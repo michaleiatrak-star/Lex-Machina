@@ -1,0 +1,513 @@
+<h2 class="sr-only">Analizator Dowodów — Dashboard v4</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+/* ── Tab bar ── */
+.tab-bar{display:flex;gap:2px;border-bottom:.5px solid var(--color-border-tertiary);margin-bottom:1.25rem;overflow-x:auto}
+.tab{padding:9px 15px;font-size:13px;cursor:pointer;border:none;background:none;color:var(--color-text-secondary);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;flex-shrink:0}
+.tab.active{color:var(--color-text-primary);border-bottom:2px solid #534AB7;font-weight:500}
+.panel{display:none}.panel.active{display:block}
+
+/* ── Layout ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
+.card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem}
+
+/* ── Metrics ── */
+.metric{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.875rem;text-align:center}
+.metric-label{font-size:11px;color:var(--color-text-secondary);margin-bottom:3px}
+.metric-value{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+.metric-sub{font-size:10px;color:var(--color-text-tertiary);margin-top:2px}
+
+/* ── Badges ── */
+.badge{display:inline-block;padding:2px 9px;border-radius:var(--border-radius-md);font-size:11px;font-weight:500}
+.badge-a{background:#E1F5EE;color:#085041}.badge-b{background:#E6F1FB;color:#0C447C}
+.badge-c{background:#FAEEDA;color:#633806}.badge-d{background:#FCEBEB;color:#791F1F}
+.badge-ok{background:#EAF3DE;color:#27500A}.badge-warn{background:#FAEEDA;color:#633806}.badge-crit{background:#FCEBEB;color:#791F1F}
+.badge-check{background:#F3F0FE;color:#3C3489}
+
+/* ── Evidence rows ── */
+.strength-bar{height:6px;border-radius:3px;background:var(--color-background-secondary);overflow:hidden;margin:5px 0}
+.strength-fill{height:100%;border-radius:3px}
+.evidence-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:.5px solid var(--color-border-tertiary)}
+.evidence-row:last-child{border-bottom:none}
+.ev-name{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.ev-meta{font-size:11px;color:var(--color-text-secondary)}
+.score-circle{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0}
+.score-hi{background:#EAF3DE;color:#27500A}.score-mid{background:#FAEEDA;color:#633806}.score-lo{background:#FCEBEB;color:#791F1F}
+
+/* ── Alert blocks ── */
+.alert-block{border-radius:var(--border-radius-md);padding:10px 14px;margin-bottom:8px;border-left:3px solid}
+.alert-crit{background:#FCEBEB;border-color:#A32D2D}
+.alert-warn{background:#FAEEDA;border-color:#854F0B}
+.alert-info{background:#E6F1FB;border-color:#185FA5}
+.alert-check{background:#F3F0FE;border-color:#534AB7}
+.alert-title{font-size:12px;font-weight:500;margin-bottom:2px}
+.alert-crit .alert-title{color:#791F1F}.alert-warn .alert-title{color:#633806}
+.alert-info .alert-title{color:#0C447C}.alert-check .alert-title{color:#3C3489}
+.alert-body{font-size:11px;line-height:1.5}
+.alert-crit .alert-body{color:#A32D2D}.alert-warn .alert-body{color:#854F0B}
+.alert-info .alert-body{color:#185FA5}.alert-check .alert-body{color:#534AB7}
+
+/* ── Contradiction blocks ── */
+.contra-block{border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:12px 14px;margin-bottom:10px;background:var(--color-background-primary)}
+.contra-header{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+.contra-type{font-size:11px;font-weight:600;padding:2px 8px;border-radius:var(--border-radius-md)}
+.type-legal{background:#FCEBEB;color:#791F1F}
+.type-inter{background:#FAEEDA;color:#633806}
+.type-intra{background:#FFF0D6;color:#7A3800}
+.type-doubt{background:#F3F0FE;color:#3C3489}
+.contra-title{font-size:13px;font-weight:500;color:var(--color-text-primary);flex:1}
+.contra-status{font-size:11px;font-weight:600;padding:3px 10px;border-radius:var(--border-radius-md);flex-shrink:0}
+.status-crit{background:#FCEBEB;color:#791F1F}
+.status-check{background:#F3F0FE;color:#3C3489}
+.status-warn{background:#FAEEDA;color:#633806}
+.cite-block{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 12px;margin:6px 0}
+.cite-source{font-size:10px;font-weight:600;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.cite-text{font-size:12px;color:var(--color-text-primary);font-style:italic;line-height:1.5;border-left:2px solid #534AB7;padding-left:8px}
+.cite-loc{font-size:10px;color:var(--color-text-secondary);margin-top:3px}
+.contra-law{font-size:11px;color:var(--color-text-secondary);margin-top:6px;padding-top:6px;border-top:.5px solid var(--color-border-tertiary)}
+.contra-rec{font-size:11px;color:var(--color-text-primary);margin-top:4px;padding:6px 10px;background:#F3F0FE;border-radius:var(--border-radius-md)}
+
+/* ── Coverage ── */
+.coverage-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary)}
+.coverage-item:last-child{border-bottom:none}
+.coverage-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-full{background:#639922}.dot-partial{background:#BA7517}.dot-none{background:#E24B4A}
+.cov-label{font-size:13px;color:var(--color-text-primary);flex:1}
+.cov-status{font-size:11px;font-weight:500}
+.stat-full{color:#3B6D11}.stat-partial{color:#854F0B}.stat-none{color:#A32D2D}
+
+/* ── Timeline ── */
+.timeline-item{display:flex;gap:12px;padding-bottom:16px;position:relative}
+.timeline-item::before{content:'';position:absolute;left:15px;top:32px;bottom:0;width:1px;background:var(--color-border-tertiary)}
+.timeline-item:last-child::before{display:none}
+.tl-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.tl-blue{background:#E6F1FB;color:#185FA5}.tl-red{background:#FCEBEB;color:#A32D2D}.tl-amber{background:#FAEEDA;color:#854F0B}
+.tl-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
+.tl-date{font-size:12px;color:var(--color-text-secondary)}
+.tl-days{font-size:11px;font-weight:500;padding:2px 8px;border-radius:var(--border-radius-md)}
+.days-urgent{background:#FCEBEB;color:#791F1F}.days-ok{background:#EAF3DE;color:#27500A}.days-past{background:#F1EFE8;color:#5F5E5A}
+
+/* ── Verdict ── */
+.verdict-banner{border-radius:var(--border-radius-lg);padding:14px;text-align:center;margin-bottom:1rem}
+.verdict-strong{background:#EAF3DE}.verdict-mid{background:#FAEEDA}.verdict-weak{background:#FCEBEB}
+.verdict-title{font-size:17px;font-weight:500;margin-bottom:4px}
+.verdict-strong .verdict-title{color:#27500A}.verdict-mid .verdict-title{color:#633806}.verdict-weak .verdict-title{color:#791F1F}
+.verdict-sub{font-size:12px}
+.verdict-strong .verdict-sub{color:#3B6D11}.verdict-mid .verdict-sub{color:#854F0B}.verdict-weak .verdict-sub{color:#A32D2D}
+.pos-gauge{height:14px;border-radius:7px;background:var(--color-background-secondary);overflow:hidden;margin:8px 0}
+.pos-fill{height:100%;border-radius:7px}
+
+/* ── Section title ── */
+.section-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:10px}
+
+/* ── Buttons ── */
+.send-btn{display:flex;align-items:center;gap:6px;padding:9px 16px;border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:none;cursor:pointer;font-size:12px;color:var(--color-text-primary);margin-top:8px}
+.send-btn:hover{background:var(--color-background-secondary)}
+
+/* ── Filters ── */
+.filter-bar{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.filter-btn{padding:4px 12px;border-radius:var(--border-radius-md);font-size:11px;cursor:pointer;border:.5px solid var(--color-border-secondary);background:none;color:var(--color-text-secondary)}
+.filter-btn.active{background:#534AB7;color:#fff;border-color:#534AB7}
+
+/* ── Empty state ── */
+.empty{padding:2rem;text-align:center;color:var(--color-text-secondary);font-size:13px}
+</style>
+
+<div style="padding:1rem 0">
+
+<!-- Header -->
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem">
+  <div>
+    <div style="font-size:17px;font-weight:500;color:var(--color-text-primary)">
+      Analizator Dowodów
+      <span style="font-size:11px;background:#EEEDFE;color:#3C3489;padding:2px 8px;border-radius:var(--border-radius-md);margin-left:6px">v4</span>
+    </div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-top:2px">
+      Hierarchia A–D · Scoring 0–10 · Sprzeczności z prawem · Sprzeczności między dokumentami · Terminy
+    </div>
+  </div>
+  <button class="send-btn" onclick="sendPrompt('Przeanalizuj mój materiał dowodowy')">✦ Analizuj z AI ↗</button>
+</div>
+
+<!-- KPI strip -->
+<div class="grid4" style="margin-bottom:1.25rem">
+  <div class="metric"><div class="metric-label">Dowodów</div><div class="metric-value" id="m-total">—</div><div class="metric-sub">w rejestrze</div></div>
+  <div class="metric"><div class="metric-label">Śr. siła</div><div class="metric-value" id="m-avg">—</div><div class="metric-sub">/ 10 pkt</div></div>
+  <div class="metric"><div class="metric-label">Alerty kryt.</div><div class="metric-value" style="color:#E24B4A" id="m-alerts">—</div><div class="metric-sub">wymagają działania</div></div>
+  <div class="metric"><div class="metric-label">Do sprawdzenia</div><div class="metric-value" style="color:#534AB7" id="m-check">—</div><div class="metric-sub">sprzeczności / wątpliwości</div></div>
+</div>
+
+<!-- Tab bar -->
+<div class="tab-bar">
+  <button class="tab active" onclick="switchTab('dowody')">📋 Rejestr</button>
+  <button class="tab" onclick="switchTab('sprzecznosci')">⚠ Sprzeczności <span id="badge-contra" style="background:#F3F0FE;color:#3C3489;padding:1px 6px;border-radius:10px;font-size:10px;margin-left:3px">0</span></button>
+  <button class="tab" onclick="switchTab('alerty')">🔴 Alerty <span id="badge-count" style="background:#FCEBEB;color:#791F1F;padding:1px 6px;border-radius:10px;font-size:10px;margin-left:3px">0</span></button>
+  <button class="tab" onclick="switchTab('pokrycie')">✔ Przesłanki</button>
+  <button class="tab" onclick="switchTab('terminy')">📅 Terminy</button>
+  <button class="tab" onclick="switchTab('raport')">📊 Raport</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 1 — REJESTR -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="panel-dowody" class="panel active">
+  <div class="card">
+    <div id="evidence-list"><div class="empty">Brak danych — użyj przycisku ✦ Analizuj z AI</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 2 — SPRZECZNOŚCI -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="panel-sprzecznosci" class="panel">
+
+  <!-- Legend -->
+  <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+    <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--color-text-secondary)">
+      <span style="width:10px;height:10px;border-radius:2px;background:#FCEBEB;border:1px solid #A32D2D;display:inline-block"></span> [LEG] Sprzeczność z prawem
+    </span>
+    <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--color-text-secondary)">
+      <span style="width:10px;height:10px;border-radius:2px;background:#FFF0D6;border:1px solid #7A3800;display:inline-block"></span> [INTRA] Zmiana narracji tej samej strony
+    </span>
+    <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--color-text-secondary)">
+      <span style="width:10px;height:10px;border-radius:2px;background:#FAEEDA;border:1px solid #854F0B;display:inline-block"></span> [CROSS] Sprzeczność między dokumentami
+    </span>
+    <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--color-text-secondary)">
+      <span style="width:10px;height:10px;border-radius:2px;background:#F3F0FE;border:1px solid #534AB7;display:inline-block"></span> [DOUBT] Wątpliwość
+    </span>
+  </div>
+
+  <!-- Filters -->
+  <div class="filter-bar" id="contra-filters">
+    <button class="filter-btn active" onclick="filterContra('all',this)">Wszystkie</button>
+    <button class="filter-btn" onclick="filterContra('legal',this)">⚖ [LEG]</button>
+    <button class="filter-btn" onclick="filterContra('intra',this)">🔄 [INTRA]</button>
+    <button class="filter-btn" onclick="filterContra('inter',this)">🔀 [CROSS]</button>
+    <button class="filter-btn" onclick="filterContra('doubt',this)">❓ [DOUBT]</button>
+  </div>
+
+  <div id="contra-list"><div class="empty">Brak zidentyfikowanych sprzeczności i wątpliwości</div></div>
+
+  <button class="send-btn" onclick="sendPrompt('Wyjaśnij wykryte sprzeczności i co powinienem z nimi zrobić przed złożeniem pisma')">Jak rozwiązać sprzeczności? ↗</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 3 — ALERTY -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="panel-alerty" class="panel">
+  <div class="grid2" style="margin-bottom:16px">
+    <div>
+      <div class="section-title" style="color:#791F1F">Krytyczne</div>
+      <div id="alerts-crit"><div style="font-size:12px;color:var(--color-text-secondary);padding:8px">Brak</div></div>
+    </div>
+    <div>
+      <div class="section-title" style="color:#633806">Ostrzegawcze</div>
+      <div id="alerts-warn"><div style="font-size:12px;color:var(--color-text-secondary);padding:8px">Brak</div></div>
+    </div>
+  </div>
+  <div>
+    <div class="section-title">Informacyjne</div>
+    <div id="alerts-info"><div style="font-size:12px;color:var(--color-text-secondary);padding:8px">Brak</div></div>
+  </div>
+  <button class="send-btn" onclick="sendPrompt('Wyjaśnij alerty krytyczne i jak je naprawić przed złożeniem pisma')">Jak usunąć alerty krytyczne? ↗</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 4 — PRZESŁANKI -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="panel-pokrycie" class="panel">
+  <div class="grid2">
+    <div class="card">
+      <div class="section-title">Pokrycie przesłanek</div>
+      <div id="coverage-list"><div class="empty">Brak danych</div></div>
+    </div>
+    <div class="card">
+      <div class="section-title">Luki krytyczne</div>
+      <div id="gaps-list"><div class="empty">Brak zidentyfikowanych luk</div></div>
+      <button class="send-btn" style="margin-top:12px" onclick="sendPrompt('Jakie dowody powinienem pozyskać aby uzupełnić luki w materiale?')">Co pozyskać? ↗</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 5 — TERMINY -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="panel-terminy" class="panel">
+  <div class="card" style="margin-bottom:12px">
+    <div class="section-title" style="color:#E24B4A">Terminy zawite</div>
+    <div id="timeline-list"><div class="empty">Podaj datę doręczenia i tryb postępowania</div></div>
+  </div>
+  <button class="send-btn" onclick="sendPrompt('Oblicz terminy procesowe — podaj datę doręczenia i tryb postępowania')">Oblicz mój termin ↗</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 6 — RAPORT -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="panel-raport" class="panel">
+  <div id="verdict-wrap">
+    <div class="verdict-banner verdict-mid">
+      <div class="verdict-title">Brak danych</div>
+      <div class="verdict-sub">Uruchom analizę przez przycisk ✦ Analizuj z AI</div>
+    </div>
+  </div>
+  <div class="grid2" style="margin-bottom:12px">
+    <div class="card">
+      <div class="section-title">Pozycja procesowa</div>
+      <div class="pos-gauge"><div class="pos-fill" id="pos-fill" style="width:0%;background:#639922"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--color-text-secondary);margin-top:4px">
+        <span>Krytyczna</span><span>Słaba</span><span>Umiarkowana</span><span>Silna</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-title">Walidacja</div>
+      <div id="val-summary" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:12px">
+    <div class="section-title">Dowody kluczowe do powołania</div>
+    <div id="key-evidence"></div>
+  </div>
+  <div class="card" style="margin-bottom:12px">
+    <div class="section-title">Rekomendacje</div>
+    <div id="recommendations"></div>
+  </div>
+  <button class="send-btn" onclick="sendPrompt('Sporządź pismo procesowe na podstawie analizy dowodów')">Sporządź pismo ↗</button>
+</div>
+
+</div><!-- /padding wrapper -->
+
+<script>
+/* ═══ DATA ARRAYS — wypełnia AI przed renderowaniem ═══
+   evidence[]       — {id, name, type, level, score, date, alerts, desc, status}
+   alerts_data{}    — {crit[], warn[], info[]} — każdy: {code, dowod, ryzyko, rek, podstawa}
+   coverage_data[]  — {label, status:'full'|'partial'|'none', dowod}
+   gaps[]           — {gap, action}
+   terminy[]        — {label, date:'YYYY-MM-DD', type, code}
+   recs[]           — string[]
+
+   contradictions[] — każdy obiekt:
+   {
+     id:       string,        // unikalny id — prefiks INTRA-N / SPOJ-N / LEG-N / DOUBT-N
+     type:     'legal'|'inter'|'intra'|'doubt',
+                              // legal  = [LEG]   sprzeczność z przepisem prawa
+                              // intra  = [INTRA] zmiana narracji tej samej strony
+                              // inter  = [CROSS] sprzeczność między stronami/dokumentami
+                              // doubt  = [DOUBT] wątpliwość / niejednoznaczność
+     status:   'KRYTYCZNE'|'DO SPRAWDZENIA'|'OSTRZEŻENIE',
+     title:    string,        // krótki opis — z prefixem [INTRA]/[CROSS]/[LEG]/[DOUBT]
+     law:      string,        // podstawa prawna (art. X ustawy Y) — dla type=legal; '' dla pozostałych
+     cites: [                 // cytaty — min 1, max 3; INTRA i CROSS wymagają ≥2
+       {
+         doc:    string,      // nazwa dokumentu
+         page:   string,      // "str. 3" / "§ 4 pkt 2" / "e-mail z dn."
+         text:   string,      // KRÓTKI cytat (max 100 zn.) z cudzysłowem
+         label:  string,      // "Wersja 1 — data" / "Źródło A" / "Kwestionowany fragment"
+       }
+     ],
+     rec:      string         // rekomendacja co zrobić
+   }
+*/
+const evidence=[];
+const alerts_data={crit:[],warn:[],info:[]};
+const coverage_data=[];
+const gaps=[];
+const terminy=[];
+const recs=[];
+const contradictions=[];
+
+/* ═══ HELPERS ═══ */
+function scoreClass(s){return s>=7?'score-hi':s>=4?'score-mid':'score-lo'}
+function scoreColor(s){return s>=7?'#639922':s>=4?'#BA7517':'#E24B4A'}
+
+function typeLabel(t){
+  return t==='legal'?'⚖ [LEG] Z prawem':
+         t==='intra'?'🔄 [INTRA] Zmiana narracji':
+         t==='inter'?'🔀 [CROSS] Między dok.':
+         '❓ [DOUBT] Wątpliwość';
+}
+function typeCls(t){
+  return t==='legal'?'type-legal':
+         t==='intra'?'type-intra':
+         t==='inter'?'type-inter':
+         'type-doubt';
+}
+function statusCls(s){
+  return s==='KRYTYCZNE'?'status-crit':
+         s==='DO SPRAWDZENIA'?'status-check':
+         'status-warn';
+}
+
+/* ═══ RENDER HELPERS ═══ */
+function renderEvidence(){
+  if(!evidence.length){document.getElementById('evidence-list').innerHTML='<div class="empty">Brak danych — użyj przycisku ✦ Analizuj z AI</div>';return;}
+  document.getElementById('evidence-list').innerHTML=evidence.map(e=>{
+    const statusBadge=e.status?`<span class="badge badge-check" style="margin-left:4px">${e.status}</span>`:'';
+    return `<div class="evidence-row">
+      <div class="score-circle ${scoreClass(e.score)}">${e.score.toFixed(1)}</div>
+      <div style="flex:1">
+        <div class="ev-name">${e.name}${statusBadge}</div>
+        <div class="ev-meta">${e.type} · ${e.date}${e.alerts&&e.alerts.length?' · <span style="color:#E24B4A">'+e.alerts.length+' alert(y)</span>':''}</div>
+        <div class="strength-bar"><div class="strength-fill" style="width:${e.score*10}%;background:${scoreColor(e.score)}"></div></div>
+        ${e.desc?`<div style="font-size:11px;color:var(--color-text-secondary);margin-top:2px">${e.desc}</div>`:''}
+      </div>
+      <span class="badge badge-${e.level.toLowerCase()}">${e.level}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderContradictions(filter){
+  const list=filter&&filter!=='all'?contradictions.filter(c=>c.type===filter):contradictions;
+  if(!list.length){
+    document.getElementById('contra-list').innerHTML='<div class="empty">Brak sprzeczności w tej kategorii</div>';
+    return;
+  }
+  document.getElementById('contra-list').innerHTML=list.map(c=>{
+    const citeHtml=c.cites&&c.cites.length?c.cites.map(ci=>`
+      <div class="cite-block">
+        <div class="cite-source">${ci.label||ci.doc}</div>
+        <div class="cite-text">${ci.text}</div>
+        <div class="cite-loc">📄 ${ci.doc} — ${ci.page}</div>
+      </div>`).join(''):'';
+    const lawHtml=c.law?`<div class="contra-law">⚖ Podstawa prawna: <strong>${c.law}</strong></div>`:'';
+    const recHtml=c.rec?`<div class="contra-rec">💡 ${c.rec}</div>`:'';
+    return `<div class="contra-block" data-type="${c.type}">
+      <div class="contra-header">
+        <span class="contra-type ${typeCls(c.type)}">${typeLabel(c.type)}</span>
+        <div class="contra-title">${c.title}</div>
+        <span class="contra-status ${statusCls(c.status)}">${c.status}</span>
+      </div>
+      ${citeHtml}
+      ${lawHtml}
+      ${recHtml}
+    </div>`;
+  }).join('');
+}
+
+function renderAlerts(){
+  const fmt=(list,cls)=>list.length?list.map(a=>`
+    <div class="alert-block alert-${cls}">
+      <div class="alert-title">[${a.code}] ${a.dowod}</div>
+      <div class="alert-body">${a.ryzyko}</div>
+      <div class="alert-body"><strong>Rek.:</strong> ${a.rek}</div>
+      <div class="alert-body" style="margin-top:4px;opacity:.75">${a.podstawa}</div>
+    </div>`).join(''):'<div style="font-size:12px;color:var(--color-text-secondary);padding:8px">Brak</div>';
+  document.getElementById('alerts-crit').innerHTML=fmt(alerts_data.crit,'crit');
+  document.getElementById('alerts-warn').innerHTML=fmt(alerts_data.warn,'warn');
+  document.getElementById('alerts-info').innerHTML=fmt(alerts_data.info,'info');
+}
+
+function renderCoverage(){
+  if(!coverage_data.length)return;
+  document.getElementById('coverage-list').innerHTML=coverage_data.map(c=>`
+    <div class="coverage-item">
+      <div class="coverage-dot dot-${c.status==='full'?'full':c.status==='partial'?'partial':'none'}"></div>
+      <div style="flex:1">
+        <div class="cov-label">${c.label}</div>
+        <div style="font-size:11px;color:var(--color-text-secondary)">${c.dowod}</div>
+      </div>
+      <span class="cov-status stat-${c.status==='full'?'full':c.status==='partial'?'partial':'none'}">
+        ${c.status==='full'?'Pokryte':c.status==='partial'?'Częściowe':'Brak'}
+      </span>
+    </div>`).join('');
+  if(gaps.length)document.getElementById('gaps-list').innerHTML=gaps.map(g=>`
+    <div style="padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary)">
+      <div style="font-size:13px;font-weight:500;color:#E24B4A;margin-bottom:2px">${g.gap}</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">${g.action}</div>
+    </div>`).join('');
+}
+
+function renderTerminy(){
+  if(!terminy.length)return;
+  const today=new Date();
+  document.getElementById('timeline-list').innerHTML=terminy.map(t=>{
+    const d=new Date(t.date),diff=Math.round((d-today)/864e5);
+    const dc=diff<0?'tl-blue':diff<=7?'tl-red':'tl-amber';
+    const dl=diff<0?`Minął ${Math.abs(diff)} dni temu`:diff===0?'Dziś!':diff<=7?`${diff} dni!`:`${diff} dni`;
+    const dtc=diff<0?'days-past':diff<=7?'days-urgent':'days-ok';
+    return `<div class="timeline-item">
+      <div class="tl-dot ${dc}">📅</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+          <div class="tl-title">${t.label}</div>
+          <span class="tl-days ${dtc}">${dl}</span>
+          <span class="badge" style="background:#EEEDFE;color:#3C3489">${t.type}</span>
+        </div>
+        <div class="tl-date">${t.date} · ${t.code}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderRaport(){
+  if(!evidence.length)return;
+  const avg=evidence.reduce((a,e)=>a+e.score,0)/evidence.length;
+  const v=avg>=7?'strong':avg>=5?'mid':'weak';
+  const vL={strong:'Pozycja procesowa silna',mid:'Pozycja procesowa umiarkowana',weak:'Pozycja procesowa słaba'};
+  const vS={strong:'Materiał daje podstawy do prowadzenia sprawy.',mid:'Materiał wymaga uzupełnienia w kluczowych lukach.',weak:'Niewystarczający materiał — konieczna korekta strategii.'};
+  document.getElementById('verdict-wrap').innerHTML=`
+    <div class="verdict-banner verdict-${v}">
+      <div class="verdict-title">${vL[v]}</div>
+      <div class="verdict-sub">${vS[v]}</div>
+    </div>`;
+  const pw=v==='strong'?78:v==='mid'?52:28;
+  const pc=v==='strong'?'#639922':v==='mid'?'#BA7517':'#E24B4A';
+  document.getElementById('pos-fill').style.cssText=`width:${pw}%;background:${pc}`;
+  const checkCount=contradictions.length;
+  document.getElementById('val-summary').innerHTML=
+    `<span class="badge badge-crit">Kryt.: ${alerts_data.crit.length}</span>`+
+    `<span class="badge badge-warn">Ostrzeg.: ${alerts_data.warn.length}</span>`+
+    `<span class="badge badge-check">Do spr.: ${checkCount}</span>`;
+  document.getElementById('key-evidence').innerHTML=[...evidence].sort((a,b)=>b.score-a.score).slice(0,3).map((e,i)=>`
+    <div class="evidence-row">
+      <div class="score-circle ${scoreClass(e.score)}" style="width:28px;height:28px;font-size:12px">${i+1}</div>
+      <div style="flex:1"><div class="ev-name">${e.name}</div><div class="ev-meta">${e.score.toFixed(1)}/10 · Poziom ${e.level}</div></div>
+      <span class="badge badge-${e.level.toLowerCase()}">${e.level}</span>
+    </div>`).join('');
+  if(recs.length)document.getElementById('recommendations').innerHTML=recs.map((r,i)=>`
+    <div style="display:flex;gap:8px;padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary);align-items:flex-start">
+      <span style="width:20px;height:20px;border-radius:50%;background:var(--color-background-secondary);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0">${i+1}</span>
+      <div style="font-size:13px">${r}</div>
+    </div>`).join('');
+}
+
+/* ═══ INIT ═══ */
+function init(){
+  // KPI
+  document.getElementById('m-total').textContent=evidence.length||'—';
+  if(evidence.length){
+    const avg=evidence.reduce((a,e)=>a+e.score,0)/evidence.length;
+    document.getElementById('m-avg').textContent=avg.toFixed(1);
+  }
+  const cc=alerts_data.crit.length;
+  document.getElementById('m-alerts').textContent=cc||'—';
+  document.getElementById('badge-count').textContent=cc;
+  const contra=contradictions.length;
+  document.getElementById('m-check').textContent=contra||'—';
+  document.getElementById('badge-contra').textContent=contra;
+
+  renderEvidence();
+  renderContradictions('all');
+  renderAlerts();
+  renderCoverage();
+  renderTerminy();
+  renderRaport();
+}
+
+function switchTab(id){
+  document.querySelectorAll('.tab,.panel').forEach(el=>el.classList.remove('active'));
+  document.querySelector(`[onclick="switchTab('${id}')"]`).classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
+}
+
+let activeFilter='all';
+function filterContra(type,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFilter=type;
+  renderContradictions(type);
+}
+
+init();
+</script>
