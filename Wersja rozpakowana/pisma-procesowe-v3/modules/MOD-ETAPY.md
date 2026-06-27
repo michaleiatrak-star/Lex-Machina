@@ -7,6 +7,28 @@ plikach dowodowych albo gdy użytkownik chce pismo procesowe wysokiego ryzyka.
 Finalne pismo nie jest pierwszym wynikiem. Najpierw powstaje mapa sprawy,
 analiza, plan, następnie projekt, a na końcu audyt.
 
+## ⛔ Relacja do automatu stanów W1–W3 — REGUŁA PIERWSZEŃSTWA
+
+```
+MOD-ETAPY OPAKOWUJE W1–W3, NIE ZASTĘPUJE. Automat stanów obowiązuje
+identycznie wewnątrz MOD-ETAPY:
+
+Etap 1 (mapa materiału)  → przygotowanie do W1
+Etap 2 (fakty i dowody)  → przygotowanie do W1 (mapa przesłanka→dowód)
+Etap 3 (prawo i ryzyka)  → przygotowanie do W1 (lista robocza przepisów)
+Etap 4 (plan pisma)      → CHECKPOINT: po Etapie 4 wejdź do W1 i wykonaj
+                            cały automat stanów (W1 → zatwierdzenie → W2 → W3)
+Etap 5 (projekt pisma)   → = W2 (redakcja z placeholderami ⚠️)
+Etap 6 (audyt końcowy)   → = W3 (weryfikacja ISAP + PODMIOT-GATE + WALIDACJA +
+                            AUDYT-KONCOWY); obowiązuje ZAKAZ-7 i wszystkie
+                            inne zakazy bezwzględne z SKILL.md
+
+⛔ ZAKAZY z SKILL.md (ZAKAZ-1 do ZAKAZ-8) obowiązują we wszystkich
+   etapach bez wyjątku — MOD-ETAPY ich nie znosi.
+⛔ PODMIOT-GATE wykonuje się na początku Etapu 6 (= W3.0) — nie wcześniej.
+⛔ CLAIM-VALIDATION wykonuje się na początku Etapu 2 (= W1.2a).
+```
+
 ## Kiedy stosować
 
 Stosuj obowiązkowo gdy:

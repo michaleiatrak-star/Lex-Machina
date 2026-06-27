@@ -126,6 +126,13 @@ KROK 1 — Przeanalizuj rozmowę → zbuduj blueprint JSON (schemat poniżej)
 KROK 2 — Wykonaj walidację kompletności blueprintu (sekcja WALIDACJA)
 KROK 3 — Wywołaj visualize:read_me z modules=["interactive","mockup"]
           (tylko jeśli nie załadowano w tej sesji)
+KROK 3a — ⛔ MOD-WIDGET-IO (OBOWIĄZKOWE przed show_widget):
+           view /mnt/skills/user/shared/MOD-WIDGET-IO.md
+           → wbuduj pasek IO w nagłówek widgetu (powyżej zakładek)
+           → IO_SKILL_ID='raport-sytuacyjny-v2', IO_CASE_ID=sygnatura
+           → matryca: Export JSON ✅ PDF ✅ | Import JSON ✅
+           → ioGetState(): pełny blueprint JSON (§ BLUEPRINT JSON)
+           → ioSetState(s): odtwórz wszystkie zakładki z wczytanego blueprintu
 KROK 4 — Wywołaj show_widget z widget_code zawierającym kompletny HTML widgetu:
           • dane sprawy jako literały JS wbudowane bezpośrednio w HTML
           • vanilla JS + CSS variables (var(--color-*))

@@ -88,6 +88,13 @@ Gdy użytkownik wpisuje "widget" / "pokaż oś czasu" / "timeline" / "aplikację
 ```
 KROK B1 — Wyciągnij z rozmowy zdarzenia jako strukturę chronologiczną (schemat poniżej)
 KROK B2 — Wywołaj visualize:read_me z modules=["interactive","mockup"]
+KROK B2a — ⛔ MOD-WIDGET-IO (OBOWIĄZKOWE przed show_widget):
+            view /mnt/skills/user/shared/MOD-WIDGET-IO.md
+            → wbuduj pasek IO w nagłówek widgetu (powyżej osi czasu)
+            → IO_SKILL_ID='chronologia-sprawy-v1', IO_CASE_ID=sygnatura
+            → matryca: Export JSON ✅ MD ✅ | Import JSON ✅
+            → ioGetState(): { watki, zdarzenia, sprzecznosci }
+            → ioSetState(s): odtwórz oś czasu z wczytanego JSON
 KROK B3 — Wywołaj show_widget z HTML vanilla JS:
            • zdarzenia i wątki jako literały JS wbudowane bezpośrednio w HTML
            • osobna oś czasu per wątek (zakładki lub sekcje)

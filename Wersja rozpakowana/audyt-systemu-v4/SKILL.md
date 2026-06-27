@@ -394,6 +394,23 @@ Wywołanie: "zamknij otwarte warningi" / "sprawdź WARN-X"
 4. **CRIT blokuje skill** — nie używaj skilla z otwartym CRIT.
 5. **WARN nie blokuje** — ale musi być odnotowany i zamknięty w następnym audycie.
 6. **Moduły czystości (interlinie, wstawki) działają zachowawczo** — w razie wątpliwości ZOSTAW, nie usuwaj.
+7. ⛔ **ZASADA KOMPLETNOŚCI OUTPUTU (OUTPUT-COMPLETENESS) — NARUSZENIE = CRIT**
+
+   Każda naprawa pliku (CRIT lub WARN) musi być dostarczona jako **kompletny skill**
+   zawierający WSZYSTKIE pliki i podfoldery danego skilla, nie tylko zmieniony plik.
+   Dostarczanie wyłącznie zmodyfikowanego pliku bez reszty struktury grozi nieodwracalną
+   utratą danych przy wgraniu (nadpisanie katalogu bez pozostałych plików).
+
+   **Reguła:** po każdej naprawie → `find /mnt/skills/user/<skill>/ -not -path "*/archive/*"` →
+   skopiuj WSZYSTKIE pliki do `/home/claude/<skill>/` z zachowaniem podfolderów →
+   `zip -r <skill>.zip <skill>/` → skopiuj ZIP do `/mnt/user-data/outputs/` →
+   `present_files` pliku ZIP. Nigdy nie dostarcza się luźnych plików .md.
+
+   **Wyjątek dozwolony:** wyłącznie gdy deweloper **explicite** potwierdził w tej sesji,
+   że chce tylko diff/patch i rozumie ryzyko. Bez takiego potwierdzenia — zawsze pełna struktura.
+
+   Naruszenie tej zasady (dostarczenie samego pliku zamiast pełnego skilla) jest błędem
+   krytycznym równoważnym CRIT i musi być odnotowane w AUDIT-JOURNAL.
 
 ---
 
@@ -416,9 +433,14 @@ audyt-systemu-v4/
 
 ---
 
-*Wersja: 4.4 | Ostatnia aktualizacja: 2026-06-14*
+*Wersja: 4.5 | Ostatnia aktualizacja: 2026-06-17*
 
 ## CHANGELOG
+
+**4.5 (2026-06-17):**
+- Dodano ZASADĘ 7: OUTPUT-COMPLETENESS — każda naprawa musi być dostarczona
+  jako kompletny skill (wszystkie pliki + podfoldery), nie tylko zmieniony plik.
+  Naruszenie = CRIT. Wyjątek tylko na explicite potwierdzenie dewelopera w sesji.
 
 **4.4 (2026-06-14g):**
 - Naprawiono nieaktualne odwołania `mapa_dzu_2026-06-07.md` → `mapa_dzu_2026-06-14.md`

@@ -7,9 +7,13 @@ lub termin zawity musi być obliczony*
 
 ## OP-1 — Tabela opłat sądowych
 
-*⚠ Zawsze weryfikuj aktualne stawki na isap.sejm.gov.pl — KSCU bywa nowelizowana.*
+> ⛔ WERYFIKACJA OBOWIĄZKOWA przed użyciem: KSCU jest nowelizowana nieregularnie.
+> Dane poniższe mają charakter ORIENTACYJNY — aktualne stawki pobierz z:
+> web_fetch → https://isap.sejm.gov.pl (szukaj: ustawa o kosztach sądowych w sprawach cywilnych)
+> lub web_search: "KSCU aktualne stawki [bieżący rok]"
+> Tabela nie zastępuje weryfikacji online — podaj użytkownikowi kwotę DOPIERO po potwierdzeniu.
 
-| Rodzaj pisma | Opłata | Podstawa |
+| Rodzaj pisma | Opłata (orientacyjna) | Podstawa |
 |---|---|---|
 | Pozew do 500 zł | 30 zł | art. 27 pkt 1 KSCU |
 | Pozew do 1 500 zł | 100 zł | art. 27 pkt 2 KSCU |

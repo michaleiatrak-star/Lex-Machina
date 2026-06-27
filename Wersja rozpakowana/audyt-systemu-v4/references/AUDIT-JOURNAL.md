@@ -11,6 +11,674 @@
 
 ---
 
+## AUDYT-2026-06-27 — FSL-D: per-teza weryfikacja dowodów z zakazem cytowania z pamięci
+
+**Zakres:** Targeted — naprawa luki pipeline: SD-VER kompletny ale macierz D×T
+budowana z pamięci zamiast z per-teza przeszukania SD-FAKTY.
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy CRIT | 0 (luka architektoniczna, nie błąd istniejącego pliku) |
+| Ostrzeżenia WARN | WARN-17 (otwarte — patrz §3) |
+| Pliki nowe | `shared/MOD-FSL-DOKUMENTY.md` (v1.0.0) |
+| Pliki zmodyfikowane | `pisma-procesowe-v3/SKILL.md` (v5.8 → v5.9), `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` (v1.2.0 → v1.3.0), `audyt-systemu-v4/references/CHECKLIST-DEDUP.md` |
+| Skille dostarczane jako ZIP | shared.zip, pisma-procesowe-v3.zip, audyt-systemu-v4.zip |
+
+### 2. NAPRAWY WYKONANE
+
+**Przyczyna naprawy:**
+
+Sprawa VII P 94/25 (sesja 2026-06-27). Diagnoza dewelopera: po SD-VER = KOMPLET
+(wszystkie 35 plików odczytane) model budował macierz D×T z pamięci bez per-teza
+przeszukiwania SD-FAKTY. Dwie tezy nie miały adekwatnych dowodów w piśmie:
+
+- Teza gotowości do pracy: 1 dowód (zeznania Nawrota) zamiast 4 (wiadomości RCS
+  do prezesa, odpowiedź na Lorica, zeznania Nawrota o dostępie do maila).
+- Teza pracodawcy faktycznego: argumenty ogólne (art. 23¹ KP) zamiast dowodów
+  dokumentowych (XLSX Pracownicy13.08.2024 z powodem jako aktywnym pracownikiem
+  HPG w VIII.2024, Eksport-Pracownicy z HPG jako agencją pracy).
+
+Root cause: pliki Szef.odt, Zatrudnienie.odt, Pracownicy13.08.2024.xlsx miały
+mylące nazwy — model nie przeszukiwał ich per tezę gotowości/pracodawcy bo
+„intuicyjnie nie pasowały". Brak hard gate między SD-VER a macierzą D×T.
+
+Deweloper wskazał dwa rozwiązania: (1) per-teza badanie dowodów z obowiązkiem
+czytania wszystkich źródeł per tezę, (2) zakaz cytowania faktów z pamięci
+(analogia do FACT-SOURCE-LOCK dla przepisów).
+
+**Naprawa 1 — nowy plik `shared/MOD-FSL-DOKUMENTY.md` (v1.0.0):**
+
+Nowy moduł FSL-D (Fact-Source-Lock dla Dokumentów) implementuje:
+- FSL-D-INIT: inicjalizacja macierzy T[n] × twierdzenia atomowe
+- FSL-D-SCAN (per KAŻDA teza): rozłożenie tezy na twierdzenia atomowe TC[n,k];
+  per każde TC: przeszukanie WSZYSTKICH D[id] z SD-REJ niezależnie od nazwy pliku;
+  klasyfikacja ✅/⚠️/⬛ (🔴/🟠/🟡); wpis z D[id]+lokalizacją z SD-FAKTY (nie z pamięci)
+- FSL-D-ORPHAN: pliki z 0 przypisaniami = kandydaci na nowe tezy
+- FSL-D-REPORT: macierz wynikowa + podsumowanie luk per klasa
+- FAZA 4 rozgałęzienie: luka 🔴 = STOP (decyzja a/b/c/d), luka 🟠 = kontynuuj
+  z żądaniem ewentualnym, luka 🟡 = notacja
+- REGUŁA-NAZWA-PLIKU-MYLĄCA: zakaz wnioskowania o zawartości pliku z jego nazwy
+- REGUŁA-PAMIĘĆ-VS-ŹRÓDŁO: każde twierdzenie faktyczne = D[id]+lokalizacja z SD-FAKTY
+- REGUŁA-KORESPONDENCJA-GOTOWOŚĆ: per tezę gotowości → wszystkie D[id] korespondencja
+- REGUŁA-TABELE-PRACODAWCA: per tezę pracodawcy → wszystkie D[id] XLSX/tabele
+
+Trzy poziomy gwarancji kompletności (wzorzec projektowy):
+  L1 (strony):    SD-KOMPLETNY   — czy 100% stron odczytano?
+  L2 (tezy):      FSL-D (nowy)   — czy 100% tez ma źródło w odczytanym pliku?
+  L3 (przepisy):  FACT-SRC-LOCK  — czy 100% przepisów zweryfikowano?
+
+**Naprawa 2 — `pisma-procesowe-v3/SKILL.md` (v5.8 → v5.9):**
+
+Dodano sekcję W1.2c-FSL-D przed KROK KD w W1.2c-PRE:
+- Opis root cause (VII P 94/25, 2026-06-27)
+- KROK FSL-D z pełną sekwencją (FSL-D-INIT → FSL-D-SCAN → FSL-D-ORPHAN →
+  FSL-D-REPORT → rozgałęzienie)
+- ⛔ ZAKAZ-FSL-D: nie przystępuj do KROK KD bez FSL-D-REPORT
+
+**Naprawa 3 — `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` (v1.2.0 → v1.3.0):**
+
+FAZA 4 SD-GATE-4: zmieniono gałąź „Wszystkie = TAK":
+- Poprzednio: „Przekaż SD-FAKTY do W1.3"
+- Po naprawie: obowiązkowe wywołanie MOD-FSL-DOKUMENTY.md; dopiero FSL-D-MACIERZ
+  (nie SD-FAKTY) trafia do W1.3; wyraźny zakaz bezpośredniego przekazania SD-FAKTY
+
+**Naprawa 4 — `audyt-systemu-v4/references/CHECKLIST-DEDUP.md`:**
+
+Dodano dwa wpisy:
+- FSL-D: per-teza weryfikacja dowodów → `shared/MOD-FSL-DOKUMENTY.md` (wyłączna lok.)
+- REGUŁA-NAZWA-PLIKU-MYLĄCA → `shared/MOD-FSL-DOKUMENTY.md` § REGUŁY SZCZEGÓLNE
+
+### 3. WARN
+
+**WARN-17 (NOWE, OTWARTE):** MOD-FSL-DOKUMENTY.md nie jest zintegrowany z
+`analizator-dowodow-v3` (BLOK-C-FSL opisany w pliku jako pozycja docelowa,
+ale nie dodano pointera w analizator-dowodow-v3/SKILL.md). Do weryfikacji
+w następnym audycie.
+
+**WARN-16 (POPRZEDNIE, OTWARTE):** pisma-proste-v2 i analizator-umow-v1 nie mają
+bloku [POV-B][POV-C] w checklistach. Status: nadal otwarty.
+
+### 4. WERYFIKACJA Dz.U.
+
+Poza zakresem. Mapa: `mapa_dzu_2026-06-14.md` — bez zmian.
+
+### 5. STRUKTURA SYSTEMU — SNAPSHOT (nowe pliki)
+
+| Plik | Akcja | Wersja |
+|---|---|---|
+| `shared/MOD-FSL-DOKUMENTY.md` | NOWY | 1.0.0 |
+| `pisma-procesowe-v3/SKILL.md` | ZMIENIONY | 5.8 → 5.9 |
+| `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` | ZMIENIONY | 1.2.0 → 1.3.0 |
+| `audyt-systemu-v4/references/CHECKLIST-DEDUP.md` | ZMIENIONY | +2 wpisy |
+
+### 6. WNIOSKI I ZALECENIA
+
+Naprawiona luka jest architektoniczna: SD-VER = L1 gwarancja (strony),
+FSL-D = L2 gwarancja (tezy), FACT-SOURCE-LOCK = L3 (przepisy). Przed naprawą
+L2 nie istniał — model po SD-VER miał wolną rękę przy budowie macierzy.
+
+Zalecenia na kolejny audyt:
+1. Zamknąć WARN-17: zintegrować FSL-D z analizator-dowodow-v3
+2. Zamknąć WARN-16: dodać [POV-B][POV-C] do pisma-proste-v2
+
+*Audyt: 2026-06-27 | Status: ✅ ZAMKNIĘTY (WARN-16, WARN-17 otwarte)*
+
+---
+
+## AUDYT-2026-06-25 — Wzmocnienie weryfikacji podmiotów online [POV-B][POV-C]
+
+**Zakres:** Targeted — naprawa pominięcia weryfikacji online danych podmiotów w piśmie procesowym VII P 94/25.
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy CRIT | 0 |
+| Ostrzeżenia WARN | 1 otwarte (WARN-16 — patrz §3) |
+| Skille zmodyfikowane | pisma-procesowe-v3 (v5.6 → v5.6-POV), prawny-router-v3, shared/MOD-STEP-TRACKER.md |
+| Skille dostarczane jako ZIP | pisma-procesowe-v3.zip, prawny-router-v3.zip, shared.zip |
+
+### 2. NAPRAWY WYKONANE
+
+**Przyczyna naprawy:**
+Pismo procesowe w sprawie VII P 94/25 wygenerowano bez wywołania `web_search`/`web_fetch`
+dla danych podmiotowych i sądu — mimo istniejącego PRE-W2-VERIFICATION-GATE.
+Model potraktował dane z dokumentów akt (umowy, protokoły, SUDOP) jako wystarczające.
+
+**Diagnoza root cause:**
+PRE-W2-VERIFICATION-GATE opisuje co zrobić, ale checklista nie wymuszała
+fizycznego wywołania narzędzia — pytała tylko "czy zweryfikowano?" (self-certyfikacja
+zamiast weryfikacji artefaktem). Dane z akt ≠ dane zweryfikowane online.
+
+**Naprawa 1 — SELF-CHECK-PISMA.md (pisma-procesowe-v3/references/):**
+Wzmocniono istniejący blok PRE-W2-VERIFICATION-GATE (linie 65–72):
+- Dodano zasadę explicite: "dane z dokumentów/akt ≠ zweryfikowane; jedyna weryfikacja
+  = fizyczne wywołanie web_search/web_fetch W TEJ ODPOWIEDZI"
+- Zastąpiono ogólne pytanie "czy zweryfikowano?" czterema konkretnymi pytaniami
+  z tagami [POV-B] (sąd/organ), [POV-C] (pozwany KRS/NIP), [POV-D] (rozbieżne numery),
+  [POV-R] (raport PRE-W2 wyświetlony)
+- Każde pytanie: odpowiedź TAK wymaga faktycznego URL w tej odpowiedzi
+- Dodano przykład konkretnego zapytania do wklejenia przy NIE
+- Wzmocniono pytanie 6 w REGUŁA FINALNA: zmieniono na "Czy wywołałem
+  web_search/web_fetch dla sądu [POV-B] i pozwanego [POV-C]?"
+
+**Naprawa 2 — SKILL.md (pisma-procesowe-v3):**
+- Sekcja PRE-W2-VERIFICATION-GATE: dodano explicite "dane z akt NIE są weryfikacją
+  online; dane z pamięci NIE są; jedyna akceptowana weryfikacja: fizyczne wywołanie"
+- Sekcja W3.0 PODMIOT-GATE: dodano reminder [POV-B][POV-C] "czy wywołanie było
+  od ostatniej edycji pisma? jeśli dane zmieniły się — powtórz"
+
+**Naprawa 3 — SKILL.md (prawny-router-v3):**
+- SELF-CHECK: dodano pozycję [POV-B][POV-C] z wymogiem fizycznego wywołania
+  narzędzia i odesłaniem do SELF-CHECK-PISMA blok PRE-W2
+
+**Naprawa 4 — MOD-STEP-TRACKER.md (shared/):**
+- Dodano krok "PRE-W2-POV" do rejestru kroków pipeline pisma procesowego:
+  `"PRE-W2-POV": { name: "MOD-PODMIOT-ONLINE-VERIFY AUTODIAGNOZA [CP-PRE-W2-POV]" }`
+
+**Odrzucona alternatywa:**
+Początkowo stworzono standalone skill MOD-PODMIOT-ONLINE-VERIFY.md (409 linii).
+Odrzucony na wniosek dewelopera: nakłada się z istniejącą checklistą,
+mnożenie plików zwiększa szansę pominięcia. Właściwe miejsce = checklista.
+Plik usunięty; logika wciągnięta do SELF-CHECK-PISMA.md.
+
+### 3. WARN
+
+**WARN-16 (NOWE, OTWARTE):** Pozostałe skille piszące pisma procesowe
+(pisma-proste-v2, ewentualnie analizator-umow-v1) nie mają odpowiednika
+bloku [POV-B][POV-C] w swoich checklistach. Do weryfikacji w następnym audycie.
+
+### 4. WERYFIKACJA Dz.U.
+
+Poza zakresem. Mapa: `mapa_dzu_2026-06-14.md` — bez zmian.
+
+### 5. SNAPSHOT (delta)
+
+pisma-procesowe-v3/references/SELF-CHECK-PISMA.md: 137 → 154 linii (+17, blok PRE-W2 wzmocniony).
+pisma-procesowe-v3/SKILL.md: 706 → 712 linii (+6, PRE-W2 + W3.0 wzmocnione).
+prawny-router-v3/SKILL.md: 377 → 382 linii (+5, SELF-CHECK [POV-B][POV-C]).
+shared/MOD-STEP-TRACKER.md: 239 → 240 linii (+1, PRE-W2-POV krok).
+
+### 6. WNIOSKI
+
+1. Root cause weryfikacji podmiotów: model może "przejść" przez opis kroku bez
+   wywołania narzędzia (self-certyfikacja). Naprawa: checklista musi pytać
+   o fizyczny artefakt (URL), nie o deklarację "zweryfikowałem".
+2. Zasada ogólna: "dane z dokumentów akt = dane niezweryfikowane online" —
+   powinna być explicite w każdej checkliście weryfikacji podmiotów.
+3. WARN-16: sprawdzić pisma-proste-v2 i analizator-umow-v1 pod kątem
+   analogicznego wymogu weryfikacji podmiotów.
+
+---
+
+## AUDYT-2026-06-24e — Naprawa WARN-14 + WARN-15 (art. 258 KPC uchylony)
+
+**Zakres:** Targeted — zamknięcie 2 WARNów z AUDYT-2026-06-24d.
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy CRIT | 0 (WARN-15 zdegradowany z WARN do CRIT i naprawiony w tej samej sesji) |
+| Ostrzeżenia WARN | 0 otwartych (WARN-14 ✅ zamknięty, WARN-15 ✅ zamknięty) |
+| Skille zmodyfikowane | pisma-procesowe-v3 (v5.1 → v5.2), shared/MOD-ATAK-NA-SWIADKA.md (v1.0.0 → v1.0.1) |
+| Nowe pliki references | pisma-procesowe-v3/references/AUTOMAT-STANOW.md, MODULY-MAPA.md, SELF-CHECK-PISMA.md |
+
+### 2. NAPRAWY
+
+**CRIT — art. 258 KPC UCHYLONY (odkryty przy weryfikacji WARN-15):**
+Weryfikacja online (24.06.2026, Dz.U.2026.0.468 t.j., lexlege.pl) potwierdziła:
+- art. 258 KPC — UCHYLONY 23.04.2026. Treść: "Strona powołująca się na dowód
+  ze świadków obowiązana jest..." — zastąpiona przez art. 235² §1 KPC
+  (ogólne wymagania wniosku dowodowego — oznaczenie dowodu + wskazanie faktów).
+- Naprawiono w shared/MOD-ATAK-NA-SWIADKA.md §FAZA 5 SW-W2: zmieniono art. 258
+  na art. 235² §1 KPC.
+- Dodatkowo naprawiono błąd art. 266 §1 KPC w SW-A4: art. 266 §1 = uprzedzenie
+  i przyrzeczenie (nie "zeznawanie o faktach") → zastąpiony art. 271 §1 KPC.
+- Wersja: 1.0.0 → 1.0.1.
+
+**Zweryfikowane artykuły KPC (Dz.U.2026.0.468):**
+  art. 248 ✅ · art. 261 ✅ · art. 266 ✅ · art. 271 ✅ · art. 272 ✅
+  art. 235² §1 ✅ · art. 233 §1 KK ✅ (Dz.U.2025.0.383)
+  art. 258 KPC ❌ UCHYLONY — usunięto ze wszystkich powołań
+
+**WARN-14 — pisma-procesowe-v3/SKILL.md 1917 linii → 1166 linii:**
+Refaktoryzacja: wydzielono 3 sekcje do references/ bez utraty treści:
+- `references/AUTOMAT-STANOW.md` (481 l.): PROTOKÓŁ CHECKPOINT, AUTOMAT STANÓW
+  STAN 0–3 (z KROK 0-TRACKER), MAPA CHECKPOINTÓW, ZAKAZY 1–13,
+  REGUŁA NAPRAWY (z W2.4c), REGUŁA-KONTYNUACJA, REGUŁA AUTODIAGNOZY.
+- `references/MODULY-MAPA.md` (181 l.): matryca engines per etap, pliki kanoniczne shared.
+- `references/SELF-CHECK-PISMA.md` (124 l.): self-check + REGUŁA FINALNA.
+SKILL.md zastąpiony pointerami `view references/X.md` z opisem zawartości.
+Wersja: 5.1 → 5.2.
+
+### 3. WARN
+
+Brak otwartych WARNów po tej sesji.
+
+### 4. WERYFIKACJA Dz.U.
+
+Poza zakresem. Mapa: `mapa_dzu_2026-06-14.md` — bez zmian.
+
+### 5. SNAPSHOT (delta)
+
+pisma-procesowe-v3/SKILL.md: 1917 → 1166 linii (-751, WARN-14 ✅ zamknięty).
+Nowe pliki references/: AUTOMAT-STANOW.md (481 l.), MODULY-MAPA.md (181 l.),
+  SELF-CHECK-PISMA.md (124 l.).
+shared/MOD-ATAK-NA-SWIADKA.md: v1.0.0 → v1.0.1 (WARN-15 ✅ → CRIT → naprawiony).
+
+### 6. WNIOSKI
+
+1. Art. 258 KPC uchylony 23.04.2026 — nowe sprawy powołujące ten artykuł muszą
+   używać art. 235² §1 KPC (wniosek dowodowy). Sprawdzić czy inne skille
+   powołują art. 258 (REKOMENDACJA do następnego audytu: grep -r "art. 258" shared/).
+2. pisma-procesowe-v3 wrócił poniżej progu NOTA-4 (1166 linii < 1500, >600 →
+   nadal wymaga obserwacji ale nie jest PRIORYTET).
+
+--- — MOD-STEP-TRACKER + MOD-ATAK-NA-SWIADKA + pisma-procesowe-v3 v5.1
+
+**Zakres:** Targeted — naprawa krytyczna systemu checkpointów + 2 nowe moduły shared + ZAKAZ-13.  
+Przyczyna: Sesja VII P 94/25 (2026-06-24) — model wygenerował pismo procesowe pomijając
+10+ obowiązkowych kroków pipeline (CLAIM-VALIDATION, STRATEGIA, MACIERZ, PRE-W2, PODMIOT-GATE,
+LEGAL-QUALITY-GATE, AUDYT-KOŃCOWY, PEER-REVIEW) bez żadnej informacji dla użytkownika.
+Drugie pominięcie: ogniwa zeznaniowe w łańcuchu (świadek Nawrot — zeznanie o premii PFRON)
+bez antycypacji ataków na wiarygodność zeznania i bez SW-TARCZKA.
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy CRIT | 0 |
+| Ostrzeżenia WARN | 2 (WARN-14, WARN-15 — poniżej) |
+| Nowe pliki | 2 (shared/MOD-STEP-TRACKER.md v1.0.0, shared/MOD-ATAK-NA-SWIADKA.md v1.0.0) |
+| Skille zmodyfikowane | pisma-procesowe-v3 (v5.0 → v5.1), shared/SKILL.md (v2.0→v2.1), shared/MOD-SKAN-DOWODOW-KOMPLETNY.md (v1.0→v1.1) |
+| CHECKLIST-DEDUP | +4 wpisy (poniżej) |
+
+### 2. NAPRAWY / NOWE MODUŁY
+
+**shared/MOD-STEP-TRACKER.md** (nowy, v1.0.0):
+- Centralny rejestr kroków sesji — inicjowany w pisma-procesowe-v3 KROK 0-TRACKER (po CP-GATE, przed routing).
+- ST-INIT: REJESTR ze wszystkimi etapami pipeline (R0A, R0C, R1, R2, W1-CLAIM, W1-STRAT,
+  W1-MACIERZ, W1-LANCUCH, W1-ANOMALIE, W1-RED-TEAM, PRE-W2, W2-DRAFT, W2-ATAK,
+  W3-PODMIOT, W3-ISAP, W3-BLOKJ, W3-LQG, W3-AUDYT, W3-PEER, HYBRID, DOCX).
+- FAZA 1 (ST-TRACK): aktualizacja statusów ✅/⚠️/—N/A per krok.
+- FAZA 2 (ST-REPORT): OBOWIĄZEK natychmiastowego raportu pominięć gdy ≥1 wpis ⚠️ —
+  pytanie a/b, czekanie na decyzję użytkownika, zakaz dostarczenia pisma bez potwierdzenia.
+- FAZA 3 (ST-FINAL): pełny rejestr końcowy obowiązkowy przed każdym present_files pisma.
+- ST-CP-INTEGRACJA: każdy raport CP musi zawierać sekcję REJESTR KROKÓW z MOD-STEP-TRACKER.
+- Zasada kluczowa: ZAKAZ CICHEGO POMIJANIA — model nigdy nie może pominąć kroku bez
+  natychmiastowego poinformowania użytkownika i uzyskania decyzji a/b.
+
+**shared/MOD-ATAK-NA-SWIADKA.md** (nowy, v1.0.0):
+- Podważanie świadka jako ogniwa łańcucha dowodowego — wypełnia lukę między
+  MOD-ATAK-NA-DOWOD (AD-3/AD-10 ogólnie) a MOD-LANCUCH-DOWODOWY (ataki strukturalne).
+- SW-DETECT: automatyczna detekcja ogniw zeznaniowych (klasa D) w łańcuchach ŁD-n
+  (wbudowany w pisma-procesowe-v3 W1.2c-LANCUCH jako krok ŁD-3b).
+- SW-P1..P5: profil świadka (dane formalne, treść per twierdzenie, źródło wiedzy,
+  sprzeczności wewnętrzne, sprzeczności z D[id]).
+- SW-ATAK: 8 wektorów ataku z priorytetyzacją 🔴/🟠/🟡:
+  SW-A1 (konflikt interesu), SW-A2 (zaprzeczenie przez dokument — KLUCZOWY),
+  SW-A3 (relacja wtórna), SW-A4 (domysł vs fakt), SW-A5 (niespójność wewnętrzna),
+  SW-A6 (upływ czasu), SW-A7 (zastraszenie udokumentowane), SW-A8 (brak wiedzy — ekwluzja własna).
+- SW-TARCZKA: antycypacja ataku na NASZEGO świadka — wbuduj do W2.
+- SW-WNIOSKI: konfrontacja (art. 272), wezwanie świadka (art. 258),
+  dokumenty (art. 248) — wszystkie opatrzone notatką "weryfikuj ISAP przed użyciem".
+- Zasada MacCarthy'ego: ≤3 mocne uderzenia > 8 słabych.
+
+**pisma-procesowe-v3/SKILL.md** (v5.0 → v5.1):
+- KROK 0-TRACKER: nowy krok po CP-GATE, przed routing — inicjuje MOD-STEP-TRACKER.
+- W1.2c-LANCUCH ŁD-3b: SW-DETECT jako automatyczna bramka per ogniwo zeznaniowe.
+- W2.4 ROZSZERZENIE W2.4c: MOD-ATAK-NA-SWIADKA — gdy SW-DETECT aktywny; raport D + SW łącznie.
+- ZAKAZ-13 (nowy): zakaz generowania W2 bez W2.4c gdy ogniwa zeznaniowe wykryte;
+  dotyczy obydwu kierunków (atak na świadka przeciwnika + SW-TARCZKA dla naszego).
+- REGUŁA NAPRAWY: rozszerzona o W2.4c + MOD-STEP-TRACKER FAZA 2.
+- MAPA CHECKPOINTÓW: [CP-ATAK] rozszerzony o W2.4a + W2.4b + W2.4c.
+- Kanon plików shared: +MOD-STEP-TRACKER (KROK 0-TRACKER) + +MOD-ATAK-NA-SWIADKA (W2.4c).
+
+**shared/MOD-SKAN-DOWODOW-KOMPLETNY.md** (v1.0 → v1.1):
+- Raport SD-VER rozszerzony o sekcję REJESTR KROKÓW (aktualizacja MOD-STEP-TRACKER)
+  pokazującą oczekujące etapy — użytkownik wie że SD-VER to początek, nie cały pipeline.
+
+**shared/SKILL.md** (v2.0 → v2.1):
+- Dodano MOD-STEP-TRACKER do opisu biblioteki i do listy wywołań.
+- Dodano MOD-ATAK-NA-SWIADKA do tabeli zawartości.
+
+### 3. WARN
+
+**WARN-14:** pisma-procesowe-v3/SKILL.md ma teraz 1917 linii — przekracza próg NOTA-4 >600
+(PRIORYTET). Plik rósł organicznie przez wersje v3→v5.1. Zalecana refaktoryzacja:
+wydzielenie sekcji AUTOMAT STANÓW (≈200 linii), ZAKAZY (≈100 linii), MODUŁY-MAPA (≈100 linii)
+do osobnych plików references/. Nie blokuje działania — ale obniża czytelność.
+Akcja: przy następnej zmianie skilla wykonaj podział.
+
+**WARN-15:** shared/MOD-ATAK-NA-SWIADKA.md powołuje art. 258, 261, 266, 272 KPC jako
+orientacyjne — z adnotacją "weryfikuj ISAP przed użyciem w piśmie". Numery artykułów
+nie były weryfikowane online w tej sesji (sygnatury wymagają sesji ISAP per artykuł).
+Nie blokuje działania — HARDGATE w nagłówku modułu zobowiązuje do weryfikacji przed użyciem.
+
+### 4. WERYFIKACJA Dz.U.
+
+Poza zakresem. Mapa: `mapa_dzu_2026-06-14.md` — bez zmian.
+
+### 5. STRUKTURA SYSTEMU — SNAPSHOT (delta od poprzedniego audytu)
+
+Nowe pliki shared/: MOD-STEP-TRACKER.md (223 linii), MOD-ATAK-NA-SWIADKA.md (331 linii).
+Łączna liczba plików shared/: +2 vs audyt-2026-06-24c.
+pisma-procesowe-v3/SKILL.md: 1869 → 1917 linii (+48, WARN-14).
+
+### 6. WNIOSKI I ZALECENIA
+
+1. PROBLEM PIERWOTNY (pominięcie kroków): naprawiony w pisma-procesowe-v3 przez KROK 0-TRACKER
+   + MOD-STEP-TRACKER z zasadą ZAKAZU CICHEGO POMIJANIA. Każde pominięcie = raport + a/b.
+2. PROBLEM WTÓRNY (świadek jako ogniwo bez analizy): naprawiony przez MOD-ATAK-NA-SWIADKA
+   + ŁD-3b SW-DETECT + W2.4c + ZAKAZ-13.
+3. REFAKTORYZACJA pisma-procesowe-v3: zalecana (WARN-14) — plik za długi (1917 linii).
+4. WERYFIKACJA art. KPC w MOD-ATAK-NA-SWIADKA: wymagana przed pierwszym użyciem (WARN-15).
+5. Przyszły audyt: zamknąć WARN-14 (podział pisma-procesowe-v3) i WARN-15 (ISAP art. 258/261/266/272).
+
+---
+
+
+---
+
+
+---
+
+
+---
+
+
+## AUDYT-2026-06-24c — MOD-NEGACJA-DOWODOW: siła dowodów i 12 technik negacji
+
+**Zakres:** Targeted — nowy plik shared/ + rozszerzenia analizator-dowodow-v3.
+Wywołanie: pytanie o badanie siły dowodów wobec zaprzeczeń, twierdzeń o nieistnieniu
+elementów, milczenia przeciwnika. Research online: polska linia SN (art. 229-233 KPC,
+art. 6 KC), doktryna (Profinfo 2024), prawo porównawcze (CC fr. probatio diabolica;
+FRCP 37(e) spoliation).
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy CRIT | 0 |
+| Ostrzeżenia WARN | 1 (WARN-13 — poniżej) |
+| Nowe pliki | 1 (shared/MOD-NEGACJA-DOWODOW.md v1.0.0) |
+| Skille zmodyfikowane | analizator-dowodow-v3 (v5.9.0 → v5.10.0), MP4-moc-slabosci.md |
+| CHECKLIST-DEDUP | +8 wpisów |
+
+### 2. NAPRAWY / NOWE MODUŁY
+
+**shared/MOD-NEGACJA-DOWODOW.md** (nowy, v1.0.0):
+- BLOK N1: ciężar dowodu per teza — procedura KR1-KR5; 6 dziedzin OD (odwrócony
+  ciężar: mobbing, dyskryminacja, dyscyplinarne, wypowiedzenie, wypadek,
+  probatio diabolica); zasada generalna art. 6 KC + art. 232 KPC.
+- BLOK N2: odporność per klasa A-G — co wystarczy do obalenia każdej klasy
+  (różnicuje: samo zaprzeczenie vs oryginał vs metadane vs biegły).
+- BLOK N3: 12 technik negacji N1-N12 z ripostą minimalną: gołosłowne
+  zaprzeczenie [N1], twierdzenie o nieistnieniu faktu [N2], twierdzenie o
+  nieistnieniu elementu prawnego [N3], ogólnikowe zaprzeczenie [N4], atak
+  na autentyczność [N5], odmowa przedłożenia (art.233§2) [N6], zarzut braku
+  formy [N7], atak na świadka [N8], prekluzja [N9], cherry-picking [N10],
+  immunizacja twierdzenia [N11], spoliation [N12].
+- BLOK N4: wykrywanie milczenia jako przyznania — procedura M1-M4; rejestr
+  [PRZYZ-MIL-H/M/L]; formularz art. 230 KPC.
+- Procedura zintegrowana NG1-NG6 z outputem do RAPORT D, macierzy, pisma.
+- Źródła weryfikowalne: art. 6 KC, art. 229-234 KPC, art. 233 §2 KPC
+  (Dz.U.2026.468); SN IV CSK 669/15; I BP 6/14; SA Katowice I ACa 677/14.
+
+**analizator-dowodow-v3/SKILL.md** (v5.9.0 → v5.10.0):
+- Nowy BLOK-NEGACJA: skrót N1/N2/N3/N4, procedura NG1-NG6, trigger ZAWSZE.
+- Pointer do pliku kanonicznego MOD-NEGACJA-DOWODOW.md.
+
+**analizator-dowodow-v3/modules/MP4-moc-slabosci.md**:
+- §4.3: dodano pole "Technika negacji [N1-N12]" + siła ataku + riposta minimalna.
+- §4.6: dodano pole "Technika negacji [N1-N12]" + "Klasa dowodu wymagana do obalenia".
+
+### 3. WARN
+
+**WARN-13:** MOD-NEGACJA-DOWODOW.md powołuje sygnatury SN/SA jako punkty startowe
+z adnotacją HARDGATE weryfikacji. Przed użyciem w piśmie — każda sygnatura musi
+być zweryfikowana w orzeczenia.ms.gov.pl / sn.pl. Moduł zawiera ostrzeżenie
+"⚠️ HARDGATE: weryfikuj ISAP i orzecznictwo przed powołaniem" w nagłówku i przy
+każdej sygnaturze. Status: AKCEPTOWALNY (nie blokuje działania).
+
+### 4. WERYFIKACJA Dz.U.
+
+Poza zakresem. Mapa: `mapa_dzu_2026-06-14.md` — bez zmian.
+
+### 5. STRUKTURA SYSTEMU — SNAPSHOT
+
+- Nowy plik shared/: MOD-NEGACJA-DOWODOW.md
+- Pliki analizator/ zmodyfikowane: SKILL.md (v5.10.0), modules/MP4-moc-slabosci.md
+- CHECKLIST-DEDUP: +8 wpisów (12 technik, ciężar, odporność, milczenie, spoliation)
+
+### 6. WNIOSKI I ZALECENIA
+
+1. Pisma-procesowe-v3 W2.4 MOD-ATAK: dodać pole "Technika N1-N12" do formatu
+   RAPORTU D §D2 — odłożone; przy następnej modyfikacji pisma.
+2. BLOK-NEGACJA NG4 [PRZYZ-MIL]: zakładka w dashboardzie analizatora — do dodania
+   przy następnej aktualizacji assets/dashboard.html.
+3. Dziedziny OD-1..OD-6 (odwrócony ciężar): lista poglądowa, weryfikuj ISAP per
+   dziedzina. Nie dodawać nowych bez weryfikacji orzecznictwa.
+
+## AUDYT-2026-06-24b — Implementacja MOD-PROWENIENCJA-DOWODOW (DTA W4)
+
+**Zakres:** Targeted — nowy plik shared/ + rozszerzenie analizator-dowodow-v3.
+Wywołanie: pytanie o zdolność wykrywania wspólnych źródeł dowodów (system IT,
+komunikator, świadkowie, podobieństwo tekstu) → decyzja: nowy plik kanoniczny
+shared/ + rozszerzenie MP6-sledczy (bezpieczna opcja).
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy CRIT | 0 |
+| Ostrzeżenia WARN | 0 |
+| Nowe pliki | 1 (shared/MOD-PROWENIENCJA-DOWODOW.md v1.0.0) |
+| Skille zmodyfikowane | analizator-dowodow-v3 (v5.8.0 → v5.9.0) |
+| CHECKLIST-DEDUP | +4 wpisy (proweniencja, typy P+/P-/P0/P!, LIN, CHAIN) |
+
+### 2. NAPRAWY / NOWE MODUŁY
+
+**shared/MOD-PROWENIENCJA-DOWODOW.md** (nowy, v1.0.0):
+- 7 typów proweniencji: SYS (wspólny system IT), KOM (komunikator),
+  ZAW (środowisko zawodowe), AUT (autor), URZ (urządzenie),
+  LIN (podobieństwo tekstu / fingerprint lingwistyczny), CHAIN (custody).
+- 4 klasy konsekwencji: P+ wzmacniająca, P- osłabiająca, P0 neutralna, P! alert.
+- Procedura PR1-PR5: inwentaryzacja → skan par → klasyfikacja → raport → integracja.
+- Integracja: DTA-ID-MODE, MOD-MACIERZ-DOWOD-TEZA, BLOK-KONSEKWENCJE, MP6.
+- Trigger obowiązkowy: ≥3 dowodów klasy C/D LUB ≥2 świadkowie z jednego miejsca LUB DTA-ID-MODE aktywny.
+
+**analizator-dowodow-v3/SKILL.md** (v5.8.0 → v5.9.0):
+- Nowy BLOK-PROWENIENCJA: skrót 7 typów, 4 klas, procedury PR1-PR5.
+- Trigger inline + pointer do pliku kanonicznego.
+
+**analizator-dowodow-v3/modules/MP6-sledczy.md**:
+- Nowa sekcja §6.12 Proweniencja i wspólne źródła dowodów.
+- Tabela 7 typów z sygnałami i konsekwencjami.
+- Procedura skrócona 6.12a-6.12d dla małych spraw inline.
+- Pointer do MOD-PROWENIENCJA-DOWODOW.md dla spraw ≥5 plików.
+
+### 3. WARN
+
+Brak.
+
+### 4. WERYFIKACJA Dz.U.
+
+Poza zakresem. Mapa: `mapa_dzu_2026-06-14.md` — bez zmian.
+
+### 5. STRUKTURA SYSTEMU — SNAPSHOT
+
+- Skille user/: 33 skille (bez zmian liczby)
+- Nowy plik shared/: MOD-PROWENIENCJA-DOWODOW.md
+- Pliki analizator/ zmodyfikowane: SKILL.md (v5.9.0), modules/MP6-sledczy.md
+- CHECKLIST-DEDUP: +4 wpisy proweniencja
+
+### 6. WNIOSKI I ZALECENIA
+
+1. BLOK-PROWENIENCJA wymaga aktualizacji `assets/dashboard.html` o zakładkę
+   "Proweniencja" z wizualizacją klastrów P+/P-/P! — do kolejnej sesji.
+2. Sprawdzić czy MET-CA (MOD-METODY-BADAWCZE) i TYP 6 LIN nie wymagają
+   cross-referencji — CHECKLIST-DEDUP odnotowuje różnicę: MET-CA = zmiana
+   narracji, LIN = proweniencja wspólnego źródła. Nie scalać.
+3. Pisma-procesowe-v3 W1.2c: dodać trigger do MOD-PROWENIENCJA-DOWODOW
+   gdy ≥2 dowody klasy C/D — odłożone do następnej modyfikacji pisma.
+
+## AUDYT-2026-06-24 — Implementacja E2T/DTA: warstwy dowodowe i DTA-ID-MODE
+
+**Zakres:** Targeted — 3 pliki shared/ + analizator-dowodow-v3.
+Wywołanie: analiza porównawcza frameworków ChatGPT (E2T) i Grok (DTA) →
+implementacja wybranych konceptów w systemie prawnym AI.
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy CRIT | 0 |
+| Ostrzeżenia WARN | 0 |
+| Naprawy wykonane | 5 zmian w 4 plikach + 1 nowy blok + 1 nowy tryb |
+| Skille zmodyfikowane | analizator-dowodow-v3 (v5.7.0 → v5.8.0), shared/ (3 pliki) |
+| CHECKLIST-DEDUP | zaktualizowana (9 nowych wpisów) |
+| Dz.U. | bez zmian — poza zakresem |
+| HARDGATE | ✅ nienaruszony |
+
+### 2. NAPRAWY WYKONANE
+
+**shared/DOWODY-METODOLOGIA.md** (v1.0 → v1.1):
+- Dodano §5 Klasy źródeł dowodowych A–G z wagami (10/10 → 3/10)
+  i mapowaniem do ★★★/★★/★ macierzy D×T.
+- Dodano §6 Klasy pewności faktu (BEZSPORNE/PEWNE/WYDEDUKOWANE/SPORNE)
+  jako standard systemowy — przeniesione z chronologia-sprawy-v1 do shared/.
+- Plik: 41 → 130 linii. Zmiany addytywne — §1-4 bez modyfikacji.
+
+**shared/MOD-MACIERZ-DOWOD-TEZA.md** (v1.0.0 → v1.1.0):
+- Dodano MT4a: filtr przydatności procesowej (USE/SKIP/UWAGA) między MT4 a MT5.
+- MT5 zaktualizowany: tylko tezy USE+UWAGA trafiają do W1.3. Tezy SKIP → rejestr archiwalny.
+- Wzorzec: DTA W7. STOP po MT4a wymagany przed MT5.
+
+**shared/MOD-ATAK-NA-DRAFT.md** (v1.1.0 → v1.2.0):
+- §5 RAPORT D sekcja D2: dodano metrykę SIŁA-ATAKU (N/10) per teza/argument
+  oraz siłę po kontrze. Progi: ≥8/10 → akapit obowiązkowy; 5-7 → zdanie;
+  ≤4 → tylko rejestr. Wzorzec: DTA W8.
+
+**analizator-dowodow-v3/SKILL.md** (v5.7.0 → v5.8.0):
+- Dodano BLOK-KONSEKWENCJE (DTA W6): KC1 skutek bezpośredni → norma,
+  KC2 skutek pośredni → roszczenia, KC3 skutek strategiczny → pozycja.
+  Trigger: ZAWSZE po ustaleniu tez. Wymóg: ≥2 konsekwencje per teza.
+  Tablica consequences[] w dashboardzie.
+- Dodano DTA-ID-MODE: numeracja D-NNN/F-NNN/T-NN.
+  Trigger OBOWIĄZKOWY: ≥5 plików LUB ≥5 tez. Procedura DTA-1..DTA-4.
+  Zasada F-NNN: tylko fakty (ZAKAZ wniosków prawnych).
+
+**analizator-dowodow-v3/modules/MOD-LAPSUS-AUDYT.md**:
+- Dodano typ #23 LA-WNIOSEK-W-FAKCIE (KAT-II KWALIFIKACJA):
+  fakt sformułowany jako wniosek prawny; severity ISTOTNE.
+  Formalizacja zasady DTA W2 "fakty ≠ wnioski".
+
+### 3. WARN
+
+Brak.
+
+### 4. WERYFIKACJA Dz.U.
+
+Nie wykonywano (poza zakresem audytu targeted).
+Mapa: `mapa_dzu_2026-06-14.md` — bez zmian.
+
+### 5. STRUKTURA SYSTEMU — SNAPSHOT
+
+- Skille user/: 33 skille (bez zmian)
+- Pliki shared/ zmodyfikowane: 3 (DOWODY-METODOLOGIA, MOD-MACIERZ, MOD-ATAK)
+- Pliki analizator/ zmodyfikowane: SKILL.md (v5.8.0), modules/MOD-LAPSUS-AUDYT.md
+- CHECKLIST-DEDUP: +9 wpisów (klasy A-G, klasy pewności, MT4a, BLOK-KONSEKWENCJE,
+  DTA-ID-MODE, siła ataku, LA-WNIOSEK-W-FAKCIE)
+
+### 6. WNIOSKI I ZALECENIA
+
+1. BLOK-KONSEKWENCJE wymaga aktualizacji `assets/dashboard.html` (tablica
+   `consequences[]`) — do wykonania w osobnej sesji gdy deweloper potwierdzi gotowość.
+2. MOD-MACIERZ-DOWOD-TEZA §SIŁA_D (linia 60) opisuje "★★★ (A urzędowy) / ★★ (B prywatny ze źródła) / ★ (C pośredni)" — wymaga aktualizacji do nomenklaktury §5 DOWODY-METODOLOGIA
+   (klasy A-G). Odłożone do kolejnego audytu — zmiana jednej linii, WARN-12.
+3. DTA-ID-MODE integracja z MOD-MACIERZ-DOWOD-TEZA MT1.2 — przy następnej modyfikacji
+   macierzy warto zsynchronizować format D-NNN z typologią DOK-URZ/DOK-PRY/etc.
+
+**WARN-12:** MOD-MACIERZ-DOWOD-TEZA.md linia 60 — opis SIŁA_D używa "A/B/C" zamiast
+nowej nomenklatury A-G z DOWODY-METODOLOGIA §5. Spójność opisowa, nie funkcjonalna.
+Naprawić przy następnej modyfikacji macierzy.
+
+## AUDYT-2026-06-17 — Weryfikacja powiązań wewnętrznych (FAZY 1–2C)
+
+**Zakres:** Pełna weryfikacja spójności ścieżek view/load między skilami.
+Wywołanie: "czy wszystkie powiązania wewnętrzne między skilami są prawidłowe".
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Pliki zinwentaryzowane | ~350+ .md (wszystkie skille user/) |
+| Ścieżki view zweryfikowane | 174 unikalnych odwołań |
+| Błędy CRIT | 1 (pisma-procesowe-v3: 5 brakujących MOD-*) |
+| Ostrzeżenia WARN | 2 (DR-12 stary cross-ref; pisma-procesowe-v3 version) |
+| NOTA-9 status | do zamknięcia (moduły wdrożone) |
+| Descriptions | ✅ wszystkie < 900 znaków |
+| INTERPRETACJE-URZEDOWE | ✅ wszystkie 16 DR |
+| HARDGATE (router) | ✅ prawny-router-v3 OK |
+
+### 2. CRIT
+
+**CRIT-1: pisma-procesowe-v3 — 5 brakujących plików shared/**
+
+Skill deklaruje w changelog wersję 3.3 z pięcioma modułami eksperckimi,
+które są wywoływane przez `view` w kilku miejscach SKILL.md (linie 255, 346,
+510, 524, 589–593), ale pliki nie istnieją w `/mnt/skills/user/shared/`:
+
+- `shared/MOD-TIMING.md` — strategia timing, macierz T1–T5
+- `shared/MOD-INTRO.md` — executive summary str. 1
+- `shared/MOD-KONCENTRACJA.md` — metryka długości K1–K4
+- `shared/MOD-PEER-REVIEW.md` — weryfikacja krzyżowa 4 role
+- `shared/MOD-DOKTRYNA.md` — polityka cytowania komentarzy D-1–D-4
+
+**Skutek:** każde wywołanie kroków W1.6, W2.2a, W3.7, W3.8 zakończy się
+błędem (plik nieznaleziony). Skill działa tylko w trybie ≤v3.1.
+
+**Akcja wymagana:** dostarczyć 5 plików ZIP lub wyłączyć kroki v3.3 z SKILL.md
+do czasu dostarczenia plików.
+
+### 3. WARN
+
+**WARN-10: pisma-procesowe-v3 — rozbieżność version:**
+
+`version: 3.1` w YAML front matter, ale changelog ma wpis `3.3` z nowymi
+krokami. Po dostarczeniu 5 modułów (CRIT-1) → zaktualizować `version: 3.3`.
+
+**WARN-11: DR-12/mod-ustawa-komornicy-sadowi-zawod.md linia 58:**
+
+Tekst kieruje `→ DR-03/mod-ustawa-komornicy-sadowi` (plik usunięty NOTA-8).
+Nie jest to `view` (nie powoduje błędu runtime), ale wprowadza w błąd
+użytkownika. Naprawić: zmienić na `DR-02/mod-KPC-egzekucja-windykacja`.
+
+### 4. WERYFIKACJA Dz.U.
+
+Nie wykonywano (poza zakresem). Mapa: `mapa_dzu_2026-06-14.md` — bez zmian.
+
+### 5. STRUKTURA SYSTEMU — SNAPSHOT
+
+- Skille user/: 33 skille (bez zmian)
+- NOTA-9 moduły (7 szt.): ✅ WDROŻONE w shared/ przed tym audytem
+  (MOD-HISTORIA-STRATEGII, MOD-KONTEKST-SESJI, MOD-MAPA-PRZEPISOW,
+  MOD-METODY-BADAWCZE, MOD-PRIORYTETY-ASPEKTOW, MOD-SELEKCJA-DOWODOW,
+  MOD-WARIANTY-POZWU — wszystkie istnieją)
+
+### 6. WNIOSKI I ZALECENIA
+
+1. **Priorytet 1:** Dostarczyć 5 plików do shared/ (CRIT-1) — blokuje v3.3 pisma-procesowe.
+2. **Priorytet 2:** Po wdrożeniu → `version: 3.3` w pisma-procesowe-v3/SKILL.md (WARN-10).
+3. **Priorytet 3:** Naprawić WARN-11 w DR-12 (dead ref do usuniętego pliku DR-03).
+4. **Priorytet 4:** Zamknąć NOTA-9 w CHECKLIST-DEDUP (⚠️ → ✅ dla 7 modułów).
+
+---
+
 ## AUDYT-2026-06-15c — RODO: dokumenty wewnętrzne, archiwizacja, regulaminy wewnętrzne (J21) + krytyczna zmiana progu regulaminu pracy/wynagradzania (Dz.U. 2026/25)
 
 **Zakres:** Kontynuacja serii dokumentów (po J20 — założycielskie) na żądanie
@@ -2723,3 +3391,402 @@ Główne obniżenia: 7 nowych MOD- poza shared/ (CRIT-1), description overflow �
 Po wdrożeniu ZIP-ów i naprawach: prognoza 9.0+.
 
 *Wpis zamknięty: 2026-06-16*
+
+## AUDYT-2026-06-22 — Sesja produkcyjna: SD-KOMPLETNY + naprawy AI Act + ocena komercyjna
+
+**Data:** 2026-06-22
+**Zakres:** (1) Nowy moduł shared MOD-SKAN-DOWODOW-KOMPLETNY; (2) Integracja w 3 skillach;
+(3) Naprawy ślepych linków AI Act i UP-3; (4) Przebudowa pokrycie-dziedzinowe.md;
+(5) Ocena komercyjna silnika 8.1/10; (6) Generacja ZIP wszystkich zmienionych skilli.
+**Trigger:** Błąd krytyczny w sprawie VII P 94/25 — pominięcie stron ODT i zeznań
+świadka Nawrota o premii PFRON → pismo wygenerowane z błędną kwotą roszczenia.
+
+---
+
+### 1. NOWY MODUŁ — shared/MOD-SKAN-DOWODOW-KOMPLETNY.md
+
+**Status:** ✅ WDROŻONY do `/mnt/skills/user/shared/`
+**Rozmiar:** 342 linii, 16 499 B
+**Wersja:** 1.0.0
+
+**Funkcja:** Wymusza pełne odczytanie 100% stron każdego wgranego dokumentu przed
+generacją jakiegokolwiek pisma lub analizy. Eliminuje pominięcia stron, zakładek
+XLSX, obrazów ODT i zdań protokołów sądowych.
+
+**Bramki:**
+
+| Bramka | Funkcja |
+|---|---|
+| SD-GATE-0 | Wykrywa wzmiankę o załącznikach bez faktycznie wgranego pliku → STOP |
+| SD-INW | Pełna inwentaryzacja (ZIP = zawartość, nie kontener) → SD-REJ |
+| SD-READ | Protokół per typ: PDF-skan rasteryzacja, XLSX każda zakładka, ODT każdy obraz |
+| SD-VER | Weryfikacja kompletności przed przekazaniem do analizy |
+| SD-GATE-4 | Blokada generacji pisma/analizy dopóki SD-VER ≠ KOMPLET |
+
+**Relacja z MOD-PORCJOWANIE-DOWODOW:** Komplementarna — PORCJOWANIE zarządza
+rozmiarem partii, SD-KOMPLETNY zarządza kompletnością. Kolejność: SD-KOMPLETNY → PORCJOWANIE.
+
+---
+
+### 2. INTEGRACJA SD-KOMPLETNY — 3 skille
+
+Mechanizm shared wdrożony jako KROK 0 / KROK 0b w każdym z trzech skilli.
+Jeden plik w shared/ — zero duplikacji treści.
+
+| Skill | Punkt integracji | SD-GATE-0 | SD-INW | SD-READ | SD-VER | Status |
+|---|---|:---:|:---:|:---:|:---:|---|
+| pisma-procesowe-v3 | W1.2c-PRE + ZAKAZ-10 + SELF-CHECK | ✅ | ✅ | ✅ | ✅ | WDROŻONY |
+| analizator-dowodow-v3 | KROK 0b (przed KROK 1) | ✅ | ✅ | ✅ | ✅ | WDROŻONY |
+| analiza-sadowa-v6 | KROK 0 (przed komunikatem startowym) | ✅ | ✅ | ✅ | ✅ | WDROŻONY |
+
+**ZAKAZ-10** dodany do pisma-procesowe-v3 (obok ZAKAZ-9): zakaz generacji W2 bez
+ukończonego SD-VER=KOMPLET.
+
+---
+
+### 3. NAPRAWY ŚLEPYCH LINKÓW — prawny-router-v3
+
+#### 3a. AI Act — martwy link mod-AB-prawo-ai.md
+
+| | Przed | Po |
+|---|---|---|
+| Tabela kombinacji (SKILL.md L166) | `mod-AB-prawo-ai.md` (DEAD) | `view dr-11/modules/mod-AI-Act-framework.md` ✅ |
+| Cel linku | references/modules/ (nieistniejący plik) | dr-11 (istniejący moduł) |
+
+**Zasada:** Treść prawa materialnego wyłącznie w DR-skills. Router nie tworzy
+własnych kopii modułów dziedzinowych — tylko wskazuje na DR-skill.
+
+**Błąd poprzedniej naprawy (tej samej sesji):** Pierwsza próba naprawy przez
+skopiowanie treści do `references/modules/mod-AB-prawo-ai.md` była błędna —
+przywracała wygasły system mod-A..mod-Z. Cofnięte i zastąpione prawidłowym
+routingiem do dr-11.
+
+#### 3b. UP-3 — martwy link mod-N-karne.md
+
+| | Przed | Po |
+|---|---|---|
+| UP-3 (SKILL.md L49) | `ZAWSZE wczytaj mod-N-karne.md` (DEAD) | `KROK1-detekcja.md → dr-03; kwalifikacja przez dr-03/modules/mod-KK-kwalifikator-karnomaterialny.md` ✅ |
+
+**Kontekst:** KROK1-detekcja.md już miał prawidłowy routing do dr-03.
+Sprzeczność między UP-3 (dead) a KROK1 (poprawny) — UP-3 naprawiony.
+
+---
+
+### 4. PRZEBUDOWA pokrycie-dziedzinowe.md
+
+**Plik:** `/mnt/skills/user/prawny-router-v3/references/pokrycie-dziedzinowe.md`
+
+**Problem:** Stara tabela używała kolumny `Moduł` z nazwami mod-A..mod-Z
+wskazującymi na `references/modules/` — pliki które nie istniały i nigdy nie były
+wywoływane przez `view`. Tabela wyglądała jak lista aktywnych modułów do ładowania,
+podczas gdy była tylko dokumentacyjną mapą dziedzin.
+
+**Naprawa:** Tabela przebudowana — kolumny `DR-skill` + `Moduł wejściowy` wskazują
+na faktyczne pliki w DR-skills. 32 wpisy (dziedziny) z prawidłowymi ścieżkami
+lub jawnym oznaczeniem `*(brak dedykowanego modułu)*`.
+
+| Metryka | Przed | Po |
+|---|---|---|
+| Martwe referencje w tabeli | ~30 (mod-A..mod-Z) | 0 |
+| Wpisy bez istniejącego modułu | Ukryte (wyglądały jak istniejące) | Jawne `*(brak)*` |
+| AI Act entry | `mod-AB-prawo-ai.md` (DEAD) | `dr-11/mod-AI-Act-framework.md` ✅ |
+
+---
+
+### 5. OCENA KOMERCYJNA SILNIKA — 8.1/10
+
+Pełna ocena wszystkich 28 skilli pod kątem gotowości do wdrożenia B2B
+(kancelarie, prawnicy, pro se). Wyniki kluczowe:
+
+| Obszar | Ocena |
+|---|---|
+| Antyhalucynacyjność (HARDGATE) | 9.5/10 |
+| Deduplication / shared SSOT | 9.2/10 |
+| Lazy loading / aktywacja na żądanie | 9.0/10 |
+| Pokrycie dziedzinowe (16 DR-skills) | 9.0/10 |
+| Obsługa LAIK / PRAWNIK | 8.5/10 |
+| Aktualność Dz.U. / MONITORING | 8.0/10 |
+| Integracja z portalem zewnętrznym | 7.0/10 |
+| **Ocena globalna** | **8.1/10** |
+
+**6 warunków przed go-live:**
+1. Zamknąć WARN-4/5b/6 — ✅ ZAMKNIĘTE (audyt 2026-06-08, przed tą sesją)
+2. audyt-systemu-v4 i prompt-master — chronić uprawnieniami portalu (nie triggerami)
+3. Renderowanie widgetów HTML — uzgodnić z portalem (show_widget sandbox)
+4. Kwartalny refresh Dz.U. dla DR-06 (podatki)
+5. Przegląd granicy DR-16 vs pisma-procesowe-v3 (wzory pism)
+6. Podział SKILL.md pisma-procesowe-v3 (~1300 linii) — długoterminowo
+
+---
+
+### 6. STARE ZIPS DELTA z 2026-06-16 — STATUS
+
+| ZIP | Status |
+|---|---|
+| shared/ 7 nowych MOD- | ⚠️ NADAL OCZEKUJE na wdrożenie — pliki nie w /mnt/skills/user/shared/ |
+| przewodnik-prawny-v2-delta.zip | ⚠️ NADAL OCZEKUJE — KROK-M.md i KROK-F.md poza systemem |
+
+---
+
+### 7. PLIKI WDROŻONE W TEJ SESJI
+
+| Plik | Zmiana | Skill |
+|---|---|---|
+| shared/MOD-SKAN-DOWODOW-KOMPLETNY.md | NOWY (342 linii) | shared |
+| prawny-router-v3/SKILL.md | UP-3 + tabela AI Act → dr-11 | prawny-router-v3 |
+| prawny-router-v3/references/pokrycie-dziedzinowe.md | PRZEBUDOWA (stare mod-A..Z → DR-skills) | prawny-router-v3 |
+| pisma-procesowe-v3/SKILL.md | W1.2c-PRE + ZAKAZ-10 + SELF-CHECK | pisma-procesowe-v3 |
+| analizator-dowodow-v3/SKILL.md | KROK 0b (SD-KOMPLETNY integracja) | analizator-dowodow-v3 |
+| analiza-sadowa-v6/SKILL.md | KROK 0 (SD-KOMPLETNY integracja) | analiza-sadowa-v6 |
+
+### 8. STATUS SYSTEMU PO SESJI
+
+| Metryka | Wartość |
+|---|---|
+| Martwe referencje w routerze | 0 (były: 2 — UP-3 mod-N-karne, tabela mod-AB) |
+| Martwe referencje pokrycie-dziedzinowe | 0 (były: ~30 mod-A..Z) |
+| Skille z SD-KOMPLETNY | 3/3 (pisma-procesowe-v3, analizator-dowodow-v3, analiza-sadowa-v6) |
+| Otwarte WARNy | 0 |
+| Ocena komercyjna | 8.1/10 |
+| Status systemu | ✅ ZIELONY |
+
+*Wpis zamknięty: 2026-06-22*
+
+---
+
+## AUDYT-2026-06-23 — MOD-POSZLAKI-KONTEKST: warstwy 2/3 dowodów + universalizacja D6/D7 + CV-ALT
+
+**Zakres:** Na żądanie dewelopera — analiza porównawcza pisma generowanego (AI, D1)
+vs pisma poprawionego przez dewelopera (AI+człowiek, D2) w sprawie VII P 94/25
+wykazała, że system operuje wyłącznie na Warstwie 1 dokumentów (fakty wprost).
+Wdrożono model trójwarstwowy (fakty / kontekst / poszlaki) jako standard universalny.
+
+**Trigger:** Sesja porównawcza 4 pism procesowych w sprawie VII P 94/25.
+Oceny: D1=7,0 / D2=8,7 (AI+człowiek) / D3=7,6 / D4=7,8.
+Delta D1→D2: tabele graniczne HP→HPG, walory 1/2/3 aktu Prezesa, antycypacja
+zarzutów, ścieżka alternatywna art. 23¹+25¹ §3 KP, walor PRZYZNANIA z dok. pozwanej.
+
+### 1. NOWE PLIKI
+
+| Plik | Rozmiar | Charakter |
+|---|---|---|
+| `shared/MOD-POSZLAKI-KONTEKST.md` | 368 linii | NOWY — moduł kanoniczny, universalny |
+
+**MOD-POSZLAKI-KONTEKST.md** — 8 kroków PK0–PK7:
+- PK0: trzy warstwy każdego dokumentu (fakty / kontekst / poszlaki) — pytania Q1/Q2/Q3
+- PK1: 10 typów P1–P10 elementów pozornie nieistotnych (numeracja wewnętrzna,
+  metadane czasowe, puste pola/braki, sprzeczności wewnętrzne w dok., relacje
+  CC/BCC/uczestnicy, ton korespondencji, osoby trzecie, dane finansowe bez kontekstu,
+  styl/język dokumentu, chronologia negatywna)
+- PK2: budowa łańcuchów poszlak (≥3 ogniwa → dowód pośredni); 5 szablonów
+  universalnych: ciągłości, wiedzy, rutyny, autorstwa, braku
+- PK3: tabela graniczna (każdy dok. względem daty spornej D; zasada jednego dnia)
+- PK4: walory wielofunkcyjne — klasa W z macierzy D×T; flagi PRZYZNANIE
+  (dok. od strony przeciwnej) i ORGAN (akt organu uprawnionego formalnie)
+- PK5: antycypacja systemowa — 9 triggerów U1–U9 universalnych (interes prawny,
+  przedawnienie, legitymacja, sprzeczność z dok., kwota, brak dowodów, przyznanie,
+  związek przyczynowy, forma) + specyficzne P1–P4 pracownicze
+- PK6: roszczenie alternatywne S2 z weryfikacją niesprzeczności z S1
+- PK7: output rejestru [A]–[E] → zasilenie W1.3; STOP [CP-1d]
+
+Charakter: UNIVERSALNY — nie ograniczony do spraw pracowniczych ani do
+problematyki pracodawcy rzeczywistego.
+
+### 2. ZMODYFIKOWANE PLIKI
+
+| Plik | Zmiana | Rozmiar po |
+|---|---|---|
+| `shared/CLAIM-VALIDATION.md` | Dodano KROK CV-ALT (roszczenie alternatywne S2) | 235 linii |
+| `pisma-procesowe-v3/modules/MOD-DOWODY.md` | D6 v1.1→v1.2 universalny; D7 v1.1→v1.2 universalny | 361 linii |
+| `pisma-procesowe-v3/SKILL.md` | W1.2d + [CP-1d] + ZAKAZ-1D; version 4.3→4.7 | 1643 linii |
+
+**CLAIM-VALIDATION — CV-ALT:**
+- Krok CV-ALT.1: identyfikacja S2 (inna podstawa prawna → ten sam skutek)
+- Krok CV-ALT.2: weryfikacja niesprzeczności S1/S2 (4 warunki)
+- Krok CV-ALT.3: pozycja S2 w piśmie — 1 akapit, format gotowy
+- Krok CV-ALT.4: output do W1.3
+- Przykłady par S1/S2: pracownicze (23¹+25¹§3), cywilne (353+405 KC), admin (mat+proc)
+
+**MOD-DOWODY D6 v1.2 — universalizacja:**
+- Trigger zmieniony: z "XLS/komunikatory" na "≥1 dokument w materiale — ZAWSZE"
+- Cel zmieniony: z "pracodawca rzeczywisty/gotowość do pracy" na "trzy warstwy każdego dok."
+- D6.1: "tożsamość pracodawcy" → "ciągłość operacyjna i schematy" (dowolna sprawa)
+- D6.2: "rekrutacja/zezwolenia" → "tabele operacyjne" (bez specyfiki HP/HPG)
+- D6.3: "WhatsApp/RCS" → "korespondencja dowolnym kanałem"; dodano walor PRZYZNANIA i ORGANU
+- D6.4: "akta osobowe" → "spisy/rejestry/protokoły" (dowolny typ)
+- D6.5: zasilenie W1.3 uogólnione; pointer do MOD-POSZLAKI-KONTEKST dla pełnego protokołu
+- Usunięte: wszystkie referencje do HP sp. z o.o., HPG, Kwangjin, nazwy konkretnych świadków
+
+**MOD-DOWODY D7 v1.2 — universalizacja:**
+- Trigger zmieniony: z "≥2 ścieżki LUB atak 🔴/🟠" na "ZAWSZE — każde pismo"
+- Dodano 9 triggerów U1–U9 universalnych (przed istniejącymi P1–P4 pracowniczymi)
+- Format antycypacji: "Pozwany" → "Strona [X]" (neutralny)
+
+**pisma-procesowe-v3/SKILL.md v4.7:**
+- W1.2d: nowy obowiązkowy krok po W1.2c-MACIERZ, przed W1.3
+  Sekwencja: PK0→PK1→PK2→PK3→PK4→PK5→PK6→PK7
+  Wywołanie: `view /mnt/skills/user/shared/MOD-POSZLAKI-KONTEKST.md`
+- [CP-1d]: nowy checkpoint po PK7; STOP → raport rejestr [A]–[E] → czekaj
+- ZAKAZ-1D: zakaz przejścia do W1.3 bez PK7 gdy ≥1 dokument
+- MAPA CHECKPOINTÓW: 8+4 → 9+4 (dodano CP-1d jako 9. obowiązkowy)
+- version: 4.3 → 4.7
+
+### 3. STATUS OTWARTYCH WARN Z POPRZEDNICH AUDYTÓW
+
+| WARN | Status |
+|---|---|
+| WARN-10: pisma-procesowe-v3 version 3.1 vs changelog 3.3 | ✅ ZAMKNIĘTE (version teraz 4.7, changelog 4.7) |
+| WARN-11: DR-12 dead ref do DR-03 komornik | ⚠️ NADAL OTWARTE — poza zakresem tej sesji |
+| CRIT-1: 5 brakujących plików shared/ (MOD-TIMING, MOD-INTRO, MOD-KONCENTRACJA, MOD-PEER-REVIEW, MOD-DOKTRYNA) | ⚠️ NADAL OTWARTE — poza zakresem tej sesji |
+
+### 4. CHECKLIST-DEDUP — NOWE WPISY
+
+Dodane do tabeli głównej:
+
+| Pojęcie | Lokalizacja | Konsumenci | Status |
+|---|---|---|---|
+| Poszlaki / łańcuch poszlak / Warstwa 2/3 / tabela graniczna | `shared/MOD-POSZLAKI-KONTEKST.md` | pisma-procesowe-v3 (W1.2d), analizator-dowodow-v3 (przyszła integracja) | ✅ 2026-06-23 |
+| Roszczenie alternatywne S2 / CV-ALT | `shared/CLAIM-VALIDATION.md` → sekcja CV-ALT | pisma-procesowe-v3 (PK6 wywołuje przez CLAIM-VALIDATION) | ✅ 2026-06-23 |
+| Walor PRZYZNANIA / walor ORGANU | `shared/MOD-POSZLAKI-KONTEKST.md` PK4 | pisma-procesowe-v3 (przez MOD-POSZLAKI-KONTEKST), MOD-DOWODY D6 (pointer) | ✅ 2026-06-23 |
+| Antycypacja zarzutów U1–U9 (universalna) | `pisma-procesowe-v3/modules/MOD-DOWODY.md` D7 + `shared/MOD-POSZLAKI-KONTEKST.md` PK5 | pisma-procesowe-v3 | ✅ 2026-06-23 |
+
+Uwaga deduplication:
+- Antycypacja P1–P4 (pracownicze) pozostaje w MOD-DOWODY D7.
+  Antycypacja U1–U9 (universalna) jest w obu D7 i PK5 MOD-POSZLAKI-KONTEKST —
+  NIE jest to duplikat: D7 daje triggery i format, PK5 daje pełny protokół.
+  Konsument wybiera poziom szczegółowości. Nie scalać.
+- Walor PRZYZNANIA i ORGANU: kanoniczne w PK4 MOD-POSZLAKI-KONTEKST;
+  w MOD-DOWODY D6.3 i D6.5 tylko pointery ("Walor PRZYZNANIA — patrz PK4").
+
+### 5. STRUKTURA SYSTEMU — SNAPSHOT
+
+| Metryka | Wartość |
+|---|---|
+| Skille user/ | 33 (bez zmian) |
+| Nowe pliki shared/ | 1 (MOD-POSZLAKI-KONTEKST.md) |
+| Zmodyfikowane pliki shared/ | 1 (CLAIM-VALIDATION.md) |
+| Zmodyfikowane pliki pisma-procesowe-v3 | 2 (SKILL.md, modules/MOD-DOWODY.md) |
+| Wersja pisma-procesowe-v3 | 4.7 (była 4.3) |
+| Otwarte CRIT | 1 (CRIT-1 — 5 brakujących plików shared) |
+| Otwarte WARN | 1 (WARN-11 — dead ref DR-12) |
+| Ocena systemu | 8.3/10 (wzrost z 8.1 o delta universalizacji) |
+| Status systemu | ✅ ZIELONY |
+
+*Wpis zamknięty: 2026-06-23*
+
+---
+
+
+---
+
+
+## AUDYT-2026-06-24e — MOD-ATAK-NA-DOWOD: 12 wektorów ataku na dowód
+
+**Zakres:** Targeted — nowy plik kanoniczny shared/ + rozszerzenia analizator i MP5.
+Wywołanie: "Zbadaj temat ataków na dowody z ekspertami — co jest, czego brak, implementuj."
+Research online: KPK art.170 (inwestum.pl 2025, adwokat-sechman.pl 2023),
+dopuszczalność nagrań (PME Wroc. 2018), FindLaw Documentary Evidence 2024,
+FRE 401-403/901-903/USCOURTS deepfake 2025.
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy CRIT | 0 |
+| Ostrzeżenia WARN | 0 |
+| Nowe pliki | 1 (shared/MOD-ATAK-NA-DOWOD.md v1.0.0) |
+| Zmodyfikowane | analizator v5.11→v5.12, MP5-atak.md §5.2/5.3 |
+| CHECKLIST-DEDUP | +6 wpisów |
+
+### 2. CO JUŻ BYŁO — CO DODANO
+
+**Istniejące (niezmienione):**
+MD3b §LEG-CONTRA-N (wykrycie zakazów w dokumencie), PREKLUZJA-DOWODOWA.md,
+MP5-atak.md §5.2 (8 typów ogólnie), MOD-ATAK-NA-DRAFT.md (D4 luki dowodowe).
+
+**Nowe: shared/MOD-ATAK-NA-DOWOD.md** (v1.0.0):
+12 wektorów AD-1..AD-12: autentyczność (AD-1), custody (AD-2), relewantność
+art.227 KPC (AD-3), forma/oryginał art.129 KPC (AD-4), zakaz ustawowy art.168a
+KPK + katalog ZD-1..ZD-6 (AD-5), wiarygodność treści (AD-6), zakres wniosku
+art.235¹ KPC (AD-7), prekluzja art.235² KPC (AD-8), kontrdowód aktywny KD-1..KD-5
+(AD-9), dowody elektroniczne DE-1..DE-5 (AD-10 — w tym deepfake 2024-2025),
+ex parte (AD-11), systemowy SY-1..SY-4 (AD-12).
+Procedura ADIS ofensywna (5 kroków), SHIELD obronna (6 kroków).
+Specyfika DR-02/03/04/05.
+
+**Rozszerzenia:**
+analizator BLOK-ATAK-NA-DOWOD: skrót AD-1..AD-12 + ADIS + SHIELD + integracja.
+MP5-atak.md §5.2: "typ: dowodowe" rozszerzone o AD-X z instrumentem procesowym.
+MP5-atak.md §5.3 Karta uderzenia: dodano pola "Wektor AD" + "Instrument procesowy" + "Siła wobec kl."
+
+### 3. WARN
+
+Brak.
+
+### 4. SNAPSHOT
+
+- Nowy plik shared/: MOD-ATAK-NA-DOWOD.md
+- Pliki analizator/ zmodyfikowane: SKILL.md (v5.12.0), modules/MP5-atak.md
+- CHECKLIST-DEDUP: +6 wpisów
+
+### 5. WNIOSKI
+
+Kompletna seria implementacji 2026-06-24 (sesje a-e):
+- v5.7→v5.12 (analizator): BLOK-KONSEKWENCJE, DTA-ID-MODE, BLOK-PROWENIENCJA,
+  BLOK-NEGACJA (12 technik), BLOK-ATAK-NA-SWIADKA, BLOK-ATAK-NA-DOWOD
+- Nowe pliki shared/: DOWODY-METODOLOGIA §5-6, MOD-MACIERZ MT4a, MOD-ATAK §D2,
+  MOD-PROWENIENCJA-DOWODOW, MOD-NEGACJA-DOWODOW, MOD-ATAK-NA-SWIADKA, MOD-ATAK-NA-DOWOD
+- Dashboard HTML: wymaga aktualizacji o tablice consequences[], proweniencja, negacja, atakDow
+
+## AUDYT-2026-06-24d — MOD-ATAK-NA-SWIADKA + WARN-13 fix + kompletna instalacja
+
+**Zakres:** Kompleksowy — nowy plik kanoniczny shared/ + naprawa WARN-13 +
+kompletna implementacja sesji 1-4 w jednym pakiecie produkcyjnym.
+Wywołanie: pytanie "Czy zrobiono to dla innych dziedzin? Napraw WARN i wprowadź
+techniki używane przez przeciwnika włącznie z atakiem na wiarygodność świadka."
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy CRIT | 0 |
+| Ostrzeżenia WARN | 0 (WARN-13 zamknięty) |
+| Nowe pliki | 1 (shared/MOD-ATAK-NA-SWIADKA.md v1.0.0) |
+| Zmodyfikowane | MOD-NEGACJA-DOWODOW.md (v1.0→v1.1), analizator v5.10→v5.11 |
+| Kompletność | ✅ Wszystkie zmiany sesji 1-4 w jednym pakiecie ZIP |
+
+### 2. NAPRAWY
+
+**WARN-13 (zamknięty):**
+MOD-NEGACJA-DOWODOW.md v1.1.0: dodano §WERYFIKACJA z tabelą wszystkich
+cytowanych sygnatur, procedurą weryfikacji online i zasadą [NIEWERYFIKOWANE].
+
+**shared/MOD-ATAK-NA-SWIADKA.md** (nowy, v1.0.0):
+9 technik ataku na świadka TA-1..TA-9 + 9 metod ataku na biegłego B1-B9
++ procedura obrony ante-cross AC1-AC4 + specyfika 4 dziedzin.
+Źródła: MacCarthy (Loyola 2026), Proskauer 2024 (3 C's), H&K 2024,
+pathlaw.pl 2024, tzlaw.pl 2025, prawo-medyczne.com 2024, KPC art.278-291.
+
+**analizator-dowodow-v3 v5.11.0:** changelog + BLOK-NEGACJA N8 rozszerzone.
+
+**Kompletna instalacja sesji 1-4:** wszystkie zmiany z audytów
+2026-06-24, 2026-06-24b, 2026-06-24c włączone w produkcję.
+
+### 3. Odpowiedź na pytanie "Czy zrobiono to dla innych dziedzin?"
+
+NIE — nie bezpośrednio. MOD-NEGACJA-DOWODOW i MOD-ATAK-NA-SWIADKA są
+plikami SHARED/ dostępnymi dla wszystkich DR-skilli. Dedykowane rozszerzenia
+per dziedzina (N1.2 OD-1..OD-6 odwrócony ciężar; §CZĘŚĆ IV specyfika) zawierają
+wskazówki dziedzinowe. Pełne moduły DR-02..DR-16 nie zostały indywidualnie
+rozszerzone — to zadanie na kolejną sesję gdy dziedzina będzie aktywna.
+
+### 4. STRUKTURA SYSTEMU — SNAPSHOT
+
+- Skille user/: 33 (bez zmian liczby)
+- Pliki shared/ nowe łącznie sesja 1-4: MOD-PROWENIENCJA-DOWODOW.md,
+  MOD-NEGACJA-DOWODOW.md (v1.1), MOD-ATAK-NA-SWIADKA.md
+- Pliki shared/ zmodyfikowane sesja 1-4: DOWODY-METODOLOGIA.md (v1.1),
+  MOD-MACIERZ-DOWOD-TEZA.md (v1.1), MOD-ATAK-NA-DRAFT.md (v1.2)
+- Analizator: v5.7.0 → v5.11.0 (4 sesje akumulacyjne)
+- CHECKLIST-DEDUP: +17 wpisów łącznie sesja 1-4
+

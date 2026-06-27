@@ -54,6 +54,15 @@ Przełącznik **LAIK / PRAWNIK** w nagłówku zmienia język alertów, tez i rek
 Kod widgetu: patrz `references/widget.md` — wklej jako argument `widget_code` narzędzia
 `show_widget`, podstawiając dane konkretnej sprawy w miejsca oznaczone `<!-- DANE: ... -->`.
 
+⛔ MOD-WIDGET-IO (OBOWIĄZKOWE — wykonaj PRZED każdym show_widget):
+```
+view /mnt/skills/user/shared/MOD-WIDGET-IO.md
+→ wbuduj pasek IO w nagłówek widgetu (powyżej zakładek)
+→ IO_SKILL_ID='orzeczenia-sadowe-v2', IO_CASE_ID=sygnatura_sprawy
+→ matryca: Export JSON ✅ MD ✅ | Import JSON —
+→ w obu wywołaniach (przed i po wyszukiwaniu): pasek IO obecny
+```
+
 Widget wywołujesz **dwukrotnie:**
 - przed wyszukiwaniem — z danymi Fazy 0-A i 0-B, komunikat „Trwa wyszukiwanie…" w zakładkach Orzeczenia i Raport
 - po wyszukiwaniu — z kompletnymi danymi wszystkich faz

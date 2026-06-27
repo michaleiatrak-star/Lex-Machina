@@ -55,7 +55,7 @@ Ustawa o kosztach komorniczych (jeśli odrębna od u.k.s.):
 
 ```text
 □ sprawa dotyczy statusu zawodowego komornika czy trybu egzekucji?
-  (jeśli tryb → DR-03/mod-ustawa-komornicy-sadowi)
+  (jeśli tryb → DR-02/mod-KPC-egzekucja-windykacja)
 □ czy to skarga na czynności komornika (art. 767 KPC)?
 □ czy to odpowiedzialność odszkodowawcza komornika?
 □ czy to skarga dyscyplinarna?

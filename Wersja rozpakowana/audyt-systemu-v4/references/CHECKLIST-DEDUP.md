@@ -54,6 +54,31 @@
 | Niealimentacja (art.209 KK) | `shared/definicje/DEF-PRACA.md` (sekcja dolna) | DR-04, DR-03 | ⚠️ patrz NOTA-2 |
 | Opłata parkingowa SPP — charakter prawny, zarzuty UPEA art.33 | `dr-08/.../mod-UDP-strefy-platnego-parkowania.md` (293 linii, kanon) | DR-08, DR-03 (przedawnienie), DR-16 | ✅ scalone 06-13 (usunięto duplikat z DEF-BUDOWLANE-DROGOWE) |
 | Taryfikator mandatów drogowych — kwoty | `dr-03/.../mod-grzywny-mandaty-szczegolowe.md` (PRM 30.12.2021, NIE Dz.U.2026/724!) | DR-03 | ✅ naprawione 06-13 — patrz NOTA-5 |
+| Poszlaki / łańcuch poszlak / Warstwa 2/3 / tabela graniczna | `shared/MOD-POSZLAKI-KONTEKST.md` | pisma-procesowe-v3 (W1.2d), analizator-dowodow-v3 (integracja przyszła) | ✅ 2026-06-23 |
+| Roszczenie alternatywne S2 / CV-ALT | `shared/CLAIM-VALIDATION.md` → sekcja KROK CV-ALT | pisma-procesowe-v3 (PK6) | ✅ 2026-06-23 |
+| Walor PRZYZNANIA / walor ORGANU | `shared/MOD-POSZLAKI-KONTEKST.md` PK4 (kanoniczne); MOD-DOWODY D6 tylko pointer | pisma-procesowe-v3 | ✅ 2026-06-23 |
+| Antycypacja zarzutów universalna U1–U9 | `shared/MOD-POSZLAKI-KONTEKST.md` PK5 + `pisma-procesowe-v3/modules/MOD-DOWODY.md` D7 (triggery) — NIE scalać (różne poziomy szczegółowości) | pisma-procesowe-v3 | ✅ 2026-06-23 |
+| FSL-D: per-teza weryfikacja dowodów z zakazem cytowania z pamięci | `shared/MOD-FSL-DOKUMENTY.md` v1.0.0 — WYŁĄCZNA lokalizacja; NIE duplikować w CLAIM-VALIDATION ani MACIERZ | pisma-procesowe-v3 (W1.2c-FSL-D), analizator-dowodow-v3 (BLOK-C-FSL) | ✅ 2026-06-27 |
+| REGUŁA-NAZWA-PLIKU-MYLĄCA | `shared/MOD-FSL-DOKUMENTY.md` § REGUŁY SZCZEGÓLNE — NIE duplikować w MOD-SKAN-DOWODOW-KOMPLETNY | pisma-procesowe-v3, analizator-dowodow-v3 | ✅ 2026-06-27 |
+| Klasy źródeł dowodowych A–G | `shared/DOWODY-METODOLOGIA.md §5` (kanoniczne) | analizator-dowodow-v3, pisma-procesowe-v3, MOD-MACIERZ-DOWOD-TEZA (mapowanie ★) | ✅ 2026-06-24 |
+| Klasy pewności faktu (BEZSPORNE/PEWNE/WYDEDUKOWANE/SPORNE) | `shared/DOWODY-METODOLOGIA.md §6` (standard systemowy) | analizator-dowodow-v3 (BLOK-KONSEKWENCJE), chronologia-sprawy-v1 (source), pisma-procesowe-v3 W1.3 | ✅ 2026-06-24 — przeniesione z chronologia-sprawy-v1 |
+| Filtr przydatności procesowej tez (USE/SKIP/UWAGA) | `shared/MOD-MACIERZ-DOWOD-TEZA.md §MT4a` | pisma-procesowe-v3 (W1.3), analizator-dowodow-v3 | ✅ 2026-06-24 |
+| Warstwa konsekwencji tezy C-X.1/C-X.2/C-X.3 (DTA W6) | `analizator-dowodow-v3/SKILL.md §BLOK-KONSEKWENCJE` | pisma-procesowe-v3 (petitum, uzasadnienie, W2.1) | ✅ 2026-06-24 |
+| Numeracja krzyżowa D-NNN/F-NNN/T-NN (DTA-ID-MODE) | `analizator-dowodow-v3/SKILL.md §DTA-ID-MODE` | Trigger ≥5 plików lub ≥5 tez; optional dla małych spraw | ✅ 2026-06-24 |
+| Metryka siły ataku per teza (N/10 + po kontrze) | `shared/MOD-ATAK-NA-DRAFT.md §5 D2` | pisma-procesowe-v3 (W2.4 RAPORT D) | ✅ 2026-06-24 |
+| LA-WNIOSEK-W-FAKCIE (fakt = wniosek prawny) | `analizator-dowodow-v3/modules/MOD-LAPSUS-AUDYT.md §KAT-II` typ #23 | analizator-dowodow-v3 (BLOK-LAPSUS), pisma-procesowe-v3 (W2.4) | ✅ 2026-06-24 |
+| Proweniencja dowodów — taksonomia typów SYS/KOM/ZAW/AUT/URZ/LIN/CHAIN | `shared/MOD-PROWENIENCJA-DOWODOW.md` (plik kanoniczny) | analizator-dowodow-v3 (BLOK-PROWENIENCJA), MP6-sledczy §6.12, pisma-procesowe-v3 W1.2c | ✅ 2026-06-24 |
+| Klasy konsekwencji proweniencji P+/P-/P0/P! | `shared/MOD-PROWENIENCJA-DOWODOW.md §PR3` | analizator-dowodow-v3 (integracja z macierzą D×T i BLOK-KONSEKWENCJE) | ✅ 2026-06-24 |
+| Podobieństwo tekstu / fingerprint lingwistyczny (LIN) | `shared/MOD-PROWENIENCJA-DOWODOW.md §TYP 6` (kanoniczne) — NIE scalać z MET-CA (MET-CA = narracja, LIN = proweniencja) | analizator-dowodow-v3 MP6 §6.12, MP6-sledczy §6.2 VSA (komplementarne) | ✅ 2026-06-24 |
+| 12 technik negacji N1-N12 (gołosłowne zaprzeczenie..spoliation) | `shared/MOD-NEGACJA-DOWODOW.md §BLOK N3` (kanoniczne) | analizator-dowodow-v3 (BLOK-NEGACJA NG3), MP4 §4.3/4.6, RAPORT D §D2, pisma-procesowe-v3 W2.4 | ✅ 2026-06-24 |
+| Ciężar dowodu per teza (KR1-KR5) + 6 dziedzin OD-1..OD-6 | `shared/MOD-NEGACJA-DOWODOW.md §BLOK N1` (kanoniczne) | analizator-dowodow-v3 (BLOK-NEGACJA NG1), pisma-procesowe-v3 W1.3 | ✅ 2026-06-24 |
+| Odporność dowodów per klasa A-G na negację | `shared/MOD-NEGACJA-DOWODOW.md §BLOK N2` (kanoniczne) — NIE scalać z §5 DOWODY-METODOLOGIA (N2 = dynamika obalania, §5 = bazowe wagi statyczne) | analizator-dowodow-v3 (NG2), MP4 §4.6 | ✅ 2026-06-24 |
+| Milczenie jako przyznanie [PRZYZ-MIL-H/M/L] (art. 229-230 KPC) | `shared/MOD-NEGACJA-DOWODOW.md §BLOK N4` (kanoniczne) | analizator-dowodow-v3 (BLOK-NEGACJA NG4), pisma-procesowe-v3 (sekcja "Fakty bezsporne") | ✅ 2026-06-24 |
+| Spoliation / odmowa przedłożenia dowodu (art. 233 §2 KPC) | `shared/MOD-NEGACJA-DOWODOW.md §N12 + §N6` (kanoniczne) — NIE scalać z MP6-sledczy §6.4 BEH (N12 = technika negacji, BEH-C = wzorzec behawioralny) | analizator-dowodow-v3 (BLOK-NEGACJA NG3), pisma-procesowe-v3 W1.2d | ✅ 2026-06-24 |
+| REJESTR KROKÓW pipeline / śledzenie pominięć / ZAKAZ CICHEGO POMIJANIA | `shared/MOD-STEP-TRACKER.md` (kanoniczne, v1.0.0) — inicjowany w pisma-procesowe-v3 KROK 0-TRACKER; ST-INIT/ST-TRACK/ST-REPORT/ST-FINAL | pisma-procesowe-v3 (KROK 0-TRACKER, REGUŁA NAPRAWY, ZAKAZ-12), shared/MOD-SKAN-DOWODOW-KOMPLETNY (SD-VER) | ✅ 2026-06-24d |
+| Wektory ataku na świadka SW-A1..SW-A8 (konflikt interesu, zaprzeczenie, relacja wtórna...) | `shared/MOD-ATAK-NA-SWIADKA.md §FAZA 2` (kanoniczne, v1.0.0) — NIE scalać z MOD-NEGACJA-DOWODOW §N8 (N8 = ogólny "atak na świadka" bez procedury; ten moduł = pełna procedura SW-P1..SW-P5 + priorytetyzacja + integracja W2.4c) | pisma-procesowe-v3 (W1.2c ŁD-3b, W2.4c, ZAKAZ-13) | ✅ 2026-06-24d |
+| SW-TARCZKA — antycypacja ataku na NASZEGO świadka | `shared/MOD-ATAK-NA-SWIADKA.md §FAZA 4 SW-TARCZKA` (kanoniczne) — NIE scalać z ŁD-6 antycypacja (ŁD-6 = ogólna antycypacja na łańcuch; SW-TARCZKA = specyficznie dla ogniwa zeznaniowego) | pisma-procesowe-v3 (W2.4c, ZAKAZ-13) | ✅ 2026-06-24d |
+| SW-DETECT — detekcja ogniw zeznaniowych w łańcuchu dowodowym | `shared/MOD-ATAK-NA-SWIADKA.md §FAZA 0` (kanoniczne) — wbudowany w pisma-procesowe-v3 W1.2c ŁD-3b jako automatyczny krok per ogniwo | pisma-procesowe-v3 (ŁD-3b, W2.4c) | ✅ 2026-06-24d |
 
 ---
 
@@ -226,13 +251,13 @@ Zarejestrowane pojęcia/moduły jako kanoniczne lokalizacje:
 
 | Pojęcie/Moduł | Lokalizacja kanoniczna | Konsumenci | Status |
 |---|---|---|---|
-| Warianty strategiczne pisma (W1.2b) | `shared/MOD-WARIANTY-POZWU.md` | pisma-procesowe-v3, analizator-dowodow-v3 | ⚠️ ZIP delta 06-16 |
-| Checklist priorytetów aspektów (główne/poboczne) | `shared/MOD-PRIORYTETY-ASPEKTOW.md` | analizator-dowodow-v3, analiza-sadowa-v6 | ⚠️ ZIP delta 06-16 |
-| Rejestr metod badawczych (13 metod) | `shared/MOD-METODY-BADAWCZE.md` | analizator-dowodow-v3 BLOK E2a-j | ⚠️ ZIP delta 06-16 |
-| Historia strategii (TRYB A/B, schema JSON) | `shared/MOD-HISTORIA-STRATEGII.md` | MOD-WARIANTY-POZWU, MOD-PRIORYTETY-ASPEKTOW | ⚠️ ZIP delta 06-16 |
-| Mapowanie wyników na przepisy (głębokość/zgodność) | `shared/MOD-MAPA-PRZEPISOW.md` | analizator-dowodow-v3 KROK 4a.3, MOD-WARIANTY-POZWU | ⚠️ ZIP delta 06-16 |
-| Selekcja dowodów do tez + ryzyko krzyżowe | `shared/MOD-SELEKCJA-DOWODOW.md` | analizator-dowodow-v3 KROK 4a.5, pisma-procesowe-v3 W1.3 | ⚠️ ZIP delta 06-16 |
-| Kontekst sesji (bridge między sesjami, format .md) | `shared/MOD-KONTEKST-SESJI.md` | prawny-router-v3 KROK 0B/5B, przesluchanie-swiadkow-v2 KROK 0 | ⚠️ ZIP delta 06-16 |
+| Warianty strategiczne pisma (W1.2b) | `shared/MOD-WARIANTY-POZWU.md` | pisma-procesowe-v3, analizator-dowodow-v3 | ✅ wdrożone 06-17 |
+| Checklist priorytetów aspektów (główne/poboczne) | `shared/MOD-PRIORYTETY-ASPEKTOW.md` | analizator-dowodow-v3, analiza-sadowa-v6 | ✅ wdrożone 06-17 |
+| Rejestr metod badawczych (13 metod) | `shared/MOD-METODY-BADAWCZE.md` | analizator-dowodow-v3 BLOK E2a-j | ✅ wdrożone 06-17 |
+| Historia strategii (TRYB A/B, schema JSON) | `shared/MOD-HISTORIA-STRATEGII.md` | MOD-WARIANTY-POZWU, MOD-PRIORYTETY-ASPEKTOW | ✅ wdrożone 06-17 |
+| Mapowanie wyników na przepisy (głębokość/zgodność) | `shared/MOD-MAPA-PRZEPISOW.md` | analizator-dowodow-v3 KROK 4a.3, MOD-WARIANTY-POZWU | ✅ wdrożone 06-17 |
+| Selekcja dowodów do tez + ryzyko krzyżowe | `shared/MOD-SELEKCJA-DOWODOW.md` | analizator-dowodow-v3 KROK 4a.5, pisma-procesowe-v3 W1.3 | ✅ wdrożone 06-17 |
+| Kontekst sesji (bridge między sesjami, format .md) | `shared/MOD-KONTEKST-SESJI.md` | prawny-router-v3 KROK 0B/5B, przesluchanie-swiadkow-v2 KROK 0 | ✅ wdrożone 06-17 |
 
 **Po wdrożeniu ZIP-ów**: zmień status wszystkich wierszy z ⚠️ na ✅ z datą wdrożenia.
 
@@ -245,4 +270,15 @@ Zarejestrowane pojęcia/moduły jako kanoniczne lokalizacje:
 - Format pliku kontekstu sesji (9 sekcji §2 MOD-KONTEKST-SESJI): jeden format
   dla TRYB A i TRYB B (portal vendora) — nie tworzyć alternatywnych schematów.
 
-*NOTA-9 otwarta: 2026-06-16 · zamknąć po wdrożeniu ZIP-ów*
+*NOTA-9 ZAMKNIĘTA: 2026-06-17 · wszystkie 7 modułów wdrożone i zweryfikowane*
+| 9 technik ataku na świadka TA-1..TA-9 (sprzeczność zeznań, motyw, percepcja, sprzeczność wewnętrzna, skazanie, hearsay, konfrontacja, zeznania pisemne, biegły) | `shared/MOD-ATAK-NA-SWIADKA.md §CZĘŚĆ I` (kanoniczne) | analizator-dowodow-v3 (BLOK-NEGACJA N8), przesluchanie-swiadkow-v2, dr-16 mod-KPC-przesluchanie-swiadkow, pisma-procesowe-v3 W2.4 | ✅ 2026-06-24 |
+| 9 metod ataku na biegłego B1-B9 (metodologia, ultra vires, sprzeczność, niekompletny materiał, wyłączenie, prywatna opinia, kwalifikacje, art.286, art.278¹) | `shared/MOD-ATAK-NA-SWIADKA.md §CZĘŚĆ II` (kanoniczne) — NIE scalać z DR-12 (procesowa rola biegłego ≠ techniki ataku) | analizator-dowodow-v3 (BLOK-NEGACJA N8), pisma-procesowe-v3 | ✅ 2026-06-24 |
+| Procedura obrony ante-cross AC1-AC4 (inwentaryzacja podatności, neutralizacja w direct, przygotowanie świadka, scoring) | `shared/MOD-ATAK-NA-SWIADKA.md §CZĘŚĆ III` (kanoniczne) | przesluchanie-swiadkow-v2 W3-W4, pisma-procesowe-v3 | ✅ 2026-06-24 |
+| Specyfika ataku na świadka/biegłego per dziedzina (DR-02/03/04/05) | `shared/MOD-ATAK-NA-SWIADKA.md §CZĘŚĆ IV` (kanoniczne, poglądowe) | DR-02, DR-03, DR-04, DR-05 (pointer — szczegóły w DR-skillu) | ✅ 2026-06-24 |
+| WARN-13 zamknięty: §WERYFIKACJA sygnatur w MOD-NEGACJA-DOWODOW | `shared/MOD-NEGACJA-DOWODOW.md §WERYFIKACJA` | System: procedura weryfikacji przed powołaniem w piśmie | ✅ 2026-06-24 |
+| 12 wektorów ataku na dowód AD-1..AD-12 | `shared/MOD-ATAK-NA-DOWOD.md §CZĘŚĆ I` (kanoniczne) | analizator-dowodow-v3 (BLOK-ATAK-NA-DOWOD, MP5-atak §5.2/5.3), pisma-procesowe-v3 (W2.4 + W1.2d) | ✅ 2026-06-24 |
+| Procedura ADIS ofensywna (5 kroków ataku na dowody przeciwnika) | `shared/MOD-ATAK-NA-DOWOD.md §CZĘŚĆ II` | analizator-dowodow-v3 (BLOK-ATAK-NA-DOWOD), pisma-procesowe-v3 W1.2d | ✅ 2026-06-24 |
+| Procedura SHIELD obronna (6 kroków szczepienia dowodu) | `shared/MOD-ATAK-NA-DOWOD.md §CZĘŚĆ III` | pisma-procesowe-v3 W2.4, analizator-dowodow-v3 MP5-atak §5.4 | ✅ 2026-06-24 |
+| Ataki na dowody elektroniczne DE-1..DE-5 (metadane, hash, AI/deepfake) | `shared/MOD-ATAK-NA-DOWOD.md §AD-10` — NIE scalać z DR-11 (DR-11=prawo cyfrowe, AD-10=taktyki ataku) | analizator-dowodow-v3, pisma-procesowe-v3 | ✅ 2026-06-24 |
+| Zakaz dowodowy katalog ZD-1..ZD-6 (nagrania, tajemnice, RODO, art.174 KPK) | `shared/MOD-ATAK-NA-DOWOD.md §AD-5` (rozszerzenie MD3b §LEG-CONTRA-N o katalog i mechanizmy ataku) | analizator-dowodow-v3 MD3b (istniejący wykrywa), MP5-atak §AD-5 (mechanizm ofensywny) | ✅ 2026-06-24 |
+| Kontrdowód aktywny KD-1..KD-5 (sekwencja ofensywna) | `shared/MOD-ATAK-NA-DOWOD.md §AD-9` (kanoniczne) — NIE scalać z MP5 §5.4 (MP5=ogólny przeciwplan) | analizator-dowodow-v3 (BLOK-ATAK-NA-DOWOD ADIS-4) | ✅ 2026-06-24 |

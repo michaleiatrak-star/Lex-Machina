@@ -276,3 +276,103 @@ V. NA DOWÓD
 VI. WNIOSKI KOŃCOWE
     [3–5 zdań. Końcowe: "Mając na uwadze powyższe, wnoszę jak na wstępie."]
 ```
+
+---
+
+## SZ-ARCH — ARCHITEKTURA UZASADNIENIA (obowiązkowa od v5.6)
+
+### SZ-ARCH-1: Numerowanie tez
+
+Każda teza główna w uzasadnieniu MUSI być numerowana:
+
+```
+1. [Tytuł tezy głównej]
+
+[Blok 7-elementowy wg MOD-BUDOWA-ARGUMENTU]
+
+Na dowód:
+  Dowód 1. ...  na okoliczność: ...
+  Dowód 2. ...  na okoliczność: ...
+
+2. [Kolejna teza]
+[...]
+```
+
+### SZ-ARCH-2: Zamknięcie furtki (obowiązkowe dla tez klasy 🔴/🟠)
+
+Po każdej głównej tezie o ryzyku prawnym >30%:
+
+```
+Nawet gdyby Sąd nie podzielił powyższego stanowiska co do [teza 1],
+to [alternatywna podstawa prawna lub kwalifikacja] prowadzi do tożsamego
+skutku prawnego, bowiem [argumentacja alternatywna].
+```
+
+### SZ-ARCH-3: Sekcja TEZY DOWODOWE na końcu pisma (obowiązkowa)
+
+Po uzasadnieniu, przed podpisem:
+
+```
+══════════════════════════════════════════════════════
+TEZY DOWODOWE I WSKAZANIE DOWODÓW
+
+Teza 1: [Treść — jedno zdanie]
+Podstawa: art. X §Y [ustawa] (Dz.U. rok poz. nr t.j.)
+Klasyfikacja: A / B / C / D
+Dowody:
+  • [Nazwa dowodu] (str. X akt / zał. nr Y)
+    na okoliczność: [co wykazuje]
+  • [Kolejny dowód]
+    na okoliczność: [...]
+Skutek prawny: [co Sąd winien ustalić/zasądzić]
+Koszt odpowiedzi: [co musi złożyć/wykazać pozwany]
+
+Teza 2: [...]
+[...]
+══════════════════════════════════════════════════════
+```
+
+⛔ ZAKAZ: brak sekcji TEZY DOWODOWE = ⬛ LUKA krytyczna — nie generuj .docx.
+⛔ ZAKAZ: teza bez podstawy prawnej = twierdzenie poziom D.
+⛔ ZAKAZ: dowód bez "na okoliczność" = dowód nieaktywny procesowo.
+
+### SZ-ARCH-4: Wywołanie modułów do W2
+
+```
+Przed redakcją (W2.1) wczytaj DODATKOWO:
+  view /mnt/skills/user/shared/MOD-BUDOWA-ARGUMENTU.md     (schemat 7-el.)
+  view /mnt/skills/user/shared/MOD-KOSZT-ODPOWIEDZI.md     (KO-2/KO-6 inline)
+  view /mnt/skills/user/shared/MOD-SKUTEK-PROCESOWY.md     (SP-1 — nowe)
+  view /mnt/skills/user/shared/MOD-MIKROPODSUMOWANIA.md    (MK-1 — nowe)
+  view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md
+
+Po W2 (przed W3):
+  view /mnt/skills/user/shared/MOD-STRESS-TEST.md          (ST-1 — OBOWIĄZKOWY)
+  → Wykonaj ST-1. Wyświetl raport ST-2 użytkownikowi.
+  → STATUS PASS → kontynuuj do W3/AUDYT-KOŃCOWY
+  → STATUS FAIL → wróć do W2.2 + ST-FIX + ponów ST-1
+```
+
+### SZ-ARCH-5: Schemat pełnego bloku uzasadnienia (architektura v5.7)
+
+```
+Per każdy numerowany rozdział (Teza 1, Teza 2...):
+
+  [1] FAKT                        (konkretny, z datą i podmiotem)
+  [2] DOWÓD                       (z lokalizatorem SD-LOC)
+  [3] PODSTAWA PRAWNA             (zweryfikowana online, Dz.U.)
+  ─── SKUTEK PROCESOWY ───        (SP-1 z MOD-SKUTEK-PROCESOWY) ← NOWE
+  [4] ANTYCYPACJA ZARZUTU         (KO-6 inline per twierdzenie) ← wzmocnione
+  [5] ZAMKNIĘCIE FURTKI           (dla klasy 🔴/🟠)
+  [6] KO-2 (jeżeli pozwany...)    (dla twierdzeń o dokumentach pozwanego)
+  [7] WNIOSEK CZĄSTKOWY
+
+  ═══ MIKROPODSUMOWANIE ═══       (MK-1 z MOD-MIKROPODSUMOWANIA) ← NOWE
+  (3-4 zdania: co wykazano / skutek / ciężar / synergia)
+
+  ────────────────────────────────────────────────────────────────
+
+⛔ BLOKADA: Brak SKUTEK PROCESOWY = LUKA-SP
+⛔ BLOKADA: Brak MIKROPODSUMOWANIA = LUKA-MK
+⛔ BLOKADA: Brak STRESS-TEST przed .docx = BLOKADA-ST
+```

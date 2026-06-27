@@ -128,6 +128,35 @@ Przycisk: "＋ Dodaj własne pisma →" gdy MODE=B → auto-rozszerz do A+B
 
 ---
 
+## KROK 0b — SKAN KOMPLETNOŚCI PLIKÓW ⛔ HARD GATE
+
+```
+Wykonaj PRZED KROK 1. Mechanizm współdzielony z pisma-procesowe-v3 i analiza-sadowa-v6.
+
+view /mnt/skills/user/shared/MOD-SKAN-DOWODOW-KOMPLETNY.md → wykonaj sekwencję:
+
+SD-GATE-0: Czy w wiadomości wzmianka o załącznikach/dowodach/aktach BEZ wgranego pliku?
+  TAK → ⛔ STOP. Wyświetl: "Wskazujesz na dokumenty, ale nie wykryłem żadnego pliku.
+         Wgraj materiały przed analizą." Czekaj. Nie przechodzij do KROK 1.
+
+SD-INW: Zinwentaryzuj WSZYSTKIE pliki (ZIP = zawartość, nie kontener).
+  Zbuduj SD-REJ z każdym plikiem D[id] i liczbą stron/zakładek.
+
+SD-READ: Per każdy D[id] — właściwa metoda per typ:
+  PDF-skan    → pdftoppm -r 120 per KAŻDA strona → view
+  PDF-tekst   → pdftotext; jeśli pusty → rasteryzacja
+  XLSX        → openpyxl: KAŻDA zakładka
+  ODT-obrazy  → zipfile Pictures/* → view per obraz
+  JPG/PNG     → view bezpośrednio
+  DOCX        → zipfile word/document.xml
+  ⛔ ZAKAZ POMINIĘCIA STRONY / ZAKŁADKI / OBRAZU
+
+SD-VER: Wszystkie D[id] = ✅ ODCZYTANE?
+  NIE → wróć do SD-READ. Nie przechodzij do KROK 1.
+
+Wyniki SD-READ → SD-FAKTY[D[id]] zasilają BLOK A i BLOK B.
+Protokoły sądowe: KAŻDE zdanie zeznań świadka → osobny wpis SD-FAKTY.
+```
 
 ---
 
@@ -197,6 +226,38 @@ B3. Materiał zawiera nagranie LUB wątpliwość co do legalności dowodu?
 B4. Dokument może mieć wady formalne (kopia bez poświadczenia, brak pieczęci,
     brak podpisu, skan bez oryginału)?
     TAK → dodaj: MD3a (pełna walidacja formalna, wszystkie punkty)
+```
+
+---
+
+### BLOK B5 — PORCJOWANIE (⛔ HARD GATE gdy materiał duży)
+
+```
+Po SD-VER (KROK 0b) — PRZED MD1-ekstrakcją:
+  view /mnt/skills/user/shared/MOD-PORCJOWANIE-DOWODOW.md → wykonaj PD0.
+
+  STATUS BEZPIECZNY  (≤5 plików i ≤100 KB):
+    → kontynuuj BLOK C i MD1 normalnie bez podziału.
+
+  STATUS OSTRZEŻENIE (6–15 plików lub 100–400 KB):
+    → PD1 (podział na partie) → PD2 (plan dla użytkownika) → STOP.
+    → Czekaj na zatwierdzenie planu przed analizą.
+
+  STATUS WYMAGANE    (≥16 plików lub >400 KB):
+    → ⛔ HARD GATE — nie rozpoczynaj MD1 bez zatwierdzonego planu partii.
+    → PD1 → PD2 → STOP → po zatwierdzeniu: MD1/MD2/MD3 per partia.
+
+  STATUS KRYTYCZNE   (≥30 plików lub >800 KB):
+    → ⛔ HARD GATE BEZWZGLĘDNY — max 3–4 pliki per partia.
+    → Każda partia kończy się PD4 (checkpoint) → present_files.
+    → Użytkownik wznawia przez wgranie checkpointu (PD5).
+
+  Trigger wznawiania: plik "# CHECKPOINT ANALIZY" wgrany przez użytkownika
+    → PD5 (parsuj checkpoint, odtwórz stan) → kontynuuj od właściwej partii.
+
+  W każdej partii: kroki MD1/MD2/MD3 wykonuj per plik z bieżącej partii.
+  Akumuluj wyniki w STAN_PARTII (PD3.3 z MOD-PORCJOWANIE-DOWODOW).
+  Po ostatniej partii: PD6 (synteza finalna) → zasilenie MD4/MD5/MD6.
 ```
 
 ---
@@ -406,9 +467,18 @@ H1. Sprawa zawiera zidentyfikowane roszczenia / zarzuty / przedmioty sporu?
 
 ---
 
-## BLOK I — Eksport raportu
+## BLOK I — Import / Eksport raportu
 
 ```
+I0. MOD-WIDGET-IO (OBOWIĄZKOWE — wczytaj przed wygenerowaniem dashboardu):
+    view /mnt/skills/user/shared/MOD-WIDGET-IO.md
+    → wbuduj pasek IO w nagłówek dashboardu (powyżej zakładek)
+    → IO_SKILL_ID='analizator-dowodow-v3', IO_CASE_ID=CASE_ID
+    → matryca: Export JSON ✅ MD ✅ CSV ✅ | Import JSON ✅
+    → ioGetState(): { evidence, contradictions, persons, nazewnictwo,
+                      dis_items, coverage_data, gaps, recs, lapsus }
+    → ioSetState(s): odtwórz dashboard z wczytanego JSON (wszystkie zakładki)
+
 I1. Dashboard wygenerowany (B1=TAK i KROK 4 wykonany)?
     TAK → dodaj przyciski eksportu do dashboardu:
 

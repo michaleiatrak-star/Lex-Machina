@@ -440,6 +440,11 @@ Wczytaj ten plik na etapie 5–9 i 13 sekwencji obowiązkowej (patrz INSTRUKCJE 
 11. Moduł 5 → zbieg norm (jeśli wiele przepisów)
 12. Moduł 6 → tryb specjalny (karny / admin / proceduralny)
 13. Moduł 8 → Widget wyników HTML z 7 zakładkami (zawsze po analizie)
+    ⛔ MOD-WIDGET-IO (OBOWIĄZKOWE przed show_widget):
+    view /mnt/skills/user/shared/MOD-WIDGET-IO.md
+    → wbuduj pasek IO w nagłówek widgetu
+    → IO_SKILL_ID='analizator-przepisow-v2', IO_CASE_ID=sygnatura_lub_przepis
+    → matryca: Export JSON ✅ MD ✅ | Import JSON ✅
 14. Moduł 9 → propozycja kolejnych skillów
 ```
 

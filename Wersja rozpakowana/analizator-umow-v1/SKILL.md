@@ -126,6 +126,7 @@ ZAKAZ oznaczania ✅ [VER] bez faktycznego wykonania web_search / web_fetch.
 |---|---|---|
 | Brakujące dane w Fazie 0 (⬛ pola) | **INTAKE-GAP** | `view /mnt/skills/user/shared/INTAKE-GAP.md` |
 | Przed wygenerowaniem umowy / klauzul | **HYBRID-VALIDATION** | `view /mnt/skills/user/shared/HYBRID-VALIDATION.md` |
+| Przed eksportem .docx / przekazaniem umowy | **STRIP-VER-GATE** | `view /mnt/skills/user/shared/WERYFIKACJA-SLAD.md § STRIP-VER-GATE` |
 | Po wygenerowaniu dokumentu — walidacja spójności | **POST-VALIDATION** | `view /mnt/skills/user/shared/POST-VALIDATION.md` |
 | Formalna walidacja pisma (bloki A–J) | **MOD-WALIDACJA** | `view /mnt/skills/user/shared/MOD-WALIDACJA_v2.md` |
 | Weryfikacja zgodności treści z faktami źródłowymi | **FAKTY** | `view /mnt/skills/user/shared/FAKTY_v2.md` |
@@ -139,6 +140,9 @@ ZAKAZ oznaczania ✅ [VER] bez faktycznego wykonania web_search / web_fetch.
 > **HYBRID-VALIDATION wczytaj ZAWSZE przed wygenerowaniem jakiegokolwiek dokumentu wyjściowego.**
 > **DISCLAIMER dodaj ZAWSZE na końcu każdej odpowiedzi zawierającej analizę prawną.**
 > **WERYFIKACJA-ŚLAD: każdy przepis/termin/orzeczenie — znacznik ✅ [VER: źródło] lub ⚠️ [NIEWERYFIKOWANE].**
+> **⛔ STRIP-VER-GATE: po HYBRID-VALIDATION, przed eksportem umowy / regulaminu / OWU / wzorca —**
+> **view /mnt/skills/user/shared/WERYFIKACJA-SLAD.md § STRIP-VER-GATE → SVG-1→SVG-2→SVG-3→SVG-4.**
+> **Blokada: nie generuj .docx ani nie przekazuj dokumentu bez zamknięcia SVG-1–SVG-3.**
 
 ---
 

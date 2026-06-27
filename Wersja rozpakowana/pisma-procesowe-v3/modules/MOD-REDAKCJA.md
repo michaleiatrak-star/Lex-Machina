@@ -180,6 +180,37 @@ KROK 5 — Sporządź RAPORT ZMIAN (R.5)
 
 ---
 
+## R.4b — GATE JAKOŚCI (obowiązkowy po R.4, przed R.5)
+
+> Ścieżka MOD-REDAKCJA (Test A) omija W1–W3, ale nie zwalnia z minimalnej
+> weryfikacji jakościowej. Wykonaj poniższe kroki po zakończeniu redakcji
+> tekstu, a przed sporządzeniem R.5.
+
+```
+KROK G1 — PODMIOT-GATE (uproszczony):
+  Zidentyfikuj podmioty w redagowanym piśmie (nazwy spółek, sądy, organy).
+  Czy jakikolwiek podmiot prowadzący działalność ma oznaczenie ⚠️POD
+  lub czy jego dane budzą wątpliwość?
+    TAK → wykonaj W3.0 PODMIOT-GATE dla tych podmiotów
+          (KRS/CEIDG/BIP — jak w pełnym W3.0)
+    NIE → odnotuj "PODMIOT-GATE: N/D — brak podmiotów wymagających weryfikacji"
+
+KROK G2 — AUDYT-KONCOWY (uproszczony — 2 kategorie):
+  Oceń zredagowane pismo w dwóch najważniejszych kategoriach:
+    Spójność petitum z uzasadnieniem:  __/10
+    Realizm sądowy (ton, proporcje):   __/10
+  Jeśli którakolwiek < 7 → wskaż poprawkę, wykonaj ją, powtórz ocenę.
+  Nie blokuj całości .docx za te dwie kategorie — tylko sygnalizuj w R.5.
+
+KROK G3 — HYBRID-VALIDATION (auto-raport braków formalnych):
+  view /mnt/skills/user/shared/HYBRID-VALIDATION.md
+  FAZA 1: wylistuj braki 🔴/🟡/🔵 bez pytania o zgodę.
+  FAZA 2: jeśli użytkownik dostarczył dane → wstaw. Jeśli nie → ⬛.
+  Braki 🔴 blokują oznaczenie pisma jako gotowego.
+```
+
+---
+
 ## R.5 — RAPORT ZMIAN (obowiązkowy po każdej redakcji)
 
 ```

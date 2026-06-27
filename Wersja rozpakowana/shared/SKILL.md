@@ -1,6 +1,6 @@
 ---
 name: shared
-version: 2.0
+version: 2.1
 type: library
 compatibility: "wszystkie skille prawne systemu"
 description: |
@@ -14,6 +14,7 @@ description: |
   FACT-SOURCE-LOCK (FSL-A/B/C), LEGAL-STATUS-LOCK (LSL-1..6), terminy
   (terminy KPC/KPK/KPW/KPA/KP), FAKTY (zgodność faktyczna pisma),
   raport-sytuacyjny-integracja (widget Raportu Sytuacyjnego v2),
+  MOD-STEP-TRACKER (v1.0.0 — śledzenie kroków i raportowanie pominięć),
   DEFINICJE-KLUCZOWE (router do 9 plików w definicje/: DEF-PODMIOTY-WLASNOSC,
   DEF-ODPOWIEDZIALNOSC-SZKODA, DEF-PRACA, DEF-PROCEDURA, DEF-BUDOWLANE-DROGOWE,
   DEF-PODATKOWE, DEF-CYWILNE-WYKLADNIA, DEF-ADMINISTRACYJNE, METODOLOGIA-ORKA2),
@@ -41,6 +42,7 @@ Nie jest samodzielnym skillem — pełni rolę biblioteki referencji.
 | `terminy.md` | Tabela terminów zawitych i przedawnień (KPC, KPK, KPW, KPA, KP, PPSA) |
 | `FAKTY_v2.md`                        | Weryfikacja zgodności faktycznej pisma ze źródłem (MOD-FAKTY) |
 | `raport-sytuacyjny-integracja.md` | Sekwencja wywołania widgetu Raportu Sytuacyjnego v2 |
+| `MOD-STEP-TRACKER.md` | ⛔ Śledzenie kroków i raportowanie pominięć — inicjowany w KROK 0-TRACKER routera; każde pominięcie = obowiązek poinformowania użytkownika + czekanie na decyzję |
 
 Pliki w `prawny-router-v3/references/` (nie w shared, ale powiązane):
 | `pokrycie-dziedzinowe.md` | Pełna mapa dziedzin → modułów → powiązanych skilli (28 dziedzin) |
@@ -52,6 +54,7 @@ Wszystkie pliki są kanoniczne — nie istnieją stuby ani kopie w innych lokali
 Każdy skill wczytuje pliki z tego katalogu bezpośrednio przez `view`:
 
 ```
+view /mnt/skills/user/shared/MOD-STEP-TRACKER.md  ← KROK 0-TRACKER (przed wszystkim — ST-INIT)
 view /mnt/skills/user/shared/PRAWO-HARDGATE.md  ← wymagane przed każdym przepisem/orzeczeniem
 view /mnt/skills/user/shared/HYBRID-VALIDATION.md
 view /mnt/skills/user/shared/INTAKE-GAP.md
@@ -105,6 +108,7 @@ Nie wczytuj wszystkich naraz — tylko te potrzebne dla danego kroku.
 | `MOD-INTRO.md` | Executive summary pisma (str. 1) — 2–5 zdań, max 150 słów, killer argument na str. 1 |
 | `MOD-KONCENTRACJA.md` | Metryka długości pisma per typ — limity orientacyjne, algorytm K1–K4, reguły skracania |
 | `MOD-DOKTRYNA.md` | Polityka cytowania komentarzy i doktryny — hierarchia D-1–D-4, formaty, HARDGATEs |
+| `MOD-WIDGET-IO.md` | ⭐ Obligatoryjny pasek Import/Export dla widgetów analitycznych — matryca per skill, wzorzec HTML/CSS/JS, reguły IO-1–IO-8 |
 
 ### Obowiązkowe wywołania dla generatorów pism
 

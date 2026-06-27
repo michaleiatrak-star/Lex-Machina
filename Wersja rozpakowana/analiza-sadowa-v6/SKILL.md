@@ -50,6 +50,45 @@ analiza-sadowa-v6/
 
 ---
 
+## KROK 0 — SKAN KOMPLETNOŚCI PLIKÓW ⛔ HARD GATE
+
+> Wykonaj jako ABSOLUTNIE PIERWSZY krok — przed KOMUNIKATEM STARTOWYM i przed Przejściem I.
+> Mechanizm współdzielony: `view /mnt/skills/user/shared/MOD-SKAN-DOWODOW-KOMPLETNY.md`
+
+```
+SD-GATE-0: Czy w wiadomości wzmianka o aktach/pismach/dowodach/dokumentach
+  BEZ faktycznie wgranego pliku?
+  TAK → ⛔ STOP. "Wskazujesz na dokumenty, których nie wykryłem.
+         Wgraj akta/pisma przed uruchomieniem analizy." Czekaj. Nie wyświetlaj komunikatu startowego.
+
+SD-INW: Zinwentaryzuj WSZYSTKIE pliki.
+  ZIP → rozpakowuj i inwentaryzuj zawartość.
+  Każdy plik = D[id] z typem i liczbą stron w SD-REJ.
+
+SD-READ: Per każdy D[id] — właściwa metoda per typ pliku:
+  PDF-skan     → pdftoppm -r 120 per KAŻDA strona → view
+  PDF-tekst    → pdftotext; jeśli pusty → rasteryzacja
+  XLSX         → openpyxl: KAŻDA zakładka osobno
+  ODT-obrazy   → zipfile Pictures/* → view per obraz
+  JPG/PNG      → view bezpośrednio
+  DOCX         → zipfile word/document.xml
+  ⛔ ZAKAZ POMINIĘCIA STRONY / ZAKŁADKI / OBRAZU — pominięcie = błąd krytyczny
+
+SD-READ szczególna reguła — PISMA I PROTOKOŁY SĄDOWE:
+  Każde pismo procesowe  → wyodrębnij: strony, daty, żądania, podstawy prawne
+  Każdy protokół sądowy  → KAŻDE zdanie zeznań świadka = osobny wpis SD-FAKTY
+  Każde postanowienie    → wpis SD-POSTANOWIENIE
+  ⛔ ZAKAZ uznania zdania zeznania za "nieistotne" bez uzasadnienia
+
+SD-VER: Wszystkie D[id] = ✅?
+  NIE → wróć do SD-READ dla brakujących stron/plików.
+  TAK → SD-FAKTY gotowe do zasilenia Przejścia I (mapa faktyczna).
+
+SD-GATE-4: SD-VER ≠ KOMPLET → ⛔ BLOKADA Przejścia I. Nie wyświetlaj komunikatu startowego.
+```
+
+---
+
 ## KOMUNIKAT STARTOWY
 
 ```
@@ -437,10 +476,16 @@ KROK 4 — Raport końcowy §1-§11 (tylko po GATE: ZATWIERDZONE TAK)
 1. Dane sprawy ze rozmowy (schemat: syg, sad, rodzaj, klient, rola,
    przeciwnik, etap, wartosc, przepis, znamiona, notatki)
 2. visualize:read_me modules=["interactive","mockup"]
-3. show_widget — kompletny HTML, dane jako literały JS
+3. ⛔ MOD-WIDGET-IO (OBOWIĄZKOWE przed show_widget):
+   view /mnt/skills/user/shared/MOD-WIDGET-IO.md
+   → wbuduj pasek IO (§3 HTML + §4 CSS + §5 JS) w nagłówek widgetu
+   → zaimplementuj ioGetState/ioSetState/ioGetMarkdown dla danych analiza-sadowa
+   → ustaw IO_SKILL_ID='analiza-sadowa-v6', IO_CASE_ID=syg
+   → matryca: Export JSON ✅ MD ✅ PDF ✅ | Import JSON ✅
+4. show_widget — kompletny HTML, dane jako literały JS
    Zakładki: Intake | Przejście I | Przejście II | Przejście III+W1 |
              Przejście IV+WO | Dowody | Filtry | Orzecznictwo | Koszty | Raport
-4. Opis 2-3 zdania + "zacznij od zakładki Przejście I"
+5. Opis 2-3 zdania + "zacznij od zakładki Przejście I"
 ```
 
 ### TRYB C — Analiza hybrydowa
@@ -511,6 +556,10 @@ A+F łącznie: audyt dwustronny. B+D: często w sporach pracowniczych.
     (b) DOKUMENTY: przed każdym krokiem W1/W2/O1/O2 → obowiązkowy view na pliki
         źródłowe; brak view = zakaz opisywania "ponownego przeczytania";
         fakt bez view = oznaczony jako NIEZWERYFIKOWANY z poziomem pewności WĄTPLIWY
+16. SD-SKAN KOMPLETNY (KROK 0) — mechanizm shared:
+    view /mnt/skills/user/shared/MOD-SKAN-DOWODOW-KOMPLETNY.md
+    Wszystkie dokumenty muszą być zinwentaryzowane i odczytane (SD-VER=KOMPLET)
+    PRZED Przejściem I. Pominięcie strony lub protokołu sądowego = błąd krytyczny.
 
 ---
 

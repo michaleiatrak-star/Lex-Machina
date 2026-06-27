@@ -29,9 +29,9 @@ JEŚLI BLOK 0A nie zamknięty → STOP. Żaden punkt poniżej nie jest wykonywan
 □ Sprawdziłem shared/ACTIVATION-MATRIX.md przy nakładaniu się skillów?
 □ Wczytałem PRIMARY skill PRZED analizą?
 □ Sprawdziłem termin zawity (nakaz/wyrok)?
-□ [INTENT-DOCX] Pismo → intent_docx=true → docx-skill bez pytania, present_files?
-□ [MOD-FAKTY] Materiały źródłowe + pismo → shared/FAKTY_v2.md, wynik ✅?
-□ [MOD-FAKTY] ⛔ FIKCJA lub ⛔ BRAK ŹRÓDŁA → STOP, blokada finalizacji?
+□ [INTENT-DOCX] Pismo procesowe → delegowane do pisma-procesowe-v3?
+   Status DRAFT/FINAL, watermark, CP-GATE — wyłącznie w pisma-procesowe-v3.
+   Router nie zarządza checkpointami pisma — tylko deleguje.
 □ Tryb LAIK → raport przez przewodnik-prawny-v2 (KROK H)?
 □ Użytkownik pyta "co możesz zrobić" → przewodnik-prawny-v2 KROK M?
 □ Zaoferowałem kreator (LAIK + pismo)?

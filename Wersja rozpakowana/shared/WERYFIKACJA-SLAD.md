@@ -58,10 +58,56 @@ Termin: 2 tygodnie na sprzeciw od nakazu zapłaty (art. 502 §1 KPC) ✅ [VER: i
 ## KIEDY STOSOWAĆ KTÓRY FORMAT
 
 ```
-Analiza ≤ 3 przepisów   → poziom minimalny (znaczniki śródtekstowe)
-Analiza ≥ 4 przepisów   → poziom pełny (tabela na końcu)
-Pismo procesowe (.docx) → tabela w treści pisma LUB w stopce + tabela w wiadomości
-Orzeczenie              → ZAWSZE URL bezpośredni do orzeczenia + data
+Analiza ≤ 3 przepisów            → poziom minimalny (znaczniki śródtekstowe)
+Analiza ≥ 4 przepisów            → poziom pełny (tabela na końcu)
+Pismo procesowe (.docx)          → tabela WYŁĄCZNIE w wiadomości (nie w .docx) — patrz STRIP-VER-GATE
+Umowa / regulamin / wzorzec      → tabela WYŁĄCZNIE w wiadomości (nie w dokumencie) — patrz STRIP-VER-GATE
+Orzeczenie                       → ZAWSZE URL bezpośredni do orzeczenia + data
+```
+
+---
+
+## ⛔ STRIP-VER-GATE — BRAMKA OCZYSZCZANIA PRZED EKSPORTEM DOKUMENTU
+
+> **Wersja:** 1.0 (2026-06-23) — patch STRIP-VER
+> **Obowiązuje dla:** pism procesowych (.docx), umów, regulaminów, wzorców, OWU
+
+```
+TRIGGER: każdorazowo PRZED wywołaniem view /mnt/skills/public/docx/SKILL.md
+         i przed finalnym zapisem umowy / regulaminu / wzorca.
+
+⛔ ZAKAZ: znaczniki [VER: …] i [NIEWERYFIKOWANE] NIE mogą pojawić się
+          w treści właściwej dokumentu kierowanego do sądu, kontrahenta
+          lub klienta.
+
+PROCEDURA:
+  SVG-1: Zidentyfikuj WSZYSTKIE wystąpienia:
+           ✅ [VER: …]
+           ⚠️ [NIEWERYFIKOWANE]
+         w treści właściwej pisma / umowy (nagłówek, uzasadnienie,
+         żądania, petitum, klauzule, podpisy).
+
+  SVG-2: USUŃ je z treści dokumentu — przepis pozostaje, znacznik znika.
+         Przykład przed: „art. 25¹ §3 KP ✅ [VER: isap.sejm.gov.pl, 2026-06-23]"
+         Przykład po:    „art. 25¹ §3 KP"
+
+  SVG-3: Przenieś pełną tabelę śladu weryfikacji (format POZIOM PEŁNY)
+         do wiadomości towarzyszącej — PRZED present_files:
+
+         ## 🔍 Ślad weryfikacji (wewnętrzny — nie jest częścią dokumentu)
+         | Element | Źródło | Data | Status |
+         |---|---|---|---|
+         | … | … | … | ✅ / ⚠️ |
+
+  SVG-4: Dopiero po SVG-1–SVG-3 → generuj .docx / finalizuj dokument.
+
+⛔ ZAKAZ pominięcia SVG-2: „sąd nie weryfikuje naszego procesu walidacji"
+   nie jest uzasadnieniem — znaczniki VER są artefaktem wewnętrznym systemu
+   i nigdy nie powinny trafiać do dokumentu urzędowego ani handlowego.
+
+⛔ ZAKAZ „skrótu": przeniesienie tabeli do stopki .docx NIE jest
+   równoważne usunięciu — stopka też trafia do adresata. Jedyne
+   dopuszczalne miejsce: wiadomość w Claude (nie w pliku .docx).
 ```
 
 ---

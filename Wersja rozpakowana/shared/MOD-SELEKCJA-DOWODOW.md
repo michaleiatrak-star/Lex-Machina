@@ -13,6 +13,9 @@
 > ostrzeżenia ("ten dowód może być ryzykowny") są ZAKAZANE.
 >
 > Zależności wejściowe:
+>   MOD-MACIERZ-DOWOD-TEZA.md (⛔ NOWE — wczytaj PRZED tym modułem gdy ≥2 dowody):
+>     Dostarcza pre-wypełnioną mapę D×T z klasami K/R/W/RK i lukami.
+>     Gdy macierz zatwierdzona → MT2.A (skan A) jest już wykonany; skup się na rankingu.
 >   MD1/MD2-ekstrakcja (korpus dowodów A-D)
 >   MD4-pokrycie (mapa przesłanek)
 >   MOD-PRIORYTETY-ASPEKTOW.md (aspekty_glowne/aspekty_poboczne)
