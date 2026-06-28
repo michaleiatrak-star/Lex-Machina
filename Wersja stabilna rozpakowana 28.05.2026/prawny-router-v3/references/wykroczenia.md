@@ -161,14 +161,14 @@ REKOMENDACJA: □ Sprzeciw od wyroku nakazowego  □ Rozprawa  □ Przyjąć man
 | Sytuacja | Skill |
 |---|---|
 | Sprzeciw od wyroku nakazowego | `pisma-proste-v2` |
-| Analiza akt wykroczeniowych | `analiza-sadowa-v5` |
+| Analiza akt wykroczeniowych | `analiza-sadowa-v6` |
 | Obrona na rozprawie (pytania do funkcjonariusza) | moduł [K] `przesluchanie-swiadkow-v2` |
 | Orzecznictwo SN — wykroczenia | `orzeczenia-sadowe-v2` |
 | Granica z przestępstwem → | `mod-N-karne.md` + kwalifikator |
 
 ---
 *KW (Dz.U. 2025.734 t.j.) + KPSW (Dz.U. 2025.860 t.j.)*
-*KPK stosowany posiłkowo (Dz.U. 2025.46 t.j.)*
+*KPK stosowany posiłkowo (Dz.U. 2026.490 t.j.)*
 *Uchwała SN I KZP 7/25 z 19.03.2026 — sn.pl (weryfikuj URL)*
 *Postanowienie SN IV KK 145/24 z 10.09.2024 — sn.pl*
 *Taryfikator mandatów: rozporządzenie z 2022 r. — weryfikuj aktualne Dz.U.*

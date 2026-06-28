@@ -157,7 +157,7 @@ REKOMENDACJA: □ Zawiadomienie karne  □ Pozew cywilny  □ Zgłoszenie platfo
 | Kwalifikacja karno-materialna | `kwalifikator-karnomaterialny.md` |
 | Orzecznictwo SN / SA | `orzeczenia-sadowe-v2` |
 
-*KK: Dz.U. 2025 poz. 383 t.j. | Rozdział XXXIII — Przestępstwa przeciwko ochronie informacji*
+*KK: Dz.U. 2025 poz. 383; sprawdź zmiany Dz.U. 2025 poz. 1818 i 1872 t.j. | Rozdział XXXIII — Przestępstwa przeciwko ochronie informacji*
 *Prawo telekomunikacyjne: Dz.U. 2024.1221 t.j. — weryfikuj w isap.sejm.gov.pl*
 *DSA (Rozp. UE 2022/2065): stosowany od 17.02.2024 dla wszystkich platform*
 *e-Evidence (Rozp. UE 2023/1543): wdrożenie transgraniczne — weryfikuj stan w EUR-LEX*

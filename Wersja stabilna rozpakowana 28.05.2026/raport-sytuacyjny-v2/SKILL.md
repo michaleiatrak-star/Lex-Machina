@@ -1,20 +1,31 @@
 ---
 name: raport-sytuacyjny-v2
-version: 2.4-render-fix
-compatibility: "prawny-router-v3, web_search, web_fetch, Anthropic API"
+version: 2.6
+type: executive-raport
+status: production
+compatibility: "prawny-router-v3, web_search, web_fetch, show_widget"
 description: |
   Raport Sytuacyjny Sprawy v2 — interaktywny widget graficzny renderowany inline.
-
   WYWOŁYWANY przez prawny-router-v3 w trzech trybach:
-  [A] OBOWIĄZKOWY — po wygenerowaniu pisma lub ostatnim podsumowującym kroku
-  [B] PROPOZYCJA — po wgraniu i analizie dokumentów (tylko sugestia słowna)
-  [C] NA ŻĄDANIE — gdy użytkownik pyta o aktualny stan sprawy
-
-  RENDERING: show_widget z HTML (vanilla JS) — NIE present_files, NIE JSX asset.
-  Dane wbudowane bezpośrednio w HTML jako literały JS.
+  [A] OBOWIĄZKOWY — po wygenerowaniu pisma lub ostatnim podsumowującym kroku.
+  [B] PROPOZYCJA — po wgraniu i analizie dokumentów (tylko sugestia słowna).
+  [C] NA ŻĄDANIE — gdy użytkownik pyta o aktualny stan sprawy.
+  RENDERING: show_widget z HTML vanilla JS — NIE present_files, NIE JSX, NIE React.
+  Dane sprawy wbudowane jako literały JS bezpośrednio w HTML widgetu.
+  Zawiera: chronologię z weryfikacją źródeł, mapę ryzyk P1/P2/P3, sprzeczności
+  i luki dowodowe, rekomendacje procesowe z priorytetem, priorytety aspektów
+  (główne/poboczne) z MOD-PRIORYTETY-ASPEKTOW, historię wariantów strategii
+  z MOD-HISTORIA-STRATEGII, eksport PDF.
+changelog:
+  - "2.6: nowa zakładka Historia strategii (oś czasu wersji z
+    MOD-HISTORIA-STRATEGII, oznaczenie wybranego/odrzuconych wariantów,
+    porównanie wersji, powrót do wariantu); rozszerzenie zakładki Ryzyka o
+    sekcję Priorytety sprawy (aspekty główne/poboczne + metody badawcze z
+    MOD-PRIORYTETY-ASPEKTOW); nowe pola blueprintu: priorytetyAspektow,
+    historiaStrategii"
 ---
 
-# Raport Sytuacyjny Sprawy v2.4-render-fix
+# Raport Sytuacyjny Sprawy v2.5
 # Kompatybilny z: prawny-router-v3
 
 ---
@@ -23,9 +34,9 @@ description: |
 
 ```
 raport-sytuacyjny-v2/
-├── SKILL.md
+├── SKILL.md                ← ten plik — jedyne źródło prawdy
 └── assets/
-    └── RaportSytuacyjnyWidget.html   ← standalone artefakt React JSX
+    └── RaportSytuacyjnyWidget.html   ← dokumentacja struktury (nie używaj bezpośrednio)
 ```
 
 ---
@@ -56,58 +67,14 @@ Wywołaj po **każdym** z poniższych zakończeń pipeline'u:
 |---|---|
 | **pisma-procesowe-v3** | Po `present_files` z gotowym `.docx` (KROK 6 routera) |
 | **pisma-proste-v2** | Po checkliście finalnej i `present_files` |
-| **analiza-sadowa-v5** | Po §10 Rekomendacje procesowe (Filtr #10/#11) |
+| **analiza-sadowa-v6** | Po §10 Rekomendacje procesowe (Filtr #10/#11) |
 | **przesluchanie-swiadkow-v2** | Po sekcji „Mowa końcowa" — ostatnim elemencie strategii |
 | **analizator-dowodow-v3** | Po sekcji REKOMENDACJE (ostatni blok analizy) |
 | **analizator-umow-v1** | Po §8 Rekomendacje zmian |
-| **analizator-przepisow-v2** | Po §8 Rekomendacje (Zakładka 6) — tylko przy konkretnej sprawie |
+| **analizator-przepisow-v2** | Po §8 Rekomendacje — tylko przy konkretnej sprawie |
 | **prawo-polskie-v2** | Po bloku REKOMENDACJA modułu dziedzinowego |
-| **przewodnik-prawny-v1** | Po opcjach działania z konsekwencjami (ostatni krok LAIK) |
+| **przewodnik-prawny-v2** | Po opcjach działania z konsekwencjami (ostatni krok LAIK) |
 | **orzeczenia-sadowe-v2** | Po liście orzeczeń z linkami — tylko gdy sprawa konkretna |
-
-```
-SEKWENCJA WYWOŁANIA [A] — JEDYNA POPRAWNA METODA:
-  1. Przeanalizuj rozmowę → zbuduj blueprint JSON ze schematu poniżej
-  2. Wywołaj visualize:read_me z modules=["interactive","mockup"] (jeśli nie załadowano)
-  3. Wywołaj show_widget z widget_code zawierającym kompletny HTML widgetu
-     — dane sprawy jako literały JS wbudowane bezpośrednio w HTML
-     — vanilla JS + CSS variables (var(--color-*)) — BEZ React, BEZ importów
-     — zakładki: Sprawa | Chronologia | Źródła | Ryzyka | Luki i sprzeczności | Rekomendacje
-     — przyciski sendPrompt dla następnych kroków w zakładce Rekomendacje
-  4. Poprzedź widgetem komunikat (patrz niżej)
-
-NIE WOLNO:
-  ✗ kopiować pliku .jsx i udostępniać przez present_files — plik .jsx nie renderuje się w claude.ai
-  ✗ używać bash cp + str_replace + present_files dla tego widgetu
-  ✗ używać window.__INJECTED__ — to mechanizm JSX, nie działa w show_widget HTML
-
-SCHEMAT JSON blueprintu:
-  { tryb:"A|B|C",
-    przepis:"art. X KP/KK/...", czyn:"opis roszczenia/czynu",
-    etap:"przedsądowy|I instancja|apelacja|...",
-    dziedzina:"karne|cywilne|pracownicze|admin|rodzinne|spadkowe|gospodarcze",
-    sygnatura:null, termin:null, pilnosc:"natychmiastowa|wysoka|normalna|niska",
-    confidence:0, uwagi_pewnosci:"tekst",
-    s1rola:"powód|oskarżony|...", s1opis:"opis strony",
-    s2rola:"pozwany|oskarżyciel|...", s2opis:"opis strony",
-    zdarzenie:"1-3 zdania stanu faktycznego", skutki:null,
-    p1lbl:"wygranie|skazanie|...", p1pct:0, p1opis:null,
-    p2lbl:null, p2pct:0, p2war:null,
-    sources:[{status:"A|B|C|D|E", type:"dokument|...", name:"opis", impact:"wysoki|...", ryzyko:null}],
-    dowody:[{opis:"...", poziom:"A|B|C|D", typ:"...", zrodlo:"...", ryzyko:null}],
-    risk_map:[{level:"P1|P2|P3 — opis", name:"...", probability:"...", wplyw:"...", mitigation:"..."}],
-    conflicts:[{type:"...", opis:"...", znaczenie:"...", rekomendacja:"..."}],
-    chronologia:[{data:"YYYY-MM-DD|null", zdarzenie:"...", zrodlo:"...",
-                  status_zrodla:"zweryfikowane|częściowe|twierdzenie strony|brak źródła",
-                  znaczenie_procesowe:"wysokie|średnie|niskie", ryzyko:null}],
-    procedural_recommendations:[{text:"...", deadline:"..."}],
-    nastepnyKrok:null }
-  Pola null → null. Brak danych w rozmowie → null (nie wymyślaj).
-
-KOMUNIKAT przed widgetem (zawsze):
-  "Poniżej aktualny raport sytuacyjny sprawy —
-   możesz uzupełnić brakujące dane lub skorygować automatycznie rozpoznane informacje."
-```
 
 ---
 
@@ -131,14 +98,10 @@ Gdy odmówi lub milczy → kontynuuj bez widgetu.
 ## TRYB [C] — NA ŻĄDANIE (natychmiastowy)
 
 ```
-FRAZY WYZWALAJĄCE — reaguj na każdą z nich natychmiast:
-  "aktualny stan sprawy"
-  "podsumuj sprawę" / "podsumowanie sprawy"
+FRAZY WYZWALAJĄCE — reaguj natychmiast, bez potwierdzenia:
+  "aktualny stan sprawy" / "podsumuj sprawę" / "podsumowanie sprawy"
   "raport sprawy" / "raport sytuacyjny" / "pokaż raport"
-  "co wiemy do tej pory" / "co ustaliliśmy"
-  "status sprawy" / "odśwież raport"
-
-→ Wywołaj widget natychmiast, bez pytania, bez potwierdzenia.
+  "co wiemy do tej pory" / "co ustaliliśmy" / "status sprawy" / "odśwież raport"
 ```
 
 ---
@@ -149,37 +112,408 @@ FRAZY WYZWALAJĄCE — reaguj na każdą z nich natychmiast:
 ✗ Pytanie abstrakcyjne o przepis — brak konkretnej sprawy
 ✗ Ogólna rozmowa prawna bez stanu faktycznego
 ✗ Tryb [B]: po dokumentach → TYLKO sugestia słowna
-✗ W środku analizy — tylko po ostatnim kroku
+✗ W środku analizy — tylko po ostatnim kroku skilla
 ✗ analizator-przepisow-v2 przy pytaniach abstrakcyjnych (bez sprawy)
 ✗ orzeczenia-sadowe-v2 przy wyszukiwaniu bez konkretnej sprawy
 ```
 
 ---
 
-## FUNKCJE WIDGETU v2.2
+## SEKWENCJA WYWOŁANIA — JEDYNA POPRAWNA METODA
 
-- **Auto-fill** — Anthropic API wyciąga dane z rozmowy przy każdym otwarciu
-- **Retry ×2 z backoffem** — przy błędzie API: próba 1 natychmiast, próba 2 po 500ms, próba 3 po 1000ms
-- **Timeout 15s** — AbortController przerywa fetch po 15 sekundach; nie blokuje widgetu
-- **Graceful fallback** — po 3 nieudanych próbach widget otwiera się w trybie ręcznym z amber-barem i komunikatem błędu; użytkownik uzupełnia pola ręcznie
-- **Historia snapshota** — tryb ręczny zapisuje się jako "Tryb ręczny — brak auto-fill" w historii
+```
+KROK 1 — Przeanalizuj rozmowę → zbuduj blueprint JSON (schemat poniżej)
+KROK 2 — Wykonaj walidację kompletności blueprintu (sekcja WALIDACJA)
+KROK 3 — Wywołaj visualize:read_me z modules=["interactive","mockup"]
+          (tylko jeśli nie załadowano w tej sesji)
+KROK 3a — ⛔ MOD-WIDGET-IO (OBOWIĄZKOWE przed show_widget):
+           view /mnt/skills/user/shared/MOD-WIDGET-IO.md
+           → wbuduj pasek IO w nagłówek widgetu (powyżej zakładek)
+           → IO_SKILL_ID='raport-sytuacyjny-v2', IO_CASE_ID=sygnatura
+           → matryca: Export JSON ✅ PDF ✅ | Import JSON ✅
+           → ioGetState(): pełny blueprint JSON (§ BLUEPRINT JSON)
+           → ioSetState(s): odtwórz wszystkie zakładki z wczytanego blueprintu
+KROK 4 — Wywołaj show_widget z widget_code zawierającym kompletny HTML widgetu:
+          • dane sprawy jako literały JS wbudowane bezpośrednio w HTML
+          • vanilla JS + CSS variables (var(--color-*))
+          • BEZ React, BEZ importów, BEZ window.__INJECTED__
+          • zakładki: Sprawa | Chronologia | Źródła | Ryzyka |
+                      Luki i sprzeczności | Rekomendacje | Historia strategii
+          • przyciski sendPrompt dla następnych kroków w zakładce Rekomendacje
+KROK 5 — Poprzedź widget komunikatem:
+          "Poniżej aktualny raport sytuacyjny sprawy —
+           możesz uzupełnić brakujące dane lub skorygować automatycznie
+           rozpoznane informacje."
+
+NIE WOLNO:
+  ✗ kopiować pliku .jsx i udostępniać przez present_files
+  ✗ używać bash cp + str_replace + present_files dla tego widgetu
+  ✗ używać window.__INJECTED__
+  ✗ używać Anthropic API do zasilania widgetu (dane z rozmowy, nie z API)
+```
+
+---
+
+## BLUEPRINT JSON — SCHEMAT DANYCH
+
+```json
+{
+  "tryb": "A|B|C",
+  "przepis": "art. X KP/KK/...",
+  "czyn": "opis roszczenia / czynu",
+  "etap": "przedsądowy|I instancja|apelacja|kasacja|egzekucja",
+  "dziedzina": "karne|cywilne|pracownicze|admin|rodzinne|spadkowe|gospodarcze",
+  "sygnatura": null,
+  "termin": null,
+  "pilnosc": "natychmiastowa|wysoka|normalna|niska",
+  "confidence": 0,
+  "uwagi_pewnosci": "tekst",
+  "s1rola": "powód|oskarżony|wnioskodawca|...",
+  "s1opis": "opis strony 1",
+  "s2rola": "pozwany|oskarżyciel|...",
+  "s2opis": "opis strony 2",
+  "zdarzenie": "1–3 zdania stanu faktycznego",
+  "skutki": null,
+  "p1lbl": "wygranie|skazanie|...",
+  "p1pct": 0,
+  "p1opis": null,
+  "p2lbl": null,
+  "p2pct": 0,
+  "p2war": null,
+  "sources": [
+    {"status": "A|B|C|D|E", "type": "dokument|...", "name": "opis",
+     "impact": "wysoki|średni|niski", "ryzyko": null}
+  ],
+  "dowody": [
+    {"opis": "...", "poziom": "A|B|C|D", "typ": "...",
+     "zrodlo": "...", "ryzyko": null}
+  ],
+  "risk_map": [
+    {"level": "P1|P2|P3", "name": "...", "probability": "...",
+     "wplyw": "...", "mitigation": "..."}
+  ],
+  "conflicts": [
+    {"type": "...", "opis": "...", "znaczenie": "...", "rekomendacja": "..."}
+  ],
+  "chronologia": [
+    {"data": "YYYY-MM-DD|null", "zdarzenie": "...", "zrodlo": "...",
+     "status_zrodla": "zweryfikowane|częściowe|twierdzenie strony|brak źródła",
+     "znaczenie_procesowe": "wysokie|średnie|niskie", "ryzyko": null}
+  ],
+  "procedural_recommendations": [
+    {"text": "...", "deadline": "..."}
+  ],
+  "nastepnyKrok": null
+}
+```
+
+**Reguła antyhalucynacyjna:** Pola bez podstawy w materiale → `null`. Nie wymyślaj dat, kwot, sygnatur ani stron. Jeśli data nie wynika z materiału → `null`.
+
+**Pole `chronologia[]`:** Jeśli w historii rozmowy istnieje blok "DANE CHRONOLOGICZNE DLA RAPORTU SYTUACYJNEGO" wygenerowany przez chronologia-sprawy-v1 — wyciągnij go i użyj jako wartości tego pola.
+
+```javascript
+// Logika auto-zasilania chronologii w widgecie HTML:
+const chronSource = window._chronologiaData || null;
+if (chronSource && blueprint.chronologia.length === 0) {
+  blueprint.chronologia = chronSource;
+}
+```
+
+**Pola rozszerzone blueprintu** (wbuduj obok schematu głównego w widgecie):
+
+```json
+{
+  "ustaleniaZeStatusemZrodla": [],
+  "mapaRyzyk": [],
+  "sprzecznosciILuki": [],
+  "rekomendacjeProcesowe": [],
+  "poziomPewnosciRaportu": 0,
+  "ograniczeniaRaportu": [],
+  "priorytetyAspektow": {
+    "aspekty_glowne": [],
+    "aspekty_poboczne": [],
+    "metody_wybrane": {}
+  },
+  "historiaStrategii": {
+    "tryb": "A|B|null",
+    "wersje": []
+  }
+}
+```
+
+**Pole `priorytetyAspektow`:** jeśli w historii rozmowy wystąpił wynik
+`shared/MOD-PRIORYTETY-ASPEKTOW.md` (checklist klasyfikacji), wyciągnij go i
+użyj jako wartości tego pola. Aspekty główne i poboczne renderowane są jako
+dwie listy w zakładce Ryzyka (patrz §"ZAKŁADKA RYZYKA — ROZSZERZENIE").
+
+**Pole `historiaStrategii`:** jeśli `shared/MOD-HISTORIA-STRATEGII.md` zwróciło
+wpisy (TRYB A — window.storage, lub TRYB B — eksport z portalu), wyciągnij
+listę wersji jako `wersje[]` (wg schematu §2 tego modułu) i ustaw `tryb`.
+Jeśli brak wpisów → `wersje: []`, `tryb: null` — zakładka "Historia strategii"
+renderowana jest, ale z komunikatem "Brak zapisanej historii dla tej sprawy".
+
+`poziomPewnosciRaportu` 0–10: zakaz 9–10 przy braku źródeł dla kluczowych faktów.
+
+---
+
+## STATUS ŹRÓDEŁ — KLASYFIKACJA
+
+Każde ustalenie faktyczne musi otrzymać jeden z pięciu statusów:
+
+| Status | Znaczenie | Zasada |
+|---|---|---|
+| `A — źródło bezpośrednie` | dokument, nagranie, e-mail, decyzja, pismo, akt | mocne ustalenie |
+| `B — źródło pośrednie` | relacja, opis, streszczenie, odpowiedź strony | wymaga ostrożności |
+| `C — twierdzenie strony` | informacja wyłącznie od użytkownika lub przeciwnika | nie traktować jako udowodnione |
+| `D — luka dowodowa` | brak dokumentu lub brak potwierdzenia | oznaczyć jako ryzyko |
+| `E — sprzeczność` | dwa źródła mówią co innego | skierować do bloku sprzeczności |
+
+Zakaz mieszania ustaleń kategorii A z twierdzeniami kategorii C bez oznaczenia statusu.
+
+---
+
+## MAPA RYZYK — FORMAT
+
+```json
+{
+  "ryzyko": "opis",
+  "kategoria": "dowodowe|prawne|terminowe|formalne|strategiczne|kosztowe|reputacyjne",
+  "prawdopodobieństwo": "niskie|średnie|wysokie",
+  "wpływ": "niski|średni|wysoki|krytyczny",
+  "podstawa": "z czego wynika ryzyko",
+  "działanie_mitygujące": "konkretna czynność",
+  "priorytet": "P1|P2|P3"
+}
+```
+
+Priorytety:
+- `P1` — może przesądzić o wyniku lub terminie; działanie natychmiastowe.
+- `P2` — istotne, nie blokuje biegu sprawy.
+- `P3` — porządkowe lub strategiczne.
+
+Kolorowanie w widgecie:
+- P1: `border-left: 3px solid var(--color-border-danger)` + `background: var(--color-background-danger)`
+- P2: `border-left: 3px solid var(--color-border-warning)` + `background: var(--color-background-warning)`
+- P3: `border-left: 3px solid var(--color-border-tertiary)` + `background: var(--color-background-secondary)`
+
+---
+
+## SPRZECZNOŚCI I LUKI — FORMAT
+
+```json
+{
+  "punkt": "czego dotyczy sprzeczność",
+  "wersja_1": "opis + źródło",
+  "wersja_2": "opis + źródło",
+  "znaczenie": "wysokie|średnie|niskie",
+  "rekomendacja": "jak usunąć sprzeczność"
+}
+```
+
+Wykrywaj obligatoryjnie: sprzeczne daty, sprzeczne kwoty, sprzeczne wersje zdarzeń, brak dokumentu potwierdzającego kluczową tezę, brak dowodu doręczenia, nieustaloną właściwość sądu, nieustalony termin.
+
+Jeśli nie wykryto sprzeczności i materiał był wystarczający → `"Nie wykryto sprzeczności w dostarczonym materiale"`.
+Jeśli materiał niewystarczający → `"Brak wystarczających danych do oceny sprzeczności"`.
+
+---
+
+## ZAKŁADKA RYZYKA — ROZSZERZENIE (priorytety aspektów)
+
+Jeśli `priorytetyAspektow.aspekty_glowne` lub `aspekty_poboczne` niepuste —
+dodaj w zakładce Ryzyka osobny blok PONAD mapą ryzyk P1/P2/P3:
+
+```
+SEKCJA "PRIORYTETY SPRAWY":
+  ROSZCZENIA GŁÓWNE:
+    [lista aspektów_glowne — każdy z odnośnikiem do powiązanego ryzyka
+     w risk_map, jeśli istnieje]
+  KWESTIE POBOCZNE:
+    [lista aspektów_poboczne]
+  METODY BADAWCZE ZASTOSOWANE:
+    [metody_wybrane — per aspekt, format "ASP-X: MET-XXX (opis funkcjonalny
+     z shared/MOD-METODY-BADAWCZE.md §5 — wersja LAIK/PRAWNIK wg detekcji
+     persony)"]
+```
+
+Wizualnie: dwie kolumny (główne/poboczne) analogicznie do checklisty z
+`shared/MOD-PRIORYTETY-ASPEKTOW.md` — ale tu w trybie tylko-odczyt
+(edycja odbywa się w checklist, nie w raporcie).
+
+Jeśli `priorytetyAspektow.aspekty_glowne` i `aspekty_poboczne` oba puste —
+pomiń tę sekcję bez komunikatu (sprawa jednowątkowa, checklist nie była
+wywoływana — zgodnie z `MOD-PRIORYTETY-ASPEKTOW.md` §3.4).
+
+---
+
+## ZAKŁADKA HISTORIA STRATEGII
+
+Renderuj jako oś czasu wersji (najnowsza na górze), na podstawie
+`historiaStrategii.wersje[]` (schema: `shared/MOD-HISTORIA-STRATEGII.md` §2).
+
+```
+DLA KAŻDEJ WERSJI:
+  Nagłówek: "Wersja [n] — [timestamp]"
+  Lista wariantów (warianty_pozwu[]):
+    [nazwa] — Ryzyko: [P1/P2/P3] | Styl: [styl_sugerowany]
+    [oznacz wybrany wariant (pole "wybor") wizualnie — np. ramka/badge "WYBRANY"]
+    [jeśli powod_odrzucenia zawiera wpis dla tego wariantu — pokaż jako
+     "Odrzucony: [powód]"]
+  Przyciski:
+    "Porównaj z aktualną wersją" — pokazuje diff wariantów między wersją
+    historyczną i najnowszą (tylko jeśli ≥2 wersje)
+    "Wróć do tego wariantu" → sendPrompt('Wróć do wariantu [nazwa] z wersji [n]')
+
+GDY historiaStrategii.wersje jest puste:
+  Komunikat: "Brak zapisanej historii strategii dla tej sprawy. Historia
+  zapisywana jest automatycznie po wyborze wariantu pozwu w W1
+  (pisma-procesowe-v3)."
+
+GDY historiaStrategii.tryb === "A":
+  Dodaj baner informacyjny (np. var(--color-background-warning)):
+  "⚠️ Historia zapisana w trybie sesyjnym (Artifacts) — może nie przetrwać
+  zamknięcia tej konwersacji. Dla trwałej historii skonfiguruj integrację
+  z portalem (TRYB B w MOD-HISTORIA-STRATEGII)."
+```
+
+---
+
+## REKOMENDACJE PROCESOWE — FORMAT
+
+```json
+{
+  "działanie": "konkretna czynność",
+  "cel": "co ma osiągnąć",
+  "podstawa": "fakt/ryzyko/luka, z którego wynika",
+  "termin": "data albo tryb: natychmiast / przed kolejnym pismem / przed rozprawą",
+  "priorytet": "P1|P2|P3",
+  "eskalacja_do_skilla": "nazwa skilla albo null"
+}
+```
+
+Eskalacje (przyciski sendPrompt w zakładce Rekomendacje):
+
+| Sytuacja | Eskalacja |
+|---|---|
+| Brak osi czasu | `chronologia-sprawy-v1` |
+| Brak oceny dowodów | `analizator-dowodow-v3` |
+| Potrzeba pisma | `pisma-procesowe-v3` |
+| Pytania do świadka | `przesluchanie-swiadkow-v2` |
+| Problem z podstawą prawną | `analizator-przepisow-v2` |
+| Potrzeba orzecznictwa | `orzeczenia-sadowe-v2` |
+
+---
+
+## WALIDACJA KOMPLETNOŚCI BLUEPRINTU
+
+Wykonaj przed renderowaniem widgetu:
+
+```
+POLA OBOWIĄZKOWE:
+  □ dziedzina         → null?  → ⬛ [UZUPEŁNIJ: cywilne/karne/pracownicze/admin/inne]
+  □ etap              → null?  → ⬛ [UZUPEŁNIJ: przedsądowy/I instancja/apelacja/...]
+  □ s1rola + s1opis   → null?  → ⬛ [UZUPEŁNIJ: kim jest strona 1]
+  □ s2rola + s2opis   → null?  → ⬛ [UZUPEŁNIJ: kim jest strona 2]
+  □ zdarzenie         → null?  → ⬛ [UZUPEŁNIJ: stan faktyczny 1–3 zdania]
+  □ p1lbl + p1pct     → null?  → ⬛ [UZUPEŁNIJ: scenariusz główny i prawdopodobieństwo]
+
+POLA OSTRZEGAWCZE:
+  □ sources[]         → pusta? → ⚠️ brak rejestru źródeł
+  □ risk_map[]        → pusta? → ⚠️ brak mapy ryzyk
+  □ chronologia[]     → pusta? → ⚠️ brak osi czasu — rozważ chronologia-sprawy-v1
+
+WYNIK:
+  0 pól ⬛ → GOTOWY    → renderuj widget
+  1–2 ⬛  → CZĘŚCIOWY → renderuj widget z banerem "⚠️ Raport częściowy — uzupełnij pola [lista]"
+  ≥3 ⬛   → ROBOCZY   → renderuj widget z banerem "⛔ Wersja robocza — brak kluczowych danych"
+                        + wyświetl listę brakujących pól przed widgetem
+```
+
+Baner statusu w widgecie (sekcja Sprawa):
+
+| Status | Kolor | Tekst |
+|---|---|---|
+| GOTOWY | `var(--color-background-success)` | `✅ Raport kompletny` |
+| CZĘŚCIOWY | `var(--color-background-warning)` | `⚠️ Raport częściowy — uzupełnij pola [lista]` |
+| ROBOCZY | `var(--color-background-danger)` | `⛔ Wersja robocza — brak kluczowych danych` |
+
+---
+
+## HARD GATES — ZAKAZY
+
+Raport nie może być oznaczony jako gotowy gdy:
+
+- nie oznaczono statusu źródeł kluczowych ustaleń,
+- nie wskazano ryzyk procesowych,
+- pominięto sprzeczności lub luki mimo widocznych rozbieżności,
+- podano termin bez źródła,
+- podano podstawę prawną bez weryfikacji albo zastrzeżenia,
+- przedstawiono twierdzenie strony (status C) jako fakt udowodniony.
+- `confidence` wynosi 9–10 przy braku źródeł dla kluczowych faktów.
+
+W takim przypadku raport otrzymuje status `WERSJA ROBOCZA`.
+
+---
+
+## POZIOM PEWNOŚCI RAPORTU 0–10
+
+| Poziom | Kryterium |
+|---|---|
+| 0–3 | Raport orientacyjny, materiał niewystarczający |
+| 4–6 | Częściowa podstawa, istotne luki |
+| 7–8 | Dobra podstawa, ograniczone ryzyka |
+| 9–10 | Mocna podstawa źródłowa, brak istotnych luk |
+
+Zakaz dawania 9–10 przy braku źródeł dla kluczowych faktów.
+
+---
+
+## FUNKCJE WIDGETU
+
+- **7 zakładek:** Sprawa | Chronologia | Źródła | Ryzyka | Luki i sprzeczności | Rekomendacje | Historia strategii
+- **Baner statusu** (GOTOWY / CZĘŚCIOWY / ROBOCZY) w zakładce Sprawa
+- **Auto-fill** — dane z rozmowy wyciągane automatycznie przy każdym otwarciu; brak Anthropic API
 - **Detekcja trybu** — widget wykrywa [A]/[B]/[C] i pokazuje go w badge
 - **Edycja inline** — metadane, strony, stan faktyczny, dowody, predykcja
 - **Oznaczanie zmian** — niebieski kontur + badge "zmienione" na każdym edytowanym elemencie
 - **Oznaczanie dowodów** — każdy dowód zmieniony względem auto-fill jest oznaczony
 - **Historia zmian** — pełny log z godziną, cofanie Ctrl+Z, ponawianie Ctrl+Y
 - **Resetuj** — powrót do stanu auto-fill jednym kliknięciem
-- **📄 Eksportuj PDF** — generuje sformatowany raport PDF z wszystkimi sekcjami: metadane, strony, stan faktyczny, rejestr dowodów, predykcja, historia zmian; otwiera dialog drukowania przeglądarki
+- **Graceful fallback** — przy błędzie renderowania widget otwiera się w trybie ręcznym
+  z amber-barem i komunikatem błędu; użytkownik uzupełnia pola ręcznie
+- **Historia snapshota** — tryb ręczny zapisuje się jako "Tryb ręczny — brak auto-fill" w historii
+- **Retry ×2 z backoffem** — przy błędzie: próba 1 natychmiast, próba 2 po 500 ms, próba 3 po 1000 ms
+- **Timeout 15s** — AbortController przerywa fetch po 15 sekundach; nie blokuje widgetu
+- **📄 Eksportuj PDF** — pełny raport: metadane, strony, stan faktyczny, rejestr dowodów,
+  predykcja, chronologia, ryzyka, rekomendacje, historia zmian; otwiera dialog drukowania
 - **Kontynuuj ↗** — sendPrompt do dalszej pracy z Claude
+- **Przyciski sendPrompt** w zakładce Rekomendacje dla kolejnych kroków akcji
+
+### Integracja z analizatorem umów v1.8
+
+Gdy raport generowany po analizie umowy — dodaj sekcję RYZYKA KONTRAKTOWE w zakładce Ryzyka:
+
+```
+TRIGGER: sprawa zawiera umowę / kontrakt / OWU / regulamin
+
+SEKCJA KONTRAKTOWA (lazy — tylko gdy analiza umowy była wcześniej):
+  □ Ekspozycja finansowa klauzul → wynik z mod-shared-economic.md
+  □ Brakujące klauzule TOP 3    → wynik z mod-shared-missing-clause.md
+  □ Aktywne regulacje UE        → wynik z mod-shared-regulatory-horizon.md
+  □ Kluczowe orzecznictwo       → wynik z mod-shared-orzecznictwo-umow.md
+
+Format w zakładce Ryzyka (dodaj jako osobny blok):
+  | Klauzula | Ryzyko finansowe | Poziom A/B/C/D | Regulacja |
+  Rekomendacja: [playbook FL z mod-shared-fallback-library.md]
+```
 
 ---
 
 ## INTEGRACJA Z PRAWNY-ROUTER-V3
 
 Router v3 wywołuje ten skill jako **ostatni krok SEKWENCJI END-TO-END**
-(po KROK 6 — generowaniu dokumentu, lub po ostatnim kroku skilla bez dokumentu).
+(po KROK 6 lub po ostatnim kroku skilla bez dokumentu).
 
-Dodaj do SELF-CHECK routera v3:
+Punkty self-check routera v3:
 ```
 □ Czy po wygenerowaniu pisma/raportu wywołałem raport-sytuacyjny-v2? [A]
 □ Czy po wgraniu dokumentów zaproponowałem raport-sytuacyjny-v2? [B]
@@ -190,7 +524,7 @@ Dodaj do SELF-CHECK routera v3:
 
 ## WALIDACJA KOŃCOWA — HYBRID-VALIDATION
 
-Po wygenerowaniu dokumentu/raportu/analizy/listy pytań w tym skilla:
+Po wygenerowaniu widgetu:
 
 ```
 view /mnt/skills/user/shared/HYBRID-VALIDATION.md
@@ -200,300 +534,20 @@ FAZA 1 — auto-raport braków 🔴/🟡/🔵 (bez pytania o zgodę)
 FAZA 2 — użytkownik uzupełnia wybrane punkty → wstawiaj precyzyjnie
 FAZA 3 — licznik ⬛ + zamknięcie
 
-Pełna logika: `/mnt/skills/user/shared/HYBRID-VALIDATION.md`
-
 ---
 
-## ARCHITEKTURA RENDEROWANIA — OBOWIĄZKOWA REGUŁA WYKONAWCZA
+## INTEGRACJA Z KANCELARYJNYM JĄDREM SHARED
 
-> ⚠️ KOREKTA KRYTYCZNA v2.4 — nadpisuje wszystkie wcześniejsze instrukcje renderowania w tym pliku.
-
-### Dlaczego NIE używamy present_files z plikiem .jsx
-
-Pliki `.jsx` udostępnione przez `present_files` NIE renderują się wizualnie w interfejsie claude.ai — użytkownik widzi wyłącznie link do pobrania pliku, bez żadnej treści. Jest to błąd architektoniczny poprzedniej wersji skilla.
-
-### Jedyna poprawna metoda renderowania: `show_widget`
-
-Raport sytuacyjny ZAWSZE renderuj przez narzędzie `show_widget` z kodem HTML.
-Nigdy nie używaj `present_files` ani `cp ... /mnt/user-data/outputs/` dla tego widgetu.
-Plik `assets/RaportSytuacyjny.jsx` jest wyłącznie dokumentacją struktury — nie kopiuj go ani nie modyfikuj.
-
-### Sekwencja wywołania — obowiązkowa dla każdego trybu [A]/[B]/[C]
-
-1. Przeanalizuj rozmowę i zbuduj blueprint JSON zgodny ze schematem poniżej.
-2. Wywołaj `visualize:read_me` z modułami `["interactive", "mockup"]` (jeśli jeszcze nie załadowano w tej sesji).
-3. Wywołaj `show_widget` z parametrem `widget_code` zawierającym kompletny HTML widgetu z danymi sprawy wbudowanymi jako literały JS — BEZ żadnych zewnętrznych zależności, BEZ `window.__INJECTED__`, BEZ importów React.
-4. Widget musi używać wyłącznie vanilla JS + inline CSS z CSS variables (`var(--color-*)`).
-5. Nie wywołuj `present_files` dla widgetu raportu sytuacyjnego.
-
-### Struktura obowiązkowa widgetu HTML
-
-Widget musi zawierać co najmniej następujące sekcje jako zakładki (tabs, przełączane przez JS):
-
-- **Sprawa** — metadane, strony, stan faktyczny, predykcja z paskiem procentowym
-- **Chronologia** — lista zdarzeń z datami, źródłami i statusem weryfikacji
-- **Źródła** — tabela A/B/C/D/E z opisem i ryzykiem każdego źródła
-- **Ryzyka** — mapa ryzyk P1/P2/P3 z kolorowaniem (danger/warning/secondary)
-- **Luki i sprzeczności** — wykryte sprzeczności i brakujące dowody
-- **Rekomendacje** — lista kroków P1/P2/P3 z terminami + przyciski `sendPrompt` dla kolejnych akcji
-
-### Schemat danych — pola obowiązkowe blueprintu
+Gdy wynik ma służyć strategii procesowej, ocenie ryzyka lub decyzji terminowej:
 
 ```
-dziedzina, przepis, etap, pilnosc, confidence (0-10), uwagi_pewnosci
-s1rola, s1opis, s2rola, s2opis
-zdarzenie, skutki
-p1lbl, p1pct, p1opis, p2lbl, p2pct, p2war
-sources[]  → {status:"A|B|C|D|E", type, name, impact, ryzyko}
-dowody[]   → {opis, poziom:"A|B|C|D", typ, zrodlo, ryzyko}
-risk_map[] → {level:"P1|P2|P3 — opis", name, probability, wplyw, mitigation}
-conflicts[] → {type, opis, znaczenie, rekomendacja}
-chronologia[] → {data, zdarzenie, zrodlo, status_zrodla, znaczenie_procesowe, ryzyko}
-procedural_recommendations[] → {text, deadline}
-nastepnyKrok
+view /mnt/skills/user/shared/TRYBY-PROCESOWE.md
+view /mnt/skills/user/shared/RISK-ASSESSMENT.md
+view /mnt/skills/user/shared/TERM-CALC.md
+view /mnt/skills/user/shared/DOWODY-METODOLOGIA.md
+view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md
+view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md
+view /mnt/skills/user/shared/QUALITY-CHECK.md
 ```
 
-Pola z brakiem danych w materiale → wpisz `null` lub pustą tablicę — NIE wymyślaj.
-
-### Reguła kolorowania ryzyk w HTML
-
-- P1 (krytyczne): `border-left: 3px solid var(--color-border-danger)` + `background: var(--color-background-danger)` + `color: var(--color-text-danger)`
-- P2 (istotne): `border-left: 3px solid var(--color-border-warning)` + `background: var(--color-background-warning)` + `color: var(--color-text-warning)`
-- P3 (porządkowe): `border-left: 3px solid var(--color-border-tertiary)` + `background: var(--color-background-secondary)` + `color: var(--color-text-secondary)`
-
-### Reguła przycisków akcji
-
-W zakładce Rekomendacje dodaj przyciski wywołujące `sendPrompt(...)` dla:
-- Weryfikacji przepisów w ISAP (jeśli nie zweryfikowano)
-- Sporządzenia pisma procesowego (jeśli sprawa jest gotowa)
-- Innych następnych kroków wynikających z blueprintu
-
-### Podział odpowiedzialności
-
-- `SKILL.md` → analiza merytoryczna, dobór trybu, budowa blueprintu JSON
-- `references/` → bramki walidacyjne (SOURCE-STATUS-MATRIX, PROCESS-RISK-MAP, itd.)
-- Rendering → wyłącznie przez `show_widget` z HTML (vanilla JS)
-
-
----
-
-# MIN8 QUALITY UPGRADE
-
-Ten skill działa z dodatkowym kontraktem jakościowym `upgrade-min8/MIN8-UPGRADE.md` oraz checklistą `upgrade-min8/QUALITY-CHECKLIST.md`.
-
-## Obowiązkowe reguły wykonawcze
-- stosuj twarde bramki źródłowe dla przepisów i orzecznictwa,
-- odróżniaj fakty, interpretacje, hipotezy i ryzyka,
-- nie przyjmuj twierdzeń użytkownika jako udowodnionych bez dowodu,
-- wskazuj poziom pewności 0–10,
-- eskaluj do właściwego skilla, gdy sprawa wykracza poza zakres modułu,
-- nie duplikuj funkcji `shared`; referuj do nich jako zależności.
-
-## Status modernizacji
-Docelowy poziom jakościowy: minimum 8.0/10 przy użyciu wspólnego kontraktu `SKILL-CONTRACT-MIN8`.
-
-
----
-
-# MIN8.5 QUALITY UPGRADE — RAPORT SYTUACYJNY PROCESOWY
-
-Cel tej iteracji: podnieść moduł z poziomu raportowo-statusowego do poziomu procesowo-analitycznego, bez zmiany roli modułu jako końcowego raportu sytuacyjnego.
-
-## Zakres obowiązkowy od v2.3-min85
-
-Raport nie może być wyłącznie podsumowaniem. Musi zawierać pięć bloków kontrolnych:
-
-1. **Chronologia z odniesieniem do źródeł**
-2. **Status źródeł każdego ustalenia**
-3. **Mapa ryzyk procesowych**
-4. **Sprzeczności, luki i punkty wymagające dowodu**
-5. **Rekomendacje procesowe z priorytetem działania**
-
-Jeżeli brakuje danych do któregokolwiek bloku, wpisz `brak danych w materiale`, a nie uzupełniaj domyślnie.
-
----
-
-## 1. POWIĄZANIE Z CHRONOLOGIĄ
-
-### Obowiązkowa integracja
-
-Jeżeli w sprawie występują daty, zdarzenia, terminy, pisma, decyzje, czynności stron albo dowody czasowe, raport musi załadować logikę:
-
-```text
-/mnt/skills/user/chronologia-sprawy-v1/SKILL.md
-```
-
-albo jej aktualną iterację `chronologia-sprawy-v1-min8`, jeżeli jest dostępna.
-
-### Wymagany format ustalenia chronologicznego
-
-Każde istotne zdarzenie w raporcie musi mieć strukturę:
-
-```json
-{
-  "data": "YYYY-MM-DD lub null",
-  "zdarzenie": "krótki opis",
-  "źródło": "nazwa dokumentu / wiadomości / wypowiedzi / brak",
-  "status_źródła": "zweryfikowane | częściowe | twierdzenie strony | brak źródła",
-  "znaczenie_procesowe": "wysokie | średnie | niskie",
-  "ryzyko": "opis ryzyka albo null"
-}
-```
-
-### Reguła antyhalucynacyjna
-
-Nie wolno porządkować zdarzeń według dat domniemanych. Jeżeli data nie wynika z materiału, wpisz `null` i oznacz zdarzenie jako wymagające uzupełnienia.
-
----
-
-## 2. STATUS ŹRÓDEŁ KAŻDEGO USTALENIA
-
-Każde ustalenie faktyczne w raporcie musi otrzymać jeden z pięciu statusów:
-
-| Status | Znaczenie | Wpływ na raport |
-|---|---|---|
-| `A — źródło bezpośrednie` | dokument, nagranie, e-mail, decyzja, pismo, akt | można używać jako mocnego ustalenia |
-| `B — źródło pośrednie` | relacja, opis, streszczenie, odpowiedź strony | wymaga ostrożności |
-| `C — twierdzenie strony` | informacja wyłącznie od użytkownika lub przeciwnika | nie traktować jako udowodnione |
-| `D — luka dowodowa` | brak dokumentu lub brak potwierdzenia | oznaczyć jako ryzyko |
-| `E — sprzeczność` | dwa źródła mówią co innego | skierować do bloku sprzeczności |
-
-### Reguła wykonawcza
-
-W sekcji „co wiadomo” nie wolno mieszać ustaleń kategorii A z twierdzeniami kategorii C bez oznaczenia statusu.
-
----
-
-## 3. MAPA RYZYK PROCESOWYCH
-
-Raport musi zawierać tabelę ryzyk.
-
-### Minimalny schemat ryzyka
-
-```json
-{
-  "ryzyko": "opis",
-  "kategoria": "dowodowe | prawne | terminowe | formalne | strategiczne | kosztowe | reputacyjne",
-  "prawdopodobieństwo": "niskie | średnie | wysokie",
-  "wpływ": "niski | średni | wysoki | krytyczny",
-  "podstawa": "z czego wynika ryzyko",
-  "działanie_mitygujące": "konkretna czynność",
-  "priorytet": "P1 | P2 | P3"
-}
-```
-
-### Priorytety
-
-- `P1` — ryzyko może przesądzić o wyniku albo terminie; wymaga działania natychmiast.
-- `P2` — istotne, ale nie blokuje biegu sprawy.
-- `P3` — porządkowe albo strategiczne.
-
----
-
-## 4. SPRZECZNOŚCI, LUKI I PUNKTY DOWODOWE
-
-Raport musi wykrywać i ujawniać:
-
-- sprzeczne daty,
-- sprzeczne kwoty,
-- sprzeczne wersje zdarzeń,
-- brak dokumentu potwierdzającego kluczową tezę,
-- brak dowodu doręczenia,
-- brak źródła przepisu/orzeczenia,
-- niejasny status strony lub roszczenia,
-- nieustaloną właściwość sądu/organu,
-- nieustalony termin.
-
-### Format sprzeczności
-
-```json
-{
-  "punkt": "czego dotyczy sprzeczność",
-  "wersja_1": "opis + źródło",
-  "wersja_2": "opis + źródło",
-  "znaczenie": "wysokie | średnie | niskie",
-  "rekomendacja": "jak usunąć sprzeczność"
-}
-```
-
-Jeżeli nie wykryto sprzeczności, wpisz: `Nie wykryto sprzeczności w dostarczonym materiale`, ale tylko wtedy, gdy materiał był wystarczający do takiej oceny. W przeciwnym razie wpisz: `Brak wystarczających danych do oceny sprzeczności`.
-
----
-
-## 5. REKOMENDACJE PROCESOWE
-
-Każdy raport musi kończyć się rekomendacjami procesowymi. Nie mogą być ogólne.
-
-### Format rekomendacji
-
-```json
-{
-  "działanie": "konkretna czynność",
-  "cel": "co ma osiągnąć",
-  "podstawa": "fakt/ryzyko/luka, z którego wynika",
-  "termin": "data albo tryb: natychmiast / przed kolejnym pismem / przed rozprawą",
-  "priorytet": "P1 | P2 | P3",
-  "eskalacja_do_skilla": "nazwa skilla albo null"
-}
-```
-
-### Przykładowe eskalacje
-
-- brak osi czasu → `chronologia-sprawy-v1-min8`
-- brak oceny dowodów → `analizator-dowodow-v3-min8`
-- potrzeba pisma → `pisma-procesowe-v3`
-- pytania do świadka → `przesluchanie-swiadkow-v2`
-- problem z podstawą prawną → `analizator-przepisow-v2-min8`
-- potrzeba orzecznictwa → `orzeczenia-sadowe-v2`
-
----
-
-## 6. ROZSZERZONY BLUEPRINT RAPORTU
-
-Od v2.3-min85 blueprint powinien zawierać dodatkowe pola:
-
-```json
-{
-  "chronologia": [],
-  "ustaleniaZeStatusemŹródła": [],
-  "mapaRyzyk": [],
-  "sprzecznościILuki": [],
-  "rekomendacjeProcesowe": [],
-  "poziomPewnościRaportu": 0,
-  "ograniczeniaRaportu": []
-}
-```
-
-### Poziom pewności raportu 0–10
-
-- `0–3` — raport orientacyjny, materiał niewystarczający,
-- `4–6` — częściowa podstawa, istotne luki,
-- `7–8` — dobra podstawa, ograniczone ryzyka,
-- `9–10` — mocna podstawa źródłowa, brak istotnych luk.
-
-Nie wolno dawać `9–10`, jeżeli brak źródeł dla kluczowych faktów.
-
----
-
-## 7. HARD GATES
-
-Raport nie może zostać oznaczony jako gotowy, jeżeli:
-
-- nie oznaczono statusu źródeł kluczowych ustaleń,
-- nie wskazano ryzyk procesowych,
-- pominięto sprzeczności lub luki mimo widocznych rozbieżności,
-- podano termin bez źródła,
-- podano podstawę prawną bez weryfikacji albo zastrzeżenia,
-- przedstawiono twierdzenie strony jako fakt udowodniony.
-
-W takim przypadku raport otrzymuje status:
-
-```text
-WERSJA ROBOCZA — wymaga uzupełnienia źródeł / dowodów / terminów
-```
-
----
-
-## 8. OCENA DOCELOWA
-
-Po tej modernizacji moduł powinien być oceniany nie niżej niż 8.5/10, pod warunkiem że router rzeczywiście wymusza użycie powyższych bloków oraz nie pomija walidacji `HYBRID-VALIDATION`.
+Nie dubluj logiki shared w lokalnych plikach.

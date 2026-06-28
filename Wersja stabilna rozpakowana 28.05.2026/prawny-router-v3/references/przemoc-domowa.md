@@ -155,7 +155,7 @@ REKOMENDACJA: □ Nakaz natychmiastowy  □ Zawiadomienie karne  □ Nakaz sądo
 | Przemoc ekonomiczna — rozdzielność | `mod-C-rodzinne.md` + `prawo-rodzinne.md` |
 | Orzecznictwo SN / SA | `orzeczenia-sadowe-v2` |
 
-*Art. 207 KK: Dz.U. 2025 poz. 383 t.j. | Art. 190a KK: nowelizacja od 01.10.2023*
+*Art. 207 KK: Dz.U. 2025 poz. 383; sprawdź zmiany Dz.U. 2025 poz. 1818 i 1872 t.j. | Art. 190a KK: nowelizacja od 01.10.2023*
 *Ustawa o przec. przemocy w rodzinie: Dz.U. 2021.1249 t.j. — weryfikuj w isap.sejm.gov.pl*
 *KRO: Dz.U. 2026 poz. 236 t.j. | KPC: Dz.U. 2026 poz. 468 t.j.*
 *Weryfikacja: 22.05.2026 — zakaz cytowania przepisów z pamięci*

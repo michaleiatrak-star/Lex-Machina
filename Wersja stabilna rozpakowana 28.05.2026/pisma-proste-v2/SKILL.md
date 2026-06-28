@@ -1,23 +1,18 @@
 ---
 name: pisma-proste-v2
+version: 2.0
+type: executive-pisma
+status: production
 description: |
   Skill do szybkiego redagowania pism procesowych o NISKIM stopniu złożoności
-  z JEDNYM wątkiem prawnym. Stosuj gdy użytkownik prosi o:
-  - wniosek o nadanie klauzuli wykonalności (art. 781–788 KPC)
-  - sprzeciw od nakazu zapłaty (art. 503 KPC)
-  - zarzuty od nakazu zapłaty (art. 493 KPC)
-  - wniosek o wszczęcie egzekucji do komornika
-  - wniosek o zabezpieczenie roszczenia (art. 730 KPC)
-  - wniosek o zwolnienie od kosztów sądowych (art. 102 §1 KSCU)
-  - odpowiedź na zawezwanie do próby ugodowej
-  - wniosek o przywrócenie terminu (art. 168 KPC)
-  - wniosek o wgląd do akt (art. 9 KPC)
-  - pismo z wezwaniem do zapłaty (przedsądowe)
-  - wniosek o uzasadnienie wyroku (art. 328¹ KPC)
-  - wniosek o doręczenie przez komornika (art. 139¹ KPC)
-  - sprzeciw od orzeczenia referendarza sądowego
-  - NIE stosuj do pism wielowątkowych (apelacje, pozwy złożone,
-    pisma przygotowawcze) — użyj pisma-procesowe-v3
+  z JEDNYM wątkiem prawnym. Stosuj gdy użytkownik prosi o: wniosek o nadanie
+  klauzuli wykonalności, sprzeciw od nakazu zapłaty, zarzuty od nakazu,
+  wniosek o wszczęcie egzekucji, wniosek o zabezpieczenie roszczenia,
+  wniosek o zwolnienie od kosztów sądowych, odpowiedź na zawezwanie do ugody,
+  wniosek o przywrócenie terminu, wniosek o wgląd do akt, wezwanie do zapłaty
+  (przedsądowe), wniosek o uzasadnienie wyroku, wniosek o doręczenie przez
+  komornika, sprzeciw od orzeczenia referendarza sądowego.
+  NIE stosuj do pism wielowątkowych — użyj pisma-procesowe-v3.
 compatibility:
   tools:
     - web_search
@@ -35,6 +30,14 @@ jest skrócona do potwierdzenia aktualności przepisu i ewentualnej opłaty.
 > **v2 vs v1:** Wersja v2 wprowadza architekturę modułową — logika i schematy są
 > podzielone na oddzielne pliki ładowane tylko gdy są potrzebne. Rdzeń merytoryczny
 > pozostaje identyczny z v1.
+
+---
+
+## ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
+
+> Przed podaniem jakiegokolwiek artykułu, terminu, opłaty lub sygnatury:
+> `view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
+> Jeśli źródło niedostępne → oznacz `⚠️ [NIEWERYFIKOWANE]`.
 
 ---
 
@@ -87,6 +90,7 @@ Nie cytuj przepisów ani orzeczeń z pamięci bez weryfikacji online.
 | **SPC — Klauzula** | `references/SPC-SPD-SPE.md` → sekcja SPC | Wniosek o nadanie klauzuli wykonalności |
 | **SPD — Egzekucja** | `references/SPC-SPD-SPE.md` → sekcja SPD | Wniosek o wszczęcie egzekucji |
 | **SPE — Wezwanie** | `references/SPC-SPD-SPE.md` → sekcja SPE | Wezwanie przedsądowe do zapłaty |
+| **SPE-O — Ostateczne wezwanie** | `references/SPE-ostateczne.md` | Ostateczne przedsądowe wezwanie do zapłaty po bezskutecznym wcześniejszym wezwaniu albo bezpośrednio przed pozwem |
 | **SPF — Uzasadnienie** | `references/SPF-SPG.md` → sekcja SPF | Wniosek o uzasadnienie wyroku |
 | **SPG — Zabezpieczenie** | `references/SPF-SPG.md` → sekcja SPG | Wniosek o zabezpieczenie roszczenia |
 | **SPH — Inne wnioski** | `references/SPH-inne.md` | Zwolnienie od kosztów, przywrócenie terminu, wgląd do akt, doręczenie przez komornika, sprzeciw od orzeczenia referendarza |
@@ -101,7 +105,7 @@ KROK 1  → Wczytaj references/M1-zasady.md             [zawsze]
 KROK 2  → Wczytaj references/M2-intake.md             [zawsze — ustal typ pisma i dane]
 KROK 3  → Wczytaj:
            view /mnt/skills/user/shared/terminy.md            [jeśli pismo ma termin zawity]
-KROK 4  → Wczytaj właściwy schemat SPA–SPI            [na podstawie wyniku M2]
+KROK 4  → Wczytaj właściwy schemat SPA–SPI albo SPE-O [na podstawie wyniku M2; dla wezwania ostatecznego: references/SPE-ostateczne.md]
 KROK 5  → Wczytaj references/M6-oplaty.md             [jeśli pismo wymaga opłaty]
 KROK 6  → Wczytaj references/M3-weryfikacja.md        [jeśli kwota/przepis wymaga weryfikacji]
 KROK 7  → Wczytaj references/M7-eskalacja.md          [jeśli sprawa może być złożona lub wymaga orzecznictwa]
@@ -124,6 +128,11 @@ Np. proste wezwanie do zapłaty bez terminu zawitego → pomijasz M5 i M7.
 
 > ⚠ Pliki modułów przechowywane są w katalogu `references/` względem SKILL.md.
 > Ładuj z pełną ścieżką.
+
+**Weryfikacja twierdzeń strony** — wykonaj przed redagowaniem:
+> `view /mnt/skills/user/shared/CLAIM-VALIDATION.md`
+> Twierdzenie sprzeczne z materiałem → zastąp tym co wynika z dokumentów; poinformuj użytkownika.
+> Twierdzenie bez oparcia → oznacz jako lukę; nie umieszczaj w piśmie.
 
 Gdy brakuje danych faktycznych — wczytaj: view /mnt/skills/user/shared/INTAKE-GAP.md:
 - **Dane krytyczne** (strony, typ, istota): jedno pytanie zbiorcze
@@ -157,6 +166,7 @@ Jeśli użytkownik nie podał wszystkich danych — zapytaj o brakujące
 | Wniosek o nadanie klauzuli | brak | 6 zł / 50 zł (art. 71 KSCU) | SPC |
 | Wniosek o wszczęcie egzekucji | brak | brak | SPD |
 | Wezwanie przedsądowe do zapłaty | brak | brak | SPE |
+| Ostateczne przedsądowe wezwanie do zapłaty | 3–5 dni roboczych wg danych sprawy | brak | SPE-O |
 | Wniosek o uzasadnienie wyroku | **7 dni** od ogłoszenia | 100 zł (art. 25b KSCU) | SPF |
 | Wniosek o zabezpieczenie | brak | 100 zł (art. 69 §1 KSCU) | SPG |
 | Zwolnienie od kosztów / przywrócenie terminu / inne | patrz M5 | patrz M6 | SPH |
@@ -212,7 +222,6 @@ Jeśli użytkownik nie podał wszystkich danych — zapytaj o brakujące
 *Aktualizuj stawki przez weryfikację na isap.sejm.gov.pl — mogą ulec zmianie.*
 
 ---
-
 
 ## ORZECZNICTWO I ESKALACJA (szczegóły w references/M7-eskalacja.md)
 
@@ -309,15 +318,45 @@ Nie wydawaj pisma jeśli którykolwiek element checklisty nie jest spełniony.
 
 **Plik kanoniczny — wczytaj zawsze:**
 ```
-view /mnt/skills/user/shared/FAKTY.md
+view /mnt/skills/user/shared/FAKTY_v2.md
 ```
 
 Uruchamiaj zawsze gdy pismo powstaje z dostarczonych przez użytkownika dokumentów,
 akt, pism, faktur, wyroków, umów lub opisów słownych przekazanych w konwersacji.
-Procedura, klasyfikacja błędów, format raportu i nakazy bezwzględne są w FAKTY.md.
+Procedura, klasyfikacja błędów, format raportu i nakazy bezwzględne są w FAKTY_v2.md.
 
 ---
 
 *Skill pisma-proste-v2 · Architektura modułowa · v2.2*
 *Dla pism wielowątkowych → pisma-procesowe-v3*
 *Dla analizy dowodów → analizator-dowodow-v3 · Dla orzecznictwa → orzeczenia-sadowe-v2*
+
+---
+
+## KROK 9d — PROCEDURAL CORE SHARED
+
+Przed oddaniem jakiegokolwiek pisma, nawet prostego, wczytaj i zastosuj:
+
+```text
+view /mnt/skills/user/shared/TRYBY-PROCESOWE.md
+view /mnt/skills/user/shared/FORMAL-CHECK.md
+view /mnt/skills/user/shared/BRAKI-FORMALNE.md
+view /mnt/skills/user/shared/WARUNKI-SKUTECZNOSCI.md
+view /mnt/skills/user/shared/RISK-ASSESSMENT.md
+view /mnt/skills/user/shared/QUALITY-CHECK.md
+```
+
+Jeżeli pismo dotyczy terminu, sprzeciwu, zarzutów, uzasadnienia, apelacji, zażalenia albo przywrócenia terminu, dołącz:
+
+```text
+view /mnt/skills/user/shared/TERM-CALC.md
+```
+
+Jeżeli pismo zawiera dowody lub zarzuty faktyczne, dołącz:
+
+```text
+view /mnt/skills/user/shared/DOWODY-METODOLOGIA.md
+view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md
+```
+
+Pismo proste nie może ominąć walidacji tylko dlatego, że jest krótkie.

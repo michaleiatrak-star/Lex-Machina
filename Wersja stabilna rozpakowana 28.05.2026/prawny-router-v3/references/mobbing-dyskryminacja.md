@@ -87,4 +87,4 @@ REKOMENDACJA: □ Sąd pracy  □ PIP  □ Ugoda  □ Negocjacje
 | Rejestr / wycena dowodów mobbingu | `analizator-dowodow-v3` |
 | Pozew o zadośćuczynienie / odszkodowanie | `pisma-procesowe-v3` |
 | Orzecznictwo SN — mobbing | `orzeczenia-sadowe-v2` |
-| Analiza szans procesowych | `analiza-sadowa-v5` |
+| Analiza szans procesowych | `analiza-sadowa-v6` |

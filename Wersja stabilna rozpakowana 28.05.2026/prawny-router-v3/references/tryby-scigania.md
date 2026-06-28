@@ -65,7 +65,7 @@
 | Czyn | Art. KK | Tryb gdy sprawca obcy | Tryb gdy sprawca = osoba najbliższa |
 |---|---|---|---|
 | Kradzież | art. 278 | Z urzędu | §4: „Na wniosek pokrzywdzonego" |
-| Kradzież z włamaniem | art. 279 | Z urzędu | **§ 2: „Jeżeli kradzież z włamaniem popełniono na szkodę osoby najbliższej, ściganie następuje na wniosek pokrzywdzonego."** Podstawa autonomiczna — nie odesłanie do art. 278 §4. Źródło: Dz.U.2025.0.383 t.j. |
+| Kradzież z włamaniem | art. 279 | Z urzędu | **§ 2: „Jeżeli kradzież z włamaniem popełniono na szkodę osoby najbliższej, ściganie następuje na wniosek pokrzywdzonego."** Podstawa autonomiczna — nie odesłanie do art. 278 §4. Źródło: Dz.U.2025.383 t.j. |
 | Przywłaszczenie | art. 284 | Z urzędu | §4: „Jeżeli nastąpiło na szkodę osoby najbliższej — na wniosek" |
 | Oszustwo | art. 286 | Z urzędu | §4: „Jeżeli na szkodę osoby najbliższej — na wniosek" |
 

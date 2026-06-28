@@ -1,0 +1,183 @@
+# Moduł [AY] — Pomoc społeczna, świadczenia i sprawy lokalowe publiczne
+
+**Status:** moduł klasy kancelaryjnej — poziom DR-03
+
+**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+---
+WSPÓLNE ZASADY DLA MODUŁU:
+- przed cytowaniem przepisu zastosuj `shared/ISAP-AUDIT-PROTOCOL.md`;
+- metryki aktów sprawdzaj w `shared/ISAP-METRYKI-AKTOW.md`;
+- jeżeli sprawa jest procesowa, uruchom `shared/FORMAL-CHECK.md`, `shared/WARUNKI-SKUTECZNOSCI.md`, `shared/TERM-CALC.md`, `shared/RISK-ASSESSMENT.md`;
+- nie mieszaj trybów: KPA, Ordynacja podatkowa, KAS, PPSA i egzekucja administracyjna mają odrębne rygory.
+---
+
+**Zakres:** zasiłki, DPS, usługi opiekuńcze, świadczenia rodzinne i lokalne, dodatki, orzeczenia organów pomocy społecznej, odwołania do SKO, skargi do WSA, świadczenia związane z niepełnosprawnością.
+
+## ZASADY ABSOLUTNE
+
+1. Ustal, czy sprawa jest świadczeniem z pomocy społecznej, świadczeniem rodzinnym, świadczeniem z ZUS czy sprawą lokalową — tryby różnią się zasadniczo.
+2. Decyzje OPS/MOPS/GOPS zwykle zaskarża się do SKO, następnie do WSA.
+3. Kluczowe są kryteria dochodowe, skład rodziny, niepełnosprawność, wywiad środowiskowy i uzasadnienie odmowy.
+4. Nie cytuj progów i kwot bez sprawdzenia aktualnego rozporządzenia/ustawy.
+
+## KLUCZOWE AKTY PRAWNE — ISAP
+
+| Akt | Metryka robocza |
+|---|---|
+| Ustawa o pomocy społecznej | Dz.U. 2025 poz. 1214; sprawdzić późniejsze zmiany 2025/2026 |
+| KPA | Dz.U. 2025 poz. 1691 według rejestru ISAP |
+| PPSA | Dz.U. 2026 poz. 143 według rejestru ISAP |
+| Ustawy świadczeniowe szczególne | każdorazowo sprawdzić ISAP |
+
+## WALIDACJA
+
+```text
+□ rodzaj świadczenia
+□ organ I instancji i SKO
+□ data decyzji i doręczenia
+□ kryterium dochodowe i dokumenty dochodowe
+□ wywiad środowiskowy
+□ niepełnosprawność / orzeczenie / potrzeba opieki
+□ możliwość zabezpieczenia lub świadczenia tymczasowego
+```
+
+---
+
+# STANDARDOWE UZUPEŁNIENIE MODUŁU — poziom prawa pracy / prawa karnego
+
+> Ten blok jest częścią obowiązkową modułu. Ma pierwszeństwo przed opisowym użyciem modułu. Nie zastępuje kontroli ISAP; wymusza praktyczny workflow kancelaryjny.
+
+## 1. Intake szczególny
+
+Przed odpowiedzią ustal co najmniej:
+- rodzaj świadczenia;
+- organ;
+- kryterium dochodowe;
+- skład rodziny;
+- decyzja/bezczynność;
+- termin odwołania;
+
+## 2. Mapa proceduralna
+
+```text
+Identyfikacja trybu i organu/sądu
+  ↓
+Kontrola terminu, doręczenia, właściwości i legitymacji
+  ↓
+Ustalenie faktów materialnych i proceduralnych
+  ↓
+Matryca dowodowa: fakt → dowód → ciężar dowodu → luka
+  ↓
+Dobór pisma/środka: wniosek / odwołanie / zażalenie / skarga / pozew / zawiadomienie
+  ↓
+Walidacja formalna: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
+  ↓
+Ocena ryzyka: shared/RISK-ASSESSMENT.md + shared/QUALITY-CHECK.md
+  ↓
+Strategia: minimum, optimum, wariant eskalacyjny
+```
+
+## 3. Warunki skuteczności
+
+```text
+□ prawidłowy tryb
+□ właściwy organ albo sąd
+□ termin liczony od prawidłowego zdarzenia
+□ legitymacja strony
+□ żądanie możliwe prawnie
+□ fakty powiązane z podstawą prawną
+□ dowody przypisane do każdej tezy
+□ kontrola opłat, odpisów, pełnomocnictw i podpisu
+□ kontrola ISAP na dzień sporządzenia pisma
+□ kontrola stanu prawnego na dzień zdarzenia oraz na dzień orzekania
+```
+
+## 4. Matryca dowodowa
+
+Dowody typowe dla tego modułu:
+- wniosek;
+- decyzja;
+- zaświadczenia dochodowe;
+- orzeczenia niepełnosprawności;
+- wywiad środowiskowy;
+- dokumentacja medyczna;
+
+Każdy dowód oceniaj według schematu:
+
+```text
+Dowód → fakt, który ma wykazać → bezpośredni/pośredni → wiarygodność → ryzyko podważenia → brakujący dowód wzmacniający
+```
+
+## 5. Typowe zarzuty i kontrzarzuty
+
+W każdej sprawie przygotuj dwie wersje:
+
+1. argumentację strony inicjującej sprawę,
+2. argumentację organu/przeciwnika procesowego.
+
+Typowe ryzyka i kontrargumenty:
+- brak dowodów dochodu;
+- niewykazanie przesłanek szczególnych;
+- przekroczenie terminu;
+- niewłaściwy tryb skargi;
+
+## 6. Strategia procesowa
+
+Zastosuj trzy warianty:
+
+### Wariant ostrożny
+Minimalizuje ryzyko formalne. Priorytet: termin, kompletność, zabezpieczenie dowodów.
+
+### Wariant ofensywny
+Eksponuje naruszenia proceduralne, wadliwość ustaleń, niewłaściwą wykładnię, naruszenie zasady proporcjonalności albo praw strony.
+
+### Wariant eskalacyjny
+Zakłada przejście do organu II instancji, WSA/NSA, sądu powszechnego, SN, TSUE, ETPC albo organu sektorowego — tylko gdy wynika to z trybu.
+
+## 7. Quality gate
+
+Przed końcową odpowiedzią sprawdź:
+
+```text
+□ Czy moduł działa praktycznie, a nie opisowo?
+□ Czy wskazano decydujący element prawny?
+□ Czy oddzielono fakty od interpretacji?
+□ Czy podano ryzyka przeciwnika/organu?
+□ Czy wskazano słabe punkty klienta?
+□ Czy każdy przepis i Dz.U. ma kontrolę ISAP albo oznaczenie braku weryfikacji?
+□ Czy użyto shared/MODULE-STANDARD-POLISH-LAW.md?
+```
+
+## 8. Łącz obowiązkowo z
+
+| Potrzeba | Moduł współdzielony / skill |
+|---|---|
+| aktualność prawa | `shared/ISAP-AUDIT-PROTOCOL.md` + `shared/ISAP-METRYKI-AKTOW.md` |
+| stan prawny w czasie | `shared/TEMPORAL-LAW-CHECK.md` |
+| braki formalne | `shared/BRAKI-FORMALNE.md` |
+| warunki skuteczności | `shared/WARUNKI-SKUTECZNOSCI.md` |
+| dowody | `shared/DOWODY-METODOLOGIA.md` + `analizator-dowodow-v3` |
+| ryzyka | `shared/RISK-ASSESSMENT.md` |
+| pisma | `pisma-procesowe-v3` albo `pisma-proste-v2` |
+| analiza sądowa | `analiza-sadowa-v6` |
+
+
+---
+
+## QUALITY GATE
+
+- [ ] Aktualny tekst t.j. aktu zweryfikowany w ISAP?
+- [ ] Stan prawny właściwy temporalnie (na dzień zdarzenia i na dzień orzekania)?
+- [ ] Każda przesłanka ma przypisany dowód?
+- [ ] Termin nie upłynął?
+- [ ] Właściwy organ / sąd wskazany?
+- [ ] Ryzyka formalne i dowodowe ocenione?
+- [ ] Brzmienie przepisów ze źródeł, nie z pamięci modelu?
+
+## OUTPUT
+
+1. Stan faktyczny; 2. Stan prawny i źródła; 3. Kwalifikacja trybu i właściwość;
+4. Terminy (obliczone, daty graniczne); 5. Przesłanki (spełnione / wątpliwe / niespełnione);
+6. Matryca dowodowa (teza → dowód → siła → luka); 7. Zarzuty i kontrargumenty;
+8. Analiza ryzyk; 9. Strategia (podstawowy + ewentualny); 10. Rekomendacja;
+11. Kontrola ISAP/temporalności.

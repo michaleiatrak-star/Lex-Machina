@@ -1,4 +1,4 @@
-# Widget — Wyszukiwanie Orzeczeń Sądowych v2
+# Widget — Wyszukiwanie Orzeczeń Sądowych v2.1
 
 Plik zawiera kompletny kod HTML widgetu do wklejenia w `show_widget`.
 
@@ -13,32 +13,56 @@ show_widget(
 ```
 
 Wywołujesz widget **dwukrotnie**:
-- **Przed wyszukiwaniem** — z danymi Faz 0-A i 0-B; w zakładkach Orzeczenia i Raport wstaw komunikat `Trwa wyszukiwanie…`
+- **Przed wyszukiwaniem** — z danymi Faz 0-A i 0-B; w zakładkach Orzeczenia, Alerty i Raport wstaw komunikat `Trwa wyszukiwanie…`
 - **Po wyszukiwaniu** — z kompletnymi danymi wszystkich faz
 
 ## Mapowanie alertów → klasy CSS
 
-| Alert              | Klasa CSS        | Kolor     |
-|--------------------|------------------|-----------|
-| ⚠️ STARE           | `alert-old`      | żółty     |
-| 🔴 SPRZECZNE       | `alert-conflict` | czerwony  |
-| 🔴 ZMIANA PRAWA    | `alert-law`      | czerwony  |
-| ℹ️ WYMIAR UE       | `alert-eu`       | niebieski |
-| ⛔ BRAK URL        | `alert-nurl`     | szary     |
-| ✅ brak alertów    | `alert-ok`       | zielony   |
+| Alert                    | Klasa CSS          | Kolor     |
+|--------------------------|--------------------|-----------|
+| ⚠️ STARE                 | `alert-old`        | żółty     |
+| 🔴 SPRZECZNE             | `alert-conflict`   | czerwony  |
+| 🔴 ZMIANA PRAWA          | `alert-law`        | czerwony  |
+| ℹ️ WYMIAR UE             | `alert-eu`         | niebieski |
+| ⛔ BRAK URL              | `alert-nurl`       | szary     |
+| 🏛️ ZASADA PRAWNA (6A)   | `alert-zp`         | fioletowy |
+| ✅ brak alertów          | `alert-ok`         | zielony   |
 
 ## Mapowanie kategorii → etykiety
 
-| Kat. | Etykieta              | Opis                                    |
-|------|-----------------------|-----------------------------------------|
-| 1    | Najnowsze             | Orzeczenia z ostatnich 2 lat            |
-| 2    | Starsze               | Orzeczenia 2–5 lat                      |
-| 3A   | Linia dominująca      | Jednolita linia większościowa           |
-| 3B   | Linia mniejszościowa  | Zawsze prezentuj — zakaz ukrywania      |
-| 4    | Wspierające           | Potwierdzają linię główną               |
-| 5    | UE / TSUE             | Materia objęta dyrektywą lub wyrokiem   |
-| 6    | Interpretacje         | Uchwały, wytyczne, interpretacje SN     |
-| 7    | Literatura            | Komentarze, glosy (pomocniczo)          |
+| Kat. | Etykieta              | Opis                                                      |
+|------|-----------------------|-----------------------------------------------------------|
+| 1    | Najnowsze             | Orzeczenia w granicach progu dziedzinowego                |
+| 2    | Starsze               | Powyżej progu, poniżej 2× progu                          |
+| 3A   | Linia dominująca      | Jednolita linia większościowa                             |
+| 3B   | Linia mniejszościowa  | Zawsze prezentuj — zakaz ukrywania                       |
+| 4    | Wspierające           | Potwierdzają linię główną                                 |
+| 5    | UE / TSUE / ETPC      | Materia objęta dyrektywą lub wyrokiem                    |
+| 6    | Interpretacje         | Zwykłe uchwały SN, wytyczne, interpretacje                |
+| **6A** | **Zasada prawna SN** | **Uchwały z mocą zasady prawnej — PRIORYTET powołania** |
+| 7    | Literatura            | Komentarze, glosy (pomocniczo)                            |
+
+## Szablon zakładki Alerty — instrukcja wypełniania
+
+Zakładka Alerty zawiera **jeden blok alert-detail per orzeczenie**, które ma co najmniej jeden aktywny alert.
+Orzeczenia bez alertów (alert-ok) nie wymagają bloku.
+
+Struktura bloku alert-detail:
+```html
+<div class="alert-detail">
+  <div class="alert-detail-sig"><!-- DANE: sygnatura, np. II PK 123/22 --></div>
+  <ul class="alert-detail-list">
+    <!-- Wstaw jeden <li> na każdy aktywny alert tego orzeczenia: -->
+    <li class="a-tag alert-old">⚠️ STARE — <span class="mode-laik"><!-- DANE: opis dla laika, np. „Wyrok wydany ponad 3 lata temu — sprawdź czy przepis nie zmienił się." --></span><span class="mode-prawnik"><!-- DANE: opis dla prawnika, np. „Data: 12.03.2020; próg dziedzinowy: 3 lata (prawo pracy); art. 52 KP nowelizowany 2022 r. — weryfikuj aktualność tezy." --></span></li>
+    <li class="a-tag alert-conflict">🔴 SPRZECZNE — <span class="mode-laik"><!-- DANE: opis dla laika --></span><span class="mode-prawnik"><!-- DANE: opis dla prawnika z sygnaturą orzeczenia sprzecznego --></span></li>
+    <li class="a-tag alert-law">🔴 ZMIANA PRAWA — <span class="mode-laik"><!-- DANE --></span><span class="mode-prawnik"><!-- DANE: przepis + data nowelizacji --></span></li>
+    <li class="a-tag alert-eu">ℹ️ WYMIAR UE — <span class="mode-laik"><!-- DANE --></span><span class="mode-prawnik"><!-- DANE: dyrektywa lub sprawa TSUE --></span></li>
+    <li class="a-tag alert-zp">🏛️ ZASADA PRAWNA — <span class="mode-laik"><!-- DANE: „To wiążąca zasada Sądu Najwyższego." --></span><span class="mode-prawnik"><!-- DANE: „Uchwała 7 sędziów SN z mocą zasady prawnej (art. 87 § 1 uSN). Wiąże wszystkie składy SN." --></span></li>
+  </ul>
+</div>
+```
+
+Jeśli brak jakichkolwiek alertów: `<p class="empty-msg">Brak alertów dla tej linii orzeczniczej.</p>`
 
 ## Kod widgetu HTML
 
@@ -55,6 +79,7 @@ Wklej poniższy kod jako `widget_code`. Wypełnij miejsca oznaczone `<!-- DANE: 
     --c-accent: var(--color-accent-primary, #0d6efd);
     --c-green: #198754; --c-red: #dc3545;
     --c-yellow: #ffc107; --c-blue: #0dcaf0;
+    --c-purple: #7c3aed;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: system-ui, sans-serif; font-size: 14px;
@@ -102,12 +127,15 @@ Wklej poniższy kod jako `widget_code`. Wypełnij miejsca oznaczone `<!-- DANE: 
   /* Orzeczenia */
   .orz-card { border: 1px solid var(--c-border); border-radius: 8px;
                padding: 12px 14px; margin-bottom: 10px; }
+  .orz-card.zp { border-left: 3px solid var(--c-purple); }
   .orz-header { display: flex; justify-content: space-between;
                 align-items: flex-start; gap: 8px; margin-bottom: 6px; }
   .orz-sig { font-weight: 700; font-size: 13px; }
   .kat-badge { font-size: 10px; padding: 2px 8px; border-radius: 10px;
                background: var(--c-surface); border: 1px solid var(--c-border);
                white-space: nowrap; }
+  .kat-badge.kat-6a { background: #f3e8ff; border-color: var(--c-purple);
+                      color: var(--c-purple); font-weight: 700; }
   .orz-sad { font-size: 12px; color: var(--c-muted); margin-bottom: 4px; }
   .orz-teza { font-size: 13px; line-height: 1.5; margin-bottom: 8px; }
   .orz-alerts { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
@@ -118,7 +146,23 @@ Wklej poniższy kod jako `widget_code`. Wypełnij miejsca oznaczone `<!-- DANE: 
   .alert-eu   { background: #e7f5ff; color: #0c5460; }
   .alert-nurl { background: var(--c-surface); color: var(--c-muted); }
   .alert-ok   { background: #f0fff4; color: var(--c-green); }
+  .alert-zp   { background: #f3e8ff; color: var(--c-purple); font-weight: 600; }
+  .orz-link { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
   .orz-link a { font-size: 12px; color: var(--c-accent); text-decoration: none; }
+
+  /* Alerty (zakładka) */
+  .alert-detail { border: 1px solid var(--c-border); border-radius: 8px;
+                  padding: 10px 14px; margin-bottom: 10px; }
+  .alert-detail-sig { font-weight: 700; font-size: 13px; margin-bottom: 6px; }
+  .alert-detail-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .alert-detail-list li { font-size: 12px; padding: 4px 8px; border-radius: 6px; line-height: 1.5; }
+
+  /* Eksport */
+  .export-btn { font-size: 12px; padding: 5px 14px; border-radius: 20px;
+                border: 1px solid var(--c-border); cursor: pointer;
+                background: var(--c-surface); color: var(--c-text);
+                margin-top: 12px; }
+  .export-btn:hover { background: var(--c-border); }
 
   /* Raport */
   .wskaznik { margin-bottom: 16px; }
@@ -140,11 +184,11 @@ Wklej poniższy kod jako `widget_code`. Wypełnij miejsca oznaczone `<!-- DANE: 
 </div>
 
 <div class="tabs">
-  <div class="tab active" onclick="showTab('ryzyko')">Profil ryzyka</div>
-  <div class="tab" onclick="showTab('preslanka')">Przesłanki</div>
-  <div class="tab" onclick="showTab('orzeczenia')">Orzeczenia</div>
-  <div class="tab" onclick="showTab('alerty')">Alerty</div>
-  <div class="tab" onclick="showTab('raport')">Raport</div>
+  <div class="tab active" onclick="showTab('ryzyko', this)">Profil ryzyka</div>
+  <div class="tab" onclick="showTab('preslanka', this)">Przesłanki</div>
+  <div class="tab" onclick="showTab('orzeczenia', this)">Orzeczenia</div>
+  <div class="tab" onclick="showTab('alerty', this)">Alerty</div>
+  <div class="tab" onclick="showTab('raport', this)">Raport</div>
 </div>
 
 <!-- ZAKŁADKA: Profil ryzyka -->
@@ -166,7 +210,8 @@ Wklej poniższy kod jako `widget_code`. Wypełnij miejsca oznaczone `<!-- DANE: 
 <div id="tab-preslanka" class="panel">
   <p style="font-size:12px;color:var(--c-muted);margin-bottom:12px;">
     Przepis: <!-- DANE: np. art. 52 §1 pkt 1 KP --> |
-    Instytucja: <!-- DANE: np. ciężkie naruszenie podstawowych obowiązków -->
+    Instytucja: <!-- DANE: np. ciężkie naruszenie podstawowych obowiązków --> |
+    Jurysdykcja: <!-- DANE: PL / UE / zagraniczna -->
   </p>
   <!-- DANE: wstaw tyle bloków preslanka ile przesłanek; width% i klasa (ok/warn/gap) -->
   <div class="preslanka">
@@ -188,17 +233,34 @@ Wklej poniższy kod jako `widget_code`. Wypełnij miejsca oznaczone `<!-- DANE: 
 <!-- ZAKŁADKA: Orzeczenia -->
 <div id="tab-orzeczenia" class="panel">
   <!-- DANE: przed wyszukiwaniem wstaw <p class="loading-msg">Trwa wyszukiwanie…</p> -->
-  <!-- DANE: po wyszukiwaniu wstaw tyle bloków orz-card ile orzeczeń -->
+  <!-- DANE: po wyszukiwaniu — najpierw karty Kat. 6A, potem pozostałe -->
+  <!-- Przykład karty Kat. 6A (usuń lub skopiuj według potrzeby): -->
+  <div class="orz-card zp">
+    <div class="orz-header">
+      <span class="orz-sig"><!-- DANE: sygnatura --></span>
+      <span class="kat-badge kat-6a">Kat. 6A — Zasada prawna</span>
+    </div>
+    <div class="orz-sad"><!-- DANE: SN + izba + data --></div>
+    <div class="orz-teza mode-laik"><!-- DANE: teza w prostym języku --></div>
+    <div class="orz-teza mode-prawnik"><!-- DANE: pełna teza z kwalifikacją + podstawa art. 87 § 1 uSN --></div>
+    <div class="orz-alerts">
+      <span class="a-tag alert-zp">🏛️ ZASADA PRAWNA</span>
+    </div>
+    <div class="orz-link">
+      <a href="<!-- DANE: URL -->" target="_blank" rel="noopener">🔗 Otwórz oryginał</a>
+    </div>
+  </div>
+  <!-- Przykład karty zwykłej (usuń lub skopiuj według potrzeby): -->
   <div class="orz-card">
     <div class="orz-header">
-      <span class="orz-sig"><!-- DANE: pełna sygnatura, np. II PK 123/22 --></span>
+      <span class="orz-sig"><!-- DANE: pełna sygnatura --></span>
       <span class="kat-badge">Kat. <!-- DANE: 1/2/3A/3B/4/5/6 --></span>
     </div>
-    <div class="orz-sad"><!-- DANE: pełna nazwa sądu + izba + data, np. SN, Izba Pracy, 15 marca 2023 --></div>
+    <div class="orz-sad"><!-- DANE: sąd + izba + data --></div>
     <div class="orz-teza mode-laik"><!-- DANE: teza w prostym języku --></div>
     <div class="orz-teza mode-prawnik"><!-- DANE: pełna teza z kwalifikacją prawną --></div>
     <div class="orz-alerts">
-      <!-- DANE: wstaw odpowiednie a-tag z klasą; usuń niepotrzebne -->
+      <!-- DANE: wstaw odpowiednie a-tag; usuń niepotrzebne -->
       <span class="a-tag alert-old">⚠️ STARE</span>
       <span class="a-tag alert-conflict">🔴 SPRZECZNE</span>
       <span class="a-tag alert-law">🔴 ZMIANA PRAWA</span>
@@ -207,9 +269,7 @@ Wklej poniższy kod jako `widget_code`. Wypełnij miejsca oznaczone `<!-- DANE: 
       <span class="a-tag alert-ok">✅</span>
     </div>
     <div class="orz-link">
-      <a href="<!-- DANE: URL oryginału -->" target="_blank" rel="noopener">
-        🔗 Otwórz oryginał w nowym oknie
-      </a>
+      <a href="<!-- DANE: URL -->" target="_blank" rel="noopener">🔗 Otwórz oryginał</a>
     </div>
   </div>
 </div>
@@ -217,8 +277,37 @@ Wklej poniższy kod jako `widget_code`. Wypełnij miejsca oznaczone `<!-- DANE: 
 <!-- ZAKŁADKA: Alerty -->
 <div id="tab-alerty" class="panel">
   <!-- DANE: przed wyszukiwaniem wstaw <p class="loading-msg">Trwa wyszukiwanie…</p> -->
-  <!-- DANE: po wyszukiwaniu wstaw wyjaśnienia alertów per orzeczenie -->
-  <div class="empty-msg"><!-- DANE: np. "Brak alertów dla tej linii orzeczniczej." --></div>
+  <!-- DANE: po wyszukiwaniu — jeden blok alert-detail na orzeczenie z alertami.
+       Orzeczenia bez alertów (✅ ok) — nie wstawiaj bloku.
+       Jeśli brak jakichkolwiek alertów: wstaw <p class="empty-msg">Brak alertów...</p> -->
+  <div class="alert-detail">
+    <div class="alert-detail-sig"><!-- DANE: sygnatura orzeczenia --></div>
+    <ul class="alert-detail-list">
+      <!-- Wstaw po jednym <li> na każdy aktywny alert, z klasą CSS alertu: -->
+      <li class="a-tag alert-old">⚠️ STARE —
+        <span class="mode-laik"><!-- DANE: opis dla laika --></span>
+        <span class="mode-prawnik"><!-- DANE: opis dla prawnika: data orzeczenia, próg dziedzinowy, nowelizacja jeśli dotyczy --></span>
+      </li>
+      <li class="a-tag alert-conflict">🔴 SPRZECZNE —
+        <span class="mode-laik"><!-- DANE --></span>
+        <span class="mode-prawnik"><!-- DANE: sygnatura orzeczenia sprzecznego --></span>
+      </li>
+      <li class="a-tag alert-law">🔴 ZMIANA PRAWA —
+        <span class="mode-laik"><!-- DANE --></span>
+        <span class="mode-prawnik"><!-- DANE: przepis + data i zakres nowelizacji --></span>
+      </li>
+      <li class="a-tag alert-eu">ℹ️ WYMIAR UE —
+        <span class="mode-laik"><!-- DANE --></span>
+        <span class="mode-prawnik"><!-- DANE: dyrektywa lub sprawa TSUE/ETPC --></span>
+      </li>
+      <li class="a-tag alert-zp">🏛️ ZASADA PRAWNA —
+        <span class="mode-laik">To wiążąca zasada prawna Sądu Najwyższego.</span>
+        <span class="mode-prawnik">Uchwała z mocą zasady prawnej (art. 87 § 1 ustawy z 8 XII 2017 r. o SN). Wiąże wszystkie składy SN.</span>
+      </li>
+    </ul>
+  </div>
+  <!-- Przycisk eksportu listy orzeczeń -->
+  <button class="export-btn" onclick="exportOrzeczenia()">📋 Kopiuj listę sygnatur</button>
 </div>
 
 <!-- ZAKŁADKA: Raport -->
@@ -235,23 +324,46 @@ Wklej poniższy kod jako `widget_code`. Wypełnij miejsca oznaczone `<!-- DANE: 
     <br><br>
     <strong>Kolejność powołania w piśmie:</strong>
     <ol style="padding-left:18px;margin-top:6px;font-size:13px;">
-      <!-- DANE: po 1 orzeczeniu na punkt, w kolejności od najsilniejszego -->
+      <!-- DANE: 1. najpierw Kat. 6A (uchwały z mocą zasady prawnej), potem Kat. 1, 3A, 5 -->
       <li><!-- DANE: sygnatura + dlaczego pierwsze --></li>
     </ol>
+    <br>
+    <!-- DANE: jeśli jurysdykcja zagraniczna: -->
+    <strong style="color:var(--c-muted);font-size:12px;">Jurysdykcja zagraniczna:</strong>
+    <span style="font-size:12px;color:var(--c-muted);"><!-- DANE: oznaczenie Tier 4 + portal weryfikacji --></span>
   </div>
+  <button class="export-btn" onclick="exportRaport()">📄 Kopiuj raport</button>
 </div>
 
 <script>
-  function showTab(name) {
+  function showTab(name, el) {
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.getElementById('tab-' + name).classList.add('active');
-    event.target.classList.add('active');
+    if (el) el.classList.add('active');
   }
   function setMode(mode) {
     document.body.className = mode === 'prawnik' ? 'prawnik' : '';
     document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
     event.target.classList.add('active');
+  }
+  function exportOrzeczenia() {
+    const sigs = [...document.querySelectorAll('.orz-sig')].map(s => s.textContent.trim());
+    const sads = [...document.querySelectorAll('.orz-sad')].map(s => s.textContent.trim());
+    const text = sigs.map((sig, i) => sig + ' | ' + (sads[i] || '')).join('\n');
+    navigator.clipboard.writeText(text).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta);
+    });
+  }
+  function exportRaport() {
+    const raport = document.querySelector('#tab-raport').innerText || '';
+    navigator.clipboard.writeText(raport).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = raport; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta);
+    });
   }
 </script>
 ```

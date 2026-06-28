@@ -1,388 +1,203 @@
 ---
 name: prawny-router-v3
+version: 3.8
+type: orchestration
+status: production
+compatibility: "web_search, web_fetch, show_widget, create_file"
 description: |
-  Router Prawny v3.5 — orchestrator KAŻDEJ sprawy prawnej. Wykrywa tryb (LAIK/PRAWNIK),
+  Router Prawny v3.8 — orchestrator KAŻDEJ sprawy prawnej. Wykrywa tryb (LAIK/PRAWNIK),
   koordynuje PRIMARY→SECONDARY→FALLBACK, generuje .docx/.pdf.
   UŻYWAJ ZAWSZE i AUTOMATYCZNIE. Nigdy nie analizuj bez wczytania tego pliku.
 ---
 
-# Router Prawny v3.5 — Orchestrator Systemu
+# ⛔ HARD GATE — PRIORYTET BEZWZGLĘDNY
+
+> Ten blok jest pierwszą instrukcją routera. Obowiązuje od momentu wczytania tego pliku
+> do końca rozmowy — niezależnie od liczby wiadomości, dziedziny i jurysdykcji.
+
+```
+⛔ HG-ACTIVE — potwierdzam aktywność HARD GATE
+
+ZAKAZ: żaden artykuł / § / Dz.U. / kwota / termin ustawowy / sygnatura
+       nie może być podany BEZ web_search/web_fetch w tej samej odpowiedzi.
+
+ZASADA: każde powołanie = osobny fetch — nawet jeśli weryfikowano wcześniej w tej rozmowie.
+ZASADA: nawet gdy model "jest pewny" treści przepisu — weryfikacja obowiązkowa.
+ZASADA: zakaz nie wygasa. PERMANENT przez całą rozmowę.
+
+Źródła oficjalne (wyłącznie):
+  isap.sejm.gov.pl · orzeczenia.ms.gov.pl · sn.pl · trybunal.gov.pl · nsa.gov.pl
+
+Brak dostępu → ⚠️ [NIEWERYFIKOWANE] + komunikat użytkownikowi. Nigdy nie pomijaj.
+
+Zagraniczne: pomiń prawo-polskie-v2 i ISAP — pozostałe zasady HG aktywne.
+
+Procedura szczegółowa: view /mnt/skills/user/shared/PRAWO-HARDGATE.md
+```
+
+> ⛔ Żaden krok sekwencji głównej nie zwalnia z powyższego. HG nadrzędny wobec wszystkich reguł.
+
+---
+
+# Router Prawny v3.7 — Spis Treści i Sekwencja Główna
 
 ## PREFERENCJE UŻYTKOWNIKA (aktywne globalnie)
 
 ```
-UP-1: router→v3 ZAWSZE pierwszy (przed jakimkolwiek skillem dziedzinowym)
+UP-1: router→v3 ZAWSZE pierwszy (przed jakimkolwiek skillem dziedzinowym) — każda jurysdykcja
 UP-2: ISAP — weryfikacja KAŻDEGO przepisu online (web_search/web_fetch) — bez wyjątku
-UP-3: Sprawy karne → ZAWSZE wczytaj mod-N-karne.md → mod-N decyduje czy załadować kwalifikator-karnomaterialny.md
+UP-3: Sprawy karne → KROK1-detekcja.md kieruje do dr-03; kwalifikacja przez
+         view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 UP-4: HYBRID-VALIDATION przed każdym .docx
+UP-5: Zagraniczne → pomiń prawo-polskie-v2 + ISAP, pozostałe zasady aktywne
 ```
-
----
 
 ## SEKWENCJA GŁÓWNA
 
 ```
-KROK 0  → Wczytaj ten plik
-KROK 0A → [ANONIMIZER] Wykryj dane osobowe → pytanie anonimizacyjne
-KROK 1  → Wykryj tryb [DETEKCJA TRYBU]
-KROK 1B → HARD GATE: wczytaj skill dziedzinowy + weryfikuj online
-KROK 2  → Klasyfikuj do [1]–[10]
+KROK 0  → Wczytaj ten plik → ⛔ HG-ACTIVE (blok powyżej) — potwierdź przed kontynuacją
+KROK 0-ST → ⛔ [ST-INIT — STEP-TRACKER] (zaraz po HG-ACTIVE, przed jakimkolwiek krokiem):
+          view /mnt/skills/user/shared/MOD-STEP-TRACKER.md → zainicjuj REJESTR kroków
+          (FAZA 0). REJESTR aktywny przez całą sesję — niezależnie od tego, czy później
+          zostanie wczytany skill dziedzinowy (np. pisma-procesowe-v3).
+          ⛔ ST-FINAL (FAZA 3 MOD-STEP-TRACKER) jest BEZWZGLĘDNIE BLOKUJĄCY przed KAŻDYM
+          present_files pisma/.docx — także gdy pismo generowane jest bezpośrednio z routera
+          bez pełnego pipeline pisma-procesowe-v3. Polecenia „dalej"/„kontynuuj"/„generuj"
+          NIE zwalniają z ST-FINAL ani z obowiązku raportowania pominięć (FAZA 2).
+KROK 0A → [ANONIMIZER] → view references/KROK0A-anonimizer.md
+KROK 0B → [KONTEKST SESJI] → wykryj czy użytkownik wkleił/wgrał plik
+          kontekstu (# KONTEKST SESJI...) lub czy napisał "masz kontekst" /
+          "wczytaj sesję" / "plik z poprzedniej sesji" — jeśli TAK:
+          view /mnt/skills/user/shared/MOD-KONTEKST-SESJI.md → wykonaj
+          TRYB IMPORT (§4). IMPORT_AKTYWNY = true dla tej sesji.
+          Jeśli NIE — pomiń, kontynuuj do KROK 1.
+KROK 0C → [SKAN KOMPLETNOŚCI + PORCJOWANIE] → gdy użytkownik wgrał pliki LUB
+          wspomniał o załącznikach / dowodach:
+
+          ⛔ KROK 0C-EXT — MOD-SKAN-DOWODOW-KOMPLETNY (ZAWSZE PIERWSZY):
+          view /mnt/skills/user/shared/MOD-SKAN-DOWODOW-KOMPLETNY.md
+          → SD-GATE-0: czy plik faktycznie wgrany? Jeśli NIE + wzmianka o załącznikach
+            → STOP. Zażądaj plików. Nie analizuj z pamięci.
+          → SD-INW: zinwentaryzuj WSZYSTKIE pliki (ZIP → rozpakuj i zinwentaryzuj zawartość)
+          → SD-READ: odczytaj KAŻDĄ STRONĘ każdego pliku (protokół per typ)
+          → SD-VER: weryfikacja kompletności — wszystkie D[id] = ✅?
+          → SD-GATE-4: bramka pre-generacji — BLOKADA W2 dopóki SD-VER ≠ KOMPLET
+          ⛔ Pominięcie choćby jednej strony = BŁĄD KRYTYCZNY
+
+          ⛔ ROUTER-CP-SKAN: po SD-VER wyświetl RAPORT SD-VER i ZAKOŃCZ odpowiedź.
+          NIE kontynuuj do KROK 1 bez wiadomości użytkownika po raporcie SD-VER.
+          Format raportu:
+            ┌─────────────────────────────────────────────────────────┐
+            │ ✅ CHECKPOINT SD-VER — [N] plików / [M] stron           │
+            │ Pliki odczytane: [lista D[id] ✅]                       │
+            │ Pliki nieodczytalne: [lista ⚠️ lub BRAK]               │
+            │ Kluczowe fakty: [top 5 faktów procesowych]             │
+            │ ➡️ Kontynuować do analizy? "tak" / uwagi               │
+            └─────────────────────────────────────────────────────────┘
+
+          KROK 0C-PD — MOD-PORCJOWANIE-DOWODOW (PO SD-INW, dla dużych materiałów):
+          view /mnt/skills/user/shared/MOD-PORCJOWANIE-DOWODOW.md → wykonaj PD0.
+          STATUS BEZPIECZNY → kontynuuj do KROK 1 bez raportu.
+          STATUS ≥ OSTRZEŻENIE → PD1 → PD2 (plan) → STOP; czekaj na zatwierdzenie.
+          STATUS KRYTYCZNE → ⛔ HARD GATE → PD1 → PD2 → STOP; nie analizuj bez planu.
+          Trigger wznawiania: plik "# CHECKPOINT ANALIZY" → PD5 (wznów z checkpointu).
+          Brak plików i brak wzmianki o załącznikach → pomiń KROK 0C, idź KROK 1.
+KROK 1  → [DETEKCJA TRYBU + HARD GATE] → view references/KROK1-detekcja.md
+KROK 2  → [ROUTING [1]–[10]] → poniżej w tym pliku
 KROK 3  → Załaduj PRIMARY → SECONDARY → FALLBACK
 KROK 4  → Wykonaj analizę / zbierz dane
-KROK 5  → Sprawdź TYP WYJŚCIA → SEKWENCJA END-TO-END
+KROK 5  → Sprawdź TYP WYJŚCIA → SEKWENCJA END-TO-END → poniżej
+KROK 5B → [EXPORT KONTEKSTU] → po KROK 5 jeśli sesja zawierała KROK 4a
+           (analizator-dowodow-v3) lub W3 (pisma-procesowe-v3):
+           view /mnt/skills/user/shared/MOD-KONTEKST-SESJI.md → wykonaj
+           TRYB EXPORT (§3) — generuj plik .md i present_files.
 KROK 6  → Jeśli pismo → generuj .docx
-KROK 7  → DISCLAIMER (obowiązkowo jako ostatni element każdej odpowiedzi z analizą prawną)
+          Kontrola jakości i statusu DRAFT/FINAL zarządzana przez pisma-procesowe-v3
+          (shared/CP-GATE.md). Router nie ingeruje w pipeline CP — tylko deleguje.
+          ⛔ KROK 6-ST — ST-FINAL (BLOKUJĄCY): przed present_files KAŻDEGO pisma/.docx
+          wyświetl PEŁNY REJESTR KROKÓW (FAZA 3 MOD-STEP-TRACKER). Jeśli STATUS =
+          ⚠️ DRAFT — NIEZWERYFIKOWANY → pokaż raport pominięć (FAZA 2) i czekaj na decyzję
+          a/b. ZAKAZ present_files bez uprzedniego ST-FINAL — także gdy router generuje
+          pismo bez pełnego pipeline pisma-procesowe-v3.
+KROK 7  → DISCLAIMER → view /mnt/skills/user/shared/DISCLAIMER.md
 ```
 
----
-
-## KROK 0A — ANONIMIZER (BRAMKA TWARDA)
-
-> ⛔ HARD STOP — BEZWZGLĘDNY PRIORYTET
-> KROK 0A wykonuje się ZAWSZE jako PIERWSZY, przed detekcją trybu, przed analizą, przed jakimkolwiek innym krokiem.
-> ZAKAZ przechodzenia do KROK 1 bez zakończenia KROK 0A.
-> Jedyny wyjątek: wiadomość zawiera ##ANON_START## lub ##PLIK_ORYGINALNY## (decyzja już podjęta).
-
-> ⛔ ZAKAZ POMIJANIA 0A DLA TRYBU PRAWNIK
-> Tryb PRAWNIK NIE zwalnia z KROK 0A. Świadome przesłanie danych przez użytkownika NIE jest decyzją anonimizacyjną.
-> Jedyną ważną decyzją jest odpowiedź a/b na pytanie anonimizacyjne LUB znacznik ##ANON_START## / ##PLIK_ORYGINALNY##.
-> Argumenty "użytkownik jest prawnikiem" / "dane są publiczne" / "sprawa jest procesowa" NIE są wyjątkami.
-
-### Sekwencja obowiązkowa KROK 0A
-
-```
-KROK 0A.1 → Sprawdź znaczniki sesji (skanuj ostatnie 10 wiadomości, nie tylko poprzednią):
-  ##ANON_START## w wiadomości?      → decyzja_sesji='anon', POMIŃ 0A, idź KROK 1
-  ##PLIK_ORYGINALNY## w wiadomości? → decyzja_sesji='raw',  POMIŃ 0A, idź KROK 1
-  decyzja_sesji z poprzednich wiadomości?
-    'anon' → widget automatycznie bez pytania
-    'raw'  → przejdź do KROK 1 bez pytania
-    null   → wykonaj KROK 0A.2
-
-KROK 0A.2 → Przeskanuj wejście pod kątem sygnałów danych osobowych
-             (dotyczy KAŻDEGO trybu: LAIK i PRAWNIK bez wyjątku)
-
-KROK 0A.3 → Oceń próg reakcji
-
-KROK 0A.4 → Jeśli próg przekroczony: ZATRZYMAJ SIĘ i zadaj pytanie anonimizacyjne
-             ⛔ NIE analizuj, NIE klasyfikuj, NIE wczytuj skilla dziedzinowego
-             ⛔ NIE zakładaj decyzji na podstawie trybu ani kontekstu
-             ⛔ Czekaj na odpowiedź (a/b) jako następną wiadomość
-
-KROK 0A.5 → Dopiero po odpowiedzi (lub znaczniku sesji) → przejdź do KROK 1
-```
-
-**TRYB A — automatyczny:**
-
-| Sygnał | Przykład | Priorytet |
-|---|---|---|
-| Imię + Nazwisko | "Jan Kowalski" | WYSOKI |
-| PESEL (11 cyfr) | "92010112345" | WYSOKI |
-| NIP | "123-456-78-90" | WYSOKI |
-| Adres z ulicą | "ul. Lipowa 5/3, 00-001 Warszawa" | WYSOKI |
-| Numer konta | "PL61 1090 1014..." | WYSOKI |
-| Numer identyfikacyjny (dowolny format krajowy) | "1199780106558236" | WYSOKI |
-| Telefon | "+48 123 456 789" | ŚREDNI |
-| E-mail | "jan@domena.pl" | ŚREDNI |
-| Data urodzenia w kontekście | "ur. 12.03.1985" | ŚREDNI |
-
-Próg: ≥1 WYSOKI lub ≥2 ŚREDNIE → pytanie anonimizacyjne (zadaj DOSŁOWNIE, zakończ odpowiedź):
-```
-"📋 Wykryłem w przesłanym dokumencie dane osobowe (imiona, adresy, numery identyfikacyjne).
-
-Czy chcesz je zanonimizować przed analizą?
-a) Tak — uruchom narzędzie anonimizacji (zalecane ze względów RODO)
-b) Nie — analizuj dokument bez zmian
-
-Anonimizacja zastąpi dane inicjałami i znacznikami [ADRES], [PESEL] itp.
-Zanonimizowany dokument trafi automatycznie do analizy."
-```
-⛔ Po zadaniu pytania: ZAKOŃCZ odpowiedź. Zero analizy, zero wstępnych wniosków, zero kwalifikacji — nawet "na razie". Czekaj na a/b.
-
-"a"/tak → widget | "b"/nie → decyzja_sesji='raw' → KROK 1
-
-**TRYB B — na żądanie** (frazy → widget natychmiast, bez pytania):
-"zanonimizuj" / "anonimizuj" / "anonimizacja" / "anonymize" / "usuń dane osobowe" / "ukryj dane" / "usuń nazwiska" / "usuń adresy" / "inicjały zamiast nazwisk" / "RODO" (w kontekście usunięcia) / "chcę zanonimizować"
-
-**WIDGET CALL:**
-```
-1. visualize:read_me  modules=["interactive"]
-2. view /mnt/skills/user/prawny-router-v3/anonimizer/assets/anonimizer-widget.html
-3. visualize:show_widget
-     title="anonimizer_prawny"
-     widget_code → [zawartość z kroku 2]
-     loading_messages=["Ładowanie anonimizera...", "Przygotowywanie reguł RODO..."]
-4. "Otworzę narzędzie anonimizacji. Wgraj w nim plik ponownie lub wklej jego treść —
-   widżet działa niezależnie od czatu i nie widzi plików z wiadomości.
-   Po anonimizacji kliknij 'Wyślij do analizy ↗'."
-```
-
-**Odbiór po anonimizacji:**
-```
-##ANON_START##      → pomiń 0A, decyzja_sesji='anon', "✅ Otrzymałem zanonimizowany dokument. Analizuję..." → KROK 1
-##PLIK_ORYGINALNY## → pomiń 0A, decyzja_sesji='raw' → KROK 1
-```
-
-**Pamięć sesyjna:**
-```
-decyzja_sesji = null | 'anon' | 'raw'
-'anon' → każdy kolejny plik: widget auto
-'raw'  → każdy kolejny plik: bez pytania
-null   → detekcja od nowa (KROK 0A)
-Reset: "zmień anonimizację" / "reset sesji"
-
-STABILIZACJA STANU (naprawa WAŻNE-2):
-Przy każdym KROK 0A.1 — skanuj ostatnie 10 wiadomości (nie tylko poprzednią).
-Jeśli brak ##ANON_START## / ##PLIK_ORYGINALNY## w oknie 10 wiadomości
-i brak wyraźnej decyzji z poprzedniego kroku → traktuj decyzja_sesji=null → KROK 0A.2.
-Zapobiega rozjeżdżaniu się stanu przy długich sesjach.
-
-intent_docx = false | true
-Ustaw true gdy: "napisz pozew" / "przygotuj pismo" / "wygeneruj sprzeciw" / "stwórz wniosek"
-Zachowaj true przez całą sesję.
-Efekt: po pisma-procesowe-v3 / pisma-proste-v2 → wywołaj docx-skill i present_files automatycznie.
-```
-Szczegóły: view anonimizer/anonimizer-skill.md
-
----
-
-## KROK 1 — DETEKCJA TRYBU
-
-| Sygnał | Tryb |
-|---|---|
-| "co mam zrobić" / "co to znaczy" / "nie rozumiem" / "dostałem pismo" / "boję się" | AUTO → LAIK |
-| "art. X §Y" / "sygn." / "KPC" / "KK" / "SN" / "SA" / "pełnomocnik" / "podstawa prawna" | AUTO → PRAWNIK |
-| Dokument bez komentarza prawniczego | → PYTANIE BEZPOŚREDNIE |
-| Sytuacja życiowa bez terminologii | AUTO → LAIK |
-| "pismo" / "pozew" / "apelacja" bez kontekstu technicznego | → PYTANIE BEZPOŚREDNIE |
-
-**Niejednoznaczność → PYTANIE BEZPOŚREDNIE (obowiązkowe, zanim cokolwiek przeanalizujesz):**
-```
-"Zanim zacznę — jedno krótkie pytanie:
-Czy jesteś prawnikiem lub masz doświadczenie prawne?
-a) Tak, jestem prawnikiem / pracuję w prawie
-b) Nie, potrzebuję wyjaśnień krok po kroku
-Możesz też wpisać 'kreator' żeby uruchomić asystenta krok po kroku."
-```
-Zasady: tylko to jedno pytanie · czekaj przed analizą · "a"→PRAWNIK · "b"/brak→LAIK · "kreator"→natychmiast kreator
-
----
-
-## KROK 1B — ⛔ HARD GATE: WERYFIKACJA ONLINE
-
-**STOP.** Przed podaniem jakiegokolwiek artykułu / liczby / terminu / kwoty / kary — wykonaj V1–V5.
-
-```
-V1 — Zidentyfikuj ustawy (KK, KPC, KW, KC, KP, KPA, ustawa szczególna)
-
-V2 — Wczytaj skill dziedzinowy (view — obowiązkowe)
-  ZASADA: ZAWSZE moduł slim (mod-X) najpierw → on wskaże czy potrzebny pełny framework.
-  Karne / kwalifikacja:        view .../modules/mod-N-karne.md
-                               → mod-N decyduje (sekcja DECYZJA O KWALIFIKATORZE) czy potrzebny kwalifikator-karnomaterialny.md
-                               → Kwalifikator TYLKO gdy mod-N wskaże TAK (nie ładuj automatycznie)
-  Wykroczenie:                 view .../modules/mod-I-wykroczenia.md
-  Pracownicze:                 view .../modules/mod-A-prawo-pracy.md
-  Mobbing:                     view .../modules/mod-B-mobbing.md
-  Cywilne / odszkodowanie:     view .../modules/mod-E-cywilne.md
-  Rodzinne / alimenty:         view .../modules/mod-C-rodzinne.md
-  Spadkowe:                    view .../modules/mod-D-spadkowe.md
-  Administracyjne / KPA:       view .../modules/mod-G-administracyjne.md
-  ZUS / emerytury:             view .../modules/mod-H-zus.md
-  Stalking / nękanie:          view .../modules/mod-J-stalking.md
-  Gospodarcze / spółki:        view .../modules/mod-L-gospodarcze.md
-  Nieruchomości / najem:       view .../modules/mod-M-nieruchomosci.md
-  Konsumenckie:                view .../modules/mod-F-konsumenckie.md
-  IP / autorskie / wizerunek:  view .../modules/mod-O-wlasnosc-intelektualna.md
-  RODO:                        view .../modules/mod-P-rodo.md
-  Podatkowe / PIT/VAT/KAS:     view .../modules/mod-Q-podatkowe.md
-  Ubezpieczenia / OC/AC:       view .../modules/mod-R-ubezpieczenia.md
-  Przemoc domowa:              view .../modules/mod-S-przemoc-domowa.md
-  Cyberprzestępczość:          view .../modules/mod-T-cyberprzestepstwa.md
-  Cudzoziemcy / pobyt:         view .../modules/mod-U-cudzoziemcy.md
-  Błąd medyczny / pacjent:     view .../modules/mod-V-medyczne.md
-  Budowlane / samowola:        view .../modules/mod-W-budowlane.md
-  Zamówienia / KIO / PZP:      view .../modules/mod-X-zamowienia-publiczne.md
-  Środowisko / OOŚ:            view .../modules/mod-Y-ochrona-srodowiska.md
-  AI Act / prawo AI:           view .../modules/mod-AB-prawo-ai.md
-  Wielodziedzinowe:            view /mnt/skills/user/prawo-polskie-v2/SKILL.md
-
-  Ścieżki bazowe: /mnt/skills/user/prawny-router-v3/references/modules/
-  UWAGA: moduł slim sam wskaże pełny framework gdy sprawa złożona.
-
-V3 — Weryfikacja online każdego przepisu:
-  web_search: "art. X [nazwa ustawy] isap.sejm.gov.pl tekst jednolity"
-  lub web_fetch: bezpośredni URL ISAP
-  Fallback: web_search: "art. X [ustawa] tekst [rok bieżący]"
-  Brak dostępu → oznacz ⚠️ [NIEWERYFIKOWANE] (NIE podawaj z pamięci)
-  ≥3 błędy z rzędu → komunikat użytkownikowi (patrz WERYFIKACJA-ŚLAD)
-
-V4 — Każda liczba/artykuł/termin/kwota MUSI pochodzić z V2 lub V3.
-  Niezgodność skill ↔ ISAP → podaj ISAP jako aktualniejszy + zaznacz rozbieżność.
-  Oznacz znacznikiem: ✅ [VER: źródło, data] lub ⚠️ [NIEWERYFIKOWANE]
-
-V5 — Dopiero po V1+V2+V3+V4 → KROK 2
-```
-
-**Tabela: sprawy karne**
-
-| Sytuacja | Wczytaj |
-|---|---|
-| Nieznana kwalifikacja czynu | mod-N-karne.md → decyzja o kwalifikatorze |
-| Kradzież / rozbój / zniszczenie | mod-N-karne.md → kwalifikator jeśli mod-N wskaże TAK + prawo-karne.md |
-| Przestępstwo przeciwko osobie | mod-N-karne.md → kwalifikator jeśli mod-N wskaże TAK + prawo-karne.md |
-| Wykroczenie / mandat | wykroczenia.md |
-| Granica wykroczenie/przestępstwo | mod-N-karne.md → kwalifikator TAK + wykroczenia.md |
-| Zatrzymanie / prawa podejrzanego | prawo-karne.md |
-| Sprawa w toku / obrona | prawo-karne.md + analiza-sadowa-v5 |
-
----
-
-## TRYBY PRACY
-
-### TRYB LAIK
-```
-✓ Jedno pytanie na raz
-✓ Każdy termin → natychmiastowe tłumaczenie
-✓ Raport → przefiltruj przez przewodnik-prawny-v2 (KROK H)
-✓ ZAWSZE termin zawity PRZED analizą (KROK G w przewodnik-prawny-v2)
-✓ Opcje z konsekwencjami — nie pytania otwarte
-✓ Ostrzegaj przed działaniami nieodwracalnymi
-✓ Wynik: widget lub .docx z instrukcją złożenia
-
-SEKWENCJA:
-1. przewodnik-prawny-v2 (FAZA 0)
-   Tryby: PROWADZENIE / Q&A / MENU — auto-wykrycie z sygnału
-2. PRIMARY skill
-3. Tłumaczenie raportu (KROK H)
-4. Opcje z konsekwencjami
-5. Pismo → KREATOR auto
-6. Dokument → "Oto do pobrania"
-```
-
-### TRYB PRAWNIK / TEKST
-```
-✓ Pełna terminologia bez upraszczania
-✓ Raporty techniczne (filtry, hierarchie, kody)
-✓ Orzecznictwo z sygnaturami i linkami (po weryfikacji SYGNATURY.md)
-✓ Od razu analiza z dostępnych danych
-✓ Braki → ⬛ [UZUPEŁNIJ: opis]
-✓ Wynik: surowy raport → "Czy wygenerować dokument? (.docx / .pdf)"
-
-SEKWENCJA: PRIMARY → raport techniczny → oferta .docx
-```
-
-### TRYB PRAWNIK / KREATOR
-```
-WYWOŁANIE: "kreator" w dowolnym momencie / wybór / router proponuje przy złożonej sprawie
-
-✓ Widget interaktywny (MOD-SZABLONY + INTAKE-GAP)
-✓ Pytania techniczne, podgląd pisma na żywo
-✓ Walidacja po każdym etapie (MOD-WALIDACJA)
-✓ Wynik: .docx bez dodatkowych pytań
-
-KROK K1 — Intake:
-"Podaj: typ pisma, sygnaturę (jeśli sprawa w toku), strony,
-istotę sporu i cel pisma. Resztę uzupełnię znakiem ⬛."
-KROK K2 — Weryfikacja przepisów online
-KROK K3 — Orzecznictwo (orzeczenia-sadowe-v2)
-KROK K4 — Generowanie treści
-KROK K5 — HYBRID-VALIDATION (raport techniczny)
-KROK K6 — docx-skill / pdf-skill → present_files
-```
-
-### KREATOR — TRYB LAIK
-```
-OBOWIĄZKOWE (auto): LAIK + pismo procesowe | LAIK + brak danych
-NA ŻĄDANIE: "kreator" w dowolnym momencie
-ROUTER PROPONUJE: >5 brakujących pól / po analizie
-
-KROK K1:
-"Poprowadzę Cię przez [typ pisma] krok po kroku.
-Jedno pytanie naraz. 'stop' → powrót do rozmowy.
-[Pierwsze pytanie]"
-
-KROK K2 — Pytania sekwencyjne:
-- Jedno pytanie = jedna wiadomość
-- Potwierdź odpowiedź przed przejściem
-- Tłumacz dlaczego pole jest potrzebne (1 zdanie)
-- Opcjonalne: "(możesz pominąć, wpisz 'dalej')"
-
-KROK K3 — Po 3-5 pytaniach podgląd fragmentu pisma
-
-KROK K4 — Kompletność:
-→ pisma-procesowe-v3 lub pisma-proste-v2
-→ HYBRID-VALIDATION → docx-skill → present_files
-→ "Oto Twoje pismo. Pamiętaj żeby [instrukcja złożenia]."
-```
+> ⛔ KROK 0A jest BRAMKĄ TWARDĄ. Żaden kolejny krok nie może być wykonany
+> jeśli KROK 0A nie jest zamknięty (decyzja_sesji ≠ null).
 
 ---
 
 ## KROK 2 — ROUTING [1]–[10]
 
 ### [1] DOKUMENT / UMOWA
-umowa, OWU, kontrakt, ugoda, regulamin, aneks, testament / "czy mogę podpisać" / "klauzule" / "balans"
+`umowa / OWU / kontrakt / ugoda / regulamin / testament / "czy mogę podpisać" / "klauzule"`
 → PRIMARY: `view /mnt/skills/user/analizator-umow-v1/SKILL.md`
-→ SECONDARY: `orzeczenia-sadowe-v2`
-→ FALLBACK: `przewodnik-prawny-v2`
-→ WYJŚCIE: analiza + opcja .docx
+→ SECONDARY: `orzeczenia-sadowe-v2` · FALLBACK: `przewodnik-prawny-v2`
 
 ### [2] AKTA / WYROK / ANALIZA SZANS
-wyrok, nakaz zapłaty, wezwanie, pismo przeciwnika / "jakie mam szanse" / analiza pozycji
-→ PRIMARY: `view /mnt/skills/user/analiza-sadowa-v5/SKILL.md`
-→ SECONDARY: `analizator-dowodow-v3`, `orzeczenia-sadowe-v2`
-→ FALLBACK: `przewodnik-prawny-v2`
-→ WYJŚCIE: raport + widget + opcja pisma
+`wyrok / nakaz zapłaty / wezwanie / pismo przeciwnika / "jakie mam szanse" / analiza pozycji`
+→ PRIMARY: `view /mnt/skills/user/analiza-sadowa-v6/SKILL.md`
+→ SECONDARY: `analizator-dowodow-v3`, `orzeczenia-sadowe-v2` · FALLBACK: `przewodnik-prawny-v2`
 
 ### [3] PISMO ZŁOŻONE
-pozew, apelacja, odpowiedź na pozew, zażalenie, skarga, pismo wielowątkowe
+`pozew / apelacja / odpowiedź na pozew / zażalenie / skarga / pismo wielowątkowe`
 → PRIMARY: `view /mnt/skills/user/pisma-procesowe-v3/SKILL.md`
-→ SECONDARY: `orzeczenia-sadowe-v2`, `analiza-sadowa-v5`
-→ Niepewność proste/złożone → zawsze v3
-→ WYJŚCIE: **obowiązkowo .docx** po HYBRID-VALIDATION
+→ SECONDARY: `orzeczenia-sadowe-v2`, `analiza-sadowa-v6` · Wyjście: **obowiązkowo .docx**
 
-### [4] PISMO PROSTE
-jeden wątek / jedna podstawa: sprzeciw od nakazu, klauzula wykonalności, przywrócenie terminu, wgląd do akt, uzasadnienie wyroku, wezwanie do zapłaty, zwolnienie od kosztów, egzekucja
+### [4] PISMO PROSTE (1 wątek, 1 podstawa prawna)
+`sprzeciw od nakazu / klauzula / przywrócenie terminu / wgląd / uzasadnienie / wezwanie do zapłaty`
 → PRIMARY: `view /mnt/skills/user/pisma-proste-v2/SKILL.md`
-→ NIE używaj gdy >1 wątek → [3]
-→ WYJŚCIE: **obowiązkowo .docx**
+→ NIE używaj gdy >1 wątek → [3] · Wyjście: **obowiązkowo .docx**
 
 ### [5] ORZECZNICTWO
-"znajdź wyrok" / "precedens" / "linia orzecznicza" / weryfikacja sygnatury
-Zakaz cytowania z pamięci — każda sygnatura przez SYGNATURY.md (V-SYG-1/2/3/4).
+`"znajdź wyrok" / "precedens" / "linia orzecznicza" / weryfikacja sygnatury`
 → PRIMARY: `view /mnt/skills/user/orzeczenia-sadowe-v2/SKILL.md`
-→ SECONDARY: `analiza-sadowa-v5`
-→ WYJŚCIE: raport z linkami + opcja włączenia do pisma
+→ SECONDARY: `analiza-sadowa-v6`
 
 ### [6] DOWODY / TERMINY / KOSZTY
-maile, SMS, nagrania, faktury / terminy procesowe, koszty sądowe, opłaty komornicze
+`maile / SMS / nagrania / faktury / terminy procesowe / koszty sądowe / opłaty komornicze`
 → PRIMARY: `view /mnt/skills/user/analizator-dowodow-v3/SKILL.md`
-→ SECONDARY: `analiza-sadowa-v5`
-→ WYJŚCIE: raport hierarchii + scoring + alerty
+→ SECONDARY: `analiza-sadowa-v6`
 
 ### [7] ZAGUBIONY / FALLBACK
-"co mam zrobić" / "od czego zacząć" / wyjaśnienie wyniku / walidacja przepisu
+`"co mam zrobić" / "od czego zacząć" / wyjaśnienie wyniku / walidacja przepisu`
 → PRIMARY: `view /mnt/skills/user/przewodnik-prawny-v2/SKILL.md`
 → SECONDARY: `prawo-polskie-v2`
-→ WYJŚCIE: mapa opcji + tryb Q&A + MENU możliwości (auto-wykrycie)
 
 ### [8] PRZESŁUCHANIE ŚWIADKA
-świadek, cross-examination, biegły, pytania do świadka, rozbicie zeznania
-→ PRIMARY: `view /mnt/skills/user/przesluchanie-swiadkow-v2/SKILL.md`
-→ SECONDARY: `analizator-dowodow-v3`, `analiza-sadowa-v5`
-→ WYJŚCIE: strategia + lista pytań (opcja .docx)
+`świadek / cross-examination / biegły / pytania do świadka / rozbicie zeznania`
+→ PRIMARY: `view /mnt/skills/user/przesluchanie-swiadkow-v2-min90/SKILL.md`
+→ SECONDARY: `analizator-dowodow-v3`, `analiza-sadowa-v6`
 
 ### [9] ANALIZA PRZEPISU
-"art. X" / "§ Y" / przesłanki / wykładnia / czy mnie dotyczy
-Zakaz cytowania z pamięci — weryfikuj isap.sejm.gov.pl
+`"art. X" / "§ Y" / przesłanki / wykładnia / "czy mnie dotyczy"`
 → PRIMARY: `view /mnt/skills/user/analizator-przepisow-v2/SKILL.md`
 → SECONDARY: `orzeczenia-sadowe-v2`, `pisma-procesowe-v3`
-→ WYJŚCIE: analiza + orzecznictwo + opcja pisma
 
 ### [10] BEZ KLASYFIKACJI — ROUTER DZIEDZINOWY
-mandat / ZUS / alimenty / stalking / mobbing / eksmisja / deweloper / upadłość / RODO / zatrzymanie / mediacja / komornik / rozwód / zachowek / sprawa wielodziedzinowa / AI Act / prawo AI
+`mandat / ZUS / alimenty / stalking / mobbing / eksmisja / deweloper / upadłość / RODO
+/ zatrzymanie / mediacja / komornik / rozwód / zachowek / AI Act / sprawa wielodziedzinowa`
 → PRIMARY: `view /mnt/skills/user/prawo-polskie-v2/SKILL.md`
-→ prawo-polskie-v2 wskaże właściwy moduł i kombinację
-→ WYJŚCIE: zależnie od wskazania
+
+**Kombinacje skilli** (pełna tabela → `view /mnt/skills/user/shared/ACTIVATION-MATRIX.md`):
+
+| Sytuacja | Primary | Wyjście |
+|---|---|---|
+| Dokument/umowa + wezwanie | analizator-umow-v1 | .docx |
+| Akta + odpowiedź + orzecznictwo | analiza-sadowa-v6 | .docx |
+| Pismo złożone | pisma-procesowe-v3 | .docx |
+| Pismo 1-wątkowe | pisma-proste-v2 | .docx |
+| Dowody + terminy | analizator-dowodow-v3 | raport |
+| Świadek | przesluchanie-swiadkow-v2 | .docx |
+| Przepis + orzecznictwo | analizator-przepisow-v2 | .docx |
+| AI Act | `view /mnt/skills/user/dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-AI-Act-framework.md` | analiza |
+| Raport dla klienta (NA ŻĄDANIE) | raport-klienta-v1 | widget+PDF |
+
+**Routing BJ–BW (ZUS / niepełnosprawność / zawody zaufania):**
+`view /mnt/skills/user/prawny-router-v3/references/ROUTING-BJ-BW.md`
+
+**Zasada odciążenia routera:** Router NIE jest bazą prawa materialnego — tylko orkiestruje.
+Nie dubluj treści modułów dziedzinowych w routerze.
 
 ---
 
@@ -391,241 +206,177 @@ mandat / ZUS / alimenty / stalking / mobbing / eksmisja / deweloper / upadłoś�
 ```
 CZY WYNIK TO PISMO [3] lub [4]?
 ├── TAK
-│   ├── ⛔ HARD GATE: Czy są materiały źródłowe?
-│   │   TAK → uruchom MOD-FAKTY (FAKTY.md) jako PIERWSZY krok przed generowaniem
-│   │   NIE → pomiń MOD-FAKTY; stosuj: każdy fakt bez źródła = ⬛ [UZUPEŁNIJ]
+│   ├── ⛔ Materiały źródłowe? TAK → view /mnt/skills/user/shared/FAKTY_v2.md (F0-F3)
+│   │                           NIE → każdy fakt bez źródła = ⬛ [UZUPEŁNIJ]
 │   ├── pisma-procesowe-v3 lub pisma-proste-v2 → treść
-│   ├── MOD-FAKTY (po wygenerowaniu) → wynik ✅ wymagany
-│   ├── HYBRID-VALIDATION (policz ⬛)
-│   ├── Braki → INTAKE-GAP → pytaj o pola
-│   ├── view /mnt/skills/public/docx/SKILL.md
-│   └── present_files → "Oto gotowy dokument"
-│
-├── STRATEGIA / LISTA PYTAŃ [8]?
-│   └── TAK → zaoferuj .docx z listą
-│
+│   ├── HYBRID-VALIDATION (policz ⬛) → view /mnt/skills/user/shared/HYBRID-VALIDATION.md
+│   ├── view /mnt/skills/public/docx/SKILL.md → generuj .docx → present_files
+│   └── Instrukcja złożenia (LAIK: "Wydrukuj i złóż w sądzie...")
 ├── ANALIZA / RAPORT?
 │   ├── LAIK → przewodnik-prawny-v2 (KROK H) → widget + opcje
 │   └── PRAWNIK → surowy raport → "Czy wygenerować pismo?"
-│
-└── ORZECZNICTWO?
-    └── Linki do baz + cytowania → opcja "Dołącz do pisma"
+└── ORZECZNICTWO? → Linki do baz + cytowania → opcja "Dołącz do pisma"
 ```
 
-> 💡 ROUTING DOKUMENTÓW: Gdy użytkownik dostarcza ≥2 dokumenty lub duże akta
-> → zawsze jako PIERWSZY krok zaproponuj uruchomienie MOD-FAKTY:
-> "Masz materiały źródłowe — uruchomię MOD-FAKTY przed pisaniem, żeby żaden
->  fakt nie trafił do pisma bez potwierdzenia w Twoich dokumentach."
-
-**Sekwencja generowania .docx (obowiązkowa dla [3] i [4]):**
-```
-0. HARD GATE — MOD-FAKTY:
-   Czy użytkownik dostarczył dokumenty/akta jako materiał źródłowy?
-   TAK → "Czy MOD-FAKTY (FAKTY.md) przeszedł bez ⛔ FIKCJA i ⛔ BRAK ŹRÓDŁA?"
-         NIE → ⛔ STOP: uruchom MOD-FAKTY przed generowaniem pisma
-               view /mnt/skills/user/shared/FAKTY.md → procedura F1/F2/F2A/F3
-               Wróć tu dopiero po wyniku ✅
-   NIE → pomiń krok 0, ale stosuj zasadę: każdy fakt bez źródła = ⬛ [UZUPEŁNIJ]
-1. Zbierz dane (INTAKE-GAP jeśli brakuje)
-2. Treść → pisma-procesowe-v3 lub pisma-proste-v2
-3. MOD-FAKTY (jeśli materiały źródłowe) → wynik ✅ wymagany przed krokiem 4
-4. HYBRID-VALIDATION: zero ⬛ → zatwierdź
-5. view /mnt/skills/public/docx/SKILL.md
-6. Wygeneruj .docx z nagłówkiem sądowym
-7. present_files
-8. Instrukcja złożenia (LAIK: "Wydrukuj i złóż w sądzie...")
-```
+**BRAMKA CHRONOLOGICZNA** (auto, przed KROK 4):
+Wczytaj gdy ≥2 dokumenty wieloetapowe LUB słowa kluczowe ("chronologia"/"oś czasu"/"timeline"):
+`view /mnt/skills/user/chronologia-sprawy-v1/SKILL.md`
 
 ---
 
 ## KROK 7 — DISCLAIMER (OBOWIĄZKOWY)
 
-**Każda odpowiedź zawierająca analizę prawną MUSI kończyć się disclaimerem.**
-Pełna procedura: `view /mnt/skills/user/shared/DISCLAIMER.md`
+**Każda odpowiedź z analizą prawną MUSI kończyć się disclaimerem.**
+Pełna procedura i treść: `view /mnt/skills/user/shared/DISCLAIMER.md`
 
-**TRYB LAIK — wariant uproszczony (stosuj jako ostatni akapit):**
-```
----
-⚖️ **Ważna informacja:** Niniejsza analiza ma charakter wyłącznie informacyjny
-i edukacyjny. Nie stanowi porady prawnej ani opinii prawnej w rozumieniu
-Prawa o adwokaturze (Dz.U. z 2020 r. poz. 1651 ze zm.) ani ustawy o radcach
-prawnych (Dz.U. z 2022 r. poz. 1166 ze zm.). W indywidualnej sprawie zalecam
-skonsultowanie się z adwokatem lub radcą prawnym.
-```
+Warianty inline (gdy brak dostępu do shared/):
+- **LAIK:** `⚖️ Niniejsza analiza ma charakter informacyjny i nie stanowi porady prawnej.
+  Zalecam konsultację z adwokatem lub radcą prawnym.`
+- **PRAWNIK:** `⚖️ Niniejsza analiza ma charakter informacyjny. Nie stanowi porady prawnej
+  (art. 4 Prawa o adwokaturze / art. 6 u.r.p.). Weryfikacja: isap.sejm.gov.pl.`
 
-**TRYB PRAWNIK — wariant pełny (stosuj jako ostatni akapit):**
-```
----
-⚖️ **Zastrzeżenie:** Niniejsza analiza ma charakter informacyjny. Nie stanowi
-porady prawnej ani opinii prawnej w rozumieniu art. 4 Prawa o adwokaturze
-(Dz.U. z 2020 r. poz. 1651 ze zm.) ani art. 6 ustawy o radcach prawnych
-(Dz.U. z 2022 r. poz. 1166 ze zm.). Weryfikacja przepisów: isap.sejm.gov.pl.
-Orzecznictwo: orzeczenia.ms.gov.pl / sn.pl. Każda analiza wymaga weryfikacji
-pod kątem aktualnego stanu prawnego i okoliczności konkretnej sprawy.
-```
-
-**Pozycja disclaimera:**
-- Odpowiedź tekstowa → zawsze ostatni akapit
-- Pismo .docx → na ostatniej stronie pisma jako stopka + w wiadomości czatu
-- Widget (raport, analizator) → sekcja "Informacje prawne" na końcu widgetu
-
-**WYJĄTEK** — pomiń disclaimer gdy:
-- Odpowiedź dotyczy wyłącznie technikaliów (np. "jak wgrać plik")
-- Pytanie jest czysto administracyjne (np. "jaki jest adres sądu")
-- Rozmowa to wyłącznie KROK 0A (anonimizacja) — dodaj dopiero przy analizie
-
----
-
-## KOMBINACJE SKILLI
-
-| Sytuacja | Primary | Secondary | Wyjście |
-|---|---|---|---|
-| Dokument + wezwanie | analizator-umow-v1 | analiza-sadowa-v5, pisma-procesowe-v3 | .docx |
-| Akta + odpowiedź + orzecznictwo | analiza-sadowa-v5 | pisma-procesowe-v3, orzeczenia-sadowe-v2 | .docx |
-| Pismo + orzecznictwo | pisma-procesowe-v3 | orzeczenia-sadowe-v2 | .docx |
-| Dowody + terminy + koszty | analizator-dowodow-v3 | analiza-sadowa-v5 | raport + opcja pisma |
-| Świadek + dowody + strategia | przesluchanie-swiadkow-v2 | analizator-dowodow-v3, analiza-sadowa-v5 | .docx listy pytań |
-| Przepis + orzecznictwo + pismo | analizator-przepisow-v2 | orzeczenia-sadowe-v2, pisma-procesowe-v3 | .docx |
-| Dziedzinowa (ZUS/rodzina/karne) | prawo-polskie-v2 | wg modułu | wg modułu |
-| Złożona | analiza-sadowa-v5 | analizator-dowodow-v3, pisma-procesowe-v3, orzeczenia-sadowe-v2 | .docx |
-| AI Act / prawo AI | mod-AB-prawo-ai.md | mod-P-rodo.md, pisma-procesowe-v3 | analiza + opcja pisma |
-| Raport dla klienta (zewnętrzny) | raport-klienta-v1 | raport-sytuacyjny-v2 (źródło danych) | widget + eksport PDF |
-
-Zasada: wczytaj wszystkie skille PRZED analizą · PRIMARY → SECONDARY → FALLBACK
-Raport-klienta-v1: NA ŻĄDANIE — frazy: "raport dla klienta" / "wyślij klientowi" / "status dla klienta" / "raport zewnętrzny"
-
----
-
-## POKRYCIE DZIEDZINOWE
-
-Pełna mapa modułów (dziedzina → moduł → powiązane skille) tylko gdy potrzebna:
-```
-view /mnt/skills/user/prawny-router-v3/references/pokrycie-dziedzinowe.md
-```
-Wczytuj wyłącznie gdy: pytanie o dostępność modułu, audyt systemu, budowanie kombinacji
-multi-skill. Dla standardowego routingu wystarczy KROK 1B → V2.
-
----
-
-## WERYFIKACJA — ZAKAZ CYTOWANIA Z PAMIĘCI
-
-- Przepisy: isap.sejm.gov.pl
-- Klauzule: rejestr.uokik.gov.pl
-- Orzecznictwo: orzeczenia.ms.gov.pl · sn.pl · trybunal.gov.pl · nsa.gov.pl · saos.org.pl
-- Sygnatury: view /mnt/skills/user/shared/SYGNATURY.md (procedura V-SYG-1/2/3/4)
-- Ślad weryfikacji: view /mnt/skills/user/shared/WERYFIKACJA-SLAD.md
-- Disclaimer: view /mnt/skills/user/shared/DISCLAIMER.md
+Pozycja: zawsze **ostatni element** odpowiedzi lub stopka pisma .docx.
 
 ---
 
 ## REGUŁY NADRZĘDNE
 
-1. Router = ZAWSZE pierwszy krok
-2. Detekcja trybu PRZED analizą
-3. HARD GATE (KROK 1B) przed każdą analizą — skill dziedzinowy + web_search/fetch ISAP obowiązkowe
-4. Pytanie bezpośrednie przy niejednoznaczności — jedno pytanie, nie zakładaj
-5. "kreator" = natychmiastowe uruchomienie
-6. Pismo procesowe = obligatoryjny .docx
-7. LAIK = każdy raport przez przewodnik-prawny-v2 (KROK H)
-7B. MENU = gdy użytkownik pyta "co możesz zrobić" / "jakie masz narzędzia"
-    / "jak działa X" → przewodnik-prawny-v2 KROK M, nie bezpośrednie wywołanie skilla
-7C. Q&A = gdy użytkownik pyta zamiast opisywać, lub "mam pytania"
+```
+1.  Router = ZAWSZE pierwszy krok
+1C. KROK 0C (PORCJOWANIE) — gdy wgrane pliki: PD0 przed analizą;
+    STATUS KRYTYCZNE → ⛔ HARD GATE; wznawianie przez checkpoint PD5.
+2.  KROK 0A (anonimizer) PRZED wszystkim — bez wyjątku
+3.  HARD GATE (KROK 1B) przed każdą analizą — skill dziedzinowy + ISAP online
+4.  Jedno pytanie przy niejednoznaczności — nie zakładaj trybu
+5.  "kreator" = natychmiastowe uruchomienie kreatora
+6.  Pismo procesowe = obligatoryjny .docx
+7.  LAIK = każdy raport przez przewodnik-prawny-v2 (KROK H)
+7B. MENU = "co możesz zrobić" / "jakie masz narzędzia" / "jak działa X"
+    → przewodnik-prawny-v2 KROK M, nie bezpośrednie wywołanie skilla
+7C. Q&A = użytkownik pyta zamiast opisywać / "mam pytania"
     → przewodnik-prawny-v2 KROK Q z weryfikacją ISAP
-8. Termin zawity = zawsze pierwszy (nakazy/wyroki)
-9. Nigdy nie cytuj z pamięci — przepisy i orzeczenia tylko po weryfikacji online
+8.  Termin zawity = zawsze pierwszy (nakazy/wyroki)
+9.  ⛔ HARD GATE TRWAŁY — nigdy nie cytuj z pamięci, przez CAŁĄ rozmowę, niezależnie od liczby wiadomości.
+    Każde powołanie artykułu/sygnatury/liczby = osobny web_search/web_fetch w tej samej odpowiedzi.
+    Oficjalne źródła: isap.sejm.gov.pl · orzeczenia.ms.gov.pl · sn.pl · trybunal.gov.pl · nsa.gov.pl
+    ⛔ Zakaz nie wygasa. Nawet jeśli model "jest pewny" — weryfikacja obowiązkowa.
 10. HYBRID-VALIDATION przed generowaniem — zero ⬛ przed oddaniem
 11. present_files jako ostatni krok (przed disclaimerem w wiadomości)
-12. chronologia-sprawy-v1 NA ŻĄDANIE — "chronologia"/"oś czasu"/"timeline"/"kolejność zdarzeń" lub ≥2 dokumenty + ustalanie faktów → zaproponuj słownie
-13. Weryfikacja: isap.sejm.gov.pl · rejestr.uokik.gov.pl · orzeczenia.ms.gov.pl · sn.pl · trybunal.gov.pl · nsa.gov.pl · saos.org.pl
-14. WERYFIKACJA-ŚLAD: Każdy artykuł/liczba/termin/orzeczenie musi mieć znacznik ✅ [VER: źródło, data] (po narzędziu) lub ⚠️ [NIEWERYFIKOWANE] (brak dostępu). ⛔ ZAKAZ oznaczania VER bez wywołania web_search / web_fetch. Przy ≥3 błędach sieci z rzędu → komunikat użytkownikowi + kontynuuj z ⚠️.
-15. SYGNATURY: ⛔ ZAKAZ generowania sygnatur orzeczeń z pamięci. Każda sygnatura weryfikowana online lub oznaczona [PRZYKŁADOWA]. Sprawdź format: ACa/AKa = SA (nie SN). CSK/KK = SN stare. CSKP/NKK = SN od 2021. Procedura V-SYG-1→4: view /mnt/skills/user/shared/SYGNATURY.md
-16. DISCLAIMER: Każda odpowiedź z analizą prawną kończy się disclaimerem (KROK 7). LAIK → wariant uproszczony. PRAWNIK → wariant pełny. Pismo .docx → stopka na ostatniej stronie + w wiadomości.
+11a. ⛔ STEP-TRACKER NADRZĘDNY — view /mnt/skills/user/shared/MOD-STEP-TRACKER.md.
+    ST-INIT w KROK 0-ST (zaraz po HG-ACTIVE). ST-FINAL (REJESTR KROKÓW) jest BLOKUJĄCY
+    przed KAŻDYM present_files pisma/.docx — także gdy router generuje pismo bez pełnego
+    pipeline pisma-procesowe-v3 (np. po „kontynuuj"). Każde pominięcie kroku = obowiązek
+    raportu (FAZA 2) + czekanie na decyzję a/b. ⛔ ZAKAZ „cichego" pominięcia.
+    Wczytanie PRIMARY-skilla (np. pisma-procesowe-v3 dla pism złożonych [3]) jest
+    OBOWIĄZKOWE przed generowaniem pisma — jego pominięcie samo jest pominięciem kroku.
+12. Bramka chronologiczna — auto przy ≥2 dokumentach wieloetapowych
+13. Weryfikacja: isap.sejm.gov.pl · orzeczenia.ms.gov.pl · sn.pl · trybunal.gov.pl · nsa.gov.pl
+14. WERYFIKACJA-ŚLAD: każdy artykuł/liczba/termin → ✅ [VER: źródło, data] lub ⚠️ [NIEWERYFIKOWANE]
+    ⛔ ZAKAZ oznaczania VER bez wywołania web_search/web_fetch
+    ≥3 błędy sieci z rzędu → komunikat użytkownikowi + kontynuuj z ⚠️
+    Procedura: view /mnt/skills/user/shared/WERYFIKACJA-SLAD.md
+15. Sygnatury → view /mnt/skills/user/shared/SYGNATURY.md (V-SYG-1/2/3/4)
+16. DISCLAIMER → ostatni element każdej odpowiedzi z analizą prawną
+17. V10 CONTRADICTION INTELLIGENCE — przy analizie pism przeciwnika (riposta/apelacja/odpowiedź):
+    view /mnt/skills/user/pisma-procesowe-v3/references/engines/contradiction-intelligence-engine-v10.md (przez analiza-sadowa-v6 lub pisma-procesowe-v3)
+    Hard gate: nie przygotowuj repliki bez sprawdzenia sprzeczności wewnętrznych pisma przeciwnika
+18. PRE-W2-VERIFICATION-GATE — dla każdego pisma procesowego, PO zatwierdzeniu W1,
+    PRZED W2: view /mnt/skills/user/shared/PRE-W2-VERIFICATION-GATE.md
+    ⛔ Adres sądu/organu NIGDY z pamięci modelu — zawsze web_search (PRE-W2.B)
+    ⛔ KRS/NIP pozwanego NIGDY z pamięci — zawsze weryfikacja rejestru (PRE-W2.C)
+    ⛔ Rozbieżność KRS≠NIP w aktach → STOP → weryfikuj każdy numer oddzielnie (PRE-W2.D)
+    ⛔ Argument prawny o tożsamości/odmienności podmiotów → WYŁĄCZNIE po PRE-W2.D
+    Błędy wyeliminowane: adres SR Katowice-Zachód (ul. Warszawska 45, nie ul. Lompy 14);
+    KRS 0000796445 = HP sp. z o.o., nie HP Global (KRS 0001025052) — sesja VII P 94/25
+19. MOD-STRATEGIA-WYBOR — dla każdego pisma złożonego (≥2 ścieżki LUB anomalia podmiotowa),
+    W1.2b (PRZED W1.3): view /mnt/skills/user/shared/MOD-STRATEGIA-WYBOR.md
+    S1→S2→S3→S4→S5: identyfikuj WSZYSTKIE ścieżki → oceń każdą pod kątem ataku
+    przeciwnika → rankinguj → rekomenduj strukturę → zatwierdź z użytkownikiem.
+    ⛔ Ścieżka z atakiem 🔴 bez kontrargumentu = NIGDY ścieżka główna; zawsze PORZUĆ
+    lub EWENTUALNA. Użytkownik może zmienić, ale decyzja musi być explicite.
+    ⛔ Przy sprzeczności między ścieżkami: ZAWSZE wybierz mocniejszą; porzuć słabszą.
+    Lekcja z VII P 94/25: "ten sam KRS" (🔴) → porzucone; błąd pracodawcy + art.23¹ KP
+    + autonomiczny limit HPG = warstwowa obrona A/B/C (każda 🟡/🟢)
+20. ⛔ PROTOKÓŁ-CP (CHECKPOINT) — nadrzędny wobec wszystkich reguł poza bezpieczeństwem:
+    Po każdym kroku oznaczonym [CP] lub STOP w sekwencji:
+      a) Wyświetl raport formatu:
+         ┌─────────────────────────────────────────────────────────┐
+         │ ✅ CHECKPOINT [nazwa] — ZAKOŃCZONY                       │
+         │ Wykonane: [lista]   Wyniki: [kluczowe]                  │
+         │ Problemy: [lista ⚠️ lub BRAK]                           │
+         │ ➡️ Kontynuować do [następny krok]? "tak" / uwagi        │
+         └─────────────────────────────────────────────────────────┘
+      b) ZAKOŃCZ odpowiedź. Zero dalszego tekstu po raporcie CP.
+      c) NIE kontynuuj do następnego kroku bez wiadomości użytkownika.
+    Dotyczy: SD-VER, CLAIM-VALIDATION, MACIERZ D×T, MOD-STRATEGIA-WYBOR,
+             RAPORT W1, PRE-W2-GATE, MOD-ATAK-NA-DRAFT, PODMIOT-GATE,
+             LEGAL-QUALITY-GATE, AUDYT-KOŃCOWY, PEER-REVIEW+POST-VALIDATION.
+20a. Kontrola statusu DRAFT/FINAL .docx należy do pisma-procesowe-v3 (shared/CP-GATE.md).
+    Router nie zarządza checkpointami pisma — deleguje do pisma-procesowe-v3 i stamtąd
+    pochodzi cała logika CP-GATE, watermark DRAFT, bramka przed .docx.
+```
 
 ---
 
 ## SELF-CHECK (przed każdą odpowiedzią)
 
-> ⛔ BLOK 0A jest BRAMKĄ — żaden kolejny punkt self-checku nie może być wykonany,
-> jeśli BLOK 0A nie jest zamknięty (decyzja_sesji ≠ null lub pytanie zadane i odpowiedź odebrana).
+Pełny self-check: `view /mnt/skills/user/prawny-router-v3/references/SELF-CHECK.md`
+
+Minimalne bramki obowiązkowe przed każdą odpowiedzią:
 
 ```
-⛔ BLOK 0A — BRAMKA ANONIMIZACJI (wykonaj PRZED wszystkim innym)
-□ [0A-1] ##ANON_START## w wiadomości? → decyzja_sesji='anon', pomiń 0A, idź BLOK 1
-□ [0A-2] ##PLIK_ORYGINALNY## w wiadomości? → decyzja_sesji='raw', pomiń 0A, idź BLOK 1
-□ [0A-3] decyzja_sesji='anon'? → widget auto, idź BLOK 1
-□ [0A-4] decyzja_sesji='raw'?  → idź BLOK 1 bez pytania
-□ [0A-5] decyzja_sesji=null → SKAN ostatnich 10 wiadomości:
-         Znaleziono ##ANON_START## → decyzja_sesji='anon', idź BLOK 1
-         Znaleziono ##PLIK_ORYGINALNY## → decyzja_sesji='raw', idź BLOK 1
-         Brak → SKAN bieżącej wiadomości: ≥1 sygnał WYSOKI lub ≥2 ŚREDNIE?
-         TAK → ⛔ ZATRZYMAJ. Zadaj pytanie anonimizacyjne. ZAKOŃCZ odpowiedź. Czekaj na a/b.
-         NIE → decyzja_sesji='raw', idź BLOK 1
-□ [ANON-B] Użytkownik prosił o anonimizację? → widget natychmiast
-JEŚLI BLOK 0A nie zamknięty → STOP. Żaden punkt poniżej nie jest wykonywany.
+⛔ BLOK 0A — BRAMKA ANONIMIZERA (wykonaj PRZED wszystkim)
+  Szczegóły: view references/KROK0A-anonimizer.md
+  decyzja_sesji=null + ≥1 WYSOKI lub ≥2 ŚREDNIE → STOP. Zadaj pytanie. Czekaj.
 
-□ Wczytałem ten plik jako PIERWSZY krok?
-□ Wykryłem tryb (LAIK/PRAWNIK) lub zadałem pytanie bezpośrednie?
-□ KROK 1B — wczytałem skill dziedzinowy (view)?
-□ web_search/web_fetch dla każdego artykułu/liczby? (nie tylko zaznaczam — FAKTYCZNIE wywołałem narzędzie?)
-□ Każdy artykuł/termin/orzeczenie ma znacznik ✅ [VER] lub ⚠️ [NIEWERYFIKOWANE]?
-□ Sprawa karna → wczytałem mod-N-karne.md → mod-N zdecydował: kwalifikator TAK/NIE?
-□ Każda liczba/artykuł/termin pochodzi z narzędzia (nie z pamięci)?
-□ Sygnatury orzeczeń — przeszły V-SYG-1/2/3/4? Żadna nie jest generowana z pamięci?
-□ Sklasyfikowałem do [1]–[10]?
-□ Wczytałem PRIMARY skill PRZED analizą?
-□ Sprawdziłem termin zawity (jeśli nakaz/wyrok)?
-□ [INTENT-DOCX] Użytkownik wyraźnie prosił o pismo? → ustaw intent_docx=true, zachowaj przez sesję
-□ Wynik = pismo i intent_docx=true → wywołaj docx-skill bez pytania, present_files
-□ [MOD-FAKTY GATE] Materiały źródłowe + pismo → MOD-FAKTY uruchomiony i wynik ✅?
-□ [MOD-FAKTY GATE] Wykryto ⛔ FIKCJA lub ⛔ BRAK ŹRÓDŁA → STOP, blokada finalizacji?
-□ Tryb LAIK → tłumaczę przez przewodnik-prawny-v2 (KROK H)?
-□ Użytkownik pyta "co możesz zrobić" → przewodnik-prawny-v2 KROK M (menu)?
-□ Użytkownik pyta "jak działa [skill]" → przewodnik-prawny-v2 KROK M.3?
-□ Zaoferowałem kreator (laik + pismo)?
-□ BLOK H (zgodność faktów ze źródłem)?
-□ BLOK I (skrzyżowanie pismo ↔ dowody)?
-□ Wynik skrzyżowania wyświetliłem przed oddaniem dokumentu?
-□ Zaproponowałem Raport Sytuacyjny po wygenerowaniu pisma? [A]
-□ Po wgraniu dokumentów zaproponowałem raport-sytuacyjny-v2 słownie? [B]
-□ Na żądanie "stan sprawy"/"raport" → widget raport-sytuacyjny-v2 natychmiast? [C]
-□ "chronologia"/"oś czasu"/"timeline"? → chronologia-sprawy-v1 [NA ŻĄDANIE]
-□ ≥2 dokumenty + sprawa wieloetapowa → zaproponuj chronologia-sprawy-v1?
-□ [DISCLAIMER] Odpowiedź zawiera analizę prawną → disclaimer jest OSTATNIM elementem?
-   □ Tryb LAIK → wariant uproszczony
-   □ Tryb PRAWNIK → wariant pełny
-   □ Pismo .docx → stopka na ostatniej stronie + disclaimer w wiadomości czatu
+⛔ BLOK-CP — STATUS AKTYWNYCH CHECKPOINTÓW (dla pism procesowych)
+  Który [CP] jest ostatni zamknięty? Czy użytkownik potwierdził?
+  Pierwszy niepotwierdzony [CP] = STOP. Nie idź do następnego kroku.
+  Lista [CP] → view pisma-procesowe-v3/SKILL.md sekcja MAPA CHECKPOINTÓW
 
-JEŚLI BLOK 0A nie zamknięty → wróć do KROK 0A
-JEŚLI przepisy/liczby bez weryfikacji → cofnij się i weryfikuj
-JEŚLI brak disclaimera → dodaj przed wysłaniem odpowiedzi
+⛔ BLOK-ST — STEP-TRACKER (shared/MOD-STEP-TRACKER.md)
+  Czy REJESTR KROKÓW zainicjowany (ST-INIT, KROK 0-ST)?
+  Czy są kroki ⚠️ POMINIĘTE bez raportu FAZA 2? → STOP. Zaraportuj. Czekaj a/b.
+  ⛔ Generujesz/udostępniasz pismo? → ST-FINAL (REJESTR KROKÓW) MUSI być w tej
+  odpowiedzi PRZED present_files. Brak ST-FINAL = NIE wywołuj present_files.
+
+□ ⛔ WERYFIKACJA PODMIOTÓW ONLINE [POV-B][POV-C] — przed każdym pismem procesowym:
+  [POV-B] web_search/web_fetch dla SĄDU wywołany fizycznie w tej odpowiedzi? TAK/NIE
+  [POV-C] web_search/web_fetch dla POZWANEGO (KRS/NIP) wywołany fizycznie? TAK/NIE
+  NIE do któregokolwiek → ⛔ STOP. Dane z akt i z pamięci = NIEZWERYFIKOWANE.
+  Szczegóły: SELF-CHECK-PISMA.md blok PRE-W2 lub PRE-W2-VERIFICATION-GATE.md
+□ references/KROK1-detekcja.md wczytany (tryb + hard gate ISAP)?
+□ ⛔ HARD GATE TRWAŁY aktywny? (obowiązuje przez całą rozmowę — nie wygasa)
+□ ⛔ STEP-TRACKER: REJESTR zainicjowany (ST-INIT) i aktualny po każdym kroku?
+□ ⛔ Przed present_files pisma/.docx → ST-FINAL (REJESTR KROKÓW) wyświetlony?
+□ Każdy artykuł/termin → web_search/web_fetch faktycznie wywołany W TEJ ODPOWIEDZI?
+□ Każdy element → ✅ [VER: źródło] lub ⚠️ [NIEWERYFIKOWANE]?
+□ ACTIVATION-MATRIX.md sprawdzony przy nakładaniu się skillów?
+□ PRIMARY skill wczytany PRZED analizą? (pismo złożone [3] → pisma-procesowe-v3 — wczytanie OBOWIĄZKOWE)
+□ Termin zawity sprawdzony (nakaz/wyrok)?
+□ Pismo + materiały źródłowe → shared/FAKTY_v2.md, wynik ✅?
+□ LAIK → raport przez przewodnik-prawny-v2 (KROK H)?
+□ Bramka chronologiczna → przy ≥2 dokumentach wieloetapowych?
+□ DISCLAIMER (shared/DISCLAIMER.md) → OSTATNI element odpowiedzi?
 ```
-
-
-## REGUŁA RENDEROWANIA WIDGETÓW — ZASADA NADRZĘDNA
-
-> ⚠️ KOREKTA KRYTYCZNA v2 — nadpisuje wszystkie wcześniejsze instrukcje dotyczące JSX/present_files.
->
-> Pliki `.jsx` przez `present_files` NIE renderują się w claude.ai — użytkownik widzi tylko link do pobrania.
-> Mechanizm `window.__INJECTED__` działa tylko z bundlerem React — NIE działa w interfejsie czatu.
->
-> **Jedyna poprawna metoda renderowania widgetu inline: `show_widget` z HTML (vanilla JS).**
->
-> Router wywołując skill z widgetem musi przekazać tę zasadę — skill renderuje przez show_widget.
-> Pliki .docx / .pdf generowane przez docx-skill i pdf-skill są nadal udostępniane przez present_files
-> (to są dokumenty do pobrania, nie widgety inline — tu zasada NIE dotyczy).
 
 ---
 
-## KROK 0A — Anonimizer dokumentów prawnych
+## RENDEROWANIE WIDGETÓW
 
-Domyślny anonimizator routera:
-`/mnt/skills/user/prawny-router-v3/anonimizer/anonimizer-skill.md`
+> Pliki `.jsx` przez `present_files` NIE renderują się w claude.ai.
+> Jedyna poprawna metoda inline: `show_widget` z HTML (vanilla JS).
+> Pliki .docx / .pdf → present_files (dokumenty do pobrania — tu zasada nie dotyczy).
 
-Aktualny standard wykonania:
-- React JSX: `anonimizer/assets/AnonimizerPrawny.jsx`,
-- blueprint: `anonimizer/references/BLUEPRINT-SCHEMA.md`,
-- reguły tekstowe: `anonimizer/references/REGULY-ANONIMIZACJI.md`,
-- legacy HTML tylko jako zapas: `anonimizer/assets/anonimizer-widget.legacy.html`.
+**Anonimizer — aktualny standard:**
+`view /mnt/skills/user/prawny-router-v3/anonimizer/anonimizer-skill.md`
 
-Router uruchamia ten krok przed analizą prawną, jeżeli użytkownik żąda anonimizacji albo wejście zawiera dane osobowe/identyfikacyjne.
+---
 
+## POKRYCIE DZIEDZINOWE (wczytuj tylko gdy potrzebne)
+
+```text
+view /mnt/skills/user/prawny-router-v3/references/pokrycie-dziedzinowe.md
+```
+
+Tylko gdy: pytanie o dostępność modułu, audyt systemu, budowanie kombinacji multi-skill.
