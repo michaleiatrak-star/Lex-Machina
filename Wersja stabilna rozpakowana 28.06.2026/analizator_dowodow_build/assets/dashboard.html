@@ -1,0 +1,1524 @@
+<h2 class="sr-only">Analizator Dowodów — Dashboard v5.6.3</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+/* ── Tab bar ── */
+.tab-bar{display:flex;gap:2px;border-bottom:.5px solid var(--color-border-tertiary);margin-bottom:1.25rem;overflow-x:auto}
+.tab{padding:9px 15px;font-size:13px;cursor:pointer;border:none;background:none;color:var(--color-text-secondary);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;flex-shrink:0}
+.tab.active{color:var(--color-text-primary);border-bottom:2px solid #534AB7;font-weight:500}
+.panel{display:none}.panel.active{display:block}
+
+/* ── Layout ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
+.card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem}
+
+/* ── Metrics ── */
+.metric{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.875rem;text-align:center}
+.metric-label{font-size:11px;color:var(--color-text-secondary);margin-bottom:3px}
+.metric-value{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+.metric-sub{font-size:10px;color:var(--color-text-tertiary);margin-top:2px}
+
+/* ── Badges ── */
+.badge{display:inline-block;padding:2px 9px;border-radius:var(--border-radius-md);font-size:11px;font-weight:500}
+.badge-a{background:#E1F5EE;color:#085041}.badge-b{background:#E6F1FB;color:#0C447C}
+.badge-c{background:#FAEEDA;color:#633806}.badge-d{background:#FCEBEB;color:#791F1F}
+.badge-ok{background:#EAF3DE;color:#27500A}.badge-warn{background:#FAEEDA;color:#633806}.badge-crit{background:#FCEBEB;color:#791F1F}
+.badge-check{background:#F3F0FE;color:#3C3489}
+
+/* ── Evidence rows ── */
+.strength-bar{height:6px;border-radius:3px;background:var(--color-background-secondary);overflow:hidden;margin:5px 0}
+.strength-fill{height:100%;border-radius:3px}
+.evidence-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:.5px solid var(--color-border-tertiary)}
+.evidence-row:last-child{border-bottom:none}
+.ev-name{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.ev-meta{font-size:11px;color:var(--color-text-secondary)}
+.score-circle{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0}
+.score-hi{background:#EAF3DE;color:#27500A}.score-mid{background:#FAEEDA;color:#633806}.score-lo{background:#FCEBEB;color:#791F1F}
+
+/* ── Lapsus tab ── */
+.la-block{border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:12px 14px;margin-bottom:10px;background:var(--color-background-primary)}
+.la-crit{border-left:3px solid #A32D2D;background:#FCEBEB10}
+.la-ist{border-left:3px solid #854F0B;background:#FAEEDA10}
+.la-marg{border-left:3px solid #534AB7;background:#F3F0FE10}
+.la-hdr{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.la-type{font-size:10px;font-weight:700;padding:2px 8px;border-radius:var(--border-radius-md);font-family:monospace;flex-shrink:0}
+.lt-koszty{background:#FCEBEB;color:#791F1F}
+.lt-podmiot{background:#FAEEDA;color:#633806}
+.lt-kwalif{background:#FFF0D6;color:#7A3800}
+.lt-narr{background:#F3F0FE;color:#3C3489}
+.lt-data{background:#E6F1FB;color:#0C447C}
+.lt-kwota{background:#FAEEDA;color:#633806}
+.lt-legal{background:#FCEBEB;color:#791F1F}
+.lt-intencja{background:#EAF3DE;color:#27500A}
+.lt-chronologia{background:#FCEBEB;color:#791F1F}
+.lt-miesiac{background:#FAEEDA;color:#633806}
+.lt-podmiot-rola{background:#E6F1FB;color:#0C447C}
+.lt-teza-dow{background:#FCEBEB;color:#791F1F}
+.lt-data-przyszla{background:#FFF0D6;color:#7A3800}
+.lt-przyznanie{background:#EAF3DE;color:#27500A}
+.lt-kwalif-tech{background:#E6F1FB;color:#0C447C}
+.lt-zakres-dow{background:#FAEEDA;color:#633806}
+.lt-samoobala{background:#FCEBEB;color:#791F1F}
+.lt-rodzaj{background:#FCEBEB;color:#791F1F}
+.lt-odrecznie{background:#F3F0FE;color:#3C3489}
+.lt-kwota-slownie-cyframi{background:#FAEEDA;color:#633806}
+.lt-osoba-mylona{background:#EAF3DE;color:#27500A}
+.la-title{font-size:13px;font-weight:500;color:var(--color-text-primary);flex:1;min-width:0}
+.la-sev{font-size:11px;font-weight:600;padding:3px 10px;border-radius:var(--border-radius-md);flex-shrink:0}
+.sev-crit{background:#FCEBEB;color:#791F1F}
+.sev-ist{background:#FAEEDA;color:#633806}
+.sev-marg{background:#F3F0FE;color:#3C3489}
+.la-row{display:grid;grid-template-columns:130px 1fr;gap:4px 10px;font-size:11px;margin-bottom:6px}
+.la-label{color:var(--color-text-tertiary);font-weight:500;padding:2px 0}
+.la-val{color:var(--color-text-primary);padding:2px 0;line-height:1.5}
+.la-skutek-odwr{background:#FCEBEB;border-radius:var(--border-radius-md);padding:5px 10px;font-size:11px;color:#791F1F;margin-top:6px;font-weight:500}
+.la-rec{background:#F3F0FE;border-radius:var(--border-radius-md);padding:6px 10px;font-size:11px;color:#3C3489;margin-top:4px}
+/* MODE badge */
+.mode-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:var(--border-radius-md);font-size:11px;font-weight:600}
+.mb-a{background:#E6F1FB;color:#0C447C}
+.mb-b{background:#EEEDFE;color:#3C3489}
+.mb-c{background:#EAF3DE;color:#27500A}
+.mb-ab{background:linear-gradient(135deg,#E6F1FB,#EEEDFE);color:#3C3489}
+.mb-bc{background:linear-gradient(135deg,#EEEDFE,#EAF3DE);color:#27500A}
+.mode-expand-btn{font-size:11px;padding:4px 10px;border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:none;cursor:pointer;color:var(--color-text-secondary)}
+.mode-expand-btn:hover{background:var(--color-background-secondary)}
+
+
+
+/* ── Strony i świadkowie ── */
+.person-card{border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;margin-bottom:10px;background:var(--color-background-primary)}
+.person-hdr{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0}
+.av-pow{background:#E6F1FB;color:#0C447C}.av-poz{background:#FAEEDA;color:#633806}
+.av-sw{background:#F3F0FE;color:#3C3489}.av-os{background:#F1EFE8;color:#5F5E5A}
+.person-name{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.person-role{font-size:11px;color:var(--color-text-secondary)}
+.person-grid{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:11px}
+.pg-label{color:var(--color-text-tertiary);font-weight:500;padding:2px 0}
+.pg-val{color:var(--color-text-primary);padding:2px 0;line-height:1.5}
+/* ── Nazewnictwo procesowe ── */
+.nazw-block{border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:12px 14px;margin-bottom:10px}
+.nazw-err{border-color:#A32D2D;background:#FCEBEB08}.nazw-warn{border-color:#854F0B;background:#FAEEDA08}
+/* ── DIS kwestie sporne ── */
+.dis-btn{width:100%;text-align:left;border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:11px 14px;margin-bottom:6px;cursor:pointer;background:var(--color-background-primary);display:flex;align-items:center;gap:10px;transition:background .15s}
+.dis-btn:hover{background:var(--color-background-secondary)}
+.dis-detail{display:none;border:.5px solid #534AB7;border-radius:var(--border-radius-lg);padding:14px;margin-top:-2px;margin-bottom:8px;background:var(--color-background-primary)}
+.dis-detail.open{display:block}
+.common-box{background:#EAF3DE;border-radius:var(--border-radius-md);padding:8px 12px;font-size:12px;color:#27500A;margin-bottom:8px;line-height:1.6}
+.law-box{background:#E6F1FB;border-radius:var(--border-radius-md);padding:7px 12px;font-size:12px;color:#0C447C;margin-bottom:6px}
+.hg-badge{display:inline-block;font-size:10px;font-weight:600;padding:1px 6px;border-radius:var(--border-radius-md);background:#FCEBEB;color:#791F1F;margin-left:6px}
+
+/* ── Roszczenia ── */
+.rosz-block{border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:12px 14px;margin-bottom:10px;background:var(--color-background-primary)}
+.rosz-hdr{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.rosz-tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:var(--border-radius-md);font-family:monospace;flex-shrink:0}
+.rt-pien{background:#E6F1FB;color:#0C447C}.rt-niem{background:#F3F0FE;color:#3C3489}
+.rt-prac{background:#EAF3DE;color:#27500A}.rt-proc{background:#FAEEDA;color:#633806}
+.rt-inn{background:#F1EFE8;color:#5F5E5A}
+.rosz-title{font-size:13px;font-weight:500;color:var(--color-text-primary);flex:1;min-width:0}
+.rosz-status{font-size:11px;font-weight:600;padding:3px 10px;border-radius:var(--border-radius-md);flex-shrink:0}
+.rs-aktywne{background:#EAF3DE;color:#27500A}.rs-sporne{background:#FAEEDA;color:#633806}
+.rs-zaspokojone{background:#E6F1FB;color:#0C447C}.rs-cofniete{background:#F1EFE8;color:#5F5E5A}
+.rosz-row{display:grid;grid-template-columns:120px 1fr;gap:3px 10px;font-size:11px;margin-bottom:6px}
+.rrl{color:var(--color-text-tertiary);font-weight:500;padding:2px 0}
+.rrv{color:var(--color-text-primary);padding:2px 0;line-height:1.5}
+.odniesienie-block{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 12px;margin:6px 0;border-left:2px solid}
+.odn-powod{border-left-color:#185FA5}.odn-pozwana{border-left-color:#854F0B}
+.odn-src{font-size:10px;font-weight:600;color:var(--color-text-tertiary);text-transform:uppercase;margin-bottom:3px}
+.odn-text{font-size:12px;color:var(--color-text-primary);font-style:italic;line-height:1.5}
+.wpływ-box{background:#EAF3DE;border-radius:var(--border-radius-md);padding:6px 10px;font-size:11px;color:#27500A;margin-top:4px}
+.podwaz-box{background:#FCEBEB;border-radius:var(--border-radius-md);padding:6px 10px;font-size:11px;color:#791F1F;margin-top:4px}
+.rosz-rec{background:#F3F0FE;border-radius:var(--border-radius-md);padding:6px 10px;font-size:11px;color:#3C3489;margin-top:4px;line-height:1.6}
+.mode-strip{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);margin-bottom:12px;font-size:12px;flex-wrap:wrap}
+.ms-label{color:var(--color-text-secondary)}
+.ms-badge{padding:3px 10px;border-radius:var(--border-radius-md);font-size:11px;font-weight:600}
+.msb-pozew{background:#E6F1FB;color:#0C447C}
+.msb-odpowiedz{background:#FAEEDA;color:#633806}
+.msb-przedsad{background:#EAF3DE;color:#27500A}
+
+/* ── Eksport bar ── */
+.export-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.exp-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:none;cursor:pointer;font-size:11px;font-weight:500;color:var(--color-text-secondary);transition:background .15s}
+.exp-btn:hover{background:var(--color-background-secondary);color:var(--color-text-primary)}
+.exp-btn-json{border-color:#185FA5;color:#185FA5}.exp-btn-json:hover{background:#E6F1FB}
+.exp-btn-md{border-color:#3B6D11;color:#3B6D11}.exp-btn-md:hover{background:#EAF3DE}
+.exp-btn-csv{border-color:#633806;color:#633806}.exp-btn-csv:hover{background:#FAEEDA}
+.exp-toast{position:fixed;bottom:20px;right:20px;background:#1D9E75;color:#fff;padding:10px 18px;border-radius:var(--border-radius-md);font-size:12px;font-weight:500;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none}
+.exp-toast.show{opacity:1}
+
+
+/* ── Alert blocks ── */
+.alert-block{border-radius:var(--border-radius-md);padding:10px 14px;margin-bottom:8px;border-left:3px solid}
+.alert-crit{background:#FCEBEB;border-color:#A32D2D}
+.alert-warn{background:#FAEEDA;border-color:#854F0B}
+.alert-info{background:#E6F1FB;border-color:#185FA5}
+.alert-check{background:#F3F0FE;border-color:#534AB7}
+.alert-title{font-size:12px;font-weight:500;margin-bottom:2px}
+.alert-crit .alert-title{color:#791F1F}.alert-warn .alert-title{color:#633806}
+.alert-info .alert-title{color:#0C447C}.alert-check .alert-title{color:#3C3489}
+.alert-body{font-size:11px;line-height:1.5}
+.alert-crit .alert-body{color:#A32D2D}.alert-warn .alert-body{color:#854F0B}
+.alert-info .alert-body{color:#185FA5}.alert-check .alert-body{color:#534AB7}
+
+/* ── Contradiction blocks ── */
+.contra-block{border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:12px 14px;margin-bottom:10px;background:var(--color-background-primary)}
+.contra-header{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+.contra-type{font-size:11px;font-weight:600;padding:2px 8px;border-radius:var(--border-radius-md)}
+.type-legal{background:#FCEBEB;color:#791F1F}
+.type-inter{background:#FAEEDA;color:#633806}
+.type-intra{background:#FFF0D6;color:#7A3800}
+.type-doubt{background:#F3F0FE;color:#3C3489}
+.contra-title{font-size:13px;font-weight:500;color:var(--color-text-primary);flex:1}
+.contra-status{font-size:11px;font-weight:600;padding:3px 10px;border-radius:var(--border-radius-md);flex-shrink:0}
+.status-crit{background:#FCEBEB;color:#791F1F}
+.status-check{background:#F3F0FE;color:#3C3489}
+.status-warn{background:#FAEEDA;color:#633806}
+.cite-block{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 12px;margin:6px 0}
+.cite-source{font-size:10px;font-weight:600;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.cite-text{font-size:12px;color:var(--color-text-primary);font-style:italic;line-height:1.5;border-left:2px solid #534AB7;padding-left:8px}
+.cite-loc{font-size:10px;color:var(--color-text-secondary);margin-top:3px}
+.contra-law{font-size:11px;color:var(--color-text-secondary);margin-top:6px;padding-top:6px;border-top:.5px solid var(--color-border-tertiary)}
+.contra-rec{font-size:11px;color:var(--color-text-primary);margin-top:4px;padding:6px 10px;background:#F3F0FE;border-radius:var(--border-radius-md)}
+
+/* ── Coverage ── */
+.coverage-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary)}
+.coverage-item:last-child{border-bottom:none}
+.coverage-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-full{background:#639922}.dot-partial{background:#BA7517}.dot-none{background:#E24B4A}
+.cov-label{font-size:13px;color:var(--color-text-primary);flex:1}
+.cov-status{font-size:11px;font-weight:500}
+.stat-full{color:#3B6D11}.stat-partial{color:#854F0B}.stat-none{color:#A32D2D}
+
+/* ── Timeline ── */
+.timeline-item{display:flex;gap:12px;padding-bottom:16px;position:relative}
+.timeline-item::before{content:'';position:absolute;left:15px;top:32px;bottom:0;width:1px;background:var(--color-border-tertiary)}
+.timeline-item:last-child::before{display:none}
+.tl-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.tl-blue{background:#E6F1FB;color:#185FA5}.tl-red{background:#FCEBEB;color:#A32D2D}.tl-amber{background:#FAEEDA;color:#854F0B}
+.tl-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
+.tl-date{font-size:12px;color:var(--color-text-secondary)}
+.tl-days{font-size:11px;font-weight:500;padding:2px 8px;border-radius:var(--border-radius-md)}
+.days-urgent{background:#FCEBEB;color:#791F1F}.days-ok{background:#EAF3DE;color:#27500A}.days-past{background:#F1EFE8;color:#5F5E5A}
+
+/* ── Verdict ── */
+.verdict-banner{border-radius:var(--border-radius-lg);padding:14px;text-align:center;margin-bottom:1rem}
+.verdict-strong{background:#EAF3DE}.verdict-mid{background:#FAEEDA}.verdict-weak{background:#FCEBEB}
+.verdict-title{font-size:17px;font-weight:500;margin-bottom:4px}
+.verdict-strong .verdict-title{color:#27500A}.verdict-mid .verdict-title{color:#633806}.verdict-weak .verdict-title{color:#791F1F}
+.verdict-sub{font-size:12px}
+.verdict-strong .verdict-sub{color:#3B6D11}.verdict-mid .verdict-sub{color:#854F0B}.verdict-weak .verdict-sub{color:#A32D2D}
+.pos-gauge{height:14px;border-radius:7px;background:var(--color-background-secondary);overflow:hidden;margin:8px 0}
+.pos-fill{height:100%;border-radius:7px}
+
+/* ── Section title ── */
+.section-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:10px}
+
+/* ── Buttons ── */
+.send-btn{display:flex;align-items:center;gap:6px;padding:9px 16px;border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:none;cursor:pointer;font-size:12px;color:var(--color-text-primary);margin-top:8px}
+.send-btn:hover{background:var(--color-background-secondary)}
+
+/* ── Filters ── */
+.filter-bar{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.filter-btn{padding:4px 12px;border-radius:var(--border-radius-md);font-size:11px;cursor:pointer;border:.5px solid var(--color-border-secondary);background:none;color:var(--color-text-secondary)}
+.filter-btn.active{background:#534AB7;color:#fff;border-color:#534AB7}
+
+/* ── Empty state ── */
+.empty{padding:2rem;text-align:center;color:var(--color-text-secondary);font-size:13px}
+</style>
+
+<div style="padding:1rem 0">
+
+<!-- Header -->
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px">
+  <div>
+    <div style="font-size:17px;font-weight:500;color:var(--color-text-primary)">
+      Analizator Dowodów v5.7.0
+      <span style="font-size:11px;background:#EEEDFE;color:#3C3489;padding:2px 8px;border-radius:var(--border-radius-md);margin-left:6px">Rejestr · Sprzeczności · Alerty · Przesłanki · Terminy · Lapsusy · Roszczenia · Raport</span>
+    </div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <span>Hierarchia A–D · Scoring 0–10 · MODE A/B/C · 22 typy LA · Eksport JSON/MD/CSV</span>
+      <span class="mode-badge mb-a" id="mode-badge">MODE A</span>
+      <button class="mode-expand-btn" onclick="sendPrompt('Dodaj pisma drugiej strony — rozszerz do MODE B')">＋ Pisma drugiej strony →</button>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <div class="export-bar">
+      <button class="exp-btn exp-btn-json" onclick="exportJSON()" title="Eksport JSON">💾 JSON</button>
+      <button class="exp-btn exp-btn-md"   onclick="exportMD()"   title="Eksport Markdown">📄 Markdown</button>
+      <button class="exp-btn exp-btn-csv"  onclick="exportCSV()"  title="Eksport CSV">📊 CSV</button>
+    </div>
+    <button class="send-btn" onclick="sendPrompt('Sporządź pismo procesowe na podstawie analizy')">✦ Sporządź pismo ↗</button>
+  </div>
+</div>
+<div id="exp-toast" class="exp-toast"></div>
+
+<!-- KPI strip -->
+<div class="grid4" style="margin-bottom:1.25rem">
+  <div class="metric"><div class="metric-label">Dowodów</div><div class="metric-value" id="m-total">—</div><div class="metric-sub">w rejestrze</div></div>
+  <div class="metric"><div class="metric-label">Śr. siła</div><div class="metric-value" id="m-avg">—</div><div class="metric-sub">/ 10 pkt</div></div>
+  <div class="metric"><div class="metric-label">Alerty kryt.</div><div class="metric-value" style="color:#E24B4A" id="m-alerts">—</div><div class="metric-sub">wymagają działania</div></div>
+  <div class="metric"><div class="metric-label">Do sprawdzenia</div><div class="metric-value" style="color:#534AB7" id="m-check">—</div><div class="metric-sub">sprzeczności / wątpliwości</div></div>
+</div>
+
+<!-- Tab bar -->
+<div class="tab-bar">
+  <button class="tab active" onclick="switchTab('dowody')">📋 Rejestr</button>
+  <button class="tab" onclick="switchTab('strony')">👥 Strony <span id="badge-strony" style="background:#E6F1FB;color:#0C447C;padding:1px 6px;border-radius:10px;font-size:10px;margin-left:3px">0</span></button>
+  <button class="tab" onclick="switchTab('nazewnictwo')">📝 Nazewnictwo</button>
+  <button class="tab" onclick="switchTab('dis')">🔬 Kwestie DIS <span id="badge-dis" style="background:#EEEDFE;color:#3C3489;padding:1px 6px;border-radius:10px;font-size:10px;margin-left:3px">0</span></button>
+  <button class="tab" onclick="switchTab('sprzecznosci')">⚠ Sprzeczności <span id="badge-contra" style="background:#F3F0FE;color:#3C3489;padding:1px 6px;border-radius:10px;font-size:10px;margin-left:3px">0</span></button>
+  <button class="tab" onclick="switchTab('alerty')">🔴 Alerty <span id="badge-count" style="background:#FCEBEB;color:#791F1F;padding:1px 6px;border-radius:10px;font-size:10px;margin-left:3px">0</span></button>
+  <button class="tab" onclick="switchTab('pokrycie')">✔ Przesłanki</button>
+  <button class="tab" onclick="switchTab('terminy')">📅 Terminy</button>
+  <button class="tab" onclick="switchTab('lapsusy')">🔍 Lapsusy <span id="badge-la" style="background:#FCEBEB;color:#791F1F;padding:1px 6px;border-radius:10px;font-size:10px;margin-left:3px">0</span></button>
+  <button class="tab" onclick="switchTab('roszczenia')">⚖ Roszczenia <span id="badge-rosz" style="background:#E6F1FB;color:#0C447C;padding:1px 6px;border-radius:10px;font-size:10px;margin-left:3px">0</span></button>
+  <button class="tab" onclick="switchTab('raport')">📊 Raport</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 1 — REJESTR -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="panel-dowody" class="panel active">
+  <div class="card">
+    <div id="evidence-list"><div class="empty">Brak danych — użyj przycisku ✦ Analizuj z AI</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 2 — SPRZECZNOŚCI -->
+<!-- ═══════════════════════════════════════════════════ -->
+
+<!-- ══ STRONY I ŚWIADKOWIE ══ -->
+<div id="panel-strony" class="panel">
+  <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+    <span style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--color-text-secondary)"><span style="width:10px;height:10px;border-radius:50%;background:#E6F1FB;border:1px solid #185FA5;display:inline-block"></span>Powód</span>
+    <span style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--color-text-secondary)"><span style="width:10px;height:10px;border-radius:50%;background:#FAEEDA;border:1px solid #854F0B;display:inline-block"></span>Pozwana / Organ</span>
+    <span style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--color-text-secondary)"><span style="width:10px;height:10px;border-radius:50%;background:#F3F0FE;border:1px solid #534AB7;display:inline-block"></span>Świadek</span>
+    <span style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--color-text-secondary)"><span style="width:10px;height:10px;border-radius:50%;background:#F1EFE8;border:1px solid #888;display:inline-block"></span>Osoba trzecia</span>
+  </div>
+  <div id="persons-list"></div>
+  <button class="send-btn" onclick="sendPrompt('Przygotuj pytania do przesłuchania świadków ze sprawy VII P 94/25')">Przygotuj pytania do świadków ↗</button>
+</div>
+
+<!-- ══ NAZEWNICTWO PROCESOWE ══ -->
+<div id="panel-nazewnictwo" class="panel">
+  <div class="card" style="margin-bottom:12px">
+    <div class="section-title">Kontrola nazewnictwa procesowego i kwalifikacji stron</div>
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:12px;line-height:1.7">Weryfikacja konsekwentności nazewnictwa w pismach Lorica Iuris. Wykryte wzorce błędów rodzaju gramatycznego i kwalifikacji podmiotów.</div>
+    <div id="nazw-list"></div>
+  </div>
+  <button class="send-btn" onclick="sendPrompt('Jak procesowo wykorzystać błędy nazewnictwa procesowego w pismach Lorica Iuris?')">Jak wykorzystać błędy nazewnictwa? ↗</button>
+</div>
+
+<!-- ══ KWESTIE SPORNE DIS ══ -->
+<div id="panel-dis" class="panel">
+  <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:12px;line-height:1.7">
+    Kliknij kwestię sporną aby rozwinąć: fakty bezsporne (common ground), stanowiska stron, stosowne przepisy <span class="hg-badge">⚠ HARDGATE</span> i rekomendacje procesowe.
+  </div>
+  <div id="dis-list"></div>
+</div>
+
+<div id="panel-sprzecznosci" class="panel">
+
+  <!-- Legend -->
+  <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+    <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--color-text-secondary)">
+      <span style="width:10px;height:10px;border-radius:2px;background:#FCEBEB;border:1px solid #A32D2D;display:inline-block"></span> [LEG] Sprzeczność z prawem
+    </span>
+    <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--color-text-secondary)">
+      <span style="width:10px;height:10px;border-radius:2px;background:#FFF0D6;border:1px solid #7A3800;display:inline-block"></span> [INTRA] Zmiana narracji tej samej strony
+    </span>
+    <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--color-text-secondary)">
+      <span style="width:10px;height:10px;border-radius:2px;background:#FAEEDA;border:1px solid #854F0B;display:inline-block"></span> [CROSS] Sprzeczność między dokumentami
+    </span>
+    <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--color-text-secondary)">
+      <span style="width:10px;height:10px;border-radius:2px;background:#F3F0FE;border:1px solid #534AB7;display:inline-block"></span> [DOUBT] Wątpliwość
+    </span>
+  </div>
+
+  <!-- Filters -->
+  <div class="filter-bar" id="contra-filters">
+    <button class="filter-btn active" onclick="filterContra('all',this)">Wszystkie</button>
+    <button class="filter-btn" onclick="filterContra('legal',this)">⚖ [LEG]</button>
+    <button class="filter-btn" onclick="filterContra('intra',this)">🔄 [INTRA]</button>
+    <button class="filter-btn" onclick="filterContra('inter',this)">🔀 [CROSS]</button>
+    <button class="filter-btn" onclick="filterContra('doubt',this)">❓ [DOUBT]</button>
+  </div>
+
+  <div id="contra-list"><div class="empty">Brak zidentyfikowanych sprzeczności i wątpliwości</div></div>
+
+  <button class="send-btn" onclick="sendPrompt('Wyjaśnij wykryte sprzeczności i co powinienem z nimi zrobić przed złożeniem pisma')">Jak rozwiązać sprzeczności? ↗</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 3 — ALERTY -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="panel-alerty" class="panel">
+  <div class="grid2" style="margin-bottom:16px">
+    <div>
+      <div class="section-title" style="color:#791F1F">Krytyczne</div>
+      <div id="alerts-crit"><div style="font-size:12px;color:var(--color-text-secondary);padding:8px">Brak</div></div>
+    </div>
+    <div>
+      <div class="section-title" style="color:#633806">Ostrzegawcze</div>
+      <div id="alerts-warn"><div style="font-size:12px;color:var(--color-text-secondary);padding:8px">Brak</div></div>
+    </div>
+  </div>
+  <div>
+    <div class="section-title">Informacyjne</div>
+    <div id="alerts-info"><div style="font-size:12px;color:var(--color-text-secondary);padding:8px">Brak</div></div>
+  </div>
+  <button class="send-btn" onclick="sendPrompt('Wyjaśnij alerty krytyczne i jak je naprawić przed złożeniem pisma')">Jak usunąć alerty krytyczne? ↗</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 4 — PRZESŁANKI -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="panel-pokrycie" class="panel">
+  <div class="grid2">
+    <div class="card">
+      <div class="section-title">Pokrycie przesłanek</div>
+      <div id="coverage-list"><div class="empty">Brak danych</div></div>
+    </div>
+    <div class="card">
+      <div class="section-title">Luki krytyczne</div>
+      <div id="gaps-list"><div class="empty">Brak zidentyfikowanych luk</div></div>
+      <button class="send-btn" style="margin-top:12px" onclick="sendPrompt('Jakie dowody powinienem pozyskać aby uzupełnić luki w materiale?')">Co pozyskać? ↗</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 5 — TERMINY -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="panel-terminy" class="panel">
+  <div class="card" style="margin-bottom:12px">
+    <div class="section-title" style="color:#E24B4A">Terminy zawite</div>
+    <div id="timeline-list"><div class="empty">Podaj datę doręczenia i tryb postępowania</div></div>
+  </div>
+  <button class="send-btn" onclick="sendPrompt('Oblicz terminy procesowe — podaj datę doręczenia i tryb postępowania')">Oblicz mój termin ↗</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 6 — RAPORT -->
+<!-- ═══════════════════════════════════════════════════ -->
+
+<div id="panel-lapsusy" class="panel">
+  <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:10px;line-height:1.7">
+    Błędy autorskie wykryte w pismach procesowych — z uwzględnieniem intencji autora i skutku rzeczywistego. Uwzględnia kontekst: kto pisał, dla kogo i co chciał osiągnąć.
+  </div>
+  <div class="fbar" id="la-filters">
+    <button class="fbtn active" onclick="filterLA('all',this)">Wszystkie</button>
+    <button class="fbtn" onclick="filterLA('KRYTYCZNE',this)">Krytyczne</button>
+    <button class="fbtn" onclick="filterLA('ISTOTNE',this)">Istotne</button>
+    <button class="fbtn" onclick="filterLA('la-koszty',this)">[LA-KOSZTY]</button>
+    <button class="fbtn" onclick="filterLA('la-podmiot',this)">[LA-PODMIOT]</button>
+    <button class="fbtn" onclick="filterLA('la-kwalif',this)">[LA-KWALIF]</button>
+    <button class="fbtn" onclick="filterLA('la-narr',this)">[LA-NARR]</button>
+    <button class="fbtn" onclick="filterLA('la-legal',this)">[LA-LEGAL]</button>
+    <button class="fbtn" onclick="filterLA('la-intencja',this)">[LA-INTENCJA]</button>
+    <button class="fbtn" onclick="filterLA('la-chronologia',this)">[LA-CHRONOLOGIA]</button>
+    <button class="fbtn" onclick="filterLA('la-miesiac',this)">[LA-MIESIAC]</button>
+    <button class="fbtn" onclick="filterLA('la-podmiot-rola',this)">[LA-PODMIOT-ROLA]</button>
+    <button class="fbtn" onclick="filterLA('la-rodzaj',this)">[LA-RODZAJ]</button>
+    <button class="fbtn" onclick="filterLA('la-odrecznie',this)">[LA-ODRĘCZNIE]</button>
+    <button class="fbtn" onclick="filterLA('la-osoba-mylona',this)">[LA-OSOBA-MYLONA]</button>
+    <button class="fbtn" onclick="filterLA('la-teza-dowodowa',this)">[LA-TEZA-DOWODOWA]</button>
+    <button class="fbtn" onclick="filterLA('la-data-przyszla',this)">[LA-DATA-PRZYSZŁA]</button>
+    <button class="fbtn" onclick="filterLA('la-przyznanie-korzystne',this)">[LA-PRZYZNANIE-KORZYSTNE]</button>
+    <button class="fbtn" onclick="filterLA('la-kwalifikacja-techniczna',this)">[LA-KWALIF-TECHNICZNA]</button>
+    <button class="fbtn" onclick="filterLA('intra-samoobala',this)">[INTRA-SAMOOBALA]</button>
+    <button class="fbtn" onclick="filterLA('d03',this)">Tylko D03</button>
+  </div>
+  <div id="la-list"></div>
+  <button class="send-btn" onclick="sendPrompt('Jak procesowo wykorzystać wykryte lapsusy pełnomocnika Pozwanej?')">Jak wykorzystać lapsusy? ↗</button>
+</div>
+
+
+<div id="panel-roszczenia" class="panel">
+  <div class="mode-strip">
+    <span class="ms-label">Tryb analizy roszczeń:</span>
+    <button class="ms-badge msb-pozew" id="ms-btn-pozew" onclick="setRoszMode('pozew',this)">Pozew / pismo</button>
+    <button class="ms-badge" id="ms-btn-odpowiedz" onclick="setRoszMode('odpowiedz',this)" style="background:var(--color-background-primary);color:var(--color-text-secondary);border:.5px solid var(--color-border-secondary)">Odpowiedź na pozew</button>
+    <button class="ms-badge" id="ms-btn-przedsad" onclick="setRoszMode('przedsad',this)" style="background:var(--color-background-primary);color:var(--color-text-secondary);border:.5px solid var(--color-border-secondary)">Pismo przedsądowe</button>
+    <span id="ms-info" style="font-size:11px;color:var(--color-text-secondary);margin-left:4px"></span>
+  </div>
+  <div class="fbar" id="rosz-filters">
+    <button class="fbtn active" onclick="filterRosz('all',this)">Wszystkie</button>
+    <button class="fbtn" onclick="filterRosz('pieniezne',this)">💰 Pieniężne</button>
+    <button class="fbtn" onclick="filterRosz('niepienieze',this)">📄 Niepieniężne</button>
+    <button class="fbtn" onclick="filterRosz('procesowe',this)">⚙ Procesowe</button>
+    <button class="fbtn" onclick="filterRosz('aktywne',this)">Aktywne</button>
+    <button class="fbtn" onclick="filterRosz('sporne',this)">Sporne</button>
+    <button class="fbtn" onclick="filterRosz('zaspokojone',this)">Zaspokojone</button>
+  </div>
+  <div id="rosz-list"></div>
+  <button class="sbtn" onclick="sendPrompt('Sporządź pismo procesowe uwzględniające wszystkie aktywne roszczenia i wnioski z analizy')">✦ Sporządź pismo z roszczeniami ↗</button>
+</div>
+
+<div id="panel-raport" class="panel">
+  <div id="verdict-wrap">
+    <div class="verdict-banner verdict-mid">
+      <div class="verdict-title">Brak danych</div>
+      <div class="verdict-sub">Uruchom analizę przez przycisk ✦ Analizuj z AI</div>
+    </div>
+  </div>
+  <div class="grid2" style="margin-bottom:12px">
+    <div class="card">
+      <div class="section-title">Pozycja procesowa</div>
+      <div class="pos-gauge"><div class="pos-fill" id="pos-fill" style="width:0%;background:#639922"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--color-text-secondary);margin-top:4px">
+        <span>Krytyczna</span><span>Słaba</span><span>Umiarkowana</span><span>Silna</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-title">Walidacja</div>
+      <div id="val-summary" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:12px">
+    <div class="section-title">Dowody kluczowe do powołania</div>
+    <div id="key-evidence"></div>
+  </div>
+  <div class="card" style="margin-bottom:12px">
+    <div class="section-title">Rekomendacje</div>
+    <div id="recommendations"></div>
+  </div>
+  <button class="send-btn" onclick="sendPrompt('Sporządź pismo procesowe na podstawie analizy dowodów')">Sporządź pismo ↗</button>
+</div>
+
+</div><!-- /padding wrapper -->
+
+<script>
+/* ═══ DATA ARRAYS — wypełnia AI przed renderowaniem ═══
+   evidence[]       — {id, name, type, level, score, date, alerts, desc, status}
+   alerts_data{}    — {crit[], warn[], info[]} — każdy: {code, dowod, ryzyko, rek, podstawa}
+   coverage_data[]  — {label, status:'full'|'partial'|'none', dowod}
+   gaps[]           — {gap, action, dotyczy?}  // dotyczy: string[] — ID elementów
+                       z evidence[] / contradictions[], których ta luka dotyczy
+   terminy[]        — {label, date:'YYYY-MM-DD', type, code}
+   recs[]           — string[]
+
+   contradictions[] — każdy obiekt:
+   {
+     id:       string,        // unikalny id — prefiks INTRA-N / SPOJ-N / LEG-N / DOUBT-N
+     type:     'legal'|'inter'|'intra'|'doubt',
+                              // legal  = [LEG]   sprzeczność z przepisem prawa
+                              // intra  = [INTRA] zmiana narracji tej samej strony
+                              // inter  = [CROSS] sprzeczność między stronami/dokumentami
+                              // doubt  = [DOUBT] wątpliwość / niejednoznaczność
+     status:   'KRYTYCZNE'|'DO SPRAWDZENIA'|'OSTRZEŻENIE',
+     title:    string,        // krótki opis — z prefixem [INTRA]/[CROSS]/[LEG]/[DOUBT]
+     law:      string,        // podstawa prawna (art. X ustawy Y) — dla type=legal; '' dla pozostałych
+     cites: [                 // cytaty — min 1, max 3; INTRA i CROSS wymagają ≥2
+       {
+         doc:    string,      // nazwa dokumentu
+         page:   string,      // "str. 3" / "§ 4 pkt 2" / "e-mail z dn."
+         text:   string,      // KRÓTKI cytat (max 100 zn.) z cudzysłowem
+         label:  string,      // "Wersja 1 — data" / "Źródło A" / "Kwestionowany fragment"
+       }
+     ],
+     rec:      string         // rekomendacja co zrobić
+   }
+*/
+const evidence=[];
+const alerts_data={crit:[],warn:[],info:[]};
+const coverage_data=[];
+const gaps=[];
+const terminy=[];
+const recs=[];
+const contradictions=[];
+
+/* ═══ HELPERS ═══ */
+
+const lapsusy=[
+
+  /* ── LAPSUSY POTWIERDZONE Z ORYGINALNYCH DOKUMENTÓW ── */
+
+  {id:'LA-1',type:'la-rodzaj',autor:'adw. Andrzej Ciecierski / Lorica Iuris Ciecierski Rak Sp.k.',
+   doc:'D02 — petitum odpowiedzi na pozew (8.04.2025)',
+   zamierzenie:'Wniosek o zasądzenie kosztów procesu na rzecz klienta (Pozwanej HPG) od strony przegrywającej.',
+   skutek_rzecz:'Petitum zawiera "zasądzenie od powódki na rzecz Pozwanej kosztów". Powód w sprawie to Michał Wiatrak — mężczyzna. Forma "powódka" (rodzaj żeński) to osoba nieistniejąca w tym postępowaniu. Pełnomocnik skopiował wzorzec z innej sprawy gdzie stroną była kobieta i nie zmienił formy gramatycznej.',
+   skutek_odwr:true,
+   severity:'KRYTYCZNE',
+   cytat:'"zasądzenie od powódki na rzecz Pozwanej kosztów procesu wraz z kosztami zastępstwa procesowego" — petitum D02; Powód: Michał Wiatrak (rodzaj męski → "Powód", nie "powódka")',
+   rek:'Wskazać Sądowi że wniosek dotyczy "powódki" której w sprawie nie ma. Nie wnosić o sprostowanie — błąd leży po stronie Pozwanej. Można argumentować że wniosek o koszty nie odnosi się do rzeczywistego Powoda.',
+   status:'potwierdzony'},
+
+  {id:'LA-2',type:'la-odrecznie',autor:'Nieznany (HPG lub Wiatrak) / weryfikacja odcisku pisma',
+   doc:'Pokwitowanie Poudela (5.12.2024, str. 19, dok. 1) — dopisek odręczny',
+   zamierzenie:'Uzupełnienie pokwitowania o wskazanie osoby, która nienależnie pobrała pieniądze.',
+   skutek_rzecz:'Fragment "przez Michał Wiatrak" jest odręcznym dopiskiem bez własnej daty. Nie wiadomo kiedy dopisek powstał — przed podpisem, po podpisie, w dniu dokumentu czy w innym terminie. Dopisek bez daty nie może być weryfikowalny pod względem czasu powstania.',
+   skutek_odwr:false,
+   severity:'KRYTYCZNE',
+   cytat:'Pokwitowanie 5.12.2024: "zwrot nienależnie pobranych pieniędzy [druk] przez Michał Wiatrak [odręcznie — bez daty dopisku]" — kwota: 1.000,00 zł / tysiąc złotych',
+   rek:'Wnioskować o ekspertyzę grafologiczną ustalającą czy dopisek pochodzi z tej samej sesji pisania co reszta dokumentu. Odręczny fragment bez daty nie ma atrybutu dokumentu datowanego co do tej treści.',
+   status:'potwierdzony'},
+
+  {id:'LA-3',type:'la-odrecznie',autor:'HPG lub nieznany / weryfikacja odcisku pisma',
+   doc:'Pokwitowanie Wiatraka (9.10.2024, str. 102, dok. 1) — słowna kwota odręcznie',
+   zamierzenie:'Uzupełnienie kwoty liczbowej słownym odpowiednikiem.',
+   skutek_rzecz:'Kwota cyframi: 1.000,17 zł. Kwota słownie (odręcznie): "tysiąc złotych" = 1.000,00 zł. Rozbieżność 0,17 zł. Słowna część dopisana odręcznie bez własnej daty przy dopisku — nie wiadomo kiedy "tysiąc złotych" wpisano. Rozbieżność 0,17 zł sugeruje że dopisek nie odzwierciedla faktycznej kwoty cyfrowej.',
+   skutek_odwr:false,
+   severity:'KRYTYCZNE',
+   cytat:'Pokwitowanie 9.10.2024 str. 102: cyfry "1.000,17 zł" (maszynowe/druk) vs słownie "tysiąc złotych" (odręcznie, bez daty dopisku); różnica: 0,17 zł',
+   rek:'Wskazać rozbieżność 0,17 zł między kwotą cyfrową a słowną. W dokumentach prywatnych przy niezgodności kwoty słownej i cyfrowej pierwszeństwo ma zazwyczaj kwota słowna — co oznacza że dokument opiewa na 1000,00 zł, nie 1000,17 zł. Wnioskować o ekspertyzę czy dopisek jest autentyczny.',
+   status:'potwierdzony'},
+
+  {id:'LA-4',type:'la-kwota-slownie-cyframi',autor:'Lorica Iuris / adw. Ciecierski (opis w pismach)',
+   doc:'D01/D02 — opis pokwitowania Wiatraka w pismach procesowych',
+   zamierzenie:'Opisać kwotę potrącenia z wynagrodzenia Wiatraka.',
+   skutek_rzecz:'Pisma D01/D02 konsekwentnie opisują kwotę jako "1.000 zł" lub "1.000,00 zł". Oryginał pokwitowania to 1.000,17 zł. Pełnomocnik zaokrąglił kwotę w pismach — bez wskazania że dokument opiewa na 1.000,17 zł. Przy kwestii sporu o potrącenie każde 17 groszy ma znaczenie dla dokładności opisu stanu faktycznego.',
+   skutek_odwr:false,
+   severity:'ISTOTNE',
+   cytat:'D02 wielokrotnie: "kwota 1.000,00 zł" / "kwota 1.000 zł" — pokwitowanie str. 102: "1.000,17 zł" (cyframi)',
+   rek:'Wskazać rozbieżność: Pozwana opisuje kwotę potrącenia jako 1.000 zł, dokument opiewa na 1.000,17 zł. Precyzyjna kwota ma znaczenie dla oceny wyliczenia wynagrodzenia netto za październik 2024.',
+   status:'potwierdzony'},
+
+  {id:'LA-5',type:'la-miesiac',autor:'adw. Andrzej Ciecierski / Lorica Iuris',
+   doc:'D01/D02 — opis potrącenia vs pokwitowanie Wiatraka (str. 102, 9.10.2024)',
+   zamierzenie:'Wykazać że Powód wyraził zgodę na potrącenie z konkretnego wynagrodzenia.',
+   skutek_rzecz:'Pokwitowanie z 9.10.2024 literalnie: "z wynagrodzenia za miesiąc PAŹDZIERNIK". Pisma D01/D02 opisują to jako potrącenie "z wynagrodzenia za WRZESIEŃ". Pozwana opisuje własny dokument dowodowy niezgodnie z jego dosłowną treścią. Wrzesień i październik to różne okresy rozliczeniowe.',
+   skutek_odwr:true,
+   severity:'KRYTYCZNE',
+   cytat:'Pokwitowanie str. 102: "wyrażam zgodę na potrącenie tej kwoty z mojego wynagrodzenia za miesiąc październik" vs pisma D01/D02: narracja o potrąceniu "z wynagrodzenia za wrzesień"',
+   rek:'Wskazać rozbieżność: jeśli zgoda dotyczyła wynagrodzenia za październik (a podpisanie nastąpiło 9.10.2024, gdy październik trwał) — potrącenie z wynagrodzenia za wrzesień byłoby bez podstawy w tym dokumencie. Wnioskować o listę płac za wrzesień i październik 2024.',
+   status:'potwierdzony'},
+
+  {id:'LA-6',type:'la-podmiot',autor:'adw. Andrzej Ciecierski / Lorica Iuris',
+   doc:'D01 — pkt u, s. 10; D02 — s. 8',
+   zamierzenie:'D02: wykazać służbowy charakter konta e-mail. D01: zaprzeczyć twierdzeniu Powoda.',
+   skutek_rzecz:'D02: "Konto stworzone do celów wykonywania pracy" (= służbowe). D01: "Powód stworzył PRYWATNEGO maila z dopiskiem @humanpark.pl" (= prywatne). Sprzeczne kwalifikacje tego samego konta przez tę samą stronę w tym samym postępowaniu.',
+   skutek_odwr:true,
+   severity:'KRYTYCZNE',
+   cytat:'D02 s.8: "Konto to zostało stworzone do celów wykonywania przez Powoda pracy" vs D01 pkt u: "Powód stworzył PRYWATNEGO maila z dopiskiem @humanpark.pl, jest nielogiczna i sprzeczna z prawdą"',
+   rek:'Wskazać Sądowi odwrócenie kwalifikacji między pismami. Żądać jednoznacznego oświadczenia z dokumentacją IT: kto założył konto, na jakiej domenie, kto kontrolował hasło.',
+   status:'potwierdzony'},
+
+  {id:'LA-7',type:'la-kwalif',autor:'adw. Andrzej Ciecierski / Lorica Iuris',
+   doc:'D02 — pokwitowanie str. 102 i pokwitowanie Poudela str. 19',
+   zamierzenie:'Wykazać prawidłowe rozliczenie kwoty 1.000 zł.',
+   skutek_rzecz:'"Zaliczka na wynagrodzenie za październik" (art. 91 KP — uzgodnione) vs "nienależnie pobrane pieniądze przez Michała Wiatraka" (art. 405 KC — bezpodstawne). Wzajemnie wykluczające się kwalifikacje prawne tej samej kwoty przez tę samą stronę.',
+   skutek_odwr:true,
+   severity:'KRYTYCZNE',
+   cytat:'Pokwitowanie str. 102: "zaliczki oraz wyrażam zgodę na potrącenie" vs pokwitowanie Poudela str. 19: "zwrot nienależnie pobranych pieniędzy przez Michał Wiatrak"',
+   rek:'Żądać od Pozwanej jednoznacznego oświadczenia: zaliczka (KP) czy nienależne pobranie (KC). Dwie podstawy prawne nie mogą współistnieć dla tej samej kwoty.',
+   status:'potwierdzony'},
+
+  {id:'LA-8',type:'la-osoba-mylona',autor:'analiza systemu + weryfikacja materiału',
+   doc:'D01/D02 — wnioski dowodowe; pokwitowanie str. 19',
+   zamierzenie:'Powołanie właściwych świadków w odpowiednich rolach procesowych.',
+   skutek_rzecz:'"Bishal Poudel" (str. 19 — osoba na pokwitowaniu zwrotu 1.000 zł, były pracownik HPG z Sosnowca) vs "Bishwas Pudasaini" (inna osoba, pojawiająca się w innych wnioskach dowodowych w sprawie). Dwa różne imiona i dwa różne nazwiska. Mieszanie ich ról procesowych lub twierdzeń byłoby błędem atrybucji.',
+   skutek_odwr:false,
+   severity:'ISTOTNE',
+   cytat:'"Bishal Poudel" — pisma D01/D02, wielokrotnie; "Bishal Paudel" — pokwitowanie str. 19; "Bishwas Pudasaini" — odrębna osoba, odrębny kontekst dowodowy',
+   rek:'Ustalić pełne dane identyfikacyjne każdej z tych osób (PESEL lub nr paszportu). Nie mieszać twierdzeń dotyczących Poudela z twierdzeniami dotyczącymi Pudasainiego w pismach procesowych.',
+   status:'potwierdzony'},
+
+  {id:'LA-9',type:'la-narr',autor:'adw. Andrzej Ciecierski / Lorica Iuris',
+   doc:'D01 — s. 2-3 (pkt I); D02 — s. 5',
+   zamierzenie:'D02: wykazać dobrowolność porozumienia 9.10.2024.',
+   skutek_rzecz:'D01 opisując chronologię podaje: "pracodawca rozważy zwolnienie dyscyplinarne — pokłosiem było podpisanie porozumienia". Słowo "pokłosiem" przyznaje przyczynowość — zagrożenie dyscyplinarką było przyczyną podpisania. Zaprzecza to tezie "dobrowolności" z D02.',
+   skutek_odwr:true,
+   severity:'KRYTYCZNE',
+   cytat:'D01: "pracodawca rozważy zwolnienie dyscyplinarne. Pokłosiem (...) było podpisanie (...) porozumienia" vs D02: "Powód podpisał dobrowolnie, miał wkład w zapisy, strony rozstały się w przyjaznych stosunkach"',
+   rek:'Wskazać że D01 zawiera przyznanie przyczynowe. Można połączyć z argumentacją z art. 87 KC (groźba) w zw. z art. 300 KP.',
+   status:'potwierdzony'},
+
+  {id:'LA-10',type:'la-kwota',autor:'adw. Andrzej Ciecierski / Lorica Iuris',
+   doc:'D02 — s. 1 vs s. 2',
+   zamierzenie:'Opisać zakres tematyczny zeznań świadków odnośnie rozliczenia 1.000 zł.',
+   skutek_rzecz:'Ta sama operacja finansowa: s. 1 (Koroleva): "zwrotu kwoty 1.060,00 zł", s. 2 (Poudel): "nienależnych środków w kwocie 1.000,00 zł". Różnica 60 zł w jednym piśmie dla tej samej transakcji.',
+   skutek_odwr:false,
+   severity:'ISTOTNE',
+   cytat:'"zwrotu kwoty 1.060,00 zł przez Pozwaną" (D02 s.1) vs "nienależnych środków w kwocie 1.000,00 zł" (D02 s.2)',
+   rek:'Żądać historii rachunku Pozwanej za 5.12.2024. Rozbieżność 60 zł może oznaczać koszty przelewu lub błąd przepisania.',
+   status:'potwierdzony'},
+
+  {id:'LA-11',type:'la-podmiot-rola',autor:'adw. Andrzej Ciecierski / Lorica Iuris',
+   doc:'D01 — s. 4, pkt III',
+   zamierzenie:'Wyłączyć Pawła Raka z przesłuchania przez tajemnicę zawodową.',
+   skutek_rzecz:'Rak jest WSPÓLNIKIEM kancelarii Lorica Iuris Ciecierski Rak Sp.k. — pełnomocnika Pozwanej w tej sprawie. Opisanie go jako "radcy prawnego obsługującego spółkę" błędnie sugeruje zewnętrzny charakter relacji. Rak to element struktury pełnomocnika procesowego, nie niezależny doradca.',
+   skutek_odwr:false,
+   severity:'KRYTYCZNE',
+   cytat:'"Paweł Rak jest radcą prawnym obsługującym spółkę" (D01 pkt III) — tymczasem: pełnomocnik Pozwanej = Lorica Iuris Ciecierski Rak Sp.k., gdzie Rak jest wspólnikiem; pisma D01 i D02 podpisane przez tę kancelarię',
+   rek:'Wskazać Sądowi że Rak jest wspólnikiem kancelarii reprezentującej Pozwaną. Wnioskować o jego przesłuchanie co do faktów niezwiązanych z pomocą prawną. ⚠ art. 3 u.r.p. wymaga weryfikacji w ISAP.',
+   status:'potwierdzony'},
+
+  {id:'LA-12',type:'la-legal',autor:'adw. Andrzej Ciecierski / Lorica Iuris',
+   doc:'D01 — s. 4, pkt III',
+   zamierzenie:'Wyłączyć Grzywacz i Raka z przesłuchania.',
+   skutek_rzecz:'Art. 3 u.r.p. i art. 6 Prawa o adwokaturze chronią konkretne informacje — nie wyłączają świadka in toto. Wniosek o pominięcie całości zeznań ma zakres szerszy niż norma na którą się powołuje.',
+   skutek_odwr:false,
+   severity:'ISTOTNE',
+   cytat:'"wobec osób tych zachodzi okoliczność wskazywana w art. 3 Ustawy o radcach prawnych i w art. 6 ustawy Prawo o adwokaturze" jako podstawa wniosku o pominięcie całości dowodu',
+   rek:'Sprzeciwić się pominięciu in toto. Sąd może dopuścić dowód z możliwością punktowego powołania tajemnicy. ⚠ Przepisy wymagają weryfikacji w ISAP.',
+   status:'potwierdzony'},
+
+  {id:'LA-13',type:'la-intencja',autor:'adw. Andrzej Ciecierski / Lorica Iuris',
+   doc:'D01',
+   zamierzenie:'Zanegować twierdzenie o roli Poudela jako pełnomocnika Powoda.',
+   skutek_rzecz:'Zaprzeczanie twierdzeniu nieobecnemu w pismach Powoda. Odpieranie nieistniejącego zarzutu sygnalizuje Sądowi powiązanie, które Pozwana chce zneutralizować.',
+   skutek_odwr:true,
+   severity:'ISTOTNE',
+   cytat:'"Pozwana zaprzecza, aby Pan Bishal Poudel działał wobec Pozwanej jako pełnomocnik Powoda"',
+   rek:'Sprawdzić czy Powód postawił tę tezę. Jeśli nie — wskazać Sądowi odpieranie nieistniejącego argumentu.',
+   status:'potwierdzony'},
+
+  /* ── D03 — LORICA IURIS 19.10.2025 ── */
+
+  {id:'LA-14',type:'intra-samoobala',autor:'adw. Andrzej Ciecierski / Lorica Iuris',
+   doc:'D03 — pismo procesowe (19.10.2025), akapit główny',
+   zamierzenie:'Wykazać że Powód nie wykonał zobowiązania Sądu o przedstawienie wyciągów bankowych.',
+   skutek_rzecz:'Zdanie 1: "powód nie wykonał zobowiązania Sądu". Zdanie 2 bezpośrednio po: "Powód przedstawił potwierdzenia 30 wpłat na konto MUW podając spółkę Trabahante, NIP, imiona najemców". Pełnomocnik nie mógłby znać treści 30 przelewów gdyby Powód niczego nie złożył. Akapit obala własną tezę.',
+   skutek_odwr:true,severity:'KRYTYCZNE',
+   cytat:'"powód nie wykonał zobowiązania Sądu o przedstawienie wyciągów" — po czym: "Powód przedstawił potwierdzenia 30 wpłat (...) podając dane spółki Trabahante, NIP oraz imię i nazwisko najemców" (D03)',
+   rek:'Wskazać Sądowi: Pozwana sama przyznaje że Powód złożył 30 potwierdzeń. Spór dotyczy zakresu (wyciągi vs potwierdzenia wybranych przelewów) — nie niewykonania zobowiązania.',
+   status:'potwierdzony'},
+
+  {id:'LA-15',type:'la-teza-dowodowa',autor:'adw. Andrzej Ciecierski / Lorica Iuris',
+   doc:'D03 — wniosek dowodowy, s. 2',
+   zamierzenie:'Wnioskować o dowód że Powód miał stałe źródło dochodu po ustaniu stosunku pracy — argument przeciwko szkodzie.',
+   skutek_rzecz:'Dosłowny wniosek: "posiadania stałego źródła dochodu przez POZWANEGO po rozwiązaniu umowy o pracę z POWODEM". Podmiotem jest POZWANY (własny klient) zamiast POWÓD. Pełnomocnik składa wniosek dowodowy na okoliczność dochodów HPG, a nie Powoda. Trzy błędy w jednym zdaniu: zła osoba + błąd rodzaju (pozwanego r.m. zamiast pozwanej r.ż.) + skutek odwrotny.',
+   skutek_odwr:true,severity:'KRYTYCZNE',
+   cytat:'"posiadania stałego źródła dochodu przez POZWANEGO po rozwiązaniu umowy o pracę z POWODEM" — wniosek dowodowy złożony przez pełnomocnika Pozwanej (HPG), D03',
+   rek:'Przyjąć tezę dosłownie i złożyć wniosek: "Powód popiera wniosek Pozwanej co do posiadania przez nią stałego źródła dochodu — wnoszę o zobowiązanie HPG do przedłożenia dokumentów finansowych." Alternatywnie: wskazać błąd podmiotu i żądać sprostowania z wyjaśnieniem co Pozwana chciała dowieść.',
+   status:'potwierdzony'},
+
+  {id:'LA-16',type:'la-przyznanie-korzystne',autor:'adw. Andrzej Ciecierski / Lorica Iuris',
+   doc:'D03 — s. 2, 10 potwierdzeń przelewów',
+   zamierzenie:'Wykazać nieuprawnione pobieranie opłat od cudzoziemców przez Powoda rzekomo działającego w imieniu HPG.',
+   skutek_rzecz:'Pozwana przedkłada do akt 10 potwierdzeń przelewów na PRYWATNE konto Powoda. Cel: dowód nielegalnej działalności. Efekt uboczny: (a) Powód uzyskuje w aktach 10 dowodów wpłat na własne konto; (b) Pozwana dokumentuje aktywność zawodową Powoda po ustaniu stosunku pracy; (c) "wpłaty na rzecz pozwanego od obcokrajowców" sugeruje że klienci traktowali Powoda jako reprezentanta HPG.',
+   skutek_odwr:true,severity:'KRYTYCZNE',
+   cytat:'"Pozwany przedkłada 10 potwierdzeń przelewów na konto powoda, gdzie wskazano wpłaty na rzecz pozwanego od obcokrajowców, ale wpłaty dokonywane były na prywatne konto Pana Michała Wiatraka" (D03)',
+   rek:'Przyjąć 10 potwierdzeń jako własne dowody. Zidentyfikować nadawców i kwoty. Wskazać że Pozwana sama dostarczyła dowód wpłat na konto Powoda — relewantne przy wyliczeniu szkody i zdolności zarobkowej.',
+   status:'potwierdzony'},
+
+  {id:'LA-17',type:'la-data-przyszla',autor:'adw. Andrzej Ciecierski / Lorica Iuris',
+   doc:'D03 — pismo procesowe (19.10.2025), akapit główny',
+   zamierzenie:'Wykazać że Powód świadczył usługi dla Trabahante w konkretnej dacie.',
+   skutek_rzecz:'Pismo datowane 19.10.2025. Powołany przelew: "w dniu 15.11.2025r. (data wykonania przelewu)". Data przelewu 27 dni późniejsza niż pismo — nie istniał w chwili składania. Przy korekcie na 15.11.2024: przelew wykracza poza zakres zobowiązania Sądu (wrzesień–październik 2024).',
+   skutek_odwr:true,severity:'KRYTYCZNE',
+   cytat:'"w dniu 15.11.2025r. (data wykonania przelewu) Powód [świadczył] usługi na rzecz firmy Trabahante sp z o.o." — pismo datowane 19.10.2025 (D03)',
+   rek:'Wskazać niespójność dat. W każdym wariancie interpretacji (rok 2025 lub 2024) dowód jest albo z przyszłości albo poza zakresem zobowiązania Sądu.',
+   status:'potwierdzony'},
+
+  {id:'LA-18',type:'la-kwalifikacja-techniczna',autor:'adw. Andrzej Ciecierski / Lorica Iuris',
+   doc:'D03 — s. 1, opis dokumentu z komputera służbowego',
+   zamierzenie:'Wykazać że Powód podpisał umowę z Trabahante na komputerze służbowym HPG.',
+   skutek_rzecz:'Profil zaufany jest przypisany do OSOBY (PESEL) przez ePUAP/mObywatel — nie do urządzenia. Podpisanie dokumentu profilem zaufanym możliwe z dowolnego urządzenia. Fakt znalezienia skanu PDF na komputerze służbowym nie dowodzi że podpis złożono na tym urządzeniu — skan mógł zostać tam skopiowany lub przesłany e-mailem.',
+   skutek_odwr:false,severity:'ISTOTNE',
+   cytat:'"skan dokumentu zapisanego w formacie pdf i podpisanego profilem zaufanym powoda opatrzonym datą 16.05.2024r." znaleziony na komputerze służbowym powoda (D03)',
+   rek:'Wskazać Sądowi że profil zaufany jest przypisany do osoby, nie urządzenia. Wnioskować o biegłego z zakresu podpisu elektronicznego. ⚠ Wymaga weryfikacji aktualnego stanu prawnego w ISAP.',
+   status:'potwierdzony'},
+
+  {id:'LA-19',type:'la-rodzaj',autor:'adw. Andrzej Ciecierski / Lorica Iuris',
+   doc:'D03 — s. 2, oświadczenie i wniosek dowodowy',
+   zamierzenie:'Złożyć oświadczenie HPG i wniosek dowodowy w jej imieniu.',
+   skutek_rzecz:'"Pozwany oświadcza" — HPG to spółka, konsekwentnie "Pozwana" (r. żeński). Czwarty błąd rodzaju w trzech pismach: D02 "od powódki" + D03s1 "od pozwanego" + D03s2 "przez pozwanego" + D03s2 "Pozwany oświadcza". Wzorzec systemowy: kopiowanie szablonów bez weryfikacji rodzaju gramatycznego.',
+   skutek_odwr:false,severity:'ISTOTNE',
+   cytat:'"Pozwany oświadcza, że nigdy nie otrzymał od powoda jakichkolwiek wpłat z tego tytułu" — HPG sp. z o.o. = "Pozwana" r. żeński (D03)',
+   rek:'Zestawić wszystkie cztery błędy rodzaju (D02 + D03) jako wzorzec systemowy i wskazać Sądowi.',
+   status:'potwierdzony'}
+];
+
+
+/* ═══ ROSZCZENIA ═══ */
+/*
+  Typy roszczeń:
+  'pieniezne'   — żądanie zapłaty kwoty
+  'niepienieze' — przywrócenie do pracy, sprostowanie świadectwa, zaniechanie
+  'procesowe'   — wnioski dowodowe, proceduralne, o koszty
+  'inne'        — inne żądania
+
+  Status: 'aktywne' | 'sporne' | 'zaspokojone' | 'cofniete'
+
+  Tryb: 'pozew'|'odpowiedz'|'przedsad'|'all'
+  Przy trybie 'odpowiedz' → wypełnij pole odniesienia[] (co mówi przeciwnik)
+
+  Kwota: liczba lub null (dla niepieniężnych)
+*/
+const roszczenia=[
+  /* PRZYKŁAD STRUKTURY — wypełnić danymi ze sprawy:
+  {
+    id:'R-01',
+    typ:'pieniezne',
+    tryb:'pozew',               // 'pozew'|'odpowiedz'|'przedsad'|'all'
+    tytul:'Zaległe wynagrodzenie za październik 2024',
+    podstawa:'art. 80 KP',     // ⚠ wymaga weryfikacji ISAP
+    kwota:4200,                 // lub null
+    waluta:'PLN',
+    od_daty:'2024-11-01',
+    status:'aktywne',           // aktywne|sporne|zaspokojone|cofniete
+    opis:'Wynagrodzenie za październik 2024 nie zostało wypłacone.',
+    dowody:['EV1','EV3'],       // ID z tablicy evidence[]
+    odniesienia:[               // wypełnić przy trybie odpowiedź na pozew
+      {
+        strona:'pozwana',
+        doc:'D02',
+        tekst:'Pozwana zaprzecza zaległości — wynagrodzenie wypłacono 10.11.2024',
+        ocena_wpływu:'słabe',   // 'silne'|'srednie'|'slabe'|'neutralne'
+        mozliwosc_podwazenia:'Brak potwierdzenia przelewu w materiale. Wnioskować o historię rachunku.'
+      }
+    ],
+    rek:'Złożyć wniosek o zobowiązanie Pozwanej do przedłożenia wyciągu bankowego za listopad 2024.'
+  },
+  */
+];
+
+let roszMode='pozew';
+
+function setRoszMode(mode, btn){
+  roszMode=mode;
+  document.querySelectorAll('.ms-badge').forEach(b=>{
+    b.style.background='var(--color-background-primary)';
+    b.style.color='var(--color-text-secondary)';
+    b.style.border='.5px solid var(--color-border-secondary)';
+  });
+  const clsMap={pozew:'msb-pozew',odpowiedz:'msb-odpowiedz',przedsad:'msb-przedsad'};
+  btn.className='ms-badge '+clsMap[mode];
+  const info={
+    pozew:'Lista roszczeń i wniosków z pozwu / pisma procesowego',
+    odpowiedz:'Roszczenia + odniesienia Pozwanej + możliwości wpływu / podważenia',
+    przedsad:'Roszczenia z pisma przedsądowego — przed wszczęciem postępowania'
+  };
+  document.getElementById('ms-info').textContent=info[mode]||'';
+  renderRoszczenia('all');
+  document.querySelector('#rosz-filters .fbtn').click();
+}
+
+function roszTypLbl(t){
+  return {pieniezne:'[PIENIĘŻNE]',niepienieze:'[NIEPIENIĘŻNE]',procesowe:'[PROCESOWE]',inne:'[INNE]'}[t]||t.toUpperCase();
+}
+function roszTypCls(t){
+  return {pieniezne:'rt-pien',niepienieze:'rt-niem',procesowe:'rt-proc',inne:'rt-inn'}[t]||'rt-inn';
+}
+function roszStatusCls(s){
+  return {aktywne:'rs-aktywne',sporne:'rs-sporne',zaspokojone:'rs-zaspokojone',cofniete:'rs-cofniete'}[s]||'rs-aktywne';
+}
+function roszStatusLbl(s){
+  return {aktywne:'Aktywne',sporne:'Sporne',zaspokojone:'Zaspokojone',cofniete:'Cofnięte'}[s]||s;
+}
+function ocenaWplywuCls(o){
+  return {silne:'color:#791F1F;font-weight:600',srednie:'color:#633806;font-weight:500',slabe:'color:#27500A',neutralne:'color:var(--color-text-secondary)'}[o]||'';
+}
+
+function renderRoszczenia(filter){
+  const showOdn = roszMode==='odpowiedz';
+  let list = roszczenia;
+  if(filter && filter!=='all'){
+    if(['aktywne','sporne','zaspokojone','cofniete'].includes(filter))
+      list=roszczenia.filter(r=>r.status===filter);
+    else
+      list=roszczenia.filter(r=>r.typ===filter);
+  }
+  if(!list.length){
+    document.getElementById('rosz-list').innerHTML='<div class="empty">Brak roszczeń w tej kategorii — wypełnij tablicę roszczenia[] w danych</div>';
+    return;
+  }
+  document.getElementById('rosz-list').innerHTML=list.map(r=>{
+    const kwotaStr=r.kwota!=null?
+      `<span style="font-weight:600;color:var(--color-text-primary)">${r.kwota.toLocaleString('pl-PL')} ${r.waluta||'PLN'}</span>`:
+      '<span style="color:var(--color-text-secondary)">niepieniężne</span>';
+    const odnHtml = showOdn && r.odniesienia && r.odniesienia.length ?
+      r.odniesienia.map(o=>`
+        <div class="odniesienie-block odn-${o.strona}">
+          <div class="odn-src">${o.strona.toUpperCase()} · ${o.doc||''}</div>
+          <div class="odn-text">${o.tekst}</div>
+          ${o.ocena_wpływu?`<div style="font-size:11px;margin-top:4px">Siła stanowiska: <span style="${ocenaWplywuCls(o.ocena_wpływu)}">${o.ocena_wpływu.toUpperCase()}</span></div>`:''}
+          ${o.mozliwosc_podwazenia?`<div class="podwaz-box">⚡ Jak podważyć: ${o.mozliwosc_podwazenia}</div>`:''}
+        </div>`).join('') :
+      (showOdn ? '<div style="font-size:11px;color:var(--color-text-tertiary);padding:4px 0">Brak odwołania Pozwanej do tego roszczenia</div>' : '');
+    return `<div class="rosz-block">
+      <div class="rosz-hdr">
+        <span class="rosz-tag ${roszTypCls(r.typ)}">${roszTypLbl(r.typ)}</span>
+        <div class="rosz-title">${r.id} — ${r.tytul}</div>
+        <span class="rosz-status ${roszStatusCls(r.status)}">${roszStatusLbl(r.status)}</span>
+      </div>
+      <div class="rosz-row">
+        <span class="rrl">Podstawa prawna</span>
+        <span class="rrv">${r.podstawa||'—'} ${r.podstawa?'<span style="font-size:10px;color:#791F1F">⚠ weryfikacja ISAP</span>':''}</span>
+        <span class="rrl">Kwota</span><span class="rrv">${kwotaStr}</span>
+        ${r.od_daty?`<span class="rrl">Od daty</span><span class="rrv">${r.od_daty}</span>`:''}
+        ${r.opis?`<span class="rrl">Opis</span><span class="rrv">${r.opis}</span>`:''}
+        ${r.dowody&&r.dowody.length?`<span class="rrl">Dowody</span><span class="rrv">${r.dowody.join(', ')}</span>`:''}
+      </div>
+      ${odnHtml}
+      ${r.rek?`<div class="rosz-rec">${r.rek}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function filterRosz(type,btn){
+  document.querySelectorAll('#rosz-filters .fbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderRoszczenia(type);
+}
+
+
+/* ═══ STRONY I ŚWIADKOWIE ═══ */
+const persons=[
+  {id:'P01',kat:'pow',initials:'MW',name:'Michał Wiatrak',
+   rola:'Powód / były pracownik',
+   status_proc:'Powód pro se — bez pełnomocnika',
+   umocowanie:'Strona czynna; pisma składane osobiście',
+   dane:'ul. Azot 2A/31, 43-600 Jaworzno; PESEL: w aktach',
+   uwagi:'W dokumentach pojawia się też jako "Michał Wiatr" (pokwitowanie 9.10.2024) — IDENT-1 KRYTYCZNE'},
+  {id:'P02',kat:'poz',initials:'HPG',name:'Human Park Global sp. z o.o.',
+   rola:'Pozwana / były pracodawca',
+   status_proc:'Pozwana — reprezentowana przez adw. Andrzeja Ciecierskiego',
+   umocowanie:'Pełnomocnik: adw. Andrzej Ciecierski (Lorica Iuris). Organy: Juneyoung Park (Prezes), Sang Youl Park (Czł. Zarządu)',
+   dane:'KRS 0000796445, ul. Pukowca 15, 40-847 Katowice',
+   uwagi:'W D04 wymieniona jako nadawca łącznie z "Human Park sp. z o.o." — dwie różne spółki'},
+  {id:'P03',kat:'poz',initials:'HP',name:'Human Park sp. z o.o.',
+   rola:'Drugi podmiot w nagłówku D04',
+   status_proc:'Formalnie nieobecna w treści D04 — LA-PODMIOT-POWTORZONY',
+   umocowanie:'Brak informacji o odrębnym pełnomocnictwie',
+   dane:'ul. Pukowca 15, 40-847 Katowice (domniemanie — ten sam adres)',
+   uwagi:'Wymieniona w nagłówku D04 ale nie w treści — wezwanie D04 jej formalnie nie dotyczy'},
+  {id:'P04',kat:'poz',initials:'MK',name:'Maria Koroleva',
+   rola:'General Manager / bezpośrednia przełożona Powoda / potencjalny sprawca mobbingu',
+   status_proc:'Świadek wnioskowany przez Pozwaną; zawiadomienie o nękaniu 1.04.2025',
+   umocowanie:'Brak umocowania do reprezentacji spółki. Rola operacyjna.',
+   dane:'Powiązana z Lorica Iuris przez sprawę VIII W 633/25',
+   uwagi:'Zeznania w VIII W 633/25 kwestionowane jako fałszywe (art. 233 §1 KK). Kluczowa dla roszczeń mobbingowych.'},
+  {id:'P05',kat:'os',initials:'AC',name:'adw. Andrzej Ciecierski',
+   rola:'Pełnomocnik Pozwanej / wspólnik Lorica Iuris Ciecierski Rak Sp.k.',
+   status_proc:'Pełnomocnik procesowy Pozwanej we wszystkich pismach D01–D05',
+   umocowanie:'Pełnomocnictwo zdeponowane w kancelarii (wzmianka w D05)',
+   dane:'Lorica Iuris, ul. Pukowca 15, 40-847 Katowice; katowice@loricaiuris.pl',
+   uwagi:'Wspólnik kancelarii — nie "zewnętrzny radca". Paweł Rak (drugi wspólnik) powołany jako świadek przez Powoda.'},
+  {id:'P06',kat:'sw',initials:'PR',name:'Paweł Rak',
+   rola:'Radca prawny / wspólnik Lorica Iuris Ciecierski Rak Sp.k.',
+   status_proc:'Osoba wnioskowana przez Powoda jako świadek — Pozwana wnosi o pominięcie',
+   umocowanie:'Wspólnik kancelarii reprezentującej Pozwaną — nie zewnętrzny doradca',
+   dane:'Lorica Iuris, ul. Pukowca 15, Katowice',
+   uwagi:'LA-PODMIOT-ROLA: Pozwana kwalifikuje go jako "radcę obsługującego spółkę" zamiast wspólnika kancelarii reprezentującej Pozwaną.'},
+  {id:'P07',kat:'poz',initials:'JP',name:'Juneyoung Park',
+   rola:'Prezes Zarządu Pozwanej',
+   status_proc:'Osoba uprawniona do reprezentacji HPG; wnioskowana do przesłuchania z tłumaczem',
+   umocowanie:'Prezes Zarządu HPG',
+   dane:'Wymaga tłumacza j. koreańskiego (wg D02)',
+   uwagi:'Adresat wezwania D04 ("Prezes Spółek Pan Juneyoung Park") — co sugeruje że D04 dotyczy obu spółek (HPG i HP).'}
+];
+
+/* ═══ NAZEWNICTWO PROCESOWE ═══ */
+const nazewnictwo=[
+  {id:'NZ-1',status:'err',
+   title:'[LA-RODZAJ] D05 petitum: "od powódki" — Powód to mężczyzna',
+   cytat:'"zasądzenie od powódki na rzecz Pozwanej kosztów procesu" (D02 petitum, 8.04.2025)',
+   problem:'Powód to Michał Wiatrak — mężczyzna. Forma "powódka" (r. żeński) = nieistniejąca strona w tym postępowaniu. Wzorzec kopiowania szablonu ze sprawy z kobietą.',
+   skutek:'Wniosek o koszty dotyczy "powódki" której nie ma — przy dosłownej interpretacji Sąd może oddalić.',
+   rek:'Wskazać Sądowi i nie wnosić o sprostowanie — błąd leży po stronie Pozwanej.'},
+  {id:'NZ-2',status:'err',
+   title:'[LA-RODZAJ] D04 treść: "Human Park Global i Human Park Global" — dwie razy ta sama spółka',
+   cytat:'"Działając w imieniu Spółek Human Park Global sp. z o.o. i Human Park Global sp. z o.o." (D04, treść)',
+   problem:'Nagłówek: HPG + HP (dwie różne spółki). Treść: HPG + HPG (ta sama dwukrotnie). Wzorzec: LA-PODMIOT-POWTORZONY.',
+   skutek:'Wezwanie formalnie pochodzi tylko od HPG. Human Park sp. z o.o. nie jest objęta treścią wezwania.',
+   rek:'Wskazać rozbieżność — wezwanie D04 nie wywołuje skutków wobec HP sp. z o.o.'},
+  {id:'NZ-3',status:'err',
+   title:'[LA-RODZAJ] D03: "Pozwany oświadcza" — HPG to spółka (r. żeński = Pozwana)',
+   cytat:'"Pozwany oświadcza, że nigdy nie otrzymał od powoda jakichkolwiek wpłat" (D03)',
+   problem:'HPG to spółka → r. żeński → "Pozwana". Wzorzec systemowy: czwarty błąd rodzaju gramatycznego w pismach Lorica Iuris (D02, D03×2, D04).',
+   skutek:'Oświadczenie złożone przez "Pozwanego" który w tym postępowaniu nie istnieje.',
+   rek:'Zestawić wszystkie 4 błędy rodzaju jako wzorzec systemowy dla Sądu.'},
+  {id:'NZ-4',status:'warn',
+   title:'[LA-KWALIFIKACJA-PRAWNA] D04: "wrażenie nękania" zamiast "uzasadnione poczucie zagrożenia"',
+   cytat:'"działania, które w moich Mocodawcach wywołują wrażenie nękania" (D04)',
+   problem:'"Wrażenie" = kategoria subiektywna. Art. 190a §1 KK wymaga "uzasadnionego poczucia zagrożenia" lub "istotnego naruszenia prywatności" — kategorii obiektywnych. Własne sformułowanie Lorica Iuris nie osiąga progu ustawowego znamienia.',
+   skutek:'Zarzut art. 190a §1 KK oparty na "wrażeniu" jest procesowo słaby — nie opisuje ustawowych znamion.',
+   rek:'Wskazać że "wrażenie nękania" ≠ "uzasadnione poczucie zagrożenia". ⚠ Zweryfikować art. 190a §1 KK w ISAP.'}
+];
+
+/* ═══ KWESTIE SPORNE DIS ═══ */
+const dis_items=[
+  {id:'DIS-01',title:'Charakter prawny 4. umowy o pracę — terminowa vs bezterminowa (art. 25¹ KP)',
+   priorytet:'KRYTYCZNA',
+   bezsporne:'Zawarto 4 umowy na czas określony. KRS pracodawcy 0000796445 identyczny dla wszystkich. Zmiana nazwy z "Human Park" na "Human Park Global" nie zmienia KRS.',
+   pow:'4. umowa (29.12.2023, okres 01.01–31.12.2024) jest z mocy prawa umową na czas nieokreślony (art. 25¹ §3 KP). Nie mogła wygasnąć przez upływ czasu.',
+   poz:'"Umowa była na czas określony i wygasła samoczynnie 31.12.2024" (D05). Alternatywnie: nawet przy nieważności porozumienia umowa wygasłaby 31.12.2024.',
+   przepisy:[
+     {art:'art. 25¹ §1 i §3 KP — limit 3 umów terminowych; 4. staje się bezterminową z mocy prawa',hg:true},
+     {art:'art. 30 §1 pkt 4 KP — rozwiązanie umowy terminowej przez upływ czasu (dotyczy tylko umów terminowych)',hg:true}
+   ],
+   rek:'Złożyć pismo z tabelą 4 umów i KRS 0000796445. Wskazać że "alternatywny" argument Lorica też odpada (opiera się na tej samej błędnej przesłance). ⚠ Zweryfikować art. 25¹ KP w ISAP.'},
+  {id:'DIS-02',title:'Ważność porozumienia z 9.10.2024 — dobrowolność vs wada oświadczenia woli',
+   priorytet:'KRYTYCZNA',
+   bezsporne:'Porozumienie zostało podpisane 9.10.2024. Poprzedzało je pismo z 7.10.2024 o możliwym zwolnieniu dyscyplinarnym.',
+   pow:'Porozumienie zawarte pod wpływem groźby bezprawnej (art. 87 KC) — mobbing Koroleva + zagrożenie utratą zatrudnienia. Nieważne.',
+   poz:'"Nie zostało skutecznie zakwestionowane ani uznane za nieważne" (D05). "Ostrożnościowo": nawet przy nieważności umowa i tak wygasłaby 31.12.2024.',
+   przepisy:[
+     {art:'art. 87 KC w zw. z art. 300 KP — groźba bezprawna jako wada oświadczenia woli',hg:true},
+     {art:'art. 94³ §3 KP — odszkodowanie za mobbing',hg:true}
+   ],
+   rek:'Lorica Iuris sama w D05 buduje scenariusz nieważności ("ostrożnościowy" akapit) — wskazać jako przyznanie otwartości kwestii. Zebrać dowody mobbingu.'},
+  {id:'DIS-03',title:'Zasadność roszczeń o zaległe wynagrodzenie XI 2024 – IV 2026',
+   priorytet:'KRYTYCZNA',
+   bezsporne:'Wynagrodzenie za ten okres nie zostało wypłacone. Wezwanie do zapłaty z 2.05.2026 (D07) zostało doręczone. Termin 7 dni minął.',
+   pow:'111.044,46 zł brutto (70% GUS, tabela kwartalna w D07). Odsetki ustawowe od dat wymagalności. Podstawa: art. 80, 85 §1-2 KP.',
+   poz:'"Żądanie nie może zostać uznane" bo umowa wygasła (D05). Metodologia GUS nie wskazana w piśmie Lorica.',
+   przepisy:[
+     {art:'art. 80 KP — wynagrodzenie za wykonaną pracę',hg:true},
+     {art:'art. 85 §1-2 KP — termin wypłaty wynagrodzenia',hg:true},
+     {art:'art. 481 §1-2 KC w zw. z art. 300 KP — odsetki za opóźnienie',hg:true}
+   ],
+   rek:'Argument Pozwanej odpada jeśli DIS-01 rozstrzygnięty na korzyść Powoda. Zweryfikować metodologię: GUS vs wynagrodzenie z umowy.'},
+  {id:'DIS-04',title:'Zarzut stalkingu / nękania (art. 190a §1 KK) w D04',
+   priorytet:'ISTOTNA',
+   bezsporne:'Wezwanie D04 zostało wysłane. Wiatrak kontaktował się z osobami powiązanymi z HPG.',
+   pow:'Kontakt związany ze sporem sądowym i zabezpieczaniem materiału dowodowego — nie stalking. Lorica Iuris nie podała żadnego konkretnego zdarzenia.',
+   poz:'"Wywołują wrażenie nękania co może wypełniać znamiona art. 190a §1 KK" (D04). Blokada na komunikatorach.',
+   przepisy:[
+     {art:'art. 190a §1 KK — stalking: znamię "uzasadnionego poczucia zagrożenia" (⚠ nie "wrażenia")',hg:true}
+   ],
+   rek:'Trzy argumenty: (1) brak konkretnych faktów w D04 [LA-BRAK-KONKRETYZACJI]; (2) "wrażenie" ≠ "uzasadnione poczucie zagrożenia" [LA-KWALIFIKACJA-PRAWNA]; (3) blokada wyklucza twierdzenie o odbiorze wiadomości [INTRA-SAMOOBALA]. ⚠ Zweryfikować art. 190a §1 KK w ISAP.'},
+  {id:'DIS-05',title:'Ryzyko propozycji ugodowej z D08 — warunek działań karnych wobec Koroleva',
+   priorytet:'ISTOTNA',
+   bezsporne:'D08 zawiera propozycję ugody warunkującą wycofanie roszczeń od czynnej współpracy HPG w postępowaniu karnym wobec Koroleva.',
+   pow:'Propozycja uzasadniona — zeznania Koroleva kwestionowane jako fałszywe (VIII W 633/25).',
+   poz:'HPG mało prawdopodobne żeby przyjęło warunek działań karnych wobec własnego pracownika.',
+   przepisy:[
+     {art:'art. 191 §2 KK — wymuszenie rozbójnicze / przymus nieodparty — weryfikacja czy propozycja przekracza granicę',hg:true},
+     {art:'art. 917-918 KC — ugoda sądowa i pozasądowa',hg:true}
+   ],
+   rek:'Przeformułować propozycję ugodową wyłącznie w kategoriach finansowych. Warunek działań karnych jest procesowo ryzykowny i prawdopodobnie nieskuteczny.'}
+];
+
+
+/* ── RENDER: Strony ── */
+function avCls(k){return k==='pow'?'av-pow':k==='poz'?'av-poz':k==='sw'?'av-sw':'av-os'}
+function avLbl(k){return k==='pow'?'Powód':k==='poz'?'Pozwana/Organ':k==='sw'?'Świadek':'Osoba trzecia'}
+function avColor(k){return k==='pow'?'#E6F1FB':k==='poz'?'#FAEEDA':k==='sw'?'#F3F0FE':'#F1EFE8'}
+function avTxtColor(k){return k==='pow'?'#0C447C':k==='poz'?'#633806':k==='sw'?'#3C3489':'#5F5E5A'}
+
+function renderPersons(){
+  if(!document.getElementById('persons-list'))return;
+  document.getElementById('persons-list').innerHTML=persons.map(p=>`
+    <div class="person-card">
+      <div class="person-hdr">
+        <div class="avatar ${avCls(p.kat)}">${p.initials}</div>
+        <div style="flex:1">
+          <div class="person-name">${p.name}</div>
+          <div class="person-role">${p.rola}</div>
+        </div>
+        <span class="badge" style="background:${avColor(p.kat)};color:${avTxtColor(p.kat)}">${avLbl(p.kat)}</span>
+      </div>
+      <div class="person-grid">
+        <span class="pg-label">Status proc.</span><span class="pg-val">${p.status_proc}</span>
+        <span class="pg-label">Umocowanie</span><span class="pg-val">${p.umocowanie}</span>
+        <span class="pg-label">Dane/ref.</span><span class="pg-val">${p.dane}</span>
+        <span class="pg-label">Uwagi</span><span class="pg-val" style="color:${p.uwagi.includes('IDENT')||p.uwagi.includes('LA-')?'#A32D2D':'var(--color-text-primary)'}">${p.uwagi}</span>
+      </div>
+    </div>`).join('');
+  document.getElementById('badge-strony').textContent=persons.length;
+}
+
+/* ── RENDER: Nazewnictwo ── */
+function renderNazw(){
+  if(!document.getElementById('nazw-list'))return;
+  document.getElementById('nazw-list').innerHTML=nazewnictwo.map(n=>`
+    <div class="nazw-block ${n.status==='err'?'nazw-err':'nazw-warn'}">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+        <span class="badge ${n.status==='err'?'badge-crit':'badge-warn'}">${n.id}</span>
+        <span style="font-size:13px;font-weight:500;color:var(--color-text-primary);flex:1">${n.title}</span>
+      </div>
+      <div class="cite-block" style="margin-bottom:8px">
+        <div class="cite-src">Cytat z pisma</div>
+        <div class="cite-text">${n.cytat}</div>
+      </div>
+      <div style="font-size:12px;margin-bottom:6px;line-height:1.6"><strong>Problem:</strong> ${n.problem}</div>
+      <div style="font-size:12px;margin-bottom:6px;line-height:1.6;color:${n.status==='err'?'#A32D2D':'#633806'}"><strong>Skutek:</strong> ${n.skutek}</div>
+      <div class="c-rec">${n.rek}</div>
+    </div>`).join('');
+}
+
+/* ── RENDER: DIS kwestie sporne ── */
+function renderDIS(){
+  if(!document.getElementById('dis-list'))return;
+  const pMap={KRYTYCZNA:'bc',ISTOTNA:'bw',POBOCZNA:'bi'};
+  document.getElementById('dis-list').innerHTML=dis_items.map(d=>`
+    <div>
+      <button class="dis-btn" onclick="toggleDIS('${d.id}')">
+        <span class="badge ${pMap[d.priorytet]||'bi'}">${d.id}</span>
+        <span style="font-size:13px;font-weight:500;color:var(--color-text-primary);flex:1;text-align:left">${d.title}</span>
+        <span class="badge ${pMap[d.priorytet]||'bi'}">${d.priorytet}</span>
+        <span style="font-size:11px;color:var(--color-text-tertiary);margin-left:4px">${d.przepisy.length} przepis${d.przepisy.length>1?'y':''} ▾</span>
+      </button>
+      <div id="dis-${d.id}" class="dis-detail">
+        <div style="margin-bottom:10px">
+          <div style="font-size:11px;font-weight:600;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px">Common ground — fakty bezsporne</div>
+          <div class="common-box">${d.bezsporne}</div>
+        </div>
+        <div class="grid2" style="margin-bottom:10px">
+          <div>
+            <div style="font-size:11px;font-weight:600;color:#185FA5;margin-bottom:5px">Stanowisko Powoda</div>
+            <div class="cite-block"><div class="cite-text" style="border-left-color:#185FA5">${d.pow}</div></div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:600;color:#854F0B;margin-bottom:5px">Stanowisko Pozwanej</div>
+            <div class="cite-block"><div class="cite-text" style="border-left-color:#854F0B">${d.poz}</div></div>
+          </div>
+        </div>
+        <div style="margin-bottom:10px">
+          <div style="font-size:11px;font-weight:600;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px">Stosowne przepisy <span class="hg-badge">HARDGATE</span></div>
+          ${d.przepisy.map(pr=>`<div class="law-box">${pr.art}</div>`).join('')}
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;color:#3C3489;margin-bottom:5px">Rekomendacje procesowe</div>
+          <div class="c-rec" style="line-height:1.7">${d.rek}</div>
+        </div>
+        <button class="send-btn" style="margin-top:8px" onclick="sendPrompt('Przeanalizuj kwestię sporną ${d.id} — ${d.title} — i zaproponuj argumentację procesową dla Powoda')">Głębsza analiza ${d.id} ↗</button>
+      </div>
+    </div>`).join('');
+  document.getElementById('badge-dis').textContent=dis_items.length;
+}
+
+function toggleDIS(id){
+  const el=document.getElementById('dis-'+id);
+  if(el) el.classList.toggle('open');
+}
+
+
+function scoreClass(s){return s>=7?'score-hi':s>=4?'score-mid':'score-lo'}
+function scoreColor(s){return s>=7?'#639922':s>=4?'#BA7517':'#E24B4A'}
+
+function typeLabel(t){
+  return t==='legal'?'⚖ [LEG] Z prawem':
+         t==='intra'?'🔄 [INTRA] Zmiana narracji':
+         t==='inter'?'🔀 [CROSS] Między dok.':
+         '❓ [DOUBT] Wątpliwość';
+}
+function typeCls(t){
+  return t==='legal'?'type-legal':
+         t==='intra'?'type-intra':
+         t==='inter'?'type-inter':
+         'type-doubt';
+}
+function statusCls(s){
+  return s==='KRYTYCZNE'?'status-crit':
+         s==='DO SPRAWDZENIA'?'status-check':
+         'status-warn';
+}
+
+/* ═══ RENDER HELPERS ═══ */
+function renderEvidence(){
+  if(!evidence.length){document.getElementById('evidence-list').innerHTML='<div class="empty">Brak danych — użyj przycisku ✦ Analizuj z AI</div>';return;}
+  document.getElementById('evidence-list').innerHTML=evidence.map(e=>{
+    const statusBadge=e.status?`<span class="badge badge-check" style="margin-left:4px">${e.status}</span>`:'';
+    return `<div class="evidence-row">
+      <div class="score-circle ${scoreClass(e.score)}">${e.score.toFixed(1)}</div>
+      <div style="flex:1">
+        <div class="ev-name">${e.name}${statusBadge}</div>
+        <div class="ev-meta">${e.type} · ${e.date}${e.alerts&&e.alerts.length?' · <span style="color:#E24B4A">'+e.alerts.length+' alert(y)</span>':''}</div>
+        <div class="strength-bar"><div class="strength-fill" style="width:${e.score*10}%;background:${scoreColor(e.score)}"></div></div>
+        ${e.desc?`<div style="font-size:11px;color:var(--color-text-secondary);margin-top:2px">${e.desc}</div>`:''}
+      </div>
+      <span class="badge badge-${e.level.toLowerCase()}">${e.level}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderContradictions(filter){
+  const list=filter&&filter!=='all'?contradictions.filter(c=>c.type===filter):contradictions;
+  if(!list.length){
+    document.getElementById('contra-list').innerHTML='<div class="empty">Brak sprzeczności w tej kategorii</div>';
+    return;
+  }
+  document.getElementById('contra-list').innerHTML=list.map(c=>{
+    const citeHtml=c.cites&&c.cites.length?c.cites.map(ci=>`
+      <div class="cite-block">
+        <div class="cite-source">${ci.label||ci.doc}</div>
+        <div class="cite-text">${ci.text}</div>
+        <div class="cite-loc">📄 ${ci.doc} — ${ci.page}</div>
+      </div>`).join(''):'';
+    const lawHtml=c.law?`<div class="contra-law">⚖ Podstawa prawna: <strong>${c.law}</strong></div>`:'';
+    const recHtml=c.rec?`<div class="contra-rec">💡 ${c.rec}</div>`:'';
+    return `<div class="contra-block" data-type="${c.type}">
+      <div class="contra-header">
+        <span class="contra-type ${typeCls(c.type)}">${typeLabel(c.type)}</span>
+        <div class="contra-title">${c.title}</div>
+        <span class="contra-status ${statusCls(c.status)}">${c.status}</span>
+      </div>
+      ${citeHtml}
+      ${lawHtml}
+      ${recHtml}
+    </div>`;
+  }).join('');
+}
+
+function renderAlerts(){
+  const fmt=(list,cls)=>list.length?list.map(a=>`
+    <div class="alert-block alert-${cls}">
+      <div class="alert-title">[${a.code}] ${a.dowod}</div>
+      <div class="alert-body">${a.ryzyko}</div>
+      <div class="alert-body"><strong>Rek.:</strong> ${a.rek}</div>
+      <div class="alert-body" style="margin-top:4px;opacity:.75">${a.podstawa}</div>
+    </div>`).join(''):'<div style="font-size:12px;color:var(--color-text-secondary);padding:8px">Brak</div>';
+  document.getElementById('alerts-crit').innerHTML=fmt(alerts_data.crit,'crit');
+  document.getElementById('alerts-warn').innerHTML=fmt(alerts_data.warn,'warn');
+  document.getElementById('alerts-info').innerHTML=fmt(alerts_data.info,'info');
+}
+
+function renderCoverage(){
+  if(!coverage_data.length)return;
+  document.getElementById('coverage-list').innerHTML=coverage_data.map(c=>`
+    <div class="coverage-item">
+      <div class="coverage-dot dot-${c.status==='full'?'full':c.status==='partial'?'partial':'none'}"></div>
+      <div style="flex:1">
+        <div class="cov-label">${c.label}</div>
+        <div style="font-size:11px;color:var(--color-text-secondary)">${c.dowod}</div>
+      </div>
+      <span class="cov-status stat-${c.status==='full'?'full':c.status==='partial'?'partial':'none'}">
+        ${c.status==='full'?'Pokryte':c.status==='partial'?'Częściowe':'Brak'}
+      </span>
+    </div>`).join('');
+  if(gaps.length)document.getElementById('gaps-list').innerHTML=gaps.map(g=>`
+    <div style="padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary)">
+      <div style="font-size:13px;font-weight:500;color:#E24B4A;margin-bottom:2px">${g.gap}</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">${g.action}</div>
+      ${g.dotyczy&&g.dotyczy.length?`<div style="font-size:10px;color:var(--color-text-tertiary);margin-top:3px">Dotyczy: ${g.dotyczy.join(', ')}</div>`:''}
+    </div>`).join('');
+}
+
+function renderTerminy(){
+  if(!terminy.length)return;
+  const today=new Date();
+  document.getElementById('timeline-list').innerHTML=terminy.map(t=>{
+    const d=new Date(t.date),diff=Math.round((d-today)/864e5);
+    const dc=diff<0?'tl-blue':diff<=7?'tl-red':'tl-amber';
+    const dl=diff<0?`Minął ${Math.abs(diff)} dni temu`:diff===0?'Dziś!':diff<=7?`${diff} dni!`:`${diff} dni`;
+    const dtc=diff<0?'days-past':diff<=7?'days-urgent':'days-ok';
+    return `<div class="timeline-item">
+      <div class="tl-dot ${dc}">📅</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+          <div class="tl-title">${t.label}</div>
+          <span class="tl-days ${dtc}">${dl}</span>
+          <span class="badge" style="background:#EEEDFE;color:#3C3489">${t.type}</span>
+        </div>
+        <div class="tl-date">${t.date} · ${t.code}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderRaport(){
+  if(!evidence.length)return;
+  const avg=evidence.reduce((a,e)=>a+e.score,0)/evidence.length;
+  const v=avg>=7?'strong':avg>=5?'mid':'weak';
+  const vL={strong:'Pozycja procesowa silna',mid:'Pozycja procesowa umiarkowana',weak:'Pozycja procesowa słaba'};
+  const vS={strong:'Materiał daje podstawy do prowadzenia sprawy.',mid:'Materiał wymaga uzupełnienia w kluczowych lukach.',weak:'Niewystarczający materiał — konieczna korekta strategii.'};
+  document.getElementById('verdict-wrap').innerHTML=`
+    <div class="verdict-banner verdict-${v}">
+      <div class="verdict-title">${vL[v]}</div>
+      <div class="verdict-sub">${vS[v]}</div>
+    </div>`;
+  const pw=v==='strong'?78:v==='mid'?52:28;
+  const pc=v==='strong'?'#639922':v==='mid'?'#BA7517':'#E24B4A';
+  document.getElementById('pos-fill').style.cssText=`width:${pw}%;background:${pc}`;
+  const checkCount=contradictions.length;
+  document.getElementById('val-summary').innerHTML=
+    `<span class="badge badge-crit">Kryt.: ${alerts_data.crit.length}</span>`+
+    `<span class="badge badge-warn">Ostrzeg.: ${alerts_data.warn.length}</span>`+
+    `<span class="badge badge-check">Do spr.: ${checkCount}</span>`;
+  document.getElementById('key-evidence').innerHTML=[...evidence].sort((a,b)=>b.score-a.score).slice(0,3).map((e,i)=>`
+    <div class="evidence-row">
+      <div class="score-circle ${scoreClass(e.score)}" style="width:28px;height:28px;font-size:12px">${i+1}</div>
+      <div style="flex:1"><div class="ev-name">${e.name}</div><div class="ev-meta">${e.score.toFixed(1)}/10 · Poziom ${e.level}</div></div>
+      <span class="badge badge-${e.level.toLowerCase()}">${e.level}</span>
+    </div>`).join('');
+  if(recs.length)document.getElementById('recommendations').innerHTML=recs.map((r,i)=>`
+    <div style="display:flex;gap:8px;padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary);align-items:flex-start">
+      <span style="width:20px;height:20px;border-radius:50%;background:var(--color-background-secondary);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0">${i+1}</span>
+      <div style="font-size:13px">${r}</div>
+    </div>`).join('');
+}
+
+/* ═══ INIT ═══ */
+/* ── EKSPORT ── */
+const CASE_ID = 'VII P 94/25';
+const EXPORT_DATE = new Date().toISOString().slice(0,10);
+
+function showToast(msg){
+  const t=document.getElementById('exp-toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+function dlBlob(content,filename,mime){
+  const blob=new Blob([content],{type:mime});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=filename;a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function exportJSON(){
+  const data={
+    meta:{sygnatura:CASE_ID,data_eksportu:EXPORT_DATE,wersja:'5.5.0'},
+    evidence,alerts_data,coverage_data,gaps,terminy,recs,contradictions,lapsusy,roszczenia,persons,nazewnictwo,dis_items,mode:'A'
+  };
+  dlBlob(JSON.stringify(data,null,2),`analiza_${CASE_ID.replace(/\//g,'-')}_${EXPORT_DATE}.json`,'application/json');
+  showToast('✓ Eksport JSON gotowy');
+}
+
+function exportCSV(){
+  const header='ID;Nazwa;Typ;Poziom;Score;Alerty;Opis';
+  const rows=evidence.map(e=>[
+    e.id,
+    '"'+e.name.replace(/"/g,'""')+'"',
+    e.type,e.level,
+    e.score.toFixed(1),
+    e.alerts?e.alerts.join('|'):'',
+    '"'+(e.desc||'').replace(/"/g,'""')+'"'
+  ].join(';'));
+  dlBlob([header,...rows].join('\n'),`dowody_${CASE_ID.replace(/\//g,'-')}_${EXPORT_DATE}.csv`,'text/csv;charset=utf-8');
+  showToast('✓ Eksport CSV gotowy');
+}
+
+function exportMD(){
+  const lines=[];
+  lines.push('# Analiza dowodów — '+CASE_ID+' — '+EXPORT_DATE);
+  lines.push('');
+  lines.push('> Wygenerowano przez Analizator Dowodów v5.5 · Mój system prawny AI');
+  lines.push('> ⚠ Wszystkie przepisy wymagają weryfikacji w isap.sejm.gov.pl przed powołaniem w piśmie.');
+  lines.push('');
+
+  // Rejestr dowodów
+  lines.push('## Rejestr dowodów');
+  lines.push('');
+  evidence.forEach(e=>{
+    lines.push('### '+e.id+' — '+e.name);
+    lines.push('- **Typ:** '+e.type+' | **Poziom:** '+e.level+' | **Score:** '+e.score.toFixed(1)+'/10');
+    lines.push('- **Data:** '+e.date);
+    if(e.alerts&&e.alerts.length) lines.push('- **Alerty:** '+e.alerts.join(', '));
+    if(e.desc) lines.push('- '+e.desc);
+    lines.push('');
+  });
+
+  // Sprzeczności
+  lines.push('## Sprzeczności');
+  lines.push('');
+  contradictions.forEach(c=>{
+    const typeMap={intra:'[INTRA]',inter:'[CROSS]',legal:'[LEG]',doubt:'[DOUBT]'};
+    lines.push('### '+c.id+' — '+c.title);
+    lines.push('**Status:** '+c.status);
+    if(c.cites) c.cites.forEach(ci=>{
+      lines.push('');
+      lines.push('> **'+ci.label+'** ('+ci.doc+' — '+ci.page+')');
+      lines.push('> '+ci.text);
+    });
+    if(c.rec){lines.push('');lines.push('**Rekomendacja:** '+c.rec);}
+    lines.push('');
+  });
+
+  // Pokrycie przesłanek
+  lines.push('## Pokrycie przesłanek');
+  lines.push('');
+  coverage_data.forEach(c=>{
+    const dot=c.status==='full'?'✅':c.status==='partial'?'🔶':'❌';
+    lines.push(dot+' **'+c.label+'**');
+    lines.push('  '+c.dowod);
+    lines.push('');
+  });
+
+  // Luki
+  lines.push('## Luki krytyczne');
+  lines.push('');
+  gaps.forEach(g=>{
+    lines.push('- **'+g.gap+'**');
+    lines.push('  Działanie: '+g.action);
+    if(g.dotyczy) lines.push('  Dotyczy: '+g.dotyczy);
+    lines.push('');
+  });
+
+  // Alerty
+  lines.push('## Alerty krytyczne');
+  lines.push('');
+  (alerts_data.crit||[]).forEach(a=>{
+    lines.push('### [KRYTYCZNE] '+a.code+' — '+a.dowod);
+    lines.push(a.ryzyko);
+    lines.push('**Rekomendacja:** '+a.rek);
+    lines.push('**Podstawa:** '+a.podstawa);
+    lines.push('');
+  });
+
+  // Rekomendacje
+  lines.push('## Rekomendacje procesowe');
+  lines.push('');
+  recs.forEach((r,i)=>lines.push((i+1)+'. '+r));
+  lines.push('');
+  lines.push('---');
+  lines.push('*Wygenerowano: '+new Date().toLocaleString('pl-PL')+'*');
+
+  
+  // Strony i świadkowie
+  if(persons&&persons.length){
+    lines.push('## Strony i świadkowie');lines.push('');
+    persons.forEach(p=>{
+      lines.push(`### ${p.id} — ${p.name} [${avLbl(p.kat)}]`);
+      lines.push(`- **Rola:** ${p.rola}`);
+      lines.push(`- **Status procesowy:** ${p.status_proc}`);
+      lines.push(`- **Umocowanie:** ${p.umocowanie}`);
+      lines.push(`- **Uwagi:** ${p.uwagi}`);
+      lines.push('');
+    });
+  }
+  // Kwestie sporne DIS
+  if(dis_items&&dis_items.length){
+    lines.push('## Kwestie sporne DIS');lines.push('');
+    dis_items.forEach(d=>{
+      lines.push(`### ${d.id} — ${d.title} [${d.priorytet}]`);
+      lines.push(`**Common ground:** ${d.bezsporne}`);
+      lines.push(`**Powód:** ${d.pow}`);
+      lines.push(`**Pozwana:** ${d.poz}`);
+      d.przepisy.forEach(pr=>lines.push(`- ${pr.art} ⚠ HARDGATE`));
+      lines.push(`**Rekomendacja:** ${d.rek}`);
+      lines.push('');
+    });
+  }
+  // Roszczenia
+  if(roszczenia&&roszczenia.length){
+    lines.push('## Roszczenia i wnioski');lines.push('');
+    const total=roszczenia.filter(r=>r.kwota).reduce((s,r)=>s+r.kwota,0);
+    if(total>0) lines.push(`**Łączna wartość roszczeń pieniężnych: ${total.toLocaleString('pl-PL')} PLN**`);
+    lines.push('');
+    roszczenia.forEach(r=>{
+      lines.push(`### ${r.id} — ${r.tytul} [${(r.status||'').toUpperCase()}]`);
+      lines.push(`- **Typ:** ${roszTypLbl(r.typ)} | **Kwota:** ${r.kwota!=null?r.kwota.toLocaleString('pl-PL')+' PLN':'niepieniężne'}`);
+      lines.push(`- **Podstawa:** ${r.podstawa||'—'} ⚠ wymaga weryfikacji ISAP`);
+      if(r.opis) lines.push(`- ${r.opis}`);
+      if(r.odniesienia&&r.odniesienia.length){
+        lines.push('- **Stanowisko Pozwanej:**');
+        r.odniesienia.forEach(o=>{
+          lines.push(`  - [${o.strona}/${o.doc}]: ${o.tekst}`);
+          if(o.mozliwosc_podwazenia) lines.push(`  - Jak podważyć: ${o.mozliwosc_podwazenia}`);
+        });
+      }
+      if(r.rek) lines.push(`- **Rekomendacja:** ${r.rek}`);
+      lines.push('');
+    });
+  }
+  // Lapsusy
+  if(lapsusy&&lapsusy.length){
+    lines.push('## Lapsusy autorskie [LAPSUS]');
+    lines.push('');
+    lapsusy.forEach(la=>{
+      lines.push('### '+la.id+' — '+laTypeLabel(la.type)+' ('+la.severity+')');
+      lines.push('**Autor:** '+la.autor);
+      lines.push('**Dokument:** '+la.doc);
+      lines.push('**Zamierzenie:** '+la.zamierzenie);
+      lines.push('**Skutek rzeczywisty:** '+la.skutek_rzecz);
+      if(la.skutek_odwr) lines.push('**⚠ SKUTEK ODWROTNY DO ZAMIERZONEGO**');
+      lines.push('> '+la.cytat);
+      lines.push('**Rekomendacja:** '+la.rek);
+      lines.push('');
+    });
+  }
+  
+  dlBlob(lines.join('\n'),`raport_${CASE_ID.replace(/\//g,'-')}_${EXPORT_DATE}.md`,'text/markdown;charset=utf-8');
+  showToast('✓ Eksport Markdown gotowy');
+}
+
+
+function laTypeCls(t){
+  const map={'la-koszty':'lt-koszty','la-podmiot':'lt-podmiot','la-kwalif':'lt-kwalif',
+    'la-narr':'lt-narr','la-data':'lt-data','la-kwota':'lt-kwota',
+    'la-legal':'lt-legal','la-intencja':'lt-intencja',
+    'la-chronologia':'lt-chronologia','la-miesiac':'lt-miesiac','la-podmiot-rola':'lt-podmiot-rola','la-rodzaj':'lt-rodzaj','la-odrecznie':'lt-odrecznie','la-kwota-slownie-cyframi':'lt-kwota-slownie-cyframi','la-osoba-mylona':'lt-osoba-mylona',
+    'la-teza-dowodowa':'lt-teza-dow','la-data-przyszla':'lt-data-przyszla',
+    'la-przyznanie-korzystne':'lt-przyznanie','la-kwalifikacja-techniczna':'lt-kwalif-tech',
+    'la-zakres-dowodowy':'lt-zakres-dow','intra-samoobala':'lt-samoobala'};
+  return map[t]||'lt-podmiot';
+}
+function laTypeLabel(t){
+  const map={'la-koszty':'[LA-KOSZTY]','la-podmiot':'[LA-PODMIOT]','la-kwalif':'[LA-KWALIF]',
+    'la-narr':'[LA-NARR]','la-data':'[LA-DATA]','la-kwota':'[LA-KWOTA]',
+    'la-legal':'[LA-LEGAL]','la-intencja':'[LA-INTENCJA]',
+    'la-chronologia':'[LA-CHRONOLOGIA]','la-miesiac':'[LA-MIESIAC]','la-podmiot-rola':'[LA-PODMIOT-ROLA]','la-rodzaj':'[LA-RODZAJ]','la-odrecznie':'[LA-ODRĘCZNIE]','la-kwota-slownie-cyframi':'[LA-KWOTA-SŁOWNIE/CYFRAMI]','la-osoba-mylona':'[LA-OSOBA-MYLONA]',
+    'la-teza-dowodowa':'[LA-TEZA-DOWODOWA]','la-data-przyszla':'[LA-DATA-PRZYSZŁA]',
+    'la-przyznanie-korzystne':'[LA-PRZYZNANIE-KORZYSTNE]',
+    'la-kwalifikacja-techniczna':'[LA-KWALIF-TECHNICZNA]',
+    'la-zakres-dowodowy':'[LA-ZAKRES-DOWODOWY]','intra-samoobala':'[INTRA-SAMOOBALA]'};
+  return map[t]||t.toUpperCase();
+}
+function laSevCls(s){return s==='KRYTYCZNE'?'sev-crit':s==='ISTOTNE'?'sev-ist':'sev-marg';}
+function laBorderCls(s){return s==='KRYTYCZNE'?'la-crit':s==='ISTOTNE'?'la-ist':'la-marg';}
+
+function renderLA(filter){
+  let list=lapsusy;
+  if(filter&&filter!=='all'){
+    if(filter==='KRYTYCZNE'||filter==='ISTOTNE'||filter==='MARGINALNE')
+      list=lapsusy.filter(l=>l.severity===filter);
+    else
+      list=lapsusy.filter(l=>l.type===filter);
+  }
+  if(!list.length){document.getElementById('la-list').innerHTML='<div class="empty">Brak w tej kategorii</div>';return;}
+  document.getElementById('la-list').innerHTML=list.map(la=>`
+    <div class="la-block ${laBorderCls(la.severity)}">
+      <div class="la-hdr">
+        <span class="la-type ${laTypeCls(la.type)}">${laTypeLabel(la.type)}</span>
+        <div class="la-title">${la.id} — ${la.zamierzenie.slice(0,80)}${la.zamierzenie.length>80?'...':''}</div>
+        <span class="la-sev ${laSevCls(la.severity)}">${la.severity}</span>
+      </div>
+      <div class="la-row">
+        <span class="la-label">Autor</span><span class="la-val">${la.autor}</span>
+        <span class="la-label">Dokument</span><span class="la-val">${la.doc}</span>
+        <span class="la-label">Zamierzenie</span><span class="la-val">${la.zamierzenie}</span>
+        <span class="la-label">Skutek rzeczywisty</span><span class="la-val">${la.skutek_rzecz}</span>
+      </div>
+      <div class="cite-block" style="margin:6px 0">
+        <div class="cite-src">Cytat</div>
+        <div class="cite-text">${la.cytat}</div>
+      </div>
+      ${la.skutek_odwr?'<div class="la-skutek-odwr">⚠ Skutek odwrotny do zamierzonego</div>':''}
+      ${la.status==='wymaga_weryfikacji'?'<div style="font-size:11px;color:#854F0B;padding:4px 0">⚠ Status: wymaga weryfikacji w oryginalnym tekście</div>':''}
+      <div class="la-rec">${la.rek}</div>
+    </div>`).join('');
+}
+
+function filterLA(type,btn){
+  document.querySelectorAll('#la-filters .fbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderLA(type);
+}
+
+function init(){
+  // KPI
+  document.getElementById('m-total').textContent=evidence.length||'—';
+  if(evidence.length){
+    const avg=evidence.reduce((a,e)=>a+e.score,0)/evidence.length;
+    document.getElementById('m-avg').textContent=avg.toFixed(1);
+  }
+  const cc=alerts_data.crit.length;
+  document.getElementById('m-alerts').textContent=cc||'—';
+  document.getElementById('badge-count').textContent=cc;
+  const contra=contradictions.length;
+  document.getElementById('m-check').textContent=contra||'—';
+  document.getElementById('badge-contra').textContent=contra;
+
+  renderEvidence();
+  renderContradictions('all');
+  renderAlerts();
+  renderCoverage();
+  renderTerminy();
+  renderRaport();
+}
+
+function switchTab(id){
+  document.querySelectorAll('.tab,.panel').forEach(el=>el.classList.remove('active'));
+  document.querySelector(`[onclick="switchTab('${id}')"]`).classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
+}
+
+let activeFilter='all';
+function filterContra(type,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFilter=type;
+  renderContradictions(type);
+}
+
+init();
+</script>

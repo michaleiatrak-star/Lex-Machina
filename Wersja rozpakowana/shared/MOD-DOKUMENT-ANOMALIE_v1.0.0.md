@@ -1,7 +1,7 @@
 # MOD-DOKUMENT-ANOMALIE — Wykrywanie Anomalii w Dokumentach Pracodawcy/Strony Przeciwnej
 
 > **Plik:** `/mnt/skills/user/shared/MOD-DOKUMENT-ANOMALIE.md`
-> **Wersja:** 1.0.0 (2026-06-23)
+> **Wersja:** 1.1.0 (2026-06-23)
 > **Status:** PRODUKCJA
 > **Pozycja w pipeline:** W1.2d-EXTEND — po SD-VER, równolegle z MOD-POSZLAKI-KONTEKST
 > **Trigger:** ZAWSZE gdy ≥2 dokumenty tworzone przez stronę przeciwną (umowy, regulaminy,
@@ -78,6 +78,17 @@ DA-3: KLASYFIKACJA ANOMALII
     → Dwie wersje podpisu/pieczęci
     → Daty niezgodne z chronologią zdarzeń
     EFEKT: wniosek o zbadanie autentyczności dokumentu (art. 253 k.p.c.)
+
+⛔ TRIGGER ISU — PO DA-3, GDY KLASA I LUB II (rozbieżność identyfikatorów podmiotu):
+  → view /mnt/skills/user/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
+  → Wykonaj ISU-1 → ISU-2 → ISU-3 → ISU-4 (jeśli wynik niejednoznaczny) → ISU-5
+  → Formuła ISU-5 [A] = gotowy akapit "Identyfikacja strony" do DA-5
+  → Wynik ISU wchodzi do DA-REJ jako kolumna "Podmiot wskazany / element błędny"
+  ⛔ Nie przechodź do DA-4 bez wykonanego ISU gdy Klasa I dotyczy KRS/NIP/nazwy
+
+⛔ TRIGGER ISU-PESEL — GDY KLASA I/III DOTYCZY PESEL:
+  → Wykonaj ISU-PESEL (P1→P6) z MOD-IDENTYFIKACJA-STRONY-UMOWY.md §ISU-PESEL
+  → Wynik RAPORTU PESEL wchodzi do DA-REJ
 
 DA-4: REJESTR ANOMALII (DA-REJ)
   Format:

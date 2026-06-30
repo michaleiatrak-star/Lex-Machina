@@ -188,14 +188,30 @@ Gdy w aktach sprawy widnieją RÓŻNE NIP lub RÓŻNE KRS przy zbliżonej nazwie
     bez uprzedniej weryfikacji każdego numeru z rejestru.
   → Weryfikuj KAŻDY numer osobno: do której spółki należy KRS X? do której Y?
   → Dopiero po weryfikacji — buduj argument procesowy na faktach rejestrowych.
-  
-PRZYKŁAD z VII P 94/25:
-  Umowy 1-2: "Human Park sp. z o.o." KRS 0000796445
-  Umowy 3-5: "Human Park Global sp. z o.o." KRS 0000796445
-  → Weryfikacja: KRS 0000796445 = Human Park sp. z o.o. (NIP 8971869561)
-  → Weryfikacja: Human Park Global sp. z o.o. ma KRS 0001025052 (NIP 6343021499)
-  → Wniosek procesowy: umowy 3-5 zawierają BŁĘDNY KRS pracodawcy
-  → To jest argument na korzyść powoda, nie na korzyść pozwanej
+
+⛔ TRIGGER MOD-IDENTYFIKACJA-STRONY-UMOWY + MOD-PRACODAWCA-RZECZYWISTY (OBOWIĄZKOWY):
+Gdy weryfikacja wykryje KAT-I, KAT-II lub KAT-III (patrz poniżej):
+
+KROK 1 — Identyfikacja strony każdej umowy:
+  → NATYCHMIAST: view /mnt/skills/user/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
+  → Wykonaj ISU-1 → ISU-2 → ISU-3 → ISU-4 (jeśli konieczne) → ISU-5
+  → Formuła ISU-5 [A] = akapit "Identyfikacja strony" do pisma
+
+KROK 2 — Scalenie pracodawców / kontrahentów (gdy KAT-II — seria z różnych podmiotów):
+  → view /mnt/skills/user/pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md
+  → Wykonaj R1→R2→R3 (warstwy W1–W4) →R4→R5
+  → ⛔ ZAKAZ przejścia do PRE-W2.D bez RAPORTU R5
+
+⛔ ZAKAZ-R1: nie buduj argumentu "ten sam KRS = jeden podmiot" gdy KRS z umów jest błędny
+   (niezgodny z rejestrem) — to argument obalany przez "literówkę"; ISU KROK 1 go zastępuje
+
+PRZYKŁAD z VII P 94/25 (błąd v1.1.0, naprawiony v1.3.0 + ISU + MOD-PR-RZECZ v2.2.0):
+  Umowy 1-2: "Human Park sp. z o.o." KRS 0000796445 — wszystkie elementy ✓
+  Umowy 3-5: "Human Park Global sp. z o.o." KRS 0000796445 — KRS błędny (6/7 elem. = HPG)
+  → ISU: strona umów 3-5 = HPG (NIP 6343021499, KRS błędny = błąd pisarski)
+  → MOD-PR-RZECZ: HP i HPG = jeden pracodawca rzeczywisty (warstwy W1–W4)
+  → ⛔ BŁĄD (poprzedni): "ten sam KRS → jeden podmiot" → obalony przez "literówkę"
+  → ✅ POPRAWNIE: ISU (strona każdej umowy) → MOD-PR-RZECZ (scalenie)
 ```
 
 ---
@@ -209,6 +225,14 @@ Gdy widzisz ≥2 różne numery KRS lub NIP przy zbliżonej nazwie podmiotu w ak
 Sama różnorodność numerów = trigger PRE-W2.D.
 Przykład: "Human Park sp. z o.o. KRS 796445" w umowie 1 i "Human Park Global KRS 796445"
 w umowie 3 → trigger (ta sama liczba przy innej nazwie = anomalia wymagająca weryfikacji).
+
+⛔ [MOD-IDENTYFIKACJA-TRIGGER] — PO WERYFIKACJI NUMERÓW:
+Gdy PRE-W2.D wykryje ROZBIEŻNOŚĆ (KRS lub NIP z akt ≠ dane z rejestru):
+KROK 1: view /mnt/skills/user/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md → ISU-1→ISU-5
+         (kto jest stroną każdej umowy z osobna)
+KROK 2: view /mnt/skills/user/pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md → R1→R5
+         (scalenie podmiotów — tylko gdy KAT-II — seria z różnych podmiotów)
+⛔ ZAKAZ przejścia do PRE-W2.E bez zamkniętego ISU-5 i (jeśli KAT-II) R5
 
 Gdy w materiale dowodowym pojawiają się numery KRS, NIP, REGON:
 
@@ -324,6 +348,18 @@ ZAKAZ BEZWZGLĘDNY:
 ## HISTORIA ZMIAN
 
 ```
+1.4.0 (2026-06-27) — ISU-first: MOD-IDENTYFIKACJA-STRONY-UMOWY wywołany przed MOD-PRACODAWCA-RZECZYWISTY:
+  Root cause nowej naprawy: PRE-W2.C/D wykrywały rozbieżność podmiotową i
+  zatrzymywały pipeline (GATE-STOP), ale NIE wywoływały modułu budującego
+  argument prawny. Skutek: pismo VII P 94/25 v3 opierało tezę 1 na argumencie
+  "ten sam KRS we wszystkich umowach" — obalonym przez "literówkę".
+  Naprawy:
+  (1) PRE-W2.C §SZCZEGÓLNA REGUŁA: dodano ⛔ TRIGGER MOD-PRACODAWCA-RZECZYWISTY
+      z ZAKAZEM-R1 (zakaz argumentu "ten sam KRS" gdy KRS błędny) i przykładem VII P 94/25.
+  (2) PRE-W2.D §POV-D-TRIGGER: dodano [MOD-PRACODAWCA-TRIGGER] — po wykryciu
+      rozbieżności NATYCHMIAST view MOD-PRACODAWCA-RZECZYWISTY + R1→R5.
+  (3) Historia wersji zaktualizowana.
+
 1.2.0 (2026-06-26) — Nowy krok PRE-W2.0: STATUS-LIFECYCLE podmiotów:
   Dodano mechanizm obowiązkowego oznaczania podmiotów statusem ⬛ [DO WERYFIKACJI]
   od chwili napotkania w materiałach dowodowych aż do faktycznej weryfikacji online.
