@@ -3,8 +3,8 @@ Instrukcja krok po kroku dla systemu Lex Machina w Claude AI.
 
 Wymagania wstępne
 
-Konto Claude AI na claude.ai z planem Pro lub Team
-(skille użytkownika wymagają planu płatnego)
+Zalecane jest konto Claude AI na claude.ai z planem Free, Pro lub Team
+(skille użytkownika wymagają planu płatnego, do prostych zapytań darmowe)
 Dostęp do repozytorium: https://github.com/michaleiatrak-star/Lex-Machina
 Przeglądarka internetowa — brak instalacji oprogramowania
 
