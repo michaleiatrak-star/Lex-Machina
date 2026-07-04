@@ -1,6 +1,6 @@
 ---
 name: dr-15-compliance-iso-governance-audyt
-version: 3.0
+version: 3.1
 description: |
   DR-15: Compliance, ISO, Governance, Audyt
   Jeden moduł = jeden akt prawny (Dz.U.) lub norma ISO / rozporządzenie UE.

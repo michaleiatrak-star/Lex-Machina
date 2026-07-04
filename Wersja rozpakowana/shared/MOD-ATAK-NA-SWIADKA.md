@@ -1,7 +1,9 @@
 # MOD-ATAK-NA-SWIADKA — Podważanie świadka jako ogniwa łańcucha dowodowego
 
 > **Plik:** `/mnt/skills/user/shared/MOD-ATAK-NA-SWIADKA.md`
-> **Wersja:** 1.0.1 (2026-06-24) — naprawa CRIT: art. 258 KPC uchylony 23.04.2026
+> **Wersja:** 1.1.0 (2026-07-02) — naprawa WARN-22: dodano FAZA 6 (specyfika
+> dziedzinowa DR-02/03/04/05), zastępująca nieaktualne odwołania CHECKLIST-DEDUP
+> do nieistniejącej struktury §CZĘŚĆ I-IV / TA-1..TA-9 (patrz HISTORIA ZMIAN)
 > **Status:** PRODUKCJA — plik kanoniczny shared/
 > **Pozycja w pipeline:**
 >   - pisma-procesowe-v3: W1.2c-LANCUCH (ŁD-3 EQG — ocena ogniwa zeznanie)
@@ -304,6 +306,105 @@ SW-W4: WNIOSEK O DOKUMENTY (art. 248 k.p.c.) — weryfikuj ISAP
 
 ---
 
+## FAZA 6 — SPECYFIKA DZIEDZINOWA PER DR (poglądowa)
+
+```
+⛔ ZASADA: ta sekcja jest POGLĄDOWA — nie zastępuje FAZ 0-5 powyżej (które
+pozostają jedynym źródłem procedury SW-DETECT/SW-PROFIL/SW-ATAK/SW-PRIOR/
+SW-WNIOSKI). Cel: wskazać, GDZIE w poszczególnych DR-skillach szukać pełnej
+specyfiki dziedzinowej, oraz dać 2-3 przykłady typowych sygnałów per dziedzina,
+żeby ułatwić rozpoznanie kiedy dany wektor SW-A1..SW-A8 jest szczególnie
+prawdopodobny. Pełna, rozwinięta treść żyje w DR-skillu (nie tutaj — unikaj
+duplikacji przy rozbudowie).
+```
+
+### DR-02 — Prawo cywilne/rodzinne/gospodarcze
+
+```
+Pełna specyfika: dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/
+  mod-KRO-rodzinne.md § "ŚWIADKOWIE W SPRAWACH ROZWODOWYCH" (S1-S4)
+
+Sprawy rozwodowe/rodzinne — sygnały typowe:
+  • Krąg świadków to głównie osoby bliskie stronom (rodzina, przyjaciele) →
+    PODWYŻSZONE ryzyko SW-A1 (konflikt interesu) jako sytuacja STRUKTURALNA,
+    nie wyjątkowa — traktuj tak przy każdym świadku powołanym na okoliczność
+    winy rozkładu pożycia lub kompetencji rodzicielskich.
+  • Świadkowie rodzinni często znają zdarzenia wyłącznie z relacji strony,
+    która ich powołała → podwyższone ryzyko SW-A3 (źródło wtórne).
+  • Nadmierna spójność / "wyuczony" charakter zeznań kilku świadków tej samej
+    strony → sygnał możliwego przygotowania świadków, wykorzystaj przy
+    SW-P4/SW-P5 jako element wniosku o konfrontację (SW-W1).
+  • Ocena wiarygodności podlega standardowi art. 233 §1 KPC — zarzut wymaga
+    wskazania konkretnego dowodu + braku logicznego powiązania z ustaleniem
+    sądu, NIE samej odmiennej wersji zdarzeń (formuła 3-punktowa w DR-02).
+
+Sprawy gospodarcze (KSH, upadłość/restrukturyzacja) — sygnały typowe:
+  • Świadkowie-pracownicy/kontrahenci stron → SW-A1 z tytułu zależności
+    służbowej/ekonomicznej jest częstszy niż w sprawach cywilnych ogólnych.
+  • Świadkowie z zarządu/rady nadzorczej → weryfikuj status formalny (SW-P1)
+    i ewentualną odpowiedzialność osobistą jako czynnik motywacyjny (SW-A1).
+```
+
+### DR-03 — Prawo karne, wykroczenia, egzekucja
+
+```
+Pełna specyfika: DO OPRACOWANIA w dr-03-prawo-karne-wykroczenia-egzekucja
+  (moduł dedykowany świadkom w procesie karnym nie istnieje jeszcze —
+  kandydat na przyszłą sesję).
+
+Sygnały typowe (poglądowe, do rozwinięcia w DR-03):
+  • Świadek koronny / świadek incognito — odrębny reżim proceduralny (KPK),
+    SW-A1 (motyw: redukcja odpowiedzialności własnej) często kluczowy.
+  • Pokrzywdzony jako świadek we własnej sprawie — status szczególny, SW-A1
+    (interes procesowy) niemal zawsze aktualny, ale NIE dyskwalifikuje
+    automatycznie zeznania.
+  • Świadek z kartoteką karną — dopuszczalność powołania karalności jako
+    okoliczności obniżającej wiarygodność wymaga odrębnej weryfikacji KPK
+    (poza zakresem tego modułu — weryfikuj w DR-03).
+```
+
+### DR-04 — Prawo pracy, ZUS, świadczenia
+
+```
+Pełna specyfika: dr-04-prawo-pracy-zus-swiadczenia/modules/
+  mod-KP-art943-mobbing-dyskryminacja.md (częściowo — świadkowie mobbingu)
+  — pełne rozwinięcie SW-specyfiki: DO OPRACOWANIA.
+
+Sygnały typowe (poglądowe):
+  • Świadkowie-współpracownicy pozwanego pracodawcy → SW-A1 (zależność
+    służbowa, obawa przed konsekwencjami zawodowymi) — częsty i silny wektor.
+  • Sprawy o mobbing/dyskryminację: świadkowie często zeznają "ze słyszenia"
+    o zdarzeniach, których osobiście nie obserwowali → SW-A3.
+  • Rotacja kadrowa w toku procesu → SW-A6 (upływ czasu/zawodność pamięci)
+    bywa wzmocniony zmianą miejsca zatrudnienia świadka.
+```
+
+### DR-05 — Prawo administracyjne i sądowoadministracyjne
+
+```
+Pełna specyfika: DO OPRACOWANIA w dr-05-prawo-administracyjne-
+  sadowoadministracyjne (moduł dedykowany nie istnieje jeszcze).
+
+Sygnały typowe (poglądowe):
+  • W postępowaniu administracyjnym dowód z zeznań świadka ma mniejsze
+    znaczenie niż dokumenty urzędowe — SW-A2 (zaprzeczenie przez dokument)
+    zyskuje relatywnie większą wagę niż w procesie cywilnym.
+  • Świadkowie-urzędnicy organu → status szczególny (SW-P1: zależność
+    służbowa od organu będącego stroną postępowania) — weryfikuj kontekst
+    przed zastosowaniem SW-A1.
+```
+
+### Rejestr rozwinięć (aktualizuj przy każdym audycie targeted per DR)
+
+| Dziedzina | Status rozwinięcia | Ostatnia aktualizacja |
+|---|---|---|
+| DR-02 (cywilne/rodzinne/gospodarcze) | ✅ pełne (mod-KRO-rodzinne S1-S4) | 2026-07-02 |
+| DR-03 (karne) | ⚠️ poglądowe — pełny moduł DO OPRACOWANIA | 2026-07-02 (dodano poglądowe) |
+| DR-04 (praca/ZUS) | ⚠️ poglądowe — pełny moduł DO OPRACOWANIA | 2026-07-02 (dodano poglądowe) |
+| DR-05 (administracyjne) | ⚠️ poglądowe — pełny moduł DO OPRACOWANIA | 2026-07-02 (dodano poglądowe) |
+
+---
+
 ## SELF-CHECK
 
 ```
@@ -315,6 +416,8 @@ SW-W4: WNIOSEK O DOKUMENTY (art. 248 k.p.c.) — weryfikuj ISAP
 □ W2.4c sekcja wbudowana do projektu pisma (W2)?
 □ SW-TARCZKA dla naszych świadków — wbudowana do W2?
 □ SW-WNIOSKI: wnioski procesowe wynikające z ataku — wygenerowane?
+□ FAZA 6: sprawdzono specyfikę dziedzinową per DR (jeśli dostępna) — użyto
+  jako uzupełnienie, nie zastąpienie FAZ 0-5?
 Którykolwiek = NIE → wróć do brakującego kroku.
 ```
 
@@ -323,6 +426,23 @@ Którykolwiek = NIE → wróć do brakującego kroku.
 ## HISTORIA ZMIAN
 
 ```
+1.1.0 (2026-07-02) — NAPRAWA WARN-22 (rozbieżność struktury vs CHECKLIST-DEDUP)
+Przyczyna: CHECKLIST-DEDUP (wpisy z sesji 2026-06-24) odwoływał się do sekcji
+  "§CZĘŚĆ I-IV" i techniki "TA-1..TA-9", które NIE istniały w treści pliku
+  (struktura faktyczna: FAZA 0-5 / SW-A1..SW-A8) — wykryte podczas targeted
+  audytu dr-02 (sesja 2026-07-02, wzmocnienie mod-KRO-rodzinne o świadków
+  rozwodowych).
+Naprawa: dodano FAZA 6 — SPECYFIKA DZIEDZINOWA PER DR (poglądowa), zgodnie
+  z pierwotnym zamysłem wpisu CHECKLIST-DEDUP ("specyfika ataku na świadka/
+  biegłego per dziedzina DR-02/03/04/05"). DR-02 ma pełne rozwinięcie
+  (pointer do mod-KRO-rodzinne.md S1-S4, dodane 2026-07-02); DR-03/04/05
+  mają wyłącznie treść poglądową (2-3 sygnały) + jawne oznaczenie
+  "DO OPRACOWANIA" — pełne moduły dziedzinowe są zadaniem na przyszłe sesje,
+  gdy dana dziedzina będzie aktywna (zgodnie z wnioskiem z AUDYT-2026-06-24d).
+  Dodano też SELF-CHECK: pozycja FAZA 6.
+CHECKLIST-DEDUP zaktualizowany równolegle (4 wiersze — patrz audyt-systemu-v4).
+Nie zmieniono FAZ 0-5 — treść merytoryczna SW-A1..SW-A8/AC1-AC4 bez zmian.
+
 1.0.1 (2026-06-24) — NAPRAWA CRIT (art. 258 KPC UCHYLONY) + korekta art. 266/271
   (1) SW-W2: art. 258 KPC uchylony 23.04.2026 → zastąpiony art. 235² §1 KPC
       (VER: lexlege.pl, Dz.U.2026.0.468, 24.06.2026)

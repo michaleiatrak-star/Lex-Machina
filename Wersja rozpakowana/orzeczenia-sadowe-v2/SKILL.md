@@ -1,25 +1,27 @@
 ---
 name: orzeczenia-sadowe-v2
-version: 2.1
+version: 2.2
 type: executive-analiza
 status: production
 compatibility: "web_search, web_fetch, show_widget"
 description: >
   Wyszukuje, weryfikuje i cytuje realne orzeczenia sądowe z oficjalnych polskich
-  portali prawnych (orzeczenia.ms.gov.pl, sn.pl, nsa.gov.pl, trybunal.gov.pl,
-  saos.org.pl). Stosuj ZAWSZE gdy użytkownik pyta o orzecznictwo, wyroki,
-  judykaturę, linię orzeczniczą, precedensy lub podobne sprawy sądowe — nawet
-  jeśli nie używa tych słów wprost. Stosuj też gdy użytkownik chce wzmocnić
-  pismo procesowe orzecznictwem lub potrzebuje podstawy orzeczniczej do
-  argumentacji prawnej. Nigdy nie cytuj orzeczeń z pamięci — ten skill zawsze
-  weryfikuje orzeczenia online przed podaniem sygnatury i nazwy sądu.
-  NIE stosuj gdy użytkownik pyta tylko o przepisy prawa bez orzeczeń.
-  v2.1: uchwały 7 SN jako Kat. 6A z priorytetem; obsługa jurysdykcji
-  zagranicznych (Tier 4); fallback przy niedostępności narzędzi sieciowych;
-  dziedzinowe progi alertu STARE; szablon zakładki Alerty; integracja SYGNATURY.
+  portali — centralnych (orzeczenia.ms.gov.pl, sn.pl, orzeczenia.nsa.gov.pl,
+  trybunal.gov.pl, saos.org.pl) i z sieci lokalnej SA/SO/SR oraz WSA (CBOSA).
+  Stosuj ZAWSZE gdy użytkownik pyta o orzecznictwo, wyroki, linię orzeczniczą,
+  precedensy — nawet bez tych słów wprost, oraz gdy chce wzmocnić pismo
+  orzecznictwem. Dobiera orzeczenia najbliższe oczekiwanemu rozstrzygnięciu;
+  przy licznej linii przeciwnej — obowiązkowy ilościowy BILANS. Nigdy nie cytuj
+  z pamięci — zawsze weryfikacja online przed podaniem sygnatury. NIE stosuj
+  gdy pytanie dotyczy tylko przepisów bez orzeczeń.
+  v2.2: sieć lokalna portali SA/SO/SR + CBOSA NSA/WSA (Faza 1-L); profil
+  oczekiwanego rozstrzygnięcia (Faza 0-C); BILANS LINII ORZECZNICZEJ z alertem
+  krytycznym przy przewadze linii przeciwnej.
+  v2.1: uchwały 7 SN Kat. 6A; jurysdykcje zagraniczne (Tier 4); fallback
+  sieciowy; progi STARE; integracja SYGNATURY.
 ---
 
-# Wyszukiwanie Orzeczeń Sądowych v2.1
+# Wyszukiwanie Orzeczeń Sądowych v2.2
 
 Narzędzie procesowe dla pełnomocników, sędziów i stron działających pro se.
 Łączy interaktywny widget HTML (tryb laik / prawnik) z weryfikowanym
@@ -30,11 +32,13 @@ wyszukiwaniem orzeczeń, wskaźnikiem pokrycia przesłanek i systemem alertów.
 1. **Wyświetl widget interaktywny** — patrz: sekcja Widget poniżej
 2. **Emituj profil ryzyka** — alerty wstępne przed wyszukiwaniem (Faza 0-A)
 3. **Ustal przesłanki i zakres** — przepis, znamiona, ciężar dowodu (Faza 0-B)
-4. **Wyszukaj orzeczenia** — portale priorytetowe, 4 kroki (Faza 1)
-5. **Skategoryzuj z alertami** — taksonomia 8 kategorii (Faza 2)
-6. **Zweryfikuj aktualność linii** — jednolitość, zmiany prawa (Faza 3)
-7. **Wygeneruj raport końcowy** — wskaźnik pokrycia, rekomendacje (Faza 4)
-8. **Wyświetl widget ponownie** — z kompletnymi danymi z Faz 1–4
+4. **Ustal oczekiwany kierunek rozstrzygnięcia** — dla dopasowania tezy (Faza 0-C)
+5. **Wyszukaj orzeczenia** — portale priorytetowe i sieć lokalna, 5 kroków (Faza 1, 1-L)
+6. **Wyszukaj kierunek przeciwny** — test równoważny pod kątem linii przeciwnej (Faza 1-D)
+7. **Skategoryzuj z alertami** — taksonomia 8 kategorii + BILANS (Faza 2)
+8. **Zweryfikuj aktualność linii** — jednolitość, zmiany prawa (Faza 3)
+9. **Wygeneruj raport końcowy** — wskaźnik pokrycia, BILANS, rekomendacje (Faza 4)
+10. **Wyświetl widget ponownie** — z kompletnymi danymi z Faz 1–4
 
 ---
 
@@ -101,10 +105,24 @@ Zakaz linkowania do LexLege, Prawo.pl, SIP itp. jako głównego źródła.
 
 **Zasada 5 — Jedno wiarygodne oficjalne źródło wystarczy.**
 Orzeczenie jest uznane za zweryfikowane gdy potwierdzone w co najmniej JEDNYM
-z portali: sn.pl, orzeczenia.ms.gov.pl, orzeczenia.nsa.gov.pl, trybunal.gov.pl,
-curia.europa.eu (TSUE), hudoc.echr.coe.int (ETPC).
+z portali: sn.pl, orzeczenia.ms.gov.pl (wraz z całą siecią lokalną SA/SO/SR —
+patrz Zasada 5A), orzeczenia.nsa.gov.pl (CBOSA — obejmuje NSA oraz wszystkie
+16 WSA), trybunal.gov.pl, curia.europa.eu (TSUE), hudoc.echr.coe.int (ETPC).
 saos.org.pl pełni rolę wsparcia — nie jest samodzielnym źródłem weryfikacji.
 Nie wymagaj potwierdzenia w wielu portalach jednocześnie.
+
+**Zasada 5A — Sieć lokalna portali sądów powszechnych (SA/SO/SR).**
+`orzeczenia.ms.gov.pl` jest punktem centralnym sieci złożonej z osobnych
+portali każdego sądu apelacyjnego, okręgowego i rejonowego (np.
+`orzeczenia.warszawa.so.gov.pl`, `orzeczenia.krakow-sr.sr.gov.pl`). Wszystkie
+mają status Tier 1 — potwierdzenie w portalu lokalnym danego sądu jest
+równoważne potwierdzeniu w portalu centralnym. Szczegółowy wzorzec URL,
+lista portali głównych sądów apelacyjnych/okręgowych i procedura użycia:
+patrz `references/PORTALE-LOKALNE.md` oraz Faza 1-L.
+⚠️ Publikacja w sieci SA/SO/SR NIE jest wyczerpująca — sądy publikują tylko
+orzeczenia z uzasadnieniem wybrane przez zespół sędziów; brak orzeczenia
+w portalu ≠ jego nieistnienie. Nie formułuj wniosku o braku linii orzeczniczej
+wyłącznie na tej podstawie — patrz FALLBACK F-4 i Faza 3.
 
 **Zasada 6 — Status „Źródło niepotwierdzone w portalu sądowym".**
 Gdy orzeczenie pojawia się w wynikach wyszukiwania, ale nie można uzyskać
@@ -116,13 +134,17 @@ bezpośredniego URL z oficjalnego portalu sądowego:
 
 **Zasada 7 — Hierarchia portali (TSUE i ETPC jako pełnoprawne źródła):**
 ```
-Tier 1 (krajowe PL): sn.pl · orzeczenia.ms.gov.pl · orzeczenia.nsa.gov.pl · trybunal.gov.pl
+Tier 1 (krajowe PL): sn.pl · orzeczenia.ms.gov.pl + sieć lokalna SA/SO/SR (Zasada 5A)
+                      · orzeczenia.nsa.gov.pl = CBOSA (NSA + wszystkie 16 WSA)
+                      · trybunal.gov.pl
 Tier 2 (UE/EU):      curia.europa.eu · hudoc.echr.coe.int
 Tier 3 (backup):     saos.org.pl (wyłącznie pomocniczo)
 Tier 4 (zagraniczne): patrz sekcja „Jurysdykcje zagraniczne"
 ```
 Orzeczenia TSUE i ETPC mają status równoważny z Tier 1 dla materii objętej prawem UE
 lub Konwencją. Kategoria 5 (UE/TSUE) obejmuje teraz również orzeczenia ETPC.
+CBOSA jest bazą jednolitą — nie ma odrębnych portali per WSA; wystarczy jedno
+zapytanie w orzeczenia.nsa.gov.pl obejmujące całość orzecznictwa administracyjnego.
 
 **Zasada 8 — Uchwały SN z mocą zasady prawnej (Kat. 6A — priorytet):**
 Uchwały pełnego składu SN, połączonych izb lub całej izby oraz uchwały
@@ -134,6 +156,24 @@ Sędziowie sądów powszechnych nie są nimi formalnie związani, lecz mają
 fundamentalne znaczenie praktyczne dla całego systemu.
 Gdy takie uchwały są dostępne → ZAWSZE powołuj jako pierwsze w piśmie.
 Weryfikacja: sn.pl/orzecznictwo/SitePages/Najnowsze_orzeczenia.aspx?Izba=Uchwaly
+
+**Zasada 9 — Dopasowanie tezy do oczekiwanego rozstrzygnięcia.**
+Wyszukiwanie ma na celu znalezienie orzeczeń, których teza i sentencja są
+maksymalnie zbieżne z oczekiwanym rozstrzygnięciem sprawy (patrz Faza 0-C
+i Faza 1-D). Bliskość dopasowania oceniaj wg trzech kryteriów łącznie:
+(1) zgodność stanu faktycznego z instytucją/przesłankami sprawy,
+(2) zgodność kierunku rozstrzygnięcia (nie tylko tematu, ale wyniku sprawy),
+(3) aktualność linii (Faza 3). Orzeczenie zgodne tematycznie, ale o odwrotnym
+kierunku rozstrzygnięcia, NIE jest „dopasowane" — trafia do Kat. 3B lub 4
+wg reguł Fazy 2, nigdy nie jest prezentowane jako wspierające tezę.
+
+**Zasada 10 — ⛔ Zakaz ukrywania liczebnej przewagi linii przeciwnej.**
+Gdy w wynikach wyszukiwania (Faza 1 + Faza 1-D) liczba orzeczeń o kierunku
+przeciwnym do oczekiwanego jest równa lub większa niż liczba orzeczeń zgodnych,
+LUB orzeczenia przeciwne stanowią ≥ 50% wszystkich trafień w Kat. 1–2 —
+wygeneruj alert krytyczny 🔴 BILANS NIEKORZYSTNY (patrz Faza 2 i Faza 4) i
+umieść go jako PIERWSZY alert w zakładce Profil ryzyka, niezależnie od trybu
+LAIK/PRAWNIK. Zakaz przedstawiania sprawy jako „mocnej" bez tego ujawnienia.
 
 ---
 
@@ -163,6 +203,23 @@ P2: [treść] — ciężar: [strona]
 
 FRAZY DO WYSZUKIWANIA: [3–7 fraz]
 ```
+
+---
+
+## Faza 0-C — Profil oczekiwanego rozstrzygnięcia
+
+Ustal przed wyszukiwaniem — warunek konieczny dla Zasady 9 i Fazy 1-D:
+
+```
+STRONA / INTERES: [czyje stanowisko wspieramy — powód/pozwany/oskarżony/organ/strona]
+OCZEKIWANY KIERUNEK ROZSTRZYGNIĘCIA: [np. „oddalenie powództwa", „uchylenie decyzji",
+                                       „uniewinnienie", „stwierdzenie nieważności klauzuli"]
+KIERUNEK PRZECIWNY (dla testu równoważnego): [odwrotność powyższego —
+                                       używany do wykrycia linii przeciwnej, nie do pomijania jej]
+```
+
+Jeśli użytkownik nie wskazał interesu strony (pytanie neutralne, analityczne) →
+pomiń profil, wyszukiwanie prowadź bez preferowanego kierunku i pomiń Fazę 1-D.
 
 ---
 
@@ -201,6 +258,72 @@ Dla Tier 4:
 - Weryfikacja możliwa wyłącznie przez web_fetch na oficjalnym portalu danego państwa.
 - Brak możliwości fetch → status „Brak weryfikacji bezpośredniej (Tier 4)" — nie powołuj w piśmie polskim.
 - Orzeczenia Tier 4 nie mogą być powoływane w polskim piśmie procesowym jako samodzielna podstawa; stosować wyłącznie pomocniczo (prawo porównawcze, argumentacja).
+
+---
+
+## Faza 1-L — Sieć lokalna portali SA/SO/SR i CBOSA (rozszerzenie bazy)
+
+Uzupełnienie Fazy 1 — stosuj gdy:
+- wyszukiwanie centralne (orzeczenia.ms.gov.pl) nie zwróciło wyników lub zwróciło
+  ich mało (< 3) mimo że sprawa dotyczy powszechnej instytucji prawnej,
+- użytkownik lub przeciwnik procesowy powołał konkretną sygnaturę konkretnego SR/SO/SA
+  i trzeba ją zweryfikować bezpośrednio u źródła,
+- sprawa jest lokalnie osadzona (właściwość miejscowa znanego sądu) i celowe jest
+  sprawdzenie linii orzeczniczej WŁAŚNIE tego sądu/okręgu (praktyka lokalna bywa
+  odmienna od linii krajowej — istotne dla prognozy rozstrzygnięcia w danej sprawie).
+
+Procedura:
+```
+1. Ustal właściwy sąd (nazwa + siedziba) z akt sprawy lub pytania użytkownika.
+2. view /mnt/skills/user/orzeczenia-sadowe-v2/references/PORTALE-LOKALNE.md
+   → odczytaj wzorzec URL i sprawdź, czy sąd jest na liście głównych portali.
+3. Jeśli sąd nieznany z listy → web_search "orzeczenia [pełna nazwa sądu]"
+   → zweryfikuj adres portalu przez web_fetch (musi być subdomena *.gov.pl).
+4. web_fetch na wyszukiwarkę portalu lokalnego z frazami z Fazy 0-B.
+5. Każde trafienie traktuj jak Tier 1 (Zasada 5A) — te same wymogi 4 elementów
+   (Zasada 2) i ten sam limit cytatu (Zasada 3).
+```
+
+Dla spraw administracyjnych: orzeczenia.nsa.gov.pl (CBOSA) już obejmuje wszystkie
+16 WSA jedną bazą — NIE szukaj osobno portali poszczególnych WSA (nie istnieją
+jako odrębne bazy, wyłącznie jako oddziały w ramach CBOSA po symbolu sądu).
+
+⚠️ Publikacja w sieci lokalnej nie jest wyczerpująca (patrz Zasada 5A) — brak
+wyniku w portalu lokalnym nie jest dowodem braku orzecznictwa danego sądu;
+odnotuj to zastrzeżenie w Raporcie, jeśli wyszukiwanie lokalne było kluczowe
+dla wniosku.
+
+---
+
+## Faza 1-D — Dopasowanie tezy i test kierunku przeciwnego
+
+Cel: znaleźć orzeczenia maksymalnie zbieżne z oczekiwanym rozstrzygnięciem
+(Faza 0-C, Zasada 9) I jednocześnie rzetelnie sprawdzić, czy istnieje liczna
+linia przeciwna (Zasada 10) — bez tego dwuetapowego podejścia wynik jest
+stronniczy (confirmation bias) i niewiarygodny procesowo.
+
+```
+KROK 1 — Wyszukiwanie zgodne z oczekiwanym kierunkiem:
+  Użyj fraz z Faza 0-B + słów kluczowych zgodnych z OCZEKIWANYM KIERUNKIEM
+  (np. dla „oddalenie powództwa": „bezzasadność roszczenia", „brak przesłanek").
+
+KROK 2 — Wyszukiwanie kierunku przeciwnego (OBOWIĄZKOWE, nie pomijaj):
+  Te same frazy bazowe + słowa kluczowe zgodne z KIERUNKIEM PRZECIWNYM
+  (np. „uwzględnienie powództwa", „zasadność roszczenia").
+  Wykonaj minimum 2 zapytania w tym kroku, nawet jeśli Krok 1 dał dużo trafień.
+
+KROK 3 — Ocena dopasowania (per orzeczenie, wg Zasady 9):
+  Klasyfikuj każde trafienie jako: ZGODNE (kierunek = oczekiwany) /
+  PRZECIWNE (kierunek = przeciwny) / NEUTRALNE (dotyczy instytucji,
+  ale rozstrzygnięcie nie przesądza kierunku, np. z innych przyczyn procesowych).
+
+KROK 4 — Policz i przekaż do Fazy 2/4:
+  N_zgodne, N_przeciwne, N_neutralne → wylicz BILANS (patrz Faza 2, Faza 4).
+```
+
+Jeśli profil oczekiwanego rozstrzygnięcia nie został ustalony w Fazie 0-C
+(pytanie neutralne) → pomiń tę fazę, prowadź wyszukiwanie bez podziału na
+kierunki, kategoryzuj wyłącznie wg Fazy 2 (Kat. 3A/3B linia większościowa/mniejszościowa).
 
 ---
 
@@ -246,6 +369,29 @@ Czytaj `references/widget.md` — tabele mapowania alertów i kategorii na klasy
 | ℹ️ WYMIAR UE | Materia objęta dyrektywą UE lub orzecznictwem TSUE/ETPC | Informacyjny |
 | ⛔ ŹRÓDŁO NIEPOTWIERDZONE | Sygnatura nieznaleziona w portalach Tier 1–2; zakaz powołania | Krytyczny |
 | 🏛️ ZASADA PRAWNA | Uchwała SN z mocą zasady prawnej (art. 87 § 1 uSN) — Kat. 6A | Priorytetowy |
+| 🔴 BILANS NIEKORZYSTNY | N_przeciwne ≥ N_zgodne LUB przeciwne ≥ 50% trafień Kat. 1–2 (Faza 1-D, Zasada 10) | Krytyczny |
+
+### BILANS LINII ORZECZNICZEJ — obliczenie
+
+Wykonuj zawsze gdy Faza 1-D była przeprowadzona (profil oczekiwanego rozstrzygnięcia ustalony):
+
+```
+N_zgodne     = liczba orzeczeń Kat. 1–2 o kierunku zgodnym z oczekiwanym
+N_przeciwne  = liczba orzeczeń Kat. 1–2 o kierunku przeciwnym
+N_neutralne  = liczba orzeczeń niekierunkowych (dotyczą instytucji, nie przesądzają)
+
+PROPORCJA = N_przeciwne : N_zgodne
+PROGI:
+  N_przeciwne ≥ N_zgodne              → 🔴 BILANS NIEKORZYSTNY (krytyczny)
+  N_przeciwne < N_zgodne, ale ≥ 30%   → 🟡 BILANS MIESZANY (informacyjny, odnotuj)
+  N_przeciwne < 30% wszystkich        → ✅ BILANS KORZYSTNY (bez alertu)
+```
+
+Gdy 🔴 BILANS NIEKORZYSTNY → alert musi pojawić się w Profilu ryzyka (Faza 0-A,
+jako pierwszy) ORAZ w Raporcie końcowym (Faza 4) z wymienieniem sygnatur linii
+przeciwnej — zakaz pomijania nawet gdy linia zgodna zawiera Kat. 6A (uchwała
+wiąże kierunek prawny, ale nie usuwa obowiązku ujawnienia rozbieżności w praktyce
+sądów niższych instancji, jeśli taka istnieje).
 
 ### Dziedzinowe progi alertu STARE
 
@@ -305,6 +451,14 @@ WSKAŹNIK POKRYCIA PRZESŁANEK:
 P1: ██████░░  62%  ← Kat.1: 2 orz.
 P2: █████████  90%  ← Kat.6A: 1 uchwała SN
 P3: ██░░░░░░  20%  ⚠️ LUKA
+
+BILANS LINII ORZECZNICZEJ (jeśli Faza 1-D wykonana):
+Zgodne z oczekiwanym rozstrzygnięciem: [N_zgodne]
+Przeciwne:                             [N_przeciwne]
+Neutralne:                             [N_neutralne]
+Status: [🔴 BILANS NIEKORZYSTNY / 🟡 BILANS MIESZANY / ✅ BILANS KORZYSTNY]
+[Jeśli 🔴 lub 🟡: wypisz sygnatury linii przeciwnej z jednozdaniową tezą każdej —
+ zakaz pomijania nawet jednej pozycji.]
 ```
 
 ---
@@ -327,8 +481,10 @@ Skill wykrywa poziom automatycznie. Użytkownik może wpisać „tryb prawnik" /
 |----------|-----------|
 | Portal Tier 1–3 niedostępny | Przejdź do następnego w kolejności |
 | Wszystkie portale Tier 1–3 niedostępne | Wykonaj FALLBACK F-1 |
-| Brak wyników | Rozszerz frazę lub użyj SAOS |
+| Brak wyników | Rozszerz frazę lub użyj SAOS, rozważ Fazę 1-L (sieć lokalna) |
+| Portal lokalny (SA/SO/SR) sądu nieznany lub niedostępny | web_search nazwy sądu → zweryfikuj URL przez web_fetch; brak potwierdzenia → traktuj jak F-2 |
 | Sprzeczne orzeczenia | Kat. 3A + Kat. 3B — nigdy nie ukrywaj |
+| Liczna linia przeciwna do oczekiwanego rozstrzygnięcia | Wykonaj Fazę 1-D → oblicz BILANS (Faza 2) → alert 🔴/🟡 w Raporcie (Zasada 10) |
 | Sygnatura nieweryfikowalna w Tier 1–2 | „Źródło niepotwierdzone w portalu sądowym" — nie powołuj |
 | Orzeczenie TSUE/ETPC | Weryfikuj w curia.europa.eu / hudoc — traktuj jako Tier 2 |
 | Luka pokrycia < 40% | Wykonaj FALLBACK F-4 |
@@ -378,3 +534,26 @@ view /mnt/skills/user/shared/ORZECZENIA-HIERARCHIA.md
 ```
 
 Nie dubluj logiki shared w lokalnych plikach. Lokalne moduły mogą tylko doprecyzować analizę dziedzinową.
+
+---
+
+## CHANGELOG
+
+**2.2 (2026-07-01):**
+- Rozszerzono bazę portali o sieć lokalną sądów apelacyjnych/okręgowych/rejonowych
+  (Zasada 5A, Faza 1-L) — nowy plik `references/PORTALE-LOKALNE.md` ze wzorcem URL
+  i listą portali głównych sądów.
+- Doprecyzowano, że CBOSA (orzeczenia.nsa.gov.pl) obejmuje NSA oraz wszystkie 16 WSA
+  jedną bazą (Zasada 7).
+- Dodano Fazę 0-C (profil oczekiwanego rozstrzygnięcia) i Fazę 1-D (dopasowanie
+  tezy + obowiązkowy test kierunku przeciwnego) — Zasada 9.
+- Dodano ilościowy mechanizm BILANS LINII ORZECZNICZEJ z progami i alertem
+  krytycznym 🔴 BILANS NIEKORZYSTNY przy przewadze lub równowadze linii
+  przeciwnej — Zasada 10, Faza 2, Faza 4.
+- Zaktualizowano tabelę obsługi błędów/fallback i sekwencję działania (10 kroków).
+- `references/widget.md`: dodano mapowanie alertu BILANS oraz szablon bloku
+  „Bilans linii orzeczniczej" w zakładce Raport.
+
+**2.1:** uchwały 7 SN jako Kat. 6A z priorytetem; obsługa jurysdykcji zagranicznych
+(Tier 4); fallback przy niedostępności narzędzi sieciowych; dziedzinowe progi
+alertu STARE; szablon zakładki Alerty; integracja SYGNATURY.

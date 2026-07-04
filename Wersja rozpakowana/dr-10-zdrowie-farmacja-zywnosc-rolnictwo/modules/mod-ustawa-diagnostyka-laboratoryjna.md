@@ -2,10 +2,24 @@
 
 ## Akt prawny
 **Ustawa z 15.09.2022 r. o medycynie laboratoryjnej**
-- **Dz.U. 2022 poz. 2162** ze zm. (nowa ustawa zastapila stara diagnostyke laborat.)
-  VER: isap.sejm.gov.pl [2026-05-31]
-- Starszy akt: Ustawa z 27.07.2001 r. o diagnostyce laboratoryjnej - Dz.U. 2023 poz. 1517
-  (uchylana etapowo - weryfikuj aktualny stan!)
+- ⚠️ POPRAWKA 2026-07-02s (weryfikacja ISAP na wyraźne żądanie użytkownika):
+  **Dz.U. 2022 poz. 2280** ze zm. — BYŁO błędnie podane 2022 poz. 2162,
+  który to numer w rzeczywistości odpowiada tekstowi jednolitemu STAREJ,
+  zastąpionej ustawy z 2001 r. (patrz niżej) — doszło do pomylenia numerów
+  między dwoma różnymi aktami o zbliżonej tematyce.
+  VER: isap.sejm.gov.pl [2026-07-02]
+- Starszy akt (uchylony w większości od 1.01.2025, przepisy wykonawcze
+  zachowały moc przejściowo do ok. stycznia 2026 — obecnie NIEAKTUALNE):
+  Ustawa z 27.07.2001 r. o diagnostyce laboratoryjnej
+  ⚠️ NIESPÓJNOŚĆ 2026-07-02s: ten moduł cytuje dla starego aktu Dz.U. 2023
+  poz. 1517, podczas gdy dr-10/MAPA-AKTOW.md cytowała (przed poprawką)
+  Dz.U. 2022 poz. 2162 — obie liczby mogą być różnymi t.j. tego samego
+  starego aktu w różnym czasie (2022.2162 → ewentualnie 2023.1517 jako
+  kolejny t.j.) LUB jedna z nich jest błędna. NIE rozstrzygnięto ostatecznie
+  w tej sesji które z 2022.2162/2023.1517 jest poprawnym ostatnim t.j. starej
+  ustawy — praktyczne znaczenie ograniczone, bo stary akt jest już w dużej
+  mierze nieaktualny, ale wymaga domknięcia przy najbliższej pełnej rewizji
+  tego modułu.
 
 **Weryfikacja ISAP przed kazdy cytowaniem - zmiana prawa w toku!**
 ```

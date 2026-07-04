@@ -1,7 +1,7 @@
 # mod-ustawa-rynek-kapitalowy-fundusze
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Fundusze inwestycyjne — Dz.U. 2024 poz. 1034 t.j. ze zm. | Obrót instrumentami — Dz.U. 2023 poz. 646 t.j. ze zm. | Oferta publiczna — Dz.U. 2024 poz. 620 t.j. ze zm. | Obligacje — Dz.U. 2022 poz. 2218 t.j. ze zm.
+**Źródło weryfikacji:** Fundusze inwestycyjne — Dz.U. 2024 poz. 1034 t.j. ze zm. | Obrót instrumentami — Dz.U. 2023 poz. 646 t.j. ze zm. | Oferta publiczna — Dz.U. 2024 poz. 620 t.j. ze zm. | Obligacje — Dz.U. 2024 poz. 708 t.j. ze zm. (POPRAWKA 2026-07-02g: było błędnie 2022.2218)
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -19,7 +19,7 @@ Fundusze inwestycyjne (FIO, SFIO, FIZ, ASI), TFI, rynek kapitałowy (GPW, Cataly
 | Ustawa o funduszach inwestycyjnych | Dz.U. 2024 poz. 1034 t.j. ze zm. | AIFMD II — implementacja 2024 |
 | Ustawa o obrocie instrumentami finansowymi | Dz.U. 2023 poz. 646 t.j. ze zm. — weryfikuj | MiFID II |
 | Ustawa o ofercie publicznej | Dz.U. 2024 poz. 620 t.j. ze zm. — weryfikuj | Rozp. Prospektowy UE 2017/1129 |
-| Ustawa o obligacjach | Dz.U. 2022 poz. 2218 t.j. ze zm. — weryfikuj | |
+| Ustawa o obligacjach | Dz.U. 2024 poz. 708 t.j. ze zm. (POPRAWKA 2026-07-02g) | zastępuje nieaktualny 2022.2218 |
 
 ---
 

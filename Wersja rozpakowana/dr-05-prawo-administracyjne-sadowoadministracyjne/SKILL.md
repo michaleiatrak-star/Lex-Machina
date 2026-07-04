@@ -1,6 +1,6 @@
 ---
 name: dr-05-prawo-administracyjne-sadowoadministracyjne
-version: 3.0
+version: 3.1
 description: |
   DR-05: Prawo Administracyjne i Sądownictwo Administracyjne
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.

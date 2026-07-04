@@ -26,6 +26,20 @@ Ustawa o komornikach sądowych:
   ✅ VER: isap.sejm.gov.pl 2026-06-05
   → https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240001458
 
+Postępowanie dyscyplinarne komorników — Ustawa o komornikach sądowych,
+  Rozdział 11 "Odpowiedzialność dyscyplinarna", art. 222-260:
+  → I instancja: KOMISJA DYSCYPLINARNA (33 członków powoływanych przez
+    Krajową Radę Komorniczą spośród kandydatów zgłoszonych przez rady
+    poszczególnych izb komorniczych; kadencja, wymogi: min. 5-letni staż
+    nienagannej służby, brak toczącego się postępowania dyscyplinarnego)
+  → ⚠️ RÓŻNICA STRUKTURALNA względem adwokatów/radców/notariuszy: II instancja
+    (odwoławcza) to SĄD APELACYJNY — organ PAŃSTWOWY, NIE korporacyjny
+  → Przedawnienie: 5 lat od popełnienia czynu (art. 227)
+  → Zatarcie kary: 10 lat od uprawomocnienia (dla kar surowszych)
+  ✅ VER: 2026-07-02 (zadanie specjalne, na żądanie użytkownika — numeracja
+  artykułów wg wersji ustawy z 22.03.2018 r., zweryfikować zgodność z
+  aktualnym t.j. 2024.1458 przy najbliższej okazji)
+
 Opłaty egzekucyjne — rozporządzenie MS:
   ⚠️ Weryfikuj aktualne rozp. w ISAP przed podaniem stawek
   web_search: "opłaty komornicze rozporządzenie MS 2025 2026 egzekucja stawki"

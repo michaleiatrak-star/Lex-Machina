@@ -1,4 +1,4 @@
-# Widget — Wyszukiwanie Orzeczeń Sądowych v2.1
+# Widget — Wyszukiwanie Orzeczeń Sądowych v2.2
 
 Plik zawiera kompletny kod HTML widgetu do wklejenia w `show_widget`.
 
@@ -26,6 +26,8 @@ Wywołujesz widget **dwukrotnie**:
 | ℹ️ WYMIAR UE             | `alert-eu`         | niebieski |
 | ⛔ BRAK URL              | `alert-nurl`       | szary     |
 | 🏛️ ZASADA PRAWNA (6A)   | `alert-zp`         | fioletowy |
+| 🔴 BILANS NIEKORZYSTNY   | `alert-bilans-bad` | czerwony  |
+| 🟡 BILANS MIESZANY       | `alert-bilans-mid` | żółty     |
 | ✅ brak alertów          | `alert-ok`         | zielony   |
 
 ## Mapowanie kategorii → etykiety
@@ -170,6 +172,17 @@ Wklej poniższy kod jako `widget_code`. Wypełnij miejsca oznaczone `<!-- DANE: 
   .rekomendacja { background: var(--c-surface); border-radius: 8px;
                   padding: 10px 14px; font-size: 13px; line-height: 1.6; }
 
+  /* Bilans linii orzeczniczej */
+  .bilans-box { border-radius: 8px; padding: 10px 14px; margin-bottom: 12px;
+                border-left: 4px solid; font-size: 13px; line-height: 1.6; }
+  .bilans-box.bad { background: #fff5f5; border-color: var(--c-red); }
+  .bilans-box.mid { background: #fffbf0; border-color: var(--c-yellow); }
+  .bilans-box.good { background: #f0fff4; border-color: var(--c-green); }
+  .bilans-title { font-weight: 700; font-size: 12px; text-transform: uppercase;
+                  letter-spacing: .5px; margin-bottom: 6px; }
+  .bilans-counts { display: flex; gap: 14px; font-size: 12px; margin-bottom: 6px; }
+  .bilans-sygnatury { font-size: 12px; color: var(--c-muted); }
+
   .loading-msg { color: var(--c-muted); font-style: italic; text-align: center;
                  padding: 24px; font-size: 13px; }
   .empty-msg { color: var(--c-muted); font-style: italic; padding: 12px 0; font-size: 13px; }
@@ -313,6 +326,19 @@ Wklej poniższy kod jako `widget_code`. Wypełnij miejsca oznaczone `<!-- DANE: 
 <!-- ZAKŁADKA: Raport -->
 <div id="tab-raport" class="panel">
   <!-- DANE: przed wyszukiwaniem wstaw <p class="loading-msg">Trwa wyszukiwanie…</p> -->
+  <!-- DANE: wstaw TYLKO jeśli Faza 1-D była wykonana (profil oczekiwanego rozstrzygnięcia ustalony).
+       Klasa: bad (BILANS NIEKORZYSTNY) / mid (BILANS MIESZANY) / good (BILANS KORZYSTNY) -->
+  <div class="bilans-box bad">
+    <div class="bilans-title">🔴 Bilans linii orzeczniczej</div>
+    <div class="bilans-counts">
+      <span>Zgodne: <!-- DANE: N_zgodne --></span>
+      <span>Przeciwne: <!-- DANE: N_przeciwne --></span>
+      <span>Neutralne: <!-- DANE: N_neutralne --></span>
+    </div>
+    <div class="mode-laik"><!-- DANE: opis dla laika, np. „Więcej wyroków zapadło na niekorzyść tego stanowiska niż na jego korzyść — sprawa jest ryzykowna." --></div>
+    <div class="mode-prawnik"><!-- DANE: opis dla prawnika z proporcją i rekomendacją procesową --></div>
+    <div class="bilans-sygnatury"><!-- DANE: lista sygnatur linii przeciwnej, każda z jednozdaniową tezą — zakaz pomijania --></div>
+  </div>
   <div class="wskaznik">
     <div class="wskaznik-title">Wskaźnik pokrycia przesłanek</div>
     <!-- DANE: skopiuj preslanka-bloki z zakładki Przesłanki z ostatecznymi wartościami -->

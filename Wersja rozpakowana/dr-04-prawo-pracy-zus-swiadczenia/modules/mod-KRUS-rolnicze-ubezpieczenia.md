@@ -1,8 +1,13 @@
 # mod-KRUS-rolnicze-ubezpieczenia
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** KRUS — Dz.U. 2024 poz. 90 t.j. ze zm.
-**Data weryfikacji online:** 2026-06-05
+**Źródło weryfikacji:** KRUS — Dz.U. 2025 poz. 1770 t.j. ze zm. (POPRAWKA 2026-07-02e:
+było błędnie Dz.U. 2024 poz. 90 — nieaktualny t.j., zastąpiony obwieszczeniem
+przenoszącym ustawę do Dz.U. 2025 poz. 1770; treść merytoryczna modułu poniżej
+NIE była w tej sesji zweryfikowana pod kątem zmian między t.j. — wymaga
+odrębnego przeglądu przy najbliższej sesji targeted na ten moduł)
+**Data weryfikacji online:** 2026-07-02e (wyłącznie numer Dz.U. w nagłówku;
+poprzednia pełna weryfikacja treści: 2026-06-05)
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
 ---

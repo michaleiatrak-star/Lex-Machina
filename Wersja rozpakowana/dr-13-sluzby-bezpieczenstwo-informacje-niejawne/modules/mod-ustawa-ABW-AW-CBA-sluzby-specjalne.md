@@ -166,7 +166,7 @@ Przed odpowiedzią lub pismem zastosuj:
 ## KLUCZOWE AKTY — ZWERYFIKOWANE 2026-06-05
 
 ```
-Ustawa o ABW oraz AW: Dz.U. 2024 poz. 1183 t.j. ze zm. — weryfikuj w ISAP
+Ustawa o ABW oraz AW: Dz.U. 2025 poz. 902 t.j. (VER 2026-07-02 — WARN-28 zamknięty; to nowy t.j. tej samej ustawy z 24.05.2002 r., NIE nowa ustawa — art. 1 "Tworzy się ABW" to oryginalny tekst ustawy z 2002 r. powtórzony w konsolidacji, nie dowód reformy) — weryfikuj dalsze zm. w ISAP
 Ustawa o CBA: Dz.U. 2024 poz. 1392 t.j. ze zm. — weryfikuj w ISAP
 Ustawa o SOP: Dz.U. 2024 poz. 1672 t.j. ze zm.
   → Dz.U. 2025 poz. 1366 — zakwaterowanie funkcjonariuszy SOP

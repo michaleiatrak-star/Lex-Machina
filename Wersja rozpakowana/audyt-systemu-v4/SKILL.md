@@ -1,6 +1,6 @@
 ---
 name: audyt-systemu-v4
-version: 4.4
+version: 4.6
 type: governance-audit
 compatibility:
   - Claude
@@ -15,7 +15,7 @@ widgets:
 references:
   - references/AUDIT-JOURNAL.md
   - references/CHECKLIST-DEDUP.md   # mapa pojęć → lokalizacje (5 not, NOTA-6 ORPHAN dodana 06-14g)
-  - references/mapa_dzu_2026-06-14.md   # aktualna mapa Dz.U. (395 aktów); 06-07 usunięty jako archiwalny
+  - references/mapa_dzu_2026-07-02.md   # aktualna mapa Dz.U. (400 aktów); 06-14 poprzednia wersja
 ---
 
 # audyt-systemu-v4 — Orchestrator Audytu Systemu Prawnego
@@ -33,7 +33,7 @@ Przed jakimkolwiek działaniem wczytaj:
 ```
 view /mnt/skills/user/audyt-systemu-v4/references/AUDIT-JOURNAL.md
 view /mnt/skills/user/audyt-systemu-v4/references/CHECKLIST-DEDUP.md
-view /mnt/skills/user/audyt-systemu-v4/references/mapa_dzu_2026-06-14.md
+view /mnt/skills/user/audyt-systemu-v4/references/mapa_dzu_2026-07-02.md
 ```
 
 Celem jest ustalenie:
@@ -138,7 +138,7 @@ Wykonaj skan regex → oceń każde trafienie wg tabeli kwalifikacji → usuń t
 
 ## FAZA 3 — WERYFIKACJA MAPY Dz.U.
 
-Wczytaj: `references/mapa_dzu_2026-06-14.md`
+Wczytaj: `references/mapa_dzu_2026-07-02.md`
 
 ### 3-PULL — Synchronizacja DR-MAPA-AKTOW → ROUTING-MAP → mapa_dzu
 
@@ -398,6 +398,25 @@ Wywołanie: "zamknij otwarte warningi" / "sprawdź WARN-X"
 
    Każda naprawa pliku (CRIT lub WARN) musi być dostarczona jako **kompletny skill**
    zawierający WSZYSTKIE pliki i podfoldery danego skilla, nie tylko zmieniony plik.
+8. ⛔ **ZASADA WERYFIKACJI NUMERU NIEZALEŻNIE OD NAZWY (dodana 2026-07-02s,
+   na wyraźny nakaz użytkownika) — "jeśli nazwy różnią się choć trochę,
+   sprawdzaj w ISAP".**
+
+   Zgodność NAZWY aktu między dwoma źródłami (np. między MAPA-AKTOW.md a
+   treścią modułu) NIE jest dowodem poprawności numeru Dz.U. Odkryty
+   przypadek referencyjny (dr-10, ustawa o medycynie laboratoryjnej): moduł
+   poprawnie nazwał akt, ale podał numer Dz.U. należący do INNEGO,
+   zastąpionego aktu o pokrewnej tematyce (2022.2162 zamiast 2022.2280).
+   Zasada praktyczna: przy każdej weryfikacji TRYB DZU sprawdzaj NUMER
+   niezależnie od tego, czy NAZWA aktu w mapie/module wygląda poprawnie —
+   zwłaszcza gdy w tej samej dziedzinie istnieje stary i nowy akt o
+   zbliżonym temacie (typowy wzorzec ryzyka: reformy zawodowe/regulacyjne,
+   gdzie nowa ustawa zastępuje starą pod inną nazwą lub tym samym tytułem).
+   Techniczne ograniczenie: `isap.sejm.gov.pl` blokuje bezpośredni
+   `web_fetch` (ROBOTS_DISALLOWED) — weryfikacja odbywa się przez
+   `web_search` z numerem Dz.U. jako frazą kluczową, czytając zaindeksowane
+   fragmenty (w tym z samego ISAP, oraz dziennikustaw.gov.pl/sip.lex.pl/
+   gofin.pl jako źródła pomocnicze).
    Dostarczanie wyłącznie zmodyfikowanego pliku bez reszty struktury grozi nieodwracalną
    utratą danych przy wgraniu (nadpisanie katalogu bez pozostałych plików).
 
@@ -428,14 +447,28 @@ audyt-systemu-v4/
 └── references/
     ├── AUDIT-JOURNAL.md                        ← dziennik audytów
     ├── CHECKLIST-DEDUP.md                      ← mapa pojęć → lokalizacje kanoniczne (dedup)
-    └── mapa_dzu_2026-06-14.md                  ← mapa 395 aktów Dz.U. (aktualna)
+    └── mapa_dzu_2026-07-02.md                  ← mapa 400 aktów Dz.U. (aktualna)
 ```
 
 ---
 
-*Wersja: 4.5 | Ostatnia aktualizacja: 2026-06-17*
+*Wersja: 4.6 | Ostatnia aktualizacja: 2026-07-02*
 
 ## CHANGELOG
+
+**4.6 (2026-07-02):**
+- **WARN-26 ZAMKNIĘTY W CAŁOŚCI (16/16 kroków)** — pełna weryfikacja TRYB
+  DZU wszystkich DR-skilli (dr-01…dr-16) + synchronizacja obu plików
+  centralnych (`prawo-polskie-v2/ROUTING-MAP.md`: 46 wierszy;
+  `mapa_dzu_2026-07-02.md`: 28 sync + 3 dodane). 68 błędów CRIT naprawionych
+  łącznie w DR-MAPA-AKTOW w trakcie sesji. Wykryto i udokumentowano
+  strukturalny dryf synchronizacji dysk↔centralne indeksy (dokładnie
+  ryzyko zasygnalizowane we wcześniejszym audycie silnika) — naprawy
+  punktowe w DR-skillach nie były propagowane automatycznie do
+  ROUTING-MAP/mapa_dzu. 3 flagi świadomie pozostawione nierozstrzygnięte
+  (duplikat KNF, możliwe rozdzielenie sport/imprezy masowe, niepotwierdzony
+  t.j. rzeczników patentowych) zamiast zgadywania.
+
 
 **4.5 (2026-06-17):**
 - Dodano ZASADĘ 7: OUTPUT-COMPLETENESS — każda naprawa musi być dostarczona

@@ -191,20 +191,20 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | PPSA — sądownictwo administracyjne | Dz.U. 2026 poz. 143 ze zm. | dr-04/modules/mod-KPA-postepowanie-administracyjne | ✅ OK |
 | Ustawa o systemie ubezpieczeń społecznych (SUS/ZUS) | Dz.U. 2025 poz. 1169 ze zm. (zm.: 2026.199) | dr-04/modules/mod-SUS-ZUS-ubezpieczenia-spoleczne | ✅ OK |
 | Ustawa o emeryturach i rentach z FUS | Dz.U. 2025 poz. 1749 ze zm. | dr-04/modules/mod-SUS-ZUS-ubezpieczenia-spoleczne | ✅ OK |
-| Ustawa o ubezpieczeniu społecznym rolników (KRUS) | Dz.U. 2024 poz. 90 ze zm. | dr-04/modules/mod-KRUS-rolnicze-ubezpieczenia | ✅ OK |
+| Ustawa o ubezpieczeniu społecznym rolników (KRUS) | Dz.U. 2025 poz. 1770 t.j. (sync 2026-07-02 z dr-04) | dr-04/modules/mod-KRUS-rolnicze-ubezpieczenia | ✅ OK |
 | Ustawa o rehabilitacji zawodowej i PFRON | Dz.U. 2025 poz. 913 ze zm. | dr-04/modules/mod-ustawa-rehabilitacja-PFRON | ✅ OK |
 | Ustawa o PIP | Dz.U. 2024 poz. 1712 t.j. + zm. Dz.U. 2025 poz. 321/368/620/769, Dz.U. 2026 poz. 160 ⏳ nowelizacja Dz.U. 2026 poz. 473 (wchodzi 08.07.2026) | dr-04/modules/mod-ustawa-PIP-inspekcja-pracy | ✅ OK — sekcja 5 modułu |
 | Ustawa o minimalnym wynagrodzeniu | Dz.U. 2024 poz. 1285 ze zm. (MW 2026: 4806 zł) | dr-04/modules/mod-ustawa-minimalne-wynagrodzenie | ✅ OK |
 | Ustawa o ZFSS | Dz.U. 2024 poz. 288 ze zm. | dr-04/modules/mod-ustawa-ZFSS | ✅ OK |
 | Ustawa o zatrudnianiu pracowników tymczasowych | Dz.U. 2025 poz. 1682 t.j. | dr-04/modules/mod-ustawa-praca-tymczasowa | ✅ OK |
-| Ustawa o sporach zbiorowych pracy (nowa) | Dz.U. 2025 poz. 1661 | dr-04/modules/mod-ustawa-zwiazki-zawodowe-spory-zbiorowe | ✅ OK |
+| Ustawa o układach zbiorowych pracy i porozumieniach zbiorowych (sync 2026-07-02 — była błędnie nazwana "o sporach zbiorowych pracy"; to odrębna ustawa z 1991 r., uchyla Dział XI KP) | Dz.U. 2025 poz. 1661 | dr-04/modules/mod-ustawa-zwiazki-zawodowe-spory-zbiorowe | ✅ OK |
 | Ustawa o związkach zawodowych | Dz.U. 2026 poz. 549 t.j. | dr-04/modules/mod-ustawa-zwiazki-zawodowe-spory-zbiorowe | ✅ OK |
 | Ustawa o ubezpieczeniu społ. z tytułu wypadków przy pracy i chorób zawodowych | Dz.U. 2022 poz. 2189 t.j. ze zm. — weryfikuj ISAP | dr-04/modules/mod-KP-prawo-pracy → ANEKS B | ✅ OK |
 | KP art. 67⁵–67²⁴ — praca zdalna | Dz.U. 2025 poz. 277 ze zm. (Dz.U. 2023 poz. 240) | dr-04/modules/mod-KP-prawo-pracy → ANEKS C | ✅ OK |
 | Ustawa o zwolnieniach grupowych | Dz.U. 2025 poz. 570 t.j. | dr-04/modules/mod-ustawa-zwolnienia-grupowe | ✅ OK |
 | Ustawa o rynku pracy i służbach zatrudnienia | Dz.U. 2025 poz. 620 ze zm. (zm.: 2026.451) | dr-04/modules/mod-ustawa-rynek-pracy-zatrudnienie | ✅ OK |
 | Ustawa o świadczeniach rodzinnych | Dz.U. 2025 poz. 1208 t.j. | dr-04/modules/mod-ustawa-swiadczenia-rodzinne | ✅ OK |
-| Ustawa o pomocy społecznej | Dz.U. 2025 poz. 1214 t.j. | dr-04/modules/mod-ustawa-pomoc-spoleczna | ✅ OK |
+| Ustawa o pomocy społecznej | Dz.U. 2026 poz. 639 t.j. (sync 2026-07-02 z dr-04) | dr-04/modules/mod-ustawa-pomoc-spoleczna | ✅ OK |
 | Ustawa o świadczeniu wspierającym (WZON) | Dz.U. 2023 poz. 1429 ze zm. | dr-04/modules/mod-ustawa-swiadczenie-wspierajace-WZON | ✅ OK |
 
 ---
@@ -225,11 +225,11 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o udzielaniu ochrony cudzoziemcom | Dz.U. 2024 poz. 1546 t.j. | dr-05/modules/mod-ustawa-cudzoziemcy | ✅ OK |
 | Ustawa o Rzeczniku Praw Obywatelskich | Dz.U. 2024 poz. 1264 t.j. | dr-05/modules/mod-ustawa-RPO | ✅ OK |
 | Ustawa o samorządowych kolegiach odwoławczych (SKO) | Dz.U. 2023 poz. 825 t.j. | dr-05/modules/mod-ustawa-SKO | ✅ OK |
-| Ustawa o kontroli w administracji rządowej | Dz.U. 2020 poz. 224 ze zm. | dr-05/modules/mod-ustawa-kontrola-administracji | ✅ OK |
+| Ustawa o kontroli w administracji rządowej | Dz.U. 2026 poz. 158 t.j. (sync 2026-07-02 z dr-05) | dr-05/modules/mod-ustawa-kontrola-administracji | ✅ OK |
 | Ustawa o petycjach | Dz.U. 2018 poz. 870 — weryfikuj t.j. w ISAP | dr-05/modules/mod-ustawa-petycje | ✅ OK |
 | Ustawa o sygnalistach | Dz.U. 2024 poz. 928 ze zm. | dr-05/modules/mod-ustawa-sygnalisci | ✅ OK |
 | Zaskarzanie decyzji / reprywatyzacja | Dz.U. 2025 poz. 1691 (KPA art. 156) + Dz.U. 2021 poz. 795 | dr-05/modules/mod-ustawa-zaskarzanie-decyzji-wlasnosci | ✅ OK |
-| Ustawa o dostępności — osoby ze szczególnymi potrzebami | Dz.U. 2022 poz. 2240 t.j. | dr-05/modules/mod-ustawa-dostepnosc-niepelnosprawni | ✅ OK |
+| Ustawa o dostępności — osoby ze szczególnymi potrzebami | Dz.U. 2024 poz. 1411 t.j. (sync 2026-07-02 z dr-05/dr-10) | dr-05/modules/mod-ustawa-dostepnosc-niepelnosprawni | ✅ OK |
 
 ---
 
@@ -237,7 +237,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
-| **Interpretacje podatkowe, MDR, WIS, uchwały NSA, definicje** | Op Dz.U. 2025 poz. 111 t.j. (art.14a–14p) + EUREKA + orzeczenia.nsa.gov.pl | dr-06/modules/mod-interpretacje-definicje-podatkowe | ✅ OK |
+| **Interpretacje podatkowe, MDR, WIS, uchwały NSA, definicje** | Op Dz.U. 2026 poz. 622 t.j. (sync 2026-07-02 — spójne z wierszem Ordynacji podatkowej) (art.14a–14p) + EUREKA + orzeczenia.nsa.gov.pl | dr-06/modules/mod-interpretacje-definicje-podatkowe | ✅ OK |
 | **Klasyfikacje statystyczne (PKWiU/CN/PKOB/KŚT)** | PKWiU 2025 (Rozp. RM 17.12.2025) + PKWiU 2015 (Dz.U. 2015 poz. 1676) | dr-06/modules/mod-PKWiU-klasyfikacje-statystyczne | ✅ OK |
 | Ordynacja podatkowa | Dz.U. 2026 poz. 622 t.j. (25.05.2026) ⚡ część vacatio ~IX.2026 | dr-06/modules/mod-OP-ordynacja-podatkowa | ✅ OK |
 | Ustawa o PIT | Dz.U. 2026 poz. 592 t.j. | dr-06/modules/mod-PIT-podatek-dochodowy-fizyczne | ✅ OK |
@@ -251,12 +251,12 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o ryczałcie od przychodów | Dz.U. 2025 poz. 843 t.j. | dr-06/modules/mod-ustawa-ryczalt-przychody | ✅ OK |
 | Ustawa o finansach publicznych (UFP) | Dz.U. 2025 poz. 1483 t.j. | dr-06/modules/mod-UFP-finanse-publiczne-NIK-RIO | ✅ OK |
 | Ustawa o KAS | Dz.U. 2025 poz. 1131 t.j. | dr-06/modules/mod-KAS-kontrola-celno-skarbowa | ✅ OK |
-| Ustawa o nadzorze KNF | Dz.U. 2024 poz. 724 ze zm. | dr-06/modules/mod-prawo-bankowe-KNF-BFG | ✅ OK |
+| Ustawa o nadzorze KNF | Dz.U. 2025 poz. 640 t.j. (sync 2026-07-02 z dr-06) | dr-06/modules/mod-prawo-bankowe-KNF-BFG | ✅ OK |
 | Prawo bankowe | Dz.U. 2026 poz. 38 t.j. | dr-06/modules/mod-prawo-bankowe-KNF-BFG | ✅ OK |
 | Ustawa o usługach płatniczych | Dz.U. 2025 poz. 611 t.j. | dr-06/modules/mod-ustawa-uslugi-platnicze | ✅ OK |
 | Ustawa AML | Dz.U. 2025 poz. 644 t.j. | dr-06/modules/mod-ustawa-AML-instytucje-obowiazkowe | ✅ OK |
 | KKS — kodeks karny skarbowy | Dz.U. 2025 poz. 633 t.j. | dr-06/modules/mod-KAS-kontrola-celno-skarbowa | ✅ OK |
-| Ustawa o obligacjach | Dz.U. 2022 poz. 2218 ze zm. | dr-06/modules/mod-ustawa-rynek-kapitalowy-fundusze | ✅ OK |
+| Ustawa o obligacjach | Dz.U. 2024 poz. 708 t.j. (sync 2026-07-02 z dr-06) | dr-06/modules/mod-ustawa-rynek-kapitalowy-fundusze | ✅ OK |
 | Ustawa o funduszach inwestycyjnych | Dz.U. 2024 poz. 1034 t.j. | dr-06/modules/mod-ustawa-rynek-kapitalowy-fundusze | ✅ OK |
 | Ustawa o biegłych rewidentach, firmach audytorskich oraz nadzorze publicznym (zawód zaufania publicznego) | Dz.U. 2025 poz. 1891 t.j. ✅ VER: 2026-06-14 | dr-06/modules/mod-ustawa-biegli-rewidenci-zawod | ✅ NOWY |
 | Ustawa o doradztwie podatkowym (zawód zaufania publicznego) | Dz.U. 2021 poz. 2117 + Dz.U. 2025 poz. 1882 (nowelizacja) ✅ VER: 2026-06-14 | dr-06/modules/mod-ustawa-doradcy-podatkowi-zawod | ✅ NOWY |
@@ -269,20 +269,20 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
-| Prawo zamówień publicznych (PZP) | Dz.U. 2024 poz. 1320 ze zm. | dr-07/modules/mod-PZP-zamowienia-publiczne-KIO | ✅ OK |
+| Prawo zamówień publicznych (PZP) | Dz.U. 2026 poz. 793 t.j. (sync 2026-07-02) | dr-07|Dz.U. 2026 poz. 793 t.j. (sync 2026-07-02) | dr-07/modules/mod-PZP-zamowienia-publiczne-KIO | ✅ OK |
 | PZP — certyfikacja wykonawców | Dz.U. 2025 poz. 1235 | dr-07/modules/mod-ustawa-PZP-certyfikacja-wykonawcow | ✅ OK |
-| PZP — zamówienia obronne i bezpieczeństwa | Dz.U. 2024 poz. 1320 ze zm. | → DR-15/mod-PZP-zamowienia-obronne-bezpieczenstwa | 🔗 odesłanie |
+| PZP — zamówienia obronne i bezpieczeństwa | Dz.U. 2026 poz. 793 t.j. (sync 2026-07-02) | → DR-15|Dz.U. 2026 poz. 793 t.j. (sync 2026-07-02) | → DR-15/mod-PZP-zamowienia-obronne-bezpieczenstwa | 🔗 odesłanie |
 | Ustawa o PPP | Dz.U. 2023 poz. 1688 ze zm. | dr-07/modules/mod-ustawa-PPP-i-koncesja | ✅ OK |
-| Ustawa o zasadach realizacji programów UE 2021-2027 | Dz.U. 2024 poz. 1655 ze zm. | dr-07/modules/mod-ustawa-fundusze-UE-pomoc-publiczna | ✅ OK |
+| Ustawa o zasadach realizacji programów UE 2021-2027 | Dz.U. 2025 poz. 1733 t.j. (sync 2026-07-02 z dr-07) | dr-07/modules/mod-ustawa-fundusze-UE-pomoc-publiczna | ✅ OK |
 | Ustawa o polityce rozwoju | Dz.U. 2025 poz. 1733 t.j. | dr-07/modules/mod-ustawa-fundusze-UE-pomoc-publiczna | ✅ OK |
 | Ustawa o postępowaniu w sprawach pomocy publicznej | Dz.U. 2025 poz. 468 t.j. | dr-07/modules/mod-ustawa-fundusze-UE-pomoc-publiczna | ✅ OK |
-| Ustawa o RIO | Dz.U. 2023 poz. 1325 ze zm. | dr-07/modules/mod-ustawa-RIO-regionalne-izby | ✅ OK |
+| Ustawa o RIO | Dz.U. 2025 poz. 7 t.j. (sync 2026-07-02 z dr-07) | dr-07/modules/mod-ustawa-RIO-regionalne-izby | ✅ OK |
 | Ustawa o finansach publicznych | → DR-06/mod-UFP-finanse-publiczne-NIK-RIO | → DR-06 | 🔗 odesłanie |
 | KPC cz. V — arbitraż i mediacja | Dz.U. 2026 poz. 468 ze zm. | dr-07/modules/mod-ustawa-arbitraz-mediacja | ✅ OK |
 | Prawo o notariacie | Dz.U. 2026 poz. 614 t.j. | dr-07/modules/mod-PrNotariat-notariat-rejestry | ✅ OK |
 | Ustawa o NIK | Dz.U. 2022 poz. 623 ze zm. | dr-07/modules/mod-ustawa-NIK | ✅ OK |
-| Ustawa o Prokuratorii Generalnej RP | Dz.U. 2023 poz. 1109 ze zm. | dr-07/modules/mod-ustawa-Prokuratorii-Generalnej | ✅ OK |
-| Ustawa o dyscyplinie finansów publicznych | Dz.U. 2024 poz. 104 t.j. | dr-07/modules/mod-ustawa-dyscyplina-finansow-publicznych | ✅ OK |
+| Ustawa o Prokuratorii Generalnej RP | Dz.U. 2024 poz. 1192 t.j. (sync 2026-07-02 z dr-07) | dr-07/modules/mod-ustawa-Prokuratorii-Generalnej | ✅ OK |
+| Ustawa o dyscyplinie finansów publicznych | Dz.U. 2025 poz. 1484 t.j. (sync 2026-07-02 z dr-07) | dr-07/modules/mod-ustawa-dyscyplina-finansow-publicznych | ✅ OK |
 
 ---
 
@@ -298,7 +298,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o Wojewodzie i administracji rządowej w województwie | Dz.U. 2025 poz. 428 t.j. | dr-08/modules/mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa | ✅ OK |
 | Ustawa o pracownikach samorządowych | Dz.U. 2024 poz. 1135 t.j. | dr-08/modules/mod-ustawa-pracownicy-samorzadowi | ✅ OK |
 | Ustawa o dochodach JST (nowa 2024) | Dz.U. 2024 poz. 1572 (w życie 01.01.2025 — zastępuje ustawę z 2003 r.) | dr-08/modules/mod-ustawa-dochody-JST | ✅ OK |
-| Ustawa o referendum lokalnym | Dz.U. 2023 poz. 1317 ze zm. | dr-08/modules/mod-ustawa-referendum-lokalne | ✅ OK |
+| Ustawa o referendum lokalnym | Dz.U. 2025 poz. 472 t.j. (sync 2026-07-02 z dr-08) | dr-08/modules/mod-ustawa-referendum-lokalne | ✅ OK |
 | Ustawa o zarządzaniu kryzysowym i ochronie ludności | Dz.U. 2024 poz. 1907 ze zm. (zm.: 2025.1705, ⚡ 2026.646) | dr-08/modules/mod-ustawa-zarzadzanie-kryzysowe | ✅ OK |
 | Nadzór Wojewody i RIO — legalność uchwał | USG/USP/USW | dr-08/modules/mod-nadzor-wojewody-RIO-legalnosc-uchwal | ✅ OK |
 | Procedury JST — statuty, regulaminy | Uchwały JST | dr-08/modules/mod-procedury-JST-statuty-regulaminy | ✅ OK |
@@ -307,14 +307,14 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Akty porządkowe — bezpieczeństwo lokalne | art. 40 §3 USG + przepisy porządkowe | dr-08/modules/mod-akty-porzadkowe-bezpieczenstwo-lokalne | ✅ OK |
 | Skargi na prawo miejscowe — WSA/NSA | PPSA + USG | dr-08/modules/mod-skargi-na-prawo-miejscowe-WSA-NSA | ✅ OK |
 | Lokalne dane publiczne — RODO, BIP | RODO + UDIP | dr-08/modules/mod-lokalne-dane-publiczne-RODO-BIP | ✅ OK |
-| Ustawa o kontroli w administracji i inspekcjach | Dz.U. 2020 poz. 224 ze zm. | dr-08/modules/mod-kontrola-administracji-inspekcje | ✅ OK |
-| Dzienniki urzędowe województw + BIP | Dz.U. 2012 poz. 317 ze zm. | dr-08/modules/mod-dzienniki-urzedowe-BIP-publikacja | ✅ OK |
-| Ustawa o czystości i porządku w gminach | Dz.U. 2025 poz. 765 t.j. | dr-08/modules/mod-ustawa-komunalne-wod-kan-transport-czystosc | ✅ OK |
+| Ustawa o kontroli w administracji i inspekcjach | Dz.U. 2026 poz. 158 t.j. (sync 2026-07-02 z dr-08) | dr-08/modules/mod-kontrola-administracji-inspekcje | ✅ OK |
+| Dzienniki urzędowe województw + BIP | Dz.U. 2019 poz. 1461 t.j. (sync 2026-07-02 z dr-08) | dr-08/modules/mod-dzienniki-urzedowe-BIP-publikacja | ✅ OK |
+| Ustawa o czystości i porządku w gminach | Dz.U. 2025 poz. 733 t.j. (sync 2026-07-02 — było 765, transpozycja cyfr) | dr-08/modules/mod-ustawa-komunalne-wod-kan-transport-czystosc | ✅ OK |
 | Ustawa o zbiorowym zaopatrzeniu w wodę | Dz.U. 2024 poz. 757 ze zm. | dr-08/modules/mod-ustawa-komunalne-wod-kan-transport-czystosc | ✅ OK |
 | Ustawa o publicznym transporcie zbiorowym | Dz.U. 2025 poz. 285 t.j. | dr-08/modules/mod-ustawa-komunalne-wod-kan-transport-czystosc | ✅ OK |
 | Ustawa o ochronie zabytków i opiece nad zabytkami | Dz.U. 2024 poz. 1292 t.j. | dr-08/modules/mod-ustawa-zabytki-rewitalizacja | ✅ OK |
 | Ustawa o rewitalizacji | Dz.U. 2024 poz. 278 ze zm. | dr-08/modules/mod-ustawa-zabytki-rewitalizacja | ✅ OK |
-| Ustawa o cmentarzach i chowaniu zmarłych | Dz.U. 2023 poz. 1284 ze zm. | dr-08/modules/mod-ustawa-zabytki-rewitalizacja | ✅ OK |
+| Ustawa o cmentarzach i chowaniu zmarłych | Dz.U. 2025 poz. 1590 t.j. (sync 2026-07-02 z dr-08) | dr-08/modules/mod-ustawa-zabytki-rewitalizacja | ✅ OK |
 | Zmiana ustawy o obronie cywilnej — 2026.646 | Dz.U. 2026 poz. 646 — vacatio legis weryfikuj w ISAP | dr-08/modules/mod-ustawa-zarzadzanie-kryzysowe | ⏳ OCZEKUJE |
 | **Ustawa o drogach publicznych — SPP/ŚSPP** (art. 13, 13b, 13f opłaty parkingowe) | Dz.U. 2025 poz. 889 t.j. | dr-08/modules/mod-UDP-strefy-platnego-parkowania | ✅ OK |
 
@@ -343,9 +343,9 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o OOŚ — oceny środowiskowe | Dz.U. 2024 poz. 1112 t.j. | dr-09/modules/mod-ustawa-OOS-oceny-srodowiskowe | ✅ OK |
 | Ustawa leśna, łowiecka, ochrona przyrody | Dz.U. 2024 poz. 1219 + Dz.U. 2026 poz. 13 | dr-09/modules/mod-ustawa-lesna-lowiecka-ochrona-przyrody | ✅ OK |
 | Ustawa o planowaniu i zagospodarowaniu przestrzennym | Dz.U. 2026 poz. 538 t.j. | dr-09/modules/mod-ustawa-planowanie-przestrzenne | ✅ OK |
-| Ustawa o gospodarce nieruchomościami (UGN) | Dz.U. 2024 poz. 1899 ze zm. | dr-09/modules/mod-UGN-gospodarka-nieruchomosciami | ✅ OK |
-| Prawo geodezyjne + wywłaszczenia | Dz.U. 2023 poz. 1752 ze zm. | dr-09/modules/mod-PrGeodezyjne-kartografia-wywlaszczenia | ✅ OK |
-| Prawo geologiczne i górnicze | Dz.U. 2024 poz. 1290 t.j. | dr-09/modules/mod-prawo-geologiczne-gornicze | ✅ OK |
+| Ustawa o gospodarce nieruchomościami (UGN) | Dz.U. 2026 poz. 399 t.j. (sync 2026-07-02 z dr-09) | dr-09/modules/mod-UGN-gospodarka-nieruchomosciami | ✅ OK |
+| Prawo geodezyjne + wywłaszczenia | Dz.U. 2024 poz. 1151 t.j. (sync 2026-07-02 z dr-09) | dr-09/modules/mod-PrGeodezyjne-kartografia-wywlaszczenia | ✅ OK |
+| Prawo geologiczne i górnicze | Dz.U. 2026 poz. 69 t.j. (sync 2026-07-02 z dr-09) | dr-09/modules/mod-prawo-geologiczne-gornicze | ✅ OK |
 | Kodeks morski | Dz.U. 2023 poz. 1523 ze zm. | dr-09/modules/mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski | ✅ OK |
 | Ustawa o zapobieganiu szkodom w środowisku | Dz.U. 2007 poz. 75 ze zm. | dr-09/modules/mod-POS-prawo-ochrony-srodowiska | ✅ OK |
 | Ustawa deweloperska | Dz.U. 2024 poz. 695 t.j. | dr-09/modules/mod-UGN-gospodarka-nieruchomosciami | ✅ OK |
@@ -363,18 +363,18 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
 | Prawo farmaceutyczne | Dz.U. 2026 poz. 612 t.j. | dr-10/modules/mod-PrFarm-prawo-farmaceutyczne | ✅ OK |
-| GIF/GIS/WIF — nadzór farmaceutyczny | Dz.U. 2026 poz. 612 + Dz.U. 2023 poz. 394 | dr-10/modules/mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny | ✅ OK |
+| GIF/GIS/WIF — nadzór farmaceutyczny | Dz.U. 2026 poz. 612 (GIF) + Dz.U. 2024 poz. 416 t.j. (GIS, sync 2026-07-02 — było błędnie 2023.394) | dr-10/modules/mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny | ✅ OK |
 | Rozp. REACH + CLP — chemikalia | Rozp. (WE) 1907/2006 + 1272/2008 | dr-10/modules/mod-REACH-CLP-chemikalia | ✅ OK |
 | Ustawa o działalności leczniczej | Dz.U. 2026 poz. 156 t.j. | dr-10/modules/mod-ustawa-dzialalnosc-lecznicza-pacjent | ✅ OK |
 | Ustawa o świadczeniach zdrowotnych — NFZ | Dz.U. 2025 poz. 1461 t.j. | dr-10/modules/mod-ustawa-NFZ-swiadczenia | ✅ OK |
 | Ustawa o jakości w opiece zdrowotnej | Dz.U. 2023 poz. 1692 ze zm. | dr-10/modules/mod-ustawa-jakosc-opieka-zdrowotna | ✅ OK |
 | Ustawa o zawodzie lekarza | Dz.U. 2026 poz. 37 t.j. | dr-10/modules/mod-ustawa-dzialalnosc-lecznicza-pacjent | ✅ OK |
 | Ustawa o zawodach pielęgniarki i położnej | Dz.U. 2025 poz. 450 t.j. | dr-10/modules/mod-ustawa-pielegniarka-polozna | ✅ OK |
-| Ustawa o diagnostyce laboratoryjnej | Dz.U. 2022 poz. 2162 ze zm. | dr-10/modules/mod-ustawa-diagnostyka-laboratoryjna | ✅ OK |
+| Ustawa o diagnostyce laboratoryjnej | Dz.U. 2023 poz. 2125 t.j. (sync 2026-07-02 — łańcuch 2022.2162[błąd]→2022.2280→2023.2125) | dr-10/modules/mod-ustawa-diagnostyka-laboratoryjna | ✅ OK |
 | Ustawa o wyrobach medycznych | Dz.U. 2022 poz. 974 ze zm. | dr-10/modules/mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny | ✅ OK |
 | Ustawa o produktach biobójczych | Dz.U. 2021 poz. 24 ze zm. | dr-10/modules/mod-ustawa-produkty-biobojcze | ✅ OK |
-| Ustawa Prawo oświatowe + szkolnictwo wyższe | Dz.U. 2024 poz. 737 + Dz.U. 2024 poz. 1571 | dr-10/modules/mod-ustawa-oswiata-szkolnictwo-wyzsze | ✅ OK |
-| Ustawa o sporcie + imprezach masowych | Dz.U. 2023 poz. 2048 | dr-10/modules/mod-ustawa-rolne-zywnosc-weterynaria | ✅ OK |
+| Ustawa Prawo oświatowe + szkolnictwo wyższe | Dz.U. 2025 poz. 1043 t.j. (oświatowe, sync 2026-07-02 — było błędnie 2024.737) + Dz.U. 2024 poz. 1571 t.j. (szkolnictwo wyższe) | dr-10/modules/mod-ustawa-oswiata-szkolnictwo-wyzsze | ✅ OK |
+| Ustawa o sporcie + imprezach masowych | Dz.U. 2026 poz. 95 t.j. (sync 2026-07-02 z dr-10) | dr-10/modules/mod-ustawa-rolne-zywnosc-weterynaria | ✅ OK |
 | Ustawa o bezpieczeństwie żywności | Dz.U. 2023 poz. 1448 ze zm. | dr-10/modules/mod-ustawa-bezpieczenstwo-zywnosci | ✅ OK |
 | Ustawa o Inspekcji Weterynaryjnej | Dz.U. 2024 poz. 12 t.j. | dr-10/modules/mod-ustawa-inspekcja-weterynaryjna | ✅ OK |
 | Ustawa o izbach aptekarskich (zawód zaufania publicznego) | Dz.U. 2025 poz. 1693 t.j. ✅ VER: 2026-06-14 | dr-10/modules/mod-ustawa-aptekarz-zawod | ✅ NOWY |
@@ -387,9 +387,9 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o substancjach chemicznych (REACH) | Dz.U. 2022 poz. 1816 ze zm. | dr-10/modules/mod-REACH-CLP-chemikalia | ✅ OK |
 | Adwokatura / zawody medyczne — ustawy korporacyjne | Dz.U. 2024 poz. 1564 | dr-10/modules/mod-ustawa-pielegniarka-polozna | ✅ OK |
 | Ustawa o ubezpieczeniach obowiązkowych lekarzy | Dz.U. 2025 poz. 367 t.j. | dr-10/modules/mod-ustawa-dzialalnosc-lecznicza-pacjent | ✅ OK |
-| Ustawa o medycynie — edukacja specjalna | Dz.U. 2022 poz. 2240 | dr-10/modules/mod-ustawa-edukacja-specjalna-dostepnosc | ✅ OK |
+| Ustawa o medycynie — edukacja specjalna | Dz.U. 2024 poz. 1411 t.j. (sync 2026-07-02 — było błędnie 2022.2240) | dr-10/modules/mod-ustawa-edukacja-specjalna-dostepnosc | ✅ OK |
 | Ustawa o rolnictwie ekologicznym + weterynaria | Dz.U. 2024 poz. 1284 | dr-10/modules/mod-ustawa-rolne-zywnosc-weterynaria | ✅ OK |
-| Ustawa KRUS | Dz.U. 2024 poz. 90 ze zm. | dr-10/modules/mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny | ✅ OK |
+| Ustawa KRUS | Dz.U. 2025 poz. 1770 t.j. (sync 2026-07-02 z dr-04) | dr-10/modules/mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny | ✅ OK |
 | Prawo farmaceutyczne — zmiana 2025 | Dz.U. 2025 poz. 1537 ze zm. | dr-10/modules/mod-PrFarm-prawo-farmaceutyczne | ⏳ OCZEKUJE |
 
 ---
@@ -406,16 +406,16 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o krajowym systemie certyfikacji cyberbezpieczeństwa | Dz.U. 2025 poz. 1017 | dr-11/modules/mod-ustawa-certyfikacja-cyberbezpieczenstwa | ✅ OK |
 | KSC — krajowy system cyberbezpieczeństwa | Dz.U. 2026 poz. 20 t.j. | dr-11/modules/mod-KSC-NIS2-cyberbezpieczenstwo-telekom | ✅ OK |
 | DORA (Rozp. UE 2022/2554) + eIDAS 2.0 | Rozp. UE 2022/2554 + 2024/1183 | dr-11/modules/mod-DORA-eIDAS-cyfrowe-finanse | ✅ OK |
-| Prawo komunikacji elektronicznej + UKE | Dz.U. 2024 poz. 1220 t.j. | dr-11/modules/mod-PrTelekom-poczta-UKE | ✅ OK |
+| Prawo komunikacji elektronicznej + UKE | Dz.U. 2024 poz. 1221 t.j. (sync 2026-07-02 — było błędnie 1220) | dr-11/modules/mod-PrTelekom-poczta-UKE | ✅ OK |
 | Ustawa o prawie autorskim i prawach pokrewnych | Dz.U. 2025 poz. 24 t.j. | dr-11/modules/mod-PrAut-wlasnosc-intelektualna-IP | ✅ OK |
 | AI Act — Rozp. UE 2024/1689 | Dz.Urz. UE L 2024/1689 | dr-11/modules/mod-AI-Act-framework | ✅ OK |
 | DMA — Digital Markets Act (Rozp. UE 2022/1925) | Dz.Urz. UE L 265/1 z 12.10.2022 | dr-11/modules/mod-DMA-digital-markets-act | ✅ OK |
 | DSA — Digital Services Act (Rozp. UE 2022/2065) | Dz.Urz. UE L 277/1 z 27.10.2022 | dr-11/modules/mod-DSA-digital-services-act | ✅ OK |
 | CRA, EUCS, DA, DGA — akty cyfrowe UE | Dz.Urz. UE L 2024/2847 + inne | dr-11/modules/mod-EUCS-CRA-akty-regulacyjne-UE | ✅ OK |
 | MiCA — kryptoaktywa (Rozp. UE 2023/1114) | Dz.Urz. UE L 2023/1114 | dr-11/modules/mod-MiCA-kryptoaktywa | ✅ OK |
-| Ustawa o informatyzacji podmiotów publicznych + KSeF | Dz.U. 2024 poz. 1557 t.j. | dr-11/modules/mod-ustawa-informatyzacja-podmiotow-publicznych | ✅ OK |
+| Ustawa o informatyzacji podmiotów publicznych + KSeF | Dz.U. 2025 poz. 1703 t.j. (sync 2026-07-02 z dr-11) | dr-11/modules/mod-ustawa-informatyzacja-podmiotow-publicznych | ✅ OK |
 | Ustawa o otwartych danych | Dz.U. 2023 poz. 1524 t.j. | dr-11/modules/mod-ustawa-otwarte-dane | ✅ OK |
-| Ustawa o podpisie elektronicznym i eIDAS | Rozp. UE 910/2014 + Dz.U. 2016 poz. 147 | dr-11/modules/mod-ustawa-podpis-elektroniczny | ✅ OK |
+| Ustawa o podpisie elektronicznym i eIDAS | Rozp. UE 910/2014 + Dz.U. 2016 poz. 1579 t.j. (sync 2026-07-02 — było błędnie 2016.147) | dr-11/modules/mod-ustawa-podpis-elektroniczny | ✅ OK |
 | Prawo własności przemysłowej | Dz.U. 2023 poz. 1170 t.j. | dr-11/modules/mod-ustawa-prawo-wlasnosci-przemyslowej | ✅ OK |
 | Ustawa o usługach świadczonych drogą elektroniczną | Dz.U. 2020 poz. 344 ze zm. | dr-11/modules/mod-ustawa-uslugi-elektroniczne | ✅ OK |
 | Ustawa UODO stara (2018) — ref historyczna | Dz.U. 2018 poz. 1000 | dr-11/modules/mod-UODO-postepowanie-ochrona-danych | ✅ OK |
@@ -442,7 +442,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o radcach prawnych | Dz.U. 2024 poz. 499 ze zm. | dr-12/modules/mod-ustawa-radcowie-prawni | ✅ OK |
 | Ustawa Prawo o notariacie (zawód) | Dz.U. 2026 poz. 614 t.j. | dr-12/modules/mod-ustawa-notariat | ✅ OK |
 | Ustawa o komornikach sądowych | Dz.U. 2024 poz. 1458 t.j. ✅ VER: 2026-06-14 (TRYB DZU — potwierdzono aktualny, KOREKTA: 2026/26 to inny akt - Ustawa SUS, błąd wcześniejszego wyszukiwania) | dr-12/modules/mod-ustawa-komornicy-sadowi-zawod | ✅ OK |
-| Ustawa o rzecznikach patentowych (zawód, zawód zaufania publicznego) | Dz.U. 2024 poz. 749 t.j. + Dz.U. 2025 poz. 1679 (w życie 3.02.2026) ✅ VER: 2026-06-14 | dr-12/modules/mod-ustawa-rzecznicy-patentowi-zawod | ✅ NOWY |
+| Ustawa o rzecznikach patentowych (zawód, zawód zaufania publicznego) | Dz.U. 2025 poz. 591 t.j. (sync 2026-07-02 z dr-12; możliwy jeszcze nowszy 2026.778 niepotwierdzony) + Dz.U. 2025 poz. 1679 (w życie 3.02.2026) ✅ VER: 2026-06-14 | dr-12/modules/mod-ustawa-rzecznicy-patentowi-zawod | ✅ NOWY |
 
 ---
 
@@ -453,20 +453,20 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
-| Ustawa o Policji | Dz.U. 2024 poz. 1589 t.j. ze zm. (zm.: 2024.1248, 2024.1562, 2025.1366) | dr-13/modules/mod-ustawa-policja | ✅ OK |
-| Ustawa o Straży Granicznej | Dz.U. 2024 poz. 1552 t.j. ze zm. (zm.: 2025.1366) | dr-13/modules/mod-ustawa-straz-graniczna | ✅ OK |
-| Ustawa o Żandarmerii Wojskowej | Dz.U. 2024 poz. 1654 t.j. ze zm. | dr-13/modules/mod-ustawa-zandarmeria-wojskowa | ✅ OK |
-| Ustawa o ABW i AW | Dz.U. 2024 poz. 1183 t.j. ze zm. | dr-13/modules/mod-ustawa-ABW-AW-CBA-sluzby-specjalne | ✅ OK |
-| Ustawa o CBA | Dz.U. 2024 poz. 1392 t.j. ze zm. | dr-13/modules/mod-ustawa-ABW-AW-CBA-sluzby-specjalne | ✅ OK |
+| Ustawa o Policji | Dz.U. 2025 poz. 636 t.j. (sync 2026-07-02 z dr-13) (zm.: 2024.1248, 2024.1562, 2025.1366) | dr-13/modules/mod-ustawa-policja | ✅ OK |
+| Ustawa o Straży Granicznej | Dz.U. 2026 poz. 367 t.j. (sync 2026-07-02 z dr-13) (zm.: 2025.1366) | dr-13/modules/mod-ustawa-straz-graniczna | ✅ OK |
+| Ustawa o Żandarmerii Wojskowej | Dz.U. 2026 poz. 159 t.j. (sync 2026-07-02 z dr-13) | dr-13/modules/mod-ustawa-zandarmeria-wojskowa | ✅ OK |
+| Ustawa o ABW i AW | Dz.U. 2025 poz. 902 t.j. (WARN-28 zamknięty, sync 2026-07-02 — było błędnie 2024.1183; to nowy t.j. tej samej ustawy z 2002 r., nie nowa reforma) | dr-13/modules/mod-ustawa-ABW-AW-CBA-sluzby-specjalne | ✅ OK |
+| Ustawa o CBA | Dz.U. 2025 poz. 712 t.j. (sync 2026-07-02 z dr-13) | dr-13/modules/mod-ustawa-ABW-AW-CBA-sluzby-specjalne | ✅ OK |
 | Ustawa o SOP | Dz.U. 2024 poz. 1672 t.j. ze zm. (zm.: 2025.1366) | dr-13/modules/mod-ustawa-ABW-AW-CBA-sluzby-specjalne | ✅ OK |
 | Ustawa o ochronie informacji niejawnych | Dz.U. 2025 poz. 1209 t.j. | dr-13/modules/mod-ustawa-informacje-niejawne | ✅ OK |
-| Ustawa o obronie Ojczyzny | Dz.U. 2022 poz. 655 ze zm. (zm.: 2025.825, 2025.1014) | dr-13/modules/mod-ustawa-obrona-ojczyzny-mobilizacja | ✅ OK |
+| Ustawa o obronie Ojczyzny | Dz.U. 2025 poz. 825 t.j. (sync 2026-07-02 — nowy t.j., nie zwykła zmiana) (zm.: 2025.825, 2025.1014) | dr-13/modules/mod-ustawa-obrona-ojczyzny-mobilizacja | ✅ OK |
 | Ustawa o ochronie ludności i obronie cywilnej | Dz.U. 2024 poz. 1907 ze zm. (zm.: 2025.1705, ⚡ 2026.646) | dr-13/modules/mod-ustawa-zarzadzanie-kryzysowe-obrona-cywilna | ✅ OK |
 | Ustawa o działaniach antyterrorystycznych | Dz.U. 2024 poz. 1474 t.j. | dr-13/modules/mod-ustawa-ABW-AW-CBA-sluzby-specjalne | ✅ OK |
-| Ustawa — szczególne środki zabezpieczające | Dz.U. 2020 poz. 2001 ze zm. | dr-13/modules/mod-ustawa-szczegolne-srodki-zabezpieczajace | ✅ OK |
-| Ustawa o środkach przymusu bezpośredniego | Dz.U. 2023 poz. 202 t.j. | dr-13/modules/mod-ustawa-policja | ✅ OK |
+| Ustawa — szczególne środki zabezpieczające | Dz.U. 2022 poz. 1689 t.j. (sync 2026-07-02 z dr-13, KOZZiD) | dr-13/modules/mod-ustawa-szczegolne-srodki-zabezpieczajace | ✅ OK |
+| Ustawa o środkach przymusu bezpośredniego | Dz.U. 2026 poz. 244 t.j. (sync 2026-07-02 z dr-13) | dr-13/modules/mod-ustawa-policja | ✅ OK |
 | Ustawa o udzielaniu ochrony cudzoziemcom | Dz.U. 2024 poz. 1546 t.j. | dr-13/modules/mod-ustawa-straz-graniczna | ✅ OK |
-| Prawo komunikacji elektronicznej (retencja danych) | Dz.U. 2024 poz. 1220 t.j. | → DR-11/mod-PrTelekom-poczta-UKE | 🔗 odesłanie |
+| Prawo komunikacji elektronicznej (retencja danych) | Dz.U. 2024 poz. 1221 t.j. (sync 2026-07-02 — było błędnie 1220) | → DR-11/mod-PrTelekom-poczta-UKE | 🔗 odesłanie |
 | Zmiana ustawy o obronie cywilnej 2026.646 | Dz.U. 2026 poz. 646 — vacatio legis weryfikuj | dr-13/modules/mod-ustawa-zarzadzanie-kryzysowe-obrona-cywilna | ⏳ OCZEKUJE |
 | Ustawa o zakwaterowaniu funkcjonariuszy 2025.1366 | Dz.U. 2025 poz. 1366 — weryfikuj termin wejścia | dr-13/modules/mod-ustawa-policja | ⏳ OCZEKUJE |
 
@@ -504,10 +504,10 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 
 | Akt prawny / norma | Źródło | Moduł | Status |
 |---|---|---|---|
-| PZP — zamówienia obronne i bezpieczeństwa | Dz.U. 2024 poz. 1320 ze zm. | dr-15/modules/mod-PZP-zamowienia-obronne-bezpieczenstwa | ✅ OK |
+| PZP — zamówienia obronne i bezpieczeństwa | Dz.U. 2026 poz. 793 t.j. (sync 2026-07-02) | dr-15|Dz.U. 2026 poz. 793 t.j. (sync 2026-07-02) | dr-15/modules/mod-PZP-zamowienia-obronne-bezpieczenstwa | ✅ OK |
 | Ustawa AML — nadzór finansowy | Dz.U. 2025 poz. 644 t.j. | dr-15/modules/mod-AML-nadzor-finansowy-instytucje | ✅ OK |
 | DORA — compliance sektor finansowy | Rozp. UE 2022/2554 | dr-15/modules/mod-DORA-compliance-sektor-finansowy | ✅ OK |
-| Ustawa — nauczyciele i uczelnie | Dz.U. 2023 poz. 984 + Dz.U. 2024 poz. 1571 | dr-15/modules/mod-ustawa-nauczyciele-uczelnie | ✅ OK |
+| Ustawa — nauczyciele i uczelnie | Dz.U. 2026 poz. 515 t.j. (Karta Nauczyciela, sync 2026-07-02 — było błędnie 2023.984) + Dz.U. 2024 poz. 1571 t.j. (szkolnictwo wyższe) | dr-15/modules/mod-ustawa-nauczyciele-uczelnie | ✅ OK |
 | Ustawa o ochronie sygnalistów | Dz.U. 2024 poz. 928 ze zm. | dr-15/modules/mod-ustawa-sygnalisci | ✅ OK |
 | ISO 37001:2016 — Anti-bribery management | Norma ISO | dr-15/modules/mod-ISO-37001-antykorupcja | ✅ OK |
 | ISO 37301:2021 — Compliance management systems | Norma ISO | dr-15/modules/mod-ISO-37301-compliance-management | ✅ OK |
@@ -530,7 +530,9 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa Prawo prasowe | Dz.U. 2018 poz. 1914 ze zm. | dr-16/modules/mod-ustawa-prawo-prasowe-media | ✅ OK |
 | Konstytucja — prawa i wolności w procesie | Art. 45, 47, 51, 77 Konstytucji | dr-16/modules/mod-Konstytucja-prawa-i-wolnosci-procesowe | ✅ OK |
 | Ustawa o archiwach i dokumentacji | Dz.U. 2020 poz. 164 ze zm. | dr-16/modules/mod-ustawa-archiwa-dokumentacja | ✅ OK |
-| Ustawa o obywatelstwie, paszportach, ewidencji | Dz.U. 2024 poz. 80 + inne | dr-16/modules/mod-ustawa-obywatelstwo-paszporty-ewidencja | ✅ OK |
+| Ustawa o obywatelstwie polskim | Dz.U. 2025 poz. 1611 ze zm. (sync 2026-07-02 z dr-16 krok 14/16 — było błędnie 2024.80, numer należący do rozp. MEN o planach nauczania) | dr-16/modules/mod-ustawa-obywatelstwo-paszporty-ewidencja | ✅ OK |
+| Ustawa o dokumentach paszportowych | Dz.U. 2026 poz. 196 ze zm. (sync 2026-07-02 z dr-16 krok 14/16) | dr-16/modules/mod-ustawa-obywatelstwo-paszporty-ewidencja | ✅ OK |
+| Ustawa o ewidencji ludności | Dz.U. 2026 poz. 384 ze zm. (sync 2026-07-02 z dr-16 krok 14/16) | dr-16/modules/mod-ustawa-obywatelstwo-paszporty-ewidencja | ✅ OK |
 | Ustawa o emeryturach pomostowych — wykaz prac szczególnych | Dz.U. 2025 poz. 468 t.j. ✅ VER: 2026-06-09 | dr-16/modules/mod-narzedzie-kalkulatory | ✅ OK |
 | Narzędzia procesowe — kalkulatory, kontrolery | — | dr-16/modules/mod-narzedzie-kalkulatory | ✅ OK |
 

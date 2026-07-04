@@ -1,6 +1,6 @@
 ---
 name: dr-04-prawo-pracy-zus-swiadczenia
-version: 3.2
+version: 3.3
 description: |
   DR-04: Prawo Pracy, ZUS, Świadczenia Społeczne
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.

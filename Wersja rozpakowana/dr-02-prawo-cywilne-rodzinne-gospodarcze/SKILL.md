@@ -1,6 +1,6 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: 3.2
+version: 3.3
 description: |
   DR-02: Prawo Cywilne, Rodzinne i Gospodarcze
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -72,6 +72,9 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   [✓] OK    mod-KC-ubezpieczenia
   [✓] NOWY  mod-KC-kredyty-frankowe
   [✓] OK    mod-KRO-rodzinne
+              (v1.1.0 2026-07-02: +mediacja rozwodowa art.436/445² KPC,
+               +OZSS rozszerzone, +świadkowie w sprawach rozwodowych —
+               pointer do shared/MOD-ATAK-NA-SWIADKA.md, bez duplikacji)
   [✓] OK    mod-KSH-spolki-handlowe
   [✓] OK    mod-PrUpad-upadlosc-restrukturyzacja
   [✓] NOWY  mod-ustawa-doradca-restrukturyzacyjny-zawod
@@ -110,6 +113,8 @@ view /mnt/skills/user/dr-02-prawo-cywilne-rodzinne-gospodarcze/MAPA-AKTOW.md
 ## Powiązania zewnętrzne
 - Wchodzi z: `prawo-polskie-v2` → `ROUTING-MAP.md` → ten skill
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2` / `analizator-umow-v1`
+- mod-KRO-rodzinne (sprawy rozwodowe, świadkowie) → `shared/MOD-ATAK-NA-SWIADKA.md` (kanoniczne techniki
+  ataku/obrony wiarygodności świadka) oraz `przesluchanie-swiadkow-v2-min90` (przygotowanie przesłuchania)
 - Weryfikacja prawa: isap.sejm.gov.pl
 - Orzecznictwo: orzeczenia.ms.gov.pl, sn.pl
 

@@ -1,6 +1,6 @@
 ---
 name: dr-09-budownictwo-srodowisko-energia-transport
-version: 3.1
+version: 3.2
 description: |
   DR-09: Budownictwo, Środowisko, Energia, Transport
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.

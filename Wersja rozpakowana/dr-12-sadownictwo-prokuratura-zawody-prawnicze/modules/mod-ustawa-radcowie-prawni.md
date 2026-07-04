@@ -25,7 +25,35 @@ Ustawa o radcach prawnych:
   → https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000499
 
 Powiązane akty (weryfikuj Dz.U. w ISAP przed użyciem):
-  Kodeks Etyki Radcy Prawnego — uchwała KRRP (nie Dz.U.; źródło: kirp.pl)
+  Postępowanie dyscyplinarne radców prawnych — Ustawa o radcach prawnych,
+    art. 42 (organy samorządu) i art. 64 i nast. (odpowiedzialność
+    dyscyplinarna):
+    → I instancja: OKRĘGOWY SĄD DYSCYPLINARNY właściwej okręgowej izby
+      radców prawnych
+    → II i OSTATNIA instancja (odwoławcza): WYŻSZY SĄD DYSCYPLINARNY (organ
+      samorządu wymieniony w art. 42 ust. 1, obok Krajowego Zjazdu, Krajowej
+      Rady, Wyższej Komisji Rewizyjnej, Głównego Rzecznika Dyscyplinarnego,
+      zgromadzeń i rad okręgowych izb, okręgowych komisji rewizyjnych i
+      rzeczników dyscyplinarnych)
+    → Ostrzeżenie dziekańskie (art. 66) — w wypadkach mniejszej wagi dziekan
+      rady okręgowej izby może poprzestać na ostrzeżeniu; odwołanie do
+      okręgowego sądu dyscyplinarnego (druga i ostatnia instancja dla tej
+      formy)
+    ✅ VER: 2026-07-02 (weryfikacja online na żądanie użytkownika, w ramach
+    TRYB DZU krok 11/16 — zadanie specjalne, dodanie podstaw dyscyplinarnych)
+  Kodeks Etyki Radcy Prawnego — uchwalony przez Nadzwyczajny Krajowy Zjazd
+    Radców Prawnych, obowiązuje od 1 lipca 2015 r.; tekst jednolity ogłoszony
+    Uchwałą nr 884/XI/2023 Prezydium Krajowej Rady Radców Prawnych z dnia
+    7 lutego 2023 r. (NIE Dz.U. — akt korporacyjny KRRP, źródło: kirp.pl)
+    Stosuje się odpowiednio do aplikantów radcowskich oraz — w zakresie
+    wskazanym w przepisach odrębnych — do prawników zagranicznych świadczących
+    w RP pomoc prawną odpowiadającą czynnościom radcy prawnego.
+    Radca prawny działający transgranicznie obowiązany jest dodatkowo
+    przestrzegać Kodeksu Etyki CCBE (Rady Adwokatur i Stowarzyszeń
+    Prawniczych Europy), uznanego za wiążący Uchwałą nr 8/2010 IX Krajowego
+    Zjazdu Radców Prawnych z 6.11.2010 r.
+    ✅ VER: 2026-07-02 (dodano w ramach TRYB DZU krok 11/16 na żądanie
+    użytkownika — dodanie KEA/KERP i odpowiedników)
   Rozp. MS w spr. wynagrodzenia radcy prawnego z urzędu — weryfikuj aktualne w ISAP
   KPC — zdolność postulacyjna radcy
   KPK art. 82 — obrona karna przez radcę (z ograniczeniami)

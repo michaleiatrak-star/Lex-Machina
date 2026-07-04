@@ -1,6 +1,6 @@
 ---
 name: dr-16-pisma-strategia-dowody-orzecznictwo
-version: 3.0
+version: 3.1
 description: |
   DR-16: Pisma, Strategia, Dowody, Orzecznictwo
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony obszar procesowy.

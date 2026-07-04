@@ -30,3 +30,13 @@
 > ⚠️ Bruksela Ia (1215/2012): znosi exequatur — orzeczenie sądu UE wykonalne w Polsce bez dodatkowego postępowania (wyjątek: klauzula porządku publicznego art. 45).
 > ⚠️ Rozp. spadkowe 650/2012: łącznik — zwykłe miejsce pobytu, nie obywatelstwo. Testamentowy wybór prawa ojczystego możliwy (art. 22).
 > ⚠️ TFUE art. 267 — pytanie prejudycjalne: sąd ostatniej instancji ma OBOWIĄZEK skierowania; niższe instancje — prawo.
+
+> Aktualizacja: 2026-07-02zzz (TRYB DZU krok 12/16 wg WARN-26, ROZPOCZĘTY —
+> minimalny zakres z uwagi na charakter skilla: większość pozycji to
+> rozporządzenia UE i traktaty międzynarodowe, które NIE wymagają
+> weryfikacji Dz.U. w standardowym trybie TRYB DZU. Sprawdzono 2 akty
+> krajowe: Prawo prywatne międzynarodowe (2023.503) i ustawa o obecności
+> sił zbrojnych (2020.1287) — wyniki wyszukiwania NIEJEDNOZNACZNE (możliwa
+> pomyłka nazwy z "ustawą o zasadach pobytu wojsk obcych" z poszlaką
+> nowszego t.j. z 2024 r.) — NIE rozstrzygnięto, NIE zgadywano. Krok 12/16
+> wymaga dokończenia w przyszłej sesji z bardziej precyzyjnymi zapytaniami

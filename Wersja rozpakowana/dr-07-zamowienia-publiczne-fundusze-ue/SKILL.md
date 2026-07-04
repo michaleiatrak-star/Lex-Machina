@@ -1,6 +1,6 @@
 ---
 name: dr-07-zamowienia-publiczne-fundusze-ue
-version: 3.0
+version: 3.1
 description: |
   DR-07: Zamówienia Publiczne, Fundusze UE, Pomoc Publiczna
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.

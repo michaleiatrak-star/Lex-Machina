@@ -1,7 +1,7 @@
 # ORZECZENIA-OUTPUT-SCHEMA — Protokół danych wyjściowych orzeczenia-sadowe-v2
 
 > **Plik:** `/mnt/skills/user/shared/ORZECZENIA-OUTPUT-SCHEMA.md`
-> **Wersja:** 1.0
+> **Wersja:** 1.1
 > **Właściciel:** orzeczenia-sadowe-v2
 > **Konsumenci:** pisma-procesowe-v3 (W3.2), analizator-umow-v1, analiza-sadowa-v6
 
@@ -35,6 +35,10 @@ ORZ-REKORD {
                        (STARE / SPRZECZNE / ZMIANA_PRAWA / WYMIAR_UE / ZASADA_PRAWNA)
   [OPT] pokrycie_p   : lista przesłanek które to orzeczenie pokrywa, np. ["P1", "P3"]
   [OPT] jurysdykcja  : "PL" | "UE/TSUE" | "ETPC" | "Tier4:[kraj]"
+  [OPT] kierunek     : "ZGODNE" | "PRZECIWNE" | "NEUTRALNE" — wynik Fazy 1-D
+                       orzeczenia-sadowe-v2 (dopasowanie do oczekiwanego rozstrzygnięcia);
+                       obecne wyłącznie gdy profil oczekiwanego rozstrzygnięcia (Faza 0-C)
+                       był ustalony
 }
 ```
 
@@ -130,6 +134,12 @@ Consumer samodzielnie wybiera pola których potrzebuje.
 5. **Alert SPRZECZNE** — gdy aktywny, consumer MUSI przekazać oba rekordy
    (Kat. 3A i Kat. 3B). Zakaz ukrywania linii mniejszościowej.
 
+6. **BILANS NIEKORZYSTNY/MIESZANY** — gdy pole `kierunek` jest obecne w zestawie
+   rekordów i przeważają lub równoważą się rekordy `PRZECIWNE` (Zasada 10
+   orzeczenia-sadowe-v2), consumer MUSI ująć tę informację w raporcie/piśmie
+   jako zastrzeżenie procesowe — zakaz przedstawiania sprawy jako jednoznacznie
+   silnej bez tego ujawnienia.
+
 ---
 
 ## WYWOŁANIE PRZEZ KONSUMENTA
@@ -151,5 +161,5 @@ view /mnt/skills/user/orzeczenia-sadowe-v2/SKILL.md
 
 ---
 
-*ORZECZENIA-OUTPUT-SCHEMA v1.0 · shared · właściciel: orzeczenia-sadowe-v2*
+*ORZECZENIA-OUTPUT-SCHEMA v1.1 · shared · właściciel: orzeczenia-sadowe-v2*
 *Konsumenci: pisma-procesowe-v3 · analizator-umow-v1 · analiza-sadowa-v6*

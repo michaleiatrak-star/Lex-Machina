@@ -18,12 +18,25 @@ postępowanie dyscyplinarne, mianowanie i odwołanie notariusza.
 
 ```
 Prawo o notariacie:
-  Dz.U. 1991 nr 22 poz. 91 (brak nowego t.j. — liczne nowelizacje)
-  Stan na 2026-06-05: nowelizacje m.in.:
+  ⚠️ POPRAWKA 2026-07-02: Dz.U. 2026 poz. 614 t.j. (potwierdzone w tej samej
+  sesji, FAZA 3A/krok 10 WARN-26) — BYŁO błędnie opisane jako "brak nowego
+  t.j." z bazą 1991 nr 22 poz. 91; ten opis był nieaktualny
+  Stan na 2026-06-05 (do zweryfikowania czy nadal aktualne po nowym t.j.):
     Dz.U. 2025 poz. 497, 621, 622, 769, 820, 1203
     Dz.U. 2026 poz. 252, 347, 473
-  ✅ VER: isap.sejm.gov.pl 2026-06-05 (brak skonsolidowanego t.j.)
+  ✅ VER: 2026-07-02
   → ZAWSZE weryfikuj aktualną wersję w ISAP przed cytowaniem
+
+Postępowanie dyscyplinarne notariuszy — Prawo o notariacie, Rozdział 6
+  "Odpowiedzialność dyscyplinarna", art. 50-63c:
+  → I instancja: SĄD DYSCYPLINARNY przy Radzie Izby Notarialnej (wybierany
+    przez Walne Zgromadzenie notariuszy danej izby na 3-letnią kadencję)
+  → II instancja (odwoławcza): WYŻSZY SĄD DYSCYPLINARNY
+  → Rzecznik Dyscyplinarny Notariatu — wszczyna i prowadzi dochodzenie
+    dyscyplinarne (art. 70 i nast.)
+  → Pomocniczo stosuje się przepisy postępowania karnego
+  → Kasacja do Sądu Najwyższego możliwa w określonych przypadkach (art. 63a-63c)
+  ✅ VER: 2026-07-02 (zadanie specjalne, na żądanie użytkownika)
 
 Taksa notarialna:
   Rozp. MS w spr. maksymalnych stawek taksy notarialnej

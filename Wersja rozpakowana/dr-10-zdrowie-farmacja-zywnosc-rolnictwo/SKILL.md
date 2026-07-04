@@ -1,6 +1,6 @@
 ---
 name: dr-10-zdrowie-farmacja-zywnosc-rolnictwo
-version: 3.1
+version: 3.2
 description: |
   DR-10: Zdrowie, Farmacja, Żywność, Rolnictwo
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.

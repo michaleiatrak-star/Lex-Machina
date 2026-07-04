@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: 5.0
+version: 5.2
 type: domain-router
 status: production
 compatibility: "web_search, web_fetch"
@@ -99,4 +99,4 @@ audyt-systemu-v4/references/mapa_dzu_*.md  ← rejestr Dz.U.
 | Akt uchylony przed wejściem | Status `❌`, usuń z MONITORING, odnotuj w AUDIT-JOURNAL |
 | Wejście w ciągu 90 dni od daty audytu | Zmień na `⚡ WCHODZI` — priorytetowa aktualizacja modułu |
 
-*Wersja: 5.0 | 2026-06-07*
+*Wersja: 5.2 | 2026-07-02 (WARN-28 zamknięty — ABW/AW to nowy t.j. tej samej ustawy z 2002 r., nie reforma; sync ROUTING-MAP)*

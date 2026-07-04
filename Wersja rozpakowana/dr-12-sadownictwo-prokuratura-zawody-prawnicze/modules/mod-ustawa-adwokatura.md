@@ -23,7 +23,32 @@ Prawo o adwokaturze:
   → https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240001564
 
 Powiązane akty (weryfikuj Dz.U. w ISAP przed użyciem):
-  Kodeks Etyki Adwokackiej — uchwała NRA (nie Dz.U., źródło: adwokatura.pl)
+  Postępowanie dyscyplinarne adwokatów — Prawo o adwokaturze, Dział VIII
+    "Odpowiedzialność dyscyplinarna", art. 45-95m:
+    → I instancja: SĄD DYSCYPLINARNY właściwej izby adwokackiej (art. 50 —
+      zakres działania; art. 51 — skład: prezes, wiceprezes, 6-23 członków,
+      3 zastępców; orzeka w składzie 3 sędziów)
+    → II instancja (odwoławcza): WYŻSZY SĄD DYSCYPLINARNY (organ adwokatury
+      wymieniony w art. 9 ust. 1, obok Krajowego Zjazdu Adwokatury, Naczelnej
+      Rady Adwokackiej, Rzecznika Dyscyplinarnego Adwokatury i Wyższej
+      Komisji Rewizyjnej)
+    → Rzecznik Dyscyplinarny Adwokatury — prowadzi czynności w postępowaniu
+      dyscyplinarnym (art. 51a i nast.)
+    → W sprawach nieuregulowanych stosuje się odpowiednio KPK (art. 95n)
+    ✅ VER: 2026-07-02 (weryfikacja online na żądanie użytkownika, w ramach
+    TRYB DZU krok 11/16 — zadanie specjalne, dodanie podstaw dyscyplinarnych)
+  Kodeks Etyki Adwokackiej (Zbiór Zasad Etyki Adwokackiej i Godności Zawodu) —
+    tekst jednolity: Uchwała nr 174/2026 Prezydium Naczelnej Rady Adwokackiej
+    z dnia 23 czerwca 2026 r. (NIE Dz.U. — akt korporacyjny NRA, źródło:
+    adwokatura.pl/regulaminy)
+    ⚠️ NAJŚWIEŻSZA ZMIANA 2026-07-02: uchwała NRA z 12-13.06.2026 (posiedzenie
+    plenarne w Rzeszowie) wprowadziła zasady korzystania przez adwokata z
+    narzędzi AI — wyłącznie pomocniczo, zakaz przekazania samodzielnego osądu
+    narzędziu, bez obowiązku informowania klienta (chyba że prawo stanowi
+    inaczej). VER: isap nie dotyczy (akt korporacyjny) — źródło: rp.pl
+    16.06.2026 + adwokatura.pl
+    ✅ VER: 2026-07-02 (dodano w ramach TRYB DZU krok 11/16 na żądanie
+    użytkownika — dodanie KEA/KERP i odpowiedników)
   Regulamin aplikacji adwokackiej — uchwała NRA
   Rozp. MS w spr. wynagrodzenia adwokata z urzędu — weryfikuj aktualne w ISAP
   KPC — zdolność postulacyjna adwokata
