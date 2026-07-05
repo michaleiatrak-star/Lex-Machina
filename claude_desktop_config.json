@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "mcp-isap": {
+      "command": "npx",
+      "args": ["-y", "@matematicsolutions/mcp-isap"]
+    }
+  }
+}
