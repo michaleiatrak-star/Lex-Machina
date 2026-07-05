@@ -1,13 +1,77 @@
 ---
 name: prawny-router-v3
-version: 3.8
+version: 3.9
 type: orchestration
 status: production
+entrypoint: SKILL.md
 compatibility: "web_search, web_fetch, show_widget, create_file"
 description: |
   Router Prawny v3.8 — orchestrator KAŻDEJ sprawy prawnej. Wykrywa tryb (LAIK/PRAWNIK),
   koordynuje PRIMARY→SECONDARY→FALLBACK, generuje .docx/.pdf.
   UŻYWAJ ZAWSZE i AUTOMATYCZNIE. Nigdy nie analizuj bez wczytania tego pliku.
+dependencies:
+  requires:
+    - shared
+    - prawo-polskie-v2
+    - analiza-sadowa-v6
+    - analizator-dowodow-v3
+    - analizator-przepisow-v2
+    - analizator-umow-v1
+    - chronologia-sprawy-v1
+    - dr-03-prawo-karne-wykroczenia-egzekucja
+    - dr-08-samorzad-terytorialny-prawo-lokalne
+    - dr-09-budownictwo-srodowisko-energia-transport
+    - dr-10-zdrowie-farmacja-zywnosc-rolnictwo
+    - dr-11-cyfrowe-cyber-ai-dane-ip
+    - dr-12-sadownictwo-prokuratura-zawody-prawnicze
+    - orzeczenia-sadowe-v2
+    - pisma-procesowe-v3
+    - pisma-proste-v2
+    - przesluchanie-swiadkow-v2-min90
+    - przewodnik-prawny-v2
+  called_by:
+    - użytkownik (punkt wejścia — brak nadrzędnego skilla)
+inputs:
+  - opis sprawy użytkownika (tekst wolny)
+  - opcjonalnie: pliki/dowody wgrane przez użytkownika
+  - opcjonalnie: plik kontekstu sesji (eksport z wcześniejszej rozmowy)
+outputs:
+  - decyzja routingu ([1]-[10]) + wywołanie właściwego skilla PRIMARY/SECONDARY/FALLBACK
+  - finalnie: odpowiedź tekstowa, widget (show_widget) lub dokument .docx/.pdf (create_file)
+confidence: verified-online
+  # HARD GATE wymusza web_search/web_fetch dla każdego przepisu/sygnatury —
+  # router sam nie generuje treści prawnej z pamięci, tylko orkiestruje.
+escalation:
+  - brak dostępu do isap.sejm.gov.pl / orzeczenia.ms.gov.pl / sn.pl / nsa.gov.pl
+    → oznacz ⚠️ [NIEWERYFIKOWANE] i poinformuj użytkownika, nie kontynuuj cicho
+  - sprawa transgraniczna / prawo obce → pomiń prawo-polskie-v2 i ISAP,
+    pozostałe zasady HG aktywne (UP-5)
+  - użytkownik zagubiony / brak klasyfikacji → [7] FALLBACK, nie zgadywanie dziedziny
+limitations:
+  - nie zastępuje porady radcy prawnego/adwokata — patrz shared/DISCLAIMER.md (KROK 7, obowiązkowy)
+  - jakość i czas odpowiedzi zależą od dostępności i jakości web_search/web_fetch
+  - nie ingeruje w kontrolę jakości pipeline'u pisma-procesowe-v3 (tylko deleguje)
+  - "ZNALEZISKO 2026-07-04 (do weryfikacji w następnym audycie): plik lokalny
+    references/kwalifikator-karnomaterialny.md (589 linii) wygląda na
+    potencjalny duplikat/wariant kanonicznego
+    dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
+    wskazanego w UP-3 — nie scalone w tej sesji (poza zakresem pilotażu
+    standaryzacji metadanych), zgłoszone do CHECKLIST-DEDUP."
+required_modules:
+  - shared/PRAWO-HARDGATE.md
+  - shared/MOD-STEP-TRACKER.md
+  - shared/MOD-KONTEKST-SESJI.md
+  - shared/MOD-SKAN-DOWODOW-KOMPLETNY.md
+  - shared/MOD-PORCJOWANIE-DOWODOW.md
+  - shared/CP-GATE.md
+  - shared/DISCLAIMER.md
+  - references/KROK0A-anonimizer.md
+  - references/KROK1-detekcja.md
+  - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md  # kanoniczny, wg UP-3
+changelog:
+  - "3.9: standaryzacja metadanych frontmatter (dependencies/inputs/outputs/
+    confidence/escalation/limitations/required_modules) — sesja 2026-07-04,
+    pilotaż standaryzacji przed rozszerzeniem na pozostałe 29 skili."
 ---
 
 # ⛔ HARD GATE — PRIORYTET BEZWZGLĘDNY

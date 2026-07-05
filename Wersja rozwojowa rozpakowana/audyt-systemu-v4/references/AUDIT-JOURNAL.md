@@ -100,6 +100,11 @@ legal-ai-audit-bundle.
    kio-orzeczenia-mcp) — wymaga środowiska Claude Desktop/Code z dostępem
    do `mcpServers`; PRAWO-HARDGATE jest na to gotowy (POZIOM A), do czasu
    konfiguracji działa POZIOM B (web_fetch na API).
+   **AKTUALIZACJA 2026-07-05:** mcp-isap skonfigurowany w `.mcp.json`
+   w korzeniu repozytorium (Claude Code wczytuje go automatycznie —
+   POZIOM A aktywny w sesjach Claude Code). Claude Desktop nadal wymaga
+   ręcznego wpisu w `claude_desktop_config.json`. Pozostałe konektory
+   (sententim, prawo-pl-saos, kio-orzeczenia-mcp) — flaga otwarta.
 2. **Odchudzenie monolitycznych SKILL.md** (436/559 linii → wzorzec
    index + references lazy-load) — osobna sesja refaktoryzacyjna; zmiana
    strukturalna, nie treściowa.
