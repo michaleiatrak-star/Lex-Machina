@@ -11,6 +11,115 @@
 
 ---
 
+## AUDYT-2026-07-05a — WZMOCNIENIE MECHANIZMÓW WERYFIKACJI — wdrożenie wzorców z narzędzi zewnętrznych (benchmark 7 repozytoriów)
+
+**Zakres:** Wdrożenie rekomendacji z porównania systemu z 7 zewnętrznymi
+narzędziami open-source (sententim, legal-cite-pl, mcp-isap, prawo-pl-eli /
+-saos / -eurlex, kio-orzeczenia-mcp, awesome-matematic-skills-pl, praxis).
+Diagnoza wyjściowa: system ma dojrzałą orkiestrację i wiedzę merytoryczną,
+ale HARD GATE realizował weryfikację najsłabszym narzędziem (web_search
+ogólnego przeznaczenia) zamiast strukturalnych API; brak było weryfikacji
+"prawdziwy cytat, fałszywa teza"; luka operacyjna RODO; brak artefaktu
+audytowego AI Act art. 12.
+
+### 1. NAPRAWY / ROZBUDOWY
+
+**(a) PRAWO-HARDGATE v2.0 — WARSTWA STRUKTURALNA (ŹRÓDŁO-0).**
+Nowa hierarchia narzędzi weryfikacji: POZIOM A (konektory MCP: get_act /
+verify_article / verify_signature, gdy skonfigurowane) → POZIOM B (web_fetch
+bezpośrednio na strukturalne API: api.sejm.gov.pl/eli — metadane,
+/references (łańcuch t.j.), /text.html; saos.org.pl/api — sygnatury;
+EUR-Lex/CELEX — prawo UE) → POZIOM C (dotychczasowe web_search/web_fetch
+jako fallback lub do USTALENIA identyfikatora). Reguła aktualności t.j.
+przełączona z heurystycznego web_search na deterministyczny endpoint
+ELI `/references`. Procedura orzeczeń dostała KROK 0 (SAOS API / MCP przed
+wyszukiwarką). Wzorce: prawo-pl-eli, legal-cite-pl, mcp-isap.
+
+**(b) SYGNATURY.md v1.1 — KONTRAKT WYNIKU WERYFIKACJI.**
+Deterministyczny kontrakt FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE
+(wzorzec sententim: "jeśli czegoś nie ma w bazie → NOT_FOUND, nigdy nie
+zgaduj") + reguły K-SYG-1..5 (pokrycie bazy przed interpretacją zera trafień,
+zakaz "blisko pasującej" sygnatury, AMBIGUOUS = prezentacja kandydatów bez
+wyboru, ✅ [VER] tylko dla FOUND, komplet danych audytowych do śladu).
+V-SYG-3 przełączony na kanał strukturalny z klasyfikacją wg kontraktu.
+
+**(c) WERYFIKACJA-SLAD.md v1.1 — GRADIENT WERYFIKACJI CYTATU.**
+Trzy poziomy ISTNIENIE / TREŚĆ / FRAGMENT (adaptacja z citation-grounding-pl
+v2.1), procedura GRAD-1..4: klasyfikacja siły twierdzenia, weryfikacja na
+wymaganym poziomie, guard STRON (sygnatura realna doczepiona do innej
+sprawy = blokada), reguła kalibracji (twierdzisz FRAGMENT, osiągasz TREŚĆ →
+🟠 KALIBRACJA: złagodź do parafrazy). Nowe statusy śladu: 🟢 [VER-FRAGMENT],
+🟢 [VER-TREŚĆ], 🟠 [KALIBRACJA], 🔴 [BLOKADA]. Zamyka lukę "prawdziwy cytat,
+fałszywa teza" (Stanford "false-under-true"). SELF-CHECK rozszerzony o 3
+pozycje [GRADIENT].
+
+**(d) DR-11 — LUKA OPERACYJNA RODO WYPEŁNIONA (3 nowe moduły + 1 rozbudowa).**
+- `mod-RODO-DPIA-ocena-skutkow.md` (NOWY): art. 35–36, przesiew progu
+  (wykaz UODO + 9 kryteriów EROD WP248, reguła ≥2), 4 filary OSOD,
+  uprzednie konsultacje, relacja do FRIA z AI Act.
+- `mod-RODO-DSAR-zadania-osob.md` (NOWY): art. 12 + 15–22, deterministyczny
+  zegar 1 miesiąc / +2 mies. wg rozp. (EWG) 1182/71 art. 3 ust. 2 lit. c
+  (wpływ 31.01 → deadline 28/29.02), bramki odmowy, draft + rejestr żądań.
+- `mod-RODO-RCP-DPA-rejestr-powierzenie.md` (NOWY): RCP art. 30 ust. 1–2 +
+  mechaniczny checklist klauzul DPA art. 28 ust. 3 lit. a–h, wynik
+  deterministyczny KOMPLETNA / BRAKI.
+- `mod-RODO-szczegolowy.md` (ROZBUDOWA procedury naruszenia, bez duplikacji —
+  zgodnie z DEDUPLICATION-POLICY rozbudowano lokalizację kanoniczną):
+  KROK 0 zegar 72h od STWIERDZENIA (godzinowo), typologia
+  poufność/integralność/dostępność, ocena ryzyka wg EROD 9/2022 z wynikiem
+  BRAK/ISTNIEJE/WYSOKIE, zgłoszenie etapowe (art. 33 ust. 4), KROK 2B
+  zawiadomienie osób z wyjątkami art. 34 ust. 3, granica governance
+  (wysyłka = człowiek). Wzorzec: bundle ochrona-danych.
+
+**(e) shared/MOD-AUDIT-BUNDLE.md (NOWY) — artefakt AI Act art. 12.**
+Paczka audytowa: manifest JSON z metadanymi (model, tryb, skille, źródła,
+stawka), sumy SHA-256 artefaktów, statusy MISSING z powodami, INDEX.md dla
+człowieka; konsumuje raport MOD-STEP-TRACKER i tabelę śladu (wersję sprzed
+STRIP-VER-GATE); zakaz umieszczania mapy anonimizacji w paczce. Wzorzec:
+legal-ai-audit-bundle.
+
+### 2. STRUKTURA SYSTEMU (ten wpis)
+
+| Plik | Akcja |
+|---|---|
+| `shared/PRAWO-HARDGATE.md` | ZMIENIONY (v2.0 — ŹRÓDŁO-0, KROK 0 orzeczeń, sekwencja t.j. przez ELI /references) |
+| `shared/SYGNATURY.md` | ZMIENIONY (v1.0→1.1 — kontrakt FOUND/NOT_FOUND/AMBIGUOUS/OUT_OF_SCOPE) |
+| `shared/WERYFIKACJA-SLAD.md` | ZMIENIONY (v1.0→1.1 — gradient ISTNIENIE/TREŚĆ/FRAGMENT + guard STRON) |
+| `shared/MOD-AUDIT-BUNDLE.md` | NOWY (v1.0.0 — paczka audytowa AI Act art. 12) |
+| `dr-11.../modules/mod-RODO-DPIA-ocena-skutkow.md` | NOWY |
+| `dr-11.../modules/mod-RODO-DSAR-zadania-osob.md` | NOWY |
+| `dr-11.../modules/mod-RODO-RCP-DPA-rejestr-powierzenie.md` | NOWY |
+| `dr-11.../modules/mod-RODO-szczegolowy.md` | ZMIENIONY (procedura naruszenia rozbudowana) |
+| `dr-11-cyfrowe-cyber-ai-dane-ip/SKILL.md` | ZMIENIONY (version 3.3→3.4; lista modułów 19→22) |
+| `audyt-systemu-v4/SKILL.md` | ZMIENIONY (version 4.6→4.7) |
+| `audyt-systemu-v4/references/AUDIT-JOURNAL.md` | ZMIENIONY (ten wpis) |
+
+### 3. ŚWIADOMIE NIEWDROŻONE (otwarte flagi)
+
+1. **Konfiguracja konektorów MCP** (sententim, mcp-isap, prawo-pl-saos,
+   kio-orzeczenia-mcp) — wymaga środowiska Claude Desktop/Code z dostępem
+   do `mcpServers`; PRAWO-HARDGATE jest na to gotowy (POZIOM A), do czasu
+   konfiguracji działa POZIOM B (web_fetch na API).
+2. **Odchudzenie monolitycznych SKILL.md** (436/559 linii → wzorzec
+   index + references lazy-load) — osobna sesja refaktoryzacyjna; zmiana
+   strukturalna, nie treściowa.
+3. **Testy driftu** (wzorzec test_instructions_drift.py z kio-orzeczenia-mcp:
+   zgodność SKILL.md z zachowaniem) — wymaga decyzji o infrastrukturze CI
+   dla repozytorium skilli.
+
+### 4. REKOMENDACJE NA PRZYSZŁOŚĆ
+
+1. Po skonfigurowaniu MCP: przeprowadzić sesję testową weryfikacji 10 losowych
+   aktów z mapy Dz.U. przez POZIOM A i porównać z wynikami katalogu t.j.
+   z projektu 2026-07-04.
+2. Rozważyć lokalną bazę sygnatur (wzorzec sententim: SQLite + kontrakt) dla
+   najczęściej cytowanych orzeczeń systemu — orzeczenia-sadowe-v2 jako host.
+3. Gradient weryfikacji (c) stosować od razu w pismach wysokiej stawki;
+   po miesiącu ocenić w audycie, czy statusy 🟠 KALIBRACJA faktycznie
+   wyłapują nadinterpretacje parafraz.
+
+---
+
 ## AUDYT-2026-07-04p — PROJEKT "KATALOG WSZYSTKICH T.J." — DR-15 (sprawdzona, bez akcji) i DR-16 SKATALOGOWANA — 🏁 PROJEKT ZAKOŃCZONY
 
 **Zakres:** Piętnasta i szesnasta (ostatnia) dziedzina projektu
