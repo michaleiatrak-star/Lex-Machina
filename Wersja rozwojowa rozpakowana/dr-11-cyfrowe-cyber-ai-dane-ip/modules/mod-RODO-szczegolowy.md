@@ -63,21 +63,52 @@ C. OBA JEDNOCZEŚNIE (A + B)
 | Sprzeciw | art. 21 | Niezwłocznie | Prawnie uzasadnione nadrzędne interesy |
 
 ## NARUSZENIE OCHRONY DANYCH — PROCEDURA
+
+> Rozszerzono: 2026-07-05 (AUDYT-2026-07-05a), wzorzec rodo-naruszenie-72h-pl:
+> deterministyczny zegar 72h, typologia naruszenia, zgłoszenie etapowe, wyjątki art. 34 ust. 3.
+
 ```
-KROK 1 — Wykrycie naruszenia
-  → Ocena ryzyka: czy naruszenie może powodować ryzyko dla praw osób?
-  → Jeśli TAK: zgłoszenie do UODO w ciągu 72h (art. 33 RODO)
-  → Jeśli WYSOKIE ryzyko: + zawiadomienie osób w bez zbędnej zwłoki (art. 34 RODO)
-  → Jeśli NIE: dokumentuj w rejestrze naruszeń (art. 33 ust. 5)
+KROK 0 — ZEGAR (deterministycznie, nie "w pamięci"):
+  → Start biegu: moment STWIERDZENIA naruszenia przez administratora
+    (nie moment zdarzenia!). Zanotuj datę i GODZINĘ stwierdzenia.
+  → deadline_72h = stwierdzenie + 72 godziny (liczone godzinowo, ISO z godziną)
+  → Po terminie → zgłoszenie NADAL obowiązkowe + wyjaśnienie przyczyn
+    opóźnienia (art. 33 ust. 1 zd. 2)
+  → Procesor stwierdza naruszenie → zawiadamia administratora BEZ ZBĘDNEJ
+    ZWŁOKI (art. 33 ust. 2) — zegar administratora startuje od jego stwierdzenia
+
+KROK 1 — Kwalifikacja i ocena ryzyka
+  → Czy to naruszenie (art. 4 pkt 12)? Typ: POUFNOŚĆ (ujawnienie/dostęp) /
+    INTEGRALNOŚĆ (modyfikacja) / DOSTĘPNOŚĆ (utrata/zniszczenie) — często łącznie
+  → Ocena ryzyka dla praw i wolności (czynniki wg wytycznych EROD 9/2022):
+    charakter/wrażliwość/wolumen danych, łatwość identyfikacji, waga skutków,
+    cechy osób (dzieci, pacjenci), liczba osób
+  → Wynik deterministyczny: ryzyko BRAK / ISTNIEJE / WYSOKIE + uzasadnienie
+  → ISTNIEJE lub WYSOKIE: zgłoszenie do UODO przed deadline_72h (art. 33)
+  → WYSOKIE: + zawiadomienie osób bez zbędnej zwłoki (art. 34) — patrz KROK 2B
+  → BRAK: bez zgłoszenia, ale UZASADNIJ i udokumentuj w rejestrze (art. 33 ust. 5)
 
 KROK 2 — Zgłoszenie do UODO (treść wymagana art. 33 ust. 3):
-  □ Charakter naruszenia (kategorie, liczba osób, liczba rekordów)
+  □ Charakter naruszenia (kategorie i przybliżona liczba osób oraz rekordów)
   □ Dane kontaktowe IOD lub innego punktu kontaktowego
   □ Prawdopodobne konsekwencje naruszenia
   □ Środki podjęte lub proponowane w celu zaradzenia
+  → Brak kompletu informacji w 72h → ZGŁOSZENIE ETAPOWE (art. 33 ust. 4):
+    zgłoś to, co wiesz, uzupełniaj sukcesywnie — nie czekaj z całością po terminie
+  → Formularz i kanał zgłoszenia: weryfikuj aktualny na uodo.gov.pl (web_fetch)
+
+KROK 2B — Zawiadomienie osób (art. 34, tylko WYSOKIE ryzyko):
+  → Językiem prostym: opis naruszenia, kontakt IOD, konsekwencje, środki (art. 34 ust. 2)
+  → WYJĄTKI (art. 34 ust. 3): (a) dane nieczytelne dla nieuprawnionych
+    (np. skuteczne szyfrowanie), (b) środki następcze eliminują wysokie ryzyko,
+    (c) niewspółmierny wysiłek → komunikat publiczny
 
 KROK 3 — Rejestr naruszeń (art. 33 ust. 5):
-  → Dokumentuj wszystkie naruszenia — nawet te niezgłaszane do UODO
+  → Dokumentuj WSZYSTKIE naruszenia — także niezgłaszane: okoliczności, skutki,
+    działania naprawcze, ocenę ryzyka z uzasadnieniem (dowód rozliczalności)
+
+GRANICA: moduł przygotowuje ocenę, liczy deadline_72h i składa DRAFT zgłoszenia
+i zawiadomień. Decyzję o zgłoszeniu i WYSYŁKĘ wykonuje administrator/IOD.
 ```
 
 ## MONITORING PRACOWNIKÓW (art. 22² KP)

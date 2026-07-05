@@ -1,8 +1,11 @@
 # WERYFIKACJA-ŚLAD — Moduł Audytu Śladu Weryfikacji
 
 > **Plik:** `/mnt/skills/user/shared/WERYFIKACJA-SLAD.md`
-> **Wersja:** 1.0 (2026-05-25)
-> **Status:** NOWY — naprawa BLOKER-3
+> **Wersja:** 1.1 (2026-07-05) — dodano GRADIENT WERYFIKACJI CYTATU
+>              (ISTNIENIE/TREŚĆ/FRAGMENT + reguła kalibracji + guard STRON;
+>              wzorzec citation-grounding-pl v2.1; AUDYT-2026-07-05a)
+> **Wersja poprzednia:** 1.0 (2026-05-25)
+> **Status:** AKTYWNY — naprawa BLOKER-3
 
 ---
 
@@ -51,6 +54,94 @@ Termin: 2 tygodnie na sprzeciw od nakazu zapłaty (art. 502 §1 KPC) ✅ [VER: i
 | art. 190a §4 KK — tryb na wniosek | orka.sejm.gov.pl | 2026-05-25 | ✅ |
 | art. 12 §4 KPK — wyjątek wnioskowy | isap.sejm.gov.pl (Dz.U.2026.490) | 2026-05-25 | ✅ |
 | Wyrok SN V KK 123/22 | sn.pl (nie znaleziono) | 2026-05-25 | ⚠️ NIEWERYFIKOWANE |
+```
+
+---
+
+## 🎚️ GRADIENT WERYFIKACJI CYTATU — ISTNIENIE / TREŚĆ / FRAGMENT
+
+> Dodano: 2026-07-05 (AUDYT-2026-07-05a). Wzorzec: citation-grounding-pl v2.1
+> (adaptacja gradientu Existence/Content/Paragraph). Zamyka lukę
+> "prawdziwy cytat, fałszywa teza" (problem Stanford "false-under-true"):
+> dotychczasowy ślad ✅ [VER] potwierdzał ISTNIENIE przepisu/sygnatury,
+> ale nie sprawdzał, czy PARAFRAZA oddaje faktyczną treść źródła.
+
+**Zasada:** samo `✅ [VER]` (istnienie) NIE wystarcza, gdy odpowiedź twierdzi coś
+o TREŚCI źródła. Poziom weryfikacji musi odpowiadać sile twierdzenia.
+
+### Trzy poziomy weryfikacji
+
+| Poziom | Co potwierdza | Wymagany dla |
+|---|---|---|
+| **ISTNIENIE** | Kotwica (sygnatura / nr Dz.U. / CELEX, data, organ) jest realna i zgodna z deklaracją | samo powołanie: "por. II CSK 123/19", "(t.j. Dz.U. 2024 poz. 18)" |
+| **TREŚĆ** | Źródło CO DO ISTOTY zawiera to, co twierdzi odpowiedź | parafraza: "SN przyjął, że…", "przepis przewiduje, że…" |
+| **FRAGMENT** | Cytowany fragment istnieje DOSŁOWNIE w źródle | każdy cytat w cudzysłowie, każdy pinpoint (§, ustęp, akapit uzasadnienia) |
+
+### Procedura GRAD
+
+```
+GRAD-1: Sklasyfikuj każde powołanie w planowanej odpowiedzi:
+          cytat dosłowny / teza z pinpointem     → wymagany poziom FRAGMENT
+          stanowisko sądu / parafraza przepisu    → wymagany poziom TREŚĆ
+          samo powołanie kotwicy (sygnatura, Dz.U.) → wymagany poziom ISTNIENIE
+
+GRAD-2: Zweryfikuj na WYMAGANYM poziomie — wobec treści pobranej ze źródła
+        (PRAWO-HARDGATE KROK 3: odczyt ze źródła, nie z pamięci):
+          FRAGMENT → porównaj cytat ze źródłem znak-po-znaku (po normalizacji:
+                     wielkość liter, białe znaki, cudzysłowy „"», myślniki —–,
+                     [...] jako dozwolona luka). Słowo nośne inne = brak trafienia.
+          TREŚĆ    → sprawdź czy terminy nośne twierdzenia (≥4 znaki, bez słów
+                     funkcyjnych) występują w źródle I czy sens nie jest odwrócony
+                     (zwłaszcza: kto wygrał, co oddalono, zakres wyjątku).
+          ISTNIENIE→ kontrakt FOUND/NOT_FOUND/AMBIGUOUS (shared/SYGNATURY.md)
+                     lub KROK 2B PRAWO-HARDGATE (tytuł aktu vs teza).
+
+GRAD-3: GUARD STRON (dla orzeczeń, gdy znane są strony postępowania):
+        porównaj strony deklarowane w odpowiedzi ze stronami ze źródła.
+        Sygnatura zgodna + strony RAŻĄCO rozbieżne = 🔴 blokada
+        ("prawdziwa sygnatura doczepiona do INNEJ sprawy").
+        Formy prawne pomijaj w porównaniu (S.A. ≡ Spółka Akcyjna, sp. z o.o.).
+
+GRAD-4: REGUŁA KALIBRACJI — porównaj poziom OSIĄGNIĘTY z WYMAGANYM:
+          osiągnięty ≥ wymagany → 🟢 ZWERYFIKOWANY
+          twierdzisz FRAGMENT, osiągnąłeś tylko TREŚĆ → 🟠 KALIBRACJA:
+             złagodź cytat dosłowny do parafrazy ALBO oznacz pinpoint
+             jako prowizoryczny — NIGDY nie zostawiaj cudzysłowu bez FRAGMENT
+          TREŚĆ niepotwierdzona co do istoty → 🟡 WYMAGA_OSĄDU (decyzja
+             człowieka przed użyciem w piśmie) lub usuń twierdzenie
+          kotwica nierozwiązana / rozbieżna / guard STRON → 🔴 NIEZWERYFIKOWANY
+             = potencjalna halucynacja, BLOKADA (usuń z odpowiedzi/pisma)
+```
+
+### Rozszerzone statusy śladu
+
+Dotychczasowe `✅ [VER]` / `⚠️ [NIEWERYFIKOWANE]` pozostają w mocy dla poziomu
+ISTNIENIE. Dla TREŚĆ i FRAGMENT stosuj rozszerzenie:
+
+```
+🟢 [VER-FRAGMENT: źródło, data]  — cytat dosłowny potwierdzony w źródle
+🟢 [VER-TREŚĆ: źródło, data]     — parafraza potwierdzona co do istoty
+✅ [VER: źródło, data]           — potwierdzone ISTNIENIE kotwicy (jak dotąd)
+🟠 [KALIBRACJA]                  — osiągnięto niższy poziom niż twierdzono → złagodź tezę
+⚠️ [NIEWERYFIKOWANE]             — weryfikacja niemożliwa (jak dotąd)
+🔴 [BLOKADA]                     — rozbieżność kotwicy / stron / treści → usuń przed wysłaniem
+```
+
+⛔ ZAKAZ: cytat w cudzysłowie lub pinpoint bez statusu 🟢 [VER-FRAGMENT].
+⛔ ZAKAZ: "SN przyjął, że…" z samym ✅ [VER] (istnienie) — parafraza wymaga
+   co najmniej poziomu TREŚĆ albo przeformułowania na "orzeczenie dotyczy [tematu]".
+Statusy 🟠 i 🔴 podlegają STRIP-VER-GATE tak samo jak pozostałe znaczniki.
+
+### Kolumna poziomu w tabeli śladu (poziom pełny)
+
+Przy analizach z cytatami/parafrazami dodaj kolumnę "Poziom (wym.→osiąg.)":
+
+```
+| Element | Źródło | Data | Poziom (wym.→osiąg.) | Status |
+|---|---|---|---|---|
+| „sąd związany jest granicami zaskarżenia" (II CSK 123/19) | saos.org.pl API | 2026-07-05 | FRAGMENT→FRAGMENT | 🟢 |
+| "SN dopuścił klauzulę waloryzacyjną" (I CSK 50/18) | sn.pl | 2026-07-05 | TREŚĆ→ISTNIENIE | 🟠 KALIBRACJA |
+| art. 385¹ §1 KC — powołanie | api.sejm.gov.pl ELI | 2026-07-05 | ISTNIENIE→ISTNIENIE | ✅ |
 ```
 
 ---
@@ -168,6 +259,11 @@ Tryb awaryjny NIE oznacza pominięcia disclaimera — DISCLAIMER.md stosuje się
 □ [WERYFIKACJA-ŚLAD] Użyłem narzędzia (web_search/web_fetch) dla każdego VER?
 □ [WERYFIKACJA-ŚLAD] ≥3 błędy sieci → komunikat użytkownikowi wyświetlony?
 □ [WERYFIKACJA-ŚLAD] Analiza ≥4 przepisów → tabela śladu na końcu odpowiedzi?
+□ [GRADIENT] Każdy cytat w cudzysłowie / pinpoint ma 🟢 [VER-FRAGMENT]?
+□ [GRADIENT] Każda parafraza ("SN przyjął, że…") zweryfikowana na poziomie TREŚĆ,
+             nie tylko ISTNIENIE?
+□ [GRADIENT] Twierdzenia z poziomem osiągniętym < wymaganym → skalibrowane (🟠)
+             lub usunięte (🔴)?
 ```
 
 ### Dodaj do REGUŁ NADRZĘDNYCH routera (punkt 14):

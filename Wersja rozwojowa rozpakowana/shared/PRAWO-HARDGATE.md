@@ -1,5 +1,9 @@
 # PRAWO-HARDGATE — Zakaz cytowania prawa i orzeczeń z pamięci
 
+> **Wersja:** 2.0 (2026-07-05) — dodano WARSTWĘ STRUKTURALNĄ (ŹRÓDŁO-0):
+> deterministyczne API (ELI Sejm / SAOS / CELLAR) i konektory MCP przed web_search.
+> Wzorce: prawo-pl-eli, legal-cite-pl, mcp-isap, sententim (AUDYT-2026-07-05a).
+>
 > ⛔ HARD GATE — BEZWZGLĘDNY. Aktywny we wszystkich skillach, modułach i krokach systemu.
 > Nie ma wyjątków. Nie ma trybu "szybkiego". Nie ma trybu "wiem na pewno".
 >
@@ -34,9 +38,13 @@ Dotyczy KAŻDEJ dziedziny prawa: cywilnego, karnego, pracy, administracyjnego, p
 > ZAKAZ cytowania przepisu z t.j. który nie jest najnowszym ogłoszonym tekstem jednolitym.
 >
 > Weryfikacja sekwencja:
->   1. Sprawdź na isap.sejm.gov.pl jaki jest NAJNOWSZY t.j. danego aktu.
->   2. Jeśli od najnowszego t.j. były nowelizacje — wskaż je jako "(ze zm. Dz.U. YYYY poz. NNN)".
->   3. Dopiero na tej podstawie cytuj przepis.
+>   1. PREFEROWANE (deterministyczne): web_fetch / narzędzie MCP na
+>      https://api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}/references
+>      → odczytaj łańcuch "Tekst jednolity" — najnowsza pozycja = obowiązujący t.j.
+>      (patrz sekcja "WARSTWA STRUKTURALNA (ŹRÓDŁO-0)").
+>   2. Fallback: sprawdź na isap.sejm.gov.pl jaki jest NAJNOWSZY t.j. danego aktu.
+>   3. Jeśli od najnowszego t.j. były nowelizacje — wskaż je jako "(ze zm. Dz.U. YYYY poz. NNN)".
+>   4. Dopiero na tej podstawie cytuj przepis.
 >
 > Standardowy format cytowania:
 >   art. X ustawy z dnia [...] (t.j. Dz.U. z RRRR r. poz. NNN[, ze zm.])
@@ -45,6 +53,55 @@ Dotyczy KAŻDEJ dziedziny prawa: cywilnego, karnego, pracy, administracyjnego, p
 > ⛔ ZAKAZ używania t.j. starszego niż najnowszy dostępny — nawet gdy moduł podaje inny rok.
 > Jeśli t.j. w module jest starszy niż najnowszy na ISAP: użyj najnowszego z ISAP.
 
+## ⚙️ WARSTWA STRUKTURALNA (ŹRÓDŁO-0) — API zamiast wyszukiwarki
+
+> Dodano: 2026-07-05 (AUDYT-2026-07-05a). Wzorce: prawo-pl-eli (ELI Sejm),
+> legal-cite-pl / mcp-isap (strukturalny odczyt aktu po identyfikatorze),
+> sententim (deterministyczna weryfikacja sygnatur), prawo-pl-saos (SAOS API).
+>
+> **Zasada:** web_search to wyszukiwarka ogólnego przeznaczenia — może trafić na
+> nieaktualną kopię, forum lub komentarz. Strukturalne API pytamy o KONKRETNY
+> identyfikator aktu/orzeczenia i dostajemy odpowiedź deterministyczną.
+> Dlatego API/MCP są ZAWSZE pierwszym wyborem, a web_search — fallbackiem.
+
+**Hierarchia narzędzi weryfikacji (od najsilniejszego):**
+
+```
+POZIOM A — konektor MCP (gdy skonfigurowany w środowisku):
+  get_act / verify_article        (mcp-isap, legal-cite-pl)  → akty Dz.U./M.P.
+  verify_signature / search_judgments (sententim)            → sygnatury (kontrakt FOUND/NOT_FOUND/AMBIGUOUS)
+  narzędzia SAOS / KIO / EUR-Lex  (prawo-pl-saos, kio-orzeczenia-mcp, prawo-eu-eurlex)
+
+POZIOM B — bezpośredni web_fetch na strukturalne API (działa bez MCP):
+  Akty PL (ELI Sejm):  https://api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}            → metadane (status, wejście w życie)
+                       https://api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}/references → nowelizacje, TEKST JEDNOLITY
+                       https://api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}/text.html  → pełny tekst aktu
+  Orzeczenia (SAOS):   https://www.saos.org.pl/api/search/judgments?caseNumber={sygnatura}
+  Prawo UE (CELLAR):   https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:{celex}
+                       (wersje skonsolidowane: CELEX 0{...}-{YYYYMMDD})
+
+POZIOM C — web_search / web_fetch na strony (dotychczasowe ŹRÓDŁO-1..3 poniżej):
+  stosuj TYLKO gdy POZIOM A i B niedostępne lub nie znasz identyfikatora aktu
+  (wtedy web_search służy do USTALENIA identyfikatora, a cytat i tak pobierz z POZIOMU A/B).
+```
+
+**Reguły warstwy strukturalnej:**
+
+1. Wynik z POZIOMU A/B oznaczaj: `✅ [VER: api.sejm.gov.pl ELI DU/RRRR/NNN, data]`
+   lub `✅ [VER: saos.org.pl API, data]` — to znacznik silniejszy niż web-fallback.
+2. Weryfikację t.j. wykonuj przez endpoint `/references` (typ „Tekst jednolity") —
+   NIE przez web_search. Endpoint zwraca pełny łańcuch t.j.; najnowszy = obowiązujący.
+   Narzędzie/endpoint ostrzega też o nowelizacjach PO tekście jednolitym — nałóż je
+   i sprawdź vacatio legis względem daty zdarzenia.
+3. Akt OGŁOSZONY ≠ OBOWIĄZUJĄCY: z metadanych ELI odczytaj datę wejścia w życie
+   i status; przy nowelizacji sprawdź artykuł „wchodzi w życie" (różne daty dla
+   różnych jednostek redakcyjnych).
+4. Brak aktu/orzeczenia w odpowiedzi API ≠ dowód nieistnienia, jeżeli API nie
+   pokrywa danego zakresu (np. SAOS nie indeksuje NSA/WSA; indeksacja ELI bywa
+   opóźniona). Wtedy przejdź na POZIOM C i zaznacz ograniczenie pokrycia.
+5. Do dosłownego cytatu w piśmie/umowie preferuj urzędowy PDF t.j. (ELI `text.pdf`),
+   bo konwersja HTML bywa zlepiona.
+
 ## PROCEDURA OBOWIĄZKOWA PRZED KAŻDYM PRZEPISEM
 
 ```
@@ -52,7 +109,14 @@ KROK 1: Zidentyfikuj akt prawny (nazwa ustawy / kodeksu)
 
 KROK 2: Weryfikacja online — sekwencja ŹRÓDEŁ (zatrzymaj się na pierwszym działającym):
 
-  ŹRÓDŁO-1 (autorytatywne, bezpłatne — ZAWSZE próbuj pierwsze):
+  ŹRÓDŁO-0 (strukturalne, deterministyczne — ZAWSZE próbuj przed wszystkimi):
+    Konektor MCP (get_act / verify_article / verify_signature) — gdy dostępny,
+    lub web_fetch: https://api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}[/references|/text.html]
+    → Wynik ✅: użyj. Znacznik: ✅ [VER: api.sejm.gov.pl ELI DU/RRRR/NNN, data]
+    → Nie znasz roku/pozycji aktu → ustal je (ŹRÓDŁO-1/3), potem WRÓĆ do ŹRÓDŁO-0 po treść.
+    → Szczegóły i reguły: sekcja "WARSTWA STRUKTURALNA (ŹRÓDŁO-0)" powyżej.
+
+  ŹRÓDŁO-1 (autorytatywne, bezpłatne — gdy ŹRÓDŁO-0 niedostępne):
     web_search: "art. X [nazwa ustawy] isap.sejm.gov.pl tekst jednolity"
     lub web_fetch: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=[Dz.U.]
     → Wynik ✅ ISAP: użyj. Znacznik: ✅ [VER: ISAP, data]
@@ -141,6 +205,17 @@ ORAZ PRZEDMIOTU (tytułu) aktu zgodnego z tezą.
 > nsa.gov.pl, trybunal.gov.pl, saos.org.pl). Wszystko inne = ⚠️ [NIEWERYFIKOWANE].
 
 ```
+KROK 0 (strukturalny — ZAWSZE próbuj pierwszy):
+  Konektor MCP verify_signature (sententim / prawo-pl-saos) — gdy dostępny,
+  lub web_fetch: https://www.saos.org.pl/api/search/judgments?caseNumber=[sygnatura]
+  → Wynik interpretuj wg kontraktu FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE
+    (pełny kontrakt: shared/SYGNATURY.md, sekcja "KONTRAKT WYNIKU WERYFIKACJI")
+  → FOUND (dokładnie 1 trafienie) → znacznik ✅ [VER: saos.org.pl API, data], przejdź do KROK 3
+  → AMBIGUOUS (≥2 sądy, ta sama sygnatura) → NIE wybieraj sam; dopytaj o sąd/datę lub podaj kandydatów
+  → NOT_FOUND w zakresie pokrywanym przez bazę → traktuj jak sygnaturę prawdopodobnie zmyśloną (SCENARIUSZ B)
+  → OUT_OF_SCOPE / baza nie pokrywa danego sądu (np. NSA/WSA w SAOS) → przejdź do KROK 1
+  ⚠️ Zero trafień w bazie WTÓRNEJ ≠ dowód nieistnienia — rozstrzyga baza oficjalna (KROK 1).
+
 KROK 1: Wyszukaj sygnaturę WYŁĄCZNIE w oficjalnej bazie:
   sn.pl           → wyroki i uchwały Sądu Najwyższego
   orzeczenia.ms.gov.pl → sądy powszechne (apelacyjne, okręgowe, rejonowe)
