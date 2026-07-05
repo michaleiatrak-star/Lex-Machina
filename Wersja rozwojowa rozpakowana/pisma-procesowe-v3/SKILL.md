@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: 5.8
+version: 5.10
 type: executive-pisma
 status: production
 description: |
@@ -754,7 +754,23 @@ view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md                (⛔ OBOWIĄZ
 >     NIE przechodzij do weryfikacji przepisów (W3.1) bez zamkniętego PODMIOT-GATE.
 >     Każdy ⚠️POD bez statusu ✅/⚠️/⛔ = blokada W3.1.
 > Każdy ⚠️Pn musi mieć wpis ✅ lub ⛔ w raporcie.
-> Każdy ⚠️On musi mieć sygnaturę + URL ze źródła lub ⛔ BRAK.
+> ⛔ Każdy ⚠️On (orzeczenie powołane w piśmie — CYTAT LUB GOŁE POWOŁANIE NA
+>   POPARCIE TEZY) musi mieć **status GRAD z shared/WERYFIKACJA-SLAD.md
+>   (GRAD-1..4), nie samą sygnaturę + URL.** Naprawa po NSA I FZ 104/26
+>   (zażalenie z fabrykowanymi datami/sygnaturami niedotyczącymi w ogóle
+>   powoływanej instytucji procesowej) — sam URL potwierdza tylko ISTNIENIE,
+>   nie potwierdza, że orzeczenie faktycznie popiera tezę pisma.
+>   → view /mnt/skills/user/shared/WERYFIKACJA-SLAD.md → wykonaj GRAD-1..4
+>     dla KAŻDEGO ⚠️On, w tym GRAD-3b (GUARD INSTYTUCJA) gdy strony
+>     anonimizowane. Wynik 🟢 → ✅. Wynik 🟠/🟡 → decyzja/złagodzenie przed
+>     W3.6a. Wynik 🔴 lub kotwica nierozwiązana → ⛔ USUŃ powołanie, nie
+>     "napraw" innym pinpointem tej samej sygnatury.
+> ⛔ Gdy pismo zawiera zwrot typu "zgodnie z ugruntowaną linią orzeczniczą"
+>   / "utrwalone orzecznictwo" / "jednolicie przyjmuje się" — dodatkowo
+>   uruchom Zasadę 10 (BILANS) z `orzeczenia-sadowe-v2` PRZED W3.6a: takie
+>   sformułowanie jest twierdzeniem o STANIE CAŁEJ LINII, nie o pojedynczym
+>   wyroku — wymaga sprawdzenia linii przeciwnej, nie tylko istnienia
+>   przykładów zgodnych.
 > Każdy ⚠️POD musi mieć wpis ✅/⚠️/⛔ z PODMIOT-GATE.
 > Dopiero po zamknięciu wszystkich ⚠️ — pismo finalne + .docx.
 
@@ -860,6 +876,47 @@ Naprawa:
    Każde twierdzenie atomowe = D[id] + lokalizacja (str/zakładka/obraz/godz).
    Luki 🔴/🟠 = blokada .docx lub żądanie ewentualne.
 2. W1.2c-PRE: dodano sekcję W1.2c-FSL-D z KROK FSL-D przed KROK KD.
+
+---
+
+**5.10 (2026-07-05b) — NAPRAWA: hard gate W3.2 orzeczenia — gradient TREŚĆ zamiast samej ISTNIENIA (NSA I FZ 104/26)**
+
+Root cause (postanowienie NSA z 23.06.2026, sygn. I FZ 104/26): pełnomocnik
+powołał w zażaleniu postanowienia NSA jako poparcie tezy o przesłankach
+wstrzymania wykonania decyzji — NSA ustalił, że powołane orzeczenia zapadły
+w innych datach niż podane i żadne nie dotyczyło w ogóle tej instytucji
+procesowej; ocenił to jako "bezrefleksyjne korzystanie z AI" i brak
+profesjonalizmu. Diagnoza w tym systemie: hard gate W3 w SKILL.md wymagał
+tylko "sygnatury + URL" (poziom ISTNIENIE) dla każdego ⚠️On, a KROK 2 w
+W3.2 (`references/W3-WERYFIKACJA.md`) nie wymuszał jawnie weryfikacji
+DOKŁADNEJ DATY niezależnie od sygnatury.
+
+Naprawa:
+1. Hard gate W3 (SKILL.md): ⚠️On wymaga teraz statusu GRAD z
+   `shared/WERYFIKACJA-SLAD.md` (GRAD-1..4), nie samego URL — 🔴/kotwica
+   nierozwiązana = usunięcie powołania, nie "naprawa" innym pinpointem.
+2. W3.2 KROK 1: kanał strukturalny (SYGNATURY.md FOUND/NOT_FOUND/AMBIGUOUS/
+   OUT_OF_SCOPE) jako pierwszy wybór, web_search jako fallback.
+3. W3.2 KROK 2: jawna weryfikacja DATY WYDANIA niezależnie od sygnatury i
+   tezy — rozbieżność daty = traktuj jak NOT_FOUND dla tej pary (K-SYG-2).
+4. W3.2 KROK 3a (ZAKRES-STOSOWANIA): dodano pytanie wprost o TĘ SAMĄ
+   INSTYTUCJĘ PROCESOWĄ (nie tylko "ten sam przepis") — zmapowano status
+   ZAKRES-OK/WARN-ZAKRES/ZAKAZ-ZAKRES na gradient 🟢/🟠/🔴 dla spójności
+   z audit-bundle (bez duplikowania logiki — patrz shared/WERYFIKACJA-SLAD.md
+   GRAD-3b).
+5. W3.2 KROK 6 (nowy): zwroty "ugruntowana/utrwalona linia orzecznicza"
+   wymagają uruchomienia Zasady 10 (BILANS) z `orzeczenia-sadowe-v2` przed
+   W3.6a — twierdzenie o całej linii, nie o pojedynczym wyroku.
+6. `shared/DISCLAIMER.md` v2.1: nowy WARIANT PISMO SĄDOWE — jawne
+   przypomnienie o niedelegowalnym obowiązku pełnomocnika do samodzielnej
+   weryfikacji przed podpisaniem, dołączane po wariancie PRAWNIK dla
+   każdego projektu pisma.
+7. `shared/WERYFIKACJA-SLAD.md` v1.2: GRAD-1 zamyka lukę "gołe powołanie
+   na poparcie tezy = tylko ISTNIENIE" → teraz minimum TREŚĆ; nowy GRAD-3b
+   (GUARD INSTYTUCJA/PRZEDMIOT) jako wersja ogólna dla skilli bez własnej
+   kontroli zakresu.
+
+Plik: `audyt-systemu-v4/references/AUDIT-JOURNAL.md` → AUDYT-2026-07-05b.
    ⛔ ZAKAZ-FSL-D: nie przystępuj do macierzy bez FSL-D-REPORT.
 3. Trzy poziomy gwarancji (L1 strony → L2 tezy → L3 przepisy) kompletne.
 

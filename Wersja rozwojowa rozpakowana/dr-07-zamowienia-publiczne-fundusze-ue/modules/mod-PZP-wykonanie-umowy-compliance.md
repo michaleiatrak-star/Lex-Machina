@@ -67,7 +67,7 @@ KROK C5 — Podstawa odwołania (gdy naruszenie art. 99 ust. 4 PZP):
   Żądanie: zmiana OPZ poprzez usunięcie preferowania + dodanie klauzuli równoważności
            z mierzalnymi kryteriami (art. 99 ust. 5–6 PZP)
 
-Orzecznictwo KIO — zasada neutralności opisu: weryfikuj na kio.gov.pl
+Orzecznictwo KIO — zasada neutralności opisu: weryfikuj na orzeczenia.uzp.gov.pl (Faza 1-K, orzeczenia-sadowe-v2; kio.gov.pl nie hostuje wyszukiwarki)
 ```
 
 > Odwołanie wynikające z naruszenia art. 99 PZP — procedura, terminy i treść
@@ -170,7 +170,7 @@ web_search: "certyfikacja wykonawców zamówień publicznych Dz.U. 2025 poz. 123
 ## ŹRÓDŁA ONLINE
 
 - PZP: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20241320
-- KIO (wyroki): https://www.kio.gov.pl
+- KIO (wyroki, wyszukiwarka): https://orzeczenia.uzp.gov.pl (kio.gov.pl nie hostuje wyszukiwarki od korekty 2026-07-05d)
 - UZP (wytyczne): https://uzp.gov.pl
 
 ---
