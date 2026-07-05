@@ -1,6 +1,6 @@
 ---
 name: analizator-umow-v1
-version: 1.10
+version: 1.11
 type: executive-umowy
 status: production
 description: |
@@ -63,7 +63,7 @@ ZAKAZ oznaczania ✅ [VER] bez faktycznego wykonania web_search / web_fetch.
 | Umowa B2B / kontrakt menedżerski | **G** | `view references/b2b-podwykonawcze.md` |
 | Umowa podwykonawcza budowlana | **G + G.3** | `view references/b2b-podwykonawcze.md` |
 | Umowa podwykonawcza IT / software | **G + J6** | `view references/b2b-podwykonawcze.md` + `view references/mod-J6-it-konsorcjum.md` |
-| Pseudosamozatrudnienie / test pracy | **G.1** | `view references/b2b-podwykonawcze.md` |
+| Pseudosamozatrudnienie / test pracy | **G.1 + G.1B** | `view references/b2b-podwykonawcze.md` |
 | Umowa o pracę / kontrakt pracowniczy | **H** | `view references/umowy-o-prace.md` |
 | Zakaz konkurencji (każdy typ) | **I** | `view references/zakaz-konkurencji.md` |
 
