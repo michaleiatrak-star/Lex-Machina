@@ -1,0 +1,149 @@
+{
+  "env": {
+    "CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL": "1",
+    "ENABLE_TOOL_SEARCH": "true"
+  },
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "Read(//D:/*/git/gpu/**)",
+      "Edit(//D:/*/git/gpu/**)",
+      "WebSearch",
+      "WebFetch(domain:*)",
+      "Read",
+      "Write",
+      "Bash(ls:*)",
+      "Bash(dir:*)",
+      "Bash(pwd:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(grep -E:*)",
+      "Bash(rg:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
+      "Bash(printf:*)",
+      "Bash(echo:*)",
+      "Bash(tree:*)",
+      "Bash(stat:*)",
+      "Bash(du:*)",
+      "Bash(which:*)",
+      "Bash(where:*)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "Bash(chmod:*)",
+      "Bash(sed -n:*)",
+      "Bash(sed --posix -n:*)",
+      "Bash(sed -E -n:*)",
+      "Bash(sed -r -n:*)",
+      "Bash(sed-safe:*)",
+      "Bash(nl -ba)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git diff:*)",
+      "Bash(git grep:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git rev-list:*)",
+      "Bash(git ls-files:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(git describe:*)",
+      "Bash(git blame:*)",
+      "Bash(git cat-file:*)",
+      "Bash(git check-ignore:*)",
+      "Bash(git config --local --get:*)",
+      "Bash(git remote -v:*)",
+      "Bash(git submodule status:*)",
+      "Bash(git submodule summary:*)",
+      "Bash(git ls-remote:*)",
+      "Bash(git fetch:*)",
+      "Bash(git branch:*)",
+      "Bash(git switch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git restore:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git stash:*)",
+      "Bash(git merge:*)",
+      "Bash(git rebase:*)",
+      "Bash(git -c core.editor=true rebase --continue)",
+      "Bash(aws:*)"
+    ],
+    "deny": [],
+    "ask": [],
+    "defaultMode": "auto"
+  },
+  "model": "claude-opus-4-8",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|MultiEdit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py -c \"import os,sys,runpy;runpy.run_path(os.path.expanduser('~/.claude/hooks/'+sys.argv[1]),run_name='__main__')\" emoji_remover.py"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.exe",
+    "refreshInterval": 1
+  },
+  "enabledPlugins": {
+    "data@knowledge-work-plugins": true,
+    "superpowers@claude-plugins-official": false,
+    "code-review@claude-plugins-official": false,
+    "clangd-lsp@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "document-skills@anthropic-agent-skills": false,
+    "axiom-planning@foundryside-marketplace": true,
+    "playwright@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": false
+  },
+  "extraKnownMarketplaces": {
+    "knowledge-work-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/knowledge-work-plugins"
+      }
+    },
+    "claude-code-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-code"
+      }
+    },
+    "claude-plugins-official": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/anthropics/claude-plugins-official.git"
+      }
+    },
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    },
+    "foundryside-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "tachyon-beep/skillpacks"
+      }
+    }
+  },
+  "effortLevel": "xhigh",
+  "autoUpdatesChannel": "latest",
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "dark-daltonized",
+  "teammateMode": "auto",
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "skipWorkflowUsageWarning": true
+}
