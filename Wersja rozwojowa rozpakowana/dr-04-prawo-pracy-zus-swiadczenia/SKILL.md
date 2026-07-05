@@ -1,0 +1,138 @@
+---
+name: dr-04-prawo-pracy-zus-swiadczenia
+version: 3.4
+description: |
+  DR-04: Prawo Pracy, ZUS, Świadczenia Społeczne
+  Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
+  Ładuj TYLKO moduł pasujący do sprawy — lazy loading.
+  Wchodzi z: prawo-polskie-v2 → ROUTING-MAP → ten skill.
+  Weryfikacja: isap.sejm.gov.pl | orzeczenia.ms.gov.pl | sn.pl + shared/INTERPRETACJE-URZEDOWE.md (rejestr interpretacji urzędowych per dziedzina)
+---
+
+# DR-04 — Prawo Pracy, ZUS, Świadczenia Społeczne
+
+## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
+
+**PRZED każdym powołaniem przepisu, artykułu, terminu lub sygnatury:**
+1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
+2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
+3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
+
+---
+
+## Zasada architektoniczna
+- Jeden moduł = jeden akt prawny (tekst jednolity Dz.U.)
+- Wyjątek: wydzielone rozdziały jednej ustawy mogą mieć osobny moduł (z adnotacją)
+- Ten sam akt NIE może pokrywać dwóch różnych DR-skills
+- **Zakaz cytowania przepisów z pamięci modelu podczas sesji — każde brzmienie weryfikuj w ISAP**
+- Źródło podstawowe: ISAP; LEX/Legalis dopuszczalne wyłącznie pomocniczo
+
+## DEFINICJE — shared/definicje/ (bezpośrednie, lazy loading per temat)
+
+- `definicje/DEF-PRACA.md` — pracownik/pracodawca (A.4), mobbing (definicja
+  ustawowa + linia SN + alert nowelizacji 2026), dyskryminacja, forma umowy,
+  nieobecności, urlopy, wypadek przy pracy, zasiłki ZUS, niealimentacja
+  — PLIK GŁÓWNY dla tej dziedziny (313 linii, scalony z BAS-W20)
+
+## ORKA-BAS — Definicje wspomagające (shared/ORKA-BAS-LEKSYKON.md)
+
+Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
+- BAS-001/002/003/014/075 Praca nierejestrowana / nielegalne zatrudnienie /
+  odpowiednia praca / bezrobotny
+  ✅ ZAKTUALIZOWANO: ustawa o promocji zatrudnienia UCHYLONA 01.06.2025,
+  definicje przeniesione bez zmiany substancji do art. 2 pkt 1/14/16 ustawy
+  o rynku pracy i służbach zatrudnienia (Dz.U. 2025 poz. 620). NOWOŚĆ:
+  rolnicy >2 ha przeliczeniowe bez stałych dochodów mogą się rejestrować
+  jako bezrobotni; nowa kategoria "osoby bierne zawodowo" (emeryci,
+  studenci, urlop wychowawczy — objęci wsparciem PUP, nie są bezrobotnymi)
+- BAS-120 Powierzenie cudzoziemcowi nielegalnej pracy (ustawa 2012, sankcje)
+- BAS-W01 Uzasadnione potrzeby pracodawcy (art. 42 §4 KP — zmiana rodzaju pracy)
+- BAS-W02 Szczególne potrzeby pracodawcy / nadgodziny (art. 151 §1 KP)
+- BAS-W03 Praca zdalna okazjonalna (24 dni, niezależnie od etatu — MRiPS 2023)
+- BAS-W04 Ochrona szczególna pracownika — kategorie (osobiste/zawodowe)
+- BAS-W05 Urlop wypoczynkowy — definicja funkcjonalna (MRiPS 2023)
+- BAS-W15 Choroba zawodowa — 2 przesłanki (art. 235¹ KP + wykaz RM)
+- BAS-W16 Godziny ponadwymiarowe nauczycieli (Karta Nauczyciela art. 35)
+- BAS-W20 Mobbing — granice (art. 94³ KP — 5 przesłanek, "ofiara rozsądna")
+- BAS-W36 ⚠️⚠️ TERMIN 02.08.2026: AI Act — system AI wysokiego ryzyka (Annex III
+  pkt 4) — rekrutacja, ocena kandydatów, decyzje o awansie/zwolnieniu,
+  monitorowanie wydajności pracowników przez AI. Obowiązki: FRIA, nadzór
+  ludzki, zgodność z prawem pracy. Pracownik: prawo do informacji o logice
+  AI + interwencji ludzkiej (art. 22 RODO)
+- BAS-W28 Nadużycie prawa w stosunkach pracy (art. 8 KP)
+- BAS-004/102/124/131-134 Niepełnosprawność — świadczenia, PFRON, świadczenie
+  wspierające (→ mod-niepelnosprawnosc-intelektualna-gluchota.md,
+  mod-niewidomy-prawa-prawne.md, mod-prawa-obywatelskie-srodki-karne.md)
+
+## Moduły (17 łącznie — ✓ 17 OK, ☐ 0 STUB)
+
+```
+  [✓] OK    mod-KP-prawo-pracy
+              (PRZYCIĘTY 2026-06-12: 524→337 linii. RDZEŃ — rozwiązanie umowy
+               o pracę, wypowiedzenie, dyscyplinarka, roszczenia art.45 KP.
+               3 byłe aneksy wydzielone niżej — lazy loading.)
+  [✓] NOWY  mod-KP-mobbing-dyskryminacja
+              (wydzielony z ANEKS A: kwalifikacja mobbing/dyskryminacja/
+               molestowanie, tabela roszczeń, strategia dowodowa; definicja
+               i linia SN → shared/definicje/DEF-PRACA.md; projekt UD183/
+               RM 17.02.2026 SCALONY z dwóch wcześniej rozbieżnych wpisów)
+  [✓] NOWY  mod-wypadek-przy-pracy-choroba-zawodowa
+              (wydzielony z ANEKS B: intake wypadkowy, świadczenia ZUS,
+               terminy, ścieżka sporna; definicja 4-elementowa →
+               shared/definicje/DEF-PRACA.md H.1.4)
+  [✓] NOWY  mod-KP-praca-zdalna
+              (wydzielony z ANEKS C: obowiązki BHP, praca zdalna okazjonalna;
+               wykładnia MRiPS → BAS-W03)
+  [✓] OK    mod-KPA-postepowanie-administracyjne
+  [✓] OK    mod-SUS-ZUS-ubezpieczenia-spoleczne
+              (zawiera Aneks A: renta — 3 przesłanki z tabelą stażu;
+               Aneks B: kalkulator terminów ZUS; Aneks C: predykcja wyniku)
+  [✓] OK    mod-KRUS-rolnicze-ubezpieczenia
+  [✓] OK    mod-ustawa-zwolnienia-grupowe
+  [✓] OK    mod-ustawa-zwiazki-zawodowe-spory-zbiorowe
+  [✓] OK    mod-ustawa-PIP-inspekcja-pracy
+  [✓] OK    mod-ustawa-minimalne-wynagrodzenie
+  [✓] OK    mod-ustawa-ZFSS
+  [✓] OK    mod-ustawa-praca-tymczasowa
+  [✓] OK    mod-ustawa-rynek-pracy-zatrudnienie
+  [✓] OK    mod-ustawa-swiadczenia-rodzinne
+  [✓] OK    mod-ustawa-aktywny-rodzic
+  [✓] OK    mod-ustawa-rehabilitacja-PFRON
+              (zawiera Aneks: świadczenie uzupełniające 500+ dla niepełnosprawnych)
+  [✓] OK    mod-ustawa-pomoc-spoleczna
+  [✓] OK    mod-ustawa-ochrona-konkurencji-konsumentow-UOKiK
+  [✓] OK    mod-ustawa-swiadczenie-wspierajace-WZON
+```
+
+## Jak wywołać
+
+```
+view /mnt/skills/user/dr-04-prawo-pracy-zus-swiadczenia/modules/[nazwa-modulu].md
+```
+
+## Lokalna mapa aktów prawnych
+
+```
+view /mnt/skills/user/dr-04-prawo-pracy-zus-swiadczenia/MAPA-AKTOW.md
+```
+
+## Powiązania zewnętrzne
+- Wchodzi z: `prawo-polskie-v2` → `ROUTING-MAP.md` → ten skill
+- Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
+- Weryfikacja prawa: isap.sejm.gov.pl
+- Orzecznictwo: orzeczenia.ms.gov.pl, sn.pl, nsa.gov.pl
+
+## ⚖️ DISCLAIMER (obowiązkowy)
+
+Po zakończeniu analizy lub przed oddaniem odpowiedzi zawierającej ocenę prawną:
+
+```text
+view /mnt/skills/user/shared/DISCLAIMER.md
+```
+
+Wybierz wariant odpowiedni do trybu:
+- **PRAWNIK / kancelaria** → wariant techniczny (art. 4 Prawa o adwokaturze / art. 6 u.r.p.)
+- **LAIK / pro se** → wariant uproszczony (informacja ≠ porada prawna)
+
+Disclaimer musi być **ostatnim elementem** każdej odpowiedzi zawierającej analizę prawną,
+ocenę szans, kwalifikację prawną lub interpretację przepisu.
