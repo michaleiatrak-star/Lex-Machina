@@ -1,6 +1,6 @@
 ---
 name: dr-11-cyfrowe-cyber-ai-dane-ip
-version: 3.3
+version: 3.4
 description: |
   DR-11: Cyfrowe, Cyberbezpieczeństwo, AI, Dane, IP
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -53,7 +53,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Cyfrowe, cyberbezpieczeństwo, AI, dane, IP — definicje RODO (art. 4), AI Act i KSC/NIS2 są obszerne i sektorowe; pokryte wprost w modułach mod-RODO-GDPR-2016-679, mod-AI-Act, mod-KSC-NIS2 (każdy z własną sekcją definicji ustawowych). Żaden plik shared/definicje/ nie obejmuje tej dziedziny bez duplikacji treści modułowej.
-## Moduły (19 łącznie — ✓ 18 OK, ☐ 1 STUB [certyfikacja])
+## Moduły (22 łącznie — ✓ 21 OK, ☐ 1 STUB [certyfikacja])
 
 ```
 DANE OSOBOWE:
@@ -66,6 +66,21 @@ DANE OSOBOWE:
   [✓] OK    mod-UODO-postepowanie-ochrona-danych
               (postępowanie przed UODO: skarga, decyzja, odwołanie WSA,
                kary administracyjne; Dz.U. 2019 poz. 1781 t.j.)
+
+DANE OSOBOWE — WARSTWA OPERACYJNA (dodano 2026-07-05, AUDYT-2026-07-05a;
+wzorzec: bundle ochrona-danych / awesome-matematic-skills-pl):
+  [✓] OK    mod-RODO-DPIA-ocena-skutkow
+              (DPIA/OSOD art. 35–36: przesiew progu — wykaz UODO + 9 kryteriów
+               EROD WP248 reguła ≥2, struktura 4 filarów art. 35 ust. 7,
+               uprzednie konsultacje art. 36; relacja do FRIA z AI Act)
+  [✓] OK    mod-RODO-DSAR-zadania-osob
+              (żądania osób art. 12 + 15–22: klasyfikacja, deterministyczny
+               zegar 1 miesiąc / +2 mies. wg rozp. 1182/71 art. 3 ust. 2 lit. c,
+               bramki odmowy art. 12 ust. 5 / 17 ust. 3, draft + rejestr żądań)
+  [✓] OK    mod-RODO-RCP-DPA-rejestr-powierzenie
+              (RCP art. 30 ust. 1–2 pola obowiązkowe + mechaniczny checklist
+               klauzul umowy powierzenia art. 28 ust. 3 lit. a–h; wynik
+               deterministyczny KOMPLETNA / BRAKI)
 
 CYBERBEZPIECZEŃSTWO I TELEKOMUNIKACJA:
   [✓] OK    mod-KSC-NIS2-cyberbezpieczenstwo-telekom

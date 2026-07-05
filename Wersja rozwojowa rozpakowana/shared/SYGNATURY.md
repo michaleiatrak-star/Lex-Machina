@@ -1,8 +1,10 @@
 # SYGNATURY — Moduł Walidacji Sygnatur Sądowych
 
 > **Plik:** `/mnt/skills/user/shared/SYGNATURY.md`
-> **Wersja:** 1.0 (2026-05-25)
-> **Status:** NOWY — naprawa BLOKER-2
+> **Wersja:** 1.1 (2026-07-05) — dodano KONTRAKT WYNIKU WERYFIKACJI
+>              (FOUND/NOT_FOUND/AMBIGUOUS/OUT_OF_SCOPE, wzorzec sententim; AUDYT-2026-07-05a)
+> **Wersja poprzednia:** 1.0 (2026-05-25)
+> **Status:** AKTYWNY — naprawa BLOKER-2
 > **Podstawa:** Instrukcja sądowa (zarządzenie MS z 19.06.2019, Dz. Urz. MS z 2019 r. poz. 138 ze zm.)
 >              Zasady biurowości SN (zmiana 01.01.2021 r.)
 
@@ -113,6 +115,53 @@ Przykład: K 6/06, SK 4/02
 
 ---
 
+## KONTRAKT WYNIKU WERYFIKACJI — FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE
+
+> Dodano: 2026-07-05 (AUDYT-2026-07-05a). Wzorzec: sententim — deterministyczny
+> weryfikator sygnatur (0 LLM w runtime). Reguła naczelna sententim:
+> **"jeśli czegoś nie ma w bazie → NOT_FOUND. Nigdy nie zgaduj."**
+
+Każda weryfikacja sygnatury (V-SYG-3, KROK 0/1 z PRAWO-HARDGATE) MUSI kończyć się
+JEDNYM z czterech statusów. Zakaz wyników "chyba istnieje", "prawdopodobnie tak":
+
+| Status | Definicja | Obowiązkowa reakcja systemu |
+|---|---|---|
+| **FOUND** | Dokładnie JEDNO trafienie w bazie: sygnatura + sąd (+ data, jeśli podana) zgodne | Cytuj z pełnymi danymi (sąd, data, URL) + ✅ [VER: źródło, data] |
+| **NOT_FOUND** | Zero trafień w bazie, która POKRYWA dany typ sądu i okres | ⛔ NIE CYTUJ. Komunikat: "sygnatura nie została potwierdzona — pominięto zgodnie z PRAWO-HARDGATE" (SCENARIUSZ B) |
+| **AMBIGUOUS** | Ta sama sygnatura w ≥2 sądach (format sygnatur SR/SO/SA nie jest ogólnokrajowo unikalny) | ⛔ NIE WYBIERAJ SAM. Przedstaw WSZYSTKICH kandydatów (sąd + data) i dopytaj / zawęź po sądzie lub dacie |
+| **OUT_OF_SCOPE** | Zero trafień, ale baza NIE pokrywa danego sądu/okresu (np. SAOS: brak NSA/WSA, SN w SAOS niepełny; sententim: tylko domena kredytowa) | NIE potwierdzaj i NIE zaprzeczaj. Eskaluj do bazy oficjalnej (KROK 1 PRAWO-HARDGATE: sn.pl / orzeczenia.ms.gov.pl / nsa.gov.pl / trybunal.gov.pl) |
+
+**Reguły twarde kontraktu:**
+
+```
+K-SYG-1: Zanim zinterpretujesz zero trafień, ustal POKRYCIE bazy (corpus scope):
+         jakie instancje i jaki okres baza faktycznie indeksuje.
+         Zero trafień poza pokryciem = OUT_OF_SCOPE, nigdy NOT_FOUND.
+
+K-SYG-2: ⛔ ZAKAZ "blisko pasującej" sygnatury. Trafienie częściowe
+         (inny rok, inne repertorium, inny numer) = NOT_FOUND dla sygnatury
+         pytanej. Nie "poprawiaj" sygnatury na najbliższego kandydata.
+
+K-SYG-3: AMBIGUOUS nie jest błędem — jest informacją. System prezentuje
+         kandydatów bez preferencji; wybór należy do użytkownika lub do
+         zawężenia (sąd / data ISO YYYY-MM-DD).
+
+K-SYG-4: Statusy NOT_FOUND i OUT_OF_SCOPE NIGDY nie mogą być cytowane jako
+         "potwierdzone przez narzędzie". Znacznik ✅ [VER] przysługuje
+         wyłącznie statusowi FOUND.
+
+K-SYG-5: Przy każdym FOUND zapisz do śladu weryfikacji (WERYFIKACJA-SLAD.md):
+         źródło (URL), datę pobrania, sąd i datę orzeczenia — komplet danych
+         audytowych, nie samą sygnaturę.
+```
+
+**Normalizacja przed porównaniem** (żeby kosmetyka nie generowała fałszywych NOT_FOUND):
+wielkość liter, spacje i kropki w skrótach repertoriów są nieistotne
+(`II CSK 750/15` ≡ `ii csk 750/15` ≡ `II C.S.K. 750/15`). Różnica w treści
+merytorycznej (numer, rok, repertorium, wydział) POZOSTAJE różnicą.
+
+---
+
 ## PROCEDURA WALIDACJI V-SYG
 
 Wykonaj PRZED każdym cytowaniem sygnatury:
@@ -130,8 +179,11 @@ V-SYG-2: Sprawdź format — czy repertorium pasuje do sądu?
           NIE pasuje → ⛔ BŁĄD FORMATU: poinformuj użytkownika
 
 V-SYG-3: Czy sygnatura ma być cytowana jako realne orzeczenie?
-          TAK → obowiązkowe: web_search lub web_fetch na sn.pl / orzeczenia.ms.gov.pl / saos.org.pl
-                Jeśli nie znaleziono → ⛔ NIE CYTUJ: "nie znalazłem potwierdzenia tej sygnatury online"
+          TAK → obowiązkowe: najpierw kanał strukturalny (MCP verify_signature /
+                web_fetch https://www.saos.org.pl/api/search/judgments?caseNumber=...),
+                fallback: web_search / web_fetch na sn.pl / orzeczenia.ms.gov.pl / saos.org.pl
+                Wynik klasyfikuj WYŁĄCZNIE wg kontraktu FOUND / NOT_FOUND / AMBIGUOUS /
+                OUT_OF_SCOPE (sekcja wyżej). Tylko FOUND → cytuj.
           NIE (ilustracja formatu) → oznacz [PRZYKŁADOWA]
 
 V-SYG-4: Rok sygnatury vs rok reformy SN:
