@@ -51,6 +51,67 @@ WYNIK TESTU:
 
 ---
 
+## G.1B ZAKAZ "OŚWIADCZENIA DEKLARATORYJNEGO" JAKO NAPRAWY RYZYKA
+
+> ⛔ REGUŁA WIĄŻĄCA dla trybu redakcji/draftu (tryb 2/3/4). Stosuj ZAWSZE,
+> gdy wynik testu G.1 wynosi ≥3 cechy, a użytkownik oczekuje "poprawki"
+> lub "zabezpieczenia" umowy przed przekwalifikowaniem.
+
+**Klauzula typu:**
+„Strony zgodnie oświadczają, że niniejsza Umowa nie stanowi umowy
+o pracę w rozumieniu art. 22 §1 Kodeksu pracy, a jej przedmiotem jest
+świadczenie usług w ramach działalności gospodarczej Wykonawcy, z którą
+wiąże się ryzyko gospodarcze" — **nie jest środkiem prawnym eliminującym
+ryzyko przekwalifikowania** i NIE WOLNO jej proponować jako rozwiązania.
+
+```
+DLACZEGO NIE DZIAŁA:
+□ art. 22 §1¹ KP — o rodzaju stosunku prawnego decyduje SPOSÓB WYKONYWANIA
+  umowy, nie nazwa ani deklaracja nadana przez strony (utrwalone stanowisko
+  SN — weryfikuj aktualne orzecznictwo w orzeczenia.ms.gov.pl / sn.pl,
+  nie cytuj sygnatur z pamięci)
+□ Sąd/ZUS/PIP bada FAKTYCZNY sposób świadczenia pracy, niezależnie od
+  treści oświadczenia — deklaracja stron nie jest dowodem przeciwko
+  ustaleniom faktycznym
+□ Jeśli POZOSTAŁE postanowienia umowy (godziny, podporządkowanie,
+  wyłączność, brak ryzyka ekonomicznego — patrz G.1) nadal spełniają
+  ≥3 cechy testu, dodanie samego oświadczenia:
+    a) nie zmienia wyniku testu ani o jeden punkt,
+    b) tworzy WEWNĘTRZNĄ SPRZECZNOŚĆ w dokumencie — oświadczenie
+       zaprzecza treści innych paragrafów tej samej umowy, co samo
+       w sobie jest dodatkowym argumentem dla organu kontrolnego
+       (dokument "sam się demaskuje")
+
+OBOWIĄZEK PRZY GENEROWANIU DRAFTU:
+□ NIGDY nie wstawiaj takiej klauzuli jako samodzielnej "poprawki" —
+  jeśli użytkownik o to prosi, wyjaśnij wprost dlaczego nie zadziała
+  (patrz wyżej) zamiast dostarczyć tekst klauzuli
+□ Jeśli wynik testu G.1 to 5–8 cech → ALERT KRYTYCZNY musi zostać
+  utrzymany w raporcie NAWET jeśli draft zawiera takie oświadczenie —
+  zakaz "wyciszania" alertu przez samą obecność deklaracji
+□ Jedyne realne rozwiązania: (a) faktyczna zmiana sposobu współpracy —
+  konkretne postanowienia usuwające cechy z G.1 (np. zniesienie sztywnych
+  godzin, dopuszczenie substytucji, przeniesienie ryzyka na wykonawcę,
+  zniesienie wyłączności) — wskaż KTÓRE cechy i JAK je usunąć §-po-§;
+  (b) rekomendacja zawarcia umowy o pracę, jeśli relacja faktycznie ma
+  charakter pracowniczy
+□ Po zaproponowaniu poprawek (a) — uruchom PONOWNIE test G.1 na całym
+  poprawionym dokumencie (nie tylko na zmienionych klauzulach) i podaj
+  nowy wynik liczbowy w raporcie — zgodnie z B.0 (synteza krzyżowa,
+  mod-core-checklist.md)
+
+PRECYZJA JĘZYKOWA (dotyczy też trybu LAIK):
+□ Nazywaj cechy testu ich właściwym terminem prawnym (podporządkowanie,
+  osobiste świadczenie, ryzyko gospodarcze, ciągłość) — nie zastępuj ich
+  ogólnikowym opisem potocznym ("chodzi o to, żeby nie było za bardzo
+  jak w pracy"); dla klienta-laika PO nazwaniu terminu dodaj JEDNO zdanie
+  wyjaśnienia w prostym języku, dopasowane do konkretnej branży/rodzaju
+  działalności z dokumentu — nie generyczny szablon niezależny od stanu
+  faktycznego sprawy
+```
+
+---
+
 ## G.2 PUŁAPKI W UMOWACH B2B — KATALOG EKSPERCKI
 
 ### PUŁAPKA 1 — Zakaz konkurencji bez limitów (HIGH RISK)
@@ -361,6 +422,8 @@ Moduł J6 zawiera pełne opracowanie pułapek IT, których skróty znajdują si�
 IDENTYFIKACJA:
 □ Typ: B2B / podwykonawcza budowlana / podwykonawcza IT / ramowa / inna
 □ Test pseudosamozatrudnienia (G.1) — ile cech stosunku pracy?
+□ Jeśli tryb redakcji/draftu i wynik ≥3 cechy → obowiązkowo G.1B
+  (zakaz oświadczenia deklaratoryjnego jako "naprawy")
 □ Prawo właściwe — polskie? Inna jurysdykcja?
 
 KLUCZOWE KLAUZULE DO WERYFIKACJI:

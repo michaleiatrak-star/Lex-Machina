@@ -1,27 +1,25 @@
 ---
 name: orzeczenia-sadowe-v2
-version: 2.2
+version: 2.5
 type: executive-analiza
 status: production
 compatibility: "web_search, web_fetch, show_widget"
 description: >
-  Wyszukuje, weryfikuje i cytuje realne orzeczenia sądowe z oficjalnych polskich
-  portali — centralnych (orzeczenia.ms.gov.pl, sn.pl, orzeczenia.nsa.gov.pl,
-  trybunal.gov.pl, saos.org.pl) i z sieci lokalnej SA/SO/SR oraz WSA (CBOSA).
-  Stosuj ZAWSZE gdy użytkownik pyta o orzecznictwo, wyroki, linię orzeczniczą,
-  precedensy — nawet bez tych słów wprost, oraz gdy chce wzmocnić pismo
-  orzecznictwem. Dobiera orzeczenia najbliższe oczekiwanemu rozstrzygnięciu;
-  przy licznej linii przeciwnej — obowiązkowy ilościowy BILANS. Nigdy nie cytuj
-  z pamięci — zawsze weryfikacja online przed podaniem sygnatury. NIE stosuj
+  Wyszukuje, weryfikuje i cytuje realne orzeczenia sądowe z oficjalnych portali
+  (orzeczenia.ms.gov.pl, sn.pl, orzeczenia.nsa.gov.pl, trybunal.gov.pl,
+  orzeczenia.uzp.gov.pl, saos.org.pl) oraz sieci lokalnej SA/SO/SR i WSA (CBOSA).
+  Stosuj ZAWSZE gdy pyta o orzecznictwo, wyroki, linię orzeczniczą, precedensy
+  — nawet bez tych słów wprost. Dobiera orzeczenia najbliższe oczekiwanemu
+  rozstrzygnięciu; przy licznej linii przeciwnej — obowiązkowy BILANS. Nigdy
+  nie cytuj z pamięci — zawsze weryfikacja online przed sygnaturą. NIE stosuj
   gdy pytanie dotyczy tylko przepisów bez orzeczeń.
-  v2.2: sieć lokalna portali SA/SO/SR + CBOSA NSA/WSA (Faza 1-L); profil
-  oczekiwanego rozstrzygnięcia (Faza 0-C); BILANS LINII ORZECZNICZEJ z alertem
-  krytycznym przy przewadze linii przeciwnej.
-  v2.1: uchwały 7 SN Kat. 6A; jurysdykcje zagraniczne (Tier 4); fallback
-  sieciowy; progi STARE; integracja SYGNATURY.
+  v2.5: Faza 1-K — KIO/zamówienia publiczne przez orzeczenia.uzp.gov.pl
+  (zweryfikowane fetchem; koryguje nieaktualny adres kio.gov.pl w DR-07).
+  v2.4: scalenie Fazy 1-T (SAOS/CBOSA) i Zasady 2A (gradient TREŚĆ, NSA
+  I FZ 104/26).
 ---
 
-# Wyszukiwanie Orzeczeń Sądowych v2.2
+# Wyszukiwanie Orzeczeń Sądowych v2.5
 
 Narzędzie procesowe dla pełnomocników, sędziów i stron działających pro se.
 Łączy interaktywny widget HTML (tryb laik / prawnik) z weryfikowanym
@@ -33,7 +31,8 @@ wyszukiwaniem orzeczeń, wskaźnikiem pokrycia przesłanek i systemem alertów.
 2. **Emituj profil ryzyka** — alerty wstępne przed wyszukiwaniem (Faza 0-A)
 3. **Ustal przesłanki i zakres** — przepis, znamiona, ciężar dowodu (Faza 0-B)
 4. **Ustal oczekiwany kierunek rozstrzygnięcia** — dla dopasowania tezy (Faza 0-C)
-5. **Wyszukaj orzeczenia** — portale priorytetowe i sieć lokalna, 5 kroków (Faza 1, 1-L)
+5. **Wyszukaj orzeczenia** — portale priorytetowe i sieć lokalna, 5 kroków (Faza 1, 1-L);
+   gdy cel to dopasowanie DOSŁOWNEJ tezy/uzasadnienia — najpierw pełnotekstowo (Faza 1-T)
 6. **Wyszukaj kierunek przeciwny** — test równoważny pod kątem linii przeciwnej (Faza 1-D)
 7. **Skategoryzuj z alertami** — taksonomia 8 kategorii + BILANS (Faza 2)
 8. **Zweryfikuj aktualność linii** — jednolitość, zmiany prawa (Faza 3)
@@ -95,6 +94,17 @@ view /mnt/skills/user/shared/SYGNATURY.md
 ```
 Brak któregokolwiek = błąd krytyczny, orzeczenie nie może być powołane.
 
+**Zasada 2A — Cztery elementy potwierdzają ISTNIENIE, nie TREŚĆ (dodano 2026-07-05b,
+po NSA I FZ 104/26).** Kompletne 4 elementy (Zasada 2) wystarczają, gdy orzeczenie
+jest tylko wzmiankowane. Gdy orzeczenie ma POPRZEĆ tezę użytkownika/pisma (włącznie
+z "gołym" powołaniem bez cudzysłowu, np. "por. też…") — wymagany dodatkowo poziom
+TREŚĆ z `shared/WERYFIKACJA-SLAD.md` (GRAD-1..4): sprawdź, czy orzeczenie FAKTYCZNIE
+dotyczy powoływanej instytucji/kwestii, nie tylko tej samej gałęzi prawa. Cztery
+elementy + niedopasowany przedmiot = wynik nadal niecytowalny na poparcie tezy.
+Ten sam mechanizm łapie również cytaty z KROK 1-T.1/1-T.2 (SAOS/CBOSA
+pełnotekstowe) — one dają KANDYDATÓW, gradient TREŚĆ jest krokiem PO nich,
+nie zamiast (patrz 1-T.3).
+
 **Zasada 3 — Limit cytatu: maksymalnie 30 słów.**
 Dziedzinowy override globalnego limitu 15 słów z PRAWO-HARDGATE — uzasadniony koniecznością
 dokładnego oddania tezy prawnej. Dotyczy WYŁĄCZNIE cytatów z treści orzeczeń sądowych.
@@ -107,7 +117,8 @@ Zakaz linkowania do LexLege, Prawo.pl, SIP itp. jako głównego źródła.
 Orzeczenie jest uznane za zweryfikowane gdy potwierdzone w co najmniej JEDNYM
 z portali: sn.pl, orzeczenia.ms.gov.pl (wraz z całą siecią lokalną SA/SO/SR —
 patrz Zasada 5A), orzeczenia.nsa.gov.pl (CBOSA — obejmuje NSA oraz wszystkie
-16 WSA), trybunal.gov.pl, curia.europa.eu (TSUE), hudoc.echr.coe.int (ETPC).
+16 WSA), trybunal.gov.pl, curia.europa.eu (TSUE), hudoc.echr.coe.int (ETPC),
+orzeczenia.uzp.gov.pl (KIO i skargi SO/SA/SN — zamówienia publiczne, Faza 1-K).
 saos.org.pl pełni rolę wsparcia — nie jest samodzielnym źródłem weryfikacji.
 Nie wymagaj potwierdzenia w wielu portalach jednocześnie.
 
@@ -137,6 +148,9 @@ bezpośredniego URL z oficjalnego portalu sądowego:
 Tier 1 (krajowe PL): sn.pl · orzeczenia.ms.gov.pl + sieć lokalna SA/SO/SR (Zasada 5A)
                       · orzeczenia.nsa.gov.pl = CBOSA (NSA + wszystkie 16 WSA)
                       · trybunal.gov.pl
+                      · orzeczenia.uzp.gov.pl = KIO + SO/SA/SN ws. PZP (Faza 1-K) —
+                        referencyjne, nie źródło prawa (art. 87 Konstytucji), ale
+                        Tier 1 dla praktyki DR-07
 Tier 2 (UE/EU):      curia.europa.eu · hudoc.echr.coe.int
 Tier 3 (backup):     saos.org.pl (wyłącznie pomocniczo)
 Tier 4 (zagraniczne): patrz sekcja „Jurysdykcje zagraniczne"
@@ -240,6 +254,9 @@ Jedno trafienie w portalach 1–6 = orzeczenie zweryfikowane.
 Brak trafienia w 1–6 + trafienie tylko w innych źródłach → status „Źródło niepotwierdzone w portalu sądowym".
 
 Strategia: fraza + przepis → instytucja prawna → zagadnienie ogólne → SAOS.
+Gdy celem jest odnalezienie KONKRETNEJ tezy (dosłownego sformułowania z uzasadnienia),
+a nie tylko orzeczeń „w temacie" — nie zaczynaj od web_search (przeszukuje zaindeksowane
+strony, nie treść uzasadnień) — zacznij od Fazy 1-T (SAOS API + CBOSA pełnotekstowo).
 
 ### Portale zagraniczne (Tier 4)
 
@@ -258,6 +275,200 @@ Dla Tier 4:
 - Weryfikacja możliwa wyłącznie przez web_fetch na oficjalnym portalu danego państwa.
 - Brak możliwości fetch → status „Brak weryfikacji bezpośredniej (Tier 4)" — nie powołuj w piśmie polskim.
 - Orzeczenia Tier 4 nie mogą być powoływane w polskim piśmie procesowym jako samodzielna podstawa; stosować wyłącznie pomocniczo (prawo porównawcze, argumentacja).
+
+---
+
+## Faza 1-T — Wyszukiwanie pełnotekstowe po treści tezy (SAOS API + CBOSA)
+
+Uzupełnienie Fazy 1 — stosuj PRZED klasycznym wyszukiwaniem frazowym, gdy celem jest
+„znajdź tezę" (dosłowne sformułowanie prawne w uzasadnieniu/sentencji), nie tylko
+„znajdź orzeczenie w danym temacie". `web_search` nie przeszukuje treści uzasadnień —
+trafia wyłącznie tam, gdzie fraza już została zacytowana na zaindeksowanej stronie
+(np. w artykule prawniczym). SAOS i CBOSA indeksują pełny tekst orzeczeń bezpośrednio
+i pozwalają przeszukać go wprost.
+
+### 1-T.1 — SAOS REST API (zapytanie bezpośrednie do API, nie przez wyszukiwarkę web)
+
+Punkt wejścia: `https://www.saos.org.pl/api/search/judgments`
+
+Kluczowe parametry (dowolna kombinacja, doklejane jako query string):
+```
+all=FRAZA                → pełnotekstowe przeszukanie treści/tezy/uzasadnienia.
+                            Obsługuje język zapytań: "fraza w cudzysłowie" (dokładna
+                            kolejność słów), -słowo (wyklucza), A OR B.
+judgmentDateFrom / judgmentDateTo   → filtr dat, format yyyy-MM-dd
+courtType                → COMMON | SUPREME | ADMINISTRATIVE
+ccCourtType               → APPEAL | REGIONAL | DISTRICT (tylko sądy powszechne)
+ccCourtName                → nazwa konkretnego sądu
+judgmentTypes              → SENTENCE | RESOLUTION | DECISION | REGULATION | REASONS
+keywords                  → lista haseł tematycznych SAOS
+sortingField / sortingDirection, pageSize / pageNumber → paginacja/sortowanie
+```
+
+Procedura:
+```
+1. web_fetch: https://www.saos.org.pl/api/search/judgments?all=FRAZA+TEZY&courtType=...
+   &judgmentDateFrom=...&judgmentDateTo=...&pageSize=10
+2. Z odpowiedzi JSON odczytaj per trafienie: caseNumber, judgmentDate,
+   division.court.name (lub chambers dla SN), fragment textContent zawierający frazę, href.
+3. To jest ETAP WYSZUKANIA KANDYDATÓW, nie weryfikacji — saos.org.pl nadal pełni
+   wyłącznie rolę wsparcia (Zasada 5) → przejdź do 1-T.3 przed powołaniem sygnatury.
+```
+⚠️ SAOS to projekt akademicki (ICM UW) — pokrycie nie jest wyczerpujące, a baza bywa
+opóźniona względem najnowszych orzeczeń. Traktuj trafienie jako trop, nie jako
+potwierdzenie.
+
+### 1-T.2 — CBOSA (NSA/WSA) — wyszukiwanie pełnotekstowe „Treść wyroku"
+
+CBOSA (orzeczenia.nsa.gov.pl) NIE ma publicznego REST API — dostęp wyłącznie przez
+formularz wyszukiwania na stronie. Formularz ma odrębne pole „Treść wyroku"/
+„Treść uzasadnienia", które przeszukuje pełny tekst — w odróżnieniu od pola
+„Powołane przepisy", które przeszukuje wyłącznie słownik kontrolowany, nie treść.
+
+Procedura:
+```
+1. web_fetch formularza wyszukiwania orzeczenia.nsa.gov.pl z polem „Treść wyroku"
+   wypełnionym FRAZĄ TEZY, najlepiej w cudzysłowie (CBOSA dopasowuje dosłownie,
+   nie semantycznie).
+2. Opcjonalnie zawęź: konkretny sąd (NSA / dany WSA), zakres dat, hasło tematyczne.
+3. Brak wyniku ≠ brak orzecznictwa — CBOSA szuka dopasowań dosłownych. Przed uznaniem
+   braku wyniku przeformułuj frazę na prawniczy synonim (np. „odmowa wydania
+   pozwolenia" → „organ nie wydał zgody na realizację inwestycji").
+4. ⚠️ CBOSA ogranicza automatyzację (captcha po serii zapytań) — ogranicz liczbę
+   zapytań do niezbędnego minimum, nie iteruj bez potrzeby.
+5. Każde trafienie → 1-T.3 przed powołaniem.
+```
+
+### 1-T.3 — Krok weryfikacji (wspólny dla 1-T.1 i 1-T.2)
+
+Wyszukiwanie pełnotekstowe wskazuje KANDYDATÓW — nie zwalnia z Zasady 1 (zakaz
+cytowania bez weryfikacji) ani z procedury V-SYG.
+```
+Dla każdego kandydata:
+→ Wykonaj V-SYG (shared/SYGNATURY.md) na sygnaturze uzyskanej z SAOS/CBOSA.
+→ CBOSA-owe trafienia są już z Tier 1 (orzeczenia.nsa.gov.pl) — potwierdź bezpośredni
+  URL wyroku i przejdź do cytowania.
+→ SAOS-owe trafienia dla sądów powszechnych/SN → potwierdź w orzeczenia.ms.gov.pl
+  (lub portalu lokalnym, Zasada 5A) / sn.pl, chyba że rekord SAOS linkuje wprost
+  do oryginalnego portalu (pole href / source.judgmentUrl) — wtedy wystarczy ten link.
+→ Dopiero po potwierdzeniu → cytuj z linkiem do ORYGINAŁU (Zasada 4), nigdy do
+  samego saos.org.pl jako źródła głównego.
+```
+
+### 1-T.4 — Rozszerzenie na inne bazy z wyszukiwaniem pełnotekstowym
+
+Logikę „najpierw pełnotekstowe zapytanie po treści tezy → dopiero potem weryfikacja
+sygnatury" stosuj analogicznie wszędzie tam, gdzie portal na to pozwala:
+- `sn.pl` — wyszukiwarka SN ma pole treści orzeczenia/uzasadnienia,
+- portale lokalne SA/SO/SR (`references/PORTALE-LOKALNE.md`) — część ma wyszukiwanie
+  pełnotekstowe, część wyłącznie po sygnaturze/dacie — sprawdź formularz danego
+  portalu przed założeniem, że pole istnieje,
+- `trybunal.gov.pl` — wyszukiwarka TK obejmuje treść uzasadnień.
+Brak pola pełnotekstowego w danym portalu → wróć do strategii Fazy 1 (fraza → przepis
+→ instytucja → SAOS jako uzupełnienie).
+
+---
+
+## Faza 1-K — Orzecznictwo KIO / zamówienia publiczne (PZP)
+
+Stosuj gdy sprawa dotyczy zamówień publicznych: odwołanie do KIO, skarga na
+orzeczenie KIO do sądu, rażąco niska cena, wykluczenie/odrzucenie oferty,
+warunki udziału, SWZ — zwłaszcza gdy współpracujesz z `dr-07-zamowienia-
+publiczne-fundusze-ue`.
+
+⚠️ **Korekta adresu (zweryfikowane 2026-07-05c):** `kio.gov.pl` jako
+"wyszukiwarka wyroków" jest NIEAKTUALNE — domena przekierowuje na strony
+informacyjne `uzp.gov.pl/kio` (o KIO, skład, kontakt), NIE na wyszukiwarkę
+orzeczeń. Właściwa, działająca wyszukiwarka orzecznictwa PZP jest pod
+odrębną subdomeną: **`orzeczenia.uzp.gov.pl`**. Obejmuje nie tylko KIO, ale
+też SO/SA/SN w zakresie skarg na orzeczenia KIO (zakładki „Wszystkie/KIO/
+SO/SA/SN" w wyszukiwarce) — szerszy zakres niż sama Izba.
+
+⚠️ **Status prawny:** orzeczenia KIO NIE są źródłem prawa (art. 87
+Konstytucji RP) — są materiałem referencyjnym praktyki PZP. Traktuj jak
+Tier 1 dla spraw DR-07 mimo braku mocy precedensowej formalnej — patrz
+Zasada 7.
+
+### 1-K.1 — Wyszukiwanie
+
+Punkt wejścia: `https://orzeczenia.uzp.gov.pl/Home/Search`
+
+Parametry zweryfikowane bezpośrednim fetchem (2026-07-05c) — używaj TYLKO tych,
+inne pola widoczne w formularzu (Rodzaj dokumentu, Wynik postępowania, Izba,
+Zamawiający, Miejscowość itd.) wymagają ustalenia dokładnej nazwy parametru
+przez inspekcję formularza PRZED użyciem — nie zgaduj nazw po wzorze innych API:
+```
+Phrase=FRAZA     → hasło wyszukiwania (URL-encode spacji i polskich znaków)
+Fle=0|1          → 0 = szukaj dokładnej formy, 1 = "odmiana słów" (fleksja)
+SCnt=0|1         → 0 = szukaj w metadanych, 1 = "szukaj również w treści" (pełny tekst)
+Pg=N             → numer strony wyników
+```
+Przykład zweryfikowany: `.../Home/Search?Phrase=art.%207%20ust.%201&Fle=0&SCnt=0`
+(filtr po konkretnym artykule PZP — link ten sam wzorzec, który portal
+generuje sam dla „Kluczowe przepisy ustawy Pzp" na stronie wyniku).
+
+### 1-K.2 — Pobranie pojedynczego orzeczenia
+
+Z listy wyników każdy wpis linkuje do strony szczegółów
+(`/Home/Details/{internal_id}?Pg=...&Phrase=...&ind=...&total=...` lub
+`/Home/Move?...` przy nawigacji strzałkami między wynikami tego zapytania).
+Strona szczegółów zawiera KOMPLET metadanych bezpośrednio w HTML (nie trzeba
+osobnego zapytania):
+```
+Organ wydający | Rodzaj dokumentu | Data wydania rozstrzygnięcia |
+Przewodniczący | Zamawiający | Miejscowość | Sygnatura akt / Sposób
+rozstrzygnięcia (np. "KIO 827/18 / oddalone") | Tryb postępowania |
+Rodzaj zamówienia | Kluczowe przepisy ustawy Pzp (linkowane) |
+Indeks tematyczny (linkowany)
+```
+Pełny tekst: link „Treść dokumentu" → `/Home/ContentHtml/{id}?Kind=KIO&phrase=...`
+(fragment HTML) lub „Pobierz treść PDF" → `/Home/PdfContent/{id}?Kind=KIO`.
+
+> ℹ️ Zewnętrzny konektor `kio-orzeczenia-mcp` (POC, oceniony osobno) opisuje
+> nieco inny wzorzec URL (`/Home/HtmlContent/{id}`) — przy fetchu 2026-07-05c
+> rzeczywisty portal zwrócił `/Home/Details/{id}` + `/Home/ContentHtml/{id}`.
+> Rozbieżność potwierdza to, co ten konektor sam przyznał w CHANGELOG
+> (4/4 nieudane testy live, selektory best-effort) — nie kopiuj jego
+> endpointów bez własnej weryfikacji fetchem, tak jak wykonano tutaj.
+
+### 1-K.3 — Cytowanie (Zasada 2 + rozszerzenie domenowe)
+
+Cztery elementy Zasady 2 (sygnatura/data/sąd/URL) + dla KIO dodaj obowiązkowo
+z metadanych strony szczegółów: **Sposób rozstrzygnięcia** (oddalone/
+uwzględnione/odrzucone/umorzone) — pole to jest już otagowane przez portal,
+więc stanowi mocniejszy, tańszy pierwszy test GUARD INSTYTUCJA (Zasada 2A/
+GRAD-3b z `shared/WERYFIKACJA-SLAD.md`) niż czytanie całego uzasadnienia:
+jeśli teza pisma twierdzi „KIO uwzględniło odwołanie w zakresie X", a pole
+Sposób rozstrzygnięcia = „oddalone" — to sprzeczność wykrywalna od razu,
+bez analizy treści.
+
+Format:
+```
+Wyrok/postanowienie KIO z [data], sygn. [KIO NNN/RR] ([sposób rozstrzygnięcia])
+— [URL Home/Details/{id}]
+```
+
+### 1-K.4 — Powiązanie z przepisem (ISAP)
+
+Strona szczegółów linkuje "Kluczowe przepisy ustawy Pzp" — to potwierdza
+TYLKO, że KIO powołało dany artykuł, NIE zwalnia z odrębnej weryfikacji
+brzmienia przepisu w ISAP (ustawa z 11.09.2019 r. — Prawo zamówień
+publicznych, t.j. — sprawdź aktualny numer Dz.U. przed cytowaniem, zmienia
+się często). Dwa źródła, dwa kroki — nigdy nie wyprowadzaj brzmienia
+przepisu z tego, jak cytuje go orzeczenie.
+
+### 1-K.5 — Zastrzeżenia praktyczne
+
+- Brak oficjalnego udokumentowanego API i publikowanego limitu zapytań —
+  traktuj jak każdy portal publiczny: rozsądna liczba zapytań w ramach
+  jednej sprawy, bez zbędnego powtarzania tego samego zapytania.
+- Filtry poza Phrase/Fle/SCnt/Pg (Rodzaj dokumentu, Wynik postępowania,
+  Izba, Zamawiający, Skarżony organ, Miejscowość, Publikator, Tryb
+  postępowania) są dostępne w formularzu, ale ich dokładne nazwy parametrów
+  URL NIE zostały zweryfikowane w tej sesji — jeśli potrzebne, sprawdź
+  fetchem strony formularza przed założeniem nazwy.
+- Zakładki „SO/SA/SN" na tym portalu to skargi NA orzeczenia KIO — osobna
+  droga procesowa (art. 579–589 PZP), nie duplikat KIO.
 
 ---
 
@@ -538,6 +749,66 @@ Nie dubluj logiki shared w lokalnych plikach. Lokalne moduły mogą tylko doprec
 ---
 
 ## CHANGELOG
+
+**2.5 (2026-07-05d):**
+- **Nowa Faza 1-K — orzecznictwo KIO / zamówienia publiczne.** Luka wykryta
+  podczas oceny zewnętrznego repo `kio-orzeczenia-mcp`: portal `orzeczenia.
+  uzp.gov.pl` (KIO + skargi SO/SA/SN) nie występował dotąd nigdzie w
+  hierarchii portali tego skilla. Procedura wyszukiwania i cytowania
+  zweryfikowana bezpośrednim fetchem (nie skopiowana z żadnego repo):
+  `Home/Search?Phrase=...&Fle=...&SCnt=...`, strona szczegółów z pełnymi
+  metadanymi (w tym otagowane pole "Sposób rozstrzygnięcia" — tańszy test
+  GUARD INSTYTUCJA niż czytanie uzasadnienia), `Home/ContentHtml/{id}` /
+  `Home/PdfContent/{id}` dla pełnej treści.
+- **Korekta:** `kio.gov.pl` (używane w `dr-07/modules/mod-PZP-...-KIO.md`
+  jako "wyszukiwarka wyroków") przekierowuje na strony informacyjne
+  `uzp.gov.pl/kio`, NIE hostuje wyszukiwarki — poprawiono w obu miejscach.
+- Zasada 5 i Zasada 7 (hierarchia Tier) rozszerzone o KIO/orzeczenia.uzp.gov.pl.
+- Uczciwie odnotowano: rozbieżność endpointów względem `kio-orzeczenia-mcp`
+  (ten POC deklaruje `/Home/HtmlContent/{id}`, żywy portal zwrócił
+  `/Home/Details/{id}` + `/Home/ContentHtml/{id}`) — spójne z jego własnym
+  zgłoszeniem 4/4 nieudanych testów live w CHANGELOG tamtego repo.
+
+**2.4 (2026-07-05c) — SCALENIE dwóch rozgałęzionych dostaw 2.3:**
+- Wykryto podczas przesłania pliku przez użytkownika: żywy system miał
+  wersję 2.2 (bez Fazy 1-T i bez Zasady 2A) — obie poprzednie dostawy 2.3
+  (ta niżej: Faza 1-T/SAOS-CBOSA; oraz równoległa: Zasada 2A/NSA I FZ 104/26)
+  powstały NIEZALEŻNIE na tej samej bazie 2.2 i nigdy nie zostały scalone
+  ani wdrożone — stąd kolizja numeru wersji 2.3 użytego dwukrotnie dla
+  różnej treści.
+- Ten plik = Faza 1-T (poniżej) + wstawiona Zasada 2A (w sekcji "Zasady
+  fundamentalne", po Zasadzie 2) + zdanie łączące oba mechanizmy (gradient
+  TREŚĆ stosuje się też do kandydatów z SAOS/CBOSA, nie tylko z web_search).
+- Opis (`description`) przebudowany pod limit MOD-DESCRIPTION (864 znaki —
+  status OK), skróceniu uległy szczegóły v2.1 (już nieaktualne priorytetowo).
+- Od tej wersji: **każda przyszła zmiana wchodzi na TEN plik**, nie na
+  równoległą kopię — zapobiega to powtórce tej kolizji.
+
+**2.3 (2026-07-05):**
+- **Naprawa CRIT (MOD-DESCRIPTION):** pierwsza wersja opisu v2.3 miała 1256 znaków
+  (limit 1024) — skrócono do 888 znaków, zachowując triggery, wersję i kluczowe
+  ograniczenia; szczegóły techniczne (parametry SAOS API, procedura CBOSA) przeniesione
+  wyłącznie do treści skilla (Faza 1-T), zgodnie z procedurą naprawy MOD-DESCRIPTION.
+- Dodano Fazę 1-T (wyszukiwanie pełnotekstowe po treści tezy) — na wyraźny wniosek
+  użytkownika o zastąpienie pośredniego wyszukiwania (przez agregatory/web_search)
+  bezpośrednim zapytaniem do źródeł indeksujących pełny tekst:
+  - **SAOS REST API bezpośrednio** (`https://www.saos.org.pl/api/search/judgments`,
+    parametr `all` do przeszukania treści/tezy/uzasadnienia + filtry
+    `judgmentDateFrom/To`, `courtType`, `ccCourtType`, `ccCourtName`, `judgmentTypes`,
+    `keywords`) — zweryfikowane wg oficjalnej dokumentacji API (CeON/saos,
+    saos.org.pl/help).
+  - **CBOSA (orzeczenia.nsa.gov.pl)** — udokumentowano, że NIE ma publicznego API
+    (wniosek KIDP o jego udostępnienie pozostał bez odpowiedzi) i że dostęp do
+    pola pełnotekstowego „Treść wyroku" jest wyłącznie przez formularz WWW
+    (w odróżnieniu od pola „Powołane przepisy", które przeszukuje tylko słownik
+    kontrolowany) — z zastrzeżeniem o blokadzie automatyzacji (captcha).
+  - Procedura dwuetapowa dla obu źródeł: [1] zapytanie pełnotekstowe → kandydaci,
+    [2] V-SYG + potwierdzenie w portalu Tier 1 dopiero przed cytowaniem (1-T.3) —
+    SAOS/CBOSA jako etap wyszukania nie zwalnia z Zasady 1/5.
+  - Zasada rozszerzona (1-T.4) na inne portale z polem pełnotekstowym (sn.pl,
+    trybunal.gov.pl, część portali lokalnych SA/SO/SR).
+  - Zaktualizowano „Strategię" w Fazie 1 i sekwencję działania (krok 5), by
+    kierować do Fazy 1-T, gdy celem jest dopasowanie dosłownej tezy.
 
 **2.2 (2026-07-01):**
 - Rozszerzono bazę portali o sieć lokalną sądów apelacyjnych/okręgowych/rejonowych
