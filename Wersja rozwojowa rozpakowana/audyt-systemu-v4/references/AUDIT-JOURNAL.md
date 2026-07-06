@@ -11,6 +11,150 @@
 
 ---
 
+## AUDYT-2026-07-06g — UTRWALENIE PREFERENCJI UŻYTKOWNIKA W SYSTEMIE (router-v3 pierwszy, ISAP, HYBRID-VAL, kwalifikator)
+
+**Pytanie wyjściowe:** dopisać `<userPreferences>` (router→v3 pierwszy,
+ISAP każdy przepis, HYBRID-VAL przed .docx, Karne: +kwalifikator) do
+"prawo polskie" na stałe, nie tylko jako preferencję sesyjną.
+
+### 1. WYNIK WERYFIKACJI
+
+Przed dodaniem czegokolwiek sprawdzono `prawny-router-v3/SKILL.md` —
+**wszystkie 4 zasady już istniały** jako sekcja "PREFERENCJE UŻYTKOWNIKA
+(aktywne globalnie)", UP-1 (router pierwszy), UP-2 (ISAP każdy przepis),
+UP-3 (kwalifikacja karna → moduł `mod-KK-kwalifikator-karnomaterialny.md`,
+25 KB, już istniejący i rozbudowany), UP-4 (HYBRID-VALIDATION przed .docx).
+Pierwsza wersja naprawy (dodana bez sprawdzenia) DUBLOWAŁA tę treść w
+`prawo-polskie-v2/SKILL.md` i `dr-03/SKILL.md` — **naprawiono w tej samej
+sesji** przed zapisaniem na stałe, zgodnie z zasadą CHECKLIST-DEDUP
+("jeśli pojęcie już istnieje — scal, nie duplikuj").
+
+### 2. NAPRAWY (wersja finalna, po korekcie dedup)
+
+1. `prawo-polskie-v2/SKILL.md` — dodany krótki odsyłacz (NIE duplikat)
+   potwierdzający, że UP-1..UP-5 z `prawny-router-v3` są aktywne zanim
+   fasada w ogóle się uruchomi + zabezpieczenie na wypadek bezpośredniego
+   wywołania tego pliku z pominięciem routera.
+2. `dr-03-prawo-karne-wykroczenia-egzekucja/SKILL.md` — dodany krótki
+   punkt wejścia "OBOWIĄZKOWY KWALIFIKATOR" odsyłający do już istniejącego
+   `modules/mod-KK-kwalifikator-karnomaterialny.md` (nie przepisujący
+   treści drzewa decyzyjnego).
+
+### 3. WARN
+
+Brak nowych. WARN-29 (PSP/OSP brak modułu) pozostaje otwarty z sesji
+2026-07-06f.
+
+### 4. SNAPSHOT
+
+- Zmodyfikowane: `prawo-polskie-v2/SKILL.md`, `dr-03/SKILL.md`
+- Nowe pliki: 0
+- CHECKLIST-DEDUP: brak nowych wpisów wymaganych (odsyłacze do
+  ISTNIEJĄCYCH kanonicznych lokalizacji UP-1..UP-5 i mod-KK-kwalifikator,
+  już opisanych — nie nowe pojęcia)
+
+### 5. WNIOSKI
+
+Przydatna lekcja proceduralna: przy "utrwalaniu preferencji użytkownika w
+systemie" ZAWSZE najpierw sprawdź, czy router-v3 (punkt wejścia dla całego
+systemu) już ich nie skodyfikował — w tym wypadku już to zrobił, a ślepe
+dopisanie groziło dokładnie tym duplikatem, przed którym ostrzega
+CHECKLIST-DEDUP w swojej genezie (sesja 2026-06-12).
+
+---
+
+## AUDYT-2026-07-06f — SĄDY WOJSKOWE, POLICJA, PSP, OSP — KOMPLETNOŚĆ HARDGATE I BAZ ORZECZNICTWA
+
+**Pytanie wyjściowe:** czy PRAWO-HARDGATE zabezpiecza tylko sygnatury/daty/
+cytaty/miejsce wydania, czy można wzmocnić hardgate lub dodać dodatkowe
+źródła orzecznictwa/interpretacji — ze szczególnym uwzględnieniem
+sądownictwa wojskowego, Policji, oraz (w kontynuacji) straży pożarnej
+(PSP i OSP).
+
+### 1. WYNIK WERYFIKACJI ONLINE
+
+**Sądy wojskowe:** potwierdzone istnienie dwuinstancyjnego sądownictwa
+wojskowego (garnizonowe → okręgowe; okręgowe jako I inst. → SN Izba Karna
+bezpośrednio, brak sądu apelacyjnego w tej linii). ✅ [VER: pl.wikipedia.org
+Sądy_wojskowe_(Polska), zpe.gov.pl, zolnierz-zawodowy.info.pl — zgodne
+źródła niezależne]. **Brak potwierdzonego scentralizowanego publicznego
+portalu treści orzeczeń** — strony wsokrwarszawa.wp.mil.pl / wsow.mon.gov.pl
+to serwisy informacyjne, nie bazy orzeczeń. SAOS ich nie indeksuje. System
+nie miał wcześniej ŻADNEGO wpisu o tym fakcie (luka milcząca, nie
+projektowa).
+
+**Policja / PSP — dyscyplinarka:** ✅ [VER: sip.lex.pl art. 124j ustawy o
+PSP — skarga do sądu administracyjnego na orzeczenie II instancji;
+rp.pl 2019 — wyrok WSA Olsztyn: orzeczenia dyscyplinarne PSP są informacją
+publiczną, ale dostępne tylko na wniosek, nie z gotowej bazy]. Skutek:
+orzeczenie WSA/NSA po skardze JEST weryfikowalne zwykłym Tier 1 (CBOSA);
+orzeczenie służbowe I/II instancji (przed skargą) nie ma publicznej bazy.
+
+**PSP jako akt prawny / OSP:** ✅ [VER: isap.sejm.gov.pl WDU20250001312 —
+ustawa o PSP, t.j. Dz.U. 2025 poz. 1312, obwieszczenie 15.09.2025;
+isap.sejm.gov.pl WDU20250000244 — ustawa o OSP, t.j. Dz.U. 2025 poz. 244,
+akt pierwotny Dz.U. 2021 poz. 2490; api.sejm.gov.pl text.pdf — ustawa o
+ochronie przeciwpożarowej, Dz.U. 2025 poz. 188 przywołana wprost w art. 2
+ustawy o OSP]. **Odkryto lukę strukturalną wykraczającą poza pytanie
+źródłowe:** żadna z tych 3 ustaw nie miała DOTĄD żadnego wiersza w
+`dr-13/MAPA-AKTOW.md` ani żadnego modułu w całym systemie — PSP była
+wzmiankowana wyłącznie pośrednio (przy Dz.U. 2025 poz. 1366, zakwaterowanie
+funkcjonariuszy), OSP nie była wzmiankowana WCALE. To nie jest błąd numeru
+Dz.U. (jak większość wcześniejszych sesji katalogowania) — to całkowity
+brak pokrycia dziedziny.
+
+### 2. NAPRAWY
+
+1. `shared/ORZECZENIA-HIERARCHIA.md` — nowa sekcja **§4** "Sądy szczególne
+   i dyscyplinarne służb mundurowych": §4.1 sądy wojskowe (status
+   NIEWERYFIKOWALNE + wyjątek SN), §4.2 Policja/PSP dyscyplinarka (status
+   mieszany wg etapu), §4.3 OSP (status prawny — stowarzyszenie, nie sąd
+   szczególny; kanały weryfikacji już istnieją, brak potrzeby nowego Tier).
+   Dawna sekcja "4. Karta orzeczenia" przenumerowana na §5.
+2. `shared/INTERPRETACJE-URZEDOWE.md` — wiersz DR-13 rozszerzony o
+   `gov.pl/web/policja`/BIP KGP, `zandarmeria-wojskowa.wp.mil.pl`,
+   `gov.pl/web/kgpsp` + odesłanie do ORZECZENIA-HIERARCHIA §4.
+3. `orzeczenia-sadowe-v2/SKILL.md` — dodana sekcja odsyłająca do
+   ORZECZENIA-HIERARCHIA §4 przed Tier 4 (portale zagraniczne).
+4. `dr-13/MAPA-AKTOW.md` — dodane 3 wiersze: ustawa o PSP (Dz.U. 2025.1312,
+   ❌ BRAK MODUŁU), ustawa o ochronie przeciwpożarowej (Dz.U. 2025.188,
+   ❌ BRAK MODUŁU), ustawa o OSP (Dz.U. 2025.244, ❌ BRAK MODUŁU) — Dz.U.
+   skatalogowane i zweryfikowane, ale treść merytoryczna modułów NIE
+   napisana w tej sesji (poza zakresem — wymaga sesji dedykowanej, zgodnie
+   z konwencją systemu dla zmian strukturalnych, nie tylko numerów Dz.U.).
+5. `CHECKLIST-DEDUP.md` — 3 nowe wpisy (sądy wojskowe, dyscyplinarka
+   Policja/PSP, PSP/OSP jako luka strukturalna).
+
+### 3. WARN
+
+**WARN-29 (NOWY, OTWARTY):** DR-13 nie ma modułów dla ustawy o PSP, ustawy
+o ochronie przeciwpożarowej ani ustawy o OSP. Dz.U. już zweryfikowane
+(patrz wyżej) — brakuje: intake + workflow + dowody + ryzyka + strategia +
+quality gate (poziom A wg `POLISH-LAW-COMPLETENESS-MATRIX.md`). Priorytet:
+średni (dziedzina rzadziej aktywna niż Policja/ABW, ale całkowicie
+niepokryta — poziom X). Nie zamykać przez zgadywanie treści modułu.
+
+### 4. SNAPSHOT
+
+- Pliki shared/ zmodyfikowane: ORZECZENIA-HIERARCHIA.md (+§4, renumeracja
+  §5), INTERPRETACJE-URZEDOWE.md (wiersz DR-13 rozszerzony)
+- orzeczenia-sadowe-v2/SKILL.md zmodyfikowany (+odesłanie)
+- dr-13/MAPA-AKTOW.md zmodyfikowany (+3 wiersze, 0 modułów nowych)
+- CHECKLIST-DEDUP.md: +3 wpisy
+- Nowe moduły: 0 (świadomie — WARN-29 pozostaje otwarty do sesji dedykowanej)
+
+### 5. WNIOSKI
+
+Pytanie o "kompletność baz per dziedzina" ujawniło dwa różne typy luk:
+(a) luka źródeł weryfikacji przy istniejącym module (sądy wojskowe,
+dyscyplinarka Policja/PSP — naprawione w tej sesji), (b) całkowity brak
+modułu dla całej poddziedziny (PSP/OSP jako akty prawne — tylko
+zdiagnozowane i skatalogowane Dz.U., WARN-29 otwarty). Rekomendacja na
+przyszłość: przy audytach kompletności rozróżniać te dwa typy w raporcie,
+bo wymagają różnego nakładu naprawy.
+
+---
+
 ## AUDYT-2026-07-06e — ZWYKŁE (LOKALNE/IZBOWE) SĄDY DYSCYPLINARNE — ROZSZERZONA WERYFIKACJA + NOWA KATEGORIA: SĘDZIOWIE
 
 **Pytanie wyjściowe:** czy zwykłe (pierwszoinstancyjne, izbowe) sądy

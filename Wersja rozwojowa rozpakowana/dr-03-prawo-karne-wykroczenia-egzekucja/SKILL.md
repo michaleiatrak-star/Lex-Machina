@@ -11,6 +11,29 @@ description: |
 
 # DR-03 — Prawo Karne, Wykroczenia, Egzekucja
 
+## ⛔ OBOWIĄZKOWY KWALIFIKATOR — dla każdej sprawy karnej/wykroczeniowej
+
+> Dodano: 2026-07-06 (utrwalenie preferencji użytkownika "Karne:
+> +kwalifikator"). UWAGA DEDUP: zasada i pełne drzewo decyzyjne JUŻ
+> istnieją jako `prawny-router-v3` UP-3 (sekcja "PREFERENCJE UŻYTKOWNIKA")
+> + moduł kanoniczny poniżej — ten wpis to tylko punkt wejścia z poziomu
+> DR-03, NIE nowa treść (nie duplikować dalej).
+
+Dla KAŻDEJ sprawy karnej/wykroczeniowej (nie tylko na wyraźne żądanie
+użytkownika) obowiązkowe jest przejście przez drzewo decyzyjne kwalifikacji
+przed podaniem jakiejkolwiek analizy lub pisma:
+
+```
+view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
+```
+
+Zasada naczelna modułu (skrót): nigdy nie kwalifikuj czynu bez przejścia
+przez drzewo; kwalifikacja oparta na chronologii faktów, nie na pierwszym
+pasującym przepisie; każdy przepis weryfikowany w ISAP przed użyciem
+(zgodnie z zasadą 2 `prawo-polskie-v2/SKILL.md` / UP-2 routera). Jeśli czyn
+wyczerpuje znamiona więcej niż jednego przepisu — kwalifikacja kumulatywna
+(art. 11 § 2 KK), nie wybór arbitralny.
+
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem przepisu, artykułu, terminu lub sygnatury:**

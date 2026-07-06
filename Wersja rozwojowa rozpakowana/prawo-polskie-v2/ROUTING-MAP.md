@@ -472,6 +472,9 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Prawo komunikacji elektronicznej (retencja danych) | Dz.U. 2024 poz. 1221 t.j. (sync 2026-07-02 — było błędnie 1220) | → DR-11/mod-PrTelekom-poczta-UKE | 🔗 odesłanie |
 | Zmiana ustawy o obronie cywilnej 2026.646 | Dz.U. 2026 poz. 646 — vacatio legis weryfikuj | dr-13/modules/mod-ustawa-zarzadzanie-kryzysowe-obrona-cywilna | ⏳ OCZEKUJE |
 | Ustawa o zakwaterowaniu funkcjonariuszy 2025.1366 | Dz.U. 2025 poz. 1366 — weryfikuj termin wejścia | dr-13/modules/mod-ustawa-policja | ⏳ OCZEKUJE |
+| Ustawa o Państwowej Straży Pożarnej | Dz.U. 2025 poz. 1312 t.j. (sync 2026-07-06 z dr-13, dodane od zera — audyt kompletności) | brak modułu | ❌ BRAK MODUŁU (WARN-29) |
+| Ustawa o ochronie przeciwpożarowej | Dz.U. 2025 poz. 188 t.j. (sync 2026-07-06 z dr-13, dodane od zera) | brak modułu | ❌ BRAK MODUŁU (WARN-29) |
+| Ustawa o ochotniczych strażach pożarnych (OSP) | Dz.U. 2025 poz. 244 t.j. (akt pierwotny 2021.2490) (sync 2026-07-06 z dr-13, dodane od zera) | brak modułu | ❌ BRAK MODUŁU (WARN-29) |
 
 ---
 

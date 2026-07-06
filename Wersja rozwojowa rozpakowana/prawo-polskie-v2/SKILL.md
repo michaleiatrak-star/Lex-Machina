@@ -13,6 +13,21 @@ description: |
 
 # prawo-polskie-v2 — Fasada Routera DR-01 do DR-16
 
+## ⛔ STAŁE ZASADY WORKFLOW (odsyłacz — NIE duplikować)
+
+> Sprawdzono 2026-07-06: wszystkie 4 zasady zgłoszone przez użytkownika
+> ("router→v3 pierwszy, ISAP każdy przepis, HYBRID-VAL przed .docx,
+> Karne: +kwalifikator") JUŻ są kanonicznie skodyfikowane w
+> `prawny-router-v3/SKILL.md`, sekcja "PREFERENCJE UŻYTKOWNIKA (aktywne
+> globalnie)" jako UP-1 do UP-5 — nie duplikuj ich treści tutaj.
+
+Ten plik (`prawo-polskie-v2`) jest wywoływany DOPIERO z poziomu
+`prawny-router-v3` (KROK 1B) — a więc UP-1..UP-5 są już aktywne, zanim
+routing w tym pliku w ogóle się zacznie. Jedyne dodane tu wzmocnienie:
+jeśli ten plik zostanie kiedykolwiek wywołany bezpośrednio, z pominięciem
+routera (np. błąd w innym skillu) — potraktuj to jako naruszenie UP-1 i
+najpierw wczytaj `prawny-router-v3/SKILL.md` zanim przejdziesz dalej.
+
 ## Zasada
 
 ```

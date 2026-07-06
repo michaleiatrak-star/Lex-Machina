@@ -258,6 +258,14 @@ Gdy celem jest odnalezienie KONKRETNEJ tezy (dosłownego sformułowania z uzasad
 a nie tylko orzeczeń „w temacie" — nie zaczynaj od web_search (przeszukuje zaindeksowane
 strony, nie treść uzasadnień) — zacznij od Fazy 1-T (SAOS API + CBOSA pełnotekstowo).
 
+### Sądy szczególne i dyscyplinarne służb mundurowych
+
+Sądy wojskowe, postępowania dyscyplinarne Policji/PSP i status OSP NIE
+mieszczą się w Tier 1–3 powyżej wprost — mają odrębny status weryfikowalności
+(część niepubliczna/brak portalu, część routowana przez CBOSA/sn.pl jak
+zwykle). Pełna procedura: `shared/ORZECZENIA-HIERARCHIA.md` §4 — wczytaj
+PRZED odpowiedzią dotyczącą orzeczenia/sygnatury z tych obszarów.
+
 ### Portale zagraniczne (Tier 4)
 
 Stosuj gdy sprawa zawiera element obcy lub użytkownik pyta o orzecznictwo
