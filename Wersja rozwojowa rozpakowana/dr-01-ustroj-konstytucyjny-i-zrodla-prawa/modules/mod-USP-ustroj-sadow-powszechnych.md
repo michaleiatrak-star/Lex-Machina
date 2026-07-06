@@ -73,7 +73,7 @@ TRYBUNAŁY:
 | Przewlekłość postępowania | Skarga na przewlekłość → sąd przełożony |
 | Brak bezstronności sędziego | Wniosek o wyłączenie sędziego |
 | Organizacja pracy sądu | Skarga administracyjna do prezesa sądu |
-| Zachowanie osoby wykonującej zawód | Tryb dyscyplinarny |
+| Zachowanie osoby wykonującej zawód | Tryb dyscyplinarny — dla sędziów/asesorów: Sąd Dyscyplinarny przy Sądzie Apelacyjnym (art. 110 USP) → SN Izba Odpowiedzialności Zawodowej; bazy orzeczeń i zastrzeżenia co do jawności: `dr-12` → `mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md`, sekcja "Orzecznictwo dyscyplinarne — instancje i bazy" |
 | Naruszenie prawa do sądu | Zarzut konstytucyjny (art. 45 Konstytucji → mod-TK) |
 
 ### Warunki skuteczności pisma

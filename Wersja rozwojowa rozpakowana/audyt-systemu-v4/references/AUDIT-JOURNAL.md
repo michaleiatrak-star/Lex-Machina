@@ -11,6 +11,327 @@
 
 ---
 
+## AUDYT-2026-07-06e — ZWYKŁE (LOKALNE/IZBOWE) SĄDY DYSCYPLINARNE — ROZSZERZONA WERYFIKACJA + NOWA KATEGORIA: SĘDZIOWIE
+
+**Pytanie wyjściowe:** czy zwykłe (pierwszoinstancyjne, izbowe) sądy
+dyscyplinarne — użytkownik wskazał przykładowo Lublin — też coś publikują;
+poszukać innych i dodać.
+
+### 1. WYNIK WERYFIKACJI ONLINE
+
+**Adwokatura — POPRAWKA własnej wcześniejszej oceny (sesja 07-06d):**
+znaleziono `wsd.adwokatura.pl/rejestry/showMain/orzecznictwo-19` —
+"Portal Orzecznictwa Dyscyplinarnego Adwokatury" z **1151+ pozycjami**,
+obejmujący zarówno orzeczenia WSD jak i orzecznictwo SN w sprawach
+dyscyplinarnych (sygn. SDI). To istotnie szerszy i inny portal niż sugerował
+artykuł rp.pl z 2021 r., na którym opierała się poprzednia, zbyt surowa ocena
+"wybiórcza i nieaktualna". Poszczególne izby adwokackie (Lublin, Kraków i in.)
+mają własne strony, ale te są WYŁĄCZNIE opisowe (skład, kompetencje) — bez
+archiwum treści orzeczeń.
+
+**Radcowie prawni:** potwierdzono, że oprócz centralnego `wsd.kirp.pl`
+poszczególne OIRP (np. `oirp.lu` Lublin, `oirp.gda.pl` Gdańsk) mają WŁASNE
+strony z archiwum "Orzeczenia Okręgowego Sądu Dyscyplinarnego" po latach.
+Jednocześnie znaleziono badanie Sieci Obywatelskiej Watchdog Polska (wniosek
+o informację publiczną do 19 OIRP): praktyka jest NIERÓWNA — 3 OIRP w ogóle
+nie odpowiedziały/nie publikowały (Bydgoszcz, Katowice, Wałbrzych), inne
+publikują częściowo, bez wspólnych reguł anonimizacji. Zaktualizowano tabelę
+o to zastrzeżenie.
+
+**NOWA KATEGORIA ODKRYTA: sędziowie i asesorzy sądowi.** Poszukiwania w
+Lublinie ujawniły, że przy każdym sądzie apelacyjnym (Lublin, Poznań,
+Warszawa, Gdańsk, Rzeszów, Katowice i in.) działa **Sąd Dyscyplinarny przy
+Sądzie Apelacyjnym** (art. 110 ustawy Prawo o ustroju sądów powszechnych) —
+I instancja dla spraw dyscyplinarnych sędziów i asesorów sądowych, z dalszą
+drogą do SN (Izba Odpowiedzialności Zawodowej). Kategoria ta NIE była dotąd
+ujęta w tabeli zawodów zaufania publicznego (moduł dotyczył wyłącznie zawodów
+korporacyjnych spoza władzy sądowniczej) — dodano jako osobny wiersz, z
+odesłaniem zwrotnym z `dr-01/mod-USP-ustroj-sadow-powszechnych.md`. Ustalono:
+strony poszczególnych SA są opisowe (skład, kompetencja), bez potwierdzonego
+archiwum treści orzeczeń dyscyplinarnych; jawne są za to KOMUNIKATY o
+wszczętych postępowaniach na `rzecznik.gov.pl` (Rzecznik Dyscyplinarny Sędziów
+Sądów Powszechnych) — to zawiadomienia o wszczęciu/zarzutach, NIE pełne
+orzeczenia.
+
+**Notariusz, komornik, rzecznik patentowy:** ponowne poszukiwania nie
+ujawniły żadnego dodatkowego lokalnego/izbowego portalu publikującego treść
+orzeczeń — status bez zmian względem sesji 07-06d.
+
+### 2. NAPRAWY WYKONANE
+
+- `dr-12/modules/mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md` —
+  tabela zawodów zaufania publicznego rozszerzona o wiersz "Sędzia / asesor
+  sądowy"; poprawiony (rozszerzony) opis bazy adwokackiej; dodane zastrzeżenie
+  Watchdog Polska przy radcach prawnych; zaktualizowany "Zakres" modułu.
+- `shared/PRAWO-HARDGATE.md` — sekcja zawodów zaufania publicznego
+  zsynchronizowana z powyższymi ustaleniami.
+- `dr-01/modules/mod-USP-ustroj-sadow-powszechnych.md` — w tabeli
+  kwalifikatora trybu dodano odesłanie do sekcji orzecznictwa dyscyplinarnego
+  w DR-12 dla wiersza "Zachowanie osoby wykonującej zawód" (sędziowie).
+
+### 3. ZASADA NA PRZYSZŁOŚĆ
+
+Lokalne/izbowe strony pojedynczych miast bywają albo (a) czysto opisowe
+(skład, kontakt — jak adwokatura Lublin/Kraków), albo (b) faktycznym
+archiwum orzeczeń (jak OIRP Lublin/Gdańsk) — rozróżnienie wymaga sprawdzenia
+konkretnej podstrony, nie samego faktu istnienia strony izby. Ekstrapolacja
+"skoro jedna izba publikuje, inne też" jest błędem — potwierdzone badaniem
+Watchdog Polska dla radców prawnych.
+
+---
+
+## AUDYT-2026-07-06d — REALNE ADRESY BAZ ORZECZEŃ DYSCYPLINARNYCH (WERYFIKACJA ONLINE) + SAMOKOREKTA BŁĘDU
+
+**Pytanie wyjściowe:** czy są wstawione adresy, skąd można pobierać orzeczenia
+różnych sądów dyscyplinarnych i wyższych sądów dyscyplinarnych, celem ich
+weryfikacji.
+
+### 1. DIAGNOZA
+
+Tabela dodana w AUDYT-2026-07-06b zawierała nazwy instancji i ogólne bazy
+kasacyjne (sn.pl / orzeczenia.ms.gov.pl), ale **nie zawierała żadnego
+konkretnego adresu URL** dla samych sądów/komisji dyscyplinarnych I i II
+instancji korporacyjnej — a to była literalna treść pytania. Wykonano
+`web_search` (zgodnie z HARDGATE — zakaz zgadywania adresów z pamięci) dla
+każdego z 6 zawodów z tabeli.
+
+### 2. WYNIK WERYFIKACJI ONLINE — REALNE ADRESY
+
+| Zawód | Zweryfikowany adres | Zakres/zastrzeżenie |
+|---|---|---|
+| Adwokat | `wsd.adwokatura.pl` (zakładka Orzecznictwo) | Istnieje, ale WYBIÓRCZA — publikuje tylko "szczególnie ważne" orzeczenia; potwierdzone wieloletnie luki aktualizacji (rp.pl, 2019 r.: 105 orzeczeń, 2020: 15, 2021: 0) |
+| Radca prawny | `wsd.kirp.pl` | Najbardziej kompletna baza korporacyjna — obejmuje WSD KRRP (2014–bieżący rok) **oraz** Okręgowe Sądy Dyscyplinarne wg miast (I instancja!) |
+| Lekarz | `nil.org.pl/orzeczenia` | Nowy portal NIL prawomocnych orzeczeń sądów lekarskich, uruchomiony dopiero w 2024 r.; osobno: `nil.org.pl/izba/naczelny-rzecznik-odpowiedzialnosci-zawodowej/dokumenty/orzeczenia-sadu-najwyzszego` — kasacje SN skompilowane przez NIL |
+| Notariusz | brak potwierdzonego scentralizowanego portalu | Orzeczenia uznane za informację publiczną na żądanie (WSA, sygn. II SA/Wa 1455/13), ale bez stałej bazy online |
+| Komornik sądowy | brak potwierdzonego portalu KRK | Pojedyncze orzeczenia Komisji Dyscyplinarnej bywają zaindeksowane w `saos.org.pl` (potwierdzony przykład) |
+| Rzecznik patentowy | brak potwierdzonego portalu PIRP | — |
+
+### 3. SAMOKOREKTA BŁĘDU Z SESJI 07-06b
+
+Weryfikacja ujawniła błąd we własnej tabeli z poprzedniej sesji: **notariusz
+NIE ma II instancji w sądzie apelacyjnym** (tak było błędnie zapisane) — II
+instancją jest **Wyższy Sąd Dyscyplinarny przy Krajowej Radzie Notarialnej**
+(organ korporacyjny, analogicznie do adwokata/radcy), dopiero od niego
+kasacja do SN (potwierdzone sygnatury SDI, np. "SDI 74/17" na sn.pl). Sąd
+apelacyjny jako II instancja dotyczy WYŁĄCZNIE komornika sądowego (jedyny
+zawód z tej grupy, dla którego przepis tak stanowi — art. 252 ustawy o
+komornikach sądowych). Skorygowano tabelę w `dr-12/mod-ustawa-
+odpowiedzialnosc-dyscyplinarna-zawodow.md`. Skorygowano też rzecznika
+patentowego: II instancja to Odwoławczy Sąd Dyscyplinarny PIRP (korporacyjny),
+nie sąd powszechny — usunięto błędnie dopisane `orzeczenia.ms.gov.pl`.
+
+### 4. NAPRAWY WYKONANE
+
+- `dr-12/modules/mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md` —
+  tabela przebudowana z konkretnymi, zweryfikowanymi adresami URL + kolumna
+  zastrzeżeń co do kompletności/aktualności każdej bazy; poprawiono ścieżkę
+  instancyjną notariusza i rzecznika patentowego.
+- `shared/PRAWO-HARDGATE.md` — sekcja "zawody zaufania publicznego" zaktualizowana
+  o te same, konkretne adresy zamiast generycznego "brak bazy".
+- `dr-10/modules/mod-ustawa-zawod-lekarza.md` — placeholder zamieniony na
+  `nil.org.pl/orzeczenia` + adres skompilowanych kasacji SN.
+
+### 5. ZASADA NA PRZYSZŁOŚĆ
+
+Każdy zawód dodany do tej tabeli w przyszłości wymaga odrębnej weryfikacji
+`web_search`/`web_fetch` per zawód — jawność I/II instancji korporacyjnej NIE
+jest jednolita w polskim systemie (od w pełni otwartej bazy radców prawnych po
+całkowity brak u notariuszy/komorników/rzeczników patentowych) i nie wolno
+ekstrapolować z jednego zawodu na inny.
+
+---
+
+## AUDYT-2026-07-06c — CZY WSZYSTKIE DR SĄ POWIĄZANE Z HARDGATE?
+
+**Pytanie wyjściowe:** czy wszystkie moduły DR-01…DR-16 są powiązane z
+`shared/PRAWO-HARDGATE.md`.
+
+### 1. DIAGNOZA
+
+Metoda: sprawdzenie (a) bezpośrednich odwołań do `PRAWO-HARDGATE` w SKILL.md
+i w plikach modułów każdej domeny, (b) pośrednich odwołań przez
+`shared/ISAP-AUDIT-PROTOCOL.md` (który sam zaczyna się od nakazu wczytania
+PRAWO-HARDGATE — linia 5), (c) połączenia globalnego przez orchestrator
+`prawny-router-v3` (który ładuje PRAWO-HARDGATE jako moduł obowiązkowy,
+niezależnie od wybranej domeny DR).
+
+**Wynik przed naprawą — trzy warstwy powiązania, nierówne:**
+
+| Warstwa | Domeny | Status |
+|---|---|---|
+| Bezpośrednie odwołanie w SKILL.md/modułach | DR-10, DR-11, DR-12 | ✅ powiązane wprost |
+| Pośrednie przez `ISAP-AUDIT-PROTOCOL.md` w modułach treściowych | DR-03, DR-04, DR-06, DR-08, DR-09, DR-13, DR-14, DR-15, DR-16 | ✅ powiązane tranzytywnie (poprawnie, bo ISAP-AUDIT-PROTOCOL sam odsyła do HARDGATE) |
+| **Brak jakiegokolwiek odwołania** — ani bezpośredniego, ani przez ISAP-AUDIT-PROTOCOL, w żadnym pliku domeny | **DR-01, DR-02, DR-05, DR-07** | ❌ **luka** |
+
+Wszystkie 16 domen miały w SKILL.md identyczny, stary akapit
+`## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI` — ale to samodzielna PARAFRAZA
+zasady sprzed uaktualnienia HARDGATE v2.0 (AUDYT-2026-07-05a), bez faktycznego
+`view shared/PRAWO-HARDGATE.md`. Dla domen z warstwy 2/3 nie miało to
+znaczenia, bo dodatkowe powiązanie zapewniały moduły treściowe. Dla DR-01,
+DR-02, DR-05, DR-07 ta parafraza była JEDYNYM ogniwem — a nie zawiera warstwy
+strukturalnej SAOS/MCP, kontraktu SYGNATURY.md ani gradientu
+WERYFIKACJA-SLAD.md dodanych w 07-05a. Praktyczne ryzyko: te 4 domeny są w
+pełni zabezpieczone TYLKO gdy sesja przechodzi przez `prawny-router-v3` (który
+ładuje HARDGATE globalnie na wejściu) — przy bezpośrednim wywołaniu samego
+DR-skilla (z pominięciem routera) korzystałyby z płytszej, nieaktualnej wersji
+zasady.
+
+### 2. NAPRAWA WYKONANA
+
+W SKILL.md czterech domen (DR-01, DR-02, DR-05, DR-07) dopisano pod istniejącym
+akapitem HARD GATE jawne odesłanie:
+`view shared/PRAWO-HARDGATE.md` (wczytać przed pierwszym przepisem) +
+odnotowanie integracji z `shared/ISAP-AUDIT-PROTOCOL.md`, ujednolicając je z
+resztą systemu.
+
+### 3. STATUS PO NAPRAWIE
+
+Wszystkie 16 domen DR-01…DR-16 mają teraz co najmniej jedno bezpośrednie lub
+udokumentowane w SKILL.md odesłanie do `shared/PRAWO-HARDGATE.md`, niezależnie
+od tego, czy sesja wchodzi przez `prawny-router-v3` czy przez bezpośrednie
+wywołanie skilla.
+
+### 4. ŚWIADOMIE POZA ZAKRESEM
+
+Nie podmieniano samego tekstu parafrazy (treściowo poprawnej, tylko
+niekompletnej) — dodano wyłącznie odesłanie. Ujednolicenie WSZYSTKICH 16
+nagłówków HARD GATE do jednej, w pełni aktualnej wersji (np. przez wyciągnięcie
+ich do współdzielonego include) pozostaje kandydatem do sesji dedykowanej
+refaktoryzacji — nie wykonano tego tutaj, by ograniczyć zakres zmian do
+literalnego pytania (powiązanie z HARDGATE, nie przepisanie treści).
+
+---
+
+## AUDYT-2026-07-06b — ORZECZNICTWO DYSCYPLINARNE ZAWODÓW ZAUFANIA PUBLICZNEGO — SPIĘCIE Z HARDGATE
+
+**Pytanie wyjściowe:** czy dla zawodów zaufania publicznego (adwokat, radca
+prawny, lekarz, notariusz, komornik, rzecznik patentowy, farmaceuta, lekarz
+weterynarii) istnieją bazy orzeczeń ich sądów/organów dyscyplinarnych i czy są
+one spięte z `shared/PRAWO-HARDGATE.md`.
+
+### 1. DIAGNOZA
+
+Stan sprzed naprawy: **NIE, nie były spięte.** `PRAWO-HARDGATE.md` (KROK 1)
+znał tylko cztery kategorie sądów (sn.pl / orzeczenia.ms.gov.pl / nsa.gov.pl /
+trybunal.gov.pl) — brak jakiejkolwiek kategorii dla orzecznictwa dyscyplinarnego
+korporacji zawodowych. Moduł `dr-12/mod-ustawa-odpowiedzialnosc-dyscyplinarna-
+zawodow.md` (zakres: adwokat, radca, lekarz, notariusz, komornik) miał opisaną
+procedurę merytoryczną, ale zero przypisania bazy orzeczeń i zero odwołania do
+PRAWO-HARDGATE lub `orzeczenia-sadowe-v2` w tabeli "Łącz obowiązkowo z". Ten sam
+wzorzec luki potwierdzony w DR-10: moduły `mod-ustawa-zawod-lekarza.md`,
+`mod-ustawa-aptekarz-zawod.md`, `mod-ustawa-lekarz-weterynarii-zawod.md` opisują
+tryb dyscyplinarny/sądownictwo korporacyjne, ale odsyłały co najwyżej do
+gołego `web_search`, bez oficjalnej bazy ani spięcia z HARDGATE.
+
+**Ustalenie merytoryczne (weryfikacja wiedzy o strukturze sądownictwa
+korporacyjnego, nie zgadywanie sygnatur):** orzeczenia **I instancji** (sądy/
+komisje dyscyplinarne izb: adwokackiej, radcowskiej, lekarskiej, aptekarskiej,
+lekarsko-weterynaryjnej, notarialnej, komorniczej) **z reguły nie są publikowane
+w żadnej ogólnodostępnej bazie** — ograniczona jawność regulaminowa i ochrona
+danych obwinionego. Dopiero instancja odwoławcza/kasacyjna trafia do jawnej
+bazy: dla adwokata, radcy prawnego, lekarza i rzecznika patentowego jest to
+kasacja do SN (Izba Odpowiedzialności Zawodowej, dawniej Izba Dyscyplinarna) →
+**sn.pl**; dla komornika i notariusza — odwołanie do sądu apelacyjnego →
+**orzeczenia.ms.gov.pl**.
+
+### 2. NAPRAWY WYKONANE
+
+- **`shared/PRAWO-HARDGATE.md`** — dodano w KROK 1 dedykowaną podsekcję
+  "zawody zaufania publicznego — odpowiedzialność dyscyplinarna": rozróżnienie
+  I instancji (brak jawnej bazy → znacznik ⚠️ [NIEWERYFIKOWALNE — I instancja
+  korporacyjna], nigdy ✅ [VER]) od instancji odwoławczej/kasacyjnej (sn.pl /
+  orzeczenia.ms.gov.pl, pełna procedura KROK 0–5).
+- **`dr-12/modules/mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md`** —
+  nowa sekcja "Orzecznictwo dyscyplinarne — instancje i bazy" z tabelą 6
+  zawodów (adwokat, radca prawny, lekarz, notariusz, komornik, rzecznik
+  patentowy) × instancja × baza; nowy wiersz w tabeli "Łącz obowiązkowo z"
+  odsyłający do PRAWO-HARDGATE i `orzeczenia-sadowe-v2` (dotąd nieobecny —
+  jedyny moduł DR-12 bez tego odesłania mimo że cały skill deklaruje wyjście
+  do `orzeczenia-sadowe-v2` na poziomie SKILL.md).
+- **`dr-10/modules/mod-ustawa-zawod-lekarza.md`** — sekcja "Odpowiedzialnosc
+  dyscyplinarna" uzupełniona o przypisanie sn.pl (kasacja) + odesłanie do
+  DR-12 sekcja 4a; zamieniono luźny `web_search` na `web_fetch` bazy SN.
+- **`dr-10/modules/mod-ustawa-aptekarz-zawod.md`** — analogiczne uzupełnienie
+  (orzeczenia.ms.gov.pl / sn.pl) w opisie odpowiedzialności dyscyplinarnej i w
+  sekcji weryfikacji online.
+- **`dr-10/modules/mod-ustawa-lekarz-weterynarii-zawod.md`** — dodano wiersz
+  "Orzecznictwo SN | sn.pl | Kasacja..." do tabeli źródeł (miała już NSA dla
+  kontroli uchwał izb, brakowało SN dla kasacji dyscyplinarnej).
+
+### 3. ŚWIADOMIE POZOSTAWIONE OTWARTE
+
+- Moduł `mod-ustawa-psycholog-zawod` (DR-10) — pominięty celowo: ustawa
+  2019/1026 nie doczekała się nigdy powstania samorządu/sądownictwa
+  dyscyplinarnego (stan przejściowy do 2028), więc przypisanie bazy orzeczeń
+  byłoby obecnie bezprzedmiotowe — do rewizji po 19.05.2028.
+- Flaga strukturalna z AUDYT-2026-07-04k (4.17) — "izby lekarskie (brak
+  dedykowanego modułu)" — dotyczy **innego** aktu (ustawa o izbach lekarskich,
+  2021.1342 — ustrój samorządu), NIE modułu `mod-ustawa-zawod-lekarza.md`
+  (odpowiedzialność zawodowa lekarza), który już istnieje i został właśnie
+  naprawiony w tej sesji. Flaga strukturalna pozostaje otwarta bez zmian —
+  wymaga sesji dedykowanej.
+- Nie skanowano pozostałych DR (poza DR-10/DR-12) pod kątem innych zawodów
+  regulowanych z sądownictwem korporacyjnym (np. biegły rewident, architekt,
+  doradca podatkowy) — poza zakresem tego pytania; potencjalny kandydat do
+  kolejnej sesji targeted.
+
+### 4. STATUS
+
+Brak zmian w mapie Dz.U. Zmiany wyłącznie strukturalne/proceduralne (przypisanie
+źródeł orzecznictwa + spięcie z HARDGATE), bez naruszenia CRIT.
+
+---
+
+## AUDYT-2026-07-06 — SPÓJNOŚĆ SĄDOWNICTWA I BAZ ORZECZEŃ W MODUŁACH DR-01…DR-16
+
+**Zakres:** Przegląd wszystkich 16 modułów dziedzinowych (DR-01…DR-16) pod kątem
+tego, czy każdemu modułowi przypisane jest właściwe sądownictwo (jeśli w danej
+dziedzinie ono istnieje) oraz baza orzeczeń, z której należy korzystać dla tego
+sądownictwa. Metoda: porównanie linii `Weryfikacja:` we frontmatterze SKILL.md
+(źródło używane przez router i HARD GATE) z lokalną sekcją źródeł na końcu tego
+samego pliku oraz z treścią merytoryczną modułu (opisy trybów zaskarżenia,
+właściwości sądów). Rozbieżność między tym, co moduł **opisuje** (np. tryb
+odwołania do WSA), a tym, co ma wpisane w `Weryfikacja:`, traktowana jako luka.
+
+### 1. NAPRAWY WYKONANE (9 modułów, 10 poprawek frontmatteru)
+
+| Moduł | Braki wykryte | Poprawka |
+|---|---|---|
+| DR-01 (Ustrój Konstytucyjny) | frontmatter nie miał `nsa.gov.pl`, `orzeczenia.ms.gov.pl`, mimo że treść modułu (sekcja źródeł) już je wymieniała | dopisano oba |
+| DR-03 (Karne/Wykroczenia/Egzekucja) | brak `nsa.gov.pl` mimo obecności w sekcji Orzecznictwo modułu | dopisano |
+| DR-04 (Praca/ZUS) | brak `nsa.gov.pl` (sprawy administracyjne, np. cudzoziemcy/zezwolenia na pracę) mimo obecności w sekcji Orzecznictwo | dopisano |
+| DR-09 (Budownictwo/Środowisko/Energia/Transport) | brak `kio.gov.pl` dla zamówień budowlanych, mimo że moduł sam to wskazuje w lokalnej liście źródeł | dopisano |
+| DR-11 (Cyfrowe/Cyber/AI/Dane/IP) | **luka merytoryczna, nie tylko kosmetyczna:** moduł opisuje tryb odwołania od decyzji UODO do WSA, ale żadna z dwóch list źródeł (frontmatter ani lokalna) nie zawierała sądu administracyjnego | dopisano `orzeczenia.nsa.gov.pl` w obu miejscach |
+| DR-12 (Sądownictwo/Prokuratura/Zawody Prawnicze) | moduł opisuje kontrolę WSA/NSA wg PPSA (i SOKiK dla UOKiK) oraz wskazuje `cbosa.nsa.gov.pl` jako źródło sygnatur, ale frontmatter tego nie odzwierciedlał | dopisano `orzeczenia.nsa.gov.pl` z adnotacją zakresu |
+| DR-13 (Służby/Bezpieczeństwo/Informacje Niejawne) | brak `nsa.gov.pl` mimo opisanego trybu zaskarżenia do WSA (poświadczenia bezpieczeństwa) i obecności w lokalnej liście źródeł | dopisano z adnotacją |
+| DR-14 (Prawo UE/Międzynarodowe/Prawa Człowieka) | frontmatter używał ogólnego `echr.coe.int` zamiast właściwej bazy orzeczeń ETPC `hudoc.echr.coe.int` (już poprawnie stosowanej w krokach proceduralnych modułu, linie 19–20) i nie miał `curia.europa.eu` (baza TSUE), mimo że lokalna lista źródeł już je miała | ujednolicono: frontmatter i lokalna lista → `curia.europa.eu` + `hudoc.echr.coe.int` |
+| DR-15 (Compliance/ISO/Governance/Audyt) | brak `nsa.gov.pl` mimo obecności w lokalnej liście źródeł | dopisano |
+| DR-16 (Pisma/Strategia/Dowody/Orzecznictwo) | brak `curia.europa.eu` i `hudoc.echr.coe.int` we frontmatterze mimo obecności w lokalnej liście źródeł | dopisano oba |
+
+Moduły sprawdzone bez rozbieżności (frontmatter = treść modułu):
+DR-02, DR-05, DR-06, DR-07, DR-08, DR-10.
+
+### 2. ZASADA WYKRYTA I ZALECENIE NA PRZYSZŁOŚĆ
+
+Powtarzający się wzorzec: moduły miały prawidłową wiedzę merytoryczną o
+właściwym sądzie/trybie zaskarżenia **w treści**, ale linia `Weryfikacja:` we
+frontmatterze (jedyna czytana automatycznie przez router/HARD GATE przy
+lazy-loading) nie była z nią zsynchronizowana — ryzyko, że moduł zostanie
+załadowany bez wskazania właściwej bazy orzeczeń do faktycznej weryfikacji.
+**Zalecenie:** przy każdej przyszłej edycji treści modułu DR, jeśli dodawany
+jest nowy tryb zaskarżenia/sąd, aktualizować równolegle frontmatter i lokalną
+sekcję źródeł (patrz też ZASADA KRYTYCZNA nr 8 w SKILL.md — weryfikacja
+niezależna od pozornej zgodności nazw, tu: niezależna od tego, czy temat
+"wygląda" jak już pokryty).
+
+### 3. STATUS
+
+Brak zmian w mapie Dz.U. (poza zakresem tej sesji — dotyczyła wyłącznie
+przypisań sądownictwa/baz orzeczeń, nie numerów aktów). `mapa_dzu_2026-07-04.md`
+pozostaje aktualna, bez zmian.
+
+---
+
 ## AUDYT-2026-07-05a — WZMOCNIENIE MECHANIZMÓW WERYFIKACJI — wdrożenie wzorców z narzędzi zewnętrznych (benchmark 7 repozytoriów)
 
 **Zakres:** Wdrożenie rekomendacji z porównania systemu z 7 zewnętrznymi
@@ -100,6 +421,11 @@ legal-ai-audit-bundle.
    kio-orzeczenia-mcp) — wymaga środowiska Claude Desktop/Code z dostępem
    do `mcpServers`; PRAWO-HARDGATE jest na to gotowy (POZIOM A), do czasu
    konfiguracji działa POZIOM B (web_fetch na API).
+   **AKTUALIZACJA 2026-07-05:** mcp-isap skonfigurowany w `.mcp.json`
+   w korzeniu repozytorium (Claude Code wczytuje go automatycznie —
+   POZIOM A aktywny w sesjach Claude Code). Claude Desktop nadal wymaga
+   ręcznego wpisu w `claude_desktop_config.json`. Pozostałe konektory
+   (sententim, prawo-pl-saos, kio-orzeczenia-mcp) — flaga otwarta.
 2. **Odchudzenie monolitycznych SKILL.md** (436/559 linii → wzorzec
    index + references lazy-load) — osobna sesja refaktoryzacyjna; zmiana
    strukturalna, nie treściowa.

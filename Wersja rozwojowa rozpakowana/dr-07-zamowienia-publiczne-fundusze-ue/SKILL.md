@@ -1,12 +1,12 @@
 ---
 name: dr-07-zamowienia-publiczne-fundusze-ue
-version: 3.1
+version: 3.2
 description: |
   DR-07: Zamówienia Publiczne, Fundusze UE, Pomoc Publiczna
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
   Ładuj TYLKO moduł pasujący do sprawy — lazy loading.
   Wchodzi z: prawo-polskie-v2 → ROUTING-MAP → ten skill.
-  Weryfikacja: isap.sejm.gov.pl | uzp.gov.pl | kio.gov.pl + shared/INTERPRETACJE-URZEDOWE.md (rejestr interpretacji urzędowych per dziedzina)
+  Weryfikacja: isap.sejm.gov.pl | uzp.gov.pl | orzeczenia.uzp.gov.pl + shared/INTERPRETACJE-URZEDOWE.md (rejestr interpretacji urzędowych per dziedzina)
 ---
 
 # DR-07 — Zamówienia Publiczne, Fundusze UE, Pomoc Publiczna
@@ -17,6 +17,11 @@ description: |
 1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
 2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
 3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
+
+> Procedura szczegółowa (warstwa strukturalna SAOS/MCP, kontrakt sygnatur,
+> gradient weryfikacji cytatu): `view shared/PRAWO-HARDGATE.md` — wczytaj
+> PRZED pierwszym przepisem w każdej odpowiedzi. Integruje się z
+> `shared/ISAP-AUDIT-PROTOCOL.md`.
 
 ---
 
@@ -78,7 +83,7 @@ view /mnt/skills/user/dr-07-zamowienia-publiczne-fundusze-ue/MAPA-AKTOW.md
 - Zamówienia obronne: `dr-13`
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
 - Weryfikacja prawa: isap.sejm.gov.pl
-- Orzecznictwo KIO: kio.gov.pl | UZP: uzp.gov.pl
+- Orzecznictwo KIO: orzeczenia.uzp.gov.pl (Faza 1-K, orzeczenia-sadowe-v2) | UZP: uzp.gov.pl
 
 ## ⚖️ DISCLAIMER (obowiązkowy)
 

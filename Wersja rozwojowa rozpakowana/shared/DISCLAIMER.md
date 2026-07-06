@@ -1,7 +1,8 @@
 # DISCLAIMER — Moduł Zastrzeżenia Prawnego
 
 > **Plik kanoniczny:** `/mnt/skills/user/shared/DISCLAIMER.md`
-> **Wersja:** 2.0 | Aktualizacja: 2026-06-02 (R4 — rozszerzona instrukcja integracji)
+> **Wersja:** 2.1 | Aktualizacja: 2026-07-05b (R5 — klauzula profesjonalnej
+>              weryfikacji dla pism kierowanych do sądu; NSA I FZ 104/26)
 
 ---
 
@@ -65,6 +66,33 @@ Orzecznictwo: orzeczenia.ms.gov.pl / sn.pl. Każda analiza wymaga weryfikacji
 pod kątem aktualnego stanu prawnego i okoliczności konkretnej sprawy.
 ```
 
+### WARIANT PISMO SĄDOWE (NOWY v2.1 — obowiązkowy dodatek dla pism kierowanych
+### do sądu/organu, DOŁĄCZ do wariantu PRAWNIK, nie zamiast niego)
+
+> Dodano po: postanowienie NSA z 23.06.2026, sygn. I FZ 104/26 — NSA ocenił
+> "nader krytycznie" bezrefleksyjne korzystanie z AI przez profesjonalnego
+> pełnomocnika (pismo zawierało zmyślone sygnatury/daty orzeczeń, których
+> pełnomocnik najwyraźniej nie zweryfikował ani nie przeczytał przed
+> podpisaniem). Ten wariant czyni ten obowiązek WIDOCZNYM w każdej odpowiedzi
+> kończącej się projektem pisma procesowego, nie tylko domyślnym.
+
+```
+---
+⚠️ **Przed podpisaniem i złożeniem do sądu/organu:** ten projekt wymaga
+samodzielnej, merytorycznej lektury i weryfikacji przez pełnomocnika —
+w szczególności każdej powołanej sygnatury, daty orzeczenia i tezy prawnej
+(nie wystarczy weryfikacja formalna/stylistyczna). Odpowiedzialność zawodowa
+za treść pisma wniesionego do sądu spoczywa na pełnomocniku, niezależnie od
+narzędzi użytych przy jego przygotowaniu (art. 4 Prawa o adwokaturze /
+art. 6 ustawy o radcach prawnych — należyta staranność). Tabela śladu
+weryfikacji poniżej ułatwia tę kontrolę, ale jej NIE zastępuje.
+```
+
+**Pozycja:** bezpośrednio PO wariancie PRAWNIK, PRZED tabelą śladu weryfikacji
+(poziom pełny), gdy odpowiedź zawiera projekt pisma kierowanego do sądu/organu
+(pisma-procesowe-v3, pisma-proste-v2). Dla opinii/analiz bez pisma — pomiń,
+wystarczy wariant PRAWNIK.
+
 ---
 
 ## POZYCJA DISCLAIMERA
@@ -101,7 +129,8 @@ Dodać do sekcji W3.6 — Pismo finalne, po generowaniu .docx:
 ```markdown
 Po W3.6 — po generowaniu .docx:
 - view /mnt/skills/public/docx/SKILL.md → generuj .docx → present_files
-- Dodaj disclaimer (TRYB LAIK / PRAWNIK) jako ostatni akapit wiadomości W3
+- Dodaj disclaimer: wariant LAIK/PRAWNIK JAK DOTĄD, plus OBOWIĄZKOWO
+  wariant PISMO SĄDOWE (v2.1) bezpośrednio po nim — patrz sekcja wyżej
   → view /mnt/skills/user/shared/DISCLAIMER.md
 - view /mnt/skills/user/shared/raport-sytuacyjny-integracja.md → propozycja Raportu Sytuacyjnego
 ```
@@ -114,6 +143,7 @@ Dodać do KROK 9 (końcowy):
 KROK 9c → DISCLAIMER (obowiązkowy)
 → view /mnt/skills/user/shared/DISCLAIMER.md
 → Dodaj jako ostatni element wiadomości (LAIK: uproszczony / PRAWNIK: pełny)
+  + WARIANT PISMO SĄDOWE (v2.1) bezpośrednio po wariancie PRAWNIK
 ```
 
 ### orzeczenia-sadowe-v2 ⚠️ Wymaga dodania
@@ -182,5 +212,7 @@ Sekcja już jest w KROK 7 routera (v3.5) i pozostaje w SELF-CHECK (v3.6):
 □ [DISCLAIMER] Odpowiedź zawiera analizę prawną → shared/DISCLAIMER.md jest OSTATNIM elementem?
   □ Tryb LAIK → wariant uproszczony
   □ Tryb PRAWNIK → wariant pełny
+  □ Odpowiedź zawiera projekt pisma do sądu/organu → WARIANT PISMO SĄDOWE (v2.1)
+    dołączony bezpośrednio po wariancie PRAWNIK?
   □ Pismo .docx → stopka na ostatniej stronie + disclaimer w wiadomości czatu
 ```

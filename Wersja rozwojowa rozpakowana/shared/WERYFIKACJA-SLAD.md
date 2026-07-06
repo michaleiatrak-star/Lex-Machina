@@ -1,11 +1,12 @@
 # WERYFIKACJA-ŚLAD — Moduł Audytu Śladu Weryfikacji
 
 > **Plik:** `/mnt/skills/user/shared/WERYFIKACJA-SLAD.md`
-> **Wersja:** 1.1 (2026-07-05) — dodano GRADIENT WERYFIKACJI CYTATU
->              (ISTNIENIE/TREŚĆ/FRAGMENT + reguła kalibracji + guard STRON;
->              wzorzec citation-grounding-pl v2.1; AUDYT-2026-07-05a)
-> **Wersja poprzednia:** 1.0 (2026-05-25)
-> **Status:** AKTYWNY — naprawa BLOKER-3
+> **Wersja:** 1.2 (2026-07-05b) — naprawa luki "cytat na poparcie tezy bez
+>              parafrazy" (NSA I FZ 104/26) + GUARD INSTYTUCJA/PRZEDMIOT dla
+>              orzeczeń anonimizowanych (adm./karne)
+> **Wersja poprzednia:** 1.1 (2026-07-05a) — GRADIENT ISTNIENIE/TREŚĆ/FRAGMENT
+>              + guard STRON; wzorzec citation-grounding-pl v2.1
+> **Status:** AKTYWNY — naprawa BLOKER-3, rozszerzenie po AUDYT-2026-07-05b
 
 ---
 
@@ -66,6 +67,21 @@ Termin: 2 tygodnie na sprzeciw od nakazu zapłaty (art. 502 §1 KPC) ✅ [VER: i
 > dotychczasowy ślad ✅ [VER] potwierdzał ISTNIENIE przepisu/sygnatury,
 > ale nie sprawdzał, czy PARAFRAZA oddaje faktyczną treść źródła.
 
+> ⚠️ **Case study zamknięty przez v1.2 (2026-07-05b):** postanowienie NSA z
+> 23.06.2026, sygn. **I FZ 104/26** — pełnomocnik powołał w zażaleniu
+> postanowienia NSA jako rzekome poparcie tezy o przesłankach wstrzymania
+> wykonania decyzji (art. 61 § 3 p.p.s.a.). NSA ustalił, że: (1) powołane
+> postanowienia zapadły w innych datach niż podane, (2) żadne z nich w
+> ogóle nie dotyczyło instytucji wstrzymania wykonania, (3) teza pisma
+> była sprzeczna z ugruntowaną linią orzeczniczą co do ciężaru dowodu.
+> NSA nazwał to wprost "bezrefleksyjnym korzystaniem z AI" i brakiem
+> profesjonalizmu pełnomocnika. Luka w v1.1: GRAD-1 klasyfikował "gołe"
+> powołanie (bez cudzysłowu, bez wprost sformułowanej parafrazy) jako
+> wymagające tylko ISTNIENIA — a to za mało, gdy powołanie ma poprzeć
+> konkretną tezę. v1.2 zamyka to w GRAD-1 (poniżej) i dodaje GUARD
+> INSTYTUCJA dla spraw, gdzie strony są anonimizowane (adm./karne) i
+> GUARD STRON nie ma czego porównać.
+
 **Zasada:** samo `✅ [VER]` (istnienie) NIE wystarcza, gdy odpowiedź twierdzi coś
 o TREŚCI źródła. Poziom weryfikacji musi odpowiadać sile twierdzenia.
 
@@ -73,9 +89,17 @@ o TREŚCI źródła. Poziom weryfikacji musi odpowiadać sile twierdzenia.
 
 | Poziom | Co potwierdza | Wymagany dla |
 |---|---|---|
-| **ISTNIENIE** | Kotwica (sygnatura / nr Dz.U. / CELEX, data, organ) jest realna i zgodna z deklaracją | samo powołanie: "por. II CSK 123/19", "(t.j. Dz.U. 2024 poz. 18)" |
-| **TREŚĆ** | Źródło CO DO ISTOTY zawiera to, co twierdzi odpowiedź | parafraza: "SN przyjął, że…", "przepis przewiduje, że…" |
+| **ISTNIENIE** | Kotwica (sygnatura / nr Dz.U. / CELEX, data, organ) jest realna i zgodna z deklaracją | wyłącznie neutralne wzmianki bez funkcji dowodowej: "sprawa toczyła się pod sygn. X", spis/wykaz orzeczeń bez tezy |
+| **TREŚĆ** | Źródło CO DO ISTOTY zawiera to, co twierdzi odpowiedź | parafraza ("SN przyjął, że…"), ORAZ **każde powołanie użyte jako poparcie tezy/argumentu — nawet bez cudzysłowu i bez wprost sformułowanej parafrazy** (np. "zgodnie z ugruntowaną linią orzeczniczą (por. sygn. X, Y, Z)…", "analogicznie orzekł NSA w sprawach…") |
 | **FRAGMENT** | Cytowany fragment istnieje DOSŁOWNIE w źródle | każdy cytat w cudzysłowie, każdy pinpoint (§, ustęp, akapit uzasadnienia) |
+
+> ⛔ **Reguła I FZ 104/26 (v1.2):** "powołanie na poparcie" ≠ "sama kotwica".
+> Jeśli sygnatura/Dz.U. pojawia się w zdaniu, które ma PRZEKONAĆ o czymś
+> (poprzeć tezę, argument, linię orzeczniczą) — to zawsze **minimum TREŚĆ**,
+> niezależnie od tego, czy jest cudzysłów. Do ISTNIENIA wolno zejść WYŁĄCZNIE
+> gdy powołanie nie pełni żadnej funkcji dowodowej (czysty spis/inwentarz).
+> W razie wątpliwości, czy dane powołanie "popiera tezę" — traktuj jako TREŚĆ
+> (zasada ostrożności, nie odwrotnie).
 
 ### Procedura GRAD
 
@@ -83,7 +107,11 @@ o TREŚCI źródła. Poziom weryfikacji musi odpowiadać sile twierdzenia.
 GRAD-1: Sklasyfikuj każde powołanie w planowanej odpowiedzi:
           cytat dosłowny / teza z pinpointem     → wymagany poziom FRAGMENT
           stanowisko sądu / parafraza przepisu    → wymagany poziom TREŚĆ
-          samo powołanie kotwicy (sygnatura, Dz.U.) → wymagany poziom ISTNIENIE
+          powołanie użyte jako poparcie tezy/argumentu (nawet gołe,
+            bez cudzysłowu i bez wprost sformułowanej parafrazy)
+            → wymagany poziom TREŚĆ (reguła I FZ 104/26, patrz wyżej)
+          samo powołanie bez funkcji dowodowej (spis/inwentarz)
+            → wymagany poziom ISTNIENIE
 
 GRAD-2: Zweryfikuj na WYMAGANYM poziomie — wobec treści pobranej ze źródła
         (PRAWO-HARDGATE KROK 3: odczyt ze źródła, nie z pamięci):
@@ -93,6 +121,9 @@ GRAD-2: Zweryfikuj na WYMAGANYM poziomie — wobec treści pobranej ze źródła
           TREŚĆ    → sprawdź czy terminy nośne twierdzenia (≥4 znaki, bez słów
                      funkcyjnych) występują w źródle I czy sens nie jest odwrócony
                      (zwłaszcza: kto wygrał, co oddalono, zakres wyjątku).
+                     Dla powołania-na-poparcie: dodatkowo ustal, czy źródło W OGÓLE
+                     dotyczy tej samej INSTYTUCJI/PROCEDURY co teza (nie tylko tego
+                     samego działu prawa) — patrz GRAD-3b.
           ISTNIENIE→ kontrakt FOUND/NOT_FOUND/AMBIGUOUS (shared/SYGNATURY.md)
                      lub KROK 2B PRAWO-HARDGATE (tytuł aktu vs teza).
 
@@ -102,6 +133,33 @@ GRAD-3: GUARD STRON (dla orzeczeń, gdy znane są strony postępowania):
         ("prawdziwa sygnatura doczepiona do INNEJ sprawy").
         Formy prawne pomijaj w porównaniu (S.A. ≡ Spółka Akcyjna, sp. z o.o.).
 
+GRAD-3b: GUARD INSTYTUCJA/PRZEDMIOT (NOWE v1.2 — gdy GUARD STRON niemożliwy,
+        np. sprawy administracyjne/karne z anonimizacją do inicjałów,
+        LUB jako dodatkowa kontrola obok GUARD STRON):
+        Ustal PRZEDMIOT sprawy cytowanego orzeczenia wprost ze źródła
+        (sentencja / pierwszy akapit uzasadnienia — nie z pamięci ani
+        z tego, jak przedstawia go pełnomocnik/model). Porównaj z INSTYTUCJĄ
+        PRAWNĄ, którą powołanie ma poprzeć (np. "wstrzymanie wykonania decyzji
+        art. 61 § 3 p.p.s.a." vs orzeczenie faktycznie dotyczące np. kosztów
+        postępowania albo przywrócenia terminu — RÓŻNE instytucje mimo tej
+        samej gałęzi prawa/tego samego typu sprawy administracyjnej).
+        Przedmiot NIE zgadza się z powoływaną instytucją = 🔴 blokada
+        ("prawdziwe orzeczenie, niewłaściwy temat") — usuń powołanie,
+        NIE "napraw" go dobieraniem innej tezy pod tę samą sygnaturę.
+
+        ⚠️ DEDUPLIKACJA: `pisma-procesowe-v3` ma już lokalną, bardziej
+        rozbudowaną implementację tej samej kontroli — KROK 3a
+        ZAKRES-STOSOWANIA w `references/W3-WERYFIKACJA.md` (pytania o typ
+        podmiotu, ten sam przepis/kontekst, ograniczony zakres, utrwalenie
+        doktryny). GRAD-3b NIE zastępuje ZAKRES-STOSOWANIA tam, gdzie już
+        działa — jest wersją OGÓLNĄ dla skilli, które własnej kontroli
+        tematu jeszcze nie mają (np. `orzeczenia-sadowe-v2` poza kontekstem
+        pisma, `analiza-sadowa-v6`). Mapowanie statusów (żeby audit-bundle
+        i tabela śladu używały spójnego słownika):
+          ZAKRES-OK      ≈ 🟢 (GRAD-3b: przedmiot zgodny)
+          WARN-ZAKRES    ≈ 🟠 (GRAD-3b: przedmiot częściowo/pomocniczo zgodny)
+          ZAKAZ-ZAKRES   ≈ 🔴 (GRAD-3b: przedmiot niezgodny — blokada)
+
 GRAD-4: REGUŁA KALIBRACJI — porównaj poziom OSIĄGNIĘTY z WYMAGANYM:
           osiągnięty ≥ wymagany → 🟢 ZWERYFIKOWANY
           twierdzisz FRAGMENT, osiągnąłeś tylko TREŚĆ → 🟠 KALIBRACJA:
@@ -109,8 +167,9 @@ GRAD-4: REGUŁA KALIBRACJI — porównaj poziom OSIĄGNIĘTY z WYMAGANYM:
              jako prowizoryczny — NIGDY nie zostawiaj cudzysłowu bez FRAGMENT
           TREŚĆ niepotwierdzona co do istoty → 🟡 WYMAGA_OSĄDU (decyzja
              człowieka przed użyciem w piśmie) lub usuń twierdzenie
-          kotwica nierozwiązana / rozbieżna / guard STRON → 🔴 NIEZWERYFIKOWANY
-             = potencjalna halucynacja, BLOKADA (usuń z odpowiedzi/pisma)
+          kotwica nierozwiązana / rozbieżna / guard STRON / guard INSTYTUCJA
+             → 🔴 NIEZWERYFIKOWANY = potencjalna halucynacja, BLOKADA
+             (usuń z odpowiedzi/pisma)
 ```
 
 ### Rozszerzone statusy śladu
@@ -262,6 +321,11 @@ Tryb awaryjny NIE oznacza pominięcia disclaimera — DISCLAIMER.md stosuje się
 □ [GRADIENT] Każdy cytat w cudzysłowie / pinpoint ma 🟢 [VER-FRAGMENT]?
 □ [GRADIENT] Każda parafraza ("SN przyjął, że…") zweryfikowana na poziomie TREŚĆ,
              nie tylko ISTNIENIE?
+□ [GRADIENT] Każde "gołe" powołanie użyte na poparcie tezy (bez cudzysłowu,
+             bez parafrazy) TEŻ zweryfikowane na poziomie TREŚĆ (reguła
+             I FZ 104/26) — nie potraktowane jako sama ISTNIENIE?
+□ [GRADIENT] Dla orzeczeń bez możliwości porównania stron (anonimizacja
+             adm./karna) — wykonany GUARD INSTYTUCJA/PRZEDMIOT (GRAD-3b)?
 □ [GRADIENT] Twierdzenia z poziomem osiągniętym < wymaganym → skalibrowane (🟠)
              lub usunięte (🔴)?
 ```

@@ -313,14 +313,26 @@ NIEWAŻNOŚĆ Z MOCY PRAWA (art. 457 PZP): zmiana poza zakresem art. 455 PZP
 ## 14. ORZECZNICTWO
 
 ```
-Portal KIO (wyszukiwarka wyroków): https://www.kio.gov.pl
+⚠️ KOREKTA (2026-07-05d): kio.gov.pl NIE hostuje wyszukiwarki — przekierowuje
+   na strony informacyjne uzp.gov.pl/kio (o KIO, skład, kontakt). Właściwa
+   wyszukiwarka orzeczeń: https://orzeczenia.uzp.gov.pl (obejmuje KIO + SO/
+   SA/SN ws. skarg na orzeczenia KIO). Procedura pełna: orzeczenia-sadowe-v2
+   → Faza 1-K.
+
+Wyszukiwarka orzeczeń (KIO + SO/SA/SN): https://orzeczenia.uzp.gov.pl
 UZP (wytyczne i interpretacje): https://uzp.gov.pl
 
-web_search: "KIO wykluczenie odrzucenie rażąco niska cena wyrok 2025 2026 kio.gov.pl"
+→ Dla wyszukiwania orzecznictwa KIO ZAWSZE deleguj do:
+  view /mnt/skills/user/orzeczenia-sadowe-v2/SKILL.md → Faza 1-K
+  (procedura zweryfikowana bezpośrednim fetchem: Home/Search?Phrase=...,
+  cytowanie z polem "Sposób rozstrzygnięcia" jako tani test zgodności tezy)
+
+web_search: "KIO wykluczenie odrzucenie rażąco niska cena wyrok 2025 2026"
 web_search: "KIO art 99 ust 4 PZP preferowanie produktu równoważność wyrok 2025"
 web_search: "KIO self-cleaning art 110 PZP środki naprawcze 2025 2026"
 web_search: "PZP zmiana umowy art 455 okoliczności nieprzewidywalne KIO 2025"
-⚠️ NIGDY nie cytuj sygnatur z pamięci — zawsze weryfikuj przez kio.gov.pl
+⚠️ NIGDY nie cytuj sygnatur z pamięci — zawsze weryfikuj przez orzeczenia.uzp.gov.pl
+   (Faza 1-K w orzeczenia-sadowe-v2), NIE przez nieistniejącą wyszukiwarkę na kio.gov.pl
 ```
 
 ---
@@ -349,7 +361,8 @@ IN PLUS: uchybienie formalne zamawiającego (brak wezwania do RNC, brak wskazani
 IN MINUS: upływ terminu zawitego, brak wpisu, odwołanie na treść SWZ po terminie,
           zarzuty nieprecyzyjne, brak dowodów złożonych łącznie z odwołaniem
 
-BENCHMARKING: → kio.gov.pl (bezpłatna wyszukiwarka wyroków)
+BENCHMARKING: → orzeczenia.uzp.gov.pl (bezpłatna wyszukiwarka wyroków KIO/SO/SA/SN
+  — kio.gov.pl NIE hostuje wyszukiwarki, patrz korekta w sekcji 14)
   (NIGDY nie cytuj sygnatur z pamięci — ZAWSZE weryfikuj online)
 REKOMENDACJA: □ Odwołanie do KIO  □ Pytanie do zamawiającego (art. 135)
               □ Skarga do SO  □ Wyjaśnienia RNC  □ Self-cleaning
@@ -378,7 +391,8 @@ REKOMENDACJA: □ Odwołanie do KIO  □ Pytanie do zamawiającego (art. 135)
 
 - PZP: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20241320
 - Progi UE: https://uzp.gov.pl/aktualnosci/progi-unijne
-- KIO (wyroki): https://www.kio.gov.pl
+- KIO (wyroki, wyszukiwarka): https://orzeczenia.uzp.gov.pl (kio.gov.pl NIE
+  hostuje wyszukiwarki od korekty 2026-07-05d — przekierowuje na uzp.gov.pl/kio)
 - UZP (wytyczne): https://uzp.gov.pl
 - e-Zamówienia: https://ezamowienia.gov.pl
 - PCA (certyfikacja): https://www.pca.gov.pl

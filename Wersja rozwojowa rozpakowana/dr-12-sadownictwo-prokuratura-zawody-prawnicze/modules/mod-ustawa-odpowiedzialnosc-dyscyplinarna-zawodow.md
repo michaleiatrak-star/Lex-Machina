@@ -9,7 +9,7 @@ WSPÓLNE ZASADY DLA MODUŁU:
 - nie mieszaj trybów: KPA, Ordynacja podatkowa, KAS, PPSA i egzekucja administracyjna mają odrębne rygory.
 ---
 
-**Zakres:** adwokaci, radcowie prawni, lekarze, notariusze, komornicy, biegli, rzecznicy dyscyplinarni, sądy dyscyplinarne, skargi, zawiadomienia, odpowiedzialność zawodowa.
+**Zakres:** adwokaci, radcowie prawni, lekarze, notariusze, komornicy, sędziowie i asesorzy sądowi, biegli, rzecznicy dyscyplinarni, sądy dyscyplinarne, skargi, zawiadomienia, odpowiedzialność zawodowa.
 
 ## ZASADY ABSOLUTNE
 
@@ -147,7 +147,35 @@ Przed końcową odpowiedzią sprawdź:
 □ Czy użyto shared/MODULE-STANDARD-POLISH-LAW.md?
 ```
 
+## Orzecznictwo dyscyplinarne — instancje i bazy (⚙️ spięte z shared/PRAWO-HARDGATE.md)
+
+**Stan zweryfikowany online (nie z pamięci) — 2026-07-06, zaktualizowany po
+dodatkowej weryfikacji miast/instancji zwykłych (I instancja izbowa):**
+
+| Zawód | I instancja | II instancja / kasacja | Publiczna baza (zweryfikowany adres) |
+|---|---|---|---|
+| Adwokat | Sąd Dyscyplinarny Izby Adwokackiej (osobna strona opisowa per izba, np. Lublin `ora.lublin.pl`, Kraków `adwokatura.krakow.pl` — bez archiwum treści orzeczeń) | Wyższy Sąd Dyscyplinarny Adwokatury → kasacja SN | **`wsd.adwokatura.pl/rejestry/showMain/orzecznictwo-19`** — "Portal Orzecznictwa Dyscyplinarnego Adwokatury": **1151+ pozycji** (stan na dzień weryfikacji), obejmuje ZARÓWNO orzeczenia WSD JAK I orzecznictwo SN w sprawach dyscyplinarnych (sygn. SDI, np. "SDI 15/05") — POPRAWKA względem wcześniejszej wersji tej tabeli: to nowszy, znacznie szerszy portal niż sugerował artykuł rp.pl z 2021 r. (na którym opierała się poprzednia ocena "wybiórcza/nieaktualna") |
+| Radca prawny | Okręgowy Sąd Dyscyplinarny (OSD) — lokalne strony per izba: `oirp.lu` (Lublin), `oirp.gda.pl` (Gdańsk) i analogicznie inne OIRP | Wyższy Sąd Dyscyplinarny KRRP (WSD) → kasacja SN | `wsd.kirp.pl` (portal centralny od 2018) + strony lokalne OIRP jw. — ⚠️ ZASTRZEŻENIE: badanie Sieci Obywatelskiej Watchdog Polska (wniosek o informację publiczną do 19 OIRP) wykazało NIERÓWNĄ praktykę: 3 OIRP w ogóle nie odpowiedziały/nie publikowały (Bydgoszcz, Katowice, Wałbrzych), inne publikują częściowo i bez wspólnych reguł anonimizacji — traktuj jako najbardziej rozbudowaną, ale NIE kompletną bazę korporacyjną |
+| Lekarz | Okręgowy Sąd Lekarski (OSL) | Naczelny Sąd Lekarski (NSL) → kasacja SN | `nil.org.pl/orzeczenia` — portal NIL uruchomiony 2024 (OSL+NSL, zanonimizowane); kasacje SN skompilowane pod `nil.org.pl/izba/naczelny-rzecznik-odpowiedzialnosci-zawodowej/dokumenty/orzeczenia-sadu-najwyzszego` (sygn. SDI / II ZK) |
+| **Sędzia / asesor sądowy** *(NOWA POZYCJA — dot. też dr-01, USP)* | **Sąd Dyscyplinarny przy Sądzie Apelacyjnym** (art. 110 USP) — osobny w każdej apelacji: Lublin (`lublin.sa.gov.pl`), Poznań, Warszawa, Gdańsk, Rzeszów, Katowice i in. | Sąd Najwyższy, Izba Odpowiedzialności Zawodowej (dawniej Izba Dyscyplinarna) | Strony poszczególnych SA opisują skład/kompetencję sądu dyscyplinarnego, ale BEZ potwierdzonego archiwum treści orzeczeń; jawne są za to KOMUNIKATY o wszczętych postępowaniach na `rzecznik.gov.pl` (Rzecznik Dyscyplinarny Sędziów Sądów Powszechnych) — to NIE są pełne orzeczenia, tylko zawiadomienia o wszczęciu/zarzutach; kasacja → **sn.pl** |
+| Notariusz | Sąd Dyscyplinarny Izby Notarialnej | Wyższy Sąd Dyscyplinarny przy Krajowej Radzie Notarialnej (korporacyjny, NIE sąd apelacyjny) → kasacja SN | Brak potwierdzonego scentralizowanego publicznego portalu; orzeczenia uznane za informację publiczną na żądanie (WSA, sygn. II SA/Wa 1455/13), ale bez stałej bazy online; kasacja → **sn.pl** (sygn. SDI, np. "SDI 74/17") |
+| Komornik sądowy | Komisja Dyscyplinarna przy KRK | Sąd apelacyjny (JEDYNY zawód z tej listy, gdzie II instancja to sąd powszechny) | Brak potwierdzonego portalu KRK; pojedyncze orzeczenia bywają zaindeksowane w **saos.org.pl** (potwierdzony przykład); II instancja → **orzeczenia.ms.gov.pl** |
+| Rzecznik patentowy | Sąd Dyscyplinarny PIRP | Odwoławczy Sąd Dyscyplinarny PIRP (korporacyjny) → kasacja SN | Brak potwierdzonego portalu PIRP; kasacja → **sn.pl** |
+
+**Uwaga krytyczna (zaktualizowana):** jawność I/II instancji korporacyjnej jest
+**nierówna między zawodami I między poszczególnymi izbami tego samego zawodu**
+(np. wśród OIRP niektóre publikują, inne nie odpowiadają nawet na wnioski o
+informację publiczną). Adwokatura ma obecnie największy zweryfikowany portal
+(1151+ pozycji), ale to NIE oznacza kompletności — traktuj każdy wynik zerowy
+jako możliwą lukę bazy, nie jako dowód zmyślenia sygnatury: oznacz
+⚠️ [NIEWERYFIKOWALNE — baza korporacyjna niekompletna/nieaktualna/lokalna],
+nigdy ✅ [VER] bez faktycznego odnalezienia treści. Dopiero kasacja do SN (lub
+— wyłącznie dla komornika — odwołanie do sądu apelacyjnego) podlega pełnej,
+niezawodnej procedurze weryfikacji sygnatury wg PRAWO-HARDGATE KROK 0–5.
+
 ## 8. Łącz obowiązkowo z
+
+
 
 | Potrzeba | Moduł współdzielony / skill |
 |---|---|
@@ -157,6 +185,7 @@ Przed końcową odpowiedzią sprawdź:
 | warunki skuteczności | `shared/WARUNKI-SKUTECZNOSCI.md` |
 | dowody | `shared/DOWODY-METODOLOGIA.md` + `analizator-dowodow-v3` |
 | ryzyka | `shared/RISK-ASSESSMENT.md` |
+| **weryfikacja orzeczeń dyscyplinarnych** | `shared/PRAWO-HARDGATE.md` (sekcja "zawody zaufania publicznego — odpowiedzialność dyscyplinarna") + `orzeczenia-sadowe-v2` |
 | pisma | `pisma-procesowe-v3` albo `pisma-proste-v2` |
 | analiza sądowa | `analiza-sadowa-v6` |
 
@@ -165,5 +194,5 @@ Przed końcową odpowiedzią sprawdź:
 ## STATUS KANCELARSKI
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Data weryfikacji:** 2026-06-05
+**Data weryfikacji:** 2026-07-06 (dodano sekcję 4a — orzecznictwo dyscyplinarne + spięcie z PRAWO-HARDGATE)
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl

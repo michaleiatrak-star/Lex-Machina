@@ -33,10 +33,26 @@ Dokumentacja medyczna: Art. 41 - prowadzona przez 20 lat
 Organ: Okregowy Sad Lekarski -> Naczelny Sad Lekarski -> SN (kasacja)
 Kary: Upomnienie, nagana, zawieszenie PWZ (max 5 lat), pozbawienie PWZ
 Przedawnienie: 5 lat od popelnienia czynu lub 3 lata od dowiedzenia sie przez Izbe
+
+Baza orzeczen (⚙️ spięte z shared/PRAWO-HARDGATE.md, sekcja "zawody zaufania
+publicznego — odpowiedzialność dyscyplinarna"; zweryfikowane online 2026-07-06):
+  I i II instancja (Okregowy Sad Lekarski, Naczelny Sad Lekarski) ->
+    nil.org.pl/orzeczenia (portal NIL prawomocnych orzeczen sadow lekarskich,
+    uruchomiony 2024, tresci zanonimizowane) -> mimo istnienia portalu, brak
+    trafienia NIE jest dowodem zmyslenia sygnatury (portal moze byc
+    niekompletny/opozniony) -> oznacz ⚠️ [NIEWERYFIKOWALNE], nigdy ✅ [VER]
+    bez faktycznego odnalezienia tresci
+  Kasacja -> sn.pl (Izba Odpowiedzialnosci Zawodowej SN), rowniez skompilowana
+    osobno przez NIL pod nil.org.pl/izba/naczelny-rzecznik-odpowiedzialnosci-
+    zawodowej/dokumenty/orzeczenia-sadu-najwyzszego (sygnatury SDI / II ZK)
+    -> pelna procedura weryfikacji sygnatury wg PRAWO-HARDGATE KROK 0-5
+Pelny opis trybu, tabela zawodow i uzasadnienie: dr-12 ->
+  mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md, sekcja
+  "Orzecznictwo dyscyplinarne — instancje i bazy"
 ```
 
 ## Weryfikacja online
 ```
 web_search: "ustawa zawod lekarza Dz.U. 2026 poz. 37 isap t.j."
-web_search: "prawo wykonywania zawodu lekarza PWZ odpowiedzialnosc dyscyplinarna 2025"
+web_fetch: https://www.sn.pl/orzecznictwo/SitePages/Baza_orzeczen.aspx (kasacja od orzeczen NSL)
 ```

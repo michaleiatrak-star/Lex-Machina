@@ -71,6 +71,12 @@ Powiązane (kontekst — patrz mod-PrFarm-* dla treści):
 5. Odpowiedzialność dyscyplinarna i zawodowa farmaceuty — sądy/rzecznicy
    dyscyplinarni samorządu aptekarskiego. WERYFIKUJ aktualną procedurę
    (rozdziały dot. odpowiedzialności zawodowej w t.j. 2025/1693).
+   Baza orzeczeń (⚙️ spięte z shared/PRAWO-HARDGATE.md, sekcja "zawody
+   zaufania publicznego — odpowiedzialność dyscyplinarna"): I instancja
+   (sąd dyscyplinarny izby aptekarskiej) → z reguły BRAK publicznej bazy,
+   oznacz ⚠️ [NIEWERYFIKOWALNE — instancja korporacyjna]; odwołanie/kasacja
+   → orzeczenia.ms.gov.pl (sąd apelacyjny) / sn.pl (dalsza kasacja, gdy
+   przepis dopuszcza) — pełna procedura KROK 0–5 HARDGATE.
 
 6. ⚠️ ROZGRANICZENIE Z mod-PrFarm-*:
    → SPRAWA O APTEKARZA jako osobę (prawo wykonywania zawodu, wpis do
@@ -144,6 +150,7 @@ Nie twórz fikcyjnych sygnatur. Szukaj w:
 
 web_search: "izba aptekarska odmowa prawa wykonywania zawodu skarga WSA orzecznictwo"
 web_search: "odpowiedzialność dyscyplinarna farmaceuty izba aptekarska orzecznictwo"
+web_fetch: https://www.orzeczenia.ms.gov.pl (sąd apelacyjny — odwołanie) / https://www.sn.pl/orzecznictwo/SitePages/Baza_orzeczen.aspx (kasacja)
 web_search: "ustawa o zawodzie farmaceuty 2020 tekst jednolity isap"
 ```
 

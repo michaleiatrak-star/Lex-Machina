@@ -192,6 +192,7 @@ web_search: "odpowiedzialność cywilna lekarza weterynarii błąd w leczeniu or
 | ISAP — tekst jednolity | isap.sejm.gov.pl | Dz.U. 2026 poz. 125, 2023 poz. 154 |
 | Krajowa Izba Lekarsko-Weterynaryjna | vetpol.org.pl | Samorząd, sądownictwo lekarsko-weterynaryjne |
 | Orzecznictwo NSA | orzeczenia.nsa.gov.pl | Kontrola uchwał izb |
+| Orzecznictwo SN | sn.pl | Kasacja od orzeczeń sądu lekarsko-weterynaryjnego (⚙️ spięte z shared/PRAWO-HARDGATE.md — I instancja korporacyjna bez publicznej bazy, oznacz ⚠️ [NIEWERYFIKOWALNE]) |
 
 ---
 

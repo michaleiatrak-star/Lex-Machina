@@ -18,6 +18,11 @@ description: |
 2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
 3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
 
+> Procedura szczegółowa (warstwa strukturalna SAOS/MCP, kontrakt sygnatur,
+> gradient weryfikacji cytatu): `view shared/PRAWO-HARDGATE.md` — wczytaj
+> PRZED pierwszym przepisem w każdej odpowiedzi. Integruje się z
+> `shared/ISAP-AUDIT-PROTOCOL.md`.
+
 ---
 
 ## Zasada architektoniczna

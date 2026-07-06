@@ -6,7 +6,7 @@ description: |
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
   Ładuj TYLKO moduł pasujący do sprawy — lazy loading.
   Wchodzi z: prawo-polskie-v2 → ROUTING-MAP → ten skill.
-  Weryfikacja: isap.sejm.gov.pl | trybunal.gov.pl | sn.pl + shared/INTERPRETACJE-URZEDOWE.md (rejestr interpretacji urzędowych per dziedzina)
+  Weryfikacja: isap.sejm.gov.pl | trybunal.gov.pl | sn.pl | nsa.gov.pl | orzeczenia.ms.gov.pl + shared/INTERPRETACJE-URZEDOWE.md (rejestr interpretacji urzędowych per dziedzina)
 ---
 
 # DR-01 — Ustrój Konstytucyjny i Źródła Prawa
@@ -17,6 +17,11 @@ description: |
 1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
 2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
 3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
+
+> Procedura szczegółowa (warstwa strukturalna SAOS/MCP, kontrakt sygnatur,
+> gradient weryfikacji cytatu): `view shared/PRAWO-HARDGATE.md` — wczytaj
+> PRZED pierwszym przepisem w każdej odpowiedzi. Integruje się z
+> `shared/ISAP-AUDIT-PROTOCOL.md`.
 
 ---
 

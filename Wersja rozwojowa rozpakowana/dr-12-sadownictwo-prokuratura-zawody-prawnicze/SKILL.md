@@ -6,7 +6,7 @@ description: |
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
   Ładuj TYLKO moduł pasujący do sprawy — lazy loading.
   Wchodzi z: prawo-polskie-v2 → ROUTING-MAP → ten skill.
-  Weryfikacja: isap.sejm.gov.pl | orzeczenia.ms.gov.pl | sn.pl + shared/INTERPRETACJE-URZEDOWE.md (rejestr interpretacji urzędowych per dziedzina)
+  Weryfikacja: isap.sejm.gov.pl | orzeczenia.ms.gov.pl | sn.pl | orzeczenia.nsa.gov.pl (kontrola WSA/NSA wg PPSA, gdzie właściwa) + shared/INTERPRETACJE-URZEDOWE.md (rejestr interpretacji urzędowych per dziedzina)
 ---
 
 # DR-12 — Sądownictwo, Prokuratura, Zawody Prawnicze

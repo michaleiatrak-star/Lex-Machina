@@ -223,6 +223,41 @@ KROK 1: Wyszukaj sygnaturę WYŁĄCZNIE w oficjalnej bazie:
   trybunal.gov.pl → Trybunał Konstytucyjny
   saos.org.pl     → agregator (pomocniczo, gdy powyższe niedostępne)
 
+  [zawody zaufania publicznego — odpowiedzialność dyscyplinarna, dot. dr-12
+   mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow]:
+    Jawność I/II instancji korporacyjnej jest NIERÓWNA między zawodami I MIĘDZY
+    IZBAMI TEGO SAMEGO ZAWODU — zweryfikowane online (2026-07-06), NIE zgaduj:
+      adwokat  → wsd.adwokatura.pl/rejestry/showMain/orzecznictwo-19 —
+                 "Portal Orzecznictwa Dyscyplinarnego Adwokatury", 1151+ pozycji
+                 (WSD + orzecznictwo SN, sygn. SDI)
+      radca prawny → wsd.kirp.pl (centralny, od 2018) + strony lokalne OIRP
+                 (np. oirp.lu, oirp.gda.pl) — ⚠️ praktyka NIERÓWNA: badanie
+                 Watchdog Polska wykazało, że część OIRP nie publikuje wcale
+      lekarz   → nil.org.pl/orzeczenia (portal NIL, od 2024, OSL+NSL);
+                 kasacje SN osobno pod nil.org.pl/izba/naczelny-rzecznik-
+                 odpowiedzialnosci-zawodowej/dokumenty/orzeczenia-sadu-najwyzszego
+      sędzia/asesor sądowy → Sąd Dyscyplinarny przy Sądzie Apelacyjnym
+                 (art. 110 USP, osobny w każdej apelacji) — BRAK potwierdzonego
+                 archiwum treści orzeczeń; jawne są tylko KOMUNIKATY o wszczętych
+                 postępowaniach na rzecznik.gov.pl (to NIE są pełne orzeczenia)
+      notariusz, komornik, rzecznik patentowy → BRAK potwierdzonego
+                 scentralizowanego publicznego portalu I/II instancji
+    Niezależnie od powyższego: brak trafienia w bazie korporacyjnej NIE jest
+    dowodem, że sygnatura jest zmyślona — oznacz ⚠️ [NIEWERYFIKOWALNE — baza
+    korporacyjna niekompletna/nieaktualna/lokalna], NIGDY ✅ [VER] bez faktycznego
+    odnalezienia treści orzeczenia.
+    Kasacja / odwołanie → publiczna baza wg zawodu:
+      adwokat, radca prawny, lekarz, notariusz, rzecznik patentowy, sędzia →
+        sn.pl (Sąd Najwyższy, Izba Odpowiedzialności Zawodowej — dawniej Izba
+        Dyscyplinarna; sygnatury SDI dla notariusza/rzecznika patentowego)
+      komornik sądowy → orzeczenia.ms.gov.pl (JEDYNY z tej grupy, gdzie
+        II instancja to sąd apelacyjny, nie sąd korporacyjny)
+    Pełny opis, tabela i zastrzeżenia: dr-12 →
+      mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md, sekcja
+      "Orzecznictwo dyscyplinarne — instancje i bazy".
+    Do tej kategorii stosuj tę samą procedurę KROK 1–5 co do orzeczeń powszechnych,
+    z zastrzeżeniami dot. jawności I/II instancji powyżej.
+
   Metoda wyszukiwania:
     web_fetch: https://www.sn.pl/orzecznictwo/SitePages/Baza_orzeczen.aspx → szukaj sygnatury
     lub web_search: "[sygnatura] site:sn.pl" / "[sygnatura] site:orzeczenia.ms.gov.pl"

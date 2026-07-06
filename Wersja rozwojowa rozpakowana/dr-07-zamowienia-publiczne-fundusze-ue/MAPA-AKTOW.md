@@ -15,8 +15,8 @@
 | Ustawa o dyscyplinie finansów publicznych | ⚠️ Dz.U. 2025 poz. 1484 t.j. (POPRAWKA 2026-07-02ii — BYŁO błędnie 2024.104, obwieszczenie 20.10.2025) | mod-ustawa-dyscyplina-finansow-publicznych | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
 | Ustawa o zasadach realizacji programów UE 2021-2027 | ⚠️ Dz.U. 2025 poz. 1733 t.j. (POPRAWKA 2026-07-02mm — BYŁO błędnie 2024.1655; ustawa bazowa z 28.04.2022, Dz.U. 2022.1079, potwierdzony pełny łańcuch t.j. do 2025.1733) | mod-ustawa-fundusze-UE-pomoc-publiczna | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
 
-> Źródło weryfikacji: isap.sejm.gov.pl | uzp.gov.pl | kio.gov.pl
-> Aktualizacja: 2026-06-09
+> Źródło weryfikacji: isap.sejm.gov.pl | uzp.gov.pl | orzeczenia.uzp.gov.pl
+> Aktualizacja: 2026-06-09 (link KIO poprawiony 2026-07-05d — kio.gov.pl nie hostuje wyszukiwarki)
 
 > Aktualizacja: 2026-07-02mm (TRYB DZU krok 7/16 wg WARN-26, ZAMKNIĘTY W
 > CAŁOŚCI: 10/10 pozycji zweryfikowane [100%, z wyjątkiem NIK — brak
