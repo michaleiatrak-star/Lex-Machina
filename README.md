@@ -7,7 +7,7 @@
 [![Licencja: GPL v3](https://img.shields.io/badge/Licencja-GPL%20v3-blue.svg)](LICENSE)
 [![Wersja stabilna](https://img.shields.io/badge/stabilna-28.06.2026-2A6F50.svg)](#-wersjonowanie)
 [![Wersja rozwojowa](https://img.shields.io/badge/rozwojowa-aktywna-orange.svg)](#-wersjonowanie)
-[![Skille](https://img.shields.io/badge/skille-33-8A2BE2.svg)](#-katalog-skilli)
+[![Skille](https://img.shields.io/badge/skille-32-8A2BE2.svg)](#-katalog-skilli)
 [![Platforma](https://img.shields.io/badge/platforma-Claude%20AI-D97757.svg)](https://claude.ai)
 [![Język](https://img.shields.io/badge/j%C4%99zyk-polski-white.svg?labelColor=DC143C)](#)
 
@@ -15,6 +15,7 @@
 dowodów i strategię procesową, po generowanie pism — z obowiązkową weryfikacją online
 każdego przepisu i każdej sygnatury.*
 
+[Co nowego](#co-nowego-5-6072026) •
 [Szybki start](#-szybki-start) •
 [Architektura](#%EF%B8%8F-architektura) •
 [Katalog skilli](#-katalog-skilli) •
@@ -28,7 +29,7 @@ każdego przepisu i każdej sygnatury.*
 
 ## 🎯 Czym jest Lex Machina
 
-Lex Machina to zestaw **33 skilli** (Claude AI Skills) tworzących kompletny warsztat pracy
+Lex Machina to zestaw **32 skilli** (Claude AI Skills) tworzących kompletny warsztat pracy
 z polskim prawem:
 
 | | |
@@ -41,6 +42,23 @@ z polskim prawem:
 
 > **Zasada naczelna:** *brak numeru artykułu jest lepszy niż błędny numer artykułu;
 > brak sygnatury jest lepszy niż sygnatura nieweryfikowana lub fałszywa.*
+
+---
+
+## Co nowego (5-6.07.2026)
+
+Najważniejsze zmiany w wersji rozwojowej — pełny rejestr w [dzienniku audytów](Wersja%20rozwojowa%20rozpakowana/audyt-systemu-v4/references/AUDIT-JOURNAL.md):
+
+| Zmiana | Znaczenie dla użytkownika |
+|---|---|
+| **Konektor MCP `mcp-isap` skonfigurowany w repo** (`.mcp.json` + `claude_desktop_config.json`) | aktywuje POZIOM A HARDGATE: deterministyczna weryfikacja aktów przez Sejm ELI API (96 000+ aktów Dz.U./M.P. od 1918) zamiast web_search — [instrukcja](#-instalacja) |
+| **Orzecznictwo dyscyplinarne spięte z HARDGATE** | tabela instancji i baz orzeczeń dla 6 zawodów zaufania publicznego (DR-12) z realnymi, zweryfikowanymi adresami URL; nowa kategoria: sędziowie/asesorzy (sąd dyscyplinarny przy SA); portal adwokatury (1151+ orzeczeń); zasada: orzeczenie I instancji korporacyjnej = `NIEWERYFIKOWALNE`, nigdy `[VER]` |
+| **Sądy wojskowe, Policja, PSP/OSP** | nowa sekcja §4 w `shared/ORZECZENIA-HIERARCHIA.md` — status weryfikowalności per etap postępowania; otwarta flaga WARN-29: brak modułów merytorycznych PSP/OSP |
+| **`orzeczenia-sadowe-v2` → v2.5** | hierarchia źródeł Tier 1–4, orzeczenia KIO przez `orzeczenia.uzp.gov.pl`, wyszukiwanie pełnotekstowe SAOS/CBOSA, obowiązkowy BILANS linii przeciwnej |
+| **Wszystkie 16 DR jawnie powiązane z PRAWO-HARDGATE** | domeny DR-01/02/05/07 zabezpieczone także przy bezpośrednim wywołaniu skilla z pominięciem routera |
+| **Preferencje użytkownika UP-1..UP-5 utrwalone w `prawny-router-v3`** | zasady z User Preferences (router pierwszy, ISAP każdy przepis, HYBRID-VAL, kwalifikator karny) skodyfikowane w samym systemie |
+| **Synchronizacja frontmatteru `Weryfikacja:`** (9 modułów DR, 10 poprawek) | router i HARD GATE dostają właściwe bazy orzeczeń już przy lazy-loadingu modułu |
+| **Porządki struktury** | `pisma_build` → `pisma-procesowe-v3`; kopie rozpakowane zsynchronizowane 1:1 z archiwami `.zip` |
 
 ---
 
@@ -101,6 +119,8 @@ powołanie przepisu/orzeczenia przechodzi przez bramki `shared/` → wynik z wid
 Lex-Machina/
 ├── 📄 README.md                          ← ten plik
 ├── 📄 LICENSE                            ← GNU GPL v3
+├── 📄 .mcp.json                          ← konektor mcp-isap dla Claude Code (auto)
+├── 📄 claude_desktop_config.json         ← ta sama konfiguracja dla Claude Desktop
 ├── 📦 WERSJA STABILNA 28.06.2026/        ← skille spakowane (.zip) — wersja stabilna
 ├── 📦 WERSJA ROZWOJOWA/                  ← skille spakowane (.zip) — wersja rozwojowa
 ├── 📂 Wersja stabilna rozpakowana 28.06.2026/
@@ -109,7 +129,7 @@ Lex-Machina/
     ├── prawny-router-v3/                 ← orkiestrator
     ├── prawo-polskie-v2/                 ← mapa routingu dziedzin
     ├── dr-01-… … dr-16-…/                ← 16 dziedzin prawa
-    ├── pisma_build/, analiza-sadowa-v6/, …  ← skille wykonawcze
+    ├── pisma-procesowe-v3/, analiza-sadowa-v6/, …  ← skille wykonawcze
     └── audyt-systemu-v4/                 ← governance: dziennik audytów, mapy Dz.U.
 ```
 
@@ -140,7 +160,7 @@ Lex-Machina/
 | 09 | `dr-09-budownictwo-srodowisko-energia-transport` | Prawo budowlane, OOŚ, energetyka |
 | 10 | `dr-10-zdrowie-farmacja-zywnosc-rolnictwo` | Prawo medyczne, farmaceutyczne |
 | 11 | `dr-11-cyfrowe-cyber-ai-dane-ip` | RODO (+ operacyjne: DPIA, DSAR, RCP/DPA, naruszenia 72h), AI Act, DSA/DMA, KSC/NIS2, IP |
-| 12 | `dr-12-sadownictwo-prokuratura-zawody-prawnicze` | Ustrój sądów, zawody prawnicze |
+| 12 | `dr-12-sadownictwo-prokuratura-zawody-prawnicze` | Ustrój sądów, zawody prawnicze, orzecznictwo dyscyplinarne zawodów zaufania publicznego (instancje + bazy per zawód) |
 | 13 | `dr-13-sluzby-bezpieczenstwo-informacje-niejawne` | Służby, informacje niejawne |
 | 14 | `dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka` | Prawo UE, EKPC, KPP |
 | 15 | `dr-15-compliance-iso-governance-audyt` | Compliance, ISO, sygnaliści |
@@ -155,7 +175,7 @@ Lex-Machina/
 | `analizator-umow-v1` | Analiza i redakcja umów (w tym RODO: powierzenie, regulaminy) |
 | `analizator-dowodow-v3` | Klasyfikacja, scoring i walidacja dowodów |
 | `analizator-przepisow-v2` | Analiza przepisów, vacatio legis, historia nowelizacji |
-| `orzeczenia-sadowe-v2` | Wyszukiwanie i weryfikacja orzecznictwa |
+| `orzeczenia-sadowe-v2` | Wyszukiwanie i weryfikacja orzecznictwa — hierarchia Tier 1–4 (krajowe / UE / SAOS / zagraniczne), KIO, BILANS linii przeciwnej |
 | `analiza-sadowa-v6` | Pełna, wieloprzebiegowa analiza sprawy (ekstrakcja → struktura → predykcja) |
 | `chronologia-sprawy-v1` | Oś czasu zdarzeń prawnych |
 | `przesluchanie-swiadkow-v2` | Pytania do świadków, kontrprzesłuchanie (≥90 pytań) |
@@ -179,7 +199,7 @@ Fundament systemu — pliki w `shared/`, obowiązkowe dla wszystkich skilli:
 online **w tym samym kroku**. Hierarchia źródeł (od najsilniejszego):
 
 ```
-POZIOM A  🔌 konektory MCP (verify_article, verify_signature — gdy skonfigurowane)
+POZIOM A  🔌 konektory MCP — mcp-isap dostarczony w repo (.mcp.json / claude_desktop_config.json)
 POZIOM B  🌐 strukturalne API:  api.sejm.gov.pl/eli (akty + łańcuch t.j.)
                                 saos.org.pl/api (sygnatury) · EUR-Lex/CELEX (UE)
 POZIOM C  🔍 web_search / web_fetch — wyłącznie fallback
@@ -187,6 +207,9 @@ POZIOM C  🔍 web_search / web_fetch — wyłącznie fallback
 
 Zawsze najnowszy tekst jednolity (deterministycznie przez endpoint ELI `/references`),
 weryfikacja przedmiotu aktu (tytuł vs teza), specjalny reżim dla wyroków TK 2024–2026.
+Dla orzecznictwa dyscyplinarnego (zawody zaufania publicznego, sędziowie, służby
+mundurowe) HARDGATE rozróżnia instancje: I instancja korporacyjna bez jawnej bazy =
+`NIEWERYFIKOWALNE`; kasacja/odwołanie → sn.pl / orzeczenia.ms.gov.pl — pełna procedura.
 
 ### 🔏 SYGNATURY v1.1 — kontrakt wyniku weryfikacji
 Każda weryfikacja sygnatury kończy się jednym z czterech statusów — bez zgadywania:
@@ -272,7 +295,22 @@ Prawo PL: router→v3 pierwszy, ISAP każdy przepis, HYBRID-VAL przed .docx. Kar
 </details>
 
 <details>
-<summary><b>Krok 4 — Weryfikacja i rozwiązywanie problemów</b></summary>
+<summary><b>Krok 4 — Konektor MCP mcp-isap (opcjonalny, zalecany — Claude Desktop / Claude Code)</b></summary>
+
+Aktywuje POZIOM A HARDGATE: deterministyczna weryfikacja aktów przez oficjalne
+Sejm ELI API (`search_acts`, `get_act`, `get_act_text` — 96 000+ aktów Dz.U./M.P. od 1918).
+
+| Środowisko | Co zrobić |
+|---|---|
+| **Claude Code** | nic — `.mcp.json` w korzeniu repo wczytywany automatycznie |
+| **Claude Desktop** | skopiuj zawartość `claude_desktop_config.json` do własnej konfiguracji: Settings → Developer → Edit Config |
+| **claude.ai (web)** | konektor niedostępny — system działa na POZIOMIE B (web_fetch na api.sejm.gov.pl/eli) |
+
+Wymaga Node.js (konektor uruchamiany przez `npx -y @matematicsolutions/mcp-isap`).
+</details>
+
+<details>
+<summary><b>Krok 5 — Weryfikacja i rozwiązywanie problemów</b></summary>
 
 Test: nowa rozmowa → *„Mam sprawę prawną. Od czego zacząć?"* — system powinien
 uruchomić router, dopytać o charakter sprawy i zaproponować przewodnik.
