@@ -1,10 +1,10 @@
 ---
 name: analizator-przepisow-v2
-version: 2.0
+version: 2.3
 type: executive-analiza
 status: production
 compatibility: "web_search, web_fetch, show_widget"
-description: Analizuje przepisy prawa polskiego. Stosuj gdy użytkownik pyta o artykuł, przesłanki, wykładnię, orzecznictwo, zbieg norm, historię zmian przepisu lub chce sprawdzić czy przepis stosuje się do jego sytuacji. v2: automatyczne orzecznictwo (3 orzeczenia + alert rozbieżności linii), mapa powiązań norm, historia nowelizacji z obsługą vacatio legis, interaktywne drzewo przesłanek krok-po-kroku, kontekst praktyczny dla laika.
+description: Analizuje przepisy prawa polskiego. Stosuj gdy użytkownik pyta o artykuł, przesłanki, wykładnię, orzecznictwo, zbieg norm, historię zmian przepisu lub chce sprawdzić czy przepis stosuje się do jego sytuacji. v2: automatyczne orzecznictwo (3 orzeczenia + alert rozbieżności linii), mapa powiązań norm, historia nowelizacji z obsługą vacatio legis, interaktywne drzewo przesłanek krok-po-kroku, kontekst praktyczny dla laika. v2.3: RZĄD 1 (ISAP) / RZĄD 2 (orzecznictwo, LEX-Legalis-tekst, ORAZ duże portale: prawo.pl, LEX/Legalis-komentarz, rp.pl, infor.pl, gofin.pl i inne) / RZĄD 3 (strony prawników, kancelarii, NGO, blogów — wysokie ryzyko dezaktualizacji, wymagają daty i krzyżowej weryfikacji).
 ---
 
 # Analizator Przepisów Prawnych v2
@@ -96,13 +96,128 @@ Paleta: --primary #1B3A6B, --accent #C8960C, --bg #F8F7F4, --success #16a34a, --
 
 ## MODUŁ 1 — WERYFIKACJA I POBRANIE PRZEPISU
 
-### Hierarchia źródeł
+### Hierarchia źródeł (RZĄD 1 / RZĄD 2 / RZĄD 3)
 
+**RZĄD 1 — PIERWSZORZĘDNE (wiążące, wyłączne dla BRZMIENIA przepisu):**
 1. ISAP — https://isap.sejm.gov.pl — PRIORYTET (tekst jednolity)
 2. Sejm RP — https://www.sejm.gov.pl/prawo/prawo.htm
 3. EUR-Lex — https://eur-lex.europa.eu — prawo UE implementowane w Polsce
 4. UODO — https://uodo.gov.pl — przepisy o ochronie danych
 5. BIP właściwego organu — dla rozporządzeń branżowych
+
+Ten rząd dotyczy WYŁĄCZNIE brzmienia przepisu — obowiązuje tu
+`shared/PRAWO-HARDGATE.md` bez wyjątków.
+
+**RZĄD 2 — DRUGORZĘDNE (oficjalne orzecznictwo, LEX/Legalis jako tekst przy
+licencji, ORAZ duże, uznane portale prawnicze/branżowe — komentarz i
+interpretacja o niskim ryzyku dezaktualizacji, redakcja profesjonalna):**
+
+**2A — oficjalne, wykonawcze/orzecznicze (znacznik ✅ [VER: ...]):**
+- Orzecznictwo z oficjalnych baz sądowych: sn.pl, orzeczenia.ms.gov.pl,
+  orzeczenia.nsa.gov.pl, trybunal.gov.pl, saos.org.pl (pomocniczo) — Moduł
+  7/7A, procedura wyłącznie wg `shared/PRAWO-HARDGATE.md`.
+- LEX (sip.lex.pl) i Legalis (sip.legalis.pl) jako ŹRÓDŁO-2 dla BRZMIENIA
+  przepisu, gdy ISAP niedostępny i kancelaria posiada aktywną licencję —
+  równoważne ISAP wyłącznie w tej roli, zgodnie z `shared/PRAWO-HARDGATE.md`.
+
+**2B — duże, uznane portale prawnicze/branżowe (komentarz/interpretacja,
+znacznik 📚 [ŹRÓDŁO POMOCNICZE — RZĄD 2: ...], NIGDY brzmienie przepisu ani
+dowód istnienia orzeczenia):** lista przykładowa, nie zamknięta:
+
+- prawo.pl (Wolters Kluwer — portal informacyjny)
+- lex.pl / sip.lex.pl (Wolters Kluwer LEX — w roli komentarza/glosy, nie tekstu)
+- legalis.pl / sip.legalis.pl (C.H.Beck — w roli komentarza/monografii, nie tekstu)
+- rp.pl (Rzeczpospolita, dział Prawo)
+- infor.pl, lexlege.pl — portale informacyjno-branżowe
+- gazetaprawna.pl (Dziennik Gazeta Prawna)
+- kadry.infor.pl (prawo pracy — komentarze praktyczne)
+- poradnikprzedsiebiorcy.pl (prawo gospodarcze/podatkowe dla przedsiębiorców)
+- money.pl (dział Prawo/Podatki)
+- gofin.pl (Wydawnictwo Podatkowe GOFIN — podatki, rachunkowość, prawo pracy)
+- biznes.gov.pl — wyłącznie treści poradnikowe/informacyjne (odróżnij od
+  aktów prawnych i oficjalnych interpretacji organów — te, gdy dostępne
+  bezpośrednio na stronach urzędowych, np. podatki.gov.pl/eureka, należą
+  do Rzędu 1/2A, nie do tej listy)
+- inne duże portale o podobnym profilu: redakcja zawodowa/wydawnicza,
+  systematyczna aktualizacja po nowelizacjach, rozpoznawalna marka —
+  kryterium przynależności do 2B, nie do Rzędu 3.
+
+Kryterium 2B vs Rząd 3: redakcja zawodowa + rozpoznawalna marka wydawnicza/
+medialna + praktyka regularnej aktualizacji treści po zmianach przepisów →
+niższe ryzyko dezaktualizacji niż Rząd 3 (patrz niżej), ale nadal NIE jest to
+wykładnia wiążąca — zawsze 📚, nigdy ✅ [VER].
+
+Ten rząd dotyczy WYŁĄCZNIE brzmienia przepisu — obowiązuje tu
+`shared/PRAWO-HARDGATE.md` bez wyjątków.
+
+**RZĄD 3 — TRZECIORZĘDNE (WYSOKIE RYZYKO DEZAKTUALIZACJI — strony
+indywidualnych prawników/kancelarii, blogi eksperckie, organizacje NGO,
+fora, poradniki bez redakcji wydawniczej):**
+
+Obejmuje: strony własne adwokatów/radców/kancelarii, blogi prawnicze,
+publikacje NGO, fora internetowe, poradniki bez wskazanej redakcji lub daty
+aktualizacji. Cecha wspólna uzasadniająca niższy rząd niż 2B: brak
+systematycznej redakcji wydawniczej i brak gwarancji aktualizacji treści po
+nowelizacji — wpis mógł powstać przed zmianą przepisu i nigdy nie zostać
+poprawiony.
+
+ZASADY DODATKOWE DLA RZĄDU 3 (ponad ogólny zakaz mieszania ról poniżej):
+```
+1. Sprawdź datę publikacji/ostatniej aktualizacji treści.
+   Brak daty lub data > 24 miesiące wstecz → dodaj ostrzeżenie
+   "⚠️ możliwa dezaktualizacja — brak/dawna data publikacji".
+2. NIGDY nie cytuj twierdzenia z Rzędu 3 jako samodzielnej podstawy —
+   zawsze skrzyżuj z Rzędem 1 (tekst) lub 2A (orzecznictwo) przed użyciem.
+   Jeśli nie da się skrzyżować (np. brak czasu/dostępu) → oznacz
+   "⚠️ NIEPOTWIERDZONE W ŹRÓDLE WYŻSZEGO RZĘDU" i nie buduj na tym wniosku.
+3. Dozwolone wyłącznie jako inspiracja do dalszego wyszukiwania (podobnie do
+   BRAMKI WTÓRNE-ŹRÓDŁO-STOP dla orzeczeń w `shared/PRAWO-HARDGATE.md`) —
+   nigdy jako ostateczne potwierdzenie stanu prawnego.
+```
+
+Uzupełniająco do Rzędu 1 (tekst) i Rzędu 2 (orzecznictwo/LEX-Legalis-tekst/
+duże portale) — analiza MOŻE sięgać po Rząd 3, gdy wzbogaca kontekst
+praktyczny (Moduł 7D) lub wskazuje trop do dalszej weryfikacji, ale ZAWSZE
+z zastrzeżeniami powyżej.
+
+⛔ ZAKAZ mieszania rzędów:
+- Dla BRZMIENIA przepisu → wyłącznie Rząd 1 lub Rząd 2A (LEX/Legalis-tekst,
+  przy licencji) — Rząd 2B i Rząd 3 nigdy nie pełnią tej roli.
+- Dla ISTNIENIA sygnatury orzeczenia → wyłącznie Rząd 2A (oficjalna baza
+  sądowa, BRAMKA WTÓRNE-ŹRÓDŁO-STOP z `shared/PRAWO-HARDGATE.md`) — Rząd 2B
+  i Rząd 3 nigdy nie potwierdzają istnienia orzeczenia, tylko wskazują trop.
+- Rząd 2B i Rząd 3 wolno cytować WYŁĄCZNIE jako pogląd/informację pomocniczą,
+  nigdy jako samodzielną podstawę normatywną.
+
+ZNACZNIK OBOWIĄZKOWY — każdy fragment pochodzący z Rzędu 2B lub Rzędu 3 oznacz:
+```
+📚 [ŹRÓDŁO POMOCNICZE — RZĄD 2: nazwa portalu, autor jeśli podany, data]
+— pogląd doktrynalny/informacyjny, nie wykładnia wiążąca
+
+⚠️📚 [ŹRÓDŁO POMOCNICZE — RZĄD 3: nazwa strony/autor, data jeśli znana]
+— WYSOKIE RYZYKO DEZAKTUALIZACJI, wymaga potwierdzenia w Rzędzie 1/2
+```
+Nie myl ze znacznikami HARDGATE:
+```
+✅ [VER: ISAP / api.sejm.gov.pl, data]              → Rząd 1, tekst przepisu, wiążący
+✅ [VER: sn.pl / orzeczenia.ms.gov.pl / ..., data]   → Rząd 2A, orzeczenie zweryfikowane oficjalnie
+✅ [VER: LEX/Legalis, data]                          → Rząd 2A, tekst przepisu (tylko przy licencji)
+📚 [ŹRÓDŁO POMOCNICZE — RZĄD 2: portal, data]        → Rząd 2B, duży portal, komentarz/informacja
+⚠️📚 [ŹRÓDŁO POMOCNICZE — RZĄD 3: strona/autor, data] → Rząd 3, wysokie ryzyko dezaktualizacji
+```
+
+KOLIZJA Z ORZECZNICTWEM: jeśli pogląd z Rzędu 2B/3 jest sprzeczny ze
+zweryfikowaną linią orzeczniczą (Rząd 2A, Moduł 7/7A) → wyraźnie zaznacz
+rozbieżność w raporcie; priorytet interpretacyjny ma zawsze Rząd 1/2A.
+
+GDZIE STOSOWAĆ RZĄD 2B / RZĄD 3:
+- Moduł 2 — jako dodatkowy kontekst przy wykładni pojęć nieostrych, obok
+  (nie zamiast) wykładni orzeczniczej; Rząd 3 wyłącznie po skrzyżowaniu z
+  Rzędem 1/2A (zasada 2 powyżej).
+- Moduł 7D — komentarze (zwłaszcza 2B) ułatwiają przystępne, praktyczne
+  wyjaśnienie dla laika.
+- Moduł 4, sekcja 10 — osobna podsekcja "Źródła pomocnicze (Rząd 2B/Rząd 3)",
+  oddzielona od "Źródła normatywne i orzecznicze (Rząd 1/2A, zweryfikowane)".
 
 ### Procedura weryfikacji (OBOWIĄZKOWA)
 
@@ -228,6 +343,14 @@ Przeszukaj w kolejności:
 4. https://www.trybunal.gov.pl/orzeczenia — Trybunał Konstytucyjny
 5. https://saos.org.pl — agregator orzeczeń
 
+Uzupełniająco (POMOCNICZO, nie zamiast powyższego): sprawdź też komentarze
+doktrynalne na dużych, uznanych portalach RZĘDU 3 (prawo.pl, LEX, Legalis,
+rp.pl, gofin.pl i pozostałe duże portale — patrz "Hierarchia źródeł" w
+Module 1) i oznacz je znacznikiem 📚 [ŹRÓDŁO POMOCNICZE — RZĄD 2: ...].
+Strony indywidualnych prawników/kancelarii/blogów (Rząd 3) traktuj z
+dodatkową ostrożnością wg zasad Rzędu 3. Gdy komentarz i orzecznictwo się różnią —
+priorytet ma orzecznictwo, odnotuj rozbieżność.
+
 ---
 
 ## MODUŁ 3 — ANALIZA SPEŁNIENIA PRZESŁANEK
@@ -322,7 +445,10 @@ Stan prawny na: [data] | Typ sprawy: [typ] | Wygenerowano: [dziś]
 9. POWIĄZANE PRZEPISY
    [przepisy powiązane, wyjątki, lex specialis]
 
-10. ŹRÓDŁA — [lista URL]
+10. ŹRÓDŁA
+    Normatywne i orzecznicze (zweryfikowane, ✅ [VER: ...]): [lista URL]
+    Pomocnicze — duże portale RZĄD 2 (📚 [ŹRÓDŁO POMOCNICZE — RZĄD 2: ...], o ile użyto): [lista URL]
+    Pomocnicze — Rząd 3, wysokie ryzyko dezaktualizacji (⚠️📚 [... RZĄD 3: ...], o ile użyto): [lista URL]
 ```
 
 ---
@@ -514,3 +640,73 @@ view /mnt/skills/user/shared/QUALITY-CHECK.md
 ```
 
 Nie dubluj logiki shared w lokalnych plikach. Lokalne moduły mogą tylko doprecyzować analizę dziedzinową.
+
+---
+
+## CHANGELOG
+
+**2.3 (2026-07-06):**
+- **KOREKTA na wyraźne polecenie użytkownika:** duże, uznane portale
+  prawnicze/branżowe (prawo.pl, LEX-komentarz, Legalis-komentarz, rp.pl,
+  infor.pl, lexlege.pl, gazetaprawna.pl, kadry.infor.pl,
+  poradnikprzedsiebiorcy.pl, money.pl, biznes.gov.pl), błędnie nazwane w
+  v2.2 "RZĄD 3", przeniesione do **RZĄD 2** jako podkategoria **2B**
+  (obok 2A — oficjalne orzecznictwo i LEX/Legalis-tekst). Dodano do listy
+  **gofin.pl**. Znacznik zmieniony na `📚 [ŹRÓDŁO POMOCNICZE — RZĄD 2: ...]`.
+- **RZĄD 3 zredefiniowany:** teraz wyłącznie strony indywidualnych
+  prawników/kancelarii, blogi eksperckie, NGO, fora — źródła z WYSOKIM
+  RYZYKIEM DEZAKTUALIZACJI (brak redakcji wydawniczej, brak gwarancji
+  aktualizacji po nowelizacji). Dodano zasady dodatkowe: obowiązkowe
+  sprawdzenie daty publikacji (brak/starsza niż 24 mies. → ostrzeżenie),
+  zakaz cytowania bez krzyżowej weryfikacji w Rzędzie 1/2A, rola wyłącznie
+  jako trop do dalszego wyszukania. Nowy znacznik:
+  `⚠️📚 [ŹRÓDŁO POMOCNICZE — RZĄD 3: ...]` (z ostrzeżeniem w samym znaczniku,
+  nie tylko w opisie).
+- Zaktualizowano spójnie: Moduł 2, Moduł 4 sekcja 10 (rozdzielone teraz na
+  trzy pozycje: normatywne/orzecznicze Rząd 1–2A, pomocnicze Rząd 2B,
+  pomocnicze wysokiego ryzyka Rząd 3), Moduł 7D.
+- Wersja 2.2 → 2.3, description 698 znaków (✅ OK).
+
+**2.2 (2026-07-06):**
+- **Restrukturyzacja "Hierarchii źródeł" (Moduł 1) na jawne RZĄD 1/2/3**, na
+  wyraźne polecenie użytkownika. RZĄD 1 = ISAP/Sejm/EUR-Lex/UODO/BIP (tekst
+  przepisu, wiążący). RZĄD 2 = oficjalne bazy orzeczeń (sn.pl,
+  orzeczenia.ms.gov.pl, nsa.gov.pl, trybunal.gov.pl, saos.org.pl) oraz
+  LEX/Legalis wyłącznie w roli tekstu przepisu przy aktywnej licencji. RZĄD 3
+  = interpretacja doktrynalna/portale informacyjne — TRZECIORZĘDNE,
+  POMOCNICZE: rozszerzono listę z v2.1 (prawo.pl, LEX/Legalis-komentarz,
+  rp.pl, infor.pl, lexlege.pl) o **pozostałe portale**: gazetaprawna.pl,
+  kadry.infor.pl, poradnikprzedsiebiorcy.pl, money.pl, biznes.gov.pl
+  (wyłącznie treści poradnikowe) — spójnie z listą już rozpoznaną w
+  `shared/PRAWO-HARDGATE.md` (BRAMKA WTÓRNE-ŹRÓDŁO-STOP), rozszerzoną i
+  nazwaną tu wprost jako RZĄD 3.
+- Znacznik doprecyzowany: `📚 [ŹRÓDŁO POMOCNICZE — RZĄD 3: portal, data]` —
+  numer rzędu wprost w znaczniku, żeby w raporcie było widać na pierwszy
+  rzut oka, że to trzeciorzędne źródło pomocnicze, nie tekst ani orzecznictwo.
+  Zaktualizowano spójnie odesłania w Module 2, Module 4 sekcja 10 i Module 7D
+  (`references/MOD-ORZECZ-POWIAZANIA-HISTORIA.md`).
+- Wersja 2.1 → 2.2, description 633 znaki (✅ OK).
+
+**2.1 (2026-07-06):**
+- **Dodano sekcję "Źródła pomocnicze — interpretacja doktrynalna" (Moduł 1).**
+  Na wyraźne polecenie użytkownika: skill ma chętnie korzystać z zewnętrznych
+  interpretacji/komentarzy (prawo.pl, LEX/lex.pl, Legalis, rp.pl i inne duże,
+  uznane portale branżowe), ale ZAWSZE oznaczać je wyraźnie jako źródło
+  pomocnicze — znacznik 📚 [ŹRÓDŁO POMOCNICZE: ...], odróżniony od znaczników
+  HARDGATE ✅ [VER: ...] zastrzeżonych dla zweryfikowanego tekstu przepisu
+  (ISAP/ELI) i zweryfikowanego orzecznictwa (sn.pl/orzeczenia.ms.gov.pl/...).
+  Wyraźny zakaz mieszania ról: te portale nie mogą być podstawą brzmienia
+  przepisu (poza rolą ŹRÓDŁO-2 LEX/Legalis już opisaną w `shared/PRAWO-
+  HARDGATE.md` przy aktywnej licencji) ani potwierdzeniem istnienia sygnatury
+  orzeczenia (BRAMKA WTÓRNE-ŹRÓDŁO-STOP z HARDGATE pozostaje w mocy).
+- Skrzyżowane odesłania dodane w: Moduł 2 (wykładnia pojęć nieostrych —
+  komentarz doktrynalny jako uzupełnienie, nie zamiennik, wykładni
+  orzeczniczej), Moduł 4 sekcja 10 (Raport końcowy — rozdzielono "Źródła
+  normatywne i orzecznicze" od "Źródła pomocnicze"), Moduł 7D w
+  `references/MOD-ORZECZ-POWIAZANIA-HISTORIA.md` (kontekst dla laika —
+  komentarze mogą wspomóc przystępne wyjaśnienie, oznaczone 📚).
+- Nie zduplikowano logiki HARDGATE — nowa sekcja odsyła do istniejących zasad
+  ŹRÓDŁO-2 (LEX/Legalis dla tekstu) i BRAMKI WTÓRNE-ŹRÓDŁO-STOP (sygnatury)
+  w `shared/PRAWO-HARDGATE.md`, dodaje wyłącznie nową kategorię — użycie tych
+  portali jako doktryny/komentarza, którego dotąd skill nie adresował wprost.
+- Wersja podniesiona 2.0 → 2.1, description zaktualizowany (614 znaków, ✅ OK).

@@ -251,6 +251,14 @@ JĘZYK TECHNICZNY vs PROSTY:
 
 Styl: jak tłumaczenie przyjacielowi przy kawie — konkretnie, bez patronizowania.
 Nie upraszczaj przez omijanie istotnych niuansów — zaznaczaj je słowem "uwaga:".
+
+Dozwolone wsparcie z dużych portali RZĘDU 2 (prawo.pl, LEX, Legalis, rp.pl,
+gofin.pl i pozostałe — patrz SKILL.md Moduł 1, "Hierarchia źródeł") do
+sformułowania przystępnego przykładu lub porównania — oznacz je
+📚 [ŹRÓDŁO POMOCNICZE — RZĄD 2: ...]. Źródła Rzędu 3 (strony indywidualne,
+blogi, NGO) tylko po zastosowaniu zasad dodatkowych Rzędu 3 (data + krzyżowa
+weryfikacja). Nie zastępują
+one weryfikacji przepisu (ISAP) ani orzecznictwa (Moduł 7/7A).
 ```
 
 ---

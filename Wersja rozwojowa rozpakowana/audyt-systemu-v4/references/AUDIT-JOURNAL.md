@@ -11,7 +11,304 @@
 
 ---
 
-## AUDYT-2026-07-06g — UTRWALENIE PREFERENCJI UŻYTKOWNIKA W SYSTEMIE (router-v3 pierwszy, ISAP, HYBRID-VAL, kwalifikator)
+## AUDYT-2026-07-06l — ⛔ CRIT: NARUSZENIE ZASADY 7 (OUTPUT-COMPLETENESS) — DOSTARCZONO ZBIORCZY ZIP ZAMIAST JEDNEGO ZIPA NA SKILL
+
+**Klasyfikacja: CRIT** (zgodnie z SKILL.md, sekcja "Zasady operacyjne", pkt 7:
+*"Naruszenie tej zasady (dostarczenie samego pliku zamiast pełnego skilla)
+jest błędem krytycznym równoważnym CRIT i musi być odnotowane w
+AUDIT-JOURNAL"*). Użytkownik wprost odrzucił określenie tego jako
+"odstępstwo" — poprawnie zakwalifikował je jako niedopuszczalny błąd.
+
+### 1. CO SIĘ STAŁO
+
+Literalna procedura Zasady 7 (SKILL.md pkt 7, "Reguła"):
+```
+find /mnt/skills/user/<skill>/ ... → skopiuj WSZYSTKIE pliki →
+zip -r <skill>.zip <skill>/ → present_files pliku ZIP.
+```
+— jeden ZIP na jeden skill, nazwany po tym skillu. W sesji dot. trzech
+skilli (`orzeczenia-sadowe-v2`, `audyt-systemu-v4`, `analizator-przepisow-v2`)
+dostarczono zamiast tego JEDEN zbiorczy plik `skille-kompletne.zip` łączący
+wszystkie trzy skille. To NIE jest tym samym co przepis, mimo że zawierał
+pełną strukturę katalogów każdego skilla (brak luźnych plików .md — ta część
+zasady była spełniona, ale sama forma dostawy — jeden zip zamiast trzech — nie).
+
+### 2. DLACZEGO TO JEST CRIT, A NIE "DROBNE ODSTĘPSTWO"
+
+Ryzyko praktyczne: zbiorczy zip utrudnia użytkownikowi rozpakowanie i
+podmianę PODZBIORU skilli bez ryzyka pomyłki nazw katalogów przy wgrywaniu,
+a nazwa `skille-kompletne.zip` nie odpowiada nazwie żadnego konkretnego
+skilla — narusza też czytelność/identyfikowalność dostawy, którą reguła
+wprost zakłada przez `<skill>.zip`. Zdrobnienie tego do "drobnego
+odstępstwa" w poprzedniej odpowiedzi było błędem ocennym — sam skill
+kwalifikuje TAKIE naruszenie jednoznacznie jako CRIT, bez marginesu na
+łagodniejszą kategorię.
+
+### 3. NAPRAWA
+
+Dostarczono w tej samej sesji trzy osobne archiwa, każde nazwane dokładnie
+wg wzorca `<skill>.zip`:
+- `orzeczenia-sadowe-v2.zip` (5 plików, pełna struktura)
+- `audyt-systemu-v4.zip` (15 plików, pełna struktura, w tym pełny
+  AUDIT-JOURNAL.md z wpisami do 06k)
+- `analizator-przepisow-v2.zip` (5 plików, pełna struktura)
+
+### 4. WNIOSKI
+
+Gdy sesja dotyczy naprawy/zmiany wielu skilli jednocześnie — Zasada 7
+wymaga TYLU ZIPÓW, ILE SKILLI, nie jednego zbiorczego pliku, nawet jeśli
+zbiorczy plik zawiera kompletne struktury każdego z nich. "Kompletność
+struktury wewnątrz" i "jeden zip na skill" to dwa osobne wymogi tej samej
+zasady — spełnienie jednego nie zwalnia z drugiego.
+
+---
+
+## AUDYT-2026-07-06k — analizator-przepisow-v2 → v2.3: KOREKTA — DUŻE PORTALE = RZĄD 2, RZĄD 3 = WYSOKIE RYZYKO DEZAKTUALIZACJI
+
+**Pytanie wyjściowe:** korekta użytkownika do sesji 06j — duże, uznane
+portale prawnicze (prawo.pl, LEX, Legalis, rp.pl, infor.pl i inne, w tym
+dodatkowo gofin.pl) mają być RZĄD 2 (drugorzędne), nie RZĄD 3. RZĄD 3 ma być
+zarezerwowany dla stron prawników, kancelarii, NGO, blogerów i podobnych —
+źródeł z wysokim ryzykiem dezaktualizacji informacji.
+
+### 1. ZMIANA (v2.2 → v2.3)
+
+Przeniesiono całą listę dużych portali z v2.2 (błędnie nazwaną "RZĄD 3") do
+**RZĄD 2, podkategoria 2B** (obok 2A — oficjalne orzecznictwo + LEX/Legalis
+jako tekst). Dodano **gofin.pl** do listy 2B. Zredefiniowano **RZĄD 3**:
+strony indywidualnych prawników/kancelarii, blogi eksperckie, NGO, fora —
+z wyraźnym uzasadnieniem (brak redakcji wydawniczej, brak gwarancji
+aktualizacji po nowelizacji) i nowymi zasadami dodatkowymi: obowiązek
+sprawdzenia daty publikacji (ostrzeżenie gdy brak/starsza niż 24 mies.),
+zakaz cytowania bez krzyżowej weryfikacji w Rzędzie 1/2A, rola wyłącznie
+jako trop. Nowy znacznik `⚠️📚 [ŹRÓDŁO POMOCNICZE — RZĄD 3: ...]` — ostrzeżenie
+wbudowane w sam znacznik, nie tylko w opisie tekstowym.
+
+Zaktualizowano spójnie: Moduł 2, Moduł 4 sekcja 10 (teraz 3 pozycje: Rząd
+1–2A / Rząd 2B / Rząd 3), Moduł 7D w
+`references/MOD-ORZECZ-POWIAZANIA-HISTORIA.md`.
+
+### 2. KONTROLA JAKOŚCI
+
+description 698 znaków (✅ OK), 0 zbędnych interlinii, 0 wstawek opisowych.
+Zweryfikowano grepem, że żadne pozostałe odwołanie w treści operacyjnej
+(Moduł 2/4/7D) nie odnosi się już błędnie do dużych portali jako "RZĄD 3" —
+wszystkie odwołania do RZĄD 3 w bieżącej treści dotyczą wyłącznie nowej
+definicji (strony wysokiego ryzyka); wzmianki o starej numeracji pozostały
+tylko w CHANGELOG jako zapis historii zmian, co jest poprawne.
+
+### 3. WARN
+
+Brak nowych. WARN-29 (PSP/OSP) pozostaje otwarty z 2026-07-06f.
+
+### 4. SNAPSHOT
+
+- Zmodyfikowane: `analizator-przepisow-v2/SKILL.md` (v2.2→v2.3),
+  `analizator-przepisow-v2/references/MOD-ORZECZ-POWIAZANIA-HISTORIA.md`
+- Nowe pliki: 0
+
+### 5. WNIOSKI
+
+Warto przy przyszłych podobnych klasyfikacjach źródeł pytać wprost o
+kryterium rozróżnienia (tu: redakcja wydawnicza + regularna aktualizacja vs.
+brak tych gwarancji) zamiast zgadywać intuicyjny podział na "duże/małe" —
+pierwsza wersja (06j) pomyliła "nieoficjalne" z "wysokim ryzykiem
+dezaktualizacji", a to dwie różne osie oceny źródła.
+
+---
+
+## AUDYT-2026-07-06j — analizator-przepisow-v2 → v2.2: JAWNA HIERARCHIA RZĄD 1/2/3 + ROZSZERZENIE PORTALI TRZECIORZĘDNYCH
+
+**Pytanie wyjściowe:** na wyraźne polecenie użytkownika — do analizy
+przepisów dodać pozostałe portale, ze wskazaniem że są to źródła
+TRZECIORZĘDNE, oraz dostarczyć kompletne skille zgodnie z zaleceniem
+ZASADY 7 OUTPUT-COMPLETENESS.
+
+### 1. ZMIANA (v2.1 → v2.2)
+
+Przemianowano sekcję "Źródła pomocnicze" (Moduł 1) na jawną, trójstopniową
+hierarchię: RZĄD 1 (ISAP/Sejm/EUR-Lex/UODO/BIP — tekst przepisu, wiążący),
+RZĄD 2 (oficjalne bazy orzeczeń + LEX/Legalis wyłącznie w roli tekstu przy
+licencji), RZĄD 3 (interpretacja doktrynalna/portale informacyjne —
+TRZECIORZĘDNE, POMOCNICZE). Rozszerzono listę Rzędu 3 z v2.1 (prawo.pl,
+LEX/Legalis-komentarz, rp.pl, infor.pl, lexlege.pl) o pozostałe portale:
+gazetaprawna.pl, kadry.infor.pl, poradnikprzedsiebiorcy.pl, money.pl,
+biznes.gov.pl (wyłącznie treści poradnikowe, nie akty ani interpretacje
+urzędowe). Lista jest spójna z portalami już rozpoznanymi w BRAMCE
+WTÓRNE-ŹRÓDŁO-STOP (`shared/PRAWO-HARDGATE.md`) — rozszerzona, nie
+duplikowana (tamta reguła zakazuje potwierdzania SYGNATUR tym rzędem, ta
+dopuszcza KOMENTARZ tym rzędem, z tym samym obowiązkiem oznaczenia).
+Znacznik doprecyzowany na `📚 [ŹRÓDŁO POMOCNICZE — RZĄD 3: portal, data]` —
+numer rzędu wprost w znaczniku. Spójnie zaktualizowane odesłania w Module 2,
+Module 4 sekcja 10, Module 7D.
+
+### 2. KONTROLA JAKOŚCI
+
+description 633 znaki (✅ OK), 0 zbędnych interlinii, 0 wstawek opisowych,
+wszystkie ścieżki `view` w obu zmienionych plikach zweryfikowane jako
+istniejące na dysku.
+
+### 3. DOSTAWA KOMPLETNYCH SKILLI (ZASADA 7)
+
+Na żądanie użytkownika dostarczono w tej sesji jako pełne pakiety plików
+(nie tylko zmieniony plik): `analizator-przepisow-v2/` (SKILL.md +
+`references/MOD-ORZECZ-POWIAZANIA-HISTORIA.md` + `references/MOD-VACATIO-
+LEGIS.md`, niezmieniony, dołączony dla kompletności) oraz odświeżony
+`audyt-systemu-v4/` (z wpisami 06h/06i/06j w dzienniku).
+
+### 4. WARN
+
+Brak nowych. WARN-29 (PSP/OSP) pozostaje otwarty z 2026-07-06f.
+
+### 5. SNAPSHOT
+
+- Zmodyfikowane: `analizator-przepisow-v2/SKILL.md` (v2.1→v2.2),
+  `analizator-przepisow-v2/references/MOD-ORZECZ-POWIAZANIA-HISTORIA.md`
+- Nowe pliki: 0
+- CHECKLIST-DEDUP: brak nowych wpisów — rozszerzenie listy Rzędu 3 reużywa
+  nazw portali już skatalogowanych w `shared/PRAWO-HARDGATE.md`.
+
+### 6. WNIOSKI
+
+Nazwanie warstw wprost "RZĄD 1/2/3" (zamiast opisowego "pomocnicze") czyni
+znacznik w raporcie samowyjaśniającym się bez konieczności czytania całej
+sekcji SKILL.md — czytelnik od razu widzi numer rzędu przy źródle. Wzorzec
+wart rozważenia do przeniesienia w przyszłości do `shared/`, jeśli inne
+skille analityczne będą chciały tej samej numeracji rzędów źródeł.
+
+---
+
+## AUDYT-2026-07-06i — analizator-przepisow-v2 → v2.1: ŹRÓDŁA POMOCNICZE (INTERPRETACJA DOKTRYNALNA)
+
+**Pytanie wyjściowe:** na wyraźne polecenie użytkownika — `analizator-
+przepisow-v2` ma chętnie korzystać z zewnętrznych interpretacji (komentarze,
+glosy) z dużych, uznanych portali prawniczych (prawo.pl, LEX, Legalis i
+podobne), ale zawsze wyraźnie oznaczać je jako źródła pomocnicze, odróżnione
+od zweryfikowanego tekstu przepisu i orzecznictwa. Dodatkowo: sprawdzić
+aktualny stan i możliwości tego skilla.
+
+### 1. STAN PRZED ZMIANĄ
+
+Skill (9 modułów + refaktoryzowane 7/7A–7D/8 w osobnym pliku referencyjnym)
+miał w Module 1 wyłącznie hierarchię źródeł OFICJALNYCH dla tekstu przepisu
+(ISAP, Sejm, EUR-Lex, UODO, BIP) — brak jakiegokolwiek uregulowania dla
+zewnętrznych interpretacji/komentarzy doktrynalnych. `shared/PRAWO-HARDGATE.md`
+reguluje LEX/Legalis wyłącznie jako ŹRÓDŁO-2 dla BRZMIENIA przepisu oraz
+zakazuje portali wtórnych (prawo.pl, infor.pl, lexlege.pl) jako dowodu
+istnienia orzeczenia (BRAMKA WTÓRNE-ŹRÓDŁO-STOP) — żadna z tych reguł nie
+adresowała roli "komentarz/interpretacja doktrynalna jako kontekst".
+
+### 2. ZMIANA (v2.0 → v2.1)
+
+Dodano w Module 1 nową sekcję "Źródła pomocnicze — interpretacja doktrynalna":
+lista dużych portali (prawo.pl, lex.pl, legalis.pl, rp.pl, infor.pl,
+lexlege.pl i podobne), obowiązkowy znacznik `📚 [ŹRÓDŁO POMOCNICZE: ...]`
+wyraźnie odróżniony od `✅ [VER: ...]` (HARDGATE), zakaz mieszania ról
+(te portale nigdy nie zastępują ISAP dla tekstu ani oficjalnej bazy dla
+sygnatury), zasada pierwszeństwa orzecznictwa przy kolizji z komentarzem.
+Odesłania dodane w: Moduł 2 (wykładnia pojęć nieostrych), Moduł 4 sekcja 10
+(rozdzielone źródła normatywne/orzecznicze vs pomocnicze), Moduł 7D w
+`references/MOD-ORZECZ-POWIAZANIA-HISTORIA.md` (kontekst dla laika).
+
+### 3. NAPRAWY / KONTROLE JAKOŚCI
+
+Self-check wg wzorca `audyt-systemu-v4`: description 614 znaków (✅ OK, było
+612 w v2.0 — brak problemu), 0 zbędnych interlinii w obu zmienionych plikach,
+0 wstawek opisowych, wszystkie ścieżki `view` w obu plikach zweryfikowane
+jako istniejące na dysku.
+
+### 4. WARN
+
+Brak nowych. WARN-29 (PSP/OSP) pozostaje otwarty z 2026-07-06f, niepowiązane.
+
+### 5. SNAPSHOT
+
+- Zmodyfikowane: `analizator-przepisow-v2/SKILL.md` (v2.0→v2.1),
+  `analizator-przepisow-v2/references/MOD-ORZECZ-POWIAZANIA-HISTORIA.md`
+- Nowe pliki: 0
+- CHECKLIST-DEDUP: brak nowych wpisów — nowa reguła nie duplikuje
+  `shared/PRAWO-HARDGATE.md` (odsyła do niego dla ŹRÓDŁO-2/BRAMKI WTÓRNE-
+  ŹRÓDŁO-STOP), adresuje wyłącznie nową, dotąd nieopisaną kategorię
+  (komentarz doktrynalny jako źródło pomocnicze). Do rozważenia w przyszłości:
+  jeśli inne skille (np. `analiza-sadowa-v6`, `analizator-umow-v1`) będą
+  chciały tej samej reguły — przenieść do `shared/` jako wspólny moduł,
+  zamiast duplikować lokalnie.
+
+### 6. WNIOSKI
+
+Skill przed zmianą był rygorystyczny w stosunku do brzmienia przepisu i
+orzecznictwa (słusznie — HARDGATE), ale nie dawał żadnej systematyki dla
+zupełnie innej kategorii materiału: doktryny/komentarza jako pomocy
+interpretacyjnej. Rozwiązanie: osobny, jednoznacznie odmienny znacznik
+(📚 zamiast ✅ [VER]), żeby te dwie role nigdy nie zlały się w jedną w oczach
+czytelnika raportu.
+
+---
+
+## AUDYT-2026-07-06h — orzeczenia-sadowe-v2 → v2.6: ZASADA 11 (PLAN MINIMUM 5+5 Z PRZESŁANKAMI) + NAPRAWY AUDYTOWE
+
+**Pytanie wyjściowe:** na wyraźne polecenie użytkownika — zmienić skill
+`orzeczenia-sadowe-v2` tak, aby ZAWSZE prezentował minimum 5 orzeczeń
+wspierających tezę (jak najdokładniej dopasowanych, plan minimum — może być
+więcej) z kluczowymi przesłankami rozstrzygnięcia, oraz 5 orzeczeń linii
+przeciwnej (o ile istnieją) z wyjaśnieniem, co zdecydowało o takim wyniku.
+Następnie: zaudytować wprowadzoną zmianę wg procedur `audyt-systemu-v4` i
+zaktualizować ten dziennik.
+
+### 1. ZMIANA MERYTORYCZNA (v2.5 → v2.6)
+
+Dodano **Zasadę 11 — PLAN MINIMUM**: 5 orzeczeń najdokładniej dopasowanych
+(Zasada 9) do oczekiwanego rozstrzygnięcia (dolny próg, nie sufit) + 5
+orzeczeń linii przeciwnej, o ile istnieją (Faza 1-D). Dla każdego z 10
+orzeczeń wymóg podania przesłanek rozstrzygnięcia (2–4 zdania, parafraza);
+dla linii przeciwnej dodatkowo **czynnik odróżniający** (co w stanie
+faktycznym/wykładni zdecydowało o odwrotnym wyniku). Jakość ponad ilość:
+zakaz „dopychania" grup orzeczeniem niedopasowanym lub o odwrotnym kierunku
+tylko by osiągnąć liczbę 5 — gdy faktycznie znaleziono mniej, raport ma to
+odnotować wprost, nie ukrywać.
+
+Zaktualizowano spójnie: Faza 1-D (Krok 2 — cel ilościowy 5 dla linii
+przeciwnej), Faza 4 / szablon Raportu końcowego (sekcje [A]/[B] z listą do
+5+5 i miejscem na przesłanki), sekwencja działania (nowy krok 9 „Zrealizuj
+PLAN MINIMUM", renumeracja kroków 10–11), CHANGELOG, frontmatter (wersja
+2.5→2.6, description).
+
+### 2. NAPRAWY AUDYTOWE WYKONANE W TEJ SAMEJ SESJI
+
+| Kontrola | Wynik przed | Wynik po | Status |
+|---|---|---|---|
+| MOD-DESCRIPTION (2C) | 990–1020 znaków (⚠️ WARN, blisko limitu 1024) | 835 znaków | ✅ naprawiono (usunięto historyczny wpis v2.4 z description; treść zachowana w CHANGELOG) |
+| Zależności/ścieżki (2A) | — | 13/13 ścieżek `view` (`shared/*`, `references/*`) zweryfikowanych — istnieją na dysku | ✅ OK, brak CRIT |
+| Interlinie (2D-1) | — | 0 plików z ≥2 kolejnymi pustymi liniami w `orzeczenia-sadowe-v2/` | ✅ OK |
+| Wstawki opisowe (2D-2) | — | 0 trafień kwalifikujących się do usunięcia (1 fałszywe trafienie „ma na celu" — fragment instrukcji Zasady 9, nie meta-opis skilla — ZOSTAWIONE zgodnie z tabelą kwalifikacji MOD-WSTAWKI) | ✅ OK |
+| ZASADA 7 OUTPUT-COMPLETENESS | `references/widget.md` nie miał pola na przesłanki → niespójność z nową Zasadą 11 | dodano `.orz-przeslanki` (treść + CSS) do obu wzorów kart (Kat. 6A i zwykła), zaktualizowano opis zakładki Orzeczenia w SKILL.md | ✅ naprawiono w tej samej sesji, nie odłożone |
+
+### 3. WARN
+
+Brak nowych WARN otwartych. WARN-29 (PSP/OSP brak modułu) pozostaje otwarty
+z sesji 2026-07-06f — niepowiązane z tą zmianą.
+
+### 4. SNAPSHOT
+
+- Zmodyfikowane: `orzeczenia-sadowe-v2/SKILL.md` (v2.5→v2.6),
+  `orzeczenia-sadowe-v2/references/widget.md`
+- Nowe pliki: 0
+- CHECKLIST-DEDUP: brak nowych wpisów wymaganych (Zasada 11 jest rozszerzeniem
+  lokalnym istniejącej Zasady 9/10 tego samego skilla, nie nowym pojęciem
+  współdzielonym między skillami)
+
+### 5. WNIOSKI
+
+Zmiana wprowadzona na żądanie użytkownika ujawniła wzorzec ryzyka wart
+odnotowania na przyszłość: dodanie nowego wymogu treściowego do raportu
+tekstowego skilla (SKILL.md) bez równoczesnej aktualizacji jego widgetu HTML
+(`references/widget.md`) narusza ZASADĘ 7 OUTPUT-COMPLETENESS (4.5) po cichu
+— widget renderuje się bez błędu, ale milczy o polu, którego reguła wymaga.
+Rekomendacja proceduralna: przy każdej zmianie SKILL.md dodającej pole do
+struktury wyjściowej — od razu grep za odpowiadającym `references/widget.md`
+(jeśli istnieje) w tej samej sesji, nie jako osobny krok "przy okazji".
+
+---
 
 **Pytanie wyjściowe:** dopisać `<userPreferences>` (router→v3 pierwszy,
 ISAP każdy przepis, HYBRID-VAL przed .docx, Karne: +kwalifikator) do

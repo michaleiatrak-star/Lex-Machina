@@ -1,6 +1,6 @@
 ---
 name: orzeczenia-sadowe-v2
-version: 2.5
+version: 2.6
 type: executive-analiza
 status: production
 compatibility: "web_search, web_fetch, show_widget"
@@ -10,16 +10,16 @@ description: >
   orzeczenia.uzp.gov.pl, saos.org.pl) oraz sieci lokalnej SA/SO/SR i WSA (CBOSA).
   Stosuj ZAWSZE gdy pyta o orzecznictwo, wyroki, linię orzeczniczą, precedensy
   — nawet bez tych słów wprost. Dobiera orzeczenia najbliższe oczekiwanemu
-  rozstrzygnięciu; przy licznej linii przeciwnej — obowiązkowy BILANS. Nigdy
-  nie cytuj z pamięci — zawsze weryfikacja online przed sygnaturą. NIE stosuj
-  gdy pytanie dotyczy tylko przepisów bez orzeczeń.
-  v2.5: Faza 1-K — KIO/zamówienia publiczne przez orzeczenia.uzp.gov.pl
-  (zweryfikowane fetchem; koryguje nieaktualny adres kio.gov.pl w DR-07).
-  v2.4: scalenie Fazy 1-T (SAOS/CBOSA) i Zasady 2A (gradient TREŚĆ, NSA
-  I FZ 104/26).
+  rozstrzygnięciu; przy licznej linii przeciwnej — obowiązkowy BILANS. PLAN
+  MINIMUM: 5 orzeczeń wspierających + 5 linii przeciwnej (o ile istnieje),
+  każde z przesłankami rozstrzygnięcia. Nigdy nie cytuj z pamięci — zawsze
+  weryfikacja online przed sygnaturą. NIE stosuj gdy pytanie dotyczy tylko
+  przepisów bez orzeczeń.
+  v2.6: Zasada 11 — PLAN MINIMUM 5+5 z przesłankami (zalecenie audytu).
+  v2.5: Faza 1-K — KIO/zamówienia publiczne przez orzeczenia.uzp.gov.pl.
 ---
 
-# Wyszukiwanie Orzeczeń Sądowych v2.5
+# Wyszukiwanie Orzeczeń Sądowych v2.6
 
 Narzędzie procesowe dla pełnomocników, sędziów i stron działających pro se.
 Łączy interaktywny widget HTML (tryb laik / prawnik) z weryfikowanym
@@ -36,8 +36,9 @@ wyszukiwaniem orzeczeń, wskaźnikiem pokrycia przesłanek i systemem alertów.
 6. **Wyszukaj kierunek przeciwny** — test równoważny pod kątem linii przeciwnej (Faza 1-D)
 7. **Skategoryzuj z alertami** — taksonomia 8 kategorii + BILANS (Faza 2)
 8. **Zweryfikuj aktualność linii** — jednolitość, zmiany prawa (Faza 3)
-9. **Wygeneruj raport końcowy** — wskaźnik pokrycia, BILANS, rekomendacje (Faza 4)
-10. **Wyświetl widget ponownie** — z kompletnymi danymi z Faz 1–4
+9. **Zrealizuj PLAN MINIMUM** — 5 wspierających + 5 linii przeciwnej z przesłankami rozstrzygnięcia dla każdego (Zasada 11)
+10. **Wygeneruj raport końcowy** — wskaźnik pokrycia, BILANS, PLAN MINIMUM, rekomendacje (Faza 4)
+11. **Wyświetl widget ponownie** — z kompletnymi danymi z Faz 1–4
 
 ---
 
@@ -48,7 +49,7 @@ Uruchom widget opisany w `references/widget.md`.
 Widget zawiera 5 zakładek:
 - **Profil ryzyka** — alerty wstępne dla sprawy w trybie laik lub prawnik
 - **Przesłanki** — pasek pokrycia per przesłanka i rozkład ciężaru dowodu
-- **Orzeczenia** — pełna sygnatura, sąd z izbą, data, link do oryginału w nowym oknie
+- **Orzeczenia** — pełna sygnatura, sąd z izbą, data, link do oryginału w nowym oknie, przesłanki rozstrzygnięcia (Zasada 11)
 - **Alerty** — katalog aktywnych ostrzeżeń per orzeczenie z wyjaśnieniami (patrz: szablon Alerty w widget.md)
 - **Raport** — wskaźnik pokrycia, ocena linii orzeczniczej, kolejność powołania
 
@@ -188,6 +189,53 @@ LUB orzeczenia przeciwne stanowią ≥ 50% wszystkich trafień w Kat. 1–2 —
 wygeneruj alert krytyczny 🔴 BILANS NIEKORZYSTNY (patrz Faza 2 i Faza 4) i
 umieść go jako PIERWSZY alert w zakładce Profil ryzyka, niezależnie od trybu
 LAIK/PRAWNIK. Zakaz przedstawiania sprawy jako „mocnej" bez tego ujawnienia.
+
+**Zasada 11 — ⛔ PLAN MINIMUM: 5 orzeczeń wspierających + 5 linii przeciwnej,
+zawsze z przesłankami rozstrzygnięcia.**
+Dotyczy każdego wyszukiwania linii orzeczniczej na poparcie tezy (nie dotyczy
+pojedynczego powołania sygnatury na marginesie innej analizy).
+```
+PLAN MINIMUM:
+[A] 5 orzeczeń NAJDOKŁADNIEJ dopasowanych do oczekiwanego rozstrzygnięcia
+    (wg kryteriów Zasady 9) — to jest DOLNY próg, nie sufit: jeśli
+    wyszukiwanie (Faza 1, 1-T, 1-L wg właściwości) daje więcej dobrych
+    dopasowań, prezentuj wszystkie, nie ucinaj sztucznie do 5.
+[B] 5 orzeczeń linii PRZECIWNEJ (Faza 1-D, Krok 2) — O ILE takie w ogóle
+    istnieją w wynikach. Brak linii przeciwnej po wyczerpującym
+    wyszukiwaniu (Faza 1-F nie została wywołana z powodu błędu narzędzi,
+    tylko wyniki są puste) = stan FAKTYCZNY do odnotowania wprost w
+    Raporcie ("nie odnaleziono linii przeciwnej po przeszukaniu [portale]"),
+    nie sygnał by przestać szukać po 1–2 próbach.
+```
+Reguły realizacji planu minimum:
+1. Dopasowanie (Zasada 9) ma pierwszeństwo przed liczbą — zakaz uzupełniania
+   grupy [A] lub [B] orzeczeniem o odwrotnym kierunku albo niedopasowanym
+   stanie faktycznym tylko po to, by osiągnąć 5. Jeśli po wyczerpującym
+   wyszukiwaniu (wszystkie właściwe portale Tier 1–3 + Faza 1-T gdy zasadna)
+   znaleziono mniej niż 5 w danej grupie — podaj tyle, ile faktycznie
+   istnieje, i napisz to wprost („znaleziono 3 z planowanych 5 — wyszukiwanie
+   wyczerpujące, brak dalszych trafień w [lista portali]").
+2. Dla KAŻDEGO orzeczenia z obu grup — obok czterech elementów Zasady 2 —
+   podaj **kluczowe przesłanki rozstrzygnięcia**: konkretne okoliczności
+   faktyczne i argumenty prawne, które zdecydowały o takim, a nie innym
+   wyniku (2–4 zdania, parafraza — limit cytatu z Zasady 3 nadal obowiązuje).
+   Sama sygnatura + jednozdaniowa teza NIE spełnia tego wymogu.
+3. Dla grupy [B] (linia przeciwna) przesłanki muszą dodatkowo wskazywać
+   **czynnik odróżniający** — co w stanie faktycznym, wykładni albo etapie
+   postępowania spowodowało, że sąd orzekł odwrotnie niż linia zgodna
+   (np. inny moment powstania roszczenia, brak przesłanki formalnej,
+   odmienna kwalifikacja prawna zdarzenia). Bez tego elementu orzeczenie
+   przeciwne jest tylko wymienione, a nie wyjaśnione — niewystarczające.
+4. Kolejność prezentacji w obu grupach: najpierw Kat. 6A (zasada prawna SN),
+   potem pozostałe wg Zasady 7/8, w obrębie tej samej rangi — od najnowszego.
+5. Plan minimum NIE zwalnia z Zasady 1 (zakaz cytowania z pamięci) ani z
+   V-SYG — każde z 10 (do 5+5) orzeczeń przechodzi tę samą weryfikację co
+   pojedyncze powołanie.
+6. Gdy profil oczekiwanego rozstrzygnięcia nie został ustalony w Fazie 0-C
+   (pytanie neutralne, analityczne) — plan minimum stosuje się analogicznie
+   do Kat. 3A (linia dominująca, docelowo 5) i Kat. 3B (linia mniejszościowa,
+   docelowo 5, o ile istnieje), bez podziału na „zgodne/przeciwne z interesem
+   strony".
 
 ---
 
@@ -530,6 +578,10 @@ KROK 2 — Wyszukiwanie kierunku przeciwnego (OBOWIĄZKOWE, nie pomijaj):
   Te same frazy bazowe + słowa kluczowe zgodne z KIERUNKIEM PRZECIWNYM
   (np. „uwzględnienie powództwa", „zasadność roszczenia").
   Wykonaj minimum 2 zapytania w tym kroku, nawet jeśli Krok 1 dał dużo trafień.
+  Cel ilościowy (Zasada 11, PLAN MINIMUM [B]): 5 orzeczeń linii przeciwnej,
+  o ile istnieją — jeśli po 2 zapytaniach jest ich mniej niż 5, a Krok 1 (linia
+  zgodna) dał dużo trafień, kontynuuj wyszukiwanie kierunku przeciwnego
+  (kolejne portale/frazy) zanim uznasz temat za wyczerpany.
 
 KROK 3 — Ocena dopasowania (per orzeczenie, wg Zasady 9):
   Klasyfikuj każde trafienie jako: ZGODNE (kierunek = oczekiwany) /
@@ -676,8 +728,25 @@ Zgodne z oczekiwanym rozstrzygnięciem: [N_zgodne]
 Przeciwne:                             [N_przeciwne]
 Neutralne:                             [N_neutralne]
 Status: [🔴 BILANS NIEKORZYSTNY / 🟡 BILANS MIESZANY / ✅ BILANS KORZYSTNY]
-[Jeśli 🔴 lub 🟡: wypisz sygnatury linii przeciwnej z jednozdaniową tezą każdej —
- zakaz pomijania nawet jednej pozycji.]
+
+PLAN MINIMUM (Zasada 11) — [n_A]/5 wspierających, [n_B]/5 linii przeciwnej:
+
+[A] ORZECZENIA WSPIERAJĄCE TEZĘ (docelowo 5, w kolejności: Kat.6A → reszta wg rangi/daty)
+  1. [SYGNATURA] · [SĄD + IZBA] · [DATA] · [URL]
+     Przesłanki: [2–4 zdania — co konkretnie w stanie faktycznym/wykładni
+     zdecydowało o takim rozstrzygnięciu; parafraza, limit cytatu Zasada 3]
+  2. ...
+  (do 5; jeśli mniej — napisz wprost: „znaleziono [n] z 5 — wyszukiwanie
+   wyczerpujące w [lista portali/faz użytych], brak dalszych trafień")
+
+[B] LINIA PRZECIWNA (docelowo 5, o ile istnieje — Faza 1-D)
+  1. [SYGNATURA] · [SĄD + IZBA] · [DATA] · [URL]
+     Przesłanki + czynnik odróżniający: [2–4 zdania — dlaczego sąd orzekł
+     odwrotnie: inny stan faktyczny, brak przesłanki, odmienna wykładnia]
+  2. ...
+  (do 5; brak linii przeciwnej po wyczerpującym wyszukiwaniu → napisz wprost:
+   „nie odnaleziono linii przeciwnej po przeszukaniu [portale]", nie pomijaj
+   milczeniem)
 ```
 
 ---
@@ -757,6 +826,38 @@ Nie dubluj logiki shared w lokalnych plikach. Lokalne moduły mogą tylko doprec
 ---
 
 ## CHANGELOG
+
+**2.6 (2026-07-06):**
+- **Nowa Zasada 11 — PLAN MINIMUM: 5 orzeczeń wspierających + 5 linii
+  przeciwnej (o ile istnieje), zawsze z przesłankami rozstrzygnięcia.**
+  Wdrożone na wyraźne polecenie użytkownika, zgodnie z zaleceniem audytu:
+  dotychczasowa Zasada 10 (BILANS) wymuszała UJAWNIENIE liczebnej przewagi
+  linii przeciwnej, ale nie ustanawiała docelowej liczby orzeczeń do
+  zaprezentowania ani obowiązku wskazania przesłanek/czynnika odróżniającego
+  per orzeczenie — sama sygnatura + jednozdaniowa teza nie dawały pełnego
+  obrazu, dlaczego sąd rozstrzygnął tak, a nie inaczej.
+- Rozszerzono Fazę 1-D (Krok 2) o cel ilościowy: 5 orzeczeń linii przeciwnej,
+  z instrukcją kontynuacji wyszukiwania (kolejne portale/frazy), jeśli po
+  2 obowiązkowych zapytaniach jest ich mniej.
+- Rozszerzono szablon Raportu końcowego (Faza 4) o sekcje [A]/[B] z listą do
+  5+5 orzeczeń, przesłankami (2–4 zdania, parafraza, limit cytatu Zasada 3
+  nadal obowiązuje) oraz — dla linii przeciwnej — obowiązkowym czynnikiem
+  odróżniającym.
+- Zaktualizowano sekwencję działania: nowy krok 9 „Zrealizuj PLAN MINIMUM"
+  przed generowaniem raportu (poprzedni krok 9 → 10, poprzedni krok 10 → 11).
+- Jakość ponad ilość: Zasada 11 wyraźnie zastrzega, że dopasowanie (Zasada 9)
+  ma pierwszeństwo przed liczbą — zakaz „dopychania" do 5 orzeczeniem
+  niedopasowanym lub o odwrotnym kierunku; gdy faktycznie istnieje mniej niż
+  5, raport ma to wprost odnotować, nie ukrywać.
+- **Poprawki z audytu audyt-systemu-v4 (2026-07-06, sesja WARN-DESC-ORZ):**
+  description skrócone z 990/1020 (⚠️ WARN, blisko limitu 1024) do 835 znaków
+  (✅ OK) — usunięto historyczny wpis v2.4 z description (pozostaje w
+  CHANGELOG); `references/widget.md` uzupełniony o pole `.orz-przeslanki`
+  (obie karty: Kat. 6A i zwykła) + styl CSS — bez tego widget nie odzwierciedlał
+  nowego wymogu Zasady 11 (naruszenie ZASADY 7 OUTPUT-COMPLETENESS z
+  audyt-systemu-v4 4.5, gdyby pozostało niescalone); zweryfikowano 2A (13/13
+  ścieżek `view` istnieje na dysku), 2D-1 (0 zbędnych interlini), 2D-2 (0
+  wstawek opisowych) — brak CRIT/WARN po naprawie.
 
 **2.5 (2026-07-05d):**
 - **Nowa Faza 1-K — orzecznictwo KIO / zamówienia publiczne.** Luka wykryta

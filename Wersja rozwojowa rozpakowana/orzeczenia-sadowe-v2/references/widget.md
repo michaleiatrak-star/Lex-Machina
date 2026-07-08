@@ -140,6 +140,9 @@ Wklej poniższy kod jako `widget_code`. Wypełnij miejsca oznaczone `<!-- DANE: 
                       color: var(--c-purple); font-weight: 700; }
   .orz-sad { font-size: 12px; color: var(--c-muted); margin-bottom: 4px; }
   .orz-teza { font-size: 13px; line-height: 1.5; margin-bottom: 8px; }
+  .orz-przeslanki { font-size: 12px; line-height: 1.5; color: var(--c-muted);
+                     margin-bottom: 8px; padding-left: 8px;
+                     border-left: 2px solid var(--c-border); }
   .orz-alerts { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
   .a-tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; }
   .alert-old  { background: #fffbf0; color: #856404; }
@@ -256,6 +259,7 @@ Wklej poniższy kod jako `widget_code`. Wypełnij miejsca oznaczone `<!-- DANE: 
     <div class="orz-sad"><!-- DANE: SN + izba + data --></div>
     <div class="orz-teza mode-laik"><!-- DANE: teza w prostym języku --></div>
     <div class="orz-teza mode-prawnik"><!-- DANE: pełna teza z kwalifikacją + podstawa art. 87 § 1 uSN --></div>
+    <div class="orz-przeslanki"><!-- DANE: przesłanki rozstrzygnięcia (2–4 zdania, Zasada 11) — pomiń tylko gdy karta służy wyłącznie do wzmianki, nie do poparcia tezy --></div>
     <div class="orz-alerts">
       <span class="a-tag alert-zp">🏛️ ZASADA PRAWNA</span>
     </div>
@@ -272,6 +276,7 @@ Wklej poniższy kod jako `widget_code`. Wypełnij miejsca oznaczone `<!-- DANE: 
     <div class="orz-sad"><!-- DANE: sąd + izba + data --></div>
     <div class="orz-teza mode-laik"><!-- DANE: teza w prostym języku --></div>
     <div class="orz-teza mode-prawnik"><!-- DANE: pełna teza z kwalifikacją prawną --></div>
+    <div class="orz-przeslanki"><!-- DANE: przesłanki rozstrzygnięcia (2–4 zdania, Zasada 11); dla orzeczeń grupy [B] linia przeciwna — dodaj też czynnik odróżniający (dlaczego sąd orzekł odwrotnie) --></div>
     <div class="orz-alerts">
       <!-- DANE: wstaw odpowiednie a-tag; usuń niepotrzebne -->
       <span class="a-tag alert-old">⚠️ STARE</span>
