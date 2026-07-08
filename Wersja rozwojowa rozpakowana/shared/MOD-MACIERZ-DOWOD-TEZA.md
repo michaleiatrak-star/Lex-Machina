@@ -57,7 +57,7 @@ Gdzie:
 - `-` = brak powiązania (lub powiązanie niezbadane → "?" przed skanem)
 - `PKR_T` = procent przesłanek tezy pokrytych ≥1 dowodem
 - `LUKI_T` = tezy z luką krytyczną (brak dowodu kat. A/B dla ≥1 przesłanki niezbędnej)
-- `SIŁA_D` = ogólna siła dowodowa: ★★★ (A urzędowy) / ★★ (B prywatny ze źródła) / ★ (C pośredni)
+- `SIŁA_D` = ogólna siła dowodowa wg hierarchii kanonicznej A–D (patrz `analizator-dowodow-v3/modules/MD1-klasyfikacja.md`): ★★★★ (A — dokument urzędowy, moc najwyższa) / ★★★ (B — zeznanie formalne / opinia biegłego, moc wysoka) / ★★ (C — dokument prywatny / ślad cyfrowy, moc średnia) / ★ (D — twierdzenie bez dokumentu, moc zerowa — wymaga alertu [⚠ POZIOM-D])
 - `RYZYKA` = kody ryzyk (patrz §4)
 
 ---
@@ -264,7 +264,7 @@ Po zatwierdzeniu macierzy przez użytkownika:
 ⛔ ZASADA DWÓCH WARSTW — BEZWZGLĘDNA:
 
   WARSTWA WEWNĘTRZNA (MT1–MT5, tylko dla modelu):
-    Symbole ●/●●/●●●, [K]/[W]/[R]/[RK], ★/★★/★★★, PKR%, SIŁA_D, RYZYKA
+    Symbole ●/●●/●●●, [K]/[W]/[R]/[RK], ★/★★/★★★/★★★★, PKR%, SIŁA_D, RYZYKA
     → służą klasyfikacji, priorytetyzacji, decyzjom o powołaniu
     → NIE trafiają do pisma procesowego — ani do uzasadnienia, ani do zestawienia
 

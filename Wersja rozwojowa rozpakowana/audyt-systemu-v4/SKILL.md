@@ -1,6 +1,6 @@
 ---
 name: audyt-systemu-v4
-version: 4.7
+version: 5.2
 type: governance-audit
 compatibility:
   - Claude
@@ -14,6 +14,7 @@ widgets:
   - widgets/WIDGET-MENU.md        # interaktywne menu wielokrotnego wyboru
 references:
   - references/AUDIT-JOURNAL.md
+  - references/WARN-OTWARTE.md   # rejestr żywy TYLKO otwartych flag (WARN + strukturalne) — dodane 2026-07-07, ZASADA 10
   - references/CHECKLIST-DEDUP.md   # mapa pojęć → lokalizacje (5 not, NOTA-6 ORPHAN dodana 06-14g)
   - references/mapa_dzu_2026-07-04.md   # aktualna mapa Dz.U. (439 wierszy); 07-02 poprzednia wersja
 ---
@@ -32,6 +33,7 @@ Przed jakimkolwiek działaniem wczytaj:
 
 ```
 view /mnt/skills/user/audyt-systemu-v4/references/AUDIT-JOURNAL.md
+view /mnt/skills/user/audyt-systemu-v4/references/WARN-OTWARTE.md
 view /mnt/skills/user/audyt-systemu-v4/references/CHECKLIST-DEDUP.md
 view /mnt/skills/user/audyt-systemu-v4/references/mapa_dzu_2026-07-04.md
 ```
@@ -43,7 +45,8 @@ Celem jest ustalenie:
   "PROCEDURA UŻYCIA" w CHECKLIST-DEDUP.md)
 - Czy edytowany moduł jest na liście modułów >400 linii (NOTA-4 w
   CHECKLIST-DEDUP.md) — jeśli TAK, rozważ podział "przy okazji"
-- Jakie WARN są otwarte i wymagają zamknięcia
+- Jakie WARN/flagi są otwarte i wymagają zamknięcia — źródło: `WARN-OTWARTE.md`
+  (ZASADA 10), NIE przeszukiwanie całego AUDIT-JOURNAL.md
 - Jaka jest aktualna mapa skilli i Dz.U.
 
 ---
@@ -382,7 +385,10 @@ Wywołanie: "sprawdź mapę Dz.U." / "aktualizuj Dz.U."
 
 ### TRYB WARN-CLOSE (zamknięcie ostrzeżeń)
 Wywołanie: "zamknij otwarte warningi" / "sprawdź WARN-X"
-→ Faza 0 → odczytaj otwarte WARN z AUDIT-JOURNAL → weryfikacja online → Faza 7A.
+→ Faza 0 → odczytaj otwarte flagi z `references/WARN-OTWARTE.md` (NIE grepuj
+całego AUDIT-JOURNAL.md — to jest wolniejsze i mniej niezawodne, patrz
+ZASADA 10) → weryfikacja online → Faza 7A → po zamknięciu: usuń wiersz
+z WARN-OTWARTE.md, dodaj pełny wpis do AUDIT-JOURNAL.md.
 
 ---
 
@@ -392,12 +398,15 @@ Wywołanie: "zamknij otwarte warningi" / "sprawdź WARN-X"
 2. **Każdy audyt kończy się aktualizacją AUDIT-JOURNAL.md** — bez wyjątków.
 3. **Mapa Dz.U. aktualizowana tylko gdy potwierdzone zmiany online** — nie spekuluj.
 4. **CRIT blokuje skill** — nie używaj skilla z otwartym CRIT.
-5. **WARN nie blokuje** — ale musi być odnotowany i zamknięty w następnym audycie.
+5. **WARN nie blokuje** — ale musi być odnotowany w `references/WARN-OTWARTE.md`
+   (nie tylko w AUDIT-JOURNAL.md) i zamknięty w przyszłym audycie (patrz ZASADA 10).
 6. **Moduły czystości (interlinie, wstawki) działają zachowawczo** — w razie wątpliwości ZOSTAW, nie usuwaj.
 7. ⛔ **ZASADA KOMPLETNOŚCI OUTPUTU (OUTPUT-COMPLETENESS) — NARUSZENIE = CRIT**
 
    Każda naprawa pliku (CRIT lub WARN) musi być dostarczona jako **kompletny skill**
    zawierający WSZYSTKIE pliki i podfoldery danego skilla, nie tylko zmieniony plik.
+   Naruszenie tej zasady (dostarczenie samego pliku zamiast pełnego skilla) jest błędem
+   krytycznym równoważnym CRIT i musi być odnotowane w AUDIT-JOURNAL.
 8. ⛔ **ZASADA WERYFIKACJI NUMERU NIEZALEŻNIE OD NAZWY (dodana 2026-07-02s,
    na wyraźny nakaz użytkownika) — "jeśli nazwy różnią się choć trochę,
    sprawdzaj w ISAP".**
@@ -428,8 +437,52 @@ Wywołanie: "zamknij otwarte warningi" / "sprawdź WARN-X"
    **Wyjątek dozwolony:** wyłącznie gdy deweloper **explicite** potwierdził w tej sesji,
    że chce tylko diff/patch i rozumie ryzyko. Bez takiego potwierdzenia — zawsze pełna struktura.
 
-   Naruszenie tej zasady (dostarczenie samego pliku zamiast pełnego skilla) jest błędem
-   krytycznym równoważnym CRIT i musi być odnotowane w AUDIT-JOURNAL.
+9. ⛔ **ZASADA PRZEGLĄDU OKRESOWEGO WARN (dodana 2026-07-07, po sesji w której
+   WARN-12 i WARN-24 pozostały otwarte przez wiele kolejnych wpisów dziennika
+   bez zamknięcia i bez ponownego odnotowania).**
+
+   Flagi drugorzędne (priorytet "niski/średni", bez oznaczenia PILNY) mogą
+   zostać zgubione w długich, wielokrokowych sesjach, gdy kolejne wpisy
+   dziennika koncentrują się na głównym wątku bieżącej sesji i nie powtarzają
+   pełnej listy historycznie otwartych WARN. Wynik: flaga pozostaje formalnie
+   otwarta, ale nikt jej już nie widzi w bieżącym kontekście.
+
+   **Reguła:** co najmniej raz na ~10 wpisów dziennika (liczonych od
+   ostatniego pełnego przeglądu) — lub natychmiast, gdy użytkownik pyta
+   wprost "czy wszystkie WARN są zamknięte" / podobnie — wykonaj:
+   `grep -noE "WARN-[0-9]+" AUDIT-JOURNAL.md | sort -t- -k2 -n -u`, a następnie
+   dla każdego numeru sprawdź kontekst NAJNOWSZEGO (najniższy numer linii)
+   wystąpienia, by potwierdzić status. Nie polegaj wyłącznie na podsumowaniach
+   "WARN nadal otwarte: ..." z pojedynczej sesji — mogą być niekompletne,
+   jeśli odnoszą się tylko do WARN otwartych w ramach tej jednej sesji, a nie
+   do całej historii. Wynik przeglądu odnotuj w dzienniku jako osobny wpis
+   (jak ten), nawet jeśli nie znaleziono nowych otwartych flag.
+
+10. ⛔ **ZASADA ROZDZIAŁU OTWARTE/ZAMKNIĘTE (dodana 2026-07-07, na wyraźne
+    polecenie użytkownika) — "wydziel do otwartych warnów osobny dziennik,
+    a zamknięte utrzymuj w aktualnym".**
+
+    `AUDIT-JOURNAL.md` i `references/WARN-OTWARTE.md` mają rozłączne role:
+    - **`WARN-OTWARTE.md`** — WYŁĄCZNIE aktualnie otwarte flagi (WARN
+      numerowane + flagi strukturalne F-N). Krótki, żywy rejestr — to jest
+      TODO systemu, nie archiwum. Nie zawiera narracji, dat naprawy ani
+      historii — tylko to, co jeszcze czeka.
+    - **`AUDIT-JOURNAL.md`** — pełna historia chronologiczna, w tym
+      zamknięcia z pełnym opisem naprawy. Nic z niego nigdy nie jest
+      usuwane.
+
+    **Reguła operacyjna:**
+    - Nowa flaga (WARN lub strukturalna) odkryta w sesji → dodaj wiersz do
+      `WARN-OTWARTE.md` ORAZ krótki wpis o odkryciu w `AUDIT-JOURNAL.md`.
+    - Flaga zamknięta → USUŃ jej wiersz z `WARN-OTWARTE.md` ORAZ dodaj pełny
+      wpis o naprawie w `AUDIT-JOURNAL.md` (jak dotychczas).
+    - Pytanie "co jest otwarte" / "czy wszystko zamknięte" → czytaj
+      NAJPIERW `WARN-OTWARTE.md`. Grep całego `AUDIT-JOURNAL.md` (ZASADA 9)
+      pozostaje jako kontrola co ~10 wpisów, żeby wykryć rozjazd między
+      dwoma plikami — nie jako podstawowy sposób odpowiadania na bieżąco.
+    - Ten sam skill (`audyt-systemu-v4`) z niepustym `WARN-OTWARTE.md`
+      NIE jest blokowany (WARN nie blokuje, ZASADA 5) — plik służy
+      wyłącznie widoczności, nie jest bramką.
 
 ---
 
@@ -455,6 +508,43 @@ audyt-systemu-v4/
 *Wersja: 5.0 | Ostatnia aktualizacja: 2026-07-04*
 
 ## CHANGELOG
+
+**5.2 (2026-07-07) — Wydzielony rejestr WARN-OTWARTE.md; ZASADA 10 (na polecenie użytkownika):**
+- **Nowy plik `references/WARN-OTWARTE.md`** — rejestr żywy zawierający
+  WYŁĄCZNIE aktualnie otwarte flagi audytowe (WARN numerowane + strukturalne
+  F-N). AUDIT-JOURNAL.md pozostaje pełną, niezmienioną historią —
+  zamknięcia trafiają tam, nie tutaj.
+- **ZASADA 10 dodana:** otwarcie flagi → wiersz w WARN-OTWARTE.md + wpis
+  w dzienniku; zamknięcie → usunięcie wiersza z WARN-OTWARTE.md + pełny
+  wpis w dzienniku. Pytania "co otwarte" → czytaj WARN-OTWARTE.md
+  najpierw, nie grepuj całego dziennika.
+- Zaktualizowano FAZA 0 (wczytuje teraz też WARN-OTWARTE.md), TRYB
+  WARN-CLOSE, ZASADĘ 5 i frontmatter `references:` — wszystkie odwołania
+  do "otwartych WARN" wskazują teraz na nowy plik.
+- Przy okazji naprawiono zdanie o ZASADZIE 7 (OUTPUT-COMPLETENESS)
+  omyłkowo osierocone pod koniec ZASADY 9 w poprzedniej edycji —
+  przywrócone do właściwego miejsca (koniec ZASADY 7).
+
+**5.1 (2026-07-07) — WARN-12 i WARN-24 zamknięte; ZASADA 9 dodana; naprawiony rozjazd wersji:**
+- **WARN-12 zamknięty:** legenda SIŁA_D w `shared/MOD-MACIERZ-DOWOD-TEZA.md`
+  dostosowana do kanonicznej hierarchii A-D z
+  `analizator-dowodow-v3/modules/MD1-klasyfikacja.md` (4 poziomy zamiast 3,
+  dodana reprezentacja kategorii D).
+- **WARN-24 zamknięty:** ustalono rzeczywisty zakres Dz.U. 2026.795 (zwykły
+  nowy t.j. KC, nie odrębna nowelizacja) i Dz.U. 2026.644 (ustawa ESAP —
+  omnibus ~17 ustaw sektora finansowego, KSH dotknięty tylko incydentalnie,
+  wcześniej błędnie zakładano że to nowelizacja KSH-centryczna). Zaktualizowano
+  `mapa_dzu_2026-07-04.md`, `dr-06/MAPA-AKTOW.md` (+1 wiersz), `dr-02/MAPA-AKTOW.md`
+  (doprecyzowanie).
+- **Dodano ZASADĘ 9** (przegląd okresowy WARN co ~10 wpisów dziennika lub na
+  żądanie użytkownika) — reakcja na to, że WARN-12/24 pozostały niezauważone
+  przez wiele sesji mimo formalnego statusu "otwarte".
+- **Naprawiono rozjazd wersji:** frontmatter błędnie cofnięty do 4.7 mimo że
+  CHANGELOG od dawna wskazywał 5.0 jako najnowszy wpis (analogiczne do
+  wcześniej naprawianego WARN-10 w innym skillu — rozjazd version: vs
+  CHANGELOG). Ustalono 5.1 jako kontynuację prawdziwego najnowszego stanu (5.0).
+- Pełny przegląd całego dziennika (`grep WARN-[0-9]+`) potwierdził: WARN-1 do
+  WARN-29 wszystkie zamknięte. Zero otwartych CRIT.
 
 **5.0 (2026-07-04p) — PROJEKT "KATALOG WSZYSTKICH T.J." ZAKOŃCZONY:**
 - **DR-15 (Compliance, ISO, Governance, Audyt):** sprawdzona — już w pełni

@@ -4,10 +4,278 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 **Powiązany plik referencyjny:** `AUDIT-REFERENCES.md`
+**Powiązany plik żywy (od 2026-07-07):** `WARN-OTWARTE.md` — zawiera WYŁĄCZNIE
+aktualnie otwarte flagi (WARN numerowane + strukturalne bez numeru). Ten
+dziennik (AUDIT-JOURNAL.md) zawiera pełną historię, w tym zamknięcia — ale
+do sprawdzenia "co jest jeszcze otwarte" zawsze czytaj `WARN-OTWARTE.md`
+jako pierwsze źródło, nie grepuj tego pliku.
 
 > **Zasada:** Po każdym audycie:
 > 1. Dodaj wpis do tego dziennika (wyniki, naprawy, status)
 > 2. Zaktualizuj `AUDIT-REFERENCES.md` jeśli zmieniły się ścieżki, struktury lub statusy Dz.U.
+> 3. **Zsynchronizuj `WARN-OTWARTE.md`:** nowa flaga → dodaj wiersz tam;
+>    zamknięta flaga → usuń wiersz stamtąd (pełny opis naprawy zostaje
+>    wyłącznie tutaj, w tym dzienniku, jako wpis historyczny).
+
+---
+
+## AUDYT-2026-07-07c — ZMIANA STRUKTURALNA: wydzielenie WARN-OTWARTE.md (nowa ZASADA 10) — na wyraźne polecenie użytkownika
+
+**Zakres:** Użytkownik polecił wprost: "wydziel do otwartych warnów osobny
+dziennik, a zamknięte utrzymuj w aktualnym i stosuj to jako zasadę
+audytową". Reakcja na powtarzający się w tej sesji problem: flagi
+drugorzędne (WARN-12, WARN-24) gubiły się w bardzo długim, liniowym
+dzienniku, bo trzeba było przeszukiwać całą historię, żeby znaleźć ich
+aktualny status.
+
+### 1. NOWY PLIK — `WARN-OTWARTE.md`
+
+Rejestr żywy zawierający WYŁĄCZNIE aktualnie otwarte flagi audytowe:
+- WARN numerowane (obecnie: 0 otwartych)
+- Flagi strukturalne bez numeru WARN, oznaczone F-1 do F-6 (przeniesione
+  z rozproszonych wzmianek w historii dziennika: DR-10 ×3, DR-03 ×1
+  [narkomania], DR-06 ×1 [ESAP bez modułu], DR-02 ×1 [KSH — sprawdź treść])
+- Sekcja obserwacji informacyjnych (O-1: nowelizacja ABW ws. treści
+  terrorystycznych — nieblokująca, niepilna)
+
+### 2. ZASADA PODZIAŁU (skodyfikowana w SKILL.md jako ZASADA 10)
+
+- Otwarcie nowej flagi → wiersz w `WARN-OTWARTE.md` + wpis w `AUDIT-JOURNAL.md`.
+- Zamknięcie flagi → USUNIĘCIE wiersza z `WARN-OTWARTE.md`; pełny opis
+  naprawy pozostaje WYŁĄCZNIE w `AUDIT-JOURNAL.md` jako wpis historyczny
+  (dziennik pozostaje pełną, niezmienioną historią — nic z niego nie jest
+  usuwane, zgodnie z dotychczasową praktyką).
+- Pytanie typu "co jest otwarte" / "czy wszystko zamknięte" → odpowiadać na
+  podstawie `WARN-OTWARTE.md` w pierwszej kolejności, nie przez grep całego
+  dziennika (choć grep pozostaje metodą weryfikacyjną/audytową co ~10 wpisów,
+  zgodnie z ZASADĄ 9 z poprzedniej sesji).
+
+### 3. STRUKTURA SYSTEMU
+
+| Plik | Akcja |
+|---|---|
+| `audyt-systemu-v4/references/WARN-OTWARTE.md` | NOWY |
+| `audyt-systemu-v4/references/AUDIT-JOURNAL.md` | ZMIENIONY (nagłówek — odwołanie do WARN-OTWARTE.md + krok 3 zasady; ten wpis) |
+| `audyt-systemu-v4/SKILL.md` | ZMIENIONY (ZASADA 10 dodana; version bump) |
+
+### 4. WNIOSKI
+
+To rozwiązuje strukturalnie problem, który ZASADA 9 (przegląd okresowy)
+łagodziła tylko proceduralnie — zamiast polegać na tym, że ktoś pamięta
+zrobić pełny przegląd co 10 wpisów, stan otwarty jest teraz w jednym,
+krótkim pliku, aktualizowanym na bieżąco przy każdym zamknięciu/otwarciu.
+ZASADA 9 pozostaje jako zabezpieczenie (audyt kontrolny), ale nie jest już
+jedynym mechanizmem wykrywania zapomnianych flag.
+
+---
+
+## AUDYT-2026-07-07b — WARN-12 i WARN-24 ZAMKNIĘTE (przegląd pełnego dziennika na żądanie użytkownika: "czy wszystkie WARN zostały zamknięte")
+
+**Zakres:** Użytkownik zapytał wprost, czy wszystkie flagi WARN w dzienniku są
+zamknięte. Przeprowadzono pełny przegląd WARN-1 do WARN-29 (grep + analiza
+kontekstu najnowszego wystąpienia każdej flagi). Wynik: 27/29 były już
+zamknięte; WARN-12 i WARN-24 pozostawały otwarte od dawna bez nigdy
+odnotowanego zamknięcia. Obie naprawiono w tej sesji.
+
+### 1. WARN-12 — ZAMKNIĘTY
+
+**Problem:** `shared/MOD-MACIERZ-DOWOD-TEZA.md`, legenda `SIŁA_D`, błędnie
+opisywała skalę gwiazdek jako "★★★ (A urzędowy) / ★★ (B prywatny ze źródła) /
+★ (C pośredni)" — niezgodne z kanoniczną hierarchią A-D zdefiniowaną w
+`analizator-dowodow-v3/modules/MD1-klasyfikacja.md` (A = dokumenty urzędowe,
+B = zeznania formalne/opinie biegłych, C = dokumenty prywatne/ślady cyfrowe,
+D = twierdzenia bez dokumentu). Brakowało też reprezentacji kategorii D
+w skali gwiazdek w ogóle, mimo że D jest aktywnie używana w
+`MOD-SELEKCJA-DOWODOW.md` (np. jako kryterium odznaczenia domyślnego).
+
+**Naprawa:** Zaktualizowano legendę `SIŁA_D` do 4-poziomowej skali
+★★★★/★★★/★★/★ zgodnej z MD1-klasyfikacja.md, z jawnym odesłaniem do tego
+pliku jako źródła kanonicznego. Zaktualizowano też listę symboli warstwy
+wewnętrznej (MT6) do 4 gwiazdek.
+
+### 2. WARN-24 — ZAMKNIĘTY
+
+**Problem:** Dz.U. 2026 poz. 795 i Dz.U. 2026 poz. 644 dodane do mapy
+2026-07-02 z adnotacją "zakres nieustalony" — nigdy nie zweryfikowane
+merytorycznie.
+
+**Ustalenia (web_search + weryfikacja krzyżowa infor.pl/rp.pl/prezydent.pl/
+gofin.pl):**
+- **Dz.U. 2026 poz. 795** — to zwykły NOWY TEKST JEDNOLITY Kodeksu cywilnego
+  (obwieszczenie Marszałka Sejmu 27.05.2026, publikacja 17.06.2026),
+  poprzedni t.j. Dz.U. 2025 poz. 1071. Konsoliduje zmiany z Dz.U. 2025.1172,
+  2025.1508, 2026.184, 2026.507. NIE jest odrębną nowelizacją merytoryczną —
+  klasyfikacja "NW" w mapie była błędna, poprawiono na "TJ".
+  ✅ [VER: infor.pl DZU.2026.168.0000795, rp.pl 17.06.2026]
+- **Dz.U. 2026 poz. 644** — BŁĘDNIE zakładano wcześniej, że to nowelizacja
+  KSH. W rzeczywistości to ustawa z 17.04.2026 wdrażająca pakiet UE ESAP
+  (European Single Access Point: rozp. 2023/2859, dyr. 2023/2864,
+  rozp. 2023/2869) — omnibus zmieniający ~17 ustaw sektora finansowego:
+  o rachunkowości, o KRS, o funduszach emerytalnych, Prawo bankowe, o listach
+  zastawnych, KSH (incydentalnie), o funduszach inwestycyjnych, o nadzorze
+  uzupełniającym, o ofercie publicznej, o nadzorze nad rynkiem kapitałowym,
+  o obrocie instrumentami finansowymi, o nadzorze nad rynkiem finansowym,
+  o nadzorze makroostrożnościowym, o działalności ubezpieczeniowej
+  i reasekuracyjnej, o BFG, o biegłych rewidentach. Podpisana przez
+  Prezydenta 11.05.2026, ogłoszona 14.05.2026.
+  ✅ [VER: inforlex Kronika prawa 21.05.2026 (lista pełna zmienianych ustaw),
+  prawo.pl, prezydent.pl, gofin.pl przepisy.gofin.pl (wersja czasowa art. 1
+  ustawy o obrocie instrumentami finansowymi potwierdza Dz.U. 2026.644)]
+
+**Naprawa:** Zaktualizowano `mapa_dzu_2026-07-04.md` (oba wiersze, z pełnym
+opisem i źródłami), dodano wiersz katalogujący ustawę ESAP do
+`dr-06-podatki-finanse-publiczne-aml/MAPA-AKTOW.md` (główny konsument
+tematyczny — prawo rynku finansowego), doprecyzowano wiersz KSH w
+`dr-02-prawo-cywilne-rodzinne-gospodarcze/MAPA-AKTOW.md` (incydentalny
+kontakt z 2026.644, nieblokujące ⚠️ SPRAWDŹ pozostaje dla treści modułu KSH).
+
+### 3. STRUKTURA SYSTEMU
+
+| Plik | Akcja |
+|---|---|
+| `shared/MOD-MACIERZ-DOWOD-TEZA.md` | ZMIENIONY (legenda SIŁA_D naprawiona, WARN-12) |
+| `audyt-systemu-v4/references/mapa_dzu_2026-07-04.md` | ZMIENIONY (2 wiersze: 2026.795 → TJ poprawne, 2026.644 → zakres ustalony, WARN-24) |
+| `dr-06-podatki-finanse-publiczne-aml/MAPA-AKTOW.md` | ZMIENIONY (+1 wiersz: ustawa ESAP skatalogowana, ⏳ OCZEKUJE na moduł) |
+| `dr-02-prawo-cywilne-rodzinne-gospodarcze/MAPA-AKTOW.md` | ZMIENIONY (wiersz KSH doprecyzowany) |
+| `audyt-systemu-v4/references/AUDIT-JOURNAL.md` | ZMIENIONY (ten wpis) |
+
+### 4. STATUS KOŃCOWY DZIENNIKA
+
+Wszystkie 29 flag WARN odnotowanych w historii dziennika są teraz zamknięte
+(WARN-1 do WARN-29). Brak otwartych CRIT. Pozostają wyłącznie:
+- 1 obserwacja drugorzędna informacyjna (nowelizacja ABW ws. treści
+  terrorystycznych — patrz AUDYT-2026-07-07a), bez numeru WARN, niepilna;
+- 1 nowa pozycja katalogowa bez modułu, świadomie (ustawa ESAP, dr-06,
+  niska aktywność tematyczna — analogicznie do innych ⏳ OCZEKUJE w systemie);
+- flagi strukturalne DR-10 (rolnictwo/żywność/weterynaria, zawody
+  medyczne/prawnicze, izby lekarskie) i DR-03 (nowelizacja narkomanii)
+  odnotowane w projekcie katalogowania 2026-07-04 jako świadomie pozostawione
+  otwarte — nie mają numeru WARN, wymagają decyzji o przebudowie modułów,
+  nie prostej weryfikacji Dz.U.
+
+### 5. WNIOSKI
+
+Pełny przegląd dziennika ujawnił wzorzec: flagi drugorzędne (priorytet
+"niski/średni", bez słowa "PILNY") czasem giną w bardzo długich sesjach
+wielokrokowych, bo kolejne wpisy koncentrują się na głównym wątku sesji i nie
+powtarzają pełnej listy otwartych drugorzędnych WARN w każdym wpisie.
+Rekomendacja systemowa: dodać do `audyt-systemu-v4/SKILL.md` obowiązek, by co
+~10 wpisów dziennika (albo na wyraźne żądanie użytkownika, jak w tej sesji)
+wykonać pełny przegląd `grep WARN-` całego pliku i potwierdzić status każdej
+historycznie otwartej flagi — nie tylko tych wspomnianych w bieżącej sesji.
+
+---
+
+## AUDYT-2026-07-07a — SESJA DEDYKOWANA: WARN-29 ZAMKNIĘTY (PSP/ochrona przeciwpożarowa/OSP — nowy moduł DR-13 poziom A)
+
+**Zakres:** Sesja dedykowana WARN-29 (otwarty od 2026-07-06, priorytet średni),
+na wyraźne polecenie użytkownika: "zbadaj dziennik audytu i zgodnie ze
+wskazaniem w audycie dokonaj napraw, które są wskazane". Przy okazji
+zweryfikowano też status WARN-28 — potwierdzono, że pozostaje ZAMKNIĘTY
+(zamknięty prawidłowo 2026-07-02eeee, żadna dalsza akcja nie była potrzebna;
+zidentyfikowano przy okazji odrębną, nieotwartą wcześniej obserwację: nowelizacja
+ustawy o ABW/AW z 18.10.2024 [Dz.U. 2024 poz. 1684, weszła w życie 2.12.2024,
+uprawnienia Szefa ABW do nakazów usunięcia treści terrorystycznych na podstawie
+rozporządzenia UE 2021/784] nie jest odrębnie opisana w module — zgłoszone niżej
+jako nowa obserwacja drugorzędna, NIE jako reotwarcie WARN-28).
+
+Zgodnie z `<userPreferences>` (router→v3 zawsze, każda jurysdykcja; ISAP
+aktywne dla spraw krajowych) wczytano strukturę `prawny-router-v3` i
+`dr-13-sluzby-bezpieczenstwo-informacje-niejawne/SKILL.md` przed przystąpieniem
+do weryfikacji merytorycznej.
+
+### 1. WERYFIKACJA ISAP — 3 AKTY
+
+- Ustawa o Państwowej Straży Pożarnej: Dz.U. 2025 poz. 1312 t.j. (ustawa
+  z 24.08.1991, obwieszczenie 15.09.2025, weszła w życie 30.09.2025)
+  ✅ [VER: isap.sejm.gov.pl WDU20250001312]
+- Ustawa o ochronie przeciwpożarowej: Dz.U. 2025 poz. 188 t.j. (ustawa
+  z 24.08.1991 — akt ODRĘBNY od PSP mimo tej samej daty uchwalenia,
+  obwieszczenie 5.02.2025) ✅ [VER: isap.sejm.gov.pl WDU20250000188]
+- Ustawa o ochotniczych strażach pożarnych (OSP): Dz.U. 2025 poz. 244 t.j.
+  (ustawa z 17.12.2021, akt pierwotny Dz.U. 2021 poz. 2490, obwieszczenie
+  21.02.2025) ✅ [VER: isap.sejm.gov.pl WDU20250000244]
+
+Wszystkie 3 numery Dz.U. potwierdzają numery już skatalogowane w sesji
+2026-07-06 (dr-13/MAPA-AKTOW.md) — brak rozbieżności do naprawy na poziomie
+samych Dz.U., tylko brak treści merytorycznej modułu (to był właśnie WARN-29).
+
+Dodatkowo zweryfikowano i uwzględniono w module: rozdz. 11 ustawy o PSP
+(art. 115-124n, odpowiedzialność dyscyplinarna), w tym art. 118 (kara
+upomnienia), art. 119 (przedawnienie 1/2 lata), art. 124j (skarga do WSA)
+i utrwaloną linię orzeczniczą NSA/WSA o dopuszczalności skargi również po
+karze upomnienia w trybie uproszczonym; art. 3-4 ustawy o ochronie
+przeciwpożarowej (obowiązki właściciela obiektu) i art. 7b (wyłączenie KPA
+dla dopuszczeń/opinii); status stowarzyszeniowy OSP (art. 1 ust. 1 ustawy
+o OSP w zw. z Prawem o stowarzyszeniach) oraz art. 7 (obowiązek gminy),
+rozdz. 3 (świadczenia), rozdz. 5 (majątek/likwidacja).
+
+### 2. NAPRAWA — NOWY MODUŁ
+
+**`dr-13-sluzby-bezpieczenstwo-informacje-niejawne/modules/mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa.md`**
+— NOWY, poziom A wg `shared/POLISH-LAW-COMPLETENESS-MATRIX.md` (intake +
+workflow + dowody + ryzyka + strategia + ISAP + quality gate), 12 sekcji
+standardowych + blok KLUCZOWE AKTY. Architektura: trzy akty w jednym module
+domenowym (wzorzec analogiczny do `mod-ustawa-ABW-AW-CBA-sluzby-specjalne.md`,
+już przyjęty w DR-13 dla klastrów tematycznych) — NIE trzy osobne moduły,
+zgodnie z decyzją odnotowaną w WARN-29 (dziedzina rzadziej aktywna niż
+Policja/ABW, jeden skoncentrowany moduł jest efektywniejszy niż trzy cienkie).
+
+Kluczowe rozróżnienia wbudowane w moduł, aby zapobiec typowym błędom
+kwalifikacyjnym: (a) PSP i ochrona przeciwpożarowa to DWA odrębne akty mimo
+tej samej daty uchwalenia — łatwo pomylić numery Dz.U.; (b) OSP nie ma
+państwowego reżimu dyscyplinarnego (stowarzyszenie, spory idą drogą cywilną/
+stowarzyszeniową, nie administracyjną) — częsty błąd kwalifikacyjny wychwycony
+już w sesji 2026-07-06 (patrz `shared/ORZECZENIA-HIERARCHIA.md` §4.3).
+
+### 3. SYNCHRONIZACJA SYSTEMOWA
+
+| Plik | Akcja |
+|---|---|
+| `dr-13-sluzby-bezpieczenstwo-informacje-niejawne/modules/mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa.md` | NOWY |
+| `dr-13-sluzby-bezpieczenstwo-informacje-niejawne/MAPA-AKTOW.md` | ZMIENIONY (3 wiersze: ❌ BRAK MODUŁU → ✅ OK) |
+| `dr-13-sluzby-bezpieczenstwo-informacje-niejawne/SKILL.md` | ZMIENIONY (version 3.4→3.5; moduły 9→10; nowa sekcja w liście modułów) |
+| `prawo-polskie-v2/ROUTING-MAP.md` | ZMIENIONY (3 wiersze DR-13 → ✅ OK; tabela podsumowująca DR-13: OK 13→16, Łącznie 16→19) |
+| `prawo-polskie-v2/SKILL.md` | ZMIENIONY (version 5.7→5.8) |
+| `audyt-systemu-v4/references/CHECKLIST-DEDUP.md` | ZMIENIONY (wpis PSP/OSP: ⚠️ CZĘŚCIOWE → ✅ zamknięty) |
+| `audyt-systemu-v4/references/mapa_dzu_2026-07-04.md` | ZMIENIONY (+3 wiersze: 2025.1312, 2025.244, 2025.188) |
+| `audyt-systemu-v4/references/AUDIT-JOURNAL.md` | ZMIENIONY (ten wpis) |
+
+### 4. WARN
+
+**WARN-29 — ZAMKNIĘTY.** Wszystkie 3 akty DR-13 skatalogowane w sesji
+2026-07-06 mają teraz moduł merytoryczny poziomu A.
+
+**NOWA OBSERWACJA DRUGORZĘDNA (nie WARN, informacyjna):** nowelizacja ustawy
+o ABW/AW z 18.10.2024 (Dz.U. 2024 poz. 1684, w życie 2.12.2024) — uprawnienia
+Szefa ABW do decyzji administracyjnych nakazujących usunięcie treści
+terrorystycznych (implementacja rozporządzenia UE 2021/784) — nie jest opisana
+w `mod-ustawa-ABW-AW-CBA-sluzby-specjalne.md`. To odrębne zagadnienie od
+false-alarmu WARN-28 (który dotyczył pomyłki numeru t.j., nie tej nowelizacji
+merytorycznej). Priorytet: niski/średni (wąska kompetencja wobec dostawców
+hostingu, rzadko aktywna w typowej sprawie DR-13) — do rozważenia w przyszłej
+sesji, bez oznak pilności.
+
+### 5. WNIOSKI
+
+Sesja potwierdza wzorzec z WARN-27: rozdzielenie "katalogowania Dz.U." (szybkie,
+zrobione 2026-07-06) od "napisania treści merytorycznej modułu poziomu A"
+(wymaga odrębnej, dedykowanej sesji z pełną weryfikacją ISAP artykuł po
+artykule) jest właściwą praktyką — pozwala zamykać flagi strukturalne bez
+pośpiechu przy budowaniu treści prawnej. Rekomendacja na przyszłość: przy
+katalogowaniu nowych aktów bez modułu, od razu odnotowywać w WARN co najmniej
+2-3 kluczowe rozróżnienia/pułapki kwalifikacyjne przewidywane dla przyszłej
+sesji budowy modułu (tu: rozróżnienie PSP/ochrona ppoż./OSP) — przyspiesza to
+późniejszą sesję dedykowaną.
+
+### NASTĘPNY KROK
+
+Brak otwartych PILNYCH sygnałów w DR-13. Pozostaje 1 obserwacja drugorzędna
+(nowelizacja ABW ws. treści terrorystycznych, patrz wyżej) oraz 3 drugorzędne
+flagi z sesji 2026-07-02eeee (duplikat KNF — już zamknięty 2026-07-04; możliwe
+rozdzielenie sport/imprezy masowe — już zamknięte 2026-07-04; t.j. rzeczników
+patentowych — już zamknięty 2026-07-04) — do potwierdzenia że wszystkie 3 są
+faktycznie zamknięte przy najbliższej okazji.
 
 ---
 
@@ -10791,3 +11059,77 @@ rozszerzone — to zadanie na kolejną sesję gdy dziedzina będzie aktywna.
 - Analizator: v5.7.0 → v5.11.0 (4 sesje akumulacyjne)
 - CHECKLIST-DEDUP: +17 wpisów łącznie sesja 1-4
 
+
+---
+
+## AUDYT-2026-07-07b — Audyt literaturowy analizator-umow-v1 + naprawa luki reformy PIP (Dz.U. 2026 poz. 473)
+
+**Zakres:** Targeted — audyt literatury eksperckiej dot. redakcji umów w Polsce
+(analizator-umow-v1), wykrycie luki (moduł B2B nie uwzględniał reformy PIP wchodzącej
+w życie 08.07.2026), naprawa + synchronizacja statusu ustawy we wszystkich mapach.
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy CRIT | 0 |
+| Ostrzeżenia WARN | 0 (znalezisko naprawione w tej samej sesji, nie otwierano formalnego WARN) |
+| Nowe sekcje | 1 (G.1C w b2b-podwykonawcze.md) |
+| Zmodyfikowane pliki | 7 |
+| Wersja analizator-umow-v1 | 1.12 (była 1.11) |
+
+### 2. ZNALEZISKO
+
+Audyt literaturowy (raport PARP o umowach B2B, materiały EY/Grant Thornton/RPMS/Calamari/
+gov.pl o reformie PIP, literatura legal design/plain language) wykazał, że moduł
+`analizator-umow-v1/references/b2b-podwykonawcze.md` — mimo szczegółowego testu
+kwalifikacji G.1 i zakazu oświadczeń deklaratoryjnych G.1B — **nie uwzględniał reformy
+uprawnień PIP** (ustawa z 11.03.2026, Dz.U. 2026 poz. 473), która wchodzi w życie
+**08.07.2026** (dzień po dacie tej sesji) i wprowadza administracyjną ścieżkę reklasyfikacji
+B2B→UoP bez pośrednictwa sądu (art. 10 ust. 1 pkt 7a ustawy o PIP).
+
+Reforma była już wcześniej skatalogowana materiałowo w DR-04
+(`mod-ustawa-PIP-inspekcja-pracy.md` sekcja 5/6, sesja 2026-06-13) oraz w mapach
+(`AKTY-PRAWNE-MASTER.md`, `ROUTING-MAP.md`, `dr-04/MAPA-AKTOW.md`, `mapa_dzu`) — ale
+wyłącznie ze statusem ⏳ "jeszcze nie obowiązuje" i **bez propagacji do modułu umownego**
+(analizator-umow-v1), który faktycznie generuje/analizuje klauzule B2B dla klienta.
+
+### 3. NAPRAWY
+
+**a) `analizator-umow-v1/references/b2b-podwykonawcze.md`:**
+- Nowa sekcja **G.1C** — pełny opis konsekwencji redakcyjnych reformy: nowa ścieżka
+  decyzji administracyjnej, pułapka rozwiązania umowy w trakcie kontroli (art. 34 ust. 2g
+  — skutek wsteczny do dnia rozpoczęcia kontroli), interpretacja indywidualna GIP (art. 14b,
+  40 zł), podwyższone kary (60–90 tys. zł), okno abolicyjne 08.07.2026–08.07.2027, zmiana
+  procedury raportowej Faza 0/F.1.
+- Zaktualizowano wynik testu G.1 (5–8 cech) o odesłanie do G.1C.
+- `analizator-umow-v1/SKILL.md`: wersja 1.11→1.12, wpis CHANGELOG.
+
+**b) Synchronizacja statusu ustawy ⏳→✅ (obowiązująca od 08.07.2026, VER 2026-07-07)
+w 5 lokalizacjach** — zgodnie z zasadą "dzień się kończy, wstaw jako aktualne":
+- `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-ustawa-PIP-inspekcja-pracy.md`
+  (nagłówek, sekcja 5 — poprawiono też numerację podsekcji 6.1–6.5 → 5.1–5.5,
+  niespójną z nagłówkiem "## 5.", quality gate)
+- `dr-04-prawo-pracy-zus-swiadczenia/MAPA-AKTOW.md` (wiersze KP i PIP)
+- `shared/AKTY-PRAWNE-MASTER.md` (wiersze KP i PIP, BLOK 5)
+- `prawo-polskie-v2/ROUTING-MAP.md` (wiersz PIP)
+- `audyt-systemu-v4/references/mapa_dzu_2026-07-04.md` (wiersze 2026/473 i 2024/1712,
+  dodano analizator-umow-v1 jako konsumenta wiersza 473)
+
+### 4. ZASTRZEŻENIE (przekazane użytkownikowi, nie jest WARN)
+
+Ustawa objęta kontrolą następczą Trybunału Konstytucyjnego (nie wstrzymuje to jej
+wejścia w życie ani obowiązywania). Wpisano jako aktualną na wyraźne polecenie
+użytkownika ("dzień już się kończy, wstawiaj jako aktualne") — każdy moduł zawiera
+przypomnienie o weryfikacji online statusu przy konkretnej sprawie. Dodano obserwację
+informacyjną O-2 w WARN-OTWARTE.md.
+
+### 5. WNIOSKI
+
+Wzorzec do zapamiętania dla przyszłych audytów: akt prawny może być poprawnie
+skatalogowany w mapach systemowych (AKTY-PRAWNE-MASTER, ROUTING-MAP, mapa_dzu) i w
+module DR- właściwym merytorycznie, a mimo to pozostać nieuwzględniony w modułach
+*wykonawczych* innych skilli (tu: analizator-umow-v1), które z niego faktycznie
+korzystają przy generowaniu dokumentów dla klienta. Rekomendacja: przy TRYB DZU
+sprawdzać nie tylko czy akt jest skatalogowany, ale czy propagacja objęła wszystkie
+moduły *konsumujące* dany temat (patrz DEPENDENCY-GRAPH), nie tylko moduł źródłowy.

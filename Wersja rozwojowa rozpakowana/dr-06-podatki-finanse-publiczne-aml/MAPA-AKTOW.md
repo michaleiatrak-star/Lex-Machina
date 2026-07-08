@@ -26,6 +26,8 @@
 | Ustawa o biegłych rewidentach, firmach audytorskich oraz nadzorze publicznym (zawód, zawód zaufania publicznego) | Dz.U. 2025 poz. 1891 t.j. ✅ VER: 2026-06-14 | mod-ustawa-biegli-rewidenci-zawod | ✅ NOWY |
 | Ustawa o doradztwie podatkowym (zawód, zawód zaufania publicznego) | Dz.U. 2021 poz. 2117 (ostatni potwierdzony t.j.) + zm. do 2025.1882 i 2026.176 (POTWIERDZONE 2026-07-02g — brak nowszego t.j. mimo dużej nowelizacji wchodzącej w życie 1.03.2026; monitorować, t.j. może się pojawić wkrótce) | mod-ustawa-doradcy-podatkowi-zawod | ✅ OK (t.j. nadal aktualny) |
 
+| Ustawa ESAP — o zmianie niektórych ustaw w związku z przekazywaniem informacji do europejskiego pojedynczego punktu dostępu (17.04.2026, wdraża pakiet UE ESAP: rozp. 2023/2859, dyr. 2023/2864, rozp. 2023/2869) | Dz.U. 2026 poz. 644 (podpisana 11.05.2026, publikacja 14.05.2026) ✅ VER: 2026-07-07 (naprawa WARN-24) | brak modułu | ⏳ OCZEKUJE — omnibus dot. ~17 ustaw sektora finansowego (rachunkowość, KRS, fundusze emerytalne, Prawo bankowe, listy zastawne, KSH, fundusze inwestycyjne, oferta publiczna, obrót instrumentami finansowymi, nadzór KNF, ubezpieczenia, BFG, biegli rewidenci); brak modułu dedykowanego w systemie — do rozważenia przy przyszłej sesji, jeśli sprawy z zakresu rynku kapitałowego/nadzoru finansowego staną się aktywne |
+
 > Źródło weryfikacji: isap.sejm.gov.pl | podatki.gov.pl | orzeczenia.nsa.gov.pl
 > Aktualizacja: 2026-07-02h (TRYB DZU krok 2/16 wg WARN-26, DOKOŃCZONY: 15/16
 > pozycji zweryfikowane. 4 błędy CRIT naprawione: obligacje, interpretacje
@@ -37,3 +39,9 @@
 > niezweryfikowanych — pozostają 2 flagi "WYMAGA AKTUALIZACJI MODUŁU"
 > (obligacje, interpretacje podatkowe) dotyczące treści modułu, nie numeru
 > Dz.U. DR-06 W PEŁNI SKATALOGOWANA.
+>
+> **Sesja 2026-07-07 (naprawa WARN-24):** dodano ustawę ESAP (Dz.U. 2026.644),
+> błędnie zakładaną wcześniej za "nowelizację KSH" — ustalono rzeczywisty,
+> znacznie szerszy zakres (omnibus ~17 ustaw finansowych, KSH dotknięty tylko
+> incydentalnie). Skatalogowana, bez modułu dedykowanego (niska aktywność
+> tematyczna w typowych sprawach obsługiwanych przez system).

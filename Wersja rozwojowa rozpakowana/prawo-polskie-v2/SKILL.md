@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: 5.7
+version: 5.8
 type: domain-router
 status: production
 compatibility: "web_search, web_fetch"

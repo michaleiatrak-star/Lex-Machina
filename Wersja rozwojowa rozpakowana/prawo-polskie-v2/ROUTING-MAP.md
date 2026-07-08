@@ -94,7 +94,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | DR-10 | Zdrowie/Farmacja/Żywność | 27 | 0 | 0 | 1 | 28 |
 | DR-11 | Cyfrowe/AI/Dane/IP | 20 | 0 | 0 | 0 | 20 |
 | DR-12 | Sądownictwo/Zawody | 11 | 1 | 0 | 0 | 12 |
-| DR-13 | Służby/Bezpieczeństwo | 13 | 1 | 0 | 2 | 16 |
+| DR-13 | Służby/Bezpieczeństwo | 16 | 1 | 0 | 2 | 19 |
 | DR-14 | Prawo UE/Międzynarodowe | 18 | 0 | 0 | 0 | 18 |
 | DR-15 | Compliance/ISO | 9 | 0 | 0 | 0 | 9 |
 | DR-16 | Pisma/Narzędzia | 11 | 0 | 0 | 0 | 11 |
@@ -195,7 +195,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o emeryturach i rentach z FUS | Dz.U. 2025 poz. 1749 ze zm. | dr-04/modules/mod-SUS-ZUS-ubezpieczenia-spoleczne | ✅ OK |
 | Ustawa o ubezpieczeniu społecznym rolników (KRUS) | Dz.U. 2025 poz. 1770 t.j. (sync 2026-07-02 z dr-04) | dr-04/modules/mod-KRUS-rolnicze-ubezpieczenia | ✅ OK |
 | Ustawa o rehabilitacji zawodowej i PFRON | Dz.U. 2025 poz. 913 ze zm. | dr-04/modules/mod-ustawa-rehabilitacja-PFRON | ✅ OK |
-| Ustawa o PIP | Dz.U. 2024 poz. 1712 t.j. + zm. Dz.U. 2025 poz. 321/368/620/769, Dz.U. 2026 poz. 160 ⏳ nowelizacja Dz.U. 2026 poz. 473 (wchodzi 08.07.2026) | dr-04/modules/mod-ustawa-PIP-inspekcja-pracy | ✅ OK — sekcja 5 modułu |
+| Ustawa o PIP | Dz.U. 2024 poz. 1712 t.j. + zm. Dz.U. 2025 poz. 321/368/620/769, Dz.U. 2026 poz. 160 ✅ nowelizacja Dz.U. 2026 poz. 473 obowiązuje od 08.07.2026 (VER 2026-07-07) | dr-04/modules/mod-ustawa-PIP-inspekcja-pracy | ✅ OK — sekcja 5 modułu |
 | Ustawa o minimalnym wynagrodzeniu | Dz.U. 2024 poz. 1285 ze zm. (MW 2026: 4806 zł) | dr-04/modules/mod-ustawa-minimalne-wynagrodzenie | ✅ OK |
 | Ustawa o ZFSS | Dz.U. 2024 poz. 288 ze zm. | dr-04/modules/mod-ustawa-ZFSS | ✅ OK |
 | Ustawa o zatrudnianiu pracowników tymczasowych | Dz.U. 2025 poz. 236 t.j. ✅ VER 2026-07-04 (POPRAWKA — było błędnie 2025.1682, numer nieistniejący dla tej ustawy) | dr-04/modules/mod-ustawa-praca-tymczasowa | ✅ OK |
@@ -472,9 +472,9 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Prawo komunikacji elektronicznej (retencja danych) | Dz.U. 2024 poz. 1221 t.j. (sync 2026-07-02 — było błędnie 1220) | → DR-11/mod-PrTelekom-poczta-UKE | 🔗 odesłanie |
 | Zmiana ustawy o obronie cywilnej 2026.646 | Dz.U. 2026 poz. 646 — vacatio legis weryfikuj | dr-13/modules/mod-ustawa-zarzadzanie-kryzysowe-obrona-cywilna | ⏳ OCZEKUJE |
 | Ustawa o zakwaterowaniu funkcjonariuszy 2025.1366 | Dz.U. 2025 poz. 1366 — weryfikuj termin wejścia | dr-13/modules/mod-ustawa-policja | ⏳ OCZEKUJE |
-| Ustawa o Państwowej Straży Pożarnej | Dz.U. 2025 poz. 1312 t.j. (sync 2026-07-06 z dr-13, dodane od zera — audyt kompletności) | brak modułu | ❌ BRAK MODUŁU (WARN-29) |
-| Ustawa o ochronie przeciwpożarowej | Dz.U. 2025 poz. 188 t.j. (sync 2026-07-06 z dr-13, dodane od zera) | brak modułu | ❌ BRAK MODUŁU (WARN-29) |
-| Ustawa o ochotniczych strażach pożarnych (OSP) | Dz.U. 2025 poz. 244 t.j. (akt pierwotny 2021.2490) (sync 2026-07-06 z dr-13, dodane od zera) | brak modułu | ❌ BRAK MODUŁU (WARN-29) |
+| Ustawa o Państwowej Straży Pożarnej | Dz.U. 2025 poz. 1312 t.j. (sync 2026-07-07 z dr-13 — WARN-29 zamknięty) | dr-13/modules/mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa | ✅ OK |
+| Ustawa o ochronie przeciwpożarowej | Dz.U. 2025 poz. 188 t.j. (sync 2026-07-07 z dr-13 — WARN-29 zamknięty) | dr-13/modules/mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa | ✅ OK |
+| Ustawa o ochotniczych strażach pożarnych (OSP) | Dz.U. 2025 poz. 244 t.j. (akt pierwotny 2021.2490) (sync 2026-07-07 z dr-13 — WARN-29 zamknięty) | dr-13/modules/mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa | ✅ OK |
 
 ---
 

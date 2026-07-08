@@ -1,6 +1,6 @@
 ---
 name: dr-13-sluzby-bezpieczenstwo-informacje-niejawne
-version: 3.4
+version: 3.5
 description: |
   DR-13: Służby, Bezpieczeństwo, Informacje Niejawne
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -42,7 +42,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Służby, bezpieczeństwo, informacje niejawne — pojęcia (informacja niejawna, klauzula, dostęp) zdefiniowane wprost w ustawie o ochronie informacji niejawnych i pokryte w mod-ustawa-informacje-niejawne. Żaden plik shared/definicje/ nie obejmuje tej dziedziny.
-## Moduły (9 łącznie — ✓ 9 OK, ☐ 0 STUB)
+## Moduły (10 łącznie — ✓ 10 OK, ☐ 0 STUB)
 
 ```
 SŁUŻBY MUNDUROWE:
@@ -88,6 +88,14 @@ SZCZEGÓLNE ŚRODKI ZABEZPIECZAJĄCE:
   [✓] OK    mod-ustawa-szczegolne-srodki-zabezpieczajace
               (KOZZiD — Dz.U. 2020 poz. 2001 ze zm.;
                nadzór prewencyjny, izolacja sprawców najcięższych przestępstw)
+
+OCHRONA PRZECIWPOŻAROWA:
+  [✓] OK    mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa
+              (PSP — Dz.U. 2025 poz. 1312 t.j.; ochrona przeciwpożarowa —
+               Dz.U. 2025 poz. 188 t.j.; OSP — Dz.U. 2025 poz. 244 t.j.;
+               WARN-29 zamknięty 2026-07-07 — trzy akty, jeden moduł domenowy;
+               dyscyplinarka PSP rozdz. 11, status stowarzyszeniowy OSP,
+               obowiązki właściciela obiektu w zakresie ppoż.)
 ```
 
 ---

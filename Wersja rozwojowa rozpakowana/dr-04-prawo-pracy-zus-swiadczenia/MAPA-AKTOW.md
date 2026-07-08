@@ -4,11 +4,11 @@
 
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
-| Kodeks pracy (KP) | Dz.U. 2025 poz. 277 ze zm. (zm.: 2026.25, 2025.807, 2025.1423) | mod-KP-prawo-pracy | ✅ OK — ⏳ od 08.07.2026: art. 281–283 KP, podwyższenie grzywien do 90 000 zł (Dz.U. 2026 poz. 473, zob. mod-ustawa-PIP-inspekcja-pracy sekcja 5) |
+| Kodeks pracy (KP) | Dz.U. 2025 poz. 277 ze zm. (zm.: 2026.25, 2025.807, 2025.1423) | mod-KP-prawo-pracy | ✅ OK — ✅ od 08.07.2026: art. 281–283 KP, podwyższenie grzywien do 90 000 zł (Dz.U. 2026 poz. 473, obowiązująca — zob. mod-ustawa-PIP-inspekcja-pracy sekcja 5) |
 | KPA — postępowanie administracyjne | Dz.U. 2025 poz. 1691 ze zm. | mod-KPA-postepowanie-administracyjne | ✅ OK |
 | Ustawa o ubezpieczeniu społecznym rolników (KRUS) | ⚠️ Dz.U. 2025 poz. 1770 t.j. (POPRAWKA 2026-07-02e — BYŁO błędnie 2024.90, nieaktualne od dawna) | mod-KRUS-rolnicze-ubezpieczenia | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
 | Ustawa o systemie ubezpieczeń społecznych (SUS/ZUS) | ⚠️ Dz.U. 2026 poz. 199 t.j. (POPRAWKA 2026-07-02e — BYŁO błędnie oznaczone 2025.1169 jako aktualne + 2026.199 jako "zwykła zmiana"; 2026.199 to w rzeczywistości NOWY t.j.) + zm. 2026.507 (zakres do sprawdzenia) | mod-SUS-ZUS-ubezpieczenia-spoleczne | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
-| Ustawa o PIP | Dz.U. 2024 poz. 1712 t.j. + zm. Dz.U. 2025 poz. 321/368/620/769, Dz.U. 2026 poz. 160 | mod-ustawa-PIP-inspekcja-pracy | ✅ OK — ⏳ nowelizacja Dz.U. 2026 poz. 473 (wchodzi 08.07.2026, jeszcze nieobowiązująca) opisana w module sekcja 5 |
+| Ustawa o PIP | Dz.U. 2024 poz. 1712 t.j. + zm. Dz.U. 2025 poz. 321/368/620/769, Dz.U. 2026 poz. 160 + Dz.U. 2026 poz. 473 | mod-ustawa-PIP-inspekcja-pracy | ✅ OK — ✅ nowelizacja Dz.U. 2026 poz. 473 obowiązuje od 08.07.2026 (VER 2026-07-07), opisana w module sekcja 5 |
 | Ustawa o ZFSS | Dz.U. 2024 poz. 288 ze zm. — VER 2026-07-02e: nadal aktualne; zm. przez 2026.25 (reprezentacja pracowników, art.4/art.8) potwierdzona | mod-ustawa-ZFSS | ✅ OK |
 | Ustawa Aktywny Rodzic | Dz.U. 2024 poz. 858 ✅ VER 2026-07-04 (audyt-DR04 — było "weryfikuj ISAP" bez numeru): ustawa z 15.05.2024 r. o wspieraniu rodziców w aktywności zawodowej oraz w wychowaniu dziecka – "Aktywny Rodzic", w życie 1.10.2024; liczne nowelizacje (2025.619, 2025.1083, 2025.1301, 2026.203, 2026.532) — brak dotąd ogłoszonego tekstu jednolitego, cytować jako "Dz.U. 2024.858 ze zm." | mod-ustawa-aktywny-rodzic | ✅ OK (nowo zweryfikowane) |
 | Ustawa o minimalnym wynagrodzeniu | Dz.U. 2024 poz. 1285 ze zm. (MW 2026: 4806 zł) | mod-ustawa-minimalne-wynagrodzenie | ✅ OK |
