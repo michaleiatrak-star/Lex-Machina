@@ -1,34 +1,46 @@
-## v3.14 — 2026-07-11 (AUDYT SYSTEMU na żywym przypadku — sprawa XI P 27/26, świadek Maria Koroleva)
+## v3.15 — 2026-07-12b (AUDYT SYSTEMU — CRIT: MOD-DESCRIPTION przekroczony)
 
-- Naprawiono rozjazd wersji frontmatter (błędnie cofnięty do "3.12" mimo że
-  ten plik i sekcja `changelog` w SKILL.md wskazywały 3.13 jako najnowszy
-  wpis — ten sam wzorzec błędu wersja-vs-changelog, wcześniej naprawiany
-  już w innych skillach systemu).
-- **PRE-W1a.2 rozszerzony**: obowiązkowa weryfikacja `tesseract --list-langs`
-  i instalacja `tesseract-ocr-pol` PRZED pierwszym OCR w sesji. Wykryto na
-  żywym przypadku, że środowisko wykonawcze nie miało domyślnie
-  zainstalowanego polskiego pakietu językowego — bez tego kroku SD-VER
-  mógłby zostać oznaczony jako KOMPLET mimo bezużytecznego wyniku OCR.
-  Dodano też wymóg dzielenia OCR na partie przy dużej liczbie stron (>~40).
-- **TEZA-DOWODOWA-SCOPE-GATE rozszerzona** o wariant TEZA-NIEUSTALONA:
-  procedura warstwowego budowania pytań (bezpieczne/średnie/wysokiego
-  ryzyka), gdy strona wycofała wniosek o świadka, a mimo to sąd i tak go
-  wezwał bez utrwalonego w materiale uzasadnienia zakresu tezy.
-- **Nowy KROK FPW-1b (ORGAN-COMPETENCY-CHECK)** w
-  `QUESTION-ADMISSIBILITY-GATE.md` (v3.3→v3.4): zakaz budowania pytania
-  insynuującego odpowiedzialność karną na podstawie wyłącznie
-  jednostronnego, niezweryfikowanego twierdzenia strony o postępowaniu
-  przed konkretnym organem, bez sprawdzenia, czy ten organ ma w ogóle
-  kompetencję rzeczową do takiej sprawy (np. Straż Graniczna nie prowadzi
-  spraw o "składanie fałszywych zeznań"). Dodano obowiązkowy self-check
-  auto-sprzeczności ze strategią klienta.
-- Przyczyna: przygotowanie pytań dla świadka Marii Korolevy (sygn. XI P
-  27/26) ujawniło, że pytanie oparte na twierdzeniu powoda o rzekomym
-  postępowaniu Straży Granicznej o "fałszywe zeznania" opierało się na
-  organie bez kompetencji rzeczowej do takiej sprawy i stosowało wobec
-  świadka mechanizm, który klient zarzuca stronie przeciwnej.
-- Pełny opis: `AUDIT-JOURNAL.md`, wpis `AUDYT-2026-07-11` (audyt skilla
-  proceduralnego wg ZASADY 11 z `audyt-systemu-v4`).
+- **CRIT naprawiony:** pole `description` w SKILL.md przekroczyło twardy limit
+  1024 znaków (osiągnęło 1151 po dodaniu WITNESS-SCOPE-LOCK w v3.14) — zgodnie
+  z `audyt-systemu-v4/modules/MOD-DESCRIPTION.md` przekroczenie >1024 znaków
+  to CRIT (grozi bezciszym obcięciem description w UI).
+- Skrócono description do 870 znaków (strefa ✅ OK, ≤900) — skonsolidowano
+  trzy oddzielne linie HARD GATE w jedną, skrócono opis etapów pipeline'u
+  (usunięto powtórzenia typu "sądowy"/"i adaptacja"), zachowano wszystkie
+  triggery wywołania, numer wersji i kluczowe ograniczenia, zgodnie z
+  "Procedurą naprawy (CRIT)" z MOD-DESCRIPTION.md.
+- Przyczyna: przy dodawaniu WITNESS-SCOPE-LOCK w v3.14 nie zweryfikowano
+  długości description po edycji frontmatter.
+- `version: "3.14" → "3.15"`.
+
+## v3.14 — 2026-07-12 (AUDYT SYSTEMU — na wyraźne wskazanie użytkownika po błędzie sesji)
+
+- Dodano **WITNESS-SCOPE-LOCK** (nowa sekcja w ETAP W1, zaraz po
+  TEZY-DOWODY-SWIADEK-GATE). HARD GATE: zakaz dołączania do W2/W3 osoby
+  niepotwierdzonej wprost jako przesłuchiwanego świadka tylko dlatego, że
+  występuje w tych samych materiałach co świadek już ustalony (np. drugi
+  reprezentant strony przeciwnej, współsygnatariusz tego samego pisma).
+- Wymaganie: jeśli z materiałów/kontekstu rozmowy nie wynika jednoznacznie,
+  kto konkretnie ma być przesłuchiwany, a w dokumentach występuje więcej niż
+  jedna możliwa osoba — model musi zapytać wprost o zamkniętą listę
+  świadków, zanim powstanie choćby jedno pytanie. Chęć bycia "wyczerpującym"
+  nie jest wyjątkiem od tej zasady.
+- Dodano test regresyjny w `tests/REGRESSION-CASES.md` (sprawa pracownicza,
+  dwóch reprezentantów pozwanej spółki w materiałach, przesłuchiwana tylko
+  jedna z nich).
+- Przyczyna: w sesji roboczej model przygotował pytania dla dwóch osób
+  (Prezes Zarządu + Dyrektor generalna spółki pozwanej), mimo że z
+  materiałów i kontekstu rozmowy jednoznacznie wynikało, iż przesłuchiwana
+  ma być tylko jedna z nich (autorka najbardziej spornej, najświeższej
+  korespondencji). Błąd polegał na milczącym rozszerzeniu zakresu świadków
+  zamiast potwierdzenia go z użytkownikiem.
+- Zaktualizowano: frontmatter `description` (dodany HARD GATE
+  WITNESS-SCOPE-LOCK), sekcję "Zakaz" (nowy punkt z odesłaniem do gate'u),
+  `version: "3.12" → "3.14"` (3.13 zarezerwowane przez wcześniejszy audyt
+  tej samej daty roboczej — SD-VER/OCR, patrz wpis niżej).
+- **OUTPUT-COMPLETENESS**: naprawa dostarczona jako pełny, zsynchronizowany
+  skill (SKILL.md + CHANGELOG.md + tests/REGRESSION-CASES.md), zgodnie z
+  ZASADĄ 7 z `audyt-systemu-v4`.
 
 ## v3.13 — 2026-07-11 (AUDYT SYSTEMU)
 

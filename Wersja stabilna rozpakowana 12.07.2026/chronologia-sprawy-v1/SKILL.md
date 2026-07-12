@@ -1,6 +1,6 @@
 ---
 name: chronologia-sprawy-v1
-version: 1.3
+version: 1.4
 type: executive-chronologia
 status: production
 compatibility: "web_search, web_fetch, Anthropic API"
@@ -732,6 +732,13 @@ ZASADY:
 □ Czy każde zdarzenie ma klasę pewności: BEZSPORNE / PEWNE / WYDEDUKOWANE / SPORNE?
 □ Czy każde [WYDEDUKOWANE] ma jawny opis rozumowania + podstawę + przedział czasowy?
 □ Czy sprawdziłem sprzeczności (references/sprzecznosci-dat.md) → INDEKS SPRZECZNOŚCI?
+□ ⛔ [v1.3, audyt 2026-07-12] Czy PRZED zgłoszeniem jakiejkolwiek sprzeczności dat
+  wykonałem KROK 0 z sprzecznosci-dat.md (bramka A0): (a) rozróżniłem dosłowne
+  czasowniki/zdarzenia prawne w każdym źródle (np. "dowiedziałem się o" ≠
+  "otrzymałem/doręczono mi" — to różne zdarzenia, nie warianty tej samej daty),
+  (b) jeśli którakolwiek data była względna ("N miesięcy po zdarzeniu Y") — czy
+  wykonałem i pokazałem jawne obliczenie arytmetyczne przed porównaniem dat?
+  Brak tej bramki = ryzyko zgłoszenia FAŁSZYWEJ sprzeczności (błąd CRIT).
 □ Czy sprawdziłem tożsamość osób podpisujących dokumenty dowodowe (pokwitowania,
   formularze, podpisy) względem danych stron/świadków w pismach procesowych —
   rozbieżności zapisu nazwiska oznaczyłem jako SPRZECZNOŚĆ typu IDENT, nie pominąłem

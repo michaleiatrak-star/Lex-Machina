@@ -30,12 +30,29 @@ FORMAT RAPORTU bloku P:
 
 ### W3.2 — Weryfikacja orzeczeń
 
+> ⚠️ **Naprawa po NSA I FZ 104/26 (2026-07-05b):** postanowienie NSA
+> skrytykowało pełnomocnika, który powołał w zażaleniu postanowienia
+> wydane w INNYCH DATACH niż podane i niedotyczące w ogóle powoływanej
+> instytucji procesowej — sygnały "bezrefleksyjnego" AI. KROK 2 poniżej
+> rozszerzono o obowiązkową weryfikację DOKŁADNEJ DATY (nie tylko sygnatury
+> i tezy) — dotąd tylko domyślnie zakładana, teraz jawna.
+
 Dla każdego ⚠️On z listy W2.3:
 
 ```
-  KROK 1: web_search → "[opis orzeczenia] sygnatura site:orzeczenia.ms.gov.pl"
+  KROK 1: kanał strukturalny NAJPIERW (PRAWO-HARDGATE POZIOM A/B):
+           web_fetch → saos.org.pl/api/search/judgments?... lub MCP verify_signature,
+           fallback: web_search → "[opis orzeczenia] sygnatura site:orzeczenia.ms.gov.pl"
            lub: web_search → "[opis orzeczenia] sygnatura site:sn.pl"
-  KROK 2: web_fetch → URL z wyników → potwierdź sygnaturę i tezę
+           Klasyfikuj wynik wg kontraktu FOUND/NOT_FOUND/AMBIGUOUS/OUT_OF_SCOPE
+           (shared/SYGNATURY.md) — patrz również V-SYG w orzeczenia-sadowe-v2.
+  KROK 2: web_fetch → URL z wyników → potwierdź TRZY elementy niezależnie:
+           (a) sygnaturę, (b) DATĘ WYDANIA orzeczenia — dokładną, dzień-miesiąc-rok,
+           porównaną znak-po-znak z datą podaną w projekcie pisma (nie samym rokiem
+           z sygnatury), (c) tezę/sentencję.
+           ⛔ Rozbieżność na (b) — nawet przy zgodnej sygnaturze — traktuj jak
+           NOT_FOUND dla tej pary sygnatura+data (K-SYG-2, SYGNATURY.md) i USUŃ
+           datę z pisma albo skoryguj na rzeczywistą, ze wskazaniem źródła.
   KROK 3: Odczytaj tezę ze źródła — nie parafrazuj z pamięci
 
   KROK 3a — ZAKRES-STOSOWANIA (obowiązkowy):
@@ -44,21 +61,37 @@ Dla każdego ⚠️On z listy W2.3:
     Pytania kontrolne:
       □ Czy orzeczenie dotyczy tego samego typu podmiotu?
       □ Czy orzeczenie dotyczy tego samego przepisu w tym samym kontekście?
+      □ Czy orzeczenie dotyczy w ogóle TEJ SAMEJ INSTYTUCJI PROCESOWEJ, którą
+        pismo powołuje na poparcie (np. "wstrzymanie wykonania" vs "przywrócenie
+        terminu" — różne instytucje mimo tej samej gałęzi prawa) — to jest
+        odrębne pytanie od "ten sam przepis": błąd I FZ 104/26 polegał na
+        powołaniu orzeczeń z INNEJ instytucji niż ta, o którą toczył się spór.
       □ Czy orzeczenie nie ma ograniczonego zakresu (np. wyłącznie prywatyzacja,
         wyłącznie art. 47 KP, wyłącznie określony typ umowy)?
       □ Czy doktryna orzeczenia jest utrwalona czy odosobniona?
 
-    Klasyfikacja:
+    Klasyfikacja (odpowiednik gradientu shared/WERYFIKACJA-SLAD.md GRAD-3b —
+    patrz tam mapowanie statusów dla spójności z tabelą śladu/audit-bundle):
       ✅ ZAKRES-OK:      stan faktyczny analogiczny → dopuszcz
       ⚠️ WARN-ZAKRES:   orzeczenie z ograniczonym zakresem stosowania →
                         wskaż ograniczenie w piśmie, szukaj orzeczenia
                         o szerszym zakresie jako wsparcie lub zamiennik
-      ⛔ ZAKAZ-ZAKRES:  stan faktyczny orzeczenia NIE obejmuje pisma →
+      ⛔ ZAKAZ-ZAKRES:  stan faktyczny orzeczenia NIE obejmuje pisma, LUB
+                        orzeczenie dotyczy innej instytucji procesowej →
                         orzeczenia NIE wolno użyć; wstaw ⬛ [UZUPEŁNIJ]
 
   KROK 4: Sprawdź datę — czy linia orzecznicza aktualna po ewentualnych zmianach prawa?
   KROK 5: Zapisz: "wyrok [sąd] z [data], sygn. [nr], teza: [dosłownie ze źródła]"
            URL źródłowy obowiązkowy
+
+  KROK 6 — "ugruntowana linia orzecznicza" (jeśli pismo używa takiego zwrotu):
+    Sformułowania "zgodnie z ugruntowaną/utrwaloną linią orzeczniczą",
+    "jednolicie przyjmuje się" to twierdzenie o STANIE CAŁEJ LINII, nie
+    o pojedynczym wyroku. Uruchom Zasadę 10 (BILANS) z `orzeczenia-sadowe-v2`
+    (Faza 1-D) PRZED W3.6a — sprawdź linię przeciwną, nie tylko przykłady
+    zgodne. 🔴 BILANS NIEKORZYSTNY → usuń zwrot "ugruntowana"/"utrwalona",
+    zastąp opisem rzeczywistego rozkładu (np. "przeważająca, choć nie
+    jednolita, linia orzecznicza").
 
 FORMAT RAPORTU bloku O:
   ✅ O1: wyrok SN z [data], sygn. [nr] — URL: [...] — teza: [...]

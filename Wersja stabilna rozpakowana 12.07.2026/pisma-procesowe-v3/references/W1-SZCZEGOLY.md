@@ -10,13 +10,13 @@
 
 ### W1.3 — Mapa: cel → przesłanka → dowód → łańcuch
 
-> TRYB AUTO-WYPEŁNIENIA: jeśli przed W1 wykonano KROK 4a.5 (analizator-dowodow-v3
+> TRYB AUTO-WYPEŁNIENIA: jeśli przed W1 wykonano KROK 3B.3 (analizator-dowodow-v3
 > → MOD-SELEKCJA-DOWODOW), ta mapa jest WSTĘPNIE WYPEŁNIONA automatycznie —
 > zatwierdź lub zmień konkretne pola (np. inny DOC-ID). Możesz też oznaczyć
 > przesłankę jako "pomijam świadomie" (decyzja strategiczna). Puste pole
 > "Dowód" = LUKA — patrz W1.5. Przepisy jako ⚠️ do weryfikacji w W3.
 >
-> TRYB RĘCZNY: jeśli KROK 4a.5 nie był wykonany (brak analizatora) — wypełnij
+> TRYB RĘCZNY: jeśli KROK 3B.3 nie był wykonany (brak analizatora) — wypełnij
 > mapę ręcznie jak dotychczas.
 >
 > ⛔ ŁAŃCUCHY PIERWSZE (W1.2c-PRE obowiązkowe gdy ≥2 dokumenty):

@@ -189,9 +189,75 @@ KROK 6: Zaproponuj rekomendację — najczęściej: zażądać dowodu przelewu/p
 ```
 
 
+## KATEGORIA A0 — FAŁSZYWE SPRZECZNOŚCI (błąd analityczny modelu, NIE sprzeczność źródeł)
+[NOWE v1.3, audyt 2026-07-12 — patrz AUDIT-JOURNAL.md AUDYT-2026-07-12]
+
+> Ta kategoria kataloguje sytuacje, w których DWA (lub więcej) stwierdzeń wyglądają
+> na sprzeczne, ale po ścisłej analizie okazują się w pełni spójne. Rozpoznanie
+> tych wzorców jest OBOWIĄZKOWE i musi nastąpić PRZED zakwalifikowaniem czegokolwiek
+> do kategorii A/B/C. Błędne oznaczenie fałszywej sprzeczności jako prawdziwej jest
+> traktowane jak błąd CRIT (wprowadza w błąd co do wiarygodności strony/świadka).
+
+#### A0-1 — Pomylenie czasownika "dowiedzieć się o [X]" z "otrzymać/uzyskać [X]"
+```
+WZORZEC BŁĘDU: strona zeznaje (a) "o istnieniu dokumentu dowiedziałem się [data1]"
+               oraz osobno (b) "dokument/kopię otrzymałem [data2]" — model odczytuje
+               to jako dwie sprzeczne wersje "kiedy się dowiedziałem", podczas gdy
+               to są DWA RÓŻNE ZDARZENIA PRAWNE:
+               (a) = powzięcie wiedzy o samym istnieniu/treści (np. przy podpisywaniu,
+                   przy ustnym poinformowaniu, przy odczytaniu na głos),
+               (b) = fizyczne wejście w posiadanie dokumentu/kopii (doręczenie).
+DLACZEGO TO NIE JEST SPRZECZNOŚĆ: obie daty mogą być prawdziwe jednocześnie —
+               osoba może wiedzieć o istnieniu pisma od dnia X (bo je podpisała,
+               bo jej je odczytano, bo brała udział w zdarzeniu), a fizyczną kopię
+               do wglądu/na własność otrzymać dopiero w dniu Y > X (np. po formalnym
+               wniosku i biegu terminu na jego rozpatrzenie).
+PROCEDURA: zanim zgłosisz sprzeczność między dwoma datami dot. "wiedzy o dokumencie",
+           wypisz OSOBNO dla każdej wzmianki: (1) dokładny czasownik użyty w źródle
+           ("dowiedziałem się", "wiedziałem", "otrzymałem", "doręczono mi", "wydano mi",
+           "podpisałem"), (2) czy dotyczy powzięcia wiedzy czy fizycznego posiadania.
+           Sprzeczność istnieje TYLKO gdy ten sam czasownik/zdarzenie ma różne daty
+           w różnych źródłach — NIE gdy różne czasowniki mają różne daty.
+```
+
+#### A0-2 — Brak wykonania arytmetyki dat przed zgłoszeniem sprzeczności
+```
+WZORZEC BŁĘDU: źródło A podaje datę względną ("X miesiące po zdarzeniu Y"),
+               źródło B podaje datę bezwzględną (np. "styczeń 2025") — model
+               zestawia je "na oko" bez policzenia, czy data względna faktycznie
+               odpowiada dacie bezwzględnej, i błędnie zgłasza sprzeczność.
+PROCEDURA OBOWIĄZKOWA: dla KAŻDEJ pary dat, z których co najmniej jedna jest
+               wyrażona względnie (np. "N miesięcy/tygodni/dni po/od [zdarzenie]"),
+               wykonaj jawne obliczenie: [data zdarzenia bazowego] + [N jednostek]
+               = [data wynikowa]. Dopiero porównaj wynik z drugą datą. Jeśli wynik
+               pokrywa się (nawet w przybliżeniu miesiąca) z drugą datą — to NIE
+               jest sprzeczność, tylko potwierdzenie tej samej chronologii opisanej
+               na dwa sposoby.
+PRZYKŁAD (błąd rzeczywisty z sesji 2026-07-12): stosunek pracy zakończony w
+               październiku 2024; strona twierdzi "otrzymałem dokument 3 miesiące
+               po rozwiązaniu umowy" ORAZ osobno "otrzymałem w styczniu 2025".
+               Arytmetyka: październik + 3 miesiące = styczeń. Obie wypowiedzi są
+               ZGODNE. Błędem byłoby zestawienie ich jako sprzecznych bez wykonania
+               tego działania.
+```
+
+---
+
 ## ALGORYTM OCENY SPRZECZNOŚCI
 
 ```
+KROK 0 (OBOWIĄZKOWY, PRZED KROKIEM 1 — bramka przeciw fałszywym sprzecznościom):
+  0a. Dla każdej wzmianki o dacie/terminie wypisz DOSŁOWNY czasownik/zdarzenie
+      użyty w źródle (nie parafrazuj). Sprawdź wg A0-1, czy różne wzmianki opisują
+      TO SAMO zdarzenie prawne, czy różne zdarzenia (wiedza vs posiadanie,
+      podpisanie vs doręczenie, nadanie vs otrzymanie).
+  0b. Jeśli którakolwiek data jest wyrażona względnie ("N dni/tygodni/miesięcy
+      od/po ...") — wykonaj jawne obliczenie arytmetyczne (A0-2) i zapisz wynik
+      przed porównaniem z drugą datą.
+  0c. Dopiero po 0a i 0b: czy nadal istnieje rozbieżność między datami TEGO SAMEGO
+      zdarzenia? Jeśli NIE → nie zgłaszaj sprzeczności (odnotuj jako spójne,
+      opcjonalnie wyjaśnij czytelnikowi dlaczego pozornie wyglądały na sprzeczne).
+      Jeśli TAK → przejdź do KROK 1.
 KROK 1: Zidentyfikuj parę dokumentów z różnymi datami dla tego samego zdarzenia
 KROK 2: Oblicz różnicę w dniach
 KROK 3: Sprawdź kategorię (A/B/C) z katalogu powyżej

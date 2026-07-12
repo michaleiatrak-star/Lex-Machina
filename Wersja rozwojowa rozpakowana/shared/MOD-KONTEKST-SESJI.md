@@ -2,7 +2,7 @@
 
 > Status: shared canonical. Wywoływany przez prawny-router-v3 w dwóch
 > trybach:
-> [EXPORT] na końcu sesji zawierającej KROK 4a (analizator-dowodow-v3) —
+> [EXPORT] na końcu sesji zawierającej KROK 3B (analizator-dowodow-v3) —
 >   automatycznie lub na żądanie użytkownika ("zapisz kontekst", "podsumuj
 >   ustalenia do następnej sesji", "co mam przenieść dalej").
 > [IMPORT] na początku sesji, gdy użytkownik wkleja lub wgrywa plik
@@ -26,7 +26,7 @@
 
 ```
 AUTO-TRIGGER (generuj bez pytania):
-  - analizator-dowodow-v3 zakończył KROK 4a (4a.1-4a.6) — pełna analiza
+  - analizator-dowodow-v3 zakończył KROK 3B (3B.1-3B.4) — pełna analiza
     z aspektami, metodami, mapą przepisów, selekcją dowodów,
   - pisma-procesowe-v3 zakończyło W3 (pismo zweryfikowane i gotowe).
 
@@ -162,9 +162,9 @@ TRYB IMPORT.*
 
 ```
 KROK E1 — Zbierz dane ze stanu bieżącej sesji:
-  - aspekty z MOD-PRIORYTETY-ASPEKTOW (lub z rozmowy jeśli brak KROK 4a),
-  - mapa_przepisow z MOD-MAPA-PRZEPISOW (KROK 4a.3),
-  - selekcja_dowodow z MOD-SELEKCJA-DOWODOW (KROK 4a.5),
+  - aspekty z MOD-PRIORYTETY-ASPEKTOW (lub z rozmowy jeśli brak KROK 3B),
+  - mapa_przepisow z MOD-MAPA-PRZEPISOW (KROK 3B.2),
+  - selekcja_dowodow z MOD-SELEKCJA-DOWODOW (KROK 3B.3),
   - wyniki metod E2a-j (z aktywnej sesji — streszczaj, nie cytuj przepisów z
     pamięci; metody nieweryfikowane prawnie → tylko obserwacja analityczna),
   - chronologia-sprawy-v1 jeśli wywołana — max 10 kluczowych zdarzeń,
@@ -236,20 +236,20 @@ KROK I3 — Potwierdź wczytanie użytkownikowi:
   Od czego zaczynamy?"
 
 KROK I4 — Integracja z modułami:
-  MOD-PRIORYTETY-ASPEKTOW — aspekty z I2 traktowane jak wynik KROK 4a,
+  MOD-PRIORYTETY-ASPEKTOW — aspekty z I2 traktowane jak wynik KROK 3B,
     nie trzeba ponownie klasyfikować chyba że użytkownik dostarczył nowe
     dokumenty.
   MOD-MAPA-PRZEPISOW — mapa_przepisow z I2 jako punkt startowy; użytkownik
-    może dopytać o inne przepisy jak w normalnym KROK 4a.3.
+    może dopytać o inne przepisy jak w normalnym KROK 3B.2.
   MOD-SELEKCJA-DOWODOW — korpus_dowodow_wstepny i ostrzezenia_krzyzowe z I2
     jako stan wyjściowy; jeśli użytkownik dostarczył NOWE dokumenty →
-    uruchom KROK 4a.5 dla nowych + utrzymaj decyzje z poprzedniej sesji.
+    uruchom KROK 3B.3 dla nowych + utrzymaj decyzje z poprzedniej sesji.
   przesluchanie-swiadkow-v2 — wyniki_metod i chronologia z I2 traktowane
     jak wynik KROK 0 (§ KROK 0 w SKILL.md przesluchania) — nie ma potrzeby
     ponownego intake dotyczącego sprawy.
 
 KROK I5 — Flaga IMPORT_AKTYWNY = true dla tej sesji.
-  Gdy IMPORT_AKTYWNY: przy każdym KROK 4a → najpierw sprawdź czy nowe
+  Gdy IMPORT_AKTYWNY: przy każdym KROK 3B → najpierw sprawdź czy nowe
   dokumenty/informacje wymagają aktualizacji kontekstu, czy potwierdzają
   stan z importu.
 ```
@@ -259,7 +259,7 @@ KROK I5 — Flaga IMPORT_AKTYWNY = true dla tej sesji.
 ## 5. Integracja z przesłuchaniem świadków
 
 ```
-Gdy przesluchanie-swiadkow-v2 KROK 0 wykryje IMPORT_AKTYWNY lub wyniki KROK 4a
+Gdy przesluchanie-swiadkow-v2 KROK 0 wykryje IMPORT_AKTYWNY lub wyniki KROK 3B
 z bieżącej sesji — następujące sekcje kontekstu zasilają W1 intake:
 
   §2 ROSZCZENIA GŁÓWNE → tezy do wykazania przez świadka (WARSTWA A,

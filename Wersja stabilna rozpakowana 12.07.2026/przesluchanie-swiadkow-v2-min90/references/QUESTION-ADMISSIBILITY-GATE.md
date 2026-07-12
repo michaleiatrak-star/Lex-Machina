@@ -1,4 +1,4 @@
-# QUESTION-ADMISSIBILITY-GATE — v3.4
+# QUESTION-ADMISSIBILITY-GATE — v3.3
 
 > ⛔ HARDGATE — przy każdej powołanej podstawie prawnej:
 > `view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
@@ -15,35 +15,6 @@ KROK FPW-1 — FAKT:
   Zidentyfikuj fakt procesowy, który pytanie ma potwierdzić lub obalić.
   Źródło: dokument (dok_id + strona) / zeznanie (protokół + data) / domniemanie.
   Jeśli fakt nie wynika z żadnego źródła → pytanie niedopuszczalne (spekulacja).
-
-KROK FPW-1b — ORGAN-COMPETENCY-CHECK (dodane w audycie na żywym przypadku,
-  2026-07-11) — aktywna WYŁĄCZNIE gdy FPW-1 opiera fakt na twierdzeniu strony
-  o istnieniu/przebiegu postępowania przed konkretnym, nazwanym organem
-  (np. "toczy się sprawa przed Strażą Graniczną/Policją/prokuraturą o czyn X"):
-  ⛔ Zanim takie twierdzenie trafi do pytania jako przesłanka faktyczna,
-     zweryfikuj web_search czy wskazany organ ma w ogóle kompetencję rzeczową
-     do prowadzenia postępowania o wskazany typ czynu (np. Straż Graniczna nie
-     prowadzi spraw o "składanie fałszywych zeznań" — jej właściwość rzeczowa
-     jest enumeratywnie ograniczona, m.in. do wiarygodności dokumentów
-     granicznych/pobytowych i wybranych przestępstw skarbowych). Niezgodność
-     = sygnał, że twierdzenie strony jest błędnie streszczone/skonfabulowane
-     i NIE nadaje się na FPW-1 bez dalszego wyjaśnienia źródła.
-  ⛔ ZAKAZ budowania pytania insynuującego świadkowi/stronie odpowiedzialność
-     karną WYŁĄCZNIE na podstawie jednostronnego, niezweryfikowanego
-     twierdzenia strony przeciwnej (nawet gdy to twierdzenie pochodzi z
-     protokołu rozprawy) — nieprawomocne, jednostronne zawiadomienie nie jest
-     dowodem nieuczciwości i nie uzasadnia samo w sobie pytania o "toczące się
-     postępowanie" jako ustalony fakt.
-  ⚠️ AUTO-SPRZECZNOŚĆ ZE STRATEGIĄ (self-check obowiązkowy): jeżeli teza
-     główna klienta zarzuca stronie przeciwnej właśnie bezpodstawne
-     oskarżanie o przestępstwa bez dowodów, a przygotowywane pytanie stosuje
-     dokładnie ten sam mechanizm wobec świadka/strony przeciwnej — oznacz to
-     jawnie jako ryzyko autodestrukcyjne (osłabia wiarygodność własnej tezy)
-     i NIE włączaj takiego pytania do finalnego zestawu bez wyraźnego,
-     świadomego potwierdzenia użytkownika.
-  Efekt: fakt, który nie przejdzie FPW-1b, nie może zostać oznaczony jako
-  BEZPIECZNE w FPW-3 — trafia automatycznie do RYZYKO-KONTROLA lub jest
-  usuwany z zestawu.
 
 KROK FPW-2 — PODSTAWA PRAWNA (weryfikacja ISAP):
   ⛔ HARDGATE → view /mnt/skills/user/shared/PRAWO-HARDGATE.md

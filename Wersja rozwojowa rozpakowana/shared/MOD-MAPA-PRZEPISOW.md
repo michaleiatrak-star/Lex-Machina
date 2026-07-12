@@ -1,6 +1,6 @@
 # MOD-MAPA-PRZEPISOW — mapowanie wyników analizy na przepisy prawne
 
-> Status: shared canonical. Wywoływany w KROK 4a (`analizator-dowodow-v3`),
+> Status: shared canonical. Wywoływany w KROK 3B (`analizator-dowodow-v3`),
 > PO klasyfikacji aspektów (`MOD-PRIORYTETY-ASPEKTOW.md`) i PO ewentualnym
 > wykonaniu metod badawczych (`MOD-METODY-BADAWCZE.md`), PRZED przekazaniem
 > wyniku do `MOD-WARIANTY-POZWU.md` (W1.2b).
@@ -25,7 +25,7 @@ wyniku metody badawczej (`MOD-METODY-BADAWCZE.md`), moduł:
 4. Pozwala użytkownikowi dopytać o INNY przepis — system wykonuje §3 dla
    wskazanego przepisu identycznie jak dla kandydatów automatycznych (§5).
 
-Wynik jest sekcją TEKSTOWĄ w KROK 4a (nie osobny widget) — dołączany do
+Wynik jest sekcją TEKSTOWĄ w KROK 3B (nie osobny widget) — dołączany do
 prezentacji checklisty, PRZED przejściem do W1.2b. Wpływa na to, JAK
 budowane są warianty pozwu: aspekt z tezą SPRZECZNĄ względem kandydującego
 przepisu sygnalizuje, że wariant oparty na tym przepisie będzie słaby —
@@ -124,7 +124,7 @@ NIEROZSTRZYGNIĘTA — wynik analizy NIE PRZESĄDZA — przepis jest relewantny,
 
 ---
 
-## 4. Format wyniku — sekcja w KROK 4a
+## 4. Format wyniku — sekcja w KROK 3B
 
 ```
 PODSTAWY PRAWNE — [opis aspektu]:
@@ -163,7 +163,7 @@ WYKONANIE:
   2. Wykonaj §3 (głębokość + zgodność) DLA TEGO przepisu, względem tego
      samego wyniku analizy/aspektu, którego dotyczyło pytanie (jeśli
      kontekst niejasny — zapytaj którego aspektu dotyczy, jedno pytanie).
-  3. Zwróć wynik w formacie §4, jako kontynuację — NIE jako nowy KROK 4a od
+  3. Zwróć wynik w formacie §4, jako kontynuację — NIE jako nowy KROK 3B od
      zera.
 
 GRANICA: jeśli użytkownik pyta o przepis z INNEJ dziedziny niż dziedzina
@@ -237,7 +237,7 @@ czy między wersjami zmieniła się ocena zgodności tezy dla danego przepisu
 
 ---
 
-## 8. Self-check przed KROK 4a (rozszerzenie)
+## 8. Self-check przed KROK 3B (rozszerzenie)
 
 ```
 □ Czy dla każdego aspektu_glowne wskazano 1-3 kandydatów (§2), nie więcej?

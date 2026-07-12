@@ -1,6 +1,6 @@
 ---
 name: przesluchanie-swiadkow-v2-min90
-version: "3.14"
+version: "3.16"
 type: legal-skill
 domain: litigation-witness-examination
 status: production
@@ -17,13 +17,12 @@ description: |
   Stosuj gdy użytkownik chce: przygotować pytania do świadka lub biegłego,
   przeprowadzić impeachment, ocenić wiarygodność zeznań, wykryć sprzeczności
   z wcześniejszymi zeznaniami, dobrać model przesłuchania do typu sędziego.
-  Pipeline: PRE-W1a SD-VER (skan i weryfikacja kompletności dowodów, HARD GATE)
-  → PRE-W1 (profil+mapa wiedzy+preparation chart) → KROK 0 → W1 intake
-  → W2 tezy/model → CHECKPOINT-W2 (pauza, uwagi) → W3 pytania (FPW pipeline,
-  taksonomia ryzyka 3D, WHY-GATE, SAFE-Q, SYGNAŁY STOP) → W4 próba generalna
-  → W5 binder sądowy → W6 słuchanie direct i adaptacja.
-  ⛔ HARD GATE: zakaz cytowania przepisów KPC/KPK/KPW i sygnatur z pamięci.
-  ⛔ HARD GATE: zakaz wejścia do WITNESS-INTELLIGENCE bez SD-VER = KOMPLET.
+  Pipeline: PRE-W1a SD-VER (skan dowodów, HARD GATE) → PRE-W1 (profil) →
+  KROK 0 → W1 intake → W2 tezy/model → CHECKPOINT-W2 → W3 pytania (FPW,
+  ryzyko 3D, WHY-GATE, SAFE-Q) → W4 próba generalna → W5 binder → W6 direct.
+  ⛔ HARD GATE: zakaz cytowania przepisów/sygnatur z pamięci; zakaz wejścia
+  do WITNESS-INTELLIGENCE bez SD-VER=KOMPLET; WITNESS-SCOPE-LOCK — zakaz
+  dołączania do W2/W3 osób spoza potwierdzonej listy świadków.
   NIE stosuj do analizy dokumentów bez świadka — użyj analizator-dowodow-v3.
 dependencies:
   required:
@@ -70,35 +69,25 @@ pipeline:
     - W5-BINDER
     - W6-LIVE-DIRECT
 changelog:
-  - "3.14 (2026-07-11, AUDYT SYSTEMU na żywym przypadku — sprawa XI P 27/26,
-    świadek Maria Koroleva): (1) naprawiono rozjazd wersji frontmatter
-    (błędnie cofnięty do '3.12' mimo że CHANGELOG.md i sekcja changelog
-    poniżej wskazywały 3.13 jako najnowszy wpis — ten sam wzorzec błędu co
-    poprzednio naprawiany w innych skillach systemu); (2) PRE-W1a.2
-    rozszerzony o obowiązkową weryfikację `tesseract --list-langs` i
-    instalację `tesseract-ocr-pol` PRZED pierwszym OCR w sesji — wykryto,
-    że środowisko wykonawcze nie miało domyślnie zainstalowanego polskiego
-    pakietu językowego, co przy braku tego kroku dawałoby fałszywy status
-    SD-VER=KOMPLET; dodano też wymóg dzielenia OCR na partie przy dużej
-    liczbie stron (>~40), po przerwaniu wywołania z powodu limitu czasu;
-    (3) TEZA-DOWODOWA-SCOPE-GATE rozszerzona o wariant TEZA-NIEUSTALONA —
-    procedura warstwowego budowania pytań (bezpieczne/średnie/wysokiego
-    ryzyka), gdy strona wycofała wniosek o świadka, a mimo to sąd i tak go
-    wezwał, bez utrwalonego w materiale uzasadnienia zakresu; (4) dodano
-    KROK FPW-1b (ORGAN-COMPETENCY-CHECK) w QUESTION-ADMISSIBILITY-GATE.md
-    (v3.3→v3.4): zakaz budowania pytania insynuującego odpowiedzialność
-    karną na podstawie wyłącznie jednostronnego, niezweryfikowanego
-    twierdzenia strony o postępowaniu przed konkretnym organem, bez
-    sprawdzenia, czy ten organ ma w ogóle kompetencję rzeczową do takiej
-    sprawy; dodano też obowiązkowy self-check auto-sprzeczności ze
-    strategią, gdy pytanie stosuje wobec świadka dokładnie ten mechanizm
-    (bezpodstawne oskarżenie o przestępstwo bez dowodu), który klient
-    zarzuca stronie przeciwnej. Odkryte podczas przygotowania pytań do
-    świadka Maria Koroleva (sygn. XI P 27/26) — pytanie o rzekome
-    postępowanie Straży Granicznej o 'fałszywe zeznania' było oparte
-    wyłącznie na twierdzeniu powoda i opierało się na organie bez
-    kompetencji rzeczowej do takiej sprawy. Pełny opis w AUDIT-JOURNAL.md
-    (wpis AUDYT-2026-07-11, sekcja procedural skill audit wg ZASADY 11)."
+  - "3.16 (AUDYT SYSTEMU — na wyraźne wskazanie użytkownika, 3 luki naraz):
+    (1) USUNIĘTO wyjątek w CHECKPOINT-W2 pozwalający pominąć pauzę, gdy
+    użytkownik wprost zażądał pytań od razu — teraz BEZ WYJĄTKÓW, zawsze
+    osobna wiadomość z akceptacją przed W3. (2) CHECKPOINT-W2 rozszerzony
+    o obowiązkowe pole CHRONOLOGIA ZDARZEŃ — akceptacja użytkownika musi
+    obejmować tezy+model ORAZ chronologię łącznie, nie tylko tezy. (3)
+    Dodano SELF-CHECK-PRZED-W3 — obowiązkowe ponowne wczytanie checklisty
+    (W2+chronologia potwierdzone / lista świadków zamknięta / teza
+    dowodowa ustalona / rejestr kroków aktualny) na starcie KAŻDEJ
+    wiadomości zawierającej W3, z krótkim raportem co potwierdzono i co
+    (jeśli cokolwiek) pominięto — na tej samej zasadzie jak FAZA 2
+    MOD-STEP-TRACKER w pisma-procesowe-v3. Przyczyna: użytkownik wskazał,
+    że (a) pytania nie mogą powstać bez odrębnej akceptacji chronologii,
+    nie tylko dowodów/tez, (b) ustalenie kto ma być przesłuchany musi
+    wynikać z dokumentów/protokołów lub, gdy się nie da, z wprost
+    zadanego pytania — nie z domysłu, (c) pominięcie etapu musi być
+    zawsze jawnie zaraportowane, tak jak w pisma-procesowe-v3, (d)
+    checklista musi być wczytywana na nowo w kolejnej wiadomości, nie
+    tylko raz na początku sesji."
   - "3.13 (AUDYT SYSTEMU — na wyraźne wskazanie użytkownika po błędach sesji:
     przedwczesne tezy o rzekomo brakującej 'notatce' bez wykonania OCR na
     130 stronach zeskanowanych akt; pomylenie odręcznego dopisku na
@@ -318,7 +307,7 @@ changelog:
     reguła KNOW-WHEN-TO-STOP z sygnałami STOP w BLOKU C."
   - "3.2 (ZIP niezaszyty): FPW pipeline — KROK 0 kontekstu poprzedniej sesji;
     FPW-RISK auto-kwalifikator do BLOKU E; zakaz VER bez web_search = CRIT"
-  - "3.1: KROK 0 — wczytanie kontekstu sprawy z KROK 4a analizator-dowodow-v3
+  - "3.1: KROK 0 — wczytanie kontekstu sprawy z KROK 3B analizator-dowodow-v3
     lub z pliku kontekstu sesji (MOD-KONTEKST-SESJI §4 TRYB IMPORT); mapowanie
     aspektów głównych/pobocznych → tezy; zatwierdzone dowody → blok B pytań;
     ostrzeżenia krzyżowe (HARDGATE-SD-01/02) → blok E (tematy zakazane z
@@ -391,24 +380,11 @@ PRE-W1a.2 — WYMÓG OCR JAWNY (bez tego kroku SD-READ jest niekompletny):
     a) sprawdź ekstrakcję tekstu (pdftotext / pdffonts) — czy >0 znaków na stronę?
     b) jeśli TAK dla wszystkich stron → plik tekstowy, kontynuuj normalnie
     c) jeśli NIE (0 znaków na ≥1 stronie) → plik lub strona jest SKANEM →
-       0) ⛔ PRZED pierwszym wywołaniem tesseract w tej sesji — sprawdź:
-          `tesseract --list-langs` → czy `pol` jest na liście?
-          NIE → `apt-get install -y tesseract-ocr-pol` (lub równoważne dla
-          środowiska) PRZED jakimkolwiek wywołaniem OCR. Uruchomienie
-          `tesseract -l pol` bez zainstalowanego pakietu językowego kończy
-          się błędem/wynikiem bezużytecznym — SD-VER=KOMPLET oznaczony w
-          takiej sytuacji byłby FAŁSZYWY. Ten pod-krok jest częścią
-          definicji "wykonano OCR", nie czynnością opcjonalną.
        OBOWIĄZKOWO: pdftoppm -jpeg -r 120 -f [n] -l [n] plik.pdf /tmp/strona
                     → tesseract -l pol /tmp/strona.jpg stdout
-                    (lub view rastra, jeśli tesseract niedostępny nawet po
-                    próbie instalacji — odnotuj to jawnie jako ograniczenie,
-                    nie jako "OCR wykonano")
+                    (lub view rastra, jeśli tesseract niedostępny)
     d) ⛔ ZAKAZ pominięcia strony/pliku z powodu "prawdopodobnie mało istotny"
-       lub "duży plik" — rozmiar/liczba stron NIE zwalnia z odczytu. Przy
-       dużej liczbie stron (>~40) dziel wywołania OCR na partie (batch), aby
-       uniknąć przerwania z powodu limitu czasu pojedynczego wywołania —
-       przerwanie w trakcie NIE zwalnia z dokończenia pozostałych stron.
+       lub "duży plik" — rozmiar/liczba stron NIE zwalnia z odczytu.
     e) Krok ten jest BEZWARUNKOWY: wykonuje się automatycznie, bez czekania
        na to, aż użytkownik zauważy brak i poprosi o korektę.
 
@@ -625,14 +601,14 @@ są już dostępne w materiałach — wydobądź systematycznie z transkryptu:
 
 ## KROK 0 — WCZYTAJ KONTEKST SPRAWY (przed W1)
 
-> Cel: zasilić W1 intake danymi z analizatora (KROK 4a) lub z pliku kontekstu
+> Cel: zasilić W1 intake danymi z analizatora (KROK 3B) lub z pliku kontekstu
 > sesji (MOD-KONTEKST-SESJI TRYB IMPORT), żeby nie zaczynać od zera.
 > Jeśli żadne źródło niedostępne → przejdź bezpośrednio do ETAP W1 (KROK 0
 > jest OPCJONALNY, nie blokujący).
 
 ```
 ŹRÓDŁO 1 — BIEŻĄCA SESJA (priorytet):
-  Jeśli w tej samej sesji wykonano analizator-dowodow-v3 KROK 4a → pobierz:
+  Jeśli w tej samej sesji wykonano analizator-dowodow-v3 KROK 3B → pobierz:
     kontekst_sprawy = {
       aspekty_glowne, aspekty_poboczne,   ← MOD-PRIORYTETY-ASPEKTOW
       mapa_przepisow,                       ← MOD-MAPA-PRZEPISOW §4
@@ -909,6 +885,65 @@ rozmowie (np. przy okazji wcześniejszego dokumentu) — nie powtarzaj pytania,
 tylko przywołaj ustalenie i poproś o samo potwierdzenie ("czy to nadal
 aktualne?"). Pytaj tylko o to, czego naprawdę brakuje.
 ```
+
+---
+
+### WITNESS-SCOPE-LOCK (dodane w audycie 3.14) ⛔ OBOWIĄZKOWA
+
+> Cel: materiał dowodowy sprawy niemal zawsze wspomina więcej niż jedną osobę
+> po stronie przeciwnej (np. dwóch reprezentantów spółki, kilku sygnatariuszy
+> pism). Sam fakt, że dana osoba pojawia się w dokumentach, NIE oznacza, że
+> użytkownik chce przygotowywać pytania także do niej. Domyślne rozszerzanie
+> zakresu świadków ponad to, co użytkownik faktycznie wskazał, jest błędem
+> tego samego rodzaju co pomijanie TEZY-DOWODY-SWIADEK-GATE — to zgadywanie
+> zamiast ustalania.
+
+```
+KROK 1 — USTAL ZAMKNIĘTĄ LISTĘ ŚWIADKÓW PRZED W2/W3:
+  a) Czy użytkownik wprost nazwał świadka (imię/nazwisko, "ta osoba",
+     "świadek, który podpisał X") → TA osoba i TYLKO ta osoba wchodzi na
+     listę. Inne osoby wymienione w tych samych dokumentach (współpracownicy,
+     inni sygnatariusze, inni reprezentanci strony przeciwnej) NIE wchodzą
+     automatycznie na listę, nawet jeśli są równie dobrze udokumentowane.
+  b) Czy z kontekstu rozmowy (np. "kto będzie przesłuchiwany", ustalenia
+     wcześniejsze w tej samej sesji) wynika JEDNOZNACZNIE, kto jest
+     przesłuchiwanym świadkiem → potwierdź to jednym zdaniem zamiast pytać
+     od nowa (zgodnie z REGUŁĄ NADRZĘDNĄ wyżej).
+  c) Jeśli ani (a) ani (b) nie rozstrzyga jednoznacznie, kto konkretnie ma
+     być przesłuchiwany, a materiały wspominają więcej niż jedną możliwą
+     osobę → ZAPYTAJ WPROST, zanim powstanie choćby jedno pytanie:
+     "Widzę w materiałach kilka osób powiązanych z pozwaną stroną: [lista
+     z rolami]. Które z nich mają być przesłuchiwane jako świadkowie w tym
+     zestawie pytań?"
+
+KROK 2 — ZAKAZ ROZSZERZANIA BEZ POTWIERDZENIA:
+  ⛔ Nie generuj pytań ani tez dla żadnej osoby spoza zamkniętej listy z
+     KROKU 1 — nawet jeśli ta osoba pełni analogiczną funkcję (np. drugi
+     członek zarządu, współsygnatariusz tego samego pisma) i nawet jeśli
+     dodanie jej "dla kompletności" wydaje się pomocne.
+  ⛔ Chęć bycia wyczerpującym nie jest wyjątkiem od tej zasady — dodanie
+     niezamówionego świadka to nie dodatkowa wartość, tylko rozmycie
+     zakresu ustalonego przez użytkownika.
+  → Jeśli podczas przygotowania W2/W3 pojawi się materiał sugerujący, że
+    warto byłoby przesłuchać dodatkową osobę — zasygnalizuj to jako
+    REKOMENDACJĘ na końcu odpowiedzi ("czy rozszerzyć zestaw pytań o
+    [osoba], która też widnieje w [dokument]?"), nie jako gotowy blok pytań.
+
+KROK 3 — PRZY WIELU ŚWIADKACH JEDNOCZEŚNIE:
+  Jeśli użytkownik potwierdzi więcej niż jednego świadka — każdy świadek
+  dostaje osobny, wyraźnie nagłówkowany blok W1→W3 (osobny profil, osobne
+  tezy, osobne pytania). Nie mieszaj pytań do różnych świadków w jednej
+  wspólnej liście.
+```
+
+**Test regresyjny (patrz `tests/REGRESSION-CASES.md`):** sprawa pracownicza,
+w materiałach występuje dwóch reprezentantów pozwanej spółki (np. prezes
+zarządu i dyrektor generalna), obaj podpisani pod różnymi pismami; użytkownik
+prosi ogólnie o "pytania do świadka" bez podania nazwiska, ale z wcześniejszej
+rozmowy jasno wynika, że przesłuchiwana będzie tylko jedna konkretna osoba
+(np. autorka najbardziej spornego, świeżego pisma) → oczekiwany wynik: pytania
+WYŁĄCZNIE do tej jednej osoby; błędem jest dołączenie drugiego reprezentanta
+"na wszelki wypadek".
 
 ---
 
@@ -1240,22 +1275,72 @@ TEMATY ZAKAZANE (BLOK E):
 LUKI DOWODOWE:
   [tematy bez dowodu kontrolnego → SAFE-Q wymagane]
 
+CHRONOLOGIA ZDARZEŃ (do zatwierdzenia):
+  [lista zdarzeń/dat istotnych dla tez powyżej — jeśli chronologia jest
+  złożona lub sporna, wypisz ją tu w skrócie; jeśli nie ustalono jeszcze
+  chronologii, napisz to wprost: "⚠️ chronologia nie została jeszcze
+  ustalona/zatwierdzona — wymagana przed W3"]
+
 ══════════════════════════════════════════════════════════
-Czy tezy i model są właściwe? Czy chcesz coś zmienić lub
+Czy tezy, model I CHRONOLOGIA są właściwe? Czy chcesz coś zmienić lub
 uzupełnić zanim przejdę do generowania pytań?
 (Możesz odpowiedzieć "OK" aby kontynuować lub wskazać zmiany)
 ══════════════════════════════════════════════════════════
 ```
 
-**Reguła CHECKPOINT-W2:** System nie generuje żadnego pytania z W3 bez
-potwierdzenia użytkownika lub jawnej zgody ("OK", "kontynuuj", "generuj").
-Wyjątek: użytkownik w pierwotnym poleceniu wprost zażądał pytań
-("przygotuj od razu pytania", "wygeneruj cały zestaw") → pomiń checkpoint,
-ale poinformuj że W2 i W3 są w tej samej wiadomości.
+**Reguła CHECKPOINT-W2 (poprawiona w audycie 3.16 — USUNIĘTO WYJĄTEK):**
+System nie generuje ŻADNEGO pytania z W3 bez wyraźnego, oddzielnego
+potwierdzenia użytkownika obejmującego JEDNOCZEŚNIE (a) tezy i model
+oraz (b) chronologię zdarzeń. Potwierdzenie musi paść jako osobna
+wiadomość użytkownika PO wiadomości z W2 — nie w tej samej wiadomości,
+w której podano materiał źródłowy.
+
+⛔ BEZ WYJĄTKÓW. Poprzednia treść tej reguły przewidywała wyjątek dla
+sytuacji, gdy użytkownik w pierwotnym poleceniu wprost zażądał pytań
+("przygotuj od razu pytania") — ten wyjątek został USUNIĘTY (audyt 3.16),
+ponieważ w praktyce prowadził do pomijania weryfikacji chronologii i tez
+nawet wtedy, gdy użytkownik nie miał jeszcze szansy ich zobaczyć. Nawet
+przy wyraźnym żądaniu natychmiastowych pytań, system:
+  1. dostarcza W2 (tezy + model + chronologia) w jednej wiadomości,
+  2. kończy tę wiadomość pytaniem o akceptację,
+  3. CZEKA na odpowiedź — nie generuje W3 w tej samej turze pod żadnym pozorem.
 
 ---
 
-### TEZA-DOWODOWA-SCOPE-GATE (dodane w audycie 3.10) ⚠️ KRYTYCZNA, OBOWIĄZKOWA
+## SELF-CHECK-PRZED-W3 — OBOWIĄZKOWE PONOWNE WCZYTANIE (dodane w audycie 3.16)
+
+> ⛔ Ta sekcja uruchamia się NA STARCIE wiadomości zawierającej W3 (pytania),
+> czyli w wiadomości NASTĘPUJĄCEJ PO akceptacji CHECKPOINT-W2 przez
+> użytkownika — niezależnie od tego, ile innych tematów pojawiło się w
+> międzyczasie w rozmowie (np. prośba o naprawę innego skilla). Zanim
+> powstanie choćby jedno pytanie W3, potwierdź w tej samej wiadomości,
+> krótko, każdy z poniższych punktów:
+
+```
+□ Czy użytkownik potwierdził W2 (tezy + model) ORAZ chronologię w
+  OSOBNEJ, wcześniejszej wiadomości? Jeśli NIE — STOP, wróć do CHECKPOINT-W2.
+□ Czy lista świadków jest zamknięta i potwierdzona (WITNESS-SCOPE-LOCK
+  KROK 1)? Jeśli świadek wynika z dokumentu/protokołu (np. postanowienie
+  sądu o wezwaniu), przywołaj to źródło jednym zdaniem zamiast pytać od nowa.
+□ Czy teza dowodowa dla TEGO świadka w TYM postępowaniu została ustalona
+  (TEZA-DOWODOWA-SCOPE-GATE)? Jeśli nie wynika z materiałów — pytanie do
+  użytkownika, nie zgadywanie.
+□ Czy rejestr kroków (MOD-STEP-TRACKER) jest aktualny? Każdy etap
+  pominięty od ostatniej wiadomości → raportuj TERAZ, na tej samej
+  zasadzie jak w pisma-procesowe-v3 (FAZA 2 MOD-STEP-TRACKER): wypisz
+  wprost co zrobiono i co pominięto, nie milcz i nie odkładaj raportu
+  do końca pracy.
+```
+
+Wynik tego self-checku pokazujesz użytkownikowi jako krótki nagłówek
+przed właściwymi pytaniami W3 (2–4 linijki, nie rozbudowany raport) —
+np.: "Potwierdzone: tezy+chronologia (Twoja wiadomość z [opis]), świadek:
+Maria Koroleva (postanowienie sądu z 8.07.2026). Pominięte etapy: brak."
+Jeśli coś pominięto — wpisz to zamiast "brak".
+
+---
+
+
 
 > 🔴 Sąd uchyla pytania wykraczające poza zatwierdzoną tezę dowodową
 > NATYCHMIAST i BEZ WZGLĘDU na ich merytoryczną siłę — najlepiej
@@ -1273,26 +1358,6 @@ Przed przejściem do ETAP W3 w KONKRETNYM postępowaniu sądowym:
    - Jeśli NIE (brak takiej informacji w materiałach) → zapytaj
      użytkownika wprost o zakres zatwierdzonej tezy PRZED wygenerowaniem
      pytań, zamiast zakładać, że każdy wątek merytoryczny jest dopuszczalny.
-
-1a. ⚠️ WARIANT TEZA-NIEUSTALONA (dodane w audycie na żywym przypadku,
-    2026-07-11) — gdy z protokołów wynika, że: (i) strona SAMA wycofała
-    swój wniosek o przesłuchanie tego świadka, a mimo to (ii) sąd i tak
-    postanowił wezwać świadka — bez utrwalonego w dostępnym materiale
-    uzasadnienia/zakresu tego wezwania:
-    - ⛔ ZAKAZ milczącego przyjęcia, że teza obejmuje wszystkie wątki,
-      których dotyczyły dotychczasowe zeznania stron w sprawie.
-    - Oznacz to jawnie jako "⬛ TEZA-NIEUSTALONA" w raporcie przed W3.
-    - Buduj pytania WARSTWOWO: warstwa bezpieczna = fakty niesporne
-      (przyznane wprost przez stronę przeciwną w protokole) → warstwa
-      średnia = fakty własne świadka jednoznacznie z jego wcześniejszych,
-      udokumentowanych czynności → warstwa wysokiego ryzyka = wątki
-      wyłącznie odtworzone z twierdzeń jednej, zainteresowanej strony.
-    - W binderze (W5) każdy blok pytań musi mieć widoczne oznaczenie
-      warstwy, żeby użytkownik mógł natychmiast pominąć warstwę wysokiego
-      ryzyka, jeśli teza okaże się węższa niż zakładano.
-    - Rekomenduj użytkownikowi pozyskanie dokładnego brzmienia
-      postanowienia dowodowego przed terminem rozprawy, zamiast czekać
-      z tym pytaniem do samej rozprawy.
 
 2. Dla KAŻDEGO pytania z W3 — oznacz zgodność z tezą:
    ✅ W RAMACH TEZY / ⚠️ GRANICZNE (może wymagać wniosku o rozszerzenie
@@ -1670,6 +1735,10 @@ Nie wolno domyślnie:
 - **rozpoczynać generowanie pytań bez jawnego ustalenia tez do wykazania, posiadanych dowodów
   oraz tożsamości/roli świadka**, gdy nie wynika to jednoznacznie z materiałów —
   patrz TEZY-DOWODY-SWIADEK-GATE (audyt 3.6),
+- **dołączać do W2/W3 osobę niepotwierdzoną wprost jako przesłuchiwanego świadka tylko dlatego,
+  że pojawia się w tych samych dokumentach co potwierdzony świadek (np. drugi reprezentant
+  strony przeciwnej, współsygnatariusz pisma)** —
+  patrz WITNESS-SCOPE-LOCK (audyt 3.14),
 - **akceptować pytanie zawierające twierdzenie o treści dokumentu bez zestawienia go
   z faktyczną treścią źródła dostępną w rozmowie** —
   patrz FACT-CROSS-CHECK-GATE (audyt 3.7),
@@ -1729,15 +1798,15 @@ Nie wolno domyślnie:
 - **wchodzić do KROK-PRE-W1-INTELLIGENCE, profilu świadka, tez lub pytań bez
   wykonanego SD-VER = KOMPLET dla całego materiału dot. świadka, w tym bez
   jawnego wykonania OCR dla każdego pliku PDF bez warstwy tekstowej** —
-  patrz PRE-W1a-SD-VER (audyt 3.13, HARD GATE),
+  patrz PRE-W1a-SD-VER (audyt 3.14, HARD GATE),
 - **utożsamiać dokument wzmiankowany w zeznaniu/protokole (np. "notatka
   dołączona do akt") z innym, fizycznie obecnym dokumentem o zbliżonej
   funkcji, zamiast oznaczyć go jako ⬛ DO WERYFIKACJI, gdy sam nie występuje
   w przekazanym materiale** —
-  patrz DOCUMENT-REFERENCED-NOT-FOUND-GATE w PRE-W1a-SD-VER (audyt 3.13),
+  patrz DOCUMENT-REFERENCED-NOT-FOUND-GATE w PRE-W1a-SD-VER (audyt 3.14),
 - **pomijać krok pipeline'u świadka (PRE-W1a..W6) bez natychmiastowego
   zaraportowania tego jako "⚠️ POMINIĘTY" w rejestrze MOD-STEP-TRACKER** —
-  patrz integracja STEP-TRACKER w PRE-W1a-SD-VER (audyt 3.13),
+  patrz integracja STEP-TRACKER w PRE-W1a-SD-VER (audyt 3.14),
 - pomijać KROK PRE-W1 WITNESS-INTELLIGENCE gdy dostarczone są dokumenty o świadku,
 - generować pytań bez przejścia przez W1 i W2,
 - **generować pytań bez zamkniętego pipeline FPW (FPW-1 + FPW-2 + FPW-3)**
@@ -1762,8 +1831,8 @@ Nie wolno domyślnie:
 
 | Skill | Kiedy wywołać |
 |---|---|
-| `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` | **OBOWIĄZKOWO, BEZPOŚREDNIO, na PRE-W1a** — przed jakimkolwiek profilem świadka lub tezą, niezależnie od tego, czy `analizator-dowodow-v3` jest wczytany (audyt 3.13) |
-| `shared/MOD-STEP-TRACKER.md` | **OBOWIĄZKOWO, na PRE-W1a.3** — inicjalizacja rejestru kroków świadka, aktualizacja po każdym etapie (audyt 3.13) |
+| `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` | **OBOWIĄZKOWO, BEZPOŚREDNIO, na PRE-W1a** — przed jakimkolwiek profilem świadka lub tezą, niezależnie od tego, czy `analizator-dowodow-v3` jest wczytany (audyt 3.14) |
+| `shared/MOD-STEP-TRACKER.md` | **OBOWIĄZKOWO, na PRE-W1a.3** — inicjalizacja rejestru kroków świadka, aktualizacja po każdym etapie (audyt 3.14) |
 | `analizator-dowodow-v3` | przed W2 jeśli dostępne obszerne akta (uzupełniająco — nie zastępuje bezpośredniego SD-VER z PRE-W1a) |
 | `chronologia-sprawy-v1` | jeśli zdarzenia mają złożoną oś czasu |
 | `analiza-sadowa-v6` | jeśli potrzebna ocena szans sprawy przed doborem strategii |

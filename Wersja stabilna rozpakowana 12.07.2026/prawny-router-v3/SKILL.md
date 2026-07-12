@@ -1,13 +1,91 @@
 ---
 name: prawny-router-v3
-version: 3.8
+version: 3.12
 type: orchestration
 status: production
+entrypoint: SKILL.md
 compatibility: "web_search, web_fetch, show_widget, create_file"
 description: |
-  Router Prawny v3.8 — orchestrator KAŻDEJ sprawy prawnej. Wykrywa tryb (LAIK/PRAWNIK),
+  Router Prawny v3.12 — orchestrator KAŻDEJ sprawy prawnej. Wykrywa tryb (LAIK/PRAWNIK),
   koordynuje PRIMARY→SECONDARY→FALLBACK, generuje .docx/.pdf.
   UŻYWAJ ZAWSZE i AUTOMATYCZNIE. Nigdy nie analizuj bez wczytania tego pliku.
+dependencies:
+  requires:
+    - shared
+    - prawo-polskie-v2
+    - analiza-sadowa-v6
+    - analizator-dowodow-v3
+    - analizator-przepisow-v2
+    - analizator-umow-v1
+    - chronologia-sprawy-v1
+    - dr-03-prawo-karne-wykroczenia-egzekucja
+    - dr-08-samorzad-terytorialny-prawo-lokalne
+    - dr-09-budownictwo-srodowisko-energia-transport
+    - dr-10-zdrowie-farmacja-zywnosc-rolnictwo
+    - dr-11-cyfrowe-cyber-ai-dane-ip
+    - dr-12-sadownictwo-prokuratura-zawody-prawnicze
+    - orzeczenia-sadowe-v2
+    - pisma-procesowe-v3
+    - pisma-proste-v2
+    - przesluchanie-swiadkow-v2-min90
+    - przewodnik-prawny-v2
+  called_by:
+    - użytkownik (punkt wejścia — brak nadrzędnego skilla)
+inputs:
+  - opis sprawy użytkownika (tekst wolny)
+  - opcjonalnie: pliki/dowody wgrane przez użytkownika
+  - opcjonalnie: plik kontekstu sesji (eksport z wcześniejszej rozmowy)
+outputs:
+  - decyzja routingu ([1]-[10]) + wywołanie właściwego skilla PRIMARY/SECONDARY/FALLBACK
+  - finalnie: odpowiedź tekstowa, widget (show_widget) lub dokument .docx/.pdf (create_file)
+confidence: verified-online
+  # HARD GATE wymusza web_search/web_fetch dla każdego przepisu/sygnatury —
+  # router sam nie generuje treści prawnej z pamięci, tylko orkiestruje.
+escalation:
+  - brak dostępu do isap.sejm.gov.pl / orzeczenia.ms.gov.pl / sn.pl / nsa.gov.pl
+    → oznacz ⚠️ [NIEWERYFIKOWANE] i poinformuj użytkownika, nie kontynuuj cicho
+  - sprawa transgraniczna / prawo obce → pomiń prawo-polskie-v2 i ISAP,
+    pozostałe zasady HG aktywne (UP-5)
+  - użytkownik zagubiony / brak klasyfikacji → [7] FALLBACK, nie zgadywanie dziedziny
+  - podmiot (spółka/organ/sąd) oznaczony ⬛ [DO WERYFIKACJI] i brak dostępu do
+    rejestru (KRS/CEIDG) → STOP, poinformuj użytkownika, ZAKAZ generowania
+    pisma z podmiotem w statusie ⬛
+limitations:
+  - nie zastępuje porady radcy prawnego/adwokata — patrz shared/DISCLAIMER.md (KROK 7, obowiązkowy)
+  - jakość i czas odpowiedzi zależą od dostępności i jakości web_search/web_fetch
+  - nie ingeruje w kontrolę jakości pipeline'u pisma-procesowe-v3 (tylko deleguje)
+  - "ZNALEZISKO 2026-07-04 (do weryfikacji w następnym audycie): plik lokalny
+    references/kwalifikator-karnomaterialny.md (589 linii) wygląda na
+    potencjalny duplikat/wariant kanonicznego
+    dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
+    wskazanego w UP-3 — nie scalone w tej sesji (poza zakresem pilotażu
+    standaryzacji metadanych), zgłoszone do CHECKLIST-DEDUP."
+required_modules:
+  - shared/PRAWO-HARDGATE.md
+  - shared/MOD-STEP-TRACKER.md
+  - shared/MOD-KONTEKST-SESJI.md
+  - shared/MOD-SKAN-DOWODOW-KOMPLETNY.md
+  - shared/MOD-REJESTR-ZALACZNIKOW-CHECKPOINT.md
+  - shared/MOD-PORCJOWANIE-DOWODOW.md
+  - shared/PRE-W2-VERIFICATION-GATE.md
+  - shared/CP-GATE.md
+  - shared/DISCLAIMER.md
+  - references/KROK0A-anonimizer.md
+  - references/KROK1-detekcja.md
+  - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md  # kanoniczny, wg UP-3
+changelog:
+  - "3.9 (2026-06-26): naprawa [POV-D-TRIGGER] i zasady 'dane z akt ≠ zweryfikowane
+    online' — pełny opis w sekcji CHANGELOG na końcu pliku."
+  - "3.10 (2026-06-26): KROK 0D — obowiązkowe oznaczanie podmiotów ⬛ [DO WERYFIKACJI]
+    — pełny opis w sekcji CHANGELOG na końcu pliku."
+  - "3.11 (2026-07-05): SCALENIE dwóch równoległych gałęzi rozwoju — (a) standaryzacja
+    metadanych frontmatter (dependencies/inputs/outputs/confidence/escalation/
+    limitations/required_modules), wprowadzona w wersji roboczej oznaczonej 3.9
+    z dnia 2026-07-04, z (b) pełną logiką weryfikacji podmiotów KROK 0D +
+    POV-D-TRIGGER z wersji 3.10 (2026-06-26). Żadna funkcja bezpieczeństwa nie
+    została usunięta w procesie scalenia — required_modules rozszerzone o
+    shared/PRE-W2-VERIFICATION-GATE.md, escalation rozszerzone o przypadek
+    podmiotu ⬛ bez dostępu do rejestru."
 ---
 
 # ⛔ HARD GATE — PRIORYTET BEZWZGLĘDNY
@@ -39,7 +117,7 @@ Procedura szczegółowa: view /mnt/skills/user/shared/PRAWO-HARDGATE.md
 
 ---
 
-# Router Prawny v3.7 — Spis Treści i Sekwencja Główna
+# Router Prawny v3.11 — Spis Treści i Sekwencja Główna
 
 ## PREFERENCJE UŻYTKOWNIKA (aktywne globalnie)
 
@@ -102,12 +180,19 @@ KROK 0C → [SKAN KOMPLETNOŚCI + PORCJOWANIE] → gdy użytkownik wgrał pliki 
           STATUS KRYTYCZNE → ⛔ HARD GATE → PD1 → PD2 → STOP; nie analizuj bez planu.
           Trigger wznawiania: plik "# CHECKPOINT ANALIZY" → PD5 (wznów z checkpointu).
           Brak plików i brak wzmianki o załącznikach → pomiń KROK 0C, idź KROK 1.
+KROK 0D → [STATUS PODMIOTÓW — OZNACZENIE ⬛] → obowiązkowy gdy w materiałach widoczne
+          dane podmiotów (spółki, organy, sądy, fundusze):
+          ⛔ Każdy podmiot niebędący osobą prywatną = natychmiast ⬛ [DO WERYFIKACJI]
+          ⛔ Status ⬛ utrzymuje się aż do faktycznego web_search/web_fetch w tej sesji
+          ⛔ ZAKAZ wstawiania danych ⬛ do pisma / argumentacji bez weryfikacji
+          Szczegóły + STATUS-LIFECYCLE: view /mnt/skills/user/shared/PRE-W2-VERIFICATION-GATE.md (PRE-W2.0)
+          Wyjątki (NIE oznaczaj): imię/nazwisko, adres, PESEL osoby fizycznej
 KROK 1  → [DETEKCJA TRYBU + HARD GATE] → view references/KROK1-detekcja.md
 KROK 2  → [ROUTING [1]–[10]] → poniżej w tym pliku
 KROK 3  → Załaduj PRIMARY → SECONDARY → FALLBACK
 KROK 4  → Wykonaj analizę / zbierz dane
 KROK 5  → Sprawdź TYP WYJŚCIA → SEKWENCJA END-TO-END → poniżej
-KROK 5B → [EXPORT KONTEKSTU] → po KROK 5 jeśli sesja zawierała KROK 4a
+KROK 5B → [EXPORT KONTEKSTU] → po KROK 5 jeśli sesja zawierała KROK 3B
            (analizator-dowodow-v3) lub W3 (pisma-procesowe-v3):
            view /mnt/skills/user/shared/MOD-KONTEKST-SESJI.md → wykonaj
            TRYB EXPORT (§3) — generuj plik .md i present_files.
@@ -282,12 +367,20 @@ Pozycja: zawsze **ostatni element** odpowiedzi lub stopka pisma .docx.
     Hard gate: nie przygotowuj repliki bez sprawdzenia sprzeczności wewnętrznych pisma przeciwnika
 18. PRE-W2-VERIFICATION-GATE — dla każdego pisma procesowego, PO zatwierdzeniu W1,
     PRZED W2: view /mnt/skills/user/shared/PRE-W2-VERIFICATION-GATE.md
-    ⛔ Adres sądu/organu NIGDY z pamięci modelu — zawsze web_search (PRE-W2.B)
-    ⛔ KRS/NIP pozwanego NIGDY z pamięci — zawsze weryfikacja rejestru (PRE-W2.C)
-    ⛔ Rozbieżność KRS≠NIP w aktach → STOP → weryfikuj każdy numer oddzielnie (PRE-W2.D)
-    ⛔ Argument prawny o tożsamości/odmienności podmiotów → WYŁĄCZNIE po PRE-W2.D
-    Błędy wyeliminowane: adres SR Katowice-Zachód (ul. Warszawska 45, nie ul. Lompy 14);
-    KRS 0000796445 = HP sp. z o.o., nie HP Global (KRS 0001025052) — sesja VII P 94/25
+    ⛔ ZASADA FUNDAMENTALNA (ROOT CAUSE sesji 2026-06-26):
+       DANE Z AKT/UMOW/PROTOKOLOW ≠ DANE ZWERYFIKOWANE ONLINE.
+       Nawet gdy dane podmiotowe sa w aktach — wymagane fizyczne web_search/web_fetch.
+       "Widzi KRS X w umowie" nie zwalnia ze sprawdzenia czy KRS X = ten podmiot w rejestrze.
+    ⛔ Adres sadu/organu NIGDY z pamieci modelu — zawsze web_search (PRE-W2.B)
+    ⛔ KRS/NIP pozwanego NIGDY z pamieci ANI z akt — zawsze weryfikacja rejestru (PRE-W2.C)
+    ⛔ Rozbiez̈nosc KRS≠NIP w aktach → STOP → weryfikuj kazdy numer osobno (PRE-W2.D)
+    ⛔ [POV-D-TRIGGER]: gdy w materiale dowodowym widoczne sa ≥2 rozne numery KRS lub NIP
+       przy zbliz̈onej nazwie podmiotu → AUTOMATYCZNIE uruchom PRE-W2.D dla kazdego numeru.
+       Nie czekaj na jawna sprzecznos c — sama roznorodnos c numerow = trigger POV-D.
+    ⛔ Argument prawny o tozsamosci/odmiennosci podmiotow → WYLACZNIE po PRE-W2.D
+    Bledy wyeliminowane: adres SR Katowice-Zachod (ul. Warszawska 45, nie ul. Lompy 14);
+    KRS 0000796445 = HP sp. z o.o. (NIP 8971869561), nie HP Global (KRS 0001025052,
+    NIP 6343021499) — sesja VII P 94/25 (26.06.2026)
 19. MOD-STRATEGIA-WYBOR — dla każdego pisma złożonego (≥2 ścieżki LUB anomalia podmiotowa),
     W1.2b (PRZED W1.3): view /mnt/skills/user/shared/MOD-STRATEGIA-WYBOR.md
     S1→S2→S3→S4→S5: identyfikuj WSZYSTKIE ścieżki → oceń każdą pod kątem ataku
@@ -314,6 +407,29 @@ Pozycja: zawsze **ostatni element** odpowiedzi lub stopka pisma .docx.
 20a. Kontrola statusu DRAFT/FINAL .docx należy do pisma-procesowe-v3 (shared/CP-GATE.md).
     Router nie zarządza checkpointami pisma — deleguje do pisma-procesowe-v3 i stamtąd
     pochodzi cała logika CP-GATE, watermark DRAFT, bramka przed .docx.
+21. ⛔ CHECKPOINT W ŻĄDANIACH ZŁOŻONYCH [NOWE, audyt 2026-07-12, naprawa F-8] —
+    gdy jedno zlecenie użytkownika łączy KILKA elementów z różnych PRIMARY-skilli
+    (np. "zbierz tezy + chronologię + sprzeczności + przygotuj pytania do świadka"),
+    KAŻDY element podlega checkpointom SWOJEGO PRIMARY-skilla NIEZALEŻNIE — zebranie
+    kilku próśb w jedną wiadomość NIE zwalnia z checkpointu żadnej z nich.
+    W SZCZEGÓLNOŚCI: jeśli jednym z elementów jest "pytania do świadka" →
+    [8] PRZESŁUCHANIE ŚWIADKA → PRIMARY: przesluchanie-swiadkow-v2-min90 →
+    CHECKPOINT-W2 (pauza po tezach/modelu, wymagająca jawnej akceptacji użytkownika
+    PRZED napisaniem jakichkolwiek pytań W3) MUSI zadziałać, nawet jeśli reszta
+    zlecenia (tezy, chronologia, sprzeczności) nie ma własnego checkpointu i może
+    zostać dostarczona w tej samej odpowiedzi.
+    PROCEDURA: (a) zidentyfikuj wszystkie komponenty zlecenia i przypisz PRIMARY
+    skill do każdego z osobna (nie tylko do "głównego" wątku sprawy); (b) dostarcz
+    w jednej odpowiedzi komponenty BEZ blokującego checkpointu; (c) dla komponentu
+    z checkpointem (np. świadek) — wczytaj jego PRIMARY skill, wykonaj jego etapy
+    aż do checkpointu, wyświetl raport CHECKPOINT i ZAKOŃCZ ten wątek odpowiedzi
+    zgodnie z regułą 20 (bez pytań W3), nawet jeśli reszta odpowiedzi jest dłuższa.
+    Root cause naprawionego incydentu: model potraktował złożone zlecenie jako
+    jedno zadanie obsługiwane przez jeden skill (chronologia) i nigdy nie wczytał
+    przesluchanie-swiadkow-v2-min90, więc CHECKPOINT-W2 nie miał szansy zadziałać
+    mimo poprawnego wpisu routingu w tabeli [8] — sama obecność wiersza w tabeli
+    okazała się niewystarczająca bez tej jawnej reguły. Pełny opis: AUDIT-JOURNAL.md,
+    wpis AUDYT-2026-07-12.
 ```
 
 ---
@@ -340,10 +456,27 @@ Minimalne bramki obowiązkowe przed każdą odpowiedzią:
   ⛔ Generujesz/udostępniasz pismo? → ST-FINAL (REJESTR KROKÓW) MUSI być w tej
   odpowiedzi PRZED present_files. Brak ST-FINAL = NIE wywołuj present_files.
 
-□ ⛔ WERYFIKACJA PODMIOTÓW ONLINE [POV-B][POV-C] — przed każdym pismem procesowym:
-  [POV-B] web_search/web_fetch dla SĄDU wywołany fizycznie w tej odpowiedzi? TAK/NIE
-  [POV-C] web_search/web_fetch dla POZWANEGO (KRS/NIP) wywołany fizycznie? TAK/NIE
-  NIE do któregokolwiek → ⛔ STOP. Dane z akt i z pamięci = NIEZWERYFIKOWANE.
+□ ⛔ STATUS PODMIOTÓW — czy wszystkie podmioty (spółki, sądy, organy) mają ✅?
+  ⛔ Podmioty oznaczone ⬛ [DO WERYFIKACJI] = ZAKAZ generowania pisma / .docx.
+  Oznaczaj ⬛ przy napotkaniu; zdejmuj dopiero po faktycznym web_search/web_fetch.
+  Szczegóły STATUS-LIFECYCLE: PRE-W2-VERIFICATION-GATE.md (PRE-W2.0)
+□ ⛔ WERYFIKACJA PODMIOTÓW ONLINE [POV-B][POV-C][POV-D] — przed każdym pismem procesowym:
+  ⛔ ZASADA FUNDAMENTALNA: dane z dokumentów/akt/umów ≠ ZWERYFIKOWANE.
+     Dane z pamięci modelu ≠ ZWERYFIKOWANE. Jedyne źródło: fizyczne web_search/web_fetch.
+  [POV-B] web_search/web_fetch dla SĄDU/ORGANU wywołany fizycznie W TEJ ODPOWIEDZI?
+          NIE → ⛔ STOP. Wywołaj: web_search "[sąd] [wydział] adres [rok]"
+          Potwierdź: pełna nazwa, właściwy wydział dla tego typu sprawy, adres budynku.
+  [POV-C] web_search/web_fetch dla POZWANEGO (KRS/NIP/adres) wywołany fizycznie?
+          NIE → ⛔ STOP. Wywołaj: web_search "[nazwa] KRS NIP rejestr"
+          Potwierdź: firma rejestrowa (≠ handlowa), KRS, NIP, adres z rejestru, status.
+  [POV-D] Czy w materiałach dowodowych (umowy, protokoły, SUDOP, inne) pojawiają się
+          RÓŻNE numery KRS lub NIP dla podmiotów o zbliżonej nazwie?
+          TAK → ⛔ STOP. Zweryfikuj KAŻDY numer KRS/NIP oddzielnie przez web_search.
+               ZAKAZ argumentowania o tożsamości/odmienności podmiotów bez tej weryfikacji.
+               Rozbieżność = fakt procesowy do wskazania w piśmie (nie błąd analizy).
+               Przykład: KRS 0000796445 = HP sp. z o.o. ≠ HP Global (KRS 0001025052).
+  NIE do POV-B lub POV-C → ⛔ STOP. NIE generuj pisma bez tych wywołań.
+  Wszystkie ✅ → wyświetl raport PRE-W2 (VER-SAD + VER-POZ) → dopiero potem W2.
   Szczegóły: SELF-CHECK-PISMA.md blok PRE-W2 lub PRE-W2-VERIFICATION-GATE.md
 □ references/KROK1-detekcja.md wczytany (tryb + hard gate ISAP)?
 □ ⛔ HARD GATE TRWAŁY aktywny? (obowiązuje przez całą rozmowę — nie wygasa)
@@ -357,6 +490,10 @@ Minimalne bramki obowiązkowe przed każdą odpowiedzią:
 □ Pismo + materiały źródłowe → shared/FAKTY_v2.md, wynik ✅?
 □ LAIK → raport przez przewodnik-prawny-v2 (KROK H)?
 □ Bramka chronologiczna → przy ≥2 dokumentach wieloetapowych?
+□ ⛔ RZ-SHOW (shared/MOD-REJESTR-ZALACZNIKOW-CHECKPOINT.md) → jeśli w grze
+  są załączniki: pokazano pełny rejestr plików ze statusami ✅/🔶/⬜/➖/⬛
+  i — jeśli są ⬜/🔶 — zapytano o kontynuację, ZANIM podano wnioski
+  merytoryczne oparte na materiale?
 □ DISCLAIMER (shared/DISCLAIMER.md) → OSTATNI element odpowiedzi?
 ```
 
@@ -380,3 +517,53 @@ view /mnt/skills/user/prawny-router-v3/references/pokrycie-dziedzinowe.md
 ```
 
 Tylko gdy: pytanie o dostępność modułu, audyt systemu, budowanie kombinacji multi-skill.
+
+## CHANGELOG (prawny-router-v3)
+
+**3.12 (2026-07-12) — Reguła 21: CHECKPOINT w żądaniach złożonych (naprawa F-8):**
+- Incydent: zlecenie łączące tezy/chronologię/sprzeczności + "pytania do świadka"
+  zostało obsłużone przez chronologia-sprawy-v1 w całości; przesluchanie-swiadkow-v2-min90
+  nigdy nie zostało wczytane mimo poprawnego wiersza [8] w tabeli routingu — pytania
+  W3 powstały bez CHECKPOINT-W2 (bez akceptacji tez przez użytkownika).
+- Dodano REGUŁĘ 21 (sekcja reguł nadrzędnych, po regule 20/20a): żądania złożone
+  dekomponować na komponenty, każdy z własnym PRIMARY skillem i checkpointami;
+  obecność checkpointu w jednym komponencie (np. świadek → CHECKPOINT-W2) blokuje
+  wyłącznie ten komponent, nie całą odpowiedź — ale MUSI zablokować.
+- Pełny opis incydentu i naprawy równoległej w chronologia-sprawy-v1 (v1.3→v1.4,
+  KATEGORIA A0 fałszywe sprzeczności): AUDIT-JOURNAL.md, wpis AUDYT-2026-07-12.
+- Flaga F-8 w WARN-OTWARTE.md → zamknięta tym wpisem.
+
+**3.11 (2026-07-05) — scalenie standaryzacji metadanych z pełną logiką 3.10:**
+- Kontekst: równolegle do rozwoju 3.9→3.10 (logika weryfikacji podmiotów) powstała
+  osobna gałąź robocza, oznaczona "3.9" z dnia 2026-07-04, wprowadzająca ustrukturyzowany
+  frontmatter (dependencies, inputs, outputs, confidence, escalation, limitations,
+  required_modules) — ale bez KROK 0D i bez POV-D-TRIGGER.
+- Scalenie: przyjęto ustrukturyzowany frontmatter, zachowując w całości treść
+  KROK 0D, [POV-D-TRIGGER], ZASADĘ FUNDAMENTALNĄ ("dane z akt ≠ zweryfikowane")
+  oraz pełny blok SELF-CHECK z POV-B/C/D.
+- Dodano: required_modules → shared/PRE-W2-VERIFICATION-GATE.md; escalation →
+  przypadek podmiotu ⬛ bez dostępu do rejestru.
+- Dodano do frontmatter adnotację ZNALEZISKO 2026-07-04 o potencjalnym duplikacie
+  kwalifikator-karnomaterialny.md (zgłoszone do CHECKLIST-DEDUP, nie rozwiązane
+  w tym scaleniu).
+- Wersja: 3.10 → 3.11. Żadna funkcja bezpieczeństwa nie została usunięta.
+
+**3.10 (2026-06-26) — KROK 0D: oznaczanie podmiotów ⬛ [DO WERYFIKACJI]:**
+- Nowy krok 0D w sekwencji głównej: obowiązkowe oznaczanie każdego podmiotu
+  (spółki, sądy, organy) statusem ⬛ [DO WERYFIKACJI] od chwili napotkania.
+- Status ⬛ utrzymuje się do faktycznego web_search/web_fetch — nie do zamiaru.
+- SELF-CHECK: nowy blok "STATUS PODMIOTÓW" z checklistą przed każdą odpowiedzią.
+- MOD-STEP-TRACKER: dodano R0D do REJESTRU.
+- Wyjątki: dane osoby fizycznej (imię/nazwisko/adres/PESEL) — nie oznaczaj ⬛.
+- Powiązane: PRE-W2-VERIFICATION-GATE.md v1.2.0 (nowy krok PRE-W2.0).
+
+**3.9 (2026-06-26) — naprawa [POV-D-TRIGGER] i zasady "dane z akt ≠ zweryfikowane":**
+- Root cause: model traktował KRS/NIP z umów/akt jako zweryfikowane online.
+  Skutek: KRS 0000796445 (HP sp. z o.o.) wpisany przy Human Park Global sp. z o.o.
+  (która ma KRS 0001025052) w piśmie procesowym VII P 94/25 (sesja 2026-06-26).
+- SELF-CHECK: blok POV-B/C/D rozbudowany o:
+  (a) zasadę explicite "dane z akt ≠ zweryfikowane"
+  (b) [POV-D] jako osobny krok z triggerem przy ≥2 różnych numerach KRS/NIP
+  (c) wymóg wyświetlenia raportu PRE-W2 przed W2
+- Reguła nadrzędna 18: dodano [POV-D-TRIGGER] i zasadę fundamentalną.
+- Wersja: 3.8 → 3.9

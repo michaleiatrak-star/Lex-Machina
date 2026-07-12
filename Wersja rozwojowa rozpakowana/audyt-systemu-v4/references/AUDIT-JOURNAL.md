@@ -4,6 +4,218 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
+## AUDYT-2026-07-12d — Nowy moduł: MOD-REJESTR-ZALACZNIKOW-CHECKPOINT (widoczność skanu dowodów + checkpoint kontynuacji) — sprawa XI P 27/26
+
+**Zakres:** Naprawa punktowa (WARN — brak mechanizmu widoczności, nie CRIT
+strukturalny), na wyraźne polecenie użytkownika po incydencie w sprawie
+XI P 27/26: model przeanalizował materiał dowodowy wybiórczo i nie
+zasygnalizował tego użytkownikowi — 2 kluczowe zrzuty WhatsApp (zwroty
+pieniędzy dla cudzoziemców) ujawniły się dopiero po pytaniu kontrolnym
+użytkownika.
+
+**Błąd źródłowy:** `MOD-SKAN-DOWODOW-KOMPLETNY.md` (SD-KOMPLETNY) definiuje
+METODOLOGIĘ pełnego odczytu (SD-INW/SD-REJ/SD-READ), ale nic w pipeline nie
+wymuszało WYŚWIETLENIA tego rejestru użytkownikowi w trakcie rozmowy ani
+pytania o zgodę na etapowanie, gdy analiza pozostawała niekompletna.
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy WARN | 1 (brak mechanizmu widoczności/checkpointu kontynuacji) |
+| Błędy WARN (zamknięte) | 1/1 |
+| Nowe pliki | 1: `shared/MOD-REJESTR-ZALACZNIKOW-CHECKPOINT.md` (v1.0.0) |
+| Zmodyfikowane pliki | 2: `prawny-router-v3/SKILL.md` (required_modules + pozycja SELF-CHECK), `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` (akapit "Relacja z...") |
+| Czystość kodu (MOD-INTERLINIE) | ✅ 0 zbędnych interlinii w nowym pliku |
+| Czystość kodu (MOD-WSTAWKI) | ✅ 1 trafienie ocenione i ZOSTAWIONE (spełnia test "zawiera regułę") |
+| Description | N/A — plik `shared/` bez własnego pola `description` (nie jest samodzielnym entrypointem skilla) |
+
+### 2. NAPRAWA
+
+- Nowy plik `shared/MOD-REJESTR-ZALACZNIKOW-CHECKPOINT.md` v1.0.0: buduje
+  widoczny rejestr WSZYSTKICH załączników (w tym zawartości zip,
+  rekurencyjnie), ze statusem per plik (✅/🔶/⬜/➖/⬛), obowiązkowo
+  wyświetlany użytkownikowi przy pierwszej odpowiedzi po wgraniu plików, na
+  żądanie kontrolne oraz przed każdym wnioskiem merytorycznym opartym na
+  materiale z pozycjami niesprawdzonymi. Jeśli są ⬜/🔶 — zadaje pytanie o
+  kontynuację i czeka na decyzję (chyba że użytkownik zlecił tryb
+  automatyczny). Rejestr trwały przez całą rozmowę, rozszerzany o nowe pliki
+  w kolejnych wiadomościach.
+- `prawny-router-v3/SKILL.md`: dodano moduł do `required_modules` oraz nową
+  pozycję w SELF-CHECK (blokada odpowiedzi merytorycznej bez RZ-SHOW, gdy są
+  pliki niesprawdzone).
+- `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md`: dodano akapit "Relacja z
+  MOD-REJESTR-ZALACZNIKOW-CHECKPOINT" w nagłówku — jawny podział
+  odpowiedzialności (SD-KOMPLETNY = metodologia odczytu, nowy moduł =
+  widoczność + zgoda użytkownika na etapowanie).
+
+**Weryfikacja końcowa:** `grep -rn "MOD-REJESTR-ZALACZNIKOW-CHECKPOINT"
+/mnt/skills/user` — 3 wystąpienia (plik własny + 2 odwołania), brak
+odwołań do nieistniejącej ścieżki.
+
+---
+
+## AUDYT-2026-07-12c — [NAPRAWA STRUKTURALNA] Odtworzenie zerwanego "KROK 4a" jako "KROK 3B" w analizator-dowodow-v3 + synchronizacja 8 plików konsumujących
+
+**Zakres:** Naprawa strukturalna (CRIT — zerwane odwołanie krzyżowe, nie tylko
+WARN), na wyraźne polecenie użytkownika po pytaniu, czy istnieje mechanizm
+użycia analizatora dowodów do przygotowania pytań do świadka. Zgodnie z
+ZASADĄ 11 dotyczy zarówno skilla wykonawczego (`analizator-dowodow-v3`), jak
+i skilli proceduralnych konsumujących jego wynik.
+
+**Błąd źródłowy:** `analizator-dowodow-v3` był w pewnym momencie przebudowany
+z liniowego pipeline'u (zawierającego krok "KROK 4a" z podkrokami 4a.1-4a.6:
+klasyfikacja aspektów → mapowanie na przepisy → selekcja dowodów) na router
+KROK 2/3/4 oparty o moduły MD/MP (od wersji 5.1.0). Krok "KROK 4a" **przestał
+istnieć pod tą nazwą** w tym pliku, ale 8 innych plików nadal się do niego
+odwoływały jako do istniejącego, aktywnego punktu integracji:
+
+| Plik | Odwołanie |
+|---|---|
+| `shared/MOD-METODY-BADAWCZE.md` | "KROK 4a" (3×) |
+| `shared/MOD-MAPA-PRZEPISOW.md` | "KROK 4a" (4×) — własny punkt wywołania modułu |
+| `shared/MOD-KONTEKST-SESJI.md` | "KROK 4a" (4×), w tym eksport/import sesji |
+| `shared/MOD-SELEKCJA-DOWODOW.md` | "KROK 4a.5" (2×) — własny punkt wywołania modułu |
+| `shared/MOD-PRIORYTETY-ASPEKTOW.md` | "KROK 4a" / "KROK 4a.3" (4×) |
+| `prawny-router-v3/SKILL.md` | "KROK 4a" (1×, w KROK 5B eksport kontekstu) |
+| `przesluchanie-swiadkow-v2-min90/SKILL.md` | "KROK 4a" (3×, w KROK 0) |
+| `pisma-procesowe-v3/references/W1-SZCZEGOLY.md` | "KROK 4a.5" (2×, tryb auto-wypełnienia) |
+| `audyt-systemu-v4/references/CHECKLIST-DEDUP.md` | "KROK 4a.3"/"KROK 4a.5" (2×) — **błędnie oznaczone jako "✅ wdrożone"** |
+
+Efekt: mechanizm opisywany użytkownikowi jako istniejący (ekstrakcja
+twierdzeń/faktów/dat/sprzeczności z dokumentów do zasilenia pytań świadka)
+odwoływał się do kroku, którego fizycznie nie ma — integracja była martwa,
+mimo że CHECKLIST-DEDUP.md sugerował, że jest wdrożona i zweryfikowana.
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy CRIT | 1 (zerwane odwołanie krzyżowe, dotyczące 8 plików) |
+| Błędy CRIT (zamknięte) | 1/1 |
+| Zmodyfikowane pliki | 9: `analizator-dowodow-v3/SKILL.md` (5.13.0→5.14.0, nowa sekcja KROK 3B) + 8 plików konsumujących (KROK 4a→3B, 4a.3→3B.2, 4a.5→3B.3) |
+| Description (analizator-dowodow-v3) | 873/1024 — ✅ OK, niezmieniona treściowo |
+
+### 2. NAPRAWA
+
+- Dodano do `analizator-dowodow-v3/SKILL.md` nową sekcję **KROK 3B — SYNTEZA:
+  ASPEKTY → PRZEPISY → SELEKCJA DOWODÓW**, umiejscowioną po KROK 3 (WYKONANIE,
+  po zakończeniu MD6/MP7), przed KROK 4 (DASHBOARD). Podkroki: 3B.1 (aspekty,
+  MOD-PRIORYTETY-ASPEKTOW) → 3B.2 (mapa przepisów, MOD-MAPA-PRZEPISOW,
+  dawne 4a.3) → 3B.3 (selekcja dowodów + ostrzeżenia krzyżowe,
+  MOD-SELEKCJA-DOWODOW, dawne 4a.5) → 3B.4 (eksport pakietu `kontekst_sprawy`
+  do konsumentów). Zawiera jawną notkę o dawnej nazwie i liście
+  zsynchronizowanych plików.
+- We wszystkich 8 plikach konsumujących zamieniono "KROK 4a"→"KROK 3B",
+  "KROK 4a.3"→"KROK 3B.2", "KROK 4a.5"→"KROK 3B.3" (33 wystąpienia łącznie),
+  w tym poprawiono jeden nieoczywisty pozostały zapis zakresu podkroków w
+  `MOD-KONTEKST-SESJI.md` ("4a.1-4a.6" → "3B.1-3B.4").
+- `CHECKLIST-DEDUP.md` zachowuje status "✅ wdrożone" dla obu wierszy — teraz
+  faktycznie prawdziwe, bo odwołanie wskazuje na istniejący krok.
+
+**Weryfikacja końcowa:** `grep -rn "KROK 4a" /mnt/skills/user` zwraca WYŁĄCZNIE
+3 wystąpienia w `analizator-dowodow-v3/SKILL.md`, wszystkie w jawnej notce
+historycznej wyjaśniającej dawną nazwę — zero martwych odwołań gdzie indziej.
+
+---
+
+
+
+**Zakres:** Naprawa punktowa (WARN, nie CRIT), na wyraźne polecenie użytkownika,
+kontynuacja tego samego wątku co AUDYT-2026-07-12 (ZASADA 11 — skill proceduralny).
+
+**Luki znalezione (3, wszystkie realne, potwierdzone w treści pliku przed naprawą):**
+
+1. **Wyjątek w CHECKPOINT-W2** dopuszczał pominięcie obowiązkowej pauzy przed W3,
+   gdy użytkownik w pierwotnym poleceniu wprost zażądał pytań od razu — sprzeczne
+   z wymaganiem użytkownika "pytania obowiązkowo bez wyjątków".
+2. Treść CHECKPOINT-W2 wymagała potwierdzenia **tez i modelu**, ale nie
+   wymieniała **chronologii** jako osobnego, wymaganego elementu akceptacji —
+   użytkownik żądał akceptacji obu łącznie.
+3. Brak sekcji SELF-CHECK wymuszającej ponowne wczytanie checklisty na starcie
+   wiadomości z W3 (w przeciwieństwie do routera, który ma taką sekcję) —
+   ryzyko, że ustalenia z W2 "wietrzeją" po dłuższej wymianie wiadomości na
+   inny temat (np. audyt innego skilla) zanim padną właściwe pytania.
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy CRIT | 0 |
+| Luki WARN (zamknięte) | 3 |
+| Zmodyfikowane pliki | `przesluchanie-swiadkow-v2-min90/SKILL.md` (3.15→3.16) |
+| Description | 895/1024 znaków — ✅ OK, niezmieniona treściowo |
+| Kompletność wydania | Naprawa w jednym pliku (nie wymagała nowych plików CHANGELOG/tests — brak dedykowanego katalogu tests/ w tej instancji roboczej) |
+
+### 2. NAPRAWA
+
+**przesluchanie-swiadkow-v2-min90/SKILL.md v3.16:**
+- CHECKPOINT-W2: usunięty wyjątek "pomiń checkpoint gdy użytkownik żąda pytań
+  od razu"; dodane obowiązkowe pole "CHRONOLOGIA ZDARZEŃ" do treści
+  prezentowanej użytkownikowi; pytanie zamykające zmienione na "tezy, model
+  I CHRONOLOGIA".
+- Nowa sekcja **SELF-CHECK-PRZED-W3**, uruchamiana na starcie KAŻDEJ wiadomości
+  zawierającej W3: potwierdzenie (a) akceptacji W2+chronologii w osobnej
+  wcześniejszej wiadomości, (b) zamkniętej listy świadków, (c) ustalonej tezy
+  dowodowej, (d) aktualności rejestru kroków — z obowiązkiem jawnego
+  raportowania pominięć na tej samej zasadzie co FAZA 2 MOD-STEP-TRACKER
+  w pisma-procesowe-v3.
+
+**Nie zmieniono (świadomie):** WITNESS-SCOPE-LOCK (audyt 3.14) już poprawnie
+przewidywał ekstrakcję świadka z dokumentów/kontekstu w pierwszej kolejności
+i pytanie wprost dopiero gdy się nie da ustalić — to wymaganie użytkownika
+było już spełnione, nie dodawano duplikatu.
+
+---
+
+
+
+**Zakres:** Naprawa punktowa (WARN, nie CRIT) na wyraźne wskazanie użytkownika
+po błędzie w bieżącej sesji roboczej. Zgodnie z ZASADĄ 11 — dotyczy skilla
+proceduralnego (bramka jakości), nie mapy Dz.U.
+
+**Błąd źródłowy:** w trakcie przygotowania pytań do świadka w sprawie
+pracowniczej, model przygotował zestawy pytań dla dwóch osób powiązanych ze
+stroną pozwaną (Prezes Zarządu oraz Dyrektor generalna spółki), mimo że z
+materiałów i przebiegu rozmowy jednoznacznie wynikało, iż przesłuchiwana
+będzie tylko jedna z nich. Skill nie miał bramki wymuszającej potwierdzenie
+zamkniętej listy świadków przed wygenerowaniem pytań — TEZY-DOWODY-SWIADEK-GATE
+(audyt 3.6) wymagała ustalenia roli świadka, ale nie zabraniała wprost
+milczącego dodania dodatkowych osób z tych samych materiałów.
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy CRIT | 0 |
+| Luka WARN (zamknięta) | Brak bramki blokującej dodawanie niepotwierdzonych dodatkowych świadków do W2/W3 |
+| Zmodyfikowane pliki | `przesluchanie-swiadkow-v2-min90/SKILL.md` (3.12→3.14), `.../CHANGELOG.md`, `.../tests/REGRESSION-CASES.md` |
+| Kompletność wydania | Naprawa dostarczona jako pełny, spójny skill (SKILL.md + CHANGELOG + testy), zgodnie z ZASADĄ 7 |
+
+### 2. NAPRAWA
+
+**przesluchanie-swiadkow-v2-min90/SKILL.md v3.14:**
+- Nowa sekcja **WITNESS-SCOPE-LOCK** (ETAP W1, zaraz po TEZY-DOWODY-SWIADEK-GATE):
+  wymóg ustalenia zamkniętej listy świadków przed W2/W3; zakaz dołączania osób
+  niepotwierdzonych wprost jako przesłuchiwanych, nawet jeśli występują w tych
+  samych dokumentach co świadek potwierdzony; przy niejednoznaczności — pytanie
+  wprost do użytkownika o zakres, zamiast domyślnego objęcia wszystkich osób.
+- Zaktualizowano frontmatter `description` (dodany HARD GATE) oraz sekcję "Zakaz".
+- Dodano test regresyjny (`tests/REGRESSION-CASES.md`, pozycja 6).
+
+**Uwaga porządkowa:** wersja 3.13 była już zajęta przez audyt z 2026-07-11
+(PRE-W1a-SD-VER/OCR) z tej samej daty roboczej — niniejsza naprawa oznaczona
+jako 3.14, bez kolizji numeracji.
+
+**Follow-up CRIT (v3.15, ten sam dzień):** dodanie WITNESS-SCOPE-LOCK do
+description w v3.14 przekroczyło HARD LIMIT 1024 znaków (MOD-DESCRIPTION.md)
+— osiągnęło 1151 znaków. Naprawione przez skrócenie do 870 znaków (strefa
+✅ OK). Lekcja: każda edycja frontmatter `description` wymaga natychmiastowej
+weryfikacji długości tym samym skryptem co w MOD-DESCRIPTION.md, nie dopiero
+przy następnym pełnym audycie.
+
+---
+
 ## AUDYT-2026-07-11b — Dodanie MOD-STEP-TRACKER + dependencies/pipeline do analizator-dowodow-v3
 
 **Zakres:** Naprawa WARN (luka proceduralna, nie CRIT).

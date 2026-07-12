@@ -40,13 +40,13 @@ Każda metoda w rejestrze ma przypisany model wykonania:
 ```
 JEDNOETAPOWY (domyślny): sygnał auto-doboru = TAK → metoda wykonywana
   w PEŁNI od razu (KROK 3 analizator-dowodow-v3) → wynik trafia do dashboardu
-  i checklisty (KROK 4a) jako gotowa analiza.
+  i checklisty (KROK 3B) jako gotowa analiza.
   Dotyczy: MET-FTL, MET-CA, MET-CASE, MET-PT, MET-TRI, MET-DQ.
 
 DWUETAPOWY (metody kosztowne — najwyższy nakład tokenowy/poznawczy):
   KROK A — SZKIC: sygnał auto-doboru = TAK → wykonaj WYŁĄCZNIE "PROCEDURĘ
     SZKICU" (1-2 kroki, bez pełnej macierzy/grafu/tabeli) → zapisz jako
-    kandydata z 1-zdaniową obserwacją → KROK 4a (checklist).
+    kandydata z 1-zdaniową obserwacją → KROK 3B (checklist).
   KROK B — GŁĘBOKA: w checkliście użytkownik wybiera per kandydat
     "Pomiń" lub "Analiza głęboka" → TYLKO dla "Analiza głęboka" wykonaj
     pełną procedurę z pola "WYNIK" (macierz/graf/tabela) → wynik trafia
@@ -76,7 +76,7 @@ Dla metod DWUETAPOWYCH `wstepna_obserwacja` jest WYNIKIEM PROCEDURY SZKICU
 pełnej metody — pełna metoda wykonywana jest tylko po wyborze "Analiza
 głęboka".
 
-### Self-check przed KROK 4a
+### Self-check przed KROK 3B
 
 ```
 □ Dla każdej metody z sygnałem auto-doboru = TAK: sprawdzony model

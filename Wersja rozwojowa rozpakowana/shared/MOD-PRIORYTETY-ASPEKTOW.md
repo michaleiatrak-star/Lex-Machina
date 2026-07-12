@@ -6,7 +6,7 @@
 >
 > Zależności: `MOD-METODY-BADAWCZE.md` (rejestr metod), `MOD-MAPA-PRZEPISOW.md`
 > (mapowanie wyników aspektów na przepisy — wykonywane PO tej checkliście,
-> w KROK 4a.3), `MOD-WARIANTY-POZWU.md` (konsument wyboru roszczeń głównych),
+> w KROK 3B.2), `MOD-WARIANTY-POZWU.md` (konsument wyboru roszczeń głównych),
 > `MOD-HISTORIA-STRATEGII.md` (trwałość wyboru między regeneracjami).
 
 ---
@@ -200,7 +200,7 @@ function render() {
 
 function wybierzGleboka(aspektId, metodaId) {
   // oznacz metodaId dla aspektId jako tryb: "gleboka"
-  // → po zatwierdz() KROK 4a wykona PROCEDURĘ GŁĘBOKĄ (§1a MOD-METODY-BADAWCZE)
+  // → po zatwierdz() KROK 3B wykona PROCEDURĘ GŁĘBOKĄ (§1a MOD-METODY-BADAWCZE)
   //   TYLKO dla metod oznaczonych "gleboka"
 }
 
@@ -297,7 +297,7 @@ Po zatwierdzeniu checklisty zapisz wynik wg schematu z
 }
 ```
 
-`mapa_przepisow` wypełniane jest w KROK 4a.3 (analizator-dowodow-v3),
+`mapa_przepisow` wypełniane jest w KROK 3B.2 (analizator-dowodow-v3),
 PO zatwierdzeniu tej checklisty — szczegóły: `MOD-MAPA-PRZEPISOW.md` §6-7.
 ```
 
@@ -340,7 +340,7 @@ faktycznego jako podstawy alternatywne).
 □ Czy formularz "Dodaj własny aspekt" (§3.5) jest obecny w widgecie?
 □ Czy wynik checklisty (w tym `metody_gleboka`) zostanie zapisany do
   historii strategii PRZED przejściem do MOD-WARIANTY-POZWU?
-□ Czy dla `metody_gleboka` niepustych — KROK 4a (analizator-dowodow-v3)
+□ Czy dla `metody_gleboka` niepustych — KROK 3B (analizator-dowodow-v3)
   wykona PROCEDURĘ GŁĘBOKĄ (§1a) PO zatwierdzeniu checklisty, nie wcześniej?
 Którykolwiek = NIE → uzupełnij przed renderem widgetu.
 ```

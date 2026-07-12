@@ -16,6 +16,12 @@
 >   MOD-PORCJOWANIE-DOWODOW zarządza ROZMIAREM partii (ile plików naraz).
 >   MOD-SKAN-DOWODOW-KOMPLETNY zarządza KOMPLETNOŚCIĄ (czy odczytano KAŻDĄ stronę każdego pliku).
 >   Oba są obowiązkowe i wzajemnie komplementarne. Kolejność: ten moduł PRZED porcjowaniem.
+>
+> **Relacja z MOD-REJESTR-ZALACZNIKOW-CHECKPOINT:**
+>   Ten moduł (SD-KOMPLETNY) odpowiada za METODOLOGIĘ odczytu (jak czytać).
+>   MOD-REJESTR-ZALACZNIKOW-CHECKPOINT odpowiada za WIDOCZNOŚĆ dla użytkownika
+>   (pokazanie rejestru ze statusami i pytanie o kontynuację, gdy coś zostało
+>   pominięte). SD-REJ z tego modułu jest wejściem dla RZ-REJ tamtego modułu.
 
 ---
 

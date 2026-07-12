@@ -1,7 +1,7 @@
 # MOD-SELEKCJA-DOWODOW — automatyczna selekcja dowodów do tez z oceną ryzyka
 
-> Status: shared canonical. Wywoływany w KROK 4a.5 (`analizator-dowodow-v3`),
-> PO `MOD-MAPA-PRZEPISOW.md` (KROK 4a.3), PRZED przekazaniem do
+> Status: shared canonical. Wywoływany w KROK 3B.3 (`analizator-dowodow-v3`),
+> PO `MOD-MAPA-PRZEPISOW.md` (KROK 3B.2), PRZED przekazaniem do
 > `pisma-procesowe-v3` W1.3.
 >
 > ⛔ HARDGATE-SD-01: Żaden dowód z RYZYKIEM KRZYŻOWYM WYSOKIM lub KRYTYCZNYM
@@ -333,7 +333,7 @@ Każda LUKA ISTOTNA → jako:
 
 ---
 
-## 7. Self-check przed KROK 4a.5
+## 7. Self-check przed KROK 3B.3
 
 ```
 □ Czy korpus dowodów MD1/MD2 wczytany PRZED uruchomieniem?
