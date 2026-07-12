@@ -73,8 +73,9 @@ changelog:
     changelog (14 wpisów, od 3.13 wzwyż) wyniesiona 1:1 do
     references/CHANGELOG.md — nic nie usunięto, tylko przeniesiono z
     pola YAML `changelog` (zawsze wczytywanego z SKILL.md, 245 linii) do
-    pliku ładowanego na żądanie. view /mnt/skills/user/przesluchanie-
-    swiadkow-v2-min90/references/CHANGELOG.md po pełną historię."
+    pliku ładowanego na żądanie.
+    view /mnt/skills/user/przesluchanie-swiadkow-v2-min90/references/CHANGELOG.md
+    po pełną historię."
   - "3.16 (AUDYT SYSTEMU — na wyraźne wskazanie użytkownika, 3 luki naraz):
     (1) USUNIĘTO wyjątek w CHECKPOINT-W2 pozwalający pominąć pauzę, gdy
     użytkownik wprost zażądał pytań od razu — teraz BEZ WYJĄTKÓW, zawsze
