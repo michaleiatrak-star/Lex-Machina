@@ -1,5 +1,16 @@
 # Orzecznictwo — Zasady Weryfikacji i Cytowania
 
+> ⛔ **UZUPEŁNIENIE O KANONICZNĄ HIERARCHIĘ:** ten plik opisuje WYŁĄCZNIE
+> dozwolone źródła i format cytowania. Ocenę **wagi/hierarchii** danego
+> orzeczenia (SN 7 sędziów > uchwała SN > wyrok SN > NSA/WSA > SA > SO > SR
+> > komentarz) oraz test aktualności linii orzeczniczej wykonuj wyłącznie wg
+> pliku kanonicznego, żeby nie utrzymywać dwóch niezależnych ocen wagi:
+> ```
+> view /mnt/skills/user/shared/ORZECZENIA-HIERARCHIA.md
+> ```
+> (ten sam plik jest źródłem prawdy dla `analizator-dowodow-v3` i
+> `pisma-procesowe-v3` — patrz CHECKLIST-DEDUP.md).
+
 ## Dozwolone źródła (wyłącznie te)
 
 | Baza | URL | Zakres |
@@ -9,6 +20,7 @@
 | Trybunał Konstytucyjny | `trybunal.gov.pl` | Orzeczenia TK |
 | NSA / WSA | `nsa.gov.pl` | Sądownictwo administracyjne |
 | SAOS | `saos.org.pl` | Agregator — wyłącznie do weryfikacji krzyżowej |
+
 
 ## Zasady cytowania
 

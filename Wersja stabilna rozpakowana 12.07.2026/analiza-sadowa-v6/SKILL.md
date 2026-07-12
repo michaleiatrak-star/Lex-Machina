@@ -1,6 +1,6 @@
 ---
 name: analiza-sadowa-v6
-version: 6.0
+version: 6.1
 type: executive-analiza
 status: production
 compatibility: "web_search, web_fetch, show_widget"
@@ -13,6 +13,24 @@ description: |
   pracownika; pyta o "narzędzie"/"dashboard"/"analizator" → wywołaj widget React;
   pyta "co mam zrobić" / "czy mam szansę" / "czy to zgodne z prawem".
   v6: model CZTEROPRZEBIEGOWY z obowiązkową DWUKROTNĄ WERYFIKACJĄ dowodów i pism.
+changelog:
+  - "6.1 (2026-07-12): naprawa nakładania kompetencji z analizator-dowodow-v3
+    (WARN z audytu silnika). references/koszty-terminy.md i
+    references/orzecznictwo.md przestały utrzymywać własne, niezależne
+    kopie terminów procesowych i hierarchii orzecznictwa — teraz wskazują
+    na kanoniczne shared/terminy.md i shared/ORZECZENIA-HIERARCHIA.md,
+    zachowując lokalnie WYŁĄCZNIE pozycje uzupełniające (terminy) i format
+    cytowania (orzecznictwo). Dodano sekcję 'GRANICA KOMPETENCJI vs.
+    analizator-dowodow-v3'. Przy okazji wykryto i zgłoszono błędną
+    klasyfikację 'Odpowiedź na pozew' (art. 207 §2 KPC) jako ZAWITY w
+    shared/terminy.md, powinien być INSTRUKCYJNY — patrz changelog
+    shared/terminy.md. UWAGA: pozostałe 13 plików w references/ (MOD-A..F,
+    filtry-analityczne, PRZEBIEG-1..3, WERYFIKACJA-DOWODOW, moduly-spec,
+    BLUEPRINT-SCHEMA) nadal nie mają żadnych odwołań do shared/ — to
+    świadomie NIE zostało ruszone w tej sesji (brak w nich potwierdzonej
+    duplikacji jak w terminy/orzecznictwo; wymaga osobnej sesji per plik,
+    nie zgadywania). Zarejestrować w CHECKLIST-DEDUP.md i zamknąć
+    odpowiednią pozycję w WARN-OTWARTE.md."
 ---
 
 **Zasada progressive disclosure:** Zacznij od tego pliku. Doładuj references/ tylko gdy
@@ -47,6 +65,29 @@ analiza-sadowa-v6/
 
 > Orzecznictwo: orzeczenia.ms.gov.pl, sn.pl, trybunal.gov.pl, nsa.gov.pl, saos.org.pl. Nigdy z pamięci.
 > ZAKAZ AUTOŁADOWANIA JSX — widget WYŁĄCZNIE na jawne żądanie użytkownika.
+
+## GRANICA KOMPETENCJI vs. analizator-dowodow-v3
+
+Oba skille pokrywają częściowo ten sam obszar (dowody, terminy, orzecznictwo,
+ocena szans) — to świadomy, udokumentowany stan, nie przypadkowy duplikat.
+Rozdział wykonuje router (`prawny-router-v3`, tabela PRIMARY/SECONDARY/
+FALLBACK), a nie ten plik — ale dla kogoś czytającego wyłącznie ten skill:
+
+- **analiza-sadowa-v6 = PRIMARY**, gdy: ocena całościowa szans w sprawie na
+  bazie akt/wyroku/decyzji, audyt błędów pełnomocnika strony przeciwnej,
+  audyt własnych pism, 6 wąskich modułów specjalistycznych (MOD-A…MOD-F).
+- **analizator-dowodow-v3 = PRIMARY**, gdy: głęboka analiza dowodowa
+  wieloplikowa (hierarchia A–D, macierz dowód×teza, łańcuchy proweniencji,
+  25 dziedzin MX), analiza śledcza (profilowanie, VSA, HUMINT), lub gdy
+  wyjściem ma być graf/macierz, nie executive summary.
+- Terminy procesowe i hierarchia orzecznictwa: **oba skille korzystają z tych
+  samych plików kanonicznych** `shared/terminy.md` i
+  `shared/ORZECZENIA-HIERARCHIA.md` (patrz `references/koszty-terminy.md` i
+  `references/orzecznictwo.md` w tym skillu) — żadna z dwóch implementacji
+  nie utrzymuje już własnej, potencjalnie rozbieżnej kopii tych tabel.
+- Gdy zapytanie pasuje do obu → router ładuje `analiza-sadowa-v6` jako
+  PRIMARY i `analizator-dowodow-v3` jako SECONDARY (patrz
+  `prawny-router-v3/SKILL.md`, tabela routingu).
 
 ---
 

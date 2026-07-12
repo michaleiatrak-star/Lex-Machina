@@ -2,55 +2,66 @@
 
 ## TERMINY PROCESOWE
 
-### KPC — Kodeks postępowania cywilnego
+> ⛔ **ŹRÓDŁO KANONICZNE:** `shared/terminy.md` jest jedyną kanoniczną tabelą
+> terminów procesowych w systemie (używaną też przez `analizator-dowodow-v3`
+> §MP12-terminy i `pisma-procesowe-v3`). Przed podaniem jakiegokolwiek
+> terminu:
+> ```
+> view /mnt/skills/user/shared/terminy.md
+> ```
+> Terminy poniżej to WYŁĄCZNIE pozycje UZUPEŁNIAJĄCE, których nie ma w
+> `shared/terminy.md` (żeby uniknąć dwóch rozbieżnych źródeł prawdy —
+> patrz CHECKLIST-DEDUP.md, wpis "Terminy procesowe"). W razie sprzeczności
+> między tym plikiem a `shared/terminy.md` wiążący jest `shared/terminy.md`.
+> Nigdy nie podawaj terminu z pamięci jako pewnego — zweryfikuj podstawę
+> prawną w ISAP, zwłaszcza gdy istnieje ryzyko nowelizacji.
+
+### KPC — pozycje uzupełniające (brak w shared/terminy.md)
 
 | Czynność | Termin | Rodzaj | Podstawa | Skutek przekroczenia |
 |----------|--------|--------|----------|----------------------|
-| Wniosek o uzasadnienie | **7 dni** | ZAWITY | art. 328¹ KPC | Utrata prawa do apelacji |
-| Apelacja | **14 dni** od doręczenia uzasadnienia | ZAWITY | art. 369 §1 KPC | Wyrok prawomocny |
-| Zażalenie | **7 dni** | ZAWITY | art. 394 §2 KPC | Postanowienie prawomocne |
-| Sprzeciw od nakazu zapłaty | **14 dni** | ZAWITY | art. 503 §1 KPC | Nakaz prawomocny |
-| Odpowiedź na pozew | **14 dni** (instrukcyjny) | INSTRUKCYJNY | art. 207 §2 KPC | Pominięcie twierdzeń |
 | Zarzuty od nakazu zapłaty | **14 dni** | ZAWITY | art. 493 §1 KPC | Nakaz prawomocny |
 | Skarga na czynności komornika | **7 dni** | ZAWITY | art. 767 §4 KPC | Niedopuszczalna |
-| Skarga kasacyjna | **2 miesiące** | ZAWITY | art. 398⁵ §1 KPC | Niedopuszczalna |
+| Skarga kasacyjna (cywilna) | **2 miesiące** | ZAWITY | art. 398⁵ §1 KPC | Niedopuszczalna |
 
-### KPK — Kodeks postępowania karnego
+### KPK — pozycje uzupełniające
 
 | Czynność | Termin | Rodzaj | Podstawa |
 |----------|--------|--------|----------|
-| Wniosek o uzasadnienie wyroku | **7 dni** | ZAWITY | art. 422 §1 KPK |
-| Apelacja | **14 dni** od doręczenia uzasadnienia | ZAWITY | art. 445 §1 KPK |
 | Zażalenie | **7 dni** | ZAWITY | art. 460 §1 KPK |
 | Kasacja | **30 dni** od doręczenia orzeczenia | ZAWITY | art. 524 §1 KPK |
 | Wniosek o wznowienie | Bez terminu (różne podstawy) | — | art. 542 KPK |
 
-### KPW — Kodeks postępowania w sprawach o wykroczenia
+### KPW — pozycje uzupełniające
 
 | Czynność | Termin | Rodzaj | Podstawa |
 |----------|--------|--------|----------|
-| Wniosek o uzasadnienie | **3 dni** | ZAWITY | art. 105 §1 KPW |
-| Apelacja | **7 dni** od doręczenia uzasadnienia | ZAWITY | art. 105 §2 KPW |
 | Sprzeciw od wyroku nakazowego | **7 dni** | ZAWITY | art. 506 §1 KPK w zw. z KPW |
 
-### KPA — Kodeks postępowania administracyjnego / PPSA
+### KPA / PPSA — pozycje uzupełniające
 
 | Czynność | Termin | Rodzaj | Podstawa |
 |----------|--------|--------|----------|
-| Odwołanie od decyzji | **14 dni** | ZAWITY | art. 129 §2 KPA |
-| Skarga do WSA | **30 dni** od doręczenia decyzji | ZAWITY | art. 53 §1 PPSA |
 | Skarga kasacyjna do NSA | **30 dni** od doręczenia uzasadnienia WSA | ZAWITY | art. 177 §1 PPSA |
 | Zażalenie (KPA) | **7 dni** | ZAWITY | art. 141 §2 KPA |
 
-### KP — Kodeks pracy
+### KP — pozycje uzupełniające
 
 | Czynność | Termin | Rodzaj | Podstawa | Uwaga |
 |----------|--------|--------|----------|-------|
-| Odwołanie od wypowiedzenia | **21 dni** od doręczenia | ZAWITY | art. 264 §1 KP | ⚠ ROSZCZENIE WYGASA |
 | Żądanie przywrócenia / odszkodowania (rozwiązanie bez wypowiedzenia) | **21 dni** | ZAWITY | art. 264 §2 KP | ⚠ ROSZCZENIE WYGASA |
 | Odwołanie od wypowiedzenia umowy na czas określony | **21 dni** | ZAWITY | art. 264 §1 KP | |
 
 > **⚠ UWAGA:** Terminy zawite w prawie pracy są bezwzględne — sąd może je przywrócić tylko wyjątkowo (art. 265 KP), gdy strona nie ponosi winy za przekroczenie.
+
+> **⚠ ROZBIEŻNOŚĆ WYKRYTA (2026-07-12):** `shared/terminy.md` klasyfikuje
+> "Odpowiedź na pozew" (art. 207 §2 KPC) w sekcji "Terminy ZAWITE", ale
+> termin ten jest w istocie INSTRUKCYJNY (brak sankcji wygaśnięcia prawa —
+> jego przekroczenie skutkuje jedynie ryzykiem pominięcia spóźnionych
+> twierdzeń/dowodów na zasadach ogólnych, nie utratą możliwości złożenia
+> odpowiedzi). Zgłoszone do naprawy w `shared/terminy.md` — patrz changelog
+> tego pliku i AUDIT-JOURNAL.md. Do czasu naprawy: traktuj ten konkretny
+> wiersz jako INSTRUKCYJNY, nie ZAWITY.
 
 ---
 

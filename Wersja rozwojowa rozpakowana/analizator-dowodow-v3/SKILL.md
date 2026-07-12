@@ -1,6 +1,6 @@
 ---
 name: analizator-dowodow-v3
-version: "5.14.0"
+version: "5.14.1"
 type: executive-analiza
 status: production
 description: |
@@ -50,6 +50,14 @@ pipeline:
     - AD-KROK3-WYKONANIE
     - AD-KROK4-DASHBOARD
 changelog:
+  - "5.14.1 (AUDYT SYSTEMU 2026-07-12d — rozwiązanie WARN 'nakładanie
+    kompetencji z analiza-sadowa-v6' z audytu silnika): dodano jawną notę
+    'Granica kompetencji vs. analiza-sadowa-v6' zaraz po nagłówku (linia
+    ~113). Sam ten skill nie duplikował tabel terminów/orzecznictwa (już
+    poprawnie wskazywał na shared/HYBRID-VALIDATION i shared/terminy w
+    MP12-terminy.md) — źródłem realnej duplikacji był analiza-sadowa-v6,
+    naprawiony równolegle w tej samej sesji (v6.1). Nie zmieniono logiki
+    pipeline'u, wyłącznie dokumentację granicy odpowiedzialności."
   - "5.14.0 (AUDYT SYSTEMU 2026-07-12c — na wyraźne polecenie użytkownika,
     naprawa strukturalna, opcja '1' spośród dwóch zaproponowanych): dodano
     nową sekcję KROK 3B — SYNTEZA: ASPEKTY → PRZEPISY → SELEKCJA DOWODÓW,
@@ -114,6 +122,18 @@ changelog:
 > Pytam zanim wystawię ocenę. Każdy alert zawiera podstawę prawną.
 > Role: sędzia neutralny · pełnomocnik przeciwnika · Twój pełnomocnik
 > · analityk śledczy (hipotezy tylko jako `[H-ŚLEDCZA]`).
+
+> **Granica kompetencji vs. analiza-sadowa-v6:** oba skille pokrywają
+> częściowo ten sam obszar (dowody, terminy, orzecznictwo, ocena szans) —
+> świadomy, udokumentowany stan, rozdzielany przez router
+> (`prawny-router-v3`, tabela PRIMARY/SECONDARY/FALLBACK). Ten skill jest
+> PRIMARY dla głębokiej analizy dowodowej wieloplikowej (hierarchia A–D,
+> macierz dowód×teza, proweniencja, 25 dziedzin MX) i analizy śledczej;
+> `analiza-sadowa-v6` jest PRIMARY dla executive summary szans w sprawie i
+> audytu błędów pełnomocnika. Terminy procesowe (MP12) i hierarchia
+> orzecznictwa korzystają z tych samych plików kanonicznych
+> `shared/terminy.md` / `shared/ORZECZENIA-HIERARCHIA.md` co
+> `analiza-sadowa-v6` — nie utrzymuj tu równoległej kopii tych tabel.
 
 ---
 

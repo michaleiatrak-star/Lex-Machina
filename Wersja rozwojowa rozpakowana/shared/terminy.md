@@ -11,7 +11,7 @@
 | **3 dni** | Wniosek o uzasadnienie (KPW) | art. 105 §1 KPW |
 | **7 dni** | Apelacja wykroczeniowa | art. 105 §2 KPW |
 | **14 dni** | Sprzeciw od nakazu zapłaty | art. 503 §1 KPC |
-| **14 dni** | Odpowiedź na pozew | art. 207 §2 KPC |
+| **14 dni** ⚠ | Odpowiedź na pozew — **UWAGA: to termin INSTRUKCYJNY, nie zawity** (patrz przypis) | art. 207 §2 KPC |
 | **14 dni** | Apelacja cywilna (od doręcz. uzasadn.) | art. 369 §1 KPC |
 | **14 dni** | Apelacja karna | art. 445 §1 KPK |
 | **14 dni** | Odwołanie od decyzji admin. | art. 129 §2 KPA |
@@ -22,6 +22,16 @@
 | **1 miesiąc** | Odwołanie od decyzji ZUS do sądu | art. 477⁹ §1 KPC |
 | **6 tygodni** | Zaskarżenie uchwały wspólnoty mieszkaniowej | art. 25 uWŁ |
 | **6 miesięcy** | Przyjęcie/odrzucenie spadku | art. 1015 §1 KC |
+
+> **Przypis (dodany 2026-07-12, wykryty przy naprawie nakładania kompetencji
+> analiza-sadowa-v6/analizator-dowodow-v3):** wiersz "Odpowiedź na pozew"
+> (art. 207 §2 KPC) jest błędnie umieszczony w tabeli "Terminy ZAWITE" —
+> ten termin jest w rzeczywistości INSTRUKCYJNY: jego przekroczenie nie
+> powoduje wygaśnięcia prawa do złożenia odpowiedzi, a jedynie ryzyko
+> pominięcia spóźnionych twierdzeń/dowodów na zasadach ogólnych (art. 205³
+> §2 / 235¹ KPC), nie utratę samego uprawnienia. Do decyzji przy najbliższym
+> audycie: przenieść wiersz do osobnej sekcji "Terminy instrukcyjne" czy
+> zostawić w tabeli głównej z adnotacją ⚠ jak obecnie.
 
 ## Przedawnienia (instrukcyjne)
 

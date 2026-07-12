@@ -32,7 +32,7 @@ MOD-DOKUMENT-ANOMALIE  W1.2d-PRE  gdy ≥2 dokumenty strony przeciwnej lub praco
                                    ⛔ ZAWSZE gdy umowy o pracę / dokumenty XLSX /
                                    pisma strony przeciwnej z numerami rejestrowymi;
                                    DA-0→DA-5: krzyżowa weryfikacja KRS/NIP/REGON;
-                                   view /mnt/skills/user/shared/MOD-DOKUMENT-ANOMALIE.md
+                                   view /mnt/skills/user/shared/MOD-DOKUMENT-ANOMALIE_v1.0.0.md
 MOD-WARIANTY-POZWU     W1.2b      gdy aktywny (≥2 aspekty główne / sygnał
                                    wieloznaczności / żądanie wariantów)
 MOD-RED-TEAM-WLASNY    W1.6       gdy aktywny (wielopodmiotowość / ciągłość

@@ -1,6 +1,6 @@
 ---
 name: shared
-version: 2.2
+version: 2.4
 type: library
 entrypoint: SKILL.md
 compatibility: "wszystkie skille prawne systemu"
@@ -57,12 +57,46 @@ limitations:
     opisane tu jawnie, żeby FAZA 2E w trybie deklarowanym go NIE zgubiła.
     Decyzja architektoniczna (uznać jako świadomy wzorzec 'plik-most' czy
     wydzielić poza shared/) pozostaje OTWARTA — do następnego audytu."
-  - rozmiar (106 plików, 1,3 MB) — każda zmiana pliku kanonicznego ma
+  - rozmiar (115 plików, ~1,4 MB) — każda zmiana pliku kanonicznego ma
     potencjalnie systemowy promień rażenia; edytować tylko przez
     audyt-systemu-v4 z pełną weryfikacją CHECKLIST-DEDUP.md
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog:
+  - "2.4 (2026-07-12): korekta merytoryczna w terminy.md — wiersz 'Odpowiedź
+    na pozew' (art. 207 §2 KPC) był błędnie sklasyfikowany w tabeli 'Terminy
+    ZAWITE'; jest to termin INSTRUKCYJNY. Wykryte przy okazji naprawy WARN
+    'nakładanie kompetencji analiza-sadowa-v6/analizator-dowodow-v3' —
+    analiza-sadowa-v6 miał tę pozycję poprawnie oznaczoną jako INSTRUKCYJNY
+    we własnej (teraz usuniętej) kopii tabeli terminów, co ujawniło
+    rozbieżność z kanonicznym shared/terminy.md. Dodano adnotację ⚠ i
+    przypis w treści pliku zamiast przenosić wiersz do nowej sekcji — decyzja
+    strukturalna (osobna sekcja 'Terminy instrukcyjne' vs. adnotacja inline)
+    pozostaje otwarta do najbliższego audytu."
+  - "2.3 (2026-07-12): ODZYSKANIE 7 PLIKÓW KANONICZNYCH uznanych za utracone
+    (CRIT z audytu silnika, zgłoszony przez pisma-procesowe-v3 SKILL.md
+    i modules/MOD-SZABLONY.md jako ⛔ OBOWIĄZKOWE, brak na dysku):
+    MOD-BUDOWA-ARGUMENTU.md, MOD-ELIMINACJA-TEZ.md, MOD-KARTA-DOWODU.md,
+    MOD-KOSZT-ODPOWIEDZI.md, MOD-MIKROPODSUMOWANIA.md,
+    MOD-SKUTEK-PROCESOWY.md, MOD-STRESS-TEST.md. Źródło: archiwum
+    shared_v5.zip (frontmatter shared v2.1, poprzedzające obecną v2.2) —
+    treść modułów zweryfikowana jako produkcyjna (nagłówek 'Status: PRODUKCJA
+    — plik kanoniczny shared', ścieżki i wywołania `view` zgodne z aktualną
+    strukturą, brak zależności kaskadowych do innych brakujących plików).
+    UWAGA METODOLOGICZNA: pozostałe 25 plików wspólnych z shared_v5.zip
+    różniło się treścią od wersji obecnej na dysku (v2.2 jest od nich
+    nowsza — np. PRAWO-HARDGATE.md 367 vs 257 linii) — te 25 NIE zostało
+    nadpisanych, przywrócono wyłącznie 7 plików faktycznie nieobecnych.
+    4 pliki obecne na dysku (MOD-AUDIT-BUNDLE.md, MOD-FSL-DOKUMENTY.md,
+    MOD-IDENTYFIKACJA-STRONY-UMOWY.md, MOD-REJESTR-ZALACZNIKOW-CHECKPOINT.md)
+    nie istniały w shared_v5.zip — dodane po tym zrzucie, zachowane bez zmian.
+    Tabela 'Moduły kancelaryjne v3.0' i sekcja 'Obowiązkowe wywołania dla
+    generatorów pism' uzupełnione o 7 odzyskanych modułów. Do zrobienia przez
+    audyt-systemu-v4 przy najbliższej sesji: wpis w AUDIT-JOURNAL.md,
+    zamknięcie odpowiadającej flagi w WARN-OTWARTE.md, weryfikacja czy
+    CHECKLIST-DEDUP.md wymaga aktualizacji (dwa moduły — MOD-KARTA-DOWODU
+    i MOD-ELIMINACJA-TEZ — są współdzielone przez pisma-procesowe-v3 i
+    analizator-dowodow-v3, sprawdzić czy to jedyna kanoniczna lokalizacja)."
   - "2.2: standaryzacja metadanych frontmatter (dependencies/inputs/outputs/
     confidence/escalation/limitations/required_modules) — sesja 2026-07-04.
     Jawnie odnotowane ZNANE ODSTĘPSTWO (5 plików z zależnością zwrotną do
@@ -156,6 +190,13 @@ Nie wczytuj wszystkich naraz — tylko te potrzebne dla danego kroku.
 | `MOD-KONCENTRACJA.md` | Metryka długości pisma per typ — limity orientacyjne, algorytm K1–K4, reguły skracania |
 | `MOD-DOKTRYNA.md` | Polityka cytowania komentarzy i doktryny — hierarchia D-1–D-4, formaty, HARDGATEs |
 | `MOD-WIDGET-IO.md` | ⭐ Obligatoryjny pasek Import/Export dla widgetów analitycznych — matryca per skill, wzorzec HTML/CSS/JS, reguły IO-1–IO-8 |
+| `MOD-KARTA-DOWODU.md` | ⛔ Karta dowodowa i graf faktów — pisma-procesowe-v3 W1.2c-PRE (po SD-SKAN, przed macierzą MT1); analizator-dowodow-v3 BLOK-B2 |
+| `MOD-ELIMINACJA-TEZ.md` | ⛔ Eliminacja tez, żądań i przepisów bez pokrycia prawnego — pisma-procesowe-v3 W1.2a-POST (po CLAIM-VALIDATION, przed W1.3); analizator-dowodow-v3 BLOK-C |
+| `MOD-BUDOWA-ARGUMENTU.md` | ⛔ Obowiązkowy schemat budowy każdego argumentu — W2.2, każdy akapit uzasadnienia |
+| `MOD-KOSZT-ODPOWIEDZI.md` | ⛔ Optymalizacja kosztu procesowego dla przeciwnika — W2.2 dla każdego głównego twierdzenia + W3.6a AUDYT-KOŃCOWY |
+| `MOD-MIKROPODSUMOWANIA.md` | ⛔ Obowiązkowe podsumowanie każdego rozdziału uzasadnienia — W2.2, koniec każdej sekcji numerowanej |
+| `MOD-SKUTEK-PROCESOWY.md` | ⛔ Obowiązkowy blok skutku procesowego — W2.2, koniec każdego bloku uzasadnienia klasy A/B |
+| `MOD-STRESS-TEST.md` | ⛔ Symulacja odpowiedzi pełnomocnika pozwanego — po W2 (projekt pisma), przed W3 / AUDYT-KOŃCOWY |
 
 ### Obowiązkowe wywołania dla generatorów pism
 
@@ -189,4 +230,26 @@ view /mnt/skills/user/shared/MOD-KONCENTRACJA.md    (kontrola długości — zaw
 view /mnt/skills/user/shared/MOD-PEER-REVIEW.md     (gdy WPS>50k / ≥3 żądania / apelacja)
 view /mnt/skills/user/shared/MOD-DOKTRYNA.md        (gdy cytowanie komentarzy w W2)
 view /mnt/skills/user/shared/MOD-TIMING.md          (gdy pytanie o timing złożenia)
+```
+
+Przed W1.3 (eliminacja tez bez pokrycia) i w trakcie W1.2c-PRE (karta dowodowa), obowiązkowo:
+
+```text
+view /mnt/skills/user/shared/MOD-ELIMINACJA-TEZ.md  (⛔ W1.2a-POST, po CLAIM-VALIDATION)
+view /mnt/skills/user/shared/MOD-KARTA-DOWODU.md    (⛔ W1.2c-PRE, po SD-SKAN)
+```
+
+W W2.2 (redakcja każdego bloku uzasadnienia), obowiązkowo w tej kolejności:
+
+```text
+view /mnt/skills/user/shared/MOD-BUDOWA-ARGUMENTU.md    (⛔ każdy akapit uzasadnienia)
+view /mnt/skills/user/shared/MOD-KOSZT-ODPOWIEDZI.md    (⛔ każde główne twierdzenie)
+view /mnt/skills/user/shared/MOD-SKUTEK-PROCESOWY.md    (⛔ koniec bloku klasy A/B)
+view /mnt/skills/user/shared/MOD-MIKROPODSUMOWANIA.md   (⛔ koniec każdego rozdziału)
+```
+
+Po W2 (projekt pisma gotowy), przed W3/AUDYT-KOŃCOWY, obowiązkowo:
+
+```text
+view /mnt/skills/user/shared/MOD-STRESS-TEST.md     (⛔ symulacja odpowiedzi pełnomocnika pozwanego)
 ```
