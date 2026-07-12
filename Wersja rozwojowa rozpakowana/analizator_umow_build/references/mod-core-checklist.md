@@ -48,53 +48,6 @@ TYP DOKUMENTU:
 
 ## MODUŁ B — ANALIZA KLAUZUL
 
-### B.0 SYNTEZA KRZYŻOWA — OBOWIĄZKOWA PRZED WNIOSKAMI KOŃCOWYMI
-
-> ⛔ ZASADA: analiza klauzula-po-klauzuli (B.1) jest warunkiem KONIECZNYM,
-> ale NIGDY wystarczającym. Żaden wniosek kwalifikacyjny (np. „to jest B2B",
-> „to nie jest stosunek pracy", „umowa jest zgodna z prawem") nie może
-> opierać się wyłącznie na odczycie jednej klauzuli z osobna — musi wynikać
-> z zestawienia WSZYSTKICH klauzul, które razem opisują tę samą relację
-> faktyczną. Pojedyncza klauzula analizowana w izolacji systematycznie
-> zaniża ryzyko, ponieważ ukrywa efekt łącznego działania kilku postanowień.
-
-```
-PROCEDURA (wykonaj PO B.1, PRZED sformułowaniem wniosku/raportu):
-
-KROK A: Zbuduj TABELĘ CECH dla każdego testu kwalifikacyjnego, który
-        dotyczy dokumentu (np. test stosunku pracy G.1, test konsumenta
-        J8, test rzeczywistego pracodawcy MOD-PRACODAWCA-RZECZYWISTY).
-        W wierszach: cechy testu. W kolumnach: numer §/klauzuli, w której
-        cecha występuje (może być kilka klauzul na jedną cechę i odwrotnie).
-
-KROK B: Sumuj cechy z CAŁEGO dokumentu, nie tylko z klauzuli "wprost"
-        dotyczącej danego zagadnienia. Np. cecha "podporządkowanie"
-        (test z G.1) może wynikać jednocześnie z: §dot. godzin pracy,
-        §dot. raportowania, §dot. sprzętu, §dot. lokalizacji — każda
-        z osobna może wyglądać neutralnie, razem dają wynik testu.
-
-KROK C: Sprawdź KLAUZULE DEKLARATORYJNE (oświadczenia stron o charakterze
-        prawnym umowy, np. "strony zgodnie oświadczają, że niniejsza
-        umowa nie jest umową o pracę") WYŁĄCZNIE jako dodatkowy wiersz
-        w tabeli — NIGDY jako rozstrzygnięcie testu. Takie oświadczenie:
-          → nie ma mocy wiążącej wobec sądu/ZUS/PIP — o kwalifikacji
-            decyduje treść faktycznie wykonywanych obowiązków i pozostałe
-            postanowienia (art. 22 §1¹ KP: o rodzaju stosunku prawnego
-            decyduje jego rzeczywista treść, nie nazwa nadana przez strony)
-          → jeśli pozostałe klauzule dokumentu spełniają ≥3 cechy testu
-            z G.1 — oświadczenie NIE obniża wyniku testu i musi być
-            oznaczone jako SPRZECZNE Z TREŚCIĄ DOKUMENTU (CRIT), a nie
-            jako środek zaradczy
-KROK D: Dopiero po A–C sformułuj wniosek końcowy i wpisz go do raportu
-        (Moduł F.1) — z odesłaniem do konkretnych numerów §, nie ogólnikowo.
-```
-
-**Zakaz wzorca "izolowanej klauzuli":** raport nie może zawierać zdania
-typu „§X jest w porządku" bez wskazania, czy §X w połączeniu z innymi
-postanowieniami zmienia ocenę całości. Jeśli synteza B.0 zmienia wynik
-uzyskany dla pojedynczej klauzuli w B.1, raport musi to wprost odnotować
-(„§X samodzielnie neutralny, ale w połączeniu z §Y i §Z wskazuje na...").
-
 ### B.1 Sekwencja obowiązkowa dla każdej klauzuli
 
 ```

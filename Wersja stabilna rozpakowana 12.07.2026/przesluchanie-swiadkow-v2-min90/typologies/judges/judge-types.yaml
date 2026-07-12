@@ -1,0 +1,52 @@
+judge_types:
+  - id: formalist
+    label: formalistyczny
+    strategy: krótko, precyzyjnie, zgodnie z tezą dowodową
+    risks:
+      - ucięcie pytań narracyjnych
+      - niska tolerancja dla dygresji
+  - id: evidence_focused
+    label: dowodowy
+    strategy: każde pytanie powiązać z dokumentem lub faktem
+    risks:
+      - niska tolerancja dla ogólnej narracji
+  - id: pragmatic
+    label: pragmatyczny
+    strategy: od razu do faktów decydujących
+    risks:
+      - pominięcie tła
+  - id: active
+    label: aktywny
+    strategy: krótkie bloki pytań, gotowość do zmiany kolejności
+    risks:
+      - przejęcie kontroli przez sąd
+  - id: passive
+    label: pasywny
+    strategy: pełna kontrola struktury przez stronę
+    risks:
+      - chaos przy złej strukturze pytań
+  - id: skeptical
+    label: sceptyczny
+    strategy: ostrożne twierdzenia, mocne kotwiczenie źródłowe
+    risks:
+      - wysoki próg wiarygodności
+  - id: settlement_oriented
+    label: ugodowy
+    strategy: unikać teatralizacji, akcentować fakty pozwalające rozstrzygnąć spór
+    risks:
+      - nacisk na kompromis
+  - id: literal
+    label: literalny
+    strategy: trzymać się literalnej treści dokumentów i przepisów
+    risks:
+      - słabsza recepcja argumentów celowościowych
+  - id: anti_emotional
+    label: antyemocjonalny
+    strategy: emocje tylko jako skutek, nie jako oś pytań
+    risks:
+      - negatywna reakcja na dramatyzację
+  - id: detail_oriented
+    label: szczegółowy
+    strategy: mikrochronologia, daty, osoby, miejsca, dokumenty
+    risks:
+      - wychwycenie niespójności w detalach
