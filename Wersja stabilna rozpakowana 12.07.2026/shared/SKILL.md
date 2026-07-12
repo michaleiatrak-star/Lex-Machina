@@ -1,6 +1,6 @@
 ---
 name: shared
-version: 2.4
+version: 2.6
 type: library
 entrypoint: SKILL.md
 compatibility: "wszystkie skille prawne systemu"
@@ -63,6 +63,34 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog:
+  - "2.6 (2026-07-12, runda 2): ZAMKNIĘTE — WARN 'numer wersji vs nazwa
+    pliku' z MOD-DOKUMENT-ANOMALIE (otwarty w 2.5). Plik przemianowano z
+    MOD-DOKUMENT-ANOMALIE_v1.0.0.md na MOD-DOKUMENT-ANOMALIE_v1.1.0.md, żeby
+    nazwa fizyczna zgadzała się z deklarowaną w treści wersją 1.1.0.
+    Zweryfikowano całą bazę (grep całego /mnt/skills/user/) — tylko dwa
+    miejsca odwoływały się do tego pliku po pełnej ścieżce z rozszerzeniem:
+    pisma-procesowe-v3/references/MODULY-MAPA.md i
+    pisma-procesowe-v3/references/AUTOMAT-STANOW.md — oba zaktualizowane.
+    Pozostałe wzmianki w systemie (shared/CP-GATE.md,
+    shared/MOD-KOSZT-ODPOWIEDZI.md, shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md,
+    shared/MOD-STEP-TRACKER.md, pisma-procesowe-v3/modules/
+    MOD-PRACODAWCA-RZECZYWISTY.md, pisma-procesowe-v3/references/
+    SELF-CHECK-PISMA.md, pisma-procesowe-v3/references/W3-WERYFIKACJA.md,
+    pisma-procesowe-v3/SKILL.md) to nazwy koncepcyjne bez ścieżki/rozszerzenia
+    — nie wymagały zmiany. Wpis changelog 2.5 opisujący pierwotną naprawę
+    (linia 'MOD-DOKUMENT-ANOMALIE_v1.0.0.md — plik...') pozostawiony bez
+    zmian jako wierny zapis historyczny tamtej sesji."
+  - "2.5 (2026-07-12): naprawa niespójności samoopisu w
+    MOD-DOKUMENT-ANOMALIE_v1.0.0.md — plik w dwóch miejscach (nagłówek
+    'Plik:' i wewnętrzna instrukcja `view` w sekcji WYWOŁANIE) opisywał
+    samego siebie pod nazwą bez sufiksu wersji (MOD-DOKUMENT-ANOMALIE.md),
+    mimo że fizyczna nazwa na dysku ma sufiks _v1.0.0. Nic zewnętrznego już
+    się o to nie potykało (naprawione w pisma-procesowe-v3 sesją wcześniej),
+    ale sam plik był niespójny. Przy okazji ujawniona DRUGA niespójność:
+    deklarowana w treści 'Wersja: 1.1.0' nie zgadza się z sufiksem nazwy
+    pliku '_v1.0.0' — odnotowana jawnie w pliku, nierozstrzygnięta (wymaga
+    decyzji: zmienić nazwę pliku na _v1.1.0, czy to nazwa jest kanoniczna a
+    numer w treści jest przestarzały)."
   - "2.4 (2026-07-12): korekta merytoryczna w terminy.md — wiersz 'Odpowiedź
     na pozew' (art. 207 §2 KPC) był błędnie sklasyfikowany w tabeli 'Terminy
     ZAWITE'; jest to termin INSTRUKCYJNY. Wykryte przy okazji naprawy WARN

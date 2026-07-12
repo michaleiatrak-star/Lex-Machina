@@ -1,12 +1,16 @@
 # MOD-DOKUMENT-ANOMALIE — Wykrywanie Anomalii w Dokumentach Pracodawcy/Strony Przeciwnej
 
-> **Plik:** `/mnt/skills/user/shared/MOD-DOKUMENT-ANOMALIE_v1.0.0.md`
+> **Plik:** `/mnt/skills/user/shared/MOD-DOKUMENT-ANOMALIE_v1.1.0.md`
 > **Wersja:** 1.1.0 (2026-06-23)
-> ⚠ **Niespójność wykryta 2026-07-12:** nazwa fizyczna pliku ma sufiks
-> `_v1.0.0`, a deklarowana wersja w treści to 1.1.0. Nie zmieniono nazwy
-> pliku (wymagałoby ponownej weryfikacji wszystkich odwołań zewnętrznych) —
-> do rozstrzygnięcia przy najbliższym audycie, czy plik powinien nazywać
-> się `MOD-DOKUMENT-ANOMALIE_v1.1.0.md`.
+> ✅ **Niespójność z 2026-07-12 rozwiązana (2026-07-12, runda 2):** plik
+> przemianowano z `MOD-DOKUMENT-ANOMALIE_v1.0.0.md` na
+> `MOD-DOKUMENT-ANOMALIE_v1.1.0.md`, żeby nazwa fizyczna zgadzała się z
+> deklarowaną wersją treści. Zaktualizowano oba realne odwołania `view` w
+> pisma-procesowe-v3 (`references/MODULY-MAPA.md`,
+> `references/AUTOMAT-STANOW.md`) — sprawdzone jako jedyne dwa miejsca w
+> całym systemie, które odwoływały się do tego pliku po ścieżce z
+> rozszerzeniem `.md` (pozostałe wzmianki to nazwy koncepcyjne bez ścieżki,
+> nie wymagały zmiany).
 > **Status:** PRODUKCJA
 > **Pozycja w pipeline:** W1.2d-EXTEND — po SD-VER, równolegle z MOD-POSZLAKI-KONTEKST
 > **Trigger:** ZAWSZE gdy ≥2 dokumenty tworzone przez stronę przeciwną (umowy, regulaminy,
@@ -164,7 +168,7 @@ REGUŁA-ADRES-DWUWERSJA:
 ```
 WYWOŁANIE w pisma-procesowe-v3:
   Po SD-VER KOMPLET, równolegle z MOD-POSZLAKI-KONTEKST, przed W1.3:
-  view /mnt/skills/user/shared/MOD-DOKUMENT-ANOMALIE_v1.0.0.md
+  view /mnt/skills/user/shared/MOD-DOKUMENT-ANOMALIE_v1.1.0.md
   → DA-0 → DA-1 → DA-2 → DA-3 → DA-4 (DA-REJ) → DA-5
   ⛔ STOP [CP-DA] po DA-4 → wyświetl DA-REJ → czekaj na zatwierdzenie
   Po zatwierdzeniu → DA-5 → zasilenie W1.3

@@ -1,6 +1,6 @@
 ---
 name: analizator-dowodow-v3
-version: "5.14.1"
+version: "5.14.2"
 type: executive-analiza
 status: production
 description: |
@@ -50,6 +50,13 @@ pipeline:
     - AD-KROK3-WYKONANIE
     - AD-KROK4-DASHBOARD
 changelog:
+  - "5.14.2 (2026-07-12, runda 2 — redukcja kosztu kontekstu): pełna
+    historia changelog (22 wpisy, 4.0.0...5.14.1) wyniesiona 1:1 do
+    references/CHANGELOG.md — nic nie usunięto, tylko przeniesiono z
+    pola YAML `changelog` (zawsze wczytywanego z SKILL.md) do pliku
+    ładowanego na żądanie.
+    `view /mnt/skills/user/analizator-dowodow-v3/references/CHANGELOG.md`
+    po pełną historię."
   - "5.14.1 (AUDYT SYSTEMU 2026-07-12d — rozwiązanie WARN 'nakładanie
     kompetencji z analiza-sadowa-v6' z audytu silnika): dodano jawną notę
     'Granica kompetencji vs. analiza-sadowa-v6' zaraz po nagłówku (linia
@@ -58,59 +65,6 @@ changelog:
     MP12-terminy.md) — źródłem realnej duplikacji był analiza-sadowa-v6,
     naprawiony równolegle w tej samej sesji (v6.1). Nie zmieniono logiki
     pipeline'u, wyłącznie dokumentację granicy odpowiedzialności."
-  - "5.14.0 (AUDYT SYSTEMU 2026-07-12c — na wyraźne polecenie użytkownika,
-    naprawa strukturalna, opcja '1' spośród dwóch zaproponowanych): dodano
-    nową sekcję KROK 3B — SYNTEZA: ASPEKTY → PRZEPISY → SELEKCJA DOWODÓW,
-    umieszczoną po KROK 3 (WYKONANIE) i przed KROK 4 (DASHBOARD). Odtwarza
-    ona punkt integracji, który wcześniej istniał pod nazwą 'KROK 4a'
-    (z podkrokami 4a.1-4a.6), zanim ten skill został przebudowany na router
-    KROK 2/3/4 (MD/MP-moduły, wersje 5.1.0+) — nazwa 'KROK 4a' przestała
-    istnieć w tym pliku, ale pozostała jako martwe odwołanie w 8 innych
-    plikach (shared/MOD-METODY-BADAWCZE.md, shared/MOD-MAPA-PRZEPISOW.md,
-    shared/MOD-KONTEKST-SESJI.md, shared/MOD-SELEKCJA-DOWODOW.md,
-    shared/MOD-PRIORYTETY-ASPEKTOW.md, prawny-router-v3/SKILL.md,
-    przesluchanie-swiadkow-v2-min90/SKILL.md,
-    pisma-procesowe-v3/references/W1-SZCZEGOLY.md), co dawało fałszywe
-    poczucie działającej integracji (audyt-systemu-v4/CHECKLIST-DEDUP.md
-    oznaczał ją jako '✅ wdrożone'). Wszystkie te 8 plików zaktualizowano
-    (KROK 4a → KROK 3B, KROK 4a.3 → KROK 3B.2, KROK 4a.5 → KROK 3B.3).
-    Przyczyna: pytanie użytkownika o użycie analizatora dowodów do
-    przygotowania pytań do świadka ujawniło, że opisany w
-    przesluchanie-swiadkow-v2-min90/KROK-0 mechanizm pobierania danych
-    z analizatora wskazywał na nieistniejący krok."
-  - "5.13.0 (AUDYT SYSTEMU — na pytanie użytkownika 'czy podobny mechanizm
-    nadzorczy jak w pisma procesowe i w przesłuchaniu świadków nie powinien
-    być obecny w analizatorze dowodów?'): dodano formalne sekcje YAML
-    `dependencies` / `pipeline.stages` / `validation.required_gates`
-    (wcześniej całkowicie nieobecne w tym skillu, w przeciwieństwie do
-    pisma-procesowe-v3 i przesluchanie-swiadkow-v2-min90). Dodano
-    MOD-STEP-TRACKER jako TWARDĄ zależność i nowy etap AD-KROK0c-STINIT
-    (inicjalizacja rejestru kroków tuż po SD-VER z KROK 0b, przed KROK 1).
-    Zarejestrowano 10 pozycji pipeline'u (AD-KROK0..AD-KROK4 + BLOK G/J/H)
-    w shared/MOD-STEP-TRACKER.md. Przyczyna: skill miał już poprawnie wpiętą
-    bramkę dowodową (SD-VER w KROK 0b), ale brakowało mu bramki proceduralnej
-    — żaden mechanizm nie raportował użytkownikowi pominięcia BLOK-u (np.
-    BLOK G/J przy A2=TAK) w wieloetapowym routerze KROK 2/3, mimo że
-    dokładnie taki mechanizm istnieje już w dwóch pokrewnych skillach."
-  - "5.11.0: MOD-ATAK-NA-SWIADKA (shared/ nowy plik kanoniczny): 9 technik ataku na swiadka TA-1..TA-9 (sprzecznosc wczesniejsze zeznania, motyw stronniczosci, percepcja, sprzecznosc wewnetrzna, skazanie, hearsay, konfrontacja, zeznania pisemne 271¹ KPC); 9 metod ataku na bieglego B1-B9 (metodologia B1, ultra vires B2, sprzecznosc B3, material niekompletny B4, wylaczenie B5, prywatna opinia B6, kwalifikacje B7, art.286 KPC B8, art.278¹ KPC B9); procedura obrony ante-cross AC1-AC4; specyfika DR-02/03/04/05. N8 w MOD-NEGACJA v1.1.0 rozszerzone. WARN-13 naprawiony: §WERYFIKACJA z tabela sygnatur. Kompletna implementacja sesji 1-4."
-  - "5.12.0: MOD-ATAK-NA-DOWOD (shared/ nowy plik kanoniczny v1.0.0): 12 wektorow ataku na dowod AD-1..AD-12 (autentycznosc, custody, relewantnosc art.227 KPC, forma/oryginal art.129 KPC, zakaz ustawowy art.168a KPK/art.170 KPK, wiarygodnosc tresci, zakres wniosku art.235¹ KPC, prekluzja art.235², kontrdowod aktywny KD-1..KD-5, cyfrowe/elektroniczne DE-1..DE-5, jednostronne ex parte, systemowy SY-1..SY-4); procedura ADIS ofensywna 5 krokow; procedura SHIELD obronna 6 krokow; specyfika DR-02/03/04/05; integracja MP5-atak/MOD-PROWENIENCJA/MOD-NEGACJA/pisma-procesowe-v3."
-  - "5.10.0: BLOK-NEGACJA — pełna analiza odporności na negację (auto-trigger ZAWSZE); 12 technik negacji N1-N12 z ripostą minimalną (gołosłowne zaprzeczenie, twierdzenie o nieistnieniu faktu/elementu prawnego, ogólnikowe zaprzeczenie, atak na autentyczność, odmowa przedłożenia [art.233§2], zarzut braku formy, atak na świadka, prekluzja, cherry-picking, antycypacja/immunizacja, spoliation); BLOK N1 ciężar dowodu per teza (KR1-KR5, 6 dziedzin odwróconego ciężaru OD-1..OD-6); BLOK N2 odporność per klasa A-G (co wystarczy do obalenia per każda klasa); BLOK N4 wykrywanie milczenia jako przyznania [PRZYZ-MIL-H/M/L] (art.229-230 KPC); procedura zintegrowana NG1-NG6 z integracją RAPORT D §D2, macierzy D×T i BLOK-KONSEKWENCJE. Plik kanoniczny: shared/MOD-NEGACJA-DOWODOW.md."
-  - "5.9.0: BLOK-PROWENIENCJA — wykrywanie wspólnego pochodzenia dowodów; trigger OBOWIĄZKOWY: ≥3 dowodów klasy C/D LUB ≥2 świadkowie z jednego miejsca pracy LUB DTA-ID-MODE aktywny; 7 typów proweniencji (SYS/KOM/ZAW/AUT/URZ/LIN/CHAIN); 4 klasy konsekwencji P+/P-/P0/P!; procedura PR1-PR5 w shared/MOD-PROWENIENCJA-DOWODOW.md (plik kanoniczny); MP6-sledczy §6.12 jako skrócony wariant inline; integracja z DTA-ID-MODE, macierzą D×T i BLOK-KONSEKWENCJE."
-  - "5.8.0: BLOK-KONSEKWENCJE (DTA W6) — warstwa skutków prawnych tezy: KC1 skutek bezpośredni → norma, KC2 skutek pośredni → inne roszczenia, KC3 skutek strategiczny → pozycja procesowa; trigger ZAWSZE po tezach; ≥2 konsekwencje wymagane; tablica consequences[] w dashboardzie. DTA-ID-MODE — numeracja krzyżowa D-NNN/F-NNN/T-NN: trigger OBOWIĄZKOWY przy ≥5 plikach lub ≥5 tezach; procedura DTA-1..DTA-4; zasada F-NNN = tylko fakty (ZAKAZ wniosków). LA-WNIOSEK-W-FAKCIE — typ #23 w MOD-LAPSUS-AUDYT (formalizacja DTA W2: fakt ≠ wniosek; severity ISTOTNE)."
-  - "5.7.0: nowy moduł MOD-NAZEWNICTWO-STRON.md (10 tabel nazewnictwa T1-T10: cywilne procesowe/nieprocesowe, karne KPK, wykroczenia KPW, administracyjne KPA, sądowoadministracyjne PPSA, pracownicze, egzekucyjne, zabezpieczające, rodzinne; 7 zestawów wymogów formalnych W1-W7 z elementami OBL/ADD/POZ/WNP/WSA/ZAW/WEZ; 7 wzorów nagłówków N1-N7; reguły cross-check C1/C2 dla LA-RODZAJ i LA-PODMIOT-POWTORZONY); MOD-LAPSUS-AUDYT.md zaktualizowany o wywołanie MOD-NAZEWNICTWO-STRON; BLOK-NAZW rozszerzony o cross-reference do tabel T"
-  - "5.6.4: BLOK J zastąpiony odwołaniem do dedykowanego modułu MOD-LAPSUS-AUDYT.md; moduł zawiera 22 typy lapsusów w 4 kategoriach (Podmiot, Kwalifikacja, Logika, Dokument), protokół L0-L5, tabele 22 kodów, źródła eksperckie (prawo.pl, Palestra, Lawyers Mutual, BriefCatch, Cornell LII, arxiv); nowe typy z D04: [LA-PODMIOT-POWTORZONY] (ten sam podmiot dwa razy zamiast dwóch różnych), [LA-BRAK-KONKRETYZACJI] (żądanie bez wskazania konkretnego czynu/daty); wzorzec systemowy LA-RODZAJ potwierdzony w D02+D03+D04 (4 wystąpienia u tego samego autora); tablica lapsusy[] rozszerzona o pole wzorzec (SZABLON/JEDNOSTKOWY/SYSTEMOWY)"
-  - "5.6.3: BLOK-LAPSUS rozszerzony o 6 nowych typów z D03: [LA-TEZA-DOWODOWA] (wniosek dowodowy na okoliczność faktów dotyczących własnego klienta zamiast strony przeciwnej), [LA-DATA-PRZYSZLA] (dowód powołany z daty późniejszej niż data pisma), [LA-PRZYZNANIE-KORZYSTNE] (twierdzenie osłabiające jedno roszczenie wzmacnia inne roszczenie lub pozycję przeciwnika), [LA-KWALIFIKACJA-TECHNICZNA] (błędne rozumienie mechanizmu technicznego/prawnego np. profil zaufany = urządzenie zamiast osoba), [LA-ZAKRES-DOWODOWY] (dowód powołany spoza okresu objętego zobowiązaniem Sądu), [INTRA-SAMOOBALA] (argumentacja obala własną tezę w obrębie jednego akapitu); protokół L2 uzupełniony; wzorzec systemowy LA-RODZAJ udokumentowany w 4 miejscach D01-D03"
-  - "5.6.2: BLOK-LAPSUS — korekty po weryfikacji z oryginalnych dokumentów: LA-1 potwierdzony (POWÓDKA zamiast Powód — błąd rodzaju gramatycznego, nie kierunku podmiotów); LA-2 data Poudela skorygowana na 5.12.2024 (prawidłowa); nowe typy [LA-RODZAJ] (błąd fleksji podmiotu przez kopiowanie wzorca z innej sprawy), [LA-ODERECZNIE] (brak daty przy odręcznie dopisanym fragmencie dokumentu), [LA-KWOTA-SLOWNIECYFRAMI] (rozbieżność kwoty słownie/cyframi przy odręcznym uzupełnieniu), [LA-OSOBA-MYLONA] (pomylenie dwóch różnych osób o podobnych imionach: Bishal Poudel vs Bishwas Pudasaini); protokół L2 rozszerzony o reguły detekcji tych typów"
-  - "5.6.1: BLOK-LAPSUS rozszerzony o typy z oryginalnych dokumentów D01/D02: [LA-CHRONOLOGIA] (błąd daty pokwitowania Poudela — 25.01.2024 vs twierdzenie 5.12.2024), [LA-MIESIAC] (pokwitowanie: październik vs narracja: wrzesień), [LA-PODMIOT-KRS] (Rak jako wspólnik Lorica Iuris — nie zewnętrzny radca), [LA-KOSZTY] zmieniony z potencjalnego na potwierdzony typ; protokół L2 uzupełniony o [LA-CHRONOLOGIA] i [LA-MIESIAC]"
-  - "5.6.0: tryby addytywne MODE A/B/C (auto-detect z materiału, zmiana w sesji bez kasowania danych); BLOK-MODE jako KROK 0a przed całym routerem; BLOK-LAPSUS — dedykowany detektor błędów autorskich (LA) z kontekstem autora i skutkiem odwrotnym; 8 typów lapsusów: [LA-KOSZTY][LA-DATA][LA-PODMIOT][LA-KWALIF][LA-NARR][LA-KWOTA][LA-LEGAL][LA-INTENCJA]; dashboard v5.6: zakładka Lapsusy z kategoryzacją i severity; auto-rozszerzanie trybu gdy dodano pisma drugiej strony; widget-kreator v3: STEP 1.5 tryb pracy zintegrowany z auto-detect materiału"
-  - "5.5.0: widget-kreator v2 (auto-select trybu badania — 1 sygnał→auto, kilka→dialog; 5 kroków zamiast 4; format wyjścia jako osobny krok); dashboard v5.5 (nowe zakładki: Strony i świadkowie, Nazewnictwo procesowe, Kwestie sporne DIS z drill-down; eksport JSON/MD/CSV; metryki KPI rozszerzone); BLOK-STRONY — rejestr osób z rolą/umocowaniem/metadanymi; BLOK-NAZW — kontrola nazewnictwa procesowego i kwalifikacji stron; BLOK-DIS — kwestie sporne z common ground, stanowiskami, przepisami HARDGATE i rekomendacjami"
-  - "5.4.1: doprecyzowanie relacji dashboard/MD-NARR — dashboard (FAZA 2/KROK 4) jest WZORCOWYM domyślnym formatem raportu (C3, generowany zawsze gdy B1=TAK); MD-NARR jest wersją SZCZEGÓŁOWĄ generowaną jako DODATEK na wyraźne żądanie (C4: 'szczegółowo'/'dokument'/'plik'/'jak LexAlpha'), nigdy zamiast dashboardu"
-  - "5.4.0: nowy MD-NARR (raport narracyjny .md ze spisem treści, format alternatywny do dashboardu); MD3c — nowa podkategoria [DOUBT][IDENT]/[CROSS][IDENT] dla rozbieżności tożsamości osób podpisujących dokumenty; MP1 — reguła tożsamości w Warstwie A; MD3a — KROK 0 (skan błędów dat/nazw przed analizą), obowiązkowy przy ≥2 dok.; MD4 — mapa dowodów do faktów (evidence_map) + pole 'Dotyczy' w lukach; dashboard gaps[] rozszerzony o pole dotyczy"
-  - "5.3.0: MD3c kanoniczny z cites[]; nowy type:'intra' dedykowany dla INTRA-CONTRA; dashboard: filtr [INTRA] osobny, type-intra styl, typeLabel/typeCls zaktualizowane; §P3 spójna terminologia type vs prefix"
-  - "5.2.0: Reguła Precyzji Detalu §P1–P3; INTRA-CONTRA; checklist 8-punktowy przed zakładką Sprzeczności; format [INTRA]/[CROSS]/[LEG]"
-  - "5.1.0: centralny router — jeden decision tree, moduły wczytywane wyłącznie on-demand na podstawie sygnałów; eliminacja duplikacji reguł routingu"
-  - "5.0.0: fuzja analizator-dowodow-v4 + analiza-pism-v4; nowy MX; warstwy D/P/DP"
-  - "4.0.0: zakładka Sprzeczności z cytatami, M3b skanowanie sprzeczności z prawem"
 ---
 
 # Analizator Dowodów Procesowych v5.1

@@ -1,6 +1,6 @@
 ---
 name: analiza-sadowa-v6
-version: 6.1
+version: 6.2
 type: executive-analiza
 status: production
 compatibility: "web_search, web_fetch, show_widget"
@@ -14,6 +14,28 @@ description: |
   pyta "co mam zrobić" / "czy mam szansę" / "czy to zgodne z prawem".
   v6: model CZTEROPRZEBIEGOWY z obowiązkową DWUKROTNĄ WERYFIKACJĄ dowodów i pism.
 changelog:
+  - "6.2 (2026-07-12): ZAMKNIĘTE — WARN 'średni priorytet: 13 plików w
+    references/ bez odwołań do shared/' (otwarty w sesji 6.1). Sprawdzono
+    treść, nie tylko obecność odwołań, każdego z 13 plików: MOD-A..MOD-F
+    (6 wąskich modułów tematycznych — błędy pełnomocnika, groźba bezprawna,
+    nagrania, podwójna kwalifikacja kwoty, konto e-mail pracownika, szkoda
+    od własnego pełnomocnika), PRZEBIEG-1/2/3 (model czteroprzebiegowy
+    własny dla tego skilla — ekstrakcja/struktura/predykcja, nie istnieje
+    odpowiednik w shared/ ani w analizator-dowodow-v3, który używa zupełnie
+    innej architektury MP0-MP13 + macierz D×T), WERYFIKACJA-DOWODOW.md
+    (protokół W1-W4/O1-O5 przypięty do własnego modelu Przejść I-IV, nie
+    do FACT-SOURCE-LOCK/PRAWO-HARDGATE z shared/), filtry-analityczne.md
+    (11 filtrów własnych, sprawdzone przeciw shared/MOD-NEGACJA-DOWODOW —
+    inny zakres: filtry oceniają kompletność analizy, MOD-NEGACJA-DOWODOW
+    ocenia odporność dowodu na obalenie), moduly-spec.md (świadomy fallback
+    awaryjny agregujący MOD-A..F w jednym pliku na wypadek braku dostępu do
+    plików osobnych — duplikacja WEWNĄTRZ tego samego skilla, udokumentowana
+    i zamierzona, nie międzyskillowa). WYNIK: brak potwierdzonej duplikacji
+    z shared/ ani z analizator-dowodow-v3 w żadnym z 13 plików — treść jest
+    unikalna dla własnej metodologii tego skilla. Brak odwołań do shared/
+    był więc fałszywym sygnałem ostrzegawczym, nie dowodem duplikacji.
+    Żadna treść nie została zmieniona — to weryfikacja zamykająca, nie
+    refaktor."
   - "6.1 (2026-07-12): naprawa nakładania kompetencji z analizator-dowodow-v3
     (WARN z audytu silnika). references/koszty-terminy.md i
     references/orzecznictwo.md przestały utrzymywać własne, niezależne
@@ -88,6 +110,13 @@ FALLBACK), a nie ten plik — ale dla kogoś czytającego wyłącznie ten skill:
 - Gdy zapytanie pasuje do obu → router ładuje `analiza-sadowa-v6` jako
   PRIMARY i `analizator-dowodow-v3` jako SECONDARY (patrz
   `prawny-router-v3/SKILL.md`, tabela routingu).
+- **Zweryfikowane 2026-07-12 (v6.2):** pozostałe 13 plików w `references/`
+  (MOD-A…MOD-F, PRZEBIEG-1/2/3, WERYFIKACJA-DOWODOW, filtry-analityczne,
+  moduly-spec, BLUEPRINT-SCHEMA) sprawdzono pod kątem treści, nie tylko
+  obecności odwołań do `shared/` — żaden nie duplikuje `shared/` ani
+  `analizator-dowodow-v3`. To unikalna metodologia własna tego skilla
+  (model czteroprzebiegowy PRZEBIEG-1/2/3, nie MP0-MP13 z macierzą D×T).
+  Zobacz changelog 6.2 po szczegóły per plik.
 
 ---
 

@@ -189,7 +189,7 @@ STAN 1: W1 — Rama i strategia
         Po zatwierdzeniu: lista łańcuchów ŁD-n → zasilenie W1.3 + D7 antycypacje
 
   → W1.2d-PRE MOD-DOKUMENT-ANOMALIE ⛔ (gdy ≥2 dokumenty strony przeciwnej lub pracodawcy) [CP-1d-anomalie]
-      view /mnt/skills/user/shared/MOD-DOKUMENT-ANOMALIE_v1.0.0.md
+      view /mnt/skills/user/shared/MOD-DOKUMENT-ANOMALIE_v1.1.0.md
       DA-0 (inwentaryzacja pól identyfikacyjnych: KRS/NIP/REGON/PESEL/adres per dokument) →
       DA-1 (cross-check wewnętrzny: czy KRS = NIP w każdym dokumencie?) →
       DA-2 (cross-check z rejestrem online: web_search per każdy KRS/NIP) →
