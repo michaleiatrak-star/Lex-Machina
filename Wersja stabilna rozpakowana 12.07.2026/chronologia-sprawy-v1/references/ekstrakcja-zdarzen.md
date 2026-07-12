@@ -355,6 +355,30 @@ Kluczowe daty:
 • Data skargi do WSA (30 dni od doręczenia decyzji odwoławczej)
 ```
 
+### Sprawy z rozliczeniami finansowymi między stronami lub z osobami trzecimi [NOWE v1.2]
+```
+Dotyczy: spraw pracowniczych z rozliczeniami pozapłacowymi (opłaty pobierane od
+kandydatów/klientów, zaliczki, kaucje), spraw o zwrot nienależnie pobranych
+świadczeń, spraw z wątkiem pokrzywdzonych osób trzecich (np. cudzoziemcy
+wnoszący opłaty za pośrednictwo w uzyskaniu zezwolenia na pracę).
+
+OBOWIĄZKOWO stosuj sekcję 3B (KORELACJA FINANSOWA) z SKILL.md — nie poprzestawaj
+na wypisaniu kwot jako zwykłych "zdarzeń" bez pól kwota/płatnik/odbiorca/termin/status.
+
+Kluczowe dane do zawsze wyciągania:
+• Każda kwota pobrana od osoby trzeciej — tytuł, data, potwierdzenie (pokwitowanie,
+  przelew, zapis w arkuszu rozliczeniowym)
+• Każda deklaracja zwrotu — kto, komu, ile, kiedy (deklarowany termin) — z
+  korespondencji NIEFORMALNEJ (czat, SMS) równie rygorystycznie jak z dokumentów
+  formalnych, ponieważ to właśnie w korespondencji nieformalnej pojawiają się
+  najczęściej przyznania w rodzaju "ona nadal ma moje pieniądze"
+• Status na dzień najpóźniejszego dokumentu w aktach — czy zwrot nastąpił, czy
+  kwota pozostaje NIEROZLICZONA
+• Czy ta sama osoba/kwota pojawia się w więcej niż jednym źródle (arkusz +
+  wiadomość + zeznanie) — jeśli tak, zbuduj wiersz rekoncyliacji łączący wszystkie
+  źródła, zamiast referować do nich osobno w różnych miejscach chronologii
+```
+
 ---
 
 ## 7. KATALOG SPRZECZNOŚCI OPISOWYCH — KATEGORIE

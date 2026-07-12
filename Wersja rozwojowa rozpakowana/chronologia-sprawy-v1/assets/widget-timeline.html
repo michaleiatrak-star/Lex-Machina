@@ -1,0 +1,189 @@
+<!--
+  ChronologiaSprawy — szablon dokumentacyjny renderowania (v1.2)
+
+  NAPRAWA v1.2 (audyt 2026-07-12): ten plik był odwoływany z SKILL.md
+  (TRYB B, KROK B1/B3) ale fizycznie nie istniał na dysku — CRIT wg
+  audyt-systemu-v4 FAZA 2A (martwe odwołanie).
+
+  UWAGA: to jest SZABLON/DOKUMENTACJA STRUKTURY — NIE kopiuj 1:1 do
+  show_widget. Przy realnym wywołaniu TRYB B:
+    1. wywołaj visualize:read_me z modules=["interactive","mockup"],
+    2. wbuduj RZECZYWISTE dane sprawy (watki/zdarzenia/finanse/sprzecznosci)
+       jako literały JS w miejsce SAMPLE_DATA poniżej,
+    3. NIE używaj window.storage/localStorage tutaj bez wyraźnej potrzeby —
+       MOD-WIDGET-IO obsługuje eksport/import JSON osobnym mechanizmem.
+-->
+<div id="chronologia-root" style="font-family: var(--font-sans, system-ui); color: var(--color-text, #1a1a1a); background: transparent;">
+
+  <div id="io-bar" style="margin-bottom:12px; font-size:12px; opacity:0.7;">
+    <!-- KROK B2a: pasek IO (MOD-WIDGET-IO) wstawiany tutaj w realnym wywołaniu -->
+  </div>
+
+  <div id="tabs" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;"></div>
+  <div id="content"></div>
+
+  <script>
+  // ============================================================
+  // PRZYKŁADOWE DANE — ZASTĄP rzeczywistymi danymi sprawy przy realnym użyciu
+  // ============================================================
+  const SAMPLE_DATA = {
+    watki: [
+      { id: "W1", nazwa: "Zatrudnienie i jego zakończenie" },
+      { id: "W2", nazwa: "Zarzuty karne i ich rozpowszechnianie" },
+      { id: "W3", nazwa: "Rozliczenia finansowe z kandydatami" }
+    ],
+    zdarzenia: [
+      {
+        data: "2024-10-07", pewnosc: "BEZSPORNE", dedukacja: null,
+        opis: "Pismo grożące zwolnieniem dyscyplinarnym (zarzuty karne)",
+        proweniencja: { typ_zrodla: "DOKUMENT_PRYWATNY", dok_id: "DOK-05", strona_dok: "str. 1", autor_twierdzenia: "pozwany" },
+        watki: ["W1", "W2"], wezel_wspolny: true, znaczenie: "KLUCZOWE", kolizja_id: "SPRZECZNOSC-01"
+      },
+      {
+        data: "2024-10-09", pewnosc: "BEZSPORNE", dedukacja: null,
+        opis: "Porozumienie stron o rozwiązaniu umowy o pracę",
+        proweniencja: { typ_zrodla: "DOKUMENT_PRYWATNY", dok_id: "DOK-06", strona_dok: "str. 1", autor_twierdzenia: "obie_strony" },
+        watki: ["W1"], wezel_wspolny: false, znaczenie: "KLUCZOWE", kolizja_id: "SPRZECZNOSC-01"
+      }
+    ],
+    // [NOWE v1.2] — sekcja 3B, patrz SKILL.md
+    finanse: [
+      {
+        id: "FIN-01", kwota: 700, waluta: "PLN", tytul: "zwrot opłaty za pozwolenie na pracę",
+        platnik: "Human Park / Maria Koroleva", odbiorca: "[OSOBA-NIEZIDENTYFIKOWANA-1] (kontakt +977 982-7316121)",
+        termin: null, status: "DO_ZAPŁATY",
+        proweniencja: { typ_zrodla: "KORESPONDENCJA", dok_id: "DOK-13", strona_dok: "treść wiadomości", autor_twierdzenia: "osoba_trzecia" },
+        powiazane_dok_id: ["DOK-11", "DOK-17"], kolizja_id: null
+      }
+    ],
+    sprzecznosci: [
+      {
+        id: "SPRZECZNOSC-01", typ: "OPIS", zdarzenie: "Tryb rozwiązania stosunku pracy",
+        watek: "W1",
+        wersja_a: { tresc: "Świadectwo pracy: rozwiązanie za porozumieniem stron (art. 30 §1 pkt 1 KP)", dok_id: "DOK-07", strona_dok: "pkt 4", autor: "pozwany (dokument urzędowy)" },
+        wersja_b: { tresc: "Mail do podmiotu trzeciego: \"został zwolniony dyscyplinarnie\"", dok_id: "DOK-14", strona_dok: "treść maila", autor: "pozwany (Maria Koroleva)" },
+        common_ground: "Obie wersje zgadzają się, że 7.10.2024 zagrożono dyscyplinarką, a 9.10.2024 podpisano porozumienie.",
+        roznica_dni: null, kategoria: "A-KRYTYCZNA",
+        wplyw: "Rdzeń roszczenia o zadośćuczynienie za pomówienie.",
+        rekomendacja: "Skonfrontować świadka bezpośrednio z treścią świadectwa pracy."
+      }
+    ]
+  };
+
+  function el(tag, attrs, children) {
+    const e = document.createElement(tag);
+    Object.entries(attrs || {}).forEach(([k, v]) => {
+      if (k === "style") Object.assign(e.style, v); else e.setAttribute(k, v);
+    });
+    (children || []).forEach(c => e.appendChild(typeof c === "string" ? document.createTextNode(c) : c));
+    return e;
+  }
+
+  function pewnoscBadge(p) {
+    const map = { BEZSPORNE: "✓✓", PEWNE: "✓", WYDEDUKOWANE: "~", SPORNE: "⚠" };
+    return map[p] || p;
+  }
+
+  function renderOsCzasu(watekId) {
+    const container = el("div", {});
+    const zdarzeniaWatku = SAMPLE_DATA.zdarzenia
+      .filter(z => watekId === "__ALL__" || z.watki.includes(watekId))
+      .sort((a, b) => a.data.localeCompare(b.data));
+
+    zdarzeniaWatku.forEach(z => {
+      const card = el("div", { style: {
+        border: "1px solid var(--color-border, #ddd)", borderRadius: "8px",
+        padding: "10px 14px", marginBottom: "8px",
+        borderLeft: z.kolizja_id ? "4px solid var(--color-danger, #c0392b)" : "4px solid var(--color-accent, #2c5282)"
+      }}, [
+        el("div", { style: { fontWeight: "600" } }, [`${z.data} ${pewnoscBadge(z.pewnosc)} ${z.wezel_wspolny ? "🔗 [WSPÓLNY]" : ""}`]),
+        el("div", {}, [z.opis]),
+        el("div", { style: { fontSize: "12px", opacity: "0.7" } }, [
+          `${z.proweniencja.dok_id} — ${z.proweniencja.strona_dok} (${z.proweniencja.autor_twierdzenia})`
+        ]),
+        z.kolizja_id ? el("div", { style: { fontSize: "12px", color: "var(--color-danger, #c0392b)" } }, [`⚠ ${z.kolizja_id}`]) : null
+      ].filter(Boolean));
+      container.appendChild(card);
+    });
+    return container;
+  }
+
+  // [NOWE v1.2] — tabela rekoncyliacji finansowej (KROK-FIN-2 z SKILL.md 3B)
+  function renderFinanse() {
+    const container = el("div", {});
+    container.appendChild(el("h3", {}, ["Rekoncyliacja finansowa"]));
+    const table = el("table", { style: { width: "100%", borderCollapse: "collapse", fontSize: "13px" } });
+    const header = el("tr", {}, ["Kwota", "Tytuł", "Płatnik", "Odbiorca", "Termin", "Status", "Źródła"].map(h =>
+      el("th", { style: { textAlign: "left", borderBottom: "1px solid var(--color-border,#ccc)", padding: "4px" } }, [h])
+    ));
+    table.appendChild(header);
+    SAMPLE_DATA.finanse.forEach(f => {
+      const statusColor = f.status === "ZAPŁACONE" ? "var(--color-success,#2f855a)"
+        : (f.status === "DO_ZAPŁATY" || f.status === "ZALEGŁE") ? "var(--color-danger,#c0392b)" : "inherit";
+      const row = el("tr", {}, [
+        el("td", { style: { padding: "4px" } }, [`${f.kwota} ${f.waluta}`]),
+        el("td", { style: { padding: "4px" } }, [f.tytul]),
+        el("td", { style: { padding: "4px" } }, [f.platnik]),
+        el("td", { style: { padding: "4px" } }, [f.odbiorca]),
+        el("td", { style: { padding: "4px" } }, [f.termin || "— (brak w dokumencie)"]),
+        el("td", { style: { padding: "4px", color: statusColor, fontWeight: "600" } }, [f.status]),
+        el("td", { style: { padding: "4px", fontSize: "11px", opacity: "0.7" } }, [
+          [f.proweniencja.dok_id, ...(f.powiazane_dok_id || [])].join(", ")
+        ])
+      ]);
+      table.appendChild(row);
+    });
+    container.appendChild(table);
+    return container;
+  }
+
+  function renderSprzecznosci() {
+    const container = el("div", {});
+    container.appendChild(el("h3", {}, ["Indeks sprzeczności"]));
+    SAMPLE_DATA.sprzecznosci.forEach(s => {
+      container.appendChild(el("div", { style: {
+        border: "1px solid var(--color-danger,#c0392b)", borderRadius: "8px", padding: "10px 14px", marginBottom: "8px"
+      }}, [
+        el("div", { style: { fontWeight: "700" } }, [`${s.id} [${s.typ}] — kategoria ${s.kategoria}`]),
+        el("div", {}, [`Wersja A (${s.wersja_a.dok_id}): ${s.wersja_a.tresc}`]),
+        el("div", {}, [`Wersja B (${s.wersja_b.dok_id}): ${s.wersja_b.tresc}`]),
+        s.common_ground ? el("div", { style: { fontStyle: "italic" } }, [`Wspólne: ${s.common_ground}`]) : null,
+        el("div", {}, [`Wpływ: ${s.wplyw}`]),
+        el("div", {}, [`Rekomendacja: ${s.rekomendacja}`])
+      ].filter(Boolean)));
+    });
+    return container;
+  }
+
+  function render(tabId) {
+    const content = document.getElementById("content");
+    content.innerHTML = "";
+    if (tabId === "__FINANSE__") { content.appendChild(renderFinanse()); return; }
+    if (tabId === "__SPRZECZNOSCI__") { content.appendChild(renderSprzecznosci()); return; }
+    content.appendChild(renderOsCzasu(tabId));
+  }
+
+  function init() {
+    const tabs = document.getElementById("tabs");
+    const allTabs = [
+      { id: "__ALL__", nazwa: "Widok zbiorczy" },
+      ...SAMPLE_DATA.watki,
+      { id: "__FINANSE__", nazwa: "Rekoncyliacja finansowa" },
+      { id: "__SPRZECZNOSCI__", nazwa: "Sprzeczności" }
+    ];
+    allTabs.forEach(t => {
+      const btn = el("button", {
+        style: {
+          padding: "6px 12px", borderRadius: "6px", border: "1px solid var(--color-border,#ccc)",
+          background: "var(--color-surface,#f5f5f5)", cursor: "pointer"
+        }
+      }, [t.nazwa]);
+      btn.addEventListener("click", () => render(t.id));
+      tabs.appendChild(btn);
+    });
+    render("__ALL__");
+  }
+
+  init();
+  </script>
+</div>

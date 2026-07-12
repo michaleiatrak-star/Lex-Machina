@@ -1,23 +1,65 @@
 ---
 name: chronologia-sprawy-v1
-version: 1.1
+version: 1.3
 type: executive-chronologia
 status: production
 compatibility: "web_search, web_fetch, Anthropic API"
 description: |
-  Chronologia Sprawy v1.1 — wielowarstwowa ekstrakcja i porządkowanie zdarzeń prawnych
+  Chronologia Sprawy v1.3 — wielowarstwowa ekstrakcja i porządkowanie zdarzeń prawnych
   z dokumentów procesowych, akt i dowodów. AUTO-TRIGGER przez prawny-router-v3: ≥2
   dokumenty wieloetapowe LUB słowa kluczowe (chronologia, oś czasu, timeline, kolejność
   zdarzeń, kiedy+potem). Na żądanie: ustalanie kolejności faktów, wykrywanie sprzeczności
-  dat, przygotowanie stanu faktycznego do pozwu/apelacji/odpowiedzi.
-  v1.1: osobna oś czasu per wątek prawny, cztery klasy pewności zdarzenia (BEZSPORNE /
-  PEWNE / WYDEDUKOWANE / SPORNE), proweniencja każdego zdarzenia (dok_id + strona +
-  autor twierdzenia), automatyczny indeks sprzeczności (daty ORAZ opisy zdarzeń —
-  rozbieżności między zeznaniami, dokumentami i twierdzeniami stron), klasa BEZSPORNE
-  jako podstawa faktów niewymagających dowodzenia. Integruje się z raport-sytuacyjny-v2.
+  dat, przygotowanie stanu faktycznego do pozwu/apelacji/odpowiedzi. Osobna oś czasu per
+  wątek prawny, cztery klasy pewności zdarzenia (BEZSPORNE/PEWNE/WYDEDUKOWANE/SPORNE),
+  proweniencja każdego zdarzenia, automatyczny indeks sprzeczności dat i opisów,
+  obowiązkowa korelacja finansowa (kwoty, terminy, strony płatności) z zestawieniem
+  krzyżowym. Integruje się z raport-sytuacyjny-v2.
 ---
 
-# Chronologia Sprawy v1.1 — Framework Wielowarstwowy
+# Chronologia Sprawy v1.3 — Framework Wielowarstwowy
+
+## Historia wersji
+
+```
+v1.1: osobna oś czasu per wątek prawny, cztery klasy pewności zdarzenia (BEZSPORNE /
+PEWNE / WYDEDUKOWANE / SPORNE), proweniencja każdego zdarzenia (dok_id + strona +
+autor twierdzenia), automatyczny indeks sprzeczności (daty ORAZ opisy zdarzeń —
+rozbieżności między zeznaniami, dokumentami i twierdzeniami stron), klasa BEZSPORNE
+jako podstawa faktów niewymagających dowodzenia. Integruje się z raport-sytuacyjny-v2.
+
+v1.2 (AUDYT 2026-07-12, naprawa na wyraźne wskazanie użytkownika): dodano OBOWIĄZKOWĄ
+KORELACJĘ FINANSOWĄ (sekcja 3B) — ekstrakcja kwot/terminów/stron płatności z KAŻDEGO
+dokumentu jako osobna kategoria danych, z obowiązkowym zestawieniem krzyżowym kwot
+między dokumentami (kto komu ile winien, co zostało/nie zostało zwrócone, w jakim
+terminie).
+
+v1.3 (KOREKTA WŁASNEGO BŁĘDU z naprawy v1.2, na wyraźne wskazanie użytkownika, który
+odnalazł i udostępnił starszą wersję skilla z 2026-06 zawierającą pliki nieobecne
+już w wersji produkcyjnej v1.1): naprawa v1.2 odtworzyła references/sprzecznosci-dat.md
+i assets/widget-timeline.html OD ZERA zamiast na bazie realnej treści, bo w chwili
+naprawy oryginał nie był dostępny — po porównaniu z odnalezioną starszą wersją:
+(a) references/sprzecznosci-dat.md przywrócony na bazie PRAWDZIWEJ oryginalnej
+treści (katalog A1–C3 z konkretnymi podstawami prawnymi i tabelą terminów zawitych,
+wcześniej zgubioną w wersji odtworzonej od zera) + dopisana nowa KATEGORIA D (KWOTA);
+(b) przywrócono assets/ChronologiaSprawy.jsx — plik nadal jawnie referencjonowany w
+sekcji "ARCHITEKTURA RENDEROWANIA" tego SKILL.md ("dokumentacja struktury — nie
+kopiuj go"), pominięty w paczce v1.2 mimo że tekst się do niego odwoływał (dokładnie
+ten sam typ błędu, który v1.2 miało naprawiać); (c) przywrócono references/
+BLUEPRINT-SCHEMA.md i upgrade-min8/{MIN8-UPGRADE.md,QUALITY-CHECKLIST.md} —
+zweryfikowano, że żaden z nich NIE jest już referencjonowany w aktualnym SKILL.md
+(ich treść merytoryczna została wchłonięta przez rozszerzony schemat "CZTERY KLASY
+PEWNOŚCI" i PROWENIENCJĘ w v1.1) — zachowane jako materiał archiwalny dla
+przejrzystości, nie jako aktywna zależność pipeline'u. Wniosek na przyszłość:
+odtwarzanie zaginionego pliku WYŁĄCZNIE z opisu jego roli (bez dostępu do oryginału)
+jest z definicji stratne — należy to jawnie nazwać w chwili naprawy, a nie
+przedstawiać rekonstrukcję jako równoważną oryginałowi.
+
+v1.4 (2026-07-12, ta naprawa): pole `description` w YAML frontmatter przekraczało
+1024 znaki (2773 znaki) — powyżej limitu pola opisu w metadanych skilla. Skrócono
+`description` do wersji zwięzłej (poniżej progu), zachowując wszystkie frazy
+wyzwalające AUTO-TRIGGER; pełną treść dziennika zmian (v1.1–v1.3) przeniesiono
+bez utraty informacji do niniejszej sekcji "Historia wersji" w treści pliku.
+```
 
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 > Chronologia może zawierać terminy ustawowe, daty wejścia w życie aktów, terminy zawite.
@@ -30,14 +72,26 @@ description: |
 chronologia-sprawy-v1/
 ├── SKILL.md                          ← ten plik — mechanika, tryby, reguły
 ├── assets/
-│   └── widget-timeline.html          ← interaktywny widget osi czasu (Anthropic API)
-└── references/
-    ├── ekstrakcja-zdarzen.md         ← reguły wyciągania dat i zdarzeń z dokumentów
-    └── sprzecznosci-dat.md           ← katalog typowych kolizji dat w sprawach PL
+│   ├── widget-timeline.html          ← interaktywny widget osi czasu (Anthropic API, TRYB B)
+│   └── ChronologiaSprawy.jsx         ← LEGACY: dokumentacja struktury (nie renderuje się
+│                                        w claude.ai, nie kopiuj do show_widget — patrz
+│                                        "ARCHITEKTURA RENDEROWANIA" niżej)
+├── references/
+│   ├── ekstrakcja-zdarzen.md         ← reguły wyciągania dat i zdarzeń z dokumentów
+│   ├── sprzecznosci-dat.md           ← katalog kolizji dat (A-C) i kwot (D) w sprawach PL
+│   └── BLUEPRINT-SCHEMA.md           ← ARCHIWALNE (v1): schemat JSON dla ChronologiaSprawy.jsx,
+│                                        zastąpiony przez SCHEMAT DANYCH w sekcji TRYB B niżej;
+│                                        nieużywany aktywnie w pipeline v1.3
+└── upgrade-min8/                     ← ARCHIWALNE (v1): kontrakt jakości sprzed v1.1,
+    ├── MIN8-UPGRADE.md                  treść merytoryczna wchłonięta przez CZTERY KLASY
+    └── QUALITY-CHECKLIST.md             PEWNOŚCI + PROWENIENCJĘ; nieużywane aktywnie w v1.3
 ```
 
 **Zasada progressive disclosure:** Zacznij od tego pliku. Widget ładuj tylko w TRYB B.
-Dla analizy tekstowej (TRYB A) wystarczy `references/ekstrakcja-zdarzen.md`.
+Dla analizy tekstowej (TRYB A) wystarczy `references/ekstrakcja-zdarzen.md` +
+`references/sprzecznosci-dat.md`. Pliki oznaczone ARCHIWALNE nie są wymagane do
+działania — zachowane dla ciągłości historycznej, nie usuwaj ich bez wyraźnej decyzji,
+żeby uniknąć powtórki błędu z audytu 2026-07-12 (cichej utraty plików przy migracji wersji).
 
 ---
 
@@ -116,9 +170,20 @@ SCHEMAT DANYCH (wbuduj jako literały JS w HTML):
     znaczenie,
     kolizja_id              // null lub "SPRZECZNOŚĆ-01"
   }]
+  finanse: [{                // [NOWE v1.2] — sekcja 3B, wypełniane RÓWNOLEGLE ze zdarzeniami
+    id,                      // "FIN-01"
+    kwota, waluta,
+    tytul,
+    platnik, odbiorca,       // string lub "[OSOBA-NIEZIDENTYFIKOWANA-N]"
+    termin,                  // string lub null — NIE zgaduj, jeśli brak w dokumencie
+    status,                  // ZAPŁACONE / DO_ZAPŁATY / ZALEGŁE / SPORNE_CZY_ZWRÓCONE / NIEZNANY
+    proweniencja: { typ_zrodla, dok_id, strona_dok, autor_twierdzenia },
+    powiazane_dok_id,        // tablica DOK-XX potwierdzających/wzmiankujących tę samą kwotę
+    kolizja_id               // null lub "SPRZECZNOŚĆ-01" (typ KWOTA)
+  }]
   sprzecznosci: [{
     id,          // "SPRZECZNOŚĆ-01"
-    typ,         // DATA / OPIS / DATA_I_OPIS / IDENT
+    typ,         // DATA / OPIS / DATA_I_OPIS / IDENT / KWOTA [NOWE v1.2]
     zdarzenie,
     watek,
     wersja_a: { tresc, dok_id, strona_dok, autor },
@@ -152,6 +217,15 @@ DLA KAŻDEGO DOKUMENTU:
 6. Oceń PEWNOŚĆ daty: [BEZSPORNE] / [PEWNE] / [WYDEDUKOWANE] / [SPORNE]
 7. Wypełnij PROWENIENCJĘ: typ_zrodla, dok_id, strona_dok, autor_twierdzenia
 8. Przypisz zdarzenie do WĄTKU PRAWNEGO (lub kilku)
+9. ⛔ OBOWIĄZKOWO (v1.2): jeśli dokument zawiera JAKĄKOLWIEK wzmiankę o kwocie
+   pieniężnej (zapłata, zwrot, opłata, zadatek, kara umowna, odszkodowanie,
+   zaległość, rozliczenie) — wypełnij rekord FINANSE wg sekcji 3B. Nie wolno
+   potraktować takiej wzmianki wyłącznie jako "zdarzenie" ogólne bez wypełnienia
+   pól kwota/waluta/płatnik/odbiorca/termin/status — patrz KROK-FIN-GATE (3B).
+   Dotyczy to również dokumentów nieformalnych (wiadomości, korespondencja
+   nieprocesowa, arkusze kalkulacyjne) — one najczęściej NIE trafiają do
+   sekcji "daty" bo nie mają formy pisma procesowego, a mimo to zawierają
+   kluczowe dane finansowe, które łatwo pominąć.
 ```
 
 ---
@@ -213,6 +287,113 @@ Kryteria (choć jedno):
 • Sprzeczność wewnętrzna w jednym dokumencie
 
 Oznaczenie: ⚠ [SPORNE]  — zawsze z odesłaniem do INDEKSU SPRZECZNOŚCI
+```
+
+---
+
+## 3B. KORELACJA FINANSOWA MIĘDZY DOKUMENTAMI (OBOWIĄZKOWA, v1.2)
+
+> ⛔ KROK-FIN-GATE — HARD GATE. Nie wolno zamknąć FAZY EKSTRAKCJI (KROK A4/A6)
+> jeśli w materiale występuje ≥1 wzmianka o kwocie pieniężnej, a rekord FINANSE
+> nie został wypełniony i skorelowany z pozostałymi dokumentami. Pominięcie tego
+> kroku jest traktowane tak samo jak pominięcie ekstrakcji daty — jako niepełna
+> analiza, nie jako pominięcie nieistotnego szczegółu.
+
+### Dlaczego to osobna bramka, a nie część ogólnej ekstrakcji zdarzeń
+
+Data i opis zdarzenia odpowiadają na pytanie "co i kiedy się stało". Kwota
+odpowiada na trzy DODATKOWE pytania, które model pomija, jeśli kwotę potraktuje
+się jako zwykły szczegół zdarzenia: **komu**, **ile dokładnie** i **czy/kiedy
+rozliczono**. Te trzy pytania rzadko mają odpowiedź w jednym dokumencie —
+odpowiedź składa się z fragmentów rozproszonych po wielu źródłach (arkusz +
+korespondencja + zeznanie), więc wymaga jawnego, osobnego kroku korelacji, a nie
+tylko ekstrakcji.
+
+### Rekord FINANSE — pola obowiązkowe
+
+```
+Dla KAŻDEJ wzmianki o kwocie wypełnij:
+
+kwota:            liczba + waluta (np. "700 zł", "1200 PLN") — nigdy w przybliżeniu,
+                  jeśli dokument podaje kwotę dokładną
+tytul:            za co (opłata za pozwolenie na pracę, zwrot, kara umowna, …)
+plator:           kto płaci / kto ma zapłacić (imię, nazwa, lub "NIEZIDENTYFIKOWANY")
+odbiorca:         kto otrzymuje / ma otrzymać
+termin:           data lub warunek płatności, jeśli wskazany w dokumencie
+                  ("po 1 miesiącu", "do 10. dnia następnego miesiąca") — jeśli brak
+                  terminu w dokumencie, pole = null, NIE domyślaj się terminu
+status:           ZAPŁACONE / DO_ZAPŁATY / ZALEGŁE / SPORNE_CZY_ZWRÓCONE / NIEZNANY
+dok_id:           źródło (jak w proweniencji zdarzeń)
+strona_dok:       lokalizacja w dokumencie
+powiazane_osoby:  lista identyfikatorów osób/podmiotów, których kwota dotyczy
+                  (nawet jeśli w danym dokumencie występują tylko pod pseudonimem,
+                  numerem telefonu lub inicjałem — patrz KROK-FIN-3 niżej)
+```
+
+### KROK-FIN-1 — Inwentaryzacja kwot per dokument
+
+Dla każdego DOK-XX zawierającego kwotę: wypełnij rekord FINANSE jak wyżej.
+Rób to RÓWNOLEGLE z inwentaryzacją dat — nie jako odrębny, późniejszy przebieg,
+żeby uniknąć sytuacji, w której dokument bez daty procesowej (np. zrzut czatu,
+arkusz kalkulacyjny) zostaje uznany za "niekwalifikujący się" do analizy.
+
+### KROK-FIN-2 — Zestawienie krzyżowe (tabela rekoncyliacji)
+
+Zbuduj tabelę: wiersz = jedna relacja płatnicza (jedna osoba/podmiot ↔ jedna
+kwota), kolumny = wszystkie DOK-XX, w których ta relacja występuje. Dla każdej
+pary dokumentów dotyczących tej samej osoby/kwoty sprawdź:
+
+```
+CZY kwota z DOK-A zgadza się z kwotą z DOK-B?
+  TAK → oznacz jako potwierdzoną (podnieś pewność zdarzenia o jeden poziom,
+        jeśli wcześniej było [WYDEDUKOWANE])
+  NIE → SPRZECZNOŚĆ-[N], TYP: KWOTA (nowy podtyp — patrz references/sprzecznosci-dat.md
+        → KATEGORIA D) — nie uśredniaj ani nie wybieraj kwoty "bardziej prawdopodobnej"
+        bez jawnego uzasadnienia hierarchią źródeł
+
+CZY status (zapłacone/do zapłaty) jest spójny w czasie?
+  Zbuduj mini-oś: kwota zgłoszona jako należna (data X) → kwota potwierdzona
+  jako zapłacona (data Y, jeśli istnieje) → jeśli status "do zapłaty"/"zaległe"
+  utrzymuje się w najpóźniejszym chronologicznie dokumencie → oznacz jako
+  [NIEROZLICZONE NA DZIEŃ NAJPÓŹNIEJSZEGO DOKUMENTU], nie milcz na ten temat
+```
+
+### KROK-FIN-3 — Identyfikacja osób przy danych szczątkowych
+
+Dokumenty finansowe nieformalne (czat, WhatsApp, SMS) często identyfikują
+osoby przez numer telefonu, pseudonim czy samo imię, bez nazwiska. Nie wolno:
+(a) milcząco pominąć takiej kwoty, bo "nie wiadomo czyja", ani
+(b) domyślnie przypisać jej do strony postępowania bez wskazania podstawy.
+
+```
+JEŻELI tożsamość płatnika/odbiorcy nie jest jednoznaczna z samego dokumentu:
+  → oznacz osobę jako [OSOBA-NIEZIDENTYFIKOWANA-N] (numeruj kolejno w obrębie sprawy)
+  → wskaż wszystkie poszlaki dostępne w materiale, które mogłyby pomóc w identyfikacji
+    (numer telefonu, kontekst rozmowy, zbieżność kwoty z innym, w pełni
+    zidentyfikowanym dokumentem)
+  → NIE zgaduj tożsamości bez jawnego zaznaczenia, że to dedukcja z przypisaną
+    skalą pewności (patrz [WYDEDUKOWANE], sekcja 3 wyżej)
+```
+
+### KROK-FIN-4 — Eksport
+
+W eksporcie do pisma (sekcja "Rekoncyliacja finansowa", dodatkowa wobec sekcji
+A–D z rozdziału EKSPORT DO PISMA PROCESOWEGO) każda relacja płatnicza ma osobny
+akapit z kwotą, tytułem, stronami, terminem, statusem i źródłem — w kolejności
+chronologicznej rozliczenia, nie w kolejności występowania w aktach.
+
+### SELF-CHECK (uzupełnienie do sekcji SELF-CHECK głównej)
+
+```
+□ Czy KAŻDA wzmianka o kwocie w KAŻDYM dostarczonym dokumencie (w tym w plikach
+  nieformalnych — czat, arkusz, SMS) ma wypełniony rekord FINANSE?
+□ Czy zbudowano tabelę rekoncyliacji krzyżowej (KROK-FIN-2) zamiast wypisania
+  kwot osobno per dokument bez zestawienia ich ze sobą?
+□ Czy każda kwota o niejasnym statusie rozliczenia (zapłacone/zaległe) na dzień
+  najpóźniejszego dostępnego dokumentu została jawnie oznaczona jako
+  NIEROZLICZONE, a nie pominięta milczeniem?
+□ Czy tożsamości niepełne (telefon/pseudonim) oznaczono jako
+  [OSOBA-NIEZIDENTYFIKOWANA-N] zamiast pominięcia lub domysłu bez zastrzeżenia?
 ```
 
 ---
@@ -564,6 +745,10 @@ ZASADY:
 □ Czy sprzeczności KRYTYCZNE zostały wyróżnione przed kontynuacją?
 □ Czy zaoferowałem integrację z analiza-sadowa-v6 lub pisma-procesowe-v3?
 □ Czy wygenerowałem blok JSON "DANE CHRONOLOGICZNE DLA RAPORTU SYTUACYJNEGO"?
+□ ⛔ [v1.2] Czy KAŻDA kwota pieniężna w materiale ma wypełniony rekord FINANSE
+  (sekcja 3B) i czy zbudowano tabelę rekoncyliacji krzyżowej między dokumentami
+  (kto komu ile, czy i kiedy zwrócone)? Brak tego kroku = analiza niekompletna,
+  nawet jeśli oś czasu dat jest kompletna.
 □ Czy nie podałem żadnego przepisu, terminu ustawowego ani sygnatury bez weryfikacji ISAP?
 ```
 
