@@ -4,6 +4,42 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
+## AUDYT-2026-07-12e — Reguła 22: TWARDY trigger słowny "pytania do świadka" (naprawa F-8b, kontynuacja F-8) — sprawa XI P 27/26
+
+**Zakres:** Naprawa strukturalna (CRIT — ścieżka routingu pominięta mimo istniejącej
+reguły 21), na wyraźne polecenie użytkownika: model dostarczył pytania do świadka
+w odpowiedzi na złożone zlecenie (tezy + wątek cudzoziemców + sprzeczności +
+chronologia + pytania do świadka) bez wczytania `przesluchanie-swiadkow-v2-min90/SKILL.md`,
+mimo że reguła 21 (wpis AUDYT-2026-07-12, F-8) formalnie już to nakazywała.
+
+**Błąd źródłowy:** reguła 21 wiąże obowiązek uruchomienia skilla świadka z oceną
+"czy zlecenie jest złożone" — poprawną dla dekompozycji checkpointów, ale niebędącą
+samodzielnym, bezwarunkowym triggerem. Model może błędnie ocenić fragment prośby
+jako niewymagający pełnego pipeline'u.
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy CRIT | 1 (brak triggera słownego niezależnego od oceny złożoności) |
+| Błędy CRIT (zamknięte) | 1/1 |
+| Nowe pliki | 0 |
+| Zmodyfikowane pliki | 1: `prawny-router-v3/SKILL.md` (REGUŁA 22 + pozycja SELF-CHECK + version 3.12→3.13 + changelog) |
+
+### 2. NAPRAWA
+
+Dodano REGUŁĘ 22 w `prawny-router-v3/SKILL.md`: obecność fraz "pytania do świadka",
+"przygotuj pytania do/dla świadka/biegłego", "przesłuchanie świadka",
+"kontrprzesłuchanie", "impeachment świadka" w wiadomości użytkownika stanowi TWARDY,
+NIEWARUNKOWY trigger — wymusza `view przesluchanie-swiadkow-v2-min90/SKILL.md`
+PRZED napisaniem jakiejkolwiek odpowiedzi zawierającej takie pytania, niezależnie
+od oceny złożoności zlecenia. Dodano odpowiadającą pozycję w bloku SELF-CHECK
+routera. Reguła 21 pozostaje w mocy równolegle (dekompozycja checkpointów przy
+zleceniach złożonych) — reguła 22 jest zabezpieczeniem niezależnym, nie zamiennikiem.
+
+**Status:** ZAMKNIĘTE. Flaga F-8b niewymagana w WARN-OTWARTE.md (naprawiona w tej
+samej sesji, w której została wykryta).
+
 ## AUDYT-2026-07-12d — Nowy moduł: MOD-REJESTR-ZALACZNIKOW-CHECKPOINT (widoczność skanu dowodów + checkpoint kontynuacji) — sprawa XI P 27/26
 
 **Zakres:** Naprawa punktowa (WARN — brak mechanizmu widoczności, nie CRIT

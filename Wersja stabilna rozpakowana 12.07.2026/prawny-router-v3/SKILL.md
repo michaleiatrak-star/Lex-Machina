@@ -1,12 +1,12 @@
 ---
 name: prawny-router-v3
-version: 3.12
+version: 3.13
 type: orchestration
 status: production
 entrypoint: SKILL.md
 compatibility: "web_search, web_fetch, show_widget, create_file"
 description: |
-  Router Prawny v3.12 — orchestrator KAŻDEJ sprawy prawnej. Wykrywa tryb (LAIK/PRAWNIK),
+  Router Prawny v3.13 — orchestrator KAŻDEJ sprawy prawnej. Wykrywa tryb (LAIK/PRAWNIK),
   koordynuje PRIMARY→SECONDARY→FALLBACK, generuje .docx/.pdf.
   UŻYWAJ ZAWSZE i AUTOMATYCZNIE. Nigdy nie analizuj bez wczytania tego pliku.
 dependencies:
@@ -117,7 +117,7 @@ Procedura szczegółowa: view /mnt/skills/user/shared/PRAWO-HARDGATE.md
 
 ---
 
-# Router Prawny v3.11 — Spis Treści i Sekwencja Główna
+# Router Prawny v3.13 — Spis Treści i Sekwencja Główna
 
 ## PREFERENCJE UŻYTKOWNIKA (aktywne globalnie)
 
@@ -430,6 +430,35 @@ Pozycja: zawsze **ostatni element** odpowiedzi lub stopka pisma .docx.
     mimo poprawnego wpisu routingu w tabeli [8] — sama obecność wiersza w tabeli
     okazała się niewystarczająca bez tej jawnej reguły. Pełny opis: AUDIT-JOURNAL.md,
     wpis AUDYT-2026-07-12.
+22. ⛔ TRIGGER SŁOWNY OBLIGATORYJNY — "PYTANIA DO ŚWIADKA" [NOWE, audyt 2026-07-12,
+    naprawa F-8b — model dostarczył pytania do świadka "z ręki" bez wczytania
+    przesluchanie-swiadkow-v2-min90 mimo obecności reguły 21] —
+    niezależnie od tego, czy prośba jest prosta czy złożona, każde z poniższych
+    sformułowań (lub ich oczywisty synonim) w wiadomości użytkownika stanowi
+    TWARDY, NIEWARUNKOWY trigger:
+      "pytania do świadka", "przygotuj pytania [do/dla] świadka/biegłego",
+      "przesłuchanie świadka", "kontrprzesłuchanie", "impeachment świadka".
+    Wykrycie triggera → OBOWIĄZEK, przed napisaniem JAKIEJKOLWIEK odpowiedzi:
+      a) view /mnt/skills/user/przesluchanie-swiadkow-v2-min90/SKILL.md
+      b) wejście do pipeline'u od PRE-W1a SD-VER (nie od W3) — zakaz skracania
+         do "samych pytań" nawet jeśli użytkownik nie wspomniał o profilu/tezach
+      c) jeśli zlecenie jest złożone (tezy/chronologia/sprzeczności + świadek) →
+         reguła 21 stosuje się RÓWNOLEGLE (dekompozycja na komponenty), ale
+         NIE zwalnia z (a)-(b) dla komponentu świadka
+      d) brak wczytania SKILL.md świadka przed dostarczeniem pytań = CRIT,
+         niezależnie od tego, czy finalne pytania byłyby merytorycznie poprawne —
+         błędem jest sama ścieżka, nie tylko wynik.
+    ⛔ SELF-CHECK: pytanie kontrolne "czy odpowiedź zawiera pytania do świadka?"
+    → TAK → czy w tej samej odpowiedzi wystąpiło `view` pliku
+    przesluchanie-swiadkow-v2-min90/SKILL.md? NIE → STOP, nie wysyłaj odpowiedzi
+    z pytaniami, wczytaj skill najpierw.
+    Root cause: reguła 21 opisywała POPRAWNY routing tabelaryczny ([8] → PRIMARY),
+    ale nie ustanawiała samodzielnego, słownego, bezwarunkowego triggera
+    niezależnego od oceny "czy zlecenie jest złożone" — model przy prostym
+    doprecyzowaniu ("przygotuj pytania do świadka") pominął ocenę złożoności
+    i odpowiedział wprost z pamięci prawniczej, bez żadnego wczytania skilla.
+    Zgłoszone i zamknięte w tej samej sesji, co reguła 21 — patrz AUDIT-JOURNAL.md,
+    wpis AUDYT-2026-07-12 (kontynuacja F-8 → F-8b).
 ```
 
 ---
@@ -490,6 +519,10 @@ Minimalne bramki obowiązkowe przed każdą odpowiedzią:
 □ Pismo + materiały źródłowe → shared/FAKTY_v2.md, wynik ✅?
 □ LAIK → raport przez przewodnik-prawny-v2 (KROK H)?
 □ Bramka chronologiczna → przy ≥2 dokumentach wieloetapowych?
+□ ⛔ TRIGGER ŚWIADKA (reguła 22) → jeśli odpowiedź ma zawierać "pytania do
+  świadka"/przesłuchanie/kontrprzesłuchanie: czy w TEJ odpowiedzi wykonano
+  view przesluchanie-swiadkow-v2-min90/SKILL.md PRZED napisaniem pytań?
+  NIE → STOP, nie wysyłaj pytań, wczytaj skill.
 □ ⛔ RZ-SHOW (shared/MOD-REJESTR-ZALACZNIKOW-CHECKPOINT.md) → jeśli w grze
   są załączniki: pokazano pełny rejestr plików ze statusami ✅/🔶/⬜/➖/⬛
   i — jeśli są ⬜/🔶 — zapytano o kontynuację, ZANIM podano wnioski
@@ -519,6 +552,28 @@ view /mnt/skills/user/prawny-router-v3/references/pokrycie-dziedzinowe.md
 Tylko gdy: pytanie o dostępność modułu, audyt systemu, budowanie kombinacji multi-skill.
 
 ## CHANGELOG (prawny-router-v3)
+
+**3.13 (2026-07-12) — Reguła 22: TWARDY trigger słowny dla pytań do świadka
+(naprawa F-8b, kontynuacja F-8):**
+- Incydent: mimo poprawnie wdrożonej reguły 21 (dekompozycja żądań złożonych),
+  model w KOLEJNEJ odpowiedzi w tej samej sesji otrzymał proste, samodzielne
+  doprecyzowanie ("czy użyłeś skila przesłuchania świadków... router zawsze
+  powinien odpalać ten skill") i — zamiast tego — wcześniej dostarczył pytania
+  do świadka wprost z pamięci prawniczej, bez żadnego `view` pliku
+  przesluchanie-swiadkow-v2-min90/SKILL.md, mimo że fraza "pytania do świadka"
+  padła explicite w poleceniu użytkownika.
+- Root cause: reguła 21 wiąże obowiązek wczytania skilla świadka z oceną
+  "czy zlecenie jest złożone" (≥2 komponenty z różnych PRIMARY). To dobra
+  reguła dla dekompozycji, ale nie jest ona TRIGGEREM SAMYM W SOBIE — model
+  może (błędnie) ocenić, że dany fragment prośby "nie wymaga" pełnego
+  pipeline'u i odpowiedzieć skrótowo.
+- Naprawa: dodano REGUŁĘ 22 — bezwarunkowy, słowny trigger niezależny od
+  oceny złożoności: obecność fraz "pytania do świadka"/"przesłuchanie
+  świadka"/"kontrprzesłuchanie"/"impeachment świadka" wymusza `view`
+  przesluchanie-swiadkow-v2-min90/SKILL.md PRZED napisaniem jakiejkolwiek
+  odpowiedzi zawierającej takie pytania — niezależnie od tego, czy reszta
+  zlecenia jest prosta czy złożona. Dodano też pozycję w SELF-CHECK.
+- Pełny opis incydentu: AUDIT-JOURNAL.md, wpis AUDYT-2026-07-12 (F-8 → F-8b).
 
 **3.12 (2026-07-12) — Reguła 21: CHECKPOINT w żądaniach złożonych (naprawa F-8):**
 - Incydent: zlecenie łączące tezy/chronologię/sprzeczności + "pytania do świadka"
