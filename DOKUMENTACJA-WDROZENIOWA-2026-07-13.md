@@ -7,17 +7,7 @@ Powiązane: `audyt-komercyjny-silnika-prawnego.md` (rekomendacje #2, #4, #6),
 
 ---
 
-## 0. Jak czytać ten dokument — i dlaczego wersja 2.0
-
-Wersja 1.0 tego dokumentu opisywała trzy funkcjonalności jako **osobne skille**
-(`mcp-zrodla-prawa-v1`, `audit-trail-portal-v1`, `sync-dzu-automatyczny-v1`).
-Po pytaniu użytkownika "czy nie lepiej wdrożyć to jako elementy obecnych
-skili, a nie tworzyć coś nowego, co duplikuje już istniejące skille?" —
-odpowiedź brzmiała: tak, to była duplikacja wzorca. Żadna z tych trzech
-funkcjonalności nie jest samodzielną jednostką wywoływaną intencją
-użytkownika — wszystkie trzy to protokoły/narzędzia ładowane przez router
-(`prawny-router-v3`) lub przez `audyt-systemu-v4`, dokładnie jak istniejące
-od dawna `shared/PRAWO-HARDGATE.md` czy `shared/HYBRID-VALIDATION.md`.
+## 0. Jak czytać ten dokument?
 
 **Skonsolidowano (2026-07-13f):** treść trzech skilli przeniesiono do
 `shared/` (dla MCP i audit-trail — cross-cutting, używane przez router i
