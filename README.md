@@ -104,7 +104,7 @@ Lex-Machina/
 ├── 📄 LICENSE                            ← GNU GPL v3
 ├── 📦 WERSJA STABILNA 12.07.2026/        ← skille spakowane (.zip) — wersja stabilna
 ├── 📦 WERSJA ROZWOJOWA/                  ← skille spakowane (.zip) — wersja rozwojowa
-├── 📂 Wersja stabilna rozpakowana 28.06.2026/
+├── 📂 Wersja stabilna rozpakowana 12.07.2026/
 └── 📂 Wersja rozwojowa rozpakowana/      ← tu trafiają bieżące zmiany
     ├── shared/                           ← bramki, moduły wspólne, definicje, mapy aktów
     ├── prawny-router-v3/                 ← orkiestrator
