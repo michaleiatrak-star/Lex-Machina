@@ -102,7 +102,7 @@ powołanie przepisu/orzeczenia przechodzi przez bramki `shared/` → wynik z wid
 Lex-Machina/
 ├── 📄 README.md                          ← ten plik
 ├── 📄 LICENSE                            ← GNU GPL v3
-├── 📦 WERSJA STABILNA 28.06.2026/        ← skille spakowane (.zip) — wersja stabilna
+├── 📦 WERSJA STABILNA 12.07.2026/        ← skille spakowane (.zip) — wersja stabilna
 ├── 📦 WERSJA ROZWOJOWA/                  ← skille spakowane (.zip) — wersja rozwojowa
 ├── 📂 Wersja stabilna rozpakowana 28.06.2026/
 └── 📂 Wersja rozwojowa rozpakowana/      ← tu trafiają bieżące zmiany
@@ -296,13 +296,7 @@ automatycznie według harmonogramu — typowo cykliczny audyt `audyt-systemu-v4`
 
 ### Jak utworzyć zadanie
 
-1. W Cowork: **Schedule** (pasek boczny) → **+ New task** — albo wpisz `/schedule`
-   w oknie czatu, albo opisz zadanie w rozmowie
-   (*„ustaw cotygodniowy audyt systemu w poniedziałki o 8:00"*).
-2. Podaj nazwę, instrukcję (prompt) i częstotliwość: **Hourly / Daily / Weekdays / Weekly**
-   (Daily domyślnie 9:00). Inne interwały — opisz w czacie.
-3. Po zapisaniu kliknij **Run now** i zatwierdź prompty uprawnień jako *always allow* —
-   kolejne przebiegi nie zablokują się na oczekiwaniu zgody.
+Uruchom audyt systemu w trybie graficznym w Cowork i wybierz automatyzację systemu - weryfikacje dzienników ustaw, system poprowadzi cię automatycznie.
 
 ### Prompt zadania dla Lex Machina — reguły
 
@@ -334,7 +328,7 @@ Wskazuj wprost tryb z sekcji „TRYBY WYWOŁANIA" w `audyt-systemu-v4/SKILL.md`:
 
 | Kanał | Lokalizacja | Przeznaczenie |
 |---|---|---|
-| 🟢 **Stabilna** | `WERSJA STABILNA 28.06.2026/` + katalog rozpakowany | do codziennej pracy |
+| 🟢 **Stabilna** | `WERSJA STABILNA 12.07.2026/` + katalog rozpakowany | do codziennej pracy |
 | 🟠 **Rozwojowa** | `WERSJA ROZWOJOWA/` + `Wersja rozwojowa rozpakowana/` | nowe mechanizmy przed promocją do stabilnej |
 
 Każda zmiana w systemie jest odnotowana w
