@@ -20,6 +20,7 @@ każdego przepisu i każdej sygnatury.*
 [Katalog skilli](#-katalog-skilli) •
 [Mechanizmy weryfikacji](#%EF%B8%8F-mechanizmy-antyhalucynacyjne) •
 [Instalacja](#-instalacja) •
+[Zadania cykliczne (Cowork)](#zadania-cykliczne-scheduled-tasks-w-cowork) •
 [Zastrzeżenia](#%EF%B8%8F-zastrzeżenia-prawne)
 
 </div>
@@ -284,6 +285,48 @@ uruchomić router, dopytać o charakter sprawy i zaproponować przewodnik.
 | Cytowanie bez weryfikacji | napisz: *„przypomnij sobie zasady HARDGATE"*; sprawdź czy `shared/` zawiera `PRAWO-HARDGATE.md` |
 | Błąd „description too long" | uruchom: *„przeprowadź audyt systemu"* — wskaże winny skill |
 </details>
+
+---
+
+## Zadania cykliczne (scheduled tasks) w Cowork
+
+Cowork (aplikacja desktop Claude, plany płatne) pozwala uruchamiać skille systemu
+automatycznie według harmonogramu — typowo cykliczny audyt `audyt-systemu-v4`
+(monitoring nowych Dz.U., zamykanie flag WARN).
+
+### Jak utworzyć zadanie
+
+1. W Cowork: **Schedule** (pasek boczny) → **+ New task** — albo wpisz `/schedule`
+   w oknie czatu, albo opisz zadanie w rozmowie
+   (*„ustaw cotygodniowy audyt systemu w poniedziałki o 8:00"*).
+2. Podaj nazwę, instrukcję (prompt) i częstotliwość: **Hourly / Daily / Weekdays / Weekly**
+   (Daily domyślnie 9:00). Inne interwały — opisz w czacie.
+3. Po zapisaniu kliknij **Run now** i zatwierdź prompty uprawnień jako *always allow* —
+   kolejne przebiegi nie zablokują się na oczekiwaniu zgody.
+
+### Prompt zadania dla Lex Machina — reguły
+
+Zadanie startuje w **świeżej sesji**: prompt musi być samowystarczalny i **musi
+precyzować zakres audytu**. Samo „przeprowadź audyt" uruchamia w `audyt-systemu-v4`
+interaktywne menu wyboru (FAZA 0B), na które w sesji automatycznej nikt nie odpowie.
+Wskazuj wprost tryb z sekcji „TRYBY WYWOŁANIA" w `audyt-systemu-v4/SKILL.md`:
+
+| Cel | Częstotliwość | Prompt zadania |
+|---|---|---|
+| Monitoring nowych Dz.U. / t.j. | Daily / Weekdays | `Uruchom audyt-systemu-v4 w TRYBIE DZU: sprawdź mapę Dz.U., zaktualizuj tabelę MONITORING i AUDIT-JOURNAL.` |
+| Pełny audyt systemu | Weekly | `Uruchom audyt-systemu-v4 w TRYBIE AUTO: pełny audyt, Fazy 0–7, bez menu interaktywnego.` |
+| Zamykanie otwartych flag | Weekly | `Uruchom audyt-systemu-v4 w TRYBIE WARN-CLOSE: zamknij otwarte warningi z references/WARN-OTWARTE.md.` |
+
+### O czym pamiętać
+
+- Zadanie lokalne wykonuje się tylko przy otwartej aplikacji i niewyłączonym komputerze;
+  pominięty termin → jeden przebieg nadrabiający po wybudzeniu. Zadania niezależne od
+  komputera twórz jako zdalne *routines* (chmura Anthropic).
+- Wynik każdego przebiegu pojawia się jako sesja w sekcji **Scheduled** — sprawdź, czy
+  audyt zakończył się obowiązkowym wpisem w `AUDIT-JOURNAL.md` (FAZA 7).
+- Wszystkie bramki systemu (HARDGATE, weryfikacja online, ZASADA 7) obowiązują również
+  w sesjach automatycznych — skille `shared/` i `audyt-systemu-v4/` muszą być wgrane
+  na koncie, na którym działa Cowork.
 
 ---
 
