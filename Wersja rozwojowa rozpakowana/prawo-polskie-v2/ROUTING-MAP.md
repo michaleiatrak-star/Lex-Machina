@@ -528,7 +528,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 
 | Narzędzie / akt | Podstawa | Moduł | Status |
 |---|---|---|---|
-| KPC — przesłuchanie świadków (art. 258–305) | Dz.U. 2026 poz. 468 ze zm. | dr-16/modules/mod-KPC-przesluchanie-swiadkow | ✅ OK |
+| KPC — przesłuchanie świadków (art. 258–305) | Dz.U. 2026 poz. 468 ze zm. | shared/PRZESLUCHANIE-SWIADKOW-KPC.md (przeniesiony 2026-07-12) | ✅ OK |
 | KPC — e-doręczenia i portal sądowy | Dz.U. 2026 poz. 468 ze zm. | dr-16/modules/mod-KPC-e-doreczenia-portal-sadowy | ✅ OK |
 | KPC — procedury UE (TSUE, ETPCz) | KPC + Rozp. UE | dr-16/modules/mod-KPC-procedury-UE-TSUE-ETPC | ✅ OK |
 | KPC — arbitraż sportowy i dyscyplinarny | Dz.U. 2026 poz. 468 cz. V | dr-16/modules/mod-KPC-arbitraz-sportowy-dyscyplinarny | ✅ OK |

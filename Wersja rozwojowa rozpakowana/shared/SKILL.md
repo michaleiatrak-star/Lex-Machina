@@ -1,6 +1,6 @@
 ---
 name: shared
-version: 2.6
+version: 2.7
 type: library
 entrypoint: SKILL.md
 compatibility: "wszystkie skille prawne systemu"
@@ -63,6 +63,19 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog:
+  - "2.7 (2026-07-12, audyt komercyjny silnika, punkty 1-2 + zamknięcie
+    duplikatów): ci_check_shared.py (audyt-systemu-v4/scripts/) wykrył 4
+    nieudokumentowane duplikaty bajtowe — wszystkie scalone: NAZEWNICTWO-STRON.md
+    (kanoniczny już istniał, analizator-dowodow-v3 przekierowany), nowe pliki
+    kanoniczne STALKING-NEKANIE.md i PRZESLUCHANIE-SWIADKOW-KPC.md (przeniesione
+    z dr-03/dr-16 + prawny-router-v3/references/, oba konsumowane przez ≥2
+    lokalizacje). Przy okazji naprawiono DEDUPLICATION-POLICY.md: 9 z 10 plików
+    zadeklarowanych jako 'usunięte 2026-06-13' wciąż leżało na dysku — usunięte
+    naprawdę teraz. Dodano shared/tools/ — walidator_cytowan.py, deterministyczna
+    bramka weryfikacji cytowań poza LLM, uruchamiana przez portal przed
+    present_files (nie audyt-systemu-v4 — to narzędzie produkcyjne, nie
+    deweloperskie). Pełny opis: AUDIT-JOURNAL.md AUDYT-2026-07-12g,
+    CHECKLIST-DEDUP.md NOTA-12/13/14."
   - "2.6 (2026-07-12, runda 2): ZAMKNIĘTE — WARN 'numer wersji vs nazwa
     pliku' z MOD-DOKUMENT-ANOMALIE (otwarty w 2.5). Plik przemianowano z
     MOD-DOKUMENT-ANOMALIE_v1.0.0.md na MOD-DOKUMENT-ANOMALIE_v1.1.0.md, żeby
@@ -157,6 +170,15 @@ Pliki w `prawny-router-v3/references/` (nie w shared, ale powiązane):
 | `pokrycie-dziedzinowe.md` | Pełna mapa dziedzin → modułów → powiązanych skilli (28 dziedzin) |
 
 Wszystkie pliki są kanoniczne — nie istnieją stuby ani kopie w innych lokalizacjach.
+
+## tools/ — narzędzia produkcyjne (kod, nie markdown)
+
+`shared/tools/` zawiera skrypty uruchamiane przez portal poza sesją modelu
+— nie wczytuj ich przez `view()`, to nie są moduły promptowe:
+
+| Plik | Rola |
+|------|------|
+| `tools/walidator_cytowan.py` | Deterministyczna bramka: sprawdza, czy każde powołanie w gotowym piśmie ma odpowiadający log web_fetch. Pełny opis: `tools/README.md` |
 
 ## Jak korzystać
 

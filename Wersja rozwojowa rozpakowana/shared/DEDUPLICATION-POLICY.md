@@ -15,7 +15,16 @@ view /mnt/skills/user/shared/NAZWA.md
 
 **Zakaz tworzenia lokalnych stubów/adapterów** — od 2026-06-13 każde wywołanie modułu shared/ musi być bezpośrednie. Stuby pośrednie (`references/HYBRID-VALIDATION.md` → `shared/HYBRID-VALIDATION.md`) są niedopuszczalne i będą usuwane w audytach.
 
-## Stuby usunięte 2026-06-13
+## Stuby zadeklarowane jako usunięte 2026-06-13 — FAKTYCZNIE usunięte 2026-07-12
+
+> **Korekta (2026-07-12):** ten nagłówek od 2026-06-13 twierdził, że poniższe
+> pliki zostały usunięte. Nie zostały — `ci_check_shared.py` (audyt
+> gotowości komercyjnej) potwierdził, że 9 z 10 wciąż fizycznie leżało na
+> dysku jako martwe stuby, mimo tej deklaracji. Zweryfikowano ponownie
+> (zero żywych `view()` na pełną ścieżkę każdego pliku) i usunięto naprawdę
+> w tej sesji. Jedyny faktycznie usunięty wcześniej: `raport-sytuacyjny-v2/
+> references/HYBRID-VALIDATION.md`. Pełny opis: AUDIT-JOURNAL.md,
+> wpis AUDYT-2026-07-12g.
 
 Następujące pliki były martwymi stubami (nie wywoływanymi przez żaden `view` w SKILL.md):
 
@@ -29,8 +38,16 @@ Następujące pliki były martwymi stubami (nie wywoływanymi przez żaden `view
 | `pisma-proste-v2/references/INTAKE-GAP.md` | `shared/INTAKE-GAP.md` | Martwy — nie wywoływany przez view |
 | `pisma-proste-v2/references/POST-VALIDATION.md` | `shared/POST-VALIDATION.md` | Martwy — nie wywoływany przez view |
 | `pisma-proste-v2/references/terminy.md` | `shared/terminy.md` | Martwy — nie wywoływany przez view |
-| `pisma-proste-v2/references/M5-terminy.md` | `shared/terminy.md` | Martwy — nie wywoływany przez view |
-| `raport-sytuacyjny-v2/references/HYBRID-VALIDATION.md` | `shared/HYBRID-VALIDATION.md` | Martwy — SKILL.md wywołuje bezpośrednio shared/ |
+| `pisma-proste-v2/references/M5-terminy.md` | `shared/terminy.md` | Martwy — nie wywoływany przez view; `pisma-proste-v2/references/M1-zasady.md` (ZASADA 6) zaktualizowany na bezpośrednie odwołanie |
+| `raport-sytuacyjny-v2/references/HYBRID-VALIDATION.md` | `shared/HYBRID-VALIDATION.md` | Martwy — SKILL.md wywołuje bezpośrednio shared/ (faktycznie usunięty już 2026-06-13) |
+
+## Duplikaty bajtowe scalone 2026-07-12 (audyt komercyjny, wykryte przez ci_check_shared.py)
+
+| Usunięte pliki (oba) | Nowy plik kanoniczny | Uwaga |
+|---|---|---|
+| `analizator-dowodow-v3/modules/MOD-NAZEWNICTWO-STRON.md` | `shared/NAZEWNICTWO-STRON.md` (już istniał, konsumenci przekierowani) | 2 wywołania w analizator-dowodow-v3/SKILL.md przekierowane |
+| `dr-03/modules/mod-KK-stalking-szczegolowy.md` + `prawny-router-v3/references/stalking-nekanie.md` | `shared/STALKING-NEKANIE.md` (nowy) | Patrz NOTA-12 w CHECKLIST-DEDUP.md |
+| `dr-16/modules/mod-KPC-przesluchanie-swiadkow.md` + `prawny-router-v3/references/przesluchanie-swiadkow.md` | `shared/PRZESLUCHANIE-SWIADKOW-KPC.md` (nowy) | Patrz NOTA-13 w CHECKLIST-DEDUP.md. Nie mylić z pełnym skillem `przesluchanie-swiadkow-v2-min90` (inny zakres — zaawansowana strategia, nie ramowy KPC) |
 
 ## Pliki kanoniczne w shared/ (jedyne źródła prawdy)
 
@@ -49,6 +66,9 @@ Następujące pliki były martwymi stubami (nie wywoływanymi przez żaden `view
 | `SYGNATURY.md` | Format sygnatur procesowych (V-SYG-1/2/3/4) |
 | `DISCLAIMER.md` | Disclaimer prawny (LAIK/PRAWNIK) |
 | `PRAWO-HARDGATE.md` | Hard gate zakazu cytowania z pamięci |
+| `NAZEWNICTWO-STRON.md` | Tabele nazewnictwa stron T1-T10, wzory nagłówków N1-N7 (dodany do rejestru 2026-07-12, istniał już wcześniej) |
+| `STALKING-NEKANIE.md` | Framework art. 190a KK — stalking i nękanie (scalony 2026-07-12) |
+| `PRZESLUCHANIE-SWIADKOW-KPC.md` | Ramowy framework KPC art. 258-305 — przesłuchanie świadków (scalony 2026-07-12; nie mylić z pełnym skillem przesluchanie-swiadkow-v2-min90) |
 
 ## Świadome duplikaty — udokumentowane wyjątki (2026-06-13)
 

@@ -1,12 +1,12 @@
 ---
 name: prawny-router-v3
-version: 3.13
+version: 3.16
 type: orchestration
 status: production
 entrypoint: SKILL.md
 compatibility: "web_search, web_fetch, show_widget, create_file"
 description: |
-  Router Prawny v3.13 — orchestrator KAŻDEJ sprawy prawnej. Wykrywa tryb (LAIK/PRAWNIK),
+  Router Prawny v3.16 — orchestrator KAŻDEJ sprawy prawnej. Wykrywa tryb (LAIK/PRAWNIK),
   koordynuje PRIMARY→SECONDARY→FALLBACK, generuje .docx/.pdf.
   UŻYWAJ ZAWSZE i AUTOMATYCZNIE. Nigdy nie analizuj bez wczytania tego pliku.
 dependencies:
@@ -54,13 +54,18 @@ limitations:
   - nie zastępuje porady radcy prawnego/adwokata — patrz shared/DISCLAIMER.md (KROK 7, obowiązkowy)
   - jakość i czas odpowiedzi zależą od dostępności i jakości web_search/web_fetch
   - nie ingeruje w kontrolę jakości pipeline'u pisma-procesowe-v3 (tylko deleguje)
-  - "ZNALEZISKO 2026-07-04 (do weryfikacji w następnym audycie): plik lokalny
-    references/kwalifikator-karnomaterialny.md (589 linii) wygląda na
-    potencjalny duplikat/wariant kanonicznego
+  - "ROZWIĄZANE 2026-07-12 (zamyka ZNALEZISKO 2026-07-04): plik
+    references/kwalifikator-karnomaterialny.md był bajt-w-bajt identyczny
+    (MD5 zgodny) z kanonicznym
     dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
-    wskazanego w UP-3 — nie scalone w tej sesji (poza zakresem pilotażu
-    standaryzacji metadanych), zgłoszone do CHECKLIST-DEDUP."
+    wskazanym w UP-3 — usunięty. Dwa realne miejsca wywołania, które
+    wskazywały na kopię w routerze (dr-03/modules/mod-KW-kodeks-wykroczen.md
+    i dr-03/modules/mod-KK-KPK-framework-karne.md, po 2 odwołania każdy —
+    view + wpis tabeli ŁĄCZ Z), przekierowane na ścieżkę kanoniczną. Pełny
+    opis w audyt-systemu-v4/references/AUDIT-JOURNAL.md i
+    shared/CHECKLIST-DEDUP.md."
 required_modules:
+  - shared/MCP-INTEGRACJA.md  # opcjonalny — patrz KROK 1; tani gdy MCP niepodłączone
   - shared/PRAWO-HARDGATE.md
   - shared/MOD-STEP-TRACKER.md
   - shared/MOD-KONTEKST-SESJI.md
@@ -74,6 +79,31 @@ required_modules:
   - references/KROK1-detekcja.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md  # kanoniczny, wg UP-3
 changelog:
+  - "3.16 (2026-07-13f): KONSOLIDACJA — usunięto zależność od osobnych skilli
+    mcp-zrodla-prawa-v1/audit-trail-portal-v1/sync-dzu-automatyczny-v1 (utworzonych
+    2026-07-13). Ich treść przeniesiono do shared/MCP-INTEGRACJA.md,
+    shared/AUDIT-TRAIL-SPEC.md i audyt-systemu-v4/references/SYNC-DZU-AUTOMATYCZNY.md
+    — bo żaden z nich nie był samodzielnym skillem wywoływanym intencją użytkownika,
+    tylko protokołem/narzędziem ładowanym przez router lub audyt-systemu-v4,
+    dokładnie jak PRAWO-HARDGATE.md czy HYBRID-VALIDATION.md. Powód: uniknięcie
+    duplikowania wzorca 'protokół + narzędzia w shared/tools', na wniosek
+    użytkownika po pytaniu 'czy nie lepiej wdrożyć to jako elementy obecnych
+    skili, a nie tworzyć coś nowego, co duplikuje już istniejące skille?'.
+    Skille w systemie: 36 → 33 (powrót do liczby sprzed 2026-07-13)."
+  - "3.15 (2026-07-13): INTEGRACJA — dodano shared/MCP-INTEGRACJA.md jako opcjonalną
+    warstwę deterministyczną PRZED HARD GATE (nie zamiast). Gdy connector MCP
+    (ISAP/SAOS/CBOSA/KRS/EUR-Lex) jest podłączony i dostępny w rozmowie, router
+    używa go w pierwszej kolejności do weryfikacji powołań; HARD GATE
+    (web_search/web_fetch) pozostaje aktywny bez zmian jako fallback i jako
+    jedyna ścieżka gdy MCP niedostępne. Część realizacji rekomendacji #2 z
+    audytu komercyjnego silnika 2026-07-13 (pełny opis: audyt-systemu-v4/
+    references/AUDIT-JOURNAL.md, wpis AUDYT-2026-07-13)."
+  - "3.14 (2026-07-12): DEDUP — usunięty duplikat
+    references/kwalifikator-karnomaterialny.md (identyczny z kanonicznym
+    dr-03/modules/mod-KK-kwalifikator-karnomaterialny.md, MD5 zgodny),
+    zgłoszony jako ZNALEZISKO 2026-07-04. 2 miejsca wywołania w dr-03
+    przekierowane na ścieżkę kanoniczną. Zamyka pozycję w limitations —
+    pełny opis tam. Część audytu komercyjnego silnika (punkt 4)."
   - "3.9 (2026-06-26): naprawa [POV-D-TRIGGER] i zasady 'dane z akt ≠ zweryfikowane
     online' — pełny opis w sekcji CHANGELOG na końcu pliku."
   - "3.10 (2026-06-26): KROK 0D — obowiązkowe oznaczanie podmiotów ⬛ [DO WERYFIKACJI]
@@ -109,6 +139,12 @@ ZASADA: zakaz nie wygasa. PERMANENT przez całą rozmowę.
 Brak dostępu → ⚠️ [NIEWERYFIKOWANE] + komunikat użytkownikowi. Nigdy nie pomijaj.
 
 Zagraniczne: pomiń prawo-polskie-v2 i ISAP — pozostałe zasady HG aktywne.
+
+Warstwa MCP (jeśli podłączona): przed web_search/web_fetch sprawdź, czy dostępny
+jest connector MCP dla danego typu powołania — patrz
+view /mnt/skills/user/shared/MCP-INTEGRACJA.md (KROK 1-4). Jeśli tak, użyj go
+najpierw; jeśli brak/niedostępny/AMBIGUOUS/NOT_FOUND, przejdź do standardowej
+procedury HARD GATE poniżej bez zmian. MCP nigdy nie zwalnia z HARD GATE.
 
 Procedura szczegółowa: view /mnt/skills/user/shared/PRAWO-HARDGATE.md
 ```

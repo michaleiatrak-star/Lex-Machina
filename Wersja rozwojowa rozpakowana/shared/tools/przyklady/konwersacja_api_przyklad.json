@@ -1,0 +1,28 @@
+{
+  "session_id": "demo-api-001",
+  "messages": [
+    {
+      "role": "user",
+      "content": [{"type": "text", "text": "Czy mam podstawy do zniesienia współwłasności nieruchomości?"}]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {"type": "text", "text": "Sprawdzam aktualne brzmienie art. 211 KC w ISAP przed odpowiedzią."},
+        {"type": "server_tool_use", "id": "toolu_demo_1", "name": "web_fetch",
+         "input": {"url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19640160093"}},
+        {"type": "web_fetch_tool_result", "tool_use_id": "toolu_demo_1",
+         "content": {"type": "web_fetch_result",
+                     "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19640160093"}},
+        {"type": "text", "text": "Weryfikuję też podobną sprawę — wyrok SN I CSK 4821/23."},
+        {"type": "server_tool_use", "id": "toolu_demo_2", "name": "web_search",
+         "input": {"query": "wyrok SN I CSK 4821/23"}},
+        {"type": "web_search_tool_result", "tool_use_id": "toolu_demo_2",
+         "content": [{"type": "web_search_result",
+                     "url": "https://sn.pl/orzecznictwo/SitePages/wyrok.aspx?id=I-CSK-4821-23",
+                     "title": "Wyrok SN I CSK 4821/23"}]},
+        {"type": "text", "text": "Na podstawie powyższego przygotowuję odpowiedź."}
+      ]
+    }
+  ]
+}

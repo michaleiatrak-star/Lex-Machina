@@ -1,0 +1,8 @@
+{
+  "session_id": "demo-001",
+  "events": [
+    {"tool": "web_fetch", "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19640160093", "query_context": "art. 211 KC zniesienie wspolwlasnosci"},
+    {"tool": "web_fetch", "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19640160093", "query_context": "art. 5 KC naduzycie prawa"},
+    {"tool": "web_search", "query": "Dz.U. 2019 poz. 1145 koszty sadowe", "result_urls": ["https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20190001145"]}
+  ]
+}

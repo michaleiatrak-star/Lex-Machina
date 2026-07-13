@@ -17,14 +17,14 @@
 |------|--------|-------------------|
 | `MOD-WALIDACJA_v2.md` | **ACTIVE — KANONICZNY** | pisma-procesowe-v3, pisma-proste-v2, prawny-router-v3 |
 | `MOD-WALIDACJA.md` | STUB → v2 | (zachować — kompatybilność wsteczna) |
-| `HYBRID-VALIDATION.md` | ACTIVE | pisma-procesowe-v3, analizator-umow-v1, prawny-router-v3 |
+| `HYBRID-VALIDATION.md` | ACTIVE | pisma-procesowe-v3, pisma-proste-v2, analizator-umow-v1, prawny-router-v3 |
 | `POST-VALIDATION.md` | ACTIVE | analizator-umow-v1, pisma-procesowe-v3 |
 | `FACT-SOURCE-LOCK.md` | INTERNAL | wywoływany przez MOD-WALIDACJA_v2.md (Blok J), FAKTY_v2.md |
 | `LEGAL-STATUS-LOCK.md` | INTERNAL | wywoływany przez MOD-WALIDACJA_v2.md (Blok J), FAKTY_v2.md |
-| `FORMAL-CHECK.md` | ACTIVE | pisma-procesowe-v3/modules/MOD-WALIDACJA.md (KROK 2) |
-| `BRAKI-FORMALNE.md` | ACTIVE | pisma-procesowe-v3/modules/MOD-WALIDACJA.md (KROK 2) |
-| `WARUNKI-SKUTECZNOSCI.md` | ACTIVE | pisma-procesowe-v3/modules/MOD-WALIDACJA.md (KROK 2) |
-| `QUALITY-CHECK.md` | ACTIVE | pisma-procesowe-v3/modules/MOD-WALIDACJA.md (KROK 2) |
+| `FORMAL-CHECK.md` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
+| `BRAKI-FORMALNE.md` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
+| `WARUNKI-SKUTECZNOSCI.md` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
+| `QUALITY-CHECK.md` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
 | `RISK-ASSESSMENT.md` | ACTIVE | wszystkie DR-skille, pisma-procesowe-v3 |
 
 ## Moduły faktów i danych wejściowych
@@ -32,16 +32,16 @@
 | Plik | Status | Wywołujące skille |
 |------|--------|-------------------|
 | `FAKTY_v2.md` | ACTIVE | pisma-procesowe-v3, pisma-proste-v2 |
-| `INTAKE-GAP.md` | ACTIVE | analizator-umow-v1, pisma-procesowe-v3 |
+| `INTAKE-GAP.md` | ACTIVE | analizator-umow-v1, pisma-procesowe-v3, pisma-proste-v2, przewodnik-prawny-v2, dr-11 (mod-RODO-GDPR) |
 
 ## Moduły terminów i procedury
 
 | Plik | Status | Wywołujące skille |
 |------|--------|-------------------|
-| `terminy.md` | ACTIVE | analizator-dowodow-v3, pisma-procesowe-v3, pisma-proste-v2 |
-| `TERM-CALC.md` | ACTIVE | pisma-procesowe-v3 (KROK 2 MOD-WALIDACJA) |
-| `TRYBY-PROCESOWE.md` | ACTIVE | pisma-procesowe-v3/modules/MOD-WALIDACJA.md |
-| `PREKLUZJA-DOWODOWA.md` | ACTIVE | pisma-procesowe-v3/modules/MOD-WALIDACJA.md |
+| `terminy.md` | ACTIVE | analizator-dowodow-v3, pisma-procesowe-v3, pisma-proste-v2, analiza-sadowa-v6, przewodnik-prawny-v2, analizator-umow-v1 |
+| `TERM-CALC.md` | ACTIVE | pisma-procesowe-v3 (W3.4 walidacja formalna) |
+| `TRYBY-PROCESOWE.md` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
+| `PREKLUZJA-DOWODOWA.md` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
 | `DISCLAIMER.md` | ACTIVE | prawny-router-v3, przewodnik-prawny-v2 |
 
 ## Moduły dowodowe i orzecznicze
@@ -59,7 +59,7 @@
 |------|--------|-------------------|
 | `RISK-ASSESSMENT.md` | ACTIVE | wszystkie DR-01..DR-16 |
 | `TEMPORAL-LAW-CHECK.md` | ACTIVE | wszystkie DR-01..DR-16 |
-| `ISAP-AUDIT-PROTOCOL.md` | ACTIVE | wszystkie DR-01..DR-16 |
+| `ISAP-AUDIT-PROTOCOL.md` | ACTIVE | wszystkie DR-01..DR-16, pisma-procesowe-v3 (via KROK1-detekcja.md, W3-WERYFIKACJA.md) |
 | `MODULE-STANDARD-POLISH-LAW.md` | ACTIVE | wszystkie DR-01..DR-16 |
 | `LEGAL-QUALITY-GATE.md` | ACTIVE | wszystkie DR-01..DR-16 |
 | `ISAP-METRYKI-AKTOW.md` | ACTIVE | wszystkie DR-01..DR-16 |
@@ -67,6 +67,28 @@
 | `LEGAL-LIFECYCLE-MANAGEMENT.md` | ACTIVE | wybrane DR-skille |
 | `PRAWO-HARDGATE.md` | ACTIVE | wszystkie skille z przepisami |
 | `AKTY-PRAWNE-MASTER.md` | ⛔ DEPRECATED 2026-06-14 (WARN-7, opcja b — nigdy nie wdrożony) | — |
+
+## Moduły scalone do shared/ 2026-07-12 (audyt komercyjny — ci_check_shared.py)
+
+| Plik | Status | Wywołujące skille |
+|------|--------|-------------------|
+| `NAZEWNICTWO-STRON.md` | ACTIVE | shared/FORMAL-CHECK.md, analizator-dowodow-v3, pisma-proste-v2 |
+| `STALKING-NEKANIE.md` | ACTIVE | dr-03 (mod-KK-art190a-stalking.md, mod-KK-kwalifikator-karnomaterialny.md) |
+| `PRZESLUCHANIE-SWIADKOW-KPC.md` | ACTIVE | dr-16 (ramowy KPC art. 258-305 — nie mylić z pełnym skillem przesluchanie-swiadkow-v2-min90) |
+
+## Narzędzia deweloperskie (kod, nie markdown — poza pipeline'em LLM)
+
+| Plik | Status | Rola |
+|------|--------|------|
+| `audyt-systemu-v4/scripts/ci_check_shared.py` | ACTIVE (dev/CI) | Wykrywa zerwane odwołania view() i duplikaty MD5 w całym silniku; git pre-commit hook |
+| `tools/walidator_cytowan.py` | ACTIVE (produkcyjna bramka, poza LLM) | Sprawdza, czy każde powołanie w finalnym piśmie ma odpowiadające zdarzenie weryfikacji w logu sesji API — uruchamiane przez portal przed present_files, nie przez skille |
+| `tools/extract_api_verification_log.py` | ACTIVE (produkcyjna bramka, poza LLM) | Dodany 2026-07-13d. Buduje log sesji wymagany przez walidator_cytowan.py automatycznie z surowej konwersacji Claude API (bloki server_tool_use/*_tool_result) — domyka lukę integracyjną opisaną w README (krok 1) |
+| `tools/export_gate.py` | ACTIVE (produkcyjna bramka, poza LLM) | Dodany 2026-07-13d. Łączy extract_api_verification_log.py + walidator_cytowan.py w jedno wywołanie — jedyny punkt, który portal musi wpiąć w pipeline przed present_files/eksportem |
+| `MCP-INTEGRACJA.md` + `KONEKTORY-REKOMENDOWANE.md` + `SCHEMAT-ODPOWIEDZI-MCP.md` | ACTIVE (protokół ładowany przez router) | Skonsolidowane 2026-07-13f z osobnego skilla mcp-zrodla-prawa-v1 (usunięty). Warstwa MCP jako uzupełnienie PRAWO-HARDGATE.md — patrz `required_modules` w prawny-router-v3 |
+| `tools/test_mcp_protocol.py` + `tools/connector_health_check.py` | ACTIVE (testy/narzędzia dev, poza LLM) | Skonsolidowane 2026-07-13f razem z MCP-INTEGRACJA.md. Klasyfikacja odpowiedzi connectora (6 testów jednostkowych) + health-check dostępności connectorów |
+| `AUDIT-TRAIL-SPEC.md` | ACTIVE (specyfikacja, poza silnikiem) | Skonsolidowane 2026-07-13f z osobnego skilla audit-trail-portal-v1 (usunięty). Specyfikacja logu hash-chain zgodnego z art. 12 AI Act, do wdrożenia po stronie portalu |
+| `tools/hash_chain_verify.py` + `append_event.py` + `router_event_parser.py` | ACTIVE (referencyjne, poza LLM) | Skonsolidowane 2026-07-13f razem z AUDIT-TRAIL-SPEC.md. Zapis/weryfikacja/parsowanie logu hash-chain |
+
 
 ## Moduły orkiestratora i routingu
 
