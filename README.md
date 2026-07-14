@@ -20,6 +20,7 @@ każdego przepisu i każdej sygnatury.*
 [Katalog skilli](#-katalog-skilli) •
 [Mechanizmy weryfikacji](#%EF%B8%8F-mechanizmy-antyhalucynacyjne) •
 [Instalacja](#-instalacja) •
+[Zadania cykliczne (Cowork)](#zadania-cykliczne-scheduled-tasks-w-cowork) •
 [Zastrzeżenia](#%EF%B8%8F-zastrzeżenia-prawne)
 
 </div>
@@ -101,9 +102,9 @@ powołanie przepisu/orzeczenia przechodzi przez bramki `shared/` → wynik z wid
 Lex-Machina/
 ├── 📄 README.md                          ← ten plik
 ├── 📄 LICENSE                            ← GNU GPL v3
-├── 📦 WERSJA STABILNA 28.06.2026/        ← skille spakowane (.zip) — wersja stabilna
+├── 📦 WERSJA STABILNA 12.07.2026/        ← skille spakowane (.zip) — wersja stabilna
 ├── 📦 WERSJA ROZWOJOWA/                  ← skille spakowane (.zip) — wersja rozwojowa
-├── 📂 Wersja stabilna rozpakowana 28.06.2026/
+├── 📂 Wersja stabilna rozpakowana 12.07.2026/
 └── 📂 Wersja rozwojowa rozpakowana/      ← tu trafiają bieżące zmiany
     ├── shared/                           ← bramki, moduły wspólne, definicje, mapy aktów
     ├── prawny-router-v3/                 ← orkiestrator
@@ -287,11 +288,47 @@ uruchomić router, dopytać o charakter sprawy i zaproponować przewodnik.
 
 ---
 
+## Zadania cykliczne (scheduled tasks) w Cowork
+
+Cowork (aplikacja desktop Claude, plany płatne) pozwala uruchamiać skille systemu
+automatycznie według harmonogramu — typowo cykliczny audyt `audyt-systemu-v4`
+(monitoring nowych Dz.U., zamykanie flag WARN).
+
+### Jak utworzyć zadanie
+
+Uruchom audyt systemu w trybie graficznym w Cowork i wybierz automatyzację systemu - weryfikacje dzienników ustaw, system poprowadzi cię automatycznie.
+
+### Prompt zadania dla Lex Machina — reguły
+
+Zadanie startuje w **świeżej sesji**: prompt musi być samowystarczalny i **musi
+precyzować zakres audytu**. Samo „przeprowadź audyt" uruchamia w `audyt-systemu-v4`
+interaktywne menu wyboru (FAZA 0B), na które w sesji automatycznej nikt nie odpowie.
+Wskazuj wprost tryb z sekcji „TRYBY WYWOŁANIA" w `audyt-systemu-v4/SKILL.md`:
+
+| Cel | Częstotliwość | Prompt zadania |
+|---|---|---|
+| Monitoring nowych Dz.U. / t.j. | Daily / Weekdays | `Uruchom audyt-systemu-v4 w TRYBIE DZU: sprawdź mapę Dz.U., zaktualizuj tabelę MONITORING i AUDIT-JOURNAL.` |
+| Pełny audyt systemu | Weekly | `Uruchom audyt-systemu-v4 w TRYBIE AUTO: pełny audyt, Fazy 0–7, bez menu interaktywnego.` |
+| Zamykanie otwartych flag | Weekly | `Uruchom audyt-systemu-v4 w TRYBIE WARN-CLOSE: zamknij otwarte warningi z references/WARN-OTWARTE.md.` |
+
+### O czym pamiętać
+
+- Zadanie lokalne wykonuje się tylko przy otwartej aplikacji i niewyłączonym komputerze;
+  pominięty termin → jeden przebieg nadrabiający po wybudzeniu. Zadania niezależne od
+  komputera twórz jako zdalne *routines* (chmura Anthropic).
+- Wynik każdego przebiegu pojawia się jako sesja w sekcji **Scheduled** — sprawdź, czy
+  audyt zakończył się obowiązkowym wpisem w `AUDIT-JOURNAL.md` (FAZA 7).
+- Wszystkie bramki systemu (HARDGATE, weryfikacja online, ZASADA 7) obowiązują również
+  w sesjach automatycznych — skille `shared/` i `audyt-systemu-v4/` muszą być wgrane
+  na koncie, na którym działa Cowork.
+
+---
+
 ## 🔄 Wersjonowanie
 
 | Kanał | Lokalizacja | Przeznaczenie |
 |---|---|---|
-| 🟢 **Stabilna** | `WERSJA STABILNA 28.06.2026/` + katalog rozpakowany | do codziennej pracy |
+| 🟢 **Stabilna** | `WERSJA STABILNA 12.07.2026/` + katalog rozpakowany | do codziennej pracy |
 | 🟠 **Rozwojowa** | `WERSJA ROZWOJOWA/` + `Wersja rozwojowa rozpakowana/` | nowe mechanizmy przed promocją do stabilnej |
 
 Każda zmiana w systemie jest odnotowana w
