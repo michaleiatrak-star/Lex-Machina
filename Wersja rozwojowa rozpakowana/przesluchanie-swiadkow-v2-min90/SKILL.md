@@ -29,6 +29,7 @@ dependencies:
     - shared
     - analizator-dowodow
     - MOD-SKAN-DOWODOW-KOMPLETNY
+    - MOD-REJESTR-ZALACZNIKOW-CHECKPOINT
     - MOD-STEP-TRACKER
   optional:
     - chronologia-sprawy
@@ -54,10 +55,12 @@ validation:
     - TEXT-FIRST-UI-GATE
     - HARDGATE-SD-01
     - HARDGATE-SD-02
+    - RZ-SHOW-GATE
     - STEP-TRACKER-WITNESS
 pipeline:
   stages:
     - PRE-W1a-SD-VER
+    - PRE-W1a.4-RZ-SHOW
     - KROK-PRE-W1-INTELLIGENCE
     - KROK-0-KONTEKST
     - W1-INTAKE
@@ -69,6 +72,25 @@ pipeline:
     - W5-BINDER
     - W6-LIVE-DIRECT
 changelog:
+  - "3.17 (2026-07-14, runda 3 — na wyraźne polecenie użytkownika po incydencie
+    sprawa XI P 27/26 — świadek Maria Koroleva): PRZYCZYNA: moduł
+    shared/MOD-REJESTR-ZALACZNIKOW-CHECKPOINT.md (utworzony 2026-07-12
+    właśnie z powodu tej sprawy) istniał, ale NIE był wpisany jako
+    zależność required tego skilla — działał wyłącznie reaktywnie
+    (na wprost zadane pytanie użytkownika 'czy sprawdziłeś wszystko?'),
+    a nie proaktywnie przy każdym otwarciu sprawy z dowodami. Skutek:
+    model przedstawił tezy i pytania W3 na podstawie 7 z 23 dostępnych
+    plików, bez poinformowania użytkownika o pominięciu pozostałych 16,
+    które wyszło na jaw dopiero po pytaniu kontrolnym.
+    NAPRAWA: (1) dodano MOD-REJESTR-ZALACZNIKOW-CHECKPOINT do
+    dependencies.required (nie tylko pośrednio przez SD-VER); (2) dodano
+    RZ-SHOW-GATE do validation.required_gates; (3) dodano jawny etap
+    PRE-W1a.4-RZ-SHOW do pipeline.stages, wykonywany BEZPOŚREDNIO po
+    PRE-W1a-SD-VER i PRZED KROK-PRE-W1-INTELLIGENCE — nie opcjonalnie,
+    nie tylko na żądanie; (4) dodano regułę RZ-SHOW-ZAWSZE (patrz sekcja
+    poniżej) wymuszającą wyświetlenie pełnego rejestru plików ze statusem
+    ✅/🔶/⬜/➖ w PIERWSZEJ odpowiedzi każdej tury, w której obecne są
+    dowody, niezależnie od tego czy użytkownik o to zapytał."
   - "3.17 (2026-07-12, runda 2 — redukcja kosztu kontekstu): pełna historia
     changelog (14 wpisów, od 3.13 wzwyż) wyniesiona 1:1 do
     references/CHANGELOG.md — nic nie usunięto, tylko przeniesiono z
@@ -154,6 +176,27 @@ Użyj tego skilla, gdy użytkownik chce:
 - dobrać styl pytań do typu sędziego,
 - wykryć sprzeczności z wcześniejszymi zeznaniami,
 - zbudować macierz: pytanie → cel → fakt → dowód → ryzyko.
+
+---
+
+## KROK PRE-W1a.4 — RZ-SHOW-ZAWSZE (HARD GATE, dodane w audycie 3.17, runda 3)
+
+> ⛔ Zaraz PO wykonaniu SD-INW/SD-REJ (poniżej), a PRZED przejściem do profilu
+> świadka (KROK-PRE-W1-INTELLIGENCE), model MUSI wykonać
+> `shared/MOD-REJESTR-ZALACZNIKOW-CHECKPOINT.md` FAZA 2 (RZ-SHOW)
+> i wyświetlić użytkownikowi pełną listę plików ze statusem
+> ✅ SPRAWDZONY / 🔶 CZĘŚCIOWO / ⬜ NIESPRAWDZONY / ➖ NIE DOTYCZY.
+>
+> Zasada obowiązuje w KAŻDEJ turze, w której w rozmowie obecne są dowody
+> (nowo wgrane lub już wcześniej wgrane w tej sprawie) — nie tylko gdy
+> użytkownik o to wprost zapyta. Reaktywne wywołanie (na pytanie
+> "czy sprawdziłeś wszystko?") pozostaje w mocy jako uzupełnienie,
+> nie jako jedyny tryb działania.
+>
+> Jeśli istnieje choć jedna pozycja ⬜/🔶 → obowiązkowe pytanie do
+> użytkownika: "Czy mam teraz sprawdzić pozostałe [y] plik(i)?"
+> (FAZA 3 RZ-DECYZJA z tego modułu). Nie generować tez W2 ani pytań W3
+> w oparciu o materiał, dopóki użytkownik nie zdecyduje.
 
 ---
 
@@ -1601,6 +1644,11 @@ Nie wolno domyślnie:
   wykonanego SD-VER = KOMPLET dla całego materiału dot. świadka, w tym bez
   jawnego wykonania OCR dla każdego pliku PDF bez warstwy tekstowej** —
   patrz PRE-W1a-SD-VER (audyt 3.14, HARD GATE),
+- **formułować tez, pytań ani jakichkolwiek wniosków merytorycznych z materiału
+  dowodowego bez uprzedniego wyświetlenia użytkownikowi pełnego rejestru
+  plików ze statusem ✅/🔶/⬜/➖ w TEJ SAMEJ turze** — patrz PRE-W1a.4
+  RZ-SHOW-ZAWSZE / `MOD-REJESTR-ZALACZNIKOW-CHECKPOINT.md` (audyt 3.17-r3,
+  HARD GATE) — dotyczy KAŻDEJ tury z dowodami, nie tylko pierwszej,
 - **utożsamiać dokument wzmiankowany w zeznaniu/protokole (np. "notatka
   dołączona do akt") z innym, fizycznie obecnym dokumentem o zbliżonej
   funkcji, zamiast oznaczyć go jako ⬛ DO WERYFIKACJI, gdy sam nie występuje
@@ -1634,6 +1682,7 @@ Nie wolno domyślnie:
 | Skill | Kiedy wywołać |
 |---|---|
 | `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` | **OBOWIĄZKOWO, BEZPOŚREDNIO, na PRE-W1a** — przed jakimkolwiek profilem świadka lub tezą, niezależnie od tego, czy `analizator-dowodow-v3` jest wczytany (audyt 3.14) |
+| `shared/MOD-REJESTR-ZALACZNIKOW-CHECKPOINT.md` | **OBOWIĄZKOWO, na PRE-W1a.4, w KAŻDEJ turze z dowodami** — bezpośrednio po SD-VER, przed profilem świadka; wyświetla użytkownikowi pełen rejestr plików ze statusem i pyta o kontynuację przy ⬜/🔶 (audyt 3.17-r3) |
 | `shared/MOD-STEP-TRACKER.md` | **OBOWIĄZKOWO, na PRE-W1a.3** — inicjalizacja rejestru kroków świadka, aktualizacja po każdym etapie (audyt 3.14) |
 | `analizator-dowodow-v3` | przed W2 jeśli dostępne obszerne akta (uzupełniająco — nie zastępuje bezpośredniego SD-VER z PRE-W1a) |
 | `chronologia-sprawy-v1` | jeśli zdarzenia mają złożoną oś czasu |
