@@ -2,10 +2,94 @@
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 
-**Źródło weryfikacji:** KSH — Dz.U. 2024 poz. 18 t.j. ze zm. | PrUp — Dz.U. 2025 poz. 614 t.j. | Prawo przedsiębiorców — Dz.U. 2025 poz. 1480 t.j. | KC (spółka cywilna) — Dz.U. 2025 poz. 1071 ze zm.
-**Data weryfikacji online:** 2026-06-05 (KSH/PrUp) · 2026-06-15 (Prawo przedsiębiorców, formy działalności, dokumenty założycielskie)
+**Źródło weryfikacji:** KSH — Dz.U. 2024 poz. 18 t.j. ze zm. (w tym Dz.U. 2026 poz. 176) | PrUp — Dz.U. 2025 poz. 614 t.j. | Prawo przedsiębiorców — Dz.U. 2025 poz. 1480 t.j. | KC (spółka cywilna) — Dz.U. 2025 poz. 1071 ze zm.
+**Data weryfikacji online:** 2026-06-05 (KSH/PrUp) · 2026-06-15 (Prawo przedsiębiorców, formy działalności, dokumenty założycielskie) · 2026-07-15 (nowelizacja Dz.U. 2026 poz. 176 — patrz sekcja niżej; koryguje wcześniejszą flagę F-6, która błędnie wskazywała "art. 130 (2026.187)" — poz. 187/2026 dotyczy w rzeczywistości zmian w ustawie o Policji, nie KSH)
 **ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 **⚠️ KSH był wielokrotnie nowelizowany — przed każdą sprawą weryfikuj aktualny t.j. w ISAP.**
+
+---
+
+## NOWELIZACJA 2026 — REJESTR AKCJONARIUSZY I DEMATERIALIZACJA AKCJI (Dz.U. 2026 poz. 176)
+
+```
+Ustawa z dnia 23 stycznia 2026 r. o zmianie ustawy – Kodeks spółek handlowych
+oraz niektórych innych ustaw. Uchwalona przez Sejm, podpisana przez Prezydenta
+12.02.2026, ogłoszona w Dz.U. 17.02.2026 (poz. 176).
+
+WEJŚCIE W ŻYCIE (⛔ dwa różne terminy — nie mylić):
+  → WIĘKSZOŚĆ przepisów: 18.02.2027 (12 miesięcy od ogłoszenia)
+  → WYJĄTEK — przedłużenie mocy dowodowej dokumentu akcji: już od 28.02.2026
+
+CO SIĘ ZMIENIA (dotyczy S.A., S.K.A., prostej spółki akcyjnej, spółki europejskiej):
+  1. Przedłużenie okresu ochronnego dokumentu akcji o kolejne 2 lata — pierwotny
+     5-letni okres z dematerializacji 2021 r. (do 01.03.2026) wydłużony do
+     29.02.2028. Po tym terminie dokument akcji (papierowy) całkowicie traci
+     moc dowodową nawet między akcjonariuszem a spółką.
+  2. Całkowite zniesienie rozróżnienia akcji imiennych i na okaziciela —
+     uznane za nieaktualne w dobie powszechnej demateriaizacji akcji.
+  3. Nowe obowiązki informacyjne spółek i podmiotów prowadzących rejestr
+     akcjonariuszy — m.in. ujawnianie podmiotu prowadzącego rejestr,
+     zgłaszanie zawarcia/rozwiązania umowy o prowadzenie rejestru do sądu
+     rejestrowego (nowy art. 25da ustawy o KRS), przekazywanie szczegółowych
+     danych akcjonariuszy przy wykreśleniu spółki z rejestru.
+  4. Przepis przejściowy (transitional): S.A., S.K.A., proste spółki akcyjne
+     i spółki europejskie istniejące w dniu wejścia w życie ustawy muszą
+     dostosować umowy/statuty do zmian NIE PÓŹNIEJ niż w terminie 2 lat od
+     wejścia w życie — czyli praktyczny deadline dostosowawczy przypada
+     ok. 18.02.2029 (2 lata od głównego terminu wejścia w życie 18.02.2027).
+
+PRAKTYCZNE ZASTOSOWANIE:
+  → Sprawa dot. akcji na okaziciela sprzed dematerializacji, spór o moc
+    dowodową dokumentu → sprawdź, czy data zdarzenia mieści się w oknie
+    ochronnym (do 29.02.2028), nie w starym terminie (01.03.2026).
+  → Doradztwo dla S.A./S.K.A. o dostosowaniu statutu → przypomnij o
+    dwuletnim terminie dostosowawczym z Art. 34 ustawy nowelizującej.
+  → NIE dotyczy sp. z o.o. ani spółek osobowych (dotyczy wyłącznie spółek
+    akcyjnych/kapitałowych z akcjami: S.A., S.K.A., P.S.A., SE).
+
+ZWIĄZEK Z FLAGĄ F-5 (ustawa ESAP, Dz.U. 2026 poz. 644):
+  Flaga F-5 wskazywała, że omnibus ESAP dotyczy KSH "incydentalnie" — TEGO
+  konkretnego związku NIE udało się jednoznacznie potwierdzić w tej sesji
+  (brak źródła wprost łączącego poz. 644 ze zmianą treści KSH). F-5 pozostaje
+  OTWARTA jako osobna flaga — nie zamykać jej na podstawie tej sekcji.
+```
+
+---
+
+## NOWELIZACJA 2026 — SPÓŁKA PARTNERSKA: PSYCHOLOG DODANY DO KATALOGU ZAWODÓW (art. 88 KSH, zmiana przez Dz.U. 2026 poz. 187)
+
+```
+⚠️ KOREKTA WCZEŚNIEJSZEJ FLAGI F-6: flaga błędnie wskazywała "art. 130
+(2026.187)". Po weryfikacji źródłowej: Dz.U. 2026 poz. 187 to ustawa z dnia
+23 stycznia 2026 r. o zawodzie psychologa oraz samorządzie zawodowym
+psychologów — akt SAMODZIELNY (nie nowelizacja KSH wprost), który przy
+okazji (jako jeden z ok. 20 zmienianych aktów towarzyszących) zmienia
+ART. 88 KSH, NIE art. 130. Art. 130 KSH dotyczy zupełnie czego innego
+(reprezentacja w spółce komandytowej) i nie ma związku z tą nowelizacją.
+
+CO SIĘ ZMIENIA:
+  Art. 88 KSH (katalog zawodów uprawnionych do bycia partnerem w spółce
+  partnerskiej) rozszerzony o zawód PSYCHOLOGA — analogicznie jak
+  wcześniej rozszerzano go o inne zawody zaufania publicznego (adwokat,
+  aptekarz, architekt, biegły rewident, diagnosta laboratoryjny,
+  fizjoterapeuta, inżynier budownictwa, lekarz, notariusz, pielęgniarka,
+  położna, radca prawny, rzecznik patentowy, rzeczoznawca majątkowy,
+  tłumacz przysięgły i in.).
+
+WEJŚCIE W ŻYCIE: powiązane z wejściem w życie ustawy o zawodzie psychologa
+  — sprawdź aktualny stan w ISAP przed powołaniem (ustawa główna miała
+  różne terminy wejścia w życie dla różnych przepisów, w tym część
+  przepisów odroczona o 2 lata i 3 miesiące od ogłoszenia).
+
+PRAKTYCZNE ZASTOSOWANIE:
+  → Zakładanie spółki partnerskiej przez psychologów (np. wspólna praktyka
+    psychoterapeutyczna/diagnostyczna) → od wejścia w życie tego przepisu
+    jest to prawnie dopuszczalne na tych samych zasadach co inne wolne
+    zawody w art. 88 KSH.
+  → Sprawdź w ISAP, czy przepis już obowiązuje w dacie zdarzenia w sprawie
+    klienta (możliwe długie vacatio legis głównej ustawy o zawodzie
+    psychologa).
+```
 
 ---
 

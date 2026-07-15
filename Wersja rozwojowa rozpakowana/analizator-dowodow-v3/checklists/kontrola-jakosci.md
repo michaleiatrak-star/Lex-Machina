@@ -13,6 +13,7 @@
 - [ ] Wskazano realne ryzyka procesowe.
 - [ ] Przepisy do aktualnej weryfikacji oznaczono (ISAP).
 - [ ] Orzecznictwo nie jest generowane bez sprawdzenia (orzeczenia-sadowe-v2).
+- [ ] Cytaty z orzeczeń/interpretacji mają lokalizację (s./teza/pkt) + kotwicę gdy możliwa (Zasada 2B).
 - [ ] Rekomendacje są operacyjne.
 - [ ] Terminy krytyczne (< 14 dni) oznaczono alertem M12.
 

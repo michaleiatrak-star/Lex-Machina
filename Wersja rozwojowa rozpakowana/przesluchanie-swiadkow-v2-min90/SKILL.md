@@ -1,6 +1,6 @@
 ---
 name: przesluchanie-swiadkow-v2-min90
-version: "3.17"
+version: "3.20"
 type: legal-skill
 domain: litigation-witness-examination
 status: production
@@ -57,6 +57,8 @@ validation:
     - HARDGATE-SD-02
     - RZ-SHOW-GATE
     - STEP-TRACKER-WITNESS
+    - PRZESLANKI-GATE
+    - FORMALNA-ZGODNOSC-GATE
 pipeline:
   stages:
     - PRE-W1a-SD-VER
@@ -72,6 +74,62 @@ pipeline:
     - W5-BINDER
     - W6-LIVE-DIRECT
 changelog:
+  - "3.19 (2026-07-14, runda 5 — na wyraźne polecenie użytkownika po incydencie
+    sprawa XI P 27/26 — świadek Maria Koroleva, protokół rozprawy 08.07.2026):
+    PRZYCZYNA: model odczytał protokół rozprawy z 08.07.2026 narzędziem `view`
+    bez `view_range`. Narzędzie zwróciło adnotację `< truncated lines 174-230 >`
+    — obcięcie środka pliku mimo jego niewielkiego rozmiaru (394-403 linii,
+    ~14 KB; próg obcięcia jest znakowy, nie zależy od 'wyglądu' pliku jako
+    krótkiego). Model potraktował to jako nieistotną adnotację techniczną i
+    zbudował tezy oraz pytania (W2/W3) na pozostałej treści, nigdy nie
+    wracając do obciętego zakresu. Skutek: przez trzy kolejne tury pominięto
+    zeznanie o wiadomości WhatsApp z 28.09.2024 do kilkuset pracowników —
+    fakt niekwestionowany przez pełnomocnika pozwanej wprost na rozprawie —
+    dopóki użytkownik nie porównał wyniku z niezależnie przygotowanym
+    dokumentem (Pytania_dla_Marii.docx, Blok 4) i nie polecił ponownego
+    zbadania protokołów pod tym kątem.
+    NAPRAWA: poprawka wprowadzona w zależności współdzielonej, nie lokalnie w
+    tym skillu — patrz `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` w.1.5.0,
+    REGUŁA-TRUNCATION-VIEW oraz SD-GATE-TRUNC (FAZA 2 i FAZA 3). Ten skill
+    dziedziczy naprawę automatycznie przez istniejącą, twardą zależność
+    PRE-W1a-SD-VER (patrz tabela integracji niżej) — nie wymaga osobnej kopii
+    reguły, zgodnie z zasadą unikania duplikacji (CHECKLIST-DEDUP).
+    Pełny opis incydentu: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`,
+    wpis AUDYT-2026-07-14b."
+  - "3.18 (2026-07-14, runda 4 — na wyraźne polecenie użytkownika po incydencie
+    sprawa XI P 27/26 — świadek Maria Koroleva, pismo pracodawcy 7.10.2024):
+    PRZYCZYNA: przy pierwszym czytaniu dokumentu powołującego się na przepisy
+    Kodeksu karnego jako podstawę zwolnienia dyscyplinarnego (upomnienie
+    14.08.2024, pismo 7.10.2024) model wykonał WYŁĄCZNIE KROK 2 procedury
+    PRZESŁANKI-GATE (weryfikacja treści przepisu przez web_search — zgodnie
+    z PRAWO-HARDGATE), ale pominął KROKI 3-5 (zestawienie KAŻDEJ wymaganej
+    przesłanki z tym, co dokument konkretnie podaje na jej poparcie,
+    CONTEXTUAL-REBUTTAL-CHECK wobec innych dokumentów sprawy, tabela
+    zbiorcza, wniosek jednozdaniowy per podstawa prawna). Model pomylił
+    'zweryfikowałem treść przepisu' z 'wykonałem PRZESŁANKI-GATE' — to są
+    dwa różne, niezależne obowiązki tego skilla. Analiza formalna dokumentu
+    (upomnienia) pod kątem zgodności z art. 108-112 k.p. również nie została
+    wykonana proaktywnie przy pierwszym czytaniu, tylko dopiero na wprost
+    zadane pytanie użytkownika 'czy analizowałeś dokumenty pod kątem
+    zgodności z prawem i wymogami formalnymi?' — dokładnie ten sam wzorzec
+    reaktywności, który doprowadził do naprawy 3.17 (RZ-SHOW). Skutek:
+    5 podstaw prawnych z pisma 7.10.2024 pozostało niezweryfikowanych pod
+    kątem pokrycia faktycznego przez półtorej tury rozmowy, mimo że materiał
+    do tej analizy (w tym CONTEXTUAL-REBUTTAL-CHECK z pisma powoda 30.06.2025
+    i zeznań świadka Nawrota) był dostępny od momentu wczytania akt.
+    NAPRAWA: (1) dodano jawne rozróżnienie PRAWO-HARDGATE vs PRZESŁANKI-GATE
+    w sekcji PRZESŁANKI-GATE (patrz niżej, blok 'ROZRÓŻNIENIE 3.18') —
+    weryfikacja treści przepisu NIGDY nie zamyka obowiązku PRZESŁANKI-GATE
+    sama w sobie; (2) dodano SELF-CHECK-PO-WERYFIKACJI-PRAWNEJ: bezpośrednio
+    po KAŻDYM web_search weryfikującym przepis karny/kp w dokumencie
+    oskarżycielskim, model MUSI natychmiast, w tej samej odpowiedzi,
+    przejść do KROKU 3 PRZESŁANKI-GATE dla tego przepisu — zakaz kończenia
+    odpowiedzi na samej weryfikacji treści; (3) dodano FORMALNA-ZGODNOSC-GATE
+    — analogiczny obowiązek jak PRZESŁANKI-GATE, ale dla zgodności FORMALNEJ
+    dokumentu (nie merytorycznej) z wymogami proceduralnymi (art. 108-113
+    k.p. dla kar porządkowych, wymogi doręczenia, pouczeń) — wykonywany
+    RÓWNOLEGLE z PRZESŁANKI-GATE przy pierwszym czytaniu takiego dokumentu,
+    nie tylko na żądanie."
   - "3.17 (2026-07-14, runda 3 — na wyraźne polecenie użytkownika po incydencie
     sprawa XI P 27/26 — świadek Maria Koroleva): PRZYCZYNA: moduł
     shared/MOD-REJESTR-ZALACZNIKOW-CHECKPOINT.md (utworzony 2026-07-12
@@ -366,7 +424,13 @@ WYNIK:
 >
 > KROK 2 — Zweryfikuj ustawowe znamiona/przesłanki KAŻDEJ podstawy
 >   przez ISAP lub zweryfikowane orzecznictwo — zgodnie z PRAWO-HARDGATE,
->   zakaz cytowania znamion z pamięci bez weryfikacji.
+>   zakaz cytowania znamion z pamięci bez weryfikacji. ⚠️ DODANE 2026-07-15:
+>   każdy cytat z orzeczenia lub interpretacji online użyty w tej analizie
+>   (np. do przygotowania pytania konfrontacyjnego opartego na tezie prawnej)
+>   wymaga lokalizacji w źródle (strona/teza/punkt) + kotwicy technicznej gdy
+>   możliwa — pełny standard: `orzeczenia-sadowe-v2/SKILL.md` Zasada 2B.
+>   Ten sam wymóg co QUOTE-VERIFICATION-DEFAULT (patrz niżej) dla cytatów z
+>   dokumentów sprawy, rozszerzony na źródła zewnętrzne.
 >
 > KROK 3 — Zestaw KAŻDĄ wymaganą przesłankę z tym, co dokument KONKRETNIE
 >   podaje na jej poparcie (nie z tym, co dokument ogólnie twierdzi, tylko
@@ -415,6 +479,43 @@ WYNIK:
 > pokrycia w jednym dokumencie (zakres obowiązków niesprecyzowany), mimo że
 > własne pismo procesowe użytkownika ORAZ transkrypt zeznań świadka strony
 > przeciwnej — oba już dostępne w aktach — wprost tę przesłankę potwierdzają.
+
+> 🔴 **ROZRÓŻNIENIE 3.18 (naprawa incydentu — sprawa XI P 27/26, pismo 7.10.2024):**
+> PRAWO-HARDGATE (weryfikacja treści/numeracji przepisu przez web_search) i
+> PRZESŁANKI-GATE (dopasowanie faktów z dokumentu do przesłanek tego przepisu)
+> to DWA NIEZALEŻNE obowiązki. Wykonanie web_search potwierdzającego treść
+> art. X k.k./k.p. **nie zwalnia** z obowiązku przejścia przez KROKI 3-5
+> powyżej. Incydent, który to ujawnił: model zweryfikował treść 5 przepisów
+> karnych przywołanych w piśmie oskarżycielskim (art. 270, 286, 191§1, 287§1,
+> 212 k.k.), uznał to za wystarczające, i dopiero na wprost zadane pytanie
+> użytkownika ("czy analizowałeś dokumenty pod kątem zgodności z prawem")
+> wykonał właściwe zestawienie przesłanek — które ujawniło, że 3 z 5 zarzutów
+> nie mają żadnego pokrycia faktycznego, a 2 z nich opisują działania
+> pokrzywdzonego, które są realizacją jego własnych uprawnień (dostęp do akt
+> osobowych) lub czynnością zgłoszeniową (zgłoszenie podejrzenia włamania),
+> nie czynem zabronionym.
+>
+> **SELF-CHECK-PO-WERYFIKACJI-PRAWNEJ (obowiązkowy):** bezpośrednio po
+> KAŻDYM web_search weryfikującym treść przepisu karnego lub przepisu k.p.
+> stanowiącego podstawę zarzutu wobec strony w dokumencie oskarżycielskim,
+> model w TEJ SAMEJ odpowiedzi zadaje sobie pytanie: "Czy zestawiłem już
+> KAŻDĄ przesłankę tego przepisu z konkretnym opisem faktu w dokumencie
+> (KROK 3), sprawdziłem kontekst innych dokumentów (KROK 4) i sformułowałem
+> ocenę (KROK 5)? Jeśli NIE — nie kończ odpowiedzi na samej weryfikacji
+> treści przepisu, przejdź do tych kroków od razu."
+
+> 🔴 **FORMALNA-ZGODNOŚĆ-GATE (dodane w audycie 3.18):**
+> Analogicznie do PRZESŁANKI-GATE, ale dla zgodności FORMALNEJ (proceduralnej)
+> dokumentu, nie merytorycznej treści zarzutów. Aktywacja: dokument stanowi
+> lub dokumentuje zastosowanie kary porządkowej (upomnienie, nagana, kara
+> pieniężna — art. 108 k.p.) lub inną sformalizowaną czynność proceduralną
+> (np. zawiadomienie o rozwiązaniu umowy). Przy PIERWSZYM czytaniu takiego
+> dokumentu — RÓWNOLEGLE z PRZESŁANKI-GATE, nie zamiast niego — wykonaj
+> tabelaryczne zestawienie: wymóg formalny (konkretyzacja zarzutu i daty,
+> uprzednie wysłuchanie pracownika art. 109 §2, pouczenie o prawie i
+> 7-dniowym terminie sprzeciwu art. 112 §1, dowód doręczenia, podpis osoby
+> uprawnionej) → stan faktyczny w dokumencie → ocena ✅/⚠️/🔴. Nie odkładaj
+> tego do momentu, gdy użytkownik zapyta wprost o zgodność formalną.
 
 ### TRANSCRIPT-MINING-GATE (dodane w audycie 3.10)
 
@@ -1613,6 +1714,14 @@ Nie wolno domyślnie:
   zarzucanego czynu bez ustrukturyzowanego, tabelarycznego zestawienia KAŻDEJ wymaganej
   przesłanki z tym, co dokument faktycznie podaje na jej poparcie** —
   patrz PRZESŁANKI-GATE (dawne LEGAL-ELEMENT-MATCH-CHECK, rozbudowane w audycie 3.9),
+- **traktować web_search weryfikujący treść/numerację przepisu jako zakończenie obowiązku
+  PRZESŁANKI-GATE — to dwa niezależne kroki, weryfikacja treści nie zwalnia z zestawienia
+  przesłanek z faktami (KROKI 3-5)** —
+  patrz ROZRÓŻNIENIE 3.18 (audyt 3.18, KRYTYCZNA — incydent XI P 27/26),
+- **pomijać ocenę zgodności FORMALNEJ (proceduralnej) dokumentu stanowiącego karę porządkową
+  lub inną sformalizowaną czynność, czekając aż użytkownik zapyta wprost o zgodność z prawem/
+  wymogami formalnymi** —
+  patrz FORMALNA-ZGODNOŚĆ-GATE (audyt 3.18),
 - **analizować dokumenty od wielu powiązanych podmiotów prawnych bez prowadzenia
   i aktualizowania tabeli przypisania dokumentów do podmiotów** —
   patrz ENTITY-DISAMBIGUATION-TABLE (audyt 3.8),

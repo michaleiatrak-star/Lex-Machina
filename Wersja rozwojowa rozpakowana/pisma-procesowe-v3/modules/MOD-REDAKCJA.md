@@ -143,6 +143,32 @@ zasygnalizuj możliwość uruchomienia analizator-dowodow-v3/MD3c.
 
 ---
 
+## R.1b — TEZA-GATE (obowiązkowy, przed KROK 2 — naprawa F-7/ZASADA 11)
+
+```
+⛔ Zanim MOD-REDAKCJA zdiagnozuje styl/ton (KROK 2), zrekonstruuj JEDNYM
+ZDANIEM tezę centralną dostarczonego pisma: czego strona żąda i na jakiej
+podstawie prawnej/faktycznej. Zapisz to jawnie w odpowiedzi (1 linijka),
+NIE tylko w myślach.
+
+Powód: bez tej rekonstrukcji MOD-REDAKCJA może np. wzmocnić ton twierdzenia,
+które przy uważnym czytaniu tezy okazuje się słabo poparte dowodowo, albo
+"wygładzić" fragment, który w rzeczywistości ukrywa lukę w argumentacji —
+redagując czysto stylistycznie bez zauważenia problemu merytorycznego,
+który wymagałby SUGESTII w R.5, nie cichej poprawki kosmetycznej.
+
+Jeśli teza centralna NIE jest możliwa do ustalenia jednym zdaniem (pismo
+wielowątkowe, kilka roszczeń) → wypisz tezy osobno dla każdego wątku, nie
+uśredniaj ich do jednego ogólnika.
+
+To nie jest ponowna weryfikacja merytoryczna (to rola W1-W2-W3/MOD-OBAL) —
+to jednozdaniowe stwierdzenie faktu, służące jako punkt odniesienia dla
+KROK 2 i R.3 (żeby "bezpieczne" zmiany stylu nie kolidowały cicho z tym,
+co pismo faktycznie twierdzi).
+```
+
+---
+
 ## R.4 — PRZEBIEG REDAKCJI
 
 ```

@@ -44,6 +44,12 @@ Możesz pytać o wszystko — każdą odpowiedź sprawdzam
 w aktualnych przepisach zanim ją dam.
 → Powiedz: "mam pytania"
 
+🔎 SUROWA ANALIZA (bez mojej oceny)
+Jeśli wolisz, żebym tylko znalazł materiał (wyroki, przepisy, cytaty)
+z dokładnym wskazaniem skąd — bez mojej interpretacji czy rekomendacji,
+bo sam/a chcesz ocenić — powiedz o tym, a przełączę się na ten tryb.
+→ Powiedz: "surowa analiza" albo "bez interpretacji, same źródła"
+
 Co Cię interesuje najbardziej?"
 ```
 
@@ -119,6 +125,15 @@ Co Cię interesuje najbardziej?"
     Mechanizm: sesja pytań z weryfikacją ISAP każdej odpowiedzi,
     historia w kontekście sesji, po sesji → oferta modułu docelowego.
     → Wywołaj: "mam pytania" lub zadaj pytanie bezpośrednio
+
+[9] TRYB SUROWEJ ANALIZY (nakładka na moduły [2][3][5][6][7] — v2.4)
+    Orthogonalny do LAIK/PRAWNIK — wyłącza kwalifikację/ocenę/rekomendację
+    w wynikach dowolnego modułu powyżej. Zwraca WYŁĄCZNIE: źródło +
+    lokalizacja (strona/teza/punkt, PRAWO-HARDGATE KROK 5A-5B) + kotwica
+    gdy dostępna + cytat — bez interpretacji, decyzję pozostawia Tobie.
+    Aktywny do odwołania w tej sesji. Szczegóły: references/TRYB-SUROWA-
+    -ANALIZA.md.
+    → Wywołaj: "surowa analiza" / "bez interpretacji, tylko cytaty i lokalizacja"
 
 Który moduł Cię interesuje? Mogę też wyjaśnić szczegółowo
 pipeline dowolnego modułu zanim go uruchomisz."

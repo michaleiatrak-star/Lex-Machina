@@ -30,6 +30,12 @@ Dokumentacja medyczna: Art. 41 - prowadzona przez 20 lat
 
 ## Odpowiedzialnosc dyscyplinarna
 ```
+Akt: Ustawa z dnia 2 grudnia 2009 r. o izbach lekarskich — Dz.U. 2021 poz. 1342
+  t.j. (obwieszczenie 25.06.2021), nadal aktualny [VER: 2026-07-15]. Rozdział 5
+  "Odpowiedzialność zawodowa" — art. 53-112 — to źródłowa podstawa całej
+  poniższej procedury (organy, kary, przedawnienie, postępowanie mediacyjne).
+  ⚠️ Weryfikuj w ISAP przed każdym cytowaniem konkretnego artykułu.
+
 Organ: Okregowy Sad Lekarski -> Naczelny Sad Lekarski -> SN (kasacja)
 Kary: Upomnienie, nagana, zawieszenie PWZ (max 5 lat), pozbawienie PWZ
 Przedawnienie: 5 lat od popelnienia czynu lub 3 lata od dowiedzenia sie przez Izbe

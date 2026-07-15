@@ -65,7 +65,7 @@ o uzasadnienie, sprzeciw od orzeczenia referendarza):
 
 | Zawsze ładuj | M1, M2, M4, M8, M9 |
 |---|---|
-| Tylko gdy termin zawity | M5-terminy.md |
+| Tylko gdy termin zawity | `view /mnt/skills/user/shared/terminy.md` |
 | Tylko gdy opłata | M6-oplaty.md |
 | Tylko gdy złożona/orzecznictwo | M7-eskalacja.md |
 | Tylko gdy weryfikacja kwot | M3-weryfikacja.md |

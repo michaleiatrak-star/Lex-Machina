@@ -1,6 +1,6 @@
 ---
 name: dr-03-prawo-karne-wykroczenia-egzekucja
-version: 2.1
+version: 2.8
 description: |
   DR-03: Prawo Karne, Wykroczenia, Egzekucja
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -76,7 +76,11 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   obrona obligatoryjna art. 79 §1 pkt 2-4 KPK (→ mod-niewidomy-prawa-prawne.md,
   mod-niepelnosprawnosc-intelektualna-gluchota.md)
 
-## Moduły (20 łącznie — ✓ 20 OK, ☐ 0 STUB)
+## Moduły (24 łącznie — ✓ 24 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+## ⚠️ 2026-07-15: naprawiono niezgodność dysk↔lista — 4 pliki istniały na
+## dysku, ale nie były wpisane poniżej: mod-KK-art291-pranie-pieniedzy,
+## mod-ustawa-fundusz-pomocy-pokrzywdzonym, mod-ustawa-narkomania,
+## mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych — dodane na końcu listy.
 
 ```
   [✓] OK    mod-KK-KPK-framework-karne
@@ -89,11 +93,44 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   [✓] OK    mod-KK-cyberprzestepstwa-szczegolowy
   [✓] OK    mod-KK-kodeks-karny
   [✓] OK    mod-KK-kwalifikator-karnomaterialny
+              (⚠️ 2026-07-15: dodano BLOK 0 — Część Ogólna KK (klasyfikacja
+               zbrodnia/występek/materialne/formalne/kontratypy — odpowiedź
+               na pytanie o zgodność z doktrynalnym podziałem przestępstw;
+               obrona konieczna art. 25 i stan wyższej konieczności art. 26
+               w pełni, wcześniej jedno zdanie bez treści); BLOK H —
+               przestępczość zorganizowana art. 258 KK; BLOK I —
+               zabójstwa/pobicia art. 148/158-159 KK; BLOK J — przestępstwa
+               seksualne art. 197-205 KK w tym wobec dzieci/niepełnosprawnych
+               + Rejestr Sprawców Dz.U. 2026.110; BLOK L — uszkodzenie
+               mienia art. 288 KK / art. 124 KW z progiem 800 zł (część
+               2/6 naprawy); BLOK G rozbudowany — podsłuch/nagrania,
+               rozróżnienie uczestnik/osoba trzecia art. 267 §2-4 KK,
+               GPS (SN V KK 505/18), kontrola operacyjna służb (część
+               5/6 naprawy); wszystkie wcześniej
+               całkowicie nieobecne lub tylko wzmiankowane w tabelach)
   [✓] OK    mod-KK-przemoc-domowa-szczegolowy
-  [✓] OK    mod-KK-stalking-szczegolowy
   [✓] OK    mod-KKS-karny-skarbowy-i-AML
+              (⚠️ 2026-07-15: rozbudowany o konkretne artykuły KKS —
+               art. 54/55/56/62/76, czynny żal art. 16 KKS, zbieg z KK
+               przy karuzelach VAT — wcześniej sam szkielet proceduralny)
   [✓] OK    mod-KKW-kodeks-karny-wykonawczy
   [✓] OK    mod-KPK-tryby-scigania
+  [✓] NOWY  mod-tajemnica-zawodowa-poufnosc
+              (utworzony 2026-07-15, część 4/6 naprawy; art. 266 KK —
+               naruszenie tajemnicy zawodowej/służbowej, zbieg z art. 23
+               UZNK, konsolidująca mapa 12 kategorii poufności w systemie;
+               wcześniej temat całkowicie nieobecny od strony karnej)
+  [✓] NOWY  mod-przymusowe-leczenie-odwykowe
+              (utworzony 2026-07-15, część 3/6 naprawy; alkohol — ustawa
+               o wychowaniu w trzeźwości art. 24-36, GKRPA→sąd rodzinny;
+               narkotyki — ustawa o przeciwdziałaniu narkomanii art. 25-30
+               nieletni, art. 71-73a dorośli sprawcy przestępstw; wcześniej
+               temat całkowicie nieobecny)
+  [✓] NOWY  mod-KPK-wspolpraca-miedzynarodowa-karna
+              (utworzony 2026-07-15; ENA — KPK rozdz. 65a-65d; EPPO —
+               Dział XIIa KPK, Polska przystąpiła po pierwotnym opt-out;
+               Europol/Eurojust — rola pomocnicza, nie śledcza; Konwencja
+               Palermska Dz.U. 2005 nr 18 poz. 158)
   [✓] OK    mod-KW-KPW-framework-szczegolowy
               (nowe art. 86c KW — celowy drift/poślizg od 29.01.2026; zloty bez zgłoszenia;
                taryfikator: rozp. Dz.U. 2026 poz. 724 — weryfikuj kody)
@@ -109,7 +146,25 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
               (wydzielony 2026-06-14 z mod-PRD >400 linii: BRD I Dz.U. 2025 poz. 1676
                + BRD II Dz.U. 2025 poz. 1872; brawurowa jazda, nielegalne wyścigi,
                drift art. 86c KW, sądowy zakaz/dożywotni zakaz/przepadek, pj od 17 lat)
+  [✓] OK    mod-KK-art291-pranie-pieniedzy
+              (paserstwo art. 291-293 KK + pranie pieniędzy art. 299 KK — dopisany do
+               listy 2026-07-15, plik istniał wcześniej, patrz naprawa wyżej)
+  [✓] OK    mod-ustawa-fundusz-pomocy-pokrzywdzonym
+              (dopisany do listy 2026-07-15, plik istniał wcześniej)
+  [✓] OK    mod-ustawa-narkomania
+              (dopisany do listy 2026-07-15, plik istniał wcześniej — powiązany z
+               nowym mod-przymusowe-leczenie-odwykowe.md, sekcja B tego modułu)
+  [✓] OK    mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych
+              (odpowiedzialność karna spółek — dopisany do listy 2026-07-15, plik
+               istniał wcześniej)
 ```
+
+> **Przeniesiony do shared/ (2026-07-12):** `mod-KK-stalking-szczegolowy` był
+> bajt-w-bajt identyczny z `prawny-router-v3/references/stalking-nekanie.md`
+> (wykryte przez `ci_check_shared.py`). Scalony pod jedną kanoniczną lokalizacją:
+> `view /mnt/skills/user/shared/STALKING-NEKANIE.md`. Ładuj stamtąd bezpośrednio —
+> `mod-KK-art190a-stalking.md` zawiera odesłanie. Pełny opis:
+> `audyt-systemu-v4/references/CHECKLIST-DEDUP.md` NOTA-12.
 
 ## Jak wywołać
 

@@ -1,6 +1,6 @@
 ---
 name: dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka
-version: 3.2
+version: 3.5
 description: |
   DR-14: Prawo UE, Międzynarodowe, Prawa Człowieka
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony obszar prawa UE / prawa międzynarodowego.
@@ -46,7 +46,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Prawo UE, międzynarodowe, prawa człowieka — definicje TFUE/TUE/KPP/EKPC mają charakter pierwotny (prawo traktatowe) i są pokryte wprost w modułach dziedzinowych (mod-KPP-karta-praw-podstawowych-UE, mod-EKPC-ETPC-prawa-czlowieka). Żaden plik shared/definicje/ nie obejmuje tej dziedziny.
-## Moduły (8 łącznie — ✓ 8 OK, ☐ 0 STUB)
+## Moduły (10 łącznie — ✓ 10 OK, ☐ 0 STUB)
 
 ```
 PRAWO PIERWOTNE UE I PROCEDURY TSUE:
@@ -101,6 +101,25 @@ NATO I UMOWY OBRONNE:
                art. 5 — klauzula wzajemnej obrony; jurysdykcja nad obcymi żołnierzami;
                art. 42 TUE — wspólna obrona UE; zgoda Sejmu art. 117 Konstytucji)
 
+GRANICE I RUCH OSOBOWY:
+  [✓] NOWY  mod-maly-ruch-graniczny
+              (utworzony 2026-07-15; rozp. UE 1931/2006 + 1342/2011; umowy
+               dwustronne PL-Ukraina (Dz.U. 2009.103.858), PL-Rosja
+               (Dz.U. 2012.814, zawieszona od 2016), PL-Białoruś (Dz.U.
+               2010.122.823, nigdy nie weszła w życie) — ⛔ temat wysoce
+               zmienny politycznie, zawsze web_search aktualnego statusu)
+
+INWESTYCJE TRANSGRANICZNE:
+  [✓] NOWY  mod-inwestycje-transgraniczne-FDI-BIT
+              (utworzony 2026-07-15; DWA reżimy: A) kontrola FDI — ustawa
+               o kontroli niektórych inwestycji Dz.U. 2026 poz. 47 t.j.,
+               mechanizm podstawowy + art. 12a-12k uczyniony bezterminowym
+               nowelizacją 2025.973; rama UE rozp. 2019/452; B) ochrona
+               traktatowa BIT/ISDS — Achmea C-284/16, Komstroy C-741/19,
+               PL Holdings C-109/20, porozumienie 2020 o wygaśnięciu BIT-ów
+               intra-UE; ⛔ Polska NIE ratyfikowała Konwencji ICSID — fakt
+               łatwy do pomylenia, jawnie odnotowany w module)
+
 NARZĘDZIE METODYCZNE:
   [✓] OK    mod-rejestr-zrodla-prawa-lifecycle
               (workflow kancelaryjny aktualności prawa: ISAP audit, stan prawny
@@ -129,7 +148,7 @@ view /mnt/skills/user/dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/MAPA-AKTOW.m
 - Wchodzi z: `prawo-polskie-v2` → `ROUTING-MAP.md` → ten skill
 - Cyberprzestępstwa transgraniczne (dyrektywa NIS2, Budapest) → `dr-11`
 - AI Act, DSA, DMA — regulacje sektorowe UE wymagają analizy merytorycznej → `dr-11` (mod-AI-Act-framework, mod-DSA-digital-services-act, mod-DMA-digital-markets-act); ten skill dostarcza podstawę praw podstawowych (KPP art. 47, EKPC) gdy decyzja krajowa na bazie tych regulacji jest zaskarżana
-- Prawo karne UE (ENA, dyrektywy ofiarowe, Eurojust) → `dr-03`
+- Prawo karne UE (ENA, EPPO, Europol/Eurojust, Konwencja Palermska) → `dr-03/mod-KPK-wspolpraca-miedzynarodowa-karna.md` (utworzony 2026-07-15)
 - Prawo pracy UE (swoboda przepływu, dyrektywy pracownicze) → `dr-04`
 - Zamówienia publiczne UE (dyrektywy 2014/24, 2014/25) → `dr-07`
 - Obrona narodowa / NATO → `dr-13` → `mod-ustawa-obrona-ojczyzny-mobilizacja`

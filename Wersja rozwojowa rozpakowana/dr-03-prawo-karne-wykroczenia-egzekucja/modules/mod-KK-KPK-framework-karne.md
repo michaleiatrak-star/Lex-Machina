@@ -118,7 +118,7 @@ view /mnt/skills/user/prawny-router-v3/references/tryby-scigania.md
 
 **Jeśli decyzja: TAK — załaduj:**
 ```
-view /mnt/skills/user/prawny-router-v3/references/kwalifikator-karnomaterialny.md
+view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 ```
 Przejdź przez drzewo decyzyjne PRZED wydaniem jakiejkolwiek kwalifikacji.
 
@@ -154,7 +154,7 @@ skill `analiza-sadowa-v6`.
 | Stalking (art. 190a KK) | `mod-J-stalking.md` |
 | Wykroczenie na granicy z przestępstwem | `mod-I-wykroczenia.md` |
 | Przesłuchanie świadka w KPK | `mod-K-przesluchanie.md` / `przesluchanie-swiadkow-v2` |
-| Kwalifikacja czynu (przepisy z indeksu) | `/references/kwalifikator-karnomaterialny.md` |
+| Kwalifikacja czynu (przepisy z indeksu) | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md` |
 
 ---
 

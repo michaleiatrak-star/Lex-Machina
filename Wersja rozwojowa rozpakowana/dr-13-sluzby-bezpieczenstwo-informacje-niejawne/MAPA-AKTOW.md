@@ -24,9 +24,9 @@
 | Ustawa o ochronie przeciwpożarowej | ✅ Dz.U. 2025 poz. 188 t.j. (obwieszczenie Marszałka Sejmu 5.02.2025; ✅ [VER: isap.sejm.gov.pl WDU20250000188]) — WERYFIKUJ dalsze zmiany w ISAP przed cytowaniem | dr-13/modules/mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa | ✅ OK — WARN-29 zamknięty 2026-07-07 |
 | Ustawa o ochotniczych strażach pożarnych (OSP) | ✅ Dz.U. 2025 poz. 244 t.j. (akt pierwotny Dz.U. 2021 poz. 2490; ✅ [VER: isap.sejm.gov.pl WDU20250000244, obwieszczenie Marszałka Sejmu 21.02.2025]) | dr-13/modules/mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa | ✅ OK — WARN-29 zamknięty 2026-07-07 (status: stowarzyszenie, nie służba mundurowa — patrz `shared/ORZECZENIA-HIERARCHIA.md` §4.3 ws. właściwości sądów) |
 
-> ⚠️ Dz.U. 2025 poz. 1366 zmienia równocześnie: Policję, SG, PSP, ABW, AW, SKW, SWW, SOP — zakwaterowanie funkcjonariuszy.
+> ✅ Dz.U. 2025 poz. 1366 zmienia równocześnie: Policję, SG, PSP, ABW, AW, SKW, SWW, SOP — zakwaterowanie funkcjonariuszy. VER 2026-07-13 (TRYB DZU): w pełni w mocy (świadczenie mieszkaniowe z mocą od 01.07.2025, pozostałe przepisy od 14.10.2025).
 > ⚠️ POPRAWKA 2026-07-02: Ustawa o obronie Ojczyzny MA nowy t.j. (Dz.U. 2025 poz. 825, obwieszczenie 11.06.2025) — wcześniejsza adnotacja "nie ma nowego t.j." była błędna.
-> ⚠️ Obrona cywilna: zm. Dz.U. 2026 poz. 646 weszła w życie w 2026 r. — weryfikuj terminy vacatio legis.
+> ✅ Obrona cywilna: zm. Dz.U. 2026 poz. 646 — VER 2026-07-13 (TRYB DZU, potwierdzone ponownie): weszła w życie 29.05.2026, brak dalszego vacatio do weryfikacji.
 
 > Aktualizacja: 2026-07-02yyy (TRYB DZU krok 11/16 wg WARN-26, ZAMKNIĘTY na
 > tym etapie: 9 z 13 pozycji zweryfikowane [69%]. 8 błędów CRIT naprawionych.

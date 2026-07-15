@@ -6,14 +6,14 @@
 |---|---|---|---|
 | Ustawa o CIT | Dz.U. 2026 poz. 554 t.j. | mod-CIT-podatek-dochodowy-prawne | ✅ OK |
 | Ustawa o KAS | Dz.U. 2025 poz. 1131 t.j. — VER 2026-07-02h: nadal aktualne | mod-KAS-kontrola-celno-skarbowa | ✅ OK |
-| Ordynacja podatkowa | Dz.U. 2026 poz. 622 t.j. (25.05.2026) ⚡ część vacatio ~IX.2026 | mod-OP-ordynacja-podatkowa | ✅ OK |
+| Ordynacja podatkowa | Dz.U. 2026 poz. 622 t.j. (publ. 11.05.2026, stan prawny 21.04.2026) — VER 2026-07-13 (TRYB DZU): 622 to sam TEKST JEDNOLITY, nie nowelizacja; ⚡ część wcześniej wprowadzonych przepisów nowelizujących OP ma odroczone wejście (~IX.2026 część, do 16 mies. od ogłoszenia część) | mod-OP-ordynacja-podatkowa | ✅ OK |
 | Ustawa o PIT | Dz.U. 2026 poz. 592 t.j. | mod-PIT-podatek-dochodowy-fizyczne | ✅ OK |
 | Ustawa o finansach publicznych (UFP) | Dz.U. 2025 poz. 1483 t.j. — VER 2026-07-02h: nadal aktualne (obwieszczenie 26.09.2025, liczne nowelizacje do 2026.635 bez nowego t.j.) | mod-UFP-finanse-publiczne-NIK-RIO | ✅ OK |
 | Ustawa o VAT | Dz.U. 2025 poz. 775 t.j. — VER 2026-07-02g: nadal aktualne (obwieszczenie 21.05.2025, liczne nowelizacje do 2026.507 bez nowego t.j.) | mod-VAT-podatek-od-towarow-i-uslug | ✅ OK |
 | Ustawa o nadzorze KNF | Dz.U. 2025 poz. 640 t.j. ✅ VER 2026-07-04 (audyt WARN-KNF): isap.sejm.gov.pl WDU20250000640 — obwieszczenie Marszałka Sejmu z 10.04.2025, jednolity tekst ustawy z 21.07.2006 r. o nadzorze nad rynkiem finansowym, zastępujący poprzedni t.j. Dz.U. 2024 poz. 135 (NIE 136, NIE 724 — oba te numery były błędne w poprzednich wersjach mapy) | mod-prawo-bankowe-KNF-BFG | ✅ OK |
 | Ustawa AML | Dz.U. 2025 poz. 644 t.j. — VER 2026-07-02g: nadal aktualne (obwieszczenie 9.05.2025) | mod-ustawa-AML-instytucje-obowiazkowe | ✅ OK |
 | Ustawa o PCC | Dz.U. 2026 poz. 191 t.j. — VER 2026-07-02h: nadal aktualne (obwieszczenie 17.02.2026) | mod-ustawa-PCC-i-podatek-spadkow-darowizn | ✅ OK |
-| Ustawa akcyzowa | Dz.U. 2025 poz. 126 t.j. ✅ VER 2026-07-04 (audyt-DR06 — było "NIEZWERYFIKOWANE"): isap WDU20250000126, obwieszczenie Marszałka Sejmu 23.12.2024; potwierdzone niezależnie (infor.pl, dziennikustaw.gov.pl, MF podatki-arch.mf.gov.pl), ze zm. do 2025.340 bez nowego t.j. | mod-ustawa-akcyzowa-i-clo-UCC | ✅ OK (nowo zweryfikowane) |
+| Ustawa akcyzowa | Dz.U. 2025 poz. 126 t.j. ✅ VER 2026-07-04 (audyt-DR06 — było "NIEZWERYFIKOWANE"): isap WDU20250000126, obwieszczenie Marszałka Sejmu 23.12.2024; potwierdzone niezależnie (infor.pl, dziennikustaw.gov.pl, MF podatki-arch.mf.gov.pl), ze zm. do 2025.340 bez nowego t.j. | mod-ustawa-akcyzowa-i-clo-UCC | ✅ ROZBUDOWANE 2026-07-15 (część 4/6 sesji dr-03) — dodano sekcję 4a: rozróżnienie art. 86 (przemyt) vs art. 87 (oszustwo celne) KKS, mechanizm WIT/WIS/WIA, zbieg z art. 286 KK — wcześniej "błędna klasyfikacja CN" było jednym wyrazem bez treści |
 | Kodeks celny UE (UCC) + Taryfa celna (CN) | Rozp. (UE) 952/2013 + Rozp. (EWG) 2658/87 | mod-UCC-clo-taryfa-celna | ✅ OK |
 | Ustawa o podatkach i opłatach lokalnych | Dz.U. 2025 poz. 707 t.j. (reforma od 01.01.2025) — VER 2026-07-02h: nadal aktualne (obwieszczenie 21.05.2025) | mod-ustawa-podatek-nieruchomosci-i-lokalne | ✅ OK |
 | Ustawa o ryczałcie od przychodów | Dz.U. 2025 poz. 843 t.j. | mod-ustawa-ryczalt-przychody | ✅ OK |

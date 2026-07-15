@@ -60,7 +60,7 @@ Postanowienie SN IV KK 145/24 z 10.09.2024:
 > **wczytaj drzewo decyzyjne przed kwalifikacją.**
 
 ```
-view /mnt/skills/user/prawny-router-v3/references/kwalifikator-karnomaterialny.md
+view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 ```
 
 ---
@@ -86,4 +86,4 @@ I KZP 7/25 i IV KK 145/24), przedawnienie i zatarcie, kalkulator terminów.
 | Analiza sprawy wykroczeniowej | `analiza-sadowa-v6` |
 | Granica z przestępstwem → | `mod-N-karne.md` |
 | Dowody (kamera, GPS, radar) | `analizator-dowodow-v3` |
-| Kwalifikacja czynu (przepisy z indeksu) | `/references/kwalifikator-karnomaterialny.md` |
+| Kwalifikacja czynu (przepisy z indeksu) | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md` |

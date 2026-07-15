@@ -4,6 +4,2368 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
+## AUDYT-2026-07-15n — DEDUP: kategoryzacja źródeł RZĄD 1/2/3 wydzielona do shared/HIERARCHIA-ZRODEL.md
+
+**Zakres:** `shared/HIERARCHIA-ZRODEL.md` (nowy, kanoniczny), `analizator-przepisow-v2/SKILL.md`
+(usunięto duplikat, dodano odesłanie), `shared/PRAWO-HARDGATE.md` (KROK 5-RZĄD),
+`shared/WERYFIKACJA-SLAD.md` (KOTWICA-TEKSTOWA + tabela śladu + SELF-CHECK).
+
+### KONTEKST
+
+W tej samej sesji wdrożono mechanizm KOTWICA-TEKSTOWA (Text Fragment,
+`#:~:text=...`) w `shared/WERYFIKACJA-SLAD.md`. Przy demonstracji tego
+mechanizmu użytkownik zauważył, że podany link (do strony indywidualnej
+kancelarii, kdkadwokat.pl) nie miał przypisanej kategorii źródła — mimo że
+system JUŻ POSIADAŁ kategoryzację RZĄD 1/2A/2B/3 dla dokładnie takich
+przypadków. Weryfikacja wykazała, że kategoryzacja istniała WYŁĄCZNIE
+lokalnie w `analizator-przepisow-v2/SKILL.md` (Moduł 1) i nie była
+zarejestrowana w `CHECKLIST-DEDUP.md` jako pojęcie kanoniczne ani ładowana
+przez `shared/PRAWO-HARDGATE.md` / `shared/WERYFIKACJA-SLAD.md` — więc nie
+obowiązywała w odpowiedziach generowanych poza tym jednym skillem.
+
+### DIAGNOZA
+
+Ten sam wzorzec błędu co poprzednie DEDUP-y w tym dzienniku (np. AUDYT
+2026-07-12/2026-07-13f): reguła bezpieczeństwa/jakości zdefiniowana lokalnie
+w jednym skillu, potrzebna cross-cutting, nigdy nie podniesiona do `shared/`
+ani wpisana do `CHECKLIST-DEDUP.md` — więc żaden inny skill nie "wiedział",
+że ma ją stosować.
+
+### NAPRAWA
+
+1. Utworzono `shared/HIERARCHIA-ZRODEL.md` — pełna treść RZĄD 1/2A/2B/3
+   (definicje, listy domen, zakaz mieszania rzędów, znaczniki obowiązkowe,
+   procedura H-1→H-4) przeniesiona z `analizator-przepisow-v2`.
+2. `analizator-przepisow-v2/SKILL.md` (2.3 → 2.4): treść RZĄD zastąpiona
+   odesłaniem do pliku kanonicznego — zero duplikacji.
+3. `shared/PRAWO-HARDGATE.md` (2.1 → 2.2): nowy KROK 5-RZĄD, wymóg
+   kategoryzacji OBOK znacznika VER przy każdym linku; BRAMKA
+   WTÓRNE-ŹRÓDŁO-STOP rozszerzona o odesłanie do tej samej kategoryzacji.
+4. `shared/WERYFIKACJA-SLAD.md` (1.3 → 1.4): wymóg RZĄD dodany do sekcji
+   KOTWICA-TEKSTOWA, formatu śladu i SELF-CHECK.
+5. Wpis kanoniczny dodany do `CHECKLIST-DEDUP.md`.
+
+### STATUS
+
+✅ ZAMKNIĘTE — kategoryzacja RZĄD jest teraz jedną, kanoniczną treścią
+odczytywaną przez trzy punkty wejścia (`PRAWO-HARDGATE`, `WERYFIKACJA-SLAD`,
+`analizator-przepisow-v2`), zamiast obowiązywać wyłącznie punktowo.
+
+---
+
+## AUDYT-2026-07-15m — Nowy tryb w przewodnik-prawny-v2: SUROWA ANALIZA (bez interpretacji/oceny AI)
+
+**Zakres:** `przewodnik-prawny-v2` (SKILL.md + nowy plik references/TRYB-SUROWA-ANALIZA.md + KROK-M.md).
+
+### KONTEKST
+
+Po analizie opinii użytkownika-prawnika (e-mail testowy Actiflow/Brightspot)
+oceniono jego krytykę jako trafną (8/10): system domyślnie kwalifikuje,
+ocenia i rekomenduje, zamiast dawać surowy materiał do samodzielnej
+interpretacji prawnika, który zawodowo odpowiada za tę ocenę. Użytkownik
+polecił: dodaj do przewodnika prawnego tryb surowej analizy — jako opcję
+równoległą, nie zamiennik domyślnego trybu.
+
+### NAPRAWA — ZASADA 8 + NOWY PLIK REFERENCYJNY
+
+Dodano **Zasadę 8** (SKILL.md) definiującą tryb jako orthogonalny do
+LAIK/PRAWNIK — to nie kwestia języka, lecz głębokości interpretacji.
+Wyzwalacze: "surowa analiza" / "bez interpretacji" / "same źródła" / "sam
+ocenię" / "tylko tezy z lokalizacją". Domyślnie NIEAKTYWNY — wymaga
+jawnego żądania (nie włącza się automatycznie przez sam fakt bycia
+prawnikiem/TRYB PRAWNIK — to były dotąd mylone jako jedna oś).
+
+Nowy plik `references/TRYB-SUROWA-ANALIZA.md`: pełna specyfikacja — co
+wyłącza tryb (kwalifikacja, ocena, rekomendacja, "implikacja procesowa",
+"co to znaczy dla Ciebie", bilans stron, mapa opcji z rekomendacją) vs co
+pozostaje aktywne (PRAWO-HARDGATE, Zasada 2B/KROK 5A-5B lokalizacja+kotwica,
+limity cytatu, ostrzeżenia o terminach — to fakty proceduralne, nie ocena
+merytoryczna). Format wyjścia: neutralna lista "ZNALEZIONE ŹRÓDŁO [N]" z
+identyfikacją+lokalizacją+URL+cytatem, bez komentarza interpretacyjnego,
+BEZ sortowania wg domniemanej wagi (to już byłaby ukryta ocena). Zasady
+współpracy z wywoływanymi skillami (orzeczenia-sadowe-v2, analizator-
+dowodow-v3, analiza-sadowa-v6, kwalifikatory dr-XX) — przewodnik filtruje
+ich wynik do warstwy źródeł, odrzucając warstwę interpretacyjną, nawet
+jeśli wywołany skill ją i tak wygenerował (bo jego własna specyfikacja
+tego wymaga). Zasady przełączania między trybami w obie strony.
+
+### ZMIANY W ISTNIEJĄCYCH KROKACH
+
+- Rozpoznanie trybu wejścia (FAZA 0): dodano wyzwalacz SUROWA-ANALIZA,
+  aktywowalny w dowolnym momencie sesji, nie tylko na starcie.
+- KROK H (tłumaczenie wyników): dodano gałąź — cały mechanizm tłumaczenia
+  na język laika / dodawania implikacji procesowej jest WYŁĄCZONY, zamiast
+  tego neutralna ekstrakcja z lokalizacją.
+- KROK I (opcje po analizie): dodano gałąź — pomijamy mapę opcji z
+  rekomendacją (bo LAIK i PRAWNIK formaty i tak zawierają ocenę), używamy
+  zakończenia bez rekomendacji z nowego pliku referencyjnego.
+- KROK M (menu): nowa pozycja [9] w wersji PRAWNIK + pozycja "🔎 SUROWA
+  ANALIZA" w wersji LAIK.
+
+### NAPRAWA — ZMIANY W PLIKACH
+
+| Plik | Zmiana |
+|---|---|
+| `przewodnik-prawny-v2/SKILL.md` | + Zasada 8; + wyzwalacz w rozpoznaniu trybu; + gałęzie w KROK H i KROK I; wersja 2.4→**2.5**; frontmatter description + changelog + stopka zaktualizowane |
+| `przewodnik-prawny-v2/references/TRYB-SUROWA-ANALIZA.md` | **NOWY PLIK** — pełna specyfikacja |
+| `przewodnik-prawny-v2/references/KROK-M.md` | + pozycja menu LAIK i PRAWNIK |
+
+### STATUS
+
+Tryb wdrożony jako opcja równoległa do domyślnej pełnej analizy, zgodnie
+z rekomendacją z oceny opinii prawnika (nie zamiana architektury, tylko
+dodanie wyboru).
+
+---
+
+## AUDYT-2026-07-15l — Wdrożenie kotwic/pinpoint do centralnego mechanizmu cytowania (PRAWO-HARDGATE), nie punktowo do jednego modułu
+
+**Zakres:** `shared/PRAWO-HARDGATE.md` (mechanizm centralny, v2.0→**v2.1**), `orzeczenia-sadowe-v2/SKILL.md` (odesłanie), `shared/SKILL.md` (wersja).
+
+### KONTEKST
+
+Po poprzedniej naprawie (AUDYT-2026-07-15k — Zasada 2B dodana WYŁĄCZNIE w
+`orzeczenia-sadowe-v2`) użytkownik zapytał wprost, czy Claude faktycznie
+stosuje ten mechanizm we własnych cytowaniach. Odpowiedź: NIE —
+sprawdzone bezpośrednio, że cytaty orzeczeń wpisane w tej samej sesji do
+`mod-KK-kwalifikator-karnomaterialny.md` (SN III KK 265/15, SN V KK
+505/18, SA Łódź II AKa 135/05, SA Katowice II AKa 153/14 i inne) mają
+WYŁĄCZNIE sygnaturę/sąd/datę — zero URL, zero kotwicy. Przyczyna: użyto
+web_search (fragmenty ze stron wtórnych), nigdy web_fetch źródła
+oficjalnego — więc nie było z czego zbudować linku ani kotwicy, i nawet
+URL strony wtórnej nie został zapisany.
+
+Użytkownik polecił: wdrożyć mechanizm do samego SYSTEMU CYTOWANIA, nie
+punktowo do jednego modułu. Zidentyfikowano właściwe miejsce: nie
+`orzeczenia-sadowe-v2` (używany tylko przy dedykowanym wyszukiwaniu
+orzecznictwa), lecz **`shared/PRAWO-HARDGATE.md`** — jedyny mechanizm
+faktycznie referencowany i egzekwowany w CAŁYM systemie (każdy DR-skill,
+każdy generator pism, każdy analizator wywołuje go jako HARD GATE przed
+jakimkolwiek cytowaniem prawa/orzeczeń).
+
+### NAPRAWA — DWA NOWE KROKI W PRAWO-HARDGATE (v2.0→v2.1)
+
+**KROK 5A (lokalizacja + kotwica)** — dodany do procedury orzeczeń ORAZ
+do procedury przepisów ustawowych (ta druga wcześniej nie wymagała
+NAWET samego URL, nie tylko lokalizacji). Wymaga: numer strony (PDF),
+numer tezy/punktu/akapitu (TSUE/ETPC), nazwa sekcji (źródła bez
+numeracji), lub jawna adnotacja opisowa — plus kotwica techniczna
+(#page=N, kotwica nagłówka TYLKO jeśli zweryfikowana) z jawnym zakazem
+zmyślania kotwicy ("wymyślona kotwica jest gorsza niż jej brak").
+
+**KROK 5B (link zawsze obowiązkowy)** — odpowiedź na drugie pytanie
+użytkownika: "gdy nie możesz czytać bezpośrednio strony a tylko indeks w
+Google, czy podać chociaż link do źródła?" TAK — zmieniono dotychczasowe
+zachowanie BRAMKI WTÓRNE-ŹRÓDŁO-STOP, która kazała CAŁKOWICIE pomijać
+sygnaturę/link przy samym snippecie. Teraz: link z wyniku web_search
+NADAL się podaje, tylko ze zmienionym statusem (⚠️ [NIEWERYFIKOWANE —
+link do wyniku wyszukiwania, nie do potwierdzonej treści]) zamiast
+całkowitego pominięcia. Wyjątek zachowany: sygnatura NIEISTNIEJĄCA w
+oficjalnej bazie nadal znika z analizy (to chroni przed halucynacją
+prawa) — KROK 5B dotyczy wyłącznie samego LINKU jako informacji
+pomocniczej, nie podnosi statusu dowodowego niepotwierdzonej treści.
+
+Zaktualizowano też SELF-CHECK na końcu pliku o dwa nowe punkty (lokalizacja
+podana? kotwica zweryfikowana, nie zgadnięta?).
+
+### PROPAGACJA
+
+`orzeczenia-sadowe-v2/SKILL.md` Zasada 2B (z poprzedniej naprawy)
+pozostawiona jako szczegółowa specyfikacja robocza, z dopiskiem że
+mechanizm nadrzędny żyje teraz w PRAWO-HARDGATE — w razie rozbieżności
+rozstrzyga PRAWO-HARDGATE. Dzięki temu, że PRAWO-HARDGATE jest wywoływany
+przez KAŻDY DR-skill i generator pism (nie tylko orzeczenia-sadowe-v2,
+analizator-dowodow-v3, przesłuchanie świadków — cel poprzedniej naprawy),
+naprawa jest teraz systemowa, nie wymaga ręcznego dopisywania
+cross-referencji do kolejnych modułów w miarę ich powstawania.
+
+### NAPRAWA — ZMIANY W PLIKACH
+
+| Plik | Zmiana |
+|---|---|
+| `shared/PRAWO-HARDGATE.md` | + KROK 5A (orzeczenia i przepisy) + KROK 5B; + 2 punkty self-check; wersja 2.0→**2.1** |
+| `orzeczenia-sadowe-v2/SKILL.md` | + odesłanie do PRAWO-HARDGATE jako źródła nadrzędnego |
+| `shared/SKILL.md` | wersja 2.7→**2.8** |
+
+### AUTOKRYTYKA (jawnie odnotowana na żądanie użytkownika)
+
+Claude w tej samej sesji NIE stosował własnej Zasady 2B przy pisaniu
+treści merytorycznej modułów (10-12 cytowań orzeczeń bez URL). Użytkownik
+zaproponował retroaktywną naprawę tych konkretnych cytowań — NIE
+wykonano jej w tym wpisie (użytkownik przekierował na wdrożenie
+systemowe zamiast punktowej łatki). Cytaty orzeczeń dodane w tej sesji
+PRZED tą naprawą (BLOK G, H, I, J, L) formalnie NIE spełniają nowego
+KROK 5A/5B — pozostają do ewentualnej naprawy retroaktywnej, jeśli
+użytkownik o to poprosi osobno.
+
+### STATUS
+
+Mechanizm wdrożony centralnie. Obowiązuje od teraz dla wszystkich
+przyszłych cytowań w całym systemie — automatycznie, bez potrzeby
+ręcznego dopisywania do nowych modułów.
+
+---
+
+## AUDYT-2026-07-15k — Nowa misja: kotwice i pinpoint-lokalizacja dla cytatów z orzeczeń i interpretacji internetowych
+
+**Zakres:** `orzeczenia-sadowe-v2/SKILL.md` (zasada centralna), `analizator-dowodow-v3` (SKILL.md + MP9-jakosc.md + checklists/kontrola-jakosci.md), `przesluchanie-swiadkow-v2-min90/SKILL.md`, `shared/FAKTY_v2.md` (cross-referencja).
+
+### KONTEKST
+
+Użytkownik polecił: analogicznie do wskazywania strony/punktu/akapitu przy
+powoływaniu się na fragment PISMA procesowego (wzorzec: `shared/FAKTY_v2.md`
+KROK F2A — "źródło: dokument, str./pkt jeśli znane"), wprowadzić TEN SAM
+mechanizm dla cytatów z ORZECZEŃ SĄDOWYCH i INTERPRETACJI ZE STRON
+INTERNETOWYCH w modułach: orzeczenia-sadowe-v2, przesłuchanie świadków,
+analizator dowodów — z DODATKOWYM wymogiem: kotwica techniczna (link
+prowadzący wprost do miejsca w źródle), gdy platforma źródłowa na to pozwala.
+
+### NAPRAWA — NOWA ZASADA 2B W ORZECZENIA-SADOWE-V2 (moduł centralny)
+
+Dotychczasowa "Zasada 2" (4 obowiązkowe elementy: sygnatura/data/sąd/URL)
+potwierdzała ISTNIENIE orzeczenia, ale nie wymagała wskazania GDZIE W
+DOKUMENCIE znajduje się cytowany fragment. Dodano **Zasadę 2B** z dwoma
+nowymi elementami:
+- [5] LOKALIZACJA W ŹRÓDLE (obowiązkowa) — numer strony (PDF/skan), numer
+  tezy/punktu/akapitu (zwłaszcza TSUE/ETPC, które numerują akapity), nazwa
+  sekcji/nagłówka (źródła bez numeracji), lub jawna adnotacja opisowa gdy
+  źródło nie ma żadnej wewnętrznej numeracji.
+- [6] KOTWICA TECHNICZNA (gdy platforma wspiera) — `#page=N` dla PDF-ów,
+  kotwica nagłówka HTML (tylko jeśli faktycznie zweryfikowana przez
+  web_fetch — zakaz zgadywania), numer akapitu w adresie (niektóre bazy
+  TSUE/ETPC). Jawny zakaz: wymyślona/niezweryfikowana kotwica jest GORSZA
+  niż jej brak.
+Rozszerzono na WSZYSTKIE cytaty — zarówno z orzeczeń, jak i z interpretacji
+znalezionych online (komentarze, artykuły, interpretacje urzędowe, glosy)
+— z osobnym przykładem dla każdego typu źródła. Zaktualizowano też szablon
+wyjściowy PLAN MINIMUM (sekcje [A]/[B]) o nowy element lokalizacji.
+
+### PROPAGACJA DO POZOSTAŁYCH DWÓCH MODUŁÓW
+
+- `analizator-dowodow-v3`: dodano cross-referencję w sekcji ZASADY STYLU
+  (rozszerzenie istniejącego "sprzeczność = cytat + lokalizacja + status"
+  o wyraźne powiązanie z Zasadą 2B dla źródeł zewnętrznych) + punkty w
+  dwóch checklistach jakości (MP9-jakosc.md, checklists/kontrola-jakosci.md).
+- `przesluchanie-swiadkow-v2-min90`: dodano cross-referencję przy istniejącym
+  kroku weryfikacji orzecznictwa (KROK 2 sekcji o podstawach prawnych),
+  powiązując z już istniejącym mechanizmem QUOTE-VERIFICATION-DEFAULT
+  (który dotyczył dotąd tylko cytatów z dokumentów SPRAWY, nie źródeł
+  zewnętrznych).
+- `shared/FAKTY_v2.md`: dodano adnotację rozróżniającą — "str./pkt jeśli
+  znane" (opcjonalne) dla dokumentów WŁASNYCH sprawy pozostaje bez zmian;
+  dla orzeczeń/interpretacji ZEWNĘTRZNYCH obowiązuje surowszy, OBOWIĄZKOWY
+  standard z Zasady 2B — z jawnym odesłaniem, żeby uniknąć pomylenia dwóch
+  różnych progów rygoru w jednym systemie.
+
+### NAPRAWA — ZMIANY W PLIKACH
+
+| Plik | Zmiana |
+|---|---|
+| `orzeczenia-sadowe-v2/SKILL.md` | + Zasada 2B (pełna specyfikacja + przykłady); zaktualizowany szablon PLAN MINIMUM; wersja 2.7→**2.8** |
+| `analizator-dowodow-v3/SKILL.md` | + cross-referencja w ZASADY STYLU; wersja 5.15.0→**5.16.0** |
+| `analizator-dowodow-v3/modules/MP9-jakosc.md` | + punkt checklisty |
+| `analizator-dowodow-v3/checklists/kontrola-jakosci.md` | + punkt checklisty |
+| `przesluchanie-swiadkow-v2-min90/SKILL.md` | + cross-referencja przy KROK 2; wersja 3.19→**3.20** |
+| `shared/FAKTY_v2.md` | + adnotacja rozróżniająca standard wewnętrzny/zewnętrzny |
+
+### STATUS
+
+Misja zakończona. Standard jest teraz spójny w całym systemie: dokumenty
+WŁASNE sprawy → FAKTY_v2 (str./pkt "jeśli znane"); orzeczenia i
+interpretacje ZEWNĘTRZNE → orzeczenia-sadowe-v2 Zasada 2B (lokalizacja +
+kotwica OBOWIĄZKOWE, z jawnym zakazem zmyślania kotwicy technicznej).
+
+---
+
+## AUDYT-2026-07-15j — Sesja wieloczęściowa (Część 6/6): Przegląd końcowy całej serii
+
+**Zakres:** przegląd i domknięcie AUDYT-2026-07-15j Części 1-5 + korekta
+drobnej niespójności licznika wykrytej przy przeglądzie.
+
+### KONTEKST
+
+Ostatnia część 6-częściowej sesji naprawczej `mod-KK-kwalifikator-
+karnomaterialny.md` (dr-03), prowadzonej etapami na wyraźne polecenie
+użytkownika ("rób to etapami i podziel na części, z których każdą część
+robisz w osobnej wiadomości"). Poniżej pełne podsumowanie.
+
+### PODSUMOWANIE CAŁEJ SERII (Części 1-5)
+
+| Część | Blok/plik | Zakres | Status |
+|---|---|---|---|
+| 1/6 | BLOK 0 + BLOK K | Część Ogólna KK (klasyfikacja doktrynalna 7 osi) + obrona konieczna (art. 25) + stan wyższej konieczności (art. 26) | ✅ |
+| 2/6 | BLOK L | Uszkodzenie mienia — art. 288 KK / art. 124 KW, próg 800 zł | ✅ |
+| 3/6 | mod-przymusowe-leczenie-odwykowe.md (NOWY) | Przymusowe leczenie odwykowe — alkohol (ustawa o wychowaniu w trzeźwości) i narkotyki (ustawa o przeciwdziałaniu narkomanii) + naprawa niezgodności listy modułów SKILL.md (4 pliki brakujące) | ✅ |
+| 4/6 | mod-tajemnica-zawodowa-poufnosc.md (NOWY) + dr-06/mod-ustawa-akcyzowa-i-clo-UCC.md | Tajemnica zawodowa jako przestępstwo (art. 266 KK) + mapa 12 kategorii poufności + oszustwa celne/klasyfikacja CN (art. 86-87 KKS) | ✅ |
+| 5/6 | BLOK G (rozbudowa) | Podsłuch/nagrania — korekta błędnie przypisanych paragrafów art. 267 KK, rozróżnienie uczestnik/osoba trzecia, GPS, kontrola operacyjna | ✅ |
+| 6/6 | przegląd końcowy | Weryfikacja spójności całej serii | ✅ (ten wpis) |
+
+### WYNIK KOŃCOWEJ WERYFIKACJI SPÓJNOŚCI
+
+- `mod-KK-kwalifikator-karnomaterialny.md`: 1312 linii, 12 bloków (0, A-L),
+  wersja wewnętrzna nagłówka podbita v1.0 → **v2.0**.
+- `dr-03/SKILL.md`: wersja 2.1 (start sesji z poprzedniej rozmowy) →
+  **2.8** (po całej dzisiejszej serii, obejmującej też Części z
+  wcześniejszych wiadomości tej sesji: art. 258 KK, KKS, współpraca
+  międzynarodowa — łącznie 9 wzrostów wersji w tej rozmowie).
+- `dr-03/modules/`: 24 pliki na dysku = 24 wpisy w SKILL.md = **zgodność
+  potwierdzona** (naprawiono w tej części drobną niespójność licznika:
+  nagłówek mówił "23", powinno być 24 po dodaniu mod-tajemnica-zawodowa-
+  poufnosc.md w Części 4 — poprawione).
+- `dr-03/MAPA-AKTOW.md`: +9 wierszy łącznie w tej serii 6 części.
+- `dr-06/SKILL.md`: wersja 3.3 → 3.4 (Część 4).
+- Wszystkie nowe/zmienione pliki dostarczone przez `dostarcz_skill.sh`
+  (weryfikacja dysk=kopia=archiwum) po każdej części — brak zaległości.
+
+### CZEGO TA SERIA **NIE** OBEJMOWAŁA (świadomie odłożone/poza zakresem)
+
+- Synchronizacja z centralnym rejestrem `mapa_dzu_*.md` — jak w
+  poprzednich seriach tej sesji, nie wykonano bez wyraźnej prośby.
+- Pełny audyt pozostałych 4 modułów dopisanych w Części 3 (mod-KK-art291-
+  pranie-pieniedzy, mod-ustawa-fundusz-pomocy-pokrzywdzonym, mod-ustawa-
+  narkomania, mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych) —
+  dopisane do listy modułów, ale ich WEWNĘTRZNA treść nie była
+  przedmiotem tej sesji (nie zgłoszono ich jako brakujące).
+- Kontrola operacyjna służb (BLOK G wspomina ją i odsyła do dr-13, ale
+  NIE rozwija szczegółowo w tym module — to świadome odesłanie, nie luka).
+
+### STATUS
+
+Seria 6-częściowa ZAKOŃCZONA. System gotowy na kolejne zadanie
+zapowiedziane przez użytkownika (kotwice/lokalizacja cytatów w modułach
+orzeczeń/przesłuchań/analizatora dowodów).
+
+---
+
+## AUDYT-2026-07-15j — Sesja wieloczęściowa (Część 5/6): Podsłuch i nagrania — rozróżnienie uczestnik/osoba trzecia, korekta błędnych paragrafów art. 267 KK
+
+**Zakres:** `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md`.
+
+### CZĘŚĆ 5 — ROZBUDOWA BLOK G: PODSŁUCH I NAGRANIA
+
+Użytkownik wskazał tę kategorię jako dodatkową do zbadania (poza
+pierwotną listą). Diagnoza wykazała: istniejące drzewo w BLOK G miało
+**błędnie przypisane paragrafy** — §2 opisany jako "przechwycenie
+transmisji" (w rzeczywistości: dostęp do systemu informatycznego), §3
+jako "ujawnienie osobom nieuprawnionym" (w rzeczywistości: zakładanie/
+posługiwanie się urządzeniem podsłuchowym), §4 jako "publiczne
+ujawnienie" (w rzeczywistości: ujawnienie ogólnie, bez wymogu
+"publiczności"). Brakowało też najważniejszego praktycznie rozróżnienia:
+uczestnik rozmowy nagrywający siebie (co do zasady legalne) vs osoba
+trzecia podsłuchująca cudzą rozmowę (art. 267 §3 KK).
+
+Naprawiono: poprawne przypisanie §2 (dostęp do systemu), §3 (urządzenie
+podsłuchowe — z pełnym omówieniem: przestępstwo z narażenia, nie wymaga
+faktycznego uzyskania informacji; chroniony dorozumiany poufny charakter
+wypowiedzi; SN III KK 265/15 — cel obrony w rozwodzie NIE wyłącza
+odpowiedzialności; SN V KK 505/18 — GPS w cudzym pojeździe też objęty
+§3), §4 (ujawnienie, ta sama kara). Dodano: rozróżnienie dopuszczalności
+dowodowej w postępowaniu CYWILNYM (art. 308 KPC, orzecznictwo
+niejednolite — SA Warszawa I ACa 380/99, SA Kraków I ACa 1431/17) vs
+KARNYM (art. 168a KPK — sąd może, nie musi wykluczyć); wyjątek stanu
+wyższej konieczności (bardzo restrykcyjny, nie dla sporów rozwodowych);
+kontrola operacyjna służb jako odrębny reżim (wymaga zgody sądu
+okręgowego) — z jawnym odesłaniem, że to INNY temat niż art. 267 KK.
+Dodano 3 wiersze do master listy.
+
+### NAPRAWA — ZMIANY W PLIKACH
+
+- `dr-03/modules/mod-KK-kwalifikator-karnomaterialny.md`: BLOK G
+  rozbudowany + poprawiony + 3 wiersze master listy.
+- `dr-03/SKILL.md`: opis modułu zaktualizowany; wersja 2.7 → **2.8**.
+- `dr-03/MAPA-AKTOW.md`: +1 wiersz.
+
+### STATUS
+
+Część 5/6 zakończona. Pozostała: Część 6/6 (przegląd końcowy całej serii
+6-częściowej, podsumowanie).
+
+---
+
+## AUDYT-2026-07-15j — Sesja wieloczęściowa (Część 4/6): Klasyfikacja celna/fikcyjne towary (rozbudowa dr-06) + tajemnica zawodowa jako przestępstwo (art. 266 KK) i mapa kategorii poufności
+
+**Zakres:** `dr-06-podatki-finanse-publiczne-aml/modules/mod-ustawa-akcyzowa-i-clo-UCC.md`, `dr-03-prawo-karne-wykroczenia-egzekucja` (nowy moduł + SKILL.md + MAPA-AKTOW.md), `dr-06/MAPA-AKTOW.md`.
+
+### CZĘŚĆ 4a — ROZBUDOWA: OSZUSTWA CELNE / KLASYFIKACJA CN
+
+W `mod-ustawa-akcyzowa-i-clo-UCC.md` sekcja "błędna klasyfikacja CN" była
+jednym wyrazem bez treści. Dodano sekcję 4a: mechanika CN/HS/TARIC i ORINS
+(bez duplikowania już istniejącej, solidnej treści w osobnym pliku
+`mod-UCC-clo-taryfa-celna.md`), narzędzia ochronne WIT/WIS/WIA, oraz
+GŁÓWNY temat — rozróżnienie **art. 86 KKS (przemyt — brak zgłoszenia)**
+vs **art. 87 KKS (oszustwo celne — towar zgłoszony, ale z innymi cechami,
+w tym błędny kod CN)** z przykładem realnego błędu sądowego pomylenia
+tych przepisów (opisanym w komentarzach prawniczych), oraz rozgraniczenie
+od oszustwa zwykłego (art. 286 KK) — zaniżenie należności to NIE
+"niekorzystne rozporządzenie mieniem" (SA Katowice II AKa 153/14), z
+wyjątkiem faktycznego wyłudzenia zwrotu (SN V KK 248/03).
+
+### CZĘŚĆ 4b — NOWY MODUŁ: TAJEMNICA ZAWODOWA JAKO PRZESTĘPSTWO
+
+Nowy plik `mod-tajemnica-zawodowa-poufnosc.md` w dr-03. Pokrywa art. 266
+KK w pełni: §1 typ podstawowy (przestępstwo FORMALNE — bez wymogu szkody,
+szeroki krąg podmiotowy, ściganie NA WNIOSEK — czyn bezwzględnie
+wnioskowy), §2 funkcjonariusz publiczny (z urzędu, wyższa kara, z
+ostrzeżeniem o rozgraniczeniu od informacji niejawnych wyższych klauzul),
+linie obrony. Zbieg z art. 23 UZNK (rozróżnienie ust. 1 — legalne
+pozyskanie + wymóg "poważnej szkody" vs ust. 2 — nielegalne pozyskanie,
+bez wymogu szkody — z wyjaśnieniem, dlaczego prokuratura często łączy
+oba zarzuty kumulatywnie). Kluczowy element: **konsolidująca tabela 12
+kategorii poufności** rozproszonych po całym systemie (tajemnica
+zawodowa ogólna, przedsiębiorstwa, adwokacka, radcowska, lekarska,
+bankowa, biegłego rewidenta, skarbowa, informacje niejawne, regulatorów
+sektorowych, dane osobowe RODO, korespondencji) z jednym punktem
+odniesienia wskazującym, gdzie każda żyje w systemie i jaka sankcja
+karna (jeśli jakakolwiek) jej towarzyszy.
+
+### NAPRAWA — ZMIANY W PLIKACH
+
+- `dr-06/modules/mod-ustawa-akcyzowa-i-clo-UCC.md`: + sekcja 4a.
+- `dr-06/MAPA-AKTOW.md`: wiersz zaktualizowany.
+- `dr-06/SKILL.md`: wersja 3.3 → **3.4**.
+- `dr-03/modules/mod-tajemnica-zawodowa-poufnosc.md`: **NOWY PLIK**.
+- `dr-03/SKILL.md`: + wpis modułu; wersja 2.6 → **2.7**.
+- `dr-03/MAPA-AKTOW.md`: +1 wiersz.
+
+### STATUS
+
+Część 4/6 zakończona. Pozostała: podsłuch/nagrania (Część 5/6) — w
+kolejnej wiadomości, oraz przegląd końcowy (Część 6/6).
+
+---
+
+## AUDYT-2026-07-15j — Sesja wieloczęściowa (Część 3/6): Przymusowe leczenie odwykowe (alkohol i narkotyki) + naprawa niezgodności listy modułów dr-03
+
+**Zakres:** `dr-03-prawo-karne-wykroczenia-egzekucja` (nowy moduł + SKILL.md + MAPA-AKTOW.md).
+
+### CZĘŚĆ 3 — NOWY MODUŁ: PRZYMUSOWE LECZENIE ODWYKOWE
+
+Temat był całkowicie nieobecny (potwierdzone grep-em: 0 wyników). Nowy plik
+`mod-przymusowe-leczenie-odwykowe.md` pokrywa: (A) alkohol — ustawa o
+wychowaniu w trzeźwości art. 24-36: przesłanka medyczna + 4 przesłanki
+społeczne (rozkład życia rodzinnego, demoralizacja małoletnich, uchylanie
+się od obowiązku alimentacyjnego, zakłócanie porządku), procedura 4-etapowa
+(GKRPA → badanie biegłych → sąd rodzinny w trybie nieprocesowym → wykonanie
+z możliwym przymusowym doprowadzeniem przez Policję), z jawnym
+zastrzeżeniem terminologicznym: to NIE jest przymus w ścisłym sensie
+(brak sankcji za niestawienie się na terapię ambulatoryjną — krytyka NIK);
+(B) narkotyki — ustawa o przeciwdziałaniu narkomanii: art. 30 (nieletni,
+sąd rodzinny, tryb spraw nieletnich) oraz art. 71-73a (dorośli sprawcy
+przestępstw — sąd zobowiązany rozważyć, ale w praktyce PRAWIE NIGDY nie
+stosuje; zawieszenie postępowania na czas leczenia; ostrzeżenie o
+homonimii z art. 72 KK — różne przepisy o tym samym numerze z różnych
+ustaw); (C) powiązanie z KK art. 72 §1 pkt 6 (probacja ogólna, wymaga
+zgody skazanego) i z ochroną zdrowia psychicznego (inna podstawa prawna).
+
+### NAPRAWA DODATKOWA — NIEZGODNOŚĆ LISTY MODUŁÓW W SKILL.md
+
+Przy okazji wykryto (przez porównanie `ls modules/` z listą w SKILL.md):
+4 pliki istniały na dysku, ale NIE były wpisane na liście modułów:
+`mod-KK-art291-pranie-pieniedzy.md`, `mod-ustawa-fundusz-pomocy-
+pokrzywdzonym.md`, `mod-ustawa-narkomania.md`,
+`mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych.md`. Licznik nagłówka
+był przez to zaniżony (pokazywał 20, realnie na dysku 23 pliki przed tą
+sesją). Dopisano wszystkie 4 do listy, skorygowano licznik na 23
+(+1 nowy moduł tej sesji = wynik końcowy nadal wymaga przeliczenia po
+zakończeniu wszystkich części).
+
+### NAPRAWA — ZMIANY W PLIKACH
+
+- `dr-03/modules/mod-przymusowe-leczenie-odwykowe.md`: **NOWY PLIK**.
+- `dr-03/SKILL.md`: dodano nowy moduł + 4 brakujące wpisy; licznik
+  skorygowany 20→23 (+1 nowy w tej samej edycji); wersja 2.5 → **2.6**.
+  ⚠️ Przy edycji wystąpił i został naprawiony samoistny błąd analogiczny
+  do wcześniejszego w tej sesji: pierwszy str_replace przypadkowo usunął
+  nagłówek `mod-KPK-wspolpraca-miedzynarodowa-karna`, zostawiając jego opis
+  osierocony — wykryte przez grep bezpośrednio po edycji, naprawione od razu.
+- `dr-03/MAPA-AKTOW.md`: +2 wiersze.
+
+### STATUS
+
+Część 3/6 zakończona. Pozostałe (fikcyjne faktury/klasyfikacja celna —
+częściowo już pokryte w Części naprawy KKS z wcześniejszej sesji, tajemnica
+zawodowa i kategorie poufności, podsłuch/nagrania) — w kolejnych wiadomościach.
+
+---
+
+## AUDYT-2026-07-15j — Sesja wieloczęściowa (Część 2/6): Uszkodzenie mienia (art. 288 KK / art. 124 KW)
+
+**Zakres:** `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md`.
+
+### CZĘŚĆ 2 — BLOK L (nowy): USZKODZENIE MIENIA
+
+Dodano pełne drzewo L.1: rozróżnienie trzech czynności sprawczych
+(niszczy/uszkadza/czyni niezdatną do użytku, z uwagą o sporze doktrynalnym
+co do trzeciej), próg wykroczenie/przestępstwo (800 zł od 1.10.2024,
+wcześniej 500 zł od 2018 — historycznie zmienny, z ostrzeżeniem o
+weryfikacji), zasady ustalania wartości szkody (koszt przywrócenia stanu
+poprzedniego wg SN II KK 317/17, kryterium szkody a nie wartości rzeczy
+wg SN III KKN 146/97, sumowanie przy jednym czynie/wielu przedmiotach),
+zbieg z kradzieżą z włamaniem (art. 279 — zwykle pomijalny, kumulatywny
+tylko przy odwróceniu dysproporcji dóbr), czyn chuligański (art. 115 §21),
+środki kompensacyjne. Dodano 4 wiersze do master listy.
+
+Wcześniej art. 288 KK/art. 124 KW występowały wyłącznie jako jeden wiersz
+w tabeli bez żadnej treści merytorycznej (potwierdzone grep-em przed edycją).
+
+### NAPRAWA — ZMIANY W PLIKACH
+
+- `dr-03/modules/mod-KK-kwalifikator-karnomaterialny.md`: + BLOK L + 4 wiersze master listy.
+- `dr-03/SKILL.md`: opis modułu zaktualizowany; wersja 2.4 → **2.5**.
+- `dr-03/MAPA-AKTOW.md`: +1 wiersz.
+
+### STATUS
+
+Część 2/6 zakończona. Pozostałe (przemoc/przymusowy odwyk, fikcyjne
+faktury/klasyfikacja celna, tajemnica zawodowa i kategorie poufności,
+podsłuch/nagrania) — w kolejnych wiadomościach.
+
+---
+
+## AUDYT-2026-07-15j — Sesja wieloczęściowa (Część 1/N): Część Ogólna KK — klasyfikacja doktrynalna + obrona konieczna/stan wyższej konieczności
+
+**Zakres:** `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md`.
+
+### KONTEKST
+
+Użytkownik przedstawił dokument o doktrynalnej klasyfikacji przestępstw
+(zbrodnia/występek, materialne/formalne, umyślne/nieumyślne, kontratypy
+itd.) i zapytał, czy system jest z nią zgodny — a także o pokrycie obrony
+koniecznej, uszkodzenia mienia, przemocy, przymusowego odwyku, fikcyjnych
+faktur/klasyfikacji celnej, przemocy psychicznej, przestępstw
+informatycznych, tajemnicy zawodowej. Użytkownik polecił uzupełniać
+etapami, każdy etap w osobnej wiadomości, plus doszukać dodatkowych
+kategorii (podsłuch, nagrania).
+
+### CZĘŚĆ 1 — BLOK 0 (nowy): CZĘŚĆ OGÓLNA KK
+
+Dodano na początku kwalifikatora (przed BLOK A) systematyczny wykład:
+(1) siedem osi klasyfikacji przestępstw z konkretnymi odniesieniami do
+przykładów już obecnych w tym samym module (odpowiedź na pytanie o
+zgodność z podziałem doktrynalnym — TAK, teraz wyraźnie); (2) obrona
+konieczna (art. 25 KK) w pełni — §1 warunki, §2 eksces intensywny/
+ekstensywny, §2a mir domowy, §3 strach/wzburzenie z obligatoryjnym
+odstąpieniem od kary; (3) stan wyższej konieczności (art. 26 KK) z jawnym
+zestawieniem różnic względem obrony koniecznej (źródło zagrożenia,
+kierunek działania, relacja dóbr, odpowiedzialność cywilna); (4) skrót
+pozostałych kontratypów (eksperyment art. 27, zgoda pokrzywdzonego,
+ryzyko sportowe) i okoliczności wyłączających winę (błąd co do faktu/
+bezprawności art. 28/30, niepoczytalność art. 31).
+
+Wcześniej wszystkie te pojęcia były albo całkowicie nieobecne, albo
+wzmiankowane jednym zdaniem bez treści (potwierdzone grep-em przed edycją).
+
+### NAPRAWA — ZMIANY W PLIKACH
+
+- `dr-03/modules/mod-KK-kwalifikator-karnomaterialny.md`: + BLOK 0.
+- `dr-03/SKILL.md`: opis modułu zaktualizowany; wersja 2.3 → **2.4**.
+
+### STATUS
+
+Część 1/N zakończona. Pozostałe części (uszkodzenie mienia, przemoc/
+przymusowy odwyk, fikcyjne faktury/klasyfikacja celna, tajemnica
+zawodowa i kategorie poufności, podsłuch/nagrania i inne wykryte
+kategorie) — w kolejnych wiadomościach, zgodnie z poleceniem użytkownika.
+
+---
+
+## AUDYT-2026-07-15i — Cztery uzupełnienia: zabójstwa/pobicia, przestępstwa seksualne (w tym wobec dzieci/niepełnosprawnych), cross-referencja ubezwłasnowolnienia, korekta Dz.U. zdrowia psychicznego
+
+**Zakres:** `dr-03-prawo-karne-wykroczenia-egzekucja` (kwalifikator + MAPA-AKTOW
++ SKILL.md), `dr-02-prawo-cywilne-rodzinne-gospodarcze` (mod-KRO-rodzinne.md),
+`dr-10-zdrowie-farmacja-zywnosc-rolnictwo` (mod-ustawa-zdrowie-psychiczne.md).
+
+### KONTEKST
+
+Użytkownik zapytał o pokrycie: kradzieży (już potwierdzona wcześniej — BLOK A),
+pobić, zabójstw, przestępstw seksualnych, przestępstw wobec dzieci i
+niepełnosprawnych, przymusowego leczenia, ubezwłasnowolnienia. Diagnoza
+wykazała: zabójstwo (art. 148 KK) i bójka/pobicie (art. 158-159 KK) —
+CAŁKOWICIE nieobecne w kwalifikatorze (główne narzędzie klasyfikacji),
+obecne WYŁĄCZNIE jako wiersze w tabelach trybu ścigania bez typów/kar/drzewa.
+Ten sam wzorzec dla przestępstw seksualnych (art. 197-205 KK). Przymusowe
+leczenie psychiatryczne — moduł OBECNY i sensowny, ale z niepewnością co do
+Dz.U. (sam sygnalizował rozbieżność 2024.917 vs 2023.2587). Ubezwłasnowolnienie
+— treść ISTNIAŁA w `shared/mod-niepelnosprawnosc-intelektualna-gluchota.md`,
+ale `mod-KRO-rodzinne.md` (naturalny punkt wejścia) nie odsyłał do niej wcale.
+Użytkownik polecił uzupełnić wszystko w tej samej sesji.
+
+### 1. BLOK I — ZABÓJSTWA I POBICIA (nowy, w kwalifikatorze)
+
+Drzewo I.1 (zabójstwo, art. 148 KK): typ podstawowy §1 (z jawnym
+zastrzeżeniem o rozbieżności źródeł co do dolnej granicy — 8 vs 10 lat,
+do weryfikacji w ISAP), typy kwalifikowane §2-3, typy uprzywilejowane —
+afekt §4, dzieciobójstwo art. 149 (wyłącznie matka, w okresie porodu),
+zabójstwo eutanatyczne art. 150, przygotowanie §5. Drzewo I.2 (bójka/
+pobicie, art. 158-159 KK): rozróżnienie bójka (≥3 osoby, brak podziału
+ról) vs pobicie (≥2 napastników vs broniący się), stopniowanie kar wg
+skutku (§1-3), art. 159 (niebezpieczny przedmiot — z ciekawostką
+orzeczniczą o psach ras uznawanych za agresywne jako "niebezpieczny
+przedmiot"), obrona konieczna (dopuszczalna przy pobiciu, nie przy bójce).
+
+### 2. BLOK J — PRZESTĘPSTWA SEKSUALNE, W TYM WOBEC DZIECI I NIEPEŁNOSPRAWNYCH (nowy)
+
+Uwzględnia FUNDAMENTALNĄ zmianę definicji zgwałcenia od 13.02.2025 —
+dodanie samodzielnej przesłanki "w inny sposób mimo braku jej zgody" (obok
+przemocy/groźby/podstępu), zgodnie z Konwencją Stambulską — ofiara nie musi
+wykazywać czynnego oporu. Drzewo J.1: art. 197 (zgwałcenie, z §1a dla
+ofiar niezdolnych do rozpoznania czynu), art. 198 (ograniczona zdolność/
+bezradność), art. 199 (nadużycie zależności/krytycznego położenia,
+małoletni), art. 200/200a/200b/202 (małoletni poniżej 15 lat — zgoda
+prawnie nieskuteczna, korupcja elektroniczna, propagowanie pedofilii,
+pornografia dziecięca). Typy kwalifikowane art. 197 §3-5 (kazirodcze,
+z bronią, wobec ciężarnej, ze szczególnym okrucieństwem, ze skutkiem
+śmiertelnym). Sekcja okoliczności szczególnych: obowiązkowa opinia dwóch
+biegłych psychiatrów + seksuologa dla ofiar małoletnich (art. 22a ustawy
+o RSPTS), cross-referencja do niepełnosprawności intelektualnej ofiary.
+Nowy Rejestr Sprawców Przestępstw na Tle Seksualnym — t.j. **Dz.U. 2026
+poz. 110** (nazwa rozszerzona po "Ustawie Kamilka" 2023 o ochronę
+małoletnich) — trzy bazy danych, obowiązek weryfikacji pracodawców,
+Krajowe Plany, standardy ochrony małoletnich.
+
+⚠️ Podczas edycji wystąpił i został naprawiony samoistny błąd: str_replace
+przypadkowo usunął nagłówek "## SEKCJA NIUANSÓW — NAJCZĘSTSZE BŁĘDY
+KWALIFIKACYJNE" (treść błędów 1-5 pozostała nietknięta, zniknął tylko
+nagłówek sekcji) — wykryte przez grep nagłówków PO edycji, naprawione
+natychmiast w tej samej sesji.
+
+### 3. CROSS-REFERENCJA UBEZWŁASNOWOLNIENIA (naprawa "osieroconej treści")
+
+`mod-KRO-rodzinne.md` wspominał "ubezwłasnowolnienie" wyłącznie jako jedno
+słowo w checkliście intake, mimo że `shared/mod-niepelnosprawnosc-
+intelektualna-gluchota.md` miał od dawna solidną treść (KC art. 12-16,
+projekt likwidacji ubezwłasnowolnienia z 4 nowymi instrumentami wspieranego
+podejmowania decyzji, skierowany do Sejmu). Dodano jawne odesłanie w
+punkcie intake, żeby treść była faktycznie odnajdywalna z naturalnej
+ścieżki (prawo rodzinne), nie tylko przez przypadkowe trafienie na plik
+współdzielony.
+
+### 4. KOREKTA DZ.U. — ZDROWIE PSYCHICZNE
+
+Moduł sam sygnalizował niepewność między Dz.U. 2024 poz. 917 a rzekomym
+"2023 poz. 2587". Weryfikacja (ISAP, PPIOP skorowidz): **2024 poz. 917**
+(obwieszczenie 14.06.2024) jest jedynym potwierdzonym t.j. — "2023.2587"
+nie ma pokrycia w żadnym sprawdzonym źródle, najpewniej błąd wcześniejszej
+sesji. Rozstrzygnięte jednoznacznie, niepewność usunięta z treści modułu.
+
+### NAPRAWA — ZMIANY W PLIKACH
+
+| Plik | Zmiana |
+|---|---|
+| `dr-03/modules/mod-KK-kwalifikator-karnomaterialny.md` | + BLOK I + BLOK J + 14 wierszy master listy; naprawiono przypadkowo usunięty nagłówek |
+| `dr-03/SKILL.md` | opis modułu zaktualizowany; wersja 2.2→2.3 |
+| `dr-03/MAPA-AKTOW.md` | +3 wiersze |
+| `dr-02/modules/mod-KRO-rodzinne.md` | + cross-referencja ubezwłasnowolnienia |
+| `dr-02/SKILL.md` | wersja 3.5→3.6 |
+| `dr-10/modules/mod-ustawa-zdrowie-psychiczne.md` | korekta Dz.U. (rozstrzygnięcie niepewności) |
+| `dr-10/SKILL.md` | wersja 3.6→3.7 |
+
+### STATUS
+
+Cztery uzupełnienia na żądanie użytkownika — nie jest to zamknięcie flagi
+WARN-OTWARTE, to nowe pozycje/naprawy dodane proaktywnie.
+
+### UWAGA METODOLOGICZNA
+
+Podobnie jak w AUDYT-2026-07-15h — NIE synchronizowano z centralnym
+rejestrem `mapa_dzu_*.md` (użytkownik o to nie poprosił w tej sesji).
+Nowy numer Dz.U. 2026 poz. 110 (Rejestr Sprawców) pozostaje na razie
+wyłącznie w `dr-03/MAPA-AKTOW.md`.
+
+---
+
+## AUDYT-2026-07-15h — Trzy uzupełnienia na żądanie użytkownika: przestępczość zorganizowana (art. 258 KK), przestępstwa skarbowe (KKS), współpraca międzynarodowa karna
+
+**Zakres:** `dr-03-prawo-karne-wykroczenia-egzekucja` (2 moduły rozbudowane +
+1 nowy moduł + SKILL.md + MAPA-AKTOW.md), cross-referencja w
+`dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/SKILL.md`.
+
+### KONTEKST
+
+Użytkownik zapytał, czy system pokrywa: przestępczość zorganizowaną,
+gospodarczą, podatkową i międzynarodową, oraz przestępstwa skarbowe i
+podatkowe. Diagnoza (grep + odczyt struktur modułów) wykazała:
+- Przestępczość zorganizowana (art. 258 KK) — CAŁKOWICIE NIEOBECNA (0 wyników)
+- Przestępczość gospodarcza — obecna, nieźle (art. 296/297/300 KK,
+  paserstwo/pranie pieniędzy, odpowiedzialność podmiotów zbiorowych)
+- Przestępstwa skarbowe (KKS) — moduł ISTNIAŁ, ale był czystym szkieletem
+  proceduralnym bez JEDNEGO konkretnego artykułu KKS ani numeru Dz.U. kodeksu
+- Przestępczość międzynarodowa — częściowa (ENA wspomniany 1 zdaniem przy
+  cyberprzestępczości; dr-14 formalnie kierował temat do dr-03, ale tam nic
+  nie było)
+Użytkownik polecił uzupełnić wszystkie trzy braki w tej samej sesji.
+
+### 1. ART. 258 KK — PRZESTĘPCZOŚĆ ZORGANIZOWANA (NOWY BLOK H)
+
+Dodano do `mod-KK-kwalifikator-karnomaterialny.md`: drzewo decyzyjne H.1
+(udział/założenie/kierowanie grupą lub związkiem, w tym zbrojnym/
+terrorystycznym — art. 258 §1-4 KK, kary od 6 m-cy do 20 lat zależnie od
+roli i charakteru grupy), rozróżnienie od zwykłego współsprawstwa
+(orzecznictwo SN — sama znajomość + kontakt + podział zadań NIE przesądza
+o art. 258), ostrzeżenie o najczęstszym błędzie 2026 (art. 258 coraz
+częściej w sprawach GOSPODARCZYCH — karuzele VAT, nie tylko "mafia"),
+powiązane instytucje procesowe (świadek koronny, mały świadek koronny
+art. 60 §3-4 KK, rozszerzona konfiskata art. 45 §2 KK, przepadek
+przedsiębiorstwa art. 44a KK). Dodano też wiersze do MASTER LISTA
+(art. 258 §1-4, art. 271a, art. 277a KK — kara 5-25 lat przy fakturach
+>10× mienia wielkiej wartości).
+
+### 2. KKS — ROZBUDOWA O KONKRETNE ARTYKUŁY
+
+`mod-KKS-karny-skarbowy-i-AML.md` zawierał wyłącznie ogólny szkielet
+(intake/matryca dowodowa/warianty strategii) — bez ŻADNEGO konkretnego
+przepisu. Dodano: Dz.U. 2025 poz. 633 t.j. (numer kodeksu), art. 54
+(uchylanie się od opodatkowania — zaniechanie), art. 55 (firmanctwo),
+art. 56 (oszustwo podatkowe — działanie + kłamstwo, z rozróżnieniem §1-4
+i wyrokiem TK SK 13/05 o normatywnym pojęciu "prawdy"), art. 62 (faktury
+nierzetelne/wadliwe, z rozróżnieniem wykroczenia §1 vs przestępstwa §2),
+art. 76 (wyłudzenie zwrotu podatku — przestępstwo powszechne, różni się
+od art. 56 tym że każdy może je popełnić, nie tylko podatnik), czynny żal
+(art. 16 KKS) jako narzędzie wyłączenia karalności, oraz sekcję o zbiegu
+z KK przy karuzelach VAT (art. 270a/271a/277a KK + art. 258 KK).
+
+### 3. NOWY MODUŁ — WSPÓŁPRACA MIĘDZYNARODOWA KARNA
+
+`mod-KPK-wspolpraca-miedzynarodowa-karna.md` — nowy plik w dr-03. Pokrywa:
+KPK Dział XIII (mapa rozdziałów 61-67: immunitety, ekstradycja klasyczna,
+ENA rozdz. 65a-65d, przejęcie orzeczeń), szczegóły ENA (art. 607a i n. —
+przesłanki niedopuszczalności, elementy nakazu, zasada specjalności,
+odróżnienie od ekstradycji klasycznej), Prokuratura Europejska/EPPO
+(Dział XIIa KPK) z **jawnym odnotowaniem zmiany statusu Polski**: pierwotny
+opt-out (2017-2021, razem z Węgrami/Szwecją/Irlandią/Danią) → późniejsze
+przystąpienie (polski prokurator europejski zatwierdzony przez Radę UE
+XII.2024, Grażyna Stronikowska) — ⚠️ oznaczone jako temat bieżącej
+polityki, wymagający weryfikacji na bieżąco. Europol/Eurojust (rola
+pomocnicza/koordynacyjna, BEZ uprawnień śledczych — w odróżnieniu od EPPO).
+Konwencja Palermska ONZ (Dz.U. 2005 nr 18 poz. 158) jako rama
+międzynarodowa dla art. 258 KK i art. 299 KK, z 3 protokołami dodatkowymi.
+
+### NAPRAWA — ZMIANY W PLIKACH
+
+| Plik | Zmiana |
+|---|---|
+| `dr-03/modules/mod-KK-kwalifikator-karnomaterialny.md` | + BLOK H (art. 258 KK) + 7 wierszy master listy |
+| `dr-03/modules/mod-KKS-karny-skarbowy-i-AML.md` | rozbudowany o art. 54/55/56/62/76/16 KKS + sekcja zbiegu z KK |
+| `dr-03/modules/mod-KPK-wspolpraca-miedzynarodowa-karna.md` | **NOWY PLIK** |
+| `dr-03/SKILL.md` | 19→20 modułów, wersja 2.1→2.2 |
+| `dr-03/MAPA-AKTOW.md` | +4 wiersze |
+| `dr-14/SKILL.md` | cross-referencja zaktualizowana (wskazuje na konkretny plik), wersja 3.4→3.5 |
+
+### STATUS
+
+Trzy braki uzupełnione na żądanie użytkownika — nie jest to zamknięcie
+flagi WARN-OTWARTE (nie było takiej flagi), to nowe pozycje dodane
+proaktywnie, analogicznie do AUDYT-2026-07-15d/f (mały ruch graniczny,
+inwestycje transgraniczne).
+
+### UWAGA METODOLOGICZNA — NIE SYNCHRONIZOWANO Z mapa_dzu CENTRALNYM
+
+W odróżnieniu od poprzedniej sesji (AUDYT-2026-07-15g), tym razem
+użytkownik NIE poprosił o synchronizację "3-PULL" do centralnego rejestru
+`mapa_dzu_*.md` — nowe akty (Dz.U. 2025.633 KKS, Dz.U. 2005.18.158
+Konwencja Palermska) pozostają na razie WYŁĄCZNIE w `dr-03/MAPA-AKTOW.md`.
+Jeśli użytkownik zapyta o spójność map ponownie, ten fakt należy odnotować.
+
+---
+
+## AUDYT-2026-07-15g — Synchronizacja "3-PULL": dzisiejsze akty dodane do centralnego rejestru mapa_dzu
+
+**Zakres:** `audyt-systemu-v4/references/mapa_dzu_2026-07-15.md` (nowy plik,
+kopia 07-04 + zmiany), `audyt-systemu-v4/SKILL.md` (wskaźniki), oraz
+korekta przy okazji w `prawo-polskie-v2/ROUTING-MAP.md`.
+
+### KONTEKST
+
+Użytkownik zapytał wprost, czy akty dodane dzisiaj do poszczególnych
+`dr-XX/MAPA-AKTOW.md` (F-1, F-2, F-3, F-6 + 2 nowe moduły: mały ruch
+graniczny, inwestycje transgraniczne) trafiły też do centralnego rejestru
+`mapa_dzu_*.md`. Odpowiedź brzmiała: NIE — te dwie mapy nie synchronizują
+się automatycznie; centralny rejestr wymaga osobnego kroku "3-PULL"
+(SKILL.md FAZA 3). Na potwierdzenie ("Tak, dodaj teraz") wykonano ten krok.
+
+### WYKONANE
+
+Zgodnie z protokołem FAZA 7B (`cp mapa_dzu_2026-07-04.md →
+mapa_dzu_2026-07-15.md`, następnie edycja kopii): dodano 12 wierszy do
+tabeli głównej + 1 do tabeli MONITORING:
+- Dz.U. 2026.47 (kontrola niektórych inwestycji, TJ) + 2025.973 (NW)
+- Dz.U. 2026.187 (ustawa o zawodzie psychologa — nowelizuje art. 88 KSH)
+- Dz.U. 2026.176 (KSH — dematerializacja/rejestr akcjonariuszy)
+- Dz.U. 2025.1363 (ARiMR), 2024.1741 (Plan Strategiczny WPR), 2023.1980
+  (jakość handlowa artykułów rolno-spożywczych)
+- Dz.U. 2021.1342 (izby lekarskie)
+- Dz.U. 2009.858 / 2012.814 / 2010.823 (umowy MRG Ukraina/Rosja/Białoruś)
+- Wiersz zbiorczy BIT/ISDS (bez pojedynczego Dz.U. — temat
+  wieloinstrumentowy, odesłanie do modułu dr-14)
+- MONITORING: nowelizacja ustawy o przeciwdziałaniu narkomanii (F-4)
+
+### DODATKOWA KOREKTA WYKRYTA PRZY OKAZJI
+
+`prawo-polskie-v2/ROUTING-MAP.md` (stopka, wersja 5.5) wskazywał źródło
+centralne jako `mapa_dzu_2026-07-13.md` — **plik o tej nazwie nigdy nie
+istniał** w `audyt-systemu-v4/references/` (rzeczywisty łańcuch:
+06-14 → 07-02 → 07-04 → 07-15). Poprawiono odwołanie na aktualny plik,
+z jawną adnotacją o korekcie — nie cichą podmianą.
+
+### NAPRAWA — ZMIANY W PLIKACH
+
+- `audyt-systemu-v4/references/mapa_dzu_2026-07-15.md` — **NOWY PLIK**
+  (kopia 07-04 + 12 wierszy głównych + 1 MONITORING + nagłówek sesji).
+- `audyt-systemu-v4/SKILL.md`: 3 żywe wskaźniki (frontmatter, FAZA 0,
+  FAZA 3) + diagram drzewa katalogów zaktualizowane z 07-04 → 07-15.
+  Historyczne wzmianki "mapa_dzu_2026-07-04.md" w opisach PRZESZŁYCH sesji
+  (linie ~628-864) pozostawione bez zmian — to zapis historyczny, nie
+  żywe wskaźniki.
+- `prawo-polskie-v2/ROUTING-MAP.md`: korekta dangling reference do
+  nieistniejącego mapa_dzu_2026-07-13.md.
+
+### STATUS
+
+Zsynchronizowano. Nie jest to zamknięcie flagi WARN-OTWARTE — to
+uzupełnienie centralnego rejestru na wyraźne żądanie użytkownika.
+
+---
+
+## AUDYT-2026-07-15f — Nowy moduł: Inwestycje transgraniczne — kontrola FDI i ochrona traktatowa (BIT/ISDS), temat wcześniej nieskatalogowany
+
+**Zakres:** `dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka` (nowy moduł +
+SKILL.md + MAPA-AKTOW.md).
+
+### KONTEKST
+
+Użytkownik zapytał wprost, czy temat "inwestycje transgraniczne" jest
+skatalogowany. Grep po całym systemie (FDI, screening, BIT, ICSID, arbitraż
+inwestycyjny, ochrona inwestycji) znalazł 0 trafień poza ogólnymi
+wzmiankami o krajowych funduszach inwestycyjnych (dr-06) — temat był
+całkowicie nieobecny. Na potwierdzenie ("Tak") utworzono nowy moduł.
+
+### DWA NIEZALEŻNE REŻIMY W JEDNYM MODULE (rozróżnienie kluczowe)
+
+**A. Kontrola FDI (screening)** — ustawa z 24.07.2015 o kontroli niektórych
+inwestycji, t.j. **Dz.U. 2026 poz. 47** (najnowszy, obwieszczenie
+9.01.2026). Dwa mechanizmy: (1) podstawowy z 2015 — zamknięty wykaz
+podmiotów strategicznych (rozporządzenie RM, coroczna aktualizacja); (2)
+art. 12a-12k, wprowadzony 24.07.2020 jako reakcja na COVID-19 wobec
+inwestorów spoza UE/EOG/OECD, przedłużany kolejno (do 60 miesięcy wobec
+wojny w Ukrainie), **uczyniony BEZTERMINOWYM ustawą z 9.07.2025** (Dz.U.
+2025 poz. 973, weszła w życie 24.07.2025) — ta sama nowelizacja usunęła
+Prezesa UOKiK z roli nadzorczej w tym mechanizmie.
+
+**B. Ochrona traktatowa BIT/ISDS** — status silnie ukształtowany przez
+orzecznictwo TSUE: Achmea (C-284/16, 2018) uznał klauzule arbitrażowe w
+BIT-ach intra-UE za sprzeczne z prawem UE; porozumienie wielostronne z maja
+2020 zniosło większość BIT-ów intra-UE (bez Austrii/Finlandii/Irlandii/
+Szwecji) wraz z klauzulami sunset; Komstroy (C-741/19, 2021) rozszerzył to
+na Traktat Karty Energetycznej; PL Holdings (C-109/20, 2021) — wyrok
+korzystny dla Polski, wykluczający arbitraż na podstawie zgody ad hoc.
+BIT-y z państwami spoza UE pozostają w mocy.
+
+### ⛔ FAKT NIEINTUICYJNY, JAWNIE ODNOTOWANY W MODULE
+
+Polska **NIGDY nie ratyfikowała Konwencji ICSID (waszyngtońskiej z 1965)**
+— jest jedynym państwem europejskim, które tego nie zrobiło. Polskie BIT-y
+opierają arbitraż na UNCITRAL ad hoc, PCA w Hadze, SCC w Sztokholmie lub
+Regułach Dodatkowych ICSID — NIE na Konwencji głównej. Moduł ostrzega
+wprost przed założeniem "ICSID" z pamięci, bo to częsty błąd (nawet
+niektóre starsze oficjalne materiały rządowe bywają w tej kwestii
+niejasne).
+
+### NAPRAWA — ZMIANY W PLIKACH
+
+- `dr-14.../modules/mod-inwestycje-transgraniczne-FDI-BIT.md` — **NOWY PLIK**.
+- `dr-14.../SKILL.md`: dodano moduł do listy (9→10), wersja 3.3 → **3.4**.
+- `dr-14.../MAPA-AKTOW.md`: dodano 2 nowe wiersze (kontrola FDI + BIT/ISDS).
+
+### STATUS
+
+Temat teraz skatalogowany. Nie jest to "zamknięcie flagi" — nowa pozycja
+dodana proaktywnie na żądanie użytkownika, analogicznie do AUDYT-2026-07-15d
+(mały ruch graniczny).
+
+---
+
+## AUDYT-2026-07-15e — Zamknięcie F-7: audyt 5 skilli proceduralnych wg ZASADY 11 (4 wzorce)
+
+**Zakres:** `pisma-procesowe-v3`, `analizator-dowodow-v3`, `chronologia-sprawy-v1`,
+`pisma-proste-v2`, `przewodnik-prawny-v2` — sprawdzone pod kątem 4 wzorców
+braków zdefiniowanych w AUDYT-2026-07-10 (ZASADA 11), tego samego typu, co
+naprawiono w `przesluchanie-swiadkow-v2-min90` (v3.6):
+
+(a) bramki jakości stosowane reaktywnie zamiast domyślnie
+(b) brak rekonstrukcji tezy dla materiału dostarczonego gotowego
+(c) brak systematycznego skanu dokumentów pod kątem elementów nieoczywistych
+(d) milczące przyjmowanie ustaleń zamiast jawnego potwierdzenia
+
+### METODOLOGIA
+
+Dla każdego skilla: grep ukierunkowany na istniejące mechanizmy każdego
+wzorca (GATE/BRAMKA, "teza"/"rekonstrukcja"/"CLAIM", "SD-VER"/"SKAN-DOWODOW",
+jawne potwierdzenie/ST-INIT), następnie odczyt sekcji krytycznych (routing,
+intake, ścieżki obsługi materiału gotowego) tam, gdzie grep wskazywał lukę
+lub niejasność. Nie każdy skill wymagał zmiany w każdym z 4 wzorców —
+większość miała już częściowe pokrycie z wcześniejszych audytów.
+
+### WYNIKI PER SKILL
+
+**`pisma-procesowe-v3` (v5.12 → 5.13):** wzorce (a)/(c)/(d) już dobrze
+pokryte (HARD GATE MRG i SD-GATE aktywne od startu bez wyjątków, CG-GATE z
+jawną akceptacją użytkownika, ST-INIT z jawnym zgłaszaniem pominięć). Luka
+w (b): ścieżka Test A (redakcja gotowego pisma, `modules/MOD-REDAKCJA.md`)
+jawnie omija W1-W2-W3 i nie miała ŻADNEGO mechanizmu rekonstrukcji tezy
+(grep 0 wyników na "teza"/"rekonstrukcja"/"CLAIM" w tym pliku) — ryzyko
+wzmacniania tonu twierdzeń bez uważnego czytania ich zasadności. Naprawa:
+R.1b TEZA-GATE dodany przed KROK 2 (diagnoza stylu).
+
+**`analizator-dowodow-v3` (v5.14.3 → 5.15.0):** wzorce (a)/(c)/(d) już
+dobrze pokryte (KROK 0b SD-VER jako HARD GATE od startu, KROK 0c ST-INIT
+z jawnym zgłaszaniem pominiętych bloków). Luka w (b): BLOK D (analiza pism
+gotowych, D1-D6) nie miał ŻADNEGO mechanizmu rekonstrukcji tezy (grep 0
+wyników w całym katalogu skilla) — ocena mocnych/słabych stron (D2) i
+prawna (D4) mogła oceniać argumenty bez punktu odniesienia co do
+faktycznej tezy pisma. Naprawa: BLOK D0 TEZA-GATE dodany przed D1-D6.
+
+**`chronologia-sprawy-v1` (v1.4 → 1.5):** luka w (c) — skill ekstrahuje
+chronologię BEZPOŚREDNIO z dokumentów ("Sekwencja dla każdego dokumentu"),
+ale nie wywoływał NIGDZIE (grep 0 wyników) `shared/MOD-SKAN-DOWODOW-
+KOMPLETNY.md` jako bramki kompletności — dokładnie ten sam mechanizm luki,
+co udokumentowany incydent AUDYT-2026-07-14b (sprawa XI P 27/26): częściowo
+odczytany dokument generuje chronologię z CICHĄ LUKĄ, nieodróżnialną od
+braku zdarzenia w źródle. Naprawa: SD-GATE dodany jako HARD GATE przed
+sekwencją ekstrakcji. Wzorce (a)/(b)/(d) nieistotne w tym samym stopniu dla
+tego skilla (brak ścieżki "materiał gotowy do oceny" w sensie tezy) lub
+już wystarczająco pokryte (komunikat startowy obowiązkowy, jawne
+odnotowanie sprzeczności/luk w formacie raportu).
+
+**`pisma-proste-v2` (v2.0 → 2.1):** CLAIM-VALIDATION i M-FAKTY już
+obowiązkowe ("wykonaj przed redagowaniem" / "zawsze gdy pismo z dostarczonych
+źródeł") — wzorzec (b)/(d) częściowo pokryty. Luka w (c): brak wywołania
+skanu kompletności dokumentów przed ekstrakcją faktów — istotne mimo
+prostoty pism, bo pismo proste zwykle opiera się na JEDNYM dokumencie
+źródłowym (nakaz, tytuł wykonawczy) — błąd odczytu przenosi się na całe
+pismo bez szansy na wykrycie przez korelację krzyżową wielu dokumentów.
+Naprawa: SD-GATE dodany w FAZA 0 INTAKE, przed CLAIM-VALIDATION.
+
+**`przewodnik-prawny-v2` (v2.3 → 2.4):** KROK A (analiza dokumentu)
+deleguje w pełni do skilli wyspecjalizowanych (analizator-umow-v1,
+analiza-sadowa-v6, analizator-dowodow-v3) — dziedziczy ich bramki, w tym
+naprawę BLOK D0 z tej samej sesji. Luka w (b): KROK F (walidacja pisma
+użytkownika, `references/KROK-F.md`) uruchamia tryby F.2-F.6 (przepisy/
+orzeczenia/formalna/argumentacja/skutki) bez wcześniejszej jednozdaniowej
+rekonstrukcji tezy centralnej — ryzyko, że F.2-F.4 wypadną pozytywnie
+(poprawne cytaty, kompletność formalna) podczas gdy pismo jako całość broni
+innej/słabszej tezy niż zakłada użytkownik. Naprawa: F.1b TEZA-GATE dodany
+przed F.2.
+
+### WZORZEC OGÓLNY ZAOBSERWOWANY
+
+We wszystkich 5 skillach powtarza się ten sam podział: wzorce (a) bramki-
+reaktywne i (d) milczące-przyjmowanie były systematycznie dobrze pokryte
+(prawdopodobnie dziedziczone z wcześniejszych audytów ogólnosystemowych —
+CG-GATE, ST-INIT, MOD-STEP-TRACKER). Wzorce (b) rekonstrukcja-tezy i (c)
+skan-dokumentów były NIEOBECNE w większości skilli (grep 0 wyników) — to
+są dokładnie te dwa wzorce, które ujawnił oryginalny incydent w
+przesluchanie-swiadkow-v2 (sprawa XI P 27/26) i które nie zostały
+automatycznie odziedziczone przez inne skille, bo każdy implementuje
+własną ścieżkę obsługi "materiału gotowego" niezależnie.
+
+### NAPRAWA — ZMIANY W PLIKACH
+
+| Plik | Zmiana |
+|---|---|
+| `pisma-procesowe-v3/modules/MOD-REDAKCJA.md` | + R.1b TEZA-GATE |
+| `pisma-procesowe-v3/SKILL.md` | wersja 5.12→5.13 + changelog |
+| `analizator-dowodow-v3/SKILL.md` | + BLOK D0 TEZA-GATE; wersja 5.14.3→5.15.0 + changelog |
+| `chronologia-sprawy-v1/SKILL.md` | + SD-GATE przed ekstrakcją; wersja 1.4→1.5 + historia wersji |
+| `pisma-proste-v2/SKILL.md` | + SD-GATE w FAZA 0; wersja 2.0→2.1 |
+| `przewodnik-prawny-v2/references/KROK-F.md` | + F.1b TEZA-GATE |
+| `przewodnik-prawny-v2/SKILL.md` | wersja 2.3→2.4 |
+
+### STATUS
+
+F-7 **ZAMKNIĘTA** — wiersz usunięty z `WARN-OTWARTE.md`.
+
+### POZOSTAŁE OTWARTE POZYCJE
+
+F-5, F-8, F-9, F-10, F-11 pozostają otwarte. F-8/F-9/F-10/F-11 wymagają
+działań dewelopera poza tym środowiskiem (dostęp do żywych API .gov.pl,
+wdrożenie connectora/portalu) — nie do zamknięcia w tym środowisku.
+
+---
+
+## AUDYT-2026-07-15d — Nowy moduł: Mały ruch graniczny (MRG), temat wcześniej nieskatalogowany
+
+**Zakres:** `dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka` (nowy moduł +
+SKILL.md + MAPA-AKTOW.md), z cross-referencjami w `dr-05/mod-ustawa-cudzoziemcy`
+i `dr-13/mod-ustawa-straz-graniczna`.
+
+### KONTEKST
+
+Na wyraźne polecenie użytkownika sprawdzono, czy temat "mały ruch graniczny"
+(MRG) jest już skatalogowany w systemie. Grep po całym `/mnt/skills/user/`
+nie znalazł żadnego wystąpienia — temat był całkowicie nieobecny.
+
+### USTALENIA (web search wobec ISAP, Wikipedia jako indeks cytowań
+zweryfikowany krzyżowo, MSWiA, prawo.pl, LEX)
+
+Rama prawna UE: rozp. (WE) 1931/2006 (małe ruchy graniczne na zewnętrznych
+granicach lądowych UE) + rozp. (UE) 1342/2011 (rozszerzenie strefy o obwód
+kaliningradzki). Polska zawarła 3 umowy dwustronne w reżimie UE:
+- **Ukraina** (Dz.U. 2009 nr 103 poz. 858): w mocy od 2009, ale praktycznie
+  bezprzedmiotowa od decyzji PE z 17.05.2017 o ruchu bezwizowym dla
+  obywateli Ukrainy; dodatkowo od 2022 nakłada się reżim ochrony czasowej
+  (wojna) — odrębna podstawa prawna, nie MRG.
+- **Rosja/obwód kaliningradzki** (Dz.U. 2012 poz. 814): w mocy od 27.07.2012,
+  **zawieszona od 4.07.2016** (bezpieczeństwo, szczyt NATO/ŚDM Warszawa),
+  zawieszenie utrzymywane wg ostatniego potwierdzonego źródła (2022) ze
+  względu na wojnę Rosji z Ukrainą i militaryzację Kaliningradu.
+- **Białoruś** (Dz.U. 2010 nr 122 poz. 823 — ustawa ratyfikacyjna): NIGDY
+  nie weszła w życie (Białoruś nie dokonała wymiany not dyplomatycznych).
+Historyczne umowy przedschengeńskie z Niemcami/Czechami/Słowacją wygasły
+21.12.2007 wraz z wejściem Polski do strefy Schengen.
+
+### ⚠️ ZASTRZEŻENIE JAWNIE ODNOTOWANE W MODULE
+
+Temat jest silnie zależny od bieżącej polityki (relacje z Rosją/Białorusią,
+wojna w Ukrainie) — nie znaleziono w tej sesji źródła z 2026 r. potwierdzającego
+wprost aktualny status zawieszenia z Rosją (ostatnie potwierdzone źródło: 2022).
+Moduł zawiera w związku z tym twardy nakaz weryfikacji na bieżąco (⛔ ZAWSZE
+web_search) zamiast przedstawiania stanu z 2022 r. jako pewnego faktu na dziś.
+
+### NAPRAWA — ZMIANY W PLIKACH
+
+- `dr-14.../modules/mod-maly-ruch-graniczny.md` — **NOWY PLIK**.
+- `dr-14.../SKILL.md`: dodano moduł do listy (8→9 modułów), wersja 3.2 → **3.3**.
+- `dr-14.../MAPA-AKTOW.md`: dodano 4 nowe wiersze (rama UE + 3 umowy dwustronne).
+- `dr-05.../modules/mod-ustawa-cudzoziemcy.md`: dodano cross-referencję do MRG
+  (tryb odwoławczy art. 42 ust. 3-4 pozostaje w tym module, reszta → dr-14).
+  Wersja SKILL.md 3.2 → **3.3**.
+- `dr-13.../modules/mod-ustawa-straz-graniczna.md`: dodano cross-referencję.
+  Wersja SKILL.md 3.5 → **3.6**.
+
+### STATUS
+
+Temat MRG teraz skatalogowany. Nie jest to "zamknięcie flagi" (nie było
+takiej flagi w WARN-OTWARTE) — to nowa pozycja dodana proaktywnie na
+żądanie użytkownika.
+
+---
+
+## AUDYT-2026-07-15c — Zamknięcie F-1, F-2, F-3 (dr-10: rolnictwo/żywność, zawody medyczne/prawnicze, izby lekarskie)
+
+**Zakres:** `dr-10-zdrowie-farmacja-zywnosc-rolnictwo` (MAPA-AKTOW.md, SKILL.md,
+3 pliki modułów) oraz `dr-12-sadownictwo-prokuratura-zawody-prawnicze`
+(1 tabela w mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md).
+
+### F-1 — Rolnictwo/żywność/weterynaria (ZAMKNIĘTA)
+
+Weryfikacja (web search wobec ISAP/RCL) wykazała, że moduł `mod-AH` (plik
+mod-ustawa-rolne-zywnosc-weterynaria.md) nie zawierał ŻADNYCH numerów Dz.U. —
+tylko opisowe nazwy aktów. Ustalono i dodano do treści modułu:
+- Ustawa o jakości handlowej artykułów rolno-spożywczych — Dz.U. 2023 poz. 1980 t.j.
+- Ustawa o ARiMR — Dz.U. 2025 poz. 1363 t.j. (obwieszczenie 26.09.2025)
+- Ustawa o Planie Strategicznym dla WPR 2023-2027 — Dz.U. 2024 poz. 1741 t.j.,
+  zm. Dz.U. 2025 poz. 321
+Dodatkowo wyjaśniono nieporozumienie z pierwotnej flagi: numer "2024.1284"
+cytowany w starym wierszu MAPA-AKTOW dotyczył w rzeczywistości USTAWY O
+OCHRONIE ZDROWIA ZWIERZĄT — aktu już poprawnie skatalogowanego osobno w
+mod-ustawa-inspekcja-weterynaryjna.md, nie mającego związku z wierszem, w
+którym błędnie się znalazł. Bezpieczeństwo żywności i inspekcja weterynaryjna
+mają już własne, dedykowane moduły (mod-ustawa-bezpieczenstwo-zywnosci,
+mod-ustawa-inspekcja-weterynaryjna) — nie duplikowano ich treści w mod-AH.
+
+### F-2 — Zawody medyczne/prawnicze, błędnie nazwany plik (ZAMKNIĘTA)
+
+Potwierdzono: plik `mod-ustawa-zawody-medyczne-i-prawnicze.md` dotyczył
+WYŁĄCZNIE zawodów prawniczych pokrewnych (doradcy podatkowi, rzecznicy
+patentowi, syndycy, mediatorzy) i NIGDY nie pokrywał zawodów medycznych —
+te mają od dawna własne, osobne moduły (mod-ustawa-zawod-lekarza,
+mod-ustawa-pielegniarka-polozna, mod-ustawa-aptekarz-zawod,
+mod-ustawa-diagnostyka-laboratoryjna, mod-ustawa-lekarz-weterynarii-zawod,
+mod-ustawa-psycholog-zawod). Plik przemianowany na
+`mod-ustawa-zawody-prawnicze-pokrewne.md` (zgodnie z rzeczywistą treścią),
+z notą o przemianowaniu na górze pliku. Zaktualizowano odwołanie w SKILL.md
+i wiersz w MAPA-AKTOW.md. Brak było przy tym żadnej brakującej treści — to
+był wyłącznie problem mylącej nazwy pliku i opisu w SKILL.md, nie luka
+merytoryczna.
+
+### F-3 — Izby lekarskie, brak modułu dedykowanego (ZAMKNIĘTA)
+
+Weryfikacja wykazała, że procedura odpowiedzialności zawodowej lekarzy
+(OSL → NSL → SN kasacja, kary, przedawnienie, baza orzeczeń) BYŁA już
+opisana w `mod-ustawa-zawod-lekarza.md`, sekcja "Odpowiedzialnosc
+dyscyplinarna" — brakowało wyłącznie jawnej cytacji Dz.U. samej ustawy
+o izbach lekarskich. Potwierdzono w ISAP: Dz.U. 2021 poz. 1342 t.j.
+(obwieszczenie 25.06.2021) nadal aktualny; rozdział 5 "Odpowiedzialność
+zawodowa" = art. 53-112, dokładnie jak cytowała oryginalna flaga. Dodano
+cytację do mod-ustawa-zawod-lekarza.md, zaktualizowano tabelę w dr-12/
+mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md (wiersz "Lekarz") i
+dodano osobny wiersz w dr-10/MAPA-AKTOW.md. Nowy dedykowany moduł NIE był
+potrzebny — treść już istniała, brakowało tylko precyzyjnej cytacji.
+
+### NAPRAWA — ZMIANY W PLIKACH
+
+- `dr-10.../modules/mod-ustawa-rolne-zywnosc-weterynaria.md`: uzupełniono
+  tabelę aktów o 3 konkretne numery Dz.U., dodano nagłówek weryfikacji.
+- `dr-10.../modules/mod-ustawa-zawody-medyczne-i-prawnicze.md` →
+  przemianowany na `mod-ustawa-zawody-prawnicze-pokrewne.md`.
+- `dr-10.../modules/mod-ustawa-zawod-lekarza.md`: dodano cytację Dz.U. 2021
+  poz. 1342 t.j. w sekcji odpowiedzialności dyscyplinarnej.
+- `dr-10.../SKILL.md`: poprawiono odwołanie do przemianowanego modułu,
+  usunięto mylący opis "scalony: zawody medyczne + prawnicze"; wersja
+  3.5 → **3.6**.
+- `dr-10.../MAPA-AKTOW.md`: zamknięto 3 wiersze (F-1, F-2, F-3) z pełnym
+  uzasadnieniem i nowymi numerami Dz.U.
+- `dr-12.../modules/mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md`:
+  uzupełniono wiersz "Lekarz" o numer Dz.U.
+- `dr-12.../SKILL.md`: wersja 3.4 → **3.5**.
+
+### STATUS
+
+F-1, F-2, F-3 **ZAMKNIĘTE** — usunięte z `WARN-OTWARTE.md`.
+
+### POZOSTAŁE OTWARTE POZYCJE
+
+F-5, F-7, F-8, F-9, F-10, F-11 pozostają otwarte — nie były przedmiotem tej
+sesji. F-8, F-9, F-10, F-11 wymagają działań dewelopera poza tym środowiskiem
+(dostęp do żywych API .gov.pl, wdrożenie connectora/portalu) — nie są
+możliwe do zamknięcia w tym środowisku.
+
+---
+
+## AUDYT-2026-07-15b — Zamknięcie F-6 (KSH: dematerializacja + art. 88, korekta numeru artykułu) i aktualizacja F-4 (weryfikacja ISAP na żywo)
+
+**Zakres:** `dr-02-prawo-cywilne-rodzinne-gospodarcze` (moduł mod-KSH-spolki-handlowe,
+MAPA-AKTOW.md, SKILL.md) oraz status weryfikacji F-4 (dr-03).
+
+### 1. F-4 — WERYFIKACJA NA ŻYWO (web search, 2026-07-15)
+
+Ustawa o zmianie ustawy o przeciwdziałaniu narkomanii (uchwalona przez Sejm
+11.06.2026) **nadal nieopublikowana**. Ustalono z aktualnych źródeł prasowych
+(ok. 8.07.2026): ustawa przekazana do Senatu, następnie do Prezydenta; Prezydent
+Karol Nawrocki ma 21 dni na podpisanie/weto/skierowanie do TK, decyzja
+spodziewana w lipcu 2026. Flaga NIE zamknięta — zaktualizowano datę weryfikacji
+i doprecyzowano etap procesu legislacyjnego oraz następny termin sprawdzenia
+(2-3 tygodnie).
+
+### 2. F-6 — WERYFIKACJA I NAPRAWA (ZAMKNIĘTA)
+
+Pierwotna flaga cytowała "art. 130 (2026.187)" dla KSH. Weryfikacja źródłowa
+wykazała DWIE nieścisłości nałożone na siebie:
+- Dz.U. 2026 poz. 176 (23.01.2026, dedykowana nowelizacja KSH — dematerializacja
+  akcji/rejestr akcjonariuszy) — TA nowelizacja nie miała numeru w oryginalnej
+  fladze w ogóle, mimo że MAPA-AKTOW.md ją wymieniał.
+- Dz.U. 2026 poz. 187 to w rzeczywistości ustawa o zawodzie psychologa oraz
+  samorządzie zawodowym psychologów — akt SAMODZIELNY, który przy okazji
+  (jako jeden z ok. 20 towarzyszących aktów) zmienia **art. 88 KSH** (katalog
+  zawodów uprawnionych do bycia partnerem w spółce partnerskiej — dodano
+  zawód psychologa), a NIE art. 130 KSH jak błędnie zapisano w fladze.
+
+Obie nowelizacje zweryfikowane przez web search wobec źródeł pierwotnych
+(orka.sejm.gov.pl, api.sejm.gov.pl/eli, dziennikustaw.gov.pl, inforlex.pl,
+przepisy.gofin.pl) i dodane do treści modułu.
+
+### 3. NAPRAWA — ZMIANY W PLIKACH
+
+- `dr-02.../modules/mod-KSH-spolki-handlowe.md`: dodano sekcję
+  "NOWELIZACJA 2026 — REJESTR AKCJONARIUSZY I DEMATERIALIZACJA AKCJI
+  (Dz.U. 2026 poz. 176)" (terminy wejścia w życie 18.02.2027 / wyjątek
+  28.02.2026, przedłużenie okresu ochronnego do 29.02.2028, zniesienie
+  podziału akcji imienne/na okaziciela, nowe obowiązki informacyjne) oraz
+  sekcję "NOWELIZACJA 2026 — SPÓŁKA PARTNERSKA: PSYCHOLOG DODANY DO
+  KATALOGU ZAWODÓW (art. 88 KSH, zmiana przez Dz.U. 2026 poz. 187)" z jawną
+  korektą błędnego numeru artykułu. Zaktualizowano nagłówek źródeł/datę
+  weryfikacji.
+- `dr-02.../MAPA-AKTOW.md`: skorygowano wiersz KSH — poprawny numer artykułu
+  (art. 88, nie 130), status F-6 oznaczony jako zamknięty, F-5 (ESAP-KSH)
+  pozostawiony jawnie nierozstrzygnięty.
+- `dr-02.../SKILL.md`: wersja 3.4 → **3.5**.
+
+### 4. STATUS
+
+F-6 **ZAMKNIĘTA** — wiersz usunięty z `WARN-OTWARTE.md`. F-4 pozostaje
+OTWARTA, zaktualizowana. F-5 pozostaje OTWARTA, z dopiskiem o nierozstrzygniętym
+związku ESAP-KSH (nie mylić z F-6 — to była osobna, teraz zamknięta sprawa
+numeru artykułu).
+
+### 5. POZOSTAŁE OTWARTE POZYCJE
+
+F-1, F-2, F-3, F-5, F-7 do F-11 pozostają otwarte — nie były przedmiotem tej
+sesji.
+
+---
+
+## AUDYT-2026-07-15a — Zamknięcie F-12: zaprojektowano ZASADA-PORCJOWANIA-DLUGICH-PLIKOW
+
+**Zakres:** `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md`. Zamyka flagę F-12
+otwartą w AUDYT-2026-07-14b (pkt 3, 5).
+
+### 1. PRZYPOMNIENIE PROBLEMU
+
+F-12 dotyczył mechanizmu ODRĘBNEGO od SD-GATE-TRUNC (AUDYT-2026-07-14b):
+plik .odt (68 415 znaków) odczytany fragmentarycznie (~17,5% treści) metodą
+ręcznego wycinania zakresu znaków w kodzie (`tekst[4000:12000]`), bez
+żadnej adnotacji narzędzia o obcięciu — model po prostu przestał czytać
+i uznał próbkę za reprezentatywną. SD-GATE-TRUNC (v1.5.0) nie mógł tego
+wykryć, bo działa wyłącznie na aktywnym sygnale narzędzia `view`.
+
+### 2. PROJEKT NAPRAWY
+
+Zaprojektowano **SD-GATE-PORCJA** (nowy KROK SD-READ.1b w FAZA 2),
+uniwersalny — dotyczy KAŻDEGO pliku o wyodrębnionej treści >3000 znaków,
+niezależnie od metody ekstrakcji (view, zipfile+regex, OCR, pdftotext,
+ręczne cięcie w kodzie):
+- obowiązkowe ustalenie CAŁKOWITEJ długości treści przed analizą,
+- jawny licznik "przeczytano X/Y znaków (Z%)",
+- zakaz przejścia do ekstrakcji faktów (SD-READ.2) dopóki X<Y, chyba że
+  pominięcie jest jawnie uzasadnione i zapisane w SD-REJ (nie milcząco
+  założone),
+- domyślne założenie odwrócone względem dotychczasowego: brak pełnego
+  odczytu = plik NIEODCZYTANY W CAŁOŚCI.
+
+Dodatkowo doprecyzowano blok [ODT] w FAZA 2: dotychczasowa procedura
+sprawdzała content.xml tylko pod kątem "pusty → szukaj obrazów", bez
+instrukcji co zrobić, gdy content.xml zawiera ISTOTNY tekst — to była
+luka, w którą wpadł oryginalny incydent. Teraz blok [ODT] jawnie odsyła
+do SD-GATE-PORCJA dla takiego przypadku.
+
+### 3. ROZRÓŻNIENIE OD REGUŁA-TRUNCATION-VIEW (celowo zachowane w treści reguły)
+
+REGUŁA-PORCJOWANIA-DLUGICH-PLIKOW jawnie zaznacza różnicę źródła sygnału:
+REGUŁA-TRUNCATION-VIEW reaguje na AKTYWNY komunikat narzędzia; SD-GATE-PORCJA
+działa mimo BRAKU jakiegokolwiek sygnału. Obie prowadzą do tego samego
+wymogu końcowego: 100% treści faktycznie przejrzane przed budową tez,
+pytań lub pisma.
+
+### 4. NAPRAWA — ZMIANY W PLIKU
+
+`shared/MOD-SKAN-DOWODOW-KOMPLETNY.md`: 1.5.0 → **1.6.0**
+- nowy KROK SD-READ.1b (SD-GATE-PORCJA) w FAZA 2, przed SD-READ.2
+- rozszerzenie bloku [ODT] o pełną analizę tekstu content.xml
+- rozszerzenie SD-VER.1 (FAZA 3) o warunek SD-GATE-PORCJA
+- nowa REGUŁA-PORCJOWANIA-DLUGICH-PLIKOW w sekcji REGUŁY SZCZEGÓLNE
+- nowa pozycja SD-GATE-PORCJA w SELF-CHECK MODUŁU
+
+### 5. STATUS
+
+F-12 **ZAMKNIĘTA** — wiersz usunięty z `WARN-OTWARTE.md`, zgodnie z ZASADĄ 10
+(otwarcie → WARN-OTWARTE + AUDIT-JOURNAL; zamknięcie → tylko AUDIT-JOURNAL).
+
+### 6. POZOSTAŁE OTWARTE POZYCJE (bez zmian w tej sesji)
+
+F-1 do F-11 pozostają otwarte — nie były przedmiotem tej sesji (użytkownik
+wybrał wyłącznie F-12 do objęcia w tej rundzie).
+
+---
+
+## AUDYT-2026-07-14b — Naprawa: obcięcie środka pliku przez `view` niezauważone przez trzy tury (skill proceduralny, ZASADA 11)
+
+**Zakres:** Skill proceduralny `przesluchanie-swiadkow-v2-min90` +
+zależność `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md`. Nie dotyczy mapy Dz.U.
+
+**Sprawa:** XI P 27/26, świadek Maria Koroleva.
+
+### 1. INCYDENT
+
+Model odczytał protokół rozprawy z 08.07.2026 (plik `.txt`, wynik
+`pdftotext`, 394–403 linii, ~14 KB) narzędziem `view` bez `view_range`.
+Narzędzie zwróciło w wyniku adnotację `< truncated lines 174-230 >` —
+mechaniczne obcięcie środka pliku przez próg znakowy, niezależnie od tego,
+że plik "wyglądał" na krótki. Model nie zareagował na tę adnotację: nie
+wykonał dodatkowego `view` z `view_range` na zakres 174–230, i zbudował
+tezy oraz pytania przesłuchania (W2/W3) na podstawie pozostałej treści.
+
+### 2. SKUTEK
+
+Obcięty zakres (linie 193–208) zawierał zeznanie powoda o wiadomości
+WhatsApp wysłanej przez świadka do kilkuset pracowników 28.09.2024 —
+fakt, który **pełnomocnik pozwanej wprost potwierdziła jako niekwestionowany
+na tej samej rozprawie**. Fakt ten pozostał pominięty przez trzy kolejne
+tury rozmowy, dopóki użytkownik nie porównał wyniku z niezależnie
+przygotowanym dokumentem własnym (`Pytania_dla_Marii.docx`, Blok 4) i nie
+polecił wprost ponownego zbadania protokołów pod tym kątem.
+
+### 3. ROZRÓŻNIENIE OD PODOBNEGO INCYDENTU W TEJ SAMEJ SESJI
+
+Równolegle wystąpił odrębny, POZORNIE podobny błąd: plik `.odt` (68 415
+znaków) odczytany fragmentarycznie (~17,5% treści) metodą ręcznego
+wycinania zakresu w Pythonie (`x[4000:12000]`), bez żadnej adnotacji
+narzędzia o obcięciu — model po prostu przestał czytać i uznał próbkę za
+reprezentatywną. To NIE jest ten sam mechanizm: tam nie było sygnału
+technicznego do zignorowania, było zaniechanie kontynuacji lektury. Ta
+naprawa (SD-GATE-TRUNC) adresuje wyłącznie przypadek, gdy narzędzie
+**aktywnie sygnalizuje** obcięcie. Przypadek "cichego" niedoczytania
+długiego pliku bez adnotacji narzędzia pozostaje OTWARTY — do ujęcia w
+osobnej regule (robocza nazwa: ZASADA-PORCJOWANIA-DLUGICH-PLIKOW) w
+kolejnej sesji audytowej. Nie mylić tych dwóch pozycji przy zamykaniu flag.
+
+### 4. NAPRAWA
+
+- `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md`: 1.4.0 → **1.5.0**
+  — nowy typ pliku w FAZA 2 (SD-READ): „[PLIK TEKSTOWY odczytywany
+  narzędziem `view`]" z bramką **SD-GATE-TRUNC**; rozszerzenie SD-VER.1
+  (FAZA 3) o warunek braku nierozwiązanych znaczników obcięcia; nowa
+  **REGUŁA-TRUNCATION-VIEW** w sekcji REGUŁY SZCZEGÓLNE; nowa pozycja w
+  SELF-CHECK MODUŁU.
+- `przesluchanie-swiadkow-v2-min90/SKILL.md`: 3.18 → **3.19** — wpis
+  changelog dokumentujący incydent i dziedziczenie naprawy przez istniejącą
+  twardą zależność `PRE-W1a-SD-VER` (bez duplikacji reguły w tym skillu,
+  zgodnie z CHECKLIST-DEDUP).
+
+### 5. OTWARTA POZYCJA DO NASTĘPNEJ SESJI
+
+- ZASADA-PORCJOWANIA-DLUGICH-PLIKOW (patrz pkt 3) — jeszcze nieutworzona.
+- Nie sprawdzono, czy inne skille korzystające z `view` bezpośrednio (poza
+  MOD-SKAN-DOWODOW-KOMPLETNY) mają analogiczną lukę — do FAZY 2A/2B
+  następnego pełnego audytu.
+
+### 6. WERYFIKACJA DZIEDZICZENIA W POZOSTAŁYCH SKILLACH ZALEŻNYCH (na wyraźne pytanie użytkownika)
+
+Sprawdzono pozostałe dwa skille wskazane w nagłówku zależności
+`MOD-SKAN-DOWODOW-KOMPLETNY.md` (`analizator-dowodow-v3`: BLOK-B-EXT;
+`pisma-procesowe-v3`: W1.2c-PRE):
+- `analizator-dowodow-v3` — wywołuje moduł bezpośrednio jako HARD GATE
+  w KROK 0b (SD-VER, linia ~182 SKILL.md). Naprawa dziedziczona bez zmian
+  logiki. Wersja podbita 5.14.2 → **5.14.3** (wpis dokumentacyjny).
+- `pisma-procesowe-v3` — pobiera SD-REJ z modułu jako HARD GATE przed
+  budową macierzy dowód×teza (linia ~471 SKILL.md). Naprawa dziedziczona
+  bez zmian logiki. Wersja podbita 5.11 → **5.12** (wpis dokumentacyjny).
+Żaden z tych dwóch skilli nie miał własnej, zduplikowanej kopii logiki
+odczytu `view` — obaj wołają moduł współdzielony na żywo, więc naprawa
+1.5.0 obejmuje ich automatycznie od tej sesji. Nie jest to nowy mechanizm,
+tylko potwierdzenie, że istniejący mechanizm dziedziczenia zależności
+zadziałał — odnotowane wyłącznie dla śladu audytowego (żeby przy pytaniu
+"czy to naprawione wszędzie" nie trzeba było grepować od nowa).
+
+---
+
+## AUDYT-2026-07-13n — Naprawa: treść dodana w AUDYT-13m nie była skonfrontowana z literaturą ekspercką (błąd procesowy, znaleziony i naprawiony błąd merytoryczny)
+
+**Zakres:** Użytkownik trafnie wskazał: elementy dodane w sesji 2026-07-13m
+(G.7, H.1B, H.7, I.7) zostały napisane z ogólnej wiedzy, BEZ konfrontacji
+z web_search — naruszenie tej samej zasady (zakaz treści z pamięci), którą
+system stosuje wobec przepisów i orzeczeń, tu zastosowane po raz pierwszy
+świadomie do treści "eksperckiej" (dobre praktyki, złote zasady), nie tylko
+do numerów przepisów.
+
+### 1. PRZYZNANIE
+
+Odpowiedź na wprost zadane pytanie: NIE, treść z 13m nie była pierwotnie
+skonfrontowana z literaturą ekspercką. Naprawiono to w tej sesji przez
+faktyczny `web_search` (3 zapytania: art. 29 KP, dobre praktyki B2B
+kancelaryjne, zakaz konkurencji/odszkodowanie 25%).
+
+### 2. ZNALEZIONY REALNY BŁĄD (nie tylko brak potwierdzenia — faktyczna nieścisłość)
+
+`H.1B` (elementy obowiązkowe umowy o pracę) **pominęło obowiązkowy element**:
+adres siedziby pracodawcy (lub adres zamieszkania, gdy pracodawca to osoba
+fizyczna bez siedziby) — wymóg art. 29 §1 KP, wprowadzony jako
+implementacja dyrektywy 2019/1152. Potwierdzone niezależnie w 5 źródłach
+(lexlege.pl, infor.pl, pwrz.pl, gofin.pl, standardyprawa.pl). Naprawione.
+
+Dodatkowo: art. 29 §3 KP (obowiązek informacyjny w ciągu 7 dni) był
+zmieszany z §1 (treść samej umowy) w pierwszej wersji — to DWA odrębne
+obowiązki prawne o różnych skutkach naruszenia; rozdzielone w poprawce.
+
+### 3. WERYFIKACJA POZOSTAŁEJ TREŚCI (potwierdzona, nie odrzucona)
+
+- G.7 (B2B): złote zasady i większość dobrych praktyk **zgodne** z
+  literaturą kancelaryjną (Kancelaria Stawowski, KPR Kaczor Madejewska,
+  Rautszko-legal, Mięsikowski i Wziętek) — dodano 3 praktyki, których
+  brakowało (weryfikacja kontrahenta przed podpisaniem, weryfikacja
+  pełnomocnictwa, powiązanie momentu przeniesienia praw autorskich
+  z zapłatą wynagrodzenia).
+- I.7 (zakaz konkurencji): zasada #1 potwierdzona w 6 niezależnych
+  źródłach — **poprawiono precyzję cytatu** z ogólnego "art. 101² KP" na
+  dokładne "art. 101² §3 KP".
+
+### 4. ZASADA NA PRZYSZŁOŚĆ
+
+Odnotowano jako rozszerzenie dotychczasowej dyscypliny HARD GATE: zakaz
+cytowania z pamięci dotyczy NIE TYLKO numerów przepisów/orzeczeń, ale też
+treści prezentowanej jako "dobra praktyka" czy "zasada przewodnia" — taka
+treść bez potwierdzenia źródłowego jest równie ryzykowna jak nieprawdziwy
+numer artykułu, bo użytkownik (i skill wykonawczy) traktuje ją z takim
+samym zaufaniem.
+
+### 5. WERYFIKACJA I DOSTAWA
+
+`ci_check_shared.py`: 623 pliki, 0 błędów. Pliki zmodyfikowane: 3
+(umowy-o-prace.md, b2b-podwykonawcze.md, zakaz-konkurencji.md), 0 nowych.
+
+
+
+**Zakres:** Użytkownik poprosił o uzupełnienie w modułach analizatora umów:
+danych/punktów obowiązkowych, list dobrych praktyk i wzorów (jeśli brak),
+złotych zasad, ścisłego języka prawniczego — "tylko to, czego brak" dla
+wybranych typów umów.
+
+### 1. AUDYT PRZED ZMIANĄ (3 moduły PRIMARY: B2B/G, umowa o pracę/H, zakaz konkurencji/I)
+
+| Element | G (B2B) | H (UoP) | I (zakaz konkurencji) |
+|---|---|---|---|
+| Checklista analizy | ✅ G.5 | ✅ H.6 | ✅ I.4.1/I.4.2 |
+| Szablony klauzul | ✅ G.6 | ✅ H.5 | ✅ I.5 |
+| Elementy obowiązkowe UMOWY | ❌ brak | ❌ brak (tylko świadectwo pracy, H.4.2) | ✅ już w I.4.1/I.4.2 |
+| Dobre praktyki (pozytywne) | ❌ brak | ❌ brak | częściowo (I.4.1 "elementy rekomendowane") |
+| Złote zasady | ❌ brak | ❌ brak | ❌ brak |
+| Ścisły język prawniczy | ❌ brak (nigdzie w skillu) | ❌ brak | ❌ brak |
+
+### 2. DODANE (tylko braki, bez duplikowania)
+
+- `SKILL.md`: **Zasada 7 — Ścisły język prawniczy** (JEDNA globalna zasada,
+  dotyczy wszystkich modułów G/H/I/J* — świadomie NIE zduplikowana 3×,
+  zgodnie z dyscypliną dedup tej sesji).
+- `b2b-podwykonawcze.md`: nowa sekcja **G.7** (elementy obowiązkowe,
+  dobre praktyki redakcyjne, 5 złotych zasad B2B).
+- `umowy-o-prace.md`: nowa sekcja **H.1B** (elementy obowiązkowe wg art. 29
+  KP, z jawnym zastrzeżeniem weryfikacji aktualnego brzmienia) oraz **H.7**
+  (dobre praktyki + 5 złotych zasad UoP).
+- `zakaz-konkurencji.md`: nowa sekcja **I.7** (5 złotych zasad — elementy
+  obowiązkowe i dobre praktyki pominięte celowo, bo już istniały w
+  I.4.1/I.4.2 jako "TREŚĆ OBLIGATORYJNA"/"ELEMENTY REKOMENDOWANE").
+
+### 3. WERYFIKACJA
+
+`ci_check_shared.py`: 623 pliki, 0 zerwanych odwołań, 0 duplikatów.
+`mod-J0-routing.md` sprawdzony — nie odwołuje się do żadnej z nowo dodanych
+sekcji ani do numeracji, która by kolidowała.
+
+### 4. STRUKTURA SYSTEMU — SNAPSHOT
+
+- Pliki zmodyfikowane: 4 (SKILL.md + 3 moduły), 0 nowych plików.
+- Błędy CRIT: 0.
+
+
+
+**Zakres:** Użytkownik poprosił o ponowną ocenę systemu oraz o dokładne
+przeszukanie listy klauzul niedozwolonych i nieważnych z mocy prawa do
+wykorzystania przez `analizator-umow-v1`.
+
+### 1. PONOWNA OCENA (0-10)
+
+Średnia: 7,2 → 7,7 → **7,9**. Wzrost skoncentrowany w kryteriach:
+anty-halucynacja (6,5→7,5, dzięki naprawie F-12 i 7 gotowym connectorom),
+dokumentacja techniczna (8,5→9), odporność na błędy/aktualność (8→8,5 —
+uzasadnione właśnie odkryciem poniżej, jako dowód że dyscyplina weryfikacji
+faktycznie łapie nieaktualności na żywych przypadkach, nie tylko teoretycznie).
+
+### 2. KRYTYCZNE ODKRYCIE — rejestr UOKiK utracił charakter ustawowy
+
+`web_search` (nie założenie) ujawnił: rejestr klauzul niedozwolonych
+(dawny art. 479⁴⁵ KPC) **utracił charakter ustawowy 17-18.04.2026** —
+wygasł 10-letni okres przejściowy z nowelizacji z 5.08.2015 (Dz.U. 2015
+poz. 1634), a ustawodawca nie przedłużył go mimo apeli. Od 18.04.2026
+dostępny wyłącznie w wersji **zanonimizowanej, informacyjno-edukacyjnej**
+(bez danych stron, bez skutku rozszerzonej prawomocności wobec osób
+trzecich) — ~7786 archiwalnych wpisów sprzed 17.04.2016. Sprawy późniejsze
+wyłącznie w bazie decyzji Prezesa UOKiK (osobne źródło, już poprawnie
+wskazane w skillu).
+
+**`analizator-umow-v1/SKILL.md` (Zasada 1-2) i `mod-shared-abusive-
+clauses.md` odwoływały się do tego rejestru bez tej informacji** —
+identyczny typ błędu jak wcześniejsze nieaktualności (mapa Dz.U., MCP
+niepodłączone do skilli). Naprawione: obie lokalizacje zaktualizowane o
+pełny kontekst zmiany statusu, z jasnym rozróżnieniem: wpisy sprzed 2016 =
+analogia/wskazówka (nie wiążąca podstawa), sprawy po 2016 = wyłącznie
+decyzje UOKiK.
+
+### 3. NOWE NARZĘDZIE — szukaj_klauzul_uokik.py
+
+`analizator-umow-v1/references/szukaj_klauzul_uokik.py` — pobiera (lub
+wczytuje lokalnie) CSV archiwalnego rejestru i przeszukuje go
+deterministycznie (bez powtarzania web_fetch przy każdym zapytaniu).
+**Self-test PASS** (parsowanie windows-1250 + średnik, 3 warianty
+wyszukiwania) oraz **test na realnym pliku CSV** (nie tylko self-test) —
+oba przeszły. ⚠️ Adres URL CSV pochodzi z okresu SPRZED zmiany na wersję
+zanonimizowaną (źródło: projekt OSS `zmilonas/klauzule-niedozwolone-uokik`)
+— NIE zweryfikowano, czy identyczny adres/format obowiązuje po 18.04.2026;
+jawnie oznaczone w pliku i README jako wymagające potwierdzenia przez
+developera.
+
+### 4. "NIEWAŻNE Z MOCY PRAWA" — sprawdzone, już w pełni pokryte
+
+Sprawdzono (`grep`) obecność art. 58 KC w systemie — **już zintegrowane w
+kilkunastu modułach** (`mod-core-checklist.md` POZIOM 1, `zakaz-
+konkurencji.md`, `mod-MA-transakcje.md`, `mod-J7-pzp.md` i inne). To
+ogólna doktryna cywilistyczna (nieważność bezwzględna), nie skatalogowany
+rejestr zewnętrzny jak UOKiK — nie wymaga osobnej listy, weryfikowana
+przez ISAP jak każdy inny przepis. Brak działania koniecznego.
+
+### 5. STRUKTURA SYSTEMU — SNAPSHOT
+
+- Nowy plik: `analizator-umow-v1/references/szukaj_klauzul_uokik.py`
+- `analizator-umow-v1`: +1 plik
+- Błędy CRIT: 0. Nieaktualności naprawione: 1 (rejestr UOKiK).
+
+
+
+**Zakres:** Użytkownik poprosił: "Zbadaj resztę i przygotuj wszystko w sposób
+analogiczny jak z saos i isap." — dokończenie researchu 3 niezbadanych
+wcześniej źródeł + budowa serwerów MCP dla wszystkich potwierdzonych API bez
+connectora.
+
+### 1. DOKOŃCZENIE RESEARCHU (3 źródła)
+
+| Źródło | Wynik |
+|---|---|
+| Interpretacje podatkowe (system EUREKA) | ❌ NIE — tylko wyszukiwarka HTML (`eureka.mf.gov.pl`), brak REST API |
+| SUDOP/UOKiK | ✅ TAK — `api-sudop.uokik.gov.pl:9443/devportal/apis`, publiczne, limit 8 zap./s |
+| KNF | ❌ NIE — tylko rejestry HTML/pliki do pobrania, brak REST API |
+
+### 2. PIĘĆ NOWYCH SERWERÓW MCP (analogicznie do isap-eli-example/saos-example)
+
+Wszystkie zbudowane wg identycznego wzorca: `McpServer` + `StdioServerTransport`
+(`@modelcontextprotocol/sdk` 1.29.0), czysta funkcja normalizująca testowalna
+bez sieci, test jednostkowy (dane syntetyczne), test protokołu MCP (realny
+`Client` przez stdio — connect/tools-list/tools-call).
+
+| Serwer | Narzędzie | Testy jednostkowe | Test protokołu MCP | Szczególna uwaga |
+|---|---|---|---|---|
+| `krs-example` | `krs_lookup` | 4/4 PASS | ✅ PASS | Priorytet — wspiera PODMIOT-GATE |
+| `nbp-example` | `nbp_kurs_waluty` | 2/2 PASS | ✅ PASS | Najpewniejszy kształt API ze wszystkich 7 |
+| `sudop-example` | `sudop_szukaj_pomocy` | 3/3 PASS | ✅ PASS | — |
+| `ceidg-example` | `ceidg_szukaj_firmy` | 3/3 PASS | ✅ PASS (w tym poprawna obsługa braku klucza API) | Wymaga `CEIDG_API_KEY`; najmniej pewny kształt zapytania (dokumentacja sugeruje API asynchroniczne) |
+| `eurlex-example` | `eurlex_lookup` | 3/3 PASS | ✅ PASS | Zapytanie SPARQL uproszczone; 32 odwołania w dr-*/ — największy potencjalny zwrot |
+
+Wszystkie testy protokołu MCP zwróciły poprawnie ustrukturyzowany `ERROR`
+przy próbie żywego wywołania (brak dostępu sieciowego do domen `.gov.pl`/
+`europa.eu`/`nbp.pl`/`uokik.gov.pl` z tego środowiska) — bez awarii serwera,
+identyczny wzorzec jak isap-eli-example/saos-example.
+
+### 3. AKTUALIZACJE
+
+`shared/KONEKTORY-REKOMENDOWANE.md`: tabela badań domknięta (0 pozycji
+"❓ nie zbadane" wśród 9 priorytetowych źródeł), nowa tabela 7 serwerów
+referencyjnych z oceną pewności kształtu odpowiedzi dla każdego.
+
+### 4. STRUKTURA SYSTEMU — SNAPSHOT
+
+- Nowe podkatalogi: `shared/tools/mcp-servers/{krs,nbp,sudop,ceidg,eurlex}-example/` (po 5 plików każdy = 25 plików)
+- `shared/`: 147 → 172 plików
+- Testy automatyczne wykonane i zaliczone w tej sesji: 20 (5 serwerów × [test jednostkowy + test protokołu MCP] × ~2, plus warianty)
+- Błędy CRIT: 0
+
+
+
+**Zakres:** Użytkownik zapytał: "Czy instrukcja wdrożeniowa obejmuje obydwa
+API? Analogicznie sprawdź pozostałe serwery wywoływane przez skille dr i
+zbadaj istnienie ich API."
+
+### 1. USTALENIE — instrukcja wdrożeniowa NIE obejmowała obu API
+
+`grep "isap-eli-example|saos-example" DOKUMENTACJA-WDROZENIOWA-2026-07-13.md`
+zwrócił 0 wyników. Sekcja 2 tego dokumentu ("shared/MCP-INTEGRACJA.md —
+szczegóły") opisywała wyłącznie generyczny protokół (`test_mcp_protocol.py`,
+`connector_health_check.py`), napisana przed sesjami 13g-13i, w których
+powstały oba konkretne serwery. Naprawione: tabela plików w sekcji 2
+rozszerzona o `isap-eli-example/` i `saos-example/`, status testów
+zaktualizowany, manifest plików (sekcja 6) rozszerzony o `mcp-servers/`.
+
+### 2. RESEARCH — istnienie API dla źródeł używanych przez skille DR
+
+Zebrano (grep) 50 unikalnych domen referencjonowanych w `dr-*/`, wybrano 9
+najczęściej używanych (wg liczby skilli odwołujących się do każdej) i
+zbadano (`web_search`, nie zgadywano) istnienie publicznego API dla każdej:
+
+| Źródło | API? |
+|---|---|
+| EUR-Lex/CELLAR | ✅ TAK — SPARQL+REST, bez autoryzacji |
+| KRS (api-krs.ms.gov.pl) | ✅ TAK — Otwarte API od 2022, ustawa o otwartych danych |
+| NBP (api.nbp.pl) | ✅ TAK — kursy walut/złota, JSON/XML |
+| CEIDG/biznes.gov.pl | ✅ TAK — wymaga bezpłatnego klucza API |
+| ZUS | ⚠️ CZĘŚCIOWO — tylko wąskie, uwierzytelnione interfejsy (e-ZLA dla zarejestrowanych płatników), nie ogólne API |
+| KIO/UZP (orzeczenia.uzp.gov.pl) | ❌ NIE — tylko HTML + archiwalny FTP z PDF |
+| Interpretacje podatkowe, UOKiK, KNF | ❓ nie zbadane w tej sesji (zakres czasowy) |
+
+**Wniosek kluczowy:** 4 źródła o potwierdzonym publicznym API (EUR-Lex, KRS,
+NBP, CEIDG) **nie mają jeszcze żadnego connectora MCP** w tym systemie — to
+konkretna, zweryfikowana lista kandydatów do rozbudowy `mcp-servers/` w
+kolejnej sesji, w kolejności malejącego priorytetu: KRS (bezpośrednio
+wspiera PODMIOT-GATE w routerze), EUR-Lex (32 odwołania w dr-*/, największy
+potencjalny zwrot), NBP, CEIDG.
+
+### 3. AKTUALIZACJE
+
+- `DOKUMENTACJA-WDROZENIOWA-2026-07-13.md`, sekcja 2 i 6 — rozszerzone o oba serwery.
+- `shared/KONEKTORY-REKOMENDOWANE.md` — nowa sekcja "Zbadane źródła urzędowe
+  używane przez skille DR (2026-07-13j)" z pełną tabelą i wnioskiem.
+
+### 4. STRUKTURA SYSTEMU — SNAPSHOT
+
+- Brak nowych plików kodu w tej sesji (sesja diagnostyczno-dokumentacyjna).
+- `shared/KONEKTORY-REKOMENDOWANE.md` rozszerzony (treść, nie liczba plików).
+- Błędy CRIT: 0.
+
+
+
+**Zakres:** Użytkownik poprosił: "To samo zrób z saos" — analogiczny serwer
+referencyjny MCP jak `isap-eli-example`, tym razem dla SAOS REST API
+(orzeczenia sądów powszechnych i SN).
+
+### 1. IMPLEMENTACJA
+
+`shared/tools/mcp-servers/saos-example/saos-mcp-server.js` — serwer MCP
+(Node.js, `@modelcontextprotocol/sdk` 1.29.0, stdio) z narzędziem
+`saos_search`. Kształt odpowiedzi API oparty na dokumentacji **już
+istniejącej niezależnie** w `orzeczenia-sadowe-v2/SKILL.md` (Faza 1-T.1:
+pola `caseNumber`, `judgmentDate`, `division.court.name`/`chambers`,
+`textContent`, `href`) — solidniejsza podstawa niż przy `isap-eli-example`,
+gdzie kształt trzeba było zakładać z dokumentacji zewnętrznej.
+
+**Kluczowa różnica projektowa względem isap-eli-example:** wyniki oznaczone
+`rola: "KANDYDAT"` i `confidence: "candidate-only"` (nie `"deterministic"`)
+— zgodnie z Zasadą 5 z `orzeczenia-sadowe-v2` (SAOS to projekt akademicki
+ICM UW, wyłącznie wsparcie wyszukiwania, nigdy samodzielna weryfikacja).
+
+### 2. TESTY WYKONANE (realne)
+
+- `test_normalizacja.mjs`: 4/4 przypadki PASS (FOUND, NOT_FOUND, AMBIGUOUS,
+  fallback nazwy sądu SN przez `chambers` zamiast `division.court`).
+- `test_protokol_mcp.mjs`: prawdziwy klient MCP → connect (handshake OK) →
+  `tools/list` (poprawnie zwrócił `saos_search`) → `tools/call` → odpowiedź
+  `ERROR` (środowisko nie ma dostępu do `saos.org.pl`), bez awarii serwera.
+  Identyczny wzorzec jak przy `isap-eli-example`.
+
+### 3. AKTUALIZACJE
+
+`shared/KONEKTORY-REKOMENDOWANE.md` rozszerzony o wzmiankę `saos-example`
+obok `isap-eli-example`, z jawnym zaznaczeniem różnicy "KANDYDAT vs
+potwierdzenie".
+
+### 4. STRUKTURA SYSTEMU — SNAPSHOT
+
+- Nowy podkatalog: `shared/tools/mcp-servers/saos-example/` (5 plików)
+- `shared/`: 141 → 146 plików
+- Flagi: brak nowych (to rozszerzenie tego samego wzorca co F-8, nie nowy problem)
+
+
+
+**Zakres:** Użytkownik poprosił o naprawę F-12 i zapytał, czy da się wstawić
+realny connector MCP.
+
+### 1. NAPRAWA F-12
+
+Dodano jawne odwołanie `view /mnt/skills/user/shared/MCP-INTEGRACJA.md`
+(KROK 1) w dwóch miejscach:
+- `orzeczenia-sadowe-v2/SKILL.md`, Zasada 1 (PERMANENT GATE) — przed
+  web_search/web_fetch dla orzeczeń.
+- `analizator-przepisow-v2/SKILL.md`, główny blok HARD GATE na początku pliku
+  — przed web_search/web_fetch dla przepisów.
+
+Oba wpięcia zachowują zasadę nadrzędną (MCP uzupełnia, nie zastępuje HARD
+GATE) — jeśli connector niedostępny, oba skille działają dokładnie jak
+dotychczas, bez zmian.
+
+### 2. PRÓBA WSTAWIENIA REALNEGO CONNECTORA
+
+`search_mcp_registry` zwrócił: **"Connector discovery requires user opt-in"**
+— odkrywanie connectorów wymaga zgody użytkownika na poziomie interfejsu,
+niemożliwej do obejścia z tej rozmowy. Katalog connectorów Anthropic to i tak
+partnerzy konsumenccy (muzyka, restauracje, przejazdy), nie wyspecjalizowane
+bazy prawne. **Nie da się "wstawić" działającego connectora do bieżącej
+rozmowy** — to wymaga wdrożenia serwera MCP przez developera i konfiguracji
+na poziomie klienta (Claude Desktop/Code), poza czatem.
+
+### 3. ZAMIAST TEGO: realny, przetestowany protokołem serwer referencyjny
+
+Napisano `shared/tools/mcp-servers/isap-eli-example/isap-eli-mcp-server.js`
+— serwer MCP (Node.js, `@modelcontextprotocol/sdk` 1.29.0, transport stdio)
+udostępniający narzędzie `isap_lookup` dla Sejm ELI API.
+
+**Testy wykonane (realne, nie deklaratywne):**
+- `test_normalizacja.mjs`: 3/3 przypadki (FOUND/NOT_FOUND/AMBIGUOUS) PASS,
+  bez sieci.
+- `test_protokol_mcp.mjs`: **prawdziwy klient MCP** (`Client` z tego samego
+  SDK) połączył się z serwerem przez `StdioClientTransport`, wykonał pełny
+  handshake protokołu, `tools/list` poprawnie zwrócił `isap_lookup`,
+  `tools/call` wykonał się i zwrócił ustrukturyzowaną odpowiedź `ERROR` (bo
+  środowisko nie ma dostępu do `api.sejm.gov.pl` — lista dozwolonych domen
+  sieciowych nie obejmuje `.gov.pl`), **bez awarii serwera**. To dowodzi, że
+  warstwa protokołu MCP działa end-to-end; jedynym nieprzetestowanym
+  elementem jest kształt odpowiedzi prawdziwego Sejm ELI API.
+
+### 4. UCZCIWOŚĆ WOBEC OGRANICZEŃ
+
+README dodany do serwera wprost rozróżnia: co zweryfikowano (protokół MCP,
+normalizacja, łagodna obsługa błędu sieciowego) od czego nie (rzeczywisty
+kształt JSON z api.sejm.gov.pl, paginacja). Zaznaczono też, że to odstępstwo
+od zasady "integruj gotowe OSS, nie buduj od zera" — uzasadnione brakiem
+możliwości zainstalowania i przetestowania żadnego gotowego projektu z tego
+środowiska.
+
+### 5. STRUKTURA SYSTEMU — SNAPSHOT
+
+- Nowy podkatalog: `shared/tools/mcp-servers/isap-eli-example/` (6 plików:
+  server, 2 testy, package.json, package-lock.json, README)
+- `shared/`: 135 → 141 plików
+- F-12: naprawiona (okablowanie). F-8 (brak realnego connectora
+  podłączonego) pozostaje otwarta — istnienie serwera referencyjnego nie
+  jest tym samym co jego wdrożenie i podłączenie przez developera.
+
+## AUDYT-2026-07-13g — Odkrycie: shared/MCP-INTEGRACJA.md niepodłączona do skilli analitycznych (F-12, priorytet WYSOKI)
+
+**Zakres:** Użytkownik zapytał wprost: "Czy analiza orzeczeń i przepisów ma
+wdrożone oficjalne API i może z niego korzystać?" — sprawdzenie tego
+bezpośrednio w kodzie (`grep`), zamiast odpowiadać z pamięci kontekstu tej
+rozmowy, ujawniło realną lukę.
+
+### USTALENIE
+
+`grep -rl "MCP-INTEGRACJA" /mnt/skills/user --include="*.md"` zwraca tylko:
+`prawny-router-v3/SKILL.md`, `CHECKLIST-DEDUP.md`, `AUDIT-JOURNAL.md`,
+`DOKUMENTACJA-WDROZENIOWA-2026-07-13.md`. **Ani `orzeczenia-sadowe-v2/SKILL.md`
+ani `analizator-przepisow-v2/SKILL.md` nie zawierają żadnej wzmianki o
+MCP-INTEGRACJA.md** — obie mają własną, w pełni niezależną logikę
+`web_fetch`/`web_search` wg `shared/PRAWO-HARDGATE.md`, bez sprawdzania
+dostępności connectora MCP.
+
+Stan faktyczny obecnych integracji z oficjalnymi źródłami (sprzed i
+niezależnie od tej sesji):
+- `orzeczenia-sadowe-v2`: wywołuje realny REST API SAOS
+  (`saos.org.pl/api/search/judgments`) przez `web_fetch`, ale wyłącznie jako
+  Tier 3 / etap wyszukania kandydatów, nie weryfikacji. Sama dokumentacja
+  skilla stwierdza wprost: "CBOSA (orzeczenia.nsa.gov.pl) NIE ma publicznego
+  REST API — dostęp wyłącznie przez [formularz]".
+- `analizator-przepisow-v2`: fetch'uje strony HTML z `isap.sejm.gov.pl` przez
+  `web_fetch`; etykieta "`api.sejm.gov.pl`" w formacie znacznika weryfikacji
+  to nazwa źródła w cytacie, NIE osobne wywołanie API.
+
+**Wniosek:** router deklaruje MCP-INTEGRACJA.md jako `required_module`, ale
+to nie propaguje się automatycznie do skilli wykonawczych wywoływanych przez
+router (Rząd PRIMARY/SECONDARY) — `required_modules` routera i skilla
+wykonawczego to dwa osobne konteksty ładowania. Efekt praktyczny: **nawet
+gdyby developer podłączył realny connector MCP, orzeczenia-sadowe-v2 i
+analizator-przepisow-v2 nigdy by go nie użyły** w obecnym stanie kodu — cała
+warstwa MCP zbudowana w tej sesji (2026-07-13/13f) pozostaje funkcjonalnie
+martwa dla najważniejszych pod względem cytowań skilli w systemie.
+
+### DZIAŁANIE
+
+Dodano flagę **F-12, priorytet WYSOKI** (pierwsza flaga w rejestrze z tym
+priorytetem — dotychczasowy maksymalny priorytet otwartych flag to "średni").
+Podniesiony priorytet uzasadniony: to nie jest kwestia integracji zewnętrznej
+(jak F-8/F-10/F-11), tylko luka w samym drucie wewnątrz silnika — naprawialna
+bez czekania na developera portalu, w kolejnej sesji edycyjnej.
+
+Naprawa NIE wykonana w tej sesji (sesja miała charakter diagnostyczny, w
+odpowiedzi na pytanie użytkownika) — rekomendacja: dodać jawne odwołanie
+`view shared/MCP-INTEGRACJA.md` w obu skillach analitycznych, analogicznie do
+istniejącego `view shared/PRAWO-HARDGATE.md`, w miejscu gdzie dziś trafiają
+bezpośrednio do web_fetch/web_search.
+
+### WPŁYW NA OCENĘ GOTOWOŚCI (patrz rozmowa z użytkownikiem)
+
+Kryterium "anty-halucynacyjna kontrola / uziemienie deterministyczne"
+obniżone względem poprzedniej oceny (2026-07-13, po sesji konsolidacyjnej) —
+zbudowana warstwa MCP istnieje i jest przetestowana w izolacji, ale nie
+przynosi dziś żadnej realnej korzyści w rozmowach obsługiwanych przez
+orzeczenia-sadowe-v2/analizator-przepisow-v2, dopóki F-12 nie zostanie
+naprawiona.
+
+
+
+**Zakres:** Użytkownik zadał wprost pytanie: "czy nie lepiej wdrożyć to od razu
+jako elementy obecnych skili a nie tworzyć coś nowego co faktycznie duplikuje
+już istniejące skile?" — dotyczące trzech skilli utworzonych w sesjach
+2026-07-13/13b (`mcp-zrodla-prawa-v1`, `audit-trail-portal-v1`,
+`sync-dzu-automatyczny-v1`).
+
+### 1. DIAGNOZA (dlaczego pytanie było zasadne)
+
+Żaden z trzech skilli nie był samodzielną jednostką wywoływaną intencją
+użytkownika (nikt nie pyta "sprawdź connectory MCP" jako niezależne zadanie
+prawne) — wszystkie trzy były **protokołami/narzędziami ładowanymi przez
+router lub przez audyt-systemu-v4**, dokładnie tak jak `shared/PRAWO-
+HARDGATE.md` czy `shared/HYBRID-VALIDATION.md` już działają. Tworząc dla nich
+osobne `SKILL.md` z pełnym frontmatterem (name/version/entrypoint/dependencies/
+escalation/changelog), skopiowano wzorzec "samodzielny skill", zamiast użyć
+już istniejącego wzorca "plik protokołu w shared/ + narzędzia w shared/tools/"
+(dla MCP i audit-trail) albo "references/ + scripts/ w audyt-systemu-v4/" (dla
+sync Dz.U., który explicite wspiera FAZĘ 3 tego właśnie skilla).
+
+Dodatkowy koszt tego błędu: 3 nowe entrypointy SKILL.md ładowane przez router
+niezależnie od faktycznej potrzeby — dokładnie ten sam problem, który audyt
+komercyjny z 2026-07-13 (punkt 5, ocena 5) już zidentyfikował jako słabość
+architektoniczną osobną od tej sesji (rozmiar/liczba entrypointów).
+
+### 2. WYKONANA KONSOLIDACJA
+
+| Stary skill (usunięty) | Nowa lokalizacja treści | Nowa lokalizacja narzędzi |
+|---|---|---|
+| `mcp-zrodla-prawa-v1/SKILL.md` | `shared/MCP-INTEGRACJA.md` | — |
+| `mcp-zrodla-prawa-v1/references/KONEKTORY-REKOMENDOWANE.md` | `shared/KONEKTORY-REKOMENDOWANE.md` | — |
+| `mcp-zrodla-prawa-v1/references/SCHEMAT-ODPOWIEDZI-MCP.md` | `shared/SCHEMAT-ODPOWIEDZI-MCP.md` | — |
+| `mcp-zrodla-prawa-v1/scripts/*.py` + przykład adaptera | — | `shared/tools/test_mcp_protocol.py`, `connector_health_check.py`, `przyklad-adapter-normalizujacy.md` |
+| `audit-trail-portal-v1/SKILL.md` | `shared/AUDIT-TRAIL-SPEC.md` | — |
+| `audit-trail-portal-v1/scripts/*.py` | — | `shared/tools/hash_chain_verify.py`, `append_event.py`, `router_event_parser.py` |
+| `sync-dzu-automatyczny-v1/SKILL.md` | `audyt-systemu-v4/references/SYNC-DZU-AUTOMATYCZNY.md` | — |
+| `sync-dzu-automatyczny-v1/references/*.md` | `audyt-systemu-v4/references/FORMAT-RAPORTU-ROZNIC.md`, `HARMONOGRAM-CRON.md` | — |
+| `sync-dzu-automatyczny-v1/scripts/*.py` | — | `audyt-systemu-v4/scripts/sync_dzu_eli.py`, `mock_eli_server_test.py`, `bootstrap_last_sync_date.py` |
+
+Wszystkie wewnętrzne odwołania (nazwy plików, ścieżki `view`, nagłówki H1/H2)
+zaktualizowane przez `sed`/`str_replace` do nowych lokalizacji — zweryfikowane
+`grep`-em, że żadna wzmianka starej nazwy skilla nie pozostała poza historycznym
+kontekstem ("wprowadzono jako osobny skill X, skonsolidowano Y").
+
+Zaktualizowano także: `prawny-router-v3` (v3.15 → **v3.16**: usunięto
+`mcp-zrodla-prawa-v1` z `dependencies.requires` i `required_modules`, dodano
+`shared/MCP-INTEGRACJA.md` w to miejsce, poprawiono ścieżkę w treści HARD GATE),
+`shared/DEPENDENCY-GRAPH.md` (4 nowe wiersze), `CHECKLIST-DEDUP.md` (4
+zaktualizowane/nowe wiersze kanonicznych lokalizacji).
+
+### 3. WERYFIKACJA
+
+- `ci_check_shared.py --repo-root /mnt/skills/user`: **615 plików .md
+  przeskanowanych, 0 zerwanych odwołań, 0 duplikatów bajtowych** — konsolidacja
+  nie wprowadziła regresji.
+- Pełny przebieg 8 self-testów/testów w nowych lokalizacjach (`shared/tools/`:
+  test_mcp_protocol.py, connector_health_check.py, append_event.py,
+  router_event_parser.py, extract_api_verification_log.py, export_gate.py,
+  walidator_cytowan.py na fixture; `audyt-systemu-v4/scripts/`:
+  bootstrap_last_sync_date.py, mock_eli_server_test.py) — **wszystkie PASS**,
+  identycznie jak przed przeprowadzką. Import względny `router_event_parser.py
+  → append_event.py` działa bez zmian, bo oba pliki przeniesiono razem do tego
+  samego katalogu.
+
+### 4. STRUKTURA SYSTEMU — SNAPSHOT
+
+- Skille user/ łącznie: **36 → 33** (powrót do liczby sprzed sesji 2026-07-13,
+  konsolidacja nie dodała nowych skilli, tylko przeniosła treść do istniejących)
+- `shared/`: +5 plików top-level (MCP-INTEGRACJA, KONEKTORY-REKOMENDOWANE,
+  SCHEMAT-ODPOWIEDZI-MCP, AUDIT-TRAIL-SPEC + bez zmian liczby w tools/, tylko
+  przeniesienie zawartości), `shared/tools/`: 4 → 9 plików .py/.md (dodane:
+  test_mcp_protocol.py, connector_health_check.py, przyklad-adapter-
+  normalizujacy.md, hash_chain_verify.py, append_event.py, router_event_parser.py
+  — 3 z nich już tam były od sesji 13d)
+- `audyt-systemu-v4/references/`: 6 → 9 plików (dodane: SYNC-DZU-AUTOMATYCZNY.md,
+  FORMAT-RAPORTU-ROZNIC.md, HARMONOGRAM-CRON.md)
+- `audyt-systemu-v4/scripts/`: 4 → 7 plików (dodane: sync_dzu_eli.py,
+  mock_eli_server_test.py, bootstrap_last_sync_date.py)
+- Błędy CRIT: 0. Regresje: 0.
+
+
+
+**Zakres:** Użytkownik zapytał wprost: "czy tak nakazuje audyt systemu czy też
+ma inne instrukcje?" — co wymagało faktycznego odczytania `SKILL.md` zamiast
+polegania na pamięci z wcześniejszych tur tej rozmowy.
+
+### 1. INCYDENT
+
+Trzy wcześniejsze dostawy w tej sesji (`AUDYT-2026-07-13`, `13b`, `13d` oraz
+odpowiedź z wykresem radarowym) naruszyły ZASADĘ 7 w dwóch punktach:
+
+1. **Niepełne drzewa skilli** — dostarczono `prawny-router-v3/SKILL.md` (1/21
+   plików), wybrane pliki z `shared/` (7/125 plików) i wybrane pliki z
+   `audyt-systemu-v4/` (6/15 plików) zamiast pełnych katalogów tych trzech
+   zmodyfikowanych skilli.
+2. **Luźny plik .md dostarczony przez `present_files` niezależnie od ZIP-a**
+   (`DOKUMENTACJA-WDROZENIOWA-2026-07-13.md` prezentowany dwukrotnie jako
+   osobny plik) — bezpośrednie naruszenie zdania "Nigdy nie dostarcza się
+   luźnych plików .md" z sekcji ZASADA 7.
+
+To ten sam wzorzec błędu co incydent historyczny opisany w tym samym pliku
+(`AUDYT-2026-07-10b`) — sama obecność zasady w SKILL.md w kontekście
+rozmowy nie wystarczyła, dopóki nie została świadomie zastosowana krok po
+kroku.
+
+### 2. NAPRAWA (ta sesja)
+
+Wykonano pełną **PRE-DELIVERY-COMPLETENESS-CHECK** dla wszystkich 6 skilli
+dotkniętych sesją (3 nowe + 3 zmodyfikowane):
+
+| Skill | KROK 1 (przed) | KROK 4 (po skopiowaniu) | Zgodność |
+|---|---|---|---|
+| mcp-zrodla-prawa-v1 | 6 | 6 | ✅ |
+| audit-trail-portal-v1 | 4 | 4 | ✅ |
+| sync-dzu-automatyczny-v1 | 6 | 6 | ✅ |
+| prawny-router-v3 | 21 | 21 | ✅ |
+| shared | 125 | 125 | ✅ |
+| audyt-systemu-v4 | 15 | 15 | ✅ |
+
+Wszystkie 6 katalogów skopiowane w całości do `/home/claude/pelna_dostawa/`,
+spakowane do **jednego** archiwum `skille-i-dokumentacja-2026-07-13.zip`
+(zawiera też `DOKUMENTACJA-WDROZENIOWA-2026-07-13.md`, tym razem **wewnątrz**
+archiwum, nie jako osobny `present_files`). `present_files` wywołany
+wyłącznie na tym archiwum ZIP.
+
+### 4. KOREKTA (ta sama sesja, bezpośrednio po powyższym) — jeden zbiorczy ZIP też był odstępstwem
+
+Użytkownik zapytał wprost, czy zbiorcze pakowanie 6 skilli w jeden plik jest
+zgodne z zasadą. Ponowna, dokładna lektura wykazała: zapis w SKILL.md używa
+liczby pojedynczej (`<skill>.zip`), a precedens z `AUDYT-2026-07-10b` mówi
+wprost o **dwóch osobnych archiwach** ("oba skille dostarczone... jako
+kompletne **archiwa** ZIP"), nie jednym zbiorczym. Naprawiono: 6 osobnych
+plików `<skill>.zip`, każdy zweryfikowany 1:1 (na dysku = w archiwum: 6/6,
+4/4, 6/6, 21/21, 125/125, 15/15), plus osobny
+`DOKUMENTACJA-WDROZENIOWA-2026-07-13.zip` dla pliku spoza struktury
+któregokolwiek skilla — spakowany osobno (nie luzem), mimo że nie jest
+częścią żadnego skilla i zasada wprost go nie adresuje.
+
+### 5. WNIOSEK
+
+Naruszenie odnotowane jako CRIT zgodnie z literą ZASADY 7 ("naruszenie tej
+zasady jest błędem krytycznym równoważnym CRIT"). Naprawione w tej samej
+sesji, natychmiast po wykryciu, bez czekania na kolejny audyt. Błędy CRIT: 1
+(ten). Nowych plików: 0 (sesja czysto naprawcza/dostawcza).
+
+
+
+**Zakres:** Użytkownik zapytał wprost, czy `walidator_cytowan.py` wymaga
+dodatkowej implementacji po stronie portalu, i zlecił jej dodanie do paczki
+razem z instrukcją. Odpowiedź: TAK — README (`shared/tools/README.md`) od
+sesji 2026-07-12 opisywał krok 1 ("zapisz bloki server_tool_use/*_tool_result
+do logu sesji") jako coś do zrobienia, bez dostarczonego kodu. Ta sesja to
+domyka.
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Nowe skrypty | 2 (`extract_api_verification_log.py`, `export_gate.py`), oba w `shared/tools/` |
+| Nowy fixture testowy | 1 (`przyklady/konwersacja_api_przyklad.json`) |
+| Pliki zaktualizowane | `shared/tools/README.md` (sekcja integracji + tabela statusu testów), `shared/DEPENDENCY-GRAPH.md` (2 nowe wiersze) |
+| Testy wykonane | 4 (self-test ekstraktora, self-test bramki ścieżka negatywna, test bramki ścieżka pozytywna, test end-to-end na realnym fixture `przyklad_pisma.md` + wyekstrahowanym logu z `konwersacja_api_przyklad.json`) — wszystkie PASS |
+| Błędy CRIT | 0 |
+
+### 2. extract_api_verification_log.py (nowy)
+
+Buduje `sesja.json` (SCHEMA_LOGU wymagany przez `walidator_cytowan.py`)
+automatycznie z surowej konwersacji Claude API, zamiast wymagać ręcznego
+budowania tego pliku przez portal. Logika: dla każdego bloku
+`server_tool_use` (web_search/web_fetch) w kolejności występowania, zapamiętuje
+poprzedzający blok `text` jako `query_context` (najsilniejszy sygnał do fuzzy
+matchingu w walidatorze — zwykle zawiera numer artykułu/Dz.U./sygnatury),
+dopasowuje odpowiadający `*_tool_result` po `tool_use_id`, i buduje zdarzenie.
+Wywołania narzędzi bez dopasowanego wyniku (ucięta odpowiedź, timeout) są
+świadomie pomijane z ostrzeżeniem — NIE generują fałszywego zdarzenia
+weryfikacji.
+
+**Self-test:** konwersacja z 1× web_fetch (z wynikiem), 1× web_search (z
+wynikiem), 1× web_fetch BEZ wyniku (symulacja ucięcia) → poprawnie wydobyto
+dokładnie 2 zdarzenia, poprawnie pominięto trzecie z czytelnym ostrzeżeniem.
+
+**Jawne zastrzeżenie w kodzie i README:** kształt bloków `server_tool_use`/
+`*_tool_result` odzwierciedla udokumentowaną strukturę Anthropic API w
+chwili pisania, ale nie był testowany wobec PRAWDZIWEJ odpowiedzi API z tego
+środowiska — programista portalu musi to zweryfikować jako pierwszy krok
+integracyjny.
+
+### 3. export_gate.py (nowy)
+
+Łączy `extract_api_verification_log.py` + `walidator_cytowan.py` w jedno
+wywołanie — jedyny punkt, który portal realnie musi wpiąć w pipeline (tuż po
+HYBRID-VALIDATION, przed `present_files`/eksportem `.docx`).
+
+**Testy:**
+- self-test ścieżka negatywna: dokument z 2 powołaniami, konwersacja API
+  weryfikująca tylko 1 → poprawna blokada (exit 1), poprawnie wskazane
+  dokładnie to jedno niezweryfikowane powołanie (`art. 415 KC`).
+- test ścieżka pozytywna (wykonany osobno, nie w self-test): dokument z 1
+  powołaniem w pełni zweryfikowanym → poprawne dopuszczenie (exit 0).
+- **test end-to-end na realnych fixture'ach systemu:** `extract_api_
+  verification_log.py` na `przyklady/konwersacja_api_przyklad.json` → log
+  pośredni z 2 zdarzeniami → `walidator_cytowan.py` na istniejącym
+  `przyklady/przyklad_pisma.md` → poprawnie: 2/4 powołania zweryfikowane
+  (te dwa, które faktycznie pokrywa przykładowa konwersacja), 2/4 poprawnie
+  oznaczone jako brak weryfikacji (`art. 5 KC`, `Dz.U. 2019 poz. 1145` —
+  nie były częścią tej konkretnej symulowanej konwersacji, więc słusznie
+  nie mają potwierdzenia).
+
+### 4. AKTUALIZACJA DOKUMENTACJI
+
+`shared/tools/README.md`: sekcja "Integracja po stronie portalu" oznaczona
+jako częściowo zamknięta (kroki 1-2 zaimplementowane i przetestowane, krok
+"zapisywanie pełnej konwersacji API po stronie kodu portalu" pozostaje po
+stronie developera z definicji — nie da się tego zrobić bez dostępu do kodu
+portalu). Dodana tabela statusu testów. `shared/DEPENDENCY-GRAPH.md`
+rozszerzony o 2 nowe wiersze.
+
+### 5. STRUKTURA SYSTEMU — SNAPSHOT
+
+- Skille user/ łącznie: 36 (bez zmian — te 2 skrypty są rozszerzeniem
+  istniejącego `shared/tools/`, nie nowym skillem)
+- Pliki .py w `shared/tools/`: 3 (było 1: `walidator_cytowan.py`)
+- Testy automatyczne wykonane i zaliczone w tej sesji: 4
+
+
+
+**Zakres:** Użytkownik zapytał: "a co z wcześniejszymi py, które już powinny być
+obecne w skilach w user." Odpowiedź wymagała weryfikacji, nie zgadywania —
+zgodnie z ogólną zasadą systemu. Wykonano pełne przeszukanie `/mnt/skills/user`
+pod kątem plików `*.py` oraz wzmianek `.py` w treści `*.md`, żeby ustalić co
+faktycznie istnieje na dysku (a nie tylko co jest wzmiankowane).
+
+### 1. USTALENIE
+
+Oba skrypty wzmiankowane w `shared/SKILL.md`, `shared/DEDUPLICATION-POLICY.md`,
+`shared/DEPENDENCY-GRAPH.md`, `dr-03/SKILL.md`, `dr-16/SKILL.md` **faktycznie
+istnieją i są kompletne**, pochodzą z **wcześniejszej, odrębnej sesji audytu
+komercyjnego z 2026-07-12** (referencje w kodzie do "punkt 1"/"punkt 2 audytu
+komercyjnego" nie odpowiadają numeracji audytu z 2026-07-13 — to inny,
+wcześniejszy zestaw rekomendacji, komplementarny do tego z tej sesji):
+
+| Skrypt | Adresuje | Status po weryfikacji |
+|---|---|---|
+| `audyt-systemu-v4/scripts/ci_check_shared.py` | "shared/ jako single point of failure bez CI" (audyt 2026-07-12, punkt 2) | ✅ URUCHOMIONY na całym repo (615 plików .md): 0 zerwanych odwołań, 0 duplikatów bajtowych, kod wyjścia 0 |
+| `shared/tools/walidator_cytowan.py` | "egzekwowanie HARD GATE jest instrukcyjne, nie deterministyczne" (audyt 2026-07-12, punkt 1) | ✅ URUCHOMIONY na 4 zestawach danych: syntetyczny (.md, wykrył brakującą weryfikację art. 415 KC), 2 fixture'y dostarczone (`przyklady/sesja_pelna.json` → OK, `przyklady/sesja_niepelna.json` → poprawnie FAIL na I CSK 4821/23), oraz .docx (python-docx 1.2.0 dostępny w środowisku, ścieżka .docx działa poprawnie) |
+| `audyt-systemu-v4/scripts/install_precommit_hook.sh` | instalacja ci_check_shared.py jako git pre-commit hook | Przejrzany — logika poprawna (blokuje commit przy zerwanym odwołaniu, nie blokuje przy samych duplikatach) |
+
+### 2. WNIOSEK
+
+System ma teraz **dwie niezależne, komplementarne warstwy deterministyczne
+poza LLM**, obie w pełni funkcjonalne i przetestowane:
+- z sesji 2026-07-12: `ci_check_shared.py` (CI struktury silnika) +
+  `walidator_cytowan.py` (deterministyczna bramka cytowań w gotowym dokumencie),
+- z sesji 2026-07-13/13b: `mcp-zrodla-prawa-v1`, `audit-trail-portal-v1`,
+  `sync-dzu-automatyczny-v1` (MCP jako uzupełnienie HARD GATE, audit-trail
+  hash-chain, automatyzacja wykrywania Dz.U.).
+
+Żadna kolizja ani duplikacja funkcjonalna między obiema sesjami nie została
+znaleziona — `ci_check_shared.py` audytuje SILNIK (pliki skilli),
+`walidator_cytowan.py` audytuje PISMO (produkt pracy), a trzy skille z tej
+sesji adresują zupełnie inne warstwy (źródła prawa, log zdarzeń, mapa Dz.U.).
+`ci_check_shared.py` uruchomiony po dodaniu 3 nowych skilli z tej sesji
+potwierdza brak regresji (0 błędów na 615 plikach, w tym nowo dodanych).
+
+### 3. Błędy CRIT: 0. Nowych plików: 0 (sesja czysto weryfikacyjna).
+
+
+
+**Zakres:** Kontynuacja AUDYT-2026-07-13. Użytkownik zlecił: "stwórz do tego
+kompletną dokumentację i analogiczne dodaj inne skrypty py które wymagają
+działania programisty na portalu."
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Nowa dokumentacja | 1 (`DOKUMENTACJA-WDROZENIOWA-2026-07-13.md`, katalog główny user/) |
+| Nowe skrypty Python | 6 (2 na skill × 3 skille) |
+| Testy jednostkowe/self-test wykonane | 6/6 sukces (kod wyjścia 0 dla wszystkich) |
+| Test integracyjny cross-script | 1 (append_event.py → hash_chain_verify.py, na wspólnym pliku, sukces) |
+| Błędy CRIT | 0 |
+| Zmiana statusu flag WARN-OTWARTE | F-8/F-9/F-10 — treść zaktualizowana (patrz niżej), żadna NIE zamknięta w całości (wymagają jeszcze realnego środowiska developera) |
+
+### 2. Nowe skrypty — mcp-zrodla-prawa-v1
+
+- **test_mcp_protocol.py**: klasyfikator odpowiedzi connectora
+  (FOUND/NOT_FOUND/AMBIGUOUS/ERROR) + reguła `wymaga_fallbacku_hardgate()`.
+  6 testów jednostkowych, wszystkie przechodzą (`python -m unittest
+  test_mcp_protocol.py -v` → "Ran 6 tests ... OK").
+- **connector_health_check.py**: health-check listy connectorów MCP z plikiem
+  konfiguracyjnym `connectors.json`. Self-test na lokalnym serwerze HTTP
+  (3 przypadki: 200 OK, 500, connection refused) — wszystkie poprawnie
+  sklasyfikowane, self-test PASS.
+
+### 3. Nowe skrypty — audit-trail-portal-v1
+
+- **append_event.py**: strona zapisu do hash-chain (uzupełnienie
+  hash_chain_verify.py, który tylko weryfikuje). Self-test round-trip (3
+  zdarzenia) — PASS. **Test integracyjny wykonany osobno**: append_event.py
+  (3 wywołania CLI) → hash_chain_verify.py na tym samym pliku →
+  "OK: łańcuch nienaruszony (3 wpisów)".
+- **router_event_parser.py**: wprowadza i implementuje konwencję znacznika
+  `<!--AUDIT_EVENT:{...}-->` do wydobywania zdarzeń z tekstu odpowiedzi routera
+  (nowość względem specyfikacji z AUDYT-2026-07-13 — tam był tylko opis
+  mapowania kroków routera na zdarzenia, bez mechanizmu wydobycia). Self-test
+  na przykładzie z 4 znacznikami (2 poprawne, 2 celowo błędne: nieznany typ
+  zdarzenia + niepoprawny JSON) — poprawnie zapisano 2, poprawnie odrzucono 2
+  z czytelnym ostrzeżeniem na stderr. PASS.
+
+### 4. Nowe skrypty — sync-dzu-automatyczny-v1
+
+- **mock_eli_server_test.py**: test end-to-end całego przepływu
+  (wczytaj_numery_z_mapy → pobierz_nowe_pozycje_eli → zbuduj_raport) wobec
+  lokalnego mock-serwera HTTP symulującego Sejm ELI API — bez dostępu do
+  internetu. Wynik: poprawnie pobrano 2 pozycje testowe, poprawnie rozróżniono
+  "już w mapie" (Kodeks cywilny, nowelizacja) od "nowa pozycja" (Ustawa
+  testowa Z), raport wygenerowany poprawnie. **To najsilniejszy dostępny dowód
+  poprawności logiki bez dostępu do api.sejm.gov.pl z tego środowiska.**
+- **bootstrap_last_sync_date.py**: idempotentna inicjalizacja `.last_sync_date`
+  na podstawie najnowszego `mapa_dzu_YYYY-MM-DD.md` w katalogu referencyjnym.
+  Self-test: pierwsze uruchomienie tworzy plik z poprawną datą (2026-07-04
+  wybrana spośród dwóch testowych plików mapy), drugie uruchomienie
+  potwierdza idempotentność (brak nadpisania). PASS.
+
+### 5. Dokumentacja wdrożeniowa
+
+`DOKUMENTACJA-WDROZENIOWA-2026-07-13.md` (katalog główny `/mnt/skills/user/`)
+zawiera: diagram architektury (przepływ router → MCP/HARD GATE → audit-trail;
+oraz równoległy przepływ harmonogram → sync-dzu → sesja audytowa), tabele
+plik→rola dla każdego z 3 skilli, checklistę wdrożenia produkcyjnego (9 pozycji),
+instrukcję uruchomienia wszystkich self-testów jedną sekwencją poleceń, oraz
+sekcję "Czego ta dokumentacja świadomie NIE obiecuje" (jawne ograniczenia,
+zgodnie z konwencją limitations stosowaną w SKILL.md tego systemu).
+
+### 6. AKTUALIZACJA WARN-OTWARTE (F-8, F-9, F-10)
+
+Żadna flaga nie została zamknięta w całości — wszystkie trzy nadal wymagają
+działania w realnym środowisku developera (realny connector MCP, realny
+system prompt portalu z konwencją znacznika, realne api.sejm.gov.pl). Treść
+zaktualizowana, żeby odzwierciedlić, że **logika każdego komponentu jest już
+w pełni przetestowana lokalnie** i pozostaje wyłącznie krok integracji ze
+światem zewnętrznym — patrz WARN-OTWARTE.md dla pełnej, zaktualizowanej treści.
+
+### 7. STRUKTURA SYSTEMU — SNAPSHOT
+
+- Skille user/ łącznie: 36 (bez zmiany liczby względem AUDYT-2026-07-13)
+- Pliki nowe tej sesji: 7 (6 skryptów .py + 1 dokumentacja .md)
+- Pliki .py w systemie łącznie w tych 3 skillach: 8 (2 istniejące + 6 nowych)
+- Testy automatyczne wykonane i zaliczone w tej sesji: 7 (6 self-testów/
+  testów jednostkowych + 1 test integracyjny append→verify)
+
+
+
+**Zakres:** Realizacja rekomendacji #2, #4, #6 z audytu komercyjnego silnika
+(przeprowadzonego tego samego dnia, raport `audyt-komercyjny-silnika-prawnego.md`).
+Użytkownik zlecił bezpośrednio: "Zrób to" wobec trzech konkretnych rekomendacji +
+"gotowe skile daj mi tak jak nakazuje audyt systemu" — czyli zgodnie z ZASADĄ 7
+(OUTPUT-COMPLETENESS) i konwencjami frontmatter/changelog obowiązującymi w systemie.
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Nowe skille | 3 (mcp-zrodla-prawa-v1, audit-trail-portal-v1, sync-dzu-automatyczny-v1) |
+| Skille zmodyfikowane | 1 (prawny-router-v3: 3.14 → 3.15) |
+| Skille user/ łącznie po sesji | 36 (było 33) |
+| Skrypty referencyjne przetestowane lokalnie | 2/2 (hash_chain_verify.py — test integralności + test manipulacji;
+  sync_dzu_eli.py — test parsowania mapy + budowy raportu, BEZ testu wobec żywego API Sejm ELI, patrz flagi otwarte) |
+| Błędy CRIT | 0 |
+| Nowe flagi otwarte (integracyjne, nie merytoryczne) | 3 (F-8, F-9, F-10 — patrz WARN-OTWARTE.md) |
+
+### 2. mcp-zrodla-prawa-v1 (nowy skill)
+
+Warstwa protokołu integracji MCP jako uzupełnienie (nie zamiennik) HARD GATE.
+Zawiera: SKILL.md z 4-krokowym protokołem (wykrycie connectora → zapytanie →
+fallback do HARD GATE → obsługa sprzeczności źródeł), references/KONEKTORY-
+REKOMENDOWANE.md (rekomendacja integracji z istniejącymi projektami OSS zamiast
+budowy własnych connectorów od zera — zgodnie z wnioskiem z benchmarku
+konkurencji w audycie komercyjnym), references/SCHEMAT-ODPOWIEDZI-MCP.md
+(format FOUND/NOT_FOUND/AMBIGUOUS/ERROR), scripts/przyklad-adapter-
+normalizujacy.md (ilustracja, nie gotowy serwer produkcyjny).
+
+**Integracja z prawny-router-v3:** dodano do `dependencies.requires`, do
+`required_modules` (opcjonalny — tani koszt gdy MCP niepodłączone), i do
+samego bloku HARD GATE w treści SKILL.md (odwołanie "Warstwa MCP (jeśli
+podłączona)"). Router → 3.15, changelog zaktualizowany.
+
+**Zasada nadrzędna wyraźnie zapisana w skillu:** MCP nigdy nie zastępuje HARD
+GATE — router musi działać poprawnie przy MCP=0 connectorów podłączonych
+(stan obecny każdego wdrożenia dzień zero).
+
+### 3. audit-trail-portal-v1 (nowy skill)
+
+Specyfikacja logu zdarzeń zgodnego z art. 12 AI Act, do wdrożenia PO STRONIE
+PORTALU (silnik/skille nie mają trwałej pamięci między sesjami, więc nie mogą
+same prowadzić logu). Zawiera: tabelę 8 typów zdarzeń do logowania
+(SESSION_START, ROUTING_DECISION, HARDGATE_VERIFICATION, ENTITY_CHECK,
+DOCUMENT_GENERATED, STOP_ESCALATION, DISCLAIMER_SHOWN, SESSION_END), format
+JSON Lines z hash-chain SHA-256, mapowanie punktów emisji na kroki
+prawny-router-v3, oraz jawne rozróżnienie co pokrywa art. 12 AI Act a czego nie
+(dokumentacja techniczna art. 11 i nadzór ludzki art. 14 pozostają poza
+zakresem tego skilla).
+
+**scripts/hash_chain_verify.py — przetestowany lokalnie** na syntetycznym logu
+2-wpisowym: (a) log nienaruszony → "OK: łańcuch nienaruszony (2 wpisów)",
+kod wyjścia 0; (b) log z manipulacją jednego pola payload → wykryte poprawnie,
+"NARUSZENIE INTEGRALNOŚCI: pierwszy niezgodny wpis to seq=2", kod wyjścia 1.
+Logika kryptograficzna potwierdzona jako poprawna i deterministyczna.
+
+### 4. sync-dzu-automatyczny-v1 (nowy skill)
+
+Automatyzacja WYKRYWANIA nowych/zmienionych pozycji Dz.U./M.P. przez Sejm ELI
+API — **wyraźnie NIE automatyzuje decyzji ani zapisu do mapa_dzu** (zasada
+"nigdy nie zgaduj numeru" z FAZY 3 audyt-systemu-v4 pozostaje w pełni w mocy).
+Zawiera: SKILL.md z opisem przepływu (harmonogram → diff → raport → sesja
+audytowa człowiek+Claude → ręczna aktualizacja mapy jak dotychczas),
+references/FORMAT-RAPORTU-ROZNIC.md (jak sesja FAZA 3 ma czytać raport),
+references/HARMONOGRAM-CRON.md (przykłady cron i GitHub Actions),
+scripts/sync_dzu_eli.py (skrypt referencyjny).
+
+**scripts/sync_dzu_eli.py — przetestowany częściowo lokalnie:** naprawiono
+błąd w funkcji `wczytaj_numery_z_mapy` (pozostałość refaktoryzacji, martwa
+gałąź `if False else`), następnie zweryfikowano poprawność parsowania mapy
+(regex `Dz\.U\.|M\.P\. RRRR poz. N`) oraz budowy raportu różnic na
+syntetycznych danych — działa poprawnie. **Nie przetestowano wobec żywego
+Sejm ELI API** — środowisko audytowe (sandbox tej sesji) nie ma dostępu
+sieciowego do domen .gov.pl (lista dozwolonych domen ogranicza się do
+github/npm/pypi i pokrewnych). To świadomie odnotowana flaga integracyjna,
+nie ukryta wada — patrz F-10 w WARN-OTWARTE.md.
+
+### 5. AKTUALIZACJA REJESTRÓW
+
+- `WARN-OTWARTE.md`: dodano F-8, F-9, F-10 (flagi integracyjne dot. trzech
+  nowych skilli — wymagają testu/wdrożenia przez developera przed uznaniem za
+  "produkcyjnie zweryfikowane", zgodnie z limitations zapisanymi w każdym
+  SKILL.md).
+- `CHECKLIST-DEDUP.md`: dodano 2 wpisy — "Weryfikacja deterministyczna aktu
+  prawnego (MCP)" → `mcp-zrodla-prawa-v1` i "Audit-trail / hash-chain zdarzeń"
+  → `audit-trail-portal-v1` — żeby przyszłe sesje nie duplikowały tej logiki
+  w innym skillu.
+- Snapshot liczby skilli: 33 → 36.
+
+### 6. STRUKTURA SYSTEMU — SNAPSHOT
+
+- Skille user/ łącznie: 36 (+3: mcp-zrodla-prawa-v1, audit-trail-portal-v1,
+  sync-dzu-automatyczny-v1)
+- prawny-router-v3: 3.14 → 3.15 (integracja MCP jako opcjonalna warstwa
+  przed HARD GATE, required_modules +1, dependencies.requires +1)
+- Pliki nowe łącznie: 11 (3× SKILL.md + 8 plików references/scripts)
+- Testy lokalne wykonane: 2 (hash-chain — pełny sukces; sync Dz.U. — sukces
+  logiki, bez testu sieciowego wobec API rządowego)
+
+
+
+**Zakres:** Kontynuacja audytu gotowości komercyjnej silnika (AUDYT-2026-07-12f).
+Użytkownik zlecił bezpośrednio: (1) scalić 4 duplikaty znalezione przez
+`ci_check_shared.py` — jeśli oba pliki faktycznie używane, jeden do `shared/`
+i odwołania bezpośrednio na nową lokalizację; (2) umieścić pozostałe narzędzia
+(`walidator_cytowan.py`) tam, gdzie faktycznie przynależą wg logiki systemu,
+nie automatycznie w audyt-systemu-v4.
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Duplikaty scalone | 4/4 |
+| Nowe pliki kanoniczne w shared/ | 2 (STALKING-NEKANIE.md, PRZESLUCHANIE-SWIADKOW-KPC.md) |
+| Pliki usunięte łącznie | 13 (4 pary duplikatów = 4 usunięte + kanoniczny zachowany/nowy ×4... patrz szczegóły; + 9 martwych stubów odkrytych przy okazji) |
+| Odkrycie poboczne | DEDUPLICATION-POLICY.md od 2026-06-13 fałszywie deklarował 9 plików jako usunięte — nie były |
+| Narzędzia przeniesione | walidator_cytowan.py: audyt-systemu-v4/scripts/ → shared/tools/ |
+
+### 2. DUPLIKAT 1 — NAZEWNICTWO-STRON (kanoniczny już istniał)
+
+`analizator-dowodow-v3/modules/MOD-NAZEWNICTWO-STRON.md` usunięty (był
+identyczny z `shared/NAZEWNICTWO-STRON.md`, które już było kanoniczne i już
+konsumowane przez shared/FORMAL-CHECK.md i pisma-proste-v2). 2 wywołania
+`view()` w `analizator-dowodow-v3/SKILL.md` przekierowane. Pełny opis:
+CHECKLIST-DEDUP.md NOTA-14.
+
+### 3. DUPLIKAT 2 — stalking (nowy plik kanoniczny)
+
+`dr-03/modules/mod-KK-stalking-szczegolowy.md` + `prawny-router-v3/
+references/stalking-nekanie.md` → nowy `shared/STALKING-NEKANIE.md`.
+Oba oryginały używane (dr-03 checklist + MAPA-AKTOW śledziły pierwszy;
+mod-KK-art190a-stalking.md i kwalifikator odwoływały się do drugiego) —
+zgodnie z zasadą zlecenia, scalone do shared/, nie do jednej z istniejących
+lokalizacji. Przy okazji naprawiono naruszenie własnej zasady routera
+("nie duplikuj treści dziedzinowej w routerze"). Pełny opis: NOTA-12.
+
+### 4. DUPLIKAT 3 — przesłuchanie świadków KPC, ramowy (nowy plik kanoniczny)
+
+`dr-16/modules/mod-KPC-przesluchanie-swiadkow.md` + `prawny-router-v3/
+references/przesluchanie-swiadkow.md` → nowy `shared/
+PRZESLUCHANIE-SWIADKOW-KPC.md`. Jawnie odróżniony w dokumentacji od pełnego
+skilla `przesluchanie-swiadkow-v2-min90` (inny zakres — zaawansowana
+strategia vs ramowe przepisy KPC), żeby nie stworzyć nowego pozornego
+duplikatu przy kolejnym audycie. Pełny opis: NOTA-13.
+
+### 5. DUPLIKAT 4 — HYBRID-VALIDATION + odkrycie: 9 plików fałszywie zadeklarowanych jako usunięte
+
+Trzeci CI-wykryty duplikat okazał się innej natury niż pozostałe: oba pliki
+(`pisma-proste-v2/references/HYBRID-VALIDATION.md`,
+`prawny-router-v3/references/HYBRID-VALIDATION.md`) były 15-liniowymi
+stubami przekierowującymi do `shared/HYBRID-VALIDATION.md` (171 linii,
+odrębna treść — nie trójstronny duplikat). Weryfikacja realnych wywołań:
+`prawny-router-v3/SKILL.md` i `pisma-proste-v2/SKILL.md` JUŻ wołają
+`shared/HYBRID-VALIDATION.md` bezpośrednio — oba stuby były martwe.
+
+Sprawdzenie `shared/DEDUPLICATION-POLICY.md` ujawniło, że te dwa pliki (i 7
+pokrewnych: `pisma-procesowe-v3/modules/MOD-WALIDACJA.md`,
+`prawny-router-v3/references/MOD-WALIDACJA.md`,
+`prawny-router-v3/references/ISAP-AUDIT-PROTOCOL.md`,
+`pisma-proste-v2/references/INTAKE-GAP.md`,
+`pisma-proste-v2/references/POST-VALIDATION.md`,
+`pisma-proste-v2/references/terminy.md`,
+`pisma-proste-v2/references/M5-terminy.md`) były już opisane jako
+"Stuby usunięte 2026-06-13" — **ale 9 z 10 wciąż leżało na dysku**. Jedyny
+faktycznie usunięty wcześniej: `raport-sytuacyjny-v2/references/
+HYBRID-VALIDATION.md`.
+
+Zweryfikowano każdy z 9 pod kątem żywych wywołań `view()` na pełną ścieżkę
+(zero trafień dla każdego) i usunięto naprawdę. `pisma-proste-v2/
+references/M1-zasady.md` (ZASADA 6, tabela ekonomii modułów) wskazywał
+usunięty `M5-terminy.md` — zaktualizowany na bezpośrednie
+`view shared/terminy.md`. `DEDUPLICATION-POLICY.md` skorygowany z jawną
+adnotacją o fałszywej deklaracji. Pełny opis: NOTA-14.
+
+### 6. RELOKACJA — walidator_cytowan.py
+
+Zbudowany w poprzedniej sesji w `audyt-systemu-v4/scripts/` (obok
+`ci_check_shared.py`). Na wyraźne pytanie użytkownika o właściwe
+umiejscowienie: `ci_check_shared.py` audytuje SILNIK (zostaje w
+audyt-systemu-v4 — narzędzie deweloperskie, zgodnie z definicją
+użytkownika "audyt systemu jest dla developera"). `walidator_cytowan.py`
+audytuje PRODUKT PRACY (pismo) i jest bramką produkcyjną wywoływaną przez
+portal przed `present_files`, konsumowaną koncepcyjnie przez
+pisma-procesowe-v3 i pisma-proste-v2 — czyli tej samej klasy co
+`shared/HYBRID-VALIDATION.md`. Przeniesiony do nowego `shared/tools/`
+(pierwszy katalog z kodem, nie markdown, w shared/ — jawnie oznaczony w
+shared/SKILL.md jako "nie wczytuj przez view()"). README rozdzielone:
+`audyt-systemu-v4/scripts/README.md` (tylko CI) i `shared/tools/README.md`
+(tylko walidator, z wyjaśnieniem rozróżnienia).
+
+### 7. WERYFIKACJA
+
+`ci_check_shared.py` uruchomiony ponownie po wszystkich zmianach — patrz
+wynik w commicie git tej sesji. Wszystkie zmiany zacommitowane z opisowymi
+komunikatami w repozytorium `/mnt/skills/user/` (wdrożonym w AUDYT-2026-07-12f).
+
+**Status:** ZAMKNIĘTE.
+
+## AUDYT-2026-07-12f — Audyt gotowości komercyjnej silnika: wdrożenie git (punkt 3) + zamknięcie duplikatu kwalifikatora karnomaterialnego (punkt 4)
+
+**Zakres:** Dwie naprawy strukturalne zlecone bezpośrednio przez użytkownika
+w ramach zewnętrznego audytu gotowości komercyjnej całego silnika (nie
+audytu wewnętrznego DZU/WARN) — brak realnego wersjonowania i niescalony
+duplikat na poziomie routera zgłoszony w prawny-router-v3 limitations
+2026-07-04, poza zakresem WARN-OTWARTE.md (nigdy nie miał numeru WARN/F).
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Ryzyko krytyczne (audyt komercyjny) | 1 (brak wersjonowania — incydent odzyskiwania 7 plików z archiwum zip, shared/SKILL.md changelog 2.3) |
+| Duplikat plikowy | 1 (kwalifikator karnomaterialny, MD5 identyczny) |
+| Nowe pliki | 0 treściowych — 1 repozytorium git (`/mnt/skills/user/.git`) |
+| Usunięte pliki | 1: `prawny-router-v3/references/kwalifikator-karnomaterialny.md` |
+| Zmodyfikowane pliki | 4: `prawny-router-v3/SKILL.md` (v3.13→3.14), `dr-03/.../mod-KW-kodeks-wykroczen.md`, `dr-03/.../mod-KK-KPK-framework-karne.md`, `audyt-systemu-v4/references/CHECKLIST-DEDUP.md` (NOTA-11) |
+
+### 2. NAPRAWA — punkt 3 (wersjonowanie)
+
+`git init` w `/mnt/skills/user/`, commit bazowy obejmujący cały bieżący stan
+(34 katalogi skilli, ~7.5 MB, 721 obiektów). Od tego commita każda zmiana
+w plikach kanonicznych (w tym `shared/`, o najwyższym in-degree w systemie)
+jest diffowalna i odwracalna przez `git log`/`git diff`/`git revert` —
+zamiast rekonstrukcji z ręcznych archiwów zip przy podejrzeniu utraty pliku.
+Naprawa duplikatu (punkt 4, niżej) zakomitowana jako osobny, opisany commit
+na tym samym repozytorium — pierwszy realny przykład użycia.
+
+**Uwaga dla przyszłych sesji audytowych:** ten plik (`/mnt/skills/user/`)
+jest teraz repozytorium git. Sesje `audyt-systemu-v4` powinny commitować
+swoje naprawy z opisowym komunikatem zamiast polegać wyłącznie na wpisach
+w tym dzienniku — dziennik i git się uzupełniają (dziennik = uzasadnienie
+"dlaczego", git = precyzyjny "co" na poziomie linii).
+
+### 3. NAPRAWA — punkt 4 (duplikat kwalifikatora karnomaterialnego)
+
+Zweryfikowano `diff` + `md5sum`: `prawny-router-v3/references/kwalifikator-karnomaterialny.md`
+i kanoniczny `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md`
+były bajt-w-bajt identyczne (589 linii, ten sam hash) — nie wariant, czysta
+kopia. Kanoniczność `dr-03/modules/...` już wcześniej ustalona w
+`prawny-router-v3` `required_modules` pod UP-3.
+
+Dwa realne miejsca wywołania nadal wskazywały na kopię w routerze — oba
+wewnątrz samego DR-03 (`mod-KW-kodeks-wykroczen.md` i
+`mod-KK-KPK-framework-karne.md`, po 2 odwołania każdy: `view` + wiersz
+tabeli "ŁĄCZ Z"). Przekierowane na ścieżkę kanoniczną. Duplikat usunięty.
+`prawny-router-v3/SKILL.md` limitations zaktualizowane (ROZWIĄZANE, zamyka
+ZNALEZISKO 2026-07-04) + changelog v3.14. Pełny opis: `CHECKLIST-DEDUP.md`
+NOTA-11.
+
+**Status:** ZAMKNIĘTE (oba punkty).
+
 ## AUDYT-2026-07-12e — Reguła 22: TWARDY trigger słowny "pytania do świadka" (naprawa F-8b, kontynuacja F-8) — sprawa XI P 27/26
 
 **Zakres:** Naprawa strukturalna (CRIT — ścieżka routingu pominięta mimo istniejącej

@@ -32,6 +32,13 @@ NIE duplikuje tych technik, tylko dodaje specyfikę dziedzinową spraw rozwodowy
 ```
 □ Jaki problem: rozwód / separacja / alimenty / władza rodzicielska /
   kontakty / podział majątku / ubezwłasnowolnienie / ustalenie ojcostwa?
+  ⚠️ UBEZWŁASNOWOLNIENIE (naprawa 2026-07-15 — wcześniej tylko wzmianka
+  bez treści): pełna procedura (KC art. 12-16, przesłanki całkowite/
+  częściowe, KPC, kurator, PROJEKT LIKWIDACJI z 4 nowymi instrumentami
+  wspieranego podejmowania decyzji — status: skierowany do Sejmu) →
+  view /mnt/skills/user/shared/mod-niepelnosprawnosc-intelektualna-gluchota.md
+  sekcja "BLOK I — NIEPEŁNOSPRAWNOŚĆ INTELEKTUALNA" / I.3 — NIE zatrzymuj
+  się na tej checkliście, ta treść żyje w module współdzielonym.
 □ Czy są małoletnie dzieci? → kluczowe dla sądu i trybu
 □ Jaka właściwość sądu? (SO / SR — zależy od rodzaju sprawy)
 □ Czy strony mają wspólny majątek do podziału?
@@ -139,14 +146,17 @@ T6 — PRZEWLEKŁOŚĆ I KOSZTY:
   i z udziałem OZSS trwają zauważalnie dłużej. Zaradczo: wniosek o zabezpieczenie
   (art. 753 KPC) na czas trwania postępowania.
 
-T7 — ZMIANA SYSTEMOWA OD 2027 R. (MONITORING):
-  ⏳ Od 1 stycznia 2027 r. planowana możliwość rozwiązania małżeństwa przez
-  oświadczenie przed kierownikiem USC (rozwód rejestrowy) — WYŁĄCZNIE dla
-  małżonków BEZ wspólnych małoletnich dzieci. W 2026 r. NIE obowiązuje —
-  wyłącznie postępowanie przed sądem okręgowym. ⚠️ Status projektu/aktu
-  i dokładna data wejścia w życie WYMAGAJĄ odrębnej weryfikacji w ISAP przed
-  każdym użyciem tej informacji w piśmie lub poradzie (informacja o horyzoncie
-  >90 dni — kandydat do wpisu w mapa_dzu MONITORING, patrz audyt-systemu-v4).
+T7 — PRÓBA ZMIANY SYSTEMOWEJ — ZAWETOWANA (VER 2026-07-13, TRYB DZU):
+  ❌ Projekt rozwodu rejestrowego (rozwiązanie małżeństwa przez oświadczenie
+  przed kierownikiem USC, wyłącznie dla małżonków BEZ wspólnych małoletnich
+  dzieci) NIE wejdzie w życie w tym kształcie: Sejm uchwalił ustawę 13.03.2026,
+  Senat poparł 8.04.2026 (60:32), ale Prezydent RP Karol Nawrocki ZAWETOWAŁ ją
+  30.04.2026 — ustawa nie została opublikowana w Dz.U. Postępowanie rozwodowe
+  w 2026 r. i nadal WYŁĄCZNIE przed sądem okręgowym, KRO t.j. 2026.236 bez
+  zmian w tym zakresie. ⚠️ Jeśli w przyszłości pojawi się nowy/podobny projekt
+  (np. po ew. ponownym uchwaleniu przez Sejm większością odrzucającą weto, lub
+  nowa inicjatywa), status WYMAGA odrębnej weryfikacji w ISAP przed użyciem —
+  nie zakładać automatycznie powrotu tego samego kształtu projektu.
 ```
 
 ---
@@ -324,7 +334,7 @@ web_search: "mediacja rozwodowa art 436 445(2) KPC isap.sejm.gov.pl"
 web_search: "ustawa o opiniodawczych zespołach sądowych specjalistów tekst jednolity isap"
 web_search: "art 233 KPC ocena wiarygodności świadka orzecznictwo SN"
 web_search: "art 233 KK fałszywe zeznania orzecznictwo"
-web_search: "rozwód rejestrowy USC 2027 status projektu ustawy"
+web_search: "rozwód rejestrowy USC weto Prezydenta status" (VER 2026-07-13: projekt zawetowany 30.04.2026 — sprawdzać wyłącznie czy pojawiła się NOWA inicjatywa, nie tę samą ustawę)
 ```
 
 ---

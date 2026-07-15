@@ -38,8 +38,14 @@
 | Wypadek przy pracy — procedura/świadczenia/terminy | `dr-04/.../mod-wypadek-przy-pracy-choroba-zawodowa.md` | DR-04 | ✅ wydzielone 06-12 |
 | Praca zdalna — definicja (art.67⁵ KP) + wykładnia MRiPS | `shared/ORKA-BAS-VIII-X-KADENCJA.md` BAS-W03 | DR-04 | ✅ |
 | Praca zdalna — obowiązki/BHP/procedura | `dr-04/.../mod-KP-praca-zdalna.md` | DR-04 | ✅ wydzielone 06-12 |
+| Weryfikacja deterministyczna aktu prawnego/orzeczenia (MCP jako uzupełnienie HARD GATE) | `shared/MCP-INTEGRACJA.md` (protokół) + `shared/KONEKTORY-REKOMENDOWANE.md` (rekomendacje connectorów) + `shared/tools/test_mcp_protocol.py`, `shared/tools/connector_health_check.py` | prawny-router-v3 (required_modules), potencjalnie każdy DR-skill via router | ✅ skonsolidowane 2026-07-13f (wcześniej osobny skill mcp-zrodla-prawa-v1, usunięty — duplikował wzorzec shared/). Kandydat: jeśli w przyszłości jakikolwiek DR-skill zechce odwołać się bezpośrednio do protokołu MCP, ZAWSZE via `view shared/MCP-INTEGRACJA.md`, nie kopiować logiki KROK 1-4 lokalnie |
+| Audit-trail / hash-chain zdarzeń zgodny z art. 12 AI Act | `shared/AUDIT-TRAIL-SPEC.md` (specyfikacja) + `shared/tools/hash_chain_verify.py`, `append_event.py`, `router_event_parser.py` (implementacja referencyjna) | poza silnikiem (portal), punkt odniesienia dla prawny-router-v3 (mapowanie zdarzeń) | ✅ skonsolidowane 2026-07-13f (wcześniej osobny skill audit-trail-portal-v1, usunięty — duplikował wzorzec shared/). Jeśli w przyszłości inny skill potrzebuje logowania zdarzeń/integralności, ZAWSZE odwołanie tutaj, nie nowa implementacja hash-chain gdzie indziej |
+| Weryfikacja/walidacja cytowań w gotowym piśmie wobec logu API | `shared/tools/walidator_cytowan.py` + `extract_api_verification_log.py` + `export_gate.py` (bramka łącząca oba) | portal, wywoływane przed present_files/eksportem | ✅ istniało od 2026-07-12, rozszerzone 2026-07-13d o ekstrakcję logu z surowej odpowiedzi API — jedyna kanoniczna lokalizacja tej funkcji |
+| Automatyczne wykrywanie nowych pozycji Dz.U./M.P. (wejście do FAZY 3) | `audyt-systemu-v4/references/SYNC-DZU-AUTOMATYCZNY.md` + `audyt-systemu-v4/scripts/sync_dzu_eli.py`, `mock_eli_server_test.py`, `bootstrap_last_sync_date.py` | audyt-systemu-v4 FAZA 3 (wejście, nie zamiennik ręcznej weryfikacji) | ✅ skonsolidowane 2026-07-13f (wcześniej osobny skill sync-dzu-automatyczny-v1, usunięty — duplikował wzorzec references/+scripts/ już obecny w audyt-systemu-v4) |
+| Przeszukiwanie archiwalnego rejestru klauzul niedozwolonych UOKiK (lokalnie, po pobraniu CSV) | `analizator-umow-v1/references/szukaj_klauzul_uokik.py` | analizator-umow-v1 (mod-shared-abusive-clauses.md, AB.2) | ✅ nowe 2026-07-13l — kanoniczna lokalizacja, bo narzędzie jest specyficzne dla domeny tego skilla (analiza umów), nie cross-cutting infrastruktura jak shared/tools/. Jeśli inny skill (np. przewodnik-prawny-v2) potrzebowałby tej samej funkcji, ZAWSZE odwołanie tutaj, nie duplikat |
 | Nadużycie prawa (art.5 KC / art.8 KP) | `shared/ORKA-BAS-LEKSYKON.md` BAS-W28 | DR-02, DR-04, DR-16 | ✅ |
 | Kara umowna — miarkowanie (art.484§2 KC) | `shared/ORKA-BAS-LEKSYKON.md` BAS-W33 | DR-02, DR-16 | ✅ |
+| Hierarchia/kategoryzacja źródeł internetowych (RZĄD 1/2A/2B/3) | `shared/HIERARCHIA-ZRODEL.md` | `analizator-przepisow-v2` (odsyła, nie duplikuje), `shared/PRAWO-HARDGATE.md` (KROK 5-RZĄD), `shared/WERYFIKACJA-SLAD.md` (KOTWICA-TEKSTOWA + tabela śladu) — oraz KAŻDY skill podający linki źródłowe użytkownikowi | ✅ wydzielone 2026-07-15b — wcześniej istniało wyłącznie lokalnie w `analizator-przepisow-v2`, co powodowało pomijanie kategoryzacji przy linkach generowanych poza tym skillem (zgłoszone przez użytkownika) |
 | Odsetki: kapitałowe/za opóźnienie/handlowe | `shared/ORKA-BAS-LEKSYKON.md` BAS-W34 | DR-02, DR-16 | ✅ |
 | Nakaz zapłaty: sprzeciw vs zarzuty vs EPU | `shared/ORKA-BAS-LEKSYKON.md` BAS-W35 | DR-02, DR-16 | ✅ |
 | Moc dowodowa dok. urzędowy vs prywatny (art.243-245 KPC) | `shared/ORKA-BAS-LEKSYKON.md` BAS-W30 | DR-02, DR-16 | ✅ |
@@ -82,6 +88,9 @@
 | Milczenie jako przyznanie [PRZYZ-MIL-H/M/L] (art. 229-230 KPC) | `shared/MOD-NEGACJA-DOWODOW.md §BLOK N4` (kanoniczne) | analizator-dowodow-v3 (BLOK-NEGACJA NG4), pisma-procesowe-v3 (sekcja "Fakty bezsporne") | ✅ 2026-06-24 |
 | Spoliation / odmowa przedłożenia dowodu (art. 233 §2 KPC) | `shared/MOD-NEGACJA-DOWODOW.md §N12 + §N6` (kanoniczne) — NIE scalać z MP6-sledczy §6.4 BEH (N12 = technika negacji, BEH-C = wzorzec behawioralny) | analizator-dowodow-v3 (BLOK-NEGACJA NG3), pisma-procesowe-v3 W1.2d | ✅ 2026-06-24 |
 | REJESTR KROKÓW pipeline / śledzenie pominięć / ZAKAZ CICHEGO POMIJANIA | `shared/MOD-STEP-TRACKER.md` (kanoniczne, v1.0.0) — inicjowany w pisma-procesowe-v3 KROK 0-TRACKER; ST-INIT/ST-TRACK/ST-REPORT/ST-FINAL | pisma-procesowe-v3 (KROK 0-TRACKER, REGUŁA NAPRAWY, ZAKAZ-12), shared/MOD-SKAN-DOWODOW-KOMPLETNY (SD-VER) | ✅ 2026-06-24d |
+| Tabele nazewnictwa stron T1-T10, wzory nagłówków N1-N7 | `shared/NAZEWNICTWO-STRON.md` (kanoniczne, istniało już) — NIE duplikować lokalnie w skillach | shared/FORMAL-CHECK.md, analizator-dowodow-v3, pisma-proste-v2 | ✅ 2026-07-12 (NOTA-14) |
+| Stalking i nękanie (art. 190a KK) — szczegółowy framework, 3 znamiona §1 | `shared/STALKING-NEKANIE.md` (kanoniczne, nowe 2026-07-12) — NIE duplikować w dr-03 ani w routerze | dr-03 (mod-KK-art190a-stalking.md, mod-KK-kwalifikator-karnomaterialny.md) | ✅ 2026-07-12 (NOTA-12) |
+| Przesłuchanie świadków — ramowy framework KPC art. 258-305 | `shared/PRZESLUCHANIE-SWIADKOW-KPC.md` (kanoniczne, nowe 2026-07-12) — NIE mylić z pełnym skillem przesluchanie-swiadkow-v2-min90 (inny zakres) | dr-16 | ✅ 2026-07-12 (NOTA-13) |
 | Wektory ataku na świadka SW-A1..SW-A8 (konflikt interesu, zaprzeczenie, relacja wtórna...) | `shared/MOD-ATAK-NA-SWIADKA.md §FAZA 2` (kanoniczne, v1.0.0) — NIE scalać z MOD-NEGACJA-DOWODOW §N8 (N8 = ogólny "atak na świadka" bez procedury; ten moduł = pełna procedura SW-P1..SW-P5 + priorytetyzacja + integracja W2.4c) | pisma-procesowe-v3 (W1.2c ŁD-3b, W2.4c, ZAKAZ-13) | ✅ 2026-06-24d |
 | SW-TARCZKA — antycypacja ataku na NASZEGO świadka | `shared/MOD-ATAK-NA-SWIADKA.md §FAZA 4 SW-TARCZKA` (kanoniczne) — NIE scalać z ŁD-6 antycypacja (ŁD-6 = ogólna antycypacja na łańcuch; SW-TARCZKA = specyficznie dla ogniwa zeznaniowego) | pisma-procesowe-v3 (W2.4c, ZAKAZ-13) | ✅ 2026-06-24d |
 | SW-DETECT — detekcja ogniw zeznaniowych w łańcuchu dowodowym | `shared/MOD-ATAK-NA-SWIADKA.md §FAZA 0` (kanoniczne) — wbudowany w pisma-procesowe-v3 W1.2c ŁD-3b jako automatyczny krok per ogniwo | pisma-procesowe-v3 (ŁD-3b, W2.4c) | ✅ 2026-06-24d |
@@ -245,6 +254,98 @@ modułu A pod innym tytułem, to nie jest podział funkcjonalny — to duplikat.
 NOTA-10 — WSZYSTKIE ZAMKNIĘTE. Zero otwartych WARN/NOTA w tym pliku.*
 
 ---
+
+### NOTA-11: DUPLIKAT — prawny-router-v3/references/kwalifikator-karnomaterialny.md vs dr-03/modules/mod-KK-kwalifikator-karnomaterialny.md — ✅ ZAMKNIĘTE 2026-07-12
+
+Zgłoszone jako ZNALEZISKO w prawny-router-v3/SKILL.md (limitations, 2026-07-04),
+poza zakresem ówczesnej sesji standaryzacji metadanych. Podjęte w ramach
+audytu gotowości komercyjnej silnika (punkt 4).
+
+Weryfikacja: `diff` + `md5sum` — pliki bajt-w-bajt identyczne (589 linii,
+ten sam hash). Nie wariant, nie rozbieżna treść — czysta kopia.
+
+Kanoniczny: `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md`
+(już wskazany jako kanoniczny w prawny-router-v3 required_modules pod UP-3).
+
+**Rozwiązanie:** `prawny-router-v3/references/kwalifikator-karnomaterialny.md`
+USUNIĘTY. Realne miejsca wywołania, które nadal wskazywały na kopię w
+routerze — oba wewnątrz DR-03, mimo że kanoniczny plik leży w tym samym
+katalogu:
+- `dr-03/modules/mod-KW-kodeks-wykroczen.md` (linia z `view` + wiersz tabeli ŁĄCZ Z)
+- `dr-03/modules/mod-KK-KPK-framework-karne.md` (linia z `view` + wiersz tabeli ŁĄCZ Z)
+
+Oba przekierowane na ścieżkę kanoniczną. prawny-router-v3/SKILL.md
+zaktualizowany (v3.13 → 3.14, limitations + changelog).
+
+Wniosek ogólny: znaleziska oznaczone "do weryfikacji w następnym audycie"
+w polu `limitations` poszczególnych skilli nie trafiają automatycznie do
+WARN-OTWARTE.md, jeśli nie zostały jawnie tam wpisane jako WARN/F — warto
+przy kolejnym pełnym audycie DZU przeszukać `limitations:` wszystkich
+SKILL.md pod kątem podobnych niezamkniętych znalezisk.
+
+### NOTA-12: DUPLIKAT — dr-03/modules/mod-KK-stalking-szczegolowy.md vs prawny-router-v3/references/stalking-nekanie.md — ✅ ZAMKNIĘTE 2026-07-12
+
+Wykryte automatycznie przez `audyt-systemu-v4/scripts/ci_check_shared.py`
+(audyt gotowości komercyjnej, pierwsze uruchomienie). `diff`+`md5sum`: bajt-w-bajt
+identyczne (116 linii).
+
+Oba faktycznie używane: `dr-03/SKILL.md` (checklist modułów) i
+`dr-03/MAPA-AKTOW.md` śledziły `mod-KK-stalking-szczegolowy` jako moduł DR-03;
+`dr-03/modules/mod-KK-art190a-stalking.md` i `mod-KK-kwalifikator-karnomaterialny.md`
+odwoływały się (view + 2× prosa) do kopii routera. Router sam deklaruje zasadę
+"nie duplikuj treści modułów dziedzinowych w routerze" (prawny-router-v3/SKILL.md,
+"Zasada odciążenia routera") — kopia w `references/` była jej naruszeniem.
+
+**Rozwiązanie:** nowy plik kanoniczny `shared/STALKING-NEKANIE.md` (treść
+identyczna z obu usuniętych). Oba oryginały usunięte. Zaktualizowane:
+`mod-KK-art190a-stalking.md` (view), `mod-KK-kwalifikator-karnomaterialny.md`
+(2× prosa), `dr-03/SKILL.md` (checklist 20→19 + nota o relokacji),
+`dr-03/MAPA-AKTOW.md` (wskaźnik modułu).
+
+### NOTA-13: DUPLIKAT — dr-16/modules/mod-KPC-przesluchanie-swiadkow.md vs prawny-router-v3/references/przesluchanie-swiadkow.md — ✅ ZAMKNIĘTE 2026-07-12
+
+Wykryte tą samą sesją co NOTA-12. Bajt-w-bajt identyczne (99 linii, art.
+258-305 KPC — ramowy framework, NIE mylić z pełnym skillem
+`przesluchanie-swiadkow-v2-min90`, który ma inny zakres: zaawansowana
+strategia przesłuchania, nie podstawy ustawowe).
+
+Oba faktycznie używane: `dr-16/SKILL.md` (checklist), `dr-16/MAPA-AKTOW.md`
+i `prawo-polskie-v2/ROUTING-MAP.md` (centralna mapa routingu) śledziły moduł
+pod nazwą `dr-16/modules/mod-KPC-przesluchanie-swiadkow`.
+
+**Rozwiązanie:** nowy plik kanoniczny `shared/PRZESLUCHANIE-SWIADKOW-KPC.md`.
+Oba oryginały usunięte. Zaktualizowane: `dr-16/SKILL.md` (checklist 11→10 +
+nota o relokacji), `dr-16/MAPA-AKTOW.md`, `prawo-polskie-v2/ROUTING-MAP.md`.
+
+### NOTA-14: DUPLIKAT — analizator-dowodow-v3/modules/MOD-NAZEWNICTWO-STRON.md vs shared/NAZEWNICTWO-STRON.md + 9 martwych stubów HYBRID-VALIDATION/MOD-WALIDACJA/etc. — ✅ ZAMKNIĘTE 2026-07-12
+
+Wykryte tą samą sesją. Różne od NOTA-12/13: tu kanoniczny plik w `shared/`
+JUŻ istniał — `analizator-dowodow-v3/modules/MOD-NAZEWNICTWO-STRON.md` był
+zbędną kopią, 2 wywołania `view()` w `analizator-dowodow-v3/SKILL.md`
+przekierowane na `shared/NAZEWNICTWO-STRON.md`, kopia usunięta.
+
+**Odkrycie poboczne (istotniejsze niż sam duplikat):** ten sam skan wykrył,
+że `pisma-proste-v2/references/HYBRID-VALIDATION.md` i
+`prawny-router-v3/references/HYBRID-VALIDATION.md` są identyczne — ale
+`shared/DEDUPLICATION-POLICY.md` już od **2026-06-13** deklarował te dwa
+pliki (i 7 pokrewnych: `MOD-WALIDACJA.md` ×2, `ISAP-AUDIT-PROTOCOL.md`,
+`INTAKE-GAP.md`, `POST-VALIDATION.md`, `terminy.md`, `M5-terminy.md`) jako
+"usunięte". Weryfikacja na dysku: 9 z 10 wciąż fizycznie istniało — zero
+żywych `view()` na pełną ścieżkę każdego, więc bezpieczne do usunięcia, ale
+deklaracja "usunięte" była fałszywa od miesiąca i nic tego nie wyłapało.
+
+**Rozwiązanie:** wszystkie 9 usunięte naprawdę. `pisma-proste-v2/references/
+M1-zasady.md` (ZASADA 6, tabela ekonomii modułów) zaktualizowany — wskazywał
+usunięty `M5-terminy.md`, teraz bezpośrednio `shared/terminy.md`.
+`DEDUPLICATION-POLICY.md` skorygowany (nagłówek + adnotacja o fałszywej
+deklaracji). `DEPENDENCY-GRAPH.md` zaktualizowany (kolumny "Wywołujące
+skille" wskazywały nieistniejące już pliki-adaptery jako punkty odniesienia).
+
+**Wniosek ogólny:** deklaracja zamknięcia w pliku polityki ≠ wykonanie.
+Zalecenie na przyszłość: każda sesja audytowa, która pisze "usunięto X",
+powinna kończyć się realnym `rm` w tej samej sesji, nie tylko wpisem —
+`ci_check_shared.py` (uruchamiany teraz jako git pre-commit hook) wyłapie
+to przy następnej próbie commita, jeśli ktoś znowu tylko zadeklaruje.
 
 ## NOTA-9 — Nowe moduły shared z sesji 2026-06-16 (oczekują na wdrożenie)
 

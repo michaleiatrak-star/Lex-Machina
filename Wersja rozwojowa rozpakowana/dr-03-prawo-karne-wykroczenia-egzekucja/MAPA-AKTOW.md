@@ -8,10 +8,11 @@
 | KK + KPK — framework karne | Dz.U. 2025 poz. 383 + Dz.U. 2026 poz. 490 | mod-KK-KPK-framework-karne | ✅ OK |
 | KK + KPK — framework szczegółowy | Dz.U. 2025 poz. 383 ze zm. | mod-KK-KPK-framework-szczegolowy | ✅ OK |
 | KK art. 190a — stalking | Dz.U. 2025 poz. 383 ze zm. | mod-KK-art190a-stalking | ✅ OK |
-| KK art. 190a — stalking szczegółowy | Dz.U. 2025 poz. 383 ze zm. | mod-KK-stalking-szczegolowy | ✅ OK |
+| KK art. 190a — stalking szczegółowy | Dz.U. 2025 poz. 383 ze zm. | shared/STALKING-NEKANIE.md (przeniesiony 2026-07-12) | ✅ OK |
 | KK art. 207 + ustawa antyprzemocowa | Dz.U. 2025 poz. 383 + Dz.U. 2021 poz. 1249 | mod-KK-art207-przemoc-domowa | ✅ OK |
 | KK art. 207 — przemoc domowa szczegółowy | Dz.U. 2025 poz. 383 ze zm. | mod-KK-przemoc-domowa-szczegolowy | ✅ OK |
 | KK art. 267–269c — cyberprzestępstwa | Dz.U. 2025 poz. 383 ze zm. | mod-KK-art267-269c-cyberprzestepstwa | ✅ OK |
+| KK art. 267 §2-4 — podsłuch/nagrania (rozróżnienie uczestnik/osoba trzecia, GPS, kontrola operacyjna) | Dz.U. 2025 poz. 383 ze zm. | mod-KK-kwalifikator-karnomaterialny.md BLOK G | ✅ ROZBUDOWANE 2026-07-15, Część 5/6 naprawy — wcześniej błędnie przypisane paragrafy, brak kluczowego rozróżnienia |
 | KK art. 267–269c — cyberprzestępstwa szczegółowy | Dz.U. 2025 poz. 383 ze zm. | mod-KK-cyberprzestepstwa-szczegolowy | ✅ OK |
 | KK art. 291–299 — paserstwo, pranie pieniędzy | Dz.U. 2025 poz. 383 ze zm. | mod-KK-art291-pranie-pieniedzy | ✅ OK |
 | Kodeks karny wykonawczy (KKW) | Dz.U. 2025 poz. 911 t.j. — VER 2026-07-02o: nadal aktualne (obwieszczenie 11.06.2025) | mod-KKW-kodeks-karny-wykonawczy | ✅ OK |
@@ -33,6 +34,18 @@
 | UPEA — grzywna w celu przymuszenia (art. 119–125) + zarzuty (art. 33) | ⚠️ Dz.U. 2026 poz. 268 t.j. (POPRAWKA 2026-07-02p — BYŁO błędnie 2023.2505, nieaktualne o DWA cykle t.j.: 2023.2505→2025.132→2026.268, obwieszczenie 4.03.2026) | mod-grzywny-mandaty-szczegolowe | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
 | KPSW — mandat karny (art. 95–102) + uchylenie (art. 101) | ⚠️ Dz.U. 2026 poz. 473 t.j. (POPRAWKA 2026-07-02q — BYŁO błędnie 2025.860) | mod-grzywny-mandaty-szczegolowe | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
 | KW — grzywna sądowa (art. 24–37) | Dz.U. 2025 poz. 734 ze zm. | mod-grzywny-mandaty-szczegolowe | ✅ OK |
+| KK rozdz. XXXII — Przestępstwa przeciwko porządkowi publicznemu (art. 258 — udział w zorganizowanej grupie/związku) | Dz.U. 2025 poz. 383 t.j. (część KK) | mod-KK-kwalifikator-karnomaterialny.md BLOK H | ✅ DODANE 2026-07-15 — temat wcześniej całkowicie nieobecny |
+| Kodeks karny skarbowy (KKS) — art. 54/55/56/62/76 | Dz.U. 2025 poz. 633 t.j. (obwieszczenie 10.04.2025) | mod-KKS-karny-skarbowy-i-AML.md | ✅ ROZBUDOWANE 2026-07-15 — wcześniej sam szkielet proceduralny bez konkretnych artykułów |
+| KPK Dział XIII/XIIa — ENA, ekstradycja, EPPO, Europol/Eurojust | Dz.U. 2026 poz. 490 t.j. (część KPK) | mod-KPK-wspolpraca-miedzynarodowa-karna.md | ✅ NOWY 2026-07-15 |
+| Konwencja Palermska (ONZ, przestępczość zorganizowana) | Dz.U. 2005 nr 18 poz. 158 | mod-KPK-wspolpraca-miedzynarodowa-karna.md | ✅ NOWY 2026-07-15 |
+| KK rozdz. XIX — Przestępstwa przeciwko życiu i zdrowiu (art. 148 zabójstwo, art. 158-159 bójka/pobicie) | Dz.U. 2025 poz. 383 t.j. (część KK) | mod-KK-kwalifikator-karnomaterialny.md BLOK I | ✅ DODANE 2026-07-15 — temat wcześniej tylko wzmiankowany w tabeli trybu ścigania, bez treści |
+| KK rozdz. XXXV — Przestępstwa przeciwko mieniu (art. 288 zniszczenie/uszkodzenie mienia) + KW art. 124 (próg 800 zł od 1.10.2024) | Dz.U. 2025 poz. 383 t.j. (część KK); KW Dz.U. 2025 poz. 734 ze zm. | mod-KK-kwalifikator-karnomaterialny.md BLOK L | ✅ DODANE 2026-07-15, Część 2/6 naprawy — wcześniej jeden wiersz bez treści |
+| Ustawa o wychowaniu w trzeźwości i przeciwdziałaniu alkoholizmowi (przymusowe leczenie odwykowe, art. 24-36) | Dz.U. 2023 poz. 2151 t.j. (⚠️ weryfikuj aktualność) | mod-przymusowe-leczenie-odwykowe.md | ✅ NOWY 2026-07-15, Część 3/6 naprawy — temat wcześniej całkowicie nieobecny |
+| Ustawa o przeciwdziałaniu narkomanii — leczenie uzależnionych (art. 25-30 nieletni, art. 71-73a dorośli) | Dz.U. 2023 poz. 1939 t.j. (⚠️ weryfikuj aktualność) | mod-przymusowe-leczenie-odwykowe.md + mod-ustawa-narkomania.md | ✅ ROZSZERZONE 2026-07-15, Część 3/6 |
+| KK rozdz. XXXIII — Przestępstwa przeciwko ochronie informacji (art. 266 — naruszenie tajemnicy zawodowej) + art. 23 UZNK | Dz.U. 2025 poz. 383 t.j. (część KK); UZNK Dz.U. 2022 poz. 1233 ze zm. | mod-tajemnica-zawodowa-poufnosc.md | ✅ NOWY 2026-07-15, Część 4/6 naprawy — wcześniej całkowicie nieobecne od strony karnej |
+| KK rozdz. XXV — Przestępstwa przeciwko wolności seksualnej i obyczajności (art. 197-205) | Dz.U. 2025 poz. 383 t.j. (część KK), nowelizacja definicji zgwałcenia od 13.02.2025 | mod-KK-kwalifikator-karnomaterialny.md BLOK J | ✅ DODANE 2026-07-15 — jw. |
+| Ustawa o przeciwdziałaniu zagrożeniom przestępczością na tle seksualnym i ochronie małoletnich (Rejestr Sprawców, "Ustawa Kamilka") | Dz.U. 2026 poz. 110 t.j. (obwieszczenie 21.01.2026) | mod-KK-kwalifikator-karnomaterialny.md BLOK J | ✅ NOWY 2026-07-15 |
+| KK rozdz. I-III — Część Ogólna (art. 7-9 klasyfikacja, art. 25-31 kontratypy: obrona konieczna, stan wyższej konieczności) | Dz.U. 2025 poz. 383 t.j. (część KK) | mod-KK-kwalifikator-karnomaterialny.md BLOK 0 + BLOK K | ✅ NOWY 2026-07-15, Część 1/N naprawy — wcześniej całkowicie nieobecne/wzmiankowane jednym zdaniem |
 
 > Źródło weryfikacji: isap.sejm.gov.pl | orzeczenia.ms.gov.pl | sn.pl
 > Aktualizacja: 2026-07-02q (TRYB DZU krok 4/16 wg WARN-26, ZAMKNIĘTY: 13 z

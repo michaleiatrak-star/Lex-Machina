@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.11"
+version: "5.13"
 type: executive-pisma
 status: production
 description: |
@@ -832,6 +832,32 @@ view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md                (⛔ OBOWIĄZ
 ---
 
 ## CHANGELOG
+
+> **5.13 (2026-07-15, F-7 / ZASADA 11 — audyt proceduralny):** dodano
+> R.1b TEZA-GATE do `modules/MOD-REDAKCJA.md`, obowiązkowy przed KROK 2
+> (diagnoza stylu) — rekonstrukcja jednym zdaniem tezy centralnej
+> dostarczonego gotowego pisma, przed jakąkolwiek redakcją stylu/tonu.
+> Przyczyna: ścieżka Test A (redakcja gotowego pisma) jawnie omija W1-W2-W3
+> ("NIE wykonuj W1-W2-W3" — routing KROK 0), a MOD-REDAKCJA nie miała
+> NIGDZIE (grep 0 wyników na "teza"/"rekonstrukcja"/"CLAIM") mechanizmu
+> ustalenia, czego pismo faktycznie broni, zanim zaczęto poprawiać jego
+> formę — ryzyko wzmacniania tonu twierdzeń bez uważnego czytania ich
+> zasadności. Analogiczny wzorzec braku jak w przesluchanie-swiadkow-v2
+> przed naprawą 3.6 (IMPORTED-QUESTIONS-GATE). Pozostałe 3 wzorce z
+> ZASADY 11 były już dobrze pokryte w tym skillu (HARD GATE MRG/SD-GATE
+> od startu, CG-GATE z jawną akceptacją, ST-INIT z jawnym zgłaszaniem
+> pominięć) — nie wymagały zmian. Pełny opis: audyt-systemu-v4/
+> AUDIT-JOURNAL.md, AUDYT-2026-07-15e.
+
+> **5.12 (2026-07-14, sprawa XI P 27/26 — dziedziczenie naprawy SD-GATE-TRUNC):**
+> Ten skill pobiera SD-REJ z `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` jako HARD
+> GATE (patrz linia ~471, blok PRZED-MACIERZ). Naprawa wprowadzona w module
+> współdzielonym (1.4.0 → 1.5.0: bramka SD-GATE-TRUNC — obowiązkowe domykanie
+> znaczników `< truncated lines X-Y >` zwracanych przez `view` przed
+> ekstrakcją faktów) jest dziedziczona automatycznie, bez zmian w logice tego
+> pliku — zgodnie z zasadą unikania duplikacji (CHECKLIST-DEDUP). Wersja
+> podbita wyłącznie dla odnotowania zależności. Pełny opis incydentu:
+> `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-07-14b.
 
 > Pełna historia napraw (5.7...5.11, każda z root cause i opisem naprawy)
 > wyniesiona do `references/CHANGELOG.md` (redukcja kosztu kontekstu,

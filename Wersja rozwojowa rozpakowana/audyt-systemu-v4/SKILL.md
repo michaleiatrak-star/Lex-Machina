@@ -16,7 +16,7 @@ references:
   - references/AUDIT-JOURNAL.md
   - references/WARN-OTWARTE.md   # rejestr żywy TYLKO otwartych flag (WARN + strukturalne) — dodane 2026-07-07, ZASADA 10
   - references/CHECKLIST-DEDUP.md   # mapa pojęć → lokalizacje (5 not, NOTA-6 ORPHAN dodana 06-14g)
-  - references/mapa_dzu_2026-07-04.md   # aktualna mapa Dz.U. (439 wierszy); 07-02 poprzednia wersja
+  - references/mapa_dzu_2026-07-15.md   # aktualna mapa Dz.U. (460 wierszy); 07-04 poprzednia wersja
 ---
 
 # audyt-systemu-v4 — Orchestrator Audytu Systemu Prawnego
@@ -49,7 +49,7 @@ Przed jakimkolwiek działaniem wczytaj:
 view /mnt/skills/user/audyt-systemu-v4/references/AUDIT-JOURNAL.md
 view /mnt/skills/user/audyt-systemu-v4/references/WARN-OTWARTE.md
 view /mnt/skills/user/audyt-systemu-v4/references/CHECKLIST-DEDUP.md
-view /mnt/skills/user/audyt-systemu-v4/references/mapa_dzu_2026-07-04.md
+view /mnt/skills/user/audyt-systemu-v4/references/mapa_dzu_2026-07-15.md
 ```
 
 Celem jest ustalenie:
@@ -155,7 +155,7 @@ Wykonaj skan regex → oceń każde trafienie wg tabeli kwalifikacji → usuń t
 
 ## FAZA 3 — WERYFIKACJA MAPY Dz.U.
 
-Wczytaj: `references/mapa_dzu_2026-07-04.md`
+Wczytaj: `references/mapa_dzu_2026-07-15.md`
 
 ### 3-PULL — Synchronizacja DR-MAPA-AKTOW → ROUTING-MAP → mapa_dzu
 
@@ -546,7 +546,7 @@ audyt-systemu-v4/
 └── references/
     ├── AUDIT-JOURNAL.md                        ← dziennik audytów
     ├── CHECKLIST-DEDUP.md                      ← mapa pojęć → lokalizacje kanoniczne (dedup)
-    └── mapa_dzu_2026-07-04.md                  ← mapa 439 wierszy Dz.U. (aktualna)
+    └── mapa_dzu_2026-07-15.md                  ← mapa 460 wierszy Dz.U. (aktualna)
 ```
 
 ---

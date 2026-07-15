@@ -24,7 +24,7 @@ WSPÓLNE ZASADY DLA MODUŁU:
 |---|---|
 | Adwokat | Prawo o adwokaturze + Zbiór Zasad Etyki Adwokackiej — sprawdzić aktualne źródła |
 | Radca prawny | ustawa o radcach prawnych + Kodeks Etyki Radcy Prawnego — sprawdzić aktualne źródła |
-| Lekarz | ustawa o izbach lekarskich + KEL — sprawdzić aktualne źródła |
+| Lekarz | ustawa o izbach lekarskich (Dz.U. 2021 poz. 1342 t.j.) + KEL — rozdz. 5 art. 53-112 = odpowiedzialność zawodowa; pełna procedura opisana w dr-10/mod-ustawa-zawod-lekarza.md, sekcja "Odpowiedzialnosc dyscyplinarna" (F-3 zamknięta 2026-07-15) |
 | Notariusz | Prawo o notariacie — sprawdzić ISAP |
 | Komornik | ustawa o komornikach sądowych — sprawdzić ISAP |
 

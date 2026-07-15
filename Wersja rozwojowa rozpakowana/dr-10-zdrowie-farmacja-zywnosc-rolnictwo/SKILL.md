@@ -1,6 +1,6 @@
 ---
 name: dr-10-zdrowie-farmacja-zywnosc-rolnictwo
-version: 3.5
+version: 3.7
 description: |
   DR-10: Zdrowie, Farmacja, Żywność, Rolnictwo
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -81,9 +81,13 @@ MEDYCYNA I PRAWA PACJENTA:
               (świadczenia opieki zdrowotnej, NFZ, kolejki, odmowa, kontraktowanie)
 
 ZAWODY MEDYCZNE:
-  [✓] OK    mod-ustawa-zawody-medyczne-i-prawnicze
-              (scalony: zawody medyczne + zawody prawnicze i pokrewne —
-               doradcy podatkowi, rzecznicy patentowi, mediatorzy, syndycy)
+  [✓] OK    mod-ustawa-zawody-prawnicze-pokrewne
+              (⚠️ NAZWA SKORYGOWANA 2026-07-15, było: mod-ustawa-zawody-medyczne-i-prawnicze
+               — plik dotyczy WYŁĄCZNIE zawodów prawniczych pokrewnych: doradcy
+               podatkowi, rzecznicy patentowi, mediatorzy, syndycy/doradcy
+               restrukturyzacyjni. NIE dotyczy zawodów medycznych — te mają
+               własne moduły niżej. Dla większości zawodów tu wymienionych
+               preferuj moduły dedykowane w innych DR-skillach, patrz nagłówek pliku)
   [✓] OK    mod-ustawa-zawod-lekarza
               (ustawa o zawodach lekarza i lekarza dentysty — Dz.U. 2026 poz. 37 t.j.)
   [✓] OK    mod-ustawa-pielegniarka-polozna

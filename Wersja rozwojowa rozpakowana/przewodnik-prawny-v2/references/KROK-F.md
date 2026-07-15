@@ -51,6 +51,22 @@ JEŚLI tryb = konkretny (FORMALNY/MERYTORYCZNY/PROCESOWY):
 [krótkie 1-zdaniowe wyjaśnienie co to znaczy z F.0]"
 ```
 
+### F.1b — TEZA-GATE (obowiązkowy, przed F.2-F.6 — naprawa F-7/ZASADA 11, 2026-07-15)
+
+```
+⛔ Zanim uruchomisz KTÓRYKOLWIEK z trybów F.2-F.6, zrekonstruuj JEDNYM
+ZDANIEM tezę centralną dostarczonego pisma: czego strona żąda i na jakiej
+podstawie. Wypisz to jawnie w odpowiedzi, przed wynikami walidacji.
+
+Powód: F.2/F.3/F.4 mogą wszystkie wypaść pozytywnie (poprawne przepisy,
+poprawne orzeczenia, kompletność formalna), podczas gdy pismo jako CAŁOŚĆ
+broni innej albo słabszej tezy niż zakłada użytkownik — bez jawnej
+rekonstrukcji tezy centralnej taki rozjazd łatwo przeoczyć, bo każdy tryb
+sprawdza swój wąski wycinek (cytat/formę/skutek), nie całość roszczenia.
+
+Jeśli pismo dotyczy kilku roszczeń/zarzutów → osobna teza per wątek.
+```
+
 ### F.2 Walidacja przepisów (dla każdego art./§)
 
 ```

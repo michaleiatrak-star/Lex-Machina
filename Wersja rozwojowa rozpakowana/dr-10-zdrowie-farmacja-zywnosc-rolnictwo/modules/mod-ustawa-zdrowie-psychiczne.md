@@ -2,9 +2,12 @@
 
 ## Akt prawny
 **Ustawa z 19.08.1994 r. o ochronie zdrowia psychicznego**
-- Tekst jednolity: **Dz.U. 2024 poz. 917** (ze zm.)
-  VER: isap.sejm.gov.pl [2026-05-31] - weryfikuj aktualny!
-  (W poprzednich sesjach wskazywano Dz.U. 2023 poz. 2587 - zweryfikuj aktualna sygnature!)
+- Tekst jednolity: **Dz.U. 2024 poz. 917** (obwieszczenie Marszałka Sejmu 14.06.2024)
+  ✅ POTWIERDZONE 2026-07-15: to jest prawidłowy aktualny numer. Wcześniejsza
+  wzmianka "Dz.U. 2023 poz. 2587" w tym pliku nie znajduje potwierdzenia w
+  żadnym źródle (ISAP/PPIOP/skorowidz) — najpewniej błąd wcześniejszej
+  sesji, nie osobny t.j. Poprzedni t.j.: Dz.U. 2022 poz. 2123.
+  VER: isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000917
 
 **Weryfikacja ISAP przed kazdy cytowaniem.**
 

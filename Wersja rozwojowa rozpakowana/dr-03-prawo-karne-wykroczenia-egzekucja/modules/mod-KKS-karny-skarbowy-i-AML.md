@@ -1,5 +1,4 @@
----
-name: mod-AN-karne-gospodarcze-aml
+# mod-AN-karne-gospodarcze-aml
 
 **Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 description: |
@@ -16,20 +15,127 @@ compatibility:
 
 | Akt | Zakres |
 |---|---|
-| Kodeks karny | oszustwo, przywłaszczenie, szkoda spółki, dokumenty |
-| KKS | podatki, faktury, deklaracje, uszczuplenia |
-| Ustawa AML | instytucje obowiązane, GIIF, procedury |
+| Kodeks karny | oszustwo, przywłaszczenie, szkoda spółki, dokumenty, fałszywe faktury (rozdz. XXXIVa) |
+| Kodeks karny skarbowy (KKS) — Dz.U. 2025 poz. 633 t.j. (obwieszczenie 10.04.2025) ✅ VER 2026-07-15 | podatki, faktury, deklaracje, uszczuplenia — patrz sekcja niżej |
+| Ustawa AML — instytucje obowiązane, GIIF, procedury | dr-06/mod-ustawa-AML-instytucje-obowiazkowe |
 | KSH | obowiązki organów spółek |
+
+## ⚠️ KOREKTA 2026-07-15 — NAPRAWA BRAKU TREŚCI KKS
+
+> Ten moduł do 2026-07-15 zawierał WYŁĄCZNIE ogólny szkielet proceduralny,
+> bez ŻADNYCH konkretnych artykułów KKS (potwierdzone: brak art. 54/56/62/76,
+> brak numeru Dz.U. samego kodeksu). Sekcja niżej naprawia ten brak.
+
+## KLUCZOWE PRZESTĘPSTWA/WYKROCZENIA SKARBOWE (⛔ weryfikuj ISAP przed cytowaniem)
+
+```
+ART. 54 KKS — UCHYLANIE SIĘ OD OPODATKOWANIA
+  Czyn: nieujawnienie właściwemu organowi przedmiotu lub podstawy
+  opodatkowania, lub niezłożenie deklaracji — przez ZANIECHANIE (podatnik
+  "milczy", nie składa niczego), różni się tym od art. 56 (podatnik "mówi",
+  ale kłamie).
+  Skutek: narażenie podatku na uszczuplenie.
+  Kara: zależna od kwoty — przestępstwo skarbowe (grzywna/PW) albo
+  wykroczenie skarbowe (kwota poniżej progu ustawowego — weryfikuj aktualny
+  próg w ISAP, indeksowany do minimalnego wynagrodzenia).
+
+ART. 55 KKS — FIRMANCTWO
+  Czyn: prowadzenie działalności gospodarczej na cudzą tożsamość/firmę w
+  celu zatajenia przed fiskusem prowadzenia działalności przez faktycznego
+  beneficjenta.
+  Kara: grzywna lub PW do 3 lat (zależnie od kwoty uszczuplenia).
+
+ART. 56 KKS — OSZUSTWO PODATKOWE (podanie nieprawdy/zatajenie w deklaracji)
+  Czyn: złożenie deklaracji/oświadczenia organowi podatkowemu, płatnikowi
+  lub innemu uprawnionemu organowi z podaniem nieprawdy LUB zatajeniem
+  prawdy, LUB niedopełnienie obowiązku zawiadomienia o zmianie danych —
+  skutkujące narażeniem podatku na uszczuplenie. Różni się od art. 54 tym,
+  że tu podatnik AKTYWNIE składa dokument (ale kłamie), a nie milczy.
+  §1 — typ podstawowy: grzywna do 720 stawek dziennych, PW, albo obie kary
+  §2 — kwota "małej wartości": tylko grzywna do 720 stawek dziennych
+  §3 — kwota poniżej progu ustawowego: WYKROCZENIE skarbowe (niższe zagrożenie)
+  §4 — niezłożenie deklaracji w terminie/niewłaściwą formą (np. brak
+       wymaganego podpisu elektronicznego) — zwykle wykroczenie, chyba że
+       towarzyszy mu zamiar oszustwa
+  ⚠️ Wymaga UMYŚLNOŚCI (zamiar bezpośredni lub ewentualny) — wyrok TK
+  SK 13/05 (12.09.2005): "prawda" w art. 56 to pojęcie normatywne
+  (obejmuje też właściwą kwalifikację prawną, nie tylko fakty), ale
+  niedokładność podatkowa NIE JEST automatycznie oszustwem — prokuratura
+  musi wykazać świadomość i wolę sprawcy.
+  Przedawnienie: NIE biegnie od daty czynu, lecz od końca roku, w którym
+  upłynął termin płatności podatku; dodatkowo — przedawnienie odpowiedzialności
+  karnoskarbowej następuje też, gdy przedawni się sam obowiązek podatkowy
+  (nawet jeśli termin karny jeszcze nie upłynął) — ⛔ zawsze licz oba terminy.
+
+ART. 62 KKS — FAKTURY NIERZETELNE/WADLIWE
+  §1 — WYKROCZENIE: niewystawienie faktury wbrew obowiązkowi, lub
+       wystawienie jej wadliwie (błędy formalne/rachunkowe, ALE transakcja
+       była rzeczywista)
+  §2 — PRZESTĘPSTWO: wystawienie lub posłużenie się fakturą NIERZETELNĄ
+       ("pustą" — nieodzwierciedlającą rzeczywistej transakcji, lub
+       znacząco zniekształcającą jej parametry: wartość/przedmiot/strony)
+       — grzywna do 720 stawek dziennych lub PW, albo obie
+  ⚠️ Rozróżnienie kluczowe: faktura WADLIWA (§1, wykroczenie) ma pokrycie
+  w rzeczywistej transakcji — faktura NIERZETELNA/PUSTA (§2, przestępstwo)
+  nie ma. Jeśli faktura CAŁKOWICIE fikcyjna (fingowanie samego obowiązku
+  podatkowego, nie tylko jego wysokości) → NIE art. 62 KKS, lecz art. 271
+  lub 271a KK (postanowienie SN IV KK 426/13).
+  Zbieg z KK: puste faktury dużej wartości → kumulatywnie z art. 270a KK
+  (fałszowanie faktur) i/lub art. 271a KK (poświadczenie nieprawdy w
+  fakturze) — patrz niżej.
+
+ART. 76 KKS — WYŁUDZENIE ZWROTU PODATKU (NIENALEŻNY ZWROT)
+  Czyn: podanie danych niezgodnych ze stanem rzeczywistym lub zatajenie
+  stanu rzeczywistego, wprowadzające w błąd organ podatkowy, narażające
+  na NIENALEŻNY ZWROT podatku (typowo: zwrot VAT) lub zaliczenie nadpłaty.
+  ⚠️ To jest przestępstwo POWSZECHNE (może je popełnić KAŻDY, nie tylko
+  podatnik) — różni się tym od art. 56 (przestępstwo INDYWIDUALNE, tylko
+  podatnik). Odpowiedzialność powstaje przy STWORZENIU WYSOKIEGO
+  PRAWDOPODOBIEŃSTWA nienależnego zwrotu — NIE wymaga faktycznego
+  otrzymania zwrotu (przestępstwo z narażenia, nie ze skutku majątkowego).
+  Może zbiegać się kumulatywnie z art. 56 KKS, jeśli tym samym czynem
+  (czyn ciągły) sprawca i uszczuplił podatek, i naraził na nienależny zwrot.
+
+CZYNNY ŻAL (art. 16 KKS) — ⛔ ISTOTNE narzędzie obrony/samoregulacji
+  Zawiadomienie organu o popełnieniu czynu zabronionego PRZED wszczęciem
+  postępowania (lub zanim organ miał wyraźnie udokumentowaną wiadomość o
+  czynie) + uiszczenie należności publicznoprawnej w całości w wyznaczonym
+  terminie = WYŁĄCZENIE karalności. ⚠️ Warunki formalne i wyjątki (np. gdy
+  organ już wszczął czynności sprawdzające) — zawsze weryfikuj aktualne
+  brzmienie w ISAP przed poradą, nie zakładaj automatycznej skuteczności.
+```
+
+## ZBIEG Z KODEKSEM KARNYM — KARUZELE VAT I POWAŻNE OSZUSTWA FAKTUROWE
+
+```
+Wyłudzenia VAT na dużą skalę (karuzele podatkowe, puste faktury o wysokiej
+wartości) rzadko kwalifikują się z jednego przepisu — typowy zbieg:
+  KKS: art. 54/56 (uszczuplenie) + art. 62 §2 (nierzetelna faktura) +
+       art. 76 (wyłudzenie zwrotu, jeśli dotyczy)
+  KK: art. 270a (fałszowanie faktur) + art. 271a (poświadczenie nieprawdy
+      w fakturze) + art. 258 (jeśli działanie grupowe/zorganizowane —
+      patrz dr-03/mod-KK-kwalifikator-karnomaterialny.md BLOK H)
+  Zagrożenie skrajne: art. 277a §1 KK — przy fakturach o wartości powyżej
+  10-krotności mienia wielkiej wartości: KARA OD 5 DO 25 LAT — jeden z
+  najsurowszych przepisów w całym KK.
+Weryfikacja kontrahenta / należyta staranność VAT — dokumentuj procedury
+  weryfikacji (KRS, CEIDG, wykaz podatników VAT, koncesje) jako element
+  linii obrony przy zarzutach nieświadomego udziału w karuzeli.
+```
 
 ## KWALIFIKATOR CZYNU
 
 ```
 1. Czynność: co dokładnie zrobiono albo zaniechano?
-2. Sprawca: kto miał obowiązek działania?
+2. Sprawca: kto miał obowiązek działania? (przestępstwo indywidualne —
+   podatnik — czy powszechne — art. 76, każdy)
 3. Pokrzywdzony: spółka, kontrahent, Skarb Państwa, wierzyciel?
-4. Szkoda: kwota, utracone korzyści, uszczuplenie publicznoprawne.
-5. Zamiar: dowody świadomości, korespondencja, ostrzeżenia, podpisy.
+4. Szkoda: kwota, utracone korzyści, uszczuplenie publicznoprawne — sprawdź
+   progi "małej wartości" i próg wykroczenia (indeksowane, weryfikuj ISAP).
+5. Zamiar: dowody świadomości, korespondencja, ostrzeżenia, podpisy —
+   art. 56/76 wymagają UMYŚLNOŚCI, nie wystarczy błąd rachunkowy.
 6. Dokumenty: faktury, umowy, uchwały, księgi, przelewy.
+7. Czynny żal: czy możliwe/już złożone zawiadomienie z art. 16 KKS?
 ```
 
 ## WYJŚCIE

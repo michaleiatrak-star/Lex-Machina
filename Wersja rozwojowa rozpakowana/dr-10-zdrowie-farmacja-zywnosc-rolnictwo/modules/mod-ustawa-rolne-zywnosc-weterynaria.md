@@ -12,16 +12,30 @@ compatibility:
 
 # mod-AH — Prawo Rolne / Żywność / Weterynaria
 
+**Data weryfikacji online:** 2026-07-15 (naprawa F-1 — konkretne numery Dz.U. dla IJHARS/ARiMR/WPR)
+**ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
+
+
 ## AKTY PRAWNE — WERYFIKUJ
 
-| Akt | Zakres |
-|---|---|
-| Prawo żywnościowe UE 178/2002 | bezpieczeństwo żywności |
-| Rozp. 852/2004 | higiena żywności, HACCP |
-| Rozp. 853/2004 | żywność pochodzenia zwierzęcego |
-| Ustawa o bezpieczeństwie żywności i żywienia | sanepid, produkcja, obrót |
-| Ustawa o jakości handlowej artykułów rolno-spożywczych | IJHARS |
-| Ustawa o ARiMR / PROW / WPR | dopłaty, kontrole, zwroty |
+| Akt | Zakres | Numer Dz.U. (VER 2026-07-15) |
+|---|---|---|
+| Prawo żywnościowe UE 178/2002 | bezpieczeństwo żywności | rozporządzenie UE, stosowane bezpośrednio |
+| Rozp. 852/2004 | higiena żywności, HACCP | rozporządzenie UE, stosowane bezpośrednio |
+| Rozp. 853/2004 | żywność pochodzenia zwierzęcego | rozporządzenie UE, stosowane bezpośrednio |
+| Ustawa o bezpieczeństwie żywności i żywienia | sanepid, produkcja, obrót | Dz.U. 2023 poz. 1448 t.j. — ⚠️ TREŚĆ SZCZEGÓŁOWA w dedykowanym module `mod-ustawa-bezpieczenstwo-zywnosci.md`, nie duplikuj tutaj |
+| Ustawa o jakości handlowej artykułów rolno-spożywczych | IJHARS | Dz.U. 2023 poz. 1980 t.j. (obwieszczenie 2.08.2023) |
+| Ustawa o Agencji Restrukturyzacji i Modernizacji Rolnictwa (ARiMR) | struktura, zadania, finansowanie agencji | Dz.U. 2025 poz. 1363 t.j. (obwieszczenie 26.09.2025) |
+| Ustawa o Planie Strategicznym dla Wspólnej Polityki Rolnej na lata 2023-2027 (WPR/PROW) | dopłaty bezpośrednie, płatności obszarowe, interwencje EFRG/EFRROW, kontrole, zwroty | Dz.U. 2024 poz. 1741 t.j. (obwieszczenie 7.11.2024), zmieniona Dz.U. 2025 poz. 321 |
+
+⚠️ **KOREKTA F-1 (2026-07-15):** poprzednia wersja tabeli nie zawierała żadnych
+numerów Dz.U. dla ARiMR i WPR/PROW, a numer "2024.1284" cytowany w
+MAPA-AKTOW.md dla tego zbiorczego wiersza faktycznie odnosi się do USTAWY O
+OCHRONIE ZDROWIA ZWIERZĄT, skatalogowanej i zweryfikowanej w osobnym module
+`mod-ustawa-inspekcja-weterynaryjna.md` — nie do żadnego aktu rolno-żywnościowego
+z tej tabeli. Ten moduł (mod-AH) pokrywa WYŁĄCZNIE: jakość handlowa (IJHARS),
+ARiMR (struktura agencji) i WPR/PROW (dopłaty) — bezpieczeństwo żywności i
+weterynaria mają własne, osobne moduły (patrz wiersz wyżej i SKILL.md).
 
 ## PROCEDURA
 

@@ -1,6 +1,6 @@
 ---
 name: orzeczenia-sadowe-v2
-version: 2.7
+version: 2.8
 type: executive-analiza
 status: production
 compatibility: "web_search, web_fetch, show_widget"
@@ -78,7 +78,13 @@ Widget wywołujesz **dwukrotnie:**
 ## Zasady fundamentalne
 
 **Zasada 1 — ⛔ PERMANENT GATE: zakaz cytowania z pamięci (przez CAŁĄ rozmowę):**
-Każde powołanie sygnatury, daty lub sądu = osobny web_search/web_fetch w tej odpowiedzi.
+Przed każdym web_search/web_fetch poniżej: sprawdź KROK 1 z
+`view /mnt/skills/user/shared/MCP-INTEGRACJA.md` — jeśli connector MCP dla
+orzecznictwa (np. SAOS/CBOSA) jest podłączony i dostępny w tej rozmowie, użyj
+go najpierw (KROK 2 tamtego pliku); w przeciwnym razie przejdź od razu do
+web_search/web_fetch poniżej, bez zmian względem dotychczasowej procedury.
+Każde powołanie sygnatury, daty lub sądu = osobny web_search/web_fetch w tej odpowiedzi
+(lub odpowiadające zapytanie MCP, jeśli tryb MCP-FIRST aktywny).
 Zakaz nie wygasa po żadnej liczbie wiadomości. Nawet gdy model "jest pewny" — weryfikacja obowiązkowa.
 Jeśli nie możesz zweryfikować: „Nie odnalazłem tego źródła online. Nie powołuję."
 Przed cytowaniem wykonaj procedurę V-SYG z modułu SYGNATURY:
@@ -107,6 +113,72 @@ elementy + niedopasowany przedmiot = wynik nadal niecytowalny na poparcie tezy.
 Ten sam mechanizm łapie również cytaty z KROK 1-T.1/1-T.2 (SAOS/CBOSA
 pełnotekstowe) — one dają KANDYDATÓW, gradient TREŚĆ jest krokiem PO nich,
 nie zamiast (patrz 1-T.3).
+
+**Zasada 2B — KOTWICA/PINPOINT do konkretnego miejsca w źródle (dodano
+2026-07-15, na wyraźne polecenie użytkownika — analogia do wskazywania
+strony/punktu/akapitu w pismach procesowych, patrz `shared/FAKTY_v2.md`
+KROK F2A). Cztery elementy Zasady 2 mówią GDZIE JEST dokument — Zasada 2B
+mówi GDZIE W DOKUMENCIE jest cytowany fragment. Obowiązuje dla KAŻDEGO
+cytatu i KAŻDEJ sentencji/tezy przywoływanej z orzeczenia LUB z interpretacji
+znalezionej na stronie internetowej (komentarz, artykuł, interpretacja
+urzędowa, glosa).**
+
+⚠️ AKTUALIZACJA 2026-07-15: ten sam mechanizm wdrożono także CENTRALNIE do
+`shared/PRAWO-HARDGATE.md` (KROK 5A/5B, wersja 2.1) — jako HARD GATE
+aktywny w całym systemie, nie tylko w tym module. Treść poniżej pozostaje
+jako szczegółowa specyfikacja robocza dla tego skilla; w razie rozbieżności
+rozstrzyga PRAWO-HARDGATE jako źródło nadrzędne.
+
+```
+[5] LOKALIZACJA W ŹRÓDLE — obowiązkowa, w pierwszej pasującej formie:
+    (a) NUMER STRONY dokumentu źródłowego, jeśli źródło jest plikiem
+        stronicowanym (PDF orzeczenia z portalu, skan, uzasadnienie
+        w wersji do druku) — format: "s. 4" lub "k. 12" (dla akt sądowych)
+    (b) NUMER TEZY/PUNKTU/AKAPITU, jeśli orzeczenie lub strona ma
+        numerację wewnętrzną (np. "teza 3", "pkt II.4", "akapit 27" —
+        częste w wyrokach TSUE i ETPC, które numerują akapity od 1)
+    (c) NAZWA SEKCJI/NAGŁÓWKA, jeśli źródło (artykuł, komentarz,
+        interpretacja) ma strukturę nagłówków bez numeracji — cytuj
+        dosłowne brzmienie najbliższego nagłówka nadrzędnego
+    (d) Jeśli ŻADNA z (a)-(c) nie istnieje w źródle (np. czysty HTML bez
+        struktury) → jawna adnotacja: "brak wewnętrznej numeracji w
+        źródle — lokalizacja opisowa: [1-2 zdaniowy opis miejsca, np.
+        »akapit zaczynający się od: Sąd Najwyższy uznał, że...«]"
+
+[6] KOTWICA TECHNICZNA (URL fragment) — dodaj, GDY platforma źródłowa
+    wspiera adresowanie fragmentu, w kolejności preferencji:
+    (a) #page=N — dla PDF-ów otwieranych w przeglądarce (działa w
+        większości plików z portali sądowych i SAOS/CBOSA, gdy URL
+        kończy się na .pdf) → pełny format: [URL].pdf#page=4
+    (b) Kotwica nagłówka strony (#nazwa-sekcji), jeśli źródło HTML ma
+        widoczne id sekcji w kodzie strony (sprawdź przez web_fetch —
+        NIE zgaduj nazwy kotwicy, jeśli jej nie widziałeś w treści)
+    (c) Numer akapitu w adresie, jeśli portal go udostępnia (niektóre
+        bazy orzecznictwa TSUE/ETPC mają odrębny URL per punkt/paragraf)
+    (d) Brak wsparcia technicznego (typowe: strony bez zakotwiczeń,
+        proste PDF-y skanowane bez warstwy tekstowej) → NIE zmyślaj
+        kotwicy — podaj tylko URL z Zasady 2[4] + lokalizację opisową
+        z [5]. Wymyślona kotwica, która nie prowadzi do właściwego
+        miejsca, jest GORSZA niż jej brak (myląca dla czytelnika).
+
+⛔ ZAKAZ: podawanie numeru strony/tezy z pamięci lub przez odgadnięcie na
+podstawie długości dokumentu — numer MUSI pochodzić z faktycznie
+przeczytanej treści (web_fetch) tej konkretnej strony/akapitu.
+⛔ ZAKAZ: kotwica techniczna nigdy nie zastępuje lokalizacji opisowej z
+[5] — obie razem, gdy to możliwe (kotwica ułatwia KLIKNIĘCIE, opis
+pozwala ZNALEŹĆ nawet gdy kotwica nie zadziała, np. link się zmienił).
+
+PRZYKŁAD PEŁNEGO CYTOWANIA (wszystkie 6 elementów):
+  Sąd Najwyższy w wyroku z 15 marca 2023 r. (II PK 123/22) wskazał, że
+  "[cytat do 30 słów]" (SN, II PK 123/22, 15.03.2023, s. 7 uzasadnienia,
+  https://przyklad-portalu.pl/orzeczenie/xyz.pdf#page=7)
+
+PRZYKŁAD DLA INTERPRETACJI ZE STRONY INTERNETOWEJ (nie orzeczenie, ale
+ten sam standard — komentarz prawniczy, interpretacja urzędowa, glosa):
+  Zgodnie z komentarzem [autor/instytucja], "[cytat do 15 słów — limit
+  ogólny PRAWO-HARDGATE, NIE 30-słowny limit orzeczeń z Zasady 3]" —
+  sekcja "[dokładny nagłówek]", https://przyklad.pl/artykul#sekcja
+  (jeśli brak kotwicy: "..., sekcja »Kary za naruszenie«, akapit 3 od góry")
 
 **Zasada 3 — Limit cytatu: maksymalnie 30 słów.**
 Dziedzinowy override globalnego limitu 15 słów z PRAWO-HARDGATE — uzasadniony koniecznością
@@ -734,7 +806,7 @@ Status: [🔴 BILANS NIEKORZYSTNY / 🟡 BILANS MIESZANY / ✅ BILANS KORZYSTNY]
 PLAN MINIMUM (Zasada 11) — [n_A]/5 wspierających, [n_B]/5 linii przeciwnej:
 
 [A] ORZECZENIA WSPIERAJĄCE TEZĘ (docelowo 5, w kolejności: Kat.6A → reszta wg rangi/daty)
-  1. [SYGNATURA] · [SĄD + IZBA] · [DATA] · [URL]
+  1. [SYGNATURA] · [SĄD + IZBA] · [DATA] · [URL] · [lokalizacja: s./teza/pkt — Zasada 2B]
      Przesłanki: [2–4 zdania — co konkretnie w stanie faktycznym/wykładni
      zdecydowało o takim rozstrzygnięciu; parafraza, limit cytatu Zasada 3]
   2. ...
@@ -742,7 +814,7 @@ PLAN MINIMUM (Zasada 11) — [n_A]/5 wspierających, [n_B]/5 linii przeciwnej:
    wyczerpujące w [lista portali/faz użytych], brak dalszych trafień")
 
 [B] LINIA PRZECIWNA (docelowo 5, o ile istnieje — Faza 1-D)
-  1. [SYGNATURA] · [SĄD + IZBA] · [DATA] · [URL]
+  1. [SYGNATURA] · [SĄD + IZBA] · [DATA] · [URL] · [lokalizacja: s./teza/pkt — Zasada 2B]
      Przesłanki + czynnik odróżniający: [2–4 zdania — dlaczego sąd orzekł
      odwrotnie: inny stan faktyczny, brak przesłanki, odmienna wykładnia]
   2. ...

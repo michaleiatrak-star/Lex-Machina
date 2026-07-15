@@ -1,6 +1,6 @@
 ---
 name: pisma-proste-v2
-version: 2.0
+version: 2.1
 type: executive-pisma
 status: production
 description: |
@@ -137,6 +137,16 @@ Np. proste wezwanie do zapłaty bez terminu zawitego → pomijasz M5 i M7.
 
 > ⚠ Pliki modułów przechowywane są w katalogu `references/` względem SKILL.md.
 > Ładuj z pełną ścieżką.
+
+**Skan kompletności dokumentów (naprawa F-7/ZASADA 11, 2026-07-15)** — jeśli
+użytkownik dostarczył JAKIKOLWIEK dokument (nakaz, tytuł wykonawczy, wyrok,
+umowa, korespondencja), wykonaj PRZED weryfikacją twierdzeń poniżej:
+> `view /mnt/skills/user/shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` — zastosuj
+> FAZA 1-3 w pełni (SD-GATE-TRUNC, SD-GATE-PORCJA, SD-VER), nawet dla
+> jednego krótkiego dokumentu. Przyczyna: pismo proste bazuje zwykle na
+> 1 dokumencie źródłowym — błąd w jego odczycie (obcięcie przez `view`,
+> fragmentaryczna lektura) przenosi się wprost na CAŁE pismo, bez żadnej
+> drugiej szansy na wykrycie w wielodokumentowej korelacji krzyżowej.
 
 **Weryfikacja twierdzeń strony** — wykonaj przed redagowaniem:
 > `view /mnt/skills/user/shared/CLAIM-VALIDATION.md`

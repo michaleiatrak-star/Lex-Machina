@@ -20,6 +20,13 @@ rozwiązań Dz.U. 2026.203; poprzednia weryfikacja: 2026-06-05)
 cudzoziemców (Dz.U. 2025 poz. 621, w życie 01.06.2025) — elektronizacja wniosków
 przez praca.gov.pl, kary dla pracodawcy za nielegalne zatrudnienie.
 
+**Zezwolenie na przekraczanie granicy w ramach małego ruchu granicznego (MRG)**
+— to odrębny typ dokumentu wjazdowego, uregulowany bilateralnie (nie w tej
+ustawie wprost poza art. 42 ust. 3-4 — tryb odwoławczy: wniosek o ponowne
+rozpatrzenie przez KONSULA w 14 dni). Pełna rama prawna (umowy z Ukrainą/
+Rosją/Białorusią, aktualny status obowiązywania/zawieszenia) →
+`dr-14/mod-maly-ruch-graniczny.md` (utworzony 2026-07-15).
+
 ---
 
 ## 1. CORE

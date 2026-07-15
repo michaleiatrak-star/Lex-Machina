@@ -30,6 +30,7 @@ Każde twierdzenie w raporcie oznacz:
 □ Czy wskazano braki dowodowe?
 □ Czy przepisy wymagające aktualności oznaczono do weryfikacji w ISAP?
 □ Czy orzeczenia nie zostały wymyślone (weryfikacja przez orzeczenia-sadowe-v2)?
+□ Czy każdy cytat z orzeczenia/interpretacji ma lokalizację (s./teza/pkt) i kotwicę gdy możliwa (Zasada 2B, orzeczenia-sadowe-v2)?
 □ Czy końcowa rekomendacja jest operacyjna?
 □ Czy terminy krytyczne (< 14 dni) są oznaczone alertem w M12?
 ```

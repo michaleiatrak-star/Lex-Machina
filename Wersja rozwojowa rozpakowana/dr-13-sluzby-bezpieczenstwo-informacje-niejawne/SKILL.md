@@ -1,6 +1,6 @@
 ---
 name: dr-13-sluzby-bezpieczenstwo-informacje-niejawne
-version: 3.5
+version: 3.6
 description: |
   DR-13: Służby, Bezpieczeństwo, Informacje Niejawne
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
