@@ -1,12 +1,23 @@
 # WERYFIKACJA-ŚLAD — Moduł Audytu Śladu Weryfikacji
 
 > **Plik:** `/mnt/skills/user/shared/WERYFIKACJA-SLAD.md`
-> **Wersja:** 1.2 (2026-07-05b) — naprawa luki "cytat na poparcie tezy bez
+> **Wersja:** 1.4 (2026-07-15b) — dodano obowiązkową kategoryzację RZĄD
+>              (odesłanie do `shared/HIERARCHIA-ZRODEL.md`) przy każdej
+>              kotwicy tekstowej i w tabeli śladu — zgłoszone przez
+>              użytkownika po incydencie: link 🔗 podany bez kategoryzacji
+>              źródła (patrz CHANGELOG)
+> **Wersja poprzednia:** 1.3 (2026-07-15) — dodano KOTWICA-TEKSTOWA (Text Fragment):
+>              link bezpośredni do konkretnego zdania w źródle, na wniosek
+>              użytkownika po teście mechanizmu cytowania w rozmowie
+>              (patrz sekcja niżej + CHANGELOG na końcu pliku)
+> **Wersja 1.2** (2026-07-05b) — naprawa luki "cytat na poparcie tezy bez
 >              parafrazy" (NSA I FZ 104/26) + GUARD INSTYTUCJA/PRZEDMIOT dla
 >              orzeczeń anonimizowanych (adm./karne)
-> **Wersja poprzednia:** 1.1 (2026-07-05a) — GRADIENT ISTNIENIE/TREŚĆ/FRAGMENT
+> **Wersja 1.1** (2026-07-05a) — GRADIENT ISTNIENIE/TREŚĆ/FRAGMENT
 >              + guard STRON; wzorzec citation-grounding-pl v2.1
-> **Status:** AKTYWNY — naprawa BLOKER-3, rozszerzenie po AUDYT-2026-07-05b
+> **Status:** AKTYWNY — naprawa BLOKER-3, rozszerzenie po AUDYT-2026-07-05b,
+>              rozszerzenie 1.3 po teście KOTWICA-TEKSTOWA (2026-07-15),
+>              rozszerzenie 1.4 po dodaniu kategoryzacji RZĄD (2026-07-15b)
 
 ---
 
@@ -56,6 +67,29 @@ Termin: 2 tygodnie na sprzeciw od nakazu zapłaty (art. 502 §1 KPC) ✅ [VER: i
 | art. 12 §4 KPK — wyjątek wnioskowy | isap.sejm.gov.pl (Dz.U.2026.490) | 2026-05-25 | ✅ |
 | Wyrok SN V KK 123/22 | sn.pl (nie znaleziono) | 2026-05-25 | ⚠️ NIEWERYFIKOWANE |
 ```
+
+---
+
+## 🔗 KOTWICA-TEKSTOWA (Text Fragment) — SCALONE do PRAWO-HARDGATE.md (2026-07-15c)
+
+> ⛔ **Ten mechanizm nie jest już opisany tutaj osobno.** Powstał 2026-07-15
+> niezależnie od KROK 5A w `shared/PRAWO-HARDGATE.md` (dodanego tego samego
+> dnia) — dwie osobne implementacje tego samego problemu w dwóch plikach
+> shared/, wykryte przez użytkownika jako duplikacja po incydencie, w którym
+> odpowiedź z modułu karnego (dr-03) nie zastosowała żadnej z nich.
+>
+> Pełna, kanoniczna procedura (Text Fragment `#:~:text=`, KT-1→KT-4,
+> kategoryzacja RZĄD, zastrzeżenie o wsparciu przeglądarek, FALLBACK) jest
+> teraz WYŁĄCZNIE w:
+> `view /mnt/skills/user/shared/PRAWO-HARDGATE.md` → sekcja KROK 5A
+>
+> Ten plik (WERYFIKACJA-SLAD.md) pozostaje właściwym miejscem dla znaczników
+> ✅/⚠️ [VER/NIEWERYFIKOWANE] i GRADIENTU (ISTNIENIE/TREŚĆ/FRAGMENT) — patrz
+> sekcje niżej. KOTWICA-TEKSTOWA jest odrębnym, dodatkowym mechanizmem
+> nawigacyjnym opisanym w PRAWO-HARDGATE.md, nie zastępuje GRADIENTU.
+>
+> Pełny opis scalenia: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`,
+> wpis AUDYT-2026-07-15c.
 
 ---
 
@@ -181,6 +215,9 @@ ISTNIENIE. Dla TREŚĆ i FRAGMENT stosuj rozszerzenie:
 🟢 [VER-FRAGMENT: źródło, data]  — cytat dosłowny potwierdzony w źródle
 🟢 [VER-TREŚĆ: źródło, data]     — parafraza potwierdzona co do istoty
 ✅ [VER: źródło, data]           — potwierdzone ISTNIENIE kotwicy (jak dotąd)
+🔗 [KOTWICA-TEKSTOWA: URL#:~:text=…] — link z Text Fragment do miejsca cytowania
+                                   (TOWARZYSZY 🟢/✅, nie zastępuje — procedura
+                                   kanoniczna: shared/PRAWO-HARDGATE.md KROK 5A)
 🟠 [KALIBRACJA]                  — osiągnięto niższy poziom niż twierdzono → złagodź tezę
 ⚠️ [NIEWERYFIKOWANE]             — weryfikacja niemożliwa (jak dotąd)
 🔴 [BLOKADA]                     — rozbieżność kotwicy / stron / treści → usuń przed wysłaniem
@@ -277,6 +314,12 @@ KROK W-3: Przypisz znacznik do każdego elementu:
   Narzędzie nie zwróciło / brak dostępu → ⚠️ [NIEWERYFIKOWANE]
   ⛔ ZAKAZ: ✅ bez wywołania narzędzia
 
+KROK W-3b: Dla elementów na poziomie FRAGMENT (cytat dosłowny/pinpoint) lub
+  dla orzeczeń → wykonaj KT-1→KT-4 (procedura kanoniczna: shared/PRAWO-
+  -HARDGATE.md KROK 5A) W TEJ SAMEJ odpowiedzi, korzystając z treści
+  właśnie zwróconej przez narzędzie — NIE dobudowuj kotwicy tekstowej po
+  fakcie, w kolejnej turze, bez ponownego web_fetch/web_search tego źródła.
+
 KROK W-4: Przy ≥ 3 nieudanych weryfikacjach z rzędu:
   → Wyświetl użytkownikowi komunikat:
     "⚠️ Weryfikacja online niedostępna (ISAP / sn.pl nie odpowiada).
@@ -328,6 +371,16 @@ Tryb awaryjny NIE oznacza pominięcia disclaimera — DISCLAIMER.md stosuje się
              adm./karna) — wykonany GUARD INSTYTUCJA/PRZEDMIOT (GRAD-3b)?
 □ [GRADIENT] Twierdzenia z poziomem osiągniętym < wymaganym → skalibrowane (🟠)
              lub usunięte (🔴)?
+□ [KOTWICA-TEKSTOWA] Każdy cytat na poziomie FRAGMENT / każde orzeczenie
+             ma dołączony link z Text Fragment (🔗), skonstruowany w TEJ
+             odpowiedzi z treści właśnie zwróconej przez narzędzie?
+□ [KOTWICA-TEKSTOWA] Czy przy każdym 🔗 podano zastrzeżenie (a)/(b)/(c)
+             z shared/PRAWO-HARDGATE.md KROK 5A, zamiast przedstawiać link jako
+             gwarantowany?
+□ [RZĄD] Czy KAŻDY link/URL w odpowiedzi (nie tylko 🔗) ma przypisaną
+             kategorię RZĄD 1/2A/2B/3 wg `shared/HIERARCHIA-ZRODEL.md`?
+□ [RZĄD] Czy źródła Rządu 3 mają sprawdzoną datę (>24 mies. → ostrzeżenie)
+             i są skrzyżowane z Rzędem 1/2A przed użyciem jako poparcia tezy?
 ```
 
 ### Dodaj do REGUŁ NADRZĘDNYCH routera (punkt 14):
@@ -336,4 +389,80 @@ Tryb awaryjny NIE oznacza pominięcia disclaimera — DISCLAIMER.md stosuje się
 14. WERYFIKACJA-ŚLAD: Każdy artykuł / liczba / termin / orzeczenie musi mieć znacznik
     ✅ [VER: źródło, data] (po narzędziu) lub ⚠️ [NIEWERYFIKOWANE] (brak dostępu).
     ⛔ ZAKAZ oznaczania VER bez wywołania web_search / web_fetch.
+    ⛔ Dla FRAGMENT/orzeczeń — dołącz też 🔗 [KOTWICA-TEKSTOWA], procedura
+       kanoniczna w `shared/PRAWO-HARDGATE.md` KROK 5A (SCALONE 2026-07-15c —
+       nie duplikuj tutaj), zbudowaną w tej samej odpowiedzi, z zastrzeżeniem
+       o ograniczonym wsparciu przeglądarek i braku gwarancji trwałości
+       dopasowania.
 ```
+
+---
+
+## CHANGELOG
+
+**1.5 (2026-07-15c) — SCALENIE: KOTWICA-TEKSTOWA przeniesiona do shared/PRAWO-HARDGATE.md:**
+- Wykryto: mechanizm KOTWICA-TEKSTOWA (Text Fragment `#:~:text=`) powstał
+  tutaj 2026-07-15 niezależnie od KROK 5A w `shared/PRAWO-HARDGATE.md`,
+  dodanego TEGO SAMEGO DNIA — dwie osobne implementacje tego samego
+  problemu (link do konkretnego miejsca w źródle) w dwóch plikach shared/.
+  Zgłoszone przez użytkownika po incydencie: odpowiedź z modułu karnego
+  (dr-03) nie zastosowała żadnej z dwóch wersji.
+- Naprawa: pełna treść (Text Fragment, KT-1→KT-4, RZĄD, zastrzeżenie
+  o przeglądarkach, FALLBACK) przeniesiona do `PRAWO-HARDGATE.md` KROK 5A
+  (2.2→2.3), scalona z istniejącą tam treścią o numerach strony/tezy/
+  nagłówka. Ten plik zachowuje wyłącznie krótkie odesłanie w miejscu
+  dawnej pełnej sekcji, plus poprawione odesłania w GRADIENCIE i KROK W-3b
+  (dotąd wskazywały "patrz wyżej" na treść, która po scaleniu już tu nie
+  jest pełna).
+- Ten plik (WERYFIKACJA-SLAD.md) pozostaje kanoniczny dla: znaczników
+  ✅/⚠️ [VER/NIEWERYFIKOWANE], GRADIENTU (ISTNIENIE/TREŚĆ/FRAGMENT),
+  formatu tabeli śladu, SVG (usuwanie znaczników z dokumentów finalnych).
+  `PRAWO-HARDGATE.md` jest kanoniczny dla: samego mechanizmu kotwicy
+  (jak zbudować link), niezależnie od tego, który plik ustala WYMÓG
+  jej zastosowania.
+- Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis
+  AUDYT-2026-07-15c.
+- Wersja 1.4 → 1.5.
+
+**1.4 (2026-07-15b):**
+- **Naprawa: brak obowiązkowej kategoryzacji RZĄD przy linkach.** Zgłoszone
+  przez użytkownika: w poprzedniej turze podano link 🔗 (kotwica tekstowa)
+  bez kategoryzacji źródła wg hierarchii RZĄD 1/2A/2B/3 — mechanizm ten
+  istniał już w systemie, ale wyłącznie lokalnie w `analizator-przepisow-v2`
+  i nie był ładowany/wymuszany w kontekście tego pliku ani w odpowiedziach
+  generowanych poza tym skillem.
+- **Naprawa systemowa (nie punktowa):** hierarchia źródeł wydzielona do
+  nowego kanonicznego pliku `shared/HIERARCHIA-ZRODEL.md`, współdzielonego
+  przez ten plik, `shared/PRAWO-HARDGATE.md` i `analizator-przepisow-v2`
+  (który teraz się do niego odsyła zamiast duplikować treść).
+- Dodano wymóg RZĄD do sekcji KOTWICA-TEKSTOWA (kategoryzacja OBOK 🔗,
+  nie zamiast), do formatu śladu weryfikacji i do SELF-CHECK.
+- Wersja 1.3 → 1.4.
+
+**1.3 (2026-07-15):**
+- Dodano sekcję **🔗 KOTWICA-TEKSTOWA (Text Fragment)** — na wyraźne życzenie
+  użytkownika, po tym jak w rozmowie przetestowano ręcznie skonstruowany link
+  `#:~:text=...` i porównano go z natywnym mechanizmem cytowania Claude
+  (tag `` z indeksem dokument-zdanie). Ustalono, że to dwa różne
+  mechanizmy: natywne cytowanie jest weryfikowalne wewnątrz rozmowy, ale nie
+  gwarantuje przewinięcia żywej strony po kliknięciu; Text Fragment adresuje
+  właśnie ten drugi przypadek, kosztem braku gwarancji (przeglądarka, trwałość
+  treści strony).
+- Nowy znacznik `🔗 [KOTWICA-TEKSTOWA: URL#:~:text=…]` w tabeli statusów —
+  TOWARZYSZY dotychczasowym ✅/🟢, nie zastępuje ich. Poziom weryfikacji
+  (ISTNIENIE/TREŚĆ/FRAGMENT) nadal ustala WYŁĄCZNIE GRADIENT.
+- Nowy krok **KT-1→KT-4** (procedura konstrukcji) oraz **KROK W-3b** w
+  sekwencji obowiązkowej — kotwica tekstowa musi być budowana w tej samej
+  odpowiedzi co web_fetch/web_search źródła, nie doklejana post factum bez
+  ponownego odczytu.
+- Rozszerzony SELF-CHECK o dwa punkty kontrolne dla KOTWICA-TEKSTOWA.
+- Zastrzeżenie obowiązkowe wprowadzone jako twardy wymóg: ZAKAZ prezentowania
+  linku jako gwarantowanego — zawsze z zastrzeżeniem o wsparciu przeglądarek
+  (Chromium tak, Safari/Firefox nie gwarantowanie) i możliwej dezaktualizacji
+  treści strony źródłowej.
+- Dodano **FALLBACK** (na wyraźne życzenie użytkownika): gdy konstrukcja
+  kotwicy tekstowej zawodzi (fragment za długi/nieregularny, treść z PDF-a,
+  brak pewności unikalności dopasowania) → nie twórz jej "na siłę", podaj
+  wyłącznie zwykły link do strony źródłowej, bez znacznika 🔗, z wyraźną
+  adnotacją że to link do strony, nie do fragmentu.
+- Wersja 1.2 → 1.3.

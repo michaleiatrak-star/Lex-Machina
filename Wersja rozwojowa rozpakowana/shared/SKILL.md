@@ -1,6 +1,6 @@
 ---
 name: shared
-version: 2.7
+version: 2.8
 type: library
 entrypoint: SKILL.md
 compatibility: "wszystkie skille prawne systemu"

@@ -1,7 +1,7 @@
 # MOD-SKAN-DOWODOW-KOMPLETNY — Pełna inwentaryzacja i weryfikacja odczytania 100% stron
 
 > **Plik:** `/mnt/skills/user/shared/MOD-SKAN-DOWODOW-KOMPLETNY.md`
-> **Wersja:** 1.4.0 (2026-07-11)
+> **Wersja:** 1.6.0 (2026-07-15)
 > **Status:** PRODUKCJA — plik kanoniczny shared
 > **Pozycja w pipeline:**
 >   - prawny-router-v3: KROK 0C-EXT — rozszerzenie KROK 0C, wykonywane PO rozpakowaniu ZIP,
@@ -159,7 +159,12 @@ KROK SD-READ.1 — Per każdy plik D[id] wykonaj protokół:
     A. zipfile content.xml → czy zawiera tekst?
     B. Jeśli PUSTY lub minimalny → wyodrębnij obrazy: zipfile Pictures/* → /tmp/
     C. Per KAŻDY obraz z ODT: view → wypisz treść wizualną
-    D. Aktualizuj SD-REJ: D[id] → ✅ ODCZYTANY obraz [1/N]...[N/N]
+    D. Jeśli content.xml zawiera ISTOTNY tekst (nie pusty/minimalny) → strip tagów →
+       traktuj wynikowy tekst jak [PLIK TEKSTOWY] niżej: PEŁNA długość musi zostać
+       faktycznie przeanalizowana, zgodnie z KROK SD-READ.1b (SD-GATE-PORCJA) —
+       ⛔ zakaz wycinania dowolnego zakresu znaków i uznawania go za całość
+    E. Aktualizuj SD-REJ: D[id] → ✅ ODCZYTANY obraz [1/N]...[N/N] i/lub
+       ✅ ODCZYTANY TEKST W CAŁOŚCI [X/Y znaków]
 
   [JPG/PNG standalone]
     A. view → opis treści
@@ -169,6 +174,39 @@ KROK SD-READ.1 — Per każdy plik D[id] wykonaj protokół:
     A. zipfile word/document.xml → regex strip tags → tekst
     B. Jeśli tekst < 50 znaków → prawdopodobnie osadzony obraz → sprawdź word/media/*
     C. Aktualizuj SD-REJ: D[id] → ✅ ODCZYTANY
+
+  [PLIK TEKSTOWY odczytywany narzędziem `view` — .txt, wyniki pdftotext, OCR]
+    A. Wywołaj `view` bez view_range (odczyt domyślny).
+    B. ⛔ SD-GATE-TRUNC: sprawdź WYNIK pod kątem znacznika obcięcia —
+       `< truncated lines X-Y >` lub równoważny komunikat "showing beginning and end".
+       Ten znacznik oznacza, że narzędzie NIE pokazało środkowej części pliku —
+       niezależnie od tego, ile linii/znaków plik ma łącznie.
+    C. Jeśli znacznik obcięcia WYSTĄPIŁ:
+       → wykonaj DODATKOWE wywołanie `view` z jawnym `view_range` pokrywającym
+         DOKŁADNIE zakres X-Y (i wszystkie kolejne zakresy obcięcia, jeśli plik
+         jest na tyle długi, że wymaga więcej niż dwóch wywołań)
+       → ZAKAZ przechodzenia do ekstrakcji faktów (SD-READ.2) z pliku, który ma
+         nierozwiązany znacznik obcięcia
+    D. Aktualizuj SD-REJ: D[id] → ✅ ODCZYTANY W CAŁOŚCI (0 nierozwiązanych obcięć)
+       lub ⚠️ OBCIĘTY — [X-Y nieodczytane] dopóki krok C nie zostanie wykonany
+
+KROK SD-READ.1b — ⛔ SD-GATE-PORCJA (dotyczy KAŻDEGO pliku, niezależnie od
+metody ekstrakcji — `view`, zipfile+regex, OCR, pdftotext, ręczne cięcie
+tekstu w kodzie — którego wyodrębniona treść przekracza ok. 3000 znaków):
+  A. Ustal N_ZNAKOW = długość CAŁEJ wyodrębnionej treści (nie tylko fragmentu
+     dotychczas przejrzanego).
+  B. Prowadź jawny licznik SD-PORCJA[D[id]]: "przeczytano X/Y znaków (Z%)",
+     aktualizowany po każdym faktycznie przeanalizowanym fragmencie.
+  C. ⛔ ZAKAZ przejścia do SD-READ.2 (ekstrakcja faktów) dopóki X < Y, chyba że:
+     - pominięty fragment został OBIEKTYWNIE zweryfikowany jako powtarzalny
+       lub nieistotny (np. wielokrotnie powtórzona stopka/nagłówek) — i to
+       uzasadnienie jest JAWNIE zapisane w SD-REJ, nie domyślnie założone; LUB
+     - użytkownik wyraźnie zaakceptował próbkowanie zamiast pełnego odczytu
+       (np. bardzo duży zbiór danych) — również z jawnym zapisem w SD-REJ.
+  D. Domyślne założenie jest ODWROTNE niż potoczne: brak przeczytania całości
+     = plik NIEODCZYTANY W CAŁOŚCI, nie "odczytany częściowo, wystarczająco".
+  E. Aktualizuj SD-REJ: D[id] → ✅ ODCZYTANY W CAŁOŚCI [Y/Y znaków, 100%] lub
+     ⚠️ PRÓBKOWANY [X/Y znaków, Z%] — z uzasadnieniem z kroku C.
 
 KROK SD-READ.2 — Po odczytaniu każdego pliku: ekstrakcja faktów do SD-FAKTY:
   SD-FAKTY[D[id]] = {
@@ -194,6 +232,13 @@ KROK SD-VER.1 — Sprawdź SD-REJ:
   Czy dla każdego PDF: strony_odczytane = N_stron_łącznie?
   Czy dla każdego XLSX: wszystkie zakładki przeanalizowane?
   Czy dla każdego ODT z obrazami: wszystkie obrazy z Pictures/ odczytane?
+  ⛔ Czy dla każdego pliku odczytanego przez `view` (SD-GATE-TRUNC) NIE pozostał
+     żaden nierozwiązany znacznik `< truncated lines X-Y >`? Status ⚠️ OBCIĘTY
+     liczy się jak brak istotny — patrz SD-VER.2.
+  ⛔ Czy dla każdego pliku o wyodrębnionej treści >3000 znaków (SD-GATE-PORCJA)
+     licznik SD-PORCJA pokazuje X=Y (100%), lub — jeśli X<Y — czy w SD-REJ
+     zapisano JAWNE uzasadnienie próbkowania? Brak jednego i drugiego = status
+     ⚠️ PRÓBKOWANY, traktowany jak brak istotny — patrz SD-VER.2.
 
 KROK SD-VER.2 — Klasyfikacja wyników:
   ✅ KOMPLET: wszystkie pliki odczytane, wszystkie strony ✅
@@ -394,6 +439,50 @@ REGUŁA-PFRON-SUDOP:
   → Wyodrębnij: data udzielenia, kwota nominalna, NIP beneficjenta, nr środka.
   → Zsumuj PER PODMIOT (NIP), nie łącznie.
   → Porównaj z okresem spornym: które miesiące pokrywa, które nie.
+
+REGUŁA-TRUNCATION-VIEW (dodana 2026-07-14, sprawa XI P 27/26 — świadek Maria
+Koroleva, protokół rozprawy 08.07.2026):
+  Narzędzie `view` wywołane BEZ `view_range` automatycznie obcina środek pliku,
+  gdy treść przekracza próg znakowy — niezależnie od tego, czy plik "wygląda"
+  na krótki (mało linii, mały rozmiar w KB). Sam plik protokołu rozprawy
+  (394-403 linii, ~14 KB) już podlegał temu obcięciu.
+  → KAŻDE wystąpienie `< truncated lines X-Y >` w wyniku `view` jest twardym
+    sygnałem, nie kosmetyczną adnotacją.
+  → Reakcja obowiązkowa: NATYCHMIAST, w tej samej turze, dodatkowe wywołanie
+    `view` z `view_range` pokrywającym dokładnie X-Y, ZANIM jakikolwiek fakt
+    z tego pliku zostanie użyty do budowania tez, pytań lub pisma.
+  → Nie wystarczy założyć, że obcięty fragment "prawdopodobnie nie zawiera nic
+    istotnego" — w udokumentowanym przypadku obcięty zakres zawierał kluczowe,
+    niekwestionowane przez stronę przeciwną zeznanie (wiadomość WhatsApp do
+    kilkuset pracowników, 28.09.2024), pominięte w trzech kolejnych turach.
+  → Dotyczy to zarówno plików .txt, jak i wyników pdftotext/OCR wklejanych do
+    plików tekstowych przed odczytem przez `view`.
+
+REGUŁA-PORCJOWANIA-DLUGICH-PLIKOW (dodana 2026-07-15, na podstawie F-12 /
+AUDYT-2026-07-14b pkt 3 — plik .odt 68 415 znaków odczytany w ~17,5% BEZ
+żadnej adnotacji narzędzia o obcięciu):
+  Mechanizm odrębny od REGUŁA-TRUNCATION-VIEW i SD-GATE-TRUNC: tam narzędzie
+  `view` SAMO sygnalizuje obcięcie (`< truncated lines X-Y >`). Tutaj problem
+  jest "cichy" — treść zostaje odczytana częściowo metodą, która NIE zgłasza
+  żadnego ostrzeżenia (np. zipfile+regex na .odt/.docx, ręczne wycinanie
+  zakresu znaków w kodzie typu `tekst[4000:12000]`, przetwarzanie
+  strumieniowe, OCR wklejany fragmentami) — a model uznaje dowolną próbkę
+  (np. pierwsze 17,5% pliku) za reprezentatywną dla całości, bez żadnego
+  sygnału z zewnątrz, że coś zostało pominięte.
+  → Dla KAŻDEGO pliku, którego wyodrębniona treść przekracza ok. 3000 znaków,
+    niezależnie od metody ekstrakcji: ustal CAŁKOWITĄ długość treści (N_ZNAKOW)
+    ZANIM rozpocznie się jej analiza, nie po fakcie.
+  → Prowadź jawny licznik "przeczytano X/Y znaków (Z%)" — patrz SD-GATE-PORCJA
+    (KROK SD-READ.1b, FAZA 2) — i nie przechodź do ekstrakcji faktów (SD-READ.2)
+    dopóki X < Y, chyba że brak pełnego odczytu jest JAWNIE uzasadniony i
+    zapisany w SD-REJ (nie założony milcząco).
+  → Domyślne założenie: plik odczytany częściowo BEZ jawnego uzasadnienia =
+    plik NIEODCZYTANY W CAŁOŚCI — traktowany tak samo rygorystycznie jak
+    plik z nierozwiązanym znacznikiem obcięcia w SD-GATE-TRUNC.
+  → Nie myl tej reguły z REGUŁA-TRUNCATION-VIEW: różnią się źródłem sygnału
+    (aktywny komunikat narzędzia vs. brak jakiegokolwiek sygnału), ale obie
+    prowadzą do tego samego wymogu końcowego — 100% treści faktycznie
+    przejrzane przed budową tez, pytań lub pisma.
 ```
 
 ---
@@ -408,6 +497,10 @@ REGUŁA-PFRON-SUDOP:
 □ Dla PDF wielostronicowych: str. odczytane = N_stron?
 □ Dla XLSX: odczytano WSZYSTKIE zakładki?
 □ Dla ODT z obrazami: odczytano WSZYSTKIE obrazy z Pictures/?
+□ SD-GATE-TRUNC: dla KAŻDEGO pliku odczytanego przez `view` sprawdzono brak
+  nierozwiązanego znacznika `< truncated lines X-Y >`?
+□ SD-GATE-PORCJA: dla KAŻDEGO pliku >3000 znaków sprawdzono, że przeczytano
+  100% treści LUB zapisano jawne uzasadnienie próbkowania w SD-REJ?
 □ Dla protokołów sądowych: wyodrębniono zeznania WSZYSTKICH świadków per zdanie?
 □ SD-FAKTY: wypełnione dla każdego D[id]?
 □ SD-VER: status KOMPLET?
@@ -422,6 +515,51 @@ Którykolwiek = NIE → wróć do właściwego kroku. Nie generuj pisma.
 ## HISTORIA ZMIAN
 
 ```
+1.6.0 (2026-07-15)
+Przyczyna: flaga F-12 (otwarta w AUDYT-2026-07-14b pkt 3) — plik .odt
+  (68 415 znaków) odczytany fragmentarycznie (~17,5% treści) metodą
+  ręcznego wycinania zakresu znaków w kodzie, BEZ żadnej adnotacji
+  narzędzia o obcięciu. SD-GATE-TRUNC (v1.5.0) nie adresował tego
+  przypadku, bo działa wyłącznie na aktywnym sygnale narzędzia `view`
+  (`< truncated lines X-Y >`) — tu takiego sygnału nie było, model po
+  prostu przestał czytać i uznał próbkę za reprezentatywną.
+Naprawa: (1) dodano KROK SD-READ.1b — nową uniwersalną bramkę SD-GATE-PORCJA
+  (FAZA 2), obowiązującą dla KAŻDEGO pliku o wyodrębnionej treści >3000
+  znaków, niezależnie od metody ekstrakcji; wymaga jawnego licznika
+  "przeczytano X/Y znaków" i zakazuje ekstrakcji faktów dopóki X<Y bez
+  jawnego uzasadnienia w SD-REJ; (2) rozszerzono blok [ODT] o wymóg pełnej
+  analizy tekstu z content.xml, gdy jest on istotny (nie tylko fallback na
+  obrazy); (3) rozszerzono SD-VER.1 (FAZA 3) o warunek SD-GATE-PORCJA;
+  (4) dodano REGUŁA-PORCJOWANIA-DLUGICH-PLIKOW w sekcji REGUŁY SZCZEGÓLNE,
+  z jawnym rozróżnieniem od REGUŁA-TRUNCATION-VIEW (sygnał aktywny narzędzia
+  vs. brak jakiegokolwiek sygnału); (5) dodano pozycję SD-GATE-PORCJA do
+  SELF-CHECK MODUŁU. Flaga F-12 zamknięta — patrz AUDIT-JOURNAL.md.
+
+1.5.0 (2026-07-14)
+Przyczyna: sprawa świadka Marii Korolevej, protokół rozprawy z 08.07.2026
+  (XI P 27/26). Model odczytał plik tekstowy protokołu narzędziem `view` bez
+  `view_range` — narzędzie zwróciło adnotację `< truncated lines 174-230 >`,
+  obcinając środek pliku mimo jego niewielkiego rozmiaru (394-403 linii,
+  ~14 KB). Model kontynuował analizę i budował tezy/pytania na podstawie
+  pozostałej treści, NIGDY nie wracając do obciętego zakresu. Skutek: przez
+  trzy kolejne tury pominięto niekwestionowane przez stronę pozwaną zeznanie
+  o wiadomości WhatsApp wysłanej do kilkuset pracowników 28.09.2024 — fakt,
+  który użytkownik samodzielnie zidentyfikował w porównywanym dokumencie
+  zewnętrznym (Pytania_dla_Marii.docx, Blok 4) i o którym model dowiedział
+  się dopiero po wyraźnym poleceniu ponownego zbadania protokołów.
+  Osobny, analogiczny incydent w tej samej sesji: plik .odt (68 415 znaków)
+  odczytany fragmentarycznie (~17,5%) bez żadnej adnotacji narzędzia — to
+  inny mechanizm (przerwana lektura długiego pliku, nie obcięcie przez
+  narzędzie) i NIE jest przedmiotem tej poprawki; wymaga osobnej reguły
+  (patrz ZASADA-PORCJOWANIA-DLUGICH-PLIKOW, do rozważenia w kolejnej sesji).
+Naprawa: (1) dodano do FAZA 2 (SD-READ) nowy typ pliku "[PLIK TEKSTOWY
+  odczytywany narzędziem `view`]" z bramką SD-GATE-TRUNC — obowiązkowe
+  dodatkowe wywołanie `view` z jawnym `view_range` na każdy zgłoszony zakres
+  obcięcia, PRZED ekstrakcją faktów; (2) rozszerzono SD-VER.1 (FAZA 3) o
+  warunek braku nierozwiązanych znaczników obcięcia; (3) dodano
+  REGUŁA-TRUNCATION-VIEW w sekcji REGUŁY SZCZEGÓLNE; (4) dodano pozycję
+  SD-GATE-TRUNC do SELF-CHECK MODUŁU.
+
 1.4.0 (2026-07-11)
 Przyczyna: sprawa świadka Marii Korolevej — model zbudował trzy tezy
   i pytania przesłuchania wyłącznie na plikach tekstowych + 1 zrasteryzowanym

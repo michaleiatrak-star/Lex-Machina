@@ -110,6 +110,11 @@ KROK F2A — ADNOTACJA ŹRÓDŁA (obowiązkowa przy każdym twierdzeniu)
   Przykład: "W dniu 15.03.2024 pozwany rozwiązał umowę (źródło: pismo z 15.03.2024, §2)"
   Dla [⚠️ OBLICZENIE] / FSL-C: pokaż składniki + źródła składników.
   Zasada: nawet jeśli źródło jest oczywiste — adnotacja jest obowiązkowa.
+  ⚠️ Powyższe "str./pkt jeśli znane" dotyczy dokumentów SPRAWY (własnych akt
+  użytkownika). Dla orzeczeń sądowych i interpretacji znalezionych ONLINE
+  obowiązuje BARDZIEJ RYGORYSTYCZNY, OBOWIĄZKOWY (nie "jeśli znane") standard
+  lokalizacji + kotwicy technicznej — patrz `orzeczenia-sadowe-v2/SKILL.md`
+  Zasada 2B (dodana 2026-07-15).
 
 KROK F3 — KLASYFIKACJA WYNIKÓW
   Policz i zgrupuj oznaczenia z F2.
