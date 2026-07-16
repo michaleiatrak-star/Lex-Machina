@@ -1278,6 +1278,25 @@ AKTY PRAWNE (weryfikuj aktualność przed użyciem):
 >   `mod-KK-art148-162-przeciwko-zyciu-zdrowiu.md`
 > - Zniesławienie i zniewaga offline (art. 212-216 KK) →
 >   `mod-KK-art212-216-przeciwko-czci.md`
+
+> ⛔ Dodane 2026-07-16 (sesja 3): korupcja — pełne drzewa w osobnych
+> modułach (NIE dubluj tu):
+> - Korupcja urzędnicza: łapownictwo bierne/czynne, płatna protekcja,
+>   nadużycie funkcji (art. 228-231 KK) → `mod-KK-art228-231-korupcja-urzednicza.md`
+> - Korupcja w sektorze prywatnym / łapownictwo menadżerskie (art. 296a KK)
+>   → `mod-KK-art296a-korupcja-sektor-prywatny.md`
+> - Zmowa przetargowa — ujęcie karne (art. 305 KK, NIE mylić z art. 305 KC)
+>   → `mod-KK-art305-zmowa-przetargowa-karna.md`
+
+> ⛔ Dodane 2026-07-16 (sesja 4, domknięcie otwartych kandydatów):
+> - Ochrona funkcjonariusza publicznego: znieważenie, naruszenie
+>   nietykalności, czynna napaść, zmuszanie/opór (art. 222-226 KK) →
+>   `mod-KK-art222-226-ochrona-funkcjonariusza.md`
+> - Nadużycie zaufania / działanie na szkodę majątkową (art. 296 KK,
+>   sąsiaduje z korupcją menadżerską 296a) →
+>   `mod-KK-art296-naduzycie-zaufania.md`
+> - Korupcja wyborcza / przekupstwo wyborcze (art. 250a KK) →
+>   `mod-KK-art250a-korupcja-wyborcza.md`
 | Zabójstwo — typ podstawowy | art. 148 §1 KK | z urzędu | 10 lat (⚠️weryfikuj) | 25 lat/dożywocie |
 | Zabójstwo kwalifikowane | art. 148 §2-3 KK | z urzędu | 15 lat | dożywocie |
 | Zabójstwo w afekcie (uprzywilejowane) | art. 148 §4 KK | z urzędu | 1 rok | 10 lat |

@@ -122,6 +122,11 @@ Zatarcie:                     z mocy prawa po 10 latach od wykonania/darowania/
 - DR-06/mod-KAS-kontrola-celno-skarbowa (kontrola KAS podmiotów zbiorowych)
 - DR-11 (AML) — Dz.U. 2025 poz. 1440 zmienia też ustawę o przeciwdziałaniu praniu
   pieniędzy oraz finansowaniu terroryzmu
+- DR-03/mod-KK-art228-231-korupcja-urzednicza.md, mod-KK-art296a-korupcja-sektor-prywatny.md,
+  mod-KK-art305-zmowa-przetargowa-karna.md (dodano 2026-07-16) — przestępstwa
+  korupcyjne popełnione przez osobę fizyczną działającą w imieniu/interesie
+  podmiotu zbiorowego są typowym katalogowym źródłem jego odpowiedzialności —
+  sprawdź, czy dany typ korupcyjny mieści się w katalogu art. 16 tej ustawy
 
 ## Weryfikacja online
 ```

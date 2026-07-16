@@ -15,6 +15,10 @@ na iso.org lub PKN (pkn.pl). Powiązane akty prawne weryfikuj w isap.sejm.gov.pl
   Dz.U. 2025 poz. 383 ze zm. [WYMAGA WERYFIKACJI ISAP]
 - Ustawa o odpowiedzialności podmiotów zbiorowych — Dz.U. 2002 poz. 1661 ze zm.
   [WYMAGA WERYFIKACJI ISAP — reforma planowana/w toku; weryfikuj aktualny stan]
+- Ustawa o ograniczeniu prowadzenia działalności gospodarczej przez osoby
+  pełniące funkcje publiczne (1997) — pełne omówienie zakresu podmiotowego,
+  zakazów i sankcji: `mod-ustawa-antykorupcyjna-1997-ograniczenia.md`
+  (dodano 2026-07-16, NIE dubluj tu jego treści)
 - Konwencja OECD o zwalczaniu przekupstwa — ratyfikowana przez Polskę
 - Konwencja ONZ przeciwko korupcji (UNCAC)
 - ISO 37301:2021 — Compliance management systems (szersza rama; ISO 37001 jako podzbiór)
