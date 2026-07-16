@@ -1,15 +1,16 @@
 ---
 name: audyt-systemu-v4
-version: 5.4
+version: 5.5
 type: governance-audit
 compatibility:
   - Claude
   - Modular Legal Skills
 entrypoint: SKILL.md
 modules:
-  - modules/MOD-INTERLINIE.md     # usuwanie zbędnych pustych linii
-  - modules/MOD-WSTAWKI.md        # usuwanie wstawek opisowych
-  - modules/MOD-DESCRIPTION.md    # walidacja długości description (limit 1024)
+  - modules/MOD-INTERLINIE.md          # usuwanie zbędnych pustych linii
+  - modules/MOD-WSTAWKI.md             # usuwanie wstawek opisowych
+  - modules/MOD-DESCRIPTION.md         # walidacja długości description (limit 1024)
+  - modules/MOD-TRESC-MERYTORYCZNA.md  # FAZA 3E — weryfikacja treści modułów DR po zmianie przepisu (ZASADA 12, dodane 2026-07-16)
 widgets:
   - widgets/WIDGET-MENU.md        # interaktywne menu wielokrotnego wyboru
 references:
@@ -38,6 +39,20 @@ Po zakończeniu audytu: **obowiązkowa aktualizacja plików references**.
 > proceduralnego, a nie mapy Dz.U. — żeby FAZA 3 (Dz.U.) nie myliła kontekstów.
 > Ta zasada nie jest jednorazowym wyjątkiem — obowiązuje dla każdego kolejnego
 > audytu, dowolnego skilla w `/mnt/skills/user/`.
+
+---
+
+> ⚙️ **ZASADA 12 (2026-07-16, STAŁA — nie precedens):** Audyt map Dz.U.
+> (FAZA 3A–3D) i audyt treści merytorycznej modułów (FAZA 3E,
+> `MOD-TRESC-MERYTORYCZNA.md`) to **dwa odrębne zakresy kontroli, oba
+> obowiązkowe**. Aktualizacja numeru/statusu tekstu jednolitego w
+> `mapa_dzu`/`MAPA-AKTOW.md` (np. `OK` → `PREV`, dodanie nowego wiersza
+> `TJ`) **nie jest równoznaczna** ze sprawdzeniem, czy opisowa treść
+> modułu `dr-XX/modules/mod-*.md` (progi, terminy, definicje, przesłanki)
+> nadal odpowiada aktualnemu stanowi prawnemu. FAZA 3E uruchamia się
+> automatycznie po każdej sesji FAZA 3, w której wykryto zmianę statusu
+> aktu — nie jest opcjonalna i nie wymaga osobnego wywołania. Naruszenie
+> (zamknięcie FAZA 3 bez FAZA 3E mimo wykrytej zmiany) = **CRIT**.
 
 ---
 
@@ -257,6 +272,40 @@ Dla każdego: sprawdź online czy istnieje nowszy akt. Jeśli tak → CRIT. Jeś
 
 ---
 
+## FAZA 3E — WERYFIKACJA TREŚCI MERYTORYCZNEJ MODUŁÓW (ZASADA 12)
+
+> Odpowiada na pytanie: skoro FAZA 3A–3D wykryła zmianę numeru/statusu
+> aktu — czy **treść** modułu DR, która o tym akcie coś twierdzi (progi,
+> terminy, definicje, przesłanki), nadal jest zgodna z aktualnym stanem
+> prawnym? To zakres inny niż poprawność numeru Dz.U. w mapie.
+
+Pełna procedura: `modules/MOD-TRESC-MERYTORYCZNA.md` — wczytaj przed wykonaniem:
+
+```
+view /mnt/skills/user/audyt-systemu-v4/modules/MOD-TRESC-MERYTORYCZNA.md
+```
+
+**Uruchamia się automatycznie**, gdy FAZA 3 (dowolny podtryb) zakończyła
+się co najmniej jedną zmianą: nowy `TJ` (3A/3B), pozycja `✅ WSZEDŁ` z
+MONITORING (3D), lub WARN z 3C zamknięty jako "jest nowszy akt".
+
+Skrót procedury:
+1. Zidentyfikuj moduł(y) DR opisujące dotknięty akt (kolumna `Moduł` w `MAPA-AKTOW.md`).
+2. Ustal w ISAP zakres zmiany — które artykuły dodano/zmieniono/uchylono (zakaz cytowania z pamięci — PRAWO-HARDGATE).
+3. Skonfrontuj wyłącznie te twierdzenia modułu, które dotyczą zmienionych artykułów (nie cały moduł).
+4. Sklasyfikuj: ✅ ZGODNE / ⚠️ WARN-TREŚĆ / ❌ CRIT-TREŚĆ.
+5. CRIT-TREŚĆ → napraw treść modułu w tej samej sesji (str_replace na kopii), z adnotacją źródła i datą weryfikacji.
+
+Brak zmian Dz.U. w sesji → FAZA 3E pomijana, odnotuj wprost:
+`FAZA 3E: pominięta — brak zmian Dz.U. w tej sesji`.
+
+Wynik trafia do raportu jako `### 4C. TREŚĆ MERYTORYCZNA MODUŁÓW` (FAZA 6)
+oraz — dla CRIT-TREŚĆ naprawionych — do `AUDIT-JOURNAL.md` z jawnym
+odróżnieniem od poprawek czysto numeracyjnych (analogicznie do ZASADY 11
+dla skilli proceduralnych).
+
+---
+
 ## FAZA 4 — TESTY ANTYHALUCYNACYJNE
 
 ### 4A — Zakaz cytowania z pamięci
@@ -307,6 +356,7 @@ Struktura wymaganego raportu:
 ### 2. NAPRAWY WYKONANE (CRIT)
 ### 3. OSTRZEŻENIA (WARN)
 ### 4. WERYFIKACJA Dz.U.
+### 4C. TREŚĆ MERYTORYCZNA MODUŁÓW (FAZA 3E — patrz MOD-TRESC-MERYTORYCZNA.md)
 ### 5. STRUKTURA SYSTEMU — SNAPSHOT
 ### 6. WNIOSKI I ZALECENIA
 ```
@@ -395,7 +445,11 @@ Wywołanie: "wyczyść skille" / "usuń zbędne interlinie" / "usuń wstawki opi
 
 ### TRYB DZU (tylko mapa Dz.U.)
 Wywołanie: "sprawdź mapę Dz.U." / "aktualizuj Dz.U."
-→ Faza 0 + Faza 3 (A+B+C+D) + Faza 7A + 7B.
+→ Faza 0 + Faza 3 (A+B+C+D) + Faza 3E (automatycznie, jeśli 3A–3D wykryły zmianę) + Faza 7A + 7B.
+
+### TRYB TREŚĆ (tylko weryfikacja merytoryczna modułów)
+Wywołanie: "sprawdź czy moduł X wymaga aktualizacji po zmianie Y" / "zweryfikuj treść modułów po nowelizacji"
+→ Faza 0 → Faza 3E bezpośrednio (pomija 3A–3D, wskazany akt/moduł podany przez użytkownika lub ostatni wpis MONITORING/mapa_dzu) → Faza 6 (skrócony, sekcja 4C) → Faza 7A.
 
 ### TRYB WARN-CLOSE (zamknięcie ostrzeżeń)
 Wywołanie: "zamknij otwarte warningi" / "sprawdź WARN-X"
@@ -530,6 +584,19 @@ z WARN-OTWARTE.md, dodaj pełny wpis do AUDIT-JOURNAL.md.
       NIE jest blokowany (WARN nie blokuje, ZASADA 5) — plik służy
       wyłącznie widoczności, nie jest bramką.
 
+11. ⛔ **ZASADA TREŚĆ-PO-MAPIE (dodana 2026-07-16, ZASADA 12 w nagłówku
+    pliku, tu jako pozycja 11 listy operacyjnej) — audyt aktualności
+    numeru Dz.U. i audyt aktualności treści merytorycznej modułu to
+    dwie różne kontrole.**
+
+    Zamknięcie FAZA 3 (dowolny podtryb) z wykrytą zmianą statusu aktu
+    (nowy `TJ`, `✅ WSZEDŁ`, lub WARN z 3C potwierdzony jako "jest nowszy
+    akt") **bez uruchomienia FAZA 3E** (`modules/MOD-TRESC-MERYTORYCZNA.md`)
+    jest błędem krytycznym równoważnym CRIT — analogicznie do ZASADY 7
+    dla kompletności dostarczenia. Aktualizacja samego wiersza w
+    `mapa_dzu`/`MAPA-AKTOW.md` nie jest dowodem, że treść modułu została
+    sprawdzona pod kątem tego, co konkretnie zmieniła nowelizacja.
+
 ---
 
 ## STRUKTURA KATALOGU
@@ -540,7 +607,8 @@ audyt-systemu-v4/
 ├── modules/
 │   ├── MOD-INTERLINIE.md                       ← wykrycie i usuwanie zbędnych pustych linii
 │   ├── MOD-WSTAWKI.md                          ← wykrycie i usuwanie wstawek opisowych
-│   └── MOD-DESCRIPTION.md                      ← walidacja długości description (limit 1024)
+│   ├── MOD-DESCRIPTION.md                      ← walidacja długości description (limit 1024)
+│   └── MOD-TRESC-MERYTORYCZNA.md               ← FAZA 3E — weryfikacja treści modułów DR po zmianie przepisu
 ├── widgets/
 │   └── WIDGET-MENU.md                          ← kod JSX interaktywnego menu wyboru
 └── references/

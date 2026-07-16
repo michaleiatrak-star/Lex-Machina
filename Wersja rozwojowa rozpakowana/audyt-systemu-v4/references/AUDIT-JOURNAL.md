@@ -4,7 +4,68 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
-## AUDYT-2026-07-15n — DEDUP: kategoryzacja źródeł RZĄD 1/2/3 wydzielona do shared/HIERARCHIA-ZRODEL.md
+## AUDYT-2026-07-16 — WDROŻENIE FAZA 3E: weryfikacja treści merytorycznej modułów DR (ZASADA 12)
+
+**Zakres:** `SKILL.md` (5.4 → 5.5), nowy moduł
+`modules/MOD-TRESC-MERYTORYCZNA.md`. Sesja systemowa (dot. samego
+audytora, nie konkretnej dziedziny DR) — analogicznie do wpisów
+wprowadzających ZASADY 7/10/11.
+
+### KONTEKST
+
+Pytanie użytkownika: czy audyt systemu ogranicza się do badania map
+aktów (numerów Dz.U.), czy też bada, jakie przepisy uległy zmianie lub
+zostały wprowadzone, w celu aktualizacji **treści** modułów DR.
+
+### DIAGNOZA
+
+Przegląd FAZY 3 (A–D) oraz `SYNC-DZU-AUTOMATYCZNY.md`/`sync_dzu_eli.py`
+potwierdził: dotychczasowy mechanizm w całości dotyczył **metadanych** —
+czy numer/status Dz.U. przypisany aktowi w `mapa_dzu`/`MAPA-AKTOW.md`/
+`ROUTING-MAP.md` jest aktualny (3A/3B), czy akt z vacatio legis już
+wszedł w życie (3D), czy istnieje nowszy akt zastępujący (3C). Żaden
+krok nie konfrontował **opisowej treści** modułów `dr-XX/modules/mod-*.md`
+(progi kwotowe, terminy, przesłanki, definicje) z tym, co konkretnie
+zmieniła dana nowelizacja. Przesunięcie statusu `OK` → `PREV` w mapie
+było dotąd końcem procedury — bez sprawdzenia, czy treść merytoryczna
+modułu wymaga edycji. To realna luka: zaktualizowana mapa może
+współistnieć z nieaktualną treścią modułu bez żadnego sygnału o tym w
+systemie.
+
+### NAPRAWA
+
+1. Dodano `modules/MOD-TRESC-MERYTORYCZNA.md` — procedura 5-krokowa:
+   identyfikacja dotkniętego modułu → ustalenie zakresu zmiany w ISAP
+   (PRAWO-HARDGATE — zakaz z pamięci) → konfrontacja wyłącznie tych
+   twierdzeń modułu, które dotyczą zmienionych artykułów → klasyfikacja
+   (✅ ZGODNE / ⚠️ WARN-TREŚĆ / ❌ CRIT-TREŚĆ) → naprawa treści dla CRIT-TREŚĆ.
+2. Dodano **FAZA 3E** do `SKILL.md` — uruchamia się automatycznie po
+   każdej sesji FAZA 3, w której wykryto zmianę statusu aktu; pomijana
+   z jawną adnotacją, gdy brak zmian.
+3. Dodano **ZASADĘ 12** (nagłówek pliku) i pozycję 11 listy operacyjnej
+   ZASADY KRYTYCZNE: zamknięcie FAZY 3 z wykrytą zmianą bez uruchomienia
+   FAZY 3E = CRIT, analogicznie do ZASADY 7 (OUTPUT-COMPLETENESS).
+4. Dodano **TRYB TREŚĆ** do sekcji TRYBY WYWOŁANIA — punktowe wywołanie
+   weryfikacji treści dla wskazanego aktu/modułu bez pełnego audytu Dz.U.
+5. Zaktualizowano szablon raportu FAZA 6 o sekcję `### 4C. TREŚĆ
+   MERYTORYCZNA MODUŁÓW`.
+6. Zaktualizowano frontmatter `modules:` i drzewo w STRUKTURA KATALOGU.
+
+### OGRANICZENIE ŚWIADOME
+
+FAZA 3E obsługuje zmiany punktowe, jednoznacznie mapowalne na konkretny
+fragment konkretnego modułu. Zmiany o szerokim/niejasnym zakresie nadal
+wymagają sesji dedykowanej (wzorzec z wpisów 4.16/4.12) — nie jest to
+zastąpione automatyzmem.
+
+### DOSTARCZENIE
+
+Zgodnie z ZASADĄ 7 — cały skill `audyt-systemu-v4` (SKILL.md + moduły +
+widgets + references + scripts, wszystkie pliki bez zmian poza opisanymi
+wyżej) dostarczony jako pojedyncze archiwum `.zip` przez `present_files`,
+po weryfikacji liczby plików `dostarcz_skill.sh` (dysk = kopia = archiwum).
+
+
 
 **Zakres:** `shared/HIERARCHIA-ZRODEL.md` (nowy, kanoniczny), `analizator-przepisow-v2/SKILL.md`
 (usunięto duplikat, dodano odesłanie), `shared/PRAWO-HARDGATE.md` (KROK 5-RZĄD),

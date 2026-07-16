@@ -1250,6 +1250,34 @@ AKTY PRAWNE (weryfikuj aktualność przed użyciem):
 | Fałszywa faktura (wystawienie/użycie) | art. 271a §1 KK | z urzędu | 6 m-cy | 8 lat |
 | — wartość >5 mln zł (mienie wielkiej wartości) | art. 271a §2 KK | z urzędu | 3 lata | 15 lat |
 | — wartość >10× mienia wielkiej wartości | art. 277a §1 KK | z urzędu | **5 lat** | **25 lat** |
+| Fałsz materialny dokumentu (podrobienie/przerobienie/użycie) | art. 270 §1 KK | z urzędu | 3 m-ce | 5 lat |
+| Fałsz intelektualny (poświadczenie nieprawdy) | art. 271 §1 KK | z urzędu | 3 m-ce | 5 lat |
+| Podrabianie pieniędzy/papierów wartościowych | art. 310 §1 KK | z urzędu | 5 lat | 25 lat |
+> ⛔ Fałszerstwa dokumentów (270-277d) i środków płatniczych (310-316) — pełne drzewa
+> decyzyjne, różnice 270 vs 271, kontratypy i luki: patrz osobny moduł
+> `mod-KK-art270-310-falszerstwa-dokumentow.md` (NIE dubluj tu jego treści).
+
+> ⛔ Instytucje części ogólnej wpływające na wymiar/wykonanie kary, dodane
+> 2026-07-16 — pełne drzewa decyzyjne w osobnych modułach (NIE dubluj tu):
+> - Recydywa specjalna/wielokrotna (art. 64-65 KK) → `mod-KK-art64-recydywa.md`
+> - Warunkowe zawieszenie wykonania kary i warunkowe przedterminowe
+>   zwolnienie (art. 69-84 KK) → `mod-KK-art69-84-warunkowe-zawieszenie-zwolnienie.md`
+> - Przedawnienie karalności i wykonania kary (art. 101-105 KK) →
+>   `mod-KK-art101-105-przedawnienie-karalnosci.md`
+
+> ⛔ Dodane 2026-07-16 (sesja 2): formy zjawiskowe, wymiar sprawiedliwości,
+> nieletni, przeciwko życiu/zdrowiu, przeciwko czci — pełne drzewa w
+> osobnych modułach (NIE dubluj tu):
+> - Formy popełnienia: sprawstwo/współsprawstwo/podżeganie/pomocnictwo
+>   (art. 18-22 KK) → `mod-KK-art18-22-formy-popelnienia.md`
+> - Fałszywe zeznania, fałszywe oskarżenie, poplecznictwo/ukrywanie
+>   przestępcy (art. 233-244b KK) → `mod-KK-art233-244b-przeciwko-wymiarowi-sprawiedliwosci.md`
+> - Odpowiedzialność karna nieletnich (art. 10 KK + ustawa o
+>   resocjalizacji nieletnich) → `mod-KK-art10-odpowiedzialnosc-nieletnich.md`
+> - Zabójstwo (wszystkie typy), uszczerbek na zdrowiu (art. 148-162 KK) →
+>   `mod-KK-art148-162-przeciwko-zyciu-zdrowiu.md`
+> - Zniesławienie i zniewaga offline (art. 212-216 KK) →
+>   `mod-KK-art212-216-przeciwko-czci.md`
 | Zabójstwo — typ podstawowy | art. 148 §1 KK | z urzędu | 10 lat (⚠️weryfikuj) | 25 lat/dożywocie |
 | Zabójstwo kwalifikowane | art. 148 §2-3 KK | z urzędu | 15 lat | dożywocie |
 | Zabójstwo w afekcie (uprzywilejowane) | art. 148 §4 KK | z urzędu | 1 rok | 10 lat |
