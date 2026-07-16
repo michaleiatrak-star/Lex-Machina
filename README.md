@@ -100,19 +100,40 @@ powołanie przepisu/orzeczenia przechodzi przez bramki `shared/` → wynik z wid
 
 ```
 Lex-Machina/
-├── 📄 README.md                          ← ten plik
-├── 📄 LICENSE                            ← GNU GPL v3
-├── 📦 WERSJA STABILNA 12.07.2026/        ← skille spakowane (.zip) — wersja stabilna
-├── 📦 WERSJA ROZWOJOWA/                  ← skille spakowane (.zip) — wersja rozwojowa
-├── 📂 Wersja stabilna rozpakowana 12.07.2026/
-└── 📂 Wersja rozwojowa rozpakowana/      ← tu trafiają bieżące zmiany
-    ├── shared/                           ← bramki, moduły wspólne, definicje, mapy aktów
-    ├── prawny-router-v3/                 ← orkiestrator
-    ├── prawo-polskie-v2/                 ← mapa routingu dziedzin
-    ├── dr-01-… … dr-16-…/                ← 16 dziedzin prawa
-    ├── pisma_build/, analiza-sadowa-v6/, …  ← skille wykonawcze
-    └── audyt-systemu-v4/                 ← governance: dziennik audytów, mapy Dz.U.
+├── README.md                                ← ten plik
+├── LICENSE                                  ← GNU GPL v3
+├── DOKUMENTACJA-WDROZENIOWA-2026-07-13.md   ← dokumentacja wdrożeniowa systemu
+├── claude_desktop_config.json               ← przykładowa konfiguracja konektorów MCP
+├── WERSJA STABILNA 12.07.2026/              ← skille spakowane (.zip) — wersja stabilna
+├── WERSJA ROZWOJOWA/                        ← skille spakowane (.zip) — wersja rozwojowa
+├── Wersja stabilna rozpakowana 12.07.2026/  ← źródła skilli — wersja stabilna
+└── Wersja rozwojowa rozpakowana/            ← źródła skilli — tu trafiają bieżące zmiany
+    ├── shared/                              ← bramki (PRAWO-HARDGATE, SYGNATURY,
+    │   │                                      WERYFIKACJA-SLAD), moduły MOD-*, definicje
+    │   └── tools/                           ← skrypty audytowe + mcp-servers/ (przykłady
+    │                                          konektorów: ISAP/ELI, SAOS, EUR-Lex, KRS…)
+    ├── prawny-router-v3/                    ← orkiestrator
+    ├── prawo-polskie-v2/                    ← mapa routingu dziedzin
+    ├── przewodnik-prawny-v2/                ← punkt wejścia dla laika
+    ├── dr-01-… … dr-16-…/                   ← 16 dziedzin prawa
+    ├── analiza-sadowa-v6/                   ┐
+    ├── analizator-dowodow-v3/               │
+    ├── analizator-przepisow-v2/             │
+    ├── analizator-umow-v1/                  │
+    ├── chronologia-sprawy-v1/               │
+    ├── orzeczenia-sadowe-v2/                ├─ skille wykonawcze
+    ├── pisma-procesowe-v3/                  │
+    ├── pisma-proste-v2/                     │
+    ├── przesluchanie-swiadkow-v2-min90/     │  (+ wariant -v35)
+    ├── raport-klienta-v1/                   │
+    ├── raport-sytuacyjny-v2/                ┘
+    ├── *_build/                             ← katalogi robocze buildów — NIE wgrywać
+    └── audyt-systemu-v4/                    ← governance: modules/, references/
+                                               (AUDIT-JOURNAL, mapy Dz.U.), scripts/, widgets/
 ```
+
+Katalog wersji stabilnej ma tę samą strukturę. Każdy skill to folder z `SKILL.md`
+w korzeniu — do Claude AI wgrywa się cały folder skilla.
 
 ---
 
