@@ -13,6 +13,22 @@ normalnym toku wyszukiwania orzeczeń.
 
 ## CHANGELOG
 
+**2.9 (2026-07-17):** Dodano Zasadę 5B — `otkzu.trybunal.gov.pl` (Zbiór
+Urzędowy TK, oficjalne archiwum pełnych tekstów wyroków/postanowień) wpięty
+jako źródło Tier 1, RÓWNOWAŻNE `trybunal.gov.pl/orzeczenia` (ten sam organ,
+inny punkt dostępu do tej samej treści urzędowej — nie osobna instytucja).
+Kontekst: użytkownik zapytał, czy baza orzeczeń TK jest wpięta jako źródło
+do przeszukiwania; odpowiedź brzmiała "częściowo" — trybunal.gov.pl/orzeczenia
+(wyszukiwarka) był już Tier 1 #4 od wcześniejszych wersji skilla, ale
+otkzu.trybunal.gov.pl (archiwum pełnych tekstów, faktycznie użyte przy
+weryfikacji orzeczeń wpiętych do DR-01 w tej samej sesji: P 31/02, K 8/98,
+K 4/10, SK 37/19) nie był nigdzie osobno wymieniony. Dodano: wpis w opisie
+skilla (nagłówek), Zasada 5 (rozszerzona), nowa Zasada 5B (pełny opis: kiedy
+sięgać, format oznaczenia OTK ZU nr X/Rok poz. Y / OTK-A RRRR/N/poz., wzorzec
+URL `downloadOTK?mpo=`), Zasada 7 (drzewo hierarchii Tier 1), Faza 1-T.4
+(pełnotekstowe wyszukiwanie). Wzorowano na istniejącym wzorcu Zasady 5A
+(sieć lokalna SA/SO/SR jako sub-źródło pod parasolem Tier 1 głównego portalu).
+
 **2.6 (2026-07-06):**
 - **Nowa Zasada 11 — PLAN MINIMUM: 5 orzeczeń wspierających + 5 linii
   przeciwnej (o ile istnieje), zawsze z przesłankami rozstrzygnięcia.**

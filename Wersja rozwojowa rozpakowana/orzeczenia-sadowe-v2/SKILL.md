@@ -1,20 +1,23 @@
 ---
 name: orzeczenia-sadowe-v2
-version: 2.8
+version: 2.9
 type: executive-analiza
 status: production
 compatibility: "web_search, web_fetch, show_widget"
 description: >
   Wyszukuje, weryfikuje i cytuje realne orzeczenia sądowe z oficjalnych portali
   (orzeczenia.ms.gov.pl, sn.pl, orzeczenia.nsa.gov.pl, trybunal.gov.pl,
-  orzeczenia.uzp.gov.pl, saos.org.pl) oraz sieci lokalnej SA/SO/SR i WSA (CBOSA).
-  Stosuj ZAWSZE gdy pyta o orzecznictwo, wyroki, linię orzeczniczą, precedensy
-  — nawet bez tych słów wprost. Dobiera orzeczenia najbliższe oczekiwanemu
-  rozstrzygnięciu; przy licznej linii przeciwnej — obowiązkowy BILANS. PLAN
+  otkzu.trybunal.gov.pl, orzeczenia.uzp.gov.pl, saos.org.pl) oraz sieci lokalnej
+  SA/SO/SR i WSA (CBOSA). Stosuj ZAWSZE gdy pyta o orzecznictwo, wyroki, linię
+  orzeczniczą, precedensy — nawet bez tych słów wprost. Dobiera orzeczenia
+  najbliższe oczekiwanemu rozstrzygnięciu; przy licznej linii przeciwnej —
+  obowiązkowy BILANS. PLAN
   MINIMUM: 5 orzeczeń wspierających + 5 linii przeciwnej (o ile istnieje),
   każde z przesłankami rozstrzygnięcia. Nigdy nie cytuj z pamięci — zawsze
   weryfikacja online przed sygnaturą. NIE stosuj gdy pytanie dotyczy tylko
   przepisów bez orzeczeń.
+  v2.9: Zasada 5B — otkzu.trybunal.gov.pl (Zbiór Urzędowy TK) wpięty jako
+  archiwum pełnych tekstów, równoważne trybunal.gov.pl (ten sam organ, Tier 1).
   v2.7: CHANGELOG (2.1...2.6) wyniesiony do references/CHANGELOG.md — redukcja
   kosztu kontekstu, treść zachowana w 100%.
   v2.6: Zasada 11 — PLAN MINIMUM 5+5 z przesłankami (zalecenie audytu).
@@ -192,7 +195,8 @@ Zakaz linkowania do LexLege, Prawo.pl, SIP itp. jako głównego źródła.
 Orzeczenie jest uznane za zweryfikowane gdy potwierdzone w co najmniej JEDNYM
 z portali: sn.pl, orzeczenia.ms.gov.pl (wraz z całą siecią lokalną SA/SO/SR —
 patrz Zasada 5A), orzeczenia.nsa.gov.pl (CBOSA — obejmuje NSA oraz wszystkie
-16 WSA), trybunal.gov.pl, curia.europa.eu (TSUE), hudoc.echr.coe.int (ETPC),
+16 WSA), trybunal.gov.pl wraz z otkzu.trybunal.gov.pl (Zbiór Urzędowy, ten sam
+organ — patrz Zasada 5B), curia.europa.eu (TSUE), hudoc.echr.coe.int (ETPC),
 orzeczenia.uzp.gov.pl (KIO i skargi SO/SA/SN — zamówienia publiczne, Faza 1-K).
 saos.org.pl pełni rolę wsparcia — nie jest samodzielnym źródłem weryfikacji.
 Nie wymagaj potwierdzenia w wielu portalach jednocześnie.
@@ -210,6 +214,36 @@ orzeczenia z uzasadnieniem wybrane przez zespół sędziów; brak orzeczenia
 w portalu ≠ jego nieistnienie. Nie formułuj wniosku o braku linii orzeczniczej
 wyłącznie na tej podstawie — patrz FALLBACK F-4 i Faza 3.
 
+**Zasada 5B — OTK ZU jako archiwum pełnych tekstów TK (dodane 2026-07-17).**
+`trybunal.gov.pl/orzeczenia` to WYSZUKIWARKA (formularz po sygnaturze/haśle/
+dacie), ale pełny, urzędowy tekst wyroku — łącznie z uzasadnieniem — bywa
+wygodniej dostępny bezpośrednio w **Zbiorze Urzędowym (OTK ZU)**, hostowanym
+pod `otkzu.trybunal.gov.pl`. To NIE jest osobna instytucja ani osobne źródło
+w sensie Zasady 5 — to ten sam organ (TK), ten sam status Tier 1, tylko inny
+punkt dostępu do tej samej treści urzędowej. Traktuj jako RÓWNOWAŻNY
+`trybunal.gov.pl` — potwierdzenie w OTK ZU spełnia wymóg Zasady 5 tak samo
+jak potwierdzenie w wyszukiwarce głównej.
+
+Kiedy sięgać po OTK ZU zamiast/obok głównej wyszukiwarki:
+- Gdy znasz orientacyjną treść tezy, ale nie masz jeszcze sygnatury —
+  wyszukiwarka Google z frazą `site:otkzu.trybunal.gov.pl` + fraza tezy
+  bywa skuteczniejsza niż formularz TK (który wymaga zwykle sygnatury/hasła).
+- Gdy potrzebujesz PEŁNEGO tekstu uzasadnienia (nie tylko sentencji) do
+  cytowania w piśmie — OTK ZU publikuje kompletne orzeczenie w PDF.
+- Format oznaczenia publikacji: `OTK ZU nr X/Rok, poz. Y` (seria A — wyroki/
+  postanowienia merytoryczne w trybie art. 91 u.o.t.p.TK; seria B —
+  postanowienia o (nie)nadaniu dalszego biegu skardze/wnioskowi w trybie
+  art. 61 u.o.t.p.TK) lub nowszy format `OTK-A RRRR/N/poz.` — podawaj ten
+  identyfikator OBOK sygnatury przy cytowaniu, jeśli jest dostępny (zwiększa
+  weryfikowalność cytatu niezależnie od tego, czy link jest jeszcze aktywny).
+- Wzorzec URL bezpośredniego dokumentu: `otkzu.trybunal.gov.pl/downloadOTK?mpo=NUMER`
+  — numer `mpo` nie jest przewidywalny z sygnatury, wymaga wyszukania.
+
+⚠️ OTK ZU, tak jak główna wyszukiwarka TK, obejmuje pełnym pokryciem
+orzeczenia od momentu elektronizacji publikacji — dla bardzo starych wyroków
+(lata 90.) sprawdź czy dokument w ogóle istnieje w tej postaci, zanim uznasz
+brak wyniku za błąd wyszukiwania.
+
 **Zasada 6 — Status „Źródło niepotwierdzone w portalu sądowym".**
 Gdy orzeczenie pojawia się w wynikach wyszukiwania, ale nie można uzyskać
 bezpośredniego URL z oficjalnego portalu sądowego:
@@ -222,7 +256,8 @@ bezpośredniego URL z oficjalnego portalu sądowego:
 ```
 Tier 1 (krajowe PL): sn.pl · orzeczenia.ms.gov.pl + sieć lokalna SA/SO/SR (Zasada 5A)
                       · orzeczenia.nsa.gov.pl = CBOSA (NSA + wszystkie 16 WSA)
-                      · trybunal.gov.pl
+                      · trybunal.gov.pl + otkzu.trybunal.gov.pl (Zasada 5B —
+                        równoważne, ten sam organ, archiwum pełnych tekstów)
                       · orzeczenia.uzp.gov.pl = KIO + SO/SA/SN ws. PZP (Faza 1-K) —
                         referencyjne, nie źródło prawa (art. 87 Konstytucji), ale
                         Tier 1 dla praktyki DR-07
@@ -493,7 +528,9 @@ sygnatury" stosuj analogicznie wszędzie tam, gdzie portal na to pozwala:
 - portale lokalne SA/SO/SR (`references/PORTALE-LOKALNE.md`) — część ma wyszukiwanie
   pełnotekstowe, część wyłącznie po sygnaturze/dacie — sprawdź formularz danego
   portalu przed założeniem, że pole istnieje,
-- `trybunal.gov.pl` — wyszukiwarka TK obejmuje treść uzasadnień.
+- `trybunal.gov.pl` — wyszukiwarka TK obejmuje treść uzasadnień; dla pełnego
+  tekstu urzędowego i wyszukiwania po frazie via Google (`site:` operator)
+  patrz też `otkzu.trybunal.gov.pl` (Zasada 5B — równoważne źródło, ten sam organ).
 Brak pola pełnotekstowego w danym portalu → wróć do strategii Fazy 1 (fraza → przepis
 → instytucja → SAOS jako uzupełnienie).
 

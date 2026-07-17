@@ -4,7 +4,252 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
-## AUDYT-2026-07-16 — WDROŻENIE FAZA 3E: weryfikacja treści merytorycznej modułów DR (ZASADA 12)
+## AUDYT-2026-07-17e — orzeczenia-sadowe-v2 v2.9: dodano OTK ZU (otkzu.trybunal.gov.pl) jako źródło Tier 1
+
+**Zakres:** `orzeczenia-sadowe-v2/SKILL.md` (2.8→2.9: nagłówek/opis, Zasada 5,
+nowa Zasada 5B, Zasada 7, Faza 1-T.4) + `orzeczenia-sadowe-v2/references/
+CHANGELOG.md` (wpis 2.9).
+
+**Kontekst:** użytkownik zapytał, czy baza orzeczeń TK jest wpięta jako
+źródło do przeszukiwania. Ustalenie: CZĘŚCIOWO — `trybunal.gov.pl/orzeczenia`
+(wyszukiwarka formularzowa) był już Tier 1 pozycja #4 od wcześniejszych
+wersji skilla, ale `otkzu.trybunal.gov.pl` (Zbiór Urzędowy — oficjalne
+archiwum PEŁNYCH TEKSTÓW orzeczeń, faktycznie użyte w poprzedniej sesji przy
+weryfikacji P 31/02, K 8/98, K 4/10, SK 37/19 dla modułów DR-01) nie był
+nigdzie osobno opisany. Użytkownik polecił dodać tę bazę, zaznaczając że
+"im lepiej bazy opisane tym większa dokładność systemu".
+
+**Wykonanie:** dodano nową Zasadę 5B (wzorowaną na istniejącym wzorcu
+Zasady 5A — sieć lokalna SA/SO/SR jako sub-źródło Tier 1 pod parasolem
+głównego portalu), opisującą: status równoważny trybunal.gov.pl (ten sam
+organ, nie osobne źródło w sensie Zasady 5), kiedy sięgać po OTK ZU zamiast/
+obok głównej wyszukiwarki, format oznaczenia publikacji (OTK ZU nr X/Rok
+poz. Y, OTK-A RRRR/N/poz.), wzorzec URL bezpośredniego dokumentu, oraz
+zastrzeżenie o niepełnym pokryciu dla bardzo starych wyroków (l. 90).
+Zaktualizowano spójnie: nagłówek/opis skilla, Zasadę 5, drzewo hierarchii
+Tier 1 (Zasada 7), Fazę 1-T.4 (pełnotekstowe wyszukiwanie).
+
+**Status:** ✅ WDROŻONE. Brak naruszeń CRIT. Zmiana czysto opisowa (nowe
+źródło danych, nie nowa treść merytoryczna prawa) — nie wymaga wpisu w
+CHECKLIST-DEDUP (to nie jest pojęcie prawne per DR, tylko rozszerzenie
+opisu istniejącego źródła weryfikacji w ramach jednego skilla).
+
+---
+
+
+
+**Zakres:** `mod-ZTP-przepisy-przejsciowe-doktryna.md` (v1.1),
+`mod-specustawy-lex-specialis-graf-zaleznosci.md` (v1.1),
+`mod-stany-nadzwyczajne-sytuacje-kryzysowe.md` (v1.1).
+
+**Kontekst:** użytkownik zapytał wprost, czy orzeczenia TK i SN są "wpięte"
+do skilli, czy tylko generycznie wspomniane. Weryfikacja pokazała: TAK, we
+wszystkich trzech modułach z tej sesji orzecznictwo było dotąd wyłącznie
+generyczne ("orzecznictwo TK", "orzeczenie SN") z ostrzeżeniem HARDGATE do
+weryfikacji online — bez ani jednej konkretnej sygnatury. Użytkownik polecił
+wyszukać dostępne online orzeczenia i wpiąć je.
+
+**Wykonanie:** wyszukano i zweryfikowano online (min. 2 niezależne źródła na
+orzeczenie, priorytet dla trybunal.gov.pl/sn.pl/isap/saos.org.pl):
+
+- **MOD-ZTP** — TK P 31/02 (1.07.2003) i K 8/98 (12.04.2000) nt. ekspektatywy
+  maksymalnie ukształtowanej (ISAP, SAOS).
+- **MOD-SPECUSTAWY** — bilans TK K 4/10 (16.10.2012, linia potwierdzająca
+  konstytucyjność uproszczonej procedury) vs SK 37/19 (30.06.2021, linia
+  krytyczna wobec braku regulacji zwrotu nieruchomości) — obie dot.
+  specustawy drogowej (trybunal.gov.pl komunikaty oficjalne, prawo.pl,
+  OpenLEX, BRPO).
+- **MOD-STANY-KRYZYSOWE** — linia SN II KK 74/21, II KK 64/21, II KK 97/21
+  (wszystkie z 16.03.2021) + II KK 122/21 (14.04.2021, powołujący się na
+  poprzednie) nt. braku podstawy ustawowej dla sankcji covidowych (sn.pl —
+  baza orzeczeń z pełnym tekstem, bip.brpo.gov.pl, inforlex.pl).
+
+**Rozróżnienie odnotowane w module stanów kryzysowych:** generyczne
+odesłanie do "orzeczenia SN o dyskrecji RM" (za S. Czarnow, Radca Prawny)
+dotyczy INNEJ kwestii prawnej (wybór reżimu) niż wpięta linia II KK (wadliwość
+konkretnych sankcji) — oznaczono osobnym zastrzeżeniem zamiast błędnego
+scalenia obu w jedną sygnaturę.
+
+**Status:** ✅ WDROŻONE. Każda wpięta sygnatura ma min. 2 niezależne źródła
+weryfikacji online + URL. Żadna sygnatura nie została podana z pamięci
+(zgodnie z HARDGATE i Zasadą 11 orzeczenia-sadowe-v2 — choć niniejsza sesja
+nie uruchamiała pełnego pipeline'u tego skilla, zastosowano analogiczny
+rygor weryfikacyjny w skali odpowiedniej do zakresu prośby).
+
+**Uwaga do przyszłego audytu:** katalogi orzecznictwa w tych 3 modułach są
+punktami startowymi, NIE zamkniętymi katalogami (szczególnie linia covidowa
+w MOD-STANY-KRYZYSOWE jest znacznie bogatsza niż 4 przywołane wyroki). Przy
+kolejnym audycie DR-01 rozważyć, czy nie przenieść samej METODY "orzecznictwo
+wpięte jako tabela z min. 2 źródłami" jako wzorca do `shared/` dla innych
+modułów DR — obecnie stosowana punktowo.
+
+---
+
+
+
+**Zakres:** `dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-stany-nadzwyczajne-sytuacje-kryzysowe.md`
+(nowy, v1.0) + aktualizacja `dr-01/SKILL.md` (6→7 modułów) + dopisek
+"ZOBACZ TEŻ" w `mod-specustawy-lex-specialis-graf-zaleznosci.md` (odesłanie
+dwukierunkowe) + wpis w `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik poprosił o rozbudowę rodziny modułów DR-01 (ZTP +
+specustawy) o zmiany prawne w sytuacjach kryzysowych: klęski żywiołowe,
+katastrofy, epidemie.
+
+**Rozgraniczenie względem MOD-SPECUSTAWY (uniknięcie duplikacji):**
+MOD-SPECUSTAWY zawiera już katalog konkretnych specustaw doraźnych (w tym
+koronawirusową) — POZOSTAWIONO tam bez zmian. Nowy moduł dostarcza warstwę
+WYŻSZĄ: konstytucyjną architekturę (Rozdział XI) i ustawowe reżimy
+zarządzania kryzysem, w które te specustawy się wpisują jako narzędzia
+wykonawcze.
+
+**Ustalenie kluczowe (rdzeń modułu):** w polskim systemie prawnym istnieją
+DWIE OSOBNE OSIE reżimu kryzysowego, nie jedna hierarchia: (A) konstytucyjne
+stany nadzwyczajne (art. 228-234 — wojenny/wyjątkowy/klęski żywiołowej) oraz
+(B) ustawowe reżimy poniżej progu konstytucyjnego (zarządzanie kryzysowe,
+ochrona ludności, stan epidemii/zagrożenia epidemicznego). Oś B — w
+szczególności "stan epidemii" — NIE jest stanem nadzwyczajnym z Rozdziału XI,
+mimo pozornego podobieństwa nazw i wagi społecznej. To rozróżnienie było
+źródłem głównej kontrowersji konstytucyjnej COVID-19 w Polsce (2020-2022):
+rząd wybrał oś B zamiast konstytucyjnego stanu klęski żywiołowej, co w
+doktrynie określono jako "materialny stan klęski żywiołowej bez formy" /
+"hybrydowy stan nadzwyczajny" — z konsekwencją, że ograniczenia praw musiały
+mieć pełną podstawę ustawową (art. 31 ust. 3 Konstytucji), nie tylko
+rozporządzeniową. SN potwierdził jednak, że wybór osi B był w granicach
+dyskrecji Rady Ministrów (brak obowiązku wprowadzenia stanu nadzwyczajnego).
+
+**Odkrycie przy weryfikacji online:** nowa ustawa o ochronie ludności i
+obronie cywilnej (5.12.2024, Dz.U. 2024 poz. 1907, w życie 1.01.2025) —
+mimo roboczego tytułu wcześniejszych projektów sugerującego zastąpienie
+ustawy o stanie klęski żywiołowej — w finalnej wersji tego NIE zrobiła:
+art. 5 ust. 1 wprost odsyła do współistniejących odrębnych ustaw (stan
+klęski żywiołowej, zarządzanie kryzysowe, stan wyjątkowy, stan wojenny,
+obrona Ojczyzny). Świeży przykład techniki C z MOD-ZTP (koegzystencja, nie
+derogacja) — odnotowany w module z odesłaniem.
+
+**Weryfikacja online (2026-07-17):** Rozdział XI Konstytucji (art. 228-234,
+3 źródła: prezydent.pl, arslege, lexlege); ustawa o stanie klęski żywiołowej
+t.j. Dz.U. 2025 poz. 112; ustawa o zarządzaniu kryzysowym (t.j. ogłoszony ze
+stanem prawnym na 16.04.2026 — dokładny numer pozycji oznaczony do
+potwierdzenia); ustawa o ochronie ludności i obronie cywilnej Dz.U. 2024
+poz. 1907; ustawa o zapobieganiu chorobom zakaźnym art. 46/46a/46b;
+doktryna: S. Czarnow (Radca Prawny — Zeszyty Naukowe 3/2021), Palestra
+6/2020 i 9/2020, Temidium (jawność postępowań COVID), orzeczenie SN ws.
+braku obowiązku wprowadzenia stanu klęski żywiołowej.
+
+**Umiejscowienie:** DR-01 — Rozdział XI to materia stricte konstytucyjna
+(ten sam dział co mod-Konstytucja-TK-skarga-konstytucyjna), czwarty moduł
+w rodzinie prawa międzyczasowego/kolizyjnego obok mod-ZTP i mod-specustawy.
+
+**Status:** ✅ WDROŻONE. Brak naruszeń CRIT. Brak duplikacji z
+mod-specustawy (katalog specustaw pozostał tam, rozgraniczenie odnotowane
+w treści obu modułów).
+
+**Uwaga do przyszłego audytu:** numer pozycji t.j. ustawy o zarządzaniu
+kryzysowym (stan prawny 16.04.2026) nie został potwierdzony co do
+dokładnego numeru Dz.U. — oznaczony w module jako "do potwierdzenia na
+ISAP". Re-weryfikuj przy najbliższym audycie DR-01, razem z ZTP (Dz.U. 2026
+poz. 100, oznaczone w AUDYT-2026-07-17).
+
+---
+
+
+
+**Zakres:** `dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-specustawy-lex-specialis-graf-zaleznosci.md`
+(nowy, v1.0) + aktualizacja `dr-01/SKILL.md` (5→6 modułów) + dopisek
+"ZOBACZ TEŻ" w `mod-ZTP-przepisy-przejsciowe-doktryna.md` (odesłanie
+dwukierunkowe) + wpis w `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik poprosił o mechanizm dla specustaw, praw
+tymczasowych, lex specialis i graf wzajemnych zależności — kontynuacja
+sesji AUDYT-2026-07-17 (przepisy przejściowe/ZTP).
+
+**Rozgraniczenie względem MOD-ZTP (uniknięcie duplikacji):** MOD-ZTP
+odpowiada "co się dzieje ZE STARYM prawem gdy wchodzi NOWE" (przepisy
+przejściowe, Rozdział 5 ZTP). Ten moduł odpowiada na dwa inne pytania:
+"który z DWÓCH równolegle obowiązujących aktów stosować" (lex specialis)
+i "co się dzieje gdy akt ma ustawowo ograniczony czas obowiązywania"
+(przepisy epizodyczne, Rozdział 4a ZTP — inny dział TEGO SAMEGO
+rozporządzenia). Rozdzielone na dwa moduły ze względu na odrębność
+merytoryczną, z pełną integracją odesłaniami w obie strony.
+
+**Ustalenie doktrynalne kluczowe:** "specustawa" to pojęcie doktrynalne/
+potoczne (definicja WSJP PAN), NIE kategoria ustawowa — nie należy jej
+mylić z "przepisami epizodycznymi" (kategoria ustawowa, ZTP §29a-29c).
+Specustawa może, ale nie musi być epizodyczna (wiele specustaw, mimo
+zamysłu tymczasowości, jest regularnie przedłużanych bezterminowo —
+przykład: specustawa drogowa z 2003 r., pierwotnie do 2017 r., przetrwała
+>20 lat kolejnych przedłużeń).
+
+**Weryfikacja online (2026-07-17):** ZTP Rozdział 4a §29a-29c (przepisy
+epizodyczne, dodane nowelizacją Dz.U. 2015 poz. 1812, w życie 1.03.2016);
+katalog przykładowy specustaw (Wikipedia PL, hasło "Specustawa" — drogowa,
+mieszkaniowa, koronawirusowa, Ukraina, EURO 2012, stoczniowa, Ostrowice);
+reguła lex specialis derogat legi generali i jej kolizja z lex posterior
+(Wikipedia PL); krytyka doktrynalna przepisów epizodycznych (blog
+ekspercki W. Zająca, artykuł P. Kroczka) oraz krytyka rozrostu liczby
+specustaw (prawo.pl — "psucie prawa").
+
+**Umiejscowienie:** DR-01, ten sam dział co MOD-ZTP (ZTP jako rozporządzenie
+= akt DR-01), zgodnie z zasadą "jeden moduł = jeden akt prawny" — oba moduły
+razem pokrywają różne działy tego samego rozporządzenia plus doktrynę
+towarzyszącą (lex specialis, katalog specustaw, graf).
+
+**Status:** ✅ WDROŻONE. Brak naruszeń CRIT. Brak duplikacji z MOD-ZTP
+(rozgraniczenie merytoryczne odnotowane wyżej i w treści obu modułów).
+
+---
+
+
+
+**Zakres:** `dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-ZTP-przepisy-przejsciowe-doktryna.md`
+(nowy, v1.0) + aktualizacja `dr-01/SKILL.md` (4→5 modułów), `dr-01/MAPA-AKTOW.md`
+(+1 akt: ZTP), `CHECKLIST-DEDUP.md` (nowy wpis rejestrujący), oraz dopisek
+"ZOBACZ TEŻ" w `analizator-przepisow-v2/references/MOD-VACATIO-LEGIS.md`.
+
+**Kontekst:** użytkownik poprosił o mechanizm analizy przepisów przejściowych
++ literaturę ekspercką, do wstawienia we właściwym module DR, zgodnie
+z ZASADĄ 7 (OUTPUT-COMPLETENESS).
+
+**Diagnoza przed wdrożeniem:** system miał już `MOD-VACATIO-LEGIS.md`
+(analizator-przepisow-v2), ale wyłącznie warstwę PROCEDURALNĄ (ustalanie,
+która wersja przepisu obowiązuje na daną datę: VL-PRZED/VL-VACATIO/VL-AKTYWNY/
+VL-ZMIANA). Brakowało: (a) podstawy prawnej samej techniki legislacyjnej
+(rozporządzenie ZTP jako akt prawny), (b) taksonomii/algorytmu kwalifikacji
+WYBORU techniki przez ustawodawcę (kontynuacja / bezpośrednie działanie /
+ochrona praw nabytych) i jej zgodności z art. 2 Konstytucji, (c) wyjątku
+favor rei z art. 4 KK, (d) literatury eksperckiej. Zdecydowano NIE duplikować
+mechaniki dat — nowy moduł jest komplementarny, z dwukierunkowym odesłaniem.
+
+**Weryfikacja online (2026-07-17):** ZTP t.j. Dz.U. 2016 poz. 283 ze zm.
+Dz.U. 2026 poz. 100 (RCL, ISAP, Senat RP — 3 źródła niezależne; nowelizacja
+świeża, oznaczona do re-weryfikacji przy kolejnym audycie DR-01); art. 4 KK
+(favor rei, treść §1-4 potwierdzona); literatura: K. Mularski (C.H.Beck),
+Wronkowska/Zieliński (komentarz kanoniczny do ZTP), E. Łętowska, Temidium.
+
+**Umiejscowienie — uzasadnienie:** DR-01 wybrany zgodnie z zasadą architektoniczną
+skilla ("jeden moduł = jeden akt prawny") — ZTP jest rozporządzeniem, więc
+mieści się w domenie "Ustrój Konstytucyjny i Źródła Prawa". Mechanizm/algorytm
+(treść ponaddziedzinowa) mógłby alternatywnie trafić do `shared/`, ale
+użytkownik wskazał wprost "właściwy moduł dr" — pozostawiono w DR-01 z pełną
+integracją (odesłania z MOD-VACATIO-LEGIS i wpis w CHECKLIST-DEDUP), tak by
+przyszły audyt mógł ocenić, czy przenieść do `shared/` gdy pojawi się ≥2.
+niezależny konsument spoza DR-01/analizator-przepisow-v2.
+
+**Status:** ✅ WDROŻONE. Brak stwierdzonych naruszeń CRIT. Brak duplikacji
+(sprawdzono treść MOD-VACATIO-LEGIS.md przed utworzeniem nowego modułu).
+
+**Uzupełnienie (synchronizacja map centralnych, na wniosek użytkownika):**
+nowy akt (ZTP) doszedł też do `prawo-polskie-v2/ROUTING-MAP.md` (sekcja DR-01:
++1 wiersz, licznik 6→7 OK / 7→8 łącznie w DR-01, SUMA systemowa 262→263 OK /
+275→276 łącznie) oraz do `mapa_dzu_2026-07-15.md` (2 wiersze: t.j. 2016.283
++ nowelizacja 2026.100 jako odrębny wpis NW, niescalony jeszcze w nowy t.j.
+wg RCL). Dotrzymano zasady „nowy akt = wpis w obu mapach centralnych jednocześnie”
+z changelogu 4.6-4.16.
+
+---
+
+
 
 **Zakres:** `SKILL.md` (5.4 → 5.5), nowy moduł
 `modules/MOD-TRESC-MERYTORYCZNA.md`. Sesja systemowa (dot. samego

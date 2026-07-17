@@ -45,13 +45,31 @@ Brak dedykowanych rekordów ORKA dla tej dziedziny (pojęcia konstytucyjne mają
 ugruntowane definicje doktrynalne, kazuistyka TK). Pomocniczo:
 - BAS-W31 Właściwość sądu — zasady ogólne (gdy sprawa dotyczy podziału władz/sądów)
 
-## Moduły (4 łącznie — ✓ 4 OK, ☐ 0 STUB)
+## Moduły (7 łącznie — ✓ 7 OK, ☐ 0 STUB)
 
 ```
   [✓] OK    mod-Konstytucja-TK-skarga-konstytucyjna
   [✓] OK    mod-USP-ustroj-sadow-powszechnych
   [✓] OK    mod-ustawa-KRS-i-ustroj-wladzy
   [✓] OK    mod-ustawa-partie-polityczne-referendum
+  [✓] OK    mod-ZTP-przepisy-przejsciowe-doktryna  — dodany 2026-07-17: podstawa
+            prawna Zasad Techniki Prawodawczej + mechanizm/algorytm kwalifikacji
+            technik intertemporalnych + literatura ekspercka. Wywołuj gdy pytanie
+            dot. wpływu nowelizacji na sprawy w toku wykracza poza samą mechanikę
+            dat (dla tej ostatniej: analizator-przepisow-v2/references/
+            MOD-VACATIO-LEGIS.md — NIE duplikować).
+  [✓] OK    mod-specustawy-lex-specialis-graf-zaleznosci  — dodany 2026-07-17:
+            specustawy (pojęcie doktrynalne), przepisy epizodyczne (ZTP Rozdz.
+            4a — inny dział tego samego aktu co mod-ZTP powyżej), algorytm
+            lex specialis derogat legi generali, mechanizm grafu zależności
+            specustawa↔akt ogólny. Komplementarny z mod-ZTP, nie duplikuje.
+  [✓] OK    mod-stany-nadzwyczajne-sytuacje-kryzysowe  — dodany 2026-07-17:
+            Rozdział XI Konstytucji (art. 228-234), 3 stany nadzwyczajne,
+            reżimy ustawowe poniżej progu konstytucyjnego (zarządzanie
+            kryzysowe, ochrona ludności, stan epidemii), doktrynalna
+            kontrowersja COVID-19, graf zależności między reżimami. Wywołuj
+            dla klęsk żywiołowych/katastrof/epidemii — komplementarny z
+            mod-specustawy (katalog specustaw doraźnych pozostaje tam).
 ```
 
 ## Jak wywołać
@@ -97,6 +115,14 @@ prawo konstytucyjne / ustrojowe jest rzadko samodzielnym przedmiotem sprawy kanc
 - ✅ Ustrój sądów (PUSP, SN, sądy adm.)
 - ✅ KRS + władza wykonawcza
 - ✅ Partie polityczne + referendum
+- ✅ Zasady Techniki Prawodawczej — przepisy przejściowe, doktryna i mechanizm
+  kwalifikacji technik intertemporalnych (dodano 2026-07-17, na wniosek
+  użytkownika; literatura ekspercka + algorytm decyzyjny)
+- ✅ Specustawy, lex specialis, przepisy epizodyczne, graf zależności (dodano
+  2026-07-17, na wniosek użytkownika; komplementarne z modułem ZTP powyżej)
+- ✅ Stany nadzwyczajne i sytuacje kryzysowe — klęski żywiołowe, katastrofy,
+  epidemie (dodano 2026-07-17, na wniosek użytkownika; rozdział XI
+  Konstytucji + doktrynalna kontrowersja COVID-19 + graf reżimów)
 
 **Brakujące akty — kandydaci do rozbudowy przy zwiększonym zapotrzebowaniu:**
 - Ustawa o dostępie do informacji publicznej (UDIP) — jest w DR-05 (mod-UDIP-...), tu niepotrzebna
@@ -104,4 +130,8 @@ prawo konstytucyjne / ustrojowe jest rzadko samodzielnym przedmiotem sprawy kanc
 - Ustawa o finansowaniu kampanii wyborczych (PKW, PKW-odwołania) — niszowa, brak modułu, dodać przy zapotrzebowaniu
 - Ustawa o ochronie danych osobowych w sprawach wyborczych — marginalnie
 
-**Konkluzja:** DR-01 nie wymaga pilnej rozbudowy. Małe pokrycie modułowe jest proporcjonalne do rzadkości samodzielnych spraw z tej dziedziny w kancelarii. Przy pierwszej sprawie wyborczej lub PKW — dodać moduł.
+**Konkluzja:** DR-01 nie wymaga pilnej rozbudowy poza dziedziną wyborczą.
+Moduł ZTP (2026-07-17) domyka lukę doktrynalną: system miał już mechanikę dat
+(MOD-VACATIO-LEGIS) ale brakowało podstawy prawnej samej techniki legislacyjnej
+i literatury eksperckiej — teraz obie warstwy są rozdzielone i połączone
+odesłaniami, bez duplikacji.

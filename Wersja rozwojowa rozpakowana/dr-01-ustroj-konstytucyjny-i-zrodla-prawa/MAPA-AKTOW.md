@@ -17,7 +17,15 @@
 | Ustawa o wykonywaniu mandatu posła i senatora | Dz.U. 2024 poz. 907 t.j. ✅ VER 2026-07-04 (potwierdzone niezależnie — cytowane w ustawie z 13.09.2024 o TK jako aktualne brzmienie) | mod-ustawa-KRS-i-ustroj-wladzy | ✅ OK |
 | Ustawa o partiach politycznych | Dz.U. 2023 poz. 1215 t.j. ✅ VER 2026-07-04 (potwierdzone niezależnie — cytowane w ustawie z 13.09.2024 o TK jako aktualne brzmienie) | mod-ustawa-partie-polityczne-referendum | ✅ OK |
 | Ustawa o referendum ogólnokrajowym | Dz.U. 2025 poz. 300 t.j. ✅ VER: 2026-06-14 (TRYB DZU — był 2020/851; nie re-weryfikowano ponownie w tej sesji, brak sygnałów zmiany) | mod-ustawa-partie-polityczne-referendum | ✅ OK |
+| Rozporządzenie Prezesa Rady Ministrów z 20.06.2002 w sprawie „Zasad techniki prawodawczej” (ZTP) | Dz.U. 2016 poz. 283 t.j. ✅ VER 2026-07-17 (RCL, isap, senat.gov.pl) ze zm. Dz.U. 2026 poz. 100 — ⚠️ nowelizacja świeża, sprawdź czy ukazał się kolejny t.j. przed powołaniem | mod-ZTP-przepisy-przejsciowe-doktryna | ✅ OK (nowo dodane) |
 
 > ⚠️ Przed każdym powołaniem: sprawdź aktualny tekst jednolity w ISAP — nowelizacje mogą zmienić numery pozycji i brzmienie przepisów. Dla Konstytucji RP nie ma tekstu jednolitego — zawsze korzystaj z pierwotnego Dz.U. 1997 nr 78 poz. 483 z uwzględnieniem zmian wprowadzonych w trybie art. 235 Konstytucji.
 >
 > **Wynik sesji katalogowania 2026-07-04:** 11/11 pozycji ma teraz potwierdzony numer Dz.U. (0 pozycji ze statusem "weryfikuj w ISAP"). 3 błędne/nieaktualne numery poprawione (PUSA, KRS, Rada Ministrów — Rada Ministrów miała numer całkowicie nieistniejący dla tej ustawy). 2 pozycje uzupełnione z zera (PUSA, skarga na przewlekłość). Domena DR-01 uznana za W PEŁNI ZWERYFIKOWANĄ na dzień 2026-07-04.
+>
+> **Uzupełnienie 2026-07-17:** dodano 12. pozycję — Zasady Techniki Prawodawczej
+> (rozporządzenie ZTP), na wniosek użytkownika, jako podstawa prawna nowego modułu
+> doktrynalnego o przepisach przejściowych (`mod-ZTP-przepisy-przejsciowe-doktryna`).
+> Numer t.j. zweryfikowany niezależnie w 3 źródłach (RCL, ISAP, Senat RP);
+> nowelizacja Dz.U. 2026 poz. 100 oznaczona jako świeża — wymaga re-weryfikacji
+> przy kolejnym audycie DR-01.

@@ -94,7 +94,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 
 | DR | Dziedzina | ✅ OK | 🔗 odesłanie | ☐ BRAK | ⏳/⚡ MON | Łącznie |
 |---|---|:---:|:---:|:---:|:---:|:---:|
-| DR-01 | Ustrój Konstytucyjny | 6 | 1 | 0 | 0 | 7 |
+| DR-01 | Ustrój Konstytucyjny | 14 | 1 | 0 | 0 | 15 |
 | DR-02 | Prawo Cywilne/Rodzinne/Gosp. | 18 | 1 | 0 | 0 | 19 |
 | DR-03 | Prawo Karne/Wykroczenia | 16 | 0 | 0 | 2 | 18 |
 | DR-04 | Prawo Pracy/ZUS/Świadczenia | 18 | 0 | 0 | 0 | 18 |
@@ -110,7 +110,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | DR-14 | Prawo UE/Międzynarodowe | 18 | 0 | 0 | 0 | 18 |
 | DR-15 | Compliance/ISO | 9 | 0 | 0 | 0 | 9 |
 | DR-16 | Pisma/Narzędzia | 11 | 0 | 0 | 0 | 11 |
-| **SUMA** | | **262** | **9** | **0** | **4** | **275** |
+| **SUMA** | | **270** | **9** | **0** | **4** | **283** |
 
 ---
 
@@ -127,6 +127,14 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o partiach politycznych + referendum ogólnokrajowe | Dz.U. 2023 poz. 1215 | dr-01/modules/mod-ustawa-partie-polityczne-referendum | ✅ OK |
 | Ustawa o referendum ogólnokrajowym | Dz.U. 2025 poz. 300 t.j. ✅ VER: 2026-06-14 (TRYB DZU — był 2020/851) | dr-01/modules/mod-ustawa-partie-polityczne-referendum | ✅ OK |
 | Ustawa o Radzie Ministrów + Prezydent RP | Dz.U. 2025 poz. 780 t.j. ✅ VER 2026-07-04 (POPRAWKA — było błędnie "2022 poz. 2032", numer nieistniejący dla tej ustawy) | → dr-01/modules/mod-ustawa-KRS-i-ustroj-wladzy | 🔗 odesłanie |
+| Rozporządzenie ws. „Zasad techniki prawodawczej" (ZTP) | Dz.U. 2016 poz. 283 t.j. ✅ VER 2026-07-17 (RCL, isap, senat.gov.pl) ze zm. Dz.U. 2026 poz. 100 — ⚠️ nowelizacja świeża, re-weryfikuj przy najbliższym audycie DR-01 | dr-01/modules/mod-ZTP-przepisy-przejsciowe-doktryna | ✅ NOWY (2026-07-17, na wniosek użytkownika — mechanizm przepisów przejściowych + literatura ekspercka) |
+| ZTP Rozdział 4a (przepisy epizodyczne, §29a-29c) + doktryna specustaw/lex specialis (ten sam akt co wyżej, inny dział) | jak wyżej — Dz.U. 2016 poz. 283 t.j. ze zm. 2026 poz. 100 | dr-01/modules/mod-specustawy-lex-specialis-graf-zaleznosci | ✅ NOWY (2026-07-17) |
+| Ustawa z 18.04.2002 o stanie klęski żywiołowej | Dz.U. 2025 poz. 112 t.j. ✅ VER 2026-07-17 (isap) | dr-01/modules/mod-stany-nadzwyczajne-sytuacje-kryzysowe | ✅ NOWY (2026-07-17) |
+| Ustawa z 21.06.2002 o stanie wyjątkowym | ⚠️ VER częściowa 2026-07-17 (poprzedni t.j. Dz.U. 2017 poz. 1928, nowelizowany od tego czasu — zweryfikuj aktualny t.j. na ISAP przed powołaniem) | dr-01/modules/mod-stany-nadzwyczajne-sytuacje-kryzysowe | ✅ NOWY (2026-07-17) |
+| Ustawa z 29.08.2002 o stanie wojennym oraz o kompetencjach Naczelnego Dowódcy SZ | ⚠️ VER częściowa 2026-07-17 (poprzedni t.j. Dz.U. 2022 poz. 2091, nowelizowany m.in. Dz.U. 2024 poz. 1907 — zweryfikuj aktualny t.j. na ISAP) | dr-01/modules/mod-stany-nadzwyczajne-sytuacje-kryzysowe | ✅ NOWY (2026-07-17) |
+| Ustawa z 26.04.2007 o zarządzaniu kryzysowym | ⚠️ t.j. ogłoszony ze stanem prawnym na 16.04.2026 — dokładny nr pozycji do potwierdzenia na ISAP przy najbliższym audycie DR-01 | dr-01/modules/mod-stany-nadzwyczajne-sytuacje-kryzysowe | ✅ NOWY (2026-07-17) |
+| Ustawa z 5.12.2024 o ochronie ludności i obronie cywilnej | Dz.U. 2024 poz. 1907 ✅ VER 2026-07-17 (isap, gofin) — w życie 1.01.2025, NIE zastępuje ustaw o stanie klęski żywiołowej/zarządzaniu kryzysowym, współistnieje (art. 5 ust. 1) | dr-01/modules/mod-stany-nadzwyczajne-sytuacje-kryzysowe | ✅ NOWY (2026-07-17) |
+| Ustawa z 5.12.2008 o zapobieganiu oraz zwalczaniu zakażeń i chorób zakaźnych u ludzi (art. 46/46a/46b) | ⚠️ VER częściowa 2026-07-17 — zweryfikuj aktualny t.j. na ISAP przed powołaniem (nowelizowana wielokrotnie od 2020) | dr-01/modules/mod-stany-nadzwyczajne-sytuacje-kryzysowe | ✅ NOWY (2026-07-17) |
 
 ---
 
