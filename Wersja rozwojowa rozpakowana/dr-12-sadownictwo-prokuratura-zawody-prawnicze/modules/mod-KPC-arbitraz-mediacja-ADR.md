@@ -77,6 +77,16 @@ Orzecznictwo: SN i sądy apelacyjne przy zapisach arbitrażowych, ugodach i klau
 ## Uwagi szczególne
 Moduł uzupełnia procedury cywilne/gospodarcze, nie zastępuje analizy roszczenia materialnego.
 
+**ZOBACZ TEŻ (dodane 2026-07-17):** ten moduł dostarcza WYŁĄCZNIE warstwę
+proceduralną (podstawa ustawowa, status mediatora, wniosek, skutki
+procesowe ugody). Dla warstwy TECHNIK — jak faktycznie prowadzić/przygotować
+się do mediacji (5 zasad mediacji, style/modele, negocjacje oparte na
+interesach, BATNA/ZOPA, techniki komunikacyjne, caucus, nierównowaga siły)
+— wywołaj:
+```
+view /mnt/skills/user/dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-techniki-mediacyjne-negocjacyjne.md
+```
+
 ---
 
 ## STATUS KANCELARSKI

@@ -13,6 +13,19 @@ normalnym toku wyszukiwania orzeczeń.
 
 ## CHANGELOG
 
+**2.9.1 (2026-07-17, naprawa YAML):** Usunięto z pola `description` w
+`SKILL.md` wpisy changelog (v2.9/v2.7/v2.6/v2.5), które od wersji 2.7
+(migracja CHANGELOG do tego pliku) błędnie pozostawały RÓWNIEŻ w opisie
+wyzwalającym skilla, mimo że migracja miała je stamtąd usunąć — zamiast
+tego kolejne wersje (2.9) dopisywały nowe wpisy w tym samym miejscu,
+powtarzając błąd. Skutek: opis skilla (kluczowy dla trafności triggerowania
+wg zasad skill-creator) był rozwadniany historią zmian zamiast zwięzłym
+opisem funkcji. Poprawiono: `description` zawiera teraz wyłącznie
+funkcjonalny opis + jedno zdanie odsyłające do tego pliku po pełną
+historię. Żadna informacja nie została utracona — wszystkie 4 wpisy
+(2.5, 2.6, 2.7, 2.9) już istniały w tym pliku przed naprawą. Zgłoszone
+przez użytkownika jako "napraw yaml" po przesłaniu zip z poprzedniej tury.
+
 **2.9 (2026-07-17):** Dodano Zasadę 5B — `otkzu.trybunal.gov.pl` (Zbiór
 Urzędowy TK, oficjalne archiwum pełnych tekstów wyroków/postanowień) wpięty
 jako źródło Tier 1, RÓWNOWAŻNE `trybunal.gov.pl/orzeczenia` (ten sam organ,

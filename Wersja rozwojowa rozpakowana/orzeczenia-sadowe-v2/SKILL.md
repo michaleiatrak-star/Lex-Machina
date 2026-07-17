@@ -11,17 +11,12 @@ description: >
   SA/SO/SR i WSA (CBOSA). Stosuj ZAWSZE gdy pyta o orzecznictwo, wyroki, linię
   orzeczniczą, precedensy — nawet bez tych słów wprost. Dobiera orzeczenia
   najbliższe oczekiwanemu rozstrzygnięciu; przy licznej linii przeciwnej —
-  obowiązkowy BILANS. PLAN
-  MINIMUM: 5 orzeczeń wspierających + 5 linii przeciwnej (o ile istnieje),
-  każde z przesłankami rozstrzygnięcia. Nigdy nie cytuj z pamięci — zawsze
-  weryfikacja online przed sygnaturą. NIE stosuj gdy pytanie dotyczy tylko
-  przepisów bez orzeczeń.
-  v2.9: Zasada 5B — otkzu.trybunal.gov.pl (Zbiór Urzędowy TK) wpięty jako
-  archiwum pełnych tekstów, równoważne trybunal.gov.pl (ten sam organ, Tier 1).
-  v2.7: CHANGELOG (2.1...2.6) wyniesiony do references/CHANGELOG.md — redukcja
-  kosztu kontekstu, treść zachowana w 100%.
-  v2.6: Zasada 11 — PLAN MINIMUM 5+5 z przesłankami (zalecenie audytu).
-  v2.5: Faza 1-K — KIO/zamówienia publiczne przez orzeczenia.uzp.gov.pl.
+  obowiązkowy BILANS. PLAN MINIMUM: 5 orzeczeń wspierających + 5 linii
+  przeciwnej (o ile istnieje), każde z przesłankami rozstrzygnięcia. Nigdy nie
+  cytuj z pamięci — zawsze weryfikacja online przed sygnaturą. NIE stosuj gdy
+  pytanie dotyczy tylko przepisów bez orzeczeń.
+  Pełna historia zmian: references/CHANGELOG.md (nie w tym polu — opis
+  wyzwalający musi zostać zwięzły dla trafności triggerowania skilla).
 ---
 
 # Wyszukiwanie Orzeczeń Sądowych v2.7

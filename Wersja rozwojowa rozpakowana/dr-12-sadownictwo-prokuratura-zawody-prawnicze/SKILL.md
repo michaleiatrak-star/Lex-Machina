@@ -211,7 +211,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W29 Pełnomocnik / obrońca z urzędu (art. 117 KPC / art. 78-81a KPK —
   obligatoryjny vs fakultatywny, kryteria ETPCz art. 6 §3 lit. c)
 
-## Moduły (12 łącznie — ✓ 12 OK, ☐ 0 STUB)
+## Moduły (13 łącznie — ✓ 13 OK, ☐ 0 STUB)
 
 ```
 SĄDOWNICTWO I PROCEDURA:
@@ -228,6 +228,21 @@ SĄDOWNICTWO I PROCEDURA:
               (arbitraż KPC art. 1154–1217, mediacja art. 1831–18315,
                Konwencja nowojorska, regulaminy SA KIG/Lewiatan;
                pełny framework ADR → DR-07/mod-ustawa-arbitraz-mediacja)
+  [✓] OK    mod-techniki-mediacyjne-negocjacyjne  — dodany 2026-07-17,
+              rozbudowany 2026-07-17 (v1.1), skorygowany 2026-07-17 (v1.2 —
+              zastąpiono autorskie przypuszczenia realną literaturą: Koło
+              Konfliktu Moore'a, PCM, Lewicki i in.): warstwa TECHNIK (nie
+              procedury) — 5 zasad mediacji, przygotowanie w 5 krokach
+              (Waszkiewicz: zbieranie informacji, wyznaczanie celów wg Koła
+              Konfliktu Moore'a, plan, logistyka, analiza) + przygotowanie
+              z perspektywy MEDIATORA (sesje wstępne, screening, za PCM),
+              ustalanie priorytetów/kolejności kwestii, style/modele,
+              typy negocjacji (transakcyjne/rozjemcze, dystrybucyjne/
+              integracyjne), negocjacje oparte na interesach (Fisher/Ury),
+              BATNA/ZOPA, techniki komunikacyjne, caucus, nierównowaga siły.
+              Wypełnia lukę odnotowaną w CHECKLIST-DEDUP ("brak modułu
+              ogólnego"). Komplementarny z mod-KPC-arbitraz-mediacja-ADR
+              powyżej.
 
 PROKURATURA I ORGANY OCHRONY PRAWA:
   [✓] OK    mod-PrProkuratura-organy-ochrony-prawa
@@ -292,6 +307,9 @@ view /mnt/skills/user/dr-12-sadownictwo-prokuratura-zawody-prawnicze/MAPA-AKTOW.
 - Egzekucja komornicza (tryb KPC) — patrz `shared/...` lub `mod-ustawa-komornicy-sadowi-zawod` (sekcja "Łącz obowiązkowo z")
 - PPSA (skargi na regulatorów): `dr-05` → `mod-PPSA-postepowanie-sadowoadministracyjne`
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
+- Rejestr źródeł uchwał/kodeksów etyki samorządów zawodowych (NRA, KRRP,
+  KRN, KRK, PIRP i inne — także zawody medyczne/gospodarcze poza DR-12):
+  `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (dodano 2026-07-17)
 
 ## ⚖️ DISCLAIMER (obowiązkowy)
 

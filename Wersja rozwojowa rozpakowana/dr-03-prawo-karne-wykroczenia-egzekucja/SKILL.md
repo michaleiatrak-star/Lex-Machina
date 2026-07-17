@@ -76,7 +76,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   obrona obligatoryjna art. 79 §1 pkt 2-4 KPK (→ mod-niewidomy-prawa-prawne.md,
   mod-niepelnosprawnosc-intelektualna-gluchota.md)
 
-## Moduły (24 łącznie — ✓ 24 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+## Moduły (25 łącznie — ✓ 25 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
 ## ⚠️ 2026-07-15: naprawiono niezgodność dysk↔lista — 4 pliki istniały na
 ## dysku, ale nie były wpisane poniżej: mod-KK-art291-pranie-pieniedzy,
 ## mod-ustawa-fundusz-pomocy-pokrzywdzonym, mod-ustawa-narkomania,
@@ -154,6 +154,13 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   [✓] OK    mod-ustawa-narkomania
               (dopisany do listy 2026-07-15, plik istniał wcześniej — powiązany z
                nowym mod-przymusowe-leczenie-odwykowe.md, sekcja B tego modułu)
+  [✓] OK    mod-KPK-mediacja-sprawiedliwosc-naprawcza
+              (dodany 2026-07-17: art. 23a KPK §1-7, mediacja karna od 2003,
+               rozszerzona na wykroczenia od 2015, idea sprawiedliwości
+               naprawczej, przesłanki kwalifikacji, poufność/art. 178a KPK.
+               Wypełnia lukę zidentyfikowaną w audycie mediacji — komplementarny
+               z dr-12/mod-techniki-mediacyjne-negocjacyjne, nie duplikuje
+               ogólnych technik)
   [✓] OK    mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych
               (odpowiedzialność karna spółek — dopisany do listy 2026-07-15, plik
                istniał wcześniej)

@@ -56,6 +56,31 @@ Po zakończeniu audytu: **obowiązkowa aktualizacja plików references**.
 
 ---
 
+> ⚙️ **ZASADA 13 (2026-07-17, STAŁA — nie precedens):** Ponowna weryfikacja
+> oznaczeń/skrótów prawnych + wytrwałość wyszukiwania + oznaczanie przy
+> każdym użyciu. Pełna treść i uzasadnienie: `shared/PRAWO-HARDGATE.md`
+> wersja 2.4. Skrót operacyjny na potrzeby audytu:
+> 1. Każde niepotwierdzone źródłowo oznaczenie/skrót prawny, gdy pojawia
+>    się PONOWNIE w dalszej części rozmowy jako podstawa wniosku, wymaga
+>    NOWEJ weryfikacji — przywołanie z pamięci wcześniejszej hipotezy
+>    (nawet własnej) NIE wystarcza i nie podnosi jej do statusu ustalonego
+>    faktu.
+> 2. Pierwsze wyszukiwanie bez jednoznacznego potwierdzenia z aktu
+>    źródłowego NIE kończy weryfikacji — kontynuuj różnymi zapytaniami
+>    (pełna nazwa instytucji/rejestru, synonimy, szersze/węższe ujęcie)
+>    zamiast zatrzymywać się na hipotezie prawdopodobieństwa.
+> 3. ⚠️ [NIEWERYFIKOWANE] musi towarzyszyć KAŻDEMU wystąpieniu
+>    niepotwierdzonego oznaczenia w odpowiedzi/dokumencie, nie tylko
+>    pierwszemu wprowadzeniu.
+>
+> Przy audycie treści merytorycznej (FAZA 3E) i przy każdym audycie
+> skilli operujących na sygnaturach/repertoriach/oznaczeniach
+> instytucjonalnych — sprawdź zgodność z tą zasadą jako osobny punkt.
+> Naruszenie (powtórne użycie niepotwierdzonego oznaczenia bez ponownej
+> weryfikacji lub bez powtórzonego ⚠️ [NIEWERYFIKOWANE]) = **CRIT**.
+
+---
+
 ## FAZA 0 — WCZYTANIE REFERENCES (ZAWSZE PIERWSZE)
 
 Przed jakimkolwiek działaniem wczytaj:

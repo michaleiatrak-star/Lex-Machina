@@ -4,7 +4,450 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
-## AUDYT-2026-07-17e — orzeczenia-sadowe-v2 v2.9: dodano OTK ZU (otkzu.trybunal.gov.pl) jako źródło Tier 1
+## AUDYT-2026-07-17o — SAMORZADY-ZAWODOWE-DOKUMENTY.md v1.2→v1.3: komplet 16/16 + zbadano status lekarzy dentystów
+
+**Zakres:** `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (wiersz IARP, nowa
+sekcja 3.1, changelog).
+
+**Kontekst:** użytkownik polecił dokończyć weryfikację IARP (ostatnia
+niepotwierdzona pozycja) oraz zbadać, czy lekarze dentyści mają odrębną
+radę/izbę od lekarzy.
+
+**Wykonanie:**
+1. IARP potwierdzone przez `web_search` (izbaarchitektow.pl) — aktywna
+   strona z bardzo aktualnym materiałem (nowelizacja KEZA przyjęta
+   6.12.2025, w życie 1.01.2026). Rejestr osiągnął komplet 16/16 pozycji
+   ze statusem ✅ VER.
+2. Zbadano pytanie o dentystów — jednoznaczna odpowiedź: NIE mają
+   odrębnego samorządu. Dzielą Naczelną Izbę Lekarską z lekarzami (ustawa
+   z 2.12.2009 o izbach lekarskich), z gwarantowaną proporcjonalną
+   reprezentacją na wszystkich szczeblach. Ustalono wartościowy kontekst
+   historyczny (odrębna Naczelna Izba Lekarsko-Dentystyczna 1938-1952,
+   zniesiona przez władze komunistyczne, NIE reaktywowana przy odbudowie
+   samorządu w 1989 r.) oraz nadal aktualny, choć osłabły, wewnętrzny
+   spór o autonomię dentystów w ramach wspólnego samorządu (Komisja
+   Stomatologiczna, komunikat ok. 2020 r., pytania mediów branżowych o
+   możliwy "rozłam" — separacja się nie wydarzyła).
+
+**Status:** ✅ WDROŻONE. Rejestr osiągnął pełne pokrycie zakresu
+pierwotnie ustalonego (16 samorządów zawodów zaufania publicznego) —
+każda pozycja z konkretnymi uchwałami/datami, nie tylko nazwą domeny.
+
+---
+
+
+
+**Zakres:** `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (wszystkie tabele
+sekcji 2-4, sekcja 1, changelog).
+
+**Kontekst:** użytkownik odpowiedział "kontynuuj" na propozycję dokończenia
+weryfikacji pozostałych 13 portali.
+
+**Wykonanie:** 12 kolejnych portali potwierdzonych przez `web_search`
+(KRK, PIRP, NIL, weterynaria/vetpol.org.pl, NIA, NIPiP, KIDL, KIF, KIDP,
+PIBR, PIIB) — z konkretnymi numerami uchwał i datami dla każdego, nie
+tylko potwierdzeniem istnienia domeny. Wynik końcowy: **15/16 pozycji w
+rejestrze mają status ✅ VER, 1 pozostaje ⚠️ (IARP — architekci,
+nieznaleziona w wynikach wyszukiwania w tej sesji)**.
+
+**Odkrycie wykraczające poza pierwotny zakres zapytania:** projekt ustawy
+rządowej z 27.06.2024 (o zawodzie psychologa i samorządzie zawodowym
+psychologów) ujawnia, że dotychczasowy samorząd psychologów (ustawa z
+2001 r.) najprawdopodobniej nigdy nie był w pełni operacyjny — projekt
+nowej ustawy przewiduje dotację celową (do 2 mln zł) na "rozpoczęcie
+wykonywania obowiązków" przez Krajową Izbę Psychologów. Zaktualizowano
+wpis w rejestrze z ogólnego "do weryfikacji" na konkretne ustalenie ze
+źródłem. Częściowo wyjaśnia to (ale nie w pełni) odnotowaną wcześniej
+rozbieżność liczbową między źródłami (15/16/18 vs 24/17/19).
+
+**Dodatkowa usterka wykryta i odnotowana (nie naprawiona, bo wymaga dalszej
+weryfikacji):** rozbieżność domeny NIA (`nia.org.pl` vs `nia.gov.pl`) —
+oba używane w różnych materiałach źródłowych, oznaczono do doprecyzowania
+zamiast wybrania jednej arbitralnie.
+
+**Status:** ✅ WDROŻONE. Zgodnie z ZASADA 13 — jedyna pozostała pozycja
+(IARP) NADAL oznaczona jako niepotwierdzona, nie domyślnie podniesiona do
+statusu zweryfikowanej mimo presji na "kompletność" rejestru.
+
+---
+
+
+
+**Zakres:** `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (sekcje 2, 2.1 nowa).
+
+**Kontekst:** użytkownik doprecyzował poprzednie polecenie — chodziło o
+faktyczne przeszukanie repozytoriów dokumentów (jak nra.pl/szukaj-dokumenty),
+nie tylko zarejestrowanie adresu portalu jako "źródło do weryfikacji przy
+użyciu". Trafna korekta — poprzednia wersja (1.0) rzeczywiście poprzestała
+na rejestracji adresów dla 15/16 pozycji.
+
+**Wykonanie:** `web_fetch` bezpośrednio na `nra.pl/szukaj-dokumenty/` —
+potwierdzono rzeczywisty mechanizm (1083 dokumenty, filtry: okres/organ/typ,
+struktura URL wyniku i dokumentu, linki do PDF źródłowych) — opisany jako
+nowa sekcja 2.1, analogicznie do Fazy 1-T (SAOS/CBOSA) w
+`orzeczenia-sadowe-v2`. Dodatkowo zweryfikowano `kirp.pl`/`bibliotekakirp.pl`
+(KRRP) i `krn.org.pl` (KRN) przez `web_search` z potwierdzeniem konkretnych,
+rzeczywistych dokumentów (numery uchwał, daty).
+
+**Status:** 3/16 portali w rejestrze mają teraz status ✅ VER (potwierdzone
+bezpośrednim dostępem), 13 pozostaje ⚠️ WYMAGA weryfikacji — jawnie
+utrzymano to rozróżnienie (ZASADA 13) zamiast oznaczyć całość jako
+zweryfikowaną po sprawdzeniu tylko części.
+
+---
+
+
+
+**Zakres:** `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (nowy, v1.0) +
+odesłanie w `dr-12/SKILL.md` (Powiązania zewnętrzne) + wpis w
+`CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik poprosił o zbudowanie bazy dokumentów dla NRA i
+innych zawodów zaufania publicznego, w tej samej wiadomości pytając o
+skuteczność mechanizmu weryfikacji HARDGATE.
+
+**Wykonanie:** zweryfikowano online: art. 17 Konstytucji (definicja),
+wyrok TK SK 20/00 (definicja zawodu zaufania publicznego — sygnatura
+oznaczona jako niepełnie zweryfikowana, zgodnie z ZASADA 13/PRAWO-HARDGATE
+— nie fabrykowano potwierdzenia bez faktycznego sprawdzenia), listę
+ustaw/samorządów (Wikipedia PL, z odnotowaną i uczciwie ujawnioną
+rozbieżnością liczbową między nagłówkiem artykułu — 24 ustawy/17
+samorządów/19 zawodów, stan 2026 — a szczegółową listą w tym samym źródle
+— 15/16/18), oraz portal NRA (nra.pl, adwokatura.pl) — JEDYNY w pełni
+potwierdzony bezpośrednim `web_fetch` w tej sesji.
+
+**Zastosowanie ZASADA 13 w praktyce:** pozostałe 15 portali (KRRP, KRN,
+KRK, PIRP, NIL, NIA, NIPiP, KIDL, KIF, KIDP, PIBR, IARP, PIIB i in.) NIE
+zostały potwierdzone bezpośrednim fetch w tej sesji — oznaczono je
+jawnie "⚠️ WYMAGA weryfikacji" jako punkty startowe, nie potwierdzone
+fakty, zgodnie z regułą dodaną w poprzedniej turze (ZASADA 13): lepiej
+oznaczyć niepewność niż fabrykować pozór pełnej weryfikacji dla całej listy.
+
+**Struktura pliku:** definicja konstytucyjna, tabele źródeł per grupa
+zawodowa (prawnicze — DR-12, medyczne — DR-10, gospodarcze/techniczne —
+DR-06/DR-09), procedura weryfikacji uchwał/kodeksów etyki analogiczna do
+PRAWO-HARDGATE, zastrzeżenie że uchwały samorządów NIE są źródłem prawa
+powszechnie obowiązującego (art. 87 Konstytucji) — wiążą tylko członków
+samorządu.
+
+**Umiejscowienie:** `shared/` — plik jest cross-domenowy (konsumowany
+przez DR-12, DR-06, DR-09, DR-10), analogicznie do `PORTALE-LOKALNE.md`
+w orzeczenia-sadowe-v2, ale dla samorządów zawodowych zamiast sieci sądów.
+
+**Status:** ✅ WDROŻONE. Brak naruszeń CRIT. Zero duplikacji z istniejącymi
+modułami ustawowymi w DR-12 (treść merytoryczna statusu zawodów pozostaje
+tam, ten plik to wyłącznie rejestr źródeł do weryfikacji dokumentów
+wewnętrznych samorządów).
+
+**Uwaga do przyszłego audytu:** 15 z 16 wpisanych portali wymaga
+rzeczywistej weryfikacji fetch przed pierwszym użyciem w piśmie — plik
+jest świadomie niedokończony w tym zakresie (uczciwie oznaczone), nie
+"gotowy do cytowania bez sprawdzenia".
+
+---
+
+
+
+**Zakres:** `orzeczenia-sadowe-v2/SKILL.md` (frontmatter) +
+`orzeczenia-sadowe-v2/references/CHANGELOG.md` (wpis 2.9.1).
+
+**Kontekst:** użytkownik przesłał ZIP z poprzedniej tury (orzeczenia-sadowe-v2)
+z poleceniem "napraw yaml".
+
+**Diagnoza:** YAML parsował się bez błędu składniowego (zweryfikowano
+parserem `yaml.safe_load` w Pythonie) — problem był STRUKTURALNY, nie
+syntaktyczny: pole `description` zawierało wpisy changelog ("v2.9: ...",
+"v2.7: ...", "v2.6: ...", "v2.5: ...") mimo że wersja 2.7 miała WŁAŚNIE
+wynieść historię zmian do osobnego pliku `CHANGELOG.md` — migracja nie
+usunęła wpisów z `description`, a kolejna wersja (2.9, dodana w tej samej
+sesji rozmowy, patrz AUDYT-2026-07-17e) powtórzyła ten sam błąd, dopisując
+nowy wpis w tym samym, niewłaściwym miejscu. Skutek: opis wyzwalający
+skill (kluczowy dla trafności triggerowania — zasada z `skill-creator`)
+był rozwadniany treścią nieistotną dla decyzji "czy wywołać ten skill".
+
+**Naprawa:** usunięto wszystkie 4 wpisy changelog z `description`,
+pozostawiając czysty opis funkcjonalny + jedno zdanie odsyłające do
+`references/CHANGELOG.md`. Przed usunięciem sprawdzono, że wszystkie 4
+wpisy (2.5, 2.6, 2.7, 2.9) już istnieją w `CHANGELOG.md` — zero utraty
+informacji.
+
+**Status:** ✅ NAPRAWIONE. Zweryfikowano parserem YAML po zmianie — brak
+błędów. Dodano wpis 2.9.1 w CHANGELOG.md dokumentujący naprawę.
+
+**Wniosek do przyszłych sesji:** przy KAŻDYM dopisywaniu wpisu "vX.Y: ..."
+do skilla z podobną strukturą (frontmatter description + osobny
+CHANGELOG.md) — dopisuj WYŁĄCZNIE do CHANGELOG.md, nigdy do description,
+nawet jeśli poprzednie wersje (błędnie) robiły to w obu miejscach.
+
+**Uzupełnienie (2026-07-17, po pytaniu użytkownika "czy to najnowsza
+wersja"):** wykryto i naprawiono dodatkową niespójność — `SKILL.md` miał
+`version: 2.9`, podczas gdy najnowszy wpis w CHANGELOG.md to `2.9.1`
+(sama naprawa YAML). Numer wersji w nagłówku podniesiony do `2.9.1` dla
+spójności. Zweryfikowano parserem YAML po zmianie — brak błędów.
+
+---
+
+
+
+**Zakres:** `shared/PRAWO-HARDGATE.md` (2.3→2.4: nagłówek wersji + nowy
+punkt kontrolny w SELF-CHECK) + `audyt-systemu-v4/SKILL.md` (nowa ZASADA
+13, po ZASADA 12).
+
+**Kontekst:** użytkownik podał regułę "na przyszłość" po incydencie z
+niepotwierdzonym oznaczeniem/skrótem prawnym (repertorium postępowań
+sprawdzających) — pierwsze zapytanie wyszukiwania ("S og" wprost) nie dało
+jednoznacznego potwierdzenia z aktu źródłowego, a odpowiedź zatrzymała się
+na hipotezie prawdopodobieństwa zamiast kontynuować wyszukiwanie innymi
+zapytaniami. Incydent pochodzi z wcześniejszej części rozmowy/innej sesji,
+nie zrekonstruowano tu jego pełnego przebiegu — zarejestrowano WYŁĄCZNIE
+regułę na przyszłość, zgodnie z poleceniem.
+
+**Trzy elementy nowej reguły (pełna treść w PRAWO-HARDGATE.md v2.4):**
+1. Ponowna weryfikacja przy KAŻDYM powtórnym użyciu niepotwierdzonego
+   oznaczenia jako podstawy wniosku — przywołanie z pamięci wcześniejszej
+   hipotezy (nawet własnej) nie wystarcza.
+2. Wytrwałość wyszukiwania — różne zapytania (pełna nazwa, synonimy,
+   szersze/węższe ujęcie) zamiast zatrzymania się na pierwszej próbie.
+3. Oznaczanie ⚠️ [NIEWERYFIKOWANE] przy KAŻDYM wystąpieniu niepotwierdzonego
+   oznaczenia, nie tylko przy pierwszym wprowadzeniu.
+
+**Umiejscowienie:** rozszerzenie istniejącego PERMANENT GATE (linia 37-42
+PRAWO-HARDGATE.md), które już wymagało re-weryfikacji "każdego nowego
+powołania" — nowa wersja doprecyzowuje, że dotyczy to też WŁASNYCH
+wcześniejszych hipotez modelu (nie tylko formalnych "powołań"), dodaje
+wymóg wytrwałości metodologicznej wyszukiwania, i rozszerza oznaczanie
+z "przy wprowadzeniu" na "przy każdym użyciu". Dodano też operacyjny punkt
+kontrolny w SELF-CHECK (koniec pliku) — nie tylko opis narracyjny w
+nagłówku wersji, żeby reguła była faktycznie wymuszana przy każdej
+odpowiedzi z sygnaturą/oznaczeniem, nie tylko odnotowana.
+
+**Rejestracja governance:** ZASADA 13 dodana w `audyt-systemu-v4/SKILL.md`
+(STAŁA — nie precedens, zgodnie z konwencją ZASADA 11/12) — do sprawdzania
+przy FAZA 3E i przy audycie skilli operujących na sygnaturach/repertoriach/
+oznaczeniach instytucjonalnych.
+
+**Status:** ✅ WDROŻONE. Sprawdzono `shared/WERYFIKACJA-SLAD.md` — plik
+tylko odsyła do PRAWO-HARDGATE.md, nie wymaga zmiany równoległej (uniknięto
+powtórzenia błędu z AUDYT-2026-07-15c, gdzie dwie niezależne implementacje
+tego samego mechanizmu istniały w dwóch plikach jednocześnie).
+
+---
+
+
+
+**Zakres:** `dr-12/.../mod-techniki-mediacyjne-negocjacyjne.md` (v1.2→v1.3)
++ NOWY `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KPK-mediacja-
+sprawiedliwosc-naprawcza.md` (v1.0) + `dr-03/SKILL.md` (24→25 modułów) +
+`dr-03/MAPA-AKTOW.md` (+1 wiersz: art. 23a KPK) + 2 wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik wybrał "c" — oba elementy z poprzedniej propozycji:
+(a) dokończenie weryfikacji Kroków 3-5 modelu Waszkiewicza (żeby nie
+zostawić tego samego problemu co poprawiono w Kroku 2), (b) uzupełnienie
+4 zidentyfikowanych braków (cisza/niewerbalna, mediacja karna, kwestie
+kulturowe, rola/osobowość mediatora).
+
+**Wykonanie (a) — weryfikacja Kroków 3-5:**
+Kroki 3 i 5 (plan mediacji, analiza pomediacyjna) NIE mają w dostępnej
+literaturze tak bogatego niezależnego udokumentowania jak Kroki 1-2 —
+oznaczono to WPROST w treści modułu jako "konsensus praktyki, nie cytat
+z named source" (uczciwe rozgraniczenie, zamiast pozostawienia niejasności
+z poprzedniej wersji). Krok 4 (logistyka) wzbogacony o realne źródła
+(Centrum Mediacji AID, Polskie Centrum Mediacji — neutralność miejsca,
+czas trwania sesji, liczba sesji).
+
+**Wykonanie (b) — 4 braki:**
+1. **Rola ciszy i komunikacja niewerbalna** — nowa sekcja 6A, za
+   niezależnymi źródłami branżowymi (ngo.pl, centrummediacji-jp.pl,
+   twojamediacja.pl): kontakt wzrokowy, postawa ciała, funkcja ciszy.
+2. **Mediacja karna / sprawiedliwość naprawcza** — NAJWIĘKSZA zidentyfikowana
+   luka, rozwiązana NOWYM modułem w DR-03 (nie w DR-12, bo to odrębna
+   podstawa prawna — art. 23a KPK — i odrębna idea, restorative justice,
+   nie tylko "mediacja cywilna zastosowana do sprawy karnej"). Pełna
+   treść §1-7 art. 23a KPK, historia (2003, rozszerzenie na wykroczenia
+   2015), literatura (E. Bieńkowska — podstawowa polska monografia, J.
+   Kosonoga — komentarz do przesłanek, W. Zalewski, A. Murzynowski,
+   J. Consedine), krytyka doktrynalna odnotowana uczciwie (wydłużenie
+   faktycznego czasu postępowania mimo § 2).
+3. **Kwestie kulturowe w mediacji** — nowa sekcja 7B, oparta na klasycznym
+   modelu Hofstede (indywidualizm/kolektywizm, dystans władzy, unikanie
+   niepewności, kontekst komunikacji) z zastosowaniem praktycznym.
+4. **Rola/umiejętności/osobowość mediatora** — nowa sekcja 7A, 3 poziomy
+   kompetencji (wiedza/umiejętności/postawy) + zastrzeżenie z literatury
+   (A. Kościółek) że osobowość to nie jedyny czynnik sukcesu.
+
+**Integracja:** odesłania dwukierunkowe między DR-12 (techniki ogólne) i
+DR-03 (specyfika karna) — bez duplikacji. Zarejestrowano oba w
+CHECKLIST-DEDUP z jasnym rozgraniczeniem zakresów.
+
+**Status:** ✅ WDROŻONE. Brak naruszeń CRIT. Ta sesja (AUDYT-2026-07-17,
+kontynuowana przez litery a-i) jest przykładem pełnego cyklu: audyt →
+budowa → samokrytyczna weryfikacja na żądanie użytkownika → korekta →
+domknięcie pozostałych braków tej samej domeny tematycznej.
+
+---
+
+
+
+**Zakres:** `dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/
+mod-techniki-mediacyjne-negocjacyjne.md` (sekcje 2A/Krok 2, 2A/uzupełnienie
+Kroku 1, 3.1 nowa, 2B, literatura, changelog).
+
+**Kontekst — WAŻNE, wzorzec do zapamiętania dla przyszłych sesji:**
+użytkownik wprost zarzucił, że część treści v1.1 była oparta na "własnych
+przypuszczeniach" autora modułu, nie na faktycznej literaturze eksperckiej.
+Zarzut był ZASADNY po weryfikacji: klasyfikacja celów mediacji (merytoryczny/
+proceduralny/relacyjny/psychologiczny) i macierz priorytetyzacji były
+autorską syntezą, nieopatrzoną w v1.1 wyraźnym zastrzeżeniem stopnia
+pewności źródłowej adekwatnym do wagi problemu — mimo że jeden fragment
+changelogu 1.1 zawierał ogólną wzmiankę o "oryginalnym opracowaniu", nie
+było to wystarczająco widoczne w treści samych sekcji.
+
+**Wykonana korekta (zweryfikowano online każdy nowy element):**
+1. Klasyfikację celów ZASTĄPIONO Kołem Konfliktu Ch. Moore'a (5 źródeł:
+   dane, interesy [rzeczowe/proceduralne/psychologiczne], struktura,
+   relacje, wartości) — model potwierdzony w ≥4 niezależnych źródłach
+   (Gamma, Certes Szkolenia, zpe.gov.pl, LinkedIn branżowy).
+2. DODANO realnie udokumentowany etap przygotowawczy z perspektywy
+   MEDIATORA (sesje wstępne/informacyjne per strona, screening) — za
+   Polskim Centrum Mediacji (mediator.org.pl, największa organizacja
+   mediacyjna w Polsce) + Stowarzyszenie OVUM (przesłanki nieskuteczności
+   mediacji). To była realna luka zidentyfikowana w poprzedniej turze
+   (moduł miał tylko przygotowanie STRONY, nie MEDIATORA).
+3. DODANO rzeczywistą treść typów negocjacji (transakcyjne/rozjemcze z
+   przykładem historycznym Dayton 1995; dystrybucyjne/integracyjne za
+   Lewicki/Saunders/Barry/Minton "Negotiation" 2004) — wcześniej tylko
+   cytowane w bibliografii bez wyjaśnienia treści.
+4. Macierz priorytetyzacji w sekcji 2B JAWNIE oznaczono jako własne
+   narzędzie pomocnicze modułu, oddzielone od udokumentowanej koncepcji
+   źródłowej (differential priorities, Lewicki i in.) — żeby czytelnik nie
+   mylił autorskiej wizualizacji z cytatem z podręcznika.
+
+**Wniosek systemowy (do zastosowania w przyszłych sesjach o podobnym
+charakterze — techniki/metodyka, nie prawo pozytywne):** przy modułach
+opisujących wiedzę fachową (nie przepisy) obowiązek odróżnienia "co mówi
+źródło" od "co jest syntezą/rozwinięciem autora modułu" jest RÓWNIE ważny
+jak HARDGATE dla przepisów/orzeczeń — mimo że nie ma tu sankcji prawnej za
+błąd, jest ryzyko wprowadzenia w błąd co do autorytetu stojącego za daną
+tezą. Rekomendacja: przy tworzeniu kolejnych modułów tego typu (techniki,
+metodyka, dobre praktyki) — każda tabela/macierz/klasyfikacja własnego
+autorstwa powinna mieć wyraźne oznaczenie TEGO FAKTU już przy pierwszym
+wprowadzeniu do modułu, nie dopiero w changelogu.
+
+**Status:** ✅ SKORYGOWANE. Brak naruszeń CRIT w wersji poprzedniej (nie
+było to naruszenie HARDGATE sensu stricto, bo dotyczyło wiedzy fachowej,
+nie przepisów/orzeczeń) — ale zasadny zarzut co do przejrzystości
+źródłowej, w pełni uwzględniony.
+
+---
+
+
+
+**Zakres:** `dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/
+mod-techniki-mediacyjne-negocjacyjne.md` (nowe sekcje 2A, 2B; zaktualizowana
+sekcja 9, literatura, changelog) + `dr-12/SKILL.md` (opis modułu) +
+`CHECKLIST-DEDUP.md` (opis wpisu).
+
+**Kontekst:** użytkownik, po otrzymaniu modułu w wersji 1.0, zapytał wprost:
+czy jest przedstawione JAK prowadzić mediacje, jak się do nich przygotować,
+jakie informacje/dane zebrać, jak ustalić priorytety i wyznaczyć cele.
+Uczciwa ocena: v1.0 miała tylko ogólny 6-krokowy algorytm dla pełnomocnika
+(sekcja 9) — bez usystematyzowanej metodyki zbierania informacji,
+wyznaczania celów czy priorytetyzacji wielu spornych kwestii. To był
+rzeczywisty, zasadny brak, nie tylko subiektywne wrażenie użytkownika.
+
+**Wykonanie:** wyszukano i zweryfikowano online strukturę kanonicznego
+polskiego podręcznika Gmurzyńska/Morek (red.), *Mediacje. Teoria i
+praktyka*, wyd. 4 (2024, profinfo.pl — spis treści pobrany bezpośrednio od
+wydawcy, TYLKO spis treści, bez naruszenia praw autorskich do treści
+rozdziałów). Dodano:
+- **Sekcja 2A** — "Przygotowanie do mediacji w 5 krokach" (P. Waszkiewicz,
+  rozdz. 10): zbieranie informacji (4 warstwy: faktyczna/dowodowa, prawna,
+  relacyjna, proceduralna — checklist praktyczny), wyznaczanie celów (4
+  kategorie: merytoryczny/proceduralny/relacyjny/psychologiczny + rozróżnienie
+  cel główny vs poboczny + logrolling), plan mediacji, logistyka, analiza
+  pomediacyjna.
+- **Sekcja 2B** — "Ustalanie priorytetów i kolejności omawianych kwestii"
+  (E. Gmurzyńska, rozdz. 11.2.5): strategie "łatwe najpierw" vs "trudne
+  najpierw", grupowanie kwestii powiązanych, oraz ORYGINALNA macierz
+  priorytetyzacji 2×2 (waga dla klienta × przewidywana waga dla drugiej
+  strony) jako praktyczne narzędzie dla pełnomocnika — rozwinięcie
+  koncepcji z literatury, nie bezpośredni cytat.
+- Zaktualizowano algorytm w sekcji 9, żeby odsyłał do 2A/2B zamiast
+  duplikować treść, dodano krok 7 (analiza pomediacyjna).
+
+**Uwaga metodologiczna (przejrzystość):** treść sekcji 2A/2B to ORYGINALNE
+opracowanie własne oparte na strukturze/koncepcjach ze zweryfikowanego spisu
+treści źródła (nie parafraza ani cytat z treści rozdziałów, do której nie
+uzyskano dostępu — tylko spis treści był dostępny publicznie). Oznaczono to
+wprost w treści modułu, żeby przyszły audyt wiedział, że ewentualna
+rozbieżność ze szczegółową treścią oryginału (gdyby ktoś porównał z
+książką) wynika z tego, że moduł nie odtwarza książki 1:1, tylko rozwija
+jej strukturę.
+
+**Status:** ✅ WDROŻONE. Brak naruszeń CRIT. Brak duplikacji wewnątrz modułu
+(sekcja 9 zaktualizowana, nie zduplikowana).
+
+---
+
+
+
+**Zakres:** `dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/
+mod-techniki-mediacyjne-negocjacyjne.md` (nowy, v1.0) + aktualizacja
+`dr-12/SKILL.md` (12→13 modułów) + dopisek "ZOBACZ TEŻ" w
+`mod-KPC-arbitraz-mediacja-ADR.md` (odesłanie dwukierunkowe) + aktualizacja
+2 wpisów w `CHECKLIST-DEDUP.md` (rozwiązanie odnotowanej luki + rejestracja
+nowego modułu).
+
+**Kontekst:** użytkownik poprosił o zbadanie stopnia rozwinięcia mediacji
+i technik mediacyjnych w systemie. Audyt (przeszukanie treści + nazw
+plików) wykazał: mediacja obecna wyłącznie jako warstwa PRAWNO-PROCEDURALNA
+w ~7 plikach (2 moduły dedykowane w DR-07/DR-12 + fragment w DR-02 rozwodowa
++ jedna wzmianka bez rozwinięcia w DR-04 spory zbiorowe) — zero treści o
+FAKTYCZNYCH technikach prowadzenia mediacji. Odkryto, że system SAM już to
+udokumentował: wpis w `CHECKLIST-DEDUP.md` dla mediacji rozwodowej zawierał
+jawną adnotację "brak jeszcze modułu ogólnego". Użytkownik polecił zbudować
+brakujący moduł, z wyszukaniem literatury eksperckiej online.
+
+**Wykonanie:** zweryfikowano online i wpięto: Standardy Społecznej Rady ADR
+przy Ministrze Sprawiedliwości (26.06.2006, dokument źródłowy gov.pl) — 5
+zasad mediacji (dobrowolność, bezstronność, neutralność, poufność,
+akceptowalność); E. Gmurzyńska/R. Morek (red.) "Mediacje. Teoria i
+praktyka" (Wolters Kluwer) — kanoniczna polska typologia modeli mediacji
+(facylitatywna/ewaluacyjna/oparta na interesach/transformatywna/
+narratywna/humanistyczna); R. Fisher/W. Ury/B. Patton "Getting to Yes"
+(Harvard PON) — principled negotiation, BATNA, ZOPA, z pełnym algorytmem
+3-krokowym ustalania BATNA; R. Bush/J. Folger "The Promise of Mediation"
+— model transformatywny (empowerment + recognition); A. Zienkiewicz
+(Studia Prawnoustrojowe 2012/18) — komentarz akademicki do standardów;
+Standardy szkolenia mediatorów (gov.pl) — katalog technik komunikacyjnych.
+
+**Struktura modułu:** 11 sekcji — zasady mediacji, przebieg postępowania
+(6 etapów), typologia modeli, principled negotiation, BATNA/ZOPA z
+algorytmem i przykładem liczbowym, techniki komunikacyjne, caucus,
+nierównowaga siły/przeciwwskazania, algorytm przygotowania klienta do
+mediacji (6 kroków, perspektywa pełnomocnika), literatura, integracja.
+
+**Rozgraniczenie względem MOD-KPC-arbitraz-mediacja-ADR (uniknięcie
+duplikacji):** ten ostatni pozostaje WYŁĄCZNIE warstwą proceduralną
+(podstawa ustawowa, status mediatora, wzór wniosku, skutki procesowe) —
+nowy moduł dostarcza WYŁĄCZNIE warstwę technik/metodyki, niezależną od
+trybu (sądowa/pozasądowa) i dziedziny (cywilna/rodzinna/pracownicza).
+Odesłania dwukierunkowe dodane w obu plikach.
+
+**Status:** ✅ WDROŻONE. Brak naruszeń CRIT. Luka odnotowana w poprzedniej
+sesji audytowej (CHECKLIST-DEDUP) — ZAMKNIĘTA, z jawnym odesłaniem w obu
+kierunkach między starym a nowym wpisem.
+
+**Uwaga do przyszłego audytu:** DR-02 (`mod-KRO-rodzinne.md`) i DR-04
+(`mod-ustawa-zwiazki-zawodowe-spory-zbiorowe.md`) NIE zostały w tej sesji
+zaktualizowane o wprost dodane odesłanie do nowego modułu (tylko
+odnotowano w CHECKLIST-DEDUP i w treści nowego modułu, sekcja 11) — rozważ
+dodanie jawnego "ZOBACZ TEŻ" w tych dwóch plikach przy najbliższym audycie
+DR-02/DR-04, analogicznie do wzorca zastosowanego w DR-12.
+
+---
+
+
 
 **Zakres:** `orzeczenia-sadowe-v2/SKILL.md` (2.8→2.9: nagłówek/opis, Zasada 5,
 nowa Zasada 5B, Zasada 7, Faza 1-T.4) + `orzeczenia-sadowe-v2/references/

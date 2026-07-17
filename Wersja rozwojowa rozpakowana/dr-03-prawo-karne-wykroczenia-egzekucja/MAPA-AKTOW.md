@@ -24,6 +24,7 @@
 | Ustawa o poprawie BRD — BRD II (wyścigi, drift, brawurowa jazda, przepadek) | Dz.U. 2025 poz. 1872 (w życie 29.01.2026, 30.03.2026) | mod-PRD-nowe-przestepstwa-drogowe-BRD + mod-KW-KPW-framework-szczegolowy | ✅ OK |
 | Rozp. MSWiA ws. ewidencji kierujących (taryfikator, kody, szkolenia — NOWE) | Dz.U. 2026 poz. 724 (w życie 03.06.2026) | mod-PRD-prawo-jazdy-punkty-karne | ✅ OK |
 | KPK — tryby ścigania | Dz.U. 2026 poz. 490 ze zm. | mod-KPK-tryby-scigania | ✅ OK |
+| KPK art. 23a — mediacja karna (część KPK, ten sam Dz.U. co wyżej) | Dz.U. 2026 poz. 490 t.j. (część KPK) — w życie 1.07.2003, rozszerzenie na wykroczenia 1.07.2015 | mod-KPK-mediacja-sprawiedliwosc-naprawcza | ✅ NOWY 2026-07-17 |
 | KKS + Ustawa AML | Dz.U. 2025 poz. 633 t.j. — VER 2026-07-02o: nadal aktualne (obwieszczenie 10.04.2025) + Dz.U. 2025 poz. 644 t.j. ✅ VER: 2026-06-14 (TRYB DZU — AML był 2023/1124, nowszy t.j. 2025/644 z 09.05.2025; uwaga: dalsza nowelizacja Dz.U. 2025 poz. 1669, sprawdzić czy konsolidowana) | mod-KKS-karny-skarbowy-i-AML | ✅ OK |
 | Kwalifikator karnomaterialny | — | mod-KK-kwalifikator-karnomaterialny | ✅ OK |
 | Ustawa o odpowiedzialności podmiotów zbiorowych | Dz.U. 2024 poz. 1822 t.j. — VER 2026-07-02o: nadal aktualne (obwieszczenie 6.12.2024); POTWIERDZONE: nowelizacja Dz.U. 2025 poz. 1440 (ustawa z 26.09.2025, nowy art. 9a — obowiązek naprawienia szkody) rzeczywiście weszła w życie 1.03.2026 r. i jest OBOWIĄZUJĄCA od tej daty — mapa poprawnie to sygnalizowała | mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych | ✅ OK |
