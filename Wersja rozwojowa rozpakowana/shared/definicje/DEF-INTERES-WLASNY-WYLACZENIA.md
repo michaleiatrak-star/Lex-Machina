@@ -358,6 +358,18 @@ OBOWIĄZEK REJESTRACJI W CRBR:
 
 ---
 
+## 7. ZOBACZ TEŻ — KONFLIKT INTERESÓW W ZAMÓWIENIACH PUBLICZNYCH (dodane 2026-07-18)
+
+Analogiczny, ale WĘŻSZY mechanizm (pokrewieństwo/powinowactwo w linii
+bocznej TYLKO do 2. stopnia, nie 4. jak przy wyłączeniu sędziego powyżej)
++ DODATKOWA przesłanka PRACOWNICZA (stosunek pracy/zlecenia z wykonawcą
+w ciągu ostatnich 3 lat) opisany w:
+```
+view /mnt/skills/user/dr-07-zamowienia-publiczne-fundusze-ue/modules/mod-PZP-dzial-I-podstawy-wylaczenia-szacowanie.md
+```
+sekcja 6.1 (art. 56-57 PZP) — NIE myl zakresów pokrewieństwa między
+tymi dwoma odrębnymi reżimami proceduralnymi.
+
 ## QUALITY GATE
 
 ```

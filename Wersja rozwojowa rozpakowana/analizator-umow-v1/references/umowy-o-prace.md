@@ -34,6 +34,61 @@ PARAMETRY WYMAGAJĄCE WERYFIKACJI ONLINE (zmieniają się co roku!):
 
 ---
 
+## H.1B ELEMENTY OBOWIĄZKOWE UMOWY O PRACĘ
+
+> Dodane 2026-07-13m, **skorygowane 2026-07-13n po konfrontacji z art. 29 KP
+> (isap/lexlege/pwrz.pl)** — pierwsza wersja pominęła jeden obowiązkowy
+> element (adres siedziby pracodawcy). To błąd wynikający z tego, że treść
+> napisano z pamięci ogólnej wiedzy, nie z web_search — naprawiony po
+> zwróceniu na to uwagi. Poniższa wersja została skonfrontowana ze źródłem.
+
+```
+TREŚĆ OBOWIĄZKOWA (art. 29 §1 KP — weryfikuj aktualne brzmienie w isap.sejm.gov.pl
+przed każdym powołaniem, mimo że przepis jest stabilny od lat):
+□ Strony umowy
+□ Adres siedziby pracodawcy — a gdy pracodawca jest osobą fizyczną
+  nieposiadającą siedziby: adres zamieszkania (element ŁATWO POMIJANY —
+  pierwsza wersja tej listy go pominęła; dodany do KP jako implementacja
+  dyrektywy 2019/1152 o przejrzystych warunkach pracy)
+□ Rodzaj umowy (na okres próbny / czas określony / czas nieokreślony)
+□ Data zawarcia umowy
+□ Warunki pracy i płacy, w tym w szczególności:
+  □ Rodzaj pracy (stanowisko lub zakres obowiązków)
+  □ Miejsce wykonywania pracy
+  □ Wynagrodzenie za pracę odpowiadające rodzajowi pracy, ze wskazaniem
+    składników wynagrodzenia (Pułapka P-1 — brak rozbicia na składniki)
+  □ Wymiar czasu pracy
+  □ Termin rozpoczęcia pracy
+
+FORMA (art. 29 §2 KP):
+□ Zasadą jest forma pisemna. Jeśli umowa NIE została zawarta pisemnie →
+  pracodawca musi PRZED DOPUSZCZENIEM pracownika do pracy potwierdzić mu
+  na piśmie ustalenia co do stron, rodzaju umowy i jej warunków. Sprawdź,
+  czy w analizowanym przypadku takie potwierdzenie faktycznie istnieje,
+  jeśli sama umowa jest niekompletna.
+
+ODRĘBNY OBOWIĄZEK INFORMACYJNY (art. 29 §3 KP — NIE jest to treść samej
+umowy, lecz osobna informacja pisemna w ciągu 7 dni od zawarcia umowy):
+□ Obowiązująca pracownika dobowa i tygodniowa norma czasu pracy
+□ Częstotliwość wypłat wynagrodzenia
+□ Wymiar przysługującego urlopu wypoczynkowego
+□ Długość okresu wypowiedzenia
+□ Układ zbiorowy pracy (jeśli dotyczy), a przy braku regulaminu pracy —
+  dodatkowo: pora nocna, miejsce/termin/czas wypłaty wynagrodzenia,
+  sposób potwierdzania obecności
+→ Brak tej informacji to odrębne naruszenie od niekompletności samej
+  umowy — oceniaj je osobno w raporcie.
+
+ELEMENTY DODATKOWE WYMAGANE PRZY OKREŚLONYCH TYPACH UMÓW:
+□ Umowa na okres próbny → maksymalny czas trwania (weryfikuj aktualny limit w KP)
+□ Umowa na czas określony → limity liczby umów i łącznego czasu trwania (art. 25¹ KP)
+□ Praca zdalna → dodatkowe ustalenia zgodnie z rozdziałem KP o pracy zdalnej
+□ Niepełny etat → informacja o zasadach wykonywania pracy w godzinach
+  nadliczbowych (jeśli dotyczy)
+```
+
+---
+
 ## H.2 PUŁAPKI W UMOWACH O PRACĘ — KATALOG EKSPERCKI
 
 ### PUŁAPKA P-1 — Wynagrodzenie równe minimalnemu bez składników (MEDIUM RISK)
@@ -451,6 +506,48 @@ MONITORING I DANE:
 SCORING → Balans H/UoP:
 □ Tabela D.1 z SKILL.md — zmierz balans pracodawca vs pracownik
 □ Raport końcowy — sekcja F z SKILL.md
+```
+
+---
+
+## H.7 DOBRE PRAKTYKI I ZŁOTE ZASADY UMÓW O PRACĘ
+
+> Dodane 2026-07-13m — uzupełnienie brakującego elementu.
+
+### H.7.1 Dobre praktyki redakcyjne
+
+```
+□ Rozbij wynagrodzenie na składniki (podstawa + dodatki) nawet gdy
+  suma = minimalne wynagrodzenie — ułatwia rozliczenia i kontrolę PIP
+□ Wskaż wprost miejsce wykonywania pracy jako konkretny adres/obszar,
+  nie "zgodnie z poleceniem pracodawcy" bez żadnego ograniczenia
+□ Każdy załącznik (zakres obowiązków, regulamin, procedury) — z datą
+  i potwierdzeniem zapoznania się pracownika
+□ Klauzule o pracy zdalnej/mieszanej — precyzuj dni/harmonogram, nie
+  odsyłaj wyłącznie do "ustaleń z przełożonym"
+□ Przy zmianie warunków w trakcie trwania stosunku — zawsze forma
+  pisemna (aneks lub wypowiedzenie zmieniające), nigdy ustna/mailowa
+  bez potwierdzenia
+```
+
+### H.7.2 Złote zasady umów o pracę
+
+```
+1. Niekorzystniejsze dla pracownika niż KP = nieważne z mocy prawa
+   (art. 18 §2 KP) — nie trzeba tego "odkrywać" w analizie, to
+   automatyczny skutek ustawowy; wskaż go wprost, nie jako "ryzyko".
+2. Ustne ustalenia nie zastępują pisemnego potwierdzenia (art. 29 §2 KP)
+   — brak formy pisemnej to ryzyko dowodowe dla obu stron, nie tylko
+   pracownika.
+3. Każde odstępstwo od typowego wzorca (dłuższy okres próbny, szerszy
+   zakres monitoringu, nietypowy harmonogram) wymaga wyraźnej podstawy
+   ustawowej — brak podstawy = domniemanie na korzyść pracownika.
+4. Zakaz konkurencji, kary umowne i odpowiedzialność materialna mają
+   sztywne limity ustawowe (patrz Moduł I i Pułapka P-4) — próba ich
+   obejścia w treści umowy jest nieskuteczna, nie tylko ryzykowna.
+5. Dokumenty kończące stosunek pracy (porozumienie, świadectwo) wymagają
+   tej samej staranności co sama umowa — błędy tam kosztują częściej
+   w praktyce niż błędy w samej umowie (patrz H.4).
 ```
 
 ---

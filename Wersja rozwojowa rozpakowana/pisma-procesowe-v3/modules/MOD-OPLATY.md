@@ -85,6 +85,23 @@ KROK 4: Jeśli ostatni dzień to ustawowy dzień wolny od pracy →
          termin przesuwa się analogicznie
 KROK 5: Data ZŁOŻENIA pisma = data nadania w placówce pocztowej
          (art. 165 §2 KPC) lub data złożenia w biurze podawczym sądu
+         ⚠️⚠️ DODANE 2026-07-18: przepis był ZMIENIANY WIELOKROTNIE (co
+         najmniej 4 razy w ostatnich latach, m.in. w reakcji na wyrok
+         TSUE C-545/17 z 27.03.2019) i JEGO WYKŁADNIA POZOSTAJE SPORNA —
+         część doktryny/orzecznictwa twierdzi, że nadal TYLKO nadanie u
+         "operatora wyznaczonego" (Poczta Polska) daje pewność zachowania
+         terminu; inne źródła wskazują na rozszerzenie na KAŻDEGO operatora
+         świadczącego "usługi powszechne" lub nawet każdego operatora
+         wpisanego do rejestru (259 podmiotów wg stanu z lutego 2025).
+         **REKOMENDACJA PRAKTYCZNA: dla pism o KRYTYCZNYM znaczeniu
+         (środki zaskarżenia, pisma z zawitym terminem) nadawaj WYŁĄCZNIE
+         za pośrednictwem Poczty Polskiej, dopóki nie zweryfikujesz online
+         AKTUALNEGO brzmienia art. 165 §2 KPC i najnowszego orzecznictwa SN
+         na dzień sporządzania pisma — ryzyko nieskuteczności czynności
+         procesowej przy użyciu innego operatora jest realne i NIE zostało
+         jednoznacznie wyeliminowane.** Patrz też
+         `dr-02/.../mod-ustawa-monopole-panstwowe.md` sekcja o operatorze
+         wyznaczonym (Poczta Polska) dla szerszego kontekstu.
 
 ALERT TERMINOWY:
 Jeśli termin upływa w ciągu ≤ 3 dni: ⚠ PILNE — wskaż wyraźnie

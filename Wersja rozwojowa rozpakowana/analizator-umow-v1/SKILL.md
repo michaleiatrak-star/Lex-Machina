@@ -1,10 +1,10 @@
 ---
 name: analizator-umow-v1
-version: 1.12
+version: 1.13
 type: executive-umowy
 status: production
 description: |
-  Analizator Umów v1 (v1.12) — analiza, redakcja i negocjacje umów.
+  Analizator Umów v1 (v1.10) — analiza, redakcja i negocjacje umów.
   PRIMARY: B2B (G), umowa o pracę (H), zakaz konkurencji (I).
   DOMAIN: J0 routing, J1 najem, J2 nieruchomości/UUDE, J3 dystrybucja,
   J4 finansowanie, J5 wykonawcze, J6 IT/SaaS/agile, J7 PZP/FIDIC,
@@ -150,7 +150,20 @@ ZAKAZ oznaczania ✅ [VER] bez faktycznego wykonania web_search / web_fetch.
 
 **Zasada 1 — Weryfikacja prawa wyłącznie w oficjalnych źródłach:**
 - Prawo polskie → isap.sejm.gov.pl (tekst jednolity)
-- Klauzule niedozwolone → rejestr.uokik.gov.pl
+- Klauzule niedozwolone (wpisy SOKiK sprzed 17.04.2016) → rejestr.uokik.gov.pl
+  — ⚠️ ZMIANA STATUSU (2026-04-18, potwierdzone 2026-07-13l): rejestr utracił
+  charakter ustawowy (uchylony art. 479⁴⁵ KPC, wygaśnięcie 10-letniego okresu
+  przejściowego z nowelizacji z 5.08.2015, Dz.U. 2015 poz. 1634). Od
+  18.04.2026 dostępny wyłącznie jako **zanonimizowana baza informacyjno-
+  edukacyjna** (bez danych stron postępowania, bez skutku rozszerzonej
+  prawomocności wobec osób trzecich) — ~7786 archiwalnych wpisów, użyteczne
+  jako WSKAZÓWKA/ANALOGIA, NIE jako samodzielna podstawa prawna wiążąca
+  innych przedsiębiorców. Zweryfikuj przed użyciem, czy rejestr nadal
+  odpowiada pod tym adresem — jego dalsze istnienie zależy od decyzji UOKiK,
+  nie ustawy.
+- Klauzule uznane za niedozwolone PO 17.04.2016 → wyłącznie decyzje Prezesa
+  UOKiK (baza decyzji na uokik.gov.pl), NIE rejestr — to jedyne aktualne
+  źródło dla nowych spraw, rejestr ich nie obejmuje
 - Decyzje UOKiK → uokik.gov.pl
 - RODO → eur-lex.europa.eu → GDPR 2016/679
 - Dyrektywy UE → eur-lex.europa.eu
@@ -158,8 +171,12 @@ ZAKAZ oznaczania ✅ [VER] bez faktycznego wykonania web_search / web_fetch.
 - Deweloperzy → oficjalny rejestr inwestycji deweloperskich (gov.pl — zweryfikuj adres), ekw.ms.gov.pl
 
 **Zasada 2 — Zakaz fikcyjnych sygnatur:**
-Każda klauzula z rejestru UOKiK musi mieć numer wpisu z rejestr.uokik.gov.pl.
-Jeśli nie znaleziono → wskaż art. 385¹ KC + uzasadnienie analogią.
+Każda klauzula z rejestru UOKiK (wpisy sprzed 2016) musi mieć numer wpisu z
+rejestr.uokik.gov.pl — traktuj jako analogię/wskazówkę interpretacyjną, nie
+wiążącą podstawę (rejestr od 18.04.2026 nie ma już statusu ustawowego —
+patrz Zasada 1). Dla spraw po 17.04.2016 → zamiast numeru wpisu wskaż numer
+i datę decyzji Prezesa UOKiK. Jeśli nie znaleziono w żadnym z tych źródeł
+→ wskaż art. 385¹ KC + uzasadnienie analogią.
 
 **Zasada 3 — Pytania PRZED analizą (Faza 0):**
 Zawsze ustal kontekst decyzyjny przed analizą.
@@ -175,6 +192,33 @@ Scoring uprawnień/obowiązków każdej strony oddzielnie.
 
 **Zasada 6 — Rekomendacja = gotowe brzmienie:**
 Nie "zmień §3" lecz "§3 powinien brzmieć: [pełna treść]"
+
+**Zasada 7 — Ścisły język prawniczy (2026-07-13m, dotyczy WSZYSTKICH modułów G/H/I/J*):**
+Każde proponowane brzmienie klauzuli, każdy szablon i każda rekomendacja
+MUSI być sformułowana w precyzyjnym języku prawniczym, nie potocznym
+przybliżeniem:
+```
+□ Terminy ustawowe = dokładne sformułowania z KC/KP/ustaw szczególnych,
+  nie synonimy potoczne (np. "kara umowna" nie "grzywna", "wypowiedzenie"
+  nie "zwolnienie", "odstąpienie" nie "zerwanie umowy" — to różne instytucje
+  o różnych skutkach prawnych, mylenie ich jest błędem merytorycznym, nie
+  stylistycznym)
+□ Strony oznaczaj konsekwentnie zdefiniowanymi nazwami ("Zamawiający"/
+  "Wykonawca", "Pracodawca"/"Pracownik" itd.), zdefiniowanymi przy
+  pierwszym wystąpieniu, bez zamiennego używania synonimów w dalszej treści
+□ Liczby, terminy i kwoty — cyfrą i słownie przy kwotach pieniężnych
+  (konwencja notarialna/procesowa), daty w formacie dzień-miesiąc-rok
+□ Unikaj nieostrych sformułowań potocznych ("w miarę możliwości", "w
+  rozsądnym terminie" bez definicji) w szablonach klauzul — jeśli
+  ustawa/orzecznictwo definiuje pojęcie nieostre, odeślij do tej definicji
+  zamiast tworzyć własną, nieprecyzyjną
+□ Nie myl instytucji o podobnej nazwie, ale różnej naturze prawnej —
+  każdy moduł ekspercki (G/H/I) w swoim katalogu PUŁAPEK wskazuje
+  przykłady takich pomyłek właściwe dla danego typu umowy
+```
+Naruszenie tej zasady w wygenerowanym dokumencie = błąd tej samej wagi co
+błąd merytoryczny (nieprecyzyjny język prawniczy tworzy realne ryzyko sporu
+o wykładnię postanowienia).
 
 ---
 
@@ -244,24 +288,6 @@ na żądanie         → zawsze F.1 niezależnie od kwoty
 ```
 
 ---
-
-## CHANGELOG
-
-**1.12 (2026-07-07) — reforma PIP (Dz.U. 2026 poz. 473) w module G.1/G.1B:**
-- Znalezisko audytu literaturowego 2026-07-07: moduł `b2b-podwykonawcze.md` nie
-  uwzględniał reformy uprawnień PIP obowiązującej od 08.07.2026 (decyzja administracyjna
-  reklasyfikacyjna bez sądu, art. 10 ust. 1 pkt 7a ustawy o PIP).
-- Dodano sekcję **G.1C** w `b2b-podwykonawcze.md`: nowa ścieżka reklasyfikacji, pułapka
-  rozwiązania umowy w trakcie kontroli, interpretacja indywidualna GIP (art. 14b),
-  podwyższone kary, okno abolicyjne 08.07.2026–08.07.2027, zmiana procedury raportowej
-  Faza 0/F.1 dla umów B2B/zlecenie analizowanych od tej daty.
-- Zaktualizowano wynik testu G.1 (5–8 cech) o odesłanie do G.1C.
-- Status ustawy wpisany jako ✅ obowiązująca (VER 2026-07-07, dzień przed wejściem
-  w życie) — zsynchronizowano z DR-04 `mod-ustawa-PIP-inspekcja-pracy.md` sekcja 5,
-  `shared/AKTY-PRAWNE-MASTER.md`, `prawo-polskie-v2/ROUTING-MAP.md`,
-  `dr-04/MAPA-AKTOW.md`, `audyt-systemu-v4/references/mapa_dzu_2026-07-04.md`.
-- Treść materialna kanoniczna pozostaje w DR-04 (zasada deduplikacji) — G.1C tylko
-  odsyła i podaje konsekwencje redakcyjne specyficzne dla umów B2B.
 
 *Skill analizator-umow-v1 v1.8 · PRIMARY: b2b-podwykonawcze · umowy-o-prace · zakaz-konkurencji*
 *DOMAIN (lazy): J0-routing · J1-najem · J2-nieruchomosci · J3-dystrybucja*

@@ -127,6 +127,12 @@ OCHRONA MAJĄTKOWA SYGNALISTY (przy działaniach odwetowych):
 **Powiązania:**
 - `dr-04` → `mod-KP-prawo-pracy` — zwolnienie, roszczenia pracownicze
 - `dr-04` → `mod-ustawa-PIP-inspekcja-pracy` — PIP jako organ kontroli i kanał zewnętrzny
+- `dr-04` → `mod-KP-naduzycia-pracodawcy-limity-kary-degradacja` (dodane
+  2026-07-17) — GDY odwet wobec sygnalisty przybiera formę DEGRADACJI:
+  ten moduł (DR-05) dostarcza domniemanie odwetu, tamten (DR-04) dostarcza
+  analizę formalnej poprawności samego trybu degradacji (wypowiedzenie
+  zmieniające art. 42 KP vs próba zamaskowania kary porządkowej poza
+  zamkniętym katalogiem art. 108 KP) — stosuj oba łącznie
 - `pisma-procesowe-v3` — pozew o odszkodowanie za odwet, zawiadomienie do RPO
 - `dr-15` → `mod-ustawa-sygnalisci.md` — perspektywa compliance pracodawcy / CMS / ISO 37301
 

@@ -68,7 +68,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (19 łącznie — ✓ 19 OK, ☐ 0 STUB)
+## Moduły (22 łącznie — ✓ 22 OK, ☐ 0 STUB)
 
 ```
   [✓] OK    mod-KC-cywilne-zobowiazania-odpowiedzialnosc
@@ -81,6 +81,13 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
                +OZSS rozszerzone, +świadkowie w sprawach rozwodowych —
                pointer do shared/MOD-ATAK-NA-SWIADKA.md, bez duplikacji)
   [✓] OK    mod-KSH-spolki-handlowe
+  [✓] OK    mod-KSH-wrogie-przejecie-obrona-bialy-rycerz
+              (dodany 2026-07-18: brak definicji ustawowej "wrogiego
+               przejęcia" — termin ekonomiczny; techniki obrony
+               prewencyjne (zapisy statutowe, akcje nieme/uprzywilejowane,
+               złote spadochrony) i reaktywne (biały rycerz — z
+               zastrzeżeniem że to wciąż przejęcie, tylko friendly;
+               zatruta pigułka, MBO). Odpowiedź na pytanie użytkownika)
   [✓] OK    mod-PrUpad-upadlosc-restrukturyzacja
   [✓] NOWY  mod-ustawa-doradca-restrukturyzacyjny-zawod
               (Dz.U. 2022 poz. 1007 [licencja, sprawdź nowszy t.j.] +
@@ -94,6 +101,22 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   [✓] OK    mod-KPC-egzekucja-windykacja
   [✓] OK    mod-ustawa-prawa-konsumenta
   [✓] OK    mod-ustawa-UZNK-nieuczciwa-konkurencja
+  [✓] OK    mod-ustawa-UOKIK-antymonopolowe
+  [✓] OK    mod-ustawa-monopole-panstwowe
+              (dodany 2026-07-18: podstawa konstytucyjna art. 216 ust. 3
+               [ustawa + ważny interes społeczny], monopol na gry
+               hazardowe [Totalizator Sportowy], operator wyznaczony
+               [Poczta Polska] — w tym WAŻNE ZNALEZISKO: sporna,
+               wielokrotnie nowelizowana kwestia art. 165 §2 KPC dot.
+               skutku nadania pisma procesowego u różnych operatorów
+               pocztowych, ostrzeżenie dodane też w pisma-procesowe-v3.
+               Komplementarny do mod-ustawa-UOKIK — monopol PAŃSTWOWY
+               [celowy, ustawowy] vs pozycja dominująca [rynkowa])
+              (dodany 2026-07-18: rozgraniczenie od UZNK — struktura
+               rynku [monopol, pozycja dominująca, koncentracje] vs
+               uczciwość praktyk. Kontrola koncentracji z mocy ustawy,
+               3 rodzaje decyzji Prezesa UOKiK, kary i program leniency.
+               Odpowiedź na pytanie o "kwestie monopoli")
   [✓] OK    mod-ustawa-deweloperska
   [✓] OK    mod-ustawa-KRS-rejestr-sadowy
   [✓] OK    mod-ustawa-fundacje-stowarzyszenia

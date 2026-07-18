@@ -40,88 +40,14 @@ WYNIK TESTU:
               → ryzyko: PIP/ZUS może zakwalifikować jako UoP
               → skutki: zaległe składki ZUS za okres nieprzedawniony + odsetki + sankcje; termin przedawnienia weryfikuj w ustawie o SUS
               → podstawa: art. 22 §1¹ KP + art. 8 ust. 2a ustawy o SUS
-              → ⚠️ OD 08.07.2026: dodatkowa, SZYBSZA ścieżka — decyzja administracyjna okręgowego
-                inspektora pracy BEZ POŚREDNICTWA SĄDU (art. 10 ust. 1 pkt 7a ustawy o PIP,
-                Dz.U. 2026 poz. 473) — patrz G.1C poniżej. Uwzględnij to ryzyko w KAŻDEJ analizie
-                umowy B2B/zlecenie od tej daty, nie tylko w analizach dotyczących sporu sądowego.
 ```
 
 **Weryfikacja online obowiązkowa:**
 ```
 1. isap.sejm.gov.pl → Kodeks pracy → art. 22
 2. isap.sejm.gov.pl → ustawa z 13.10.1998 o systemie ubezpieczeń społecznych → art. 8 ust. 2a
-3. isap.sejm.gov.pl → ustawa o PIP → art. 10 ust. 1 pkt 7a, art. 14b (od 08.07.2026, Dz.U. 2026 poz. 473)
-4. Oficjalnie: pip.gov.pl → aktualne stanowiska/komunikaty kontrolne; ISAP → art. 22 KP
+3. Oficjalnie: pip.gov.pl → aktualne stanowiska/komunikaty kontrolne; ISAP → art. 22 KP
 ```
-
----
-
-## G.1C ⚠️ REFORMA PIP (Dz.U. 2026 poz. 473) — OBOWIĄZUJE OD 08.07.2026
-
-> **ZNALEZISKO AUDYTU 2026-07-07:** ta sekcja została dodana w ramach naprawy luki
-> wykrytej podczas audytu literaturowego — moduł G.1/G.1B nie uwzględniał dotąd
-> reformy uprawnień PIP, mimo że jest ona kluczowa dla ryzyka każdej umowy B2B/zlecenie
-> redagowanej lub analizowanej od tej daty. Pełny opis materialny: DR-04
-> `mod-ustawa-PIP-inspekcja-pracy.md` sekcja 5 (kanoniczne źródło — ten moduł tylko
-> odsyła i podaje konsekwencje redakcyjne/kontraktowe).
-
-**Akt:** Ustawa z 11.03.2026 o zmianie ustawy o PIP (Dz.U. 2026 poz. 473, ogł. 07.04.2026).
-✅ Obowiązuje od **08.07.2026** (zweryfikowano online 2026-07-07 — dzień przed wejściem
-w życie, wpisana jako aktualna zgodnie z decyzją redakcyjną). Ustawa objęta kontrolą
-następczą TK — nie wstrzymuje to jej obowiązywania; zweryfikuj online przy konkretnej sprawie,
-czy nie zapadło orzeczenie wpływające na jej treść.
-
-### Co zmienia się dla umów redagowanych/analizowanych w tym module
-
-```
-□ NOWA ŚCIEŻKA RECLASYFIKACJI (art. 10 ust. 1 pkt 7a ustawy o PIP):
-  Okręgowy inspektor pracy może samodzielnie, W DRODZE DECYZJI ADMINISTRACYJNEJ,
-  stwierdzić istnienie stosunku pracy przy umowie B2B/zlecenie — BEZ postępowania
-  sądowego. Warunek: wcześniejsze polecenie usunięcia naruszeń (art. 10 ust. 2 pkt 2)
-  zostało zignorowane przez zatrudniającego. Odwołanie → sąd pracy (30 dni, wstrzymuje
-  wykonanie decyzji do prawomocnego orzeczenia).
-□ SKUTEK DLA REDAKCJI: sama treść umowy (nawet doskonała, patrz G.1B — zakaz
-  oświadczeń deklaratoryjnych) NIE chroni przed decyzją inspektora, jeśli FAKTYCZNY
-  sposób wykonywania odpowiada testowi G.1 na poziomie ≥3 cech. Ryzyko nie jest już
-  wyłącznie "sądowe i odległe w czasie" — jest administracyjne i szybsze.
-□ PUŁAPKA ROZWIĄZANIA UMOWY W TRAKCIE KONTROLI: jeśli zamawiający rozwiąże/wypowie
-  umowę B2B między rozpoczęciem kontroli a terminem na odwołanie — prawo uznaje
-  stosunek pracy za nawiązany z mocą wsteczną od dnia rozpoczęcia kontroli (ochrona
-  przed zwolnieniem odwetowym). NIE rekomenduj rozwiązania umowy jako reakcji na kontrolę.
-□ NOWE NARZĘDZIE OCHRONNE — art. 14b ustawy o PIP: interpretacja indywidualna GIP
-  (40 zł/stan faktyczny) — czy planowana/istniejąca relacja stanowi stosunek pracy.
-  Analogicznie do interpretacji podatkowej: NIE wiąże, ale chroni przed sankcją, jeśli
-  strona zastosowała się do jej treści I opisany stan faktyczny był zgodny z rzeczywistością.
-  Rekomenduj jako element strategii PRZED podpisaniem umowy B2B w strefie szarej (3–4 cechy)
-  — nie po fakcie i nie w trakcie już toczącej się kontroli (interpretacji się wtedy nie wydaje).
-□ WYŻSZE KARY: grzywna za wykroczenia z art. 281 KP: 2000–60 000 zł (było 1000–30 000 zł),
-  przy recydywie do 90 000 zł — uwzględnij w kalkulacji ryzyka finansowego (moduł ECONOMIC).
-□ OKNO ABOLICYJNE (08.07.2026–08.07.2027): dobrowolne przekształcenie ryzykownej umowy
-  B2B/zlecenie w umowę o pracę w tym oknie → zwolnienie z odpowiedzialności wykroczeniowej
-  (art. 281 §1 pkt 1 KP), ALE NIE z zaległości ZUS/PIT (te nadal do 5 lat wstecz, niezależnie
-  od PIP). Rekomenduj klientowi rozważenie tego okna przy wyniku testu G.1 = 5–8 cech.
-```
-
-### Zmiana w rekomendacji przy Fazie 0 / raporcie F.1
-
-```
-Przy KAŻDEJ analizie/redakcji umowy B2B lub zlecenia od 08.07.2026:
-  1. Wykonaj test G.1 jak dotychczas.
-  2. Jeśli wynik ≥3 cechy → dodaj do raportu sekcję "Ryzyko administracyjne PIP (od 08.07.2026)"
-     z odniesieniem do G.1C, NIE tylko do klasycznego ryzyka sądowego/ZUS.
-  3. Przy wyniku 5–8 cech → rekomenduj klientowi do wyboru: (a) korektę faktycznego sposobu
-     wykonywania umowy, (b) wniosek o interpretację GIP art. 14b PRZED podpisaniem/przy sporze
-     jeszcze nieobjętym kontrolą, (c) rozważenie okna abolicyjnego jeśli już trwa współpraca
-     o cechach etatu.
-  4. NIE proponuj (a) zerwania umowy w reakcji na rozpoczętą kontrolę (patrz pułapka wyżej),
-     (b) oświadczenia deklaratoryjnego jako substytutu korekty faktycznej (patrz G.1B — zasada
-     ta obowiązuje a fortiori po reformie, bo ścieżka administracyjna jest szybsza).
-```
-
-**Źródła:** isap.sejm.gov.pl (Dz.U. 2026 poz. 473) | gov.pl/web/rodzina (komunikat MRPiPS) |
-pip.gov.pl/aktualnosci — weryfikuj online przed każdym powołaniem konkretnego artykułu.
-**Powiązania:** DR-04 `mod-ustawa-PIP-inspekcja-pracy.md` sekcja 5 (treść kanoniczna) |
-`mod-shared-economic.md` (kalkulacja ryzyka grzywien 60–90 tys. zł) | `shared/AKTY-PRAWNE-MASTER.md` BLOK PIP.
 
 ---
 
@@ -591,6 +517,88 @@ SCORING:
       lub osób trzecich niezwiązanych z Wykonawcą.
 3. Ograniczenia z ust. 1–2 nie stosuje się do szkód wyrządzonych umyślnie
    lub wskutek rażącego niedbalstwa Wykonawcy (art. 473 §2 KC).
+```
+
+---
+
+## G.7 ELEMENTY OBOWIĄZKOWE, DOBRE PRAKTYKI I ZŁOTE ZASADY UMOWY B2B
+
+> Dodane 2026-07-13m — uzupełnienie brakującego elementu (checklisty G.5 i
+> szablony G.6 już istniały; brakowało odrębnej listy TREŚCI OBOWIĄZKOWEJ
+> niezależnej od procesu analizy, oraz zestawu zasad przewodnich).
+
+### G.7.1 Elementy obowiązkowe (bez których umowa B2B jest niekompletna lub ryzykowna)
+
+```
+KONIECZNE DO WAŻNOŚCI / EGZEKWOWALNOŚCI:
+□ Oznaczenie stron: pełna firma, forma prawna, NIP, KRS/CEIDG, adres
+  (weryfikuj aktualność wpisu — patrz shared/MCP-INTEGRACJA.md /
+  KONEKTORY-REKOMENDOWANE.md: connector krs-example)
+□ Przedmiot świadczenia — opisany na tyle precyzyjnie, by dało się
+  ocenić wykonanie/niewykonanie (zakaz opisów blankietowych typu
+  "usługi informatyczne wg potrzeb")
+□ Wynagrodzenie LUB sposób jego ustalenia (art. 353¹ KC — swoboda umów,
+  ale musi być oznaczalne; brak = ryzyko nieważności/sporu o wysokość)
+□ Termin/sposób wykonania lub czas trwania umowy
+□ Forma i skutki rozwiązania/wypowiedzenia
+□ Prawo właściwe i sąd właściwy (istotne przy elemencie transgranicznym)
+
+REKOMENDOWANE (nie obligatoryjne, ale ich brak = luka ryzyka — patrz G.2 Pułapki):
+□ Zakres i limit odpowiedzialności (Pułapka 4)
+□ Zasady poufności z określonymi wyjątkami (Pułapka 7)
+□ Własność intelektualna — zakres przeniesienia/licencji (Pułapka 2)
+□ Zasady podwykonawstwa/cesji (Pułapki 6, 10)
+□ Klauzula siły wyższej
+□ Klauzula salwatoryjna
+```
+
+### G.7.2 Dobre praktyki redakcyjne (pozytywne, nie tylko unikanie pułapek)
+
+> Zaktualizowane 2026-07-13n po konfrontacji z praktyką kancelaryjną
+> (Kancelaria Stawowski, KPR Kaczor Madejewska, Rautszko-legal, Mięsikowski
+> i Wziętek — paraf­raza, nie cytat dosłowny) — dodano 3 pozycje poniżej,
+> których pierwsza wersja nie uwzględniała.
+
+```
+□ Definiuj pojęcia kluczowe na początku umowy (§ Definicje), nie
+  rozrzucaj definicji po całym dokumencie
+□ Numeruj paragrafy i ustępy konsekwentnie — ułatwia odesłania i aneksowanie
+□ Każdy termin (płatności, wykonania, wypowiedzenia) wyrażaj jednoznacznie
+  (data kalendarzowa lub liczba dni + zdarzenie początkowe), nie opisowo
+□ Kwoty: cyfrą + słownie, z walutą i wskazaniem netto/brutto
+□ Odesłania do załączników — z dokładnym tytułem i datą załącznika,
+  nie ogólnym "zgodnie z ustaleniami stron"
+□ Klauzula integralności umowy (entire agreement) — jasno wskazuje, co
+  zastępuje wcześniejsze ustalenia
+
+DODANE PO KONFRONTACJI Z PRAKTYKĄ KANCELARYJNĄ (2026-07-13n):
+□ Zweryfikuj kontrahenta PRZED podpisaniem: wpis w KRS/CEIDG (connector
+  krs-example), historia finansowa, referencje — praktyka rekomendowana
+  wprost jako "bezpieczne zawieranie umów B2B"
+□ Jeśli umowę podpisuje pełnomocnik — zażądaj dokumentu pełnomocnictwa
+  wskazującego kto go udzielił, w jakim zakresie i na jak długo; sam fakt
+  twierdzenia "jestem pełnomocnikiem" nie potwierdza umocowania
+□ Moment przeniesienia majątkowych praw autorskich — powiąż z zapłatą
+  wynagrodzenia, nie tylko z powstaniem/ustaleniem utworu (typowy wzór
+  przenosi prawa już w chwili powstania utworu, co jest mniej korzystne
+  dla wykonawcy niż powiązanie z zapłatą)
+```
+
+### G.7.3 Złote zasady umów B2B
+
+```
+1. Symetria ryzyka > pozorna ochrona jednej strony — jednostronnie
+   niekorzystna umowa częściej trafia do sądu i rzadziej jest wykonywana
+   dobrowolnie.
+2. Precyzja przedmiotu świadczenia zapobiega 80% sporów — większość
+   sporów B2B to spory o zakres, nie o cenę.
+3. Każdy limit (kwotowy, czasowy, terytorialny) musi mieć wyraźnie
+   wskazaną wartość — brak limitu w klauzuli ryzyka = klauzula nieważna
+   lub bezskuteczna przy kontroli sądowej (patrz G.2, art. 58 KC).
+4. Nie kopiuj klauzul z niepowiązanych umów bez dostosowania definicji
+   stron i przedmiotu — najczęstsze źródło wewnętrznych sprzeczności.
+5. Jeśli klauzula brzmi dobrze dla obu stron — sprawdź, czy to
+   rzeczywiście prawda, czy tylko brak jasności co do jej skutków.
 ```
 
 ---

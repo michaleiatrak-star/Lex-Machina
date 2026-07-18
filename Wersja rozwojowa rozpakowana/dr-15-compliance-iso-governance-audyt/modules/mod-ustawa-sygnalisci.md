@@ -212,9 +212,22 @@ Weryfikuj: web_search "ustawa sygnaliści odpowiedzialność karna art. Dz.U. 20
 - **mod-ISO-37301-compliance-management** (DR-15) — kanał zgłoszeń jako element CMS
 - **mod-ISO-37001-antykorupcja** (DR-15) — whistleblowing jako element ABMS
 - **mod-AML-nadzor-finansowy-instytucje** (DR-15) — obowiązek kanału AML niezależny
-- **mod-KP-kodeks-pracy** (DR-04) — zakaz dyskryminacji, wypowiedzenie, roszczenia
+- **mod-KP-prawo-pracy** (DR-04) — zakaz dyskryminacji, wypowiedzenie, roszczenia
+  (⚠️ nazwa skorygowana 2026-07-17 — poprzedni wpis "mod-KP-kodeks-pracy"
+  nie odpowiadał rzeczywistej nazwie pliku w DR-04)
+- **mod-KP-naduzycia-pracodawcy-limity-kary-degradacja** (DR-04, dodany
+  2026-07-17) — GDY działanie odwetowe wobec sygnalisty przybiera formę
+  DEGRADACJI: ten moduł DR-15 dostarcza domniemanie odwetu (przerzuca
+  ciężar dowodu na pracodawcę); moduł DR-04 dostarcza analizę formalnej
+  poprawności samego trybu degradacji (czy zachowano wypowiedzenie
+  zmieniające art. 42 KP, czy to była próba zamaskowania kary porządkowej
+  poza zamkniętym katalogiem art. 108 KP) — stosuj OBA łącznie, to
+  odesłanie domyka wcześniej jednokierunkowe powiązanie (DR-04→DR-15
+  istniało, DR-15→DR-04 nie)
 - **mod-RODO-GDPR-2016-679** (DR-11) — dane w rejestrze zgłoszeń
-- **mod-ustawa-PIP-panstwowa-inspekcja-pracy** (DR-04) — PIP jako organ kontroli
+- **mod-ustawa-PIP-inspekcja-pracy** (DR-04) — PIP jako organ kontroli
+  (⚠️ nazwa skorygowana 2026-07-17 — poprzedni wpis "mod-ustawa-PIP-
+  panstwowa-inspekcja-pracy" nie odpowiadał rzeczywistej nazwie pliku)
 - **dr-05** → **mod-ustawa-sygnalisci.md** — perspektywa procesowa sygnalisty (kanały, odwołanie, pozew)
 
 ## 15. Quality gate

@@ -75,9 +75,66 @@ przedłużany, USTAWĄ Z 9.07.2025 UCZYNIONY BEZTERMINOWYM od 24.07.2025):
   czynności prawnej (sprawdź aktualną sankcję w ISAP)
 ```
 
----
+### ⭐ PRZYKŁAD ROBOCZY (dodany 2026-07-18): INWESTOR ROSYJSKI W PRZEMYŚLE ZBROJENIOWYM
 
-## B. OCHRONA TRAKTATOWA INWESTYCJI (BIT / ISDS)
+Konkretne zastosowanie powyższych dwóch mechanizmów do najbardziej
+oczywistego, praktycznego przypadku (odpowiedź na pytanie użytkownika):
+
+```
+KROK 1 — Czy podmiot zbrojeniowy figuruje na WYKAZIE (rozporządzenie RM)?
+  Spółki zbrojeniowe/obronne w Polsce (np. z Polskiej Grupy Zbrojeniowej
+  i pokrewne) TYPOWO figurują na wykazie MECHANIZMU 1 jako podmioty o
+  znaczeniu strategicznym — sprawdź AKTUALNY wykaz na dany rok, nie
+  zakładaj z pamięci które konkretnie spółki są wpisane.
+  → Jeśli TAK: KAŻDE nabycie ≥20% głosów/udziału w zyskach lub dominacji
+    wymaga zgody organu kontroli — NIEZALEŻNIE od tego, skąd pochodzi
+    inwestor (dotyczy też inwestorów z UE, nie tylko Rosji).
+
+KROK 2 — Inwestor rosyjski = ZAWSZE "spoza UE/EOG/OECD" → MECHANIZM 2
+  stosuje się DODATKOWO (niezależnie od wyniku Kroku 1), jeśli podmiot
+  docelowy mieści się w SZERSZEJ definicji "podmiotu objętego ochroną"
+  (art. 12d) — sektory wrażliwe, prawdopodobnie obejmujące obronność/
+  bezpieczeństwo wprost.
+
+KROK 3 — WARSTWA DODATKOWA, NIEZALEŻNA OD USTAWY O KONTROLI INWESTYCJI:
+  SANKCJE UE wobec Rosji (kolejne "pakiety sankcyjne", np. 16. pakiet
+  z 24.02.2025) — zamrożenie aktywów i restrykcje finansowe wobec
+  KONKRETNYCH osób/podmiotów powiązanych z rosyjskim kompleksem
+  wojskowo-przemysłowym (wpisanych na unijne LISTY SANKCYJNE) — jeśli
+  potencjalny inwestor figuruje na takiej liście, transakcja jest
+  ZAKAZANA WPROST przez reżim sankcyjny, NIEZALEŻNIE od wyniku analizy
+  z Kroków 1-2 (ustawa o kontroli inwestycji i reżim sankcyjny działają
+  RÓWNOLEGLE, nie zastępują się wzajemnie — sprawdź OBA).
+  ⚠️ Listy sankcyjne UE zmieniają się często (kolejne pakiety) —
+  ZAWSZE weryfikuj AKTUALNĄ listę przed transakcją, nie polegaj na
+  wcześniejszej weryfikacji nawet sprzed kilku miesięcy.
+
+KROK 4 — OBOWIĄZKI ŁAŃCUCHA DOSTAW (kontekst dodatkowy, nie sama
+  kontrola inwestycji, ale powiązany compliance): od 2024 r. UE
+  wzmocniła wymogi wobec spółek HANDLUJĄCYCH KOMPONENTAMI ZBROJENIOWYMI
+  — muszą OCENIAĆ i DOKUMENTOWAĆ ryzyko REEKSPORTU tych produktów do
+  Rosji (klauzule zakazu reeksportu w umowach, monitoring działalności
+  zagranicznych spółek zależnych) — istotne przy DUE DILIGENCE
+  transakcji w tym sektorze, niezależnie od samej kontroli inwestycji.
+
+WNIOSEK PRAKTYCZNY: przy transakcji z udziałem podmiotu rosyjskiego w
+sektorze zbrojeniowym w Polsce — ZAWSZE sprawdź WSZYSTKIE CZTERY warstwy
+łącznie (Mechanizm 1 + Mechanizm 2 + sankcje UE + compliance łańcucha
+dostaw), nie tylko jedną z nich. Prawdopodobieństwo, że transakcja
+zostanie ZABLOKOWANA na którymś etapie jest bardzo wysokie — praktyczna
+rekomendacja dla klienta: taka transakcja jest w obecnych warunkach
+geopolitycznych DE FACTO niewykonalna legalnie, niezależnie od tego,
+którą z czterech warstw się analizuje jako pierwszą.
+```
+
+**Źródła dla tego przykładu (zweryfikowane online 2026-07-18):** PISM
+(Polski Instytut Spraw Międzynarodowych) — obchodzenie sankcji UE wobec
+Rosji, obowiązki łańcucha dostaw komponentów zbrojeniowych; EY Polska —
+16. pakiet sankcji UE (24.02.2025, zamrożenie aktywów 48 osób i 35
+podmiotów powiązanych z rosyjskim kompleksem wojskowo-przemysłowym);
+biznes.gov.pl — oficjalny wykaz sankcji UE/Polski wobec Rosji.
+
+---
 
 ### Status ogólny (⛔ WYSOCE ZMIENNY W CZASIE — zawsze weryfikuj per konkretna umowa)
 

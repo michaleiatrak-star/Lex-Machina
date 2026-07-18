@@ -12,6 +12,9 @@
 > ```
 > Podstawy PL:    isap.sejm.gov.pl → KC → art. 385¹–385³ (aktualne brzmienie)
 > Rejestr UOKiK:  rejestr.uokik.gov.pl → wyszukaj frazę klauzuli
+>                 ⚠️ od 18.04.2026 wyłącznie baza zanonimizowana/informacyjna
+>                 (utracił charakter ustawowy — szczegóły: SKILL.md, Zasada 1-2).
+>                 Dla spraw PO 17.04.2016 → tylko decyzje UOKiK poniżej, nie rejestr.
 > Decyzje UOKiK:  uokik.gov.pl/decyzje-i-postanowienia
 > Dyrektywy UE:   eur-lex.europa.eu (93/13/EWG, 2019/770, 2019/771, 2019/2161)
 > Data Act:       eur-lex.europa.eu → 2023/2854 (stosowanie od 12.09.2025)

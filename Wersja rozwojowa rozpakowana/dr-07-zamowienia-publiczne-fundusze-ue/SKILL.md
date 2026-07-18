@@ -40,10 +40,37 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Zamówienia publiczne, fundusze UE, pomoc publiczna — pojęcia (wykonawca, zamawiający, oferta, rażąco niska cena, kryteria oceny ofert) mają definicje ustawowe wprost w PZP (art. 7) i nie wymagają osobnego pliku w shared/definicje/. Żaden plik tematyczny nie obejmuje dziedziny PZP.
-## Moduły (11 łącznie — ✓ 11 OK, ☐ 0 STUB)
+## Moduły (16 łącznie — ✓ 16 OK, ☐ 0 STUB)
 
 ```
   [✓] OK    mod-PZP-zamowienia-publiczne-KIO
+              (2026-07-18: naprawiono martwy odnośnik "Zamówienia obronne
+               → DR-13" oraz rozbudowano przetarg nieograniczony/ograniczony)
+  [✓] OK    mod-PZP-dzial-I-podstawy-wylaczenia-szacowanie
+              (dodany 2026-07-18: próg podstawowy 170 000 zł, wyłączenia
+               stosowania ustawy art. 9-15 (usługi prawne, nieruchomości
+               z zastrzeżeniem SN, badania naukowe), zasady art. 16-20,
+               zakaz dzielenia zamówienia art. 29-30. Najwyższy priorytet
+               z audytu pokrycia PZP)
+  [✓] OK    mod-PZP-dzial-V-VI-sektorowe-obronne-infrastruktura-krytyczna
+              (dodany 2026-07-18: 7 sektorów działalności, "przedsiębiorstwa
+               publiczne" = korporacje pod dominującym wpływem publicznym,
+               mechanizm art. 131a ust. 1a — infrastruktura krytyczna +
+               niejawny wykaz RCB → surowszy reżim obronny)
+  [✓] OK    mod-PZP-dzial-XI-XII-kontrola-kary-UZP
+              (dodany 2026-07-18: kontrola doraźna/uprzednia Prezesa UZP
+               [odrębna od NIK/RIO — bada TYLKO zgodność z PZP, nie
+               gospodarność], kary pieniężne 3000-150000 zł, termin 4 lat
+               na unieważnienie umowy)
+  [✓] OK    mod-PZP-fundusze-UE-podwojny-rezim
+              (dodany 2026-07-18: podwójny reżim PZP + Wytyczne
+               kwalifikowalności, zasada konkurencyjności poniżej progu
+               PZP, taryfikator korekt finansowych 3 kategorie)
+  [✓] OK    mod-PZP-opis-przedmiotu-zakaz-znakow-towarowych
+              (dodany 2026-07-18: art. 99 ust. 4-6 — zakaz wskazywania
+               znaków towarowych/producenta, NARUSZENIE POŚREDNIE przez
+               dobór parametrów "szytych pod" jednego producenta, test
+               obiektywnego uzasadnienia vs sam skutek)
               (progi UE 2026-2027, tryby, wykluczenie, odrzucenie, RNC,
                środki ochrony, zmiana umowy, predykcja, strategia)
   [✓] OK    mod-PZP-wykonanie-umowy-compliance

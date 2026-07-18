@@ -4,7 +4,653 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
-## AUDYT-2026-07-17u — DOMKNIĘCIE POKRYCIA KW: 2 nowe moduły (Rozdz. X/XII/XIII oraz XV-XIX) — wszystkie 12 rozdziałów części szczególnej KW mają teraz pokrycie
+## AUDYT-2026-07-18g — mod-ustawa-monopole-panstwowe v1.0→v1.1: KOREKTA (Mennica Polska NIE jest monopolem) + dodano PRAWDZIWY sporny monopol PWPW
+
+**Zakres:** `dr-02/.../mod-ustawa-monopole-panstwowe.md` (rozbudowa
+sekcji 5, v1.0→v1.1) + wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik wskazał, że zabrakło "pozostałych kluczowych
+monopoli i chyba najważniejszego — mennicy państwowej".
+
+**Wynik weryfikacji — KOREKTA założenia, nie proste uzupełnienie:**
+sprawdzono online status Mennicy Polskiej S.A. i ustalono, że spółka
+jest **W PEŁNI SPRYWATYZOWANA** (Ministerstwo Skarbu Państwa + BGK
+sprzedały pozostałe 42% akcji, kończąc prywatyzację; obecny główny
+akcjonariusz: Zbigniew Jakubas, prywatny biznesmen, 42,32% akcji;
+spółka notowana na GPW). Jej "wyłączność" na produkcję monet obiegowych
+dla NBP wynika z UMOWY handlowej, NIE z ustawy ustanawiającej monopol
+państwowy w rozumieniu art. 216 ust. 3 Konstytucji — i nawet ta umowna
+wyłączność może się kończyć (doniesienia 2026 o możliwym otwarciu na
+konkurencję przy nowych monetach stalowych).
+
+**Zidentyfikowano PRAWDZIWY, i to obecnie AKTUALNIE PRAWNIE SPORNY,
+kluczowy monopol pominięty w wersji 1.0: PWPW** (Polska Wytwórnia
+Papierów Wartościowych) — 100% Skarb Państwa, nadzór Ministra Spraw
+Wewnętrznych i Administracji (od 2017), monopol na produkcję banknotów
+(akredytacja EBC od 2006, usługi też dla zagranicznych banków
+centralnych), dowodów osobistych, paszportów, wiz, banderol i innych
+dokumentów publicznych. **KLUCZOWE ZNALEZISKO:** ten monopol jest
+OBECNIE PRAWNIE KWESTIONOWANY przez TSUE — wyrok dot. analogicznej
+sprawy austriackiej + opinia Rzecznika Generalnego TSUE (2023) w
+sprawie DOTYCZĄCEJ WPROST Polski/PWPW (Komisja Europejska
+zakwestionowała argumentację o unikalności bezpieczeństwa PWPW,
+wskazując porównywalne firmy w UE — niemiecki Bundesdruckerei,
+hiszpańska Fábrica Nacional de Moneda y Timbre). Polska zareagowała
+projektem ustawy (listopad 2025) przedefiniowującym PWPW jako
+"wytwórca wyłączny" — próba UTRZYMANIA monopolu inną drogą prawną,
+oceniana przez komentatorów jako idąca WBREW kierunkowi orzecznictwa
+TSUE. Status ostatecznego rozstrzygnięcia sporu NIE jest ustalony w tej
+sesji — oznaczono jako dynamiczny, wymagający re-weryfikacji.
+
+**Dodano precyzyjne rozróżnienie trzech podmiotów w łańcuchu produkcji
+pieniądza:** NBP (władztwo prawne emisji, art. 227 — niekwestionowany
+monopol) vs PWPW (produkcja fizyczna banknotów — prawdziwy, ale sporny
+monopol państwowy) vs Mennica Polska (produkcja fizyczna monet — NIE
+monopol, prywatna spółka z umowną wyłącznością).
+
+**Status:** ✅ WDROŻONE. To dobry przykład wartości weryfikacji online
+zamiast polegania na intuicyjnym założeniu — użytkownik słusznie
+wskazał lukę tematyczną (monopol produkcji znaków pieniężnych), ale
+sama WERYFIKACJA ujawniła, że konkretna hipoteza (Mennica jako
+"najważniejszy monopol") była nieaktualna/błędna, a prawdziwym,
+istotniejszym przypadkiem okazało się PWPW — z dodatkową wartością w
+postaci aktualnego, żywego sporu z prawem UE.
+
+---
+
+
+
+**Zakres:** NOWY `dr-02/.../mod-ustawa-monopole-panstwowe.md` (v1.0) +
+aktualizacja `pisma-procesowe-v3/modules/MOD-OPLATY.md` (ostrzeżenie o
+spornej interpretacji art. 165 §2 KPC) + `dr-02/SKILL.md` (21→22) +
+`dr-02/MAPA-AKTOW.md` (+1 wiersz) + wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik doprecyzował poprzednie pytanie o monopole —
+"prawo antymonopolowe i monopole PAŃSTWOWE" — wskazując, że
+poprzedni moduł UOKiK (ogólne prawo antymonopolowe) nie wyczerpuje
+tematu monopoli USTANAWIANYCH PRZEZ PAŃSTWO celowo.
+
+**Wykonanie:** zweryfikowano online podstawę konstytucyjną (art. 216
+ust. 3 — ustanowienie monopolu WYŁĄCZNIE w drodze ustawy, jako wyjątek
+od art. 22 wymagający uzasadnienia "ważnym interesem społecznym", TK SK
+35/08), rozgraniczenie od pozycji dominującej/UOKiK (celowa decyzja
+ustawodawcy vs spontaniczna dominacja rynkowa), dwa główne przykłady
+współczesne: monopol na gry hazardowe (ustawa 2009, mechanizm powierzenia
+wykonania Totalizatorowi Sportowemu przez Prezesa RM, rozszerzenie na
+automaty poza kasynem od 2017, nadzór KAS) oraz operator wyznaczony w
+Prawie pocztowym (historia liberalizacji od 2013, fundusz kompensacyjny,
+konkursy UKE).
+
+**WAŻNE ZNALEZISKO wykraczające poza pierwotny zakres pytania:** przy
+badaniu monopolu pocztowego natrafiono na SPORNĄ, WIELOKROTNIE
+NOWELIZOWANĄ (min. 4 razy) kwestię art. 165 §2 KPC — skutek nadania
+pisma procesowego u różnych operatorów pocztowych dla zachowania terminu
+sądowego. Historia: pierwotnie tylko "operator wyznaczony" (Poczta
+Polska) dawał skutek → TSUE C-545/17 (27.03.2019) uznał to za niezgodne
+z prawem UE → nowelizacja rozszerzająca na "operatora świadczącego
+usługi powszechne" → UTRZYMUJĄCY SIĘ spór interpretacyjny, czy to
+faktycznie zmieniło praktyczny rezultat (część doktryny: nadal tylko
+Poczta Polska spełnia kryterium) → kolejne projekty (luty 2025) proponują
+dalsze rozszerzenie na wszystkich 259 zarejestrowanych operatorów, status
+uchwalenia NIEPOTWIERDZONY w tej sesji.
+
+**Naprawiono PRZY OKAZJI:** istniejący moduł `pisma-procesowe-v3/
+MOD-OPLATY.md` traktował tę kwestię zbyt ogólnikowo ("data nadania w
+placówce pocztowej") bez odzwierciedlenia realnego, praktycznie istotnego
+sporu — dodano wyraźne ostrzeżenie + rekomendację praktyczną (nadawaj
+pisma krytyczne wyłącznie przez Pocztę Polską przy braku czasu na
+weryfikację aktualnego stanu prawnego).
+
+**Status:** ✅ WDROŻONE. Odpowiedź na pytanie użytkownika kompletna —
+moduł UOKiK (poprzednia tura) + moduł monopole państwowe (ta tura) razem
+pokrywają pełny obraz "prawa antymonopolowego i monopoli państwowych".
+Dodatkowa wartość: wykryto i naprawiono nieprecyzyjność w istniejącym,
+często używanym module proceduralnym (MOD-OPLATY.md), z realnym
+znaczeniem praktycznym dla bezpieczeństwa terminów procesowych.
+
+---
+
+
+
+**Zakres:** `dr-07/.../mod-PZP-dzial-I-podstawy-wylaczenia-szacowanie.md`
+(nowa sekcja 6.1, v1.0→v1.1) + odesłania zwrotne w `shared/definicje/
+DEF-INTERES-WLASNY-WYLACZENIA.md` i `dr-04/.../mod-KP-konflikt-interesow-
+rodzina-nepotyzm.md` + wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik doprecyzował poprzednie pytanie o konflikt
+interesów rodzina/pracownik — zapytał wprost, jak wygląda pokrycie tego
+tematu SPECYFICZNIE w postępowaniach sądowych i w przetargach.
+
+**Ustalenie po sprawdzeniu obu kontekstów:**
+- Postępowania SĄDOWE: JUŻ dobrze pokryte (wyłączenie sędziego art.
+  48-49 KPC — pokrewieństwo/powinowactwo w linii bocznej do 4. stopnia;
+  wyłączenie biegłego art. 281 KPC przez odesłanie) — potwierdzono, bez
+  potrzeby uzupełnienia.
+- Przetargi: RZECZYWISTA, KONKRETNA LUKA — art. 56-57 PZP (Dział I,
+  Rozdział 6) nie był w ogóle uwzględniony przy budowie modułu Dział I
+  dzień wcześniej, mimo że to jeden z najczęściej analizowanych tematów
+  w praktyce PZP.
+
+**Wykonanie:** zweryfikowano online pełną treść art. 56 PZP: krąg osób
+objętych (kierownik zamawiającego, komisja przetargowa, PRACOWNICY i
+zleceniobiorcy zamawiającego, BIEGLI z art. 55 ust. 4 — potwierdzone
+zastosowanie do zewnętrznych radców prawnych opiniujących dla komisji),
+3 główne przesłanki konfliktu (ubieganie się samemu; więzi RODZINNE —
+małżeństwo, pokrewieństwo/powinowactwo w linii prostej bez ograniczenia
+i w linii bocznej do 2. STOPNIA, przysposobienie/opieka/kuratela,
+konkubinat; oraz KLUCZOWA przesłanka PRACOWNICZA — stosunek pracy LUB
+zlecenia z wykonawcą w ciągu 3 LAT przed wszczęciem postępowania, lub
+otrzymywanie wynagrodzenia z innego tytułu, lub członkostwo w organach
+wykonawcy), przesłankę karną (prawomocne skazanie za katalog przestępstw
+gospodarczych), procedurę oświadczeń i skutki wyłączenia (powtórzenie
+czynności z wyjątkiem otwarcia ofert), orzecznictwo KIO 1037/11.
+
+**Uwaga metodologiczna WAŻNA:** odnotowano wprost, że zakres pokrewieństwa
+w linii bocznej RÓŻNI SIĘ między dwoma reżimami — PZP: do 2. stopnia,
+KPC (wyłączenie sędziego): do 4. stopnia — dodano ostrzeżenie, by nie
+mylić tych dwóch odrębnych zakresów przy pracy na różnych typach spraw.
+
+**Status:** ✅ WDROŻONE. Odesłania dwukierunkowe dodane we wszystkich 3
+plikach (PZP, DEF-INTERES-WLASNY, KP-konflikt-interesow). Luka z
+poprzedniej tury (przeoczenie art. 56 PZP przy budowie Działu I)
+zamknięta.
+
+---
+
+
+
+**Zakres:** aktualizacja `mod-inwestycje-transgraniczne-FDI-BIT.md` (DR-14,
+nowa sekcja z przykładem rosyjskim/zbrojeniowym) + 3 NOWE pliki:
+`mod-ustawa-UOKIK-antymonopolowe.md` (DR-02), `mod-KSH-wrogie-przejecie-
+obrona-bialy-rycerz.md` (DR-02), `mod-KP-konflikt-interesow-rodzina-
+nepotyzm.md` (DR-04) + `dr-02/SKILL.md` (19→21), `dr-04/SKILL.md` (25→26),
+`dr-14/SKILL.md` (adnotacja aktualizacji) + MAPA-AKTOW dla DR-02/DR-04
++ 3 wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik zapytał o klaster tematów: inwestycje
+transgraniczne, konflikt interesów (rodzina, pracownik), niedopuszczenie
+podmiotów zagranicznych (rosyjskich) do przemysłu zbrojeniowego, monopole,
+wrogie przejęcie i biały rycerz, konsorcjum.
+
+**Ustalenie wstępne:** kontrola inwestycji zagranicznych (FDI screening)
+oraz konflikt interesów w kontekście PROCESOWYM (sędzia/świadek/
+pełnomocnik) BYŁY już pokryte — wymagały uzupełnienia (FDI) lub
+uzupełnienia o BRAKUJĄCĄ perspektywę (konflikt interesów — pracowniczą).
+Konsorcjum uznano za już adekwatnie pokryte (PZP, analizator-umow-v1) —
+NIE budowano dodatkowego modułu, by uniknąć zbędnej duplikacji.
+
+**Aktualizacja FDI — przykład roboczy Rosja/zbrojeniówka:** dodano
+konkretne zastosowanie istniejącego frameworku (Mechanizm 1 — wykaz
+podmiotów strategicznych; Mechanizm 2 — inwestorzy spoza UE/EOG/OECD) do
+najbardziej oczywistego przypadku z pytania użytkownika. KLUCZOWE
+ustalenie: transakcja wymaga sprawdzenia CZTERECH RÓWNOLEGŁYCH warstw
+(oba mechanizmy ustawy o kontroli inwestycji + reżim SANKCJI UE wobec
+Rosji, w tym 16. pakiet sankcyjny z 24.02.2025 — 48 osób/35 podmiotów
+powiązanych z rosyjskim kompleksem wojskowo-przemysłowym + obowiązki
+compliance łańcucha dostaw komponentów zbrojeniowych od 2024 r.) —
+praktyczny wniosek: taka transakcja jest w obecnych warunkach
+geopolitycznych DE FACTO niewykonalna legalnie na którymkolwiek etapie.
+
+**Nowy moduł — UOKiK/monopole:** rozgraniczenie od już istniejącego UZNK
+(struktura rynku vs uczciwość praktyk), pojęcie monopolu i pozycji
+dominującej (próg 40% domniemania), praktyki ograniczające konkurencję
+(zmowy, nadużycie pozycji dominującej — z powiązaniem do art. 305 KK
+zmowa przetargowa, już istniejący moduł DR-03), kontrola koncentracji
+(obowiązek zgłoszenia niezależny od faktycznych skutków rynkowych, 3
+rodzaje decyzji Prezesa UOKiK), kary i program leniency.
+
+**Nowy moduł — wrogie przejęcie/biały rycerz:** KLUCZOWE ustalenie —
+brak definicji ustawowej, to termin ekonomiczny/praktyczny, nie prawny.
+Katalog technik prewencyjnych (zapisy statutowe, akcje nieme/
+uprzywilejowane, złote spadochrony) i reaktywnych (biały rycerz — z
+doktrynalnym zastrzeżeniem, że to WCIĄŻ jest przejęcie, tylko przez
+przyjazny podmiot — friendly takeover; zatruta pigułka, wykup akcji
+własnych, MBO, środki prawno-proceduralne). Odnotowano wprost, że
+szczegółowa analiza przepisów proceduralnych KSH (progi wezwań,
+squeeze-out/sell-out) NIE została zbadana — moduł to warstwa
+strategiczna, nie proceduralna.
+
+**Nowy moduł — konflikt interesów rodzina/nepotyzm:** kluczowe
+rozgraniczenie sektor prywatny (PEŁNA legalność zatrudniania rodziny w
+Polsce, zero ograniczeń ustawowych) vs sektor publiczny (obowiązek z
+ustawy o finansach publicznych + praktyka zakazu bezpośredniej
+podległości służbowej krewnych). Definicja i formy nepotyzmu/
+kumoterstwa, instrumenty przeciwdziałania (audyt, kanały sygnalistów,
+polityka konfliktu interesów), oraz analityczne rozróżnienie poziomu
+tolerancji wg struktury właścicielskiej (korporacja rozdrobniona vs
+sektor publiczny vs właściciel z bezpośrednim nadzorem) — "siła
+POSTRZEGANEGO konfliktu interesów" jako zjawisko niezależne od
+faktycznej zasadności decyzji kadrowej.
+
+**Status:** ✅ WDROŻONE. Wszystkie elementy klastra tematycznego
+zaadresowane: 3 nowe moduły + 1 istotna aktualizacja + potwierdzenie, że
+konsorcjum już adekwatnie pokryte (bez zbędnej duplikacji).
+
+---
+
+
+
+**Zakres:** 5 NOWYCH plików w `dr-07-zamowienia-publiczne-fundusze-ue/
+modules/` + aktualizacja `mod-PZP-zamowienia-publiczne-KIO.md` (naprawa
+martwego odnośnika + rozbudowa przetargów ograniczonego/nieograniczonego)
++ `dr-07/SKILL.md` (11→16) + `dr-07/MAPA-AKTOW.md` (+5 wierszy) + 5 wpisów
+`CHECKLIST-DEDUP.md`.
+
+**Kontekst:** kontynuacja audytu pokrycia PZP z poprzedniej tury — użytkownik
+polecił uzupełnić zidentyfikowane luki (Działy I, V, VI, XI, XII) oraz
+dodatkowo zbadać/uzupełnić: przetargi ograniczone i nieograniczone
+(okazały się już częściowo pokryte, ale płytko — rozbudowano), przetargi
+dot. infrastruktury krytycznej, przetargi organizowane przez korporacje
+(= zamawiający sektorowi), przetargi dotowane przez UE, wymogi formalne,
+oraz zakaz wskazywania konkretnego producenta i próby jego obchodzenia
+przez dokładną specyfikację.
+
+**Moduł 1 — Dział I (podstawy):** próg 170 000 zł (reforma 2025/2026),
+katalog wyłączeń z art. 9-15 (usługi prawne, nieruchomości z KLUCZOWYM
+zastrzeżeniem SN II CSK 104/09 — wyłączenie nie obejmuje nieruchomości
+niepowstałej/wymagającej znacznych robót, zapobiega obejściu PZP przez
+"umowy deweloperskie"), badania naukowe, zasada wykładni zawężającej
+wyłączeń, zasady z art. 16-20, ZAKAZ DZIELENIA ZAMÓWIENIA (art. 29-30)
+z kryteriami oceny niedozwolonego podziału.
+
+**Moduł 2 — Dział V/VI (sektorowe/obronne/infrastruktura krytyczna):**
+odpowiedź na "korporacje" — wyjaśniono pojęcie "przedsiębiorstwa
+publicznego" (podmiot niepubliczny, ale pod dominującym wpływem
+publicznym + 7 sektorów działalności), progi wyższe niż klasyczne.
+**KLUCZOWE odkrycie:** art. 131a ust. 1a PZP — mechanizm wymagający
+surowszego reżimu obronnego dla zamówień DOTYCZĄCYCH INFRASTRUKTURY
+KRYTYCZNEJ, oceniany wg NIEJAWNEGO WYKAZU Rządowego Centrum
+Bezpieczeństwa — dokładna, nazwana odpowiedź na pytanie użytkownika.
+NAPRAWIONO przy okazji martwy odnośnik: `mod-PZP-zamowienia-publiczne-
+KIO.md` przekierowywał "Zamówienia obronne → DR-13", ale DR-13 NIE MA
+odpowiedniego modułu (zweryfikowano bezpośrednio) — treść teraz
+dostępna wprost w DR-07.
+
+**Moduł 3 — Dział XI/XII (kontrola/kary UZP):** dwa rodzaje kontroli
+(doraźna z urzędu/na wniosek każdej osoby; uprzednia dla zamówień UE
+≥20 mln EUR robót budowlanych), KLUCZOWE rozgraniczenie od NIK (Prezes
+UZP bada TYLKO zgodność z przepisami, NIE gospodarność/celowość/
+rzetelność), 3 możliwe działania po naruszeniu (kara 3000-150000 zł,
+wystąpienie o unieważnienie umowy z 4-letnim terminem zawitym,
+zawiadomienie rzecznika dyscypliny finansów publicznych).
+
+**Moduł 4 — Fundusze UE:** podwójny reżim (PZP + Wytyczne
+kwalifikowalności, dokument programowy a nie ustawa), zasada
+konkurencyjności jako ODRĘBNY obowiązek dla zamówień PONIŻEJ progu PZP
+(częsta pułapka: poprawne ustalenie braku obowiązku PZP nie zwalnia z
+Wytycznych), 3 kategorie taryfikatora korekt finansowych, mechanizm
+wysokości korekty (do 100% dofinansowania) z wyjątkiem braku obniżenia
+przy potwierdzonym prawomocnie nadużyciu finansowym.
+
+**Moduł 5 — Zakaz znaków towarowych (art. 99):** DOKŁADNA odpowiedź na
+najbardziej precyzyjne pytanie użytkownika o obejście przez specyfikację.
+Ustalono: naruszenie może być POŚREDNIE (dobór parametrów bez żadnej
+nazwy własnej), wskazówka TSUE o proporcjonalności szczegółowości opisu,
+ale KLUCZOWE zastrzeżenie znalezione w praktyce branżowej — sam FAKT, że
+tylko jeden producent spełnia specyfikację, NIE WYSTARCZA do stwierdzenia
+naruszenia — test dotyczy OBIEKTYWNEGO UZASADNIENIA/INTENCJI, nie tylko
+skutku. Dodano checklist analityczny i katalog dowodów praktycznych
+(zestawienie z kartą katalogową, opinia biegłego, analiza rynku).
+
+**Dodatkowo — przetargi ograniczone/nieograniczone:** rozbudowano
+jednoliniowe wzmianki w istniejącym module o rzeczywistą procedurę
+(terminy 35/30 dni, jedno- vs dwuetapowość, przesłanki stosowania).
+Odnotowano UCZCIWIE rozbieżność numeracji artykułu dla przetargu
+ograniczonego między źródłami (140 vs 150) — oznaczoną do weryfikacji
+na ISAP zamiast wybrania jednej wersji arbitralnie.
+
+**Status:** ✅ WDROŻONE. Wszystkie 5 zidentyfikowanych luk z poprzedniej
+tury ORAZ wszystkie dodatkowe tematy z pytania użytkownika zaadresowane.
+DR-07/PZP ma teraz znacznie pełniejsze pokrycie strukturalne (13 Działów
+PZP) niż przed tą sesją.
+
+---
+
+
+
+**Zakres:** `analizator-umow-v1/references/zakaz-konkurencji.md` (nowa
+Pułapka ZK-10 + aktualizacja KROK 2, scoring ZAKRES) +
+`analizator-umow-v1/SKILL.md` (1.12→1.13) + wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik zapytał o zakaz konkurencji obejmujący
+działalność, którą firma faktycznie nie prowadzi lub prowadzi w
+marginalnym zakresie — kontynuacja poprzedniej tury (ZK-9).
+
+**Rozróżnienie od Pułapki ZK-1 (istniejącej):** ZK-1 adresuje NIEJASNOŚĆ
+definicji ("wszelka działalność mogąca naruszać interesy"). Pytanie
+użytkownika dotyczyło ODMIENNEGO scenariusza: definicja MOŻE być
+precyzyjna (konkretna lista PKD/branż), ale NIEPROPORCJONALNA do
+realnego zakresu działalności firmy — to wymagało osobnej pułapki.
+
+**Ustalenie kluczowe:** zweryfikowano online zasadę, że zakres zakazu
+konkurencji należy określać na podstawie działalności FAKTYCZNIE
+prowadzonej przez pracodawcę, nie na podstawie pełnego wykazu kodów
+PKD w KRS (spółki rejestrują często kilkadziesiąt kodów "na zapas").
+Test konkurencyjności wymaga ŁĄCZNIE: tego samego rynku (te same/
+substytucyjne dobra) i tego samego obszaru geograficznego.
+
+**Uczciwie odnotowana rozbieżność w orzecznictwie:** sąd II instancji
+w jednej sprawie przyjął szerokie podejście ("choćby jeden rynek się
+pokrywa" wystarcza), ale ta sama sprawa w dalszym postępowaniu przed SN
+skrytykowała odwołanie do "wszelkiej działalności wynikającej z KRS"
+jako zbyt ogólne. Zalecono argumentację dwutorową (ZK-1 + ZK-10).
+Dodano doktrynalne określenie "umowy kneblujące/dławiące" (kontekst
+B2B) — ocena całościowa proporcji między zakresem restrykcji a
+rzeczywistą/potencjalną działalnością zobowiązanego.
+
+**Status:** ✅ WDROŻONE. Moduł zakazu konkurencji ma teraz 10 nazwanych
+pułapek (ZK-1 do ZK-10), pokrywających praktycznie wszystkie zgłoszone
+dotąd przez użytkownika scenariusze nadużycia klauzul niekonkurencyjnych.
+
+---
+
+
+
+**Zakres:** `analizator-umow-v1/references/zakaz-konkurencji.md` (nowa
+Pułapka ZK-9 + aktualizacja KROK 4, Złota Zasada 2, scoring I.6,
+checklista I.4.1) + `analizator-umow-v1/SKILL.md` (1.11→1.12) + wpis
+`CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik zapytał, czy zakaz konkurencji jest w pełni
+pokryty, wskazując 4 konkretne scenariusze: zakaz ogólnoświatowy bez
+ograniczenia geograficznego, zakaz bez ograniczenia czasowego, zakaz
+bezpłatny, zakaz ukryty pod pozorem ustawy o uczciwej konkurencji.
+
+**Ustalenie:** po pełnym przeglądzie istniejącego, bardzo obszernego
+pliku (491 linii, 8 pułapek ZK-1..ZK-8, matryca reżimów, algorytm
+6-krokowy, szablony, scoring) — 3 z 4 scenariuszy były JUŻ w pełni
+pokryte: zakaz ogólnoświatowy (KROK 3 — "zakaz ogólnoświatowy przy
+lokalnej firmie → ryzyko unieważnienia"), zakaz bezpłatny (Zasada 1 —
+"brak odszkodowania = brak zakazu, to nie jest ryzyko, to automatyczny
+skutek ustawowy"), zakaz ukryty pod UZNK/tajemnicą przedsiębiorstwa
+(Pułapka ZK-8, bardzo szczegółowa, z 3-kryterialnym testem tajemnicy).
+
+**Rzeczywista luka znaleziona:** brak DEDYKOWANEJ analizy zakazu
+BEZTERMINOWEGO (bez wskazania jakiegokolwiek okresu) jako scenariusza
+ODRĘBNEGO od "zbyt długiego" zakazu — istniejąca treść (KROK 4, Zasada 2)
+traktowała oba przypadki łącznie pod ogólnym "ryzykiem unieważnienia",
+podczas gdy w rzeczywistości mają RÓŻNY skutek prawny: zbyt długi = ocena
+sędziowska proporcjonalności (wynik niepewny), bezterminowy/brak okresu =
+nieważność AUTOMATYCZNA z mocy prawa.
+
+**Dodano Pułapkę ZK-9** z konkretnym, zweryfikowanym orzeczeniem: SN,
+wyrok z 2.10.2003, sygn. I PK 453/02 (MoP 2004/10/1) — "nie dochodzi do
+ustanowienia zakazu konkurencji... w razie pominięcia postanowienia
+określającego czas trwania tego zakazu". Przy tej samej weryfikacji
+znaleziono i dodano PRZY OKAZJI użyteczny niuans dla B2B: sama
+nieekwiwalentność/brak wynagrodzenia NIE wystarcza do nieważności między
+przedsiębiorcami (osłabia — nie wzmacnia — argument strony słabszej w
+B2B, w przeciwieństwie do reżimu KP).
+
+**Status:** ✅ WDROŻONE. Odpowiedź na pytanie użytkownika: zakaz
+konkurencji był i pozostaje BARDZO DOBRZE pokryty (jeden z najgłębiej
+opracowanych tematów w całym systemie) — znaleziona luka była wąska i
+konkretna, teraz zamknięta.
+
+---
+
+
+
+**Zakres:** `dr-15-compliance-iso-governance-audyt/modules/mod-ustawa-
+sygnalisci.md` (sekcja 14) + `dr-05-prawo-administracyjne-
+sadowoadministracyjne/modules/mod-ustawa-sygnalisci.md` (sekcja 6,
+Powiązania) + `dr-04/.../mod-KP-naduzycia-pracodawcy-limity-kary-
+degradacja.md` (aktualizacja własnej notatki o zaleceniu).
+
+**Kontekst:** realizacja zalecenia odnotowanego w poprzedniej turze —
+odesłanie między DR-04 a DR-15/DR-05 istniało tylko w jedną stronę.
+Użytkownik polecił "zrobić z tym to co konieczne".
+
+**Wykonanie:**
+1. Dodano w OBU wersjach `mod-ustawa-sygnalisci.md` (DR-15 i DR-05)
+   wyraźne odesłanie zwrotne do nowego `mod-KP-naduzycia-pracodawcy-
+   limity-kary-degradacja.md` (DR-04) — z konkretnym wyjaśnieniem
+   PODZIAŁU RÓL: moduł sygnalistów dostarcza domniemanie odwetu
+   (przerzucenie ciężaru dowodu), moduł DR-04 dostarcza analizę formalnej
+   poprawności samego trybu degradacji.
+2. **Dodatkowo wykryto i naprawiono (przy okazji, nie było to pierwotnym
+   celem):** wersja DR-15 zawierała DWIE nieaktualne nazwy modułów DR-04
+   w sekcji powiązań — "mod-KP-kodeks-pracy" (rzeczywista nazwa:
+   mod-KP-prawo-pracy) i "mod-ustawa-PIP-panstwowa-inspekcja-pracy"
+   (rzeczywista nazwa: mod-ustawa-PIP-inspekcja-pracy) — skorygowano
+   obie, z adnotacją o korekcie.
+3. Zaktualizowano notatkę w module DR-04 — zalecenie oznaczone jako
+   ZREALIZOWANE zamiast pozostawione jako otwarty punkt dla przyszłości.
+
+**Status:** ✅ WDROŻONE. Odesłanie teraz dwukierunkowe w obu miejscach
+(DR-05 i DR-15), z dodatkową korzyścią przy okazji (naprawa nieaktualnych
+nazw plików, które mogłyby prowadzić do nieudanego `view` przy próbie
+wywołania).
+
+**Nieadresowane w tej turze (świadomie, poza zakresem "to co konieczne"):**
+BHP ogólne obowiązki (Dział X KP poza wypadkami) — luka odnotowana
+wielokrotnie w poprzednich turach, pozostaje otwarta do ewentualnej
+przyszłej sesji budowy.
+
+---
+
+
+
+**Zakres:** NOWY `dr-03/.../mod-KK-slupy-fikcyjna-reprezentacja-spolki.md`
+(v1.0) + `dr-03/SKILL.md` (32→33) + `dr-03/MAPA-AKTOW.md` (+1 wiersz) +
+wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik zapytał o cztery zjawiska: fikcyjną reprezentację
+spółki, słupy jako prezesów, korupcję, poplecznictwo w pracy.
+
+**Ustalenie wstępne (sprawdzone przed budową, uniknięto duplikacji):**
+korupcja (4 dedykowane moduły: urzędnicza 228-231, sektor prywatny 296a,
+wyborcza 250a, zmowa przetargowa 305) i poplecznictwo (art. 239, dodane
+2026-07-16 na wcześniejsze żądanie tego samego użytkownika) są JUŻ dobrze
+pokryte — potwierdzono to i odesłano w nowym module (Część C), bez
+rebuildowania.
+
+**Część A (nowa) — słupy jako prezesi:** ustalono podstawę odpowiedzialności
+karnej niezależnie od "biernej" roli figuranta (współsprawstwo art. 18
+§1, lub pomocnictwo art. 18 §3), typowe przestępstwa bazowe (oszustwo
+286, wyłudzenie kredytu 297, karuzele VAT), oraz ODNOTOWANO WPROST
+rozbieżność w praktyce sądowej co do oceny "świadomości" słupa (linia
+surowsza: bierność = przestępstwo przez milczenie; linia łagodniejsza:
+uwzględnia rzeczywisty brak świadomości u części figurantów). Ustalono
+kontrast z odpowiedzialnością rzeczywistego decydenta jako sprawcy
+kierowniczego/polecającego (art. 18 §1 zd. 2-3, surowsza kwalifikacja
+niż dla słupa-pomocnika). Powiązano z odpowiedzialnością z KSH (art.
+586-590) i art. 296 KK, gdy słup formalnie jest członkiem zarządu —
+ryzyko wielowarstwowe (karne + cywilne z art. 299 KSH).
+
+**Część B (nowa) — fikcyjna reprezentacja spółki:** rozróżniono dwie
+konstrukcje: falsus procurator (art. 103 KC, pełnomocnik) i fałszywy
+organ osoby prawnej (art. 39 KC per analogiam art. 103 — potwierdzone
+SN III CSK 33/13, 22.01.2014: NIE wszystkie czynności bez umocowania są
+bezwzględnie nieważne, możliwe zastosowanie mechanizmu bezskuteczności
+zawieszonej z możliwością potwierdzenia, nawet z mocą wsteczną przy
+zgodach korporacyjnych z art. 17 KSH). Odnotowano ochronę kontrahenta
+przez wpis w KRS (rękojmia wiary publicznej) jako zagadnienie sporne,
+bogato komentowane w orzecznictwie (21 pozycji), wymagające odrębnej
+analizy przy konkretnej sprawie. Wskazano zbieg z odpowiedzialnością
+karną (podrobienie dokumentu — art. 270 KK, obejście zakazu sądowego —
+możliwy art. 244 KK, nie w pełni zweryfikowany).
+
+**Część C — potwierdzenie pokrycia:** korupcja i poplecznictwo
+potwierdzone jako już kompletnie opracowane, z odesłaniem zamiast
+duplikacji treści.
+
+**Status:** ✅ WDROŻONE. Wszystkie 4 elementy pytania użytkownika
+zaadresowane — 2 tematy nowe (pełne opracowanie), 2 tematy potwierdzone
+jako już pokryte.
+
+---
+
+
+
+**Zakres:** NOWY `dr-04/.../mod-KP-naduzycia-pracodawcy-limity-kary-
+degradacja.md` (v1.0) + `dr-04/SKILL.md` (24→25) + `dr-04/MAPA-AKTOW.md`
+(+1 wiersz) + wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik zapytał o pięć/sześć konkretnych zjawisk:
+przenoszenie pracownika celem ominięcia limitu 3 umów/33 miesięcy, BHP,
+mobbing, zemsta na sygnaliście (w tym "karna degradacja"), faktyczna
+degradacja z powodu przewiny, oraz elementy konieczne upomnienia i
+konsekwencje ich braku. Dwa z tych tematów (mobbing, BHP przy wypadkach)
+już były pokryte — potwierdzono to i odesłano, zamiast duplikować.
+
+**Część A (nowa) — obejście limitu umów terminowych:** ustalono, że
+przejęcie zakładu pracy (art. 23¹ KP) NIE resetuje limitów (stanowisko
+MRPiT z 20.01.2021), ale "rotacja" pracownika między formalnie odrębnymi,
+powiązanymi podmiotami BEZ rzeczywistego przejścia zakładu pracy jest
+kwestionowalna na podstawie doktryny "nadużycia osobowości prawnej"/
+"przebicia zasłony korporacyjnej" (art. 8 KP) — z przeniesieniem
+konstrukcji prawnej stosowanej dotąd w orzecznictwie SN głównie w
+kontekście nadgodzin/wynagrodzenia (III PK 136/13, II PK 50/13) na
+kontekst limitu umów terminowych, gdzie rozwija się analogiczna linia
+(postanowienie I PK 60/18). Droga procesowa: pozew o ustalenie (art. 189
+KPC) z ciężarem dowodu na pracowniku.
+
+**Część B (nowa) — kary porządkowe:** pełna lista elementów koniecznych
+zawiadomienia (art. 110: podstawa prawna, rodzaj kary, precyzyjne
+wskazanie naruszonego obowiązku, opis i data, dowód wysłuchania,
+pouczenie o sprzeciwie), terminy (2 tygodnie/3 miesiące), sprzeciw (7
+dni), oraz KLUCZOWE ustalenie: katalog kar jest ZAMKNIĘTY — jakakolwiek
+inna sankcja (w tym degradacja) = wykroczenie z art. 281 pkt 4 KP,
+bezpośrednio powiązane z już opisanymi w mod-ustawa-PIP-inspekcja-pracy
+podwyższonymi sankcjami po reformie 2026.
+
+**Część C (nowa) — degradacja:** rozgraniczenie "karnej" (bezprawnej,
+bo poza zamkniętym katalogiem art. 108, narusza dobra osobiste,
+orzecznictwo rp.pl 2015: "nawet krótka degradacja nie może być karą") od
+degradacji w legalnym trybie wypowiedzenia zmieniającego (art. 42 —
+pisemne, uzasadnione, z prawem odmowy). Ustalono, że wypowiedzenie
+zmieniające MOŻE pełnić funkcję "dyscyplinującą" (SN), o ile zachowano
+właściwy tryb.
+
+**Część D — potwierdzenie pokrycia + odesłania:** mobbing (już pokryty,
+odesłanie), BHP ogólne (częściowo pokryte — luka odnotowana wcześniej,
+potwierdzona ponownie), sygnaliści (pokryci w DR-15/DR-05 — dodano
+odesłanie + zalecenie dla przyszłego audytu, by dodać odesłanie zwrotne
+z tamtych modułów, gdy odwet przybiera formę pracowniczą jak degradacja).
+
+**Status:** ✅ WDROŻONE. Wszystkie elementy pytania użytkownika
+zaadresowane — 3 tematy nowe (pełne opracowanie), 3 tematy potwierdzone
+jako już pokryte (z odesłaniem, bez duplikacji).
+
+---
+
+
+
+**Zakres:** NOWY `mod-KP-dzial-III-wynagrodzenie-swiadczenia-jawnosc.md`
+(v1.0) + `dr-04/SKILL.md` (23→24) + `dr-04/MAPA-AKTOW.md` (+2 wiersze) +
+wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik zapytał wprost, czy poprzednia tura obejmowała
+CAŁOŚĆ KP, oraz czy uwzględniono nowe przepisy o świadczeniach
+wypłacanych przez pracodawcę. Odpowiedź uczciwa: NIE, poprzednia tura
+(3 moduły: VI, VII, V+XIV) nie wyczerpywała KP — Dział III
+(wynagrodzenie i świadczenia) pozostawał lukę, a to WŁAŚNIE ten dział
+zawiera art. 92 — dokładnie "świadczenie wypłacane przez pracodawcę"
+(wynagrodzenie chorobowe, przed przejęciem przez ZUS od 34/15 dnia).
+
+**Treść modułu — Część B (art. 92, centralna dla pytania):** pełne
+rozgraniczenie pracodawca/ZUS (33 dni zwykły pracownik / 14 dni po 50
+r.ż., z zastrzeżeniem że próg 14 dni dotyczy roku PO ukończeniu 50 lat,
+nie tego samego roku), stawki 80% (zasada) / 100% (3 wyjątki: wypadek
+w drodze, ciąża, dawstwo komórek/tkanek/narządów), sposób liczenia
+(podstawa zasiłkowa, za każdy dzień w tym wolne), wpływ na staż pracy
+(okres składkowy), wyjątek dla pracodawców >20 ubezpieczonych (sami
+wypłacają też zasiłek jako płatnik).
+
+**Odkrycie wykraczające poza pierwotne pytanie — Część D, ZUPEŁNIE NOWY
+temat: jawność wynagrodzeń (dyrektywa UE 2023/970).** Ustalono i
+zweryfikowano w 7 niezależnych źródłach branżowych 3-etapowy harmonogram:
+Etap 1 (widełki płacowe w ogłoszeniach, zakaz pytania o historię
+zarobków, neutralność płciowa nazw stanowisk) JUŻ OBOWIĄZUJE od
+24.12.2025; Etap 2 (prawo do informacji o średnich wynagrodzeniach wg
+płci, wartościowanie stanowisk, ograniczenie klauzul poufności) —
+termin transpozycji 7.06.2026, ale ustawa implementująca (projekt
+UC127) może być jeszcze nieuchwalona — oznaczono niepewność wprost;
+Etap 3 (raportowanie luki płacowej) — 2027/2031 wg progów zatrudnienia.
+Odnotowano uczciwie rozbieżność źródeł co do wysokości projektowanych
+grzywien (2000-60000 vs 3000-50000 zł, zależne od finalnego brzmienia
+ustawy).
+
+**Status:** ✅ WDROŻONE. Odpowiedź na pytanie użytkownika: KP nadal NIE
+jest w pełni pokryty — Rozdział II Działu III (ochrona wynagrodzenia,
+potrącenia, art. 84-91) świadomie NIE zbadany w tym module, oznaczony
+jako priorytet kolejnej tury. Łącznie po 4 turach audytu KP pokryte:
+Działy III (częściowo), V, VI, VII, XIV — pozostają: pełny Dział III
+Rozdz. II, Dział IV (regulamin/kary porządkowe), Dział VIII/IX z
+samego KP, reszta Działu X (BHP ogólne), Dział XII (sądy pracy —
+fragment), Dział XIII (wykroczenia przeciw prawom pracownika).
+
+---
+
+
+
+**Zakres:** NOWY `mod-KP-dzial-VI-czas-pracy.md` (v1.0) + NOWY
+`mod-KP-dzial-VII-urlopy-pracownicze.md` (v1.0) + NOWY `mod-KP-dzial-V-
+XIV-odpowiedzialnosc-materialna-przedawnienie.md` (v1.0) + aktualizacja
+`mod-ustawa-PIP-inspekcja-pracy.md` + `dr-04/SKILL.md` (17→23 — z
+korektą własnego błędu liczenia, patrz niżej) + `dr-04/MAPA-AKTOW.md`
+(+3 wiersze) + 4 wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** kontynuacja audytu pokrycia Kodeksu pracy z poprzedniej
+sesji — użytkownik polecił rozpocząć od najwyższych priorytetów (czas
+pracy, urlopy, przedawnienie, odpowiedzialność materialna) oraz dodać
+aktualizację o nowe uprawnienia PIP dot. przekwalifikowania B2B na UoP.
+
+**Moduł 1 — Dział VI (czas pracy):** normy (8h/dobę, 40h/tydzień),
+okresy odpoczynku (11h dobowy, 35h tygodniowy), pełna konstrukcja
+nadgodzin (rozróżnienie dobowe/średniotygodniowe, zakaz podwójnego
+naliczenia, limit 150h/rok z możliwością podwyższenia, granica
+bezwzględna 48h/tydzień z art. 131, dodatki 50%/100%, czas wolny 1:1 na
+wniosek / 1:1,5 z inicjatywy pracodawcy), nowelizacja Dz.U. 2026 poz. 25
+(forma elektroniczna wniosków, w życie 27.01.2026).
+
+**Moduł 2 — Dział VII (urlopy):** wymiar 20/26 dni (art. 154), zasady
+proporcjonalności i narastania, niezrzekalność, odwołanie z urlopu
+(przesłanki + obowiązek pokrycia kosztów), urlop w okresie wypowiedzenia,
+ekwiwalent art. 171 (pełna treść + nowe §4-5 z tej samej nowelizacji
+2026), urlop na żądanie i zwolnienie z tyt. siły wyższej (2 dni/16h).
+
+**Moduł 3 — Działy V+XIV (odpowiedzialność materialna + przedawnienie),
+połączone celowo ze względu na ścisły związek praktyczny:** kluczowe
+ROZRÓŻNIENIE między zwykłą odpowiedzialnością (wina NIE domniemana,
+ciężar dowodu po stronie pracodawcy, ograniczenie do rzeczywistej straty
+przy nieumyślności) a odpowiedzialnością za mienie POWIERZONE (wina
+DOMNIEMANA — pracownik musi się uwolnić, ODWRÓCONY ciężar dowodu) — z
+istotnym zastrzeżeniem doktrynalnym: WADLIWE powierzenie mienia cofa
+sprawę do zwykłych zasad. Przedawnienie: zasada ogólna 3 lata (art. 291
+§1), ale UCZCIWIE odnotowana niepewność co do złożonego reżimu §2
+(roszczenie pracodawcy o naprawienie szkody) — jeden z najbogaciej
+komentowanych w orzecznictwie SN fragmentów całego Działu, nie w pełni
+zrekonstruowany w tej sesji.
+
+**Aktualizacja PIP (reforma B2B→UoP):** moduł JUŻ zawierał solidną
+sekcję o tej reformie (co ustalono przed rozpoczęciem pracy — uniknięto
+duplikacji). Uzupełniono: (1) status wejścia w życie — ustawa z 08.07.2026
+JUŻ OBOWIĄZUJE (usunięto nieaktualną flagę "jeszcze nie weszła w życie"),
+(2) ZAKAZ RETORSJI wobec osoby objętej decyzją PIP (nowe ustalenie,
+wcześniej nieobecne w module), (3) rozróżnienie: brak retroakcji SAMEJ
+DECYZJI PIP (na przyszłość) vs NIEZALEŻNA ścieżka ZUS mogąca sięgać
+5 LAT WSTECZ za zaległe składki — kluczowe rozróżnienie temporalne,
+wcześniej niejasno przedstawione.
+
+**Korekta własnego błędu w trakcie sesji:** początkowo błędnie
+zasugerowano, że 3 istniejące moduły (mobbing, praca-zdalna, wypadek-
+przy-pracy) były nieskatalogowane w SKILL.md — błąd wynikał z wadliwego
+wzorca grep (nie uwzględniał statusu "NOWY" obok "OK"). Skorygowano
+natychmiast po weryfikacji przed zapisaniem błędnej informacji na stałe.
+
+**Status:** ✅ WDROŻONE. Priorytety wysokie z audytu KP (VI, VII, V, XIV)
+oraz aktualizacja PIP — zrealizowane. Pozostają (niższy priorytet,
+odnotowany w oryginalnym audycie): Dział III (wynagrodzenie/potrącenia),
+Dział IV (regulamin pracy/kary porządkowe), Dział XII (postępowanie
+przed sądem pracy — obecnie tylko fragment), Dział XIII (wykroczenia
+przeciwko prawom pracownika), Dział VIII/IX (rodzicielstwo z KP wprost/
+młodociani), reszta Działu X (BHP ogólne poza wypadkami).
+
+---
+
+
 
 **Zakres:** NOWY `mod-KW-art70-118-bezpieczenstwo-osoba-zdrowie.md` (v1.0)
 + NOWY `mod-KW-art132-166-pozostale-rozdzialy.md` (v1.0) + `dr-03/SKILL.md`

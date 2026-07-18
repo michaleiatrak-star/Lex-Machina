@@ -76,7 +76,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   obrona obligatoryjna art. 79 §1 pkt 2-4 KPK (→ mod-niewidomy-prawa-prawne.md,
   mod-niepelnosprawnosc-intelektualna-gluchota.md)
 
-## Moduły (32 łącznie — ✓ 32 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+## Moduły (33 łącznie — ✓ 33 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
 ## ⚠️ 2026-07-15: naprawiono niezgodność dysk↔lista — 4 pliki istniały na
 ## dysku, ale nie były wpisane poniżej: mod-KK-art291-pranie-pieniedzy,
 ## mod-ustawa-fundusz-pomocy-pokrzywdzonym, mod-ustawa-narkomania,
@@ -210,6 +210,15 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
                z dr-12/mod-techniki-mediacyjne-negocjacyjne, nie duplikuje
                ogólnych technik)
   [✓] OK    mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych
+  [✓] OK    mod-KK-slupy-fikcyjna-reprezentacja-spolki
+              (dodany 2026-07-17: odpowiedzialność karna "słupów" jako
+               prezesów/wspólników — współsprawstwo/pomocnictwo art. 18,
+               rozbieżność orzecznictwa co do świadomości, powiązanie z
+               art. 296 KK i art. 586-590 KSH; fikcyjna reprezentacja
+               spółki — falsus procurator art. 103 KC, fałszywy organ
+               art. 39 KC per analogiam, bezskuteczność zawieszona,
+               ochrona przez wpis w KRS. Potwierdzono, że korupcja i
+               poplecznictwo są już dobrze pokryte — bez duplikacji)
               (odpowiedzialność karna spółek — dopisany do listy 2026-07-15, plik
                istniał wcześniej)
 ```

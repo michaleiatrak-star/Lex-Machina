@@ -5,6 +5,9 @@
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
 | Kodeks cywilny — zobowiązania, roszczenia | Dz.U. 2025 poz. 1071 ze zm. (+2025.1508, +2026.184, +2026.795 — VER 2026-07-02) | mod-KC-cywilne-zobowiazania-odpowiedzialnosc | ✅ OK |
+| Ustawa o ochronie konkurencji i konsumentów (UOKiK) — monopole, koncentracje | ⚠️ zweryfikuj aktualny t.j. na ISAP (ustawa z 16.02.2007) | mod-ustawa-UOKIK-antymonopolowe | ✅ NOWY 2026-07-18, odpowiedź na pytanie o monopole |
+| Monopole państwowe — art. 216 ust. 3 Konstytucji, ustawa o grach hazardowych (Totalizator Sportowy), Prawo pocztowe (operator wyznaczony) | Konstytucja RP + Dz.U. — ustawa z 19.11.2009 o grach hazardowych (⚠️ zweryfikuj t.j.) + Prawo pocztowe z 23.11.2012 (⚠️ zweryfikuj t.j.) + art. 165 §2 KPC (⚠️ SPORNY, wielokrotnie nowelizowany — zweryfikuj aktualne brzmienie) | mod-ustawa-monopole-panstwowe | ✅ NOWY 2026-07-18, odpowiedź na pytanie użytkownika |
+| KSH — wrogie przejęcie, techniki obrony (strategia, nie procedura) | Dz.U. — ten sam KSH co mod-KSH-spolki-handlowe, inny aspekt (praktyka, nie tylko przepisy) | mod-KSH-wrogie-przejecie-obrona-bialy-rycerz | ✅ NOWY 2026-07-18, odpowiedź na pytanie użytkownika |
 | Kodeks cywilny — konsumenckie | Dz.U. 2025 poz. 1071 ze zm. (⚠️ 2025.1508 dot. oświadczenia o charakterze zawodowym umowy — art. 385⁵/556⁴ — sprawdź czy uwzględnione w module) | mod-KC-konsumenckie | ⚠️ DO SPRAWDZENIA (nowelizacja 2025.1508) |
 | Kodeks cywilny — Księga IV Spadki | Dz.U. 2025 poz. 1071 ze zm. | mod-KC-spadki | ✅ OK |
 | Kodeks cywilny — ubezpieczenia | Dz.U. 2025 poz. 1071 + Dz.U. 2025 poz. 367 t.j. | mod-KC-ubezpieczenia | ✅ OK |

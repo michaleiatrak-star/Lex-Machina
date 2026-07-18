@@ -64,7 +64,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   wspierające (→ mod-niepelnosprawnosc-intelektualna-gluchota.md,
   mod-niewidomy-prawa-prawne.md, mod-prawa-obywatelskie-srodki-karne.md)
 
-## Moduły (17 łącznie — ✓ 17 OK, ☐ 0 STUB)
+## Moduły (26 łącznie — ✓ 26 OK, ☐ 0 STUB)
 
 ```
   [✓] OK    mod-KP-prawo-pracy
@@ -72,6 +72,22 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
                o pracę, wypowiedzenie, dyscyplinarka, roszczenia art.45 KP.
                3 byłe aneksy wydzielone niżej — lazy loading.)
   [✓] NOWY  mod-KP-mobbing-dyskryminacja
+  [✓] NOWY  mod-KP-naduzycia-pracodawcy-limity-kary-degradacja
+  [✓] NOWY  mod-KP-konflikt-interesow-rodzina-nepotyzm
+              (dodany 2026-07-18: sektor prywatny — pełna legalność
+               zatrudniania rodziny, brak ograniczeń ustawowych; sektor
+               publiczny — obowiązek z ustawy o finansach publicznych +
+               zakaz podległości bezpośredniej krewnych; nepotyzm/
+               kumoterstwo, instrumenty przeciwdziałania. Odpowiedź na
+               pytanie o konflikt interesów rodzina/pracownik)
+              (dodany 2026-07-17: obejście limitu 3 umów/33 miesięcy przez
+               rotację między podmiotami powiązanymi — doktryna "przebicia
+               zasłony korporacyjnej"/nadużycia osobowości prawnej, art. 8
+               KP; elementy konieczne kar porządkowych i konsekwencje ich
+               braku (art. 108-113); degradacja karna [niedopuszczalna,
+               poza zamkniętym katalogiem] vs faktyczna w trybie
+               wypowiedzenia zmieniającego [legalna, art. 42]; odesłania
+               do sygnalistów [DR-15] i BHP [luka odnotowana])
               (wydzielony z ANEKS A: kwalifikacja mobbing/dyskryminacja/
                molestowanie, tabela roszczeń, strategia dowodowa; definicja
                i linia SN → shared/definicje/DEF-PRACA.md; projekt UD183/
@@ -83,6 +99,28 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   [✓] NOWY  mod-KP-praca-zdalna
               (wydzielony z ANEKS C: obowiązki BHP, praca zdalna okazjonalna;
                wykładnia MRiPS → BAS-W03)
+  [✓] OK    mod-KP-dzial-VI-czas-pracy
+              (dodany 2026-07-17: Dział VI KP — normy czasu pracy, okresy
+               odpoczynku, NADGODZINY (limit 150h/rok, granica 48h/tydzień,
+               dodatki 50%/100%, czas wolny), nowelizacja 2026 forma
+               elektroniczna wniosków. Najwyższy priorytet z audytu KP)
+  [✓] OK    mod-KP-dzial-VII-urlopy-pracownicze
+              (dodany 2026-07-17: Dział VII KP — wymiar urlopu (20/26 dni),
+               zasady udzielania/odwołania, ekwiwalent art. 171 (w tym
+               nowe §4-5 z 2026), urlop na żądanie, siła wyższa. Drugi
+               priorytet z audytu KP)
+  [✓] OK    mod-KP-dzial-V-XIV-odpowiedzialnosc-materialna-przedawnienie
+              (dodany 2026-07-17: Dział V KP — odpowiedzialność materialna
+               (zwykła vs mienie powierzone, KLUCZOWE odwrócenie ciężaru
+               dowodu przy mieniu powierzonym) + Dział XIV — przedawnienie
+               roszczeń (3 lata, wyjątek dla roszczeń pracodawcy art. 291
+               §2). Domyka priorytety wysokie z audytu KP)
+  [✓] OK    mod-KP-dzial-III-wynagrodzenie-swiadczenia-jawnosc
+              (dodany 2026-07-17: Dział III KP — art. 92 wynagrodzenie
+               chorobowe (świadczenie WYPŁACANE PRZEZ PRACODAWCĘ, 33/14
+               dni, 80%/100%) + ZUPEŁNIE NOWY temat: jawność wynagrodzeń,
+               dyrektywa UE 2023/970, Etap 1 już obowiązuje od 24.12.2025.
+               Odpowiedź na pytanie użytkownika o świadczenia pracodawcy)
   [✓] OK    mod-KPA-postepowanie-administracyjne
   [✓] OK    mod-SUS-ZUS-ubezpieczenia-spoleczne
               (zawiera Aneks A: renta — 3 przesłanki z tabelą stażu;

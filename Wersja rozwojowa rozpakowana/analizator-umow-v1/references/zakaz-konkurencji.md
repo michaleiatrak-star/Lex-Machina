@@ -54,6 +54,11 @@ KROK 2 — ZAKRES PRZEDMIOTOWY:
   □ Czy zakaz obejmuje tylko faktycznie konkurencyjną działalność?
     Pracodawca nie może zakazać pracy w niezwiązanej branży
     Weryfikuj: sn.pl → "zakres zakazu konkurencji"
+  ⚠️ NAWET GDY definicja jest precyzyjna (lista PKD/branż) — sprawdź
+  DODATKOWO, czy każda wymieniona pozycja odpowiada działalności
+  FAKTYCZNIE (nie tylko formalnie w KRS) prowadzonej przez pracodawcę —
+  patrz Pułapka ZK-10 (dodana 2026-07-18): precyzja definicji ≠
+  proporcjonalność jej zakresu do realnej działalności firmy
 
 KROK 3 — ZAKRES TERYTORIALNY:
   □ Czy określono terytorium?
@@ -64,6 +69,9 @@ KROK 4 — CZAS TRWANIA:
   UoP: KP nie określa max — SN dopuszcza rozmaite okresy; oceniaj proporcjonalność
   B2B: brak limitu ustawowego → granica: art. 5 KC i art. 353¹ KC
   Praktyka: 6–24 miesiące akceptowalne; powyżej 3 lat → ryzyko unieważnienia
+  ⚠️ ODRĘBNY SCENARIUSZ (nie mylić z "zbyt długim"): BRAK wskazania
+  jakiegokolwiek okresu / zakaz "bezterminowy" → NIEWAŻNOŚĆ AUTOMATYCZNA,
+  bez oceny proporcjonalności — patrz Pułapka ZK-9 (SN I PK 453/02)
 
 KROK 5 — ODSZKODOWANIE (zakaz post-contractual):
   UoP: min. 25% wynagrodzenia za każdy miesiąc zakazu (art. 101² §2 KP)
@@ -275,6 +283,155 @@ REKOMENDACJA DLA PRACOWNIKA:
   powszechnie dostępnych metod i narzędzi pracy."
 ```
 
+### PUŁAPKA ZK-9 — Zakaz BEZTERMINOWY / brak określenia terminu końcowego (CRITICAL, dodane 2026-07-17)
+```
+> Dotąd nieobecna jako odrębna pułapka — ogólna zasada 2 (I.7) sygnalizowała
+> "nieograniczony zakres czasowy" jako ryzyko, ale bez konkretnego, nazwanego
+> orzeczenia i bez odróżnienia od Pułapki ZK-1/KROK 4 (zakaz "zbyt długi").
+> To ODRĘBNY scenariusz: nie chodzi o okres NADMIERNIE DŁUGI (co podlega
+> OCENIE sądu wg proporcjonalności — patrz KROK 4), lecz o BRAK JAKIEJKOLWIEK
+> daty końcowej — co skutkuje NIEWAŻNOŚCIĄ AUTOMATYCZNĄ, bez potrzeby oceny
+> proporcjonalności w ogóle.
+
+ROZRÓŻNIENIE KLUCZOWE (dwa różne skutki prawne):
+  Zakaz "zbyt długi" (np. 5 lat) → OCENA SĘDZIOWSKA proporcjonalności
+    (art. 58 §2 KC / zasady współżycia społecznego) — wynik niepewny,
+    zależny od okoliczności sprawy (branża, dostęp do informacji itd.)
+  Zakaz BEZTERMINOWY lub BEZ WSKAZANEGO OKRESU W OGÓLE → NIEWAŻNOŚĆ
+    Z MOCY SAMEGO PRAWA, automatyczna, NIEZALEŻNIE od okoliczności sprawy
+    — silniejszy, pewniejszy argument obrony niż przy zwykłym "zbyt długim"
+    zakazie
+
+PODSTAWA — KONKRETNE ORZECZENIE (zweryfikuj przed cytowaniem w piśmie):
+  SN, wyrok z 2.10.2003, sygn. I PK 453/02 (MoP 2004, Nr 10, s. 1):
+  "nie dochodzi do ustanowienia zakazu konkurencji po ustaniu stosunku
+  pracy w razie pominięcia w umowie postanowienia określającego czas
+  trwania tego zakazu" — czyli brak wskazania okresu = zakaz W OGÓLE
+  NIE POWSTAŁ, a nie tylko "jest wadliwy".
+
+ZASTOSOWANIE DO UoP (art. 101² KP):
+  Dotyczy WYŁĄCZNIE zakazu POST-KONTRAKTOWEGO (po ustaniu zatrudnienia)
+  — zakaz W TRAKCIE zatrudnienia (art. 101¹ KP) trwa z definicji przez
+  cały okres zatrudnienia, więc pytanie o "brak terminu końcowego" nie
+  ma tu takiego samego znaczenia (koniec = ustanie stosunku pracy).
+
+ZASTOSOWANIE DO B2B (art. 353¹ KC):
+  Brak analogicznego bezwzględnego przepisu jak w KP, ALE zakaz
+  bezterminowy w relacji cywilnoprawnej ocenia się przez pryzmat
+  natury stosunku zobowiązaniowego (art. 353¹ KC) — zobowiązanie
+  WIECZYSTE/bezterminowe bez prawa wypowiedzenia jest sprzeczne z naturą
+  stosunków obligacyjnych w prawie polskim (ugruntowana zasada ogólna
+  prawa zobowiązań, nie specyficzna dla zakazu konkurencji) — silny,
+  ale odrębny argument od tego z UoP, wymaga own analizy przy
+  konkretnej umowie B2B.
+
+DALEJ IDĄCE ORZECZENIE (KONTEKST NIESYMETRYCZNY B2B — dot. INNEGO
+aspektu, nie mylić z powyższym): orzecznictwo SN dot. NIESYMETRYCZNEGO
+zakazu między przedsiębiorcami wskazuje, że sam BRAK WYNAGRODZENIA
+(nieekwiwalentność świadczeń) w relacji B2B NIE WYSTARCZA sam w sobie
+do stwierdzenia nieważności z art. 353¹/58 KC — potrzebne są DODATKOWE
+okoliczności (np. wykorzystanie dominującej pozycji, brak proporcji
+między długością zakazu a długością współpracy). ⚠️ To OSŁABIA (nie
+wzmacnia) argument pracownika/wykonawcy B2B próbującego podważyć
+WYŁĄCZNIE z powodu braku odpłatności — potrzeba więcej niż sama
+nieodpłatność, w przeciwieństwie do reżimu KP gdzie brak odszkodowania
+wystarcza sam w sobie (Zasada 1, I.7).
+
+CHECKLIST DLA OBRONY (były pracownik/wykonawca):
+□ Czy umowa WSKAZUJE KONKRETNĄ datę końcową LUB okres (np. "12 miesięcy
+  od ustania stosunku pracy")?
+  BRAK → dla UoP: zakaz NIEWAŻNY z mocy prawa (I PK 453/02), nie
+         przysługuje żadne roszczenie z tego zakazu były pracodawcy
+  BRAK → dla B2B: argumentuj sprzeczność z naturą stosunku (art. 353¹
+         KC), ale przygotuj się na trudniejszą batalię niż przy UoP
+□ Czy zakaz jest sformułowany jako "bezterminowy"/"na czas nieokreślony"
+  WPROST, czy po prostu BRAK jakiejkolwiek wzmianki o okresie?
+  Oba warianty objęte tą samą pułapką — brak wskazania = tak samo
+  nieważny jak wyraźne "bezterminowo"
+□ Czy to jest zakaz PO ustaniu (art. 101² KP) czy W TRAKCIE (art. 101¹
+  KP)? — pułapka dotyczy WYŁĄCZNIE zakazu post-kontraktowego
+
+REKOMENDACJA:
+  „§X. Zakaz konkurencji, o którym mowa w niniejszej Umowie, obowiązuje
+  przez okres [WYRAŹNIE WSKAZANA LICZBA] miesięcy od dnia ustania
+  stosunku pracy/rozwiązania Umowy. Brak wskazania tego okresu skutkuje
+  nieważnością postanowień niniejszego paragrafu."
+```
+
+### PUŁAPKA ZK-10 — Zakaz obejmujący działalność MARGINALNĄ lub FAKTYCZNIE NIEPROWADZONĄ przez firmę (HIGH RISK, dodane 2026-07-18)
+```
+> Różni się od Pułapki ZK-1: tam problemem była NIEJASNOŚĆ definicji
+> ("wszelka działalność mogąca naruszać interesy"). Tutaj definicja może
+> być PRECYZYJNA (konkretna lista branż/kodów PKD), ale NIEPROPORCJONALNA
+> — obejmuje dziedziny, którymi firma realnie się NIE zajmuje albo zajmuje
+> się w znikomym, marginalnym zakresie. To odrębny mechanizm kwestionowania.
+
+MECHANIZM PROBLEMU:
+  Spółki rejestrują w KRS często KILKADZIESIĄT kodów PKD "na zapas"
+  (na wypadek przyszłego rozszerzenia działalności), podczas gdy
+  REALNIE prowadzą działalność w 1-3 z nich. Umowa o zakazie konkurencji
+  odwołująca się do PEŁNEGO wykazu PKD spółki (lub do "przedmiotu
+  działalności ujawnionego w KRS") w praktyce blokuje pracownika/
+  wykonawcy w dziedzinach, w których firma nigdy faktycznie nie
+  działała lub działała incydentalnie.
+
+KLUCZOWA ZASADA — TEST WEDŁUG DZIAŁALNOŚCI FAKTYCZNEJ, NIE FORMALNEJ:
+  "W zakazie konkurencji należy precyzyjnie określić jego zakres NA
+  PODSTAWIE DZIAŁALNOŚCI GOSPODARCZEJ FAKTYCZNIE PROWADZONEJ przez
+  pracodawcę" — kody PKD są PUNKTEM WYJŚCIA do weryfikacji, NIE
+  ostatecznym kryterium rozstrzygającym o zakresie zakazu.
+
+TEST KONKURENCYJNOŚCI (2 kryteria łącznie — wg utrwalonej wykładni):
+  1. TEN SAM RYNEK — te same lub zbliżone (substytucyjne) dobra/usługi
+  2. TEN SAM OBSZAR — działanie na pokrywającym się terytorium
+  Brak spełnienia KTÓREGOKOLWIEK z dwóch kryteriów dla danej gałęzi
+  działalności = ta gałąź NIE powinna być objęta zakazem, NAWET jeśli
+  formalnie widnieje w KRS/PKD spółki.
+
+⚠️ ROZBIEŻNOŚĆ W ORZECZNICTWIE (odnotowana uczciwie, sprawdź aktualną
+linię przed użyciem): w jednej sprawie sąd II instancji przyjął
+szerokie podejście — "działalność konkurencyjna obejmuje KAŻDY
+przedmiot działalności przedsiębiorstwa, który choćby NA JEDNYM
+Z RYNKÓW pokrywa się z działalnością pracodawcy" (czyli wystarczy
+JAKIKOLWIEK punkt styku, niezależnie od jego znaczenia dla firmy)
+— ale ta sama sprawa w dalszym postępowaniu (SN) skrytykowała umowę
+odsyłającą do "wszelkiej działalności wynikającej z KRS" jako zbyt
+OGÓLNĄ i NIESKONKRETYZOWANĄ. Wniosek praktyczny: samo POWOŁANIE SIĘ
+na pełny wykaz PKD/KRS (bez konkretyzacji) jest RYZYKOWNE dla
+pracodawcy nawet przy szerokiej wykładni "jednego rynku" — argumentuj
+OBOMA torami: (a) brak konkretyzacji (ZK-1), (b) brak proporcji do
+realnej działalności (ZK-10).
+
+DOKTRYNALNE OKREŚLENIE ZJAWISKA: "umowy kneblujące/dławiące"
+(w kontekście B2B) — nieważne, gdy całościowa ocena zakresu
+DOTYCHCZASOWEJ i POTENCJALNEJ działalności zobowiązanego w stosunku
+do nałożonego ograniczenia wykazuje rażącą dysproporcję (łącznie
+z oceną zakresu przedmiotowo-podmiotowego, geograficznego, czasowego
+oraz surowości kary umownej — ocena CAŁOŚCIOWA, nie jednego elementu
+osobno).
+
+CHECKLIST WERYFIKACYJNY:
+□ Czy definicja zakazu odwołuje się do PEŁNEGO wykazu PKD/KRS spółki,
+  czy do KONKRETNYCH, faktycznie prowadzonych linii biznesowych?
+□ Ile z wymienionych w umowie branż/PKD firma REALNIE prowadzi
+  (przychody, zatrudnieni pracownicy, aktywne kontrakty) — poproś
+  o dowody faktycznego prowadzenia każdej wymienionej dziedziny
+□ Czy dla KAŻDEJ wymienionej branży spełnione są ŁĄCZNIE oba kryteria
+  testu konkurencyjności (ten sam rynek + ten sam obszar)?
+□ Czy pracownik/wykonawca faktycznie MIAŁ DOSTĘP do informacji
+  chronionych w KAŻDEJ z wymienionych dziedzin, czy tylko w tej,
+  w której realnie pracował?
+
+REKOMENDACJA:
+  „Przez działalność konkurencyjną Strony rozumieją WYŁĄCZNIE
+  działalność w zakresie [konkretna branża], FAKTYCZNIE PROWADZONĄ
+  przez Pracodawcę na dzień zawarcia niniejszej Umowy, z wyłączeniem
+  jakiejkolwiek działalności ujawnionej w rejestrze przedsiębiorców
+  (KRS) lub klasyfikacji PKD, której Pracodawca faktycznie nie
+  prowadzi lub prowadzi w zakresie nieistotnym (poniżej [X]% przychodów
+  rocznych / bez odrębnie przypisanych pracowników)."
+```
+
 ---
 
 ## I.4 ANALIZA ODRĘBNEJ UMOWY O ZAKAZIE KONKURENCJI
@@ -292,7 +449,9 @@ FORMA I ZAWARCIE:
 TREŚĆ OBLIGATORYJNA:
 □ Definicja "działalności konkurencyjnej" — precyzyjna (ZK-1)
 □ Zakres terytorialny (Pułapka ZK-1)
-□ Czas obowiązywania zakazu (Pułapka ZK-1)
+□ Czas obowiązywania zakazu (Pułapka ZK-1) — WSKAZANY WPROST, nie
+  "bezterminowo" ani pominięty (Pułapka ZK-9 — inaczej nieważność
+  automatyczna, SN I PK 453/02)
 □ Wysokość odszkodowania ≥ 25% wynagrodzenia (Pułapka ZK-2) — tylko zakaz post-contractual
 □ Termin płatności odszkodowania (miesięcznie / kwartalnie / jednorazowo)
 □ Rachunek bankowy do przelewu odszkodowania
@@ -424,11 +583,16 @@ ZAKRES:
   ✅ Precyzyjna lista podmiotów / PKD (+)
   ⚠ Ogólna branżowa definicja (-)
   ❌ "Wszelka działalność" (ZAKWESTIONUJ)
+  ⚠ Precyzyjna lista, ale odwołuje się do PEŁNEGO wykazu PKD/KRS bez
+    weryfikacji czy firma faktycznie prowadzi każdą wymienioną działalność
+    (ZK-10 — zażądaj dowodów faktycznego prowadzenia każdej pozycji)
 
 CZAS:
   ✅ Do 12 miesięcy (+)
   ⚠ 12–24 miesięcy (-)
   ❌ Powyżej 3 lat (ZAKWESTIONUJ)
+  ❌❌ Brak wskazanego okresu / "bezterminowo" (NIEWAŻNY AUTOMATYCZNIE —
+       ZK-9, silniejszy argument niż zwykłe "ZAKWESTIONUJ" powyżej)
 
 ODSZKODOWANIE (UoP zakaz post-contractual):
   ✅ ≥ 25% wynagrodzenia, płatne regularnie (+)
@@ -451,7 +615,82 @@ WYNIK OGÓLNY:
 
 ---
 
+## I.7 ZŁOTE ZASADY ZAKAZU KONKURENCJI
+
+> Dodane 2026-07-13m, **zasada 1 skonfrontowana 2026-07-13n** z wieloma
+> niezależnymi źródłami (poradnikprzedsiebiorcy.pl, HR na Szpilkach,
+> pit.pl, zarobki.pracuj.pl) — potwierdzają zgodnie: min. 25% wynagrodzenia,
+> podstawa art. 101² **§3** KP (nie ogólnie "art. 101²" jak w pierwszej
+> wersji — poprawiono precyzję cytatu). I.4.1/I.4.2 już zawierają pełne
+> listy TREŚCI OBOWIĄZKOWEJ i ELEMENTÓW REKOMENDOWANYCH; brakowało
+> zwięzłego zestawu zasad przewodnich niezależnego od checklisty formalnej.
+
+```
+1. Brak odszkodowania = brak zakazu (dla zakazu post-kontraktowego UoP) —
+   to nie jest "ryzyko", to automatyczny skutek ustawowy (art. 101² §3 KP:
+   min. 25% wynagrodzenia sprzed ustania stosunku pracy, za okres
+   odpowiadający okresowi zakazu — weryfikuj aktualne brzmienie w ISAP),
+   wskaż go wprost, nie jako punkt do negocjacji.
+2. Nieograniczony zakres (przedmiotowy, terytorialny, czasowy) = zakaz
+   nieważny lub bezskuteczny przy kontroli sądowej (art. 58 KC/art. 353¹
+   KC) — każdy z trzech wymiarów musi mieć wyraźną granicę. ⚠️ Rozróżnij:
+   zakaz ZBYT DŁUGI podlega OCENIE sędziowskiej proporcjonalności (wynik
+   niepewny), podczas gdy zakaz BEZTERMINOWY/BEZ WSKAZANEGO OKRESU jest
+   NIEWAŻNY AUTOMATYCZNIE, z mocy samego prawa (SN I PK 453/02) — patrz
+   Pułapka ZK-9, dodana 2026-07-17.
+3. Kara umowna bez możliwości miarkowania jest nieskuteczna — art. 484 §2
+   KC ma charakter semiimperatywny, próba jego wyłączenia w treści umowy
+   nie wywołuje zamierzonego skutku.
+4. "Tajemnica przedsiębiorstwa" i "zakaz konkurencji" to różne instytucje
+   o różnych przesłankach i różnych skutkach — nie oceniaj jednej klauzuli
+   pod przepisami drugiej (patrz Pułapka ZK-8).
+5. Zakaz w umowie B2B i zakaz w UoP podlegają całkowicie różnym reżimom
+   (KC vs KP) — nigdy nie stosuj checklisty formalnej I.4.1 do umowy B2B
+   ani I.4.2 do UoP; użyj Matrycy z I.1 do ustalenia właściwego reżimu
+   przed dalszą analizą.
+```
+
+---
+
 *Moduł I / analizator-umow-v1 · Dla UoP → references/umowy-o-prace.md (Moduł H)*
 *Dla umów B2B → references/b2b-podwykonawcze.md (Moduł G)*
 *Dla routingu typów umów → references/mod-J0-routing.md (Moduł J — nawigacja)*
 *Prawo weryfikuj w ISAP · Orzeczenia: sn.pl · Zawsze aktualny tekst jednolity*
+
+---
+
+## CHANGELOG
+
+**2026-07-18:** Dodano Pułapkę ZK-10 (zakaz obejmujący działalność
+MARGINALNĄ lub FAKTYCZNIE NIEPROWADZONĄ przez firmę — rozbieżność między
+formalnym wykazem PKD/KRS a rzeczywistym zakresem działalności) na
+wyraźne pytanie użytkownika. Odrębna od Pułapki ZK-1 (tam: NIEJASNOŚĆ
+definicji; tu: definicja MOŻE być precyzyjna, ale NIEPROPORCJONALNA do
+realnej skali działalności). Zweryfikowano online: rp.pl — zasada, że
+zakres zakazu należy określać na podstawie działalności FAKTYCZNIE
+prowadzonej, nie samych kodów PKD; zakaz-konkurencji.pl — praktyczny
+problem spółek deklarujących "kilkadziesiąt kodów PKD"; test
+konkurencyjności (ten sam rynek + ten sam obszar, kryteria łączne);
+doktrynalne określenie "umowy kneblujące/dławiące" w kontekście B2B
+(ocena całościowa proporcji). Odnotowano UCZCIWIE rozbieżność w
+orzecznictwie: sąd II instancji w jednej sprawie przyjął szerokie
+podejście ("choćby jeden rynek się pokrywa"), ale ta sama sprawa w SN
+skrytykowała odwołanie do "wszelkiej działalności z KRS" jako zbyt
+ogólne — zalecono argumentację dwutorową (ZK-1 + ZK-10 łącznie).
+Zaktualizowano KROK 2 i scoring ZAKRES o odesłania.
+
+**2026-07-17:** Dodano Pułapkę ZK-9 (zakaz BEZTERMINOWY / brak wskazanego
+okresu — nieważność AUTOMATYCZNA, odrębna od zwykłego "zbyt długiego"
+zakazu podlegającego ocenie proporcjonalności) na wyraźne pytanie
+użytkownika o zakaz bez ograniczenia czasowego. Zweryfikowano online:
+SN, wyrok z 2.10.2003, sygn. I PK 453/02 (MoP 2004/10/1) — brak
+wskazania okresu = zakaz w ogóle nie powstał. Doprecyzowano też (przy
+tej samej weryfikacji) niuans B2B: sama nieekwiwalentność/brak
+wynagrodzenia NIE wystarcza do nieważności zakazu między
+przedsiębiorcami (orzecznictwo SN dot. zasady swobody umów, art. 353¹
+KC) — inaczej niż w reżimie KP, gdzie brak odszkodowania wystarcza sam
+w sobie. Zaktualizowano KROK 4, Złotą Zasadę 2, scoring I.6 i checklistę
+I.4.1 o odesłania do nowej pułapki. Pozostałe trzy scenariusze z pytania
+użytkownika (zakaz ogólnoświatowy, zakaz bezpłatny, zakaz ukryty pod
+UZNK/tajemnicą przedsiębiorstwa) były JUŻ w pełni pokryte przed tą
+aktualizacją (KROK 3, Zasada 1, Pułapka ZK-8) — potwierdzono bez zmian.

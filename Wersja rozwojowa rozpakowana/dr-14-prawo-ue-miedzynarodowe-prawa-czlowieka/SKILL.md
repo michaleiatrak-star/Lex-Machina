@@ -1,6 +1,6 @@
 ---
 name: dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka
-version: 3.5
+version: 3.4
 description: |
   DR-14: Prawo UE, Międzynarodowe, Prawa Człowieka
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony obszar prawa UE / prawa międzynarodowego.
@@ -111,6 +111,10 @@ GRANICE I RUCH OSOBOWY:
 
 INWESTYCJE TRANSGRANICZNE:
   [✓] NOWY  mod-inwestycje-transgraniczne-FDI-BIT
+              (zaktualizowany 2026-07-18: dodano przykład roboczy —
+               inwestor rosyjski w przemyśle zbrojeniowym, 4 równoległe
+               warstwy kontroli: Mechanizm 1+2 ustawy o kontroli
+               inwestycji + sankcje UE + compliance łańcucha dostaw)
               (utworzony 2026-07-15; DWA reżimy: A) kontrola FDI — ustawa
                o kontroli niektórych inwestycji Dz.U. 2026 poz. 47 t.j.,
                mechanizm podstawowy + art. 12a-12k uczyniony bezterminowym
@@ -148,7 +152,7 @@ view /mnt/skills/user/dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/MAPA-AKTOW.m
 - Wchodzi z: `prawo-polskie-v2` → `ROUTING-MAP.md` → ten skill
 - Cyberprzestępstwa transgraniczne (dyrektywa NIS2, Budapest) → `dr-11`
 - AI Act, DSA, DMA — regulacje sektorowe UE wymagają analizy merytorycznej → `dr-11` (mod-AI-Act-framework, mod-DSA-digital-services-act, mod-DMA-digital-markets-act); ten skill dostarcza podstawę praw podstawowych (KPP art. 47, EKPC) gdy decyzja krajowa na bazie tych regulacji jest zaskarżana
-- Prawo karne UE (ENA, EPPO, Europol/Eurojust, Konwencja Palermska) → `dr-03/mod-KPK-wspolpraca-miedzynarodowa-karna.md` (utworzony 2026-07-15)
+- Prawo karne UE (ENA, dyrektywy ofiarowe, Eurojust) → `dr-03`
 - Prawo pracy UE (swoboda przepływu, dyrektywy pracownicze) → `dr-04`
 - Zamówienia publiczne UE (dyrektywy 2014/24, 2014/25) → `dr-07`
 - Obrona narodowa / NATO → `dr-13` → `mod-ustawa-obrona-ojczyzny-mobilizacja`

@@ -5,6 +5,11 @@
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
 | Prawo zamówień publicznych (PZP) | ⚠️ Dz.U. 2026 poz. 793 t.j. (POPRAWKA 2026-07-02gg — BYŁO błędnie 2024.1320; obwieszczenie 27.05.2026, publ. 16.06.2026 — bardzo świeży, sprzed ~2 tygodni w chwili tej sesji) | mod-PZP-zamowienia-publiczne-KIO | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
+| PZP Dział I — przepisy ogólne, wyłączenia, szacowanie wartości (art. 1-82) | Dz.U. 2026 poz. 793 t.j. (ta sama pozycja, inny dział) ze zm. Dz.U. 2025 poz. 1173 (próg 170 000 zł od 1.01.2026) | mod-PZP-dzial-I-podstawy-wylaczenia-szacowanie | ✅ NOWY 2026-07-18, priorytet 1. z audytu PZP |
+| PZP Dział V — zamówienia sektorowe (art. 362-394) + Dział VI — obronność/bezpieczeństwo (art. 395-430), w tym art. 131a infrastruktura krytyczna | Dz.U. 2026 poz. 793 t.j. (ta sama pozycja, inne działy) | mod-PZP-dzial-V-VI-sektorowe-obronne-infrastruktura-krytyczna | ✅ NOWY 2026-07-18, naprawia martwy odnośnik do DR-13 |
+| PZP Dział XI — kontrola udzielania zamówień (art. 596-617) + Dział XII — kary pieniężne (art. 618-622) | Dz.U. 2026 poz. 793 t.j. (ta sama pozycja, inne działy) | mod-PZP-dzial-XI-XII-kontrola-kary-UZP | ✅ NOWY 2026-07-18 |
+| Zamówienia dofinansowane z UE — podwójny reżim PZP + Wytyczne kwalifikowalności wydatków 2021-2027 | PZP jw. + Wytyczne (dokument programowy MFiPR, nie ustawa — zmienia się częściej) | mod-PZP-fundusze-UE-podwojny-rezim | ✅ NOWY 2026-07-18 |
+| PZP art. 99 ust. 4-6 — opis przedmiotu zamówienia, zakaz znaków towarowych | Dz.U. 2026 poz. 793 t.j. (ta sama pozycja, konkretny artykuł) | mod-PZP-opis-przedmiotu-zakaz-znakow-towarowych | ✅ NOWY 2026-07-18, odpowiedź na pytanie użytkownika |
 | Prawo o notariacie | Dz.U. 2026 poz. 614 t.j. — VER 2026-07-02c (FAZA 3A tego samego dnia): nadal aktualne | mod-PrNotariat-notariat-rejestry | ✅ OK |
 | Ustawa o NIK | Dz.U. 2022 poz. 623 ze zm. | mod-ustawa-NIK | ✅ OK |
 | Ustawa o PPP | Dz.U. 2023 poz. 1688 ze zm. — VER 2026-07-02hh: nadal aktualne (obwieszczenie 14.07.2023, baza t.j. potwierdzona jako 2023.1637 w niektórych źródłach — drobna niezgodność numeru poz. w źródłach wtórnych 1637 vs 1688, wymaga jednoznacznego potwierdzenia w ISAP przy najbliższej okazji, ale oba wskazują na ten sam okres t.j. 2023, nie na inny rok) | mod-ustawa-PPP-i-koncesja | ✅ OK (drobna niejednoznaczność źródeł co do dokładnego numeru poz.) |

@@ -119,7 +119,34 @@ SKARGA KASACYJNA DO SN (art. 590 PZP):
 ```
 TRYBY PODSTAWOWE:
   Przetarg nieograniczony (art. 132 PZP)   — otwarty; wszyscy mogą złożyć ofertę
+    ⭐ ROZWINIĘTE 2026-07-18: JEDNOETAPOWY — brak etapu kwalifikacyjnego,
+    oferty składają WSZYSCY zainteresowani bez wcześniejszego wniosku
+    o dopuszczenie. Zamawiający NIE MUSI wykazywać ŻADNYCH przesłanek
+    uzasadniających wybór tego trybu — stosuje się swobodnie (pod
+    warunkiem progu wartości: TYLKO zamówienia ≥ progi unijne — dla
+    zamówień poniżej progów odpowiednikiem jest tryb podstawowy wariant I,
+    art. 275 pkt 1, bardzo zbliżony proceduralnie). Podstawowy TERMIN
+    składania ofert: min. 35 DNI od dnia przekazania ogłoszenia do
+    Urzędu Publikacji UE (możliwe skrócenie/wydłużenie w okolicznościach
+    ustawowych — skrócenie poniżej 15 dni TYLKO w sytuacjach
+    nadzwyczajnych). NAJCZĘŚCIEJ stosowany tryb w Polsce — najkrótszy
+    czas trwania postępowania spośród trybów wieloetapowych.
   Przetarg ograniczony (art. 150 PZP)      — zaproszeni po kwalifikacji wstępnej
+    ⭐ ROZWINIĘTE 2026-07-18: DWUETAPOWY. ETAP 1 — wszyscy zainteresowani
+    składają WNIOSKI O DOPUSZCZENIE do udziału (termin min. 30 DNI od
+    przekazania ogłoszenia); zamawiający weryfikuje spełnienie warunków
+    udziału, MOŻE ograniczyć liczbę zapraszanych wykonawców do
+    złożenia oferty. ETAP 2 — TYLKO zaproszeni (ci, którzy pozytywnie
+    przeszli weryfikację) składają OFERTY; SWZ na etapie 1 NIE zawiera
+    jeszcze elementów dot. samych ofert (termin związania, sposób
+    składania, termin otwarcia). Data wszczęcia = dzień przekazania
+    ogłoszenia do UPUE. Stosowany RZADZIEJ niż przetarg nieograniczony —
+    głównie przy DUŻYCH, ZŁOŻONYCH kontraktach, gdzie zamawiającemu
+    zależy na kontroli liczby/jakości wykonawców dopuszczonych do
+    złożenia oferty. ⚠️ ROZBIEŻNOŚĆ NUMERACJI w źródłach tej sesji —
+    część materiałów wskazuje art. 150, inne art. 140 dla przetargu
+    ograniczonego — ZWERYFIKUJ dokładny numer na ISAP przed cytowaniem
+    w piśmie, nie polegaj na żadnym z tych dwóch bez potwierdzenia.
   Tryb podstawowy (art. 275–296 PZP)       — poniżej progów UE; 3 warianty:
     Wariant I  (art. 275 pkt 1): bez negocjacji
     Wariant II (art. 275 pkt 2): negocjacje przed wyborem (fakultatywne)
@@ -134,8 +161,12 @@ UPROSZCZONE / SZCZEGÓLNE:
   Partnerstwo innowacyjne (art. 297)
   Dynamiczny system zakupów (DSZ) / umowy ramowe
   Zamówienia in-house (art. 214 ust. 1 pkt 11–14) — własna jednostka
-  Zamówienia sektorowe (dział V PZP)
-  Zamówienia obronne i bezpieczeństwa → DR-13
+  Zamówienia sektorowe (dział V PZP) — patrz `mod-PZP-dzial-V-VI-
+    sektorowe-obronne-infrastruktura-krytyczna.md` (dodany 2026-07-18)
+  Zamówienia obronne i bezpieczeństwa (dział VI PZP), w tym mechanizm
+    infrastruktury krytycznej (art. 131a ust. 1a) → TEN SAM moduł jak
+    wyżej (⚠️ POPRAWIONE 2026-07-18 — poprzednie odesłanie "→ DR-13"
+    było MARTWYM ODNOŚNIKIEM, DR-13 nie ma odpowiedniego modułu)
 ```
 
 ---
