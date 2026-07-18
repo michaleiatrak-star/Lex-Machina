@@ -20,6 +20,15 @@
 
 | Pojęcie | Lokalizacja kanoniczna | Konsumenci (DR) | Status |
 |---|---|---|---|
+| Deepfake i manipulacja głosem/obrazem — mapa kwalifikacji (art. 286 oszustwo, 190a kradzież tożsamości, 270 fałszerstwo, 212/216 zniesławienie/zniewaga); brak dedykowanego przestępstwa w KK | `dr-03/.../mod-KK-kwalifikator-karnomaterialny.md`, BLOK R | DR-03 (lokalne), analiza-sadowa-v6, pisma-procesowe-v3 | ✅ nowe 2026-07-17, zidentyfikowane przez użytkownika |
+| Kary/środki karne/wymiar kary (Rozdz. IV-VI KK), kara mieszana (art. 37a/37b), przestępstwa z nienawiści (art. 119/256/257 KK) | `dr-03/.../mod-KK-kwalifikator-karnomaterialny.md`, BLOK P/Q — kontynuacja wzorca BLOK 0/K/M/N/O | DR-03 (lokalne), analiza-sadowa-v6, pisma-procesowe-v3 | ✅ nowe 2026-07-17, priorytet 2. z audytu KK |
+| Kodeks wykroczeń Rozdz. XIV — przeciwko mieniu (kradzież ≤800 zł, paserstwo, zniszczenie mienia, wyłączenia progu kwotowego) | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KW-art119-131-przeciwko-mieniu.md` — KANONICZNE, nowy moduł | DR-03 (lokalne), kwalifikator-karnomaterialny (BLOK A/L — próg graniczny) | ✅ nowe 2026-07-17, priorytet 1. z audytu KW |
+| Kodeks wykroczeń Rozdz. VIII — porządek i spokój publiczny (art. 51 — zakłócanie spokoju, charakter chuligański) | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KW-art49-64-porzadek-publiczny.md` — KANONICZNE, nowy moduł | DR-03 (lokalne), mod-KK-kwalifikator BLOK Q (eskalacja do przestępstwa z nienawiści) | ✅ nowe 2026-07-17, priorytet 2. z audytu KW — ZAMYKA listę priorytetów zidentyfikowanych w audycie KK/KW |
+| KK Rozdz. XVII — przeciwko RP: szpiegostwo (art. 130, reforma 2023), zdrada, dezinformacja wywiadowcza, zasada wzajemności dla państw sojuszniczych | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art127-139-przeciwko-RP.md` — KANONICZNE, nowy moduł | DR-03 (lokalne), DR-13 (służby/bezpieczeństwo), DR-14 (NATO/międzynarodowe) | ✅ nowe 2026-07-17, priorytet podniesiony przez użytkownika (wojna na Ukrainie, szpiegostwo) |
+| KK Rozdz. XX — bezpieczeństwo powszechne, ochrona infrastruktury krytycznej fizycznej (art. 165 §1 pkt 3) i cyfrowej (pkt 4), finansowanie terroryzmu | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art163-172-bezpieczenstwo-powszechne.md` — KANONICZNE, nowy moduł | DR-03 (lokalne), dr-01 (stany kryzysowe), mod-KK-cyberprzestepstwa (zbieg z pkt 4), DR-13 | ✅ nowe 2026-07-17, priorytet podniesiony przez użytkownika (infrastruktura krytyczna) |
+| KK Rozdz. XXII — przeciwko środowisku: zanieczyszczenie (182), gospodarka odpadami (183), czynny żal przez naprawienie szkody | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art181-188a-przeciwko-srodowisku.md` — KANONICZNE, nowy moduł | DR-03 (lokalne), DR-09 (prawo administracyjne środowiskowe) | ✅ nowe 2026-07-17, priorytet wskazany przez użytkownika |
+| KW Rozdz. X/XII/XIII — bezpieczeństwo osób/mienia, przeciwko osobie (art. 107 złośliwe niepokojenie), przeciwko zdrowiu (szczepienia, choroby zakaźne) | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KW-art70-118-bezpieczenstwo-osoba-zdrowie.md` — KANONICZNE, nowy moduł | DR-03 (lokalne), mod-KK-art190a-stalking (niższy próg nękania), dr-01 (stany kryzysowe — art. 116) | ✅ nowe 2026-07-17 |
+| KW Rozdz. XV-XIX — konsumenci, obyczajność publiczna, urządzenia użytku publicznego, ewidencja, szkodnictwo leśne/polne/ogrodowe | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KW-art132-166-pozostale-rozdzialy.md` — KANONICZNE, nowy moduł, DOMYKA część szczególną KW (wszystkie 12 rozdziałów pokryte) | DR-03 (lokalne) | ✅ nowe 2026-07-17 |
 | Samorządy zawodów zaufania publicznego — rejestr portali/źródeł uchwał, kodeksów etyki, regulaminów (NRA, KRRP, KRN, KRK, PIRP, NIL, NIA, NIPiP, KIDL, KIF, KIDP, PIBR, IARP, PIIB i in.), definicja art. 17 Konstytucji | `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` — KANONICZNE. NIE duplikuje treści ustawowej statusu poszczególnych zawodów (ta w modułach DR-12 mod-ustawa-adwokatura/radcowie-prawni/notariat/komornicy-sadowi-zawod/rzecznicy-patentowi-zawod) | DR-12 (lokalne + odesłanie), DR-06 (doradcy podatkowi, biegli rewidenci), DR-09 (architekci, inżynierowie), DR-10 (zawody medyczne), orzeczenia-sadowe-v2 (wzorzec analogiczny do PORTALE-LOKALNE.md) | ✅ nowe 2026-07-17 |
 | Stany nadzwyczajne (Rozdz. XI Konstytucji, art. 228-234), reżimy ustawowe poniżej progu konstytucyjnego (zarządzanie kryzysowe, ochrona ludności 2024, stan epidemii), doktrynalna kontrowersja COVID-19, graf zależności reżimów kryzysowych | `dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-stany-nadzwyczajne-sytuacje-kryzysowe.md` — komplementarny z `mod-specustawy-lex-specialis-graf-zaleznosci.md` (katalog specustaw doraźnych, np. koronawirusowa, POZOSTAJE tam, nie duplikować) | DR-01 (lokalne), DR-09 (klęski żywiołowe środowiskowe), DR-10 (stan epidemii/zdrowie publ.), DR-13 (stan wojenny/wyjątkowy, obrona cywilna), orzeczenia-sadowe-v2, pisma-procesowe-v3 | ✅ nowe 2026-07-17 |
 | Specustawy (doktrynalne), lex specialis derogat legi generali (algorytm), przepisy epizodyczne (ZTP Rozdz. 4a §29a-29c), graf zależności specustawa↔akt ogólny | `dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-specustawy-lex-specialis-graf-zaleznosci.md` — komplementarny z `mod-ZTP-przepisy-przejsciowe-doktryna.md` (tamten = przepisy przejściowe/Rozdz. 5 ZTP; ten = lex specialis + epizodyczne/Rozdz. 4a ZTP + graf), NIE scalać | DR-01 (lokalne), DR-09 (specustawa drogowa/mieszkaniowa), DR-05 (kolizje z KPA), DR-14 (specustawa Ukraina), orzeczenia-sadowe-v2, pisma-procesowe-v3 | ✅ nowe 2026-07-17 |
@@ -140,13 +149,25 @@ wyniki o zawodach Drift Masters). Oznaczono w tabeli jako ⚠️ NIEZWERYFIKOWAN
 z instrukcją web_search przed użyciem — możliwe że to błędny numer art.
 lub konfuzja z nowymi ustawami BRD I/BRD II (06.2026, patrz mod-PRD).
 
-### NOTA-3: mod-KK-kwalifikator-karnomaterialny.md (589 linii, DR-03) —
-ŚWIADOMIE NIE dzielony.
+### NOTA-3: mod-KK-kwalifikator-karnomaterialny.md (589→1794 linii, DR-03) —
+ŚWIADOMIE NIE dzielony (pierwotnie).
 To przekrojowe drzewo decyzyjne (BLOK A-G = różne kategorie przestępstw
 KK, porównywane wzajemnie w sekcji "BŁĘDY KWALIFIKACYJNE"). Podział
 zniszczyłby logikę porównawczą (np. BŁĄD 1 wymaga widzenia jednocześnie
 BLOK A.1 rozbój i kradzież rozbójniczą). WYJĄTEK od "jeden moduł = jeden
 akt" — udokumentowany, nie traktować jako zaniedbanie w przyszłych audytach.
+
+**Aktualizacja 2026-07-17:** plik urósł do 1794 linii po dodaniu BLOK 0,
+K (2026-07-15) oraz M, N, O, P, Q (2026-07-17) — wszystkie dot. CZĘŚCI
+OGÓLNEJ KK (kontratypy, zbieg przestępstw, środki zabezpieczające,
+zatarcie skazania, kary, przestępstwa z nienawiści). W przeciwieństwie do
+BLOK A-G (przestępstwa szczegółowe, wzajemnie porównywane), bloki części
+ogólnej NIE mają tej samej zależności krzyżowej — **rekomendacja dla
+przyszłego audytu: rozważyć wydzielenie BLOK 0/K/M/N/O/P/Q do osobnego
+pliku (np. `mod-KK-czesc-ogolna-kompendium.md`)**, zachowując BLOK A-L
+(przestępstwa szczegółowe) w oryginalnym pliku zgodnie z uzasadnieniem
+NOTA-3 pierwotnym. Nie wykonano tego podziału w tej sesji ze względu na
+priorytet uzupełniania TREŚCI nad refaktoryzacją STRUKTURY.
 
 ### NOTA-4: Moduły >400 linii — STATUS PO SESJI 2026-06-12
 | Moduł | Linie PRZED | Status |

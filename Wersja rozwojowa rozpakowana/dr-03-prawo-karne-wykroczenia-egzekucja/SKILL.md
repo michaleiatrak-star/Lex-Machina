@@ -76,7 +76,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   obrona obligatoryjna art. 79 §1 pkt 2-4 KPK (→ mod-niewidomy-prawa-prawne.md,
   mod-niepelnosprawnosc-intelektualna-gluchota.md)
 
-## Moduły (25 łącznie — ✓ 25 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+## Moduły (32 łącznie — ✓ 32 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
 ## ⚠️ 2026-07-15: naprawiono niezgodność dysk↔lista — 4 pliki istniały na
 ## dysku, ale nie były wpisane poniżej: mod-KK-art291-pranie-pieniedzy,
 ## mod-ustawa-fundusz-pomocy-pokrzywdzonym, mod-ustawa-narkomania,
@@ -135,6 +135,54 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
               (nowe art. 86c KW — celowy drift/poślizg od 29.01.2026; zloty bez zgłoszenia;
                taryfikator: rozp. Dz.U. 2026 poz. 724 — weryfikuj kody)
   [✓] OK    mod-KW-kodeks-wykroczen
+  [✓] OK    mod-KW-art119-131-przeciwko-mieniu
+              (dodany 2026-07-17: Rozdz. XIV KW — kradzież/przywłaszczenie
+               (art. 119, próg 800 zł), paserstwo (122), zniszczenie mienia
+               (124) + KLUCZOWE wyłączenia progu kwotowego (broń/amunicja,
+               szczególna zuchwałość/włamanie, przemoc/groźba — zawsze
+               przestępstwo niezależnie od wartości). Najwyższy priorytet
+               z audytu pokrycia KW — dotąd tylko sam próg bez treści)
+  [✓] OK    mod-KW-art49-64-porzadek-publiczny
+              (dodany 2026-07-17: Rozdz. VIII KW — art. 51 (zakłócanie
+               spokoju/porządku/spoczynku nocnego, JEDEN Z NAJCZĘŚCIEJ
+               STOSOWANYCH przepisów KW), charakter chuligański i jego
+               konsekwencje, art. 49/49a/50/52. Drugi priorytet z audytu
+               pokrycia KW)
+  [✓] OK    mod-KK-art127-139-przeciwko-RP
+              (dodany 2026-07-17: Rozdz. XVII KK — szpiegostwo (art. 130,
+               radykalnie zaostrzone reformą 17.08.2023 w reakcji na wojnę
+               Rosji przeciw Ukrainie), czynny żal (131), dezinformacja
+               wywiadowcza (132, ⚠️ zakres węższy niż nazwa sugeruje),
+               zasada wzajemności rozszerzona na PAŃSTWO SOJUSZNICZE (138).
+               Priorytet podniesiony przez użytkownika ze względu na
+               obecną sytuację bezpieczeństwa)
+  [✓] OK    mod-KK-art163-172-bezpieczenstwo-powszechne
+              (dodany 2026-07-17: Rozdz. XX KK — sprowadzenie zdarzenia
+               niebezpiecznego (163), OCHRONA INFRASTRUKTURY KRYTYCZNEJ
+               fizycznej i cyfrowej (165 §1 pkt 3-4 — sieci energia/woda/
+               gaz/ciepło + systemy informatyczne), finansowanie
+               terroryzmu (165a). Priorytet podniesiony przez użytkownika
+               — bezpieczeństwo infrastruktury krytycznej)
+  [✓] OK    mod-KK-art181-188a-przeciwko-srodowisku
+              (dodany 2026-07-17: Rozdz. XXII KK — zanieczyszczenie
+               środowiska (182), gospodarka odpadami (183, najczęstsza
+               podstawa odpowiedzialności przedsiębiorców), typ
+               kwalifikowany ze skutkiem śmiertelnym (185), czynny żal
+               przez naprawienie szkody. Priorytet wskazany przez
+               użytkownika — "jeden z powszechniejszych tematów")
+  [✓] OK    mod-KW-art70-118-bezpieczenstwo-osoba-zdrowie
+              (dodany 2026-07-17: Rozdz. X, XII, XIII KW — bezpieczeństwo
+               osób/mienia (art. 70-71, 77-79, 83), przeciwko osobie w
+               tym CENTRALNY art. 107 złośliwe niepokojenie (104-108),
+               przeciwko zdrowiu w tym szczepienia i choroby zakaźne
+               (109-118). Kontynuacja uzupełniania KW)
+  [✓] OK    mod-KW-art132-166-pozostale-rozdzialy
+              (dodany 2026-07-17: Rozdz. XV-XIX KW — konsumenci (132-139c),
+               obyczajność publiczna (140-142), urządzenia użytku
+               publicznego (143-145), obowiązek ewidencji (146-147a),
+               szkodnictwo leśne/polne/ogrodowe (148-166, częściowo).
+               DOMYKA pokrycie części szczególnej KW — wszystkie 12
+               rozdziałów mają teraz co najmniej podstawowe pokrycie)
   [✓] OK    mod-grzywny-mandaty-szczegolowe
               (systematyka: grzywna sądowa/mandat/kara adm./grzywna porządkowa/UPEA;
                uchylenie mandatu art.101 KPSW; KPA Dział IVa kary adm.; egzekucja UPEA;

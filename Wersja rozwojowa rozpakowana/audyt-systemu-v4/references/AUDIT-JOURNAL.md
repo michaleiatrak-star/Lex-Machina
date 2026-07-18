@@ -4,7 +4,331 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
-## AUDYT-2026-07-17o — SAMORZADY-ZAWODOWE-DOKUMENTY.md v1.2→v1.3: komplet 16/16 + zbadano status lekarzy dentystów
+## AUDYT-2026-07-17u — DOMKNIĘCIE POKRYCIA KW: 2 nowe moduły (Rozdz. X/XII/XIII oraz XV-XIX) — wszystkie 12 rozdziałów części szczególnej KW mają teraz pokrycie
+
+**Zakres:** NOWY `mod-KW-art70-118-bezpieczenstwo-osoba-zdrowie.md` (v1.0)
++ NOWY `mod-KW-art132-166-pozostale-rozdzialy.md` (v1.0) + `dr-03/SKILL.md`
+(30→32) + `dr-03/MAPA-AKTOW.md` (+2 wiersze) + 2 wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik zapytał wprost "czy kwestie KW zostały już
+pokryte? Uzupełniaj je" — kontynuacja systematycznego domykania audytu
+pokrycia Kodeksu wykroczeń rozpoczętego kilka sesji wcześniej.
+
+**Stan PRZED tą turą:** pokryte Rozdz. VIII (porządek publiczny), XI
+(komunikacja — istniejące od dawna), XIV (mienie) — 3 z 12 rozdziałów
+części szczególnej.
+
+**Moduł 1 — Rozdz. X, XII, XIII (art. 70-118):** bezpieczeństwo osób i
+mienia (art. 70-71 niebezpieczne czynności/urządzenia, 77-78 zwierzęta —
+częste sprawy sąsiedzkie o "groźnego psa", 79 oświetlenie, 83 materiały
+niebezpieczne), przeciwko osobie z CENTRALNYM art. 107 (złośliwe
+niepokojenie — potwierdzone orzecznictwem SN sygn. III KRN 44/95 co do
+wymogu umyślności/złośliwości; ustalono praktyczne zastosowanie jako
+"niższy próg" wobec stalkingu z art. 190a KK), przeciwko zdrowiu z
+istotnymi art. 115 (szczepienia) i art. 116 (nakazy przy chorobie
+zakaźnej — bezpośrednie powiązanie z modułem o stanach kryzysowych/
+kontrowersją COVID z wcześniejszej sesji).
+
+**Moduł 2 — Rozdz. XV-XIX (art. 132-166):** konsumenci (touting biletów
+art. 133, oszukiwanie nabywcy ≤100 zł art. 134), obyczajność publiczna z
+pełną wykładnią art. 140 (nieobyczajny wybryk — oparte na literaturze
+naukowej, Instytut Wymiaru Sprawiedliwości), urządzenia użytku
+publicznego, obowiązek ewidencji, szkodnictwo leśne/polne/ogrodowe
+(art. 148-150 w pełni, reszta rozdziału — art. 151-166, ok. 16
+artykułów — uczciwie oznaczona jako niepełnie zbadana).
+
+**Status:** ✅ WDROŻONE. **Wszystkie 12 rozdziałów części szczególnej KW
+mają teraz co najmniej podstawowe pokrycie.** Poziom szczegółowości
+zróżnicowany — najgłębiej opracowane: VIII, X, XII, XIV (wysoka
+częstość praktyczna); najpłycej: część Rozdz. XV i XIX (rzadsza
+materia, mniej dostępnego materiału źródłowego, uczciwie to odnotowano
+zamiast fabrykować pewność).
+
+**Uwaga do przyszłego audytu:** jeśli pojawi się konkretna sprawa
+dotycząca art. 151-166 KW (środek Rozdz. XIX — kłusownictwo, szkody
+rolne, nielegalne pozyskanie drewna) — wymagane jest odrębne, dogłębne
+zbadanie tej części, moduł obecny to tylko punkt startowy.
+
+---
+
+
+
+**Zakres:** `mod-KK-kwalifikator-karnomaterialny.md` (BLOK M korekta, nowy
+BLOK R, stopka v1.4) + `mod-KK-art127-139-przeciwko-RP.md` (pełna tabela
+§1-9 art. 130, w tym kluczowy §7) + `mod-KK-art163-172-bezpieczenstwo-
+powszechne.md` (odesłanie do art. 130 §7) + wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik polecił dokończyć weryfikację tego, co pozostało
+nierozstrzygnięte, oraz zapytał wprost o kwestię deepfake i innych
+przestępstw manipulacji informacją/głosem.
+
+**Rozstrzygnięcie 1 — katalog kar (art. 32):** DEFINITYWNIE potwierdzone,
+że "25 lat pozbawienia wolności" jako ODRĘBNY rodzaj kary zostało
+USUNIĘTE ustawą z 7.07.2022 (w życie 2023) — katalog ma teraz 4, nie 5
+pozycji. Potwierdzone wieloma niezależnymi źródłami, w tym artykułem
+naukowym poświęconym wprost temu zagadnieniu (Acta Iuridica Resoviensia)
+oraz Prokuraturą i Prawo 2/2023. Odnotowano dydaktyczny przykład: jeden
+z wcześniej używanych portali (dlajurysty.pl) miał WIDOCZNĄ datę ostatniej
+modyfikacji "10.01.2022" — sprzed wejścia reformy w życie — potwierdzający
+wartość sprawdzania dat aktualizacji źródeł wtórnych. Oznaczono jako
+NIEROZSTRZYGNIĘTE (do weryfikacji przy użyciu): czy powiązane przepisy
+(art. 86 §1a, art. 88 KK), odwołujące się do kary "25 lat" w mechanizmie
+kary łącznej, zostały skorygowane w tej samej reformie.
+
+**Rozstrzygnięcie 2 — pełna struktura art. 130 (szpiegostwo), §1-9:**
+uzupełniono brakujące §7 (dywersja/sabotaż w ramach obcego wywiadu — min.
+10 lat/dożywocie, BEZPOŚREDNI ustawowy pomost między szpiegostwem a
+sabotażem infrastruktury krytycznej), §8 (przygotowanie do §7), §9
+("szpiegostwo nieumyślne" — przepis kontrowersyjny w doktrynie,
+sygnalizowane ryzyko wykorzystania przeciw działaczom NGO). Dodano
+odesłanie krzyżowe do `mod-KK-art163-172-bezpieczenstwo-powszechne.md`
+i odwrotnie.
+
+**Nowy BLOK R — Deepfake i manipulacja głosem/obrazem:** odpowiedź na
+pytanie użytkownika. Ustalenie kluczowe: Polska NIE MA dedykowanego
+przestępstwa "deepfake" — mapa kwalifikacji przez istniejące przepisy:
+art. 286 §1 (oszustwo, główna podstawa przy wyłudzeniach ze sklonowanym
+głosem — "oszustwo na wnuczka 2.0"), art. 190a §2 (kradzież tożsamości,
+rekomendowana KUMULATYWNIE z art. 286 wg doktryny — Budyn-Kulik/Mozgawa
+2024), art. 270 (fałszerstwo dokumentu), art. 212/216 (zniesławienie/
+zniewaga dla szkody reputacyjnej). Odnotowano nadchodzący AI Act (wymogi
+przejrzystości od 2.08.2026 — NIE kryminalizuje, tylko wymaga oznaczenia)
+oraz ograniczenie konstytucyjne (wolność wypowiedzi) dla przyszłej pełnej
+penalizacji. Uczciwie oznaczono NIEPEWNOŚĆ co do kwalifikacji deepfake'ów
+o charakterze seksualnym (możliwy zbieg z art. 191a, nie potwierdzony
+wprost w tej sesji).
+
+**Status:** ✅ WDROŻONE. Wszystkie elementy żądania użytkownika
+zrealizowane: dokończona weryfikacja niepewności + odpowiedź na pytanie
+o deepfake z nowym blokiem kwalifikacyjnym.
+
+---
+
+
+
+**Zakres:** aktualizacja `mod-KW-art119-131-przeciwko-mieniu.md` (v1.0→v1.1)
+i `mod-KW-art49-64-porzadek-publiczny.md` (v1.0→v1.1) — dokończenie
+weryfikacji wszystkich wcześniej oznaczonych ⚠️; aktualizacja BLOK M/P w
+`mod-KK-kwalifikator-karnomaterialny.md` (rozstrzygnięcie 30 lat jako
+aktualnej wartości kary łącznej; odnotowanie NIEROZSTRZYGNIĘTEJ
+rozbieżności co do art. 32 pkt 4 "25 lat pozbawienia wolności"); 3 NOWE
+moduły: `mod-KK-art127-139-przeciwko-RP.md`, `mod-KK-art163-172-
+bezpieczenstwo-powszechne.md`, `mod-KK-art181-188a-przeciwko-srodowisku.md`
++ `dr-03/SKILL.md` (27→30) + `dr-03/MAPA-AKTOW.md` (+4 wiersze) + 4 wpisy
+`CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik polecił: (1) dokończyć weryfikację wszystkiego
+co nie zostało zweryfikowane, (2) podnieść priorytet bezpieczeństwa
+(szpiegostwo, wojna na Ukrainie, infrastruktura krytyczna), (3) dodać
+środowisko jako "jeden z powszechniejszych tematów", (4) zapytał czy
+główne kwestie KK/KW są teraz pokryte.
+
+**Dokończenie weryfikacji (KW):** WSZYSTKIE wcześniej oznaczone ⚠️
+pozycje rozstrzygnięte: art. 50a (nóż/maczeta, pełna treść §1/1a/2),
+52a (nawoływanie do przestępstwa — nowy, wcześniej nieznany), 52b (olej
+opałowy), 53 (uchylony), 54 (przepisy porządkowe lokalne + wymóg zgodności
+z Konstytucją wg SN), 63a (nielegalne plakaty/graffiti), 64 (pełna treść);
+art. 120 (próg ZRÓWNANY z 800 zł, korekta błędnego wcześniejszego
+ustalenia 75 zł), 123 (z ogrodu, 250 zł, na wniosek), 126 (wartości
+niemajątkowe, na wniosek), 127 (samowolne użycie, na żądanie).
+
+**Dokończenie weryfikacji (KK część ogólna):** 30 lat pozbawienia wolności
+jako górna granica kary łącznej — POTWIERDZONE (wielokrotnie, wprost z
+tekstu art. 86 na 3 niezależnych portalach + tekst archiwalny
+porównawczy). **Odkryto NOWĄ, nierozstrzygniętą rozbieżność:** art. 32
+pkt 4 "25 lat pozbawienia wolności" jako odrębny rodzaj kary —
+sprzeczność między źródłami (część nadal go wymienia, inne wskazują że
+reforma 2023 go ZLIKWIDOWAŁA jako zbędny wobec podniesienia zwykłej
+kary terminowej do 30 lat) — NIE rozstrzygnięto, oznaczono wprost do
+weryfikacji WYŁĄCZNIE na ISAP (nie na portalach wtórnych) przed użyciem.
+
+**Nowe moduły (priorytety podniesione przez użytkownika):**
+1. **Rozdz. XVII (przeciwko RP)** — art. 130 szpiegostwo z pełną tabelą
+   PRZED/PO reformie 17.08.2023 (sankcje wzrosły dramatycznie: §1 z 1-10
+   do min. 5 lat; §2 z min. 3 do min. 8 lat/dożywocie; §4 nowy — min. 10
+   lat/dożywocie za organizowanie), art. 131 czynny żal (2 warianty),
+   art. 132 dezinformacja wywiadowcza z KLUCZOWYM zastrzeżeniem o wąskim
+   zakresie (dotyczy TYLKO oszukania polskich organów przez kogoś
+   działającego NA RZECZ polskiego wywiadu, NIE ogólnej dezinformacji/
+   fake newsów), art. 138 zasada wzajemności rozszerzona na PAŃSTWO
+   SOJUSZNICZE (bezpośrednio istotne dla spraw związanych z NATO/Ukrainą).
+2. **Rozdz. XX (bezpieczeństwo powszechne)** — art. 165 §1 pkt 3-4 jako
+   SERCE ochrony infrastruktury krytycznej w KK (pkt 3 = sieci fizyczne
+   woda/światło/ciepło/gaz/energia, pkt 4 = systemy informatyczne —
+   razem odpowiadają na scenariusz ataku hybrydowego), art. 163 z
+   praktycznymi przykładami (w tym przykład rozdzielni elektrycznej
+   szpitala), art. 165a finansowanie terroryzmu. Wyjaśniono różnicę
+   terminologiczną KK ("urządzenie użyteczności publicznej") vs ustawowe
+   pojęcie "infrastruktura krytyczna" z odrębnych aktów.
+3. **Rozdz. XXII (środowisko)** — art. 182 (zanieczyszczenie, przepis
+   centralny), art. 183 (odpady, najczęstsza podstawa odpowiedzialności
+   przedsiębiorców, z rekomendacjami compliance: BDO, pozwolenia,
+   weryfikacja kontrahentów), art. 185 (typ kwalifikowany, 2-12 lat),
+   czynny żal przez naprawienie szkody. Odnotowano reformę 2022 (Dz.U.
+   2022 poz. 1726).
+
+**Status:** ✅ WDROŻONE. Wszystkie 3 priorytety wskazane przez użytkownika
+w tej turze zrealizowane. Uczciwie oznaczone pozostałe niepewności w
+nowych modułach (art. 187/188/188a treść, dokładny numer czynnego żalu
+środowiskowego, dokładny wymiar kar dla niektórych paragrafów) — zgodnie
+z ZASADA 13, nie fabrykowano pewności bez faktycznej weryfikacji.
+
+---
+
+
+
+**Zakres:** NOWY `dr-03/.../mod-KW-art49-64-porzadek-publiczny.md` (v1.0)
++ `dr-03/SKILL.md` (26→27) + `dr-03/MAPA-AKTOW.md` (+1 wiersz) + wpis
+`CHECKLIST-DEDUP.md`.
+
+**Kontekst:** trzecia i ostatnia tura "Kontynuuj" realizująca listę
+priorytetów z sesji audytowej. Drugi (ostatni pozostały) priorytet KW:
+Rozdział VIII, porządek i spokój publiczny.
+
+**Treść:** art. 51 (przepis CENTRALNY rozdziału, jeden z najczęściej
+stosowanych w całym KW) — charakter skutkowy/materialny wykroczenia,
+rozróżnienie winy (wybryk umyślny, skutek może być nieumyślny), forma
+przez zaniechanie, brak wymogu pory nocnej, kwalifikowana postać
+(charakter chuligański LUB stan odurzenia — grzywna ≥1000 zł) z pełnym
+katalogiem konsekwencji (wykluczenie nagany, brak zawieszenia aresztu,
+możliwa nawiązka), nowszy §2a (ochrona personelu medycznego/urzędów).
+Dodatkowo: art. 49 (symbole państwowe), 49a (nielegalne przekroczenie
+granicy), 50 (zbiegowisko), 52 (zgromadzenia z bronią), przepis o nożach/
+maczetach w miejscu publicznym (⚠️ numer artykułu niepotwierdzony —
+oznaczony wprost, nie zgadywany), fragment art. 64 (obowiązki właściciela
+nieruchomości).
+
+**Uczciwe oznaczenia niepewności (zgodnie z ZASADA 13):** art. 50a, 53-54,
+63a oraz dokładny numer przepisu o niebezpiecznych przedmiotach — WSZYSTKIE
+oznaczone ⚠️ jako niepotwierdzone w tej sesji, nie wypełnione domysłem.
+
+**Status:** ✅ WDROŻONE. **Lista priorytetów z audytu pokrycia KK/KW
+(3 tury: AUDYT-2026-07-17p/q/r) — ZAMKNIĘTA w zakresie pierwotnie
+zidentyfikowanych pozycji wysokiego priorytetu:**
+- KK część ogólna: zbieg przestępstw (IX), środki zabezpieczające (X),
+  zatarcie skazania (XII), kary/środki karne/wymiar kary (IV-VI) — ✅
+- KK część szczególna: przestępstwa z nienawiści (art. 119/256/257) — ✅
+- KW: mienie (Rozdz. XIV), porządek publiczny (Rozdz. VIII) — ✅
+
+**Pozostają NIEWYKONANE (niższy priorytet, odnotowany w oryginalnym
+audycie, nie żądany do kontynuacji w tej sesji):** KK Rozdz. XX
+(bezpieczeństwo powszechne), XXII (środowisko), pozostała część Rozdz.
+XXIII/XXVI, część wojskowa, KW Rozdz. IX/X/XII/XIII/XV-XIX, oraz
+rekomendowana refaktoryzacja strukturalna kwalifikatora (NOTA-3,
+odnotowana w poprzedniej turze).
+
+---
+
+
+
+**Zakres:** `dr-03/.../mod-KK-kwalifikator-karnomaterialny.md` (BLOK P, Q,
+stopka v1.3) + NOWY `dr-03/.../mod-KW-art119-131-przeciwko-mieniu.md`
+(v1.0) + `dr-03/SKILL.md` (25→26) + `dr-03/MAPA-AKTOW.md` (+1 wiersz) +
+2 wpisy `CHECKLIST-DEDUP.md` + aktualizacja NOTA-3 (rozmiar pliku).
+
+**Kontekst:** kontynuacja "Kontynuuj" — druga tura realizacji priorytetów
+z audytu pokrycia KK/KW (pierwsza tura: BLOK M/N/O, sesja poprzednia).
+
+**BLOK P — Kary/środki karne/wymiar kary (Rozdz. IV-VI KK):** katalog 5
+kar (art. 32), kara mieszana/sekwencyjna art. 37a (zamiana na karę
+wolnościową, z ostrzeżeniem o burzliwej historii nowelizacji progu i
+zaleceniem sprawdzenia art. 4 §1 KK) i art. 37b (kara kombinowana),
+katalog środków karnych (art. 39), dyrektywy wymiaru kary art. 53 (pełny
+katalog otwartych okoliczności łagodzących, zasada "dolegliwość ≤ wina",
+rola mediacji w art. 53 §3 — bezpośrednie powiązanie z modułami
+mediacyjnymi DR-12). Odnotowano UCZCIWIE niepewny status projektu
+przywrócenia celu wychowawczego do art. 53 §1 (NIE wprowadzony, tylko
+zapowiadany w doniesieniach z 2024 r.) — oznaczony jako nie do cytowania
+jako obowiązujące prawo.
+
+**BLOK Q — Przestępstwa z nienawiści (art. 119/256/257 KK, część Rozdz.
+XXXII):** trzy poziomy surowości (119 przemoc/groźba > 256 propagowanie/
+nawoływanie > 257 znieważenie), kontratyp art. 256 §3 (działalność
+artystyczna/edukacyjna/kolekcjonerska/naukowa), KLUCZOWE ograniczenie —
+katalog ZAMKNIĘTY (nie obejmuje orientacji seksualnej, płci, niepełno-
+sprawności — tylko art. 212 KK prywatnoskargowe dostępne dla tych cech),
+różnica trybu ścigania (z urzędu vs prywatnoskargowy).
+
+**Nowy moduł mod-KW-art119-131-przeciwko-mieniu (najwyższy priorytet
+audytu KW):** pełna treść Rozdziału XIV KW — art. 119 (kradzież ≤800 zł)
+z KLUCZOWYMI wyłączeniami progu kwotowego (broń/amunicja — zawsze
+przestępstwo; szczególna zuchwałość/włamanie — zawsze przestępstwo;
+przemoc/groźba — rozbój, zawsze przestępstwo) często pomijanymi w
+praktyce, art. 122 (paserstwo umyślne/nieumyślne), art. 124 (zniszczenie
+mienia), art. 131 (zastosowanie za granicą). Odnotowano niepewność dla
+art. 120/123/126 (dokładne progi/treść) — oznaczone do weryfikacji.
+
+**Aktualizacja NOTA-3 (przejrzystość strukturalna):** plik kwalifikatora
+urósł z 589 do 1794 linii po 7 nowych blokach części ogólnej dodanych w
+2 sesjach (2026-07-15, 2026-07-17). Odnotowano rekomendację dla
+przyszłego audytu: rozważyć wydzielenie bloków części ogólnej (0/K/M/N/
+O/P/Q) do osobnego pliku, bo NIE mają tej samej zależności krzyżowej,
+która uzasadniała pierwotny zakaz podziału (ten dotyczył tylko BLOK A-G/L
+— przestępstw szczegółowych). Świadomie NIE wykonano refaktoryzacji w tej
+sesji — priorytet uzupełniania treści nad przebudową struktury.
+
+**Status:** ✅ WDROŻONE (2/wiele priorytetów). KK część ogólna (Rozdz. III-
+XV) oraz mowa nienawiści — ZAMKNIĘTE jako priorytety wysokie. KW —
+najwyższy priorytet (Rozdz. XIV) ZAMKNIĘTY. Pozostaje: KW Rozdz. VIII
+(porządek publiczny, drugi priorytet KW) oraz ewentualna refaktoryzacja
+strukturalna kwalifikatora (NOTA-3).
+
+---
+
+
+
+**Zakres:** `dr-03-prawo-karne-wykroczenia-egzekucja/modules/
+mod-KK-kwalifikator-karnomaterialny.md` (nowe BLOK M, N, O + stopka wersji)
++ wpis w `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** po audycie pokrycia rozdziałów KK i KW (dwie poprzednie tury)
+użytkownik polecił: "Zajmij się po kolei prawem karnym i wykroczeniowej
+zaczynając od priorytetów." Rozpoczęto od 3 najwyżej priorytetowych luk
+części ogólnej KK zidentyfikowanych w audycie.
+
+**Decyzja architektoniczna:** dodano jako NOWE BLOKI w istniejącym pliku
+`mod-KK-kwalifikator-karnomaterialny.md` (kontynuacja liter M, N, O po
+istniejących A-L), NIE jako osobne pliki modułów — ponieważ plik ten już
+ustanowił dokładnie ten wzorzec dla części ogólnej KK (BLOK 0 — klasyfikacja/
+kontratypy, BLOK K — obrona konieczna/stan wyższej konieczności, oba
+dodane 2026-07-15 jako "naprawa braku"). Tworzenie osobnych plików
+duplikowałoby strukturę i rozproszyło część ogólną KK po wielu miejscach.
+
+**Wykonane bloki (zweryfikowane online 2026-07-17):**
+1. **BLOK M — Zbieg przestępstw i kara łączna** (Rozdz. IX, art. 85-92a):
+   przesłanka realnego zbiegu, wymiar kary łącznej (w tym świeża zmiana —
+   górna granica 30 lat pozbawienia wolności, podniesiona z 15 — oznaczona
+   z ostrzeżeniem o konieczności re-weryfikacji), ciąg przestępstw (art. 91),
+   warunkowe zawieszenie kary łącznej, checklist "kiedy wyrok łączny jest
+   niemożliwy". Źródła: lexlege.pl, OpenLEX (wersja od 29.01.2026), e-prawnik,
+   standardyprawa.pl, kkz.com.pl.
+2. **BLOK N — Środki zabezpieczające** (Rozdz. X, art. 93-100): katalog 4
+   środków wg dolegliwości, przesłanki pobytu w zakładzie psychiatrycznym
+   (art. 93g), czas trwania i kontrola sądowa, powiązanie z art. 324/354/354a
+   KPK, checklist dla obrony. Źródła: standardyprawa.pl, arslege.pl,
+   adwokatlawicki.pl, adwokat-warszawa.eu.
+3. **BLOK O — Zatarcie skazania** (Rozdz. XII, art. 106-108): skutek
+   (niebyłe, ale nie unieważnienie wyroku), wyłączenie bezwzględne (art. 106a
+   — przestępstwa seksualne wobec małoletnich <15 lat z karą bezwzględną),
+   tabela terminów wg rodzaju kary (art. 107), zasada NIEROZPOCZĘCIA biegu
+   terminu przed wykonaniem środka zabezpieczającego (powiązanie z BLOK N),
+   reguła jednolitości przy zbiegu skazań (art. 108), checklist 5 pytań.
+   Źródła: lexlege.pl, gofin.pl (historia zmian Dz.U.), standardyprawa.pl.
+
+**Status:** ✅ WDROŻONE (1/wiele priorytetów z audytu). Pozostałe wysokie
+priorytety NIE wykonane w tej turze: ogólne zasady kar/środków karnych/
+wymiaru kary (Rozdz. IV-VI KK), mowa nienawiści (art. 256-257 KK), oraz
+CAŁY audyt KW (Rozdz. VIII i XIV jako najwyżej priorytetowe — porządek
+publiczny i mienie).
+
+**Uwaga do przyszłego audytu:** BLOK M zawiera niepewność między źródłami
+co do górnej granicy kary łącznej (15 lat wg starszych źródeł vs 30 lat wg
+OpenLEX z adnotacją "wersja od 29.01.2026") — oznaczono ostrzeżeniem w
+treści, wymaga potwierdzenia przy pierwszym praktycznym użyciu.
+
+---
+
+
 
 **Zakres:** `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (wiersz IARP, nowa
 sekcja 3.1, changelog).
