@@ -68,15 +68,73 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (22 łącznie — ✓ 22 OK, ☐ 0 STUB)
+## Moduły (27 łącznie — ✓ 27 OK, ☐ 0 STUB)
 
 ```
   [✓] OK    mod-KC-cywilne-zobowiazania-odpowiedzialnosc
   [✓] OK    mod-KC-spadki
+              (v2.0, rozbudowane 2026-07-19: zapis zwykły/windykacyjny,
+               polecenie testamentowe, wykonawca testamentu,
+               wydziedziczenie [odróżnione od niegodności dziedziczenia],
+               pełna odpowiedzialność za długi spadkowe, zrzeczenie się
+               dziedziczenia, BRAK SPADKOBIERCÓW — dziedziczenie przez
+               gminę/Skarb Państwa art. 935 KC [odpowiedź na pytanie
+               użytkownika]; spadki transgraniczne/EPS i dziedziczenie
+               gospodarstw rolnych oznaczone jako punkt startowy)
   [✓] OK    mod-KC-konsumenckie
   [✓] OK    mod-KC-ubezpieczenia
   [✓] NOWY  mod-KC-kredyty-frankowe
   [✓] OK    mod-KRO-rodzinne
+              (rozbudowany 2026-07-19: dodano EKSMISJĘ MAŁŻONKA [art. 58
+               §2-4, z zastrzeżeniem SN że nie zastępuje podziału
+               majątku], OBOWIĄZEK ALIMENTACYJNY szerszego kręgu
+               [dziadkowie-wnuki, rodzeństwo, zasada pomocniczości],
+               SUROGACJĘ [zasada mater semper certa est, szara strefa
+               prawna], KONKUBINAT [praktyczne braki i narzędzia
+               ochrony], ZMIANĘ IMIENIA I NAZWISKA [ustawa 2008,
+               odrębna od art. 59 KRO])
+  [✓] OK    mod-ubezwlasnowolnienie-opieka-kuratela
+              (dodany 2026-07-19: ubezwłasnowolnienie całkowite/
+               częściowe [art. 13/16 KC], procedura, hierarchia
+               opiekunów [art. 176 KRO], SYTUACJA BRAKU RODZINY —
+               mechanizm przerzucenia poszukiwania opiekuna na OPS/MOPS
+               [stały nabór kandydatów], kuratela dla osoby
+               niepełnosprawnej art. 183 KRO jako instytucja odrębna.
+               Odpowiedź na szczegółowe pytanie użytkownika)
+  [✓] OK    mod-KRO-zawarcie-malzenstwa-bigamia-transgraniczne
+              (rozbudowany 2026-07-19: dodano sekcje SEPARACJA
+               [art. 61¹-61⁶, różnice od rozwodu — rozkład tylko
+               zupełny nie trwały, brak zakazu ponownego małżeństwa
+               NIE działa — działa ODWROTNIE], USTRÓJ MAJĄTKOWY
+               MAŁŻEŃSKI/INTERCYZA [art. 31-54, katalog zamknięty
+               ustrojów], USTALENIE OJCOSTWA [uznanie + sądowe,
+               odrębne od zaprzeczenia, + zapowiedziana reforma 2026
+               domniemania z art. 62] — w pliku mod-KRO-rodzinne.md)
+  [✓] OK    mod-KRO-przysposobienie-adopcja-miedzynarodowa
+              (nadrobienie zaległości w SKILL.md — moduł już istniał:
+               przysposobienie krajowe [3 rodzaje: pełne/niepełne/
+               całkowite], przysposobienie międzynarodowe wg Konwencji
+               haskiej 1993 [zasada subsydiarności, oba kierunki —
+               cudzoziemiec w Polsce / Polacy za granicą], pasierb
+               transgraniczny)
+  [✓] OK    mod-piecza-zastepcza-rodzina-zastepcza
+              (dodany 2026-07-19: piecza zastępcza jako instytucja
+               ODRĘBNA od przysposobienia [opieka czasowa, więź prawna
+               z rodziną biologiczną trwa], rodzaje [spokrewniona —
+               "adopcja przez rodzinę" w potocznym rozumieniu,
+               niezawodowa, zawodowa w 3 wariantach, rodzinny dom
+               dziecka], procedura umieszczenia, zasada nierozdzielania
+               rodzeństwa nawet transgranicznie. Odpowiedź na pytanie
+               użytkownika o "opiekę zastępczą")
+              (dodany 2026-07-19: zawarcie małżeństwa [forma cywilna/
+               konkordatowa, przeszkody małżeńskie], bigamia [pełne
+               opracowanie cywilne + karne, konwalidacja], małżeństwo
+               zagraniczne [locus regit actum, transkrypcja, klauzula
+               porządku publicznego], bigamia zagraniczna w kraju
+               dopuszczającym, małżeństwo jednopłciowe [PRZEŁOMOWY
+               wyrok TSUE C-713/23 z 25.11.2025 + NSA z 20.03.2026 —
+               obowiązek transkrypcji dla par UE, temat żywy/sporny
+               politycznie]. Odpowiedź na pytanie użytkownika)
               (v1.1.0 2026-07-02: +mediacja rozwodowa art.436/445² KPC,
                +OZSS rozszerzone, +świadkowie w sprawach rozwodowych —
                pointer do shared/MOD-ATAK-NA-SWIADKA.md, bez duplikacji)
@@ -103,6 +161,17 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   [✓] OK    mod-ustawa-UZNK-nieuczciwa-konkurencja
   [✓] OK    mod-ustawa-UOKIK-antymonopolowe
   [✓] OK    mod-ustawa-monopole-panstwowe
+  [✓] OK    mod-rzeczy-znalezione-zasiedzenie
+              (dodany 2026-07-18: ustawa o rzeczach znalezionych 2015
+               [obowiązki znalazcy, znaleźne 1/10 wartości, nabycie
+               własności po roku/2 latach, kategorie szczególne — broń,
+               wojskowe, zabytki]; PEŁNE opracowanie zasiedzenia [art.
+               172-176 KC — zastępuje dotychczasowy 5-linijkowy szkielet
+               w ANEKS D mod-KC-cywilne-zobowiazania]: kryteria dobrej/
+               złej wiary, doliczanie posiadania poprzednika, ograniczenie
+               rolne 300 ha, pułapka współwłasności SN IV CSK 117/12;
+               potwierdzenie że przywłaszczenie mienia [karne] już dobrze
+               pokryte — bez duplikacji)
               (dodany 2026-07-18: podstawa konstytucyjna art. 216 ust. 3
                [ustawa + ważny interes społeczny], monopol na gry
                hazardowe [Totalizator Sportowy], operator wyznaczony

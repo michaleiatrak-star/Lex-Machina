@@ -18,7 +18,9 @@ Nie cytuj literalnego brzmienia przepisu bez aktualnego sprawdzenia źródła. P
 - właściwy organ i tryb zaskarżenia.
 
 ## 2. Zakres spraw
-- wycinka drzew
+- wycinka drzew — PEŁNE opracowanie (art. 83-90, progi obwodu pnia,
+  wyjątki, kary): `mod-srodowisko-wycinka-odpady-niebezpieczne-
+  rekultywacja.md` (dodane 2026-07-18), NIE duplikuj tutaj
 - szkody łowieckie
 - decyzje Lasów Państwowych
 - formy ochrony przyrody

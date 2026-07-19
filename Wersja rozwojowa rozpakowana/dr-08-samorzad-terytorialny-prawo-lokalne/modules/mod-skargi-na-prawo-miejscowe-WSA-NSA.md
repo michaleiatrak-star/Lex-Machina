@@ -86,6 +86,6 @@ Interes prawny musi być:
 
 **Output:** Kwalifikacja skargi → wezwanie → termin → interes prawny → zarzuty → dowody → rekomendacja.
 
-**Powiązania:** `mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa` | `mod-nadzor-wojewody-RIO-legalnosc-uchwal` | `dr-04` → `mod-KPA-postepowanie-administracyjne` | `pisma-procesowe-v3`
+**Powiązania:** `mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa` | `mod-nadzor-wojewody-RIO-legalnosc-uchwal` | `dr-05` → `mod-KPA-postepowanie-administracyjne` | `pisma-procesowe-v3`
 
 **Źródła:** USG: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250001153 | PPSA: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000143

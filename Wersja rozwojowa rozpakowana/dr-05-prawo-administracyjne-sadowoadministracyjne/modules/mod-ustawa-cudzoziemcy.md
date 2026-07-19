@@ -291,7 +291,7 @@ web_search: "ustawa praca cudzoziemców Dz.U. 2025 poz. 621 elektronizacja isap"
 |---|---|
 | Zezwolenia na pracę cudzoziemców (typy A-S, matryca dokument→praca) | `mod-ustawa-cudzoziemcy-zatrudnianie.md` |
 | Prawo pracy cudzoziemców (szczegóły) | `dr-04` → `mod-ustawa-cudzoziemcy` |
-| KPA (odwołanie od decyzji administracyjnej) | `dr-04` → `mod-KPA-postepowanie-administracyjne` |
+| KPA (odwołanie od decyzji administracyjnej) | `dr-05` → `mod-KPA-postepowanie-administracyjne` |
 | Prawa człowieka (ETPC art. 3 i 8) | `dr-14` → `mod-EKPC-ETPC-prawa-czlowieka` |
 | Pismo: odwołanie / skarga do WSA | `pisma-procesowe-v3` |
 

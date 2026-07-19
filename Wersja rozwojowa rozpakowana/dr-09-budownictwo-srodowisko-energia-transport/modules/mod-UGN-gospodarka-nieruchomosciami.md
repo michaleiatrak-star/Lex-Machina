@@ -80,7 +80,9 @@ wczytaj wg potrzeby sprawy):
 - umowa deweloperska (12 przypadków odstąpienia, MRP, DFG, roszczenia nabywcy) —
   `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-deweloperska.md`
 - rękojmia (wady fizyczne i prawne — termin 5 lat od wydania/stwierdzenia wady),
-  zasiedzenie (20/30 lat + ograniczenia dla nieruchomości rolnych), służebności —
+  zasiedzenie (20/30 lat + ograniczenia dla nieruchomości rolnych — PEŁNE
+  opracowanie: `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-
+  rzeczy-znalezione-zasiedzenie.md`, dodane 2026-07-18), służebności —
   KC, sekcja powyżej w tym module + `shared/ROSZCZENIA.md`
 - wspólnota mieszkaniowa (uchwały, zarząd, windykacja zaległości) i najem
   (umowa, wypowiedzenie, ochrona lokatora, eksmisja + wyjątki od zakazu zimowego) —

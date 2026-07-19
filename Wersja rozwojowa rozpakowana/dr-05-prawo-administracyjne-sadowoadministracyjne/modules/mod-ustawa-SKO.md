@@ -94,7 +94,7 @@ SKO NIE może orzec na niekorzyść strony odwołującej się
 
 **Output:** 1. Kwalifikacja (właściwość SKO); 2. Terminy; 3. Zarzuty merytoryczne; 4. Ryzyko reformatio in peius; 5. Strategia (po decyzji SKO: WSA); 6. Rekomendacja.
 
-**Powiązania:** `dr-04` → `mod-KPA-postepowanie-administracyjne` | `dr-08` (samorząd terytorialny) | `pisma-procesowe-v3`
+**Powiązania:** `dr-05` → `mod-KPA-postepowanie-administracyjne` | `dr-08` (samorząd terytorialny) | `pisma-procesowe-v3`
 
 **Źródła:** https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20230000825
 

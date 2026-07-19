@@ -54,9 +54,16 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W21 Informacja przetworzona (UDIP art. 3 — "szczególna istotność")
 - BAS-W29 Pełnomocnik z urzędu — prawo do sądu (art. 117 KPC)
 
-## Moduły (12 łącznie — ✓ 12 OK, ☐ 0 STUB)
+## Moduły (13 łącznie — ✓ 13 OK, ☐ 0 STUB)
 
 ```
+  [✓] OK    mod-KPA-postepowanie-administracyjne
+              (PRZENIESIONY 2026-07-19 z DR-04, gdzie był błędnie
+               umiejscowiony — KPA/PPSA to najbardziej fundamentalne
+               akty prawa administracyjnego, teraz kanonicznie tutaj.
+               ROZBUDOWANY 2026-07-19 o sekcję 4a: ugoda administracyjna,
+               milczące załatwienie sprawy, wydawanie zaświadczeń,
+               skargi i wnioski Działu VIII [odróżnione od skargi do WSA])
   [✓] OK    mod-UDIP-dostep-informacji-publicznej
   [✓] OK    mod-UPEA-egzekucja-administracyjna
   [✓] OK    mod-ustawa-cudzoziemcy
@@ -76,12 +83,15 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   [✓] OK    mod-ustawa-sygnalisci
 ```
 
-## Uwaga: KPA i PPSA
+## KPA i PPSA — teraz kanonicznie w DR-05
 
 ```
 KPA (Dz.U. 2025 poz. 1691) i PPSA (Dz.U. 2026 poz. 143) są kanonicznie
-opracowane w DR-04 → mod-KPA-postepowanie-administracyjne.
-DR-05 zawiera akty szczegółowe prawa administracyjnego materialnego i procesowego.
+opracowane W TYM SKILLU → mod-KPA-postepowanie-administracyjne
+(PRZENIESIONE 2026-07-19 z DR-04, gdzie były historycznie umiejscowione
+— logiczniejsze miejsce to DR-05, zgodnie z nazwą skilla).
+DR-05 zawiera RÓWNIEŻ akty szczegółowe prawa administracyjnego
+materialnego i procesowego (pozostałe moduły powyżej).
 ```
 
 ## Jak wywołać
@@ -98,7 +108,7 @@ view /mnt/skills/user/dr-05-prawo-administracyjne-sadowoadministracyjne/MAPA-AKT
 
 ## Powiązania zewnętrzne
 - Wchodzi z: `prawo-polskie-v2` → `ROUTING-MAP.md` → ten skill
-- KPA / PPSA: `dr-04` → `mod-KPA-postepowanie-administracyjne`
+- KPA / PPSA: teraz KANONICZNIE tutaj → `mod-KPA-postepowanie-administracyjne` (PRZENIESIONY 2026-07-19 z DR-04)
 - Cudzoziemcy (prawo pracy): `dr-04` → `mod-ustawa-cudzoziemcy`
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
 - Weryfikacja prawa: isap.sejm.gov.pl

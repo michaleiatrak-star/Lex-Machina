@@ -331,11 +331,15 @@ SŁUŻEBNOŚĆ PRZESYŁU (art. 305¹–305⁴ KC):
   → Możliwość zasiedzenia służebności o treści służebności przesyłu
   → Roszczenie o wynagrodzenie za bezumowne korzystanie z nieruchomości (art. 224–225 KC)
 
-ZASIEDZENIE (art. 172 KC — weryfikuj terminy w ISAP):
-  → Nieruchomość: 20 lat (dobra wiara) / 30 lat (zła wiara)
-  → Ruchomość: 3 lata w dobrej wierze
-  → Postępowanie: sąd rejonowy, postępowanie nieprocesowe (art. 609–610 KPC)
-  → Wykreślenie hipotek i innych obciążeń: odrębny wniosek do KW
+ZASIEDZENIE (art. 172 KC) — ⚠️ ROZBUDOWANE 2026-07-18, PEŁNA TREŚĆ
+PRZENIESIONA do dedykowanego modułu:
+  → view /mnt/skills/user/dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-rzeczy-znalezione-zasiedzenie.md
+  Skrót: nieruchomość 20 lat (dobra wiara) / 30 lat (zła wiara),
+  ruchomość 3 lata (dobra wiara) — PEŁNE kryteria dobrej/złej wiary,
+  doliczanie posiadania poprzednika (art. 176 KC), ograniczenie dla
+  nieruchomości rolnych (300 ha, rolnik indywidualny), procedura
+  (sąd rejonowy, nieprocesowe, art. 609-610 KPC) — patrz moduł wyżej,
+  NIE duplikuj tutaj.
 
 WŁASNOŚĆ — ROSZCZENIA WINDYKACYJNE (art. 222 KC):
   → Roszczenie o wydanie: skierowane do każdego, kto faktycznie włada rzeczą bez prawa

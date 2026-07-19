@@ -88,7 +88,7 @@ Ponowna skarga: nie wcześniej niż po 12 miesiącach od poprzedniej
 
 **Output:** 1. Stan faktyczny (daty); 2. Kwalifikacja trybu; 3. Ponaglenie + skarga; 4. Żądania (suma pieniężna); 5. Dowody; 6. Rekomendacja.
 
-**Powiązania:** `dr-04` → `mod-KPA-postepowanie-administracyjne` | `dr-01` → `mod-USP-ustroj-sadow-powszechnych` | `pisma-procesowe-v3`
+**Powiązania:** `dr-05` → `mod-KPA-postepowanie-administracyjne` | `dr-01` → `mod-USP-ustroj-sadow-powszechnych` | `pisma-procesowe-v3`
 
 **Źródła:** https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000143
 

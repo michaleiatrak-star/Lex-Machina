@@ -61,17 +61,29 @@ Przy redagowaniu pism rozważ doładowanie (`view`) definicji:
 - BAS-W33/W34 Kara umowna i odsetki — precyzja żądań pozwu
 - BAS-W35 Nakaz zapłaty: terminologia "sprzeciw" vs "zarzuty"
 
-## Moduły (11 łącznie — ✓ 11 OK, ☐ 0 STUB)
+## Moduły (11 łącznie — ✓ 11 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
 
 ```
 KPC — PROCEDURY SZCZEGÓLNE I NARZĘDZIA PROCESOWE:
-  [✓] OK    mod-KPC-przesluchanie-swiadkow
-              (Dz.U. 2026 poz. 468 ze zm. — art. 258–305 KPC;
-               typologia świadków, 10 technik procesowych, cross-examination,
-               impeachment, sekwencje pytań, predykcja wyniku przesłuchania;
-               KPK art. 171, 272, 391; KPC art. 259, 261 — WYMAGA WERYFIKACJI ISAP)
+
+> **Przeniesiony do shared/ (2026-07-12):** `mod-KPC-przesluchanie-swiadkow`
+> (Dz.U. 2026 poz. 468 ze zm. — art. 258–305 KPC; typologia świadków, 10 technik
+> procesowych, cross-examination, impeachment, sekwencje pytań; KPK art. 171,
+> 272, 391; KPC art. 259, 261 — WYMAGA WERYFIKACJI ISAP) był bajt-w-bajt
+> identyczny z `prawny-router-v3/references/przesluchanie-swiadkow.md`
+> (wykryte przez `ci_check_shared.py`). Scalony pod jedną kanoniczną lokalizacją:
+> `view /mnt/skills/user/shared/PRZESLUCHANIE-SWIADKOW-KPC.md`. Dla zaawansowanej
+> strategii przesłuchania (przygotowanie pytań, kontrprzesłuchanie, scoring
+> dowodowy) → osobny skill `przesluchanie-swiadkow-v2-min90`, różny zakres.
+> Pełny opis: `audyt-systemu-v4/references/CHECKLIST-DEDUP.md` NOTA-13.
 
   [✓] OK    mod-KPC-e-doreczenia-portal-sadowy
+  [✓] OK    mod-KPC-odtworzenie-akt-zaginionych-zniszczonych
+              (dodany 2026-07-18: Księga IV KPC art. 716-729 — terminy
+               zawite 3/10 lat, trzyetapowa procedura [odpisy →
+               oświadczenia → dochodzenie z urzędu], sankcja grzywny,
+               zbieg z przedawnieniem roszczenia. Odpowiedź na pytanie
+               o "odtwarzanie dokumentów")
               (Dz.U. 2026 poz. 468 ze zm.; ustawa o ustroju sądów powszechnych;
                regulamin urzędowania sądów; ustawa o skardze na przewlekłość;
                portal informacyjny, fikcja doręczenia, skargi administracyjne do prezesa,

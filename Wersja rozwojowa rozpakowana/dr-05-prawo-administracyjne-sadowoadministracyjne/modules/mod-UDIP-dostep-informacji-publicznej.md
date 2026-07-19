@@ -223,7 +223,7 @@ web_search: "UDIP BIP ustawa dostęp informacja Dz.U. 2022 poz. 902 isap"
 
 | Sytuacja | Skill / Moduł |
 |---|---|
-| KPA (postępowanie administracyjne ogólnie) | `dr-04` → `mod-KPA-postepowanie-administracyjne` |
+| KPA (postępowanie administracyjne ogólnie) | `dr-05` → `mod-KPA-postepowanie-administracyjne` |
 | RODO / ochrona danych osobowych | `dr-11` → moduł RODO |
 | Pismo: wniosek / skarga na bezczynność | `pisma-procesowe-v3` |
 | Orzecznictwo NSA | `orzeczenia-sadowe-v2` |

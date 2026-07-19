@@ -18,6 +18,100 @@ Podstawą jest ISAP. Brzmienie przepisu, Dz.U., status aktu, tekst jednolity, no
 ## Zakres spraw
 Kontrola operacyjna, czynności niejawne, dostęp do danych, odmowa informacji, szkody wynikłe z czynności służb, skargi na funkcjonariuszy, postępowania sprawdzające, poświadczenia bezpieczeństwa, informacje niejawne i materiały zastrzeżone.
 
+## ⭐ DZIAŁANIA/FIRMY POD PRZYKRYCIEM ("PRZYKRYWKĄ") — dodane 2026-07-18
+
+> Odpowiedź na pytanie użytkownika ("firmy pod przykrywką") — dotąd
+> nieobecne w module mimo że to jedna z najstarszych i praktycznie
+> najważniejszych metod pracy operacyjnej służb.
+
+### Podstawa prawna (rozproszona w ustawach ustrojowych poszczególnych służb)
+
+```
+□ Art. 19a ustawy o Policji — działania POLICJANTA POD PRZYKRYCIEM
+  (wnikanie w struktury przestępcze)
+□ Art. 20a-20b ustawy o Policji — posługiwanie się DOKUMENTAMI
+  PUBLICZNYMI uniemożliwiającymi ustalenie tożsamości funkcjonariusza
+  oraz ŚRODKAMI IDENTYFIKACJI ELEKTRONICZNEJ z danymi innymi niż
+  rzeczywiste — obejmuje to również MOŻLIWOŚĆ TWORZENIA/POSŁUGIWANIA
+  SIĘ podmiotem gospodarczym (firmą) jako elementem "legalizacji"
+□ Analogiczne przepisy w ustawach ustrojowych: ABW/AW (art. 21-27,
+  patrz `mod-ustawa-ABW-AW-CBA-sluzby-specjalne.md` — NIE duplikuj,
+  tylko odsyłaj), Straż Graniczna, CBA, Żandarmeria Wojskowa
+```
+
+### Typologia metod pracy operacyjnej (doktryna, J. Widacki)
+
+```
+□ WYWIAD — jawny lub dyskretny (tajny)
+□ PRZETWARZANIE DANYCH — wykorzystanie informacji z baz danych
+□ "PRZYKRYCIE" — stworzenie ŚCIŚLE ZAKONSPIROWANEJ sytuacji
+  organizacyjnej, KAMUFLUJĄCEJ zainteresowanie służby określonym celem
+  (np. wprowadzenie policjanta do gangu, ZAŁOŻENIE FIRMY jako "przykrycia"
+  dla działań operacyjnych)
+□ LEGALIZACJA — dostarczenie funkcjonariuszowi TOŻSAMOŚCI niezgodnej
+  z rzeczywistością (dokumenty, o których mowa w art. 20a)
+□ TAJNI INFORMATORZY — osoba w środowisku przestępczym przekazująca
+  informacje służbom
+□ KOMBINACJA OPERACYJNA — złożone przedsięwzięcie łączące kilka
+  powyższych metod, WYKORZYSTUJĄCE błędne przeświadczenie osób, wobec
+  których jest skierowane, co do faktycznego stanu rzeczy
+□ GRA OPERACYJNA — najbardziej złożona metoda, długofalowa kombinacja
+  operacyjna o szczególnym skomplikowaniu
+```
+
+### Finansowanie — fundusz operacyjny
+
+```
+Koszty czynności operacyjno-rozpoznawczych, w zakresie których ze
+względu na potrzebę ochrony (art. 20a ust. 1-3) NIE MOGĄ być stosowane
+zwykłe przepisy o finansach publicznych i rachunkowości, ORAZ
+wynagrodzenia osób współpracujących — pokrywane są z odrębnego FUNDUSZU
+OPERACYJNEGO, którego zasady tworzenia/gospodarowania określa w drodze
+zarządzenia minister właściwy ds. wewnętrznych — to POZWALA firmie
+"przykrywkowej" funkcjonować bez ujawniania jej rzeczywistego,
+publicznego finansowania.
+```
+
+### Odszkodowanie dla współpracujących osób trzecich
+
+Jeżeli osoba współpracująca z Policją (np. w ramach "przykrycia") w
+związku z tą współpracą UTRACIŁA życie/poniosła uszczerbek na zdrowiu/
+szkodę w mieniu — odszkodowanie przysługuje na zasadach określonych w
+rozporządzeniu ministra właściwego ds. wewnętrznych.
+
+### Ryzyko praktyczne — kontekst pozaprawny, ale istotny dla oceny sprawy
+
+Funkcjonariusze "pod przykryciem" ("przykrywkowcy") przechodzą
+wielotygodniowe SZKOLENIA (manipulacja, podstawy psychologii, zajęcia
+"teatralne" — gesty, mimika, język) ze względu na WYSOKIE RYZYKO
+zdemaskowania i związaną z tym bezwzględność środowisk przestępczych —
+istotny kontekst przy ocenie WIARYGODNOŚCI dowodowej działań
+prowadzonych w ramach takiej operacji oraz przy analizie ewentualnych
+zarzutów PROWOKACJI (art. 24 ustawy o Policji dot. zakupu kontrolowanego/
+kombinacji operacyjnej — ⚠️ dokładna treść i granice dopuszczalnej
+prowokacji NIE zostały w pełni zbadane w tej sesji, zweryfikuj na ISAP
+przy konkretnej sprawie, zwłaszcza pod kątem linii obrony powołującej
+się na PRZEKROCZENIE granic dozwolonej czynności operacyjnej).
+
+### Checklist praktyczny (dla obrony w sprawie opartej na dowodach z działań pod przykryciem)
+
+```
+□ Czy działanie funkcjonariusza/informatora mieściło się w granicach
+  ustawowego umocowania (art. 19a i n. ustawy o Policji lub odpowiednik
+  w ustawie właściwej służby), czy przekroczyło je (PROWOKACJA)?
+□ Czy dokumentacja/zgoda na czynność (np. zgoda sądu/prokuratora na
+  kontrolę operacyjną, jeśli wymagana dla danej metody) była PRAWIDŁOWA
+  i aktualna w chwili działania?
+□ Czy "firma przykrywkowa" była wykorzystana WYŁĄCZNIE do celów
+  operacyjnych, czy wykroczyła poza nie (np. rzeczywista działalność
+  gospodarcza na szkodę osób trzecich niezwiązanych ze sprawą)?
+□ Czy dowody uzyskane w toku działania pod przykryciem mogą być
+  wykorzystane procesowo — sprawdź aktualne orzecznictwo SN/ETPC dot.
+  granic dopuszczalności prowokacji policyjnej
+```
+
+---
+
 ## Organy i ścieżki instancyjne
 Szefowie służb, sąd/prokurator w zakresie kontroli, organy przełożone, WSA/NSA przy decyzjach administracyjnych, sądy cywilne/karne przy odpowiedzialności, RPO i organy kontroli.
 

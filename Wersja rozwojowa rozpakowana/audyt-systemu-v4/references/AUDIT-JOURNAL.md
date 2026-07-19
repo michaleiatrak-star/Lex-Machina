@@ -4,7 +4,819 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
-## AUDYT-2026-07-18g — mod-ustawa-monopole-panstwowe v1.0→v1.1: KOREKTA (Mennica Polska NIE jest monopolem) + dodano PRAWDZIWY sporny monopol PWPW
+## AUDYT-2026-07-19e — PRZENIESIENIE mod-KPA-postepowanie-administracyjne z DR-04 do DR-05 + rozbudowa o 4 instytucje (ugoda, milczące załatwienie, zaświadczenia, skargi/wnioski Działu VIII)
+
+**Zakres:** przeniesienie fizyczne pliku DR-04→DR-05 + rozbudowa treści
+(nowa sekcja 4a) + aktualizacja 21 plików w całym systemie odwołujących
+się do tego modułu + `dr-04/SKILL.md`, `dr-04/MAPA-AKTOW.md`,
+`dr-05/SKILL.md`, `dr-05/MAPA-AKTOW.md`, `prawo-polskie-v2/ROUTING-MAP.md`
++ wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** poprzedni audyt pokrycia prawa administracyjnego wykazał,
+że najbardziej fundamentalne akty (KPA, PPSA) były merytorycznie dobrze
+opracowane, ale fizycznie umiejscowione w DR-04 (Prawo Pracy) zamiast
+DR-05 (Prawo Administracyjne) — architektoniczna anomalia, choć
+poprawnie oznaczona wszędzie odesłaniami. Użytkownik polecił naprawić
+to PRZY OKAZJI uzupełniania 4 brakujących instytucji proceduralnych.
+
+**Rozbudowa treści (sekcja 4a, przed przeniesieniem):**
+- **Ugoda administracyjna** (art. 114-122 KPA) — mechanizm odroczenia
+  decyzji przy sporze dwóch stron, wymóg zatwierdzenia przez organ.
+- **Milczące załatwienie sprawy** (art. 122a-122h, od 2017) — z KLUCZOWYM
+  zastrzeżeniem: KPA samo nie jest podstawą, wymaga przepisu szczególnego;
+  mechanizm adnotacji, wyłączenie zasady czynnego udziału stron.
+- **Wydawanie zaświadczeń** (Dział VII, art. 217-220) — dwie przesłanki
+  wydania, termin 7 dni, zakaz żądania przez organ danych już posiadanych
+  w rejestrach, tryb zażalenia na odmowę.
+- **Skargi i wnioski** (Dział VIII, art. 221-260) — z WYRAŹNYM
+  rozróżnieniem od skargi do WSA (środek czysto administracyjny,
+  "petycyjny", nie sądowy) — checklist kiedy który środek zastosować.
+
+**Przeniesienie fizyczne:** skopiowano plik do DR-05, usunięto z DR-04,
+skorygowano błędny nagłówek wewnętrzny pliku ("poziom DR-03" — relikt
+jeszcze wcześniejszego błędu kopiowania szablonu, nigdy niepoprawiony).
+
+**Aktualizacja referencji — ZNALEZISKO DODATKOWE:** przy przeglądzie
+21 plików odwołujących się do modułu odkryto, że WIĘKSZOŚĆ (8 z 11
+sprawdzonych) JUŻ WCZEŚNIEJ błędnie zakładała, że moduł jest w DR-05
+(mimo że fizycznie był w DR-04) — przeniesienie NAPRAWIŁO więcej
+niespójności, niż stworzyło. Tylko 3 pliki (mod-skargi-na-prawo-
+miejscowe-WSA-NSA w DR-08, SKILL.md DR-08, SKILL.md DR-06) poprawnie
+wskazywały DR-04 i wymagały korekty na DR-05. Zaktualizowano WSZYSTKIE
+21 plików (w tym pliki w DR-01 przez shared/mod-niewidomy, prawny-
+router-v3/, oraz obie strony w samych DR-04/DR-05). Wykryto i naprawiono
+PRZY KOŃCOWEJ WERYFIKACJI jeden przeoczony wiersz w `dr-05/SKILL.md`
+(sekcja "Powiązania zewnętrzne"), który nie został objęty pierwszym
+przebiegiem skryptu.
+
+**Główna mapa routingu:** rozróżniono PRAWIDŁOWO wpisy "rzeczywiste"
+(teraz w sekcji DR-05) od wpisów "odesłanie" (teraz w sekcji DR-04,
+wskazujących na nowe miejsce) — zamiast prostego przepisania tekstu,
+zamieniono ROLE wierszy między sekcjami zgodnie z nowym fizycznym
+położeniem pliku.
+
+**Techniczna uwaga — powtórzony błąd:** podczas wstawiania nowej treści
+(sekcja 4a) DWUKROTNIE przypadkowo usunięto sąsiedni nagłówek Markdown
+przy użyciu str_replace z niepełnym old_str/new_str (ten sam wzorzec
+błędu co w poprzednich turach tej sesji dot. mod-KRO-rodzinne.md) —
+oba przypadki wykryte i naprawione przy rutynowej weryfikacji integralności
+struktury BEZPOŚREDNIO po każdej edycji, zanim przystąpiono do kolejnego
+kroku.
+
+**Status:** ✅ W PEŁNI WDROŻONE. Końcowe skanowanie całego systemu
+(`grep -rn` na wzorcu łączącym "dr-04" z nazwą modułu) potwierdza ZERO
+pozostałych nieaktualnych odwołań. Struktura głównej mapy routingu
+zweryfikowana (17 sekcji zachowanych).
+
+---
+
+
+
+**Zakres:** rozbudowa `mod-KRO-rodzinne.md` (5 nowych sekcji) + NOWY
+`mod-ubezwlasnowolnienie-opieka-kuratela.md` + `dr-02/SKILL.md` (26→27)
++ `dr-02/MAPA-AKTOW.md` + `prawo-polskie-v2/ROUTING-MAP.md`
+(zsynchronizowano natychmiast) + wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** trzecia tura audytu prawa rodzinnego — użytkownik polecił
+uzupełnić 6 zidentyfikowanych luk (ubezwłasnowolnienie, surogacja,
+zmiana imienia/nazwiska, eksmisja małżonka, obowiązek alimentacyjny
+szerszego kręgu, konkubinat) ze SZCZEGÓLNYM naciskiem na sytuację
+ubezwłasnowolnienia osoby BEZ RODZINY, której stan zdrowia nie pozwala
+na samodzielne funkcjonowanie.
+
+**Eksmisja małżonka (art. 58 §2-4 KRO):** pełne opracowanie z KLUCZOWYM
+rozróżnieniem — rozwód SAM W SOBIE nie eksmituje, wymagana WĄSKA
+przesłanka (rażąco naganne postępowanie uniemożliwiające wspólne
+zamieszkiwanie), NA ŻĄDANIE strony, NIGDY z urzędu. Orzecznictwo SN
+(II CKN 670/2000 — niezależność od tytułu prawnego; I CSK 190/06 i
+III CZP 73/08 — zastrzeżenie że eksmisja nie zastępuje podziału
+majątku). Dwie ścieżki (wolna — w wyroku rozwodowym; szybka —
+zabezpieczenie lub ustawa antyprzemocowa, 14 dni).
+
+**Obowiązek alimentacyjny szerszego kręgu:** krąg NIE ogranicza się do
+rodzic-dziecko — obejmuje dziadków/wnuki i rodzeństwo, z ZASADĄ
+POMOCNICZOŚCI (obowiązek dalszych krewnych aktualizuje się dopiero gdy
+bliżsi nie mogą zaspokoić potrzeb).
+
+**Surogacja:** zasada "mater semper certa est" jako fundament (matka =
+zawsze kobieta rodząca), status "szarej strefy prawnej" w Polsce (nie
+zakazana wprost, nie uregulowana), nieważność umowy (art. 58 §1 KC),
+możliwy zbieg z art. 211a §2 KK dla wariantu komercyjnego, KLUCZOWE
+praktyczne ryzyko — matka intencjonalna bez zgody surogatki nie może
+uregulować macierzyństwa (droga: przysposobienie).
+
+**Konkubinat:** systematyczny przegląd braków względem małżeństwa
+(wspólność majątkowa, dziedziczenie, alimenty, renta rodzinna,
+domniemanie ojcostwa) oraz dostępnych narzędzi ochronnych mimo braku
+regulacji ustawowej (współwłasność ułamkowa, testament, pełnomocnictwa
+medyczne, ubezpieczenie).
+
+**Zmiana imienia i nazwiska:** odrębna ustawa z 2008 r., rozróżniona od
+już opisanej zmiany nazwiska PRZY rozwodzie (art. 59 KRO — bezpłatna,
+3-miesięczny termin, tylko powrót do nazwiska sprzed małżeństwa).
+
+**Nowy moduł — ubezwłasnowolnienie, ze SZCZEGÓLNYM naciskiem na
+scenariusz bez rodziny:** pełne opracowanie art. 13/16 KC (przesłanki
+łączne, moment oceny), procedura (sąd okręgowy, udział prokuratora,
+art. 558 KPC), hierarchia opiekunów z art. 176 KRO (małżonek → rodzice).
+**KLUCZOWY MECHANIZM dla braku rodziny** — ustawodawca świadomie
+przerzucił obowiązek poszukiwania opiekuna na Ośrodek Pomocy Społecznej,
+który prowadzi STAŁY NABÓR kandydatów (niekoniecznie spokrewnionych,
+osoby z lokalnej społeczności) i przedstawia ich sądowi po wywiadzie
+środowiskowym — z pełnym opisem wymogów wobec kandydata, mechanizmu
+wynagrodzenia (z majątku podopiecznego) i nadzoru sądu rodzinnego.
+Dodano odrębną, często mylącą instytucję kurateli dla osoby
+niepełnosprawnej (art. 183 KRO — wsparcie, nie zastępstwo, bez
+wymogu ubezwłasnowolnienia).
+
+**Status:** ✅ WDROŻONE. Struktura `mod-KRO-rodzinne.md` zweryfikowana
+po edycji (wszystkie nagłówki na miejscu, 919 linii) — odnotowano i
+naprawiono przypadkowe usunięcie nagłówka "WŁADZA RODZICIELSKA I
+KONTAKTY" podczas wstawiania nowych sekcji, wykryte przy rutynowej
+weryfikacji integralności. Prawo rodzinne i rozwodowe mają teraz
+BARDZO SZEROKIE pokrycie obejmujące zarówno rdzeń, jak i szereg
+praktycznie istotnych, choć mniej oczywistych instytucji peryferyjnych.
+
+---
+
+
+
+**Zakres:** rozbudowa `mod-KRO-rodzinne.md` (3 nowe sekcje) + NOWY
+`mod-piecza-zastepcza-rodzina-zastepcza.md` + odesłanie zwrotne w
+`mod-KRO-przysposobienie-adopcja-miedzynarodowa.md` + `dr-02/SKILL.md`
+(24→26, w tym nadrobienie zaległości) + `dr-02/MAPA-AKTOW.md` +
+`prawo-polskie-v2/ROUTING-MAP.md` (zsynchronizowano natychmiast) +
+wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** kontynuacja audytu prawa rodzinnego — użytkownik polecił
+uzupełnić 4 zidentyfikowane luki (separacja, ustrój majątkowy/intercyza,
+piecza zastępcza, ustalenie ojcostwa) i dodatkowo zapytał o "adopcję
+przez rodzinę" oraz potwierdzenie pełnego pokrycia.
+
+**Odkrycie przy okazji:** moduł `mod-KRO-przysposobienie-adopcja-
+miedzynarodowa.md` JUŻ ISTNIAŁ (zbudowany we wcześniejszej, częściowo
+skompaktowanej turze tej samej długiej sesji — 334 linie, bardzo
+kompletny, obejmujący DOKŁADNIE oba scenariusze z pytania użytkownika:
+cudzoziemiec adoptujący w Polsce i Polacy adoptujący za granicą), ale
+NIGDY nie został zarejestrowany w `dr-02/SKILL.md` ani w mapie głównej
+— klasyczny przypadek "pracy wykonanej, ale niezarejestrowanej".
+Nadrobiono tę zaległość przy okazji.
+
+**Separacja (rozbudowa mod-KRO-rodzinne.md):** pełne opracowanie art.
+61¹-61⁶ z KLUCZOWYM rozróżnieniem od rozwodu — separacja wymaga TYLKO
+rozkładu ZUPEŁNEGO (nie TRWAŁEGO), może jej żądać NAWET małżonek
+wyłącznie winny (bez trzeciej przesłanki negatywnej z rozwodu), ale
+małżeństwo formalnie TRWA (brak możliwości ponownego ślubu, zachowany
+obowiązek wzajemnej pomocy z uwagi na względy słuszności, brak powrotu
+do nazwiska sprzed małżeństwa) — z pełnym mechanizmem zniesienia
+separacji.
+
+**Ustrój majątkowy małżeński/intercyza:** pełne opracowanie art. 31-54
+— wspólność ustawowa jako domyślny ustrój, zamknięty katalog ustrojów
+umownych (rozszerzona/ograniczona wspólność, rozdzielność pełna,
+rozdzielność z wyrównaniem dorobków), zakaz tworzenia "hybrydowych"
+ustrojów nieznanych ustawie, przymusowa rozdzielność z mocy prawa
+(upadłość konsumencka) lub orzeczenia sądu, skuteczność wobec osób
+trzecich uzależniona od ich wiedzy o intercyzie.
+
+**Ustalenie ojcostwa (odrębne od już istniejącego zaprzeczenia):** trzy
+sposoby (domniemanie z art. 62, dobrowolne uznanie z art. 72-83 z
+wariantem dla prokreacji medycznie wspomaganej, sądowe ustalenie z art.
+84-86 z domniemaniem okresu koncepcyjnego 300-181 dni), z wyraźnym
+rozróżnieniem legitymacji procesowej (biologiczny ojciec NIE MA
+samodzielnej legitymacji, może tylko zwrócić się do prokuratora).
+Odnotowano ZAPOWIEDZIANĄ (status: projekt, NIE uchwalone) reformę 2026
+Ministerstwa Sprawiedliwości dot. zniesienia domniemania dla dzieci
+urodzonych po uprawomocnieniu wyroku rozwodowego — z wyraźnym
+zastrzeżeniem, że to NIE jest obowiązujące prawo.
+
+**Nowy moduł — piecza zastępcza:** KLUCZOWE rozgraniczenie od
+przysposobienia (opieka czasowa z zachowaniem więzi prawnej z rodziną
+biologiczną vs trwała zmiana statusu prawnego) — z wyjaśnieniem, że
+RODZINA ZASTĘPCZA SPOKREWNIONA (dziadkowie, wujostwo) to
+najprawdopodobniej to, co użytkownik miał na myśli pytając o "adopcję
+przez rodzinę", choć precyzyjnie to inna instytucja. Pełny katalog
+form (spokrewniona/niezawodowa/zawodowa w 3 wariantach/rodzinny dom
+dziecka/rodzina pomocowa), procedura umieszczenia, zasada
+nierozdzielania rodzeństwa (nawet transgranicznie), powiązanie
+proceduralne z ośrodkiem adopcyjnym.
+
+**Status:** ✅ WDROŻONE. Odpowiedź na pytanie użytkownika: prawo
+rodzinne i rozwodowe są teraz W PEŁNI pokryte na poziomie rdzenia
+(rozwód, separacja, zawarcie małżeństwa, bigamia, ustrój majątkowy,
+ustalenie/zaprzeczenie ojcostwa, przysposobienie krajowe i
+międzynarodowe, piecza zastępcza). Świadomie NIE zbadane w tej turze
+(poza zakresem obecnego pytania): szczegółowe kryteria kwalifikacyjne
+kandydatów na rodziny zastępcze, dokładna forma instytucjonalna pieczy
+zastępczej — drobne, techniczne detale proceduralne, nie fundamentalne
+instytucje prawa rodzinnego.
+
+---
+
+
+
+**Zakres:** NOWY `dr-02/.../mod-KRO-zawarcie-malzenstwa-bigamia-
+transgraniczne.md` (v1.0) + odesłania zwrotne w `mod-KRO-rodzinne.md`
+(DR-02) i `mod-KK-kwalifikator-karnomaterialny.md` (DR-03, bigamia) +
+`dr-02/SKILL.md` + `dr-02/MAPA-AKTOW.md` + `prawo-polskie-v2/
+ROUTING-MAP.md` (zsynchronizowano natychmiast) + wpis `CHECKLIST-
+DEDUP.md`.
+
+**Kontekst:** użytkownik wskazał klaster: rozwody (już dobrze pokryte w
+istniejącym `mod-KRO-rodzinne.md`), śluby, przypadek ślubu za granicą,
+bigamia (w tym zawarta w kraju to dopuszczającym), małżeństwo
+jednopłciowe i prawa z tym związane.
+
+**Ustalenie wstępne — poważna luka:** istniejący moduł prawa rodzinnego
+opisywał WYŁĄCZNIE rozwód (543 linie) — samo ZAWARCIE małżeństwa w
+ogóle nie było opisane. Bigamia figurowała tylko jako JEDNA wzmianka
+przykładowa w klasyfikacji form przestępstw, bez żadnej treści.
+Małżeństwo zagraniczne i jednopłciowe — całkowita luka.
+
+**Część A — zawarcie małżeństwa:** dwie formy (cywilna, konkordatowa —
+z mechanizmem przekazania zaświadczenia przez duchownego do USC),
+przesłanki pozytywne, PEŁNY katalog przeszkód małżeńskich (bezwzględne:
+bigamia, ubezwłasnowolnienie, choroba psychiczna, pokrewieństwo,
+przysposobienie; względne: powinowactwo), rozróżnienie unieważnienia od
+stwierdzenia nieistnienia małżeństwa.
+
+**Część B — bigamia, pełne opracowanie:** warstwa cywilna (art. 13 KRO
+— SZEROKI krąg uprawnionych do żądania unieważnienia, w tym
+spadkobiercy bigamisty; KLUCZOWY mechanizm konwalidacji, gdy poprzednie
+małżeństwo ustało PRZED wytoczeniem powództwa, z nieintuicyjnym
+wyjątkiem dla ustania przez śmierć) oraz warstwa karna (art. 206 KK) —
+działające RÓWNOLEGLE i NIEZALEŻNIE.
+
+**Część C — małżeństwo zagraniczne + bigamia zagraniczna w kraju
+dopuszczającym (BEZPOŚREDNIA odpowiedź na pytanie użytkownika):**
+zasada locus regit actum, mechanizm transkrypcji, klauzula porządku
+publicznego (art. 7 PPM/art. 103 uPASC). Dla scenariusza bigamii
+zawartej za granicą w kraju dopuszczającym poligamię: mimo ważności
+tam, drugie małżeństwo NIE BĘDZIE uznane w Polsce (klauzula porządku
+publicznego), z możliwą RÓWNOLEGŁĄ odpowiedzialnością karną z art. 206
+KK dla obywatela polskiego — z UCZCIWIE odnotowaną, niedokończoną
+analizą jurysdykcyjną (czy polskie prawo karne faktycznie się stosuje
+do czynu za granicą — wymaga sprawdzenia zasad odpowiedzialności
+eksterytorialnej).
+
+**Część D — małżeństwo jednopłciowe, NAJOBSZERNIEJSZA i NAJBARDZIEJ
+AKTUALNA część modułu:** zweryfikowano ŹRÓDŁOWO PRZEŁOMOWY, BARDZO
+ŚWIEŻY rozwój orzeczniczy — wyrok TSUE C-713/23 (25.11.2025): obowiązek
+uznania (transkrypcji) małżeństwa jednopłciowego zawartego przez
+obywateli UE w innym państwie UE, z KLUCZOWYM zastrzeżeniem że NIE
+wymaga to wprowadzenia takich małżeństw do prawa krajowego. Wyrok NSA
+(20.03.2026) nakazujący konkretną transkrypcję w terminie 30 dni,
+odrzucający argument o trudnościach technicznych. UCZCIWIE
+przedstawiono NIEROZSTRZYGNIĘTY kontekst polityczny (zapowiedziany
+wniosek PiS do TK, stanowisko Prezydenta dot. PRZYSZŁEJ ustawy — nie
+samego wyroku, sprzeczne oceny doktrynalne co do znaczenia wyroku) jako
+STANOWISKA stron sporu, NIE jako ustalone fakty prawne. Odnotowano
+WYRAŹNIE ograniczony zasięg wyroku (tylko ewidencja/transkrypcja, nie
+pełnia praw majątkowych/spadkowych/nazwiskowych; tylko obywatele UE,
+niepewne dla spoza UE).
+
+**Status:** ✅ WDROŻONE. Moduł zawiera SZCZEGÓLNIE MOCNE ostrzeżenie
+HARDGATE na początku, wymagające re-weryfikacji statusu przed każdym
+użyciem — to NAJBARDZIEJ dynamicznie zmieniający się temat ze wszystkich
+dotychczas budowanych w tej sesji, z aktywnym sporem politycznym w toku.
+Mapa główna zsynchronizowana natychmiast, zgodnie z dobrą praktyką
+wypracowaną w poprzednich turach.
+
+---
+
+
+
+**Zakres:** `dr-02/.../mod-KC-spadki.md` (v1.0→v2.0, +8 nowych sekcji) +
+`dr-02/SKILL.md` + `dr-02/MAPA-AKTOW.md` + `prawo-polskie-v2/
+ROUTING-MAP.md` (zsynchronizowano NATYCHMIAST, bez odrębnej tury) +
+wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** kontynuacja audytu pokrycia prawa spadkowego z poprzedniej
+tury, która wykazała 8 CAŁKOWICIE nieobecnych instytucji mimo solidnego
+rdzenia (dziedziczenie ustawowe/testamentowe, zachowek, dział spadku).
+Użytkownik polecił dodać wszystkie + dodatkowo sytuację braku
+jakichkolwiek spadkobierców.
+
+**Zweryfikowano online i dodano W PEŁNI:**
+1. **Zapis zwykły i windykacyjny** (art. 968-981¹⁶) — kluczowe
+   rozróżnienie: skutek WYŁĄCZNIE obligacyjny (zwykły, roszczenie wobec
+   spadkobierców) vs RZECZOWY (windykacyjny, własność przechodzi
+   automatycznie z chwilą śmierci) — z zamkniętym katalogiem przedmiotu
+   zapisu windykacyjnego i wymogiem formy aktu notarialnego.
+2. **Polecenie testamentowe** (art. 982-985) — odróżnione od zapisu
+   (nikt nie staje się "wierzycielem").
+3. **Wykonawca testamentu** (art. 986-990) — z rekomendacją praktyczną
+   dla skonfliktowanych spadkobierców/złożonego majątku.
+4. **Wydziedziczenie** (art. 1008-1010) — z WYRAŹNYM, kluczowym
+   rozróżnieniem od niegodności dziedziczenia (już istniejącej w
+   module): niegodność wynika z ustawy i wymaga orzeczenia SĄDU,
+   wydziedziczenie następuje WYŁĄCZNIE przez oświadczenie woli
+   spadkodawcy w testamencie — te dwie instytucje są często mylone.
+   Katalog przesłanek ZAMKNIĘTY (3 pozycje), brak możliwości
+   wydziedziczenia częściowego, instytucja przebaczenia analogiczna do
+   niegodności.
+5. **Odpowiedzialność za długi spadkowe — pełne opracowanie** (art.
+   1030-1034³) — dwa okresy (przed/po przyjęciu), solidarna
+   odpowiedzialność wielu spadkobierców DO działu spadku z roszczeniem
+   regresowym, przejście na odpowiedzialność proporcjonalną PO dziale.
+6. **Zrzeczenie się dziedziczenia** (art. 1047-1057) — forma aktu
+   notarialnego, z KLUCZOWYM ograniczeniem: NIE MOŻNA zawrzeć takiej
+   umowy z gminą ani Skarbem Państwa.
+7. **⭐⭐ BRAK SPADKOBIERCÓW — dziedziczenie przez gminę/Skarb Państwa**
+   (art. 935 KC) — BEZPOŚREDNIA odpowiedź na pytanie użytkownika.
+   Potwierdzone: polskie prawo NIE PRZEWIDUJE sytuacji "niczyjego"
+   spadku — zawsze istnieje ostateczny spadkobierca. Mechanizm:
+   gmina ostatniego miejsca zamieszkania (zasada) lub Skarb Państwa
+   (gdy miejsca zamieszkania w Polsce nie da się ustalić lub było za
+   granicą). KLUCZOWE: to dziedziczenie PRZYMUSOWE — nie można
+   odrzucić spadku ustawowego (choć MOŻNA odrzucić spadek testamentowy),
+   automatyczne dobrodziejstwo inwentarza bez składania oświadczenia,
+   testament negatywny nie działa wobec tego mechanizmu. Odnotowano
+   kontekst historyczny (reforma 2003 — przed nią tylko Skarb Państwa)
+   oraz NIEWPROWADZONE jeszcze prace legislacyjne (Zespół Problemowy ds.
+   Prawa Spadkowego) nad zmianą zasad odpowiedzialności gmin za długi
+   spadkowe — oznaczone wyraźnie jako analiza, nie projekt ustawy.
+
+**Oznaczono UCZCIWIE jako punkt startowy (nie pełne opracowanie),
+zgodnie z ZASADA 13:**
+- Spadki transgraniczne / Europejskie Poświadczenie Spadkowe (rozp. UE
+  650/2012) — ogólne ramy ustalone, szczegółowa procedura w Polsce
+  wymaga dalszej weryfikacji.
+- Dziedziczenie gospodarstw rolnych (Tytuł X KC) — odnotowano, że
+  większość przepisów była historycznie uchylana/ograniczana (w tym po
+  wyroku TK), dokładny AKTUALNY zakres nie zbadany.
+- Spis inwentarza — procedura (art. 637-641 KPC) — rozróżnienie wykaz/
+  spis ustalone, szczegółowa procedura sądowa wymaga dalszej weryfikacji.
+
+**Status:** ✅ WDROŻONE. Moduł zsynchronizowany NATYCHMIAST między mapą
+lokalną DR-02 i mapą główną (bez potrzeby odrębnej tury synchronizacyjnej,
+w przeciwieństwie do wcześniejszego długu z poprzednich sesji) — dobra
+praktyka wypracowana po poprzednich turach audytu synchronizacji.
+
+---
+
+
+
+**Zakres:** `dr-07/MAPA-AKTOW.md`, `dr-04/MAPA-AKTOW.md`, `dr-03/MAPA-AKTOW.md`
+(nowy wiersz BLOK M-R) + `prawo-polskie-v2/ROUTING-MAP.md` (korekty
+odpowiadające + naprawa 3 błędów formatowania).
+
+**Kontekst:** użytkownik polecił sprawdzić konkretne "nowe ustawy" z
+poprzedniej tury i upewnić się, że są poprawnie odzwierciedlone
+ZARÓWNO w lokalnych mapach DR, JAK I w mapie głównej.
+
+**Znalezisko 1 — luka w DR-03:** BLOK M/N/O/P/Q/R kwalifikatora
+karnomaterialnego (zbieg przestępstw, środki zabezpieczające, zatarcie
+skazania, REFORMA KATALOGU KAR — usunięcie "25 lat pozbawienia wolności",
+przestępstwa z nienawiści, deepfake/słupy) NIE MIAŁY własnego wiersza w
+lokalnej mapie DR-03, mimo że analogiczne BLOKi (G/H/I/J/K/L) go mają.
+Dodano brakujący wiersz z wyraźnym ostrzeżeniem o konieczności
+weryfikacji art. 32/86/88 KK BEZPOŚREDNIO na ISAP (nie na portalach
+wtórnych, z których część pokazuje nieaktualny 5-pozycyjny katalog kar).
+
+**Znalezisko 2 — rozbieżność KIERUNKU synchronizacji (odwrotna niż
+oczekiwana) — ustawa o PIP:** mapa GŁÓWNA miała JUŻ poprawną informację
+("nowelizacja Dz.U. 2026 poz. 473 obowiązuje od 08.07.2026, VER
+2026-07-07"), podczas gdy mapa LOKALNA DR-04 nadal błędnie pokazywała
+"jeszcze nieobowiązująca". Oznacza to, że w pewnym momencie mapa główna
+została zaktualizowana bezpośrednio, ale ta poprawka NIGDY nie wróciła
+do mapy lokalnej — odwrotny kierunek rozbieżności niż standardowo
+zakładany protokół "DR → mapa główna". Skorygowano lokalną mapę DR-04
+(3 wiersze: Ustawa o PIP, Kodeks pracy) tak by odzwierciedlała
+rzeczywisty, aktualny stan.
+
+**Znalezisko 3 — status modułu PZP w DR-07:** lokalna mapa pokazywała
+"⚠️ WYMAGA AKTUALIZACJI MODUŁU" dla `mod-PZP-zamowienia-publiczne-KIO`,
+mimo że moduł ZOSTAŁ już częściowo zaktualizowany w tej sesji (naprawiono
+martwy odnośnik do DR-13, rozbudowano przetarg ograniczony/nieograniczony).
+Zaktualizowano status na "CZĘŚCIOWO ZAKTUALIZOWANY" z odnotowaniem, co
+konkretnie zrobiono i co ewentualnie pozostaje.
+
+**Znalezisko 4 — 3 błędy formatowania (mangled duplicate content) w
+mapie głównej, niezwiązane bezpośrednio z tą sesją, ale wykryte przy
+okazji tego przeglądu:** trzy wiersze zawierały PODWÓJNIE WKLEJONĄ
+zawartość kolumny "Dz.U."/"Moduł" (wzorzec: `| dr-XX|Dz.U....` zamiast
+poprawnego rozdzielenia na kolumny) — dotyczyły wiersza PZP głównego
+(`mod-PZP-zamowienia-publiczne-KIO`) oraz DWÓCH wystąpień wiersza "PZP —
+zamówienia obronne i bezpieczeństwa" (raz jako odesłanie w sekcji DR-07,
+raz jako właściwy wpis w sekcji DR-15). Naprawiono wszystkie trzy,
+usuwając zduplikowany fragment i przywracając poprawną strukturę tabeli
+Markdown. Wykonano końcowe skanowanie całego pliku (`grep -nP "\|
+dr-\d\d\|"` i wariant ze strzałką) — ZERO pozostałych wystąpień tego
+wzorca błędu.
+
+**Status:** ✅ WDROŇONE. Zarówno konkretne "nowe ustawy" wskazane przez
+użytkownika, jak i dwie dodatkowe rozbieżności oraz trzy błędy
+formatowania wykryte przy tej samej okazji — wszystkie skorygowane w
+OBU miejscach (mapa lokalna DR + mapa główna). Struktura pliku głównego
+zweryfikowana po edycji: 17 sekcji (16 DR + MONITORING), 714 linii.
+
+**Wniosek metodologiczny dla przyszłych audytów:** synchronizacja
+map NIE JEST jednokierunkowa w praktyce — czasem to mapa główna jest
+bardziej aktualna (jak w przypadku PIP), a lokalna zaległa. Przy
+audycie synchronizacji należy sprawdzać ROZBIEŻNOŚCI w OBU kierunkach,
+nie zakładać z góry, że lokalna mapa jest zawsze źródłem prawdy.
+
+---
+
+
+
+**Zakres:** `prawo-polskie-v2/ROUTING-MAP.md` v5.6→v5.7 — sprawdzono
+WSZYSTKIE pozostałe DR-skille niedotknięte w tej sesji (metoda: `comm
+-23` między rzeczywistymi plikami modules/ a wpisami w mapie głównej).
+
+**Wynik — DOBRA WIADOMOŚĆ dla 4 z 9 sprawdzonych DR:** DR-01, DR-05,
+DR-06, DR-08 były JUŻ W PEŁNI zsynchronizowane — zero rozbieżności.
+Oznacza to, że dług synchronizacyjny NIE jest powszechny w całym
+systemie, tylko dotyczył konkretnych DR-skilli o intensywnej historii
+rozbudowy.
+
+**Wynik — luki znalezione w 5 DR:**
+- DR-10 (Zdrowie): 6 modułów (Prawo farmaceutyczne x2, zawód lekarza,
+  zawody prawnicze pokrewne, zdrowie psychiczne, wyroby medyczne)
+- DR-11 (Cyfrowe/RODO): 5 modułów (prawo autorskie media/internet, 4
+  moduły RODO szczegółowe — DPIA, DSAR, RCP/DPA, opracowanie ogólne)
+- DR-12 (Sądownictwo): 1 moduł (techniki mediacyjne/negocjacyjne)
+- DR-14 (UE/międzynarodowe): 2 moduły (inwestycje transgraniczne FDI/BIT,
+  mały ruch graniczny)
+- DR-15 (Compliance): 1 moduł (ustawa antykorupcyjna 1997)
+
+Łącznie dopisano 15 wierszy. WSZYSTKIE moduły w tych 5 DR są STARSZE niż
+ta sesja — potwierdza to, że dług synchronizacyjny narastał w
+WIELU wcześniejszych sesjach, nie tylko w tej.
+
+**Status:** ✅ WDROŻONE. Wszystkie 16 sekcji DR w głównej mapie routingu
+są teraz zsynchronizowane z lokalnymi MAPA-AKTOW odpowiadających
+DR-skilli. Struktura pliku zweryfikowana po edycji (16 sekcji DR +
+MONITORING, poprawna kolejność, 716 linii).
+
+---
+
+
+
+**Zakres:** `prawo-polskie-v2/ROUTING-MAP.md` v5.5→v5.6 — dodano ~55
+wierszy w sekcjach DR-02, DR-03, DR-04, DR-07, DR-09, DR-13, DR-16.
+
+**Kontekst:** użytkownik słusznie zauważył, że nowe moduły dodawane w tej
+(bardzo długiej) sesji do poszczególnych DR-skills i ich lokalnych
+MAPA-AKTOW.md NIE zostały automatycznie odzwierciedlone w CENTRALNEJ
+mapie routingu — mimo że protokół w samym pliku ROUTING-MAP.md WPROST
+nakazuje: "Krok 2. Ta tabela jest WTÓRNA wobec DR-MAPA-AKTOW —
+aktualizuj ją przez pull z DR-MAPA-AKTOW po każdej zmianie w DR-skill."
+Ten krok był SYSTEMATYCZNIE pomijany w tej sesji przy każdej turze
+budowy nowych modułów.
+
+**Metoda:** dla każdego z 7 dotkniętych DR-skills (DR-02, 03, 04, 07, 09,
+13, 16) porównano listę PLIKÓW FIZYCZNIE istniejących w katalogu
+modules/ z listą modułów WYMIENIONYCH w odpowiedniej sekcji
+ROUTING-MAP.md (`comm -23` na posortowanych listach nazw modułów) —
+metoda ta wykryła NIE TYLKO moduły z tej sesji, ale też ZALEGŁY DŁUG
+synchronizacyjny z sesji WCZEŚNIEJSZYCH (np. w DR-03 aż 33 moduły były
+nieobecne w mapie głównej, wiele z nich starszych niż ta sesja).
+
+**Znaleziska dodatkowe (poza samą synchronizacją):**
+1. **Naprawiono fantomowy wpis** w DR-02: wiersz UOKiK w mapie głównej
+   wskazywał na plik `mod-ustawa-ochrona-konkurencji-konsumentow-UOKiK`,
+   który NIGDY NIE ISTNIAŁ w katalogu DR-02/modules/ — poprawiono na
+   rzeczywisty plik `mod-ustawa-UOKIK-antymonopolowe.md` zbudowany w
+   tej sesji.
+2. **Wykryto najprawdopodobniej ŹLE UMIEJSCOWIONY plik:** plik o
+   DOKŁADNIE takiej samej nazwie jak powyższy fantom (
+   `mod-ustawa-ochrona-konkurencji-konsumentow-UOKiK.md`) ISTNIEJE
+   FIZYCZNIE, ale w katalogu **DR-04** (Prawo Pracy) — mimo że jego
+   treść (konsumenci, dark patterns, DSA/P2B, Rzecznik Konsumentów)
+   NIE MA związku z prawem pracy. Zarejestrowano go w mapie w sekcji
+   DR-04 (zgodnie z rzeczywistym położeniem pliku) z WYRAŹNĄ flagą i
+   rekomendacją przeniesienia do DR-02 w przyszłym audycie — NIE
+   przeniesiono pliku w tej turze (poza zakresem zadania, ryzyko
+   przy przenoszeniu plików bez pełnej weryfikacji zależności).
+   Potwierdzono BRAK treściowej duplikacji z nowym modułem DR-02
+   (`mod-ustawa-UOKIK-antymonopolowe.md` dotyczy antymonopolowego
+   aspektu UOKiK — koncentracje/pozycja dominująca; plik w DR-04
+   dotyczy konsumenckiego aspektu — praktyki rynkowe/dark patterns —
+   to KOMPLEMENTARNE, nie duplikujące się treści tej samej ustawy).
+
+**Techniczna uwaga:** narzędzie `str_replace` zawiodło wielokrotnie przy
+tym pliku (przyczyna nieustalona — prawdopodobnie subtelna różnica
+kodowania znaków), w związku z czym edycje wykonano bezpośrednio przez
+skrypty Python operujące na pliku — z zachowaniem tej samej treści i
+weryfikacją integralności struktury (wszystkie 16 sekcji DR + sekcja
+MONITORING obecne i we właściwej kolejności po edycji).
+
+**Status:** ✅ WDROŻONE. Główna mapa routingu jest teraz zsynchronizowana
+z lokalnymi MAPA-AKTOW wszystkich 7 dotkniętych DR-skills. **Nie
+sprawdzono** DR-01, DR-05, DR-06, DR-08, DR-10 do DR-12, DR-14, DR-15 —
+te DR-skills NIE były modyfikowane w tej sesji, więc przyjęto, że ich
+sekcje w mapie głównej pozostają w stanie sprzed tej sesji (mogą mieć
+WŁASNY, niezależny dług synchronizacyjny z sesji jeszcze wcześniejszych,
+nieobjęty tym audytem).
+
+---
+
+
+
+**Zakres:** `dr-09/.../mod-srodowisko-wycinka-odpady-niebezpieczne-
+rekultywacja.md` (Części C i D w pełni przepisane, v1.0→v1.1) +
+`dr-09/SKILL.md`, `dr-09/MAPA-AKTOW.md`, `CHECKLIST-DEDUP.md`
+(aktualizacja statusu z "częściowo niedokończony" na "w pełni
+opracowany").
+
+**Kontekst:** użytkownik zażądał dokończenia dwóch tematów, które w
+poprzedniej turze zostały ŚWIADOMIE oznaczone jako niedokończone
+(zgodnie z ZASADA 13) zamiast fabrykowania powierzchownej treści.
+
+**Tereny skażone/rekultywacja — pełne opracowanie:** zweryfikowano
+online i ustalono DWA odrębne reżimy czasowe — ustawa szkodowa z
+13.04.2007 (dla szkód powstałych PO 30.04.2007) vs Prawo ochrony
+środowiska art. 101a-101m (REMEDIACJA — termin ustawowy zastępujący
+potoczną "rekultywację" — HISTORYCZNYCH zanieczyszczeń powierzchni
+ziemi). Opracowano pełną 7-krokową procedurę (wykaz starosty →
+zgłoszenie → wpis RDOŚ w rejestrze, decyzja w 6 miesięcy → badania →
+obowiązek remediacji → plan remediacji → egzekwowanie z zastępczym
+wykonaniem przez RDOŚ). KLUCZOWE ustalenie — TRZY scenariusze
+odpowiedzialności z art. 101h: (A) władający jako zasada podstawowa
+NIEZALEŻNIE od tego, kto zanieczyścił; (B) przerzucenie obowiązku na
+"innego sprawcę", jeśli władający WYKAŻE, że zanieczyszczenie nastąpiło
+PO objęciu przez niego władania — kluczowa linia obrony dla nabywców
+nieruchomości; (C) odpowiedzialność SOLIDARNA, jeśli zanieczyszczenie
+przez innego sprawcę nastąpiło ZA ZGODĄ/WIEDZĄ władającego.
+
+**Dopalacze/NPS — pełne opracowanie z kluczowym ustaleniem
+doktrynalnym:** "dopalacze" to NIE pojęcie ustawowe — ustawa o
+przeciwdziałaniu narkomanii rozróżnia DWIE odrębne kategorie prawne z
+CAŁKOWICIE różnymi reżimami: "środek zastępczy" (art. 4 pkt 27 —
+definicja OTWARTA/blankietowa, WYŁĄCZNIE reżim ADMINISTRACYJNY — kary
+pieniężne 20 000-1 000 000 zł, Rozdział 6a — z ustaloną PRZYCZYNĄ tego
+rozwiązania: definicja otwarta nie spełniałaby konstytucyjnego wymogu
+jasnej/precyzyjnej definicji przestępstwa) vs "nowa substancja
+psychoaktywna" (art. 4 pkt 11a — definicja ZAMKNIĘTA na liście
+rozporządzenia Ministra Zdrowia wydanego na podstawie art. 44b ust. 2 —
+reżim KARNY analogiczny do klasycznych narkotyków, wprowadzony DOPIERO
+nowelizacją z 20.07.2018 przez dodanie art. 62b). Opracowano pełną
+treść art. 62b (grzywna dla typu podstawowego — ŁAGODNIEJSZE niż
+klasyczne narkotyki z art. 62, gdzie typ podstawowy to już do 3 lat;
+do 3 lat przy znacznej ilości NSP; możliwe umorzenie dla nieznacznej
+ilości na własny użytek, analogicznie do art. 62a). Dodano obowiązek
+zgłaszania zatruć przez podmioty lecznicze w ciągu 48h (Rozdział 4a,
+2018) i zakaz reklamy sugerującej działanie psychoaktywne (art. 20 ust. 3).
+
+**Pozostała JEDNA, świadomie odnotowana niepewność (znacznie węższa niż
+poprzednio):** dokładna procedura zamykania punktów sprzedaży ("sklepy
+z dopalaczami") przez Państwową Inspekcję Sanitarną — ogólny mechanizm
+ustalony (kontrola sanitarna + kary pieniężne jako główne narzędzie),
+ale bez bezpośredniego cytatu przepisu proceduralnego — oznaczone
+wprost do weryfikacji, zgodnie z ZASADA 13.
+
+**Status:** ✅ W PEŁNI WDROŻONE. Moduł `mod-srodowisko-wycinka-odpady-
+niebezpieczne-rekultywacja.md` ma teraz WSZYSTKIE CZTERY części w pełni
+opracowane (Część A wycinka, B odpady, C rekultywacja, D dopalacze) —
+zaktualizowano status we wszystkich plikach rejestracyjnych z
+"częściowo niedokończony" na "w pełni opracowany".
+
+---
+
+
+
+**Zakres:** NOWY `mod-swiadek-koronny-duzy-maly.md` (DR-03) + rozbudowa
+`mod-KK-art291-pranie-pieniedzy.md` (DR-03) + NOWY `mod-KPC-odtworzenie-
+akt-zaginionych-zniszczonych.md` (DR-16) + `dr-03/SKILL.md` (34→35) +
+`dr-16/SKILL.md` (10→11) + MAPA-AKTOW dla obu + 3 wpisy `CHECKLIST-
+DEDUP.md`.
+
+**Kontekst:** użytkownik wskazał: mały i duży świadek koronny, fikcyjne
+firmy/działalności celem prania pieniędzy, fałszerstwo a faksymile,
+odtwarzanie dokumentów, archiwistyka.
+
+**Ustalenie wstępne — 2 z 5 elementów już dobrze pokryte:** faksymile
+(w `mod-KK-art270-310-falszerstwa-dokumentow.md`, realna treść o użyciu
+faksymile bez podstawy jako podrobienie dokumentu) i archiwistyka
+(dedykowany moduł `mod-ustawa-archiwa-dokumentacja.md` w DR-16, retencja/
+dostęp/brakowanie/archiwizacja elektroniczna) — potwierdzono bez
+rebuildu, z wyraźnym rozróżnieniem: archiwistyka (retencja akt w
+archiwach) to INNY temat niż "odtwarzanie dokumentów" (sądowa procedura
+rekonstrukcji akt zaginionych) — te dwa pojęcia są pokrewne, ale
+odrębne, stąd osobny nowy moduł dla drugiego.
+
+**Świadek koronny — rozbudowa z 2 linijek do pełnego modułu:**
+rozróżnienie duży (ustawa 1997, immunitet, program ochrony, ryzyko
+wznowienia w ciągu 5 lat przy nowym przestępstwie) vs mały (art. 60
+§3-4 KK, tylko nadzwyczajne złagodzenie, brak ochrony), tabela
+porównawcza, rozróżnienie od świadka incognito (często mylonego),
+odnotowana krytyka doktrynalna RPO o rozbieżności KK/KKS, najczęstsze
+powody niepowodzenia w praktyce (za późno, za mała wartość informacji,
+niespójność wersji).
+
+**Fikcyjne firmy jako technika prania pieniędzy — rozbudowa:**
+mechanizm (firmy krzaki, słupy, rachunki fikcyjne), KLUCZOWE
+orzecznictwo SA Katowice (3 wyroki) ustanawiające, że sekwencja
+przelew-zapłata za fikcyjną fakturę + natychmiastowa wypłata gotówkowa
+REALIZUJE WPROST znamiona prania pieniędzy, podwójna podstawa
+odpowiedzialności (przestępstwo skarbowe z faktury + odrębnie pranie
+pieniędzy z przepływu), katalog innych technik (transfer pricing,
+transfery transgraniczne, skrzynki rozdzielcze, kryptowaluty),
+ostrzeżenie dla "nieświadomych" członków zarządu z odesłaniem do
+istniejącego modułu o słupach.
+
+**Odtworzenie zaginionych akt — nowy moduł:** pełna treść Księgi IV KPC
+(art. 716-729) — co podlega odtworzeniu (pełne dla spraw w toku vs
+tylko orzeczenie + niezbędna część dla spraw zakończonych), terminy
+zawite (3 lata w toku / 10 lat zakończone — z ostrzeżeniem, by
+sprawdzić to PRZED przygotowaniem wniosku), trzyetapowa procedura
+rosnącej formalności (proste dołączenie odpisów → wezwanie do
+oświadczeń → dochodzenie z urzędu z przesłuchaniem sędziów/
+protokolantów), sankcja grzywny za niewykonanie wezwania, praktyczny
+schemat z realnego orzecznictwa (I Co 3669/13, III Cz 77/20) pokazujący
+zbieg z zarzutem przedawnienia roszczenia.
+
+**Status:** ✅ WDROŻONE. Wszystkie 5 elementów zaadresowane — 2
+potwierdzone jako już pokryte (bez duplikacji), 3 zbudowane/rozbudowane
+od podstaw.
+
+---
+
+
+
+**Zakres:** 2 NOWE pliki w `dr-09-budownictwo-srodowisko-energia-
+transport/modules/` + aktualizacja odesłania w `mod-ustawa-lesna-
+lowiecka-ochrona-przyrody.md` + `dr-09/SKILL.md` (17→19) + MAPA-AKTOW
+(+2 wiersze) + 2 wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik wskazał obszerny klaster: dopalacze,
+patostreamerzy, reklama agresywna wobec nieletnich, nielegalna budowa,
+zmiana przeznaczenia budynku, patodeweloperka, nielegalna i legalna
+wycinka drzew, niewielkie obiekty inżynieryjne, linie wysokiego
+napięcia, strefa powodziowa a budownictwo, tereny skażone i rekultywacja,
+wysypiska śmieci i odpady niebezpieczne/rakotwórcze.
+
+**Ustalenie wstępne po audycie — WIĘKSZA CZĘŚĆ już pokryta z
+niewidocznych wcześniej tur tej samej długiej sesji:** patostreamerzy
+(dedykowany moduł `mod-KK-art255b-patostreaming.md`, 247 linii, pełne
+opracowanie), reklama agresywna wobec nieletnich (dedykowany moduł
+`mod-reklama-wobec-nieletnich.md`, 3 równoległe reżimy prawne), nielegalna
+budowa/samowola budowlana (`mod-PrBud-prawo-budowlane.md`, realna treść).
+Potwierdzono bez rebuildu.
+
+**Nowy moduł 1 — patodeweloperka/użytkowanie/małe obiekty/linie
+napięcia/strefa powodziowa:** zmiana sposobu użytkowania (art. 71/71a
+Prawa budowlanego — definicja szeroka obejmująca zmiany warunków
+bezpieczeństwa pożarowego/powodziowego/zdrowotnego, procedura zgłoszenia
+z milczącą zgodą, przesłanki sprzeciwu, konsekwencje samowolnej zmiany —
+opłata legalizacyjna 10-krotnie podwyższona); reforma
+"antypatodeweloperska" 2024 z KONKRETNYMI parametrami (odległość 5 m
+zamiast 3-4 m dla budynków >4 kondygnacji NIEZALEŻNIE od okien, 30 m od
+przemysłu, tereny biologicznie czynne 25%/20%); rozszerzone zwolnienia
+z pozwolenia (domy do 70 m², reforma 2022, z zastrzeżeniem że projekt i
+kierownik budowy WCIĄŻ wymagane); strefy ochronne linii wysokiego
+napięcia (rozróżnienie BHP vs zabudowa, brak jednolitego przepisu
+ustawowego — zależność od MPZP); obszary szczególnego zagrożenia
+powodzią (art. 77 Prawa wodnego, katalog zakazów, procedura zwolnienia
+przez Wody Polskie).
+
+**Nowy moduł 2 — wycinka drzew/odpady niebezpieczne (z uczciwym
+niedokończeniem dwóch sekcji):** wycinka drzew — pełne opracowanie art.
+83-90 ustawy o ochronie przyrody (progi obwodu pnia wg gatunku, wyjątek
+dla drzew owocowych i rolników przywracających grunty do użytkowania,
+okres lęgowy 1.03-15.10, pomniki przyrody, kary administracyjne jako
+wielokrotność opłaty legalnej); odpady niebezpieczne — katalog odpadów
+(rozporządzenie 2020), KLUCZOWY zakaz obchodzenia klasyfikacji przez
+rozcieńczanie/mieszanie (art. 5 ustawy o odpadach), procedura zmiany
+klasyfikacji, progi ilościowe dla wysypisk wymagające oceny środowiskowej.
+
+**UCZCIWIE odnotowane jako NIEDOKOŃCZONE (Część C i D tego samego
+modułu):** tereny skażone i rekultywacja (tylko ramy ogólne, brak
+pełnej procedury administracyjnej) oraz dopalacze/nowe substancje
+psychoaktywne (tylko sygnalizacja mechanizmu regulacyjnego, brak
+pogłębienia kwalifikacji karnej) — obie sekcje WPROST oznaczone jako
+wymagające odrębnej, dogłębnej sesji badawczej w przyszłości, zgodnie
+z ZASADA 13 — czas w tej turze nie pozwolił na pełne opracowanie
+wszystkich 12 elementów klastra z równą starannością.
+
+**Status:** ⚠️ CZĘŚCIOWO WDROŻONE. 8 z 12 elementów klastra w pełni
+zaadresowane (2 nowe moduły + potwierdzenie 3 już pokrytych), 2 elementy
+(tereny skażone/rekultywacja, dopalacze) świadomie pozostawione jako
+niedokończone z jasnym oznaczeniem do kontynuacji.
+
+---
+
+
+
+**Zakres:** rozbudowa `mod-KK-kwalifikator-karnomaterialny.md` (art. 204 w
+BLOK J) + NOWY `mod-KK-art263-bron-nielegalna.md` (DR-03) + NOWY
+`mod-lowiectwo-klusownictwo.md` (DR-09) + nowa sekcja w `mod-ustawa-
+sluzby-operacyjne-retencja-danych.md` (DR-13) + `dr-03/SKILL.md` (33→34)
++ `dr-09/SKILL.md` (16→17) + MAPA-AKTOW dla obu + wpisy `CHECKLIST-
+DEDUP.md`.
+
+**Kontekst:** użytkownik wskazał klaster: przestępczość zorganizowana,
+firmy pod przykrywką, sutenerstwo, stręczycielstwo, handel nielegalnymi
+substancjami i bez zezwolenia, handel i nielegalny wyrób broni,
+kłusownictwo.
+
+**Ustalenia wstępne po audycie:** przestępczość zorganizowana (BLOK H,
+art. 258 KK) i handel narkotykami (BLOK D, art. 56-63 ustawy o
+przeciwdziałaniu narkomanii) były JUŻ dobrze pokryte z poprzednich
+sesji — potwierdzono bez rebuildu. Sutenerstwo/stręczycielstwo (art.
+204 KK) miało tylko JEDNĄ LINIJKĘ bez treści. Firmy pod przykrywką,
+broń (art. 263 KK), kłusownictwo — CAŁKOWITE LUKI.
+
+**Rozbudowa art. 204 KK:** pełna treść §1-3 (stręczycielstwo/kuplerstwo,
+sutenerstwo jako czerpanie korzyści, typ kwalifikowany dla małoletniego),
+zasada konsumpcji (SA Warszawa II AKa 125/99 — sutenerstwo pochłania
+wcześniejsze nakłanianie), granica z handlem ludźmi (art. 189a — gdy
+pojawia się przemoc/groźba/podstęp/wykorzystanie krytycznego położenia),
+cecha ciągłości procederu.
+
+**Nowy moduł — broń (art. 263 KK):** pełna treść §1-4, KLUCZOWE pułapki
+kwalifikacyjne (broń gazowa = broń palna wg uchwały SN 7 sędziów I KZP
+39/03; broń alarmowa >6mm wymaga zezwolenia; istotne części broni/
+amunicji traktowane jak cały przedmiot), zasada "jednego czynu" dla
+długotrwałego posiadania, zamiar ewentualny wystarczający (pułapka dla
+kolekcjonerów militariów), orzecznictwo SN IV KK 420/19 (amunicja
+niezależnie od broni), obligatoryjna grzywna 5000/10000 zł.
+
+**Nowy moduł — kłusownictwo:** KLUCZOWE ustalenie — brak JEDNEGO
+przepisu o kłusownictwie, TRZY odrębne reżimy (Prawo łowieckie art.
+51-54, do 5 lat, z przepadkiem obejmującym też przedmioty osób trzecich;
+ustawa o rybactwie śródlądowym art. 27a, rozróżnienie przestępstwo/
+wykroczenie wg metody i skali; gatunki chronione — odesłanie do już
+istniejącego art. 181 KK, bez duplikacji).
+
+**Nowa sekcja — firmy/działania pod przykrywką (DR-13):** podstawa
+prawna (art. 19a-20b ustawy o Policji + analogiczne przepisy ABW/AW/SG/
+CBA/ŻW), typologia metod pracy operacyjnej wg doktryny (wywiad,
+przetwarzanie danych, "przykrycie", legalizacja, tajni informatorzy,
+kombinacja operacyjna, gra operacyjna), fundusz operacyjny jako
+mechanizm finansowania poza zwykłymi przepisami o finansach publicznych,
+odszkodowanie dla współpracujących osób trzecich, ryzyko praktyczne
+(szkolenia "przykrywkowców") i checklist dot. granic dopuszczalnej
+prowokacji.
+
+**Status:** ✅ WDROŻONE. Wszystkie 6 elementów klastra tematycznego
+zaadresowane — 2 potwierdzone jako już pokryte, 1 rozbudowany z
+jednoliniowej wzmianki, 3 zbudowane od podstaw.
+
+---
+
+
+
+**Zakres:** NOWY `dr-02/.../mod-rzeczy-znalezione-zasiedzenie.md` (v1.0)
++ aktualizacja ANEKS D w `mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md`
+(zastąpienie 5-linijkowego szkieletu odesłaniem) + aktualizacja
+`mod-UGN-gospodarka-nieruchomosciami.md` (DR-09, odesłanie) +
+`dr-02/SKILL.md` (22→23) + `dr-02/MAPA-AKTOW.md` (+1 wiersz) + wpis
+`CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik wskazał kolejny klaster tematyczny: "rzeczy
+znalezione, przywłaszczenie mienia i zasiedzenie".
+
+**Ustalenie wstępne po audycie:** przywłaszczenie mienia (warstwa karna,
+art. 284 KK + art. 125 KW) JUŻ dobrze pokryte z poprzednich sesji —
+potwierdzono bez duplikacji. Rzeczy znalezione — CAŁKOWITA LUKA (ustawa
+z 2015 r. nigdzie nieopracowana, tylko przelotna wzmianka o art. 183-189
+KC w module KW). Zasiedzenie — TYLKO SZKIELET (5 linijek w ANEKS D:
+same terminy 20/30/3 lata, bez kryteriów dobrej/złej wiary, doliczania
+posiadania, ograniczeń rolnych) mimo że temat był zadeklarowany w
+"zakresie modułu" tego pliku.
+
+**Część A — rzeczy znalezione:** zweryfikowano online pełną ustawę z
+20.02.2015 — obowiązki znalazcy (zawiadomienie/wskazanie miejsca),
+procedura u starosty, KATEGORIE SZCZEGÓLNE (broń/materiały wybuchowe →
+zarządca nie starosta; sprzęt wojskowy → organy wojskowe; zabytki/
+materiały archiwalne → SZCZEGÓLNY reżim: własność Skarbu Państwa nie
+znalazcy, NAGRODA zamiast znaleźnego), znaleźne (1/10 wartości, termin
+zgłoszenia najpóźniej przy wydaniu rzeczy), nabycie własności przez
+znalazcę (rok od wezwania / 2 lata od znalezienia + dopełnienie
+obowiązków), przejście na POWIAT gdy znalazca nie chce rzeczy.
+
+**Część B — zasiedzenie, pełne opracowanie:** przesłanki (posiadanie
+SAMOISTNE, art. 336 KC — nigdy zależne), terminy, kryteria dobrej/złej
+wiary z KLUCZOWYM momentem oceny (chwila objęcia w posiadanie, nie
+później), domniemanie dobrej wiary (art. 7 KC), doliczanie posiadania
+poprzednika (art. 176 KC) z ograniczeniem przy złej wierze poprzednika,
+charakter DEKLARATORYJNY orzeczenia sądu (nabycie z mocy prawa wcześniej),
+ograniczenie dla nieruchomości rolnych (art. 172 §3 — rolnik indywidualny,
+300 ha), pułapka współwłasności (SN IV CSK 117/12 — bierność jednego
+współwłaściciela nie wystarcza), procedura sądowa (nieprocesowe, art.
+609-610 KPC).
+
+**Uczciwie odnotowana rozbieżność źródeł:** przy progu lat dla doliczania
+posiadania poprzednika w złej wierze (art. 176 §1) — jedno źródło
+podawało 20 lat, większość (w tym komentarze akademickie) wskazywała
+30 lat — NIE wybrano arbitralnie, oznaczono wprost do weryfikacji na
+ISAP, zgodnie z ZASADA 13.
+
+**Część C — przywłaszczenie:** potwierdzono istniejące pokrycie (art.
+284 KK, art. 125 KW), dodano wyraźne połączenie tematyczne z Częścią A
+(znalazca działający z zamiarem zatrzymania rzeczy = przywłaszczenie) i
+krótkie uzupełnienie o roszczeniu windykacyjnym (art. 222 KC) jako
+ścieżce równoległej do odpowiedzialności karnej.
+
+**Status:** ✅ WDROŻONE. Usunięto duplikację — ANEKS D i moduł UGN
+odsyłają teraz do pełnego opracowania zamiast powielać skrócone wersje.
+
+---
+
+
 
 **Zakres:** `dr-02/.../mod-ustawa-monopole-panstwowe.md` (rozbudowa
 sekcji 5, v1.0→v1.1) + wpis `CHECKLIST-DEDUP.md`.

@@ -135,7 +135,7 @@ view /mnt/skills/user/dr-06-podatki-finanse-publiczne-aml/MAPA-AKTOW.md
 
 ## Powiązania zewnętrzne
 - Wchodzi z: `prawo-polskie-v2` → `ROUTING-MAP.md` → ten skill
-- KPA (postępowanie adm.): `dr-04` → `mod-KPA-postepowanie-administracyjne`
+- KPA (postępowanie adm.): `dr-05` → `mod-KPA-postepowanie-administracyjne`
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
 - Weryfikacja prawa: isap.sejm.gov.pl
 - Interpretacje / objaśnienia / WIS-WIA-WIP: podatki.gov.pl/narzedzia/eureka/ oraz interpretacje.podatki.gov.pl

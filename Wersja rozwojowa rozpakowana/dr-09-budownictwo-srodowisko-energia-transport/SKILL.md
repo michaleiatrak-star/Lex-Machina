@@ -52,7 +52,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W10 Obiekt liniowy (art. 3 pkt 3a PrBud — kable w kanalizacji ≠ obiekt!)
 - BAS-W14 ⚠️ Reforma upol 2025 — nowe definicje budynek/budowla (dot. też DR-06)
 
-## Moduły (16 łącznie — ✓ 16 OK, ☐ 0 STUB)
+## Moduły (19 łącznie — ✓ 19 OK, ☐ 0 STUB)
 
 ```
 BUDOWNICTWO:
@@ -82,6 +82,30 @@ BUDOWNICTWO:
   [✓] OK    mod-ustawa-odpadach-gospodarka-komunalna
               (BDO, zezwolenia, kary, nielegalne składowanie, rekultywacja)
   [✓] OK    mod-ustawa-lesna-lowiecka-ochrona-przyrody
+  [✓] OK    mod-lowiectwo-klusownictwo
+  [✓] OK    mod-PrBud-patodeweloperka-uzytkowanie-male-obiekty-ograniczenia
+              (dodany 2026-07-18: zmiana sposobu użytkowania (art. 71/71a),
+               reforma "antypatodeweloperska" 2024 [odległość 5 m dla
+               budynków >4 kondygnacji, 30 m od przemysłu, tereny zielone
+               25%/20%], niewielkie obiekty (domy do 70 m² bez pozwolenia),
+               strefy ochronne linii wysokiego napięcia, obszary
+               szczególnego zagrożenia powodzią (Prawo wodne art. 77))
+  [✓] OK    mod-srodowisko-wycinka-odpady-niebezpieczne-rekultywacja
+              (dodany 2026-07-18, DOKOŃCZONY 2026-07-18: wycinka drzew
+               [progi obwodu pnia, wyjątki rolnicy/drzewa owocowe, kary],
+               odpady niebezpieczne [katalog odpadów, zakaz obchodzenia
+               klasyfikacji przez rozcieńczanie], tereny skażone/
+               rekultywacja [POŚ art. 101a-101m, 3 scenariusze
+               odpowiedzialności: władający/inny sprawca/solidarna],
+               dopalacze/NPS [kluczowe rozróżnienie: środek zastępczy =
+               reżim administracyjny vs NSP na liście = reżim karny
+               art. 62b])
+              (dodany 2026-07-18: kłusownictwo — TRZY odrębne reżimy
+               (Prawo łowieckie art. 51-54, do 5 lat; ustawa o rybactwie
+               śródlądowym art. 27a, przestępstwo/wykroczenie wg metody;
+               gatunki chronione — odesłanie do art. 181 KK). Przepadek
+               obejmujący też przedmioty osób trzecich. Odpowiedź na
+               pytanie użytkownika)
               (ochrona przyrody, Natura 2000, szkody łowieckie, wycinka)
 
 ENERGIA I ZASOBY:

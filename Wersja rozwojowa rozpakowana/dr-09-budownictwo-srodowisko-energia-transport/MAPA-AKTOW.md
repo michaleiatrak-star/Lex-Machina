@@ -6,9 +6,9 @@
 |---|---|---|---|
 | Prawo ochrony środowiska (POŚ) | Dz.U. 2026 poz. 670 t.j. — VER 2026-07-02j: nadal aktualne (nowsze niż potwierdzony wcześniejszy t.j. 2025.647) | mod-POS-prawo-ochrony-srodowiska | ✅ OK |
 | Pos Prawo Ochrony Srodowiska Szczegoly | — weryfikuj ISAP — | mod-POS-prawo-ochrony-srodowiska-szczegoly | ⚠️ SPRAWDŹ |
-| Prawo budowlane | Dz.U. 2026 poz. 524 t.j. ⚠️ art. 1 pkt 1 lit. c → 20.09.2026 | mod-PrBud-prawo-budowlane | ✅ OK |
+| Prawo budowlane | Dz.U. 2026 poz. 524 t.j. (zmieniona ustawą Dz.U. 2025 poz. 1847) — VER 2026-07-13 (TRYB DZU): większość przepisów już w mocy (07.01.2026, 01.01.2026, część wstecznie od 22.10.2025); ⚡ pozostaje art. 1 pkt 1 i 3 → wchodzi 20.09.2026 | mod-PrBud-prawo-budowlane | ✅ OK |
 | Ustawa o samorządach zawodowych architektów oraz inżynierów budownictwa (zawód, zawód zaufania publicznego) | Dz.U. 2025 poz. 1783 t.j. ✅ VER: 2026-06-14, potwierdzone ponownie 2026-07-02j (obwieszczenie 24.11.2025) — ⚠️ samorząd urbanistów zniesiony 2014, nie objęty tym aktem | mod-ustawa-architekci-inzynierowie-budownictwa-zawod | ✅ OK |
-| Prawo energetyczne + URE + OZE | Dz.U. 2025 poz. 459 ze zm. (zm.: ⏳ 2026.516) | mod-PrEnergetyczne-URE-OZE | ✅ OK |
+| Prawo energetyczne + URE + OZE | Dz.U. 2025 poz. 459 ze zm. (zm.: 2026.516) — VER 2026-07-13 (TRYB DZU): większość w mocy od 16.04.2026 (art. 1 pkt 14 lit. a,d; pkt 20; art. 34); ⏳ pozostałe art. 9, 11, 13, 14 → 16.10.2026 | mod-PrEnergetyczne-URE-OZE | ✅ OK |
 | Prawo geodezyjne + wywłaszczenia | ⚠️ Dz.U. 2024 poz. 1151 t.j. (POPRAWKA 2026-07-02i — BYŁO błędnie 2023.1752) | mod-PrGeodezyjne-kartografia-wywlaszczenia | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
 | Prawo wodne | Dz.U. 2025 poz. 960 t.j. | mod-PrWodne-gospodarka-sciekowa | ✅ OK |
 | Ustawa o gospodarce nieruchomościami (UGN) | ⚠️ Dz.U. 2026 poz. 399 t.j. (POPRAWKA 2026-07-02i — BYŁO błędnie 2024.1899, obwieszczenie 12.03.2026) | mod-UGN-gospodarka-nieruchomosciami | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
@@ -20,6 +20,9 @@
 | Ustawa o planowaniu i zagospodarowaniu przestrzennym | Dz.U. 2026 poz. 538 t.j. — VER 2026-07-02j: nadal aktualne (stan na 23.03.2026) | mod-ustawa-planowanie-przestrzenne | ✅ OK |
 | Prawo gazowe | Dz.U. 2024 poz. 1538 ze zm. | mod-ustawa-prawo-gazowe | ✅ OK |
 | Ustawa o transporcie drogowym, kolejowym, lotniczym | Dz.U. 2024 poz. 1539 ze zm. | mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski | ✅ OK |
+| Kłusownictwo — Prawo łowieckie (13.10.1995) art. 51-54 + ustawa o rybactwie śródlądowym (18.04.1985) art. 27a | ⚠️ zweryfikuj t.j. obu ustaw na ISAP | mod-lowiectwo-klusownictwo | ✅ NOWY 2026-07-18, odpowiedź na pytanie użytkownika |
+| Prawo budowlane art. 71/71a (zmiana użytkowania) + rozporządzenie ws. warunków technicznych budynków (reforma "antypatodeweloperska" 2024) + Prawo wodne art. 77 (OSZP) | Prawo budowlane Dz.U. — ta sama pozycja co mod-PrBud; rozporządzenie z 27.10.2023 zmieniające rozporządzenie z 12.04.2002; Prawo wodne z 20.07.2017 — ⚠️ zweryfikuj wszystkie t.j. | mod-PrBud-patodeweloperka-uzytkowanie-male-obiekty-ograniczenia | ✅ NOWY 2026-07-18, odpowiedź na klaster pytań |
+| Ustawa o ochronie przyrody art. 83-90 (wycinka drzew) + ustawa o odpadach (14.12.2012) art. 5-8 (odpady niebezpieczne) + POŚ art. 101a-101m (remediacja) + ustawa o przeciwdziałaniu narkomanii art. 62b/4 pkt 27/11a (dopalacze/NPS) | ⚠️ zweryfikuj t.j. wszystkich 4 ustaw + rozporządzenia (katalog odpadów 2020, wykaz NSP Ministra Zdrowia) | mod-srodowisko-wycinka-odpady-niebezpieczne-rekultywacja | ✅ NOWY 2026-07-18, DOKOŃCZONY 2026-07-18 (wszystkie 4 części w pełni opracowane) |
 
 > Źródło weryfikacji: isap.sejm.gov.pl | orzeczenia.nsa.gov.pl | sn.pl
 > Aktualizacja: 2026-07-02j (TRYB DZU krok 3/16 wg WARN-26, CZĘŚCIOWY: 9/16

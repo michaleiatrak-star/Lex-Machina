@@ -64,7 +64,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   wspierające (→ mod-niepelnosprawnosc-intelektualna-gluchota.md,
   mod-niewidomy-prawa-prawne.md, mod-prawa-obywatelskie-srodki-karne.md)
 
-## Moduły (26 łącznie — ✓ 26 OK, ☐ 0 STUB)
+## Moduły (25 łącznie — ✓ 25 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
 
 ```
   [✓] OK    mod-KP-prawo-pracy
@@ -121,7 +121,12 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
                dni, 80%/100%) + ZUPEŁNIE NOWY temat: jawność wynagrodzeń,
                dyrektywa UE 2023/970, Etap 1 już obowiązuje od 24.12.2025.
                Odpowiedź na pytanie użytkownika o świadczenia pracodawcy)
-  [✓] OK    mod-KPA-postepowanie-administracyjne
+  [✓] PRZENIESIONY 2026-07-19 → DR-05
+              mod-KPA-postepowanie-administracyjne
+              (moduł kanoniczny KPA/PPSA przeniesiony do DR-05, gdzie
+               logicznie przynależy — sprawdź tam, rozbudowany o
+               sekcję 4a: ugoda, milczące załatwienie, zaświadczenia,
+               skargi/wnioski Działu VIII)
   [✓] OK    mod-SUS-ZUS-ubezpieczenia-spoleczne
               (zawiera Aneks A: renta — 3 przesłanki z tabelą stażu;
                Aneks B: kalkulator terminów ZUS; Aneks C: predykcja wyniku)

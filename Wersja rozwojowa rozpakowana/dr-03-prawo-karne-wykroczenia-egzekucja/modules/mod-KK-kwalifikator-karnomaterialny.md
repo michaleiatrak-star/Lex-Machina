@@ -70,7 +70,9 @@ II. WEDŁUG ZNAMIENIA SKUTKU:
      karalny, bez popełnienia dodatkowego przestępstwa w jej ramach).
 
 III. WEDŁUG SPOSOBU DZIAŁANIA SPRAWCY:
-   Z DZIAŁANIA — np. zgwałcenie (art. 197), bigamia (art. 206)
+   Z DZIAŁANIA — np. zgwałcenie (art. 197), bigamia (art. 206 — pełne
+     opracowanie: `dr-02/modules/mod-KRO-zawarcie-malzenstwa-bigamia-
+     transgraniczne.md` Część B, dodane 2026-07-19)
    Z ZANIECHANIA — np. nieudzielenie pomocy (art. 162)
    Z DZIAŁANIA I ZANIECHANIA — np. zabójstwo (art. 148 — można zabić
      przez działanie LUB przez zaniechanie, gdy na sprawcy ciążył
@@ -839,8 +841,34 @@ INNE PRZESTĘPSTWA W ROZDZIALE XXV:
   Art. 201 KK — kazirodztwo (dobrowolne obcowanie płciowe między wstępnym
     a zstępnym, rodzeństwem, przysposobionym a przysposabiającym)
   Art. 203 KK — zmuszenie do prostytucji
-  Art. 204-204a KK — stręczycielstwo/sutenerstwo/kuplerstwo, czerpanie
-    korzyści z cudzego nierządu
+  Art. 204 KK — ⭐ STRĘCZYCIELSTWO, SUTENERSTWO I KUPLERSTWO
+    (rozbudowane 2026-07-18, wcześniej jedna linijka bez treści):
+    § 1 — kto W CELU OSIĄGNIĘCIA KORZYŚCI MAJĄTKOWEJ nakłania inną
+        osobę do uprawiania prostytucji LUB jej to ułatwia (kuplerstwo:
+        wyszukiwanie klientów, wynajmowanie pomieszczeń, dowożenie) →
+        3 miesiące - 5 lat pozbawienia wolności
+    § 2 — SUTENERSTWO: kto CZERPIE KORZYŚCI MAJĄTKOWE z uprawiania
+        prostytucji przez inną osobę → TA SAMA kara (3 m-ce - 5 lat).
+        Korzyść NIE musi być głównym celem działalności sprawcy; może
+        być przekazywana dobrowolnie przez osobę uprawiającą prostytucję
+    § 3 — TYP KWALIFIKOWANY: gdy osoba z §1/2 jest MAŁOLETNIA →
+        1-10 lat pozbawienia wolności (wystarczy, że sprawca PRZEWIDYWAŁ
+        małoletniość i się na nią GODZIŁ — SA Poznań, II AKa 232/12)
+    § 4 — uchylony
+    KONSUMPCJA (SA Warszawa, II AKa 125/99): §2 (sutenerstwo) POCHŁANIA
+        zachowania z §1 (wcześniejsze nakłanianie/ułatwianie) — sprawca
+        odpowiada za JEDNO przestępstwo, nie zbieg kumulatywny
+    GRANICA z art. 189a KK (handel ludźmi): jeśli sprawca stosuje
+        PRZEMOC, GROŹBĘ, PODSTĘP lub wykorzystuje KRYTYCZNE POŁOŻENIE
+        ofiary przy werbowaniu → wykracza poza art. 204, kwalifikacja
+        jako handel ludźmi (zbrodnia, od 3 lat) — sprawdź ZAWSZE ten
+        próg, to częsty błąd niedoszacowania wagi czynu
+    CECHA CIĄGŁOŚCI: proceder musi mieć charakter POWTARZALNY, nie
+        jednorazowy/incydentalny — jednorazowe podwiezienie kogoś do
+        klienta NIE wypełnia znamion kuplerstwa
+    TRYB ŚCIGANIA: Z URZĘDU (§1-3)
+    UWAGA: sama PROSTYTUCJA nie jest w Polsce przestępstwem — karalne
+        jest WYŁĄCZNIE organizowanie/ułatwianie/czerpanie korzyści
   Art. 205 KK — tryb ścigania niektórych przestępstw z rozdziału (wnioskowy
     w wybranych przypadkach — ⛔ zawsze weryfikuj aktualny tryb per przepis,
     część typów kwalifikowanych ścigana z urzędu)

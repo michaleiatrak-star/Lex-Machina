@@ -89,7 +89,7 @@ view /mnt/skills/user/dr-08-samorzad-terytorialny-prawo-lokalne/MAPA-AKTOW.md
 
 ## Powiązania zewnętrzne
 - Wchodzi z: `prawo-polskie-v2` → `ROUTING-MAP.md` → ten skill
-- KPA / PPSA: `dr-04` → `mod-KPA-postepowanie-administracyjne`
+- KPA / PPSA: `dr-05` → `mod-KPA-postepowanie-administracyjne`
 - Podatki lokalne (podatek od nieruchomości — stawki i reforma 2025): `dr-06` → `mod-ustawa-podatek-nieruchomosci-i-lokalne`
 - Finanse publiczne / dyscyplina: `dr-06` → `mod-UFP-finanse-publiczne-NIK-RIO`
 - Zamówienia publiczne JST: `dr-07`

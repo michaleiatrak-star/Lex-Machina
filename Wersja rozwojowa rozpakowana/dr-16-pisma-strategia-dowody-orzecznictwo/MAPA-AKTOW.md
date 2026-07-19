@@ -4,7 +4,7 @@
 
 | Narzędzie / akt | Podstawa | Moduł | Status |
 |---|---|---|---|
-| KPC — przesłuchanie świadków (art. 258–305) | Dz.U. 2026 poz. 468 ze zm. | mod-KPC-przesluchanie-swiadkow | ✅ OK |
+| KPC — przesłuchanie świadków (art. 258–305) | Dz.U. 2026 poz. 468 ze zm. | shared/PRZESLUCHANIE-SWIADKOW-KPC.md (przeniesiony 2026-07-12) | ✅ OK |
 | KPC — e-doręczenia i portal sądowy | Dz.U. 2026 poz. 468 ze zm. | mod-KPC-e-doreczenia-portal-sadowy | ✅ OK |
 | KPC — procedury UE (TSUE, ETPCz) | KPC + Rozp. UE | mod-KPC-procedury-UE-TSUE-ETPC | ✅ OK |
 | KPC — arbitraż sportowy i dyscyplinarny | Dz.U. 2026 poz. 468 cz. V | mod-KPC-arbitraz-sportowy-dyscyplinarny | ✅ OK |
@@ -17,6 +17,7 @@
 | Ustawa o dokumentach paszportowych | Dz.U. 2026 poz. 196 ze zm. | mod-ustawa-obywatelstwo-paszporty-ewidencja | ✅ OK |
 | Ustawa o ewidencji ludności | Dz.U. 2026 poz. 384 ze zm. | mod-ustawa-obywatelstwo-paszporty-ewidencja | ✅ OK |
 | KPC — wzory pism procesowych | Dz.U. 2026 poz. 468 ze zm. | mod-KPC-wzory-pism-procesowych | ✅ OK |
+| KPC Księga IV — postępowanie w razie zaginięcia/zniszczenia akt (art. 716-729) | Dz.U. 2026 poz. 468 t.j. (ta sama pozycja co KPC ogólne, inna księga) | mod-KPC-odtworzenie-akt-zaginionych-zniszczonych | ✅ NOWY 2026-07-18, odpowiedź na pytanie użytkownika |
 
 > Aktualizacja: 2026-07-02bbbb (TRYB DZU krok 14/16 wg WARN-26, ZAMKNIĘTY:
 > wszystkie 6 efektywnych aktów krajowych zweryfikowane [KPC — 5 wierszy,

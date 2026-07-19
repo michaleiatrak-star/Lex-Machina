@@ -4,7 +4,7 @@
 
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
-| Prawo zamówień publicznych (PZP) | ⚠️ Dz.U. 2026 poz. 793 t.j. (POPRAWKA 2026-07-02gg — BYŁO błędnie 2024.1320; obwieszczenie 27.05.2026, publ. 16.06.2026 — bardzo świeży, sprzed ~2 tygodni w chwili tej sesji) | mod-PZP-zamowienia-publiczne-KIO | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
+| Prawo zamówień publicznych (PZP) | ⚠️ Dz.U. 2026 poz. 793 t.j. (POPRAWKA 2026-07-02gg — BYŁO błędnie 2024.1320; obwieszczenie 27.05.2026, publ. 16.06.2026) | mod-PZP-zamowienia-publiczne-KIO | ✅ CZĘŚCIOWO ZAKTUALIZOWANY 2026-07-18 (naprawiono martwy odnośnik do DR-13, rozbudowano przetarg ograniczony/nieograniczony) — ⚠️ reszta modułu nadal oparta na poprzedniej weryfikacji, rozważ pełną re-weryfikację przy okazji |
 | PZP Dział I — przepisy ogólne, wyłączenia, szacowanie wartości (art. 1-82) | Dz.U. 2026 poz. 793 t.j. (ta sama pozycja, inny dział) ze zm. Dz.U. 2025 poz. 1173 (próg 170 000 zł od 1.01.2026) | mod-PZP-dzial-I-podstawy-wylaczenia-szacowanie | ✅ NOWY 2026-07-18, priorytet 1. z audytu PZP |
 | PZP Dział V — zamówienia sektorowe (art. 362-394) + Dział VI — obronność/bezpieczeństwo (art. 395-430), w tym art. 131a infrastruktura krytyczna | Dz.U. 2026 poz. 793 t.j. (ta sama pozycja, inne działy) | mod-PZP-dzial-V-VI-sektorowe-obronne-infrastruktura-krytyczna | ✅ NOWY 2026-07-18, naprawia martwy odnośnik do DR-13 |
 | PZP Dział XI — kontrola udzielania zamówień (art. 596-617) + Dział XII — kary pieniężne (art. 618-622) | Dz.U. 2026 poz. 793 t.j. (ta sama pozycja, inne działy) | mod-PZP-dzial-XI-XII-kontrola-kary-UZP | ✅ NOWY 2026-07-18 |

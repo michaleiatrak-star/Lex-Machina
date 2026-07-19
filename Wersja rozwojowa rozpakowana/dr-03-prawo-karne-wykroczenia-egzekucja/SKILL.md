@@ -76,7 +76,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   obrona obligatoryjna art. 79 §1 pkt 2-4 KPK (→ mod-niewidomy-prawa-prawne.md,
   mod-niepelnosprawnosc-intelektualna-gluchota.md)
 
-## Moduły (33 łącznie — ✓ 33 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+## Moduły (35 łącznie — ✓ 35 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
 ## ⚠️ 2026-07-15: naprawiono niezgodność dysk↔lista — 4 pliki istniały na
 ## dysku, ale nie były wpisane poniżej: mod-KK-art291-pranie-pieniedzy,
 ## mod-ustawa-fundusz-pomocy-pokrzywdzonym, mod-ustawa-narkomania,
@@ -195,6 +195,17 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
                + BRD II Dz.U. 2025 poz. 1872; brawurowa jazda, nielegalne wyścigi,
                drift art. 86c KW, sądowy zakaz/dożywotni zakaz/przepadek, pj od 17 lat)
   [✓] OK    mod-KK-art291-pranie-pieniedzy
+              (2026-07-18: dodano sekcję "fikcyjne firmy jako technika
+               prania pieniędzy" — firmy krzaki, słupy, rachunki
+               fikcyjne, orzecznictwo SA Katowice o sekwencji przelew→
+               wypłata gotówkowa za fikcyjną fakturę)
+  [✓] OK    mod-swiadek-koronny-duzy-maly
+              (dodany 2026-07-18: pełne opracowanie — duży świadek
+               koronny [ustawa 1997, immunitet, program ochrony,
+               ryzyko wznowienia w ciągu 5 lat] vs mały świadek koronny
+               [art. 60 §3-4 KK, tylko złagodzenie kary, brak ochrony],
+               tabela porównawcza, rozróżnienie od świadka incognito.
+               Odpowiedź na pytanie użytkownika)
               (paserstwo art. 291-293 KK + pranie pieniędzy art. 299 KK — dopisany do
                listy 2026-07-15, plik istniał wcześniej, patrz naprawa wyżej)
   [✓] OK    mod-ustawa-fundusz-pomocy-pokrzywdzonym
@@ -211,6 +222,13 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
                ogólnych technik)
   [✓] OK    mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych
   [✓] OK    mod-KK-slupy-fikcyjna-reprezentacja-spolki
+  [✓] OK    mod-KK-art263-bron-nielegalna
+              (dodany 2026-07-18: art. 263 KK — wyrób/handel/posiadanie
+               broni palnej i amunicji bez zezwolenia. Pułapki: broń
+               gazowa/alarmowa >6mm = broń palna (uchwała SN I KZP 39/03),
+               istotne części traktowane jak cała broń, jeden czyn dla
+               długotrwałego posiadania, obligatoryjna grzywna 5000/
+               10000 zł. Odpowiedź na pytanie o handel/wyrób broni)
               (dodany 2026-07-17: odpowiedzialność karna "słupów" jako
                prezesów/wspólników — współsprawstwo/pomocnictwo art. 18,
                rozbieżność orzecznictwa co do świadomości, powiązanie z

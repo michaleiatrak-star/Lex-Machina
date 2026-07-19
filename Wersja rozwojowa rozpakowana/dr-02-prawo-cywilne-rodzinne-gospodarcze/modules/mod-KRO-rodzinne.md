@@ -204,6 +204,154 @@ Termin na podział: brak — można żądać w każdym czasie po ustaniu wspóln
 
 ---
 
+## ⭐ EKSMISJA MAŁŻONKA ZE WSPÓLNEGO MIESZKANIA (art. 58 §2-4 KRO) — dodane 2026-07-19
+
+```
+ZASADA: rozwód SAM W SOBIE NIE eksmituje drugiej strony — sąd DĄŻY do
+tego, by NIKOGO nie eksmitować. DOMYŚLNIE sąd orzeka wyłącznie o
+SPOSOBIE KORZYSTANIA ze wspólnego mieszkania (art. 58 §2 zd. 1).
+
+PRZESŁANKA EKSMISJI (art. 58 §2 zd. 2, wąska/wyjątkowa):
+  □ NA ŻĄDANIE jednej ze stron (NIGDY z urzędu)
+  □ W WYPADKACH WYJĄTKOWYCH
+  □ Gdy JEDEN z małżonków SWOIM RAŻĄCO NAGANNYM POSTĘPOWANIEM
+    UNIEMOŻLIWIA wspólne zamieszkiwanie
+
+⭐ ZAKRES (SN, wyrok II CKN 670/2000): przepis obejmuje WSZYSTKIE
+przypadki takiego zachowania i NIE UZALEŻNIA eksmisji od TYTUŁU
+PRAWNEGO do lokalu — można eksmitować NAWET współwłaściciela mieszkania.
+
+DOWODY KLUCZOWE: Niebieska Karta, notatki policyjne, zeznania świadków
+— BEZ tego sąd zwykle uznaje sprawę za "słowo przeciwko słowu" i oddala
+wniosek.
+
+DWIE ŚCIEŻKI:
+  WOLNA — eksmisja W WYROKU ROZWODOWYM — trwa tyle co cały proces
+  SZYBKA — zabezpieczenie w toku sprawy LUB ustawa antyprzemocowa
+    (Policja/ŻW może wydać natychmiastowy nakaz opuszczenia + zakaz
+    zbliżania się na 14 dni, przy zagrożeniu życia/zdrowia)
+
+SKUTEK przy WSPÓŁWŁASNOŚCI lokalu: eksmisja NIE POZBAWIA wyeksmitowanego
+tytułu prawnego (nadal współwłaściciel) — dotyczy WYŁĄCZNIE fizycznego
+korzystania, nie własności.
+
+⚠️ ZASTRZEŻENIE ORZECZNICZE (SN I CSK 190/06; uchwała III CZP 73/08):
+eksmisja PO rozwodzie NIE POWINNA zastępować rozstrzygnięcia z
+ODRĘBNEGO postępowania o PODZIAŁ MAJĄTKU — inaczej grozi niespójność
+orzeczeń.
+
+ALTERNATYWA: na zgodny wniosek stron, sąd może zamiast eksmisji orzec o
+FIZYCZNYM PODZIALE mieszkania lub przyznaniu go jednemu małżonkowi
+(gdy drugi zgadza się je opuścić bez lokalu zamiennego).
+```
+
+---
+
+## ⭐ OBOWIĄZEK ALIMENTACYJNY SZERSZEGO KRĘGU KREWNYCH (art. 128-144¹ KRO) — dodane 2026-07-19
+
+```
+KRĄG ZOBOWIĄZANYCH (art. 128 KRO) NIE OGRANICZA SIĘ do rodziców i dzieci
+— obejmuje KREWNYCH W LINII PROSTEJ (dziadkowie ↔ wnuki, w obie strony)
+ORAZ RODZEŃSTWO.
+
+ZASADA POMOCNICZOŚCI: obowiązek DALSZYCH krewnych (np. dziadków)
+AKTUALIZUJE SIĘ dopiero, gdy BLIŻSI krewni (rodzice) NIE ISTNIEJĄ lub
+NIE SĄ W STANIE zaspokoić potrzeb uprawnionego — dziadkowie NIE
+odpowiadają "równolegle" z rodzicami, lecz SUBSYDIARNIE.
+
+PRZYKŁAD: wnuk może dochodzić alimentów od dziadków, gdy rodzice są
+niewypłacalni/nieznani z miejsca pobytu/bez środków.
+
+PRZESŁANKA OGÓLNA (jak w sekcji ALIMENTY): niedostatek uprawnionego +
+możliwości zarobkowe/majątkowe zobowiązanego.
+```
+
+---
+
+## ⭐ MACIERZYŃSTWO ZASTĘPCZE / SUROGACJA — dodane 2026-07-19
+
+```
+STATUS: PRAWNA "SZARA STREFA" — NIE zakazana wprost, ale NIE uregulowana
+ani zalegalizowana.
+
+ZASADA NADRZĘDNA "MATER SEMPER CERTA EST": matką dziecka jest ZAWSZE
+kobieta, która je URODZIŁA (surogatka), niezależnie od materiału
+genetycznego — rodzice INTENCJONALNI nie mają automatycznego statusu.
+
+SKUTKI: umowa o macierzyństwo zastępcze — wg dominującego poglądu
+BEZWZGLĘDNIE NIEWAŻNA (art. 58 §1 KC). Możliwy zbieg z art. 211a §2 KK
+("nielegalna adopcja") — głównie przy surogacji KOMERCYJNEJ; surogacja
+ALTRUISTYCZNA (bez korzyści majątkowej) prawdopodobnie poza tym
+przepisem. Surogacja dobrowolna NIE mieści się, wg dominującego
+poglądu, w definicji handlu ludźmi (art. 115 §22 KK).
+
+PRAKTYCZNE KONSEKWENCJE: OJCIEC biologiczny MOŻE ustalić ojcostwo
+(sekcja USTALENIE OJCOSTWA wyżej). MATKA intencjonalna BEZ ZGODY
+surogatki NIE MOŻE uregulować macierzyństwa — to NAJWIĘKSZE ryzyko
+praktyczne. Droga: zwykle przysposobienie (patrz `mod-KRO-
+przysposobienie-adopcja-miedzynarodowa.md`).
+
+⚠️ Temat szybko ewoluuje (ETPCz rozpatruje sprawy uznawania zagranicznych
+aktów urodzenia po surogacji) — zweryfikuj aktualny stan przy sprawie
+transgranicznej.
+```
+
+---
+
+## ⭐ KONKUBINAT / ZWIĄZKI NIEFORMALNE — PRAKTYCZNE KONSEKWENCJE — dodane 2026-07-19
+
+```
+BRAK REGULACJI: polskie prawo NIE PRZEWIDUJE żadnej odrębnej instytucji
+dla konkubinatu (niezależnie od płci partnerów) — brak "związku
+partnerskiego" w prawie krajowym.
+
+KLUCZOWE BRAKI względem małżeństwa:
+  □ Brak wspólności majątkowej — każdy partner ma własny majątek
+  □ Brak automatycznego dziedziczenia ustawowego (tylko testament)
+  □ Brak obowiązku alimentacyjnego między partnerami
+  □ Brak renty rodzinnej po zmarłym partnerze
+  □ Brak domniemania ojcostwa (art. 62 KRO dotyczy wyłącznie mężów)
+
+NARZĘDZIA OCHRONY mimo braku regulacji:
+  □ Współwłasność w częściach ułamkowych (świadomie udokumentowana)
+  □ Testament na rzecz partnera (w tym zapis windykacyjny)
+  □ Umowa o wspólnym zamieszkiwaniu
+  □ Pełnomocnictwa (w tym medyczne — partner BEZ formalnego związku
+    NIE MA automatycznego prawa do informacji/decyzji medycznych)
+  □ Ubezpieczenie na życie ze wskazaniem partnera jako uposażonego
+
+Checklist: przy KAŻDEJ konsultacji z parą w konkubinacie zapytaj wprost
+o te narzędzia — brak ustawowej ochrony często zaskakuje klientów.
+```
+
+---
+
+## ⭐ ZMIANA IMIENIA I NAZWISKA (ustawa z 17.10.2008) — dodane 2026-07-19
+
+```
+Odrębna od zmiany nazwiska PRZY ROZWODZIE (art. 59 KRO, patrz sekcja
+OPŁATY SĄDOWE niżej) — dotyczy zmiany z INNYCH powodów, w KAŻDYM
+momencie życia.
+
+ORGAN: kierownik USC właściwy dla miejsca zamieszkania — DECYZJA
+administracyjna.
+
+WAŻNE POWODY (katalog przykładowy): imię/nazwisko śmieszne/nielicujące
+z godnością, brzmienie niepolskie/trudne do zapisania, zmiana na
+nazwisko faktycznie UŻYWANE od dawna, powrót do nazwiska sprzed błędnej
+czynności stanu cywilnego.
+
+ROZRÓŻNIENIE: zmiana PRZY ROZWODZIE (art. 59 KRO) jest BEZPŁATNA,
+dostępna TYLKO w ciągu 3 miesięcy od uprawomocnienia rozwodu, WYŁĄCZNIE
+powrót do nazwiska sprzed małżeństwa. Ustawa z 2008 r. jest szerszym
+mechanizmem, dostępnym zawsze, dla każdego ważnego powodu.
+
+⚠️ Dokładna procedura (termin, koszty, odwołanie) niepotwierdzona w
+pełni w tej sesji — punkt startowy.
+```
+
+---
+
 ## WŁADZA RODZICIELSKA I KONTAKTY
 
 ```
@@ -351,6 +499,7 @@ web_search: "rozwód rejestrowy USC weto Prezydenta status" (VER 2026-07-13: pro
 | Techniki ataku na wiarygodność świadka (SW-A1..SW-A8) + obrona ante-cross (AC1-AC4) — KANONICZNE | `shared/MOD-ATAK-NA-SWIADKA.md` |
 | Przygotowanie pytań / cross-examination świadka | `przesluchanie-swiadkow-v2-min90` |
 | Ustalenie kręgu dziedzin sprawy mieszanej (np. rozwód + wątek karny gróźb) | `analizator-dowodow-v3` (MX: 25 dziedzin) |
+| Zawarcie małżeństwa, przeszkody małżeńskie, bigamia, uznanie małżeństwa zagranicznego/jednopłciowego (dodane 2026-07-19) | `mod-KRO-zawarcie-malzenstwa-bigamia-transgraniczne.md` (ten sam DR-02) |
 
 ---
 
@@ -359,6 +508,234 @@ web_search: "rozwód rejestrowy USC weto Prezydenta status" (VER 2026-07-13: pro
 - KRO: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000236
 - SN (orzeczenia cywilne): https://www.sn.pl
 - Orzeczenia sądów powszechnych: https://orzeczenia.ms.gov.pl
+
+---
+
+## ⭐ SEPARACJA (art. 61¹-61⁶ KRO) — dodane 2026-07-19
+
+> Odrębna instytucja od rozwodu — dotąd tylko wzmiankowana jako
+> alternatywna ścieżka bez własnej treści.
+
+```
+PRZESŁANKA POZYTYWNA: ZUPEŁNY (NIE musi być TRWAŁY, w przeciwieństwie
+  do rozwodu!) rozkład pożycia małżeńskiego — TO KLUCZOWA RÓŻNICA:
+  □ ROZWÓD wymaga rozkładu ZUPEŁNEGO i TRWAŁEGO
+  □ SEPARACJA wymaga TYLKO rozkładu ZUPEŁNEGO — separacji może żądać
+    także małżonek, u którego nie ma pewności co do TRWAŁOŚCI rozpadu
+    (np. rozstanie może być odwracalne) — separacja pozwala
+    "rozłączyć się formalnie" bez przesądzania ostateczności
+
+PRZESŁANKI NEGATYWNE (WĘŻSZE niż przy rozwodzie — TYLKO 2, nie 3):
+  □ Ucierpiałoby DOBRO wspólnych MAŁOLETNICH DZIECI
+  □ Orzeczenie byłoby SPRZECZNE z zasadami współżycia społecznego
+  ⭐ BRAK trzeciej przesłanki negatywnej z rozwodu (sprzeciw małżonka
+    niewinnego, gdy żąda separacji małżonek WYŁĄCZNIE winny) — separacji
+    MOŻE żądać NAWET małżonek WYŁĄCZNIE WINNY rozkładu, sąd rozważa
+    interesy obu stron, ale brak drugiej strony NIE BLOKUJE automatycznie
+
+ZGODNE ŻĄDANIE: gdy małżonkowie NIE MAJĄ wspólnych małoletnich dzieci,
+  sąd MOŻE orzec separację na ZGODNY WNIOSEK, bez badania winy (analogicznie
+  do rozwodu bez orzekania o winie)
+
+SKUTKI (art. 61⁴ KRO) — TAKIE SAME jak przy rozwodzie, Z WYJĄTKAMI:
+  □ Powstaje ROZDZIELNOŚĆ MAJĄTKOWA (jak przy rozwodzie)
+  □ ⭐ Małżonek W SEPARACJI NIE MOŻE zawrzeć NOWEGO małżeństwa (małżeństwo
+    formalnie TRWA — to NAJWAŻNIEJSZA różnica od rozwodu)
+  □ ⭐ OBOWIĄZEK WZAJEMNEJ POMOCY między małżonkami "jeżeli wymagają
+    tego względy słuszności" (art. 61⁴ §3) — TEN obowiązek NIE ISTNIEJE
+    po rozwodzie
+  □ Obowiązek ALIMENTACYJNY analogiczny do art. 60 (jak wobec byłego
+    małżonka), ALE bez wyjątku §3 tego przepisu
+  □ ⭐ BRAK powrotu do nazwiska sprzed małżeństwa (art. 59 KRO NIE
+    STOSUJE SIĘ) — logiczne, bo małżeństwo formalnie trwa
+  □ Skutki ustalenia WINY — IDENTYCZNE jak przy rozwodzie (wpływają na
+    alimenty)
+  □ MAŁŻONKOWIE NIE DZIEDZICZĄ po sobie z mocy USTAWY w separacji (tak
+    jak rozwiedzieni) — dziedziczenie możliwe TYLKO z testamentu
+
+ZNIESIENIE SEPARACJI (art. 61⁶ KRO):
+  □ NA ZGODNE ŻĄDANIE małżonków — sąd ORZEKA o zniesieniu
+  □ Z CHWILĄ zniesienia — USTAJĄ jej skutki (małżeństwo "wraca" do
+    normalnego funkcjonowania)
+  □ WYJĄTEK: sąd ROZSTRZYGA PRZY ZNOSZENIU o władzy rodzicielskiej nad
+    wspólnym małoletnim dzieckiem — TO NIE ustaje automatycznie
+  □ Na ZGODNY wniosek małżonków, znosząc separację, sąd MOŻE orzec o
+    UTRZYMANIU rozdzielności majątkowej (mimo zniesienia separacji) —
+    kolejny wyjątek od zasady automatycznego powrotu do stanu sprzed
+    separacji
+
+SEPARACJA FAKTYCZNA vs PRAWNA — NIE MYLIĆ: separacja FAKTYCZNA (samo
+  rozstanie bez orzeczenia sądu) NIE WYWOŁUJE żadnych z powyższych
+  skutków prawnych — TYLKO separacja PRAWNA (orzeczona przez sąd) ma
+  znaczenie dla majątku, dziedziczenia, alimentów itd.
+```
+
+**Checklist — kiedy separacja zamiast rozwodu:**
+```
+□ Klient NIE JEST pewien, czy rozpad jest OSTATECZNY (możliwość pojednania)
+□ Klient ma powody RELIGIJNE/ŚWIATOPOGLĄDOWE przeciw rozwodowi, ale
+  potrzebuje formalnego rozdzielenia majątkowego/uregulowania sytuacji
+□ Klient jest WYŁĄCZNIE WINNY rozkładu i obawia się, że przy rozwodzie
+  drugi małżonek mógłby (choć to rzadkie) skutecznie się sprzeciwić —
+  przy separacji ten dodatkowy "bufor" nie istnieje
+□ Ustalić, czy klient rozumie, że separacja NIE POZWALA zawrzeć nowego
+  małżeństwa — to częsta przyczyna rozczarowania klientów
+```
+
+---
+
+## ⭐ USTRÓJ MAJĄTKOWY MAŁŻEŃSKI I INTERCYZA (art. 31-54 KRO) — dodane 2026-07-19
+
+```
+USTRÓJ USTAWOWY (domyślny, powstaje Z MOCY PRAWA z chwilą ślubu) —
+  WSPÓLNOŚĆ USTAWOWA: majątek WSPÓLNY (nabyty w czasie trwania wspólności
+  przez oboje/jedno z małżonków) + majątki OSOBISTE każdego z małżonków
+  (katalog ZAMKNIĘTY, art. 33 KRO: m.in. majątek nabyty PRZED powstaniem
+  wspólności, nabyty przez DZIEDZICZENIE/ZAPIS/DAROWIZNĘ — chyba że
+  spadkodawca/darczyńca postanowił inaczej, przedmioty ŚCIŚLE OSOBISTEGO
+  użytku) — przedmioty NIEWYMIENIONE w tym katalogu wchodzą do majątku
+  WSPÓLNEGO, nie osobistego
+
+USTROJE UMOWNE (art. 47-51¹ KRO) — wymagają UMOWY MAJĄTKOWEJ MAŁŻEŃSKIEJ
+  ("intercyza") w formie AKTU NOTARIALNEGO (rygor nieważności), może
+  poprzedzać ślub LUB być zawarta w trakcie małżeństwa:
+  □ ROZSZERZONA WSPÓLNOŚĆ — włączenie do wspólności składników, które
+    normalnie byłyby majątkiem osobistym
+  □ OGRANICZONA WSPÓLNOŚĆ — wyłączenie niektórych składników ze
+    wspólności (bez pełnej rozdzielności)
+  □ ROZDZIELNOŚĆ MAJĄTKOWA (pełna) — KAŻDY z małżonków zachowuje
+    ZARÓWNO majątek nabyty PRZED umową, JAK I nabyty PÓŹNIEJ — NIE
+    POWSTAJE majątek wspólny W OGÓLE (jeśli umowa zawarta przed ślubem)
+    lub dotychczasowa wspólność USTAJE (jeśli zawarta w trakcie
+    małżeństwa) — każdy zarządza SAMODZIELNIE swoim majątkiem (art. 51¹)
+  □ ROZDZIELNOŚĆ Z WYRÓWNANIEM DOROBKÓW — wariant pośredni: majątki
+    odrębne w trakcie trwania, ale przy ustaniu ustroju NASTĘPUJE
+    rozliczenie różnicy w przyroście majątków obojga małżonków
+
+⭐ ZAKAZ "MIESZANIA" USTROJÓW: niedopuszczalne jest zawarcie umowy
+  tworzącej USTRÓJ NIEZNANY ustawie lub KOMPILACJĘ elementów różnych
+  ustrojów — taka umowa byłaby NIEWAŻNA z mocy prawa (art. 58 KC w zw.
+  z art. 47 KRO) jako sprzeczna z ustawą — KATALOG ustrojów jest ZAMKNIĘTY
+
+PRZYMUSOWA ROZDZIELNOŚĆ MAJĄTKOWA (z mocy prawa LUB orzeczenia sądu,
+  BEZ potrzeby umowy):
+  □ Z MOCY PRAWA — np. przy OGŁOSZENIU UPADŁOŚCI KONSUMENCKIEJ przez
+    jednego z małżonków (automatyczne powstanie rozdzielności)
+  □ Z ORZECZENIA SĄDU — na żądanie JEDNEGO z małżonków z WAŻNYCH powodów
+    (np. drugi małżonek trwoni majątek wspólny) — ⚠️ dokładne przesłanki
+    NIE zweryfikowane w pełni w tej sesji
+
+ROZWIĄZANIE/ZMIANA UMOWY MAJĄTKOWEJ: MOŻLIWA w każdym czasie (ta sama
+  forma — akt notarialny) — w razie ROZWIĄZANIA W TRAKCIE małżeństwa,
+  między małżonkami PONOWNIE POWSTAJE wspólność USTAWOWA, CHYBA że
+  strony postanowiły inaczej (art. 47 §2 KRO)
+
+SKUTECZNOŚĆ WOBEC OSÓB TRZECICH: małżonek MOŻE powoływać się na umowę
+  majątkową wobec innych osób TYLKO gdy jej ZAWARCIE oraz RODZAJ były
+  tym osobom WIADOME (art. 47¹ KRO) — istotne dla WIERZYCIELI: jeśli
+  wierzyciel NIE WIEDZIAŁ o intercyzie, może dochodzić zaspokojenia
+  tak, jakby wspólność ustawowa nadal istniała
+```
+
+**Checklist praktyczny:**
+```
+□ Czy klient prowadzi DZIAŁALNOŚĆ GOSPODARCZĄ o podwyższonym ryzyku —
+  rozważ rekomendację rozdzielności majątkowej dla ochrony majątku
+  współmałżonka
+□ Czy planowana intercyza ma zostać zawarta PRZED czy PO ślubie — obie
+  opcje dopuszczalne, ta sama forma (akt notarialny)
+□ Czy umowa NIE PRÓBUJE stworzyć nieznanego ustawie "hybrydowego"
+  ustroju — sprawdź zgodność z zamkniętym katalogiem art. 47-51¹
+□ Przy rozwodzie/separacji — USTAL, jaki ustrój majątkowy OBOWIĄZYWAŁ
+  i OD KIEDY (sąd MUSI to ustalić na rozprawie rozwodowej) — kluczowe
+  dla podziału majątku wspólnego
+□ Czy druga strona (np. wierzyciel) WIEDZIAŁA o intercyzie — jeśli NIE,
+  może to nie chronić majątku osobistego małżonka przed jej roszczeniami
+```
+
+---
+
+## ⭐ USTALENIE OJCOSTWA (art. 62, 72-86 KRO) — dodane 2026-07-19
+
+> Odrębne od ZAPRZECZENIA ojcostwa (sekcja niżej) — to ustalenie
+> POCHODZENIA dziecka, wobec którego domniemanie z art. 62 NIE działa
+> (dziecko pozamałżeńskie) lub zostało już obalone.
+
+### Trzy sposoby ustalenia pochodzenia dziecka
+
+```
+1. DOMNIEMANIE POCHODZENIA OD MĘŻA MATKI (art. 62 KRO) — dla dzieci
+   MAŁŻEŃSKICH: mąż matki jest domniemanym ojcem, gdy dziecko urodziło
+   się W CZASIE MAŁŻEŃSTWA lub przed upływem 300 DNI od jego ustania/
+   unieważnienia/separacji. Domniemanie WZRUSZALNE — obala się je
+   POWÓDZTWEM O ZAPRZECZENIE OJCOSTWA (patrz sekcja niżej), NIE przez
+   samo ustalenie ojcostwa innej osoby
+   ⚠️ Domniemanie NIE DZIAŁA, gdy dziecko urodziło się PO UPŁYWIE 300 DNI
+   od ORZECZENIA SEPARACJI (nie samego jej wniosku)
+   ⚠️ Jeśli matka zawarła DRUGIE małżeństwo przed upływem 300 dni od
+   ustania pierwszego — domniemywa się ojcostwo DRUGIEGO męża
+
+2. UZNANIE OJCOSTWA (art. 72-83 KRO) — dla dzieci POZAMAŁŻEŃSKICH,
+   DOBROWOLNE:
+   □ Mężczyzna SKŁADA OŚWIADCZENIE przed KIEROWNIKIEM USC (lub sądem
+     opiekuńczym; za granicą — przed polskim KONSULEM), że JEST ojcem
+   □ MATKA POTWIERDZA jednocześnie LUB w ciągu 3 MIESIĘCY od oświadczenia
+     mężczyzny — bez potwierdzenia matki uznanie NIE JEST skuteczne
+   □ MOŻLIWE PRZED URODZENIEM dziecka już POCZĘTEGO (art. 75 KRO)
+   □ BEZPŁATNE (opłata sądowa dotyczy TYLKO ścieżki sądowej)
+   □ Szczególny wariant przy PROKREACJI MEDYCZNIE WSPOMAGANEJ z użyciem
+     komórek/zarodka od ANONIMOWEGO DAWCY — mężczyzna może oświadczyć
+     PRZED poczęciem, że będzie ojcem, z potwierdzeniem kobiety
+
+3. SĄDOWE USTALENIE OJCOSTWA (art. 84-86 KRO) — gdy NIE DOSZŁO do
+   uznania (spór/odmowa/brak porozumienia):
+   □ UPRAWNIENI do powództwa: DZIECKO, MATKA, DOMNIEMANY OJCIEC,
+     PROKURATOR (gdy wymaga tego dobro dziecka lub interes społeczny,
+     art. 86 KRO) — ⚠️ BIOLOGICZNY ojciec sam NIE MA legitymacji do
+     wytoczenia powództwa, może jedynie ZWRÓCIĆ SIĘ do prokuratora o
+     zainicjowanie sprawy
+   □ DOMNIEMANIE z art. 85 KRO: ojcem dziecka jest TEN, KTO OBCOWAŁ z
+     matką NIE WCZEŚNIEJ niż w 300., a NIE PÓŹNIEJ niż w 181. dniu
+     PRZED urodzeniem dziecka — obalane, gdy z okoliczności wynika, że
+     ojcostwo INNEGO mężczyzny jest BARDZIEJ prawdopodobne
+   □ DOWÓD: badanie DNA (praktyczny standard — profile 15-24 markerów
+     STR, prawdopodobieństwo zwykle >99,99% przy zgodności, 0% przy
+     niezgodności ≥3 niezależnych loci)
+   □ BRAK krótkiego terminu zawitego dla powództwa O USTALENIE (w
+     PRZECIWIEŃSTWIE do zaprzeczenia — patrz różnica niżej)
+   □ TRYB: procesowy, sąd REJONOWY (wydział rodzinny) właściwy dla
+     miejsca zamieszkania dziecka
+   □ OPŁATA: 200 zł od pozwu (⚠️ zweryfikuj aktualność kwoty)
+```
+
+### ⚡ ZAPOWIEDZIANA REFORMA (2026, status: PROJEKT, NIE uchwalone)
+
+Ministerstwo Sprawiedliwości ROZWAŻA (stan na wczesne 2026, ⚠️ zweryfikuj
+AKTUALNY status projektu przed użyciem) ZNIESIENIE domniemania ojcostwa
+z art. 62 KRO dla dzieci urodzonych PO UPRAWOMOCNIENIU SIĘ WYROKU
+ROZWODOWEGO (nie po samym orzeczeniu separacji, co już jest wyłączone) —
+w takim przypadku ojcostwo byłoby ustalane WYŁĄCZNIE przez uznanie
+biologicznego ojca lub sądowe ustalenie, NIE przez automatyczną fikcję
+łączącą dziecko z byłym mężem. Rzecznik Praw Obywatelskich od lat
+POSTULUJE tę zmianę, wskazując na systemową niesprawiedliwość wobec
+dzieci urodzonych w toku wieloletnich postępowań rozwodowych. **TO
+PROJEKT, NIE OBOWIĄZUJĄCE PRAWO — nie stosuj tej reformy jako aktualnego
+stanu prawnego, zweryfikuj status legislacyjny PRZED każdym użyciem.**
+
+### Checklist praktyczny
+```
+□ Czy dziecko jest MAŁŻEŃSKIE (domniemanie art. 62 działa) czy
+  POZAMAŁŻEŃSKIE (wymaga uznania lub sądowego ustalenia)?
+□ Czy doszło już do UZNANIA — jeśli TAK, dalsze "ustalanie" jest zbędne
+  (chyba że kwestionuje się samo uznanie — inny tryb)
+□ Kto wytacza powództwo o USTALENIE — sprawdź legitymację (dziecko,
+  matka, domniemany ojciec, prokurator — NIE sam biologiczny ojciec
+  bezpośrednio)
+□ Czy klientowi zależy na SZYBKIEJ, bezpłatnej ścieżce (uznanie w USC
+  za zgodą obu stron) czy sytuacja WYMAGA postępowania sądowego (spór)?
+□ ⚠️ Sprawdź AKTUALNY status projektu reformy art. 62 KRO — może zmienić
+  zasady dla dzieci urodzonych po rozwodzie
+```
 
 ---
 

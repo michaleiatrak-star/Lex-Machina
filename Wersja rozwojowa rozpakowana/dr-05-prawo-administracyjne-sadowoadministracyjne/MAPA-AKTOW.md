@@ -21,8 +21,8 @@
 | KPA art. 156 §2a + Ustawa reprywatyzacyjna | Dz.U. 2025 poz. 1691 (KPA, potwierdzone w FAZA 3A) + Dz.U. 2021 poz. 795 t.j. — VER 2026-07-02ff: nadal aktualne (ustawa z 9.03.2017, t.j. ogłoszony 16.09.2021, dot. Komisji Weryfikacyjnej ds. reprywatyzacji warszawskiej) | mod-ustawa-zaskarzanie-decyzji-wlasnosci | ✅ OK |
 | Ustawa o zapewnieniu dostępności osobom ze szczególnymi potrzebami | ⚠️ Dz.U. 2024 poz. 1411 t.j. (POPRAWKA 2026-07-02z — BYŁO błędnie 2022.2240; ten sam błąd znaleziony i naprawiony wcześniej tego dnia w dr-10/MAPA-AKTOW.md — duplikat aktu między skillami) | mod-ustawa-dostepnosc-niepelnosprawni | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
 | Ustawa o ochronie sygnalistów | Dz.U. 2024 poz. 928 ze zm. — VER 2026-07-02aa: nadal aktualne (w życie 25.09.2024) | mod-ustawa-sygnalisci | ✅ OK |
-| KPA (odesłanie) | Dz.U. 2025 poz. 1691 t.j. | → DR-04/mod-KPA-postepowanie-administracyjne | 🔗 |
-| PPSA (odesłanie) | Dz.U. 2026 poz. 143 t.j. | → DR-04/mod-KPA-postepowanie-administracyjne | 🔗 |
+| KPA (kanoniczny, PRZENIESIONY 2026-07-19 z DR-04) | Dz.U. 2025 poz. 1691 t.j. | mod-KPA-postepowanie-administracyjne | ✅ OK — rozbudowany 2026-07-19 o ugodę/milczące załatwienie/zaświadczenia/skargi-wnioski |
+| PPSA (kanoniczny, PRZENIESIONY 2026-07-19 z DR-04) | Dz.U. 2026 poz. 143 t.j. | mod-KPA-postepowanie-administracyjne | ✅ OK |
 
 > ⚠️ Przed każdym powołaniem: sprawdź aktualny t.j. w ISAP.
 > Prawo administracyjne materialne jest często nowelizowane.
