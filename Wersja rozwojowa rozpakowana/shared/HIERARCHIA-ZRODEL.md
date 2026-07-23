@@ -45,6 +45,15 @@ Ten rząd dotyczy WYŁĄCZNIE brzmienia przepisu — obowiązuje tu
 
 ## RZĄD 2 — DRUGORZĘDNE
 
+⭐ UZUPEŁNIENIE (dodane 2026-07-21): dla wyboru KONKRETNEGO portalu wg
+TEMATYKI/DZIEDZINY (nie tylko wg wiarygodności) → `shared/PORTALE-
+BRANZOWE-RZAD-2B.md` — rejestr portali PODZIELONY wg 16 dziedzin DR, z
+WYNIKAMI faktycznych testów `site:` (np. gofin.pl dla podatków,
+rynekzdrowia.pl dla zdrowia/farmacji, prawniknabudowie.com dla sporów
+budowlanych). TEN plik (HIERARCHIA-ZRODEL) POZOSTAJE kanoniczny dla
+KATEGORYZACJI wiarygodności (Rząd 1/2A/2B/3) — tamten UZUPEŁNIA o
+wymiar tematyczny, nie zastępuje tej kategoryzacji.
+
 Oficjalne orzecznictwo, LEX/Legalis jako tekst przy licencji, ORAZ duże,
 uznane portale prawnicze/branżowe (komentarz i interpretacja o niskim
 ryzyku dezaktualizacji, redakcja profesjonalna).

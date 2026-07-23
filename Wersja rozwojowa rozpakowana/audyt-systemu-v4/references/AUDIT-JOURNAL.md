@@ -4,7 +4,308 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
-## AUDYT-2026-07-21p — NOWE mod-czynny-zal-KK-KKS-samooskarzenie i mod-dobrowolne-poddanie-sie-karze-KPK — czynny żal był hasłem w 9+ modułach bez treści, dobrowolne poddanie się karze było całkowitą luką, "samooskarżenie" wyjaśnione jako nieodrębna instytucja
+## AUDYT-2026-07-21v — przetestowano DR-05 i DR-15 (uczciwie odnotowany brak dominującego portalu 2B, analogicznie do DR-03) oraz DR-16 (WAŻNE ustalenie: brak portalu 2B to TU NIE luka — właściwym źródłem są oficjalne bazy orzeczeń Rzędu 2A) — pozostały tylko 3 z 16 DR bez świeżego testu
+
+**Zakres:** rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v1.4→v1.5)
++ wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik polecił kontynuować testowanie kolejnych DR
+bez potwierdzonej bazy portali.
+
+**DR-05 (Administracyjne):** wyszukiwanie "portal prawo administracyjne
+KPA" NIE ujawniło dominującego portalu 2B — wyniki zdominowane przez
+firmy SZKOLENIOWE (projektgamma.pl, pps.edu.pl — płatne kursy, nie
+darmowe artykuły) i sklep WYDAWNICTWA (profinfo.pl, Wolters Kluwer —
+katalog książek). Odnotowano UCZCIWIE jako trzecią (obok DR-03)
+dziedzinę bez dominującego portalu 2B, z tą samą rekomendacją:
+generalistyczne portale z zawężonym zapytaniem.
+
+**DR-15 (Compliance):** analogiczny wynik — niszę zdominowały strony
+DUŻYCH firm doradczych (KPMG i podobne "Wielka Czwórka") oraz treści
+MIĘDZYNARODOWE. Zgadywana domena "compliance.com.pl" okazała się
+PRZYPADKOWYM biurem księgowym o pasującej nazwie, NIE portalem
+tematycznym — odnotowano to jako pouczający przykład ryzyka zgadywania
+domen. Odnotowano UCZCIWIE jako CZWARTĄ dziedzinę bez dominującego
+portalu 2B.
+
+**⭐ DR-16 (Orzecznictwo) — NAJWAŻNIEJSZE ustalenie tej tury, ODMIENNE
+od pozostałych "brakujących" dziedzin:** wyszukiwanie potwierdziło, że
+dla TREŚCI orzeczeń sądowych WŁAŚCIWYM, NAJLEPSZYM źródłem SĄ oficjalne
+bazy Rzędu 2A — orzeczenia.ms.gov.pl (Portal Orzeczeń Sądów Powszechnych,
+bezpłatna, bezwnioskowa publikacja z uzasadnieniami, wyszukiwanie wg
+podstawy prawnej i hasła tematycznego) oraz saos.org.pl (System
+Analizy Orzeczeń Sądowych) — OBA już znane systemowi. Sformułowano
+KLUCZOWY wniosek metodologiczny: brak dedykowanego portalu 2B w TEJ
+dziedzinie NIE JEST luką wymagającą naprawy — sama NATURA dostępu do
+TREŚCI orzeczeń wymaga źródła URZĘDOWEGO, nie komercyjnego komentarza;
+komentarz 2B ma sens DOPIERO PO ustaleniu samej treści z wyższego rzędu.
+To ROZRÓŻNIENIE (luka vs właściwy stan) dodano wyraźnie do rejestru,
+by uniknąć niepotrzebnego dalszego poszukiwania portalu, który nie
+powinien być priorytetem w tej dziedzinie.
+
+**Zaktualizowano podsumowanie stanu pokrycia:** z sześciu do TRZECH
+dziedzin bez żadnego świeżego testu — pozostały wyłącznie DR-12
+(Sądownictwo/Prokuratura/Zawody Prawnicze), DR-13 (Służby/Bezpieczeństwo),
+DR-14 (Prawo UE/Międzynarodowe). Wszystkie pozostałe 13 z 16 DR mają
+już albo potwierdzony portal, albo uczciwie odnotowany, świadomy brak
+dominującego źródła w danej niszy (co samo w sobie jest WARTOŚCIOWĄ
+informacją dla przyszłych sesji, nie porażką poszukiwań).
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana (21 sekcji
+głównych zachowanych, kolejność DR-02 do DR-16 nienaruszona).
+
+---
+
+
+
+**Zakres:** rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v1.3→v1.4)
++ wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik wskazał konkretny link (portal-sow.pfron.org.pl)
+oraz polecił zbadać IPON i POPON, kontynuując poszukiwanie kolejnych
+portali kategorii 2.
+
+**Wskazany link — pobrany bezpośrednio (`web_fetch`):**
+portal-sow.pfron.org.pl potwierdzony jako OFICJALNY portal informacyjny
+Systemu Obsługi Wsparcia finansowanego ze środków PFRON — struktura
+strony (logo RP/UE, stopka "© PFRON") jednoznacznie wskazuje Rząd 1
+(instytucja państwowa), NIE Rząd 2B — dodano z WYRAŹNYM zastrzeżeniem
+klasyfikacyjnym, analogicznym do wcześniej odnotowanego niepelnosprawni.gov.pl.
+
+**POPON — potwierdzone jako wartościowe, z zastrzeżeniem charakteru:**
+Polska Organizacja Pracodawców Osób Niepełnosprawnych (od 1995 r., ~600
+firm członkowskich) — dostarcza PERSPEKTYWĘ PRACODAWCY (optymalizacja
+wpłat na PFRON, "efekt zachęty", ZPCh) — dodano jako Rząd 2B z JAWNYM
+zastrzeżeniem, że to organizacja RZECZNICZA (advocacy), nie neutralny
+komentarz — zalecono SKRZYŻOWANIE z niepelnosprawni.pl. Przy okazji
+odkryto analogiczną organizację OBPON.org.
+
+**IPON — UCZCIWIE ODRZUCONE jako źródło prawne, mimo potwierdzonej
+realności:** Internetowy Portal Osób Niepełnosprawnych (od 2002 r.,
+jeden z najstarszych w Polsce) okazał się PRZEDE WSZYSTKIM portalem
+SPOŁECZNOŚCIOWYM/RANDKOWYM ("portal randkowy dla osób z
+niepełnosprawnościami"), NIE serwisem doradczo-prawnym jak
+niepelnosprawni.pl — dodano z WYRAŹNYM ostrzeżeniem, że NIE nadaje się
+jako źródło 2B dla analizy prawnej, mimo że jest realnym, długoletnim
+zasobem o INNYM przeznaczeniu (budowanie społeczności).
+
+**⭐ Kontynuacja poszukiwania — znaleziono znaczące ulepszenie dla
+DR-11:** poprzedni kandydat (di.com.pl) miał słabszy wynik (artykuły
+częściowo z 2018 r., ton dla szerokiego odbiorcy). Nowe wyszukiwanie
+ujawniło **poradyodo.pl** — znacznie lepszy portal: kategoryzacja
+SEKTOROWA (RODO w IT/kadrach/oświacie/służbie zdrowia), artykuły
+AUTORSTWA nazwanych radców prawnych, KONKRETNE cytaty art. 37-39 RODO,
+treści datowane na czerwiec/lipiec 2026 (BARDZO świeże). DR-11
+PRZENIESIONE z kategorii "wynik mieszany" do "potwierdzone" —
+di.com.pl zachowane jedynie jako dodatkowy kontekst ogólnoinformacyjny.
+Przy okazji znaleziono również gdpr.pl i portalodo.com jako dodatkowe,
+niepotestowane jeszcze kandydatury.
+
+**Zaktualizowano podsumowanie stanu pokrycia:** liczba dziedzin bez
+świeżego testu spadła z SIEDMIU do SZEŚCIU (DR-05, 12, 13, 14, 15, 16)
+— DR-11 opuściło tę listę.
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana (21 sekcji
+głównych zachowanych, kolejność DR-02 do DR-16 nienaruszona).
+
+---
+
+
+
+**Zakres:** rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v1.2→v1.3)
++ wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik polecił dodać infor.pl, szukać kolejnych
+portali (szczególnie podatki/księgowość) oraz WSKAZAĆ, które DR nadal
+nie mają swoich portali.
+
+**Testy wykonane:**
+1. **infor.pl** (subdomena ksiegowosc.infor.pl) — ✅✅ wynik DOSKONAŁY,
+   BARDZO aktualny (wyrok NSA z 13.02.2026 r. o odliczeniu VAT bez
+   faktury, KSeF, JPK_VAT) — ustanowiono jako DRUGI, RÓWNOWAŻNY filar
+   dla DR-06 obok gofin.pl.
+2. **podatki.biz** — ✅ potwierdzony jako realny, szeroki portal
+   podatkowy (TaxNet sp. z o.o.), choć test nie był w pełni czystym
+   `site:` — zalecono powtórzenie przed pierwszym użyciem.
+3. **serwissamorzadowy.pl** (zgadywana nazwa) — test NIEUDANY, ALE przy
+   OKAZJI szerszego wyszukiwania ORGANICZNIE odkryto DWA prawdziwe,
+   dedykowane portale dla DR-08: **samorzad.infor.pl** (subdomena
+   infor.pl dla samorządu, konkretne cytaty art. 14 ustawy o
+   samorządzie gminnym, orzecznictwo NSA) oraz **prawodlasamorzadu.pl**
+   (portal WYSPECJALIZOWANY WYŁĄCZNIE w prawie samorządowym — rzadki,
+   wartościowy przypadek dedykowanego portalu 2B).
+
+**⭐ Główne zadanie — jawne wskazanie stanu pokrycia:** dodano nową,
+obszerną sekcję "STAN POKRYCIA WSZYSTKICH 16 DR" z czterema
+kategoriami: (1) dziedziny z potwierdzonym portalem — DR-02, 04, 06,
+07, 08, 09, 10 + sekcja niepełnosprawność; (2) wynik mieszany — DR-04
+dodatkowo (hrnaszpilkach.pl), DR-11 (di.com.pl); (3) świadomie bez
+dominującego portalu — DR-03; (4) BRAK ŻADNEGO świeżego testu w tej
+sesji — SIEDEM dziedzin: DR-05 (Administracyjne), DR-11 (potrzebuje
+LEPSZEGO kandydata niż di.com.pl), DR-12 (Sądownictwo/Prokuratura/
+Zawody Prawnicze), DR-13 (Służby/Bezpieczeństwo), DR-14 (Prawo UE/
+Międzynarodowe), DR-15 (Compliance/ISO/Governance), DR-16 (Pisma/
+Dowody/Orzecznictwo) — wskazane WPROST jako priorytet dla ewentualnej
+kolejnej tury testowania.
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana (21 sekcji
+głównych zachowanych, sekcja podsumowująca poprawnie wstawiona przed
+sekcją wniosków metodologicznych bez utraty żadnego nagłówka).
+
+---
+
+
+
+**Zakres:** rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v1.1→v1.2)
++ wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik polecił kontynuować budowę rejestru dla
+kolejnych dziedzin: prawo pracy, prawo karne/wykroczeniowe, budownictwo,
+gospodarka i firmy.
+
+**Testy wykonane (site: na żywo):**
+1. **kodekspracy.pl** — ✅ doskonały wynik (DR-04) — komentarze
+   eksperckie w formie Q&A, cytaty konkretnych artykułów KP i sygnatur
+   SN (np. II PZP 3/06), treść aktualna na 2025 r., prawdopodobnie
+   CZĘŚĆ rodziny portali GOFIN (wzajemne odesłania do "DRUKI Gofin",
+   tematy PFRON/ZUS krzyżowe).
+2. **muratorplus.pl** — ✅ doskonały wynik (DR-09) — strona
+   REGULACYJNO-PROCEDURALNA (pozwolenie na budowę vs zgłoszenie,
+   terminy, progi ustawowe) — GENUINE komplementarność do już
+   zweryfikowanego prawniknabudowie.com (TAM spory kontraktowe, TU
+   procedury administracyjne) — dwa RÓŻNE, uzupełniające się kąty tej
+   samej dziedziny.
+3. **poradnikprzedsiebiorcy.pl** — ✅ doskonały wynik (DR-02/gospodarka) —
+   konkretne kwoty (kapitał zakładowy 5000 zł, opłaty sądowe 500 zł,
+   PCC 0,5%), terminy (6 miesięcy na rejestrację), cytaty KSH — status
+   PODNIESIONY z 📚 (znane) na ✅ (faktycznie testowane).
+4. **pb.pl (Puls Biznesu)** — ⚠️ TEST NIEUDANY — zapytanie zwróciło
+   WYŁĄCZNIE niepowiązane wyniki (artykuł Wikipedii o PKO BP, wpisy z
+   bazy LEI, szablony umów z lawinsider.com) — odnotowano UCZCIWIE
+   jako nieudaną próbę, NIE ukryto tego wyniku.
+
+**⭐ Najważniejsze znalezisko — DR-03 (prawo karne/wykroczenia):**
+próba znalezienia dominującego portalu 2B analogicznego do gofin.pl
+NIE POWIODŁA SIĘ w sposób ISTOTNY — wyszukiwanie ujawniło, że tę
+niszę ZDOMINOWAŁY indywidualne blogi kancelaryjne (wzorzec "adwokat-
+nazwisko.pl", Rząd 3) oraz strony-rankingi kancelarii o WĄTPLIWEJ
+wiarygodności redakcyjnej (możliwie sponsorowane). Odnotowano to
+WPROST jako "UCZCIWĄ OBSERWACJĘ" w rejestrze, z rekomendacją
+praktyczną: dla tej dziedziny korzystać z portali GENERALISTYCZNYCH
+(prawo.pl, infor.pl) z zawężonym zapytaniem, zamiast szukać
+nieistniejącego wyspecjalizowanego portalu 2B — różni się to
+ISTOTNIE od wzorca znalezionego w innych dziedzinach (podatki, praca,
+budownictwo, niepełnosprawność), gdzie dominujący portal 2B ISTNIAŁ i
+dawał się łatwo zidentyfikować.
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana (20 sekcji
+głównych zachowanych, kolejność DR-02 do DR-16 nienaruszona).
+
+---
+
+
+
+**Zakres:** rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v1.0→v1.1)
++ wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik polecił kontynuować budowę rejestru portali
+dla kolejnych dziedzin, ZE SZCZEGÓLNYM naciskiem na osoby
+niepełnosprawne.
+
+**Testy wykonane (site: na żywo):**
+1. **niepelnosprawni.pl** — ✅✅ NAJLEPSZY dotychczasowy wynik testów w
+   całej tej sesji. Portal ma sekcję "Prawnik radzi"/"Zapytaj doradcę"
+   z odpowiedziami CYTUJĄCYMI konkretne sygnatury orzeczeń (np. wyrok
+   TK z 26.06.2019 r., SK 2/17, dot. świadczenia pielęgnacyjnego a
+   renty socjalnej) oraz precyzyjne artykuły ustaw — poziom
+   szczegółowości PORÓWNYWALNY z profesjonalnym komentarzem prawnym,
+   mimo że to portal dla laików.
+2. **integracja.org** — ✅ potwierdzone jako TA SAMA platforma
+   redakcyjna co niepelnosprawni.pl (fundacja-matka od 1994 r.),
+   dodatkowo prowadzi WŁASNĄ, unikalną działalność (audyty/certyfikacja
+   dostępności architektonicznej i cyfrowej — Obiekt Bez Barier,
+   Serwis Bez Barier) oraz ma NAZWANEGO eksperta prawnego (dr Michał
+   Urban, radca prawny, specjalizacja: prawo osób z niepełnosprawnościami
+   od kilkunastu lat).
+3. **portalzp.pl** — ✅ potwierdzone dla DR-07 (zamówienia publiczne) —
+   konkretne progi kwotowe, cytaty art. 132-139 ustawy Pzp, terminy,
+   z zastrzeżeniem że CZĘŚĆ treści jest płatna (ale wystarczająco dużo
+   darmowej/indeksowanej treści do praktycznego użytku).
+
+**⭐ WAŻNE ostrzeżenie dodane do rejestru:** niepelnosprawni.gov.pl
+oraz gov.pl/web/rodzina/osoby-niepelnosprawne to organy RZĄDOWE (Biuro
+Pełnomocnika Rządu ds. Osób Niepełnosprawnych, MRPiPS) — Rząd 1, NIE
+Rząd 2B — mimo BARDZO podobnych nazw do niepelnosprawni.pl, NIE należy
+ich mylić przy kategoryzacji wiarygodności źródła.
+
+**Struktura:** dodano wydzieloną "SEKCJĘ SPECJALNĄ" (nie kolejny wiersz
+w tabeli DR-04) dla niepełnosprawności, ponieważ ta dziedzina PRZECINA
+kilka DR jednocześnie (DR-04 świadczenia, DR-02 opieka/
+ubezwłasnowolnienie, DR-08 dostępność przestrzeni publicznej, DR-10
+orzecznictwo lekarskie) — z KRZYŻOWYM odesłaniem do CZTERECH już
+zbudowanych w tej sesji modułów merytorycznych o niepełnosprawności
+(WZON, PFRON, dodatek pielęgnacyjny, RPP).
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana (20 nagłówków
+zachowanych, sekcja specjalna poprawnie wstawiona przed DR-02 bez
+utraty żadnego istniejącego nagłówka).
+
+---
+
+
+
+**Zakres:** NOWY `shared/PORTALE-BRANZOWE-RZAD-2B.md` + odesłanie w
+`shared/HIERARCHIA-ZRODEL.md` + wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik polecił zbudować rejestr portali branżowych
+(kategoria B/Rząd 2B) osobno dla każdej dziedziny, oraz zbadać "HR na
+Szpilkach" analogicznie do wcześniej testowanych portali (prawo.pl,
+gofin.pl, prawnik na budowie).
+
+**Metoda:** WYKONANO sześć FAKTYCZNYCH testów `site:` na żywo (nie
+zgadywano) — prawo.pl (✅ doskonały wynik, ogólny portal wielodziedzinowy),
+gofin.pl wraz z CZTEREMA odkrytymi subdomenami tematycznymi (✅
+doskonały, DR-06 podatki/rachunkowość), prawniknabudowie.com (✅ dobry,
+DR-09 — spory KONTRAKTOWE budowlane), prawnikpodpowienabudowie.pl (✅
+dobry, DR-09 — prawo budowlane SZEROKO, z WYRAŹNYM ostrzeżeniem że to
+ODRĘBNA strona od poprzedniej mimo bardzo podobnej nazwy), hrnaszpilkach.pl
+(⚠️ WYNIK MIESZANY — test zwrócił częściowo niepowiązane rezultaty,
+strona prawdopodobnie zorientowana na szkolenia/kalkulatory bardziej
+niż długie artykuły merytoryczne — odnotowano UCZCIWIE, NIE ukryto
+słabszego wyniku), rynekzdrowia.pl (✅ doskonały, DR-10 — bardzo
+aktualna redakcja, śledzi zmiany list refundacyjnych na bieżąco),
+di.com.pl (⚠️ wynik ogólnie pozytywny, ale artykuły częściowo datowane
+na 2018 r. — moment wejścia RODO w życie — potraktowany jako KONTEKST,
+nie główne źródło, DR-11).
+
+**Struktura rejestru:** 16 tabel (per DR) + sekcja "ogólne,
+międzydziedzinowe" dla portali generalistycznych (prawo.pl, LEX,
+Legalis, infor.pl, gazetaprawna.pl, lexlege.pl, arslege.pl) — z
+WYRAŹNYM rozróżnieniem statusu KAŻDEGO wpisu: ✅ faktycznie testowane
+w tej sesji / 📚 znane z istniejącej listy HIERARCHIA-ZRODEL bez
+świeżego testu / ⚠️ wynik mieszany LUB przykładowy wzorzec nazwy domeny
+NIE potwierdzony empirycznie. Dla dziedzin BEZ świeżego testu (DR-02,
+03, 05, 07, 08, 12, 13, 14, 15, 16) wykorzystano ISTNIEJĄCĄ listę z
+HIERARCHIA-ZRODEL (📚) oraz DODANO przykładowe wzorce nazw branżowych
+domen jako punkty startowe (⚠️), UCZCIWIE nierozróżniane od faktycznie
+zweryfikowanych — zgodnie z zasadą braku fabrykowania pewności.
+
+**Wnioski metodologiczne dodane do rejestru:** portale WĄSKO
+wyspecjalizowane dają najlepsze wyniki przy `site:`; portale
+zorientowane na SPRZEDAŻ SZKOLEŃ (jak HR na Szpilkach) mogą mieć
+słabszą indeksację artykułów; UWAGA na PODOBNE nazwy różnych,
+niepowiązanych portali (prawniknabudowie.com vs
+prawnikpodpowienabudowie.pl).
+
+**Status:** ✅ WDROŻONE. Plik jest UZUPEŁNIENIEM (nie zastąpieniem)
+`HIERARCHIA-ZRODEL.md` — tamten pozostaje kanoniczny dla kategoryzacji
+WIARYGODNOŚCI (Rząd 1/2A/2B/3), nowy plik dodaje wymiar TEMATYCZNY
+(który portal dla której dziedziny). Struktura HIERARCHIA-ZRODEL.md
+zweryfikowana po edycji (9 sekcji głównych zachowanych).
+
+---
+
+
 
 **Zakres:** NOWY `dr-03/.../mod-czynny-zal-KK-KKS-samooskarzenie.md` +
 NOWY `dr-03/.../mod-dobrowolne-poddanie-sie-karze-KPK.md` + odesłanie w
