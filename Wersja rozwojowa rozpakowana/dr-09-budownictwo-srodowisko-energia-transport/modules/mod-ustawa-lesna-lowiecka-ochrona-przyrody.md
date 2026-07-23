@@ -2,6 +2,10 @@
 
 Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ISAP / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
 
+⭐ Merytoryczna treść 10 form ochrony przyrody (art. 6 ustawy) z podziałem
+na typy i zróżnicowane reżimy ograniczeń → `mod-formy-ochrony-przyrody-
+obszary-chronione.md` (DR-09, dodany 2026-07-21, nie duplikowane tutaj).
+
 ## 1. Akty i źródła do weryfikacji
 - Ustawa o lasach
 - Prawo łowieckie

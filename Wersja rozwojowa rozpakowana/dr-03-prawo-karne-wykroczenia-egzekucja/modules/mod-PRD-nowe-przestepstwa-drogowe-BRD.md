@@ -78,10 +78,38 @@ PODSTAWY (bez zmian systemowych):
   Art. 42 KK — środek karny (sprawy karne)
   Art. 29 KW — środek karny (sprawy o wykroczenia)
 
-NOWE PRZEPISY OD 29.01.2026 (Dz.U. 2025 poz. 1872):
-  → DOŻYWOTNI zakaz: recydywista łamiący zakaz prowadzenia pojazdów (art. 42 §4 KK — weryfikuj)
+NOWE PRZEPISY OD 29.01.2026 (Dz.U. 2025 poz. 1872) — ⭐ ZWERYFIKOWANE 2026-07-20:
+  → NOWY OBOWIĄZKOWY zakaz (art. 42 §1a KK, nowy): sąd ORZEKA zakaz
+    prowadzenia WSZELKICH pojazdów mechanicznych (nie fakultatywnie,
+    lecz OBLIGATORYJNIE) w razie skazania za przestępstwo z art. 177
+    §2a, art. 178b, art. 178c §1 pkt 2, art. 178d (brawurowa jazda —
+    patrz sekcja 2) LUB art. 180a
+  → DOŻYWOTNI zakaz (art. 42 §3 KK, zweryfikowane brzmienie): sąd
+    ORZEKA zakaz DOŻYWOTNIO w razie popełnienia przestępstwa z art.
+    178a §4 (recydywa nietrzeźwego kierowcy) LUB art. 244 (złamanie
+    zakazu sądowego), GDY czyn polegał na NIEZASTOSOWANIU SIĘ do
+    wcześniejszego zakazu prowadzenia pojazdów — LUB gdy sprawca w
+    chwili popełnienia przestępstwa z art. 173 (katastrofa w ruchu, ze
+    skutkiem śmierci/ciężkiego uszczerbku) albo art. 177 §2/§2a lub
+    art. 355 §2 (wypadek popełniony przez żołnierza) BYŁ w stanie
+    NIETRZEŹWOŚCI lub pod wpływem środka odurzającego, LUB ZBIEGŁ z
+    miejsca zdarzenia (przed/po zdarzeniu, przed poddaniem się badaniu)
   → Obligatoryjny PRZEPADEK POJAZDU (≥1,5‰): art. 44a §1 KK (nowy) — weryfikuj
     lub nawiązka 5 000–500 000 zł gdy przepadek niemożliwy
+
+⭐ PODWYŻSZONE DOLNE GRANICE KARY dla wypadków/katastrof drogowych
+(zweryfikowane 2026-07-20, dokładny artykuł nowelizowany — prawdopodobnie
+art. 173/177 KK, ⚠️ zweryfikuj precyzyjnie na ISAP przy konkretnej sprawie):
+  → NIE NIŻSZA niż 3 LATA — gdy następstwem WYPADKU jest ciężki
+    uszczerbek na zdrowiu innej osoby ALBO następstwem KATASTROFY jest
+    ciężki uszczerbek na zdrowiu WIELU osób (do dwukrotności górnej
+    granicy ustawowego zagrożenia)
+  → NIE NIŻSZA niż 5 LAT — gdy następstwem czynu jest ŚMIERĆ człowieka
+    (do dwukrotności górnej granicy przy katastrofie, a DO 20 LAT
+    pozbawienia wolności przy wypadku)
+  ⭐ TO OZNACZA: sądy NIE MOGĄ już orzekać kar poniżej tych progów przy
+  najpoważniejszych skutkach wypadków/katastrof drogowych — istotne
+  ZAOSTRZENIE w porównaniu do stanu sprzed 29.01.2026
 
 SKRÓCENIE ZAKAZU (art. 84 KK):
   → Po połowie okresu (min. 1 rok), na wniosek skazanego
@@ -129,9 +157,8 @@ OBLIGATORYJNY PRZEPADEK POJAZDU:
   → Niemożność przepadku: nawiązka 5 000–500 000 zł
   → Weryfikuj art. KKW dotyczące wykonania
 
-ZAKAZ DOŻYWOTNI:
-  → Recydywista łamiący zakaz prowadzenia: dożywotni zakaz
-  → Weryfikuj: web_search "dożywotni zakaz prowadzenia recydywa 2026 art KK"
+ZAKAZ DOŻYWOTNI I NOWY OBOWIĄZKOWY ZAKAZ:
+  → Pełne, zweryfikowane warunki — patrz sekcja 1 wyżej (art. 42 §1a i §3 KK)
 ```
 
 ---

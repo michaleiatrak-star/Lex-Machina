@@ -52,6 +52,14 @@ MODUŁY USTROJOWE I PROCEDURALNE:
   [✓] OK    mod-skargi-na-prawo-miejscowe-WSA-NSA
   [✓] OK    mod-procedury-JST-statuty-regulaminy
   [✓] OK    mod-dzienniki-urzedowe-BIP-publikacja
+              (2026-07-21: dodano pełną tabelę BIP marszałkowskich dla
+               WSZYSTKICH 16 województw [Łódzkie potwierdzone przez
+               użytkownika po wstępnym błędnym trafieniu na stronę
+               wojewody] + rozróżnienie dziennik urzędowy [miarodajny]
+               vs BIP [pomocniczy] + obserwacja o oznaczeniu "akt
+               prawa miejscowego" w rejestrach BIP. Odpowiedź na
+               pytanie użytkownika czy wskazane są wszystkie 16
+               województw)
   [✓] OK    mod-kontrola-administracji-inspekcje
   [✓] OK    mod-akty-porzadkowe-bezpieczenstwo-lokalne
               (akty porządkowe, rozporządzenia porządkowe, zaskarżanie, bezpieczeństwo lokalne)

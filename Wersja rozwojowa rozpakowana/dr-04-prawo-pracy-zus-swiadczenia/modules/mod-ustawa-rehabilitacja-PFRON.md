@@ -219,3 +219,133 @@ Organ: ZUS (ubezpieczeni) / KRUS (rolnicy)
 Wniosek: formularz ZUS SU lub KRUS SU
 Odwołanie: do SO wydziału pracy i ubezpieczeń społecznych (przez ZUS) — termin 1 miesiąc
 ```
+
+---
+
+## ANEKS — LIKWIDACJA WYPOŻYCZALNI PFRON (dodane 2026-07-20)
+
+> ⛔ TEMAT BARDZO ŚWIEŻY I W TOKU — sytuacja rozwija się w czasie
+> rzeczywistym (ostatnie źródła sprzed ~4-7 dni w chwili tej sesji).
+> ZWERYFIKUJ AKTUALNY STAN przed każdym użyciem — poniższy opis to
+> ZDJĘCIE SYTUACJI na 20.07.2026, NIE ostateczny stan prawny.
+
+### 1. Historia programu — kontekst niezbędny do zrozumienia obecnej sytuacji
+
+```
+□ Program "Wypożyczalnia technologii wspomagających dla osób
+  z niepełnosprawnością" — zatwierdzony przez Radę Nadzorczą PFRON na
+  początku lutego 2023 r., URUCHOMIONY we wrześniu 2023 r.
+□ CEL: centralna wypożyczalnia NOWOCZESNEGO, DROGIEGO sprzętu/
+  oprogramowania wspomagającego, bezpłatnie udostępnianego osobom
+  z niepełnosprawnością, których NIE STAĆ na własny zakup
+□ LOGISTYKA: Rządowa Agencja Rezerw Strategicznych (RARS) zarządzała
+  magazynem NA ZLECENIE PFRON; PFRON prowadził nabór/weryfikację
+  wniosków; Poczta Polska — dostarczanie sprzętu
+□ ⭐ FIASKO: wg informacji przedstawionej w Sejmie (posiedzenie
+  Podkomisji stałej ds. osób z niepełnosprawnościami) — 73% sprzętu
+  zakupionego za ~96 MLN ZŁ NIGDY nie trafiło do użytkowników —
+  ponad 80% z tego sprzętu, wskutek NIEŁADOWANIA akumulatorów podczas
+  składowania, nie nadaje się już do użytku BEZ ich wymiany
+□ SPRAWĘ BADAJĄ DWIE PROKURATURY (⚠️ status/wynik postępowań
+  nieznany w tej sesji — sprawdź aktualności)
+□ Program w DOTYCHCZASOWEJ formule FORMALNIE zamknięty 31.12.2025 r.
+  — od 1.01.2026 r. BRAK możliwości składania nowych wniosków
+```
+
+### 2. Problem prawny uniemożliwiający proste rozwiązanie
+
+```
+⭐ Sprzęt zakupiony za PRAWIE 100 MLN ZŁ stanowi REZERWĘ STRATEGICZNĄ i
+FORMALNIE należy do SKARBU PAŃSTWA — PFRON NIE MÓGŁ go po prostu
+PRZEKAZAĆ osobom z niepełnosprawnością bez PODSTAWY PRAWNEJ do
+NIEODPŁATNEGO przekazania mienia będącego rezerwą strategiczną —
+STĄD konieczność UCHWALENIA nowych przepisów przez Sejm
+```
+
+### 3. ⭐⭐ "REAKTYWACJA LIKWIDACYJNA" — mechanizm od 10.06.2026 r.
+
+```
+□ 10.06.2026 r. PFRON PONOWNIE URUCHOMIŁ wypożyczalnię — MIMO że
+  program formalnie pozostaje W TRAKCIE LIKWIDACJI (stąd potoczne
+  określenie "reaktywacja likwidacyjna" — sprzeczne pozornie, ale
+  celowe: TO WCIĄŻ jest "działalność likwidacyjna", tylko inną drogą)
+□ LOGIKA MECHANIZMU: wypożyczalnia WYPOŻYCZY zalegający w magazynie
+  sprzęt (generujący koszty przechowania) osobom z niepełnosprawnością
+  → RÓWNOLEGLE w Sejmie procedowana jest nowelizacja ustawy o
+  rehabilitacji zawodowej i społecznej (komisyjny projekt, druk nr
+  2701), która ma dać PFRON podstawę prawną do NIEODPŁATNEGO przekazania
+  tego sprzętu NA WŁASNOŚĆ osobom, które go WYPOŻYCZYŁY → po uchwaleniu
+  przepisów: umowy WYPOŻYCZENIA zostaną zastąpione umowami PRZEKAZANIA
+  NA WŁASNOŚĆ
+
+□ SKALA: 4000 jednostek sprzętu/oprogramowania (z możliwością
+  zwiększenia/zmniejszenia o 20%) + DODATKOWO ok. 1700 jednostek już
+  WCZEŚNIEJ wypożyczonych (przed 2025 r.)
+
+□ WARUNEK dla nowych beneficjentów: "zainwestowanie" w KAUCJĘ w
+  wysokości 2% wartości sprzętu, na okres POTRZEBNY do uchwalenia
+  przepisów likwidacyjnych przez Sejm — kaucja jest ZWROTNA (po
+  przekazaniu sprzętu na własność, kaucja wraca do osoby
+  z niepełnosprawnością)
+
+□ WARUNEK KWALIFIKACYJNY: osoba z niepełnosprawnością MOŻE wypożyczyć
+  sprzęt, POD WARUNKIEM że w ciągu OSTATNICH 12 MIESIĘCY NIE
+  OTRZYMAŁA ze środków PFRON ANI NFZ dofinansowania na zakup TEGO
+  SAMEGO sprzętu (zakaz podwójnego finansowania)
+
+□ BRAK SERWISU NAPRAWCZEGO w ramach programu: przy usterce/awarii —
+  osoba MOŻE oddać sprzęt do naprawy NA WŁASNY KOSZT, PO uprzedniej
+  ZGODZIE PFRON — LUB zrezygnować z dalszego wypożyczania
+
+□ DLA OSÓB, KTÓRE JUŻ WYPOŻYCZYŁY sprzęt PRZED 2025 r.: zamiast
+  zwracać sprzęt (pierwotny termin: koniec września 2026 r.), MOGĄ
+  ANEKSOWAĆ umowy DO KOŃCA 2028 r. i w tym okresie PRZEJĄĆ sprzęt na
+  własność, analogicznie do nowych beneficjentów
+
+□ STATUS NOWELIZACJI (druk 2701): ⚠️ NA DZIEŃ TEJ SESJI (20.07.2026)
+  — projekt WCIĄŻ PROCEDOWANY w Sejmie, NIE uchwalony — WEDŁUG
+  zapowiedzi ma zostać uchwalony DO KOŃCA 2027 r. (⚠️ inne źródło
+  wskazuje termin "do końca 2026 r." dla WYGASZENIA programu — MOŻLIWA
+  ROZBIEŻNOŚĆ dat między "wygaszeniem" a "uchwaleniem przepisów
+  likwidacyjnych" — te to DWA RÓŻNE terminy, NIE mylić)
+
+□ WYPOŻYCZANIE W PIERWSZEJ KOLEJNOŚCI: wózki o napędzie RĘCZNYM
+  (rozważano też uruchomienie wypożyczania wózków/skuterów/napędów
+  ELEKTRYCZNYCH — ⚠️ status tego rozszerzenia niepotwierdzony w tej
+  sesji)
+```
+
+### 4. Checklist praktyczny
+
+```
+□ Czy klient MIAŁ już wypożyczony sprzęt PRZED 2025 r. — sprawdź czy
+  zaanektował umowę do 2028 r. zamiast zwracać sprzęt we wrześniu 2026 r.
+□ Czy klient chce SKORZYSTAĆ z reaktywowanej wypożyczalni od 10.06.2026 —
+  sprawdź warunek 12-miesięcznego braku wcześniejszego dofinansowania
+  na TEN SAM sprzęt
+□ Czy klient rozumie mechanizm KAUCJI 2% jako ZWROTNEJ, nie opłaty
+  bezzwrotnej
+□ Czy klient ma ZEPSUTY sprzęt z wcześniejszej partii (ryzyko
+  akumulatorów) — ustal czy to jego sprzęt jest objęty ryzykiem
+  wskazanym w informacji sejmowej (80% niesprawnych bez wymiany baterii)
+□ ZAWSZE zweryfikuj AKTUALNY status legislacyjny druku 2701 PRZED
+  doradzaniem klientowi w oparciu o mechanizm "reaktywacji
+  likwidacyjnej" — sytuacja jest W TOKU i może się zmienić
+```
+
+### 5. Literatura i źródła (zweryfikowane online 2026-07-20)
+
+- infor.pl (2×) — mechanizm reaktywacji likwidacyjnej, warunki kaucji,
+  przedłużenie do 2028 r., "7 reguł" programu.
+- rp.pl (2×) — reaktywacja 10.06.2026, warunek 12 miesięcy, brak
+  serwisu naprawczego.
+- bip.brpo.gov.pl — interwencje RPO, historia sporu, liczba wniosków
+  (5470 na dzień aktualizacji), postępowania prokuratorskie.
+- prawo.pl — "wielkie fiasko", zamknięcie "po cichu", stan na
+  1.01.2026.
+- gazetaprawna.pl — wystąpienie wiceprezes PFRON w Sejmie (73%
+  niewykorzystanego sprzętu, 96 mln zł, 80% niesprawnych baterii).
+- lex.media.pl — szczegóły projektu (4000 jednostek + ok. 1700
+  wcześniej wypożyczonych).
+- kadry.infor.pl — kontekst prawny (rezerwa strategiczna, Skarb
+  Państwa, druk sejmowy 2701).

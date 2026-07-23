@@ -5,11 +5,13 @@
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
 | Prawo farmaceutyczne | Dz.U. 2026 poz. 612 t.j. | mod-PrFarm-prawo-farmaceutyczne | ✅ OK |
+| Plan dla Chorób Rzadkich (dokument programowy MZ) + Rozporządzenie WE 141/2000 (leki sieroce) | ⚠️ Plan to dokument programowy nie ustawa — zweryfikuj aktualną edycję na chorobyrzadkie.gov.pl; Rozp. WE 141/2000 | mod-rzadkie-choroby-genetyczne-plan-leki-sieroce | ✅ NOWY 2026-07-20, odpowiedź na pytanie użytkownika |
 | Prawo farmaceutyczne — szczegółowy | Dz.U. 2026 poz. 612 t.j. | mod-PrFarm-szczegolowy | ✅ OK |
 | GIF/GIS/WIF — nadzór farmaceutyczny i sanitarny | Dz.U. 2026 poz. 612 t.j. (Prawo farmaceutyczne, GIF) + ⚠️ GIS: Dz.U. 2024 poz. 416 t.j. (POPRAWKA 2026-07-02y — BYŁO błędnie 2023.394; ustawa o Państwowej Inspekcji Sanitarnej, obwieszczenie 11.03.2024) | mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny | ⚠️ WYMAGA AKTUALIZACJI MODUŁU (GIS) |
 | Rozp. REACH + CLP — chemikalia | Rozp. (WE) 1907/2006 + Rozp. (WE) 1272/2008 | mod-REACH-CLP-chemikalia | ✅ OK |
 | Ustawa o działalności leczniczej + prawa pacjenta | Dz.U. 2024 poz. 799 + Dz.U. 2024 poz. 581 | mod-ustawa-dzialalnosc-lecznicza-pacjent | ✅ OK |
 | Prawo medyczne — prawa pacjenta framework (RPP) | Dz.U. 2024 poz. 581 t.j. ✅ VER: 2026-06-14 (TRYB DZU — confirmed aktualny; uwaga: nowelizacja 2026/26 art.23, sprawdzić czy konsolidowana) | mod-ustawa-prawa-pacjenta-framework | ✅ OK |
+| Ustawa o prawach pacjenta i RPP — Rozdział 12 (art. 49-53, kompetencje Rzecznika Praw Pacjenta) | Dz.U. 2024 poz. 581 t.j. | mod-rzecznik-praw-pacjenta-RPP | ✅ NOWY 2026-07-21, odpowiedź na pytanie użytkownika |
 | Prawo medyczne — szczegółowy (ustawa o działalności leczniczej) | Dz.U. 2026 poz. 156 t.j. ✅ VER: 2026-06-14 (TRYB DZU — był 2024/799; nowszy t.j. 2025/450 i 2026/156 znalezione, 2026/156 z 05.02.2026 jest aktualny) | mod-ustawa-medyczne-szczegolowy | ✅ OK |
 | Ustawa o świadczeniach zdrowotnych — NFZ | Dz.U. 2025 poz. 1461 t.j. — VER 2026-07-02s: nadal aktualne (obwieszczenie 26.09.2025) | mod-ustawa-NFZ-swiadczenia | ✅ OK |
 | ⛔ Ustawa o izbach lekarskich (samorząd zawodowy, odpowiedzialność zawodowa/dyscyplinarna lekarzy — Okręgowy Sąd Lekarski + Naczelny Sąd Lekarski) | Dz.U. 2021 poz. 1342 t.j. (ostatni potwierdzony; ustawa z 2.12.2009 r.) — ⚠️ DODANO 2026-07-02 jako NOWA POZYCJA, całkowicie brakująca w mapie do tej sesji, wykryta przy okazji weryfikacji sądów dyscyplinarnych na żądanie użytkownika. Rozdział 5 "Odpowiedzialność zawodowa" art. 53-112 | ⛔ BRAK MODUŁU DEDYKOWANEGO — sprawdzić czy odpowiedzialność zawodowa lekarzy jest w ogóle omówiona w istniejących modułach medycznych dr-10 | ⛔ NOWA POZYCJA — LUKA SYSTEMOWA |

@@ -64,6 +64,19 @@ DANE OSOBOWE:
               (szczegółowy: 72h zgłoszenie naruszenia, DPO, DPIA, monitoring pracowników,
                wyrok TSUE C-300/21 i C-340/21, art. 82 odszkodowanie)
   [✓] OK    mod-UODO-postepowanie-ochrona-danych
+              (2026-07-21: dodano rozróżnienie skarga [sekcja 9] vs
+               zgłoszenie naruszenia RODO [już wcześniej w pełni
+               opracowane w mod-RODO-szczegolowy.md, potwierdzone jako
+               kompletne — 72h, ocena ryzyka, treść zgłoszenia,
+               zawiadomienie osób, rejestr naruszeń]. Odpowiedź na
+               pytanie użytkownika)
+              (2026-07-21: dodano sekcję 9 — merytoryczna treść skargi
+               do Prezesa UODO [elementy, zasada subsydiarności, zakaz
+               żądania kary, brak opłaty poza pełnomocnikiem 17 zł,
+               termin 30/60 dni] + korekta terminologiczna GIODO→UODO
+               [zastąpiony 25.05.2018, nie tylko zmiana nazwy]. Nowy
+               wzór SPK w pisma-proste-v2. Odpowiedź na pytanie
+               użytkownika o kompletność tematu GIODO/UODO)
               (postępowanie przed UODO: skarga, decyzja, odwołanie WSA,
                kary administracyjne; Dz.U. 2019 poz. 1781 t.j.)
 

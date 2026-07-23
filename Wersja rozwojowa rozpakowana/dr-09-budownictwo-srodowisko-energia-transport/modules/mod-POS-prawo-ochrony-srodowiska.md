@@ -92,6 +92,7 @@ II instancja:
 
 ```
 Zawiadomienie do WIOŚ (Inspekcja Ochrony Środowiska) + RDOŚ
+⭐ Struktura/kompetencje IOŚ (GIOŚ + 16 WIOŚ) → `mod-inspekcja-ochrony-srodowiska-GIOS-WIOS.md` (DR-09, nie duplikowane tutaj)
     ↓
 Kontrola WIOŚ → mandat / decyzja nakazująca usunięcie
     ↓ odwołanie do Głównego Inspektora Ochrony Środowiska (GIOŚ)

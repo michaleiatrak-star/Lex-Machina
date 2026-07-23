@@ -64,7 +64,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   wspierające (→ mod-niepelnosprawnosc-intelektualna-gluchota.md,
   mod-niewidomy-prawa-prawne.md, mod-prawa-obywatelskie-srodki-karne.md)
 
-## Moduły (25 łącznie — ✓ 25 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
+## Moduły (26 łącznie — ✓ 26 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
 
 ```
   [✓] OK    mod-KP-prawo-pracy
@@ -93,6 +93,11 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
                i linia SN → shared/definicje/DEF-PRACA.md; projekt UD183/
                RM 17.02.2026 SCALONY z dwóch wcześniej rozbieżnych wpisów)
   [✓] NOWY  mod-wypadek-przy-pracy-choroba-zawodowa
+              (2026-07-21: dodano obowiązek zawiadomienia PIP i
+               PROKURATORA o wypadku ciężkim/śmiertelnym/zbiorowym
+               [art. 234 §2 KP] — odrębny od zwykłego zgłoszenia
+               pracodawcy, z sankcją wykroczeniową za niedopełnienie.
+               Odpowiedź na pytanie użytkownika o zgłoszenia do PIP)
               (wydzielony z ANEKS B: intake wypadkowy, świadczenia ZUS,
                terminy, ścieżka sporna; definicja 4-elementowa →
                shared/definicje/DEF-PRACA.md H.1.4)
@@ -128,6 +133,12 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
                sekcję 4a: ugoda, milczące załatwienie, zaświadczenia,
                skargi/wnioski Działu VIII)
   [✓] OK    mod-SUS-ZUS-ubezpieczenia-spoleczne
+              (2026-07-21: dodano ANEKS D — interpretacja indywidualna
+               ZUS [art. 34 Prawa przedsiębiorców, właściwość WYŁĄCZNIE
+               oddziały Gdańsk/Lublin, milcząca zgoda po 30 dniach,
+               znaczenie strategiczne przy ryzyku przekwalifikowania
+               umowy], z odesłaniem do nowego wzoru SPJ w
+               pisma-proste-v2. Odpowiedź na pytanie użytkownika)
               (zawiera Aneks A: renta — 3 przesłanki z tabelą stażu;
                Aneks B: kalkulator terminów ZUS; Aneks C: predykcja wyniku)
   [✓] OK    mod-KRUS-rolnicze-ubezpieczenia
@@ -139,8 +150,31 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   [✓] OK    mod-ustawa-praca-tymczasowa
   [✓] OK    mod-ustawa-rynek-pracy-zatrudnienie
   [✓] OK    mod-ustawa-swiadczenia-rodzinne
+  [✓] OK    mod-dodatek-pielegnacyjny-swiadczenie-rehabilitacyjne-wyrownawcze
+              (dodany 2026-07-20: dodatek pielęgnacyjny ZUS [75+ lat
+               automatycznie, zakaz łączenia z zasiłkiem
+               pielęgnacyjnym], zasiłek pielęgnacyjny pełne opracowanie,
+               świadczenie rehabilitacyjne ZUS, świadczenie wyrównawcze
+               [2 niezwiązane warianty]. UCZCIWA korekta: "dodatek
+               rehabilitacyjny" NIE ISTNIEJE pod tą nazwą — wskazano
+               4 prawdopodobne świadczenia. Odpowiedź na pytanie
+               użytkownika)
+              (2026-07-20: PEŁNE opracowanie świadczenia pielęgnacyjnego
+               [reforma 2024 — opiekun może PRACOWAĆ BEZ LIMITU
+               jednocześnie pobierając świadczenie, wcześniej zakaz
+               całkowity], ustawa "za życiem" [4000 zł, termin 12 mies.],
+               opieka wytchnieniowa [limity 240h/14 dób, PUŁAPKA: utrata
+               świadczenia pielęgnacyjnego przy całodobowym pobycie >5
+               dni/tydzień]. Odpowiedź na pytanie użytkownika)
   [✓] OK    mod-ustawa-aktywny-rodzic
   [✓] OK    mod-ustawa-rehabilitacja-PFRON
+              (2026-07-20: dodano ANEKS — LIKWIDACJA WYPOŻYCZALNI PFRON
+               [historia fiaska programu — 73% sprzętu niewykorzystane,
+               dwie prokuratury; mechanizm "reaktywacji likwidacyjnej"
+               od 10.06.2026 — kaucja 2%, przekazanie na własność po
+               uchwaleniu druku sejmowego 2701, przedłużenie umów do
+               2028]. Temat BARDZO ŚWIEŻY, w toku. Odpowiedź na
+               pytanie użytkownika)
               (zawiera Aneks: świadczenie uzupełniające 500+ dla niepełnosprawnych)
   [✓] OK    mod-ustawa-pomoc-spoleczna
   [✓] OK    mod-ustawa-ochrona-konkurencji-konsumentow-UOKiK

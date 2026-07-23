@@ -4,7 +4,1669 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
-## AUDYT-2026-07-19e — PRZENIESIENIE mod-KPA-postepowanie-administracyjne z DR-04 do DR-05 + rozbudowa o 4 instytucje (ugoda, milczące załatwienie, zaświadczenia, skargi/wnioski Działu VIII)
+## AUDYT-2026-07-21p — NOWE mod-czynny-zal-KK-KKS-samooskarzenie i mod-dobrowolne-poddanie-sie-karze-KPK — czynny żal był hasłem w 9+ modułach bez treści, dobrowolne poddanie się karze było całkowitą luką, "samooskarżenie" wyjaśnione jako nieodrębna instytucja
+
+**Zakres:** NOWY `dr-03/.../mod-czynny-zal-KK-KKS-samooskarzenie.md` +
+NOWY `dr-03/.../mod-dobrowolne-poddanie-sie-karze-KPK.md` + odesłanie w
+`mod-KK-KPK-framework-karne.md` + `dr-03/SKILL.md` (52→54) +
+`dr-03/MAPA-AKTOW.md` (2 nowe wiersze) + `prawo-polskie-v2/ROUTING-
+MAP.md` (2 nowe wiersze, zsynchronizowano natychmiast) + 2 wpisy
+`CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik polecił zbadać czynny żal, samooskarżenie i
+dobrowolne poddanie się karze.
+
+**Ustalenie wstępne — czynny żal jako "hasło bez treści":**
+wyszukiwanie ujawniło, że "czynny żal" był PRZYWOŁYWANY w co NAJMNIEJ
+9 różnych modułach (DR-03: framework KK/KPK, art. 127-139 przeciwko
+RP, art. 163-172 bezpieczeństwo powszechne, art. 181-188a środowisko,
+art. 228-231 korupcja, świadek koronny; DR-06: KAS kontrola celno-
+skarbowa, OP ordynacja podatkowa, UCC clo-taryfa) — ZAWSZE jako
+element listy kontrolnej lub sugestia web_search ("rozważ czynny żal",
+"web_search: czynny żal KKS art 16 skuteczność..."), NIGDY z
+rzeczywistym wyjaśnieniem elementów/procedury/terminów. Żaden
+DEDYKOWANY moduł nie istniał.
+
+**Korekta terminologiczna — "samooskarżenie":** ustalono, że NIE
+istnieje w polskim prawie karnym samodzielna, nazwana instytucja o tej
+nazwie — to potoczne określenie mogące odnosić się do JEDNEJ z trzech
+odrębnych instytucji, rozróżnionych przede wszystkim CZASOWO: czynny
+żal (PRZED wykryciem czynu, możliwe CAŁKOWITE uniknięcie kary),
+przyznanie się do winy w toku postępowania (element FAKTYCZNY przy
+wymiarze kary, nie odrębna instytucja proceduralna), oraz dobrowolne
+poddanie się karze (PO wszczęciu postępowania, mechanizm konsensualny
+ŁAGODZĄCY/PRZYSPIESZAJĄCY, nie eliminujący odpowiedzialności).
+
+**Czynny żal — pełne opracowanie z KLUCZOWYM ustaleniem:** w KK (art.
+15) rozróżniono dwie ODRĘBNE formy (dobrowolne odstąpienie od
+usiłowania PRZED dokonaniem kompletu czynności vs dobrowolne
+zapobieżenie skutkowi PO wykonaniu czynności). W KKS (art. 16-16a,
+najczęściej praktycznie stosowana forma) — NAJWAŻNIEJSZE, zaskakujące
+dla wielu ustalenie: czynny żal skarbowy z ZASADY NIE JEST tylko
+"samo-donosem" — druga przesłanka wymaga, w szczególności, ujawnienia
+RÓWNIEŻ osób WSPÓŁDZIAŁAJĄCYCH w popełnieniu czynu, nie tylko
+przyznania się do własnego udziału. Rozróżniono art. 16 (ogólny, pełne
+zawiadomienie + zapłata uszczuplonej należności w terminie) od art.
+16a (węższy, sama skuteczna korekta deklaracji/księgi, prostsza
+procedura). Odnotowano, że dla skuteczności NIE MA znaczenia wysokość
+grożącej kary, oraz wyłączenie zakresowe dla art. 79 ustawy o
+rachunkowości (nie jest przestępstwem/wykroczeniem skarbowym).
+
+**Dobrowolne poddanie się karze — pełne opracowanie, dotąd CAŁKOWITA
+luka:** dwa odrębne tryby wyraźnie rozróżnione — art. 335 KPK (wniosek
+PROKURATORA na etapie postępowania przygotowawczego, po uzgodnieniu
+kary z podejrzanym) i art. 387 KPK (wniosek SAMEGO oskarżonego na
+etapie sądowym, termin do zakończenia pierwszego przesłuchania
+wszystkich oskarżonych). Dodano ZASKAKUJĄCY, potwierdzony orzecznictwem
+SN niuans: art. 387, w odróżnieniu od art. 335, formalnie NIE WYMAGA
+przyznania się do winy jako przesłanki literalnej (dwa postanowienia
+SN: II KK 355/05, II KK 275/06 — nawet COFNIĘCIE wcześniejszego
+przyznania nie musi być przeszkodą), z praktycznym zastrzeżeniem że
+zależy to od składu sądu. Opisano warunki zgody uczestników (prokurator
++ pokrzywdzony przy art. 387), ograniczenia przedmiotowe (zbrodnie,
+wysokie zagrożenie karą), korzyści z WAŻNYM zastrzeżeniem że tryb NIE
+przyspiesza samego zatarcia skazania (tylko czas postępowania), oraz
+kluczowe ryzyko — utrata prawa zaskarżenia ustaleń faktycznych/
+wysokości kary poza uchybieniami proceduralnymi.
+
+**Status:** ✅ WDROŻONE. Struktury obu nowych plików oraz edytowanego
+frameworku KK/KPK zweryfikowane. Główna mapa routingu zsynchronizowana
+natychmiast (17 sekcji zachowanych). Nowy moduł czynnego żalu ustanowiono
+jako CENTRALNY punkt odniesienia — przyszłe sesje powinny AKTUALIZOWAĆ
+istniejące odesłania w 9 innych modułach, by wskazywały NA TEN moduł
+zamiast samych sugestii web_search (poza zakresem obecnego zlecenia,
+odnotowane jako możliwe usprawnienie na przyszłość).
+
+---
+
+
+
+**Zakres:** rejestracja 15 modułów w `dr-03/SKILL.md` (37→52) +
+zbiorczy wiersz w `dr-03/MAPA-AKTOW.md` + rozbudowa `dr-03/.../
+mod-KK-art148-162-przeciwko-zyciu-zdrowiu.md` (4 nowe drzewa, 127→296
+linii) + nagłówek `prawo-polskie-v2/ROUTING-MAP.md` (zsynchronizowano
+natychmiast) + 2 wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik polecił zarejestrować niezarejestrowane
+moduły (rozbieżność odnotowana w poprzedniej turze) i przy okazji
+zbadać kwestię nieudzielenia pomocy.
+
+**Zadanie 1 — rejestracja 15 modułów:** wszystkie 15 modułów (dotyczące
+art. 10, 18-22, 64-65, 69-84, 101-105, 148-162, 212-216, 222-226,
+228-231, 250a, 255b, 270-310, 296, 296a, 305 KK) potwierdzono jako
+SUBSTANTYWNE, dobrze opracowane treści (79-263 linii każdy) zbudowane
+2026-07-16/18 — problem dotyczył WYŁĄCZNIE braku wpisu w SKILL.md.
+Zarejestrowano WSZYSTKIE 15, z krótkim opisem tematu i datą budowy przy
+każdym. Sprawdzono GŁÓWNĄ mapę routingu — OKAZAŁA SIĘ już zawierać
+wpisy dla wszystkich 15 (potwierdzenie WCZEŚNIEJSZEJ obserwacji z tej
+sesji: synchronizacja bywa DWUKIERUNKOWA, główna mapa czasem WYPRZEDZA
+lokalny rejestr, nie tylko odwrotnie) — zaktualizowano jedynie
+nagłówek wersji, BEZ potrzeby dodawania 15 nowych wierszy tam.
+
+**Zadanie 2 — nieudzielenie pomocy, ZNALEZISKO PRZY OKAZJI:** podczas
+weryfikacji modułu `mod-KK-art148-162-przeciwko-zyciu-zdrowiu.md`
+(TEGO, gdzie logicznie POWINNO żyć art. 162) odkryto, że TYTUŁ modułu
+OBIECUJE zakres "art. 148-162", ale RZECZYWISTA treść zawierała
+WYŁĄCZNIE DRZEWO Z.1 (zabójstwo, art. 148) i DRZEWO Z.2 (uszczerbek na
+zdrowiu, art. 156-157) — CAŁY zakres art. 158-162 był NIEOBECNY mimo
+obietnicy w nagłówku pliku.
+
+**Uzupełniono WSZYSTKIE CZTERY brakujące artykuły:**
+- **Art. 158-159 (bójka/pobicie)** — z ODNOTOWANĄ, rzadko dostrzeganą
+  cechą: przy skutku śmiertelnym/ciężkim, GDY nie da się ustalić
+  KONKRETNEGO sprawcy — WSZYSCY uczestnicy odpowiadają za sam UDZIAŁ,
+  wyjątek od zasady indywidualizacji winy.
+- **Art. 160 (narażenie na niebezpieczeństwo)** — z KLUCZOWYM
+  rozróżnieniem GWARANTA (§2, do 5 lat) od zwykłego sprawcy (§1, do 3
+  lat) — BEZPOŚREDNIO powiązane z głównym tematem.
+- **Art. 161 (narażenie na zarażenie chorobą)** — podstawowe elementy,
+  z odnotowanym punktem startowym dla §2 (HIV specyficznie).
+- **Art. 162 (NIEUDZIELENIE POMOCY) — GŁÓWNA odpowiedź na pytanie
+  użytkownika:** pełne elementy (widzenie osoby w bezpośrednim
+  niebezpieczeństwie utraty życia/ciężkiego uszczerbku, możliwość
+  pomocy BEZ narażenia siebie/innych), kontratyp (§2 — gdy pomoc
+  wymaga zabiegu lekarskiego LUB na miejscu jest już osoba/instytucja
+  powołana), oraz NAJWAŻNIEJSZE praktyczne rozróżnienie: art. 162 to
+  POWSZECHNY obowiązek "ludzkiej" solidarności (KAŻDY przechodzień),
+  podczas gdy TA SAMA bierność ze strony osoby związanej więzią
+  GWARANCYJNĄ (lekarz-pacjent, rodzic-dziecko) kwalifikuje się z
+  SUROWSZEGO art. 160 §2 — z konkretnym przykładem (lekarz na dyżurze
+  SOR zaniedbujący WŁASNEGO pacjenta = art. 160 §2, nie art. 162).
+  Dodano PRAKTYCZNĄ zasadę: zakaz "oceniania" ofiary jako przesłanki
+  zwalniającej (nie można usprawiedliwiać bierności tym, że
+  poszkodowany "sam się w to wpakował"), oraz rekomendację MINIMUM
+  (zadzwonienie pod 112 zwykle wypełnia obowiązek bez narażania się).
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana natychmiast po
+edycji (8 nagłówków zachowanych, poprawna kolejność Z.1→Z.6→tabela).
+Główna mapa routingu zsynchronizowana natychmiast (17 sekcji
+zachowanych). Rozbieżność 52 vs 37 z poprzedniej tury — CAŁKOWICIE
+ZAMKNIĘTA.
+
+---
+
+
+
+**Zakres:** rozbudowa `dr-03/.../mod-KK-art233-244b-przeciwko-
+wymiarowi-sprawiedliwosci.md` (3 nowe sekcje, 138→446 linii) +
+`dr-03/SKILL.md` (36→37, nadrobiona zaległość) + `dr-03/MAPA-AKTOW.md`
++ `prawo-polskie-v2/ROUTING-MAP.md` (zsynchronizowano natychmiast) +
+wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik zapytał o sytuacje obowiązkowego zgłoszenia
+do prokuratury, ucieczkę z miejsca zdarzenia, udzielenie schronienia
+osobie ściganej listem gończym/ENA, W TYM szczególnie o sytuację, gdy
+UKRYWAJĄCY NIE WIE, że ukrywa taką osobę.
+
+**Ustalenie wstępne:** poplecznictwo (art. 239 KK) było JUŻ dobrze
+opracowane merytorycznie (elementy, sankcje, kontratyp osoby
+najbliższej) z sesji 2026-07-16 — ALE moduł ten NIGDY nie został
+zarejestrowany w `dr-03/SKILL.md` (kolejny przypadek "praca wykonana,
+nigdy niezarejestrowana", analogiczny do wcześniej znalezionych w tej
+sesji — moduł adopcyjny, mod-reklama-wobec-nieletnich).
+
+**Bezpośrednia odpowiedź na kluczowe pytanie użytkownika — wymóg
+umyślności:** dodano PEŁNE opracowanie: poplecznictwo jest przestępstwem
+WYŁĄCZNIE umyślnym — BRAK ŚWIADOMOŚCI, że pomaga się osobie ściganej,
+CAŁKOWICIE WYKLUCZA odpowiedzialność (nie jest to kontratyp, lecz BRAK
+ZNAMION czynu w ogóle). Wystarczy zamiar EWENTUALNY (przewidywanie i
+godzenie się), NIE jest wymagana pewność (orzecznictwo SN: I KR 340/72,
+IV KK 276/07). Dodano NIEOCZYWISTY przykład: osoba ukrywająca kogoś
+ściganego listem gończym, PRZEKONANA że pomaga rzeczywistemu sprawcy —
+JEŚLI ukrywany został PÓŹNIEJ uniewinniony — ukrywający NIE ODPOWIADA,
+bo brakuje warunku OBIEKTYWNEGO (osoba musiała FAKTYCZNIE być sprawcą)
+niezależnie od subiektywnego przekonania. Odnotowano ROZBIEŻNOŚĆ
+numeracji paragrafów art. 239 §2-3 między istniejącym modułem a świeżo
+znalezionymi źródłami — NIE rozstrzygnięto arbitralnie, oznaczono do
+weryfikacji na ISAP.
+
+**Art. 240 KK — nowa, pełna sekcja:** kluczowe ustalenie — w Polsce NIE
+ISTNIEJE ogólny obowiązek denuncjacji, WYŁĄCZNIE zamknięty katalog
+najcięższych zbrodni (ludobójstwo, zabójstwo, terroryzm, wzięcie
+zakładnika, zgwałcenie kwalifikowane i inne — pełny katalog art. 240
+§1). Odnotowano wyłączenia (organy już wiedzą, zapobieżenie czynowi,
+obawa przed odpowiedzialnością własną/najbliższych) oraz KLUCZOWĄ
+kolizję z tajemnicami zawodowymi — obowiązek UCHYLA tajemnicę lekarską/
+dziennikarską/psychologiczną/adwokacką/notarialną, z WYJĄTKIEM
+duchownego (spowiedź) i obrońcy (tajemnica obrończa).
+
+**Krajowy list gończy — nowa sekcja, uzupełniająca ENA:** pełne
+opracowanie art. 278-280 KPK (przesłanki, treść, skutki ujęcia,
+relacja/rozszerzenie do ENA gdy poszukiwania krajowe zawiodą), z
+bezpośrednim POWIĄZANIEM do sekcji o poplecznictwie (list gończy jako
+NAJCZĘSTSZY praktyczny kontekst tego przestępstwa).
+
+**Ucieczka z miejsca zdarzenia drogowego:** POTWIERDZONE jako JUŻ
+częściowo opracowane w `mod-PRD-nowe-przestepstwa-drogowe-BRD.md`
+(przesłanka dożywotniego zakazu prowadzenia pojazdów) — dodano KRÓTKIE
+odesłanie zamiast duplikowania, z UCZCIWIE odnotowanym punktem
+startowym (możliwy odrębny obowiązek z art. 44 Prawa o ruchu drogowym,
+NIE zweryfikowany w tej sesji).
+
+**⭐ ZNALEZISKO DODATKOWE — znacząca, SZERSZA rozbieżność:** przy
+rejestracji odkryto, że DR-03 ma FIZYCZNIE 52 pliki modułów w
+katalogu, ale TYLKO 36 (teraz 37) było zarejestrowanych w SKILL.md —
+RÓŻNICA 15 modułów zbudowanych w poprzednich sesjach, NIGDY
+niezarejestrowanych. To WYKRACZA poza zakres obecnego zlecenia —
+odnotowano WYRAŹNIE w SKILL.md, MAPA-AKTOW i tym wpisie jako temat
+WYMAGAJĄCY odrębnej, dedykowanej sesji audytowej.
+
+**Status:** ✅ WDROŻONE (w zakresie zleconych tematów). Struktura
+edytowanego pliku zweryfikowana po każdej z trzech edycji (446 linii,
+wszystkie nagłówki poprawnie zachowane). Główna mapa routingu
+zsynchronizowana natychmiast (17 sekcji zachowanych).
+
+---
+
+
+
+**Zakres:** rozbudowa `dr-04/.../mod-wypadek-przy-pracy-choroba-
+zawodowa.md` (nowa sekcja) + rozbudowa `dr-13/.../mod-ustawa-straz-
+graniczna.md` (nowa sekcja + naprawa Dz.U.) + oba SKILL.md + oba
+MAPA-AKTOW + `prawo-polskie-v2/ROUTING-MAP.md` (zsynchronizowano
+natychmiast) + 2 wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik polecił zbadać analogicznie (do wcześniejszych
+audytów ZUS/UODO/podatkowych) wszystkie typy zgłoszeń do PIP i Straży
+Granicznej.
+
+**PIP — potwierdzona, konkretna luka mimo istniejącego modułu
+wypadkowego:** `mod-wypadek-przy-pracy-choroba-zawodowa.md` miał dobrą
+treść z PERSPEKTYWY pracownika (protokół powypadkowy, świadczenia ZUS),
+ale POMIJAŁ odrębny, DODATKOWY obowiązek pracodawcy — NIEZWŁOCZNE
+zawiadomienie WŁAŚCIWEGO okręgowego inspektora PRACY i PROKURATORA o
+wypadku CIĘŻKIM/ŚMIERTELNYM/ZBIOROWYM (art. 234 §2 KP, odrębny od
+zwykłego zgłoszenia z §1). Dodano: sporny w doktrynie moment liczenia
+"niezwłoczności" (od stwierdzenia KWALIFIKACJI, nie od samego zdarzenia),
+NIEZALEŻNOŚĆ tego obowiązku od ewentualnego zgłoszenia przez policję/
+pogotowie, wymóg UZGODNIENIA z inspektorem/prokuratorem przed zmianą
+miejsca wypadku, oraz sankcję wykroczeniową (art. 283 §2 pkt 6 KP) z
+niuansem co do winy przy PÓŹNIEJSZYM ujawnieniu kwalifikacji.
+
+**Straż Graniczna — POTWIERDZONA, znacząca luka + DODATKOWO naprawiony
+błąd Dz.U.:** `mod-ustawa-straz-graniczna.md` (195 linii) okazał się
+DOKŁADNIE tym samym wzorcem co wiele innych modułów w tej sesji —
+CZYSTY szkielet proceduralny (Akty/Zakres/Intake/Mapa proceduralna/
+Warunki skuteczności/Matryca dowodowa/Zarzuty/Kontrargumenty/Strategia/
+Orzecznictwo/Ryzyka/Quality gate) BEZ treści o kontroli legalności
+zatrudnienia/pobytu. Dodano: DWA uprawnione organy działające
+RÓWNOLEGLE (PIP + SG), tryb kontroli ZA ZAWIADOMIENIEM (termin 7-30
+dni — MECHANIZM IDENTYCZNY jak ogólne zasady Prawa przedsiębiorców,
+odkryte podobieństwo do wcześniej opracowanej treści w DR-02),
+protokół z prawem ZASTRZEŻEŃ (7 dni), SPRZECIW wobec czynności
+kontrolnych (art. 59 Prawa przedsiębiorców — TEN SAM instrument co dla
+WIOŚ, teraz potwierdzony jako stosowany RÓWNIEŻ wobec SG), obowiązki
+zgłoszeniowe pracodawcy (żądanie i przechowywanie kopii dokumentu
+pobytowego jako "bezpieczna przystań", z WYJĄTKIEM świadomości o
+sfałszowaniu), KLUCZOWE rozróżnienie — obowiązek informacyjny o
+podjęciu/niepodjęciu pracy kierowany jest do URZĘDU PRACY, nie
+bezpośrednio do SG, choć SG to WERYFIKUJE przy kontroli, oraz
+możliwość DOBROWOLNEGO zgłoszenia się cudzoziemca do jednostki SG przy
+wątpliwościach co do własnych dokumentów.
+
+**⭐ ZNALEZISKO DODATKOWE — powtórzony wzorzec błędu z SUS/ZUS:** przy
+weryfikacji cytowanego Dz.U. w module SG odkryto, że TA SAMA poprawka
+(2024.1552 → 2026.367), odnotowana w lokalnej mapie DR-13 JUŻ podczas
+audytu z 2026-07-02, NIGDY nie została ZASTOSOWANA w SAMEJ treści
+modułu — moduł nadal cytował STARY, błędny numer. Naprawiono
+BEZPOŚREDNIO w pliku modułu, zamknięto długo otwartą flagę "WYMAGA
+AKTUALIZACJI MODUŁU". Potwierdza to WCZEŚNIEJSZĄ obserwację z tej
+sesji: poprawki odnotowane WYŁĄCZNIE w plikach mapujących, bez
+propagacji do samej treści, są ŁATWE do przeoczenia i WARTO je
+systematycznie sprawdzać.
+
+**Status:** ✅ WDROŻONE. Struktury obu edytowanych plików zweryfikowane
+(w tym WYKRYTA i NAPRAWIONA przypadkowa utrata nagłówka "ŁĄCZ Z" przy
+pierwszej edycji modułu wypadkowego — ten sam powtarzający się błąd
+techniczny z wcześniejszych tur, złapany natychmiast przy rutynowej
+weryfikacji). Główna mapa routingu zsynchronizowana natychmiast (17
+sekcji zachowanych).
+
+---
+
+
+
+**Zakres:** dodanie krótkiego rozróżnienia w `dr-11/.../mod-UODO-
+postepowanie-ochrona-danych.md` sekcja 9 + `dr-11/SKILL.md` + wpis
+`CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik zapytał, czy istnieją zawiadomienia do UODO i
+zgłoszenia naruszeń RODO.
+
+**Ustalenie — RZADKI w tej sesji przypadek "już kompletne, bez
+potrzeby budowy":** sprawdzono `mod-RODO-szczegolowy.md` — sekcja
+"NARUSZENIE OCHRONY DANYCH — PROCEDURA" okazała się BARDZO solidną,
+merytoryczną treścią (rozbudowaną JUŻ 2026-07-05, wzorzec
+"rodo-naruszenie-72h-pl"), NIE generycznym szkieletem jak wiele innych
+modułów napotkanych w tej sesji: deterministyczny ZEGAR 72h (start od
+STWIERDZENIA naruszenia, nie od zdarzenia), kwalifikacja typu naruszenia
+(poufność/integralność/dostępność), ocena RYZYKA wg wytycznych EROD
+9/2022 z TRZEMA wynikami (brak/istnieje/wysokie) i RÓŻNYMI konsekwencjami
+dla każdego, PEŁNA treść wymagana w zgłoszeniu do UODO (art. 33 ust. 3),
+mechanizm zgłoszenia ETAPOWEGO przy braku kompletu informacji, próg
+DODATKOWEGO zawiadomienia osób przy wysokim ryzyku (art. 34, z
+wyjątkami: szyfrowanie/środki następcze/niewspółmierny wysiłek),
+obowiązek REJESTRU wszystkich naruszeń (także niezgłaszanych).
+
+**JEDYNE dodane uzupełnienie:** rozróżnienie między DWOMA łatwymi do
+pomylenia mechanizmami "do UODO" — SKARGA (sekcja 9, składana przez
+OSOBĘ poszkodowaną PRZECIWKO administratorowi, po wyczerpaniu ścieżki
+bezpośredniej) vs ZGŁOSZENIE NARUSZENIA (składane przez SAMEGO
+administratora, w ciągu 72h od WYKRYCIA własnego naruszenia) — RÓŻNI
+się STRONA inicjująca i PRZEDMIOT sprawy, co MOŻE być mylące przy
+pierwszym kontakcie z tematem.
+
+**Status:** ✅ POTWIERDZONE KOMPLETNE. Struktura zweryfikowana (12
+nagłówków zachowanych). To jeden z NIELICZNYCH przypadków w tej
+długiej sesji, gdzie dokładna weryfikacja NIE ujawniła istotnej luki
+wymagającej budowy nowej treści — właściwa, uczciwa odpowiedź to
+POTWIERDZENIE jakości istniejącego opracowania, nie manufakturowanie
+dodatkowej pracy.
+
+---
+
+
+
+**Zakres:** rozbudowa `dr-06/.../mod-VAT-podatek-od-towarow-i-uslug.md`
+(nowa sekcja 3a) + NOWE `pisma-proste-v2/references/SPL-interpretacja-
+GIP.md` i `SPM-interpretacja-podatkowa.md` + aktualizacja `pisma-proste-
+v2/SKILL.md` (v2.3→v2.4, opis POZOSTAŁ zwięzły — scalono nowe wzory w
+istniejące punkty zamiast rozszerzać listę) + `dr-06/SKILL.md` +
+`dr-06/MAPA-AKTOW.md` + `prawo-polskie-v2/ROUTING-MAP.md`
+(zsynchronizowano natychmiast) + 2 wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik zapytał (1) czy wszystkie ustawy VAT-owskie
+zostały zbadane w kluczowych kwestiach, (2) czy istnieją wnioski o
+interpretację PIP i baza interpretacji PIP, (3) analogicznie dla
+interpretacji skarbowych.
+
+**VAT — potwierdzone braki w PIĘCIU fundamentalnych mechanizmach:**
+mimo już znacznej rozbudowy modułu VAT we wcześniejszych turach (OSS/
+IOSS, VAT marża, WDT/eksport, samochody 50/100%), audyt ujawnił, że
+NASTĘPUJĄCE, BARDZO PODSTAWOWE tematy były CAŁKOWICIE nieobecne: WNT
+(lustrzane odbicie WDT — ZERO hitów), ulga na złe długi (ZERO hitów),
+elementy obowiązkowe faktury VAT (ZERO hitów), pełne zwolnienie
+podmiotowe art. 113 (tylko JEDNA przelotna wzmianka) — oraz "odwrotne
+obciążenie" OGRANICZONE do jednego słowa. Uzupełniono WSZYSTKIE pięć:
+
+- **WNT** — mechanizm samonaliczenia, limit 50 000 zł zwolnienia dla
+  małych nabyć (z WYJĄTKIEM dla nowych środków transportu/wyrobów
+  akcyzowych), ryzyko praktyczne spóźnionej faktury zagranicznej
+  (konieczność wyksięgowania VAT naliczonego, możliwość późniejszej
+  korekty).
+- **Odwrotne obciążenie** — KLUCZOWA korekta terminologiczna: DWA
+  znaczenia (międzynarodowe przy WNT — nadal obowiązuje; KRAJOWE dla
+  stali/złomu — JUŻ NIE obowiązuje, zastąpione split payment) — z
+  wyraźnym ostrzeżeniem przed nieaktualną wiedzą.
+- **Ulga na złe długi** — pełny mechanizm (90 dni nieściągalności),
+  ODKRYTA LIBERALIZACJA z 1.10.2021 r. w wyniku wyroku TSUE C-335/19
+  (usunięcie wymogu statusu dłużnika), wydłużenie terminu z 2 do 3 lat,
+  z UCZCIWIE odnotowanym przepisem przejściowym dla spraw sprzed
+  reformy, oraz symetryczny obowiązek dłużnika.
+- **Elementy faktury** (art. 106e) — pełny katalog 12 obowiązkowych
+  elementów.
+- **Zwolnienie podmiotowe** (art. 113) — limit 200 000 zł, wyłączenia
+  PRZEDMIOTOWE (metale szlachetne, nowe środki transportu) i
+  PODMIOTOWE (usługi prawnicze/doradcze/jubilerskie ZAWSZE wymagają
+  rejestracji VAT niezależnie od obrotu), mechanizm wyboru/utraty.
+
+**PIP/GIP — potwierdzona luka, uzupełniona:** ZERO wzorów pism dla
+interpretacji PIP w całym systemie. Zbudowano SPL, wykorzystujący
+WCZEŚNIEJ już opracowaną treść merytoryczną reformy PIP (sekcja 6.1
+mod-ustawa-PIP-inspekcja-pracy, z poprzednich sesji) — z KLUCZOWĄ
+rekomendacją strategiczną: rozważenie RÓWNOLEGŁEGO wniosku do ZUS
+(SPJ) z IDENTYCZNYM opisem stanu faktycznego, oraz PRZYPOMNIENIEM o
+konieczności PRZEPROWADZENIA testu G.1 (analizator-umow-v1) PRZED
+sporządzeniem wniosku.
+
+**Interpretacje skarbowe — sprawdzone, treść merytoryczna JUŻ
+istniała:** w przeciwieństwie do PIP, `mod-interpretacje-definicje-
+podatkowe.md` już wcześniej ZAWIERAŁ solidną, kompleksową mapę systemu
+interpretacji (indywidualna/ogólna/objaśnienia/opinia zabezpieczająca/
+WIS/WIA) — BRAKOWAŁO jedynie PRAKTYCZNEGO wzoru pisma w pisma-proste-v2.
+Zbudowano SPM, z PRZYPOMNIENIEM o KRYTYCZNEJ różnicy terminu zaskarżenia
+(14 dni, NIE 30 — częsty błąd praktyczny).
+
+**Status:** ✅ WDROŻONE. Struktura pliku VAT zweryfikowana natychmiast
+po dużej edycji (26 nagłówków zachowanych, w tym prawidłowo zachowany
+nagłówek sekcji 4 bezpośrednio po nowo wstawionej sekcji 3a). Opis
+skilla pisma-proste-v2 CELOWO utrzymany w ZWIĘZŁEJ formie (zgodnie z
+lekcją z poprzedniej tury) — nowe wzory SCALONO w istniejące punkty
+opisu zamiast dodawać kolejne pełne linie. Główna mapa routingu
+zsynchronizowana natychmiast (17 sekcji zachowanych).
+
+---
+
+
+
+**Zakres:** NOWY `dr-10/.../mod-rzecznik-praw-pacjenta-RPP.md` +
+rozbudowa `dr-06/.../mod-UFP-finanse-publiczne-NIK-RIO.md` (sekcja 11)
++ `dr-10/SKILL.md` (26→27) + `dr-06/SKILL.md` + oba MAPA-AKTOW +
+`prawo-polskie-v2/ROUTING-MAP.md` (zsynchronizowano natychmiast) + 2
+wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik zapytał WPROST, czy poza samym dodaniem linku
+źródłowego w poprzedniej turze (`shared/INTERPRETACJE-URZEDOWE.md`),
+w ODPOWIEDNICH modułach DR istnieje FAKTYCZNA, merytoryczna treść o
+RPP, NIK i UTK — bardzo trafne pytanie kontrolne, odróżniające
+"wskazanie źródła" od "opracowania merytorycznego".
+
+**Weryfikacja trzech instytucji — zróżnicowany wynik:**
+
+1) **RPP — POTWIERDZONA, znacząca luka:** w CAŁYM systemie RPP był
+   wymieniony DOSŁOWNIE JEDNYM SŁOWEM, w przelotnej liście instytucji
+   (`mod-ustawa-prawa-pacjenta-framework.md`) — ZERO treści o
+   kompetencjach/procedurze. Zbudowano PEŁNY, nowy moduł: wszczęcie
+   postępowania (na wniosek — BEZPŁATNY, niski próg
+   "uprawdopodobnienia" — oraz z URZĘDU, z ODRĘBNĄ kategorią praktyk
+   naruszających ZBIOROWE prawa pacjentów, analogiczną do reżimu
+   UOKiK dla konsumentów, ale WŁASną dla pacjentów), sposób
+   prowadzenia (samodzielnie, w tym KONTROLA placówki BEZ uprzedzenia
+   — analogiczne do uprawnień innych organów inspekcyjnych w
+   systemie), trzy możliwe rozstrzygnięcia z KLUCZOWYM terminem 30 dni
+   na odpowiedź adresata wystąpienia, oraz jasne rozgraniczenie —
+   Rzecznik NIE wydaje władczych decyzji karzących.
+
+2) **NIK — POTWIERDZONA, częściowa luka (lepsza niż RPP, ale wciąż
+   niewystarczająca):** istniejący dedykowany moduł
+   `mod-UFP-finanse-publiczne-NIK-RIO.md` okazał się GENERYCZNYM
+   szkieletem proceduralnym (identyczny wzorzec CORE/INTAKE/PROCEDURA/
+   DOWODY/STRATEGIA/ORZECZNICTWO/RYZYKA/CHECKLISTA/POWIĄZANIA/OUTPUT
+   jak wiele innych modułów w systemie) — NAZYWAJĄCY kroki
+   ("wystąpienie pokontrolne, zastrzeżenia, odpowiedź") BEZ
+   wyjaśnienia, CZYM one faktycznie są. Dodano sekcję 11 z pełną
+   treścią: elementy wystąpienia pokontrolnego (7-punktowy katalog z
+   art. 53), termin 21 DNI na zastrzeżenia z ADRESATEM zależnym od
+   RANGI podmiotu (zwykłe jednostki → dyrektor jednostki NIK; podmioty
+   szczególne jak Prezes NBP/kierownicy naczelnych organów →
+   BEZPOŚREDNIO Prezes NIK, zmiana od nowelizacji 2010), możliwość
+   ODMOWY przyjęcia zastrzeżeń z prawem ZAŻALENIA, komisja
+   rozstrzygająca (skład 3-osobowy), rodzaje kontroli (planowa/
+   specjalna/rozpoznawcza/sprawdzająca). ODNOTOWANO UCZCIWIE
+   rozbieżność źródeł co do dokładnego terminu na informację o
+   realizacji wniosków (14 vs 30 dni) — NIE wybrano arbitralnie.
+
+3) **UTK — POTWIERDZONE jako JUŻ dobrze pokryte, BEZ zmian:** w
+   przeciwieństwie do RPP i NIK, moduł transportowy zawierał
+   GENUINE, SUBSTANTYWNĄ treść o Prezesie UTK (nadzór nad
+   bezpieczeństwem, certyfikaty bezpieczeństwa Część A/B, licencje
+   przewoźnika, decyzje dostępu do infrastruktury, relacja z PLK,
+   opłaty dostępowe, KONKRETNA ścieżka odwoławcza: PLK → Prezes UTK →
+   WSA) — TO NIE był przypadek "nazwa bez treści", tylko rzeczywiście
+   opracowany temat. Potwierdzono bez ingerencji.
+
+**Status:** ✅ WDROŻONE. Struktury obu edytowanych plików (mod-UFP-NIK,
+oraz plik SKILL.md) zweryfikowane. Główna mapa routingu
+zsynchronizowana natychmiast (17 sekcji zachowanych). Odpowiedź na
+pytanie użytkownika: DWIE z TRZECH instytucji WYMAGAŁY uzupełnienia
+merytorycznego (samo dodanie linku źródłowego w poprzedniej turze NIE
+WYSTARCZAŁO), JEDNA (UTK) była już adekwatnie opracowana — WAŻNA
+lekcja metodologiczna: rejestr źródeł (`shared/INTERPRETACJE-
+URZEDOWE.md`) i FAKTYCZNA treść merytoryczna w modułach DR to DWIE
+RÓŻNE warstwy, które NALEŻY weryfikować ODDZIELNIE — uzupełnienie
+jednej NIE gwarantuje kompletności drugiej.
+
+---
+
+
+
+**Zakres:** naprawa `pisma-proste-v2/SKILL.md` (opis) + rozbudowa
+`shared/INTERPRETACJE-URZEDOWE.md` (3 nowe instytucje + 3 odesłania do
+świeżo dodanej treści).
+
+**Kontekst:** użytkownik zgłosił dwa problemy: (1) ostatnio wygenerowany
+skill (pisma-proste-v2) ma za długi opis, (2) czy rejestr źródeł
+interpretacji instytucji rządowych jest kompletny.
+
+**Naprawa 1 — opis skilla:** opis (description) w nagłówku YAML
+pisma-proste-v2/SKILL.md URÓSŁ do 19 linii w miarę dodawania kolejnych
+schematów pism (SPJ, SPK) w tej sesji — każdy nowy wpis dodawał PEŁNY
+cytat artykułu i datę dodania WPROST do opisu, który POWINIEN być
+zwięzłym podsumowaniem do SZYBKIEGO skanowania przez system routingu.
+SKRÓCONO do 8 linii — usunięto cytaty artykułów i daty z SAMEGO opisu
+(te informacje POZOSTAJĄ w pełni zachowane w szczegółowej tabeli
+routingu SPA-SPK, ładowanej DOPIERO gdy skill faktycznie pracuje nad
+konkretnym pismem) — ŻADNA informacja nie została utracona, tylko
+przeniesiona na WŁAŚCIWY poziom szczegółowości.
+
+**Ustalenie 2 — rejestr interpretacji był JUŻ bardzo kompleksowy:**
+odkryto istniejący, dedykowany plik `shared/INTERPRETACJE-URZEDOWE.md`
+— rejestr źródeł interpretacji urzędowych dla WSZYSTKICH 16 dziedzin DR,
+z rozróżnieniem statusu (interpretacja administracyjna niewiążąca sądu
+vs orzeczenie vs decyzja regulatora zaskarżalna do WSA). Zawierał JUŻ
+większość kluczowych instytucji (KIS/podatki.gov.pl, ZUS, PIP, KNF,
+UOKiK, GIIF, UZP/KIO, GDOŚ, URE, UKE, UODO, RIO, GUNB, CERT/NASK,
+samorządy zawodowe prawnicze).
+
+**Naprawa 2 — 3 brakujące instytucje + 3 odesłania do świeżej treści:**
+dodano: Rzecznik Praw Pacjenta (DR-10, nieobecny wcześniej), Najwyższa
+Izba Kontroli (DR-15, jako najwłaściwsze miejsce dla wystąpień
+pokontrolnych istotnych przy audycie compliance), Urząd Transportu
+Kolejowego (DR-09, regulator kolejowy nieobecny wcześniej) oraz GIOŚ
+(DR-09, z odesłaniem do świeżo dodanego `mod-inspekcja-ochrony-
+srodowiska-GIOS-WIOS.md`). Dodano RÓWNIEŻ precyzyjne odesłania w
+istniejących wierszach DR-04 (nowy mechanizm interpretacji
+indywidualnych GIP wg art. 14b, dodany w tej sesji) i DR-11 (konkretna
+treść o skardze do UODO z §9, dodana w tej sesji) — zamiast ogólnikowego
+"już: zus.pl/pip.gov.pl" bez wskazania KONKRETNEGO miejsca w systemie.
+
+**Status:** ✅ WDROŻONE. Struktura rejestru zweryfikowana (16 wierszy
+DR zachowanych). Uczciwa odpowiedź na pytanie użytkownika: rejestr BYŁ
+już bardzo kompletny (nie wymagał budowy od zera, jak większość
+wcześniejszych audytów tej sesji) — wymagał jedynie DROBNEGO uzupełnienia
+o 3 instytucje i kilku precyzyjniejszych odesłań do treści dodanej w
+międzyczasie w tej samej, długiej sesji.
+
+---
+
+
+
+**Zakres:** NOWY `dr-09/.../mod-inspekcja-ochrony-srodowiska-GIOS-
+WIOS.md` + NOWY `dr-09/.../mod-formy-ochrony-przyrody-obszary-
+chronione.md` + odesłania w `mod-POS-prawo-ochrony-srodowiska.md` i
+`mod-ustawa-lesna-lowiecka-ochrona-przyrody.md` + `dr-09/SKILL.md`
+(21→23) + `dr-09/MAPA-AKTOW.md` (2 nowe wiersze) + `prawo-polskie-v2/
+ROUTING-MAP.md` (2 nowe wiersze, zsynchronizowano natychmiast) + 2
+wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik polecił zbadać wojewódzkie inspektoraty
+ochrony środowiska, głównego inspektora, ochronę środowiska i
+instytucje się tym zajmujące, wraz ze specjalnymi przepisami
+dotyczącymi obszarów chronionych z ich podziałem na typy i rodzaje
+ograniczeń.
+
+**Ustalenie wstępne — DWIE odrębne, potwierdzone luki:** GIOŚ/WIOŚ
+były wymienione WYŁĄCZNIE jako kroki w diagramie proceduralnym
+(`mod-POS-prawo-ochrony-srodowiska.md`) bez własnej treści o strukturze
+i kompetencjach. Formy ochrony przyrody miały WYŁĄCZNIE generyczny
+szkielet proceduralny (`mod-ustawa-lesna-lowiecka-ochrona-przyrody.md`
+— intake/mapa proceduralna/warunki skuteczności, WSPÓLNE dla wielu
+modułów w systemie) BEZ merytorycznego opisania samych 10 form i ich
+zróżnicowanych reżimów ograniczeń.
+
+**Nowy moduł — Inspekcja Ochrony Środowiska:** pełna struktura
+dwuinstancyjna (GIOŚ centralnie + 16 WIOŚ wojewódzko), mechanizm
+powołania (Główny Inspektor przez Prezesa Rady Ministrów, Wojewódzki
+Inspektor przez wojewodę ZA ZGODĄ Głównego Inspektora — mechanizm
+"podwójnej kontroli"), kompetencje (kontrola >30 000 rocznie, Państwowy
+Monitoring Środowiska, współpraca z organami ścigania), uprawnienia
+kontrolne (wstęp całodobowy na teren), oraz KLUCZOWA ścieżka odwoławcza
+— Departament Inspekcji w strukturze GIOŚ jako II instancja, SZCZEGÓLNIE
+właściwy dla spraw emisji gazów/pyłów do powietrza.
+
+**Nowy moduł — 10 form ochrony przyrody:** pełny, zamknięty katalog z
+art. 6 ustawy, z PODZIAŁEM na trzy poziomy reżimu: (1) NAJSUROWSZY —
+park narodowy (próg 1000 ha, minister, wywłaszczenie dla nieruchomości
+prywatnych) i rezerwat przyrody (RDOŚ, bez progu powierzchniowego) —
+oba z trzema rodzajami ochrony (ścisła/czynna/krajobrazowa); (2)
+POŚREDNI — park krajobrazowy i obszar chronionego krajobrazu (sejmik
+województwa, z ODKRYTYM mechanizmem STREF ochrony krajobrazu o
+ZRÓŻNICOWANYCH zakazach W OBRĘBIE tego samego obszaru) oraz Natura 2000
+(prawo UE); (3) NAJŁAGODNIEJSZY — cztery formy PUNKTOWE/OBIEKTOWE
+(pomniki przyrody, stanowiska dokumentacyjne, użytki ekologiczne,
+zespoły przyrodniczo-krajobrazowe) WSZYSTKIE ustanawiane przez radę
+GMINY; oraz OCHRONA GATUNKOWA jako JEDYNA forma NIE obszarowa (dotyczy
+konkretnego gatunku niezależnie od lokalizacji). Dodano PRAKTYCZNĄ
+tabelę zbiorczą organów ustanawiających jako punkt wyjścia do ustalenia
+właściwego trybu zaskarżenia.
+
+**Status:** ✅ WDROŻONE. Struktury obu zmodyfikowanych plików (mod-POS,
+mod-lesna-lowiecka) zweryfikowane po edycji. Główna mapa routingu
+zsynchronizowana natychmiast (17 sekcji zachowanych).
+
+---
+
+
+
+**Zakres:** NOWY `dr-09/.../mod-GDDKiA-specustawa-drogowa-ZRID.md` +
+odesłanie w `mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski.md`
++ `dr-09/SKILL.md` (20→21) + `dr-09/MAPA-AKTOW.md` + `prawo-polskie-v2/
+ROUTING-MAP.md` (naprawiono fałszywie pozytywny wpis, zsynchronizowano
+natychmiast) + wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik zapytał o GDDKiA (zapisane w wiadomości jako
+"GDKDIA" — rozpoznano jako literówkę tej powszechnie znanej instytucji).
+
+**Ustalenie 1 — GDDKiA istniało TYLKO jako jedna linijka w tabeli:**
+`mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski.md` wymieniał
+GDDKiA WYŁĄCZNIE jako pozycję w tabeli zarządców dróg wg kategorii
+(krajowe→GDDKiA) — bez JAKIEJKOLWIEK własnej treści o kompetencjach,
+a przede wszystkim BEZ opisania kluczowego, praktycznie bardzo istotnego
+mechanizmu ZRID.
+
+**⭐ ZNALEZISKO KRYTYCZNE — fałszywie pozytywny wpis w głównej mapie:**
+w toku rejestracji odkryto, że główna mapa JUŻ WCZEŚNIEJ zawierała
+wiersz "Specustawa drogowa (ZRID) | ... | ✅ OK" wskazujący na moduł
+transportowy — SUGERUJĄC, że temat jest opracowany, PODCZAS GDY
+rzeczywista treść modułu NIGDY nie istniała (tylko wspomniana wyżej
+jedna linijka). To KLASYCZNY przypadek "ghost coverage" — wpis w mapie
+deklarujący pokrycie, które nigdy nie zostało faktycznie napisane —
+podobny do wcześniej znalezionych w tej sesji przypadków (np. moduł
+adopcyjny nieujęty w SKILL.md, choć w PRZECIWNYM kierunku: tu treść
+BYŁA zadeklarowana w mapie, ale NIE ISTNIAŁA fizycznie). Naprawiono,
+przekierowując wiersz na NOWY, faktycznie opracowany moduł.
+
+**Nowy moduł — pełne opracowanie mechanizmu ZRID:** decyzja
+ZINTEGROWANA łącząca w jednym akcie projekt budowlany/pozwolenie na
+budowę/podział nieruchomości/wywłaszczenie, historyczna reforma 2018 r.
+(połączenie dwóch wcześniej odrębnych decyzji, skrócenie czasu z 5 do 3
+miesięcy), KLUCZOWY skutek prawny — przejście własności Z MOCY PRAWA z
+chwilą ostateczności ZRID (bez odrębnego postępowania wywłaszczeniowego
+wg zasad ogólnych), dwa warianty terminów wydania decyzji odszkodowawczej
+(30 dni bez rygoru natychmiastowej wykonalności / 60 dni z rygorem, oba
+INSTRUKCYJNE nie zawite — w praktyce często przekraczane), mechanizmy
+podwyższające odszkodowanie (dodatek 10 000 zł dla zamieszkałych
+nieruchomości mieszkalnych, dzielony między współwłaścicieli; możliwe
+premiowanie szybkiego dobrowolnego wydania nieruchomości — oznaczone
+jako punkt startowy wymagający dalszej weryfikacji dokładnej wysokości),
+opcja nieruchomości zamiennej z dopłatą wyrównującą, oraz rozgraniczenie
+kompetencji (GDDKiA realizuje inwestycję i wypłaca odszkodowanie,
+wojewoda ustala jego wysokość w odrębnej decyzji administracyjnej).
+
+**Status:** ✅ WDROŻONE. Struktura pliku transportowego zweryfikowana po
+edycji (26 nagłówków zachowanych). Główna mapa routingu zsynchronizowana
+natychmiast (17 sekcji zachowanych), fałszywie pozytywny wpis naprawiony.
+
+---
+
+
+
+**Zakres:** rozbudowa `dr-11/.../mod-UODO-postepowanie-ochrona-
+danych.md` (nowa sekcja 9, 160→290 linii) + NOWY `pisma-proste-v2/
+references/SPK-skarga-do-UODO.md` + aktualizacja `pisma-proste-v2/
+SKILL.md` (v2.2→v2.3) + `dr-11/SKILL.md` + `dr-11/MAPA-AKTOW.md` +
+`prawo-polskie-v2/ROUTING-MAP.md` (zsynchronizowano natychmiast) +
+wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik zapytał o GIODO i kompletność powiązanych
+dokumentów w systemie.
+
+**Ustalenie 1 — GIODO faktycznie nigdzie nieobecne, ale to STAN
+OCZEKIWANY, nie luka:** GIODO (Generalny Inspektor Ochrony Danych
+Osobowych) przestał istnieć 25.05.2018 r., zastąpiony przez Prezesa
+UODO wraz z wejściem RODO. System ma solidne, istniejące pokrycie
+tematu pod WŁAŚCIWĄ, aktualną nazwą (6 modułów: DPIA, DSAR, GDPR core,
+RCP/DPA, szczegółowy, UODO postępowanie) — brak wzmianek o "GIODO" był
+więc PRAWIDŁOWY, nie błędem.
+
+**Ustalenie 2 — genuine luka w module UODO postępowanie:** sekcje 1-8
+istniejącego modułu okazały się OGÓLNYM, abstrakcyjnym szkieletem
+proceduralnym (wspólnym dla wielu typów pism w systemie — intake, mapa
+proceduralna, warunki skuteczności) — BEZ konkretnej, merytorycznej
+treści WŁAŚCIWEJ dla skargi do Prezesa UODO. Dodano sekcję 9 z pełnym
+opracowaniem: KOREKTA terminologiczna (GIODO to nie tylko stara nazwa,
+lecz inny organ o innych kompetencjach — z zastrzeżeniem rzadkiego
+wyjątku dla przepisów przejściowych dot. postępowań wszczętych przed
+2018 r.), zasada SUBSYDIARNOŚCI (skarga dopiero po wyczerpaniu ścieżki
+bezpośredniej z administratorem, terminy 1+2 miesiące), elementy
+skargi (z KLUCZOWYM zastrzeżeniem — UODO związany zakresem skargi,
+NIE bada z urzędu pominiętych wątków), ZAKAZ żądania nałożenia kary
+administracyjnej (wyłączna kompetencja UODO, nie na wniosek strony),
+forma/opłata (bezpłatnie, WYJĄTEK 17 zł przy pełnomocniku), właściwość
+międzynarodowa, terminy rozpatrzenia (30/60 dni wg art. 237 §2 KPA).
+
+**Nowy wzór SPK w pisma-proste-v2:** pełny, gotowy do użycia wzór
+skargi zgodny z architekturą istniejących schematów (SPA-SPJ), z tymi
+samymi kluczowymi zastrzeżeniami skróconymi do formy checklisty
+praktycznej.
+
+**Status:** ✅ WDROŻONE. Struktura pliku UODO zweryfikowana po edycji
+(wszystkie 12 sekcji zachowane). Główna mapa routingu zsynchronizowana
+natychmiast (17 sekcji zachowanych).
+
+---
+
+
+
+**Zakres:** naprawa `dr-04/MAPA-AKTOW.md` i `prawo-polskie-v2/ROUTING-
+MAP.md` (wiersz SUS/ZUS + nowy osobny wiersz dla ustawy o emeryturach
+czerwcowych) + rozbudowa `dr-08/.../mod-dzienniki-urzedowe-BIP-
+publikacja.md` (nowa tabela 16 województw) + `dr-08/SKILL.md` +
+`dr-08/MAPA-AKTOW.md`.
+
+**Kontekst:** użytkownik polecił naprawić dwie wcześniej odnotowane,
+niepowiązane rozbieżności Dz.U. dla ustawy o SUS/ZUS, oraz zbadać czy
+moduł o uchwałach sejmików wojewódzkich wskazuje źródła dla wszystkich
+16 województw.
+
+**Naprawa SUS/ZUS — zagadka w pełni rozwiązana:** zweryfikowano na ISAP
+(dokument WDU20260000199), że Dz.U. 2026 poz. 199 t.j. JEST poprawnym,
+aktualnym tekstem jednolitym (obwieszczenie 9.02.2026, publikacja
+23.02.2026). Ustalono ŹRÓDŁO pomyłki: "Dz.U. 2025 poz. 1169" to
+CAŁKOWICIE ODRĘBNA, wąska ustawa z 5.08.2025 r. o emeryturach
+czerwcowych — POPRAWNIE zacytowana w tabeli ALERTÓW modułu ZUS jako
+podstawa TEJ konkretnej reformy, ale BŁĘDNIE przeniesiona przez
+wcześniejsze audyty do wiersza opisującego bazową ustawę SUS w PLIKACH
+MAPUJĄCYCH. KLUCZOWE ustalenie: sam moduł `mod-SUS-ZUS-ubezpieczenia-
+spoleczne.md` miał POPRAWNY numer w nagłówku OD POCZĄTKU — błąd
+dotyczył WYŁĄCZNIE tabel śledzenia (lokalnej i głównej mapy), nie
+merytorycznej treści. Dodano OSOBNY wiersz dla ustawy o emeryturach
+czerwcowych w obu mapach, dla przejrzystości.
+
+**Rozbudowa DR-08 — pierwszy przebieg:** dodano tabelę BIP marszałkowskich
+dla 16 województw z rozróżnieniem: dziennik urzędowy (dzienniki.gov.pl,
+źródło MIARODAJNE dla wszystkich 16 centralnie) vs BIP marszałkowskie
+(źródło POMOCNICZE — projekty uchwał, protokoły, uchwały wewnętrzne).
+Potwierdzono bezpośrednim wyszukiwaniem 15 z 16 adresów. Dla Łódzkiego
+ŚWIADOMIE NIE zgadywano adresu — znaleziony wynik (bip.lodzkie.eu)
+dotyczył wojewody, nie marszałka/sejmiku, więc oznaczono to wprost jako
+niepotwierdzone (patrz kolejny wpis journal — użytkownik dostarczył
+prawidłowy adres w następnej turze).
+
+**Status:** ✅ WDROŻONE (pierwszy przebieg). Kontynuacja w kolejnym
+wpisie journal po otrzymaniu od użytkownika potwierdzonego adresu
+Łódzkiego.
+
+---
+
+## AUDYT-2026-07-21e — POTWIERDZONE WSZYSTKIE 16 województw w mod-dzienniki-urzedowe-BIP-publikacja — Łódzkie dostarczone przez użytkownika po wcześniejszym błędnym trafieniu na stronę wojewody
+
+**Zakres:** korekta tabeli w `dr-08/.../mod-dzienniki-urzedowe-BIP-
+publikacja.md` (Łódzkie: bip.lodzkie.pl potwierdzone) + `dr-08/SKILL.md`
++ `dr-08/MAPA-AKTOW.md` + `prawo-polskie-v2/ROUTING-MAP.md`
+(zsynchronizowano natychmiast) + wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** w poprzedniej turze zbudowano tabelę 16 województw, ale
+15 z 16 było potwierdzonych wyszukiwaniem online — dla Łódzkiego
+znaleziony adres (bip.lodzkie.eu) okazał się dotyczyć WOJEWODY
+(administracja rządowa), NIE marszałka/sejmiku (samorząd) — poprawnie
+oznaczono to jako niepotwierdzone zamiast zgadywać. Użytkownik
+dostarczył PRAWIDŁOWY adres: https://bip.lodzkie.pl/uchwaly.
+
+**Weryfikacja:** pobrano wskazaną stronę — POTWIERDZONO, że to
+rzeczywiście BIP Sejmiku/Urzędu Marszałkowskiego Województwa Łódzkiego,
+zawierający pełny, czytelny rejestr uchwał (numer, data, tytuł, link do
+PDF) z OZNACZENIEM przy każdej pozycji, czy stanowi "akt prawa
+miejscowego" (wymagający publikacji w dzienniku urzędowym) czy zwykły
+"link" (uchwała wewnętrzna — np. o składzie komisji, rozpatrzeniu
+skargi). Dodano tę PRAKTYCZNĄ obserwację do modułu jako wartościową
+wskazówkę — podobne oznaczenia mogą występować na innych BIP
+marszałkowskich i ułatwiają szybkie ustalenie, czy dana uchwała w ogóle
+wymaga sprawdzenia w dzienniku urzędowym.
+
+**Status:** ✅ WSZYSTKIE 16 WOJEWÓDZTW OSTATECZNIE POTWIERDZONE. Żadna
+pozycja w tabeli nie pozostaje oznaczona jako "do weryfikacji". Struktura
+pliku zweryfikowana (3 sekcje główne zachowane). Główna mapa routingu
+zsynchronizowana (17 sekcji zachowanych).
+
+---
+
+
+
+**Zakres:** rozbudowa `dr-04/.../mod-SUS-ZUS-ubezpieczenia-spoleczne.md`
+(nowy ANEKS D) + NOWY `pisma-proste-v2/references/SPJ-interpretacja-
+zus.md` + aktualizacja `pisma-proste-v2/SKILL.md` (v2.1→v2.2, nowy
+wiersz routingu SPJ) + `dr-04/SKILL.md` + `dr-04/MAPA-AKTOW.md` +
+`prawo-polskie-v2/ROUTING-MAP.md` (zsynchronizowano natychmiast) +
+wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik zapytał WPROST dwa pytania diagnostyczne: (1)
+czy system interpretacji ZUS jest wpięty do odpowiedniego modułu, (2)
+czy w pismach prostych są wnioski o interpretację ZUS.
+
+**Odpowiedź na oba pytania — NIE, żadne z dwóch nie istniało:**
+`mod-SUS-ZUS-ubezpieczenia-spoleczne.md` (292 linii, solidnie
+opracowujący emerytury/renty/reformę orzecznictwa/dowody/strategię)
+miał ZERO wzmianek o interpretacjach indywidualnych. `pisma-proste-v2`
+(12 istniejących schematów SPA-SPI, wszystkie oparte na KPC) miał ZERO
+wzmianek o interpretacjach jakiegokolwiek rodzaju.
+
+**Zbudowano OBA elementy:**
+
+1. **ANEKS D w module ZUS (DR-04):** podstawa prawna (art. 34 Prawa
+   przedsiębiorców, pakiet "Konstytucja dla Biznesu" 2018), przedmiot
+   (obowiązek składek społecznych/zdrowotnych/FP/FGŚP/FEP), krąg
+   uprawnionych (WYŁĄCZNIE przedsiębiorca, we własnej sprawie), opłata
+   (40 zł/stan faktyczny, 7 dni na wniesienie), KLUCZOWA właściwość
+   szczególna (WYŁĄCZNIE 2 oddziały ZUS w całej Polsce — Gdańsk i
+   Lublin, zależnie od lokalizacji działalności, NIE miejsca
+   zamieszkania), termin 30 dni z MECHANIZMEM MILCZĄCEJ ZGODY
+   (analogicznym do KPA — brak odpowiedzi = potwierdzenie stanowiska
+   wnioskodawcy), forma decyzji administracyjnej z prawem odwołania,
+   wyłączenie dla spraw transgranicznych (właściwe ustawodawstwo).
+   Dodano ZNACZENIE STRATEGICZNE — narzędzie prewencyjne przy ryzyku
+   przekwalifikowania umowy B2B/zlecenie na stosunek pracy, z
+   odesłaniem do testu G.1 (`analizator-umow-v1`) i świeżej reformy
+   PIP 2026.
+
+2. **Nowy schemat SPJ w pisma-proste-v2:** pełny, gotowy do użycia
+   wzór wniosku zgodny z architekturą istniejących schematów (SPA-SPI)
+   — elementy wniosku, opłata, właściwość, checklist końcowy, oraz
+   ODKRYTA przy research'u WARTOŚCIOWA strategia: RÓWNOLEGŁY wniosek do
+   Głównego Inspektora Pracy (GIP) przy ryzyku przekwalifikowania
+   umowy — z KLUCZOWYM ustaleniem, że interpretacja GIP jest z mocy
+   ustawy automatycznie przekazywana RÓWNIEŻ do ZUS i KAS (art. 14b
+   ust. 18 ustawy o PIP), co oznacza że opisy stanu faktycznego w OBU
+   równoległych wnioskach powinny być IDENTYCZNE.
+
+**Znaleziska dodatkowe (poza zakresem, odnotowane bez ingerencji):**
+przy okazji tej aktualizacji zauważono DWIE NIEPOWIĄZANE, JUŻ
+ISTNIEJĄCE rozbieżności: (a) otwarta flaga "WYMAGA AKTUALIZACJI
+MODUŁU" w lokalnej mapie DR-04 dot. numeru t.j. tej samej ustawy SUS,
+(b) rozbieżność MIĘDZY mapą lokalną a główną co do tego, KTÓRY numer
+Dz.U. jest aktualnym t.j. — OBIE zachowane bez zmian (poza dopisaniem
+notatki o mojej niezależnej aktualizacji), jako WYRAŹNIE odrębne
+zadanie do przyszłej sesji synchronizacyjnej, zgodnie z zasadą
+nieingerowania w nierelewantne kwestie przy wykonywaniu konkretnego
+zlecenia.
+
+**Status:** ✅ WDROŻONE. Struktura obu edytowanych plików (moduł ZUS,
+SKILL.md pisma-proste-v2) zweryfikowana po edycji. Główna mapa
+routingu zsynchronizowana natychmiast (17 sekcji zachowanych).
+
+---
+
+
+
+**Zakres:** NOWY `dr-06/.../mod-odliczenia-uzytek-mieszany-firma-
+prywatny-KUP.md` + odesłanie w `mod-VAT-podatek-od-towarow-i-uslug.md`
++ `dr-06/SKILL.md` (23→24) + `dr-06/MAPA-AKTOW.md` + `prawo-polskie-v2/
+ROUTING-MAP.md` (zsynchronizowano natychmiast) + wpis `CHECKLIST-
+DEDUP.md`.
+
+**Kontekst:** użytkownik polecił sprawdzić kompletność i dokładność
+pokrycia prawa podatkowego w odniesieniu do firm, konsumentów, zakupów
+na użytek własny, możliwości odliczeń przez firmę oraz odsprzedaży.
+
+**Ustalenie wstępne — realna, praktycznie BARDZO istotna luka:**
+istniejąca sekcja "Odliczenie VAT naliczonego" w `mod-VAT-podatek-od-
+towarow-i-uslug.md` pokrywała WYŁĄCZNIE aspekt LITYGACYJNY (obrona
+przed zarzutem karuzeli VAT/dobrej wiary) — CAŁKOWICIE pomijała
+FUNDAMENTALNY, codzienny mechanizm: zasady odliczenia VAT od
+SAMOCHODÓW OSOBOWYCH (50% vs 100%) oraz OPODATKOWANIE użytku
+prywatnego majątku firmowego — być może NAJCZĘŚCIEJ zadawane pytanie
+praktyczne w całym prawie podatkowym dla małych i średnich firm.
+
+**VAT od samochodów — pełne opracowanie:** zasada domyślna 50% (bez
+formalności, "bezpiecznik systemowy"), ścieżka do 100% wymagająca TRZECH
+ŁĄCZNYCH warunków (wyłączny użytek służbowy BEZ WYJĄTKU incydentalnego,
+ewidencja przebiegu prowadzona NA BIEŻĄCO, regulamin zakazujący użytku
+prywatnego) PLUS formalne zgłoszenie VAT-26 z KRYTYCZNYM terminem (25.
+dzień miesiąca po PIERWSZYM wydatku, nie od zakupu pojazdu) — wyjątek
+dla pojazdów z wpisem VAT-1/VAT-2 (100% bez formalności). KLUCZOWE
+ryzyko praktyczne: KAS zestawia dane z sieci kamer ANPR z ewidencją
+przebiegu, wykrycie niezgodności = utrata 100% odliczenia ZA CAŁY ROK
++ korekta wsteczna do 5 lat + odsetki.
+
+**Ryczałt PIT za użytek prywatny — pełne opracowanie:** kwoty 250/400
+zł WEDŁUG MOCY silnika (zmiana metodologii od 2022, wcześniej wg
+pojemności), proporcjonalne obniżenie za niepełny miesiąc, oraz
+UTRWALONE, JEDNOLITE orzecznictwo NSA (3 wyroki cytowane) rozstrzygające
+wieloletni spór z organami — ryczałt OBEJMUJE WSZYSTKIE koszty
+eksploatacyjne, w tym PALIWO, wbrew wielokrotnym próbom organów
+podatkowych twierdzenia inaczej. Rozszerzenie na ładowanie pojazdów
+elektrycznych w domu pracownika (interpretacja KIS 2025).
+
+**Ogólne zasady KUP:** klauzula generalna (związek z przychodem, ciężar
+dowodu na podatniku), przykłady kategorii o charakterze mieszanym
+wymagających szczególnej ostrożności (limity kosztowe dla samochodów,
+wyłączenie reprezentacji, wymóg ewidencji dla IP Box).
+
+**Synteza — macierz decyzyjna i KLUCZOWE ustalenie:** zbudowano
+przejrzystą macierz (firma/konsument/odsprzedaż/niejednoznaczna
+klasyfikacja) łączącą wszystkie dotychczas zbudowane w tej sesji
+elementy prawa podatkowego (VAT marża, WDT/eksport, baza klasyfikacji
+produktów) w jeden spójny obraz. Podkreślono NAJWAŻNIEJSZY, często
+mylony w praktyce punkt: VAT i KUP to DWA NIEZALEŻNE reżimy prawne —
+ograniczenie odliczenia VAT (np. 50% przy samochodzie) NIE OGRANICZA
+automatycznie kosztu podatkowego w PIT/CIT, oba działają na podstawie
+odrębnych przepisów i wymagają ODDZIELNEJ analizy.
+
+**Status:** ✅ WDROŻONE. Struktura pliku VAT zweryfikowana po edycji
+(22 nagłówki zachowane, dodano tylko tekst w obrębie istniejącej
+sekcji, bez naruszenia granic). Główna mapa routingu zsynchronizowana
+natychmiast (17 sekcji zachowanych).
+
+---
+
+
+
+**Zakres:** rozbudowa `mod-KK-art222-226-ochrona-funkcjonariusza.md`
+(nowa sekcja art. 217a) + rozbudowa `mod-KW-art49-64-porzadek-
+publiczny.md` (nowa sekcja art. 82, punkt startowy) + uzupełnienie
+placeholderów w `mod-PRD-nowe-przestepstwa-drogowe-BRD.md` +
+`dr-03/MAPA-AKTOW.md` (zamknięcie 2 flag "WYMAGA AKTUALIZACJI") +
+`prawo-polskie-v2/ROUTING-MAP.md` (2 nowe wiersze + aktualizacja 1,
+zsynchronizowano natychmiast).
+
+**Kontekst:** użytkownik polecił sprawdzić najnowsze zmiany w prawie
+karnym i wprowadzić ewentualne aktualizacje — zadanie o charakterze
+PRZEGLĄDU AKTUALNOŚCI, nie budowy nowego tematu.
+
+**Metoda:** przejrzano lokalną mapę DR-03 pod kątem ISTNIEJĄCYCH,
+wcześniej odnotowanych flag ostrzegawczych ("⚠️ WYMAGA AKTUALIZACJI",
+placeholdery "weryfikuj") oraz przeprowadzono świeże wyszukiwanie
+online najnowszych nowelizacji KK/KW/KPW.
+
+**Znalezisko 1 — już oznaczona, nierozwiązana luka:** DR-03 miała JUŻ
+odnotowaną (z sesji 2026-07-02) flagę "⚠️ WYMAGA AKTUALIZACJI (dodać
+1814)" dla Dz.U. 2025 poz. 1814 — NIGDY nie zaimplementowaną. Ustalono
+treść: nowelizacja KW art. 82 (usunięcie "kary nagany" z §1,2,3,4,5 —
+zawężenie sankcji do aresztu/grzywny lub aresztu/ograniczenia
+wolności/grzywny) + KPW art. 96 §1ad (mandat do 5000 zł dla art. 82 i
+całego Rozdziału XI KW) + art. 24 §1a KW (rozszerzenie katalogu
+wykroczeń kwalifikowanych). Dodano jako PUNKT STARTOWY w NOWEJ sekcji
+`mod-KW-art49-64-porzadek-publiczny.md` — z WYRAŹNYM zastrzeżeniem, że
+pełna treść merytoryczna art. 82 (materia przepisu, wszystkie
+paragrafy) wymaga ODRĘBNEJ, pełnej sesji budowy — zakres tej
+aktualizacji celowo ograniczono do ODNOTOWANIA zmiany legislacyjnej,
+zgodnie z charakterem polecenia.
+
+**Znalezisko 2 — CAŁKOWICIE nowa, wcześniej nieznana ustawa:** w toku
+świeżego wyszukiwania odkryto POWIĄZANĄ, ale ODRĘBNĄ ustawę z TEJ
+SAMEJ daty (7.11.2025), Dz.U. 2025 poz. 1818, dotychczas NIEOBECNĄ w
+całym systemie w żadnej formie (nawet jako flaga). Zmienia ONA KK
+(NOWY art. 217a §2 — typ kwalifikowany ochrony osób INTERWENIUJĄCYCH
+CYWILNIE na rzecz bezpieczeństwa publicznego, gdy sprawca naraża
+pokrzywdzonego na bezpośrednie niebezpieczeństwo utraty życia/
+ciężkiego uszczerbku — 3 miesiące do 5 lat) ORAZ KW art. 51 (minimum
+grzywny 1000 zł — już WCZEŚNIEJ ujęte w `mod-KW-art49-64-porzadek-
+publiczny.md` z poprzedniej sesji, potwierdzone bez zmian) ORAZ KPW
+(postępowanie przyspieszone, nowy mandat). Dodano PEŁNĄ, nową sekcję
+o art. 217a z WYRAŹNYM podkreśleniem KLUCZOWEGO rozróżnienia: ten
+przepis chroni OSOBY PRYWATNE podejmujące interwencję, NIE
+funkcjonariuszy publicznych (mimo umieszczenia w module o ochronie
+funkcjonariuszy, ze względu na pokrewną logikę ochronną).
+
+**Znalezisko 3 — istniejący, dobrze zbudowany moduł z ZALEGŁYMI
+placeholderami:** `mod-PRD-nowe-przestepstwa-drogowe-BRD.md` (BRD II,
+Dz.U. 2025 poz. 1872 — nielegalne wyścigi/drift/brawurowa jazda) był
+JUŻ bardzo kompleksowo opracowany we wcześniejszej sesji, ale
+zawierał DWA jawne placeholdery "web_search: weryfikuj dożywotni
+zakaz..." — wypełniono je PRECYZYJNYMI, zweryfikowanymi danymi: nowy
+OBOWIĄZKOWY zakaz prowadzenia (art. 42 §1a KK, dla przestępstw z art.
+177 §2a/178b/178c §1 pkt 2/178d/180a), dożywotni zakaz (art. 42 §3 KK,
+precyzyjne warunki: recydywa łamania zakazu LUB stan nietrzeźwości/
+ucieczka z miejsca zdarzenia przy najpoważniejszych przestępstwach
+drogowych), oraz DODATKOWO odkryto i dodano NOWY element — podwyższone
+DOLNE granice kar dla wypadków/katastrof drogowych ze skutkiem
+ciężkiego uszczerbku (min. 3 lata) lub śmierci (min. 5 lat, do 20 lat
+przy wypadku) — istotne zaostrzenie NIE wcześniej odnotowane w module.
+
+**Status:** ✅ WDROŻONE. Zamknięto OBIE wcześniej otwarte flagi
+"WYMAGA AKTUALIZACJI" w lokalnej mapie DR-03. Struktury WSZYSTKICH
+trzech edytowanych plików zweryfikowane bezpośrednio po każdej edycji
+(technika jawnego powtórzenia sąsiedniego nagłówka) — bez utraty
+żadnego nagłówka. Główna mapa routingu zsynchronizowana natychmiast
+(17 sekcji zachowanych).
+
+**Wniosek metodologiczny:** przegląd "czy są aktualizacje" ujawnił
+WARTOŚĆ regularnego sprawdzania NIE TYLKO nowych tematów zgłaszanych
+przez użytkownika, ale też ISTNIEJĄCYCH, JUŻ oznaczonych w systemie
+flag ostrzegawczych i placeholderów — część z nich (jak Dz.U. 2025
+poz. 1814) czekała nierozwiązana od wielu tygodni, mimo jawnego
+oznaczenia w mapie.
+
+---
+
+
+
+**Zakres:** NOWY `dr-04/.../mod-dodatek-pielegnacyjny-swiadczenie-
+rehabilitacyjne-wyrownawcze.md` + `dr-04/SKILL.md` (25→26) +
+`dr-04/MAPA-AKTOW.md` + `prawo-polskie-v2/ROUTING-MAP.md`
+(zsynchronizowano natychmiast) + wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik zapytał wprost, czy w systemie obecne są:
+świadczenie pielęgnacyjne (TAK, rozbudowane w poprzedniej turze),
+dodatek rehabilitacyjny, świadczenie wyrównawcze oraz pozostałe
+świadczenia dla niepełnosprawnych.
+
+**⭐ KLUCZOWE USTALENIE — UCZCIWA KOREKTA zamiast fabrykacji:** po
+dokładnej weryfikacji online NIE ZNALEZIONO samodzielnego,
+obowiązującego świadczenia o nazwie "dodatek rehabilitacyjny" pod TĄ
+DOKŁADNIE nazwą. Zamiast zmyślić jego istnienie lub przemilczeć
+problem, WYJAŚNIONO to WPROST na początku modułu i wskazano CZTERY
+prawdopodobne świadczenia, o które mogło chodzić: świadczenie
+rehabilitacyjne ZUS (najbardziej prawdopodobne, ze względu na
+podobieństwo nazwy i funkcję "pomostu" do powrotu do zdrowia),
+dofinansowanie PFRON do turnusu rehabilitacyjnego, dofinansowanie
+zaopatrzenia ortopedycznego, oraz możliwe pomylenie z dodatkiem
+PIELĘGNACYJNYM (nazwy bywają mylone potocznie). Dodano rekomendację
+DOPYTANIA klienta o konkretny kontekst zamiast zgadywania.
+
+**Dodatek pielęgnacyjny (ZUS) — pełne opracowanie, dotąd całkowita
+luka:** automatyczne przyznanie od 75. roku życia BEZ wniosku,
+wcześniej wymaga orzeczenia CAŁKOWITEJ niezdolności do pracy I do
+samodzielnej egzystencji ŁĄCZNIE, druk OL-9. KLUCZOWE rozróżnienie od
+zasiłku pielęgnacyjnego (dwie różne instytucje o podobnej nazwie —
+dodatek z ZUS dla emerytów/rencistów, zasiłek z gminy dla osób z
+orzeczeniem niezależnie od statusu emerytalnego) z mechanizmem ZAKAZU
+łączenia (potrącenie przy podwójnej wypłacie na podstawie art.
+139-141 ustawy emerytalnej) oraz wyłączeniem dla osób na rencie
+socjalnej.
+
+**Zasiłek pielęgnacyjny — pełne opracowanie z jednej linijki:** pełny
+katalog czterech kategorii uprawnionych (dziecko niepełnosprawne,
+osoba ze znacznym stopniem, osoba 75+, osoba ze znacznym/umiarkowanym
+stopniem powstałym do 21. roku życia), kwota, brak kryterium
+dochodowego.
+
+**Świadczenie rehabilitacyjne (ZUS) — nowe opracowanie:** most między
+wyczerpanym zasiłkiem chorobowym (182/270 dni) a powrotem do
+pracy/rentą, maksymalny okres 12 miesięcy, wniosek na formularzu OL-6
+najpóźniej 30 dni przed końcem okresu zasiłkowego.
+
+**Świadczenie wyrównawcze — KLUCZOWE rozróżnienie dwóch niezwiązanych
+wariantów:** Wariant 1 (opiekun dziecka wymagającego stałej opieki,
+związany z niepełnosprawnością, oznaczony jako punkt startowy
+wymagający pogłębienia) vs Wariant 2 (działacze opozycji
+antykomunistycznej, NIEZWIĄZANY z niepełnosprawnością, odnotowany
+wyłącznie dla uniknięcia pomyłki terminologicznej).
+
+**Katalog zbiorczy "pozostałych świadczeń":** zestawienie WSZYSTKICH
+świadczeń dla niepełnosprawnych rozproszonych w systemie z
+odesłaniami (bez duplikacji), oraz UCZCIWIE odnotowane DWIE dodatkowe
+luki poza zakresem tego modułu (ulga rehabilitacyjna PIT, zwolnienie z
+abonamentu RTV) jako punkty startowe.
+
+**Status:** ✅ WDROŻONE. Struktura głównej mapy zweryfikowana (17
+sekcji zachowanych).
+
+---
+
+
+
+**Zakres:** NOWY `dr-10/.../mod-rzadkie-choroby-genetyczne-plan-leki-
+sieroce.md` + rozbudowa `dr-04/.../mod-ustawa-swiadczenia-rodzinne.md`
+(64→222 linie) + oba SKILL.md + oba MAPA-AKTOW + `prawo-polskie-v2/
+ROUTING-MAP.md` (zsynchronizowano natychmiast) + 2 wpisy `CHECKLIST-
+DEDUP.md`.
+
+**Kontekst:** użytkownik wskazał: rzadkie choroby genetyczne, wsparcie
+państwa, ułatwienia dla takich osób i ich OPIEKUNÓW — dotąd całkowita
+luka poza jednym zdaniem o świadczeniu pielęgnacyjnym bez rozwinięcia.
+
+**Nowy moduł — rzadkie choroby genetyczne:** definicje UE (5/10000
+rzadka, 1/50000-100000 ultrarzadka), skala w Polsce (80% podłoże
+genetyczne, 50% ujawnienie w dzieciństwie), historia i status wdrożenia
+Planu dla Chorób Rzadkich (z odnotowanymi OPÓŹNIENIAMI legislacyjnymi —
+zapowiadany na 2023, realizowany w kolejnych edycjach od 2020), sześć
+obszarów planu, Ośrodki Eksperckie Chorób Rzadkich, Polski Rejestr,
+Paszport Pacjenta. KLUCZOWY element — leki sieroce: zidentyfikowany
+problem systemowy (historyczna konkurencja o refundację na tych samych
+zasadach co leki powszechne, mimo gorszego wyniku analizy
+farmakoekonomicznej dla małej populacji), konkretny postęp (36+12
+nowych terapii refundowanych 2024-2025), proponowana nowelizacja
+uwzględniająca wpływ choroby na CAŁĄ RODZINĘ w analizie
+farmakoekonomicznej.
+
+**Świadczenie pielęgnacyjne — pełne opracowanie z NAJWAŻNIEJSZYM
+ustaleniem:** reforma z 1.01.2024 r. fundamentalnie zmieniła zasady —
+PRZED reformą opiekun MUSIAŁ całkowicie zrezygnować z zatrudnienia
+(zakaz zarobkowania), PO reformie MOŻE jednocześnie pobierać
+świadczenie I pracować BEZ ŻADNEGO limitu dochodów. Opisano warunki
+nabycia (orzeczenie + wskazania), brak kryterium dochodowego,
+podwyższenie o 100% przy opiece nad więcej niż jedną osobą, oraz
+UCZCIWIE oznaczony jako NIEUCHWALONY postulat możliwości łączenia ze
+świadczeniem wspierającym (do 7421 zł łącznie — z wyraźnym
+zastrzeżeniem że to NIE jest jeszcze prawo).
+
+**Ustawa "za życiem":** 4000 zł jednorazowo, brak kryterium
+dochodowego, termin zawity 12 miesięcy, wyłączenia (piecza zastępcza,
+świadczenie zagraniczne).
+
+**Opieka wytchnieniowa — z KLUCZOWĄ, praktyczną pułapką:** limity
+(240h dzienny/14 dób całodobowy), okno naborowe, oraz OSTRZEŻENIE:
+całodobowy pobyt przekraczający 5 dni w tygodniu MOŻE spowodować
+UTRATĘ prawa do świadczenia pielęgnacyjnego/zasiłku dla opiekuna —
+istotna interakcja między dwoma pozornie niezależnymi programami,
+łatwa do przeoczenia przez opiekuna planującego skorzystać z
+wytchnienia.
+
+**Status:** ✅ WDROŻONE. Nowe sekcje w `mod-ustawa-swiadczenia-rodzinne.md`
+dodane na KOŃCU pliku (bezpieczne miejsce, bez ryzyka utraty nagłówka)
+— struktura zweryfikowana, wszystkie 8 oryginalnych sekcji + 4 nowe
+zachowane w poprawnej kolejności.
+
+---
+
+
+
+**Zakres:** rozbudowa `dr-04/.../mod-ustawa-rehabilitacja-PFRON.md`
+(nowy ANEKS, 221→351 linii) + rozbudowa `dr-06/.../mod-alkohol-tyton-
+regulacja-sprzedazy.md` (v1.1→v1.2, nowa sekcja monitorująca, 449→511
+linii) + `dr-04/SKILL.md`, `dr-06/SKILL.md` + oba MAPA-AKTOW +
+`prawo-polskie-v2/ROUTING-MAP.md` (zsynchronizowano natychmiast) + 2
+wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik wskazał dwa tematy: (1) likwidację
+wypożyczalni PFRON, (2) zmiany dot. sprzedaży alkoholu — WYRAŹNIE "do
+monitorowania" (nie do pełnego opracowania jako ustalony stan prawny).
+
+**Wypożyczalnia PFRON — pełne opracowanie sytuacji BARDZO ŚWIEŻEJ i W
+TOKU:** historia programu (uruchomiony 2023, katastrofalne wykonanie —
+73% z 96 mln zł zakupionego sprzętu NIGDY nie trafiło do użytkowników,
+80% niesprawne przez brak ładowania akumulatorów w magazynie RARS,
+sprawa badana przez DWIE prokuratury), problem prawny uniemożliwiający
+proste rozwiązanie (sprzęt jako rezerwa strategiczna Skarbu Państwa,
+wymóg odrębnej podstawy ustawowej dla nieodpłatnego przekazania).
+KLUCZOWY, świeży mechanizm: "reaktywacja likwidacyjna" od 10.06.2026 r.
+— pozornie sprzeczne określenie (program formalnie w likwidacji, ale
+PONOWNIE przyjmuje wnioski), wyjaśnione jako celowa ścieżka: wypożyczyć
+zalegający sprzęt, RÓWNOLEGLE czekając na uchwalenie przez Sejm
+(komisyjny projekt, druk 2701) podstawy prawnej do przekazania go na
+własność. Opisano warunki (kaucja zwrotna 2%, zakaz podwójnego
+dofinansowania w 12 miesięcy, brak serwisu w programie, przedłużenie
+umów sprzed 2025 do 2028 r.). WYRAŹNIE oznaczono jako sytuację W TOKU
+z konkretną datą "zdjęcia" (20.07.2026) i rekomendacją re-weryfikacji.
+
+**Sekcja monitorująca — alkohol:** zidentyfikowano CZTERY równoległe,
+konkurencyjne projekty legislacyjne (poselski PSL blokujący projekty
+Lewicy i Polski 2050; rządowy UD 147 w konsultacjach od marca 2025) —
+ŻADEN nie jest jeszcze obowiązującym prawem. Opisano kluczowe
+proponowane elementy KAŻDEGO projektu (sprzedaż na odległość, zakaz
+opakowań przypominających produkty dla dzieci, "małpki" wyłącznie w
+szkle/puszkach, zakaz form innych niż płynna, podwyższenie kar do
+750 000 zł) z WYRAŹNYM zastrzeżeniem, że to WATCH-LIST, nie stan
+prawny — zgodnie z wyraźnym życzeniem użytkownika ("do monitorowania").
+
+**Status:** ✅ WDROŻONE. Oba dodatki umieszczono w BEZPIECZNYCH
+miejscach struktury (PFRON — na końcu pliku; alkohol — zaraz po
+nagłówku Części A z jawnym powtórzeniem następującej treści) —
+struktura obu plików zweryfikowana, bez utraty żadnego nagłówka.
+
+---
+
+
+
+**Zakres:** rozbudowa `analizator-umow-v1/references/b2b-podwykonawcze.md`
+(v1.13→v1.14 w SKILL.md, 608→712 linii) + wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik zażądał "analizy umów pod kątem kontroli PIP
+i kwestii ich prawidłowości, wadliwych zapisów i tych, które zmieniają
+[charakter] umowy" — z prośbą o wyszukanie danych na stronach
+eksperckich.
+
+**Ustalenie wstępne — WYJĄTKOWO dobre istniejące pokrycie:** moduł
+`b2b-podwykonawcze.md` (analizator-umow-v1) ZAWIERAŁ już bardzo
+dojrzały, 8-punktowy test kwalifikacji B2B vs stosunek pracy (sekcja
+G.1, z numerycznym scoringiem 0-2/3-4/5-8 cech) ORAZ sekcję G.1B
+wprost ZAKAZUJĄCĄ proponowania "oświadczenia deklaratoryjnego" jako
+fałszywej naprawy ryzyka, z pełnym uzasadnieniem prawnym DLACZEGO to
+nie działa. To jeden z najbardziej dojrzałych fragmentów całego systemu.
+
+**Znaleziona luka — brak powiązania ze ŚWIEŻĄ reformą PIP:** moduł NIE
+odwoływał się do reformy z Dz.U. 2026 poz. 473 (weszła w życie
+8.07.2026 — dosłownie ~12 dni przed tą sesją), która fundamentalnie
+PODNOSI STAWKĘ nieudanego testu G.1 — z ryzyka WYŁĄCZNIE sądowego na
+ryzyko BEZPOŚREDNIEJ, natychmiast wykonalnej DECYZJI ADMINISTRACYJNEJ
+PIP. Reforma ta była już ŚWIETNIE opisana w `mod-ustawa-PIP-inspekcja-
+pracy.md` (DR-04, sekcja 6.2) z poprzednich tur tej sesji — brakowało
+jedynie KRZYŻOWEGO odesłania z narzędzia analizy umów do tego opisu.
+Dodano odesłanie (bez duplikacji treści) plus zwięzłe podsumowanie
+kluczowych dla UŻYTKOWNIKA TEGO TESTU konsekwencji (natychmiastowa
+wykonalność "na przyszłość", brak wstrzymania przez odwołanie).
+
+**Nowa sekcja G.1C — konkretne wskazówki redakcyjne §-po-§:**
+zweryfikowano online i dodano CZTERY orzeczenia SN bezpośrednio
+potwierdzające poszczególne cechy testu G.1 (I PK 121/19 — kontrola
+REZULTATU nie SPOSOBU nie przesądza o podporządkowaniu; I PK 60/17 —
+jednostronne wyznaczanie miejsca/godzin jako cecha pracownicza; I PKN
+394/97 — wymóg ŁĄCZNEGO wystąpienia cech; I PKN 416/98 — dopuszczenie
+substytuta WYKLUCZA kwalifikację pracowniczą). Dla KAŻDEJ z głównych
+cech testu (osobiste wykonanie, podporządkowanie, ryzyko/stała kwota,
+wyłączność) dodano KONKRETNE, praktyczne wskazówki REDAKCYJNE (co
+wpisać/czego unikać w tekście umowy) — np. unikanie sformułowania
+"bycie do dyspozycji", opis rezultatu zamiast obecności, ODRĘBNY
+uproszczony sposób potwierdzania godzin zamiast ewidencji czasu pracy
+(z odesłaniem do art. 8b ustawy o minimalnym wynagrodzeniu). Dodano
+SZCZEGÓLNY przypadek: umowa zlecenia z WŁASNYM pracodawcą jako próba
+obejścia przepisów o nadgodzinach (z sankcją grzywny, zaznaczoną
+potrzebą weryfikacji czy kwoty są już zgodne z podwyższonymi widełkami
+z reformy 2026).
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana natychmiast po
+edycji (wszystkie 9 nagłówków sekcji G.1-G.7 zachowane, poprawna
+kolejność) — piąty z rzędu przypadek bezbłędnej edycji przy użyciu
+techniki jawnego powtórzenia sąsiedniego nagłówka w tej sesji.
+
+---
+
+
+
+**Zakres:** rozbudowa `dr-06/.../mod-alkohol-tyton-regulacja-sprzedazy.md`
+(nowa Część C, v1.0→v1.1, 259→449 linii) + `dr-06/SKILL.md` +
+`dr-06/MAPA-AKTOW.md` + `prawo-polskie-v2/ROUTING-MAP.md`
+(zsynchronizowano natychmiast) + wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik wskazał konkretnie "bimbrownictwo" jako
+kontynuację poprzedniej tury dot. alkoholu/tytoniu.
+
+**Ustalenie kluczowe:** podstawa prawna to ODRĘBNA ustawa (2.03.2001 o
+wyrobie alkoholu etylowego, art. 12a), NIE ustawa o wychowaniu w
+trzeźwości (która reguluje wyłącznie SPRZEDAŻ gotowego alkoholu, już
+opisana w Części A tego samego modułu) — bimbrownictwo dotyczy strony
+PRODUKCYJNEJ.
+
+**Pełne opracowanie:** wymóg wpisu do rejestru (KOWR), z odnotowaną
+rozbieżnością terminologiczną co do organu (część źródeł: "minister
+właściwy ds. rynków rolnych") — WYRAŹNIE oznaczoną do weryfikacji, nie
+rozstrzygniętą arbitralnie. NAJWAŻNIEJSZE ustalenie: uchwała SN z
+30.11.2004 r. (I KZP 23/04) rozstrzygnęła SPÓR interpretacyjny —
+wyrabianie alkoholu etylowego NA WŁASNY UŻYTEK RÓWNIEŻ wypełnia
+znamiona przestępstwa z art. 12a — w polskim prawie NIE ISTNIEJE
+kategoria "legalny bimber na własny użytek", niezależnie od ilości i
+braku zamiaru sprzedaży. Odnotowano UCZCIWIE rozbieżność źródeł co do
+górnej granicy kary w typie podstawowym (1 rok vs 3 lata) — NIE
+wybrano arbitralnie, oznaczono do weryfikacji na ISAP. Dodano
+rozróżnienie od legalnego posiadania aparatury destylacyjnej (samo
+posiadanie nie jest nielegalne — nielegalne jest jej UŻYCIE do produkcji
+alkoholu etylowego), zbieg z KKS, środek karny przepadku aparatury,
+oraz zwięzły kontekst historyczny (penalizacja nieprzerwana od 1926 r.,
+związana z monopolem Skarbu Państwa na wyroby spirytusowe).
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana od razu poprawnie
+po wstawieniu nowej Części C (technika jawnego powtórzenia sąsiedniego
+nagłówka w new_str zadziałała bez potrzeby korekty — czwarty z rzędu
+przypadek bezbłędnej edycji tą metodą w tej sesji).
+
+---
+
+
+
+**Zakres:** rozbudowa `dr-03/.../mod-ustawa-narkomania.md` (3 nowe
+sekcje, 44→191 linii) + `dr-03/SKILL.md` + `dr-03/MAPA-AKTOW.md` (2
+wiersze) + `prawo-polskie-v2/ROUTING-MAP.md` (zsynchronizowano
+natychmiast) + wpis `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik wskazał: psychotropy, narkotyki, substancje
+odurzające.
+
+**Ustalenie wstępne — aspekt KARNY już dobrze pokryty:** BLOK D
+kwalifikatora karnomaterialnego (posiadanie/obrót/uprawa, art. 55-63
+ustawy, z drzewem decyzyjnym i progami "nieznaczna"/"znaczna" ilość) —
+potwierdzono bez potrzeby zmian. Dopalacze/NPS — już w pełni opracowane
+w module DR-09 z poprzedniej tury (rozróżnienie środek zastępczy vs
+NSP). Moduł `mod-ustawa-narkomania.md` sam był jednak BARDZO CIENKI
+(44 linie, sam "quick check") — brakowało w nim substancjalnych
+tematów spoza aspektu karnego.
+
+**Marihuana lecznicza — pełne opracowanie:** legalizacja od 1.11.2017,
+podstawa art. 33a (konopie inne niż włókniste jako surowiec
+farmaceutyczny), recepta Rpw ważna 30 dni, KAŻDY lekarz z PWZ (poza
+weterynarią) może wystawić, wymóg PIERWSZEJ wizyty STACJONARNEJ (kolejne
+przez teleporadę), BRAK refundacji NFZ (wyjątek: Epidyolex w wybranych
+postaciach padaczki), oraz KLUCZOWE ograniczenie: pacjent NIE MA prawa
+do UPRAWY nawet z receptą — wyłącznie zakup gotowego surowca w aptece.
+Wyraźne rozróżnienie od konopi WŁÓKNISTYCH (CBD, THC≤0,3%) — te są
+CAŁKOWICIE poza reżimem ustawy, potwierdzone stanowiskiem RPO.
+
+**Leczenie substytucyjne — pełne opracowanie:** metadon jako wyjątek od
+przestępstwa "dostarczania środka odurzającego" w ramach zatwierdzonego
+programu, wymóg zezwolenia marszałka województwa (lub Dyrektora
+Generalnego SW dla osób pozbawionych wolności) po opinii KBPN, centralny
+wykaz zapobiegający podwójnemu uczestnictwu, warunki wyjątkowego wydania
+środka do samodzielnego przyjęcia (4 dni ze wskazań zdrowotnych / 2 dni
+przy zdarzeniu losowym). Odnotowano ŚWIEŻĄ nowelizację z 11.06.2026 r.
+(nowe terminy niestawiennictwa 4/7 dni, nowa ścieżka "ordynacji
+lekarskiej") — z WYRAŹNYM zastrzeżeniem zgodnym z wcześniejszym audytem
+DR-03 (2026-07-04), że NUMER Dz.U. tej nowelizacji NADAL nie został
+potwierdzony — NIE zgadywano numeru, potwierdzono jedynie TREŚĆ
+merytoryczną z dokumentów procesu legislacyjnego Sejmu.
+
+**Prekursory — opracowanie na poziomie punktu startowego:** reżim
+oparty głównie na prawie unijnym bezpośrednio stosowanym (rozp. UE
+273/2004 — obrót wewnątrzunijny, 111/2005 — obrót z państwami trzecimi),
+z ustawą krajową wskazującą jedynie właściwe organy. Odnotowano brak
+pełnej weryfikacji kategorii 1/2/3 i szczegółowych obowiązków
+rejestracyjnych przedsiębiorców — oznaczone wprost jako wymagające
+dalszego pogłębienia.
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana od razu poprawnie
+(wszystkie nagłówki zachowane, technika bezpiecznego wstawiania z
+jawnym powtórzeniem końcowego nagłówka zadziałała bez potrzeby korekty).
+
+---
+
+
+
+**Zakres:** NOWY `dr-06/.../mod-alkohol-tyton-regulacja-sprzedazy.md` +
+`dr-06/SKILL.md` (22→23) + `dr-06/MAPA-AKTOW.md` + `prawo-polskie-v2/
+ROUTING-MAP.md` (zsynchronizowano natychmiast) + wpis `CHECKLIST-
+DEDUP.md`.
+
+**Kontekst:** użytkownik wskazał: alkohole, papierosy, kontrabandę,
+przemyt.
+
+**Ustalenie wstępne — 2 z 4 elementów już dobrze pokryte:** przemyt i
+kontrabanda (art. 86-91 KKS) były JUŻ szczegółowo opracowane w
+`mod-ustawa-akcyzowa-i-clo-UCC.md` z sesji 2026-07-15 — w tym
+KLUCZOWE, praktyczne rozróżnienie art. 86 (przemyt — brak
+przedstawienia towaru) vs art. 87 (oszustwo celne — towar BYŁ
+przedstawiony, ale z fałszywymi danymi) na konkretnym przykładzie
+błędu sądowego — potwierdzono BEZ potrzeby zmian.
+
+**Luka rzeczywista — merytoryczna regulacja SPRZEDAŻY:** alkohol i
+tytoń były dotąd obecne WYŁĄCZNIE jako przelotne wzmianki (limity przy
+jeździe pod wpływem, zakaz reklamy wobec nieletnich) — sama regulacja
+LICENCYJNA/sprzedażowa nie była opracowana.
+
+**Alkohol — pełne opracowanie:** trzy ODRĘBNE kategorie zezwoleń wg
+mocy (do 4,5%+piwo / 4,5-18% / powyżej 18%) wydawane OSOBNO przez
+wójta/burmistrza/prezydenta, minimalny czas trwania (2 lata poza
+miejscem sprzedaży / 4 lata w miejscu), odrębny reżim obrotu HURTOWEGO
+>18% przez MINISTRA (nie gminę), pełny katalog przesłanek COFNIĘCIA
+zezwolenia z KLUCZOWYM ustaleniem potwierdzonym przez Trybunał
+Konstytucyjny — argument przedsiębiorcy "dochowałem należytej
+staranności wobec pracowników" NIE CHRONI przed cofnięciem za sprzedaż
+nieletniemu, bo obrót alkoholem nie jest traktowany jak zwykła
+działalność gospodarcza (odpowiedzialność praktycznie obiektywna).
+Kompetencja gminy do ograniczeń godzin nocnej sprzedaży.
+
+**Tytoń i wyroby nikotynowe — pełne opracowanie ze szczególnym
+naciskiem na NAJŚWIEŻSZĄ zmianę:** zakaz sprzedaży nieletnim, zakaz
+palenia w miejscach publicznych (z kompetencją gminy do dodatkowych
+stref i kompetencją resortową dla obiektów zamkniętych), wymogi
+opakowaniowe (ostrzeżenia zdrowotne, zakaz zasłaniania znaków akcyzy),
+sankcje. NOWELIZACJA z 5.07.2025 r. (bardzo świeża, ~2 tygodnie przed
+tą sesją) — zrównanie e-papierosów (W TYM BEZNIKOTYNOWYCH) i
+woreczków nikotynowych z tradycyjnym tytoniem, zamykająca WCZEŚNIEJSZĄ
+lukę prawną, która pozwalała obchodzić zakazy (sprzedaż nieletnim,
+reklama) dla wariantów bez nikotyny poprzez formalne niezaliczanie ich
+do "e-papierosów" w rozumieniu ustawy.
+
+**Status:** ✅ WDROŻONE. Zastosowano bezpieczną technikę wstawiania
+wiersza do głównej mapy — struktura zweryfikowana (17 sekcji zachowanych).
+
+---
+
+
+
+**Zakres:** NOWY `dr-06/.../mod-clo-podroznych-limity-towary-
+zabronione.md` + `dr-06/SKILL.md` (21→22) + `dr-06/MAPA-AKTOW.md` +
+`prawo-polskie-v2/ROUTING-MAP.md` (zsynchronizowano natychmiast) + wpis
+`CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik wskazał: cło, limity przewozu, towary
+zabronione w ruchu transgranicznym.
+
+**Ustalenie wstępne:** istniejący `mod-UCC-clo-taryfa-celna.md` (180
+linii) pokrywa WYŁĄCZNIE stronę KOMERCYJNĄ/B2B cła (klasyfikacja CN,
+procedury celne UCC, wartość celna, preferencje taryfowe FTA) —
+CAŁKOWICIE pomija stronę KONSUMENCKĄ/podróżnych, mimo że to najczęstszy
+praktyczny kontekst pytań o "cło" w codziennym życiu.
+
+**Limit przewozu gotówki:** pełne opracowanie rozporządzenia UE
+2018/1672 — próg 10 000 EUR niezależny od środka transportu,
+ROZSZERZONA definicja "środków pieniężnych" obejmująca złoto/platynę
+dewizową (BEZ progu kwotowego — częsty pomijany szczegół) oraz karty
+przedpłacone, procedura zgłoszenia (pisemna deklaracja, opcja
+elektroniczna przez PUESC/Cyfrowa Granica), odrębny 30-dniowy termin
+dla przesyłek pocztowych/kurierskich, sankcja czasowego zatrzymania z
+postępowaniem do 90 dni.
+
+**Zwolnienia celne dla podróżnych:** limit wartościowy 300 EUR (lądowy)
+/ 430 EUR (lotniczy/morski) dla towarów niehandlowych, z WYRAŹNYM
+zastrzeżeniem że NIE obejmuje leków/paliwa/tytoniu/alkoholu (te mają
+odrębne normy), szczegółowe normy ilościowe alkoholu (1l mocny >22%
+LUB 2l słabszy, z możliwością proporcjonalnego łączenia) i tytoniu (200
+papierosów/100 cygaretek/50 cygar/250g tytoniu), odrębne zwolnienie
+akcyzowe dla e-papierosów, CAŁKOWITY zakaz żywności pochodzenia
+zwierzęcego (niezależnie od ilości), limit 5 opakowań leków na własny
+użytek z zakazem przesyłania pocztą.
+
+**Towary zabronione:** CITES jako centralny element — konkretne
+przykłady z praktyki KAS (kość słoniowa, dzikie koty) i surowa sankcja
+karna (3 miesiące-5 lat pozbawienia wolności), z sygnalizacją (bez
+duplikacji) pozostałych kategorii już opracowanych gdzie indziej (broń
+— DR-03, narkotyki — DR-03) oraz punktem startowym dla zabytków i
+podróbek/IP.
+
+**Status:** ✅ WDROŻONE. Moduł wyraźnie komplementarny do istniejącego
+mod-UCC-clo-taryfa-celna.md — obie strony cła (komercyjna i konsumencka)
+są teraz pokryte. Zastosowano bezpieczną technikę wstawiania wiersza do
+głównej mapy (insert po istniejącym wierszu zamiast str_replace) —
+struktura zweryfikowana (17 sekcji zachowanych).
+
+---
+
+
+
+**Zakres:** 3 NOWE moduły w DR-09, DR-02, DR-03 + odpowiednie SKILL.md
+(19→20, 30→31, 35→36) + lokalne MAPA-AKTOW (3×) + `prawo-polskie-v2/
+ROUTING-MAP.md` (3 nowe wiersze, zsynchronizowano natychmiast) + 3
+wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik wskazał dwa hasła: "akcyzy" i "kaucję" (bez
+dalszego doprecyzowania — wieloznaczne pojęcie).
+
+**Akcyza — potwierdzenie, bez zmian:** sprawdzono istniejący
+`mod-ustawa-akcyzowa-i-clo-UCC.md` — 365 linii, bardzo kompleksowe
+pokrycie (wyroby akcyzowe, procedura zawieszenia poboru, cło/UCC,
+naruszenia KKS, klasyfikacja CN, Wiążąca Informacja Akcyzowa) — BRAK
+istotnych luk wymagających uzupełnienia.
+
+**Kaucja — zidentyfikowano TRZY odrębne, prawnie niezależne znaczenia,
+WSZYSTKIE całkowicie nieobecne w systemie, zbudowane od podstaw:**
+
+1. **System kaucyjny opakowań** (DR-09) — bardzo świeży (w życiu od
+   1.10.2025 r., nowelizowany dopiero w lutym 2026 r.), pełne
+   opracowanie: 3 kategorie opakowań objętych (PET do 3l, puszki do
+   1l, szkło zwrotne do 1,5l), wysokość kaucji (0,50/1,00 zł), wymogi
+   formalne i zasady zwrotu (bez paragonu, warunek nieuszkodzonego
+   opakowania z czytelną etykietą), cele ilościowe (77%/90% do 2029),
+   sankcje dla producentów, oraz ŚWIEŻY wyjątek dla browarów
+   prowadzących własne systemy zbiórki (nowelizacja luty 2026, do
+   końca 2028 r.).
+
+2. **Kaucja przy najmie lokalu** (DR-02) — art. 6/19a ustawy o
+   ochronie praw lokatorów, DWA różne limity (12-krotność zwykły vs
+   6-krotność okazjonalny, z zastrzeżeniem że "czynsz" nie obejmuje
+   mediów), termin zwrotu (1 miesiąc), oraz KLUCZOWY, często pomijany
+   w praktyce MECHANIZM WALORYZACJI kaucji przy wzroście czynszu w
+   trakcie trwania najmu (z konkretnym przykładem liczbowym: 4-krotność
+   czynszu 3000 zł pierwotnie = 12 000 zł, ale przy wzroście czynszu do
+   7000 zł zwrotowi podlega 28 000 zł) — zasady potrąceń z ciężarem
+   dowodu na wynajmującym.
+
+3. **Poręczenie majątkowe / "kaucja karna"** (DR-03) — art. 266-269
+   KPK, jako NAJWAŻNIEJSZA alternatywa wobec tymczasowego aresztowania.
+   Pełne opracowanie: formy (pieniądze/papiery wartościowe/zastaw/
+   hipoteka — nawet dom może być zabezpieczeniem), krąg uprawnionych
+   (bez ograniczeń), KLUCZOWE ograniczenie źródła pochodzenia (zakaz
+   przysporzenia dokonanego specjalnie w celu złożenia poręczenia, z
+   uzasadnieniem funkcjonalnym — realność groźby utraty), brak
+   sztywnych widełek kwotowych z zasadą realności (kwota nie może być
+   oczywiście nieosiągalna — inaczej to fikcja równoznaczna z aresztem),
+   przepadek/ściągnięcie (w tym możliwość częściowego przepadku z
+   zastosowaniem innego środka poza aresztem, pierwszeństwo
+   pokrzywdzonego do zaspokojenia roszczeń), NIEINTUICYJNY moment
+   zwrotu przy skazaniu (dopiero od rozpoczęcia odbywania kary, nie od
+   uprawomocnienia wyroku), oraz cofnięcie poręczenia przez składającego
+   (bez uzasadnienia, ale skuteczne dopiero po zastąpieniu innym
+   środkiem, niemożliwe po orzeczeniu przepadku).
+
+**Status:** ✅ WDROŻONE. Wszystkie trzy znaczenia "kaucji" zaadresowane
+kompleksowo w odpowiednich, tematycznie właściwych DR-skillach.
+Zastosowano BEZPIECZNĄ technikę wstawiania wierszy do głównej mapy
+(insert przed nagłówkiem kolejnej sekcji zamiast str_replace na
+istniejącej treści) — struktura zweryfikowana, wszystkie 3 wiersze
+poprawnie umiejscowione w swoich sekcjach DR (17 sekcji zachowanych).
+
+---
+
+
+
+**Zakres:** rozbudowa `mod-VAT-podatek-od-towarow-i-uslug.md` (2 nowe
+podsekcje) + rozbudowa `mod-ustawa-ryczalt-przychody.md` (2 nowe sekcje,
+42→166 linii) + NOWY `mod-VAT-klasyfikacja-produktow-baza-
+niejednoznacznosci.md` + `dr-06/SKILL.md` (20→21) + `dr-06/MAPA-AKTOW.md`
++ `prawo-polskie-v2/ROUTING-MAP.md` (zsynchronizowano natychmiast) +
+wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik wskazał klaster: ryczałt zamiast podatku,
+zwolnienia z podatków, VAT marża przy sprzedaży na Facebooku, sprzedaż
+towaru poza granicami Polski, oraz — jako centralny element —
+zależność stawki VAT od kodu produktu na przykładzie rękawic
+nitrylowych roboczych vs medycznych, z prośbą o zbudowanie bazy takich
+przypadków.
+
+**⭐ Korekta terminologiczna na wstępie nowego modułu:** ustalono, że
+mechanizm opisywany przez użytkownika ("kod PKD produktu") dotyczy w
+rzeczywistości PKWiU/CN (klasyfikacji TOWARU) oraz statusu prawnego
+"wyrobu medycznego" wg rozporządzenia MDR — NIE kodu PKD, który
+klasyfikuje działalność GOSPODARCZĄ podatnika, nie towar. Wyjaśniono
+to WPROST na początku nowego modułu, zamiast milcząco "poprawiać"
+pytanie bez wyjaśnienia.
+
+**Nowy moduł — baza produktów o niejednoznacznej klasyfikacji VAT
+(centralna odpowiedź):** ustalono i udokumentowano MECHANIZM OGÓLNY —
+ten sam fizyczny towar może mieć DWIE różne stawki VAT w zależności od
+certyfikacji (status wyrobu medycznego wg MDR) ORAZ od deklarowanego
+PRZEZNACZENIA konkretnej transakcji sprzedaży (nie tylko od samego
+faktu posiadania certyfikatu). W PEŁNI opracowano na przykładzie
+rękawic nitrylowych (diagnostyczne/medyczne — poz. 105 zał. 3 ustawy
+VAT, 8% vs robocze — PKWiU 22.19.60, CN 4015 19 00 z wyraźnym
+wyłączeniem zastosowań medycznych, 23%), z realnym przykładem WIS
+(0115-KDST2-2.440.170.2021.30.BM) pokazującym że kontrola GIS może
+PODWAŻYĆ wcześniej deklarowaną certyfikację MDR mimo istniejącej
+deklaracji zgodności. Rozszerzono na 3 dodatkowe, udokumentowane
+przypadki (maseczki, płyny dezynfekujące, podkłady chłonne — z
+odnotowanym problemem z okresu pandemii, gdy część podmiotów
+bezpodstawnie stosowała stawkę obniżoną) oraz zasygnalizowano 5
+dalszych kategorii (termometry, okulary ochronne, fartuchy, strzykawki,
+sprzęt pomiarowy) jako punkt startowy.
+
+**VAT marża — "FB VAT marża":** wyjaśniono KLUCZOWE rozróżnienie —
+sprzedaż PRZEZ osobę prywatną na Facebook Marketplace (okazjonalna,
+bez działalności) to zwykła sprzedaż POZA systemem VAT, NIE procedura
+VAT marża; procedura VAT marża dotyczy PODATNIKA SKUPUJĄCEGO takie
+towary od osób prywatnych W CELU DALSZEJ ODSPRZEDAŻY — to klasyczny,
+podręcznikowy przypadek zastosowania art. 120 ustawy VAT. Pełny
+mechanizm: definicja towaru używanego (wymóg rzeczywistego wcześniejszego
+użytkowania), krąg podmiotów od których można nabyć towar objęty
+procedurą, mechanizm opodatkowania samej marży, formalności (faktura
+"procedura marży", odrębna ewidencja).
+
+**Eksport/WDT — rozbudowa z jednej linijki:** pełne warunki stawki 0%
+dla WDT (ważny numer VAT-UE nabywcy, dowody wywozu/dostarczenia,
+rejestracja VAT-UE dostawcy, terminowa informacja podsumowująca),
+mechanizm postępowania przy braku dokumentacji w terminie (wykazanie
+ze stawką krajową z możliwością późniejszej korekty), domniemanie z
+rozporządzenia UE 282/2011, orzecznictwo TSUE ograniczające
+odpowiedzialność uczciwego podatnika za naruszenia wcześniejszych
+ogniw łańcucha dostaw.
+
+**Ryczałt "zamiast" podatku — logika decyzyjna:** kluczowe rozróżnienie
+koncepcyjne (ryczałt = podatek od PRZYCHODU bez KUP, skala/liniowy =
+podatek od DOCHODU), przesłanki kiedy ryczałt się opłaca (niskie koszty,
+niska stawka właściwa) i kiedy nie (wysokie koszty, działalność o
+niskiej marży/stratna — przy ryczałcie podatek należny NIEZALEŻNIE od
+faktycznego wyniku).
+
+**Zwolnienia PIT (art. 21):** przegląd najczęstszych zwolnień
+przedmiotowych (świadczenia socjalne, odszkodowania z wyroku/ugody,
+ulga dla młodych, powracających, rodzin 4+, pracujących seniorów) z
+WYRAŹNYM rozróżnieniem od wyboru korzystniejszej FORMY opodatkowania
+— to dwie różne, niezależne od siebie kwestie, częsta pomyłka w
+praktyce.
+
+**Status:** ✅ WDROŻONE. Zastosowano BEZPIECZNĄ technikę edycji (jawne
+odtwarzanie sąsiedniego nagłówka w new_str) po trzech wcześniejszych
+incydentach usunięcia nagłówka w tej sesji — WSZYSTKIE edycje tej tury
+zweryfikowane jako poprawne od razu, bez potrzeby korekty.
+
+---
+
+
+
+**Zakres:** rozbudowa `mod-CIT-podatek-dochodowy-prawne.md` (korekta +
+nowa sekcja 5a) + rozbudowa `mod-VAT-podatek-od-towarow-i-uslug.md`
+(nowa podsekcja OSS/IOSS) + NOWY `mod-podatki-sektorowe-bankowy-gry-
+tonazowy-cukrowy-detaliczny.md` + `dr-06/SKILL.md` (19→20) +
+`dr-06/MAPA-AKTOW.md` + `prawo-polskie-v2/ROUTING-MAP.md`
+(zsynchronizowano natychmiast) + wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** dokończenie audytu pokrycia prawa podatkowego, który
+wykazał WYJĄTKOWO solidny i nowoczesny rdzeń (PIT/CIT/VAT/akcyza/PCC/
+lokalne, ceny transferowe, MDR, GAAR, estoński CIT, JPK, split payment)
+z lukami ograniczonymi do węższej kategorii: WHT, minimalny CIT jako
+pełne opracowanie, VAT OSS/IOSS, oraz pięć podatków sektorowych.
+
+**⭐ ZNALEZISKO KRYTYCZNE — BŁĄD RZECZOWY w istniejącej treści:** sekcja
+o podatku minimalnym CIT (art. 24ca) w `mod-CIT-podatek-dochodowy-
+prawne.md` zawierała BŁĘDNĄ stawkę — "1,5% od podstawy" — podczas gdy
+ZWERYFIKOWANA, poprawna stawka wynosi 10% PODSTAWY OPODATKOWANIA.
+Wartość 1,5% przychodów jest TYLKO JEDNYM z TRZECH składników
+sumowanych przy obliczaniu SAMEJ PODSTAWY (obok kosztów finansowania
+dłużnego i kosztów wartości niematerialnych/prawnych na rzecz
+podmiotów powiązanych) — pomylenie składnika podstawy ze stawką
+podatku to BŁĄD O ISTOTNYM PRAKTYCZNYM ZNACZENIU (skutkowałby
+nieprawidłowym wyliczeniem zobowiązania podatkowego niemal 7-krotnie
+zaniżonym). Skorygowano i ROZBUDOWANO całą sekcję: historia zawieszenia
+2022-2023, dwie alternatywne metody ustalenia podstawy, mechanizm
+zapobiegania podwójnemu opodatkowaniu (odliczenie od "zwykłego" CIT),
+pełniejszy katalog wyłączeń z potwierdzeniem interpretacjami KIS.
+
+**WHT — nowa sekcja 5a:** mechanizm "pay and refund" (próg 2 mln zł na
+rzecz jednego podmiotu powiązanego, obowiązkowy pobór pełnej stawki od
+nadwyżki), dwa sposoby uniknięcia tego mechanizmu (opinia o stosowaniu
+preferencji ważna 36 miesięcy; oświadczenie WH-OSC/WH-OSP z terminem
+złożenia), wymóg należytej staranności NIEZALEŻNY od progu, sankcje
+(dodatkowe zobowiązanie 10% wartości brutto + możliwa odpowiedzialność
+karna skarbowa), rekomendacja wdrożenia wewnętrznej procedury.
+
+**VAT OSS/IOSS:** próg 10 000 EUR netto rocznie dla obowiązku stosowania
+stawek kraju nabywcy, mechanizm deklaracji VIU-DO, procedura nieunijna
+dla podmiotów spoza UE, IOSS dla importu ≤150 EUR, wyraźne wskazanie
+czego OSS NIE obejmuje (magazynowanie własnych towarów w innym kraju
+UE, transakcje B2B).
+
+**Nowy moduł — podatki sektorowe:** podatek od niektórych instytucji
+finansowych ("bankowy") W PEŁNI opracowany (stawka 0,0366% miesięcznie,
+progi 4 mld/2 mld zł, zwolnienia, mechanizm liczenia łącznie dla grup
+powiązanych). Podatek od gier, podatek tonażowy, opłata cukrowa i
+podatek od sprzedaży detalicznej opracowane na poziomie PODSTAWOWYM,
+UCZCIWIE oznaczone jako punkt startowy wymagający pogłębienia (w tym
+odnotowana burzliwa historia zawieszeń podatku od sprzedaży detalicznej
+w związku ze sporem przed Komisją Europejską).
+
+**Techniczna uwaga — POWTÓRZONY BŁĄD (trzeci raz w tej sesji):** przy
+wstawianiu nowych sekcji do trzech różnych plików (`mod-CIT`, `mod-VAT`)
+TRZYKROTNIE przypadkowo usunięto sąsiedni nagłówek Markdown przy użyciu
+str_replace z niepełnym old_str/new_str — dokładnie ten sam wzorzec
+błędu co w poprzednich turach (`mod-KRO-rodzinne.md`, `mod-KPA-
+postepowanie-administracyjne.md`). Wszystkie trzy przypadki wykryte i
+naprawione NATYCHMIAST przy rutynowej weryfikacji integralności
+struktury, przed przejściem do kolejnego kroku.
+
+**Status:** ✅ WDROŻONE. Struktury obu zmodyfikowanych plików (`mod-CIT`,
+`mod-VAT`) zweryfikowane po edycji — wszystkie nagłówki na miejscu.
+Główna mapa routingu zsynchronizowana natychmiast (17 sekcji zachowanych).
+
+**Wniosek metodologiczny:** powtarzalność tego samego błędu edycyjnego
+(3. raz) sugeruje, że przy WSTAWIANIU treści BEZPOŚREDNIO PRZED
+istniejącym nagłówkiem, należy ZAWSZE include'ować ten nagłówek w
+new_str, NIE polegać na tym że occurs "dalej w pliku" automatycznie
+się zachowa — old_str musi kończyć się PRZED miejscem wstawienia, a
+new_str musi jawnie odtwarzać WSZYSTKO co było w old_str, plus nową
+treść.
+
+---
+
+
+
+**Zakres:** NOWY `dr-02/.../mod-prawo-wekslowe-czekowe.md` + rozbudowa
+`mod-KSH-spolki-handlowe.md` (2 nowe sekcje 1a/1b) + `dr-02/SKILL.md`
+(28→30, w tym nadrobienie zaległości) + `dr-02/MAPA-AKTOW.md` +
+`prawo-polskie-v2/ROUTING-MAP.md` (zsynchronizowano natychmiast) +
+wpisy `CHECKLIST-DEDUP.md`.
+
+**Kontekst:** dokończenie audytu pokrycia prawa gospodarczego, który
+wykazał solidny rdzeń (formy działalności, KSH, konkurencja, upadłość,
+KRS) z trzema węższymi lukami: prawo wekslowe/czekowe, kontrola
+przedsiębiorcy, reglamentacja działalności.
+
+**Nowy moduł — prawo wekslowe i czekowe:** pełna struktura ustaw z 1936
+r. (obowiązujących praktycznie bez zmian od 90 lat), elementy konieczne
+weksla własnego (7 elementów, art. 101) i trasowanego (8 elementów, art.
+1) z rozróżnieniem trzech stron stosunku (trasant/trasat/remitent),
+mechanizm weksla in blanco i deklaracji wekslowej z KLUCZOWĄ zasadą
+ochrony posiadacza w dobrej wierze (art. 10 — ciężar dowodu złej wiary/
+rażącego niedbalstwa NABYWCY spoczywa na dłużniku, wysoki próg
+praktyczny), indos, poręczenie wekslowe (awal), protest jako warunek
+regresu wobec indosantów, TRZY różne terminy przedawnienia w zależności
+od adresata roszczenia (3 lata dla akceptanta/wystawcy własnego, 1 rok
+od protestu dla zwrotnego poszukiwania, 6 miesięcy między indosantami),
+umorzenie weksla zaginionego, kluczowe różnice weksel/czek (trasat
+czeku wyłącznie bankiem, czek zawsze płatny za okazaniem), zasadę
+abstrakcyjności i ograniczenie zarzutów wekslowych (art. 17).
+
+**Kontrola przedsiębiorcy (nowa sekcja 1a w mod-KSH):** pełne
+opracowanie Rozdziału 5 Prawa przedsiębiorców — termin wszczęcia
+kontroli (7-30 dni od zawiadomienia), obligatoryjna treść zawiadomienia,
+katalog wyjątków od obowiązku zawiadomienia (umowy międzynarodowe,
+przeciwdziałanie przestępstwu, zagrożenie życia/zdrowia/środowiska),
+zakaz podwójnej kontroli tych samych kwestii, oraz KLUCZOWY środek
+obrony — sprzeciw przedsiębiorcy (art. 59, termin 3 dni robocze,
+skutek wstrzymania czynności i biegu czasu kontroli, milczące
+rozstrzygnięcie na korzyść przedsiębiorcy przy nierozpatrzeniu w
+terminie — analogia do milczącego załatwienia sprawy KPA, powiązanie
+z niedawno rozbudowanym modułem KPA).
+
+**Reglamentacja działalności (nowa sekcja 1b w mod-KSH):** trzy stopnie
+reglamentacji z KLUCZOWYM rozróżnieniem — koncesja jest UZNANIOWA
+(organ może odmówić mimo spełnienia warunków formalnych), zezwolenie i
+wpis do rejestru działalności regulowanej NIE SĄ uznaniowe (spełnienie
+warunków = obowiązek pozytywnego rozstrzygnięcia). Zasada subsydiarności
+koncesji (ostateczność, gdy nie można zezwolenia/wpisu), instytucja
+promesy koncesji, forma zaświadczenia (nie decyzji) przy wpisie do
+rejestru regulowanego z odnotowanym sporem doktrynalnym co do jej
+charakteru prawnego.
+
+**Nadrobienie zaległości:** przy okazji aktualizacji licznika modułów
+DR-02 wykryto DRUGI (po wcześniejszym przypadku modułu adopcyjnego)
+przypadek modułu istniejącego fizycznie, ale nigdy niezarejestrowanego
+w SKILL.md — `mod-reklama-wobec-nieletnich.md`. Naprawiono przy okazji.
+
+**Status:** ✅ WDROŻONE. Wszystkie 3 luki z audytu prawa gospodarczego
+zaadresowane. Struktura pliku `mod-KSH-spolki-handlowe.md` zweryfikowana
+po edycji (wszystkie nagłówki na miejscu, sekcje 1a/1b poprawnie
+wstawione między sekcją 1 i 2 bez naruszenia istniejącej treści).
+
+---
+
+
 
 **Zakres:** przeniesienie fizyczne pliku DR-04→DR-05 + rozbudowa treści
 (nowa sekcja 4a) + aktualizacja 21 plików w całym systemie odwołujących

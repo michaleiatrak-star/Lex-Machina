@@ -68,7 +68,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   od KC; nowelizacja znosi "wieczne przedawnienie" + wprowadza ugodę
   podatkową od 01.10.2026 (art. 70 i n. OP)
 
-## Moduły (19 łącznie — ✓ 19 OK, ☐ 0 STUB)
+## Moduły (24 łącznie — ✓ 24 OK, ☐ 0 STUB)
 
 **Aktualizacja 2026-06-07:**
 - Ordynacja podatkowa: nowy t.j. **Dz.U. 2026 poz. 622**
@@ -94,14 +94,95 @@ przez cross-reference, bez duplikacji treści).
   [✓] OK    mod-KAS-kontrola-celno-skarbowa
   [✓] OK    mod-PIT-podatek-dochodowy-fizyczne
   [✓] OK    mod-CIT-podatek-dochodowy-prawne
+              (2026-07-19: SKORYGOWANO BŁĄD — podatek minimalny art.
+               24ca miał błędnie podaną stawkę 1,5% zamiast poprawnej
+               10% [1,5% to tylko jeden z 3 składników PODSTAWY, nie
+               stawka]; dodano sekcję 5a PODATEK U ŹRÓDŁA/WHT
+               [mechanizm pay and refund, próg 2 mln zł, opinia o
+               preferencji, oświadczenie WH-OSC/WH-OSP])
   [✓] OK    mod-VAT-podatek-od-towarow-i-uslug
+              (2026-07-21: dodano sekcję 3a — pięć dotąd nieobecnych
+               kluczowych mechanizmów: WNT [samonaliczenie, limit
+               50 000 zł], odwrotne obciążenie [korekta: krajowe już
+               NIE obowiązuje, zastąpione split payment], ulga na złe
+               długi [liberalizacja po TSUE C-335/19, termin 3 lata],
+               elementy faktury art. 106e, pełne zwolnienie podmiotowe
+               art. 113 [limit 200 000 zł + wyłączenia]. Odpowiedź na
+               pytanie użytkownika o kompletność ustaw VAT-owskich)
+              (2026-07-21: dodano odesłanie do nowego modułu o
+               samochodach/użytku mieszanym)
+  [✓] OK    mod-odliczenia-uzytek-mieszany-firma-prywatny-KUP
+              (dodany 2026-07-21: VAT samochody osobowe [50%/100%,
+               VAT-26, ewidencja przebiegu, ryzyko ANPR], ryczałt PIT
+               za użytek prywatny [250/400 zł wg mocy, orzecznictwo
+               NSA — paliwo w ryczałcie], ogólne zasady KUP, macierz
+               decyzyjna firma/konsument/odsprzedaż/niejednoznaczna
+               klasyfikacja, kluczowe rozróżnienie VAT≠KUP jako
+               niezależne reżimy. Odpowiedź na audyt kompletności
+               prawa podatkowego)
+              (2026-07-19: dodano PROCEDURĘ VAT MARŻA [art. 120 — w tym
+               "FB VAT marża": skup od osób prywatnych w celu odsprzedaży],
+               rozbudowano EKSPORT/WDT [pełne warunki stawki 0%, dowody,
+               informacja podsumowująca VAT-UE, orzecznictwo TSUE ws.
+               odpowiedzialności w łańcuchu dostaw])
+              (2026-07-19: dodano VAT OSS/IOSS [próg 10 000 EUR,
+               deklaracja VIU-DO, procedura nieunijna, IOSS dla
+               importu ≤150 EUR])
+  [✓] OK    mod-podatki-sektorowe-bankowy-gry-tonazowy-cukrowy-detaliczny
+              (dodany 2026-07-19: podatek bankowy [W PEŁNI opracowany
+               — stawka 0,0366%, progi 4/2 mld zł], podatek od gier,
+               tonażowy, opłata cukrowa, podatek od sprzedaży
+               detalicznej [3 ostatnie oznaczone jako punkt startowy].
+               Odpowiedź na audyt pokrycia prawa podatkowego)
   [✓] OK    mod-ustawa-ryczalt-przychody
+              (2026-07-19: dodano logikę decyzyjną "ryczałt zamiast
+               podatku" [kiedy się opłaca vs skala/liniowy] oraz
+               przegląd zwolnień przedmiotowych PIT art. 21 [ulga dla
+               młodych, powracających, 4+, pracujących seniorów])
+  [✓] OK    mod-VAT-klasyfikacja-produktow-baza-niejednoznacznosci
+              (dodany 2026-07-19: baza produktów o niejednoznacznej
+               klasyfikacji VAT — rękawice nitrylowe medyczne 8% vs
+               robocze 23% jako główny przykład, + maseczki/płyny
+               dezynfekujące/podkłady chłonne. Korekta terminologiczna:
+               mechanizm dotyczy PKWiU/CN i statusu wyrobu medycznego,
+               NIE kodu PKD. Odpowiedź na pytanie użytkownika)
   [✓] OK    mod-ustawa-PCC-i-podatek-spadkow-darowizn
   [✓] OK    mod-ustawa-podatek-nieruchomosci-i-lokalne
   [✓] OK    mod-UFP-finanse-publiczne-NIK-RIO
+              (2026-07-21: dodano sekcję 11 — merytoryczna treść
+               wystąpienia pokontrolnego NIK [elementy, termin 21 dni
+               zastrzeżeń z adresatem zależnym od rangi podmiotu,
+               komisja rozstrzygająca, rodzaje kontroli]. Dotąd
+               sekcje 1-10 nazywały kroki bez treści. Odpowiedź na
+               pytanie użytkownika)
   [✓] OK    mod-ustawa-akcyzowa-i-clo-UCC
+  [✓] OK    mod-alkohol-tyton-regulacja-sprzedazy
+              (v1.2, 2026-07-20: dodano sekcję DO MONITOROWANIA — 4
+               równoległe, konkurencyjne projekty zmian ustawy
+               alkoholowej [PSL, Lewica, Polska 2050, rządowy UD 147],
+               ŻADEN jeszcze nie jest prawem. Plus Część C —
+               bimbrownictwo)
+              (v1.1, 2026-07-20: dodano Część C — BIMBROWNICTWO [art.
+               12a ustawy 2001 — KLUCZOWE: uchwała SN I KZP 23/04,
+               "legalny bimber na własny użytek" NIE ISTNIEJE w
+               polskim prawie, zbieg z KKS, przepadek aparatury].
+               Odpowiedź na pytanie użytkownika)
+              (dodany 2026-07-19: regulacja SPRZEDAŻY alkoholu [3
+               kategorie zezwoleń wg mocy, cofnięcie zezwolenia —
+               odpowiedzialność praktycznie obiektywna wg TK] i
+               wyrobów tytoniowych/nikotynowych [zakaz sprzedaży
+               nieletnim, NOWELIZACJA 5.07.2025 — e-papierosy
+               zrównane z tytoniem]. Przemyt/kontrabanda potwierdzone
+               jako już dobrze pokryte, bez zmian. Odpowiedź na
+               pytanie użytkownika)
               (podatek akcyzowy, WIA, KKS celno-akcyzowe — Dz.U. 2025 poz. 126)
   [✓] NOWY  mod-UCC-clo-taryfa-celna
+  [✓] OK    mod-clo-podroznych-limity-towary-zabronione
+              (dodany 2026-07-19: strona KONSUMENCKA cła — limit
+               gotówki 10 000 EUR [rozporządzenie UE 2018/1672, złoto/
+               platyna BEZ progu], zwolnienia dla podróżnych [300/430
+               EUR, normy alkohol/tytoń], CITES [sankcja karna 3
+               miesiące-5 lat]. Odpowiedź na pytanie użytkownika)
               (wydzielony 2026-06-14 z mod-ustawa-akcyzowa-i-clo-UCC: Nomenklatura
                Scalona CN/TARIC, WIT, procedury celne UCC, wartość celna, FTA/GSP)
   [✓] OK    mod-ustawa-AML-instytucje-obowiazkowe

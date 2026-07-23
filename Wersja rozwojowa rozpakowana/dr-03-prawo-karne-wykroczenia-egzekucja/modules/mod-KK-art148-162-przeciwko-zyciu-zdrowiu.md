@@ -95,6 +95,175 @@ wymaga opinii biegłego, nie ustalaj sam na podstawie samych dokumentów.
 
 ---
 
+## ⭐⭐ DRZEWO Z.3 — BÓJKA I POBICIE (art. 158-159 KK) — dodane 2026-07-21
+
+> Moduł OBIECYWAŁ w tytule "art. 148-162", ale treść urywała się na
+> art. 156-157 — art. 158-162 UZUPEŁNIONE poniżej.
+
+```
+START: Czy w zdarzeniu brały udział CO NAJMNIEJ TRZY osoby (dwie
+strony konfliktu, z których KAŻDA liczy min. 1 osobę, ŁĄCZNIE min. 3)?
+
+├─ BÓJKA (art. 158 §1) — starcie WZAJEMNE, gdzie KAŻDY z uczestników
+│  jest JEDNOCZEŚNIE napastnikiem i broniącym się (role NIEROZRÓŻNIALNE)
+│  → udział w bójce, w KTÓREJ naraża się człowieka na bezpośrednie
+│     niebezpieczeństwo utraty życia/ciężkiego uszczerbku → do 3 lat
+│
+├─ POBICIE (art. 158 §1, forma alternatywna) — JEDNA strona wyraźnie
+│  NAPADA, DRUGA broni się (role ROZRÓŻNIALNE — napastnicy vs ofiara)
+│  → TA SAMA sankcja co bójka (do 3 lat) — ustawa TRAKTUJE oba warianty
+│     ŁĄCZNIE w jednym przepisie
+│
+├─ TYP KWALIFIKOWANY — SKUTEK w postaci CIĘŻKIEGO uszczerbku (art. 158
+│  §2) → 6 m-cy – 8 lat
+│
+└─ TYP KWALIFIKOWANY — SKUTEK śmiertelny (art. 158 §3) → 1-10 lat
+
+⭐⭐ KLUCZOWA CECHA DOWODOWA — ODPOWIEDZIALNOŚĆ ZBIOROWA: przy bójce/
+pobiciu ZAKOŃCZONYM ciężkim uszczerbkiem/śmiercią, GDY nie da się
+USTALIĆ, KTÓRY KONKRETNIE z uczestników spowodował dany skutek —
+WSZYSCY uczestnicy odpowiadają za sam UDZIAŁ w zdarzeniu zagrażającym
+takim skutkiem (art. 158), NIEZALEŻNIE od indywidualnego "sprawstwa"
+konkretnego ciosu — to WYJĄTEK od zasady indywidualizacji odpowiedzialności
+karnej, uzasadniony TRUDNOŚCIĄ dowodową w chaosie bójki/pobicia
+
+⚠️ Art. 159 KK (typ KWALIFIKOWANY przez UŻYCIE broni/niebezpiecznego
+narzędzia w bójce/pobiciu) — ⚠️ dokładna treść i zagrożenie karą NIE
+zweryfikowane w pełni w tej sesji, punkt startowy.
+```
+
+---
+
+## ⭐⭐ DRZEWO Z.4 — NARAŻENIE NA NIEBEZPIECZEŃSTWO (art. 160 KK) — dodane 2026-07-21
+
+```
+START: Czy sprawca NARAZIŁ człowieka na BEZPOŚREDNIE niebezpieczeństwo
+utraty życia albo CIĘŻKIEGO uszczerbku na zdrowiu?
+
+├─ TYP PODSTAWOWY (art. 160 §1) → do 3 lat
+
+├─ ⭐⭐ TYP KWALIFIKOWANY PRZEZ GWARANTA (art. 160 §2) — sprawca ma
+│  PRAWNY, SZCZEGÓLNY obowiązek TROSKI o narażoną osobę (np. LEKARZ
+│  pełniący DYŻUR/przyjmujący pacjenta, RODZIC wobec dziecka,
+│  OPIEKUN) → do 5 lat
+│  ⭐⭐⭐ TO KLUCZOWE ROZRÓŻNIENIE od art. 162 (nieudzielenie pomocy,
+│  patrz DRZEWO Z.6 niżej): art. 162 dotyczy POWSZECHNEGO,
+│  "ludzkiego" obowiązku solidarności (KAŻDY przechodzień), art. 160
+│  §2 dotyczy ZAWODOWEGO/prawnego, SZCZEGÓLNEGO obowiązku opieki
+│  (np. lekarz-GWARANT bezpieczeństwa WŁASNEGO pacjenta) — TA SAMA
+│  bierność (zaniechanie pomocy) kwalifikuje się RÓŻNIE w zależności
+│  od tego, CZY sprawcę łączyła z poszkodowanym więź GWARANCYJNA
+│
+├─ NIEUMYŚLNE narażenie (art. 160 §3) → grzywna/ograniczenie
+│  wolności/do roku
+│
+└─ ⭐ TRYB ŚCIGANIA: art. 160 §1 i §2 — Z URZĘDU; art. 160 §3
+   (NIEUMYŚLNE) — ⚠️ WYŁĄCZNIE NA WNIOSEK pokrzywdzonego (⚠️
+   zweryfikuj dokładny tryb na ISAP — częsty punkt sporny)
+```
+
+---
+
+## ⭐ DRZEWO Z.5 — NARAŻENIE NA ZARAŻENIE CHOROBĄ (art. 161 KK) — dodane 2026-07-21
+
+```
+□ Art. 161 §1 — narażenie BEZPOŚREDNIO na zarażenie chorobą
+  WENERYCZNĄ, ZAKAŹNĄ, ciężką NIEULECZALNĄ LUB realnie zagrażającą
+  życiu (np. HIV) — WIEDZĄC o swoim ZAKAŻENIU → do 3 lat
+□ ⭐ TRYB ŚCIGANIA: NA WNIOSEK pokrzywdzonego (⚠️ zweryfikuj dokładny
+  przepis proceduralny na ISAP)
+□ ⚠️ Art. 161 §2 (narażenie na zarażenie WIRUSEM HIV konkretnie, jako
+  ODRĘBNY typ o WYŻSZYM zagrożeniu) — ⚠️ dokładna treść NIE
+  zweryfikowana w pełni w tej sesji, punkt startowy — NIE MYLIĆ z §1
+  (choroba zakaźna OGÓLNIE)
+```
+
+---
+
+## ⭐⭐⭐ DRZEWO Z.6 — NIEUDZIELENIE POMOCY (art. 162 KK) — dodane 2026-07-21
+
+> BEZPOŚREDNIA odpowiedź na pytanie użytkownika — dotąd CAŁKOWICIE
+> nieobecne mimo obietnicy w tytule modułu.
+
+### Elementy przestępstwa (art. 162 §1)
+
+```
+Odpowiedzialności karnej PODLEGA ten, kto:
+  1) WIDZI (ma wiedzę o) człowieku ZNAJDUJĄCYM SIĘ w położeniu
+     GROŻĄCYM BEZPOŚREDNIM niebezpieczeństwem UTRATY ŻYCIA albo
+     CIĘŻKIEGO uszczerbku na zdrowiu (pojęcie "ciężkiego uszczerbku"
+     — DEFINIOWANE w art. 156 §1 KK, patrz DRZEWO Z.2 wyżej w TYM
+     module: pozbawienie wzroku/słuchu/mowy/zdolności płodzenia,
+     inne ciężkie kalectwo, choroba REALNIE zagrażająca życiu,
+     trwała ISTOTNA niezdolność do pracy w zawodzie)
+  2) MAJĄC MOŻLIWOŚĆ udzielenia pomocy — NIE ROBI tego
+  3) Możliwość ta ISTNIEJE BEZ narażenia SIEBIE LUB innej osoby na
+     niebezpieczeństwo utraty życia/ciężkiego uszczerbku
+□ SANKCJA: pozbawienie wolności DO 3 LAT
+□ ⭐⭐ PRZESTĘPSTWO POWSZECHNE — obowiązek dotyczy KAŻDEGO (nie tylko
+  określonej grupy zawodowej) — to WYRAZ ogólnej, "ludzkiej"
+  solidarności, w PRZECIWIEŃSTWIE do art. 160 §2 (obowiązek
+  GWARANTA, patrz DRZEWO Z.4 wyżej)
+□ ⭐ Przepis NIE ULEGŁ ZMIANIE od 1997 r. — RZADKI w polskim prawie
+  przypadek STABILNOŚCI (⚠️ i tak zweryfikuj aktualny t.j. na ISAP)
+```
+
+### ⭐ Kontratyp — kiedy brak reakcji NIE JEST przestępstwem (art. 162 §2)
+
+```
+NIE POPEŁNIA przestępstwa, kto NIE UDZIELA pomocy, DO KTÓREJ:
+  1) KONIECZNE jest poddanie się ZABIEGOWI LEKARSKIEMU (np. laik NIE
+     MA obowiązku wykonywać czynności WYMAGAJĄCYCH wiedzy/uprawnień
+     medycznych)
+  2) MOŻLIWA jest NIEZWŁOCZNA pomoc ze strony INSTYTUCJI lub osoby DO
+     TEGO POWOŁANEJ (np. na miejscu JEST już RATOWNIK/lekarz/służby —
+     dublowanie działań przez przypadkowego świadka NIE jest wymagane)
+```
+
+### ⭐⭐ Zasady interpretacyjne — praktyczne niuanse
+
+```
+⭐ ZAKAZ "OCENIANIA" ofiary jako przesłanki zwalniającej: prawo NIE
+POZWALA świadkowi usprawiedliwiać bierności twierdzeniem, że
+poszkodowany "sam się w to wpakował" lub "chciał się zabić" —
+obowiązek ochrony życia MA charakter BEZWZGLĘDNY, NIEZALEŻNY od oceny
+"winy" ofiary za własne położenie
+
+⭐ PRÓG "ciężkiego uszczerbku" WYŁĄCZA drobne obrażenia — obowiązek z
+art. 162 NIE POWSTAJE, gdy poszkodowany doznał JEDYNIE lekkich obrażeń
+(poniżej progu z art. 156 §1) — sprawdź ZAWSZE, czy sytuacja
+OBIEKTYWNIE odpowiada temu progowi, nie polegaj na SAMEJ subiektywnej
+ocenie zgłaszającego
+
+⭐⭐⭐ ROZGRANICZENIE od art. 160 §2 (GWARANT) — NAJWAŻNIEJSZA różnica
+w PRAKTYCE: LEKARZ pełniący DYŻUR (np. na SOR), przyjmujący W
+przychodni, JADĄCY na wizytę DOMOWĄ, lub OPIEKUJĄCY SIĘ pacjentami W
+szpitalu — jest wobec TYCH pacjentów GWARANTEM bezpieczeństwa. JEŚLI
+TAKI lekarz ZANIECHA działania wobec WŁASNEGO pacjenta — odpowiada NIE
+za art. 162 (łagodniejszy, do 3 lat), lecz za ZNACZNIE SUROWSZY art.
+160 §2 (do 5 lat) — TEN SAM przypadkowy PRZECHODZIEŃ, obserwujący
+OBCĄ osobę w potrzebie, BEZ więzi gwarancyjnej — odpowiada z
+ŁAGODNIEJSZEGO art. 162
+
+Checklist praktyczny:
+□ Czy sytuacja OBIEKTYWNIE osiągała próg "ciężkiego uszczerbku" (art.
+  156 §1) — jeśli NIE, brak obowiązku z art. 162 w OGÓLE
+□ Czy klient MÓGŁ pomóc BEZ narażenia SIEBIE lub INNYCH — kluczowa
+  przesłanka WYŁĄCZAJĄCA odpowiedzialność
+□ Czy pomoc WYMAGAŁA zabiegu LEKARSKIEGO (poza możliwościami LAIKA) —
+  kontratyp z §2
+□ Czy NA MIEJSCU była już OBECNA osoba/instytucja POWOŁANA do
+  udzielenia pomocy (ratownik, lekarz, służby) — kontratyp z §2
+□ Czy klienta ŁĄCZYŁA z poszkodowanym więź GWARANCYJNA (lekarz-
+  pacjent, rodzic-dziecko, opiekun-podopieczny) — jeśli TAK, sprawdź
+  ZAMIAST tego SUROWSZY art. 160 §2, NIE łagodniejszy art. 162
+□ PRAKTYCZNA rekomendacja dla ŚWIADKA w razie wątpliwości: MINIMUM to
+  ZADZWONIENIE pod 112 — TO SAMO w sobie zwykle WYPEŁNIA obowiązek
+  "udzielenia pomocy" bez narażania się, NAWET bez fizycznej interwencji
+```
+
+---
+
 ## 3. TABELA SZYBKIEGO ODCZYTU
 
 | Typ | Przepis | Zagrożenie | Tryb |

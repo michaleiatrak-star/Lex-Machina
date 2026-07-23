@@ -52,6 +52,14 @@ SŁUŻBY MUNDUROWE:
                legitymowanie, zatrzymanie, przeszukanie, środki przymusu,
                skargi, dyscyplina, odpowiedzialność SP; ustawa o śpbp Dz.U. 2023 poz. 202)
   [✓] OK    mod-ustawa-straz-graniczna
+              (2026-07-21: dodano kontrolę legalności zatrudnienia/
+               pobytu cudzoziemców [SG działa RÓWNOLEGLE z PIP],
+               tryb kontroli za zawiadomieniem [7-30 dni, identyczny
+               mechanizm jak ogólne Prawo przedsiębiorców], sprzeciw
+               wobec czynności kontrolnych, obowiązki zgłoszeniowe
+               pracodawcy, dobrowolne zgłoszenie się cudzoziemca do SG.
+               Dotąd 195 linii czystego szkieletu proceduralnego bez
+               tej treści. Odpowiedź na pytanie użytkownika)
               (Dz.U. 2024 poz. 1552 ze zm.: Dz.U. 2025 poz. 1366;
                kontrola graniczna, detencja cudzoziemca, zobowiązanie do powrotu,
                odmowa wjazdu, push-back, skargi, dyscyplina)

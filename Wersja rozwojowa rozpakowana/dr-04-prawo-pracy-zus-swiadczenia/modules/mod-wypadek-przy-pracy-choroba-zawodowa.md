@@ -38,6 +38,9 @@ są w jednym, bardziej szczegółowym miejscu:
 ```
 □ Data i miejsce wypadku?
 □ Czy wypadek zgłoszono pracodawcy (art. 234 §1 KP — obowiązek niezwłocznie)?
+□ ⭐ Czy wypadek jest CIĘŻKI/ŚMIERTELNY/ZBIOROWY — jeśli TAK, sprawdź
+  czy pracodawca ZAWIADOMIŁ okręgowego inspektora PRACY i PROKURATORA
+  (art. 234 §2 KP, patrz sekcja "ZAWIADOMIENIE PIP I PROKURATORA" niżej)
 □ Czy sporządzono protokół powypadkowy (art. 234 §1 KP — 14 dni)?
 □ Czy pracownik podpisał/zakwestionował protokół?
   → Zakwestionowanie: złożyć uwagi na piśmie, wnioskować o uzupełnienie
@@ -100,7 +103,60 @@ web_search: "wypadek przy pracy protokół powypadkowy BHP rozporządzenie wzór
 
 ---
 
+## ⭐⭐ ZAWIADOMIENIE PIP I PROKURATORA — WYPADEK CIĘŻKI/ŚMIERTELNY/ZBIOROWY (art. 234 §2 KP) — dodane 2026-07-21
+
+> Odrębny, DODATKOWY obowiązek — poza zwykłym zgłoszeniem pracodawcy
+> (art. 234 §1, patrz INTAKE wyżej) i poza sporządzeniem protokołu
+> powypadkowego.
+
+```
+□ OBOWIĄZEK: pracodawca MUSI NIEZWŁOCZNIE zawiadomić WŁAŚCIWEGO
+  OKRĘGOWEGO INSPEKTORA PRACY i PROKURATORA o wypadku ŚMIERTELNYM,
+  CIĘŻKIM lub ZBIOROWYM, oraz o KAŻDYM INNYM wypadku, KTÓRY wywołał
+  TAKIE skutki, mającym związek z pracą, JEŻELI może być uznany za
+  wypadek przy pracy
+□ ⭐ MOMENT liczenia "niezwłoczności" — sporny w doktrynie, ALE
+  PRZEWAŻAJĄCE stanowisko: termin liczy się NIE od SAMEGO zdarzenia,
+  lecz od CHWILI, gdy pracodawca UZNAJE (kwalifikuje wstępnie), że
+  zdarzenie NOSI cechy wypadku ciężkiego/śmiertelnego/zbiorowego — DO
+  TEGO momentu, dopóki istnieją WĄTPLIWOŚCI co do kwalifikacji,
+  pracodawca NIE MA jeszcze obowiązku zawiadomienia
+□ NIEZALEŻNIE od tego, czy POLICJA, załoga POGOTOWIA, personel
+  SZPITALA/przychodni JUŻ powiadomiły PIP o zdarzeniu — pracodawca MA
+  WŁASNY, ODRĘBNY obowiązek zawiadomienia (obowiązki się NIE
+  WYKLUCZAJĄ ani nie zastępują)
+□ ⭐ SZCZEGÓLNA KONSEKWENCJA na miejscu zdarzenia: zgodę na
+  URUCHOMIENIE maszyn LUB dokonanie ZMIAN w miejscu wypadku wyraża
+  pracodawca PO UZGODNIENIU z WŁAŚCIWYM inspektorem pracy I
+  prokuratorem — miejsce wypadku NIE MOŻE być dowolnie zmieniane do
+  czasu tego uzgodnienia
+
+⭐ SANKCJA za NIEZAWIADOMIENIE:
+  □ Jeśli zdarzenie od POCZĄTKU WYPEŁNIAŁO przesłanki ciężkiego/
+    śmiertelnego/zbiorowego wypadku, a pracodawca NIE zawiadomił —
+    WYKROCZENIE z art. 283 §2 pkt 6 KP
+  □ ⭐ JEŚLI dopiero PÓŹNIEJ ujawni się (np. po zatwierdzeniu protokołu
+    powypadkowego, LUB nawet po prawomocnym wyroku sądu ustalającym
+    NA NOWO treść protokołu), że zdarzenie BYŁO w istocie wypadkiem
+    ciężkim/śmiertelnym/zbiorowym — MOŻLIWA odpowiedzialność ZA
+    PÓŹNIEJSZE, ale zasadniczo BEZ winy za pierwotny brak zawiadomienia
+    (skoro w momencie zdarzenia BRAK było przesłanek do jego
+    rozpoznania jako takiego)
+
+Checklist praktyczny:
+□ Czy KWALIFIKACJA wypadku (ciężki/śmiertelny/zbiorowy) BYŁA możliwa
+  do ustalenia OD RAZU, czy ujawniła się DOPIERO później — wpływa na
+  ocenę, CZY doszło do NARUSZENIA obowiązku zawiadomienia
+□ Czy zawiadomiono ZARÓWNO okręgowego inspektora pracy, JAK I
+  prokuratora — OBA podmioty są wymagane, nie wystarczy jeden
+□ Czy MIEJSCE wypadku było ZABEZPIECZONE do czasu uzgodnienia z
+  inspektorem/prokuratorem możliwości uruchomienia maszyn/zmian
+□ Czy klient (pracodawca) BRONI się argumentem "Policja/pogotowie już
+  zgłosiło" — WYJAŚNIJ, że to NIE ZWALNIA z WŁASNEGO obowiązku
+```
+
 ## ŁĄCZ Z
+
 - `shared/definicje/DEF-PRACA.md` — definicja wypadku przy pracy (4 elementy),
   H.6 zasiłki/świadczenia ZUS
 - `mod-KP-prawo-pracy.md` — gdy wypadek jest podstawą roszczeń pracowniczych

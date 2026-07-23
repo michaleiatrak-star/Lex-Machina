@@ -42,11 +42,17 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Zdrowie, farmacja, żywność, rolnictwo — pojęcia dziedzinowe (świadczenie zdrowotne, podmiot leczniczy, produkt leczniczy) zdefiniowane wprost w aktach sektorowych (ustawa o działalności leczniczej, Prawo farmaceutyczne) i pokryte w modułach DR-10. Żaden plik shared/definicje/ nie obejmuje tej dziedziny.
-## Moduły (25 łącznie — ✓ 25 OK, ☐ 0 STUB)
+## Moduły (27 łącznie — ✓ 27 OK, ☐ 0 STUB)
 
 ```
 FARMACJA:
   [✓] OK    mod-PrFarm-prawo-farmaceutyczne
+  [✓] OK    mod-rzadkie-choroby-genetyczne-plan-leki-sieroce
+              (dodany 2026-07-20: Plan dla Chorób Rzadkich [6 obszarów,
+               OECR, rejestr, paszport pacjenta], leki sieroce
+               [mechanizm refundacji, 36+12 nowych terapii 2024-2025,
+               proponowana nowelizacja]. Odpowiedź na pytanie
+               użytkownika)
               (scalony kanceryjski: framework + intake + GIF/WIF + URPL + refundacja +
                reklama; t.j. Dz.U. 2026 poz. 612; alerty: TSUE C-200/2024, projekt UDER114)
   [✓] OK    mod-PrFarm-szczegolowy
@@ -68,6 +74,13 @@ FARMACJA:
 
 MEDYCYNA I PRAWA PACJENTA:
   [✓] OK    mod-ustawa-prawa-pacjenta-framework
+  [✓] OK    mod-rzecznik-praw-pacjenta-RPP
+              (dodany 2026-07-21: pełna treść o RPP [wszczęcie z
+               wniosku/z urzędu, praktyki naruszające zbiorowe prawa
+               pacjentów, uprawnienie do kontroli BEZ uprzedzenia, trzy
+               rozstrzygnięcia z terminem 30 dni na odpowiedź adresata]
+               — dotąd RPP był jednym słowem na liście. Odpowiedź na
+               pytanie użytkownika)
               (prawa pacjenta RPP + Dz.U. 2024 poz. 581, błąd medyczny, FKZM, zgoda na leczenie,
                dokumentacja medyczna, odpowiedzialność cywilna szpitala/lekarza;
                scalony z: mod-ustawa-RPP-prawa-pacjenta)

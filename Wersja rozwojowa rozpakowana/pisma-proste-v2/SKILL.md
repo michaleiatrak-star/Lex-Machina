@@ -1,26 +1,17 @@
 ---
 name: pisma-proste-v2
-version: 2.1
+version: 2.4
 type: executive-pisma
 status: production
 description: |
-  Skill do szybkiego redagowania pism procesowych o NISKIM stopniu złożoności
-  z JEDNYM wątkiem prawnym. Stosuj gdy użytkownik prosi o:
-  - wniosek o nadanie klauzuli wykonalności (art. 781–788 KPC)
-  - sprzeciw od nakazu zapłaty (art. 503 KPC)
-  - zarzuty od nakazu zapłaty (art. 493 KPC)
-  - wniosek o wszczęcie egzekucji do komornika
-  - wniosek o zabezpieczenie roszczenia (art. 730 KPC)
-  - wniosek o zwolnienie od kosztów sądowych (art. 102 §1 KSCU)
-  - odpowiedź na zawezwanie do próby ugodowej
-  - wniosek o przywrócenie terminu (art. 168 KPC)
-  - wniosek o wgląd do akt (art. 9 KPC)
-  - pismo z wezwaniem do zapłaty (przedsądowe)
-  - wniosek o uzasadnienie wyroku (art. 328¹ KPC)
-  - wniosek o doręczenie przez komornika (art. 139¹ KPC)
-  - sprzeciw od orzeczenia referendarza sądowego
-  - NIE stosuj do pism wielowątkowych (apelacje, pozwy złożone,
-    pisma przygotowawcze) — użyj pisma-procesowe-v3
+  Redagowanie pism procesowych o niskim stopniu złożoności, jeden wątek
+  prawny. Stosuj dla: klauzuli wykonalności, sprzeciwu/zarzutów od
+  nakazu zapłaty, wszczęcia egzekucji, zabezpieczenia roszczenia,
+  zwolnienia od kosztów, zawezwania do ugody, przywrócenia terminu,
+  wglądu do akt, wezwania do zapłaty, uzasadnienia wyroku, doręczenia
+  przez komornika, sprzeciwu od referendarza, interpretacji ZUS/GIP/
+  podatkowej, skargi do UODO. NIE stosuj do pism wielowątkowych
+  (apelacje, pozwy złożone) — użyj pisma-procesowe-v3.
 compatibility:
   tools:
     - web_search
@@ -104,6 +95,10 @@ Nie cytuj przepisów ani orzeczeń z pamięci bez weryfikacji online.
 | **SPG — Zabezpieczenie** | `references/SPF-SPG.md` → sekcja SPG | Wniosek o zabezpieczenie roszczenia |
 | **SPH — Inne wnioski** | `references/SPH-inne.md` | Zwolnienie od kosztów, przywrócenie terminu, wgląd do akt, doręczenie przez komornika, sprzeciw od orzeczenia referendarza |
 | **SPI — Zawezwanie** | `references/SPI-zawezwanie.md` | Odpowiedź na zawezwanie do próby ugodowej |
+| **SPJ — Interpretacja ZUS** | `references/SPJ-interpretacja-zus.md` | Wniosek o interpretację indywidualną ZUS (art. 34 Prawa przedsiębiorców — obowiązek składkowy) |
+| **SPK — Skarga do UODO** | `references/SPK-skarga-do-UODO.md` | Skarga do Prezesa UODO na administratora naruszającego RODO (art. 77 RODO, po wyczerpaniu ścieżki bezpośredniej) |
+| **SPL — Interpretacja GIP** | `references/SPL-interpretacja-GIP.md` | Wniosek o interpretację indywidualną Głównego Inspektora Pracy (art. 14b ustawy o PIP — ryzyko przekwalifikowania B2B/zlecenia na stosunek pracy) |
+| **SPM — Interpretacja podatkowa** | `references/SPM-interpretacja-podatkowa.md` | Wniosek o interpretację indywidualną podatkową do Dyrektora KIS (art. 14b-14p Ordynacji podatkowej) |
 
 ---
 

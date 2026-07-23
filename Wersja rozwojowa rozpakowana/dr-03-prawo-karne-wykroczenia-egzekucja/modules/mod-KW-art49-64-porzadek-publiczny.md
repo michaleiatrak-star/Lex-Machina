@@ -245,6 +245,35 @@ START: Czy zachowanie dotyczy hałasu/krzyku/alarmu/zgorszenia w miejscu
 
 ---
 
+## ⚠️ ART. 82 KW — PUNKT STARTOWY, ODNOTOWANA NOWELIZACJA (dodane 2026-07-20)
+
+```
+□ Art. 82 KW (Rozdział VII — wykroczenia przeciwko bezpieczeństwu
+  osób i mienia, ⚠️ dokładna materia — prawdopodobnie bezpieczeństwo
+  POŻAROWE/przeciwpożarowe — NIE potwierdzona w pełni w tej sesji,
+  BRAK dotąd własnej treści w tym module) — ZNOWELIZOWANY ustawą z
+  7.11.2025 r. (Dz.U. 2025 poz. 1814, razem z Dz.U. 2025 poz. 1818)
+□ ZMIANA: w §1, 2, 4 i 5 USUNIĘTO "karę nagany" jako opcję — sankcja
+  ZAWĘŻONA do "aresztu ALBO grzywny" (usunięto trzecią, najłagodniejszą
+  opcję); w §3 usunięto naganę z szerszego katalogu "aresztu,
+  ograniczenia wolności ALBO grzywny"
+□ ZMIANA TOWARZYSZĄCA w KPW: art. 96 §1ad — mandat w postępowaniu
+  mandatowym dla wykroczeń z art. 82 §1-3/4/5 oraz CAŁEGO Rozdziału XI
+  KW MOŻE wynosić DO 5000 ZŁ (podwyższenie z niższego, wcześniejszego
+  limitu)
+□ ZMIANA w art. 24 §1a KW: rozszerzono krąg wykroczeń "kwalifikowanych"
+  (z podwyższonym mandatem) o czyny z art. 82 §1-3/4/5
+
+⚠️ REKOMENDACJA: ten przepis WYMAGA odrębnej, pełnej sesji budowy
+treści merytorycznej (dokładna materia art. 82, wszystkie paragrafy,
+przesłanki) — ZAKRES tej aktualizacji ograniczono do ODNOTOWANIA
+zmiany legislacyjnej z 2025 r., zgodnie z poleceniem "sprawdź
+aktualizacje i wprowadź je" — NIE jest to pełne opracowanie przepisu,
+tylko właściwe uwzględnienie NAJNOWSZEJ zmiany w stanie prawnym.
+```
+
+---
+
 ## CHANGELOG
 
 **1.1 (2026-07-17):** Druga weryfikacja na wyraźne żądanie użytkownika.

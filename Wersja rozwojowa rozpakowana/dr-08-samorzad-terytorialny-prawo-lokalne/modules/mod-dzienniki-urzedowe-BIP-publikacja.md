@@ -34,6 +34,69 @@ WYŁĄCZNIE w BIP (akty wewnętrzne, nieobowiązujące powszechnie):
 Portal: https://dzienniki.gov.pl — portal wszystkich dzienników urzędowych woj.
 ```
 
+### ⭐⭐ ŹRÓDŁA — PEŁNA LISTA 16 WOJEWÓDZTW (dodane 2026-07-21)
+
+> Odpowiedź na pytanie użytkownika czy moduł wskazuje wszystkie 16
+> województw — dotąd był TYLKO ogólny portal zbiorczy, bez
+> wyszczególnienia poszczególnych źródeł per województwo.
+
+```
+⭐ ROZRÓŻNIENIE DWÓCH RODZAJÓW ŹRÓDEŁ (NIE MYLIĆ):
+  1) DZIENNIK URZĘDOWY WOJEWÓDZTWA (oficjalna, PRAWNIE WIĄŻĄCA
+     publikacja aktów prawa miejscowego, w tym uchwał sejmiku) —
+     WSZYSTKIE 16 dostępne CENTRALNIE przez jeden portal:
+     https://dzienniki.gov.pl (wybierz województwo z listy) — TO
+     JEST podstawowe, MIARODAJNE źródło dla ustalenia treści i daty
+     wejścia w życie uchwały
+  2) BIP URZĘDU MARSZAŁKOWSKIEGO / strona sejmiku danego województwa —
+     źródło POMOCNICZE (projekty uchwał PRZED sesją, porządek obrad,
+     protokoły, transmisje, uchwały o charakterze WEWNĘTRZNYM
+     niepodlegające obowiązkowi publikacji w dzienniku urzędowym) —
+     NIE zastępuje dziennika urzędowego jako źródła OFICJALNEGO tekstu
+
+TABELA — BIP Urzędu Marszałkowskiego / Sejmiku dla KAŻDEGO z 16
+województw (zweryfikowane online 2026-07-21, WSZYSTKIE 16
+POTWIERDZONE — Łódzkie potwierdzone bezpośrednio przez użytkownika
+2026-07-21 po wcześniejszym błędnym trafieniu na stronę wojewody;
+⚠️ sprawdź aktualność adresu przy każdym użyciu — strony bywają
+migrowane):
+
+⭐ PRAKTYCZNA OBSERWACJA (na przykładzie bip.lodzkie.pl/uchwaly): wiele
+BIP marszałkowskich prowadzi CZYTELNY rejestr uchwał sejmiku z
+OZNACZENIEM przy każdej pozycji, czy jest to "akt prawa miejscowego"
+(podlegający obowiązkowi publikacji w dzienniku urzędowym) czy zwykły
+"link" (uchwała WEWNĘTRZNA, np. o powołaniu składu komisji, rozpatrzeniu
+skargi) — TO OZNACZENIE jest PRAKTYCZNIE bardzo pomocne przy szybkim
+ustaleniu, czy DANA uchwała w ogóle WYMAGA sprawdzenia w dzienniku
+urzędowym, czy wystarczy sama strona BIP jako źródło.
+
+| Województwo | BIP Urzędu Marszałkowskiego / Sejmiku |
+|---|---|
+| Dolnośląskie | bip.dolnyslask.pl |
+| Kujawsko-Pomorskie | bip.kujawsko-pomorskie.pl |
+| Lubelskie | umwl.bip.lubelskie.pl |
+| Lubuskie | bip.lubuskie.pl |
+| Łódzkie | bip.lodzkie.pl (POTWIERDZONE 2026-07-21 — sekcja /uchwaly zawiera pełny rejestr uchwał sejmiku z linkami do plików PDF i oznaczeniem "akt prawa miejscowego" przy uchwałach podlegających publikacji w dzienniku urzędowym) |
+| Małopolskie | bip.malopolska.pl/umwm |
+| Mazowieckie | bip.mazovia.pl |
+| Opolskie | bip.opolskie.pl |
+| Podkarpackie | bip.podkarpackie.pl |
+| Podlaskie | bip.wrotapodlasia.pl |
+| Pomorskie | bip.pomorskie.eu |
+| Śląskie | bip.slaskie.pl |
+| Świętokrzyskie | bip.sejmik.kielce.pl |
+| Warmińsko-Mazurskie | bip.warmia.mazury.pl |
+| Wielkopolskie | bip.umww.pl |
+| Zachodniopomorskie | bip.wzp.pl |
+
+⭐ PRAKTYCZNA REKOMENDACJA: przy poszukiwaniu KONKRETNEJ uchwały
+sejmiku — ZACZNIJ od dzienniki.gov.pl (wybór województwa + rok +
+numer pozycji, jeśli znany) jako źródła MIARODAJNEGO; BIP marszałkowskie
+z tabeli wyżej sprawdź DODATKOWO, gdy potrzebujesz projektu uchwały
+SPRZED sesji, uzasadnienia, protokołu głosowania lub gdy dziennik
+urzędowy jeszcze NIE opublikował aktu (opóźnienie publikacyjne).
+```
+
 ### Wejście w życie
 
 ```

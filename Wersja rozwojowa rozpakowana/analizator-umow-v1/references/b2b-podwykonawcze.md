@@ -40,6 +40,24 @@ WYNIK TESTU:
               → ryzyko: PIP/ZUS może zakwalifikować jako UoP
               → skutki: zaległe składki ZUS za okres nieprzedawniony + odsetki + sankcje; termin przedawnienia weryfikuj w ustawie o SUS
               → podstawa: art. 22 §1¹ KP + art. 8 ust. 2a ustawy o SUS
+
+⭐⭐ AKTUALIZACJA STAWKI TESTU (od 08.07.2026, Dz.U. 2026 poz. 473) —
+dodane 2026-07-20: wynik ALERT KRYTYCZNY (5-8 cech) NIE OZNACZA już
+WYŁĄCZNIE ryzyka sądowego. Od tej daty okręgowy inspektor pracy MOŻE,
+W DRODZE DECYZJI ADMINISTRACYJNEJ (nowy art. 10 ust. 1 pkt 7a ustawy
+o PIP — pełny opis mechanizmu, w tym niuanse temporalne i zakaz
+retorsji: `dr-04/modules/mod-ustawa-PIP-inspekcja-pracy.md` sekcja 6.2,
+NIE duplikuj tutaj), SAMODZIELNIE stwierdzić istnienie stosunku pracy —
+BEZ POŚREDNICTWA sądu. Kluczowe dla OCENY RYZYKA w tym module:
+  □ Decyzja jest NATYCHMIAST WYKONALNA "na przyszłość" (składki/podatki
+    od dnia decyzji) — odwołanie do sądu pracy NIE WSTRZYMUJE tego skutku
+  □ WARUNKIEM wydania decyzji jest wcześniejsze NIEWYKONANIE polecenia
+    inspektora usunięcia nieprawidłowości — czyli podmiot DOSTAJE
+    najpierw szansę na dobrowolną korektę (patrz G.1B niżej — jak
+    faktycznie skorygować, nie deklaratywnie)
+  □ TO OZNACZA: raport z tego testu, przy wyniku 5-8 cech, MUSI teraz
+    informować klienta o RYZYKU ADMINISTRACYJNYM (szybszym, bez etapu
+    sądowego) obok dotychczasowego ryzyka sądowego/ZUS-owego
 ```
 
 **Weryfikacja online obowiązkowa:**
@@ -108,6 +126,92 @@ PRECYZJA JĘZYKOWA (dotyczy też trybu LAIK):
   wyjaśnienia w prostym języku, dopasowane do konkretnej branży/rodzaju
   działalności z dokumentu — nie generyczny szablon niezależny od stanu
   faktycznego sprawy
+```
+
+---
+
+## G.1C ⭐ KONKRETNE WSKAZÓWKI REDAKCYJNE — CO ZMIENIAĆ §-PO-§ (dodane 2026-07-20)
+
+> Uzupełnienie G.1B — TAM wyjaśniono, DLACZEGO samo oświadczenie nie
+> działa; TU konkretne, sprawdzone online wskazówki, JAK faktycznie
+> skorygować poszczególne klauzule, z potwierdzonym orzecznictwem SN.
+
+### Orzecznictwo potwierdzające kryteria testu G.1 (zweryfikowane 2026-07-20)
+
+```
+□ SN, postanowienie z 13.05.2020, I PK 121/19: podporządkowania NIE
+  MOŻNA utożsamiać ze STAŁYM NADZOREM nad SPOSOBEM/TEMPEM wykonywania
+  czynności — WYSTARCZY wskazanie ZADANIA i TERMINU, a następnie
+  kontrola JAKOŚCI i TERMINOWOŚCI already wykonanej pracy — TO NIE
+  JEST jeszcze podporządkowanie pracownicze. Kluczowe dla cechy [B]/[H]:
+  sama kontrola REZULTATU (nie SPOSOBU) nie przesądza o stosunku pracy.
+□ SN, wyrok z 10.05.2018, I PK 60/17: JEDNOSTRONNE wyznaczanie MIEJSCA
+  wykonywania pracy ORAZ GODZIN — wskazuje na cechę CHARAKTERYSTYCZNĄ
+  dla umowy o pracę (cecha [B] testu G.1)
+□ SN, wyrok z 4.12.1997, I PKN 394/97: art. 22 §1¹ KP NIE MA
+  zastosowania, gdy w łączącym strony stosunku BRAK podstawowych
+  elementów (osobiste świadczenie + podporządkowanie organizacyjne/
+  służbowe) — POTWIERDZA że test wymaga ŁĄCZNEGO wystąpienia cech,
+  nie pojedynczego elementu
+□ SN, wyrok z 28.10.1998, I PKN 416/98: BRAK bezwzględnego obowiązku
+  OSOBISTEGO świadczenia (czyli dopuszczenie SUBSTYTUTA) WYKLUCZA
+  możliwość zakwalifikowania jako umowa o pracę — POTWIERDZA znaczenie
+  cechy [A] jako jednej z NAJSILNIEJSZYCH linii obrony
+```
+
+### Konkretne zmiany redakcyjne wg cechy testu G.1
+
+```
+CECHA [A] OSOBISTE WYKONANIE → NAPRAW przez:
+  □ Wprost DOPUŚĆ możliwość wykonania czynności przez OSOBĘ TRZECIĄ
+    (substytuta), z określeniem ODPOWIEDZIALNOŚCI zleceniobiorcy za
+    jej działania — to JEDNA Z NAJSILNIEJSZYCH klauzul obronnych
+    (I PKN 416/98) — ALE musi być REALNA, nie tylko "na papierze"
+    (patrz G.1B — sprzeczność z faktycznym wykonywaniem demaskuje umowę)
+
+CECHA [B] PODPORZĄDKOWANIE (miejsce/godziny/sposób) → NAPRAW przez:
+  □ UNIKAJ określania SZTYWNEGO miejsca wykonywania czynności, chyba
+    że jest to OBIEKTYWNIE konieczne dla natury usługi (np. obsługa
+    konkretnej maszyny w konkretnej lokalizacji)
+  □ Opisuj REZULTAT lub CZYNNOŚĆ do wykonania, NIE "bycie do
+    dyspozycji" zlecającego
+  □ NIE FORMUŁUJ zapisów o BIEŻĄCYM nadzorze typowym dla relacji
+    przełożony-pracownik — kontrola MOŻE dotyczyć TYLKO jakości i
+    terminowości REZULTATU (zgodnie z I PK 121/19), NIE sposobu/tempa
+    wykonywania
+  □ Rozliczaj czynności BEZ odwoływania się do pojęcia "CZASU PRACY"
+    ani sztywnych GRAFIKÓW — jeśli wymagane jest potwierdzanie liczby
+    godzin (np. dla minimalnej stawki godzinowej przy zleceniu, art.
+    8b ustawy o minimalnym wynagrodzeniu za pracę), ustal ODRĘBNY,
+    UPROSZCZONY sposób potwierdzania, INNY niż ewidencja czasu pracy
+    pracowników
+
+CECHA [D]/[G] RYZYKO GOSPODARCZE / STAŁA KWOTA → NAPRAW przez:
+  □ Wynagrodzenie opisz jako zależne od CZYNNOŚCI/USŁUGI/REZULTATU
+    (nie "etat miesięczny" sformułowany jako stała pensja bez związku
+    z wykonaną pracą)
+  □ Rozważ elementy RZECZYWISTEGO ryzyka ekonomicznego wykonawcy
+    (własne narzędzia, własna odpowiedzialność za wady, możliwość
+    świadczenia dla innych podmiotów)
+
+CECHA [F] WYŁĄCZNOŚĆ → NAPRAW przez:
+  □ UNIKAJ całkowitego zakazu świadczenia usług innym podmiotom BEZ
+    WYJĄTKÓW — jeśli ograniczenie jest uzasadnione (np. konkurencja
+    bezpośrednia), OGRANICZ je do KONKRETNYCH, wąsko określonych
+    podmiotów/branż, nie do "wszelkiej innej działalności zarobkowej"
+
+⭐ SZCZEGÓLNY PRZYPADEK — UMOWA ZLECENIA Z WŁASNYM PRACODAWCĄ:
+Zawarcie DODATKOWEJ umowy cywilnoprawnej (zlecenie) z tym SAMYM
+podmiotem, u którego dana osoba JEST już zatrudniona na umowę o pracę,
+NIE JEST zakazane SAMO W SOBIE — ALE jeśli dodatkowa umowa obejmuje
+TE SAME obowiązki, wykonywane pod TYM SAMYM kierownictwem i wg TEJ
+SAMEJ organizacji pracy — istnieją PODSTAWY do zakwestionowania jako
+PRÓBY OBEJŚCIA przepisów o CZASIE PRACY/nadgodzinach (nie tylko
+przepisów o stosunku pracy jako takim) — SANKCJA: grzywna od 1000 zł
+do 30 000 zł (⚠️ zweryfikuj czy kwoty te zostały już zaktualizowane
+zgodnie z podwyższonymi widełkami z reformy 2026, patrz odesłanie
+wyżej do sekcji 6.3 mod-ustawa-PIP-inspekcja-pracy.md — MOŻLIWA
+NIESPÓJNOŚĆ między źródłami co do aktualnych kwot, zweryfikuj na ISAP).
 ```
 
 ---

@@ -68,7 +68,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (27 łącznie — ✓ 27 OK, ☐ 0 STUB)
+## Moduły (31 łącznie — ✓ 31 OK, ☐ 0 STUB)
 
 ```
   [✓] OK    mod-KC-cywilne-zobowiazania-odpowiedzialnosc
@@ -111,6 +111,11 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
                odrębne od zaprzeczenia, + zapowiedziana reforma 2026
                domniemania z art. 62] — w pliku mod-KRO-rodzinne.md)
   [✓] OK    mod-KRO-przysposobienie-adopcja-miedzynarodowa
+  [✓] OK    mod-kaucja-najem-lokalu
+              (dodany 2026-07-19: kaucja przy najmie [limit 12-krotność
+               zwykły/6-krotność okazjonalny, termin zwrotu 1 miesiąc,
+               MECHANIZM WALORYZACJI przy wzroście czynszu — często
+               pomijany]. Odpowiedź na pytanie użytkownika o "kaucję")
               (nadrobienie zaległości w SKILL.md — moduł już istniał:
                przysposobienie krajowe [3 rodzaje: pełne/niepełne/
                całkowite], przysposobienie międzynarodowe wg Konwencji
@@ -139,6 +144,30 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
                +OZSS rozszerzone, +świadkowie w sprawach rozwodowych —
                pointer do shared/MOD-ATAK-NA-SWIADKA.md, bez duplikacji)
   [✓] OK    mod-KSH-spolki-handlowe
+              (rozbudowany 2026-07-19: KONTROLA PRZEDSIĘBIORCY [Rozdział
+               5 Prawa przedsiębiorców — zawiadomienie 7-30 dni, sprzeciw
+               3 dni robocze, zakaz podwójnej kontroli] + REGLAMENTACJA
+               DZIAŁALNOŚCI [koncesja/zezwolenie/wpis do rejestru
+               regulowanego — z kluczową różnicą: koncesja jest UZNANIOWA,
+               pozostałe dwie NIE])
+  [✓] OK    mod-reklama-wobec-nieletnich
+              (nadrobienie zaległości w SKILL.md — moduł już istniał)
+  [✓] OK    mod-prawo-wekslowe-czekowe
+              (dodany 2026-07-19: struktura Prawa wekslowego/czekowego
+               1936, elementy konieczne weksla własnego/trasowanego,
+               weksel in blanco i deklaracja wekslowa [ciężar dowodu na
+               dłużniku], indos, awal, protest, TRZY różne terminy
+               przedawnienia wg adresata roszczenia, różnice weksel/czek.
+               Odpowiedź na audyt pokrycia prawa gospodarczego)
+  [✓] OK    mod-wekslowe-kontrola-przedsiebiorcy-koncesje
+              (dodany 2026-07-19: Prawo wekslowe/czekowe 1936
+               [essentialia negotii, indos, aval, protest, weksel in
+               blanco], kontrola przedsiębiorcy [Rozdział 5 Prawa
+               przedsiębiorców — terminy 7-30 dni, katalog wyjątków,
+               książka kontroli, sprzeciw], działalność regulowana/
+               koncesjonowana [3 poziomy reglamentacji, zasada
+               subsydiarności koncesji]. Odpowiedź na audyt pokrycia
+               prawa gospodarczego)
   [✓] OK    mod-KSH-wrogie-przejecie-obrona-bialy-rycerz
               (dodany 2026-07-18: brak definicji ustawowej "wrogiego
                przejęcia" — termin ekonomiczny; techniki obrony

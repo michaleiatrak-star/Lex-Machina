@@ -1,10 +1,10 @@
 ---
 name: analizator-umow-v1
-version: 1.13
+version: 1.14
 type: executive-umowy
 status: production
 description: |
-  Analizator Umów v1 (v1.10) — analiza, redakcja i negocjacje umów.
+  Analizator Umów v1 (v1.14) — analiza, redakcja i negocjacje umów.
   PRIMARY: B2B (G), umowa o pracę (H), zakaz konkurencji (I).
   DOMAIN: J0 routing, J1 najem, J2 nieruchomości/UUDE, J3 dystrybucja,
   J4 finansowanie, J5 wykonawcze, J6 IT/SaaS/agile, J7 PZP/FIDIC,

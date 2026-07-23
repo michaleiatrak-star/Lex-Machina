@@ -266,6 +266,154 @@ Podstawa: Prawo przedsiębiorców (Dz.U. 2025 poz. 1480 t.j.)
   → patrz DR-02/mod-ustawa-prawa-konsumenta i analizator-umow-v1/J8)
 ```
 
+### 1a. ⭐ KONTROLA PRZEDSIĘBIORCY (Rozdział 5 Prawa przedsiębiorców, art. 45-65) — dodane 2026-07-19
+
+> Odpowiedź na audyt pokrycia prawa gospodarczego — dotąd całkowita
+> luka, mimo praktycznego znaczenia dla KAŻDEGO przedsiębiorcy.
+
+```
+□ ZASADA: organ kontroli ZAWIADAMIA przedsiębiorcę o ZAMIARZE
+  wszczęcia kontroli PRZED jej rozpoczęciem
+□ TERMIN wszczęcia: NIE WCZEŚNIEJ niż po 7 DNIACH i NIE PÓŹNIEJ niż
+  przed upływem 30 DNI od doręczenia zawiadomienia
+  → jeśli kontrola NIE zostanie wszczęta w 30 dni — WYMAGANE ponowne
+    zawiadomienie
+  → NA WNIOSEK przedsiębiorcy — kontrola MOŻE zacząć się PRZED
+    upływem 7 dni (skrócenie na korzyść przedsiębiorcy)
+□ TREŚĆ zawiadomienia: oznaczenie organu, data/miejsce, oznaczenie
+  przedsiębiorcy, zakres PRZEDMIOTOWY kontroli, WSTĘPNA lista
+  dokumentów/informacji oczekiwanych, (przy kontroli PLANOWEJ)
+  informacja o KATEGORII RYZYKA, podpis osoby upoważnionej
+
+WYJĄTKI od obowiązku zawiadomienia (kontrola BEZ uprzedzenia):
+  □ Podstawa: ratyfikowana umowa międzynarodowa lub bezpośrednio
+    stosowane prawo UE
+  □ Kontrola NIEZBĘDNA dla przeciwdziałania przestępstwu/wykroczeniu
+    (w tym skarbowemu) lub zabezpieczenia dowodów jego popełnienia
+  □ Kontrola uzasadniona BEZPOŚREDNIM zagrożeniem życia/zdrowia/środowiska
+  □ Brak możliwości SKUTECZNEGO doręczenia przedsiębiorcy (nieznany
+    adres, doręczanie bezskuteczne/utrudnione)
+  □ Czynności zw. z pobieraniem PRÓBEK, OGLĘDZINAMI (w tym pojazdów)
+    lub POMIARAMI — mogą być wykonane PRZED upływem 7 dni (ale
+    oględziny w tym trybie NIE MOGĄ dotyczyć TREŚCI dokumentów)
+
+⭐ ZAKAZ PODWÓJNEJ KONTROLI TYCH SAMYCH KWESTII: książka kontroli
+  pozwala organowi ustalić, czy tożsame czynności NIE BYŁY już
+  wcześniej sprawdzane — urzędnicy CO DO ZASADY nie mogą dwukrotnie
+  badać tych samych zagadnień (wyjątki w art. 58 ust. 2)
+
+⭐ SPRZECIW PRZEDSIĘBIORCY (art. 59) — środek obrony w TRAKCIE kontroli:
+  □ TERMIN: 3 DNI ROBOCZE od wszczęcia kontroli (lub od wystąpienia
+    przesłanki sprzeciwu) — WYMAGA UZASADNIENIA, wnosi się NA PIŚMIE
+  □ DOTYCZY: konkretnych czynności kontrolnych wykonywanych z
+    naruszeniem przepisów (odesłanie do konkretnych artykułów: 48, 49,
+    50 ust. 1 i 5, 51 ust. 1, 54 ust. 1, 55 ust. 1-2, 58)
+  □ NIEDOPUSZCZALNY, gdy czynność była NIEZBĘDNA dla przeciwdziałania
+    przestępstwu/wykroczeniu (w tym skarbowemu) lub zabezpieczenia
+    dowodów
+  □ SKUTEK wniesienia: WSTRZYMANIE czynności kontrolnych organu (od
+    doręczenia zawiadomienia o sprzeciwie) ORAZ wstrzymanie BIEGU
+    CZASU TRWANIA kontroli (do zakończenia postępowania ws. sprzeciwu)
+  □ Organ MA 3 DNI ROBOCZE na rozpatrzenie — wydaje POSTANOWIENIE:
+    odstąpienie od czynności ALBO kontynuowanie
+  □ NIEROZPATRZENIE w terminie = RÓWNOZNACZNE z postanowieniem o
+    ODSTĄPIENIU od czynności (milczące rozstrzygnięcie NA KORZYŚĆ
+    przedsiębiorcy — analogia do milczącego załatwienia sprawy KPA)
+  □ Na postanowienie o KONTYNUOWANIU — ZAŻALENIE w 3 dni, rozpatrywane
+    w 7 dni — sprzeciw i zażalenie rozpatruje się WG PRZEPISÓW KPA
+  □ Mimo wniesienia sprzeciwu — organ MOŻE, POSTANOWIENIEM, zabezpieczyć
+    DOWODY związane z przedmiotem kontroli na czas rozpatrywania
+    sprzeciwu (sprzeciw nie "zamraża" wszystkiego bezwzględnie)
+
+□ INNE ZASADY: czynności kontrolne w OBECNOŚCI przedsiębiorcy/osoby
+  upoważnionej; prowadzenie w sposób SPRAWNY i możliwie NIEZAKŁÓCAJĄCY
+  funkcjonowania firmy (jeśli przedsiębiorca WSKAŻE NA PIŚMIE istotne
+  zakłócenie — organ musi to UZASADNIĆ w protokole)
+□ ODSZKODOWANIE: przedsiębiorca, który poniósł SZKODĘ wskutek kontroli
+  przeprowadzonej Z NARUSZENIEM przepisów — MA roszczenie odszkodowawcze
+
+Checklist praktyczny:
+□ Czy zawiadomienie zawiera WSZYSTKIE wymagane elementy i zachowano
+  termin 7-30 dni?
+□ Czy zachodzi jeden z WYJĄTKÓW uzasadniających kontrolę bez
+  zawiadomienia — jeśli TAK, sprawdź czy w protokole podano
+  UZASADNIENIE braku zawiadomienia (wymóg obligatoryjny)
+□ Czy dana kwestia NIE BYŁA już wcześniej kontrolowana (książka kontroli)
+□ Czy warto wnieść SPRZECIW — pamiętaj o terminie 3 DNI ROBOCZYCH i
+  wymogu UZASADNIENIA
+□ Czy kontrola nadmiernie ZAKŁÓCA działalność — rozważ pisemne
+  zgłoszenie tego faktu organowi
+```
+
+### 1b. ⭐ REGLAMENTACJA DZIAŁALNOŚCI — KONCESJA, ZEZWOLENIE, WPIS DO REJESTRU DZIAŁALNOŚCI REGULOWANEJ (Rozdział 4 Prawa przedsiębiorców, art. 37-49) — dodane 2026-07-19
+
+```
+TRZY STOPNIE REGLAMENTACJI — OD NAJSUROWSZEGO DO NAJŁAGODNIEJSZEGO:
+
+1️⃣ KONCESJA — NAJBARDZIEJ RYGORYSTYCZNA forma
+   □ Dotyczy dziedzin o SZCZEGÓLNYM znaczeniu dla bezpieczeństwa
+     państwa/obywateli lub WAŻNEGO interesu publicznego
+   □ ZASADA SUBSYDIARNOŚCI (art. 37 ust. 1): koncesja wymagana
+     WYŁĄCZNIE, gdy działalności NIE MOŻNA wykonywać jako WOLNEJ ani
+     po zezwoleniu/wpisie do rejestru — koncesja to OSTATECZNOŚĆ
+   □ ⭐ KLUCZOWA CECHA ODRÓŻNIAJĄCA: organ koncesyjny MOŻE ODMÓWIĆ
+     udzielenia koncesji NAWET gdy przedsiębiorca formalnie SPEŁNIA
+     wszystkie wymogi — decyzja ma charakter UZNANIOWY (w
+     przeciwieństwie do zezwolenia/wpisu, gdzie spełnienie warunków
+     RODZI OBOWIĄZEK wydania pozytywnej decyzji)
+   □ FORMA: DECYZJA ministra właściwego ze względu na przedmiot
+     działalności (chyba że przepisy odrębne stanowią inaczej)
+   □ MOŻLIWA "PROMESA KONCESJI" — przyrzeczenie jej wydania, przed
+     pełnym spełnieniem wszystkich warunków (np. przed uzyskaniem
+     nieruchomości/sprzętu wymaganego dla działalności)
+   □ PRZYKŁADOWE DZIEDZINY: materiały wybuchowe/broń/amunicja, paliwa
+     i energia, ochrona osób i mienia, rozpowszechnianie programów
+     radiowych/telewizyjnych
+
+2️⃣ ZEZWOLENIE — pośredni stopień
+   □ DECYZJA administracyjna POTWIERDZAJĄCA spełnienie określonych
+     prawem WARUNKÓW — organ NIE MA swobody uznaniowej: spełnienie
+     warunków = OBOWIĄZEK wydania pozytywnej decyzji
+   □ Różni się od koncesji BRAKIEM elementu uznaniowości
+
+3️⃣ WPIS DO REJESTRU DZIAŁALNOŚCI REGULOWANEJ — NAJŁAGODNIEJSZA forma
+   □ Przedsiębiorca SKŁADA WNIOSEK o wpis + OŚWIADCZENIE o spełnianiu
+     warunków (jako załącznik) — BEZ konieczności ich uprzedniego
+     WERYFIKOWANIA przez organ w formie decyzji
+   □ Rozstrzygnięcie ma formę ZAŚWIADCZENIA, NIE decyzji (organ
+     dokonuje jedynie CZYNNOŚCI MATERIALNO-TECHNICZNEJ wpisu, oparty
+     na OŚWIADCZENIU przedsiębiorcy — SPÓR DOKTRYNALNY, czy to w ogóle
+     forma "reglamentacji" sensu stricto, czy już coś innego —
+     odnotowany, ale nierozstrzygnięty w tej sesji)
+   □ Przedsiębiorca MUSI PRZECHOWYWAĆ dokumenty potwierdzające
+     spełnianie warunków — NA POTRZEBY ewentualnej KONTROLI (patrz
+     sekcja 1a)
+   □ REJESTRY są JAWNE — każdy może je przeglądać za pośrednictwem
+     prowadzącego je organu
+   □ PRZYKŁADOWE DZIEDZINY: prowadzenie ośrodka szkolenia kierowców,
+     pracowni psychologicznej dla instruktorów/egzaminatorów,
+     organizowanie kursów dla kierowców przewożących towary niebezpieczne
+
+KOLEJNOŚĆ PRAKTYCZNA: rejestracja PODSTAWOWA działalności (CEIDG dla
+  JDG / KRS dla spółki — patrz sekcje 1 i 3 wyżej) ZAWSZE POPRZEDZA
+  złożenie wniosku o koncesję/zezwolenie/wpis do rejestru regulowanego
+  — nie da się ubiegać o reglamentację BEZ uprzedniej rejestracji
+  podstawowej.
+
+Checklist praktyczny:
+□ Sprawdź NAJPIERW, czy planowana działalność w OGÓLE podlega
+  reglamentacji — większość działalności jest WOLNA
+□ Jeśli TAK — ustal, KTÓRY z trzech stopni ma zastosowanie (sprawdź
+  przepis SZCZEGÓLNY dla danej branży — Prawo przedsiębiorców określa
+  TYLKO ramy ogólne, konkretne wymogi są w odrębnych ustawach
+  branżowych)
+□ Przy KONCESJI — przygotuj klienta na MOŻLIWĄ odmowę mimo spełnienia
+  formalnych warunków (element uznaniowy) — rozważ wcześniej promesę
+□ Przy WPISIE do rejestru regulowanego — ZADBAJ o kompletną
+  dokumentację potwierdzającą warunki, przechowywaną NA WYPADEK
+  kontroli
+```
+
 ### 2. Spółka cywilna
 
 ```

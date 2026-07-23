@@ -64,13 +64,12 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 ---
 
 # ROUTING-MAP — Centralna Mapa Aktów Prawnych → DR-skills
-# prawo-polskie-v2 v6.3 (aktualizacja 2026-07-19e — PRZENIESIONO
-# mod-KPA-postepowanie-administracyjne z DR-04 do DR-05 (logiczne
-# miejsce dla najbardziej fundamentalnego aktu prawa administracyjnego),
-# zaktualizowano WSZYSTKIE 21 plików w systemie odwołujących się do
-# tego modułu. Rozbudowano moduł o sekcję 4a: ugoda administracyjna,
-# milczące załatwienie sprawy, wydawanie zaświadczeń, skargi i wnioski
-# Działu VIII KPA.)
+# prawo-polskie-v2 v8.8 (aktualizacja 2026-07-21p — DR-03: NOWY
+# mod-czynny-zal-KK-KKS-samooskarzenie (KK art. 15, KKS art. 16-16a —
+# KLUCZOWE: czynny żal to NIE tylko samo-donos; korekta terminologiczna
+# "samooskarżenie" nie jest odrębną instytucją) + NOWY mod-dobrowolne-
+# poddanie-sie-karze-KPK (art. 335 i 387, dwa odrębne tryby). 54 moduły
+# łącznie w DR-03 (było 52).)
 #
 # Format: Akt prawny | Dz.U. | DR-skill | Moduł | Status
 # Status: ✅ OK = moduł merytoryczny | 🔗 odesłanie = w innym DR | ☐ BRAK = do zbudowania
@@ -163,7 +162,8 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Prawo upadłościowe | Dz.U. 2025 poz. 614 ze zm. | dr-02/modules/mod-PrUpad-upadlosc-restrukturyzacja | ✅ OK |
 | Prawo restrukturyzacyjne | Dz.U. 2026 poz. 533 t.j. | dr-02/modules/mod-PrUpad-upadlosc-restrukturyzacja | ✅ OK |
 | Ustawa o licencji doradcy restrukturyzacyjnego (zawód regulowany, BEZ samorządu — syndyk/nadzorca/zarządca) | Dz.U. 2022 poz. 1007 [sprawdź nowszy t.j.] + Pr. restrukturyzacyjne 2026/533 + Pr. upadłościowe 2025/614 + nowelizacja Dz.U. 2025 poz. 1085 (w życie 23.08.2025) ✅ VER: 2026-06-15 | dr-02/modules/mod-ustawa-doradca-restrukturyzacyjny-zawod | ✅ NOWY |
-| Prawo przedsiębiorców (formy działalności gospodarczej, JDG, działalność nierejestrowana) | Dz.U. 2025 poz. 1480 t.j. — art. 5 (próg działalności nierejestrowanej) w brzmieniu od 1.01.2026 wg nowelizacji Dz.U. 2025 poz. 769 ✅ VER: 2026-06-15 | dr-02/modules/mod-KSH-spolki-handlowe (sekcja "FORMY DZIAŁALNOŚCI GOSPODARCZEJ") | ✅ NOWY |
+| Prawo przedsiębiorców (formy działalności gospodarczej, JDG, działalność nierejestrowana, Rozdział 4 reglamentacja koncesja/zezwolenie/wpis, Rozdział 5 kontrola przedsiębiorcy) | Dz.U. 2025 poz. 1480 t.j. — art. 5 w brzmieniu od 1.01.2026 wg nowelizacji Dz.U. 2025 poz. 769 ✅ VER: 2026-06-15, ROZBUDOWANE 2026-07-19 | dr-02/modules/mod-KSH-spolki-handlowe (sekcja "FORMY DZIAŁALNOŚCI GOSPODARCZEJ") | ✅ OK |
+| Prawo wekslowe (28.04.1936) + Prawo czekowe (28.04.1936) | Dz.U. 2022 poz. 282 t.j. + Dz.U. 2016 poz. 462 t.j. ⚠️ zweryfikuj aktualne t.j. | dr-02/modules/mod-prawo-wekslowe-czekowe | ✅ NOWY 2026-07-19 |
 | Ustawa o prawach konsumenta | Dz.U. 2023 poz. 2759 ze zm. | dr-02/modules/mod-ustawa-prawa-konsumenta | ✅ OK |
 | Ustawa o cudzoziemcach | Dz.U. 2025 poz. 1079 ze zm. | dr-02/modules/mod-ustawa-cudzoziemcy | ✅ OK |
 | Ustawa o ochronie konkurencji i konsumentów (UOKiK) | ⚠️ zweryfikuj t.j. na ISAP (ustawa z 16.02.2007) | dr-02/modules/mod-ustawa-UOKIK-antymonopolowe | ✅ NOWY 2026-07-18 — KOREKTA: poprzedni wpis wskazywał na plik "mod-ustawa-ochrona-konkurencji-konsumentow-UOKiK", który NIGDY NIE ISTNIAŁ w DR-02 (fantom); teraz wskazuje na rzeczywisty moduł |
@@ -184,11 +184,17 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 
 ---
 
+| Ustawa o ochronie praw lokatorów art. 6, 19a (kaucja przy najmie) | ⚠️ zweryfikuj t.j. na ISAP | dr-02/modules/mod-kaucja-najem-lokalu | ✅ NOWY 2026-07-19 |
+
+---
+
 ## DR-03 — Prawo Karne, Wykroczenia, Egzekucja
 
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
 | Kodeks karny (KK) | Dz.U. 2025 poz. 383 ze zm. (zm.: 2025.1818, 2026.638) | dr-03/modules/mod-KK-kodeks-karny | ✅ OK |
+| KK art. 15/17/23 (czynny żal) + KKS art. 16-16a (czynny żal skarbowy) — korekta terminologiczna "samooskarżenie" | Dz.U. 2025 poz. 383 t.j. + Dz.U. 2025 poz. 633 t.j. (KKS) | dr-03/modules/mod-czynny-zal-KK-KKS-samooskarzenie | ✅ NOWY 2026-07-21 |
+| KPK art. 335 i 387 (dobrowolne poddanie się karze) | Dz.U. 2026 poz. 490 t.j. | dr-03/modules/mod-dobrowolne-poddanie-sie-karze-KPK | ✅ NOWY 2026-07-21 |
 | KK — kwalifikator karnomaterialny | Dz.U. 2025 poz. 383 ze zm. | dr-03/modules/mod-KK-kwalifikator-karnomaterialny | ✅ OK |
 | KK art. 190a — stalking | Dz.U. 2025 poz. 383 ze zm. | dr-03/modules/mod-KK-art190a-stalking | ✅ OK |
 | KK art. 207 + ustawa antyprzemocowa | Dz.U. 2025 poz. 383 + Dz.U. 2021 poz. 1249 | dr-03/modules/mod-KK-art207-przemoc-domowa | ✅ OK |
@@ -204,7 +210,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | KPW — Kodeks postępowania w sprawach o wykroczenia | Dz.U. 2025 poz. 860 t.j. | dr-03/modules/mod-KW-KPW-framework-szczegolowy | ✅ OK |
 | KKS + Ustawa AML | Dz.U. 2025 poz. 633 t.j. + Dz.U. 2025 poz. 644 | dr-03/modules/mod-KKS-karny-skarbowy-i-AML | ✅ OK |
 | Ustawa Fundusz Pomocy Pokrzywdzonym | Dz.U. 2022 poz. 2256 ze zm. | dr-03/modules/mod-KK-kodeks-karny | ✅ OK |
-| Ustawa o przeciwdziałaniu narkomanii | Dz.U. 2023 poz. 1939 t.j. ✅ VER: 2026-06-14 (TRYB DZU) | dr-03/modules/mod-ustawa-narkomania | ✅ OK |
+| Ustawa o przeciwdziałaniu narkomanii — ROZBUDOWANE 2026-07-20: marihuana lecznicza (art. 33a), leczenie substytucyjne (art. 28-28b), prekursory (rozp. UE 273/2004, 111/2005) | Dz.U. 2023 poz. 1939 t.j. ✅ VER: 2026-06-14 (TRYB DZU); nowelizacja 11.06.2026 ⚠️ NUMER Dz.U. do ustalenia | dr-03/modules/mod-ustawa-narkomania | ✅ OK |
 | Ustawa o odpowiedzialności podmiotów zbiorowych | Dz.U. 2024 poz. 1822 t.j. ✅ VER: 2026-06-14 (TRYB DZU — uwaga: nowelizacja 2025/1440 wchodzi 01.03.2026, nowy art. 9a) | dr-03/modules/mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych | ✅ OK |
 | KPK — oczekująca nowelizacja 2026.638 | Dz.U. 2026 poz. 638 (ustawa z 27.03.2026, publ. 13.05.2026, zmienia art. 25 §1 pkt 2 KPK) ✅ VER 2026-07-13: prawdopodobnie już w mocy (standardowe 14-dniowe vacatio od publikacji → ok. 27.05.2026), wymaga jednoznacznego potwierdzenia terminu w ISAP przed zamknięciem wpisu | dr-03/modules/mod-KK-KPK-framework-karne | ⚡ WCHODZI |
 | KPK — zmiana 2025.1390 | ⚠️ NUMER BŁĘDNY — VER 2026-07-13: Dz.U. 2025 poz. 1390 to rozporządzenie MF ws. wyłączenia poboru zryczałtowanego CIT (isap WDU20250001390), NIE dotyczy KPK. Wpis pierwotny wskazywał niewłaściwy numer — właściwy Dz.U. dla zamierzonej zmiany KPK wymaga ponownego ustalenia | dr-03/modules/mod-KPK-tryby-scigania | ❌ NUMER BŁĘDNY |
@@ -212,7 +218,9 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | **Grzywna/mandat/kara adm./grzywna przymuszenia** | KW Dz.U. 2025 poz. 734 + KPSW Dz.U. 2025 poz. 860 + KPA Dz.U. 2025 poz. 1691 Dz. IVa + UPEA Dz.U. 2023 poz. 2505 | dr-03/modules/mod-grzywny-mandaty-szczegolowe | ✅ OK |
 | **Ustawa o kierujących pojazdami (u.k.p.)** | Dz.U. 2025 poz. 1226 t.j. ze zm. Dz.U. 2025 poz. 1676 | dr-03/modules/mod-PRD-prawo-jazdy-punkty-karne | ✅ OK |
 | **Ustawa BRD I** — pj od 17 lat, cofnięcie, cyfrowe pj | Dz.U. 2025 poz. 1676 (w życie od 01.2026 etapami — weryfikuj) | dr-03/modules/mod-PRD-prawo-jazdy-punkty-karne (cofnięcie, okres próbny) + mod-PRD-nowe-przestepstwa-drogowe-BRD (pj od 17 lat) | ✅ OK |
-| **Ustawa BRD II** — nielegalne wyścigi, drift, brawurowa jazda, przepadek | Dz.U. 2025 poz. 1872 (w życie 29.01.2026, 30.03.2026, 03.06.2026) | dr-03/modules/mod-PRD-nowe-przestepstwa-drogowe-BRD + mod-KW-KPW-framework-szczegolowy | ✅ OK |
+| **Ustawa BRD II** — nielegalne wyścigi, drift, brawurowa jazda, przepadek | Dz.U. 2025 poz. 1872 (w życie 29.01.2026, 30.03.2026, 03.06.2026) | dr-03/modules/mod-PRD-nowe-przestepstwa-drogowe-BRD + mod-KW-KPW-framework-szczegolowy | ✅ OK — 2026-07-20: wypełniono placeholdery (dożywotni zakaz art. 42 §3, nowy obowiązkowy zakaz art. 42 §1a, podwyższone dolne granice kar) |
+| Ustawa z 7.11.2025 — zmiana KW/KPW (art. 82 — usunięcie kary nagany, mandat do 5000 zł) | Dz.U. 2025 poz. 1814 | dr-03/modules/mod-KW-art49-64-porzadek-publiczny (art. 82 punkt startowy) + mod-KW-kodeks-wykroczen | ✅ NOWY 2026-07-20, odpowiedź na polecenie sprawdzenia aktualizacji prawa karnego |
+| Ustawa z 7.11.2025 — zmiana KK/KW/KPW (art. 217a KK — ochrona interweniujących cywilnie; art. 51 KW — minimum 1000 zł) | Dz.U. 2025 poz. 1818 | dr-03/modules/mod-KK-art222-226-ochrona-funkcjonariusza (nowa sekcja) + mod-KW-art49-64-porzadek-publiczny | ✅ NOWY 2026-07-20 |
 | **Rozp. MSWiA — ewidencja kierujących** (taryfikator punktów, kody, szkolenia) | Dz.U. 2026 poz. 724 (w życie 03.06.2026) | dr-03/modules/mod-PRD-prawo-jazdy-punkty-karne | ✅ OK |
 | KK art. 18-22 — formy popełnienia (sprawstwo, podżeganie, pomocnictwo) | Dz.U. 2025 poz. 383 ze zm. | dr-03/modules/mod-KK-art18-22-formy-popelnienia | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — pull z DR-03/MAPA-AKTOW) |
 | KK art. 10 — odpowiedzialność nieletnich | Dz.U. 2025 poz. 383 ze zm. | dr-03/modules/mod-KK-art10-odpowiedzialnosc-nieletnich | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — pull z DR-03/MAPA-AKTOW) |
@@ -223,7 +231,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | KK art. 212-216 — przeciwko czci | Dz.U. 2025 poz. 383 ze zm. | dr-03/modules/mod-KK-art212-216-przeciwko-czci | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — pull z DR-03/MAPA-AKTOW) |
 | KK art. 222-226 — ochrona funkcjonariusza | Dz.U. 2025 poz. 383 ze zm. | dr-03/modules/mod-KK-art222-226-ochrona-funkcjonariusza | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — pull z DR-03/MAPA-AKTOW) |
 | KK art. 228-231 — korupcja urzędnicza | Dz.U. 2025 poz. 383 ze zm. | dr-03/modules/mod-KK-art228-231-korupcja-urzednicza | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — pull z DR-03/MAPA-AKTOW) |
-| KK art. 233-244b — przeciwko wymiarowi sprawiedliwości (w tym poplecznictwo, świadek koronny w BLOK) | Dz.U. 2025 poz. 383 ze zm. | dr-03/modules/mod-KK-art233-244b-przeciwko-wymiarowi-sprawiedliwosci | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — pull z DR-03/MAPA-AKTOW) |
+| KK art. 233-244b — przeciwko wymiarowi sprawiedliwości (poplecznictwo, świadek koronny) + NOWY art. 240 KK (niezawiadomienie) + NOWY KPK art. 278-280 (list gończy krajowy) — ROZBUDOWANE 2026-07-21 | Dz.U. 2025 poz. 383 ze zm. + Dz.U. 2026 poz. 490 t.j. | dr-03/modules/mod-KK-art233-244b-przeciwko-wymiarowi-sprawiedliwosci | ✅ OK |
 | KK art. 250a — korupcja wyborcza | Dz.U. 2025 poz. 383 ze zm. | dr-03/modules/mod-KK-art250a-korupcja-wyborcza | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — pull z DR-03/MAPA-AKTOW) |
 | KK art. 255b — patostreaming | Dz.U. 2025 poz. 383 ze zm. | dr-03/modules/mod-KK-art255b-patostreaming | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — pull z DR-03/MAPA-AKTOW) |
 | KK art. 263 — nielegalny wyrób/handel/posiadanie broni palnej i amunicji | Dz.U. 2025 poz. 383 ze zm. + ustawa o broni i amunicji (1999) ⚠️ zweryfikuj t.j. | dr-03/modules/mod-KK-art263-bron-nielegalna | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — pull z DR-03/MAPA-AKTOW) |
@@ -258,10 +266,11 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Kodeks pracy (KP) | Dz.U. 2025 poz. 277 ze zm. (zm.: 2026.25, 2025.807, 2025.1423) | dr-04/modules/mod-KP-prawo-pracy | ✅ OK — ✅ od 08.07.2026 (już obowiązuje): art. 281-283 KP, podwyższenie grzywien do 90 000 zł (Dz.U. 2026 poz. 473, zob. mod-ustawa-PIP-inspekcja-pracy sekcja 5) |
 | KPA (odesłanie — moduł fizycznie w DR-05, PRZENIESIONY 2026-07-19) | Dz.U. 2025 poz. 1691 ze zm. | → DR-05/mod-KPA-postepowanie-administracyjne | 🔗 odesłanie |
 | PPSA (odesłanie — moduł fizycznie w DR-05, PRZENIESIONY 2026-07-19) | Dz.U. 2026 poz. 143 ze zm. | → DR-05/mod-KPA-postepowanie-administracyjne | 🔗 odesłanie |
-| Ustawa o systemie ubezpieczeń społecznych (SUS/ZUS) | Dz.U. 2025 poz. 1169 ze zm. (zm.: 2026.199) | dr-04/modules/mod-SUS-ZUS-ubezpieczenia-spoleczne | ✅ OK |
+| Ustawa o systemie ubezpieczeń społecznych (SUS/ZUS) + art. 34 Prawa przedsiębiorców (interpretacja indywidualna, ANEKS D) | Dz.U. 2026 poz. 199 t.j. (obwieszczenie 9.02.2026, opublikowane 23.02.2026, POTWIERDZONE na ISAP: WDU20260000199) — ✅ NAPRAWIONE 2026-07-21: poprzedni numer "2025 poz. 1169" był BŁĘDNY jako oznaczenie tej ustawy — to odrębna, wąska ustawa o emeryturach czerwcowych (5.08.2025), pomylona w tym wierszu z bazową ustawą SUS; treść modułu była CAŁY CZAS poprawna, błąd dotyczył wyłącznie tego wiersza mapy | dr-04/modules/mod-SUS-ZUS-ubezpieczenia-spoleczne | ✅ OK |
+| Ustawa z 5.08.2025 o ustalaniu wysokości emerytur z FUS ustalonych w czerwcu w latach 2009-2019 oraz rent rodzinnych ("emerytury czerwcowe") | Dz.U. 2025 poz. 1169 (POTWIERDZONE na ISAP: WDU20250001169), w życie 1.01.2026 | dr-04/modules/mod-SUS-ZUS-ubezpieczenia-spoleczne (tabela ALERTÓW) | ✅ NOWY 2026-07-21 (osobny wiersz dla przejrzystości) |
 | Ustawa o emeryturach i rentach z FUS | Dz.U. 2025 poz. 1749 ze zm. | dr-04/modules/mod-SUS-ZUS-ubezpieczenia-spoleczne | ✅ OK |
 | Ustawa o ubezpieczeniu społecznym rolników (KRUS) | Dz.U. 2025 poz. 1770 t.j. (sync 2026-07-02 z dr-04) | dr-04/modules/mod-KRUS-rolnicze-ubezpieczenia | ✅ OK |
-| Ustawa o rehabilitacji zawodowej i PFRON | Dz.U. 2025 poz. 913 ze zm. | dr-04/modules/mod-ustawa-rehabilitacja-PFRON | ✅ OK |
+| Ustawa o rehabilitacji zawodowej i PFRON — ROZBUDOWANE 2026-07-20: ANEKS o likwidacji Wypożyczalni PFRON (temat świeży, w toku) | Dz.U. 2025 poz. 913 ze zm. | dr-04/modules/mod-ustawa-rehabilitacja-PFRON | ✅ OK |
 | Ustawa o PIP | Dz.U. 2024 poz. 1712 t.j. + zm. Dz.U. 2025 poz. 321/368/620/769, Dz.U. 2026 poz. 160 ✅ nowelizacja Dz.U. 2026 poz. 473 obowiązuje od 08.07.2026 (VER 2026-07-07) | dr-04/modules/mod-ustawa-PIP-inspekcja-pracy | ✅ OK — sekcja 5 modułu |
 | Ustawa o minimalnym wynagrodzeniu | Dz.U. 2024 poz. 1285 ze zm. (MW 2026: 4806 zł) | dr-04/modules/mod-ustawa-minimalne-wynagrodzenie | ✅ OK |
 | Ustawa o ZFSS | Dz.U. 2024 poz. 288 ze zm. | dr-04/modules/mod-ustawa-ZFSS | ✅ OK |
@@ -272,7 +281,8 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | KP art. 67⁵–67²⁴ — praca zdalna | Dz.U. 2025 poz. 277 ze zm. (Dz.U. 2023 poz. 240) | dr-04/modules/mod-KP-prawo-pracy → ANEKS C | ✅ OK |
 | Ustawa o zwolnieniach grupowych | Dz.U. 2025 poz. 570 t.j. | dr-04/modules/mod-ustawa-zwolnienia-grupowe | ✅ OK |
 | Ustawa o rynku pracy i służbach zatrudnienia | Dz.U. 2025 poz. 620 ze zm. (zm.: 2026.451) | dr-04/modules/mod-ustawa-rynek-pracy-zatrudnienie | ✅ OK |
-| Ustawa o świadczeniach rodzinnych | Dz.U. 2025 poz. 1208 t.j. | dr-04/modules/mod-ustawa-swiadczenia-rodzinne | ✅ OK |
+| Ustawa o świadczeniach rodzinnych — ROZBUDOWANE 2026-07-20 (świadczenie pielęgnacyjne pełne, za życiem, opieka wytchnieniowa) | Dz.U. 2025 poz. 1208 t.j. | dr-04/modules/mod-ustawa-swiadczenia-rodzinne | ✅ OK |
+| Ustawa o emeryturach i rentach z FUS (dodatek pielęgnacyjny, świadczenie rehabilitacyjne) + art. 16 ustawy o świadczeniach rodzinnych (zasiłek pielęgnacyjny) | ⚠️ zweryfikuj t.j. na ISAP | dr-04/modules/mod-dodatek-pielegnacyjny-swiadczenie-rehabilitacyjne-wyrownawcze | ✅ NOWY 2026-07-20 |
 | Ustawa o pomocy społecznej | Dz.U. 2026 poz. 639 t.j. (sync 2026-07-02 z dr-04) | dr-04/modules/mod-ustawa-pomoc-spoleczna | ✅ OK |
 | Ustawa o świadczeniu wspierającym (WZON) | Dz.U. 2023 poz. 1429 ze zm. | dr-04/modules/mod-ustawa-swiadczenie-wspierajace-WZON | ✅ OK |
 
@@ -282,7 +292,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | KP praca zdalna (Rozdz. II^b) | Dz.U. 2025 poz. 277 ze zm. (zm.: 2026.25, 2025.807, 2025.1423) | dr-04/modules/mod-KP-praca-zdalna | ✅ OK |
 | KP mobbing/dyskryminacja (art. 94³, 18³a-18³e) | Dz.U. 2025 poz. 277 ze zm. (zm.: 2026.25, 2025.807, 2025.1423) | dr-04/modules/mod-KP-mobbing-dyskryminacja | ✅ OK |
 | Ustawa "aktywny rodzic" (świadczenia rodzicielskie) | ⚠️ zweryfikuj t.j. na ISAP | dr-04/modules/mod-ustawa-aktywny-rodzic | ✅ OK |
-| Wypadek przy pracy i choroba zawodowa | ⚠️ zweryfikuj akty właściwe (ustawa wypadkowa + rozporządzenia) | dr-04/modules/mod-wypadek-przy-pracy-choroba-zawodowa | ✅ OK |
+| Wypadek przy pracy i choroba zawodowa — ROZBUDOWANE 2026-07-21 (zawiadomienie PIP/prokuratora o wypadku ciężkim/śmiertelnym/zbiorowym, art. 234 §2 KP) | ⚠️ zweryfikuj akty właściwe (ustawa wypadkowa + rozporządzenia) | dr-04/modules/mod-wypadek-przy-pracy-choroba-zawodowa | ✅ OK |
 | KP Dział III — wynagrodzenie, świadczenia, jawność wynagrodzeń (dyr. UE 2023/970) | Dz.U. 2025 poz. 277 ze zm. (zm.: 2026.25, 2025.807, 2025.1423) + Dyrektywa UE 2023/970 | dr-04/modules/mod-KP-dzial-III-wynagrodzenie-swiadczenia-jawnosc | ✅ NOWY 2026-07-18 |
 | KP Dział VI — czas pracy (nadgodziny, limity) | Dz.U. 2025 poz. 277 ze zm. (zm.: 2026.25, 2025.807, 2025.1423) | dr-04/modules/mod-KP-dzial-VI-czas-pracy | ✅ NOWY 2026-07-18 |
 | KP Dział VII — urlopy pracownicze | Dz.U. 2025 poz. 277 ze zm. (zm.: 2026.25, 2025.807, 2025.1423) | dr-04/modules/mod-KP-dzial-VII-urlopy-pracownicze | ✅ NOWY 2026-07-18 |
@@ -324,15 +334,20 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | **Klasyfikacje statystyczne (PKWiU/CN/PKOB/KŚT)** | PKWiU 2025 (Rozp. RM 17.12.2025) + PKWiU 2015 (Dz.U. 2015 poz. 1676) | dr-06/modules/mod-PKWiU-klasyfikacje-statystyczne | ✅ OK |
 | Ordynacja podatkowa | Dz.U. 2026 poz. 622 t.j. (publ. 11.05.2026, stan prawny 21.04.2026) ⚡ część przepisów nowelizujących wchodzi ~IX.2026 (patrz MONITORING) ✅ VER 2026-07-13 | dr-06/modules/mod-OP-ordynacja-podatkowa | ✅ OK |
 | Ustawa o PIT | Dz.U. 2026 poz. 592 t.j. | dr-06/modules/mod-PIT-podatek-dochodowy-fizyczne | ✅ OK |
-| Ustawa o CIT | Dz.U. 2026 poz. 554 t.j. | dr-06/modules/mod-CIT-podatek-dochodowy-prawne | ✅ OK |
-| Ustawa o VAT | Dz.U. 2025 poz. 775 t.j. | dr-06/modules/mod-VAT-podatek-od-towarow-i-uslug | ✅ OK |
+| Ustawa o CIT | Dz.U. 2026 poz. 554 t.j. — ROZBUDOWANE 2026-07-19 (korekta stawki podatku minimalnego 10%, dodano WHT/pay-and-refund) | dr-06/modules/mod-CIT-podatek-dochodowy-prawne | ✅ OK |
+| Ustawa o VAT | Dz.U. 2025 poz. 775 t.j. — ROZBUDOWANE 2026-07-19 (VAT OSS/IOSS, procedura VAT marża, eksport/WDT pełne warunki) + 2026-07-21 (WNT, ulga na złe długi, elementy faktury, zwolnienie podmiotowe art. 113) | dr-06/modules/mod-VAT-podatek-od-towarow-i-uslug | ✅ OK |
+| Ustawa VAT art. 86a (samochody 50%/100%) + ustawa PIT art. 12 ust. 2a-2c (ryczałt użytek prywatny) + art. 22 PIT/15 CIT (KUP) | Dz.U. 2025 poz. 775 t.j. + ⚠️ zweryfikuj t.j. PIT/CIT | dr-06/modules/mod-odliczenia-uzytek-mieszany-firma-prywatny-KUP | ✅ NOWY 2026-07-21 |
+| Podatki sektorowe: bankowy (2016) + gry hazardowe (2009) + tonażowy (2006) + opłata cukrowa + sprzedaż detaliczna (2016) | Dz.U. 2016 poz. 68 (bankowy) + ⚠️ zweryfikuj pozostałe | dr-06/modules/mod-podatki-sektorowe-bankowy-gry-tonazowy-cukrowy-detaliczny | ✅ NOWY 2026-07-19 |
 | Ustawa o podatkach i opłatach lokalnych | Dz.U. 2025 poz. 707 t.j. (reforma od 01.01.2025) | dr-06/modules/mod-ustawa-podatek-nieruchomosci-i-lokalne | ✅ OK |
 | Ustawa o PCC | Dz.U. 2026 poz. 191 t.j. | dr-06/modules/mod-ustawa-PCC-i-podatek-spadkow-darowizn | ✅ OK |
 | Ustawa o podatku od spadków i darowizn | Dz.U. 2024 poz. 1837 t.j. | dr-06/modules/mod-ustawa-PCC-i-podatek-spadkow-darowizn | ✅ OK |
 | Ustawa akcyzowa | Dz.U. 2025 poz. 126 t.j. | dr-06/modules/mod-ustawa-akcyzowa-i-clo-UCC | ✅ OK |
+| Ustawa o wychowaniu w trzeźwości (1982, + sekcja DO MONITOROWANIA: 4 konkurencyjne projekty zmian) + ustawa o ochronie zdrowia przed tytoniem (1995, nowelizacja 5.07.2025) + ustawa o wyrobie alkoholu etylowego (2001, art. 12a — bimbrownictwo) | Dz.U. 2023 poz. 2151 t.j. + Dz.U. 2024 poz. 1162 t.j. + ⚠️ zweryfikuj t.j. 2001 | dr-06/modules/mod-alkohol-tyton-regulacja-sprzedazy | ✅ ROZBUDOWANE 2026-07-20 |
 | Kodeks celny UE (UCC) + Taryfa celna (CN) | Rozp. (UE) 952/2013 + Rozp. (EWG) 2658/87 | dr-06/modules/mod-UCC-clo-taryfa-celna | ✅ OK |
-| Ustawa o ryczałcie od przychodów | Dz.U. 2025 poz. 843 t.j. | dr-06/modules/mod-ustawa-ryczalt-przychody | ✅ OK |
-| Ustawa o finansach publicznych (UFP) | Dz.U. 2025 poz. 1483 t.j. | dr-06/modules/mod-UFP-finanse-publiczne-NIK-RIO | ✅ OK |
+| Rozporządzenie UE 2018/1672 (kontrola środków pieniężnych) + Prawo dewizowe + zwolnienia celne dla podróżnych + Konwencja CITES | Rozp. UE 2018/1672 + Dz.U. 2024 poz. 1131 + ⚠️ zweryfikuj pozostałe | dr-06/modules/mod-clo-podroznych-limity-towary-zabronione | ✅ NOWY 2026-07-19 |
+| Ustawa o ryczałcie od przychodów | Dz.U. 2025 poz. 843 t.j. — ROZBUDOWANE 2026-07-19 (logika decyzyjna, zwolnienia PIT art. 21) | dr-06/modules/mod-ustawa-ryczalt-przychody | ✅ OK |
+| Ustawa VAT (klasyfikacja produktów, PKWiU/CN, status wyrobu medycznego MDR) | Dz.U. 2025 poz. 775 t.j. + rozporządzenie MDR 2017/745 | dr-06/modules/mod-VAT-klasyfikacja-produktow-baza-niejednoznacznosci | ✅ NOWY 2026-07-19 |
+| Ustawa o finansach publicznych (UFP) + ustawa o NIK — ROZBUDOWANE 2026-07-21 (wystąpienie pokontrolne, termin 21 dni zastrzeżeń) | Dz.U. 2025 poz. 1483 t.j. | dr-06/modules/mod-UFP-finanse-publiczne-NIK-RIO | ✅ OK |
 | Ustawa o KAS | Dz.U. 2025 poz. 1131 t.j. | dr-06/modules/mod-KAS-kontrola-celno-skarbowa | ✅ OK |
 | Ustawa o nadzorze KNF | Dz.U. 2025 poz. 640 t.j. ✅ VER 2026-07-04 (sync z dr-06; poprzedni t.j. Dz.U. 2024 poz. 135, zamyka duplikat z błędnymi 2024.136/2024.724) | dr-06/modules/mod-prawo-bankowe-KNF-BFG | ✅ OK |
 | Prawo bankowe | Dz.U. 2026 poz. 38 t.j. | dr-06/modules/mod-prawo-bankowe-KNF-BFG | ✅ OK |
@@ -411,6 +426,10 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 
 ---
 
+| KPK art. 266-269 — poręczenie majątkowe (kaucja karna) | Dz.U. 2026 poz. 490 t.j. | dr-03/modules/mod-poreczenie-majatkowe-kaucja-karna | ✅ NOWY 2026-07-19 |
+
+---
+
 ## DR-09 — Budownictwo, Środowisko, Energia, Transport
 
 *Źródło: dr-09/MAPA-AKTOW.md | Weryfikacja: 2026-06-05*
@@ -427,7 +446,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o transporcie drogowym, kolejowym, lotniczym | Dz.U. 2024 poz. 1539 ze zm. | dr-09/modules/mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski | ✅ OK |
 | Prawo lotnicze | Dz.U. 2023 poz. 2110 ze zm. (zm.: 2025.1431) | dr-09/modules/mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski | ✅ OK |
 | Prawo o transporcie kolejowym | Dz.U. 2025 poz. 1234 t.j. | dr-09/modules/mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski | ✅ OK |
-| Specustawa drogowa (ZRID) | Dz.U. 2024 poz. 1641 ze zm. | dr-09/modules/mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski | ✅ OK |
+| Specustawa drogowa (ZRID) — PRZENIESIONE 2026-07-21: wcześniej wpis "✅ OK" WSKAZYWAŁ moduł transportowy, ale ta jego treść NIGDY nie istniała (tylko jedna linijka w tabeli zarządców dróg) — teraz DEDYKOWANY, w pełni opracowany moduł | Dz.U. 2024 poz. 1641 ze zm. — ⚠️ zweryfikuj aktualny t.j., wielokrotnie nowelizowana | dr-09/modules/mod-GDDKiA-specustawa-drogowa-ZRID | ✅ OK — treść RZECZYWIŚCIE istnieje od 2026-07-21 |
 | Ustawa o drogach publicznych | Dz.U. 2025 poz. 889 t.j. | dr-09/modules/mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski | ✅ OK |
 | Prawo wodne | Dz.U. 2025 poz. 960 t.j. | dr-09/modules/mod-PrWodne-gospodarka-sciekowa | ✅ OK |
 | Ustawa o odpadach + gospodarka komunalna | Dz.U. 2023 poz. 1587 ze zm. | dr-09/modules/mod-ustawa-odpadach-gospodarka-komunalna | ✅ OK |
@@ -451,6 +470,12 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Kłusownictwo — Prawo łowieckie (13.10.1995) art. 51-54 + ustawa o rybactwie śródlądowym (18.04.1985) art. 27a | ⚠️ zweryfikuj t.j. obu ustaw na ISAP | dr-09/modules/mod-lowiectwo-klusownictwo | ✅ NOWY 2026-07-18 (dopisane do głównej mapy) |
 | Prawo budowlane art. 71/71a (zmiana użytkowania) + rozporządzenie ws. warunków technicznych budynków (reforma "antypatodeweloperska" 2024) + Prawo wodne art. 77 (OSZP) | Prawo budowlane Dz.U. — ta sama pozycja co mod-PrBud; rozporządzenie z 27.10.2023; Prawo wodne z 20.07.2017 — ⚠️ zweryfikuj t.j. | dr-09/modules/mod-PrBud-patodeweloperka-uzytkowanie-male-obiekty-ograniczenia | ✅ NOWY 2026-07-18 (dopisane do głównej mapy) |
 | Ustawa o ochronie przyrody art. 83-90 (wycinka drzew) + ustawa o odpadach (14.12.2012) art. 5-8 (odpady niebezpieczne) + POŚ art. 101a-101m (remediacja) + ustawa o przeciwdziałaniu narkomanii (dopalacze/NPS) | ⚠️ zweryfikuj t.j. wszystkich ustaw + rozporządzenia (katalog odpadów 2020, wykaz NSP) | dr-09/modules/mod-srodowisko-wycinka-odpady-niebezpieczne-rekultywacja | ✅ NOWY 2026-07-18 (dopisane do głównej mapy) |
+| Ustawa o ochronie przyrody art. 6-64 (Rozdział 2 — 10 form ochrony przyrody) | Dz.U. 2026 poz. 13 t.j. z 08.01.2026 | dr-09/modules/mod-formy-ochrony-przyrody-obszary-chronione | ✅ NOWY 2026-07-21 |
+| Ustawa o Inspekcji Ochrony Środowiska (20.07.1991) — GIOŚ + 16 WIOŚ | ⚠️ zweryfikuj aktualny t.j. na ISAP | dr-09/modules/mod-inspekcja-ochrony-srodowiska-GIOS-WIOS | ✅ NOWY 2026-07-21 |
+
+---
+
+| Ustawa o gospodarce opakowaniami i odpadami opakowaniowymi (system kaucyjny) | ⚠️ zweryfikuj t.j. na ISAP | dr-09/modules/mod-system-kaucyjny-opakowania | ✅ NOWY 2026-07-19 |
 
 ---
 
@@ -461,6 +486,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
 | Prawo farmaceutyczne | Dz.U. 2026 poz. 612 t.j. (zm.: 2025.1537 ✅ w pełni w mocy od 01.07.2026 — art. 1 pkt 2 lit. c, pkt 3-4 dot. art. 23f, VER 2026-07-13; sprawdzić czy treść modułu odzwierciedla wymogi ws. danych osoby wystawiającej receptę — patrz WARN-OTWARTE) | dr-10/modules/mod-PrFarm-prawo-farmaceutyczne | ✅ OK |
+| Plan dla Chorób Rzadkich + Rozp. WE 141/2000 (leki sieroce) | ⚠️ Plan to dokument programowy — zweryfikuj edycję na chorobyrzadkie.gov.pl | dr-10/modules/mod-rzadkie-choroby-genetyczne-plan-leki-sieroce | ✅ NOWY 2026-07-20 |
 | GIF/GIS/WIF — nadzór farmaceutyczny | Dz.U. 2026 poz. 612 (GIF) + Dz.U. 2024 poz. 416 t.j. (GIS, sync 2026-07-02 — było błędnie 2023.394) | dr-10/modules/mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny | ✅ OK |
 | Rozp. REACH + CLP — chemikalia | Rozp. (WE) 1907/2006 + 1272/2008 | dr-10/modules/mod-REACH-CLP-chemikalia | ✅ OK |
 | Ustawa o działalności leczniczej | Dz.U. 2026 poz. 156 t.j. | dr-10/modules/mod-ustawa-dzialalnosc-lecznicza-pacjent | ✅ OK |
@@ -482,6 +508,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa refundacyjna | Dz.U. 2025 poz. 907 t.j. | dr-10/modules/mod-PrFarm-prawo-farmaceutyczne | ✅ OK |
 | Ustawa o ochronie zdrowia psychicznego | Dz.U. 2024 poz. 917 ze zm. | dr-10/modules/mod-ustawa-dzialalnosc-lecznicza-pacjent | ✅ OK |
 | Ustawa o prawach pacjenta i Rzeczniku Praw Pacjenta | Dz.U. 2024 poz. 581 t.j. ✅ VER: 2026-06-14 (TRYB DZU; uwaga: nowelizacja 2026/26 art.23) | dr-10/modules/mod-ustawa-prawa-pacjenta-framework | ✅ OK |
+| Ustawa o prawach pacjenta i RPP — Rozdział 12 (kompetencje Rzecznika Praw Pacjenta) | Dz.U. 2024 poz. 581 t.j. | dr-10/modules/mod-rzecznik-praw-pacjenta-RPP | ✅ NOWY 2026-07-21 |
 | Ustawa o działalności leczniczej | Dz.U. 2026 poz. 156 t.j. ✅ VER: 2026-06-14 (TRYB DZU — był 2024/799) | dr-10/modules/mod-ustawa-medyczne-szczegolowy | ✅ OK |
 | Ustawa o substancjach chemicznych (REACH) | Dz.U. 2022 poz. 1816 ze zm. | dr-10/modules/mod-REACH-CLP-chemikalia | ✅ OK |
 | Adwokatura / zawody medyczne — ustawy korporacyjne | Dz.U. 2024 poz. 1564 | dr-10/modules/mod-ustawa-pielegniarka-polozna | ✅ OK |
@@ -508,7 +535,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
 | RODO — Rozp. UE 2016/679 | Dz.Urz. UE L 119/1 | dr-11/modules/mod-RODO-GDPR-2016-679 | ✅ OK |
-| Ustawa UODO — implementacja RODO | Dz.U. 2019 poz. 1781 ze zm. | dr-11/modules/mod-UODO-postepowanie-ochrona-danych | ✅ OK |
+| Ustawa UODO — implementacja RODO — ROZBUDOWANE 2026-07-21 (sekcja 9: skarga do Prezesa UODO, korekta GIODO→UODO) | Dz.U. 2019 poz. 1781 ze zm. | dr-11/modules/mod-UODO-postepowanie-ochrona-danych | ✅ OK |
 | Ustawa o KSC + NIS2 (2022/2555) | Dz.U. 2024 poz. 1226 ze zm. (zm.: 2026.252) | dr-11/modules/mod-KSC-NIS2-cyberbezpieczenstwo-telekom | ✅ OK |
 | Ustawa o krajowym systemie certyfikacji cyberbezpieczeństwa | Dz.U. 2025 poz. 1017 | dr-11/modules/mod-ustawa-certyfikacja-cyberbezpieczenstwa | ✅ OK |
 | KSC — krajowy system cyberbezpieczeństwa | Dz.U. 2026 poz. 20 t.j. | dr-11/modules/mod-KSC-NIS2-cyberbezpieczenstwo-telekom | ✅ OK |
@@ -573,7 +600,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
 | Ustawa o Policji | Dz.U. 2025 poz. 636 t.j. (sync 2026-07-02 z dr-13) (zm.: 2024.1248, 2024.1562, 2025.1366) | dr-13/modules/mod-ustawa-policja | ✅ OK |
-| Ustawa o Straży Granicznej | Dz.U. 2026 poz. 367 t.j. (sync 2026-07-02 z dr-13) (zm.: 2025.1366 ✅ w pełni w mocy od 14.10.2025, VER 2026-07-13) | dr-13/modules/mod-ustawa-straz-graniczna | ✅ OK |
+| Ustawa o Straży Granicznej — ROZBUDOWANE 2026-07-21 (kontrola legalności zatrudnienia/pobytu cudzoziemców, sprzeciw wobec kontroli, obowiązki zgłoszeniowe pracodawcy) | Dz.U. 2026 poz. 367 t.j. (sync 2026-07-02 z dr-13) (zm.: 2025.1366 ✅ w pełni w mocy od 14.10.2025, VER 2026-07-13) | dr-13/modules/mod-ustawa-straz-graniczna | ✅ OK |
 | Ustawa o Żandarmerii Wojskowej | Dz.U. 2026 poz. 159 t.j. (sync 2026-07-02 z dr-13) | dr-13/modules/mod-ustawa-zandarmeria-wojskowa | ✅ OK |
 | Ustawa o ABW i AW | Dz.U. 2025 poz. 902 t.j. (WARN-28 zamknięty, sync 2026-07-02 — było błędnie 2024.1183; to nowy t.j. tej samej ustawy z 2002 r., nie nowa reforma) | dr-13/modules/mod-ustawa-ABW-AW-CBA-sluzby-specjalne | ✅ OK |
 | Ustawa o CBA | Dz.U. 2025 poz. 712 t.j. (sync 2026-07-02 z dr-13) | dr-13/modules/mod-ustawa-ABW-AW-CBA-sluzby-specjalne | ✅ OK |

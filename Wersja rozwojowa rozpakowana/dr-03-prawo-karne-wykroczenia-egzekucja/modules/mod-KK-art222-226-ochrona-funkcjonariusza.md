@@ -104,3 +104,53 @@ piśmie (PRAWO-HARDGATE).
 - Nadużycie funkcji przez SAMEGO funkcjonariusza (odwrotna strona —
   gdy to funkcjonariusz przekracza uprawnienia) → `mod-KK-art228-231-korupcja-urzednicza.md` DRZEWO K.4.
 - Uszczerbek na zdrowiu jako skutek czynnej napaści → `mod-KK-art148-162-przeciwko-zyciu-zdrowiu.md`.
+
+---
+
+## ⭐ ART. 217a KK — OCHRONA OSÓB INTERWENIUJĄCYCH CYWILNIE (dodane 2026-07-20, ZAKTUALIZOWANE ustawą z 7.11.2025, Dz.U. 2025 poz. 1818)
+
+> ⚠️ KLUCZOWE ROZRÓŻNIENIE od reszty tego modułu: art. 217a chroni
+> KAŻDEGO CZŁOWIEKA (typowo świadka/przechodnia), który PODJĄŁ
+> INTERWENCJĘ w obronie bezpieczeństwa publicznego — NIE jest to
+> przepis o ochronie FUNKCJONARIUSZA jako takiego (Rozdział XXVII —
+> przestępstwa przeciwko czci i NIETYKALNOŚCI CIELESNEJ, nie Rozdział
+> XXIX jak art. 222-224 opisane wyżej w tym module) — umieszczono TU
+> ze względu na POKREWNĄ logikę ochronną (odwet za działanie w
+> interesie publicznym), NIE tożsamość podmiotu chronionego.
+
+```
+TYP PODSTAWOWY (art. 217a §1, przepis z 2011 r., BEZ zmian w 2025):
+  Kto UDERZA człowieka lub W INNY SPOSÓB narusza jego NIETYKALNOŚĆ
+  CIELESNĄ W ZWIĄZKU z podjętą przez NIEGO interwencją NA RZECZ
+  ochrony bezpieczeństwa LUDZI lub ochrony bezpieczeństwa/PORZĄDKU
+  PUBLICZNEGO → grzywna, kara ograniczenia wolności albo pozbawienia
+  wolności DO 2 LAT
+  TRYB: ŚCIGANY Z URZĘDU (mimo że to formalnie naruszenie nietykalności
+  cielesnej, zwykle ściganej z oskarżenia prywatnego — art. 217 KK) —
+  to KLUCZOWE wzmocnienie ochrony w porównaniu do "zwykłego" art. 217
+
+⭐ NOWY TYP KWALIFIKOWANY (art. 217a §2, DODANY ustawą z 7.11.2025,
+Dz.U. 2025 poz. 1818, w życie 14 dni od ogłoszenia — czyli grudzień
+2025): jeżeli sprawca czynu z §1 NARAŻA pokrzywdzonego na BEZPOŚREDNIE
+NIEBEZPIECZEŃSTWO utraty ŻYCIA albo CIĘŻKIEGO USZCZERBKU na zdrowiu →
+podlega karze pozbawienia wolności OD 3 MIESIĘCY DO 5 LAT
+
+⭐ ta sama nowelizacja (2025 poz. 1818) wprowadziła ANALOGICZNY
+mechanizm (dodanie kwalifikowanego §1a/§2 z tą samą granicą 3 m-ce–5
+lat oraz możliwością nadzwyczajnego złagodzenia/odstąpienia od kary
+gdy czyn sprawcy zostały WYWOŁANE niewłaściwym zachowaniem
+funkcjonariusza) — RÓWNIEŻ do INNEGO przepisu tego samego rozdziału
+ochronnego (⚠️ dokładny numer artykułu, prawdopodobnie art. 222 lub
+223 — NIE potwierdzony z pewnością w tej sesji, sprawdź na ISAP czy
+ta sama nowelizacja objęła również przepisy opisane w DRZEWACH F.2-F.4
+wyżej w tym module — jeśli TAK, ZAKTUALIZUJ te sekcje analogicznie)
+
+Checklist praktyczny:
+□ Czy pokrzywdzony był OSOBĄ PRYWATNĄ (nie funkcjonariuszem) podejmującą
+  INTERWENCJĘ — jeśli TAK, sprawdź TEN przepis, nie art. 222-224
+□ Czy doszło do NARAŻENIA na bezpośrednie niebezpieczeństwo
+  utraty życia/ciężkiego uszczerbku — jeśli TAK, kwalifikacja z NOWEGO
+  §2 (3 m-ce–5 lat), nie z §1 (do 2 lat)
+□ Pamiętaj: ŚCIGANIE Z URZĘDU, mimo pozornego podobieństwa do
+  "zwykłego" naruszenia nietykalności cielesnej (art. 217, prywatnoskargowe)
+```

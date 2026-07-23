@@ -76,7 +76,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   obrona obligatoryjna art. 79 §1 pkt 2-4 KPK (→ mod-niewidomy-prawa-prawne.md,
   mod-niepelnosprawnosc-intelektualna-gluchota.md)
 
-## Moduły (35 łącznie — ✓ 35 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+## Moduły (54 łącznie — ✓ 54 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
 ## ⚠️ 2026-07-15: naprawiono niezgodność dysk↔lista — 4 pliki istniały na
 ## dysku, ale nie były wpisane poniżej: mod-KK-art291-pranie-pieniedzy,
 ## mod-ustawa-fundusz-pomocy-pokrzywdzonym, mod-ustawa-narkomania,
@@ -93,6 +93,69 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   [✓] OK    mod-KK-cyberprzestepstwa-szczegolowy
   [✓] OK    mod-KK-kodeks-karny
   [✓] OK    mod-KK-kwalifikator-karnomaterialny
+  [✓] OK    mod-czynny-zal-KK-KKS-samooskarzenie
+              (dodany 2026-07-21: czynny żal KK [art. 15, dwie formy]
+               i KKS [art. 16-16a, KLUCZOWE — nie tylko samo-donos,
+               wymaga ujawnienia współdziałających] + korekta
+               terminologiczna "samooskarżenie" [nie jest odrębną
+               instytucją]. Dotąd hasło w 9+ modułach bez treści.
+               Odpowiedź na pytanie użytkownika)
+  [✓] OK    mod-dobrowolne-poddanie-sie-karze-KPK
+              (dodany 2026-07-21: dwa tryby art. 335 [prokurator,
+               postępowanie przygotowawcze] i art. 387 KPK [oskarżony,
+               etap sądowy] — dotąd całkowita luka. Odpowiedź na
+               pytanie użytkownika)
+  [✓] OK    mod-KK-art18-22-formy-popelnienia
+              (nadrobienie 2026-07-21: sprawstwo/współsprawstwo/
+               podżeganie/pomocnictwo, dodany 2026-07-16)
+  [✓] OK    mod-KK-art10-odpowiedzialnosc-nieletnich
+              (nadrobienie 2026-07-21: trzy reżimy wiekowe — art. 10
+               KK vs ustawa o wspieraniu i resocjalizacji nieletnich,
+               dodany 2026-07-16)
+  [✓] OK    mod-KK-art64-recydywa
+              (nadrobienie 2026-07-21: recydywa specjalna podstawowa
+               i wielokrotna, art. 64-65 KK, dodany 2026-07-16)
+  [✓] OK    mod-KK-art69-84-warunkowe-zawieszenie-zwolnienie
+              (nadrobienie 2026-07-21: dwie różne instytucje —
+               zawieszenie wykonania kary vs warunkowe przedterminowe
+               zwolnienie, dodany 2026-07-16)
+  [✓] OK    mod-KK-art101-105-przedawnienie-karalnosci
+              (nadrobienie 2026-07-21: przedawnienie karalności vs
+               przedawnienie wykonania kary, dodany 2026-07-16)
+  [✓] OK    mod-KK-art148-162-przeciwko-zyciu-zdrowiu
+              (nadrobienie 2026-07-21 + ROZBUDOWA tego samego dnia:
+               typy zabójstwa, uszczerbek na zdrowiu — dotąd BRAKOWAŁO
+               art. 158-162 mimo obietnicy w tytule, uzupełniono
+               NIEUDZIELENIE POMOCY [art. 162] i sąsiednie przepisy,
+               odpowiedź na pytanie użytkownika)
+  [✓] OK    mod-KK-art212-216-przeciwko-czci
+              (nadrobienie 2026-07-21: zniesławienie i zniewaga,
+               dodany 2026-07-16)
+  [✓] OK    mod-KK-art222-226-ochrona-funkcjonariusza
+              (nadrobienie 2026-07-21, rozbudowany 2026-07-20 o art.
+               217a — ochrona osób interweniujących cywilnie)
+  [✓] OK    mod-KK-art228-231-korupcja-urzednicza
+              (nadrobienie 2026-07-21: łapownictwo bierne/czynne,
+               płatna protekcja, nadużycie funkcji publicznej — cztery
+               odrębne przestępstwa, dodany 2026-07-16)
+  [✓] OK    mod-KK-art250a-korupcja-wyborcza
+              (nadrobienie 2026-07-21: przekupstwo wyborcze, dodany
+               2026-07-16)
+  [✓] OK    mod-KK-art255b-patostreaming
+              (nadrobienie 2026-07-21, dodany 2026-07-18)
+  [✓] OK    mod-KK-art270-310-falszerstwa-dokumentow
+              (nadrobienie 2026-07-21: trzy różne "fałszerstwa"
+               [dokumentów/pieniędzy/papierów wartościowych], dodany
+               2026-07-16)
+  [✓] OK    mod-KK-art296-naduzycie-zaufania
+              (nadrobienie 2026-07-21: działanie na szkodę majątkową,
+               dodany 2026-07-16)
+  [✓] OK    mod-KK-art296a-korupcja-sektor-prywatny
+              (nadrobienie 2026-07-21: łapownictwo menadżerskie, dodany
+               2026-07-16)
+  [✓] OK    mod-KK-art305-zmowa-przetargowa-karna
+              (nadrobienie 2026-07-21: udaremnienie/utrudnienie
+               przetargu publicznego, ujęcie karne, dodany 2026-07-16)
               (⚠️ 2026-07-15: dodano BLOK 0 — Część Ogólna KK (klasyfikacja
                zbrodnia/występek/materialne/formalne/kontratypy — odpowiedź
                na pytanie o zgodność z doktrynalnym podziałem przestępstw;
@@ -211,6 +274,14 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   [✓] OK    mod-ustawa-fundusz-pomocy-pokrzywdzonym
               (dopisany do listy 2026-07-15, plik istniał wcześniej)
   [✓] OK    mod-ustawa-narkomania
+              (rozbudowany 2026-07-20: MARIHUANA LECZNICZA [art. 33a,
+               recepta Rpw, brak refundacji, zakaz uprawy nawet dla
+               pacjenta, rozróżnienie od konopi włóknistych CBD],
+               LECZENIE SUBSTYTUCYJNE metadon [zezwolenie marszałka,
+               centralny wykaz, ŚWIEŻA nowelizacja 11.06.2026 —
+               terminy niestawiennictwa], PREKURSORY [rozporządzenia
+               UE 273/2004 i 111/2005, punkt startowy]. Odpowiedź na
+               pytanie użytkownika)
               (dopisany do listy 2026-07-15, plik istniał wcześniej — powiązany z
                nowym mod-przymusowe-leczenie-odwykowe.md, sekcja B tego modułu)
   [✓] OK    mod-KPK-mediacja-sprawiedliwosc-naprawcza
@@ -221,7 +292,22 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
                z dr-12/mod-techniki-mediacyjne-negocjacyjne, nie duplikuje
                ogólnych technik)
   [✓] OK    mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych
+  [✓] OK    mod-KK-art233-244b-przeciwko-wymiarowi-sprawiedliwosci
+              (nadrobienie zaległości rejestracyjnej + rozbudowa
+               2026-07-21: wymóg UMYŚLNOŚCI w poplecznictwie [brak
+               wiedzy = brak przestępstwa, wystarczy zamiar ewentualny,
+               nieoczywisty przykład uniewinnienia osoby ukrywanej],
+               NOWY art. 240 KK [zamknięty katalog najcięższych
+               zbrodni, kolizja z tajemnicami zawodowymi], NOWY list
+               gończy krajowy art. 278-280 KPK [odróżnienie od ENA].
+               Odpowiedź na pytanie użytkownika)
   [✓] OK    mod-KK-slupy-fikcyjna-reprezentacja-spolki
+  [✓] OK    mod-poreczenie-majatkowe-kaucja-karna
+              (dodany 2026-07-19: poręczenie majątkowe/"kaucja karna"
+               [art. 266-269 KPK — alternatywa dla tymczasowego
+               aresztowania, zakaz przysporzenia specjalnie na ten cel,
+               brak sztywnych widełek kwotowych, przepadek, cofnięcie].
+               Odpowiedź na pytanie użytkownika o "kaucję")
   [✓] OK    mod-KK-art263-bron-nielegalna
               (dodany 2026-07-18: art. 263 KK — wyrób/handel/posiadanie
                broni palnej i amunicji bez zezwolenia. Pułapki: broń

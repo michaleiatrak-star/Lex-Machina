@@ -52,7 +52,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W10 Obiekt liniowy (art. 3 pkt 3a PrBud — kable w kanalizacji ≠ obiekt!)
 - BAS-W14 ⚠️ Reforma upol 2025 — nowe definicje budynek/budowla (dot. też DR-06)
 
-## Moduły (19 łącznie — ✓ 19 OK, ☐ 0 STUB)
+## Moduły (23 łącznie — ✓ 23 OK, ☐ 0 STUB)
 
 ```
 BUDOWNICTWO:
@@ -74,6 +74,20 @@ BUDOWNICTWO:
 ŚRODOWISKO:
   [✓] OK    mod-POS-prawo-ochrony-srodowiska
               (POŚ, pozwolenia, IPPC, emisje, kary WIOŚ, KK 181-188a)
+  [✓] OK    mod-inspekcja-ochrony-srodowiska-GIOS-WIOS
+              (dodany 2026-07-21: struktura dwuinstancyjna GIOŚ + 16
+               WIOŚ, powołanie [premier/wojewoda za zgodą GIOŚ],
+               kompetencje kontrolne, Departament Inspekcji GIOŚ jako
+               II instancja szczególnie dla emisji. Odpowiedź na
+               pytanie użytkownika)
+  [✓] OK    mod-formy-ochrony-przyrody-obszary-chronione
+              (dodany 2026-07-21: 10 form ochrony przyrody z podziałem
+               na typy [obszarowe najsurowsze — park narodowy/rezerwat;
+               pośrednie — park krajobrazowy/obszar chronionego
+               krajobrazu ze STREFAMI/Natura 2000; punktowe najłagodniejsze
+               — pomniki/stanowiska/użytki/zespoły; gatunkowa jako
+               jedyna nieobszarowa] + tabela organów ustanawiających.
+               Odpowiedź na pytanie użytkownika)
   [✓] OK    mod-POS-prawo-ochrony-srodowiska-szczegoly
               (szczegółowy framework OOŚ: intake, screening, Natura 2000, predykcja,
                kary administracyjne WIOŚ, odpowiedzialność szkodowa)
@@ -91,6 +105,12 @@ BUDOWNICTWO:
                strefy ochronne linii wysokiego napięcia, obszary
                szczególnego zagrożenia powodzią (Prawo wodne art. 77))
   [✓] OK    mod-srodowisko-wycinka-odpady-niebezpieczne-rekultywacja
+  [✓] OK    mod-system-kaucyjny-opakowania
+              (dodany 2026-07-19: system kaucyjny opakowań po napojach
+               [obowiązuje od 1.10.2025 — 3 kategorie: PET do 3l/puszki
+               do 1l/szkło zwrotne do 1,5l, kaucja 0,50/1,00 zł, cele
+               77%/90%, wyjątek dla browarów od lutego 2026]. Odpowiedź
+               na pytanie użytkownika o "kaucję")
               (dodany 2026-07-18, DOKOŃCZONY 2026-07-18: wycinka drzew
                [progi obwodu pnia, wyjątki rolnicy/drzewa owocowe, kary],
                odpady niebezpieczne [katalog odpadów, zakaz obchodzenia
@@ -120,6 +140,13 @@ ENERGIA I ZASOBY:
 
 TRANSPORT:
   [✓] OK    mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski
+  [✓] OK    mod-GDDKiA-specustawa-drogowa-ZRID
+              (dodany 2026-07-21: GDDKiA i mechanizm ZRID [decyzja
+               zintegrowana — projekt/pozwolenie/podział/wywłaszczenie
+               w jednym akcie; przejście własności Z MOCY PRAWA;
+               terminy odszkodowania 30/60 dni; dodatek 10 000 zł dla
+               zamieszkałych nieruchomości]. Odpowiedź na pytanie
+               użytkownika)
               (scalony kanceryjski: drogowy ITD, kolejowy UTK, lotniczy ULC, morski,
                drogi publ., specustawa drogowa ZRID, elektromobilność, drony, pasażerowie)
   [✓] OK    mod-ustawa-prawo-gazowe

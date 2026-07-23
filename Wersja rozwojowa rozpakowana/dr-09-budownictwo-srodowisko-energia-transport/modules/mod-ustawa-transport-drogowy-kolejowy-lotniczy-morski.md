@@ -57,6 +57,11 @@ Drogi powiatowe:    Zarząd Dróg Powiatowych / Starosta
 Drogi gminne:       Wójt / Burmistrz / Prezydent
 ```
 
+⭐ Mechanizm SPECUSTAWY DROGOWEJ (ZRID — Zezwolenie na Realizację
+Inwestycji Drogowej, decyzja łącząca pozwolenie na budowę/podział
+nieruchomości/wywłaszczenie) — patrz DEDYKOWANY moduł `mod-GDDKiA-
+specustawa-drogowa-ZRID.md` (dodany 2026-07-21), NIE duplikowany tutaj.
+
 ### Pas drogowy i odpowiedzialność odszkodowawcza
 
 ```

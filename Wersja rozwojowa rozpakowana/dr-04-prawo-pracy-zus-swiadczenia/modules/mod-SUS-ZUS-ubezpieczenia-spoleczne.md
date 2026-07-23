@@ -290,3 +290,43 @@ BENCHMARKING: → wywołaj orzeczenia-sadowe-v2
   (NIGDY nie cytuj sygnatur z pamięci — ZAWSZE weryfikuj online)
 REKOMENDACJA: □ Odwołanie do sądu  □ Wniosek o przeliczenie  □ Biegły lekarski
 ```
+
+---
+
+## ANEKS D — INTERPRETACJA INDYWIDUALNA ZUS (art. 34 Prawa przedsiębiorców) — dodane 2026-07-21
+
+> Odpowiedź na pytanie użytkownika czy system interpretacji ZUS jest
+> "wpięty" do odpowiedniego modułu — dotąd CAŁKOWITA LUKA.
+
+```
+□ PODSTAWA: art. 34 ustawy z 6.03.2018 r. Prawo przedsiębiorców
+  ("Konstytucja dla Biznesu", w życie 30.04.2018)
+□ PRZEDMIOT: wyjaśnienie zakresu/sposobu stosowania przepisów o
+  obowiązku SKŁADEK (społeczne, zdrowotne, FP/FGŚP/FEP) w indywidualnej
+  sprawie przedsiębiorcy
+□ UPRAWNIONY: WYŁĄCZNIE przedsiębiorca, we WŁASNEJ sprawie
+□ OPŁATA: 40 zł za KAŻDY stan faktyczny/zdarzenie przyszłe, płatne w
+  7 dni od złożenia
+□ WŁAŚCIWOŚĆ SZCZEGÓLNA: WYŁĄCZNIE 2 oddziały ZUS w Polsce — GDAŃSK i
+  LUBLIN (wg lokalizacji działalności, sprawdź wyszukiwarkę PRZED
+  złożeniem)
+□ TERMIN: 30 dni od wpływu KOMPLETNEGO i OPŁACONEGO wniosku
+□ ⭐ MILCZĄCA ZGODA: brak wydania w terminie = UZNAJE SIĘ za wydaną
+  interpretację POTWIERDZAJĄCĄ stanowisko WNIOSKODAWCY (analogicznie
+  do milczącego załatwienia sprawy KPA)
+□ FORMA: decyzja administracyjna, z prawem odwołania
+□ WYŁĄCZENIE: ZUS ODMÓWI dla spraw ustalenia właściwego ustawodawstwa
+  (sprawy transgraniczne — koordynacja UE, odrębna procedura)
+
+⭐ ZNACZENIE STRATEGICZNE: narzędzie PREWENCYJNE przy planowaniu modelu
+współpracy (B2B/zlecenie) budzącego wątpliwości co do ryzyka uznania
+za STOSUNEK PRACY — patrz test G.1 w `analizator-umow-v1/references/
+b2b-podwykonawcze.md` oraz reforma PIP 2026 (`mod-ustawa-PIP-
+inspekcja-pracy.md` sekcja 6.2, DR-05) — pozytywna interpretacja
+uzyskana PRZED rozpoczęciem współpracy wzmacnia pozycję przedsiębiorcy
+przy kontroli.
+
+GOTOWY WZÓR WNIOSKU: `pisma-proste-v2/references/SPJ-interpretacja-
+zus.md` (dodany 2026-07-21) — pełne elementy, opłata, właściwość,
+strategia równoległego wniosku do GIP.
+```

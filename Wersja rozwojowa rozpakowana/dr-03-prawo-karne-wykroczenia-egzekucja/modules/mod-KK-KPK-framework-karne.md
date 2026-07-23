@@ -226,4 +226,9 @@ INTAKE:
 web_search: "art 286 KK oszustwo przesłanki orzecznictwo SN 2024 2025 isap.sejm.gov.pl"
 web_search: "art 296 KK nadużycie zaufania menedżerskie przesłanki wyrok SN 2024 2025"
 web_search: "art 209 KK niealimentacja termin 3 miesiące czynny żal SN orzeczenie 2024 2025"
+⭐ Ogólna treść czynnego żalu (KK art. 15 + KKS art. 16-16a, w tym
+kluczowe ustalenie że to NIE tylko samo-donos) → `mod-czynny-zal-KK-
+KKS-samooskarzenie.md` (DR-03, dodany 2026-07-21) — art. 209 KK ma
+WŁASNY, SZCZEGÓLNY wariant czynnego żalu (termin 3 miesięcy) ODRĘBNY
+od ogólnych zasad, NIE duplikowany w tamtym module, sprawdź OBA.
 ```
