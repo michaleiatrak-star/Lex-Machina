@@ -19,6 +19,7 @@ każdego przepisu i każdej sygnatury.*
 [Architektura](#%EF%B8%8F-architektura) •
 [Katalog skilli](#-katalog-skilli) •
 [Mechanizmy weryfikacji](#%EF%B8%8F-mechanizmy-antyhalucynacyjne) •
+[Baza źródeł](#baza-źródeł-i-portali) •
 [Instalacja](#-instalacja) •
 [Zadania cykliczne (Cowork)](#zadania-cykliczne-scheduled-tasks-w-cowork) •
 [Zastrzeżenia](#%EF%B8%8F-zastrzeżenia-prawne)
@@ -237,6 +238,75 @@ FRAGMENT   → cytat dosłowny / pinpoint
 Paczka audytowa deliverable: manifest JSON, sumy SHA-256, metadane (model, tryb,
 źródła, zatwierdzający), jawne statusy `MISSING`. Dowód dla audytora i compliance —
 nigdy załącznik do pisma.
+
+---
+
+## Baza źródeł i portali
+
+Lex Machina nie przeszukuje internetu "na ślepo" — każde wyszukiwanie trafia do
+skatalogowanej bazy źródeł o przypisanym rzędzie wiarygodności. Rejestry kanoniczne:
+[`shared/HIERARCHIA-ZRODEL.md`](Wersja%20rozwojowa%20rozpakowana/shared/HIERARCHIA-ZRODEL.md)
+(kategoryzacja wiarygodności Rząd 1 / 2A / 2B / 3) oraz
+[`shared/PORTALE-BRANZOWE-RZAD-2B.md`](Wersja%20rozwojowa%20rozpakowana/shared/PORTALE-BRANZOWE-RZAD-2B.md)
+(mapa portali per dziedzina DR, z empirycznymi testami `site:`).
+
+### Rząd 1 — źródła urzędowe (wyłączne dla brzmienia przepisu)
+
+| Baza | Zakres |
+|---|---|
+| [isap.sejm.gov.pl](https://isap.sejm.gov.pl) + [api.sejm.gov.pl/eli](https://api.sejm.gov.pl/eli) | Dz.U. i M.P. od 1918 r. — teksty jednolite, łańcuch nowelizacji (deterministyczne API ELI) |
+| [sejm.gov.pl](https://www.sejm.gov.pl) | proces legislacyjny |
+| [eur-lex.europa.eu](https://eur-lex.europa.eu) | prawo UE (CELLAR/CELEX) |
+| [dzienniki.gov.pl](https://dzienniki.gov.pl) | dzienniki urzędowe (m.in. wojewódzkie — prawo miejscowe) |
+| uodo.gov.pl, BIP właściwych organów | rozporządzenia branżowe, ochrona danych |
+
+### Rząd 2A — oficjalne orzecznictwo i interpretacje
+
+| Baza | Zakres |
+|---|---|
+| [sn.pl](https://sn.pl) | Sąd Najwyższy |
+| [orzeczenia.ms.gov.pl](https://orzeczenia.ms.gov.pl) | Portal Orzeczeń Sądów Powszechnych + portale poszczególnych SA/SO/SR |
+| [orzeczenia.nsa.gov.pl](https://orzeczenia.nsa.gov.pl) | CBOSA — NSA i 16 WSA |
+| [trybunal.gov.pl](https://trybunal.gov.pl) + otkzu.trybunal.gov.pl | Trybunał Konstytucyjny (OTK ZU) |
+| [orzeczenia.uzp.gov.pl](https://orzeczenia.uzp.gov.pl) | Krajowa Izba Odwoławcza |
+| [saos.org.pl](https://www.saos.org.pl) | SAOS — wyszukiwarka pomocnicza i API weryfikacji sygnatur |
+| [curia.europa.eu](https://curia.europa.eu), [echr.coe.int](https://www.echr.coe.int) | TSUE, ETPC |
+| interpretacje.podatki.gov.pl (Eureka), zus.pl, pip.gov.pl, uokik.gov.pl, uzp.gov.pl i in. | interpretacje urzędowe per dziedzina — rejestr: [`shared/INTERPRETACJE-URZEDOWE.md`](Wersja%20rozwojowa%20rozpakowana/shared/INTERPRETACJE-URZEDOWE.md) |
+
+### Rząd 2B — uznane portale prawnicze i branżowe (komentarz i kontekst)
+
+Nigdy nie służą jako brzmienie przepisu ani dowód istnienia orzeczenia — zawsze ze
+znacznikiem źródła pomocniczego.
+
+| Kategoria | Portale |
+|---|---|
+| Generalistyczne | prawo.pl, infor.pl (+ kadry / ksiegowosc / samorzad), gofin.pl (+ subdomeny), gazetaprawna.pl, rp.pl, lexlege.pl, arslege.pl, money.pl |
+| Podatki i księgowość (DR-06) | gofin.pl, ksiegowosc.infor.pl, podatki.biz |
+| Prawo pracy (DR-04) | kodekspracy.pl, kadry.infor.pl |
+| Gospodarcze (DR-02) | poradnikprzedsiebiorcy.pl |
+| Zamówienia publiczne (DR-07) | portalzp.pl |
+| Samorząd (DR-08) | samorzad.infor.pl, prawodlasamorzadu.pl |
+| Budownictwo (DR-09) | muratorplus.pl, prawniknabudowie.com, prawnikpodpowienabudowie.pl |
+| Zdrowie i farmacja (DR-10) | rynekzdrowia.pl |
+| RODO i cyfrowe (DR-11) | poradyodo.pl |
+| Osoby z niepełnosprawnościami | niepelnosprawni.pl, integracja.org (+ popon.pl, obpon.org — perspektywa pracodawcy) |
+| Bazy komercyjne (przy licencji) | LEX (sip.lex.pl), Legalis (sip.legalis.pl) — jako tekst przepisu Rząd 2A, jako komentarz Rząd 2B |
+
+Rejestr uczciwie odnotowuje dziedziny bez dominującego portalu branżowego (DR-03
+karne, DR-05 administracyjne, DR-15 compliance) — tam system korzysta z portali
+generalistycznych z zawężonym zapytaniem.
+
+### Rząd 3 — strony kancelarii, blogi, NGO
+
+Dopuszczone wyłącznie jako trop do dalszej weryfikacji — wysokie ryzyko
+dezaktualizacji, obowiązkowe skrzyżowanie z Rzędem 1/2A przed użyciem.
+
+### Konektory MCP (dostęp deterministyczny, poziom A)
+
+| Konektor | Źródło | Status |
+|---|---|---|
+| `mcp-isap` | api.sejm.gov.pl/eli — 96 000+ aktów Dz.U./M.P. | skonfigurowany ([`claude_desktop_config.json`](claude_desktop_config.json)) |
+| SAOS, EUR-Lex/CELLAR, KRS, CEIDG, NBP, SUDOP | przykładowe implementacje | [`shared/tools/mcp-servers/`](Wersja%20rozwojowa%20rozpakowana/shared/tools/mcp-servers/) + rekomendacje: [`shared/KONEKTORY-REKOMENDOWANE.md`](Wersja%20rozwojowa%20rozpakowana/shared/KONEKTORY-REKOMENDOWANE.md) |
 
 ---
 
