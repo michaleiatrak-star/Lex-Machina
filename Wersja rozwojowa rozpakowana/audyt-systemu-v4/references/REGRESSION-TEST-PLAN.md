@@ -44,6 +44,7 @@ automatycznego) — WYŁĄCZNIE integralność STRUKTURALNĄ i SPÓJNOŚCIOWĄ.
 | T7 | Duplikaty bajtowe | ⭐ ŚREDNI | JUŻ POKRYTE przez istniejący `ci_check_shared.py` |
 | T8 | Zakresy tytuł-vs-treść | ⭐⭐ WYSOKI | Moduł `mod-KK-art148-162` obiecywał w tytule "art. 148-162", treść urywała się na art. 157 (audyt 2026-07-21o) |
 | T9 | Weryfikacja przeniesień do shared/ | ⭐⭐ WYSOKI | Dodane 2026-07-21 przy PONOWNYM przeglądzie T1 — wąski, celowany następca próbnego, SZEROKIEGO skanera dangling references, który dał ZBYT DUŻO szumu (patrz sekcja 10) |
+| ~~T10~~ | ~~Monitorowanie plików Nexto/Virtualo o niepewnym statusie prawnym~~ | — | USUNIĘTE 2026-07-24d na polecenie użytkownika (wraz z flagą F-12, rejestrem i skryptem `check_nexto_free_files.py`) — patrz `AUDIT-JOURNAL.md`, wpis AUDYT-2026-07-24d |
 
 ---
 

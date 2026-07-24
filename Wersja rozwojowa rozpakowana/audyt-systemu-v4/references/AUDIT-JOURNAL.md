@@ -4,7 +4,299 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
-## AUDYT-2026-07-21ff — zweryfikowano niebezpiecznik.pl (DR-11) + WSZYSTKIE TRZY kandydatów z własnej listy rekomendacji, WSZYSTKIE trafione: e-prawnik.pl ROZWIĄZUJE wcześniej odnotowaną lukę DR-03, wirtualnemedia.pl (nowa nisza medialna), praca.pl (perspektywa pracownika)
+## AUDYT-2026-07-24d — USUNIĘCIE W CAŁOŚCI zamkniętego rejestru i mechanizmu T10 (monitorowanie plików Nexto/Virtualo, flaga F-12), na wyraźne polecenie użytkownika
+
+**Kontekst:** kontynuacja AUDYT-2026-07-24c (zamknięcie flagi F-12,
+wyczyszczenie rejestru do `[]`). Użytkownik zażądał wprost usunięcia
+"tego zamkniętego rejestru i reguły w audycie systemu do monitorowania
+takich plików" — a więc nie tylko wyczyszczenia danych, ale skasowania
+samego mechanizmu (skrypt, plik rejestru, wpis testu T10, wywołanie
+w orkiestratorze).
+
+**Naprawa wykonana:**
+
+1. **USUNIĘTE pliki** (skasowane z drzewa skilla, nie tylko wyczyszczone):
+   - `audyt-systemu-v4/scripts/check_nexto_free_files.py`
+   - `audyt-systemu-v4/scripts/nexto_free_files_registry.json`
+2. `audyt-systemu-v4/scripts/run_regression_suite.py` — usunięty blok
+   T10 (wywołanie/komunikat o `check_nexto_free_files.py`) oraz
+   `results["T10"]`, poprawiony komunikat końcowy (T4/T5 zamiast
+   T4/T5/T10).
+3. `audyt-systemu-v4/SKILL.md` — usunięty wiersz rejestrujący
+   `scripts/check_nexto_free_files.py` jako T10 w liście skryptów.
+4. `audyt-systemu-v4/references/REGRESSION-TEST-PLAN.md` — wiersz T10
+   oznaczony jako usunięty (przekreślony, z odsyłaczem do tego wpisu),
+   zamiast usunięcia całego wiersza — zachowuje numerację T1-T9 bez
+   przesuwania.
+5. `audyt-systemu-v4/references/CHECKLIST-DEDUP.md` — historyczny wpis
+   o budowie T10 opatrzony adnotacją o usunięciu; ZAPIS HISTORYCZNY NIE
+   USUNIĘTY (to log przeszłych działań, nie aktywna reguła).
+6. `audyt-systemu-v4/references/WARN-OTWARTE.md` — bez dodatkowych
+   zmian w tej rundzie (flaga F-12 już usunięta z tabeli wpisem
+   AUDYT-2026-07-24c).
+
+**PRE-DELIVERY-COMPLETENESS-CHECK — uzasadnienie różnicy liczby
+plików (ZASADA 7):** liczba plików PRZED tą rundą edycji: 34 (już po
+wcześniejszym wyczyszczeniu rejestru w AUDYT-2026-07-24c, przed
+usunięciem plików). PO usunięciu 2 plików (`check_nexto_free_files.py`,
+`nexto_free_files_registry.json`): 32. Różnica (34 → 32, -2) jest
+ŚWIADOMA i WPROST uzasadniona: to jest dokładnie zadanie zlecone przez
+użytkownika (usunięcie mechanizmu), nie przypadkowa utrata pliku.
+
+**Co POZOSTAJE bez zmian:** sekcja 3B `shared/HIERARCHIA-ZRODEL.md`
+(legalne próbki/podglądy księgarni cyfrowych, w tym rozróżnienie
+3B-i/Rząd 3 vs 3B-ii/Rząd 2B-równoważne dla Beck/Kluwer) — to ODRĘBNY,
+legalny mechanizm dotyczący fragmentów/próbek, nie pełnych plików PDF,
+i nie był przedmiotem tego ani poprzedniego polecenia usunięcia.
+
+**Zakres:** `audyt-systemu-v4/scripts/` (2 pliki usunięte, 1 zmieniony),
+`audyt-systemu-v4/SKILL.md`, `audyt-systemu-v4/references/
+REGRESSION-TEST-PLAN.md`, `audyt-systemu-v4/references/
+CHECKLIST-DEDUP.md`. Dostarczono zgodnie z ZASADĄ 7 jako kompletny
+skill `audyt-systemu-v4` (34 pliki przed tą rundą → 32 pliki po, różnica
+uzasadniona powyżej).
+
+## AUDYT-2026-07-24c — ZAMKNIĘCIE FLAGI F-12: usunięto wszystkie bezpośrednie linki do pełnych plików PDF (nexto/Virtualo) jako źródła w systemie, na wyraźne polecenie użytkownika
+
+**Kontekst:** po sesjach 2026-07-24/2026-07-24b (dodanie sekcji 3B
+`shared/HIERARCHIA-ZRODEL.md` dla LEGALNYCH próbek/fragmentów książek z
+nexto.pl, z rozróżnieniem 3B-i/Rząd 3 i 3B-ii/Rząd 2B-równoważne dla
+Beck/Kluwer), użytkownik zażądał wprost: "usuń pojedyncze przypisane
+pdf jako źródła, takie jak [konkretny link nexto do pełnego komentarza
+KK, Mozgawa] i pozostałe bezpośrednie linki do pdf".
+
+**Naprawa wykonana:**
+
+1. `audyt-systemu-v4/scripts/nexto_free_files_registry.json` —
+   WYCZYSZCZONY do `[]`. Usunięto wszystkie 5 wcześniej monitorowanych
+   bezpośrednich adresów URL (komentarze KK-Mozgawa 2023, wyroby
+   budowlane 2017, KAS 2018, akcyza 2016, usługi płatnicze 2016 —
+   wszystkie Wolters Kluwer, wzorzec `.../free/[hash].pdf`).
+2. `audyt-systemu-v4/scripts/check_nexto_free_files.py` — docstring
+   zaktualizowany: rejestr pusty, monitorowanie zamknięte, skrypt
+   pozostaje jako gotowe narzędzie na wypadek przyszłego wskazania
+   NOWEGO adresu przez użytkownika (`--add`), ale nie prowadzi już
+   aktywnego śledzenia i nie legitymizuje żadnego bezpośredniego linku
+   PDF jako źródła.
+3. `audyt-systemu-v4/references/WARN-OTWARTE.md` — usunięto wiersz
+   flagi F-12 z tabeli otwartych flag (flaga ZAMKNIĘTA tym wpisem, zgodnie
+   z procedurą opisaną w sekcji "Jak korzystać z tego pliku").
+
+**Rozróżnienie od sekcji 3B (NIE cofnięte tym wpisem):** F-12 dotyczył
+WYŁĄCZNIE pełnych, płatnych plików PDF udostępnionych pod pełnym
+adresem `.../free/[hash].pdf` (naruszenie wzorca — cała treść
+komentarza, nie ograniczona próbka). Sekcja 3B w
+`shared/HIERARCHIA-ZRODEL.md` (v1.2) dotyczy ODRĘBNEGO, legalnego
+mechanizmu: standardowych STRON PODGLĄDU/PRÓBKI księgarni cyfrowej
+(spis treści + kilka stron), z obowiązkowym oznaczeniem jako fragment
+i weryfikacją ważności linku — TA sekcja pozostaje w mocy bez zmian.
+Innymi słowy: podgląd/próbka nadal wolno cytować z zastrzeżeniami
+sekcji 3B; bezpośredni link do PEŁNEGO pliku PDF (jak usunięte wyżej)
+nie jest już w żadnej formie przechowywany w systemie jako źródło.
+
+**Uzasadnienie decyzji:** niezależnie od wcześniejszej hipotezy o
+przyczynie (błąd konfiguracji platformy Virtualo/Nexto vs świadoma
+decyzja wydawcy — nierozstrzygnięte), użytkownik zdecydował, że system
+nie powinien przechowywać ani przypisywać jako źródła bezpośrednich
+linków do pełnych, cudzych plików PDF. Decyzja wykonana bez dyskusji
+nad zasadnością — to preferencja użytkownika co do konfiguracji
+własnego systemu, nie kwestia wymagająca dodatkowej weryfikacji prawnej.
+
+**Zakres:** `audyt-systemu-v4/scripts/nexto_free_files_registry.json`,
+`audyt-systemu-v4/scripts/check_nexto_free_files.py`,
+`audyt-systemu-v4/references/WARN-OTWARTE.md` (usunięcie wiersza F-12).
+Dostarczono zgodnie z ZASADĄ 7 (OUTPUT-COMPLETENESS) jako kompletny
+skill `audyt-systemu-v4` (34 pliki przed = 34 pliki po edycji).
+
+## AUDYT-2026-07-21jj — KOREKTA na uwagę użytkownika: usunięto wpis nexto.pl/profinfo.pl jako "legalna księgarnia" z rejestru portali — cel tego rejestru to źródła PRZESZUKIWANIA (site:), nie katalog miejsc zakupu; przy okazji naprawiono niespójność (brakujący wpis CHANGELOG dla wcześniejszej wersji 2.5)
+
+**Zakres:** korekta `shared/PORTALE-BRANZOWE-RZAD-2B.md` (DR-03, v2.5→
+v2.6) + wpis `CHECKLIST-DEDUP.md`. Kontrola: T1/T2/T9 uruchomione
+POST-edycyjnie.
+
+**Kontekst:** użytkownik trafnie zauważył: "nie reklamujemy księgarni,
+więc nie powinny być dodane, tylko wskazane jako źródło darmowych
+zasobów do monitorowania".
+
+**Naprawa:** usunięto wiersz `nexto.pl / profinfo.pl (własny sklep
+Wolters Kluwer)` z tabeli DR-03, gdzie WCZEŚNIEJ (w poprzedniej turze)
+został BŁĘDNIE zarejestrowany jako "legalna księgarnia" — POMIMO że
+CAŁY sens tego rejestru to wskazywanie źródeł do PRZESZUKIWANIA
+(`site:domena.pl zapytanie` dla treści prawnej/komentarza), NIE
+katalogowanie miejsc KOMERCYJNEGO zakupu, niezależnie od tego, jak
+legalna i godna zaufania jest dana platforma. Zastąpiono wpisem
+WYŁĄCZNIE informującym, że domena nexto.pl jest ŹRÓDŁEM monitorowanych
+plików (flaga F-12/T10), BEZ rekomendowania jej jako ogólnego portalu.
+
+**Przy okazji naprawiono dodatkową niespójność:** odkryto, że
+POPRZEDNIA aktualizacja wersji (2.4→2.5) zmieniła WYŁĄCZNIE nagłówek
+wersji na górze pliku, BEZ odpowiadającego wpisu w sekcji CHANGELOG na
+końcu — dodano brakujący wpis 2.5 (z jawną adnotacją, że został
+uzupełniony WSTECZNIE, dla przejrzystości historii zmian) ORAZ nowy
+wpis 2.6 dokumentujący samą korektę.
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana (22 sekcje
+głównych, 15 wpisów DR zachowanych). Kontrola T1/T2/T9 — wszystkie
+PASS.
+
+---
+
+
+
+**Zakres:** ZAOSTRZENIE F-12 w `WARN-OTWARTE.md` + NOWY
+`audyt-systemu-v4/scripts/check_nexto_free_files.py` (T10) + rejestracja
+w `SKILL.md` (v5.7→v5.8) + `REGRESSION-TEST-PLAN.md` + wpis
+`CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik polecił poszukać ANALOGICZNYCH pełnych
+komentarzy na Nexto, monitorować je, oraz dodać do audytu MECHANIZM
+sprawdzający "każdy jeden taki plik".
+
+**⭐⭐⭐ Znalezisko kluczowe, ZMIENIAJĄCE ocenę:** wyszukiwanie TEGO
+SAMEGO wzorca URL (`nexto.pl/upload/virtualo/wolters_kluwer/[hash]/
+free/[hash].pdf`) ujawniło CO NAJMNIEJ CZTERY kolejne, RÓŻNE pełne
+komentarze Wolters Kluwer (wyroby budowlane 2017, KAS 2018, akcyza
+2016, usługi płatnicze 2016) — RÓŻNE lata/tematy/ISBN, TEN SAM
+schemat ścieżki — potwierdzając, że to zjawisko SYSTEMOWE (platforma
+Virtualo/Nexto), nie pojedynczy incydent. NAJWAŻNIEJSZE: TRZY z pięciu
+sprawdzonych plików zawierają WEWNĄTRZ TREŚCI jawną notatkę wydawcy:
+"Ta książka jest wspólnym dziełem twórcy i wydawcy (...) nie publikuj
+jej w internecie (...) Szanujmy prawo i własność. Więcej na
+www.legalnakultura.pl" — SAM WYDAWCA, W SAMYM DOKUMENCIE, WPROST
+zabrania internetowej publikacji, podczas gdy plik leży PUBLICZNIE na
+serwerze jego WŁASNEGO, autoryzowanego sprzedawcy. TO silnie przechyla
+ocenę w stronę HIPOTEZY BŁĘDU KONFIGURACJI, nie świadomej decyzji
+promocyjnej wydawcy — ZAKTUALIZOWANO F-12 tym ustaleniem, PODNOSZĄC
+priorytet z "średni" na "średni-wysoki".
+
+**⛔ Świadome ograniczenie zakresu — NIE zbudowano mechanizmu
+systematycznego wyszukiwania:** mimo że TECHNICZNIE możliwe byłoby
+dalsze przeszukiwanie w celu znalezienia JESZCZE większej liczby
+takich plików, ŚWIADOMIE tego NIE zrobiono — biorąc pod uwagę
+odkrytą notatkę wydawcy, systematyczne "polowanie" i katalogowanie
+KOLEJNYCH takich plików jako "źródeł do monitorowania" zaczęłoby
+przypominać dokumentowanie/rozpowszechnianie wiedzy o luce w cudzym
+systemie WBREW jawnej, udokumentowanej woli wydawcy. Rejestr
+OGRANICZONO do 5 plików: 1 wskazany BEZPOŚREDNIO przez użytkownika +
+4 znalezione PRZY OKAZJI weryfikacji TEGO SAMEGO wzorca (na wyraźne
+polecenie użytkownika), NIE przez dalsze, autonomiczne rozszerzanie
+poszukiwań.
+
+**Zbudowano T10 — mechanizm monitorowania z jawnym ograniczeniem
+środowiskowym:** `check_nexto_free_files.py` — NIE jest to w pełni
+autonomiczny skrypt sieciowy (sandbox audytowy NIE MA dostępu do
+nexto.pl w białej liście domen bash_tool) — zamiast tego, skrypt
+prowadzi PRZETRWAŁY rejestr JSON (5 pozycji, z metadanymi: tytuł,
+wydawca, rok, obecność notatki zakazu publikacji, data/status
+ostatniej weryfikacji) oraz generuje CZYTELNE ZADANIA dla asystenta do
+wykonania przez `web_fetch` w KAŻDEJ przyszłej sesji dotykającej tego
+tematu, z komendą do LOGOWANIA wyników (`--log-result`). Dodano jako
+T10 (⭐ ŚREDNI, RĘCZNY) do orkiestratora — analogicznie do T4/T5,
+oznaczony jako pomijany w automatycznym przebiegu z jasnym
+przypomnieniem, jak go uruchomić ręcznie.
+
+**Kryterium rozstrzygnięcia zapisane w mechanizmie:** jeśli WSZYSTKIE
+5 plików zniknie/zostanie ograniczonych JEDNOCZEŚNIE w przyszłej
+weryfikacji → potwierdzi systemowy błąd (naprawiony) → zamknij F-12;
+jeśli TYLKO NIEKTÓRE znikną → sugeruje indywidualne decyzje per tytuł;
+jeśli WSZYSTKIE pozostaną pełne przez wiele miesięcy → rosnące
+prawdopodobieństwo świadomej decyzji wydawcy.
+
+**Status:** ✅ WDROŻONE. Skrypt przetestowany (--list, --tasks,
+--log-result wszystkie działają poprawnie), pliki testowe wyczyszczone
+przed dostawą (świeży rejestr wygenerowany od nowa). Struktura
+WARN-OTWARTE.md i REGRESSION-TEST-PLAN.md zweryfikowana (7 flag F
+zachowanych). Pełny zestaw testów regresyjnych (T1-T10) uruchomiony —
+T1/T2/T6_T7/T9 PASS, T3/T8 WARN (bez zmian), T4/T5/T10 poprawnie
+oznaczone jako RĘCZNE.
+
+---
+
+
+
+**Zakres:** nowy wpis F-12 w `WARN-OTWARTE.md` + rejestracja
+`nexto.pl`/`profinfo.pl` jako legalnych księgarni w
+`shared/PORTALE-BRANZOWE-RZAD-2B.md` (DR-03).
+
+**Kontekst:** użytkownik wskazał konkretny link z domeny Nexto.pl,
+prowadzący (via `web_fetch`) do PEŁNEGO tekstu komentarza do Kodeksu
+karnego (Mozgawa i in., wyd. 11, Wolters Kluwer 2023) — NIE fragmentu
+promocyjnego, lecz kompletnej, wielosetstronicowej publikacji
+komercyjnej, umieszczonej w ścieżce zawierającej segment "/free/".
+Użytkownik poprosił o dodanie MECHANIZMU MONITOROWANIA tego pliku do
+audytu — TAK, by z czasem SAMA trwałość (lub zniknięcie) pliku
+rozstrzygnęła, czy jest to świadome udostępnienie przez wydawcę, czy
+błąd konfiguracji.
+
+**⭐⭐ Decyzja metodologiczna — NIE zarejestrowano pliku jako
+"potwierdzone źródło":** zamiast dodać KONKRETNY adres URL jako
+zweryfikowaną pozycję w rejestrze portali (co przedwcześnie
+przesądzałoby o jego legalnym, trwałym charakterze), otwarto flagę
+F-12 w `WARN-OTWARTE.md` — DOKŁADNIE ten sam mechanizm, jaki system już
+stosuje dla innych niepewnych, wymagających powtórnej weryfikacji w
+czasie ustaleń (np. F-4 — nowelizacja narkomanii czekająca na podpis
+prezydenta). Flaga zawiera JEDNOZNACZNĄ instrukcję dla przyszłych
+sesji: użyj `web_fetch` na TYM SAMYM adresie, potwierdź czy TREŚĆ
+nadal jest PEŁNA (nie tylko czy strona w ogóle odpowiada), zanotuj
+datę. Po kilku POTWIERDZONYCH sprawdzeniach rozłożonych w czasie —
+rosnące prawdopodobieństwo świadomej decyzji wydawcy; jeśli plik
+zniknie/zostanie ograniczony — potwierdzi to hipotezę błędu.
+
+**Dodatkowo:** zarejestrowano `nexto.pl` i `profinfo.pl` (własny sklep
+Wolters Kluwer) jako LEGALNE księgarnie cyfrowe oferujące komentarze
+prawnicze głównych wydawnictw — z WYRAŹNYM rozróżnieniem: to
+rejestracja PLATFORMY jako miejsca ZAKUPU, NIE potwierdzenie
+konkretnego, darmowego pliku jako trwałego źródła.
+
+**Status:** ✅ WDROŻONE. Flaga F-12 aktywna, wymaga powtórnej
+weryfikacji w przyszłych sesjach. Struktura obu plików zweryfikowana.
+
+---
+
+
+
+**Zakres:** rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v2.3→v2.4)
++ wpis `CHECKLIST-DEDUP.md`. Kontrola: T1/T2/T9 uruchomione POST-edycyjnie.
+
+**Kontekst:** użytkownik wskazał konkretny link (gov.pl/web/kgpsp) oraz
+polecił przeszukać inne portale rządowe w tym względzie (dla DR-13,
+służby/bezpieczeństwo).
+
+**gov.pl/web/kgpsp — pobrany bezpośrednio:** potwierdzony jako
+oficjalny (Rząd 1) portal Komendy Głównej Państwowej Straży Pożarnej,
+z menu zawierającym dedykowaną sekcję "Prawo" (obok KSRG, Prewencji,
+Kształcenia). Treść strony głównej okazała się w PRZEWAŻAJĄCEJ części
+aktualnościowo-wizerunkowa (zawody sportowe strażaków, jubileusze OSP,
+życzenia świąteczne, apele) — sama sekcja "Prawo" NIE została zbadana
+szczegółowo w tej turze (link nie prowadził bezpośrednio do niej) —
+odnotowano jako punkt startowy do ewentualnego pogłębienia.
+
+**⭐ Poszukiwanie analogicznych portali — bip.kgp.policja.gov.pl:**
+znaleziono oficjalny portal Komendy Głównej Policji, z WŁASNYM,
+odrębnym Dziennikiem Urzędowym (edziennik.policja.gov.pl, elektroniczny
+od 2012 r.) oraz publikowanymi zarządzeniami Komendanta Głównego
+Policji (np. regulamin organizacyjny KGP z licznymi nowelizacjami).
+To WARTOŚCIOWE źródło dla AKTÓW WEWNĘTRZNYCH Policji jako instytucji,
+ODRĘBNE od ogólnego prawa karnego (które pozostaje domeną DR-03/
+e-prawnik.pl).
+
+**⭐ Ustalenie strukturalne dodane do rejestru:** dla dziedziny DR-13 (i
+analogicznie innych służb mundurowych/agencji bezpieczeństwa) właściwym
+WZORCEM nie jest pojedynczy portal komercyjny 2B, lecz CAŁA STRUKTURA
+gov.pl/web/[skrót] — każda służba ma WŁASNY portal w tej rodzinie (KGPSP,
+KGP, analogicznie ABW/SKW/CBA), czasem z WŁASNYM Dziennikiem Urzędowym.
+Odnotowano jednak ZASTRZEŻENIE: treść tych portali jest w przeważającej
+części informacyjno-wizerunkowa, wymagająca ODRĘBNEGO zbadania
+konkretnych sekcji prawnych/zarządzeń dla oceny faktycznej przydatności
+merytorycznej — sama STRUKTURA istnienia portalu nie gwarantuje głębi
+merytorycznej porównywalnej do np. e-prawnik.pl czy gofin.pl.
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana (22 sekcje
+głównych, 15 wpisów DR zachowanych). Kontrola T1/T2/T9 — wszystkie PASS.
+
+---
+
+
 
 **Zakres:** rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v2.2→v2.3,
 w tym KOREKTA wcześniejszego wniosku w sekcji DR-03) + wpis

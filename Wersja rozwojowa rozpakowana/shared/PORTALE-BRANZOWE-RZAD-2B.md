@@ -1,10 +1,23 @@
 # PORTALE-BRANZOWE-RZAD-2B.md — Rejestr Portali per Dziedzina (z weryfikacją `site:`)
 
 > **Plik:** `/mnt/skills/user/shared/PORTALE-BRANZOWE-RZAD-2B.md`
-> **Wersja:** 2.3 (2026-07-21) — zweryfikowano niebezpiecznik.pl (DR-11)
-> + TRZY kandydatów z listy rekomendacji, wszystkie TRAFIONE:
-> e-prawnik.pl (ROZWIĄZUJE lukę DR-03!), wirtualnemedia.pl (nowa
-> nisza medialna), praca.pl (perspektywa pracownika, DR-04)
+> **Wersja:** 2.9 (2026-07-24c) — zamknięto wiersz F-12 (pełne pliki PDF
+> nexto.pl): rejestr wyczyszczony na polecenie użytkownika, patrz
+> `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-07-24c.
+> Wiersz nexto.pl PRÓBKI (3B-i/3B-ii) BEZ ZMIAN.
+> **Wersja:** 2.8 (2026-07-24b) — doprecyzowano wiersz nexto.pl PRÓBKI:
+> rozróżnienie 3B-i (Rząd 3, inne wydawnictwo) / 3B-ii (Rząd
+> 2B-równoważne, gdy próbka jednoznacznie C.H.Beck/Wolters Kluwer), na
+> uwagę użytkownika. Pełna treść w `shared/HIERARCHIA-ZRODEL.md` v1.2.
+> **Wersja:** 2.7 (2026-07-24) — dodano wiersz nexto.pl PRÓBKI (odrębny
+> od wiersza F-12) w tabeli DR-03, na polecenie użytkownika — odsyła do
+> nowej sekcji 3B `shared/HIERARCHIA-ZRODEL.md` (fragmenty/próbki
+> wydawnicze jako Rząd 3, z obowiązkiem weryfikacji ważności linku).
+> **Wersja:** 2.6 (2026-07-21) — KOREKTA: usunięto wpis nexto.pl/
+> profinfo.pl jako "legalna księgarnia" — TEN rejestr służy do
+> wskazywania źródeł PRZESZUKIWANIA (site:), nie reklamowania miejsc
+> zakupu. Domena wspomniana WYŁĄCZNIE jako źródło monitorowanych
+> plików (F-12/T10)
 > **Rola:** UZUPEŁNIENIE `shared/HIERARCHIA-ZRODEL.md` — TAMTEN plik
 > kategoryzuje portale wg WIARYGODNOŚCI (Rząd 1/2A/2B/3), TEN plik
 > mapuje portale wg SPECJALIZACJI TEMATYCZNEJ, z podziałem na 16
@@ -98,6 +111,8 @@
 | Portal | Specjalizacja | Status |
 |---|---|---|
 | **e-prawnik.pl** (+ subdomena dokumenty.e-prawnik.pl) | ⭐⭐ WYPEŁNIA lukę odnotowaną poniżej — PEŁNY tekst Kodeksu wykroczeń Z KOMENTARZEM artykuł-po-artykule (art. 104-108, 119-131, 140-142 i inne), format praktycznego Q&A, PRECYZYJNE cytaty (art. 45 §1 KW — przedawnienie, art. 97 §2 KPSW — odmowa przyjęcia mandatu) | ✅✅ ZWERYFIKOWANE 2026-07-21 (test: prawo karne/wykroczenia — wynik DOSKONAŁY) — ⭐⭐⭐ ZMIENIA WCZEŚNIEJSZY WNIOSEK z tej samej sesji: DR-03 JEDNAK MA dedykowany portal 2B, po prostu WYMAGAŁ innej frazy wyszukiwania niż pierwotnie próbowana ("najlepsze portale prawo karne" nie trafiło na niego, "prawo karne wykroczenia przepisy" — TAK) |
+| *(nexto.pl — NIE rejestrujemy jako portal/księgarnia, to NIE jest cel tego rejestru)* | ⛔ ZAMKNIĘTE 2026-07-24c na wyraźne polecenie użytkownika: wszystkie 5 wcześniej monitorowanych bezpośrednich linków do pełnych plików PDF (flaga F-12) zostały USUNIĘTE z `audyt-systemu-v4/scripts/nexto_free_files_registry.json` (rejestr pusty `[]`) — patrz `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-07-24c | ⛔ Żaden bezpośredni link do pełnego pliku PDF (wzorzec `.../free/[hash].pdf` lub jakikolwiek inny bezpośredni link do pliku PDF spoza Rządu 1/2A) nie jest przechowywany w systemie jako źródło i nie wolno go cytować — dotyczy to WYŁĄCZNIE pełnych plików; legalne próbki/podglądy pozostają dozwolone wg sekcji 3B `shared/HIERARCHIA-ZRODEL.md` |
+| nexto.pl — PRÓBKI/fragmenty książek (spis treści + ograniczone strony, funkcja standardowa księgarni cyfrowej) | ⭐ Dodane 2026-07-24, doprecyzowane 2026-07-24b — ODRĘBNE od wiersza F-12 powyżej (F-12 = pełne, nieautoryzowane pliki; ten wiersz = legalne próbki wydawnicze) | 📚 Rząd 3 domyślnie (3B-i), ALE Rząd 2B-równoważne (3B-ii) gdy wydawnictwo widoczne w próbce to C.H.Beck lub Wolters Kluwer (dziedziczy status marki już uznanej w 2B przez legalis.pl/lex.pl) — pełna procedura, oba znaczniki i wymóg weryfikacji ważności linku + aktualności wydania w `shared/HIERARCHIA-ZRODEL.md`, sekcja **3B**. Zawsze fragment, nigdy Rząd 1/2A |
 | komornik.pl (Krajowa Izba Komornicza) | Egzekucja komornicza — wytyczne, komunikaty | 📚 znane (już w systemie) |
 | infor.pl | Ogólne prawo karne, komentarze praktyczne | 📚 znane (HIERARCHIA-ZRODEL) |
 | gazetaprawna.pl | Prawo karne — bieżące komentarze, orzecznictwo | ✅✅ ZWERYFIKOWANE 2026-07-21 jako GENERALISTYCZNE źródło wysokiej jakości (patrz sekcja "OGÓLNE, MIĘDZYDZIEDZINOWE" niżej) — status podniesiony z 📚 |
@@ -277,7 +292,24 @@ dziedziny dotyczy pytanie.
 |---|---|---|
 | strazgraniczna.pl (oficjalny, nie 2B) | Rząd 1 — organ | patrz odrębne traktowanie |
 | bip.abw.gov.pl, skw.gov.pl | Oficjalne (Rząd 1) — organizacja ochrony informacji niejawnych, spory kompetencyjne ABW/SKW | patrz `shared/INTERPRETACJE-URZEDOWE.md` |
+| **gov.pl/web/kgpsp** (Komenda Główna Państwowej Straży Pożarnej) | ⛔ Rząd 1 — OFICJALNY portal PSP, dedykowana sekcja "Prawo" (menu "Co robimy"), KSRG (Krajowy System Ratowniczo-Gaśniczy), Prewencja, zarządzenia Komendanta Głównego | ✅ ZWERYFIKOWANE 2026-07-21 (pobrano stronę bezpośrednio, na wskazanie użytkownika) — TREŚĆ w WIĘKSZOŚCI aktualnościowo-wizerunkowa (zawody sportowe, apele, jubileusze OSP), sekcja "Prawo" NIE zbadana szczegółowo w tej turze — punkt startowy do pogłębienia |
+| **bip.kgp.policja.gov.pl / edziennik.policja.gov.pl** (Komenda Główna Policji) | ⛔ Rząd 1 — OFICJALNY portal KGP, WŁASNY Dziennik Urzędowy KGP (od 2012 r. elektroniczny, edziennik.policja.gov.pl), zarządzenia Komendanta Głównego, status prawny | ✅ ZWERYFIKOWANE 2026-07-21 (przy okazji poszukiwania analogicznych portali służb) — WARTOŚCIOWE źródło DLA aktów WEWNĘTRZNYCH Policji (zarządzenia, regulaminy), NIE dla ogólnego prawa karnego (patrz DR-03 dla tego) |
 | **defence24.pl** | Bezpieczeństwo, obronność, służby specjalne — dziennikarstwo analityczno-branżowe (NIE głęboki komentarz prawny) | ✅ ZWERYFIKOWANE 2026-07-21 — ⚠️ ZASTRZEŻENIE: znalezione artykuły w WIĘKSZOŚCI STARSZE (2013-2017, dotyczące HISTORYCZNYCH procesów legislacyjnych) — profil BLIŻSZY dziennikarstwu bezpieczeństwa/obronności niż analizie prawnej; TRAKTUJ jako KONTEKST branżowy, NIE główne źródło prawne |
+
+### ⭐ Uwaga o strukturze gov.pl (dodane 2026-07-21)
+
+```
+DLA DZIEDZINY DR-13 (i analogicznie dla INNYCH służb mundurowych)
+WŁAŚCIWYM wzorcem NIE JEST portal 2B (komercyjny komentarz), lecz
+STRUKTURA oficjalna gov.pl/web/[skrót] — KAŻDA służba/agencja RZĄDOWA
+ma WŁASNY portal w TEJ strukturze (gov.pl/web/kgpsp, gov.pl/web/kgp
+via policja.pl, analogicznie ABW/SKW/CBA) — z WŁASNYMI zarządzeniami,
+czasem WŁASNYM Dziennikiem Urzędowym (jak KGP). TREŚĆ tych portali jest
+jednak W PRZEWAŻAJĄCEJ części WIZERUNKOWO-INFORMACYJNA (aktualności,
+zawody sportowe, jubileusze) — SEKCJA "Prawo"/zarządzenia WYMAGA
+odrębnego, GŁĘBSZEGO zbadania niż strona główna, żeby ocenić
+FAKTYCZNĄ przydatność merytoryczną.
+```
 
 ### ⚠️ UCZCIWA OBSERWACJA (dodane 2026-07-21)
 
@@ -554,6 +586,71 @@ KROK 5: ZAWSZE kategoryzuj wynik wg `shared/HIERARCHIA-ZRODEL.md`
 ---
 
 ## CHANGELOG
+
+**2.9 (2026-07-24c):** ⛔ Na wyraźne polecenie użytkownika ("usuń
+pojedyncze przypisane pdf jako źródła... i pozostałe bezpośrednie linki
+do pdf") zamknięto flagę F-12: rejestr `nexto_free_files_registry.json`
+wyczyszczony do `[]`, wiersz F-12 usunięty z tabeli otwartych flag w
+`audyt-systemu-v4/references/WARN-OTWARTE.md`. Wiersz w tabeli DR-03
+powyżej zaktualizowany, żeby to odzwierciedlić. Wiersz "nexto.pl —
+PRÓBKI/fragmenty książek" (3B-i/3B-ii) NIE jest tym dotknięty — dotyczy
+odrębnego, legalnego mechanizmu podglądu/próbki.
+
+**2.8 (2026-07-24b):** ⭐ Na uwagę użytkownika ("czy nie powinny być w 2,
+szczególnie w odniesieniu do literatury Beck, Kluwer?") doprecyzowano
+wiersz nexto.pl PRÓBKI: kryterium 2B to marka wydawnicza + redakcja
+zawodowa, nie kanał dystrybucji — C.H.Beck i Wolters Kluwer są już w 2B
+przez legalis.pl/lex.pl, więc próbka na nexto.pl jednoznacznie
+identyfikowalna jako publikacja tych wydawnictw dziedziczy status 2B
+(podtyp 3B-ii w `shared/HIERARCHIA-ZRODEL.md`), z zachowaniem wymogów
+fragmentu/linku/aktualności wydania. Inne/nieustalone wydawnictwo
+pozostaje Rząd 3 (3B-i).
+
+**2.7 (2026-07-24):** ⭐ Na polecenie użytkownika dodano ODRĘBNY wiersz
+`nexto.pl — PRÓBKI/fragmenty książek` w tabeli DR-03, celowo
+oddzielony od istniejącego wiersza F-12. Rozróżnienie: F-12 = pełne,
+nieautoryzowane pliki PDF (`.../free/[hash].pdf`), pod aktywnym
+monitorowaniem, nie do cytowania; nowy wiersz = standardowa funkcja
+próbki księgarni cyfrowej (spis treści + ograniczone strony),
+dozwolona jako Rząd 3 WYŁĄCZNIE jako fragment/pogląd doktrynalny, z
+obowiązkową weryfikacją ważności linku przed każdym użyciem — pełna
+procedura w nowej sekcji 3B `shared/HIERARCHIA-ZRODEL.md` (wersja 1.1).
+
+**2.6 (2026-07-21):** ⭐ KOREKTA na uwagę użytkownika: "nie reklamujemy
+księgarni, więc nie powinny być dodane, tylko wskazane jako źródło
+darmowych zasobów do monitorowania". USUNIĘTO wpis nexto.pl/profinfo.pl
+jako "legalna księgarnia" z tabeli DR-03 — TEN rejestr ma na celu
+wskazywanie źródeł do PRZESZUKIWANIA (`site:` dla treści prawnej), nie
+katalogowanie miejsc zakupu, niezależnie od tego, jak legalne i godne
+zaufania by nie były. Domena nexto.pl POZOSTAJE wspomniana WYŁĄCZNIE
+jako źródło PIĘCIU konkretnych, monitorowanych plików (flaga F-12/T10
+w audyt-systemu-v4) — BEZ rekomendowania jej jako ogólnego portalu do
+przeszukiwania.
+
+**2.5 (2026-07-21):** [WPIS UZUPEŁNIONY WSTECZNIE 2026-07-21 — w
+oryginalnej turze zaktualizowano WYŁĄCZNIE nagłówek wersji pliku, bez
+odpowiadającego wpisu w tej sekcji, co jest NIESPÓJNOŚCIĄ naprawioną
+teraz] Zarejestrowano (BŁĘDNIE, patrz KOREKTA 2.6 powyżej) nexto.pl i
+profinfo.pl jako "legalne księgarnie" w DR-03, w kontekście dyskusji o
+znalezionym na Nexto pełnym pliku komentarza do KK o niepewnym statusie
+prawnym (patrz flaga F-12).
+
+**2.4 (2026-07-21):** Na wskazanie użytkownika sprawdzono link
+https://www.gov.pl/web/kgpsp — POTWIERDZONO (pobrano stronę
+bezpośrednio) jako oficjalny (Rząd 1) portal Komendy Głównej Państwowej
+Straży Pożarnej, z dedykowaną sekcją "Prawo" i systemem KSRG — treść W
+WIĘKSZOŚCI aktualnościowo-wizerunkowa, sama sekcja "Prawo" NIE zbadana
+szczegółowo (punkt startowy). Przy poszukiwaniu ANALOGICZNYCH portali
+rządowych dla służb znaleziono **bip.kgp.policja.gov.pl** — oficjalny
+portal Komendy Głównej Policji z WŁASNYM Dziennikiem Urzędowym
+(edziennik.policja.gov.pl, elektroniczny od 2012 r.) i zarządzeniami
+Komendanta Głównego. Dodano OBA do DR-13 jako źródła Rządu 1, z NOWĄ
+uwagą o strukturze systemowej: dla służb mundurowych/agencji
+bezpieczeństwa właściwym wzorcem jest STRUKTURA gov.pl/web/[skrót]
+(każda służba ma własny portal w tej rodzinie), nie komercyjny portal
+2B — ale treść tych portali jest w przeważającej części
+wizerunkowo-informacyjna, wymagająca odrębnego zbadania sekcji
+prawnych/zarządzeń dla oceny faktycznej przydatności merytorycznej.
 
 **2.3 (2026-07-21):** Na polecenie użytkownika ("sprawdź niebezpiecznik
 i szukaj dalej, a następnie zajmij się badaniem i dodawaniem kandydatów

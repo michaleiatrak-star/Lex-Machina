@@ -1,6 +1,25 @@
 # HIERARCHIA-ZRODEL.md — Kanoniczna Kategoryzacja Źródeł (RZĄD 1/2/3)
 
 > **Plik:** `/mnt/skills/user/shared/HIERARCHIA-ZRODEL.md`
+> **Wersja:** 1.3 (2026-07-24e) — dodano ZASADĘ OTWARTEJ LISTY w sekcji
+>              Rzędu 3: brak wpisu domeny w tym pliku lub w
+>              `PORTALE-BRANZOWE-RZAD-2B.md` nie blokuje cytowania —
+>              rejestry są przykładowe/pomocnicze, nie zamkniętą listą
+>              dopuszczonych źródeł. Na wyraźne polecenie użytkownika.
+> **Wersja:** 1.2 (2026-07-24) — rozdzielono sekcję 3B na 3B-i
+>              (nieustalone/inne wydawnictwo → Rząd 3) i 3B-ii
+>              (jednoznacznie C.H.Beck/Wolters Kluwer w próbce →
+>              Rząd 2B-równoważne, dziedziczony po marce wydawniczej już
+>              uznanej w 2B przez legalis.pl/lex.pl), na uwagę
+>              użytkownika. Dodano wymóg sprawdzenia aktualności wydania
+>              względem nowelizacji (książka nie jest aktualizowana jak
+>              portal).
+> **Wersja:** 1.1 (2026-07-24) — dodano sekcję 3B: próbki/fragmenty
+>              książek z księgarni cyfrowych (nexto.pl i analogiczne), na
+>              wyraźne polecenie użytkownika. Odróżnia legalne, wydawniczo
+>              udostępnione PRÓBKI (spis treści + fragment stron) od
+>              flagi F-12 (pełne, nieautoryzowane pliki PDF) w
+>              `audyt-systemu-v4/references/WARN-OTWARTE.md`.
 > **Wersja:** 1.0 (2026-07-15) — wydzielone z `analizator-przepisow-v2/SKILL.md`
 >              (Moduł 1, sekcja "Hierarchia źródeł") na kanoniczną lokalizację
 >              współdzieloną, na wyraźne polecenie użytkownika po tym, jak
@@ -120,6 +139,26 @@ serwisy typu "sprawy-karne.biz.pl", "prawoity.pl" i podobne bez wskazanej
 redakcji wydawniczej — lista nie jest zamknięta, kryterium decyduje ZAWSZE
 brak redakcji + brak gwarancji aktualizacji, nie sama nazwa domeny.
 
+> ⛔ **ZASADA OTWARTEJ LISTY (dodana 2026-07-24e, na wyraźne polecenie
+> użytkownika):** brak wpisu danej domeny w tym pliku lub w
+> `shared/PORTALE-BRANZOWE-RZAD-2B.md` NIE JEST przeszkodą do jej
+> zacytowania. Rejestry te są przykładowe i pomocnicze (podpowiadają,
+> który portal przeszukać przy danej dziedzinie) — nie są zamkniętą
+> listą dopuszczonych źródeł ani bramką blokującą. Strona małej,
+> nieznanej wcześniej kancelarii lub nowy blog prawniczy KWALIFIKUJE SIĘ
+> od razu jako Rząd 3 na podstawie kryteriów powyżej (brak redakcji
+> zawodowej + brak gwarancji aktualizacji), bez konieczności
+> wcześniejszego dopisania jej do żadnego rejestru. Jedynym wymogiem
+> jest przejście przez zasady dodatkowe dla Rzędu 3 poniżej (data
+> publikacji, krzyżowanie z Rzędem 1/2, oznaczenie "⚠️ NIEPOTWIERDZONE"
+> gdy krzyżowanie niemożliwe) — te same, proporcjonalne do ryzyka
+> wymogi weryfikacji, które i tak obowiązują KAŻDE źródło Rzędu 3,
+> znane czy nowe. Ta sama logika (brak rejestracji ≠ zakaz cytowania,
+> tylko obowiązek weryfikacji) dotyczy analogicznie sekcji 3B (próbki
+> nexto.pl i podobnych) — tam kryterium 3B-ii (Beck/Kluwer) także nie
+> wymaga wcześniejszego wpisu konkretnego tytułu w żadnym rejestrze,
+> wystarczy identyfikacja wydawnictwa w samej próbce.
+
 ### Zasady dodatkowe dla Rzędu 3 (ponad ogólny zakaz mieszania ról niżej)
 
 ```
@@ -139,6 +178,110 @@ Uzupełniająco do Rzędu 1 (tekst) i Rzędu 2 (orzecznictwo/LEX-Legalis-tekst/
 duże portale) — analiza MOŻE sięgać po Rząd 3, gdy wzbogaca kontekst
 praktyczny lub wskazuje trop do dalszej weryfikacji, ale ZAWSZE z
 zastrzeżeniami powyżej.
+
+### 3B — Próbki/fragmenty książek z księgarni cyfrowych (np. nexto.pl)
+
+> Dodane na wyraźne polecenie użytkownika, po odróżnieniu tego przypadku
+> od flagi F-12 (`audyt-systemu-v4/references/WARN-OTWARTE.md`), która
+> dotyczy INNEGO zjawiska: pełnych, nieautoryzowanych plików PDF pod
+> ścieżką `.../free/[hash].pdf`. TEN wpis dotyczy wyłącznie LEGALNYCH,
+> wydawniczo udostępnionych PRÓBEK (fragment tekstu + spis treści,
+> ograniczona liczba stron) — standardowej funkcji księgarni cyfrowych
+> (nexto.pl i platformy o analogicznym modelu, np. virtualo, woblink,
+> publio, ibuk).
+>
+> **Uzupełnienie 2026-07-24b** (na uwagę użytkownika): kryterium
+> przynależności do Rzędu 2B w tym pliku to "redakcja zawodowa +
+> rozpoznawalna marka wydawnicza + praktyka aktualizacji" — NIE sam
+> kanał dystrybucji. C.H.Beck i Wolters Kluwer są już uznane w Rzędzie
+> 2B (patrz wyżej: legalis.pl/sip.legalis.pl, lex.pl/sip.lex.pl), ale
+> przez ICH WŁASNE portale. Nexto jest cudzym kanałem sprzedaży TEJ
+> SAMEJ treści — dlatego rozróżnienie poniżej: 3B-i (nieustalone/inne
+> wydawnictwo → Rząd 3) i 3B-ii (jednoznacznie Beck/Kluwer → Rząd
+> 2B-równoważne tej marki).
+
+**Wspólne dla obu przypadków** — próbka NIGDY nie pełni roli Rzędu 1/2A
+(nie potwierdza brzmienia przepisu ani istnienia orzeczenia), niezależnie
+od tego, który wydawca:
+
+```
+1. KAŻDY cytat/parafraza z takiej próbki musi być oznaczony jako
+   FRAGMENT/PRÓBKA, nigdy jako pełna treść dzieła — próbka z definicji
+   pokazuje tylko część książki (zwykle spis treści + pierwsze strony
+   rozdziału), więc twierdzenie zbudowane na próbce może pomijać
+   dalszy, niewidoczny kontekst autora. Nie ekstrapoluj poza to, co
+   faktycznie widoczne w próbce. Dotyczy to RÓWNIEŻ próbek Beck/Kluwer —
+   status wydawnictwa podnosi WIARYGODNOŚĆ treści, ale nie zmienia faktu,
+   że widoczny jest tylko fragment.
+2. Strona z próbką na nexto.pl (i analogicznych platformach) zawiera
+   zwykle wewnętrzną notatkę wydawcy/twórcy o zakazie publikacji treści
+   w internecie i o dozwolonym cytowaniu bez zmiany treści — ta notatka
+   NIE blokuje cytowania w rozumieniu prawa cytatu (krótki cytat z
+   podaniem źródła), ale POTWIERDZA, że wolno przywołać wyłącznie
+   krótki, dosłownie niezmieniony fragment, nigdy odtworzyć większą
+   część próbki ani całość.
+3. ⚠️ WAŻNOŚĆ LINKU — link do konkretnej próbki nie jest trwały:
+   wydawca/platforma może zmienić zakres widocznych stron, wycofać
+   próbkę, zmienić URL po aktualizacji katalogu, lub zmienić edycję
+   książki. Przy KAŻDYM użyciu linku do próbki:
+   a) zweryfikuj świeżo przez web_fetch, że link nadal działa i nadal
+      pokazuje ten sam fragment, zanim podasz go użytkownikowi;
+   b) jeśli link nie działa/przekierowuje/zwraca inną treść — nie
+      podawaj go jako źródła, zaznacz "⚠️ link do próbki niedostępny
+      w momencie weryfikacji";
+   c) NIE zakładaj trwałości linku między sesjami — każda nowa sesja
+      wymaga ponownej weryfikacji, nawet jeśli link działał wcześniej.
+4. ⚠️ AKTUALNOŚĆ WYDANIA — w odróżnieniu od portalu (2B, aktualizowany
+   na bieżąco), książka jest zamrożona na dacie wydania. Sprawdź rok
+   wydania/numer edycji widoczny w próbce i skrzyżuj z ewentualnymi
+   nowelizacjami przepisu od tej daty (np. przez ISAP/historię aktu) —
+   jeśli przepis był nowelizowany po dacie wydania, komentarz może być
+   nieaktualny mimo renomy wydawnictwa; oznacz to wprost.
+5. Odróżnij WYRAŹNIE od F-12: jeśli podczas przeglądania próbki
+   natrafisz na plik pod wzorcem `.../free/[hash].pdf` udostępniający
+   PEŁNĄ, płatną treść komentarza (nie ograniczoną próbkę) — to NIE
+   jest ten przypadek, tylko wzorzec z F-12; postępuj wg zasad z
+   `audyt-systemu-v4/references/WARN-OTWARTE.md` (flaga F-12), NIE
+   cytuj takiego pliku jako źródła i nie traktuj go jak zwykłej próbki.
+```
+
+**3B-i — wydawnictwo nieustalone lub inne niż Beck/Kluwer → Rząd 3**
+
+Traktuj jak zwykły Rząd 3 (wymóg krzyżowania z Rzędem 1/2, ryzyko
+dezaktualizacji, zakaz samodzielnej podstawy) — plus zasady 1–5 powyżej.
+
+Znacznik:
+
+```
+⚠️📚 [ŹRÓDŁO POMOCNICZE — RZĄD 3, PRÓBKA: nexto.pl (lub inna platforma),
+wydawnictwo jeśli znane, tytuł/autor/wydanie, data weryfikacji linku]
+— FRAGMENT/PRÓBKA WYDAWNICZA, nie pełna treść dzieła; link zweryfikowany
+web_fetch w tej sesji; wymaga potwierdzenia w Rzędzie 1/2 jak każdy Rząd 3
+```
+
+**3B-ii — jednoznacznie identyfikowalne wydawnictwo C.H.Beck lub Wolters
+Kluwer (widoczne w próbce logo/stopka wydawcy, seria wydawnicza, ISBN
+przypisany do tych wydawnictw) → Rząd 2B-równoważne**
+
+Dziedziczy status Rzędu 2B tej samej marki co legalis.pl (Beck) i
+lex.pl/sip.lex.pl (Kluwer) — "w roli komentarza/monografii, nie tekstu"
+— pod warunkiem spełnienia zasad 1–5 powyżej (fragment, notatka wydawcy,
+ważność linku, aktualność wydania, odróżnienie od F-12). Redakcja
+wydawnicza uzasadnia niższe ryzyko merytoryczne treści niż typowy
+Rząd 3, ale NIE zwalnia z obowiązków fragmentu/linku/aktualności — to są
+zastrzeżenia o innej naturze (kompletność i trwałość źródła), nie o
+jakości wydawniczej.
+
+Znacznik:
+
+```
+📚 [ŹRÓDŁO POMOCNICZE — RZĄD 2B-RÓWNOWAŻNE (nexto.pl, wydawnictwo:
+C.H.Beck/Wolters Kluwer), PRÓBKA: tytuł/autor/wydanie, data weryfikacji
+linku] — FRAGMENT/PRÓBKA WYDAWNICZA (nie pełna treść), status 2B
+dziedziczony po wydawnictwie identyfikowalnym w próbce; sprawdzona
+aktualność wydania względem nowelizacji; link zweryfikowany web_fetch
+w tej sesji; NIGDY brzmienie przepisu ani dowód istnienia orzeczenia
+```
 
 ---
 

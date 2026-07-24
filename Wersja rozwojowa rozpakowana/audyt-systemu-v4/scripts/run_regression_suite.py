@@ -114,6 +114,11 @@ def main():
     print(out)
     results["T9"] = code
 
+    # T10 (monitorowanie plików Nexto/Virtualo, flaga F-12) USUNIĘTE
+    # 2026-07-24d na wyraźne polecenie użytkownika — cały mechanizm
+    # (rejestr + skrypt check_nexto_free_files.py) skasowany, patrz
+    # AUDIT-JOURNAL.md, wpis AUDYT-2026-07-24d.
+
     # --- PODSUMOWANIE ---
     print("=" * 70)
     print("PODSUMOWANIE ZBIORCZE")

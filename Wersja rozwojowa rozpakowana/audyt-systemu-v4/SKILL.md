@@ -1,6 +1,6 @@
 ---
 name: audyt-systemu-v4
-version: 5.7
+version: 5.8
 type: governance-audit
 compatibility:
   - Claude
@@ -26,6 +26,9 @@ scripts:
   - scripts/test_header_snapshot.py       # T4 — integralność nagłówków, --snapshot/--verify (KRYTYCZNY, RĘCZNY)
   - scripts/test_title_scope_match.py     # T8 — zakres tytuł-vs-treść (WYSOKI, heurystyka→WARN)
   - scripts/test_moved_to_shared.py       # T9 — weryfikacja przeniesień do shared/ (WYSOKI, heurystyka celowana→WARN, dodane 2026-07-21)
+  # T10 (check_nexto_free_files.py, monitorowanie plików Nexto/Virtualo,
+  # flaga F-12) USUNIĘTE 2026-07-24d na polecenie użytkownika — patrz
+  # AUDIT-JOURNAL.md, wpis AUDYT-2026-07-24d
   - scripts/run_regression_suite.py       # orkiestrator — uruchamia T1/T2/T3/T6/T7/T8 w jednym przebiegu
   - scripts/ci_check_shared.py            # T6/T7 — zerwane odwołania / duplikaty (już istniejący, wywoływany przez orkiestrator)
 ---
