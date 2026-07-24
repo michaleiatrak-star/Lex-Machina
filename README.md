@@ -248,7 +248,14 @@ skatalogowanej bazy źródeł o przypisanym rzędzie wiarygodności. Rejestry ka
 [`shared/HIERARCHIA-ZRODEL.md`](Wersja%20rozwojowa%20rozpakowana/shared/HIERARCHIA-ZRODEL.md)
 (kategoryzacja wiarygodności Rząd 1 / 2A / 2B / 3) oraz
 [`shared/PORTALE-BRANZOWE-RZAD-2B.md`](Wersja%20rozwojowa%20rozpakowana/shared/PORTALE-BRANZOWE-RZAD-2B.md)
-(mapa portali per dziedzina DR, z empirycznymi testami `site:`).
+(mapa portali per dziedzina DR, z empirycznymi testami `site:`, wersja 2.1).
+
+> **Integracja jako źródła wyszukiwania (router v3.17, 2026-07-21):** oba rejestry
+> istniały wcześniej, ale nie były ładowane przez żaden skill. Teraz
+> `HIERARCHIA-ZRODEL.md` i `PORTALE-BRANZOWE-RZAD-2B.md` są w `required_modules`
+> orkiestratora [`prawny-router-v3`](Wersja%20rozwojowa%20rozpakowana/prawny-router-v3/SKILL.md),
+> więc każda sprawa prowadzona przez router — a przez to każdy uruchamiany przez
+> niego skill DR — ma dostęp do kategoryzacji wiarygodności i mapy portali branżowych.
 
 ### Rząd 1 — źródła urzędowe (wyłączne dla brzmienia przepisu)
 
@@ -258,6 +265,8 @@ skatalogowanej bazy źródeł o przypisanym rzędzie wiarygodności. Rejestry ka
 | [sejm.gov.pl](https://www.sejm.gov.pl) | proces legislacyjny |
 | [eur-lex.europa.eu](https://eur-lex.europa.eu) | prawo UE (CELLAR/CELEX) |
 | [dzienniki.gov.pl](https://dzienniki.gov.pl) | dzienniki urzędowe (m.in. wojewódzkie — prawo miejscowe) |
+| [prawakonsumenta.uokik.gov.pl](https://prawakonsumenta.uokik.gov.pl) | UOKiK — prawa konsumenta, gotowe wzory pism (odstąpienie, reklamacja), polubowne spory (DR-02) |
+| [parp.gov.pl](https://www.parp.gov.pl) | PARP — dotacje i dofinansowania dla firm, aktualne nabory (DR-06) |
 | uodo.gov.pl, BIP właściwych organów | rozporządzenia branżowe, ochrona danych |
 
 ### Rząd 2A — oficjalne orzecznictwo i interpretacje
@@ -281,16 +290,21 @@ znacznikiem źródła pomocniczego.
 | Kategoria | Portale |
 |---|---|
 | Generalistyczne | prawo.pl, infor.pl (+ kadry / ksiegowosc / samorzad), gofin.pl (+ subdomeny), gazetaprawna.pl, rp.pl, lexlege.pl, arslege.pl, money.pl |
-| Podatki i księgowość (DR-06) | gofin.pl, ksiegowosc.infor.pl, podatki.biz |
+| Gospodarcze i NGO (DR-02) | poradnikprzedsiebiorcy.pl, bankier.pl, ngo.pl (fundacje, stowarzyszenia — nowa nisza) |
+| Podatki i księgowość (DR-06) | gofin.pl, ksiegowosc.infor.pl, podatki.biz, epodatnik.pl (archiwum interpretacji KIS), bankier.pl (proces legislacyjny), egospodarka.pl |
 | Prawo pracy (DR-04) | kodekspracy.pl, kadry.infor.pl |
-| Gospodarcze (DR-02) | poradnikprzedsiebiorcy.pl |
 | Zamówienia publiczne (DR-07) | portalzp.pl |
 | Samorząd (DR-08) | samorzad.infor.pl, prawodlasamorzadu.pl |
 | Budownictwo (DR-09) | muratorplus.pl, prawniknabudowie.com, prawnikpodpowienabudowie.pl |
-| Zdrowie i farmacja (DR-10) | rynekzdrowia.pl |
+| Zdrowie, farmacja, rolnictwo (DR-10) | rynekzdrowia.pl (zdrowie/farmacja), farmer.pl, wiescirolnicze.pl (rolnictwo — ARiMR, KRUS) |
 | RODO i cyfrowe (DR-11) | poradyodo.pl |
+| Zawody prawnicze (DR-12) | palestra.pl, temidium.pl |
 | Osoby z niepełnosprawnościami | niepelnosprawni.pl, integracja.org (+ popon.pl, obpon.org — perspektywa pracodawcy) |
 | Bazy komercyjne (przy licencji) | LEX (sip.lex.pl), Legalis (sip.legalis.pl) — jako tekst przepisu Rząd 2A, jako komentarz Rząd 2B |
+
+> Portale oznaczone jako AI-wspomagane (np. egospodarka.pl — część artykułów
+> generowana przez AI) system traktuje z podwyższoną ostrożnością i krzyżuje z
+> innym źródłem przy kluczowych ustaleniach.
 
 Rejestr uczciwie odnotowuje dziedziny bez dominującego portalu branżowego (DR-03
 karne, DR-05 administracyjne, DR-15 compliance) — tam system korzysta z portali
