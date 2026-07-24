@@ -1,6 +1,6 @@
 ---
 name: audyt-systemu-v4
-version: 5.5
+version: 5.7
 type: governance-audit
 compatibility:
   - Claude
@@ -18,6 +18,16 @@ references:
   - references/WARN-OTWARTE.md   # rejestr żywy TYLKO otwartych flag (WARN + strukturalne) — dodane 2026-07-07, ZASADA 10
   - references/CHECKLIST-DEDUP.md   # mapa pojęć → lokalizacje (5 not, NOTA-6 ORPHAN dodana 06-14g)
   - references/mapa_dzu_2026-07-15.md   # aktualna mapa Dz.U. (460 wierszy); 07-04 poprzednia wersja
+  - references/REGRESSION-TEST-PLAN.md   # zestaw testów regresyjnych T1-T8, v1.1 (dodane 2026-07-21) — NAJPIERW zarejestrowany tutaj po odkryciu że plan istniał bez wpisu w SKILL.md
+scripts:
+  - scripts/test_module_registration.py   # T1 — rejestracja modułów (KRYTYCZNY)
+  - scripts/test_module_count.py          # T2 — zgodność liczników (WYSOKI)
+  - scripts/test_cross_map_dzu.py         # T3 — spójność Dz.U. między mapami (KRYTYCZNY, heurystyka→WARN)
+  - scripts/test_header_snapshot.py       # T4 — integralność nagłówków, --snapshot/--verify (KRYTYCZNY, RĘCZNY)
+  - scripts/test_title_scope_match.py     # T8 — zakres tytuł-vs-treść (WYSOKI, heurystyka→WARN)
+  - scripts/test_moved_to_shared.py       # T9 — weryfikacja przeniesień do shared/ (WYSOKI, heurystyka celowana→WARN, dodane 2026-07-21)
+  - scripts/run_regression_suite.py       # orkiestrator — uruchamia T1/T2/T3/T6/T7/T8 w jednym przebiegu
+  - scripts/ci_check_shared.py            # T6/T7 — zerwane odwołania / duplikaty (już istniejący, wywoływany przez orkiestrator)
 ---
 
 # audyt-systemu-v4 — Orchestrator Audytu Systemu Prawnego

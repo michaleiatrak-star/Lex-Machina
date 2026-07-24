@@ -4,7 +4,304 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
-## AUDYT-2026-07-21v — przetestowano DR-05 i DR-15 (uczciwie odnotowany brak dominującego portalu 2B, analogicznie do DR-03) oraz DR-16 (WAŻNE ustalenie: brak portalu 2B to TU NIE luka — właściwym źródłem są oficjalne bazy orzeczeń Rzędu 2A) — pozostały tylko 3 z 16 DR bez świeżego testu
+## AUDYT-2026-07-21aa — zbadano wskazany link problemykryminalistyki.policja.pl (potwierdzony jako oficjalny kwartalnik naukowy CLKP, nisza kryminalistyczna) + odkryto palestra.pl i temidium.pl wypełniające brakujący aspekt "zawody prawnicze" w DR-12
+
+**Zakres:** rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v1.7→v1.8)
++ wpis `CHECKLIST-DEDUP.md`. Kontrola: T1/T2/T9 z zestawu testów
+regresyjnych uruchomione POST-edycyjnie.
+
+**Kontekst:** użytkownik polecił szukać kolejnych istotnych portali
+oraz zbadać konkretnie wskazany link problemykryminalistyki.policja.pl.
+
+**Wskazany link — pobrany bezpośrednio:** POTWIERDZONO jako oficjalny
+(Rząd 1) kwartalnik naukowy Centralnego Laboratorium Kryminalistycznego
+Policji — struktura w PEŁNI akademicka (rada naukowa, recenzenci,
+kodeks etyki, wskazówki dla autorów). NISZA WYRAŹNIE ODMIENNA od reszty
+rejestru — KRYMINALISTYKA (metodologia dowodowo-śledcza: mapowanie
+linii papilarnych, badania dokumentów/podpisów biometrycznych,
+identyfikacja ofiar katastrof, hipnoza jako metoda przestępstwa), NIE
+ogólne prawo karne czy komentarz przepisów. Dodano do DR-16, ze
+SZCZEGÓLNYM odesłaniem do `analizator-dowodow-v3` — ten portal jest
+WARTOŚCIOWY przy PYTANIACH o samą METODOLOGIĘ badania dowodów/śladów,
+nie o prawo dowodowe jako takie.
+
+**⭐ Odkrycie przy dalszym poszukiwaniu — wypełnienie luki w DR-12:**
+poprzednio zweryfikowane rp.pl i gazetaprawna.pl dla DR-12 (Sądownictwo/
+Prokuratura/Zawody Prawnicze) skupiały się WYŁĄCZNIE na aspekcie
+SĄDOWNICTWA/TK — aspekt "ZAWODY PRAWNICZE" (adwokatura/radcostwo jako
+takie) POZOSTAWAŁ niepokryty. Znaleziono **palestra.pl** — OFICJALNE
+czasopismo Naczelnej Rady Adwokackiej, z DŁUGOLETNIM archiwum (co
+najmniej od 2013 r.), artykułami autorstwa PRAKTYKUJĄCYCH adwokatów i
+profesorów prawa, z pełnymi przypisami naukowymi — pokrywające
+konkretnie: relacje adwokat/radca prawny, etykę zawodową, formy
+wykonywania zawodu (spółki, stosunek pracy), projekty ustaw
+korporacyjnych. Znaleziono RÓWNIEŻ **temidium.pl** — analogiczny serwis
+Okręgowej Izby Radców Prawnych w Warszawie. DR-12 ma TERAZ podwójne,
+KOMPLEMENTARNE pokrycie — jeden zestaw portali dla sądownictwa, drugi
+dla samego zawodu prawniczego.
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana (21 sekcji
+głównych, 15 wpisów DR zachowanych). Kontrola T1/T2/T9 — wszystkie
+PASS, potwierdzając spójność systemu po edycji.
+
+---
+
+
+
+**Zakres:** rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v1.6→v1.7)
++ wpis `CHECKLIST-DEDUP.md`. Kontrola: uruchomiono T1/T2/T9 z zestawu
+testów regresyjnych jako weryfikację POST-edycyjną.
+
+**Kontekst:** użytkownik polecił poszukać portali dla służb (DR-13)
+oraz sprawdzić czy istnieją jeszcze inne duże, uznane portale prawne.
+
+**DR-13 (Służby, Bezpieczeństwo, Informacje Niejawne):** test
+`site:defence24.pl służby specjalne ABW ustawa` potwierdził REALNY
+portal, ale z ISTOTNYM zastrzeżeniem — znalezione artykuły w
+WIĘKSZOŚCI datowane 2013-2017 (historyczne procesy legislacyjne), a
+profil BLIŻSZY dziennikarstwu bezpieczeństwa/obronności niż głębokiej
+analizie prawnej. Dodatkowe wyszukiwanie ("portal prawo informacje
+niejawne komentarz ekspercki") NIE ujawniło dominującego portalu 2B —
+niszę zdominowały OFICJALNE strony organów (BIP ABW, SKW — Rząd 1) i
+generalistyczne bazy (lexlege, LEX). DR-13 zakwalifikowane jako
+CZWARTA dziedzina bez dominującego portalu 2B, dołączając do
+DR-03/DR-05/DR-15 — z TYM SAMYM zaleceniem (portale generalistyczne z
+zawężonym zapytaniem, lub oficjalne źródła Rządu 1).
+
+**⭐ Znalezisko przy okazji — curia.europa.eu:** test `site:wyborcza.pl
+wyrok Sąd Najwyższy` ZAWIÓDŁ (zero wyników z tej domeny, WYŁĄCZNIE
+dokumenty curia.europa.eu) — odnotowano UCZCIWIE jako test nieudany. PRZY
+OKAZJI jednak odkryto samą curia.europa.eu — oficjalną bazę orzeczeń
+Trybunału Sprawiedliwości UE, dostępną W JĘZYKU POLSKIM — analogiczną
+do orzeczenia.ms.gov.pl (DR-16), ale dla poziomu UNIJNEGO. Podobnie jak
+przy DR-16, brak portalu 2B w tej niszy NIE JEST luką — dla TREŚCI
+orzeczeń unijnych właściwym źródłem jest oficjalna baza (Rząd 1), nie
+komercyjny komentarz. TO wypełnia częściowo DR-14.
+
+**bankier.pl — dodane do DR-06:** test `site:bankier.pl prawo
+podatkowe VAT zmiany 2026` dał wynik DOSKONAŁY — artykuły z DNI (np.
+2.06.2026), SILNE śledzenie procesu legislacyjnego na bieżąco (projekty
+rządowe, głosowania Sejmu, konkretne daty wejścia w życie: 1.07.2026,
+1.01.2027). Status podniesiony z 📚 (wcześniej wymieniony jako "znany,
+niepotestowany" w DR-02) na ✅✅ w OBU dziedzinach.
+
+**⭐⭐ Stan końcowy — kompletny przegląd osiągnięty:** PO tej turze
+WSZYSTKIE 16 dziedzin DR + sekcja specjalna niepełnosprawności zostały
+przebadane CO NAJMNIEJ RAZ w tej wieloetapowej sesji budowy rejestru
+portali — BRAK dziedzin całkowicie nietkniętych. Jedynym otwartym
+punktem pozostaje POWTÓRZENIE testu wyborcza.pl inną frazą, jeśli
+użytkownik zechce kontynuować w przyszłości.
+
+**Kontrola jakości:** uruchomiono T1 (rejestracja modułów), T2
+(zgodność liczników), T9 (weryfikacja przeniesień do shared/) z
+zestawu testów regresyjnych PO edycji rejestru portali — WSZYSTKIE
+TRZY zwróciły PASS, potwierdzając że ta edycja NIE naruszyła spójności
+strukturalnej reszty systemu.
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana (21 sekcji
+głównych zachowanych, 15 wpisów DR).
+
+---
+
+
+
+**Zakres:** naprawa `test_module_registration.py` (v1.0→v1.1) + NOWY
+`test_moved_to_shared.py` (T9) + naprawa `install_precommit_hook.sh`
+(v1.0→v2.0) + rozbudowa `REGRESSION-TEST-PLAN.md` (v1.1→v1.2, nowa
+sekcja 10) + rejestracja w `SKILL.md` (v5.6→v5.7) + wpis
+`CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik polecił wrócić do testów regresyjnych,
+zbadać krytycznie działanie T1, i ocenić czy zestaw wymaga jeszcze
+jakichś testów, aby osiągnąć poziom profesjonalny.
+
+**Znaleziony i naprawiony błąd w T1:** T1 (v1.0) używał NAIWNEGO
+sprawdzenia podciągu do ustalenia rejestracji modułu. TO dawało
+TEORETYCZNE ryzyko fałszywego negatywu przy nazwach-podciągach (krótsza
+nazwa modułu będąca dosłownym fragmentem dłuższej). SYSTEMATYCZNE
+przeszukanie potwierdziło 2 TAKIE pary w systemie (dr-05, dr-09) — w
+OBU przypadkach obie nazwy SĄ obecnie osobno zarejestrowane (brak
+aktywnego błędu), ale ryzyko było REALNE. NAPRAWIONO przez zamianę na
+dopasowanie regex z granicą słowa. Zweryfikowano PO naprawie: T1 nadal
+zwraca czysty PASS, bez nowych fałszywych trafień.
+
+**⭐⭐⭐ Kluczowa decyzja metodologiczna — zbadano i ŚWIADOMIE ODRZUCONO
+szeroki zakres:** zbudowano PRÓBNY, szeroki skaner wszystkich odwołań
+"mod-XXX" w całym systemie w poszukiwaniu dangling references. Wynik:
+~50 podejrzanych trafień. Manualne sprawdzenie próbki (6 przypadków)
+ujawniło WSZYSTKIE jako fałszywe pozytywy, należące do czterech
+odrębnych, legalnych wzorców (cross-referencje międzyskillowe z
+prefiksem "→ dr-XX", odwołania do shared/, świadome placeholdery na
+przyszłość, notatki historyczne o przeniesieniu pod nową nazwą). ZAMIAST
+budować skomplikowany parser rozróżniający te wzorce (ryzykując "alert
+fatigue"), ŚWIADOMIE ograniczono zakres do NAJBARDZIEJ ryzykownej,
+WERYFIKOWALNEJ kategorii — zbudowano T9, wąski test WYŁĄCZNIE dla
+deklaracji "przeniesiony do shared/". Pierwsze uruchomienie: 3
+deklaracje, wszystkie rozwiązane, czysty PASS.
+
+**Naprawiony odłączony pre-commit hook:** odkryto, że
+`install_precommit_hook.sh` (z wcześniejszej sesji) instalował
+WYŁĄCZNIE stary `ci_check_shared.py` (T6/T7), mimo że PÓŹNIEJ w tej
+samej sesji dokończono pełny zestaw T1-T8. Hook NIGDY nie został
+zaktualizowany — DOKŁADNIE ten sam wzorzec "zbudowano, zapomniano
+podłączyć" znajdowany wielokrotnie w tej sesji. NAPRAWIONO (v2.0):
+hook instaluje teraz PEŁNY `run_regression_suite.py`.
+
+**Formalna ocena profesjonalizmu (sekcja 10.4 planu):** sformułowano
+jawną listę spełnionych kryteriów (traceability, priorytetyzacja
+ryzyko-oparta, niezależność testów, walidacja przez rzeczywiste użycie,
+udokumentowane decyzje o zakresie, integracja CI) oraz ŚWIADOMIE
+pozostających ograniczeń (T4/T5 wymagają ręcznego wywołania/osądu
+semantycznego, 6 z 7 przypadków T8 niesprawdzonych manualnie,
+merytoryczna poprawność prawna poza zasięgiem automatyzacji) — WNIOSEK:
+zestaw OSIĄGNĄŁ poziom profesjonalny wg zweryfikowanych kryteriów
+branżowych, z uczciwie udokumentowanymi granicami zakresu.
+
+**Status:** ✅ WDROŻONE. Pełne, końcowe uruchomienie `run_regression_
+suite.py` (9 testów: T1/T2/T6_T7/T9 PASS; T3/T8 WARN wymagające
+przeglądu manualnego; T4/T5 ręczne) potwierdziło spójność całego
+systemu po wszystkich zmianach tej tury.
+
+---
+
+
+
+**Zakres:** rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v1.5→v1.6)
++ wpis `CHECKLIST-DEDUP.md`. Dodatkowo: uruchomiono T1/T2 z nowo
+dokończonego zestawu testów regresyjnych jako kontrolę POST-edycyjną.
+
+**Kontekst:** użytkownik polecił poszukać kolejnych istotnych źródeł
+typu "Dziennik Gazeta Prawna" — dużych, generalistycznych dzienników o
+wyrobionej, silnej pozycji, w odróżnieniu od WĄSKO wyspecjalizowanych
+portali branżowych dotąd dominujących w rejestrze.
+
+**gazetaprawna.pl — status podniesiony z "znane" na "w pełni
+zweryfikowane":** portal BYŁ już wcześniej wymieniony w rejestrze jako
+📚 (ogólna wiedza, bez świeżego testu). Test `site:gazetaprawna.pl
+wyrok Sądu Najwyższego 2026` ujawnił wynik DOSKONAŁY — dedykowaną
+sekcję "Orzecznictwo", artykuły z BIEŻĄCEGO tygodnia (czerwiec/lipiec
+2026), precyzyjne sygnatury (II CSKP 643/25 — sprawa frankowa
+przedsiębiorcy, II KK 453/22). Potwierdzono wydawcę: INFOR PL S.A. —
+TA SAMA grupa co już wcześniej zweryfikowany infor.pl.
+
+**rp.pl (Rzeczpospolita) — NOWE, znaczące odkrycie:** test
+`site:rp.pl wyrok Trybunału Konstytucyjnego` ujawnił WYJĄTKOWO GŁĘBOKĄ,
+wieloartykułową analizę BIEŻĄCEGO sporu ustrojowego wokół legitymacji
+Trybunału Konstytucyjnego (kwestia sędziów "dublerów", spór o
+obowiązek publikacji wyroków TK w Dzienniku Ustaw, stanowisko SN że
+wyrok TK z dublerem "nie jest wyrokiem") — z precyzyjnymi sygnaturami
+(SK 50/22, I KZP 5/23) i aktualizacjami DO CZERWCA 2026. TO źródło
+JEST SZCZEGÓLNIE silne w tematyce ustrojowo-konstytucyjnej, bezpośrednio
+istotnej dla DR-12 (Sądownictwo/Prokuratura/Zawody Prawnicze).
+
+**⭐ Efekt praktyczny — redukcja luki pokrycia:** DR-12, JEDNA z
+TRZECH dziedzin oznaczonych w poprzedniej turze jako "bez żadnego
+świeżego testu", PRZENIESIONA do kategorii potwierdzonych dzięki
+rp.pl. Zaktualizowano podsumowanie stanu pokrycia: TYLKO DWIE dziedziny
+(DR-13 Służby/Bezpieczeństwo, DR-14 Prawo UE/Międzynarodowe) pozostają
+bez żadnego świeżego testu w całej tej wieloetapowej sesji budowy
+rejestru portali.
+
+**⭐ Kontrola jakości przy użyciu WŁASNEGO, nowo zbudowanego narzędzia:**
+po edycji pliku PORTALE-BRANZOWE-RZAD-2B.md, uruchomiono T1
+(rejestracja modułów) i T2 (zgodność liczników) z zestawu testów
+regresyjnych dokończonego w POPRZEDNIEJ turze tej sesji — OBA zwróciły
+PASS, potwierdzając że bieżąca edycja NIE naruszyła spójności
+strukturalnej reszty systemu. To PIERWSZE praktyczne, RUTYNOWE użycie
+nowo zbudowanego zestawu testów w codziennej pracy (nie tylko przy
+jego budowie), zgodnie z zaleceniem "uruchamiać przy końcu każdej
+sesji audytowej" z REGRESSION-TEST-PLAN.md.
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana (21 sekcji
+głównych zachowanych, 15 wpisów DR).
+
+---
+
+
+
+**Zakres:** dokończenie `audyt-systemu-v4/scripts/` (5 nowych skryptów:
+test_module_count.py, test_cross_map_dzu.py, test_header_snapshot.py,
+test_title_scope_match.py, run_regression_suite.py) + rozbudowa
+`audyt-systemu-v4/references/REGRESSION-TEST-PLAN.md` (v1.0→v1.1,
+sekcja 9 — wyniki walidacji) + rejestracja w `audyt-systemu-v4/SKILL.md`
+(references + NOWA sekcja scripts, v5.5→v5.6) + naprawa DWÓCH
+znalezionych błędów systemu (`dr-10/.../SKILL.md` licznik modułów,
+`prawo-polskie-v2/ROUTING-MAP.md` Dz.U. samorządu gminnego) + wpis
+`CHECKLIST-DEDUP.md`.
+
+**Kontekst:** użytkownik polecił przygotować profesjonalny zestaw
+testów regresyjnych dla systemu, w oparciu o literaturę ekspercką
+online.
+
+**Metodologia:** zweryfikowano online praktyki regresyjnego testowania
+oprogramowania (TestRail, Qase, Testlio, TestDevLab, Katalon, Virtuoso
+QA — priorytetyzacja ryzyko-oparta, niezależność przypadków testowych,
+struktura test case, kryteria wyjścia) ORAZ specyficznie metodologię
+"golden set"/"golden dataset" dla systemów LLM (Braintrust, Langfuse,
+FutureAGI, Evidently AI — kuratorowane przypadki z RZECZYWISTYCH trybów
+awarii, wersjonowanie, małe ale reprezentatywne zestawy 25-200
+przypadków, pętla sprzężenia zwrotnego produkcja→testy).
+
+**⭐⭐ KLUCZOWE ZNALEZISKO — dokładnie ten sam wzorzec co WIELOKROTNIE w
+tej sesji:** przy sprawdzaniu, CZY podobny plan już istnieje (zanim
+zbudowano cokolwiek od zera), odkryto plik `REGRESSION-TEST-PLAN.md`
+JUŻ ISTNIEJĄCY, datowany na TEN SAM dzień, cytujący TĘ SAMĄ metodologię
+(TestRail/BrowserStack/QualityLogic/TestDevLab) — ale: (1) plan NIE
+BYŁ zarejestrowany w `SKILL.md` audyt-systemu-v4 (orphaned reference,
+analogicznie do wcześniej znalezionych niezarejestrowanych modułów),
+(2) z PIĘCIU odwołanych skryptów TYLKO JEDEN (test_module_registration.py,
+T1) faktycznie istniał na dysku — POZOSTAŁE cztery (T2, T3, T4, T8) oraz
+orkiestrator były WYŁĄCZNIE OPISANE w planie, NIGDY nie zaimplementowane.
+
+**Dokończono implementację WSZYSTKICH brakujących skryptów** — każdy
+z jawnym odesłaniem w docstring do KONKRETNEGO, udokumentowanego błędu
+z tej sesji, który chroni przed powrotem (zasada traceability z
+badanej literatury).
+
+**⭐⭐⭐ WALIDACJA PRZEZ RZECZYWISTE UŻYCIE — test sam siebie udowodnił:**
+pierwsze pełne uruchomienie `run_regression_suite.py` na CAŁYM systemie
+ZNALAZŁO DWA PRAWDZIWE, AKTYWNE błędy (nie tylko potwierdziło już
+znane/naprawione):
+  1) T2: `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/SKILL.md` deklarował
+     "27 łącznie" modułów, fizycznie 28 plików — wszystkie 28 BYŁY
+     indywidualnie zarejestrowane, sam licznik zbiorczy nie był
+     zaktualizowany. NAPRAWIONE.
+  2) T3: ustawa o samorządzie gminnym (DR-08) — lokalna mapa MIAŁA już
+     poprawiony numer Dz.U. (2026 poz. 662, z notatką o wcześniejszej
+     korekcie z 2026-07-02), ale GŁÓWNA mapa routingu NADAL wskazywała
+     stary numer (2025 poz. 1153) — TA SAMA "desynchronizacja map"
+     zidentyfikowana wcześniej dla SUS/ZUS i Straży Granicznej, TERAZ
+     złapana AUTOMATYCZNIE przez narzędzie, nie przypadkowym
+     odkryciem przy innej pracy. NAPRAWIONE.
+
+**Skrypty testowe SAME wymagały naprawy przy pierwszym uruchomieniu**
+(uczciwie odnotowane, nie ukryte): T2 błędnie odejmował adnotacje
+"przeniesiony do shared" jako dodatkowy wyjątek (fałszywe pozytywy dla
+DR-03/DR-16) — naprawione przez usunięcie tej logiki. T3 miał zbyt
+słabą heurystykę dopasowania nazw aktów (redukcja do pojedynczych,
+zbyt ogólnych słów jak "ustawa" powodowała dziesiątki fałszywych
+kolizji) — przepisano na dopasowanie przez podobieństwo Jaccarda ze
+zbiorem słów dystynktywnych (próg 0.5, wykluczenie słów ogólnych),
+redukując szum z dziesiątek do 4-5 sensownych kandydatów.
+
+**T8 (zakres tytuł-vs-treść)** — 7 przypadków oznaczonych WARN w DR-03,
+JEDEN sprawdzony manualnie jako przykład (mod-KK-art69-84) i POTWIERDZONY
+jako fałszywy pozytyw (treść pokrywa zakres w INNEJ formie zapisu, nie
+brakuje merytorycznie) — heurystyka działa zgodnie z udokumentowanym,
+świadomym ograniczeniem. Pozostałe 6 przypadków NIE zweryfikowano
+manualnie w tej sesji — punkt startowy na przyszłość.
+
+**Status:** ✅ WDROŻONE i ZWALIDOWANE przez rzeczywiste użycie. Zestaw
+składa się z 6 skryptów Python (deterministyczne, bez zależności od
+sieci/LLM) + istniejącego ci_check_shared.py, orkiestrowanych przez
+JEDEN punkt wejścia (`run_regression_suite.py`), z jasną
+priorytetyzacją (KRYTYCZNE blokują, WYSOKIE ostrzegają, ŚREDNIE
+informują) i pełną identyfikowalnością wstecz do konkretnych błędów
+udokumentowanych w tym samym AUDIT-JOURNAL.md.
+
+---
+
+
 
 **Zakres:** rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v1.4→v1.5)
 + wpis `CHECKLIST-DEDUP.md`.

@@ -1,8 +1,10 @@
 # PORTALE-BRANZOWE-RZAD-2B.md — Rejestr Portali per Dziedzina (z weryfikacją `site:`)
 
 > **Plik:** `/mnt/skills/user/shared/PORTALE-BRANZOWE-RZAD-2B.md`
-> **Wersja:** 1.5 (2026-07-21) — przetestowano DR-05, DR-15, DR-16;
-> tylko DR-12/13/14 pozostają bez żadnego świeżego testu
+> **Wersja:** 1.8 (2026-07-21) — dodano palestra.pl i temidium.pl
+> (wypełniają "zawody prawnicze" w DR-12) oraz problemykryminalistyki.
+> policja.pl (kryminalistyka, DR-16, szczególnie dla analizator-
+> dowodow-v3)
 > **Rola:** UZUPEŁNIENIE `shared/HIERARCHIA-ZRODEL.md` — TAMTEN plik
 > kategoryzuje portale wg WIARYGODNOŚCI (Rząd 1/2A/2B/3), TEN plik
 > mapuje portale wg SPECJALIZACJI TEMATYCZNEJ, z podziałem na 16
@@ -85,7 +87,7 @@
 | **poradnikprzedsiebiorcy.pl** | Prawo gospodarcze/firmy — zakładanie działalności/spółek (JDG, sp. z o.o.), koszty i procedury rejestracyjne (KRS, S24, CEIDG), przekształcenia | ✅ ZWERYFIKOWANE 2026-07-21 (test: zakładanie spółki z o.o. — wynik DOSKONAŁY, konkretne kwoty [kapitał zakładowy 5000 zł, opłaty sądowe 500 zł, PCC 0,5%], terminy [6 miesięcy na rejestrację], cytaty KSH) |
 | infor.pl | Ogólne prawo cywilne/gospodarcze, redakcja profesjonalna | 📚 znane (HIERARCHIA-ZRODEL) |
 | rodzinneprawo.pl / adwokatrodzinny.pl (przykładowe wzorce nazw) | Prawo rodzinne — ⚠️ SPRAWDŹ każdorazowo czy dana domena ma redakcję wydawniczą (Rząd 2B) czy jest indywidualną kancelarią (Rząd 3) | ⚠️ NIE testowane — punkt startowy, brak jednej dominującej marki "2B" w tej niszy |
-| bankier.pl (dział Prawo) | Prawo gospodarcze/handlowe, kontekst rynkowy | 📚 znane ogólnie, nie testowane w tej sesji |
+| bankier.pl (dział Prawo) | Prawo gospodarcze/handlowe, kontekst rynkowy | ✅ ZWERYFIKOWANE (patrz DR-06 — TA SAMA domena, status podniesiony z 📚) |
 | pb.pl (Puls Biznesu) | Ekonomia/biznes — ⚠️ TEST `site:` w tej sesji zwrócił WYŁĄCZNIE niepowiązane wyniki (Wikipedia, baza LEI, szablony umów) — MOŻLIWE że indeksacja tej domeny jest słaba dla wyszukiwarki LUB wymaga innej frazy zapytania | ⚠️ WYNIK NIEUDANY 2026-07-21 — NIE polegaj na tym portalu bez PONOWNEGO testu z inną frazą |
 
 ## DR-03 — Karne, Wykroczenia, Egzekucja
@@ -94,7 +96,7 @@
 |---|---|---|
 | komornik.pl (Krajowa Izba Komornicza) | Egzekucja komornicza — wytyczne, komunikaty | 📚 znane (już w systemie) |
 | infor.pl | Ogólne prawo karne, komentarze praktyczne | 📚 znane (HIERARCHIA-ZRODEL) |
-| gazetaprawna.pl | Prawo karne — bieżące komentarze, orzecznictwo | 📚 znane (HIERARCHIA-ZRODEL) |
+| gazetaprawna.pl | Prawo karne — bieżące komentarze, orzecznictwo | ✅✅ ZWERYFIKOWANE 2026-07-21 jako GENERALISTYCZNE źródło wysokiej jakości (patrz sekcja "OGÓLNE, MIĘDZYDZIEDZINOWE" niżej) — status podniesiony z 📚 |
 
 ### ⚠️ UCZCIWA OBSERWACJA (dodane 2026-07-21)
 
@@ -166,6 +168,7 @@ poziomie porównywalnym do gofin.pl.
 | **infor.pl (+ subdomena ksiegowosc.infor.pl)** | Podatki/VAT/księgowość — treść BARDZO AKTUALNA (cytuje wyroki NSA z lutego 2026 r.), KSeF, JPK_VAT, interpretacje KIS | ✅✅ ZWERYFIKOWANE 2026-07-21 (test: VAT faktura — wynik DOSKONAŁY, konkretne artykuły ustawy o VAT, świeże orzecznictwo NSA, zakres porównywalny z gofin.pl — DRUGI, RÓWNOWAŻNY filar dla tej dziedziny) |
 | **podatki.biz** | Podatki PIT/CIT/VAT/PCC, ZUS, rachunkowość — prowadzony przez TaxNet sp. z o.o., szerokie kategorie tematyczne (ryczałt, samochód w firmie, spadki/darowizny) | ✅ ZWERYFIKOWANE 2026-07-21 (potwierdzona realność i zakres portalu, choć test nie był w pełni czystym `site:` — ZALECANE powtórzenie testu z konkretniejszą frazą przed pierwszym praktycznym użyciem) |
 | money.pl (dział Podatki) | Podatki — kontekst rynkowo-informacyjny | 📚 znane (HIERARCHIA-ZRODEL) |
+| **bankier.pl** | Podatki/finanse — SILNE śledzenie PROCESU LEGISLACYJNEGO na bieżąco (głosowania Sejmu, projekty rządowe, daty wejścia w życie) | ✅ ZWERYFIKOWANE 2026-07-21 (test: zmiany VAT 2026 — wynik DOSKONAŁY, artykuły z DNI, nie tygodni [np. 2.06.2026], konkretne terminy wejścia w życie [1.07.2026, 1.01.2027]) |
 | poradnikprzedsiebiorcy.pl | Podatki dla małych przedsiębiorców, JDG | ✅ ZWERYFIKOWANE (patrz DR-02 — TA SAMA domena, dotyczy też podatków) |
 
 ## DR-07 — Zamówienia Publiczne, Fundusze UE
@@ -225,20 +228,55 @@ generalistycznego prawo.pl.
 
 | Portal | Specjalizacja | Status |
 |---|---|---|
+| **palestra.pl** | OFICJALNE czasopismo Naczelnej Rady Adwokackiej — WYPEŁNIA konkretnie "ZAWODY PRAWNICZE" (adwokatura), czego rp.pl/gazetaprawna.pl NIE pokrywały: relacje adwokat/radca prawny, etyka zawodowa, formy wykonywania zawodu (spółki, stosunek pracy), projekty ustaw korporacyjnych | ✅✅ ZWERYFIKOWANE 2026-07-21 — długoletnie czasopismo naukowo-zawodowe (archiwum sięga co najmniej 2013 r.), artykuły AUTORSTWA praktykujących adwokatów/profesorów prawa, z pełnymi przypisami naukowymi |
+| **temidium.pl** | Serwis Okręgowej Izby Radców Prawnych w Warszawie — analogicznie do palestra.pl, ale dla ŚRODOWISKA radców prawnych (tajemnica zawodowa, przegląd prasy prawniczej) | ✅ ZWERYFIKOWANE 2026-07-21 |
+| **rp.pl** (Rzeczpospolita) | Ustrój sądownictwa, TK, spory o legitymację sędziowską, orzecznictwo SN dot. wymiaru sprawiedliwości | ✅✅ ZWERYFIKOWANE 2026-07-21 (patrz sekcja "OGÓLNE, MIĘDZYDZIEDZINOWE" — szczegóły testu) |
 | prawo.pl (dział Sądy/Prokuratura) | Ustrój sądownictwa, zawody prawnicze | 📚 znane, ta sama redakcja co testowana ✅ |
+| gazetaprawna.pl | Orzecznictwo SN, sprawy karne/cywilne z udziałem sądów | ✅✅ ZWERYFIKOWANE (patrz sekcja "OGÓLNE") |
+
+### ⭐ Uwaga praktyczna
+
+```
+DR-12 ma TERAZ wyraźny PODZIAŁ kompetencyjny między portalami: rp.pl/
+gazetaprawna.pl NAJLEPSZE dla SĄDOWNICTWA/TK (ustrój, orzecznictwo),
+PODCZAS GDY palestra.pl/temidium.pl NAJLEPSZE dla ZAWODÓW PRAWNICZYCH
+(etyka, forma wykonywania zawodu, spory międzykorporacyjne
+adwokat/radca) — WYBIERZ portal wg TEGO, KTÓRY z dwóch aspektów
+dziedziny dotyczy pytanie.
+```
 
 ## DR-13 — Służby, Bezpieczeństwo, Informacje Niejawne
 
 | Portal | Specjalizacja | Status |
 |---|---|---|
 | strazgraniczna.pl (oficjalny, nie 2B) | Rząd 1 — organ | patrz odrębne traktowanie |
-| defence24.pl (przykładowy wzorzec) | Bezpieczeństwo, obronność — kontekst branżowy | ⚠️ NIE testowane w tej sesji, punkt startowy |
+| bip.abw.gov.pl, skw.gov.pl | Oficjalne (Rząd 1) — organizacja ochrony informacji niejawnych, spory kompetencyjne ABW/SKW | patrz `shared/INTERPRETACJE-URZEDOWE.md` |
+| **defence24.pl** | Bezpieczeństwo, obronność, służby specjalne — dziennikarstwo analityczno-branżowe (NIE głęboki komentarz prawny) | ✅ ZWERYFIKOWANE 2026-07-21 — ⚠️ ZASTRZEŻENIE: znalezione artykuły w WIĘKSZOŚCI STARSZE (2013-2017, dotyczące HISTORYCZNYCH procesów legislacyjnych) — profil BLIŻSZY dziennikarstwu bezpieczeństwa/obronności niż analizie prawnej; TRAKTUJ jako KONTEKST branżowy, NIE główne źródło prawne |
+
+### ⚠️ UCZCIWA OBSERWACJA (dodane 2026-07-21)
+
+```
+Test wyszukiwania "portal prawo informacje niejawne komentarz
+ekspercki" NIE UJAWNIŁ dominującego portalu 2B — wyniki zdominowane
+przez OFICJALNE strony organów (BIP ABW, SKW — Rząd 1) oraz
+GENERALISTYCZNE bazy (lexlege.pl, LEX — już znane). JEDEN indywidualny
+blog kancelaryjny (adwokatpazdan.pl) pojawił się, ale to Rząd 3.
+
+WNIOSEK PRAKTYCZNY: DR-13 dołącza do DR-03/DR-05/DR-15 jako CZWARTA
+dziedzina bez dominującego portalu 2B — PODOBNY wzorzec: dla spraw
+службowych/bezpieczeństwa/informacji niejawnych PRIORYTETOWO korzystaj
+z OFICJALNYCH źródeł (Rząd 1: BIP ABW, SKW) lub generalistycznych baz
+(LEX/lexlege) z zawężonym zapytaniem, ZAMIAST szukać wyspecjalizowanego
+komentarza.
+```
 
 ## DR-14 — Prawo UE, Międzynarodowe, Prawa Człowieka
 
 | Portal | Specjalizacja | Status |
 |---|---|---|
 | eur-lex.europa.eu | Rząd 1 — tekst prawa UE | (nie 2B, dla porządku) |
+| **curia.europa.eu** | Rząd 1 — OFICJALNA baza orzeczeń Trybunału Sprawiedliwości UE (TSUE), z pełnymi tekstami wyroków, w tym w JĘZYKU POLSKIM | ✅ ODKRYTE 2026-07-21 (przy okazji testu innego portalu) — analogiczne do orzeczenia.ms.gov.pl (DR-16), ale dla poziomu UNIJNEGO — WYPEŁNIA CZĘŚCIOWO tę dziedzinę jako źródło TREŚCI orzeczeń (Rząd 1), NIE 2B |
+| wyborcza.pl | GENERALISTYCZNY dziennik ogólnopolski | ⚠️ TEST NIEUDANY 2026-07-21 — zapytanie `site:wyborcza.pl wyrok Sąd Najwyższy` zwróciło WYŁĄCZNIE niepowiązane wyniki (dokumenty curia.europa.eu) — NIE potwierdzono wartości tego portalu, WYMAGA ponownego testu z inną frazą przed użyciem |
 | euractiv.pl (przykładowy wzorzec) | Polityka UE, kontekst | ⚠️ NIE testowane w tej sesji, punkt startowy |
 
 ## DR-15 — Compliance, ISO, Governance, Audyt
@@ -272,6 +310,7 @@ interpretacyjną.
 
 | Portal | Specjalizacja | Status |
 |---|---|---|
+| **problemykryminalistyki.policja.pl** | KWARTALNIK NAUKOWY Centralnego Laboratorium Kryminalistycznego Policji — NISZA ODMIENNA od reszty rejestru: KRYMINALISTYKA (metodologia dowodowo-śledcza — linie papilarne, badania dokumentów/podpisów biometrycznych, identyfikacja ofiar, metody popełnienia przestępstw), NIE ogólne prawo karne/komentarz przepisów | ✅✅ ZWERYFIKOWANE 2026-07-21 (pobrano stronę bezpośrednio) — Rząd 1 (oficjalna publikacja policyjna), STRUKTURA w pełni akademicka (rada naukowa, recenzenci, kodeks etyki, wskazówki dla autorów) — ⭐ SZCZEGÓLNIE WARTOŚCIOWE dla `analizator-dowodow-v3` (DR-16/moduły dowodowe) przy KONKRETNYCH pytaniach o METODOLOGIĘ badania śladów/dowodów, nie samo prawo dowodowe |
 | standardyprawa.pl | Agregator orzeczeń/komentarzy przy przepisach | 📚 znane (HIERARCHIA-ZRODEL) |
 | saos.org.pl | Wyszukiwarka orzeczeń sądów powszechnych (pomocnicza) | 📚 znane (HIERARCHIA-ZRODEL, Rząd 2A pomocniczo) |
 
@@ -302,10 +341,11 @@ DOPIERO PO ustaleniu treści orzeczenia z Rzędu 2A/1.
 | Portal | Specjalizacja | Status |
 |---|---|---|
 | prawo.pl | Portal GENERALISTYCZNY (Wolters Kluwer) — ma DZIAŁY tematyczne (Kadry, Samorząd, Sądy, Compliance) obejmujące PRAKTYCZNIE wszystkie DR | ✅ ZWERYFIKOWANE 2026-07-21 (test: wypowiedzenie umowy o pracę — wynik doskonały, cytaty orzecznictwa SN, przykłady praktyczne) |
+| **gazetaprawna.pl** | GENERALISTYCZNY dziennik prawny (wydawca: INFOR PL S.A., ta sama grupa co infor.pl) — BARDZO silna, wyrobiona pozycja: orzecznictwo SN/TK z sygnaturami, prawo pracy, podatki/VAT/KSeF, bieżące zmiany legislacyjne | ✅✅ ZWERYFIKOWANE 2026-07-21 (test: wyrok SN 2026 — wynik DOSKONAŁY, artykuły z BIEŻĄCEGO tygodnia [czerwiec/lipiec 2026], precyzyjne sygnatury np. II CSKP 643/25, II KK 453/22) — STATUS PODNIESIONY z 📚 na ✅✅ |
+| **rp.pl** (Rzeczpospolita) | GENERALISTYCZNY, PRESTIŻOWY dziennik ogólnopolski o WYROBIONEJ, silnej pozycji — SZCZEGÓLNIE mocny w tematyce USTROJOWEJ/KONSTYTUCYJNEJ (spór o legitymację TK, sędziowie "dublerzy", publikacja wyroków TK w Dz.U.), sądownictwo, orzecznictwo SN/TSUE | ✅✅ ZWERYFIKOWANE 2026-07-21 (test: wyrok TK — wynik DOSKONAŁY, GŁĘBOKA, wieloartykułowa analiza sporu ustrojowego, aktualizacje do czerwca 2026, precyzyjne sygnatury np. SK 50/22, I KZP 5/23) — ⭐ WYPEŁNIA CZĘŚCIOWO DR-12 (Sądownictwo/Prokuratura/Zawody Prawnicze) |
 | lex.pl / sip.lex.pl | GENERALISTYCZNA baza (Wolters Kluwer) — Rząd 2A dla TEKSTU przy licencji, Rząd 2B dla komentarza — NIE dotyczy jednej dziedziny | 📚 znane, dostęp OGRANICZONY bez licencji (patrz HIERARCHIA-ZRODEL) |
 | legalis.pl / sip.legalis.pl | GENERALISTYCZNA baza (C.H.Beck) — analogicznie do LEX | 📚 znane, dostęp OGRANICZONY bez licencji |
 | infor.pl | GENERALISTYCZNY portal, obejmuje WIELE dziedzin (podatki, kadry, prawo gospodarcze) | 📚 znane (HIERARCHIA-ZRODEL) |
-| gazetaprawna.pl | GENERALISTYCZNY dziennik prawny | 📚 znane (HIERARCHIA-ZRODEL) |
 | lexlege.pl, arslege.pl | GENERALISTYCZNE — teksty przepisów z komentarzem, NIE jedna dziedzina | 📚 znane (HIERARCHIA-ZRODEL), używane WIELOKROTNIE w tej sesji |
 
 ---
@@ -314,30 +354,44 @@ DOPIERO PO ustaleniu treści orzeczenia z Rzędu 2A/1.
 
 ```
 ✅ DZIEDZINY Z POTWIERDZONYM, ŚWIEŻO TESTOWANYM PORTALEM (`site:` na żywo):
-  DR-02 (poradnikprzedsiebiorcy.pl), DR-04 (kodekspracy.pl, gofin.pl),
-  DR-06 (gofin.pl+subdomeny, infor.pl, podatki.biz — NAJLEPIEJ pokryta
-  dziedzina, 3 niezależne, silne portale), DR-07 (portalzp.pl), DR-08
-  (samorzad.infor.pl, prawodlasamorzadu.pl), DR-09 (prawniknabudowie.com,
+  DR-02 (poradnikprzedsiebiorcy.pl, bankier.pl), DR-04 (kodekspracy.pl,
+  gofin.pl), DR-06 (gofin.pl+subdomeny, infor.pl, podatki.biz,
+  bankier.pl — NAJLEPIEJ pokryta dziedzina, 4 niezależne, silne
+  portale), DR-07 (portalzp.pl), DR-08 (samorzad.infor.pl,
+  prawodlasamorzadu.pl), DR-09 (prawniknabudowie.com,
   prawnikpodpowienabudowie.pl, muratorplus.pl), DR-10 (rynekzdrowia.pl),
-  DR-11 (poradyodo.pl)
+  DR-11 (poradyodo.pl), DR-12 (rp.pl, gazetaprawna.pl dla sądownictwa/TK
+  + palestra.pl, temidium.pl dla zawodów prawniczych — PODWÓJNE
+  pokrycie obu aspektów dziedziny), DR-14
+  (curia.europa.eu — Rząd 1, częściowe wypełnienie dla treści orzeczeń
+  TSUE, analogicznie do DR-16)
   + SEKCJA SPECJALNA niepełnosprawność (niepelnosprawni.pl, integracja.org,
   popon.pl, obpon.org dla perspektywy pracodawcy; portal-sow.pfron.org.pl
   jako Rząd 1 oficjalny; ipon.pl odnotowany jako portal SPOŁECZNOŚCIOWY,
   NIE prawny)
+  + DWA GENERALISTYCZNE dzienniki o WYROBIONEJ pozycji, obejmujące
+  PRAKTYCZNIE wszystkie DR: gazetaprawna.pl (wydawca INFOR PL S.A.),
+  rp.pl (Rzeczpospolita)
 
 ⚠️ DZIEDZINY Z WYNIKIEM MIESZANYM/NIEJEDNOZNACZNYM:
-  DR-04 dodatkowo (hrnaszpilkach.pl — słabszy wynik)
+  DR-04 dodatkowo (hrnaszpilkach.pl — słabszy wynik), DR-14 dodatkowo
+  (wyborcza.pl — test NIEUDANY, wymaga ponownej próby inną frazą)
 
-⛔ TRZY DZIEDZINY ŚWIADOMIE BEZ DOMINUJĄCEGO PORTALU (uczciwie
+⛔ CZTERY DZIEDZINY ŚWIADOMIE BEZ DOMINUJĄCEGO PORTALU 2B (uczciwie
 odnotowane, NIE fabrykowane — WSPÓLNY WZORZEC: nisze zdominowane przez
-firmy szkoleniowe/doradcze/wydawnictwa książkowe, NIE portale
-artykułowe):
+firmy szkoleniowe/doradcze/wydawnictwa książkowe LUB oficjalne strony
+organów, NIE portale artykułowe):
   □ DR-03 (Karne/Wykroczenia) — indywidualne blogi kancelaryjne (Rząd 3)
   □ DR-05 (Administracyjne) — firmy szkoleniowe, sklep Wolters Kluwer
-  □ DR-15 (Compliance/ISO/Governance) — firmy doradcze ("Wielka Czwórka"),
-    treści międzynarodowe
-  ZALECENIE dla WSZYSTKICH TRZECH: korzystaj z portali GENERALISTYCZNYCH
-  (prawo.pl, infor.pl) z zawężonym zapytaniem
+  □ DR-13 (Służby/Bezpieczeństwo/Informacje Niejawne) — oficjalne
+    strony organów (BIP ABW, SKW); defence24.pl jako CZĘŚCIOWY
+    substytut branżowy (dziennikarstwo, nie głęboki komentarz prawny,
+    treści w większości starsze — patrz zastrzeżenie w sekcji DR-13)
+  □ DR-15 (Compliance/ISO/Governance) — firmy doradcze ("Wielka
+    Czwórka"), treści międzynarodowe
+  ZALECENIE dla WSZYSTKICH CZTERECH: korzystaj z portali
+  GENERALISTYCZNYCH (prawo.pl, infor.pl, gazetaprawna.pl, rp.pl) z
+  zawężonym zapytaniem, LUB (dla DR-13) z oficjalnych źródeł Rządu 1
 
 ⭐ JEDNA DZIEDZINA, GDZIE BRAK PORTALU 2B TO NIE LUKA, LECZ WŁAŚCIWY STAN:
   □ DR-16 (Pisma/Dowody/Orzecznictwo) — dla TREŚCI orzeczeń właściwym
@@ -345,17 +399,11 @@ artykułowe):
     saos.org.pl), NIE komercyjny portal 2B — komentarz przychodzi
     DOPIERO po ustaleniu treści z wyższego rzędu
 
-⚠️⚠️ DZIEDZINY NADAL BEZ ŻADNEGO ŚWIEŻEGO TESTU W TEJ SESJI:
-  □ DR-12 (Sądownictwo, Prokuratura, Zawody Prawnicze)
-  □ DR-13 (Służby, Bezpieczeństwo, Informacje Niejawne) — TYLKO
-    przykładowy wzorzec nazwy (defence24.pl), NIEPOTWIERDZONY
-  □ DR-14 (Prawo UE, Międzynarodowe, Prawa Człowieka) — TYLKO
-    przykładowy wzorzec nazwy (euractiv.pl), NIEPOTWIERDZONY
-
-⭐ REKOMENDACJA: TRZY powyższe dziedziny (DR-12, 13, 14) to JEDYNY
-pozostały priorytet dla ewentualnej kolejnej tury testowania — WSZYSTKIE
-POZOSTAŁE 13 z 16 DR mają już ALBO potwierdzony portal, ALBO uczciwie
-odnotowany, świadomy brak dominującego źródła 2B w danej niszy.
+⭐⭐ STAN KOŃCOWY PO TEJ TURZE: WSZYSTKIE 16 DR + sekcja specjalna
+niepełnosprawności zostały PRZEBADANE co najmniej raz — BRAK dziedzin
+"całkowicie nietkniętych" w tym rejestrze. Jedynym pozostającym punktem
+otwartym jest POWTÓRZENIE testu dla wyborcza.pl (DR-14) inną frazą,
+jeśli użytkownik zechce kontynuować.
 ```
 
 ---
@@ -410,6 +458,56 @@ KROK 5: ZAWSZE kategoryzuj wynik wg `shared/HIERARCHIA-ZRODEL.md`
 ---
 
 ## CHANGELOG
+
+**1.8 (2026-07-21):** Kontynuacja poszukiwań na polecenie użytkownika,
+w tym zbadanie wskazanego linku https://problemykryminalistyki.
+policja.pl/. POTWIERDZONO (pobrano stronę bezpośrednio): to OFICJALNY
+(Rząd 1) kwartalnik naukowy Centralnego Laboratorium Kryminalistycznego
+Policji — NISZA ODMIENNA od reszty rejestru (kryminalistyka/metodologia
+dowodowa, NIE ogólne prawo karne), ze STRUKTURĄ w pełni akademicką (rada
+naukowa, recenzenci, kodeks etyki). Dodano do DR-16, ze SZCZEGÓLNYM
+odesłaniem do `analizator-dowodow-v3`. Przy poszukiwaniu kolejnych
+dużych portali prawnych ODKRYTO **palestra.pl** (✅✅, oficjalne
+czasopismo Naczelnej Rady Adwokackiej, archiwum od co najmniej 2013 r.)
+i **temidium.pl** (✅, Okręgowa Izba Radców Prawnych w Warszawie) — OBA
+WYPEŁNIAJĄ konkretnie brakujący aspekt "ZAWODY PRAWNICZE" w DR-12
+(etyka, forma wykonywania zawodu, relacje adwokat/radca), którego
+wcześniej zweryfikowane rp.pl/gazetaprawna.pl (skupione na SĄDOWNICTWIE/
+TK) nie pokrywały — DR-12 ma TERAZ podwójne, komplementarne pokrycie
+obu aspektów dziedziny.
+
+**1.7 (2026-07-21):** Na polecenie użytkownika o portalach dla służb
+oraz kolejnych dużych, uznanych portalach prawnych: **defence24.pl**
+(✅ zweryfikowany, DR-13 — ale z ISTOTNYM zastrzeżeniem: treści w
+większości STARSZE [2013-2017], profil dziennikarsko-analityczny, NIE
+głęboki komentarz prawny). DR-13 potwierdzone jako CZWARTA dziedzina
+bez dominującego portalu 2B (dołącza do DR-03/05/15) — nisza
+zdominowana przez oficjalne strony ABW/SKW. Przy okazji testowania
+wyborcza.pl (⚠️ TEST NIEUDANY — zero wyników z tej domeny) ODKRYTO
+**curia.europa.eu** — oficjalną bazę orzeczeń TSUE w języku polskim
+(Rząd 1), która WYPEŁNIA częściowo DR-14, analogicznie do sytuacji
+DR-16 (treść orzeczeń → źródło urzędowe, nie komentarz 2B). Dodano
+**bankier.pl** (✅✅ zweryfikowany, DR-06 — silne śledzenie procesu
+legislacyjnego na bieżąco, artykuły z dni nie tygodni). PO tej turze:
+WSZYSTKIE 16 dziedzin DR + sekcja specjalna niepełnosprawności zostały
+przebadane co najmniej raz — brak dziedzin całkowicie nietkniętych w
+tym rejestrze.
+
+**1.6 (2026-07-21):** Na wskazanie użytkownika (szukanie dużych,
+autorytatywnych źródeł jak "Dziennik Gazeta Prawna" o wyrobionej
+pozycji): zweryfikowano EMPIRYCZNIE dwa GENERALISTYCZNE, prestiżowe
+dzienniki. **gazetaprawna.pl** (wydawca INFOR PL S.A.) — status
+PODNIESIONY z 📚 (znane) na ✅✅ (w pełni zweryfikowane) — test na
+"wyrok SN 2026" dał wynik doskonały, artykuły z BIEŻĄCEGO tygodnia,
+precyzyjne sygnatury spraw. **rp.pl** (Rzeczpospolita) — NOWO dodane,
+✅✅ — test na "wyrok TK" ujawnił GŁĘBOKĄ, wieloartykułową analizę
+sporu ustrojowego wokół legitymacji Trybunału Konstytucyjnego
+(sędziowie "dublerzy", publikacja wyroków w Dz.U.), z aktualizacjami
+do czerwca 2026 i precyzyjnymi sygnaturami (SK 50/22, I KZP 5/23).
+rp.pl WYPEŁNIA częściowo DR-12 (Sądownictwo/Prokuratura/Zawody
+Prawnicze) — dziedzina PRZENIESIONA z "brak testu" do "potwierdzone".
+Zaktualizowano podsumowanie: TYLKO DWIE dziedziny (DR-13, DR-14)
+pozostają bez żadnego świeżego testu, zamiast trzech.
 
 **1.5 (2026-07-21):** Na polecenie użytkownika o zbadaniu kolejnych DR
 bez bazy portali: przetestowano TRZY dziedziny. DR-05 (Administracyjne)
