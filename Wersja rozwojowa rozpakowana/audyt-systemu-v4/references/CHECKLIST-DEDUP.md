@@ -20,6 +20,8 @@
 
 | Pojęcie | Lokalizacja kanoniczna | Konsumenci (DR) | Status |
 |---|---|---|---|
+| niebezpiecznik.pl (DR-11) + WERYFIKACJA 3 kandydatów z listy rekomendacji, wszystkie trafione: e-prawnik.pl (ROZWIĄZUJE lukę DR-03), wirtualnemedia.pl (nowa nisza medialna), praca.pl (perspektywa pracownika DR-04) | `shared/PORTALE-BRANZOWE-RZAD-2B.md` v2.3 | DR-11, DR-03, DR-04 | ✅ zweryfikowane 2026-07-21 — metodyczna analiza luk dała 100% trafień, DR-03 przeniesione z "brak portalu" do potwierdzonych |
+| bezprawnik.pl (DR-02, bardzo znany portal) + sekcja rekomendacji na przyszłość (analiza własna luk) | `shared/PORTALE-BRANZOWE-RZAD-2B.md` v2.2 | DR-02, wszystkie DR (rekomendacje) | ✅ zweryfikowane 2026-07-21 — odpowiedź na pytanie o dalsze ważne portale, z uzasadnioną listą priorytetów |
 | ⭐⭐⭐ NAPRAWA PODŁĄCZENIA: shared/HIERARCHIA-ZRODEL.md i shared/PORTALE-BRANZOWE-RZAD-2B.md nigdy nie były ładowane przez ŻADEN DR-skill ani router | `prawny-router-v3/SKILL.md` (required_modules) | WSZYSTKIE 16 DR (pośrednio, przez router) | ✅ NAPRAWIONE 2026-07-21, odpowiedź na pytanie "czy wszystkie DR wiedzą o tej bazie portali?" — odpowiedź brzmiała ŻADEN, teraz naprawione |
 | prawakonsumenta.uokik.gov.pl (Rząd 1, DR-02, wzory pism), medonet.pl (test nieudany, DR-10) | `shared/PORTALE-BRANZOWE-RZAD-2B.md` v2.1 | DR-02, DR-10 | ✅ zweryfikowane 2026-07-21 |
 | epodatnik.pl (DR-06, archiwum interpretacji), ngo.pl (DR-02, NOWA nisza NGO), parp.gov.pl (Rząd 1, dotacje) | `shared/PORTALE-BRANZOWE-RZAD-2B.md` v2.0 | DR-06, DR-02 | ✅ zweryfikowane 2026-07-21 — ngo.pl wypełnia całkowicie nową, dotąd nieobecną niszę |

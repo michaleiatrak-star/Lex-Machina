@@ -4,7 +4,119 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
-## AUDYT-2026-07-21dd — ⭐⭐⭐ NAJWAŻNIEJSZE odkrycie w kontekście rejestru portali: ŻADEN z 16 DR-skilli ani sam router prawny-router-v3 nie ładował shared/HIERARCHIA-ZRODEL.md ani shared/PORTALE-BRANZOWE-RZAD-2B.md — NAPRAWIONE + zbadano prawakonsumenta.uokik.gov.pl i medonet.pl (test nieudany)
+## AUDYT-2026-07-21ff — zweryfikowano niebezpiecznik.pl (DR-11) + WSZYSTKIE TRZY kandydatów z własnej listy rekomendacji, WSZYSTKIE trafione: e-prawnik.pl ROZWIĄZUJE wcześniej odnotowaną lukę DR-03, wirtualnemedia.pl (nowa nisza medialna), praca.pl (perspektywa pracownika)
+
+**Zakres:** rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v2.2→v2.3,
+w tym KOREKTA wcześniejszego wniosku w sekcji DR-03) + wpis
+`CHECKLIST-DEDUP.md`. Kontrola: T1/T2/T9 uruchomione POST-edycyjnie.
+
+**Kontekst:** użytkownik polecił zbadać niebezpiecznik.pl analogicznie
+do wcześniejszych portali, a NASTĘPNIE przejść do weryfikacji i
+dodawania kandydatów z listy rekomendacji sformułowanej w poprzedniej
+turze.
+
+**niebezpiecznik.pl — potwierdzone doskonale:** bardzo znany, wieloletni
+polski portal cyberbezpieczeństwa (Marcin Maj i zespół) — MOCNE
+pokrycie prawne NIS2/KSC2 (Ustawa o Krajowym Systemie Cyberbezpieczeństwa)
+z cytatami konkretnych artykułów (art. 49 — uprawnienia kontrolne,
+art. 37 RODO), śledzi GŁOŚNE sprawy (kara Morele.net, wyrok NSA
+uchylający decyzję UODO). UZUPEŁNIA poradyodo.pl — ten portal SILNIEJSZY
+w NIS2/cyberbezpieczeństwie, poradyodo.pl silniejszy w samym RODO.
+Dodano do DR-11.
+
+**⭐⭐⭐ Weryfikacja listy rekomendacji — WSZYSTKIE TRZY kandydaci
+TRAFIONE, ZNACZĄCE ustalenie metodologiczne:**
+
+1) **e-prawnik.pl** — NAJWAŻNIEJSZE odkrycie tej tury: portal ten
+   ROZWIĄZUJE lukę DR-03 (Karne/Wykroczenia), którą WCZEŚNIEJ w tej
+   samej sesji oznaczono jako "brak dominującego portalu 2B" (audyt
+   z wcześniejszej tury). Zawiera PEŁNY tekst Kodeksu wykroczeń z
+   komentarzem artykuł-po-artykule (art. 104-108, 119-131, 140-142),
+   precyzyjne cytaty (art. 45 §1 KW — przedawnienie, art. 97 §2 KPSW
+   — odmowa przyjęcia mandatu). SKORYGOWANO wcześniejszy wniosek w
+   sekcji DR-03 z JAWNYM wyjaśnieniem PRZYCZYNY rozbieżności:
+   PIERWOTNE zapytanie ("najlepsze portale prawo karne") było zapytaniem
+   META (szukającym rankingu), podczas gdy zapytanie SKUTECZNE ("prawo
+   karne wykroczenia przepisy") było sformułowane jak FAKTYCZNE pytanie
+   prawne — dodano to jako LEKCJĘ METODOLOGICZNĄ na przyszłość.
+
+2) **wirtualnemedia.pl** — POTWIERDZONA nowa nisza: prawo medialne/
+   prasowe (Prawo prasowe, relacja RODO↔dziennikarstwo z WYJĄTKIEM
+   art. 5-9 RODO dla działalności dziennikarskiej, orzecznictwo TSUE
+   o reklamie śledzącej — sprawa IAB Europe/TCF, aktualne do 2025 r.).
+   Analogicznie do WCZEŚNIEJ odkrytej niszy NGO (ngo.pl) — dodano do
+   DR-11.
+
+3) **praca.pl** — POTWIERDZONE wypełnienie luki PERSPEKTYWY PRACOWNIKA
+   w DR-04: dotychczasowe portale tej sekcji (kodekspracy.pl, kadry.
+   infor.pl) pisane były GŁÓWNIE z perspektywy pracodawcy/działu kadr;
+   praca.pl odwraca punkt widzenia, z konkretnymi rozróżnieniami (umowa
+   o pracę vs zlecenie, art. 153 KP, zasady naliczania urlopu).
+
+**⭐ Wniosek metodologiczny (dodany do rejestru):** WSZYSTKIE TRZY
+kandydaty wybrane na podstawie KONKRETNEJ, przemyślanej analizy luk
+(nie przypadkowego zgadywania nazw domen) okazały się TRAFIONE — ŻADEN
+nie dał wyniku nieudanego, w PRZECIWIEŃSTWIE do wcześniejszych,
+przypadkowych prób w tej sesji (wyborcza.pl, pb.pl, medonet.pl —
+wszystkie oparte na "znanej marce" bez uprzedniej analizy STRATEGICZNEJ,
+KTÓRA konkretna luka mogłaby zostać wypełniona). Potwierdza to wartość
+METODYCZNEGO podejścia (najpierw zidentyfikuj lukę, POTEM szukaj
+kandydata) nad losowym testowaniem znanych marek.
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana (22 sekcje
+głównych, 15 wpisów DR zachowanych). Kontrola T1/T2/T9 — wszystkie PASS.
+
+---
+
+
+
+**Zakres:** rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v2.1→v2.2)
++ wpis `CHECKLIST-DEDUP.md`. Kontrola: T1/T2/T9 uruchomione POST-edycyjnie.
+
+**Kontekst:** użytkownik zadał pytanie WYMAGAJĄCE własnej analizy, nie
+tylko wykonania wskazanych testów: "czy są jeszcze jakieś ważne
+portale branżowe lub ogólne których brakuje, a są w Polsce? i które
+powinieneś zbadać".
+
+**Podejście:** zamiast czekać na kolejne konkretne wskazania,
+przeanalizowano SAMODZIELNIE stan rejestru i zidentyfikowano
+NAJBARDZIEJ oczywistą, dotąd przeoczoną lukę — **bezprawnik.pl**,
+jeden z NAJBARDZIEJ rozpoznawalnych ogólnie portali prawnych w Polsce
+(istnieje od ok. 2013 r.), pomijany mimo kilkunastu kolejnych tur
+budowy tego rejestru. Test potwierdził wynik DOSKONAŁY: precyzyjne
+cytaty (art. 563 KC dot. dodatkowego obowiązku przedsiębiorcy przy
+rękojmi, art. 45 ustawy o kredycie konsumenckim), sygnatura SN (II CK
+291/05), subtelne rozróżnienia praktyczne (rękojmia vs gwarancja vs
+odpowiedzialność kontraktowa). Dodano do DR-02.
+
+**⭐ Dodatkowo — sformułowano WŁASNĄ, przemyślaną listę rekomendacji na
+przyszłość** (nowa sekcja w rejestrze), z UZASADNIENIEM każdej pozycji,
+podzieloną wg priorytetu:
+- WYSOKI: kandydaci CELUJĄCY w trzy dziedziny wciąż bez dominującego
+  portalu 2B (DR-03, DR-05, DR-15) — adwokatura.pl/e-prawnik.pl,
+  alternatywny portal compliance
+- ŚREDNI: redundancja/porównanie dla już pokrytych dziedzin — money.pl
+  (nigdy świeżo testowany mimo bycia "znanym"), businessinsider.com.pl,
+  WirtualneMedia.pl (możliwa NOWA nisza — prawo medialne, analogicznie
+  do wcześniej odkrytej niszy NGO)
+- NISKI: specjalistyczne uzupełnienia — portale nieruchomości
+  deweloperskich, praca.pl/pracuj.pl jako możliwe uzupełnienie
+  PERSPEKTYWY PRACOWNIKA (DR-04 ma dziś wyłącznie portale zorientowane
+  na pracodawcę/dział kadr)
+
+Sformułowano WŁASNĄ ocenę, KTÓRE trzy pozycje z tej listy wydają się
+NAJBARDZIEJ obiecujące dla PRAWDZIWEGO wypełnienia luki (nie tylko
+redundancji): próba dla DR-03/DR-05, WirtualneMedia.pl dla nowej niszy
+medialnej, oraz praca.pl/pracuj.pl dla brakującej perspektywy
+pracownika.
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana (22 sekcje
+głównych — nowa sekcja rekomendacji dodana bez naruszenia pozostałych
+21, 15 wpisów DR zachowanych). Kontrola T1/T2/T9 — wszystkie PASS.
+
+---
+
+
 
 **Zakres:** naprawa `prawny-router-v3/SKILL.md` (required_modules,
 dodano 2 pliki) + rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md`
