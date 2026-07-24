@@ -1,10 +1,10 @@
 # PORTALE-BRANZOWE-RZAD-2B.md — Rejestr Portali per Dziedzina (z weryfikacją `site:`)
 
 > **Plik:** `/mnt/skills/user/shared/PORTALE-BRANZOWE-RZAD-2B.md`
-> **Wersja:** 1.8 (2026-07-21) — dodano palestra.pl i temidium.pl
-> (wypełniają "zawody prawnicze" w DR-12) oraz problemykryminalistyki.
-> policja.pl (kryminalistyka, DR-16, szczególnie dla analizator-
-> dowodow-v3)
+> **Wersja:** 2.1 (2026-07-21) — NAPRAWIONO systemowe podłączenie:
+> ŻADEN DR-skill/router nie ładował tego rejestru — dodano do
+> required_modules prawny-router-v3. Dodano prawakonsumenta.uokik.gov.pl
+> (Rząd 1, DR-02) + odnotowano NIEUDANY test medonet.pl (DR-10)
 > **Rola:** UZUPEŁNIENIE `shared/HIERARCHIA-ZRODEL.md` — TAMTEN plik
 > kategoryzuje portale wg WIARYGODNOŚCI (Rząd 1/2A/2B/3), TEN plik
 > mapuje portale wg SPECJALIZACJI TEMATYCZNEJ, z podziałem na 16
@@ -85,10 +85,12 @@
 | Portal | Specjalizacja | Status |
 |---|---|---|
 | **poradnikprzedsiebiorcy.pl** | Prawo gospodarcze/firmy — zakładanie działalności/spółek (JDG, sp. z o.o.), koszty i procedury rejestracyjne (KRS, S24, CEIDG), przekształcenia | ✅ ZWERYFIKOWANE 2026-07-21 (test: zakładanie spółki z o.o. — wynik DOSKONAŁY, konkretne kwoty [kapitał zakładowy 5000 zł, opłaty sądowe 500 zł, PCC 0,5%], terminy [6 miesięcy na rejestrację], cytaty KSH) |
+| **ngo.pl** (+ subdomeny poradnik.ngo.pl, publicystyka.ngo.pl) | ⭐ NOWA NISZA — prawo ORGANIZACJI POZARZĄDOWYCH (fundacje, stowarzyszenia): ustawa o fundacjach, Prawo o stowarzyszeniach, władze/organy, oddziały/filie, działalność gospodarcza NGO, odpowiedzialność zarządu | ✅✅ ZWERYFIKOWANE 2026-07-21 (test: fundacja/stowarzyszenie przepisy — wynik DOSKONAŁY, precyzyjne cytaty artykułów [art. 7 ustawy o fundacjach, art. 10a Prawa o stowarzyszeniach], format Q&A praktyczny) — DOTĄD BRAK dedykowanego portalu dla tej niszy w całym rejestrze |
 | infor.pl | Ogólne prawo cywilne/gospodarcze, redakcja profesjonalna | 📚 znane (HIERARCHIA-ZRODEL) |
 | rodzinneprawo.pl / adwokatrodzinny.pl (przykładowe wzorce nazw) | Prawo rodzinne — ⚠️ SPRAWDŹ każdorazowo czy dana domena ma redakcję wydawniczą (Rząd 2B) czy jest indywidualną kancelarią (Rząd 3) | ⚠️ NIE testowane — punkt startowy, brak jednej dominującej marki "2B" w tej niszy |
 | bankier.pl (dział Prawo) | Prawo gospodarcze/handlowe, kontekst rynkowy | ✅ ZWERYFIKOWANE (patrz DR-06 — TA SAMA domena, status podniesiony z 📚) |
 | pb.pl (Puls Biznesu) | Ekonomia/biznes — ⚠️ TEST `site:` w tej sesji zwrócił WYŁĄCZNIE niepowiązane wyniki (Wikipedia, baza LEI, szablony umów) — MOŻLIWE że indeksacja tej domeny jest słaba dla wyszukiwarki LUB wymaga innej frazy zapytania | ⚠️ WYNIK NIEUDANY 2026-07-21 — NIE polegaj na tym portalu bez PONOWNEGO testu z inną frazą |
+| **prawakonsumenta.uokik.gov.pl** (+ polubowne.uokik.gov.pl, malykonsument.uokik.gov.pl) | ⛔ TO NIE JEST Rząd 2B — OFICJALNY portal UOKiK (Rząd 1, domena .gov.pl) — prawa konsumenta, reklamacja, GOTOWE WZORY PISM (oświadczenie o odstąpieniu, reklamacja — naprawa/wymiana/obniżenie ceny/odstąpienie), polubowne rozwiązywanie sporów | ✅ ZWERYFIKOWANE 2026-07-21 — klasyfikuj jako Rząd 1 (analogicznie do PFRON SOW, PARP) — ⭐ SZCZEGÓLNIE WARTOŚCIOWE ze względu na GOTOWE wzory pism, potencjalnie przydatne dla `pisma-proste-v2` |
 
 ## DR-03 — Karne, Wykroczenia, Egzekucja
 
@@ -167,8 +169,11 @@ poziomie porównywalnym do gofin.pl.
 | — subdomena: przewodnikksiegowego.gofin.pl | Rachunkowość szczegółowa, ewidencja księgowa | ✅ ZWERYFIKOWANE 2026-07-21 |
 | **infor.pl (+ subdomena ksiegowosc.infor.pl)** | Podatki/VAT/księgowość — treść BARDZO AKTUALNA (cytuje wyroki NSA z lutego 2026 r.), KSeF, JPK_VAT, interpretacje KIS | ✅✅ ZWERYFIKOWANE 2026-07-21 (test: VAT faktura — wynik DOSKONAŁY, konkretne artykuły ustawy o VAT, świeże orzecznictwo NSA, zakres porównywalny z gofin.pl — DRUGI, RÓWNOWAŻNY filar dla tej dziedziny) |
 | **podatki.biz** | Podatki PIT/CIT/VAT/PCC, ZUS, rachunkowość — prowadzony przez TaxNet sp. z o.o., szerokie kategorie tematyczne (ryczałt, samochód w firmie, spadki/darowizny) | ✅ ZWERYFIKOWANE 2026-07-21 (potwierdzona realność i zakres portalu, choć test nie był w pełni czystym `site:` — ZALECANE powtórzenie testu z konkretniejszą frazą przed pierwszym praktycznym użyciem) |
+| **epodatnik.pl** | ⭐ INNA FUNKCJA niż pozostałe portale tej sekcji — to PRZESZUKIWALNE ARCHIWUM rzeczywistych interpretacji podatkowych (KIS i poprzedniczek), z wyszukiwarką WG konkretnego przepisu, PKWiU/PKD/KŚT/PKOB, hasła tematycznego — NIE serwis komentarzowy | ✅ ZWERYFIKOWANE 2026-07-21 — WARTOŚCIOWE jako ALTERNATYWNE/uzupełniające narzędzie do bazy EUREKA (oficjalnej, Rząd 1) przy poszukiwaniu KONKRETNEJ, historycznej interpretacji do danego artykułu — ⚠️ część wyników w wynikach wyszukiwania DATOWANA nawet na 2007-2011 r. (co jest NATURALNE dla archiwum, nie wadą — stare interpretacje POZOSTAJĄ źródłem, jeśli przepis się nie zmienił) |
+| **parp.gov.pl** (Polska Agencja Rozwoju Przedsiębiorczości) | ⛔ TO NIE JEST Rząd 2B — OFICJALNA agencja rządowa (Rząd 1, domena .gov.pl) — dotacje/dofinansowania dla firm (FENG, fundusze europejskie), BARDZO aktualne nabory z konkretnymi terminami i kwotami | ✅ ZWERYFIKOWANE 2026-07-21 jako REALNE, aktywne źródło (nabory z terminami do listopada 2026) — klasyfikuj jako Rząd 1, analogicznie do PFRON SOW |
 | money.pl (dział Podatki) | Podatki — kontekst rynkowo-informacyjny | 📚 znane (HIERARCHIA-ZRODEL) |
 | **bankier.pl** | Podatki/finanse — SILNE śledzenie PROCESU LEGISLACYJNEGO na bieżąco (głosowania Sejmu, projekty rządowe, daty wejścia w życie) | ✅ ZWERYFIKOWANE 2026-07-21 (test: zmiany VAT 2026 — wynik DOSKONAŁY, artykuły z DNI, nie tygodni [np. 2.06.2026], konkretne terminy wejścia w życie [1.07.2026, 1.01.2027]) |
+| **egospodarka.pl** (+ subdomeny podatki.egospodarka.pl, firma.egospodarka.pl) | Podatki/biznes — bardzo SZEROKA oferta (Podatki/Firma/Finanse/Nieruchomości/Przetargi/Praca/Prawo), komentarze NAZWANYCH ekspertów (kancelarie), kalkulatory | ✅✅ ZWERYFIKOWANE 2026-07-21 (test: zmiana B2B na umowę o pracę — wynik DOSKONAŁY, artykuł z KOMENTARZEM partnera kancelarii, aktualny do 2026-04) — ⚠️ ZASTRZEŻENIE: JEDEN ze znalezionych artykułów oznaczony WPROST "© wygenerowane przez AI" — TRAKTUJ treść egospodarka.pl z TĄ SAMĄ ostrożnością co przy innych źródłach AI-generowanych (patrz zastrzeżenie psz.praca.gov.pl w sekcji niepełnosprawność), SKRZYŻUJ z innym źródłem przy KLUCZOWYCH ustaleniach |
 | poradnikprzedsiebiorcy.pl | Podatki dla małych przedsiębiorców, JDG | ✅ ZWERYFIKOWANE (patrz DR-02 — TA SAMA domena, dotyczy też podatków) |
 
 ## DR-07 — Zamówienia Publiczne, Fundusze UE
@@ -212,7 +217,21 @@ generalistycznego prawo.pl.
 | Portal | Specjalizacja | Status |
 |---|---|---|
 | rynekzdrowia.pl | Polityka zdrowotna, REFUNDACJA LEKÓW, farmacja — redakcja BARDZO aktualna (śledzi zmiany list refundacyjnych na bieżąco) | ✅ ZWERYFIKOWANE 2026-07-21 (test: refundacja leków — liczne, świeże, konkretne artykuły z nazwami substancji/dat wejścia w życie) |
+| **farmer.pl** | ROLNICTWO — dedykowane sekcje "Prawo"/"Finanse i prawo"/"Przepisy i regulacje", dopłaty ARiMR, sankcje, interwencje RPO w sprawach warunkowości płatności | ✅✅ ZWERYFIKOWANE 2026-07-21 (test: dopłaty rolne ARiMR — wynik DOSKONAŁY, konkretne mechanizmy prawne [konflikt kontroli krzyżowej, warunkowość społeczna od 2025, sankcje BHP], cytaty stanowisk RPO) |
+| **wiescirolnicze.pl** | ROLNICTWO — dedykowane sekcje "Prawo i finanse"/"Prawo dla rolnika", KRUS, ubezpieczenia upraw/zwierząt gospodarskich — redakcja BARDZO aktualna, śledzi PROCES LEGISLACYJNY na bieżąco | ✅✅ ZWERYFIKOWANE 2026-07-21 (test: ustawa dopłaty — wynik DOSKONAŁY, artykuły z marca 2026, PEŁNA saga ustawy "Aktywny Rolnik" [projekt→Sejm→WETO PREZYDENTA→aktualne zasady] śledzona krok po kroku) |
 | termedia.pl (przykładowy wzorzec dla medycyny/prawa medycznego) | Prawo medyczne, czasopisma branżowe | ⚠️ NIE testowane w tej sesji, punkt startowy |
+| medonet.pl | Zdrowie ogólnie — portal ZNANY z ogólnej wiedzy jako duży, popularny serwis medyczny | ⚠️ TEST NIEUDANY 2026-07-21 (DWUKROTNIE, różne frazy: "prawa pacjenta ubezpieczenie zdrowotne" i "NFZ refundacja recepta") — OBA razy zapytanie `site:medonet.pl` zwróciło ZERO wyników z tej domeny (wyłącznie źródła niepowiązane: dokumenty HHS.gov, Trustpilot, OpenStreetMap) — NIE POTWIERDZONO wartości tego portalu dla treści PRAWNEJ, mimo że jest znaną marką ogólnie — MOŻLIWE że medonet.pl NIE MA znaczącej treści prawnej/regulacyjnej (skupia się raczej na poradach zdrowotnych/lifestyle niż prawie), LUB indeksacja jest słaba — NIE polegaj na tym portalu bez POTWIERDZENIA innym sposobem |
+
+### ⭐ Uwaga praktyczna
+
+```
+DR-10 miało DOTĄD tylko rynekzdrowia.pl (zdrowie/farmacja) — BRAKOWAŁO
+dedykowanego pokrycia dla "ROLNICTWA" (czwarty człon nazwy dziedziny).
+TERAZ farmer.pl i wiescirolnicze.pl WYPEŁNIAJĄ konkretnie ten aspekt —
+oba śledzą NAJBARDZIEJ aktualne zagadnienia (ustawa "Aktywny Rolnik",
+warunkowość społeczna WPR, KRUS) z PORÓWNYWALNĄ głębią do rynekzdrowia.pl
+dla swojej niszy.
+```
 
 ## DR-11 — Cyfrowe, Cyberbezpieczeństwo, AI, Dane, IP
 
@@ -359,7 +378,9 @@ DOPIERO PO ustaleniu treści orzeczenia z Rzędu 2A/1.
   bankier.pl — NAJLEPIEJ pokryta dziedzina, 4 niezależne, silne
   portale), DR-07 (portalzp.pl), DR-08 (samorzad.infor.pl,
   prawodlasamorzadu.pl), DR-09 (prawniknabudowie.com,
-  prawnikpodpowienabudowie.pl, muratorplus.pl), DR-10 (rynekzdrowia.pl),
+  prawnikpodpowienabudowie.pl, muratorplus.pl), DR-10 (rynekzdrowia.pl
+  dla zdrowia/farmacji + farmer.pl, wiescirolnicze.pl dla ROLNICTWA —
+  czwarty człon nazwy dziedziny wcześniej niepokryty),
   DR-11 (poradyodo.pl), DR-12 (rp.pl, gazetaprawna.pl dla sądownictwa/TK
   + palestra.pl, temidium.pl dla zawodów prawniczych — PODWÓJNE
   pokrycie obu aspektów dziedziny), DR-14
@@ -458,6 +479,47 @@ KROK 5: ZAWSZE kategoryzuj wynik wg `shared/HIERARCHIA-ZRODEL.md`
 ---
 
 ## CHANGELOG
+
+**2.1 (2026-07-21):** ⭐⭐⭐ NAJWAŻNIEJSZE ustalenie tej tury — na
+pytanie użytkownika "czy wszystkie DR wiedzą o tej bazie portali?"
+sprawdzono SYSTEMATYCZNIE (grep) WSZYSTKIE 16 DR-skilli: ŻADEN nie
+odwoływał się do tego rejestru, ANI DO shared/HIERARCHIA-ZRODEL.md.
+Sprawdzono również orkiestrator prawny-router-v3 — RÓWNIEŻ nie ładował
+żadnego z tych plików. NAPRAWIONO: dodano OBA pliki do required_modules
+w prawny-router-v3/SKILL.md — TERAZ każde wywołanie routera (a więc
+każdy DR-skill uruchamiany przez router) ma dostęp do kategoryzacji
+wiarygodności źródeł i rejestru portali. Dodatkowo zbadano portale:
+**prawakonsumenta.uokik.gov.pl** (✅, Rząd 1 — oficjalny portal UOKiK,
+GOTOWE wzory pism reklamacyjnych, potencjalnie przydatne dla pisma-
+proste-v2) oraz **medonet.pl** — ⚠️ TEST NIEUDANY dwukrotnie (różne
+frazy), zero wyników z tej domeny mimo że to znana marka ogólnie —
+odnotowano UCZCIWIE bez fabrykowania wartości portalu.
+
+**2.0 (2026-07-21):** Na polecenie użytkownika: zbadano cztery portale.
+**epodatnik.pl** (✅, DR-06) — ⭐ ODMIENNA funkcja od reszty sekcji:
+PRZESZUKIWALNE ARCHIWUM rzeczywistych interpretacji podatkowych (nie
+serwis komentarzowy), z wyszukiwarką wg przepisu/PKWiU/hasła —
+wartościowe jako alternatywa dla oficjalnej bazy EUREKA. **ngo.pl**
+(✅✅, DR-02) — WYPEŁNIA CAŁKOWICIE NOWĄ niszę, dotąd nieobecną w
+rejestrze: prawo organizacji pozarządowych (fundacje, stowarzyszenia),
+z precyzyjnymi cytatami (art. 7 ustawy o fundacjach, art. 10a Prawa o
+stowarzyszeniach). **parp.gov.pl** (✅, Rząd 1) — potwierdzona oficjalna
+agencja rządowa (Polska Agencja Rozwoju Przedsiębiorczości), NIE 2B —
+dotacje/dofinansowania dla firm, bardzo aktualne nabory z konkretnymi
+terminami do 2026/2027.
+
+**1.9 (2026-07-21):** Na polecenie użytkownika: zbadano trzy wskazane
+portale. **egospodarka.pl** (✅✅, DR-06/02) — bardzo szeroka oferta
+(Podatki/Firma/Finanse/Prawo), komentarze nazwanych ekspertów
+kancelaryjnych — ⚠️ ODNOTOWANO ZASTRZEŻENIE: jeden znaleziony artykuł
+oznaczony wprost "wygenerowane przez AI", wymaga tej samej ostrożności
+co inne źródła AI-generowane w rejestrze. **farmer.pl** (✅✅, DR-10) i
+**wiescirolnicze.pl** (✅✅, DR-10) — OBA WYPEŁNIAJĄ dotąd niepokryty
+aspekt "ROLNICTWA" (czwarty człon nazwy DR-10, wcześniej reprezentowany
+wyłącznie przez rynekzdrowia.pl skupione na zdrowiu/farmacji) — oba
+mają dedykowane sekcje prawne, śledzą na bieżąco dopłaty ARiMR, KRUS,
+oraz PEŁNĄ, aktualną sagę legislacyjną ustawy "Aktywny Rolnik" (projekt
+→ Sejm → weto prezydenta → obowiązujące zasady 2026).
 
 **1.8 (2026-07-21):** Kontynuacja poszukiwań na polecenie użytkownika,
 w tym zbadanie wskazanego linku https://problemykryminalistyki.

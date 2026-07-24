@@ -4,7 +4,141 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
-## AUDYT-2026-07-21aa — zbadano wskazany link problemykryminalistyki.policja.pl (potwierdzony jako oficjalny kwartalnik naukowy CLKP, nisza kryminalistyczna) + odkryto palestra.pl i temidium.pl wypełniające brakujący aspekt "zawody prawnicze" w DR-12
+## AUDYT-2026-07-21dd — ⭐⭐⭐ NAJWAŻNIEJSZE odkrycie w kontekście rejestru portali: ŻADEN z 16 DR-skilli ani sam router prawny-router-v3 nie ładował shared/HIERARCHIA-ZRODEL.md ani shared/PORTALE-BRANZOWE-RZAD-2B.md — NAPRAWIONE + zbadano prawakonsumenta.uokik.gov.pl i medonet.pl (test nieudany)
+
+**Zakres:** naprawa `prawny-router-v3/SKILL.md` (required_modules,
+dodano 2 pliki) + rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md`
+(v2.0→v2.1) + wpis `CHECKLIST-DEDUP.md`. Kontrola: T1/T2/T9 uruchomione
+POST-edycyjnie na całym systemie.
+
+**Kontekst:** użytkownik zadał WPROST pytanie diagnostyczne: "czy
+wszystkie DR wiedzą o tej bazie portali?" — przed odpowiedzią
+SPRAWDZONO to systematycznie, zamiast zakładać.
+
+**⭐⭐⭐ Ustalenie — SYSTEMOWY brak podłączenia, NAJWAŻNIEJSZE odkrycie
+tej wieloetapowej pracy nad rejestrem portali:** systematyczne
+przeszukanie (`grep`) WSZYSTKICH 16 plików `dr-XX/SKILL.md` wykazało
+ZERO odwołań do `shared/PORTALE-BRANZOWE-RZAD-2B.md` — mimo że rejestr
+ten był rozbudowywany przez WIELE kolejnych tur tej sesji, z dziesiątkami
+zweryfikowanych portali. CO WIĘCEJ — ŻADEN DR-skill nie odwoływał się
+NAWET do `shared/HIERARCHIA-ZRODEL.md` (istniejącego od dawna, centralnego
+pliku kategoryzacji wiarygodności źródeł). Sprawdzono RÓWNIEŻ orkiestrator
+`prawny-router-v3` (główny punkt wywołania CAŁEGO systemu prawnego) —
+RÓWNIEŻ nie ładował żadnego z tych dwóch plików w swojej liście
+`required_modules`. To NAJDOBITNIEJSZY dotąd przykład wzorca
+znajdowanego wielokrotnie w tej sesji ("zbudowano, zapomniano
+podłączyć") — TYM razem dotyczący CAŁEGO, obszernego rejestru
+budowanego przez kilkanaście kolejnych tur, nie pojedynczego modułu.
+
+**Naprawa:** dodano OBA pliki (`shared/HIERARCHIA-ZRODEL.md` i
+`shared/PORTALE-BRANZOWE-RZAD-2B.md`) do `required_modules` w
+`prawny-router-v3/SKILL.md` — WYBRANO router jako PUNKT NAPRAWY (zamiast
+edytowania 16 osobnych plików DR), ponieważ WSZYSTKIE DR-skille są
+WYWOŁYWANE przez ten router, więc TA jedna zmiana zapewnia dostęp
+WSZYSTKIM 16 dziedzinom jednocześnie, bez ryzyka pominięcia któregoś
+z nich przy edycji rozproszonej.
+
+**Dodatkowo zbadano dwa wskazane portale:**
+1. **prawakonsumenta.uokik.gov.pl** — ✅ potwierdzony jako oficjalny
+   (Rząd 1) portal UOKiK, z GOTOWYMI wzorami pism reklamacyjnych
+   (oświadczenie o odstąpieniu, reklamacja z różnymi żądaniami) —
+   dodano do DR-02, ze wskazaniem potencjalnej przydatności dla
+   `pisma-proste-v2`.
+2. **medonet.pl** — ⚠️ TEST NIEUDANY, wykonany DWUKROTNIE z różnymi
+   frazami zapytania — OBA razy zero wyników z tej domeny. Odnotowano
+   UCZCIWIE jako porażkę testu, BEZ fabrykowania wartości portalu
+   tylko dlatego, że jest znaną marką z ogólnej wiedzy — analogicznie
+   do wcześniej odnotowanych porażek (wyborcza.pl, pb.pl).
+
+**Status:** ✅ WDROŻONE. Struktura `PORTALE-BRANZOWE-RZAD-2B.md`
+zweryfikowana (21 sekcji, 15 wpisów DR). Struktura YAML
+`prawny-router-v3/SKILL.md` zweryfikowana (12 wpisów shared/ w
+required_modules, zgodnie z oczekiwaniem po dodaniu 2 nowych do
+istniejących 10). Kontrola T1/T2/T9 na całym systemie — wszystkie PASS.
+
+---
+
+
+
+**Zakres:** rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v1.9→v2.0)
++ wpis `CHECKLIST-DEDUP.md`. Kontrola: T1/T2/T9 uruchomione POST-edycyjnie.
+
+**Kontekst:** użytkownik polecił zbadać cztery portale: epodatnik,
+poradnik przedsiębiorcy (już wcześniej zweryfikowany), ngo, parp.
+
+**epodatnik.pl — potwierdzone, z WAŻNYM rozróżnieniem funkcjonalnym:**
+w odróżnieniu od WSZYSTKICH dotąd testowanych portali sekcji DR-06
+(gofin.pl, infor.pl, bankier.pl, egospodarka.pl — wszystkie SERWISY
+KOMENTARZOWE/artykułowe), epodatnik.pl okazał się PRZESZUKIWALNYM
+ARCHIWUM rzeczywistych, historycznych interpretacji podatkowych — z
+wyszukiwarką WG konkretnego przepisu, klasyfikacji PKWiU/PKD/KŚT/PKOB,
+oraz hasła tematycznego. Odnotowano jako WARTOŚCIOWE narzędzie
+ALTERNATYWNE/uzupełniające dla oficjalnej bazy EUREKA — część wyników
+w wyszukiwarce datowana nawet na 2007-2011 r., co jest NATURALNE dla
+archiwum (stare interpretacje pozostają ważne, jeśli przepis się nie
+zmienił), nie wadą portalu.
+
+**⭐⭐ ngo.pl — WYPEŁNIA CAŁKOWICIE NOWĄ, dotąd nieobecną niszę w
+CAŁYM rejestrze:** żaden z 20+ dotychczas zweryfikowanych portali nie
+pokrywał prawa organizacji pozarządowych (fundacje, stowarzyszenia) —
+temat TECHNICZNIE należący do DR-02 (Cywilne), ale STANOWIĄCY odrębną
+specjalizację. Test ujawnił wynik DOSKONAŁY: precyzyjne cytaty
+konkretnych artykułów (art. 7 ustawy o fundacjach — moment uzyskania
+osobowości prawnej; art. 10a Prawa o stowarzyszeniach — jednostki
+terenowe), format praktycznego Q&A, osobne subdomeny (poradnik.ngo.pl,
+publicystyka.ngo.pl). Dodano jako NOWY wiersz w DR-02.
+
+**parp.gov.pl — potwierdzone jako Rząd 1, nie 2B:** Polska Agencja
+Rozwoju Przedsiębiorczości, oficjalna agencja rządowa (.gov.pl) —
+dotacje/dofinansowania dla firm (FENG, fundusze europejskie), z BARDZO
+aktualnymi naborami (konkretne terminy do listopada 2026, kwoty
+dofinansowania). Sklasyfikowano analogicznie do wcześniej odnotowanego
+portal-sow.pfron.org.pl — realne, wartościowe źródło, ale KATEGORII
+Rząd 1, nie komercyjny portal 2B.
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana (21 sekcji
+głównych, 15 wpisów DR zachowanych). Kontrola T1/T2/T9 — wszystkie PASS.
+
+---
+
+
+
+**Zakres:** rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v1.8→v1.9)
++ wpis `CHECKLIST-DEDUP.md`. Kontrola: T1/T2/T9 uruchomione POST-edycyjnie.
+
+**Kontekst:** użytkownik polecił zbadać trzy konkretne portale:
+egospodarka, farmer, wieścirolnicze — oraz kontynuować poszukiwania.
+
+**egospodarka.pl — potwierdzone, z ważnym zastrzeżeniem:** test ujawnił
+BARDZO szeroką ofertę (subdomeny podatki.egospodarka.pl, firma.
+egospodarka.pl), komentarze NAZWANYCH ekspertów kancelaryjnych (partner
+Kancelarii Litigato), treść aktualną do kwietnia 2026. ⚠️ ODNOTOWANO
+UCZCIWIE: JEDEN ze znalezionych artykułów zawierał JAWNE oznaczenie "©
+wygenerowane przez AI" — dodano to zastrzeżenie do rejestru, z
+zaleceniem tej SAMEJ ostrożności, co przy innych źródłach częściowo
+AI-generowanych już odnotowanych w systemie (psz.praca.gov.pl).
+
+**farmer.pl i wiescirolnicze.pl — WYPEŁNIAJĄ realną, dotąd niezauważoną
+lukę:** DR-10 (Zdrowie, Farmacja, Żywność, ROLNICTWO) miało DOTĄD
+pokrycie WYŁĄCZNIE dla zdrowia/farmacji (rynekzdrowia.pl) — CZWARTY
+człon nazwy dziedziny, rolnictwo, pozostawał BEZ dedykowanego portalu.
+Oba nowo znalezione portale mają WŁASNE, dedykowane sekcje prawne
+("Prawo"/"Finanse i prawo" na farmer.pl; "Prawo i finanse"/"Prawo dla
+rolnika" na wiescirolnicze.pl) i śledzą NAJBARDZIEJ aktualne tematy z
+PORÓWNYWALNĄ głębią do rynekzdrowia.pl — w szczególności PEŁNĄ,
+wieloetapową sagę legislacyjną ustawy "Aktywny Rolnik" (projekt trafił
+do Sejmu 30.12.2025 → pierwsze czytanie 21.01.2026 → WETO PREZYDENTA
+Karola Nawrockiego → obowiązywanie dotychczasowych zasad w kampanii
+2026), oraz konkretne mechanizmy prawne (konflikt kontroli krzyżowej
+ARiMR, warunkowość społeczna WPR od 2025, sankcje BHP, zmiany KRUS).
+
+**Status:** ✅ WDROŻONE. Struktura pliku zweryfikowana (21 sekcji
+głównych, 15 wpisów DR zachowanych). Kontrola T1/T2/T9 — wszystkie
+PASS.
+
+---
+
+
 
 **Zakres:** rozbudowa `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v1.7→v1.8)
 + wpis `CHECKLIST-DEDUP.md`. Kontrola: T1/T2/T9 z zestawu testów

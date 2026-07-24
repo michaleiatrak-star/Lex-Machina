@@ -67,6 +67,8 @@ limitations:
 required_modules:
   - shared/MCP-INTEGRACJA.md  # opcjonalny — patrz KROK 1; tani gdy MCP niepodłączone
   - shared/PRAWO-HARDGATE.md
+  - shared/HIERARCHIA-ZRODEL.md  # kategoryzacja wiarygodności źródeł (Rząd 1/2A/2B/3) — dodane 2026-07-21, ISTNIAŁ od dawna ale ŻADEN DR-skill/router go nie ładował
+  - shared/PORTALE-BRANZOWE-RZAD-2B.md  # rejestr portali branżowych per dziedzina, z weryfikacją site: — dodane 2026-07-21, ten sam błąd co wyżej (zbudowany, nigdy niepodłączony)
   - shared/MOD-STEP-TRACKER.md
   - shared/MOD-KONTEKST-SESJI.md
   - shared/MOD-SKAN-DOWODOW-KOMPLETNY.md
@@ -79,6 +81,17 @@ required_modules:
   - references/KROK1-detekcja.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md  # kanoniczny, wg UP-3
 changelog:
+  - "3.17 (2026-07-21): NAPRAWIONO — shared/HIERARCHIA-ZRODEL.md (istniał
+    od dawna) i shared/PORTALE-BRANZOWE-RZAD-2B.md (zbudowany w tej sesji,
+    16 dziedzin z weryfikacją site:) NIE BYŁY ładowane przez ŻADEN DR-skill
+    ani przez sam router — DOKŁADNIE ten sam wzorzec 'zbudowano, zapomniano
+    podłączyć' co wielokrotnie w tej sesji (moduły niezarejestrowane w
+    SKILL.md, plany bez skryptów, poprawki niezsynchronizowane między
+    mapami). Dodano OBA do required_modules — TERAZ każde wywołanie routera
+    (a więc każdy DR-skill uruchamiany PRZEZ router) ma dostęp do
+    kategoryzacji wiarygodności źródeł i rejestru portali branżowych.
+    Odkryte przy pytaniu użytkownika 'czy wszystkie DR wiedzą o tej bazie
+    portali?' — odpowiedź brzmiała: ŻADEN, naprawiono."
   - "3.16 (2026-07-13f): KONSOLIDACJA — usunięto zależność od osobnych skilli
     mcp-zrodla-prawa-v1/audit-trail-portal-v1/sync-dzu-automatyczny-v1 (utworzonych
     2026-07-13). Ich treść przeniesiono do shared/MCP-INTEGRACJA.md,
