@@ -1,6 +1,6 @@
 ---
 name: pisma-proste-v2
-version: 2.4
+version: 2.6
 type: executive-pisma
 status: production
 description: |
@@ -9,9 +9,9 @@ description: |
   nakazu zapłaty, wszczęcia egzekucji, zabezpieczenia roszczenia,
   zwolnienia od kosztów, zawezwania do ugody, przywrócenia terminu,
   wglądu do akt, wezwania do zapłaty, uzasadnienia wyroku, doręczenia
-  przez komornika, sprzeciwu od referendarza, interpretacji ZUS/GIP/
-  podatkowej, skargi do UODO. NIE stosuj do pism wielowątkowych
-  (apelacje, pozwy złożone) — użyj pisma-procesowe-v3.
+  przez komornika, sprzeciwu od referendarza, interpretacji ZUS, skargi
+  do UODO. NIE stosuj do pism wielowątkowych (apelacje, pozwy złożone)
+  — użyj pisma-procesowe-v3.
 compatibility:
   tools:
     - web_search
@@ -97,8 +97,7 @@ Nie cytuj przepisów ani orzeczeń z pamięci bez weryfikacji online.
 | **SPI — Zawezwanie** | `references/SPI-zawezwanie.md` | Odpowiedź na zawezwanie do próby ugodowej |
 | **SPJ — Interpretacja ZUS** | `references/SPJ-interpretacja-zus.md` | Wniosek o interpretację indywidualną ZUS (art. 34 Prawa przedsiębiorców — obowiązek składkowy) |
 | **SPK — Skarga do UODO** | `references/SPK-skarga-do-UODO.md` | Skarga do Prezesa UODO na administratora naruszającego RODO (art. 77 RODO, po wyczerpaniu ścieżki bezpośredniej) |
-| **SPL — Interpretacja GIP** | `references/SPL-interpretacja-GIP.md` | Wniosek o interpretację indywidualną Głównego Inspektora Pracy (art. 14b ustawy o PIP — ryzyko przekwalifikowania B2B/zlecenia na stosunek pracy) |
-| **SPM — Interpretacja podatkowa** | `references/SPM-interpretacja-podatkowa.md` | Wniosek o interpretację indywidualną podatkową do Dyrektora KIS (art. 14b-14p Ordynacji podatkowej) |
+| **SPL — Skarga na komornika** | `references/SPL-skarga-komornik.md` | Skarga na czynności komornika / na zaniechanie (art. 767 KPC) — **UWAGA: wnosi się do komornika, nie bezpośrednio do sądu**, patrz sekcja "Adresat" w pliku |
 
 ---
 
@@ -109,7 +108,7 @@ KROK 1  → Wczytaj references/M1-zasady.md             [zawsze]
 KROK 2  → Wczytaj references/M2-intake.md             [zawsze — ustal typ pisma i dane]
 KROK 3  → Wczytaj:
            view /mnt/skills/user/shared/terminy.md            [jeśli pismo ma termin zawity]
-KROK 4  → Wczytaj właściwy schemat SPA–SPI albo SPE-O [na podstawie wyniku M2; dla wezwania ostatecznego: references/SPE-ostateczne.md]
+KROK 4  → Wczytaj właściwy schemat SPA–SPL albo SPE-O [na podstawie wyniku M2; dla wezwania ostatecznego: references/SPE-ostateczne.md]
 KROK 5  → Wczytaj references/M6-oplaty.md             [jeśli pismo wymaga opłaty]
 KROK 6  → Wczytaj references/M3-weryfikacja.md        [jeśli kwota/przepis wymaga weryfikacji]
 KROK 7  → Wczytaj references/M7-eskalacja.md          [jeśli sprawa może być złożona lub wymaga orzecznictwa]
@@ -358,7 +357,31 @@ Procedura, klasyfikacja błędów, format raportu i nakazy bezwzględne są w FA
 
 ---
 
-*Skill pisma-proste-v2 · Architektura modułowa · v2.2*
+*Skill pisma-proste-v2 · Architektura modułowa · v2.6*
+
+## CHANGELOG
+
+- **2026-07-25 (v2.6):** Zarejestrowano `shared/ZAZALENIE-ADRESAT-GATE.md`
+  jako obowiązkową bramkę w KROK 9d — systemowe rozwiązanie luki
+  "zażalenie wymienione, ale bez adresata", potwierdzonej w 69 plikach
+  całego systemu (patrz AUDIT-JOURNAL.md, AUDYT-2026-07-25c/d).
+
+- **2026-07-25 (v2.5):** Dodano nowy schemat **SPL — Skarga na czynności
+  komornika** (`references/SPL-skarga-komornik.md`, art. 767 KPC) — na
+  żądanie użytkownika, w ramach rozszerzenia o "wnioski i pozostałe
+  dokumenty kierowane do sądu". Zarejestrowano w tabeli schematów, KROK 4
+  ścieżki wykonania i M6-oplaty.md (100 zł). Adresat opisany od razu
+  poprawnie (do komornika, nie bezpośrednio do sądu — art. 767 §5 KPC),
+  zgodnie z wnioskiem z audytu adresatów zażalenia tego samego dnia.
+
+- **2026-07-25 (v2.4):** CRIT-TREŚĆ — `references/SPH-inne.md`: poprawiono
+  błędny adresat/podstawę zażalenia w SPH-A (odmowa zwolnienia od kosztów
+  sądowych) — było art. 394 §1 KPC (sąd II instancji), jest art. 394¹ᵃ §1
+  pkt 1 KPC (zażalenie poziome, inny skład tego samego sądu). Oznaczono jako
+  sporne/do weryfikacji podstawę zażalenia w SPH-B (odmowa przywrócenia
+  terminu) — poprzedni cytat (art. 394 §1 pkt 2 KPC) treściowo nie pasował.
+  Zweryfikowano online (ISAP, arslege.pl, lexlege.pl). Zob.
+  audyt-systemu-v4/references/AUDIT-JOURNAL.md, wpis 2026-07-25.
 *Dla pism wielowątkowych → pisma-procesowe-v3*
 *Dla analizy dowodów → analizator-dowodow-v3 · Dla orzecznictwa → orzeczenia-sadowe-v2*
 
@@ -381,6 +404,13 @@ Jeżeli pismo dotyczy terminu, sprzeciwu, zarzutów, uzasadnienia, apelacji, za�
 
 ```text
 view /mnt/skills/user/shared/TERM-CALC.md
+```
+
+Jeżeli pismo dotyczy JAKIEGOKOLWIEK środka zaskarżenia (zażalenie, odwołanie,
+sprzeciw, zarzuty, skarga) — obowiązkowo dołącz, ZANIM wskażesz adresata w piśmie:
+
+```text
+view /mnt/skills/user/shared/ZAZALENIE-ADRESAT-GATE.md
 ```
 
 Jeżeli pismo zawiera dowody lub zarzuty faktyczne, dołącz:

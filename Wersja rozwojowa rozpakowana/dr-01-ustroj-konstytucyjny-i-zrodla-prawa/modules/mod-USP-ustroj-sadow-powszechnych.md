@@ -109,8 +109,30 @@ Wniosek o wyłączenie → złóż na piśmie do sądu rozpoznającego sprawę
 Sędzia składa oświadczenie czy zachodzą przesłanki wyłączenia
   ↓
 Rozstrzygnięcie przez sąd w składzie bez wyłączonego sędziego
-  ↓ odmowa → zażalenie (termin: weryfikuj w aktualnym KPC/KPK/PPSA w ISAP)
+  ↓ oddalenie wniosku STRONY → zażalenie (termin: weryfikuj w aktualnym
+    KPC/KPK/PPSA w ISAP) — ADRESAT zależy od instancji, w której zapadło
+    postanowienie (patrz niżej); NIE zakładaj domyślnie sądu wyższej instancji
 ```
+
+⚠️ **Adresat zażalenia na oddalenie wniosku o wyłączenie (dodane w audycie
+2026-07-25 — poprzednia wersja tej procedury nie wskazywała adresata wcale,
+co przy sprawach neosędziowskich jest informacją strategiczną, nie tylko
+techniczną):**
+
+| Kto oddalił wniosek | Adresat zażalenia | Podstawa |
+|---|---|---|
+| Sąd I instancji, oddalenie wniosku **strony** o wyłączenie sędziego tego sądu | **Zażalenie poziome** — do innego składu **tego samego** sądu I instancji | art. 394¹ᵃ §1 pkt 10 KPC |
+| Sąd II instancji, oddalenie wniosku **strony** o wyłączenie sędziego tego sądu (np. w toku apelacji) | **Zażalenie poziome** — do innego składu **tego samego** sądu II instancji | art. 394² §1 KPC |
+| Oddalenie żądania wyłączenia zgłoszonego **przez samego sędziego** (autozgłoszenie, nie wniosek strony) | **Zażalenie NIE przysługuje** — postanowienie niezaskarżalne | uchwała SN III CZP 33/69, podtrzymana w późniejszym orzecznictwie |
+
+Praktyczna konsekwencja dla spraw o wyłączenie neosędziego: odmowa wyłączenia
+w typowym przypadku trafia do **innego składu tego samego sądu**, a nie
+automatycznie „wyżej" — jeśli cały sąd ma podobny problem obsady, sam fakt
+złożenia zażalenia nie gwarantuje kontroli przez inny, niezależny organ.
+Przy formułowaniu strategii procesowej informuj o tym wprost, zamiast
+milcząco zakładać dewolutywność środka. Podstawy KPK/PPSA (art. 40/41 KPK,
+art. 18/19 PPSA) mają odrębną, własną systematykę zaskarżalności — weryfikuj
+odrębnie, nie kopiuj wprost schematu KPC.
 
 ---
 

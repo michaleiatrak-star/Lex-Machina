@@ -26,6 +26,18 @@ compatibility:
 | Wgląd do akt | KPA | w toku sprawy | kontrola materiału dowodowego |
 | Odwołanie od decyzji | KPA art. 127 i n. | co do zasady 14 dni | kontrola instancyjna |
 | Zażalenie | KPA / ustawa szczególna | zwykle 7 dni, weryfikuj | kontrola postanowienia |
+
+> ⚠️ **Adresat odwołania/zażalenia w KPA (dodane w audycie 2026-07-25):**
+> obu środków nie składa się bezpośrednio do organu wyższego stopnia, lecz
+> **za pośrednictwem organu, który wydał decyzję/postanowienie** — ten organ
+> ma obowiązek przekazać je wraz z aktami organowi odwoławczemu (art. 129 §1
+> KPA dla odwołania; art. 141 §1 KPA dla zażalenia), chyba że sam uwzględni
+> żądanie w całości (autokontrola, art. 132 KPA). Organem odwoławczym jest
+> zwykle organ wyższego stopnia (np. SKO dla decyzji wójta/burmistrza,
+> minister/centralny organ dla decyzji wojewody) — ustal go odrębnie dla
+> każdej sprawy, bo nie ma jednego uniwersalnego "sądu II instancji" jak
+> w KPC. Adres na piśmie: "Do [organ odwoławczy] za pośrednictwem
+> [organ, który wydał rozstrzygnięcie]".
 | Ponaglenie | KPA art. 37 | po bezczynności/przewlekłości | warunek skargi do WSA |
 | Skarga do WSA | PPSA | co do zasady 30 dni | kontrola legalności |
 | Skarga na bezczynność | PPSA | po ponagleniu, bez klasycznego 30-dniowego rygoru w wielu sprawach — weryfikuj | zobowiązanie organu |

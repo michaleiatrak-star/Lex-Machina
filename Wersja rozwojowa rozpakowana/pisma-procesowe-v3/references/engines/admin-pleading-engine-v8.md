@@ -3,7 +3,7 @@
 ## Zakres
 
 - odwołanie od decyzji,
-- zażalenie na postanowienie,
+- zażalenie na postanowienie, [⚠️ adresat: `shared/ZAZALENIE-ADRESAT-GATE.md` — nie zakładaj instancji wyższej bez sprawdzenia]
 - ponaglenie,
 - skarga na bezczynność,
 - skarga do WSA,

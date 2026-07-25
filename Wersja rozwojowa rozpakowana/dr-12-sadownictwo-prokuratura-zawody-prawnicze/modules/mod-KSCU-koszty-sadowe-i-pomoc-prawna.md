@@ -48,7 +48,7 @@ Nie wpisuj literalnego brzmienia, jeżeli nie zostało pobrane z aktualnego źr�
 Wybierz właściwy tor:
 
 - wniosek pierwotny;
-- odwołanie/zażalenie/sprzeciw;
+- odwołanie/zażalenie/sprzeciw; [⚠️ adresat zależy od KONKRETNEGO postanowienia — patrz `shared/ZAZALENIE-ADRESAT-GATE.md`, nie zakładaj automatycznie sądu wyższej instancji (np. odmowa zwolnienia od kosztów = zażalenie poziome)]
 - skarga do WSA;
 - środek do sądu powszechnego;
 - skarga kasacyjna/kasacja;

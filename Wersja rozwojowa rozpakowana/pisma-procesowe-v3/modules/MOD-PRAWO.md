@@ -88,7 +88,13 @@ Najczęściej stosowane przepisy wg dziedzin (ORIENTACYJNIE — weryfikuj online
 - art. 5 §2 — in dubio pro reo
 - art. 7 — swobodna ocena dowodów
 - art. 304 §1 — obowiązek zawiadomienia o przestępstwie
-- art. 306 — zażalenie na postanowienie o odmowie wszczęcia
+- art. 306 — zażalenie na postanowienie o odmowie wszczęcia. **Adresat:
+  sąd rejonowy właściwy miejscowo** (art. 306 §2 KPK) — WYJĄTEK od ogólnej
+  zasady art. 465 §2-3 KPK (zażalenie na inne postanowienia prokuratora
+  idzie zwykle do prokuratora nadrzędnego); tu ustawodawca celowo
+  przewidział kontrolę SĄDOWĄ, nie wewnątrzprokuratorską. Zweryfikowano
+  online 2026-07-25 (arslege.pl, legaartis.com) — patrz też
+  `shared/ZAZALENIE-ADRESAT-GATE.md`.
 
 ### Prawo administracyjne (KPA)
 - art. 7 — zasada prawdy obiektywnej

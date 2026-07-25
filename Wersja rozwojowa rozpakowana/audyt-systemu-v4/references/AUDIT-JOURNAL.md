@@ -19513,3 +19513,428 @@ rozszerzone — to zadanie na kolejną sesję gdy dziedzina będzie aktywna.
 - Analizator: v5.7.0 → v5.11.0 (4 sesje akumulacyjne)
 - CHECKLIST-DEDUP: +17 wpisów łącznie sesja 1-4
 
+
+## AUDYT-2026-07-25 — Adresat zażalenia/odwołania (KPC/KPA) + wyłączenie sędziego/neosędziowie
+
+**Zakres:** Na żądanie użytkownika — audyt, czy pisma-proste-v2 i
+pisma-procesowe-v3 poprawnie wskazują, gdzie składać zażalenia/odwołania
+(ten sam sąd/organ w innym składzie vs. instancja wyższa), rozszerzony
+następnie o wyłączenie sędziego / sprawy neosędziowskie w dr-01/mod-USP.
+Metodologia: FAZA 3E / ZASADA 12 (weryfikacja treści merytorycznej) + T8
+(zakres tytuł-vs-treść), nie Reguła 7 (ta dotyczy weryfikacji przed
+dostawą/ZIP, nieadekwatna do audytu treści — odnotowane wprost użytkownikowi
+zgodnie z zasadą uczciwości).
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy CRIT-TREŚĆ | 3 (naprawione) |
+| Luka systemowa (brak pojęcia "zażalenie poziome" w całym systemie) | 1 (naprawiona w shared/) |
+| Pozycje sporne pozostawione do dalszej weryfikacji | 1 (SPH-B, patrz WARN-OTWARTE.md) |
+| Zmodyfikowane pliki | 5 treściowych + 3 SKILL.md (wersje/changelog) |
+
+### 2. NAPRAWY
+
+**pisma-proste-v2 (v2.3→v2.4), references/SPH-inne.md:**
+- SPH-A (odmowa zwolnienia od kosztów sądowych): błędna podstawa
+  art. 394 §1 KPC → poprawiona na art. 394¹ᵃ §1 pkt 1 KPC (zażalenie
+  POZIOME, inny skład tego samego sądu, NIE sąd II instancji).
+- SPH-B (odmowa przywrócenia terminu): cytat art. 394 §1 pkt 2 KPC nie
+  pasował treściowo (pkt 2 dotyczy zwrotu pozwu) — oznaczony jako
+  [NIEWERYFIKOWANE — SPORNE], nie zgadywano poprawki na siłę.
+
+**shared/terminy.md:** dodano przypis rozróżniający zażalenie
+dewolutywne/pionowe (art. 394 §1 KPC, sąd II instancji) od poziomego
+(art. 394¹ᵃ/394² KPC, inny skład tego samego sądu) — pojęcie "zażalenie
+poziome" nie istniało WCZEŚNIEJ W ŻADNYM pliku systemu (grep 0 wyników
+przed naprawą). To centralne miejsce, z którego korzystają oba skille pism.
+
+**pisma-procesowe-v3 (v5.13→v5.14), modules/MOD-ADMIN.md:** dodano
+wyjaśnienie, że odwołanie/zażalenie w KPA wnosi się za pośrednictwem
+organu I instancji do organu wyższego stopnia (art. 129 §1 / 141 §1 KPA) —
+tabela pism wcześniej nie precyzowała adresata w ogóle.
+
+**dr-01-ustroj-konstytucyjny-i-zrodla-prawa (v3.2→v3.3),
+modules/mod-USP-ustroj-sadow-powszechnych.md:** sekcja "Procedura
+wyłączenia" kończyła się ogólnikiem bez adresata. Dodano tabelę: (1)
+oddalenie wniosku STRONY o wyłączenie → zażalenie poziome, inny skład
+tego samego sądu (art. 394¹ᵃ §1 pkt 10 KPC dla I instancji, art. 394² §1
+KPC dla II instancji); (2) oddalenie żądania wyłączenia zgłoszonego przez
+SAMEGO SĘDZIEGO → niezaskarżalne (uchwała SN III CZP 33/69). Dodano
+konsekwencję praktyczną dla spraw neosędziowskich: kontrola odwoławcza
+zwykle zostaje w tym samym sądzie, nie trafia automatycznie "wyżej".
+
+### 3. WERYFIKACJA ŹRÓDŁOWA
+
+Wszystko zweryfikowane online przed naprawą (zgodnie z zakazem cytowania
+z pamięci): ISAP (t.j. Dz.U. 2026 poz. 468 KPC), arslege.pl, lexlege.pl,
+rklegal.pl (komentarz do zażaleń poziomych), orzeczenie SN III CZP 37/19,
+SAOS (SK 38/09), Palestra 11-12/2011, przepisy.gofin.pl.
+
+### 4. OTWARTE
+
+Patrz WARN-OTWARTE.md — F-12 (SPH-B, zaskarżalność odmowy przywrócenia
+terminu, sporne w doktrynie).
+
+### 5. WNIOSEK OGÓLNY
+
+Wzorzec systemowy: moduły konsekwentnie podawały TERMIN i PODSTAWĘ zażalenia,
+ale nie ADRESATA — założenie domyślne (milczące) było "sąd wyższej instancji",
+co dla większości pozycji (koszty, pełnomocnik z urzędu, wyłączenie sędziego)
+jest błędne od nowelizacji KPC z 2019 r. (zażalenia poziome, art. 394¹ᵃ/394²).
+Rekomendacja na przyszłość: przy dodawaniu NOWYCH pozycji "zażalenie" do
+jakiejkolwiek tabeli w systemie — zawsze podawać adresata wprost, nie tylko
+termin, i sprawdzać krzyżowo z katalogiem art. 394¹ᵃ §1 KPC.
+
+## AUDYT-2026-07-25b — Nowe pismo SPL (skarga na czynności komornika) + przygotowanie dostawy (Reguła 7)
+
+**Zakres:** Na żądanie użytkownika, po audycie AUDYT-2026-07-25: rozszerzenie
+pisma-proste-v2 o "wnioski i pozostałe dokumenty kierowane do sądu" oraz
+wykonanie Reguły 7 (weryfikacja przed dostawą — poprzednio pominięta,
+użytkownik to zauważył).
+
+**Naprawa:** Dodano `references/SPL-skarga-komornik.md` (art. 767 KPC) —
+zarejestrowano w SKILL.md (tabela + KROK 4 + CHANGELOG, v2.4→v2.5) i w
+M6-oplaty.md (100 zł). Adresat opisany poprawnie od razu przy tworzeniu:
+skargę wnosi się DO KOMORNIKA (art. 767 §5 KPC), nie bezpośrednio do sądu —
+komornik przekazuje ją do sądu rejonowego właściwego wg siedziby kancelarii
+(lub wg zasad ogólnych, gdy komornik działał z wyboru wierzyciela poza
+swoim rewirem), chyba że sam ją uwzględni. Zweryfikowano online: arslege.pl,
+lexlege.pl (art. 767, 767§4, 767²), pwrz.pl, Wolters Kluwer.
+
+**Dostawa (Reguła 7):** poprzednia sesja (AUDYT-2026-07-25) zakończyła się
+bez spakowania i wydania plików użytkownikowi — naprawiono w tej sesji:
+policzono pliki katalogu źródłowego przed kopiowaniem do folderu
+przygotowanego do ZIP, porównano po skopiowaniu, dopiero potem spakowano
+i wydano przez present_files (szczegóły liczby plików: patrz output
+bezpośrednio poprzedzający tę dostawę w sesji).
+
+## AUDYT-2026-07-25c — Rozszerzenie rejestru portali (hrlaw.pl, sygnalista.pl) + potwierdzenie systemowego zakresu luki poziome/pionowe
+
+**Zakres:** Na żądanie użytkownika — (1) dodanie hrlaw.pl i poszukanie
+innych wartościowych portali prawnych do `shared/PORTALE-BRANZOWE-RZAD-2B.md`;
+(2) sprawdzenie, czy zażalenia/skargi pionowe i poziome są w systemie
+faktycznie ROZRÓŻNIONE (które są które), czy tylko WYMIENIONE jako
+istniejące kategorie.
+
+### 1. Rejestr portali (v2.9 → v3.0)
+
+- **hrlaw.pl** ("Portal prawa pracy", Wardyński i Wspólnicy / WiW Services
+  sp. z o.o.) dodany do DR-04. Zweryfikowano `site:hrlaw.pl wypowiedzenie
+  umowy o pracę` — wynik dobry, precyzyjne cytaty KP, treść dwujęzyczna
+  PL/EN. Zastrzeżenie: portal kancelaryjny (marketing jednej firmy), nie
+  neutralna redakcja — analogiczne zastrzeżenie jak przy POPON/OBPON.
+- **sygnalista.pl** dodany do DR-15, częściowo wypełniając lukę odnotowaną
+  2026-07-21 (brak dominującego portalu compliance). Zastrzeżenie: ustalić
+  niezależność redakcyjną przy pierwszym praktycznym użyciu.
+
+### 2. Odpowiedź na pytanie: rozróżnienie poziome/pionowe — punktowe czy systemowe?
+
+**Ustalenie (policzalne, nie szacunkowe):** 69 plików w całym systemie
+wspomina "zażalenie". Z tego TYLKO 4 pliki (`shared/terminy.md`,
+`pisma-proste-v2/references/SPH-inne.md`, `pisma-proste-v2/SKILL.md`,
+`dr-01/.../mod-USP-ustroj-sadow-powszechnych.md`) faktycznie ROZRÓŻNIAJĄ
+zażalenie poziome od pionowego — a są to WYŁĄCZNIE pliki naprawione w
+sesjach AUDYT-2026-07-25 i 25b tego samego dnia.
+
+Próbkowanie 7 reprezentatywnych plików spośród pozostałych 65
+(`pisma-procesowe-v3/modules/MOD-PRAWO.md`, `references/engines/
+admin-pleading-engine-v8.md`, `pleading-engine-v8.md`,
+`prosecution-complaint-engine-v8.md`, `dr-12/.../mod-KSCU-koszty-sadowe-
+i-pomoc-prawna.md`, `dr-05/.../mod-UPEA-egzekucja-administracyjna.md`,
+`dr-11/.../mod-UODO-postepowanie-ochrona-danych.md`) potwierdza spójny
+wzorzec: "zażalenie" występuje WYŁĄCZNIE jako nazwa środka w liście
+dostępnych pism/schemacie przepływu (np. "zarzuty → zażalenie → skarga
+do WSA"), BEZ adresata i bez rozróżnienia poziome/pionowe.
+
+**Wniosek:** to NIE jest lokalny, już zamknięty problem — to wzorzec
+systemowy prawdopodobnie obejmujący większość pozostałych 65 plików.
+Otwarto **F-13** w `WARN-OTWARTE.md` (priorytet wysoki) zamiast fałszywie
+zamykać temat na podstawie napraw punktowych z tego samego dnia.
+
+## AUDYT-2026-07-25d — Naprawa systemowa F-13 (bramka adresata) — CZĘŚCIOWA, uczciwie opisana
+
+**Zakres:** Na żądanie użytkownika: "Dokonaj napraw" dla luki F-13
+(rozróżnienie zażalenie poziome/pionowe) zidentyfikowanej w AUDYT-2026-07-25c.
+
+**Decyzja metodologiczna (świadoma granica zakresu, Zasada 6):** Zamiast
+mechanicznie anotować wszystkie ok. 65 pozostałych plików (ryzyko: i tak
+niekompletne, i tak podatne na błędy przy zgadywaniu specyfiki 15
+pozostałych dziedzin bez odrębnej weryfikacji każdej), zbudowano
+**rozwiązanie systemowe**: `shared/ZAZALENIE-ADRESAT-GATE.md` — HARD GATE
+zarejestrowana jako obowiązkowa w obu skillach pism (pisma-proste-v2 KROK
+9d, pisma-procesowe-v3 sekwencja W2, obok MOD-ADMIN.md). Wymusza
+weryfikację adresata PRZED wydaniem KAŻDEGO pisma zawierającego środek
+zaskarżenia, niezależnie od tego, czy dany moduł DR-xx to precyzuje.
+Zawiera rozpoznane dotąd wzorce (tabela, do rozbudowy) + procedurę
+web_search dla przypadków nierozpoznanych.
+
+**Naprawy treściowe (konkretne, zweryfikowane online 2026-07-25):**
+- `pisma-procesowe-v3/modules/MOD-PRAWO.md`: art. 306 KPK — dodano adresat
+  (sąd rejonowy, art. 306 §2 KPK, WYJĄTEK od reguły ogólnej art. 465 §2-3).
+- `dr-05/.../mod-UPEA-egzekucja-administracyjna.md`: rozpisano pełny
+  łańcuch adresatów (zarzuty do wierzyciela za pośrednictwem organu
+  egzekucyjnego; zażalenie do organu odwoławczego za pośrednictwem organu,
+  art. 17/34 §3 UPEA; wyjątek — oszacowanie poborcy skarbowego rozpoznaje
+  sam organ egzekucyjny).
+- 3× `references/engines/*.md` (admin-pleading, pleading,
+  prosecution-complaint) + `dr-12/.../mod-KSCU.md` +
+  `dr-11/.../mod-UODO-postepowanie-ochrona-danych.md`: dopiski ⚠️
+  odsyłające do bramki (te pliki to generyczne listy nazw środków, nie
+  twierdzenia o konkretnym adresacie — błędem był brak, nie fałsz, więc
+  odesłanie do bramki jest właściwą, proporcjonalną naprawą, nie zgadywanie
+  szczegółu na siłę).
+
+**Rejestracja:** `shared/SKILL.md` (nowy wpis w tabeli, v2.8→2.9),
+`pisma-proste-v2` v2.5→2.6, `pisma-procesowe-v3` v5.14→5.15,
+`dr-05` v3.3→3.4, `dr-11` v3.4→3.5, `dr-12` v4.5→4.6.
+
+**UCZCIWIE NIEZROBIONE (zgodnie z Zasadą 8):** pozostałe ok. 58 z 69
+plików (DR-02, 03, 06, 07, 08, 09, 10, 13, 14, 15, 16) NIE zostały
+indywidualnie zweryfikowane/zanotowane — polegają WYŁĄCZNIE na ogólnej
+bramce, nie na wiedzy dziedzinowej wpisanej wprost do pliku. F-13
+przeklasyfikowano z "wysoki" na "średni" w WARN-OTWARTE.md (mechanizm
+łagodzący istnieje), ale flaga POZOSTAJE OTWARTA — nie zamykam jej
+fałszywie na podstawie dzisiejszej pracy częściowej.
+
+**CHECKLIST-DEDUP.md:** nie zaktualizowano w tej sesji — format tego
+pliku (log chronologiczny z narracją per-WARN) nie został przeanalizowany
+na tyle, by dopisać zgodnie z konwencją; do zrobienia przy najbliższej
+okazji, jeśli użytkownik uzna to za istotne.
+
+## AUDYT-2026-07-25e — ⛔ CRIT: PONOWNE NARUSZENIE ZASADY 7 (OUTPUT-COMPLETENESS) — dwie dostawy zbiorcze zamiast osobnych ZIP na skill
+
+**Klasyfikacja: CRIT** — użytkownik wprost zapytał, czy nie obowiązuje
+zasada "jeden ZIP jeden skill", i wskazał, że dostawy z tej samej sesji
+(AUDYT-2026-07-25 i 25b/c/d) jej nie spełniały. Analogiczne do precedensu
+AUDYT-2026-07-06l.
+
+### 1. CO SIĘ STAŁO
+
+Dwie dostawy w tej sesji (`dostawa-audyt-2026-07-25.zip`,
+`dostawa-audyt-2026-07-25b.zip`) zawierały RĘCZNIE WYSELEKCJONOWANE pliki
+z 5-8 różnych skili naraz (pisma-proste-v2, pisma-procesowe-v3, dr-01,
+dr-05, dr-11, dr-12, shared, audyt-systemu-v4), spakowane w JEDEN wspólny
+plik ZIP — nie pełne, osobne foldery każdego skilla. Weryfikacja przed
+dostawą ograniczyła się do liczby plików WYSELEKCJONOWANYCH (nie całych
+katalogów źródłowych) — spełniała węższy wymóg "policz i porównaj", ale
+NIE spełniała ZASADY 7 w całości (KROK 0 — tyle ZIPÓW ile skili; KROK 2 —
+skopiuj CAŁE drzewo, nie wybrane pliki).
+
+### 2. DLACZEGO TO CRIT
+
+Identyczne ryzyko jak w precedensie 06l: użytkownik nie mógł podmienić
+POJEDYNCZEGO, pełnego skilla bez ryzyka nadpisania częściowej struktury;
+paczka nie odpowiadała nazwie żadnego konkretnego skilla; naruszała też
+zasadę "nigdy nie dostarczaj luźnych/wyselekcjonowanych plików" —
+dotyczy to również dostawy WIELU wyselekcjonowanych plików w jednym ZIP,
+nie tylko pojedynczego pliku.
+
+### 3. DODATKOWA LUKA WYKRYTA PRZY OKAZJI
+
+Nawet gdyby dostawy były podzielone na osobne ZIP-y per skill, procedura
+Zasady 7 (sprzed tej naprawy) weryfikowała WYŁĄCZNIE liczbę plików, NIE
+treść bajtową. Dodano KROK 4b (diff -rq całego rozpakowanego archiwum
+względem źródła) jako obowiązkowy — patrz naprawa w SKILL.md v5.8→5.9.
+
+### 4. NAPRAWA
+
+W tej samej sesji: (a) wzmocniono ZASADĘ 7 w `audyt-systemu-v4/SKILL.md`
+o jawny KROK 0 (tyle ZIP-ów ile skili, przypomnienie) i KROK 4b
+(weryfikacja bajtowa `diff -rq`); (b) dostarczono OSOBNE, PEŁNE archiwa
+dla wszystkich 8 skili zmodyfikowanych w tej sesji: pisma-proste-v2.zip,
+pisma-procesowe-v3.zip, dr-01-ustroj-konstytucyjny-i-zrodla-prawa.zip,
+dr-05-prawo-administracyjne-sadowoadministracyjne.zip,
+dr-11-cyfrowe-cyber-ai-dane-ip.zip,
+dr-12-sadownictwo-prokuratura-zawody-prawnicze.zip, shared.zip,
+audyt-systemu-v4.zip — każdy z pełną strukturą katalogów, licznikiem
+plików PRZED/PO i weryfikacją `diff -rq` pokazaną przed `present_files`.
+
+### 5. WNIOSEK
+
+Dwa poprzednie zbiorcze ZIP-y (25 i 25b) pozostają jako artefakty w
+historii rozmowy — NIE są unieważniane wstecznie, ale od tej pory
+obowiązującą, kompletną dostawą są osobne archiwa z tego wpisu.
+
+## AUDYT-2026-07-25f — Kolejne portale: monikasmulewicz.pl (DR-04), ptpodatki.pl (DR-06), odrzucone kandydatury
+
+**Zakres:** Na żądanie użytkownika — zbadanie monikasmulewicz.pl, poszukanie
+innych cenionych miejsc śledzących interpretacje/zmiany w prawie, przypisanie
+do właściwych DR; potwierdzenie, że hrlaw.pl (sesja wcześniejsza) był
+poprawnie przypisany do DR-04.
+
+**monikasmulewicz.pl** ("HR na Szpilkach®", Monika Smulewicz/Eduwersum) →
+**DR-04**. Zweryfikowano `site:monikasmulewicz.pl interpretacja` — wyniki
+precyzyjne (interpretacja GIP ws. kwoty wolnej od potrąceń, art. 85 §1 KP).
+Cykliczny format "HR Detektywi" (cotygodniowy, świeże numery #194/#195 z
+lipca 2026) to dokładnie rodzaj źródła, o które pytał użytkownik —
+śledzenie zmian. Zastrzeżenie: autorka nie jest prawnikiem, to biznes
+szkoleniowy (Eduwersum) — treść praktyczna/branżowa, krzyżować z hrlaw.pl
+lub źródłem urzędowym przy sporach prawnych.
+
+**ptpodatki.pl** ("Przekrój Podatkowy", Paczuski Taudul) → **DR-06**.
+Publikacja kancelaryjna z konkretnymi sygnaturami NSA i datami — ten sam
+wzorzec i to samo zastrzeżenie co hrlaw.pl (portal jednej firmy, nie
+neutralna redakcja).
+
+**Odrzucone (udokumentowane, nie dodane):** ksiegowa.ai,
+interpretacje-podatkowe.org — treść o wyraźnych cechach generowanej pod
+SEO (ogólnikowe frazy, brak konkretnych sygnatur, brak autora z
+kwalifikacjami). Nie spełniają nawet progu Rząd 3.
+
+**Potwierdzenie:** hrlaw.pl z sesji AUDYT-2026-07-25c był poprawnie
+przypisany do DR-04 (prawo pracy) — zweryfikowano ponownie przy okazji,
+zgodność potwierdzona.
+
+**Rejestracja:** `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v3.0→3.1),
+`shared/SKILL.md` (v2.9→3.0).
+
+## AUDYT-2026-07-25g — 4 kolejne źródła: rcl.gov.pl, infor.pl/prawo/, LegaltechHub, uodo.gov.pl
+
+**Zakres:** Na żądanie użytkownika — zbadać 4 podane linki i dodać do
+właściwych DR ze wskazaniem, czy hrlaw.pl wcześniej miał poprawne
+przypisanie (potwierdzone wcześniej w AUDYT-2026-07-25f).
+
+**rcl.gov.pl (Rządowe Centrum Legislacji)** — JUŻ zarejestrowany, obszernie:
+`shared/INTERPRETACJE-URZEDOWE.md` (DR-01, obok rpo.gov.pl), używany w
+dziesiątkach miejsc (legislacja.rcl.gov.pl, ppiop.rcl.gov.pl skorowidz) w
+DR-04, DR-10, DR-13, prawny-router-v3, mapy Dz.U. Bez zmian — potwierdzone
+fetch bezpośredni: RCL prowadzi też Wykaz aktów oczekujących na ogłoszenie
+i Rządowy Proces Legislacyjny (legislacja.gov.pl) — dokładnie narzędzia do
+śledzenia zmian, o które pytał użytkownik wcześniej, i już wykorzystywane.
+
+**uodo.gov.pl** — JUŻ zarejestrowany równie obszernie: DR-11 (mod-UODO,
+mod-RODO-*), DR-15, `shared/INTERPRETACJE-URZEDOWE.md`,
+`shared/HIERARCHIA-ZRODEL.md`, `analizator-umow-v1`, `analizator-dowodow-v3`.
+Bez zmian.
+
+**infor.pl/prawo/** — sekcja OGÓLNA (nie tylko już znana ksiegowosc.infor.pl)
+zweryfikowana bezpośrednim `web_fetch`. Bardzo aktualna, śledzi proces
+legislacyjny na bieżąco (konkretne daty posiedzeń Sejmu, numery projektów
+UDER105, np. reforma prawa rodzinnego z 17.06.2026). Status podniesiony
+z 📚 (znane pośrednio) na ✅ w DR-02 i DR-03.
+
+**LegaltechHub (legaltechnologyhub.com)** — ŚWIADOMIE NIE dodany. To
+międzynarodowy (angielski) katalog dostawców oprogramowania prawniczego
+(CLM, narzędzia AI dla kancelarii) — nie źródło interpretacji czy zmian w
+prawie polskim. Poza zakresem tego rejestru (Zasada 6 — świadoma granica).
+
+**Korekta przy okazji:** wykryto i skonsolidowano duplikat w DR-04 —
+`hrnaszpilkach.pl` (wpis 2026-07-21, wynik mieszany, prawdopodobnie zła
+domena) i `monikasmulewicz.pl` (wpis 2026-07-25, wynik dobry) to ten sam
+portal Moniki Smulewicz.
+
+**Rejestracja:** `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v3.1→3.2),
+`shared/SKILL.md` (v3.0→3.1).
+
+## AUDYT-2026-07-25h — rozwodowy.pl, portaloswiatowy.pl, sw.gov.pl — i odkrycie luki taksonomicznej "oświata"
+
+**Zakres:** Na żądanie użytkownika, 3 kolejne linki do zbadania i przypisania
+do właściwych DR.
+
+**rozwodowy.pl** → DR-02. Sieć kancelaryjna "Lexine" Gawek i Kielar sp.j.
+(KRS 0000335571), obejmuje też spadek.info/prawo-pracy.pl/prawozus.pl
+(niezweryfikowane odrębnie). Zweryfikowane fetchem bezpośrednim — bardzo
+aktualne (artykuły 17-24 lipca 2026), zastrzeżenie kancelaryjne jak przy
+hrlaw.pl/ptpodatki.pl.
+
+**portaloswiatowy.pl** → zarejestrowany w DR-04 (kadry/płace nauczycieli,
+Karta Nauczyciela) jako miejsce główne, z cross-ref w DR-08 (zarządzanie
+szkołą jako jednostką samorządową). **Odkrycie przy okazji:** żadna z 16
+dziedzin DR nie obejmuje wprost "prawa oświatowego" — treść portalu
+(bardzo wysokiej jakości: "Zmiany w prawie oświatowym", "Analizy i
+interpretacje", "Komunikaty MEN i CKE", kalendarz obowiązków z podstawą
+prawną) rozkłada się między DR-04 i DR-08. Odnotowano to jawnie jako lukę
+TAKSONOMICZNĄ (nie tylko brak portalu) — decyzja czy oświata zasługuje na
+własny moduł/DR wykracza poza zakres samego rejestru portali, zostawiona
+do rozważenia.
+
+**sw.gov.pl** (Służba Więzienna) → dodane do `shared/INTERPRETACJE-
+URZEDOWE.md`, wiersz DR-03 (organ wykonawczy kary pozbawienia wolności)
+i DR-13 (formacja mundurowa). ⚠️ Fetch bezpośredni zwrócił treść z
+komunikatami datowanymi na 2017 r. — prawdopodobny cache/archiwum
+strony po stronie fetchera, NIE stwierdzenie że strona jest nieaktywna.
+Oznaczone do ponownej weryfikacji świeżym `site:` przed poleganiem na
+konkretnej informacji z tej domeny.
+
+**Rejestracja:** `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v3.2→3.3),
+`shared/INTERPRETACJE-URZEDOWE.md` (bez własnej wersji we frontmatter —
+brak zmiany numeru), `shared/SKILL.md` (v3.1→3.2).
+
+## AUDYT-2026-07-25i — Rozstrzygnięcie podziału "oświaty" + sieć Lexine (14-15 portali)
+
+**Zakres:** Na wyraźne polecenie użytkownika: "oświata jako związana z
+nauczycielami jako zawód zaufania publicznego i jako elementy związane z
+pracą tak powinny być podzielone" + "zbadaj pozostałe wskazane portale"
+(sieć siostrzana rozwodowy.pl, wcześniej niedoszacowana na 7 domen).
+
+### 1. Podział "oświaty" (koryguje notatkę "luka taksonomiczna" z 25h)
+
+- **Nauczyciel jako zawód zaufania publicznego** → DR-08 (nadzór organu
+  prowadzącego/kuratora nad statusem zawodowym: awans zawodowy, etyka,
+  dyscyplina, Karta Nauczyciela jako pragmatyka służbowa). Ogólna doktryna
+  konstytucyjna pojęcia (art. 17 ust. 1 Konstytucji) → DR-01.
+- **Elementy związane z pracą** → DR-04 (wynagrodzenie, urlopy, ZUS, BHP,
+  zatrudnianie/zwalnianie — zarówno nauczycieli, jak i pracowników
+  niepedagogicznych).
+- `portaloswiatowy.pl` jako portal pozostaje zarejestrowany w DR-04 (portal
+  jest jeden, treść dzieli się na dwie kategorie użycia).
+
+### 2. Sieć Lexine — pełne odkrycie (14-15 domen, nie 7)
+
+Poprzednia sesja (25h) wymieniła tylko 7 domen sieci. Dokładniejsze
+wyszukiwanie ujawniło łącznie 14 potwierdzonych w stopce + prawo-karne.info
+jako 15. (odkryta pośrednio, źródło jednego z wyników wyszukiwania, samo
+nie wymieniło siebie we własnej stopce). Zbudowano tabelę przypisania:
+eporady24.pl/odpowiedziprawne.pl (parasol, brak jednego DR), rozwodowy.pl/
+spadek.info/prawo-cywilne.info/sluzebnosc.info/spolkowy.pl/prawo-
+mieszkaniowe.info (DR-02), prawo-budowlane.info (DR-09), prawo-pracy.pl/
+prawozus.pl (DR-04), poradapodatkowa.pl (DR-06), praworolne.info (DR-10),
+ewindykacja24.pl (DR-02, cross-ref DR-03), prawo-karne.info (DR-03).
+
+Zweryfikowano treściowo: spadek.info, prawo-budowlane.info, prawo-pracy.pl,
+odpowiedziprawne.pl, prawo-cywilne.info (rzetelne, konkretne artykuły).
+Pozostałe potwierdzone jako istniejące, ale NIE zweryfikowane odrębnym
+testem treści — jawnie oznaczone jako kandydaci do przyszłej weryfikacji,
+zgodnie z Zasadą 8 (nie przedstawiaj niesprawdzonego jako sprawdzone).
+
+**Decyzja o zakresie (Zasada 6):** świadomie nie dodano osobnych wierszy
+cross-ref w tabelach DR-04/06/09/10 dla każdej domeny sieci — jedna
+konsolidowana tabela przy DR-02 uznana za czytelniejszą niż rozproszenie.
+
+**Rejestracja:** `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v3.3→3.4),
+`shared/SKILL.md` (v3.2→3.3).
+
+## AUDYT-2026-07-25j — Weryfikacja pozostałych domen sieci Lexine ("testuj resztę")
+
+**Zakres:** Na żądanie użytkownika — dokończenie weryfikacji treściowej
+domen sieci Lexine pozostawionych jako niesprawdzone w sesji 25i.
+
+**Zweryfikowane treściowo 2026-07-25 (site: z konkretną frazą):**
+- spolkowy.pl — ✅✅ cytaty KSH (art. 201, 210), aktualne maj-czerwiec 2026
+- sluzebnosc.info — ✅✅ precyzyjne sygnatury SN (I CKN 543/97, V CKN 43/2000,
+  II CSK 30/10), art. 145/244-251/285-305 KC
+- poradapodatkowa.pl — ✅ realny, funkcjonujący serwis podatkowy
+- praworolne.info — ✅ nazwani autorzy (Monika Wycykał, Tomasz Krupiński)
+- ewindykacja24.pl — ✅ windykacja/upadłość konsumencka, nazwany ekspert
+  (Adam Dąbrowski)
+- prawo-mieszkaniowe.info — ✅ najem, mieszkania komunalne, cytaty KC/KPC
+- prawozus.pl — ✅✅ bardzo aktualne (renta wdowia 2026, limit 5935,47 zł,
+  Dz.U. 2024 poz. 1243), słownik pojęć
+- prawo-karne.info — ✅ wzory pism, kalkulatory, słownik >60 haseł, artykuł
+  o przeszukaniu (KPK), aktualny (maj 2026)
+- odpowiedziprawne.pl — ✅ potwierdzony dodatkowo (wcześniej już wskazany)
+
+**Odkrycie przy okazji:** 16. domena sieci — **Pozew-o-alimenty.pl**,
+widoczna w stopce ewindykacja24.pl, pominięta nawet w poprawionej liście
+z sesji 25i. Dodana do rejestru, ale NIE zweryfikowana treściowo —
+oznaczona jawnie jako do sprawdzenia.
+
+**Wynik końcowy:** z 16 potwierdzonych domen sieci, 13 zweryfikowanych
+treściowo (wszystkie pozytywnie — rzetelne, aktualne, z cytatami), 2
+portale-parasole (eporady24.pl, odpowiedziprawne.pl — bez jednego DR z
+natury), 1 nowoodkryta niezweryfikowana (Pozew-o-alimenty.pl).
+
+**Rejestracja:** `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v3.4→3.5),
+`shared/SKILL.md` (v3.3→3.4).

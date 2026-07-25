@@ -106,7 +106,13 @@ Załączniki:
 - Sąd może cofnąć zwolnienie jeśli okaże się, że okoliczności uzasadniające
   zwolnienie nie istniały lub ustały (art. 111 §1 KSCU).
 - Odmowa zwolnienia → zażalenie w terminie 7 dni od doręczenia postanowienia
-  (art. 394 §1 KPC).
+  z uzasadnieniem. ⚠️ **Adresat: zażalenie POZIOME** — do innego składu
+  **tego samego sądu**, który wydał postanowienie (art. 394¹ᵃ §1 pkt 1 KPC),
+  **NIE** do sądu wyższej instancji. Pismo składa się (za pośrednictwem/wprost)
+  w sądzie, który wydał zaskarżone postanowienie — sąd ten przekazuje je do
+  rozpoznania innemu składowi. (Zweryfikowano online 2026-07-25: ISAP,
+  arslege.pl, lexlege.pl — poprzednia wersja tej sekcji błędnie wskazywała
+  art. 394 §1 KPC, sugerujący zażalenie dewolutywne do sądu II instancji.)
 
 ---
 
@@ -226,7 +232,17 @@ Załączniki:
 - Sąd orzeka o wniosku **postanowieniem** — może wydać je niejawnie
   (bez rozprawy) lub na posiedzeniu.
 - Odmowa przywrócenia → **zażalenie** w terminie 7 dni od doręczenia
-  postanowienia (art. 394 §1 pkt 2 KPC).
+  postanowienia. ⚠️ [NIEWERYFIKOWANE — SPORNE] Poprzednia wersja tej sekcji
+  wskazywała art. 394 §1 pkt 2 KPC, ale ten punkt katalogu dotyczy zwrotu
+  pozwu, nie przywrócenia terminu — cytat był błędny. Zaskarżalność odmowy
+  przywrócenia terminu zależy od tego, czy in concreto stanowi postanowienie
+  "kończące postępowanie w sprawie" (art. 394 §1 zdanie wstępne KPC) — kwestia
+  sporna w doktrynie/orzecznictwie. **Przed sporządzeniem pisma:**
+  web_search "zażalenie odmowa przywrócenia terminu KPC orzecznictwo
+  [aktualny rok]" i potwierdź zarówno dopuszczalność, jak i adresata
+  (sąd II instancji vs inny skład tego samego sądu) na gruncie najnowszego
+  orzecznictwa SN dla konkretnego rodzaju postanowienia, które uchybiona
+  czynność miała poprzedzać.
 - Skuteczne przywrócenie terminu ma **moc wsteczną** — czynność uznaje się
   za dokonaną w terminie.
 

@@ -1,6 +1,6 @@
 ---
 name: dr-12-sadownictwo-prokuratura-zawody-prawnicze
-version: 4.5
+version: 4.6
 description: |
   DR-12: Sądownictwo, Prokuratura, Zawody Prawnicze
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -307,9 +307,6 @@ view /mnt/skills/user/dr-12-sadownictwo-prokuratura-zawody-prawnicze/MAPA-AKTOW.
 - Egzekucja komornicza (tryb KPC) — patrz `shared/...` lub `mod-ustawa-komornicy-sadowi-zawod` (sekcja "Łącz obowiązkowo z")
 - PPSA (skargi na regulatorów): `dr-05` → `mod-PPSA-postepowanie-sadowoadministracyjne`
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
-- Rejestr źródeł uchwał/kodeksów etyki samorządów zawodowych (NRA, KRRP,
-  KRN, KRK, PIRP i inne — także zawody medyczne/gospodarcze poza DR-12):
-  `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (dodano 2026-07-17)
 
 ## ⚖️ DISCLAIMER (obowiązkowy)
 

@@ -67,6 +67,8 @@ Ustalenie faktów materialnych i proceduralnych
 Matryca dowodowa: fakt → dowód → ciężar dowodu → luka
   ↓
 Dobór pisma/środka: wniosek / odwołanie / zażalenie / skarga / pozew / zawiadomienie
+  [⚠️ adresat każdego z tych środków — patrz `shared/ZAZALENIE-ADRESAT-GATE.md`,
+  ustal PRZED redakcją nagłówka, nie zakładaj wzorca z innej dziedziny]
   ↓
 Walidacja formalna: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
   ↓
@@ -285,21 +287,6 @@ Przed końcową odpowiedzią sprawdź:
   ekranu, inne dokumenty)
 
 GOTOWY WZÓR SKARGI: `pisma-proste-v2/references/SPK-skarga-do-UODO.md`
-
-⭐⭐ NIE MYLIĆ z INNYM mechanizmem "do UODO" (dodane 2026-07-21): SKARGA
-opisana w TEJ sekcji 9 to pismo OSOBY, KTÓREJ DANE DOTYCZĄ, przeciwko
-ADMINISTRATOROWI (dopiero PO wyczerpaniu ścieżki bezpośredniej) —
-CAŁKOWICIE ODRĘBNYM mechanizmem jest ZGŁOSZENIE NARUSZENIA OCHRONY
-DANYCH (art. 33-34 RODO), SKŁADANE PRZEZ SAMEGO ADMINISTRATORA w
-CIĄGU 72 GODZIN od WYKRYCIA własnego naruszenia (np. wycieku danych) —
-TEN drugi mechanizm jest W PEŁNI opracowany w `mod-RODO-szczegolowy.md`
-sekcja "NARUSZENIE OCHRONY DANYCH — PROCEDURA" (deterministyczny zegar
-72h, ocena ryzyka, treść zgłoszenia, zawiadomienie osób przy WYSOKIM
-ryzyku, rejestr naruszeń) — SPRAWDŹ, KTÓRY z dwóch mechanizmów
-faktycznie dotyczy sprawy klienta, ZANIM zaczniesz redagować pismo:
-KTO jest stroną (poszkodowana osoba vs administrator) i CO jest
-przedmiotem (zarzut naruszenia PRAW osoby vs własne, wykryte naruszenie
-BEZPIECZEŃSTWA danych).
 (dodany 2026-07-21)
 ```
 

@@ -1,6 +1,6 @@
 ---
 name: dr-01-ustroj-konstytucyjny-i-zrodla-prawa
-version: 3.2
+version: 3.3
 description: |
   DR-01: Ustrój Konstytucyjny i Źródła Prawa
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -135,3 +135,21 @@ Moduł ZTP (2026-07-17) domyka lukę doktrynalną: system miał już mechanikę 
 (MOD-VACATIO-LEGIS) ale brakowało podstawy prawnej samej techniki legislacyjnej
 i literatury eksperckiej — teraz obie warstwy są rozdzielone i połączone
 odesłaniami, bez duplikacji.
+
+## CHANGELOG
+
+> **3.3 (2026-07-25, CRIT-TREŚĆ — audyt adresatów zażalenia w sprawach
+> wyłączenia sędziego/neosędziów):** `modules/mod-USP-ustroj-sadow-
+> powszechnych.md`, sekcja "Procedura wyłączenia" — poprzednia wersja
+> kończyła się ogólnikiem "odmowa → zażalenie" bez wskazania adresata.
+> Dodano tabelę rozróżniającą: (1) zażalenie poziome do innego składu tego
+> samego sądu przy oddaleniu wniosku strony (art. 394¹ᵃ §1 pkt 10 KPC dla
+> I instancji, art. 394² §1 KPC dla II instancji); (2) brak zaskarżalności,
+> gdy to sam sędzia zgłosił i uzyskał oddalenie własnego żądania wyłączenia
+> (uchwała SN III CZP 33/69). Doprecyzowano konsekwencję praktyczną dla
+> spraw neosędziowskich: kontrola odwoławcza zwykle zostaje w tym samym
+> sądzie, nie trafia automatycznie do instancji wyższej. Zweryfikowano
+> online (SN, Palestra, gofin.pl, saos.org.pl). Ten sam wzorzec braku
+> (brak adresata zażalenia) wykryto i naprawiono równolegle w
+> pisma-proste-v2 (v2.4) i pisma-procesowe-v3 (v5.14). Pełny opis:
+> audyt-systemu-v4/references/AUDIT-JOURNAL.md, wpis 2026-07-25.

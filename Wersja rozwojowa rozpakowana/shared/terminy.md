@@ -6,7 +6,7 @@
 |--------|----------|----------|
 | **7 dni** | Sprzeciw od wyroku nakazowego (wykroczenia) | art. 94 KPSW |
 | **7 dni** | Wniosek o uzasadnienie wyroku (KPC) | art. 328¹ KPC |
-| **7 dni** | Zażalenie (KPC) | art. 394 §2 KPC |
+| **7 dni** | Zażalenie (KPC) ⚠ patrz przypis niżej | art. 394 §2 KPC |
 | **7 dni** | Wniosek o uzasadnienie (KPK) | art. 422 §1 KPK |
 | **3 dni** | Wniosek o uzasadnienie (KPW) | art. 105 §1 KPW |
 | **7 dni** | Apelacja wykroczeniowa | art. 105 §2 KPW |
@@ -32,6 +32,25 @@
 > §2 / 235¹ KPC), nie utratę samego uprawnienia. Do decyzji przy najbliższym
 > audycie: przenieść wiersz do osobnej sekcji "Terminy instrukcyjne" czy
 > zostawić w tabeli głównej z adnotacją ⚠ jak obecnie.
+
+> **Przypis (dodany 2026-07-25, wykryty przy audycie pisma-proste-v2 /
+> pisma-procesowe-v3 / mod-USP — brak wskazania adresata zażalenia w
+> wielu modułach):** termin 7 dni (art. 394 §2 KPC) jest wspólny, ale
+> **adresat zażalenia NIE zawsze jest sądem wyższej instancji.** Rozróżnij:
+> - **Zażalenie dewolutywne (pionowe)** — do sądu **II instancji**, katalog
+>   zamknięty w art. 394 §1 KPC (m.in. zwrot pozwu, odrzucenie sprzeciwu,
+>   zawieszenie postępowania, postanowienia kończące postępowanie).
+> - **Zażalenie poziome** — do **innego składu tego samego sądu**
+>   (art. 394¹ᵃ §1 KPC dla sądu I instancji; art. 394² §1 KPC dla sądu
+>   II instancji) — obejmuje m.in. odmowę zwolnienia od kosztów sądowych,
+>   odmowę ustanowienia pełnomocnika z urzędu, **oddalenie wniosku o
+>   wyłączenie sędziego**, zwrot zaliczki, wynagrodzenie biegłego.
+> - **Wyjątek bez zażalenia:** oddalenie żądania wyłączenia zgłoszonego
+>   przez samego sędziego (a nie przez stronę) — niezaskarżalne
+>   (uchwała SN III CZP 33/69, podtrzymana w późniejszym orzecznictwie).
+> Przed sporządzeniem zażalenia **zawsze ustal, którego postanowienia
+> dotyczy** i sprawdź właściwy przepis (art. 394 §1 / 394¹ᵃ §1 / 394² §1
+> KPC) zamiast zakładać domyślnie sąd wyższej instancji.
 
 ## Przedawnienia (instrukcyjne)
 

@@ -1,6 +1,6 @@
 ---
 name: audyt-systemu-v4
-version: 5.8
+version: 5.9
 type: governance-audit
 compatibility:
   - Claude
@@ -545,6 +545,32 @@ z WARN-OTWARTE.md, dodaj pełny wpis do AUDIT-JOURNAL.md.
    > `present_files` dla naprawy skilla wolno wywołać wyłącznie na archiwum
    > całego katalogu (`.zip`), nigdy na pojedynczym, samodzielnie skopiowanym
    > pliku typu `SKILL.md` czy `AUDIT-JOURNAL.md` z pominięciem reszty drzewa.
+   >
+   > 🔴 **KROK 4b — WERYFIKACJA BAJTOWA TREŚCI (dodane 2026-07-25, po
+   > incydencie: dwie kolejne dostawy przeszły test liczby plików, ale NIE
+   > były w ogóle pełnymi skillami — zbiorczy ZIP z wyselekcjonowanymi
+   > plikami z 5-8 różnych skili naraz, bez weryfikacji treści względem
+   > źródła. "Liczba się zgadza" nie jest dowodem, że TREŚĆ w archiwum jest
+   > aktualna i nieuszkodzona.):**
+   >
+   > ```bash
+   > # Po spakowaniu, PRZED present_files — rozpakuj i porównaj TREŚĆ
+   > # każdego pliku w ZIP z aktualnym stanem na dysku:
+   > rm -rf /tmp/verify_<skill> && mkdir -p /tmp/verify_<skill>
+   > unzip -q /mnt/user-data/outputs/<skill>.zip -d /tmp/verify_<skill>
+   > diff -rq /tmp/verify_<skill>/<skill> /mnt/skills/user/<skill>
+   > # Musi zwrócić PUSTY wynik. Jakakolwiek różnica = CRIT, wstrzymaj dostawę.
+   > ```
+   >
+   > **KROK 0 — ILE SKILLI, TYLE ZIPÓW (przypomnienie, już obowiązywało,
+   > ponownie naruszone 2026-07-25):** gdy sesja dotyczy naprawy wielu
+   > skilli naraz, KROKI 1-4b wykonuje się ODDZIELNIE dla KAŻDEGO skilla,
+   > z OSOBNYM archiwum `<skill>.zip` nazwanym dokładnie jak katalog skilla.
+   > Zbiorczy plik łączący kilka skili (nawet z zachowaniem pełnej struktury
+   > wewnątrz) jest niedopuszczalny — patrz precedens AUDYT-2026-07-06l.
+   > "shared/" i "audyt-systemu-v4/" traktuj jak KAŻDY inny skill w tym
+   > wyliczeniu, jeśli ich pliki były modyfikowane w danej sesji — nie
+   > pomijaj ich z dostawy tylko dlatego, że nie są DR-modułem.
 8. ⛔ **ZASADA WERYFIKACJI NUMERU NIEZALEŻNIE OD NAZWY (dodana 2026-07-02s,
    na wyraźny nakaz użytkownika) — "jeśli nazwy różnią się choć trochę,
    sprawdzaj w ISAP".**

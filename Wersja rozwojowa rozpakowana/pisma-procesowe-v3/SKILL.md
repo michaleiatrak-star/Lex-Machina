@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.13"
+version: "5.15"
 type: executive-pisma
 status: production
 description: |
@@ -653,6 +653,12 @@ view /mnt/skills/user/pisma-procesowe-v3/modules/MOD-DOWODY.md     (gdy są dowo
 view /mnt/skills/user/pisma-procesowe-v3/modules/MOD-OBAL.md       (gdy riposta/odpowiedź)
 view /mnt/skills/user/pisma-procesowe-v3/modules/MOD-OPLATY.md     (gdy pismo wszczynające)
 view /mnt/skills/user/pisma-procesowe-v3/modules/MOD-ADMIN.md      (gdy sprawa adm./KPA/WSA)
+view /mnt/skills/user/shared/ZAZALENIE-ADRESAT-GATE.md             (⛔ OBOWIĄZKOWE gdy pismo to
+                                                                     zażalenie/odwołanie/sprzeciw/
+                                                                     zarzuty/skarga — ustal adresata
+                                                                     PRZED redakcją nagłówka pisma,
+                                                                     nie zakładaj domyślnie instancji
+                                                                     wyższej)
 view /mnt/skills/user/shared/MOD-TIMING.md                         (gdy timing złożenia jest istotny:
                                                                      pierwsza rozprawa <14 dni /
                                                                      wniosek dowodowy grożący prekluzją /
@@ -832,6 +838,27 @@ view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md                (⛔ OBOWIĄZ
 ---
 
 ## CHANGELOG
+
+> **5.15 (2026-07-25, naprawa systemowa F-13 — częściowa):** zarejestrowano
+> `shared/ZAZALENIE-ADRESAT-GATE.md` jako HARD GATE (obok MOD-ADMIN.md w
+> sekwencji W2). `modules/MOD-PRAWO.md`: dodano adresat dla art. 306 KPK
+> (sąd rejonowy — wyjątek od reguły ogólnej). Dopiski `⚠️ adresat` dodane
+> w trzech plikach `references/engines/` (admin-pleading-engine-v8.md,
+> pleading-engine-v8.md, prosecution-complaint-engine-v8.md). Pełny opis
+> zakresu i tego, co POZOSTAJE nienaprawione: audyt-systemu-v4/references/
+> AUDIT-JOURNAL.md, wpis AUDYT-2026-07-25d.
+
+> **5.14 (2026-07-25, audyt adresatów zażalenia/odwołania — CRIT-TREŚĆ):**
+> `modules/MOD-ADMIN.md` — dodano wyjaśnienie, że odwołanie i zażalenie w KPA
+> wnosi się **za pośrednictwem organu I instancji do organu wyższego stopnia**
+> (art. 129 §1 / art. 141 §1 KPA), czego tabela pism wcześniej nie
+> precyzowała. `shared/terminy.md` — dodano przypis rozróżniający zażalenie
+> **dewolutywne/pionowe** (do sądu II instancji, art. 394 §1 KPC) od
+> **poziomego** (do innego składu tego samego sądu, art. 394¹ᵃ/394² KPC) —
+> wcześniej wiersz "Zażalenie (KPC)" sugerował jeden, uniwersalny adresat.
+> Ten sam wzorzec braku wykryto i naprawiono równolegle w pisma-proste-v2
+> (v2.4) i dr-01/mod-USP (v3.3). Pełny opis: audyt-systemu-v4/references/
+> AUDIT-JOURNAL.md, wpis 2026-07-25.
 
 > **5.13 (2026-07-15, F-7 / ZASADA 11 — audyt proceduralny):** dodano
 > R.1b TEZA-GATE do `modules/MOD-REDAKCJA.md`, obowiązkowy przed KROK 2

@@ -14,7 +14,13 @@ Egzekucja administracyjna (UPEA) — obowiązki z aktów administracyjnych
   → Wierzycielem jest organ (US, ZUS, organ samorządowy, inne)
   → Organem egzekucyjnym jest naczelnik US, dyrektor oddziału ZUS, starosta lub inny
   → Środki egzekucyjne: zajęcie wynagrodzenia, rachunku, wierzytelności, ruchomości
-  → Kontrola: zarzuty → zażalenie → skarga do WSA
+  → Kontrola: zarzuty (do wierzyciela, ZA POŚREDNICTWEM organu
+    egzekucyjnego, art. 33 §1 UPEA) → zażalenie na postanowienie w sprawie
+    zarzutów (do organu odwoławczego WŁAŚCIWEGO DLA WIERZYCIELA, ZA
+    POŚREDNICTWEM organu, który wydał postanowienie, art. 17 i art. 34 §3
+    UPEA — WYJĄTEK: zażalenie na oszacowanie przez poborcę skarbowego
+    rozpoznaje SAM organ egzekucyjny) → skarga do WSA. Zweryfikowano
+    online 2026-07-25 — patrz `shared/ZAZALENIE-ADRESAT-GATE.md`.
 
 Egzekucja komornicza (KPC) — obowiązki z wyroków i nakazów sądowych
   → DR-02 → mod-KPC-egzekucja-windykacja
@@ -77,7 +83,7 @@ SKARGA DO WSA na postanowienie ostateczne
 
 ```
 Zarzuty w egzekucji (art. 33 UPEA):       7 dni od doręczenia odpisu TW lub zajęcia
-Zażalenie na postanowienie:               7 dni od doręczenia postanowienia
+Zażalenie na postanowienie:               7 dni od doręczenia postanowienia (adresat: patrz sekcja wyżej i `shared/ZAZALENIE-ADRESAT-GATE.md` — NIE zakładaj domyślnie sądu)
 Skarga na czynności egzekucyjne:          14 dni od czynności
 Skarga do WSA na postanowienie ostateczne: 30 dni od doręczenia
 ⚠️ Terminy ZAWITE — weryfikuj aktualne brzmienie UPEA w ISAP.

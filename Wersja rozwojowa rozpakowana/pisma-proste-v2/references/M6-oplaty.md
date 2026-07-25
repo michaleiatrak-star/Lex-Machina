@@ -32,6 +32,7 @@
 | Wniosek o przywrócenie terminu | **0 zł** | — |
 | Wniosek o wgląd do akt | **0 zł** | art. 9 KPC |
 | Wniosek o wszczęcie egzekucji | **0 zł** | — |
+| Skarga na czynności komornika | 100 zł | ustawa o kosztach sądowych w sprawach cywilnych |
 
 ---
 

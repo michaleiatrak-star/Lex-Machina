@@ -2,8 +2,8 @@
 
 ## Zakres
 
-- zażalenie na odmowę wszczęcia,
-- zażalenie na umorzenie,
+- zażalenie na odmowę wszczęcia, [⚠️ adresat: sąd rejonowy — art. 306 §2 KPK, WYJĄTEK od zasady prokurator nadrzędny; patrz `shared/ZAZALENIE-ADRESAT-GATE.md`]
+- zażalenie na umorzenie, [⚠️ adresat: analogicznie — patrz `shared/ZAZALENIE-ADRESAT-GATE.md`]
 - wniosek dowodowy,
 - wniosek o dostęp do akt,
 - subsydiarny akt oskarżenia.

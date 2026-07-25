@@ -1,6 +1,6 @@
 ---
 name: dr-11-cyfrowe-cyber-ai-dane-ip
-version: 3.4
+version: 3.5
 description: |
   DR-11: Cyfrowe, Cyberbezpieczeństwo, AI, Dane, IP
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -64,12 +64,6 @@ DANE OSOBOWE:
               (szczegółowy: 72h zgłoszenie naruszenia, DPO, DPIA, monitoring pracowników,
                wyrok TSUE C-300/21 i C-340/21, art. 82 odszkodowanie)
   [✓] OK    mod-UODO-postepowanie-ochrona-danych
-              (2026-07-21: dodano rozróżnienie skarga [sekcja 9] vs
-               zgłoszenie naruszenia RODO [już wcześniej w pełni
-               opracowane w mod-RODO-szczegolowy.md, potwierdzone jako
-               kompletne — 72h, ocena ryzyka, treść zgłoszenia,
-               zawiadomienie osób, rejestr naruszeń]. Odpowiedź na
-               pytanie użytkownika)
               (2026-07-21: dodano sekcję 9 — merytoryczna treść skargi
                do Prezesa UODO [elementy, zasada subsydiarności, zakaz
                żądania kary, brak opłaty poza pełnomocnikiem 17 zł,

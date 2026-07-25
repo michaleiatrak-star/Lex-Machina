@@ -1,6 +1,6 @@
 ---
 name: shared
-version: 2.8
+version: 3.4
 type: library
 entrypoint: SKILL.md
 compatibility: "wszystkie skille prawne systemu"
@@ -226,6 +226,7 @@ Nie wczytuj wszystkich naraz — tylko te potrzebne dla danego kroku.
 | `TRYBY-PROCESOWE.md` | Centralny rejestr trybów, etapów, rygorów i modułów do wczytania |
 | `PREKLUZJA-DOWODOWA.md` | Kontrola spóźnionych twierdzeń i dowodów |
 | `TERM-CALC.md` | Metodologia kontroli terminów; nie zastępuje kalendarza sądowego |
+| `ZAZALENIE-ADRESAT-GATE.md` | Bramka: adresat zażalenia/odwołania/skargi (poziome vs dewolutywne, za pośrednictwem) — obowiązkowa przy każdym środku zaskarżenia (dodano 2026-07-25) |
 | `RISK-ASSESSMENT.md` | Matryca ryzyka formalnego, dowodowego, prawnego i kosztowego |
 | `ORZECZENIA-HIERARCHIA.md` | Hierarchia orzecznictwa, test aktualności i karta orzeczenia |
 | `DOWODY-METODOLOGIA.md` | Matryca dowodowa i test wiarygodności dowodu |
