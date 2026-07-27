@@ -1,9 +1,9 @@
 # Moduł [AB] — Prawo AI / AI Act
 
 > **Plik:** `/mnt/skills/user/prawny-router-v3/references/modules/mod-AB-prawo-ai.md`
-> **Wersja:** 1.0 (2026-05-25)
-> **Status:** NOWY — naprawa BLOKER-4
-> **Weryfikacja:** web_search 2026-05-25 (prawo.pl, parp.gov.pl, mycompanypolska.pl, infor.pl)
+> **Wersja:** 1.1 (2026-07-27)
+> **Status:** AKTUALIZOWANY — polska ustawa o AI podpisana przez prezydenta 24.07.2026
+> **Weryfikacja:** web_search 2026-07-27 (rp.pl, prawo.pl, gazetaprawna.pl, cyberdefence24.pl, tmt.expert, skarbiec.biz)
 
 ---
 
@@ -28,11 +28,40 @@ ETAPY STOSOWANIA AI Act (zweryfikowano 2026-05-25):
   02.08.2027  → Niektóre systemy wbudowane (aneks I)
 
 PRAWO POLSKIE:
-  - Projekt ustawy o systemach sztucznej inteligencji
-    (zatwierdzony przez Rząd RP 01.04.2026 r., MC)
-    → Powołuje: Komisja Rozwoju i Bezpieczeństwa Sztucznej Inteligencji (KRiBSI)
-    → Na etapie: projekt przed uchwaleniem przez Sejm (stan na 2026-05-25)
-    → UWAGA: AI Act obowiązuje bezpośrednio NIEZALEŻNIE od stanu ustawy krajowej
+  ⚡ POPRAWKA PILNA 2026-07-27 (FAZA 3E/ZASADA 14) — moduł był
+  NIEAKTUALNY o CAŁY etap procesu legislacyjnego. Poprzednia wersja
+  (VER 2026-05-25/06-05) opisywała ustawę jako "projekt przed
+  uchwaleniem przez Sejm". W rzeczywistości od tego czasu:
+    09.04.2026 — projekt wpłynął do Sejmu (po zatwierdzeniu przez
+                 rząd 30.03.2026)
+    11.06.2026 — Sejm UCHWALIŁ ustawę (421 za, 3 przeciw, 18 wstrzym.)
+    25.06.2026 — Senat zgłosił 25 poprawek
+    03.07.2026 — Sejm przyjął 24 z 25 poprawek Senatu, prace
+                 parlamentarne ZAKOŃCZONE
+    24.07.2026 — PREZYDENT PODPISAŁ ustawę (2 dni przed tym audytem!)
+    sierpień 2026 — planowane wejście w życie (dokładna data zależy
+                 od publikacji w Dzienniku Ustaw — SPRAWDŹ
+                 isap.sejm.gov.pl dla konkretnej daty przed użyciem)
+
+  - Ustawa o systemach sztucznej inteligencji (podpisana 24.07.2026)
+    → Powołuje: Komisja Rozwoju i Bezpieczeństwa Sztucznej Inteligencji
+      (KRiBSI) — niezależny krajowy organ nadzoru rynku AI, obsługa
+      organizacyjno-kancelaryjna przez Ministerstwo Cyfryzacji
+    → Struktura KRiBSI: Przewodniczący (kadencja 5 lat, powoływany
+      przez Sejm za zgodą Senatu) + 2 zastępców + 4 członków
+      delegowanych przez UOKiK, UKE, KNF, KRRiT
+    → Wprowadza PIASKOWNICE REGULACYJNE dla przedsiębiorców i urzędów
+    → Nowa ŚCIEŻKA SKARGOWA dla obywateli — prawo złożenia wniosku o
+      interwencję do KRiBSI, jeśli system AI narusza przepisy
+    → Penalizuje stosowanie zakazanych praktyk AI (art. 5 AI Act) —
+      system kar administracyjnych
+    → UWAGA: AI Act i tak obowiązuje bezpośrednio NIEZALEŻNIE od stanu
+      ustawy krajowej — ustawa krajowa dotyczy NADZORU i EGZEKWOWANIA,
+      nie samych materialnych obowiązków z Rozporządzenia UE
+
+    Potwierdzone: rp.pl [21.07.2026], prawo.pl, gazetaprawna.pl,
+    cyberdefence24.pl, tmt.expert [sprzed 2 dni], skarbiec.biz
+    [sprzed 2 dni] — 6 źródeł zgodnych co do przebiegu procesu i treści.
 
 POWIĄZANE:
   - RODO (rozporządzenie 2016/679) — dane osobowe w systemach AI
@@ -180,28 +209,37 @@ Aktualizuj przy każdym pytaniu — etapy stosowania AI Act są kroczące.
 ```
 ⚠️ UWAGA SYSTEMOWA: AI Act jest prawem dynamicznym (kolejne etapy stosowania
 w 2025, 2026, 2027). ZAWSZE weryfikuj aktualny etap stosowania przed analizą.
-Stan na 2026-05-25: obowiązują art. 5 (zakazy) + art. 4 (AI literacy) + art. 51-55 (GPAI).
+Stan na 2026-07-27: obowiązują art. 5 (zakazy) + art. 4 (AI literacy) + art. 51-55 (GPAI). Polska ustawa o AI PODPISANA (24.07.2026), wejście w życie w sierpniu 2026 (sprawdź dokładną datę).
 ```
 
 ---
 
-## ⚡ AKTUALIZACJA STATUS PRAWA POLSKIEGO (VER: 2026-06-05)
+## ⚡ AKTUALIZACJA STATUS PRAWA POLSKIEGO (VER: 2026-07-27)
 
 ```
 AI Act (Rozp. UE 2024/1689):
   → W życie: 01.08.2024
-  → Etapy stosowania (OBOWIĄZUJĄCE na 2026-06-05):
+  → Etapy stosowania (OBOWIĄZUJĄCE na 2026-07-27):
     ✅ 02.02.2025: Zakazy (art. 5) + AI Literacy (art. 4) — OBOWIĄZUJĄ
     ✅ 02.08.2025: GPAI (art. 51–55) + organy krajowe — OBOWIĄZUJĄ
-    ⏳ 02.08.2026: Systemy wysokiego ryzyka (Aneks III) — JESZCZE NIE
+    ⏳ 02.08.2026: Systemy wysokiego ryzyka (Aneks III) — ZA OK. TYDZIEŃ,
+       jeszcze nie weszło w życie na dzień audytu (26.07.2026), ale BARDZO
+       BLISKO — sprawdź ponownie przy każdym użyciu w lipcu/sierpniu 2026
     ⏳ 02.08.2027: Systemy wbudowane (Aneks I) — JESZCZE NIE
 
 Polska ustawa o systemach AI:
-  → Projekt zatwierdzony przez Rząd RP 01.04.2026 r. (Ministerstwo Cyfryzacji)
-  → Status: projekt PRZED uchwaleniem przez Sejm (stan na 2026-06-05)
-  → Powołuje: Komisja Rozwoju i Bezpieczeństwa Sztucznej Inteligencji (KRiBSI)
-  → UWAGA: AI Act obowiązuje BEZPOŚREDNIO niezależnie od stanu ustawy krajowej
+  ⚡ PODPISANA PRZEZ PREZYDENTA 24.07.2026 r. — prace parlamentarne
+  ZAKOŃCZONE (Sejm 11.06.2026, Senat 25.06.2026, Sejm ponownie 03.07.2026).
+  → Wejście w życie: sierpień 2026 (dokładna data zależy od publikacji w
+    Dzienniku Ustaw — SPRAWDŹ isap.sejm.gov.pl przed cytowaniem konkretnej
+    daty, ten moduł NIE podaje dokładnej daty wejścia w życie celowo, bo
+    nie było jej jeszcze w źródłach na 27.07.2026)
+  → Powołuje: KRiBSI (przewodniczący 5-letnia kadencja + 2 zastępców +
+    4 członków z UOKiK/UKE/KNF/KRRiT), piaskownice regulacyjne, ścieżka
+    skargowa obywateli
+  → UWAGA: AI Act obowiązuje BEZPOŚREDNIO niezależnie od stanu ustawy
+    krajowej — ustawa krajowa dotyczy nadzoru/egzekwowania
 
-web_search: "polska ustawa AI sztuczna inteligencja projekt Sejm 2026 KRiBSI status"
-web_search: "AI Act etapy stosowania 2026 2027 aktualizacja"
+web_search: "ustawa o systemach sztucznej inteligencji Dziennik Ustaw data wejścia w życie"
+web_search: "AI Act systemy wysokiego ryzyka 2 sierpnia 2026"
 ```

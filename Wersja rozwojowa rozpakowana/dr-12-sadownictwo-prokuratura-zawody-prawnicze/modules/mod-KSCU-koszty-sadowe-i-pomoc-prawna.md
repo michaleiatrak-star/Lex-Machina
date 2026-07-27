@@ -148,10 +148,22 @@ Ustawa o kosztach sądowych w sprawach cywilnych (KSCU):
 ⚠️ STAWKI I KWOTY — ZAWSZE WERYFIKUJ PRZED PODANIEM:
   web_search: "KSCU opłaty sądowe stawki 2025 2026 isap koszty sądowe cywilne"
 
-Kluczowe stawki (ORIENTACYJNE — weryfikuj aktualne w ISAP!):
-  Opłata od pozwu:
-    5% wartości przedmiotu sporu (WPS) — zasada ogólna
-    Min. 30 zł, max 200 000 zł (weryfikuj aktualne limity)
+Kluczowe stawki (⚠️ POPRAWKA 2026-07-27, FAZA 3E/ZASADA 14 — poprzednia
+wersja miała nieaktualny limit i oversimplified strukturę; naprawiono
+na podstawie dosłownego cytatu art. 13 KSCU z arslege.pl [t.j.
+Dz.U.2025.1228]):
+  Opłata od pozwu — DWA REŻIMY zależnie od WPS (od reformy z 25.07.2025,
+  w życie 23.09.2025 — GÓRNY LIMIT OBNIŻONY z 200 000 na 100 000 zł):
+    - WPS do 20 000 zł → OPŁATA STAŁA wg tabeli progowej (art. 13 ust. 1):
+      do 500 zł → 30 zł | 500-1500 zł → 100 zł | 1500-4000 zł → 200 zł |
+      4000-7500 zł → 400 zł | 7500-10000 zł → 500 zł | 10000-15000 zł →
+      750 zł | 15000-20000 zł → 1000 zł
+    - WPS powyżej 20 000 zł → opłata STOSUNKOWA 5% tej wartości, NIE
+      WIĘCEJ niż 100 000 zł (⚠️ BYŁO błędnie "200 000 zł" — ten limit
+      OBNIŻONO nowelizacją z 25.07.2025)
+    - postępowanie GRUPOWE: połowa opłaty ustalonej wg powyższych zasad
+      (wcześniej: 2% z odrębnym limitem — sprawdź czy ta zmiana też
+      weszła w życie z tą samą nowelizacją, NIEZWERYFIKOWANE w tej sesji)
   Opłata od apelacji: tyle samo co od pozwu
   Opłata od skargi kasacyjnej: dwukrotność opłaty od apelacji
   Opłata stała od odwołania od decyzji UOKiK/URE/UKE/UTK: 1 000 zł

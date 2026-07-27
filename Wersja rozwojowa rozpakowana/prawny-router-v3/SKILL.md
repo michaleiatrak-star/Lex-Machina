@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: 3.16
+version: 3.17
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -150,6 +150,9 @@ ZASADA: zakaz nie wygasa. PERMANENT przez całą rozmowę.
   isap.sejm.gov.pl · orzeczenia.ms.gov.pl · sn.pl · trybunal.gov.pl · nsa.gov.pl
 
 Brak dostępu → ⚠️ [NIEWERYFIKOWANE] + komunikat użytkownikowi. Nigdy nie pomijaj.
+
+Każdy link/URL podany użytkownikowi wymaga znacznika RZĄD 1/2A/2B/3 —
+patrz shared/HIERARCHIA-ZRODEL.md.
 
 Zagraniczne: pomiń prawo-polskie-v2 i ISAP — pozostałe zasady HG aktywne.
 
@@ -556,6 +559,10 @@ Minimalne bramki obowiązkowe przed każdą odpowiedzią:
   NIE do POV-B lub POV-C → ⛔ STOP. NIE generuj pisma bez tych wywołań.
   Wszystkie ✅ → wyświetl raport PRE-W2 (VER-SAD + VER-POZ) → dopiero potem W2.
   Szczegóły: SELF-CHECK-PISMA.md blok PRE-W2 lub PRE-W2-VERIFICATION-GATE.md
+□ ⛔ ŹRÓDŁO-GATE (dodane 2026-07-27, na żądanie użytkownika — wykorzystuje
+  ten sam wzorzec bramki blokującej co POV-B/C/D powyżej):
+  Każdy link podany w tej odpowiedzi ma przypisany RZĄD 1/2A/2B/3?
+  NIE → ⛔ STOP. Sklasyfikuj wg shared/HIERARCHIA-ZRODEL.md przed wysłaniem.
 □ references/KROK1-detekcja.md wczytany (tryb + hard gate ISAP)?
 □ ⛔ HARD GATE TRWAŁY aktywny? (obowiązuje przez całą rozmowę — nie wygasa)
 □ ⛔ STEP-TRACKER: REJESTR zainicjowany (ST-INIT) i aktualny po każdym kroku?

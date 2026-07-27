@@ -1,6 +1,6 @@
 ---
 name: dr-11-cyfrowe-cyber-ai-dane-ip
-version: 3.5
+version: 3.8
 description: |
   DR-11: Cyfrowe, Cyberbezpieczeństwo, AI, Dane, IP
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.

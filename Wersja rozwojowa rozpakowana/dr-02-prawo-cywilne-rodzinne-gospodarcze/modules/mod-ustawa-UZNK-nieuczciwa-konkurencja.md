@@ -52,9 +52,32 @@
 ## TERMIN PRZEDAWNIENIA
 
 ```
-art. 20 UZNK: 3 lata od dowiedzenia się o czynie i osobie zobowiązanej
-              max 10 lat od czynu
-⚠️ Weryfikuj aktualne brzmienie w ISAP.
+⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) — poprzednia wersja modułu
+błędnie podawała "3 lata od dowiedzenia się o czynie i osobie
+zobowiązanej, max 10 lat od czynu" — TA KONSTRUKCJA JEST BŁĘDNA,
+przypomina ogólną zasadę deliktową z KC, nie aktualne brzmienie UZNK.
+
+Dosłowne brzmienie art. 20 UZNK (t.j. Dz.U.2026.85), potwierdzone
+zgodnie w 4 źródłach Rządu 2B (prawo.pl, lexlege.pl, arslege.pl —
+identyczny tekst):
+
+§1: Roszczenia z tytułu czynów nieuczciwej konkurencji przedawniają
+    się z upływem 3 LAT — termin liczony OSOBNO co do KAŻDEGO
+    naruszenia (nie od "dowiedzenia się", prosty termin obiektywny
+    liczony od chwili naruszenia)
+§2: Do przedawnienia roszczeń O NAPRAWIENIE SZKODY wyrządzonej czynem
+    nieuczciwej konkurencji stosuje się art. 442¹ KC (przedawnienie
+    roszczeń deliktowych — TU dopiero pojawia się mechanizm
+    subiektywny/obiektywny znany z KC)
+§3: §2 NIE stosuje się do roszczeń objętych ustawą o roszczeniach za
+    naruszenie prawa konkurencji z 2017 r. (osobny reżim)
+§4: Jeśli czyn narusza tajemnicę przedsiębiorstwa I stanowi jednocześnie
+    zbrodnię/występek → termin przedawnienia roszczenia o naprawienie
+    szkody NIE MOŻE skończyć się później niż 20 LAT od popełnienia
+    przestępstwa (wyłącza wtedy art. 442¹ §2 KC)
+
+⚠️ Zweryfikuj aktualne brzmienie w ISAP przed użyciem w piśmie —
+powyższe to stan potwierdzony na 2026-07-27, ustawa może się zmieniać.
 ```
 
 ---

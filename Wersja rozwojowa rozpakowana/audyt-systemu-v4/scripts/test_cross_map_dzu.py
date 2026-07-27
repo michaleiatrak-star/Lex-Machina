@@ -45,7 +45,21 @@ DZU_PATTERN = re.compile(r"Dz\.?\s*U\.?\s*(\d{4})\s*poz\.?\s*(\d+)", re.IGNORECA
 
 def extract_act_dzu_pairs(text: str):
     """Zwraca listę (zbiór_slow_kluczowych, nazwa_aktu_przyblizona, rok, poz)
-    dla każdej linii zawierającej WZORZEC nazwy ustawy + numer Dz.U."""
+    dla każdej linii zawierającej WZORZEC nazwy ustawy + numer Dz.U.
+
+    ⚠️ PRÓBA NAPRAWY 2026-07-26 I COFNIĘCIE TEGO SAMEGO DNIA: próbowano
+    zbierać WSZYSTKIE cytaty Dz.U. w linii (nie tylko pierwszy), żeby
+    usunąć 2 fałszywe alarmy dla wierszy wieloaktowych (np. "KK+KPK").
+    Efekt uboczny: liczba alarmów wzrosła z 2 do 14 — wielokrotne wpisy
+    per linia zaczęły kolidować kombinatorycznie z innymi wielokrotnymi
+    wpisami w głównej mapie, generując WIĘCEJ szumu niż usuwały.
+    Zmianę COFNIĘTO w całości. Test pozostaje z ZNANYM, udokumentowanym
+    ograniczeniem: wiersze z wieloma aktami/numerami Dz.U. w jednej
+    komórce tabeli mogą dawać fałszywe alarmy, bo porównywany jest tylko
+    PIERWSZY numer w linii. Weryfikuj ręcznie takie przypadki zamiast
+    ufać automatycznemu werdyktowi — dokładnie do tego służy status WARN
+    (nie FAIL) tego testu.
+    """
     results = []
     for line in text.splitlines():
         m = DZU_PATTERN.search(line)

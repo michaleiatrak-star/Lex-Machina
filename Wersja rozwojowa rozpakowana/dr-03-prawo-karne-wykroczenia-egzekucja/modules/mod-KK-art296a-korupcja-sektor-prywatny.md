@@ -30,7 +30,13 @@ związanych z działalnością takiej jednostki?
    │  art. 296a §2 KK (3 m-ce – 5 lat, symetrycznie do §1)
    │
    ├─ Wypadek mniejszej wagi (art. 296a §3) → grzywna, ograniczenie
-   │  wolności lub do roku
+   │  wolności lub POZBAWIENIA WOLNOŚCI DO LAT 2 (⚠️ POPRAWKA 2026-07-26,
+   │  FAZA 3E: poprzednia wersja błędnie podawała "do roku" — potwierdzono
+   │  wielokrotnie online: lexlege.pl, arslege.pl, prawo-pl.com,
+   │  adwokatlawicki.pl, skalski-adwokat.pl, karh.pl — wszystkie zgodnie
+   │  wskazują "do lat 2", zgodnie z ogólnym wzorcem wypadku mniejszej
+   │  wagi w KK dla przestępstw z podstawowym zagrożeniem 3 m-ce-5 lat,
+   │  patrz też art. 228§2, 229§2, 230§2 — ten sam wzorzec "do lat 2")
    │
    ├─ Szkoda MAJĄTKOWA ZNACZNEJ WARTOŚCI wyrządzona jednostce
    │  (art. 296a §4) → 6 m-cy – 8 lat (typ kwalifikowany)
@@ -42,6 +48,23 @@ związanych z działalnością takiej jednostki?
       wszystkie istotne okoliczności czynu, zanim organ ten się o nim
       dowiedział
 ```
+
+⚠️ **ESKALACJA ZBRODNIOWA (art. 306b KK) — dodane 2026-07-26
+(MOD-PROPAGACJA-NOWELIZACJI, ustalenie przeniesione z
+mod-KK-art296-naduzycie-zaufania.md, ten sam przepis dotyka OBU
+modułów):** jeśli czyn z art. 296a **§1 LUB §4** (WYŁĄCZNIE strona
+BIERNA — przyjęcie korzyści — NIE §2, czynna strona przekupstwa, którą
+ustawodawca celowo wyłączył z tej eskalacji) dotyczy mienia/szkody:
+```
+> 5 mln zł  → art. 306b §1 → 3-20 lat (ZBRODNIA)
+> 10 mln zł → art. 306b §2 → 5-25 lat (ZBRODNIA)
+```
+Potwierdzone w 6+ źródłach (arslege.pl [t.j. Dz.U.2025.383], kairp.pl,
+adwokatdulniak.pl, kancelarierp.pl, chmielniak.com.pl,
+russellbedford.pl) — wejście w życie 1.10.2023. Zob. też
+`mod-KK-art296-naduzycie-zaufania.md` DRZEWO N.1 dla pełnego opisu
+mechanizmu (ta sama eskalacja obejmuje też art. 296 §1/§2, art. 299
+§1/2/5/6, art. 303 §1).
 
 ⚠️ **Kluczowa różnica od art. 228-230 (korupcja urzędnicza):** art. 296a
 NIE wymaga, by sprawca pełnił funkcję PUBLICZNĄ — dotyczy WYŁĄCZNIE
@@ -82,7 +105,7 @@ bezpośrednio do prokuratury bez zadbania o formalny wniosek.
 |---|---|---|---|
 | Łapownictwo menadżerskie bierne | art. 296a §1 | 3 m-ce – 5 lat | na wniosek (wyjątek: Skarb Państwa/JST — z urzędu) |
 | Łapownictwo menadżerskie czynne | art. 296a §2 | 3 m-ce – 5 lat | j.w. |
-| Wypadek mniejszej wagi | art. 296a §3 | grzywna/ogr. wolności/do 1 roku | j.w. |
+| Wypadek mniejszej wagi | art. 296a §3 | grzywna/ogr. wolności/do 2 lat | j.w. |
 | Szkoda znacznej wartości | art. 296a §4 | 6 m-cy – 8 lat | j.w. |
 
 ⚠️ WSZYSTKIE zagrożenia do potwierdzenia na isap.sejm.gov.pl przed

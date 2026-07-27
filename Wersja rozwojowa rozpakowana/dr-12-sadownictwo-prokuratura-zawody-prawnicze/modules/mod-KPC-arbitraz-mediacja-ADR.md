@@ -157,7 +157,6 @@ PRAKTYCZNA KONSEKWENCJA DLA INTAKE:
 ```
 
 
-
 ```
 KPC — Część V: Sąd polubowny (arbitraż), mediacja:
   Dz.U. 2026 poz. 468 t.j.

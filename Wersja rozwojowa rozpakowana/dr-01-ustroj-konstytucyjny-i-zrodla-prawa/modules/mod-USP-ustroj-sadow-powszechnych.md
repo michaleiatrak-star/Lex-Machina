@@ -158,7 +158,12 @@ Skarga na przewlekłość → sąd przełożony
   Oddalenie → zażalenie (termin: weryfikuj w ustawie w ISAP)
   ↓
 Jeśli przewlekłość trwa → ponowna skarga
-  (nie wcześniej niż po 12 miesiącach od poprzedniej — weryfikuj w ISAP)
+  (nie wcześniej niż po 12 miesiącach od poprzedniej — POTWIERDZONE
+   2026-07-27, FAZA 3E/ZASADA 14, 7+ źródeł zgodnych, w tym sądy
+   rejonowe i gazetaprawna.pl. ⚠️ UZUPEŁNIENIE: WYJĄTEK — w postępowaniu
+   przygotowawczym z tymczasowym aresztowaniem oraz w sprawie
+   egzekucyjnej/dot. wykonania orzeczenia — termin skrócony do 6
+   MIESIĘCY, nie 12. Poprzednia wersja modułu pomijała ten wyjątek)
 ```
 
 ---

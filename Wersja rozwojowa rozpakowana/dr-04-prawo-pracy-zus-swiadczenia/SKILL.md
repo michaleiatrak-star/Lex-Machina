@@ -1,6 +1,6 @@
 ---
 name: dr-04-prawo-pracy-zus-swiadczenia
-version: 3.4
+version: 3.6
 description: |
   DR-04: Prawo Pracy, ZUS, Świadczenia Społeczne
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -64,9 +64,17 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   wspierające (→ mod-niepelnosprawnosc-intelektualna-gluchota.md,
   mod-niewidomy-prawa-prawne.md, mod-prawa-obywatelskie-srodki-karne.md)
 
-## Moduły (26 łącznie — ✓ 26 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
+## Moduły (27 łącznie — ✓ 27 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
 
 ```
+  [✓] NOWY  mod-ustawa-karta-nauczyciela-pracownicze
+              (dodany 2026-07-27, domyka F-19 z WARN-OTWARTE.md: brak
+               treści pracowniczej Karty Nauczyciela — wynagrodzenie
+               art. 30, czas pracy/pensum art. 42 [40h tydzień, pensum
+               18h dla większości], urlop wypoczynkowy art. 64 [okres
+               ferii, NIE sztywne "56 dni"], urlop dla poratowania
+               zdrowia art. 73 [7 lat stażu, do roku]. Cross-ref do
+               dr-15 [dyscyplinarka] i dr-10 [administracyjne].)
   [✓] OK    mod-KP-prawo-pracy
               (PRZYCIĘTY 2026-06-12: 524→337 linii. RDZEŃ — rozwiązanie umowy
                o pracę, wypowiedzenie, dyscyplinarka, roszczenia art.45 KP.

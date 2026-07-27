@@ -29,8 +29,27 @@ organizacyjnej niemającej osobowości prawnej?
    ├─ Szkoda WIELKIEJ WARTOŚCI (art. 296 §3, w zw. z art. 115 §6) →
    │  1-10 lat
    │
-   └─ Typ NIEUMYŚLNY — sprawca nieumyślnie wyrządza znaczną szkodę
-      majątkową (art. 296 §4) → do 3 lat
+   ├─ Typ NIEUMYŚLNY — sprawca nieumyślnie wyrządza znaczną szkodę
+   │  majątkową (art. 296 §4) → do 3 lat
+   │
+   └─ ⚠️ ESKALACJA ZBRODNIOWA (art. 306b KK — dodane 2026-07-26, FAZA 3E/
+      ZASADA 14, weryfikacja odłożona z poprzedniej transzy, teraz
+      potwierdzona) — jeśli czyn z art. 296 §1 LUB §2 (NIE §3!) dotyczy
+      mienia o wartości LUB szkody w rozmiarach:
+        > 5 mln zł (pięciokrotność mienia wielkiej wartości)
+          → art. 306b §1 → 3-20 lat (ZBRODNIA)
+        > 10 mln zł (dziesięciokrotność mienia wielkiej wartości)
+          → art. 306b §2 → 5-25 lat (ZBRODNIA)
+      Wprowadzone nowelizacją z 2022 r. (w życie 1.10.2023), obejmuje
+      RÓWNIEŻ art. 296a §1/§4 (korupcja menadżerska), art. 299 §1/2/5/6
+      (pranie pieniędzy), art. 303 §1 (dokumentacja działalności
+      gospodarczej) — WYŁĄCZNIE bierne łapownictwo menadżerskie z 296a,
+      nie czynne. Potwierdzone w 6+ źródłach: arslege.pl (t.j. Dz.U.
+      2025.383), kairp.pl, adwokatdulniak.pl, kancelarierp.pl,
+      chmielniak.com.pl, russellbedford.pl. ⚠️ UWAGA: art. 306b NIE
+      obejmuje art. 296 §3 (już samodzielnie do 10 lat) — dotyczy
+      wyłącznie eskalacji z §1/§2, tworząc TRZYSTOPNIOWĄ, nie
+      dwustopniową drabinę zagrożenia dla tego samego czynu bazowego.
 ```
 
 ⚠️ **Ściganie na wniosek pokrzywdzonego (art. 296 §4a KK)** — analogicznie

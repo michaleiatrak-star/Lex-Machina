@@ -188,9 +188,28 @@ Ustawa o udzielaniu ochrony cudzoziemcom — Dz.U. 2024 poz. 1546 t.j. — weryf
 
 Kluczowe sprawy SG:
   Detencja cudzoziemca:
-    → Strzeżony ośrodek: decyzja SG zatwierdzona przez sąd (48h → 14 dni → przedłużenie)
+    → ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) — poprzednia wersja
+      miała BŁĘDNĄ instancję sądową, błędny okres i błędny termin
+      zażalenia. Potwierdzone w 6+ źródłach (Kwartalnik IUSTITIA,
+      publikacja akademicka KIPK vol. XXVI, gofin.pl, panstwoprawa.org,
+      Amnesty International, interwencjaprawna.pl):
+    → Zatrzymanie wstępne przez SG/Policję: MAX 48 GODZIN — w tym
+      czasie SG składa do SĄDU (rejonowego, NIE WSA — to sąd
+      POWSZECHNY, nie administracyjny) wniosek o umieszczenie w
+      strzeżonym ośrodku lub zastosowanie aresztu dla cudzoziemców
+    → Sąd w postanowieniu wskazuje okres pobytu: NIE DŁUŻSZY niż
+      3 MIESIĄCE (nie "14 dni" jak błędnie wcześniej), z możliwością
+      przedłużania do 6 miesięcy, a w uzasadnionych przypadkach
+      maksymalnie do 12 miesięcy łącznie
     → Prawo do adwokata z urzędu
-    → Skarga do WSA: 14 dni od doręczenia decyzji o detencji
+    → ZAŻALENIE na postanowienie sądu: 7 DNI od doręczenia postanowienia
+      (nie "skarga do WSA w 14 dni" — to ZAŻALENIE do SĄDU REJONOWEGO
+      za pośrednictwem Straży Granicznej, ŚCIEŻKA SĄDÓW POWSZECHNYCH,
+      analogiczna do KPK, NIE ścieżka sądowoadministracyjna jak przy
+      zobowiązaniu do powrotu/odmowie wjazdu poniżej). Sąd rozpoznaje
+      zażalenie również w terminie 7 dni.
+    → Odszkodowanie/zadośćuczynienie od Skarbu Państwa możliwe, jeśli
+      zatrzymanie/umieszczenie okazało się nieuzasadnione
   Zobowiązanie do powrotu:
     → Decyzja SG → odwołanie do Komendanta Głównego SG (14 dni)
     → Skarga do WSA → NSA

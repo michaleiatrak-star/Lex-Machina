@@ -17,7 +17,6 @@ powiązane pliki: audyt-systemu-v4/references/FORMAT-RAPORTU-ROZNIC.md,
 ---
 
 
-
 ## Czego ten skill NIE robi (żeby nie było wątpliwości)
 
 `audyt-systemu-v4` ma twardą zasadę: **"nigdy nie zgaduj numeru Dz.U."** — cała

@@ -272,7 +272,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o ubezpieczeniu społecznym rolników (KRUS) | Dz.U. 2025 poz. 1770 t.j. (sync 2026-07-02 z dr-04) | dr-04/modules/mod-KRUS-rolnicze-ubezpieczenia | ✅ OK |
 | Ustawa o rehabilitacji zawodowej i PFRON — ROZBUDOWANE 2026-07-20: ANEKS o likwidacji Wypożyczalni PFRON (temat świeży, w toku) | Dz.U. 2025 poz. 913 ze zm. | dr-04/modules/mod-ustawa-rehabilitacja-PFRON | ✅ OK |
 | Ustawa o PIP | Dz.U. 2024 poz. 1712 t.j. + zm. Dz.U. 2025 poz. 321/368/620/769, Dz.U. 2026 poz. 160 ✅ nowelizacja Dz.U. 2026 poz. 473 obowiązuje od 08.07.2026 (VER 2026-07-07) | dr-04/modules/mod-ustawa-PIP-inspekcja-pracy | ✅ OK — sekcja 5 modułu |
-| Ustawa o minimalnym wynagrodzeniu | Dz.U. 2024 poz. 1285 ze zm. (MW 2026: 4806 zł) | dr-04/modules/mod-ustawa-minimalne-wynagrodzenie | ✅ OK |
+| Ustawa o minimalnym wynagrodzeniu | Dz.U. 2024 poz. 1773 ze zm. (MW 2026: 4806 zł) — POPRAWKA 2026-07-26, było błędnie "poz. 1285" | dr-04/modules/mod-ustawa-minimalne-wynagrodzenie | ✅ OK |
 | Ustawa o ZFSS | Dz.U. 2024 poz. 288 ze zm. | dr-04/modules/mod-ustawa-ZFSS | ✅ OK |
 | Ustawa o zatrudnianiu pracowników tymczasowych | Dz.U. 2025 poz. 236 t.j. ✅ VER 2026-07-04 (POPRAWKA — było błędnie 2025.1682, numer nieistniejący dla tej ustawy) | dr-04/modules/mod-ustawa-praca-tymczasowa | ✅ OK |
 | Ustawa o układach zbiorowych pracy i porozumieniach zbiorowych (sync 2026-07-02 — była błędnie nazwana "o sporach zbiorowych pracy"; to odrębna ustawa z 1991 r., uchyla Dział XI KP) | Dz.U. 2025 poz. 1661 | dr-04/modules/mod-ustawa-zwiazki-zawodowe-spory-zbiorowe | ✅ OK |
@@ -399,7 +399,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
-| Ustawa o samorządzie gminnym (USG) | Dz.U. 2025 poz. 1153 t.j. | dr-08/modules/mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa | ✅ OK |
+| Ustawa o samorządzie gminnym (USG) | Dz.U. 2026 poz. 662 t.j. — POPRAWKA 2026-07-26 (audyt pełnego systemu, T3): poprzedni numer (2025.1153) był NIEAKTUALNY, zastąpiony nowym t.j. (obwieszczenie Marszałka Sejmu z 15.05.2026, publ. 21.05.2026, uwzględnia zmiany Dz.U. 2025.1436 i 2026.252); zweryfikowano online (isap.sejm.gov.pl WDU20260000662, rzeszow.rio.gov.pl, infor.pl) — lokalna mapa dr-08/MAPA-AKTOW.md miała już poprawny numer, główna mapa nie była zsynchronizowana | dr-08/modules/mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa | ✅ OK |
 | Ustawa o samorządzie powiatowym (USP) | Dz.U. 2025 poz. 1684 t.j. | dr-08/modules/mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa | ✅ OK |
 | Ustawa o samorządzie województwa (USW) | Dz.U. 2025 poz. 581 t.j. | dr-08/modules/mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa | ✅ OK |
 | Ustawa o Wojewodzie i administracji rządowej w województwie | Dz.U. 2025 poz. 428 t.j. | dr-08/modules/mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa | ✅ OK |
@@ -536,9 +536,8 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 |---|---|---|---|
 | RODO — Rozp. UE 2016/679 | Dz.Urz. UE L 119/1 | dr-11/modules/mod-RODO-GDPR-2016-679 | ✅ OK |
 | Ustawa UODO — implementacja RODO — ROZBUDOWANE 2026-07-21 (sekcja 9: skarga do Prezesa UODO, korekta GIODO→UODO) | Dz.U. 2019 poz. 1781 ze zm. | dr-11/modules/mod-UODO-postepowanie-ochrona-danych | ✅ OK |
-| Ustawa o KSC + NIS2 (2022/2555) | Dz.U. 2024 poz. 1226 ze zm. (zm.: 2026.252) | dr-11/modules/mod-KSC-NIS2-cyberbezpieczenstwo-telekom | ✅ OK |
 | Ustawa o krajowym systemie certyfikacji cyberbezpieczeństwa | Dz.U. 2025 poz. 1017 | dr-11/modules/mod-ustawa-certyfikacja-cyberbezpieczenstwa | ✅ OK |
-| KSC — krajowy system cyberbezpieczeństwa | Dz.U. 2026 poz. 20 t.j. | dr-11/modules/mod-KSC-NIS2-cyberbezpieczenstwo-telekom | ✅ OK |
+| Ustawa o KSC + NIS2 (2022/2555) | Dz.U. 2026 poz. 20 t.j. + zm. 2026.252 — POPRAWKA 2026-07-26 (audyt pełnego systemu, T3): usunięto zduplikowany, sprzeczny wiersz "KSC — krajowy system cyberbezpieczeństwa" który miał ten sam moduł z inną wersją numeru (2024.1226, nieaktualny) — scalono w jeden poprawny wpis | dr-11/modules/mod-KSC-NIS2-cyberbezpieczenstwo-telekom | ✅ OK |
 | DORA (Rozp. UE 2022/2554) + eIDAS 2.0 | Rozp. UE 2022/2554 + 2024/1183 | dr-11/modules/mod-DORA-eIDAS-cyfrowe-finanse | ✅ OK |
 | Prawo komunikacji elektronicznej + UKE | Dz.U. 2024 poz. 1221 t.j. (sync 2026-07-02 — było błędnie 1220) | dr-11/modules/mod-PrTelekom-poczta-UKE | ✅ OK |
 | Ustawa o prawie autorskim i prawach pokrewnych | Dz.U. 2025 poz. 24 t.j. | dr-11/modules/mod-PrAut-wlasnosc-intelektualna-IP | ✅ OK |

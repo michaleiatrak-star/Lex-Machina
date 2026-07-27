@@ -1,6 +1,6 @@
 ---
 name: dr-06-podatki-finanse-publiczne-aml
-version: 3.4
+version: 3.6
 description: |
   DR-06: Podatki, Finanse Publiczne, AML
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -68,7 +68,13 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   od KC; nowelizacja znosi "wieczne przedawnienie" + wprowadza ugodę
   podatkową od 01.10.2026 (art. 70 i n. OP)
 
-## Moduły (24 łącznie — ✓ 24 OK, ☐ 0 STUB)
+## Moduły (25 łącznie — ✓ 25 OK, ☐ 0 STUB)
+
+**Aktualizacja 2026-07-27:**
+- Nowy moduł: `mod-limit-platnosci-gotowkowych.md` — limit 15 000 zł B2B
+  (art. 19 Prawa przedsiębiorców), sankcja KUP, historia nieudanego
+  obniżenia do 8000 zł, nadchodząca zmiana unijna (AML, 10 000 EUR od
+  2027, dotyczy też B2C) — odpowiedź na pytanie użytkownika
 
 **Aktualizacja 2026-06-07:**
 - Ordynacja podatkowa: nowy t.j. **Dz.U. 2026 poz. 622**
@@ -101,14 +107,6 @@ przez cross-reference, bez duplikacji treści).
                [mechanizm pay and refund, próg 2 mln zł, opinia o
                preferencji, oświadczenie WH-OSC/WH-OSP])
   [✓] OK    mod-VAT-podatek-od-towarow-i-uslug
-              (2026-07-21: dodano sekcję 3a — pięć dotąd nieobecnych
-               kluczowych mechanizmów: WNT [samonaliczenie, limit
-               50 000 zł], odwrotne obciążenie [korekta: krajowe już
-               NIE obowiązuje, zastąpione split payment], ulga na złe
-               długi [liberalizacja po TSUE C-335/19, termin 3 lata],
-               elementy faktury art. 106e, pełne zwolnienie podmiotowe
-               art. 113 [limit 200 000 zł + wyłączenia]. Odpowiedź na
-               pytanie użytkownika o kompletność ustaw VAT-owskich)
               (2026-07-21: dodano odesłanie do nowego modułu o
                samochodach/użytku mieszanym)
   [✓] OK    mod-odliczenia-uzytek-mieszany-firma-prywatny-KUP

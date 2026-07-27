@@ -23,11 +23,69 @@ Zasada:        Nie można być ukarany za paserstwo w stosunku do własnego prze
 ```
 Art. 299 § 1:  Przyjmowanie, posiadanie, używanie, przekazywanie, wywożenie za granicę,
                pomaganie w przeniesieniu własności — środków z przestępstwa — do 8 lat
-Art. 299 § 5:  Działanie w porozumieniu lub przy użyciu instytucji finansowej — do 10 lat
-Art. 299 § 6:  Czynny żal — obligatoryjne nadzwyczajne złagodzenie lub odstąpienie
-               Warunek: ujawnienie informacji przed wszczęciem postępowania
-Art. 299 § 8:  Przepadek korzyści majątkowej — obligatoryjny
+Art. 299 § 2:  ⚠️ POPRAWKA 2026-07-26b (FAZA 3E/ZASADA 14 — korekta
+               WŁASNEGO błędu z poprzedniej edycji tej samej sesji:
+               pomylono treść §2 z §5). §2 dotyczy PRACOWNIKA lub osoby
+               działającej w imieniu/na rzecz banku, instytucji
+               finansowej/kredytowej lub innego podmiotu objętego
+               obowiązkiem rejestracji transakcji, który WBREW PRZEPISOM
+               przyjmuje środki płatnicze/instrumenty finansowe itd. —
+               KARA TA SAMA CO §1 (6 m-cy — 8 lat), nie osobny, wyższy
+               wymiar. Potwierdzone WPROST cytatem z arslege.pl (t.j.
+               Dz.U.2025.383): "Karze określonej w §1 podlega, kto będąc
+               pracownikiem lub działając w imieniu lub na rzecz banku,
+               instytucji finansowej lub kredytowej..." — dosłowne
+               brzmienie nie pozostawia wątpliwości.
+Art. 299 § 5:  ⚠️ POPRAWKA 2026-07-26d (F-18, DOMKNIĘTA Z RZĄDEM 2B —
+               poprzednia wersja 26c opierała się WYŁĄCZNIE na Rządzie 3,
+               wbrew ZASADZIE 14; teraz potwierdzone DOSŁOWNYM cytatem z
+               3 niezależnych agregatorów Rządu 2B): "Jeżeli sprawca
+               dopuszcza się czynu określonego w § 1 lub 2, działając w
+               porozumieniu z innymi osobami, podlega karze pozbawienia
+               wolności od roku do lat 10." Potwierdzone dosłownie:
+               lexlege.pl, prawo-pl.com, e-prawnik.pl (wszystkie 3
+               identyczny tekst) — Rząd 2B jako główne potwierdzenie,
+               Rząd 3 (karh.pl, adwokat-szymczyk.pl) i publikacja
+               akademicka (journals.umcs.pl) jako dodatkowe.
+Art. 299 § 6:  ⚠️ POPRAWKA 2026-07-26d (F-18, DOMKNIĘTA Z RZĄDEM 2B):
+               "Karze określonej w § 5 podlega sprawca, jeżeli
+               dopuszczając się czynu określonego w § 1 lub 2, osiąga
+               znaczną korzyść majątkową." — czyli TA SAMA kara co §5
+               (rok-10 lat), ODRĘBNA przesłanka (znaczna korzyść
+               majątkowa, >200 000 zł, art. 115 §4/§5 KK). Dosłowny
+               cytat identyczny w lexlege.pl, prawo-pl.com, e-prawnik.pl.
+               Orzecznictwo (wg adwokat-skoczylas.pl) precyzuje, że
+               "znaczna korzyść" z §6 to zysk z SAMEGO procederu prania
+               (np. prowizja), NIE cała kwota prania środków.
+Art. 299 § 6a: ⚠️ DODANE 2026-07-26d (F-18 — całkowicie pominięte we
+               wcześniejszych wersjach modułu, znalezione przy
+               weryfikacji §5/§6 z Rządu 2B). Przygotowanie do
+               przestępstwa z §1 lub §2 — do 3 lat. Potwierdzone
+               dosłownie: lexlege.pl, prawo-pl.com, e-prawnik.pl,
+               karh.pl (wszystkie zgodne).
+Art. 299 § 7:  Przepadek przedmiotów/korzyści z przestępstwa (§1 lub 2) — obligatoryjny
+               (⚠️ POPRAWKA 2026-07-26b: BYŁO błędnie oznaczone jako "§8" —
+               potwierdzone: adwokatdulniak.pl, rgn.legal, lexlege.pl,
+               prawo-pl.com, e-prawnik.pl — dosłowny cytat identyczny)
+Art. 299 § 8:  Czynny żal — brak kary, jeśli sprawca dobrowolnie ujawnił organowi
+               ścigania informacje o osobach uczestniczących i okolicznościach,
+               zanim zapobiegło to popełnieniu innego przestępstwa
+               (⚠️ POPRAWKA 2026-07-26b: BYŁO błędnie oznaczone jako "§6" —
+               potwierdzone: materiały szkoleniowe B.J. Stefańskiej [gov.pl],
+               adwokatdulniak.pl — "art. 299 § 8 in fine k.k.")
 ```
+
+⚠️ **ESKALACJA ZBRODNIOWA (art. 306b KK) — dodane 2026-07-26
+(MOD-PROPAGACJA-NOWELIZACJI, ten sam mechanizm co w mod-KK-art296-
+naduzycie-zaufania.md i mod-KK-art296a-korupcja-sektor-prywatny.md):**
+jeśli czyn z art. 299 **§1, §2, §5 LUB §6** dotyczy mienia/szkody:
+```
+> 5 mln zł  → art. 306b §1 → 3-20 lat (ZBRODNIA)
+> 10 mln zł → art. 306b §2 → 5-25 lat (ZBRODNIA)
+```
+Wejście w życie 1.10.2023. Potwierdzone: arslege.pl (t.j. Dz.U.2025.383),
+kairp.pl, adwokatdulniak.pl, kancelarierp.pl, chmielniak.com.pl,
+russellbedford.pl.
 
 ## ⭐ FIKCYJNE FIRMY JAKO TECHNIKA PRANIA PIENIĘDZY (dodane 2026-07-18)
 
@@ -138,8 +196,8 @@ Część A, sekcja o rozbieżności orzecznictwa co do świadomości słupa).
 ## Zasady absolutne
 ```
 Pranie brudnych pieniędzy: przestępstwo umyślne (zamiar bezpośredni lub ewentualny)
-Czynny żal: skuteczny TYLKO gdy ujawnienie przed wszczęciem — art. 299 § 6
-Przepadek: obligatoryjny (art. 299 § 8) — nie można się zwolnić
+Czynny żal: skuteczny TYLKO gdy ujawnienie przed wszczęciem — art. 299 § 8
+Przepadek: obligatoryjny (art. 299 § 7) — nie można się zwolnić
 Przestępstwo bazowe: wystarczy, że środki pochodzą z JAKIEGOKOLWIEK przestępstwa
 ```
 

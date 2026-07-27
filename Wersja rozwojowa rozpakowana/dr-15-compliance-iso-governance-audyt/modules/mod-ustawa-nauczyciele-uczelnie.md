@@ -26,6 +26,15 @@ Nie cytuj literalnego brzmienia przepisu bez aktualnego sprawdzenia źródła. P
 - odpowiedzialność dyscyplinarna akademicka
 - dostosowania niepełnosprawności
 
+> 📌 **Cross-referencja dodana 2026-07-27** (naprawa braku wzajemnej
+> świadomości między modułami, znaleziona na pytanie użytkownika o
+> pokrycie prawa oświatowego): dla SZERSZEGO kontekstu administracyjnego
+> spoza samej dyscyplinarki (skreślenia z listy studentów, decyzje
+> stypendialne, kuratorium, bezczynność uczelni) — zob. RÓWNIEŻ
+> `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-oswiata-szkolnictwo-wyzsze.md`.
+> Ten moduł (dr-15) pozostaje właściwy dla samego POSTĘPOWANIA
+> DYSCYPLINARNEGO w szczegółach.
+
 ## 3. Intake
 Ustal obowiązkowo:
 

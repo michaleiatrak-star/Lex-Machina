@@ -59,7 +59,7 @@ Opłata podstawowa wg art. 27 KSCU:
   do 7 500 zł  → 400 zł
   do 15 000 zł → 500 zł
   do 20 000 zł → 750 zł
-  > 20 000 zł  → 5% WPS (min. 200 zł, max 200 000 zł)
+  > 20 000 zł  → 5% WPS, max 100 000 zł (⚠️ POPRAWKA 2026-07-27: było błędnie "200 000 zł", obniżone reformą z 25.07.2025)
 
 Opłata od zarzutów = 3/4 × opłata podstawowa
 Weryfikuj w aktualnej wersji KSCU na isap.sejm.gov.pl.

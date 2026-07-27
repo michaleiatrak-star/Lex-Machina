@@ -173,6 +173,11 @@ Przed końcową odpowiedzią sprawdź:
 ## ⚡ ALERT — NOWELIZACJA KSC (NIS2) W ŻYCIE 03.04.2026
 
 ```
+AKTUALNY TEKST JEDNOLITY USTAWY O KSC: Dz.U. 2026 poz. 20 t.j.
+  (obwieszczenie Marszałka Sejmu z 29.12.2025) — POPRAWKA 2026-07-26
+  (audyt pełnego systemu, T3): moduł wcześniej wspominał TYLKO nowelizację
+  (poz. 252) bez podania aktualnego numeru bazowego t.j. — luka domknięta.
+
 Ustawa z 23.01.2026 r. o zmianie ustawy o krajowym systemie cyberbezpieczeństwa:
   → Dz.U. 2026 poz. 252 — wejście w życie: 03.04.2026
   ✅ VER: isap.sejm.gov.pl 2026-06-05

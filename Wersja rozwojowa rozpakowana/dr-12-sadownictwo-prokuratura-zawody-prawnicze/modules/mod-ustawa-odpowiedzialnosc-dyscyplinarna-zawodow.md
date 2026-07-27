@@ -213,7 +213,6 @@ niezawodnej procedurze weryfikacji sygnatury wg PRAWO-HARDGATE KROK 0–5.
 ## 8. Łącz obowiązkowo z
 
 
-
 | Potrzeba | Moduł współdzielony / skill |
 |---|---|
 | aktualność prawa | `shared/ISAP-AUDIT-PROTOCOL.md` + `shared/ISAP-METRYKI-AKTOW.md` |

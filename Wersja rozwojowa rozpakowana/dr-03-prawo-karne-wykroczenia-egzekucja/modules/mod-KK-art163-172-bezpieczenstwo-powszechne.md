@@ -196,6 +196,32 @@ KROK 6: Czy to WYŁĄCZNIE etap przygotowawczy (bez realizacji)?
 
 ---
 
+## 6A. ART. 170-172 — DOMKNIĘCIE ZAKRESU (dodano 2026-07-26, audyt
+pełnego systemu T8 — tytuł deklarował "art. 163-172", treść kończyła
+się na art. 169)
+
+- **Art. 170 — piractwo morskie (rozbójnictwo morskie):** uzbrojenie
+  lub przysposobienie statku morskiego do dokonania rabunku na morzu,
+  lub przyjęcie służby na takim statku. Kara: 1-10 lat pozbawienia
+  wolności.
+- **Art. 171 — materiały niebezpieczne:** bez wymaganego zezwolenia
+  wyrabianie, przetwarzanie, gromadzenie, posiadanie, posługiwanie się
+  lub handel substancją/przyrządem wybuchowym, materiałem
+  radioaktywnym, urządzeniem emitującym promienie jonizujące lub innym
+  przedmiotem mogącym sprowadzić niebezpieczeństwo dla życia/zdrowia
+  wielu osób lub mienia w wielkich rozmiarach. Kara: 6 miesięcy-8 lat
+  (również przy dopuszczeniu do czynu wbrew obowiązkowi, §2, lub
+  odstąpieniu przedmiotów osobie nieuprawnionej, §3).
+- **Art. 172 — przeszkadzanie akcji ratowniczej:** przeszkadzanie
+  działaniu mającemu na celu zapobieżenie niebezpieczeństwu dla życia
+  lub zdrowia wielu osób albo mienia w wielkich rozmiarach. Kara:
+  3 miesiące-5 lat.
+
+Zweryfikowano online 2026-07-26 (lexlege.pl, przepisy.gofin.pl,
+dlajurysty.pl) — WERYFIKUJ aktualność na isap.sejm.gov.pl przed użyciem.
+
+---
+
 ## 7. INTEGRACJA Z SYSTEMEM
 
 - **`dr-01/mod-stany-nadzwyczajne-sytuacje-kryzysowe.md`** — ramy

@@ -199,7 +199,17 @@ NIE forma współudziału w czynie bazowym.
 | Nadużycie prawa do obrony (fałszywe oskarżenie obrońcy) | art. 236 §2 KK | do 3 lat |
 | Ujawnienie tożsamości świadka incognito | art. 241 §2/§3 KK | do 3 lat / do 5 lat |
 | Rozpowszechnianie wiadomości z rozprawy przy wyłączeniu jawności | art. 241 §1 KK | grzywna/ogr. wolności |
+| Bezprawne uwolnienie się (przez osobę pozbawioną wolności) | art. 242 KK | do 2 lat |
+| Uwolnienie lub ułatwienie ucieczki osoby pozbawionej wolności | art. 243 KK | do 3 lat |
+| Niestosowanie się do orzeczonych środków karnych (zakaz zawodu, prowadzenia pojazdów, zbliżania się itd.) | art. 244 KK | do 3 lat |
+| Niestosowanie się do zakazu wstępu na imprezę masową | art. 244a KK | do 3 lat |
+| Niestosowanie się do obowiązków środka zabezpieczającego (w tym udaremnienie elektronicznej kontroli miejsca pobytu) | art. 244b KK | do 2 lat |
 | Niedopełnienie obowiązku zawiadomienia o przestępstwie (funkcjonariusz) | art. 231 §1 KK (nadużycie funkcji, szerszy zakres) | do 3 lat |
+
+> ⚠️ Art. 242-244b dodane 2026-07-26 (audyt pełnego systemu T8 — tytuł
+> modułu deklarował "art. 233-244b", te przepisy wcześniej nie były
+> wspomniane w treści wcale). Zweryfikowano online 2026-07-26 (lexlege.pl,
+> prawnik.cc, arslege.pl) — WERYFIKUJ aktualność na isap.sejm.gov.pl.
 
 ⚠️ WSZYSTKIE zagrożenia do potwierdzenia na isap.sejm.gov.pl przed
 użyciem w piśmie (PRAWO-HARDGATE).

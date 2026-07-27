@@ -1,6 +1,6 @@
 ---
 name: dr-15-compliance-iso-governance-audyt
-version: 3.1
+version: 3.3
 description: |
   DR-15: Compliance, ISO, Governance, Audyt
   Jeden moduł = jeden akt prawny (Dz.U.) lub norma ISO / rozporządzenie UE.
@@ -51,7 +51,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   figurant/słup, zlecenie powiernicze (art. 734 i n. KC), Centralny Rejestr
   Beneficjentów Rzeczywistych (CRBR), ustawa AML art. 2 ust. 2 pkt 1)
   — kluczowe dla due diligence AML i compliance KYC
-## Moduły (9 łącznie — ✓ 9 OK, ☐ 0 STUB)
+## Moduły (10 łącznie — ✓ 10 OK, ☐ 0 STUB)
 
 ```
 PRAWO KRAJOWE — COMPLIANCE I NADZÓR:
@@ -65,6 +65,15 @@ PRAWO KRAJOWE — COMPLIANCE I NADZÓR:
                kanał wewnętrzny, zgłoszenia zewnętrzne do RPO, ujawnienie publiczne,
                ochrona przed działaniami odwetowymi, obowiązki pracodawcy ≥ 50 prac.,
                rejestr zgłoszeń, odpowiedzialność karna za odwet i ujawnienie tożsamości)
+
+  [✓] OK    mod-ustawa-antykorupcyjna-1997-ograniczenia
+              (Dz.U. 2025 poz. 499 t.j. ze zm.; ustawa z 21.08.1997 r.;
+               ograniczenie prowadzenia działalności gospodarczej przez osoby
+               pełniące funkcje publiczne, oświadczenia majątkowe, wygaśnięcie
+               mandatu jako sankcja administracyjno-ustrojowa — NIE karna,
+               z wyjątkiem wąskiego art. 15 dot. nielegalnego zatrudnienia;
+               ⚠️ dodany 2026-07-16, zarejestrowany dopiero 2026-07-26 —
+               naprawiono niezarejestrowanie zgodnie z Regułą 2)
 
   [✓] OK    mod-PZP-zamowienia-obronne-bezpieczenstwa
               (Dz.U. 2024 poz. 1320 ze zm.;

@@ -4,8 +4,12 @@
 
 ## Akt prawny
 **Ustawa z 10.10.2002 r. o minimalnym wynagrodzeniu za pracę**
-- Tekst jednolity: **Dz.U. 2024 poz. 642**
-  ✅ VER: isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000642 [2026-05-31]
+- Tekst jednolity: **Dz.U. 2024 poz. 1773** (⚠️ POPRAWKA 2026-07-26,
+  FAZA 3E/ZASADA 14 — było błędnie "2024 poz. 642", nieaktualny/
+  nieprawidłowy numer; obwieszczenie Marszałka Sejmu z 27.11.2024,
+  publ. 3.12.2024. Potwierdzone bezpośrednio: isap.sejm.gov.pl
+  [WDU20240001773], gofin.pl, rynekzdrowia.pl, portaloswiatowy.pl)
+  ✅ VER: isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240001773 [2026-07-26]
 
 **Wysokość minimalnego wynagrodzenia: ZAWSZE weryfikuj aktualną przez:**
 ```
@@ -18,7 +22,13 @@ Rozporządzenie RM w sprawie wysokości minimalnego wynagrodzenia i minimalnej s
 ## Aktualne wartości (WERYFIKUJ — zmieniane co roku!)
 ```
 2025: 4666 zł brutto/mies. (od 01.01.2025) — minimalna stawka godzinowa: 30,50 zł
-2026: weryfikuj przez web_search przed cytowaniem!
+2026: 4806 zł brutto/mies. (od 01.01.2026, jedyna zmiana w roku — nie
+      przewidziano podwyżki w trakcie roku) — minimalna stawka godzinowa:
+      31,40 zł. ✅ ZWERYFIKOWANE 2026-07-26 (FAZA 3E/ZASADA 14): Rozp. RM
+      z 11.09.2025 r. (publ. 15.09.2025, Dz.U. 2025 poz. 1242) —
+      potwierdzone bezpośrednio treścią rozporządzenia (dziennikustaw.gov.pl,
+      Rząd 1) oraz gov.pl/MRPiPS (Rząd 1). WERYFIKUJ PONOWNIE, jeśli
+      używasz tego po ogłoszeniu ewentualnej korekty w trakcie 2026 r.
 ```
 
 ## Zakres

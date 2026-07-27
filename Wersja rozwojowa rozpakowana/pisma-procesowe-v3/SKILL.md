@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.15"
+version: "5.17"
 type: executive-pisma
 status: production
 description: |
@@ -592,7 +592,6 @@ Jeśli warunek aktywacji NIE jest spełniony — pomiń ten krok, przejdź do W1
 > W1.5 (braki krytyczne), W1.6 (MOD-RED-TEAM-WLASNY) i Checkpoint W1→W2:
 >
 > `view /mnt/skills/user/pisma-procesowe-v3/references/W1-SZCZEGOLY.md`
-
 
 
 ## ⛔⛔⛔ PRE-W2-VERIFICATION-GATE — BRAMKA OBOWIĄZKOWA PRZED W2 ⛔⛔⛔

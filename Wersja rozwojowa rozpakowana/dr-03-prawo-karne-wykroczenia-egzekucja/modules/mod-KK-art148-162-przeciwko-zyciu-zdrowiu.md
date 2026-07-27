@@ -18,17 +18,30 @@ START: Czy sprawca umyślnie spowodował śmierć człowieka?
 │
 └─ TAK → sprawdź OKOLICZNOŚCI KWALIFIKUJĄCE/UPRZYWILEJOWUJĄCE:
    │
-   ├─ Typ podstawowy (art. 148 §1) → 10-30 lat, 25 lat lub dożywocie
+   ├─ Typ podstawowy (art. 148 §1) → 10-30 lat pozbawienia wolności
+   │  lub dożywocie (⚠️ POPRAWKA 2026-07-26, F-15/MOD-PROPAGACJA-
+   │  NOWELIZACJI: USUNIĘTO "25 lat" — ta odrębna kategoria kary
+   │  ZNIESIONA reformą z 7.07.2022, Dz.U. 2022.2600, w życie 1.10.2023;
+   │  zastąpiona jednolitą karą terminową do 30 lat. Potwierdzone w 8+
+   │  źródłach: chmielniak.com.pl, hplegal.pl, weredynscy.pl,
+   │  jhcadwokaci.pl, durajreck.com, gov.pl [J. Kluza, Prokuratura i
+   │  Prawo], zzbudowlani.pl, lawyersoffice.pl)
    │
    ├─ Typ KWALIFIKOWANY (art. 148 §2) — jeśli sprawca działał:
    │  ze szczególnym okrucieństwem / w związku z wzięciem zakładnika,
    │  zgwałceniem, rozbojem / w wyniku motywacji zasługującej na
    │  szczególne potępienie / z użyciem broni palnej lub materiałów
-   │  wybuchowych → 12-30 lat, 25 lat lub dożywocie (surowsza dolna granica)
+   │  wybuchowych → 15-30 lat lub dożywocie (⚠️ POPRAWKA 2026-07-26:
+   │  było błędnie "12-30 lat, 25 lat" — dolna granica to 15 lat, nie
+   │  12, i bez odrębnej kary 25 lat; potwierdzone dosłownym brzmieniem
+   │  w lexlege.pl i arslege.pl: "podlega karze pozbawienia wolności na
+   │  czas nie krótszy od lat 15")
    │
    ├─ Typ SZCZEGÓLNIE KWALIFIKOWANY (art. 148 §3) — zabójstwo więcej niż
    │  jednej osoby jednym czynem, LUB sprawca był wcześniej prawomocnie
-   │  skazany za zabójstwo → 12-30 lat, 25 lat lub dożywocie
+   │  skazany za zabójstwo → 15-30 lat lub dożywocie (⚠️ ta sama
+   │  poprawka co §2 — §3 KK odsyła wprost do zagrożenia z §2, "karze
+   │  określonej w §2 podlega...")
    │
    ├─ Typ UPRZYWILEJOWANY — DZIECIOBÓJSTWO (art. 149 KK): matka zabija
    │  dziecko w okresie porodu, POD WPŁYWEM JEGO PRZEBIEGU → 3 m-ce –
@@ -268,8 +281,8 @@ Checklist praktyczny:
 
 | Typ | Przepis | Zagrożenie | Tryb |
 |---|---|---|---|
-| Zabójstwo podstawowe | art. 148 §1 | 10-30 lat / 25 lat / dożywocie | z urzędu |
-| Zabójstwo kwalifikowane | art. 148 §2-3 | 12-30 lat / 25 lat / dożywocie | z urzędu |
+| Zabójstwo podstawowe | art. 148 §1 | 10-30 lat / dożywocie (⚠️ usunięto "25 lat" — kategoria zniesiona 1.10.2023) | z urzędu |
+| Zabójstwo kwalifikowane | art. 148 §2-3 | 15-30 lat / dożywocie (⚠️ było błędnie "12-30 lat, 25 lat") | z urzędu |
 | Dzieciobójstwo | art. 149 | 3 m-ce – 5 lat | z urzędu |
 | Zabójstwo w afekcie | art. 148 §4 | 1-10 lat | z urzędu |
 | Eutanazja | art. 150 | 3 m-ce – 5 lat (możliwe odstąpienie) | z urzędu |

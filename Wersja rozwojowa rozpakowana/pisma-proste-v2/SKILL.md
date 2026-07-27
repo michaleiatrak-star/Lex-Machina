@@ -1,6 +1,6 @@
 ---
 name: pisma-proste-v2
-version: 2.6
+version: 2.7
 type: executive-pisma
 status: production
 description: |
@@ -245,7 +245,7 @@ Jeśli użytkownik nie podał wszystkich danych — zapytaj o brakujące
 | Pozew / apelacja do 7 500 zł | 400 zł | art. 27 pkt 4 KSCU |
 | Pozew / apelacja do 15 000 zł | 500 zł | art. 27 pkt 5 KSCU |
 | Pozew / apelacja do 20 000 zł | 750 zł | art. 27 pkt 6 KSCU |
-| Pozew / apelacja powyżej 20 000 zł | 5% WP (min. 200, max 200 000 zł) | art. 13 §2 KSCU |
+| Pozew / apelacja powyżej 20 000 zł | 5% WP, max 100 000 zł (⚠️ POPRAWKA 2026-07-27: było błędnie "200 000 zł", obniżone reformą z 25.07.2025) | art. 13 §2 KSCU |
 | EPU — nakaz zapłaty | 1,25% WP (min. 30 zł) | art. 19 §2b KSCU |
 | Odpowiedź na zawezwanie | brak | — |
 

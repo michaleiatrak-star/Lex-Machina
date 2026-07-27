@@ -83,6 +83,15 @@ SKARGA DO WSA na postanowienie ostateczne
 
 ```
 Zarzuty w egzekucji (art. 33 UPEA):       7 dni od doręczenia odpisu TW lub zajęcia
+                                          (⚠️ POTWIERDZONE 2026-07-27, Rząd 2B: lexlege.pl,
+                                          arslege.pl — reguła podstawowa poprawna;
+                                          UZUPEŁNIENIE: art. 33 §5 UPEA przewiduje
+                                          DODATKOWE, ALTERNATYWNE terminy "nie później
+                                          niż" dla sytuacji szczególnych — np. 30 dni od
+                                          wyegzekwowania obowiązku w całości, 7 dni od
+                                          doręczenia postanowienia o umorzeniu — sprawdź
+                                          §5 gdy standardowe doręczenie TW jest
+                                          niejednoznaczne lub sporne)
 Zażalenie na postanowienie:               7 dni od doręczenia postanowienia (adresat: patrz sekcja wyżej i `shared/ZAZALENIE-ADRESAT-GATE.md` — NIE zakładaj domyślnie sądu)
 Skarga na czynności egzekucyjne:          14 dni od czynności
 Skarga do WSA na postanowienie ostateczne: 30 dni od doręczenia

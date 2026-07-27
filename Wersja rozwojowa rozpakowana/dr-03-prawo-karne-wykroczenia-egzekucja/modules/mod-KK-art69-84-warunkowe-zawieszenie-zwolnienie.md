@@ -127,6 +127,23 @@ przesłanki jak przy zarządzeniu wykonania kary zawieszonej (rażące
 naruszenie porządku prawnego / popełnienie podobnego przestępstwa
 umyślnego w okresie próby).
 
+## 2.3 — DOMKNIĘCIE ZAKRESU: ART. 83-84 KK (dodano 2026-07-26, audyt
+pełnego systemu T8 — tytuł modułu deklarował "art. 69-84", treść
+kończyła się na art. 82)
+
+**Art. 83 KK — zwolnienie od reszty kary ograniczenia wolności.**
+Instytucja ANALOGICZNA do warunkowego zwolnienia, ale dla kary
+ograniczenia wolności (nie pozbawienia wolności). Przesłanki: skazany
+odbył ≥1/2 orzeczonej kary, przestrzegał porządku prawnego, sumiennie
+wykonywał wskazaną pracę, spełnił nałożone obowiązki i orzeczone środki
+karne/kompensacyjne/przepadek. Sąd MOŻE (nie musi) zwolnić od reszty
+kary, uznając ją za wykonaną — decyzja fakultatywna, nie automatyczna.
+
+**Art. 84 / 84a KK — zaliczenie okresu próby / przepis uchylony.**
+⚠️ [NIEWERYFIKOWANE — WYMAGA POTWIERDZENIA NA ISAP] treść dokładna
+art. 84 i status art. 84a (część źródeł wskazuje "uchylony") — nie
+zgaduj brzmienia, sprawdź `isap.sejm.gov.pl` przed użyciem w piśmie.
+
 ---
 
 ## 3. TABELA SZYBKIEGO ODCZYTU
@@ -138,6 +155,7 @@ umyślnego w okresie próby).
 | Warunkowe zwolnienie — recydywa 64§1 | odbyto ≥2/3 kary | sąd penitencjarny | 2-5 lat |
 | Warunkowe zwolnienie — recydywa 64§2 | odbyto ≥3/4 kary | sąd penitencjarny | 2-5 lat |
 | Warunkowe zwolnienie — dożywocie | odbyto ≥25 lat | sąd penitencjarny | 2-5 lat |
+| Zwolnienie od reszty kary ograniczenia wolności (art. 83) | odbyto ≥1/2 kary + warunki dodatkowe | sąd | fakultatywne, brak okresu próby |
 
 ⚠️ WSZYSTKIE progi do potwierdzenia na isap.sejm.gov.pl przed użyciem
 w piśmie procesowym (PRAWO-HARDGATE).

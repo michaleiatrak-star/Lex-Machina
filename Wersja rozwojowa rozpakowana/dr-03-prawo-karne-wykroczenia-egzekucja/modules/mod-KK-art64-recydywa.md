@@ -34,11 +34,26 @@ START: Czy sprawca był już wcześniej skazany?
    └─ 4. Czasowo: w ciągu 5 LAT od odbycia co najmniej 6 miesięcy
         poprzedniej kary
 
-   → Jeśli WSZYSTKIE 4 przesłanki spełnione → art. 64 §1 KK: sąd MOŻE
-     wymierzyć karę przewidzianą za przypisane przestępstwo w wysokości
-     do górnej granicy ustawowego zagrożenia zwiększonego o połowę
-     (fakultatywne zaostrzenie, nie obligatoryjne)
+   → Jeśli WSZYSTKIE 4 przesłanki spełnione → art. 64 §1 KK ma DWA
+     elementy, nie jeden (⚠️ POPRAWKA 2026-07-26, FAZA 3E/ZASADA 14 —
+     poprzednia wersja opisywała WYŁĄCZNIE element fakultatywny,
+     pomijając obowiązkowy — potwierdzone w lexlege.pl, arslege.pl,
+     przepisy.gofin.pl, infor.pl — 4 źródła zgodne co do dosłownego
+     brzmienia):
+     a) OBOWIĄZKOWY: sąd WYMIERZA karę w wysokości POWYŻEJ dolnej
+        granicy ustawowego zagrożenia — sąd NIE MOŻE orzec kary na
+        samej dolnej granicy ani poniżej niej (to nie jest fakultatywne)
+     b) FAKULTATYWNY: sąd MOŻE (nie musi) wymierzyć karę w wysokości do
+        górnej granicy ustawowego zagrożenia zwiększonego o połowę —
+        TYLKO ta górna, podwyższona granica jest opcjonalna
 ```
+
+⚠️ **Częsty błąd praktyczny:** traktowanie CAŁEJ instytucji z art. 64 §1
+jako "fakultatywnej" (skoro sąd "może" zaostrzyć) — w rzeczywistości
+punkt (a) jest OBOWIĄZKOWY: przy spełnieniu przesłanek recydywy sąd NIE
+MOŻE wymierzyć kary na zwykłej dolnej granicy zagrożenia, musi wyjść
+POWYŻEJ niej. Fakultatywność dotyczy WYŁĄCZNIE tego, czy sąd sięgnie aż
+do podwyższonej górnej granicy (+50%).
 
 ⚠️ **Przesłanka 3 (podobieństwo czynów) jest najczęstszym źródłem błędu**
 — art. 115 §3 KK definiuje przestępstwo podobne jako należące do tego
@@ -67,16 +82,27 @@ START: Czy sprawca spełnia przesłanki recydywy z §1 (patrz DRZEWO R.1)
    powszechnemu, przy użyciu przemocy lub groźby jej użycia (katalog
    zamknięty rodzajowo — węższy niż w §1)
 
-   → Jeśli spełnione → art. 64 §2 KK: sąd WYMIERZA karę powyżej DOLNEJ
-     granicy ustawowego zagrożenia (obligatoryjne podwyższenie minimum,
-     nie fakultatywne jak w §1), a może wymierzyć do górnej granicy
-     zwiększonej o połowę
+   → Jeśli spełnione → art. 64 §2 KK: sąd WYMIERZA karę W CAŁYM
+     PRZEDZIALE OD dolnej granicy ustawowego zagrożenia ZWIĘKSZONEJ O
+     POŁOWĘ DO górnej granicy zwiększonej o połowę — ⚠️ POPRAWKA
+     2026-07-26 (FAZA 3E/ZASADA 14, potwierdzone lexlege.pl/arslege.pl):
+     to NIE jest "zwykła dolna granica + opcjonalna górna" jak w §1 —
+     w §2 OBIE granice przedziału są podwyższone o połowę i CAŁY ten
+     podwyższony przedział jest obligatoryjny (nie ma tu elementu
+     fakultatywnego analogicznego do §1)
 ```
 
-⚠️ **Różnica kluczowa §1 vs §2:** w §1 zaostrzenie górnej granicy jest
-FAKULTATYWNE ("sąd może"); w §2 podwyższenie DOLNEJ granicy jest
-OBLIGATORYJNE ("sąd wymierza karę powyżej dolnej granicy") — to częsty
-błąd w pismach, gdzie oba reżimy są traktowane jednakowo.
+⚠️ **Różnica kluczowa §1 vs §2 (POPRAWIONA 2026-07-26):** w §1 sąd musi
+wyjść POWYŻEJ zwykłej dolnej granicy (element obowiązkowy), a MOŻE (nie
+musi) sięgnąć aż do podwyższonej górnej granicy (+50%, element
+fakultatywny) — mieszany reżim obowiązkowo-fakultatywny. W §2 CAŁY
+przedział kary jest przesunięty w górę o połowę na OBU końcach i jest
+to w całości OBLIGATORYJNE — sąd nie ma tu żadnej dyskrecji analogicznej
+do fakultatywnego elementu z §1. To istotnie surowszy reżim niż samo
+"podwyższenie minimum" — poprzednia wersja tej sekcji myliła to z logiką
+§1, sugerując że §2 ma swój własny element fakultatywny (górna granica),
+podczas gdy w §2 GÓRNA granica podwyższona o połowę jest sufitem
+OBOWIĄZKOWEGO przedziału, nie opcją analogiczną do §1.
 
 ---
 

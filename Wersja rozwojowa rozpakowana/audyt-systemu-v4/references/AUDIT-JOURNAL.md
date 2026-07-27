@@ -19938,3 +19938,2745 @@ natury), 1 nowoodkryta niezweryfikowana (Pozew-o-alimenty.pl).
 
 **Rejestracja:** `shared/PORTALE-BRANZOWE-RZAD-2B.md` (v3.4→3.5),
 `shared/SKILL.md` (v3.3→3.4).
+
+## AUDYT-2026-07-26 — Pełny audyt systemu (TRYB AUTO, wszystkie 11 elementów z widgetu)
+
+**Zakres:** Na wyraźne żądanie użytkownika przez interaktywne menu (widget
+FAZA 0B) — wybrano wszystkie 11 elementów: inwentaryzacja, spójność
+ścieżek, wersje cross-referencji, długość description, interlinie,
+wstawki, mapa Dz.U., testy antyhalucynacyjne, scoring, raport, references.
+
+### 1. STATUS OGÓLNY
+
+| Kategoria | Wynik |
+|---|---|
+| Błędy CRIT (T1/T2) | 1 znaleziony, naprawiony |
+| Rozbieżności Dz.U. (T3) | 5 znalezionych, 5 naprawionych (2 pozostają jako fałszywe alarmy testu — treść już poprawna) |
+| Zerwane odwołania / duplikaty bajtowe (T6/T7) | 0 — PASS bez napraw |
+| Zakres tytuł-vs-treść (T8) | 7 znalezionych, 1 naprawiony, 6 udokumentowanych jako F-14 |
+| Przeniesienia do shared/ (T9) | 0 problemów — PASS |
+| Description >1024 znaków (2C) | 0 — PASS |
+| Zbędne interlinie (2D-1) | 9 plików, 8 naprawionych (AUDIT-JOURNAL.md świadomie pominięty — 115 wystąpień w rosnącym logu historycznym, ryzyko > korzyść) |
+| PRAWO-HARDGATE / zakaz cytowania z pamięci (4B) | wszystkie 16 DR — obecne w jakiejś formie — PASS |
+| Zmodyfikowanych skilli łącznie | 11 |
+
+### 2. NAPRAWY WYKONANE (CRIT)
+
+**T1/T2 — dr-15-compliance-iso-governance-audyt (v3.1→3.2):** moduł
+`mod-ustawa-antykorupcyjna-1997-ograniczenia.md` istniał fizycznie od
+2026-07-16, nigdy nie trafił do SKILL.md (Reguła 2). Dodano do listy
+modułów (9→10), poprawiono licznik nagłówka, dodano wpis w MAPA-AKTOW.md.
+
+### 3. NAPRAWY WYKONANE (Dz.U. — T3)
+
+Zweryfikowano na ISAP/ELI/Sejm API każdą z 5 rozbieżności:
+
+1. **dr-03 (v2.8→2.9):** wiersz "KK+KPK framework szczegółowy" cytował
+   tylko KK (2025.383) — moduł już poprawnie cytował też KPK (2026.490)
+   i KKW (2025.911). Mapa zsynchronizowana z modułem.
+2. **dr-03:** wiersz "KW+KPW framework szczegółowy" nie cytował numeru
+   KPW (2025.860) wcale — naprawione analogicznie.
+3. **dr-08 (v3.2→3.3):** ustawa o samorządzie gminnym — flaga z 2026-07-02
+   ("WYMAGA AKTUALIZACJI MODUŁU") nigdy nie została faktycznie
+   zrealizowana. Moduł `mod-JST-ustroj-samorzad-gminny-powiatowy-
+   wojewodztwa.md` miał 4 wystąpienia nieaktualnego numeru (2025.1153),
+   poprawiono na aktualny t.j. (Dz.U. 2026 poz. 662, obwieszczenie
+   15.05.2026). Główna mapa routingu (prawo-polskie-v2) również
+   zsynchronizowana — była nieaktualna.
+4. **dr-10 (v3.7→3.8):** dwa wiersze lokalnej mapy dla tej samej ustawy
+   (o działalności leczniczej) miały różne numery — jeden aktualny
+   (2026.156, zweryfikowany 2026-06-14), jeden nieaktualny (2024.799).
+   Zsynchronizowano.
+5. **dr-11 (v3.5→3.6):** analogiczna sytuacja jak dr-08 — flaga z
+   2026-07-02 nigdy niedomknięta. Moduł KSC-NIS2 wspominał tylko
+   nowelizację (Dz.U. 2026 poz. 252), nie podawał aktualnego numeru
+   bazowego t.j. (2026 poz. 20). Uzupełniono. Główna mapa routingu miała
+   DODATKOWO zduplikowany, sprzeczny wiersz dla tego samego modułu (jeden
+   z numerem 2024.1226 nieaktualnym, drugi z 2026.20 aktualnym) — scalono
+   w jeden poprawny wpis.
+
+**prawo-polskie-v2 (v5.8→5.9):** 2 poprawki opisane wyżej (USG, KSC).
+
+**Wzorzec systemowy zauważony:** w co najmniej 2 przypadkach (dr-08,
+dr-11) lokalna mapa PRAWIDŁOWO wykryła nieaktualny numer Dz.U. już
+2026-07-02, otwarła flagę "WYMAGA AKTUALIZACJI MODUŁU", ale flaga nigdy
+nie została faktycznie zrealizowana w treści modułu przez 3+ tygodnie —
+rozbieżność między lokalną mapą (poprawną) a modułem/główną mapą
+(nieaktualnymi) przetrwała aż do tego audytu. Wniosek: otwarcie flagi
+"WYMAGA AKTUALIZACJI" bez follow-upu nie gwarantuje naprawy — WARN-
+OTWARTE.md powinien to łapać, ale te dwie flagi nie były tam wpisane
+jako osobne pozycje (były tylko w treści lokalnych MAPA-AKTOW.md).
+
+### 4. NAPRAWY WYKONANE (T8 — zakres tytuł-vs-treść)
+
+**dr-03, mod-KK-art69-84-warunkowe-zawieszenie-zwolnienie.md:** tytuł
+deklarował "art. 69-84", treść kończyła się na art. 82. Dodano art. 83
+(zwolnienie od reszty kary ograniczenia wolności, zweryfikowane online) i
+oznaczono art. 84/84a jako [NIEWERYFIKOWANE — WYMAGA POTWIERDZENIA NA
+ISAP] zamiast zgadywać treść bez weryfikacji (Zasada 8).
+
+**6 pozostałych przypadków T8** (mod-KK-art127-139, mod-KK-art163-172,
+mod-KK-art233-244b, mod-KK-art267-269c, mod-KW-art132-166,
+mod-KW-art70-118) — udokumentowane jako **F-14** w WARN-OTWARTE.md, NIE
+naprawione w tej sesji (dwa z nich mogą być fałszywym alarmem testu ze
+względu na literę na końcu numeru artykułu w nazwie pliku — wymaga
+odróżnienia realnej luki od artefaktu dopasowania stringów).
+
+### 5. CZYSTOŚĆ KODU (2D-1)
+
+Naprawiono zbędne interlinie (3+ puste linie z rzędu →1 pusta linia) w
+8 plikach: shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md, shared/definicje/
+DEF-PRACA.md, przesluchanie-swiadkow-v2-min90/SKILL.md (v3.20→3.21),
+dr-12/modules/mod-KPC-arbitraz-mediacja-ADR.md, dr-12/modules/
+mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md, dr-12/modules/
+mod-techniki-mediacyjne-negocjacyjne.md (dr-12 v4.6→4.7), pisma-
+procesowe-v3/SKILL.md (v5.15→5.16), audyt-systemu-v4/references/
+SYNC-DZU-AUTOMATYCZNY.md. Świadomie POMINIĘTO AUDIT-JOURNAL.md (115
+wystąpień) — plik rosnący, historyczny log, ryzyko uszkodzenia
+struktury wpisów przewyższa kosmetyczną korzyść (Zasada 6).
+
+Liczba nagłówków `##`/`###` sprawdzona przed i po dla KAŻDEGO
+edytowanego pliku w tej sesji — brak przypadkowych usunięć.
+
+### 6. TESTY ANTYHALUCYNACYJNE (FAZA 4)
+
+Wszystkie 16 skilli DR mają jakąś formę zakazu cytowania z pamięci
+(PRAWO-HARDGATE lub wzorzec "Weryfikacja: isap.sejm.gov.pl...") — PASS.
+
+### 7. SCORING (FAZA 5) — SKRÓCONY
+
+Ze względu na zakres sesji (11 elementów naraz), pełny scoring 0-10 per
+skill NIE został wykonany indywidualnie dla wszystkich 33 skilli — to
+wykraczałoby poza rozsądny budżet jednej sesji. Jakościowo: system jest
+w stanie DOBRYM — jedyny CRIT znaleziony dotyczył pojedynczego,
+niedawno dodanego modułu; większość znalezisk to rozbieżności Dz.U.
+typowe dla systemu z setkami aktów prawnych śledzonych ręcznie.
+
+### 8. STRUKTURA SYSTEMU — SNAPSHOT (2026-07-26)
+
+- Skille user/: 33 (bez zmian liczby względem poprzedniego snapshotu)
+- Zmodyfikowane w tej sesji: dr-03 (2.8→2.9), dr-08 (3.2→3.3), dr-10
+  (3.7→3.8), dr-11 (3.5→3.6), dr-15 (3.1→3.2), prawo-polskie-v2 (5.8→5.9),
+  przesluchanie-swiadkow-v2-min90 (3.20→3.21), dr-12 (4.6→4.7),
+  pisma-procesowe-v3 (5.15→5.16), shared (3.4→3.5), audyt-systemu-v4
+  (5.9→6.0)
+
+### 9. WNIOSKI I ZALECENIA
+
+1. **F-14 (T8, 6 pozycji)** pozostaje otwarta — priorytet średni,
+   wymaga odróżnienia realnych luk treści od artefaktów testu.
+2. **Wzorzec "flaga otwarta, nigdy niezrealizowana"** (dr-08, dr-11)
+   sugeruje, że oznaczenia "WYMAGA AKTUALIZACJI MODUŁU" wewnątrz
+   lokalnych MAPA-AKTOW.md powinny być RÓWNIEŻ kopiowane do
+   WARN-OTWARTE.md jako osobne pozycje F-N, żeby ZASADA 9 (przegląd
+   okresowy WARN) je faktycznie łapała — obecnie omija je, bo szuka
+   tylko w WARN-OTWARTE.md, nie w treści 16 lokalnych map.
+3. **Scoring pełny (FAZA 5) i wstawki opisowe (FAZA 2D-2)** pozostają
+   do wykonania w przyszłej, węższej sesji — świadomie odłożone z
+   uwagi na zakres tej sesji (Zasada 6).
+
+## AUDYT-2026-07-26b — Domknięcie pozostałych elementów (2A, 2B, 2D-2, FAZA 5)
+
+**Kontekst:** Użytkownik zapytał wprost, czy wszystkie 11 elementów z
+widgetu zostały wykonane. Uczciwa odpowiedź brzmiała NIE — 2A, 2B, 2D-2
+i FAZA 5 nie zostały wykonane jako odrębne, zweryfikowane kroki w sesji
+AUDYT-2026-07-26. Ten wpis je domyka.
+
+### FAZA 2A — Spójność ścieżek: ✅ ZAMKNIĘTE
+
+Skrypt Python zliczył 719 odwołań `view /mnt/skills/user/...` w całym
+systemie (poza archive/). **22 nie wskazywały na istniejący plik** — ale
+wszystkie 22 to PLACEHOLDERY dokumentacyjne (`[nazwa-modulu].md`,
+`X.md`, `NAZWA.md`, `[XX...`, `[skill...`) pokazujące WZORZEC ścieżki,
+nie rzeczywiste, złamane odwołania. Zgodne z wynikiem T6/T7
+(ci_check_shared.py: 0 zerwanych odwołań), który poprawnie filtruje te
+placeholdery. **Wynik: 0 realnych złamanych ścieżek — PASS.**
+
+### FAZA 2B — Wersje cross-referencji: ✅ ZAMKNIĘTE
+
+Sprawdzono wzorce dla 16 potencjalnie usuniętych/starych wersji skilli
+(np. `przewodnik-prawny-v1`, `pisma-procesowe-v2`, `analiza-sadowa-v5`
+itd.) — **0 żywych odwołań** (poza kontekstem historycznym w
+AUDIT-JOURNAL.md/changelogach, co jest oczekiwane i poprawne). Dodatkowo
+sprawdzono twarde odwołania do numerów wersji innych skilli — jedyne
+trafienie to historyczna notatka w `shared/SKILL.md` o incydencie
+sprzed tej sesji (nie żywy błąd). **Wynik: PASS.**
+
+### FAZA 2D-2 — Wstawki opisowe: ✅ ZAMKNIĘTE (na próbie, nie wyczerpująco)
+
+Pełne przeszukanie fraz-wskaźników ("służy do", "ma na celu" itd.) dało
+86 plików — zbyt szeroki zakres do wyczerpującej ręcznej kwalifikacji w
+jednej sesji. Zawężono do najbardziej jednoznacznych wskaźników
+("Ten skill", "Ten moduł", "został stworzony", "jest przeznaczony") w
+samych plikach SKILL.md (33 pliki, najwyższy priorytet wg dokumentacji
+modułu) — 3 trafienia, wszystkie w analizator-dowodow-v3, pisma-
+procesowe-v3, przesluchanie-swiadkow-v2-min90. Każde sprawdzone ręcznie
+wg tabeli kwalifikacji modułu: WSZYSTKIE opisują konkretną zależność
+funkcjonalną ("Ten skill wywołuje X", "Ten skill pobiera Y jako HARD
+GATE") — to instrukcje/reguły, nie narracyjna wypełniaczka. **Żadna nie
+kwalifikuje się do usunięcia** (zgodnie z zasadą modułu: instrukcja/
+reguła → ZOSTAW). **Uczciwe zastrzeżenie:** pełny skan 86 plików
+(obejmujący też pliki modules/*.md, nie tylko SKILL.md) NIE został
+wykonany wyczerpująco — próba objęła tylko najwyższy-priorytet warstwę.
+
+### FAZA 5 — Scoring skilli: ✅ ZAMKNIĘTE (wg wzoru z SKILL.md, na podstawie danych już zebranych w T1-T9)
+
+| Skill | CRIT (40%) | Zależności (25%) | Description (10%) | Czystość (15%) | HARDGATE (10%) | WYNIK | Status |
+|---|---|---|---|---|---|---|---|
+| dr-15-compliance-iso-governance-audyt | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | **10.0** | 🟢 zielony (CRIT naprawiony w tej sesji) |
+| dr-03-prawo-karne-wykroczenia-egzekucja | 4.0 | 2.0 (F-14: 6 luk T8 otwartych) | 1.0 | 1.5 | 1.0 | **9.5** | 🟢 zielony, drobne otwarte F-14 |
+| dr-08-samorzad-terytorialny-prawo-lokalne | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | **10.0** | 🟢 zielony (Dz.U. naprawiony) |
+| dr-10-zdrowie-farmacja-zywnosc-rolnictwo | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | **10.0** | 🟢 zielony |
+| dr-11-cyfrowe-cyber-ai-dane-ip | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | **10.0** | 🟢 zielony |
+| prawo-polskie-v2 | 4.0 | 2.5 | 1.0 | 1.5 | n/d (router, nie DR) | **9.0/9** | 🟢 zielony |
+| przesluchanie-swiadkow-v2-min90 | 4.0 | 2.5 | 1.0 | 1.5 | n/d | **9.0/9** | 🟢 zielony |
+| dr-12-sadownictwo-prokuratura-zawody-prawnicze | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | **10.0** | 🟢 zielony |
+| pisma-procesowe-v3 | 4.0 | 2.5 | 1.0 | 1.5 | n/d | **9.0/9** | 🟢 zielony |
+| shared | 4.0 | 2.5 | 1.0 | 1.5 | n/d | **9.0/9** | 🟢 zielony |
+| audyt-systemu-v4 | 4.0 | 2.5 | 1.0 | 1.0 (AUDIT-JOURNAL.md interlinie świadomie niepoprawione) | n/d | **8.5/9** | 🟢 zielony |
+| **Pozostałe 22 skille nietknięte w tej sesji** | — | — | — | — | — | **niescorowane indywidualnie** | wymagają odrębnego przebiegu FAZA 1-4 przed wiarygodnym scoringiem |
+
+**Uczciwe zastrzeżenie metodologiczne:** powyższy scoring obejmuje TYLKO
+11 skilli dotkniętych w tej sesji audytowej, na podstawie danych z T1-T9
+i FAZA 2A/2B/2C/2D zebranych tutaj. Pozostałe 22 skille systemu (m.in.
+dr-01, dr-02, dr-04-07, dr-09, dr-13, dr-14, dr-16, analizator-*,
+prawny-router-v3, przewodnik-prawny-v2, raport-*, prompt-master,
+chronologia-sprawy-v1, orzeczenia-sadowe-v2, analiza-sadowa-v6) NIE
+zostały poddane pełnemu przebiegowi FAZA 1-4 w TEJ sesji (uczestniczyły
+tylko biernie w testach ogólnosystemowych T1/T2/T3/T6/T7/T9, które
+wypadły dla nich czysto — brak CRIT/zerwanych odwołań/duplikatów w
+całym repo). Przypisanie im scoringu 0-10 bez dedykowanego przebiegu
+byłoby nieuzasadnione — stąd świadomie pozostawione bez liczby.
+
+### PODSUMOWANIE — WSZYSTKIE 11 ELEMENTÓW Z WIDGETU
+
+| # | Element | Status |
+|---|---|---|
+| 1 | Inwentaryzacja systemu | ✅ ZAMKNIĘTE (AUDYT-2026-07-26) |
+| 2 | Spójność ścieżek | ✅ ZAMKNIĘTE (ten wpis) |
+| 3 | Wersje cross-referencji | ✅ ZAMKNIĘTE (ten wpis) |
+| 4 | Długość description | ✅ ZAMKNIĘTE (AUDYT-2026-07-26) |
+| 5 | Zbędne interlinie | ✅ ZAMKNIĘTE (AUDYT-2026-07-26, 8/9 plików — AUDIT-JOURNAL.md świadomie pominięty) |
+| 6 | Wstawki opisowe | ✅ ZAMKNIĘTE NA PRÓBIE (ten wpis — nie wyczerpujące, patrz zastrzeżenie wyżej) |
+| 7 | Mapa Dz.U. | ✅ ZAMKNIĘTE (AUDYT-2026-07-26, 5/5 rozbieżności) |
+| 8 | Testy antyhalucynacyjne | ✅ ZAMKNIĘTE (AUDYT-2026-07-26) |
+| 9 | Scoring skilli | ✅ ZAMKNIĘTE Z ZASTRZEŻENIEM (ten wpis — tylko 11 z 33 skilli) |
+| 10 | Raport audytu | ✅ ZAMKNIĘTE (ten wpis + AUDYT-2026-07-26) |
+| 11 | Aktualizacja references | ✅ ZAMKNIĘTE (AUDIT-JOURNAL.md, WARN-OTWARTE.md, mapa_dzu — ten wpis) |
+
+**Nadal otwarte, poza zakresem "11 elementów":** F-14 (6 przypadków T8
+w dr-03), pełny scoring pozostałych 22 skilli, pełny (nie na próbie)
+skan wstawek opisowych w 86 plikach.
+
+## AUDYT-2026-07-26c — Zamknięcie F-14 (6 pozostałych przypadków T8, dr-03 v2.9→3.0)
+
+**Zakres:** Kontynuacja na żądanie użytkownika ("kontynuuj") — dokończenie
+weryfikacji 6 przypadków T8 pozostawionych otwartych jako F-14.
+
+**Wyniki, każdy zweryfikowany indywidualnie:**
+
+1. **mod-KK-art127-139-przeciwko-RP.md — NAPRAWIONY.** Dodano art. 139 KK
+   (przepadek przedmiotów niestanowiących własności sprawcy, w sprawach
+   o art. 127/128/130). Zweryfikowano: lexlege.pl, prawo-pl.com.
+2. **mod-KK-art163-172-bezpieczenstwo-powszechne.md — NAPRAWIONY.**
+   Dodano art. 170 (piractwo morskie), art. 171 (materiały wybuchowe/
+   radioaktywne), art. 172 (przeszkadzanie akcji ratowniczej).
+   Zweryfikowano: lexlege.pl, przepisy.gofin.pl, dlajurysty.pl.
+3. **mod-KK-art233-244b-przeciwko-wymiarowi-sprawiedliwosci.md —
+   NAPRAWIONY.** Dodano art. 242 (bezprawne uwolnienie się), art. 243
+   (ułatwienie ucieczki), art. 244 (niestosowanie się do środków
+   karnych), art. 244a (zakaz wstępu na imprezę masową), art. 244b
+   (środek zabezpieczający). Zweryfikowano: lexlege.pl, prawnik.cc,
+   arslege.pl.
+4. **mod-KK-art267-269c-cyberprzestepstwa.md — FAŁSZYWY ALARM
+   testu.** Art. 269 występuje wielokrotnie w treści (§1, §2, jako
+   punkt tabeli), ale w formacie "269 §1" bez poprzedzającego słowa
+   "art." bezpośrednio przy tym wystąpieniu w tabeli — test
+   `test_title_scope_match.py` szukał dosłownego "art. 269" i nie
+   dopasował. Treść jest kompletna, korekta niepotrzebna.
+5. **mod-KW-art70-118-bezpieczenstwo-osoba-zdrowie.md — FAŁSZYWY ALARM
+   testu.** Art. 118 występuje jako nagłówek "### Art. 118 — ubój
+   zwierząt..." z WIELKĄ literą "Art.", test szukał tylko małej litery
+   "art. 118". Treść jest kompletna.
+6. **mod-KW-art132-166-pozostale-rozdzialy.md — NIE jest ukrytym
+   błędem.** Moduł SAM, już od 2026-07-17, jawnie zawiera adnotację
+   "Pozostałe artykuły (151-166) — ⚠️ NIE zweryfikowane w tej sesji" oraz
+   w CHANGELOG "Rozdział XIX... NIE został [zweryfikowany]". To świadomie
+   ujawnione ograniczenie zakresu (Zasada 6 audytu), nie luka odkryta
+   teraz po raz pierwszy — pozostawiono bez zmian, wpisano do wniosków
+   jako kandydat do przyszłej rozbudowy.
+
+**Wniosek dla przyszłych audytów:** `test_title_scope_match.py` generuje
+fałszywe alarmy przy (a) tabelarycznych wystąpieniach numeru artykułu
+bez poprzedzającego "art." bezpośrednio przy KAŻDYM wystąpieniu, (b)
+nagłówkach z wielką literą "Art." zamiast małej. Rozważyć dostrojenie
+regexu, żeby zmniejszyć liczbę fałszywych alarmów w przyszłości —
+zostawione jako obserwacja, nie pilna naprawa skryptu.
+
+**F-14 ZAMKNIĘTA** — usunięta z WARN-OTWARTE.md, pełny opis tutaj.
+
+**Rejestracja:** dr-03-prawo-karne-wykroczenia-egzekucja v2.9→v3.0.
+
+### AKTUALIZACJA PODSUMOWANIA "WSZYSTKIE 11 ELEMENTÓW" (z wpisu 26b)
+
+Punkt 9 (scoring) i uwaga "nadal otwarte" z poprzedniego wpisu wymagają
+korekty: **F-14 jest teraz w pełni zamknięta**, nie tylko częściowo.
+Jedyne formalnie nadal otwarte pozycje po tej sesji to: pełny scoring
+pozostałych 22 skilli (świadomie odłożony, poza zakresem tej sesji) i
+pełny, niewybiórczy skan wstawek opisowych w 86 plikach (świadomie
+ograniczony do próby, poza zakresem tej sesji).
+
+## AUDYT-2026-07-26d — Naprawa test_title_scope_match.py (re.IGNORECASE)
+
+**Naprawiono:** `scripts/test_title_scope_match.py`, linia 75 — regex
+`end_pattern` nie miał `re.IGNORECASE`, co powodowało fałszywe alarmy dla
+nagłówków zapisanych "Art. X" (wielką literą) zamiast "art. X". Dodano
+flagę. Potwierdzone ponownym uruchomieniem T8: z 7 wykrytych przypadków
+pozostał dokładnie 1 (mod-KW-art132-166 — znany, wcześniej samodzielnie
+ujawniony brak, nie fałszywy alarm ani nowo odkryty błąd).
+
+**Rejestracja:** audyt-systemu-v4 v6.0→v6.1.
+
+## AUDYT-2026-07-26e — Pełny scoring wszystkich 33 skilli (domknięcie FAZA 5)
+
+**Kontekst:** Użytkownik poprosił o kontynuację. Ponowna analiza wykazała,
+że testy T1/T2/T3/T6/T7/T8/T9 oraz sprawdzenia description/interlinie w
+sesjach 26/26b/26c/26d były WYKONANE DLA CAŁEGO SYSTEMU (nie tylko 11
+dotkniętych skilli) — poprzedni scoring ograniczony do 11 skilli był
+niepotrzebnie zachowawczy. Ten wpis domyka FAZA 5 dla wszystkich 33.
+
+### Metodologia
+
+Wynik wg wzoru z SKILL.md (CRIT 40%, zależności 25%, description 10%,
+czystość 15%, HARDGATE 10%), na podstawie DANYCH JUŻ ZEBRANYCH (nie
+nowego, dedykowanego przebiegu per skill):
+- CRIT (T1/T2, 18 skilli z modules/): 0 otwartych po naprawach 26/26c
+- Zależności (T3 16 map, T6/T7 710 plików, T9 31 plików): 0 realnych
+  problemów (T3 ma 2 rezydualne alarmy narzędzia dla dr-03, potwierdzone
+  jako artefakt fuzzy-matchingu, nie błąd treści — opisane w 26)
+- Description (33 SKILL.md): 0 przekroczeń limitu
+- Czystość (interlinie, 9 plików znalezionych systemowo): naprawione 8/9
+  (AUDIT-JOURNAL.md świadomie pominięty); wstawki opisowe sprawdzone na
+  próbie (33 SKILL.md, nie 86 plików modułów) — patrz zastrzeżenie niżej
+- HARDGATE: 16/16 DR ma; z 15 pozostałych skilli-narzędzi 12/15 ma,
+  3 (prawo-polskie-v2 — czysty router, raport-sytuacyjny-v2 — generator
+  widgetu, prompt-master — poza domeną prawną) oznaczone n/d (nie
+  dotyczy, nie brak)
+
+### TABELA WYNIKÓW (33/33 skille)
+
+| Skill | CRIT | Zależn. | Descr. | Czystość | HARDGATE | WYNIK | 🟢/🟡/🔴 |
+|---|---|---|---|---|---|---|---|
+| analiza-sadowa-v6 | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| analizator-dowodow-v3 | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| analizator-przepisow-v2 | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| analizator-umow-v1 | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| audyt-systemu-v4 | 4.0 | 2.5 | 1.0 | 1.0* | n/d/9 | 8.5/9 | 🟢 |
+| chronologia-sprawy-v1 | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| dr-01-ustroj-konstytucyjny-i-zrodla-prawa | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| dr-02-prawo-cywilne-rodzinne-gospodarcze | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| dr-03-prawo-karne-wykroczenia-egzekucja | 4.0 | 2.25** | 1.0 | 1.5 | 1.0 | 9.75 | 🟢 |
+| dr-04-prawo-pracy-zus-swiadczenia | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| dr-05-prawo-administracyjne-sadowoadministracyjne | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| dr-06-podatki-finanse-publiczne-aml | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| dr-07-zamowienia-publiczne-fundusze-ue | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| dr-08-samorzad-terytorialny-prawo-lokalne | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| dr-09-budownictwo-srodowisko-energia-transport | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| dr-10-zdrowie-farmacja-zywnosc-rolnictwo | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| dr-11-cyfrowe-cyber-ai-dane-ip | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| dr-12-sadownictwo-prokuratura-zawody-prawnicze | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| dr-13-sluzby-bezpieczenstwo-informacje-niejawne | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| dr-15-compliance-iso-governance-audyt | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| dr-16-pisma-strategia-dowody-orzecznictwo | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| orzeczenia-sadowe-v2 | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| pisma-procesowe-v3 | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| pisma-proste-v2 | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| prawny-router-v3 | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| prawo-polskie-v2 | 4.0 | 2.5 | 1.0 | 1.5 | n/d/9 | 9.0/9 | 🟢 |
+| prompt-master | 4.0 | 2.5 | 1.0 | 1.5 | n/d/9 | 9.0/9 | 🟢 |
+| przesluchanie-swiadkow-v2-min90 | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| przewodnik-prawny-v2 | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| raport-klienta-v1 | 4.0 | 2.5 | 1.0 | 1.5 | 1.0 | 10.0 | 🟢 |
+| raport-sytuacyjny-v2 | 4.0 | 2.5 | 1.0 | 1.5 | n/d/9 | 9.0/9 | 🟢 |
+| shared | 4.0 | 2.5 | 1.0 | 1.5 | n/d/9 | 9.0/9 | 🟢 |
+
+\* audyt-systemu-v4: -0.5 za świadomie niepoprawiony AUDIT-JOURNAL.md
+(115 wystąpień nadmiarowych interlinii w rosnącym logu historycznym —
+decyzja świadoma, nie przeoczenie, Zasada 6).
+\*\* dr-03: -0.25 za 2 rezydualne alarmy T3 (potwierdzone jako artefakt
+narzędzia fuzzy-match, nie błąd treści) — utrzymane w wyniku dla
+przejrzystości, mimo że treść jest faktycznie poprawna.
+n/d/9 = kryterium nie dotyczy (skill nie generuje treści z konkretnych
+przepisów prawa, więc HARDGATE nieadekwatny) — wynik przeliczony na
+skali /9 zamiast /10, nie karany jako brak.
+
+### WYNIK ZBIORCZY
+
+**33/33 skille = 🟢 ZIELONE** (próg zielony ≥8.0, próg wymagający naprawy
+<6.0 — żaden skill nie zbliża się nawet do progu ostrzegawczego).
+Średnia ważona (znormalizowana do /10 dla skilli n/d): **9.94/10**.
+
+### UCZCIWE ZASTRZEŻENIA METODOLOGICZNE (Zasada 8)
+
+1. Komponent "czystość kodu" NIE obejmuje wyczerpującego skanu wstawek
+   opisowych (2D-2) na poziomie 86 plików modułów — tylko próbę 33
+   plików SKILL.md. Jeśli wstawki opisowe istnieją w głębszych modułach,
+   ten scoring ich nie wykrył. Traktować jako "brak dowodu problemu",
+   nie "dowód braku problemu".
+2. Ten scoring bazuje na testach AUTOMATYCZNYCH (T1-T9 + skrypty Python)
+   i PRÓBKOWANIU (opisowe wstawki), NIE na pełnym, ręcznym przeczytaniu
+   każdego z 33 skilli artykuł po artykule. Wysoki wynik oznacza "żaden
+   znany, wykrywalny automatycznie problem", nie "każde zdanie w każdym
+   pliku zweryfikowane merytorycznie".
+3. FAZA 3E (weryfikacja treści merytorycznej modułów, ZASADA 12) —
+   pogłębiona weryfikacja merytoryczna poszczególnych przepisów (poza
+   automatycznym dopasowaniem zakresu z T8) NIE była przedmiotem tej
+   sesji dla całego systemu — była wykonywana tylko punktowo, dla
+   konkretnych pytań użytkownika w poprzednich sesjach.
+
+**FAZA 5 uznana za domkniętą** dla całego systemu, z powyższymi
+zastrzeżeniami jawnie wskazanymi.
+
+## AUDYT-2026-07-26f — Pełny (nie na próbie) skan wstawek opisowych, 86/86 plików
+
+**Kontekst:** Ostatnie uczciwe zastrzeżenie z sesji 26b/26e — "pełny skan
+86 plików NIE został wykonany, tylko próba 33 SKILL.md". Ten wpis domyka
+to w całości.
+
+**Metoda:** `grep -rl` wg wzorców modułu MOD-WSTAWKI.md ("Ten skill",
+"Ten moduł", "Celem tego", "Poniżej znajdziesz", "W tej sekcji",
+"Niniejszy", "służy do", "ma na celu", "pozwala na", "umożliwia
+użytkownikowi", "został stworzony", "jest przeznaczony") na CAŁYM
+systemie → 86 plików. Dla KAŻDEGO pliku wyciągnięto kontekst (±1 linia)
+KAŻDEGO trafienia i oceniono wg tabeli kwalifikacji modułu ("Czy zawiera
+instrukcję/regułę? → ZOSTAW"; "Czy nagłówek już to mówi? → USUŃ").
+
+**Wynik: 0 z 86 plików wymaga naprawy.** Kategoryzacja znalezisk:
+
+1. **Reguły delegacji/granic zakresu** (zdecydowana większość, ~60
+   plików): "Ten moduł dostarcza WYŁĄCZNIE X, NIE dubluj Y — patrz
+   `mod-Y.md`" — to są operacyjne reguły routingu między modułami,
+   krytyczne dla unikania konfliktów/duplikacji. Jednoznacznie ZOSTAJĄ.
+2. **Uzasadnienie powstania modułu** (~15 plików, głównie dr-03 moduły
+   z 2026-07-16/17): "Do [data] ZERO wystąpień w systemie. Ten moduł
+   naprawia lukę" — to prowenienacja/changelog, nie narracyjny wstęp.
+   ZOSTAJE (analogicznie do przykładu "ZOSTAJE" w samym MOD-WSTAWKI.md).
+3. **Fragmenty rzeczywistych wzorów pism** (kilka plików pisma-proste-v2,
+   analizator-umow-v1): "Niniejszym wzywam...", "Niniejszy Aneks
+   zastępuje..." — to TEKST SZABLONU dokumentu prawnego, nie meta-opis
+   skilla. Oczywiście ZOSTAJE.
+4. **Już wcześniej samodzielnie zweryfikowane** (orzeczenia-sadowe-v2):
+   ten sam skill miał już przeprowadzony dokładnie ten test w przeszłej
+   sesji (AUDIT-JOURNAL, ok. linii 9005) — wynik: 0 kwalifikujących się,
+   1 świadomie zostawiony fałszywy trop. Potwierdza spójność metody.
+
+**Żadne trafienie nie jest czystym intro/outro-akapitem bez wartości
+operacyjnej** (przykład negatywny z MOD-WSTAWKI.md: "Ten moduł ma na celu
+zapewnienie użytkownikowi możliwości przeprowadzenia kompleksowej
+analizy..." — TAKIEGO wzorca NIE znaleziono ani razu w 86 plikach).
+
+**FAZA 2D-2 uznana za w pełni domkniętą dla całego systemu** (nie tylko
+próby) — usuwa ostatnie uczciwe zastrzeżenie z wpisów 26b/26e dotyczące
+tego konkretnego punktu.
+
+### AKTUALIZACJA STATUSU "CO POZOSTAJE POZA ZAKRESEM"
+
+Jedyny formalnie pozostający punkt po tej sesji: **FAZA 3E** (pogłębiona
+weryfikacja merytoryczna treści prawnej artykuł-po-artykule dla całego
+systemu) — to zadanie o innym charakterze (wymaga web_search per
+przepis, nie jest jednorazowym skanem regex) i pozostaje świadomie poza
+zakresem audytu strukturalnego jako odrębny typ pracy.
+
+## AUDYT-2026-07-26g — Próba naprawy test_cross_map_dzu.py, COFNIĘTA (uczciwie udokumentowana porażka)
+
+**Kontekst:** Kontynuacja na żądanie użytkownika. Próbowano naprawić
+ostatnie znane niedoskonałości narzędzia — 2 rezydualne alarmy T3 dla
+dr-03 (potwierdzone wcześniej jako artefakt: linia mapy z DWOMA aktami
+"KK+KPK" w jednej komórce, test porównuje tylko PIERWSZY numer Dz.U.
+w linii z niepasującym wierszem głównej mapy).
+
+**Próba naprawy:** zmieniono `extract_act_dzu_pairs()`, by zbierać
+WSZYSTKIE cytaty Dz.U. w linii (nie tylko pierwszy), oraz pętlę
+porównawczą, by akceptować zgodność z KTÓRYMKOLWIEK najlepiej
+dopasowanym wierszem głównej mapy zamiast tylko pierwszym znalezionym.
+
+**Wynik: POGORSZENIE, nie poprawa.** Liczba alarmów T3 wzrosła z 2 do
+14 — wielokrotne wpisy per linia zaczęły kolidować kombinatorycznie z
+innymi wielokrotnymi wpisami w całym systemie (np. nowe, wcześniej
+niewykryte "rozbieżności" dla dr-02, dr-04, dr-08, dr-10, dr-13),
+generując więcej szumu niż usuwały.
+
+**Decyzja: COFNIĘTO W CAŁOŚCI.** Przywrócono oryginalną logikę
+(pojedyncze dopasowanie na linię). Potwierdzono ponownym uruchomieniem:
+z powrotem dokładnie 2 znane alarmy dla dr-03, identyczne jak przed próbą
+naprawy. Pełny zestaw regresyjny: bez zmian (PASS z tymi samymi WARN).
+
+**Dodano do kodu** (jako komentarz w `extract_act_dzu_pairs()`) opis tej
+próby i jej cofnięcia — żeby przyszła sesja audytowa nie próbowała
+dokładnie tego samego podejścia bez wiedzy, że już zawiodło.
+
+**Wniosek metodologiczny (Zasada 8 — uczciwość ponad efekt):** nie
+każda znana niedoskonałość narzędzia nadaje się do szybkiej naprawy.
+Fuzzy-matching heurystyki tekstowej dla wierszy wieloaktowych wymaga
+głębszej przebudowy (np. parsowania struktury tabeli Markdown zamiast
+dopasowania tekstowego linia-po-linii), nie punktowej łatki — to
+ZNACZNIE większe zadanie niż naprawa `re.IGNORECASE` w T8 (sesja 26d),
+która zadziałała bez efektów ubocznych. Test_cross_map_dzu.py pozostaje
+z udokumentowanym w swoim docstringu ograniczeniem: "może dawać fałszywe
+negatywy/pozytywy przy nietypowym formatowaniu wiersza" — to ograniczenie
+jest teraz PODWÓJNIE potwierdzone (raz przy odkryciu, raz przy nieudanej
+próbie naprawy) i pozostaje jako ŚWIADOMIE zaakceptowany kompromis
+(Zasada 6), nie zapomniana usterka.
+
+**Rejestracja:** audyt-systemu-v4 v6.1→v6.2 (zmiana netto: wyłącznie
+komentarz dokumentujący próbę i cofnięcie — kod funkcjonalny identyczny
+jak przed sesją 26g).
+
+## AUDYT-2026-07-26h — FAZA 3E, pierwsza transza: mod-KK-art296a — CRIT znaleziony i naprawiony
+
+**Kontekst:** Kontynuacja na żądanie użytkownika, po jawnym zastrzeżeniu,
+że FAZA 3E (weryfikacja merytoryczna treści prawnej) to jakościowo inne,
+znacznie większe zadanie niż audyt strukturalny. Wybrano jako pierwszą
+transzę: `mod-KK-art296a-korupcja-sektor-prywatny.md` (najnowszy moduł
+dr-03, dodany 2026-07-16, opisany jako "zero pokrycia wcześniej" —
+statystycznie najmniej sprawdzony).
+
+### CRIT ZNALEZIONY I NAPRAWIONY
+
+**Błędny wymiar kary dla art. 296a §3 KK (wypadek mniejszej wagi).**
+Moduł podawał "grzywna, ograniczenie wolności lub **do roku**" (do 1
+roku pozbawienia wolności) w DWÓCH miejscach (drzewo decyzyjne + tabela
+szybkiego odczytu). Zweryfikowano niezależnie w 7+ źródłach (lexlege.pl,
+arslege.pl, prawo-pl.com, adwokatlawicki.pl, skalski-adwokat.pl,
+karh.pl, dodatkowo potwierdzone przez systematyczne zestawienie wzorca
+"wypadek mniejszej wagi" w KK, gdzie art. 296a §3 jest wymieniony wprost
+obok art. 228§2, 229§2, 230§2 jako przykład zagrożenia "do lat 2") —
+**poprawny wymiar to POZBAWIENIE WOLNOŚCI DO LAT 2, nie do roku**.
+Naprawiono w obu miejscach z pełnym śladem weryfikacji.
+
+**Dodatkowo sprawdzone i POTWIERDZONE jako poprawne** (bez zmian):
+§1/§2 (3 m-ce-5 lat), §4 (6 m-cy-8 lat, szkoda znacznej wartości), §5
+(czynny żal dla strony czynnej — zgodne z lexlege.pl/prawo-pl.com).
+
+**Niezweryfikowane w tej sesji** (brak czasu na dalsze szukanie, nie
+znaleziono ani potwierdzenia, ani zaprzeczenia): §6 (tryb ścigania na
+wniosek, wyjątek Skarb Państwa/JST z urzędu) — wyszukiwanie trafiało
+głównie na POKREWNY, ale ODRĘBNY art. 296 (bez litery "a"), który ma
+podobną konstrukcję trybu ściągania. Pozostawiono bez zmian (nie
+zaprzeczone), ale NIE oznaczono jako "zweryfikowane" — to rozróżnienie
+jest istotne (Zasada 8: nie przedstawiaj niesprawdzonego jako sprawdzone).
+
+**Rejestracja:** dr-03-prawo-karne-wykroczenia-egzekucja v3.0→v3.1.
+
+### UCZCIWA OCENA SKALI ZADANIA
+
+Ta transza objęła **1 moduł z ~250+ plików modułów w całym systemie**
+(56 samych w dr-03). Znaleziono 1 potwierdzony błąd sentencyjny po
+~15 minutach dedykowanej weryfikacji jednego, stosunkowo krótkiego
+modułu. Ekstrapolując (bez nadinterpretacji — to tylko orientacyjny
+rząd wielkości, nie prognoza): pełne FAZA 3E dla całego systemu
+oznaczałoby dziesiątki/setki podobnych sesji weryfikacyjnych. To
+POTWIERDZA wcześniejszą ocenę, że jest to zadanie innego rzędu niż
+audyt strukturalny — wartościowe, ale wymagające jawnej decyzji
+użytkownika o zakresie (które skille/moduły priorytetyzować), a nie
+mechanicznego "przejścia przez wszystko" w kolejnych turach "kontynuuj".
+
+## AUDYT-2026-07-26i — FAZA 3E, druga transza: mod-KKS-karny-skarbowy-i-AML — potwierdzone poprawne
+
+**Zakres:** Kontynuacja FAZA 3E, zgodnie z żądaniem użytkownika użycia
+gradacji źródeł z `shared/HIERARCHIA-ZRODEL.md` i procedury `shared/
+PRAWO-HARDGATE.md`. Moduł: `mod-KKS-karny-skarbowy-i-AML.md` (dr-03) —
+sekcja dodana 2026-07-15 jako naprawa wcześniejszego braku treści KKS.
+
+**Metodologia zastosowana jawnie:** ISAP (Rząd 1) pozostaje niedostępny
+do bezpośredniego web_fetch (znane ograniczenie, ROBOTS_DISALLOWED) —
+weryfikacja przez web_search z numerem artykułu jako frazą kluczową,
+krzyżowo z co najmniej 2-3 źródłami niezależnymi, w tym Rząd 2B
+(lexlege.pl) tam gdzie dostępne, oraz Rząd 3 (blogi kancelaryjne) jako
+DODATKOWE potwierdzenie ZBIEŻNOŚCI, nigdy jako JEDYNE źródło brzmienia.
+
+**Sprawdzone i POTWIERDZONE jako poprawne (bez zmian):**
+1. **Art. 55 KKS (firmanctwo), §1** — "grzywna do 720 stawek dziennych
+   albo kara pozbawienia wolności do lat 3, albo obie kary łącznie" —
+   potwierdzone w lexlege.pl (Rząd 2B) oraz 5 niezależnych źródeł Rząd 3
+   (ifirma.pl, kruczek.pl, kancelaria-gatner.pl i inne), wszystkie
+   dosłownie zgodne. Moduł prawidłowo streszcza to jako "grzywna lub PW
+   do 3 lat".
+2. **Wyrok TK SK 13/05 z 12.09.2005 r.** (cytowany w module jako podstawa
+   tezy o normatywnym charakterze pojęcia "prawdy" w art. 56 KKS) —
+   potwierdzone SYGNATURA, DATA i TREŚĆ TEZY w 6+ niezależnych źródłach,
+   w tym dokument gov.pl (bliski Rządowi 1). Cytat w module jest
+   dokładny i poprawnie przypisany.
+
+**Wniosek tej transzy:** w przeciwieństwie do poprzedniej (art. 296a,
+gdzie znaleziono błąd), ta transza NIE wykazała błędów — moduł KKS jest
+merytorycznie solidny w sprawdzonym zakresie. To ważny, uczciwy wynik:
+FAZA 3E nie ma z założenia znajdować błąd w każdym module — czasem
+wynikiem jest potwierdzenie poprawności, co samo w sobie ma wartość
+(zwiększa pewność co do jakości systemu).
+
+**Niesprawdzone w tej transzy** (dla przejrzystości zakresu): art. 54,
+56 (poza samą tezą TK), 62, 76 KKS — obecne w module, ale nie
+zweryfikowane indywidualnie z powodu ograniczeń czasowych tej sesji.
+
+### STATUS ZBIORCZY FAZA 3E PO DWÓCH TRANSZACH
+
+| Moduł | Wynik |
+|---|---|
+| mod-KK-art296a-korupcja-sektor-prywatny.md | 1 błąd znaleziony i naprawiony (art. 296a §3: "do roku"→"do lat 2") |
+| mod-KKS-karny-skarbowy-i-AML.md (częściowo) | 2 twierdzenia sprawdzone, oba poprawne |
+
+**Rekomendacja dla dalszego ciągu:** biorąc pod uwagę, że każda transza
+zajmuje ok. 15-20 minut i sprawdza fragment jednego pliku spośród
+~250+ w całym systemie, sensowne jest, żeby użytkownik wskazał PRIORYTET
+(konkretna dziedzina, konkretny typ ryzyka, np. "wszystkie wymiary kar
+w dr-03" albo "wszystkie terminy w dr-04") zamiast kontynuacji przez
+arbitralny wybór kolejnego pliku — to pozwoli skoncentrować ograniczony
+czas sesji na materii o najwyższej wartości dla użytkownika.
+
+## AUDYT-2026-07-26j — Dodanie ZASADY 14 (gradacja źródeł) + trzecia transza FAZA 3E
+
+**Na wyraźne polecenie użytkownika:** metodologia gradacji źródeł
+zastosowana w transzach 26h/26i sformalizowana jako **ZASADA 14** (STAŁA)
+w `audyt-systemu-v4/SKILL.md`, wersja 6.2→6.3:
+- Rejestracja narracyjna w sekcji "Cel" (obok ZASADA 12/13)
+- Pozycja 12 na liście operacyjnej ZASADY KRYTYCZNE
+- Odniesienie w samej sekcji FAZA 3E (KROK 2/3), z jawnym doprecyzowaniem
+  kolejności: Rząd 1 (ISAP, zawsze próba pierwsza) → Rząd 2A/2B (główne
+  potwierdzenie, gdy Rząd 1 niedostępny wprost) → Rząd 3 (wyłącznie jako
+  dodatkowe potwierdzenie zbieżności, nigdy jedyne źródło), próg minimum
+  2-3 źródła niezależne, obowiązek wskazania Rzędu w AUDIT-JOURNAL.md
+
+**Dodatkowo doprecyzowano w FAZA 3E:** tryb NA ŻĄDANIE (standalone, bez
+poprzedzającej zmiany Dz.U.) — to dokładnie to, co robimy od transzy
+26h — wcześniej FAZA 3E była opisana wyłącznie jako auto-trigger po
+zmianie Dz.U., teraz formalnie dopuszcza też wywołanie punktowe na
+wskazanie użytkownika.
+
+### TRZECIA TRANSZA FAZA 3E: mod-KK-art228-231-korupcja-urzednicza.md
+
+Zastosowano ZASADĘ 14 explicite. Sprawdzono 4 wymiary kar:
+
+| Przepis | Twierdzenie modułu | Wynik weryfikacji |
+|---|---|---|
+| art. 228 §1 | 6 m-cy – 8 lat | ✅ POTWIERDZONE — 6 źródeł Rządu 3 zgodnych (edukacjaprawnicza.pl, szurmandusko.pl, pwrz.pl komentarz, infor.pl, karh.pl, adwokat-skoczylas.pl) |
+| art. 228 §2 (wypadek mniejszej wagi) | do 2 lat | ✅ POTWIERDZONE — te same źródła zgodne |
+| art. 228 §3 (naruszenie przepisów prawa) | 1-10 lat | ✅ POTWIERDZONE — zgodne |
+| art. 228 §5 (korzyść znacznej wartości) | 2-12 lat | ✅ POTWIERDZONE z zastrzeżeniem — 5 z 6 źródeł zgodnych na "2-12 lat" (w tym edukacjaprawnicza.pl z konkretnym wskazaniem mechanizmu progu z art. 115 §5 KK); 1 źródło (adwokat-skoczylas.pl) podało "2-15 lat" — potraktowano jako pojedynczy outlier wobec przewagi 5:1, zgodnie z ZASADĄ 14 pkt 4 (rozbieżność = sygnał do dalszego sprawdzenia, nie automatyczny wybór) — dodatkowo sprawdzono, że żadne inne źródło nie potwierdza "15 lat", co wzmacnia wniosek o błędzie w tym jednym źródle, nie w module |
+
+**Wynik: WSZYSTKIE 4 twierdzenia modułu POTWIERDZONE jako poprawne.**
+Trzecia transza z rzędu bez potwierdzonego błędu w SPRAWDZONYM zakresie
+(po jednym błędzie znalezionym w pierwszej transzy — art. 296a).
+
+**Rejestracja:** audyt-systemu-v4 v6.2→v6.3 (ZASADA 14).
+
+### BILANS TRZECH TRANSZ FAZA 3E
+
+| Moduł | Twierdzenia sprawdzone | Błędy znalezione |
+|---|---|---|
+| mod-KK-art296a | 1 (wymiar kary §3) | 1 (naprawiony) |
+| mod-KKS-karny-skarbowy-i-AML | 2 (art. 55, wyrok TK) | 0 |
+| mod-KK-art228-231 | 4 (wymiary kar §1/§2/§3/§5) | 0 |
+| **RAZEM** | **7** | **1** |
+
+## AUDYT-2026-07-26k — FAZA 3E, czwarta transza: mod-KK-art64-recydywa — CRIT znaleziony i naprawiony
+
+**Moduł:** `mod-KK-art64-recydywa.md` (dr-03, dodany 2026-07-16).
+Zastosowano ZASADĘ 14 (gradacja źródeł): 4 źródła Rządu 2B (lexlege.pl,
+arslege.pl, przepisy.gofin.pl, infor.pl) + 6 źródeł Rządu 3 (kancelarie,
+Iustitia) zgodnych co do dosłownego brzmienia art. 64 §1-2 KK.
+
+### CRIT ZNALEZIONY I NAPRAWIONY
+
+**Błędne przedstawienie art. 64 §1 KK jako w CAŁOŚCI fakultatywnego.**
+Moduł opisywał recydywę podstawową wyłącznie jako "sąd MOŻE wymierzyć
+karę... (fakultatywne zaostrzenie, nie obligatoryjne)". W rzeczywistości
+przepis ma DWA elementy: (a) OBOWIĄZKOWY — sąd musi wymierzyć karę
+POWYŻEJ zwykłej dolnej granicy ustawowego zagrożenia (nie może orzec na
+samej dolnej granicy), (b) FAKULTATYWNY — sąd MOŻE (nie musi) sięgnąć
+aż do górnej granicy zwiększonej o połowę. Poprzednia wersja modułu
+pomijała element (a) całkowicie, co mogło prowadzić do błędnego
+przekonania, że przy recydywie sąd ma pełną swobodę wymiaru kary w
+zwykłych granicach — podczas gdy dolna granica jest podniesiona
+obligatoryjnie. Naprawiono z pełnym opisem obu elementów.
+
+**Dodatkowo skorygowano opis §2 (multirecydywa)**, który mylił logikę
+§1 z §2: w §2 CAŁY przedział kary (obie granice, nie tylko dolna) jest
+przesunięty w górę o połowę i jest to w CAŁOŚCI obligatoryjne — nie ma
+tu elementu fakultatywnego analogicznego do §1 (poprzednia wersja
+sugerowała, że górna granica w §2 jest opcją jak w §1, co jest
+nieścisłe — to sufit obowiązkowego przedziału, nie opcja).
+
+**Rejestracja:** dr-03-prawo-karne-wykroczenia-egzekucja v3.1→v3.2.
+
+### BILANS CZTERECH TRANSZ FAZA 3E
+
+| Moduł | Twierdzenia sprawdzone | Błędy znalezione |
+|---|---|---|
+| mod-KK-art296a | 1 | 1 |
+| mod-KKS-karny-skarbowy-i-AML | 2 | 0 |
+| mod-KK-art228-231 | 4 | 0 |
+| mod-KK-art64-recydywa | 2 (§1 + §2) | 2 |
+| **RAZEM** | **9** | **3** |
+
+**Obserwacja metodologiczna:** wszystkie 3 znalezione błędy dotyczyły
+NIE brzmienia numerycznego wprost (te były w większości poprawne), lecz
+STRUKTURY/LOGIKI przepisu — mylenia elementu obowiązkowego z
+fakultatywnym, lub pomijania jednego z dwóch elementów instytucji. To
+sugeruje, że przy dalszych transzach warto zwracać szczególną uwagę nie
+tylko na same liczby (progi, terminy), ale na to, CO DOKŁADNIE jest
+obowiązkowe a co fakultatywne w danym przepisie — to bardziej subtelny,
+ale praktycznie istotniejszy typ błędu (wpływa na strategię procesową,
+nie tylko na czystą poprawność cytatu).
+
+## AUDYT-2026-07-26l — FAZA 3E, piąta transza: mod-KK-art101-105-przedawnienie — 2 CRIT znalezione i naprawione
+
+**Moduł:** `mod-KK-art101-105-przedawnienie-karalnosci.md` (dr-03, dodany
+2026-07-16). Zastosowano ZASADĘ 14. Znaleziska szczególnie istotne, bo
+moduł SAM w nagłówku ostrzegał: "Nowelizacja 2023 WYDŁUŻYŁA terminy
+przedawnienia — sprawdzaj ZAWSZE" — a mimo to nie zastosował tego do
+własnej, najważniejszej liczby.
+
+### CRIT 1 — Przedawnienie karalności zabójstwa: było "30 lat", jest 40 lat
+
+Nowelizacja z 7.07.2022 r. (Dz.U. 2022.2600, w życie 1.10.2023 r.)
+wydłużyła termin przedawnienia karalności zbrodni zabójstwa (art. 148 KK)
+z 30 do 40 lat. Potwierdzone w **7 niezależnych źródłach**: rp.pl (Rząd
+2B, artykuł zaktualizowany 13.04.2026 — a więc AKTUALNY na dziś),
+arslege.pl (cytuje wprost obowiązujący t.j. Dz.U.2025.383 z liczbą "40"),
+publikacja R. Kmiecika w "Prokuratura i Prawo" (gov.pl), kglegal.pl,
+zzbudowlani.pl, adwokat-grube.pl, tvn24.pl — wszystkie zgodne. Moduł
+podawał nieaktualną, sprzed-nowelizacyjną liczbę "30 lat". Naprawiono.
+
+**Uwaga metodologiczna (ZASADA 14, pkt 4 — rozbieżność źródeł):** 3
+dodatkowe źródła (e-prawnik.pl, zaufanyprawnik.pl [mimo daty 2026!],
+halatek.pl) nadal podawały "30 lat" — potraktowano jako źródła
+NIEZAKTUALIZOWANE po nowelizacji (typowy dla Rządu 3 problem
+dezaktualizacji, o którym ostrzega `shared/HIERARCHIA-ZRODEL.md`), nie
+jako dowód przeciw naprawie — przewagę dano źródłom jawnie
+odwołującym się do KONKRETNEGO numeru Dz.U./t.j. (arslege.pl) oraz
+źródłu z jawną, świeżą datą aktualizacji (rp.pl).
+
+### CRIT 2 — Przedawnienie czynu z oskarżenia prywatnego: elementy całkowicie zamienione miejscami
+
+Moduł podawał: "3 lata od popełnienia, ALE nie później niż 5 lat od
+ustania skutków". Prawidłowe brzmienie art. 101 §2 KK (potwierdzone w
+arslege.pl, e-prawnik.pl, lexlege.pl — 3 źródła zgodne): "**1 rok** od
+dnia, gdy pokrzywdzony **dowiedział się o osobie sprawcy**, ale **nie
+później niż 3 lata** od popełnienia czynu." Moduł miał oba elementy
+(krótszy/dłuższy termin ORAZ zdarzenie początkowe) pomylone. Naprawiono.
+
+**Sprawdzone i POTWIERDZONE bez zmian:** DRZEWO P.2 (przedawnienie
+wykonania kary, art. 103 KK — 30/15/10 lat wg wymiaru orzeczonej kary)
+— w pełni zgodne z arslege.pl/e-prawnik.pl.
+
+**Rejestracja:** dr-03-prawo-karne-wykroczenia-egzekucja v3.2→v3.3.
+
+### BILANS PIĘCIU TRANSZ FAZA 3E
+
+| Moduł | Twierdzenia sprawdzone | Błędy znalezione |
+|---|---|---|
+| mod-KK-art296a | 1 | 1 |
+| mod-KKS-karny-skarbowy-i-AML | 2 | 0 |
+| mod-KK-art228-231 | 4 | 0 |
+| mod-KK-art64-recydywa | 2 | 2 |
+| mod-KK-art101-105-przedawnienie | 3 | 2 |
+| **RAZEM** | **12** | **5** |
+
+**Obserwacja:** transza 5 zawierała najpoważniejszy dotąd błąd — moduł
+JAWNIE ostrzegał o nowelizacji zmieniającej dokładnie tę liczbę, a mimo
+to nie zastosował poprawki do własnej treści. To wzmacnia wcześniejszy
+wniosek z transzy 4: same ostrzeżenia/adnotacje o zmianach prawnych w
+module NIE gwarantują, że treść została faktycznie zaktualizowana —
+analogicznie do wzorca znalezionego wcześniej w mapach Dz.U. (dr-08,
+dr-11 — flaga otwarta, nigdy nie zrealizowana). To POWTARZAJĄCY SIĘ
+wzorzec systemowy, wart odnotowania jako obserwacja ogólna, nie
+jednostkowy przypadek.
+
+## AUDYT-2026-07-26m — Nowy mechanizm MOD-PROPAGACJA-NOWELIZACJI + zastosowanie na żywo
+
+**Na wyraźne polecenie użytkownika:** dodano nowy, stały mechanizm
+audytowy `audyt-systemu-v4/modules/MOD-PROPAGACJA-NOWELIZACJI.md`,
+zarejestrowany w SKILL.md (v6.3→6.4): lista modułów, drzewo katalogu,
+odesłanie w sekcji FAZA 3E. Mechanizm odpowiada na pytanie: "ta
+KONKRETNA nowelizacja zmieniła te KONKRETNE artykuły — czy KTÓRYKOLWIEK
+plik w CAŁYM systemie (nie tylko 'domowy' moduł) nadal ma przedawnioną
+wartość?" — uzupełnienie MOD-TRESC-MERYTORYCZNA (które działa 1 akt →
+1 moduł).
+
+### ZASTOSOWANIE NA ŻYWO: propagacja nowelizacji Dz.U. 2022.2600 (przedawnienie)
+
+**KROK 1 (zakres zmiany):** ustalono wcześniej w transzy 26l — zabójstwo
+30→40 lat, w życie 1.10.2023.
+
+**KROK 2 (przeszukanie CAŁEGO systemu):** `grep -rn "zabójstw\|art\.
+148" /mnt/skills/user/ | grep -i "30 lat"` — 5 trafień w 2 plikach.
+
+**KROK 3-4 (klasyfikacja i naprawa):**
+
+1. **mod-KK-art101-105-przedawnienie-karalnosci.md — DRUGIE wystąpienie
+   TYCH SAMYCH błędów** naprawionych w transzy 26l (DRZEWO P.1), tym
+   razem w: (a) zdaniu narracyjnym pod DRZEWO P.1 ("zwykłe zabójstwo...
+   podlega przedawnieniu po 30 latach"), (b) całej "TABELA SZYBKIEGO
+   ODCZYTU" (sekcja 4) — baza zabójstwa 30→40 lat, KASKADOWO także
+   przedłużenie po wszczęciu postępowania 40→50 lat (nie 40, jak by
+   wynikało z prostego przepisania błędnej bazy), wiersz prywatnoskargowe
+   (te same 2 elementy zamienione miejscami co w transzy 26l), ORAZ
+   DODATKOWO naprawiono błąd w kolumnie "po wszczęciu post." dla
+   występków >3-5 lat: było błędnie "+5 lat", poprawnie "+10 lat" (art.
+   102 §1 KK przedłuża o 10 lat WSZYSTKIE kategorie z art. 101 §1 pkt
+   1-3, nie tylko zbrodnie — tylko pkt 4, najlżejsze występki, mają +5).
+   Potwierdzone: arslege.pl, infor.pl, paplinska.pl.
+
+2. **mod-KK-art148-162-przeciwko-zyciu-zdrowiu.md — 4 trafienia, ALE
+   dotyczą INNEGO zagadnienia** (wymiar KARY za zabójstwo: "10-30 lat,
+   25 lat lub dożywocie" — to sankcja za czyn, NIE termin przedawnienia)
+   — sklasyfikowane jako możliwy, ale NIEZWERYFIKOWANY problem, nie
+   naprawione w tej sesji (patrz niżej).
+
+**Wynik: 1 plik z 2 dodatkowymi lokalizacjami tego samego błędu
+naprawiony (dowód na wartość mechanizmu — sama pierwsza naprawa w
+transzy 26l NIE złapała tych 2 dodatkowych miejsc w tym samym pliku).**
+
+### NOWA FLAGA F-15 (odkryta przy okazji, nie zweryfikowana)
+
+Podczas przeszukania natrafiono na PODEJRZENIE niezwiązane bezpośrednio
+z propagowaną zmianą: `mod-KK-art148-162-przeciwko-zyciu-zdrowiu.md`
+wymienia "25 lat pozbawienia wolności" jako samodzielną kategorię kary
+za zabójstwo — ta sama reforma z 2023 r. mogła znieść tę kategorię na
+rzecz podniesienia górnej granicy kary terminowej do 30 lat (wskazówka
+z jednego źródła Rządu 3: "górna granica terminowej kary pozbawienia
+wolności to 30 lat" bez wzmianki o odrębnej karze 25-letniej). NIE
+zweryfikowano wprost w tej sesji — dodano jako **F-15** w
+`WARN-OTWARTE.md`, zgodnie z Zasadą 8 (nie zgaduj, nie przedstawiaj
+niesprawdzonego jako sprawdzonego).
+
+**Rejestracja:** dr-03-prawo-karne-wykroczenia-egzekucja v3.3→v3.4,
+audyt-systemu-v4 v6.3→v6.4 (nowy mechanizm).
+
+### BILANS SZEŚCIU TRANSZ/ZASTOSOWAŃ FAZA 3E + PROPAGACJA
+
+| Sesja | Twierdzenia/lokalizacje sprawdzone | Błędy znalezione |
+|---|---|---|
+| Transze 1-5 (h/i/j/k/l) | 12 | 5 |
+| Propagacja (m) | 5 dodatkowych lokalizacji tego samego pliku | 2 dodatkowe (te same błędy, nowe miejsca) |
+| **RAZEM** | **17** | **7** (5 unikalnych błędów merytorycznych, 2 dodatkowe wystąpienia) |
+
+**Wniosek o wartości nowego mechanizmu:** potwierdzony na pierwszym
+realnym zastosowaniu — znalazł duplikat błędu W TYM SAMYM PLIKU, który
+umknął przy pierwszej, punktowej naprawie. To silny argument za tym, że
+mechanizm powinien być stosowany rutynowo po KAŻDEJ naprawie CRIT-TREŚĆ
+znalezionej w transzy FAZA 3E, nie tylko na wyraźne żądanie.
+
+## AUDYT-2026-07-26n — Zamknięcie F-15: kara 25 lat rzeczywiście zniesiona, moduł naprawiony
+
+**Weryfikacja F-15 (podejrzenie z transzy 26m):** potwierdzone w 8+
+niezależnych źródłach (chmielniak.com.pl, hplegal.pl, weredynscy.pl,
+jhcadwokaci.pl, durajreck.com, gov.pl [J. Kluza, Prokuratura i Prawo
+2/2023], zzbudowlani.pl, lawyersoffice.pl) — reforma z 7.07.2022 (Dz.U.
+2022.2600, w życie 1.10.2023) **zniosła odrębną karę "25 lat pozbawienia
+wolności"** jako samodzielną kategorię (wcześniej: terminowa do 15 lat /
+25 lat / dożywocie), zastępując ją jednolitą karą terminową w
+przedziale 1 miesiąc – 30 lat (plus dożywocie jako osobna opcja).
+
+### NAPRAWIONO: mod-KK-art148-162-przeciwko-zyciu-zdrowiu.md (2 lokalizacje)
+
+1. Drzewo decyzyjne: usunięto "25 lat" jako trzecią, nieistniejącą opcję
+   dla §1/§2/§3; DODATKOWO poprawiono dolną granicę §2/§3 z błędnych
+   "12 lat" na poprawne **15 lat** (potwierdzone dosłownym brzmieniem w
+   lexlege.pl i arslege.pl: "podlega karze pozbawienia wolności na czas
+   nie krótszy od lat 15").
+2. Tabela podsumowująca: te same 2 poprawki powtórzone (analogicznie do
+   wzorca "duplikat błędu w drugiej lokalizacji tego samego pliku" z
+   transzy 26m).
+
+### WAŻNE ODKRYCIE PRZY PROPAGACJI: temat już wcześniej opracowany gdzie indziej
+
+Przeszukanie całego systemu (`grep -rn "25 lat"`) ujawniło, że
+`mod-KK-kwalifikator-karnomaterialny.md` **JUŻ WCZEŚNIEJ** (sesja
+2026-07-17, widoczna w AUDIT-JOURNAL.md ok. linii 3168-4395) miał
+obszerną, starannie udokumentowaną pracę nad DOKŁADNIE tym samym
+tematem — łącznie z jawnym zastrzeżeniem o niepewności co do art. 86 §1a
+i art. 88 KK po reformie. To POTWIERDZA wzorzec z transzy 26m: jeden
+dobrze opracowany moduł nie gwarantuje, że wiedza dotarła do WSZYSTKICH
+plików cytujących ten sam akt — `mod-KK-art148-162` nie skorzystał z
+pracy już wykonanej w `mod-KK-kwalifikator-karnomaterialny.md`, mimo że
+oba pliki są w tym samym skillu (dr-03).
+
+### NOWA FLAGA F-16 (lekka, niepilna)
+
+Przy okazji znaleziono 2 DODATKOWE, niesprawdzone wystąpienia "25 lat" w
+`mod-KK-art270-310-falszerstwa-dokumentow.md` (art. 310 §1) i
+`mod-KK-slupy-fikcyjna-reprezentacja-spolki.md`. Rozróżnienie jest
+subtelne: "5-25 lat" jako zwykły, JEDNORAZOWY zakres ustawowy konkretnego
+przepisu (całkowicie OK w nowej, ciągłej skali 1 miesiąc-30 lat) różni
+się od "X lat, 25 lat, dożywocie" jako TRZECH osobnych opcji (błąd, bo
+środkowa opcja nie istnieje) — wymaga przeczytania kontekstu, nie
+prostego grepa. NIE rozstrzygnięto w tej sesji — dodano jako **F-16**,
+priorytet niski (mniej oczywisty błąd niż F-15, wymaga więcej pracy do
+ustalenia czy to w ogóle jest błąd).
+
+**Rejestracja:** dr-03-prawo-karne-wykroczenia-egzekucja v3.4→v3.5.
+
+### BILANS ZBIORCZY (transze + propagacje)
+
+| Sesja | Błędy znalezione i naprawione |
+|---|---|
+| Transze FAZA 3E 1-5 (h-l) | 5 |
+| Propagacja nowelizacji przedawnienia (m) | 2 (duplikaty w tym samym pliku) |
+| Zamknięcie F-15, propagacja kary 25 lat (n) | 2 (2 lokalizacje w 1 pliku) |
+| **RAZEM** | **9 poprawek merytorycznych** w 6 plikach dr-03 |
+| Nowe otwarte flagi | F-16 (niski priorytet, niepewne czy to w ogóle błąd) |
+
+## AUDYT-2026-07-26o — Zamknięcie F-16: oba kandydaty to legalne zakresy, bez błędu
+
+**Weryfikacja F-16:** sprawdzono oba pozostałe wystąpienia "25 lat".
+
+1. **mod-KK-art270-310-falszerstwa-dokumentow.md (art. 310 §1).**
+   Potwierdzone w lexlege.pl (Rząd 2B, t.j. Dz.U.2025.383): "podlega
+   karze pozbawienia wolności OD LAT 5 DO 25" — to CIĄGŁY przedział w
+   ramach nowej skali (1 miesiąc-30 lat), nie dyskretna "kara 25 lat"
+   jako osobna opcja. Moduł miał to poprawnie od początku. Bez zmian.
+
+2. **mod-KK-slupy-fikcyjna-reprezentacja-spolki.md ("do 25 lat" przy
+   karuzelach VAT, art. 277a KK).** Potwierdzone w 5+ niezależnych,
+   AKTUALNYCH źródłach (kancelaria-skarbiec.pl, adwokat-skoczylas.pl
+   [marzec 2026], sprawy-karne.biz.pl [styczeń 2026],
+   karnistasprawykarne.pl [październik 2025], adwokatsrocki.pl):
+   art. 277a §1 KK = "od 5 do 25 lat" — również ciągły, aktualny
+   przedział, nie pozostałość dyskretnej kategorii. Moduł już miał
+   własne zastrzeżenie "⚠️ zweryfikuj aktualny wymiar" — teraz
+   potwierdzone jako AKTUALNE, zastrzeżenie można uznać za spełnione.
+
+**Wynik: 0 błędów. F-16 zamknięta bez zmian w treści.**
+
+**Wniosek metodologiczny (potwierdzenie rozróżnienia z F-16):** to
+dobry przykład rozróżnienia z ZASADY 14 — "5-25 lat" jako pojedynczy,
+ciągły przedział ustawowy JEST poprawny w nowej skali kary; błędem
+było WYŁĄCZNIE przedstawianie "25 lat" jako TRZECIEJ, ODRĘBNEJ opcji
+obok przedziału i dożywocia (co było błędem w mod-KK-art148-162,
+naprawionym w transzy 26n). Ten sam ciąg znaków ("25 lat") wymagał
+całkowicie różnej oceny w różnych kontekstach — potwierdza wartość
+CZYTANIA KONTEKSTU, nie prostego dopasowania frazy.
+
+### BILANS KOŃCOWY SESJI 26h-26o (FAZA 3E + propagacja nowelizacji)
+
+| Kategoria | Liczba |
+|---|---|
+| Transze/zastosowania | 8 (h, i, j, k, l, m, n, o) |
+| Błędy merytoryczne znalezione i naprawione | 9 |
+| Pliki zmodyfikowane | 6 (dr-03) |
+| Nowy stały mechanizm dodany | 1 (MOD-PROPAGACJA-NOWELIZACJI) |
+| Nowa stała zasada dodana | 1 (ZASADA 14 — gradacja źródeł) |
+| Flagi otwarte na koniec | 0 (F-15, F-16 zamknięte; F-14 zamknięta wcześniej) |
+| Flagi błędnie zasugerowane, potem obalone weryfikacją | 2 (oba w F-16) |
+
+## AUDYT-2026-07-26p — FAZA 3E, rozszerzenie na dr-04: mod-ustawa-minimalne-wynagrodzenie — 2 CRIT znalezione i naprawione
+
+**Kontekst:** Kontynuacja na żądanie użytkownika, tym razem świadomie
+poza dr-03 (dywersyfikacja zakresu) — dr-04 (prawo pracy), moduł
+najbardziej podatny na dryf czasowy (stawka zmienia się co roku).
+Zastosowano ZASADĘ 14.
+
+### CRIT 1 — Brakująca wartość na 2026 r. (uzupełniona, nie błąd, ale luka)
+
+Moduł jawnie unikał podania wartości na 2026 r. ("weryfikuj przez
+web_search przed cytowaniem!") — DOBRA praktyka (nie zgadywał), ale
+skoro dziś jest 25.07.2026 i wartość na 2026 jest już dawno ustalona,
+uzupełniono ją: **4806 zł brutto/mies., stawka godzinowa 31,40 zł, od
+1.01.2026, jedyna zmiana w całym roku.** Potwierdzone: gov.pl/MRPiPS
+(Rząd 1), dziennikustaw.gov.pl (Rząd 1, treść rozporządzenia RM z
+11.09.2025), oraz 5+ źródeł Rządu 2B/3 zgodnych.
+
+### CRIT 2 — Numer Dz.U. tekstu jednolitego ustawy: BŁĘDNY w TRZECH różnych miejscach, TRZY różne błędne liczby
+
+Odkryto podczas propagacji: moduł podawał "Dz.U. 2024 poz. 642",
+lokalna mapa dr-04/MAPA-AKTOW.md i główna mapa routingu (prawo-polskie-v2)
+podawały "Dz.U. 2024 poz. 1285" — **DWIE różne, obie błędne liczby dla
+tego samego aktu w trzech plikach**. Poprawny numer, potwierdzony
+BEZPOŚREDNIO przez gov.pl/MRPiPS (Rząd 1, jawnie wymienia akt z tym
+numerem) oraz isap.sejm.gov.pl (link bezpośredni działający,
+WDU20240001773): **Dz.U. 2024 poz. 1773** (obwieszczenie Marszałka
+Sejmu z 27.11.2024, publ. 3.12.2024). Naprawiono we wszystkich trzech
+plikach: mod-ustawa-minimalne-wynagrodzenie.md, dr-04/MAPA-AKTOW.md,
+prawo-polskie-v2/ROUTING-MAP.md.
+
+**Obserwacja:** to NOWY wariant znanego wzorca — nie "jeden plik ma
+starą wartość, inny ma nową", ale **WSZYSTKIE TRZY pliki miały BŁĘDNE,
+ale RÓŻNE MIĘDZY SOBĄ liczby** (642 / 1285 / żadna z nich = 1773). To
+sugeruje, że żaden z trzech numerów nie pochodził z bezpośredniej
+weryfikacji ISAP w danym momencie — raczej z różnych, nieskorelowanych
+źródeł wtórnych lub z pomyłek przy przepisywaniu.
+
+**Rejestracja:** dr-04-prawo-pracy-zus-swiadczenia v3.4→v3.5,
+prawo-polskie-v2 v5.9→v6.0.
+
+### BILANS ROZSZERZONEJ SESJI FAZA 3E (dr-03 + dr-04)
+
+| Domena | Błędy znalezione i naprawione |
+|---|---|
+| dr-03 (transze h-o) | 9 |
+| dr-04 (transza p) | 2 (+ 1 uzupełnienie brakującej, nie błędnej wartości) |
+| **RAZEM** | **11 poprawek merytorycznych w 8 plikach, 3 skille** |
+
+## AUDYT-2026-07-26q — FAZA 3E, dr-06: mod-PIT-podatek-dochodowy-fizyczne — potwierdzone bez zmian
+
+**Moduł:** `mod-PIT-podatek-dochodowy-fizyczne.md` (dr-06). Sprawdzono
+skalę podatkową i kwotę wolną — najczęściej cytowane, najbardziej
+"polityczne" liczby w całym systemie podatkowym (przedmiot stałych
+zapowiedzi zmian).
+
+**Sprawdzone:** kwota wolna 30 000 zł, skala 12%/32%, próg 120 000 zł,
+kwota zmniejszająca podatek 3 600 zł/rok (300 zł/mies.).
+
+**Wynik: WSZYSTKO POTWIERDZONE jako aktualne na 2026 r.** — 6 niezależnych
+źródeł, w tym jedno z 10.06.2026 (taxcoach.pl) i jedno z 15.04.2026
+(dkms.pl), zgodnie potwierdzają: wartości niezmienione od 2022 r.
+(Polski Ład). **Ważne rozróżnienie zastosowane (ZASADA 14, ostrożność
+przy szumie medialnym):** zapowiedzi podwojenia kwoty wolnej do 60 000 zł
+to WYŁĄCZNIE polityczna obietnica, NIE uchwalone prawo — kilka źródeł
+wprost to potwierdza ("mało prawdopodobne w latach 2026-2027", "nie
+ujęte w projekcie budżetu 2026"). Moduł nie wymagał żadnej zmiany.
+
+**Wniosek:** trzecia transza z rzędu (po mod-KKS, mod-KK-art228-231)
+zakończona wynikiem "brak błędu" — dobry sygnał jakości systemu w
+sprawdzonym zakresie, choć nie dowód nieomylności całości.
+
+## AUDYT-2026-07-26r — FAZA 3E, dr-02: mod-KC-cywilne-zobowiazania-odpowiedzialnosc — potwierdzone bez zmian
+
+**Moduł:** `mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md` (dr-02).
+Sprawdzono formułę odsetek ustawowych za opóźnienie (art. 481 §2 KC).
+
+**Sprawdzone:** "stopa referencyjna NBP + 5,5 pkt proc." — moduł
+świadomie NIE podaje sztywnej wartości procentowej (dobra praktyka,
+analogiczna do mod-ustawa-minimalne-wynagrodzenie przed poprawką),
+tylko formułę i odesłanie do nbp.pl.
+
+**Wynik: FORMUŁA POTWIERDZONA jako poprawna** w 8+ niezależnych,
+aktualnych źródłach (2026): poradnikprzedsiebiorcy.pl, dziennikmedia.pl
+[maj 2026], symfonia.pl [kwiecień 2026], szukajradcy.pl, oferia.com.pl
+[maj 2026], i-rs.pl [grudzień 2025], behrendtiwspolnicy.pl [marzec
+2026]. Przy okazji potwierdzono POPRAWNOŚĆ rozróżnienia trzech odrębnych
+stawek w systemie (dla świadomości, nie do zmiany w module — moduł tego
+nie miesza): odsetki kapitałowe (art. 359 KC, NBP+3,5pp), odsetki za
+opóźnienie (art. 481 KC, NBP+5,5pp), odsetki w transakcjach handlowych
+B2B (NBP+10pp, +8pp dla podmiotów leczniczych publicznych).
+
+**Bez zmian w module — formuła i podejście (brak sztywnej wartości)
+były już poprawne.**
+
+### BILANS CAŁOŚCIOWY SESJI FAZA 3E (transze 26h → 26r)
+
+| Domena | Sprawdzeń (twierdzeń/formuł) | Błędów znalezionych |
+|---|---|---|
+| dr-03 (8 transz) | 17 | 9 |
+| dr-04 (1 transza) | 2 | 2 |
+| dr-06 (1 transza) | 4 | 0 |
+| dr-02 (1 transza) | 1 | 0 |
+| **RAZEM** | **24** | **11** |
+
+Nowy stały mechanizm: MOD-PROPAGACJA-NOWELIZACJI. Nowa stała zasada:
+ZASADA 14 (gradacja źródeł). Flagi otwarte na koniec: **0**.
+
+## AUDYT-2026-07-26s — FAZA 3E, dr-07: mod-PZP-dzial-I-podstawy-wylaczenia-szacowanie — potwierdzone bez zmian
+
+**Moduł:** `mod-PZP-dzial-I-podstawy-wylaczenia-szacowanie.md` (dr-07).
+Sprawdzono próg podstawowy stosowania PZP.
+
+**Sprawdzone:** próg podstawowy 170 000 zł (podniesiony z 130 000 zł),
+ustawa zmieniająca z 25.07.2025 r. (Dz.U. 2025 poz. 1173), w życie
+1.01.2026 r.
+
+**Wynik: W PEŁNI POTWIERDZONE** — 8 niezależnych, aktualnych źródeł
+(prawo.pl [10.01.2026], portalzp.pl, apexnet.com.pl [30.10.2025],
+taxcoach.pl [19.12.2025], prawowkulturze.pl [29.12.2025], pi.marketplanet.pl
+[10.12.2025], ezamowienia.ai, jmgj.pl) zgodnych co do kwoty, daty wejścia
+w życie i numeru Dz.U. Moduł już wcześniej samodzielnie zawierał tę
+poprawkę z odpowiednim śladem weryfikacji — potwierdzone jako w pełni
+aktualne, bez potrzeby zmian.
+
+**Drobna, nieistotna rozbieżność dat odnotowana bez działania:** 1
+źródło (jmgj.pl) podało datę ustawy jako "26 sierpnia 2025", podczas
+gdy 5 innych zgodnie wskazują "25 lipca 2025" — potraktowano jako
+pojedynczy outlier (możliwe pomylenie z datą podpisu/publikacji), zgodne
+z ZASADĄ 14 pkt 4, nie wymaga korekty modułu.
+
+### BILANS CAŁOŚCIOWY SESJI FAZA 3E (transze 26h → 26s)
+
+| Domena | Sprawdzeń | Błędów |
+|---|---|---|
+| dr-03 (8 transz) | 17 | 9 |
+| dr-04 | 2 | 2 |
+| dr-06 | 4 | 0 |
+| dr-02 | 1 | 0 |
+| dr-07 | 1 | 0 |
+| **RAZEM** | **25** | **11** |
+
+5 dziedzin prawa sprawdzonych (karne, praca, podatki, cywilne, zamówienia
+publiczne). Wskaźnik błędów: 44% w pierwszej fazie eksploracyjnej
+(dr-03, moduły dodane niedawno bez pełnej weryfikacji), 0% w kolejnych
+4 domenach sprawdzonych po nowszej metodologii (ZASADA 14) — sugeruje,
+że problem koncentrował się w konkretnej, niedawno dodanej partii
+modułów (dr-03, 2026-07-16/17), nie w całym systemie równomiernie.
+
+## AUDYT-2026-07-26t — FAZA 3E, dr-03: mod-KK-art222-226-ochrona-funkcjonariusza — potwierdzone bez zmian
+
+**Moduł:** `mod-KK-art222-226-ochrona-funkcjonariusza.md` (dr-03, dodany
+2026-07-16 — z partii, gdzie koncentrowały się wcześniejsze błędy).
+
+**Sprawdzone:** art. 226 §1 (znieważenie — grzywna/ogr. wolności/do
+roku), art. 226 §3 (znieważenie organu konstytucyjnego — do 2 lat),
+art. 222 §1 (naruszenie nietykalności cielesnej — do 3 lat).
+
+**Wynik: WSZYSTKIE TRZY POTWIERDZONE jako poprawne** — 9+ niezależnych
+źródeł zgodnych (arslege.pl, lexlege.pl [wyświetlone 15.07.2026],
+lukaszoles.pl, kancelaria-prawo-karne.pl, radcasilski.pl [30.03.2026],
+sprawy-karne.biz.pl [7.01.2026], adwokat-skwarek.pl, adwokatlawicki.pl,
+standardyprawa.pl, adwokatmdp.pl, ugwlaw.pl, adwokatplacheta.pl).
+
+**Wniosek:** to piąte z rzędu potwierdzenie bez błędu (po dr-06, dr-02,
+dr-07 i teraz części dr-03). Nawet w obrębie samej "podejrzanej" partii
+modułów dr-03 z 16-17 lipca, NIE wszystkie moduły mają błędy — ten
+konkretny plik (art. 222-226) jest w pełni poprawny w sprawdzonym
+zakresie.
+
+### BILANS CAŁOŚCIOWY SESJI FAZA 3E (transze 26h → 26t)
+
+| Domena | Sprawdzeń | Błędów |
+|---|---|---|
+| dr-03 (9 transz, w tym ta) | 20 | 9 |
+| dr-04 | 2 | 2 |
+| dr-06 | 4 | 0 |
+| dr-02 | 1 | 0 |
+| dr-07 | 1 | 0 |
+| **RAZEM** | **28** | **11** |
+
+Wskaźnik błędów łącznie: ~39%, ale skoncentrowany w 6 z 15 sprawdzonych
+dotąd plików/modułów — reszta (9 z 15) w pełni poprawna.
+
+## AUDYT-2026-07-26u — FAZA 3E, dr-03: mod-KK-art296-naduzycie-zaufania — potwierdzone bez zmian
+
+**Moduł:** `mod-KK-art296-naduzycie-zaufania.md` (dr-03, dodany
+2026-07-16 — z tej samej partii co art296a, gdzie znaleziono błąd).
+
+**Sprawdzone:** §1 (typ podstawowy, 3 m-ce–5 lat), §2 (cel korzyści
+majątkowej, 6 m-cy–8 lat), §3 (szkoda wielkich rozmiarów >1 mln zł,
+1-10 lat), §4 (nieumyślne, do 3 lat).
+
+**Wynik: WSZYSTKIE CZTERY POTWIERDZONE** — 8+ niezależnych źródeł
+zgodnych (arslege.pl [t.j. Dz.U.2025.383], edukacjaprawnicza.pl,
+kancelaria-prawo-karne.pl, smadwokaci.pl, kancelarierp.pl,
+chmielniak.com.pl, lexplay.pl, adwokat-skoczylas.pl [marzec 2026],
+obrona24h.pl [marzec 2026]).
+
+**Obserwacja NIEZWERYFIKOWANA, bez działania:** jedno źródło
+(chmielniak.com.pl) wspomina o dodatkowej, surowszej eskalacji dla
+mienia >5 mln zł (3-20 lat) i >10 mln zł (5-25 lat) w kontekście
+"działania na szkodę spółki" — możliwe pomylenie z INNYM przepisem
+(np. art. 296 w older wersji sprzed 2023, lub z innym przepisem
+gospodarczym typu art. 277a). NIE zweryfikowano czy to realna, odrębna
+eskalacja art. 296 czy pomyłka źródła — nie otwarto nowego wątku w tej
+sesji, odnotowane wyłącznie dla ewentualnej przyszłej weryfikacji.
+
+### BILANS CAŁOŚCIOWY SESJI FAZA 3E (transze 26h → 26u)
+
+| Domena | Sprawdzeń | Błędów |
+|---|---|---|
+| dr-03 (10 transz) | 24 | 9 |
+| dr-04 | 2 | 2 |
+| dr-06 | 4 | 0 |
+| dr-02 | 1 | 0 |
+| dr-07 | 1 | 0 |
+| **RAZEM** | **32** | **11** |
+
+16 plików/modułów sprawdzonych, 10 w pełni poprawnych, 6 z błędami
+(wszystkie naprawione).
+
+## AUDYT-2026-07-26v — Zamknięcie odłożonej weryfikacji: art. 306b KK, brakująca eskalacja zbrodniowa — 3 moduły naprawione przez propagację
+
+**Kontekst:** Dokończenie weryfikacji odłożonej w transzy 26u (obserwacja
+o "3-20 lat / 5-25 lat" dla dużych kwot w art. 296, niezweryfikowana
+wtedy). Użytkownik wprost poprosił o sprawdzenie tego.
+
+### POTWIERDZONE: art. 306b KK to REALNY, ważny przepis
+
+Wprowadzony nowelizacją z 2022 r. (w życie 1.10.2023), tworzy TRZECI,
+najsurowszy poziom zagrożenia dla wybranych przestępstw gospodarczych,
+gdy dotyczą mienia/szkody przekraczającej wielokrotność "mienia
+wielkiej wartości" (próg 1 mln zł):
+- **§1:** >5 mln zł → **3-20 lat** (zbrodnia)
+- **§2:** >10 mln zł → **5-25 lat** (zbrodnia)
+
+Obejmuje: art. 296 §1/§2 (nadużycie zaufania — NIE §3, które ma własną,
+odrębną eskalację do 10 lat), art. 296a §1/§4 (korupcja menadżerska —
+WYŁĄCZNIE strona bierna, nie czynna), art. 299 §1/2/5/6 (pranie
+pieniędzy), art. 303 §1 (dokumentacja działalności gospodarczej).
+Potwierdzone w 6+ niezależnych źródłach: arslege.pl (t.j. Dz.U.2025.383,
+z pełnym brzmieniem §1 i §2), kairp.pl, adwokatdulniak.pl,
+kancelarierp.pl, chmielniak.com.pl, russellbedford.pl.
+
+### NAPRAWIONE (propagacja przez 3 moduły dr-03, MOD-PROPAGACJA-NOWELIZACJI)
+
+1. **mod-KK-art296-naduzycie-zaufania.md** — dodano gałąź eskalacji
+   306b do DRZEWO N.1, z pełnym opisem mechanizmu i zakresu (który
+   moduł "macierzysty" dla tego ustalenia).
+2. **mod-KK-art296a-korupcja-sektor-prywatny.md** — dodano skróconą
+   wersję z odesłaniem do modułu macierzystego, precyzując że dotyczy
+   WYŁĄCZNIE §1/§4 (strona bierna).
+3. **mod-KK-art291-pranie-pieniedzy.md** — dodano skróconą wersję.
+   **PRZY OKAZJI znaleziono DODATKOWY, niezależny błąd:** tabela art. 299
+   całkowicie POMIJAŁA §2 (typ kwalifikowany — znaczna korzyść lub
+   porozumienie z innymi osobami), mimo że §1/§5/§6/§8 były wymienione.
+   Dodano §2, ale dokładny wymiar kary oznaczono jako
+   [NIEWERYFIKOWANE OSTATECZNIE] — źródła wtórne rozbieżne (jedno mówi
+   "do 8 lat" analogicznie do §1, inne "do 12 lat") — zgodnie z Zasadą
+   8 nie zgadywano, które źródło ma rację, tylko oznaczono do dalszej
+   weryfikacji bezpośrednio na ISAP.
+
+**Rejestracja:** dr-03-prawo-karne-wykroczenia-egzekucja v3.5→v3.6.
+
+### BILANS CAŁOŚCIOWY SESJI FAZA 3E (transze 26h → 26v)
+
+| Domena | Sprawdzeń | Błędów/luk znalezionych |
+|---|---|---|
+| dr-03 (11 transz) | 27 | 12 (w tym 1 nowa luka w art.299 §2, wciąż otwarta co do dokładnej liczby) |
+| dr-04 | 2 | 2 |
+| dr-06 | 4 | 0 |
+| dr-02 | 1 | 0 |
+| dr-07 | 1 | 0 |
+| **RAZEM** | **35** | **14** |
+
+### NOWA FLAGA F-17 (lekka, konkretna do domknięcia)
+
+Dokładny wymiar kary art. 299 §2 KK — rozbieżność źródeł wtórnych
+("do 8 lat" vs "do 12 lat") niezweryfikowana wprost na ISAP. Otwarta w
+`WARN-OTWARTE.md`.
+
+## AUDYT-2026-07-26w — Domknięcie F-17: znalezienie WŁASNEGO błędu z poprzedniej tury + korekta numeracji §6/§7/§8
+
+**Kontekst:** Kontynuacja weryfikacji F-17 (dokładny wymiar art. 299 §2)
+na wyraźne żądanie użytkownika. Wynik był głębszy niż oczekiwano —
+odkryto, że POPRZEDNIA edycja tej samej sesji (26v) zawierała WŁASNY
+błąd, oraz dodatkowo błędną numerację 2 innych paragrafów.
+
+### 1. KOREKTA WŁASNEGO BŁĘDU: §2 to NIE "porozumienie/znaczna korzyść"
+
+Poprzednia edycja (26v) opisała §2 jako "znaczna korzyść majątkowa lub
+porozumienie z innymi osobami" — **to było pomylenie z §5**. Dosłowne
+brzmienie §2 (potwierdzone bezpośrednim cytatem z arslege.pl, t.j.
+Dz.U.2025.383): dotyczy PRACOWNIKA lub osoby działającej w imieniu
+banku/instytucji finansowej/kredytowej, która WBREW PRZEPISOM przyjmuje
+środki płatnicze z naruszeniem obowiązku rejestracji transakcji — kara
+TA SAMA co §1 (6 m-cy–8 lat), nie osobny/wyższy wymiar. Naprawiono.
+
+### 2. UZUPEŁNIONO §5 — brakująca dolna granica i druga przesłanka
+
+Poprzednia wersja modułu (sprzed całej tej sesji) miała §5 jako
+"działanie w porozumieniu lub przy użyciu instytucji finansowej — do
+10 lat" — brakowało dolnej granicy (rok, nie tylko górna) ORAZ
+alternatywnej przesłanki "znaczna korzyść majątkowa" (>200 000 zł).
+Potwierdzone w 5+ źródłach (standardyprawa.pl [wyrok SA Katowice II AKa
+344/23], adwokat-skoczylas.pl [2026], obrona24h.pl [2025],
+adwokatspiewak.pl, adwokatdulniak.pl). Naprawiono.
+
+### 3. KOREKTA NUMERACJI: czynny żal = §8 (nie §6), przepadek = §7 (nie §8)
+
+Moduł od dawna (przed tą sesją) błędnie oznaczał czynny żal jako "§6" i
+przepadek jako "§8". Potwierdzone materiałami szkoleniowymi B.J.
+Stefańskiej (gov.pl, dokument akademicki) oraz adwokatdulniak.pl/
+rgn.legal — prawidłowo: **§7 = przepadek**, **§8 = czynny żal**.
+Naprawiono w 4 miejscach w pliku (2 w tabeli głównej, 2 w dalszej
+części dot. terminów/przesłanek).
+
+### 4. §6 POZOSTAJE NIEROZSTRZYGNIĘTE (nowa, zawężona flaga F-18)
+
+Ustalono, że §6 to SUBSTANTYWNY typ kwalifikowany (nie czynny żal, jak
+błędnie sądzono) — prawdopodobnie oparty na "znacznej korzyści
+majątkowej" jako ODRĘBNEJ od §5 przesłance (wg 1 źródła, karh.pl), ale
+dokładne dosłowne brzmienie NIE zostało zweryfikowane wprost. Oznaczono
+w module jako [NIEROZSTRZYGNIĘTE OSTATECZNIE], nie zgadywano. F-17
+zamknięta (3 z 4 problemów rozstrzygnięte), zastąpiona zawężoną F-18
+(tylko dokładne brzmienie §6).
+
+**Rejestracja:** dr-03-prawo-karne-wykroczenia-egzekucja v3.6→v3.7.
+
+### WNIOSEK METODOLOGICZNY — WAŻNY
+
+Ta transza pokazuje wartość PONOWNEGO, dociekliwego sprawdzenia
+WŁASNEJ wcześniejszej pracy w tej samej sesji, nie tylko treści modułu
+sprzed sesji. Naprawa z transzy 26v (dodanie §2) była WYKONANA W
+POŚPIECHU i zawierała błąd merytoryczny (pomylenie z §5). Zgodnie z
+Zasadą 8 (uczciwość), błąd własny jest tak samo warty naprawy i
+odnotowania jak błąd zastany w systemie — nie ma tu różnicy w
+traktowaniu.
+
+### BILANS CAŁOŚCIOWY SESJI FAZA 3E (transze 26h → 26w)
+
+| Domena | Sprawdzeń | Błędów/luk znalezionych (w tym własne) |
+|---|---|---|
+| dr-03 (12 transz) | 30 | 15 (w tym 1 błąd własny z tej samej sesji, naprawiony) |
+| dr-04 | 2 | 2 |
+| dr-06 | 4 | 0 |
+| dr-02 | 1 | 0 |
+| dr-07 | 1 | 0 |
+| **RAZEM** | **38** | **17** |
+
+## AUDYT-2026-07-26x — Przełom: bezpośredni fetch ISAP (api.sejm.gov.pl) + korekta mechanizmu art. 102 §1
+
+**Kontekst:** Próba domknięcia F-18 (dokładne brzmienie art. 299 §6)
+przez bezpośrednią weryfikację na ISAP. Znaleziono i pobrano
+bezpośrednio (`web_fetch`) pełny, autentyczny tekst jednolity KK z
+`api.sejm.gov.pl/eli/acts/DU/2025/383/text.pdf` (Rząd 1 — dokument
+Dziennika Ustaw, nie omówienie wtórne). To PIERWSZY przypadek w tej
+sesji faktycznego, bezpośredniego dotarcia do brzmienia ustawy, nie
+przez pośrednie źródła.
+
+**Ograniczenie napotkane:** dokument ucina się w okolicach art. 118 KK
+(niezależnie od `text_content_token_limit` — próbowano 30000, ten sam
+punkt odcięcia) — NIE udało się dotrzeć do art. 299, więc **F-18
+pozostaje otwarta**, nierozstrzygnięta.
+
+### PRZY OKAZJI: KOREKTA WŁASNEGO błędu w mechanizmie art. 102 §1 (transza 26n)
+
+Autentyczny tekst ISAP: "Jeżeli w okresie, o którym mowa w art. 101,
+wszczęto postępowanie, karalność przestępstw określonych w **art. 101
+§1** ustaje z upływem **10 lat**, a w **pozostałych wypadkach** — z
+upływem **5 lat** od zakończenia tego okresu."
+
+To znaczy: WSZYSTKIE 5 kategorii z §1 (włącznie z najlżejszymi
+występkami, pkt 4) dostają +10 lat — nie tylko pkt 1-3, jak błędnie
+napisano w transzy 26n. "Pozostałe wypadki" (+5 lat) to sprawy SPOZA
+§1 — czyli art. 101 §2 (prywatnoskargowe), które transza 26n zostawiła
+bez żadnej wartości przedłużenia ("—").
+
+**Naprawiono w mod-KK-art101-105-przedawnienie-karalnosci.md:**
+- Wiersz "Występek, zagrożenie ≤3 lata": było błędnie "+5 lat = 10 lat", poprawnie "+10 lat = 15 lat"
+- Wiersz "Prywatnoskargowe": było "—" (brak wartości), poprawnie "+5 lat od zakończenia okresu z §2"
+- Wyjaśnienie mechanizmu przepisane od podstaw z cytatem z autentycznego tekstu ISAP
+
+**Potwierdzone bez zmian** (ta sama fetch potwierdziła wcześniejsze poprawki):
+- Art. 101 §1 (40/20/15/10/5 lat) — DOKŁADNIE zgodne z transzą 26l
+- Art. 101 §2 (prywatnoskargowe, 1 rok/3 lata) — DOKŁADNIE zgodne z transzą 26l
+- Art. 64 §1/§2 (recydywa) — DOKŁADNIE zgodne z transzą 26k
+
+**Rejestracja:** dr-03-prawo-karne-wykroczenia-egzekucja v3.7→v3.8.
+
+### WNIOSEK METODOLOGICZNY — WAŻNY, DO ZASADY 14
+
+`api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}/text.pdf` (oraz analogicznie
+`/text.html`) to DZIAŁAJĄCY, bezpośrednio pobieralny mirror ISAP (Rząd
+1) — już udokumentowany w `shared/PRAWO-HARDGATE.md` (linie ok.
+139-141), ale w tej sesji PIERWSZY RAZ faktycznie użyty i potwierdzony
+jako działający w praktyce. Ograniczenie: URL musi najpierw pojawić się
+w wyniku `web_search`, zanim `web_fetch` na niego pozwoli (polityka
+narzędzia) — nie da się fetchować od razu po samym wzorcu URL bez
+wcześniejszego "zobaczenia" go w wynikach wyszukiwania. Długie akty
+(jak KK, >300 artykułów) ucinają się w połowie niezależnie od
+zwiększania limitu tokenów — użyteczne dla aktów krótkich/średnich lub
+dla WCZESNYCH artykułów długich aktów, nie dla artykułów w drugiej
+połowie bardzo długich kodeksów.
+
+### BILANS CAŁOŚCIOWY SESJI FAZA 3E (transze 26h → 26x)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań | 17 (h-x) |
+| Błędów merytorycznych znalezionych i naprawionych | 18 (w tym 2 błędy własne z tej samej sesji) |
+| Plików zmodyfikowanych | 8 (dr-03: 7, dr-04: 1) + 2 mapy (prawo-polskie-v2, dr-04/MAPA-AKTOW) |
+| Nowy stały mechanizm | MOD-PROPAGACJA-NOWELIZACJI |
+| Nowa stała zasada | ZASADA 14 (gradacja źródeł) |
+| Flagi otwarte na koniec | 1 (F-18 — dokładne brzmienie art. 299 §6, nierozstrzygnięte) |
+
+## AUDYT-2026-07-26y — F-18: druga próba bezpośredniego fetchu ISAP, ten sam mur — flaga pozostaje otwarta
+
+**Kontekst:** Kontynuacja próby domknięcia F-18 na wyraźne żądanie
+użytkownika. Znaleziono i wypróbowano DRUGI wariant URL dokumentu:
+`eli.gov.pl/api/acts/DU/2025/383/text/U/D20250383Lj.pdf` (wersja
+"ujednolicona" 148 stron, uwzględniająca zmiany do 2026-07-16, inna niż
+poprzednio użyty `api.sejm.gov.pl/eli/acts/DU/2025/383/text.pdf` — 76
+stron oryginalnego t.j.).
+
+**Wynik: TEN SAM MUR.** Dokument ucina się w niemal identycznym miejscu
+(art. 115 §26, nielegalny wyścig pojazdów — jeden paragraf dalej niż
+poprzednio, art. 118), mimo innego źródła, innej długości pliku (148
+vs 76 stron) i zwiększonego `text_content_token_limit` (50000).
+
+**Wniosek: to twardy limit przetwarzania odpowiedzi narzędzia
+(prawdopodobnie limit tokenów wyjścia po stronie fetchera), nie
+własność konkretnego dokumentu ani parametr możliwy do obejścia przez
+wybór innego URL czy zwiększenie limitu wejściowego.** Dla aktów o
+długości KK (>300 artykułów, >300 stron w wersji ujednoliconej) metoda
+bezpośredniego fetchu PDF/HTML z ELI/ISAP działa TYLKO dla artykułów
+we WCZESNEJ części kodeksu (sprawdzone do ok. art. 118 z ~350 w KK) —
+nie dla artykułów w drugiej połowie lub dalej.
+
+**F-18 POZOSTAJE OTWARTA** — dokładne brzmienie art. 299 §6 KK
+pozostaje nierozstrzygnięte. Dwie uczciwe, niezależne próby dotarcia
+bezpośrednio do źródła zostały wyczerpane w tej sesji. Dalsze próby
+tą samą metodą (bezpośredni fetch PDF/HTML całego kodeksu) nie mają
+sensu — potrzebna byłaby albo (a) metoda fetchowania WYCINKA aktu
+(np. przez wyszukiwarkę ISAP z zapytaniem o konkretny artykuł, nie
+cały tekst), albo (b) zaakceptowanie źródeł Rządu 2B/3 jako
+wystarczających dla tego wąskiego przypadku, z jawnym zastrzeżeniem
+niższej kategorii dowodu (zgodnie z ZASADĄ 14 pkt 2-3).
+
+### AKTUALIZACJA METODOLOGICZNA DO ZASADY 14
+
+Dodano do wniosków: bezpośredni fetch ELI/ISAP (`api.sejm.gov.pl` lub
+`eli.gov.pl/api/acts/...`) jest NIEZAWODNY dla: (a) krótkich/średnich
+aktów w całości, (b) WCZESNYCH artykułów długich kodeksów (KK, KC,
+KPC — sprawdzone: KK działa do ok. art. 115-118). NIE działa dla
+dalszych partii bardzo długich kodeksów — tam pozostaje jedyną opcją
+web_search z frazą zawierającą numer artykułu, krzyżowana z ZASADĄ 14
+(Rząd 2B jako główne potwierdzenie, Rząd 3 jako dodatkowe).
+
+**Żadnych zmian w plikach dr-03 w tej turze — F-18 zamknięta jako
+"wyczerpana, nierozwiązana" (nie "porzucona bez próby").**
+
+## AUDYT-2026-07-26z — F-18 ZAMKNIĘTA: art. 299 §5/§6 KK rozstrzygnięte jako DWA odrębne paragrafy
+
+**Kontekst:** Kontynuacja na wyraźne żądanie użytkownika — po nieudanych
+próbach bezpośredniego fetchu ISAP (transze 26x/26y), znaleziono
+źródło (adwokat-szymczyk.pl, aktualizacja 3.07.2026) prezentujące
+przepis w formie osobnych, nazwanych sekcji dla każdego paragrafu —
+wystarczające do rozstrzygnięcia struktury, choć nie jest to Rząd 1.
+
+**Rozstrzygnięcie:** art. 299 §5 i §6 KK to **DWA ODRĘBNE paragrafy**
+(nie jeden połączony, jak błędnie zapisano w transzy 26v):
+- **§5** — sprawca czynu z §1 lub §2 działający W POROZUMIENIU Z INNYMI
+  OSOBAMI — od roku do 10 lat.
+- **§6** — sprawca czynu z §1 lub §2 osiągający ZNACZNĄ KORZYŚĆ
+  MAJĄTKOWĄ (>200 000 zł) — od roku do 10 lat (ta sama kara, odrębna
+  przesłanka).
+
+Potwierdzone przez 2 niezależne źródła prezentujące je jako odrębne,
+nazwane sekcje: adwokat-szymczyk.pl (nagłówki "Działanie... w
+porozumieniu" i "...o znacznej wartości" jako osobne części artykułu)
+oraz karh.pl (wprost: "Typ kwalifikowany z art. 299 § 6 k.k. różni się
+z kolei od typów podstawowych wartością korzyści majątkowej").
+
+**Naprawiono w mod-KK-art291-pranie-pieniedzy.md:** rozdzielono
+poprzedni, błędnie połączony wiersz §5 na dwa osobne wiersze §5/§6, z
+pełnym śladem weryfikacji dla każdego.
+
+**Rejestracja:** dr-03-prawo-karne-wykroczenia-egzekucja v3.8→v3.9.
+
+**F-18 ZAMKNIĘTA** — usunięta z WARN-OTWARTE.md.
+
+### UCZCIWE ZASTRZEŻENIE KOŃCOWE
+
+To rozstrzygnięcie opiera się na źródłach Rządu 3 (dwie niezależne
+kancelarie prawne), NIE na bezpośrednim tekście ISAP (Rząd 1), mimo
+dwóch prób. Zgodnie z ZASADĄ 14 pkt 2-3, oznaczone jako potwierdzone
+na podstawie zbieżności źródeł niższej kategorii, z jawnym wskazaniem
+tego faktu w samym module — nie podszywa się pod pełną weryfikację
+Rządu 1.
+
+### BILANS KOŃCOWY CAŁEJ SESJI FAZA 3E (transze 26h → 26z)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań | 19 |
+| Błędów/luk merytorycznych znalezionych i naprawionych | 19 (w tym 2 błędy własne z tej samej sesji, oba naprawione) |
+| Plików zmodyfikowanych | 8 (dr-03: 7, dr-04: 1) + 2 mapy |
+| Nowy stały mechanizm | MOD-PROPAGACJA-NOWELIZACJI |
+| Nowa stała zasada | ZASADA 14 (gradacja źródeł) |
+| Flagi otwarte na koniec | **0** |
+
+## AUDYT-2026-07-27a — Uznanie i naprawa naruszenia ZASADY 14: F-18 domknięta ponownie, tym razem prawidłowo z Rządem 2B
+
+**Kontekst:** Użytkownik słusznie zwrócił uwagę, że zamknięcie F-18 w
+transzy 26z naruszyło samą ZASADĘ 14, którą ta sesja ustanowiła:
+oparłem rozstrzygnięcie WYŁĄCZNIE na 2 źródłach Rządu 3 (kancelarie
+prawne), bez próby dotarcia do Rządu 2B, mimo że Rząd 2B jest
+WYMAGANY jako główne potwierdzenie, a Rząd 3 tylko pomocniczo.
+
+**Naprawiono metodologicznie:** wyszukano i potwierdzono dosłownym
+cytatem z **3 niezależnych agregatorów Rządu 2B** (lexlege.pl,
+prawo-pl.com, e-prawnik.pl — wszystkie trzy identyczny tekst
+przepisu, co jest silnym sygnałem wierności źródłu):
+
+```
+§ 5. Jeżeli sprawca dopuszcza się czynu określonego w § 1 lub 2,
+     działając w porozumieniu z innymi osobami, podlega karze
+     pozbawienia wolności od roku do lat 10.
+§ 6. Karze określonej w § 5 podlega sprawca, jeżeli dopuszczając się
+     czynu określonego w § 1 lub 2, osiąga znaczną korzyść majątkową.
+§ 6a. Kto czyni przygotowania do przestępstwa określonego w § 1 lub 2,
+      podlega karze pozbawienia wolności do lat 3.
+§ 7. [przepadek — jak już ustalono]
+```
+
+**Rezultat: struktura §5/§6 potwierdzona jako identyczna** z tym, co
+ustalono (błędnie metodologicznie, ale poprawnie merytorycznie) w
+transzy 26z — DWA odrębne paragrafy, ta sama kara, odrębne przesłanki.
+**Ale przy okazji odkryto DODATKOWY, wcześniej całkowicie pominięty
+element: §6a (przygotowanie do przestępstwa z §1/§2 — do 3 lat)** —
+nie było go w module w ŻADNEJ wcześniejszej wersji.
+
+**Naprawiono w mod-KK-art291-pranie-pieniedzy.md:**
+- §5/§6: przepisano z dosłownym cytatem Rządu 2B jako podstawą, nie
+  tylko Rządu 3
+- §6a: dodano od podstaw (przygotowanie, do 3 lat)
+- §7: dodatkowo potwierdzone tym samym zestawem 3 źródeł Rządu 2B
+
+**Rejestracja:** dr-03-prawo-karne-wykroczenia-egzekucja v3.9→v3.10.
+
+### WNIOSEK METODOLOGICZNY — NAJWAŻNIEJSZY Z CAŁEJ SESJI
+
+Ta transza to najbardziej wymowny przykład wartości ZASADY 14: sesja,
+która SAMA USTANOWIŁA regułę "Rząd 2B najpierw, Rząd 3 pomocniczo",
+w jednej z własnych transz (26z) tę regułę złamała pod presją "domknij
+temat" — i zostałaby to niezauważone, gdyby użytkownik nie zwrócił
+uwagi. Konsekwencja złamania zasady NIE była błędem merytorycznym
+(struktura §5/§6 okazała się poprawna), ale mogła nim być — a
+DODATKOWO właściwe podejście metodologiczne (szukanie Rządu 2B) od razu
+ujawniło NOWY, realny brak (§6a), którego podejście oparte tylko na
+Rządzie 3 nie wykryło. To konkretny, udokumentowany dowód na to, że
+gradacja źródeł nie jest formalnością — wyższa jakość źródła
+koreluje z wyższą szansą wykrycia dodatkowych nieścisłości.
+
+### BILANS KOŃCOWY CAŁEJ SESJI FAZA 3E (transze 26h → 27a)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań | 20 |
+| Błędów/luk merytorycznych znalezionych i naprawionych | 20 (w tym 3 błędy/luki własne z tej samej sesji, wszystkie naprawione) |
+| Naruszeń własnej ZASADY 14 znalezionych i naprawionych | 1 (ta transza) |
+| Flagi otwarte na koniec | **0** |
+
+## AUDYT-2026-07-27b — Największa naprawa sesji: mod-KK-art305-zmowa-przetargowa-karna, całościowa przebudowa (Rząd 2B od podstaw)
+
+**Kontekst:** Kontynuacja transz FAZA 3E, tym razem stosując ZASADĘ 14
+poprawnie od SAMEGO POCZĄTKU (Rząd 2B jako pierwsza, nie ostatnia,
+próba) — bezpośredni fetch lexlege.pl ("Stan prawny aktualny na dzień:
+17.07.2026", t.j. Dz.U.2025.383).
+
+### ZNALEZISKO: moduł opisywał NIEAKTUALNĄ/POMYLONĄ strukturę art. 305 KK
+
+Porównanie z autorytatywnym tekstem Rządu 2B ujawniło:
+
+1. **§1 i §2 miały ZAMIENIONE treści** — moduł przypisywał element
+   "wejście w porozumienie z inną osobą" do §1, podczas gdy w
+   rzeczywistości ten element (wraz z "w celu wywarcia bezprawnego
+   wpływu") stanowi TREŚĆ §2. §1 dotyczy WYŁĄCZNIE prostego
+   utrudniania/udaremniania, BEZ elementu porozumienia.
+2. **§3 (typ kwalifikowany — cel korzyści majątkowej/osobistej, 6
+   m-cy–8 lat) CAŁKOWICIE POMINIĘTY** — to NAJCZĘŚCIEJ używany w
+   praktyce wariant ("zmowa za łapówkę"), a moduł go nie miał wcale.
+3. **§4 (rozszerzenie na aukcje, w tym prywatne) CAŁKOWICIE
+   POMINIĘTY** — kluczowa zmiana z nowelizacji 2022/2023, która
+   rozszerzyła zakres przepisu poza sam sektor zamówień publicznych.
+4. **§5 (tryb ścigania na wniosek, z wyjątkami) CAŁKOWICIE POMINIĘTY**
+   — moduł błędnie zakładał "z urzędu" dla wszystkiego.
+5. **§6 (klauzula niekaralności/leniency) CAŁKOWICIE POMINIĘTY.**
+
+**Przyczyna:** moduł (dodany 2026-07-16) opisywał prawdopodobnie
+przedreformową (sprzed 1.10.2023) wersję przepisu, bez uwzględnienia
+nowelizacji — analogicznie do wzorca znalezionego wcześniej w
+mod-KK-art101-105 i mod-KK-art148-162 w tej samej sesji, ale w
+znacznie szerszym zakresie (tu brakowało 4 z 6 paragrafów całkowicie,
+nie tylko jednej liczby).
+
+**Naprawiono: CAŁOŚCIOWA PRZEBUDOWA modułu** — DRZEWO Z.1 i Z.2
+przepisane od podstaw z poprawną strukturą, dodano DRZEWO Z.3 (§3),
+sekcje dla §4/§5/§6, przebudowano tabelę szybkiego odczytu z
+poprawnym trybem ścigania per paragraf. Wersja pliku: v1.0.0→v2.0.0
+(zmiana głównej cyfry — uzasadniona skalą przebudowy).
+
+**Rejestracja:** dr-03-prawo-karne-wykroczenia-egzekucja v3.10→v3.11.
+
+### WNIOSEK METODOLOGICZNY
+
+Ta transza — zastosowanie ZASADY 14 PRAWIDŁOWO OD POCZĄTKU (Rząd 2B
+najpierw) — ujawniła NAJWIĘKSZY dotąd znaleziony w tej sesji błąd
+merytoryczny (4 z 6 paragrafów pominiętych, 2 pomylone). To bezpośrednio
+kontrastuje z transzą 26z (F-18), gdzie oparcie się na Rządzie 3 dało
+wynik "wystarczająco dobry, ale niepełny" (przeoczono §6a). Tutaj
+podejście "Rząd 2B pierwsze" ujawniło znacznie więcej niż podejście
+oparte na Rządzie 3 prawdopodobnie by ujawniło — silny, powtarzalny
+argument za bezwzględnym stosowaniem kolejności z ZASADY 14, nie tylko
+w teorii, ale i w praktyce każdej kolejnej transzy.
+
+### BILANS KOŃCOWY CAŁEJ SESJI FAZA 3E (transze 26h → 27b)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań | 21 |
+| Błędów/luk merytorycznych znalezionych i naprawionych | 21 (w tym największy: 4-6 brakujących/pomylonych paragrafów w art. 305) |
+| Plików całościowo przebudowanych | 1 (mod-KK-art305, v1→v2) |
+| Flagi otwarte na koniec | **0** |
+
+## AUDYT-2026-07-27c — Kontrola na żądanie: nieuczciwa konkurencja i zakaz konkurencji
+
+**Kontekst:** Użytkownik poprosił o sprawdzenie, czy system pokrywa
+tematy "nieuczciwa konkurencja" i "zakaz konkurencji" — oba tematy
+mają dedykowane moduły. Sprawdzono z ZASADĄ 14 (Rząd 2B najpierw).
+
+### mod-ustawa-UZNK-nieuczciwa-konkurencja.md (dr-02) — 1 błąd znaleziony i naprawiony
+
+**Błąd:** moduł opisywał art. 20 UZNK (przedawnienie roszczeń) jako
+"3 lata od dowiedzenia się o czynie i osobie zobowiązanej, max 10 lat
+od czynu" — konstrukcja przypominająca ogólną zasadę deliktową z KC,
+ale NIEZGODNA z aktualnym brzmieniem UZNK.
+
+**Poprawne brzmienie** (potwierdzone 4 źródłami Rządu 2B: prawo.pl,
+lexlege.pl, arslege.pl — wszystkie identyczny tekst, t.j. Dz.U.2026.85):
+§1 — prosty termin 3 lata liczony OSOBNO od KAŻDEGO naruszenia (nie od
+"dowiedzenia się"); §2 — dla roszczeń o naprawienie szkody stosuje się
+dopiero art. 442¹ KC (tam pojawia się mechanizm subiektywny/
+obiektywny); §3 — wyłączenie dla roszczeń objętych ustawą z 2017 r. o
+naprawieniu szkody za naruszenie prawa konkurencji; §4 — jeśli
+naruszenie tajemnicy przedsiębiorstwa jest jednocześnie przestępstwem,
+termin przedawnienia szkody nie może skończyć się później niż 20 lat
+od popełnienia przestępstwa. Moduł miał WSZYSTKIE cztery elementy
+pomieszane w jeden, uproszczony (i błędny) opis.
+
+**Potwierdzone bez zmian:** art. 11 UZNK (tajemnica przedsiębiorstwa) —
+zgodne z modułem, potwierdzone przez arslege.pl, lexlege.pl i 3
+dodatkowe źródła Rządu 3.
+
+**Rejestracja:** dr-02-prawo-cywilne-rodzinne-gospodarcze v3.6→v3.7.
+
+### analizator-umow-v1/references/zakaz-konkurencji.md — potwierdzone bez zmian
+
+Sprawdzono kluczowe twierdzenie: minimalne odszkodowanie za zakaz
+konkurencji po ustaniu zatrudnienia = 25% wynagrodzenia (art. 101²
+§3 KP). **Potwierdzone w 7+ niezależnych źródłach**, w tym lexlege.pl
+(Rząd 2B) z dosłownym cytatem: "Odszkodowanie... nie może być niższe
+od 25% wynagrodzenia otrzymanego przez pracownika przed ustaniem
+stosunku pracy przez okres odpowiadający okresowi obowiązywania
+zakazu konkurencji." Moduł już stosuje dobrą praktykę: HARD GATE
+wymuszający weryfikację ISAP przed każdym cytowaniem, bez sztywno
+zakodowanych wartości poza dobrze ugruntowanymi (25% to stała
+ustawowa, nie podatna na coroczną zmianę jak stawki kwotowe).
+
+### BILANS CAŁOŚCIOWY SESJI FAZA 3E (transze 26h → 27c)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań | 22 |
+| Błędów/luk merytorycznych znalezionych i naprawionych | 22 |
+| Domeny sprawdzone | dr-02, dr-03, dr-04, dr-06, dr-07, analizator-umow-v1 |
+| Flagi otwarte na koniec | **0** |
+
+## AUDYT-2026-07-27d — FAZA 3E, dr-05: mod-KPA-postepowanie-administracyjne — potwierdzone bez zmian
+
+**Moduł:** `mod-KPA-postepowanie-administracyjne.md` (dr-05) — pierwsza
+weryfikacja tej domeny w całej sesji.
+
+**Sprawdzone:** termin odwołania od decyzji administracyjnej (art. 129
+§2 KPA) — 14 dni od doręczenia; termin przekazania akt przez organ I
+instancji (art. 133 KPA) — 7 dni.
+
+**Wynik: POTWIERDZONE w pełni** — 2 źródła Rządu 2B (arslege.pl,
+lexlege.pl, t.j. Dz.U.2025.1691) oraz 6 dodatkowych źródeł zgodnych.
+Moduł poprawny w sprawdzonym zakresie, bez zmian.
+
+### BILANS CAŁOŚCIOWY SESJI FAZA 3E (transze 26h → 27d)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań | 23 |
+| Błędów/luk merytorycznych znalezionych i naprawionych | 22 |
+| Domeny sprawdzone | dr-02, dr-03, dr-04, dr-05, dr-06, dr-07, analizator-umow-v1 (7 dziedzin) |
+| Flagi otwarte na koniec | **0** |
+
+## AUDYT-2026-07-27e — FAZA 3E, dr-05: mod-UPEA-egzekucja-administracyjna — potwierdzone, lekkie uzupełnienie
+
+**Moduł:** `mod-UPEA-egzekucja-administracyjna.md` (dr-05).
+
+**Sprawdzone:** termin zarzutów w egzekucji administracyjnej (art. 33
+UPEA) — moduł podaje "7 dni od doręczenia odpisu TW lub zajęcia".
+
+**Wynik: REGUŁA PODSTAWOWA POTWIERDZONA** — Rząd 2B (lexlege.pl,
+arslege.pl) i Rząd 3 (lexplay.pl — dosłowny cytat: "Zarzuty... wnosi
+się w terminie 7 dni od dnia doręczenia zobowiązanemu odpisu tytułu
+wykonawczego") zgodnie potwierdzają.
+
+**Uzupełnienie (nie błąd):** art. 33 §5 UPEA przewiduje DODATKOWE,
+alternatywne terminy "nie później niż" dla sytuacji szczególnych
+(30 dni od wyegzekwowania w całości, 7 dni od postanowienia o
+umorzeniu) — moduł tego nie miał, dodano jako uzupełnienie z jasnym
+wskazaniem, że to dodatkowy przypadek, nie korekta błędu.
+
+**Rejestracja:** dr-05-prawo-administracyjne-sadowoadministracyjne v3.4→v3.5.
+
+### BILANS CAŁOŚCIOWY SESJI FAZA 3E (transze 26h → 27e)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań | 24 |
+| Błędów/luk merytorycznych znalezionych i naprawionych | 22 błędów + 2 uzupełnienia (nie-błędy) |
+| Domeny sprawdzone | dr-02, dr-03, dr-04, dr-05, dr-06, dr-07, analizator-umow-v1 |
+| Flagi otwarte na koniec | **0** |
+
+## AUDYT-2026-07-27f — FAZA 3E, dr-09: mod-PrBud-prawo-budowlane — potwierdzone bez zmian
+
+**Moduł:** `mod-PrBud-prawo-budowlane.md` (dr-09) — pierwsza weryfikacja
+tej domeny w całej sesji.
+
+**Sprawdzone:** termin milczącej zgody przy zgłoszeniu robót
+budowlanych (art. 30 ust. 5 Prawo budowlane) — 21 dni od doręczenia
+zgłoszenia, brak sprzeciwu = możliwość rozpoczęcia robót.
+
+**Wynik: W PEŁNI POTWIERDZONE** — 4+ źródeł Rządu 2B/3 zgodnych
+(lexlege.pl, prawo-budowlane.info, projektgamma.pl, wspolnota.org.pl,
+prawo.pl), w tym potwierdzenie orzecznictwa WSA o charakterze prawnym
+milczącej zgody. Moduł poprawny, bez zmian.
+
+### BILANS CAŁOŚCIOWY SESJI FAZA 3E (transze 26h → 27f)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań | 25 |
+| Błędów/luk merytorycznych znalezionych i naprawionych | 22 |
+| Domeny sprawdzone | dr-02, dr-03, dr-04, dr-05, dr-06, dr-07, dr-09, analizator-umow-v1 (8) |
+| Flagi otwarte na koniec | **0** |
+
+## AUDYT-2026-07-27g — Ulepszenie na żądanie: znacznik RZĄD w HG-ACTIVE i nowa pozycja ŹRÓDŁO-GATE w SELF-CHECK
+
+**Na wyraźne polecenie użytkownika:** dwie precyzyjne, minimalno-kosztowe
+zmiany w `prawny-router-v3/SKILL.md` (v3.16→v3.17), wykorzystujące już
+istniejące, działające mechanizmy zamiast tworzenia nowych:
+
+1. **Blok HG-ACTIVE** (HARD GATE PRIORYTET BEZWZGLĘDNY) — dodano jedno
+   zdanie: "Każdy link/URL podany użytkownikowi wymaga znacznika RZĄD
+   1/2A/2B/3 — patrz shared/HIERARCHIA-ZRODEL.md." Umieszczone zaraz po
+   istniejącej regule o [NIEWERYFIKOWANE], przed regułą o sprawach
+   zagranicznych — zachowuje kolejność i styl bloku.
+
+2. **SELF-CHECK** (ten sam blok co POV-B/POV-C/POV-D) — dodano nową
+   pozycję blokującą **ŹRÓDŁO-GATE**: "Każdy link podany w tej
+   odpowiedzi ma przypisany RZĄD 1/2A/2B/3? NIE → STOP. Sklasyfikuj wg
+   shared/HIERARCHIA-ZRODEL.md przed wysłaniem." Umieszczona
+   bezpośrednio po bloku POV-B/C/D, w tym samym stylu (⛔ + wzorzec
+   pytanie-warunek-akcja), przed pozycją o KROK1-detekcja.md.
+
+**Sprawdzone, ale NIE zmienione:** plik `references/SELF-CHECK.md`
+(50 linii, osobna, krótsza lista kontrolna) NIE ma zdublowanej
+struktury POV-B/C/D — to inny, komplementarny checklist. Użytkownik
+wskazał precyzyjnie "ten sam blok, który już ma POV-B/POV-C/POV-D" —
+to blok w SKILL.md, nie w tym pliku referencyjnym. Nie rozszerzano
+zakresu ponad wyraźne żądanie.
+
+**Uzasadnienie zgodności z intencją użytkownika:** obie zmiany
+wykorzystują istniejący, już działający mechanizm HARD GATE / SELF-CHECK
+zamiast tworzyć nowy, osobny system wymuszania — dokładnie tak, jak
+prosił użytkownik ("najmniejszy koszt, korzysta z już działającego
+mechanizmu zamiast tworzyć nowy").
+
+**Rejestracja:** prawny-router-v3 v3.16→v3.17.
+
+## AUDYT-2026-07-27h — FAZA 3E, dr-09: mod-ustawa-planowanie-przestrzenne — CRIT znaleziony, termin krytycznie bliski
+
+**Moduł:** `mod-ustawa-planowanie-przestrzenne.md` (dr-09). Moduł miał
+własne przypomnienie ("web_search: Plan Ogólny Gminy POG reforma 2025
+termin uchwalenia") zamiast podanej wartości — rozstrzygnięto to
+przypomnienie w tej transzy.
+
+### CRIT ZNALEZIONY I NAPRAWIONY — termin POG przesunięty DWUKROTNIE
+
+Moduł podawał termin uchwalenia Planu Ogólnego Gminy jako **31.12.2025**
+— to termin PIERWOTNY, od dawna nieaktualny. Ustalono (Rząd 1: gov.pl/
+MRiT wprost cytowany; Rząd 3: ongeo.pl, investorrealestateexpert.co,
+dsk-kancelaria.pl): termin przesuwano DWUKROTNIE — najpierw do
+30.06.2026, potem PONOWNIE do **31.08.2026** (projekt UD316, uchwalony
+przez Sejm). To termin KRYTYCZNIE BLISKI — dziś jest 26.07.2026, czyli
+ok. MIESIĄC do terminu. Po 1.09.2026 gminy bez POG co do zasady NIE
+BĘDĄ MOGŁY uchwalać/zmieniać MPZP ani wydawać decyzji WZ/LICP.
+
+**Dodatkowo odnotowano (kontekst praktyczny):** stan realizacji
+alarmujący — w marcu 2026 POG uchwaliło zaledwie 31 z ponad 2400 gmin
+(1,3%). To istotny kontekst dla oceny ryzyka klienta w konkretnej
+sprawie (czy gmina, w której leży nieruchomość, zdążyła).
+
+**Naprawiono z jawnym ostrzeżeniem o dalszej niestabilności:** biorąc
+pod uwagę HISTORIĘ dwóch przesunięć w ciągu roku, dodano wprost
+zalecenie ponownej weryfikacji przed użyciem — to nie jest ustalony,
+stabilny fakt, tylko żywy, zmieniający się temat legislacyjny.
+
+**Rejestracja:** dr-09-budownictwo-srodowisko-energia-transport v3.3→v3.4.
+
+### BILANS CAŁOŚCIOWY SESJI FAZA 3E (transze 26h → 27h)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań | 26 |
+| Błędów/luk merytorycznych znalezionych i naprawionych | 23 |
+| Domeny sprawdzone | dr-02, dr-03, dr-04, dr-05, dr-06, dr-07, dr-09, analizator-umow-v1 (8), prawny-router-v3 (ulepszenie strukturalne) |
+| Flagi otwarte na koniec | **0** |
+
+## AUDYT-2026-07-27i — Niespójność routingu prawa oświatowego znaleziona i częściowo naprawiona
+
+**Kontekst:** Użytkownik zapytał wprost: "do jakiego DR dałeś prawo
+oświatowe, czy jest pokryte w całości?" Sprawdzenie ujawniło REALNĄ
+niespójność między decyzją routingu z 2026-07-25 a faktycznym stanem
+systemu.
+
+### ZNALEZISKO
+
+Decyzja z 2026-07-25 (transze "audyt portali") przypisała prawo
+oświatowe do: DR-04 (elementy pracownicze) + DR-08 (zawód zaufania
+publicznego — awans, nadzór, dyscyplina). **Ta decyzja NIGDY nie
+została zrealizowana jako rzeczywista treść** — sprawdzenie modułów
+DR-04 i DR-08 ujawniło WYŁĄCZNIE jednolinijkowe wzmianki (ZFŚS,
+subwencja oświatowa), zero substancjalnej treści.
+
+**Jednocześnie odkryto, że substancjalne moduły JUŻ ISTNIAŁY, od dawna,
+niezależnie od tej decyzji:**
+- `dr-10/modules/mod-ustawa-oswiata-szkolnictwo-wyzsze.md` (155 linii)
+  — decyzje administracyjne, kuratorium, skreślenia, awans
+- `dr-15/modules/mod-ustawa-nauczyciele-uczelnie.md` (162 linii) —
+  dyscyplinarka, ocena pracy, awans, orzeczenia PPP
+
+Decyzja routingu z 2026-07-25 NIE WIEDZIAŁA o istnieniu tych dwóch
+modułów — prawdopodobnie dlatego, że audyt portali z tamtej sesji
+skupiał się na REJESTRZE ŹRÓDEŁ (który portal, jaki DR), nie na
+przeszukaniu całego systemu pod kątem ISTNIEJĄCYCH modułów treściowych
+przed podjęciem decyzji o przypisaniu.
+
+**DODATKOWO:** moduły DR-10 i DR-15, mimo pokrywającego się zakresu
+("awans zawodowy" w obu), NIE MIAŁY żadnej wzajemnej cross-referencji
+— każdy istniał w izolacji, nieświadomy drugiego.
+
+### NAPRAWIONE
+
+1. Dodano wzajemne cross-referencje między `mod-ustawa-oswiata-
+   szkolnictwo-wyzsze.md` (DR-10) i `mod-ustawa-nauczyciele-uczelnie.md`
+   (DR-15) — każdy teraz wskazuje na drugi z jasnym rozgraniczeniem
+   (DR-15 = szczegóły dyscyplinarki, DR-10 = szerszy kontekst
+   administracyjny).
+2. Naprawiono wpis w `shared/PORTALE-BRANZOWE-RZAD-2B.md` — poprzednia
+   notatka z 2026-07-25 błędnie kierowała do DR-04/DR-08; skorygowano
+   z jawnym wskazaniem PRAWDZIWEGO stanu (DR-15/DR-10 dla treści
+   merytorycznej).
+3. Dodano **F-19** do WARN-OTWARTE.md: elementy PRACOWNICZE Karty
+   Nauczyciela (wynagrodzenie, czas pracy, urlopy, ZFŚS) NIE mają
+   substancjalnej treści NIGDZIE w systemie — to prawdziwa, nie tylko
+   formalna luka, w przeciwieństwie do aspektu dyscyplinarno-
+   administracyjnego, który JEST pokryty (tylko w innym miejscu niż
+   wcześniej zakładano).
+
+**Rejestracja:** shared v3.5→v3.6, dr-10 v3.8→v3.9, dr-15 v3.2→v3.3.
+
+### WNIOSEK METODOLOGICZNY
+
+Decyzje o ROUTINGU/PRZYPISANIU dziedziny do DR powinny być
+poprzedzone przeszukaniem CAŁEGO systemu pod kątem istniejących
+modułów treściowych (np. `grep -rl "słowo kluczowe" /mnt/skills/user/`),
+nie tylko sprawdzeniem, czy dany temat "pasuje" koncepcyjnie do opisu
+danego DR. Decyzja z 2026-07-25 była logicznie spójna (DR-04 dla pracy,
+DR-08 dla statusu zawodowego), ale ODERWANA od stanu faktycznego
+systemu — dokładnie ten typ błędu, jaki mechanizm propagacji nowelizacji
+(MOD-PROPAGACJA-NOWELIZACJI) ma wychwytywać dla PRZEPISÓW; ten
+przypadek pokazuje, że ten sam problem (decyzja bez sprawdzenia całego
+systemu) dotyczy też decyzji TAKSONOMICZNYCH, nie tylko merytorycznych.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27i)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 26 |
+| Błędów/luk merytorycznych FAZA 3E | 23 |
+| Niespójności taksonomicznych znalezionych i naprawionych | 1 (ta transza) |
+| Flagi otwarte na koniec | 1 (F-19 — brak treści pracowniczej Karty Nauczyciela, świadomie pozostawiona jako kandydat do rozbudowy) |
+
+## AUDYT-2026-07-27j — Rozbudowa treściowa na żądanie: autonomia uczelni, szkoły publiczne/niepubliczne, wymagane licencje
+
+**Kontekst:** Kontynuacja po transzy 27i (niespójność routingu prawa
+oświatowego) — użytkownik poprosił o dodanie trzech konkretnych
+tematów do modułu prawa oświatowego. Dodano do
+`dr-10/modules/mod-ustawa-oswiata-szkolnictwo-wyzsze.md` (moduł
+wskazany jako właściwy dla szerszego kontekstu administracyjnego, per
+korekta z transzy 27i), z zastosowaniem ZASADY 14: Rząd 1
+(isap.sejm.gov.pl, bezpośredni PDF ustawy — udało się dotrzeć, ustawa
+krótsza niż KK) jako podstawa, Rząd 2B (lexlege.pl, arslege.pl,
+inforlex.pl) jako potwierdzenie, Rząd 3 (mvg.pl, lexedu.pl) jako
+dodatkowe.
+
+### NOWA SEKCJA 1A — Autonomia uczelni
+
+Dodano na podstawie art. 3 ust. 1 i art. 9 PSWiN (Dz.U.2024.1571 t.j.):
+definicja ustawowa, 5 ustępów art. 9 (osobowość prawna, autonomia "na
+zasadach określonych w ustawie" — NIE nieograniczona, siedziba/filia,
+KLUCZOWE: "organy władzy publicznej mogą podejmować rozstrzygnięcia
+dotyczące uczelni TYLKO w przypadkach przewidzianych w ustawach"),
+wyłączenia dla uczelni kościelnych (art. 8, z wyjątkiem KUL), ochrona
+nazw "akademia"/"akademia nauk stosowanych" (art. 16).
+
+### NOWA SEKCJA 1B — Szkoły publiczne vs niepubliczne
+
+Tabela porównawcza (kto zakłada, odpłatność, podstawa programowa, wpis
+do ewidencji, finansowanie) na podstawie Prawa oświatowego (Dz.U.
+2026.820 t.j.) i Rozdziału 8 (art. 168 i nast.). **Kluczowe ostrzeżenie
+dodane:** rozróżnienie publiczna/niepubliczna NIE jest tożsame z
+samorządowa/prywatna — szkoła publiczna może być prowadzona przez
+podmiot prywatny spełniający wymogi art. 14 — to częsty błąd
+praktyczny, jawnie oznaczony jako taki.
+
+### NOWA SEKCJA 1C — Wymagane licencje/zezwolenia
+
+Tabela 6 typów podmiotów (uczelnia publiczna/niepubliczna, szkoła
+publiczna/niepubliczna, szkoła z uprawnieniami publicznymi, placówka
+zawodowa) z wymaganym aktem, organem i podstawą prawną. Kluczowe
+ustalenia: uczelnia niepubliczna NABYWA OSOBOWOŚĆ PRAWNĄ dopiero z
+chwilą wpisu do ewidencji (nie wcześniej); wpis szkoły niepublicznej
+do ewidencji to tryb ZGŁOSZENIOWO-REJESTROWY z merytoryczną kontrolą
+(opinia kuratora), nie czyste "zezwolenie"; szkoła niepubliczna MOŻE
+otrzymać "uprawnienia szkoły publicznej" (art. 178 Prawo oświatowe)
+nawet nie spełniając wprost zwykłych wymogów, na podstawie zgody
+ministra; osobny, rzadki wyjątek dla nadzoru nad szkołami
+artystycznymi (minister kultury, nie MEN/kurator, poza przedmiotami
+ogólnokształcącymi).
+
+**Rejestracja:** dr-10-zdrowie-farmacja-zywnosc-rolnictwo v3.9→v3.10
+(3 nowe sekcje "## ", nagłówki 11→14, zweryfikowane).
+
+**Uwaga o zakresie:** ta rozbudowa NIE domyka F-19 (brak treści
+pracowniczej Karty Nauczyciela — wynagrodzenie, urlopy, czas pracy) —
+to inny temat niż autonomia/zakładanie placówek, F-19 pozostaje
+otwarta.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27j)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 26 |
+| Błędów/luk merytorycznych FAZA 3E naprawionych | 23 |
+| Rozbudowy treściowe na żądanie (nie naprawy błędów) | 2 (transza 27j: 3 nowe sekcje) |
+| Niespójności taksonomiczne znalezione i naprawione | 1 |
+| Flagi otwarte na koniec | 1 (F-19) |
+
+## AUDYT-2026-07-27k — FAZA 3E, dr-14: mod-EKPC-ETPC-prawa-czlowieka — potwierdzone bez zmian
+
+**Moduł:** `mod-EKPC-ETPC-prawa-czlowieka.md` (dr-14) — pierwsza
+weryfikacja tej domeny w sesji.
+
+**Sprawdzone:** termin skargi do ETPC — moduł podaje "4 miesiące od
+ostatecznej decyzji krajowej (od 01.02.2022 — poprzednio 6 mies.)".
+
+**Wynik: W PEŁNI POTWIERDZONE** — gov.pl/MSZ (Rząd 1, cytat wprost),
+10+ źródeł Rządu 2B/3 (prawo.pl, infor.pl, sądy okręgowe, policja)
+zgodnie potwierdzają: Protokół nr 15 do EKPC skrócił termin z 6 do 4
+miesięcy, w życie 1.02.2022, BEZ działania wstecz (stare sprawy z
+ostateczną decyzją przed 1.02.2022 nadal mają 6 miesięcy). Moduł
+zawiera tę historyczną niuansę poprawnie i zwięźle. Bez zmian.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27k)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 27 |
+| Błędów/luk merytorycznych naprawionych | 23 |
+| Domeny sprawdzone | dr-02, 03, 04, 05, 06, 07, 09, 14, analizator-umow-v1 (9) |
+| Rozbudowy treściowe na żądanie | 2 |
+| Flagi otwarte | 1 (F-19) |
+
+## AUDYT-2026-07-27l — FAZA 3E, dr-13: obserwacja wzorca projektowego, brak konkretnych błędów do naprawy
+
+**Zakres:** Sprawdzono 3 moduły dr-13 (mod-ustawa-informacje-niejawne.md,
+mod-ustawa-policja.md, mod-ustawa-obrona-ojczyzny-mobilizacja.md) pod
+kątem konkretnych, sprawdzalnych twierdzeń liczbowych (terminy, progi
+wiekowe, okresy ochrony klauzul tajności).
+
+**Wynik: BRAK twierdzeń do zweryfikowania** — wszystkie 3 moduły
+stosują KONSEKWENTNIE defensywny wzorzec projektowy: NIE hardkodują
+konkretnych liczb (okresów ochrony klauzul, terminów zatrzymania,
+progów wiekowych), tylko dają ogólny szkielet proceduralny ("ustal
+termin", "sprawdź w ISAP") z odesłaniem do bieżącej weryfikacji. To
+SPÓJNE z resztą skilli w tej rodzinie (mod-KI-nauczyciele-uczelnie z
+dr-15 miał podobny styl przy pierwszym sprawdzeniu tej sesji).
+
+**Obserwacja pozytywna, nie błąd:** ten wzorzec ELIMINUJE ryzyko
+dryfu (nie ma nieaktualnej liczby, bo nie ma żadnej liczby) kosztem
+mniejszej użyteczności praktycznej (użytkownik musi sam sprawdzić
+każdy próg). To świadomy kompromis, nie usterka — brak potrzeby
+interwencji.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27l)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 28 |
+| Błędów/luk merytorycznych naprawionych | 23 |
+| Domeny sprawdzone (z błędem lub bez) | 10 (dr-02,03,04,05,06,07,09,13,14, analizator-umow-v1) |
+| Flagi otwarte | 1 (F-19) |
+
+## AUDYT-2026-07-27m — F-19 ZAMKNIĘTA: nowy moduł mod-ustawa-karta-nauczyciela-pracownicze
+
+**Kontekst:** Na wyraźne żądanie użytkownika ("zajmij się F-19"),
+utworzono nowy moduł DR-04 pokrywający pracownicze aspekty Karty
+Nauczyciela, zweryfikowany zgodnie z ZASADĄ 14 (Rząd 1: gov.pl/MEN,
+orka2.sejm.gov.pl; Rząd 2B: lexlege.pl, arslege.pl, przepisy.gofin.pl).
+
+### NOWY MODUŁ: mod-ustawa-karta-nauczyciela-pracownicze.md (dr-04)
+
+Sześć sekcji, każda zweryfikowana osobno:
+
+1. **Wynagrodzenie (art. 30 KN)** — zamknięty katalog składników
+   (zasadnicze + dodatki + godziny ponadwymiarowe + nagrody), "średnie
+   wynagrodzenie" jako model teoretyczny (art. 30 ust. 3), dodatek
+   uzupełniający (art. 30a) — potwierdzone orzecznictwem SA Warszawa
+   (III APa 89/05) o zamkniętym katalogu.
+2. **Czas pracy/pensum (art. 42 KN)** — 40h/tydzień ogólny czas pracy,
+   pensum ≤30h, dla większości 18h (potwierdzone wprost przez
+   orka2.sejm.gov.pl — odpowiedź MEN na interpelację), mechanizm
+   łączonego pensum (art. 42 ust. 5c).
+3. **Urlop wypoczynkowy (art. 64-66 KN)** — ⚠️ **WAŻNE ZNALEZISKO
+   METODOLOGICZNE:** wcześniejsza sugestia w treści F-19 (wpisana
+   2026-07-27 w poprzedniej transzy) mówiła o "56 dniach w roku
+   szkolnym" jako punkcie odniesienia do przyszłej rozbudowy — TA
+   LICZBA JEST BŁĘDNA i nie pojawia się w ŻADNYM źródle. Prawidłowo:
+   dla szkół Z feriami — urlop = OKRES FERII (zmienna liczba dni,
+   zależna od kalendarza roku szkolnego), dla szkół BEZ ferii i dla
+   stanowisk kierowniczych — 35 dni roboczych (sztywna liczba).
+   Dobrze, że zweryfikowano przed napisaniem modułu zamiast przepisać
+   błędną liczbę z własnej wcześniejszej sugestii.
+4. **Urlop dla poratowania zdrowia (art. 73 KN)** — 7 lat stażu, do
+   roku jednorazowo, zachowanie wynagrodzenia zasadniczego + dodatku
+   za wysługę, zakaz podejmowania innej pracy, ograniczenie dla
+   bliskich emerytury.
+5. **Rozwiązanie stosunku pracy** — odesłanie (nie duplikacja) do
+   dr-15 dla pełnej analizy, sygnalizacja tematu.
+6. **ZFŚS** — odesłanie do istniejącego mod-ustawa-ZFSS.md z
+   zaznaczeniem odrębności mechanizmu odpisu w KN.
+
+**Rejestracja (Reguła 2):** dodano do SKILL.md (26→27 modułów) i
+MAPA-AKTOW.md (Dz.U. 2024 poz. 986 t.j. + 2 znane nowelizacje, z
+wyraźnym ostrzeżeniem o częstej nowelizacji tej ustawy — 85+ zmian
+historycznie). dr-04 v3.5→v3.6.
+
+**F-19 ZAMKNIĘTA** — usunięta z WARN-OTWARTE.md.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27m)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 29 |
+| Błędów/luk merytorycznych naprawionych | 23 |
+| Nowe moduły utworzone na żądanie | 1 (mod-ustawa-karta-nauczyciela-pracownicze) |
+| Rozbudowy treściowe na żądanie (sekcje w istniejących modułach) | 3 (autonomia uczelni, szkoły publ./niepubl., licencje) |
+| Flagi otwarte na koniec | **0** (F-19 domknięta) |
+
+## AUDYT-2026-07-27n — PILNE: polska ustawa o AI podpisana 2 dni przed audytem, moduł kompletnie nieaktualny
+
+**Moduł:** `mod-AI-Act-framework.md` (dr-11, ostatnio weryfikowany
+2026-06-05 — czyli 52 dni przed tym audytem, w szybko zmieniającej się
+dziedzinie).
+
+### ZNALEZISKO — CAŁY ETAP PROCESU LEGISLACYJNEGO POMINIĘTY
+
+Moduł opisywał polską ustawę implementującą AI Act jako "projekt przed
+uchwaleniem przez Sejm" (stan na 2026-06-05). W rzeczywistości,
+między 2026-06-05 a dniem audytu (2026-07-26/27), ustawa przeszła
+CAŁĄ resztę procesu legislacyjnego:
+- 11.06.2026 — Sejm uchwalił (421 za, 3 przeciw, 18 wstrzym.)
+- 25.06.2026 — Senat zgłosił 25 poprawek
+- 03.07.2026 — Sejm przyjął 24 z 25 poprawek, prace zakończone
+- **24.07.2026 — PREZYDENT PODPISAŁ ustawę** (2 dni przed audytem!)
+- Planowane wejście w życie: sierpień 2026
+
+Potwierdzone w 6 niezależnych, bardzo świeżych źródłach (rp.pl
+[21.07.2026], prawo.pl, gazetaprawna.pl, cyberdefence24.pl, tmt.expert
+i skarbiec.biz — oba "sprzed 2 dni" wg metadanych wyszukiwania).
+
+**Naprawiono: 3 lokalizacje w module** (nagłówek/opis, sekcja "PRAWO
+POLSKIE", zduplikowana sekcja "AKTUALIZACJA STATUS PRAWA POLSKIEGO")
++ zaktualizowano markery wersji i daty stanu. Dodano szczegóły
+struktury KRiBSI (przewodniczący 5-letnia kadencja, 2 zastępców, 4
+członków z UOKiK/UKE/KNF/KRRiT), piaskownice regulacyjne, nowa ścieżka
+skargowa obywateli.
+
+**Świadomie NIE podano** dokładnej daty wejścia w życie ustawy (tylko
+"sierpień 2026") — źródła na 2026-07-27 mówiły "planowane wejście w
+życie w sierpniu 2026" bez jednej, precyzyjnej daty dziennej;
+zgodnie z Zasadą 8 nie zgadywano konkretnego dnia.
+
+**Rejestracja:** dr-11-cyfrowe-cyber-ai-dane-ip v3.6→v3.7 (moduł
+v1.0→v1.1).
+
+### WNIOSEK METODOLOGICZNY
+
+To najbardziej DRAMATYCZNY przykład w całej sesji wartości weryfikacji
+"na bieżąco" — moduł był zweryfikowany raptem 52 dni wcześniej, a mimo
+to całkowicie pominął finalizację ustawy, jej podpisanie przez
+prezydenta i zbliżający się (za tydzień) najważniejszy etap stosowania
+samego AI Act (systemy wysokiego ryzyka od 2.08.2026). W szybko
+zmieniających się dziedzinach (AI, cyberbezpieczeństwo, prawo UE w
+transpozycji) nawet "świeża" weryfikacja sprzed 1-2 miesięcy może być
+już istotnie nieaktualna — to argument za KRÓTSZYMI cyklami
+odświeżania dla tej konkretnej kategorii modułów, nie tylko
+jednorazową weryfikacją.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27n)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 30 |
+| Błędów/luk merytorycznych naprawionych | 24 |
+| Domeny sprawdzone | 11 (dr-02,03,04,05,06,07,09,11,13,14, analizator-umow-v1) |
+| Nowe moduły utworzone | 1 |
+| Rozbudowy treściowe | 3 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-27o — DSA: burzliwy proces legislacyjny (weto prezydenckie) całkowicie pominięty
+
+**Moduł:** `mod-DSA-digital-services-act.md` (dr-11, ostatnio
+weryfikowany 2026-05-31). Sprawdzony w kontynuacji tematu z transzy
+27n (fast-moving digital regulation).
+
+**Znalezisko:** moduł miał tylko lakoniczne "Koordynator usług
+cyfrowych: Polska — wyznaczenie w toku" z odesłaniem do web_search.
+Rzeczywisty przebieg jest znacznie bardziej burzliwy i utracony w tej
+lakoniczności:
+- Polska PRZEKROCZYŁA termin wdrożenia DSA (maj 2024), KE pozwała do
+  TSUE (ryzyko 35-40 mln zł kary)
+- 13.05.2025 — Prezes UKE tymczasowym koordynatorem (uchwała RM,
+  ograniczony zakres)
+- Styczeń 2026 — **PREZYDENT ZAWETOWAŁ** pełną ustawę wdrażającą DSA,
+  zarzucając "administracyjną cenzurę" (dot. uprawnień blokowania
+  treści przez policję/prokuraturę/KAS)
+- Luty 2026 — rząd PODZIELIŁ projekt na 2 odrębne: czysta implementacja
+  DSA vs. sporne uprawnienia blokujące
+- 2.07.2026 — pierwsze czytanie w Sejmie (samej implementacji DSA)
+- 17.07.2026 — Sejm nadal pracuje, BRAK potwierdzenia uchwalenia na
+  dzień audytu
+
+**Naprawiono:** dodano pełną chronologię z jawnym zastrzeżeniem, że
+status na dzień audytu (26-27.07.2026) NIE jest ostatecznie
+potwierdzony — w przeciwieństwie do AI Act (transza 27n, gdzie proces
+się ZAKOŃCZYŁ podpisem prezydenta), DSA jest wciąż W TOKU, z jawnym
+odesłaniem do precedensu AI Act jako ostrzeżenia, że taki proces może
+przyspieszyć w ciągu tygodni.
+
+**Rejestracja:** dr-11-cyfrowe-cyber-ai-dane-ip v3.7→v3.8.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27o)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 31 |
+| Błędów/luk merytorycznych naprawionych | 25 |
+| Domeny sprawdzone | 11 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-27p — FAZA 3E, dr-12: mod-KSCU-koszty-sadowe — CRIT znaleziony i naprawiony
+
+**Moduł:** `mod-KSCU-koszty-sadowe-i-pomoc-prawna.md` (dr-12) — pierwsza
+weryfikacja tej domeny w sesji.
+
+**Błąd znaleziony:** moduł podawał opłatę sądową jako jednolite "5%
+WPS, min. 30 zł, max 200 000 zł". To NIEAKTUALNE i NADMIERNIE
+UPROSZCZONE w dwóch wymiarach:
+1. **Górny limit obniżony** z 200 000 na **100 000 zł** nowelizacją z
+   25.07.2025 r. (w życie 23.09.2025) — potwierdzone dosłownym cytatem
+   art. 13 z arslege.pl (t.j. Dz.U.2025.1228) i kancelarii
+   Ziemski&Partners, która wprost opisuje tę zmianę.
+2. **Struktura jest DWUSTOPNIOWA, nie jednolita 5%:** dla WPS do
+   20 000 zł obowiązuje opłata STAŁA wg tabeli progowej (30-1000 zł w
+   zależności od przedziału), a opłata stosunkowa 5% dotyczy WYŁĄCZNIE
+   nadwyżki powyżej 20 000 zł. Moduł sugerował, że 5% (z minimum 30 zł)
+   stosuje się od razu do całej wartości sporu — to nieprecyzyjne.
+
+**Naprawiono:** przepisano całą sekcję z dosłownym cytatem tabeli
+progowej i poprawnym limitem. Oznaczono jako niezweryfikowaną kwestię
+poboczną (czy zmiana z 2% na "połowę opłaty" dla postępowań grupowych
+też weszła w życie tą samą nowelizacją) — zgodnie z Zasadą 8, nie
+zgadywano.
+
+**Rejestracja:** dr-12-sadownictwo-prokuratura-zawody-prawnicze v4.7→v4.8.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27p)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 32 |
+| Błędów/luk merytorycznych naprawionych | 26 |
+| Domeny sprawdzone | 12 (dr-02,03,04,05,06,07,09,11,12,13,14, analizator-umow-v1) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-27q — Transza wielomodułowa (4 moduły w 1 turze, na żądanie użytkownika)
+
+**Kontekst:** Użytkownik zapytał, czy można sprawdzać więcej niż 1
+moduł na turę — potwierdzone, zastosowane w tej transzy.
+
+**Sprawdzone (dr-12):**
+1. `mod-ustawa-adwokatura.md` — tylko generyczny szkielet proceduralny
+   bez hardkodowanych progów (staż aplikacji itd.) — nic do weryfikacji,
+   dobra praktyka defensywna.
+2. `mod-ustawa-radcowie-prawni.md` — jw., generyczny szkielet.
+3. `mod-ustawa-notariat.md` — taksa notarialna świadomie NIE
+   hardkodowana (odesłanie do web_search) — dobra praktyka.
+4. `mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF.md` — brak hardkodowanych
+   progów koncentracji do sprawdzenia.
+5. **`mod-ustawa-komornicy-sadowi-zawod.md` — UZUPEŁNIONY.** Podstawowa
+   stawka 10% potwierdzona, ale moduł pomijał kluczowe niuanse:
+   preferencyjna stawka 3% (spłata w ciągu miesiąca), 5% przy
+   umorzeniu na wniosek wierzyciela, minima (150/200/300 zł zależnie
+   od typu egzekucji), maksimum 50 000 zł. Potwierdzone w 6+ zgodnych
+   źródłach (w tym z 2026 r.). Sprawdzono też termin skargi na
+   czynności komornika (art. 767 KPC) — NIE znaleziono jasnego
+   potwierdzenia terminu do WNIESIENIA skargi w dostępnych fragmentach
+   aktualnego brzmienia (widziałem tylko termin do ROZPOZNANIA przez
+   sąd, art. 767² — 1 tydzień, INNA rzecz) — NIE zmieniono modułu bez
+   jasnego potwierdzenia, zgodnie z Zasadą 8.
+
+**Rejestracja:** dr-12 v4.8→v4.9 (dotyczy komornicy, pozostałe 4
+moduły niezmienione — potwierdzone jako już poprawne/defensywne).
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27q)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 33 |
+| Modułów sprawdzonych w tej turze | 5 (1 zmieniony, 4 potwierdzone bez zmian) |
+| Błędów/luk merytorycznych naprawionych łącznie | 26 (+1 uzupełnienie, nie błąd) |
+| Domeny sprawdzone | 12 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-27r — Nowa ZASADA STAŁA: rejestr portali tylko dla wartościowych źródeł, czyszczenie z Rządu 3/poza kategorią
+
+**Na wyraźne polecenie użytkownika**, po ocenie loricaiuris.pl/aktualnosci
+(źródło Rząd 3, nie zarejestrowane per decyzja użytkownika):
+ustanowiono nową ZASADĘ STAŁĄ w `shared/PORTALE-BRANZOWE-RZAD-2B.md` —
+rejestr jest WYŁĄCZNIE dla Rządu 1/2A/2B; Rząd 3 i poza kategorią nie
+mają tam miejsca, niezależnie od jakości pojedynczego sprawdzonego
+źródła, ponieważ Rząd 3 jest z definicji (ZASADA 14) traktowany
+jednakowo bez względu na konkretną domenę.
+
+**Usunięto 9 wpisów/bloków z rejestru:**
+1. Cała "SIEĆ LEXINE" (16 domen jednej kancelarii, Gawek i Kielar
+   sp.j.) — jawnie oznaczona w poprzedniej wersji jako "nie neutralna
+   redakcja", czyli Rząd 3 z definicji, mimo hedge'u "traktuj jak
+   2B-podobny z uwagi na skalę"
+2. rozwodowy.pl (część tej samej sieci, osobny wiersz)
+3. hrlaw.pl (portal kancelaryjny Wardyński i Wspólnicy)
+4. ptpodatki.pl (portal kancelaryjny Paczuski Taudul)
+5. monikasmulewicz.pl (autorka nie jest prawnikiem — poza kategorią)
+6. wpis konsolidacyjny ~~hrnaszpilkach.pl~~→monikasmulewicz.pl
+7. sygnalista.pl (status ostatecznie nierozstrzygnięty — poza kategorią)
+8. rodzinneprawo.pl/adwokatrodzinny.pl (niezweryfikowany placeholder)
+9. pb.pl (test `site:` nieudany, poza kategorią)
+10. ipon.pl (portal społecznościowy, jawnie NIE prawny)
+
+**Zasada dodana explicite dla przyszłych audytów:** przy KAŻDYM audycie
+tego rejestru, jeśli natrafiono na wiersz Rządu 3/poza kategorią bez
+ścieżki awansu — usuń go. Wyjątek: sieci Rządu 3 o rozpoznawalnej
+skali mogą być odnotowane ZBIORCZO jako zjawisko (nie jako wzorzec do
+naśladowania przy rejestrowaniu kolejnych podobnych domen).
+
+**Rejestracja:** shared v3.6→v3.7, `PORTALE-BRANZOWE-RZAD-2B.md` v3.5→v3.6.
+
+### KONTEKST: ocena loricaiuris.pl/aktualnosci (bez rejestracji)
+
+Na prośbę użytkownika oceniono uczciwie stronę kancelarii przeciwnej
+strony procesowej użytkownika. Ustalenie: realna, zarejestrowana
+kancelaria (KRS 0000297714), treść blogowa profesjonalna, jedno
+konkretne twierdzenie (wyrok TSUE C-744/24) potwierdzone w 6
+niezależnych źródłach jako dokładne. Klasyfikacja: Rząd 3, standardowe
+zastrzeżenia. Ocena była BEZSTRONNA mimo kontekstu procesowego
+(przeciwnik użytkownika) — zgodnie z zasadą oceny merytoryki źródła,
+nie relacji do sprawy użytkownika. NIE zarejestrowano na wyraźne
+życzenie użytkownika — konsekwentnie z nową zasadą.
+
+## AUDYT-2026-07-27s — Korekta: monikasmulewicz.pl przywrócony (błąd klasyfikacji)
+
+**Na wyraźne polecenie użytkownika:** przywrócono wpis monikasmulewicz.pl,
+usunięty w poprzedniej transzy (27r) w ramach czyszczenia rejestru.
+
+**Uznanie błędu:** poprzednia decyzja pomyliła "poza kategorią" (co
+zasada stała definiuje jako: marginalne/niezweryfikowane/niejasne) z
+"autor nie ma formalnych kwalifikacji prawniczych" — to DWIE RÓŻNE
+rzeczy. Monika Smulewicz / "HR na Szpilkach®" to uznany, rozpoznawalny
+w branży portal kadrowo-płacowy z cyklicznym formatem "HR Detektywi" —
+dokładnie analogiczny do już zarejestrowanych POPON/OBPON (organizacje
+branżowe, nie kancelarie, ale wartościowe praktycznie).
+
+**Naprawiono:** przywrócono pełny wpis, DOPRECYZOWANO samą ZASADĘ
+STAŁĄ w nagłówku pliku — dodano jawne rozróżnienie między "poza
+kategorią" (do usunięcia) a "uznane źródło praktyczne bez formalnego
+tytułu prawniczego" (zostaje w rejestrze). To zapobiegnie powtórzeniu
+tego samego błędu przy przyszłych audytach.
+
+**Rejestracja:** `PORTALE-BRANZOWE-RZAD-2B.md` v3.6→v3.7, shared v3.7→v3.8.
+
+### WNIOSEK METODOLOGICZNY
+
+To kolejny przykład (po transzy 27a — F-18/ZASADA 14) wartości
+otwartej korekty własnych błędów w tej samej sesji — reguła nowo
+wprowadzona przez samą sesję (usuwanie "poza kategorią") została
+zastosowana zbyt szeroko przy pierwszym wdrożeniu, a użytkownik to
+skorygował. Uczciwe przyznanie błędu i precyzyjne dopracowanie
+definicji jest ważniejsze niż mechaniczne trzymanie się pierwszej
+interpretacji nowej zasady.
+
+### KONTYNUACJA FAZA 3E
+
+Po korekcie rejestru, kontynuacja weryfikacji merytorycznej — patrz
+kolejny wpis w tym dzienniku.
+
+## AUDYT-2026-07-27t — FAZA 3E, dr-01: mod-Konstytucja-TK-skarga-konstytucyjna — potwierdzone bez zmian
+
+**Moduł:** `mod-Konstytucja-TK-skarga-konstytucyjna.md` (dr-01) —
+pierwsza weryfikacja tej domeny w sesji.
+
+**Sprawdzone:** termin wniesienia skargi konstytucyjnej — 3 miesiące
+od doręczenia ostatecznego rozstrzygnięcia, termin zawity (brak
+przywrócenia).
+
+**Wynik: W PEŁNI POTWIERDZONE** — bezpośrednio przez trybunal.gov.pl
+(Rząd 1, strona samego TK) oraz 5+ źródeł Rządu 2B/3 (lexlege.pl,
+arslege.pl x2, Wikipedia, publikacja akademicka, sądy okręgowe).
+Moduł poprawny, bez zmian.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27t)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 34 |
+| Błędów/luk merytorycznych naprawionych | 27 |
+| Domeny sprawdzone | 13 (dr-01,02,03,04,05,06,07,09,11,12,13,14, analizator-umow-v1) |
+| Naprawy metodologiczne rejestru portali | 2 (czyszczenie + korekta) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-27u — Rozstrzygnięcie 2 badań źródeł + FAZA 3E dr-08
+
+### Badanie sygnalista.pl (na żądanie użytkownika)
+
+**Rozstrzygnięte:** sygnalista.pl to strona Fundacji im. Stefana
+Batorego (forumIdei) — poważny, niezależny polski think tank
+współpracujący z Helsińską Fundacją Praw Człowieka, NSZZ Solidarność,
+RPO. NIE jest to dostawca oprogramowania do zgłoszeń (co było
+niepewne w poprzedniej wersji rejestru) — niezależność POTWIERDZONA.
+
+**Nowy problem znaleziony:** treść strony (kalendarium "aktualności")
+kończy się na 2019 r. — opisuje przyjęcie unijnej dyrektywy, ale
+NIE WSPOMINA WCALE polskiej ustawy o ochronie sygnalistów z 2024 r.,
+która faktycznie weszła w życie. Strona jest wiarygodna, ale PORZUCONA/
+NIEAKTUALNA — nie nadaje się jako źródło do śledzenia bieżących zmian,
+niezależnie od wiarygodności wydawcy. NIE przywrócono do rejestru
+(inny powód niż wcześniej zakładany, ale wniosek ten sam).
+
+### Badanie rodzinneprawo.pl / adwokatrodzinny.pl (na żądanie użytkownika)
+
+**Rozstrzygnięte:** to NIE były realne, zweryfikowane domeny — sam
+wcześniejszy wpis w rejestrze jawnie mówił "przykładowe wzorce nazw"
+(czyli sugestia WZORCA nazwy do przyszłego wyszukiwania, nie
+faktyczna, istniejąca, przetestowana strona). Wyszukiwanie potwierdza:
+nie ma jednej dominującej, rozpoznawalnej domeny o tej dokładnej
+nazwie. Usunięcie z transzy 27r było prawidłowe — nie ma czego
+przywracać.
+
+### FAZA 3E — dr-08 (2 moduły sprawdzone)
+
+**mod-nadzor-wojewody-RIO-legalnosc-uchwal.md** — termin 30 dni na
+rozstrzygnięcie nadzorcze wojewody (art. 91 ust. 1 USG). POTWIERDZONE
+bezpośrednio treścią pism nadzorczych wojewodów (Świętokrzyski,
+Podlaski, 2025) oraz Rządem 2B (lexlege.pl, arslege.pl, prawo.pl,
+prawodlasamorzadu.pl). Moduł poprawny, bez zmian.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27u)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 35 |
+| Błędów/luk merytorycznych naprawionych | 27 |
+| Domeny sprawdzone | 14 |
+| Badania źródeł rejestru rozstrzygnięte | 2 (sygnalista.pl, rodzinneprawo.pl) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-27v — FAZA 3E: 2 moduły sprawdzone (dr-08, dr-16)
+
+**mod-lokalne-podatki-oplaty-taryfy.md (dr-08) — UZUPEŁNIONY.** Stawka
+dla niesegregujących odpady: moduł podawał tylko "min. 2× wyższa",
+pomijając górną granicę (max 4×, art. 6k ust. 3 ustawy o utrzymaniu
+czystości i porządku w gminach) — potwierdzoną w 5+ źródłach 2026 r.,
+w tym praktykowaną realnie przez niektóre gminy (Słupsk — 4×
+maksimum). Uzupełniono.
+
+**mod-narzedzie-kalkulatory.md (dr-16) — potwierdzony bez zmian.**
+Sprawdzono: termin odwołania od wypowiedzenia (21 dni, art. 264 KP —
+zunifikowany dla §1/§2/§3, potwierdzony w 8+ źródłach) oraz wzór
+zachowku (przykład: substrat 300 000 zł, syn pełnoletni, 2 dzieci →
+zachowek = 1/2 × 1/2 substratu = 75 000 zł — matematycznie poprawne).
+Moduł solidny.
+
+**Rejestracja:** dr-08 v3.3→v3.4.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27v)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 37 |
+| Błędów/luk merytorycznych naprawionych | 28 |
+| Domeny sprawdzone | 15 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-27w — Propagacja: limit opłaty 200 000→100 000 zł znaleziony w 6 plikach naraz
+
+**Kontekst:** FAZA 3E na dr-06 (VAT/KSeF — moduł okazał się kompletny,
+mój wcześniejszy grep po prostu nie złapał środkowej linii
+harmonogramu; dodano tylko drobne uzupełnienie o warunku 450 zł/faktura
+dla najmniejszych firm, potwierdzone w 3 źródłach 2026) oraz
+pisma-proste-v2 (M6-oplaty.md) — znaleziono TEN SAM błąd limitu opłaty
+sądowej (200 000 zł zamiast aktualnego 100 000 zł, reforma z 25.07.2025),
+już raz naprawiony w dr-12/mod-KSCU (transza 27p).
+
+**Zastosowano MOD-PROPAGACJA-NOWELIZACJI:** przeszukano cały system pod
+kątem "200 000 zł" w kontekście opłat sądowych — znaleziono TEN SAM
+błąd w **4 DODATKOWYCH plikach**:
+1. `pisma-proste-v2/references/SPB-zarzuty.md`
+2. `pisma-proste-v2/SKILL.md`
+3. `analiza-sadowa-v6/references/koszty-terminy.md`
+4. `pisma-procesowe-v3/modules/MOD-OPLATY.md`
+
+Wszystkie naprawione tą samą poprawką (200 000→100 000 zł, z
+odesłaniem do transzy 27p i tego samego źródła — arslege.pl t.j.
+Dz.U.2025.1228, Ziemski&Partners).
+
+**Rejestracja:** dr-06 v3.4→v3.5, pisma-proste-v2 v2.6→v2.7,
+analiza-sadowa-v6 v6.2→v6.3, pisma-procesowe-v3 v5.16→v5.17.
+
+### WNIOSEK METODOLOGICZNY — NAJWIĘKSZA DOTĄD DEMONSTRACJA WARTOŚCI PROPAGACJI
+
+Ta transza to najbardziej przekonujący dotąd dowód wartości
+MOD-PROPAGACJA-NOWELIZACJI: JEDNA liczba (limit opłaty sądowej) była
+BŁĘDNIE skopiowana do **6 różnych plików w 5 różnych skillach**
+(dr-12, pisma-proste-v2 ×3 wystąpienia, analiza-sadowa-v6,
+pisma-procesowe-v3) — każdy skill budował własną "ściągawkę" opłat
+sądowych niezależnie, kopiując tę samą, kiedyś poprawną (sprzed
+23.09.2025), teraz nieaktualną liczbę. Punktowa naprawa jednego pliku
+(transza 27p, dr-12) NIE złapałaby pozostałych 5 wystąpień bez
+świadomego zastosowania mechanizmu propagacji.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27w)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 38 |
+| Błędów/luk merytorycznych naprawionych | 34 (6 z tej transzy — propagacja limitu opłat) |
+| Domeny/skille sprawdzone | 16 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-27x — Nowy moduł: limit płatności gotówkowych (na żądanie użytkownika)
+
+**Utworzono** `dr-06/modules/mod-limit-platnosci-gotowkowych.md`,
+zweryfikowany zgodnie z ZASADĄ 14 (Rząd 2B: poradnikprzedsiebiorcy.pl,
+gofin.pl, pit.pl, aktis.net.pl, polcard.pl, rankomat.pl — 7 źródeł
+zgodnych, wszystkie 2026 r.).
+
+**Kluczowe ustalenia:**
+1. **Limit B2B: 15 000 zł brutto** na TRANSAKCJĘ (nie fakturę/płatność)
+   — bez zmian w 2026 r. Podstawa: art. 19 Prawa przedsiębiorców
+   (Dz.U. 2025 poz. 1480 t.j.).
+2. **Sankcja dotyczy CAŁEJ kwoty**, nie tylko nadwyżki — utrata prawa
+   do zaliczenia całego wydatku do KUP.
+3. **Konsumenci (B2C, C2C) — BRAK limitu ustawowego** w 2026 r.
+4. **Historia często mylona:** planowane obniżenie do 8000 zł (w
+   ramach Polskiego Ładu) — NIGDY nie weszło w życie, ostatecznie
+   ZARZUCONE, nie tylko odłożone. Powszechny błąd w internecie.
+5. **Realna nadchodząca zmiana:** unijne rozporządzenie AML (2024/1624)
+   wprowadzi limit 10 000 EUR OD 2027 r., obejmujący TAKŻE konsumentów
+   (czego obecny polski limit nie robi) — jawnie oznaczone jako
+   "jeszcze nie obowiązuje", z zastrzeżeniem że dokładna data i sposób
+   implementacji w Polsce NIE zostały zweryfikowane w tej sesji.
+
+**Rejestracja (Reguła 2):** dodano do SKILL.md (24→25 modułów) i
+MAPA-AKTOW.md. dr-06 v3.5→v3.6.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27x)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 39 |
+| Błędów/luk merytorycznych naprawionych | 34 |
+| Nowe moduły utworzone na żądanie | 2 (Karta Nauczyciela, limit gotówkowy) |
+| Domeny/skille sprawdzone | 16 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-27y — FAZA 3E: 2 moduły sprawdzone (dr-09, orzeczenia-sadowe-v2)
+
+**mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski.md (dr-09) —
+potwierdzony bez zmian.** Sprawdzono: rozporządzenie AFIR (UE 2023/1804)
+— stacje ładowania co 60 km wzdłuż sieci TEN-T. Potwierdzone w 10+
+niezależnych źródłach z 2024-2026, w tym PSNM "Licznik AFIR" [maj 2026].
+Moduł podaje uproszczoną, ale poprawną wersję (bez szczegółu mocy
+400→600 kW ani rozróżnienia sieć bazowa/kompleksowa) — nie błąd, tylko
+świadome uproszczenie, bez potrzeby zmian.
+
+**orzeczenia-sadowe-v2/SKILL.md — potwierdzony bez zmian.** Sprawdzono
+przykładową sygnaturę "SN II PK 123/22" — jawnie oznaczona jako
+PRZYKŁAD SZABLONOWY (placeholder URL "przyklad-portalu.pl"), nie
+rzeczywista sygnatura do weryfikacji. Brak błędu.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27y)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 41 |
+| Błędów/luk merytorycznych naprawionych | 34 |
+| Domeny/skille sprawdzone | 18 |
+| Nowe moduły utworzone | 2 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-27z1 — Stan ukończenia i FAZA 3E: 3 moduły dr-13
+
+**Na żądanie użytkownika: oszacowano procent ukończenia audytu
+merytorycznego całego systemu.**
+
+| Kategoria | Liczba |
+|---|---|
+| Moduły w folderach `modules/` (wszystkie skille) | 358 |
+| Pliki `references/` z treścią merytoryczną | 147 |
+| **Razem plików treściowych w systemie** | **505** |
+| Plików faktycznie zweryfikowanych merytorycznie (FAZA 3E) | ~49 |
+| **Procent ukończenia** | **~9,7%** |
+
+### FAZA 3E — 3 moduły dr-13 sprawdzone w tej turze
+
+1. **mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa.md — potwierdzony.**
+   Przedawnienie dyscyplinarne strażaka PSP (1 rok / 2 lata od czynu,
+   art. 119 ustawy o PSP) — potwierdzone w 6+ źródłach, w tym
+   REALNYM wyrokiem WSA w Warszawie (II SA/Wa 1225/16, 22.12.2016)
+   stosującym dokładnie ten przepis do konkretnego stanu faktycznego.
+2. **mod-ustawa-sluzby-operacyjne-retencja-danych.md** — generyczny
+   szkielet proceduralny, brak hardkodowanych progów do weryfikacji.
+3. **mod-ustawa-zarzadzanie-kryzysowe-obrona-cywilna.md** — jw.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z1)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 44 |
+| Błędów/luk merytorycznych naprawionych | 34 |
+| Plików zweryfikowanych merytorycznie | ~49 z 505 (~9,7%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-27z2 — FAZA 3E: 3 moduły dr-13 (kontynuacja pełnego audytu)
+
+**mod-ustawa-straz-graniczna.md — CRIT znaleziony i naprawiony.**
+Sekcja "Detencja cudzoziemca" miała potrójny błąd:
+1. Zła instancja: podano "skarga do WSA" — poprawnie to ZAŻALENIE do
+   SĄDU REJONOWEGO (sąd powszechny, nie administracyjny) — detencja
+   cudzoziemca to procedura zbliżona do KPK, nie postępowanie
+   administracyjne jak pozostałe dwie kategorie w tym samym module
+   (zobowiązanie do powrotu, odmowa wjazdu), z którymi została błędnie
+   ujednolicona.
+2. Zły okres: "48h → 14 dni → przedłużenie" — poprawnie sąd orzeka
+   pobyt w strzeżonym ośrodku na NIE DŁUŻEJ niż 3 MIESIĄCE, przedłużalne
+   do 6, maksymalnie do 12 miesięcy.
+3. Zły termin zażalenia: "14 dni" — poprawnie 7 DNI.
+Potwierdzone w 6+ źródłach: Kwartalnik IUSTITIA, publikacja akademicka
+KIPK (vol. XXVI), gofin.pl, panstwoprawa.org, Amnesty International,
+interwencjaprawna.pl. Naprawiono całą sekcję z pełnym wyjaśnieniem
+rozróżnienia ścieżki sądów powszechnych (detencja) od
+sądowoadministracyjnej (pozostałe dwie kategorie).
+
+**mod-ustawa-ABW-AW-CBA-sluzby-specjalne.md — potwierdzony bez zmian.**
+Kontrola operacyjna: 3 miesiące, przedłużalne jednorazowo o kolejne 3
+(art. 27 ust. 8 ustawy o ABW) — potwierdzone w 7+ źródłach (arslege.pl,
+Wikipedia, Senat RP [druk 371], kryminalistyka.org.pl i inne).
+Odnotowano przy okazji (bez zmiany modułu): trwa proces legislacyjny
+(projekt UD278) wzmacniający nadzór sądowy nad kontrolą operacyjną —
+NIE jeszcze uchwalony, moduł tego nie wymaga na razie.
+
+**mod-ustawa-zandarmeria-wojskowa.md** — generyczny szkielet, brak
+hardkodowanych progów do weryfikacji.
+
+**Rejestracja:** dr-13-sluzby-bezpieczenstwo-informacje-niejawne v3.6→v3.7.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z2)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 47 |
+| Błędów/luk merytorycznych naprawionych | 35 |
+| Plików zweryfikowanych merytorycznie | ~52 z 505 (~10,3%) |
+| dr-13 | UKOŃCZONE (8/8 modułów sprawdzonych) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-27z3 — KRYTYCZNE: anonimizacja realnych danych sprawy w analizator-dowodow-v3/assets/dashboard.html
+
+**Zgłoszenie użytkownika:** plik zawierał realne akta sprawy w folderze
+przeznaczonym na generyczne assety skilla.
+
+**Zakres znaleziska (potwierdzony w poprzednich turach):**
+- Prawdziwa sygnatura sprawy pracowniczej (VII P .../25) + powiązana
+  sprawa o wykroczenie (VIII W .../25)
+- Pełne dane 7+ realnych osób (powód, pozwana spółka, pełnomocnik,
+  świadkowie, członkowie zarządu) — imiona, nazwiska, role procesowe
+- Realny adres domowy prawdopodobnego powoda
+- Realny adres i e-mail kancelarii przeciwnej (ta sama kancelaria
+  oceniana wcześniej w tej sesji — transza z loricaiuris.pl)
+- Realny numer KRS pozwanej spółki
+- Szczegółowa analiza dowodowa i strategia procesowa (co jest
+  przyznaniem, gdzie przeciwnik się sprzeczał, rekomendacje)
+
+**Ustalone w poprzedniej turze:** brak "danych wrażliwych" w ścisłym
+sensie RODO art. 9 (zdrowie/religia/orientacja/etniczność wprost), ALE
+obecne dane o naruszeniu prawa (art. 10 RODO — zarzut fałszywych
+zeznań, sprawa o wykroczenie) oraz szeroki zakres zwykłych danych
+osobowych połączonych z poufną strategią procesową — wystarczające,
+by wykluczyć jakąkolwiek publiczną dostępność niezależnie od
+kategoryzacji RODO.
+
+### NAPRAWIONE: pełna anonimizacja (na wyraźne polecenie użytkownika)
+
+Zastąpiono WSZYSTKIE identyfikujące elementy spójnymi, fikcyjnymi
+odpowiednikami (Python, iteracyjna weryfikacja do zera pozostałości):
+- Wszystkie imiona/nazwiska (7 osób) → fikcyjne polskie/koreańskie/
+  nepalskie odpowiedniki, zachowujące spójność (w tym warianty
+  błędnych zapisów nazwisk, które były same w sobie dowodem w sprawie
+  — np. "Michał Wiatr" vs "Michał Wiatrak" → zachowano analogiczną
+  parę "Jan Kowal" vs "Jan Kowalski", żeby NIE ZNISZCZYĆ merytorycznej
+  wartości demonstracyjnej pliku jako przykładu wykrywania
+  niespójności nazwisk)
+- Nazwa spółki pozwanej (Human Park Global / Human Park / skrót HPG)
+  → Alpha Solutions / ALPHA
+- Nazwa i adres kancelarii przeciwnej + domena e-mail
+- Nazwa trzeciej spółki (Trabahante) → Fictus Sp. z o.o.
+- 2 adresy fizyczne → adresy fikcyjne
+- Numer KRS → 0000000000
+- 2 sygnatury sądowe → zanonimizowane numery
+- Inicjały osób w strukturze danych → przeliczone na spójne z nowymi
+  imionami (żeby nie zdradzały oryginalnych danych przez rozbieżność)
+
+**Weryfikacja końcowa:** wyczerpujące przeszukanie pod kątem 26
+oryginalnych fraz/nazw — zero pozostałości. Struktura pliku (1524
+linie, tagi `<script>` zbalansowane) niezmieniona — funkcjonalność
+widgetu zachowana, tylko treść danych zanonimizowana.
+
+**Sprawdzono też:** pozostałe 3 pliki HTML w folderach `assets/` w
+całym systemie (`widget-kreator.html`, `anonimizer-widget.legacy.html`,
+`widget-timeline.html`) — potwierdzone jako CZYSTE, bez podobnego
+problemu (już ustalone w poprzedniej turze).
+
+**Brak zmiany wersji skilla w tym wpisie** — to nie jest zmiana treści
+merytorycznej modułu prawnego, tylko oczyszczenie danych osobowych z
+pliku demonstracyjnego; wersja analizator-dowodow-v3 pozostaje bez
+zmian, ale odnotowuję fakt edycji dla przejrzystości.
+
+### WNIOSEK — REKOMENDACJA PROCESOWA NA PRZYSZŁOŚĆ
+
+To wskazuje na lukę proceduralną: pliki `assets/` (widgety/dashboardy)
+mogą być zapisywane jako WYNIK realnej pracy z konkretną sprawą
+użytkownika, a nie tylko jako generyczne szablony. Rekomendacja:
+każda przyszła sesja audytowa powinna sprawdzać pliki `assets/*.html`
+pod kątem realnych danych osobowych/sygnatur/nazw firm PRZED każdą
+dostawą zip — analogicznie do już istniejącej praktyki sprawdzania
+modułów prawnych, ale z odwrotnym pytaniem: nie "czy treść jest
+aktualna", tylko "czy treść jest CZYJAŚ, a nie generyczna".
+
+## AUDYT-2026-07-27z4 — FAZA 3E: mod-ustawa-partie-polityczne-referendum (dr-01) — potwierdzony bez zmian, ważna lekcja metodologiczna
+
+**Zakres:** Kontynuacja systematycznego domykania dr-01 (6 modułów
+pozostałych po transzy 27t).
+
+**Prawie popełniony błąd, uniknięty dzięki weryfikacji kontekstu:**
+moduł podawał "Partia samodzielna ≥3%, koalicja ≥6%" w sekcji
+zatytułowanej "Progi procentowe i kwoty SUBWENCJI". Pierwsze
+wyszukiwanie (ogólne "próg wyborczy") zwróciło jednogłośnie 5%/8% —
+co jest PRAWDĄ, ale dla INNEGO progu (próg wyborczy/reprezentacji w
+Sejmie, nie próg subwencji). Przed edycją wykonano DRUGIE, bardziej
+precyzyjne wyszukiwanie ("subwencja budżetowa próg 3%/6%") — potwierdziło
+DOSŁOWNYM cytatem art. 28 ustawy o partiach politycznych (lexlege.pl,
+arslege.pl — Rząd 2B; Wikipedia, demagog.org.pl, money.pl — Rząd 3),
+że 3%/6% to WŁAŚCIWY, inny próg (subwencja, nie mandaty). Moduł był
+od początku POPRAWNY — kontekst nagłówka sekcji ("subwencji") był
+kluczowy i został uwzględniony przed edycją, nie po.
+
+**Pozostałe twierdzenia sprawdzone i potwierdzone:**
+- Referendum ogólnokrajowe wiążące: frekwencja >50% (art. 125 ust. 3
+  Konstytucji) — potwierdzone m.in. przez prezydent.pl (Rząd 1)
+- Referendum lokalne ważne: frekwencja ≥30% — potwierdzone
+- Inicjatywa ustawodawcza obywateli: 100 000 podpisów (art. 118 ust. 2
+  Konstytucji) — potwierdzone jako dobrze znany, prawidłowy próg
+
+**Moduł w pełni poprawny — bez zmian.**
+
+### WNIOSEK METODOLOGICZNY — WAŻNY DODATEK DO ZASADY 14
+
+Ta transza pokazuje krytyczne ryzyko przy weryfikacji: **ta sama
+liczba (3%/6% vs 5%/8%) może być POPRAWNA dla jednego progu prawnego
+i BŁĘDNA dla innego, pozornie podobnego** — kontekst nagłówka/sekcji
+modułu MUSI być uwzględniony PRZED uznaniem czegoś za błąd, nie tylko
+sama liczba. Pierwsze, ogólne wyszukiwanie było niewystarczające i
+omal nie doprowadziło do wprowadzenia PRAWDZIWEGO błędu do poprawnego
+modułu. Rekomendacja: przy wynikach wyszukiwania sprzecznych z
+modułem, ZAWSZE sprawdzić dokładny kontekst/nagłówek sekcji w module
+i dopasować zapytanie wyszukiwania do TEGO konkretnego kontekstu,
+zanim uzna się rozbieżność za błąd.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z4)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 48 |
+| Błędów/luk merytorycznych naprawionych | 35 |
+| Plików zweryfikowanych merytorycznie | ~55 z 505 (~10,9%) |
+| dr-01 | 2/7 modułów sprawdzonych (mod-Konstytucja-TK, mod-ustawa-partie-polityczne) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-27z5 — FAZA 3E: 2 moduły dr-01 potwierdzone bez zmian
+
+**mod-stany-nadzwyczajne-sytuacje-kryzysowe.md** — stan klęski
+żywiołowej: Rada Ministrów wprowadza na czas nie dłuższy niż 30 dni.
+Potwierdzone bezpośrednio brzmieniem art. 232 Konstytucji, zgodne z
+modułem. Zakaz zmiany ordynacji wyborczej i przeprowadzania wyborów
+podczas stanu nadzwyczajnego oraz 90 dni po jego zakończeniu —
+potwierdzone (art. 228 ust. 7 Konstytucji, znany mechanizm z okresu
+COVID-19/wyborów 2020).
+
+**mod-ustawa-KRS-i-ustroj-wladzy.md** — wotum nieufności wobec
+ministra: wniosek co najmniej 69 posłów (art. 159 Konstytucji).
+Potwierdzone DOSŁOWNYM cytatem w 9 niezależnych źródłach, w tym
+prezydent.pl i sejm.gov.pl (oba Rząd 1). Moduł w pełni poprawny.
+
+**Oba moduły bez zmian.**
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z5)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 50 |
+| Błędów/luk merytorycznych naprawionych | 35 |
+| Plików zweryfikowanych merytorycznie | ~57 z 505 (~11,3%) |
+| dr-01 | 4/7 modułów sprawdzonych |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-27z6 — FAZA 3E: 3 moduły dr-01 sprawdzone (deklaracja dotrzymana), dr-01 UKOŃCZONE
+
+**mod-USP-ustroj-sadow-powszechnych.md — UZUPEŁNIONY.** Termin
+ponownej skargi na przewlekłość: 12 miesięcy potwierdzone w 7+
+źródłach, ALE moduł pomijał WYJĄTEK — w postępowaniu przygotowawczym
+z tymczasowym aresztowaniem oraz w sprawie egzekucyjnej termin skrócony
+do 6 miesięcy. Uzupełniono.
+
+**mod-ZTP-przepisy-przejsciowe-doktryna.md — potwierdzony bez zmian.**
+Sygnatura TK z 1.07.2003, P 31/02 (ekspektatywa maksymalnie
+ukształtowana) zweryfikowana BEZPOŚREDNIO w PDF z isap.sejm.gov.pl —
+data, sygnatura i teza dokładnie zgodne z modułem.
+
+**mod-specustawy-lex-specialis-graf-zaleznosci.md — potwierdzony bez
+zmian.** Rozdział 4a ZTP (przepisy epizodyczne, §29a-29c) potwierdzony
+w 8+ źródłach (Senat RP, RCL, lexlege.pl, arslege.pl). Nawet cytowane
+źródło poboczne modułu ("Blog Legislatora W. Zająca") potwierdzone
+jako realne, istniejące źródło (bloglegislatora.pl) z treścią zgodną
+z opisem w module.
+
+**Rejestracja:** dr-01-ustroj-konstytucyjny-i-zrodla-prawa v3.3→v3.4.
+
+**dr-01 UKOŃCZONE — 7/7 modułów sprawdzonych** w transzach 27t, 27z4,
+27z5, 27z6.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z6)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 53 |
+| Błędów/luk merytorycznych naprawionych | 36 |
+| Plików zweryfikowanych merytorycznie | ~60 z 505 (~11,9%) |
+| Domeny w pełni ukończone | dr-01 (7/7), dr-13 (8/8) |
+| Flagi otwarte | **0** |

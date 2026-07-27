@@ -2,7 +2,7 @@
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:**
-- USG — **Dz.U. 2025 poz. 1153 t.j.** z 05.08.2025 ✅ VER: 2026-06-05
+- USG — **Dz.U. 2026 poz. 662 t.j.** z 21.05.2026 (obwieszczenie 15.05.2026, stan na 13.05.2026) ✅ VER: 2026-07-26 — POPRAWKA: poprzedni numer 2025.1153 był nieaktualny (flaga otwarta od 2026-07-02, nigdy niedomknięta w treści modułu — naprawiono przy audycie pełnego systemu)
 - USP — **Dz.U. 2025 poz. 1684 t.j.** z 07.11.2025 ✅ VER: 2026-06-05
 - USW — **Dz.U. 2025 poz. 581 t.j.** z 24.03.2025 ✅ VER: 2026-06-05
 - Ustawa o wojewodzie — **Dz.U. 2025 poz. 428 t.j.** z 24.03.2025 ✅ VER: 2026-06-05
@@ -19,7 +19,7 @@ Trójstopniowy samorząd terytorialny: gmina (USG), powiat (USP), województwo (
 
 | Akt | Skrót | Dz.U. |
 |---|---|---|
-| Ustawa o samorządzie gminnym | USG | Dz.U. 2025 poz. 1153 t.j. |
+| Ustawa o samorządzie gminnym | USG | Dz.U. 2026 poz. 662 t.j. |
 | Ustawa o samorządzie powiatowym | USP | Dz.U. 2025 poz. 1684 t.j. |
 | Ustawa o samorządzie województwa | USW | Dz.U. 2025 poz. 581 t.j. |
 | Ustawa o wojewodzie i administracji rządowej w województwie | — | Dz.U. 2025 poz. 428 t.j. |
@@ -168,7 +168,7 @@ Procedura:
   → Uchwała rady (przy radnym) lub zarządzenie zastępcze Wojewody (przy wójcie)
   → Zaskarżenie do WSA
 
-⚠️ Weryfikuj aktualne przepisy w t.j. USG w ISAP (Dz.U. 2025 poz. 1153).
+⚠️ Weryfikuj aktualne przepisy w t.j. USG w ISAP (Dz.U. 2026 poz. 662).
 ```
 
 ---
@@ -256,7 +256,7 @@ web_search: "wygaszenie mandatu wójta zaskarżenie WSA orzecznictwo"
 
 ## ŹRÓDŁA ONLINE
 
-- USG: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250001153
+- USG: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000662
 - USP: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250001684
 - USW: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250000581
 - Ustawa o Wojewodzie: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250000428

@@ -163,7 +163,6 @@ Kodeks Etyki Lekarskiej obowiązuje WPROST lekarzy dentystów (to jeden
 kodeks dla obu zawodów, nie dwa odrębne).
 
 
-
 ---
 
 ## 4. REJESTR SAMORZĄDÓW — ZAWODY GOSPODARCZE/TECHNICZNE (DR-06, DR-09)

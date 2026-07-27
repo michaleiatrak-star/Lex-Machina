@@ -164,6 +164,17 @@ prowadzona z terytorium lub przy udziale osób w Polsce).
 
 ---
 
+## 5A. ART. 139 — PRZEPADEK PRZEDMIOTÓW NIENALEŻĄCYCH DO SPRAWCY (dodano
+2026-07-26, audyt pełnego systemu T8 — tytuł deklarował "art. 127-139",
+treść kończyła się na art. 138)
+
+W sprawie o przestępstwo z art. 127 (zamach stanu), art. 128 (zamach na
+organ konstytucyjny RP) lub art. 130 (szpiegostwo) sąd MOŻE orzec
+przepadek przedmiotów TAKŻE wtedy, gdy nie stanowią własności sprawcy —
+odstępstwo od zasady ogólnej (przepadek zwykle tylko mienia sprawcy).
+Zweryfikowano online 2026-07-26 (lexlege.pl, prawo-pl.com) — WERYFIKUJ
+aktualność na isap.sejm.gov.pl przed użyciem w piśmie.
+
 ## 6. ALGORYTM KWALIFIKACJI WSTĘPNEJ
 
 ```

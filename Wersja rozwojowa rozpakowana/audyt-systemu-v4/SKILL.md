@@ -1,6 +1,6 @@
 ---
 name: audyt-systemu-v4
-version: 5.9
+version: 6.4
 type: governance-audit
 compatibility:
   - Claude
@@ -11,6 +11,7 @@ modules:
   - modules/MOD-WSTAWKI.md             # usuwanie wstawek opisowych
   - modules/MOD-DESCRIPTION.md         # walidacja długości description (limit 1024)
   - modules/MOD-TRESC-MERYTORYCZNA.md  # FAZA 3E — weryfikacja treści modułów DR po zmianie przepisu (ZASADA 12, dodane 2026-07-16)
+  - modules/MOD-PROPAGACJA-NOWELIZACJI.md  # propagacja zmian z konkretnej nowelizacji przez CAŁY system, nie 1 moduł (dodane 2026-07-26)
 widgets:
   - widgets/WIDGET-MENU.md        # interaktywne menu wielokrotnego wyboru
 references:
@@ -91,6 +92,52 @@ Po zakończeniu audytu: **obowiązkowa aktualizacja plików references**.
 > instytucjonalnych — sprawdź zgodność z tą zasadą jako osobny punkt.
 > Naruszenie (powtórne użycie niepotwierdzonego oznaczenia bez ponownej
 > weryfikacji lub bez powtórzonego ⚠️ [NIEWERYFIKOWANE]) = **CRIT**.
+
+---
+
+> ⚙️ **ZASADA 14 (2026-07-26, STAŁA — nie precedens):** Gradacja źródeł
+> przy weryfikacji merytorycznej (FAZA 3E) — obowiązkowe stosowanie
+> `shared/HIERARCHIA-ZRODEL.md` (Rząd 1/2A/2B/3), nie tylko przy
+> podawaniu linków użytkownikowi, ale RÓWNIEŻ jako metodologia SAMEJ
+> weryfikacji przy audycie. Ustalone po dwóch transzach FAZA 3E
+> (AUDYT-2026-07-26h/i), na wyraźne polecenie użytkownika.
+>
+> **Procedura, w kolejności:**
+> 1. **Rząd 1 (ISAP) — próba pierwsza, zawsze.** `isap.sejm.gov.pl`
+>    zwykle blokuje bezpośredni `web_fetch` (ROBOTS_DISALLOWED) — nie
+>    jest to powód do pominięcia, tylko do zmiany narzędzia: użyj
+>    `web_search` z numerem artykułu/Dz.U. jako frazą kluczową, próbując
+>    dotrzeć do treści ISAP pośrednio (fragmenty indeksowane) lub przez
+>    `eli.gov.pl`/`api.sejm.gov.pl` (też Rząd 1, czasem dostępne przez
+>    `web_fetch` gdy URL pojawił się już w wynikach wyszukiwania).
+> 2. **Rząd 2A/2B jako główne potwierdzenie**, gdy Rząd 1 niedostępny
+>    wprost: lexlege.pl, arslege.pl, prawo.pl i analogiczne z rejestru
+>    `HIERARCHIA-ZRODEL.md`/`PORTALE-BRANZOWE-RZAD-2B.md`. Traktuj jako
+>    wiarygodne dla BRZMIENIA przepisu, ale NIGDY nie zaznaczaj wyniku
+>    jako ✅ [VER] tak jakby to był Rząd 1 — użyj oznaczenia zgodnego z
+>    `shared/WERYFIKACJA-SLAD.md` odpowiedniego dla źródła Rządu 2.
+> 3. **Rząd 3 (blogi kancelaryjne) — WYŁĄCZNIE jako dodatkowe
+>    potwierdzenie zbieżności, NIGDY jako jedyne źródło.** Wysoka liczba
+>    zgodnych źródeł Rządu 3 (5+) wokół tego samego brzmienia ZWIĘKSZA
+>    pewność, ale nie zastępuje braku Rządu 1/2 — jeśli WSZYSTKIE
+>    dostępne źródła to Rząd 3, oznacz wynik jako potwierdzony z
+>    zastrzeżeniem niższej kategorii źródła, nie jako pełne ✅.
+> 4. **Próg potwierdzenia:** minimum 2-3 źródła NIEZALEŻNE (różne domeny,
+>    różni wydawcy) zgodne ze sobą, zanim twierdzenie modułu zostanie
+>    oznaczone jako sprawdzone. Rozbieżność między źródłami = sygnał do
+>    DALSZEGO wyszukiwania (inne zapytanie, inny kąt), nie do wyboru
+>    jednego źródła arbitralnie (patrz ZASADA 13, pkt 2 — wytrwałość
+>    wyszukiwania stosuje się też tutaj).
+> 5. **Każdy wynik weryfikacji FAZA 3E w AUDIT-JOURNAL.md wskazuje
+>    WYRAŹNIE, z jakiego Rzędu pochodziło potwierdzenie** (nie tylko
+>    nazwy domen) — np. "potwierdzone w lexlege.pl (Rząd 2B) oraz 5
+>    źródłach Rządu 3" — żeby czytelnik dziennika mógł ocenić siłę
+>    dowodową ustalenia bez ponownego sprawdzania.
+>
+> Naruszenie (oznaczenie twierdzenia jako "zweryfikowane" na podstawie
+> WYŁĄCZNIE jednego źródła Rządu 3, lub bez wskazania Rzędu w ogóle) =
+> **WARN**, nie CRIT — to zasada jakości dowodu, nie zakaz absolutny jak
+> PRAWO-HARDGATE, ale traktuj ją jako obowiązkową praktykę FAZA 3E.
 
 ---
 
@@ -323,9 +370,27 @@ Pełna procedura: `modules/MOD-TRESC-MERYTORYCZNA.md` — wczytaj przed wykonani
 view /mnt/skills/user/audyt-systemu-v4/modules/MOD-TRESC-MERYTORYCZNA.md
 ```
 
+> ⭐ **Mechanizm uzupełniający (dodany 2026-07-26):** gdy transza FAZA 3E
+> ujawni, że MODUŁ SAM ostrzegał o nowelizacji, ale nie zastosował jej do
+> własnej treści (wzorzec z AUDYT-2026-07-26l) — uruchom
+> `modules/MOD-PROPAGACJA-NOWELIZACJI.md`, żeby sprawdzić, czy TA SAMA
+> nieaktualność występuje też w INNYCH plikach systemu (nie tylko w
+> module "domowym" dla danego aktu). Jedna naprawa punktowa nie
+> gwarantuje, że problem nie powtarza się gdzie indziej.
+
 **Uruchamia się automatycznie**, gdy FAZA 3 (dowolny podtryb) zakończyła
 się co najmniej jedną zmianą: nowy `TJ` (3A/3B), pozycja `✅ WSZEDŁ` z
 MONITORING (3D), lub WARN z 3C zamknięty jako "jest nowszy akt".
+
+> ⭐ **Tryb NA ŻĄDANIE (dodane 2026-07-26):** FAZA 3E może być też
+> wywołana samodzielnie, bez poprzedzającej zmiany Dz.U. — użytkownik
+> wskazuje konkretny moduł/dziedzinę do pogłębionej weryfikacji
+> merytorycznej ("sprawdź treść modułu X", "kontynuuj audyt
+> merytoryczny"). W tym trybie KROK 1 (identyfikacja modułu) jest
+> zastąpiony wskazaniem użytkownika lub wyborem audytora wg priorytetu
+> (np. najnowsze/najmniej sprawdzone moduły) — reszta procedury
+> identyczna. Każda taka transza to jeden fragment jednego pliku, nie
+> cały system naraz — traktuj jako iteracyjne, nie jednorazowe zadanie.
 
 Skrót procedury:
 1. Zidentyfikuj moduł(y) DR opisujące dotknięty akt (kolumna `Moduł` w `MAPA-AKTOW.md`).
@@ -334,8 +399,14 @@ Skrót procedury:
 4. Sklasyfikuj: ✅ ZGODNE / ⚠️ WARN-TREŚĆ / ❌ CRIT-TREŚĆ.
 5. CRIT-TREŚĆ → napraw treść modułu w tej samej sesji (str_replace na kopii), z adnotacją źródła i datą weryfikacji.
 
+> ⚙️ Przy KROKU 2/3 stosuj ZASADĘ 14 (gradacja źródeł, patrz sekcja
+> ZASADY KRYTYCZNE pkt 12 i `shared/HIERARCHIA-ZRODEL.md`) — Rząd 1
+> pierwsza próba, Rząd 2B główne potwierdzenie gdy Rząd 1 niedostępny
+> wprost, Rząd 3 wyłącznie jako dodatkowe potwierdzenie zbieżności.
+
 Brak zmian Dz.U. w sesji → FAZA 3E pomijana, odnotuj wprost:
-`FAZA 3E: pominięta — brak zmian Dz.U. w tej sesji`.
+`FAZA 3E: pominięta — brak zmian Dz.U. w tej sesji` (NIE dotyczy trybu
+NA ŻĄDANIE, który działa niezależnie od FAZA 3A-3D).
 
 Wynik trafia do raportu jako `### 4C. TREŚĆ MERYTORYCZNA MODUŁÓW` (FAZA 6)
 oraz — dla CRIT-TREŚĆ naprawionych — do `AUDIT-JOURNAL.md` z jawnym
@@ -661,6 +732,22 @@ z WARN-OTWARTE.md, dodaj pełny wpis do AUDIT-JOURNAL.md.
     `mapa_dzu`/`MAPA-AKTOW.md` nie jest dowodem, że treść modułu została
     sprawdzona pod kątem tego, co konkretnie zmieniła nowelizacja.
 
+12. ⛔ **ZASADA GRADACJI ŹRÓDEŁ PRZY WERYFIKACJI (dodana 2026-07-26,
+    ZASADA 14 w nagłówku pliku, tu jako pozycja 12 listy operacyjnej) —
+    FAZA 3E stosuje `shared/HIERARCHIA-ZRODEL.md` jako metodologię, nie
+    tylko jako zasadę oznaczania linków.**
+
+    Kolejność: Rząd 1 (ISAP, próba zawsze pierwsza, `web_search` gdy
+    `web_fetch` zablokowany) → Rząd 2A/2B (lexlege.pl, arslege.pl,
+    prawo.pl — główne potwierdzenie brzmienia, gdy Rząd 1 niedostępny
+    wprost) → Rząd 3 (blogi kancelaryjne — WYŁĄCZNIE jako dodatkowe
+    potwierdzenie zbieżności, nigdy jako jedyne źródło). Minimum 2-3
+    źródła niezależne zgodne ze sobą przed oznaczeniem twierdzenia jako
+    sprawdzonego. Każdy wpis w AUDIT-JOURNAL.md wskazuje Rząd źródła
+    potwierdzenia, nie tylko nazwę domeny. Naruszenie (oznaczenie
+    "zweryfikowane" na podstawie wyłącznie 1 źródła Rządu 3, lub bez
+    wskazania Rzędu) = **WARN**.
+
 ---
 
 ## STRUKTURA KATALOGU
@@ -672,7 +759,8 @@ audyt-systemu-v4/
 │   ├── MOD-INTERLINIE.md                       ← wykrycie i usuwanie zbędnych pustych linii
 │   ├── MOD-WSTAWKI.md                          ← wykrycie i usuwanie wstawek opisowych
 │   ├── MOD-DESCRIPTION.md                      ← walidacja długości description (limit 1024)
-│   └── MOD-TRESC-MERYTORYCZNA.md               ← FAZA 3E — weryfikacja treści modułów DR po zmianie przepisu
+│   ├── MOD-TRESC-MERYTORYCZNA.md               ← FAZA 3E — weryfikacja treści modułów DR po zmianie przepisu
+│   └── MOD-PROPAGACJA-NOWELIZACJI.md           ← propagacja zmian z nowelizacji przez CAŁY system
 ├── widgets/
 │   └── WIDGET-MENU.md                          ← kod JSX interaktywnego menu wyboru
 └── references/

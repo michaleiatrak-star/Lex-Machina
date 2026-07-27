@@ -1,6 +1,6 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: 3.6
+version: 3.7
 description: |
   DR-02: Prawo Cywilne, Rodzinne i Gospodarcze
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -68,7 +68,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (31 łącznie — ✓ 31 OK, ☐ 0 STUB)
+## Moduły (30 łącznie — ✓ 30 OK, ☐ 0 STUB)
 
 ```
   [✓] OK    mod-KC-cywilne-zobowiazania-odpowiedzialnosc
@@ -111,11 +111,6 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
                odrębne od zaprzeczenia, + zapowiedziana reforma 2026
                domniemania z art. 62] — w pliku mod-KRO-rodzinne.md)
   [✓] OK    mod-KRO-przysposobienie-adopcja-miedzynarodowa
-  [✓] OK    mod-kaucja-najem-lokalu
-              (dodany 2026-07-19: kaucja przy najmie [limit 12-krotność
-               zwykły/6-krotność okazjonalny, termin zwrotu 1 miesiąc,
-               MECHANIZM WALORYZACJI przy wzroście czynszu — często
-               pomijany]. Odpowiedź na pytanie użytkownika o "kaucję")
               (nadrobienie zaległości w SKILL.md — moduł już istniał:
                przysposobienie krajowe [3 rodzaje: pełne/niepełne/
                całkowite], przysposobienie międzynarodowe wg Konwencji

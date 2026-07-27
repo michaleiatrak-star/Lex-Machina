@@ -1,6 +1,6 @@
 ---
 name: analizator-dowodow-v3
-version: "5.14.2"
+version: "5.16.0"
 type: executive-analiza
 status: production
 description: |
@@ -50,6 +50,28 @@ pipeline:
     - AD-KROK3-WYKONANIE
     - AD-KROK4-DASHBOARD
 changelog:
+  - "5.15.0 (2026-07-15, F-7 / ZASADA 11 — audyt proceduralny): dodano
+    BLOK D0 TEZA-GATE, obowiązkowy przed BLOK D (D1-D6) — rekonstrukcja
+    jednym zdaniem tezy centralnej per strona z materiału, zanim ocenione
+    zostaną mocne/słabe strony (D2), ocena prawna (D4) lub raport końcowy
+    (D5). Przyczyna: skill nie miał NIGDZIE (grep 0 wyników) mechanizmu
+    rekonstrukcji tezy — analogiczny wzorzec braku jak w
+    przesluchanie-swiadkow-v2-min90 przed naprawą 3.6 (IMPORTED-QUESTIONS-
+    GATE). Pozostałe 3 wzorce z ZASADY 11 (bramki reaktywne, skan
+    dokumentów, milczące przyjmowanie ustaleń) już były pokryte: KROK 0b
+    SD-VER (HARD GATE od startu), KROK 0c ST-INIT (jawne zgłaszanie
+    pominięć). Pełny opis: audyt-systemu-v4/AUDIT-JOURNAL.md,
+    AUDYT-2026-07-15e."
+  - "5.14.3 (2026-07-14, sprawa XI P 27/26 — dziedziczenie naprawy SD-GATE-TRUNC):
+    Ten skill wywołuje `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` bezpośrednio jako
+    HARD GATE w KROK 0b (SD-VER) — patrz linia ~182. Naprawa wprowadzona w
+    module współdzielonym (1.4.0 → 1.5.0: nowa bramka SD-GATE-TRUNC, wykrywanie
+    i obowiązkowe domykanie znaczników `< truncated lines X-Y >` zwracanych
+    przez narzędzie `view` przed ekstrakcją faktów) jest dziedziczona
+    automatycznie, bez zmian w logice tego pliku — zgodnie z zasadą unikania
+    duplikacji (CHECKLIST-DEDUP). Wersja podbita wyłącznie dla odnotowania
+    zależności w dzienniku audytu. Pełny opis incydentu:
+    `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-07-14b."
   - "5.14.2 (2026-07-12, runda 2 — redukcja kosztu kontekstu): pełna
     historia changelog (22 wpisy, 4.0.0...5.14.1) wyniesiona 1:1 do
     references/CHANGELOG.md — nic nie usunięto, tylko przeniesiono z
@@ -392,6 +414,31 @@ C4. Użytkownik prosi WYRAŹNIE o wersję szczegółową / dokument / plik / "ja
 
 ---
 
+### BLOK D0 — TEZA-GATE (obowiązkowe, PRZED D1-D6 — naprawa F-7/ZASADA 11)
+
+```
+⛔ Zanim odpowiesz na pytania D1-D6, zrekonstruuj JEDNYM ZDANIEM per strona
+tezę centralną wynikającą z materiału: czego strona żąda/twierdzi i na
+jakiej podstawie. Zapisz to jawnie w odpowiedzi — nie tylko w rozumowaniu
+wewnętrznym.
+
+Powód: bez tego punktu odniesienia ocena mocnych/słabych stron (D2), analiza
+prawna per roszczenie (D4) czy raport końcowy (D5) mogą oceniać argumenty
+w oderwaniu od tego, co pismo FAKTYCZNIE twierdzi — ryzykując ocenę
+powierzchowną (np. na podstawie tonu czy objętości argumentacji, nie jej
+rzeczywistego związku z tezą) lub pominięcie, że pismo broni innej tezy niż
+się wydaje z pierwszego wrażenia.
+
+Jeśli materiał zawiera kilka wątków/roszczeń → osobna teza per wątek, nie
+jedna uśredniona. Jeśli strony są >1 (spór dwustronny) → teza każdej strony
+osobno, nawet jeśli są sprzeczne.
+
+To nie zastępuje D1 (kolizje narracyjne) ani MP2 (ocena prawna) — to punkt
+odniesienia, do którego D1-D6 się odnoszą.
+```
+
+---
+
 ### BLOK D — Zakres analizy pism (tylko jeśli A2=TAK)
 
 ```
@@ -495,7 +542,7 @@ G2. Materiał zawiera pisma jednej strony (analiza wyłącznie pism Pozwanej lub
     TAK → dodaj: BLOK-NAZW (kontrola nazewnictwa procesowego)
 
     Wczytaj tabelę nazewnictwa dla trybu sprawy:
-    view /mnt/skills/user/analizator-dowodow-v3/modules/MOD-NAZEWNICTWO-STRON.md
+    view /mnt/skills/user/shared/NAZEWNICTWO-STRON.md
     → Tabela T1 (cywilne procesowe), T2 (nieprocesowe), T3 (karne), T4 (wykroczenia)
        T5 (KPA), T6 (PPSA/WSA), T7 (pracownicze), T8 (egzekucja), T9 (zabezpieczenie)
        T10 (rodzinne)
@@ -524,7 +571,7 @@ G2. Materiał zawiera pisma jednej strony (analiza wyłącznie pism Pozwanej lub
 ```
 Wczytaj moduł przed wykonaniem:
 view /mnt/skills/user/analizator-dowodow-v3/modules/MOD-LAPSUS-AUDYT.md
-    view /mnt/skills/user/analizator-dowodow-v3/modules/MOD-NAZEWNICTWO-STRON.md
+    view /mnt/skills/user/shared/NAZEWNICTWO-STRON.md
     (tabele T1-T10 wymagane dla KROK L0 i KROK L1 w MOD-LAPSUS-AUDYT)
 
 Moduł zawiera pełny protokół L0-L5 + 22 typy lapsusów w 4 kategoriach:
@@ -737,6 +784,14 @@ Tablice do wypełnienia: `evidence[]` · `alerts_data{}` · `coverage_data[]`
 **Zawsze:** ocena siły = liczba + uzasadnienie · alert = `[⚠ KOD-N]` + podstawa
 + rekomendacja · sprzeczność = cytat + lokalizacja + status · luka = konkretne
 uzupełnienie · terminy zawite oznaczone ⚠ ZAWITY · przepisy weryfikuj w ISAP.
+⚠️ DODANE 2026-07-15 (na wyraźne polecenie użytkownika): każdy cytat z
+orzeczenia LUB z interpretacji znalezionej online (komentarz, artykuł,
+interpretacja urzędowa) MUSI mieć lokalizację w źródle (strona/teza/punkt/
+akapit) + kotwicę techniczną gdy platforma na to pozwala — pełny standard
+w `orzeczenia-sadowe-v2/SKILL.md` Zasada 2B. "Lokalizacja" w linii wyżej
+("sprzeczność = cytat + lokalizacja + status") oznacza TO SAMO dla
+sprzeczności między dokumentami sprawy co Zasada 2B dla źródeł
+zewnętrznych — jeden spójny standard w całym systemie.
 
 **Nigdy:** ocena bez kryteriów · pominięcie alertu legalności nagrań · mylenie
 terminów instrukcyjnych z zawitymi · orzeczenia z pamięci · sugerowanie że

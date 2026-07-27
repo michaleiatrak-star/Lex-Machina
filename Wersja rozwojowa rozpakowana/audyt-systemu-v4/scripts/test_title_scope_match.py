@@ -72,7 +72,11 @@ def check_scope(md_path: Path):
 
     # Szukaj "art. END" lub "art.END" lub "artEND" w treści (elastyczne
     # dopasowanie spacji/kropki, zgodnie z konwencją polskich tekstów prawnych)
-    end_pattern = re.compile(rf"art\.?\s*{end}\b")
+    # POPRAWKA 2026-07-26c (audyt pełnego systemu, F-14): dodano re.IGNORECASE
+    # — dwa potwierdzone fałszywe alarmy (mod-KK-art267-269c,
+    # mod-KW-art70-118) wynikały z nagłówków "Art. X" wielką literą, których
+    # ten wzorzec wcześniej nie dopasowywał
+    end_pattern = re.compile(rf"art\.?\s*{end}\b", re.IGNORECASE)
     end_present = bool(end_pattern.search(text))
 
     return start, end, end_present

@@ -1,6 +1,6 @@
 ---
 name: dr-12-sadownictwo-prokuratura-zawody-prawnicze
-version: 4.6
+version: 4.9
 description: |
   DR-12: Sądownictwo, Prokuratura, Zawody Prawnicze
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.

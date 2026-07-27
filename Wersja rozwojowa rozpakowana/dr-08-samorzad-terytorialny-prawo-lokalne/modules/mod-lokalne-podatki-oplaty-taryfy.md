@@ -39,7 +39,7 @@ STAWKI UCHWALANE PRZEZ RADĘ GMINY w granicach maksymalnych z obwieszczenia MF:
 OPŁATA ZA ŚMIECI (opłata za gospodarowanie odpadami komunalnymi):
   → Rada gminy: uchwalenie stawek i regulaminu
   → Kryteria: od osoby / od m² / od gospodarstwa / od ilości wody (do wyboru)
-  → Stawka dla niesegregujących: min. 2× wyższa
+  → Stawka dla niesegregujących: NIE MOŻE być niższa niż 2× ani wyższa niż 4× stawki podstawowej (art. 6k ust. 3 ustawy o utrzymaniu czystości i porządku w gminach) — ⚠️ UZUPEŁNIONE 2026-07-27 (FAZA 3E/ZASADA 14): poprzednia wersja podawała TYLKO dolną granicę ("min. 2×"), pomijając górną (max 4×), którą część gmin faktycznie stosuje (np. Słupsk — 4× jako maksimum dozwolone ustawą). Potwierdzone w 5+ źródłach 2026 r. (portalsamorzadowy.pl, biznes.gov.pl, przyjazne-deklaracje.pl, forsal.pl [marzec 2026])
   → Zaskarżenie uchwały: tryb art. 101 USG + WSA
 
 OPŁATA TARGOWA, MIEJSCOWA, UZDROWISKOWA:

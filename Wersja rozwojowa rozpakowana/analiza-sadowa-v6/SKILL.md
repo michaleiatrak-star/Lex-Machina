@@ -1,6 +1,6 @@
 ---
 name: analiza-sadowa-v6
-version: 6.2
+version: 6.3
 type: executive-analiza
 status: production
 compatibility: "web_search, web_fetch, show_widget"

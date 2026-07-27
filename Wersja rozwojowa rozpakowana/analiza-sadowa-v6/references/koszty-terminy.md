@@ -78,7 +78,7 @@
 | 7 500 – 10 000 zł | 500 zł | |
 | 10 000 – 15 000 zł | 750 zł | |
 | 15 000 – 20 000 zł | 1 000 zł | |
-| powyżej 20 000 zł | 5% WPS (max 200 000 zł) | |
+| powyżej 20 000 zł | 5% WPS, max 100 000 zł (⚠️ POPRAWKA 2026-07-27: było błędnie "200 000 zł", obniżone reformą z 25.07.2025) | |
 
 ### Opłata — sprawy gospodarcze
 5% WPS, maksymalnie **20 000 zł** (art. 13 ust. 1a KSCU)

@@ -96,7 +96,6 @@ OBECNIE OBOWIĄZUJĄCE ROSZCZENIA (art. 94³ §3–4 KP):
 ```
 
 
-
 ### Linia orzecznicza SN — przesłanki sporne i ocenne (BAS-W20)
 ```
 Weryfikacja: KP art. 94³ (Dz.U. 2025 poz. 277 t.j.) + SN I PK 176/06 + standardyprawa.pl

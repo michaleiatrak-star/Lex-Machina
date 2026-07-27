@@ -1,6 +1,6 @@
 ---
 name: przesluchanie-swiadkow-v2-min90
-version: "3.20"
+version: "3.21"
 type: legal-skill
 domain: litigation-witness-examination
 status: production
@@ -1285,7 +1285,6 @@ Maria Koroleva (postanowienie sądu z 8.07.2026). Pominięte etapy: brak."
 Jeśli coś pominięto — wpisz to zamiast "brak".
 
 ---
-
 
 
 > 🔴 Sąd uchyla pytania wykraczające poza zatwierdzoną tezę dowodową

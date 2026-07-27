@@ -1,6 +1,62 @@
 # PORTALE-BRANZOWE-RZAD-2B.md — Rejestr Portali per Dziedzina (z weryfikacją `site:`)
 
 > **Plik:** `/mnt/skills/user/shared/PORTALE-BRANZOWE-RZAD-2B.md`
+
+> ⛔ **ZASADA STAŁA (dodana 2026-07-27, na wyraźne polecenie użytkownika,
+> NIE PRECEDENS DO PODWAŻENIA):** Ten rejestr jest WYŁĄCZNIE dla
+> WARTOŚCIOWYCH źródeł — Rząd 1, Rząd 2A, Rząd 2B. **Rząd 3 (pojedyncza
+> kancelaria, blog indywidualny, bez redakcji wydawniczej) i "poza
+> kategorią" (niezweryfikowane, niejasne, marginalne) NIE MAJĄ TU
+> MIEJSCA i nie są rejestrowane, niezależnie od jakości pojedynczego
+> sprawdzonego artykułu.** Powód: Rząd 3 jest z definicji traktowany
+> tak samo (wyłącznie jako dodatkowe potwierdzenie zbieżności, ZASADA 14
+> w `audyt-systemu-v4/SKILL.md`) niezależnie od tego, KTÓRA konkretna
+> domena to jest — rejestrowanie pojedynczych domen Rządu 3 nie dodaje
+> wartości decyzyjnej, tylko rozdyma rejestr. Wyjątek: sieci/agregatory
+> Rządu 3 o rozpoznawalnej SKALI (np. sieć Lexine, 16 domen jednej
+> kancelarii z konsekwentnym, sprawdzonym wzorcem jakości) mogą zostać
+> odnotowane ZBIORCZO jako zjawisko, ale NIE jako indywidualne wpisy do
+> naśladowania przy każdej kolejnej podobnej domenie.
+>
+> **Przy KAŻDYM audycie tego rejestru:** jeśli natrafisz na wiersz
+> oznaczony jednoznacznie jako Rząd 3 lub poza kategorią BEZ ścieżki
+> awansu (np. bez potencjału "2B-równoważne" jak w przypadku
+> wydawnictw C.H.Beck/Wolters Kluwer w próbkach nexto.pl) — USUŃ go z
+> tabeli. Nie dotyczy to fragmentów metodologicznych objaśniających
+
+> ⚠️ **DOPRECYZOWANIE 2026-07-27b (po korekcie błędnej klasyfikacji
+> monikasmulewicz.pl na żądanie użytkownika):** "poza kategorią" NIE
+> oznacza "źródło prowadzone przez osobę bez formalnych kwalifikacji
+> prawniczych". Oznacza wyłącznie: marginalne, niezweryfikowane,
+> niejasne co do statusu, lub z nierozstrzygniętym testem jakości (np.
+> sygnalista.pl — niejasna niezależność; rodzinneprawo.pl —
+> niezweryfikowany placeholder; pb.pl — nieudany test `site:`; ipon.pl
+> — portal jawnie NIE prawny, tylko społecznościowy). UZNANE,
+> rozpoznawalne w branży źródła praktyczne prowadzone przez
+> specjalistów niebędących prawnikami (np. kadrowo-płacowych,
+> księgowych, doradców) POZOSTAJĄ w rejestrze, analogicznie do POPON/
+> OBPON w sekcji niepełnosprawności — praktyczna wartość i
+> rozpoznawalność w branży liczą się bardziej niż formalny tytuł
+> zawodowy autora.
+> SAMĄ hierarchię (te zostają) — dotyczy wyłącznie konkretnych wpisów
+> rejestrujących pojedynczą domenę jako źródło do sprawdzania.
+
+> **Wersja:** 3.7 (2026-07-27b) — KOREKTA na żądanie użytkownika:
+> monikasmulewicz.pl PRZYWRÓCONY — poprzednie usunięcie było błędem
+> klasyfikacji ("poza kategorią" pomylone z "autor nie jest
+> prawnikiem"). Doprecyzowano ZASADĘ STAŁĄ: uznane, rozpoznawalne
+> źródła praktyczne prowadzone przez specjalistów niebędących
+> prawnikami POZOSTAJĄ w rejestrze (analogia do POPON/OBPON).
+> **Wersja:** 3.6 (2026-07-27) — na wyraźne polecenie użytkownika:
+> ustanowiono ZASADĘ STAŁĄ (nagłówek pliku) — rejestr wyłącznie dla
+> Rządu 1/2A/2B, Rząd 3 i poza kategorią NIE mają tu miejsca.
+> USUNIĘTO 9 wpisów/bloków: cała "sieć Lexine" (16 domen jednej
+> kancelarii), hrlaw.pl, ptpodatki.pl, monikasmulewicz.pl (+ wpis
+> konsolidacyjny hrnaszpilkach.pl), sygnalista.pl (status nierozstrzygnięty),
+> rodzinneprawo.pl (niezweryfikowany placeholder), pb.pl (test nieudany),
+> ipon.pl (portal społecznościowy, nie prawny). Rejestr istotnie
+> odchudzony — pozostają wyłącznie źródła o potwierdzonej, wyższej
+> wartości dowodowej.
 > **Wersja:** 3.5 (2026-07-25) — na żądanie użytkownika "testuj resztę":
 > zweryfikowano treściowo 8 dotąd niesprawdzonych domen sieci Lexine
 > (spolkowy.pl, sluzebnosc.info, poradapodatkowa.pl, praworolne.info,
@@ -115,7 +171,6 @@
 | **portal-sow.pfron.org.pl** (System Obsługi Wsparcia) | OFICJALNY portal PFRON — "Baza wiedzy"/"Informator" podzielony WEDŁUG rodzaju orzeczenia o niepełnosprawności, "Słownik" pojęć, obsługa wniosków o dofinansowanie | ⛔ TO NIE JEST Rząd 2B — oficjalny portal PFRON (fundusz państwowy), klasyfikuj jako RZĄD 1, analogicznie do niepelnosprawni.gov.pl — POTWIERDZONE 2026-07-21 (pobrano stronę bezpośrednio, w pełni oficjalna struktura rządowa z logo RP/UE) |
 | **popon.pl** (Polska Organizacja Pracodawców Osób Niepełnosprawnych) | Organizacja PRACODAWCÓW zatrudniających osoby niepełnosprawne (od 1995 r., ~600 firm) — PERSPEKTYWA PRACODAWCY: optymalizacja wpłat na PFRON, "efekt zachęty", ZPCh (Zakłady Pracy Chronionej), poradnictwo prawne, wydaje "Kompendium Ekonomiczno-Prawne ZPCh" | ✅ ZWERYFIKOWANE 2026-07-21 — ⭐ TRAKTUJ jako Rząd 2B z ZASTRZEŻENIEM: to organizacja RZECZNICZA (advocacy) reprezentująca INTERESY pracodawców, NIE neutralny komentarz — WARTOŚCIOWA dla PERSPEKTYWY pracodawcy, ale SKRZYŻUJ z niepelnosprawni.pl dla perspektywy pracownika/osoby niepełnosprawnej |
 | **obpon.org** (Ogólnopolska Baza Pracodawców Osób Niepełnosprawnych) | ANALOGICZNA do POPON — perspektywa pracodawcy, PRAKTYCZNE tematy: system SODiR, dofinansowanie do wynagrodzenia, "efekt zachęty", ZFRON, analiza postępowań administracyjnych/sądowych z PFRON | ✅ ZWERYFIKOWANE 2026-07-21 (znalezione przy okazji badania POPON) — TA SAMA zasada: perspektywa pracodawcy, skrzyżuj z niepelnosprawni.pl |
-| **ipon.pl / ipon.org.pl** (Internetowy Portal Osób Niepełnosprawnych) | ⭐ UWAGA — INNY CHARAKTER niż powyższe: to PRZEDE WSZYSTKIM portal SPOŁECZNOŚCIOWY/RANDKOWY dla osób z niepełnosprawnościami (działa od 2002 r., jeden z najstarszych w Polsce) — NIE jest to serwis prawny/doradczy jak niepelnosprawni.pl | ⚠️ ZWERYFIKOWANE 2026-07-21 jako REALNY, długoletni portal — ALE NIE TRAKTUJ jako źródło prawne (Rząd 2B) — to zasób SPOŁECZNY/integracyjny, wartościowy dla INNYCH celów (budowanie społeczności, wsparcie rówieśnicze), NIE dla analizy prawnej |
 
 ### ⭐ Rekomendacja praktyczna dla tej dziedziny
 
@@ -157,50 +212,19 @@
 | **poradnikprzedsiebiorcy.pl** | Prawo gospodarcze/firmy — zakładanie działalności/spółek (JDG, sp. z o.o.), koszty i procedury rejestracyjne (KRS, S24, CEIDG), przekształcenia | ✅ ZWERYFIKOWANE 2026-07-21 (test: zakładanie spółki z o.o. — wynik DOSKONAŁY, konkretne kwoty [kapitał zakładowy 5000 zł, opłaty sądowe 500 zł, PCC 0,5%], terminy [6 miesięcy na rejestrację], cytaty KSH) |
 | **ngo.pl** (+ subdomeny poradnik.ngo.pl, publicystyka.ngo.pl) | ⭐ NOWA NISZA — prawo ORGANIZACJI POZARZĄDOWYCH (fundacje, stowarzyszenia): ustawa o fundacjach, Prawo o stowarzyszeniach, władze/organy, oddziały/filie, działalność gospodarcza NGO, odpowiedzialność zarządu | ✅✅ ZWERYFIKOWANE 2026-07-21 (test: fundacja/stowarzyszenie przepisy — wynik DOSKONAŁY, precyzyjne cytaty artykułów [art. 7 ustawy o fundacjach, art. 10a Prawa o stowarzyszeniach], format Q&A praktyczny) — DOTĄD BRAK dedykowanego portalu dla tej niszy w całym rejestrze |
 | infor.pl (sekcja ogólna /prawo/, obok już znanej ksiegowosc.infor.pl) | Ogólne prawo cywilne/gospodarcze/rodzinne (spadki, rozwody, alimenty), redakcja profesjonalna | ✅ STATUS PODNIESIONY 2026-07-25 z 📚 (fetch bezpośredni `infor.pl/prawo/`) — treść BARDZO aktualna i śledząca proces legislacyjny NA BIEŻĄCO: artykuły z konkretnymi datami posiedzeń Sejmu, numerami projektów (np. UDER105), np. "Reforma prawa rodzinnego" z 17.06.2026 z odesłaniem do konkretnego komunikatu MS. Sekcja /prawo/ jest SZERSZA niż zarejestrowana wcześniej ksiegowosc.infor.pl (podatki) — obejmuje spadki, rozwody, alimenty, sprawy urzędowe, KPA, wybory |
-| rodzinneprawo.pl / adwokatrodzinny.pl (przykładowe wzorce nazw) | Prawo rodzinne — ⚠️ SPRAWDŹ każdorazowo czy dana domena ma redakcję wydawniczą (Rząd 2B) czy jest indywidualną kancelarią (Rząd 3) | ⚠️ NIE testowane — punkt startowy, brak jednej dominującej marki "2B" w tej niszy |
 | bankier.pl (dział Prawo) | Prawo gospodarcze/handlowe, kontekst rynkowy | ✅ ZWERYFIKOWANE (patrz DR-06 — TA SAMA domena, status podniesiony z 📚) |
-| pb.pl (Puls Biznesu) | Ekonomia/biznes — ⚠️ TEST `site:` w tej sesji zwrócił WYŁĄCZNIE niepowiązane wyniki (Wikipedia, baza LEI, szablony umów) — MOŻLIWE że indeksacja tej domeny jest słaba dla wyszukiwarki LUB wymaga innej frazy zapytania | ⚠️ WYNIK NIEUDANY 2026-07-21 — NIE polegaj na tym portalu bez PONOWNEGO testu z inną frazą |
 | **prawakonsumenta.uokik.gov.pl** (+ polubowne.uokik.gov.pl, malykonsument.uokik.gov.pl) | ⛔ TO NIE JEST Rząd 2B — OFICJALNY portal UOKiK (Rząd 1, domena .gov.pl) — prawa konsumenta, reklamacja, GOTOWE WZORY PISM (oświadczenie o odstąpieniu, reklamacja — naprawa/wymiana/obniżenie ceny/odstąpienie), polubowne rozwiązywanie sporów | ✅ ZWERYFIKOWANE 2026-07-21 — klasyfikuj jako Rząd 1 (analogicznie do PFRON SOW, PARP) — ⭐ SZCZEGÓLNIE WARTOŚCIOWE ze względu na GOTOWE wzory pism, potencjalnie przydatne dla `pisma-proste-v2` |
 | **bezprawnik.pl** | Prawo konsumenckie/cywilne — BARDZO ZNANY, popularny polski portal prawniczy (istnieje od ok. 2013 r., archiwum bogate), precyzyjne cytaty artykułów (KC, ustawa o kredycie konsumenckim) i SYGNATUR SN, subtelne rozróżnienia praktyczne (rękojmia vs gwarancja vs odpowiedzialność kontraktowa, uprawnienia przedsiębiorcy-konsumenta) | ✅✅ ZWERYFIKOWANE 2026-07-21 (test: prawo konsumenckie/umowa — wynik DOSKONAŁY, cytaty art. 563 KC, art. 45 ustawy o kredycie konsumenckim, wyrok SN II CK 291/05) — ⭐ JEDEN Z NAJLEPIEJ ROZPOZNAWALNYCH ogólnie portali prawnych w Polsce, dotąd NIEOBECNY w tym rejestrze mimo wielu tur budowy |
-| **rozwodowy.pl** (część sieci 16 portali "Lexine" Gawek i Kielar sp.j. — patrz tabela **SIEĆ LEXINE** poniżej) | ⭐ Dedykowany portal prawa rodzinnego — rozwód, separacja, podział majątku, alimenty, rozdzielność majątkowa/intercyza, związki partnerskie/konkubinat, władza rodzicielska | ✅ ZWERYFIKOWANE 2026-07-25 (fetch bezpośredni) — treść BARDZO aktualna (artykuły z 17-24 lipca 2026: podział majątku, intercyza a długi, rozliczenie konkubinatu), konkretna i praktyczna. ⚠️ ZASTRZEŻENIE: portal KANCELARYJNY (jedna spółka prawnicza, model porad płatnych) — analogiczne zastrzeżenie jak przy hrlaw.pl/ptpodatki.pl |
-
-> ### 🏢 SIEĆ LEXINE — 16 portali niszowych jednej kancelarii (odkryte
-> 2026-07-25, KRS 0000335571, "Lexine" Gawek i Kielar sp.j., Kraków)
->
-> Każdy portal to WĄSKA nisza tematyczna tej samej firmy, ten sam model
-> (bezpłatne artykuły + płatne porady prawnika w 24h, autorzy artykułów to
-> NAZWANI prawnicy z afiliacją — np. Adam Dąbrowski, Monika Wycykał,
-> Tomasz Krupiński, Janusz Polanowski — nie anonimowa treść). **Zweryfikowano
-> treściowo 13 z 16 domen** (`site:` z konkretną frazą, 2026-07-25) —
-> wszystkie potwierdzone jako rzetelne, konkretne, z cytatami ustaw/Dz.U./
-> orzeczeń SN i AKTUALNE (artykuły z maja-lipca 2026). Pozostałe 3
-> (eporady24.pl, odpowiedziprawne.pl — portale-parasole; Pozew-o-alimenty.pl
-> — odkryta dopiero w stopce ewindykacja24.pl, nieprzetestowana) NIE mają
-> jednego DR lub czekają na test.
->
-> | Domena | Nisza | DR | Status weryfikacji |
-> |---|---|---|---|
-> | eporady24.pl | Portal-parasol, WSZYSTKIE dziedziny naraz | brak jednego DR | 📚 potwierdzony jako realny (widziany wielokrotnie jako źródło), nie testowany osobno — to punkt wejścia do sieci, nie samodzielne źródło |
-> | odpowiedziprawne.pl | Generalistyczny (jak eporady24.pl, inna marka) | brak jednego DR | ✅ ZWERYFIKOWANY 2026-07-25 — artykuły o prawie budowlanym, spadkowym, rodzinnym w jednym miejscu, konkretne i aktualne |
-> | rozwodowy.pl | Prawo rodzinne | DR-02 | ✅ ZWERYFIKOWANY 2026-07-25 |
-> | spadek.info | Prawo spadkowe | DR-02 | ✅ ZWERYFIKOWANY 2026-07-25 |
-> | prawo-cywilne.info | Prawo cywilne ogólne | DR-02 | ✅ ZWERYFIKOWANY 2026-07-25 |
-> | sluzebnosc.info | Służebności (prawo rzeczowe) | DR-02 | ✅✅ ZWERYFIKOWANY 2026-07-25 — precyzyjne sygnatury SN (I CKN 543/97, V CKN 43/2000, II CSK 30/10), art. 145/244-251/285-305 KC, PCC |
-> | spolkowy.pl | Prawo spółek | DR-02 | ✅✅ ZWERYFIKOWANY 2026-07-25 — cytaty KSH (art. 201, 210), aktualne (maj-czerwiec 2026) |
-> | prawo-mieszkaniowe.info | Najem, wspólnoty, spółdzielnie, lokale komunalne | DR-02 | ✅ ZWERYFIKOWANY 2026-07-25 — KC/KPC, najem socjalny |
-> | prawo-budowlane.info | Prawo budowlane, zagospodarowanie przestrzenne | DR-09 | ✅ ZWERYFIKOWANY 2026-07-25 |
-> | prawo-pracy.pl | Kodeks pracy | DR-04 | ✅ potwierdzony jako realny (KRS/RODO widoczne), treść merytoryczna nie w pełni przetestowana w tej sesji |
-> | prawozus.pl | ZUS, emerytury, renty, zasiłki | DR-04 | ✅✅ ZWERYFIKOWANY 2026-07-25 — bardzo aktualne (renta wdowia 2026, limit 5935,47 zł, Dz.U. 2024 poz. 1243), słownik pojęć |
-> | poradapodatkowa.pl | Podatki | DR-06 | ✅ ZWERYFIKOWANY 2026-07-25 |
-> | praworolne.info | Prawo rolne — obrót ziemią, KRUS, dopłaty | DR-10 | ✅ ZWERYFIKOWANY 2026-07-25 — nazwani autorzy (Monika Wycykał, Tomasz Krupiński) |
-> | ewindykacja24.pl | Windykacja, egzekucja cywilna, upadłość konsumencka | DR-02 (cross-ref DR-03 dla procedury komorniczej) | ✅ ZWERYFIKOWANY 2026-07-25 |
-> | **prawo-karne.info** | Prawo karne — wzory pism, kalkulatory (promile, przedawnienie, punkty karne), słownik >60 haseł | **DR-03** | ✅ ZWERYFIKOWANY 2026-07-25 — artykuły o przeszukaniu (KPK), aktualne (maj 2026) |
-> | **Pozew-o-alimenty.pl** (odkryta 2026-07-25 w stopce ewindykacja24.pl — 16. domena, wcześniej pominięta nawet w poprawionej liście) | Pozwy alimentacyjne (nazwa mówi sama za siebie) | **DR-02** | ⚠️ NIEZWERYFIKOWANA — dostrzeżona tylko jako link w stopce, nie testowana treściowo |
->
-> ⚠️ Wspólne dla całej sieci zastrzeżenie: to portale KANCELARYJNE jednej
-> spółki (Rząd 2B-podobne z uwagi na skalę, nie neutralna redakcja) —
-> stosuj tę samą zasadę co przy hrlaw.pl/ptpodatki.pl: SKRZYŻUJ z
-> portalem neutralnym lub źródłem urzędowym przy kwestiach spornych.
+> ⛔ **USUNIĘTO 2026-07-27 (na wyraźne polecenie użytkownika, ZASADA
+> STAŁA z nagłówka pliku):** wcześniej w tym miejscu rejestrowano
+> rozwodowy.pl i całą "sieć Lexine" (16 domen jednej kancelarii, Gawek
+> i Kielar sp.j.) — wszystkie jednoznacznie Rząd 3 (portale
+> KANCELARYJNE jednej spółki, "nie neutralna redakcja" — cytat z
+> poprzedniej wersji tego pliku). Zgodnie z nową zasadą, indywidualne
+> domeny Rządu 3 nie mają miejsca w tym rejestrze niezależnie od
+> potwierdzonej jakości pojedynczych artykułów — Rząd 3 jest z
+> definicji traktowany tak samo (ZASADA 14), więc katalogowanie
+> konkretnych domen tej kategorii nie dodaje wartości decyzyjnej.
 
 ## DR-03 — Karne, Wykroczenia, Egzekucja
 
@@ -243,11 +267,21 @@ WYJĄTKIEM, redakcyjnym portalem 2B, nie kancelaryjnym blogiem.
 | **kodekspracy.pl** | Prawo pracy — komentarze eksperckie w formie Q&A praktycznych (case-style), pełny tekst KP z komentarzem, ⭐ prawdopodobnie CZĘŚĆ rodziny portali GOFIN (wzajemne odesłania do "KSeF w programie DRUKI Gofin", tematy PFRON/ZUS krzyżowe z gofin.pl) | ✅ ZWERYFIKOWANE 2026-07-21 (test: wypowiedzenie zmieniające — wynik DOSKONAŁY, cytaty konkretnych artykułów KP, sygnatur SN np. II PZP 3/06, aktualne na 2025 r.) |
 | **praca.pl** (dział Poradniki) | ⭐ WYPEŁNIA lukę PERSPEKTYWY PRACOWNIKA — dotychczasowe portale tej sekcji (kodekspracy.pl, kadry.infor.pl) pisane są GŁÓWNIE z perspektywy PRACODAWCY/działu kadr; praca.pl odwraca punkt widzenia ("Czy pracodawca może wysłać pracownika na urlop?"), łączy PORADY z ogłoszeniami o pracę | ✅✅ ZWERYFIKOWANE 2026-07-21 (test: prawa pracownika wypowiedzenie urlop — wynik DOSKONAŁY, konkretne rozróżnienia umowa o pracę vs zlecenie, art. 153 KP, zasady naliczania urlopu) |
 | kadry.infor.pl | Prawo pracy — komentarze praktyczne, kadry i płace | 📚 znane (HIERARCHIA-ZRODEL), używane wielokrotnie w tej sesji z dobrym skutkiem |
-| ~~hrnaszpilkach.pl~~ → **monikasmulewicz.pl** (Monika Smulewicz, "HR na Szpilkach®") | Kadry, płace, HR — marka ROZPOZNAWALNA w branży | ⚠️→✅ SKORYGOWANE 2026-07-25: wpis z 2026-07-21 testował domenę `hrnaszpilkach.pl` i uzyskał wynik mieszany (prawdopodobnie przekierowanie/domena pomocnicza zaburzyła `site:`) — właściwa, kanoniczna domena portalu to **monikasmulewicz.pl**. Ponowny test `site:monikasmulewicz.pl interpretacja` (2026-07-25) dał wynik DOBRY — patrz pełny wpis w **DR-04** niżej, z zastrzeżeniem o charakterze biznesu szkoleniowego i wartością cyklu "HR Detektywi" do śledzenia zmian. NIE traktuj tego jako dwóch różnych źródeł. |
 | gofin.pl (patrz DR-06, ale też prawo pracy) | Kadry-płace jako CZĘŚĆ szerszej oferty podatkowo-księgowej | ✅ ZWERYFIKOWANE (patrz DR-06 niżej, dotyczy też HR) |
-| **hrlaw.pl** ("Portal prawa pracy", Wardyński i Wspólnicy / WiW Services sp. z o.o.) | ⭐ Dedykowany portal prawa pracy prowadzony przez UZNANĄ kancelarię (Wardyński i Wspólnicy) — treść DWUJĘZYCZNA (PL/EN), artykuły z konkretnymi cytatami (np. art. 41, 52, 53 KP), tematyka: wypowiedzenia, mobbing, cudzoziemcy/zatrudnienie, RODO w HR, członkowie zarządu. Dobre źródło dla spraw z ELEMENTEM MIĘDZYNARODOWYM (wersja EN) | ✅ ZWERYFIKOWANE 2026-07-25 (`site:hrlaw.pl wypowiedzenie umowy o pracę` — wynik DOBRY, precyzyjne odwołania do KP). ⚠️ ZASTRZEŻENIE: to portal KANCELARYJNY (marketing/publikacje jednej firmy, nie neutralna redakcja jak gofin.pl/kodekspracy.pl) — traktuj jak Rząd 2B-podobny z uwagi na skalę/regularność, ale SKRZYŻUJ z portalem neutralnym przy kwestiach spornych, analogicznie do zastrzeżenia przy POPON/OBPON w sekcji niepełnosprawności |
+> ⛔ **USUNIĘTO 2026-07-27** (ZASADA STAŁA — rejestr tylko dla wartości Rząd 1/2A/2B): wcześniej tu był hrlaw.pl (portal kancelaryjny Wardyński i Wspólnicy, jednoznacznie Rząd 3 mimo wcześniejszego hedge'u "traktuj jak 2B-podobny"). Usunięty zgodnie z nową zasadą.
 | pip.gov.pl | Oficjalne stanowiska PIP — NIE 2B, to RZĄD 1 (organ urzędowy) | (dla porządku: to NIE portal komercyjny, patrz `shared/INTERPRETACJE-URZEDOWE.md`) |
-| **monikasmulewicz.pl** ("HR na Szpilkach®", Monika Smulewicz / Eduwersum) | ⭐ Duży, rozpoznawalny portal kadrowo-płacowy (nie kancelaria — biznes szkoleniowy, ISO 9001, ~100 tys. obserwujących) z cyklicznym, DEDYKOWANYM formatem **"HR Detektywi"** — cotygodniowy przegląd zmian w prawie pracy/ZUS/PIP (świeże numery co tydzień, np. #194, #195 z lipca 2026) — dokładnie ten typ źródła, o który pytał użytkownik (śledzenie zmian). Artykuły merytoryczne cytują konkretne interpretacje GIP, stanowiska PIP, wyroki, z odwołaniem do artykułów KP | ✅ ZWERYFIKOWANE 2026-07-25 (`site:monikasmulewicz.pl interpretacja`) — wyniki precyzyjne, m.in. interpretacja GIP nt. kwoty wolnej od potrąceń, art. 85 §1 KP nt. terminu wypłaty. ⚠️ ZASTRZEŻENIE: autorka NIE jest prawnikiem/radcą prawnym — to specjalistka kadrowo-płacowa i przedsiębiorczyni edukacyjna (Eduwersum, kursy płatne to główny model biznesowy portalu); treść ma charakter praktyczny/branżowy, nie doktrynalny — SKRZYŻUJ z hrlaw.pl lub źródłem urzędowym (PIP/ZUS) przy kwestiach spornych prawnie, ale świetne źródło DO ŚLEDZENIA BIEŻĄCYCH ZMIAN dzięki cyklowi "HR Detektywi" |
+> ⚠️ **KOREKTA 2026-07-27b (na żądanie użytkownika):** wcześniejsze
+> usunięcie monikasmulewicz.pl było BŁĘDEM KLASYFIKACJI. "Poza
+> kategorią" w ZASADZIE STAŁEJ oznacza źródła marginalne/niejasne/
+> niezweryfikowane (jak sygnalista.pl, rodzinneprawo.pl, pb.pl) — NIE
+> oznacza "uznane źródło prowadzone przez osobę, która nie jest
+> prawnikiem". Monika Smulewicz / "HR na Szpilkach®" to UZNANY,
+> rozpoznawalny w branży portal kadrowo-płacowy z cyklicznym formatem
+> "HR Detektywi" — dokładnie ten typ źródła praktycznego (jak POPON/
+> OBPON w sekcji niepełnosprawności), który rejestr ma katalogować,
+> mimo że nie jest to Rząd 2B w ścisłym doktrynalnym sensie. Przywrócono.
+
+| **monikasmulewicz.pl** ("HR na Szpilkach®", Monika Smulewicz / Eduwersum) | ⭐ Duży, rozpoznawalny portal kadrowo-płacowy (nie kancelaria — biznes szkoleniowy, ISO 9001, ~100 tys. obserwujących) z cyklicznym, DEDYKOWANYM formatem **"HR Detektywi"** — cotygodniowy przegląd zmian w prawie pracy/ZUS/PIP (świeże numery co tydzień, np. #194, #195 z lipca 2026). Artykuły merytoryczne cytują konkretne interpretacje GIP, stanowiska PIP, wyroki, z odwołaniem do artykułów KP | ✅ ZWERYFIKOWANE 2026-07-25 (`site:monikasmulewicz.pl interpretacja`) — wyniki precyzyjne, m.in. interpretacja GIP nt. kwoty wolnej od potrąceń, art. 85 §1 KP nt. terminu wypłaty. ⚠️ ZASTRZEŻENIE: autorka NIE jest prawnikiem/radcą prawnym — to specjalistka kadrowo-płacowa i przedsiębiorczyni edukacyjna; treść ma charakter praktyczny/branżowy, nie doktrynalny — SKRZYŻUJ ze źródłem urzędowym (PIP/ZUS) przy kwestiach spornych prawnie, ale ŚWIETNE źródło DO ŚLEDZENIA BIEŻĄCYCH ZMIAN dzięki cyklowi "HR Detektywi" |
 
 > ✅ **PODZIAŁ "OŚWIATY" — rozstrzygnięty przez użytkownika 2026-07-25**
 > (koryguje wcześniejszą notatkę o "luce taksonomicznej" z tej samej sesji):
@@ -275,7 +309,41 @@ WYJĄTKIEM, redakcyjnym portalem 2B, nie kancelaryjnym blogiem.
 > zawodowy, nadzór pedagogiczny czy dyscyplinę nauczyciela — sprawdzaj
 > najpierw moduły DR-08, nie DR-04, mimo że portal-źródło jest ten sam.
 
-| **portaloswiatowy.pl** | ⭐⭐ Portal prawa oświatowego — Karta Nauczyciela (stosunek pracy, wynagrodzenia, awans zawodowy, urlop zdrowotny), zarządzanie szkołą/przedszkolem, nadzór pedagogiczny, RODO w oświacie, bezpieczeństwo dzieci. Kalendarz obowiązków z podstawą prawną, dział "Orzeczenia sądów" dedykowany oświacie (np. SN nt. trzynastki nauczyciela) | ✅ ZWERYFIKOWANE 2026-07-25 (fetch bezpośredni) — treść BARDZO aktualna i precyzyjna (artykuły datowane 15-24 lipca 2026, konkretne Dz.U., np. Dz.U. 2025 poz. 1849 nowelizacja Karty Nauczyciela). Model: częściowo płatny dostęp (Akademia/prenumerata), ale znaczna część artykułów i kalendarz dostępne swobodnie. Zob. przypis wyżej — treść portalu podzielona między DR-04 (praca) i DR-08 (zawód zaufania publicznego) |
+> ⚠️ **KOREKTA 2026-07-27 — DECYZJA Z 2026-07-25 NIE ZOSTAŁA ZREALIZOWANA
+> JAKO RZECZYWISTA TREŚĆ.** Na pytanie użytkownika "czy prawo oświatowe
+> jest pokryte w całości" sprawdzono faktyczny stan modułów DR-04/DR-08 —
+> **obie zawierają WYŁĄCZNIE jednolinijkowe wzmianki** (ZFŚS w DR-04,
+> subwencja oświatowa w DR-08), ŻADNEJ substancjalnej treści o Karcie
+> Nauczyciela, awansie czy dyscyplinie. Jednocześnie odkryto, że
+> substancjalne moduły JUŻ ISTNIAŁY (od dawna, niezależnie od tej
+> decyzji) w **DR-10** (`mod-ustawa-oswiata-szkolnictwo-wyzsze.md` —
+> decyzje, kuratorium, skreślenia, awans) i **DR-15**
+> (`mod-ustawa-nauczyciele-uczelnie.md` — dyscyplinarka, ocena pracy,
+> awans) — o których decyzja z 2026-07-25 NIE WIEDZIAŁA. Dodatkowo: te
+> dwa moduły (DR-10/DR-15) NIE MIAŁY wzajemnej cross-referencji mimo
+> pokrywania się zakresu (oba: "awans zawodowy") — naprawiono to
+> 2026-07-27, dodając wzajemne odesłania w obu plikach.
+>
+> **AKTUALNY, PRAWDZIWY STAN POKRYCIA (2026-07-27):**
+> - **Dyscyplinarka, ocena pracy, awans, orzeczenia PPP** → **DR-15**
+>   (`mod-ustawa-nauczyciele-uczelnie.md`) — najbardziej szczegółowy
+> - **Szerszy kontekst administracyjny** (kuratorium, skreślenia,
+>   decyzje stypendialne, bezczynność uczelni) → **DR-10**
+>   (`mod-ustawa-oswiata-szkolnictwo-wyzsze.md`)
+> - **Elementy PRACOWNICZE** (wynagrodzenie, urlopy, czas pracy, ZFŚS) —
+>   **BRAK substancjalnej treści w CAŁYM systemie** — to NIE jest
+>   pokryte, mimo wcześniejszej decyzji przypisującej to do DR-04.
+>   Kandydat do rozbudowy, jeśli temat stanie się aktywny (patrz F-19
+>   w WARN-OTWARTE.md).
+> - **"Zawód zaufania publicznego" jako pojęcie konstytucyjne** — nadal
+>   DR-01 (bez zmian, to było poprawne).
+>
+> `portaloswiatowy.pl` jako źródło pozostaje zarejestrowany tutaj (DR-04
+> jako historyczna lokalizacja wpisu w tym rejestrze), ale przy
+> RZECZYWISTYM poszukiwaniu treści merytorycznej sprawdzaj DR-15 i DR-10,
+> NIE DR-04/DR-08 — te dwa DR nie mają czego szukać poza ZFŚS/subwencją.
+
+| **portaloswiatowy.pl** | ⭐⭐ Portal prawa oświatowego — Karta Nauczyciela (stosunek pracy, wynagrodzenia, awans zawodowy, urlop zdrowotny), zarządzanie szkołą/przedszkolem, nadzór pedagogiczny, RODO w oświacie, bezpieczeństwo dzieci. Kalendarz obowiązków z podstawą prawną, dział "Orzeczenia sądów" dedykowany oświacie (np. SN nt. trzynastki nauczyciela) | ✅ ZWERYFIKOWANE 2026-07-25 (fetch bezpośredni) — treść BARDZO aktualna i precyzyjna (artykuły datowane 15-24 lipca 2026, konkretne Dz.U., np. Dz.U. 2025 poz. 1849 nowelizacja Karty Nauczyciela). Model: częściowo płatny dostęp (Akademia/prenumerata), ale znaczna część artykułów i kalendarz dostępne swobodnie. ⚠️ Zob. KOREKTA 2026-07-27 wyżej — merytoryczne moduły są w DR-10/DR-15, NIE w DR-04/DR-08 jak wcześniej zapisano |
 
 ## DR-05 — Administracyjne, Sądowoadministracyjne
 
@@ -321,7 +389,7 @@ poziomie porównywalnym do gofin.pl.
 | **bankier.pl** | Podatki/finanse — SILNE śledzenie PROCESU LEGISLACYJNEGO na bieżąco (głosowania Sejmu, projekty rządowe, daty wejścia w życie) | ✅ ZWERYFIKOWANE 2026-07-21 (test: zmiany VAT 2026 — wynik DOSKONAŁY, artykuły z DNI, nie tygodni [np. 2.06.2026], konkretne terminy wejścia w życie [1.07.2026, 1.01.2027]) |
 | **egospodarka.pl** (+ subdomeny podatki.egospodarka.pl, firma.egospodarka.pl) | Podatki/biznes — bardzo SZEROKA oferta (Podatki/Firma/Finanse/Nieruchomości/Przetargi/Praca/Prawo), komentarze NAZWANYCH ekspertów (kancelarie), kalkulatory | ✅✅ ZWERYFIKOWANE 2026-07-21 (test: zmiana B2B na umowę o pracę — wynik DOSKONAŁY, artykuł z KOMENTARZEM partnera kancelarii, aktualny do 2026-04) — ⚠️ ZASTRZEŻENIE: JEDEN ze znalezionych artykułów oznaczony WPROST "© wygenerowane przez AI" — TRAKTUJ treść egospodarka.pl z TĄ SAMĄ ostrożnością co przy innych źródłach AI-generowanych (patrz zastrzeżenie psz.praca.gov.pl w sekcji niepełnosprawność), SKRZYŻUJ z innym źródłem przy KLUCZOWYCH ustaleniach |
 | poradnikprzedsiebiorcy.pl | Podatki dla małych przedsiębiorców, JDG | ✅ ZWERYFIKOWANE (patrz DR-02 — TA SAMA domena, dotyczy też podatków) |
-| **ptpodatki.pl** ("Przekrój Podatkowy", Paczuski Taudul, doradcy podatkowi) | ⭐ Publikacja kancelaryjna z regularnym, cyklicznym przeglądem NAJNOWSZYCH wyroków NSA i interpretacji indywidualnych — konkretne sygnatury i daty (np. wyrok NSA z 6 maja 2026, sygn. II FSK 890/23, z pełnym opisem stanu faktycznego i podstawy prawnej) | ✅ ZWERYFIKOWANE 2026-07-25 — wysoka precyzja, ale to portal KANCELARYJNY (jedna firma doradztwa podatkowego) — analogiczne zastrzeżenie jak przy hrlaw.pl (DR-04): SKRZYŻUJ z EUREKA/gofin.pl/infor.pl przy kwestiach spornych |
+> ⛔ **USUNIĘTO 2026-07-27** (ZASADA STAŁA): wcześniej tu był wpis ptpodatki.pl ("Przekrój Podatkowy", Paczuski Taudul) — jednoznacznie Rząd 3 (portal jednej firmy doradztwa podatkowego), mimo wcześniejszego hedge'u. Usunięty zgodnie z nową zasadą rejestru.
 
 > ⚠️ **Kandydaci ODRZUCENI 2026-07-25 (świadoma granica zakresu, Zasada 6
 > audytu — nie dodawaj, ale odnotuj DLACZEGO, żeby przyszła sesja nie
@@ -487,7 +555,7 @@ komentarza.
 | Portal | Specjalizacja | Status |
 |---|---|---|
 | prawo.pl (dział Compliance/ESG) | Compliance ogólnie | 📚 znane, ta sama redakcja co testowana ✅ |
-| **sygnalista.pl** | ⭐ Dedykowany portal ochrony sygnalistów (ustawa z 14.06.2024 r., Dz.U. poz. 928) — sekcja "Prawo i orzecznictwo" / "Prawo w Polsce" z chronologią inicjatyw legislacyjnych i stanowisk (RPO, MRPiPS), częściowo WYPEŁNIA lukę odnotowaną 2026-07-21 dla DR-15 | ✅ ZWERYFIKOWANE 2026-07-25 — treść merytoryczna, nie tylko marketingowa, ALE ustalić przy użyciu, czy portal jest prowadzony przez podmiot NGO/niezależny czy powiązany z konkretnym dostawcą oprogramowania do zgłoszeń (typowe dla tej niszy) — SKRZYŻUJ z gov.pl/web/sygnalisci (Rząd 1, oficjalne) dla brzmienia ustawy |
+> ⛔ **USUNIĘTO 2026-07-27** (ZASADA STAŁA): wcześniej tu był wpis sygnalista.pl — status ostatecznie NIEROZSTRZYGNIĘTY (niejasne, czy podmiot niezależny czy powiązany z dostawcą oprogramowania) — poza kategorią, usunięty zgodnie z nową zasadą rejestru.
 | nik.gov.pl | Rząd 1 — organ (wystąpienia pokontrolne) | patrz `shared/INTERPRETACJE-URZEDOWE.md` |
 
 ### ⚠️ UCZCIWA OBSERWACJA (dodane 2026-07-21)
@@ -1008,7 +1076,6 @@ użytkownika. Przetestowano EMPIRYCZNIE (zapytania `site:` na żywo) sześć
 portali: prawo.pl (✅ doskonały, ogólny), gofin.pl + 4 subdomeny (✅
 doskonały, DR-06), prawniknabudowie.com (✅ dobry, DR-09, spory
 kontraktowe), prawnikpodpowienabudowie.pl (✅ dobry, DR-09, ODRĘBNY od
-poprzedniego mimo podobnej nazwy), hrnaszpilkach.pl (⚠️ wynik mieszany,
 DR-04, prawdopodobnie zorientowany na szkolenia/kalkulatory nie
 artykuły), rynekzdrowia.pl (✅ doskonały, DR-10, bardzo aktualny),
 di.com.pl (⚠️ ogólny wynik pozytywny, ale artykuły częściowo datowane

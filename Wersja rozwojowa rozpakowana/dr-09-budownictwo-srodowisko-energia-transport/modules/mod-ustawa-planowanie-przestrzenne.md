@@ -12,7 +12,24 @@
 ## Nowe narzędzia planistyczne (po reformie 2023)
 ```
 Plan Ogólny Gminy (POG):  ZASTAPIL Studium Uwarunkowan i Kierunkow Zagospodarowania
-  Termin:   Gminy musiały uchwalić POG do 31.12.2025 (inaczej brak możliwości WZ!)
+  Termin:   ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) — BYŁO błędnie
+            "31.12.2025". Termin PRZESUWANO DWUKROTNIE: pierwotnie
+            31.12.2025 → przesunięty do 30.06.2026 → przesunięty PONOWNIE
+            do **31.08.2026** (nowelizacja uchwalona przez Sejm, ustawa o
+            zmianie ustawy o planowaniu i zagospodarowaniu przestrzennym,
+            projekt UD316). Studia uwarunkowań zachowują moc DO 31.08.2026.
+            **Po 1.09.2026 r. gminy BEZ uchwalonego POG co do zasady NIE
+            BĘDĄ MOGŁY uchwalać/zmieniać MPZP ani wydawać decyzji WZ/LICP**
+            (art. 67 ust. 4 reformy) — to KRYTYCZNY, BLISKI termin (dziś
+            jest 26.07.2026 — ok. miesiąc do terminu). Stan realizacji
+            ALARMUJĄCY: w marcu 2026 POG uchwaliło zaledwie 31 z ponad
+            2400 gmin (1,3%). Potwierdzone: gov.pl/MRiT (Rząd 1, wprost:
+            "po 1 września 2026 r. co do zasady nie będzie możliwości
+            uchwalenia nowego lub zmiany obowiązującego planu miejscowego
+            ani wydania decyzji WZ i LICP"), ongeo.pl [kwiecień/maj 2026],
+            investorrealestateexpert.co, dsk-kancelaria.pl.
+            ⚠️ SPRAWDŹ PONOWNIE PRZED UŻYCIEM — historia dwóch przesunięć
+            w ciągu roku pokazuje, że kolejne przesunięcie jest możliwe.
   Zawartosc: Strefy planistyczne (min. 13 typow), zasady ograniczen
   
 Miejscowy Plan Ogólny (MPZP): Bez zmian (akt pr. miejscowego)

@@ -40,7 +40,15 @@ przy przestępstwach materialnych, gdzie skutek następuje później: wtedy
 liczy się od dnia, gdy skutek nastąpił — art. 101 §3)
 
 │
-├─ Zbrodnia zabójstwa (art. 148 KK) → 30 lat
+├─ Zbrodnia zabójstwa (art. 148 KK) → 40 lat (⚠️ POPRAWKA 2026-07-26,
+│  FAZA 3E/ZASADA 14: BYŁO błędnie "30 lat" — to liczba SPRZED
+│  nowelizacji z 7.07.2022 r., Dz.U. 2022.2600, w życie 1.10.2023 r.,
+│  która wydłużyła ten termin z 30 DO 40 LAT. Ironicznie, ten sam moduł
+│  już wcześniej ostrzegał o istnieniu tej nowelizacji, ale nie
+│  zastosował jej do własnej liczby. Potwierdzone w 7+ źródłach: rp.pl
+│  (Rząd 2B, aktualizacja 13.04.2026), arslege.pl [t.j. Dz.U.2025.383],
+│  gov.pl [publikacja R. Kmiecik, Prokuratura i Prawo], kglegal.pl,
+│  zzbudowlani.pl, adwokat-grube.pl, tvn24.pl)
 │
 ├─ Inna zbrodnia → 20 lat
 │
@@ -50,8 +58,14 @@ liczy się od dnia, gdy skutek nastąpił — art. 101 §3)
 │
 ├─ Występek zagrożony karą pozbawienia wolności ≤3 lata → 5 lat
 │
-└─ Czyn ścigany z oskarżenia prywatnego → 3 lata od popełnienia,
-   ALE nie później niż 5 lat od ustania skutków (art. 101 §2a)
+└─ Czyn ścigany z oskarżenia prywatnego → 1 ROK od dnia, gdy pokrzywdzony
+   DOWIEDZIAŁ SIĘ O OSOBIE SPRAWCY, ALE nie później niż 3 lata OD
+   POPEŁNIENIA czynu (art. 101 §2) — ⚠️ POPRAWKA 2026-07-26 (FAZA 3E/
+   ZASADA 14): poprzednia wersja miała te dwa elementy CAŁKOWICIE
+   ZAMIENIONE MIEJSCAMI i błędne liczby ("3 lata od popełnienia... nie
+   później niż 5 lat od ustania skutków") — potwierdzone w arslege.pl,
+   e-prawnik.pl, lexlege.pl (wszystkie zgodne co do dosłownego brzmienia
+   art. 101 §2 KK)
 ```
 
 ⚠️ **WYDŁUŻENIE przy przestępstwach seksualnych wobec małoletniego**
@@ -130,10 +144,12 @@ Nie ulegają przedawnieniu:
   publicznego w związku z pełnieniem obowiązków służbowych.
 
 ⚠️ To WĄSKI wyjątek — zwykłe zabójstwo (art. 148 §1) popełnione przez
-osobę prywatną **podlega przedawnieniu po 30 latach** (DRZEWO P.1) —
-nie myl z tym wyjątkiem, który dotyczy wyłącznie funkcjonariuszy
-publicznych działających w związku ze służbą, oraz zbrodni
-międzynarodowych.
+osobę prywatną **podlega przedawnieniu po 40 latach** (⚠️ POPRAWKA
+2026-07-26, MOD-PROPAGACJA-NOWELIZACJI — to samo, wcześniej naprawione
+w DRZEWO P.1, DRUGIE wystąpienie w tym samym pliku, przeoczone przy
+pierwszej naprawie; patrz DRZEWO P.1) — nie myl z tym wyjątkiem, który
+dotyczy wyłącznie funkcjonariuszy publicznych działających w związku ze
+służbą, oraz zbrodni międzynarodowych.
 
 ---
 
@@ -141,13 +157,28 @@ międzynarodowych.
 
 | Kategoria czynu | Podstawowy termin (art. 101) | Po wszczęciu post. (art. 102) |
 |---|---|---|
-| Zabójstwo (art. 148 §1) | 30 lat | +10 lat = 40 lat |
+| Zabójstwo (art. 148 §1) | 40 lat | +10 lat = 50 lat |
 | Inna zbrodnia | 20 lat | +10 lat = 30 lat |
-| Występek, zagrożenie > 5 lat pozb. wolności | 15 lat | +5 lat = 20 lat |
-| Występek, zagrożenie > 3 lata (≤5) | 10 lat | +5 lat = 15 lat |
-| Występek, zagrożenie ≤3 lata | 5 lat | +5 lat = 10 lat |
-| Prywatnoskargowe | 3 lata (max 5 od ustania skutków) | — |
-| Przestępstwa seksualne wobec małoletniego | nie wcześniej niż od 30. r.ż. pokrzywdzonego | j.w. + odpowiedni okres |
+| Występek, zagrożenie > 5 lat pozb. wolności | 15 lat | +10 lat = 25 lat |
+| Występek, zagrożenie > 3 lata (≤5) | 10 lat | +10 lat = 20 lat |
+| Występek, zagrożenie ≤3 lata | 5 lat | +10 lat = 15 lat |
+| Prywatnoskargowe (art. 101 §2) | 1 rok od dowiedzenia się o sprawcy (max 3 lata od popełnienia) | +5 lat od zakończenia okresu z §2 |
+| Przestępstwa seksualne wobec małoletniego | nie wcześniej niż od 30. r.ż. pokrzywdzonego [⚠️ NIEWERYFIKOWANE w tej sesji — część źródeł wskazuje wyjątki z progiem 40 lat dla wybranych typów, sprawdź isap.sejm.gov.pl przed użyciem] | j.w. + odpowiedni okres |
+
+> ⚠️ **POPRAWKA 2026-07-26c (WERYFIKACJA BEZPOŚREDNIO NA ISAP —
+> api.sejm.gov.pl/eli/acts/DU/2025/383/text.pdf, Rząd 1, pobrane
+> dosłownie):** poprzednia poprawka W TEJ SAMEJ SESJI (26n) nadal miała
+> błąd — dosłowne brzmienie art. 102 §1 KK: "Jeżeli w okresie, o którym
+> mowa w art. 101, wszczęto postępowanie, karalność przestępstw
+> określonych w **art. 101 §1** ustaje z upływem **10 lat**, a w
+> **pozostałych wypadkach** — z upływem **5 lat** od zakończenia tego
+> okresu." To znaczy: WSZYSTKIE 5 kategorii z §1 (zabójstwo, inna
+> zbrodnia, >5 lat, >3 lata, ORAZ najlżejsze występki — pkt 4) dostają
+> **+10 lat**, bez wyjątku dla najlżejszych. "Pozostałe wypadki" (+5 lat)
+> to NIE pkt 4 z §1, tylko sprawy **SPOZA §1 w ogóle — czyli §2
+> (prywatnoskargowe)**. Poprzednia wersja tej tabeli (26n) błędnie
+> wyłączała pkt 4 z eskalacji +10 i błędnie zostawiała prywatnoskargowe
+> bez żadnej wartości ("—"). Naprawiono oba w tej edycji.
 
 ⚠️ WSZYSTKIE terminy do potwierdzenia na isap.sejm.gov.pl przed użyciem
 w piśmie procesowym — ta tabela to punkt startowy analizy (PRAWO-HARDGATE).

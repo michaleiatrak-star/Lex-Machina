@@ -539,7 +539,6 @@ w reakcji na milczenie bywa niepotrzebną stratą pozycji negocjacyjnej.
 ---
 
 
-
 **Definicja:** odrębna sesja mediatora z JEDNĄ stroną, bez obecności drugiej.
 
 **Zasady:**
@@ -609,7 +608,6 @@ wolniejsze tempo, więcej czasu na wyjaśnienie zasad, oraz większą wagę
 komunikatów niewerbalnych.
 
 ---
-
 
 
 Rozszerzenie już istniejącego w `mod-KRO-rodzinne.md` punktu (przemoc

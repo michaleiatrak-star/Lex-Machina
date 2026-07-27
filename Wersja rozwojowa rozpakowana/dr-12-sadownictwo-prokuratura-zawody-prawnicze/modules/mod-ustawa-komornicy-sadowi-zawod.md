@@ -59,8 +59,18 @@ Ustawa o kosztach komorniczych (jeśli odrębna od u.k.s.):
    — weryfikuj aktualne ograniczenia w ISAP.
 3. Odpowiedzialność cywilna za szkodę z egzekucji: komornik odpowiada OSOBIŚCIE
    (SP nie ponosi odpowiedzialności solidarnej — aktualny stan: weryfikuj).
-4. Opłaty egzekucyjne: co do zasady 10% wyegzekwowanej kwoty — ZAWSZE weryfikuj
-   min/max i wyjątki w aktualnym rozp. MS.
+4. Opłaty egzekucyjne (art. 29-31 ustawy o kosztach komorniczych, 28.02.2018,
+   t.j. Dz.U. 2024 poz. 377) — ⚠️ UZUPEŁNIONE 2026-07-27 (FAZA 3E/ZASADA 14,
+   potwierdzone w 6+ źródłach zgodnych, w tym z 2026): STAWKA PODSTAWOWA
+   10% wyegzekwowanej kwoty (świadczenia pieniężne); STAWKA PREFERENCYJNA
+   3%, jeśli dłużnik spłaci całość/część długu w ciągu MIESIĄCA od
+   doręczenia zawiadomienia o wszczęciu egzekucji; przy UMORZENIU na
+   wniosek wierzyciela — 5% (od kwoty pozostałej do wyegzekwowania).
+   Minimalna opłata: 150 zł (stawka preferencyjna) / 200 zł (rachunek
+   bankowy, wynagrodzenie, wierzytelności) / 300 zł (ruchomości,
+   nieruchomości). MAKSYMALNA opłata: 50 000 zł. ⚠️ NADAL WERYFIKUJ
+   dokładne progi i wyjątki w aktualnym t.j. przed cytowaniem w piśmie —
+   powyższe potwierdzone na 2026-07-27, ustawa może być nowelizowana.
 5. OC: obowiązkowe; suma gwarancyjna: weryfikuj aktualne rozp. MS.
 6. Skarga na czynności komornika: art. 767 KPC — termin 1 tydzień od czynności
    (lub powzięcia wiadomości) — WERYFIKUJ aktualne brzmienie KPC.
