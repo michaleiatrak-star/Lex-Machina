@@ -5,6 +5,14 @@
 > dokumentów przeznaczonych dla niespecjalistów, pytanie o "czytelność",
 > "przejrzystość", "zrozumiałość", ocena dla pro se lub laika.
 > Trend wymagany przez KE, OECD, DSA, Omnibus i sądy przy ocenie abuzywności.
+>
+> **Ten moduł ocenia** dokumenty (scoring D1–D5). Gdy zamiast oceniać
+> **tworzysz** dokument od zera i chcesz zastosować standard produkcyjny
+> (typografia, layout, tabela „Kluczowe warunki", spis treści, wzorce
+> wizualne wg WorldCC/Hagan/Haapio) — użyj
+> `view references/generator/legal-design-produkcyjny.md` (v1.17). Oba
+> moduły się uzupełniają: ten mierzy wynik, tamten mówi jak go osiągnąć przy
+> generowaniu.
 
 ---
 

@@ -8,31 +8,74 @@
 > ⛔ HARD GATE — kary umowne, stopy odsetek, limity z KC zawsze weryfikuj
 > w ISAP przed podaniem kwot. Weryfikacja: isap.sejm.gov.pl → KC → art. 484.
 
+> **v1.18 — źródła metodologiczne (zastępuje wcześniejszą heurystykę
+> „Likely × 2" bez podstawy):**
+> - **Three-point estimating / PERT** (Program Evaluation and Review
+>   Technique) — standard szacowania ryzyka w warunkach niepewności, gdy nie
+>   dysponujesz jawnymi prawdopodobieństwami dla każdego scenariusza.
+>   Formuła: `E = (O + 4M + P) / 6`, gdzie O = optimistic (najlepszy
+>   przypadek), M = most likely, P = pessimistic (worst case). Waga 4 dla
+>   „most likely" odzwierciedla rozkład beta, standardowy w estymacji
+>   trzypunktowej projektowej i ryzyka.
+> - **Litigation/Contract Risk Analysis (decision tree, probability-
+>   weighted expected value)** — Marc B. Victor (twórca Litigation Risk
+>   Analysis, lata 70.); Marjorie Corman Aaron, *Risk & Rigor: A Lawyer's
+>   Guide to Decision Trees for Assessing Cases and Advising Clients* (ABA,
+>   2019); Aaron, M.C. & Hoffer, D.P., „Using Decision Trees As Tools for
+>   Settlement", *Alternatives to the High Cost of Litigation* 14. Metoda:
+>   gdy DYSPONUJESZ jawnymi prawdopodobieństwami zdarzeń (np. szacowane %
+>   prawdopodobieństwa naruszenia, wygranej w sporze) — licz wartość
+>   oczekiwaną jako sumę (wynik × prawdopodobieństwo) dla każdej gałęzi
+>   drzewa decyzyjnego, nie uproszczony PERT. PERT stosuj jako **fallback**,
+>   gdy jawnych prawdopodobieństw nie da się sensownie oszacować.
+
 ---
 
 ## RK.1 METODOLOGIA KWANTYFIKACJI
 
 ```
-DLA KAŻDEJ KLAUZULI RYZYKA oblicz TRZY SCENARIUSZE:
+DLA KAŻDEJ KLAUZULI RYZYKA — wybierz metodę wg dostępności danych:
 
-SCENARIUSZ 1 — WORST CASE (najgorszy możliwy):
-  → Maksymalna liczba dni/naruszeń × maksymalna stawka
-  → Nieograniczona odpowiedzialność → szacuj jako X × wartość umowy
-  → Przykład: "Kara 0,5% dziennie × 365 dni = 182,5% wartości kontraktu"
+ŚCIEŻKA A — ZNANE/SZACOWALNE PRAWDOPODOBIEŃSTWA (preferowana, decision tree):
+  Gdy można sensownie oszacować % prawdopodobieństwa wystąpienia zdarzenia
+  (np. z historii kontrahenta, branży, częstości sporów tego typu):
 
-SCENARIUSZ 2 — LIKELY CASE (typowe opóźnienie/naruszenie w branży):
-  → Realne opóźnienie: 30–60 dni (budownictwo), 7–14 dni (IT), 1–5 dni (dostawy)
-  → Typowe naruszenie: jednorazowe, nieistotne
+  Wartość oczekiwana = Σ (wynik_i × prawdopodobieństwo_i) dla wszystkich i
 
-SCENARIUSZ 3 — EXPECTED VALUE (wartość oczekiwana):
-  → (Worst Case × prawdopodobieństwo) + (Likely × prawdopodobieństwo)
-  → Uproszczenie: Likely × 2 (konserwatywna heurystyka)
+  Przykład:
+    Zdarzenie: opóźnienie >30 dni. Szacowane prawdopodobieństwo: 20%.
+    Konsekwencja: kara 0,5%/dzień × 60 dni = 30% wartości umowy.
+    Wartość oczekiwana tej gałęzi = 30% × 20% = 6% wartości umowy.
+  Zawsze pokaż założone prawdopodobieństwo jawnie — jeśli jest szacunkiem
+  eksperckim (Twoim), oznacz to wprost („szacunek: 20%, do weryfikacji z
+  klientem/historią kontrahenta"), nie podawaj jako pewnik.
+
+ŚCIEŻKA B — BRAK DANYCH DO OSZACOWANIA PRAWDOPODOBIEŃSTWA (fallback, PERT):
+  Trzy scenariusze, wagowana średnia wg formuły PERT:
+
+  SCENARIUSZ O — OPTYMISTYCZNY (najlepszy możliwy):
+    → Brak naruszenia lub naruszenie minimalne
+
+  SCENARIUSZ M — MOST LIKELY (typowe opóźnienie/naruszenie w branży):
+    → Realne opóźnienie: 30–60 dni (budownictwo), 7–14 dni (IT), 1–5 dni (dostawy)
+    → Typowe naruszenie: jednorazowe, nieistotne
+
+  SCENARIUSZ P — PESSIMISTIC / WORST CASE (najgorszy możliwy):
+    → Maksymalna liczba dni/naruszeń × maksymalna stawka
+    → Nieograniczona odpowiedzialność → szacuj jako X × wartość umowy
+
+  WARTOŚĆ OCZEKIWANA (PERT): E = (O + 4×M + P) / 6
 
 FORMAT OBLICZENIA:
   Wartość umowy: [kwota] PLN
   Kara: [stawka]% dziennie / jednorazowa
-  Worst case:  [liczba dni] × [stawka] × [wartość] = [kwota] PLN = [X%] wartości
-  Likely case: [liczba dni] × [stawka] × [wartość] = [kwota] PLN = [X%] wartości
+  [Ścieżka A] Zdarzenie: [opis] | P(zdarzenia): [X%] | Wynik: [kwota] PLN
+              | Wartość oczekiwana: [kwota × %] = [kwota] PLN
+  [Ścieżka B] O: [kwota] | M: [kwota] | P: [kwota]
+              | E = (O + 4M + P)/6 = [kwota] PLN
+
+Wybór ścieżki uzasadnij jednym zdaniem w raporcie — nie mieszaj obu metod
+dla tej samej klauzuli w jednym raporcie (spójność metodologiczna).
 ```
 
 ---
@@ -42,24 +85,25 @@ FORMAT OBLICZENIA:
 Sporządź dla całej umowy:
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│ TABELA EKSPOZYCJI FINANSOWEJ                                    │
-│ Dokument: [nazwa] | Wartość umowy: [X] PLN                     │
-├──────────────┬──────────┬──────────┬──────────┬────────────────┤
-│ Klauzula §   │ Ryzyko   │ Worst    │ Likely   │ Podstawa       │
-│              │ (M/S/N)  │ Case PLN │ Case PLN │ prawna         │
-├──────────────┼──────────┼──────────┼──────────┼────────────────┤
-│ §X kara dz.  │ M        │ [kwota]  │ [kwota]  │ art. 484 KC    │
-│ §Y odp.nier. │ S        │ [kwota]  │ [kwota]  │ art. 471 KC    │
-│ §Z poufność  │ N        │ [kwota]  │ [kwota]  │ art. 483 KC    │
-├──────────────┼──────────┼──────────┼──────────┼────────────────┤
-│ SUMA ŁĄCZNA  │          │ [kwota]  │ [kwota]  │                │
-│ % wartości   │          │ [X%]     │ [Y%]     │                │
-└──────────────┴──────────┴──────────┴──────────┴────────────────┘
+┌─────────────────────────────────────────────────────────────────────────┐
+│ TABELA EKSPOZYCJI FINANSOWEJ                                            │
+│ Dokument: [nazwa] | Wartość umowy: [X] PLN                              │
+├──────────────┬──────────┬──────────┬──────────┬──────────┬─────────────┤
+│ Klauzula §   │ Ryzyko   │ Worst    │ Wartość  │ Metoda   │ Podstawa    │
+│              │ (M/S/N)  │ Case PLN │ oczek.(E)│ (A/B)*   │ prawna      │
+├──────────────┼──────────┼──────────┼──────────┼──────────┼─────────────┤
+│ §X kara dz.  │ M        │ [kwota]  │ [kwota]  │ [A/B]    │ art. 484 KC │
+│ §Y odp.nier. │ S        │ [kwota]  │ [kwota]  │ [A/B]    │ art. 471 KC │
+│ §Z poufność  │ N        │ [kwota]  │ [kwota]  │ [A/B]    │ art. 483 KC │
+├──────────────┼──────────┼──────────┼──────────┼──────────┼─────────────┤
+│ SUMA ŁĄCZNA  │          │ [kwota]  │ [kwota]  │          │             │
+│ % wartości   │          │ [X%]     │ [Y%]     │          │             │
+└──────────────┴──────────┴──────────┴──────────┴──────────┴─────────────┘
+* Metoda A = decision tree z jawnym prawdopodobieństwem; B = PERT (fallback) — patrz RK.1
 
 WNIOSKI:
   → Łączna ekspozycja Worst Case: [kwota] PLN ([X%] wartości umowy)
-  → Łączna ekspozycja Likely Case: [kwota] PLN ([Y%] wartości umowy)
+  → Łączna wartość oczekiwana (E): [kwota] PLN ([Y%] wartości umowy)
   → Klauzula o najwyższym ryzyku: §[X] (łącznie do [kwota] PLN)
   → Rekomendacja priorytetowa: zmiana §[X] + §[Y] eliminuje [Z%] ryzyka
 ```
@@ -108,10 +152,11 @@ METODOLOGIA:
   Krok 2: Jaka jest maksymalna szkoda klienta z umowy?
     → Wartość umowy × (1 + marża zysku = oczekiwany zysk utracony)
   
-  Proxy gdy brak danych:
-    → Minimalna: wartość umowy brutto
-    → Prawdopodobna: 2–3 × wartość umowy
-    → Maksymalna: 5–10 × wartość umowy (dla projektów krytycznych)
+  Proxy gdy brak danych (Ścieżka B / PERT — patrz RK.1):
+    → O (optymistyczny): wartość umowy brutto
+    → M (most likely): 2–3 × wartość umowy
+    → P (pesymistyczny): 5–10 × wartość umowy (dla projektów krytycznych)
+    → E = (O + 4M + P) / 6
 
 REKOMENDACJA LIMITU (cap liability):
   Standard rynkowy B2B: cap = wartość umowy lub 12 × miesięczne wynagrodzenie

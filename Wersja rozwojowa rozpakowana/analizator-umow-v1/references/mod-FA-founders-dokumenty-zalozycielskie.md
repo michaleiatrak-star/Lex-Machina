@@ -130,6 +130,12 @@ umieszczać w jawnym dokumencie złożonym do KRS).
      być nieskuteczna lub łatwo podważalna — patrz `zakaz-konkurencji.md`)
    → wczytaj RÓWNIEŻ `references/zakaz-konkurencji.md`
 
+8a. POUFNOŚĆ FOUNDERÓW (odrębna od zakazu konkurencji — patrz Moduł I Pułapka ZK-11)
+   □ okres po odejściu foundera / po zakończeniu relacji z inwestorem?
+   □ czy obejmuje informacje ujawnione inwestorom w toku rund inwestycyjnych?
+   □ wyłączenia i kara umowna zdefiniowane?
+   → wczytaj RÓWNIEŻ `references/poufnosc-nda.md` (Moduł K)
+
 9. MECHANIZMY WYJŚCIA / ROZSTANIA
    □ LOCK-UP: zakaz sprzedaży udziałów przez określony okres od startu?
    □ PRAWO ODKUPU od odchodzącego foundera — cena, termin płatności?
@@ -386,6 +392,7 @@ sprawdź DODATKOWO:
 | Runda inwestycyjna / SPA / SHA post-formation | `mod-MA-transakcje.md` |
 | Przeniesienie IP (kod, design, marka) na spółkę | `mod-J9-ip-prawa-autorskie.md`, `mod-J6-it-konsorcjum.md` (SD-1) |
 | Zakaz konkurencji founderów po odejściu | `references/zakaz-konkurencji.md` |
+| Poufność founderów / NDA przedinwestycyjne / informacje ujawniane inwestorom | `references/poufnosc-nda.md` (Moduł K) |
 | PCC od umowy spółki, opodatkowanie form działalności | DR-06 → moduły PIT/CIT/PCC |
 | Rejestracja w KRS | DR-02/`mod-ustawa-KRS-rejestr-sadowy` |
 | Spór między wspólnikami — pismo procesowe | `pisma-procesowe-v3` |

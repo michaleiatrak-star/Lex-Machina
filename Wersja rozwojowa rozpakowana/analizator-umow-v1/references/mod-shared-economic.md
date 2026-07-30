@@ -98,6 +98,38 @@ OCENA MIARKOWANIA:
   Kara ~10–30% wartości umowy → zazwyczaj akceptowalna przez sądy
 ```
 
+### OEK.3a Zastrzeżenia bezwzględnie obowiązujące (dodane 2026-07-30)
+
+> Uzupełnienie w toku zewnętrznej analizy porównawczej klauzul kontraktowych —
+> ten moduł kalkuluje SKUTEK FINANSOWY kary, ale nie zawierał dotąd wprost
+> dwóch zastrzeżeń o charakterze bezwzględnie obowiązującym, które powinny
+> towarzyszyć każdej kalkulacji z OEK.2/OEK.3 przy redakcji lub audycie klauzuli.
+
+**1. Prawo do miarkowania (art. 484 §2 KC) jest NIEZRZEKALNE.** Żadna kalkulacja
+z tego modułu nie zastępuje tego zastrzeżenia — nawet przy karze mieszczącej się
+w widełkach "akceptowalnych" (10-30% wartości umowy), strona zobowiązana zachowuje
+prawo żądania miarkowania, jeśli wykaże którąkolwiek z dwóch niezależnych,
+rozłącznych przesłanek: (a) zobowiązanie wykonane w znacznej części, (b) kara
+rażąco wygórowana. Próba zapisania w umowie zrzeczenia się tego prawa jest
+bezskuteczna z mocy prawa — nie sugerować takiego zapisu jako realnego
+zabezpieczenia przy redakcji klauzuli.
+
+**2. Kara za zobowiązanie PIENIĘŻNE jest nieważna z mocy art. 483 §1 KC.**
+Przed jakąkolwiek kalkulacją z OEK.2/OEK.3 zweryfikuj, czy zabezpieczane
+zobowiązanie jest niepieniężne (np. termin realizacji, zachowanie poufności,
+zakaz konkurencji) — jeśli kara dotyczy opóźnienia w ZAPŁACIE, cała klauzula
+jest nieważna niezależnie od jej wysokości; właściwym zabezpieczeniem są
+wyłącznie odsetki (patrz OEK.4). To częsty błąd redakcyjny w praktyce rynkowej —
+flagować jako CRITICAL przy audycie, nie jako kwestię wysokości/miarkowania.
+
+**3. Brak zastrzeżenia prawa do odszkodowania uzupełniającego** (art. 484 §1 zd. 2
+KC) oznacza, że kara stanowi CAŁOŚĆ odszkodowania niezależnie od faktycznej
+wysokości szkody. Przy kalkulacji z OEK.2/OEK.3 zawsze sprawdzić, czy klauzula
+zawiera zdanie typu "Zastrzeżenie kary umownej nie wyłącza prawa do dochodzenia
+odszkodowania przewyższającego jej wysokość na zasadach ogólnych" — brak tego
+zastrzeżenia jest samodzielną, odrębną luką od samej wysokości kary.
+
+
 ---
 
 ## OEK.4 ODSETKI
@@ -149,6 +181,34 @@ Scenariusze:
   Limit = 1 miesiąc opłaty: pokrywa ~1/12 V ⚠️
   Brak limitu: nieograniczona ekspozycja 🔴
 ```
+
+### OEK.5a Rozróżnienie damnum emergens / lucrum cessans i wyjątek winy umyślnej
+(dodane 2026-07-30, w toku zewnętrznej analizy porównawczej klauzul kontraktowych)
+
+Kalkulacja liczbowa L vs. V (powyżej) NIE zastępuje weryfikacji, CO limit faktycznie
+obejmuje. Dwa elementy o większym znaczeniu praktycznym niż sama wysokość limitu:
+
+**1. Czy klauzula wyłącza lucrum cessans (utracone korzyści)?** Bez wyraźnego
+wyłączenia, odpowiedzialność obejmuje zarówno rzeczywistą stratę (damnum emergens —
+łatwą do oszacowania, np. koszt naprawy błędu) jak i utracone korzyści kontrahenta
+(lucrum cessans — mogące wielokrotnie przewyższać wartość samej umowy, np. utracony
+zysk z przestoju systemu). Praktyka rynkowa wskazuje wyłączenie lucrum cessans jako
+pojedynczy, najważniejszy element ochronny tej klauzuli — ważniejszy niż sama
+wysokość kwotowa limitu L. Przy audycie: brak tego wyłączenia = ryzyko, nawet gdy L
+wygląda na "bezpieczny" w kalkulacji powyżej.
+
+**2. Wyjątek winy umyślnej jest bezwzględnie obowiązujący.** Art. 473 §2 KC czyni
+nieważnym z mocy prawa każde zastrzeżenie wyłączające odpowiedzialność za szkodę
+wyrządzoną umyślnie — niezależnie od tego, czy strony to zapisały. Każda redakcja
+limitu odpowiedzialności powinna zawierać ten wyjątek wprost (nie tylko milcząco go
+zakładać) — jego brak w treści klauzuli nie unieważnia całej klauzuli, ale wprowadza
+niejasność, którą przy sporze sąd i tak rozstrzygnie na korzyść wyjątku ustawowego.
+
+**3. Asymetria limitu.** Jeśli L chroni tylko jedną stronę (np. wyłącznie Wykonawcę),
+to nie jest samo w sobie wadą prawną, ale wymaga świadomej decyzji negocjacyjnej —
+przy kalkulacji odnotuj wprost, czyją perspektywę L reprezentuje, zamiast przedstawiać
+go jako neutralny wzorzec rynkowy.
+
 
 ---
 

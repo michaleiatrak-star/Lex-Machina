@@ -215,6 +215,9 @@ PEŁNA ANALIZA (ustawa o ochronie tajemnic przedsiębiorstwa, trzy kryteria,
 wzorzec rekomendowanej klauzuli):
 → OBOWIĄZKOWO wczytaj: view references/zakaz-konkurencji.md (Moduł I)
   szczególnie: I.3 Pułapka ZK-8 (tajemnica przedsiębiorstwa jako obejście zakazu)
+→ Uzupełniająco, dla oceny samej klauzuli poufności jako takiej (definicja,
+  wyłączenia, okres, kara): view references/poufnosc-nda.md (Moduł K)
+  szczególnie: K.1a (przesłanki tajemnicy przedsiębiorstwa), Pułapka K-6
 ```
 
 ### PUŁAPKA P-7 — Porozumienie rozwiązujące z zrzeczeniem roszczeń (CRITICAL)
@@ -554,5 +557,6 @@ SCORING → Balans H/UoP:
 
 *Moduł H / analizator-umow-v1 · Dla umów B2B → references/b2b-podwykonawcze.md*
 *Zakaz konkurencji (pełna analiza) → references/zakaz-konkurencji.md (Moduł I)*
+*Poufność / NDA (pełna analiza) → references/poufnosc-nda.md (Moduł K)*
 *Prawo weryfikuj ZAWSZE w ISAP (zmieniało się!) · Orzeczenia: sn.pl, orzeczenia.ms.gov.pl*
 *Nigdy nie podawaj kwot minimalnych z pamięci — weryfikuj online przed każdą odpowiedzią*

@@ -231,10 +231,14 @@ ALERT: Zakaz B2B bez odszkodowania jest co do zasady ważny (KC art. 353¹),
        z zasadami współżycia społecznego (art. 58 §2 KC) jeśli eliminuje
        możliwość zarobkowania.
 
-PEŁNA ANALIZA (matryca reżimów, test ważności, wszystkie pułapki ZK-1 do ZK-8,
+PEŁNA ANALIZA (matryca reżimów, test ważności, wszystkie pułapki ZK-1 do ZK-11,
 szablony klauzul, scoring, rekomendacje):
 → OBOWIĄZKOWO wczytaj: view references/zakaz-konkurencji.md (Moduł I)
   — jest to jedyne kompletne źródło dla zakazu konkurencji w tym systemie
+
+Dla klauzuli poufności / NDA towarzyszącej umowie B2B (odrębna instytucja od
+zakazu konkurencji — patrz Moduł I, Pułapka ZK-11):
+→ view references/poufnosc-nda.md (Moduł K)
 ```
 
 ### PUŁAPKA 2 — Prawa autorskie "na wszelki wypadek" (HIGH RISK)
@@ -539,6 +543,7 @@ KLUCZOWE KLAUZULE DO WERYFIKACJI:
 □ Kary umowne (Pułapka 5) — symetria, cap, proporcjonalność
 □ Cesja wierzytelności (Pułapka 6) — blokada faktoringu?
 □ Poufność (Pułapka 7) — wyjątki, termin, zakres
+  → Pełna analiza: view references/poufnosc-nda.md (Moduł K)
 □ Automatyczne przedłużenie (Pułapka 8) — termin wypowiedzenia, max odnowień
 □ Rozwiązanie natychmiastowe (Pułapka 9) — "jakiekolwiek naruszenie" = red flag
 □ Podwykonawstwo (Pułapka 10) — zgoda, odpowiedzialność, budownictwo → art. 647¹
@@ -709,4 +714,5 @@ DODANE PO KONFRONTACJI Z PRAKTYKĄ KANCELARYJNĄ (2026-07-13n):
 
 *Moduł G / analizator-umow-v1 · Dla umów o pracę → references/umowy-o-prace.md (Moduł H)*
 *Zakaz konkurencji (pełna analiza) → references/zakaz-konkurencji.md (Moduł I)*
+*Poufność / NDA (pełna analiza) → references/poufnosc-nda.md (Moduł K)*
 *Prawo weryfikuj w ISAP · Klauzule w rejestrze UOKiK · Zawsze aktualny tekst jednolity*

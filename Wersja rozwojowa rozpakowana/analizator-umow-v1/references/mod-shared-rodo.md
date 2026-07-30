@@ -66,6 +66,16 @@ TEST: Czy w związku z wykonaniem umowy głównej kontrahent będzie przetwarza�
 
 ALERT: Brak DPA przy faktycznym przetwarzaniu = naruszenie art. 28 RODO
   → Kara UODO + odpowiedzialność cywilna wobec osób których dane dotyczą
+
+STAWKA BŁĘDU (dodane 2026-07-30): udokumentowane przypadki kar administracyjnych
+rzędu ponad 1 mln EUR dotyczyły NIE TYLKO braku umowy powierzenia w ogóle, ale
+też przypadków gdzie umowa formalnie istniała, lecz nie odzwierciedlała faktycznego
+zakresu przetwarzania (np. nie wymieniała rzeczywiście używanych podprocesorów).
+Wniosek praktyczny: sama obecność klauzuli odsyłającej do "Załącznika DPA" w umowie
+głównej NIE jest wystarczająca — przy audycie zawsze weryfikuj, czy załącznik
+FAKTYCZNIE istnieje i pokrywa wszystkie elementy z checklisty RO.3 KROK 3, oraz czy
+odzwierciedla rzeczywisty, aktualny stan przetwarzania (nie tylko stan z dnia
+podpisania umowy).
 ```
 
 ---
@@ -125,6 +135,30 @@ PUŁAPKA RO-2 — Brak klauzuli podpowierzenia (HIGH RISK)
      stanowi Załącznik nr [Y]. Procesor zobowiązuje każdego podprocesora do
      zachowania obowiązków ochrony danych co najmniej równoważnych niniejszej
      Umowie. Za działania podprocesora Procesor odpowiada jak za własne."
+
+  ### RO-2a Tryb zgody na podprocesora — rozróżnienie o realnym znaczeniu
+  (dodane 2026-07-30, w toku zewnętrznej analizy porównawczej klauzul kontraktowych)
+
+  Zapis "ogólna / uprzednia pisemna zgoda" w rekomendacji powyżej NIE jest
+  równoważnym wyborem stylistycznym — to dwa różne tryby proceduralne
+  o różnych konsekwencjach operacyjnych dla administratora:
+
+  - **ZGODA SZCZEGÓŁOWA** — administrator z góry zatwierdza KONKRETNEGO,
+    wymienionego z nazwy podprocesora. Każda zmiana (dodanie/zastąpienie)
+    wymaga NOWEJ, odrębnej zgody administratora przed jej wprowadzeniem.
+    Daje pełną kontrolę, ale jest operacyjnie ciężka przy usługach z licznymi
+    poddostawcami (np. chmura, gdzie lista podwykonawców zmienia się często).
+  - **ZGODA OGÓLNA** — administrator z góry dopuszcza korzystanie z podprocesorów
+    w ogóle (np. z określonej listy/kategorii), pod warunkiem: (a) obowiązku
+    informowania administratora o każdej zamierzonej zmianie z wyprzedzeniem,
+    (b) prawa administratora do SPRZECIWU wobec konkretnej, planowanej zmiany
+    w określonym terminie. Bez mechanizmu notyfikacji + prawa sprzeciwu, sama
+    "zgoda ogólna" jest niekompletna i nie spełnia w pełni ducha art. 28 ust. 2
+    RODO — administrator traci realną kontrolę nad tym, kto przetwarza dane.
+
+  PRZY AUDYCIE: jeśli umowa przewiduje zgodę ogólną BEZ mechanizmu notyfikacji
+  zmian i prawa sprzeciwu — flagować jako lukę odrębną od samego braku zgody
+  (PUŁAPKA RO-2 powyżej), nawet jeśli formalnie "zgoda" w jakiejś formie istnieje.
 
 PUŁAPKA RO-3 — Termin powiadomienia o naruszeniu dłuższy niż 72h (CRITICAL)
   PROBLEM: "Procesor powiadomi Administratora o naruszeniu w terminie 7 dni."

@@ -4,7 +4,9 @@
 > **Wczytaj ten moduł gdy:** umowa o zakazie konkurencji (odrębna lub klauzula),
 > zakaz podczas zatrudnienia (art. 101¹ KP), zakaz po ustaniu (art. 101² KP),
 > zakaz w umowie B2B (KC), zakaz menedżerski, zakaz w umowie sprzedaży
-> przedsiębiorstwa lub udziałów, zakaz w umowie franczyzy lub agencyjnej.
+> przedsiębiorstwa lub udziałów, zakaz w umowie franczyzy lub agencyjnej,
+> klauzula non-solicitation / zakaz podkupywania personelu lub klientów
+> (odrębna instytucja od zakazu konkurencji — patrz Pułapka ZK-11).
 
 ---
 
@@ -36,6 +38,75 @@ sn.pl → fraza "zakaz konkurencji" → aktualna linia orzecznicza
 
 > **KRYTYCZNY ALERT:** Zakaz po ustaniu zatrudnienia (UoP) BEZ odszkodowania → nieważny
 > z mocy prawa (art. 101² §2 KP). Zakaz agencyjny wymaga odrębnej analizy art. 764⁶ §3–4 KC: odszkodowanie jest zasadą dyspozytywną, a brak kwoty uruchamia kryterium „odpowiedniej sumy”, chyba że umowa skutecznie stanowi inaczej.
+
+### I.1a Orzecznictwo B2B — nurt przeważający vs granica proporcjonalności
+> Dodano 2026-07-30 na podstawie zewnętrznej analizy porównawczej klauzul
+> kontraktowych. Weryfikacja bezpośrednia treści na oficjalnych portalach orzeczeń
+> (sn.pl, orzeczenia.bialystok.sa.gov.pl, orzeczenia.krakow.sa.gov.pl, SAOS) —
+> nie z pamięci ani z wtórnych źródeł. Uzupełnia Złotą Zasadę 2 (I.7) i pułapkę ZK-9
+> o konkretne sygnatury dla reżimu B2B (KC), odrębnie od reżimu UoP (KP).
+
+Dla zakazu konkurencji B2B (art. 353¹ KC) istnieje **ugruntowany, przeważający nurt
+orzeczniczy** dopuszczający nieodpłatny zakaz między przedsiębiorcami, obwarowany karą
+umowną, bez konieczności przywoływania szczególnych okoliczności usprawiedliwiających
+brak ekwiwalentu:
+
+- SN, wyrok z 5.12.2013, V CSK 30/13 — zweryfikowano treść na sn.pl. Oddalił skargę
+  kasacyjną, utrzymał karę umowną za naruszenie nieodpłatnego zakazu konkurencji
+  po ustaniu umowy o świadczenie usług (art. 750 KC). Kluczowa teza: strony mogą
+  dowolnie kształtować kwestię odpłatności zakazu, a nawet całkowicie ją wyłączyć —
+  brak regulacji ustawowej analogicznej do art. 101² KP świadczy o woli ustawodawcy
+  dopuszczenia szerokiej swobody kontraktowej w tym zakresie.
+- SN, wyrok z 23.05.2013, IV CSK 658/12 — zweryfikowano istnienie na SAOS (sygn.,
+  data, skład orzekający potwierdzone). Cytowany zgodnie w wielu niezależnych
+  źródłach (kancelarie, portale prawnicze) jako współźródło nurtu liberalnego:
+  wola stron może uzasadniać nieekwiwalentność ich sytuacji prawnej — jeśli strony
+  umówiły się na brak odszkodowania, a nie ma rażącej dysproporcji, taka umowa
+  jest skuteczna. Pełna treść uzasadnienia DO SAMODZIELNEJ WERYFIKACJI przed
+  cytowaniem dosłownej tezy w piśmie procesowym (zweryfikowano na tym etapie
+  metadane orzeczenia, nie pełny tekst uzasadnienia).
+- SA Białystok, wyrok z 13.09.2017, I ACa 219/17 — zweryfikowano na
+  orzeczenia.bialystok.sa.gov.pl. Wprost określa pogląd liberalny jako "przeważający
+  obecnie w judykaturze"; utrzymał nieodpłatny zakaz konkurencji (w trakcie i po
+  ustaniu umowy) zabezpieczony karą umowną.
+- SA Łódź, wyrok z 10.08.2017, I ACa 1755/16 — zweryfikowano na SAOS. Analogiczne
+  rozstrzygnięcie przy umowie sprzedaży nieruchomości z zakazem konkurencji bez
+  wynagrodzenia.
+- SA Kraków, wyrok z 24.04.2019, I ACa 467/18 — zweryfikowano na
+  orzeczenia.krakow.sa.gov.pl. ⚠️ UWAGA PRZY CYTOWANIU: w tej konkretnej sprawie sąd
+  orzekł na niekorzyść strony powołującej się na "ekwiwalent" (rabat zależny od
+  jednostronnie ustalanego cennika sprzedawcy — uznany za pozorny, nie realny
+  ekwiwalent), ALE sąd w uzasadnieniu SAM POTWIERDZA, że pogląd liberalny jest
+  "przeważający obecnie w judykaturze". Nie cytować tego wyroku jako reprezentanta
+  odrębnego, surowszego nurtu — to nieprecyzyjne uproszczenie spotykane we
+  wtórnych źródłach (poradnikach, blogach), niepotwierdzone pełną treścią orzeczenia.
+
+**Granica obowiązująca niezależnie od odpłatności** — SN, wyrok z 5.03.2019, II CSK
+58/18. Fragment zweryfikowany bezpośrednio na sn.pl (pełna treść uzasadnienia, nie
+tylko streszczenie wtórne): o tym, czy wynikające z zakazu konkurencji skrępowanie
+swobody dłużnika jest nadmierne (wywołuje "skutek dławiący") i z tego względu
+niedopuszczalne, decyduje CAŁOŚCIOWA OCENA uwzględniająca łącznie: (a) zakres
+dotychczasowej i potencjalnej działalności dłużnika, (b) zakres przedmiotowo-
+-podmiotowy, geograficzny i czasowy zakazu, (c) surowość sankcji towarzyszącej
+naruszeniu, (d) ewentualne dodatkowe korzyści czerpane przez dłużnika. Istotne
+znaczenie ma też proporcjonalność — czy zakaz służy ochronie usprawiedliwionych
+potrzeb, czy jego zasięg nie wykracza poza to, co konieczne dla tej ochrony. Sąd
+w tej sprawie wskazał również, że nie ma przeszkód, by korzyści i uszczerbki
+związane z w pełni autonomicznym uzgodnieniem zakazu konkurencji zostały
+uwzględnione już w wysokości świadczeń głównych (szczególnie prawdopodobne przy
+transakcjach jednorazowych) — oraz że samo rażąco niekorzystne dla jednej strony
+ukształtowanie treści umowy nie jest samodzielnie wystarczającą przesłanką
+sprzeczności z zasadami współżycia społecznego.
+
+**Konsekwencja praktyczna dla scoringu (I.6):** przy ocenie zakazu B2B bez odszkodowania
+NIE stosować automatycznie tej samej surowości co przy zakazie UoP (gdzie brak
+odszkodowania = nieważność automatyczna, art. 101² §3 KP). W B2B właściwym testem jest
+CAŁOŚCIOWA OCENA proporcjonalności z II CSK 58/18 (cztery czynniki wskazane powyżej,
+ocenione łącznie, nie pojedynczo) — a nie sama odpłatność. Brak ekwiwalentu w B2B jest
+dopuszczalny w świetle przeważającego nurtu orzeczniczego, o ile całościowa ocena nie
+wskazuje na "skutek dławiący" wobec strony zobowiązanej. Odrębny, starszy pogląd
+surowszy (SN III CKN 579/01 z 2003 r.) bywa przywoływany jako punkt odniesienia
+historyczny — traktować z ostrożnością jako samodzielną podstawę argumentacji.
 
 ---
 
@@ -434,6 +505,57 @@ REKOMENDACJA:
 
 ---
 
+### PUŁAPKA ZK-11 — Non-solicitation myloną z zakazem konkurencji (MEDIUM RISK, dodane 2026-07-30)
+
+> Odkryte przy zewnętrznej analizie porównawczej klauzul kontraktowych: dokumenty
+> rynkowe (w tym gotowe bazy klauzul innych podmiotów) często łączą non-solicitation
+> i zakaz konkurencji pod jedną nazwą kategorii, mimo że to odrębne instytucje
+> o różnym przedmiocie ochrony i różnym reżimie oceny ważności.
+
+**Rozróżnienie:**
+- **Zakaz konkurencji** — ogranicza WŁASNĄ działalność gospodarczą strony zobowiązanej
+  (np. zakaz tworzenia konkurencyjnego oprogramowania, zakaz pracy w konkurencyjnej
+  branży). Podlega pełnej analizie z I.1–I.3 tego modułu (proporcjonalność zakresu,
+  ewentualne odszkodowanie, art. 353¹ KC / art. 101¹-101² KP).
+- **Non-solicitation** — NIE ogranicza własnej działalności strony zobowiązanej, tylko
+  zakazuje określonych DZIAŁAŃ WOBEC personelu/klientów/kontrahentów drugiej strony
+  (np. zakaz zatrudniania lub podkupywania specjalistów świadczących usługi na
+  podstawie danej umowy — typowe w body leasingu i outsourcingu IT).
+
+**Dlaczego rozróżnienie ma znaczenie praktyczne:** non-solicitation, jako niebędące
+ograniczeniem własnej działalności gospodarczej strony zobowiązanej (może ona nadal
+swobodnie prowadzić działalność, tylko nie wobec konkretnie wskazanych osób/podmiotów),
+jest zwykle oceniane jako mniej ingerujące w swobodę działalności gospodarczej niż
+pełny zakaz konkurencji — co przekłada się na niższe ryzyko zakwestionowania z art. 58
+§2 KC / art. 353¹ KC przy porównywalnym okresie obowiązywania. Nie oznacza to jednak
+braku jakiejkolwiek kontroli — zbyt szeroki krąg objętych osób (np. "wszyscy obecni
+i byli pracownicy niezależnie od działu") lub zbyt długi okres pozostają oceniane
+analogicznie do testu proporcjonalności z ZK-1/ZK-9/ZK-10.
+
+**CHECKLIST WERYFIKACYJNY (non-solicitation, odrębny od checklisty B2B w I.4.2):**
+```
+□ Czy klauzula dotyczy konkretnie wskazanego kręgu osób (np. "Specjaliści świadczący
+  usługi na podstawie niniejszej Umowy"), a nie ogólnie "wszelkiego personelu"?
+□ Czy okres obowiązywania po zakończeniu umowy jest wskazany wprost i ograniczony
+  (rynkowa obserwacja: do 24 miesięcy — DO WERYFIKACJI aktualności przy realnym użyciu,
+  to nie jest norma ustawowa)?
+□ Czy przewidziano mechanizm "wykupienia" zgody (np. opłata kompensacyjna za zatrudnienie
+  danej osoby za zgodą drugiej strony) — częsta i rozsądna praktyka łagodząca sztywność
+  zakazu?
+□ Czy kara umowna za naruszenie jest powiązana z konkretną, weryfikowalną wartością
+  (np. wielokrotność wynagrodzenia danej osoby), a nie kwotą oderwaną od realnej szkody?
+□ Czy klauzula nie jest w istocie zakazem konkurencji przebranym za non-solicitation
+  (np. "zakaz kontaktowania się z jakimikolwiek klientami Wykonawcy" — to już wykracza
+  poza ochronę przed podkupywaniem i wchodzi w ograniczenie własnej działalności)?
+```
+
+**Nie stosować do non-solicitation:** wymogu odszkodowania analogicznego do art. 101²
+§3 KP (ten wymóg dotyczy zakazu konkurencji sensu stricto w reżimie pracowniczym) —
+non-solicitation w B2B typowo funkcjonuje bez ekwiwalentu, zabezpieczone wyłącznie
+karą umowną, analogicznie do zakazu konkurencji B2B z I.1a.
+
+---
+
 ## I.4 ANALIZA ODRĘBNEJ UMOWY O ZAKAZIE KONKURENCJI
 
 ### I.4.1 Checklista formalna (UoP)
@@ -660,6 +782,41 @@ WYNIK OGÓLNY:
 ---
 
 ## CHANGELOG
+
+**2026-07-30b:** Uzupełniono sekcję I.1a o pełną, zweryfikowaną treść tezy SN II CSK
+58/18 (zweryfikowano bezpośrednio na sn.pl, nie tylko streszczenie wtórne) — test
+"skutku dławiącego" jako CAŁOŚCIOWA OCENA czterech czynników łącznie (zakres
+działalności dłużnika, zakres przedmiotowo-podmiotowo-geograficzno-czasowy zakazu,
+surowość sankcji, dodatkowe korzyści dłużnika), nie ocena samej odpłatności w
+oderwaniu od kontekstu. Potwierdzono na SAOS istnienie i metadane orzeczenia SN
+IV CSK 658/12 (23.05.2013) jako współźródła nurtu liberalnego, spójnie cytowanego
+w wielu niezależnych źródłach. Pełna treść uzasadnienia IV CSK 658/12 pozostaje
+oznaczona jako wymagająca dalszej weryfikacji przed dosłownym cytowaniem tezy w
+piśmie procesowym (na tym etapie zweryfikowano istnienie orzeczenia i zgodność
+cytowanej tezy między niezależnymi źródłami, nie sam pełny tekst uzasadnienia z
+sn.pl/SAOS). Usunięto adnotacje "DO SAMODZIELNEJ WERYFIKACJI" tam, gdzie pełna
+weryfikacja została już wykonana w tej rundzie.
+
+**2026-07-30:** Dodano sekcję I.1a (orzecznictwo B2B — nurt przeważający vs granica
+proporcjonalności) i Pułapkę ZK-11 (non-solicitation myloną z zakazem konkurencji),
+w toku zewnętrznej analizy porównawczej klauzul kontraktowych innego podmiotu.
+Zweryfikowano bezpośrednio na oficjalnych portalach orzeczeń (nie z pamięci, nie
+z wtórnych źródeł): SN V CSK 30/13 (sn.pl), SA Białystok I ACa 219/17
+(orzeczenia.bialystok.sa.gov.pl), SA Łódź I ACa 1755/16 (SAOS), SA Kraków I ACa
+467/18 (orzeczenia.krakow.sa.gov.pl), SN II CSK 58/18 (fragment na sn.pl, pełna
+treść do dalszej weryfikacji). Istotna korekta względem wstępnego, roboczego
+odczytu wtórnego źródła: SA Kraków I ACa 467/18 NIE reprezentuje odrębnego,
+surowszego nurtu orzeczniczego — sąd w uzasadnieniu tej sprawy sam potwierdza,
+że pogląd liberalny (dopuszczający nieodpłatny zakaz B2B) jest "przeważający
+obecnie w judykaturze"; niekorzystne dla strony rozstrzygnięcie wynikało ze
+specyfiki stanu faktycznego (pozorny ekwiwalent), nie z odrzucenia zasady
+swobody umów. Zaktualizowano wskazówkę do scoringu I.6: dla B2B nie stosować
+automatycznie surowości reżimu UoP (gdzie brak odszkodowania = nieważność
+automatyczna) — właściwym testem jest proporcjonalność z II CSK 58/18.
+Rozszerzono nagłówek "Wczytaj ten moduł gdy" o non-solicitation. ZK-11 wypełnia
+lukę: moduł dotychczas nie zawierał odrębnej analizy tej instytucji, mimo że
+jest ona powszechnie stosowana i myloną z zakazem konkurencji w praktyce
+kontraktowej (w tym w dokumentach źródłowych, które zainicjowały tę analizę).
 
 **2026-07-18:** Dodano Pułapkę ZK-10 (zakaz obejmujący działalność
 MARGINALNĄ lub FAKTYCZNIE NIEPROWADZONĄ przez firmę — rozbieżność między

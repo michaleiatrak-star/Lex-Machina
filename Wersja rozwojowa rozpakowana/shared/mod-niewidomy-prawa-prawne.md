@@ -295,21 +295,10 @@ Art. 26 ust. 7a pkt 3 ustawy PIT (Dz.U. 2024 poz. 226 t.j. — weryfikuj):
   Odliczenie od dochodu wydatków na:
   → Zakup i naprawę sprzętu rehabilitacyjnego i środków pomocniczych (laski, psy przewodnicy)
   → Adaptację i wyposażenie mieszkania
-  → Przewodnik dla niewidomych: do 2 280 zł/rok (ryczałt) — ✅ POTWIERDZONE
-    2026-07-27, niezmienione od kilku lat (8+ źródeł 2026 r.: pit.pl,
-    infor.pl, pitax.pl, e-pity.pl, kancelariapiotrowski.pl)
-  → Samochód osobowy: do 2 280 zł/rok (ryczałt) — ✅ POTWIERDZONE 2026-07-27
-  → Leki: kwota ponad 100 zł/miesiąc (limit) — ✅ POTWIERDZONE 2026-07-27
-  → ⚠️ DODANE 2026-07-27: jeśli ulgę odlicza OPIEKUN (osoba mająca na
-    utrzymaniu osobę niepełnosprawną, nie sama osoba niepełnosprawna) —
-    dochód ROCZNY osoby niepełnosprawnej NIE MOŻE przekroczyć
-    22 546,92 zł (2026 r., kwota rośnie co roku wraz z indeksacją —
-    WERYFIKUJ ponownie przy dłuższym odstępie od daty weryfikacji). Do
-    tego limitu NIE WLICZA się m.in. zasiłku pielęgnacyjnego ani
-    tzw. trzynastej emerytury.
-  ⚠️ Powyższe zweryfikowane 2026-07-27 (ZASADA 14) — mimo potwierdzenia,
-  weryfikuj ponownie przy dłuższym odstępie czasu, limity bywają
-  zmieniane: web_search "ulga rehabilitacyjna niewidomy limit 2026 2027 PIT"
+  → Przewodnik dla niewidomych: do 2 280 zł/rok (ryczałt — weryfikuj!)
+  → Samochód osobowy: do 2 280 zł/rok (ryczałt)
+  → Leki: kwota ponad 100 zł/miesiąc (limit)
+  ⚠️ Weryfikuj aktualne limity: web_search "ulga rehabilitacyjna niewidomy limit 2025 2026 PIT"
   Warunek: orzeczenie o niepełnosprawności (stopień znaczny lub umiarkowany) lub rentowe
 ```
 

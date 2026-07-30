@@ -66,20 +66,6 @@ PROBLEM: Suma ubezpieczenia < rzeczywista wartość mienia → przy szkodzie cz�
 WERYFIKUJ: czy OWU przewidują regułę proporcji, czy klauzulę „leeway"/odstąpienie od
   proporcji (np. do 120% sumy). Sprawdź czy wartość = odtworzeniowa czy rzeczywista (po amortyzacji).
 
-⚠️ DODANO 2026-07-27 (na żądanie użytkownika, ZASADA 14) — SPÓR PRAWNY O SAMĄ
-  LEGALNOŚĆ ZASADY PROPORCJI: zasada NIE WYNIKA z Kodeksu cywilnego (żaden przepis
-  art. 805–834 jej nie ustanawia) — to WYŁĄCZNIE postanowienie OWU konkretnego
-  ubezpieczyciela. Część komentatorów i orzecznictwa (cyt. w administrator24.info,
-  money.pl/Vademecum Ubezpieczonego) argumentuje, że jej STOSOWANIE MOŻE NARUSZAĆ
-  art. 824 §1 KC — obniżenie wypłaty PONIŻEJ umówionej sumy ubezpieczenia oznaczałoby,
-  że odszkodowanie NIGDY nie mogłoby osiągnąć poziomu sumy będącej podstawą
-  kalkulacji składki. TO NIE JEST rozstrzygnięte jednoznacznie — zależy od
-  KONKRETNEGO zapisu OWU. → PRZY ANALIZIE PO STRONIE KLIENTA: nie zakładaj z
-  góry skuteczności klauzuli proporcji — rozważ zarzut niezgodności z art. 824 §1
-  KC / abuzywności (art. 385¹ KC), zwłaszcza gdy wypłata drastycznie odbiega od
-  rzeczywistej szkody. Skala problemu w praktyce: wg PIU niedoubezpieczenie
-  dotyczy ok. 1/3 polis mieszkaniowych (dane 2025).
-
 REKOMENDACJA dla UBEZPIECZAJĄCEGO:
   → negocjuj klauzulę wyłączenia zasady proporcji (przy szkodach do określonego progu)
   → ustal sumę na wartość ODTWORZENIOWĄ (nową), nie rzeczywistą, jeśli to mienie produkcyjne
@@ -175,43 +161,6 @@ PRAWO (art. 815 + art. 834 KC — weryfikuj): w ubezpieczeniu na życie po upły
 REKOMENDACJA: precyzyjne pytania ankiety medycznej; unikać klauzul „dowolnej" odmowy.
 ```
 
-**UB-7a — Samobójstwo ubezpieczonego, karencja i uposażony (dodano 2026-07-27,
-na żądanie użytkownika, CRITICAL dla ubezpieczeń na życie)**
-```
-PRAWO (art. 833 KC): zakład zwolniony z odpowiedzialności, jeśli samobójstwo
-  nastąpiło w ciągu 2 LAT od zawarcia umowy (karencja ustawowa) — po tym okresie
-  MUSI wypłacić świadczenie.
-
-PRAWO (art. 831 KC): świadczenie NIE wchodzi do masy spadkowej przy wskazanym
-  uposażonym — wypłata bezpośrednio do uposażonego, z pominięciem wierzycieli
-  spadkowych. Brak uposażonego/uposażony zmarł wcześniej → uposażony zastępczy
-  (jeśli wskazany) → w braku obu → masa spadkowa.
-
-⚠️ POTWIERDZONE ORZECZNICTWEM (SA Białystok I ACa 696/18): zakład NIE MOŻE
-  przekwalifikować przyczyny zgonu z „samobójstwo" na „choroba" (np. depresja
-  poprzedzająca) tylko po to, by ominąć art. 833 KC i zastosować inne, mniej
-  korzystne dla uposażonego wyłączenie z OWU — przyczyną śmierci jest WYŁĄCZNIE
-  samobójstwo.
-
-⚠️ SPÓR PRAWNY — LICZENIE 2-LETNIEGO TERMINU PRZY ZMIANIE UBEZPIECZYCIELA z
-  zachowaniem ciągłości ochrony (np. przejście z ubezpieczenia grupowego
-  pracowniczego na indywidualne u INNEGO ubezpieczyciela) — NIEJEDNOLITA LINIA
-  ORZECZNICZA SN:
-    - Wyrok SN 3.11.2022, II CSKP 82/22: termin liczy się OD NOWA od zawarcia
-      NOWEJ umowy (mniej korzystne dla uposażonych)
-    - Orzeczenie SN 12.01.2023: termin biegnie OD PIERWSZEJ umowy przy
-      ZACHOWANEJ CIĄGŁOŚCI ochrony — inaczej ubezpieczyciele mogliby dowolnie
-      "resetować" karencję samą zmianą polisy
-  → PRZY ANALIZIE: jeśli klient zmieniał ubezpieczyciela z zachowaniem
-    ciągłości ochrony, SPRAWDŹ NAJNOWSZE orzecznictwo SN przed oceną, czy
-    2-letni termin biegnie od pierwszej czy od ostatniej umowy — to może
-    zadecydować o całości roszczenia.
-
-REKOMENDACJA: przy negocjacji polisy grupowej/przejściu między ubezpieczycielami —
-  żądaj klauzuli POTWIERDZAJĄCEJ CIĄGŁOŚĆ ochrony (data pierwotnego objęcia
-  ochroną, nie data nowej polisy) wprost w dokumencie, żeby uniknąć sporu.
-```
-
 **UB-8 — Wypowiedzenie i odstąpienie (MEDIUM)**
 ```
 PRAWO (art. 812 §4 KC — weryfikuj): przy umowie na okres > 6 miesięcy ubezpieczający
@@ -248,9 +197,6 @@ Gdy spór dotyczy nie treści polisy, lecz SPOSOBU jej zaproponowania:
 □ Suma ubezpieczenia: wartość odtworzeniowa/rzeczywista; reguła proporcji?
 □ Katalog WYŁĄCZEŃ — zamknięty, ostry, bez "ukrytych" definicji?
 □ Rażące niedbalstwo — objęte czy wyłączone? (art. 827)
-□ Zasada proporcji — czy w ogóle jest w OWU? Czy jej stosowanie nie narusza art. 824 §1 KC?
-□ Ubezpieczenie na życie: karencja na samobójstwo (2 lata, art. 833) — czy klient zmieniał
-  ubezpieczyciela z zachowaniem ciągłości ochrony? (sprawdź aktualne orzecznictwo SN)
 □ Obowiązki ubezpieczającego + proporcjonalność sankcji? (art. 815, 818, 826)
 □ Termin wypłaty nie gorszy niż 30 dni / bezsporna część? (art. 817)
 □ Franszyza integralna/redukcyjna, udział własny — wysokość i mechanizm?

@@ -109,14 +109,17 @@ KLAUZULE KOŃCOWE:
 | Founders' agreement + planowana runda inwestycyjna | J20 + MA (LOI/Term Sheet, SHA) |
 | Umowa spółki/statut + przeniesienie IP founderów na spółkę | J20 + J9 (IP) lub J6 SD-1 (software) |
 | Founders' agreement z zakazem konkurencji po odejściu | J20 + I (zakaz-konkurencji) |
+| Umowa B2B/NDA z wymianą know-how i danych dostępowych | I (jeśli zakaz konkurencji) + K (poufność) |
 | Umowa spółki cywilnej przekształcana w spółkę handlową | J20 (J20.3 + J20.4/J20.5) |
 | Umowa z dostawcą (DPA) + wewnętrzna polityka retencji danych wynikająca z tej umowy | J21 + shared-rodo |
+| Umowa z dostawcą (DPA) + klauzula poufności obejmująca też dane osobowe (spójność terminów notyfikacji) | K + shared-rodo (patrz Pułapka K-7) |
 | Założenie spółki (J20) + obowiązek RCP/polityki prywatności dla nowej działalności | J20 + J21 |
 | Regulamin pracy/wynagradzania/ZFŚS + spór pracowniczy o jego treść/wprowadzenie | J21 + DR-04 (pisma-procesowe-v3) |
 
 ---
 
 *Moduł J / analizator-umow-v1 · Dla zakazu konkurencji → references/zakaz-konkurencji.md*
+*Dla poufności/NDA → references/poufnosc-nda.md (Moduł K)*
 *Dla B2B → references/b2b-podwykonawcze.md · Dla UoP → references/umowy-o-prace.md*
 *Dla M&A → references/mod-MA-transakcje.md · Dla PZP → references/mod-J7-pzp.md*
 *Dla founders' agreement / umowa spółki/statut / regulaminy organów →

@@ -1,13 +1,16 @@
 # MOD-STEP-TRACKER — Śledzenie Kroków i Raportowanie Pominięć
 
 > **Plik:** `/mnt/skills/user/shared/MOD-STEP-TRACKER.md`
-> **Wersja:** 1.2.0 (2026-07-11)
+> **Wersja:** 1.3.1 (2026-07-30)
 > **Status:** PRODUKCJA — plik kanoniczny shared
 > **Pozycja w pipeline:**
 >   - prawny-router-v3: inicjowany w KROK 0 zaraz po HARD GATE
 >   - pisma-procesowe-v3: integruje się z automat stanów
 >   - przesluchanie-swiadkow-v2-min90: inicjowany w PRE-W1a-SD-VER (audyt 3.13)
 >   - analizator-dowodow-v3: inicjowany w KROK 0c, zaraz po SD-VER z KROK 0b (audyt 5.13.0)
+>   - analizator-umow-v1: inicjowany w KROK 0-ST ⛔ HARD GATE (ST-GATE-INIT/
+>     ST-GATE-TRACK/ST-GATE-FINAL), zaraz po HARD GATE GLOBALNY, przed ROUTING
+>     DO MODUŁÓW (audyt 2026-07-30, podniesiony do hardgate na żądanie 2026-07-30b)
 >   - Każdy skill dziedzinowy: raportuje wykonanie/pominięcie swoich kroków
 
 ---
@@ -96,7 +99,28 @@ REJESTR = {
   "AD-BLOKJ":  { name: "BLOK J — lapsusy autorskie [LAPSUS] (obowiązkowy gdy A2=TAK)", status: "○ OCZEKUJE" },
   "AD-BLOKH":  { name: "BLOK H — kwestie sporne DIS (gdy D3/D4=TAK)", status: "○ OCZEKUJE" },
   "AD-KROK3":  { name: "KROK 3 — wykonanie modułów MD/MP",          status: "○ OCZEKUJE" },
-  "AD-KROK4":  { name: "KROK 4 — dashboard (gdy B1=TAK)",           status: "○ OCZEKUJE" }
+  "AD-KROK4":  { name: "KROK 4 — dashboard (gdy B1=TAK)",           status: "○ OCZEKUJE" },
+
+  // ANALIZATOR UMÓW (analizator-umow-v1) — dodane w audycie 2026-07-30
+  "AU-F0":       { name: "FAZA 0 — Intake (tryb/dokument/cel/kontekst decyzyjny)", status: "○ OCZEKUJE" },
+  "AU-GAP":      { name: "INTAKE-GAP (braki danych ⬛)",              status: "○ OCZEKUJE" },
+  "AU-POV":      { name: "BLOK POV-B/C weryfikacja podmiotów KRS/NIP/PESEL", status: "○ OCZEKUJE" },
+  "AU-ROUTE":    { name: "Routing do modułu PRIMARY/DOMAIN wg typu umowy", status: "○ OCZEKUJE" },
+  // — gałąź TRYB 1 (ANALIZA) —
+  "AU-A":        { name: "Moduł A — identyfikacja dokumentu",         status: "○ OCZEKUJE" },
+  "AU-B":        { name: "Moduł B — analiza klauzul (+ B.0 synteza krzyżowa)", status: "○ OCZEKUJE" },
+  "AU-C":        { name: "Moduł C — ocena zgodności z prawem",        status: "○ OCZEKUJE" },
+  "AU-D":        { name: "Moduł D — ocena balansu dokumentu",         status: "○ OCZEKUJE" },
+  "AU-F":        { name: "Moduł F — raport końcowy (F.1/F.1-LITE/F.2)", status: "○ OCZEKUJE" },
+  // — gałąź TRYB 2/3/4 (REDAKCJA/DRAFT/UZUPEŁNIENIE) —
+  "AU-GENCORE":  { name: "rdzen-generowania.md wczytany",             status: "○ OCZEKUJE" },
+  "AU-GENBUILD": { name: "Budowa dokumentu wg checklisty modułu + essentialia", status: "○ OCZEKUJE" },
+  "AU-GENSHARED":{ name: "Moduły shared warunkowe (DPA/FM/waloryzacja/ZK/NDA/IP)", status: "○ OCZEKUJE" },
+  // — finalizacja, wspólna dla obu gałęzi —
+  "AU-HYBRID":   { name: "HYBRID-VALIDATION",                         status: "○ OCZEKUJE" },
+  "AU-STRIP":    { name: "STRIP-VER-GATE (SVG-1→SVG-4)",              status: "○ OCZEKUJE" },
+  "AU-POST":     { name: "POST-VALIDATION",                           status: "○ OCZEKUJE" },
+  "AU-DISC":     { name: "DISCLAIMER dodany",                         status: "○ OCZEKUJE" }
 }
 
 Pomiń kroki nieistotne dla typu zadania (np. W1-MACIERZ gdy brak dowodów).
@@ -241,6 +265,40 @@ ST-CP-INTEGRACJA:
 ## HISTORIA ZMIAN
 
 ```
+1.3.1 (2026-07-30)
+Przyczyna: użytkownik zażądał wprost podniesienia rejestrowania etapów w
+  analizator-umow-v1 (wdrożonego w 1.3.0 jako "obowiązkowe") do rangi
+  HARD GATE — sformułowanie ST-INIT/ST-TRACK/ST-FINAL jako prozy bez
+  formalnych warunków STOP okazało się niewystarczające w innych skillach
+  tego systemu (patrz precedens pisma-procesowe-v3, sprawa VII P 94/25).
+Naprawa: analizator-umow-v1/SKILL.md v1.20 — KROK 0-ST przemianowany na
+  ⛔ HARD GATE (ST-GATE) z trzema jawnymi bramkami blokującymi:
+  ST-GATE-INIT (blokuje ROUTING DO MODUŁÓW), ST-GATE-TRACK (blokuje ciche
+  przejście między etapami bez wpisu w rejestrze), ST-GATE-FINAL (blokuje
+  present_files/wydanie raportu F przy pominięciach w gałęzi FINALIZACJA
+  bez potwierdzenia a/b). Zasada ogólna: rejestr kroków bez formalnej
+  bramki STOP jest tylko rekomendacją i może zostać pominięty — dopiero
+  jawny warunek blokujący (STOP/TAK-NIE) wymusza przestrzeganie.
+
+1.3.0 (2026-07-30)
+Przyczyna: użytkownik zapytał wprost, czy analizator-umow-v1 nie powinien mieć
+  tego samego mechanizmu nadzorczego co pisma-procesowe-v3 i
+  analizator-dowodow-v3. Analiza wykazała: skill definiuje 13 etapów obowiązkowych
+  (FAZA 0 → POV-B/C → routing → Moduł A/B/C/D/F w trybie ANALIZA, lub
+  GENCORE/GENBUILD/GENSHARED w trybie REDAKCJA/DRAFT/UZUPEŁNIENIE → HYBRID-VALIDATION
+  → STRIP-VER-GATE → POST-VALIDATION → DISCLAIMER), ale ZERO integracji z tym
+  modułem — pominięcie dowolnego etapu (np. STRIP-VER-GATE przed eksportem, lub
+  POV-B/C przy stronie-spółce) nie było raportowane użytkownikowi.
+Naprawa:
+  + Dodano 17 pozycji REJESTRU dla pipeline'u analizatora umów: AU-F0, AU-GAP,
+    AU-POV, AU-ROUTE, AU-A, AU-B, AU-C, AU-D, AU-F (gałąź ANALIZA), AU-GENCORE,
+    AU-GENBUILD, AU-GENSHARED (gałąź REDAKCJA/DRAFT/UZUPEŁNIENIE), AU-HYBRID,
+    AU-STRIP, AU-POST, AU-DISC (finalizacja wspólna).
+  + analizator-umow-v1/SKILL.md: nowa sekcja KROK 0-ST (ST-INIT) zaraz po
+    HARD GATE GLOBALNY, przed ROUTING DO MODUŁÓW; wpis w tabeli Moduły
+    SYSTEMOWE; ST-TRACK aktualizowany po każdym etapie/module; ST-FINAL
+    blokujący przed present_files dokumentu wynikowego (.docx) lub raportu F.
+
 1.2.0 (2026-07-11)
 Przyczyna: użytkownik zapytał wprost, czy analizator-dowodow-v3 nie powinien
   mieć tego samego mechanizmu nadzorczego co pisma-procesowe-v3 i

@@ -86,6 +86,7 @@
 | Regulamin wynagradzania | KP art. 77² | ⚡ analogiczny próg ≥50 (wcześniej ≥20) — patrz J21.4 | J21.4 |
 | Regulamin ZFŚS | ustawa o ZFŚS | przy obowiązku/decyzji tworzenia ZFŚS — zmieniona procedura uzgadniania przy braku ZZ (Dz.U. 2026 poz. 25) | J21.5 |
 | Regulamin korzystania ze sprzętu/poczty/Internetu, monitoring | KP art. 22¹–22³ (monitoring) | przy wprowadzaniu monitoringu — obowiązek informacyjny i regulaminowy | J21.7 |
+| Polityka korzystania z AI w organizacji | AI Act (Rozp. UE 2024/1689) art. 4 (kompetencje), art. 50 (transparentność) | KAŻDA firma korzystająca z AI, niezależnie od wielkości — art. 4 już obowiązuje, bez wyłączeń dla MŚP | J21.7a |
 
 ---
 
@@ -509,6 +510,82 @@ może być potrzebna podstawa w UMOWIE O PRACĘ lub odrębnym dokumencie
 zaakceptowanym przez pracownika.
 ```
 
+### J21.7a POLITYKA KORZYSTANIA Z AI W ORGANIZACJI (dodane 2026-07-30)
+
+> Odrębna od klauzul kontraktowych AI Act w umowach z dostawcami/wdrażającymi
+> (te są w `mod-shared-ai-act.md`) — tu chodzi o WEWNĘTRZNY dokument regulujący,
+> jak PRACOWNICY organizacji mogą korzystać z narzędzi AI w codziennej pracy
+> (ChatGPT, Copilot, Gemini i inne). Wczytaj gdy: klient wdraża AI w firmie
+> i pyta o politykę/regulamin AI dla pracowników, o obowiązek szkolenia z AI,
+> lub o oznaczanie treści tworzonych z użyciem AI w komunikacji z klientami.
+
+```
+PODSTAWY PRAWNE (Rozporządzenie UE 2024/1689 — AI Act):
+
+Art. 4 AI Act — obowiązek kompetencyjny (AI literacy):
+  □ Dotyczy KAŻDEJ firmy korzystającej z AI, niezależnie od poziomu ryzyka
+    systemu i wielkości przedsiębiorstwa — brak wyłączeń dla MŚP
+  □ Obowiązuje OD 2.02.2025 r. — to już aktualne prawo, nie przyszły wymóg
+  □ Obejmuje pracowników ORAZ osoby trzecie działające w imieniu organizacji
+    (podwykonawcy, konsultanci)
+  □ Standard: "wystarczający poziom znajomości AI", dostosowany do wiedzy
+    technicznej, doświadczenia, wykształcenia i kontekstu użycia (np. dyrektor
+    finansowy używający AI do prognoz i asystentka piszą maile z AI — różne
+    programy szkoleniowe, obie udokumentowane)
+  □ Jednorazowe, ogólne szkolenie NIE wystarcza — wymagane podejście
+    systematyczne, ciągłe, z dokumentacją (programy, wskaźniki uczestnictwa,
+    wyniki ocen, regularne aktualizacje)
+
+Art. 50 AI Act — obowiązki transparentności (⚠️ stosowany OD 2.08.2026 r.
+  — sprawdź AKTUALNĄ datę względem dnia sesji, to nadchodzący/świeży termin):
+  □ Obowiązek informowania o interakcji z AI (chatboty, asystenci głosowi)
+    — nie dotyczy, gdy jest to całkowicie oczywiste z kontekstu
+  □ Obowiązek ujawniania treści typu deepfake (obrazy/wideo/audio generowane
+    lub zmanipulowane przez AI, przypominające realistyczne obiekty/osoby/
+    zdarzenia) — WYJĄTEK dla treści fikcyjnych obiektów nieistniejących
+    w rzeczywistości (np. smok), ale NIE dla realistycznych wizualizacji
+    (np. wizualizacja mieszkania z wygenerowanymi meblami — TO wymaga
+    oznaczenia)
+  □ Obowiązek oznaczania tekstów publikowanych w celu informowania opinii
+    publicznej o sprawach interesu publicznego, WYJĄTEK: treści poddane
+    rzeczywistej weryfikacji redakcyjnej z odpowiedzialnością człowieka
+  □ Informacja musi być jasna, odróżnialna, przekazana najpóźniej przy
+    pierwszej interakcji/ekspozycji — ukrycie na końcu regulaminu może NIE
+    spełniać wymogu, jeśli odbiorca styka się z treścią wcześniej
+  □ Dotyczy NIE TYLKO systemów wysokiego ryzyka — każdego systemu AI w jednej
+    z opisanych sytuacji
+
+TREŚĆ MINIMALNA POLITYKI KORZYSTANIA Z AI (checklist):
+□ Rejestr narzędzi AI dopuszczonych do użytku (oficjalne + uwzględnienie
+  ryzyka "shadow IT AI" — nieformalnego korzystania z narzędzi poza
+  oficjalnym rejestrem)
+□ Kategorie danych zakazanych do wprowadzania do narzędzi AI (dane osobowe
+  klientów, tajemnica przedsiębiorstwa, dane objęte NDA — powiąż z
+  `mod-shared-rodo.md` i `references/poufnosc-nda.md`, Moduł K)
+□ Zasady weryfikacji wyników AI przed wykorzystaniem (halucynacje, błędy
+  merytoryczne — szczególnie istotne przy tekstach prawnych/finansowych)
+□ Obowiązek oznaczania treści tworzonych z istotnym udziałem AI w komunikacji
+  zewnętrznej (klienci, media) — zgodnie z art. 50, jeśli dotyczy
+  kwalifikowanych kategorii treści (patrz wyżej)
+□ Program szkoleniowy (AI literacy, art. 4) dostosowany do stanowisk —
+  NIE jednorazowe szkolenie ogólne, tylko systematyczny, udokumentowany
+  proces z ewaluacją
+□ Procedura zgłaszania incydentów związanych z AI (błędna decyzja wspierana
+  przez AI, wyciek danych do narzędzia zewnętrznego, wykryty deepfake)
+□ Osoba/funkcja odpowiedzialna za nadzór nad zgodnością z AI Act w organizacji
+□ Data wejścia w życie i wersjonowanie (analogicznie jak inne dokumenty
+  wewnętrzne tego modułu — patrz J21.8 poniżej)
+
+RÓŻNICA WOBEC KLAUZUL KONTRAKTOWYCH (mod-shared-ai-act.md):
+  Ten dokument reguluje relację PRACODAWCA-PRACOWNICY (jak wolno korzystać
+  z AI wewnątrz organizacji). mod-shared-ai-act.md reguluje relację
+  DOSTAWCA-WDRAŻAJĄCY (klauzule w umowie na konkretny system AI). Firma
+  może potrzebować OBU dokumentów jednocześnie — np. wdraża system AI od
+  dostawcy (klauzule z mod-shared-ai-act.md) I jednocześnie musi uregulować,
+  jak jej pracownicy korzystają z tego i innych narzędzi AI na co dzień
+  (polityka z niniejszej sekcji).
+```
+
 ---
 
 ## J21.8 MASTER CHECKLISTA — UZUPEŁNIENIE DLA DOKUMENTÓW RODO/ARCHIWIZACJI/REGULAMINÓW
@@ -545,6 +622,7 @@ sprawdź DODATKOWO:
 |---|---|
 | Spór/naruszenie RODO, odszkodowanie, kara UODO | DR-11/`mod-RODO-GDPR-2016-679.md`, `mod-RODO-szczegolowy.md` |
 | Klauzule RODO/DPA w umowie z kontrahentem | `mod-shared-rodo.md` |
+| Klauzule AI Act w umowie z dostawcą/wdrażającym systemu AI (odrębne od wewnętrznej polityki AI z J21.7a) | `mod-shared-ai-act.md` |
 | Regulaminy organów korporacyjnych (zarząd/RN/walne) | `mod-FA-founders-dokumenty-zalozycielskie.md` (J20) |
 | Archiwizacja/dostęp do akt — sektor publiczny, spór | DR-16/`mod-ustawa-archiwa-dokumentacja.md` |
 | Okresy przechowywania dokumentacji podatkowej | DR-06/`mod-OP-ordynacja-podatkowa.md` |

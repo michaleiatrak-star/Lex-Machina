@@ -5,8 +5,28 @@
 > użytkownik pyta o epidemię, wojnę, sankcje, kryzys surowcowy, inflację;
 > jedna strona chce powołać się na FM lub żądać renegocjacji; umowa wieloletnia.
 
-> ⛔ HARD GATE — przed przywołaniem art. 471, 473, 357¹ KC weryfikuj w ISAP.
-> Weryfikacja: isap.sejm.gov.pl → KC → art. 357¹ (hardship), art. 471 (FM)
+> ⛔ HARD GATE — przed przywołaniem art. 471, 473, 357¹, 58 KC weryfikuj w ISAP.
+> Weryfikacja: isap.sejm.gov.pl → KC → art. 357¹ (hardship), art. 471 (FM),
+> art. 473 (rozszerzenie odpowiedzialności na FM), art. 58 (nieważność klauzuli
+> asymetrycznej naruszającej zasady współżycia społecznego)
+
+> **v1.18 — punkt odniesienia międzynarodowy (uzupełnia, nie zastępuje KC):**
+> Szablony w FM.6 są ustrukturyzowane wg wzorca **ICC Force Majeure Clause
+> 2020** i **ICC Hardship Clause 2020** (International Chamber of Commerce,
+> aktualizacja z marca 2020 r. poprzednich klauzul z 2003 r.), które z kolei
+> wprost odwołują się do **UNIDROIT Principles of International Commercial
+> Contracts** — art. 7.1.7 (force majeure) i art. 6.2.1–6.2.3 (hardship).
+> ICC oferuje klauzulę siły wyższej w wersji „Long Form" (pełna, z listą
+> zdarzeń + formułą ogólną — baza dla naszej „Klauzuli FM standard") i
+> „Short Form" (skrócona, dla MŚP), oraz klauzulę hardship z trzema opcjami
+> zakończenia: **Opcja A** — rozwiązanie z inicjatywy strony powołującej się
+> na hardship; **Opcja B** — rozstrzygnięcie przez sąd/arbitraż (adaptacja
+> lub rozwiązanie); **Opcja C** — wariant zmodyfikowany z odmiennym
+> wyzwalaczem rozwiązania. Stosuj te punkty odniesienia przy ocenie, czy
+> projekt klauzuli klienta/kontrahenta odbiega od uznanego standardu
+> międzynarodowego — nie jako podstawę prawną (tą jest KC), lecz jako
+> benchmark redakcyjny, szczególnie przy kontraktach z elementem
+> transgranicznym lub stronami przyzwyczajonymi do wzorców ICC.
 
 ---
 
@@ -34,6 +54,22 @@ MECHANIZM 1 — SIŁA WYŻSZA (vis maior / force majeure):
   SKUTEK: zwolnienie z odpowiedzialności odszkodowawczej (art. 471 KC)
   NIE zwalnia automatycznie z obowiązku wykonania świadczenia
   NIE rozwiązuje umowy automatycznie
+
+  ⚠️ ZASTRZEŻENIE UMOWNE WYŁĄCZAJĄCE OCHRONĘ FM (art. 473 KC, dodane 2026-07-30):
+  Strony mogą UMOWNIE ROZSZERZYĆ odpowiedzialność dłużnika NA przypadki siły
+  wyższej (art. 473 §1 KC) — jeśli umowa zawiera taki zapis (np. "Wykonawca
+  odpowiada za niewykonanie umowy niezależnie od przyczyny" lub podobne
+  sformułowanie rozszerzające odpowiedzialność na zasadzie ryzyka), dłużnik
+  NIE MOŻE powołać się na siłę wyższą, nawet jeśli faktycznie wystąpiła i
+  spełnia wszystkie trzy przesłanki powyżej. PUŁAPKA PRZY AUDYCIE: klauzula
+  FM w §X umowy może wyglądać poprawnie, ale jeśli klauzula odpowiedzialności
+  w innym miejscu tej samej umowy (§Y) rozszerza odpowiedzialność "niezależnie
+  od przyczyny" lub "na zasadzie ryzyka" — klauzula FM może być w praktyce
+  MARTWA. Zawsze sprawdzaj klauzulę FM RAZEM z klauzulą odpowiedzialności,
+  nie osobno (patrz też `mod-shared-economic.md` OEK.5).
+  Wyjątek nieusuwalny: art. 473 §2 KC — nawet rozszerzona odpowiedzialność
+  nie może obejmować winy umyślnej wyłączonej z góry (to inny mechanizm niż
+  FM, ale ta sama norma ograniczająca swobodę umów w obu przypadkach).
 
 MECHANIZM 2 — HARDSHIP (nadzwyczajna zmiana stosunków):
   Podstawa ustawowa: KC art. 357¹ (rebus sic stantibus)
@@ -110,6 +146,20 @@ KROK 5 — SYMETRIA:
   □ Czy jedna strona ma szerszą definicję FM niż druga?
   □ Sprawdź: czy klauzula nie wyłącza FM dla strony płacącej
     (płatnik musi płacić nawet przy FM — częsta pułapka w B2B)
+
+  ⚠️ PODSTAWA PRAWNA ASYMETRII (dodane 2026-07-30): klauzula FM zastrzeżona
+  WYŁĄCZNIE na korzyść jednej strony może zostać podważona jako nieważna na
+  podstawie art. 58 §2 KC (sprzeczność z zasadami współżycia społecznego) —
+  nawet w relacjach B2B, jeśli powoduje rażącą sprzeczność z zasadami
+  uczciwości kupieckiej (art. 5 KC) i znacząco narusza równowagę kontraktową
+  stron. Dotyczy to w szczególności sytuacji, w której odpowiedzialność
+  jednej strony oparta jest na zasadzie ryzyka niezależnie od siły wyższej
+  (np. kara umowna za opóźnienie zastrzeżona bez wyłączenia FM), podczas gdy
+  druga strona ma pełną ochronę FM. Przy audycie: nie traktuj asymetrii
+  wyłącznie jako "kwestii do negocjacji" — oznacz ją także jako POTENCJALNĄ
+  PODSTAWĘ NIEWAŻNOŚCI części klauzuli, wymagającą dalszej weryfikacji
+  orzecznictwa dla konkretnego stanu faktycznego przed przedstawieniem tego
+  argumentu klientowi jako mocnej pozycji negocjacyjnej.
 ```
 
 ---
@@ -172,9 +222,16 @@ BRZMIENIE REKOMENDOWANE:
      niż [45] dni od daty pierwszego spotkania.
   3. W trakcie negocjacji Strony wykonują Umowę na dotychczasowych warunkach.
   4. Jeżeli negocjacje nie doprowadzą do porozumienia, każda ze Stron
-     jest uprawniona do [mediacji przed [instytucją] / rozwiązania Umowy
-     z [30]-dniowym wyprzedzeniem / żądania modyfikacji Umowy przez sąd
-     na podstawie art. 357¹ KC].
+     jest uprawniona do — wybierz jedną opcję wg wzorca ICC Hardship Clause
+     2020, dopasuj do preferencji klienta:
+     [Opcja A — rozwiązanie z inicjatywy strony]: rozwiązania Umowy
+       z [30]-dniowym wyprzedzeniem, bez konieczności angażowania sądu/arbitra;
+     [Opcja B — rozstrzygnięcie przez sąd/arbitraż]: żądania modyfikacji
+       Umowy przez sąd na podstawie art. 357¹ KC lub — jeśli umowa przewiduje
+       zapis na sąd polubowny — przez arbitraż, z prawem do rozwiązania,
+       jeśli adaptacja nie jest rozsądnie możliwa;
+     [Opcja C — wariant zmodyfikowany]: mediacji przed [instytucją], a przy
+       jej niepowodzeniu — rozwiązania Umowy na zasadach jw.
   5. Niniejszy paragraf nie wyłącza prawa stron do powołania się na art. 357¹ KC."
 ```
 
@@ -213,6 +270,27 @@ BRZMIENIE REKOMENDOWANE:
 
 ### Klauzula FM (standard)
 
+> Struktura poniżej odpowiada logice **ICC Force Majeure Clause 2020 (Long
+> Form)**: definicja ogólna + lista przykładowych zdarzeń (ust. 1), obowiązek
+> notyfikacji (ust. 2), obowiązek minimalizacji skutków (ust. 3), **stały
+> okres** uzasadniający rozwiązanie zamiast otwartej formuły uznaniowej (ust.
+> 4 — ICC 2020 wprowadził stałą liczbę dni w miejsce niedookreślonej formuły
+> z wersji 2003 r., co ogranicza spory o to, czy zawieszenie trwało
+> „wystarczająco długo"). Dla kontraktów z drugą stroną przyzwyczajoną do
+> wzorców ICC możesz też zaproponować **Short Form** — te same elementy w
+> 3 zdaniach, bez rozpisanej listy zdarzeń, gdy klient/kontrahent woli
+> zwięzłość (typowe dla MŚP).
+>
+> ⚠️ **DOPRECYZOWANIE BENCHMARKU (dodane 2026-07-30):** ICC Force Majeure
+> Clause 2020 (Long Form) ustala jako WARTOŚĆ DOMYŚLNĄ okres **120 dni**
+> nieprzerwanej siły wyższej jako próg uprawniający do rozwiązania umowy —
+> nie 30 dni. Placeholder "[30] dni" poniżej jest wyłącznie przykładową
+> propozycją redakcyjną (krótszy okres, korzystniejszy dla strony chcącej
+> szybszego wyjścia z umowy w kryzysie) — nie odzwierciedla wartości ICC.
+> Jeśli celem jest zgodność z uznanym standardem międzynarodowym (np. przy
+> kontrahencie zagranicznym przyzwyczajonym do wzorców ICC), rozważ realną
+> wartość 120 dni lub jawnie odnotuj świadome odejście od tego benchmarku.
+
 ```
 "§X. SIŁA WYŻSZA
 1. Żadna ze Stron nie ponosi odpowiedzialności za opóźnienie lub niewykonanie
@@ -231,9 +309,10 @@ BRZMIENIE REKOMENDOWANE:
    szacowany wpływ na realizację Umowy.
 3. Strony są zobowiązane do podjęcia wszelkich racjonalnych działań
    zmierzających do ograniczenia skutków siły wyższej.
-4. Jeżeli siła wyższa trwa nieprzerwanie przez okres dłuższy niż [30] dni,
-   każda ze Stron jest uprawniona do rozwiązania Umowy za [14]-dniowym
-   powiadomieniem, bez prawa do odszkodowania z tytułu rozwiązania."
+4. Jeżeli siła wyższa trwa nieprzerwanie przez okres dłuższy niż [30 — lub
+   120 dla zgodności z ICC Long Form, patrz uwaga wyżej] dni, każda ze Stron
+   jest uprawniona do rozwiązania Umowy za [14]-dniowym powiadomieniem, bez
+   prawa do odszkodowania z tytułu rozwiązania."
 ```
 
 ### Klauzula FM (wzmocniona — chroniona strona)
@@ -251,5 +330,15 @@ BRZMIENIE REKOMENDOWANE:
 ---
 
 *← Powrót do routingu: `view references/mod-J0-routing.md`*
-*Podstawa prawna: KC art. 357¹, 471, 473, 475, 495 — weryfikuj: isap.sejm.gov.pl*
+*Podstawa prawna: KC art. 357¹, 471, 473, 475, 495, 58 — weryfikuj: isap.sejm.gov.pl*
 *Orzecznictwo: sn.pl → "siła wyższa" · "rebus sic stantibus" · "nadzwyczajna zmiana"*
+*Wzorzec międzynarodowy (benchmark redakcyjny, nie podstawa prawna): ICC Force*
+*Majeure Clause 2020, ICC Hardship Clause 2020 (iccwbo.org) · UNIDROIT Principles*
+*of International Commercial Contracts art. 7.1.7 (FM), art. 6.2.1–6.2.3 (hardship)*
+
+*Audyt 2026-07-30: uzupełniono o art. 473 KC (rozszerzenie odpowiedzialności na FM
+— FM.1), art. 58 §2 KC (podstawa nieważności klauzuli FM asymetrycznej — FM.2 KROK 5),
+doprecyzowano realną wartość domyślną ICC Long Form (120 dni, nie 30 — FM.6). Moduł
+oceniony jako solidny przed audytem; te trzy uzupełnienia usuwają jedyne zidentyfikowane
+luki po weryfikacji na tle aktualnej praktyki i tekstów źródłowych (kancelarie, ICC/DLA
+Piper/Lexology dot. ICC 2020).*

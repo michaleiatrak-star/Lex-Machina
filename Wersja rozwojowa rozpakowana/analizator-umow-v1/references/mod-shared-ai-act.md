@@ -4,6 +4,11 @@
 > **Wczytaj gdy:** umowa dotyczy wdrożenia, dostarczenia lub używania systemu AI;
 > SaaS oparty na AI; umowy z dostawcami modeli LLM/ML; automatyczne podejmowanie
 > decyzji; rekrutacja AI, scoring AI, nadzór AI, diagnostyka AI.
+>
+> **NIE ten moduł, tylko `mod-J21-rodo-archiwizacja-regulaminy.md` J21.7a gdy:**
+> klient pyta o wewnętrzną politykę/regulamin korzystania z AI dla WŁASNYCH
+> pracowników (relacja pracodawca-pracownicy), nie o klauzule w umowie z
+> dostawcą systemu AI (relacja dostawca-wdrażający, którą reguluje ten moduł).
 
 > ⛔ HARD GATE — AI Act (Rozporządzenie UE 2024/1689) weryfikuj w EUR-Lex:
 > eur-lex.europa.eu → szukaj: "2024/1689" lub "Artificial Intelligence Act"
@@ -246,6 +251,11 @@ System AI w zamówieniach publicznych:
 Umowa z dostawcą LLM/modelu AI (B2B):
   → mod-J6-it-konsorcjum.md (umowy licencyjne, prawa IP do modelu)
   + niniejszy moduł (klauzule AI Act)
+
+Wewnętrzna polityka korzystania z AI dla pracowników organizacji (odrębna
+od klauzul kontraktowych powyżej — dotyczy relacji pracodawca-pracownicy,
+nie dostawca-wdrażający):
+  → mod-J21-rodo-archiwizacja-regulaminy.md, sekcja J21.7a (dodana 2026-07-30)
 ```
 
 ---

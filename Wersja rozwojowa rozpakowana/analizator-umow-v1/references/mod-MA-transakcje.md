@@ -293,6 +293,14 @@ PRAWO POLSKIE — zakaz po transakcji:
 > MA.3.5 zawiera rekomendacje specyficzne dla transakcji M&A (poniżej);
 > ZK-4 zawiera szczegółowy test ważności i szablony klauzul.
 
+> ℹ CROSS-REFERENCE: Poufność w transakcjach M&A (due diligence, NDA
+> przedtransakcyjne, informacje ujawniane sprzedającemu przed finalizacją)
+> → view references/poufnosc-nda.md (Moduł K) — szczególnie K.2 KROK 3
+> (okres obowiązywania, częsty w M&A wariant dłuższy niż standard B2B ze
+> względu na wagę informacji finansowych/strategicznych ujawnionych w toku
+> badania due diligence) oraz K.1a (przesłanki tajemnicy przedsiębiorstwa,
+> istotne przy ewentualnym zerwaniu negocjacji bez zawarcia transakcji).
+
 REKOMENDACJA DLA KUPUJĄCEGO (kontekst M&A):
   "§X. W ciągu [3] lat po Closingu Sprzedający zobowiązuje się nie:
   (a) prowadzić działalności konkurencyjnej wobec Spółki na terytorium [Polska/UE];

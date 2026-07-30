@@ -54,10 +54,16 @@ REKOMENDACJA:
 
 **FR-3 — Zakaz konkurencji bez odszkodowania po zakończeniu (CRITICAL)**
 ```
-→ Patrz Moduł I (references/zakaz-konkurencji.md) — sekcja I.3 ZK-1 do ZK-8
+→ Patrz Moduł I (references/zakaz-konkurencji.md) — sekcja I.3 ZK-1 do ZK-11
   W umowach franczyzowych zakaz jest szczególnie dotkliwy:
   → Franczyzobiorca inwestuje kapitał w markę, której potem nie może używać
   → Zakaz może uniemożliwić wykorzystanie nabytego doświadczenia branżowego
+
+→ Poufność know-how franczyzowego (receptury, procedury, system operacyjny)
+  → Patrz Moduł K (references/poufnosc-nda.md) — szczególnie K.1a (tajemnica
+    przedsiębiorstwa) i K.3 Pułapka K-5 (zróżnicowanie okresu wg rodzaju
+    informacji — know-how franczyzowe typowo kwalifikuje się do dłuższego
+    lub bezterminowego okresu ochrony)
 
 PUŁAPKA SPECYFICZNA: "Franczyzobiorca nie może prowadzić działalności
   konkurencyjnej przez 3 lata po rozwiązaniu umowy na obszarze [cały kraj]"

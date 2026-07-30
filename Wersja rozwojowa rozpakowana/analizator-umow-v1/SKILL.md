@@ -1,20 +1,22 @@
 ---
 name: analizator-umow-v1
-version: 1.15
+version: 1.20
 type: executive-umowy
 status: production
 description: |
-  Analizator Umów v1 (v1.14) — analiza, redakcja i negocjacje umów.
-  PRIMARY: B2B (G), umowa o pracę (H), zakaz konkurencji (I).
-  DOMAIN: J0 routing, J1 najem, J2 nieruchomości/UUDE, J3 dystrybucja,
-  J4 finansowanie, J5 wykonawcze, J6 IT/SaaS/agile, J7 PZP/FIDIC,
-  J8 konsumenckie B2C, J9 IP/prawa autorskie (art. 41-68 PrAut),
-  J10 ubezpieczenia (OWU poza B2C), J20 founders'/spółka/statut/organy,
-  J21 RODO/archiwizacja/regulaminy pracy-wynagradzania-ZFŚS, MA transakcje.
-  SHARED: NEG, ALT, WYKLADNIA, RYZYKO-KWANT, FM-HARDSHIP, RODO, LIFECYCLE,
-  ESG, AI-ACT, CORE-CHECKLIST, TRIAGE, SO, DA + systemowe shared/.
+  Analiza, redakcja, negocjacje i generowanie od zera umów oraz dokumentów
+  korporacyjnych/HR/RODO. Stosuj gdy użytkownik: chce ocenić, poprawić,
+  wynegocjować lub napisać umowę (B2B, o pracę, zakaz konkurencji, najem,
+  nieruchomości, dystrybucja, finansowanie, IT/SaaS, PZP/FIDIC, B2C,
+  IP/prawa autorskie, ubezpieczenia, dokumenty founders'/spółka/statut,
+  RODO/regulaminy) lub dokument korporacyjny/regulamin/pełnomocnictwo;
+  chce triage ryzyka klauzul, ocenę z perspektywy drugiej strony, lub
+  poprawę pojedynczego fragmentu umowy.
   Przepisy, akty UE i klauzule UOKiK weryfikować wyłącznie w źródłach
-  urzędowych przed użyciem.
+  urzędowych przed użyciem — nigdy z pamięci.
+  Pełna historia zmian i metodologia: references/CHANGELOG.md (nie w tym
+  polu — opis wyzwalający musi zostać zwięzły dla trafności triggerowania
+  skilla).
 compatibility:
   tools:
     - official_sources_only
@@ -54,6 +56,93 @@ ZAKAZ oznaczania ✅ [VER] bez faktycznego wykonania web_search / web_fetch.
 
 ---
 
+## KROK 0-ST — REJESTR KROKÓW ⛔ HARD GATE (ST-GATE)
+
+> `view /mnt/skills/user/shared/MOD-STEP-TRACKER.md`
+> Wzorem pisma-procesowe-v3 i analizator-dowodow-v3 — to jest BRAMKA, nie
+> zalecenie. Każde pominięcie obowiązkowego etapu MUSI być odnotowane i
+> zakomunikowane użytkownikowi. Przejście dalej lub dostarczenie dokumentu/
+> raportu bez zamkniętego rejestru = ZAKAZ BEZWZGLĘDNY, chyba że użytkownik
+> świadomie rezygnuje (wymaga jawnego potwierdzenia a/b — patrz ST-GATE-FINAL).
+
+**STOP przed wczytaniem jakiegokolwiek modułu z ROUTING DO MODUŁÓW, przed przejściem
+między etapami analizy/redakcji i przed każdym `present_files` — dopóki odpowiednia
+bramka poniżej nie jest zamknięta.**
+
+```
+⛔ ST-GATE-INIT (blokuje ROUTING DO MODUŁÓW):
+
+  Czy REJESTR zainicjowany w tej sesji (view MOD-STEP-TRACKER.md wykonany,
+  podzbiór AU-* dobrany do wykrytego TRYBU z FAZY 0)?
+    NIE → ⛔ STOP. Wykonaj ST-INIT poniżej. Nie wczytuj żadnego modułu
+          PRIMARY/DOMAIN/SHARED, dopóki REJESTR nie istnieje.
+    TAK → kontynuuj do ROUTING DO MODUŁÓW.
+
+ST-INIT: zainicjuj podzbiór REJESTRU właściwy dla wykrytego trybu:
+
+  WSPÓLNE (zawsze):
+    AU-F0      FAZA 0 — Intake (tryb/dokument/cel/kontekst decyzyjny)
+    AU-GAP     INTAKE-GAP — N/A jeśli brak pól ⬛
+    AU-POV     BLOK POV-B/C weryfikacja podmiotów — N/A jeśli brak firmy/PESEL w dokumencie
+    AU-ROUTE   Routing do modułu PRIMARY/DOMAIN wg typu umowy
+
+  TRYB 1 — ANALIZA:
+    AU-A → AU-B → AU-C → AU-D → AU-F
+
+  TRYB 2/3/4 — REDAKCJA/DRAFT/UZUPEŁNIENIE:
+    AU-GENCORE → AU-GENBUILD → AU-GENSHARED — N/A poszczególne moduły shared
+      (DPA/FM/waloryzacja/ZK/NDA/IP) nietriggerowane dla danego typu umowy
+
+  FINALIZACJA (wspólna, obowiązkowa gdy powstaje dokument/raport wyjściowy):
+    AU-HYBRID → AU-STRIP → AU-POST → AU-DISC
+
+  Pomiń w rejestrze pozycje nieistotne dla zadania (np. cała gałąź TRYB 1 gdy
+  praca toczy się w TRYB 2) — oznacz "— N/A" z uzasadnieniem, nie usuwaj z raportu.
+```
+
+```
+⛔ ST-GATE-TRACK (blokuje przejście do kolejnego etapu/modułu):
+
+  Przed przejściem AU-x → AU-(x+1) sprawdź: czy poprzedni etap ma status
+  w REJESTRZE (✅/⚠️/—)?
+    NIE (etap "wykonany milcząco", bez aktualizacji REJESTRU) → ⛔ STOP.
+      Zaktualizuj REJESTR (✅ WYKONANY / ⚠️ POMINIĘTY + powód / — N/A + uzasadnienie)
+      ZANIM przejdziesz dalej. Zakaz cichego przejścia bez wpisu.
+    TAK → kontynuuj.
+
+  Gdy etap = ⚠️ POMINIĘTY → raportuj NATYCHMIAST (nie czekaj do końca):
+    ┌─────────────────────────────────────────────────────────────┐
+    │ ⚠️ UWAGA — ANALIZA/REDAKCJA NIEPEŁNA                          │
+    │ Pominięty etap: [AU-id] [nazwa] — Powód: [opis]              │
+    │ Skutek: [co nie zostało zweryfikowane / ryzyko]               │
+    │ Kontynuować bez tego etapu? a) tak  b) nie, wykonaj etap      │
+    └─────────────────────────────────────────────────────────────┘
+    ⛔ Po wyświetleniu — ZAKOŃCZ ODPOWIEDŹ, czekaj na decyzję a/b.
+```
+
+```
+⛔ ST-GATE-FINAL (blokuje present_files i wydanie raportu F):
+
+  Przed present_files dokumentu (.docx) LUB przed wydaniem raportu F
+  (F.1/F.1-LITE/F.2) — wyświetl PEŁNY REJESTR (✅/⚠️/—, zgodnie z FAZĄ 3
+  shared/MOD-STEP-TRACKER.md).
+
+  Czy w gałęzi FINALIZACJA (AU-HYBRID/AU-STRIP/AU-POST/AU-DISC) istnieje
+  ≥1 wpis ⚠️ POMINIĘTY?
+    TAK → ⛔ STOP BEZWZGLĘDNY. Oznacz dokument/raport jako
+          ⚠️ DRAFT — NIEZWERYFIKOWANY. Wyświetl raport pominięć (format
+          ST-GATE-TRACK powyżej). Czekaj na decyzję a/b.
+          NIE wywołuj present_files bez jawnego potwierdzenia użytkownika.
+    NIE → STATUS: ✅ FINAL — wszystkie obowiązkowe etapy zamknięte.
+          Dozwolone present_files.
+
+  Ta sama zasada dotyczy wpisów ⚠️ POMINIĘTY poza gałęzią FINALIZACJA
+  (np. AU-POV, AU-C) — raportuj w REJESTRZE końcowym, nawet jeśli nie
+  blokują same present_files (blokują tylko etapy FINALIZACJA).
+```
+
+---
+
 ## ROUTING DO MODUŁÓW
 
 ### Moduły PRIMARY — wczytaj na podstawie typu umowy
@@ -66,6 +155,7 @@ ZAKAZ oznaczania ✅ [VER] bez faktycznego wykonania web_search / web_fetch.
 | Pseudosamozatrudnienie / test pracy | **G.1 + G.1B** | `view references/b2b-podwykonawcze.md` |
 | Umowa o pracę / kontrakt pracowniczy | **H** | `view references/umowy-o-prace.md` |
 | Zakaz konkurencji (każdy typ) | **I** | `view references/zakaz-konkurencji.md` |
+| Poufność / NDA (każdy typ) | **K** | `view references/poufnosc-nda.md` |
 
 ### Moduły DOMAIN — lazy loading
 
@@ -124,6 +214,7 @@ ZAKAZ oznaczania ✅ [VER] bez faktycznego wykonania web_search / web_fetch.
 
 | Sytuacja | Moduł | Ścieżka |
 |---|---|---|
+| Śledzenie kroków i raportowanie pominięć — ⛔ HARD GATE (KROK 0-ST / ST-GATE, blokuje ROUTING DO MODUŁÓW i present_files) | **STEP-TRACKER** | `view /mnt/skills/user/shared/MOD-STEP-TRACKER.md` |
 | Brakujące dane w Fazie 0 (⬛ pola) | **INTAKE-GAP** | `view /mnt/skills/user/shared/INTAKE-GAP.md` |
 | Przed wygenerowaniem umowy / klauzul | **HYBRID-VALIDATION** | `view /mnt/skills/user/shared/HYBRID-VALIDATION.md` |
 | Przed eksportem .docx / przekazaniem umowy | **STRIP-VER-GATE** | `view /mnt/skills/user/shared/WERYFIKACJA-SLAD.md § STRIP-VER-GATE` |
@@ -143,6 +234,66 @@ ZAKAZ oznaczania ✅ [VER] bez faktycznego wykonania web_search / web_fetch.
 > **⛔ STRIP-VER-GATE: po HYBRID-VALIDATION, przed eksportem umowy / regulaminu / OWU / wzorca —**
 > **view /mnt/skills/user/shared/WERYFIKACJA-SLAD.md § STRIP-VER-GATE → SVG-1→SVG-2→SVG-3→SVG-4.**
 > **Blokada: nie generuj .docx ani nie przekazuj dokumentu bez zamknięcia SVG-1–SVG-3.**
+
+---
+
+## GENEROWANIE DOKUMENTÓW — routing (v1.16)
+
+> Do tej pory moduły J0–MA/J20/J21 dostarczały essentialia i checklisty głównie
+> w trybie ANALIZY. Poniższe workflowy dodają warstwę **generowania od zera**
+> (wywiad → szkielet → treść wg stylu → bramka walidacji), poziomem procesu
+> odpowiadającą wzorcowi branżowemu (KTZR: `generator-umow.md` /
+> `generator-regulaminu.md`), ale osadzoną w architekturze tego systemu —
+> bez duplikowania wiedzy merytorycznej już zgromadzonej w modułach J20/J21.
+> Wczytaj `references/generator/rdzen-generowania.md` na starcie KAŻDEGO
+> z poniższych workflow.
+
+| Sygnał od użytkownika | Workflow | Essentialia z |
+|---|---|---|
+| *„wygeneruj/napisz/przygotuj umowę [typ]"* | `workflows/generator-umowy.md` | moduły G/H/I/J0–J10/MA (routing jak w analizie) |
+| *„wygeneruj/napisz regulamin [sklepu/SaaS/usług]"* | `workflows/generator-regulaminu.md` | `references/generator/essentialia-regulaminy-i-korporacyjne.md § 1` + `mod-shared-abusive-clauses.md` |
+| *„wygeneruj statut/umowę spółki"* | `workflows/generator-dokumentow-korporacyjnych.md` (Ścieżka A) | `mod-FA-founders-dokumenty-zalozycielskie.md` (J20.5) |
+| *„przygotuj uchwałę/protokół zgromadzenia/zarządu"* | `workflows/generator-dokumentow-korporacyjnych.md` (Ścieżka B) | `references/generator/essentialia-regulaminy-i-korporacyjne.md § 2` |
+| *„przygotuj pełnomocnictwo/prokurę"* | `workflows/generator-dokumentow-korporacyjnych.md` (Ścieżka C) | `references/generator/essentialia-regulaminy-i-korporacyjne.md § 3` |
+| *„wygeneruj regulamin pracy/wynagradzania/ZFŚS"* | `workflows/generator-dokumentow-hr-rodo.md` (Ścieżka A) | `mod-J21-rodo-archiwizacja-regulaminy.md § J21.4–J21.5` |
+| *„napisz politykę prywatności/klauzulę informacyjną RODO"* | `workflows/generator-dokumentow-hr-rodo.md` (Ścieżka B) | `mod-J21-rodo-archiwizacja-regulaminy.md § J21.2` |
+| *„napisz politykę AI / politykę wykorzystania AI w firmie"* | `workflows/generator-dokumentow-hr-rodo.md` (Ścieżka C) | `references/generator/doktryna-uzupelnienie.md § D.4` |
+| *„sprawdź odesłania/spójność"* w długim dokumencie (analiza LUB generowanie) | `workflows/weryfikacja-spojnosci-odeslan.md` | — (narzędzie diagnostyczne, nie essentialia) |
+
+**Narzędzia diagnostyczne i uzupełnienia doktrynalne (v1.16–v1.17, wczytuj przy
+triggerach, nie domyślnie):**
+- `references/generator/kategorie-klauzul-taksonomia.md` — 7 kategorii klauzul
+  (wzorzec: Adams, *A Manual of Style for Contract Drafting*), diagnoza
+  niejednoznaczności przy redakcji i poprawkach.
+- `references/generator/boilerplate-strukturalne.md` — komparycja, preambuła,
+  definicje, postanowienia końcowe, zwrot materiałów, cesja wierzytelności.
+- `references/generator/doktryna-uzupelnienie.md` — open source/copyleft w
+  umowach IT, wizerunek a prawa autorskie, notice&action (DSA) w regulaminach
+  UGC, Polityka AI jako dokument wewnętrzny.
+- `references/generator/legal-design-produkcyjny.md` (v1.17) — standard
+  produkcyjny typografii/layoutu/wzorców wizualnych (WorldCC, Hagan, Haapio)
+  do stosowania przy KAŻDYM eksporcie `.docx`, uzupełnia `mod-shared-legal-design.md`
+  (który tylko ocenia, nie produkuje).
+
+Reguły wspólne dla wszystkich workflow generatora — patrz
+`references/generator/rdzen-generowania.md` (R1–R7) i
+`references/generator/style-format-generowania.md` (styl + format-checklist,
+BRAMKA 4). HYBRID-VALIDATION i STRIP-VER-GATE (już zdefiniowane wyżej w tym
+pliku) obowiązują generowanie identycznie jak analizę — bez wyjątku.
+
+---
+
+## ANALIZA — narzędzia dodatkowe (v1.17)
+
+> Uzupełnienie trybu ANALIZA (Moduł A–F w `mod-core-checklist.md`) o trzy
+> workflowy poziomu branżowego, wczytywane na wyraźny sygnał lub zamiast
+> improwizowania w analogicznych sytuacjach.
+
+| Sygnał od użytkownika | Workflow | Relacja do istniejących modułów |
+|---|---|---|
+| *„czy mogę to podpisać"*, *„szybki rzut oka"*, *„triage"* | `workflows/triage-szybki.md` | Szybszy filtr 🟢/🟡/🔴 PRZED decyzją o głębokości F.1/F.1-LITE/F.2 (FAZA 0) — nie zastępuje ich, poprzedza |
+| *„ocena drugiej strony"*, *„co mogą zarzucić"*, *„devil's advocate"*, *„red team"* | `workflows/ocena-drugiej-strony.md` | Komplementarny do Modułu D (audyt ryzyk z perspektywy KLIENTA) — ten patrzy z perspektywy OPONENTA |
+| *„popraw § X"*, wklejony fragment do korekty, przerwanie szerszego workflow dla jednej poprawki | `workflows/popraw-fragment.md` | Ustandaryzowana wersja Trybu 4 (UZUPEŁNIENIE) z E.1 `mod-core-checklist.md` dla POJEDYNCZEGO fragmentu |
 
 ---
 
@@ -289,14 +440,44 @@ na żądanie         → zawsze F.1 niezależnie od kwoty
 
 ---
 
-*Skill analizator-umow-v1 v1.8 · PRIMARY: b2b-podwykonawcze · umowy-o-prace · zakaz-konkurencji*
+*Skill analizator-umow-v1 v1.20 · PRIMARY: b2b-podwykonawcze · umowy-o-prace · zakaz-konkurencji*
+*NOWE v1.20: KROK 0-ST podniesiony do ⛔ HARD GATE (ST-GATE-INIT/ST-GATE-TRACK/ST-GATE-FINAL) —*
+*             blokuje wczytanie modułów ROUTING DO MODUŁÓW bez zainicjowanego rejestru AU-*,*
+*             blokuje ciche przejście między etapami bez wpisu w REJESTRZE, blokuje present_files*
+*             dokumentu/raportu F, gdy gałąź FINALIZACJA (HYBRID/STRIP/POST/DISC) ma pominięcia*
+*             bez potwierdzenia użytkownika (a/b)*
+*NOWE v1.19: KROK 0-ST STEP-TRACKER (shared/MOD-STEP-TRACKER.md, rejestr AU-*) —*
+*             każde pominięcie obowiązkowego etapu (FAZA 0/POV/Moduł A-F/GENCORE-BUILD-SHARED/*
+*             HYBRID-VALIDATION/STRIP-VER-GATE/POST-VALIDATION/DISCLAIMER) raportowane, ST-FINAL*
+*             blokujący przed present_files gdy pominięto etap z gałęzi finalizacji*
 *DOMAIN (lazy): J0-routing · J1-najem · J2-nieruchomosci · J3-dystrybucja*
 *             J4-finansowanie · J5-umowy-wykonawcze · J6-it-konsorcjum · J7-pzp · J8-b2c*
-*             J9-ip-prawa-autorskie · J10-ubezpieczenia · MA-transakcje*
+*             J9-ip-prawa-autorskie · J10-ubezpieczenia · J20-founders · J21-rodo-regulaminy · MA-transakcje*
 *SHARED lokalne (lazy): neg-strategia · alt-drafts · wykladnia · ryzyko-kwant · fm-hardship*
 *             rodo · lifecycle · esg · ai-act · core-checklist*
 *SHARED NOWE v1.8 (lazy, z triggerami auto): abusive-clauses · orzecznictwo-umow*
 *             fallback-library · economic · missing-clause · legal-design · regulatory-horizon*
+*GENERATOR v1.15 (references/generator/ + workflows/generator-*.md):*
+*             rdzen-generowania · style-format-generowania · essentialia-regulaminy-i-korporacyjne*
+*             generator-umowy · generator-regulaminu · generator-dokumentow-korporacyjnych*
+*             generator-dokumentow-hr-rodo (Ścieżki A/B/C — regulamin pracy, RODO, Polityka AI)*
+*GENERATOR v1.16 (uzupełnienie luk wobec wzorca branżowego):*
+*             kategorie-klauzul-taksonomia (Adams MSCD) · boilerplate-strukturalne*
+*             doktryna-uzupelnienie (open source/copyleft, wizerunek, notice&action, Polityka AI)*
+*             workflows/weryfikacja-spojnosci-odeslan (dwuetapowa, analiza + generowanie)*
+*NOWE v1.17 (zastępują generyczne odpowiedniki wskazówkami z literatury profesjonalnej):*
+*             references/generator/legal-design-produkcyjny (WorldCC/Hagan/Haapio — standard*
+*             produkcji, zastępuje "goły" scoring D1-D5 przy generowaniu)*
+*             workflows/triage-szybki (🟢/🟡/🔴 — zastępuje ogólną E.3 checklistę)*
+*             workflows/ocena-drugiej-strony (6 kategorii ataków devil's advocate — było nieobecne)*
+*             workflows/popraw-fragment (ustandaryzowany format ZMIANA — zastępuje generyczny Tryb 4)*
+*NOWE v1.18 (zweryfikowane w literaturze eksperckiej online przed wdrożeniem):*
+*             mod-shared-ryzyko-kwant: PERT (O+4M+P)/6 + decision-tree probability-weighted*
+*             expected value (Marc Victor, Marjorie Corman Aaron) — zastępuje "Likely × 2"*
+*             mod-shared-fm-hardship: zakotwiczone w ICC Force Majeure/Hardship Clause 2020*
+*             + UNIDROIT Principles art. 7.1.7 / 6.2.1-6.2.3 (Opcje A/B/C rozwiązania)*
+*             mod-shared-neg-strategia: ZOPA z BATNA + principled negotiation 4 zasady*
+*             (Fisher/Ury/Patton, Getting to Yes, Harvard Negotiation Project) — NEG.1B nowe*
 *SHARED systemowe (/mnt/skills/user/shared/): INTAKE-GAP · HYBRID-VALIDATION · POST-VALIDATION*
 *             MOD-WALIDACJA_v2 · FAKTY_v2 · terminy · raport-sytuacyjny-integracja*
 *             DISCLAIMER · SYGNATURY · WERYFIKACJA-SLAD*

@@ -6,6 +6,14 @@
 > "jak przekonać drugą stronę", "co możemy odpuścić".
 
 > ⛔ HARD GATE — weryfikuj aktualne przepisy przez ISAP przed podaniem podstaw prawnych.
+>
+> **v1.17 — przed finalizacją strategii/wysłaniem kontrpropozycji:** uruchom
+> systematyczną ocenę adwersarialną zamiast polegać wyłącznie na intuicji co
+> do słabości własnego projektu —
+> `view /mnt/skills/user/analizator-umow-v1/workflows/ocena-drugiej-strony.md`
+> (6 kategorii ataków: niekorzystne potwierdzenia, niejednoznaczności, luki
+> dowodowe, sprzeczności wewnętrzne, błędy obliczeniowe/terminowe, mechanizmy
+> wyjścia). To jest finalna kontrola przed wyjściem dokumentu poza Twoją stronę.
 
 ---
 
@@ -39,7 +47,71 @@ Przed opracowaniem strategii ustal (jedno pytanie zbiorcze):
 □ BATNA (Best Alternative To Negotiated Agreement):
   → Co klient zrobi jeśli umowa nie zostanie podpisana?
   → Czy ma alternatywnego kontrahenta? Czy może zrezygnować z transakcji?
+
+□ ZOPA (Zone of Possible Agreement) — v1.18, konstruuj Z BATNA obu stron:
+  → Twoja rezerwacja (reservation point): najgorsze warunki, które klient
+    jeszcze zaakceptuje — wyznaczone przez JEGO BATNA (jeśli alternatywa
+    klienta jest słaba, jego rezerwacja jest niższa — mniej do stracenia
+    na negocjacji vs. brak umowy w ogóle).
+  → Szacowana rezerwacja drugiej strony: co, wg dostępnych sygnałów
+    (branża, pilność po ich stronie, alternatywni kontrahenci), są jeszcze
+    skłonni zaakceptować.
+  → ZOPA istnieje, gdy te dwa przedziały (Twojej rezerwacji i szacowanej
+    rezerwacji drugiej strony) się nakładają. Jeśli się NIE nakładają —
+    powiedz to wprost klientowi: dalsze negocjowanie samych zapisów umowy
+    nie pomoże, dopóki jedna ze stron nie zmieni swojego BATNA (np. klient
+    znajdzie alternatywnego kontrahenta) — to zmienia rekomendację z
+    „negocjuj klauzule" na „pracuj nad alternatywą, potem wróć do stołu".
 ```
+
+> **Źródło (v1.18):** Fisher, R.; Ury, W.; Patton, B., *Getting to Yes:
+> Negotiating Agreement Without Giving In*, wyd. 3, Penguin Books 2011 —
+> kanoniczny tekst Harvard Negotiation Project / Program on Negotiation
+> (pon.harvard.edu), na którym opierają się BATNA i ZOPA jako narzędzia
+> analizy przedumownej. WorldCC (World Commerce & Contracting, dawniej
+> IACCM) wskazuje słabą negocjację i zarządzanie kontraktem jako źródło
+> >9% utraty wartości projektu (research WorldCC — ten sam podmiot, którego
+> Contract Design Pattern Library jest już źródłem w
+> `references/generator/legal-design-produkcyjny.md`).
+
+## NEG.1B NEGOCJACJA OPARTA NA INTERESACH (v1.18) — poprzedza NEG.2
+
+**Zasada nadrzędna (Fisher/Ury/Patton, „principled negotiation"):** macierz
+must/should/nice/token w NEG.2 kategoryzuje **stanowiska** (co klient chce
+zmienić w tekście umowy). Zanim ją zastosujesz, ustal **interesy** stojące za
+tymi stanowiskami — bo dwa stanowiska, które wyglądają na sprzeczne, często
+mają interesy dające się pogodzić (opcja integrative/win-win), podczas gdy
+negocjowanie wprost ze stanowiska prowadzi tylko do kompromisu w połowie
+drogi (distributive).
+
+**Cztery zasady principled negotiation — zastosuj w tej kolejności:**
+
+1. **Oddziel ludzi od problemu.** Nie personalizuj sporu o klauzulę — trudny
+   ton drugiej strony w e-mailu nie znaczy, że ich stanowisko w sprawie
+   kary umownej jest nie do pogodzenia z Twoim.
+2. **Skup się na interesach, nie na stanowiskach.** Dla KAŻDEGO stanowiska w
+   macierzy NEG.2 zadaj: *„Dlaczego druga strona tego chce? Jaki realny
+   interes za tym stoi?"* (np. żądanie krótkiego terminu płatności może
+   wynikać z problemów z płynnością, nie z chęci dyscyplinowania — inny
+   interes = inne rozwiązanie niż samo „skróć termin").
+3. **Wymyślaj opcje korzystne dla obu stron (mutual gain)** przed wyborem
+   jednego rozwiązania — nie ograniczaj się do „zaakceptuj / odrzuć /
+   kompromis pośrodku" jednego zapisu, jeśli inny mechanizm zaspokaja
+   interesy obu stron pełniej (np. zamiast negocjować wysokość kary umownej
+   w dół — zaproponuj karę stopniowaną + krótszy okres rozliczeniowy, jeśli
+   realnym interesem drugiej strony jest przewidywalność przepływów, nie
+   sama wysokość kary).
+4. **Nalegaj na obiektywne kryteria.** Odwołuj się do benchmarków rynkowych
+   (`mod-shared-economic.md`, `mod-shared-fallback-library.md`), standardów
+   branżowych (FIDIC, ISDA — patrz `mod-shared-wykladnia.md` W.2) lub norm
+   ustawowych zamiast czystej siły przetargowej — łatwiej o zgodę drugiej
+   strony, gdy propozycja odwołuje się do zewnętrznego standardu, nie do
+   Twojego life żądania.
+
+**Zastosowanie do macierzy NEG.2:** przy KAŻDEJ pozycji M/S/N/T dopisz jedno
+zdanie „interes: [...]" obok „stanowisko: [...]" — to pozwala w Kroku
+NEG.3 (sekwencja negocjacyjna) proponować rozwiązania integrative zamiast
+tylko ustępstw wzdłuż jednej osi.
 
 ---
 

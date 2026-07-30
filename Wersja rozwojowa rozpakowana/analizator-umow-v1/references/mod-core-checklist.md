@@ -95,6 +95,12 @@ postanowieniami zmienia ocenę całości. Jeśli synteza B.0 zmienia wynik
 uzyskany dla pojedynczej klauzuli w B.1, raport musi to wprost odnotować
 („§X samodzielnie neutralny, ale w połączeniu z §Y i §Z wskazuje na...").
 
+> **Dokument długi (> 15 stron / > 15 § / > 10 odesłań):** przed zamknięciem
+> Modułu B uruchom dodatkowo `view /mnt/skills/user/analizator-umow-v1/workflows/weryfikacja-spojnosci-odeslan.md`
+> (v1.16) — dwuetapowa procedura inwentaryzacja→weryfikacja odesłań i
+> spójności, adresująca attention dilution w długim kontekście. Wynik wchodzi
+> do Modułu F jako osobna sekcja, przed „9. BRAKUJĄCE KLAUZULE".
+
 ### B.1 Sekwencja obowiązkowa dla każdej klauzuli
 
 ```
@@ -328,8 +334,13 @@ TRYB 3 — DRAFT BEZ DANYCH (szablon z placeholderami):
 
 TRYB 4 — UZUPEŁNIENIE (mam szkielet, uzupełnij):
   → Zidentyfikuj luki w dokumencie (Moduł A + J0 master checklista)
-  → Zaproponuj gotowe brzmienie brakujących klauzul
-  → Wskaż sprzeczności z istniejącą treścią
+  → Dla POJEDYNCZEGO fragmentu/klauzuli: użyj formatu i źródeł klauzul z
+    `view /mnt/skills/user/analizator-umow-v1/workflows/popraw-fragment.md`
+    (v1.17) zamiast improwizować brzmienie — ma ustandaryzowany format
+    „ZMIANA" (przed/po/uzasadnienie/źródło) i wskazuje, z którego modułu
+    wziąć brzmienie zamiast pisać od zera
+  → Dla WIELU luk naraz: zaproponuj gotowe brzmienie każdej brakującej
+    klauzuli, wskaż sprzeczności z istniejącą treścią
 ```
 
 ### E.2 Zasady redakcji
@@ -351,6 +362,8 @@ TRYB 4 — UZUPEŁNIENIE (mam szkielet, uzupełnij):
     - FM → mod-shared-fm-hardship.md (umowy >12 mies.)
     - Waloryzacja → mod-shared-lifecycle.md (umowy >24 mies.)
     - Zakaz konkurencji → zakaz-konkurencji.md (UoP + B2B)
+    - Poufność / NDA → poufnosc-nda.md (Moduł K — odrębna instytucja od
+      zakazu konkurencji, patrz Moduł I Pułapka ZK-11)
     - IP / prawa autorskie → mod-J6 lub b2b-podwykonawcze.md
 □ Język: precyzyjny, bez wieloznaczności; unikaj "itp.", "m.in." bez definicji
 □ Numeracja: §1, §2 ... lub Artykuł 1, 2... (konsekwentnie)
@@ -358,6 +371,14 @@ TRYB 4 — UZUPEŁNIENIE (mam szkielet, uzupełnij):
 ```
 
 ### E.3 Szybka checklista gotowości dokumentu do podpisania
+
+> **v1.17:** dla szybkiej, jednoznacznej decyzji „podpisać / analizować /
+> odrzucić" (nie tylko listy kontrolnej) użyj
+> `view /mnt/skills/user/analizator-umow-v1/workflows/triage-szybki.md` —
+> daje kategorię 🟢/🟡/🔴 z jawnymi kryteriami i regułą eskalacji do pełnej
+> analizy. Lista poniżej zostaje jako szybki, nieskategoryzowany przegląd,
+> gdy triage pełny jest zbędny (np. finalny rzut oka tuż przed podpisem po
+> tym, jak pełna analiza już się odbyła).
 
 ```
 PRZED PODPISANIEM — sprawdź:
