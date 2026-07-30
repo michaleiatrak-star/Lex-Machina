@@ -118,7 +118,13 @@ dwóch systemów kar mimo podobnych rzędów wielkości kwot.
 ```
 □ Ustal, czy to kontrola DORAŹNA czy UPRZEDNIA — różny moment i skutki
 □ Sprawdź, czy zamówienie w ogóle mieściło się w zakresie kontroli
-  uprzedniej (próg 20 mln EUR dla robót budowlanych i in.)
+  uprzedniej (próg 20 mln EUR dla robót budowlanych i 10 mln EUR dla
+  dostaw/usług — ✅ POTWIERDZONE 2026-07-27, FAZA 3E/ZASADA 14,
+  dosłownie w 8+ źródłach w tym gov.pl/UZP. ⚠️ DO MONITOROWANIA:
+  projekt UD409 z 8.06.2026 przewiduje PODNIESIENIE progów do 30 mln/
+  15 mln EUR — na dzień audytu TO WCIĄŻ TYLKO PROJEKT, nie obowiązujące
+  prawo — sprawdź status przed każdym użyciem, jeśli sprawa dotyczy
+  dużego zamówienia)
 □ Przygotuj kompletną dokumentację postępowania do przekazania w KOPII
 □ Rozważ, czy stwierdzone naruszenie MOGŁO MIEĆ WPŁYW na wynik
   postępowania — to kluczowe kryterium przy ocenie wagi naruszenia

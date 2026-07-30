@@ -4,7 +4,23 @@
 - Cyber Resilience Act (CRA) — Rozp. (UE) 2024/2847
   Dz.Urz. UE L 2024/2847, wejście w życie: 11.12.2024
   Stosowanie: stopniowe do 11.12.2027
-  ✅ [VER: eur-lex.europa.eu, 2026-05-31]
+  ⚠️ UZUPEŁNIONE 2026-07-27 (FAZA 3E/ZASADA 14) — poprzednia wersja
+  pomijała KLUCZOWE, CZASOWO BLISKIE terminy pośrednie. Harmonogram
+  pełny (potwierdzony w 7+ źródłach 2026 r.: cra-polska.pl,
+  staniekandpartners.pl, multicert.pl, kicb.pl, bakertilly-tpa.pl):
+    • 11.06.2026 — notyfikacja jednostek oceny zgodności (JUŻ MINĘŁO
+      na dzień tego audytu, 28.07.2026)
+    • **11.09.2026 — OBOWIĄZEK RAPORTOWANIA aktywnie wykorzystywanych
+      podatności (w ciągu 24 GODZIN) i poważnych incydentów do ENISA
+      (Single Reporting Platform), art. 14 CRA — ⚠️ TO ZA OK. 6
+      TYGODNI od dnia tego audytu, dotyczy KAŻDEGO produktu z
+      elementami cyfrowymi już wprowadzonego na rynek UE, NIE tylko
+      nowych — sprawdź ponownie bliżej terminu**
+    • 11.12.2027 — pełne stosowanie (CE marking, ocena zgodności)
+  Sankcje (art. 64 CRA): do 15 mln EUR/2,5% obrotu (naruszenie
+    wymagań zasadniczych), do 10 mln EUR/2% (inne obowiązki), do 5 mln
+    EUR/1% (błędne informacje dla organów)
+  ✅ [VER: eur-lex.europa.eu, 2026-05-31; terminy pośrednie 2026-07-27]
 - Data Governance Act (DGA) — Rozp. (UE) 2022/868
   Stosowane od 24.09.2023
   ✅ [VER: eur-lex.europa.eu, 2026-05-31]

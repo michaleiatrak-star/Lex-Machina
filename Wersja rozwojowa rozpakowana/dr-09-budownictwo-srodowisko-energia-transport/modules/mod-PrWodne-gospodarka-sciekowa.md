@@ -17,6 +17,143 @@ Nie cytuj literalnego brzmienia przepisu bez aktualnego sprawdzenia źródła. P
 - przepisy przejściowe,
 - właściwy organ i tryb zaskarżenia.
 
+## 1a. OBOWIĄZEK PRZYŁĄCZENIA DO KANALIZACJI / SZAMBA (dodano
+2026-07-27, na wyraźne żądanie użytkownika — dotąd CAŁKOWICIE
+NIEOBECNE w tym module, mimo że to jeden z najczęstszych tematów
+praktycznych w gospodarce ściekowej)
+
+```
+PODSTAWA: art. 5 ust. 1 pkt 2 ustawy z 13.09.1996 o utrzymaniu
+  czystości i porządku w gminach (t.j. Dz.U.2025.622) — "ucpg"
+
+ZASADA: właściciel nieruchomości ma OBOWIĄZEK przyłączenia do
+  ISTNIEJĄCEJ sieci kanalizacyjnej, JEŻELI sieć jest DOSTĘPNA —
+  chyba że budowa sieci jest TECHNICZNIE lub EKONOMICZNIE
+  NIEUZASADNIONA (wtedy: obowiązek wyposażenia w zbiornik
+  bezodpływowy — szambo — LUB przydomową oczyszczalnię ścieków,
+  art. 5 ust. 2)
+
+⚠️ KLUCZOWA NIEŚCISŁOŚĆ DO UNIKANIA: USTAWA NIE OKREŚLA TERMINU, w
+  którym właściciel MUSI wykonać przyłącze — wójt/burmistrz/prezydent
+  NIE MOŻE wyznaczyć konkretnej DATY tego obowiązku (potwierdzone
+  orzecznictwem sądów administracyjnych). Obowiązek istnieje "z mocy
+  prawa" od momentu, gdy sieć staje się DOSTĘPNA, ale brak sztywnego
+  kalendarza — EGZEKWOWANIE następuje przez decyzję administracyjną
+  DOPIERO gdy gmina stwierdzi trwałe niewykonanie obowiązku (patrz
+  procedura niżej), nie automatycznie w dniu X
+
+⚠️ MYLONE Z TYM: DATA 15 CZERWCA 2026 — to NIE jest termin dla
+  WŁAŚCICIELI nieruchomości (mimo alarmistycznych nagłówków medialnych)
+  — to termin, do którego SAMORZĄDY muszą ZAKOŃCZYĆ I ROZLICZYĆ
+  inwestycje wodno-kanalizacyjne finansowane z KPO. NIE nakłada
+  bezpośrednio żadnego obowiązku na mieszkańca w tej konkretnej dacie.
+
+JEDYNY WYJĄTEK zwalniający z obowiązku przyłączenia mimo dostępnej
+  sieci: nieruchomość WYPOSAŻONA w PRZYDOMOWĄ OCZYSZCZALNIĘ ŚCIEKÓW
+  spełniającą wymagania techniczne — ALE TYLKO jeśli oczyszczalnia
+  została WYBUDOWANA I ODEBRANA PRZED pojawieniem się sieci
+  kanalizacyjnej (prawo chroni już istniejące, legalne inwestycje;
+  NIE MOŻNA budować oczyszczalni PO powstaniu sieci, żeby uniknąć
+  przyłącza — organ odmówi/wniesie sprzeciw wobec zgłoszenia)
+  ⚠️ ZWYKŁE SZAMBO (zbiornik bezodpływowy) NIE JEST oczyszczalnią —
+  ten wyjątek GO NIE DOTYCZY, niezależnie od tego, jak szczelne/nowe
+
+PROCEDURA EGZEKWOWANIA przy niewykonaniu obowiązku:
+  1) DECYZJA ADMINISTRACYJNA wójta/burmistrza/prezydenta nakazująca
+     wykonanie przyłącza w określonym w DECYZJI terminie (dopiero na
+     TYM etapie pojawia się konkretna data)
+  2) Odwołanie od decyzji — na zasadach ogólnych KPA
+  3) Przy dalszym niewykonaniu → WYKONANIE ZASTĘPCZE: gmina zleca
+     wykonanie przyłącza wybranej firmie NA KOSZT właściciela
+
+KONTROLE GMINNE (obowiązek od nowelizacji 2022 r.): gminy mają
+  obowiązek na bieżąco AKTUALIZOWAĆ EWIDENCJĘ zbiorników
+  bezodpływowych i przydomowych oczyszczalni na swoim terenie,
+  SPRAWOZDANIE ROCZNE do WIOŚ i dyrektora RZGW Wody Polskie — termin
+  **30 KWIETNIA** za rok poprzedni. Właściciel kontrolowany musi
+  okazać: UMOWĘ z przedsiębiorcą odbierającym nieczystości ORAZ
+  DOWODY REGULARNEGO WYWOZU (rachunki/faktury potwierdzające
+  częstotliwość zgodną z przepisami)
+
+SANKCJE:
+  → Gmina (za niedopełnienie obowiązku nadzoru/kontroli) — kara
+    administracyjna do **50 000 zł**
+  → Mieszkaniec (za brak umowy/dowodów wywozu, nieprawidłowości) —
+    kara do **5 000 zł** (grzywna na zasadach KW, wymierzana w
+    postępowaniu mandatowym lub przed sądem)
+  → ⚠️ ODRĘBNA, DUŻO SUROWSZA sankcja dla umyślnego, nielegalnego
+    POZBYWANIA SIĘ NIECZYSTOŚCI Z OMINIĘCIEM przepisów (np. nielegalne
+    zrzuty do gruntu/wód) — może być kwalifikowane jako PRZESTĘPSTWO
+    przeciwko środowisku z KK, NIE tylko wykroczenie — sprawdź
+    kwalifikację w konkretnym stanie faktycznym, to INNA kategoria niż
+    zwykłe niedopełnienie obowiązku administracyjnego
+
+BUDOWA SZAMBA (zbiornika bezodpływowego) — WYMOGI FORMALNE:
+  → Zbiorniki DO 10 m³ pojemności: BEZ pozwolenia na budowę, TYLKO
+    ZGŁOSZENIE do organu architektoniczno-budowlanego (starostwo/urząd
+    miasta na prawach powiatu) — art. 29 ust. 1 pkt 3 w zw. z art. 30
+    ust. 1 PrBud
+  → ODLEGŁOŚCI (rozporządzenie ws. warunków technicznych budynków):
+    min. **5 M** od okien/drzwi zewnętrznych budynków przeznaczonych
+    na pobyt ludzi; min. **2 M** od granicy działki sąsiedniej
+
+Potwierdzone w 7+ zgodnych źródłach z 2024-2026 (blog.ongeo.pl [15.06.
+2026 — sprostowanie medialnych alarmów], portalsamorzadowy.pl [x2],
+agrofakt.pl, farmer.pl, wodkangaz.com, szambo.online).
+```
+
+## 1b. AWARYJNE DOSTAWY WODY (BECZKOWÓZ) — dodano 2026-07-27, na
+wyraźne żądanie użytkownika (dotąd nieobecne)
+
+```
+PODSTAWA: art. 3 ust. 1 ustawy o zbiorowym zaopatrzeniu w wodę —
+  zbiorowe zaopatrzenie w wodę jest ZADANIEM WŁASNYM GMINY. Gmina NIE
+  MOŻE "umyć rąk" od problemu braku wody — musi zapewnić KAŻDEMU
+  mieszkańcowi REALNĄ możliwość dostępu do wody do spożycia (prawo do
+  wody = potrzeba bytowa, fundamentalne prawo człowieka, NIE MOŻE
+  być całkowicie odebrane)
+
+DWIE GŁÓWNE SYTUACJE WYMAGAJĄCE ZASTĘPCZEGO PUNKTU POBORU (beczkowóz
+LUB ogólnodostępny hydrant):
+
+1) ODCIĘCIE ZA ZALEGŁOŚCI PŁATNICZE:
+   → Przesłanka: brak zapłaty za DWA PEŁNE OKRESY OBRACHUNKOWE
+   → Warunek WSTĘPNY: wcześniejsze UPOMNIENIE — termin biegnie
+     DOPIERO od doręczenia upomnienia zalegającemu
+   → Termin PRZED faktycznym odcięciem: informacja o ZAMIARZE
+     odcięcia ORAZ o sposobie udostępnienia punktu zastępczego —
+     CO NAJMNIEJ **20 DNI** przed odcięciem
+   → OBOWIĄZEK przedsiębiorstwa: mimo odcięcia regularnego przyłącza,
+     MUSI udostępnić ZASTĘPCZY punkt poboru (najczęściej beczkowóz,
+     czasem ogólnodostępny hydrant) — zapewniający MINIMUM SANITARNE
+   → ⚠️ Odbiorcy w budynkach WIELOLOKALOWYCH: umowa jest zawierana ZE
+     WSPÓLNOTĄ/SPÓŁDZIELNIĄ/ZARZĄDCĄ, NIE z indywidualnym mieszkańcem
+     — mieszkaniec NIE JEST bezpośrednim "odbiorcą usług" w rozumieniu
+     ustawy, co ma znaczenie przy analizie kto może być odcięty
+
+2) SYTUACJA KRYZYSOWA (awaria sieci, skażenie, klęska żywiołowa, akt
+   terrorystyczny, zagrożenie bezpieczeństwa kraju):
+   → Gminy/przedsiębiorstwa wodociągowe powinny dysponować PLANAMI
+     REAGOWANIA KRYZYSOWEGO z określonym minimalnym i niezbędnym
+     zapotrzebowaniem na wodę
+   → ⚠️ REALNY PROBLEM WDROŻENIOWY (potwierdzony raportem NIK):
+     kontrole wykazały, że przedsiębiorstwa wodociągowe, prezydenci
+     miast I wojewodowie CZĘSTO NIE DYSPONUJĄ aktualnymi informacjami
+     o całkowitym zapotrzebowaniu na wodę w razie zdarzenia
+     kryzysowego — SYSTEMOWA LUKA w praktyce, nie tylko w teorii
+     przepisów, WARTA odnotowania przy doradzaniu jednostkom
+     samorządu/przedsiębiorstwom wodociągowym o obowiązkach
+     planistycznych
+   → Podstawa formalna: rozporządzenie ws. zapewnienia funkcjonowania
+     publicznych urządzeń zaopatrzenia w wodę w warunkach specjalnych
+     (M.P. — dokładny numer i pozycja do zweryfikowania na ISAP przed
+     cytowaniem)
+
+Potwierdzone w 5+ zgodnych źródłach (lexlege.pl — dosłowny tekst
+ustawy, infor.pl, witrynawiejska.org.pl [12.05.2026], raport NIK
+[nik.gov.pl]).
+```
+
 ## 2. Zakres spraw
 - pozwolenie wodnoprawne
 - zgłoszenie wodnoprawne

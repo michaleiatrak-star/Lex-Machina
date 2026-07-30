@@ -68,9 +68,22 @@ Uczenie się i ewolucja → art. 13
 ```
 Klasyfikacja incydentów: [WYMAGA WERYFIKACJI RTS — kryteria klasyfikacji]
 Raportowanie:
-  Wstępne zgłoszenie:  4 godziny od sklasyfikowania jako "poważny"
-  Raport pośredni:     24 godziny
-  Raport końcowy:      1 miesiąc
+  Wstępne zgłoszenie:  4 godziny od sklasyfikowania jako "poważny",
+                       ALE NIE PÓŹNIEJ niż 24 godziny od momentu, gdy
+                       podmiot finansowy DOWIEDZIAŁ SIĘ o incydencie
+                       (dwa nakładające się limity — który upłynie
+                       pierwszy)
+  Raport pośredni:     ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) —
+                       poprzednia wersja błędnie podawała "24 godziny"
+                       (to pomylenie z limitem zgłoszenia wstępnego).
+                       Poprawnie: 72 GODZINY od złożenia zgłoszenia
+                       wstępnego — potwierdzone w 6+ zgodnych źródłach
+                       (pentestica.pl, arcus.pl, eitt.pl, rkrodo.pl,
+                       legalgeek.pl)
+  Raport końcowy:      1 miesiąc (od rozwiązania incydentu / od
+                       złożenia raportu pośredniego — źródła się
+                       nieznacznie różnią co do punktu odniesienia,
+                       sprawdź dokładnie w RTS przed terminem)
 Organ: KNF (Komisja Nadzoru Finansowego)
 Powiadamianie klientów: jeśli incydent dotyczy interesów finansowych
 ```

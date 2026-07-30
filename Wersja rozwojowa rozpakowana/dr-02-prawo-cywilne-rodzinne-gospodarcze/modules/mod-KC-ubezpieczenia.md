@@ -231,7 +231,119 @@ Wynik pracy modułu:
 4. Zbierz wszystkie dowody szkody PRZED akceptacją ugody z ubezpieczycielem.
 5. Pozew: wnieść przed upływem 3-letniego terminu przedawnienia (art. 819 KC), liczył od ostatniej decyzji lub zakończenia postępowania likwidacyjnego.
 
-### Ryzyka
+## UBEZPIECZENIE NA ŻYCIE — PEŁNA ANALIZA (dodano 2026-07-27, na żądanie
+użytkownika, zweryfikowane: rankomat.pl, sn.pl [orzeczenia bezpośrednio],
+standardyprawa.pl, dobrapolisanazycie.pl, eventum.com.pl — 6+ źródeł)
+
+### Podstawa prawna i konstrukcja
+```
+Art. 829 KC — przedmiot: życie lub dożycie oznaczonego wieku
+Art. 831 KC — świadczenie NIE wchodzi do masy spadkowej, jeśli
+  wskazano UPOSAŻONEGO — wypłata NASTĘPUJE BEZPOŚREDNIO do uposażonego,
+  z pominięciem procedury spadkowej (ważne: wierzyciele spadkodawcy NIE
+  mają dostępu do tych środków, w przeciwieństwie do zwykłego spadku)
+Art. 833 KC — SAMOBÓJSTWO ubezpieczonego: zakład ubezpieczeń zwolniony
+  z odpowiedzialności, JEŚLI nastąpiło w ciągu 2 LAT od zawarcia umowy
+  (karencja ustawowa) — po tym okresie zakład MUSI wypłacić świadczenie
+```
+
+### Uposażony — mechanizm
+```
+Uposażony: osoba wskazana przez ubezpieczającego, otrzymuje świadczenie
+  Z POMINIĘCIEM dziedziczenia — może być dowolna osoba, NIE musi być
+  spadkobiercą ani członkiem rodziny
+Brak wskazania uposażonego / uposażony zmarł przed ubezpieczonym →
+  świadczenie dla UPOSAŻONEGO ZASTĘPCZEGO (jeśli wskazany w umowie) →
+  w braku obu → wchodzi do MASY SPADKOWEJ na zasadach ogólnych
+Możliwość WIELU polis → uposażeni mogą otrzymać PODWÓJNE (lub więcej)
+  świadczenie, jeśli ubezpieczony miał kilka niezależnych polis (np.
+  grupowa w pracy + indywidualna) — każda wypłacana OSOBNO
+```
+
+### Karencja na samobójstwo — niuanse i SPORNE orzecznictwo
+```
+⚠️ Zdarzenie z art. 833 KC określane jako "śmierć samobójcza" — sądy
+KONSEKWENTNIE stoją po stronie uposażonych: zakład NIE MOŻE
+przekwalifikować przyczyny zgonu na "chorobę" (np. depresję) tylko po
+to, by ominąć zasadę z art. 833 KC i zastosować inne wyłączenie z OWU
+(wyrok SA Białystok, I ACa 696/18) — przyczyną śmierci jest WYŁĄCZNIE
+samobójstwo, nie choroba je poprzedzająca.
+
+⚠️ SPORNE, EWOLUUJĄCE ORZECZNICTWO SN co do LICZENIA 2-LETNIEGO
+TERMINU przy ZMIANIE ubezpieczyciela z zachowaniem ciągłości ochrony
+(np. przejście z grupowego ubezpieczenia pracowniczego na indywidualne
+u innego ubezpieczyciela):
+  - Wyrok SN z 3.11.2022, II CSKP 82/22: termin liczy się OD NOWA od
+    zawarcia NOWEJ umowy (stanowisko mniej korzystne dla uposażonych)
+  - Orzeczenie SN z 12.01.2023 (sprawa cytowana w standardyprawa.pl)
+    NIE PODZIELA tego stanowiska — uznaje, że przy ZACHOWANEJ
+    CIĄGŁOŚCI ochrony ubezpieczeniowej termin biegnie OD PIERWSZEJ
+    umowy, nie od każdej kolejnej — inaczej ubezpieczyciele mogliby
+    "resetować" karencję w nieskończoność przez samą zmianę polisy
+  ⚠️ TO NIE JEST JEDNOLITA LINIA ORZECZNICZA — sprawdź NAJNOWSZE
+  orzecznictwo SN przed poradą w konkretnej sprawie, zwłaszcza jeśli
+  klient zmieniał ubezpieczyciela z zachowaniem ciągłości ochrony.
+```
+
+---
+
+## UBEZPIECZENIE NIERUCHOMOŚCI/MIENIA — PEŁNA ANALIZA (dodano 2026-07-27,
+na żądanie użytkownika, zweryfikowane: 300gospodarka.pl, money.pl/
+vademecum, ctu.pl, arbitersa.pl, certumbroker.pl, administrator24.info,
+eventum.com.pl — 7+ źródeł)
+
+### Podstawa prawna
+```
+Art. 824 §1 KC — suma ubezpieczenia stanowi GÓRNĄ GRANICĘ
+  odpowiedzialności zakładu ubezpieczeń (o ile nie umówiono inaczej)
+Art. 824¹ §1 KC — odszkodowanie NIE MOŻE być wyższe niż FAKTYCZNIE
+  poniesiona szkoda (zasada odszkodowania, nie wzbogacenia)
+```
+
+### Niedoubezpieczenie i "zasada proporcji" — ⚠️ ZAGADNIENIE SPORNE
+```
+Niedoubezpieczenie: suma ubezpieczenia WPISANA W POLISIE jest NIŻSZA
+  niż rzeczywista wartość mienia/koszt jego odtworzenia — SKALA
+  PROBLEMU: wg Polskiej Izby Ubezpieczeń dotyczy ok. 1/3 polis, co
+  druga nieruchomość w ogóle NIE JEST ubezpieczona (dane 2025)
+
+"ZASADA PROPORCJI": mechanizm stosowany przez ubezpieczycieli — jeśli
+  suma ubezpieczenia < wartość mienia, wypłacane odszkodowanie jest
+  PROPORCJONALNIE zmniejszane wg stosunku (suma ubezpieczenia / wartość
+  rzeczywista). Przykład: dom wart 1 mln zł, ubezpieczony na 500 tys. zł
+  → wypłata tylko 50% wyliczonej szkody, NIEZALEŻNIE od jej rozmiaru.
+
+⚠️ **SPÓR PRAWNY O LEGALNOŚĆ SAMEJ ZASADY:** zasada proporcji NIE
+WYNIKA WPROST z Kodeksu cywilnego ani żadnej ustawy — jest to
+WYŁĄCZNIE postanowienie OWU konkretnego ubezpieczyciela. Część
+komentatorów (money.pl/Vademecum Ubezpieczonego) oraz część
+orzecznictwa argumentuje, że stosowanie tej zasady MOŻE NARUSZAĆ
+art. 824 §1 KC — obniżenie wypłaty PONIŻEJ umówionej sumy ubezpieczenia
+w wyniku "zasady proporcji" oznaczałoby, że odszkodowanie NIGDY nie
+mogłoby osiągnąć poziomu sumy ubezpieczenia będącej podstawą kalkulacji
+składki, co jest argumentem PRZECIWKO automatycznemu stosowaniu tej
+zasady bez dodatkowej analizy. ⚠️ TO NIE JEST ROZSTRZYGNIĘTE
+JEDNOZNACZNIE — zależy od KONKRETNEGO zapisu OWU i okoliczności sprawy,
+NIE zakładaj automatycznie, że "zasada proporcji" jest bezwzględnie
+skuteczna wobec klienta — warto zbadać zapis OWU i ewentualnie
+podnieść zarzut niezgodności z art. 824 §1 KC / abuzywności klauzuli
+(art. 385¹ KC, patrz tabela ryzyk wyżej).
+
+STRATEGIA PRAKTYCZNA dla klienta z niedoubezpieczeniem:
+  1. Sprawdź dokładny zapis OWU — czy w ogóle przewiduje zasadę
+     proporcji (nie każda polisa ją stosuje)
+  2. Przy szkodzie CZĘŚCIOWEJ (np. zalanie) niższa suma może i tak
+     WYSTARCZYĆ na pokrycie kosztów naprawy — zasada proporcji ma
+     największe znaczenie przy szkodzie CAŁKOWITEJ
+  3. Rozważ podniesienie zarzutu niezgodności z art. 824 §1 KC, jeśli
+     wypłata drastycznie odbiega od rzeczywistej szkody
+  4. Zalecenie prewencyjne dla klientów: REGULARNA aktualizacja sumy
+     ubezpieczenia do aktualnej wartości rynkowej (koszt podniesienia
+     sumy jest niewspółmiernie niski względem ryzyka — przykład z
+     źródła: podniesienie z 600 tys. do 1 mln zł kosztuje ok. 100 zł/rok)
+```
+
+
 
 | Ryzyko | Opis | Działanie zaradcze |
 |---|---|---|

@@ -29,7 +29,18 @@ Windykacja polubowna, postępowanie sądowe o zapłatę (nakazowe, upominawcze, 
 
 ```
 □ Jaki etap: windykacja polubowna / nakaz zapłaty / wyrok / egzekucja?
-□ Wartość roszczenia → właściwość sądu (SR ≤ 100 000 zł / SO powyżej — weryfikuj art. 17 KPC)
+□ Wartość roszczenia → właściwość sądu (SR ≤ 100 000 zł / SO powyżej —
+  ✅ POTWIERDZONE 2026-07-27, FAZA 3E/ZASADA 14, PO KOREKCIE WŁASNEGO
+  BŁĘDU: próg podniesiono z 75 000 na 100 000 zł ustawą z 9.03.2023 r.
+  o zmianie KPC (art. 17 pkt 4), w życie 1.07.2023 r. — próg 75 000 zł
+  jest NIEAKTUALNY od tej daty. Pierwsza próba weryfikacji w tej sesji
+  omyłkowo oparła się na źródłach cytujących stan SPRZED reformy —
+  skorygowano po głębszym sprawdzeniu chronologii (potwierdzone w 5+
+  źródłach z 2023 r.: kancelaria-szip.pl, traple.pl, followlegal.pl,
+  prawobiznesu.com, LinkedIn/M.Soszka — wszystkie zgodne co do daty i
+  kwoty). WYJĄTKI od tego progu (do SR mimo wysokiej wartości):
+  alimenty, naruszenie posiadania, rozdzielność majątkowa małżonków,
+  uzgodnienie treści KW, EPU)
 □ Czy istnieje tytuł wykonawczy (wyrok / nakaz z klauzulą)?
 □ Czy dłużnik ma majątek: rachunek bankowy / nieruchomość / wynagrodzenie?
 □ Czy roszczenie jest przedawnione?
@@ -116,7 +127,16 @@ Tytuł wykonawczy = tytuł egzekucyjny + klauzula wykonalności (art. 776 KPC)
 
 Wniosek o klauzulę (art. 781 KPC):
   → Sąd I instancji, w którym sprawa się toczyła
-  → Opłata: 50 zł (art. 71 ust. 1 KSCU — weryfikuj aktualną kwotę)
+  → Opłata: ⚠️ UZUPEŁNIONE 2026-07-27 (FAZA 3E/ZASADA 14) — poprzednia
+    wersja mylnie sugerowała ryczałt 50 zł dla WSZYSTKICH wniosków.
+    W RZECZYWISTOŚCI (art. 71 KSCU, potwierdzone w 6+ źródłach):
+      • Klauzula na ZWYKŁY WYROK SĄDU / ugodę sądową / nakaz zapłaty
+        (najczęstszy przypadek) → WOLNE OD OPŁATY w sprawach cywilnych
+        (wyjątek: sprawy GOSPODARCZE — tam 50 zł nawet dla wyroku)
+      • Klauzula dla INNEGO tytułu niż wyrok/ugoda/nakaz, przeciwko
+        małżonkowi dłużnika, lub na rzecz/przeciwko innej osobie niż
+        wskazana w tytule (np. następca prawny) → 50 zł
+      • Odpis tytułu egzekucyjnego (jeśli potrzebny) → 6 zł/strona
   → Zażalenie na postanowienie o klauzuli: 7 dni od doręczenia (art. 795 KPC)
 
 Klauzula na małżonka dłużnika (art. 787 KPC):

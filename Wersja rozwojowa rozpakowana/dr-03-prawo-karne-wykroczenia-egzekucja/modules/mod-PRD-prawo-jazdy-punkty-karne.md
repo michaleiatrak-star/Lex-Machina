@@ -132,6 +132,30 @@ NOWY OKRES PRÓBNY od 03.03.2026 (pj od 17 lat — Dz.U. 2025 poz. 1676):
     (ukończone 25 lat, ≥5 lat pj, brak zakazu, trzeźwość)
   → Każde poważne naruszenie → możliwość wydłużenia okresu próbnego lub cofnięcia
 
+⚠️ DODANE 2026-07-27 (FAZA 3E/ZASADA 14, NA ŻĄDANIE UŻYTKOWNIKA) —
+OGÓLNY SYSTEM OKRESU PRÓBNEGO od 3 WRZEŚNIA 2026 (Dz.U. 2025 poz.
+1872, ustawa z 4.12.2025) — TERMIN BARDZO BLISKI (ok. 5 tygodni od
+dnia audytu), DOTYCZY WSZYSTKICH nowych kierowców kat. B po raz
+pierwszy, NIE TYLKO 17-latków opisanych wyżej (który to system z
+03.03.2026 dotyczy WYŁĄCZNIE wcześniejszego dostępu do prawa jazdy
+od 17 lat — te dwa systemy WSPÓŁISTNIEJĄ, nie zastępują się nawzajem):
+  → Czas trwania: STANDARDOWO 2 lata; dla osób, które uzyskały
+    uprawnienia od 17. roku życia — do 3 lat, ale NIE DŁUŻEJ niż do
+    ukończenia 20. roku życia
+  → Limit 12 PUNKTÓW KARNYCH w okresie próbnym → OBOWIĄZKOWY kurs
+    dokształcający (1 GODZINA, cena SZTYWNA 300 zł) w terminie 12
+    MIESIĘCY od dnia przekroczenia limitu
+  → Poważniejsze naruszenia w okresie próbnym → STAROSTA MOŻE
+    WYDŁUŻYĆ okres próbny o kolejne 2 lata; jeśli kierowca NADAL nie
+    przestrzega przepisów → STAROSTA MOŻE COFNĄĆ uprawnienia w całości
+  → Osoby, które uzyskają prawo jazdy NAJPÓŹNIEJ 2 WRZEŚNIA 2026 r. —
+    NIE zostaną objęte tym systemem (przepis działa na przyszłość)
+  → Dodatkowo od 3.09.2026: podmiot wykonujący przewóz drogowy może
+    zatrudnić kierowcę 18+ z kwalifikacją wstępną do przewozu osób
+    (kat. D/D+E na liniach regularnych do 50 km, D1/D1+E)
+  Potwierdzone w 6+ zgodnych źródłach (gov.pl/mswia [Rząd 1],
+  otomoto.pl, autocentrum.pl, pwkancelaria.pl, informacje.wp.pl)
+
 Weryfikuj aktualne limity: web_search "limit punktów karnych 2026 art 98a ukp"
 ```
 

@@ -39,9 +39,20 @@ Ochrona sygnalisty zgłaszającego naruszenia: dobór kanału zgłoszenia (wewn�
 ## 2. INTAKE
 
 ```
-□ Jaki rodzaj naruszenia: prawo pracy / korupcja / BHP / prawo podatkowe / ochrona środowiska /
-  zamówienia publiczne / ochrona konsumentów / inne?
-□ Czy naruszenie mieści się w zakresie dyrektywy/ustawy (katalog art. 3)?
+□ Jaki rodzaj naruszenia: korupcja / prawo podatkowe / ochrona środowiska /
+  zamówienia publiczne / ochrona konsumentów / usługi finansowe / AML / inne?
+  ⚠️ POPRAWKA KRYTYCZNA 2026-07-27 (FAZA 3E/ZASADA 14, ta sama poprawka
+  co w dr-15/mod-ustawa-sygnalisci.md): PRAWO PRACY, WŁĄCZNIE Z BHP,
+  ZOSTAŁO WPROST USUNIĘTE Z ZAMKNIĘTEGO KATALOGU na etapie senackim,
+  mimo że pierwotny projekt MRPiPS je zawierał (potwierdzone: inforlex.pl,
+  forbes.pl, sygnalista24.info). W TYM MODULE (perspektywa pracownicza)
+  to ZNACZY: pracownik zgłaszający WYŁĄCZNIE naruszenie prawa pracy/BHP
+  (bez elementu z innej dziedziny katalogu, np. korupcji) NIE korzysta
+  z trybu/ochrony TEJ ustawy — ma inną, wcześniejszą podstawę ochrony
+  przed odwetem (nowelizacja KP z 21.11.2008), oraz zwykłą skargę
+  pracowniczą do PIP (NIE tryb "sygnalisty")
+□ Czy naruszenie mieści się w zakresie dyrektywy/ustawy (katalog art. 3 —
+  BEZ prawa pracy/BHP, patrz wyżej)?
 □ Który kanał zgłoszenia wybrać: wewnętrzny (pracodawca) / zewnętrzny (organ) / jawny?
 □ Czy nastąpiły już działania odwetowe (zwolnienie, pominięcie awansu, szykana)?
 □ Jaki status prawny sygnalisty: pracownik / zleceniobiorca / samozatrudniony / b. pracownik?
@@ -62,12 +73,17 @@ WEWNĘTRZNY (do pracodawcy):
     o podjętych działaniach (weryfikuj w ustawie — ISAP)
   → Sygnalista NIE ma obowiązku korzystania z kanału wewnętrznego
 
-ZEWNĘTRZNY (do organów publicznych):
-  → RPO (bip.brpo.gov.pl) — organ centralny
-  → PIP (pip.gov.pl) — naruszenia prawa pracy i BHP
-  → UOKiK — ochrona konsumentów / nieuczciwa konkurencja
-  → KNF — sektor finansowy
-  → inne organy branżowe — weryfikuj właściwość
+ZEWNĘTRZNY (do organów publicznych, ZALEŻNIE OD DZIEDZINY naruszenia):
+  → RPO (bip.brpo.gov.pl) — organ DOMYŚLNY dla dziedzin bez własnego
+    organu (konstytucyjne prawa/wolności) + koordynacja/przekierowanie
+  → ⚠️ PIP — NIE dla prawa pracy/BHP jako takiego w TRYBIE SYGNALISTY
+    (patrz poprawka wyżej) — właściwa tylko dla ODWETU związanego z
+    zatrudnieniem (mobbing/degradacja za zgłoszenie INNEJ dziedziny)
+  → UOKiK — ochrona konsumentów / nieuczciwa konkurencja (TYLKO interes
+    zbiorowy/publiczny, nie spory indywidualne)
+  → KNF — sektor finansowy, w tym AML
+  → inne organy branżowe (UODO, GIOŚ i in.) — weryfikuj właściwość wg
+    dziedziny z katalogu art. 3
 
 KANAŁ JAWNY (ujawnienie publiczne):
   → Dopuszczalne gdy: brak działania organów po zgłoszeniu wewnętrznym/zewnętrznym
@@ -134,6 +150,8 @@ OCHRONA MAJĄTKOWA SYGNALISTY (przy działaniach odwetowych):
   zmieniające art. 42 KP vs próba zamaskowania kary porządkowej poza
   zamkniętym katalogiem art. 108 KP) — stosuj oba łącznie
 - `pisma-procesowe-v3` — pozew o odszkodowanie za odwet, zawiadomienie do RPO
+- `dr-04/mod-klasyfikacja-naruszen-bhp-prawa-pracy.md` — GDZIE ZGŁOSIĆ
+  naruszenie BHP/prawa pracy, skoro NIE w trybie sygnalisty (dodano 2026-07-27)
 - `dr-15` → `mod-ustawa-sygnalisci.md` — perspektywa compliance pracodawcy / CMS / ISO 37301
 
 **Źródła:**

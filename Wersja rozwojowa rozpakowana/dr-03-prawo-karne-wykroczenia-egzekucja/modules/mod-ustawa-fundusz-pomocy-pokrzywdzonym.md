@@ -15,7 +15,12 @@
 Ofiara może otrzymać kompensatę od Skarbu Państwa gdy:
 1. Poniosła uszczerbek na zdrowiu lub śmierć w wyniku przestępstwa popełnionego umyślnie z użyciem przemocy
 2. Sprawca jest nieznany, niewypłacalny lub sąd umorzył postępowanie
-3. Wniosek złożono do sądu rejonowego w ciągu 3 lat od przestępstwa
+3. Wniosek złożono w TERMINIE PODWÓJNYM (⚠️ POPRAWKA 2026-07-27,
+   FAZA 3E/ZASADA 14 — poprzednia wersja upraszczała do "3 lata od
+   przestępstwa"): 3 LATA od dnia UJAWNIENIA SIĘ SKUTKÓW przestępstwa,
+   NIE PÓŹNIEJ jednak niż w terminie 5 LAT od dnia jego POPEŁNIENIA —
+   pod rygorem wygaśnięcia uprawnienia. Potwierdzone w 3+ zgodnych
+   źródłach (spes.org.pl, gov.pl/po-suwalki, arch.ms.gov.pl)
 
 **Wysokość:** do 25 000 zł (uszczerbek) lub do 60 000 zł (śmierć osoby bliskiej).
 
@@ -28,7 +33,7 @@ Fundusz celowy MF/MS finansuje:
 ## Zasady absolutne
 ```
 Kompensata: Subsydiarna — po wyczerpaniu innych źródeł odszkodowania
-Termin: 3 lata od daty przestępstwa (prekluzja!)
+Termin: PODWÓJNY — 3 lata od ujawnienia się skutków, max 5 lat od czynu (prekluzja!)
 Wniosek: Sąd rejonowy miejsca zamieszkania wnioskodawcy
 ```
 ## Weryfikacja online

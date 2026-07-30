@@ -166,6 +166,10 @@ poszczególnych przepisów — sprawdź art. przejściowe w ISAP przy konkretnej
   metody i standardy zarządzania kontrolami PIP.
 □ Wymiana danych PIP ↔ ZUS ↔ KAS — utworzenie międzyinstytucjonalnego zespołu oceny ryzyka
   i elektronicznego kanału wymiany danych (kamień milowy KPO A72G).
+  📌 To mechanizm ADMINISTRACYJNY. ODRĘBNY od PRAWNEGO obowiązku
+  zawiadomienia prokuratora/Policji, gdy inspektor PIP natrafi na
+  ślady przestępstwa POSPOLITEGO w toku kontroli (art. 304 §2 KPK) —
+  zob. `shared/ZAWIADOMIENIA-KRZYZOWE.md` (dodano 2026-07-27).
 □ Przepis przejściowy: 12-miesięczna "abolicja" — ochrona przed karą (NIE przed zaległościami
   finansowymi/składkowymi) dla podmiotów, które dobrowolnie skorygują nieprawidłowości
   w okresie przejściowym — weryfikuj dokładny zakres i terminy w tekście ustawy.

@@ -1,6 +1,6 @@
 ---
 name: dr-08-samorzad-terytorialny-prawo-lokalne
-version: 3.4
+version: 3.5
 description: |
   DR-08: Samorząd Terytorialny i Prawo Lokalne
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.

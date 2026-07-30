@@ -32,7 +32,18 @@ POMNIEJSZENIA podstawy: fundusze WŁASNE, aktywa w SKARBOWYCH papierach
   wartościowych (dla banków/SKOK), obligacje/kredyty od BFG (od zmiany
   z 7.05.2022), wartość aktywów PPK (dla zakładów ubezpieczeń)
 
-STAWKA: 0,0366% podstawy opodatkowania MIESIĘCZNIE (≈0,44% rocznie)
+STAWKA: ⚠️ ZAKTUALIZOWANE 2026-07-27 (FAZA 3E/ZASADA 14) — STAWKA
+  ZRÓŻNICOWANA po nowelizacji (art. 7 i art. 12a ustawy), NIE
+  jednolite 0,0366% dla wszystkich jak poprzednio podawano:
+    • BANKI krajowe, oddziały banków zagranicznych/instytucji
+      kredytowych, SKOK — OBNIŻONA do **0,0293%** miesięcznie (≈0,35%
+      rocznie); w 2027 r. przejściowo **0,0329%** (art. 12a ustawy)
+    • Zakłady ubezpieczeń/reasekuracji, instytucje pożyczkowe —
+      STAWKA BEZ ZMIAN: 0,0366% miesięcznie (≈0,44% rocznie)
+  Potwierdzone w źródle z 12.2025 (arenaadvisory.com) — sprawdź, czy
+  do dnia użycia nie nastąpiła KOLEJNA zmiana (temat aktywny
+  legislacyjnie, obniżka dla banków to część szerszej reformy
+  opodatkowania sektora finansowego)
 
 ZWOLNIENIA: banki PAŃSTWOWE, podatnicy objęci PROGRAMEM/PLANEM
   postępowania naprawczego, podatnicy wobec których KNF wydała
@@ -112,7 +123,13 @@ PODMIOT ZOBOWIĄZANY: zwykle podmiot SPRZEDAJĄCY napoje objęte opłatą
   do PIERWSZEGO punktu sprzedaży DETALICZNEJ (producent/importer/
   podmiot dokonujący wewnątrzwspólnotowego nabycia)
 ⚠️ Dokładne stawki kwotowe i próg ilości cukru NIE zweryfikowane w
-pełni w tej sesji — punkt startowy.
+pełni w tej sesji — punkt startowy. ⚠️ DODANE 2026-07-27: znaleziono
+(w module `mod-ustawa-akcyzowa-i-clo-UCC.md`) SPORNĄ informację o
+planowanej podwyżce stawek (0,50→0,70 zł/l podstawowa; 0,10→1,00 zł/l
+kofeina/tauryna) na 1.01.2026, ORAZ sprzeczną informację o WECIE
+Prezydenta wobec tej podwyżki — NIEROZSTRZYGNIĘTE, czy weto dotyczyło
+całości czy tylko części zmian. Wymaga PILNEJ, dedykowanej weryfikacji
+przed użyciem w konkretnej sprawie.
 ```
 
 ---

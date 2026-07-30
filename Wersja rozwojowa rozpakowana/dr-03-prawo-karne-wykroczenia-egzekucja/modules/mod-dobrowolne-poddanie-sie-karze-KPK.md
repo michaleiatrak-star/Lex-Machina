@@ -83,9 +83,14 @@ w zależności od ETAPU postępowania:
 
 ```
 □ NIEDOPUSZCZALNY w sprawach o ZBRODNIE
-□ NIEDOPUSZCZALNY przy przestępstwach o SZCZEGÓLNYM charakterze (np.
-  ZAGROŻONYCH karą POWYŻEJ 5 lat pozbawienia wolności — ⚠️ zweryfikuj
-  dokładny próg na ISAP)
+□ NIEDOPUSZCZALNY przy przestępstwach ZAGROŻONYCH KARĄ PRZEKRACZAJĄCĄ
+  15 LAT pozbawienia wolności — ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA
+  14): było błędnie "powyżej 5 lat". Art. 387 §1 KPK wprost: "przestępstwo
+  zagrożone karą NIEPRZEKRACZAJĄCĄ 15 LAT pozbawienia wolności" —
+  potwierdzone dosłownym cytatem w 7+ zgodnych źródłach (slupinska.eu,
+  plazaglab.pl, agatakosikowska.pl, pmtw.pl, agnieszkaswiatlon.pl). Np.
+  zabójstwo z art. 148 §1 KK (zagrożenie do 30 lat/dożywocie) jest
+  WYŁĄCZONE z tego trybu — próg 15 lat, nie 5
 □ NIEDOSTĘPNY, GDY istnieją WĄTPLIWOŚCI co do winy oskarżonego LUB
   gdy prawa POKRZYWDZONEGO zostały naruszone w sposób WYMAGAJĄCY
   pełnego procesu

@@ -66,9 +66,11 @@ posiadanie.
 
 **Pozycja dominująca** — NIE wymaga monopolu sensu stricto. **Domniemanie
 pozycji dominującej:** przedsiębiorca ma pozycję dominującą, jeżeli jego
-udział w rynku właściwym przekracza **40%** (⚠️ dokładny próg procentowy
-niepotwierdzony w pełni w tej sesji — zweryfikuj na ISAP, orientacyjnie
-wskazywany w literaturze). Samo POSIADANIE pozycji dominującej NIE jest
+udział w rynku właściwym przekracza **40%** (art. 4 pkt 10 ustawy o
+ochronie konkurencji i konsumentów — ✅ POTWIERDZONE 2026-07-27,
+FAZA 3E/ZASADA 14, dosłownym cytatem w 8 niezależnych źródłach: lexlege.pl,
+standardyprawa.pl, WIPO Lex, Wikipedia, rp.pl i inne — poprzednie
+zastrzeżenie niepewności usunięte). Samo POSIADANIE pozycji dominującej NIE jest
 naruszeniem prawa — nielegalne jest jej NADUŻYWANIE w postaci działań
 EKSPLOATACYJNYCH (np. narzucanie nadmiernie wygórowanych cen) lub
 WYKLUCZENIOWYCH (np. praktyki mające wyeliminować konkurentów z rynku).

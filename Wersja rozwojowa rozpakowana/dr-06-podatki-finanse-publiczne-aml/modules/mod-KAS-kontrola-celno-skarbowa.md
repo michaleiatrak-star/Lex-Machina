@@ -178,6 +178,7 @@ PO WYNIKU KONTROLI:
 | KKS (czynny żal) | `mod-OP-ordynacja-podatkowa` → sekcja KKS |
 | Pismo: odwołanie od decyzji UCS | `pisma-procesowe-v3` |
 | Orzecznictwo NSA | `orzeczenia-sadowe-v2` |
+| Obowiązek zawiadomienia prokuratora o przestępstwie pospolitym znalezionym w toku kontroli (art. 304 §2 KPK) | `shared/ZAWIADOMIENIA-KRZYZOWE.md` (dodano 2026-07-27) |
 
 ---
 

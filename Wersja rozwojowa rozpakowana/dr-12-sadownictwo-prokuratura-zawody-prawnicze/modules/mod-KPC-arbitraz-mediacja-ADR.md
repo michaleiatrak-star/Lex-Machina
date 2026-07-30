@@ -195,7 +195,17 @@ Przed końcową odpowiedzią sprawdź:
 □ Czy sprawdzono zdatność ugodową/arbitrażową sporu?
 □ Czy zidentyfikowano właściwy sąd polubowny i jego regulamin?
 □ Czy przy arbitrażu zagranicznym sprawdzono Konwencję nowojorską?
-□ Czy wskazano terminy: na uchylenie wyroku (3 miesiące — weryfikuj), na uznanie?
+□ Czy wskazano terminy: na uchylenie wyroku sądu polubownego — ⚠️
+  POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14): TERAZ **2 MIESIĄCE** (nie 3
+  jak wcześniej) od doręczenia wyroku (art. 1208 §1 KPC, t.j.
+  Dz.U.2024.0.1568 — potwierdzone dosłownie w arslege.pl i lexlege.pl,
+  oba cytujące ten sam aktualny t.j.). ⚠️ STARSZE źródła (money.pl
+  z 2013, e-prawnik.pl) wciąż pokazują nieaktualne "3 miesiące" —
+  termin został SKRÓCONY nowelizacją, sprawdź dokładną datę zmiany
+  przed cytowaniem. Dodatkowo: BEZWZGLĘDNY termin maksymalny 5 LAT od
+  doręczenia wyroku dla podstaw odkrytych później (przestępstwo,
+  podrobiony dokument, wcześniejszy prawomocny wyrok — art. 1208 §2)
+  — na uznanie?
 □ Czy uwzględniono skutki dla biegu przedawnienia?
 □ Czy sprawdzono skutki podatkowe, ubezpieczeniowe i kosztowe ugody?
 □ Jeśli sprawa dotyczy STATUSU mediatora — czy rozróżniono mediatora

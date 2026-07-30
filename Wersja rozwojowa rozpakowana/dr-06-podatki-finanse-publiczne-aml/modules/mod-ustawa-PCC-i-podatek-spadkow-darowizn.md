@@ -87,12 +87,31 @@ Przy darowiźnie środków pieniężnych:
   → Wymóg udokumentowania otrzymania na konto (przelew lub przekaz pocztowy)
 ```
 
-### Kwoty wolne — ZAWSZE weryfikuj przed podaniem!
+### Kwoty wolne — ✅ ZWERYFIKOWANE 2026-07-27 (FAZA 3E/ZASADA 14)
 
 ```
-⚠️ Kwoty wolne zmieniane są ustawowo — ZAWSZE weryfikuj aktualne:
-web_search: "podatek od spadków darowizn kwoty wolne grupy podatkowe 2025 2026"
-web_search: "SD kwota wolna Dz.U. 2024 poz. 1837 nowelizacja 2025 poz. 1064"
+Obowiązujące od 1.07.2023 r. (rozporządzenie MF z 28.06.2023, Dz.U.
+2023 poz. 1226), NIEZMIENIONE do dnia weryfikacji (potwierdzone w 8+
+zgodnych źródłach 2026 r.: rankomat.pl, ifirma.pl, infor.pl,
+poradnikprzedsiebiorcy.pl, adwokatkaczorowska.pl, kancelaria-praga.pl,
+jplegal.pl — łączna wartość nabyć od JEDNEJ OSOBY z ostatnich 5 lat):
+
+  GRUPA I:   36 120 zł
+  GRUPA II:  27 090 zł
+  GRUPA III:  5 733 zł
+
+Progi progresji stawek (wspólne dla wszystkich grup, licząc od
+nadwyżki ponad kwotę wolną): 11 833 zł i 23 665 zł
+Stawki: I grupa 3-7% | II grupa 7-12% | III grupa 12-20%
+
+⚠️ Nowelizacja z 21.11.2025 r. (Dz.U. 2025 poz. 1854, w życie
+7.01.2026 r.) — NIE zmieniła kwot ani stawek, tylko doprecyzowała
+moment powstania obowiązku podatkowego przy dziedziczeniu i
+ograniczyła ryzyko formalnej utraty zwolnień.
+
+⚠️ MIMO POWYŻSZEGO — te kwoty bywały zmieniane rozporządzeniem MF w
+przeszłości (poprzednio: 10 434 zł dla grupy I do 2023 r.) — WERYFIKUJ
+ponownie, jeśli używasz tego po dłuższym czasie od daty weryfikacji.
 ```
 
 ### Terminy SD

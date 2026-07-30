@@ -44,10 +44,10 @@ to kluczowe rozróżnienie dla linii obrony pracownika.
 odpowiada w granicach RZECZYWISTEJ STRATY poniesionej przez pracodawcę
 — NIE odpowiada za utracone korzyści (lucrum cessans).
 
-**Limit kwotowy (praktyka/doktryna — ⚠️ dokładny przepis limitujący do
-3-miesięcznego wynagrodzenia NIE potwierdzony bezpośrednim cytatem w tej
-sesji, powszechnie przywoływany w literaturze jako art. 119 lub przepis
-towarzyszący — zweryfikuj dokładnie na ISAP):** przy szkodzie
+**Limit kwotowy (art. 119 KP — ✅ POTWIERDZONE 2026-07-27, FAZA 3E/
+ZASADA 14, dosłownym cytatem w 7+ zgodnych źródłach: PIP, inforlex.pl,
+pckp.pl, adwokat-wroclaw.biz.pl — poprzednia niepewność w tej sesji
+ROZSTRZYGNIĘTA):** przy szkodzie
 NIEUMYŚLNEJ odpowiedzialność pracownika jest ograniczona do wysokości
 rzeczywistej straty, NIE WIĘCEJ niż trzykrotność miesięcznego
 wynagrodzenia przysługującego pracownikowi w dniu wyrządzenia szkody.

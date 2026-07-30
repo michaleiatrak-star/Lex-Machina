@@ -19,9 +19,18 @@ bez zgody, opiekun prawny, rodzaje swiadczen.
 ```
 Dobrowolne:      Na wniosek pacjenta z podpisana zgoda (art. 22)
 Bez zgody:       Bezposrednie niebezpieczenstwo dla siebie lub innych (art. 23)
-                 Lekarz przyjmujacy + orzeczenie sadu rejonowego w 48h
+                 ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) — poprzednia
+                 wersja mylnie łączyła to w jeden "termin sądu 48h".
+                 W RZECZYWISTOŚCI to 4 ODRĘBNE terminy (potwierdzone w
+                 6+ źródłach: lexlege.pl, arslege.pl, centrumdobrejterapii.pl):
+                   1) 48h — ORDYNATOR (nie sąd) zatwierdza przyjęcie
+                   2) 72h — kierownik szpitala ZAWIADAMIA sąd opiekuńczy
+                   3) 48h (OSOBNY termin) — sędzia wizytujący WYSŁUCHUJE
+                      osobę w szpitalu, licząc od otrzymania zawiadomienia
+                   4) 14 dni — pełna ROZPRAWA sądowa, licząc od wpływu
+                      wniosku/zawiadomienia (art. 45)
 Tryb nagly:      Komendant policji moze doprowadzic do SOR (art. 46a)
-Obserwacja:      Do 10 dni bez zgody (art. 24)
+Obserwacja:      Do 10 dni bez zgody (art. 24) — ✅ POTWIERDZONE, poprawne
 ```
 
 ## Prawa pacjenta psychiatrycznego

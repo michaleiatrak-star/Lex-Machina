@@ -78,11 +78,22 @@ TERMIN NA ODWOŁANIE OD DECYZJI: 14 dni (art. 223 §1 Op)
 ⚠️ STAWKI USTALA RADA GMINY w granicach stawek maksymalnych MF
    Obwieszczenie MF o stawkach maksymalnych — co roku!
 
-Stawki maksymalne na 2025 r. (orientacyjne — weryfikuj obwieszczenie MF):
-  Grunty związane z dz. gosp.:    1,43 zł/m² (weryfikuj!)
-  Budynki mieszkalne:              1,19 zł/m² (weryfikuj!)
-  Budynki związane z dz. gosp.:   33,10 zł/m² (weryfikuj!)
-  Budowle:                         2% wartości
+Stawki maksymalne na 2026 r. — ✅ ZAKTUALIZOWANE 2026-07-27 (FAZA 3E/
+ZASADA 14), potwierdzone jednogłośnie w 9+ zgodnych źródłach (infor.pl,
+rankomat.pl, tpa-group.pl, dobrykalkulator.pl i inne), wzrost o 4,5%
+względem 2025 r. (Obwieszczenie Ministra Finansów, wskaźnik cen GUS z
+komunikatu Prezesa GUS z 15.07.2025, M.P. z 17.07.2025 poz. 652):
+  Grunty związane z dz. gosp.:    1,45 zł/m² (2025: 1,38 zł/m²)
+  Grunty pozostałe:                0,77 zł/m² (2025: 0,73 zł/m²)
+  Budynki mieszkalne:              1,25 zł/m² (2025: 1,19 zł/m²)
+  Budynki związane z dz. gosp.:   35,53 zł/m² (2025: 34,00 zł/m²)
+  Budynki pozostałe:               12,00 zł/m² (2025: 11,48 zł/m²)
+  Budowle:                         2% wartości (bez zmian)
+⚠️ To stawki MAKSYMALNE — rzeczywista stawka w konkretnej gminie może
+być NIŻSZA (uchwała rady gminy), sprawdź zawsze lokalną uchwałę.
+Wzrasta CO ROKU o wskaźnik inflacji GUS — sprawdź ponownie po
+1.01.2027 (nowe obwieszczenie MF, zwykle publikowane latem/jesienią
+roku poprzedniego).
 
 ⚠️ ZAWSZE weryfikuj stawki dla konkretnej gminy i roku:
 web_search: "stawki maksymalne podatek nieruchomości 2025 2026 MF obwieszczenie"

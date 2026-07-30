@@ -48,12 +48,27 @@ START: Czy sprawca miał w chwili czynu ukończone 15 lat (a nie ukończone
 │
 └─ TAK (15-17 lat) → sprawdź KATALOG ZAMKNIĘTY czynów z art. 10 §2 KK:
    │
+   ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) — poprzednia wersja
+   katalogu była NIEAKTUALNA/NIEPEŁNA. Potwierdzone dosłownym cytatem
+   aktualnego brzmienia (lexlege.pl [21.07.2026], arslege.pl,
+   prawnik.cc) — katalog obejmuje:
+   │
    ├─ Zamach na życie Prezydenta RP (art. 134)
    ├─ Zabójstwo (art. 148 §1, §2 lub §3)
    ├─ Ciężki uszczerbek na zdrowiu (art. 156 §1 lub §3)
-   ├─ Sprowadzenie katastrofy (art. 163 §1 lub §3)
-   ├─ Porwanie statku/samolotu (art. 166)
-   ├─ Zgwałcenie ze szczególnym okrucieństwem/kwalifikowane (art. 197 §3/§4)
+   ├─ Sprowadzenie zdarzenia niebezpiecznego — pożar/eksplozja (art. 163 §1 lub §3)
+   ├─ Porwanie/przejęcie kontroli nad statkiem wodnym/powietrznym/publicznym
+   │  środkiem transportu lądowego (art. 166)
+   ├─ ⚠️ DODANE: Sprowadzenie katastrofy komunikacyjnej (art. 173 §1 lub §3)
+   │  — POMINIĘTE w poprzedniej wersji, to ODRĘBNA pozycja od art. 163
+   ├─ Zgwałcenie — ⚠️ ROZSZERZONE (poprzednia wersja miała TYLKO §3/§4,
+   │  kwalifikowane): OD NOWELIZACJI z 1.10.2023 r. katalog obejmuje
+   │  TAKŻE §1 (typ PODSTAWOWY zgwałcenia), §1a (wykorzystanie
+   │  bezradności/niepełnosprawności), §3, §4 ORAZ §5 (zgwałcenie ze
+   │  skutkiem śmiertelnym) — czyli PRAWIE CAŁY art. 197, nie tylko
+   │  warianty kwalifikowane
+   ├─ ⚠️ DODANE: Czynna napaść na funkcjonariusza publicznego (art. 223
+   │  §2) — CAŁKOWICIE POMINIĘTE w poprzedniej wersji
    ├─ Wzięcie zakładnika (art. 252 §1 lub §2)
    ├─ Rozbój kwalifikowany (art. 280)
    │
@@ -67,6 +82,29 @@ START: Czy sprawca miał w chwili czynu ukończone 15 lat (a nie ukończone
       → Nawet wtedy: KARA NIE MOŻE PRZEKROCZYĆ 2/3 górnej granicy
         ustawowego zagrożenia za dany czyn (art. 10 §3 KK) — obligatoryjne
         złagodzenie górnej granicy, niezależnie od wagi czynu z katalogu
+
+⚠️ **DODANE 2026-07-27 — CAŁKOWICIE NOWY PRÓG WIEKOWY, POMINIĘTY W
+POPRZEDNIEJ WERSJI (art. 10 §2a KK, wprowadzony nowelizacją 1.10.2023 r.):**
+
+```
+Nieletni w wieku 14-15 LAT (ukończone 14, NIEUKOŃCZONE 15) — NIŻSZY
+próg niż ogólna zasada z §2 (15 lat) — dotyczy WYŁĄCZNIE:
+  art. 148 §2 lub §3 KK — zabójstwo w formie KWALIFIKOWANEJ (ze
+  szczególnym okrucieństwem, w związku z innym przestępstwem, w
+  wyniku motywacji zasługującej na szczególne potępienie, z użyciem
+  broni palnej/materiałów wybuchowych, itp. — §2; LUB zabójstwo
+  wielu osób/funkcjonariusza/terrorystyczne — §3)
+  NIE obejmuje zwykłego zabójstwa z §1 — TYLKO formy kwalifikowane
+
+Przesłanki (SUROWSZE niż przy zwykłym §2 — podwójna koniunkcja):
+  (a) okoliczności sprawy + stopień rozwoju + właściwości i warunki
+      osobiste PRZEMAWIAJĄ za odpowiedzialnością na zasadach KK, ORAZ
+  (b) zachodzi UZASADNIONE PRZYPUSZCZENIE, że środki wychowawcze/
+      poprawcze NIE SĄ W STANIE zapewnić resocjalizacji
+
+Skutek: sąd MOŻE zastosować NADZWYCZAJNE ZŁAGODZENIE KARY (nie
+  obligatoryjne, ale wprost przewidziane w §4 dla obu progów — §2 i §2a)
+```
 ```
 
 ⚠️ **Częsty błąd:** katalog art. 10 §2 jest ZAMKNIĘTY — nie stosuje się

@@ -223,6 +223,60 @@ Procedura: brak terminu na wniosek — złóż jak najszybciej po przybyciu
 Odwołanie od odmowy: do SZUSC / WSA — weryfikuj aktualny tryb
 ```
 
+### 6A. DOKUMENT TYMCZASOWY W TRAKCIE PROCEDURY: TZTC (dodano 2026-07-27,
+na żądanie użytkownika, zweryfikowane: gov.pl/UDSC, strazgraniczna.pl,
+lexlege.pl — ustawa z 13.06.2003 o udzielaniu cudzoziemcom ochrony,
+Rozdział 3)
+
+```
+CZYM JEST: Tymczasowe Zaświadczenie Tożsamości Cudzoziemca (TZTC) —
+  dokument potwierdzający tożsamość osoby w procedurze o udzielenie
+  ochrony międzynarodowej. Uprawnia do LEGALNEGO POBYTU (nie do pracy
+  bez dodatkowego zaświadczenia — patrz niżej) do zakończenia
+  postępowania.
+
+WYDANIE: przez Komendanta Placówki Straży Granicznej W DNIU złożenia
+  wniosku o ochronę międzynarodową. Obejmuje wnioskodawcę + małoletnie
+  dzieci objęte tym samym wnioskiem (także dziecko urodzone w trakcie
+  procedury, na wniosek rodzica).
+
+WAŻNOŚĆ: 3 miesiące (dokument papierowy) — po upływie NALEŻY
+  NIEZWŁOCZNIE złożyć wniosek o KOLEJNE zaświadczenie (nie "wymianę"
+  automatyczną — wymaga aktywnego wniosku cudzoziemca).
+
+DEPOZYT DOKUMENTU PODRÓŻY: art. 31 ust. 1 ustawy — składając wniosek,
+  cudzoziemiec ma OBOWIĄZEK przekazać swój paszport/dokument podróży
+  do depozytu Szefowi Urzędu (za pośrednictwem SG) — dlatego potrzebny
+  jest odrębny dokument tożsamości (TZTC) na czas procedury.
+
+WNIOSEK O KOLEJNE TZTC: składany do Departamentu Postępowań
+  Uchodźczych UdSC (ul. Taborowa 33, Warszawa) — pocztą lub osobiście
+  w Biurze Podawczym. Wymaga: formularza, 1 aktualnej fotografii,
+  KOPII poprzedniego TZTC (oryginał zatrzymuje cudzoziemiec, o ile go
+  ma — jeśli utracony, zawiadomienie w terminie 3 DNI). ⚠️ PRAKTYCZNE
+  RYZYKO: czas oczekiwania na kolejne TZTC może realnie sięgać do 2
+  miesięcy — w tym okresie cudzoziemiec MOŻE POZOSTAĆ BEZ WAŻNEGO
+  DOKUMENTU tożsamości, co utrudnia odbiór korespondencji poleconej
+  (w tym pism wpływających na bieg postępowania!) i świadczeń.
+  Rekomendacja: składać wniosek o wymianę Z WYPRZEDZENIEM, przed
+  upływem ważności.
+
+ZWROT: cudzoziemiec zwraca TZTC organowi, który je wydał, gdy decyzja
+  w sprawie ochrony międzynarodowej stanie się OSTATECZNA.
+
+⚠️ PRAWO DO PRACY — MECHANIZM DWUELEMENTOWY (często mylony): samo TZTC
+  NIE uprawnia do pracy. Cudzoziemiec może pracować LEGALNIE dopiero
+  gdy ŁĄCZNIE posiada: (1) ważne TZTC, ORAZ (2) ODRĘBNE zaświadczenie
+  Szefa Urzędu potwierdzające, że sprawa NIE ZOSTAŁA ZAŁATWIONA W
+  TERMINIE 6 MIESIĘCY (art. 34 ust. 1 ustawy) z przyczyn NIEZAWINIONYCH
+  przez wnioskodawcę — wydawane NA WNIOSEK cudzoziemca, nie z urzędu.
+  Po uzyskaniu statusu uchodźcy/ochrony uzupełniającej — praca bez
+  zezwolenia w ogóle.
+```
+
+⚠️ Wszystkie terminy i procedury do potwierdzenia na isap.sejm.gov.pl
+przed użyciem w piśmie — ustawa o udzielaniu ochrony jest nowelizowana.
+
 ---
 
 ## 7. DOWODY

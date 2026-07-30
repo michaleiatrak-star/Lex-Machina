@@ -75,13 +75,16 @@ bez elementu publicznego w tym zakresie).
 ### 3. Progi unijne SEKTOROWE (WYŻSZE niż dla zamawiających klasycznych)
 
 ```
-⚠️ Zweryfikuj aktualne kwoty na dany rok (obwieszczenie Prezesa UZP) —
-w tej sesji znaleziono orientacyjne dane historyczne pokazujące rząd
-wielkości: ok. 430-443 tys. EUR dla dostaw/usług/konkursów (WYŻSZY niż
-próg klasyczny), ok. 5,4-5,5 mln EUR dla robót budowlanych (TEN SAM
-próg co dla zamówień klasycznych — roboty budowlane mają JEDEN próg
-niezależnie od rodzaju zamawiającego, patrz `mod-PZP-dzial-I-podstawy-
-wylaczenia-szacowanie.md` sekcja 2), ok. 1 mln EUR dla usług społecznych.
+✅ UZUPEŁNIONE 2026-07-27 (FAZA 3E/ZASADA 14) — precyzyjne progi na
+2026-2027 (obwieszczenie Prezesa UZP z 8.12.2025, potwierdzone
+bezpośrednio na gov.pl/uzp): 432 000 EUR dla dostaw/usług/konkursów
+sektorowych (1 861 920 zł) — WYŻSZY niż próg klasyczny; 5 404 000 EUR
+dla robót budowlanych (23 291 240 zł) — TEN SAM próg co dla zamówień
+klasycznych (roboty budowlane mają JEDEN próg niezależnie od rodzaju
+zamawiającego, patrz `mod-PZP-dzial-I-podstawy-wylaczenia-szacowanie.md`
+sekcja 2); 1 000 000 EUR dla usług społecznych (4 310 000 zł). ⚠️
+Progi zmieniają się co 2 lata (KE) — te obowiązują do końca 2027,
+sprawdź obwieszczenie Prezesa UZP przed użyciem po tej dacie.
 ```
 
 **Znaczenie praktyczne wyższego progu:** zamawiający sektorowi mają

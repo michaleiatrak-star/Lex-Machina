@@ -17,7 +17,16 @@ Art. 55 u.p.n.:  Przywóz, wywóz, wewnątrzwspólnotowe nabycie/dostawa — do 
 Art. 56 u.p.n.:  Wprowadzanie do obrotu (handel) — do 8 lat
 Art. 58 u.p.n.:  Udzielanie środka odurzającego innej osobie — do 3 lat
 Art. 59 u.p.n.:  Udzielanie nieletniemu lub w celu osiągnięcia korzyści — do 10 lat
-Art. 62 u.p.n.:  Posiadanie środków — do 3 lat (lub odpowiednio: do 10 lat — znaczna ilość)
+Art. 62 u.p.n.:  Posiadanie środków — do 3 lat (ust. 1); ⚠️ UZUPEŁNIONE
+                 2026-07-27: znaczna ilość (ust. 2) — OD ROKU do 10 lat
+                 (nie "do 10 lat" bez dolnej granicy jak wcześniej
+                 zapisano) — potwierdzone dosłownym cytatem w 5+
+                 źródłach (lexlege.pl, infor.pl). "Znaczna ilość" NIE
+                 ma ustawowej definicji gramowej — orzecznictwo SN
+                 (III KK 257/06): ilość wystarczająca do jednorazowego
+                 odurzenia kilkudziesięciu osób; praktyczny, POMOCNICZY
+                 próg orzeczniczy ok. 40-50g (marihuana/amfetamina),
+                 BEZ mocy wiążącej — zawsze ocena indywidualna
 Art. 62a u.p.n.: Posiadanie nieznacznej ilości na własny użytek — UMORZENIE lub mandat
 ```
 

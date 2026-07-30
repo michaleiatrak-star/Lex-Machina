@@ -1,6 +1,6 @@
 ---
 name: shared
-version: 3.8
+version: 3.13
 type: library
 entrypoint: SKILL.md
 compatibility: "wszystkie skille prawne systemu"
@@ -227,6 +227,8 @@ Nie wczytuj wszystkich naraz — tylko te potrzebne dla danego kroku.
 | `PREKLUZJA-DOWODOWA.md` | Kontrola spóźnionych twierdzeń i dowodów |
 | `TERM-CALC.md` | Metodologia kontroli terminów; nie zastępuje kalendarza sądowego |
 | `ZAZALENIE-ADRESAT-GATE.md` | Bramka: adresat zażalenia/odwołania/skargi (poziome vs dewolutywne, za pośrednictwem) — obowiązkowa przy każdym środku zaskarżenia (dodano 2026-07-25) |
+| `WLASCIWOSC-GATE.md` | Bramka siostrzana: właściwość rzeczowa/miejscowa/funkcjonalna sądu/organu przy WNOSZENIU sprawy (pozew/wniosek) — obowiązkowa przy każdym piśmie inicjującym postępowanie (dodano 2026-07-27, na pytanie użytkownika) |
+| `ZAWIADOMIENIA-KRZYZOWE.md` | Obowiązek instytucji (PIP, KAS, sąd) do zawiadamiania prokuratury/Policji o przestępstwie ujawnionym przy okazji własnego postępowania (art. 304 KPK) — kontrole krzyżowe między organami (dodano 2026-07-27, na pytanie użytkownika) |
 | `RISK-ASSESSMENT.md` | Matryca ryzyka formalnego, dowodowego, prawnego i kosztowego |
 | `ORZECZENIA-HIERARCHIA.md` | Hierarchia orzecznictwa, test aktualności i karta orzeczenia |
 | `DOWODY-METODOLOGIA.md` | Matryca dowodowa i test wiarygodności dowodu |

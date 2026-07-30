@@ -1,6 +1,6 @@
 ---
 name: dr-10-zdrowie-farmacja-zywnosc-rolnictwo
-version: 3.10
+version: 3.30
 description: |
   DR-10: Zdrowie, Farmacja, Żywność, Rolnictwo
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -42,9 +42,17 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Zdrowie, farmacja, żywność, rolnictwo — pojęcia dziedzinowe (świadczenie zdrowotne, podmiot leczniczy, produkt leczniczy) zdefiniowane wprost w aktach sektorowych (ustawa o działalności leczniczej, Prawo farmaceutyczne) i pokryte w modułach DR-10. Żaden plik shared/definicje/ nie obejmuje tej dziedziny.
-## Moduły (28 łącznie — ✓ 28 OK, ☐ 0 STUB)
+## Moduły (29 łącznie — ✓ 29 OK, ☐ 0 STUB)
 
 ```
+OŚWIATA:
+  [✓] NOWY  mod-prawa-ucznia
+              (dodany 2026-07-27, na żądanie użytkownika — katalog
+               praw ucznia [wolność sumienia/religii, prywatność,
+               godność], procedura skreślenia z listy uczniów [6
+               etapów, wyjątek dla obowiązku szkolnego], ocenianie
+               z religii/etyki)
+
 FARMACJA:
   [✓] OK    mod-PrFarm-prawo-farmaceutyczne
   [✓] OK    mod-rzadkie-choroby-genetyczne-plan-leki-sieroce

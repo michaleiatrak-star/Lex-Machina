@@ -1,6 +1,6 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: 3.7
+version: 3.14
 description: |
   DR-02: Prawo Cywilne, Rodzinne i Gospodarcze
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.

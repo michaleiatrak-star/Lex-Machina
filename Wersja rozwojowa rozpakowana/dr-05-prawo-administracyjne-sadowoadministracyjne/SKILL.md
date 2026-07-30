@@ -1,6 +1,6 @@
 ---
 name: dr-05-prawo-administracyjne-sadowoadministracyjne
-version: 3.5
+version: 3.10
 description: |
   DR-05: Prawo Administracyjne i Sądownictwo Administracyjne
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -54,9 +54,16 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W21 Informacja przetworzona (UDIP art. 3 — "szczególna istotność")
 - BAS-W29 Pełnomocnik z urzędu — prawo do sądu (art. 117 KPC)
 
-## Moduły (13 łącznie — ✓ 13 OK, ☐ 0 STUB)
+## Moduły (14 łącznie — ✓ 14 OK, ☐ 0 STUB)
 
 ```
+  [✓] NOWY  mod-ustawa-RPD
+              (dodany 2026-07-27, na żądanie użytkownika, analogiczny
+               do mod-ustawa-RPO — Rzecznik Praw Dziecka: kompetencje
+               interwencyjne art. 10/10a [termin 30 dni], procesowe
+               art. 7 [udział w TK, kasacja, wniosek do SN, na prawach
+               prokuratora w post. cywilnym/administracyjnym/
+               nieletnich], immunitet, rozgraniczenie od RPO/RPP)
   [✓] OK    mod-KPA-postepowanie-administracyjne
               (PRZENIESIONY 2026-07-19 z DR-04, gdzie był błędnie
                umiejscowiony — KPA/PPSA to najbardziej fundamentalne

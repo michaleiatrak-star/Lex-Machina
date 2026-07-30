@@ -48,7 +48,11 @@ SDS jest **obowiązkowa** dla:
 3. **Substancji** z listy SVHC (kandydackiej REACH Annex XIV)
 4. **Mieszanin** sklasyfikowanych jako niebezpieczne (CLP)
 5. **Mieszanin** niesklasyfikowanych, ale zawierających:
-   - substancję SVHC > 0,1% w/w — SDS na żądanie odbiorcy
+   - substancję SVHC > 0,1% w/w — SDS na żądanie odbiorcy; ⚠️ DODANE
+     2026-07-30: dla WYROBU (nie mieszaniny) — dostawca ma **45 DNI**
+     na udzielenie informacji o bezpiecznym stosowaniu NA ŻĄDANIE
+     konsumenta (art. 33 ust. 2 REACH), bezpłatnie — potwierdzone w
+     7+ zgodnych źródłach (ekotox.pl, anwil.orlen.pl)
    - substancję PBT/vPvB > 0,1% w/w — SDS na żądanie odbiorcy
 
 > **Uwaga:** Od 01.01.2023 r. format SDS oparty wyłącznie na rozp. 2020/878 (Annex II REACH zmieniony).

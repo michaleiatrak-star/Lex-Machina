@@ -137,6 +137,65 @@ TRZY RODZAJE OCHRONY W RAMACH ZADAŃ OCHRONNYCH (dotyczy OBU: park
   OOŚ — NIE duplikowanej tutaj)
 ```
 
+### 3.4 PARK KRAJOBRAZOWY — ZAKAZY (art. 17 ustawy) — dodano 2026-07-27,
+na wyraźne żądanie użytkownika (dotąd wspomniany tylko w jednej linii
+klasyfikacyjnej, BEZ treści merytorycznej — luka domknięta)
+
+```
+⚠️ KLUCZOWA CECHA SYSTEMOWA: zakazy z art. 17 ust. 1 SĄ FAKULTATYWNE
+  ("MOGĄ być wprowadzone") — to NIE jest jednolity, automatyczny
+  katalog dla WSZYSTKICH parków. SEJMIK WOJEWÓDZTWA w uchwale
+  tworzącej/zmieniającej dany park WYBIERA, KTÓRE z zakazów
+  katalogowych rzeczywiście obowiązują w TYM KONKRETNYM parku —
+  ZAWSZE sprawdź AKTUALNĄ uchwałę sejmiku dla konkretnego parku, NIE
+  zakładaj automatycznie pełnego katalogu
+
+KATALOG ZAKAZÓW MOŻLIWYCH DO WPROWADZENIA (wybór spośród, art. 17 ust. 1):
+  1) realizacji przedsięwzięć MOGĄCYCH ZNACZĄCO ODDZIAŁYWAĆ na
+     środowisko — z WYJĄTKIEM tych, dla których OOŚ wykazała BRAK
+     niekorzystnego wpływu na przyrodę/krajobraz parku
+  2) umyślnego zabijania dziko występujących zwierząt, niszczenia ich
+     nor/legowisk/miejsc rozrodu — z wyjątkiem amatorskiego połowu ryb
+     i racjonalnej gospodarki rolnej/leśnej/rybackiej/łowieckiej
+  3) likwidowania/niszczenia zadrzewień śródpolnych/przydrożnych/
+     nadwodnych — z wyjątkiem potrzeb przeciwpowodziowych/bezpieczeństwa
+  4) pozyskiwania do celów gospodarczych skał (w tym torfu),
+     skamieniałości, minerałów, bursztynu
+  5) wykonywania prac ziemnych TRWALE ZNIEKSZTAŁCAJĄCYCH rzeźbę terenu
+  6) DOKONYWANIA ZMIAN STOSUNKÓW WODNYCH — jeśli NIE służą ochronie
+     przyrody lub racjonalnej gospodarce rolnej/leśnej/wodnej/rybackiej
+  7) ⭐ BUDOWANIA NOWYCH OBIEKTÓW BUDOWLANYCH W PASIE **100 M** od linii
+     brzegów rzek/jezior/innych naturalnych zbiorników wodnych oraz od
+     zasięgu lustra wody w zbiornikach SZTUCZNYCH przy normalnym
+     poziomie piętrzenia — NAJWAŻNIEJSZY zakaz DLA INWESTORÓW
+     PRYWATNYCH, konkretny próg METRAŻOWY
+  8) [analogiczny próg odległościowy — szczegóły w pełnym tekście art. 17]
+  ...oraz dalsze pozycje katalogu (niszczenie obiektów historycznych/
+  kulturowych — TEN akurat jest zakazem BEZWZGLĘDNYM, nie fakultatywnym)
+
+WYJĄTKI OD ZAKAZÓW (art. 17 ust. 2, stosują się NIEZALEŻNIE od tego,
+  czy dany zakaz wprowadzono): realizacja zadań z planu ochrony/planu
+  zadań ochronnych; zadania na rzecz obronności/bezpieczeństwa
+  państwa; akcje ratownicze; inwestycje celu publicznego w rozumieniu
+  ustawy o planowaniu przestrzennym
+
+⚠️ WAŻNA ZASADA (potwierdzona orzecznictwem/doktryną): WOJEWODA/organ
+  wykonawczy NIE MOŻE wprowadzić SUROWSZYCH zakazów niż przewiduje
+  zamknięty katalog art. 17 ust. 1 — tylko sejmik województwa, w
+  granicach tego katalogu, kształtuje zakres ochrony
+
+USTANOWIENIE/LIKWIDACJA: uchwała SEJMIKU WOJEWÓDZTWA (nazwa, obszar,
+  granice, otulina jeśli wyznaczona, cele ochrony, WYBRANE zakazy z
+  katalogu). Likwidacja/zmniejszenie — WYŁĄCZNIE z powodu
+  BEZPOWROTNEJ utraty wartości przyrodniczych/historycznych/
+  kulturowych/krajobrazowych.
+
+Potwierdzone w 6+ zgodnych źródłach (lexlege.pl — dosłowny art. 17,
+arslege.pl, dlajurysty.pl, sip.lex.pl — w tym realny wyrok WSA VIII
+SA/Wa 883/25 dot. budowy budynku rekreacji indywidualnej w parku
+krajobrazowym pokrywającym się z Naturą 2000).
+```
+
 ---
 
 ## 4. FORMY PUNKTOWE/OBIEKTOWE O NAJŁAGODNIEJSZYM REŻIMIE

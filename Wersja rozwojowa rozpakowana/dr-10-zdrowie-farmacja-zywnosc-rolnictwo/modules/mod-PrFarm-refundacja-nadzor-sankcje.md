@@ -36,7 +36,14 @@ LISTA LEKÓW REFUNDOWANYCH:
 
 POZIOMY ODPŁATNOŚCI PACJENTA:
   → bezpłatny (0 zł) — seniorzy 75+, ciężarne, dzieci do 18. roku życia (weryfikuj warunki)
-  → ryczałtowy (3,20 zł / weryfikuj aktualną kwotę)
+  → ryczałtowy (✅ POTWIERDZONE 2026-07-30: 3,20 zł — STAŁA kwota
+    ustawowa, art. 6 ust. 2 pkt 2 ustawy o refundacji leków, NIE
+    zmienia się z waloryzacją minimalnego wynagrodzenia jak niektóre
+    inne opłaty farmaceutyczne — potwierdzone w 8+ zgodnych źródłach,
+    w tym lexlege.pl [21.05.2026] i NFZ Poznań. ⚠️ NIE MYLIĆ z
+    OSOBNYM ryczałtem za lek RECEPTUROWY, który JEST procentowy
+    (0,50% płacy minimalnej) i ROŚNIE co roku — od 1.01.2026 to 24,00
+    zł, inna kategoria niż zwykły ryczałt "R" na recepcie)
   → 50% limitu finansowania
   → 30% limitu finansowania
   → pełna odpłatność poza limitem

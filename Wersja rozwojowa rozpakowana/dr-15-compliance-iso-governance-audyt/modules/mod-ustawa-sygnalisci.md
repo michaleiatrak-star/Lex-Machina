@@ -85,6 +85,21 @@ Ustawa obejmuje naruszenia m.in. w zakresie:
 
 ## 6. Mapa proceduralna
 
+⚠️ **POPRAWKA KLUCZOWA 2026-07-27 (FAZA 3E/ZASADA 14, na pytanie
+użytkownika o wybór adresata zależny od okoliczności):** poniższe
+ścieżki BYŁY przedstawione jako ŚCIŚLE SEKWENCYJNE (wewnętrzne →
+dopiero potem zewnętrzne). To NIEPEŁNE. Prawidłowo: **sygnalista MOŻE
+wybrać KTÓRYKOLWIEK kanał jako PIERWSZY, w tym zgłoszenie zewnętrzne
+BEZ uprzedniego zgłoszenia wewnętrznego** — ustawa NIE WYMAGA
+wyczerpania kanału wewnętrznego przed zewnętrznym. Potwierdzone w 5+
+źródłach zgodnych (bip.brpo.gov.pl [oficjalny komunikat RPO], pz.legal,
+misp-modzelewski.pl, portalkadrowy.pl): "Sygnalista może również
+dokonać zgłoszenia zewnętrznego bez uprzedniego dokonania zgłoszenia
+wewnętrznego." Wybór kanału jako pierwszego zależy od OKOLICZNOŚCI
+(np. czy wewnętrzny kanał wydaje się bezpieczny/skuteczny, czy
+naruszenie dotyczy samego kierownictwa podmiotu), NIE jest to
+obowiązkowa hierarchia.
+
 ### Ścieżka sygnalisty — zgłoszenie wewnętrzne
 ```
 Wykrycie naruszenia →
@@ -93,14 +108,260 @@ Wykrycie naruszenia →
 → Potwierdzenie przyjęcia zgłoszenia przez podmiot (7 dni od wpływu) →
 → Weryfikacja i rozpatrzenie (max. 3 miesiące od potwierdzenia) →
 → Informacja zwrotna dla sygnalisty o podjętych działaniach →
-→ [jeśli brak reakcji lub zgłoszenie odrzucone] → zgłoszenie zewnętrzne do RPO
+→ [jeśli brak reakcji lub zgłoszenie odrzucone] → MOŻLIWOŚĆ (nie
+  konieczność) przejścia do zgłoszenia zewnętrznego do RPO
 ```
 
-### Ścieżka sygnalisty — zgłoszenie zewnętrzne do RPO
+### Ścieżka sygnalisty — zgłoszenie zewnętrzne (⚠️ DOSTĘPNA OD RAZU,
+NIE wymaga wcześniejszego zgłoszenia wewnętrznego — patrz poprawka wyżej)
+
+⚠️ **UZUPEŁNIENIE KLUCZOWE 2026-07-27 (na wyraźne żądanie użytkownika)
+— zgłoszenie zewnętrzne to NIE TYLKO RPO.** Poprzednia wersja modułu
+sugerowała RPO jako JEDYNY adresat zgłoszenia zewnętrznego — to
+NIEPEŁNE. Zgodnie z art. 34 ustawy o ochronie sygnalistów, sygnalista
+MOŻE zgłosić się BEZPOŚREDNIO do WŁAŚCIWEGO ORGANU SEKTOROWEGO
+(publicznego), zależnie od DZIEDZINY naruszenia — RPO jest adresatem
+DOMYŚLNYM/UNIWERSALNYM (dla dziedzin bez własnego organu, art. 3 ust.
+1 pkt 17), NIE jedynym możliwym. Potwierdzone: orka.sejm.gov.pl
+(tekst ustawy), knf.gov.pl (przykład wdrożenia), Wolters Kluwer.
+
+## PRACOWNIK POD PRESJĄ NIELEGALNYCH PROCEDUR FIRMY — INNY WYMIAR NIŻ SYGNALISTA
+(dodano 2026-07-27, na wyraźne żądanie użytkownika — dotyczy sytuacji
+gdy pracownik NIE tyle "zgłasza cudze naruszenie", co SAM jest
+zmuszany politykę firmy do UCZESTNICZENIA w nielegalnym działaniu, ze
+szczególnym uwzględnieniem kontekstu skarbowego/podatkowego, gdzie
+relewantny jest KAS, i pracowniczego, gdzie relewantny jest PIP)
+
+⚠️ **KLUCZOWE ROZRÓŻNIENIE:** status "sygnalisty" (ustawa z 2024 r.)
+chroni osobę, która ZGŁASZA naruszenie POPEŁNIONE PRZEZ INNYCH. To
+NIE JEST to samo zagadnienie, co OSOBISTA ODPOWIEDZIALNOŚĆ KARNA
+pracownika, który SAM WYKONUJE polecenie przełożonego prowadzące do
+naruszenia prawa — te dwa zagadnienia mogą wystąpić RAZEM (pracownik
+i odmawia wykonania, i zgłasza), ale są prawnie ODRĘBNE.
+
+### Odpowiedzialność osobista niezależna od wykonywania polecenia (art. 9 KKS)
+
 ```
-→ RPO przyjmuje zgłoszenie →
-→ Weryfikacja (może przekazać właściwemu organowi) →
-→ Informacja zwrotna dla sygnalisty
+Art. 9 § 1 KKS: odpowiada jak sprawca NIE TYLKO ten, kto sam wykonuje
+  czyn zabroniony, ale TAKŻE ten, kto KIERUJE wykonaniem czynu przez
+  inną osobę LUB, wykorzystując UZALEŻNIENIE innej osoby od siebie,
+  POLECA jej wykonanie takiego czynu — czyli PRZEŁOŻONY wydający
+  nielegalne polecenie SAM podlega odpowiedzialności, nie zwalnia się
+  z niej przez "zlecenie" wykonania podwładnemu.
+
+Art. 9 § 3 KKS: za przestępstwa/wykroczenia skarbowe odpowiada JAK
+  SPRAWCA również ten, kto na podstawie przepisu prawa, decyzji,
+  UMOWY (w tym umowy o pracę) LUB FAKTYCZNEGO WYKONYWANIA zajmuje się
+  sprawami gospodarczymi/finansowymi. W PRAKTYCE obejmuje to nie
+  tylko członków zarządu, ale też — zależnie od faktycznego zakresu
+  swobody decyzyjnej — głównego księgowego, szefa działu prawnego,
+  szefa HR, a nawet pracownika bez formalnego tytułu, jeśli faktycznie
+  wykonuje takie funkcje (orzecznictwo: SA Wrocław II AKa 104/13 —
+  "o zajmowaniu się sprawami gospodarczymi można mówić wobec osoby,
+  która ma pewną swobodę w podejmowaniu decyzji i ich realizacji").
+
+⚠️ WNIOSEK PRAKTYCZNY: pracownik NIE MOŻE skutecznie bronić się
+  argumentem "wykonywałem tylko polecenie przełożonego/politykę
+  firmy" — art. 9 § 3 KKS ustanawia ODPOWIEDZIALNOŚĆ OSOBISTĄ,
+  niezależną od tego, czy działanie było "firmową procedurą".
+  Jednocześnie osoba WYDAJĄCA takie polecenie RÓWNIEŻ odpowiada
+  (art. 9 § 1 KKS) — obie osoby mogą ponieść odpowiedzialność
+  RÓWNOLEGLE, nie zamiast siebie nawzajem.
+```
+
+### Podstawa do odmowy wykonania nielegalnego polecenia (art. 100 § 1 KP)
+
+```
+Pracownik jest obowiązany stosować się do poleceń przełożonych, które
+dotyczą pracy, JEŻELI nie są one sprzeczne z przepisami prawa —
+oznacza to a contrario, że polecenie SPRZECZNE Z PRAWEM (np. polecenie
+wystawienia fikcyjnej faktury, zaniżenia podstawy opodatkowania,
+naruszenia przepisów o czasie pracy w sposób noszący znamiona
+wykroczenia) NIE JEST objęte obowiązkiem podporządkowania — pracownik
+MOŻE (a przy realnym ryzyku odpowiedzialności osobistej — POWINIEN)
+odmówić wykonania, bez narażania się na zarzut niesubordynacji.
+```
+
+### KANAŁY DZIAŁANIA — POŁĄCZENIE Z JUŻ OMÓWIONYMI MECHANIZMAMI
+
+Taki pracownik ma do wyboru RÓWNOLEGLE (nie wykluczające się):
+
+1. **Odmowa wykonania** nielegalnego polecenia (art. 100 § 1 KP a
+   contrario) — z UDOKUMENTOWANIEM odmowy na piśmie/mailowo, dla
+   własnej ochrony dowodowej.
+2. **Zgłoszenie jako sygnalista** (ta sama ustawa, ten sam moduł) —
+   do kanału wewnętrznego LUB bezpośrednio zewnętrznego (KNF/UOKiK/
+   RPO/inny organ sektorowy zależnie od dziedziny naruszenia — patrz
+   TABELA wyżej). ⚠️ UWAGA: jeśli naruszenie dotyczy STRICTE
+   podatkowej/celno-skarbowej dziedziny (pkt 15 z tabeli — rynek
+   wewnętrzny UE / opodatkowanie osób prawnych) — zgłoszenie może iść
+   do **Szefa KAS jako "Sygnalista Szef KAS"** (potwierdzone:
+   gov.pl/web/kas/sygnalista-szef-kas — Szef KAS przyjmuje zgłoszenia
+   W ZAKRESIE SWOJEJ WŁAŚCIWOŚCI, inne przekazuje dalej — TA SAMA
+   logika przekierowania co przy RPO, patrz wyżej).
+3. **Skarga do PIP** — ⚠️ WAŻNE ZASTRZEŻENIE (odkryte 2026-07-27,
+   potwierdzone publiczną wypowiedzią Głównej Inspektor Pracy
+   Katarzyny Łażewskiej-Hrycko, prawo.pl): PIP ZOSTAŁA formalnie
+   wyznaczona jako "organ publiczny" w rozumieniu ustawy o
+   sygnalistach, ALE **żadna z 17 dziedzin objętych ustawą nie leży w
+   FAKTYCZNEJ kompetencji PIP** — sama Główna Inspektor Pracy
+   publicznie to skrytykowała jako legislacyjną niespójność. W
+   PRAKTYCE oznacza to: skarga do PIP jest właściwa DLA ASPEKTU
+   PRACOWNICZEGO problemu (np. działania odwetowe wobec pracownika za
+   odmowę/zgłoszenie — mobbing, degradacja, nierówne traktowanie —
+   potwierdzone realnymi danymi: 38 skarg od sygnalistów do PIP w
+   pierwszym roku, dot. WŁAŚNIE działań odwetowych, NIE samego
+   pierwotnego naruszenia), ALE NIE dla SAMEGO naruszenia
+   podatkowego/finansowego, które trzeba zgłosić do KAS/UOKiK/
+   właściwego organu sektorowego OSOBNO.
+4. **Czynny żal (art. 16 KKS)** — jeśli pracownik JUŻ wykonał
+   nielegalne polecenie (np. pod presją, przed uzyskaniem porady
+   prawnej) — możliwość UNIKNIĘCIA KARY przez zawiadomienie organu
+   ścigania/KAS o popełnieniu czynu zabronionego, zanim organ sam się
+   o tym dowie (zob. `dr-06/modules/mod-OP-ordynacja-podatkowa.md`
+   sekcja KKS/czynny żal, jeśli istnieje — WERYFIKUJ dokładne warunki
+   skuteczności czynnego żalu przed poradą).
+
+⚠️ Powyższe zweryfikowane 2026-07-27: lexlege.pl, standardyprawa.pl,
+altoadvisory.pl, businessjournal.pl, akademialtca.pl (art. 9 KKS, w
+tym orzecznictwo SA Wrocław), gov.pl/web/kas (Sygnalista Szef KAS),
+prawo.pl (krytyka Głównej Inspektor Pracy wobec roli PIP) — 8+ źródeł
+zgodnych.
+
+## TABELA PEŁNA: 17 DZIEDZIN Z ART. 3 UST. 1 USTAWY → WŁAŚCIWY ORGAN
+(rozbudowano 2026-07-27, na wyraźne żądanie użytkownika — katalog
+dziedzin jest ZAMKNIĘTY, potwierdzony w 6+ źródłach zgodnych: erecruiter.pl,
+adwokathuszno.pl, gov.pl/rodzina, monitor-zamowien.pl)
+
+⚠️ **KOREKTA KRYTYCZNA 2026-07-27b (na wyraźne żądanie użytkownika —
+BHP i prawo pracy):** **PRAWO PRACY, WŁĄCZNIE Z BHP, ZOSTAŁO WPROST
+USUNIĘTE Z ZAMKNIĘTEGO KATALOGU** na późnym etapie procesu
+legislacyjnego (poprawka senacka) — MIMO że pierwotny projekt
+Ministerstwa Rodziny, Pracy i Polityki Społecznej je zawierał.
+Potwierdzone w 4+ zgodnych źródłach (inforlex.pl, forbes.pl,
+sygnalista24.info — z cytatem krytyki ministry A. Dziemanowicz-Bąk
+wobec tej poprawki). PRAKTYCZNE KONSEKWENCJE:
+- Zgłoszenie naruszenia BHP/prawa pracy NIE korzysta z ochrony i
+  procedury USTAWY O SYGNALISTACH (brak dostępu do zewnętrznego
+  kanału RPO/organu sektorowego w TYM TRYBIE)
+- Pracodawca MOŻE (fakultatywnie, nie musi) objąć prawo pracy/BHP
+  własną procedurą zgłoszeń WEWNĘTRZNYCH — jeśli tego nie zrobił,
+  pracownik zgłaszający naruszenie BHP nie ma w ogóle formalnej
+  ścieżki "sygnalisty" w tym zakresie
+- OCHRONA PRZED ODWETEM za zgłoszenie naruszeń BHP/prawa pracy
+  ISTNIEJE NIEZALEŻNIE, ale na INNEJ podstawie — Kodeks pracy od
+  nowelizacji z 21.11.2008 r. (implementacja dyrektywy 89/391/EWG)
+  zakazuje pracodawcy działań odwetowych wobec pracownika
+  egzekwującego swoje prawa pracownicze, w tym BHP — to ODRĘBNY
+  mechanizm ochronny, NIE tożsamy ze statusem "sygnalisty" z ustawy
+  z 2024 r.
+- Zgłoszenie naruszeń BHP idzie WPROST do **PIP** (jej WŁAŚCIWA,
+  RZECZYWISTA kompetencja — w przeciwieństwie do roli "organu
+  publicznego" dla sygnalistów, gdzie PIP nie ma kompetencji
+  merytorycznej w ŻADNEJ z 17 dziedzin, patrz sekcja wyżej) —
+  poprzez zwykłą SKARGĘ PRACOWNICZĄ do PIP (art. 663¹ i nast. KP,
+  ustawa o PIP), NIE przez tryb sygnalisty. 📌 Pełna klasyfikacja
+  naruszeń BHP/prawa pracy WEDŁUG RODZAJU (8 typów, z właściwym
+  adresatem dla każdego — PIP/sąd pracy/Policja/ZUS/KAS) →
+  `dr-04/modules/mod-klasyfikacja-naruszen-bhp-prawa-pracy.md`
+  (dodano 2026-07-27)
+
+| # | Dziedzina (art. 3 ust. 1) | Organ właściwy (przykładowy, WERYFIKUJ każdorazowo) |
+|---|---|---|
+| 1 | Zamówienia publiczne | Prezes UZP / KIO (⚠️ NIEZWERYFIKOWANE wprost w tej sesji jako organ ds. sygnalistów) |
+| 2 | Usługi, produkty i rynki finansowe | **KNF** (✅ zweryfikowane wprost — knf.gov.pl) |
+| 3 | Przeciwdziałanie praniu pieniędzy i finansowaniu terroryzmu | KNF (podmioty rynku finansowego) / GIIF (ogólnie) |
+| 4 | Bezpieczeństwo produktów i ich zgodność z wymogami | UOKiK / właściwy organ nadzoru rynku |
+| 5 | Bezpieczeństwo transportu | Właściwy organ sektorowy (UTK — kolej; ULC — lotnictwo) |
+| 6 | Ochrona środowiska | GIOŚ |
+| 7 | Ochrona radiologiczna i bezpieczeństwo jądrowe | Prezes PAA |
+| 8 | Bezpieczeństwo żywności i pasz | GIS / IJHARS |
+| 9 | Zdrowie i dobrostan zwierząt | GIW |
+| 10 | Zdrowie publiczne | GIS / Minister Zdrowia |
+| 11 | Ochrona konsumentów | **UOKiK** — ⚠️ TYLKO interes zbiorowy/publiczny, NIE spory indywidualne (✅ zweryfikowane wprost) |
+| 12 | Ochrona prywatności i danych osobowych | **UODO** |
+| 13 | Bezpieczeństwo sieci i systemów teleinformatycznych | CSIRT właściwy / Minister Cyfryzacji (⚠️ NIEZWERYFIKOWANE wprost) |
+| 14 | Interesy finansowe Skarbu Państwa RP, JST oraz UE | ✅ NAJCZĘSTSZA dotąd kategoria zgłoszeń do RPO (patrz statystyki niżej) |
+| 15 | Rynek wewnętrzny UE (konkurencja, pomoc państwa, opodatkowanie osób prawnych) | UOKiK (pomoc państwa) / KAS (opodatkowanie) |
+| 16 | Korupcja | CBA / Policja / Prokuratura |
+| 17 | Konstytucyjne wolności i prawa człowieka i obywatela (RESIDUALNE) | **RPO** — WYŁĄCZNIE ta jedna dziedzina, i to TYLKO gdy żaden inny organ nie jest właściwy |
+
+⚠️ Pozycje ✅ zweryfikowane bezpośrednio w tej sesji. Pozostałe to
+prawdopodobne przypisania na podstawie ogólnej wiedzy o kompetencjach
+tych organów — PRZED użyciem sprawdź aktualną listę organów na
+bip.brpo.gov.pl.
+
+## ROLA RPO — SZCZEGÓŁOWO (na żądanie użytkownika, dane operacyjne)
+
+```
+RPO PEŁNI DWIE FUNKCJE, NIE JEDNĄ:
+  1) KOORDYNACYJNA/TRIAGE (dla WSZYSTKICH dziedzin) — przyjmuje
+     zgłoszenia niezależnie od dziedziny, weryfikuje, PRZEKAZUJE do
+     organu właściwego (art. 34 ustawy)
+  2) MERYTORYCZNA (WYŁĄCZNIE pkt 17) — rozpatruje SAMODZIELNIE, TYLKO
+     gdy żaden inny organ nie jest właściwy (art. 31 ust. 1 pkt 3)
+
+REALNE DANE OPERACYJNE (bip.brpo.gov.pl, raporty 2024-2025):
+  → Do końca marca 2025: 229 pism wpłynęło, TYLKO 79 zakwalifikowano
+    jako faktyczne "zgłoszenia zewnętrzne"
+  → Z tych 79: RPO samodzielnie rozpatrzył TYLKO 9 (pkt 17), RESZTĘ
+    przekazał innym organom — w PRAKTYCE RPO to głównie "punkt
+    wejścia", nie ostateczny adresat większości spraw
+  → NAJCZĘSTSZA dziedzina zgłoszeń: interesy finansowe SP/JST/UE
+    (pkt 14), NIE konstytucyjne prawa (pkt 17)
+  → 2025 r.: 175 pism anonimowych, 72 zakwalifikowane, 54 przekazane
+    dalej — RPO przyjmuje zgłoszenia anonimowe (ograniczony zakres)
+```
+
+## ART. 57 USTAWY — FAŁSZYWE ZGŁOSZENIE (połączenie z ZAWIADOMIENIA-KRZYZOWE)
+
+```
+Sankcja za ŚWIADOME zgłoszenie nieprawdziwych informacji: grzywna,
+ograniczenie wolności LUB pozbawienie wolności DO 2 LAT (art. 57)
+
+⚠️ RPO MA OBOWIĄZEK zawiadomić PROKURATURĘ, jeśli poweźmie wiedzę, że
+zgłoszenie było CELOWO oparte na nieprawdziwych informacjach — to
+KONKRETNY PRZYKŁAD mechanizmu `shared/ZAWIADOMIENIA-KRZYZOWE.md`
+(art. 304 §2 KPK) zastosowany wprost do RPO.
+```
+
+⚠️ Powyższe zweryfikowane 2026-07-27: bip.brpo.gov.pl (kilka raportów
+okresowych), knf.gov.pl, uokik.gov.pl, prawo.pl — 8+ źródeł zgodnych.
+
+```
+
+DZIEDZINY naruszenia — NIE wyczerpujący katalog, każdorazowo
+zweryfikuj właściwość na podstawie art. 3 ustawy):
+  → KNF — naruszenia w zakresie usług/produktów/rynków finansowych
+    ORAZ przeciwdziałania praniu pieniędzy i finansowaniu terroryzmu
+    w podmiotach rynku finansowego (potwierdzone: knf.gov.pl)
+  → UOKiK — naruszenia prawa konkurencji i ochrony konsumentów, ALE
+    ⚠️ TYLKO zbiorowy interes konsumentów/interes publiczny — Prezes
+    UOKiK NIE prowadzi indywidualnych sporów (np. czyny nieuczciwej
+    konkurencji między przedsiębiorcami, naruszenie dóbr osobistych)
+    — te wyłącznie na drogę sądową (potwierdzone: uokik.gov.pl/bip/
+    sygnalisci-zewnetrzni)
+  → RPO — organ DOMYŚLNY dla dziedzin BEZ własnego organu sektorowego
+    (katalog otwarty z art. 3 ust. 1 pkt 17) + ogólny punkt informacyjny
+
+MECHANIZM PRZEKIEROWANIA (art. 34 ustawy) — jeśli sygnalista trafi
+DO NIEWŁAŚCIWEGO organu:
+  → Organ, który otrzymał zgłoszenie, ma OBOWIĄZEK ustalić, czy
+    dziedzina należy do jego właściwości
+  → Jeśli TAK → rozpatruje samodzielnie, potwierdzenie przyjęcia w 7 dni
+  → Jeśli NIE → przekazuje NIEZWŁOCZNIE do organu właściwego, NIE
+    PÓŹNIEJ niż w 14 DNI od zgłoszenia (w uzasadnionych przypadkach —
+    do 30 dni)
+  → Sygnalista NIE MUSI sam wiedzieć, który organ jest właściwy —
+    błędny wybór NIE pozbawia go ochrony, uruchamia tylko mechanizm
+    przekierowania
+```
+
+```
+→ Organ (RPO lub sektorowy) przyjmuje zgłoszenie →
+→ Weryfikacja właściwości (czy dziedzina należy do jego zakresu) →
+→ [NIE] → przekazanie do właściwego organu (14 dni, wyjątkowo 30) →
+→ [TAK] → rozpatruje, informacja zwrotna dla sygnalisty
 ```
 
 ### Ścieżka ujawnienia publicznego (ostateczność)

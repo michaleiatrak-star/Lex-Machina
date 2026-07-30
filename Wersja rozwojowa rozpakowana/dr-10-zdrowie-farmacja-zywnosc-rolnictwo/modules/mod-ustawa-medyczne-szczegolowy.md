@@ -43,9 +43,15 @@ ZAKRES: Zdarzenia medyczne w szpitalach (hospitalizations) od 06.09.2023
   → Uszkodzenie ciała lub rozstrój zdrowia pacjenta
   → Śmierć pacjenta — roszczenia bliskich
 
-PROGI KWOTOWE (weryfikuj aktualnie w RPP — waloryzacja coroczna):
-  → Uszkodzenie ciała / rozstrój zdrowia: do 200 000 zł
-  → Śmierć: do 100 000 zł (na rzecz każdego uprawnionego)
+PROGI KWOTOWE — ✅ ZAKTUALIZOWANE 2026-07-30 (FAZA 3E/ZASADA 14):
+  poprzednie kwoty (200 000/100 000 zł) to BAZOWE wartości SPRZED
+  waloryzacji — AKTUALNE, obowiązujące od 06.09.2025 (potwierdzone
+  niezależnie w mod-ustawa-prawa-pacjenta-framework.md, transza
+  27z105 tej sesji, zgodność potwierdzona):
+  → Uszkodzenie ciała / rozstrój zdrowia: do **230 821 zł**
+  → Śmierć: do **115 411 zł** (na rzecz każdego uprawnionego)
+  ⚠️ Kolejna coroczna waloryzacja: 06.09.2026 — sprawdź nową kwotę,
+  jeśli data użycia przypada PO tym dniu
 
 PROCEDURA:
   Wniosek do Prezesa RPP → Komisja RPP (90 dni) → propozycja świadczenia

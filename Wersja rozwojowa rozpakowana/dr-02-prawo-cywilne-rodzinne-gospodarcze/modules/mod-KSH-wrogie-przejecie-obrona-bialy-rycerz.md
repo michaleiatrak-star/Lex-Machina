@@ -143,7 +143,20 @@ publicznej przy konkretnej transakcji, zwłaszcza co do:
 ```
 □ Progi obowiązkowego wezwania (przy przekroczeniu określonego % głosów)
 □ Squeeze-out (przymusowy wykup akcji mniejszościowych przez większościowego
-  akcjonariusza po przekroczeniu progu — 90% lub 95%, ⚠️ zweryfikuj)
+  akcjonariusza po przekroczeniu progu — ⚠️ POPRAWKA 2026-07-27
+  (FAZA 3E/ZASADA 14): OBA progi są prawdziwe, ale dla RÓŻNYCH
+  mechanizmów, nie alternatywa do wyboru:
+    • 95% głosów oddanych — KLASYCZNY squeeze-out (art. 418 KSH),
+      max 5 akcjonariuszy wykupujących, każdy z min. 5% kapitału,
+      wykup dotyczy akcjonariuszy z <5% kapitału każdy
+    • 90% kapitału zakładowego — squeeze-out W RAMACH GRUPY SPÓŁEK
+      (art. 21(11) KSH, mechanizm od reformy 2022 r.) — spółka
+      DOMINUJĄCA posiadająca bezpośrednio min. 90% może wykupić
+      wspólników/akcjonariuszy reprezentujących max 10% kapitału
+      spółki ZALEŻNEJ uczestniczącej w grupie; umowa/statut może
+      obniżyć ten próg do min. 75%
+    Potwierdzone w 5+ zgodnych źródłach (dgtl.law, asiw.pl,
+    conselion.pl, ggk-kancelaria.pl, rzeczoznawcy.net.pl))
 □ Sell-out (prawo akcjonariusza mniejszościowego żądania odkupu jego akcji)
 □ Rola KNF w nadzorze nad wezwaniami dot. spółek publicznych
 ```

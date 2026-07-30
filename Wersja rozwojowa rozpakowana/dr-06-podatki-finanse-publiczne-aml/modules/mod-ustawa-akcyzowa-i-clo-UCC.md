@@ -41,13 +41,14 @@ compatibility:
 
 | Kategoria | Stawka (orientacyjna — weryfikuj!) | Podstawa |
 |-----------|-----------------------------------|----------|
-| Paliwa silnikowe (benzyna 95) | 1 565,00 zł/1000 l | Zał. nr 2 u.p.a. |
-| Olej napędowy (diesel) | 1 196,00 zł/1000 l | Zał. nr 2 u.p.a. |
+| Paliwa silnikowe (benzyna 95) | 1 565,00 zł/1000 l (⚠️ SPRAWDŹ 2026-07-27: rok 2025-2026 miał WIELOKROTNE tymczasowe obniżki akcyzy paliwowej do minimum unijnego w ramach programu "Ceny Paliwa Niżej" (CPN), z kilkoma przedłużeniami — pakiet WYGASŁ 1.07.2026 wg jednego źródła, ale mógł zostać ponownie przedłużony/zmieniony. TO NAJBARDZIEJ ZMIENNA POZYCJA w tej tabeli — zawsze sprawdź aktualne obwieszczenie/rozporządzenie przed cytowaniem, nie polegaj na tej wartości) | Zał. nr 2 u.p.a. |
+| Olej napędowy (diesel) | 1 196,00 zł/1000 l (⚠️ TA SAMA zmienność co wyżej — sprawdź aktualnie) | Zał. nr 2 u.p.a. |
 | Gaz LPG (do napędu) | 670,00 zł/1000 kg | Zał. nr 2 u.p.a. |
-| Piwo | 10,00 zł/hl za każdy % Plato | art. 94 u.p.a. |
-| Wino (cihe) | 188,00 zł/hl | art. 95 u.p.a. |
-| Wyroby spirytusowe | 6 275,00 zł/hl alkoholu | art. 93 u.p.a. |
-| Tytoń (papierosy) | 228,10 zł/1000 szt. + 32,05% ceny | art. 99 u.p.a. |
+| Piwo | ✅ 2026: **11,47 zł**/hl za każdy stopień Plato (było błędnie 10,00 zł — nieaktualne, prawdopodobnie z 2022-2023 r.) — potwierdzone oficjalną "mapą akcyzową" (2022: 9,43 → 2023: 9,90 → 2024: 10,40 → 2025: 10,92 → 2026: 11,47 zł), zgodne w 6+ źródłach | art. 94 u.p.a. |
+| Wino (cichе) | ✅ 2026: **233,00 zł**/hl (było błędnie 188,00 zł — znacząco nieaktualne) — mapa akcyzowa: 2022: 191 → 2023: 201 → 2024: 211 → 2025: 222 → 2026: 233 zł | art. 95 u.p.a. |
+| Wyroby spirytusowe | ✅ 2026: **8 391,00 zł**/hl alkoholu 100% vol. (było błędnie 6 275,00 zł — znacząco nieaktualne, ok. 2 lata za stare) | art. 93 u.p.a. |
+| Tytoń (papierosy) | ✅ 2026: **476,10 zł**/1000 szt. + 32,05% ceny (było błędnie 228,10 zł — bardzo nieaktualne). ⚠️ UWAGA: sama stawka 2026 r. ZMIENIŁA SIĘ W TRAKCIE ROKU — od 1.01.2026 obowiązywało 414 zł/1000 szt., DOPIERO od **29.03.2026** podniesiono do 476,10 zł. Sprawdź, czy nie doszła KOLEJNA zmiana od dnia audytu | art. 99 u.p.a. |
+| ⚠️ Podatek/opłata cukrowa (napoje słodzone) | **SPORNE — NIE ROZSTRZYGNIĘTE w tej sesji.** Część źródeł (grudzień 2025) podawała planowaną podwyżkę stawki podstawowej z 0,50 do 0,70 zł/l i opłaty za kofeinę/taurynę z 0,10 do 1,00 zł/l od 1.01.2026 — ALE inne źródło (money.pl) wskazuje, że **Prezydent Karol Nawrocki ZAWETOWAŁ** przepisy podwyższające opłatę cukrową (razem z dodatkową podwyżką akcyzy alkoholowej do 15%). NIE USTALONO w tej sesji, czy weto dotyczyło TYLKO dodatkowej nadwyżki, czy całej podwyżki opłaty cukrowej — SPRAWDŹ AKTUALNY STAN PRZED UŻYCIEM, to nie jest opisane w tym module wcześniej i wymaga dedykowanej weryfikacji | Ustawa o zdrowiu publicznym |
 | Energia elektryczna | 5,00 zł/MWh | art. 89 u.p.a. |
 | Samochody osobowe (>2000 cm³) | 18,6% podstawy | art. 105 u.p.a. |
 

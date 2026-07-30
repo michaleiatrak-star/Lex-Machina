@@ -39,7 +39,18 @@
 Odbiór lokalu → protokół odbioru (sporządzić na piśmie!)
   → wpisać wszystkie wady do protokołu
   ↓
-Deweloper: 30 dni na usunięcie wad od podpisania protokołu
+Deweloper: 14 DNI na pisemne uznanie LUB odrzucenie zgłoszonych wad
+  od podpisania protokołu — ⚠️ DODANE 2026-07-27 (FAZA 3E/ZASADA 14,
+  poprzednia wersja pomijała ten termin całkowicie). Potwierdzone w
+  6+ źródłach zgodnych (art. 41 ust. 5 ustawy). BRAK ODPOWIEDZI W TYM
+  TERMINIE = MILCZĄCE UZNANIE WAD (skutek dla dewelopera niekorzystny,
+  warto to podnieść, jeśli deweloper spóźni się z odpowiedzią).
+  ↓
+Deweloper: 30 dni na usunięcie UZNANYCH wad od podpisania protokołu
+  (POTWIERDZONE 2026-07-27 — art. 41 ust. 6 ustawy z 20.05.2021 r.
+  o ochronie praw nabywcy lokalu mieszkalnego lub domu jednorodzinnego
+  oraz Deweloperskim Funduszu Gwarancyjnym, Dz.U. 2021.1177 ze zm.;
+  liczone jako dni kalendarzowe, nie robocze)
   ↓ brak usunięcia
 Nabywca: wyznacza dodatkowy termin ALBO
          odmawia odbioru (wada istotna) ALBO

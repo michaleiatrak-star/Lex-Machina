@@ -93,11 +93,26 @@ FORMA INSTYTUCJONALNA:
 ### Wynagrodzenie (przykład orientacyjny, ⚠️ ZAWSZE zweryfikuj aktualne stawki — ustalane lokalnie przez rady powiatów/miast, WALORYZOWANE)
 
 ```
-Orientacyjne kwoty miesięczne (stan przykładowy, jedna z gmin, od
-1.01.2026 — ⚠️ TO PRZYKŁAD LOKALNY, nie ogólnokrajowa stawka sztywna):
-  □ Rodzina zastępcza — pogotowie rodzinne: ok. 6200 zł
-  □ Zawodowa rodzina zastępcza: ok. 5800 zł
-  □ Prowadzący rodzinny dom dziecka: ok. 6500 zł
+Orientacyjne kwoty miesięczne — ⚠️ UZUPEŁNIONE 2026-07-27 (FAZA 3E/
+ZASADA 14): to NIE są stawki ogólnokrajowe sztywne, tylko WYNIK
+lokalnych uchwał POSZCZEGÓLNYCH POWIATÓW, każdy powyżej ustawowego
+MINIMUM. Ustawowe minimum (art. 85 ustawy o wspieraniu rodziny i
+systemie pieczy zastępczej, po waloryzacji): zawodowa rodzina
+zastępcza/RDD — MIN. 4 902 zł; pogotowie rodzinne — MIN. 124% tej
+kwoty (ok. 6 079 zł). POTWIERDZONY REALNY ZAKRES między powiatami
+(2026 r.): od ustawowego minimum do znacznie wyższych stawek lokalnych
+(np. Świebodzin: pogotowie 9 136 zł, RDD 9 136 zł; Puławy: pogotowie
+6 079 zł, zawodowa 4 902 zł; Szczecinek: pogotowie 124%×6000 zł=7 440
+zł) — RÓŻNICE SIĘGAJĄ KILKU TYSIĘCY ZŁOTYCH między powiatami. ZAWSZE
+sprawdź uchwałę KONKRETNEGO powiatu, którego dotyczy sprawa — nie ma
+jednej "krajowej" kwoty do zacytowania.
+  □ Rodzina zastępcza — pogotowie rodzinne: min. ustawowe ok. 6 079 zł,
+    lokalnie może być WYŻSZE (potwierdzony przykład: 9 136 zł)
+  □ Zawodowa rodzina zastępcza: min. ustawowe ok. 4 902 zł, lokalnie
+    może być wyższe
+  □ Prowadzący rodzinny dom dziecka: min. ustawowe jak zawodowa
+    (4 902 zł), lokalnie może być znacznie wyższe (potwierdzony
+    przykład: 9 136 zł)
 Rodzina zastępcza SPOKREWNIONA i NIEZAWODOWA — inny, zwykle NIŻSZY
   poziom wsparcia finansowego (⚠️ zweryfikuj dokładne zasady i kwoty)
 ```

@@ -1032,6 +1032,25 @@ sposobu na jego uniknięcie?
 Kolizja obowiązków (art. 26 §5) — gdy z ciążących na sprawcy obowiązków
   TYLKO JEDEN może być spełniony (np. lekarz musi wybrać, którego z dwóch
   pacjentów ratować pierwszym) → przepisy §1-3 stosuje się odpowiednio.
+
+⚠️ PRZYKŁADY NEGATYWNE — czego SN/SA NIE uznają za stan wyższej
+konieczności (dodano 2026-07-27, na pytanie użytkownika, potwierdzone
+w orzecznictwie cytowanym w doktrynie): subiektywny strach/pośpiech
+BEZ faktycznego, bezpośredniego zagrożenia NIE WYSTARCZA:
+  → Kradzież popełniona z powodu nędzy/biedy (SN, 26.11.1935, OSP
+    1935/339) — brak "bezpośredniości" niebezpieczeństwa w rozumieniu
+    przepisu
+  → Przekroczenie przepisów o ruchu drogowym, by szybciej dostarczyć
+    towar i uniknąć strat gospodarczych (SN, 15.01.1958, II KK 372/57)
+    — interes ekonomiczny/pośpiech to NIE bezpośrednie niebezpieczeństwo
+  → Nielegalna okupacja pomieszczeń w ramach strajku, ze stosowaniem
+    środków przymusu, gdy uczestnikom nie groziło żadne bezpośrednie,
+    nieodwracalne niebezpieczeństwo (SN, 21.06.1938, 3K 2407/37)
+  → Zabór mienia w celu wsparcia nieefektywnych podmiotów gospodarczych
+    (SA Wrocław, 20.05.1995, II AKR 82/95)
+  ⚠️ WSPÓLNY MIANOWNIK: sąd bada FAKTY (czy niebezpieczeństwo było
+  realne, bezpośrednie i nie dało się go inaczej uniknąć), nie
+  subiektywne przekonanie/emocje sprawcy o istnieniu zagrożenia.
 ```
 
 ---

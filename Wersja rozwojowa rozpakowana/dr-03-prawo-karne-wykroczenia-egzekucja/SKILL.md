@@ -1,6 +1,6 @@
 ---
 name: dr-03-prawo-karne-wykroczenia-egzekucja
-version: 3.11
+version: 3.20
 description: |
   DR-03: Prawo Karne, Wykroczenia, Egzekucja
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.

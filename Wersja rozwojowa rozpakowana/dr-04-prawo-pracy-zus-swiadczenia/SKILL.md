@@ -1,6 +1,6 @@
 ---
 name: dr-04-prawo-pracy-zus-swiadczenia
-version: 3.6
+version: 3.16
 description: |
   DR-04: Prawo Pracy, ZUS, Świadczenia Społeczne
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -64,9 +64,32 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   wspierające (→ mod-niepelnosprawnosc-intelektualna-gluchota.md,
   mod-niewidomy-prawa-prawne.md, mod-prawa-obywatelskie-srodki-karne.md)
 
-## Moduły (27 łącznie — ✓ 27 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
+## Moduły (30 łącznie — ✓ 30 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
 
 ```
+  [✓] NOWY  mod-obchodzenie-prawa-pracy-reforma-PIP-2026 (v1.0.1)
+              (dodany 2026-07-30, POPRAWIONY tego samego dnia po
+               wykryciu masywnej duplikacji z mod-ustawa-PIP-
+               inspekcja-pracy.md sekcja 5-6 — usunięto zduplikowaną
+               treść o reformie PIP, zastąpiono odesłaniem. Moduł
+               skupia się teraz WYŁĄCZNIE na katalogu mechanizmów
+               obchodzenia prawa pracy przez OBIE STRONY — dzielenie
+               etatu, nadużycie zadaniowego czasu pracy, zaniżanie
+               składek, nadużywanie L4, praca "na czarno")
+  [✓] NOWY  mod-reforma-stazu-pracy-2025-2026
+              (dodany 2026-07-27, na żądanie użytkownika — ustawa z
+               26.09.2025 [Dz.U. 2025 poz. 1423]: zaliczanie zlecenia/
+               B2B/pracy za granicą do stażu pracy, dwuetapowe wejście
+               w życie 1.01.2026/1.05.2026 [OBIE JUŻ MINĘŁY], rozróżnienie
+               staż ogólny vs zakładowy, działanie wsteczne z terminem
+               24 miesięcy na dokumenty)
+  [✓] NOWY  mod-klasyfikacja-naruszen-bhp-prawa-pracy
+              (dodany 2026-07-27, na żądanie użytkownika — 8 typów
+               naruszeń BHP/prawa pracy z właściwym adresatem dla
+               każdego: PIP, sąd pracy, Policja/Prokuratura, ZUS, KAS,
+               zależnie od charakteru i wagi. Domyka lukę po odkryciu,
+               że prawo pracy/BHP NIE jest w katalogu ustawy o
+               sygnalistach — patrz dr-15/mod-ustawa-sygnalisci.md)
   [✓] NOWY  mod-ustawa-karta-nauczyciela-pracownicze
               (dodany 2026-07-27, domyka F-19 z WARN-OTWARTE.md: brak
                treści pracowniczej Karty Nauczyciela — wynagrodzenie

@@ -25,7 +25,18 @@ Udzielenie pomocy: Obowiazek nawet bez skierowania (nagly przypadek)
 Tajemnica lekarska: Art. 40 - bezwzgledna (wyj.: sad, prokuratura, pacjent)
 Zgoda pacjenta:     Obowiazkowa (art. 32) - swiadoma, bez przymusu
 Badanie: Tylko za zgoda z wyjatkiem stanow naglych (art. 33)
-Dokumentacja medyczna: Art. 41 - prowadzona przez 20 lat
+Dokumentacja medyczna: ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) —
+  było błędnie "Art. 41" (ustawy o zawodach lekarza). Ten przepis
+  (dawny art. 41 ust. 7 ustawy o zawodach lekarza) został UCHYLONY —
+  obowiązek przechowywania przez 20 LAT jest teraz uregulowany w
+  **art. 29 ustawy o prawach pacjenta i Rzeczniku Praw Pacjenta**
+  (INNA ustawa), licząc od końca roku kalendarzowego ostatniego wpisu.
+  Sama liczba (20 lat) była poprawna, podstawa prawna nieaktualna.
+  Wyjątki: zgon wskutek uszkodzenia ciała/zatrucia oraz dane o krwi —
+  30 lat; zdjęcia RTG — 10 lat; skierowania — 5 lat (2 lata, jeśli
+  świadczenie niezrealizowane); dokumentacja dzieci do 2. r.ż. — 22
+  lata. Potwierdzone w 8+ źródłach (prawo.pl, lexlege.pl, arslege.pl,
+  archiwum RPP, NIL, termedia.pl).
 ```
 
 ## Odpowiedzialnosc dyscyplinarna

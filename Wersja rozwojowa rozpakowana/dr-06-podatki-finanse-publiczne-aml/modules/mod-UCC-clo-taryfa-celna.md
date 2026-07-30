@@ -139,7 +139,14 @@ Naczelny Sąd Administracyjny (NSA)
 ```
 
 **WIĄŻĄCA INFORMACJA TARYFOWA (WIT) — ścieżka:**
-- Wniosek → Dyrektor IAS → decyzja WIT (90 dni) → wiążąca przez 3 lata
+- Wniosek → Dyrektor KIS (Krajowej Informacji Skarbowej — ⚠️ ZMIANA
+  ORGANU od 1.07.2023, wcześniej Dyrektor IAS Warszawa) → decyzja WIT
+  (⚠️ POPRAWKA 2026-07-27, FAZA 3E/ZASADA 14: **120 DNI**, nie 90 —
+  potwierdzone jednogłośnie w 7+ źródłach, w tym biznes.gov.pl i KIS;
+  termin liczony od PRZYJĘCIA KOMPLETNEGO wniosku, może się wydłużyć o
+  dodatkowe max 30 dni przy brakach formalnych) → wiążąca przez 3 lata,
+  na całym obszarze celnym UE. Odwołanie: 14 dni od doręczenia, do
+  Dyrektora KIS przez PUESC (elektronicznie, plik PDF)
 
 > Naruszenia celne (KKS), czynny żal, kwalifikator karny: `mod-ustawa-akcyzowa-i-clo-UCC.md` sekcja 6.
 

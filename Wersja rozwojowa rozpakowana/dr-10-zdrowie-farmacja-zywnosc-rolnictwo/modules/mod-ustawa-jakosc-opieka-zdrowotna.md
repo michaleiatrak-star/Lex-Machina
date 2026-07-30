@@ -23,7 +23,21 @@ Cel: Uczenie sie z bledow bez karania
 ```
 Organ:        Centrum Monitorowania Jakosci w Ochronie Zdrowia (CMJ)
 Dobrowolna:   Podmiot leczniczy skladaswniosek
-Certyfikat:   Na 3 lata (z coroczna kontrola)
+Certyfikat:   ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) — było
+              błędnie "3 lata". To STARA wartość SPRZED reformy z
+              16.06.2023 r. Aktualnie: **4 LATA** (art. 20 ust. 2
+              ustawy o jakości w opiece zdrowotnej i bezpieczeństwie
+              pacjenta) — potwierdzone dosłownym cytatem ustawy w 6+
+              źródłach (isap.sejm.gov.pl, orka.sejm.gov.pl,
+              wolterskluwer.com, serwiszoz.pl, lexlege.pl,
+              wsparciedlaszpitala.pl — ten ostatni wprost: "Certyfikat
+              ważny jest 4 lata (wcześniej 3)"). Próg uzyskania: 75%
+              punktów ogółem, min. 50% w każdym dziale (art. 37 ust. 1
+              — NIEZWERYFIKOWANE wprost w tej sesji, przytoczone przez
+              1 źródło, sprawdź przed cytowaniem). ⚠️ Certyfikaty
+              wydane na podstawie POPRZEDNICH przepisów zachowują
+              ważność przez okres, na jaki zostały wydane (nie są
+              automatycznie skracane/wydłużane).
 Standardy:    Opracowywane przez CMJ, zatwierdzane przez ministra zdrowia
 Uplecenie akredytacji: Mozliwe dodatkowe pozarynkowe ulatwienia w kontraktowaniu z NFZ
 ```

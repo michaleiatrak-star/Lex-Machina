@@ -56,7 +56,22 @@ Ubezpieczenia społeczne (emerytalne, rentowe, chorobowe, wypadkowe), odwołanie
 
 ```
 ⚠️ Decyzje ZUS/KRUS → Sąd Okręgowy (wydział pracy i ubezpieczeń społecznych)
-                    lub Sąd Rejonowy (zasiłki, składki < 100 000 zł)
+                    lub Sąd Rejonowy — ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/
+                    ZASADA 14): BŁĘDNIE wcześniej podano próg kwotowy
+                    "składki < 100 000 zł → SR". NIE MA progu
+                    kwotowego — właściwość zależy WYŁĄCZNIE OD RODZAJU
+                    SPRAWY (potwierdzone w 5+ zgodnych źródłach, w tym
+                    hrlex.pl):
+                      • SR — TYLKO enumeratywnie: zasiłek chorobowy,
+                        wyrównawczy, opiekuńczy, macierzyński,
+                        pogrzebowy, świadczenie rehabilitacyjne,
+                        ustalenie niepełnosprawności — BEZ WZGLĘDU
+                        na wartość przedmiotu sporu
+                      • SO — WSZYSTKIE POZOSTAŁE sprawy, w tym:
+                        emerytura, renta, kapitał początkowy,
+                        PODLEGANIE UBEZPIECZENIOM, **SKŁADKI** —
+                        RÓWNIEŻ bez względu na wartość (żaden próg
+                        kwotowy nie ma tu zastosowania)
 Tryb: KPC art. 477⁸–477¹⁴ — NIE tryb PPSA — NIE WSA!
 ```
 
@@ -73,9 +88,9 @@ Decyzja ZUS
   ↓ [1 miesiąc] ODWOŁANIE DO SĄDU (art. 477⁹ §1 KPC)
     Składane ZA POŚREDNICTWEM ZUS (autokontrola 30 dni — ZUS może sam zmienić decyzję)
 Emerytura / Renta z FUS → Sąd OKRĘGOWY
-Zasiłki / Świadczenie rehab. → Sąd REJONOWY
-Składki < 100 000 zł → Sąd REJONOWY
-Składki ≥ 100 000 zł → Sąd OKRĘGOWY
+Zasiłki / Świadczenie rehab. / Niepełnosprawność → Sąd REJONOWY
+Składki / Podleganie ubezpieczeniom → Sąd OKRĘGOWY (BEZ WZGLĘDU na
+  kwotę — usunięto błędny próg "100 000 zł", patrz poprawka wyżej)
   ↓ [14 dni od wyroku z uzasad.] APELACJA → Sąd Apelacyjny (wpis: 30 zł)
   ↓ [30 dni od wyroku SA] SKARGA KASACYJNA → SN (przymus adwokacki)
 ```

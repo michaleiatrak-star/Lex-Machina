@@ -59,7 +59,14 @@ analizator-umow-v1/mod-J21-rodo-archiwizacja-regulaminy.md, sekcja J21.5
 ```
 Podstawa:  Przeciętne wynagrodzenie miesięczne w gospodarce z II połowy poprzedniego roku
 Stawka:    37,5% (pracownik etatowy) lub 50% (pracownik młodociany)
-Np. 2024:  2417,14 zł na etat (weryfikuj 2025!)
+✅ ZAKTUALIZOWANE 2026-07-27 (FAZA 3E/ZASADA 14): na 2026 r. — 2943,23
+  zł na etat (37,5% × 7848,60 zł, podstawa: przeciętne wynagrodzenie
+  w gospodarce narodowej za II półrocze 2025, obwieszczenie Prezesa
+  GUS z 19.02.2026) — potwierdzone jednogłośnie w 8+ zgodnych
+  źródłach (gazetaprawna.pl, inewi.pl, inforlex.pl i inne). Dla
+  pracownika młodocianego: 50% = 3924,30 zł. Poprzednia kwota
+  2417,14 zł (2024 r.) była już nieaktualna. ⚠️ Kwota zmienia się
+  CO ROKU — sprawdź ponownie po nowym obwieszczeniu GUS (zwykle luty)
 web_search: "odpis ZFŚS 2025 kwota MRiPS obwieszczenie"
 ```
 

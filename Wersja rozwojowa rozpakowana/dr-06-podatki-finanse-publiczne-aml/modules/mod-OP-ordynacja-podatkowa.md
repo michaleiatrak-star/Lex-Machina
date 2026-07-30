@@ -163,6 +163,20 @@ OBRONA PODATNIKA:
 UWAGA: Inne klauzule antyabuzywne (szczegółowe):
   → Art. 15e CIT (koszty usług niematerialnych) — weryfikuj aktualny stan po nowelizacjach
   → Art. 30f PIT (CFC — kontrolowane spółki zagraniczne)
+
+⚠️ DODANE 2026-07-30 (na żądanie użytkownika, mechanizm ryzyka
+analogiczny do reformy PIP) — ZNIESIONY PRÓG 100 000 ZŁ: historycznie
+GAAR (postępowanie w trybie działu IIIa Op) stosowano TYLKO gdy
+korzyść majątkowa przekraczała 100 000 zł — ten LIMIT ZOSTAŁ
+ZNIESIONY. Potwierdzone: kancelaria-skarbiec.pl — "zniesienie limitu
+100 tys. zł... spowodowało, że praktycznie żaden podatnik nie może
+czuć się bezpiecznie. Fiskus kontroluje NAWET NIEWIELKIE podmioty,
+których ewentualna korzyść szacowana jest na kilka, może kilkanaście
+tysięcy złotych." ⚠️ PRAKTYCZNA KONSEKWENCJA: NIE ZAKŁADAJ bezpiecznego
+"progu wejścia" przy doradzaniu małym/średnim podatnikom — GAAR może
+dziś objąć transakcje o WIELE niższej wartości niż dawniej. Dokładna
+data zniesienia limitu NIE ZWERYFIKOWANA w tej sesji — sprawdź na
+ISAP przed cytowaniem konkretnej daty.
 ```
 
 ---

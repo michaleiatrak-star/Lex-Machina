@@ -25,7 +25,27 @@ Wylaczenia:                      NFT jako unikalne (oceniac indywidualnie), DeFi
 ```
 Wymagane zezwolenie: Od KNF (lub innego organu w UE - paszport regulacyjny)
 Uslugi:              Handel, przechowywanie, wymiana, doradztwo, transfer
-Kapital minimalny:   Zalezny od uslugi (12 500 - 150 000 EUR)
+Kapital minimalny:   ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) — było
+  błędnie "12 500 - 150 000 EUR". Załącznik IV MiCA: TRZY klasy CASP,
+  kapitał **50 000 / 125 000 / 150 000 EUR** (nie 12 500) — potwierdzone
+  w 4+ zgodnych źródłach (legalgeek.pl, elitecorp.pl, moneteo.com,
+  comparic.pl). Zabezpieczenie ostrożnościowe = WYŻSZA z dwóch wartości:
+  kwota z zał. IV ALBO 1/4 stałych kosztów pośrednich z poprzedniego
+  roku (art. 67 MiCA) — może więc być WYŻSZE niż same progi bazowe.
+
+⚠️ **SYTUACJA KRYTYCZNA, PILNA (potwierdzona 2026-07-27, źródło z
+7.05.2026, legalgeek.pl):** Polska NADAL NIE PRZYJĘŁA ustawy o
+kryptoaktywach implementującej MiCA — brak krajowych przepisów
+pozwalających na złożenie PEŁNEGO wniosku o zezwolenie CASP do KNF.
+Jednocześnie **maksymalny okres przejściowy (grandfathering) dla
+podmiotów z wpisem w rejestrze VASP upływa 1 LIPCA 2026 r. — TA DATA
+JUŻ MINĘŁA na dzień tego audytu (28.07.2026)**. Oznacza to potencjalną
+LUKĘ REGULACYJNĄ: podmioty działające dotąd na podstawie wpisu VASP
+mogą znaleźć się bez jasnej podstawy prawnej do dalszego działania,
+a nowe podmioty nie mają w Polsce żadnej ścieżki do uzyskania licencji
+CASP. **SPRAWDŹ NATYCHMIAST aktualny status ustawy i ewentualne
+przepisy przejściowe/interpretacje KNF przed jakąkolwiek poradą w
+tym temacie** — sytuacja mogła się zmienić po dacie źródła (maj 2026).
 Ochrona klientow:    Segregacja aktywow, polityka refundacji, whitepaper
 ```
 

@@ -49,7 +49,23 @@ KROK 2: Skarga do WSA na bezczynność / przewlekłość (art. 3 §2 pkt 8 PPSA)
   → Po wniesieniu ponaglenia
   → Składana za pośrednictwem organu
   → WSA może: zobowiązać do działania + stwierdzić bezczynność +
-    wymierzyć grzywnę + przyznać sumę pieniężną stronie (do 1 000 zł — weryfikuj)
+    wymierzyć GRZYWNĘ organowi + przyznać SUMĘ PIENIĘŻNĄ stronie
+    ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) — poprzednia wersja
+    miała błędnie "do 1 000 zł". To DWIE RÓŻNE kwoty na PODSTAWIE
+    ART. 154 §6 PPSA (nie kwota organu rozpatrującego ponaglenie —
+    TEN nie ma własnego uprawnienia do grzywny/sumy, jedynie
+    wskazuje termin i stwierdza przewlekłość w 7 dniach, patrz KROK 1):
+      • GRZYWNA (dla organu, na rzecz Skarbu Państwa) — do 10-KROTNOŚCI
+        przeciętnego wynagrodzenia miesięcznego z poprzedniego roku
+        (ok. 89 000 zł przy aktualnym poziomie wynagrodzeń — KWOTA
+        ZMIENNA co roku, sprawdź aktualne przeciętne wynagrodzenie GUS)
+      • SUMA PIENIĘŻNA (dla strony skarżącej) — do POŁOWY powyższej
+        kwoty grzywny (ok. 44 500 zł) — to środek FAKULTATYWNY,
+        stosowany wg uznania sądu, "w szczególnie drastycznych
+        przypadkach" (linia orzecznicza WSA), NIE automatycznie przy
+        każdej stwierdzonej bezczynności
+    Potwierdzone w 6+ zgodnych źródłach (stasik-kancelaria.pl,
+    prawo.pl, orzecznictwo WSA/NSA)
 ```
 
 ### Skarga na przewlekłość postępowania sądowego

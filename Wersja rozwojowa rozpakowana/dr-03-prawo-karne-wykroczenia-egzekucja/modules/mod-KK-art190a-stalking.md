@@ -11,6 +11,12 @@ o przestępstwie, zakaz zbliżania (środek zapobiegawczy i nakazowy).
 1. **STALKING — ŚCIGANIE NA WNIOSEK** (art. 190a §4 KK) — bez wniosku pokrzywdzonego
    Policja i prokurator NIE MOGĄ wszcząć postępowania z urzędu dla §1 i §2.
    **Wyjątek:** §3 (gdy skutkiem jest targnięcie się pokrzywdzonego na własne życie) → z urzędu.
+   ⚠️ DODANE 2026-07-27 (FAZA 3E/ZASADA 14) — brakująca kara dla §3:
+   pozbawienie wolności OD 2 DO 15 LAT. Potwierdzone dosłownym cytatem
+   w 2 zgodnych źródłach Rządu 2B z AKTUALNYM t.j. (lexlege.pl,
+   arslege.pl — oba Dz.U.2025.0.383). ⚠️ UWAGA: część źródeł (w tym
+   Rządu 3) wciąż pokazuje NIEAKTUALNE "2 do 12 lat" — to stan
+   SPRZED podwyższenia górnej granicy; NIE cytuj tej starszej wartości.
 
 2. **UWAGA: GROŹBA KARALNA (art. 190 KK) — ODRĘBNY PRZEPIS**
    - Art. 190 §1 KK (Dz.U.2025.383): kara do **3 lat** pozbawienia wolności
@@ -27,7 +33,10 @@ o przestępstwie, zakaz zbliżania (środek zapobiegawczy i nakazowy).
    - Skutek: wzbudzenie uzasadnionego poczucia zagrożenia / istotne naruszenie prywatności
    - Obiektywna ocena (nie tylko subiektywne odczucie pokrzywdzonego)
 
-4. **NOWELIZACJA 2023:** Art. 190a §1 i §2 — zagrożenie karą 6 miesięcy – 8 lat pozbawienia
+4. ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14): **NOWELIZACJA Z 2020 R.**
+   (nie "2023" jak wcześniej błędnie podano — sama WARTOŚĆ kary była
+   już poprawna, błędny był tylko przypisany rok). Art. 190a §1 i §2
+   — zagrożenie karą 6 miesięcy – 8 lat pozbawienia
    wolności (przed nowelizacją: do 3 lat).
 
 5. **Pełna tabela trybów ścigania:**

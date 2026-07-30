@@ -31,6 +31,58 @@ compatibility:
 □ Jakie dowody: warunki, korespondencja, mapa, moc, ekspertyza sieciowa.
 ```
 
+## PROGI MOCY I OBOWIĄZKI FORMALNE — TABELA (dodano 2026-07-27, na
+żądanie użytkownika, zweryfikowane w 10+ zgodnych źródłach)
+
+```
+MIKROINSTALACJA (≤50 kW elektrycznych):
+  → BEZ koncesji URE, BEZ wpisu do jakiegokolwiek rejestru
+  → Zgłoszenie do OSD: BEZPŁATNE, elektronicznie lub papierowo,
+    NIE PÓŹNIEJ niż 30 DNI przed planowanym pierwszym wprowadzeniem
+    energii do sieci
+  → Rozliczenie: NET-BILLING (system wartościowy) dla instalacji
+    zgłoszonych od 1.04.2022 — wcześniejsze mogły zachować
+    net-metering na zasadach przejściowych, weryfikuj indywidualnie
+  → ⚠️ POWIĄZANIE Z PRAWEM BUDOWLANYM: instalacje fotowoltaiczne DO
+    150 kW (próg WYŻSZY niż próg mikroinstalacji dla celów
+    energetycznych!) są ZWOLNIONE z pozwolenia na budowę ORAZ ze
+    zgłoszenia robót budowlanych (nowelizacja Prawa budowlanego z
+    2023 r.) — traktowane jako urządzenie budowlane. Sprawdź
+    dodatkowe warunki techniczne (np. wysokość konstrukcji) w module
+    `mod-PrBud-prawo-budowlane.md` — NIE BYŁO tam dotąd odnotowane,
+    dodaj cross-referencję
+
+MAŁA INSTALACJA (>50 kW do 1 MW elektrycznych — próg PODNIESIONY z
+  500 kW nowelizacją z 2021/2023 r., podobnie moc cieplna w
+  skojarzeniu >150 kW do 3 MW, podniesiona z 900 kW):
+  → BEZ koncesji URE
+  → OBOWIĄZKOWY wpis do Rejestru Wytwórców Energii w Małej
+    Instalacji (MIOZE), prowadzonego przez Prezesa URE
+  → Czas oczekiwania na wpis: 21 DNI
+  → Opłata skarbowa za wpis: 616 zł
+  → Wyjątek zwolniony z wpisu: wytwarzanie WYŁĄCZNIE z biopłynów lub
+    biogazu rolniczego (niezależnie od mocy)
+  → OBOWIĄZEK SPRAWOZDAWCZY: półroczne sprawozdanie MIOZE (nowy
+    wzór obowiązuje od sprawozdania za I półrocze 2026 r., termin
+    31 LIPCA 2026 — licząc datę WPŁYWU do URE, nie nadania
+    przesyłki!) — kara za brak: 1000 zł. NIE dotyczy typowych
+    prosumentów-mikroinstalacji do 50 kW w net-billingu
+
+INSTALACJA POWYŻEJ 1 MW: WYMAGANA koncesja URE na wytwarzanie energii
+  elektrycznej (pełna procedura koncesyjna)
+
+DUŻE FARMY OZE ≥10 MW: od LIPCA 2026 R. obowiązek sprzedaży min. 80%
+  wytworzonej energii na Towarowej Giełdzie Energii (TGE) — obligo
+  giełdowe. Wyłączenia: linie bezpośrednie, cPPA z odbiorcą końcowym
+  (NIE ze spółką obrotu), kogeneracja >52,5% sprawności, energia na
+  potrzeby własne
+```
+
+⚠️ Wszystkie powyższe progi i terminy zmieniają się stosunkowo często
+(kilka nowelizacji w ostatnich 5 latach) — sprawdź ISAP przed użyciem
+w konkretnej sprawie, zwłaszcza próg mocy dla małej instalacji, który
+był PODNOSZONY WIELOKROTNIE.
+
 ## PROSUMENT / PV
 
 Sprawdzaj: data zgłoszenia, system rozliczeń, moc instalacji, umowa kompleksowa, reklamacje faktur, błędy licznika, niedotrzymanie terminów.

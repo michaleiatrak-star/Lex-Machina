@@ -1,18 +1,25 @@
 # mod-KK-art255b-patostreaming
 
-**Wersja:** 1.0 | **Dodano:** 2026-07-18
+**Wersja:** 1.1 | **Dodano:** 2026-07-18 | **Zaktualizowano:** 2026-07-27
 **Rola w systemie:** odpowiedź na pytanie użytkownika o "patostreamerów" —
-**BARDZO ŚWIEŻE PRAWO**: nowelizacja KK penalizująca patostreaming
-(art. 255b) została PODPISANA PRZEZ PREZYDENTA dosłownie w dniach/
-tygodniach przed tą sesją (czerwiec 2026) — droga legislacyjna trwała
-od 2018 r., pierwszy konkretny projekt od maja 2023 r.
+**BARDZO ŚWIEŻE PRAWO, TERAZ Z PRECYZYJNYMI DATAMI (na żądanie
+użytkownika, FAZA 3E/ZASADA 14):**
+  - Sejm uchwalił: 11.06.2026 (419 za, 19 przeciw, 1 wstrzymujący)
+  - Senat przyjął BEZ POPRAWEK: 25.06.2026
+  - Prezydent Karol Nawrocki PODPISAŁ: ok. 17.07.2026
+  - PUBLIKACJA w Dzienniku Ustaw: **23.07.2026 r., Dz.U. 2026 poz. 988**
+    (ustawa z 11.06.2026 r. o zmianie ustawy — Kodeks karny)
+  - ⚡ **WEJŚCIE W ŻYCIE: 22 SIERPNIA 2026 R.** (30-dniowe vacatio legis
+    od publikacji) — **TO ZA OK. 3,5 TYGODNIA od dnia tego audytu
+    (27.07.2026)** — bliski, ważny termin
+  - Potwierdzone w 6+ zgodnych źródłach (czasopismo.legeartis.org,
+    telepolis.pl, stasik-kancelaria.pl, cyberdefence24.pl, tech.wp.pl,
+    natemat.pl, forsal.pl) — wszystkie zgodne co do dat i treści
 
-> ⛔⛔ HARDGATE WZMOCNIONY: to przepis SPRZED KILKU TYGODNI na dzień tej
-> sesji. ZAWSZE zweryfikuj na ISAP, czy ustawa już weszła w życie (zwykle
-> vacatio legis po podpisaniu), dokładną datę wejścia w życie, oraz czy
-> nie pojawiły się dalsze zmiany/orzecznictwo od czasu tej weryfikacji
-> (2026-07-18). To jeden z NAJBARDZIEJ dynamicznych obszarów KK w tej
-> chwili.
+> ⛔⛔ HARDGATE WZMOCNIONY: to przepis, który NIE WSZEDŁ JESZCZE W ŻYCIE
+> na dzień tej sesji (wejdzie 22.08.2026) — ZAWSZE zweryfikuj na ISAP
+> przed poradą, czy data już minęła i czy nie pojawiły się dalsze
+> zmiany/orzecznictwo od tej weryfikacji (2026-07-27).
 
 ---
 
@@ -43,17 +50,21 @@ weryfikacji na ISAP).
 
 ---
 
-## 2. TREŚĆ ART. 255b KK (⚠️ zweryfikuj dokładne brzmienie na ISAP — przepis BARDZO świeży)
+## 2. TREŚĆ ART. 255b KK (✅ ROZSTRZYGNIĘTE 2026-07-27 — ustawa opublikowana w Dz.U. 2026 poz. 988)
 
 ```
-§ 1 — kto ROZPOWSZECHNIA za pośrednictwem SIECI treści przedstawiające
-      DOPUSZCZENIE SIĘ CZYNU ZABRONIONEGO wobec innej osoby (w tym
-      przemoc wobec zwierząt — doprecyzowane poprawką komisyjną) →
-      kara pozbawienia wolności (⚠️ dokładny wymiar dla §1 podstawowego
-      nie w pełni ustalony w tej sesji — sprzeczne fragmenty źródeł;
-      jedno źródło wskazuje do 3 lat jako karę bazową)
+§ 1 — kto, W CELU OSIĄGNIĘCIA KORZYŚCI MAJĄTKOWEJ LUB OSOBISTEJ, za
+      pośrednictwem sieci teleinformatycznej PUBLICZNIE rozpowszechnia
+      treści przedstawiające: (1) popełnienie czynu zabronionego
+      zagrożonego karą pozbawienia wolności, jeżeli przedmiotem
+      zamachu jest dobro osobiste, (2) przemoc wobec zwierzęcia z
+      naruszeniem przepisów ustawy, (3) poniżające traktowanie innej
+      osoby, NAWET ZA JEJ ZGODĄ → kara pozbawienia wolności DO 3 LAT
+      — ✅ POTWIERDZONE 2026-07-27 (FAZA 3E/ZASADA 14) jako kara
+      bazowa, dosłownym cytatem ustawy w 6+ zgodnych źródłach —
+      wcześniejsza niepewność w tej sesji ROZSTRZYGNIĘTA
 
-§ 2 — TREŚCI INSCENIZOWANE traktowane TAK SAMO jak rzeczywiste: karze
+§ 2 — TREŚCI INSCENIZOWANE (w tym deepfake) traktowane TAK SAMO jak rzeczywiste: karze
       podlega również przedstawienie MOGĄCE WYWOŁAĆ PRZEKONANIE, że
       pokazuje zakazane zachowania — udawana bójka/pozorowane znęcanie
       PODLEGA TEJ SAMEJ karze co czyn rzeczywisty
@@ -72,10 +83,18 @@ weryfikacji na ISAP).
       MAŁOLETNIEGO (osobę poniżej 18 lat) → kara ROŚNIE: od 3 miesięcy
       do 5 lat pozbawienia wolności
 
-§ ⭐ MOTYW FINANSOWY jako typ kwalifikowany: przestępstwo popełnione
-    W CELU osiągnięcia korzyści majątkowej LUB PO osiągnięciu takiej
-    korzyści → kara pozbawienia wolności od 1 roku do 10 lat
-    (odzwierciedla właśnie MODEL BIZNESOWY patostreamingu — donate'y)
+§ ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) — USUNIĘTO błędny typ
+    "motyw finansowy, 1-10 lat". W UCHWALONEJ, OPUBLIKOWANEJ wersji
+    ustawy (Dz.U. 2026 poz. 988) SĄ TYLKO 2 PROGI KARY: 3 lata (§1
+    podstawowy) i 5 lat (§3, gdy dotyczy małoletniego) — NIE MA
+    trzeciego, odrębnego typu za "motyw finansowy". To wynika z tego,
+    że CEL OSIĄGNIĘCIA KORZYŚCI MAJĄTKOWEJ/OSOBISTEJ jest już ELEMENTEM
+    SAMEGO TYPU PODSTAWOWEGO (§1) — nie tworzy odrębnej, wyższej kary.
+    Potwierdzone: stasik-kancelaria.pl wprost — "Maksimum w uchwalonej
+    wersji to 5 lat, a nie 8, jak zapowiadano wcześniej" — poprzednia
+    wersja modułu (z 2026-07-18) opisywała PRAWDOPODOBNIE WCZEŚNIEJSZY,
+    NIEUCHWALONY projekt z surowszą, odrębną karą za motyw finansowy,
+    która NIE PRZESZŁA do finalnej wersji.
 
 § 4 — KONTRATYP (okoliczność WYŁĄCZAJĄCA karalność): NIE PODLEGA KARZE
       ten, kto ŁĄCZNIE:

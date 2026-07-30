@@ -47,8 +47,11 @@ WYTWÓRCA:
   → Nadzór po wprowadzeniu do obrotu (PMS) — dla klasy I; okresowe raporty
     o bezpieczeństwie (PSUR) — dla klas IIa/IIb/III
   → Przechowywanie dokumentacji technicznej, deklaracji zgodności i certyfikatów:
-    minimalne okresy określone w MDR — weryfikuj aktualne terminy (rzędu 10+ lat,
-    dłużej dla implantów)
+    ✅ POTWIERDZONE 2026-07-30: co najmniej **10 LAT** od wprowadzenia
+    do obrotu OSTATNIEGO egzemplarza wyrobu objętego dokumentacją
+    (art. 10 ust. 8 MDR), a dla WYROBÓW DO IMPLANTACJI — co najmniej
+    **15 LAT** — potwierdzone jednogłośnie w 8+ zgodnych źródłach
+    (pacjentwbadaniach.abm.gov.pl [Rząd 1], cemed.info, iso.org.pl)
   → Producenci spoza UE: obowiązek wyznaczenia osoby odpowiedzialnej za zgodność
     regulacyjną (PRRC) lub stały dostęp do takiej osoby
 

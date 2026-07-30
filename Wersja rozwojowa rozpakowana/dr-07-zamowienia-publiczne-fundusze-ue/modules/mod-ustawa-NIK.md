@@ -35,8 +35,24 @@ Rzetelnosc:   Prawdziwosc danych, dokumentow
 ```
 Upowazmienie:  Kontroler legitimuje sie upowazmeniem
 Protokol:      Podpisywany przez kierownika jednostki kontrolowanej (lub zastrzezenia)
-Zastrzezenia:  14 dni od doreczenia protokolu
-Wystapieniepokontrolne: Kierownik zawiadamia o sposobie realizacji wnioskow w 14 dniach
+Zastrzezenia:  ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) — poprzednia
+               wersja podawała błędnie "14 dni". Aktualny art. 54 ustawy
+               o NIK (t.j. Dz.U.2022.623, potwierdzone lexlege.pl,
+               arslege.pl) stanowi: zastrzeżenia do WYSTĄPIENIA
+               POKONTROLNEGO wnosi się w terminie 21 DNI od jego
+               przekazania. ⚠️ NIEROZSTRZYGNIĘTE W TEJ SESJI: część
+               starszych źródeł (z 2010 r.) mówi o odrębnym terminie
+               14-dniowym dla zastrzeżeń do samego "protokołu kontroli"
+               — ale te same starsze źródła wskazują, że nowelizacja z
+               2010 r. wprowadziła REZYGNACJĘ ZE SPORZĄDZANIA ODRĘBNEGO
+               PROTOKOŁU KONTROLI na rzecz wystąpienia pokontrolnego —
+               możliwe, że "protokół kontroli" jako odrębny dokument z
+               własnym terminem już nie istnieje w obecnej praktyce.
+               SPRAWDŹ aktualny stan w ISAP przed użyciem w piśmie.
+Wystapieniepokontrolne: Kierownik zawiadamia o sposobie realizacji wnioskow w terminie
+               NIE KRÓTSZYM niż 14 dni (potwierdzone: gov.pl/NIK,
+               nik.gov.pl — to inny termin niż zastrzeżenia, dotyczy
+               informowania o wykonaniu wniosków, nie ich zaskarżenia)
 ```
 
 ## Zasady absolutne

@@ -12,6 +12,11 @@
 
 ---
 
+> 📌 **Mechanizm siostrzany (dodano 2026-07-27):** ten plik pokrywa
+> adresata przy ZASKARŻANIU już wydanego rozstrzygnięcia. Dla
+> właściwości sądu/organu przy WNOSZENIU sprawy OD PODSTAW (pozew,
+> wniosek) — zob. `shared/WLASCIWOSC-GATE.md`.
+
 ## ZASADA
 
 Nazwa środka zaskarżenia (zażalenie/odwołanie/skarga/sprzeciw/zarzuty)

@@ -58,7 +58,7 @@ Brak choćby jednej przesłanki = brak mobbingu (sąd oddali powództwo).
 |---|---|---|
 | Zadośćuczynienie za rozstrój zdrowia | art. 94³ §3 KP | Rozstrój zdrowia wskutek mobbingu (dokumentacja medyczna!) |
 | Odszkodowanie za rozwiązanie umowy | art. 94³ §4–5 KP | Pracownik rozwiązał umowę pisemnie z powodu mobbingu |
-| Odszkodowanie min. = wynagrodzenie za 6 tygodni | art. 94³ §4 in fine | — |
+| Odszkodowanie min. = MINIMALNE WYNAGRODZENIE ZA PRACĘ (⚠️ POPRAWKA 2026-07-27, FAZA 3E/ZASADA 14 — było błędnie "wynagrodzenie za 6 tygodni"; dosłowne brzmienie art. 943 §4 in fine: "odszkodowania w wysokości nie niższej niż minimalne wynagrodzenie za pracę" — potwierdzone jednogłośnie w 8 źródłach: arslege.pl, lexlege.pl, tvn24.pl, infor.pl, pwrz.pl, gofin.pl, prawnik.cc, fzzpkis.pl) | art. 94³ §4 in fine | brak górnej granicy odszkodowania — to WYŁĄCZNIE dolna granica |
 | Odszkodowanie za dyskryminację | art. 18³d KP | Min. minimalne wynagrodzenie za pracę |
 
 ---
@@ -187,7 +187,17 @@ Roszczenia z art. 94³ KP i art. 18³a KP są ROSZCZENIAMI PRACOWNICZYMI
   → tryb: KPC art. 459–477 (postępowanie odrębne w sprawach z zakresu prawa pracy)
   → właściwość przemienna: siedziba pracodawcy / zakład / miejsce zamieszkania pracownika
 
-Opłata: pracownik zwolniony od kosztów sądowych do wartości sporu 75 000 zł
+Opłata: pracownik zwolniony od kosztów sądowych do wartości sporu 50 000 zł
+  (⚠️ POPRAWKA 2026-07-27, FAZA 3E/ZASADA 14 — było błędnie "75 000 zł".
+  Art. 35 ust. 1 ustawy o kosztach sądowych w sprawach cywilnych: opłata
+  podstawowa 30 zł od apelacji/zażalenia/skargi kasacyjnej WYŁĄCZNIE,
+  jeśli WPS ≤50 000 zł; powyżej tej kwoty — opłata stosunkowa 5% od
+  NADWYŻKI ponad 50 000 zł, od wszystkich pism. Potwierdzone jednogłośnie
+  w 10 niezależnych źródłach [poradnikprzedsiebiorcy.pl marzec 2026,
+  infor.pl, solidarnosc.org.pl, prawo.pl, kpmg.com, pckp.pl i inne].
+  ⚠️ SPRAWDŹ AKTUALNY STAN: część źródeł [kpmg.com] wskazuje na dalszą
+  reformę CAŁKOWICIE znoszącą opłaty dla pracowników niezależnie od WPS
+  — NIEROZSTRZYGNIĘTE w tej sesji, czy ta reforma weszła w życie)
 
 Przedawnienie:
   → Art. 291 KP: 3 lata od wymagalności roszczenia (nie art. 118 KC!)

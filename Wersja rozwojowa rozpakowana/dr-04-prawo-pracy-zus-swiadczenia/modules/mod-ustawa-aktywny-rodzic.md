@@ -10,13 +10,23 @@
 **Weryfikacja ISAP przed każdym cytowaniem.**
 
 ## Zakres — trzy warianty świadczenia
+⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) — 2 błędy naprawione:
+(1) "babciowe" to potoczna nazwa WARIANTU 1 ("aktywni rodzice w
+pracy"), NIE wariantu 3 jak błędnie wcześniej podpisano — potwierdzone
+jednogłośnie w 7+ źródłach (infor.pl, bliskoedu.pl, interia.pl);
+(2) pominięto wyższą stawkę 1900 zł dla dziecka z orzeczeniem o
+niepełnosprawności — dotyczy WARIANTU 1, nie tylko podstawowych 1500 zł.
 ```
-1. „Aktywni rodzice w pracy":        1500 zł/mc — gdy oboje rodzice pracują
-                                      (lub jeden z niepełnosprawnością lub student)
-2. „Aktywnie w żłobku":              1500 zł/mc — na opłacenie żłobka (klub dziecięcy,
-                                      opiekun dzienny) — wiek dziecka do lat 3
-3. „Aktywnie w domu" (babciowe):     500 zł/mc — gdy dziecko wychowywane w domu
-                                      przez nianię lub krewnego niebędącego rodzicem
+1. „Aktywni rodzice w pracy" (potocznie: BABCIOWE): 1500 zł/mc — gdy
+   oboje rodzice pracują (lub jeden z niepełnosprawnością lub student);
+   1900 zł/mc gdy DZIECKO ma orzeczenie o niepełnosprawności — dla
+   opieki organizowanej poza żłobkiem (niania, babcia, opiekun)
+2. „Aktywnie w żłobku":              do 1500 zł/mc — na opłacenie żłobka (klub dziecięcy,
+                                      opiekun dzienny) — wiek dziecka do lat 3, kwota
+                                      zależna od faktycznej opłaty placówki
+3. „Aktywnie w domu":                500 zł/mc — gdy dziecko wychowywane w domu
+                                      przez rodzica niepracującego (NIE "babciowe" —
+                                      to osobna, trzecia nazwa/wariant)
 ```
 
 ## Warunki nabycia prawa

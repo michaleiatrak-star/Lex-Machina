@@ -1,8 +1,14 @@
 # mod-ustawa-zaskarzanie-decyzji-wlasnosci
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** KPA art. 156 §2a — Dz.U. 2025 poz. 1691 | Ustawa reprywatyzacyjna — Dz.U. 2021 poz. 795 ze zm.
+**Źródło weryfikacji:** KPA art. 156 §2 — Dz.U. 2025 poz. 1691 | Ustawa reprywatyzacyjna — Dz.U. 2021 poz. 795 ze zm.
 **Data weryfikacji online:** 2026-06-05
+⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14): cały moduł błędnie cytował
+"art. 156 §2a KPA" — poprawnie to art. 156 **§2** (bez litery "a").
+Sama TREŚĆ progów (10/30 lat) była już poprawna i potwierdzona w 6+
+zgodnych źródłach (kancelariarewers.pl, prawo.pl, infor.pl,
+krotoski-adwokaci.pl, prawobiznesu.com) — poprawiono WYŁĄCZNIE numer
+paragrafu we wszystkich 8 wystąpieniach w tym pliku.
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
 ---
@@ -10,14 +16,14 @@
 ## 1. CORE
 
 ### Zakres
-Art. 156 §2a KPA — ograniczenie stwierdzenia nieważności decyzji dotyczących nieruchomości po 30 latach; ustawa reprywatyzacyjna (dekret warszawski — komisja ds. reprywatyzacji); odszkodowanie jako alternatywa po upływie terminu nieważności.
+Art. 156 §2 KPA — ograniczenie stwierdzenia nieważności decyzji dotyczących nieruchomości po 30 latach; ustawa reprywatyzacyjna (dekret warszawski — komisja ds. reprywatyzacji); odszkodowanie jako alternatywa po upływie terminu nieważności.
 
 ### Akty
 
 | Akt | Dz.U. |
 |---|---|
-| KPA art. 156 §2a i art. 158 §3 | Dz.U. 2025 poz. 1691 t.j. |
-| Ustawa z 09.06.2021 r. (nowelizacja KPA — art. 156 §2a) | Dz.U. 2021 poz. 1706 |
+| KPA art. 156 §2 i art. 158 §3 | Dz.U. 2025 poz. 1691 t.j. |
+| Ustawa z 09.06.2021 r. (nowelizacja KPA — art. 156 §2) | Dz.U. 2021 poz. 1706 |
 | Ustawa reprywatyzacyjna (nieruchomości warszawskie) | Dz.U. 2021 poz. 795 ze zm. |
 
 ---
@@ -28,7 +34,7 @@ Art. 156 §2a KPA — ograniczenie stwierdzenia nieważności decyzji dotyczący
 □ Kiedy została wydana i doręczona kwestionowana decyzja?
 □ Czy minęło 10 lat? (ograniczenie stwierdzenia nieważności)
 □ Czy minęło 30 lat? (całkowity zakaz nieważności — możliwe tylko odszkodowanie)
-□ Czy dotyczy nieruchomości (art. 156 §2a KPA) czy innej sprawy?
+□ Czy dotyczy nieruchomości (art. 156 §2 KPA) czy innej sprawy?
 □ Czy to sprawa warszawska (dekret Bieruta 1945)?
 □ Kto jest stroną: dawny właściciel / następca prawny / nabywca od gminy / inwestor?
 ```
@@ -37,7 +43,7 @@ Art. 156 §2a KPA — ograniczenie stwierdzenia nieważności decyzji dotyczący
 
 ## 3. PROCEDURA
 
-### Ograniczenia nieważności decyzji dot. nieruchomości (art. 156 §2a KPA)
+### Ograniczenia nieważności decyzji dot. nieruchomości (art. 156 §2 KPA)
 
 ```
 Nowelizacja KPA (Dz.U. 2021 poz. 1706 — w życie od 16.09.2021):
@@ -55,7 +61,7 @@ PO 30 LATACH od doręczenia decyzji:
   → Postępowania wszczęte po 30 latach umarza się z mocy prawa
   → Możliwe wyłącznie: odszkodowanie z KC
 
-⚠️ Weryfikuj aktualne brzmienie art. 156 §2a i art. 158 §3 KPA w ISAP.
+⚠️ Weryfikuj aktualne brzmienie art. 156 §2 i art. 158 §3 KPA w ISAP.
 ```
 
 ### Ustawa reprywatyzacyjna (nieruchomości warszawskie)
@@ -90,11 +96,11 @@ Data decyzji wywłaszczeniowej / nacjonalizacyjnej: [___]
 
 ## 5. STRATEGIA, DOWODY, QUALITY GATE, OUTPUT
 
-**Strategia:** Przed wszczęciem postępowania — oblicz terminy z art. 156 §2a i art. 158 §3 KPA. Przy upływie 10 lat — wniosek o stwierdzenie naruszenia prawa + odszkodowanie z art. 4171 KC. Dla spraw warszawskich — sprawdź czy komisja reprywatyzacyjna ma właściwość.
+**Strategia:** Przed wszczęciem postępowania — oblicz terminy z art. 156 §2 i art. 158 §3 KPA. Przy upływie 10 lat — wniosek o stwierdzenie naruszenia prawa + odszkodowanie z art. 4171 KC. Dla spraw warszawskich — sprawdź czy komisja reprywatyzacyjna ma właściwość.
 
 **Dowody:** Data doręczenia decyzji (potwierdzenie z akt archiwalnych) + dokumenty własności + dokumenty nacjonalizacji/wywłaszczenia + wycena nieruchomości (przy odszkodowaniu).
 
-**Quality gate:** Termin 10/30 lat obliczony? KPA art. 156 §2a zweryfikowany? Przepisy przejściowe (2021) sprawdzone?
+**Quality gate:** Termin 10/30 lat obliczony? KPA art. 156 §2 zweryfikowany? Przepisy przejściowe (2021) sprawdzone?
 
 **Output:** 1. Kwalifikacja (termin od decyzji); 2. Dopuszczalny tryb (nieważność / naruszenie prawa / odszkodowanie); 3. Dowody; 4. Strategia; 5. Rekomendacja.
 

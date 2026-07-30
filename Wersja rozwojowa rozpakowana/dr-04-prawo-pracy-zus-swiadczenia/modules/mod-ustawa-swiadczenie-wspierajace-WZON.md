@@ -117,17 +117,24 @@ ODWOŁANIE:
 > ⚠️ Kwoty powiązane z rentą socjalną — waloryzacja co roku 1 marca. Zawsze weryfikuj aktualne kwoty:
 > `web_search: "świadczenie wspierające kwoty 2026 tabela renta socjalna"`
 
-**Podstawa: renta socjalna = 1 878,91 zł brutto (do 28 lutego 2026 r.)**
-*Od 1 marca 2026: po waloryzacji — weryfikuj aktualną kwotę renty socjalnej*
+**Podstawa: renta socjalna = 1 978,49 zł brutto (od 1 marca 2026 r.,
+po waloryzacji 5,3% — ✅ ZAKTUALIZOWANE 2026-07-27, FAZA 3E/ZASADA 14,
+potwierdzone w 10+ zgodnych źródłach z marca-czerwca 2026: rmf24.pl,
+gazetaprawna.pl, infor.pl, inewi.pl. Poprzednia kwota 1 878,91 zł
+obowiązywała TYLKO do 28.02.2026 — moduł już to poprawnie zastrzegał,
+ale nie miał jeszcze nowej kwoty, bo VER poprzedzała 1.03.2026)**
 
-| Punkty WZON | Procent renty socjalnej | Kwota (do 28.02.2026) |
+| Punkty WZON | Procent renty socjalnej | Kwota (od 1.03.2026, przeliczona) |
 |---|---|---|
-| 70–74 pkt | 40% | ok. 752 zł/mies. |
-| 75–79 pkt | 60% | ok. 1 128 zł/mies. |
-| 80–84 pkt | 80% | ok. 1 504 zł/mies. |
-| 85–89 pkt | 120% | ok. 2 255 zł/mies. |
-| 90–94 pkt | 180% | ok. 3 383 zł/mies. |
-| 95–100 pkt | 220% | ok. 4 134 zł/mies. |
+| 70–74 pkt | 40% | ok. 791 zł/mies. |
+| 75–79 pkt | 60% | ok. 1 187 zł/mies. |
+| 80–84 pkt | 80% | ok. 1 583 zł/mies. |
+| 85–89 pkt | 120% | ok. 2 374 zł/mies. |
+| 90–94 pkt | 180% | ok. 3 561 zł/mies. |
+| 95–100 pkt | 220% | ok. 4 353 zł/mies. |
+
+⚠️ Renta socjalna podlega COROCZNEJ waloryzacji od 1 marca — po
+1.03.2027 sprawdź ponownie aktualną kwotę bazową przed przeliczeniem.
 
 > ⚠️ Po waloryzacji 01.03.2026 kwoty wzrosną — weryfikuj aktualne przez web_search.
 

@@ -1,6 +1,6 @@
 ---
 name: dr-06-podatki-finanse-publiczne-aml
-version: 3.6
+version: 3.14
 description: |
   DR-06: Podatki, Finanse Publiczne, AML
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
