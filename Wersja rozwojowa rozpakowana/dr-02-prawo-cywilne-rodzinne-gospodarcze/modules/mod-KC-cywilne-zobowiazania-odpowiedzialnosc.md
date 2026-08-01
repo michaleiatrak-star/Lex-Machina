@@ -68,6 +68,65 @@ Delikt i kontrakt (dwa reżimy odpowiedzialności), kara umowna i miarkowanie, b
 | art. 433 | Wyrzucenie/wylanie/spadnięcie z pomieszczenia | Ryzyko |
 | art. 430 | Zwierzchnik za podwładnego (błąd lekarski, wypadek przy pracy) | Ryzyko |
 
+⭐ DODANE 2026-07-30 (na żądanie użytkownika) — ART. 435 KC W
+KONTEKŚCIE "CZYSTEGO NIESZCZĘŚLIWEGO WYPADKU" (np. awaria maszyny,
+BEZ naruszenia BHP): ODPOWIEDŹ NA PYTANIE "czy sama awaria zwalnia z
+odpowiedzialności?" — CO DO ZASADY **NIE**:
+
+```
+ZASADA: art. 435 §1 KC nakłada odpowiedzialność NA ZASADZIE RYZYKA —
+  CAŁKOWICIE NIEZALEŻNIE od winy przedsiębiorcy/pracodawcy. Sam fakt
+  BRAKU naruszenia BHP (a więc BRAKU podstaw do odpowiedzialności
+  KARNEJ z art. 220/155 KK — patrz DR-03,
+  `mod-KK-art148-162-przeciwko-zyciu-zdrowiu.md`) NIE OZNACZA braku
+  odpowiedzialności CYWILNEJ — te dwa reżimy są NIEZALEŻNE
+
+TRZY, ZAMKNIĘTE PRZESŁANKI EGZONERACYJNE (jedyny sposób na
+  uwolnienie się od odpowiedzialności z art. 435):
+  1) SIŁA WYŻSZA — zdarzenie ZEWNĘTRZNE, nadzwyczajne, niemożliwe do
+     przewidzenia ani zapobieżenia (np. trzęsienie ziemi, powódź
+     stulecia) — ⚠️ KLUCZOWE: pojęcie siły wyższej WYRAŹNIE NIE
+     OBEJMUJE zdarzeń WEWNĘTRZNYCH wobec przedsiębiorstwa — WPROST
+     wskazane w orzecznictwie jako NIEKWALIFIKUJĄCE SIĘ przykłady:
+     wybuch kotła w fabryce, "zwykła" awaria prądu, zwykła awaria
+     maszyny/urządzenia technicznego. AWARIA MASZYNY, SAMA W SOBIE,
+     TO NIE JEST SIŁA WYŻSZA
+  2) WYŁĄCZNA WINA POSZKODOWANEGO — np. pracownik WBREW zakazom
+     zakładowym włożył rękę w pracującą maszynę
+  3) WYŁĄCZNA WINA OSOBY TRZECIEJ, za którą przedsiębiorca nie
+     odpowiada (może nawet pozostać NIEZIDENTYFIKOWANA — uchwała SN
+     z 26.07.2017, III CZP 30/17)
+
+⚠️ RYGORYSTYCZNA PRAKTYKA SĄDOWA: jeśli DZIAŁANIE/RUCH przedsiębiorstwa
+  przyczyniło się do szkody CHOĆBY W 1% — przesłanki egzoneracyjne
+  NIE ZNAJDĄ zastosowania, odpowiedzialność POZOSTAJE. Awaria
+  maszyny, która jest ELEMENTEM ruchu przedsiębiorstwa (nie zewnętrzną
+  ingerencją), z DEFINICJI wyklucza powołanie się na siłę wyższą
+
+CIĘŻAR DOWODU: to PRZEDSIĘBIORCA musi udowodnić, że NIE prowadzi
+  działalności "wprawianej w ruch siłami przyrody" (jeśli chce
+  wyłączyć ten reżim) LUB że zachodzi jedna z 3 przesłanek
+  egzoneracyjnych — DOMNIEMANIE działa NA NIEKORZYŚĆ przedsiębiorcy
+
+ZAKRES PODMIOTOWY: dotyczy przedsiębiorstw, których funkcjonowanie
+  jest UZALEŻNIONE od maszyn/urządzeń wykorzystujących siły przyrody
+  (para, gaz, elektryczność, paliwa płynne) jako CAŁOŚĆ działalności
+  — NIE wystarczy samo POSIADANIE pojedynczej maszyny z silnikiem
+  (np. mały sklep osiedlowy z jedną chłodziarką TYPOWO nie kwalifikuje
+  się, ALE zmechanizowane przedsiębiorstwo budowlane z dźwigami/
+  koparkami/windami — TAK)
+
+PRAKTYCZNA KONSEKWENCJA: poszkodowany pracownik/osoba trzecia MA
+  UŁATWIONĄ drogę dochodzenia odszkodowania — NIE MUSI udowadniać
+  winy pracodawcy (jak przy zwykłej odpowiedzialności z art. 415 KC),
+  WYSTARCZY wykazać sam fakt szkody + związek przyczynowy z RUCHEM
+  przedsiębiorstwa — ciężar obalenia domniemania spoczywa na stronie
+  pozwanej
+
+Potwierdzone w 6+ zgodnych źródłach, w tym Sąd Najwyższy (uchwała III
+CZP 30/17), OIRP Warszawa (analiza orzecznictwa), rp.pl.
+```
+
 ### Schemat doboru trybu postępowania
 
 ```

@@ -162,6 +162,12 @@ Checklist praktyczny:
 - `mod-KP-prawo-pracy.md` — gdy wypadek jest podstawą roszczeń pracowniczych
   (rozwiązanie umowy z winy pracodawcy przy naruszeniu BHP)
 - DR-15 (compliance) — gdy sprawa dotyczy systemowych naruszeń BHP
+- ⚠️ DODANE 2026-07-30: ASPEKT KARNY śmiertelnego wypadku (art. 220 KK
+  — narażenie; art. 155 KK — jeśli śmierć faktycznie nastąpiła; art.
+  283 §1 KP — wykroczenie gdy brak bezpośredniego związku) → DR-03,
+  `mod-KK-art148-162-przeciwko-zyciu-zdrowiu.md` sekcja CROSS-
+  REFERENCJE — TEN moduł (dr-04) dostarcza WYŁĄCZNIE aspekt
+  administracyjno-pracowniczy, unikaj duplikacji
 
 ---
 *mod-wypadek-przy-pracy-choroba-zawodowa.md · dr-04/modules/ · 2026-06-12*

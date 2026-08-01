@@ -35,6 +35,8 @@
 | Ustawa o prawach konsumenta | Dz.U. 2023 poz. 2759 ze zm. | mod-ustawa-prawa-konsumenta | ✅ OK |
 | Ustawa o własności lokali + spółdzielnie | Dz.U. 2021 poz. 1048 ze zm. + Dz.U. 2024 poz. 593 t.j. | mod-ustawa-spoldzielnie-wlasnosc-lokali | ✅ OK |
 | Ustawa o timeshare + zastaw rejestrowy | Dz.U. 2018 poz. 513 + Dz.U. 2018 poz. 2017 | mod-ustawa-timeshare-zastaw-rejestrowy | ✅ OK |
+| Kodeks cywilny art. 385¹ (klauzule abuzywne — kredyty frankowe) | ta sama pozycja co główny KC — zweryfikuj t.j. na ISAP | mod-KC-kredyty-frankowe | ✅ WYDZIELONY 2026-06-14 z mod-KC-cywilne-zobowiazania-odpowiedzialnosc (NOTA-4) — DOPISANE 2026-07-30 (sync) |
+| Ustawa o przeciwdziałaniu nieuczciwym praktykom rynkowym (UPNPR) + Ustawa o radiofonii i telewizji art. 16b/18/53 | ⚠️ zweryfikuj oba t.j. na ISAP | mod-reklama-wobec-nieletnich | ✅ NOWY 2026-07-18 — DOPISANE 2026-07-30 (sync) |
 
 > Źródło weryfikacji: Dz.U. 2025 poz. 1071 ze zm. | orzeczenia.ms.gov.pl | sn.pl
 > Aktualizacja: 2026-07-02b (TRYB DZU — KC/KSH: nowelizacje 2025.1508/2026.795/

@@ -107,7 +107,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | DR-06 | Podatki/Finanse/AML | 21 | 0 | 0 | 0 | 21 |
 | DR-07 | Zamówienia Publiczne/Fundusze | 12 | 2 | 0 | 0 | 14 |
 | DR-08 | Samorząd Terytorialny | 23 | 0 | 0 | 0 | 23 |
-| DR-09 | Budownictwo/Środowisko/Energia | 26 | 0 | 0 | 2 | 28 |
+| DR-09 | Budownictwo/Środowisko/Energia | 27 | 0 | 0 | 2 | 29 |
 | DR-10 | Zdrowie/Farmacja/Żywność | 27 | 0 | 0 | 0 | 27 |
 | DR-11 | Cyfrowe/AI/Dane/IP | 20 | 0 | 0 | 0 | 20 |
 | DR-12 | Sądownictwo/Zawody | 11 | 1 | 0 | 0 | 12 |
@@ -185,6 +185,9 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 ---
 
 | Ustawa o ochronie praw lokatorów art. 6, 19a (kaucja przy najmie) | ⚠️ zweryfikuj t.j. na ISAP | dr-02/modules/mod-kaucja-najem-lokalu | ✅ NOWY 2026-07-19 |
+| Kodeks cywilny art. 385¹ (klauzule abuzywne — kredyty frankowe) | ⚠️ ta sama pozycja co główny mod-KC — zweryfikuj t.j. KC na ISAP | dr-02/modules/mod-KC-kredyty-frankowe | ✅ WYDZIELONY 2026-06-14 z mod-KC-cywilne-zobowiazania-odpowiedzialnosc (NOTA-4, moduł >400 linii) — DOPISANE do mapy 2026-07-30 (sync) |
+| Ustawa o przeciwdziałaniu nieuczciwym praktykom rynkowym (UPNPR) + Ustawa o radiofonii i telewizji art. 16b/18/53 (reklama wobec nieletnich) | ⚠️ zweryfikuj oba t.j. na ISAP | dr-02/modules/mod-reklama-wobec-nieletnich | ✅ NOWY 2026-07-18 — DOPISANE do mapy 2026-07-30 (sync) |
+| Prawo wekslowe (1936) + Prawo czekowe (1936) + Prawo przedsiębiorców Rozdz. 3-5 (kontrola przedsiębiorcy, koncesje) | Dz.U. 2022 poz. 282 t.j. (wekslowe) + Dz.U. 2016 poz. 462 t.j. (czekowe) + Dz.U. 2025 poz. 1480 t.j. (Prawo przedsiębiorców) | dr-02/modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje | ✅ NOWY 2026-07-19 — DOPISANE do mapy 2026-07-30 (sync) |
 
 ---
 
@@ -272,6 +275,8 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o ubezpieczeniu społecznym rolników (KRUS) | Dz.U. 2025 poz. 1770 t.j. (sync 2026-07-02 z dr-04) | dr-04/modules/mod-KRUS-rolnicze-ubezpieczenia | ✅ OK |
 | Ustawa o rehabilitacji zawodowej i PFRON — ROZBUDOWANE 2026-07-20: ANEKS o likwidacji Wypożyczalni PFRON (temat świeży, w toku) | Dz.U. 2025 poz. 913 ze zm. | dr-04/modules/mod-ustawa-rehabilitacja-PFRON | ✅ OK |
 | Ustawa o PIP | Dz.U. 2024 poz. 1712 t.j. + zm. Dz.U. 2025 poz. 321/368/620/769, Dz.U. 2026 poz. 160 ✅ nowelizacja Dz.U. 2026 poz. 473 obowiązuje od 08.07.2026 (VER 2026-07-07) | dr-04/modules/mod-ustawa-PIP-inspekcja-pracy | ✅ OK — sekcja 5 modułu |
+| ⭐ Katalog mechanizmów obchodzenia prawa pracy (dodano 2026-07-30) — TEN SAM akt bazowy co wiersz wyżej, moduł dostarcza UNIKALNY katalog (nie duplikat), NIE nowy akt prawny | Patrz wiersz "Ustawa o PIP" wyżej | dr-04/modules/mod-obchodzenie-prawa-pracy-reforma-PIP-2026 (v1.0.1, POPRAWIONY po wykryciu duplikacji) | ✅ NOWY |
+| ⚡⚡ Ustawa z 19.06.2026 o zmianie KP oraz KPC — "ustawa antymobbingowa" | ✅ PODPISANA przez Prezydenta 30.07.2026 — nr Dz.U. NIEZWERYFIKOWANY (VER 2026-07-30) | dr-04/modules/mod-KP-mobbing-dyskryminacja + shared/definicje/DEF-PRACA.md | ✅ ZAKTUALIZOWANE 2026-07-30 |
 | Ustawa o minimalnym wynagrodzeniu | Dz.U. 2024 poz. 1773 ze zm. (MW 2026: 4806 zł) — POPRAWKA 2026-07-26, było błędnie "poz. 1285" | dr-04/modules/mod-ustawa-minimalne-wynagrodzenie | ✅ OK |
 | Ustawa o ZFSS | Dz.U. 2024 poz. 288 ze zm. | dr-04/modules/mod-ustawa-ZFSS | ✅ OK |
 | Ustawa o zatrudnianiu pracowników tymczasowych | Dz.U. 2025 poz. 236 t.j. ✅ VER 2026-07-04 (POPRAWKA — było błędnie 2025.1682, numer nieistniejący dla tej ustawy) | dr-04/modules/mod-ustawa-praca-tymczasowa | ✅ OK |
@@ -299,6 +304,9 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | KP Dział V/XIV — odpowiedzialność materialna pracowników + przedawnienie roszczeń | Dz.U. 2025 poz. 277 ze zm. (zm.: 2026.25, 2025.807, 2025.1423) | dr-04/modules/mod-KP-dzial-V-XIV-odpowiedzialnosc-materialna-przedawnienie | ✅ NOWY 2026-07-18 |
 | KP — nadużycia pracodawcy (obejście limitu 3 umów/33 mies., kary porządkowe, degradacja) | Dz.U. 2025 poz. 277 ze zm. (zm.: 2026.25, 2025.807, 2025.1423) | dr-04/modules/mod-KP-naduzycia-pracodawcy-limity-kary-degradacja | ✅ NOWY 2026-07-18 |
 | Konflikt interesów w pracy — rodzina/nepotyzm (głównie wiedza fachowa/compliance) | ⚠️ w większości wiedza fachowa, nie akt prawny | dr-04/modules/mod-KP-konflikt-interesow-rodzina-nepotyzm | ✅ NOWY 2026-07-18 |
+| Karta Nauczyciela (KN) — aspekty pracownicze (wynagrodzenie, czas pracy, urlopy) | Dz.U. 2024 poz. 986 t.j. + zm. Dz.U. 2024 poz. 1871, Dz.U. 2025 poz. 1160 | dr-04/modules/mod-ustawa-karta-nauczyciela-pracownicze | ✅ NOWY 2026-07-27 — DOPISANE do mapy 2026-07-30 (sync) |
+| Klasyfikacja naruszeń BHP/prawa pracy — właściwy adresat zgłoszenia (PIP/sąd pracy/Policja/ZUS/KAS) | ⚠️ moduł przekrojowy — odsyła do wielu aktów źródłowych (KP, ustawa o PIP, ustawy branżowe BHP), brak jednego "własnego" aktu | dr-04/modules/mod-klasyfikacja-naruszen-bhp-prawa-pracy | ✅ NOWY 2026-07-27 — DOPISANE do mapy 2026-07-30 (sync) |
+| Ustawa z 26.09.2025 o zmianie KP i innych ustaw — reforma stażu pracy (zaliczanie zlecenia/B2B) | Dz.U. 2025 poz. 1423 | dr-04/modules/mod-reforma-stazu-pracy-2025-2026 | ✅ NOWY 2026-07-27 — DOPISANE do mapy 2026-07-30 (sync) |
 
 ---
 
@@ -361,6 +369,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o doradztwie podatkowym (zawód zaufania publicznego) | Dz.U. 2021 poz. 2117 + Dz.U. 2025 poz. 1882 (nowelizacja) ✅ VER: 2026-06-14 | dr-06/modules/mod-ustawa-doradcy-podatkowi-zawod | ✅ NOWY |
 | Podatek rolny | Dz.U. 2025 poz. 1344 t.j. | dr-06/modules/mod-ustawa-podatek-nieruchomosci-i-lokalne | ✅ OK |
 | Ustawa o podatku od wydobycia kopalin | Dz.U. 2024 poz. 44 ze zm. | dr-06/modules/mod-KAS-kontrola-celno-skarbowa | ✅ OK |
+| Prawo przedsiębiorców art. 19 (limit płatności gotówkowych) | Dz.U. 2025 poz. 1480 t.j. | dr-06/modules/mod-limit-platnosci-gotowkowych | ✅ NOWY 2026-07-27 — DOPISANE do mapy 2026-07-30 (sync) |
 
 ---
 
@@ -464,6 +473,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o KW i hipotece | Dz.U. 2025 poz. 341 t.j. | dr-09/modules/mod-UGN-gospodarka-nieruchomosciami | ✅ OK |
 | PrBud — art. 1 pkt 1 i 3 (zmiana z Dz.U. 2025 poz. 1847, odzwierciedlona w t.j. 2026.524) — wchodzi 20.09.2026 | Dz.U. 2025 poz. 1847 / 2026 poz. 524 (przepis) ✅ VER 2026-07-13: skonsolidowano dwa poprzednie osobne wpisy | dr-09/modules/mod-PrBud-prawo-budowlane | ⚡ WCHODZI |
 | Prawo energetyczne — zmiana 2026 (art. 9, 11, 13, 14) | Dz.U. 2026 poz. 516 — pozostałe przepisy wchodzą 16.10.2026 (reszta już w mocy od 16.04.2026) ✅ VER 2026-07-13 | dr-09/modules/mod-PrEnergetyczne-URE-OZE | ⏳ OCZEKUJE |
+| Ustawa o ochronie zabytków i opiece nad zabytkami + Prawo budowlane art. 5/9/39 (dostępność, kategorie obiektów) + rozp. MZ ws. lokalu apteki | Ustawa zabytki: Dz.U. 2024 poz. 1292 t.j., ze zm. do 2026.483 (13.03.2026) — rozp. lokal apteki: Dz.U. 2025 poz. 1202 t.j. — ✅ VER 2026-07-30 (sync z dr-09) | dr-09/modules/mod-ochrona-zabytkow-obiekty-uzytecznosci-publicznej | ✅ NOWY |
 
 ---
 
@@ -501,7 +511,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa Prawo oświatowe + szkolnictwo wyższe | Dz.U. 2025 poz. 1043 t.j. (oświatowe, sync 2026-07-02 — było błędnie 2024.737) + Dz.U. 2024 poz. 1571 t.j. (szkolnictwo wyższe) | dr-10/modules/mod-ustawa-oswiata-szkolnictwo-wyzsze | ✅ OK |
 | Ustawa o sporcie | Dz.U. 2026 poz. 95 t.j. ✅ VER 2026-07-04 (sync z dr-10; rozdzielona od imprez masowych) | dr-10/modules/mod-ustawa-sport-turystyka-imprezy-masowe | ✅ OK |
 | Ustawa o bezpieczeństwie imprez masowych | Dz.U. 2023 poz. 616 t.j. ✅ VER 2026-07-04 (sync z dr-10; nowy wiersz, wydzielony z dawnego zbiorczego wpisu sport+imprezy masowe; poprzedni t.j. Dz.U. 2022 poz. 1466) | dr-10/modules/mod-ustawa-sport-turystyka-imprezy-masowe | ✅ NOWY |
-| Ustawa o bezpieczeństwie żywności | Dz.U. 2023 poz. 1448 ze zm. | dr-10/modules/mod-ustawa-bezpieczenstwo-zywnosci | ✅ OK |
+| Ustawa o bezpieczeństwie żywności ⭐ + KLASTER 15+ dodatkowych aktów (Rozp. UE 1169/2011, Dyrektywa 2012/12/UE, Rozp. UE 1333/2008, Dyrektywa 2000/36/WE, Rozp. UE 2017/625, Rozp. UE 2016/2031, Rozp. UE 1151/2012, ⚡ ustawa o zakazie ferm futerkowych 12/2025, ⚡ NOWA ustawa o zdrowiu zwierząt 21.11.2025/Dz.U.2025.1795, CITES — pełna lista w dr-10/MAPA-AKTOW.md) — moduł ROZBUDOWANY OŚMIOKROTNIE 2026-07-30 na żądanie użytkownika, z 37 linii do 35 sekcji tematycznych | Dz.U. 2023 poz. 1448 ze zm. (akt bazowy) — ⚠️ SPRAWDŹ dr-10/MAPA-AKTOW.md dla PEŁNEJ, precyzyjnej listy wszystkich powiązanych aktów i ich aktualnych Dz.U. — TEN wiersz centralny NIE odzwierciedla już pełnej złożoności, sync 2026-07-30 | dr-10/modules/mod-ustawa-bezpieczenstwo-zywnosci | ✅ ROZBUDOWANY 2026-07-30 — patrz dr-10/MAPA-AKTOW.md dla szczegółów |
 | Ustawa o Inspekcji Weterynaryjnej | Dz.U. 2024 poz. 12 t.j. | dr-10/modules/mod-ustawa-inspekcja-weterynaryjna | ✅ OK |
 | Ustawa o izbach aptekarskich (zawód zaufania publicznego) | Dz.U. 2025 poz. 1693 t.j. ✅ VER: 2026-06-14 | dr-10/modules/mod-ustawa-aptekarz-zawod | ✅ NOWY |
 | Ustawa o zawodzie lekarza weterynarii i izbach lekarsko-weterynaryjnych (zawód zaufania publicznego) | Dz.U. 2026 poz. 125 t.j. ✅ VER: 2026-06-14 | dr-10/modules/mod-ustawa-lekarz-weterynarii-zawod | ✅ NOWY |
@@ -526,6 +536,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawy o zawodach prawniczych pokrewnych (kontekst zdrowia — np. biegli sądowi medyczni) | ⚠️ zweryfikuj akty właściwe na ISAP | dr-10/modules/mod-ustawa-zawody-prawnicze-pokrewne | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — synchronizacja z DR-MAPA-AKTOW) |
 | Ustawa o ochronie zdrowia psychicznego | ⚠️ zweryfikuj t.j. na ISAP | dr-10/modules/mod-ustawa-zdrowie-psychiczne | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — synchronizacja z DR-MAPA-AKTOW) |
 | Ustawa o wyrobach medycznych | ⚠️ zweryfikuj t.j. na ISAP | dr-10/modules/mod-wyroby-medyczne | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — synchronizacja z DR-MAPA-AKTOW) |
+| Prawo oświatowe — prawa ucznia (zakaz skreślenia w obowiązku szkolnym, doręczenia) | Dz.U. 2025 poz. 1043 t.j. + Konstytucja RP art. 53 | dr-10/modules/mod-prawa-ucznia | ✅ DOPISANE do mapy 2026-07-30 (sync) |
 
 ---
 
@@ -542,7 +553,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | DORA (Rozp. UE 2022/2554) + eIDAS 2.0 | Rozp. UE 2022/2554 + 2024/1183 | dr-11/modules/mod-DORA-eIDAS-cyfrowe-finanse | ✅ OK |
 | Prawo komunikacji elektronicznej + UKE | Dz.U. 2024 poz. 1221 t.j. (sync 2026-07-02 — było błędnie 1220) | dr-11/modules/mod-PrTelekom-poczta-UKE | ✅ OK |
 | Ustawa o prawie autorskim i prawach pokrewnych | Dz.U. 2025 poz. 24 t.j. | dr-11/modules/mod-PrAut-wlasnosc-intelektualna-IP | ✅ OK |
-| AI Act — Rozp. UE 2024/1689 | Dz.Urz. UE L 2024/1689 | dr-11/modules/mod-AI-Act-framework | ✅ OK |
+| AI Act — Rozp. UE 2024/1689 + ⚡ Ustawa krajowa z 3.07.2026 o systemach sztucznej inteligencji (KRiBSI) — PODPISANA przez Prezydenta 24.07.2026 | Dz.Urz. UE L 2024/1689 — nr Dz.U. ustawy krajowej NIEZWERYFIKOWANY (VER 2026-07-30, sprawdź ISAP) | dr-11/modules/mod-AI-Act-framework | ✅ ZAKTUALIZOWANY 2026-07-30 |
 | DMA — Digital Markets Act (Rozp. UE 2022/1925) | Dz.Urz. UE L 265/1 z 12.10.2022 | dr-11/modules/mod-DMA-digital-markets-act | ✅ OK |
 | DSA — Digital Services Act (Rozp. UE 2022/2065) | Dz.Urz. UE L 277/1 z 27.10.2022 | dr-11/modules/mod-DSA-digital-services-act | ✅ OK |
 | CRA, EUCS, DA, DGA — akty cyfrowe UE | Dz.Urz. UE L 2024/2847 + inne | dr-11/modules/mod-EUCS-CRA-akty-regulacyjne-UE | ✅ OK |

@@ -1,6 +1,6 @@
 ---
 name: shared
-version: 3.12
+version: 3.13
 type: library
 entrypoint: SKILL.md
 compatibility: "wszystkie skille prawne systemu"

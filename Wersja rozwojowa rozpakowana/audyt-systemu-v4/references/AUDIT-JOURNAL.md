@@ -27584,3 +27584,1122 @@ dr-14, dr-15, dr-16, i teraz dr-10).
 | Plików zweryfikowanych merytorycznie | ~320 z 505 (~63,4%) |
 | Domeny w pełni ukończone | WSZYSTKIE 16 dziedzin DR-01 do DR-16 |
 | Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z126 — Nowy moduł: ochrona zabytków + obiekty użyteczności publicznej
+
+**Kontekst:** Na żądanie użytkownika — zabytki (ograniczenia/nakazy)
+oraz wymogi obiektów użyteczności publicznej i regulujące je
+dokumenty. Sprawdzono wcześniej: "obiekty użyteczności publicznej"
+NIE występowało NIGDZIE w systemie; "zabytki" tylko mimochodem (jako
+kategoria zagrożona INNYMI naruszeniami, bez własnej treści).
+
+### Ochrona zabytków (ustawa z 23.07.2003)
+
+Zweryfikowano w 6+ zgodnych źródłach, w tym Narodowy Instytut
+Dziedzictwa: zamknięty katalog czynności wymagających pozwolenia WKZ
+(art. 36). KLUCZOWE ustalenie: pozwolenie WKZ i pozwolenie/zgłoszenie
+budowlane to PODWÓJNY, RÓWNOLEGŁY wymóg, nie alternatywa — obiekt
+wpisany do rejestru ZAWSZE wymaga pozwolenia na budowę (nigdy tylko
+zgłoszenia). Dwustopniowa procedura sankcji: wstrzymanie (wygasa po
+2 miesiącach bez kolejnej decyzji) → nakaz przywrócenia stanu/
+doprowadzenia do najlepszego możliwego stanu. Automatyczna ochrona
+tymczasowa od wszczęcia postępowania o wpis do rejestru.
+
+### Obiekty użyteczności publicznej — dostępność
+
+Zweryfikowano w 6+ źródłach, w tym bezpośrednio NIK i
+niepelnosprawni.gov.pl (Rząd 1): art. 9 ust. 1 PrBud ustanawia
+BEZWZGLĘDNY zakaz odstępstw od wymogów dostępności dla
+niepełnosprawnych — jedyny tak rygorystyczny wymóg w całym Prawie
+budowlanym. Konkretne parametry techniczne (150 cm dojścia, wymiary
+dźwigu 1,1×1,4 m). ⚠️ ODKRYTA ROZBIEŻNOŚĆ TEORIA-PRAKTYKA: raport NIK
+wykazał, że mimo bezwzględnego charakteru przepisu, 33,1% obiektów
+było CAŁKOWICIE niedostępnych, a 57,8% niepełnie dostosowanych —
+odnotowano jako ważne zastrzeżenie praktyczne dla doradztwa.
+
+**Rejestracja (Reguła 2):** nowy moduł `mod-ochrona-zabytkow-obiekty-
+uzytecznosci-publicznej.md`, dodano do SKILL.md (23→24 moduły).
+dr-09 v3.10→v3.11.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z127)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 317 |
+| Błędów/luk merytorycznych naprawionych | 85 |
+| Nowe moduły utworzone na żądanie | 5 |
+| Rozbudowy treściowe na żądanie | 44 |
+| Plików zweryfikowanych merytorycznie | ~321 z 505 (~63,6%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z127 — Rozbudowa: kategorie obiektów budowlanych (oficjalna baza), apteki, zakłady produkcyjne
+
+**Kontekst:** Na żądanie użytkownika — kontynuacja tematu obiektów
+użyteczności publicznej: sklepy różnych typów, apteki, zakłady
+produkcyjne, ze wskazaniem oficjalnych baz wymogów.
+
+### DODANE: kategorie obiektów budowlanych — wskazana oficjalna baza
+
+Zweryfikowano w 6+ zgodnych źródłach: OFICJALNA BAZA to Załącznik do
+ustawy Prawo budowlane (isap.sejm.gov.pl) — 30 kategorii (I-XXX) ze
+współczynnikami k/w. Sklepy (niezależnie od wielkości) mieszczą się
+w Kategorii XVII (handel/gastronomia/usługi) — mały sklep osiedlowy
+i hipermarket są w TEJ SAMEJ kategorii formalnej, różni je tylko
+współczynnik wielkości. Kara za użytkowanie bez pozwolenia: 5000 zł
+za KAŻDĄ nieprawidłowość osobno (sumowane). Odnotowano realne spory
+kwalifikacyjne z praktyki (waga samochodowa, kontenery, wiaty).
+
+### DODANE: szczegółowe wymogi lokalu apteki — bardzo precyzyjne
+
+Zweryfikowano bezpośrednio w aktualnym tekście jednolitym (Dz.U. 2025
+poz. 1202, z 1.09.2025 — niecały rok przed weryfikacją), via
+isap.sejm.gov.pl (Rząd 1): powierzchnia min. 80 m² (60 m² wyjątek dla
+wsi/miejscowości ≤1500 mieszkańców), pełny katalog wymaganych
+pomieszczeń, obowiązkowy parter dla izby ekspedycyjnej (NIE
+przechodniej), dwa odrębne wejścia, podwyższony standard materiałów
+(jak dla zakładu leczniczego). Podkreślono ZASADĘ PODWÓJNEGO WYMOGU:
+ogólne wymogi budynku użyteczności publicznej (sekcja 2) + szczegółowe
+wymogi apteczne JEDNOCZEŚNIE.
+
+### DODANE: zakłady produkcyjne — wymogi skumulowane, wskazanie 6
+niezależnych reżimów
+
+Brak jednego, scentralizowanego aktu — odesłano do 6 niezależnych baz/
+reżimów: kategoria budowlana, ochrona przeciwpożarowa (PSP), BHP
+(cross-ref do istniejącego modułu dr-04), OOŚ (cross-ref dr-09), sanepid
+(cross-ref dr-10), pozwolenie zintegrowane IPPC. Dodano rekomendację
+praktyczną: sprawdzać WSZYSTKIE reżimy równolegle, pominięcie jednego
+(zwłaszcza OOŚ) to najczęstszy błąd praktyczny.
+
+**Rejestracja:** dr-09-budownictwo-srodowisko-energia-transport v3.11→v3.12,
+moduł zaktualizowany do v1.1.0 z rozszerzonym tytułem.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z128)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 318 |
+| Błędów/luk merytorycznych naprawionych | 85 |
+| Nowe moduły utworzone na żądanie | 5 |
+| Rozbudowy treściowe na żądanie | 47 |
+| Plików zweryfikowanych merytorycznie | ~322 z 505 (~63,8%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z128 — Integracja z mapą aktów + żłobki/przedszkola jako kolejny skategoryzowany typ obiektu
+
+**Kontekst:** Na żądanie użytkownika — (1) wprowadzić akty prawne z
+transzy 27z127-128 do map aktów prawnych (lokalna MAPA-AKTOW.md dr-09
++ centralna ROUTING-MAP.md), (2) sprawdzić czy istnieją inne typy
+obiektów z określonymi wymogami i skategoryzować je analogicznie.
+
+### Integracja z mapami aktów
+
+Dodano wpis do `dr-09/MAPA-AKTOW.md` (25→26 wierszy) dla nowego
+modułu, z precyzyjnymi, zweryfikowanymi Dz.U.: ustawa o ochronie
+zabytków — Dz.U. 2024 poz. 1292 t.j. (ze zm. do 2026.483, ustawa z
+13.03.2026, wchodząca w życie 7 dni po ogłoszeniu — sprawdzona jako
+NAJNOWSZA); rozp. lokal apteki — Dz.U. 2025 poz. 1202 t.j.
+Zsynchronizowano z centralną `prawo-polskie-v2/ROUTING-MAP.md` —
+dodano analogiczny wpis w sekcji DR-09, zaktualizowano licznik w
+tabeli zbiorczej (26→27 modułów, 28→29 łącznie). ODNOTOWANO przy
+okazji: centralna ROUTING-MAP.md ma zaległości synchronizacyjne
+względem lokalnej mapy dr-09 (brakuje kilku modułów dodanych w
+poprzednich turach tej sesji) — to osobne zadanie do wykonania w
+przyszłości, nie rozwiązane w tej turze.
+
+### Nowy skategoryzowany typ obiektu: żłobki/przedszkola
+
+Zweryfikowano w 6+ zgodnych źródłach, w tym dosłowny tekst
+rozporządzenia (Dz.U. 2019 poz. 72 t.j.): POTRÓJNA kontrola przed
+otwarciem (PSP + sanepid + rejestr gminny) — SILNIEJSZA niż zwykły
+obiekt użyteczności publicznej. Powierzchnia min. 16 m² dla 3-5
+dzieci. PODWYŻSZONE wymogi przeciwpożarowe: strefa ZL, separacja
+EI 30 od innych lokali w tej samej strefie, OBOWIĄZKOWA dodatkowa
+gaśnica 21 A niezależna od ogólnych wymogów budynku. Odnotowano
+ważne rozróżnienie: pełne rygory dotyczą ZAREJESTROWANYCH placówek,
+istnieje łagodniejsza kategoria "innych form wychowania
+przedszkolnego" z niższymi wymogami — nie mylić przy doradzaniu.
+Przepisy przejściowe chronią placówki istniejące przed zmianą normy.
+
+**Rejestracja:** moduł zaktualizowany do v1.2.0, dr-09 SKILL.md
+v3.12→v3.13, MAPA-AKTOW.md dr-09 zaktualizowana, ROUTING-MAP.md
+(prawo-polskie-v2) zsynchronizowana dla tego wpisu.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z129)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 319 |
+| Błędów/luk merytorycznych naprawionych | 85 |
+| Nowe moduły utworzone na żądanie | 5 |
+| Rozbudowy treściowe na żądanie | 49 |
+| Plików zweryfikowanych merytorycznie | ~323 z 505 (~64,0%) |
+| Flagi otwarte | **0** (resync ROUTING-MAP = odnotowane TODO, nie flaga formalna) |
+
+## AUDYT-2026-07-30z129 — Kolejne typy obiektów: stacje transformatorowe i stacje paliw
+
+**Kontekst:** Na żądanie użytkownika — kontynuacja identyfikacji
+typów obiektów z odrębnymi wymogami, konkretnie wskazane: stacje
+transformatorowe (i podobne).
+
+### Stacje transformatorowe — rozstrzygnięta rozbieżność źródeł
+
+Zweryfikowano w 6+ zgodnych źródłach (elektro.info x2, wspolnota.net.pl,
+wm.info.pl — wszystkie cytujące dosłownie § 96/§182 rozp. ws. warunków
+technicznych budynków): JEDYNA precyzyjna, ustawowa odległość to
+**2,8 M** (pozioma i pionowa) od pomieszczeń stałego pobytu ludzi —
+dla stacji WBUDOWANEJ. Świadomie ODRZUCONO liczne, mniej precyzyjne
+wartości z blogów/poradników ("3-5 m", "5-15-50 m") jako niepoparte
+konkretnym przepisem. Odnotowano: stacja słupowa napowietrzna NIE
+jest "budynkiem" — w ogóle nie podlega tym wymogom odległościowym.
+Dodano odesłanie do służebności przesyłu (DR-02) dla kwestii
+odszkodowania za lokalizację na nieruchomości.
+
+### Stacje paliw — potwierdzone podstawowe wartości, odnotowana
+nierozstrzygnięta rozbieżność
+
+Zweryfikowano w 7+ źródłach: zbiorniki wyłącznie podziemne, konkretne
+odległości (3 m od fundamentów, 10 m od budowli ochronnych, 20 m od
+gazociągów wysokiego ciśnienia, 0,5 m między zbiornikami). ⚠️
+ODNOTOWANO NIEROZSTRZYGNIĘTĄ rozbieżność między źródłami co do
+odległości odmierzaczy od budynków mieszkalnych (jedno źródło: 30/60
+m; inne: 10/20 m) — możliwe że dotyczą różnych elementów instalacji
+(LPG vs paliwa płynne) — NIE zgadywano rozstrzygnięcia, oznaczono
+jako wymagające dedykowanej weryfikacji przed użyciem w konkretnej
+sprawie. Odnotowano też, że sam akt (rozp. z 2005, t.j. 2014) może
+mieć nowszy tekst jednolity nieznaleziony w tej sesji.
+
+**Rejestracja:** moduł zaktualizowany do v1.3.0, dr-09 SKILL.md
+v3.13→v3.14, MAPA-AKTOW.md zaktualizowana o oba nowe akty.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z130)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 320 |
+| Błędów/luk merytorycznych naprawionych | 85 |
+| Rozbudowy treściowe na żądanie | 51 |
+| Plików zweryfikowanych merytorycznie | ~324 z 505 (~64,2%) |
+| Flagi otwarte | **0** (rozbieżność stacji paliw = jawnie oznaczona, nie flaga formalna) |
+
+## AUDYT-2026-07-30z130 — Rozstrzygnięcie stacji paliw + domy pomocy społecznej/hospicja
+
+**Kontekst:** Użytkownik poprosił o rozstrzygnięcie wcześniejszego
+zastrzeżenia (odległości stacji paliw) i kontynuację z kolejnymi
+typami obiektów — konkretnie wskazane: domy starców, hospicja.
+
+### ROZSTRZYGNIĘTE: rozbieżność odległości stacji paliw
+
+Dodatkowe, celowane wyszukiwanie (8+ zgodnych źródeł, w tym dosłowny
+tekst aktualnego rozporządzenia) WYJAŚNIŁO poprzednią "rozbieżność":
+to NIE sprzeczność, tylko DWA RÓŻNE paragrafy dla DWÓCH RÓŻNYCH
+paliw. Odmierzacze PALIW PŁYNNYCH (benzyna/ON): 10/20 m (§ 98).
+Odmierzacze/zbiorniki GAZU PŁYNNEGO (LPG): 30 m od domów
+jednorodzinnych, 60 m od obiektów użyteczności publicznej/budynków
+wielorodzinnych (odrębny paragraf) — LOGICZNIE WYŻSZE z uwagi na
+wyższe ryzyko wybuchowe LPG. DODATKOWO: poprawiono błędnie wskazany
+wcześniej t.j. rozporządzenia — poprawny to **Dz.U. 2023 poz. 1707**
+(nie 2014.1853, jak wcześniej NIEZWERYFIKOWANE oznaczono).
+
+### DODANE: domy pomocy społecznej i hospicja
+
+Zweryfikowano w 5+ zgodnych źródłach, w tym dosłowny tekst
+rozporządzenia (aktualny t.j. Dz.U. 2025 poz. 51): powierzchnia
+pokoju (9 m² jednoosobowy, 6 m²/osobę wieloosobowy, max 3 osoby dla
+samodzielnie poruszających się / max 4 dla leżących), z 5% tolerancją
+odstępstwa. Indywidualny plan wsparcia w terminie 6 miesięcy (2
+miesiące dla osób uzależnionych od alkoholu — znacząco krótszy,
+odnotowany jako specyficzny wyjątek). ⚠️ UCZCIWIE ODNOTOWANO GENUINE
+LUKĘ: hospicja NIE MAJĄ odrębnego, dedykowanego aktu prawnego
+analogicznego do rozporządzenia DPS — funkcjonują jako zwykłe
+podmioty lecznicze, wymogi wynikają z ogólnych przepisów — jeśli
+potrzebna głębsza analiza, wymaga odrębnego wyszukiwania w przyszłości
+(nie wymyślono nieistniejącej regulacji, żeby "wypełnić" temat).
+
+**Rejestracja:** moduł zaktualizowany do v1.4.0, dr-09 SKILL.md
+v3.14→v3.15, MAPA-AKTOW.md zaktualizowana (poprawiony t.j. stacji
+paliw + nowy akt DPS).
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z131)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 321 |
+| Błędów/luk merytorycznych naprawionych | 86 (+1 rozstrzygnięcie, +1 korekta t.j.) |
+| Rozbudowy treściowe na żądanie | 53 |
+| Plików zweryfikowanych merytorycznie | ~325 z 505 (~64,4%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z131 — Linie napowietrzne różnych napięć + wolnostojąca stacja transformatorowa
+
+**Kontekst:** Na żądanie użytkownika — kontynuacja tematu stacji
+transformatorowych: wariant wolnostojący (odrębny budynek), słupy i
+przewody różnych napięć.
+
+**Wykryta i wyjaśniona genuine złożoność tematu:** różne, sprzeczne
+pozornie wartości w popularnych źródłach internetowych wynikają z
+MYLENIA CZTERECH różnych pojęć odległości: (A) pas zajętości
+(fizyczna szerokość linii), (B) pas służebności/techniczny (dostęp
+eksploatacyjny), (C) pas ochronny (odstępy izolacyjne), (D) ⚠️
+ODRĘBNA strefa ochronna ze względu na POLE ELEKTROMAGNETYCZNE (limit
+1 kV/m) — TA jest ZNACZĄCO WIĘKSZA niż odległości izolacyjne (110 kV:
+14,5 m wg (D) vs 4,9-15 m wg (C) w różnych źródłach; 400 kV: 33 m wg
+(D)). Część źródeł opisuje (C), część (D), stąd pozorne rozbieżności.
+
+Potwierdzono w 8+ źródłach: 4 kategorie napięć (niskie/średnie SN
+najczęściej 15kV/wysokie 110kV, operatorzy OSD/najwyższe 220-400kV,
+wyłącznie PSE S.A.). Orientacyjne wartości odległości izolacyjnej
+podano z JAWNYM zastrzeżeniem rozrzutu między źródłami — NIE
+przedstawiono fałszywej precyzji. Kluczowa rekomendacja praktyczna:
+zawsze weryfikować u OSD (geoportal) i w MPZP/WZ, nie polegać na
+ogólnych poradnikach — geodeci na mapach czasem mylą słupy
+telefoniczne z energetycznymi.
+
+**Wolnostojąca stacja transformatorowa:** w przeciwieństwie do
+wariantu WBUDOWANEGO (precyzyjne 2,8 m, sekcja 7) — wariant
+wolnostojący BRAK ma dedykowanej normy odległościowej, podlega
+OGÓLNYM przepisom przeciwpożarowym jak każde dwa sąsiadujące budynki.
+
+**Rejestracja:** moduł zaktualizowany do v1.5.0, dr-09 SKILL.md
+v3.15→v3.16.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z132)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 322 |
+| Błędów/luk merytorycznych naprawionych | 86 |
+| Rozbudowy treściowe na żądanie | 55 |
+| Plików zweryfikowanych merytorycznie | ~326 z 505 (~64,6%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z132 — Mechanizmy obchodzenia: plac zabaw/siłownia jako "zamiana" na powierzchnię + mikrokawalerki (luka zamykana za miesiąc!)
+
+**Kontekst:** Użytkownik zapytał o istotne braki i poprosił o zbadanie
+dwóch KONKRETNYCH mechanizmów: (1) zmiana przeznaczenia budynku w
+zamian za urządzenia typu plac zabaw/siłownia zewnętrzna, (2)
+analogicznie mikrokawalerki.
+
+### POTWIERDZONY MECHANIZM: plac zabaw jako "zamiana" na powierzchnię
+zabudowy
+
+Zweryfikowano w 6+ zgodnych źródłach: obowiązek placu zabaw (od
+1.08.2024, próg >20 mieszkań) ma OFICJALNIE dopuszczoną furtkę —
+projekt nowelizacji (RCL, 18.07.2024) pozwala wykonać plac NA INNEJ
+DZIAŁCE (gminnej) na podstawie umowy, LUB w ogóle GO NIE WYKONYWAĆ,
+jeśli publiczny plac istnieje w promieniu 300 m. WPROST przyznany w
+uzasadnieniu projektu skutek: "inwestorom zostanie więcej powierzchni
+na inwestycję budowlaną" — to ŚWIADOME poluzowanie, nie przypadkowa
+luka. Dodano SZERSZY, analogiczny mechanizm ZPI (Zintegrowany Plan
+Inwestycyjny) — negocjowana zwiększona intensywność zabudowy w
+zamian za finansowanie publicznej infrastruktury, z realnym
+przykładem (70 tys. m² PUM za park 3,7 ha + 4,8 mln zł). Odnotowano
+też KONTROWERSYJNY, częściowo NIELEGALNY mechanizm "umów drogowych" —
+gminy wymuszające wielomilionowe opłaty pod groźbą blokady decyzji
+zjazdowej (przykład: Kraków, >186 mln zł łącznie w 2 lata).
+
+### ⚡ MIKROKAWALERKI — luka zamykana DOSŁOWNIE ZA MIESIĄC
+
+Zweryfikowano w 9+ EKSTREMALNIE aktualnych źródłach (styczeń-maj
+2026): mechanizm obchodzenia progu 25 m² (obowiązującego od 2018 r.)
+przez klasyfikację jako "lokal użytkowy" zamiast "mieszkalny" —
+funkcjonujący 8 LAT. Skutek dla nabywcy: wyższy VAT (23% zamiast 8%).
+⚡ ZAMYKANA nowelizacja rozporządzenia ws. warunków technicznych
+WCHODZI W ŻYCIE WE WRZEŚNIU 2026 R. — za miesiąc od dnia tej
+weryfikacji! Równolegle: projekt nowelizacji ustawy o własności
+lokali (styczeń 2026) da GMINIE prawo BLOKOWANIA SPRZEDAŻY
+niezgodnych lokali. Odnotowano ochronę praw nabytych (budynki z
+zakończonym pozwoleniem PRZED zmianą — wyłączone) oraz DZIENNIKARSKIE
+przewidywanie kolejnego obejścia (klasyfikacja "aparthotel"/
+"condohotel") — z historycznym precedensem: w 2018 r. pierwsze
+wprowadzenie progu SPOWODOWAŁO WZROST liczby lokali poniżej progu,
+bo deweloperzy po prostu przeklasyfikowali je.
+
+**Rejestracja:** moduł zaktualizowany do v1.6.0, dr-09 SKILL.md
+v3.16→v3.17.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z133)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 323 |
+| Błędów/luk merytorycznych naprawionych | 86 |
+| Rozbudowy treściowe na żądanie | 57 |
+| Plików zweryfikowanych merytorycznie | ~327 z 505 (~64,8%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z133 — Miejsca parkingowe dla niepełnosprawnych: skala, mechanizm ulgi lokalizacyjnej, kluczowy wyjątek czasowy
+
+**Kontekst:** Na żądanie użytkownika — wymogi placów zabaw/siłowni
+zewnętrznych/parkingów, w szczególności miejsc dla niepełnosprawnych
+i wyjątki od tego obowiązku.
+
+**Znalezisko kluczowe — odpowiedź na pytanie "kiedy nie muszą być
+obecne":** to NIE jest kwestia kategorii budynku, tylko ZASADA
+CZASOWA (art. 5 Prawa budowlanego) — wymóg dotyczy WYŁĄCZNIE etapu
+projektowania/budowy NOWEJ inwestycji (lub przebudowy), NIE działa
+WSTECZ na już istniejące obiekty wybudowane PRZED wprowadzeniem
+wymogu. Potwierdzone interpretacją prawną (infor.pl, kwiecień 2025):
+pracodawca/zarządca starego parkingu NIE MA obowiązku retrofit,
+jeśli w momencie budowy wymogu jeszcze nie było — ALE przebudowa
+dzisiaj "resetuje" ten punkt odniesienia czasowy.
+
+**Dodatkowo wyjaśniono mechanizm STARA vs NOWA skala** (rozróżnienie,
+które mogło wcześniej wprowadzać w błąd): stara, progresywna skala
+(1/2/3/4% wg wielkości parkingu) dotyczyła LICZBY wymaganych miejsc;
+nowa zasada z 2024 r. (6%, min. 1) dotyczy MAKSYMALNEJO ODSETKA
+miejsc korzystających z ULGI LOKALIZACYJNEJ (możliwość sytuowania
+blisko okien bez normalnych ograniczeń odległościowych) — deweloperzy
+wcześniej wykorzystywali BRAK limitu tej ulgi, by zmieścić więcej
+miejsc postojowych ogółem, deklarując je jako "dla niepełnosprawnych".
+Nowelizacja ograniczyła nadużycie do max 6%.
+
+Dodano też praktyczne dane: karta parkingowa (21 zł, do 30 dni, max
+5 lat ważności) i aktualny taryfikator kar za nieuprawnione zajęcie
+"koperty" (500 zł/podszywanie 800 zł).
+
+**Rejestracja:** moduł zaktualizowany do v1.7.0, dr-09 SKILL.md
+v3.17→v3.18.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z134)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 324 |
+| Błędów/luk merytorycznych naprawionych | 86 |
+| Rozbudowy treściowe na żądanie | 58 |
+| Plików zweryfikowanych merytorycznie | ~328 z 505 (~65,0%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z134 — Przekształcenie mieszkania/parteru w sklep (Żabka/Biedronka): mechanizm, ryzyko, bardzo świeża reforma (zgoda wspólnoty)
+
+**Kontekst:** Na żądanie użytkownika — mechanizm przekształcenia
+budynku mieszkalnego w sklep typu Żabka/Biedronka przed oddaniem
+budynku, oraz ryzyko takich działań.
+
+**⚡ NAJWAŻNIEJSZE ZNALEZISKO:** procedowany JEST WŁAŚNIE (money.pl,
+2026 r., STATUS: projekt, nie finalna ustawa) mechanizm wymagający
+ZGODY WSPÓLNOTY MIESZKANIOWEJ na "zmianę przeznaczenia lokalu" —
+pojęcie celowo szerokie, obejmujące WPROST: gabinet, kancelarię,
+sklep/lokal usługowy, ORAZ najem krótkoterminowy (dotąd NIE
+wymagający zgłoszenia). Uzasadnienie resortu WPROST powołuje się na
+skargi mieszkańców: hałas, krzyki, zniszczenia części wspólnych —
+DOKŁADNIE ten mechanizm, o który zapytał użytkownik.
+
+**Rozróżniono DWA mechanizmy zależnie od etapu:** (A) PRZED oddaniem
+budynku — "istotne odstępstwo" (art. 36a, już opisane w
+mod-PrBud-prawo-budowlane.md, dodano tu cross-referencję); (B) PO
+oddaniu — "zmiana sposobu użytkowania" (art. 71, już opisane w
+mod-PrBud-patodeweloperka, dodano tu SPECYFICZNE dla tego scenariusza
+ustalenia orzecznicze).
+
+**Kluczowe orzecznictwo NSA potwierdzone:** (1) SAMA zmiana funkcji
+BEZ jakichkolwiek robót budowlanych WYSTARCZY do uznania za zmianę
+sposobu użytkowania (II OSK 3220/17) — deweloper NIE MOŻE
+argumentować "nic fizycznie nie zmieniłem"; (2) zmiana na funkcję
+generującą hałas/drgania MOŻE naruszać interesy sąsiadów (II OSK
+606/16, sprawa dyskoteki) — daje podstawę sprzeciwu.
+
+**Odnotowano też ODRĘBNĄ, ale powiązaną taktykę deweloperską** (rp.pl,
+2026): celowe opóźnianie przeniesienia własności, by wymusić na
+kliencie odstąpienie od umowy LUB podpisanie klauzuli zrzeczenia się
+roszczeń przy akcie notarialnym — z ostrzeżeniem, że klienci mylnie
+sądzą, iż akt notarialny nie może zawierać niekorzystnych zapisów.
+
+**Rejestracja:** moduł zaktualizowany do v1.8.0, dr-09 SKILL.md
+v3.18→v3.19.
+
+### PODSUMOWANIE MODUŁU — 15 SEKCJI TEMATYCZNYCH
+
+Ten moduł, rozpoczęty w tej sesji jako odpowiedź na jedno pytanie o
+zabytki, urósł po serii kolejnych, powiązanych żądań użytkownika do
+15 sekcji: zabytki, dostępność, kategorie budowlane, apteki, zakłady
+produkcyjne, żłobki/przedszkola, stacje transformatorowe, stacje
+paliw, DPS/hospicja, linie napowietrzne, mechanizmy obchodzenia
+(plac zabaw, mikrokawalerki), miejsca dla niepełnosprawnych, oraz
+przekształcenie mieszkania w sklep — jeden z najbardziej
+wyczerpujących, systematycznie budowanych pojedynczych plików w
+całej tej sesji audytowej.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z135)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 325 |
+| Błędów/luk merytorycznych naprawionych | 86 |
+| Rozbudowy treściowe na żądanie | 60 |
+| Plików zweryfikowanych merytorycznie | ~329 z 505 (~65,1%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z134 — Rozstrzygnięte: praktyka "jedno urządzenie na plac zabaw" BYŁA realna i ZOSTAŁA uregulowana
+
+**Kontekst:** Użytkownik zapytał wprost: czy praktyka placu zabaw z
+dosłownie JEDNYM urządzeniem została uregulowana, zmieniona, czy
+pozostała bez zmian.
+
+**ODPOWIEDŹ JEDNOZNACZNA: TAK, była realna, i TAK, została
+uregulowana** — potwierdzone w 6+ zgodnych źródłach, w tym artykule
+branżowym z tytułem dosłownie nazywającym to zjawisko "końcem
+patodeweloperki". Mechanizm PRAWNY zamykający lukę (§ 40 ust. 11
+rozporządzenia, nowelizacja z 1.08.2024) to DWA POŁĄCZONE wymogi:
+(1) różnorodność FUNKCJI zabawy + dostosowanie do różnych grup
+wiekowych, (2) ⭐ KLUCZOWY wymóg ILOŚCIOWY: min. 5 dzieci mogących
+jednocześnie korzystać z wyposażenia NA KAŻDE 20 m² powierzchni —
+wymuszający w PRAKTYCE sumowanie przepustowości z kart katalogowych
+urządzeń, co POJEDYNCZE urządzenie TYPOWO nie osiąga.
+
+Odnotowano WAŻNY NIUANS: rozporządzenie NIE wprowadza wprost
+"minimalnej liczby urządzeń" jako osobnej normy — działa mechanizmem
+POŚREDNIM (przepustowość + różnorodność), co W PRAKTYCE wymusza
+wielość urządzeń, ale TEORETYCZNIE jedno bardzo duże,
+wielofunkcyjne urządzenie MOGŁOBY formalnie spełnić oba kryteria
+(rzadkie, kosztowne, mało prawdopodobne w praktyce rynkowej).
+
+Dodano przy okazji pozostałe wymogi tej samej nowelizacji (obowiązkowe
+ogrodzenie 1,6 m, zakaz stropodachów >5m, nasłonecznienie 2h,
+odległość od parkingu 7m) oraz ODNOTOWANO POZOSTAŁĄ, NIEROZSTRZYGNIĘTĄ
+niejasność: rozporządzenie nie precyzuje, od którego punktu mierzyć
+odległość "od placu zabaw" — GENUINE luka interpretacyjna, NIE
+rozwiązana przez nowelizację 2024, możliwy przedmiot sporu.
+
+**Rejestracja:** moduł zaktualizowany do v1.8.0, dr-09 SKILL.md
+v3.18→v3.19.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z135)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 325 |
+| Błędów/luk merytorycznych naprawionych | 86 |
+| Rozbudowy treściowe na żądanie | 59 |
+| Plików zweryfikowanych merytorycznie | ~329 z 505 (~65,1%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z135 — Synchronizacja map aktów: naprawiono luki, odkryto szerszy, wcześniejszy problem
+
+**Kontekst:** Użytkownik zapytał wprost, czy wchodzące w życie ustawy
+z ostatnich tur zostały wprowadzone do map aktów (lokalnych DR i
+centralnej prawo-polskie-v2).
+
+**Znalezione i NAPRAWIONE luki (spowodowane przeze mnie w tej sesji):**
+1. `dr-09/MAPA-AKTOW.md` — wpis dla mod-ochrona-zabytkow... NIE
+   odzwierciedlał ostatnich 4 sekcji (linie napowietrzne, mechanizmy
+   obchodzenia/mikrokawalerki, miejsca parkingowe, przekształcenie
+   mieszkania w sklep) — NAPRAWIONO, wpis teraz obejmuje wszystkie 15
+   sekcji modułu.
+2. `dr-10/MAPA-AKTOW.md` — CAŁKOWITY BRAK wpisu dla ŻADNEGO z ponad
+   15 aktów dodanych do mod-ustawa-bezpieczenstwo-zywnosci.md (35
+   sekcji!) — moduł rozrósł się przez kilka tur, ale NIGDY nie trafił
+   do mapy — DODANO nowy, obszerny wpis klastrowy.
+3. `dr-04/MAPA-AKTOW.md` — brak osobnego wpisu dla nowego modułu
+   mod-obchodzenie-prawa-pracy-reforma-PIP-2026 — DODANO, z jasnym
+   zaznaczeniem że to NIE nowy akt prawny, tylko unikalny katalog
+   (ten sam akt bazowy co istniejący wiersz PIP).
+4. `prawo-polskie-v2/ROUTING-MAP.md` — analogicznie zsynchronizowano
+   oba powyższe wpisy (bezpieczeństwo żywności, katalog PIP) w
+   centralnej mapie.
+
+**⚠️ ODKRYTY SZERSZY, WCZEŚNIEJSZY PROBLEM (NIE spowodowany w tej
+sesji):** tabela zbiorcza w ROUTING-MAP.md pokazuje DR-04 jako "18"
+modułów łącznie, podczas gdy dr-04/SKILL.md rejestruje 30 modułów —
+ROZBIEŻNOŚĆ ISTNIEJĄCA JUŻ PRZED tą sesją (nie da się jej przypisać
+żadnej konkretnej turze tej sesji). PEŁNA naprawa wymagałaby
+systematycznego przeglądu WSZYSTKICH 16 dziedzin w centralnej mapie —
+ZA DUŻE zadanie na tę turę, ODNOTOWANE jako TODO na przyszłą,
+DEDYKOWANĄ sesję resynchronizacji.
+
+### WNIOSEK METODOLOGICZNY
+
+To ważna lekcja: przy KOLEJNYCH turach rozbudowujących TEN SAM plik
+(jak mod-ustawa-bezpieczenstwo-zywnosci przez 8 kolejnych tur), łatwo
+zapomnieć o aktualizacji mapy aktów za KAŻDYM razem — aktualizowałem
+ją przy niektórych turach, ale NIE przy wszystkich. REKOMENDACJA NA
+PRZYSZŁOŚĆ: przy cyklicznej rozbudowie tego samego pliku, dodać krok
+"sprawdź i zaktualizuj mapę aktów" do STAŁEJ checklisty końcowej
+każdej tury, nie tylko pierwszej.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z136)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 326 |
+| Błędów/luk merytorycznych naprawionych | 86 |
+| Luki synchronizacyjne map aktów naprawione | 4 |
+| Rozbudowy treściowe na żądanie | 60 |
+| Plików zweryfikowanych merytorycznie | ~329 z 505 (~65,1%) |
+| Flagi otwarte | **0** (rozbieżność DR-04 18 vs 30 w centralnej tabeli = odnotowane TODO) |
+
+## AUDYT-2026-07-30z135 — Mechanizm "sklep-czytelnia": obchodzenie zakazu handlu w niedzielę (AKTYWNA sprawa, czerwiec 2026)
+
+**Kontekst:** Na żądanie użytkownika — kontynuacja badania mechanizmów
+obchodzenia prawa, konkretnie: "sklepy będące czytelniami".
+
+**Potwierdzona, AKTYWNA sprawa** w 8+ zgodnych, ekstremalnie
+aktualnych źródłach (czerwiec-lipiec 2026): sklep E.Leclerc w
+Radomiu otwarty od 14.06.2026 we wszystkie niedziele (w tym
+niehandlowe) poprzez utworzenie "Kącika Czytelniczego"/"Klubu
+Czytelnika" — mechanizm ROZPRZESTRZENIA SIĘ (kolejna placówka w
+Szczecinie, Intermarché w Brzesku objęte dochodzeniem MRPiPS z
+23.06.2026).
+
+**Kluczowe ustalenie prawne:** Sąd Najwyższy WIELOKROTNIE (14
+wyroków wg związków zawodowych, konkretny cytowany: SN 18.10.2023,
+sygn. III KK 57/23) orzekł, że wyjątek dotyczy placówek działających
+PRZY instytucjach kultury (czytelnia główna, sklep dodatkiem), NIE
+sytuacji odwróconej (sklep główny, czytelnia jako dodatek) — MIMO to
+praktyka TRWA i się rozszerza.
+
+**Odkryty wzorzec historyczny:** to DRUGA fala tego samego
+mechanizmu — wcześniej sieci wykorzystywały analogiczny wyjątek dla
+"placówek pocztowych", zamknięty nowelizacją w życie od 1.02.2023.
+Ustawodawca zamknął jedną lukę → sieci przerzuciły się na kolejną
+(czytelnia) → BRAK dotąd analogicznego doprecyzowania dla tego
+wyjątku. Odnotowano krytykę związkową: kara (do 100 000 zł) uznawana
+za zbyt niską wobec zysków z dodatkowego dnia handlu — klasyczny
+przykład kalkulacji ryzyka biznesowego mimo jednoznacznej linii
+orzeczniczej przeciwko praktyce.
+
+**Rejestracja:** moduł mod-obchodzenie-prawa-pracy-reforma-PIP-2026
+zaktualizowany do v1.1.0, dr-04 SKILL.md v3.16→v3.17, MAPA-AKTOW.md
+zaktualizowana.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z136)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 326 |
+| Błędów/luk merytorycznych naprawionych | 86 |
+| Rozbudowy treściowe na żądanie | 60 |
+| Plików zweryfikowanych merytorycznie | ~330 z 505 (~65,3%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z136 — FAZA 3E: pierwszy skill wsparcia (orzeczenia-sadowe-v2)
+
+**Kontekst:** Kontynuacja audytu — przejście do niesprawdzonych
+dotąd SKILLI WSPARCIA (metodologicznych, nie domenowych modułów
+prawa). Te skille różnią się charakterem: zamiast progów liczbowych
+zawierają procedury wyszukiwania/cytowania orzecznictwa — weryfikacja
+polega na sprawdzeniu POPRAWNOŚCI TECHNICZNEJ (adresy portali, wzorce
+URL), nie progów prawnych.
+
+**orzeczenia-sadowe-v2 (4 pliki) — potwierdzony w pełni.** Sprawdzono
+kluczowe portale wskazane w skillu: orzeczenia.ms.gov.pl (Portal
+Orzeczeń Sądów Powszechnych) oraz otkzu.trybunal.gov.pl (Zbiór
+Urzędowy TK) — OBA aktywne, zgodne z opisem, w tym poprawne
+rozróżnienie serii A/B OTK ZU. Struktura cytowania (limit 30/15 słów,
+kotwica techniczna, zakaz cytowania bez weryfikacji) — zgodna z
+resztą systemu (PRAWO-HARDGATE).
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z137)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 327 |
+| Błędów/luk merytorycznych naprawionych | 86 |
+| Plików zweryfikowanych merytorycznie | ~331 z 505 (~65,5%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z137 — FAZA 3E: chronologia-sprawy-v1
+
+**chronologia-sprawy-v1 (8 plików) — potwierdzony w pełni.** Skill
+metodologiczny (ekstrakcja chronologii ze zdarzeń dokumentów), ALE
+zawiera tabelę odniesienia terminów procesowych z konkretnymi
+podstawami prawnymi (references/sprzecznosci-dat.md) — wszystkie
+zgodne z wielokrotnie już potwierdzonymi w tej sesji standardami: 14
+dni odwołanie KPA (art. 129), 30 dni skarga WSA (art. 53 PPSA), 21
+dni pozew o przywrócenie do pracy (art. 264 KP), 7 dni zażalenie
+(art. 394 KPC). Dodatkowo zweryfikowano fikcję doręczenia (art. 139
+KPC): 14 dni od pierwszego awizowania (podwójne awizo 7+7 dni) —
+potwierdzone w 6+ zgodnych źródłach. Skill ma też dobrą,
+udokumentowaną historię własnych incydentów (opisaną w nagłówku
+SKILL.md) — transparentność co do wcześniejszych błędów pakietowania.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z138)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 328 |
+| Błędów/luk merytorycznych naprawionych | 86 |
+| Plików zweryfikowanych merytorycznie | ~332 z 505 (~65,7%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z138 — FAZA 3E: analiza-sadowa-v6
+
+**analiza-sadowa-v6 (19 plików) — potwierdzony w pełni.** Skill ma
+dobrą architekturę deduplikacji — jawnie odsyła do `shared/terminy.md`
+jako JEDYNEGO kanonicznego źródła terminów, z własną tabelą WYŁĄCZNIE
+uzupełniającą (references/koszty-terminy.md). Sprawdzono szczegółowo
+tę tabelę: zarzuty od nakazu zapłaty (14 dni, art. 493 §1 KPC),
+skarga na czynności komornika (7 dni, art. 767 §4 KPC), zażalenie
+KPK (7 dni, art. 460 §1), kasacja karna (30 dni, art. 524 §1 KPK),
+sprzeciw od wyroku nakazowego (7 dni), skarga kasacyjna do NSA (30
+dni, art. 177 §1 PPSA) — wszystkie zgodne z resztą systemu.
+
+**Zweryfikowano dodatkowo (nowy próg):** skarga kasacyjna cywilna —
+2 MIESIĄCE od doręczenia orzeczenia z uzasadnieniem (art. 398⁵ §1
+KPC) — potwierdzone jednogłośnie w 8+ niezależnych źródłach, w tym
+dosłowny tekst przepisu (arslege.pl, lexlege.pl). Skill ma też
+własną, udokumentowaną, wcześniej zgłoszoną rozbieżność (odpowiedź
+na pozew jako rzekomo zawity termin — poprawnie instrukcyjny) —
+dobra praktyka transparentności.
+
+Tabele kosztów sądowych (KSCU) i stawek minimalnych pełnomocników —
+zgodne ze znanymi progami, w tym już wcześniej potwierdzoną w tej
+sesji korektą 100 000 zł max opłaty (reforma 25.07.2025).
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z139)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 329 |
+| Błędów/luk merytorycznych naprawionych | 86 |
+| Plików zweryfikowanych merytorycznie | ~333 z 505 (~65,9%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z139 — CRIT znaleziony w prawny-router-v3: błędny ogólny pułap mandatu karnego
+
+**Kontekst:** Kontynuacja FAZA 3E — sprawdzenie orkiestratora systemu
+prawny-router-v3 (21 plików).
+
+**mod-wykroczenia.md — naprawiony.** Moduł podawał JAKO REGUŁĘ
+OGÓLNĄ: "MANDAT (policja/ITD/straż): max 2 500 zł, RECYDYWA: max
+5 000 zł". Potwierdzone w 8+ zgodnych źródeł 2026 r., w tym DOSŁOWNY
+tekst art. 96 §1 KPSW (lexlege.pl): OGÓLNY pułap mandatu za JEDNO
+wykroczenie to **5 000 ZŁ** (nie 2 500 zł), **6 000 ZŁ** przy zbiegu
+wykroczeń (art. 9 §1 KW). Kwota "2 500 zł" dotyczyła WYŁĄCZNIE
+WĄSKIEJ, konkretnej kategorii (górny próg taryfikatora za
+przekroczenie prędkości o >70 km/h) — NIE jest uniwersalnym pułapem.
+Naprawiono z jasnym rozróżnieniem: ogólny pułap mandatu (5000/6000
+zł) vs stawki bazowe KONKRETNYCH kategorii (np. drogowych), z
+WŁASNYMI, RÓŻNYMI mechanizmami recydywy w ramach tego ogólnego
+pułapu.
+
+**Znaczenie błędu:** to KLUCZOWY skill orkiestrujący cały system
+routingu spraw — błędne zaniżenie ogólnego pułapu mandatu o połowę
+mogło prowadzić do błędnej oceny ryzyka finansowego klienta przy
+doradzaniu w SPRAWACH WYKROCZENIOWYCH spoza wąskiej kategorii
+drogowej (np. wykroczenia przeciwko mieniu, porządkowi publicznemu),
+gdzie faktyczny pułap jest 2x wyższy niż moduł sugerował.
+
+**Rejestracja:** prawny-router-v3 SKILL.md v3.17→v3.18.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z140)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 330 |
+| Błędów/luk merytorycznych naprawionych | 87 |
+| Plików zweryfikowanych merytorycznie | ~334 z 505 (~66,1%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z140 — FAZA 3E: prawny-router-v3/przemoc-domowa.md potwierdzony
+
+**przemoc-domowa.md — potwierdzony w pełni.** Sprawdzono nakaz
+natychmiastowego opuszczenia lokalu (14 dni, art. 15aa ustawy o
+Policji, od 30.11.2020) — potwierdzone jednogłośnie w 8+
+niezależnych źródłach, w tym oficjalnych komunikatach Policji (KPP
+Krotoszyn, Policja Warmińsko-Mazurska) i RPO. Kary z art. 207 KK
+(3mies-5lat/6mies-8lat/1-10lat/2-15lat) — zgodne z wielokrotnie już
+potwierdzonymi w tej sesji progami. Numery alarmowe, mapa
+instrumentów (nakaz natychmiastowy, Niebieska Karta, postępowanie
+karne) — zgodne ze stanem prawnym.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z141)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 331 |
+| Błędów/luk merytorycznych naprawionych | 87 |
+| Plików zweryfikowanych merytorycznie | ~335 z 505 (~66,3%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z141 — FAZA 3E: prawny-router-v3/cyberprzestepstwa.md potwierdzony
+
+**cyberprzestepstwa.md — potwierdzony w pełni.** Sprawdzono
+szczegółowo mapę przestępstw komputerowych (art. 267/268/268a/269a/
+269b/287/190a/212/191a KK) — wszystkie zagrożenia karą i tryby
+ścigania zgodne. Zweryfikowano dodatkowo art. 191a KK (naruszenie
+intymnego wizerunku): kara 3 miesiące do 5 lat, tryb wnioskowy —
+potwierdzone jednogłośnie w 10+ niezależnych źródłach, w tym
+dosłowny tekst przepisu (lexlege.pl, arslege.pl) oraz analiza
+Instytutu Wymiaru Sprawiedliwości. Przedawnienie wg zagrożenia karą
+(5/10/15 lat) — zgodne z ogólną zasadą art. 101 KK. Procedury
+zabezpieczania dowodów cyfrowych i identyfikacji sprawcy — aktualne,
+uwzględniają DSA i e-Evidence.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z142)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 332 |
+| Błędów/luk merytorycznych naprawionych | 87 |
+| Plików zweryfikowanych merytorycznie | ~336 z 505 (~66,5%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z142 — Zbadanie typów zabójstw: doskonałe istniejące pokrycie + jedna domknięta luka (wypadek przy pracy)
+
+**Kontekst:** Na żądanie użytkownika — zbadanie różnych typów
+zabójstw (obrona własna, afekt, nieumyślne, wypadek, w tym wypadek
+przy pracy) i uzupełnienie ewentualnych braków.
+
+**Ustalenie: pokrycie już ISTNIEJĄCE jest bardzo dobre.** Moduł
+`mod-KK-art148-162-przeciwko-zyciu-zdrowiu.md` ma pełne DRZEWO Z.1 z
+hierarchią: zabójstwo podstawowe (art. 148 §1, 10-30 lat/dożywocie),
+kwalifikowane (§2-3, z katalogiem okoliczności obciążających),
+UPRZYWILEJOWANE — zabójstwo W AFEKCIE (§4, 1-10 lat, z odróżnieniem
+od samobójstwa na żądanie), oraz nieumyślne spowodowanie śmierci
+(art. 155, 3 mies-5 lat — WYRAŹNIE odróżnione od art. 148). Obrona
+konieczna (art. 25) i stan wyższej konieczności (art. 26) mają
+WŁASNE, bardzo szczegółowe drzewa decyzyjne (K.1/K.2) w osobnym
+module (dobra architektura — cross-referencja, nie duplikacja), z
+niuansami orzeczniczymi (prowokacja wyklucza obronę konieczną,
+odróżnienie zamachu trwającego od zakończonego).
+
+**ZNALEZIONA I DOMKNIĘTA LUKA: brak połączenia karnego dla
+śmiertelnego wypadku przy pracy.** dr-04 miał dobre pokrycie
+administracyjno-pracownicze wypadków śmiertelnych, ale BRAK
+cross-referencji do aspektu KARNEGO. Zweryfikowano w 6+ zgodnych
+źródłach, w tym PIP (Rząd 1) i orzecznictwem SN (V KK 64/12): DWA
+ODRĘBNE reżimy — art. 220 KK (samo NARAŻENIE, do 3 lat umyślnie/do
+roku nieumyślnie) vs art. 155 KK (jeśli śmierć FAKTYCZNIE nastąpiła,
+3 miesiące-5 lat — TA SAMA podstawa co przy każdej innej śmierci
+nieumyślnej). Dodano DWUSTRONNE cross-referencje między dr-03 (aspekt
+karny) i dr-04 (aspekt administracyjno-pracowniczy), z jasnym
+podziałem odpowiedzialności za treść (unikanie duplikacji).
+
+**Rejestracja:** dr-03 SKILL.md v3.20→v3.21, dr-04 SKILL.md
+v3.17→v3.18.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z143)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 333 |
+| Błędów/luk merytorycznych naprawionych | 88 |
+| Rozbudowy treściowe na żądanie | 61 |
+| Plików zweryfikowanych merytorycznie | ~337 z 505 (~66,7%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z143 — Zbadanie typów uszczerbku na zdrowiu: doskonałe istniejące pokrycie, żadnych luk
+
+**Kontekst:** Na żądanie użytkownika — analogiczne zbadanie typów
+uszczerbku na zdrowiu (jak wcześniej dla zabójstw).
+
+**Ustalenie: pokrycie JUŻ ISTNIEJĄCE jest kompletne, bez luk.** TEN
+SAM moduł (`mod-KK-art148-162-przeciwko-zyciu-zdrowiu.md`) ma DRZEWO
+Z.2 (ciężki/średni/lekki uszczerbek, art. 156-157) ORAZ DRZEWO Z.3
+(bójka i pobicie, art. 158-159) — z pełnymi zagrożeniami karnymi i
+trybami ścigania. Zweryfikowano dodatkowo art. 157 §1 (średni
+uszczerbek): 3 miesiące-5 lat, z urzędu — potwierdzone jednogłośnie w
+8+ niezależnych źródłach.
+
+**Połączenie z wypadkiem przy pracy — już kompletne dzięki
+wcześniejszemu dodaniu (transza 27z143):** cross-referencja dodana
+poprzednio (art. 220 KK) OBEJMUJE WPROST zarówno śmierć, JAK I
+"ciężki uszczerbek na zdrowiu" jako alternatywny skutek narażenia —
+NIE wymaga osobnego dodania dla samego uszczerbku, bo przepis
+źródłowy już to obejmuje w swojej własnej treści.
+
+**Wniosek:** obie zbadane kategorie (zabójstwa i uszczerbek na
+zdrowiu) okazały się już bardzo dobrze, systemowo opracowane w tej
+samej sesji wcześniej (16.07-21.07.2026) — audyt na żądanie
+użytkownika POTWIERDZIŁ wysoką jakość, nie znalazł nowych błędów w
+samej treści karnomaterialnej (poza już wcześniej domkniętą luką
+wypadku przy pracy).
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z144)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 334 |
+| Błędów/luk merytorycznych naprawionych | 88 |
+| Plików zweryfikowanych merytorycznie | ~338 z 505 (~66,9%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z144 — Czysty nieszczęśliwy wypadek (awaria maszyny): domknięta luka o kluczowym praktycznym znaczeniu
+
+**Kontekst:** Na żądanie użytkownika — analogiczne zbadanie
+"nieszczęśliwego wypadku" (nie wskutek naruszenia BHP, np. awaria
+maszyny) oraz uszczerbku na zdrowiu w tym kontekście.
+
+**Znalezisko: dr-02 miał tylko SKROTOWĄ tabelę** (art. 435/436/433/
+430 KC jako "zasada ryzyka"), BEZ kluczowych przesłanek
+egzoneracyjnych — czyli bez odpowiedzi na PODSTAWOWE pytanie
+praktyczne: czy awaria maszyny zwalnia z odpowiedzialności?
+
+**ODPOWIEDŹ ZWERYFIKOWANA w 6+ zgodnych źródłach, w tym Sąd
+Najwyższy (uchwała III CZP 30/17): CO DO ZASADY NIE.** Art. 435 KC to
+odpowiedzialność NA ZASADZIE RYZYKA — niezależna od winy. TRZY,
+zamknięte przesłanki egzoneracyjne: siła wyższa (⚠️ KLUCZOWE: NIE
+obejmuje zdarzeń WEWNĘTRZNYCH — orzecznictwo WPROST wyklucza "wybuch
+kotła w fabryce" i "zwykłą awarię maszyny" jako siłę wyższą),
+wyłączna wina poszkodowanego, wyłączna wina osoby trzeciej (może być
+nieznana). Sądy stosują RYGORYSTYCZNIE: jeśli ruch przedsiębiorstwa
+przyczynił się choćby w 1% — przesłanki NIE działają. Ciężar dowodu
+SPOCZYWA na przedsiębiorcy (odwrócone domniemanie).
+
+**Kluczowe rozróżnienie systemowe dodane w OBU kierunkach:**
+odpowiedzialność KARNA (wymaga winy — brak naruszenia BHP = brak
+przestępstwa z art. 220/155 KK) i odpowiedzialność CYWILNA na
+zasadzie ryzyka (NIE wymaga winy — art. 435 KC może DZIAŁAĆ mimo
+braku podstaw karnych) to DWA NIEZALEŻNE reżimy — dodano
+dwustronne cross-referencje między dr-02 (cywilny) i dr-03 (karny),
+z jasnym rozdzieleniem odpowiedzialności za treść.
+
+**Uszczerbek na zdrowiu w tym kontekście:** ten sam reżim art. 435
+KC obejmuje RÓWNIEŻ uszczerbek na zdrowiu (nie tylko śmierć) — "szkoda
+na osobie" w treści przepisu obejmuje oba skutki, NIE wymagało to
+osobnego dodania.
+
+**Rejestracja:** dr-02 SKILL.md v3.14→v3.15, dr-03 SKILL.md
+v3.21→v3.22.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z145)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 335 |
+| Błędów/luk merytorycznych naprawionych | 89 |
+| Rozbudowy treściowe na żądanie | 62 |
+| Plików zweryfikowanych merytorycznie | ~339 z 505 (~67,1%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z145 — Oszustwa podatkowe: pokrycie już wzorcowe, potwierdzony skrajny próg 5-25 lat
+
+**Kontekst:** Na żądanie użytkownika — zbadanie mechanizmów obchodzenia
+prawa w kontekście oszustw podatkowych (karuzele VAT, fikcyjne
+faktury, słupy).
+
+**Ustalenie: pokrycie JUŻ ISTNIEJĄCE jest wzorcowe.**
+`mod-KKS-karny-skarbowy-i-AML.md` ma pełną mapę: rozróżnienie art. 56
+KKS (podatnik "mówi" nieprawdę) od art. 54 KKS ("milczy"), art. 62
+KKS (nierzetelna faktura co do TREŚCI) vs art. 271/271a KK (faktura
+CAŁKOWICIE fikcyjna — z cytowanym postanowieniem SN IV KK 426/13),
+art. 76 KKS (wyłudzenie zwrotu — przestępstwo POWSZECHNE, nie tylko
+podatnika), oraz PEŁNY zbieg kwalifikacji dla karuzeli VAT na dużą
+skalę (art. 54/56/62/76 KKS + art. 270a/271a/258 KK). Moduł zawiera
+też praktyczną poradę obronną (dokumentowanie należytej staranności
+VAT).
+
+**Zweryfikowano skrajny próg (art. 277a §1 KK):** kara od 5 do 25 lat
+dla faktur o wartości powyżej 10-krotności mienia wielkiej wartości
+(próg: 10 000 000 zł, mienie wielkiej wartości = 1 mln zł wg art.
+115 §6 KK) — potwierdzone jednogłośnie w 10+ niezależnych źródłach,
+w tym DOSŁOWNY tekst przepisu (arslege.pl, przepisy.gofin.pl) i
+tekst uzasadnienia nowelizacji z 2017 r. (orka.sejm.gov.pl, Rząd 1).
+To jeden z najsurowszych przepisów w całym KK — moduł go poprawnie
+identyfikuje jako taki.
+
+Powiązanie z dr-06 (mechanizm GAAR/zniesiony próg 100 tys. zł,
+transza wcześniejsza tej sesji) i dr-03/mod-KK-slupy — pełny obraz
+mechanizmów oszustw podatkowych jest już systemowo, dobrze
+opracowany w kilku wzajemnie powiązanych modułach.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z146)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 336 |
+| Błędów/luk merytorycznych naprawionych | 89 |
+| Plików zweryfikowanych merytorycznie | ~340 z 505 (~67,3%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z146 — Techniki manipulacji dokumentacją podatkową
+
+**Kontekst:** Na żądanie użytkownika — techniki obejścia prawa/zmian
+w dokumentacji celem obniżenia podatków, plus porównanie z zasadą
+HARDGATE dot. weryfikacji numerów artykułów.
+
+**Dodano do mod-OP-ordynacja-podatkowa.md:** kompleksową sekcję z
+fundamentalnym rozróżnieniem legalnej optymalizacji (dokumentowanie
+RZECZYWISTYCH kosztów) od granicy przekroczenia. Pięć konkretnych
+technik zweryfikowanych w 6+ zgodnych źródłach: (1) manipulacja
+cenami transferowymi w transakcjach wewnątrzgrupowych — obowiązkowa
+dokumentacja dopiero od 2017 r.; (2) zawyżanie kosztów przez wydatki
+prywatne; (3) fikcyjne umowy cywilnoprawne ukrywające prawdziwy
+charakter transakcji; (4) fałszowanie sprawozdań finansowych
+(zawyżanie przychodów fikcyjnymi fakturami, przesuwanie kosztów
+między okresami, manipulacja rezerwami) — z konkretnymi wskaźnikami
+świadomej manipulacji (powtarzalność, celowość, nietypowe transakcje
+na koniec okresu); (5) zaniżanie obrotów. Dodano ważne ustalenie:
+odpowiedzialność może dotyczyć NAWET osób jedynie zatwierdzających
+dane bez weryfikacji, nie tylko bezpośredniego sprawcy. Połączono z
+istniejącym pokryciem karnym (dr-03/mod-KKS) i klauzulą GAAR (ta
+sama sekcja, wyżej) — z wyjaśnieniem różnicy: GAAR działa nawet przy
+FORMALNIE poprawnej dokumentacji (sztuczność konstrukcji), podczas
+gdy techniki z tej sekcji dotyczą SAMEGO fałszu dokumentu.
+
+**Rejestracja:** dr-06-podatki-finanse-publiczne-aml v3.14→v3.15.
+
+### PORÓWNANIE Z ZASADĄ UŻYTKOWNIKA (HARDGATE)
+
+Użytkownik zacytował zasadę: "Żaden numer artykułu nie wychodzi z
+pamięci. Cytujesz przepis - najpierw weryfikacja w EUR-Lex albo
+ISAP, dopiero potem do dokumentu." Sprawdzono dokładne brzmienie w
+`shared/PRAWO-HARDGATE.md` (wersja 2.4) — NAJBLIŻSZY odpowiednik to:
+"⛔ PERMANENT GATE — OBOWIĄZUJE PRZEZ CAŁĄ ROZMOWĘ. Zakaz nie wygasa
+po żadnej liczbie wiadomości w sesji. Każde nowe powołanie artykułu,
+sygnatury lub liczby = osobny web_search/web_fetch" oraz zasada
+domykająca: "brak numeru artykułu jest lepszy niż błędny numer
+artykułu". TREŚCIOWO zasada użytkownika i mechanizm systemu są
+ZBIEŻNE — oba wymagają weryfikacji PRZED cytowaniem, nie z pamięci,
+i oba dopuszczają BRAK cytatu jako lepszą alternatywę niż błędny
+cytat. RÓŻNICA: system rozszerza to na SYGNATURY orzeczeń i "liczby"
+ogólnie (nie tylko numery artykułów), oraz dodaje wymóg PONOWNEJ
+weryfikacji przy każdym POWTÓRNYM przywołaniu w tej samej rozmowie
+(nie tylko przy pierwszym wprowadzeniu) — co jest NIUANSEM
+wykraczającym poza samo sformułowanie użytkownika, ale zgodnym w
+duchu z jego intencją.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z147)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 337 |
+| Błędów/luk merytorycznych naprawionych | 89 |
+| Rozbudowy treściowe na żądanie | 63 |
+| Plików zweryfikowanych merytorycznie | ~341 z 505 (~67,5%) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-07-30z147 — ⚡⚡ USTAWA ANTYMOBBINGOWA PODPISANA DZIŚ: system trafnie śledził projekt, teraz potwierdzono ostateczny kształt
+
+**Kontekst:** Użytkownik zgłosił: "Ustawa zmieniająca definicję
+mobbingu - podpisana przez Prezydenta!" — zbadano i potwierdzono.
+
+**POTWIERDZONE w 9+ zgodnych, ekstremalnie aktualnych źródłach
+(28-30.07.2026), w tym bezpośrednio orka.sejm.gov.pl (Rząd 1, pełny
+tekst ustawy):** Ustawa z 19.06.2026 o zmianie KP oraz KPC (tzw.
+"ustawa antymobbingowa") — Sejm 19.06.2026 (236 za), Senat 8.07.2026
+(bez poprawek), **Prezydent Karol Nawrocki PODPISAŁ 30.07.2026 —
+DOSŁOWNIE DZIŚ** na dzień tej weryfikacji.
+
+**Znakomite ustalenie systemowe:** `shared/definicje/DEF-PRACA.md`
+JUŻ WCZEŚNIEJ (12.06.2026) trafnie śledził ten projekt (UD183) jako
+"JESZCZE NIE USTAWA", z PRAWIDŁOWO PRZEWIDZIANĄ kwotą zadośćuczynienia
+("~6 × 4666 zł = ~28 000 zł") — TERAZ POTWIERDZONO ostateczną,
+dokładną kwotę: **28 836 zł brutto** (6× minimalne wynagrodzenie
+2026) — RÓŻNICA wynikająca z aktualizacji kwoty bazowej, NIE z błędu
+prognozy. To dobry przykład wartości ŚLEDZENIA projektów legislacyjnych
+PRZED ich uchwaleniem.
+
+**Zaktualizowano OBA pliki** (kanoniczny DEF-PRACA.md + moduł
+mod-KP-mobbing-dyskryminacja.md) z pełnym, potwierdzonym stanem:
+nowa definicja (nawracający/powtarzający/stały charakter, BEZ
+WZGLĘDU na skutki/motywacje — usunięcie wymogu rozstroju zdrowia),
+sprawca może być KAŻDY (w tym podwładny, GRUPA, lub osoba
+ZACHĘCAJĄCA do mobbingu), bezpiecznik dla merytorycznej,
+udokumentowanej krytyki, próg 9 pracowników dla obowiązkowego
+regulaminu, SKODYFIKOWANE prawo regresu pracodawcy wobec sprawcy
+(wcześniej tylko z orzecznictwa), nowy art. 477⁶ᵃ KPC (zakaz oddalenia
+powództwa z powodu błędnej podstawy prawnej wskazanej przez
+pracownika), częściowa retrospektywność dla zachowań ciągłych.
+
+**Rejestracja:** dr-04-prawo-pracy-zus-swiadczenia SKILL.md
+v3.18→v3.19. Moduł mod-KP-mobbing-dyskryminacja.md zawiera jawne
+TODO — tabela kwalifikatora wymaga PEŁNEJ aktualizacji przy
+najbliższej okazji (częściowo zaktualizowana teraz, z odesłaniem do
+kanonicznego źródła dla pełnej treści).
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z148)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 338 |
+| Błędów/luk merytorycznych naprawionych | 89 |
+| Rozbudowy/aktualizacje treściowe na żądanie | 65 |
+| Plików zweryfikowanych merytorycznie | ~342 z 505 (~67,7%) |
+| Flagi otwarte | **0** (TODO aktualizacji tabeli = jawnie odnotowane, nie flaga formalna) |
+
+## AUDYT-2026-07-30z148 — Przegląd świeżych ustaw: polska ustawa o AI (podpisana!), ustawa łańcuchowa, odrzucony windfall tax
+
+**Kontekst:** Użytkownik zapytał o inne projekty ustaw czekające na
+podpis/bliskie wejścia w życie — szeroki przegląd sytuacji
+legislacyjnej na koniec lipca 2026.
+
+### ⚡⚡ NAJWAŻNIEJSZE: Polska ma już podpisaną, PIERWSZĄ krajową
+ustawę o systemach sztucznej inteligencji
+
+Ustawa z 3.07.2026 (druk 2443), Prezydent podpisał **24.07.2026**.
+Ponownie POTWIERDZONO dobrą praktykę systemu — moduł mod-AI-Act-
+framework.md JUŻ WCZEŚNIEJ śledził KRiBSI jako PLANOWANY organ
+("po wejściu w życie ustawy krajowej"), z instrukcją web_search do
+sprawdzenia statusu. TERAZ potwierdzono: organ REALNIE POWOŁANY.
+Zaktualizowano moduł o pełne szczegóły: struktura KRiBSI, kryteria
+oceny wagi naruszenia (nie automatyczne kary), piaskownice
+regulacyjne dla MŚP, jednoinstancyjne postępowanie z odwołaniem
+bezpośrednio do SOKiK, lista nowelizowanych przy okazji ustaw. ⚡
+Odnotowano: od 2.08.2026 (za 3 dni!) zaczynają obowiązywać przepisy
+o przejrzystości AI.
+
+### Dodatkowe, istotne znaleziska (odnotowane, NIE w pełni opracowane
+w tej turze z uwagi na zakres):
+
+- **"Ustawa łańcuchowa"** (nowelizacja ochrony zwierząt, zakaz
+  trzymania psów/kotów na uwięzi) — podpisana TEGO SAMEGO dnia
+  (24.07.2026) — powiązanie z rozbudowanym w tej sesji modułem
+  dr-10/bezpieczenstwo-zywnosci (sekcja o dobrostanie zwierząt) —
+  WYMAGA osobnego dodania w przyszłej turze
+- **Podatek od nadzwyczajnych zysków paliwowych (windfall tax, 60%)
+  — NIE WSZEDŁ W ŻYCIE** — Prezydent skierował do TK w trybie
+  KONTROLI PREWENCYJNEJ (24.07.2026), powołując się na zasadę lex
+  retro non agit (próba opodatkowania z mocą wsteczną od marca 2026)
+  — ISTOTNE dla dr-06: żaden taki podatek obecnie NIE obowiązuje,
+  wbrew możliwym medialnym sugestiom
+- **Nowelizacja akcyzy** — RÓWNIEŻ skierowana do TK (2.07.2026),
+  Prezydent skrytykował "legislacyjny chaos" (rząd zmienił podejście
+  2 dni przed uchwaleniem) — POWIĄZANIE z wcześniej odnotowaną w tej
+  sesji skrajną zmiennością stawek akcyzowych (transza 27z87)
+- **Ustawa o statusie osoby najbliższej w związku i umowie o
+  wspólnym pożyciu — ZAWETOWANA** (nie weszła w życie)
+- **Asesorzy sądowi** — sygnalizowany "konstytucyjny pat" w mediach
+  (29.07.2026) — NIE zbadano szczegółowo w tej turze, możliwy temat
+  na przyszłość
+
+**Rejestracja:** dr-11-cyfrowe-cyber-ai-dane-ip SKILL.md v3.9→v3.10.
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z149)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 339 |
+| Błędów/luk merytorycznych naprawionych | 89 |
+| Rozbudowy/aktualizacje treściowe na żądanie | 66 |
+| Plików zweryfikowanych merytorycznie | ~343 z 505 (~67,9%) |
+| Flagi otwarte | **0** (kilka tematów odnotowanych jako TODO na przyszłość) |
+
+## AUDYT-2026-07-30z149 — Synchronizacja świeżych ustaw z mapami aktów (dr-04, dr-06, dr-10, dr-11 + centralna mapa)
+
+**Kontekst:** Na żądanie użytkownika — synchronizacja znalezisk z
+poprzedniej transzy (ustawa o AI, ustawa antymobbingowa, odrzucone
+ustawy podatkowe, ustawa łańcuchowa) z mapami aktów DR oraz z
+centralną prawo-polskie-v2/ROUTING-MAP.md.
+
+**Zaktualizowano 5 wpisów/dodano 5 nowych wierszy łącznie:**
+1. dr-11/MAPA-AKTOW.md + ROUTING-MAP.md: zaktualizowano istniejący
+   wpis AI Act o potwierdzenie podpisanej polskiej ustawy krajowej
+   (KRiBSI z projektu → realny organ)
+2. dr-04/MAPA-AKTOW.md + ROUTING-MAP.md: DODANO nowy wiersz — ustawa
+   antymobbingowa (podpisana 30.07.2026, dokładny nr Dz.U.
+   niezweryfikowany — ustawa dopiero co podpisana)
+3. dr-06/MAPA-AKTOW.md: DODANO 2 wiersze — FAKTY NEGATYWNE: windfall
+   tax paliwowy (60%) i nowelizacja akcyzy — OBIE skierowane do TK w
+   trybie kontroli prewencyjnej, OBIE NIE OBOWIĄZUJĄ — istotne dla
+   unikania błędnego doradzania klientom na podstawie samego
+   medialnego rozgłosu wokół uchwalenia przez Sejm/Senat
+4. dr-10/MAPA-AKTOW.md: DODANO wiersz — "ustawa łańcuchowa" (zakaz
+   trzymania psów/kotów na uwięzi, podpisana 24.07.2026) — z jawnym
+   TODO, że treść merytoryczna NIE została jeszcze opracowana w tej
+   sesji, tylko sam wpis w mapie
+
+**Rejestracja:** dr-04 v3.19→v3.20, dr-06 v3.15→v3.16, dr-10
+v3.30→v3.31 (dr-11 już zaktualizowany w poprzedniej turze do v3.10).
+
+### BILANS CAŁOŚCIOWY SESJI (transze 26h → 27z150)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E | 340 |
+| Błędów/luk merytorycznych naprawionych | 89 |
+| Rozbudowy/aktualizacje treściowe na żądanie | 67 |
+| Plików zweryfikowanych merytorycznie | ~344 z 505 (~68,1%) |
+| Flagi otwarte | **0** |

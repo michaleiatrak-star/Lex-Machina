@@ -17,14 +17,30 @@
 
 ## ANEKS A — MOBBING I DYSKRYMINACJA (art. 94³ i art. 18³a-18³e KP)
 
+### ⚡⚡ ZNALEZISKO 2026-07-30 — REFORMA PODPISANA PRZEZ PREZYDENTA DZIŚ
+
+**Ustawa antymobbingowa** (zmiana KP + KPC) PODPISANA przez Prezydenta
+Karola Nawrockiego **30.07.2026** (DZIŚ na dzień tej weryfikacji) —
+wchodzi w życie za 3 miesiące od ogłoszenia. PEŁNA analiza zmian
+(nowa definicja, kwota 6× minimalne wynagrodzenie ≈28 836 zł, próg 9
+pracowników, prawo regresu, nowy art. 477⁶ᵃ KPC) →
+`shared/definicje/DEF-PRACA.md`, sekcja MOBBING — TAM jest KANONICZNA
+treść, NIE duplikuj tutaj. Poniższa tabela w tym module OPISUJE STAN
+SPRZED reformy — WYMAGA AKTUALIZACJI do nowej definicji przy
+najbliższej okazji (odnotowane jako TODO, nie naprawione w całości w
+tej turze z uwagi na architekturę deduplikacji — kwalifikator
+różnicujący poniżej pozostaje częściowo aktualny, ALE wiersz
+"Powtórzalność" i "Min. odszkodowanie" dla mobbingu wymagają
+korekty zgodnie z nową definicją).
+
 ### Rozróżnienie czynów — kwalifikator
 
 | Cecha | Mobbing (art. 94³ KP) | Dyskryminacja (art. 18³a KP) | Molestowanie seksualne (art. 18³a §6 KP) |
 |---|---|---|---|
 | Cecha chroniona | NIE | TAK (płeć, wiek, religia, niepełnosprawność itd.) | TAK |
-| Powtarzalność | TAK — obowiązkowa (uporczywe + długotrwałe) | NIE — jednorazowe wystarczy | NIE |
+| Powtarzalność | ⚠️ PO REFORMIE (od 30.07.2026): "nawracający, powtarzający się lub stały" charakter, BEZ WZGLĘDU na skutki/motywacje (dawniej: uporczywe + długotrwałe, OBA łącznie) — patrz DEF-PRACA.md | NIE — jednorazowe wystarczy | NIE |
 | Ciężar dowodu | **Pracownik — przez cały proces** | Pracownik uprawdopodabnia → ciężar PRZESUWA SIĘ na pracodawcę | Pracodawca NIE może uzasadnić obiektywnie |
-| Min. odszkodowanie | brak (zadośćuczynienie bez minimum) | min. wynagrodzenie za pracę | min. wynagrodzenie za pracę |
+| Min. odszkodowanie | ⚠️ PO REFORMIE: **6× minimalne wynagrodzenie** (≈28 836 zł, 2026) — dawniej: brak minimum | min. wynagrodzenie za pracę | min. wynagrodzenie za pracę |
 
 ### Definicja i przesłanki mobbingu
 

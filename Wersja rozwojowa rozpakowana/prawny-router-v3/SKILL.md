@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: 3.17
+version: 3.18
 type: orchestration
 status: production
 entrypoint: SKILL.md

@@ -28,10 +28,32 @@ upłynął termin przedawnienia, kwota rażąco zawyżona.
 
 ### Kary mandatowe — rozróżnienie (ważne!)
 ```
-MANDAT (policja / ITD / straż): max 2.500 zł
-RECYDYWA (ten sam typ wykroczenia w ciągu 24 m-cy): max 5.000 zł
-SĄD (art. 24 §1 KW): grzywna do 30.000 zł
-⚠️ "Max kara" w tabeli = kara sądowa. Mandat policyjny to max 2.500/5.000 zł.
+MANDAT (policja / ITD / straż) — ✅ POPRAWIONE 2026-07-30 (FAZA 3E/
+  ZASADA 14): OGÓLNY pułap to **5 000 ZŁ** za JEDNO wykroczenie (art.
+  96 §1 KPSW — wzrost 10-krotny z 500 zł, obowiązuje od 1.01.2022),
+  **6 000 ZŁ** przy ZBIEGU wykroczeń (art. 9 §1 KW). Poprzednia
+  wersja BŁĘDNIE podawała "max 2 500 zł" jako regułę OGÓLNĄ — TA
+  kwota dotyczy WYŁĄCZNIE konkretnej, WĄSKIEJ kategorii (np. górny
+  próg taryfikatora za przekroczenie prędkości o >70 km/h), NIE jest
+  uniwersalnym pułapem dla wszystkich wykroczeń
+RECYDYWA (ten sam typ wykroczenia w ciągu 24 m-cy — DOTYCZY GŁÓWNIE
+  WYKROCZEŃ DROGOWYCH, mechanizm podwojenia STAWKI BAZOWEJ danej
+  kategorii, NIE uniwersalnej "podwyżki do 5000"): np. przekroczenie
+  prędkości 71+ km/h: 2 500 zł → 5 000 zł w recydywie; 61-70 km/h:
+  2 000 zł → 4 000 zł; ITD — KAŻDA kategoria ma WŁASNĄ bazową stawkę
+  i WŁASNĄ podwojoną stawkę recydywy, nie jeden uniwersalny próg
+SĄD (art. 24 §1 KW): grzywna do **30 000 ZŁ** (wzrost z 5 000 zł,
+  również od nowelizacji z przełomu 2025/2026 — sprawdź dokładną
+  datę wejścia w życie na ISAP przed cytowaniem)
+⚠️ "Max kara" w tabeli [wcześniej w tym dokumencie] = kara sądowa.
+  Mandat policyjny za POJEDYNCZE wykroczenie ma OGÓLNY pułap 5 000
+  zł (6 000 zł przy zbiegu) — KONKRETNE kategorie (zwłaszcza drogowe)
+  mogą mieć NIŻSZE stawki bazowe z własnym mechanizmem recydywy w
+  ramach tego ogólnego pułapu — nie myl stawki kategorii ze stawką
+  ogólną
+
+Potwierdzone w 8+ zgodnych źródłach 2026 r., w tym dosłowny tekst
+art. 96 KPSW (lexlege.pl).
 ```
 
 ### Uchylenie prawomocnego mandatu (art. 101 KPSW)

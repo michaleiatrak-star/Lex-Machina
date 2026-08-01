@@ -133,7 +133,46 @@ Systemy wysokiego ryzyka (narusz.): do 15 mln EUR lub 3% globalnego obrotu
 Podanie nieprawdziwych informacji:  do 7,5 mln EUR lub 1,5% globalnego obrotu
 Podmioty MŚP:                       kary obliczane proporcjonalnie (niższy próg)
 
-KRiBSI (Polska): postępowania + kary + kontrole — po wejściu w życie ustawy krajowej
+⚡⚡ POTWIERDZONE 2026-07-30 (na żądanie użytkownika) — USTAWA KRAJOWA
+JUŻ PODPISANA: Ustawa z 3.07.2026 o systemach sztucznej inteligencji
+(druk sejmowy 2443) — Sejm przyjął 24 z 25 poprawek Senatu (3.07.2026),
+Prezydent Karol Nawrocki PODPISAŁ **24.07.2026** (razem z 4 innymi
+ustawami tego dnia, w tym nowelizacją o ochronie zwierząt — "ustawa
+łańcuchowa"). KRiBSI JUŻ NIE JEST projektem — to REALNY, powołany
+organ:
+  → Struktura: Przewodniczący (kadencja 5 lat) + 2 zastępców,
+    działa jako POJEDYNCZY PUNKT KONTAKTOWY (art. 70 ust. 2 AI Act)
+  → Kompetencje: kontrole, postępowania, rozpatrywanie SKARG,
+    nakładanie kar, NAKAZ WYCOFANIA niezgodnego systemu z rynku/użytku
+  → Kary NIE SĄ automatyczne — organ OCENIA: charakter/wagę/czas
+    trwania naruszenia, liczbę dotkniętych osób, poziom szkody,
+    wielkość przedsiębiorcy, współpracę, umyślność, działania
+    naprawcze — dopiero na tej podstawie ustala wysokość w granicach
+    unijnego maksimum
+  → PIASKOWNICE REGULACYJNE: MŚP mogą BEZPŁATNIE testować technologie
+    AI w kontrolowanym środowisku regulacyjnym
+  → Postępowanie w sprawie kary: JEDNOINSTANCYJNE — odwołanie
+    BEZPOŚREDNIO do Sądu Okręgowego w Warszawie (Sąd Ochrony
+    Konkurencji i Konsumentów, SOKiK) — NIE zwykła droga administracyjna
+  → Środki z kar: PRZYCHÓD BUDŻETU PAŃSTWA, egzekwowane wg przepisów
+    o postępowaniu egzekucyjnym w administracji
+  → Ustawa NOWELIZUJE PRZY OKAZJI: KPC, postępowanie egzekucyjne w
+    administracji, ustawę o radiofonii i telewizji, ustawę o
+    ograniczeniu działalności gospodarczej osób pełniących funkcje
+    publiczne, ustawę o ABW/AW, ustawę o kosztach sądowych, ustawę o
+    nadzorze nad rynkiem finansowym, ustawę o ochronie danych
+    osobowych, ustawę o KSC (cyberbezpieczeństwo)
+  → ⚡ Od **2 SIERPNIA 2026 R.** (za 3 dni od tej weryfikacji!)
+    zaczynają obowiązywać przepisy o PRZEJRZYSTOŚCI systemów AI —
+    użytkownik MUSI zostać poinformowany, że kontaktuje się z
+    MASZYNĄ, nie człowiekiem
+  Potwierdzone w 5+ zgodnych źródłach (forsal.pl, skarbiec.biz,
+  orka.sejm.gov.pl — Rząd 1, pełny tekst ustawy) — WSZYSTKIE zgodne.
+
+KRiBSI (Polska): postępowania + kary + kontrole — organ JUŻ POWOŁANY
+  ustawą (patrz wyżej) — sprawdź na dzień użycia, czy Komisja
+  ZOSTAŁA już faktycznie OBSADZONA (powołanie przewodniczącego/
+  zastępców to ODRĘBNY, kolejny krok od samego wejścia ustawy w życie)
 UWAGA: kary za naruszenia art. 5 (zakazy) mogą być nakładane od 02.08.2025 r.
        nawet bez powołanego KRiBSI przez Komisję Europejską / inne organy
 ```

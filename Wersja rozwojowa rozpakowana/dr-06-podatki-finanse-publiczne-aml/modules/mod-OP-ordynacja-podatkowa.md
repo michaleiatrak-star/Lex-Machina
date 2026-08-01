@@ -179,6 +179,79 @@ data zniesienia limitu NIE ZWERYFIKOWANA w tej sesji — sprawdź na
 ISAP przed cytowaniem konkretnej daty.
 ```
 
+## TECHNIKI MANIPULACJI DOKUMENTACJĄ DLA OBNIŻENIA PODATKÓW — GRANICA
+LEGALNOŚCI (dodano 2026-07-30, na żądanie użytkownika)
+
+```
+⚠️ FUNDAMENTALNE ROZRÓŻNIENIE: LEGALNA optymalizacja (dokumentowanie
+  RZECZYWISTYCH kosztów, wybór korzystnej formy opodatkowania) vs
+  NIELEGALNE działania (fałszowanie/manipulacja dokumentacji) —
+  granica bywa cienka, ale KRYTERIUM jest jasne: czy dokument
+  odzwierciedla RZECZYWISTOŚĆ gospodarczą, czy ją FINGUJE
+
+(A) LEGALNA STRONA — dokumentowanie faktycznych kosztów:
+  → Podatnik MA PRAWO (nie obowiązek) pomniejszyć przychód o
+    UDOKUMENTOWANE, RZECZYWIŚCIE poniesione koszty — zaniżanie
+    kosztów (rezygnacja z korzystnego odliczenia) NIE rodzi sankcji,
+    bo zwiększa kwotę podatku
+  → Warunek: związek przyczynowo-skutkowy wydatku z przychodem +
+    UZASADNIENIE GOSPODARCZE — brak uzasadnienia = ryzyko wyłączenia
+    kosztu przy kontroli, NIEZALEŻNIE od posiadanej faktury
+
+(B) GRANICA PRZEKROCZENIA — konkretne techniki, z których KAŻDA
+  przesuwa sprawę w stronę przestępstwa skarbowego:
+  1) CENY TRANSFEROWE — zawyżanie/zaniżanie cen w transakcjach
+     wewnątrzgrupowych (opłaty za zarządzanie, tantiemy licencyjne,
+     usługi wewnątrzgrupowe o TRUDNEJ WERYFIKOWALNOŚCI — np. dostęp
+     do systemów IT centrali, "godzina pracy centrali") — mechanizm:
+     zysk "osiada" za granicą (niższe opodatkowanie), w Polsce zostaje
+     minimalny dochód lub KSIĘGOWA STRATA — od 2017 r. OBOWIĄZKOWA
+     szczegółowa dokumentacja cen transferowych (wcześniej swobodne
+     kształtowanie)
+  2) ZAWYŻANIE KOSZTÓW poprzez ujmowanie WYDATKÓW PRYWATNYCH jako
+     firmowych — najczęstsza pułapka w rozliczeniach PIT
+     przedsiębiorców, wykrywana przy KONTROLI przez brak związku
+     przyczynowo-skutkowego z przychodem
+  3) FIKCYJNE UMOWY CYWILNOPRAWNE — ukrywające prawdziwy charakter
+     transakcji (np. fikcyjna "usługa doradcza" zamiast rzeczywistego
+     wynagrodzenia za pracę, dla obejścia składek/podatku)
+  4) FAŁSZOWANIE SPRAWOZDAŃ FINANSOWYCH — techniki: zawyżanie
+     przychodów PRZEZ fikcyjne faktury, PRZESUWANIE kosztów między
+     okresami sprawozdawczymi (mylenie zasady memoriałowej z kasową —
+     zniekształca wynik podatkowy), NIEPRAWIDŁOWE tworzenie/
+     likwidowanie rezerw, UKRYWANIE zobowiązań (poprawia sztucznie
+     bilans). ⚠️ WSKAŹNIKI ŚWIADOMEJ manipulacji (nie pomyłki):
+     POWTARZALNOŚĆ działania, CELOWY dobór wartości, niespójności
+     między księgami a dokumentacją źródłową, NIETYPOWE transakcje
+     na KONIEC okresu sprawozdawczego
+  5) ZANIŻANIE OBROTÓW — zgłaszanie niższej sprzedaży niż rzeczywista
+     (typowy mechanizm w branżach z dużym obrotem gotówkowym) — SN
+     WPROST wskazał (analiza NSA): systematyczne zaniżanie wartości
+     sprzedaży z przedstawianiem organom FAŁSZYWYCH danych to NIE
+     TYLKO oszustwo podatkowe, ale PRZESTĘPSTWO SKARBOWE
+
+⚠️ ODPOWIEDZIALNOŚĆ OSOBISTA — NIE TYLKO SPRAWCA BEZPOŚREDNI: nawet
+  osoby, które JEDYNIE ZATWIERDZAJĄ zmanipulowane dane BEZ podjęcia
+  właściwych kroków weryfikacyjnych (np. zarząd, główny księgowy
+  podpisujący sprawozdanie bez należytej staranności), MOGĄ zostać
+  pociągnięte do odpowiedzialności — brak bezpośredniego
+  "sfałszowania" nie chroni automatycznie przy zaniedbaniu nadzoru
+
+POWIĄZANIE Z RESZTĄ SYSTEMU: mechanizmy z pkt 3-5 (fikcyjne umowy,
+  fałszywe faktury, ukrywanie prawdziwego charakteru transakcji) MOGĄ
+  kumulatywnie wypełniać znamiona przestępstw z art. 270a/271a/277a KK
+  (fałszowanie faktur) LUB art. 56/76 KKS (uszczuplenie/wyłudzenie
+  zwrotu) — pełna analiza karna → DR-03,
+  `mod-KKS-karny-skarbowy-i-AML.md`. Klauzula GAAR (art. 119a OP,
+  sekcja wyżej) to ODRĘBNY, ADMINISTRACYJNY mechanizm — działa NAWET
+  gdy dokumentacja jest FORMALNIE poprawna, ale CAŁA konstrukcja
+  prawna służy WYŁĄCZNIE uzyskaniu korzyści podatkowej sprzecznej z
+  celem ustawy (SZTUCZNOŚĆ konstrukcji, nie fałsz dokumentu).
+
+Potwierdzone w 6+ zgodnych źródłach 2025-2026 (wgospodarce.pl, BTLA
+[x2], PG Partner Gospodarczy, infor.pl).
+```
+
 ---
 
 ## 7. ODPOWIEDZIALNOŚĆ ZARZĄDU ZA ZALEGŁOŚCI (art. 116 Op)

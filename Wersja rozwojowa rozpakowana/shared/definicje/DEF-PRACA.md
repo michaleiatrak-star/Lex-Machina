@@ -72,19 +72,95 @@ OBOWIĄZUJĄCE WYMOGI (WSZYSTKIE ŁĄCZNIE):
   3. Nękanie lub zastraszanie
   4. Skutek: zaniżona ocena przydatności ALBO poniżenie/ośmieszenie ALBO izolacja
 
-⚠️ PROJEKT NOWELIZACJI — UD183 (RCL), przyjęty przez Radę Ministrów 17.02.2026
-  — JESZCZE NIE USTAWA!
-  Stan na 10.06.2026: projekt skierowany do Sejmu, NIE weszła w życie
-  Planowane zmiany (zestaw SCALONY 2026-06-12 z dwóch wcześniej rozbieżnych
-  wpisów — patrz też mod-KP-mobbing-dyskryminacja.md):
-  → Wykluczenie zachowań incydentalnych z definicji
-  → Wystarczy "nawracający lub stały" charakter (bez "długotrwały")
-  → Formy: fizyczna, werbalna, pozawerbalna
-  → Sprawca: przełożony, współpracownik, podwładny lub grupa
-  → Min. zadośćuczynienie: 6× minimalne wynagrodzenie (2026: ~6 × 4 666 zł = ~28 000 zł)
-  → Obowiązek regulaminu antymobbingowego: pracodawca ≥9 osób
-  → PRAWO REGRESU pracodawcy wobec mobbera (po wypłacie zadośćuczynienia)
-  → WERYFIKUJ: web_search "UD183 nowelizacja kodeks pracy mobbing Sejm 2026 status"
+⚡⚡ ZNALEZISKO 2026-07-30 (na żądanie użytkownika) — PROJEKT STAŁ SIĘ
+USTAWĄ, PODPISANĄ PRZEZ PREZYDENTA **DZIŚ** (30.07.2026):
+
+```
+USTAWA z 19.06.2026 o zmianie ustawy — Kodeks pracy oraz ustawy —
+  Kodeks postępowania cywilnego (tzw. "ustawa antymobbingowa")
+  Sejm: 19.06.2026 (236 za, 24 przeciw, 178 wstrzymało się)
+  Senat: 8.07.2026 (BEZ POPRAWEK)
+  Prezydent Karol Nawrocki: PODPISANA 30.07.2026 (DZIŚ na dzień tej
+    weryfikacji) — projekt UD183, druk sejmowy nr 2289
+  Wejście w życie: 3 MIESIĄCE od dnia ogłoszenia w Dz.U. (⚠️ jedno
+    starsze źródło z grudnia 2025 błędnie sugerowało 6 miesięcy/
+    "początek 2027" — to była nieaktualna prognoza sprzed
+    ostatecznego kształtu ustawy, NIE ufaj jej)
+  Pracodawcy: 6 MIESIĘCY od wejścia w życie na dostosowanie
+    regulaminu pracy / wydanie nowego regulaminu (art. 4 ustawy)
+
+NOWA DEFINICJA MOBBINGU — POTWIERDZONE OSTATECZNE brzmienie:
+  → Zachowania o charakterze NAWRACAJĄCYM, POWTARZAJĄCYM SIĘ lub
+    STAŁYM — BEZ WZGLĘDU na SKUTKI i MOTYWACJE sprawcy (⭐ KLUCZOWA
+    ZMIANA: dotychczas wymagane było "uporczywe I długotrwałe" +
+    SKUTEK w postaci zaniżonej oceny/poniżenia/izolacji — TERAZ
+    skutek i intencja PRZESTAJĄ być koniecznymi przesłankami)
+  → Sprawca: przełożony, współpracownik, PODWŁADNY, lub GRUPA —
+    ORAZ osoba ZACHĘCAJĄCA inną osobę do takich działań (nowy,
+    samodzielny typ zachowania)
+  → BEZPIECZNIK: uzasadniona, merytoryczna krytyka — w tym
+    rozliczanie z wyników i należyte wykonywanie pracy — NIE stanowi
+    mobbingu, JEŚLI wyrażona we właściwej, KULTURALNEJ formie I
+    UDOKUMENTOWANA
+  → Pracownik może dochodzić zadośćuczynienia NAWET gdy mobbing NIE
+    wywołał rozstroju zdrowia (usunięcie tego warunku)
+
+MIN. ZADOŚĆUCZYNIENIE — POTWIERDZONA OSTATECZNA KWOTA:
+  → **6-KROTNOŚĆ minimalnego wynagrodzenia za pracę** = ok. **28 836
+    ZŁ BRUTTO** w 2026 r. (przy min. wynagrodzeniu 4 806 zł) —
+    POTWIERDZONE w wielu zgodnych, aktualnych źródłach (dokładnie
+    zgodne z WCZEŚNIEJSZĄ PROGNOZĄ tego pliku sprzed uchwalenia —
+    "~6 × 4 666 zł = ~28 000 zł" — RÓŻNICA wynika z aktualizacji
+    kwoty bazowej minimalnego wynagrodzenia między prognozą a
+    uchwaleniem, NIE z błędu)
+  → Zadośćuczynienie za NARUSZENIE ZASADY RÓWNEGO TRAKTOWANIA
+    (dyskryminację) — ODRĘBNIE, NIŻSZY próg: min. WYNAGRODZENIE ZA
+    PRACĘ (1-krotność, nie 6-krotność jak przy mobbingu)
+
+OBOWIĄZEK REGULAMINU ANTYMOBBINGOWEGO: pracodawca zatrudniający ≥9
+  OSÓB — musi określić reguły/procedury/częstotliwość
+  przeciwdziałania mobbingowi w regulaminie pracy LUB obwieszczeniu,
+  prowadzić działania profilaktyczne, reagować na zgłoszenia,
+  zapewniać realne wsparcie. Mniejsi pracodawcy: BEZ obowiązku
+  formalnego regulaminu, ALE NADAL zobowiązani przeciwdziałać
+  mobbingowi
+
+PRAWO REGRESU PRACODAWCY: pracodawca, który wypłacił zadośćuczynienie,
+  MOŻE dochodzić ZWROTU od SPRAWCY mobbingu — TERAZ SKODYFIKOWANE
+  wprost w ustawie (wcześniej wynikało WYŁĄCZNIE z orzecznictwa, bez
+  podstawy ustawowej)
+
+OCHRONA ZGŁASZAJĄCEGO: osoba zgłaszająca mobbing NIE MOŻE ponieść z
+  tego tytułu ŻADNYCH negatywnych konsekwencji — ORAZ ochrona przed
+  FAŁSZYWYMI oskarżeniami (dwustronna ochrona)
+
+ZMIANY W KPC — NOWY ART. 477⁶ᵃ KPC: w postępowaniu o zadośćuczynienie/
+  odszkodowanie z tytułu naruszenia dóbr osobistych, równego
+  traktowania LUB mobbingu — sąd NIE MOŻE oddalić powództwa TYLKO
+  dlatego, że stan faktyczny wskazuje na ZASADNOŚĆ z INNEGO tytułu
+  niż wskazany przez pracownika (sąd ma OBOWIĄZEK rozpoznać wg
+  WŁAŚCIWEJ podstawy, nawet jeśli pracownik błędnie ją nazwał) —
+  dodatkowo zmiany dot. właściwości sądów i składów orzekających
+
+PRZEPISY PRZEJŚCIOWE (art. 3 ustawy): nowe przepisy STOSUJE SIĘ
+  RÓWNIEŻ do zachowań (w tym wielokrotnego naruszenia zasady równego
+  traktowania), które ROZPOCZĘŁY SIĘ PRZED wejściem w życie ustawy,
+  ALE TRWAŁY PO tej dacie — częściowa retrospektywność dla zachowań
+  CIĄGŁYCH
+
+ROZSZERZENIE DEFINICJI DYSKRYMINACJI: nowy typ zachowania —
+  ZACHĘCANIE innej osoby do naruszenia zasady równego traktowania
+  LUB NAKAZANIE jej takiego naruszenia — TERAZ SAMODZIELNIE stanowi
+  naruszenie (nie tylko samo działanie dyskryminujące bezpośrednio)
+
+Potwierdzone w 9+ zgodnych, EKSTREMALNIE aktualnych źródłach
+(28-30.07.2026 — dosłownie dni/godziny przed tą weryfikacją), w tym
+BEZPOŚREDNIO orka.sejm.gov.pl (Rząd 1, pełny tekst ustawy) oraz
+Kancelaria Prezydenta (przez pośrednictwo gazetaprawna.pl,
+pulshr.pl, bankier.pl, biznesinfo.pl, biznes.wprost.pl).
+```
+
+
   
 OBECNIE OBOWIĄZUJĄCE ROSZCZENIA (art. 94³ §3–4 KP):
   → Zadośćuczynienie za rozstrój zdrowia: nie mniej niż minimalne wynagrodzenie

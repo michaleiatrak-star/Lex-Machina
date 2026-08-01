@@ -1,6 +1,6 @@
 ---
 name: dr-09-budownictwo-srodowisko-energia-transport
-version: 3.10
+version: 3.19
 description: |
   DR-09: Budownictwo, Środowisko, Energia, Transport
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -52,10 +52,17 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W10 Obiekt liniowy (art. 3 pkt 3a PrBud — kable w kanalizacji ≠ obiekt!)
 - BAS-W14 ⚠️ Reforma upol 2025 — nowe definicje budynek/budowla (dot. też DR-06)
 
-## Moduły (23 łącznie — ✓ 23 OK, ☐ 0 STUB)
+## Moduły (24 łącznie — ✓ 24 OK, ☐ 0 STUB)
 
 ```
 BUDOWNICTWO:
+  [✓] NOWY  mod-ochrona-zabytkow-obiekty-uzytecznosci-publicznej
+              (dodany 2026-07-30, na żądanie użytkownika — ochrona
+               zabytków: katalog czynności wymagających pozwolenia
+               WKZ, podwójny wymóg pozwolenie WKZ+PrBud, nakaz/
+               wstrzymanie konserwatorskie; obiekty użyteczności
+               publicznej: bezwzględny wymóg dostępności dla
+               niepełnosprawnych, dane NIK o realnej niezgodności)
   [✓] OK    mod-PrBud-prawo-budowlane
               (samowola, PINB/WINB, pozwolenie, zgłoszenie, WZ/MPZP, umowa z wykonawcą,
                uchwała NSA 7 sędziów luty 2026 — art. 49f i wcześniejszy nakaz rozbiórki)

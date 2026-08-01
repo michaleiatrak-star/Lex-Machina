@@ -12,7 +12,7 @@
 | Prawo komunikacji elektronicznej (⚠️ POPRAWKA 2026-07-02zz: BYŁO błędnie nazwane "Prawo telekomunikacyjne" — stara ustawa telekomunikacyjna z 2004 r. została CAŁKOWICIE ZASTĄPIONA nową ustawą z 12.07.2024 r. o odmiennej nazwie, wdrażającą Europejski Kodeks Łączności Elektronicznej) + poczta + UKE | Dz.U. 2024 poz. 1221 ze zm. (BYŁO błędnie 1220 — bardzo zbliżony, ale inny numer) | mod-PrTelekom-poczta-UKE (⚠️ nazwa modułu również myląca — rozważyć rename) | ⚠️ WYMAGA AKTUALIZACJI MODUŁU (nazwa + numer) |
 | Ustawa o prawie autorskim i prawach pokrewnych | Dz.U. 2025 poz. 24 t.j. ✅ VER: 2026-06-14 (TRYB DZU — był 2022/2509) | mod-PrAut-wlasnosc-intelektualna-IP | ✅ OK |
 | Prawo autorskie — media, internet, dobra osobiste | Dz.U. 2025 poz. 24 t.j. ✅ VER: 2026-06-14 (TRYB DZU — był 2022/2509) | mod-PrAut-media-internet-dobra-osobiste | ✅ OK |
-| AI Act — Rozp. UE 2024/1689 | Dz.Urz. UE L 2024/1689 | mod-AI-Act-framework | ✅ OK |
+| AI Act — Rozp. UE 2024/1689 + ⚡ Ustawa krajowa z 3.07.2026 o systemach sztucznej inteligencji (druk 2443, KRiBSI) | Dz.Urz. UE L 2024/1689 — ustawa krajowa: ✅ PODPISANA przez Prezydenta 24.07.2026 (VER 2026-07-30) — dokładny nr Dz.U. NIEZWERYFIKOWANY w tej sesji, sprawdź ISAP | mod-AI-Act-framework | ✅ ZAKTUALIZOWANY 2026-07-30 — KRiBSI z projektu STAŁ SIĘ realnym organem |
 | DMA — Digital Markets Act (Rozp. UE 2022/1925) | Dz.Urz. UE L 265/1 z 12.10.2022 | mod-DMA-digital-markets-act | ✅ OK |
 | DSA — Digital Services Act (Rozp. UE 2022/2065) | Dz.Urz. UE L 277/1 z 27.10.2022 | mod-DSA-digital-services-act | ✅ OK |
 | CRA, EUCS, DA, DGA — nowe akty cyfrowe UE | Dz.Urz. UE L 2024/2847 + inne | mod-EUCS-CRA-akty-regulacyjne-UE | ✅ OK |
