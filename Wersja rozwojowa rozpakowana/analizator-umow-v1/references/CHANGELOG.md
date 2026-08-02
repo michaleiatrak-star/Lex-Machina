@@ -1,5 +1,39 @@
 # CHANGELOG — Analizator Umów v1
 
+## v1.25 (2026-08-02)
+
+**Kontekst:** użytkownik dopytał wprost, czy reguły w `mod-shared-zlote-
+reguly.md` zostały rzeczywiście zweryfikowane wobec opracowań eksperckich
+online. Poprzednia weryfikacja (v1.22) opierała się na jednym źródle
+(Adams MSCD) i jednym ogólnym wyszukiwaniu. Ten przebieg: 2 dodatkowe,
+celowane wyszukiwania per reguła (osierocone załączniki/schedules, oraz
+Weagree drafting principles).
+
+**Znalezione i dodane:**
+- Weagree, *Drafting Contracts* (weagree.com) — druga, niezależna od Adamsa,
+  szeroko rozpoznawana w praktyce contract management baza wiedzy o
+  redakcji kontraktów. Potwierdza Regułę 1 (definicje) i Regułę 2 (spójna
+  terminologia) tymi samymi zjawiskami co u mnie, ale z dodatkowym testem
+  dla Reguły 1: **sprawdzaj też odwrotność — termin zdefiniowany, ale
+  nieużyty, to też błąd**, nie tylko wielka litera bez definicji. Dodane do
+  treści Reguły 1, nie tylko do przypisu.
+- Weagree „Numbers in contracts — 18 best practice rules" — niezależne
+  potwierdzenie konwencji cyfra+słownie już obecnej w
+  `style-format-generowania.md` S.1.
+
+**Uczciwa korekta:** Reguła 4 („zakaz osieroconych załączników") — nazwa
+tej reguły to moja synteza, nie cytat z żadnego źródła. Sama praktyka jest
+potwierdzona (Adams, „Schedules and Exhibits as Part of a Contract";
+Weagree, sekcja o schedules/annexes), ale odnotowane wprost w pliku, żeby
+nie sugerować cytatu tam, gdzie jest parafraza.
+
+**Nie znaleziono** — nadal brak jednego, kompletnego „złotych zasad"
+dokumentu od pojedynczej uznanej firmy/instytucji obejmującego wszystkie
+12 reguł naraz; potwierdzenie jest rozproszone (Adams + Weagree razem
+pokrywają reguły 1, 2, 4, 6, 10–12; reguły 7–9 mają podstawę w polskim KC,
+nie w źródłach common law, i nie szukano dla nich odrębnego potwierdzenia
+zagranicznego, bo to inny reżim prawny).
+
 ## v1.24 (2026-08-02)
 
 **Kontekst:** usunięcie identyfikatora konkretnej kancelarii („KTZR") z tego

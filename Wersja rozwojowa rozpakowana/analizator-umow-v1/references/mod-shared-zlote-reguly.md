@@ -10,13 +10,35 @@
 > odniesieniami (#4, #11) — nie edytuj numerów bez sprawdzenia grep
 > `Złota Regu` w całym skillu.
 >
-> **Podstawa merytoryczna:** reguły 1–6 i 10–12 to nie konwencja jednej
-> kancelarii, tylko utrwalony standard redakcji kontraktów w common law i
-> praktyce polskiej — zob. K. Adams, *A Manual of Style for Contract
-> Drafting* (rozdz. „Defined Terms", „Layout"): konsekwentne wielkie litery
-> dla pojęć zdefiniowanych, jedna definicja w jednym miejscu, zakaz
-> redundancji. Reguły 7–9 wynikają z essentialia negotii (art. 353¹, 66 i n.
-> KC) i praktyki weryfikacji umocowania.
+> **Podstawa merytoryczna (zweryfikowana, 2 niezależne źródła eksperckie):**
+> reguły 1–6 i 10–12 to nie konwencja jednej kancelarii, tylko utrwalony
+> standard redakcji kontraktów, potwierdzony niezależnie w dwóch uznanych
+> źródłach:
+> — K. Adams, *A Manual of Style for Contract Drafting* (wyd. ABA, rozdz.
+>   „Defined Terms", „Layout", „Schedules and Exhibits as Part of a
+>   Contract"): konsekwentne wielkie litery dla pojęć zdefiniowanych, jedna
+>   definicja w jednym miejscu, zakaz redundancji, jednoznaczny status
+>   załączników względem umowy głównej;
+> — Weagree, *Drafting Contracts* (weagree.com/drafting-principles, wolno
+>   dostępna baza wiedzy o redakcji kontraktów, szeroko cytowana w praktyce
+>   contract management): „Definitions in contracts — 22 best practice
+>   rules" potwierdza Regułę 1 z dodatkowym testem (zdefiniowany, ale
+>   nieużywany termin to również błąd, nie tylko odwrotnie); „Consistency
+>   in contracts" potwierdza Regułę 2 tym samym przykładem typowej pomyłki
+>   (Buyer/Purchaser, Affiliates/Affiliated Companies) co skutek kopiuj-
+>   wklej z różnych wzorów; „Numbers in contracts — 18 best practice rules"
+>   potwierdza konwencję cyfra+słownie ze `style-format-generowania.md` S.1.
+>
+> **Zastrzeżenie uczciwości źródła — Reguła 4:** sformułowanie „osierocone
+> załączniki" to synteza własna, nie dosłowny termin z żadnego z powyższych
+> źródeł. Sama praktyka (referencja do załącznika musi być jednoznaczna;
+> status załącznika jako część umowy musi być jasno przesądzony) jest
+> potwierdzona u Adamsa i w Weagree — ale nazwa reguły jest moja, nie cytat.
+>
+> Reguły 7–9 wynikają z essentialia negotii (art. 353¹, 66 i n. KC) i
+> praktyki weryfikacji umocowania — podstawa doktrynalna polska, nie
+> anglosaska; nie szukałem dla nich odrębnego potwierdzenia w źródłach
+> common law, bo to inny reżim prawny.
 
 ---
 
@@ -32,7 +54,12 @@ z modułu źródłowego (J0–MA). Nie poświęcaj essentialia dla stylu.
 
 1. **Każde pojęcie pisane wielką literą musi mieć definicję** w § Definicje
    lub jako definicja lokalna (patrz reguła 11). Wielka litera bez definicji
-   = błąd formalny — zgłoś go zawsze przy audycie cudzej umowy.
+   = błąd formalny — zgłoś go zawsze przy audycie cudzej umowy. **Test w obu
+   kierunkach:** sprawdź też odwrotność — termin zdefiniowany w § Definicje,
+   ale nigdzie w treści nieużyty, to również błąd (zwykle ślad po edycji:
+   usunięto klauzulę, zapomniano usunąć definicję, albo odwrotnie —
+   skopiowano fragment z innego wzoru bez jego definicji). Oba kierunki
+   sprawdzaj przy finalnej weryfikacji dokumentu (BRAMKA 5/HYBRID-VALIDATION).
 
 2. **Spójna terminologia — jedno pojęcie, jeden termin w całym dokumencie.**
    Nie mieszaj „Wykonawca" / „Zleceniobiorca" / „Usługodawca" dla tej samej
