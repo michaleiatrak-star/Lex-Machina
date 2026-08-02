@@ -1,6 +1,6 @@
 ---
 name: analizator-umow-v1
-version: 1.20
+version: 1.21
 type: executive-umowy
 status: production
 description: |
@@ -197,6 +197,8 @@ ST-INIT: zainicjuj podzbiór REJESTRU właściwy dla wykrytego trybu:
 | Klauzule ESG / CSDDD / łańcuch dostaw | **ESG** | `view references/mod-shared-esg.md` |
 | Systemy AI / AI Act / klauzule AI | **AI-ACT** | `view references/mod-shared-ai-act.md` |
 | Tryb 2/3/4, pełny raport F.1, metodologia A–F | **CORE** | `view references/mod-core-checklist.md` |
+| Kontrakt jako obiekt danych — BRAMKA 0, dokument >15 stron, graf zależności klauzul, martwe klauzule | **MU** | `view references/mod-shared-model-umowy.md` |
+| Porównanie dwóch wersji umowy / konsekwencje zmian | **DIFF** | `view references/mod-shared-diff-intelligence.md` |
 
 > **Zasada lazy loading:** wczytuj TYLKO moduły potrzebne dla konkretnej sprawy.
 > Nigdy nie ładuj wszystkich modułów naraz.
@@ -209,6 +211,11 @@ ST-INIT: zainicjuj podzbiór REJESTRU właściwy dla wykrytego trybu:
 > **mod-shared-legal-design.md** wczytuj przy regulaminach B2C, OWU, umowach dla laika, pytaniu o czytelność.
 > **mod-shared-regulatory-horizon.md** wczytuj gdy umowa dotyczy AI, danych, IoT, platform, fintechów.
 > Przy prostych analizach jednej klauzuli lub zapytaniach B2C — POMIŃ core-checklist.
+> **mod-shared-model-umowy.md (BRAMKA 0)** wczytaj JEDNORAZOWO, PRZED modułami PRIMARY/DOMAIN,
+> gdy dokument > 15 stron / > 5 000 słów (próg zgodny z `workflows/weryfikacja-spojnosci-odeslan.md`).
+> Pomiń dla krótkich dokumentów i prostych zapytań o jedną klauzulę.
+> **mod-shared-diff-intelligence.md** wczytuj gdy użytkownik dostarcza dwie wersje dokumentu
+> i pyta o różnice/konsekwencje zmian — nie przy zwykłej poprawce jednego fragmentu (→ popraw-fragment.md).
 
 ### Moduły SYSTEMOWE — z katalogu user/shared (wczytuj przez view)
 
@@ -440,7 +447,24 @@ na żądanie         → zawsze F.1 niezależnie od kwoty
 
 ---
 
-*Skill analizator-umow-v1 v1.20 · PRIMARY: b2b-podwykonawcze · umowy-o-prace · zakaz-konkurencji*
+*Skill analizator-umow-v1 v1.21 · PRIMARY: b2b-podwykonawcze · umowy-o-prace · zakaz-konkurencji*
+*NOWE v1.21 (2026-08-02, na bazie analizy porównawczej — patrz CHANGELOG.md):*
+*             mod-shared-model-umowy.md (BRAMKA 0) — kontrakt jako obiekt danych: tabela*
+*             ekstrakcji MU.1 czytana przez wszystkie moduły PRIMARY/DOMAIN zamiast ponownego*
+*             skanu całego tekstu (>15 stron); MU.2 formalizuje graf zależności klauzul i*
+*             konflikty reżimów prawnych (spina WYKLADNIA/RODO/AI-ACT/ORZECZ); MU.3 wykrywa*
+*             klauzule martwe/redundantne/wewnętrznie sprzeczne; MU.4 = zasada stała zakazu*
+*             fabrykowanych wskaźników liczbowych (health score %, ryzyko "+37%") na rzecz*
+*             istniejących skal jakościowych (🔴🟠🟡🟢, BEZSPORNE/PEWNE/WYDEDUKOWANE/SPORNE) —*
+*             mod-shared-diff-intelligence.md — porównanie dwóch wersji umowy (DIFF.0-3),*
+*             analiza konsekwencji zmian wyłącznie jakościowa + kwoty PLN tylko gdy policzalne*
+*             wprost z tekstu (nigdy wyliczona statystyka ryzyka) — mod-core-checklist.md D.4*
+*             Risk Heatmap — wizualizacja Visualizer nad istniejącymi kategoriami ryzyka,*
+*             zero nowej treści merytorycznej. ODRZUCONE świadomie (patrz CHANGELOG.md):*
+*             procentowy "Contract Health Score" i "Clause Confidence" (fałszywa precyzja),*
+*             oraz Clause Library 2.0 / Negotiation Simulator / Contract Timeline jako osobne*
+*             moduły — już pokryte przez alt-drafts/neg-strategia/lifecycle, rebranding bez*
+*             nowej wiedzy merytorycznej.*
 *NOWE v1.20: KROK 0-ST podniesiony do ⛔ HARD GATE (ST-GATE-INIT/ST-GATE-TRACK/ST-GATE-FINAL) —*
 *             blokuje wczytanie modułów ROUTING DO MODUŁÓW bez zainicjowanego rejestru AU-*,*
 *             blokuje ciche przejście między etapami bez wpisu w REJESTRZE, blokuje present_files*
@@ -457,6 +481,7 @@ na żądanie         → zawsze F.1 niezależnie od kwoty
 *             rodo · lifecycle · esg · ai-act · core-checklist*
 *SHARED NOWE v1.8 (lazy, z triggerami auto): abusive-clauses · orzecznictwo-umow*
 *             fallback-library · economic · missing-clause · legal-design · regulatory-horizon*
+*SHARED NOWE v1.21 (lazy): model-umowy (BRAMKA 0) · diff-intelligence*
 *GENERATOR v1.15 (references/generator/ + workflows/generator-*.md):*
 *             rdzen-generowania · style-format-generowania · essentialia-regulaminy-i-korporacyjne*
 *             generator-umowy · generator-regulaminu · generator-dokumentow-korporacyjnych*

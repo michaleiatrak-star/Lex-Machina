@@ -3,6 +3,63 @@
 Historia zmian i uzasadnienia metodologiczne. Nie wczytywać rutynowo —
 wyłącznie do wglądu przy audycie lub pytaniu o pochodzenie metodologii.
 
+## v1.21 (2026-08-02)
+
+**Kontekst:** dwie niezależne analizy porównawcze (własna + zewnętrzna,
+"Grok") zestawiające ten skill z komercyjnym narzędziem LegalTech, 12
+proponowanych funkcji. Oceniono każdą pod kątem: (a) czy to realna luka,
+czy duplikat czegoś już obsłużonego, (b) czy da się to zrobić uczciwie w
+architekturze markdown+LLM, bez udawania pomiaru, którego system nie ma.
+
+**Dodano (3 nowe moduły + 1 rozszerzenie):**
+- `references/mod-shared-model-umowy.md` — **Kontrakt jako obiekt danych**
+  (BRAMKA 0). Ekstrakcja umowy do jednej tabeli (strony/przedmiot/
+  wynagrodzenie/terminy/odpowiedzialność/rozwiązanie/poufność/IP/RODO/
+  zabezpieczenia) z odesłaniami do §, czytanej przez wszystkie moduły
+  PRIMARY/DOMAIN zamiast ponownego skanu całego tekstu — adresuje
+  *attention dilution* opisany już w `weryfikacja-spojnosci-odeslan.md`.
+  Zawiera też: MU.2 formalny graf zależności klauzul i konfliktów reżimów
+  prawnych (spina istniejące WYKLADNIA/RODO/AI-ACT/ORZECZ zamiast
+  dublować), MU.3 wykrywanie klauzul martwych/redundantnych/wewnętrznie
+  sprzecznych (uzupełnienie mod-shared-missing-clause.md, który wykrywa
+  wyłącznie braki), MU.4 — zasada stała: zakaz wskaźników liczbowych typu
+  "87% egzekwowalności" czy "8.7/10 ogólnie" (patrz niżej, "Odrzucono").
+- `references/mod-shared-diff-intelligence.md` — **Contract Diff
+  Intelligence**. Porównanie dwóch wersji umowy z analizą konsekwencji
+  zmiany na poziomie pola tabeli MU.1, klasyfikacja DODANO/USUNIĘTO/
+  ZMODYFIKOWANO/PRZENIESIONO, poziom istotności na tej samej skali
+  🔴🟠🟡🟢 co reszta systemu. Realna, dotąd nieobsłużona luka — różni się
+  od `workflows/popraw-fragment.md` (redakcja na żądanie, nie analiza
+  różnicy dwóch już istniejących wersji).
+- `references/mod-core-checklist.md § D.4` — **Risk Heatmap**. Wyłącznie
+  warstwa prezentacyjna (wykres przez Visualizer) nad kategoriami ryzyka
+  już wyliczonymi w B.1/D.2/MCD/RYZYKO. Zero nowej treści merytorycznej,
+  zero ryzyka fabrykacji liczb.
+
+**Świadomie ODRZUCONO (fałszywa precyzja / duplikaty):**
+- *Contract Health Score* i *Clause Confidence* (wynik % / X.X/10) — model
+  językowy nie ma skalibrowanego rozkładu prawdopodobieństwa; taka liczba
+  wygląda na pomiar, a jest sformatowanym wrażeniem modelu. System już ma
+  uczciwsze, jakościowe odpowiedniki (🔴🟠🟡🟢 dla ryzyka, BEZSPORNE/PEWNE/
+  WYDEDUKOWANE/SPORNE dla pewności faktu w chronologia-sprawy-v1) —
+  rozszerzone na klauzule i diff zamiast wprowadzania % obok nich.
+  Zasada zapisana jako MU.4 (stała, nie jednorazowa decyzja).
+- *Contract Timeline* jako osobny moduł — już `mod-shared-lifecycle.md`
+  (LC.1). Nowość ograniczona do wizualizacji, nie nowej logiki.
+- *Clause Library 2.0* (profil klauzuli: cel/kiedy/ryzyko/alternatywy/
+  orzecznictwo/wpływ na negocjacje) — już rozproszone celowo (progressive
+  disclosure) po `mod-shared-alt-drafts.md` / `mod-shared-orzecznictwo-
+  umow.md` / `mod-shared-neg-strategia.md`. Scalenie w megaplik zwiększa
+  zużycie kontekstu bez zysku merytorycznego — sprzeczne z zasadą lazy
+  loading tego systemu.
+- *Negotiation Simulator* (drzewo decyzyjne ofert) — już robi to
+  `mod-shared-alt-drafts.md` + `mod-shared-neg-strategia.md`; formalizacja
+  jako diagram to kwestia prezentacji, nie nowej wiedzy.
+- *Precedensy "najczęściej kwestionowane przez sądy"* — już PLAN MINIMUM
+  5+5 orzeczeń w `mod-shared-orzecznictwo-umow.md`; dodatkowa etykieta
+  częstotliwości byłaby statystyką niemożliwą do zweryfikowania pojedynczym
+  wyszukiwaniem — objęta tą samą zasadą MU.4 co Health Score.
+
 ## v1.20
 KROK 0-ST podniesiony z rekomendacji do jawnego ⛔ HARD GATE (ST-GATE), na
 wyraźne żądanie użytkownika. Wcześniejsza wersja (v1.19) opisywała ST-INIT/

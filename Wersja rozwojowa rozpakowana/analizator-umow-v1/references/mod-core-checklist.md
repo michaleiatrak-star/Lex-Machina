@@ -308,6 +308,26 @@ REGUŁY ROZSTRZYGANIA (gdy klauzula trafia w więcej niż jeden próg):
      miesięcznego wynagrodzenia 20 000 zł → próg > 3× → M").
 ```
 
+### D.4 Risk Heatmap (warstwa prezentacyjna, NOWE)
+
+> Czysty zysk UX — zero nowej treści merytorycznej, zero ryzyka fabrykacji.
+> Agreguje poziomy ryzyka JUŻ ustalone w B.1/D.2/MCD/RYZYKO w jeden wykres.
+> Wczytaj przy pełnym raporcie F.1, na wyraźne żądanie ("pokaż mapę ryzyk"),
+> lub gdy liczba obszarów ryzyka > 4 (czytelniejsze niż lista).
+
+```
+Zbuduj wykres słupkowy/heatmapę przez narzędzie wizualizacji (Visualizer),
+z obszarami umowy na osi (np. Płatności / RODO / IP / Poufność / Kary /
+Odpowiedzialność / Rozwiązanie umowy) i długością słupka odpowiadającą
+LICZBIE klauzul danego obszaru w każdej kategorii ryzyka (🔴/🟠/🟡/🟢) —
+NIE wskaźnikowi procentowemu. Kolor słupka = kategoria dominująca w danym
+obszarze. Legenda musi jawnie pokazywać, że skala jest jakościowa
+(kategorie, nie zmierzony procent) — patrz `mod-shared-model-umowy.md § MU.4`.
+```
+
+Trafia jako element wizualny towarzyszący sekcji 5 Raportu F.1 (Klauzule
+ryzykowne), nie jako osobna ponumerowana sekcja raportu.
+
 ---
 
 ## MODUŁ E — TRYBY REDAKCJI
@@ -611,6 +631,12 @@ Zamówienie publiczne, przetarg, PZP, FIDIC, KIO?
 
 Umowa B2C, reklamacja, odstąpienie, OWU e-commerce, klauzule abuzywne?
   → view references/mod-J8-b2c.md
+
+Dokument > 15 stron — ekstrakcja do tabeli PRZED wczytaniem PRIMARY/DOMAIN?
+  → view references/mod-shared-model-umowy.md (BRAMKA 0)
+
+Porównanie dwóch wersji umowy / "co się zmieniło" / konsekwencje poprawek?
+  → view references/mod-shared-diff-intelligence.md
 ```
 
 ### Moduły systemowe (user/shared/) — PRIORYTETOWE
