@@ -81,7 +81,7 @@ Przed zwróceniem finalnej wersji:
 2. Jeśli umowa > 15 stron / > 15 § / > 10 odesłań → uruchom dodatkowo
    `workflows/weryfikacja-spojnosci-odeslan.md` (dwuetapowa: inwentaryzacja →
    weryfikacja) — OBOWIĄZKOWE przy tych progach, nie opcjonalne.
-3. Wyświetl bramkę potwierdzenia (analogiczna do KTZR, dostosowana do systemu):
+3. Wyświetl bramkę potwierdzenia (dostosowana do architektury tego systemu):
 
 ```
 ⛔ BRAMKA — zanim wygeneruję finalną wersję:

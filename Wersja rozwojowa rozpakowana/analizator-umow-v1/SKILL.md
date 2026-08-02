@@ -249,9 +249,9 @@ ST-INIT: zainicjuj podzbiór REJESTRU właściwy dla wykrytego trybu:
 > Do tej pory moduły J0–MA/J20/J21 dostarczały essentialia i checklisty głównie
 > w trybie ANALIZY. Poniższe workflowy dodają warstwę **generowania od zera**
 > (wywiad → szkielet → treść wg stylu → bramka walidacji), poziomem procesu
-> odpowiadającą wzorcowi branżowemu (KTZR: `generator-umow.md` /
-> `generator-regulaminu.md`), ale osadzoną w architekturze tego systemu —
-> bez duplikowania wiedzy merytorycznej już zgromadzonej w modułach J20/J21.
+> odpowiadającą uznanym wzorcom branżowym, ale osadzoną w architekturze tego
+> systemu — bez duplikowania wiedzy merytorycznej już zgromadzonej w modułach
+> J20/J21.
 > Wczytaj `references/generator/rdzen-generowania.md` na starcie KAŻDEGO
 > z poniższych workflow.
 

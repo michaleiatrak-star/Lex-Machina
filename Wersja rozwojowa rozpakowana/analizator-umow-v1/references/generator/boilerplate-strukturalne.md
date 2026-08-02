@@ -65,8 +65,8 @@ merytorycznego.
 > *…"*
 
 **Wzorzec — definicja lokalna w preambule/paragrafie (dopuszczalna, gdy
-pojęcie ma znaczenie tylko lokalnie — patrz SKILL.md Zasada nadrzędna #11
-analogiczna do Złotej Reguły #11 KTZR):**
+pojęcie ma znaczenie tylko lokalnie — patrz `mod-shared-zlote-reguly.md`,
+Reguła 11):**
 > *„…(dalej: „[Pojęcie]")."*
 
 **Technika: definicja jako zbiór zamknięty** (dla list, np. rodzajów usług,
@@ -101,9 +101,9 @@ stronę lub sąd (routing: `mod-shared-wykladnia.md` przy sporach o zakres).
    dopytaj klienta, czy taka jest intencja]
 5. Załączniki: „Integralną część Umowy stanowią następujące załączniki:
    1) Załącznik nr 1 — [nazwa]; 2) Załącznik nr 2 — [nazwa]." — WYŁĄCZNIE
-   załączniki faktycznie dołączone i faktycznie przywołane w treści (Złota
-   Reguła #4 — zakaz osieroconych załączników, zob. też
-   `weryfikacja-spojnosci-odeslan.md`).
+   załączniki faktycznie dołączone i faktycznie przywołane w treści
+   (`mod-shared-zlote-reguly.md`, Reguła 4 — zakaz osieroconych załączników,
+   zob. też `weryfikacja-spojnosci-odeslan.md`).
 6. Liczba egzemplarzy: „Umowę sporządzono w [liczba] jednobrzmiących
    egzemplarzach, po [liczba] dla każdej ze Stron." [pomiń przy podpisie
    kwalifikowanym elektronicznym — jeden plik, dopisz zamiast tego zdanie o
@@ -137,8 +137,65 @@ Routing: jeśli materiały obejmują dane osobowe — dodaj odesłanie do
   stronami, ale chroni cesjonariusza przed skutecznym świadczeniem przez
   dłużnika do rąk cedenta (art. 512 KC) — zawsze zalecaj zawiadomienie.
 
+## B.7 Wynagrodzenie i terminy płatności — warianty bazowe
+
+> Uzupełnienie luki: `mod-shared-fallback-library.md` ma playbook dla klauzul
+> **spornych negocjacyjnie** (odpowiedzialność, kary), ale nie dla **modelu
+> rozliczeń jako takiego** — to zwykle kwestia essentialia/faktów biznesowych,
+> nie negocjacji poziomów A–D. Poniżej punkty startowe do dopasowania wg
+> modelu współpracy; **nigdy nie kopiuj 1:1**, dopasuj do essentialia z modułu
+> źródłowego (kwota, waluta, harmonogram wynikają z ustaleń z klientem, nie
+> z tego pliku).
+
+**Model ryczałtowy:**
+> *„Za wykonanie przedmiotu Umowy [Strona] otrzyma wynagrodzenie ryczałtowe
+> w wysokości [kwota] PLN netto (słownie: [kwota słownie] złotych) powiększone
+> o podatek VAT według stawki obowiązującej w dniu wystawienia faktury.
+> Wynagrodzenie płatne jest na podstawie faktury VAT, w terminie [liczba] dni
+> od dnia jej doręczenia, przelewem na rachunek bankowy wskazany na fakturze."*
+
+**Model Time & Material (rozliczenie godzinowe):**
+> *„Wynagrodzenie [Strony] stanowi iloczyn faktycznie przepracowanych godzin
+> oraz stawki godzinowej w wysokości [kwota] PLN netto. Podstawą rozliczenia
+> jest zestawienie czasu pracy (raport godzinowy) przedłożone [Stronie] do
+> [dzień] każdego miesiąca. Brak zastrzeżeń [Strony] w terminie [liczba] dni
+> roboczych od przedłożenia raportu uznaje się za jego akceptację."*
+> ⚠️ Milcząca akceptacja raportu jako fikcja prawna działa w B2B; w relacji
+> z konsumentem może być kwestionowana jako klauzula niekorzystnie kształtująca
+> jego prawa (art. 385¹ KC) — nie stosuj bez zmian w umowach B2C, routing:
+> `mod-J8-b2c.md`.
+
+**Model abonamentowy / SaaS (płatność z góry):**
+> *„Opłata abonamentowa w wysokości [kwota] PLN netto miesięcznie płatna jest
+> z góry, najpóźniej do [dzień] każdego miesiąca, na podstawie faktury VAT.
+> Dostęp do Usługi przysługuje przez okres, za który dokonano płatności.
+> W przypadku rozpoczęcia lub zakończenia świadczenia Usługi w trakcie
+> miesiąca kalendarzowego, opłata [podlega / nie podlega] proporcjonalnemu
+> rozliczeniu (pro rata) — [wybierz i uzasadnij wybór klientowi]."*
+> ⚠️ Brak pro rata jest dopuszczalny w B2B, jeśli wyraźnie zastrzeżony; w B2C
+> zwiększa ryzyko abuzywności — sprawdź `mod-shared-abusive-clauses.md`.
+
+**Waloryzacja (umowy długoterminowe):**
+> *„Wynagrodzenie podlega corocznej waloryzacji o wskaźnik cen towarów i usług
+> konsumpcyjnych ogłaszany przez Prezesa Głównego Urzędu Statystycznego za
+> poprzedni rok kalendarzowy, poczynając od [data]."* — wskaźnik zweryfikuj
+> jako aktualnie publikowany (GUS) przed użyciem, nie z pamięci (R1).
+
+**Terminy i kamienie milowe (projekty etapowe):**
+> *„Strony ustalają następujący harmonogram realizacji: Etap [nr] — [opis] —
+> termin realizacji: [data/liczba dni od zdarzenia]; odbiór Etapu następuje
+> na podstawie protokołu odbioru podpisanego przez obie Strony w terminie
+> [liczba] dni od zgłoszenia gotowości do odbioru. Brak zgłoszenia zastrzeżeń
+> w tym terminie uznaje się za odbiór bez zastrzeżeń."*
+> Powiąż z essentialia modułu źródłowego (np. `mod-J6-it-konsorcjum.md` dla
+> wdrożeń IT etapowych) i z klauzulą kar za opóźnienie w kamieniu milowym
+> (`mod-shared-alt-drafts.md` AD.2.1) — jeden termin, jedno miejsce (Reguła 5,
+> `mod-shared-zlote-reguly.md`).
+
 ## Powiązania
 
+- Reguły nadrzędne redakcji (definicje, terminologia, DRY, § 1) —
+  `mod-shared-zlote-reguly.md`, wczytaj przed tym plikiem (BRAMKA 0).
 - Klauzule negocjacyjnie wrażliwe (odpowiedzialność, kary, FM) —
   `mod-shared-fallback-library.md`, NIE ten plik.
 - Kategoryzacja funkcjonalna każdej z powyższych klauzul —

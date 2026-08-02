@@ -48,6 +48,11 @@ TYP DOKUMENTU:
 
 ## MODUŁ B — ANALIZA KLAUZUL
 
+> Uzupełnij analizę po kategorii (B.1 i dalej) skanem **po brzmieniu**,
+> niezależnie od kategorii/paragrafu: `view references/mod-shared-antywzorce-jezykowe.md`.
+> Kategoria mówi „czego szukać w § o odpowiedzialności"; ten skan łapie
+> ryzykowne frazy niezależnie od tego, w którym paragrafie się pojawiły.
+
 ### B.0 SYNTEZA KRZYŻOWA — OBOWIĄZKOWA PRZED WNIOSKAMI KOŃCOWYMI
 
 > ⛔ ZASADA: analiza klauzula-po-klauzuli (B.1) jest warunkiem KONIECZNYM,
@@ -157,6 +162,12 @@ KROK 6: Oznacz kategorię negocjacyjną: M / S / N / T (→ Moduł NEG)
 ---
 
 ## MODUŁ C — OCENA ZGODNOŚCI Z PRAWEM
+
+> Przed KROK 1 — jeśli umowa jest B2B (nie konsumencka), przebiegnij bramkę
+> `view references/mod-shared-ius-cogens.md` (IC.2 katalog + IC.3 trigger
+> mikroprzedsiębiorcy + IC.4 test kumulatywny). Dla umów B2C — analogicznie
+> `mod-shared-abusive-clauses.md`. Trafienie w katalogu IC.2 = 🔴 automatycznie,
+> nie czekaj na resztę Modułu C.
 
 ### C.1 Procedura weryfikacji online — obowiązkowa
 

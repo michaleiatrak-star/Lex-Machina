@@ -1,5 +1,182 @@
 # CHANGELOG — Analizator Umów v1
 
+## v1.24 (2026-08-02)
+
+**Kontekst:** usunięcie identyfikatora konkretnej kancelarii („KTZR") z tego
+skilla + zbadanie, czy uznane kancelarie publikują online porównywalne
+„złote zasady" redakcji umów.
+
+**Usunięto:** 4 wystąpienia „KTZR" (`mod-shared-zlote-reguly.md`,
+`CHANGELOG.md` ×2, `SKILL.md`, `workflows/generator-umowy.md`) —
+zastąpione neutralnymi sformułowaniami („wzorzec zewnętrzny", „uznane
+wzorce branżowe") bez utraty treści merytorycznej reguł (same reguły,
+zweryfikowane wcześniej wobec Adams MSCD, zostały bez zmian).
+
+**Research — uznane kancelarie i „złote zasady" redakcji umów:**
+Sprawdzono (a) frazę „golden rules of contract drafting" + duże kancelarie
+(Allen & Overy/Clifford Chance/White & Case), (b) polskie kancelarie +
+„złote zasady redakcji umów". Wynik: **żadna duża/rozpoznawalna kancelaria
+(„magic circle" ani polski Big Law) nie publikuje kompletnego, numerowanego
+dokumentu „złotych zasad" porównywalnego z tym, co ma ten skill.** To, co
+istnieje publicznie: (1) pojedyncze wpisy blogowe prawników-praktyków
+(LinkedIn, osobiste, nie firmowe stanowisko), (2) polskie kancelarie
+lokalne/średnie z ogólnymi poradami SEO, bez usystematyzowanej listy reguł,
+(3) jeden wąski, ale realnie użyteczny i firmowo podpisany fragment:
+Trinity International LLP (rzeczywista kancelaria, private capital/M&A),
+„Legalese: Golden rules for drafting indemnities" — dwie konkretne reguły
+(obowiązek minimalizacji szkody trzeba wyłączyć wyraźnie; indemnity nie
+obejmuje zaniedbania żądającego bez wyraźnego zapisu).
+
+**Dodano:** oba testy z Trinity International LLP włączone do
+`mod-shared-antywzorce-jezykowe.md` (wiersz indemnity, AJ.5) — z wyraźnym
+zastrzeżeniem, że to reguły common law wymagające kwalifikacji przez art.
+353¹/473 KC przed zastosowaniem w polskim reżimie, nie automatyczny import.
+
+**Nie dodano nic więcej z tego researchu** — reszta trafień była zbyt ogólna
+(„bądź jasny", „zacznij od precedensu") albo już pokryta w
+`mod-shared-zlote-reguly.md`/`style-format-generowania.md`. Najsilniejszym
+publicznie dostępnym, rzeczywiście autorytatywnym źródłem dla reguł
+kardynalnych pozostaje Adams, *A Manual of Style for Contract Drafting*
+(wyd. ABA) — już wykorzystane w v1.22, nie kancelaria, tylko podręcznik
+uznawany w branży za standard i cytowany przez prawników z dużych kancelarii.
+
+## v1.23 (2026-08-02)
+
+**Kontekst:** dokończenie audytu z v1.22 — poprzedni przebieg nie objął
+wszystkich plików konkurenta (przyznane wprost użytkownikowi). Ten przebieg
+przeszedł przez pozostałe pliki: `references/normy-bezwzglednie.md`,
+`antywzorce-jezykowe.md`, `essentialia-mapowanie.md`, `checklist-15.md`,
+`kategorie-klauzul.md`, `legal-design.md`, `format-checklist.md`, całość
+`references/baza-wiedzy/` (14 plików, przez INDEX + spot-checki), całość
+`workflows/` (9 plików), `tools/legal-cite/` (mikroserwis Python) i
+`examples/testowe-akta/`.
+
+**Dodano (2 nowe moduły — realne luki, niezweryfikowane w v1.22):**
+- `references/mod-shared-ius-cogens.md` — katalog konkretnych norm
+  bezwzględnie obowiązujących w B2B (art. 473 § 2, 483 § 1, 484 § 2, 119 KC;
+  16, 41 ust. 2 PrAut; ustawa o zatorach; art. 28 RODO), trigger
+  mikroprzedsiębiorcy (art. 385⁵ KC) i pięciopunktowy test efektu
+  kumulatywnego dla klauzul granicznych. `mod-shared-abusive-clauses.md`
+  pokrywał wyłącznie abuzywność B2C (385¹–385³) — nic nie konsolidowało
+  granic swobody umów w B2B, mimo że to główny przypadek użycia tego
+  systemu (większość modułów J* to B2B). `mod-core-checklist.md` C.2 miał
+  już generyczną hierarchię 4 poziomów naruszenia, ale bez konkretnego
+  katalogu do poziomu 1 — ten moduł go dostarcza. Wpięty w Moduł C.
+- `references/mod-shared-antywzorce-jezykowe.md` — skan **po brzmieniu**
+  (frazy typu „dołoży starań", „wedle wyłącznego uznania", „wszelkie/
+  jakiekolwiek", indemnity bez limitu), prostopadły do analizy po kategorii
+  klauzuli (Moduł B). Grunt merytoryczny: Adams MSCD, rozdziały „Sources of
+  Uncertain Meaning" i „Reasonable Efforts and Its Variants" — potwierdzone
+  jako realny rozdział podręcznika (nie sparafrazowane z konkurenta, tylko
+  z tego samego źródła doktrynalnego). System miał wcześniej tylko
+  pojedynczą wzmiankę o „niezwłocznie" w checkliście — bez systematycznego
+  skanu. Wpięty w Moduł B.
+
+**Sprawdzone i POTWIERDZONE jako już pokryte (bez działania):**
+- `baza-wiedzy/01-04, 06-07, 11, 13-14` (maintenance art. 750 KC, cap/lucrum
+  cessans/wina umyślna, siła wyższa/podwykonawcy, indemnifikacja, open
+  source/copyleft, wizerunek, notice&action DSA, Polityka AI) — wszystkie
+  potwierdzone grepem jako już obecne w `mod-J6-it-konsorcjum.md`,
+  `mod-shared-fallback-library.md` FL.2, `generator/doktryna-uzupelnienie.md`
+  D.1–D.4, `mod-shared-fm-hardship.md`.
+- `workflows/konfiguracja-kancelarii.md` (`practice-profile.md` per
+  kancelaria) — **świadomie nieprzenoszone**, i to już udokumentowana
+  decyzja architektoniczna sprzed tego audytu (`rdzen-generowania.md` R4:
+  „ten system nie zakłada jednej kancelarii z jednym plikiem profilu").
+  Weryfikacja potwierdziła spójność z resztą systemu, nie odkryła nowej luki.
+- `workflows/cold-start-klienta.md` (trwały profil klienta między sesjami)
+  — ten sam powód co wyżej: system nie zakłada trwałości pliku między
+  sesjami dla pojedynczego klienta/kancelarii. Brak działania.
+- `workflows/ocena-2-strony.md`, `generator-umow.md`,
+  `weryfikacja-spojnosci-odeslan.md` — odpowiedniki już istnieją
+  (`ocena-drugiej-strony.md`, `generator-umowy.md`,
+  `weryfikacja-spojnosci-odeslan.md` — ten ostatni nawet pod tą samą nazwą).
+- `checklist-15.md` — funkcjonalny odpowiednik `mod-J0-routing.md` MASTER
+  CHECKLISTA + `mod-shared-missing-clause.md`. Brak działania (uniknięcie
+  duplikacji, Reguła 5 z `mod-shared-zlote-reguly.md`).
+- `tools/legal-cite/` (mikroserwis Python pobierający dokładny tekst
+  przepisu z api.sejm.gov.pl/EUR-Lex) — **rozważone i odrzucone z powodu
+  niedopasowania architektury**, nie z powodu słabości pomysłu. Ten skill to
+  zestaw plików markdown czytanych przez model, nie wdrożenie z własnym
+  serwerem MCP; a nawet gdyby uruchomić skrypt przez bash_tool, środowisko
+  wykonawcze tego audytu ma allowlistę sieciową bez `api.sejm.gov.pl` i
+  `eur-lex.europa.eu` — próba użycia skończyłaby się cichym błędem sieci.
+  Ten sam cel (dokładny tekst przepisu z oficjalnego źródła) realizuje już
+  R1 HARD GATE przez `web_search`/`web_fetch`, które nie mają tego
+  ograniczenia w normalnej sesji użytkownika.
+
+## v1.22 (2026-08-02)
+
+**Kontekst:** audyt porównawczy na podstawie realnych plików konkurenta
+`commercial-legal-pl` (przesłane .zip, ~40 plików) + niezależna analiza
+tekstowa proponująca 8 kategorii zmian. Każdą kategorię zweryfikowano wobec
+(a) faktycznego stanu tego skilla (nie deklaracji), (b) źródeł eksperckich
+(Adams, *A Manual of Style for Contract Drafting*), (c) ryzyka duplikacji
+sprzecznej z własną zasadą DRY.
+
+**Dodano:**
+- `references/mod-shared-zlote-reguly.md` — **realna luka, nie kosmetyka.**
+  `generator/boilerplate-strukturalne.md` cytował od dawna „Złota Reguła #4"
+  i „Złota Reguła #11"/„SKILL.md Zasada nadrzędna #11" — plik z takimi
+  regułami nigdy nie istniał (martwe odniesienie, potwierdzone grep). Nowy
+  plik koduje 12 reguł kardynalnych (definicje/wielka litera, spójna
+  terminologia, odesłania, zakaz osieroconych załączników, DRY, § 1 =
+  Przedmiot) + regułę nadrzędną (interes klienta vs akceptowalność dla
+  drugiej strony — już realizowaną filozoficznie przez FL.1 w
+  `mod-shared-fallback-library.md`, teraz sformalizowaną jako zasada
+  wiążąca cały generator). Numeracja dopasowana do istniejących martwych
+  odniesień, żeby je naprawić bez przepisywania. Wpięto jako BRAMKA 0 w
+  `rdzen-generowania.md` i jako obowiązkowy punkt w `popraw-fragment.md`
+  (edycja fragmentu = najczęstsze miejsce naruszenia reguł 2/3/5).
+- `generator/boilerplate-strukturalne.md` § B.7 — warianty bazowe
+  wynagrodzenia (ryczałt, T&M, abonament/SaaS, waloryzacja GUS, kamienie
+  milowe). Realna luka: fallback-library ma playbook dla klauzul **spornych
+  negocjacyjnie**, ale nie dla mechaniki rozliczeń jako essentialium. Treść
+  napisana od zera (generyczne wzorce, nie kopiowane z żadnego źródła).
+
+**Świadomie ODRZUCONO (zweryfikowano jako już zaimplementowane lub
+niekorzystne):**
+- *Pełna baza klauzul 01–19/21 wzorowana na strukturze konkurenta* — w
+  większości już pokryta: klauzule strukturalne (strony, preambuła,
+  definicje, końcowe, cesja, zwrot materiałów) już w
+  `boilerplate-strukturalne.md`; klauzule sporne negocjacyjnie
+  (odpowiedzialność, kary, wypowiedzenie, poufność, FM, zakaz konkurencji)
+  już w `mod-shared-fallback-library.md`/`mod-shared-alt-drafts.md`,
+  zorganizowane wg zagadnienia prawnego zamiast numeru paragrafu — to inny,
+  ale nie gorszy, sposób dostępu przy analizie (analiza zaczyna się od
+  problemu, nie od numeru sekcji wzorca). Realna przewaga konkurenta to
+  **rzeczywiste klauzule z konkretnych umów jednej, konkretnej kancelarii**
+  — tego nie da się uczciwie odtworzyć bez dostępu do cudzych,
+  prawdopodobnie zastrzeżonych dokumentów; kopiowanie ich treści byłoby też
+  nieuczciwe wobec źródła. Zaadresowano tylko realną, niezależną od tego
+  lukę: wynagrodzenie/terminy (B.7, powyżej).
+- *Style-redakcyjny-umowy jako nowy plik* — już istnieje niemal 1:1 jako
+  `generator/style-format-generowania.md` (S.1–S.4), z tym samym zakresem
+  (bez łaciny, „W przypadku" vs „Jeżeli", kwoty cyfrą+słownie, cudzysłowy
+  typograficzne). Brak działania.
+- *Model umowy jako graf zależności* — już zaimplementowane w v1.21
+  (`mod-shared-model-umowy.md` MU.2 graf zależności/konfliktów reżimów,
+  MU.3 wykrywanie klauzul martwych/redundantnych). Zweryfikowano obecność
+  sekcji grep — potwierdzone. Brak działania.
+- *Ujednolicenie triage + progi wartościowe + bramki STOP* — już obecne:
+  `triage-szybki.md` ma progi (>100 000 PLN → obowiązkowe F.1 z FAZA 0
+  SKILL.md) i jawne przejście 🟡/🔴 → pełna analiza. Brak działania.
+- *Krótkie karty essentialia (5–8 pkt) na górze każdego modułu J** — od-
+  rzucono świadomie: `mod-J0-routing.md` ma już generyczną MASTER
+  CHECKLISTĘ essentialia stosowaną niezależnie od typu umowy. Dodanie 21
+  zduplikowanych mini-list w każdym J* naruszałoby własną Regułę 5 (DRY,
+  „jedna regulacja — jedno miejsce") z nowo dodanego `mod-shared-zlote-
+  reguly.md w dniu, w którym go dodano — sprzeczność, której nie da się
+  uzasadnić.
+
+**Metodologiczna uwaga:** dokument źródłowy z rekomendacjami częściowo
+opisywał stan skilla sprzed v1.21 (np. rekomendacja „brak modelu umowy jako
+grafu" — nieaktualna). Weryfikacja wobec faktycznego stanu plików, nie
+wobec opisu, jest właśnie tym, o co poproszono; potwierdza to sens
+trzymania audytów jako osobnego kroku przed wdrożeniem jakiejkolwiek
+rekomendacji „bo tak robi konkurent".
+
+
 Historia zmian i uzasadnienia metodologiczne. Nie wczytywać rutynowo —
 wyłącznie do wglądu przy audycie lub pytaniu o pochodzenie metodologii.
 

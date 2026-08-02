@@ -29,6 +29,10 @@ Każdy generator w `workflows/generator-*.md` przechodzi przez pięć bramek w t
 kolejności, niezależnie od typu dokumentu:
 
 ```
+BRAMKA 0  ZŁOTE REGUŁY       wczytaj RAZ na starcie sesji generowania/edycji —
+                             `view references/mod-shared-zlote-reguly.md`
+                             (nadrzędne wobec stylu i boilerplate, podrzędne
+                             wobec R1 i essentialia)
 BRAMKA 1  ROUTING           który J-moduł/moduł dostarcza essentialia negotii
                              (patrz tabela w SKILL.md → „GENEROWANIE DOKUMENTÓW”)
 BRAMKA 2  WYWIAD/INTAKE      zbierz dane wg INTAKE-GAP; pola nieznane → ⬛

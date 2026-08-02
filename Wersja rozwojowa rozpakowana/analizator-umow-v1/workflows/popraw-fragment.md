@@ -15,8 +15,11 @@ przerywa szerszy workflow analizy/generowania, żeby naprawić jeden paragraf.
 
 ## Krok 1 — zrozum, co poprawiamy
 
-Otwórz `references/generator/style-format-generowania.md` — zawsze przed
-edycją, nawet drobną. Ustal:
+Otwórz `references/generator/style-format-generowania.md` **oraz**
+`references/mod-shared-zlote-reguly.md` — zawsze przed edycją, nawet drobną.
+Edycja pojedynczego fragmentu jest miejscem, gdzie najłatwiej naruszyć Reguły
+2 (spójna terminologia), 3 (odesłania) i 5 (DRY) — nowy termin lub numeracja
+wprowadzone lokalnie muszą pasować do reszty dokumentu. Ustal:
 - **Co konkretnie ma być poprawione?** Cały paragraf, jeden ustęp, jedno zdanie?
 - **Dlaczego?** Ujednolicić styl, dodać brakujący element, naprawić błąd
   prawny, dostosować do innych klauzul, doprecyzować?
