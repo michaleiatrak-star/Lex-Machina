@@ -60,6 +60,7 @@ Na podstawie wykrytych dziedzin wskaż listę modułów do uruchomienia
 | `[BUDOW]` | Prawo budowlane | pozwolenie na budowę, PINB, samowola, decyzja WZ | MD3a | MP2, MP0 | Weryfikuj decyzje administracyjne |
 | `[IP]` | Własność intelektualna | prawa autorskie, patent, znak towarowy, plagiat | MD2, MD3b | MP2, MP4 | Ustawa PrAut, PWP |
 | `[KONSUM]` | Prawo konsumenckie | rękojmia, gwarancja, odstąpienie, UOKiK, niedozwolone klauzule | MD3b | MP2 | Klauzule abuzywne → analizator-umow-v1 |
+| `[KREDYT-SKD]` | Sankcja Kredytu Darmowego | kredyt konsumencki, SKD, sankcja kredytu darmowego, art. 45 u.k.k., RRSO, oświadczenie o sankcji, pożyczka pozabankowa | MD1, MD4 | MP2 | Termin ZAWITY sporny (art. 45 ust. 5 u.k.k. — od wypłaty czy od pełnej spłaty, TSUE C-828/25 w toku) — alert ⚠ ZAWITY obowiązkowy; podstawa: `dr-02/modules/mod-ustawa-kredyt-konsumencki-SKD.md`; NIE mylić z `[CYW-TERM]` (przedawnienie ogólne) ani z frankowymi (art. 385¹ KC — odrębny reżim) |
 | `[MED]` | Prawo medyczne | błąd medyczny, zgoda pacjenta, dokumentacja medyczna | MD2, MD4 | MP2, MP8 | Ciężar dowodu: wina domniemana |
 | `[WINDYK]` | Windykacja | nakaz zapłaty, klauzula, egzekucja, komornik | MD5 | MP2 | Termin sprzeciwu: 14 dni (art. 503 KPC) |
 

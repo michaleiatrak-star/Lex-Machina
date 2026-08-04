@@ -100,7 +100,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | DR | Dziedzina | ✅ OK | 🔗 odesłanie | ☐ BRAK | ⏳/⚡ MON | Łącznie |
 |---|---|:---:|:---:|:---:|:---:|:---:|
 | DR-01 | Ustrój Konstytucyjny | 14 | 1 | 0 | 0 | 15 |
-| DR-02 | Prawo Cywilne/Rodzinne/Gosp. | 18 | 1 | 0 | 0 | 19 |
+| DR-02 | Prawo Cywilne/Rodzinne/Gosp. | 19 | 1 | 0 | 0 | 20 |
 | DR-03 | Prawo Karne/Wykroczenia | 16 | 0 | 0 | 2 | 18 |
 | DR-04 | Prawo Pracy/ZUS/Świadczenia | 18 | 0 | 0 | 0 | 18 |
 | DR-05 | Prawo Administracyjne | 13 | 2 | 0 | 0 | 15 |
@@ -115,7 +115,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | DR-14 | Prawo UE/Międzynarodowe | 18 | 0 | 0 | 0 | 18 |
 | DR-15 | Compliance/ISO | 9 | 0 | 0 | 0 | 9 |
 | DR-16 | Pisma/Narzędzia | 11 | 0 | 0 | 0 | 11 |
-| **SUMA** | | **270** | **9** | **0** | **4** | **283** |
+| **SUMA** | | **271** | **9** | **0** | **4** | **284** |
 
 ---
 
@@ -168,7 +168,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o cudzoziemcach | Dz.U. 2025 poz. 1079 ze zm. | dr-02/modules/mod-ustawa-cudzoziemcy | ✅ OK |
 | Ustawa o ochronie konkurencji i konsumentów (UOKiK) | ⚠️ zweryfikuj t.j. na ISAP (ustawa z 16.02.2007) | dr-02/modules/mod-ustawa-UOKIK-antymonopolowe | ✅ NOWY 2026-07-18 — KOREKTA: poprzedni wpis wskazywał na plik "mod-ustawa-ochrona-konkurencji-konsumentow-UOKiK", który NIGDY NIE ISTNIAŁ w DR-02 (fantom); teraz wskazuje na rzeczywisty moduł |
 | Ustawa o KRS — rejestr sądowy | Dz.U. 2025 poz. 869 t.j. | dr-02/modules/mod-ustawa-KRS-rejestr-sadowy | ✅ OK |
-| Ustawa o kredycie konsumenckim | Dz.U. 2024 poz. 1567 ze zm. | dr-02/modules/mod-ustawa-deweloperska | ✅ OK |
+| Ustawa o kredycie konsumenckim (SKD — sankcja kredytu darmowego, art. 45) | Dz.U. 2025 poz. 1362 t.j. ✅ POTWIERDZONE 2026-08-04 (ISAP, obwieszczenie z 26.09.2025, obowiązuje od 2025-10-10) — ⚠️ temat wyjątkowo dynamiczny, re-zweryfikuj przy każdym użyciu czy nie doszło do nowej nowelizacji | dr-02/modules/mod-ustawa-kredyt-konsumencki-SKD | ✅ NOWY 2026-08-04 — KOREKTA: poprzedni wpis wskazywał błędnie na "mod-ustawa-deweloperska" (phantom mapping — inny akt prawny, ustawa deweloperska Dz.U. 2024 poz. 695 dot. ochrony nabywcy lokalu, nie kredytu konsumenckiego); wykryte i naprawione w toku dostawy Reguły 7 |
 | Ustawa deweloperska — ochrona nabywcy | Dz.U. 2024 poz. 695 t.j. | dr-02/modules/mod-ustawa-deweloperska | ✅ OK |
 | Ustawa o własności lokali + spółdzielnie | Dz.U. 2021 poz. 1048 ze zm. + Dz.U. 2024 poz. 593 t.j. | dr-02/modules/mod-ustawa-spoldzielnie-wlasnosc-lokali | ✅ OK |
 | Ustawa o fundacjach i stowarzyszeniach | Dz.U. 2023 poz. 549 ze zm. | dr-02/modules/mod-ustawa-fundacje-stowarzyszenia | ✅ OK |

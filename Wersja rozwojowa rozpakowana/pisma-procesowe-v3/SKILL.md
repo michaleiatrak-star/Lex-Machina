@@ -826,6 +826,17 @@ view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md                (⛔ OBOWIĄZ
 > Zawiera: matrycę engines (W1.2-V10), kolejność ładowania shared/ per krok,
 > pliki kanoniczne shared (MOD-STEP-TRACKER, MOD-ATAK-NA-SWIADKA, itp.).
 
+**Pozew o zapłatę — zwrot nadpłaty w reżimie Sankcji Kredytu Darmowego
+(SKD, art. 45 u.k.k.):** dodane 2026-08-04 (Reguła 7). Sprawa zwykle
+wielowątkowa (żądanie zapłaty + ocena skuteczności wcześniejszego
+oświadczenia SKD + ryzyko zarzutu prekluzji z art. 45 ust. 5 u.k.k. ze
+strony banku) → kwalifikuje się do tego skilla, NIE do pisma-proste-v2
+(które obsługuje wyłącznie samo oświadczenie, schemat SPM). Podstawa
+materialnoprawna, katalog naruszeń i spór o termin: wczytaj PRZED W1.2
+`view /mnt/skills/user/dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-kredyt-konsumencki-SKD.md`.
+Jeśli sprawa ma ≥2 roszczenia (np. SKD + zwrot ubezpieczenia) → aktywuj
+też `theory-of-case-engine.md`.
+
 ---
 
 ## DODATEK — CONTRADICTION INTELLIGENCE (V10) + PISMO ADMINISTRACYJNE

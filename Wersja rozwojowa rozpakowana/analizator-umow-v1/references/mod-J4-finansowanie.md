@@ -38,6 +38,25 @@ PRAWO: Ustawa o kredycie konsumenckim → RRSO musi być podane przed zawarciem
 
 WERYFIKUJ: isap.sejm.gov.pl → KC art. 359 §2¹ → AKTUALNA maksymalna stopa odsetek
   (zmienia się z stopą referencyjną NBP!)
+```
+
+**PO-3 — SANKCJA KREDYTU DARMOWEGO (SKD, art. 45 u.k.k.) — CRITICAL**
+```
+Jeśli analizowana umowa to kredyt/pożyczka konsumencka (pożyczkodawca =
+przedsiębiorca, pożyczkobiorca = konsument, kwota ≤ 255 550 zł) — sprawdź
+OBOWIĄZKOWO katalog naruszeń z art. 30 ust. 1 pkt 1–8, 10, 11, 14–17,
+art. 29 ust. 1, art. 31–33, art. 33a, art. 36a–36c u.k.k. Naruszenie
+którejkolwiek z tych pozycji = przesłanka do sankcji z art. 45 u.k.k.
+(zwrot kredytu bez odsetek i innych kosztów) — NIEZALEŻNIE od tego, czy
+klient pyta o "SKD" wprost.
+
+PEŁNA MERYTORYKA (checklist naruszeń, spór o termin art. 45 ust. 5,
+orzecznictwo TSUE/SN, procedura): NIE duplikuj tutaj — wczytaj
+`view /mnt/skills/user/dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-kredyt-konsumencki-SKD.md`
+
+Jeśli klient chce dochodzić SKD (nie tylko analizować/negocjować umowę)
+→ przekieruj do generatora pism: pisma-proste-v2 → schemat SPM
+(oświadczenie) lub pisma-procesowe-v3 (pozew, po odmowie banku).
 
 PUŁAPKA: "Opłata administracyjna" + "opłata przygotowawcza" + prowizja = ukryte RRSO
   → UOKiK ściga praktyki obchodzenia limitu odsetek przez opłaty para-odsetkowe

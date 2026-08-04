@@ -68,9 +68,20 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (30 łącznie — ✓ 30 OK, ☐ 0 STUB)
+## Moduły (31 łącznie — ✓ 31 OK, ☐ 0 STUB)
 
 ```
+  [✓] NOWY  mod-ustawa-kredyt-konsumencki-SKD
+              (dodany 2026-08-04, Reguła 7 audyt-systemu-v4, na wniosek
+               użytkownika: Sankcja Kredytu Darmowego, art. 45 u.k.k.
+               — katalog naruszeń art. 30/29/31-33/33a/36a-36c, spór
+               o "wykonanie umowy" art. 45 ust. 5 [TSUE C-744/24,
+               C-828/25 w toku], procedura 2-etapowa oświadczenie+pozew,
+               integracja z pisma-proste-v2 [SPM], analizator-umow-v1
+               [J4] i analizator-dowodow-v3 [MX KREDYT-SKD]. AUDYT
+               DODATKOWY: naprawiono phantom mapping w ROUTING-MAP.md —
+               "Ustawa o kredycie konsumenckim" wskazywała błędnie na
+               mod-ustawa-deweloperska)
   [✓] OK    mod-KC-cywilne-zobowiazania-odpowiedzialnosc
   [✓] OK    mod-KC-spadki
               (v2.0, rozbudowane 2026-07-19: zapis zwykły/windykacyjny,

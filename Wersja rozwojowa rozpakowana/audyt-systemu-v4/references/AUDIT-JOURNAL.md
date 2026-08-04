@@ -28703,3 +28703,125 @@ v3.30→v3.31 (dr-11 już zaktualizowany w poprzedniej turze do v3.10).
 | Rozbudowy/aktualizacje treściowe na żądanie | 67 |
 | Plików zweryfikowanych merytorycznie | ~344 z 505 (~68,1%) |
 | Flagi otwarte | **0** |
+
+## AUDYT-2026-08-04 — Nowy moduł SKD (Sankcja Kredytu Darmowego) + generator SPM + naprawa phantom mapping (Reguła 7)
+
+**Kontekst:** Na żądanie użytkownika — sprawdzenie, czy system pokrywa
+temat "SKD" (po doprecyzowaniu: Sankcja Kredytu Darmowego, art. 45
+ustawy o kredycie konsumenckim). Ustalono brak jakiegokolwiek pokrycia:
+żaden z 16 DR-modułów, żaden generator pism, żaden analizator dowodów
+nie zawierał logiki SKD. Użytkownik wybrał pełny zakres dostawy
+(moduł DR-02 + generator pisma + integracja z analizator-umow-v1
+i analizator-dowodow-v3), lokalizacja: nowy podmoduł w DR-02.
+
+**AUDYT DODATKOWY (skutek uboczny weryfikacji ISAP):** wpis w
+`prawo-polskie-v2/ROUTING-MAP.md` dla "Ustawy o kredycie konsumenckim"
+wskazywał błędnie na moduł `mod-ustawa-deweloperska` (phantom mapping —
+zupełnie inny akt prawny, ustawa deweloperska Dz.U. 2024 poz. 695 dot.
+ochrony nabywcy lokalu/domu, nie kredytu konsumenckiego). Analogiczny
+typ błędu jak wcześniej wykryty i naprawiony phantom mapping dla UOKiK
+(2026-07-18). Ponadto `analizator-umow-v1/mod-J4-finansowanie.md`
+zawierał nieaktualne oznaczenie Dz.U. dla ustawy o kredycie
+konsumenckim (2023 poz. 1028) — zastąpione odesłaniem do nowego modułu
+zamiast duplikowania cytatu, by uniknąć przyszłej rozbieżności.
+
+**Utworzono:**
+1. `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-kredyt-konsumencki-SKD.md`
+   (NOWY) — pełna podstawa prawna (art. 45, katalog naruszeń art. 29/30/
+   31-33/33a/36a-36c u.k.k.), sekcja dedykowana sporowi o "wykonanie
+   umowy" z art. 45 ust. 5 (TSUE C-744/24 z 23.04.2026 — merytoryczny
+   fundament SKD przesądzony; TSUE C-828/25, pytanie prejudycjalne SR
+   Tomaszów Mazowiecki z 25.11.2025 — termin NIEROZSTRZYGNIĘTY, w toku;
+   Ogólne Oświadczenie Rzecznika Finansowego 1.12.2025; SN wstrzymany
+   do wyroku TSUE), procedura dwuetapowa (oświadczenie → pozew),
+   projekt nowelizacji u.k.k. (3 warianty sankcji, status: konsultacje
+   — ⚠️ oznaczony do bieżącej weryfikacji).
+2. `pisma-proste-v2/references/SPM-skd-oswiadczenie.md` (NOWY schemat
+   SPM) — generator oświadczenia o skorzystaniu z SKD, z obowiązkowym
+   ustaleniem statusu terminu zawitego PRZED redakcją (Zasada 4 M1) i
+   ścieżką eskalacji do pisma-procesowe-v3 gdy bank odmówi.
+
+**Zmodyfikowano (integracja pełnego pakietu):**
+- `dr-02-prawo-cywilne-rodzinne-gospodarcze/SKILL.md` — rejestr modułów
+  30→31, dodano wpis mod-ustawa-kredyt-konsumencki-SKD.
+- `prawo-polskie-v2/ROUTING-MAP.md` — naprawiono phantom mapping (patrz
+  wyżej), zaktualizowano liczniki DR-02 (18→19 OK, 19→20 łącznie,
+  SUMA 270→271 / 283→284).
+- `pisma-proste-v2/SKILL.md` — dodano schemat SPM do tabeli, do opisu
+  wyzwalającego (description) i do KROK 4 ścieżki wykonania.
+- `analizator-umow-v1/references/mod-J4-finansowanie.md` — dodano
+  pułapkę PO-3 (SKD) z odesłaniem do nowego modułu DR-02 zamiast
+  duplikowania podstawy prawnej.
+- `analizator-dowodow-v3/modules/MX-dziedziny.md` — dodano kod
+  `[KREDYT-SKD]` do macierzy MX.2 z alertem terminu zawitego spornego.
+- `pisma-procesowe-v3/SKILL.md` — dodano pointer w sekcji "MODUŁY —
+  MAPA WCZYTYWANIA" dla pozwu o zwrot nadpłaty w reżimie SKD (sprawa
+  wielowątkowa → ten skill, nie pisma-proste-v2), bez ingerencji w
+  matrycę engines W1.2-V10 (poza zakresem tej dostawy — ryzyko
+  naruszenia pipeline bez pełnego kontekstu AUTOMAT-STANOW).
+
+**NIE wykonano w tej turze (świadomie odłożone, brak żądania
+użytkownika):** osobny "SKD engine" w pisma-procesowe-v3 na wzór
+appellate-v8/prosecution-v8/rebuttal-v9 — obecny pointer do modułu
+DR-02 jako źródła podstawy materialnoprawnej uznano za wystarczający
+dla zakresu "generator + integracja" wskazanego przez użytkownika;
+pełny dedykowany engine wymagałby osobnej sesji z modyfikacją matrycy
+aktywacji V10.
+
+**Rejestracja:** dr-02 SKILL.md (moduły 30→31), pisma-proste-v2 SKILL.md
+v2.7 (bez zmiany numeru wersji — do potwierdzenia przy kolejnym audycie
+formalnym), prawo-polskie-v2/ROUTING-MAP.md (liczniki DR-02 + korekta
+phantom mapping).
+
+**Status:** ✅ DOSTARCZONE zgodnie z Regułą 7 (kompletna struktura, bez
+plików luźnych, wszystkie punkty integracji wskazane przez użytkownika
+zrealizowane, wpis w dzienniku audytu wykonany w tej samej sesji —
+zgodnie z wymogiem "nie odłożone").
+
+## AUDYT-2026-08-04b — Weryfikacja online podstawy prawnej modułu SKD (na żądanie użytkownika)
+
+**Kontekst:** Użytkownik zażądał sprawdzenia online, czy podstawa prawna
+modułu `mod-ustawa-kredyt-konsumencki-SKD.md` (dostarczonego w poprzedniej
+turze) jest właściwa i aktualna.
+
+**Wynik weryfikacji:**
+- ✅ **POTWIERDZONE:** t.j. ustawy o kredycie konsumenckim — Dz.U. 2025
+  poz. 1362 (obwieszczenie Marszałka Sejmu z 26.09.2025, obowiązuje od
+  2025-10-10) — zgadzało się już w pierwszej wersji modułu i w
+  ROUTING-MAP.md, oznaczenie niepewności (⚠️) zamienione na potwierdzenie.
+- ✅ **POTWIERDZONE:** treść i numeracja art. 45 (SKD) oraz katalogu
+  naruszeń art. 30 ust. 1 — bez zmian w aktualnym t.j.
+- ✅ **POTWIERDZONE:** wyrok TSUE C-744/24 z 23.04.2026 r. — rzeczywisty,
+  wielość niezależnych źródeł prawniczych, stan faktyczny zgodny z opisem
+  w module (kredyt 150 000 zł nominalnie, 133 000 zł wypłacone, różnica —
+  skredytowana składka ubezpieczeniowa i oprocentowana).
+- ✅ **POTWIERDZONE + DOPRECYZOWANE:** C-828/25 nadal NIEROZSTRZYGNIĘTE —
+  ustalono dokładną sygnaturę postępowania krajowego (SR Tomaszów
+  Mazowiecki, I C 1048/24) oraz że pytanie obejmuje 6 wątków (nie tylko
+  termin — również odsetki od prowizji i standard przejrzystości RRSO).
+- ✅ **DOPRECYZOWANE:** SN — ustalono konkretną sygnaturę zawieszonego
+  zagadnienia (III CZP 15/25), zamiast ogólnego "kolejny skład wstrzymał
+  się".
+- 🆕 **NOWE ZNALEZISKA** (nieobecne w wersji z poprzedniej tury, dodane do
+  modułu): sprawy TSUE C-831/24 (Machski — obowiązek badania SKD z
+  urzędu, opinia RG 11.06.2026), C-472/23 (argument probankowy, wyrok
+  13.02.2025), C-753/24 (Rzepacz — roszczenia banku o zwrot kapitału a
+  przedawnienie), C-684/25 i C-763/25 (kolejne pytania prejudycjalne,
+  status do ustalenia).
+- 🔄 **SKORYGOWANE:** wcześniejszy opis "projekt nowelizacji u.k.k. —
+  trzy warianty sankcji" doprecyzowany — to element szerszej implementacji
+  dyrektywy UE 2023/2225 (CCD2), termin transpozycji 20.11.2026 r.,
+  kierunek: zniesienie limitu 255 550 zł. Poprzedni opis pozostawiony
+  w module z adnotacją ⚠️ do ponownej weryfikacji, czy warianty sankcji
+  "półdarmowej/darowanej" przetrwały w projekcie implementującym.
+
+**Brak wykrytych błędów krytycznych** — moduł z poprzedniej tury okazał
+się merytorycznie poprawny w całości; sesja miała charakter uzupełniający
+(nowe orzecznictwo, doprecyzowanie sygnatur), nie naprawczy.
+
+**Zmodyfikowano:** `dr-02/modules/mod-ustawa-kredyt-konsumencki-SKD.md`,
+`prawo-polskie-v2/ROUTING-MAP.md` (status weryfikacji Dz.U.).
+
+**Status:** ✅ DOSTARCZONE zgodnie z Regułą 7 — pełne struktury
+`dr-02-prawo-cywilne-rodzinne-gospodarcze` i `prawo-polskie-v2` oraz
+`audyt-systemu-v4` (ten wpis) spakowane osobno, zweryfikowane bajtowo.
