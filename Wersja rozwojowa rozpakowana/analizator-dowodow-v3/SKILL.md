@@ -1,6 +1,6 @@
 ---
 name: analizator-dowodow-v3
-version: "5.16.0"
+version: "5.16.2"
 type: executive-analiza
 status: production
 description: |

@@ -28825,3 +28825,384 @@ się merytorycznie poprawny w całości; sesja miała charakter uzupełniający
 **Status:** ✅ DOSTARCZONE zgodnie z Regułą 7 — pełne struktury
 `dr-02-prawo-cywilne-rodzinne-gospodarcze` i `prawo-polskie-v2` oraz
 `audyt-systemu-v4` (ten wpis) spakowane osobno, zweryfikowane bajtowo.
+
+## AUDYT-2026-08-04c — Synchronizacja z równoległą sesją + odtworzenie 3 wpisów utraconych przy nadpisaniu
+
+**Kontekst:** Użytkownik wgrał 8 zaktualizowanych skilli (efekt pracy w
+równoległej sesji z 2026-08-04, obejmującej nowy moduł SKD, naprawę
+phantom mapping, weryfikację TSUE). Przy synchronizacji roboczych
+kopii z wersjami wgranymi NADPISANO `AUDIT-JOURNAL.md` wersją z tamtej
+sesji — która GAŁĄŹ DZIENNIKA rozgałęziła się z punktu SPRZED trzech
+ostatnich wpisów bieżącej rozmowy (transze 27z151-z153: potwierdzenie
+mod-J9-ip-prawa-autorskie, MOD-OPLATY.md, oraz WALIDACJA flagi ryzyka
+dla art. 168a KPK). SAME EDYCJE TREŚCI tych trzech ustaleń PRZETRWAŁY
+(potwierdzone bezpośrednio w plikach po synchronizacji), ALE ich
+udokumentowanie w dzienniku ZOSTAŁO UTRACONE przy nadpisaniu. Poniżej
+ODTWORZONE dla zachowania pełnego śladu audytowego:
+
+**[ODTWORZONE] mod-J9-ip-prawa-autorskie.md (analizator-umow-v1)** —
+potwierdzony próg 5 lat (art. 68 ust. 2 PrAut, konwersja licencji na
+czas nieoznaczony) w 8+ źródłach.
+
+**[ODTWORZONE] MOD-OPLATY.md (pisma-procesowe-v3)** — potwierdzona
+pełna tabela KSCU (już własna korekta 100 000 zł) + opłata EPU (1,25%
+WPS, min. 30 zł) w 9+ źródłach.
+
+**[ODTWORZONE] PRAWO-HARDGATE-WITNESS.md (przesluchanie-swiadkow-v2)**
+— WALIDACJA własnej flagi "wysokie ryzyko" dla art. 168a KPK: Sejm
+uchwalił przywrócenie zakazu "owoców zatrutego drzewa" (27.02.2026),
+Prezydent ZAWETOWAŁ, Sejm NIE ZDOŁAŁ odrzucić weta (~21.04.2026,
+zabrakło ~20 głosów) — stara, permisywna wersja z 2016 r. POZOSTAJE
+obowiązująca. Prezydent złożył własny, alternatywny projekt — status
+nierozstrzygnięty.
+
+### WNIOSEK METODOLOGICZNY
+
+Przy synchronizacji z RÓWNOLEGŁYMI sesjami pracującymi na TYCH SAMYCH
+plikach — zwłaszcza dziennikiem audytu, który z natury ROŚNIE
+LINIOWO w KAŻDEJ sesji z osobna — zwykłe NADPISANIE całego pliku
+wersją "z zewnątrz" ryzykuje UTRATĘ wpisów wyłącznie lokalnych dla
+bieżącej rozmowy. Rekomendacja NA PRZYSZŁOŚĆ: przy synchronizacji
+dziennika audytu z wgranym plikiem z równoległej sesji, PRZED
+nadpisaniem sprawdzić RÓŻNICĘ (nie tylko czy różne, ale KTÓRE wpisy
+są unikalne dla KAŻDEJ z dwóch wersji) i POŁĄCZYĆ oba zestawy wpisów
+chronologicznie, zamiast wybierać jedną wersję kosztem drugiej.
+
+**Rejestracja:** audyt-systemu-v4/AUDIT-JOURNAL.md — 3 wpisy
+odtworzone, dziennik teraz zawiera PEŁNY ślad (zarówno z równoległej
+sesji 08-04, jak i z bieżącej rozmowy).
+
+### ⚡ AKTUALIZACJA DATY SYSTEMOWEJ
+
+Na podstawie znacznika czasu wgranych plików i wpisów w dzienniku z
+równoległej sesji — RZECZYWISTA data bieżąca to **2026-08-04**
+(nie 2026-07-30, jak błędnie zakładano we wcześniejszych transzach
+tej bardzo długiej, wielokrotnie kompaktowanej rozmowy). Wszystkie
+DALSZE wpisy w tym dzienniku będą używać poprawnej daty.
+
+### BILANS CAŁOŚCIOWY (po synchronizacji, obie gałęzie połączone)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E (ta rozmowa) | 344 |
+| Transz z równoległej sesji 08-04 | 2 (SKD + weryfikacja SKD) |
+| Błędów/luk merytorycznych naprawionych (ta rozmowa) | 89 |
+| Nowe moduły (obie sesje łącznie) | 6 (5 z tej rozmowy + mod-ustawa-kredyt-konsumencki-SKD z równoległej) |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-08-04d — Alimenty na pełnoletnie dziecko, alimenty małżeńskie (art. 27/60 KRO), bezumowne korzystanie z rzeczy
+
+**Kontekst:** Na żądanie użytkownika — zbadanie pokrycia alimentów
+(dla dorosłego dziecka, małżonka, innego krewnego) oraz bezumownego
+zajęcia lokalu/mienia, bazując na opracowaniach eksperckich.
+
+**Ustalenie wstępne:** szerszy krąg krewnych (dziadkowie/rodzeństwo,
+zasada pomocniczości) już dobrze opracowany z wcześniejszej sesji
+(19.07.2026). GENUINE luki: "pełnoletnie dziecko" — ZERO wzmianek;
+alimenty MIĘDZY małżonkami (art. 27/60 KRO) — ZERO dedykowanej
+treści; bezumowne korzystanie — tylko jednolinijkowa wzmianka bez
+szczegółów.
+
+### DODANE: alimenty na pełnoletnie dziecko (art. 133 KRO)
+
+Zweryfikowano w 7+ zgodnych źródłach eksperckich, z bezpośrednimi
+cytatami orzeczeń SN: brak sztywnej granicy wieku (26 lat to
+potoczny, nieustawowy punkt odniesienia). Dwie przesłanki uchylenia
+(art. 133 §3): nadmierny uszczerbek DLA RODZICA lub brak starań
+DZIECKA o samodzielność — z konkretnymi kryteriami orzeczniczymi
+(SN III CRN 144/80 — zaniedbania w nauce; SN III CKN 257/97 —
+sama chęć nie wystarczy, potrzebne zdolności; SN III CKN 199/99 —
+uczelnia prywatna względem stopy życiowej rodziców). Choroba
+psychiczna NIE różni się od fizycznej. Dodano WAŻNĄ, praktyczną
+różnicę proceduralną: po pełnoletności wygasa przedstawicielstwo
+drugiego rodzica do odbioru alimentów — płatnik musi stosować się
+do oświadczenia SAMEGO dziecka.
+
+### DODANE: alimenty między małżonkami — art. 27 vs art. 60 KRO
+
+Zweryfikowano w 7+ zgodnych źródłach, z dosłownym cytatem uchwały SN
+(III CZP 39/11, 13.07.2011): art. 27 (w trakcie małżeństwa,
+bezwzględny charakter) WYGASA CAŁKOWICIE przy rozwodzie — NIE
+przekształca się w art. 60 (dwa odrębne reżimy). Art. 60 ma DWA
+warianty: §1 (zwykły, niedostatek, dotyczy też przy braku orzeczenia
+o winie) i §2 (rozszerzony, przy wyłącznej winie — NIŻSZY próg,
+wystarczy istotne pogorszenie sytuacji, nie trzeba niedostatku).
+KLUCZOWE rozstrzygnięcie "pułapki 5 lat": limit czasowy DOTYCZY
+WYŁĄCZNIE wariantu §1 (brak orzeczenia o winie/wina obu stron) — PRZY
+wyłącznej winie (§2) obowiązek BEZTERMINOWY.
+
+### DODANE: bezumowne korzystanie z rzeczy/nieruchomości (art. 224-225 KC)
+
+Zweryfikowano w 6+ zgodnych źródłach eksperckich, z cytatami
+orzeczeń SN i SA: charakter prawny (zapłata za korzystanie, NIE
+odszkodowanie — nieistotne czy właściciel poniósł stratę). Dwa
+reżimy wg dobrej/złej wiary (zła wiara: cały okres; dobra wiara:
+dopiero od powzięcia WIARYGODNEJ informacji o pozwie — NIE wymaga
+formalnego doręczenia). Wysokość = stawka RYNKOWA czynszu. Można
+dochodzić PRZED odzyskaniem rzeczy (SN V CSK 296/06). Odrębny reżim
+dla lokali mieszkalnych (art. 18 ustawy o ochronie praw lokatorów).
+
+**WŁASNA POMYŁKA ZNALEZIONA I NAPRAWIONA PRZY OKAZJI:** przy
+wstawianiu sekcji o bezumownym korzystaniu do mod-KC-cywilne-
+zobowiazania-odpowiedzialnosc.md pominięto prefiks "## " przy nowym
+nagłówku (wpisano samo "⭐ BEZUMOWNE KORZYSTANIE..." bez oznaczenia
+poziomu nagłówka) — wykryte przy standardowej weryfikacji liczby
+nagłówków (oczekiwano 19, otrzymano 18), naprawione natychmiast.
+
+**Rejestracja:** dr-02-prawo-cywilne-rodzinne-gospodarcze SKILL.md
+v3.15→v3.16.
+
+### BILANS CAŁOŚCIOWY (data systemowa poprawiona na 2026-08-04)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 71 |
+| Błędów WŁASNYCH w tej sesji znalezionych i naprawionych | 7 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-08-04e — FAZA 3E: analizator-dowodow-v3/MP12-terminy.md potwierdzony
+
+**MP12-terminy.md — potwierdzony w pełni, moduł wzorcowy.** Pełny
+przewodnik terminów wg dziedziny (KPC/KP/KK-KPK/KPA-PPSA) — wszystkie
+figury zgodne z wielokrotnie już potwierdzonymi w tej sesji
+standardami (2 tygodnie zarzuty/sprzeciw, 21 dni KP, 30 dni PPSA,
+14 dni KPA). Zweryfikowano dodatkowo nowy próg: art. 445 §1 KPK
+(termin apelacji karnej) — 14 dni od doręczenia wyroku z
+uzasadnieniem, termin ZAWITY — potwierdzone jednogłośnie w 10+
+niezależnych źródłach, w tym bezpośrednio lexlege.pl (aktualny t.j.
+Dz.U.2026.0.490) i orka.sejm.gov.pl (Rząd 1). Moduł ma dobry system
+alertów priorytetowych (KRYTYCZNY <14 dni / PILNY <30 dni).
+
+### BILANS CAŁOŚCIOWY (data systemowa: 2026-08-04)
+
+| Kategoria | Wynik |
+|---|---|
+| Transz/zastosowań FAZA 3E (łącznie sesja) | 345 |
+| Błędów/luk merytorycznych naprawionych | 89 |
+| Rozbudowy/aktualizacje treściowe na żądanie | 71 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-08-04f — FAZA 3E: analizator-dowodow-v3/MP10-koszty.md potwierdzony + PRZELICZENIE CAŁKOWITEGO POKRYCIA
+
+**MP10-koszty.md — potwierdzony w pełni.** Zweryfikowano art. 35 ust.
+1 KSCU (opłaty w sprawach z zakresu prawa pracy, próg 50 000 zł) —
+potwierdzone jednogłośnie w 9+ niezależnych źródłach, w tym
+bezpośrednio isap/sip.lex (aktualny t.j. Dz.U.2025.1228) — SPÓJNE z
+wcześniej wielokrotnie potwierdzonym w tej sesji tym samym progiem
+(50 000 zł) w innych kontekstach KSCU. Koszty procesu karnego
+(art. 616-645 KPK, zasada 618/627/632) — zgodne.
+
+### ⚠️ PRZELICZENIE CAŁKOWITEGO POKRYCIA SYSTEMU — WAŻNA AKTUALIZACJA
+
+System URÓSŁ ZNACZĄCO w trakcie tej sesji (własne rozbudowy +
+równoległa sesja z 2026-08-04 z nowym modułem SKD i podsystemem
+generatora w analizator-umow-v1): **CAŁKOWITA liczba plików .md w
+całym systemie to teraz 745** (nie 505, jak na POCZĄTKU tej sesji).//
+Rozkład: dr-03 (56), analizator-umow-v1 (57, PO rozbudowie
+równoległej sesji — było 36), pisma-procesowe-v3 (40), shared (136),
+dr-10 (31), analizator-dowodow-v3 (35), dr-02 (33), dr-04 (32),
+dr-09 (26), dr-06 (27), dr-11 (24), pozostałe DR i skille — reszta.
+
+**UCZCIWA, ZAKTUALIZOWANA LICZBA POKRYCIA:** ~345 plików formalnie
+zweryfikowanych w ramach FAZA 3E (z ORYGINALNEGO zestawu ~505) +
+nowe pliki dodane/zweryfikowane W TRAKCIE tej sesji (rozbudowy,
+nowe moduły — każdy fakt web-searchowany przy tworzeniu, więc
+FAKTYCZNIE zweryfikowany, choć poza formalnym schematem FAZA 3E) —
+DAJE TO: **~345 / 745 ≈ 46,3%** aktualnego, PEŁNEGO pokrycia
+systemu — NIŻSZY procent niż poprzednio raportowany (~68%), ALE
+WYNIKA WYŁĄCZNIE ze wzrostu MIANOWNIKA (system jest teraz WIĘKSZY,
+nie że wcześniejsza praca "zniknęła"). Odnotowane TRANSPARENTNIE,
+zgodnie z zasadą uczciwego raportowania postępu, zamiast utrzymywać
+nieaktualny, "lepiej wyglądający" wcześniejszy procent.
+
+### BILANS CAŁOŚCIOWY (data systemowa: 2026-08-04, PRZELICZONY MIANOWNIK)
+
+| Kategoria | Wynik |
+|---|---|
+| CAŁKOWITA liczba plików .md w systemie (aktualna) | **745** |
+| Formalnie zweryfikowanych w FAZA 3E (z pierwotnych 505) | ~345 |
+| Aktualny procent pokrycia (uczciwie przeliczony) | **~46,3%** |
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 89 |
+| Rozbudowy/aktualizacje treściowe na żądanie | 71 |
+| Nowe moduły utworzone (ta rozmowa + równoległa sesja) | 6 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-08-04g — FAZA 3E: 3 moduły analizator-dowodow-v3, CRIT znaleziony w MP11 (błędny cytat "art. 111 KP")
+
+**Kontekst:** Kontynuacja FAZA 3E, OGRANICZONA do plików .md (zgodnie
+z instrukcją użytkownika), 3 moduły na turę, z pominięciem elementów
+niezwiązanych z prawem w liczniku pokrycia.
+
+**MP11-rodo-cyber.md — CRIT znaleziony i naprawiony.** Moduł błędnie
+cytował "art. 111 KP" jako podstawę zakazu nielegalnego monitoringu
+pracownika. Potwierdzone w 6+ zgodnych źródłach (PARP, edukacjaprawnicza.pl,
+odoserwis.pl, mikroporady.pl): art. 111 to przepis USTAWY O OCHRONIE
+DANYCH OSOBOWYCH z 10.05.2018 r. — przepis NOWELIZUJĄCY, który
+wprowadził do Kodeksu pracy nowe artykuły 22² (monitoring wizyjny) i
+22³ (poczta elektroniczna/inne formy monitoringu) — SAM art. 111 NIE
+JEST i NIGDY NIE BYŁ artykułem Kodeksu pracy. Naprawiono cytat na
+poprawne art. 22²/22³ KP, z wyjaśnieniem pochodzenia błędu (typowa
+pomyłka wynikająca z tego, jak wtórne źródła opisują nowelizację —
+"na podstawie art. 111 ustawy o ochronie danych osobowych
+wprowadzono zmiany do KP" bywa skracane do mylącego "art. 111 KP").
+
+**MP8-dowody.md, MD4-pokrycie.md** — generyczne szkielety
+metodologiczne (skala mocy dowodowej, reguła głównego/pomocniczego
+dowodu), bez własnych, samodzielnych progów prawnych do weryfikacji.
+
+**Rejestracja:** analizator-dowodow-v3 SKILL.md v5.16.0→v5.16.1.
+
+### METODOLOGIA OD TEJ TRANSZY (na instrukcję użytkownika)
+
+Od tej tury: (1) audyt ograniczony WYŁĄCZNIE do plików .md (bez
+liczenia innych typów plików w bazie), (2) standard 3 moduły na
+turę, (3) mianownik pokrycia WYKLUCZA elementy jawnie niezwiązane z
+treścią prawną (audyt-systemu-v4 jako infrastruktura samego audytu,
+prompt-master, widgety raportowe raport-sytuacyjny-v2/raport-klienta-v1)
+— SKORYGOWANY mianownik: **721 plików .md** (745 całkowitych minus
+24 odliczone jako niezwiązane z prawem).
+
+### BILANS CAŁOŚCIOWY (mianownik skorygowany: 721 plików .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Skorygowany mianownik (bez elementów nieprawnych) | **721** |
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 90 |
+| Rozbudowy/aktualizacje treściowe na żądanie | 71 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-08-04h — FAZA 3E: 3 moduły analizator-dowodow-v3 potwierdzone (w tym świeża sprawa TSUE C-828/25)
+
+**MX-dziedziny.md — potwierdzony w pełni.** Sprawdzono szczegółowo
+katalog dziedzin z terminami (21 dni art. 264 KP, 14 dni art. 129
+KPA, 30 dni art. 53 PPSA, 14 dni art. 503 KPC) — wszystkie zgodne z
+resztą systemu. Zweryfikowano DODATKOWO świeży wpis o SKD: sprawa
+TSUE C-828/25 (pytanie prejudycjalne od Sądu Rejonowego w Tomaszowie
+Mazowieckim, postanowienie z 25.11.2025, sygn. I C 1048/24) — REALNA,
+faktycznie w toku — potwierdzone jednogłośnie w 6+ niezależnych,
+aktualnych źródłach (rp.pl, brodniccy.pl, sprawy-przeciwko-bankom.pl
+[x2], mamdlugi.pl, ostaszewskikredytyfrankowe.pl). Powiązana sprawa
+C-744/24 (wyrok 23.04.2026, zakaz odsetek od prowizji) — również
+potwierdzona, kontekst prawidłowo powiązany. Dobra jakość
+cross-referencji do dr-02/mod-ustawa-kredyt-konsumencki-SKD.md.
+
+**MP1-ekstrakcja.md, MOD-LAPSUS-AUDYT.md** — generyczne szkielety
+metodologiczne (ekstrakcja faktów, klasyfikacja błędów autorskich w
+pismach), bez własnych, samodzielnych progów prawnych.
+
+### BILANS CAŁOŚCIOWY (mianownik: 721 plików .md, metodologia: 3 moduły/turę)
+
+| Kategoria | Wynik |
+|---|---|
+| Mianownik (pliki .md, bez elementów nieprawnych) | 721 |
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 90 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-08-04i — FAZA 3E: 3 moduły, CRIT znaleziony w MD5-terminy.md (zbędny indeks górny)
+
+**MD5-terminy.md — naprawiony.** Moduł błędnie cytował "art. 328¹
+KPC" dla terminu 7 dni na wniosek o uzasadnienie wyroku — POPRAWNY
+cytat to **art. 328 KPC** (BEZ indeksu górnego "¹") — potwierdzone
+jednogłośnie w 7+ zgodnych źródłach, w tym bezpośrednio lexlege.pl
+(aktualny t.j. Dz.U.2026.0.468, sprawdzony na dzień 31.07.2026 wg
+metadanych źródła) i arslege.pl. Reszta tabeli terminów (14 dni
+apelacja KPC/KPK, 7 dni zażalenie, 3 dni KPW, 6 miesięcy spadek) —
+zgodna z wielokrotnie już potwierdzonymi w tej sesji standardami.
+
+**MD3b-walidacja-prawna.md, MP2-katalog.md** — sprawdzone, zgodne z
+resztą systemu (art. 168a KPK, art. 385¹ KC, art. 22¹ KP — wszystkie
+już wcześniej potwierdzone w tej sesji w innych kontekstach).
+
+**Rejestracja:** analizator-dowodow-v3 SKILL.md v5.16.1→v5.16.2.
+
+### BILANS CAŁOŚCIOWY (mianownik: 721 plików .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 91 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-08-04j — Wymeldowanie bez zgody i "dzikie mieszkanie" (samowolne zajęcie pustostanu)
+
+**Kontekst:** Na żądanie użytkownika — kontynuacja FAZA 3E + dodanie
+tematu meldunków bez zgody właściciela i "dzikich mieszkań".
+
+**Ustalenie wstępne:** genuine luka — tylko jedna przypadkowa wzmianka
+w kontekście podatkowym, brak dedykowanej treści gdziekolwiek w
+systemie.
+
+### DODANE: wymeldowanie bez zgody osoby zameldowanej
+
+Zweryfikowano w 7+ zgodnych źródłach eksperckich: fundamentalne
+rozróżnienie — meldunek TO NIE tytuł prawny, tylko ewidencyjne
+odzwierciedlenie faktycznego pobytu. Jedyna przesłanka materialna:
+TRWAŁE i DOBROWOLNE opuszczenie lokalu (z równoważnym traktowaniem
+przymusowego opuszczenia — eksmisja, kara pozbawienia wolności,
+potwierdzone orzecznictwem WSA/NSA). Procedura administracyjna
+(KPA), 14 dni na odwołanie do wojewody. KLUCZOWA GRANICA dodana:
+jeśli osoba NADAL faktycznie mieszka (nawet "na dziko") — organ NIE
+MOŻE wykorzystać wymeldowania jako narzędzia nacisku — właściwa
+droga to SĄDOWA eksmisja, nie administracyjne wymeldowanie. Dwie
+odrębne procedury, częsty błąd praktyczny (traktowanie wymeldowania
+jako "szybszej eksmisji").
+
+### DODANE: "dzikie mieszkanie" — samowolne zajęcie pustostanu
+
+Zweryfikowano w 6+ zgodnych, aktualnych źródłach — ZASKAKUJĄCE,
+kluczowe ustalenie: prawo chroni NAWET squattera przed samowolnym
+usunięciem przez właściciela (art. 193 KK — naruszenie miru
+domowego, oparte na FAKTYCZNYM władaniu, nie tytule prawnym).
+Właściciel próbujący samodzielnie usunąć "dzikiego lokatora"
+(wymiana zamków, odcięcie mediów) ryzykuje ODPOWIEDZIALNOŚĆ KARNĄ
+dla SIEBIE oraz przegraną w cywilnym procesie o przywrócenie
+posiadania — paradoksalnie WZMACNIAJĄC pozycję squattera. Jedyna
+legalna droga: powództwo windykacyjne (art. 222 §1 KC), ale NAWET
+tu sąd nie może być czysto formalistyczny (art. 5 KC + art. 8 EKPC,
+z cytowanym wyrokiem SO Warszawa-Praga z 2019 r., wciąż aktualnym).
+Dodano wyłączenia z ochrony przysługującej zwykłym lokatorom: brak
+prawa do lokalu socjalnego (poza wyjątkami), brak okresu ochronnego
+zimowego, możliwa "eksmisja na bruk".
+
+**Rejestracja:** dr-02-prawo-cywilne-rodzinne-gospodarcze SKILL.md
+v3.16→v3.17.
+
+### BILANS CAŁOŚCIOWY (mianownik: 721 plików .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 91 |
+| Rozbudowy/aktualizacje treściowe na żądanie | 74 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-08-04k — Domknięta luka: zameldowanie (procedura pozytywna), zgodnie z uwagą użytkownika
+
+**Kontekst:** Użytkownik trafnie zauważył asymetrię — poprzednia
+transza dodała WYŁĄCZNIE wymeldowanie (usunięcie z ewidencji), bez
+odpowiadającej jej procedury ZAMELDOWANIA (wpisania do ewidencji).
+Zbadano i potwierdzono lukę, uzupełniono.
+
+**DODANE: zameldowanie — kto może, czy potrzebna zgoda właściciela.**
+Zweryfikowano w 6+ zgodnych, aktualnych źródłach: termin 30 dni
+(4 dni dla cudzoziemców spoza UE/EFTA), zniesienie wykroczenia za
+brak meldunku od 1.01.2013 (obowiązek formalnie istnieje, bez
+sankcji). ⭐ KLUCZOWA ASYMETRIA odpowiadająca wprost na pytanie
+użytkownika: najemca MOŻE zameldować SIEBIE bez zgody właściciela
+(wystarczy sama umowa najmu jako tytuł prawny, meldunek wygasa
+automatycznie z końcem umowy) — ALE zameldowanie KOGOŚ INNEGO przez
+najemcę WYMAGA pisemnej zgody właściciela. Właściciel ma najszersze
+uprawnienia (meldowanie siebie i dowolnych innych osób bez
+ograniczeń). Dodano praktyczne szczegóły: koszt (samo zameldowanie
+bezpłatne, zaświadczenie 17 zł dla pobytu czasowego/bezpłatne dla
+stałego), automatyczne wymeldowanie z poprzedniego adresu przy
+zameldowaniu na pobyt stały, rozróżnienie od rejestracji pobytu u
+wojewody (odrębna procedura dla obywateli UE).
+
+**Rejestracja:** dr-02-prawo-cywilne-rodzinne-gospodarcze SKILL.md
+v3.17→v3.18.
+
+### BILANS CAŁOŚCIOWY (mianownik: 721 plików .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 75 |
+| Flagi otwarte | **0** |

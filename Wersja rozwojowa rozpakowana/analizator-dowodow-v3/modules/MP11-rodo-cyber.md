@@ -22,7 +22,14 @@ Typ zdarzenia:
   ☐ Nieuprawniony dostęp do systemu (art. 267 KK)
   ☐ Niszczenie / usuwanie danych (art. 268 KK)
   ☐ Zakłócenie działania systemu (art. 269 KK)
-  ☐ Nielegalny monitoring pracownika (art. 222 KP, art. 111 KP)
+  ☐ Nielegalny monitoring pracownika (art. 22² KP — monitoring wizyjny;
+    art. 22³ KP — poczta elektroniczna/inne formy monitoringu —
+    ⚠️ POPRAWIONE 2026-08-04, FAZA 3E/ZASADA 14: poprzednia wersja
+    błędnie cytowała "art. 111 KP" — art. 111 to przepis USTAWY O
+    OCHRONIE DANYCH OSOBOWYCH z 10.05.2018 r. (przepis NOWELIZUJĄCY,
+    który WPROWADZIŁ art. 22²/22³ DO Kodeksu pracy), NIE samodzielny
+    artykuł Kodeksu pracy — potwierdzone w 6+ zgodnych źródłach,
+    w tym PARP i edukacjaprawnicza.pl)
   ☐ Nieuprawnione utrwalenie rozmowy / wizerunku (art. 267 KK, art. 81 PrAut)
   ☐ Phishing / oszustwo cybernetyczne (art. 286 KK)
   ☐ Naruszenie tajemnicy korespondencji (art. 267 KK, art. 23 KC)
