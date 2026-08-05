@@ -1,6 +1,6 @@
 ---
 name: dr-03-prawo-karne-wykroczenia-egzekucja
-version: 3.22
+version: 3.27
 description: |
   DR-03: Prawo Karne, Wykroczenia, Egzekucja
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -76,7 +76,15 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   obrona obligatoryjna art. 79 §1 pkt 2-4 KPK (→ mod-niewidomy-prawa-prawne.md,
   mod-niepelnosprawnosc-intelektualna-gluchota.md)
 
-## Moduły (54 łącznie — ✓ 54 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+## Moduły (56 łącznie — ✓ 56 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+## ⚡ NOWY 2026-08-04: mod-przerobki-modyfikacje-pojazdow — na żądanie
+## użytkownika: odblokowanie hulajnóg elektrycznych (projekt ustawy
+## MI), przyciemnianie szyb (progi VLT 75%/70%), pojazdy marki "SAM"
+## (świadectwo indywidualnego dopuszczenia, procedura TDT/starosta)
+## ⚡ NOWY 2026-08-04: mod-lincz-ochrona-swiadkow-lowcy-pedofili — na
+## żądanie użytkownika: art. 158-159 KK (lincz/odpowiedzialność
+## zbiorowa), statusy więźniów N/szczególnie chroniony, zmowa
+## milczenia (art. 233 KK), łowcy pedofili (spór doktrynalny, RPO)
 ## ⚠️ 2026-07-15: naprawiono niezgodność dysk↔lista — 4 pliki istniały na
 ## dysku, ale nie były wpisane poniżej: mod-KK-art291-pranie-pieniedzy,
 ## mod-ustawa-fundusz-pomocy-pokrzywdzonym, mod-ustawa-narkomania,

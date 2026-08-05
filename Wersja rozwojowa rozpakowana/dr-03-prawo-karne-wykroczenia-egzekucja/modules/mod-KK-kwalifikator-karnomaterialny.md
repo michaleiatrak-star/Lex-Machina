@@ -640,6 +640,80 @@ art. 277a §1 KK — jeden z najsurowszych przepisów w KK).
 → Patrz też mod-KKS-karny-skarbowy-i-AML.md (rozszerzony 2026-07-15).
 ```
 
+### ⭐ DZIAŁANIE POD PRZYKRYWKĄ LEGALNEGO BIZNESU (dodane 2026-08-04,
+na żądanie użytkownika)
+
+```
+⚠️ KLUCZOWA ZASADA: LEGALNA REJESTRACJA działalności gospodarczej NIE
+DAJE żadnej "immunitetu" przed kwalifikacją z art. 258 KK — decyduje
+RZECZYWISTY cel funkcjonowania grupy, NIE formalny status podmiotu:
+"Nawet jeśli grupa działa w oparciu o legalnie zarejestrowaną
+działalność gospodarczą (np. firma transportowa), ale w rzeczywistości
+JEJ CELEM jest ukrywanie towarów akcyzowych lub pranie brudnych
+pieniędzy, to może zostać uznana za grupę przestępczą" (potwierdzone
+źródłem eksperckim, sierpień 2025)
+
+KONCEPCJA "LBS" (Legal Business Structures / legalne struktury
+  biznesowe) — z aktualnej analizy unijnej (infosecurity24.pl, dane
+  Europolu, styczeń 2025):
+  → Sieć WIELU spółek (CZĘSTO bez faktycznej działalności) z
+    PODSTAWIONYMI OSOBAMI w zarządzie (⭐ powiązanie z `mod-KK-slupy-
+    fikcyjna-reprezentacja-spolki.md` — SPÓJNE mechanizmy)
+  → Rejestrowane w RÓŻNYCH krajach — 70% zidentyfikowanych struktur
+    zlokalizowanych WYŁĄCZNIE w UE, 20% mieszanych UE/poza-UE, 10%
+    wyłącznie poza UE — sieci działają w ok. **80 KRAJACH** na świecie
+  → FIKCYJNE UMOWY I FAKTURY umożliwiają transfer dużych sum przez
+    konta należące do tych podmiotów (⭐ POWIĄZANIE z sekcją wyżej —
+    art. 270a/271a/277a KK, karuzele VAT)
+  → NIERUCHOMOŚCI = NAJPOPULARNIEJSZA lokata dla prania nielegalnych
+    zysków — **41%** najgroźniejszych sieci przestępczych w UE
+    inwestuje w nieruchomości, z praniem na RÓŻNYCH etapach: zakup
+    gruntu, sam proces budowy, komercyjne wykorzystanie
+
+DWA TRYBY INFILTRACJI BIZNESU (rozróżnienie z analizy branżowej):
+  → SYSTEMATYCZNA — struktura biznesowa jest STAŁYM, KONIECZNYM
+    elementem procederu, bez którego TRUDNO prowadzić działalność
+    przestępczą (typowe dla: oszustw VAT/MTIC "znikający podatnik",
+    prania pieniędzy w BRANŻY DETALICZNEJ/GASTRONOMICZNEJ — duży
+    obrót gotówkowy ułatwia ukrycie nielegalnych wpływów)
+  → SPORADYCZNA — większa ELASTYCZNOŚĆ, wykorzystanie legalnej
+    struktury OKAZJONALNIE, nie jako stały filar procederu
+
+PRZYKŁADY BRANŻOWE PRZYKRYWEK (z literatury kryminologicznej,
+  potwierdzone niezależnie w wielu źródłach): firmy TRANSPORTOWE
+  wykorzystywane do PRZEMYTU (towarów, ludzi, narkotyków); legalne
+  ZAKŁADY CHEMICZNE wykorzystywane do PRODUKCJI narkotyków (dual-use
+  substancji chemicznych); firmy BUDOWLANE/deweloperskie do prania
+  przez nieruchomości
+
+TRUDNOŚĆ GRANICZNA (przyznana w doktrynie): "bardzo trudno jest
+  sprecyzować dokładnie, kiedy mamy do czynienia z przestępczością
+  zorganizowaną, a kiedy zwykła banda [jednorazowa/nieformalna
+  grupa] zamienia się w [zorganizowaną strukturę]" — DLATEGO
+  orzecznictwo SN (patrz DRZEWO H.1 wyżej) konsekwentnie odróżnia
+  zwykłe współsprawstwo/znajomość towarzyską od faktycznej struktury
+  organizacyjnej — sama REJESTRACJA firmy jako "przykrywki" NIE
+  automatycznie przesądza o art. 258 — liczy się CAŁOŚĆ okoliczności
+  (trwałość, podział ról, systematyczność)
+
+NIE MA ZNACZENIA liczba planowanych przestępstw: samo ZAWIĄZANIE
+  zorganizowanej struktury w celu popełnienia CHOĆBY JEDNEGO czynu
+  karalnego WYSTARCZY do przypisania odpowiedzialności z art. 258 KK
+  — grupa NIE MUSI planować wielu przestępstw
+
+MECHANIZMY WYKRYWANIA (kontekst śledczy): analiza przepływów
+  finansowych, ustalanie RZECZYWISTYCH beneficjentów (beneficial
+  owners) wbrew formalnym "słupom" w KRS, korelacja między
+  deklarowanym profilem działalności a RZECZYWISTYM ruchem
+  towarów/pieniędzy, współpraca międzynarodowa (Europol, dane o
+  strukturach transgranicznych)
+
+Potwierdzone w 6+ zgodnych źródłach, w tym analiza akademicka
+(czasopismo.wsb.torun.pl), prawo.pl, infosecurity24.pl [styczeń 2025,
+dane Europolu], adwokaci-kmp.pl [sierpień 2025], csp.edu.pl
+(Centrum Szkolenia Policji — materiał szkoleniowy).
+```
+
 ### POWIĄZANE INSTYTUCJE PROCESOWE (⛔ weryfikuj aktualny stan przed sprawą)
 
 ```

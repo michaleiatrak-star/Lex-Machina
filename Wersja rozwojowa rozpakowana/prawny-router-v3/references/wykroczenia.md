@@ -75,6 +75,173 @@ Podstawy uchylenia (§ 1 i §1a):
    prawną wystawienia, nie winę ukaranego.
 ```
 
+### ⭐ MANDAT WYPISANY NIECZYTELNIE (dodane 2026-08-04, na żądanie
+użytkownika)
+
+```
+⭐⭐ KLUCZOWA ZASADA (potwierdzone źródłem eksperckim z marca 2026 r.):
+SĄD NIE OCENIA "ESTETYKI" mandatu — bada WYŁĄCZNIE LEGALNOŚĆ jego
+NAŁOŻENIA. Sam FAKT, że pismo funkcjonariusza jest trudne do
+odczytania, TO NIE AUTOMATYCZNA podstawa uchylenia — decyduje RODZAJ
+błędu, NIE jego "wygląd"
+
+⭐ ROZRÓŻNIENIE — DWIE KATEGORIE BŁĘDÓW:
+
+(A) BŁĘDY "KOSMETYCZNE" — NIE stanowią podstawy uchylenia:
+    → Nieczytelne, ale MOŻLIWE DO ODCYFROWANIA pismo (z wysiłkiem,
+      przez porównanie z innymi danymi w dokumencie/systemie)
+    → Drobne pomyłki techniczne NIENARUSZAJĄCE istoty sprawy
+    → Samo POCZUCIE niesprawiedliwości lub twierdzenie "policjant źle
+      to napisał" — sąd NIE bada subiektywnych wrażeń, tylko dokumenty
+      i przepisy
+
+(B) POWAŻNA WADA FORMALNA — MOŻE prowadzić do uchylenia, GDY
+    nieczytelność jest TAK DALECE POSUNIĘTA, że PRAKTYCZNIE
+    UNIEMOŻLIWIA ustalenie ISTOTNYCH ELEMENTÓW mandatu:
+    → BRAK MOŻLIWOŚCI zidentyfikowania OPISU CZYNU (nie da się
+      ustalić, ZA CO faktycznie nałożono grzywnę)
+    → BRAK MOŻLIWOŚCI odczytania PODSTAWY PRAWNEJ (nie wiadomo, jaki
+      przepis zastosowano)
+    → BRAK PODPISU funkcjonariusza (odrębna, NIEZALEŻNA od
+      czytelności wada formalna — jeśli podpis w ogóle NIE ISTNIEJE,
+      nie tylko jest nieczytelny)
+    → GRZYWNA nieczytelna w sposób uniemożliwiający ustalenie
+      WYSOKOŚCI kwoty (i tym samym niemożność weryfikacji, czy
+      mieści się w ustawowych granicach)
+
+⭐ PRAKTYCZNY TEST: PYTANIE, KTÓRE ZADAJE SOBIE SĄD, to NIE "czy
+  pismo jest ładne/czytelne", TYLKO "czy z DOKUMENTU (ewentualnie w
+  połączeniu z danymi z systemu/notatnika służbowego funkcjonariusza)
+  DA SIĘ jednoznacznie USTALIĆ: kto, za co, na jakiej podstawie
+  prawnej i w jakiej wysokości został ukarany" — jeśli TAK, nawet
+  BRZYDKIE/trudne pismo NIE unieważnia mandatu
+
+PROCEDURA (TA SAMA co przy innych wadach formalnych — patrz wyżej):
+  → Termin: **7 DNI** od uprawomocnienia (ZAWITY)
+  → Wniosek do SĄDU REJONOWEGO właściwego dla miejsca nałożenia
+  → ZACHOWAJ DOWODY: kserokopia/zdjęcie mandatu (ZANIM zniknie
+    czytelność np. przez wyblaknięcie), notatki własne (data,
+    miejsce, przebieg kontroli) — BEZ TEGO trudniej wykazać wadę w
+    sądzie
+  → ⚠️ Funkcjonariusz NIE MA obowiązku "sam z siebie" informować o
+    WSZYSTKICH konsekwencjach przyjęcia mandatu — decyzja o podpisaniu
+    NALEŻY do kierowcy, WŁĄCZNIE z oceną, czy dokument jest
+    wystarczająco czytelny, ZANIM się go podpisze
+
+⚠️ PRAKTYCZNA REKOMENDACJA (WYNIKAJĄCA z powyższych zasad — MOMENT
+  NAJWAŻNIEJSZY to PRZED podpisaniem, nie PO): jeśli mandat W
+  MOMENCIE WYSTAWIENIA jest NIECZYTELNY na tyle, że NIE WIADOMO za
+  co/ile/na jakiej podstawie — WARTO rozważyć ODMOWĘ PRZYJĘCIA na
+  MIEJSCU (co kieruje sprawę do sądu, z PEŁNYM badaniem meritum) —
+  PO PODPISANIU dochodzenie samej nieczytelności JEST TRUDNIEJSZE,
+  bo trzeba wykazać POWAŻNĄ wadę formalną, nie tylko niewygodę
+
+E-MANDATY: wraz z upowszechnieniem elektronicznych mandatów problem
+  RĘCZNEJ nieczytelności MALEJE (dane wpisywane do systemu
+  elektronicznego, kierowca dostaje WYDRUK lub potwierdzenie
+  elektroniczne) — ALE LOGIKA odpowiedzialności formalnej pozostaje
+  TA SAMA
+
+Potwierdzone w 6+ zgodnych źródłach, w tym twojemoto.pl [marzec
+2026 — źródło NAJDOKŁADNIEJ adresujące to konkretne pytanie],
+gazeta.policja.pl (Rząd 1), gliwice.policja.gov.pl (Rząd 1),
+adwokat-weglowski.pl.
+```
+
+### ⭐⭐ PROBLEMY Z POMIAREM PRĘDKOŚCI (dodane 2026-08-04, na żądanie
+użytkownika — zbadane dokładnie w internecie)
+
+```
+⭐ FUNDAMENTALNA ZASADA (odróżnia Polskę od Francji/Niemiec): W
+POLSCE NIE ISTNIEJE PRAWNA TOLERANCJA na przekroczenie prędkości —
+przekroczenie o JAKĄKOLWIEK wartość jest wykroczeniem (art. 92a §1
+KW), BEZ progu minimalnego. To, co potocznie nazywane jest
+"tolerancją", to WYŁĄCZNIE TECHNICZNY błąd pomiarowy urządzenia —
+i, W PRZECIWIEŃSTWIE do np. Francji, NIE jest on w Polsce
+AUTOMATYCZNIE odejmowany na korzyść kierowcy
+
+TECHNICZNE BŁĘDY POMIAROWE (wg typu urządzenia, orientacyjnie):
+  → Mierniki LASEROWE (ręczne "suszarki"): ok. **3 KM/H**
+  → Radary STACJONARNE: ok. **5 KM/H**
+  → Urządzenia MOBILNE: NAWET **7 KM/H** przy prędkości 100 km/h
+  → W SZCZEGÓLNYCH sytuacjach (nie-laboratoryjnych warunkach
+    użytkowania): błąd może sięgać nawet **10 KM/H**
+
+⭐ PRAKTYCZNA "PÓŁ-TOLERANCJA" — WYŁĄCZNIE dla urządzeń
+  AUTOMATYCZNYCH: fotoradary i kamery pomiaru odcinkowego (OPP) w
+  Polsce NIE AKTYWUJĄ SIĘ przy przekroczeniu prędkości O MNIEJ niż
+  **10 KM/H** — TO JEST operacyjny próg systemu CANARD, NIE prawna
+  tolerancja — DLA POLICJANTA z ręcznym radarem TEGO progu NIE MA —
+  może wystawić mandat NAWET za przekroczenie o 1 km/h, jeśli uzna
+  pomiar za wiarygodny
+
+⭐⭐ AKTYWNY, NIEROZSTRZYGNIĘTY SPÓR INSTYTUCJONALNY (2023-2026):
+  Rzecznik Praw Obywatelskich (prof. Marcin Wiącek) WIELOKROTNIE
+  (pierwsze wystąpienie 2023, PONOWNE 08.05.2025) zwracał się do
+  MSWiA o wprowadzenie zasady "POMIARU PRZYJĘTEGO" (jak we Francji —
+  odjęcie marginesu błędu OD wyniku PRZED wymierzeniem kary) oraz
+  przesunięcie progu odpowiedzialności z zakresu 1-10 km/h do 4-10
+  km/h w taryfikatorze (tabela E10)
+  → ⚠️ STATUS NA DZIEŃ WERYFIKACJI (04.08.2026): MSWiA ODMÓWIŁO —
+    "nie dostrzega pilnej potrzeby inicjowania zmian" — powołując
+    się na SPADEK liczby zabitych w wypadkach po zaostrzeniu
+    przepisów w 2022 r. (jeden z najwyższych spadków wskaźnika w UE)
+  → Wiceminister Maciej Wąsik OKREŚLIŁ propozycję RPO jako "DE FACTO
+    zwiększenie limitu dopuszczalnej prędkości o 10 km/h" —
+    POKAZUJE realny, POLITYCZNY spór, NIE tylko techniczny
+  → RPO NADAL nie odpuszcza sprawy (kolejne pismo w 2025 r.) —
+    TEMAT POZOSTAJE OTWARTY, SPRAWDŹ AKTUALNY STAN przed poradą w
+    konkretnej sprawie, bo MOŻE się zmienić
+
+JEDYNA DROGA OBRONY DLA KIEROWCY W POLSCE: ODMOWA PRZYJĘCIA mandatu
+  → sprawa TRAFIA do SĄDU → DOPIERO w postępowaniu dowodowym MOŻNA
+  próbować dowieść błędu pomiaru — MANDAT PRZYJĘTY na miejscu NIE
+  DAJE możliwości późniejszego kwestionowania samej WARTOŚCI pomiaru
+  (w przeciwieństwie do wad FORMALNYCH, patrz sekcje wyżej)
+
+⭐ STRATEGIA KWESTIONOWANIA POMIARU W SĄDZIE — kluczowe elementy do
+  sprawdzenia:
+  1) LEGALIZACJA URZĄDZENIA: czy fotoradar/radar MIAŁ WAŻNĄ
+     legalizację (świadectwo prawnej kontroli metrologicznej, GUM —
+     art. 8a Prawo o miarach) W MOMENCIE pomiaru — ⭐⭐ UDOKUMENTOWANY,
+     REALNY PRECEDENS: Sąd Rejonowy dla Łodzi-Śródmieścia UNIEWINNIŁ
+     kierowcę (pomiar 83 km/h w terenie zabudowanym), gdy biegły
+     wykazał, że fotoradar STRACIŁ polską legalizację PO
+     AKTUALIZACJI OPROGRAMOWANIA przez producenta (czeska firma
+     Ramet) — sąd uniewinnił NIE dlatego, że uznał brak przekroczenia,
+     TYLKO dlatego, że OSKARŻENIE nie mogło UDOWODNIĆ miarodajności
+     pomiaru — ⭐ CIĘŻAR DOWODU miarodajności pomiaru SPOCZYWA na
+     oskarżycielu, nie na kierowcy
+  2) ZDJĘCIE Z FOTORADARU: czy widoczny jest TYLKO jeden pojazd
+     (kwestia identyfikacji — na zdjęciu z INNYMI pojazdami wynik
+     MOŻE nie dotyczyć wyłącznie kontrolowanego auta)
+  3) CZYTELNOŚĆ TABLIC REJESTRACYJNYCH na zdjęciu — wątpliwości co
+     do identyfikacji pojazdu
+  4) KĄT POMIARU: pomiar wykonany pod kątem INNYM niż 0 stopni MOŻE
+     zwiększać błąd — kwestia podnoszona w oficjalnej interpelacji
+     poselskiej (nr 14216)
+  5) FOTORADARY KASKADOWE: kilka urządzeń radarowych na krótkim
+     odcinku, działających w TYM SAMYM PAŚMIE, MOGĄ się wzajemnie
+     ZAKŁÓCAĆ — kwestia SPORNA, podnoszona przez kierowców, BEZ
+     jednoznacznego rozstrzygnięcia w źródłach
+  6) ŚWIADKOWIE: pasażerowie/inni świadkowie mogący potwierdzić
+     prędkość jazdy
+
+RECYDYWA: kolejne przekroczenie prędkości W CIĄGU 2 LAT PODWAJA
+  mandaty i MOŻE skutkować ZATRZYMANIEM prawa jazdy (kontekst:
+  reforma z 2022 r., wzmocniona zmianami wchodzącymi 03.06.2026 —
+  ZNIESIENIE możliwości kasowania punktów karnych za przekroczenie
+  prędkości poprzez kursy, oraz 15 PUNKTÓW od razu za przekroczenie
+  o 51 km/h powyżej limitu)
+
+Potwierdzone w 10+ zgodnych, aktualnych źródeł, w tym BEZPOŚREDNIO
+bip.brpo.gov.pl (Rząd 1 — oficjalna korespondencja RPO-MSWiA,
+zaktualizowana do 2025 r.), rp.pl [aktualizacja 15.05.2026],
+prawo.pl [x2], infor.pl, portalsamorzadowy.pl [maj 2025],
+tvn24.pl, otomoto.pl [x2], prawodrogowe.pl, poleasingowe.pl [1
+miesiąc temu], blog.magdalenaslowik.pl, spidersweb.pl.
+```
+
 ## GRANICA WYKROCZENIE / PRZESTĘPSTWO — KRYTYCZNE
 ```
 Kradzież (i przywłaszczenie):

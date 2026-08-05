@@ -1,6 +1,6 @@
 ---
 name: dr-01-ustroj-konstytucyjny-i-zrodla-prawa
-version: 3.4
+version: 3.5
 description: |
   DR-01: Ustrój Konstytucyjny i Źródła Prawa
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.

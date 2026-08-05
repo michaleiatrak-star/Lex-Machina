@@ -29206,3 +29206,580 @@ v3.17→v3.18.
 |---|---|
 | Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 75 |
 | Flagi otwarte | **0** |
+
+## AUDYT-2026-08-04l — FAZA 3E: 3 kolejne moduły analizator-dowodow-v3 potwierdzone
+
+**MD1-klasyfikacja.md — potwierdzony w pełni.** Skala mocy dowodowej
+(A-D) — zgodna. Zweryfikowano art. 129 §3 KPC (poświadczenie kopii
+przez pełnomocnika-adwokata/radcę = charakter dokumentu urzędowego,
+równoważny oryginałowi) — potwierdzone jednogłośnie w 10+
+niezależnych źródłach, w tym dosłowny tekst przepisu (lexlege.pl,
+arslege.pl, przepisy.gofin.pl) oraz orzecznictwo (SO Warszawa XXIII
+Ga 1454/18).
+
+**MD3a-walidacja-formalna.md, MP4-moc-slabosci.md** — sprawdzone,
+zgodne z resztą systemu (art. 129 §1 KPC oryginał vs kopia
+niepoświadczona, art. 256 KPC tłumaczenie przysięgłe).
+
+### BILANS CAŁOŚCIOWY (mianownik: 721 plików .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 91 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-08-04m — Nowy moduł: lincz, ochrona świadków/statusy więźniów, zmowa milczenia, łowcy pedofili
+
+**Kontekst:** Na żądanie użytkownika — cztery powiązane tematy:
+lincz, ochrona osoby szczególnie niebezpiecznej, zmowa milczenia,
+łowcy pedofili i ryzyko przekraczania przez nich prawa.
+
+**Potwierdzona pełna, wcześniejsza nieobecność** wszystkich czterech
+tematów w systemie — zero wyników wyszukiwania przed tą transzą.
+
+### DODANE: lincz — odpowiedzialność zbiorowa (art. 158-159 KK)
+
+Zweryfikowano w 6+ zgodnych źródłach: brak pojęcia "lincz" wprost w
+polskim prawie, najbliższy odpowiednik to bójka/pobicie z ZASADĄ
+ODPOWIEDZIALNOŚCI ZBIOROWEJ — nie trzeba ustalać kto zadał decydujący
+cios. Drabina kar do 2-15 lat za śmierć (po nowelizacji z 7.07.2022).
+Mechanizm "eksces" (odstępstwo jednego uczestnika) i zasada, że
+przyłączenie się do trwającej bójki wyklucza obronę konieczną.
+
+### DODANE: statusy więźniów — WAŻNE rozróżnienie odpowiadające
+wprost na pytanie użytkownika
+
+Ustalono i wyjaśniono ZASADNICZĄ różnicę między statusem "N"
+(niebezpieczny DLA innych, izolacja, czerwony strój, ok. 150 osób w
+Polsce, z historią reform po wyrokach ETPC Piechowicz/Horych 2012) a
+statusem "szczególnie chroniony" (osoba, KTÓREJ zagraża
+niebezpieczeństwo w związku ze współpracą z wymiarem
+sprawiedliwości jako świadek/pokrzywdzony, decyzja dyrektora, od
+26.03.2011). Odnotowano problem praktyczny z badań naukowych 2014-2017:
+warunki obu statusów bywają PODOBNE mimo przeciwstawnego uzasadnienia.
+
+### DODANE: zmowa milczenia — granica z art. 233 KK
+
+Kluczowe rozróżnienie: SAMO milczenie/odmowa zeznań TO NIE
+przestępstwo (tylko kary porządkowe) — przestępstwem jest wyłącznie
+AKTYWNE kłamstwo lub zatajenie PRZY faktycznym zeznawaniu. Dodano
+ograniczenie z uchwały SN I KZP 5/21 (świadek broniący siebie może
+kłamać, jeśli nie pomawia innych).
+
+### DODANE: łowcy pedofili — jawnie oznaczony SPÓR doktrynalny
+
+Zweryfikowano w 8+ źródłach akademickich/instytucjonalnych, w tym
+formalne stanowisko RPO (interwencja u KGP) i JAWNĄ polemikę
+naukową w czasopiśmie "Palestra" (2022). Przedstawiono OBIE strony
+sporu: (a) część doktryny argumentuje, że "złowiony" może NIE
+popełniać przestępstwa (przygotowanie nieudolne niekaralne z art.
+16 §2 KK), (b) katalog RYZYK dla samych "łowców" (nielegalna
+prowokacja, bezprawne pozbawienie wolności, znieważenie
+kwalifikowane, teoretyczne ryzyko z art. 151 KK przy samobójstwie
+"złowionego"). Jednoznacznie ustalone (NIE sporne): zakaz
+upubliczniania wizerunku osoby nieskazanej prawomocnie — z
+odnotowaniem realnego ryzyka SAMOSĄDU jako głównego argumentu
+przeciw tej praktyce.
+
+**Rejestracja (Reguła 2):** nowy moduł `mod-lincz-ochrona-swiadkow-
+lowcy-pedofili.md`, dodano do SKILL.md (54→55 modułów). dr-03
+v3.22→v3.23.
+
+### BILANS CAŁOŚCIOWY (mianownik: 721+1=722 plików .md, po dodaniu nowego modułu)
+
+| Kategoria | Wynik |
+|---|---|
+| Nowe moduły utworzone (cała sesja) | 7 |
+| Rozbudowy/aktualizacje treściowe na żądanie | 76 |
+| Flagi otwarte | **0** (spór doktrynalny łowców pedofili — jawnie oznaczony jako spór, nie flaga formalna) |
+
+## AUDYT-2026-08-04n — Ułaskawienie/prawo łaski prezydenta — z realnym sporem konstytucyjnym
+
+**Kontekst:** Na żądanie użytkownika — temat ułaskawienia, w
+szczególności prawa łaski prezydenta.
+
+**Ustalenie wstępne:** genuine luka — tylko jedna wzmianka w
+katalogu prerogatyw prezydenckich (art. 139 Konstytucji), bez
+żadnej treści proceduralnej.
+
+**DODANE: pełna procedura + kluczowy spór konstytucyjny.**
+Zweryfikowano w 8+ zgodnych źródłach, w tym dosłowny tekst KPK: dwa
+odrębne tryby — (A) "kodeksowy" (art. 560-568 KPK, wymaga opinii
+sądów, katalog ZAMKNIĘTY uprawnionych do wniesienia prośby —
+skazany/obrońca/krewni w linii prostej/rodzeństwo/małżonek NIE
+były/konkubent — negatywna opinia BLOKUJE dalszy bieg), (B) "tryb
+prezydencki" (art. 567 KPK, Prokurator Generalny może przedstawić
+akta Prezydentowi BEZ opinii sądu, na polecenie Prezydenta).
+Decyzja Prezydenta OSTATECZNA, bez kontroli sądowej. Opłata: pierwsza
+prośba bezpłatna, kolejne 45 zł.
+
+**⭐⭐ Dodano NAJWAŻNIEJSZY, aktywny spór konstytucyjny —
+"ułaskawienie abolicyjne":** czy Prezydent może ułaskawić PRZED
+prawomocnym wyrokiem? Przeważający pogląd (potwierdzony uchwałą 7
+sędziów SN z 2017 r.): NIE. MIMO TO — realny, głośny precedens
+sporny: ułaskawienie byłych szefów CBA (Kamiński/Wąsik) w 2015 r.
+PRZED prawomocnym wyrokiem, z powrotem sprawy w 2024 r. i
+kontrowersją prawną co do zastosowania art. 568 KPK. Jednoznacznie
+zaznaczono: temat POZOSTAJE aktywnie sporny politycznie i prawniczo,
+NIE jednoznacznie rozstrzygnięty mimo przeważającego poglądu
+doktryny.
+
+**Rejestracja:** dr-01-ustroj-konstytucyjny-i-zrodla-prawa SKILL.md
+v3.4→v3.5.
+
+### BILANS CAŁOŚCIOWY (mianownik: 722 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 77 |
+| Flagi otwarte | **0** (spór o ułaskawienie abolicyjne — jawnie oznaczony jako aktywna kontrowersja, nie flaga formalna) |
+
+## AUDYT-2026-08-04o — Przestępczość zorganizowana pod przykrywką legalnego biznesu (LBS)
+
+**Kontekst:** Na żądanie użytkownika — przestępczość zorganizowana i
+działania takich grup pod przykrywką.
+
+**Ustalenie wstępne:** rdzeń przepisu (art. 258 KK, DRZEWO H.1) był
+JUŻ bardzo dobrze opracowany z WCZEŚNIEJSZEJ tury tej samej sesji
+(15.07.2026, po znalezieniu go całkowicie nieobecnym) — pełna
+drabina kar §1-4, integracja z karuzelami VAT. GENUINE luka: brak
+treści o mechanizmie "przykrywki" (firmy-fasady) — zero wystąpień
+słowa w całym systemie.
+
+**DODANE: mechanizm LBS (Legal Business Structures).** Zweryfikowano
+w 6+ zgodnych źródłach, w tym aktualną analizę unijną z danymi
+Europolu (infosecurity24.pl, styczeń 2025): kluczowa zasada —
+legalna rejestracja NIE daje immunitetu, decyduje rzeczywisty cel.
+Sieć wielu spółek ze słupami w zarządzie (POWIĄZANO z istniejącym
+mod-KK-slupy), rejestrowane w ~80 krajach (70% wyłącznie w UE).
+Nieruchomości jako najpopularniejsza lokata prania (41% najgroźniejszych
+sieci UE). Dwa tryby infiltracji: systematyczna (strukturalna
+konieczność, np. oszustwa MTIC) vs sporadyczna (elastyczne
+wykorzystanie). Konkretne przykłady branżowe (firmy transportowe →
+przemyt, zakłady chemiczne → produkcja narkotyków). Potwierdzona
+kluczowa zasada: wystarczy zawiązanie struktury dla JEDNEGO czynu
+karalnego — grupa nie musi planować wielu przestępstw.
+
+**Rejestracja:** dr-03-prawo-karne-wykroczenia-egzekucja SKILL.md
+v3.23→v3.24.
+
+### BILANS CAŁOŚCIOWY (mianownik: 722 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 78 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-08-04p — Nowy moduł: przeróbki pojazdów (hulajnogi, przyciemnianie szyb, pojazdy SAM)
+
+**Kontekst:** Na żądanie użytkownika — przeróbki pojazdów,
+dopuszczalne modyfikacje, zmiana klasy pojazdu, w tym: hulajnogi
+elektryczne po odblokowaniu, przyciemnianie szyb, pojazdy własnej
+konstrukcji.
+
+**Potwierdzona wcześniejsza nieobecność** wszystkich trzech
+podtematów w systemie (tylko przelotna wzmianka o wieku/kaskach
+hulajnóg).
+
+### DODANE: odblokowanie hulajnóg — bardzo świeży, aktywny proces
+legislacyjny
+
+Zweryfikowano w 6+ zgodnych, aktualnych źródłach z lipca 2026:
+obowiązujące od 2021 limity (20/25 km/h) już prawo; PROJEKT ustawy
+MI (lipiec 2026) wprowadzający kary administracyjne dla
+sprzedawców/importerów, nadzór TDT nad rynkiem, uprawnienia Straży
+Miejskiej do kontroli mocy. ⚠️ ODRZUCONO jedno źródło z
+radykalnie odmiennymi danymi (wiek 18 lat, konfiskata 30 dni) jako
+NIEWIARYGODNE dla kontekstu polskiego (prawdopodobnie dotyczące
+innego kraju) — świadomie NIE uwzględniono w treści.
+
+### DODANE: przyciemnianie szyb — progi VLT
+
+Zweryfikowano w 9+ zgodnych źródłach, w tym Policję (Rząd 1): 75%
+szyba czołowa, 70% przednie boczne, brak ograniczeń dla tylnych.
+Odnotowano UCZCIWIE rozbieżność w wysokości mandatu (główny zakres
+20-500 zł potwierdzony wielokrotnie, jedno odosobnione źródło
+podaje do 3000 zł) — NIE rozstrzygnięto arbitralnie, zalecono
+dodatkową weryfikację w konkretnej sprawie.
+
+### DODANE: pojazdy własnej konstrukcji ("marka SAM")
+
+Zweryfikowano w 6+ źródłach, w tym bezpośrednio biznes.gov.pl (Rząd
+1): dwie odrębne procedury — świadectwo indywidualnego dopuszczenia
+(TDT, termin 1-2 miesiące, odwołanie 14 dni, koszt 1600 zł) oraz
+nadanie cechy identyfikacyjnej VIN (starosta, wymaga oświadczenia o
+statusie "SAM"). Odnotowano praktyczną trudność proceduralną mimo
+formalnej dopuszczalności takich pojazdów.
+
+**Rejestracja (Reguła 2):** nowy moduł `mod-przerobki-modyfikacje-
+pojazdow.md`, dodano do SKILL.md (55→56 modułów). dr-03
+v3.24→v3.25.
+
+### BILANS CAŁOŚCIOWY (mianownik: 722+1=723 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Nowe moduły utworzone (cała sesja) | 8 |
+| Rozbudowy/aktualizacje treściowe na żądanie | 79 |
+| Flagi otwarte | **0** (rozbieżność mandatu za szyby i status projektu ustawy hulajnóg — jawnie oznaczone, nie flagi formalne) |
+
+## AUDYT-2026-08-04q — Analogiczne przypadki dla innych typów pojazdów: motocykle (A2), tachografy ciężarówek
+
+**Kontekst:** Na żądanie użytkownika — analogiczne przypadki
+przeróbek dla innych typów pojazdów.
+
+### DODANE: motocykle — dławienie/odkorkowanie na kategorię A2
+
+Zweryfikowano w 7+ zgodnych źródłach branżowych: limit A2 (35 kW,
+stosunek mocy do masy max 0,2 kW/kg). ⭐ KLUCZOWA, precyzyjna zasada
+"podwójnej mocy" — motocykla NIE MOŻNA zdławić do A2, jeśli
+oryginalna moc PRZEKRACZA 70 kW (2× limit) — prawo zakazuje takiej
+rejestracji NIEZALEŻNIE od możliwości technicznej. Odnotowano
+udokumentowany historyczny proceder nielegalnych rejestracji po
+2013 r. oraz najczęstszy praktyczny problem: legalnie zablokowany
+motocykl odblokowywany przez właściciela po kilku dniach. Kluczowa
+konsekwencja: REGRES UBEZPIECZENIOWY sięgający SETEK TYSIĘCY ZŁOTYCH
+przy kolizji, potwierdzony realnym przypadkiem sądowym z maja 2025.
+
+### DODANE: tachografy ciężarówek — manipulacja ("jazda na magnesie")
+
+Zweryfikowano w 8+ zgodnych źródłach, w tym BEZPOŚREDNIO gov.pl/GITD
+(Rząd 1): kluczowa zasada unijna — SAMA OBECNOŚĆ urządzenia do
+manipulacji (nawet nieużywanego) wystarcza do kary. Pełna,
+zaktualizowana drabina kar polskich: 10 000 zł przewoźnik (z 6000
+zł), do 15 000 zł koszt przymusowego serwisu, 2 000 zł osoba
+zarządzająca transportem — łącznie blisko 25 000 zł za incydent.
+NAJPOWAŻNIEJSZA konsekwencja: kwalifikacja jako "najpoważniejsze
+naruszenie" w procedurze oceny dobrej reputacji, mogąca prowadzić do
+UTRATY LICENCJI transportowej. Potwierdzono ODPOWIEDZIALNOŚĆ KARNĄ
+(nie tylko administracyjną) realnym przypadkiem z Polski (2026,
+Wałbrzych, droga S3) oraz danymi operacyjnymi GITD (189 000 zł
+zagrożonych kar w jednej akcji kontrolnej).
+
+**Rejestracja:** moduł zaktualizowany do v1.1.0, dr-03 SKILL.md
+v3.25→v3.26.
+
+### BILANS CAŁOŚCIOWY (mianownik: 723 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 81 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-08-04r — Mandat wypisany nieczytelnie: sąd ocenia legalność, nie estetykę
+
+**Kontekst:** Na żądanie użytkownika — kwestia mandatu wypisanego
+nieczytelnie.
+
+**DODANE do prawny-router-v3/wykroczenia.md** (moduł już wcześniej
+tego dnia naprawiony ws. pułapu 2500/5000 zł — kolejna, tym razem
+DODATKOWA, nie naprawcza edycja tego samego pliku). Zweryfikowano w
+6+ zgodnych źródłach, w tym najdokładniejsze — twojemoto.pl z marca
+2026 r., adresujące dokładnie to pytanie:
+
+**⭐⭐ KLUCZOWA ZASADA: sąd NIE ocenia "estetyki" mandatu, tylko
+LEGALNOŚĆ jego nałożenia.** Rozróżniono dwie kategorie: (A) błędy
+"kosmetyczne" (pismo trudne, ale MOŻLIWE do odcyfrowania) — NIE
+stanowią podstawy uchylenia; (B) poważna wada formalna — GDY
+nieczytelność UNIEMOŻLIWIA ustalenie istotnych elementów (opis
+czynu, podstawa prawna, wysokość grzywny, PODPIS funkcjonariusza w
+ogóle). Dodano praktyczny TEST sądowy (czy da się jednoznacznie
+ustalić kto/za co/na jakiej podstawie/w jakiej wysokości) oraz
+KLUCZOWĄ rekomendację praktyczną: moment KRYTYCZNY to PRZED
+podpisaniem (można ODMÓWIĆ przyjęcia nieczytelnego mandatu na
+miejscu, kierując sprawę do pełnego badania przez sąd) — PO
+podpisaniu trzeba wykazywać POWAŻNĄ wadę formalną, nie tylko
+niedogodność.
+
+**Rejestracja:** prawny-router-v3 SKILL.md v3.18→v3.19.
+
+### BILANS CAŁOŚCIOWY (mianownik: 723 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 82 |
+| Flagi otwarte | **0** |
+
+## AUDYT-2026-08-04s — Problemy z pomiarem prędkości: dokładne zbadanie, aktywny spór RPO-MSWiA nadal nierozstrzygnięty
+
+**Kontekst:** Na żądanie użytkownika — dokładne zbadanie problemów z
+pomiarem prędkości.
+
+**Potwierdzona wcześniejsza pełna nieobecność** tematu w systemie
+(tylko przypadkowa wzmianka w kontekście podatkowym).
+
+**DODANE do prawny-router-v3/wykroczenia.md, kompleksowa sekcja
+zweryfikowana w 10+ zgodnych, aktualnych źródłach, w tym
+BEZPOŚREDNIO bip.brpo.gov.pl (Rząd 1):**
+
+⭐ Fundamentalne ustalenie: w Polsce NIE MA prawnej tolerancji na
+przekroczenie prędkości (art. 92a §1 KW, bez progu minimalnego) — w
+przeciwieństwie do Francji/Niemiec, gdzie techniczny margines błędu
+JEST automatycznie odejmowany na korzyść kierowcy. W Polsce istnieje
+TYLKO techniczny błąd pomiarowy (3 km/h lasery, 5 km/h radary
+stacjonarne, do 7-10 km/h urządzenia mobilne), NIE odejmowany
+automatycznie. Jedyny "praktyczny" próg: fotoradary/OPP nie
+aktywują się poniżej 10 km/h przekroczenia — ale to próg
+OPERACYJNY systemu, nie prawo, i NIE dotyczy policjanta z ręcznym
+radarem.
+
+⭐⭐ Udokumentowany, aktywny spór instytucjonalny (2023-2025, nadal
+NIEROZSTRZYGNIĘTY na dzień weryfikacji): RPO wielokrotnie (2023, ponownie
+08.05.2025) domagał się zasady "pomiaru przyjętego" (jak we Francji)
+— MSWiA ODMÓWIŁO, powołując się na spadek liczby zabitych po
+zaostrzeniu przepisów w 2022 r. Wiceminister określił propozycję RPO
+jako "de facto zwiększenie limitu o 10 km/h" — pokazuje to REALNY
+spór polityczny, nie tylko techniczny.
+
+Dodano realny, udokumentowany precedens sądowy: Sąd Rejonowy dla
+Łodzi-Śródmieścia uniewinnił kierowcę, gdy biegły wykazał utratę
+polskiej legalizacji fotoradaru PO aktualizacji oprogramowania przez
+producenta (czeska firma Ramet) — z kluczowym wnioskiem: ciężar
+dowodu miarodajności pomiaru spoczywa na oskarżycielu, nie na
+kierowcy. Dodano pełną strategię kwestionowania pomiaru w sądzie (6
+elementów: legalizacja, zdjęcie, tablice, kąt pomiaru, fotoradary
+kaskadowe, świadkowie) oraz jedyną dostępną drogę: odmowa przyjęcia
+mandatu na miejscu (mandat przyjęty NIE daje możliwości późniejszego
+kwestionowania samej wartości pomiaru).
+
+**Rejestracja:** prawny-router-v3 SKILL.md v3.19→v3.20.
+
+### BILANS CAŁOŚCIOWY (mianownik: 723 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 83 |
+| Flagi otwarte | **0** (aktywny spór RPO-MSWiA jawnie oznaczony jako otwarty, nie flaga formalna) |
+
+## AUDYT-2026-08-04s — Utworzono system flag: FLAGI-OTWARTE.md dla śledzenia projektów ustaw w toku
+
+**Kontekst:** Na żądanie użytkownika — oznaczenie jako flagę w
+systemie audytu projektu ustawy o odblokowaniu hulajnóg (Ministerstwo
+Infrastruktury), która na dzień weryfikacji (04.08.2026) jest NADAL
+projektem, nie obowiązującym prawem.
+
+**Ustalenie:** system NIE MIAŁ dotąd dedykowanego, scentralizowanego
+mechanizmu śledzenia projektów ustaw w toku — wcześniejsze podejście
+(np. DEF-PRACA.md dla reformy mobbingu) było AD HOC, punktowe w
+danym pliku, bez centralnego rejestru.
+
+**UTWORZONO nowy plik `audyt-systemu-v4/references/FLAGI-OTWARTE.md`**
+— centralny rejestr projektów ustaw wymagających ponownej
+weryfikacji statusu przy KAŻDYM następnym użyciu. Wzorzec
+uzasadniony PRZYWOŁANIEM potwierdzonego sukcesu tego podejścia:
+DEF-PRACA.md poprawnie śledził reformę mobbingu jako "projekt" —
+04.08.2026 potwierdzono, że projekt FAKTYCZNIE stał się ustawą
+(podpisaną 30.07.2026) — DOWÓD wartości praktycznej tego mechanizmu.
+
+**FLAGA-01 (pierwszy wpis):** projekt ustawy MI ws. odblokowania
+hulajnóg/rowerów elektrycznych — pełna treść skopiowana z modułu
+docelowego, z jednoznaczną instrukcją web_search na przyszłość oraz
+trzema możliwymi scenariuszami przy następnej weryfikacji (stał się
+ustawą / nadal projekt / upadł), z odpowiednią procedurą dla
+każdego. DODANO odesłanie ZWROTNE w module źródłowym
+(`mod-przerobki-modyfikacje-pojazdow.md`) do tej flagi, dla pełnej
+spójności dwukierunkowej.
+
+**Rejestracja:** dr-03-prawo-karne-wykroczenia-egzekucja SKILL.md
+v3.26→v3.27. Nowy plik FLAGI-OTWARTE.md w audyt-systemu-v4.
+
+### WNIOSEK METODOLOGICZNY
+
+Ten mechanizm POWINIEN być używany PROSPEKTYWNIE dla wszystkich
+PRZYSZŁYCH znalezisk dot. projektów ustaw w toku (nie tylko
+retroaktywnie dla hulajnóg) — DAJE systemowi jedno, centralne
+miejsce do przeglądu "co jeszcze czeka na potwierdzenie", zamiast
+rozproszonych, punktowych wzmianek w poszczególnych modułach.
+
+### BILANS CAŁOŚCIOWY (mianownik: 723+1=724 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Nowe pliki infrastrukturalne utworzone | 1 (FLAGI-OTWARTE.md) |
+| Flagi otwarte, formalnie zarejestrowane | **1** (FLAGA-01 — hulajnogi) |
+
+## AUDYT-2026-08-04t — WŁASNY BŁĄD ZNALEZIONY I NAPRAWIONY: zduplikowany rejestr flag (użytkownik trafnie zauważył)
+
+**Kontekst:** Użytkownik zapytał: "czy flagi otwarte nie są
+bezpośrednio obecne w audycie systemu i tam powinny być dodane?" —
+PYTANIE TRAFNE, wskazujące na mój błąd z poprzedniej transzy.
+
+**Błąd:** w poprzedniej turze UTWORZYŁEM nowy plik
+`audyt-systemu-v4/references/FLAGI-OTWARTE.md` jako rzekomo
+"brakujący" mechanizm śledzenia flag — BEZ uprzedniego sprawdzenia,
+czy taki mechanizm JUŻ ISTNIEJE. Sprawdzenie SKILL.md ujawniło: TAK,
+ISTNIEJE — `references/WARN-OTWARTE.md`, WYRAŹNIE opisany w samym
+SKILL.md jako "rejestr żywy TYLKO otwartych flag (WARN + strukturalne)
+— dodane 2026-07-07, ZASADA 10", z ustaloną konwencją numeracji
+(WARN-N / F-N), formatem tabeli (7 kolumn: Flaga/Skill/Priorytet/
+Otwarta od/Opis/Wymaga), i JASNĄ zasadą podziału ról względem
+AUDIT-JOURNAL.md (WARN-OTWARTE = TYLKO otwarte "TODO", AUDIT-JOURNAL
+= pełna chronologiczna historia).
+
+**NAPRAWIONO:**
+1. Dodano F-14 (projekt ustawy MI ws. odblokowania hulajnóg) do
+   WŁAŚCIWEGO pliku `WARN-OTWARTE.md`, W USTALONYM FORMACIE tabeli,
+   zgodnie z konwencją (ostatnia flaga była F-13, więc F-14 jest
+   poprawnym kolejnym numerem)
+2. USUNIĘTO zduplikowany plik `FLAGI-OTWARTE.md`
+3. NAPRAWIONO odesłanie w module źródłowym (`mod-przerobki-
+   modyfikacje-pojazdow.md`) — teraz wskazuje na WARN-OTWARTE.md z
+   konkretnym numerem flagi (F-14), zamiast na usunięty plik
+
+**Rejestracja:** brak zmiany numerów wersji SKILL.md (edycja
+referencyjna, nie treść merytoryczna modułu DR).
+
+### WNIOSEK METODOLOGICZNY
+
+PRZED utworzeniem JAKIEGOKOLWIEK nowego pliku infrastrukturalnego w
+`audyt-systemu-v4` (nie tylko modułu domenowego DR) — ZAWSZE
+sprawdzić NAJPIERW pełną listę `references:`/`modules:` w nagłówku
+YAML samego `SKILL.md` tego skilla. Ta sama zasada "sprawdź, zanim
+zbudujesz nowe", którą stosowałem konsekwentnie dla modułów
+domenowych (np. przy module o cudzoziemcach/sygnalistach — świadoma
+kontrola przed utworzeniem), TYM RAZEM pominięto dla WŁASNEJ
+infrastruktury audytowej. Użytkownik SŁUSZNIE to wychwycił.
+
+### BILANS CAŁOŚCIOWY (mianownik: 724-1=723 pliki .md, po usunięciu
+zduplikowanego pliku)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów WŁASNYCH w tej sesji znalezionych i naprawionych | 8 |
+| Flagi otwarte, formalnie zarejestrowane (WŁAŚCIWY plik) | F-4, F-5, F-8 do F-14 (9 łącznie) |
+
+## AUDYT-2026-08-04u — Nowy moduł: pies na drodze rowerowej (art. 431 KC + zasady C-13/C-16) + flaga F-15 poprawnie zarejestrowana
+
+**Kontekst:** Na żądanie użytkownika — pies wskakujący na drogę
+rowerową i powodujący kolizję, sytuacja gdy pasy pieszy/rowerowy są
+obok siebie, kwestia dystansu/smyczy.
+
+**Potwierdzona wcześniejsza nieobecność** wszystkich trzech aspektów
+w systemie.
+
+### DODANE: odpowiedzialność cywilna właściciela psa (art. 431 KC)
+
+Zweryfikowano w 6+ zgodnych źródłach, w tym REALNY, udokumentowany
+przypadek ugody (pies z ogródka restauracyjnego wbiegł pod koła
+rowerzystki). Kluczowe ustalenie ODPOWIADAJĄCE WPROST na pytanie
+użytkownika o smycz: odpowiedzialność WŁAŚCICIELA istnieje
+NIEZALEŻNIE od tego, czy pies był na smyczy i się zerwał, CZY w
+ogóle bez smyczy uciekł/zabłąkał się — ustawa WPROST wymienia obie
+sytuacje jako NIE wyłączające odpowiedzialności. Mechanizm to
+domniemanie winy w nadzorze (odwrócony ciężar dowodu), nie czysta
+zasada ryzyka. Dodano praktyczną ścieżkę dochodzenia roszczeń
+(zgłoszenie do straży miejskiej, czipowanie jako narzędzie
+identyfikacji, ugoda/pozew).
+
+### DODANE: przyczynienie się rowerzysty (art. 362 KC) — odpowiedź
+na pytanie o "dystans"
+
+Ustalono: brak sztywnej, ustawowej wartości procentowej/metrowej —
+każdy przypadek oceniany indywidualnie wg czynników (prędkość
+dostosowana do warunków, realna możliwość reakcji, odległość
+pojawienia się psa). Przyczynienie PROPORCJONALNIE zmniejsza
+odszkodowanie, NIE wyłącza odpowiedzialności całkowicie.
+
+### DODANE: ciągi pieszo-rowerowe C-13/C-16 — odpowiedź na pytanie
+o "oba pasy obok siebie"
+
+Zweryfikowano w 8+ zgodnych źródłach, w tym z BEZPOŚREDNIĄ
+wypowiedzią rzecznika policji (Sopot) potwierdzającą zasadę:
+przy PODZIALE POZIOMYM (wspólna powierzchnia) pieszy ma ZAWSZE
+pierwszeństwo. Przy PODZIALE PIONOWYM (dokładnie sytuacja "pasy obok
+siebie" z pytania użytkownika): ruch odbywa się po wyznaczonych
+stronach, z JEDNOZNACZNIE potwierdzonym obowiązkiem ustępowania
+PRZEZ PIESZEGO rowerzyście PRZY PRZEKRACZANIU pasa rowerowego
+prostopadle.
+
+**⚠️ ZNALEZIONA I POPRAWNIE ZAREJESTROWANA ROZBIEŻNOŚĆ (F-15):**
+źródła NIE ZGADZAJĄ SIĘ co do pierwszeństwa W OBRĘBIE własnego
+wyznaczonego pasa (nie przy przekraczaniu) — jedno źródło sugeruje
+ogólną nadrzędność pieszego nawet tam, inne opisuje "każdy trzyma
+się swojej strony" bez dodatkowego obowiązku. NIE ROZSTRZYGNIĘTO
+arbitralnie — dodano jako FLAGĘ F-15 do WŁAŚCIWEGO rejestru
+(WARN-OTWARTE.md), z zastosowaniem LEKCJI z poprzedniej transzy
+(sprawdzono NAJPIERW istniejący mechanizm, zamiast tworzyć nowy).
+
+**Rejestracja (Reguła 2):** nowy moduł `mod-pies-droga-rowerowa-
+odpowiedzialnosc.md`, dodano do SKILL.md dr-02 (31→32 moduły). dr-02
+v3.18→v3.19. Flaga F-15 dodana do WARN-OTWARTE.md w prawidłowym
+formacie.
+
+### BILANS CAŁOŚCIOWY (mianownik: 723+1=724 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Nowe moduły utworzone (cała sesja) | 9 |
+| Flagi otwarte, formalnie zarejestrowane (WŁAŚCIWY plik) | 10 (F-4, F-5, F-8 do F-15) |
+
+## AUDYT-2026-08-04v — F-15 ZAMKNIĘTA: rozbieżność źródeł rozstrzygnięta dosłownym tekstem przepisu
+
+**Kontekst:** Na żądanie użytkownika — zbadanie rozbieżności źródeł
+oznaczonej jako flaga F-15 (pierwszeństwo w obrębie własnego pasa
+przy podziale pionowym C-13/C-16) i ustalenie faktycznego stanu
+prawnego.
+
+**ROZSTRZYGNIĘTE poprzez sięgnięcie do ŹRÓDŁA PIERWOTNEGO** (dosłowny
+tekst rozporządzenia ws. znaków i sygnałów drogowych, Dz.U.2019.0.2310
+t.j., potwierdzone bezpośrednio przez arslege.pl) zamiast wtórnych,
+niespójnych interpretacji dziennikarskich/branżowych, które
+wywołały rozbieżność.
+
+**KLUCZOWE ustalenie:** przepis (ust. 2 dot. znaków nakazu) WPROST
+stanowi, że podział pionowy oznacza "drogę dla rowerów I drogę dla
+pieszych POŁOŻONE OBOK SIEBIE" — czyli KAŻDA strona jest prawnie
+TRAKTOWANA jako ODRĘBNA, SAMODZIELNA droga (funkcjonalnie
+równoważna samodzielnemu znakowi C-13 lub C-16), NIE jako jeden
+wspólny obszar ze specjalnymi zasadami mieszanymi. WNIOSEK: w
+obrębie strefy rowerowej obowiązują TE SAME zasady co na
+samodzielnym C-13 (pierwszeństwo rowerzysty) — interpretacja
+"auto-swiat.pl" (każdy trzyma się swojej strony, bez dodatkowego
+obowiązku ustępowania w OBRĘBIE własnego pasa) JEST ZGODNA z
+przepisem; interpretacja sugerująca ogólną nadrzędność pieszego
+nawet w strefie rowerowej NIE ZNAJDUJE oparcia w tekście przepisu —
+PRAWDOPODOBNIE wynikała z niedokładnych odpowiedzi rzeczników
+policji cytowanych w źródłach wtórnych (sam artykuł źródłowy
+przyznawał niejednoznaczność "nawet dla służb miejskich" — czyli
+problem leżał w PRAKTYCE komunikacji urzędowej, nie w samym,
+jasnym przepisie).
+
+**Zaktualizowano moduł** (`mod-pies-droga-rowerowa-
+odpowiedzialnosc.md`, sekcja 3) z pełnym rozstrzygnięciem i
+dosłownym cytatem przepisu. **ZAMKNIĘTO flagę F-15** — usunięto
+wiersz z `WARN-OTWARTE.md` zgodnie z ustaloną zasadą podziału ról
+(zamknięcie dokumentuje się WYŁĄCZNIE tutaj, w AUDIT-JOURNAL.md).
+
+**Rejestracja:** dr-02-prawo-cywilne-rodzinne-gospodarcze SKILL.md
+v3.19→v3.20.
+
+### BILANS CAŁOŚCIOWY (mianownik: 724 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flag zamkniętych w tej sesji | 1 (F-15) |
+| Flagi otwarte, formalnie zarejestrowane (WŁAŚCIWY plik) | 9 (F-4, F-5, F-8 do F-14) |
+
+## AUDYT-2026-08-04w — FAZA 3E: 3 moduły analizator-dowodow-v3 potwierdzone
+
+**MD3a-walidacja-formalna.md — potwierdzony w pełni.** Zweryfikowano
+art. 256 KPC (żądanie tłumaczenia przysięgłego dokumentu obcojęzycznego)
+— potwierdzone jednogłośnie w 9+ niezależnych źródłach, w tym
+dosłowny tekst przepisu (lexlege.pl, arslege.pl — aktualny t.j.
+Dz.U.2026.0.468) i orzecznictwo (postanowienie SN III CZ 34/13,
+SAOS III Ca 1067/18). Potwierdzono nuans: to uprawnienie
+DYSKRECJONALNE sądu ("może", nie "musi"), moduł poprawnie skraca to
+do praktycznej wskazówki proceduralnej. Art. 129 §1 KPC (oryginał
+vs kopia niepoświadczona) — zgodny z wcześniej potwierdzonym w tej
+sesji art. 129 §3.
+
+**MP4-moc-slabosci.md, MP9-jakosc.md** — generyczne szkielety
+metodologiczne (ocena mocy dowodowej, kalibracja ryzyka halucynacji),
+bez własnych, samodzielnych progów prawnych.
+
+### BILANS CAŁOŚCIOWY (mianownik: 724 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 91 |
+| Flagi otwarte | 9 (F-4, F-5, F-8 do F-14) |

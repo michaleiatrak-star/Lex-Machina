@@ -126,6 +126,101 @@ Prerogatywy (bez kontrasygnaty — art. 144 ust. 3):
 
 ---
 
+## ⭐ UŁASKAWIENIE — PRAWO ŁASKI PREZYDENTA (dodane 2026-08-04, na
+żądanie użytkownika)
+
+```
+PODSTAWA KONSTYTUCYJNA: art. 139 Konstytucji — "Prezydent
+  Rzeczypospolitej stosuje prawo łaski. Prawa łaski NIE STOSUJE SIĘ
+  do osób skazanych przez TRYBUNAŁ STANU" (JEDYNE wyraźne
+  ograniczenie podmiotowe wprost w Konstytucji)
+
+CHARAKTER PRAWNY: ułaskawienie = CAŁKOWITE lub CZĘŚCIOWE darowanie
+  KARY wynikającej z wyroku — ⚠️ TO NIE JEST uniewinnienie — NIE
+  ZMIENIA treści wyroku, NIE PODWAŻA winy skazanego (o uniewinnieniu
+  decyduje WYŁĄCZNIE sąd, wyrokiem uniewinniającym)
+
+DECYZJA PREZYDENTA: OSTATECZNA i NIE PODLEGA żadnej kontroli (sądowej
+  ani innej) — prerogatywa osobista (art. 144 ust. 3 Konstytucji, nie
+  wymaga kontrasygnaty Premiera)
+
+DWA RÓŻNE TRYBY WSZCZĘCIA — NIE MYLIĆ:
+
+(A) TRYB "KODEKSOWY" (rozdział 59 KPK, art. 560-568) — DŁUŻSZY,
+    SFORMALIZOWANY:
+    → PODMIOTY UPRAWNIONE do wniesienia prośby (art. 560 §1 KPK,
+      katalog ZAMKNIĘTY/enumeratywny — NIKT inny nie ma uprawnienia):
+      skazany, osoba uprawniona do wnoszenia na jego korzyść środków
+      odwoławczych (obrońca, prokurator), KREWNI W LINII PROSTEJ
+      (wstępni/zstępni), RODZEŃSTWO, MAŁŻONEK (⚠️ NIE BYŁY małżonek),
+      osoba pozostająca ze skazanym WE WSPÓLNYM POŻYCIU (konkubent)
+    → PROCEDURA: wniosek SKŁADA SIĘ za pośrednictwem sądu I instancji
+      → sąd I instancji wydaje OPINIĘ → jeśli sprawa była
+      rozpoznawana w II instancji, akta idą TAKŻE do sądu odwoławczego
+      → OPINIA NEGATYWNA (od SĄDU, KTÓRY JEDYNY ORZEKAŁ, LUB gdy OBA
+      sądy — I i II instancji — wydały negatywną opinię) = wniosek
+      POZOSTAJE BEZ DALSZEGO BIEGU, NIE trafia do Prezydenta wcale
+    → Jeśli CHOĆBY JEDEN sąd zaopiniował POZYTYWNIE → Prokurator
+      Generalny PRZEDSTAWIA sprawę Prezydentowi z WŁASNYM wnioskiem
+    → PONOWNA prośba przed upływem ROKU od negatywnego załatwienia
+      POPRZEDNIEJ — sąd MOŻE pozostawić bez rozpoznania
+    → CZAS TRWANIA: co najmniej KILKA TYGODNI, ZAZWYCZAJ WIELOMIESIĘCZNE
+    → OPŁATA: PIERWSZA prośba BEZPŁATNA; KAŻDA KOLEJNA — **45 ZŁ**
+      (art. 15 ust. 1 pkt 9 ustawy o opłatach w sprawach karnych)
+
+(B) TRYB "PREZYDENCKI" / Z INICJATYWY PROKURATORA GENERALNEGO (art.
+    567 KPK) — SZYBSZY, OMIJA OPINIE SĄDÓW:
+    → Postępowanie MOŻE wszcząć Z URZĘDU Prokurator Generalny —
+      MOŻE (a) zażądać akt z opiniami sądów, ALBO (b) PRZEDSTAWIĆ
+      akta BEZPOŚREDNIO Prezydentowi BEZ ZWRACANIA SIĘ o opinię sądu
+      w ogóle
+    → Prokurator Generalny MUSI przedstawić akta Prezydentowi (lub
+      wszcząć z urzędu), gdy PREZYDENT TAK ZADECYDUJE (art. 567 §2)
+      — czyli sam Prezydent MOŻE zainicjować, pomijając sądy
+    → ⚠️ ART. 568 KPK — WSTRZYMANIE WYKONANIA KARY: sąd wydający
+      opinię ORAZ Prokurator Generalny MOGĄ wstrzymać wykonanie
+      kary/zarządzić przerwę DO CZASU zakończenia postępowania
+      ułaskawieniowego, jeśli uznają, że przemawiają za tym
+      "SZCZEGÓLNIE WAŻNE POWODY" (zwłaszcza krótki okres pozostały
+      do odbycia kary) — TO uprawnienie SĄDU/PG, NIE Prezydenta
+
+⭐⭐ NAJWAŻNIEJSZY SPÓR KONSTYTUCYJNY — "UŁASKAWIENIE ABOLICYJNE"
+  (ABOLICJA INDYWIDUALNA): czy Prezydent MOŻE ułaskawić osobę PRZED
+  PRAWOMOCNYM wyrokiem (a nawet przed rozpoczęciem/w trakcie procesu)?
+  → PRZEWAŻAJĄCY POGLĄD DOKTRYNY I ORZECZNICTWA: NIE MOŻE — prawo
+    łaski dotyczy WYŁĄCZNIE osób PRAWOMOCNIE skazanych — POTWIERDZONE
+    UCHWAŁĄ SIEDMIU SĘDZIÓW SĄDU NAJWYŻSZEGO (2017 r.)
+  → ⚠️ MIMO TO — GŁOŚNY, REALNY PRECEDENS SPORNY: Prezydent Andrzej
+    Duda w 2015 r. ułaskawił byłych szefów CBA (Mariusza Kamińskiego,
+    Macieja Wąsika) PRZED prawomocnym wyrokiem — sam określił to jako
+    "podręcznikowe ułaskawienie abolicyjne" — SPRAWA WRÓCIŁA w 2024 r.
+    (żony ułaskawionych złożyły NOWY wniosek, powołując się na art.
+    568 KPK o wstrzymanie wykonania kary — co PRAWNICY OCENILI jako
+    PROBLEMATYCZNE, bo ART. 568 dotyczy KOMPETENCJI SĄDU/PG, nie
+    Prezydenta wprost)
+  → WNIOSEK PRAKTYCZNY: TEMAT POZOSTAJE SPORNY POLITYCZNIE I
+    PRAWNICZO — traktuj jako AKTYWNĄ, nierozstrzygniętą ostatecznie
+    kontrowersję ustrojową, NIE jako jednoznacznie rozstrzygniętą
+    kwestię, mimo przeważającego poglądu doktryny przeciwnego
+    abolicji indywidualnej
+
+DODATKOWE ZASADY:
+  → Jeśli nastąpiło JUŻ ZATARCIE SKAZANIA — NIE MOŻNA ubiegać się o
+    ułaskawienie (przesłanka stała się BEZPRZEDMIOTOWA)
+  → Prezydent PRZED decyzją POWINIEN zapoznać się z pełną
+    dokumentacją (akta sądowe, treść wyroku, uzasadnienie, opinie
+    sądów, wywiad środowiskowy) — ALE brak prawnego przymusu
+    KIEROWANIA SIĘ tymi opiniami — decyzja MERYTORYCZNA należy
+    WYŁĄCZNIE do Prezydenta
+
+Potwierdzone w 8+ zgodnych źródłach, w tym dosłowny tekst KPK
+(arslege.pl, przepisy.gofin.pl), rp.pl [z odniesieniem do uchwały 7
+sędziów SN], tvn24.pl, infor.pl [x2], adwokaci-kmp.pl [marzec 2026,
+Rząd 2B], OpenLEX/sip.lex.pl.
+```
+
+---
+
 ## 4. DOWODY
 
 | Teza | Dowód | Źródło | Siła | Luka | Działanie |

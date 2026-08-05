@@ -1,6 +1,6 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: 3.18
+version: 3.19
 description: |
   DR-02: Prawo Cywilne, Rodzinne i Gospodarcze
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -68,9 +68,16 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (31 łącznie — ✓ 31 OK, ☐ 0 STUB)
+## Moduły (32 łącznie — ✓ 32 OK, ☐ 0 STUB)
 
 ```
+  [✓] NOWY  mod-pies-droga-rowerowa-odpowiedzialnosc
+              (dodany 2026-08-04, na żądanie użytkownika — art. 431
+               KC, odpowiedzialność właściciela psa za kolizję na
+               drodze rowerowej niezależnie od smyczy, przyczynienie
+               się rowerzysty, zasady pierwszeństwa C-13/C-16 —
+               patrz WARN-OTWARTE.md F-15 dla nierozstrzygniętej
+               rozbieżności źródeł co do jednego aspektu)
   [✓] NOWY  mod-ustawa-kredyt-konsumencki-SKD
               (dodany 2026-08-04, Reguła 7 audyt-systemu-v4, na wniosek
                użytkownika: Sankcja Kredytu Darmowego, art. 45 u.k.k.
