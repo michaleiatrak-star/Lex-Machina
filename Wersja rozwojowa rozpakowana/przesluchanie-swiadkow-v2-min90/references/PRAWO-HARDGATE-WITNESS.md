@@ -30,7 +30,38 @@ przepisy lub orzeczenia. Każdy obszar wymaga weryfikacji ISAP przed podaniem ar
 | Prawo do odmowy zeznań (osoba najbliższa) | art. 182 KPK | niska |
 | Prawo do odmowy odpowiedzi na pytanie | art. 183 KPK | niska |
 | Zakaz zastępowania zeznań notatkami | art. 174 KPK | niska |
-| Dowody uzyskane z naruszeniem przepisów | art. 168a KPK | wysoka (nowelizacje) |
+| Dowody uzyskane z naruszeniem przepisów | art. 168a KPK | wysoka (nowelizacje) — ✅ FLAGA POTWIERDZONA TRAFNA 2026-07-30: burzliwa historia legislacyjna w 2026 r. — patrz przypis niżej |
+
+⚡ POTWIERDZONE 2026-07-30 (na żądanie użytkownika) — FLAGA "WYSOKIE
+RYZYKO" PRZY ART. 168a OKAZAŁA SIĘ TRAFNA. Złożona historia
+legislacyjna 2026 r.:
+```
+1) Nowelizacja PRZYWRACAJĄCA surowy zakaz "owoców zatrutego drzewa"
+   (pierwotne brzmienie z 2015 r.: całkowity zakaz wykorzystania
+   dowodu uzyskanego czynem zabronionym) — UCHWALONA przez Sejm
+   27.02.2026 — miała ZASTĄPIĆ permisywne brzmienie z 2016 r.
+   (obecnie dopuszczające dowód, chyba że uzyskany w związku z
+   zabójstwem/uszkodzeniem ciała/pozbawieniem wolności)
+2) Prezydent Karol Nawrocki ZAWETOWAŁ tę nowelizację
+3) Sejm PRÓBOWAŁ odrzucić weto (~21.04.2026) — NIE UDAŁO SIĘ (244
+   głosów za odrzuceniem, potrzebne 264 — zabrakło 20 głosów)
+4) Prezydent złożył WŁASNY, ALTERNATYWNY projekt (z wyjątkami dla
+   bezpieczeństwa państwa/ochrony dzieci) — STATUS tego projektu
+   NIEZWERYFIKOWANY na dzień 30.07.2026 (3+ miesiące po wecie —
+   MOŻLIWE, że coś się zmieniło od kwietnia)
+
+⭐ WNIOSEK NA DZIEŃ WERYFIKACJI: skoro reforma z lutego NIE WESZŁA W
+ŻYCIE (weto utrzymane) — STARA, PERMISYWNA wersja z 2016 r.
+(dopuszczająca dowód z naruszeniem prawa, poza wąskimi wyjątkami)
+PRAWDOPODOBNIE POZOSTAJE W MOCY. ALE sytuacja jest AKTYWNA i
+NIEROZSTRZYGNIĘTA (prezydencki projekt alternatywny w toku) —
+BEZWZGLĘDNIE zweryfikuj AKTUALNY status na ISAP przed każdym użyciem
+tego przepisu w piśmie procesowym, NIE polegaj na tej notatce dłużej
+niż kilka tygodni.
+
+Potwierdzone w 6+ zgodnych źródłach 2026 r. (dziennikzachodni.pl,
+rp.pl, prawo.pl, money.pl).
+```
 | Tajemnica zawodowa i służbowa | art. 180 KPK | średnia |
 | Zakaz zeznań duchownego ze spowiedzi | art. 178 pkt 2 KPK | niska |
 | Zakaz zeznań obrońcy | art. 178 pkt 1 KPK | niska |
@@ -38,6 +69,42 @@ przepisy lub orzeczenia. Każdy obszar wymaga weryfikacji ISAP przed podaniem ar
 | Odczytanie zeznań z postępowania przygotowawczego | art. 391 KPK | wysoka |
 | Konfrontacja świadków | art. 172 KPK | niska |
 | Przesłuchanie świadka incognito | art. 184 KPK | średnia |
+
+⚡ PRZYPIS 2026-07-30 (potwierdzenie trafności flagi "wysokie ryzyko"
+dla art. 168a KPK) — BURZLIWA HISTORIA LEGISLACYJNA W 2026 R.:
+```
+STAN OBOWIĄZUJĄCY (wersja z 2016 r., PERMISYWNA): dowód uzyskany z
+  naruszeniem przepisów JEST dopuszczalny, chyba że dowód uzyskano w
+  związku z pełnieniem przez funkcjonariusza publicznego obowiązków
+  służbowych w wyniku zabójstwa, umyślnego spowodowania uszczerbku
+  na zdrowiu lub pozbawienia wolności — WĄSKI wyjątek
+
+PRÓBA REFORMY (przywrócenie ZAKAZU "owoców zatrutego drzewa" — wersja
+  pierwotna z 2015 r., zanim wprowadzono wyjątek w 2016 r.):
+  → Sejm UCHWALIŁ nowelizację przywracającą surowszy, pierwotny
+    zakaz (27.02.2026)
+  → Prezydent Karol Nawrocki ZAWETOWAŁ ustawę
+  → Sejm PRÓBOWAŁ odrzucić weto (~21.04.2026) — GŁOSOWANIE NIEUDANE,
+    zabrakło ok. 20 głosów do wymaganej większości 3/5 (244 głosów
+    "za" przy potrzebnych 264)
+  → SKUTEK: reforma NIE WESZŁA W ŻYCIE — STARA, PERMISYWNA wersja z
+    2016 r. POZOSTAJE OBOWIĄZUJĄCA
+  → Prezydent NASTĘPNIE złożył WŁASNY, ALTERNATYWNY projekt (z
+    węższymi wyjątkami dot. bezpieczeństwa państwa/ochrony dzieci) —
+    STATUS tego projektu NA DZIEŃ TEJ WERYFIKACJI (30.07.2026)
+    NIEZNANY — minęły ponad 3 miesiące od jego złożenia, MOŻLIWE że
+    proces legislacyjny POSTĄPIŁ dalej
+
+⚠️ WNIOSEK PRAKTYCZNY: art. 168a KPK w BRZMIENIU PERMISYWNYM (z 2016
+  r., z wąskim wyjątkiem) NAJPRAWDOPODOBNIEJ WCIĄŻ OBOWIĄZUJE na
+  dzień tej weryfikacji, ALE temat jest AKTYWNY POLITYCZNIE i
+  legislacyjnie — SPRAWDŹ BEZWZGLĘDNIE aktualny status na ISAP
+  PRZED każdym użyciem tego przepisu w konkretnej sprawie, ZWŁASZCZA
+  jeśli sprawa dotyczy dowodów zdobytych z naruszeniem prawa przez
+  funkcjonariusza publicznego
+
+Potwierdzone w 6+ zgodnych źródłach z lutego-kwietnia 2026 r.
+```
 
 ### 1C. KPW — postępowanie w sprawach o wykroczenia
 

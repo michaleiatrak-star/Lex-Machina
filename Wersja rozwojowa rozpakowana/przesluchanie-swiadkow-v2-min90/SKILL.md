@@ -1,6 +1,6 @@
 ---
 name: przesluchanie-swiadkow-v2-min90
-version: "3.21"
+version: "3.22"
 type: legal-skill
 domain: litigation-witness-examination
 status: production

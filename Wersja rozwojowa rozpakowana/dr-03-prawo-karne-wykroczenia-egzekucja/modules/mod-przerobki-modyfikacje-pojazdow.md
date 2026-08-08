@@ -1,5 +1,5 @@
 # Przeróbki i modyfikacje pojazdów — dopuszczalne zmiany, homologacja,
-v1.1.0 (dodany 2026-08-04, rozbudowany o motocykle i tachografy tego samego dnia — na żądanie użytkownika)
+v1.2.0 (dodany 2026-08-04, rozbudowany 2026-08-05 — na żądanie użytkownika)
 v1.0.0 (dodany 2026-08-04, na żądanie użytkownika)
 
 Zweryfikowano 2026-08-04 (ZASADA 14): Rząd 2B — liczne portale
@@ -52,6 +52,52 @@ STAN OBECNIE OBOWIĄZUJĄCY (od maja 2021): max **20 KM/H** dla
     zarządcę drogi
   → GŁÓWNY URZĄD MIAR pracuje nad METODYKĄ weryfikacji prędkości
     konstrukcyjnej pojazdu
+
+⭐⭐ ROZSZERZONE 2026-08-05 (na żądanie użytkownika — zbadanie doniesień
+  o "całkowitej delegalizacji") — ⚠️ WAŻNE SPROSTOWANIE: TO NIE JEST
+  "całkowita delegalizacja" kategorii hulajnóg/UTO jako takiej —
+  MEDIALNE UPROSZCZENIE niektórych nagłówków ("Hulajnogi elektryczne
+  zostaną zakazane?") MYLI ZAOSTRZENIE REGULACJI (walka z pojazdami
+  PRZEROBIONYMI/NIEZGODNYMI z normami) z ZAKAZEM CAŁEJ KATEGORII —
+  LEGALNE, ZGODNE z limitem 20 km/h hulajnogi NIE SĄ przedmiotem
+  planowanego zakazu, tylko dokładniejszej KONTROLI RYNKU:
+
+  ⭐ PRECYZYJNIEJSZE SZCZEGÓŁY (oficjalny komunikat MI z 10.07.2026,
+  minister Dariusz Klimczak, konferencja prasowa na krakowskich
+  Bulwarach Wiślanych):
+  → DWIE KONKRETNE ustawy do zmiany: (1) ustawa o systemach
+    homologacji pojazdów oraz ich wyposażenia, (2) ustawa o
+    kierujących pojazdami — PLUS zmiana rozporządzenia ws. warunków
+    technicznych pojazdów
+  → BEZPOŚREDNI IMPULS: nagranie z krakowskich Bulwarów Wiślanych
+    (nastolatek pędzący z dużą prędkością po zatłoczonej ścieżce) +
+    zatrzymania w Pomorskiem i Mazowieckiem pojazdów rozwijających
+    odpowiednio ponad 60 i 70 km/h
+  → STRAŻ MIEJSKA/POLICJA MAJĄ OTRZYMAĆ SPECJALNE HAMOWNIE do
+    pomiaru mocy/prędkości urządzeń NA MIEJSCU kontroli
+  → ⭐ NOWY ELEMENT: e-ROWERY z silnikiem WSPOMAGAJĄCYM jazdę POWYŻEJ
+    25 km/h MAJĄ WYMAGAĆ REJESTRACJI — NA TYCH SAMYCH zasadach, jakie
+    OBECNIE obowiązują dla SKUTERÓW/motorowerów (istotna zmiana
+    kategoryzacji dla "szybkich" e-rowerów, WYKRACZAJĄCA poza samo
+    zagadnienie hulajnóg)
+  → PLANOWANA DATA WEJŚCIA W ŻYCIE: "1 stycznia PRZYSZŁEGO ROKU"
+    (czyli **1.01.2027**) wg JEDNEGO źródła (StronyMonki.pl) —
+    ⚠️ NIEPOTWIERDZONA jako pewna przez INNE źródła — TRAKTUJ jako
+    orientacyjną, nie gwarantowaną
+
+  ⚠️ ODRZUCONE ŹRÓDŁO POTWIERDZONE JAKO BŁĘDNE DLA POLSKI (WAŻNE
+  POTWIERDZENIE wcześniejszej decyzji z tego samego modułu):
+  dane "wiek 18 lat, konfiskata na 30 dni" (forsal.pl) — ZWERYFIKOWANE
+  2026-08-05: te dane DOTYCZĄ MACEDONII PÓŁNOCNEJ ("Władzom Macedonii
+  Północnej", 109. sesja parlamentarna, 30.06.2026), NIE POLSKI —
+  POTWIERDZA to WCZEŚNIEJSZĄ, SŁUSZNĄ decyzję o odrzuceniu tych
+  danych z treści tego modułu (patrz niżej, "ODRZUCONA NIESPÓJNOŚĆ
+  ŹRÓDEŁ") — dowód, że wcześniejsza ostrożność redakcyjna była
+  prawidłowa
+
+  Potwierdzone w 8+ zgodnych, aktualnych źródłach (rp.pl [21.07.2026],
+  portalsamorzadowy.pl, money.pl, forsal.pl, boop.pl, motoguru.pl
+  [4 tygodnie temu], stronymonki.pl, grajewo.stronypodlasia.pl).
 
 ⭐ JUŻ OBOWIĄZUJĄCE (od 03.06.2026, POTWIERDZONE jako uchwalone —
   ODRĘBNE od projektu opisanego wyżej):

@@ -29783,3 +29783,1839 @@ bez własnych, samodzielnych progów prawnych.
 |---|---|
 | Błędów/luk merytorycznych naprawionych (cała sesja) | 91 |
 | Flagi otwarte | 9 (F-4, F-5, F-8 do F-14) |
+
+## AUDYT-2026-08-04x — Nowy moduł: podmiana części przez warsztat, z realnym, dokładnie pasującym wyrokiem sądowym
+
+**Kontekst:** Na żądanie użytkownika — podmiana części przy naprawie
+(tańszy zamiennik zamiast oryginału), w tym scenariusz gdy klient
+przynosi własną, zakupioną część, a warsztat montuje podróbkę/część
+używaną.
+
+**Potwierdzona wcześniejsza nieobecność** tematu w systemie.
+
+**⭐⭐ ZNALEZIONY REALNY WYROK, DOKŁADNIE PASUJĄCY do drugiego
+scenariusza z pytania użytkownika** (SAOS, sygn. II K 282/16):
+mechanik zamiast zamontować NOWE części zakupione i dostarczone
+przez klienta (zawory wydechowe, uszczelka, popychacze, zestaw
+rozrządu, koło zębate — łącznie 965 zł), zamontował części UŻYWANE.
+Sąd zakwalifikował to jako OSZUSTWO (art. 286 §1 KK) — nie zwykły
+spór cywilny o nienależyte wykonanie umowy — uznając, że doszło do
+wprowadzenia w błąd co do SPOSOBU wykonania naprawy, wykraczającego
+poza zwykłe ryzyko gospodarcze. Wyrok: grzywna 1500 zł (50 stawek
+dziennych po 30 zł).
+
+**Dodano analizę dodatkowej, równoległej kwalifikacji** —
+przywłaszczenie (art. 284 KK) oryginalnej części klienta, jeśli
+mechanik ją zatrzymał/sprzedał zamiast po prostu nie użyć — z
+wyjaśnieniem różnicy mechanizmu (oszustwo dotyczy relacji
+klient-wykonawca, przywłaszczenie dotyczy losu samej rzeczy) i
+możliwości kumulatywnego zbiegu (art. 11 §2 KK).
+
+**Dodano scenariusz analogiczny** (bez udziału części dostarczonej
+przez klienta) z KLUCZOWYM rozróżnieniem: gdy umowa WYRAŹNIE
+określała oryginał, a warsztat zafakturował jak za oryginał montując
+zamiennik — oszustwo; gdy umowa NIE precyzowała rodzaju części, a
+warsztat uczciwie zafakturował zgodnie z rzeczywiście użytą
+częścią — to sprawa WYŁĄCZNIE cywilna (rękojmia), nie karna.
+
+Dodano praktyczną ścieżkę postępowania dla poszkodowanego (dwie
+równoległe drogi: karna i cywilna, z konkretnymi krokami
+dowodowymi).
+
+**Rejestracja (Reguła 2):** nowy moduł `mod-podmiana-czesci-naprawa-
+oszustwo.md`, dodano do SKILL.md (56→57 modułów). dr-03
+v3.27→v3.28.
+
+### BILANS CAŁOŚCIOWY (mianownik: 724+1=725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Nowe moduły utworzone (cała sesja) | 10 |
+| Flagi otwarte | 9 (F-4, F-5, F-8 do F-14) |
+
+## AUDYT-2026-08-04y — FAZA 3E: 3 moduły pisma-procesowe-v3 potwierdzone
+
+**MOD-PRAWO.md — potwierdzony (indeks przepisów).** Zweryfikowano
+art. 167¹ KP (obowiązek wykorzystania urlopu w okresie wypowiedzenia,
+jeśli pracodawca go udzieli) — potwierdzone jednogłośnie w 8+
+niezależnych źródłach, w tym dosłowny tekst (lexlege.pl, arslege.pl,
+przepisy.gofin.pl) i orzecznictwo SN (III PK 96/18 — kolejność
+oświadczeń urlop/zwolnienie ze świadczenia pracy ma znaczenie
+prawne). Pozostałe liczne cytowane artykuły (KP/KC/KPC) — zgodne z
+wcześniej wielokrotnie potwierdzonymi w tej sesji standardami.
+
+**MOD-ADMIN.md — potwierdzony w pełni.** Zweryfikowano limity 10/30
+lat dla stwierdzenia nieważności decyzji (art. 156 §2 / art. 158 §3
+KPA) — potwierdzone jednogłośnie w 6+ źródłach, z dobrym kontekstem
+historycznym (nowelizacja z 16.09.2021, powiązana z wyrokiem TK P
+46/13 ws. dawnych decyzji reprywatyzacyjnych). Terminy 14/7/30 dni —
+zgodne. Zasada "za pośrednictwem organu" — poprawnie odróżniona od
+KPC.
+
+**MOD-ETAPY.md** — generyczny szkielet metodologiczny (klasyfikacja
+dowodów, checklist), bez własnych progów prawnych.
+
+### BILANS CAŁOŚCIOWY (mianownik: 725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 91 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-04z — FAZA 3E: 3 kolejne moduły pisma-procesowe-v3 potwierdzone
+
+**MOD-PRACODAWCA-RZECZYWISTY.md — potwierdzony w pełni, moduł
+zaawansowany.** Sprawdzono kluczowy przepis centralny dla całej
+argumentacji modułu: art. 23¹ KP (przejście zakładu pracy) —
+potwierdzone jednogłośnie w 7+ niezależnych źródłach, w tym dosłowny
+tekst (lexlege.pl, arslege.pl — aktualny t.j. Dz.U.2025.0.277):
+przejście z MOCY PRAWA, prawo pracownika do rozwiązania stosunku w
+terminie 2 miesięcy z 7-dniowym uprzedzeniem, odpowiedzialność
+solidarna dotychczasowego i nowego pracodawcy, oraz KLUCZOWY dla
+argumentacji modułu § 6 — przejście NIE MOŻE stanowić przyczyny
+wypowiedzenia. Moduł buduje na tej podstawie zaawansowaną
+argumentację o obejściu prawa (art. 58 §1 KC w zw. z art. 300 KP)
+przy resetowaniu limitów umów terminowych (art. 25¹ KP) poprzez
+zmianę nazwy pracodawcy bez formalnego trybu art. 23¹ — SPÓJNE i
+poprawnie skonstruowane prawnie.
+
+**MOD-DOWODY.md, MOD-FAKTY.md** — generyczne szkielety
+metodologiczne (klasyfikacja dowodów wg wiarygodności, weryfikacja
+faktów przed złożeniem pisma), z cytowanymi art. 248/233 §2 KPC —
+zgodne ze znanymi przepisami.
+
+### BILANS CAŁOŚCIOWY (mianownik: 725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 91 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-05a — Wydzielenie części firmy (spin-off) — rozszerzenie doktryny pracodawcy rzeczywistego
+
+**Kontekst:** Użytkownik zapytał wprost, czy doktryna
+"pracodawcy rzeczywistego" (MOD-PRACODAWCA-RZECZYWISTY.md) obejmuje
+też scenariusz wydzielenia części firmy w celu utworzenia nowej
+spółki o identycznym profilu, obsługującej tych samych klientów,
+niezależnie od struktury właścicielskiej (inny właściciel/jeden ze
+wspólników/brak zmiany właścicieli).
+
+**Potwierdzona wcześniejsza luka** — moduł pokrywał TYLKO prosty
+scenariusz zmiany nazwy pracodawcy (T4), BEZ scenariusza
+formalnego/nieformalnego wydzielenia (spin-off).
+
+**ODPOWIEDŹ JEDNOZNACZNA (TAK) — zweryfikowana w 7+ zgodnych
+źródłach, w tym publikacja akademicka z bezpośrednim odesłaniem do
+orzecznictwa TSUE:** doktryna art. 23¹ KP OBEJMUJE ten scenariusz.
+Kluczowe ustalenia: (1) przejście działa Z MOCY PRAWA, może nastąpić
+"bez woli stron, a nawet bez ich wiedzy" — decydują okoliczności
+FAKTYCZNE, nie forma prawna; (2) art. 23¹ KP jest PRZEPISEM
+BEZWZGLĘDNIE OBOWIĄZUJĄCYM — uzgodnienia zmierzające do jego
+obejścia SĄ NIEWAŻNE; (3) TEST SPIJKERS (TSUE C-24/85) —
+wieloczynnikowa ocena, gdzie "przejęcie klienteli" jest WPROST
+oficjalnym kryterium (nie poboczną okolicznością) — scenariusz
+użytkownika trafia wprost w ten test; (4) struktura własnościowa NIE
+MA znaczenia dla samej oceny przejścia — dodano analizę trzech
+wariantów (inny właściciel/jeden ze wspólników/brak zmiany
+właścicieli), z NAJSILNIEJSZYM argumentem dla pracownika przy
+BRAKU zmiany właścicieli.
+
+Dodano UCZCIWE zastrzeżenie o GRANICACH doktryny — orzecznictwo NIE
+jest jednostronnie "propracownicze": SA Katowice (III AUa 2400/17)
+i SA Lublin (III AUa 536/19) potwierdzają, że sam transfer
+pracowników BEZ przejęcia substratu majątkowego MOŻE nie
+wystarczyć, i że forma dokumentacji sama w sobie nie przesądza.
+Odnotowano ostrzeżenie przed "pozornym outsourcingiem pracowniczym"
+działające W OBIE STRONY.
+
+Dodano trigger T5 do listy triggerów modułu oraz praktyczną
+strategię dowodową rozszerzoną o element klientów/ciągłości
+biznesowej.
+
+**Rejestracja:** pisma-procesowe-v3 SKILL.md v5.17→v5.18.
+
+### ⚡ AKTUALIZACJA DATY SYSTEMOWEJ
+
+Data bieżąca (na podstawie wyszukiwań web z tej transzy, w tym
+źródło datowane "03.08.2026" i "5 sierpnia 2026" w wynikach
+wyszukiwania) — **05.08.2026**.
+
+### BILANS CAŁOŚCIOWY (mianownik: 725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 83 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-05b — FAZA 3E: 3 moduły pisma-procesowe-v3 (MOD-OBAL, MOD-ORZE, MOD-ROUTE) potwierdzone
+
+**MOD-OBAL.md, MOD-ORZE.md, MOD-ROUTE.md — potwierdzone, generyczne
+szablony/routing.** Wszystkie trzy to szablony redakcyjne (obalanie
+twierdzeń przeciwnika, wyszukiwanie orzecznictwa wg podobieństwa,
+routing do właściwego silnika pisma) bez własnych, nowych progów
+prawnych — cytowane przepisy (art. 6 KC, art. 233 §1 KPC, art. 3 §1
+KPC) już wielokrotnie potwierdzone w tej sesji w innych kontekstach.
+MOD-ORZE.md ma dobrą metodologię (skala podobieństwa 5/5 do 1/5,
+hierarchia czasowa wyszukiwania 2→5 lat) — zgodna z ogólnymi
+zasadami HARDGATE systemu.
+
+### BILANS CAŁOŚCIOWY (mianownik: 725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 91 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-05c — FAZA 3E: MOD-REDAKCJA, MOD-SZABLONY potwierdzone — PISMA-PROCESOWE-V3 UKOŃCZONY
+
+**MOD-SZABLONY.md — potwierdzony, moduł ma już własną, świeżą
+korektę.** Próg właściwości SR/SO (100 000 zł) — SPÓJNY z
+wielokrotnie już potwierdzonym w tej sesji tym samym progiem (od
+nowelizacji 9.03.2023, w życie 1.07.2023). Właściwość ogólna/przemienna
+(art. 27/33 KPC), sąd pracy (art. 461 §1 KPC), opłata apelacji (5%
+WPZ, min. 30 zł) — zgodne. Wyjątki SR niezależnie od WPS (alimenty,
+naruszenie posiadania, EPU) — poprawnie wskazane.
+
+**MOD-REDAKCJA.md — generyczny przewodnik stylistyczny**, bez
+własnych progów prawnych.
+
+### PISMA-PROCESOWE-V3 — WSZYSTKIE 12 MODUŁÓW SPRAWDZONE
+
+Ten skill (40 plików łącznie, 12 modułów głównych) jest teraz w
+pełni przejrzany w ramach FAZA 3E. Znaleziono i naprawiono 0 nowych
+błędów w tej turze — moduł MOD-SZABLONY.md miał już własną korektę z
+tego samego dnia (05.08.2026), co sugeruje albo równoległą sesję,
+albo wcześniejszą pracę w tej samej, bardzo długiej rozmowie.
+
+### BILANS CAŁOŚCIOWY (mianownik: 725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 91 |
+| Skille wsparcia w pełni sprawdzone | orzeczenia-sadowe-v2, chronologia-sprawy-v1 (częściowo), analiza-sadowa-v6 (częściowo), analizator-dowodow-v3 (częściowo), pisma-procesowe-v3 (PEŁNE 12/12) |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-05d — FAZA 3E: 3 pliki przesluchanie-swiadkow-v2-min90 potwierdzone
+
+**CROSS-EXAMINATION-GATE.md, WITNESS-SCORING.md,
+QUESTION-ADMISSIBILITY-GATE.md — potwierdzone.** Zweryfikowano art.
+271 KPC (procedura zeznań — "faza swobodna" jako pierwszy etap,
+podstawa doktrynalnego zakazu pytań sugestywnych) — potwierdzone w
+7+ zgodnych źródłach, w tym dosłowny tekst przepisu i publikacja
+akademicka (edukacjaprawnicza.pl) wyjaśniająca mechanizm sugestii.
+Cytowanie modułu jest STANDARDOWĄ praktyką prawniczą (art. 271 jako
+podstawa zakazu, mimo że TEKST przepisu nie zawiera go WPROST,
+tylko WYNIKA ze struktury proceduralnej) — NIE wymaga korekty.
+Pozostałe cytowane przepisy (art. 391 KPK, art. 261/182/183 KPK,
+art. 168a KPK) — zgodne z wielokrotnie już potwierdzonymi w tej
+sesji standardami.
+
+### BILANS CAŁOŚCIOWY (mianownik: 725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 91 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-05e — Przegląd flag otwartych: F-4 ZAMKNIĘTA (ustawa podpisana), F-14 potwierdzona jako nadal otwarta
+
+**Kontekst:** Na żądanie użytkownika — zbadanie kwestii flag
+otwartych, sprawdzenie czy któreś z 9 zarejestrowanych flag można
+teraz rozstrzygnąć.
+
+**F-4 ROZSTRZYGNIĘTA I ZAMKNIĘTA** — nowelizacja ustawy o
+przeciwdziałaniu narkomanii (uchwalona przez Sejm 11.06.2026, flaga
+otwarta od 04.07.2026 z powodu braku publikacji) — ZOSTAŁA PODPISANA
+przez Prezydenta Karola Nawrockiego **24 LIPCA 2026 R.**, tego
+samego dnia co ustawa o AI i "ustawa łańcuchowa" (dzień "5 ustaw
+podpisanych" opisany wcześniej w tej sesji). Potwierdzone w 5+
+zgodnych, aktualnych źródłach (medexpress.pl, rynekzdrowia.pl,
+gazetaprawna.pl — z pełną listą 5 ustaw, prezydent.pl). Dodatkowa
+treść: rozszerzenie wykazu substancji zabronionych o nowe "dopalacze
+nowej generacji", zwiększona dostępność leczenia substytucyjnego
+(buprenorfina na zwykłej recepcie). Zaktualizowano
+mod-ustawa-narkomania.md z pełną treścią i usunięto wiersz F-4 z
+WARN-OTWARTE.md.
+
+**F-14 SPRAWDZONA PONOWNIE, STATUS BEZ ZMIAN** — projekt ustawy MI
+ws. odblokowania hulajnóg — najświeższe dostępne źródła (sprzed ok.
+3 tygodni względem dnia weryfikacji) NADAL opisują to jako "nowy
+projekt", BEZ potwierdzenia uchwalenia przez Sejm. Zaktualizowano
+datę weryfikacji w WARN-OTWARTE.md (2026-08-05, status bez zmian) —
+flaga POZOSTAJE otwarta.
+
+**Rejestracja:** dr-03-prawo-karne-wykroczenia-egzekucja SKILL.md
+v3.28→v3.29. WARN-OTWARTE.md: 9→8 flag (F-4 zamknięta).
+
+### WNIOSEK METODOLOGICZNY
+
+Przegląd flag otwartych na żądanie użytkownika okazał się
+WARTOŚCIOWY — jedna z 9 flag (F-4) czekała na rozstrzygnięcie od
+prawie miesiąca i faktycznie ZOSTAŁA już rozstrzygnięta (ustawa
+podpisana 24.07.2026), ale NIKT nie sprawdził tego ponownie do teraz.
+Potwierdza to wartość OKRESOWEGO przeglądu rejestru flag — same
+flagi nie "przypominają" same o sobie, wymagają aktywnego przeglądu.
+
+### BILANS CAŁOŚCIOWY (mianownik: 725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flag zamkniętych w tej transzy | 1 (F-4) |
+| Flagi otwarte (WŁAŚCIWY plik, po aktualizacji) | 8 (F-5, F-8 do F-14) |
+
+## AUDYT-2026-08-05f — Dalszy przegląd flag: F-12 ROZSTRZYGNIĘTA I ZAMKNIĘTA, F-5 uczciwie pozostawiona otwarta
+
+**Kontekst:** Kontynuacja przeglądu 8 pozostałych flag na żądanie
+użytkownika ("czy to już wszystkie otwarte flagi? kontynuuj").
+Zidentyfikowano: F-8/F-9/F-10/F-11 to zadania TECHNICZNE dla
+dewelopera (testy wobec żywych API, wdrożenie produkcyjne) —
+NIEMOŻLIWE do rozstrzygnięcia przez wyszukiwanie (brak dostępu do
+domen .gov.pl w tym środowisku) — POZOSTAJĄ otwarte, poprawnie.
+F-13 wymaga żmudnej, ręcznej adnotacji ~58 plików — NIE jest
+zadaniem badawczym, POZOSTAJE otwarta zgodnie z wcześniejszym
+opisem. F-14 już sprawdzona w poprzedniej transzy.
+
+**F-12 ROZSTRZYGNIĘTA I ZAMKNIĘTA** — zaskarżalność odmowy
+przywrócenia terminu procesowego. Zweryfikowano w 6+ zgodnych
+źródłach, w tym cytowane orzecznictwo SN i dosłowny tekst art. 126
+KPK: odpowiedź ZALEŻY OD RODZAJU postępowania (KLUCZOWE ustalenie,
+którego brakowało):
+- **KPC**: BRAK zażalenia — orzecznictwo SN JEDNOLITE (nie sporne,
+  jak wcześniej sądzono) — odmowa NIE jest postanowieniem kończącym
+  postępowanie. ALE strona ma ochronę przez art. 380 KPC (kontrola
+  PRZY OKAZJI zaskarżenia PÓŹNIEJSZEGO, zaskarżalnego postanowienia)
+- **KPK**: ODWROTNIE — art. 126 §3 KPK WPROST przewiduje zażalenie
+- **KPA**: klasyfikowana jako kończąca postępowanie, zaskarżalna do
+  WSA (większościowy pogląd, z mniejszościowym odmiennym)
+
+Zaktualizowano SPH-inne.md (pisma-proste-v2) z pełnym, precyzyjnym
+rozstrzygnięciem per typ postępowania. Usunięto wiersz F-12 z
+WARN-OTWARTE.md.
+
+**F-5 — UCZCIWA PRÓBA, BEZ ROZSTRZYGNIĘCIA.** Sprawdzono zakres
+dotknięcia KSH przez ustawę ESAP — wyszukiwanie zwróciło głównie
+materiał o obowiązkach sprawozdawczych SEKTORA FINANSOWEGO (banki,
+ubezpieczenia, inwestycje) wobec unijnej platformy ESAP, BEZ
+jednoznacznego potwierdzenia KONKRETNEGO zakresu zmiany w samym
+KSH. NIE ZGADYWANO odpowiedzi — flaga POZOSTAJE otwarta, z
+odnotowaną, nierozstrzygniętą próbą weryfikacji (zgodnie z zasadą:
+brak odpowiedzi lepszy niż zgadywana odpowiedź).
+
+**Rejestracja:** pisma-proste-v2 SKILL.md v2.7→v2.8. WARN-OTWARTE.md:
+8→7 flag (F-12 zamknięta).
+
+### PODSUMOWANIE PEŁNEGO PRZEGLĄDU FLAG (odpowiedź na pytanie
+użytkownika "czy to już wszystkie?")
+
+TAK — wszystkie 9 pierwotnych flag zostały przejrzane w tej i
+poprzedniej transzy. Wynik: **2 flagi zamknięte** (F-4, F-12), **7
+pozostaje otwartych** — z czego 4 to zadania TECHNICZNE poza
+zasięgiem badawczym tego środowiska (F-8/9/10/11), 1 wymaga żmudnej
+pracy redakcyjnej nie badawczej (F-13), 1 pozostaje projektem
+ustawy w toku (F-14), 1 pozostaje bez jednoznacznej odpowiedzi mimo
+próby (F-5).
+
+### BILANS CAŁOŚCIOWY (mianownik: 725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flag zamkniętych łącznie (ta sesja + poprzednia transza) | 2 (F-4, F-12) |
+| Flagi otwarte (WŁAŚCIWY plik, stan końcowy) | 7 (F-5, F-8, F-9, F-10, F-11, F-13, F-14) |
+
+## AUDYT-2026-08-05g — FAZA 3E: 3 pliki chronologia-sprawy-v1 potwierdzone — SKILL UKOŃCZONY
+
+**ekstrakcja-zdarzen.md, BLUEPRINT-SCHEMA.md, MIN8-UPGRADE.md —
+potwierdzone, generyczne szablony techniczne.** Reguły ekstrakcji
+dat (formaty jawne/pośrednie, hierarchia wiarygodności źródeł w
+piśmie: uzasadnienie > petitum > data pisma) — metodologicznie
+solidne. Wzmianki "14 dni"/"30 dni" to WZORCE dopasowania tekstu
+(przykłady formatów, jakie może przyjąć fraza terminowa w dokumencie),
+NIE asercje prawne wymagające weryfikacji. BLUEPRINT-SCHEMA i
+MIN8-UPGRADE — czysto strukturalne/techniczne, bez treści prawnej.
+
+### CHRONOLOGIA-SPRAWY-V1 — WSZYSTKIE PLIKI SPRAWDZONE
+
+Ten skill (8 plików) jest teraz w pełni przejrzany w ramach FAZA 3E
+(łącznie z wcześniej sprawdzonym sprzecznosci-dat.md i SKILL.md).
+
+### BILANS CAŁOŚCIOWY (mianownik: 725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 91 |
+| Flagi otwarte | 7 |
+| Skille wsparcia w pełni sprawdzone | orzeczenia-sadowe-v2, chronologia-sprawy-v1 (PEŁNE), pisma-procesowe-v3 (PEŁNE) |
+
+## AUDYT-2026-08-05h — FAZA 3E: 3 pliki analiza-sadowa-v6, CRIT znaleziony w MOD-D.md (art. 87 vs 87¹ KP)
+
+**MOD-D.md — naprawiony.** Moduł mylił art. 87 KP (ogólne granice
+procentowe potrąceń: 1/2, 3/5 wynagrodzenia) z art. 87¹ KP (odrębny
+przepis ustanawiający SAMĄ "kwotę wolną od potrąceń" na poziomie
+minimalnego wynagrodzenia netto). Potwierdzone w 7+ zgodnych
+źródłach, w tym PIP (Rząd 1) i dosłowny tekst przepisu (arslege.pl,
+lexlege.pl — aktualny t.j. Dz.U.2025.0.277): to DWA odrębne
+przepisy o różnej funkcji — art. 87 określa CO i W JAKICH granicach
+można potrącić, art. 87¹ chroni MINIMALNY poziom wypłaty.
+Naprawiono cytat na poprawny art. 87¹ KP. TO KOLEJNY przykład tego
+samego wzorca błędu (pomijanie/dodawanie indeksu górnego przy
+numerze artykułu) znajdowanego wielokrotnie w tej sesji (art. 328
+vs 328¹ KPC, art. 22 vs 22²/22³ KP, art. 111 KP vs art. 111 ustawy
+o ochronie danych osobowych).
+
+**orzecznictwo.md, WERYFIKACJA-DOWODOW.md** — sprawdzone, generyczne
+metodologie (hierarchia czasowa orzecznictwa, checklist weryfikacji
+sprzeczności) bez własnych, nowych progów prawnych do korekty.
+
+**Rejestracja:** analiza-sadowa-v6 SKILL.md v6.3→v6.4.
+
+### WNIOSEK METODOLOGICZNY — POWTARZALNY WZORZEC BŁĘDU
+
+W tej sesji WIELOKROTNIE (co najmniej 4 razy) znaleziono ten sam
+TYP błędu: pomylenie artykułu Z indeksem górnym (np. 87¹, 22²,
+328¹) z artykułem BEZ indeksu (87, 22, 328) — te to ZAWSZE różne,
+odrębne przepisy w polskim prawie (nie warianty tego samego
+przepisu). WARTO przy przyszłych audytach TRAKTOWAĆ każdy cytat
+"art. X KP/KPC/KK" (bez indeksu) w kontekście, gdzie temat sugeruje
+możliwość istnienia wariantu Z indeksem, jako PRIORYTETOWY kandydat
+do weryfikacji.
+
+### BILANS CAŁOŚCIOWY (mianownik: 725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 92 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-05i — FAZA 3E: 3 moduły MOD-A/B/C analiza-sadowa-v6 potwierdzone (w tym rozróżnienie od poprzednio naprawionego przepisu)
+
+**MOD-B.md — potwierdzony, WAŻNE rozróżnienie od poprzedniej
+naprawy.** Zweryfikowano art. 87 KC (groźba jako wada oświadczenia
+woli, roczny termin uchylenia od chwili ustania stanu obawy) — TO
+JEST INNY, PRAWIDŁOWO cytowany przepis (BEZ indeksu górnego, KC nie
+KP) — NIE MYLIĆ z wcześniej naprawionym w tej sesji art. 87¹ KP
+(kwota wolna od potrąceń) — potwierdzone w 8+ zgodnych źródłach, w
+tym dosłowny tekst (arslege.pl — aktualny t.j. Dz.U.2026.0.795) i
+orzecznictwo SN (I PK 109/11, I BP 9/11). Art. 8 KP (zasady
+współżycia społecznego) — zgodny.
+
+**MOD-A.md, MOD-C.md** — sprawdzone, zgodne (art. 52 KP, art. 267
+KK — już wcześniej potwierdzone w tej sesji w innych kontekstach).
+
+### WNIOSEK METODOLOGICZNY (UZUPEŁNIENIE)
+
+Ta transza POKAZUJE ważne zastrzeżenie do wniosku z poprzedniej
+transzy: NIE KAŻDY numer "87" (lub podobny) wymaga automatycznie
+podejrzenia o pomylenie z wariantem indeksowanym — art. 87 KC jest
+POPRAWNIE cytowany BEZ indeksu, bo TAKI wariant indeksowany W OGÓLE
+nie istnieje w Kodeksie cywilnym dla tego numeru. Ostrożność przy
+numerach z potencjalnym indeksem powinna być STOSOWANA
+SELEKTYWNIE — weryfikować, czy wariant indeksowany FAKTYCZNIE
+istnieje w DANYM kodeksie, nie zakładać automatycznie błędu.
+
+### BILANS CAŁOŚCIOWY (mianownik: 725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 92 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-05j — Sprostowanie: "delegalizacja UTO" to medialne uproszczenie — plus potwierdzenie wcześniejszej trafnej decyzji redakcyjnej
+
+**Kontekst:** Użytkownik zapytał, czy rząd chce całkowicie
+"zdelegalizować" hulajnogi elektryczne/UTO, i czy dodać to jako
+flagę otwartą (jeśli w trakcie).
+
+**Zweryfikowano w 8+ zgodnych, aktualnych źródłach — WAŻNE
+SPROSTOWANIE:** to NIE JEST całkowita delegalizacja kategorii
+UTO/hulajnóg — niektóre nagłówki medialne ("Hulajnogi elektryczne
+zostaną zakazane?") MYLĄ zaostrzenie regulacji (walka z pojazdami
+PRZEROBIONYMI, kontrola homologacji) z zakazem CAŁEJ kategorii —
+LEGALNE, zgodne z limitem 20 km/h hulajnogi NIE SĄ przedmiotem
+planowanego zakazu. Skorygowano tę mylącą ramę zamiast bezkrytycznie
+przyjąć założenie z pytania użytkownika.
+
+**Uzyskano precyzyjniejsze szczegóły projektu** (komunikat MI z
+10.07.2026, minister Klimczak): DWIE konkretne ustawy do zmiany
+(homologacja pojazdów + kierujący pojazdami), specjalne HAMOWNIE
+dla Straży Miejskiej/Policji do pomiaru mocy na miejscu, ⭐ NOWY
+element — e-rowery >25 km/h MAJĄ WYMAGAĆ REJESTRACJI jak
+skutery/motorowery, planowana data wejścia w życie: 1.01.2027 (wg
+jednego źródła, niepotwierdzona przez inne).
+
+**⭐ POTWIERDZONA WCZEŚNIEJSZA, TRAFNA DECYZJA REDAKCYJNA:** przy
+tworzeniu tego modułu (transza 27z128... a właściwie wcześniejsza w
+tej rozmowie) ŚWIADOMIE ODRZUCONO dane "wiek 18 lat, konfiskata 30
+dni" (forsal.pl) jako niewiarygodne dla kontekstu polskiego. TERAZ
+POTWIERDZONO WPROST: te dane FAKTYCZNIE dotyczą MACEDONII PÓŁNOCNEJ
+("109. sesja parlamentarna", 30.06.2026), NIE Polski. To dowód, że
+ostrożność redakcyjna w tamtej turze była SŁUSZNA, nie
+nadmiarowa.
+
+**Ponieważ to TEN SAM proces legislacyjny co istniejąca F-14
+(NIE nowe, odrębne zjawisko)** — ROZSZERZONO istniejącą flagę F-14
+(nie utworzono nowej, zduplikowanej) — zgodnie z lekcją z
+wcześniejszej tury o unikaniu duplikacji mechanizmów. Zaktualizowano
+zarówno WARN-OTWARTE.md, jak i moduł źródłowy z pełną, spójną
+treścią.
+
+**Rejestracja:** moduł zaktualizowany do v1.2.0, dr-03 SKILL.md
+v3.29→v3.30.
+
+### BILANS CAŁOŚCIOWY (mianownik: 725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 84 |
+| Flagi otwarte | 7 (F-14 rozszerzona, nie nowa) |
+
+## AUDYT-2026-08-05k — FAZA 3E: MOD-E, MOD-F, filtry-analityczne potwierdzone — ANALIZA-SADOWA-V6 UKOŃCZONY
+
+**filtry-analityczne.md — potwierdzony.** Zweryfikowano art. 107 KW
+(złośliwe niepokojenie) — potwierdzone jednogłośnie w 8+
+niezależnych źródłach, w tym dosłowny tekst (arslege.pl, lexlege.pl
+— aktualny t.j. Dz.U.2025.0.734): kara ograniczenia wolności (sztywno
+1 miesiąc)/grzywny (20-1500 zł)/nagany — moduł POPRAWNIE odróżnia
+to od stalkingu (art. 190a KK, zupełnie inne przestępstwo, surowsza
+kara do 3 lat) — dobra jakość redakcyjna. Art. 5 §2 KPK (in dubio
+pro reo) — zgodny ze standardem.
+
+**MOD-E.md, MOD-F.md** — sprawdzone, zgodne (art. 267 KK, art. 49
+Konstytucji, art. 52 KP — już wcześniej potwierdzone w tej sesji w
+innych kontekstach).
+
+### ANALIZA-SADOWA-V6 — WSZYSTKIE PLIKI SPRAWDZONE
+
+Ten skill (19 plików) jest teraz w pełni przejrzany w ramach FAZA
+3E, z jednym CRIT znalezionym i naprawionym (MOD-D.md, art. 87 vs
+87¹ KP) w poprzedniej transzy.
+
+### BILANS CAŁOŚCIOWY (mianownik: 725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 92 |
+| Flagi otwarte | 7 |
+| Skille wsparcia w pełni sprawdzone | orzeczenia-sadowe-v2, chronologia-sprawy-v1, pisma-procesowe-v3, analiza-sadowa-v6 |
+
+## AUDYT-2026-08-05l — FAZA 3E: CRIT znaleziony w analizator-umow-v1 (mod-J1-najem.md — kaucja 6 vs 12-krotność)
+
+**mod-J1-najem.md — naprawiony, ZNACZĄCY błąd.** Moduł BŁĘDNIE
+podawał "6-krotność miesięcznego czynszu" jako ogólny limit kaucji
+dla NAJMU ZWYKŁEGO (mieszkaniowego/komercyjnego — zakres tego
+modułu). Potwierdzone jednogłośnie w 8+ zgodnych, aktualnych
+źródłach (2026), w tym DOSŁOWNY tekst art. 6 ustawy o ochronie praw
+lokatorów (dlajurysty.pl, lexlege.pl): PRAWIDŁOWY limit dla NAJMU
+ZWYKŁEGO to **12-KROTNOŚĆ** — 6-krotność DOTYCZY WYŁĄCZNIE najmu
+OKAZJONALNEGO (art. 19a ust. 4) i INSTYTUCJONALNEGO (art. 19f) — TO
+ODRĘBNE typy umowy z INNYMI, niższymi limitami. Moduł MYLIŁ te dwa
+reżimy, ZANIŻAJĄC realny, ustawowy limit o połowę — BŁĄD O REALNYM
+ZNACZENIU PRAKTYCZNYM: wynajmujący redagujący umowę wg tego modułu
+mógłby NIEPOTRZEBNIE ograniczyć się do niższej kaucji, niż prawo
+faktycznie dopuszcza. Naprawiono, dodano rozróżnienie od
+okazjonalnego/instytucjonalnego, oraz doprecyzowano termin zwrotu
+(1 miesiąc kalendarzowy, NIE sztywno "30 dni") i mechanizm
+obowiązkowej waloryzacji kaucji (art. 6 ust. 3) — element
+CAŁKOWICIE nieobecny w poprzedniej wersji.
+
+**Rejestracja:** analizator-umow-v1 SKILL.md v1.21→v1.22.
+
+### BILANS CAŁOŚCIOWY (mianownik: 725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 93 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-05m — FAZA 3E: mod-J2-nieruchomosci, mod-J10-ubezpieczenia (analizator-umow-v1) potwierdzone
+
+**mod-J2-nieruchomosci.md — potwierdzony w pełni.** Zweryfikowano
+art. 43 UUDE (ustawa deweloperska) — termin 120 dni na dodatkowe
+wyznaczenie deweloperowi przed odstąpieniem z powodu opóźnienia w
+przeniesieniu własności — potwierdzone jednogłośnie w 8+
+niezależnych źródłach, w tym dosłowny tekst przepisu (lexlege.pl,
+przepisy.gofin.pl — aktualny t.j. z uwzględnieniem zmian do Dz.U.
+2026 poz. 880) i liczne kancelarie prawne. Termin 30 dni (podstawowe
+przesłanki odstąpienia, art. 43 ust. 1 pkt 1-5) — zgodny. Odsetki
+ustawowe (KC art. 481) i kara umowna (art. 483) — poprawnie
+odróżnione.
+
+**mod-J10-ubezpieczenia.md** — sprawdzony, zgodny (art. 805-834 KC,
+semiimperatywny charakter art. 807, termin wypłaty 30/14 dni z art.
+817 KC) — wszystkie już wcześniej znane, poprawne standardy.
+
+### BILANS CAŁOŚCIOWY (mianownik: 725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 93 |
+| Flagi otwarte | 7 |
+| WSZYSTKIE 16 DZIEDZIN DR — POTWIERDZONE UKOŃCZONE (przez użytkownika) |
+
+## AUDYT-2026-08-05m — FAZA 3E: mod-J8-b2c.md potwierdzony w pełni, moduł wzorcowy
+
+**mod-J8-b2c.md — potwierdzony w pełni.** Sprawdzono szczegółowo
+mechanizm niezgodności towaru z umową (art. 43a-43g PK, po
+1.01.2023, WYŁĄCZA rękojmię KC) i procedurę reklamacyjną. Zweryfikowano
+art. 7a ustawy o prawach konsumenta (14 dni na odpowiedź na
+reklamację, brak odpowiedzi = uznanie reklamacji z mocy prawa) —
+potwierdzone jednogłośnie w 8+ niezależnych źródłach, w tym
+BEZPOŚREDNIO UOKiK (Rząd 1) i dosłowny tekst przepisu (lexlege.pl).
+Potwierdzona JEDNOLITA linia orzecznicza sięgająca 2012 r. (SN IV
+CSK 75/12), nieprzerwanie stosowana przez kolejne reżimy prawne od
+2002 r. Moduł POPRAWNIE wskazuje "pułapki" (błędne skrócenie do 12
+miesięcy, błędny termin 30 zamiast 14 dni, wyłączenie wad
+mechanicznych) — dobra jakość redakcyjna, DOKŁADNIE odwrotna do
+błędu znalezionego w poprzedniej transzy (mod-J1, gdzie sam moduł
+POPEŁNIŁ podobny błąd zaniżenia progu, zamiast go tylko ostrzegać).
+
+### BILANS CAŁOŚCIOWY (mianownik: 725 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 93 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-05n — Nowy moduł: nielegalny pobór mediów (prąd, woda, WiFi, wspólne instalacje)
+
+**Kontekst:** Na żądanie użytkownika — nielegalny pobór prądu, wody,
+wpięcie się do WiFi sąsiada, podpięcie do wspólnej instalacji w
+piwnicy bloku, analogia do wyłudzenia usług w hotelu.
+
+**Potwierdzona wcześniejsza nieobecność** całego tematu w systemie.
+
+### DODANE: kradzież energii elektrycznej (art. 278 § 5 KK)
+
+Zweryfikowano w 6+ zgodnych źródłach, w tym oficjalny komunikat
+Trybunału Konstytucyjnego: zawsze PRZESTĘPSTWO (3 miesiące-5 lat),
+NIGDY wykroczenie niezależnie od wartości (SN wykluczył stosowanie
+progu 250 zł z KW do energii). ⭐⭐ Rozstrzygnięta kwestia
+konstytucyjna: podwójna sankcja (karna + cywilna opłata) NIE
+narusza ne bis in idem — opłata ma charakter cywilnoprawny.
+
+### DODANE: kradzież wody — ⭐⭐ KLUCZOWA różnica od prądu
+
+Zweryfikowano w 7+ zgodnych, aktualnych źródłach: SN WPROST wykluczył
+traktowanie wody jak "energii" (postanowienie I KZP 15/06) — WŁASNY,
+odrębny, ŁAGODNIEJSZY reżim (art. 28 ustawy o zbiorowym zaopatrzeniu
+w wodę): sam pobór wody = WYKROCZENIE (do 5000 zł), ale
+odprowadzanie ścieków = PRZESTĘPSTWO (surowsze). Dodano nawiązkę
+(1000 zł/miesiąc) i opłatę ryczałtową (potencjalnie tysiące m³ przy
+założeniu pełnego przekroju rury 24h/dobę) — z udokumentowanym
+przypadkiem 15 000 zł łącznego kosztu. ODNOTOWANA i WYJAŚNIONA
+niespójność starszego źródła (2015) błędnie cytującego "5 lat
+więzienia" za kradzież wody — prawdopodobna pomyłka rzecznika
+policji, sprzeczna z jednoznacznym, nowszym stanem ustawowym.
+
+### DODANE: WiFi sąsiada (art. 267 KK)
+
+Zweryfikowano w 6+ zgodnych źródłach, w tym orzecznictwo SN (V KK
+321/14) i analizę akademicką (Palestra 2/2020): brak hasła NIE
+oznacza zgody — § 2 nie wymaga przełamania zabezpieczeń. Szeroki
+zasięg sygnału WiFi to fizyka propagacji fal, nie intencja
+właściciela. Dodano realne ryzyko dla właściciela sieci —
+odpowiedzialność za działania osoby trzeciej z jego adresu IP.
+
+### DODANE: podłączenie do wspólnej instalacji w bloku
+
+Analiza możliwych kwalifikacji (art. 272 KK przy niepełnej
+dokumentacji przyłączeniowej, naruszenie współwłasności art. 206 KC)
+z praktycznym problemem dowodowym (trudność identyfikacji sprawcy w
+budynku wielorodzinnym) i rekomendacją proceduralną.
+
+### DODANE: krótkie odesłanie — wyłudzenie usług hotelowych
+
+Wyjaśniono różnicę konstrukcyjną: kradzież mediów (brak relacji
+umownej) vs oszustwo hotelowe (istniejąca relacja umowna, oszukanie
+co do zamiaru zapłaty) — dwie różne konstrukcje prawne mimo
+powierzchownego podobieństwa.
+
+**Rejestracja (Reguła 2):** nowy moduł `mod-nielegalny-pobor-
+mediow.md`, dodano do SKILL.md (57→58 modułów). dr-03 v3.30→v3.31.
+
+### BILANS CAŁOŚCIOWY (mianownik: 725+1=726 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Nowe moduły utworzone (cała sesja) | 11 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-05o — Systematyczna kontrola synchronizacji nowych modułów: znaleziono i naprawiono istotną lukę procesową
+
+**Kontekst:** Na żądanie użytkownika — sprawdzenie wszystkich nowych
+modułów utworzonych w tej sesji i ich synchronizacji z mapami aktów
+(lokalnymi DR + centralną prawo-polskie-v2).
+
+**ZNALEZISKO: istotna luka procesowa.** Sprawdzono systematycznie
+WSZYSTKICH 6 nowych modułów utworzonych w tej sesji:
+1. mod-ochrona-zabytkow-obiekty-uzytecznosci-publicznej (dr-09)
+2. mod-lincz-ochrona-swiadkow-lowcy-pedofili (dr-03)
+3. mod-przerobki-modyfikacje-pojazdow (dr-03)
+4. mod-podmiana-czesci-naprawa-oszustwo (dr-03)
+5. mod-pies-droga-rowerowa-odpowiedzialnosc (dr-02)
+6. mod-nielegalny-pobor-mediow (dr-03)
+
+WSZYSTKIE 6 plików fizycznie ISTNIAŁY i były poprawnie zarejestrowane
+w SKILL.md odpowiednich domen (Reguła 2 przestrzegana konsekwentnie).
+ALE: tylko MODUŁ #1 (zabytki, z 30.07.2026) miał wpis w mapach aktów
+— MODUŁY #2-6 (wszystkie utworzone 04-05.08.2026, W TRAKCIE
+intensywnej serii FAZA 3E + odpowiedzi na pytania użytkownika) NIE
+MIAŁY ŻADNEGO wpisu — ANI w lokalnych MAPA-AKTOW.md (dr-02/dr-03),
+ANI w centralnej ROUTING-MAP.md.
+
+**PRZYCZYNA (samoanaliza):** w trakcie intensywnej serii kolejnych
+pytań użytkownika (lincz → przeróbki pojazdów → podmiana części →
+pies na drodze → nielegalny pobór mediów) — krok "dodaj wpis do
+mapy aktów" był KONSEKWENTNIE POMIJANY na rzecz przechodzenia
+bezpośrednio do kolejnego pytania. Reguła 2 (rejestracja w SKILL.md)
+BYŁA przestrzegana, ale ROZSZERZONY krok synchronizacji z mapami
+aktów (który sam wprowadziłem jako dobrą praktykę wcześniej w tej
+sesji) — NIE.
+
+**NAPRAWIONO W PEŁNI:**
+- Dodano 4 wpisy do `dr-03/MAPA-AKTOW.md` (62→66 wierszy)
+- Dodano 1 wpis do `dr-02/MAPA-AKTOW.md` (35→36 wierszy)
+- Dodano 4 wpisy do centralnej `ROUTING-MAP.md` sekcja DR-03
+- Dodano 1 wpis do centralnej `ROUTING-MAP.md` sekcja DR-02
+- Zweryfikowano KOŃCOWO: wszystkie 6 modułów obecne DOKŁADNIE raz w
+  centralnej mapie (510→515 wierszy, +5 nowych)
+
+### WNIOSEK METODOLOGICZNY
+
+Ten sam wzorzec błędu co poprzednio (utworzenie zduplikowanego pliku
+FLAGI-OTWARTE zamiast sprawdzenia istniejącego WARN-OTWARTE) —
+ROZPĘD kolejnych, szybko następujących po sobie żądań użytkownika
+SPRZYJA POMIJANIU kroków "administracyjnych"/"papierkowych" na rzecz
+samej TREŚCI merytorycznej. REKOMENDACJA NA PRZYSZŁOŚĆ: po KAŻDYM
+nowym module — NATYCHMIAST dodać wpis do OBU map (lokalnej i
+centralnej) W TEJ SAMEJ turze, ZANIM przejść do kolejnego pytania —
+NIE odkładać "na potem", bo "potem" bez zewnętrznego przypomnienia
+(jak ta kontrola użytkownika) MOŻE nigdy nie nastąpić.
+
+**Rejestracja:** brak zmiany numerów wersji SKILL.md (edycja
+wyłącznie referencyjna).
+
+### BILANS CAŁOŚCIOWY (mianownik: 726 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Modułów zsynchronizowanych w tej transzy | 5 (z 6, jeden już był) |
+| Wpisów dodanych do map (lokalne + centralna) | 10 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-05p — FAZA 3E: mod-J2-nieruchomosci, mod-J4-finansowanie potwierdzone
+
+**mod-J2-nieruchomosci.md — potwierdzony.** Zweryfikowano art. 43
+ust. 3 UUDE (ustawa deweloperska) — termin dodatkowy 120 dni przed
+odstąpieniem od umowy z powodu nieprzeniesienia własności —
+potwierdzone jednogłośnie w 8+ niezależnych źródłach, w tym
+dosłowny tekst (lexlege.pl, przepisy.gofin.pl — aktualny t.j. z
+uwzględnieniem nowelizacji do Dz.U. 2026 poz. 880). Pozostałe progi
+(30 dni zwrot środków, 14 dni niezgodność prospektu, 60 dni
+niestawienie się nabywcy) — zgodne.
+
+**mod-J4-finansowanie.md — potwierdzony, poprawne superskrypty.**
+Sprawdzono art. 359 §2¹ KC (odsetki maksymalne), art. 709¹-709¹⁸ KC
+(leasing), art. 45 u.k.k. (SKD — już wielokrotnie potwierdzone w tej
+sesji) — wszystkie cytaty z PRAWIDŁOWYMI indeksami górnymi, bez
+błędów typu znalezionego wcześniej w innych modułach.
+
+### BILANS CAŁOŚCIOWY (mianownik: 726 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 93 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-05q — FAZA 3E: mod-J3-dystrybucja, mod-J10-ubezpieczenia potwierdzone
+
+**mod-J10-ubezpieczenia.md — potwierdzony w pełni.** Zweryfikowano
+art. 817 KC (termin wypłaty odszkodowania: 30 dni od zgłoszenia,
+14 dni od wyjaśnienia okoliczności gdy niemożliwe w podstawowym
+terminie, bezsporna część zawsze w 30 dni) — potwierdzone
+jednogłośnie w 9+ niezależnych źródłach, w tym dosłowny tekst
+przepisu (lexlege.pl) i orzecznictwo SN (III CKN 1105/98). Art. 807,
+812 §8, 827 §1, 815, 818, 826 KC — wszystkie zgodne, z poprawnym
+zrozumieniem charakteru semiimperatywnego przepisów o ubezpieczeniu
+(odstępstwa dozwolone TYLKO na korzyść uprawnionego).
+
+**mod-J3-dystrybucja.md — potwierdzony.** Art. 764³, 764⁹, 761⁷ KC
+(świadczenie wyrównawcze, del credere) — poprawne superskrypty,
+zgodne z resztą systemu.
+
+### BILANS CAŁOŚCIOWY (mianownik: 726 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 93 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-05r — FAZA 3E: CRIT znaleziony w mod-J5-umowy-wykonawcze.md (art. 627¹ vs art. 647¹ KC)
+
+**mod-J5-umowy-wykonawcze.md — naprawiony, błąd RÓŻNY od poprzednich
+wzorców.** Moduł błędnie cytował "art. 627¹ KC" jako podstawę
+podwykonawstwa w robotach budowlanych. Potwierdzone jednogłośnie w
+8+ zgodnych źródłach, w tym dosłowny tekst przepisu (lexlege.pl,
+arslege.pl, sip.lex.pl): POPRAWNY przepis to **art. 647¹ KC** — z
+CAŁKOWICIE INNEGO tytułu Kodeksu cywilnego ("umowa o roboty
+budowlane", art. 647-658), NIE z tytułu "umowa o dzieło" (art.
+627-646), gdzie leży błędnie cytowany "627". ⚠️ TO INNY TYP błędu
+niż poprzednio znajdywane w tej sesji (tam mylono BRAK/OBECNOŚĆ
+indeksu górnego przy TYM SAMYM numerze bazowym — tu pomylono CAŁY,
+INNY numer bazowy artykułu, 627 zamiast 647). Naprawiono z pełnym
+wyjaśnieniem (solidarna odpowiedzialność inwestora/wykonawcy,
+zgłoszenie przed przystąpieniem do robót, 30 dni na sprzeciw).
+
+**Rejestracja:** analizator-umow-v1 SKILL.md v1.22→v1.23.
+
+### WNIOSEK METODOLOGICZNY (ROZSZERZENIE)
+
+Poprzedni wniosek o "błędach typu indeks górny" WYMAGA rozszerzenia:
+błędy cytowania w tej sesji przyjmują RÓŻNE formy — (a) mylenie
+obecności/braku indeksu przy TYM SAMYM numerze (87 vs 87¹, 328 vs
+328¹), (b) mylenie CAŁKOWICIE różnych numerów bazowych z PODOBNYM
+kontekstem tematycznym (627¹ vs 647¹ — oba dotyczą umów
+"wykonawczych"/budowlanych, łatwo pomylić przy szybkim
+przywoływaniu z pamięci). WNIOSEK: każdy numer artykułu, zwłaszcza
+w GĘSTO NUMEROWANYCH częściach KC (Tytuły XV-XVII, umowy
+nazwane), zasługuje na weryfikację, NIE TYLKO przy podejrzeniu
+błędu w indeksie górnym.
+
+### BILANS CAŁOŚCIOWY (mianownik: 726 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 94 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-05s — Rozbudowa: służebność przesyłu (przełomowy wyrok TK!), droga konieczna (usunięcie), wywłaszczenie pod infrastrukturę
+
+**Kontekst:** Na żądanie użytkownika — służebność przesyłu i słupy
+na działce (elektryczność, światłowody, woda), droga służebna
+(kiedy konieczna, czy można się jej pozbyć), wywłaszczenie i wykup
+ziemi (drogi, infrastruktura krytyczna, zbiornik retencyjny).
+
+**Ustalenie wstępne:** istniejący "ANEKS D" miał tylko podstawowy
+szkielet (5-6 punktów każdy temat), bez głębi wymaganej przez pytanie.
+
+### ⭐⭐⭐ NAJWAŻNIEJSZE ZNALEZISKO: przełomowy wyrok TK z 2.12.2025
+(P 10/16)
+
+Zweryfikowano w 8+ zgodnych, aktualnych źródłach, w tym bezpośrednio
+trybunal.gov.pl (Rząd 1): TK uznał za NIEKONSTYTUCYJNĄ dotychczasową
+interpretację umożliwiającą przedsiębiorstwom przesyłowym/Skarbowi
+Państwa nabycie PRZED 2008 r. przez ZASIEDZENIE służebności "o
+treści odpowiadającej" służebności przesyłu. SKUTEK: kluczowy
+argument obronny przedsiębiorstw ("nabyliśmy przez zasiedzenie, nie
+musimy płacić") PRZESTAJE działać dla przypadków sprzed 2008 r. Już
+zachodzące skutki: wznowienia zakończonych postępowań (art. 401¹
+KPC), pierwsze KORZYSTNE orzeczenia dla właścicieli, prognoza
+branżowa porównująca skalę do spraw FRANKOWYCH. Odnotowano UCZCIWIE
+aktywną, nierozstrzygniętą kwestię proceduralną: czy ten wyrok
+(interpretacyjny) w ogóle STANOWI podstawę wznowienia w świetle
+uchwały 7 sędziów SN z 2009 r. — SPORNE, nie rozstrzygnięte
+jednoznacznie.
+
+### DODANE: droga konieczna — usunięcie, DWA mechanizmy
+
+Zweryfikowano w 6+ źródłach: (A) wygaśnięcie Z MOCY PRAWA po 10
+latach niewykonywania (art. 293 KC) — z praktyczną pułapką (wpis w
+KW wymaga OSOBNEGO powództwa o uzgodnienie), (B) zniesienie przez
+SĄD — art. 295 (utrata WSZELKIEGO znaczenia, bez wynagrodzenia) vs
+art. 294 (zmiana stosunków + szczególna uciążliwość, za
+wynagrodzeniem) — z dwustopniowym testem sądowym i orzecznictwem SN.
+
+### DODANE: wywłaszczenie pod infrastrukturę (drogi, zbiorniki
+retencyjne, CPK)
+
+Zweryfikowano w 7+ źródłach, w tym oficjalne pismo RPO (Rząd 1):
+wielość specustaw z RÓŻNYMI zasadami (zaliczki 70%/100%/85% zależnie
+od ustawy), procedura (rokowania → 2 miesiące → decyzja wojewody →
+wycena rzeczoznawcy w 30 dni → bonus 5% za szybkie wydanie). Dodano
+realny przykład zbiornika retencyjnego (Kamieniec Ząbkowicki) oraz
+⭐⭐ AKTYWNY problem systemowy z interwencji RPO (maj 2026): rażąca
+przewlekłość wypłat odszkodowań mimo natychmiastowego obowiązku
+wydania nieruchomości, z asymetrią kar (surowe sankcje za
+opóźnienie inwestycji, ZERO konsekwencji za opóźnienie odszkodowania).
+
+**Rejestracja:** dodano nowy "ANEKS E" jako osobną sekcję.
+dr-02-prawo-cywilne-rodzinne-gospodarcze SKILL.md v3.20→v3.21.
+
+### BILANS CAŁOŚCIOWY (mianownik: 726 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 85 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-05t — Nowy moduł: parabanki, chwilówki, lombardy, lichwa (z natychmiastową synchronizacją map)
+
+**Kontekst:** Na żądanie użytkownika — parabanki, chwilówki i inne
+nieuregulowane pożyczki, lombardy, lichwa.
+
+**Potwierdzona wcześniejsza nieobecność** — tylko jedna przelotna
+wzmianka w module SKD.
+
+### DODANE: parabanki — brak definicji prawnej, przełomowa zmiana
+nadzoru
+
+Zweryfikowano w 6+ zgodnych źródłach, w tym bezpośrednio KNF (Rząd
+1): "parabank" to termin POTOCZNY, bez ścisłej definicji prawnej.
+⭐⭐ Kluczowa zmiana: od 1.01.2024 instytucje pożyczkowe podlegają
+BEZPOŚREDNIEMU nadzorowi KNF (fundamentalna zmiana względem
+wcześniejszego całkowitego braku nadzoru). Wymogi: forma sp. z o.o./
+S.A., min. kapitał 1 mln zł. Dodano 3 narzędzia weryfikacji dla
+konsumenta (rejestr KNF, lista ostrzeżeń, RRSO).
+
+### DODANE: chwilówki — limity MPKK
+
+Zweryfikowano mechanizm art. 36a ukk: podwójne ograniczenie (wzór
+ustawowy + max 100% kwoty kredytu), z granicą karną przy 2×
+przekroczeniu (przechodzi w lichwę, art. 304 §2 KK).
+
+### ⚡ DODANE: lombardy — zupełnie nowa, dopiero projektowana
+ustawa
+
+Zweryfikowano w 3+ źródłach, w tym BEZPOŚREDNIO gov.pl/premier (Rząd
+1): projekt ustawy (tytuł ZMIENIONY w toku prac — z "o działalności
+lombardowej" na "o konsumenckiej pożyczce lombardowej") — rejestr
+KNF, kara do 500 000 zł za brak wpisu, obowiązkowe DWIE aukcje przy
+sprzedaży zastawu, zwrot nadwyżki konsumentowi. Dane rynkowe (ZPP):
+88% wykupuje zastaw w ciągu miesiąca, średnia cena zastawu 397 zł
+vs wykupu 469 zł. ⚠️ STATUS PROJEKTU wymaga sprawdzenia — oznaczone
+jawnie jako niepewne.
+
+### DODANE: lichwa — trzy typy art. 304 KK, rozwój historyczny
+
+Zweryfikowano w 6+ zgodnych źródłach, w tym dosłowny tekst przepisu:
+§1 (klasyczny wyzysk, od 1997, do 3 lat, wymaga wykazania
+przymusowego położenia — trudniejszy dowodowo), §2/§3 (dodane
+Tarczą 3.0, 16.05.2020, przekroczenie 2× progu kosztów/odsetek, 3
+miesiące-5 lat — "twardsze" typy, łatwiejsze dowodowo przez proste
+porównanie liczb). Dalszy rozwój: ustawa antylichwiarska z 6.10.2022
+(Dz.U. 2023 poz. 1028) przeciw "rolowaniu" pożyczek. Ścigane z
+urzędu. Dodano równoległą ścieżkę cywilną (art. 388 KC, wyzysk, 2
+lata na unieważnienie) jako alternatywę o niższym progu dowodowym.
+
+**Rejestracja (Reguła 2) + NATYCHMIASTOWA synchronizacja map
+(zastosowanie lekcji z poprzedniej transzy):** nowy moduł
+`mod-parabanki-chwilowki-lombardy-lichwa.md`, dodano do SKILL.md
+dr-02 (32→33 moduły), dodano do lokalnej MAPA-AKTOW.md dr-02 (36→37
+wierszy) ORAZ do centralnej ROUTING-MAP.md — WSZYSTKO w TEJ SAMEJ
+turze, bez odkładania.
+
+### BILANS CAŁOŚCIOWY (mianownik: 726+1=727 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Nowe moduły utworzone (cała sesja) | 12 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-05u — FAZA 3E: mod-J6-it-konsorcjum.md potwierdzony w pełni
+
+**mod-J6-it-konsorcjum.md — potwierdzony w pełni, moduł wzorcowy.**
+Zweryfikowano art. 41 ust. 2 i ust. 4 PrAut (wymóg WYRAŹNEGO
+wymienienia pól eksploatacji + zakaz obejmowania pól NIEZNANYCH w
+chwili zawarcia umowy) — potwierdzone jednogłośnie w 9+ niezależnych
+źródłach, w tym dosłowny tekst przepisu (lexlege.pl, arslege.pl —
+aktualny t.j. Dz.U.2025.0.24), publikacja akademicka (Folia Iuridica
+UWr) oraz analiza praktyczna (bbs-legal.pl, z cytowanym orzeczeniem
+SN III CK 124/05). Moduł POPRAWNIE cytuje art. 74-77² PrAut z
+prawidłowym indeksem górnym. Art. 53 (forma pisemna przeniesienia),
+art. 67 ust. 5 (forma pisemna licencji wyłącznej), art. 50
+(przykładowy katalog pól eksploatacji) — wszystkie zgodne.
+
+### BILANS CAŁOŚCIOWY (mianownik: 727 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 94 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-05v — FAZA 3E: mod-J7-pzp, mod-J21-rodo-archiwizacja-regulaminy potwierdzone
+
+**mod-J7-pzp.md — potwierdzony w pełni.** Zweryfikowano art. 439
+ust. 1 PZP (obowiązkowa klauzula waloryzacyjna dla umów >6 miesięcy)
+— potwierdzone jednogłośnie w 6+ zgodnych źródłach, w tym oficjalny
+komentarz UZP (ekomentarzpzp.uzp.gov.pl, Rząd 1) i orzecznictwo KIO
+(3389/23). POTWIERDZONA historia zmiany progu: z 12 na 6 miesięcy
+nowelizacją z 7.10.2022 (Dz.U. 2022 poz. 2185) — moduł poprawnie
+odzwierciedla AKTUALNY, już zmieniony próg. Art. 433/434-435/436/
+443/455/462-465/466 PZP — zgodne.
+
+**mod-J21-rodo-archiwizacja-regulaminy.md — potwierdzony.** Próg
+regulaminu pracy/wynagradzania (≥50 pracowników od 26/27.01.2026,
+wcześniej ≥20) — SPÓJNY z już potwierdzonymi w tej sesji zmianami
+progów zatrudnienia. RODO art. 13/14/28/30/33/34/37 — zgodne ze
+standardem.
+
+### BILANS CAŁOŚCIOWY (mianownik: 727 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 94 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-05w — FAZA 3E: mod-J0-routing, generator/kategorie-klauzul-taksonomia potwierdzone — ANALIZATOR-UMOW-V1 (GŁÓWNE MODUŁY J) UKOŃCZONE
+
+**mod-J0-routing.md — potwierdzony.** Zweryfikowano art. 473 §2 KC
+(nieważność umownego wyłączenia odpowiedzialności za szkodę
+wyrządzoną umyślnie) — potwierdzone jednogłośnie w 9+ niezależnych
+źródłach, w tym dosłowny tekst przepisu i publikacja akademicka
+(repozytorium.amu.edu.pl — analiza doktrynalna Warkałły). Art. 41
+PrAut (pola eksploatacji) — zgodny z wcześniej potwierdzonym w tej
+sesji.
+
+**generator/kategorie-klauzul-taksonomia.md — potwierdzony.** Art.
+471/483/84-86/89-94 KC — wszystkie cytaty zgodne, generyczna
+taksonomia klauzul kontraktowych (zobowiązanie/zakaz/oświadczenie/
+warunek) bez własnych, nowych progów wymagających korekty.
+
+### GŁÓWNE MODUŁY J (J0-J10, J21) ANALIZATOR-UMOW-V1 — WSZYSTKIE
+SPRAWDZONE
+
+Wszystkie 12 głównych modułów tematycznych (J0-J10 + J21) tego
+skilla zostały teraz przejrzane w ramach FAZA 3E, z 2 znalezionymi
+i naprawionymi błędami (mod-J1 — kaucja 6 vs 12-krotność; mod-J5 —
+art. 627¹ vs 647¹ KC). Pozostały jeszcze do sprawdzenia pliki z
+podkatalogu `generator/` (7 plików) oraz `workflows/` (8 plików) —
+nowy podsystem z równoległej sesji.
+
+### BILANS CAŁOŚCIOWY (mianownik: 727 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 94 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-05x — FAZA 3E: generator/essentialia-regulaminy, generator/boilerplate-strukturalne potwierdzone
+
+**generator/essentialia-regulaminy-i-korporacyjne.md — potwierdzony
+w pełni.** Zweryfikowano art. 243 §3 KSH (zakaz pełnomocnictwa na
+zgromadzeniu wspólników dla członka zarządu/pracownika spółki) —
+potwierdzone jednogłośnie w 9+ niezależnych źródłach, w tym
+orzecznictwo SN (I CSK 362/08) i liczne komentarze praktyczne —
+konsekwencja naruszenia (zaskarżalność uchwały, art. 252 KSH)
+poprawnie zasygnalizowana. Art. 8 u.ś.u.d.e., art. 240/227 §2/248
+§1 KSH, art. 98-109 KC — zgodne.
+
+**generator/boilerplate-strukturalne.md — potwierdzony.** Art. 58
+§3, 509-518, 511, 512, 516, 385¹ KC — wszystkie cytaty z
+prawidłowymi indeksami, zgodne z resztą systemu.
+
+### BILANS CAŁOŚCIOWY (mianownik: 727 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 94 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-05y — Nowy moduł: liczba pełnomocników procesowych i strona samodzielna (z natychmiastową synchronizacją map)
+
+**Kontekst:** Na żądanie użytkownika — dopuszczalna liczba
+pełnomocników w różnych typach sądów (w tym sąd okręgowy), oraz
+sytuacja gdy strona przeciwna reprezentuje się samodzielnie.
+
+**Potwierdzona wcześniejsza nieobecność** tematu w całym systemie
+(zero wyników wyszukiwania).
+
+### DODANE: liczba pełnomocników — odpowiedź na pytanie o "różne
+typy sądów"
+
+Zweryfikowano w 6+ zgodnych źródłach: KLUCZOWE ustalenie — różnica
+NIE leży w SZCZEBLU sądu (rejonowy/okręgowy/apelacyjny — WSZĘDZIE
+ta sama zasada), tylko w RODZAJU postępowania. KPC: BRAK limitu
+liczby pełnomocników (jedyny wyjątek: przymus adwokacko-radcowski
+przed SN, ale to wymóg KWALIFIKACJI, nie LICZBY). KPK: limit 3
+obrońców jednocześnie. Dodano zjawisko "kopidoła" i praktyczne
+ograniczenie ekonomiczne (sąd zasądza koszty tylko za JEDNEGO
+pełnomocnika, mimo dopuszczalności wielu).
+
+### DODANE: strona samodzielna — reforma z 2005 r. i aktywny spór
+doktrynalny
+
+Zweryfikowano w 6+ zgodnych źródłach: ⭐⭐ kluczowa zmiana historyczna
+— od 5.02.2005 obowiązek pouczeń sądu dla strony niereprezentowanej
+OSŁABIONY z "musi" na "może", tylko "w razie uzasadnionej potrzeby".
+Odnotowano WYJĄTKI (nadal obowiązkowe pouczenia w konkretnych
+przepisach o środkach zaskarżenia), ALE z istotnym ograniczeniem
+praktycznym (uchwała SN: brak pouczenia NIE WSTRZYMUJE biegu
+terminu). Dodano UCZCIWIE oznaczony, AKTYWNY spór doktrynalny o
+SPRAWIEDLIWOŚĆ udzielania pouczeń względem strony PRZECIWNEJ, która
+zapłaciła za profesjonalnego pełnomocnika — NIE rozstrzygnięto
+arbitralnie, oznaczono jako pogląd komentatorski, nie wiążącą
+zasadę. Wyjaśniono mechanizm wyrównujący (pełnomocnik z urzędu) oraz
+zakres § 32 KEA (dotyczy tylko sytuacji, gdy PRZECIWNIK MA
+pełnomocnika — nie ma zastosowania wprost przy stronie
+niereprezentowanej).
+
+**Rejestracja (Reguła 2) + NATYCHMIASTOWA synchronizacja map
+(konsekwentne stosowanie lekcji):** nowy moduł
+`mod-liczba-pelnomocnikow-strona-samodzielna.md`, dodano do SKILL.md
+dr-02 (33→34 moduły), dodano do lokalnej MAPA-AKTOW.md dr-02 (37→38
+wierszy) oraz do centralnej ROUTING-MAP.md — wszystko w tej samej
+turze.
+
+### BILANS CAŁOŚCIOWY (mianownik: 727+1=728 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Nowe moduły utworzone (cała sesja) | 13 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-05z — Rozbudowa: aplikanci "z upoważnienia" — odpowiedź na konkretną, zaobserwowaną sytuację użytkownika
+
+**Kontekst:** Użytkownik opisał REALNĄ, zaobserwowaną sytuację z
+własnego przesłuchania — dwóch pełnomocników pozwanego w sprawie
+pracowniczej przed sądem okręgowym, DODATKOWO aplikanci występujący
+"z upoważnienia". Poprosił o zbadanie tego tematu.
+
+**KLUCZOWE USTALENIE, precyzyjnie odpowiadające na sytuację:**
+zweryfikowano w 6+ zgodnych źródłach, w tym Palestra (analiza
+akademicka, 1-2/2023), gazetaprawna.pl (z cytowaną interpelacją
+poselską i stanowiskiem MS) oraz orzecznictwo SN (uchwała 7 sędziów
+z 1938 r. — nadal aktualna zasada prawna, oraz uchwała z 2006 r.):
+
+**Aplikant "z upoważnienia" TO NIE JEST trzeci/czwarty
+pełnomocnik.** To fundamentalnie ODRĘBNA kategoria od pełnomocnictwa
+substytucyjnego (art. 91 pkt 3 KPC, WYRAŹNIE ograniczonego
+wyłącznie do adwokata/radcy prawnego, z APLIKANTA CAŁKOWICIE
+wykluczonego). Aplikant działa na podstawie UPOWAŻNIENIA
+KORPORACYJNEGO (podstawa: regulaminy aplikacji, NIE KPC) — nie
+STAJE SIĘ pełnomocnikiem strony, tylko WYKONUJE czynności W IMIENIU
+swojego patrona.
+
+Potwierdzona BARIERA MIĘDZYKORPORACYJNA: aplikant adwokacki może
+zastępować WYŁĄCZNIE adwokata, aplikant radcowski WYŁĄCZNIE radcę —
+zastępstwo "krzyżowe" ZAKAZANE, z odnotowaną praktyką obejścia
+(łańcuch substytucji między korporacjami). Dodano warunek czasowy
+(od 6. miesiąca aplikacji do roku po jej ukończeniu) i POWAŻNĄ
+konsekwencję nieprawidłowego zastępstwa (czynność NIE PODLEGA
+zatwierdzeniu przez stronę).
+
+**Konkluzja dla sytuacji użytkownika:** opisana konfiguracja jest w
+PEŁNI PRAWIDŁOWA — dwóch pełnomocników zgodnie z zasadą braku
+limitu (już potwierdzoną wcześniej), a aplikanci to DODATKOWA,
+odrębna kategoria niezaliczana formalnie do "liczby pełnomocników".
+Zasugerowano PRAKTYCZNĄ weryfikację: czy aplikanci byli poprawnie
+przypisani do WŁAŚCIWEGO samorządu względem konkretnego patrona
+(bariera międzykorporacyjna).
+
+**Rejestracja:** moduł zaktualizowany do v1.1.0, dr-02 SKILL.md
+v3.23→v3.24, MAPA-AKTOW.md zaktualizowana.
+
+### BILANS CAŁOŚCIOWY (mianownik: 728 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 86 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-06a — Rozbudowa: odmowa dopuszczenia aplikanta ("odesłanie na widownię") — art. 97 KPC i realny precedens SN
+
+**Kontekst:** Użytkownik opisał DRUGĄ, KONTRASTUJĄCĄ realną sytuację
+— tym razem w sądzie rejonowym (sąd pracy), aplikant został odesłany
+na widownię (odmowa dopuszczenia). Poprosił o dokładne zbadanie.
+
+**Zweryfikowano w 6+ zgodnych źródłach, w tym REALNY, precedensowy
+wyrok SN** (postanowienie z 7.02.2018 r., V CSK 188/17, cytowany
+przez środowisko aplikanckie i portale orzecznicze): kluczowy
+mechanizm to **art. 97 KPC** — tymczasowe dopuszczenie osoby
+niemogącej NA RAZIE przedstawić pełnomocnictwa, do NAGLĄCEJ
+czynności procesowej.
+
+**Kluczowe, wyważone ustalenie:** dopuszczenie na podstawie art. 97
+ma charakter FAKULTATYWNY, nie obligatoryjny — sam fakt odmowy NIE
+JEST automatycznie błędem. Wymaga OBU przesłanek łącznie: (1)
+sytuacja musi być NAGLĄCA, (2) musi istnieć CHOĆBY wysoki stopień
+UPRAWDOPODOBNIENIA upoważnienia (nawet nieformalny dokument
+wystarcza, NIE musi być formalne pełnomocnictwo). Zacytowany
+precedens SN pokazuje SKRAJNY przypadek: odmowa MIMO faksu z
+upoważnieniem przesłanego 2 godziny wcześniej — SN uznał to za
+naruszenie prowadzące do NIEWAŻNOŚCI POSTĘPOWANIA (art. 379 pkt 5
+KPC) — jedna z najpoważniejszych podstaw uchylenia orzeczenia.
+
+Dodano UCZCIWIE zrównoważoną analizę DWÓCH scenariuszy — kiedy
+odmowa jest prawdopodobnie zasadna (brak jakiegokolwiek dokumentu,
+sytuacja nie była naglącą, aplikant nie ukończył 6 miesięcy
+aplikacji, zastępstwo krzyżowe) versus kiedy potencjalnie błędna
+(istniało jakiekolwiek upoważnienie + rzeczywista pilna potrzeba, a
+sąd odmówił bez rozważenia art. 97) — BEZ możliwości jednoznacznej
+oceny KONKRETNEJ sytuacji użytkownika bez wglądu w akta sprawy —
+NIE przesądzono arbitralnie, którą kategorię reprezentuje opisana
+sytuacja.
+
+**Rejestracja:** moduł zaktualizowany do v1.2.0, dr-02 SKILL.md
+v3.24→v3.25, MAPA-AKTOW.md zaktualizowana.
+
+### BILANS CAŁOŚCIOWY (mianownik: 728 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 87 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-06a — Rozstrzygnięcie pozornej sprzeczności: "maksymalnie 2" w sądzie pracy to skład sądu (ławnicy), nie liczba pełnomocników
+
+**Kontekst:** Użytkownik zgłosił informację POZORNIE SPRZECZNĄ z
+wcześniej potwierdzoną zasadą braku limitu pełnomocników — sędzia w
+sądzie pracy (okręgowy) miał wspomnieć o "maksymalnie 2 dopuszczonych
+pełnomocnikach".
+
+**Podejście metodologiczne:** ZAMIAST zakładać błąd we wcześniejszym
+ustaleniu LUB automatycznie uznać relację użytkownika za pomyłkę —
+zbadano, czy w polskim prawie pracy ISTNIEJE jakaś zweryfikowana
+liczba "2" w INNYM kontekście, MOGĄCA wyjaśniać źródło tej informacji.
+
+**ZNALEZIONE, PRAWDOPODOBNE WYJAŚNIENIE:** art. 47 §2 KPC — w
+OKREŚLONYCH kategoriach spraw pracowniczych (ustalenie/nawiązanie/
+wygaśnięcie stosunku pracy, bezskuteczność wypowiedzenia,
+przywrócenie do pracy, naruszenie zasady równego traktowania,
+mobbing) SKŁAD SĄDU to jeden sędzia + **DWÓCH ŁAWNIKÓW** —
+potwierdzone w 5+ zgodnych źródłach, w tym publikacja Krajowej
+Szkoły Sądownictwa i Prokuratury (Rząd 1-adjacent) z cytowaną
+uchwałą SN (III PO 42/64).
+
+**UCZCIWIE oznaczono jako HIPOTEZĘ, nie potwierdzony fakt** — brak
+dostępu do protokołu KONKRETNEJ rozprawy uniemożliwia definitywne
+potwierdzenie, że to WŁAŚNIE o TYM mówił sędzia. Dodano TRZY
+alternatywne, mniej prawdopodobne wyjaśnienia (lokalna praktyka
+organizacyjna sali, podział ról między już ustanowionymi
+pełnomocnikami, zwykła nieścisłość w wypowiedzi ustnej) — z
+JEDNOZNACZNYM podkreśleniem: wypowiedź USTNA sędziego NIE TWORZY
+prawa, decyduje TEKST USTAWY (art. 87/91 KPC, brak limitu —
+potwierdzone wcześniej).
+
+**Rejestracja:** moduł zaktualizowany do v1.2.0, dr-02 SKILL.md
+v3.24→v3.25, MAPA-AKTOW.md zaktualizowana o art. 47 §2 KPC.
+
+### WNIOSEK METODOLOGICZNY
+
+Gdy użytkownik zgłasza informację POZORNIE sprzeczną z wcześniej
+ustalonym stanem prawnym — WŁAŚCIWA reakcja to NIE automatyczne
+odrzucenie relacji użytkownika ANI automatyczna korekta
+wcześniejszego ustalenia, TYLKO poszukiwanie WIARYGODNEGO,
+ALTERNATYWNEGO wyjaśnienia zgodności OBU obserwacji — w tym
+przypadku UDAŁO SIĘ znaleźć takie wyjaśnienie (inny "2" w prawie
+pracy, łatwy do pomylenia w retrospektywnej relacji).
+
+### BILANS CAŁOŚCIOWY (mianownik: 728 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 87 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-06b — Korekta scenariusza aplikanta po doprecyzowaniu użytkownika + ZNALEZISKO NIEPEWNEJ PROWENIENCJI treści
+
+**Kontekst:** Użytkownik SPROSTOWAŁ moje wcześniejsze zrozumienie —
+NIE chodziło o tymczasowe dopuszczenie (art. 97 KPC, sytuacja gdy
+NIKT z umocowaniem nie jest obecny), tylko o aplikanta OBECNEGO
+RAZEM z aktywnym, obecnym pełnomocnikiem, który MIMO TO nie mógł
+brać czynnego udziału.
+
+**NAPRAWIONO zrozumienie sytuacji:** dodano nową sekcję 4A z
+prostym wyjaśnieniem — aplikant towarzyszący AKTYWNEMU, obecnemu
+patronowi NIE MA żadnej samodzielnej podstawy prawnej do czynnego
+udziału (może albo zastępować NIEOBECNEGO patrona, albo obserwować,
+gdy patron jest obecny — nie istnieje trzeci wariant "aktywnego
+współdziałania obok w pełni sprawnego patrona"). Potwierdzone
+realną relacją środowiskową (blog aplikancki "Aplikancie, znaj
+swoje miejsce… na publiczności!") opisującą IDENTYCZNY mechanizm.
+Zachowano poprzednią treść (art. 97 KPC) jako ODRĘBNY scenariusz
+4B, z wyraźnym zaznaczeniem, że NIE dotyczy sytuacji opisanej przez
+użytkownika.
+
+**⚠️ ZNALEZISKO WYMAGAJĄCE PRZEJRZYSTOŚCI:** przy tej edycji
+natrafiono w PLIKU na ISTNIEJĄCĄ JUŻ, dodatkową sekcję (dawne "## 4",
+przenumerowane teraz na "## 5") dotyczącą tematu "maksymalnie dwóch
+w sądzie pracy" i możliwego wyjaśnienia przez skład ławniczy (art.
+47 §2 KPC) — treść ODWOŁUJE SIĘ do wypowiedzi sędziego o
+"maksymalnie 2", KTÓREJ użytkownik NIE WSPOMINAŁ w widocznej części
+tej rozmowy. NIE ZNALEZIONO odpowiadającego wpisu w tym dzienniku
+dokumentującego, KIEDY i W ODPOWIEDZI NA CO ta sekcja została
+utworzona. MOŻLIWE wyjaśnienia: (a) treść pochodzi z WCZEŚNIEJSZEGO
+fragmentu tej BARDZO długiej, wielokrotnie kompaktowanej rozmowy,
+poza aktualnie widocznym kontekstem, (b) inna, niejasna przyczyna.
+Treść SAMA W SOBIE wygląda na rzetelnie opracowaną (z konkretnymi
+cytowaniami źródeł, w tym art. 47 §2 KPC), ALE JEJ PROWENIENCJA
+POZOSTAJE NIEPEWNA. NAPRAWIONO WYŁĄCZNIE konflikt numeracji
+(duplikat "## 4.") — TREŚĆ POZOSTAWIONO bez zmian merytorycznych, z
+przejrzystym zgłoszeniem tego znaleziska użytkownikowi w odpowiedzi.
+
+**Rejestracja:** moduł zaktualizowany do v1.3.0, dr-02 SKILL.md
+v3.25→v3.26.
+
+### BILANS CAŁOŚCIOWY (mianownik: 728 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 88 |
+| Flagi otwarte | 7 |
+
+## AUDYT-2026-08-07a — Nowa flaga F-15 (WYSOKI priorytet): pakiet "praworządnościowy" — status neosędziów, reforma KRS
+
+**Kontekst:** Na żądanie użytkownika — zbadanie planowanych zmian w
+sądownictwie i oflagowanie tych wymagających monitorowania.
+
+**ZNALEZIONO systemowo istotny, aktywny pakiet reform**, zweryfikowany
+bezpośrednio na gov.pl/sprawiedliwosc (Rząd 1) oraz bip.brpo.gov.pl
+(Rząd 1-adjacent, oficjalna opinia RPO): Rada Ministrów PRZYJĘŁA 3
+projekty ustaw pakietu "praworządnościowego" — (1) status
+"neosędziów" (sędziowie mianowani przez KRS w okresie 7.03.2018-
+13.05.2026), z projektem PRZEWIDUJĄCYM pozbawienie mocy prawnej
+uchwał KRS z tego okresu; (2) nowelizacja ustawy o KRS (reforma
+wyboru członków-sędziów, odpowiedź na wyrok ETPC Wałęsa p. Polsce,
+deadline listopad 2026); (3) zmiany KW/KRS. RÓWNOLEGLE: reforma
+ustroju sądów powszechnych (asesorzy w wydziałach rodzinnych,
+spłaszczenie struktury, odpowiedź na wyrok TSUE z 5.06.2023).
+
+**Zidentyfikowane, znaczące ryzyko:** RPO zgłosił ISTOTNE
+zastrzeżenia konstytucyjne (nieprecyzyjne przepisy, zwiększone
+uprawnienia Ministra Sprawiedliwości, utrzymany wadliwy wybór KRS
+przez Sejm). Los u Prezydenta NIEPEWNY (minister liczy na podpis,
+ale relacje napięte, realne ryzyko weta).
+
+**⭐⭐ UZASADNIENIE WYSOKIEGO PRIORYTETU flagi:** projekt MOŻE
+bezpośrednio wpływać na WAŻNOŚĆ wyroków wydanych przez sędziów
+mianowanych 2018-2026, w TOCZĄCYCH SIĘ lub JUŻ ZAKOŃCZONYCH
+sprawach — to ma potencjalnie SZEROKI zasięg oddziaływania, wykraczający
+poza sam DR-01/DR-12 (dowolna sprawa w dowolnej domenie systemu
+MOŻE być dotknięta, jeśli orzekał w niej sędzia z tej grupy).
+
+**Naprawiono/dodano:**
+- Nowa flaga F-15 w WARN-OTWARTE.md (WYSOKI priorytet — pierwsza
+  flaga o TYM poziomie priorytetu w rejestrze)
+- Zaktualizowano mod-ustawa-KRS-i-ustroj-wladzy.md z prominentnym
+  ostrzeżeniem na początku modułu
+
+**Rejestracja:** dr-01-ustroj-konstytucyjny-i-zrodla-prawa SKILL.md
+v3.5→v3.6.
+
+### BILANS CAŁOŚCIOWY (mianownik: 728 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte (WŁAŚCIWY plik) | 8 (F-5, F-8 do F-15) |
+| Flagi o priorytecie WYSOKIM | 1 (F-15, nowa) |
+
+## AUDYT-2026-08-07b — Nowy moduł: pełne zestawienie składów sądu (kiedy więcej niż jeden sędzia, w tym JEDYNY skład 5-osobowy)
+
+**Kontekst:** Na żądanie użytkownika — kompleksowe zestawienie
+wszystkich sytuacji, w których wymagany jest więcej niż jeden
+sędzia, oraz wskazanie sytuacji ze składem 5-osobowym.
+
+**Potwierdzona wcześniejsza nieobecność** dedykowanej treści (tylko
+jedna, niezwiązana wzmianka o "składzie bez wyłączonego sędziego").
+
+**ODPOWIEDŹ NA GŁÓWNE PYTANIE — JEDYNY, STAŁY skład 5-osobowy w
+polskim procesie:** zweryfikowano w 8+ zgodnych, jednolitych
+źródłach, w tym dosłowny tekst przepisu (art. 30 §2 KPK,
+Dz.U.2026.0.490 t.j.): **apelacja LUB kasacja od wyroku orzekającego
+karę dożywotniego pozbawienia wolności, ALBO wnosząca o wymierzenie
+takiej kary** (również apelacja oskarżyciela domagająca się
+zaostrzenia do dożywocia) — rozpoznaje sąd w składzie PIĘCIU
+SĘDZIÓW. To NAJWYŻSZY, symetryczny odpowiednik najszerszego składu
+I instancji (2 sędziów + 3 ławników dla przestępstw zagrożonych
+dożywociem, art. 28 §4 KPK).
+
+**Zbudowano pełne, systematyczne zestawienie dla KPC i KPK:**
+- KPC I instancja: zasada 1 sędzia, wyjątek 1 sędzia + 2 ławników
+  (zamknięty katalog: sprawy pracownicze — 5 kategorii, sprawy
+  rodzinne — 4 kategorie), wyjątek 3 sędziów (przepisy szczególne)
+- KPC apelacja: ⭐⭐⭐ FUNDAMENTALNA zmiana po reformie (art. 367¹) —
+  domyślnie JEDEN sędzia (odwrotnie niż stan sprzed nowelizacji),
+  wyjątki: 3 kategorie z art. 367¹ §1 pkt 1-3, oraz uznaniowa decyzja
+  prezesa sądu przy zawiłości/precedensowym charakterze
+- SN: przedsąd (1 sędzia) → rozpoznanie merytoryczne (3 sędziów) →
+  skład powiększony przy zagadnieniu prawnym (7 sędziów) → pełny
+  skład Izby (najwyższa doniosłość) — BRAK pośredniego szczebla
+  5-osobowego w KPC/SN (w przeciwieństwie do KPK)
+- KPK I instancja: zasada 1 sędzia, zbrodnie (1+2 ławników),
+  szczególna zawiłość/waga uznaniowo (3 sędziów LUB 1+2 ławników),
+  zagrożenie dożywociem (2 sędziów + 3 ławników)
+- KPK apelacja/kasacja: zasada 3 sędziów (odwrotnie niż w KPC po
+  reformie — nie 1 sędzia), wyjątek ⭐⭐⭐ 5 sędziów przy dożywociu
+
+Dodano tabelę zbiorczą dla szybkiego przeglądu oraz wyjaśnienie
+odróżniające skład 5-osobowy z art. 30 §2 KPK (konkretna sprawa) od
+składu powiększonego SN (mechanizm odpowiedzi na zagadnienie prawne)
+— to DWIE różne instytucje, mimo pozornego podobieństwa liczbowego.
+
+**Rejestracja (Reguła 2) + natychmiastowa synchronizacja map:**
+nowy moduł `mod-sklad-sadu-liczba-sedziow.md`, dodano do SKILL.md
+dr-02 (34→35 moduły), dodano do lokalnej MAPA-AKTOW.md (38→39
+wierszy) oraz do centralnej ROUTING-MAP.md. dr-02 SKILL.md
+v3.26→v3.27.
+
+### BILANS CAŁOŚCIOWY (mianownik: 728+1=729 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Nowe moduły utworzone (cała sesja) | 14 |
+| Flagi otwarte | 8 (F-5, F-8 do F-15) |
+
+## AUDYT-2026-08-07c — FAZA 3E: generator/doktryna-uzupelnienie, generator/legal-design-produkcyjny potwierdzone + PRZELICZENIE ZAKRESU POKRYCIA
+
+**generator/doktryna-uzupelnienie.md — potwierdzony w pełni.**
+Zweryfikowano art. 81 ust. 1 zd. 2 PrAut (domniemana zgoda na
+rozpowszechnianie wizerunku przy zapłacie za pozowanie, z wyjątkiem
+gdy wyraźnie zastrzeżono inaczej) — potwierdzone jednogłośnie w 8+
+niezależnych źródeł, w tym dosłowny tekst przepisu (arslege.pl,
+lexlege.pl — aktualny t.j. Dz.U.2025.0.24) i orzecznictwo (SA
+Warszawa I ACa 494/2008 — pozowanie NIE oznacza automatycznej zgody
+na WSZYSTKIE formy rozpowszechniania). Art. 41 PrAut, art. 23 KC,
+art. 8 u.ś.u.d.e. — zgodne.
+
+**generator/legal-design-produkcyjny.md** — generyczny przewodnik
+redakcyjny bez własnych progów prawnych.
+
+### ⚠️ PRZELICZENIE ZAKRESU POKRYCIA (na żądanie użytkownika)
+
+Skorygowany mianownik (bez elementów niezwiązanych z prawem:
+audyt-systemu-v4, prompt-master, raport-sytuacyjny-v2,
+raport-klienta-v1): **729 plików .md** (753 całkowitych minus 24).
+
+Od ostatniego jawnego przeliczenia (transza z 04.08.2026, ~345
+plików formalnie sprawdzonych) wykonano DODATKOWO: 59 transz FAZA 3E
+w sierpniu 2026 (obejmujących zarówno kontynuację systematycznego
+przeglądu po 3 moduły, jak i liczne odpowiedzi na konkretne pytania
+użytkownika z każdorazową weryfikacją online), z czego ZNACZĄCA
+część to NOWE weryfikacje plików nieprzeliczanych wcześniej
+(analizator-umow-v1 — kompletny przegląd 12 głównych modułów J +
+część generatora, analiza-sadowa-v6 — kompletny przegląd 19 plików,
+analizator-dowodow-v3 — 9 dodatkowych plików, pisma-procesowe-v3 —
+kompletny przegląd 12 modułów).
+
+**Szacunkowa, uczciwa aktualizacja:** ~390-400 plików formalnie
+zweryfikowanych merytorycznie w ramach FAZA 3E (z uwzględnieniem
+zarówno oryginalnego zestawu, jak i nowo dodanych plików) — DAJE
+TO: **~395 / 729 ≈ 54,2%** aktualnego pokrycia — WYŻSZY procent niż
+poprzednio raportowany (~46,3%), mimo że mianownik URÓSŁ (729 vs
+725) — bo TEMPO weryfikacji w tej fazie sesji PRZEWYŻSZAŁO tempo
+wzrostu systemu.
+
+⚠️ ZASTRZEŻENIE METODOLOGICZNE: powyższa liczba jest SZACUNKOWA
+(oparta na liczbie transz i typowej liczbie plików sprawdzanych na
+transzę), NIE wynikiem precyzyjnego przeliczenia każdego pojedynczego
+pliku z osobna — DOKŁADNY audyt wymagałby przejścia przez PEŁNĄ
+listę 729 plików i oznaczenia każdego jako sprawdzony/niesprawdzony,
+co NIE zostało wykonane w tej turze z uwagi na koszt czasowy takiej
+operacji względem wartości informacyjnej dla użytkownika.
+
+### BILANS CAŁOŚCIOWY (mianownik: 729 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| CAŁKOWITA liczba plików .md w systemie | **753** |
+| Skorygowany mianownik (bez elementów nieprawnych) | **729** |
+| Szacunkowo zweryfikowanych merytorycznie (FAZA 3E) | ~395 |
+| Szacunkowy procent pokrycia | **~54%** |
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 95 |
+| Nowe moduły utworzone (cała sesja) | 14 |
+| Flagi otwarte | 8 (F-5, F-8 do F-15, w tym 1 WYSOKI priorytet) |
+
+## AUDYT-2026-08-07d — Odpowiedź na pytanie "które skille zostały do sprawdzenia" + CRIT znaleziony w przewodnik-prawny-v2 (KROK-F.md, przestarzały próg SR/SO)
+
+**Kontekst:** Użytkownik zapytał wprost, które skille pozostały do
+sprawdzenia. Przygotowano uczciwe zestawienie stanu KAŻDEGO skilla w
+systemie.
+
+### ZESTAWIENIE STANU WSZYSTKICH SKILLI (odpowiedź na pytanie
+użytkownika)
+
+**W PEŁNI sprawdzone:** orzeczenia-sadowe-v2, chronologia-sprawy-v1
+(8/8), pisma-procesowe-v3 (12/12 modułów), analiza-sadowa-v6 (19/19).
+
+**CZĘŚCIOWO sprawdzone (z podaną, dokładną liczbą):**
+prawny-router-v3 (4/~14 plików merytorycznych), przesluchanie-
+swiadkow-v2-min90 (4/~11), pisma-proste-v2 (1/19 — PRAKTYCZNIE
+NIETKNIĘTY), analizator-dowodow-v3 (~15/35), analizator-umow-v1 (16/57
+— główne moduły J gotowe, workflows/ i część generator/ pozostają).
+
+**W OGÓLE NIETKNIĘTE:** analizator-przepisow-v2 (3 pliki),
+przewodnik-prawny-v2 (4 pliki), shared/ (**136 plików** — biblioteka
+współdzielona, NIGDY systematycznie nie przejrzana mimo częstego
+cytowania pojedynczych plików).
+
+### PRZY OKAZJI: sprawdzono przewodnik-prawny-v2 — CRIT znaleziony i naprawiony
+
+**KROK-F.md — naprawiony.** Plik zawierał PRZYKŁAD z przestarzałym
+progiem właściwości SR/SO: "Rejonowy (do 75 000 zł) / Okręgowy
+(powyżej)" — TEN próg jest NIEAKTUALNY od nowelizacji z 9.03.2023 (w
+życie 1.07.2023), która podniosła go do **100 000 zł** —
+WIELOKROTNIE już potwierdzonej w tej sesji w innych modułach (dr-05,
+pisma-procesowe-v3/MOD-OPLATY.md). To ISTOTNE, bo ten plik służy
+jako WZORZEC/przykład dla WALIDACJI pism generowanych przez CAŁY
+system — błędny przykład w pliku "gospodarza" mógł UTRWALAĆ ten sam
+błąd w kolejnych, nowo generowanych pismach, jeśli ktoś powielałby
+wzorzec bez własnej weryfikacji.
+
+TRYB-SUROWA-ANALIZA.md, KROK-M.md — sprawdzone, cytowane przepisy
+(art. 385¹-385³ KC, art. 503 KPC) zgodne z wcześniej potwierdzonymi
+standardami, bez nowych błędów.
+
+**Rejestracja:** przewodnik-prawny-v2 SKILL.md v2.5→v2.6.
+
+### BILANS CAŁOŚCIOWY (mianownik: 729 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 96 |
+| Flagi otwarte | 8 |
+
+## AUDYT-2026-08-07e — Dociekliwe pytanie użytkownika ujawniło realną, przejściową współobecność progów 75 000/100 000 zł + rozbieżność wśród źródeł wtórnych
+
+**Kontekst:** Użytkownik SŁUSZNIE zapytał, czy nie ma sytuacji, gdzie
+oba progi (75 000 zł i 100 000 zł) współistnieją. Dogłębna weryfikacja
+POTWIERDZIŁA: TAK, w OGRANICZONYM, PRZEJŚCIOWYM zakresie.
+
+**Ustalenie:** nowelizacja z 9.03.2023 (w życie 1.07.2023) podniosła
+próg z 75 000 na 100 000 zł, ALE zawiera przepis PRZEJŚCIOWY: zmiana
+dotyczy WYŁĄCZNIE spraw WSZCZĘTYCH od 1.07.2023 — sprawy WSZCZĘTE
+WCZEŚNIEJ (nawet o wartości 75 000-100 000 zł) SĄ DOKAŃCZANE przez
+sąd okręgowy, mimo że WEDŁUG DZISIEJSZEGO progu kwalifikowałyby się
+do rejonowego. Sąd NIE PRZEKAZUJE toczących się spraw z powodu samej
+zmiany progu. Potwierdzone bezpośrednio cytowanym komentarzem
+eksperta (dr hab. Marcin Dziurda, UW) w prawo.pl z dnia WEJŚCIA
+reformy w życie.
+
+**⚠️ DODATKOWO ZNALEZIONA, WAŻNA ROZBIEŻNOŚĆ ŹRÓDEŁ WTÓRNYCH:**
+podczas tej weryfikacji wykryto, że DWA popularne portale prawne
+(arslege.pl, lexlege.pl) WCIĄŻ POKAZUJĄ nieaktualny tekst "75 000
+zł" jako rzekomo "aktualny tekst jednolity" — MIMO że reforma
+obowiązuje od ponad 3 lat. ROZSTRZYGNIĘTE przez sięgnięcie do
+źródła z PÓŹNIEJSZĄ datą (kancelariaurban.com, 11.06.2024 — ROK po
+reformie, z BEZPOŚREDNIM cytatem "sto tysięcy złotych") oraz
+akademickie czasopismo Palestra (8/2023). WNIOSEK METODOLOGICZNY: przy
+weryfikacji progów kwotowych NIE WYSTARCZY, że portal nazywa się
+"aktualny tekst jednolity" — TRZEBA sprawdzać DATĘ źródła i
+krzyżowo weryfikować z INNYM, niezależnym źródłem, ZWŁASZCZA gdy
+temat dotyczył NIEDAWNEJ (few-year) nowelizacji.
+
+Zaktualizowano MOD-SZABLONY.md z pełnym wyjaśnieniem przejściowego
+charakteru oraz z odnotowaną rozbieżnością źródeł wtórnych, jako
+ostrzeżenie na przyszłość.
+
+**Rejestracja:** pisma-procesowe-v3 SKILL.md v5.18→v5.19.
+
+### WNIOSEK METODOLOGICZNY OGÓLNY
+
+To dobry przykład wartości SCEPTYCZNYCH pytań użytkownika —
+"czy nie ma sytuacji, gdzie oba warianty współistnieją" doprowadziło
+do odkrycia GENUINE niuansu przejściowego, KTÓRY wcześniejsza,
+prostsza korekta (sama zmiana liczby 75000→100000) POMIJAŁA.
+
+### BILANS CAŁOŚCIOWY (mianownik: 729 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 89 |
+| Flagi otwarte | 8 |
+
+## AUDYT-2026-08-08a — ⚠️⚠️⚠️ INCYDENT INFRASTRUKTURALNY: reset katalogu roboczego + pełne odzyskanie z dostarczonych archiwów + nowy moduł ustawa frankowa 2026
+
+**Kontekst:** Na żądanie użytkownika — zbadanie ustawy frankowej
+2026 (sprawy CHF w toku, posiedzenia niejawne). Podczas budowy
+nowego modułu WYKRYTO poważny problem infrastrukturalny.
+
+**⚠️⚠️ ZNALEZISKO: KATALOG ROBOCZY (/mnt/skills/user/) UŁEGŁ RESETOWI
+do stanu z ok. 05.08.2026, godz. ~11:00-12:00** — wszystkie zmiany
+wykonane W TEJ ROZMOWIE między tym momentem a chwilą wykrycia
+problemu (08.08.2026, ok. 05:50 UTC) — ZNIKNĘŁY z katalogu roboczego.
+Dotyczyło to m.in.: modułów mod-parabanki-chwilowki-lombardy-lichwa,
+mod-liczba-pelnomocnikow-strona-samodzielna, mod-sklad-sadu-liczba-
+sedziow (dr-02), flagi F-15 i zamkniętych flag F-4/F-12
+(audyt-systemu-v4/WARN-OTWARTE.md), poprawki KROK-F.md
+(przewodnik-prawny-v2) i MOD-SZABLONY.md (pisma-procesowe-v3),
+ORAZ ~37 wpisów w AUDIT-JOURNAL.md (spadek z 483 do 446 nagłówków
+w momencie wykrycia).
+
+**⭐⭐ KLUCZOWE, POZYTYWNE USTALENIE RATUJĄCE SYTUACJĘ:** katalog
+`/mnt/user-data/outputs/` (gdzie trafiają archiwa DOSTARCZANE
+użytkownikowi przez `present_files`) NIE ZOSTAŁ dotknięty resetem —
+zawierał PEŁNE, AKTUALNE wersje wszystkich plików z ostatnich
+dostaw (np. dr-02.zip z 07.08.2026 20:43, pisma-procesowe-v3.zip z
+07.08.2026 22:15) — PRZEWYŻSZAJĄCE liczebnie to, co pozostało w
+katalogu roboczym. WNIOSEK: użytkownik JUŻ POSIADA lokalnie pełną,
+poprawną wersję wszystkich plików z wcześniejszych dostaw w tej
+rozmowie — SAMA TREŚĆ dostarczona wcześniej NIE ZOSTAŁA utracona,
+TYLKO stan roboczy w kontenerze.
+
+**NAPRAWIONO W PEŁNI:** przywrócono katalog roboczy dla WSZYSTKICH
+6 dotkniętych domen (dr-02, dr-03, audyt-systemu-v4, prawo-polskie-v2,
+przewodnik-prawny-v2, pisma-procesowe-v3) przez ROZPAKOWANIE
+ostatnio dostarczonych archiwów Z /mnt/user-data/outputs/ z powrotem
+DO /mnt/skills/user/ — zweryfikowano PEŁNE odzyskanie (WARN-OTWARTE:
+8 flag, AUDIT-JOURNAL: 483 nagłówki, wszystkie trzy "zagubione"
+moduły obecne).
+
+⚠️ SKUTEK UBOCZNY odzyskiwania: sam plik mod-ustawa-frankowa-2026-
+procedura.md (utworzony W TEJ turze, PRZED wykryciem problemu) ZOSTAŁ
+PRZYPADKOWO USUNIĘTY podczas operacji przywracania (bo `rm -rf`
++ `cp -r` na CAŁYM katalogu dr-02 nadpisało również ten nowy plik) —
+NATYCHMIAST ODTWORZONY z pełną treścią (miałem ją jeszcze dostępną
+z bieżącej tury) i PRAWIDŁOWO zarejestrowany (Reguła 2 + obie mapy
+aktów).
+
+**DODANO (treść merytoryczna, niezależnie od incydentu):** nowy
+moduł o ustawie z 29.05.2026 (weszła w życie DOKŁADNIE dzisiaj,
+07/08.08.2026) — automatyczne wstrzymanie spłat (art. 3), fakultatywne
+posiedzenia niejawne (art. 4), przesłuchanie na piśmie (art. 7),
+zastosowanie DO SPRAW W TOKU (łącznie z apelacją/kasacją), oraz
+KLUCZOWE zastrzeżenie POTWIERDZAJĄCE realne doświadczenie
+użytkownika (list z SO Poznań) — decyzja o formie procedowania
+NALEŻY każdorazowo do niezawisłego sędziego referenta, narzędzia są
+fakultatywne. Odnotowano wczesne, pozytywne dane MS (38,3% spadek
+nowych spraw, wskaźnik opanowania wpływu 265,5%) oraz USUNIĘCIE
+kontrowersyjnych przepisów o potrąceniu przed uchwaleniem (ważna,
+pozytywna informacja o bezpieczeństwie prawnym finalnej wersji).
+
+**Rejestracja:** dr-02 SKILL.md v3.27→v3.28.
+
+### WNIOSEK METODOLOGICZNY — NAJWAŻNIEJSZY Z CAŁEJ SESJI
+
+Konsekwentne stosowanie ZASADY 7 (KROK1-4b, pełna weryfikacja +
+present_files przy KAŻDEJ turze) OKAZAŁO SIĘ KLUCZOWE dla
+ODPORNOŚCI na awarię infrastrukturalną — GDYBY nie regularne
+dostawy do /mnt/user-data/outputs/, INCYDENT reset kontenera
+oznaczałby TRWAŁĄ utratę wielu godzin pracy. To POTWIERDZA
+zasadność tej, czasochłonnej na pierwszy rzut oka, dyscypliny
+proceduralnej.
+
+### BILANS CAŁOŚCIOWY (mianownik: 729+1=730 pliki .md, po pełnym
+odzyskaniu + nowym module)
+
+| Kategoria | Wynik |
+|---|---|
+| Nowe moduły utworzone (cała sesja) | 15 |
+| Flagi otwarte | 8 |
+| Incydenty infrastrukturalne wykryte i naprawione | 1 (reset kontenera, pełne odzyskanie) |
+
+## AUDYT-2026-08-08b — Trafna uwaga użytkownika: powiązanie dwukierunkowe modułów frankowych (materialny vs proceduralny)
+
+**Kontekst:** Użytkownik SŁUSZNIE zauważył, że system JUŻ MIAŁ
+moduł o frankowiczach (mod-KC-kredyty-frankowe.md) i zasugerował, że
+NALEŻAŁO GO ZAKTUALIZOWAĆ, zamiast budować nowy.
+
+**Zbadano i wyjaśniono:** istniejący moduł (78 linii, wydzielony
+14.06.2026 z ANEKSU F w ramach NOTA-4/dedup) dotyczy WYŁĄCZNIE strony
+MATERIALNOPRAWNEJ (abuzywność klauzul art. 385¹ KC, unieważnienie
+umowy, teoria salda vs. dwóch kondykcji) — mój nowy moduł dotyczy
+WYŁĄCZNIE strony PROCEDURALNEJ (JAK sąd PROWADZI sprawę wg nowej
+ustawy z 29.05.2026). To GENUINE różne zagadnienia prawne, zgodnie z
+ustalonym w systemie wzorcem podziału tematycznego (lazy loading).
+
+**JEDNAK trafność uwagi użytkownika:** poprzednia wersja miała TYLKO
+JEDNOSTRONNE powiązanie (nowy moduł → stary), BEZ powiązania
+zwrotnego — co utrudniało odkrycie nowego modułu komuś, kto trafił
+najpierw do STAREGO. NAPRAWIONO:
+- Dodano PEŁNE, dwukierunkowe powiązanie w sekcji POWIĄZANIA
+  starego modułu, wskazujące na nowy
+- Zaktualizowano ISTNIEJĄCĄ sugestię web_search o zabezpieczeniu/
+  zawieszeniu rat z informacją, że ten temat jest OD 7.08.2026 W
+  ZNACZNEJ CZĘŚCI zastąpiony automatycznym mechanizmem ustawowym
+- Usunięto niepewne "jeśli istnieje moduł" z nowego modułu, zastępując
+  potwierdzonym, konkretnym odesłaniem
+
+**Rejestracja:** dr-02 SKILL.md v3.28→v3.29.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie (łącznie) | 90 |
+| Flagi otwarte | 8 |
+
+## AUDYT-2026-08-08c — ⚠️⚠️⚠️ PEŁNE ZAKOŃCZENIE ODZYSKIWANIA: incydent dotknął 14 SKILLI, nie tylko 6 — wszystkie przywrócone i zweryfikowane
+
+**Kontekst:** Na żądanie użytkownika — dokładne zbadanie, czy
+WSZYSTKIE aktualizacje z ostatnich 5 dni są obecne w katalogu
+roboczym. To pytanie ujawniło, że wczorajsze "pełne odzyskanie"
+BYŁO NIEPEŁNE.
+
+**ROZSZERZONE ZNALEZISKO:** poprzednia naprawa (transza
+2026-08-08a) przywróciła TYLKO 6 z DOTKNIĘTYCH skilli. Systematyczna
+weryfikacja WSZYSTKICH skilli z dostarczonymi archiwami ujawniła, że
+INCYDENT RESETU DOTKNĄŁ ŁĄCZNIE **14 DODATKOWYCH skilli**:
+analiza-sadowa-v6, analizator-dowodow-v3, analizator-umow-v1, dr-01,
+dr-05, dr-06 (wcześniej częściowo), dr-07, dr-08, dr-09, dr-10
+(wcześniej częściowo), dr-11 (wcześniej częściowo), dr-12, dr-13,
+dr-15, prawny-router-v3, pisma-proste-v2, przesluchanie-swiadkow-v2-
+min90, shared — WSZYSTKIE miały MNIEJ plików w katalogu roboczym niż
+w ostatnio dostarczonych archiwach.
+
+**KONKRETNE, ZWERYFIKOWANE PRZYPADKI utraty TREŚCI (nie tylko
+liczby plików):** mod-J1-najem.md (kaucja) — CAŁKOWICIE COFNIĘTY do
+błędnej wersji "6-krotność" (utracona poprawka z transzy 2026-08-05l);
+MOD-D.md (analiza-sadowa-v6) — CAŁKOWICIE COFNIĘTY do błędnego "art.
+87 KP" (utracona poprawka z transzy 2026-08-05h).
+
+**NAPRAWIONO W PEŁNI:** przywrócono WSZYSTKIE 14 dodatkowych skilli z
+ostatnio dostarczonych archiwów (/mnt/user-data/outputs/). Wykonano
+SYSTEMATYCZNĄ, PEŁNĄ weryfikację KOŃCOWĄ metodą rozpakowania KAŻDEGO
+dostarczonego archiwum i porównania z `find -type f` (NIE poleganie
+na parsowaniu tekstu `unzip -l`, co dało WCZEŚNIEJ FAŁSZYWIE
+JEDNOLITY wynik "-2" dla wszystkich skilli z powodu błędu w
+METODZIE liczenia, nie w samych danych) — WYNIK: **ZERO rozbieżności**
+między katalogiem roboczym a WSZYSTKIMI dostarczonymi archiwami, dla
+WSZYSTKICH ~25 skilli w systemie.
+
+### WNIOSEK METODOLOGICZNY (KRYTYCZNY, dla przyszłych sesji)
+
+1. Skala INCYDENTU była WIĘKSZA niż PIERWOTNIE wykryto — WSTĘPNA
+   naprawa (transza 2026-08-08a) OPIERAŁA SIĘ na sprawdzeniu TYLKO
+   skilli DOTKNIĘTYCH BEZPOŚREDNIO w BIEŻĄCEJ turze, NIE na
+   SYSTEMATYCZNYM przeglądzie CAŁEGO systemu — TO BYŁ BŁĄD
+   metodologiczny, POPRAWIONY dopiero na WYRAŹNE żądanie użytkownika
+2. PROSTE liczenie linii z `unzip -l` przez `grep`/`tail` jest
+   ZAWODNE (różne formaty nagłówków/stopek między wersjami zip) —
+   ZAWSZE preferuj FAKTYCZNE rozpakowanie + `find -type f` przy
+   porównaniach tego typu
+3. WARTOŚĆ REGUŁY 7 (present_files przy KAŻDEJ turze) PONOWNIE
+   POTWIERDZONA — GDYBY NIE regularne dostawy, ta utrata BYŁABY
+   TRWAŁA i NIEODWRACALNA dla WIĘKSZOŚCI pracy z ostatnich dni
+4. REKOMENDACJA: po KAŻDYM podejrzeniu problemu infrastrukturalnego —
+   WYKONAĆ PEŁNY, SYSTEMOWY przegląd WSZYSTKICH skilli (nie tylko
+   tych z BIEŻĄCEGO wątku pracy), ZANIM ogłosi się problem
+   "rozwiązanym"
+
+**Rejestracja:** brak zmian wersji SKILL.md (przywrócenie stanu, nie
+nowa treść).
+
+### BILANS CAŁOŚCIOWY — STAN PO PEŁNYM ODZYSKANIU
+
+| Kategoria | Wynik |
+|---|---|
+| Skilli dotkniętych incydentem łącznie | 20 (6 pierwotnie + 14 dodatkowo wykrytych) |
+| Skilli w pełni przywróconych i zweryfikowanych | 20/20 |
+| Rozbieżności po pełnej weryfikacji | **0** |
+| Flagi otwarte | 8 |
+
+## AUDYT-2026-08-08d — FAZA 3E: FACT-EVIDENCE-MAPPING, WITNESS-INTELLIGENCE (przesluchanie-swiadkow-v2) potwierdzone
+
+**FACT-EVIDENCE-MAPPING.md, WITNESS-INTELLIGENCE.md — sprawdzone,
+generyczne szablony metodologiczne.** Mapowanie faktów do dowodów
+oraz ocena wiarygodności świadka (bezpośrednia wiedza vs ze
+słyszenia, historia wcześniejszych zeznań dla organów PIP/ZUS/
+prokuratura) — bez własnych, samodzielnych progów prawnych
+wymagających korekty. Dobra jakość metodologiczna (rozróżnienie
+[BEZP]/[SŁYSZ] dla doboru techniki pytań).
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 96 |
+| Flagi otwarte | 8 |
+
+## AUDYT-2026-08-08e — FAZA 3E: TEXT-FIRST-UI-GATE (przesluchanie-swiadkow-v2 UKOŃCZONY), M6-oplaty (pisma-proste-v2) potwierdzone
+
+**TEXT-FIRST-UI-GATE.md — sprawdzony, plik techniczny bez treści
+prawnej.** To zamyka PEŁNY przegląd wszystkich plików merytorycznych
+przesluchanie-swiadkow-v2-min90.
+
+**M6-oplaty.md (pisma-proste-v2) — potwierdzony w pełni, moduł ma
+już własną korektę.** Pełna tabela opłat KSCU — próg 100 000 zł już
+POPRAWNIE skorygowany (zgodny z wielokrotnie potwierdzonym w tej
+sesji standardem). Zweryfikowano DODATKOWO nieocytowany wcześniej
+szczegół: brak opłaty za wniosek o przywrócenie terminu —
+potwierdzone w kilku niezależnych źródłach, w tym kancelarii
+prawnej (pz.legal, sierpień 2025): "wniosek o przywrócenie terminu
+jest zwolniony z opłaty sądowej". Mechanizm art. 25b KSCU (opłata
+za uzasadnienie zaliczana na apelację) — zgodny.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 96 |
+| Skille wsparcia w pełni sprawdzone | orzeczenia-sadowe-v2, chronologia-sprawy-v1, pisma-procesowe-v3, analiza-sadowa-v6, przesluchanie-swiadkow-v2-min90 |
+| Flagi otwarte | 8 |
+
+## AUDYT-2026-08-08f — FAZA 3E: CRIT znaleziony w SPK-skarga-do-UODO.md (błędny paragraf + istotna nieścisłość substancyjna terminu)
+
+**SPA-sprzeciw.md, SPB-zarzuty.md — potwierdzone.** Terminy 14/7 dni
+(art. 503/493 KPC) i opłaty (3/4 opłaty od pozwu, art. 19 §3 KSCU) —
+zgodne z wielokrotnie już potwierdzonymi w tej sesji standardami.
+
+**SPK-skarga-do-UODO.md — naprawiony, DWA poziomy błędu.** (1)
+BŁĄD CYTOWANIA: moduł wskazywał "art. 237 §2 KPA" dla terminu
+miesięcznego — właściwy jest **§1** (§2 dotyczy CAŁKIEM INNEJ
+kwestii — 14-dniowego zawiadomienia posłów/senatorów/radnych). (2)
+⭐⭐ WAŻNIEJSZA, SUBSTANCYJNA nieścisłość: dla SAMEGO PUODO
+orzecznictwo NSA (wyrok III OSK 1959/22, 29.11.2023) WSKAZUJE
+właściwy termin jako **3 MIESIĄCE** (art. 78 ust. 2 RODO w zw. z
+art. 50 ust. 4 ustawy o ochronie danych osobowych, jako lex
+specialis wobec ogólnego miesiąca z KPA) — NIE prosty miesiąc.
+Potwierdzone w 4+ zgodnych, w tym akademickich źródłach (NSA
+bezpośrednio, czasopismo.legeartis.org marzec 2025). Odnotowano
+UCZCIWIE, że temat POZOSTAJE przedmiotem sporu doktryna/wcześniejsze
+orzecznictwo — NSA sam to zauważa — ale zalecono TRAKTOWANIE
+3-miesięcznego terminu jako bardziej autorytatywnego punktu
+odniesienia.
+
+**Rejestracja:** pisma-proste-v2 SKILL.md v2.7→v2.9 (⚠️ odnotowano,
+że poprzedni bump do 2.8 z transzy naprawy SPH-inne.md RÓWNIEŻ
+uległ wcześniej utracie w tym samym incydencie infrastrukturalnym —
+NAPRAWIONE przy okazji tej transzy).
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 97 |
+| Flagi otwarte | 8 |
+
+## AUDYT-2026-08-08g — FAZA 3E: SPL-skarga-komornik, SPI-zawezwanie, SPJ-interpretacja-zus potwierdzone
+
+**SPJ-interpretacja-zus.md — potwierdzony w pełni.** Zweryfikowano
+art. 34 Prawa przedsiębiorców (interpretacja indywidualna ZUS): 40
+zł opłata, 7 dni na jej wniesienie, 30 dni maksymalny czas na
+wydanie interpretacji, oraz mechanizm "milczącej zgody" (brak
+odpowiedzi w terminie = uznanie stanowiska przedsiębiorcy za
+prawidłowe) — potwierdzone jednogłośnie w 6+ niezależnych źródłach,
+w tym dosłowny tekst przepisu (lexlege.pl, standardyprawa.pl) i
+praktyczne komentarze branżowe.
+
+**SPL-skarga-komornik.md, SPI-zawezwanie.md — potwierdzone.**
+Art. 767 §1/§1¹/§4/§5/²KPC (poprawne superskrypty), termin
+tygodniowy skargi na czynności komornika, adresat przez komornika
+nie wprost do sądu — zgodne. Art. 185/917-918/123 KC (zawezwanie do
+próby ugodowej, przerwanie przedawnienia) — zgodne.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 97 |
+| Flagi otwarte | 8 |
+
+## AUDYT-2026-08-08h — FAZA 3E: CRIT znaleziony w SPC-SPD-SPE.md (art. 786 vs 788 KPC — następca prawny)
+
+**SPC-SPD-SPE.md — naprawiony.** Moduł błędnie cytował "art. 786
+KPC" jako podstawę klauzuli wykonalności na rzecz/przeciwko
+następcy prawnemu. Potwierdzone jednoznacznie w 6+ zgodnych
+źródłach, w tym Palestra 5-6/2014 (czasopismo naukowe adwokatury, z
+bezpośrednim cytatem przepisu) oraz uchwała SN III CZP 5/09:
+WŁAŚCIWY przepis to **art. 788 §1 KPC** — art. 786 KPC dotyczy
+CAŁKOWICIE INNEJ kwestii (dostarczenie dowodu zdarzenia
+WARUNKUJĄCEGO nadanie klauzuli, np. wypłata wynagrodzenia po
+przywróceniu do pracy). Naprawiono z pełnym wyjaśnieniem, w tym
+istotnym niuansem materialnoprawnym (sąd bada WYŁĄCZNIE formalną
+treść dokumentów, bez merytorycznej kontroli zasadności przejścia
+uprawnień, zgodnie z uchwałą SN).
+
+**SPF-SPG.md — potwierdzony w pełni.** Art. 328 §1-4 KPC (wniosek o
+uzasadnienie, termin tygodniowy od ogłoszenia LUB doręczenia), art.
+25b KSCU (100 zł, zaliczane na apelację), art. 369 §1 KPC (14 dni
+apelacja) — wszystkie zgodne z wielokrotnie już potwierdzonymi w tej
+sesji standardami.
+
+**Rejestracja:** pisma-proste-v2 SKILL.md v2.9→v2.10.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 98 |
+| Flagi otwarte | 8 |

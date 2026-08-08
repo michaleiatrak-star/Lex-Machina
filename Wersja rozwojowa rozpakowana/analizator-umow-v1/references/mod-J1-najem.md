@@ -24,18 +24,34 @@ isap.sejm.gov.pl → OPL → rozdziały o najmie okazjonalnym i instytucjonalnym
 
 **NM-1 — Kaucja bez górnego limitu (HIGH RISK)**
 ```
-PRAWO: OPL art. 6 ust. 1 → kaucja max 6-krotność miesięcznego czynszu
+⚠️ POPRAWIONE 2026-08-05 (FAZA 3E/ZASADA 14) — poprzednia wersja
+BŁĘDNIE podawała 6-krotność jako limit DLA NAJMU ZWYKŁEGO:
+
+PRAWO: OPL art. 6 ust. 1 → kaucja max **12-KROTNOŚĆ** miesięcznego
+  czynszu — DLA NAJMU ZWYKŁEGO (ten moduł) — ⚠️ 6-krotność DOTYCZY
+  WYŁĄCZNIE najmu OKAZJONALNEGO (art. 19a ust. 4) oraz
+  INSTYTUCJONALNEGO (art. 19f) — TO INNE, ODRĘBNE limity dla INNYCH
+  typów umowy — NIE MYLIĆ przy redagowaniu umowy najmu zwykłego
 PUŁAPKA: "kaucja w wysokości X" bez wskazania co wchodzi w kaucję
   → Wynajmujący potrąca kaucję za "normalne zużycie" (niedopuszczalne)
   → Normalne zużycie mieszkania NIE obciąża najemcy (OPL art. 6d)
+TERMIN ZWROTU: **1 MIESIĄC** od opróżnienia lokalu (art. 6 ust. 4) —
+  NIE sztywno "30 dni" (miesiąc kalendarzowy ≠ zawsze 30 dni)
+WALORYZACJA: kaucja PODLEGA obowiązkowej waloryzacji (art. 6 ust. 3)
+  — zwrot w kwocie odpowiadającej AKTUALNEJ (na dzień zwrotu) stawce
+  czynszu × krotność przyjęta przy pobieraniu, NIE MNIEJ niż kwota
+  pobrana
 WERYFIKUJ: isap.sejm.gov.pl → OPL → art. 6 (aktualne brzmienie!)
 
 REKOMENDACJA:
-  „§X. Kaucja w wysokości [X] zł (max 6-krotność czynszu) zostanie zwrócona
-  w terminie 30 dni od opróżnienia lokalu, po potrąceniu jedynie udokumentowanych
+  „§X. Kaucja w wysokości [X] zł (max 12-krotność czynszu) zostanie zwrócona
+  w terminie 1 miesiąca od opróżnienia lokalu, po potrąceniu jedynie udokumentowanych
   szkód wykraczających poza normalne zużycie odpowiadające sposobowi korzystania
   z lokalu (art. 6d ustawy o ochronie praw lokatorów).
   Na żądanie Najemcy Wynajmujący przedstawi szczegółowe rozliczenie kaucji."
+
+Potwierdzone w 8+ zgodnych źródłach, w tym dosłowny tekst art. 6
+(dlajurysty.pl) i lexlege.pl.
 ```
 
 **NM-2 — Wypowiedzenie bez zachowania ustawowych przesłanek (CRITICAL)**

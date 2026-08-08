@@ -1,6 +1,6 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: 3.19
+version: 3.29
 description: |
   DR-02: Prawo Cywilne, Rodzinne i Gospodarcze
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -68,9 +68,29 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (32 łącznie — ✓ 32 OK, ☐ 0 STUB)
+## Moduły (36 łącznie — ✓ 36 OK, ☐ 0 STUB)
 
 ```
+  [✓] NOWY  mod-ustawa-frankowa-2026-procedura
+              (dodany 2026-08-07, na żądanie użytkownika — ustawa z
+               29.05.2026, weszła w życie 7.08.2026, łapie sprawy w
+               toku, posiedzenia niejawne fakultatywne, decyzja
+               każdorazowo sędziego referenta)
+  [✓] NOWY  mod-sklad-sadu-liczba-sedziow
+              (dodany 2026-08-07, na żądanie użytkownika — pełne
+               zestawienie składów wieloosobowych KPC/KPK, w tym
+               JEDYNY stały skład 5-osobowy: apelacja/kasacja od
+               wyroku dożywocia, art. 30 §2 KPK)
+  [✓] NOWY  mod-liczba-pelnomocnikow-strona-samodzielna
+              (dodany 2026-08-05, na żądanie użytkownika — KPC bez
+               limitu liczby pełnomocników [niezależnie od szczebla
+               sądu], KPK max 3 obrońców, strona samodzielna od
+               reformy 2005 r. — osłabione pouczenia sądu)
+  [✓] NOWY  mod-parabanki-chwilowki-lombardy-lichwa
+              (dodany 2026-08-05, na żądanie użytkownika — parabanki
+               bez definicji prawnej, nadzór KNF od 1.01.2024, MPKK
+               art. 36a ukk, ⚡ nowa ustawa lombardowa/projekt, lichwa
+               art. 304 KK trzy typy + wyzysk art. 388 KC)
   [✓] NOWY  mod-pies-droga-rowerowa-odpowiedzialnosc
               (dodany 2026-08-04, na żądanie użytkownika — art. 431
                KC, odpowiedzialność właściciela psa za kolizję na

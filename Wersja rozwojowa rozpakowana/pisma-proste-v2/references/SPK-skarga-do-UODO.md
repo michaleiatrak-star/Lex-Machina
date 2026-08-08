@@ -13,8 +13,26 @@ PO WYCZERPANIU ścieżki bezpośredniej z administratorem.*
 - **art. 60 i n. ustawy z 10.05.2018 r. o ochronie danych osobowych** —
   krajowe uregulowanie postępowania skargowego (⚠️ zweryfikuj aktualny
   t.j. na ISAP)
-- **art. 237 §2 KPA** — stosowany do terminu rozpatrzenia (skarga
-  inicjuje postępowanie administracyjne)
+- **art. 237 §1 KPA** — stosowany ODPOWIEDNIO do terminu rozpatrzenia
+  (skarga inicjuje postępowanie administracyjne) — ⚠️ POPRAWIONE
+  2026-08-08 (FAZA 3E/ZASADA 14): poprzednia wersja błędnie wskazywała
+  "§2" (który dotyczy CAŁKIEM INNEJ kwestii — 14-dniowego
+  zawiadomienia POSŁÓW/senatorów/radnych, gdy TO ONI wnieśli skargę
+  w czyimś imieniu — NIE ma zastosowania do zwykłej skargi obywatela)
+  — właściwy jest **§1** (ogólny termin miesięczny)
+- ⭐⭐ WAŻNE ZASTRZEŻENIE SUBSTANCYJNE (nie tylko cytat): dla SAMEGO
+  PUODO orzecznictwo NSA (wyrok z 29.11.2023, sygn. III OSK 1959/22)
+  WSKAZUJE, że WŁAŚCIWYM terminem jest w rzeczywistości **3 MIESIĄCE**
+  — WYNIKAJĄCE z art. 78 ust. 2 RODO w zw. z art. 50 ust. 4 ustawy o
+  ochronie danych osobowych z 10.05.2018 — TRAKTOWANE jako przepis
+  SZCZEGÓLNY (lex specialis) wobec ogólnego, miesięcznego terminu z
+  art. 237 §1 KPA — DOPIERO bezskuteczny upływ TEGO 3-miesięcznego
+  terminu uprawnia do skargi na bezczynność do WSA — ⚠️ TEMAT
+  POZOSTAJE PRZEDMIOTEM SPORU między doktryną a częścią
+  wcześniejszego orzecznictwa (NSA WYRAŹNIE to zauważa w
+  uzasadnieniu) — TRAKTUJ **3 MIESIĄCE** jako BARDZIEJ WIARYGODNY,
+  AUTORYTATYWNY punkt odniesienia (NSA, sąd wyższej instancji), NIE
+  prosty, ogólny miesiąc z KPA
 
 ## ⭐ KOREKTA TERMINOLOGICZNA
 
@@ -87,7 +105,11 @@ zadania-osob.md`), skarga do UODO jest środkiem NASTĘPCZYM.
 ## TERMIN ROZPATRZENIA
 
 ```
-□ NIEZWŁOCZNIE, NIE PÓŹNIEJ niż w MIESIĄC od otrzymania (art. 237 §2 KPA)
+□ ORIENTACYJNIE, NIE PÓŹNIEJ niż w MIESIĄC od otrzymania wg ogólnej
+  zasady art. 237 §1 KPA (⚠️ POPRAWIONE 2026-08-08 — było błędnie
+  "§2"; DODATKOWO: orzecznictwo NSA III OSK 1959/22 wskazuje na
+  właściwy termin **3 MIESIĘCY** z art. 78 ust. 2 RODO jako lex
+  specialis — patrz wyżej, sekcja przepisów)
 □ W SPRAWACH SKOMPLIKOWANYCH — do 60 DNI
 □ Pierwsza odpowiedź informuje o PODJĘTYCH krokach (np. wszczęcie
   postępowania) — NIE jest jeszcze rozstrzygnięciem

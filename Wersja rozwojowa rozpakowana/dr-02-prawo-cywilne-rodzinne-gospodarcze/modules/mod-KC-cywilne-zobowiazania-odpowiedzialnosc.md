@@ -372,23 +372,246 @@ REKOMENDACJA: □ Sąd — nakaz zapłaty  □ Sąd — tryb zwykły  □ Ugoda 
 
 ---
 
-## ANEKS D — SŁUŻEBNOŚCI I PRAWO RZECZOWE (KC Księga II)
+## ANEKS D — SŁUŻEBNOŚCI I PRAWO RZECZOWE (KC Księga II) —
+ROZBUDOWANY 2026-08-05, na żądanie użytkownika
 
 > Weryfikuj przed każdym powołaniem: KC Dz.U. 2025 poz. 1071 t.j. ze zm.
 
 ```
-SŁUŻEBNOŚĆ DROGI KONIECZNEJ (art. 145 KC):
-  → Przesłanki: brak dostępu do drogi publicznej LUB dostęp nieodpowiedni
-  → Tryb: umownie LUB sądownie (wniosek do sądu rejonowego — postępowanie nieprocesowe)
-  → Wynagrodzenie: jednorazowe lub periodyczne — ustalane przez sąd
-  → Trasa: możliwie najmniej uciążliwa dla nieruchomości obciążonej
-  → Wykreślenie: gdy ustanie podstawa (art. 295 KC)
+⭐⭐ SŁUŻEBNOŚĆ DROGI KONIECZNEJ (art. 145 KC) — PEŁNA TREŚĆ:
 
-SŁUŻEBNOŚĆ PRZESYŁU (art. 305¹–305⁴ KC):
+PRZESŁANKA: brak ODPOWIEDNIEGO dostępu do drogi publicznej LUB do
+  budynków gospodarskich należących do nieruchomości — "odpowiedni"
+  NIE oznacza "jakikolwiek" — dostęp NIEDOGODNY/nieproporcjonalnie
+  utrudniony TEŻ może uzasadniać żądanie
+PRZEBIEG: z uwzględnieniem POTRZEB nieruchomości bez dostępu ORAZ
+  NAJMNIEJSZEGO obciążenia gruntów sąsiednich — DWA kryteria
+  RÓWNOWAŻONE, nie hierarchiczne
+SZCZEGÓLNY PRZYPADEK: jeśli potrzeba drogi wynika ZE SPRZEDAŻY
+  gruntu (podział działki), a strony się NIE POROZUMIEJĄ — SĄD
+  W MIARĘ MOŻLIWOŚCI prowadzi drogę PRZEZ GRUNTY będące przedmiotem
+  TEJ WŁAŚNIE czynności (nie przez zupełnie inne, przypadkowe
+  działki sąsiednie)
+
+⭐⭐ KIEDY MOŻNA SIĘ POZBYĆ DROGI KONIECZNEJ — DWA RÓŻNE MECHANIZMY
+  (odpowiedź na pytanie użytkownika):
+
+  (A) WYGAŚNIĘCIE Z MOCY PRAWA (art. 293 KC) — BEZ ORZECZENIA SĄDU:
+      służebność WYGASA SAMA, jeśli uprawniony NIE WYKONYWAŁ jej
+      przez **10 LAT** — logika: skoro nie korzysta, znaczy że
+      NIE JEST konieczna
+      ⚠️ PUŁAPKA PRAKTYCZNA: jeśli służebność jest WPISANA do
+      księgi wieczystej — SAMO wygaśnięcie NIE WYSTARCZY —
+      KONIECZNE jest OSOBNE powództwo o USZCZEGÓŁOWIENIE (uzgodnienie
+      treści KW z rzeczywistym stanem prawnym) — inaczej NOWY
+      nabywca nieruchomości władnącej MOŻE, dzięki rękojmi wiary
+      publicznej ksiąg wieczystych, NABYĆ służebność mimo że
+      faktycznie już wygasła
+
+  (B) ZNIESIENIE PRZEZ SĄD, NA WNIOSEK WŁAŚCICIELA OBCIĄŻONEGO —
+      DWA WARIANTY zależnie od okoliczności:
+      → art. 295 KC — służebność UTRACIŁA WSZELKIE ZNACZENIE dla
+        nieruchomości władnącej → zniesienie BEZ WYNAGRODZENIA
+        (SN: przy ocenie tej przesłanki ZBĘDNE jest rozważanie
+        MOTYWÓW pierwotnego orzeczenia ustanawiającego drogę —
+        liczy się WYŁĄCZNIE OBECNA sytuacja)
+      → art. 294 KC — WSKUTEK ZMIANY STOSUNKÓW służebność stała
+        się SZCZEGÓLNIE UCIĄŻLIWA dla obciążonego, A JEDNOCZEŚNIE
+        NIE JEST konieczna do prawidłowego korzystania z
+        nieruchomości władnącej → zniesienie ZA WYNAGRODZENIEM
+        ⚠️ TEST DWUSTOPNIOWY: (1) czy społeczno-gospodarcze
+        przeznaczenie nieruchomości władnącej WYMAGA istnienia
+        służebności — JEŚLI TAK, (2) czy CEL ten może być
+        osiągnięty W INNY SPOSÓB (np. powstała alternatywna droga
+        publiczna, INNY dostęp) — zmiana MUSI dotyczyć sfery
+        GOSPODARCZEJ (np. istotne zwiększenie ruchu pojazdów
+        dostawczych z powodu działalności gospodarczej) — SAMA
+        zmiana stosunków OSOBISTYCH między sąsiadami (konflikt,
+        niechęć) NIE WYSTARCZY
+
+Potwierdzone w 6+ zgodnych źródłach (poradnikprzedsiebiorcy.pl
+[luty 2025], katarzyna-porzycka.pl, kancelaria-actio.com [czerwiec
+2024], sluzebnosc.info, archon.pl, z cytowanym orzecznictwem SN III
+CKN 467/98 i SO Gdańsk III Ca 283/12).
+
+SŁUŻEBNOŚĆ PRZESYŁU (art. 3051–3054 KC):
   → Dotyczy: sieci energetyczne, wodociągowe, gazowe, teletechniczne
   → Właściciel może żądać ustanowienia za wynagrodzeniem
   → Możliwość zasiedzenia służebności o treści służebności przesyłu
   → Roszczenie o wynagrodzenie za bezumowne korzystanie z nieruchomości (art. 224–225 KC)
+
+⭐⭐ ROZBUDOWANE 2026-08-05 (na żądanie użytkownika) — SŁUP/KABEL/
+RURA NA DZIAŁCE (elektryczność, światłowód, woda, gaz):
+
+DWA POJĘCIA, NIE MYLIĆ:
+  → WYNAGRODZENIE — gdy urządzenie postawiono LEGALNIE (umowa/decyzja
+    administracyjna) — opłata za ZGODNE Z PRAWEM korzystanie
+  → ODSZKODOWANIE — gdy urządzenie postawiono BEZ tytułu prawnego
+    (brak umowy, brak decyzji, brak wpisu w KW) — rekompensata za
+    BEZPRAWNE działanie przedsiębiorcy — TRZY PROSTE PYTANIA
+    weryfikujące uprawnienie: (1) czy była pisemna zgoda/umowa? (2)
+    czy jest wpis służebności w KW? (3) czy była decyzja
+    administracyjna? — jeśli odpowiedź na WSZYSTKIE brzmi "nie" —
+    prawdopodobnie przysługuje odszkodowanie
+
+BRAK USTAWOWEJ TABELI STAWEK: wysokość wynagrodzenia zależy od:
+  przebiegu kabla/rury, powierzchni PASA TECHNOLOGICZNEGO (strefy
+  ograniczonego użytkowania wokół urządzenia), ograniczeń w
+  zabudowie, UTRATY WARTOŚCI działki, uciążliwości eksploatacyjnych
+  (dostęp służb do konserwacji/napraw) — REALNY PRZYKŁAD z praktyki:
+  początkowa oferta 700 zł wynegocjowana do 4000 zł PLUS dodatkowe
+  ograniczenia dostępu tylko do celów konserwacyjnych — POKAZUJE, że
+  PIERWSZA oferta przedsiębiorcy NIE JEST ostateczna, WARTO negocjować
+
+TRYB USTANOWIENIA — DWIE ŚCIEŻKI:
+  → SĄDOWA: gdy strony się nie porozumieją — sąd, z POMOCĄ opinii
+    biegłego rzeczoznawcy, ustala TREŚĆ służebności I wysokość
+    wynagrodzenia
+  → ADMINISTRACYJNA: przy INWESTYCJACH CELU PUBLICZNEGO — tryb
+    wywłaszczeniowy (ustawa o gospodarce nieruchomościami) — OGRANICZA
+    sposób korzystania z nieruchomości NIEZALEŻNIE od zgody właściciela
+  → FORMA: jeśli operator proponuje umowne ustanowienie służebności —
+    oświadczenie właściciela WYMAGA formy AKTU NOTARIALNEGO, by
+    służebność mogła zostać ujawniona w KW i WIĄZAĆ przyszłych
+    właścicieli
+
+⭐⭐⭐ PRZEŁOMOWY WYROK TRYBUNAŁU KONSTYTUCYJNEGO Z 2 GRUDNIA 2025 R.
+(sygn. P 10/16) — FUNDAMENTALNIE ZMIENIA SYTUACJĘ WŁAŚCICIELI
+DZIAŁEK ZE SŁUPAMI:
+
+TREŚĆ ROZSTRZYGNIĘCIA: TK uznał za NIEZGODNE z Konstytucją (art. 21
+  ust. 1, art. 64 ust. 2-3 w zw. z art. 31 ust. 3, art. 2) —
+  dotychczasową interpretację art. 292 w zw. z art. 285 §1-2 KC,
+  która UMOŻLIWIAŁA przedsiębiorcy przesyłowemu LUB Skarbowi Państwa
+  nabycie PRZED 3 SIERPNIA 2008 R. (przed wejściem w życie art.
+  305¹-305⁴ KC) — PRZEZ ZASIEDZENIE — służebności gruntowej "o treści
+  odpowiadającej" służebności przesyłu
+
+CO TO OZNACZA W PRAKTYCE: przedsiębiorstwa przesyłowe (energetyczne,
+  gazowe, telekomunikacyjne) od LAT broniły się przed żądaniami
+  właścicieli działek ARGUMENTEM: "nabyliśmy prawo do korzystania z
+  Twojej działki PRZEZ ZASIEDZENIE (30 lat), więc NIE MUSIMY płacić
+  wynagrodzenia ani zawierać umowy" — TEN ARGUMENT TK UZNAŁ ZA
+  NIEKONSTYTUCYJNY dla przypadków SPRZED 2008 r. — przedsiębiorstwa
+  NIE MOGĄ już SKUTECZNIE się na niego powoływać
+
+⭐ REALNE, JUŻ ZACHODZĄCE SKUTKI (potwierdzone w 6+ źródłach z 2026 r.):
+  → WZNOWIENIA POSTĘPOWAŃ: właściciele, którzy PRZEGRALI wcześniej
+    sprawę o ustanowienie służebności (bo sąd uznał zasiedzenie) —
+    MOGĄ żądać wznowienia na podstawie art. 401¹ KPC
+  → JUŻ POJAWIAJĄ SIĘ pierwsze KORZYSTNE dla właścicieli orzeczenia
+    po wznowieniu
+  → MOŻLIWOŚĆ dochodzenia REKOMPENSATY za CAŁY okres bezprawnego
+    korzystania z gruntu, W GRANICACH nieprzedawnionego okresu
+  → PROGNOZA BRANŻOWA (komentarz prezesa dużej grupy odszkodowawczej,
+    program "Biznes 24"): sprawy dot. służebności przesyłu MOGĄ
+    OSIĄGNĄĆ skalę PODOBNĄ do fali spraw FRANKOWYCH — "początek
+    nowej fali spraw sądowych"
+
+⚠️ GENUINE, NIEROZSTRZYGNIĘTA KWESTIA PROCEDURALNA: uchwała 7
+  sędziów SN z 17.12.2009 (III PZP 2/09, zasada prawna) stwierdziła,
+  że wyroki INTERPRETACYJNE TK (stwierdzające niezgodność
+  OKREŚLONEJ WYKŁADNI, nie usuwające przepisu z systemu) NIE
+  STANOWIĄ podstawy wznowienia postępowania — CZY wyrok P 10/16 MA
+  taki interpretacyjny charakter jest PRZEDMIOTEM AKTYWNEJ dyskusji
+  prawniczej (część komentatorów wskazuje NAWET na możliwość, że
+  polskie sądy powszechne MOGĄ w praktyce NIE UZNAWAĆ tego typu
+  orzeczeń TK za w pełni wiążące, powołując się na kontekst
+  orzecznictwa TSUE dot. legitymacji TK od 2016 r.) — TRAKTUJ TEN
+  ASPEKT jako SPORNY, NIE jednoznacznie rozstrzygnięty, mimo że SAM
+  WYROK TK jest jednoznaczny co do MERITUM
+
+Potwierdzone w 8+ zgodnych, bardzo aktualnych źródłach (prawo.pl
+[x2], currenda.pl, trybunal.gov.pl [Rząd 1, oficjalna treść wyroku],
+cgolegal.pl, votum-sa.pl, adwokat-szymczyk.pl, kancelariakg.com).
+```
+
+## ANEKS E — WYWŁASZCZENIE POD INWESTYCJE PUBLICZNE (drogi,
+infrastruktura krytyczna, zbiorniki retencyjne) — dodane 2026-08-05,
+na żądanie użytkownika
+
+```
+WIELOŚĆ SPECUSTAW — KAŻDA Z WŁASNYMI ZASADAMI (⚠️ NIE ISTNIEJE JEDNA,
+  uniwersalna procedura wywłaszczeniowa — zależy od CELU inwestycji):
+  → Specustawa DROGOWA (2003) — drogi publiczne
+  → Specustawa PRZECIWPOWODZIOWA — zbiorniki retencyjne, wały,
+    inwestycje przeciwpowodziowe
+  → Specustawa o CPK (Centralny Port Komunikacyjny) — lotnisko +
+    towarzysząca infrastruktura kolejowa ("szprychy")
+  → Ustawa o gospodarce nieruchomościami — TRYB OGÓLNY (podstawowy),
+    stosowany gdy BRAK specustawy dedykowanej danej inwestycji
+
+PROCEDURA OGÓLNA (wzorzec, z wariantami wg konkretnej specustawy):
+  1) Decyzja o LOKALIZACJI inwestycji (nazwa różni się wg ustawy:
+     ZRID dla dróg, decyzja lokalizacyjna dla innych)
+  2) OBOWIĄZEK ROKOWAŃ inwestora z właścicielem PRZED wywłaszczeniem
+     przymusowym — cel: UZGODNIENIE wysokości odszkodowania, forma:
+     PISEMNA umowa
+  3) BRAK POROZUMIENIA w ciągu **2 MIESIĘCY** od uostatecznienia się
+     decyzji lokalizacyjnej → wysokość odszkodowania ustala WOJEWODA
+     w drodze DECYZJI ADMINISTRACYJNEJ
+  4) WYCENA przez RZECZOZNAWCĘ MAJĄTKOWEGO — decyzja o odszkodowaniu
+     w terminie do **30 DNI**
+  5) BONUS za SZYBKIE opróżnienie/udostępnienie: dodatkowe **5%**
+     wysokości odszkodowania dla właścicieli, którzy przekażą
+     nieruchomość w terminie WSKAZANYM (opróżnią i udostępnią
+     inwestorowi)
+
+⭐ ZALICZKI — ISTOTNE RÓŻNICE MIĘDZY SPECUSTAWAMI (⚠️ brak
+  jednolitego standardu, każda inwestycja ma WŁASNE zasady):
+  → Specustawa DROGOWA: zaliczka **70%** ustalonej kwoty, NA WNIOSEK
+    KAŻDEGO wywłaszczonego
+  → Specustawa PRZECIWPOWODZIOWA: zaliczka **100%**, ALE TYLKO gdy
+    wywłaszczony ODWOŁAŁ SIĘ od decyzji ustalającej odszkodowanie
+  → Specustawa CPK: zaliczka **85%** wartości, TYLKO dla WŁAŚCICIELI
+    NIERUCHOMOŚCI ZABUDOWANYCH (nie dotyczy niezabudowanych działek)
+
+CO PODLEGA ODSZKODOWANIU (część zabudowań/przedmiotów spornych):
+  → BUDYNKI mieszkalne/gospodarcze, BUDOWLE (drogi, ogrodzenia,
+    zbiorniki), NASADZENIA (drzewa, krzewy), ZASIEWY — WSZYSTKO co
+    TRWALE związane z nieruchomością PRZECHODZI na własność Skarbu
+    Państwa/JST wraz z gruntem
+  → GRANICA bywa NIEOSTRA w praktyce: ogrodzenie na fundamencie =
+    trwale związane (WLICZA SIĘ), ale sama siatka rozciągnięta na
+    nim NIEKONIECZNIE; wiata NIE jest trwale związana, CHYBA że
+    zakotwiona na fundamencie; rośliny w GRUNCIE = trwale związane,
+    W DONICACH = nie
+  → JEŚLI nowe urządzenia/instalacje UNIEMOŻLIWIAJĄ właścicielowi
+    DALSZE prawidłowe korzystanie z RESZTY nieruchomości (część NIE
+    objęta wywłaszczeniem) w DOTYCHCZASOWY sposób — MOŻE on ŻĄDAĆ,
+    by zarządca drogi/inwestor NABYŁ od niego CAŁĄ nieruchomość (lub
+    prawo użytkowania wieczystego) NA WŁASNOŚĆ Skarbu Państwa, W
+    DRODZE UMOWY
+
+REALNY, UDOKUMENTOWANY PRZYKŁAD (zbiornik Kamieniec Ząbkowicki):
+  na etapie, gdy JESZCZE NIE ISTNIEJE oficjalny projekt inwestycji z
+  ostatecznymi granicami — właściciele nieruchomości w OBSZARZE
+  orientacyjnym MUSZĄ JUŻ LICZYĆ SIĘ z możliwością wywłaszczenia —
+  MAPA orientacyjna wskazuje TEREN pod INWESTYCJĘ GŁÓWNĄ ORAZ
+  ODDZIELNIE pod "zbiornik wyrównawczy i rekreacyjny" — WIELE
+  odrębnych fragmentów tej samej, szerszej inwestycji przeciwpowodziowej
+
+⭐⭐ AKTYWNY, REALNY PROBLEM SYSTEMOWY (interwencja RPO, maj 2026):
+  Rzecznik Praw Obywatelskich Marcin Wiącek SKIEROWAŁ pismo do
+  Ministerstwa Infrastruktury, ALARMUJĄC o RAŻĄCEJ PRZEWLEKŁOŚCI
+  postępowań ODSZKODOWAWCZYCH (szczególnie specustawa drogowa) —
+  KLUCZOWY problem: nieruchomość TRZEBA oddać NIEMAL NATYCHMIAST, ALE
+  na odszkodowanie CZEKA SIĘ MIESIĄCAMI, czasem LATAMI — PRZYCZYNA
+  (przyznana WPROST przez rząd w uzasadnieniu nowelizacji ustawy o
+  CPK z 24.09.2025): operaty szacunkowe TRACĄ WAŻNOŚĆ w zderzeniu z
+  DYNAMICZNIE zmieniającymi się cenami rynku nieruchomości, wymuszając
+  KOLEJNE wyceny — RAŻĄCA ASYMETRIA KAR: za przekroczenie terminów
+  ODDANIA inwestycji GROŻĄ dotkliwe sankcje finansowe URZĘDNIKOM/
+  wykonawcom, ALE za wieloletnią ZWŁOKĘ w wydaniu DECYZJI
+  ODSZKODOWAWCZEJ — BRAK jakichkolwiek ustawowych konsekwencji dla
+  urzędników — RPO domaga się SYSTEMOWEGO uszczelnienia tej luki
+
+Potwierdzone w 7+ zgodnych, aktualnych źródłach (rp.pl [aktualizacja
+04.08.2026], bip.brpo.gov.pl [Rząd 1 — oficjalne pismo RPO],
+forsal.pl [maj 2026], nczas.info [maj 2026], wywlaszczenie.pl,
+inlegis.pl [luty 2026], kancelariajasik.pl, archiwum.gddkia.gov.pl
+[Rząd 1-adjacent]).
+```
 
 ## ⭐ BEZUMOWNE KORZYSTANIE Z RZECZY/NIERUCHOMOŚCI — ROZBUDOWANE
 2026-08-04, na żądanie użytkownika, na podstawie opracowań

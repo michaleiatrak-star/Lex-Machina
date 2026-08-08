@@ -1,6 +1,6 @@
 ---
 name: dr-03-prawo-karne-wykroczenia-egzekucja
-version: 3.27
+version: 3.31
 description: |
   DR-03: Prawo Karne, Wykroczenia, Egzekucja
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -76,7 +76,18 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   obrona obligatoryjna art. 79 §1 pkt 2-4 KPK (→ mod-niewidomy-prawa-prawne.md,
   mod-niepelnosprawnosc-intelektualna-gluchota.md)
 
-## Moduły (56 łącznie — ✓ 56 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+## Moduły (58 łącznie — ✓ 58 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+## ⚡ NOWY 2026-08-05: mod-nielegalny-pobor-mediow — na żądanie
+## użytkownika: kradzież prądu (art. 278 §5 KK, zawsze przestępstwo)
+## vs kradzież wody (ODRĘBNY, łagodniejszy reżim — wykroczenie, SN
+## wykluczył wodę z pojęcia "energii"), WiFi sąsiada (art. 267 KK,
+## brak hasła NIE oznacza zgody), podłączenie do wspólnej instalacji
+## w bloku, analogia do wyłudzenia usług hotelowych
+## ⚡ NOWY 2026-08-04: mod-podmiana-czesci-naprawa-oszustwo — na
+## żądanie użytkownika: art. 286 KK (oszustwo — z realnym wyrokiem
+## SAOS II K 282/16, mechanik zamontował używane części zamiast
+## nowych dostarczonych przez klienta), art. 284 KK (przywłaszczenie
+## oryginalnej części), ścieżka karna/cywilna
 ## ⚡ NOWY 2026-08-04: mod-przerobki-modyfikacje-pojazdow — na żądanie
 ## użytkownika: odblokowanie hulajnóg elektrycznych (projekt ustawy
 ## MI), przyciemnianie szyb (progi VLT 75%/70%), pojazdy marki "SAM"

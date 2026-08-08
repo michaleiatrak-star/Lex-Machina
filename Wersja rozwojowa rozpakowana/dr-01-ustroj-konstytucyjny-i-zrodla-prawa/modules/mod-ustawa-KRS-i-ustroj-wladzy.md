@@ -3,6 +3,24 @@
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** Ustawa o KRS — Dz.U. 2011 poz. 714 ze zm. | Ustawa o RM — Dz.U. 2022 poz. 2032 ze zm. | Ustawa o wykonywaniu mandatu posła i senatora — Dz.U. 2018 poz. 1799 ze zm.
 **Data weryfikacji online:** 2026-06-05
+
+⚠️⚡⚡ FLAGA F-15 (dodana 2026-08-07, na żądanie użytkownika) — patrz
+`audyt-systemu-v4/references/WARN-OTWARTE.md` — WYSOKI PRIORYTET.
+Rada Ministrów PRZYJĘŁA pakiet "praworządnościowy": (1) ustawa ws.
+statusu sędziów powołanych przez KRS w okresie 7.03.2018-13.05.2026
+("neosędziowie") — PRZEWIDUJE pozbawienie mocy prawnej uchwał KRS z
+tego okresu (z wyłączeniem "początkujących sędziów"); (2)
+nowelizacja ustawy o KRS (reforma sposobu wyboru członków-sędziów,
+odpowiedź na wyrok pilotażowy ETPC Wałęsa p. Polsce, deadline
+listopad 2026); (3) zmiany KW/KRS (rejestr). RÓWNOLEGLE: reforma
+ustroju sądów powszechnych (asesorzy w wydziałach rodzinnych,
+spłaszczenie struktury). RPO zgłosił ISTOTNE zastrzeżenia
+konstytucyjne. NIEPEWNY los u Prezydenta (ryzyko weta). ⚠️
+BEZPOŚREDNIE znaczenie: MOŻE wpływać na WAŻNOŚĆ wyroków wydanych
+przez sędziów mianowanych 2018-2026, w TOCZĄCYCH SIĘ lub
+ZAKOŃCZONYCH sprawach — sprawdź status PRZED każdym użyciem tego
+modułu w konkretnej sprawie.
+
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
 ---

@@ -1,6 +1,6 @@
 ---
 name: pisma-proste-v2
-version: 2.7
+version: 2.10
 type: executive-pisma
 status: production
 description: |
@@ -10,8 +10,9 @@ description: |
   zwolnienia od kosztów, zawezwania do ugody, przywrócenia terminu,
   wglądu do akt, wezwania do zapłaty, uzasadnienia wyroku, doręczenia
   przez komornika, sprzeciwu od referendarza, interpretacji ZUS, skargi
-  do UODO. NIE stosuj do pism wielowątkowych (apelacje, pozwy złożone)
-  — użyj pisma-procesowe-v3.
+  do UODO, oświadczenia o skorzystaniu z sankcji kredytu darmowego (SKD,
+  art. 45 u.k.k.). NIE stosuj do pism wielowątkowych (apelacje, pozwy
+  złożone, w tym pozew o zwrot nadpłaty po SKD) — użyj pisma-procesowe-v3.
 compatibility:
   tools:
     - web_search
@@ -98,6 +99,7 @@ Nie cytuj przepisów ani orzeczeń z pamięci bez weryfikacji online.
 | **SPJ — Interpretacja ZUS** | `references/SPJ-interpretacja-zus.md` | Wniosek o interpretację indywidualną ZUS (art. 34 Prawa przedsiębiorców — obowiązek składkowy) |
 | **SPK — Skarga do UODO** | `references/SPK-skarga-do-UODO.md` | Skarga do Prezesa UODO na administratora naruszającego RODO (art. 77 RODO, po wyczerpaniu ścieżki bezpośredniej) |
 | **SPL — Skarga na komornika** | `references/SPL-skarga-komornik.md` | Skarga na czynności komornika / na zaniechanie (art. 767 KPC) — **UWAGA: wnosi się do komornika, nie bezpośrednio do sądu**, patrz sekcja "Adresat" w pliku |
+| **SPM — Oświadczenie SKD** | `references/SPM-skd-oswiadczenie.md` | Oświadczenie o skorzystaniu z sankcji kredytu darmowego (art. 45 u.k.k.) — **UWAGA: wczytaj najpierw** `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-kredyt-konsumencki-SKD.md` **dla podstawy prawnej i sporu o termin z art. 45 ust. 5**; jeśli sprawa wymaga od razu pozwu o zapłatę → `pisma-procesowe-v3` |
 
 ---
 
@@ -108,7 +110,7 @@ KROK 1  → Wczytaj references/M1-zasady.md             [zawsze]
 KROK 2  → Wczytaj references/M2-intake.md             [zawsze — ustal typ pisma i dane]
 KROK 3  → Wczytaj:
            view /mnt/skills/user/shared/terminy.md            [jeśli pismo ma termin zawity]
-KROK 4  → Wczytaj właściwy schemat SPA–SPL albo SPE-O [na podstawie wyniku M2; dla wezwania ostatecznego: references/SPE-ostateczne.md]
+KROK 4  → Wczytaj właściwy schemat SPA–SPM albo SPE-O [na podstawie wyniku M2; dla wezwania ostatecznego: references/SPE-ostateczne.md; dla SPM wczytaj NAJPIERW dr-02/modules/mod-ustawa-kredyt-konsumencki-SKD.md]
 KROK 5  → Wczytaj references/M6-oplaty.md             [jeśli pismo wymaga opłaty]
 KROK 6  → Wczytaj references/M3-weryfikacja.md        [jeśli kwota/przepis wymaga weryfikacji]
 KROK 7  → Wczytaj references/M7-eskalacja.md          [jeśli sprawa może być złożona lub wymaga orzecznictwa]

@@ -16,7 +16,16 @@ i chce uzyskać klauzulę wykonalności, aby przekazać sprawę komornikowi.*
 
 - **art. 781 KPC** — wniosek o nadanie klauzuli wykonalności
 - **art. 782 KPC** — właściwość sądu do nadania klauzuli
-- **art. 786 KPC** — klauzula na rzecz lub przeciwko następcy prawnemu
+- **art. 788 §1 KPC** — klauzula na rzecz lub przeciwko następcy prawnemu
+  (⚠️ POPRAWIONE 2026-08-08, FAZA 3E/ZASADA 14: poprzednia wersja
+  BŁĘDNIE wskazywała "art. 786 KPC" — TEN przepis dotyczy ZUPEŁNIE
+  INNEJ kwestii — dostarczenia dowodu zdarzenia WARUNKUJĄCEGO nadanie
+  klauzuli [np. wypłata wynagrodzenia po przywróceniu do pracy], NIE
+  następstwa prawnego — potwierdzone w 6+ zgodnych źródłach, w tym
+  Palestra 5-6/2014 z bezpośrednim cytatem przepisu i uchwałą SN III
+  CZP 5/09: sąd bada WYŁĄCZNIE formalną treść dokumentów wykazujących
+  przejście uprawnień, BEZ merytorycznej kontroli materialnoprawnej
+  zasadności tego przejścia)
 - **art. 71 pkt 1 KSCU** — opłata 6 zł (tytuł z sądu)
 - **art. 71 pkt 2 KSCU** — opłata 50 zł (akt notarialny z klauzulą wykonalności)
 

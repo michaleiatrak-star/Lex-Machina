@@ -138,10 +138,24 @@ WYJĄTKOWE WYDANIE ŚRODKA DO SAMODZIELNEGO PRZYJĘCIA (poza zakładem):
   □ WYJAZD ZA GRANICĘ — wydanie środka na własne potrzeby lecznicze
     na podstawie odrębnego przepisu (art. 25 ust. 4 ustawy)
 
-⚡ ŚWIEŻA NOWELIZACJA (ustawa z 11.06.2026 r. — sprzed ~6 tygodni w
-chwili tej sesji, ⚠️ ZWERYFIKUJ czy weszła już w życie i czy nie
-doszły kolejne zmiany): nowe zasady KOŃCZENIA udziału pacjenta w
-programie — WYŁĄCZENIE z programu substytucyjnego NASTĘPUJE m.in. przy
+✅ ROZSTRZYGNIĘTE 2026-08-05 (FAZA 3E, FLAGA F-4 ZAMKNIĘTA) — ustawa z
+11.06.2026 r. o zmianie ustawy o przeciwdziałaniu narkomanii oraz
+niektórych innych ustaw ZOSTAŁA PODPISANA przez Prezydenta Karola
+Nawrockiego **24 LIPCA 2026 R.** (tego samego dnia co ustawa o
+systemach sztucznej inteligencji i "ustawa łańcuchowa" o ochronie
+zwierząt — patrz dr-11/mod-AI-Act-framework.md). Wejście w życie: 30
+dni od ogłoszenia w Dz.U. — DOKŁADNY numer Dz.U. NIEZWERYFIKOWANY w
+tej sesji, sprawdź ISAP przed cytowaniem. DODATKOWA treść
+nowelizacji: rozszerzenie wykazu substancji zabronionych o nowe
+syntetyczne związki psychoaktywne ("dopalacze nowej generacji"),
+zwiększenie dostępności leczenia substytucyjnego (buprenorfina
+dostępna na ZWYKŁEJ recepcie, nie tylko w programach specjalnych).
+Potwierdzone w 5+ zgodnych, aktualnych źródłach (medexpress.pl,
+rynekzdrowia.pl, gazetaprawna.pl [z pełną listą 5 ustaw podpisanych
+tego dnia], prezydent.pl).
+
+ZASADY KOŃCZENIA UDZIAŁU PACJENTA W PROGRAMIE (z tej nowelizacji):
+WYŁĄCZENIE z programu substytucyjnego NASTĘPUJE m.in. przy
 NIEUZASADNIONYM NIESTAWIENNICTWIE pacjenta przez 4 KOLEJNE DNI od
 terminu zgłoszenia się po dawkę (dla programu leczenia substytucyjnego)
 LUB przez 7 DNI od terminu wizyty po receptę (dla tzw. "ordynacji

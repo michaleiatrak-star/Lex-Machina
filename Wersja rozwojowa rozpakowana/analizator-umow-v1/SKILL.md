@@ -1,6 +1,6 @@
 ---
 name: analizator-umow-v1
-version: 1.21
+version: 1.22
 type: executive-umowy
 status: production
 description: |

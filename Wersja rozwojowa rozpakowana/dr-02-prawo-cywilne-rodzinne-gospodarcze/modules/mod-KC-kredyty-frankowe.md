@@ -56,7 +56,7 @@ TERMIN PRZEDAWNIENIA (weryfikuj — zmieniane przez TSUE):
     o abuzywności — weryfikuj przez web_search aktualną linię orzeczniczą
 
 PROCEDURA:
-  → Powództwo do sądu okręgowego (wartość przedmiotu sporu > 75 000 zł)
+  → Powództwo do sądu okręgowego (wartość przedmiotu sporu > 100 000 zł ✅ POPRAWIONE 2026-08-05, FAZA 3E/ZASADA 14 — było błędnie "75 000 zł"; próg podniesiono nowelizacją z 9.03.2023, w życie od 1.07.2023, art. 17 pkt 4 KPC)
   → Zabezpieczenie: wniosek o zawieszenie obowiązku spłat rat w toku procesu
   → Rejestr klauzul niedozwolonych: https://uokik.gov.pl
 ```
@@ -66,12 +66,29 @@ PROCEDURA:
 web_search: "kredyt frankowy unieważnienie abuzywność TSUE C-520/21 SN uchwała 2024 2025 2026"
 web_search: "frankowy termin przedawnienia konsument bank art 118 KC SN TSUE 2025 2026"
 web_search: "kredyt frankowy zabezpieczenie zawieszenie rat postanowienie sąd 2025 2026"
+  ⚠️ ZAKTUALIZOWANE 2026-08-08: OD 7.08.2026 ten temat jest W ZNACZNEJ
+  CZĘŚCI ZASTĄPIONY nowym mechanizmem USTAWOWYM — zamiast (dawniej
+  koniecznego) WNIOSKU o zabezpieczenie rozpatrywanego przez sąd,
+  wstrzymanie spłaty rat NASTĘPUJE TERAZ AUTOMATYCZNIE, Z MOCY
+  PRAWA, z chwilą doręczenia pozwu bankowi (art. 3 ustawy z
+  29.05.2026) — JEŚLI sprawa MIEŚCI SIĘ w zakresie tej ustawy
+  (kredyty CHF) — SZCZEGÓŁY: patrz moduł niżej w sekcji POWIĄZANIA
 ```
 
 ---
 
 ## POWIĄZANIA
 
+- ⭐⭐ ASPEKT PROCEDURALNY (JAK sąd PROWADZI sprawę — posiedzenia
+  niejawne, automatyczne wstrzymanie rat, przesłuchanie na piśmie,
+  zastosowanie do spraw JUŻ W TOKU) — TEN moduł (mod-KC-kredyty-
+  frankowe.md) opisuje WYŁĄCZNIE stronę MATERIALNOPRAWNĄ (czy umowa
+  jest ważna, jakie roszczenia przysługują) — dla STRONY
+  PROCEDURALNEJ, dodanej ustawą z 29.05.2026 (weszła w życie
+  7.08.2026), patrz DEDYKOWANY, ODRĘBNY moduł: → mod-ustawa-
+  frankowa-2026-procedura.md (dodany 2026-08-07/08, na żądanie
+  użytkownika) — NIE DUBLUJ treści proceduralnej w TYM module,
+  zachowaj podział: TEN = materialne prawo, TAMTEN = procedura
 - Ogólne reżimy odpowiedzialności kontraktowej/deliktowej (art. 415, 471 KC):
   → mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md (sekcja 3, PROCEDURA)
 - Definicje szkody/odszkodowania: → shared/definicje/DEF-ODPOWIEDZIALNOSC-SZKODA.md

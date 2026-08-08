@@ -156,18 +156,43 @@ to wyjaśniać dopiero po interwencji dziennikarskiej):
     pierwszeństwa pieszego — DOTYCZY KONKRETNIE momentu przekraczania
     "cudzego" pasa, NIE poruszania się w OBRĘBIE własnego wyznaczonego
     pasa
-  ⚠️ ROZBIEŻNOŚĆ ŹRÓDEŁ CO DO PIERWSZEŃSTWA W OBRĘBIE WŁASNEGO PASA
-    przy podziale PIONOWYM: część źródeł (rp.pl) SUGERUJE, że w tym
-    wariancie to WŁAŚNIE PIESZY zachowuje ogólną nadrzędność nawet
-    poza momentem przekraczania; INNE źródła (auto-swiat.pl)
-    OPISUJĄ wariant pionowy jako "każdy trzyma się swojej strony"
-    BEZ dodatkowego, powszechnego obowiązku ustępowania W OBRĘBIE
-    WŁASNEGO pasa — NIE ROZSTRZYGNIĘTO JEDNOZNACZNIE w tej sesji,
-    KTÓRA interpretacja przeważa dla poruszania się W GRANICACH
-    własnego, wyznaczonego pasa (w przeciwieństwie do JEDNOZNACZNIE
-    potwierdzonego obowiązku ustępowania PRZY PRZEKRACZANIU) —
-    SPRAWDŹ aktualne stanowisko lokalnej policji/zarządcy drogi przy
-    konkretnej sprawie spornej dotyczącej TEGO konkretnego aspektu
+
+  ✅ ROZSTRZYGNIĘTE 2026-08-04 (na żądanie użytkownika, FLAGA F-15
+    ZAMKNIĘTA) — na podstawie DOSŁOWNEGO TEKSTU rozporządzenia ws.
+    znaków i sygnałów drogowych (Dz.U.2019.0.2310 t.j., § dot. znaków
+    nakazu, ust. 2, potwierdzone bezpośrednio przez arslege.pl):
+    "Umieszczone na jednej tarczy symbole znaków C-13 i C-16
+    oddzielone kreską PIONOWĄ oznaczają DROGĘ DLA ROWERÓW I DROGĘ DLA
+    PIESZYCH POŁOŻONE OBOK SIEBIE, odpowiednio po stronach wskazanych
+    na znaku"
+    ⭐⭐ KLUCZOWE: PRZEPIS WPROST TRAKTUJE każdą stronę jako DWIE
+    ODRĘBNE, SAMODZIELNE DROGI — jedna JEST prawnie "drogą dla
+    rowerów" (funkcjonalnie RÓWNOWAŻNA samodzielnemu znakowi C-13),
+    druga JEST "drogą dla pieszych" (RÓWNOWAŻNA C-16) — TO NIE JEST
+    jeden wspólny obszar ze specjalnymi zasadami mieszanymi, tylko
+    DWIE zwykłe, znane już z innych sekcji tego modułu kategorie dróg,
+    zestawione OBOK SIEBIE
+    → WNIOSEK: W OBRĘBIE strefy oznaczonej jako "droga dla rowerów"
+      (część znaku po stronie rowerowej) OBOWIĄZUJĄ TE SAME zasady co
+      na SAMODZIELNYM znaku C-13 (patrz "DLA PORÓWNANIA" niżej) —
+      PIERWSZEŃSTWO MA ROWERZYSTA, piesi co do zasady NIE MAJĄ tam
+      prawa przebywać (poza wyjątkami: prowadzenie roweru/wózka,
+      brak alternatywy)
+    → W OBRĘBIE strefy "droga dla pieszych" — zwykłe zasady chodnika,
+      pierwszeństwo pieszego
+    → INTERPRETACJA "auto-swiat.pl" ("każdy trzyma się swojej strony"
+      BEZ dodatkowego obowiązku ustępowania w obrębie własnego pasa)
+      JEST ZGODNA z dosłownym brzmieniem przepisu — INTERPRETACJA
+      sugerująca ogólną nadrzędność pieszego NAWET w strefie
+      rowerowej (poza momentem przekraczania) NIE ZNAJDUJE oparcia w
+      tekście ust. 2 — PRAWDOPODOBNIE wynikała z NIEPRECYZYJNYCH
+      odpowiedzi rzeczników policji cytowanych w źródłach wtórnych
+      (sam artykuł trojmiasto.pl PRZYZNAJE, że "sprawa jest
+      niejednoznaczna NAWET dla służb miejskich" — czyli
+      NIEJEDNOZNACZNOŚĆ leżała w PRAKTYCE STOSOWANIA/komunikacji
+      urzędowej, NIE w samym przepisie, który jest jasny)
+    Potwierdzone bezpośrednio dosłownym tekstem rozporządzenia
+    (arslege.pl, Dz.U.2019.0.2310 t.j.) — Rząd 1/2B.
 
 DLA PORÓWNANIA — DROGA WYŁĄCZNIE DLA ROWERÓW (sam znak C-13, BEZ
   C-16): pierwszeństwo ma ROWERZYSTA — piesi CO DO ZASADY NIE MAJĄ
@@ -189,8 +214,9 @@ Potwierdzone w 8+ zgodnych źródłach (wrower.pl, trojmiasto.pl
 rp.pl [maj 2026], auto-swiat.pl [kwiecień 2026], oznakowaniedrogi.pl
 [sierpień 2025], centrumrowerowe.pl [lipiec 2025], sprint-rowery.pl,
 duathlonpoznan.pl [maj 2026], kosmalbike.pl, wyposazeniedrogowe24.pl)
-— z JAWNIE odnotowaną, nierozstrzygniętą rozbieżnością źródeł co do
-JEDNEGO szczegółowego aspektu (patrz wyżej).
+— WCZEŚNIEJSZA rozbieżność między źródłami wtórnymi co do JEDNEGO
+szczegółowego aspektu ROZSTRZYGNIĘTA 2026-08-04 dosłownym tekstem
+rozporządzenia (arslege.pl, Dz.U.2019.0.2310 t.j.) — patrz wyżej.
 ```
 
 ## CROSS-REFERENCJE

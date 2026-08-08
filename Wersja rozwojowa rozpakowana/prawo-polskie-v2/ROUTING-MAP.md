@@ -187,6 +187,11 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o ochronie praw lokatorów art. 6, 19a (kaucja przy najmie) | ⚠️ zweryfikuj t.j. na ISAP | dr-02/modules/mod-kaucja-najem-lokalu | ✅ NOWY 2026-07-19 |
 | Kodeks cywilny art. 385¹ (klauzule abuzywne — kredyty frankowe) | ⚠️ ta sama pozycja co główny mod-KC — zweryfikuj t.j. KC na ISAP | dr-02/modules/mod-KC-kredyty-frankowe | ✅ WYDZIELONY 2026-06-14 z mod-KC-cywilne-zobowiazania-odpowiedzialnosc (NOTA-4, moduł >400 linii) — DOPISANE do mapy 2026-07-30 (sync) |
 | Ustawa o przeciwdziałaniu nieuczciwym praktykom rynkowym (UPNPR) + Ustawa o radiofonii i telewizji art. 16b/18/53 (reklama wobec nieletnich) | ⚠️ zweryfikuj oba t.j. na ISAP | dr-02/modules/mod-reklama-wobec-nieletnich | ✅ NOWY 2026-07-18 — DOPISANE do mapy 2026-07-30 (sync) |
+| art. 431 KC (odpowiedzialność za zwierzę) + art. 362 KC (przyczynienie się) + PRD (C-13/C-16) — pies na drodze rowerowej | ⚠️ zweryfikuj t.j. KC na ISAP | dr-02/modules/mod-pies-droga-rowerowa-odpowiedzialnosc | ✅ NOWY 2026-08-04 — DOPISANE 2026-08-05 (sync) |
+| Parabanki/chwilówki/lombardy/lichwa (art. 304 KK, art. 388 KC, art. 36a ukk, ⚡ projekt ustawy lombardowej, ustawa antylichwiarska) | ✅ ustawa antylichwiarska: Dz.U. 2023 poz. 1028 — ⚠️ pozostałe zweryfikuj na ISAP | dr-02/modules/mod-parabanki-chwilowki-lombardy-lichwa | ✅ NOWY 2026-08-05 |
+| Liczba pełnomocników procesowych (KPC bez limitu, KPK max 3 obrońców) + strona samodzielna (reforma 2005, art. 117 KPC) | ⚠️ zweryfikuj t.j. KPC na ISAP | dr-02/modules/mod-liczba-pelnomocnikow-strona-samodzielna | ✅ NOWY 2026-08-05 |
+| Skład sądu — pełne zestawienie (KPC art. 47/367¹, KPK art. 28-30, w tym JEDYNY skład 5 sędziów: apelacja/kasacja od dożywocia) | ✅ Dz.U.2026.0.468 KPC t.j., Dz.U.2026.0.490 KPK t.j. (VER 2026-08-07) | dr-02/modules/mod-sklad-sadu-liczba-sedziow | ✅ NOWY 2026-08-07 |
+| ⚡⚡ Ustawa frankowa z 29.05.2026 — sprawy CHF w toku, posiedzenia niejawne | ✅ Dz.U. 2026 poz. 985 (VER 2026-08-07, weszła w życie tego dnia) | dr-02/modules/mod-ustawa-frankowa-2026-procedura | ✅ NOWY 2026-08-07 |
 | Prawo wekslowe (1936) + Prawo czekowe (1936) + Prawo przedsiębiorców Rozdz. 3-5 (kontrola przedsiębiorcy, koncesje) | Dz.U. 2022 poz. 282 t.j. (wekslowe) + Dz.U. 2016 poz. 462 t.j. (czekowe) + Dz.U. 2025 poz. 1480 t.j. (Prawo przedsiębiorców) | dr-02/modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje | ✅ NOWY 2026-07-19 — DOPISANE do mapy 2026-07-30 (sync) |
 
 ---
@@ -259,6 +264,10 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Świadek koronny (duży, ustawa 1997) i mały świadek koronny (KK art. 60 §3-4) | ⚠️ zweryfikuj t.j. ustawy na ISAP + Dz.U. 2025 poz. 383 ze zm. | dr-03/modules/mod-swiadek-koronny-duzy-maly | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — pull z DR-03/MAPA-AKTOW) |
 | Tajemnica zawodowa i poufność (adwokacka/radcowska/inne) | ⚠️ zweryfikuj akty właściwe na ISAP | dr-03/modules/mod-tajemnica-zawodowa-poufnosc | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — pull z DR-03/MAPA-AKTOW) |
 | Ustawa Fundusz Pomocy Pokrzywdzonym (opracowanie odrębne od wpisu w mod-KK-kodeks-karny) | Dz.U. 2022 poz. 2256 ze zm. | dr-03/modules/mod-ustawa-fundusz-pomocy-pokrzywdzonym | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — pull z DR-03/MAPA-AKTOW) |
+| Lincz/bójka-pobicie (art. 158-159 KK), statusy więźniów N/chroniony (KKW), zmowa milczenia (art. 233 KK), łowcy pedofili | ⚠️ zweryfikuj t.j. KK/KKW na ISAP | dr-03/modules/mod-lincz-ochrona-swiadkow-lowcy-pedofili | ✅ NOWY 2026-08-04 — DOPISANE 2026-08-05 (sync) |
+| Przeróbki pojazdów: hulajnogi (⚡ projekt, F-14), przyciemnianie szyb, pojazdy "SAM", motocykle A2, tachografy | ⚠️ WIELE aktów, część PROJEKTAMI | dr-03/modules/mod-przerobki-modyfikacje-pojazdow | ✅ NOWY 2026-08-04, ROZBUDOWANY 2026-08-05 — DOPISANE 2026-08-05 (sync) |
+| Podmiana części przez warsztat naprawczy (art. 286/284 KK) | ⚠️ zweryfikuj t.j. KK na ISAP | dr-03/modules/mod-podmiana-czesci-naprawa-oszustwo | ✅ NOWY 2026-08-04 — DOPISANE 2026-08-05 (sync) |
+| Nielegalny pobór mediów (prąd art. 278§5 KK, woda Dz.U. 2024 poz. 757, WiFi art. 267 KK) | ✅ ustawa o zbiorowym zaopatrzeniu w wodę: Dz.U. 2024 poz. 757 t.j. | dr-03/modules/mod-nielegalny-pobor-mediow | ✅ NOWY 2026-08-05 — DOPISANE 2026-08-05 (sync) |
 
 ---
 
