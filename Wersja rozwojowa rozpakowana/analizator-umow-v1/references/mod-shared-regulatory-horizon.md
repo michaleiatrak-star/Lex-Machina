@@ -31,17 +31,49 @@ Skanuj umowę pod kątem słów kluczowych:
 STATUS:
   Obowiązuje: 01.08.2024 (wejście w życie)
   Zakazy (art. 5): od 02.02.2025 ✅ OBOWIĄZUJE
-  Systemy wysokiego ryzyka (art. 6–7): od 02.08.2026
-  Modele GPAI (art. 51–56): od 02.08.2025
-  Pełne stosowanie: 02.08.2026
-  → Weryfikuj: eur-lex.europa.eu → 2024/1689
+  Modele GPAI (art. 51–56): od 02.08.2025 ✅ OBOWIĄZUJE
+  Ogólna data stosowania rozporządzenia (art. 113): 02.08.2026 ✅ OBOWIĄZUJE
+  Przejrzystość — oznaczanie treści AI/deepfake/chatbot (art. 50): od
+    02.08.2026 ✅ OBOWIĄZUJE (⚠️ POPRAWIONE 2026-08-09: NIE "art. 52"
+    jak wskazywała poprzednia wersja — WŁAŚCIWY numer to art. 50)
+
+  ⭐⭐⭐ ROZBUDOWANE 2026-08-09 (FAZA 3E/ZASADA 14) — WAŻNA, BARDZO
+  ŚWIEŻA ZMIANA (weszła w życie 27.07.2026, dosłownie kilka dni przed
+  tą weryfikacją!): Rozporządzenie 2026/1744 ("Digital Omnibus on
+  AI") ZMIENIŁO art. 113 AI Act i ZNACZĄCO PRZESUNĘŁO poprzednio
+  planowany termin 02.08.2026 dla systemów WYSOKIEGO RYZYKA —
+  poprzednia wersja tego modułu ("Systemy wysokiego ryzyka: od
+  02.08.2026") jest NIEAKTUALNA:
+  → SAMODZIELNE systemy wysokiego ryzyka z ZAŁĄCZNIKA III (art. 6
+    ust. 2) — m.in. zatrudnienie, edukacja, infrastruktura krytyczna,
+    dostęp do usług podstawowych, migracja, ściganie przestępstw,
+    wymiar sprawiedliwości — NOWY termin: **2 GRUDNIA 2027 R.**
+    (przesunięcie o ponad ROK)
+  → Systemy AI będące ELEMENTEM produktów objętych unijnym prawem
+    harmonizacyjnym z ZAŁĄCZNIKA I (np. wyroby medyczne, produkty
+    przemysłowe) — NOWY termin: **2 SIERPNIA 2028 R.**
+  ⚠️ CO NIE ZOSTAŁO PRZESUNIĘTE (obowiązuje BEZ zmian od 02.08.2026):
+    ogólna data stosowania rozporządzenia, art. 50 (przejrzystość),
+    rozdział IX, art. 101
+  ⭐ DODATKOWY, PRAKTYCZNY BRAK: wytyczne Komisji ws. KLASYFIKACJI
+    systemów jako wysokiego ryzyka (wymagane art. 6 ust. 5, TERMIN
+    minął 02.02.2026) — Komisja opublikowała DOPIERO PROJEKT
+    wytycznych 19.05.2026, konsultacje w toku — BRAK finalnych
+    wytycznych na dzień tej weryfikacji
+
+  Potwierdzone w 8+ zgodnych, bardzo aktualnych źródeł (lex.pl [2
+  tygodnie przed weryfikacją], dlahandlu.pl, kirp.pl [Krajowa Izba
+  Radców Prawnych, z cytowanym numerem rozporządzenia 2026/1744],
+  gazetaprawna.pl, gov.pl/cyfryzacja [Rząd 1 — oficjalny komunikat
+  Ministerstwa Cyfryzacji], stronymonki.pl).
+  → Weryfikuj: eur-lex.europa.eu → 2024/1689 oraz 2026/1744
 
 KLAUZULE RYZYKA W UMOWACH (natychmiast):
   ⚠️ "Dostawca może używać danych klientów do trenowania modeli AI" →
      wymaga zgody RODO + ograniczeń AI Act
-  ⚠️ Brak informacji że system używa AI → naruszenie art. 52 (wymóg przejrzystości)
+  ⚠️ Brak informacji że system używa AI → naruszenie art. 50 (wymóg przejrzystości)
   ⚠️ System AI podejmuje decyzje dotyczące ludzi → sprawdź klasyfikację ryzyka
-  ⚠️ Chatbot bez oznaczenia jako AI → naruszenie art. 52 ust. 1 AI Act
+  ⚠️ Chatbot bez oznaczenia jako AI → naruszenie art. 50 AI Act
 
 KLAUZULE DO DODANIA (umowy z dostawcami AI):
   □ Klasyfikacja systemu AI (poziom ryzyka: minimalny/ograniczony/wysoki/zakazany)

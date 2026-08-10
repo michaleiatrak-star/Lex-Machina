@@ -132,8 +132,25 @@ którą z czterech warstw się analizuje jako pierwszą.
 Rosji, obowiązki łańcucha dostaw komponentów zbrojeniowych; EY Polska —
 16. pakiet sankcji UE (24.02.2025, zamrożenie aktywów 48 osób i 35
 podmiotów powiązanych z rosyjskim kompleksem wojskowo-przemysłowym);
-biznes.gov.pl — oficjalny wykaz sankcji UE/Polski wobec Rosji.
 
+⚠️⚠️ WAŻNE ZASTRZEŻENIE (dodane 2026-08-08, na żądanie użytkownika) —
+LISTA SANKCYJNA JEST SKRAJNIE DYNAMICZNA, NIE TRAKTUJ powyższego
+"16. pakietu" (luty 2025) jako AKTUALNEGO stanu: podstawowa decyzja
+2014/145/WPZiB JEST NOWELIZOWANA WIELOKROTNIE W CIĄGU ROKU (KAŻDA
+nowelizacja dodaje/usuwa konkretne osoby i podmioty z załącznika) —
+POTWIERDZONE PRZYKŁADY z SAMEGO 2026 r.: decyzja 2026/504 (23.04.2026,
++37 osób/+80 podmiotów), decyzja 2026/696 (14.03.2026, wykreślenie
+osób zmarłych), decyzja 2026/1072 (+16 osób/+7 podmiotów, uzasadniona
+M.IN. bezprawną deportacją ukraińskich dzieci do Rosji i ich
+przymusową reedukacją), decyzja 2026/1364 (+9 osób/+45 podmiotów,
+w związku z atakami na infrastrukturę cywilną Ukrainy) — TO TYLKO
+CZĘŚĆ nowelizacji z JEDNEGO roku — ⭐⭐ NIE PRÓBUJ wyliczać/utrzymywać
+wyczerpującej listy WSZYSTKICH nowelizacji w tym module (byłoby to
+NATYCHMIAST nieaktualne) — ZAMIAST tego, PRZY KAŻDYM użyciu tego
+tematu w konkretnej sprawie: web_search "decyzja WPZiB 2014/145
+zmieniająca [aktualny rok]" celem ustalenia NAJNOWSZEGO stanu listy,
+LUB bezpośrednio sprawdź biznes.gov.pl/oficjalny wykaz sankcji.
+```
 ---
 
 ### Status ogólny (⛔ WYSOCE ZMIENNY W CZASIE — zawsze weryfikuj per konkretna umowa)

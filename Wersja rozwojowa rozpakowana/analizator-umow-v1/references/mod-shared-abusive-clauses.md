@@ -129,7 +129,55 @@ SANKCJE (Omnibus — weryfikuj w ustawie o prawach konsumenta i PNPU):
 KLAUZULE SZCZEGÓLNEGO RYZYKA (Omnibus × KC):
   ⚠️ Brak informacji o najniższej cenie 30-dniowej → naruszenie + ryzyko UOKiK
   ⚠️ "Opinie zweryfikowane" bez systemu weryfikacji → wprowadzanie w błąd
-  ⚠️ Automatyczne odnowienie subskrypcji bez przypomnienia → art. 17a u.p.k.
+  ⚠️ Automatyczne odnowienie subskrypcji bez przypomnienia — ⚠️
+    POPRAWIONE 2026-08-08 (FAZA 3E/ZASADA 14): poprzednia wersja
+    BŁĘDNIE cytowała "art. 17a u.p.k." jako podstawę — TEN przepis
+    DOTYCZY CAŁKOWICIE INNEJ kwestii (zakaz przyjmowania płatności
+    przed upływem terminu odstąpienia przy sprzedaży podczas
+    wycieczki/pokazu).
+
+    ✅ ROZSTRZYGNIĘTE 2026-08-09 (na żądanie użytkownika — zbadanie
+    otwartej flagi): NIE ISTNIEJE pojedynczy, konkretny przepis
+    nakładający OGÓLNY obowiązek przypomnienia przed KAŻDYM
+    automatycznym odnowieniem — OBOWIĄZEK wynika z KOMBINACJI trzech
+    ODRĘBNYCH mechanizmów, w zależności od TYPU umowy:
+    (1) ⭐⭐ PRAKTYKA ADMINISTRACYJNA UOKiK (główna, ogólna podstawa):
+        automatyczne przedłużenie BEZ uprzedniego poinformowania
+        konsumenta o zbliżającym się końcu umowy KWALIFIKOWANE jest
+        jako NIEUCZCIWA PRAKTYKA RYNKOWA naruszająca zbiorowe
+        interesy konsumentów — PRECEDENSOWA decyzja Prezesa UOKiK
+        (Delegatura Kraków) nr RKR-52/13 z 30.12.2013 r.: "to
+        PRZEDSIĘBIORCA powinien sygnalizować konsumentowi upływ
+        terminu umowy" — TA decyzja jest WCIĄŻ CYTOWANYM punktem
+        odniesienia w praktyce (potwierdzone źródłami z 2017-2026) —
+        SKUTEK naruszenia: kara administracyjna UOKiK, NIE
+        automatyczna nieważność klauzuli
+    (2) OGÓLNA DOKTRYNA KLAUZUL ABUZYWNYCH (art. 385¹ KC) — klauzula
+        automatycznego przedłużenia BEZ odpowiedniego uprzedzenia
+        MOŻE być RÓWNOLEGLE zakwalifikowana jako niedozwolone
+        postanowienie umowne (sprzeczność z dobrymi obyczajami,
+        rażące naruszenie interesów konsumenta) — TO OGÓLNY
+        mechanizm, NIE przepis SZCZEGÓLNIE dedykowany subskrypcjom
+    (3) ⭐ PRAWO TELEKOMUNIKACYJNE — SPECYFICZNY, WĘŻSZY, ALE
+        NAJMOCNIEJSZY reżim DLA USŁUG TELEKOMUNIKACYJNYCH: automatyczne
+        przedłużenie NA KOLEJNY CZAS OKREŚLONY jest WPROST ZAKAZANE,
+        CHYBA że abonent ŚWIADOMIE wyrazi na to ZGODĘ — BEZ takiej
+        zgody, przedłużenie NASTĘPUJE WYŁĄCZNIE na czas NIEOKREŚLONY,
+        BEZ dodatkowych zobowiązań/kar (potwierdzone źródłem z
+        listopada 2025/maja 2026) — TO SUROWSZY reżim niż ogólna
+        zasada UOKiK/KC, ALE OGRANICZONY do sektora TELEKOMUNIKACYJNEGO
+    ⭐ WNIOSEK PRAKTYCZNY: PRZY OCENIE konkretnej klauzuli
+      subskrypcyjnej — NAJPIERW sprawdź, czy dotyczy USŁUG
+      TELEKOMUNIKACYJNYCH (wtedy stosuj SUROWSZY reżim z pkt 3) —
+      DLA POZOSTAŁYCH branż (streaming, siłownie, prasa itd.) —
+      OPIERAJ SIĘ na KOMBINACJI pkt 1 (ryzyko UOKiK) i pkt 2 (ryzyko
+      abuzywności) — NIE MA jednego "magicznego numeru artykułu" do
+      zacytowania
+
+    Potwierdzone w 6+ zgodnych źródłach (poradnikprzedsiebiorcy.pl,
+    czasopismo.legeartis.org, um.warszawa.pl [Rząd 1-adjacent —
+    miejski portal konsumencki], panwybierak.pl [listopad 2025],
+    twojefinanseonline.pl [maj 2026]).
   ⚠️ Brak przejrzystości rankingów w marketplace → art. 6b PNPU
 ```
 

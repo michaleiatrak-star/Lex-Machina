@@ -1275,6 +1275,93 @@ Potwierdzone w 6+ zgodnych źródłach z 2026 r., w tym BEZPOŚREDNIO
 wetgiw.gov.pl (Rząd 1) i izby lekarsko-weterynaryjne.
 ```
 
+## ⭐⭐ KRAJOWY REJESTR OZNAKOWANYCH PSÓW I KOTÓW (KROPiK) — NOWA,
+ODRĘBNA USTAWA (dodano 2026-08-08, na żądanie użytkownika,
+zamknięcie flagi F-18 — ROZRÓŻNIĆ od "obowiązkowego czipowania PRZED
+szczepieniem" opisanego wyżej, TO INNA, znacznie SZERSZA regulacja)
+
+```
+PODSTAWA: Ustawa z 15.05.2026 o Krajowym Rejestrze Oznakowanych
+  Psów i Kotów (druk sejmowy nieustalony w tej sesji z pewnością —
+  sprawdź na ISAP) — Sejm 245 za/22 przeciw/171 wstrzymało się —
+  PODPISANA przez Prezydenta Karola Nawrockiego **2.06.2026**
+
+⭐⭐ KLUCZOWA RÓŻNICA względem sekcji wyżej: TA ustawa tworzy
+  CENTRALNY, OGÓLNOKRAJOWY rejestr (zamiast rozproszonych baz
+  lokalnych) — TO SZERSZA, SYSTEMOWA reforma, NIE tylko "czipowanie
+  przed szczepieniem psa" — obejmuje RÓWNIEŻ KOTY (częściowo) i
+  WIĄŻE się z odrębnym, WŁASNYM reżimem kar
+
+ZAKRES OBOWIĄZKU — ASYMETRIA PIES/KOT:
+  → PSY: obowiązek czipowania i rejestracji DOTYCZY WSZYSTKICH psów
+    MAJĄCYCH właściciela — BEZ WYJĄTKU
+  → KOTY: obowiązek OGRANICZONY — DOTYCZY kotów w OBROCIE
+    (sprzedaż/adopcja) oraz w SCHRONISKACH/domach tymczasowych
+    prowadzonych przez organizacje prozwierzęce — czipowanie KOTÓW
+    WOLNO ŻYJĄCYCH jest DOBROWOLNE, decyzja NALEŻY do GMINY (nie ma
+    ogólnokrajowego obowiązku dla tej kategorii)
+
+ORGAN PROWADZĄCY: Agencja Restrukturyzacji i Modernizacji Rolnictwa
+  (ARiMR) — NIE Inspekcja Weterynaryjna (jak w sekcji o szczepieniach
+  wyżej) — TO INNY organ administracyjny
+
+PROCEDURA: właściciel zgłasza się do LEKARZA WETERYNARII →
+  wszczepienie transpondera (czipa) → lekarz weterynarii WPISUJE dane
+  BEZPOŚREDNIO do systemu KROPiK — DANE w rejestrze: informacje o
+  zwierzęciu ORAZ pełne dane właściciela (imię, nazwisko, PESEL,
+  numer telefonu)
+
+TERMIN WYKONANIA OBOWIĄZKU: NAJPÓŹNIEJ do dnia PIERWSZEGO szczepienia
+  psa przeciwko wściekliźnie — POWIĄZANIE z terminem 30 dni od
+  ukończenia 3. miesiąca życia (patrz sekcja wyżej) — W PRAKTYCE
+  oznacza to, że OBA obowiązki (czipowanie przed szczepieniem +
+  rejestracja w KROPiK) ZBIEGAJĄ SIĘ W CZASIE dla większości
+  właścicieli
+
+KOSZTY: MAKSYMALNIE **50 zł** za oznakowanie (czip) + MAKSYMALNIE
+  **50 zł** za rejestrację — POBIERANE przez lekarzy weterynarii za
+  wykonane czynności — ⚠️ USTAWOWY MECHANIZM WALORYZACJI: maksymalna
+  opłata WYRAŻONA jest jako 0,56% przeciętnego wynagrodzenia w
+  gospodarce narodowej (W 2026 R.: **49,86 ZŁ** za KAŻDĄ z dwóch
+  usług) — kwota BĘDZIE się zmieniać co roku wraz ze wzrostem
+  przeciętnego wynagrodzenia
+
+⭐⭐ SANKCJE — DWA POZIOMY:
+  → GRZYWNA za brak rejestracji/oznakowania: **OD 20 ZŁ DO 5000 ZŁ**
+  → ⚠️ SUROWSZA odpowiedzialność KARNA w SKRAJNYCH przypadkach —
+    NP. odmowa odbioru zwierzęcia ze schroniska (mimo obowiązku) —
+    do **3 LAT POZBAWIENIA WOLNOŚCI** — ⚠️ dokładna podstawa
+    prawna/kwalifikacja tego surowszego przepisu NIE w pełni
+    zweryfikowana w tej sesji, punkt startowy do dalszego badania
+
+KONTROLA WYKONANIA: Inspekcja Weterynaryjna, POLICJA, oraz STRAŻ
+  MIEJSKA — SZEROKI krąg organów uprawnionych do kontroli, nie tylko
+  wyspecjalizowana inspekcja
+
+⭐⭐⭐ NAJWAŻNIEJSZY NIUANS PRAKTYCZNY — BARDZO DŁUGIE VACATIO LEGIS:
+  ustawa PRZEWIDUJE **SZEŚCIOLETNI** okres przejściowy — 3 LATA na
+  ZBUDOWANIE i URUCHOMIENIE samego systemu informatycznego, oraz
+  KOLEJNE 3 LATA na PEŁNE oznakowanie/zarejestrowanie WSZYSTKICH
+  objętych ustawą zwierząt — WNIOSEK PRAKTYCZNY: mimo że ustawa JEST
+  już PODPISANA i PRAWNIE ISTNIEJE, PEŁNE, POWSZECHNE obowiązywanie
+  w PRAKTYCE NASTĄPI dopiero za WIELE LAT (orientacyjnie: ok.
+  2032 r.) — NIE TRAKTUJ tego jako natychmiast, w pełni
+  egzekwowalnego obowiązku na dzień weryfikacji
+
+⚠️ SAM PREZYDENT, PODPISUJĄC ustawę, PUBLICZNIE zwrócił uwagę na
+  DWA problemy WYMAGAJĄCE poprawy W TRAKCIE vacatio legis: (1)
+  poziom kar jest "ZDECYDOWANIE ZBYT WYSOKI" i POWINIEN zostać
+  UREALNIONY, (2) kwestia PRZENOSZENIA danych z OBECNYCH,
+  rozproszonych rejestrów DO nowego systemu WYMAGA lepszego
+  rozwiązania — SUGERUJE to, że TREŚĆ ustawy MOŻE ulec DALSZYM
+  zmianom NOWELIZACYJNYM jeszcze PRZED pełnym wejściem w życie
+
+Potwierdzone w 7+ zgodnych, aktualnych źródłach 2026 r. (forsal.pl
+[luty 2026], portalsamorzadowy.pl [kwiecień 2026], prawo.pl [czerwiec
+2026, x2], infowet.pl [x2], munipro.pl [luty 2026], infor.pl [czerwiec
+2026, z bezpośrednim potwierdzeniem podpisu prezydenckiego]).
+```
+
 ## OBOWIĄZKOWE SZCZEPIENIA ZWIERZĄT — NOWA USTAWA O ZDROWIU ZWIERZĄT
 (dodano 2026-07-30, na żądanie użytkownika)
 

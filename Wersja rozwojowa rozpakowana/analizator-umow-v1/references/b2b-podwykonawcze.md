@@ -44,13 +44,21 @@ WYNIK TESTU:
 ⭐⭐ AKTUALIZACJA STAWKI TESTU (od 08.07.2026, Dz.U. 2026 poz. 473) —
 dodane 2026-07-20: wynik ALERT KRYTYCZNY (5-8 cech) NIE OZNACZA już
 WYŁĄCZNIE ryzyka sądowego. Od tej daty okręgowy inspektor pracy MOŻE,
-W DRODZE DECYZJI ADMINISTRACYJNEJ (nowy art. 10 ust. 1 pkt 7a ustawy
-o PIP — pełny opis mechanizmu, w tym niuanse temporalne i zakaz
+W DRODZE DECYZJI ADMINISTRACYJNEJ (⚠️ POPRAWIONE 2026-08-08: właściwy
+przepis to art. 11 ust. 1 pkt 7a ustawy o PIP, NIE "art. 10 ust. 1 pkt
+7a" jak podawała poprzednia wersja — potwierdzone jednoznacznie
+oficjalnym tekstem ustawy [orka.sejm.gov.pl] i 5+ zgodnymi źródłami
+— pełny opis mechanizmu, w tym niuanse temporalne i zakaz
 retorsji: `dr-04/modules/mod-ustawa-PIP-inspekcja-pracy.md` sekcja 6.2,
 NIE duplikuj tutaj), SAMODZIELNIE stwierdzić istnienie stosunku pracy —
 BEZ POŚREDNICTWA sądu. Kluczowe dla OCENY RYZYKA w tym module:
-  □ Decyzja jest NATYCHMIAST WYKONALNA "na przyszłość" (składki/podatki
-    od dnia decyzji) — odwołanie do sądu pracy NIE WSTRZYMUJE tego skutku
+  □ ✅ ROZSTRZYGNIĘTE 2026-08-08 (FLAGA F-19 ZAMKNIĘTA): odwołanie od
+    decyzji ⭐⭐ WSTRZYMUJE WYKONANIE decyzji DO CZASU prawomocnego
+    rozstrzygnięcia — TO ZASADA (odwrotnie niż WCZEŚNIEJSZA, BŁĘDNA
+    wersja tej sekcji twierdziła) — WYJĄTEK: rygor natychmiastowej
+    wykonalności, zastrzeżony dla decyzji dot. OSÓB POD SZCZEGÓLNĄ
+    OCHRONĄ — PEŁNE uzasadnienie i źródła: `dr-04/mod-ustawa-PIP-
+    inspekcja-pracy.md` sekcja 6.2 (NIE duplikuj tutaj)
   □ WARUNKIEM wydania decyzji jest wcześniejsze NIEWYKONANIE polecenia
     inspektora usunięcia nieprawidłowości — czyli podmiot DOSTAJE
     najpierw szansę na dobrowolną korektę (patrz G.1B niżej — jak

@@ -8,7 +8,16 @@
 
 > ⛔ HARD GATE — przed podaniem art. KC dot. dzieła, zlecenia, ugody weryfikuj w ISAP:
 > isap.sejm.gov.pl → KC → art. 627–646 (dzieło), art. 734–751 (zlecenie), art. 917–918 (ugoda)
-> isap.sejm.gov.pl → KC → art. 627¹ (podwykonawstwo w robotach budowlanych)
+> isap.sejm.gov.pl → KC → art. 647¹ (podwykonawstwo w robotach budowlanych,
+>                    ⚠️ POPRAWIONE 2026-08-05: POPRZEDNIA wersja błędnie
+>                    podawała "art. 627¹" — TO JEST INNY numer artykułu
+>                    [z tytułu "umowa o dzieło", art. 627-646], podczas
+>                    gdy podwykonawstwo budowlane reguluje art. 647¹ Z
+>                    TYTUŁU "umowa o roboty budowlane" [art. 647-658] —
+>                    potwierdzone w 8+ zgodnych źródłach, w tym dosłowny
+>                    tekst przepisu, solidarna odpowiedzialność
+>                    inwestora/wykonawcy, zgłoszenie PRZED przystąpieniem
+>                    do robót, 30 dni na sprzeciw inwestora)
 > Orzecznictwo SN dot. kwalifikacji dzieło/zlecenie: sn.pl — nie cytuj z pamięci.
 ## J.9 UMOWA O DZIEŁO
 

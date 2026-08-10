@@ -68,7 +68,16 @@ FORMA (art. 29 §2 KP):
   jeśli sama umowa jest niekompletna.
 
 ODRĘBNY OBOWIĄZEK INFORMACYJNY (art. 29 §3 KP — NIE jest to treść samej
-umowy, lecz osobna informacja pisemna w ciągu 7 dni od zawarcia umowy):
+umowy, lecz osobna informacja pisemna w ciągu 7 dni od DOPUSZCZENIA
+PRACOWNIKA DO PRACY — ⚠️ POPRAWIONE 2026-08-08 (FAZA 3E/ZASADA 14):
+poprzednia wersja BŁĘDNIE liczyła termin "od zawarcia umowy" — PO
+nowelizacji z 26.04.2023 r. punktem odniesienia jest DOPUSZCZENIE DO
+PRACY, NIE data podpisania umowy — TE DWIE daty MOGĄ się RÓŻNIĆ
+(np. umowa podpisana wcześniej, praca zaczyna się kilka dni później)
+— potwierdzone w 7+ zgodnych źródłach, w tym bezpośrednio treść
+przepisu (inforlex.pl: "maksymalnie w terminie 7 dni od dnia
+dopuszczenia pracownika do pracy [a nie tak jak dotychczas — od dnia
+zawarcia umowy o pracę]")):
 □ Obowiązująca pracownika dobowa i tygodniowa norma czasu pracy
 □ Częstotliwość wypłat wynagrodzenia
 □ Wymiar przysługującego urlopu wypoczynkowego

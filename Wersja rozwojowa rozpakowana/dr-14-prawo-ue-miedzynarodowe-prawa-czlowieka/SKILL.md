@@ -1,6 +1,6 @@
 ---
 name: dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka
-version: 3.4
+version: 3.5
 description: |
   DR-14: Prawo UE, Międzynarodowe, Prawa Człowieka
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony obszar prawa UE / prawa międzynarodowego.

@@ -177,6 +177,51 @@ tysięcy złotych." ⚠️ PRAKTYCZNA KONSEKWENCJA: NIE ZAKŁADAJ bezpiecznego
 dziś objąć transakcje o WIELE niższej wartości niż dawniej. Dokładna
 data zniesienia limitu NIE ZWERYFIKOWANA w tej sesji — sprawdź na
 ISAP przed cytowaniem konkretnej daty.
+
+⭐⭐ DODANE 2026-08-08 (na żądanie użytkownika, zamknięcie flagi F-17)
+— ⚡ NOWELIZACJA z 15.05.2026 (druk 2287, uchwalona jednogłośnie
+przez Sejm, PODPISANA przez Prezydenta 19.06.2026) — WCHODZI W
+ŻYCIE **1 PAŹDZIERNIKA 2026 R.** (⚠️ NA DZIEŃ TEJ WERYFIKACJI,
+08.08.2026, JESZCZE NIE OBOWIĄZUJE — sprawdź, czy data wejścia w
+życie już minęła przed zastosowaniem poniższych zasad):
+  → ⭐⭐ NOWA PRZESŁANKA ZAWIESZENIA PRZEDAWNIENIA POWIĄZANA Z GAAR:
+    zawieszenie biegu terminu przedawnienia zobowiązania
+    podatkowego NASTĘPUJE z chwilą WSZCZĘCIA przez organ podatkowy
+    POSTĘPOWANIA w sprawie ZASTOSOWANIA klauzuli przeciwko unikaniu
+    opodatkowania — SAMO wszczęcie TAKIEGO postępowania automatycznie
+    WSTRZYMUJE bieg przedawnienia
+  → ⭐ WYDŁUŻENIE PODSTAWOWEGO TERMINU PRZEDAWNIENIA: standardowy
+    termin (5 LAT od końca roku, w którym upłynął termin płatności)
+    POZOSTAJE bez zmian JAKO ZASADA — ALE Szef KAS ZYSKUJE prawo do
+    WYDŁUŻENIA go maksymalnie do **7 LAT** KONKRETNIE w przypadkach
+    unikania opodatkowania objętych klauzulą GAAR — TO NOWE,
+    DODATKOWE uprawnienie, nieistniejące PRZED tą nowelizacją
+  → ⭐ RÓWNOWAŻĄCA ZMIANA NA KORZYŚĆ PODATNIKA (ta sama nowelizacja):
+    UCHYLENIE art. 70 §6 pkt 1 Op — dotychczasowy, KONTROWERSYJNY
+    mechanizm, który pozwalał zawiesić przedawnienie PRZEZ SAMO
+    wszczęcie postępowania W SPRAWIE O PRZESTĘPSTWO/wykroczenie
+    skarbowe (często wykorzystywany INSTRUMENTALNIE przez fiskusa
+    "na ostatnią chwilę", bez faktycznego zamiaru ścigania) — TEN
+    mechanizm ZOSTAJE ZLIKWIDOWANY — WNIOSEK: nowelizacja jest
+    "PAKIETEM WYRÓWNAWCZYM" — ZABIERA fiskusowi jedno narzędzie
+    (ogólne, nadużywane), ale DAJE mu NOWE, WĘŻSZE, ale POTENCJALNIE
+    DŁUŻSZE narzędzie SPECJALNIE dla spraw GAAR
+  → ⚠️ SZEROKI ZAKRES USTAWY NOWELIZUJĄCEJ: TA SAMA ustawa
+    (druk 2287) RÓWNOCZEŚNIE zmienia KILKANAŚCIE innych aktów —
+    Prawo o adwokaturze, ustawę o radcach prawnych, PIT, CIT, ustawę
+    o doradztwie podatkowym, Prawo bankowe, KKS, ustawę o
+    rzecznikach patentowych, PPSA, ustawę o VAT — SPRAWDŹ, czy
+    KONKRETNA sprawa NIE dotyczy również jednego z TYCH aktów
+  → ⚠️ ODRĘBNA, DRUGA nowelizacja Op z TEGO SAMEGO dnia (druk 2352,
+    RÓWNIEŻ podpisana 19.06.2026) — TREŚĆ tej DRUGIEJ ustawy NIE
+    ZBADANA w tej sesji — MOŻLIWE, że dotyczy INNEGO tematu
+    (np. wprowadzenie instytucji "ugody podatkowej", wspominane w
+    materiałach z czerwca 2026 jako ODRĘBNY, równoległy projekt) —
+    WYMAGA osobnej weryfikacji przy potrzebie
+
+Potwierdzone w 5+ zgodnych źródłach (axelo.pl [czerwiec 2026, z
+cytowanym numerem druku], akademialtca.pl, olesinski.com, oraz
+BEZPOŚREDNIO druk sejmowy 2287 na api.sejm.gov.pl [Rząd 1]).
 ```
 
 ## TECHNIKI MANIPULACJI DOKUMENTACJĄ DLA OBNIŻENIA PODATKÓW — GRANICA

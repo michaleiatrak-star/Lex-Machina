@@ -378,6 +378,71 @@ tekst zastępuje poprzednią, częściowo nieaktualną wersję ANEKSU A.
 | Świadczenia rodzinne dla opiekunów tymczasowych dzieci | Ustawa o świadczeniach rodzinnych (Dz.U. 2025 poz. 1208) — znowelizowana ustawą z 23.01.2026 (dodano art. 3a) | nowa kategoria: "opiekun tymczasowy dziecka" / "opiekun wskazany przez władze kraju pochodzenia" |
 | Okres ochrony czasowej dla DOTYCHCZASOWYCH beneficjentów | Trwa do **4.03.2027 r.** (przedłużona decyzją Rady UE 2022/382 i kolejnymi) | NOWY reżim prawny, ta sama data graniczna co poprzednio planowana |
 
+⭐⭐ NOWE ROZPORZĄDZENIE WYKONAWCZE (dodane 2026-08-08, na żądanie
+użytkownika, treść dostarczona BEZPOŚREDNIO przez użytkownika z
+oryginalnego tekstu Dziennika Ustaw) — WYKAZ PAŃSTW WYŁĄCZONYCH Z
+MOŻLIWOŚCI PRACY W RAMACH RUCHU BEZWIZOWEGO:
+
+```
+PODSTAWA: Rozporządzenie Ministra Rodziny, Pracy i Polityki
+  Społecznej z 31.07.2026 r. w sprawie wykazu państw, których
+  obywatele posiadający zezwolenie na pracę NIE SĄ uprawnieni do
+  wykonywania pracy w czasie pobytu w RP w ramach RUCHU BEZWIZOWEGO
+  — Dz.U. 2026 poz. 1072, ogłoszone 7.08.2026 r.
+  Podstawa ustawowa: art. 3 ust. 4 ustawy z 20.03.2025 o warunkach
+  dopuszczalności powierzania pracy cudzoziemcom (Dz.U. poz. 621 i
+  1794 oraz z 2026 r. poz. 203, 473 i 734) — TA SAMA, już śledzona w
+  tym module ustawa bazowa (patrz wiersz "Powierzanie pracy bez
+  zezwolenia" wyżej)
+  Podpisane przez: A. Dziemianowicz-Bąk, Minister Rodziny, Pracy i
+  Polityki Społecznej
+
+⭐⭐ ISTOTA REGULACJI: obywatele TRZECH konkretnych państw, MIMO
+  POSIADANIA zezwolenia na pracę, NIE SĄ uprawnieni do faktycznego
+  wykonywania tej pracy, JEŚLI przebywają w Polsce W RAMACH RUCHU
+  BEZWIZOWEGO (czyli bez wizy, na podstawie umów o ruchu
+  bezwizowym) — to NIE JEST cofnięcie SAMEGO zezwolenia na pracę,
+  TYLKO zablokowanie MOŻLIWOŚCI skorzystania z niego PRZY TEJ
+  KONKRETNEJ formie wjazdu/pobytu
+
+WYKAZ PAŃSTW (§ 1, katalog ZAMKNIĘTY — 3 państwa):
+  1) Boliwariańska Republika Wenezueli
+  2) Gruzja
+  3) Republika Kolumbii
+
+⭐ PRZEPIS PRZEJŚCIOWY (§ 2) — OCHRONA "PRAW NABYTYCH": obywatele
+  TYCH TRZECH państw, KTÓRZY już ROZPOCZĘLI pracę w ramach ruchu
+  bezwizowego PRZED dniem wejścia w życie rozporządzenia — MOGĄ
+  KONTYNUOWAĆ pracę NA DOTYCHCZASOWYCH zasadach, ALE TYLKO DO
+  UPŁYWU dozwolonego okresu pobytu bezwizowego (standardowo 90 dni
+  w każdym 180-dniowym okresie, wg zasad Schengen) — NIE MOGĄ
+  KONTYNUOWAĆ pracy PO tym terminie, MUSZĄ uzyskać inną podstawę
+  legalizacji
+
+WEJŚCIE W ŻYCIE: **14 DNI od ogłoszenia** — czyli ok. **21.08.2026
+  R.** (⚠️ policz dokładnie od faktycznej daty ogłoszenia w Dz.U.,
+  NIE od daty rozporządzenia)
+
+⭐ PRAKTYCZNE ZNACZENIE DLA PRACODAWCÓW: jeśli PRACODAWCA planuje
+  zatrudnić obywatela Wenezueli, Gruzji LUB Kolumbii, KTÓRY wjeżdża/
+  przebywa w Polsce W RAMACH RUCHU BEZWIZOWEGO (a NIE na podstawie
+  wizy pracowniczej/zezwolenia na pobyt czasowy) — SAMO posiadanie
+  zezwolenia na pracę NIE WYSTARCZY — pracownik NIE MA prawa
+  faktycznie PODJĄĆ pracy w TAKIM STATUSIE pobytowym — WYMAGANA
+  jest INNA podstawa pobytu (wiza pracownicza, zezwolenie na pobyt
+  czasowy i pracę, itp.)
+
+⚠️ KONTEKST BRAKUJĄCY W TEJ SESJI: DOKŁADNE uzasadnienie MERYTORYCZNE
+  wyboru WŁAŚNIE TYCH trzech państw (np. dane o nadużyciach ruchu
+  bezwizowego do nielegalnej pracy z tych krajów, kontekst
+  migracyjny) NIE ZOSTAŁO zweryfikowane w tej sesji — punkt
+  startowy do dalszego badania, jeśli istotne dla konkretnej sprawy
+
+Potwierdzone BEZPOŚREDNIO dosłownym tekstem Dziennika Ustaw
+dostarczonym przez użytkownika (Dz.U. 2026 poz. 1072, publikacja
+7.08.2026).
+```
+
 **Kluczowe zmiany praktyczne od 5.03.2026 r.:**
 ```
 PESEL ze statusem UKR nadany na podstawie oświadczenia:

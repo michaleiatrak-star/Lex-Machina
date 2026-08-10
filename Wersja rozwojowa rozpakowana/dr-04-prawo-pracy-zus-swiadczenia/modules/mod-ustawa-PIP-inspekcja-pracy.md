@@ -106,7 +106,14 @@ poszczególnych przepisów — sprawdź art. przejściowe w ISAP przy konkretnej
   art. 398² §2 KPC — dodanie pkt 4 dot. odwołań od decyzji art. 14b).
 ```
 
-### 6.2 Nowy art. 10 ust. 1 pkt 7a ustawy o PIP — decyzja reklasyfikacyjna
+### 6.2 Nowy art. 11 ust. 1 pkt 7a ustawy o PIP — decyzja
+reklasyfikacyjna (⚠️ POPRAWIONE 2026-08-08: poprzednia wersja
+błędnie wskazywała "art. 10 ust. 1 pkt 7a" — właściwy przepis to
+art. 11 ust. 1 pkt 7a, potwierdzone jednoznacznie oficjalnym
+tekstem ustawy [orka.sejm.gov.pl, druk sejmowy] i 5+ zgodnymi
+źródłami [prawo.pl, sprm.org.pl] — analogicznie POLECENIE
+poprzedzające decyzję to art. 11 ust. 2, NIE art. 10 ust. 2 pkt 2,
+jak wskazywała poprzednia wersja)
 
 ```
 □ PIP (okręgowy inspektor pracy) zyskuje uprawnienie do STWIERDZENIA W DRODZE DECYZJI
@@ -116,14 +123,52 @@ poszczególnych przepisów — sprawdź art. przejściowe w ISAP przy konkretnej
     (podporządkowanie, miejsce/czas wyznaczone przez zatrudniającego, ryzyko po stronie
     zatrudniającego),
   PRZY CZYM warunkiem wydania decyzji jest NIEWYKONANIE wcześniejszego polecenia inspektora
-  (polecenie z art. 10 ust. 2 pkt 2 ustawy o PIP — usunięcie nieprawidłowości / zawarcie
+  (polecenie z art. 11 ust. 2 ustawy o PIP — usunięcie nieprawidłowości / zawarcie
   umowy o pracę).
 □ Procedura: polecenie inspektora → niewykonanie → DECYZJA stwierdzająca stosunek pracy
-  → odwołanie do SĄDU PRACY.
+  → odwołanie do SĄDU PRACY, TRYBEM NOWYCH art. 477⁷b–477⁷j KPC (odwołanie
+  składa się ZA POŚREDNICTWEM Okręgowego Inspektora Pracy, który MOŻE
+  uwzględnić je w trybie autokontroli, ALBO przekazuje wraz z aktami do
+  sądu pracy rejonowego).
 □ Stosuje się art. 10 KPA (zasada wysłuchania strony) przed wydaniem decyzji.
 □ Reforma NIE zmienia art. 22 KP (definicja stosunku pracy) — wzmacnia jedynie narzędzia
   egzekwowania istniejącej normy.
-□ Skutki temporalne (potwierdzone 2026-07-17, druga weryfikacja — kluczowe rozróżnienie):
+□ TERMIN NA ODWOŁANIE: **1 MIESIĄC** od dnia doręczenia decyzji (⚠️ DŁUŻSZY
+  niż standardowy 7-dniowy termin dla ZWYKŁYCH nakazów PIP z art. 34 —
+  TO ODRĘBNY, NOWY tryb, NIE MYLIĆ terminów).
+
+✅ ROZSTRZYGNIĘTE 2026-08-08 (FLAGA F-19 ZAMKNIĘTA) — SKUTEK
+  ODWOŁANIA NA WYKONALNOŚĆ DECYZJI: znaleziono precyzyjne, bardzo
+  świeże źródło (cgolegal.pl, 6.07.2026 — kancelaria prawna,
+  opisująca DOKŁADNIE ten NOWY mechanizm z cytowaniem konkretnych,
+  NOWYCH przepisów KPC 477⁷b-477⁷j) — POPRZEDNIA wersja tej sekcji
+  BYŁA BŁĘDNA (twierdziła odwrotnie):
+  ⭐⭐ ZASADA: WNIESIENIE ODWOŁANIA WSTRZYMUJE WYKONANIE DECYZJI DO
+    CZASU PRAWOMOCNEGO ROZSTRZYGNIĘCIA — dosłowny cytat źródła: "to
+    zasadnicza różnica w stosunku do postępowania sądowoadministracyjnego,
+    gdzie wstrzymanie wykonania jest WYJĄTKIEM, o który trzeba osobno
+    wnosić" — TUTAJ jest ODWROTNIE: wstrzymanie to ZASADA, NIE wyjątek
+  ⭐ WYJĄTEK: rygor natychmiastowej wykonalności — ZASTRZEŻONY dla
+    DECYZJI DOTYCZĄCYCH OSÓB POD SZCZEGÓLNĄ OCHRONĄ (np. ciężarna,
+    przedemerytalna) — TYLKO wtedy stosunek pracy jest wykonalnie
+    ustalony NATYCHMIAST, mimo wniesionego odwołania
+  ⭐ PRAKTYCZNA MOŻLIWOŚĆ DLA PRACODAWCY przy decyzjach Z rygorem: MOŻE
+    złożyć WNIOSEK o wstrzymanie, KTÓRY sąd rozpoznaje w **3 DNI**
+    (termin sądu na wyznaczenie posiedzenia: **1 miesiąc**)
+  ⭐ ROZRÓŻNIENIE od kwestii ZUS: NAWET przy WSTRZYMANIU wykonania
+    decyzji PIP (co do stosunku pracy), ZUS ZACHOWUJE WŁASNE, NIEZALEŻNE
+    uprawnienie do prowadzenia postępowań w granicach 5-letniego
+    przedawnienia składek — TO SĄ dwie ODRĘBNE ścieżki (sama decyzja
+    PIP jest DOWODEM, NIE tytułem egzekucyjnym w tym zakresie)
+  ⭐ DODATKOWA MOŻLIWOŚĆ w trakcie sporu: zabezpieczenie z art. 755⁶ KPC
+    — pozwala UREGULOWAĆ obowiązki stron NA CZAS postępowania, DO
+    czasu rozstrzygnięcia
+
+⚠️ POPRZEDNIA WERSJA TEJ SEKCJI (poniżej, ZACHOWANA dla PRZEJRZYSTOŚCI
+  KOREKTY, ale JUŻ NIEAKTUALNA — NIE STOSUJ):
+□ Skutki temporalne — POPRZEDNIA, BŁĘDNA wersja (potwierdzone
+  2026-07-17, druga weryfikacja — OKAZAŁO SIĘ NIEAKTUALNE/BŁĘDNE,
+  patrz rozstrzygnięcie wyżej):
   - Decyzja wywołuje skutki PRAWNE (pracownicze) OD DNIA JEJ WYDANIA/DORĘCZENIA —
     NIE działa wstecz w warstwie stosunku pracy jako takiego.
   - Skutki "NA PRZYSZŁOŚĆ" (pracownicze, podatkowe, ZUS) są NATYCHMIAST WYKONALNE —

@@ -46,7 +46,29 @@ AKTY PRAWNE (weryfikuj aktualne teksty w EUR-Lex):
      czy jego produkty/usługi spełniają kryteria Taksonomii
 
 UWAGA PRAKTYCZNA (stan na 2026):
-  CSDDD weszła w życie, transpozycja trwa do 2026.
+  ⚠️ POPRAWIONE 2026-08-09 (FAZA 3E/ZASADA 14): CSDDD WESZŁA W ŻYCIE,
+  ALE poprzednia wersja BŁĘDNIE podawała "transpozycja trwa do 2026"
+  — TEN termin jest NIEAKTUALNY — pakiet UPRASZCZAJĄCY "Omnibus I"
+  (ostatecznie przyjęty przez Radę UE 24.02.2026, po porozumieniu
+  PE-Rada z 9.12.2025) ZNACZĄCO OPÓŹNIŁ terminy I ZAWĘZIŁ zakres:
+  → TERMIN TRANSPOZYCJI do prawa krajowego: przesunięty o ROK, na
+    **26 LIPCA 2027 R.** (NIE 2026)
+  → PIERWSZE, SUBSTANCYJNE obowiązki należytej staranności (dla
+    NAJWIĘKSZYCH przedsiębiorstw): przesunięte o ROK, na **26 LIPCA
+    2028 R.** — KOLEJNE grupy podmiotów: 2029, 2030
+  → ⭐⭐ DRASTYCZNIE ZAWĘŻONY ZAKRES PODMIOTOWY: dyrektywa OBEJMUJE już
+    TYLKO BARDZO DUŻE organizacje — powyżej **5000 PRACOWNIKÓW**
+    ORAZ globalny obrót powyżej **1,5 MLD EUR** (znacząco WYŻSZE
+    progi niż pierwotna wersja dyrektywy)
+  → DODATKOWE uproszczenia: obowiązki należytej staranności
+    OGRANICZONE WYŁĄCZNIE do partnerów biznesowych PIERWSZEGO
+    poziomu (Tier 1) — usunięto klauzulę o włączeniu sektora
+    finansowego, wykreślono przepisy o odpowiedzialności cywilnej
+    na poziomie UE
+  → W POLSCE: transpozycja w toku (Ministerstwo Rozwoju i
+    Technologii), NA DZIEŃ tej weryfikacji BEZ finalnej ustawy
+    krajowej — sprawdź aktualny status przed cytowaniem w
+    konkretnej sprawie
   Duże korporacje stosują klauzule CSDDD/ESG JUŻ TERAZ z wyprzedzeniem,
   nawet wobec mniejszych dostawców. Wymagania mogą spływać z łańcucha.
 ```

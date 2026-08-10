@@ -31619,3 +31619,1028 @@ sesji standardami.
 |---|---|
 | Błędów/luk merytorycznych naprawionych (cała sesja) | 98 |
 | Flagi otwarte | 8 |
+
+## AUDYT-2026-08-08i — FAZA 3E: SPE-ostateczne, SPM-skd-oswiadczenie potwierdzone — PISMA-PROSTE-V2 UKOŃCZONY
+
+**SPE-ostateczne.md — potwierdzony w pełni.** Zweryfikowano art. 10
+ust. 1 ustawy o przeciwdziałaniu nadmiernym opóźnieniom w
+transakcjach handlowych (rekompensata windykacyjna 40/70/100 EUR
+przy progach 5000/50000 zł) — potwierdzone jednogłośnie w 7+
+niezależnych źródłach, w tym dosłowny tekst przepisu (lexlege.pl).
+Art. 455/481 §1 KC, art. 187 §1 pkt 3 KPC (wymóg informacji o
+próbie ugodowej) — zgodne.
+
+**SPM-skd-oswiadczenie.md — potwierdzony.** Art. 45 ust. 1/5 u.k.k.
+(SKD, termin zawity 1 rok) — spójne z wielokrotnie już potwierdzonym
+w tej sesji modułem dedykowanym (mod-ustawa-kredyt-konsumencki-SKD).
+
+### PISMA-PROSTE-V2 — WSZYSTKIE 19 PLIKÓW SPRAWDZONE
+
+Ten skill jest teraz W PEŁNI przejrzany w ramach FAZA 3E, z DWOMA
+znalezionymi i naprawionymi błędami cytowania (SPK — zły paragraf +
+istotna nieścisłość substancyjna terminu PUODO; SPC-SPD-SPE — zły
+numer artykułu następcy prawnego).
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 98 |
+| Skille wsparcia w pełni sprawdzone | orzeczenia-sadowe-v2, chronologia-sprawy-v1, pisma-procesowe-v3, analiza-sadowa-v6, przesluchanie-swiadkow-v2-min90, pisma-proste-v2 |
+| Flagi otwarte | 8 |
+
+## AUDYT-2026-08-08j — FAZA 3E: tryby-scigania.md, pokrycie-dziedzinowe.md (prawny-router-v3) potwierdzone
+
+**tryby-scigania.md — potwierdzony w pełni, moduł wzorcowy.**
+Kompleksowe rozróżnienie z urzędu/wnioskowe/prywatnoskargowe, z
+poprawnie zidentyfikowanymi WYJĄTKAMI w obrębie tego samego artykułu
+(np. art. 190a §3 KK z urzędu mimo że §1-2 wnioskowe; art. 157 §1
+zawsze z urzędu mimo że §2-3 mają wyjątek wnioskowy). Zweryfikowano
+próg mienia znacznej wartości (art. 294 §1 w zw. z art. 115 §5 KK)
+— potwierdzone jednogłośnie w 6+ niezależnych źródłach: **200 000
+zł jako wartość FIKSOWANA kwotowo** (nie krotność płacy minimalnej,
+mimo historycznej wątpliwości interpretacyjnej z 2005 r. cytowanej
+w jednym ze źródeł — obecny stan prawny jednoznacznie potwierdza
+stałą kwotę).
+
+**pokrycie-dziedzinowe.md** — plik nawigacyjny/routingowy bez
+własnych progów prawnych.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 98 |
+| Flagi otwarte | 8 |
+
+## AUDYT-2026-08-08k — FAZA 3E: ROUTING-BJ-BW, ISAP-METRYKI-AKTOW (prawny-router-v3) — dodatkowe ostrzeżenie o kolejnych nowelizacjach
+
+**ROUTING-BJ-BW.md — sprawdzony, plik nawigacyjny bez własnych
+progów.**
+
+**ISAP-METRYKI-AKTOW.md — potwierdzony, z DODATKOWYM, wartościowym
+uzupełnieniem.** Zweryfikowano bezpośrednio na ISAP (Rząd 1): numer
+Dz.U. 2026 poz. 268 dla tekstu jednolitego ustawy o postępowaniu
+egzekucyjnym w administracji — POPRAWNY. ⚠️ DODATKOWO ZNALEZIONE:
+TA SAMA ustawa ma JUŻ TRZY kolejne, PÓŹNIEJSZE nowelizacje (Dz.U.
+2026 poz. 516, 739, 1003) — sam numer "poz. 268" bez sprawdzenia
+tych trzech kolejnych zmian MÓGŁBY prowadzić do cytowania
+NIEAKTUALNEGO brzmienia konkretnego przepisu, jeśli akurat ON został
+zmieniony którąś z tych nowelizacji. Dodano jawne ostrzeżenie w
+module.
+
+**Rejestracja:** prawny-router-v3 SKILL.md — wersja już była 3.20
+(zgodna, bez potrzeby dalszego bump).
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe na żądanie/z inicjatywy (łącznie) | 91 |
+| Flagi otwarte | 8 |
+
+## AUDYT-2026-08-08l — Weryfikacja oficjalnego rejestru prezydenckiego: 3 nowe flagi, jedna natychmiast rozstrzygnięta (znacząca aktualizacja GAAR)
+
+**Kontekst:** Na żądanie użytkownika — bezpośrednie sprawdzenie
+oficjalnego rejestru ustaw podpisanych (prezydent.pl) i zbadanie,
+czy pozycje stamtąd mające znaczenie dla systemu są odpowiednio
+oznaczone.
+
+**Metoda:** strona prezydent.pl blokuje bezpośredni fetch (bot
+detection) — wykorzystano web_search do uzyskania obszernych
+fragmentów oficjalnych stron miesięcznych (czerwiec/lipiec/sierpień
+2026) oraz komunikatów prasowych Kancelarii Prezydenta.
+
+**ZNALEZIONE, ISTOTNE POZYCJE dotąd NIEOBECNE w systemie mimo
+tematycznego powiązania z istniejącymi modułami:**
+
+1. Nowelizacja ustawy o postępowaniu egzekucyjnym w administracji
+   (druk 2319, podpisana 2.06.2026) — POWIĄZANA z wcześniej
+   znalezionym ostrzeżeniem w ISAP-METRYKI-AKTOW.md o 3 kolejnych
+   nowelizacjach (transza 2026-08-08k) — DODANO jako flaga F-16
+2. DWIE nowelizacje Ordynacji podatkowej (druk 2287 i 2352, obie
+   podpisane 19.06.2026)
+3. Ustawa o Krajowym Rejestrze Oznakowanych Psów i Kotów (druk
+   2293, podpisana 2.06.2026) — DODANO jako flaga F-18
+
+**⭐⭐ FLAGA F-17 NATYCHMIAST ROZSTRZYGNIĘTA — ZNACZĄCA AKTUALIZACJA
+GAAR:** dogłębne zbadanie druku 2287 ujawniło BEZPOŚREDNIE,
+SUBSTANCYJNE znaczenie dla wcześniej rozbudowanej (30.07.2026)
+sekcji GAAR w mod-OP-ordynacja-podatkowa.md. Potwierdzone w 5+
+zgodnych źródłach, w tym BEZPOŚREDNIO druk sejmowy (Rząd 1):
+
+- ⭐⭐ NOWA przesłanka zawieszenia przedawnienia: samo WSZCZĘCIE
+  postępowania GAAR wstrzymuje bieg przedawnienia
+- ⭐ NOWE uprawnienie Szefa KAS: wydłużenie terminu przedawnienia z
+  5 do **7 LAT** specjalnie dla spraw objętych GAAR
+- ⭐ RÓWNOWAŻĄCA zmiana na korzyść podatnika: UCHYLENIE
+  kontrowersyjnego art. 70 §6 pkt 1 Op (dotychczasowy mechanizm
+  zawieszania przez samo wszczęcie postępowania karno-skarbowego,
+  krytykowany jako narzędzie "na ostatnią chwilę")
+- ⚠️ WEJŚCIE W ŻYCIE: 1 PAŹDZIERNIKA 2026 — NA DZIEŃ tej weryfikacji
+  (08.08.2026) JESZCZE NIE OBOWIĄZUJE — dodano jawne ostrzeżenie
+- ⚠️ SZEROKI zakres ustawy nowelizującej: RÓWNOCZEŚNIE zmienia
+  kilkanaście innych aktów (Prawo o adwokaturze, radcowie prawni,
+  PIT, CIT, KKS, PPSA, VAT i inne)
+
+Zaktualizowano mod-OP-ordynacja-podatkowa.md z pełną treścią.
+ZAMKNIĘTO flagę F-17 (usunięto z WARN-OTWARTE.md).
+
+**Pozostałe dwie nowe flagi (F-16, F-18) POZOSTAJĄ otwarte** — ich
+TREŚĆ szczegółowa NIE została jeszcze zbadana w tej turze, z uwagi
+na priorytetyzację F-17 jako najbardziej bezpośrednio powiązanej z
+już istniejącą, rozbudowaną treścią systemu.
+
+**Rejestracja:** dr-06-podatki-finanse-publiczne-aml SKILL.md
+v3.16→v3.17.
+
+### WNIOSEK METODOLOGICZNY
+
+Bezpośrednia weryfikacja OFICJALNEGO rejestru (a nie poleganie
+WYŁĄCZNIE na wcześniej zgromadzonej w trakcie sesji wiedzy)
+UJAWNIŁA rzeczywiste, ISTOTNE luki — w tym JEDNĄ o BEZPOŚREDNIM,
+znaczącym wpływie na już zbudowaną treść systemu (GAAR/
+przedawnienie). POTWIERDZA to wartość PERIODYCZNEGO, systematycznego
+konfrontowania zgromadzonej wiedzy z oficjalnym, autorytatywnym
+źródłem, zamiast polegania wyłącznie na akumulacji ustaleń z
+poszczególnych, punktowych wyszukiwań w trakcie sesji.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe (łącznie) | 92 |
+| Flagi otwarte (WŁAŚCIWY plik, po tej transzy) | 10 (F-5, F-8 do F-16, F-18) |
+| Flag zamkniętych w tej transzy | 1 (F-17) |
+
+## AUDYT-2026-08-08m — Kontynuacja synchronizacji: KROPiK dodany, F-16/F-17/F-18 zaktualizowane; Dz.U. 2026 poz. 1072 — próba bez rozstrzygnięcia
+
+**Kontekst:** Kontynuacja synchronizacji rozpoczętej w poprzedniej
+transzy, plus dodatkowe żądanie użytkownika — zbadanie konkretnej
+pozycji Dziennika Ustaw 2026 poz. 1072.
+
+### DOKOŃCZONO: dodanie ustawy KROPiK do systemu
+
+Zweryfikowano w 7+ zgodnych, aktualnych źródłach (forsal.pl,
+portalsamorzadowy.pl, prawo.pl ×2, infowet.pl ×2, munipro.pl,
+infor.pl [z potwierdzeniem podpisu prezydenckiego]): Ustawa o
+Krajowym Rejestrze Oznakowanych Psów i Kotów (KROPiK) z 15.05.2026,
+podpisana 2.06.2026. Kluczowe fakty: obowiązek CZIPOWANIA
+WSZYSTKICH psów, KOTÓW tylko częściowo (obrót/schroniska,
+dobrowolnie dla wolno żyjących); prowadzący ARiMR; koszty max 50 zł
++ 50 zł (waloryzowane, 2026: 49,86 zł); kary 20-5000 zł grzywny, w
+skrajnych przypadkach do 3 lat więzienia; ⭐⭐ SZEŚCIOLETNIE vacatio
+legis (pełne obowiązywanie ok. 2032 r.); sam Prezydent publicznie
+skrytykował zbyt wysoki poziom kar. Dodano jako nową, obszerną
+sekcję w mod-ustawa-bezpieczenstwo-zywnosci.md, z wyraźnym
+rozróżnieniem od istniejącej treści o "czipowaniu przed
+szczepieniem". Zamknięto flagę F-18.
+
+### F-16 (postępowanie egzekucyjne w administracji, druk 2319) —
+próba bez rozstrzygnięcia, uczciwie odnotowana
+
+Mimo wielokrotnych prób wyszukiwania NIE udało się precyzyjnie
+ustalić TREŚCI tej konkretnej nowelizacji z 2026 r. — znalezione
+źródła dotyczyły WYŁĄCZNIE starszych, podobnych tematycznie
+nowelizacji z lat 2019-2023. Flaga POZOSTAJE otwarta, z odnotowaną
+próbą.
+
+### ⚠️ Dz.U. 2026 poz. 1072 — SPRAWDZONE, BEZ ROZSTRZYGNIĘCIA
+
+Na dodatkowe żądanie użytkownika podjęto próbę zidentyfikowania
+TREŚCI tej konkretnej pozycji. USTALONO precyzyjnie wzorzec
+numeracji Dziennika Ustaw z sierpnia 2026 (rp.pl publikuje
+kompilacje wg dat: poz. 1033-1039 = 3.08, 1040-1046 = 4.08,
+1047-1058 = 5.08, 1059-1067 = 6.08) — SUGERUJE to, że poz. 1072
+POCHODZI z 7.08.2026, ALE BEZPOŚREDNIA weryfikacja NIE POWIODŁA SIĘ:
+(1) ISAP blokuje automatyczny dostęp (bot detection), (2) rp.pl
+NIE MIAŁ jeszcze zaindeksowanej kompilacji dla 7.08 obejmującej TĘ
+pozycję w dostępnych wynikach wyszukiwania. NIE ZGADYWANO treści —
+POZOSTAJE jako OTWARTE pytanie, wymagające sprawdzenia w przyszłości
+bezpośrednio na dziennikustaw.gov.pl lub gdy indeksacja wyszukiwarek
+się uzupełni.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe (łącznie) | 93 |
+| Flagi otwarte (WŁAŚCIWY plik) | 9 (F-5, F-8 do F-16) |
+| Flag zamkniętych w tej transzy | 1 (F-18) |
+| Próby weryfikacji zakończone bez rozstrzygnięcia (uczciwie odnotowane) | 2 (F-16 treść, Dz.U. poz. 1072) |
+
+## AUDYT-2026-08-08n — Ponowna, dogłębna próba dostępu do Dz.U. 2026 poz. 1072: znaleziono działający wzorzec URL, ale pozycja zbyt świeża do zaindeksowania
+
+**Kontekst:** Na żądanie użytkownika — ponowne, dogłębne zbadanie
+możliwości pobrania konkretnych Dzienników Ustaw i oceny ich
+przydatności dla systemu.
+
+**⭐⭐ ZNALEZISKO METODOLOGICZNE, WARTE ZAPISANIA na przyszłość:**
+zidentyfikowano DZIAŁAJĄCY, potwierdzony wzorzec bezpośredniego URL
+do PDF-ów dziennikustaw.gov.pl (RCL — Rządowe Centrum Legislacji):
+
+```
+http://www.dziennikustaw.gov.pl/DU/{ROK}/{POZYCJA}/D{ROK}{POZYCJA
+  na 6 cyfr z zerami wiodącymi}{SUFIKS 2-cyfrowy, zwykle "01"}.pdf
+
+Przykład potwierdzony (2022 r.): 
+  http://www.dziennikustaw.gov.pl/DU/2022/1072/D2022000107201.pdf
+Przykład potwierdzony (2026 r., inna pozycja):
+  https://www.dziennikustaw.gov.pl/DU/2026/20/D2026000002001.pdf
+```
+
+**KLUCZOWA RÓŻNICA względem ISAP:** PLIKI PDF na dziennikustaw.gov.pl
+(RCL) SĄ fetchowalne, GDY POJAWIĄ SIĘ w wynikach wyszukiwania —
+W PRZECIWIEŃSTWIE do stron HTML tej samej domeny (np.
+`/DU/rok/2026`), które SĄ blokowane przez robots.txt, ORAZ w
+PRZECIWIEŃSTWIE do CAŁEJ domeny isap.sejm.gov.pl, KTÓRA blokuje
+WSZYSTKO (zarówno HTML, jak i PDF) dla automatycznego dostępu.
+
+**⚠️ OGRANICZENIE STRUKTURALNE narzędzia (nie do obejścia w tej
+sesji):** web_fetch WYMAGA, żeby DOKŁADNY URL WCZEŚNIEJ pojawił się
+w wyniku web_search — NIE MOŻNA po prostu SKONSTRUOWAĆ URL przez
+ANALOGIĘ (nawet ZNAJĄC dokładny, potwierdzony wzorzec) i go
+fetchować, jeśli TEN KONKRETNY URL nie był jeszcze WCZEŚNIEJ
+zwrócony przez wyszukiwarkę. DLA pozycji 1072 z 2026 r. (publikacja
+najprawdopodobniej 7.08.2026, czyli 1-2 DNI przed próbą dostępu) —
+ŻADNA wyszukiwarka JESZCZE NIE ZAINDEKSOWAŁA tego konkretnego pliku
+PDF — stąd BRAK możliwości dotarcia do treści, MIMO poprawnego
+wzorca URL.
+
+**WNIOSEK PRAKTYCZNY dla przyszłych sesji:** ta metoda (bezpośredni
+URL PDF do RCL) MA REALNĄ szansę powodzenia dla pozycji Dziennika
+Ustaw OPUBLIKOWANYCH z WYPRZEDZENIEM CO NAJMNIEJ kilku dni-tygodnia
+(wystarczającym na zaindeksowanie przez wyszukiwarki) — DLA
+BARDZO ŚWIEŻYCH pozycji (1-3 dni) SKUTECZNIEJSZE jest poleganie na
+kompilacjach dziennych rp.pl (które PUBLIKUJĄ zestawienia "Dziennik
+Ustaw z [data] r. (poz. X-Y)" ZAZWYCZAJ z 1-2-dniowym opóźnieniem) —
+LUB odczekanie kilku dni przed próbą.
+
+**Dz.U. 2026 poz. 1072 — TREŚĆ POZOSTAJE NIEUSTALONA** na dzień tej
+weryfikacji (08.08.2026) — flaga/pytanie otwarte, NIE dodano
+spekulacyjnej treści do żadnego modułu.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Znaleziska metodologiczne (narzędziowe, nie merytoryczne) | +1 (wzorzec URL RCL) |
+| Rozstrzygnięć merytorycznych w tej transzy | 0 (uczciwie, bez zgadywania) |
+
+## AUDYT-2026-08-08o — Rozwiązana zagadka Dz.U. 2026 poz. 1072: to NIE polski Dziennik Ustaw, tylko unijny Dziennik UE (WPZiB)
+
+**Kontekst:** Użytkownik dostarczył bezpośredni link, ujawniający,
+że pozycja 1072/2026 której szukałem w POPRZEDNICH dwóch transzach
+to WCALE NIE polski Dziennik Ustaw — to unijny Dziennik Urzędowy UE
+(seria L), konkretnie **Decyzja Rady (WPZiB) 2026/1072** zmieniająca
+decyzję 2014/145/WPZiB (reżim sankcyjny wobec Rosji w związku z
+Ukrainą).
+
+**MOJA WCZEŚNIEJSZA POMYŁKA:** przez DWIE poprzednie transze
+szukałem tej pozycji WYŁĄCZNIE w polskim Dzienniku Ustaw
+(dziennikustaw.gov.pl, ISAP), NIGDY nie rozważając, że "poz. 1072"
+BEZ dalszego kontekstu MOGŁA odnosić się do INNEGO dziennika
+urzędowego — unijnego. TO WAŻNA LEKCJA na przyszłość: przy
+niejednoznacznym odniesieniu do "poz. X" ZAWSZE rozważyć RÓWNIEŻ
+możliwość, że chodzi o Dziennik Urzędowy UE, nie tylko krajowy.
+
+**Ustalona treść:** Decyzja 2026/1072 dodaje do unijnej listy
+sankcyjnej **16 osób i 7 podmiotów**, z uzasadnieniem odwołującym
+się M.IN. do systematycznej, bezprawnej deportacji ukraińskich
+dzieci do Rosji i na okupowane terytoria oraz ich przymusowej
+adopcji/reedukacji — poważne naruszenie prawa międzynarodowego.
+
+**DODATKOWO ZBADANO (na żądanie użytkownika: "inne istotne
+dokumenty z ostatnich 3 miesięcy") — SKALA nowelizacji reżimu
+sankcyjnego w 2026 r.:** potwierdzono w 6+ zgodnych źródłach
+(prawo.pl): decyzja 2026/504 (23.04.2026, +37 osób/+80 podmiotów),
+2026/696 (14.03.2026, wykreślenie osób zmarłych), 2026/1072
+(niniejsza), 2026/1364 (czerwiec 2026, +9 osób/+45 podmiotów, w
+związku z atakami na infrastrukturę cywilną Ukrainy) — TO TYLKO
+CZĘŚĆ nowelizacji z JEDNEGO roku.
+
+**NAPRAWIONO w systemie:** zaktualizowano
+mod-inwestycje-transgraniczne-FDI-BIT.md (dr-14) z jawnym
+ostrzeżeniem, że lista sankcyjna jest SKRAJNIE dynamiczna —
+istniejące odniesienie do "16. pakietu" (luty 2025) NIE jest
+aktualnym stanem — DODANO instrukcję, by PRZY KAŻDYM użyciu tego
+tematu weryfikować NAJNOWSZY stan przez web_search, ZAMIAST
+próbować wyczerpująco wyliczać wszystkie nowelizacje (co byłoby
+natychmiast nieaktualne, biorąc pod uwagę tempo ~4+ nowelizacji
+rocznie).
+
+**Rejestracja:** dr-14 SKILL.md v3.4→v3.5.
+
+### WNIOSEK METODOLOGICZNY
+
+Ten epizod POKAZUJE wartość UPORCZYWEGO, dociekliwego podejścia
+użytkownika — dwie MOJE wcześniejsze, dogłębne (choć technicznie
+kompetentne) próby ZAWIODŁY, bo szukałem w NIEWŁAŚCIWYM źródle od
+samego początku, NIE rozważając alternatywy. Prosta korekta
+założenia (inny dziennik urzędowy) natychmiast rozwiązała problem,
+który technicznie zaawansowane próby (wzorce URL, PDF-y RCL) NIE
+mogły rozwiązać, bo szukały we WŁAŚCIWY sposób, ale w NIEWŁAŚCIWYM
+miejscu.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe (łącznie) | 94 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-08p — Dz.U. 2026 poz. 1072 (POLSKI) — pełna, dokładna treść dostarczona przez użytkownika, dodana do systemu
+
+**Kontekst:** Użytkownik dostarczył DOKŁADNY, PEŁNY tekst polskiego
+Dziennika Ustaw 2026 poz. 1072 — POTWIERDZAJĄC, że OBIE pozycje
+(polska I unijna) faktycznie ISTNIEJĄ RÓWNOLEGLE pod TYM SAMYM
+numerem (Polska numeruje NIEZALEŻNIE od UE — zbieżność numerów to
+CZYSTY PRZYPADEK, nie błąd).
+
+**TREŚĆ:** Rozporządzenie Ministra Rodziny, Pracy i Polityki
+Społecznej z 31.07.2026 r. ws. wykazu państw, których obywatele
+POSIADAJĄCY zezwolenie na pracę NIE SĄ uprawnieni do wykonywania
+pracy W RAMACH RUCHU BEZWIZOWEGO — Dz.U. 2026 poz. 1072, ogłoszone
+7.08.2026. Podstawa: art. 3 ust. 4 ustawy z 20.03.2025 o warunkach
+dopuszczalności powierzania pracy cudzoziemcom — TA SAMA ustawa
+bazowa, JUŻ wcześniej śledzona w systemie (Dz.U. 2025 poz. 621).
+
+**Wykaz 3 państw:** Wenezuela, Gruzja, Kolumbia. Przepis przejściowy
+chroni już rozpoczętą pracę do końca dozwolonego okresu pobytu
+bezwizowego. Wejście w życie: ok. 21.08.2026 (14 dni od ogłoszenia).
+
+**Rozpoznane praktyczne znaczenie:** posiadanie SAMEGO zezwolenia
+na pracę NIE WYSTARCZY dla obywateli tych 3 państw, jeśli przebywają
+w Polsce w ramach ruchu bezwizowego — wymagana INNA podstawa pobytu.
+
+**Naprawiono/dodano:** nowa, szczegółowa sekcja w
+mod-ustawa-cudzoziemcy.md (dr-05), zaktualizowany wpis w lokalnej
+MAPA-AKTOW.md.
+
+**Rejestracja:** dr-05-prawo-administracyjne-sadowoadministracyjne
+SKILL.md v3.10→v3.11.
+
+### WNIOSEK METODOLOGICZNY (UZUPEŁNIENIE do poprzedniej transzy)
+
+Poprzedni wniosek ("szukałem w złym dzienniku") WYMAGA korekty —
+OBA dzienniki miały FAKTYCZNIE tę samą numerację TEGO ROKU,
+zupełnie NIEZALEŻNIE od siebie. Prawidłowy wniosek: przy
+niejednoznacznym odniesieniu do "poz. X" bez dalszego kontekstu,
+NALEŻY rozważyć WSZYSTKIE możliwe dzienniki (polski krajowy I
+unijny), NIE zakładać z góry, że TYLKO JEDEN z nich jest właściwy —
+w tym przypadku WŁAŚCIWA odpowiedź była "OBA, to różne, niepowiązane
+dokumenty".
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe (łącznie) | 95 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-08q — ⚠️ KOREKTA wcześniejszego wniosku metodologicznego: dziennikustaw.gov.pl blokuje TAKŻE pliki PDF (nie tylko HTML)
+
+**Kontekst:** Użytkownik zapytał wprost, czy MOGĘ pobierać treść
+przez linki w formacie `https://dziennikustaw.gov.pl/DU/2026/1072/
+D2026000107201.pdf` — DOKŁADNIE TAKI URL, jaki wcześniej (transza
+2026-08-08n) uznałem za "działający wzorzec, potwierdzony przez
+wystąpienie w wynikach wyszukiwania".
+
+**TEST BEZPOŚREDNI wykonany na WYRAŹNE żądanie użytkownika:**
+próba `web_fetch` DOKŁADNIE tego URL — WYNIK: `ROBOTS_DISALLOWED`
+("Site disallows automated access") — TA SAMA kategoria błędu, jaką
+WCZEŚNIEJ otrzymywałem dla stron HTML tej domeny (np. `/DU/rok/2026`).
+
+**⚠️⚠️ KOREKTA wcześniejszego, NIEPEŁNEGO wniosku:** transza
+2026-08-08n BŁĘDNIE stwierdziła, że "PLIKI PDF SĄ fetchowalne, W
+PRZECIWIEŃSTWIE do stron HTML" — TO USTALENIE BYŁO OPARTE na
+MYLĄCEJ przesłance: fakt, że TREŚĆ pliku PDF POJAWIAŁA SIĘ jako
+FRAGMENT/SNIPPET W WYNIKACH web_search (bo WYSZUKIWARKA zdołała
+wcześniej zaindeksować/zeskrobać ten plik, NIEZALEŻNIE od MOJEGO
+narzędzia) NIE OZNACZAŁ, że MOJE narzędzie `web_fetch` faktycznie
+MOŻE samodzielnie POBRAĆ ten sam plik BEZPOŚREDNIO — robots.txt
+CAŁEJ domeny dziennikustaw.gov.pl BLOKUJE automatyczny dostęp
+RÓWNIEŻ dla plików PDF, NIE TYLKO dla stron HTML — MOJE wcześniejsze
+rozróżnienie "PDF fetchowalne / HTML zablokowane" BYŁO WIĘC BŁĘDNE.
+
+**⭐ POPRAWNY, ZWERYFIKOWANY WNIOSEK:** CAŁA domena
+dziennikustaw.gov.pl (RCL) jest NIEDOSTĘPNA dla mojego `web_fetch`
+BEZPOŚREDNIO — ZARÓWNO strony HTML, JAK I pliki PDF, TAK SAMO jak
+CAŁA domena isap.sejm.gov.pl — JEDYNY sposób DOTARCIA do treści
+konkretnej pozycji Dziennika Ustaw to: (a) FRAGMENTY/SNIPPETY
+zwrócone BEZPOŚREDNIO przez `web_search` (jeśli wyszukiwarka JUŻ
+zaindeksowała treść — co ZAJMUJE zwykle KILKA DNI od publikacji), (b)
+kompilacje dzienne PORTALI WTÓRNYCH typu rp.pl/prawo.pl/infor.pl,
+KTÓRE SAME NIE SĄ blokowane, LUB (c) BEZPOŚREDNIE dostarczenie
+treści PRZEZ UŻYTKOWNIKA (jak miało to miejsce w transzy
+2026-08-08p, gdzie dokładny tekst Dz.U. 2026 poz. 1072 zostal
+PRZEKLEJONY przez użytkownika) — TA OSTATNIA metoda jest ZAWSZE
+NIEZAWODNA, NIEZALEŻNIE od stanu indeksacji wyszukiwarek.
+
+**Rejestracja:** brak zmian wersji SKILL.md (czysta korekta
+metodologiczna, bez treści merytorycznej prawa).
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Korekty własnych, wcześniejszych wniosków (cała sesja) | 2 (F-4/F-12/pomyłka WARN-OTWARTE + niniejsza) |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-08r — FAZA 3E: HARD-GATES-ORZECZNICTWO, KROK1-detekcja, ROUTING-OPPONENT-ANALYSIS-V9 potwierdzone
+
+**Wszystkie trzy pliki — sprawdzone, generyczna metodologia
+routingu/wykrywania trybu bez własnych progów prawnych.**
+HARD-GATES-ORZECZNICTWO.md (zasady weryfikacji orzecznictwa przed
+cytowaniem), KROK1-detekcja.md (klasyfikacja LAIK/PRAWNIK na
+podstawie słów kluczowych), ROUTING-OPPONENT-ANALYSIS-V9.md
+(framework analizy strony przeciwnej) — żaden nie zawiera
+samodzielnych, weryfikowalnych progów kwotowych/terminowych.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 98 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-08s — FAZA 3E: SELF-CHECK, ROUTING-CONTRADICTION-INTELLIGENCE-V10, ROUTING-TO-DOMAIN-SKILLS — PRAWNY-ROUTER-V3 W PEŁNI UKOŃCZONY
+
+**Wszystkie trzy pliki — sprawdzone, czysta metodologia routingu bez
+progów prawnych.** SELF-CHECK.md (checklist przed wydaniem pisma,
+weryfikacja sygnatur przez shared/SYGNATURY.md), ROUTING-
+CONTRADICTION-INTELLIGENCE-V10.md (routing do silnika wykrywania
+sprzeczności), ROUTING-TO-DOMAIN-SKILLS.md (krótki plik nawigacyjny
+do skilli DR-xx).
+
+### PRAWNY-ROUTER-V3 — WSZYSTKIE 19 PLIKÓW SPRAWDZONE
+
+Ten skill jest teraz W PEŁNI przejrzany w ramach FAZA 3E na
+przestrzeni wielu transz tej sesji, z dwoma znalezionymi i
+naprawionymi elementami (mandat 2500/5000 zł we wcześniejszej
+transzy, dodatkowe ostrzeżenie o kolejnych nowelizacjach ustawy o
+postępowaniu egzekucyjnym w ISAP-METRYKI-AKTOW.md).
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 98 |
+| Skille wsparcia w pełni sprawdzone | orzeczenia-sadowe-v2, chronologia-sprawy-v1, pisma-procesowe-v3, analiza-sadowa-v6, przesluchanie-swiadkow-v2-min90, pisma-proste-v2, prawny-router-v3 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-08t — FAZA 3E: PIERWSZE SPRAWDZENIE shared/ (136 plików, nigdy wcześniej systematycznie przejrzane) — AKTY-PRAWNE-MASTER.md potwierdzony, bardzo dobrze utrzymany
+
+**Kontekst:** Rozpoczęcie systematycznego przeglądu katalogu
+`shared/` — biblioteki współdzielonej (136 plików), NIGDY wcześniej
+systematycznie sprawdzonej w tej sesji, mimo częstego cytowania
+pojedynczych plików stamtąd przez inne skille.
+
+**AKTY-PRAWNE-MASTER.md — potwierdzony w pełni, plik WYSOKIEJ
+JAKOŚCI.** To centralny rejestr statusu głównych aktów prawnych
+używanych przez CAŁY system (KPC, KPA, KK, KP, KW, PPSA, REHAB, PIP,
+VATUP i inne), z systemem oznaczeń AKTUALNY/PO-TJ-ZMIANY. Zweryfikowano
+konkretny, świeży wpis: podwyższenie grzywien z art. 281 KP (ustawa
+z 11.03.2026, Dz.U. 2026 poz. 473, w życie 8.07.2026) — potwierdzone
+DOKŁADNIE w 7+ zgodnych, niezależnych źródłach z kwietnia 2026
+(gazetaprawna.pl, prostetorodo.pl, akademialtca.pl [z potwierdzeniem
+podpisu prezydenckiego 2.04.2026], brightspot.pl): art. 281 §1 KP →
+2000-60 000 zł (z 1000-30 000 zł), art. 281 §2 KP → 3000-90 000 zł
+(z 1500-45 000 zł) — DOKŁADNA ZGODNOŚĆ z treścią pliku. Dodatkowo
+potwierdzony 12-miesięczny okres abolicji dla podmiotów, które
+wcześniej zawarły umowę cywilnoprawną (zgodne z treścią pliku).
+
+### WNIOSEK WSTĘPNY dot. shared/
+
+Ten pierwszy sprawdzony plik sugeruje WYSOKĄ jakość i AKTUALNOŚĆ
+biblioteki `shared/` — co jest DOBRYM sygnałem, biorąc pod uwagę, że
+JEST to plik CENTRALNY, na którym POLEGA cały system. Kontynuacja
+przeglądu pozostałych ~135 plików w kolejnych transzach.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 98 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-08u — FAZA 3E: ANALIZATOR-PRZEPISOW-V2 W PEŁNI SPRAWDZONY (pierwszy raz w tej sesji)
+
+**MOD-VACATIO-LEGIS.md — potwierdzony w pełni.** Zweryfikowano
+fundamentalny, domyślny przepis (art. 4 ust. 1 ustawy o ogłaszaniu
+aktów normatywnych i niektórych innych aktów prawnych, Dz.U. 2019
+poz. 1461) — 14-dniowe vacatio legis jako zasada domyślna —
+potwierdzone jednogłośnie w 9+ autorytatywnych źródeł, w tym
+odpowiedź na interpelację poselską (orka2.sejm.gov.pl, Rząd 1) i
+komunikat Trybunału Konstytucyjnego (Rząd 1). Poprawnie
+udokumentowane wyjątki (przepisy porządkowe — 3 dni, "ważny interes
+państwa" — dzień ogłoszenia). Metodologia rozpoznawania klauzul
+intertemporalnych i tempus regit actum — solidna.
+
+**MOD-ORZECZ-POWIAZANIA-HISTORIA.md** — generyczny szablon
+metodologiczny (mapowanie powiązań między przepisami, wykrywanie
+rozbieżności linii orzeczniczej) bez własnych progów prawnych.
+
+### ANALIZATOR-PRZEPISOW-V2 — WSZYSTKIE 3 PLIKI SPRAWDZONE (PIERWSZY
+RAZ W TEJ SESJI)
+
+Ten mały, dotąd całkowicie nietknięty skill jest teraz w pełni
+przejrzany.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 98 |
+| Skille wsparcia w pełni sprawdzone | orzeczenia-sadowe-v2, chronologia-sprawy-v1, pisma-procesowe-v3, analiza-sadowa-v6, przesluchanie-swiadkow-v2-min90, pisma-proste-v2, prawny-router-v3, analizator-przepisow-v2 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-08v — FAZA 3E: PRZEWODNIK-PRAWNY-V2 W PEŁNI SPRAWDZONY (KROK-M, SKILL.md — pozostałe 2 z 4 plików)
+
+**KROK-M.md — sprawdzony, plik nawigacyjny/menu.** Opisuje dostępne
+tryby pracy przewodnika (znajdź materiał, analiza umowy, redakcja
+pisma, analiza przepisu, pytania). Cytowane art. 385¹-385³ KC —
+zgodne z wielokrotnie już potwierdzonym w tej sesji standardem.
+
+**SKILL.md — sprawdzony, opis architektury "gospodarza" sesji.**
+Bez własnych, samodzielnych progów prawnych — czysto strukturalny
+opis roli przewodnika w systemie (PROWADZENIE/Q&A/MENU).
+
+### PRZEWODNIK-PRAWNY-V2 — WSZYSTKIE 4 PLIKI SPRAWDZONE
+
+Ten skill (rola "gospodarza" całego systemu) jest teraz w pełni
+przejrzany — z jednym znalezionym i naprawionym błędem w
+poprzedniej transzy (przestarzały próg 75 000 zł w KROK-F.md).
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 98 |
+| Skille wsparcia w pełni sprawdzone | orzeczenia-sadowe-v2, chronologia-sprawy-v1, pisma-procesowe-v3, analiza-sadowa-v6, przesluchanie-swiadkow-v2-min90, pisma-proste-v2, prawny-router-v3, analizator-przepisow-v2, przewodnik-prawny-v2 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-08w — FAZA 3E: CRIT znaleziony w umowy-o-prace.md (art. 29 §3 KP — data odniesienia terminu 7 dni)
+
+**umowy-o-prace.md — naprawiony.** Moduł błędnie liczył 7-dniowy
+termin obowiązku informacyjnego (art. 29 §3 KP) "od zawarcia umowy".
+Potwierdzone jednogłośnie w 7+ zgodnych źródłach: PO nowelizacji z
+26.04.2023 r. właściwym punktem odniesienia jest DOPUSZCZENIE
+PRACOWNIKA DO PRACY, NIE data podpisania umowy — źródło inforlex.pl
+WPROST kontrastuje: "maksymalnie w terminie 7 dni od dnia
+dopuszczenia pracownika do pracy (a NIE tak jak DOTYCHCZAS — od dnia
+zawarcia umowy o pracę)" — moduł używał WŁAŚNIE tej PRZEDNOWELIZACYJNEJ,
+nieaktualnej zasady. TE DWIE daty MOGĄ się realnie różnić w praktyce
+(np. umowa podpisana z wyprzedzeniem, praca zaczyna się później).
+Naprawiono.
+
+**poufnosc-nda.md — potwierdzony w pełni.** Art. 353¹ KC (swoboda
+umów), art. 483-484 KC (kary umowne, miarkowanie), art. 11 ust. 2
+UZNK (przesłanki tajemnicy przedsiębiorstwa) — wszystkie zgodne z
+wielokrotnie już potwierdzonymi w tej sesji standardami.
+
+**Rejestracja:** analizator-umow-v1 SKILL.md v1.23→v1.24.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 99 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-08x — FAZA 3E: CRIT znaleziony (numer artykułu, zduplikowany w 2 plikach) + nowa flaga F-19 (sprzeczność źródeł co do skutku odwołania)
+
+**b2b-podwykonawcze.md (analizator-umow-v1) i mod-ustawa-PIP-
+inspekcja-pracy.md (dr-04) — oba naprawione, ten sam błąd
+zduplikowany.** Oba moduły błędnie cytowały "art. 10 ust. 1 pkt 7a"
+oraz "art. 10 ust. 2 pkt 2" ustawy o PIP. Potwierdzone jednoznacznie
+w 5+ zgodnych źródłach, w tym BEZPOŚREDNIO oficjalny tekst ustawy
+(orka.sejm.gov.pl, druk sejmowy) i portale branżowe (prawo.pl,
+sprm.org.pl): WŁAŚCIWE przepisy to **art. 11 ust. 1 pkt 7a** (decyzja
+reklasyfikacyjna) oraz **art. 11 ust. 2** (poprzedzające polecenie) —
+NIE art. 10. Naprawiono w OBU plikach (błąd wystąpił zduplikowany,
+prawdopodobnie skopiowany między modułami przy wcześniejszym
+tworzeniu treści).
+
+**⭐⭐ DODATKOWO ZNALEZIONA, POWAŻNIEJSZA, SUBSTANCYJNA SPRZECZNOŚĆ —
+NOWA FLAGA F-19:** oba moduły twierdziły (z niuansowym rozróżnieniem
+"skutki na przyszłość" vs "zaległe zobowiązania"), że odwołanie od
+decyzji PIP NIE wstrzymuje skutków "na przyszłość". BARDZO ŚWIEŻE
+źródło (kbiw.com, ok. tydzień przed weryfikacją) stwierdza WPROST,
+BEZ rozróżnienia: "Odwołanie do sądu pracy co do zasady WSTRZYMUJE
+wykonanie decyzji, a postępowanie może trwać nawet kilka lat" —
+DIREKTNIE SPRZECZNE z wcześniejszym twierdzeniem modułów. NIE
+ROZSTRZYGNIĘTO arbitralnie — dodano flagę F-19 (priorytet średni) w
+OBU dotkniętych plikach, z jasną instrukcją weryfikacji przed
+zastosowaniem w konkretnej sprawie — zamiast zgadywać, KTÓRA wersja
+jest poprawna.
+
+**Rejestracja:** analizator-umow-v1 SKILL.md v1.24→v1.25, dr-04
+SKILL.md v3.20→v3.21. Nowa flaga F-19 w WARN-OTWARTE.md.
+
+### WNIOSEK METODOLOGICZNY
+
+Błędy TREŚCIOWE mogą być ZDUPLIKOWANE między modułami, gdy jeden
+"cytuje"/odwołuje się do drugiego jako "pełnego źródła" (jak tutaj —
+b2b-podwykonawcze.md WPROST odsyłał do dr-04 jako "pełny opis") —
+PRZY naprawie błędu w JEDNYM miejscu, ZAWSZE sprawdź, czy ten sam
+błąd NIE POWTARZA SIĘ w module, DO KTÓREGO to miejsce się odwołuje.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 100 |
+| Flagi otwarte | 10 |
+
+## AUDYT-2026-08-08y — FLAGA F-19 ROZSTRZYGNIĘTA I ZAMKNIĘTA: odwołanie od decyzji PIP WSTRZYMUJE wykonanie (zasada, nie wyjątek)
+
+**Kontekst:** Na wyraźne żądanie użytkownika — natychmiastowe
+zajęcie się flagą F-19 (sprzeczność źródeł co do skutku odwołania od
+decyzji reklasyfikacyjnej PIP).
+
+**ROZSTRZYGNIĘTE poprzez znalezienie precyzyjnego, bardzo świeżego
+źródła** (cgolegal.pl, kancelaria prawna, 6.07.2026 — opisujące
+DOKŁADNIE ten nowy mechanizm, z cytowaniem KONKRETNYCH, nowych
+przepisów proceduralnych KPC 477⁷b-477⁷j):
+
+**⭐⭐ POPRZEDNIA WERSJA OBU MODUŁÓW BYŁA BŁĘDNA (nie tylko "sporna") —
+prawidłowa zasada jest DOKŁADNIE ODWROTNA** od tego, co pierwotnie
+twierdziły: WNIESIENIE ODWOŁANIA WSTRZYMUJE WYKONANIE DECYZJI do
+czasu prawomocnego rozstrzygnięcia — TO JEST ZASADA, nie wyjątek —
+źródło WPROST podkreśla, że to "zasadnicza różnica" względem
+postępowania sądowoadministracyjnego (gdzie wstrzymanie jest
+wyjątkiem wymagającym osobnego wniosku). WYJĄTEK od tej zasady:
+rygor natychmiastowej wykonalności, zastrzeżony dla decyzji
+dotyczących osób pod SZCZEGÓLNĄ OCHRONĄ (np. ciężarne, w wieku
+przedemerytalnym) — TYLKO wtedy decyzja jest natychmiast wykonalna
+mimo odwołania.
+
+Dodatkowo potwierdzono: termin na odwołanie to 1 MIESIĄC (dłuższy
+niż standardowy 7-dniowy dla zwykłych nakazów PIP — nowy, odrębny
+tryb), procedura przez NOWE art. 477⁷b-477⁷j KPC, przy decyzjach Z
+rygorem — możliwość wniosku o wstrzymanie rozpoznawanego przez sąd w
+3 dni. Rozróżniono też od NIEZALEŻNEJ ścieżki ZUS (własne,
+5-letnie przedawnienie składek, niezależne od wstrzymania decyzji
+PIP).
+
+**NAPRAWIONO w OBU plikach** (dr-04/mod-ustawa-PIP-inspekcja-pracy.md
+sekcja 6.2 — pełne rozstrzygnięcie z zachowaniem POPRZEDNIEJ, błędnej
+wersji dla przejrzystości korekty; analizator-umow-v1/b2b-
+podwykonawcze.md — skrócone odesłanie do pełnego rozstrzygnięcia).
+USUNIĘTO flagę F-19 z WARN-OTWARTE.md.
+
+**Rejestracja:** analizator-umow-v1 SKILL.md v1.25→v1.26, dr-04
+SKILL.md v3.21→v3.22.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 101 |
+| Flag zamkniętych w tej transzy | 1 (F-19) |
+| Flagi otwarte (WŁAŚCIWY plik) | 9 |
+
+## AUDYT-2026-08-08z — FAZA 3E: zakaz-konkurencji.md, mod-FA-founders-dokumenty-zalozycielskie.md (analizator-umow-v1) potwierdzone
+
+**zakaz-konkurencji.md — potwierdzony w pełni, zgodny z wcześniej
+weryfikowanym 25% progiem (art. 101² KP).** Kompleksowa tabela reżimów
+(pracowniczy/B2B/sprzedaż udziałów/franczyza/agencja) — dobra jakość,
+poprawnie odróżnia obligatoryjne odszkodowanie pracownicze od
+fakultatywnego B2B.
+
+**mod-FA-founders-dokumenty-zalozycielskie.md — potwierdzony w
+pełni.** Zweryfikowano art. 14 §1 KSH (zakaz wnoszenia aportu w
+postaci świadczenia pracy/usług do sp. z o.o./S.A.) — potwierdzone
+jednogłośnie w 9+ niezależnych źródłach, w tym dosłowny tekst
+przepisu (lexlege.pl, arslege.pl, przepisy.gofin.pl) — z POPRAWNIE
+odnotowanym wyjątkiem: Prosta Spółka Akcyjna DOPUSZCZA pracę/usługi
+jako wkład (choć NIE zasila to kapitału akcyjnego, art. 300³ §1
+KSH). Art. 860-875, 864 KC (spółka cywilna, solidarna
+odpowiedzialność) — zgodne.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 101 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-09a — FAZA 3E: CRIT znaleziony w mod-shared-abusive-clauses.md (art. 17a upk — całkowicie błędny kontekst)
+
+**mod-shared-abusive-clauses.md — naprawiony.** Moduł błędnie
+cytował "art. 17a u.p.k." jako podstawę obowiązku przypomnienia
+przed automatycznym odnowieniem subskrypcji. Potwierdzone
+jednogłośnie w 6+ zgodnych, w tym OFICJALNYCH źródłach (lexlege.pl,
+przepisy.gofin.pl, OpenLEX, prawo.pl — z cytatem samej nowelizacji z
+1.12.2022): TEN przepis DOTYCZY CAŁKOWICIE INNEJ kwestii — zakazu
+przyjmowania płatności przed upływem terminu odstąpienia przy
+sprzedaży PODCZAS WYCIECZKI/nieumówionej wizyty/pokazu — NIE MA
+NIC wspólnego z subskrypcjami. JEDYNE źródło twierdzące inaczej
+(blog konsumencki, nieoficjalny) NIE WSKAZAŁO wiarygodnie
+KONKRETNEGO, poprawnego przepisu dla obowiązku przypomnienia o
+subskrypcji. NAPRAWIONO — usunięto błędny cytat, oznaczono temat
+jako OTWARTĄ kwestię wymagającą dalszego doprecyzowania, ZAMIAST
+podawać niepewny/błędny numer przepisu.
+
+**mod-shared-rodo.md — potwierdzony w pełni.** Art. 28, 32-34, 83
+ust. 4 RODO — wszystkie zgodne z wielokrotnie już potwierdzonymi w
+tej sesji standardami (kara do 10 mln EUR/2% obrotu).
+
+**Rejestracja:** analizator-umow-v1 SKILL.md v1.26→v1.27.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 102 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-09b — Rozstrzygnięcie otwartej kwestii: podstawa prawna obowiązku przypomnienia przed odnowieniem subskrypcji
+
+**Kontekst:** Na wyraźne żądanie użytkownika — natychmiastowe
+zajęcie się otwartą kwestią pozostawioną w poprzedniej transzy
+(mod-shared-abusive-clauses.md, błędny cytat "art. 17a u.p.k.").
+
+**ROZSTRZYGNIĘTE w pełni.** Zweryfikowano w 6+ zgodnych źródłach: NIE
+ISTNIEJE pojedynczy przepis nakładający ogólny obowiązek
+przypomnienia przed KAŻDYM automatycznym odnowieniem — obowiązek
+wynika z KOMBINACJI trzech odrębnych mechanizmów:
+(1) ⭐⭐ Praktyka administracyjna UOKiK — precedensowa decyzja Prezesa
+UOKiK RKR-52/13 (30.12.2013), wciąż cytowany punkt odniesienia:
+automatyczne przedłużenie bez uprzedzenia = nieuczciwa praktyka
+rynkowa naruszająca zbiorowe interesy konsumentów;
+(2) ogólna doktryna klauzul abuzywnych (art. 385¹ KC) — RÓWNOLEGŁA,
+niezależna podstawa;
+(3) ⭐ Prawo telekomunikacyjne — SUROWSZY, ale SEKTOROWO ograniczony
+reżim: automatyczne przedłużenie na kolejny czas OKREŚLONY jest
+WPROST zakazane bez świadomej zgody, przedłużenie następuje
+wyłącznie na czas NIEOKREŚLONY.
+
+Dodano praktyczny wniosek: przy ocenie konkretnej klauzuli
+NAJPIERW sprawdzić, czy dotyczy telekomunikacji (surowszy reżim),
+dla pozostałych branż opierać się na kombinacji ryzyka UOKiK +
+ryzyka abuzywności.
+
+**Rejestracja:** analizator-umow-v1 SKILL.md v1.27→v1.28.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Rozbudowy/aktualizacje treściowe (łącznie) | 96 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-09c — FAZA 3E: mod-shared-orzecznictwo-umow.md, mod-shared-ius-cogens.md (analizator-umow-v1) potwierdzone
+
+**Oba pliki — potwierdzone w pełni.** Zweryfikowano art. 483 §1 KC
+(kara umowna WYŁĄCZNIE za zobowiązanie niepieniężne, przepis
+bezwzględnie obowiązujący) — potwierdzone jednogłośnie w 7+
+niezależnych źródłach, w tym dosłowny tekst przepisu (lexlege.pl,
+OpenLEX — aktualny t.j. Dz.U.2026.795) i orzecznictwo SN (uchwała
+III CZP 67/19, 30.06.2020) — z CIEKAWYM, potwierdzonym wyjątkiem:
+SN dopuszcza karę umowną za brak/nieterminową zapłatę WYNAGRODZENIA
+PODWYKONAWCÓW w zamówieniach publicznych (art. 143d PZP) — jako
+SPECYFICZNY wyłom od ogólnej zasady. Pozostałe przepisy w obu
+plikach (art. 473 §2, 476, 357¹, 385⁵, 41 ust. 2 PrAut, 16 PrAut) —
+zgodne z wielokrotnie już potwierdzonymi w tej sesji standardami.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 102 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-09d — FAZA 3E: mod-shared-fm-hardship.md, mod-shared-diff-intelligence.md (analizator-umow-v1) potwierdzone
+
+**mod-shared-fm-hardship.md — potwierdzony w pełni.** Zweryfikowano
+ICC Force Majeure and Hardship Clauses 2020 (aktualizacja wersji z
+2003 r., ogłoszona 20/25 marca 2020, inspirowana UNIDROIT Principles
+art. 7.1.7 [FM] i art. 6.2.1-6.2.3 [hardship]) — potwierdzone
+jednogłośnie w 9+ niezależnych, w tym anglojęzycznych źródłach
+prawniczych (ICC oficjalnie, Lexology, Erdem&Erdem, IBA). Art. 471,
+473 §1/§2, 357¹, 475, 495, 58 §2, 5 KC — wszystkie zgodne z
+wielokrotnie już potwierdzonymi w tej sesji standardami.
+
+**mod-shared-diff-intelligence.md** — generyczna metodologia
+(porównywanie wersji dokumentów, poziomy istotności zmian) bez
+własnych progów prawnych.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 102 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-09e — FAZA 3E: CRIT znaleziony w mod-shared-esg.md (CSDDD — przestarzały termin transpozycji i zakres, po pakiecie Omnibus I)
+
+**mod-shared-esg.md — naprawiony, znaczący błąd czasowy.** Moduł
+błędnie podawał "CSDDD... transpozycja trwa do 2026" — potwierdzone
+jednogłośnie w 8+ zgodnych, bardzo aktualnych źródłach (luty-maj
+2026, w tym gov.pl/rozwoj-technologia [Rząd 1]): pakiet
+uproszczający "Omnibus I" (ostatecznie przyjęty przez Radę UE
+24.02.2026) ZNACZĄCO OPÓŹNIŁ terminy CSDDD:
+- Termin transpozycji: przesunięty o rok, na **26 lipca 2027 r.**
+  (nie 2026)
+- Pierwsze obowiązki dla największych firm: przesunięte o rok, na
+  **26 lipca 2028 r.**, kolejne grupy 2029-2030
+- ⭐⭐ DRASTYCZNIE zawężony zakres podmiotowy: TYLKO firmy >5000
+  pracowników I >1,5 mld EUR globalnego obrotu (znacząco wyższe
+  progi niż pierwotna wersja) — redukcja liczby objętych podmiotów
+  o ok. 80%
+- Dodatkowe uproszczenia: obowiązki ograniczone do partnerów Tier 1,
+  usunięto przepisy o odpowiedzialności cywilnej na poziomie UE
+
+Naprawiono z pełnym, aktualnym stanem, w tym statusem polskiej
+transpozycji (w toku, Ministerstwo Rozwoju i Technologii, bez
+finalnej ustawy na dzień weryfikacji).
+
+**mod-shared-ai-act.md — potwierdzony.** Rozp. UE 2024/1689 (AI Act),
+art. 4 (kompetencje AI), art. 113 (harmonogram) — zgodne, poprawnie
+odsyła do eur-lex.europa.eu dla dokładnych dat.
+
+**Rejestracja:** analizator-umow-v1 SKILL.md v1.28→v1.29.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 103 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-09f — FAZA 3E: mod-shared-wykladnia.md, mod-shared-antywzorce-jezykowe.md (analizator-umow-v1) potwierdzone
+
+**mod-shared-wykladnia.md — potwierdzony w pełni.** Zweryfikowano
+art. 385 §2 zd. 2 KC (zasada in dubio contra proferentem — niejednoznaczne
+postanowienia wzorca tłumaczy się na korzyść konsumenta,
+NIEWYŁĄCZALNA umownie) — potwierdzone jednogłośnie w 9+
+autorytatywnych źródłach, w tym dosłowny tekst przepisu (lexlege.pl,
+arslege.pl, przepisy.gofin.pl, prawnik.cc — aktualny t.j.). Art. 65
+KC (kombinowana metoda wykładni SN — subiektywna+obiektywna) —
+zgodne.
+
+**mod-shared-antywzorce-jezykowe.md — potwierdzony.** Dobra jakość
+redakcyjna — świadomie ostrożne odróżnienie polskiej praktyki
+kancelaryjnej od common-law "indemnity" (KC nie zna tej instytucji,
+wymaga kwalifikacji przez art. 353¹/473 KC). Art. 384¹, 41 ust. 2
+PrAut, 474, 484 §2 KC — zgodne z wielokrotnie już potwierdzonymi w
+tej sesji standardami.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 103 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-09g — FAZA 3E: mod-shared-neg-strategia.md, mod-shared-lifecycle.md (analizator-umow-v1) potwierdzone
+
+**Oba pliki — sprawdzone, generyczna metodologia bez nowych progów
+wymagających weryfikacji.** mod-shared-neg-strategia.md (checklisty
+strategii negocjacyjnej, redlining) i mod-shared-lifecycle.md
+(zarządzanie cyklem życia umowy — terminy opcji przedłużenia, cure
+period, wypowiedzenie) — cytowane przepisy (art. 473 §2, 484 §1
+zd.2, 123, 491-493 KC) zgodne z wielokrotnie już potwierdzonymi w
+tej sesji standardami.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 103 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-09h — FAZA 3E: CRIT znaleziony w mod-shared-regulatory-horizon.md (AI Act — Digital Omnibus przesunął termin o ponad rok, dosłownie kilka dni temu)
+
+**mod-shared-regulatory-horizon.md — naprawiony, ZNACZĄCY, BARDZO
+ŚWIEŻY błąd czasowy.** Moduł błędnie podawał "Systemy wysokiego
+ryzyka (art. 6-7): od 02.08.2026" — potwierdzone jednogłośnie w 8+
+zgodnych, EKSTREMALNIE aktualnych źródłach (sprzed 1-2 tygodni, w
+tym BEZPOŚREDNIO gov.pl/cyfryzacja [Rząd 1] i Krajowa Izba Radców
+Prawnych): Rozporządzenie 2026/1744 ("Digital Omnibus on AI") —
+WESZŁO W ŻYCIE **27.07.2026 R.**, DOSŁOWNIE kilka dni PRZED
+pierwotnym terminem — ZMIENIŁO art. 113 AI Act, PRZESUWAJĄC termin
+dla systemów wysokiego ryzyka O PONAD ROK:
+- Samodzielne systemy z Załącznika III (zatrudnienie, edukacja,
+  infrastruktura krytyczna, wymiar sprawiedliwości i inne): NOWY
+  termin **2 grudnia 2027 r.** (nie 02.08.2026)
+- Systemy będące elementem produktów z Załącznika I: NOWY termin
+  **2 sierpnia 2028 r.**
+
+⚠️ CO NIE ZOSTAŁO PRZESUNIĘTE (dla uniknięcia nadinterpretacji): ogólna
+data stosowania rozporządzenia, art. 50 (przejrzystość — oznaczanie
+treści AI/deepfake/chatbot), rozdział IX, art. 101 — TE weszły w
+życie 02.08.2026 BEZ zmian.
+
+**DODATKOWO naprawiony numer artykułu:** moduł błędnie cytował "art.
+52" jako podstawę wymogu przejrzystości (2× wystąpienia) —
+POPRAWNY numer to **art. 50** (potwierdzony w TYCH SAMYCH,
+najświeższych źródłach).
+
+**DODATKOWY, praktyczny brak odnotowany:** wytyczne Komisji ws.
+klasyfikacji systemów wysokiego ryzyka (wymagane art. 6 ust. 5,
+termin minął 02.02.2026) — Komisja dopiero opublikowała PROJEKT
+19.05.2026, konsultacje w toku, BRAK finalnych wytycznych na dzień
+weryfikacji.
+
+**mod-shared-zlote-reguly.md — potwierdzony.** Art. 353¹, 66 i n. KC
+— zgodne.
+
+**Rejestracja:** analizator-umow-v1 SKILL.md v1.29→v1.30.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 104 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-09i — FAZA 3E: mod-shared-missing-clause.md, mod-shared-model-umowy.md (analizator-umow-v1) potwierdzone
+
+**mod-shared-missing-clause.md — potwierdzony w pełni, z jedną
+NIEROZSTRZYGNIĘTĄ, drobną niepewnością.** Zweryfikowano art. 12
+u.p.k. (obowiązek informacyjny przy umowach na odległość) — SAMA
+podstawa prawna POTWIERDZONA jednogłośnie w 8+ źródłach. ⚠️ DROBNA
+niepewność (NIE rozstrzygnięta, celowo NIE poprawiona bez pewności):
+moduł podaje "23 elementy", starsze źródła (2014, moment uchwalenia)
+wskazują "21 punktów" — RÓŻNICA prawdopodobnie wynika z PÓŹNIEJSZYCH
+nowelizacji dodających kolejne punkty (np. pkt 3a widoczny w
+aktualnym tekście) — BRAK jednak PEWNEGO, AKTUALNEGO źródła
+explicite potwierdzającego "23" — POZOSTAWIONO bez zmiany, jako
+PRAWDOPODOBNIE poprawne, ale niepotwierdzone z pełną pewnością.
+Pozostałe cytaty (art. 27, DSA 16/17/20, DMA art. 5, RODO 28) —
+zgodne.
+
+**mod-shared-model-umowy.md — potwierdzony.** Generyczna metodologia
+(routing MU.1-MU.3, wykrywanie sprzeczności wewnętrznych) bez
+własnych progów wymagających korekty.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 104 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-09j — FAZA 3E: mod-shared-fallback-library.md, mod-core-checklist.md (analizator-umow-v1) potwierdzone
+
+**Oba pliki — potwierdzone w pełni.** Zweryfikowano art. 720 §2 KC
+(próg 1000 zł dla formy dokumentowej pożyczki, ad probationem nie ad
+solemnitatem) — potwierdzone jednogłośnie w 8+ autorytatywnych
+źródeł, w tym dosłowny tekst przepisu (lexlege.pl, arslege.pl —
+aktualny t.j. Dz.U.2026.0.795). mod-core-checklist.md — solidna,
+kompleksowa tabela form szczególnych (art. 158, 660, 53 PrAut, 101¹
+§2 KP, 29 KP, 28 ust. 9 RODO) — wszystkie zgodne z wielokrotnie już
+potwierdzonymi w tej sesji standardami. mod-shared-fallback-library.md
+— dobra jakość kalkulacji ekonomicznych kar umownych i klauzul
+awaryjnych.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 104 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-09k — FAZA 3E: mod-shared-ryzyko-kwant.md, mod-shared-economic.md (analizator-umow-v1) potwierdzone
+
+**Oba pliki — sprawdzone, generyczna metodologia ilościowa
+(kalkulacja ekspozycji finansowej, formuła PERT dla scenariuszy
+opóźnień, punkt pokrycia kary umownej) bez własnych, nowych progów
+prawnych.** Cytowane przepisy (art. 484 §1/§2, 471, 361 §2, 473
+§2, 359 KC) — wszystkie zgodne z wielokrotnie już potwierdzonymi w
+tej sesji standardami. Dobra jakość: mod-shared-economic.md
+poprawnie podkreśla NIEZRZEKALNY charakter prawa do miarkowania kary
+umownej (art. 484 §2 KC).
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 104 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-09l — FAZA 3E: mod-shared-legal-design.md, workflows/triage-szybki.md (analizator-umow-v1) potwierdzone
+
+**mod-shared-legal-design.md — potwierdzony, substancja zgodna.**
+Zweryfikowano DSA obowiązek zrozumiałości regulaminu dla
+małoletnich, gdy platforma jest do nich skierowana — POTWIERDZONA
+SUBSTANCJA w 5+ zgodnych źródłach (traple.pl, adequate.digital,
+lexdigital.pl), choć dokładny numer "art. 14 ust. 1" NIE był
+precyzyjnie zweryfikowany w tych konkretnych wynikach (źródła
+opisują OBOWIĄZEK bez zawsze precyzyjnego numeru artykułu) — TREŚĆ
+merytoryczna niekwestionowana. Art. 385 §2 KC, RODO art. 12 —
+zgodne z wcześniej potwierdzonym.
+
+**workflows/triage-szybki.md — potwierdzony.** Dobry przewodnik
+szybkiej oceny ryzyka (klasyfikacja czerwone/żółte flagi). Art. 473
+§2, 41 ust. 2 PrAut, 28 RODO, 484 KC — zgodne.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 104 |
+| Flagi otwarte | 9 |
