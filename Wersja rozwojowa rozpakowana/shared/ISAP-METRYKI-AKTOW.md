@@ -22,7 +22,7 @@
 |---|---:|---|---|
 | Kodeks postępowania administracyjnego | Dz.U. 2025 poz. 1691 | aktualny na dzień audytu | ogólna procedura administracyjna; nie stosować do podatków, gdy Ordynacja stanowi lex specialis |
 | Prawo o postępowaniu przed sądami administracyjnymi | Dz.U. 2026 poz. 143 | aktualny na dzień audytu | skargi do WSA, skargi kasacyjne do NSA, bezczynność i przewlekłość |
-| Ustawa o postępowaniu egzekucyjnym w administracji | Dz.U. 2026 poz. 268; tekst jednolity uwzględnia zmiany ogłoszone przed 18.02.2026 | aktualny na dzień audytu | odrębny tryb od egzekucji sądowej |
+| Ustawa o postępowaniu egzekucyjnym w administracji | Dz.U. 2026 poz. 268; tekst jednolity uwzględnia zmiany ogłoszone przed 18.02.2026 — ✅ POTWIERDZONE bezpośrednio na ISAP (Rząd 1) — ⚠️ UWAGA (zsynchronizowane 2026-08-09 z prawny-router-v3/ISAP-METRYKI-AKTOW.md): TA sama ustawa ma JUŻ TRZY kolejne, PÓŹNIEJSZE nowelizacje: Dz.U. 2026 poz. 516, poz. 739, poz. 1003 — sam numer "poz. 268" NIE WYSTARCZY do cytowania AKTUALNEGO stanu | aktualny na dzień audytu | odrębny tryb od egzekucji sądowej |
 | Ustawa o dostępie do informacji publicznej | tekst ujednolicony ISAP `D20011198Lj.pdf` | wymaga sprawdzenia Dz.U. przed cytowaniem | tryb wnioskowy, bezczynność, odmowa decyzją administracyjną |
 
 ---
@@ -65,7 +65,8 @@
 |---|---:|---|---|
 | Ustawa o planowaniu i zagospodarowaniu przestrzennym | Dz.U. 2026 poz. 538; tekst ujednolicony ISAP `D20030717Lj.pdf` | aktualny na dzień audytu | plan ogólny, MPZP, WZ, procedura partycypacyjna |
 | Prawo budowlane | Dz.U. 2026 poz. 524 t.j. ⚠️ MONITORING: art. 1 pkt 1 lit. c wchodzi 20.09.2026 | aktualny z adnotacją vacatio legis | pozwolenie, zgłoszenie, samowola, PINB/WINB |
-| Prawo ochrony środowiska | Dz.U. 2026 poz. 670 t.j. | aktualny na dzień aktualizacji | decyzje środowiskowe, emisje, kary administracyjne |
+| Prawo ochrony środowiska | Dz.U. 2025 poz. 647 t.j. — ⚠️ POPRAWIONE 2026-08-09 (FAZA 3E/ZASADA 14): poprzednia wersja BŁĘDNIE wskazywała "Dz.U. 2026 poz. 670" — TA pozycja jest tekstem jednolitym ZUPEŁNIE INNEJ ustawy (o udostępnianiu informacji o środowisku i jego ochronie, udziale społeczeństwa w ochronie środowiska oraz o ocenach oddziaływania na środowisko — tzw. "ustawa OOŚ", akt Z 2008 R., ODRĘBNY od Prawa ochrony środowiska z 2001 r.) — potwierdzone bezpośrednio przez ISAP (obwieszczenie z 9.05.2025, WDU20250000647) | aktualny na dzień aktualizacji (VER 2026-08-09) | decyzje środowiskowe, emisje, kary administracyjne |
+| Ustawa o udostępnianiu informacji o środowisku (OOŚ) — ODRĘBNY akt od Prawa ochrony środowiska, dodane 2026-08-09 | Dz.U. 2026 poz. 670 t.j. (obwieszczenie z 15.05.2026) | aktualny na dzień aktualizacji | decyzje środowiskowe (udział społeczeństwa, oceny oddziaływania — OOŚ/EIA), NIE MYLIĆ z Prawem ochrony środowiska (wiersz wyżej) |
 | Ustawa o ochronie przyrody | Dz.U. 2026 poz. 13 | aktualny na dzień audytu | drzewa, formy ochrony, RDOŚ/GDOŚ |
 | Prawo wodne | Dz.U. 2025 poz. 960 | aktualny na dzień audytu z weryfikacją zmian | Wody Polskie, zgody wodnoprawne |
 

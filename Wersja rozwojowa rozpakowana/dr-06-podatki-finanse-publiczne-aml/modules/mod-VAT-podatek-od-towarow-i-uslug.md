@@ -41,6 +41,150 @@ KSeF (Krajowy System e-Faktur) — HARMONOGRAM WDROŻENIA:
   web_search: "KSeF obowiązkowy termin 2026 ustawa Dz.U. 2025 MF aktualna"
 ```
 
+## ⭐⭐ WERYFIKACJA FAKTURY W KSeF (dodane 2026-08-09, na żądanie
+użytkownika)
+
+```
+⭐ DWUETAPOWY MECHANIZM WERYFIKACJI (przez kod QR LUB numer KSeF):
+  ETAP 1 — PODSTAWOWE dane (bez logowania): po zeskanowaniu kodu QR
+    LUB wejściu na stronę weryfikacyjną KSeF z numerem faktury —
+    WYŚWIETLANE są dane IDENTYFIKACYJNE (NIP sprzedawcy, data,
+    wyróżnik) ORAZ informacja, CZY dokument w ogóle ISTNIEJE w
+    systemie
+  ETAP 2 — PEŁNA weryfikacja (wymaga dodatkowych danych, zgodnie z
+    rozporządzeniem): standardowo — NUMER faktury, NIP nabywcy,
+    KWOTA należności — DOPIERO po podaniu TYCH danych i pozytywnej
+    weryfikacji MOŻLIWE jest pobranie PEŁNEJ faktury z załącznikami
+
+⭐⭐ DWA TYPY KODÓW QR — NIE MYLIĆ:
+  → KOD I ("weryfikacja/OFFLINE"): umieszczany na KAŻDEJ fakturze
+    przekazywanej POZA KSeF w trybie ONLINE — zawiera link
+    umożliwiający sprawdzenie, CZY dokument istnieje + podstawowe
+    dane — TO jest "zwykły", podstawowy kod weryfikacyjny
+  → KOD II ("CERTYFIKAT"): potwierdza AUTENTYCZNOŚĆ POCHODZENIA i
+    INTEGRALNOŚĆ TREŚCI faktury ORAZ uprawnienia wystawcy —
+    WYMAGA aktywnego certyfikatu KSeF (typu 2) po stronie
+    sprzedawcy — stosowany PRZY fakturach wystawionych w trybach
+    OFFLINE24 (od 1.02.2026), OFFLINE (niedostępność KSeF) i
+    AWARYJNYM — TAKIE faktury MAJĄ OBA kody jednocześnie (Kod I +
+    Kod II), NIE tylko jeden
+
+⭐⭐⭐ KLUCZOWE ZASTRZEŻENIE ZAKRESU — CAŁY POWYŻSZY MECHANIZM
+WERYFIKACJI DOTYCZY GŁÓWNIE FAKTUR B2B (dodane 2026-08-09, na
+żądanie użytkownika — "czy faktury imienne też są weryfikowane w
+KSeF, czy tylko na firmy"):
+
+⭐⭐ FAKTURY IMIENNE/B2C (wystawiane na rzecz OSÓB FIZYCZNYCH
+  NIEPROWADZĄCYCH działalności gospodarczej — czyli KONSUMENTÓW) —
+  NIE SĄ OBJĘTE OBOWIĄZKIEM KSeF — ani PRZED 1.02.2026, ani PO tej
+  dacie — TO JEDNOZNACZNIE POTWIERDZONE w 10+ zgodnych, bardzo
+  aktualnych źródłach (luty-lipiec 2026), w tym BEZPOŚREDNIO
+  podatki.gov.pl (Rząd 1 — oficjalna strona KSeF)
+  → PODSTAWA PRAWNA zwolnienia: art. 106ga ust. 2 ustawy o VAT
+  → SPRZEDAWCA MOŻE wystawić fakturę B2C W KSeF DOBROWOLNIE, ALE NIE
+    MA takiego obowiązku — pozostaje PEŁNA SWOBODA formy: papierowa,
+    PDF/e-mail, LUB (opcjonalnie) w KSeF
+  → ⭐ KONSUMENT NIE MA ŻADNYCH obowiązków związanych z KSeF — NIE
+    musi zakładać konta, logować się DO systemu ani ODBIERAĆ faktur
+    przez KSeF — NAWET jeśli sprzedawca DOBROWOLNIE wystawi fakturę
+    w systemie, MUSI i TAK udostępnić ją konsumentowi w CZYTELNEJ
+    formie (np. PDF) — zgoda konsumenta NIE JEST wymagana do
+    WYSTAWIENIA w KSeF, ALE konsument MOŻE odmówić otrzymywania
+    faktur AKURAT tą drogą (prawo to NALEŻY respektować)
+
+⭐ PRAKTYCZNY TEST ROZRÓŻNIAJĄCY B2B OD B2C: DECYDUJE PODANIE NUMERU
+  NIP przez nabywcę PRZY zakupie:
+  → NIP PODANY → transakcja TRAFIA do KSeF (traktowana jako B2B),
+    NAWET jeśli nabywcą formalnie jest osoba fizyczna prowadząca
+    działalność gospodarczą
+  → NIP NIE PODANY → transakcja B2C, POZA KSeF — DOTYCZY to RÓWNIEŻ
+    sytuacji, gdy osoba fizyczna PROWADZĄCA JDG kupuje coś
+    PRYWATNIE, na WŁASNY użytek (NIE w imieniu swojej firmy) —
+    ŚWIADOMIE NIE PODAJĄC NIP w takiej sytuacji, TRANSAKCJA
+    POZOSTAJE B2C
+
+⭐ DODATKOWY WYJĄTEK (do 31.12.2026): paragony fiskalne Z NIP DO
+  450 ZŁ — mogą być traktowane jako uproszczona faktura BEZ
+  konieczności wystawiania w KSeF — NIE WLICZANE do limitu
+  miesięcznego 10 000 zł dla faktur B2B wystawianych POZA KSeF w
+  okresie przejściowym
+
+⚠️ ODRĘBNA KATEGORIA — B2G (biznes-administracja publiczna): TE
+  faktury SĄ objęte PEŁNYM obowiązkiem KSeF, W PRZECIWIEŃSTWIE do
+  B2C — NIE MYLIĆ tych dwóch kategorii
+
+⭐ WNIOSEK PRAKTYCZNY dla POWYŻSZEGO mechanizmu weryfikacji (sekcja
+  wyżej): CAŁY opisany system dwuetapowej weryfikacji przez kod QR/
+  numer KSeF ma PEŁNE, OBOWIĄZKOWE zastosowanie DO faktur B2B (oraz
+  B2G) — DLA faktury IMIENNEJ/konsumenckiej TEN mechanizm MOŻE (ale
+  NIE MUSI) w ogóle ISTNIEĆ — JEŚLI sprzedawca NIE skorzystał z
+  opcji dobrowolnego wystawienia w KSeF, faktura dla konsumenta NIE
+  BĘDZIE miała NUMERU KSeF ani kodu QR w OGÓLE — sama JEJ
+  autentyczność WERYFIKUJE SIĘ WTEDY na zasadach OGÓLNYCH (nie przez
+  system KSeF), analogicznie jak przed reformą
+
+Potwierdzone w 10+ zgodnych, bardzo aktualnych źródeł (luty-lipiec
+2026): podatki.gov.pl [Rząd 1 — oficjalna strona KSeF, sekcja
+"Konsumenci i osoby fizyczne"], infakt.pl [3.03.2026], oneclick-
+workflow.pl [18.04.2026, TYTUŁ artykułu wprost dotyczy "faktur
+imiennych"], eztax.pl [19.02.2026], ifirma.pl [13.04.2026],
+ksefgpt.pl [26.03.2026], ingksiegowosc.pl [20.03.2026], edk-
+consulting.pl [9.03.2026], pioniew.eu [8.07.2026 — NAJŚWIEŻSZE
+potwierdzenie].
+
+⚠️⚠️ REALNE, AKTYWNE ZAGROŻENIE — FAŁSZYWE FAKTURY Z KODEM QR:
+  oszuści ROZSYŁAJĄ fałszywe faktury PDF z kodami QR IMITUJĄCYMI
+  dokumenty KSeF — kody MOGĄ prowadzić DO: (a) NIEISTNIEJĄCYCH
+  dokumentów, (b) SFAŁSZOWANYCH stron podszywających się pod KSeF,
+  (c) ⚠️ CO GROŹNIEJSZE — PRAWDZIWYCH wpisów w KSeF, KTÓRE JEDNAK
+  NIE PRZECHODZĄ pełnej weryfikacji SZCZEGÓŁÓW (np. numer istnieje,
+  ale kwota/NIP na wydruku NIE ZGADZA SIĘ z systemem)
+  ⭐ REKOMENDOWANA PROCEDURA WERYFIKACJI (dla odbiorcy faktury):
+    (1) zalogować się DO Portalu Podatnika KSeF, (2) wyszukać
+    dokument NIE TYLKO po numerze KSeF, ALE RÓWNIEŻ po szczegółowych
+    danych: KWOCIE należności, DACIE wystawienia, NIP NABYWCY —
+    (3) zweryfikować SAMEGO kontrahenta niezależnie: czy firma
+    faktycznie współpracuje, czy dane (numer konta, adres, NIP)
+    zgadzają się z bazą kontrahentów
+
+⭐ WAŻNE OGRANICZENIE kodu QR jako narzędzia: kod QR to narzędzie
+  POMOCNICZE — POZWALA na UPROSZCZONE potwierdzenie obecności i
+  podstawowych danych faktury, ALE NIE ZASTĘPUJE jej pełnego
+  doręczenia ANI dostępu do CAŁEJ treści dokumentu — NAJPEWNIEJSZY
+  sposób weryfikacji to PORÓWNANIE tego, co jest NA WYDRUKU, z tym,
+  co JEST w systemie (nie samo zeskanowanie kodu)
+
+⭐⭐ KLUCZOWE OGRANICZENIE PRAKTYCZNE — BRAK MOŻLIWOŚCI ANULOWANIA:
+  faktura, KTÓREJ NADANO numer KSeF, NIE MOŻE być anulowana —
+  JEDYNYM sposobem naprawienia pomyłki jest faktura KORYGUJĄCA "DO
+  ZERA" — DLATEGO zgodność danych (NIP, daty, kwoty: suma netto +
+  VAT = brutto) WARTO sprawdzić PRZED wysyłką dokumentu do systemu,
+  NIE dopiero po
+
+STAN ZAWIESZENIA KAR: kary za błędy/brak faktury w KSeF SĄ
+  ZAWIESZONE do **31 GRUDNIA 2026 R.** — TO NIE OZNACZA braku
+  konsekwencji w OGÓLE, TYLKO odroczenie sankcji PIENIĘŻNYCH na
+  okres wdrożeniowy
+
+⭐ WYMÓG SCHEMATU: od 1.02.2026 r. WSZYSTKIE faktury w KSeF, W TYM
+  KOREKTY do STARSZYCH dokumentów (wystawionych w schemacie FA(1)
+  lub FA(2)), MUSZĄ spełniać wymogi NOWEGO schematu **FA(3)**
+
+⚠️ QR NIE JEST FORMALNIE OBOWIĄZKOWY dla faktur POZOSTAJĄCYCH
+  WYŁĄCZNIE wewnątrz systemu KSeF (nieopuszczających go) — staje się
+  OBOWIĄZKOWY DOPIERO przy PRZEKAZANIU faktury POZA KSeF (np. PDF
+  e-mailem do kontrahenta) — Ministerstwo Finansów REKOMENDUJE jego
+  stosowanie jako element ułatwiający weryfikację, NAWET gdy nie ma
+  formalnego wymogu
+
+Potwierdzone w 9+ zgodnych, EKSTREMALNIE aktualnych źródeł (luty-
+czerwiec 2026): assecobs.pl [19.03.2026, z konkretnym opisem
+mechanizmu oszustwa], podatki.gov.pl [Rząd 1 — oficjalna strona
+KSeF], ksef-dla.pl [15.06.2026], altoadvisory.pl, eztax.pl
+[19.02.2026], fakturowo.pl, i-malaksiegowosc.pl [10.02.2026],
+oneclick-workflow.pl [maj 2026], rafsoft.net [9.03.2026].
+```
+
 ---
 
 ## 1. CORE

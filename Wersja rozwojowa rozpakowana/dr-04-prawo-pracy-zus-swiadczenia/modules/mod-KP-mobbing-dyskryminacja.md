@@ -91,7 +91,10 @@ PLANOWANE ZMIANY (zestaw scalony):
   → Formy: fizyczna, werbalna, pozawerbalna
   → Sprawca: przełożony, współpracownik, podwładny LUB GRUPA
   → Min. zadośćuczynienie: 6× minimalne wynagrodzenie (2026: ~28 000 zł)
-  → Obowiązek regulaminu antymobbingowego: pracodawca ≥9 osób
+  → Obowiązek regulaminu antymobbingowego: pracodawca ≥10 osób
+    (⚠️ POPRAWIONE 2026-08-08: próg PODNIESIONO z 9 na 10 między
+    projektem a ostateczną, podpisaną ustawą z 19.06.2026 — art.
+    94³a KP — szczegóły: shared/definicje/DEF-PRACA.md)
   → PRAWO REGRESU pracodawcy wobec mobbera (pracodawca, który wypłacił
     zadośćuczynienie, może żądać zwrotu od pracownika-mobbera)
   → Planowane odejście od wymogu intencjonalności sprawcy

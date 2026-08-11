@@ -23,10 +23,18 @@ compatibility:
 
 | Akt | Oznaczenie | Przedmiot |
 |-----|-----------|-----------|
-| Ustawa akcyzowa | Dz.U. 2025 poz. 126 t.j. | Podatek akcyzowy PL |
+| Ustawa akcyzowa | ✅ Dz.U. 2026 poz. 412 t.j. (obwieszczenie 12.03.2026 — zweryfikowano 2026-08-11; POPRZEDNIO błędnie Dz.U. 2025 poz. 126, już nieaktualne) | Podatek akcyzowy PL |
 | Dyrektywa akcyzowa | 2020/262/UE (Energy Tax Dir.) | Harmonizacja UE — wyroby energet. |
 | Dyrektywa 92/83/EWG | zmieniona 2020/1151/UE | Harmonizacja — alkohol |
-| KKS | Dz.U. 2025 poz. 633 t.j. | Kodeks karny skarbowy |
+| KKS | ✅ Dz.U. 2025 poz. 633 t.j. (obwieszczenie 10.04.2025 — zweryfikowano 2026-08-11, aktualny; ⚠️ nowelizacje po t.j.: Dz.U. 2026 poz. 347/421/846/901, sprawdź punktowo) | Kodeks karny skarbowy |
+
+> **Pełna, ustrukturyzowana baza aktów okołoakcyzowych** (ustawy, rozporządzenia
+> wykonawcze, dyrektywy UE, powiązania i typowe pomyłki numeracyjne) →
+> `dr-06-podatki-finanse-publiczne-aml/references/BAZA-AKTOW-OKOLOAKCYZOWYCH.md`.
+> Tabela wyżej to skrót roboczy — dla weryfikacji konkretnego przepisu
+> zawsze przejdź przez KROK 2C (`shared/PRAWO-HARDGATE.md`) i, jeśli akt
+> nie jest oczywisty, sprawdź najpierw w bazie referencyjnej, który
+> dokładnie akt/rozdział reguluje daną instytucję.
 
 > Cło, UCC, Nomenklatura Scalona (CN), TARIC, WIT, wartość celna, preferencje
 > FTA/GSP → `mod-UCC-clo-taryfa-celna.md`.
@@ -88,12 +96,30 @@ JEEPA, reguły pochodzenia).
 | Czyn | Przepis KKS | Sankcja orientacyjna |
 |------|-------------|----------------------|
 | Uchylanie się od zapłaty akcyzy | art. 54 KKS | do 720 stawek dziennych / do 5 lat |
+| **Produkcja/wydawanie/sprzedaż wyrobów akcyzowych poza składem podatkowym bez znaków akcyzy** | **art. 63 § 3 KKS** ⚠️ WERYFIKUJ przed użyciem (KROK 2C) | do 720 stawek dziennych albo pozbawienia wolności do lat 2, albo obie łącznie |
+| **Produkcja/magazynowanie/przeładunek wyrobów akcyzowych poza składem podatkowym z naruszeniem procedury zawieszenia poboru akcyzy** | **art. 69a KKS** ⚠️ WERYFIKUJ — w wypadku mniejszej wagi: wykroczenie skarbowe (§ 2) | do 720 stawek dziennych albo pozbawienia wolności do lat 2, albo obie łącznie; mniejsza waga → grzywna za wykroczenie |
+| Paserstwo akcyzowe (obrót wyrobami bez znaków akcyzy pochodzącymi z czynu z art. 63-64/69/69a/73/73a KKS) | art. 65 KKS | do 720 stawek dziennych albo PW, albo obie; próg wartości → wykroczenie (§ 4) |
 | Przemyt akcyzowy (uszczuplenie > małej wartości) | art. 86 KKS | do 720 stawek / do 5 lat |
 | Podanie fałszywych danych w zgłoszeniu celnym | art. 87 KKS | do 360 stawek |
 | Niedopełnienie obowiązku celnego | art. 91 KKS | grzywna do 720 stawek |
 | Przestępstwo celne przy imporcie VAT | art. 86–87 KKS | do 5 lat |
 
 > **Kwalifikator karny:** Przemyt narkotyków, broni lub substancji REACH/ADR → kumulatywna kwalifikacja KKS + KK (art. 55 KK, art. 163 KK, ustawa o przeciwdziałaniu narkomanii).
+
+> ⛔ **PUŁAPKA NUMERACJI — NIE MYL z art. 100 ustawy o podatku akcyzowym**
+> (incydent AUDYT-2026-08-11, patrz `shared/PRAWO-HARDGATE.md` v2.5, KROK 2C).
+> **Art. 100 u.a.a.** (ustawa o podatku akcyzowym, DZIAŁ V) reguluje
+> WYŁĄCZNIE opodatkowanie akcyzą **samochodów osobowych** (przedmiot
+> opodatkowania — import, WNT, pierwsza sprzedaż niezarejestrowanego auta)
+> — nie ma nic wspólnego z produkcją wyrobów akcyzowych poza składem
+> podatkowym. Podstawą dla tego drugiego zagadnienia jest **art. 63 § 3
+> lub art. 69a KKS** (tabela wyżej), NIE żaden artykuł u.a.a. Przy
+> stanach faktycznych dot. "produkcji poza składem podatkowym" / "brak
+> zezwolenia" / "brak składu podatkowego" — sprawdź najpierw w KKS
+> (rozdział 6, art. 54-84), dopiero potem, jeśli sprawa dotyczy
+> deklaracji/rejestracji/zwolnień samego podatku (nie sankcji karnej) —
+> w ustawie akcyzowej, i wtedy zweryfikuj treść KONKRETNEGO artykułu
+> zgodnie z KROK 2C, nie tylko jego istnienie w akcie.
 
 ### Czynny żal (art. 16 KKS)
 - Skuteczny do czasu wszczęcia postępowania przez organ
@@ -135,6 +161,20 @@ Cło/CN/TARIC/WIT/FTA → `mod-UCC-clo-taryfa-celna.md` sekcja 6.
 
 ---
 
+*mod-AD-akcyza-clo · v1.4 · 2026-08-11 — bez zmian treści samego modułu;*
+*odnotowuję, że oznaczenie Dz.U. ustawy akcyzowej zostało zsynchronizowane*
+*z `dr-06/MAPA-AKTOW.md` i `prawo-polskie-v2/ROUTING-MAP.md` (AUDYT-2026-08-11c/d)*
+*— te dwa pliki miały niezależnie ten sam nieaktualny numer, teraz poprawione.*
+*mod-AD-akcyza-clo · v1.3 · 2026-08-11 — kontrola aktualności (REGUŁA*
+*AKTUALNOŚCI): oznaczenie Dz.U. ustawy akcyzowej było nieaktualne*
+*(2025 poz. 126 → poprawnie 2026 poz. 412 t.j.); dodano znaczniki VER*
+*i odnotowano nowelizacje post-t.j. do sprawdzenia punktowo. Ten sam*
+*błąd naprawiono równolegle w references/BAZA-AKTOW-OKOLOAKCYZOWYCH.md.*
+*mod-AD-akcyza-clo · v1.2 · 2026-08-11 — naprawiono AUDYT-2026-08-11: dodano*
+*brakujące pozycje KKS dla produkcji poza składem podatkowym (art. 63 §3,*
+*art. 69a, art. 65) i notatkę rozróżniającą art. 100 u.a.a. (samochody*
+*osobowe) od podstaw karnoskarbowych; dodano odesłanie do nowej*
+*references/BAZA-AKTOW-OKOLOAKCYZOWYCH.md.*
 *mod-AD-akcyza-clo · v1.1 · 2026-06-14 — wydzielono mod-UCC-clo-taryfa-celna.md*
 *Powiązane: mod-UCC-clo-taryfa-celna (cło/UCC), mod-Q (PIT/VAT/CIT), mod-AC (REACH/chemikalia), mod-L (gospodarcze)*
 *Weryfikacja: isap.sejm.gov.pl*
