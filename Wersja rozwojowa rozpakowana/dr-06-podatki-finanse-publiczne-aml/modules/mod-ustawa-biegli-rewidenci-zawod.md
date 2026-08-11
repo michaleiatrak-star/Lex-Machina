@@ -163,7 +163,7 @@ web_search: "harmonogram CSRD ESG Polska 2026 odroczenie ustawa"
 
 | Sytuacja | Skill / Moduł |
 |---|---|
-| Sprawozdawczość finansowa, rachunkowość | DR-06 → moduły CIT/Ordynacja podatkowa (kontekst) |
+| Sprawozdawczość finansowa, rachunkowość (ustawa o rachunkowości) | DR-06/`mod-ustawa-rachunkowosci.md` (⚠️ POPRAWIONE 2026-08-11: poprzednio błędnie odsyłało do modułów CIT/Ordynacja podatkowa, KTÓRE dotyczą prawa PODATKOWEGO, NIE bilansowego — teraz istnieje dedykowany moduł) |
 | ESG/CSRD jako element compliance | DR-15 → moduły compliance/governance |
 | AML — obowiązki biegłego rewidenta jako instytucji obowiązanej | DR-06/`mod-ustawa-AML-instytucje-obowiazkowe` |
 | Spór cywilny o odpowiedzialność biegłego rewidenta | DR-02 → moduły zobowiązań/odpowiedzialności |

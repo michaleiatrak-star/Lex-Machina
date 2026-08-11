@@ -4,6 +4,176 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
+## AUDYT-2026-08-11v — TRANSZA 2 audytu pokrycia rachunkowo-księgowego + SYNCHRONIZACJA MAP CENTRALNYCH + ⚠️ INCYDENT KOLIZJI IDENTYFIKATORÓW SESJI
+
+**Kontekst:** kontynuacja AUDYT-2026-08-11u. Użytkownik polecił
+kontynuować uzupełnianie ORAZ objąć synchronizacją mapę w
+`prawo-polskie-v2`, której transza 1 nie ruszyła.
+
+**⚠️⚠️ INCYDENT PROCEDURALNY WYKRYTY I NAPRAWIONY W TEJ SESJI —
+KOLIZJA IDENTYFIKATORÓW:** wpis transzy 1 został pierwotnie nazwany
+`AUDYT-2026-08-11b`, podczas gdy dziennik zawierał JUŻ wpis o tym
+identyfikatorze (FAZA 3E shared/: RISK-ASSESSMENT, STRATEGIA-PROCESOWA)
+— dzień 2026-08-11 miał wtedy sesje od `a` do `t`. Przyczyna: nowy wpis
+został dodany na GÓRZE pliku bez sprawdzenia, jakie sufiksy są już
+zajęte w dalszej części (plik ma ponad 34 tys. wierszy, a wpisy nie są
+posortowane jednolicie — najnowsze są na górze, ale starsze bloki mają
+własną chronologię).
+→ **Naprawa:** transza 1 przenumerowana na `AUDYT-2026-08-11u`, transza
+  2 na `AUDYT-2026-08-11v`; wszystkie znaczniki w `dr-06`,
+  `prawo-polskie-v2` i `WARN-OTWARTE.md` zsynchronizowane (6 plików).
+→ ⭐⭐ WNIOSEK OGÓLNY: przed dodaniem wpisu do AUDIT-JOURNAL należy
+  wykonać `grep -o "^## AUDYT-RRRR-MM-DD[a-z]*" | sort -u` i wybrać
+  pierwszy WOLNY sufiks. Kandydat na kolejny test regresyjny —
+  wykrywanie zduplikowanych nagłówków sesji (patrz flaga F-22).
+
+**Uzupełnienia merytoryczne (dr-06, v3.35 → v3.36):**
+
+1. **Nowy moduł `mod-rachunkowosc-budzetowa-JSFP.md`** — ⚠️ CZWARTA LUKA
+   ZEROWA sesji: fraza „rachunkowość budżetowa" miała 0 wystąpień w
+   całym systemie, mimo rozbudowanego `mod-UFP-finanse-publiczne-NIK-RIO`
+   w DR-06 i całej dziedziny JST w DR-08. System znał budżet i kontrolę
+   RIO/NIK, nie znając reżimu księgowego, który jest przedmiotem
+   większości zastrzeżeń pokontrolnych. Rozporządzenie MRiF z 13.09.2017,
+   ⭐ NOWY t.j. **Dz.U. 2026 poz. 909** (ogł. 7.07.2026) — system nie
+   miał odnotowanego nawet poprzedniego t.j.
+2. **`mod-ustawa-rachunkowosci.md` v1.9.0 → v1.10.0:** sekcja 5f (art. 30
+   waluty — OSTATNIA pozycja 🔴 mapy pokrycia; art. 32 amortyzacja;
+   art. 35b odpisy aktualizujące należności) + sekcja 5g (Krajowe
+   Standardy Rachunkowości, art. 10 ust. 3 u.o.r., wykaz KSR 1-15)
+3. **Mapa pokrycia u.o.r.: 🟢 17 z 20 (85%), 🟡 3, 🔴 0.** Stan przed
+   całą sesją audytową: 🟢 9 / 🟡 3 / 🔴 8
+4. ⚠️ **KOREKTA ZAKRESU:** rozdz. 4 u.o.r. to art. **28-44**, nie „28-42"
+5. ⚠️ **KOREKTA METODOLOGICZNA MAPY:** mapa 20 pozycji obejmowała
+   WYŁĄCZNIE u.o.r., więc 100% jej pokrycia nie oznaczało pokrycia
+   dziedziny. Wada opisana wprost w module
+
+**Synchronizacja map (rdzeń polecenia użytkownika):**
+
+6. **`prawo-polskie-v2/ROUTING-MAP.md` — +12 wierszy** w sekcji DR-06
+   (akty z transz 1 i 2) + aktualizacja wiersza ustawy o rachunkowości
+7. ⚠️⚠️ **NAPRAWIONY DRYF DYSK↔INDEKS CENTRALNY (wzorzec znany z
+   AUDYT-2026-07-02):** ROUTING-MAP miała ustawę akcyzową jako „Dz.U.
+   2025 poz. 126", podczas gdy `dr-06/MAPA-AKTOW.md` została poprawiona
+   2026-08-11 na aktualny t.j. **Dz.U. 2026 poz. 412**. Poprawka punktowa
+   w DR-skillu nie została wtedy propagowana do mapy centralnej —
+   mechanizm udokumentowany już wcześniej i nadal aktywny
+8. ⚠️⚠️ **NAPRAWIONY DRYF LICZNIKA W TABELI STATUSU:** ROUTING-MAP
+   deklarowała dla DR-06 **21** pozycji przy rzeczywistych **32**
+   JESZCZE PRZED tą sesją. Po dopisaniu 12 aktów: **44** (40 ✅ / 4 ⚠️)
+   → ⭐⭐ **TEST T2 TEGO NIE WYKRYWA** — sprawdza liczniki modułów
+     deklarowane w `SKILL.md` DR-skilli, nie liczniki wierszy w TABELI
+     STATUSU `ROUTING-MAP.md`. Ślepa plama zestawu regresyjnego (F-21)
+
+**Świadomie NIEZAMKNIĘTE — bez zgadywania:**
+- Liczba wydanych KSR: rozbieżność 14 vs 15 (status KSR 15 — flaga F-20)
+- art. 35d u.o.r. (rezerwy) — treść nieodczytana ze źródła, NIE opisano
+- art. 42-44 u.o.r. (ustalanie wyniku finansowego)
+- Terminy publikacji sprawozdań w rachunkowości budżetowej (kierunek
+  zmian potwierdzony, liczby nie — świadomie nie podano)
+- Numer rozporządzenia ws. klasyfikacji budżetowej (budżet 2027)
+- Konto 968 „Prywatyzacja" — jedno źródło Rządu 2B
+- Liczniki TABELI STATUSU dla pozostałych 15 dziedzin (F-21)
+
+**Flagi otwarte w tej transzy:** F-20 (KSR), F-21 (ślepa plama T2),
+F-22 (brak kontroli unikalności identyfikatorów sesji — kontrola wykonana po naprawie wykazała **12 wcześniejszych, nienaprawionych duplikatów** w historii dziennika, m.in. AUDYT-2026-08-08z/zd/ze, 2026-07-27z, 2026-07-30z; nie naprawiano ich w tej sesji, bo przenumerowanie wymaga przejścia po wszystkich odniesieniach w systemie).
+
+**Testy regresyjne po zmianach:** T1 OK, T2 OK (liczniki modułów DR-06
+zgodne: 30 = 30).
+
+---
+
+## AUDYT-2026-08-11u — AUDYT ZAKRESOWY DZIEDZINY: pokrycie tematów rachunkowo-księgowych w DR-06 (ZASADA 11 — audyt merytoryczny, NIE mapa Dz.U.)
+
+**Typ:** audyt pokrycia dziedziny (nie TRYB DZU, nie FAZA 3A-3D).
+Przedmiotem nie była poprawność numerów w mapie, lecz pytanie: czy
+system w ogóle ZNA tematy rachunkowo-księgowe i gdzie ma dziury.
+
+**Wywołanie:** użytkownik — „zbadaj zakres pokrycia tematów
+rachunkowo-księgowych, uzupełniaj je i po zakończeniu uzupełniania daj
+mi go zgodnie z regułą 7 audyt systemu".
+
+**Metoda:** grep po CAŁYM `/mnt/skills/user/` (wszystkie 30+ skilli,
+`*.md`) na 10 fraz kluczowych dziedziny, następnie weryfikacja online
+wg ZASADY 14 (Rząd 1 → 2A/2B → 3, próg min. 2-3 niezależne źródła).
+Wykonano 9 sesji wyszukiwania; ISAP blokował `web_fetch`
+(ROBOTS_DISALLOWED) — dotarto do Rzędu 1 przez metryki ISAP w wynikach
+wyszukiwania oraz przez `podatki.gov.pl`, `gov.pl/web/kas`,
+`gov.pl/web/finanse`, `biznes.gov.pl`.
+
+**⚠️⚠️⚠️ ZNALEZISKA — TRZY LUKI ZEROWE (temat nieobecny w CAŁYM systemie):**
+
+1. **KASY REJESTRUJĄCE — 0 wystąpień frazy w całym systemie.** Dziedzina
+   dotycząca każdego podmiotu sprzedającego konsumentom (fryzjer,
+   gastronomia, sklep, warsztat) nie miała żadnego pokrycia, mimo
+   rozbudowanych sąsiednich modułów VAT i akcyzy. NAPRAWIONE — nowy
+   moduł `mod-kasy-rejestrujace-fiskalizacja.md`.
+2. **PKPiR — brak samodzielnego modułu.** System znał SANKCJĘ KKS za
+   wadliwe prowadzenie PKPiR, nie znając ZASAD jej prowadzenia.
+   NAPRAWIONE — `mod-PKPiR-ewidencje-uproszczone.md`.
+3. **JPK_CIT / e-sprawozdania — jedna komórka w tabeli ryzyk.**
+   Obowiązek skali porównywalnej z KSeF, z 3 turami wdrożenia i DWIEMA
+   zmianami terminu w 2026 r., bez opracowania. NAPRAWIONE —
+   `mod-JPK-ksiegi-elektroniczne-e-sprawozdania.md`.
+
+**⚠️ ZNALEZISKO STRUKTURALNE — ZERWANE ODESŁANIE (wzorzec do
+monitorowania):** `mod-ustawa-rachunkowosci.md` odsyłał temat ESG/CSRD
+„do DR-15 (compliance)" z własną adnotacją „SPRAWDŹ, czy TAMTEN moduł
+faktycznie to pokrywa". Sprawdzono: `grep -ri "ESG\|CSRD"
+dr-15-compliance-iso-governance-audyt/` → **0 wystąpień**. Odesłanie
+prowadziło donikąd przez cały okres istnienia modułu. Temat osadzono
+tam, gdzie ma podstawę normatywną — w u.o.r. (sekcja 5e).
+→ ⭐ WNIOSEK OGÓLNY DLA PRZYSZŁYCH AUDYTÓW: adnotacja typu „SPRAWDŹ, czy
+  tamten moduł to pokrywa" pozostawiona we WŁASNYM tekście modułu jest
+  sygnałem niezweryfikowanego odesłania i powinna być traktowana jak
+  otwarta flaga, a nie jak cross-referencja. Rozważyć heurystykę
+  testową (kandydat na T11) wykrywającą frazy „sprawdź, czy" /
+  „odesłane do" w cross-referencjach.
+
+**⚠️ ZNALEZISKO PRAWNE — ZMIANA STANU PRAWNEGO NIEODNOTOWANA W SYSTEMIE:**
+rozporządzenie PKPiR z 23.12.2019 (Dz.U. 2019 poz. 2544) **UTRACIŁO MOC
+1.01.2026**, zastąpione rozporządzeniem MFiG z 6.09.2025 (Dz.U. 2025
+poz. 1299). System nie miał tego odnotowanego nigdzie. Analogicznie
+nieodnotowana była podwójna zmiana terminu JPK_KR_PD w 2026 r.
+(rozp. Dz.U. 2026 poz. 188 → ustawa Dz.U. 2026 poz. 779).
+
+**Naprawy wykonane (skill `dr-06-podatki-finanse-publiczne-aml`, v3.34 → v3.35):**
+
+1. **+3 nowe moduły** (26 → 29): `mod-PKPiR-ewidencje-uproszczone.md`,
+   `mod-kasy-rejestrujace-fiskalizacja.md`,
+   `mod-JPK-ksiegi-elektroniczne-e-sprawozdania.md`
+2. `mod-ustawa-rachunkowosci.md` v1.8.0 → **v1.9.0**: +4 sekcje —
+   5b (przechowywanie danych, art. 71-76 + reżim równoległy art. 86 OP),
+   5c (usługowe prowadzenie ksiąg, rozdz. 8a + OC), 5d (konsolidacja,
+   rozdz. 6), 5e (ESG/CSRD)
+3. **Mapa pokrycia dziedziny przeliczona:** 🟢 9 → **16** z 20 (45% →
+   80%), 🟡 3, 🔴 **1** (pozostała: art. 30 — waluta sprawozdań i
+   przeliczanie walut obcych)
+4. `MAPA-AKTOW.md` — **+14 wierszy** (w tym 1 wiersz aktu ARCHIWALNEGO
+   oznaczony ⛔, żeby zapobiec cytowaniu uchylonego rozporządzenia)
+5. `SKILL.md` — licznik modułów, rejestr, nota aktualizacyjna
+
+**Świadomie NIEZAMKNIĘTE — bez zgadywania (ZASADA 1, ZASADA 13):**
+- Progi liczbowe art. 56 ust. 1 u.o.r. (zwolnienie z konsolidacji) —
+  snippety urywały się przed wyliczeniem; kwoty NIE podane
+- Numer rozporządzenia ws. zwolnień z kas: rozbieżność 1902 vs 1949
+  (flaga F-18)
+- Minimalne sumy gwarancyjne OC biur rachunkowych — potwierdzone
+  wyłącznie w Rzędzie 2B, oznaczone jako wymagające weryfikacji
+- Aktualność uchwały NSA FPS 7/98 pod rządami ustawy o VAT z 2004 r.
+- Kwota progu 2,5 mln EUR w złotych na 2026 r. (kurs NBP 1.10.2025)
+
+**Flagi otwarte w tej sesji:** F-18, F-19 (patrz `WARN-OTWARTE.md`).
+
+**Wnioski:** dziedzina rachunkowo-księgowa była pokryta ASYMETRYCZNIE —
+prawo PODATKOWE opracowane szeroko (26 modułów), prawo BILANSOWE i
+EWIDENCYJNE marginalnie. Przyczyną jest prawdopodobnie sposób budowy
+DR-06 wokół „podatków" jako osi, przy której rachunkowość wyglądała na
+temat pochodny. Nie jest pochodny — to odrębna dziedzina prawa
+gospodarczego z własnym reżimem sankcyjnym.
+
+---
+
 ## AUDYT-2026-07-24d — USUNIĘCIE W CAŁOŚCI zamkniętego rejestru i mechanizmu T10 (monitorowanie plików Nexto/Virtualo, flaga F-12), na wyraźne polecenie użytkownika
 
 **Kontekst:** kontynuacja AUDYT-2026-07-24c (zamknięcie flagi F-12,
@@ -33068,297 +33238,1506 @@ pracy w sprawach ZUS/rentowych).
 | Błędów/luk merytorycznych naprawionych (cała sesja) | 106 |
 | Flagi otwarte | 9 |
 
-## AUDYT-2026-08-11 — Incydent: błędne ✅ dla art. 100 u.p.a. w sprawie karnoskarbowej (akcyza) — naprawiony
+## AUDYT-2026-08-10b — ⚠️ TRZECI INCYDENT RESETU wykryty i naprawiony + FAZA 3E: ORZECZENIA-HIERARCHIA.md, PRAWO-HARDGATE.md, KANCELARIA-WORKFLOW.md potwierdzone
 
-**Zgłoszenie:** użytkownik przesłał zrzut ekranu odpowiedzi z oznaczeniem
-"✅ [VER: art. 100 u.a.a., Kodeks karny skarbowy]" przy tezie "Kto
-produkując poza składem podatkowym wyroby akcyzowe podlega karze —
-ponieważ brak zezwolenia = brak samego składu podatkowego, kwalifikacja
-art. 100 u.a.a.". Weryfikacja zewnętrzna (web_search) potwierdziła: art.
-100 ustawy o podatku akcyzowym ISTNIEJE, ale reguluje wyłącznie
-opodatkowanie akcyzą samochodów osobowych — nie ma związku z opisywanym
-stanem faktycznym. Prawidłowa podstawa: art. 63 § 3 KKS lub art. 69a KKS.
+**⚠️⚠️ INCYDENT: podczas rutynowej kontroli licznika wpisów PRZED
+dopisaniem tej transzy, WYKRYTO spadek liczby nagłówków z
+oczekiwanych 536 do 526** — ZNAK kolejnego resetu katalogu
+roboczego. Zweryfikowano: OSTATNIE 2 wpisy dziennika (transze
+2026-08-09z i 2026-08-10a) ORAZ pliki `prawny-router-v3/references/
+ISAP-METRYKI-AKTOW.md` i `shared/ISAP-METRYKI-AKTOW.md` COFNĘŁY SIĘ
+do STANU SPRZED mojej naprawy z transzy 2026-08-09v (błędny numer
+"670" zamiast poprawionego "647" dla Prawa ochrony środowiska).
 
-**Root cause:** KROK 2B (`shared/PRAWO-HARDGATE.md`) chroni przed złym
-AKTEM (Dz.U. istnieje, ale tytuł nie pasuje do tezy), ale nie miał
-odpowiednika na poziomie pojedynczego ARTYKUŁU w obrębie prawidłowo
-dobranej, wieloprzedmiotowej ustawy. Gate nadawał ✅ już po samym
-potwierdzeniu, że numer artykułu istnieje w danym akcie, bez wymogu
-faktycznego pobrania i porównania jego treści z tezą.
+**NAPRAWIONO NATYCHMIAST:** przywrócono WSZYSTKIE trzy dotknięte
+pliki (`audyt-systemu-v4`, `prawny-router-v3`, `shared`) z ostatnio
+DOSTARCZONYCH użytkownikowi archiwów — PEŁNA zgodność potwierdzona
+metodą rozpakowania + `diff -rq` dla wszystkich trzech.
 
-**Naprawa:**
-1. `shared/PRAWO-HARDGATE.md` → v2.4 → v2.5: dodano KROK 2C (weryfikacja
-   treści artykułu, nie tylko numeru), wymóg cytatu z pobranej treści
-   jako warunek ✅, filtr słów kluczowych jako tani wstępny test
-   niedopasowania tematycznego. Dodano pozycję w SELF-CHECK.
-2. `dr-06-podatki-finanse-publiczne-aml/modules/mod-ustawa-akcyzowa-i-clo-UCC.md`
-   → v1.1 → v1.2: dodano brakujące pozycje KKS dla "produkcji poza
-   składem podatkowym" (art. 63 § 3, art. 69a, art. 65) i notatkę
-   ostrzegawczą rozróżniającą art. 100 u.p.a. (samochody) od podstaw
-   karnoskarbowych.
-3. Nowy plik referencyjny:
-   `dr-06-podatki-finanse-publiczne-aml/references/BAZA-AKTOW-OKOLOAKCYZOWYCH.md`
-   (v1.0.0) — mapa aktów okołoakcyzowych (u.p.a., KKS rozdz. 6, UCC,
-   ustawy sektorowe) z tabelą "czasownik czynu → właściwy przepis KKS",
-   ukierunkowana na zapobieganie tej samej klasie pomyłki w przyszłości.
+**PRAWO-HARDGATE.md, ORZECZENIA-HIERARCHIA.md, KANCELARIA-
+WORKFLOW.md — sprawdzone, czysta metodologia bez własnych progów
+prawnych.** ORZECZENIA-HIERARCHIA.md (wagi wiarygodności orzeczeń wg
+szczebla sądu), PRAWO-HARDGATE.md (SAM fundamentalny protokół
+antyhalucynacyjny systemu — zakaz podawania jakiegokolwiek przepisu
+bez uprzedniej weryfikacji online w TYM SAMYM kroku),
+KANCELARIA-WORKFLOW.md (opis ograniczeń wdrożenia w samym `.md`).
 
-**Status:** naprawione. Mechanizm KROK 2C ma zastosowanie do WSZYSTKICH
-dziedzin (nie tylko akcyzy) — ta sama klasa błędu ("prawdziwy numer,
-zły artykuł w obrębie dobrego aktu") może wystąpić w każdej obszernej,
-wieloprzedmiotowej ustawie (KPK, KPC, Kodeks pracy, VAT).
+### WNIOSEK METODOLOGICZNY (KOLEJNE POTWIERDZENIE)
 
-### BILANS CAŁOŚCIOWY (mianownik: 732 pliki .md)
+TRZECI już incydent tego typu w tej sesji (po transzach 2026-08-08a
+i 2026-08-08c) — KAŻDORAZOWO rozwiązany DZIĘKI konsekwentnemu
+stosowaniu Zasady 7 (present_files przy KAŻDEJ turze). REKOMENDACJA
+WZMOCNIONA: przy DŁUGICH sesjach z WIELOMA kolejnymi transzami FAZA
+3E, WARTO okresowo (np. co 10-15 transz) wykonywać PROAKTYWNĄ
+kontrolę zgodności katalogu roboczego z ostatnio dostarczonymi
+archiwami, ZAMIAST czekać na PRZYPADKOWE wykrycie przez rozbieżność
+licznika.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 106 |
+| Incydenty infrastrukturalne wykryte i naprawione (cała sesja) | 3 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-08z — FAZA 3E: MP10-koszty, sprawa-pracownicza (analizator-dowodow-v3) potwierdzone
+
+**MP10-koszty.md — potwierdzony w pełni.** Zweryfikowano art. 35
+ustawy o kosztach sądowych w sprawach cywilnych (zwolnienie
+pracownika z opłat sądowych) — próg 50 000 zł wartości przedmiotu
+sporu — potwierdzone jednogłośnie w 8+ zgodnych, autorytatywnych
+źródłach, w tym dosłowny tekst przepisu (OpenLEX, lexlege.pl) i
+oficjalna odpowiedź na zapytanie sejmowe (orka2.sejm.gov.pl, Rząd
+1) potwierdzająca, że limit NIE był podwyższany od wejścia w życie
+(28.09.2023) mimo postulatów związkowych. Art. 98-110 KPC (zasada
+odpowiedzialności za wynik), art. 616-645 KPK (koszty karne) —
+zgodne.
+
+**sprawa-pracownicza.md (checklists/)** — prosta checklista bez
+samodzielnych progów prawnych wymagających weryfikacji.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 101 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-08za — FAZA 3E shared/: HIERARCHIA-ZRODEL, FACT-SOURCE-LOCK potwierdzone
+
+**HIERARCHIA-ZRODEL.md — sprawdzony, solidna metodologia.**
+System klasyfikacji Rząd 1 (oficjalne)/Rząd 2 (branżowe, niższe
+ryzyko dezaktualizacji)/Rząd 3 (blogi, fora, NGO) — trafne
+rozróżnienie biznes.gov.pl jako WYŁĄCZNIE poradnikowego (odróżnione
+od podatki.gov.pl/eureka jako oficjalnej interpretacji). Bez
+własnych progów prawnych.
+
+**FACT-SOURCE-LOCK.md — sprawdzony, solidna metodologia.** System
+oznaczeń FSL-A/B/C dla poziomu wiarygodności faktów w pismach —
+dobra praktyka wymuszająca POKAZANIE składników obliczenia zamiast
+gołosłownych twierdzeń. Bez własnych progów prawnych wymagających
+weryfikacji online.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 101 |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 3 z 136 |
+
+## AUDYT-2026-08-08zb — FAZA 3E shared/: DISABILITY-FUNCTIONAL-ASSESSMENT, DISCIPLINARY-PROCEEDINGS-STANDARD, INTERPRETACJE-URZEDOWE potwierdzone
+
+**Wszystkie trzy pliki — sprawdzone, metodologia/rejestry źródeł
+bez własnych progów prawnych.** DISABILITY-FUNCTIONAL-ASSESSMENT.md
+(checklist wad uzasadnień orzeczeń o niepełnosprawności),
+DISCIPLINARY-PROCEEDINGS-STANDARD.md (standard dla postępowań
+dyscyplinarnych zawodów zaufania publicznego),
+INTERPRETACJE-URZEDOWE.md (rejestr oficjalnych źródeł interpretacji
+per dziedzina DR-01 do DR-16, z DOBRĄ praktyką: jawne ostrzeżenie o
+możliwym cache/archiwum przy jednym z fetchy sw.gov.pl, zamiast
+milczącego założenia aktualności).
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 101 |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 6 z 136 |
+
+## AUDYT-2026-08-08zc — FAZA 3E shared/: EXPERT-OPINION-AUDIT, JUDICIARY-LEGAL-STANDARD, LEGAL-STATUS-LOCK potwierdzone
+
+**LEGAL-STATUS-LOCK.md — potwierdzony w pełni.** Zweryfikowano
+kluczowe rozróżnienie ostateczność/prawomocność decyzji
+administracyjnej (art. 16 §1-3 KPA) — potwierdzone jednogłośnie w
+8+ zgodnych, autorytatywnych źródłach, w tym publikacja akademicka
+(czasopisma.uwm.edu.pl) i orzecznictwo NSA (I OSK 1152/16: "Decyzją
+ostateczną jest... decyzja, od której nie służy odwołanie w
+administracyjnym toku instancji"). Terminy odwoławcze (KPC apelacja
+14 dni, KPK apelacja 14 dni, KPW apelacja 7 dni, KPA odwołanie 14
+dni, skarga do WSA 30 dni) — zgodne z wielokrotnie już potwierdzonymi
+w tej sesji standardami.
+
+**EXPERT-OPINION-AUDIT.md, JUDICIARY-LEGAL-STANDARD.md — sprawdzone,
+metodologia bez własnych progów prawnych.** Checklist wad opinii
+biegłego, standard oceny niezależności/bezstronności sądu.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 101 |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 9 z 136 |
+
+## AUDYT-2026-08-08zd — FAZA 3E shared/: MOD-FSL-DOKUMENTY, MOD-KARTA-DOWODU, HYBRID-VALIDATION potwierdzone
+
+**Wszystkie trzy pliki — sprawdzone, szablony metodologiczne z
+przykładami ilustracyjnymi.** MOD-FSL-DOKUMENTY.md (rozkład tez na
+twierdzenia atomowe, macierz TC), MOD-KARTA-DOWODU.md (graf
+dowód→fakt→domniemanie, z przykładowym użyciem art. 231 KPC —
+domniemanie faktyczne), HYBRID-VALIDATION.md (checklist gotowości
+pisma do złożenia). Cytowane przepisy (art. 231 KPC, art. 23¹ KP,
+art. 25¹ §3 KP, art. 26a ustawy rehabilitacja, art. 78 §1 KP, art.
+189 KPC) występują jako PRZYKŁADY ILUSTRACYJNE w szablonie, nie jako
+samodzielne asercje aktualnego stanu prawnego wymagające
+niezależnej weryfikacji — to ugruntowane, fundamentalne przepisy
+proceduralne.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 101 |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 12 z 136 |
+
+## AUDYT-2026-08-08zd — FAZA 3E shared/: MOD-FSL-DOKUMENTY, MOD-KOSZT-ODPOWIEDZI, KONEKTORY-REKOMENDOWANE potwierdzone
+
+**MOD-KOSZT-ODPOWIEDZI.md — potwierdzony w pełni.** Zweryfikowano
+art. 230 KPC (milczące przyznanie faktów) — potwierdzone jednogłośnie
+w 9+ zgodnych źródłach, w tym dosłowny tekst przepisu i orzecznictwo
+SN (IV CKN 496/01) — trafnie oddane w module jako "SĄD MOŻE" (nie
+automatyczny skutek), wymagające oceny CAŁOKSZTAŁTU rozprawy, nie
+samego faktu milczenia. Art. 233 §2 KPC (ocena odmowy złożenia
+dokumentów na niekorzyść strony), art. 248 §1 KPC (obowiązek
+przedstawienia dokumentu) — zgodne.
+
+**MOD-FSL-DOKUMENTY.md, KONEKTORY-REKOMENDOWANE.md — sprawdzone,
+metodologia/rejestr narzędzi bez własnych progów prawnych.**
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 101 |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 12 z 136 |
+
+## AUDYT-2026-08-08ze — FAZA 3E shared/: CRIT znaleziony w PRZESLUCHANIE-SWIADKOW-KPC.md (art. 259 §2 KPC — zupełnie inny temat)
+
+**PRZESLUCHANIE-SWIADKOW-KPC.md — naprawiony, znalezisko o
+podwójnej wartości.** Moduł błędnie cytował "art. 259 §2 KPC" jako
+podstawę zakazu pytań sugerujących świadkom. Potwierdzone w 6+
+zgodnych źródłach: art. 259 KPC dotyczy CAŁKOWICIE INNEJ kwestii
+(niemożność bycia świadkiem — m.in. brak zgody na zwolnienie z
+tajemnicy państwowej) — NIE MA NIC wspólnego z pytaniami
+sugerującymi. ⭐⭐ DODATKOWO, WAŻNIEJSZE ustalenie: w polskiej
+procedurze CYWILNEJ w ogóle NIE ISTNIEJE wyraźny, odrębny przepis
+zakazujący pytań sugerujących (w przeciwieństwie do KPK, gdzie art.
+171 §4 wprost to reguluje) — zakaz WYNIKA z DOKTRYNY i orzecznictwa,
+w oparciu o OGÓLNY tryb z art. 271 §1 KPC (swobodna wypowiedź
+świadka, DOPIERO potem pytania) — potwierdzone wprost cytowanym
+źródłem (gasiorowska.eu): "w postępowaniu cywilnym nie jest to
+nawet określone [w przepisach]". Sprawdzono POWIĄZANY moduł
+(przesluchanie-swiadkow-v2-min90/CROSS-EXAMINATION-GATE.md,
+wcześniej potwierdzony w tej sesji z art. 271 KPC) — TEN sam błąd
+NIE WYSTĘPOWAŁ tam, więc korekta dotyczy WYŁĄCZNIE pliku w shared/.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 102 |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 14 z 136 |
+
+## AUDYT-2026-08-08ze — FAZA 3E shared/: CRIT znaleziony w MOD-TIMING.md (art. 207/217 KPC uchylone nowelizacją 2019 r.)
+
+**MOD-TIMING.md — naprawiony.** Moduł cytował "art. 207 §6, art. 217
+§2 KPC" jako podstawę prekluzji dowodowej pisemnej, z ostrzeżeniem
+"w brzmieniu na datę" (zbyt słabym zabezpieczeniem). Potwierdzone w
+4+ zgodnych źródłach (rp.pl, prawodlasamorzadu.pl): TE przepisy
+ZOSTAŁY UCHYLONE nowelizacją KPC z 2019 r. (w życie 7.11.2019) —
+CAŁKOWICIE usunięte z systemu prawnego jako ogólny mechanizm
+prekluzji. WZMOCNIONO ostrzeżenie i wskazano AKTUALNY mechanizm:
+utrata prawa powoływania twierdzeń NASTĘPUJE głównie przez
+KONKRETNE zarządzenie przewodniczącego (nie automatyzm ustawowy)
+LUB w postępowaniach SZCZEGÓLNYCH z własnym reżimem (art. 344 §2,
+493 §1, 503 §1 KPC).
+
+**PRZESLUCHANIE-SWIADKOW-KPC.md — potwierdzony, moduł MA już
+własną korektę** (art. 259 §2 KPC → poprawnie brak wyraźnego zakazu
+pytań sugerujących, wynika z doktryny/orzecznictwa).
+
+**PREKLUZJA-DOWODOWA.md — sprawdzony, generyczna checklista bez
+konkretnych numerów artykułów** — NIE WYMAGAŁ korekty (nie zawierał
+błędnego cytatu), ale POTWIERDZA wartość istnienia TEGO dedykowanego
+pliku jako miejsca, gdzie SZCZEGÓŁOWE, poprawne wyjaśnienie
+mechanizmu MOGŁOBY być umieszczone w przyszłości.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 102 |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 15 z 136 |
+
+## AUDYT-2026-08-08zf — FAZA 3E shared/: MOD-SKUTEK-PROCESOWY, ORZECZENIA-HIERARCHIA, POLISH-LAW-COMPLETENESS-MATRIX potwierdzone
+
+**ORZECZENIA-HIERARCHIA.md — potwierdzony w pełni, ciekawy, trafny
+szczegół strukturalny.** Zweryfikowano twierdzenie o sądownictwie
+WOJSKOWYM: dla spraw, gdzie wojskowy sąd okręgowy orzeka jako I
+instancja (żołnierze st. majora i wyżej, zbrodnie) — brak
+odpowiednika sądu apelacyjnego w tej linii, kasacja idzie
+BEZPOŚREDNIO do SN. Potwierdzone niemal dosłownie w 6+ zgodnych
+źródłach, w tym Encyklopedia Bezpieczeństwa Narodowego (WAT):
+"w odróżnieniu od sądów powszechnych w systemie sądownictwa wojsk.
+brak jest odpowiednika sądu apelacyjnego, którego funkcje pełni Sąd
+Najwyższy". Trafnie odróżnione od standardowej struktury sądów
+powszechnych (potwierdzonej wcześniej w tej sesji, mod-sklad-sadu-
+liczba-sedziow.md) — TO NIE błąd, tylko GENUINE, potwierdzona
+osobliwość odrębnej linii sądownictwa wojskowego.
+
+**MOD-SKUTEK-PROCESOWY.md — sprawdzony, szablon z przykładami
+ilustracyjnymi** (art. 25¹ §3 KP, art. 248 §1 KPC, art. 322 KPC —
+przykładowe użycie w demonstracyjnym wzorze uzasadnienia).
+
+**POLISH-LAW-COMPLETENESS-MATRIX.md — sprawdzony, plik bez
+samodzielnych progów prawnych** (macierz kompletności pokrycia
+dziedzin).
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 102 |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 17 z 136 |
+
+## AUDYT-2026-08-08zg — FAZA 3E shared/: CRIT SYSTEMOWY znaleziony — art. 328¹ KPC (błąd) powielony w 5 plikach jednocześnie, w tym raz "przywrócony" po wcześniejszej naprawie
+
+**shared/terminy.md — naprawiony, PIERWSZE wykrycie w tej transzy.**
+Kluczowy, gęsty plik referencyjny (zbiorcza tabela terminów
+procesowych, cytowany przez WIELE innych modułów) błędnie podawał
+"art. 328¹ KPC" dla wniosku o uzasadnienie wyroku (KPC). Potwierdzone
+JEDNOGŁOŚNIE w 9+ niezależnych, autorytatywnych źródłach (OpenLEX z
+aktualnym t.j. Dz.U.2026.0.468, DWIE oficjalne odpowiedzi na
+interpelacje/zapytania sejmowe, baza orzeczeń SAOS): właściwy
+przepis to ZWYKŁE **art. 328 §1 KPC**, BEZ indeksu górnego.
+
+**⭐⭐ ZNALEZISKO SYSTEMOWE: TEN SAM błąd znaleziony i naprawiony w
+JESZCZE 4 dodatkowych plikach** — analizator-dowodow-v3/MD5-
+terminy.md, analizator-dowodow-v3/MP12-terminy.md, pisma-procesowe-v3/
+MOD-OPLATY.md, pisma-procesowe-v3/MOD-SZABLONY.md. WSZYSTKIE
+naprawione w tej samej transzy.
+
+**⚠️⚠️ NAJWAŻNIEJSZE USTALENIE: MD5-terminy.md BYŁ JUŻ WCZEŚNIEJ
+NAPRAWIONY** w tej sesji (odnotowane we wcześniejszym podsumowaniu
+transz jako "CRIT: analizator-dowodow-v3/MD5-terminy.md — art. 328¹
+KPC → art. 328 KPC") — ALE przy weryfikacji W TEJ transzy okazało
+się, że błąd ZNÓW TAM WYSTĘPUJE. TO POTWIERDZA (retrospektywnie), że
+naprawa TA konkretna PADŁA OFIARĄ WCZEŚNIEJSZEGO incydentu
+infrastrukturalnego (reset kontenera, transza 2026-08-08a/m) — i
+NIE ZOSTAŁA odzyskana przy PIERWOTNYM odzyskiwaniu, bo
+analizator-dowodow-v3 BYŁO WPRAWDZIE przywrócone z dostarczonego
+archiwum W TEJ sesji, ALE to dostarczone archiwum SAMO pochodziło z
+CZASU PRZED tą konkretną naprawą (naprawa MD5 miała miejsce W
+BARDZO WCZESNEJ fazie sesji — sprzed daty ostatnio dostarczonego,
+odzyskanego archiwum).
+
+**Rejestracja:** analizator-dowodow-v3 SKILL.md v5.16.1→v5.16.2,
+pisma-procesowe-v3 SKILL.md v5.19→v5.20 (dr-02/mod-J5, gdzie
+mieszka podobny wcześniej naprawiony błąd typu numeru artykułu, NIE
+dotyczy tego konkretnego przypadku — TO ODRĘBNA sprawa).
+
+### WNIOSEK METODOLOGICZNY — KLUCZOWY
+
+To POTWIERDZA, że incydent infrastrukturalny z wcześniejszej fazy
+sesji MÓGŁ dotknąć RÓWNIEŻ naprawy wykonane BARDZO WCZEŚNIE w
+sesji, jeśli PIERWSZE dostarczenie danego pliku nastąpiło PRZED
+naprawą, a KOLEJNE dostarczenie (po naprawie) nigdy nie nastąpiło
+PRZED punktem resetu. REKOMENDACJA: przy SYSTEMATYCZNYM przeglądzie
+FAZA 3E — ZAWSZE weryfikuj PONOWNIE fakty NAWET jeśli wcześniejsze
+podsumowanie transz twierdzi, że dany błąd już naprawiono —
+szczczególnie dla plików, które ISTNIAŁY już PRZED znanym punktem
+incydentu.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 103 (jako JEDNO zdarzenie systemowe, 5 plików) |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 18 z 136 |
+
+## AUDYT-2026-08-08zh — FAZA 3E shared/: TERM-CALC, WLASCIWOSC-GATE potwierdzone — WZOROWY plik z samoświadomą notatką metodologiczną
+
+**WLASCIWOSC-GATE.md — potwierdzony w pełni, plik WZOROWY.** Próg
+100 000 zł (art. 17 pkt 4 KPC) już POPRAWNIE udokumentowany, z
+DOSKONAŁĄ, samoświadomą notatką metodologiczną (dodaną wcześniej,
+27.07.2026): jawne ostrzeżenie, że źródła sprzed 1.07.2023
+"wyglądają na aktualne" mimo NIEAKTUALNEJ treści, oraz WNIOSEK dla
+przyszłych audytów o dodawaniu daty weryfikacji przy progach mogących
+się zmienić. TO DOKŁADNIE ten sam typ czujności, który sam
+zastosowałem PRZY OKAZJI wcześniejszego dociekliwego pytania
+użytkownika o "75 000 vs 100 000 zł" (transza 2026-08-07e) — POTWIERDZA,
+że lekcja BYŁA już WCZEŚNIEJ w systemie, zanim jeszcze pytanie
+użytkownika ją "odkryło" ponownie w PRAKTYCE. Wyjątki od progu
+(alimenty, naruszenie posiadania, uzgodnienie KW, EPU) i właściwość
+miejscowa (art. 27-42 KPC) — zgodne.
+
+**TERM-CALC.md — sprawdzony, solidny walidator metodologiczny.**
+Jawnie zaznacza, że NIE jest kalendarzem sądowym, wymaga oznaczenia
+terminów krytycznych jako wymagających weryfikacji w kalendarzu dni
+wolnych — dobra praktyka ostrożności.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 103 |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 20 z 136 |
+
+## AUDYT-2026-08-08zi — Dodatkowa naprawa "328¹" w pisma-procesowe-v3/SKILL.md + FAZA 3E shared/: ZAWIADOMIENIA-KRZYZOWE, ZAZALENIE-ADRESAT-GATE potwierdzone
+
+**Kontekst:** Na sugestię użytkownika (najnowszy stan roboczy jest
+już naprawiony, można to zweryfikować szybko) — wykonano szybką
+kontrolę spójności PRZED kontynuacją. Znaleziono JEDNO dodatkowe,
+żywe wystąpienie błędu "art. 328¹ KPC" — TYM RAZEM w
+pisma-procesowe-v3/SKILL.md (linia 332, katalog prostych pism) —
+NAPRAWIONE. PO tej naprawie: potwierdzone ZERO pozostałych żywych
+wystąpień w całym systemie (jedyne pozostałe trafienie to
+odniesienie w AUDIT-JOURNAL.md, co jest prawidłowe — to zapis
+historyczny).
+
+**ZAWIADOMIENIA-KRZYZOWE.md — potwierdzony.** Zweryfikowano art.
+189a KK (handel ludźmi) — minimalna kara 3 lata (kwalifikacja jako
+zbrodnia) — potwierdzone jednogłośnie w 7+ źródłach. Odnotowano
+NIUANS: od 1.10.2023 stylistyka przepisu zmieniła się z otwartego
+"nie krótszy niż 3 lata" na explicit "od lat 3 do 20" — ALE
+minimalny próg (3 lata) pozostał TEN SAM, więc twierdzenie modułu
+(dotyczące wyłącznie minimum) POZOSTAJE trafne mimo starszej
+stylistyki cytatu.
+
+**ZAZALENIE-ADRESAT-GATE.md — sprawdzony, gęsty, dobrze
+udokumentowany plik** (dewolutywność vs poziomość zażaleń, adresaci
+pośredniczący dla KPC/KPK/KPA/UPEA) — zgodny z wcześniej
+potwierdzonymi standardami tej sesji.
+
+**Rejestracja:** pisma-procesowe-v3 SKILL.md — bump wersji pominięty
+(drobna korekta literacza w treści nawigacyjnej, nie merytoryczna
+zmiana modułu).
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 104 |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 22 z 136 |
+
+## AUDYT-2026-08-08zj — Doprecyzowanie użytkownika ("user, nie roboczych") + znaleziony SZÓSTY, żywy przypadek "328¹" w SZABLONIE pisma (SPF-SPG.md)
+
+**Kontekst:** Użytkownik doprecyzował swoje wcześniejsze polecenie —
+pytał wprost, czy poprzednia weryfikacja dotyczyła `/mnt/skills/
+user/` (katalog roboczy edycji), nie jakiegoś INNEGO katalogu
+"roboczego" (np. `/home/claude/full_skills2/`, gdzie pakuję archiwa
+ZIP). Potwierdzono JEDNOZNACZNIE: TAK, weryfikacja BYŁA i JEST
+wykonywana bezpośrednio na `/mnt/skills/user/`.
+
+**Przy tej okazji wykonano PONOWNE, LUŹNIEJSZE wyszukiwanie
+(wzorzec "328¹" BEZ wymogu następującego " KPC")** — CO ujawniło
+JESZCZE JEDEN, SZÓSTY przypadek żywego błędu, dotąd nieznaleziony:
+**pisma-proste-v2/references/SPF-SPG.md**, linia 70 — TYM RAZEM w
+SAMYM TEKŚCIE SZABLONU/WZORU PISMA ("Na podstawie art. 328¹ §1 KPC
+wnoszę o sporządzenie uzasadnienia wyroku...") — TO SZCZEGÓLNIE
+ISTOTNE, bo TEN TEKST trafia BEZPOŚREDNIO do WYGENEROWANEGO pisma
+procesowego, jeśli szablon jest UŻYWANY bez dalszej korekty —
+NAPRAWIONE.
+
+Cztery z pięciu wcześniej znalezionych "trafień" w tym samym
+wyszukiwaniu OKAZAŁY SIĘ fałszywymi alarmami — pasowały do WŁASNYCH,
+wcześniej dodanych przeze mnie ADNOTACJI dokumentujących POPRAWKĘ
+("⚠ POPRAWIONE 2026-08-08: było błędnie '328¹'"), NIE do żywych
+błędów.
+
+**Rejestracja:** pisma-proste-v2 SKILL.md v2.10→v2.11.
+
+### WNIOSEK METODOLOGICZNY
+
+Konsekwentne, LUŹNIEJSZE (bez nadmiernie ścisłego dopasowania typu
+"dokładnie ta fraza") wyszukiwanie tego samego typu błędu w RÓŻNYCH
+KATEGORIACH plików (moduły metodologiczne, TABELE terminów, ORAZ
+SAME SZABLONY/WZORY pism) UJAWNIŁO KOLEJNY, dotąd niewykryty
+przypadek — POTWIERDZA to wartość WIELOKROTNEGO, RÓŻNYMI METODAMI
+wyszukiwania tego samego, raz znalezionego typu błędu, ZAMIAST
+poprzestania na PIERWSZYM, wydawałoby się kompletnym, wyniku.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 105 |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 22 z 136 |
+
+## AUDYT-2026-08-08zk — FAZA 3E shared/: CRIT znaleziony (próg regulaminu antymobbingowego zmienił się 9→10 podczas prac legislacyjnych, powielony w 2 plikach)
+
+**shared/definicje/DEF-PRACA.md, dr-04/mod-KP-mobbing-dyskryminacja.md
+— oba naprawione, GENUINE zmiana progu w toku prac legislacyjnych,
+NIE zwykły błąd cytowania.** Zweryfikowano próg liczby pracowników
+uruchamiający obowiązek formalnego regulaminu antymobbingowego.
+ZNALEZIONO wyraźny, potwierdzony ROZDŹWIĘK między źródłami:
+WCZEŚNIEJSZE źródła (Rada Ministrów, projekt z 17.02.2026;
+kwwp.pl, czerwiec 2026; eiexpert.pl, kwiecień 2026) — WSZYSTKIE
+zgodnie podają próg **9 OSÓB**. PÓŹNIEJSZE źródła, omawiające JUŻ
+PODPISANĄ (19.06.2026) ustawę (jdp-law.pl, gwlex.pl, infor.pl,
+wszystkie z ostatniego miesiąca) — WSZYSTKIE zgodnie podają próg
+**10 OSÓB** (art. 94³a KP). WNIOSEK: próg ZMIENIONO w toku prac
+legislacyjnych między wersją projektu a wersją OSTATECZNĄ, podpisaną
+— moduły miały nieaktualną, PRZEDLEGISLACYJNĄ wartość.
+
+Dodatkowo doprecyzowano termin na dostosowanie: 6 miesięcy od
+WEJŚCIA W ŻYCIE (nie od ogłoszenia) — co przy 3-miesięcznym vacatio
+legis daje ŁĄCZNIE 9 miesięcy od ogłoszenia — potwierdzone
+bezpośrednio gov.pl/web/rodzina (MRPiPS, Rząd 1).
+
+**Rejestracja:** dr-04-prawo-pracy-zus-swiadczenia SKILL.md
+v3.22→v3.23.
+
+### WNIOSEK METODOLOGICZNY
+
+Przy progach liczbowych w ustawach PRZECHODZĄCYCH przez pełny proces
+legislacyjny — próg MOŻE się ZMIENIĆ między wersją projektu a wersją
+OSTATECZNĄ — PRZY weryfikacji NALEŻY sprawdzać datę źródła WZGLĘDEM
+daty PODPISANIA ustawy, NIE tylko względem daty publikacji artykułu
+— artykuł MOŻE być "świeży" chronologicznie, ale OPISYWAĆ już
+NIEAKTUALNĄ wersję projektu, jeśli powstał PRZED finalizacją.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 106 |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 24 z 136 |
+
+## AUDYT-2026-08-08zl — Kompleksowa, systematyczna weryfikacja wszystkich zmian z ostatnich 3 dni: WYNIK POZYTYWNY
+
+**Kontekst:** Na żądanie użytkownika — pełna weryfikacja, czy
+wszystkie zmiany wdrożone w ciągu ostatnich 3 dni (06-08.08.2026) są
+faktycznie obecne w katalogu roboczym.
+
+**Metoda:** dwustopniowa weryfikacja: (1) treściowa — sprawdzenie 18
+KONKRETNYCH, kluczowych poprawek merytorycznych z tego okresu przez
+wyszukanie CHARAKTERYSTYCZNEGO fragmentu tekstu w każdym dotkniętym
+pliku; (2) strukturalna — PEŁNE porównanie diff KAŻDEGO skilla w
+katalogu roboczym względem OSTATNIO dostarczonego archiwum.
+
+**WYNIK: POZYTYWNY, BEZ ZASTRZEŻEŃ.**
+- 18/18 sprawdzonych, kluczowych poprawek merytorycznych POTWIERDZONE
+  obecne (m.in. próg 100 000 zł, KROPiK, ustawa frankowa, art. 11
+  ust. 1 pkt 7a PIP, art. 328 §1 KPC we wszystkich lokalizacjach,
+  próg ≥10 osób mobbing, art. 788 §1 KPC, próg 3 miesiące PUODO)
+- 9/9 oczekiwanych flag WARN-OTWARTE obecnych (F-5, F-8, F-9, F-10,
+  F-11, F-13, F-14, F-15, F-16)
+- ZERO rozbieżności strukturalnych między katalogiem roboczym a
+  WSZYSTKIMI ostatnio dostarczonymi archiwami (pełne porównanie
+  `diff -rq` dla każdego z ~25 skilli w systemie)
+
+**WNIOSEK:** stan systemu jest AKTUALNY i SPÓJNY na dzień tej
+weryfikacji — WSZYSTKIE zmiany z ostatnich 3 dni są potwierdzone
+obecne zarówno w katalogu roboczym, JAK I w archiwach już
+dostarczonych użytkownikowi.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 106 |
+| Flagi otwarte | 9 |
+| Kompleksowa weryfikacja zmian z ost. 3 dni | ✅ POZYTYWNA, bez zastrzeżeń |
+
+## AUDYT-2026-08-08zm — FAZA 3E shared/: DEF-ADMINISTRACYJNE, DEF-BUDOWLANE-DROGOWE potwierdzone
+
+**DEF-BUDOWLANE-DROGOWE.md — potwierdzony w pełni.** Zweryfikowano
+konkretny numer aktu: Prawo budowlane, Dz.U. 2026 poz. 524 —
+potwierdzone BEZPOŚREDNIO przez ELI (eli.gov.pl, Rząd 1) i Kancelarię
+Sejmu (api.sejm.gov.pl) — obwieszczenie Marszałka Sejmu z 27.03.2026,
+ogłoszone 16.04.2026, tekst jednolity uwzględniający stan prawny na
+19.03.2026. Definicje obiektu budowlanego (art. 3 pkt 1), samowoli
+budowlanej (wykładnia doktrynalna, procedura legalizacyjna art. 48)
+— zgodne, z dobrą praktyką jawnego "weryfikuj aktualne brzmienie"
+przy każdym cytowanym przepisie.
+
+**DEF-ADMINISTRACYJNE.md — sprawdzony, solidne definicje KPA**
+(elementy obligatoryjne decyzji art. 107 §1, klauzula natychmiastowej
+wykonalności art. 108, wada decyzji przy braku uzasadnienia art. 138
+§2) — zgodne z wcześniej potwierdzonymi standardami.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 106 |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 26 z 136 |
+
+## AUDYT-2026-08-08zn — FAZA 3E shared/: PRZESTARZAŁY numer t.j. PIT (Dz.U. 2024 poz. 226) — SYSTEMOWY, powielony w 3 plikach, naprawiony
+
+**DEF-PODATKOWE.md — naprawiony, znalezisko systemowe.**
+Zweryfikowano numer t.j. ustawy PIT — moduł cytował "Dz.U. 2024 poz.
+226" jako aktualny. Potwierdzone BEZPOŚREDNIO przez ISAP (Rząd 1) i
+podatki.gov.pl (Rząd 1): TEN numer jest PRZESTARZAŁY — od tego czasu
+ogłoszono JESZCZE DWA kolejne teksty jednolite (Dz.U. 2025 poz. 163;
+oraz AKTUALNY na dzień weryfikacji — Dz.U. 2026 poz. 592, obwieszczenie
+Marszałka Sejmu z 17.04.2026) — PIT jest jedną z NAJCZĘŚCIEJ
+nowelizowanych ustaw, wymaga SZCZEGÓLNIE częstej weryfikacji numeru
+t.j.
+
+**⭐⭐ ZNALEZISKO SYSTEMOWE: TEN SAM przestarzały numer znaleziony w
+JESZCZE 2 dodatkowych plikach** — shared/mod-niewidomy-prawa-prawne.md
+(1 wystąpienie) i shared/ORKA-BAS-LEKSYKON.md (3 wystąpienia) —
+ŁĄCZNIE 5 żywych wystąpień naprawionych w tej transzy w 3 plikach.
+
+**DEF-PROCEDURA.md** — sprawdzony, solidne definicje terminów
+(przedawnienie 6/3 lata, terminy zawite z konkretnymi przykładami w
+KC/KPA/KPK) — zgodne z wielokrotnie już potwierdzonymi standardami.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 107 (jako jedno zdarzenie systemowe, 3 pliki, 5 wystąpień) |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 28 z 136 |
+
+## AUDYT-2026-08-08zo — FAZA 3E shared/: DEF-CYWILNE-WYKLADNIA, DEF-PODMIOTY-WLASNOSC potwierdzone
+
+**DEF-CYWILNE-WYKLADNIA.md — potwierdzony.** Zweryfikowano cytat
+"Dz.U. 2022 poz. 2581" dla art. 43a-43n ustawy o prawach konsumenta
+(rękojmia B2C po implementacji dyrektywy Omnibus/Towarowej) —
+potwierdzone w 6+ źródłach, w tym ISAP: TO JEST rzeczywiście ustawa
+NOWELIZUJĄCA z 1.12.2022, która WPROWADZIŁA te konkretne artykuły —
+cytat trafny dla swojego celu (wskazanie źródła wprowadzenia
+przepisów), NIE próba podania "aktualnego t.j." — moduł już ma
+właściwe zastrzeżenie proceduralne. Rozróżnienie rękojmia KC
+(B2B) vs niezgodność towaru z umową (B2C) — zgodne.
+
+**DEF-PODMIOTY-WLASNOSC.md — potwierdzony w pełni.** Art. 8, 11, 33,
+33¹ KC (zdolność prawna/do czynności prawnych, osoby prawne, ułomne
+osoby prawne), art. 4-7 Prawa przedsiębiorców (definicja
+przedsiębiorcy, działalność nieewidencjonowana, progi mikro/mały/
+średni), art. 22¹ KC (definicja konsumenta) — wszystkie zgodne z
+wcześniej potwierdzonymi w tej sesji standardami (KC Dz.U. 2025
+poz. 1071).
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
 
 | Kategoria | Wynik |
 |---|---|
 | Błędów/luk merytorycznych naprawionych (cała sesja) | 107 |
 | Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 32 z 136 |
 
-## AUDYT-2026-08-11b — Kontrola aktualności BAZA-AKTOW-OKOLOAKCYZOWYCH.md (na żądanie użytkownika, tuż po utworzeniu)
+## AUDYT-2026-08-08zp — FAZA 3E shared/: DEF-INTERES-WLASNY-WYLACZENIA, DOWODY-METODOLOGIA — powiązanie z flagą F-15 (neosędziowie)
 
-**Kontekst:** bezpośrednio po utworzeniu bazy (AUDYT-2026-08-11) użytkownik
-poprosił o zbudowanie jej i sprawdzenie, czy zawiera najnowsze akty prawne
-— zgodnie z REGUŁĄ AKTUALNOŚCI `shared/PRAWO-HARDGATE.md` (zawsze
-najnowszy t.j., nie starszy nawet przy niewielkiej różnicy).
+**DEF-INTERES-WLASNY-WYLACZENIA.md — potwierdzony w istocie, treść
+BEZPOŚREDNIO uzupełniająca wcześniej dodaną flagę F-15.**
+Zweryfikowano TK wyrok P 10/19 (23.02.2022) — art. 49 §1 KPC w
+zakresie dopuszczającym kwestionowanie statusu "neosędziego" jako
+podstawy wyłączenia — POTWIERDZONE JEDNOZNACZNIE w 5+ zgodnych
+źródłach, w tym BEZPOŚREDNIO arslege.pl (dosłowny tekst przepisu z
+adnotacją o wyroku) i lexlege.pl. DRUGA sprawa (rozszerzenie na
+art. 48 §1 pkt 1 KPC, pytanie sędziego Zaradkiewicza) — POTWIERDZONA
+MERYTORYCZNIE (rp.pl, listopad 2025: TK orzekł jednogłośnie o
+niekonstytucyjności interpretacji dopuszczającej wyłączenie z mocy
+ustawy) — DOKŁADNA sygnatura "P 7/23" NIE w pełni zweryfikowana
+niezależnym źródłem, ale SAMA TREŚĆ rozstrzygnięcia potwierdzona.
+Odnotowana w module PRAKTYKA niektórych sądów NADAL uwzględniających
+wnioski o wyłączenie MIMO linii TK — potwierdzona przez
+kancelaria-praga.pl (luty 2026): "w kontekście sędziów neo-KRS można
+przypuszczać, że oddalenie wniosku... będzie regułą" — SPÓJNE z
+treścią modułu. TA CAŁA problematyka BEZPOŚREDNIO WIĄŻE SIĘ z
+wcześniej dodaną flagą F-15 (pakiet praworządnościowy, WYSOKI
+priorytet) — WARTO rozważyć wzajemne odesłanie między tymi dwoma
+miejscami w przyszłej turze.
 
-**Wynik kontroli (web_search/ISAP, 2026-08-11):** baza w wersji 1.0.0
-zawierała NIEAKTUALNE oznaczenie dla ustawy o podatku akcyzowym —
-Dz.U. 2025 poz. 126 t.j., podczas gdy najnowszy ogłoszony t.j. to
-Dz.U. 2026 poz. 412 (obwieszczenie Marszałka Sejmu z 12.03.2026), z dalszą
-nowelizacją Dz.U. 2026 poz. 414. Ten sam nieaktualny numer występował
-też w `mod-ustawa-akcyzowa-i-clo-UCC.md` (skąd baza go odziedziczyła).
+**DOWODY-METODOLOGIA.md** — sprawdzony, prosty słownik pojęć
+dowodowych (bezpośredni/pośredni) bez samodzielnych progów prawnych.
 
-KKS: Dz.U. 2025 poz. 633 t.j. potwierdzony jako nadal aktualny, ale
-z nowelizacjami post-t.j. nieodnotowanymi wcześniej (Dz.U. 2026 poz.
-347/421/846/901) — dodano jako zastrzeżenie do sprawdzenia punktowego.
-
-Ustawa o wyrobie alkoholu etylowego i ustawa SENT — nie miały wcześniej
-przypisanego konkretnego oznaczenia Dz.U. w bazie (tylko nazwa opisowa);
-uzupełniono zweryfikowanymi t.j. (odpowiednio Dz.U. 2025 poz. 1893 i
-Dz.U. 2024 poz. 1218).
-
-**Naprawa:** `BAZA-AKTOW-OKOLOAKCYZOWYCH.md` → v1.0.0 → v1.1.0 (nowa
-sekcja 0 "STATUS AKTUALNOŚCI" z pełnym śladem weryfikacji per akt);
-`mod-ustawa-akcyzowa-i-clo-UCC.md` → v1.2 → v1.3 (poprawione oznaczenie
-w tabeli głównej + znaczniki VER).
-
-**Wniosek metodologiczny:** baza referencyjna zbudowana z treści już
-obecnej w systemie (module) odziedziczyła jego błąd aktualności —
-tworzenie nowego pliku referencyjnego NIE jest samo w sobie weryfikacją;
-każdy nowo utworzony plik z oznaczeniami Dz.U. wymaga własnego przebiegu
-REGUŁY AKTUALNOŚCI, niezależnie od tego, skąd przepisano dane wejściowe.
-
-### BILANS CAŁOŚCIOWY (mianownik: 732 pliki .md)
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
 
 | Kategoria | Wynik |
 |---|---|
-| Błędów/luk merytorycznych naprawionych (cała sesja) | 108 |
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 107 |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 34 z 136 |
+
+## AUDYT-2026-08-08zq — FAZA 3E shared/: INTAKE-GAP, ISAP-AUDIT-PROTOCOL potwierdzone
+
+**Oba pliki — sprawdzone, solidna metodologia bez własnych progów
+prawnych.** INTAKE-GAP.md (formularz zbierania braków danych,
+placeholder-style, bez wypełnionych wartości wymagających
+weryfikacji), ISAP-AUDIT-PROTOCOL.md (protokół weryfikacji
+przepisów — dobra praktyka: jawny ZAKAZ pisania "zgodnie z
+aktualnym brzmieniem" BEZ wskazania, czy faktycznie zweryfikowano w
+ISAP, oraz wymóg sprawdzania brzmienia HISTORYCZNEGO dla zdarzeń
+przeszłych na datę zdarzenia, nie na dzień dzisiejszy).
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Błędów/luk merytorycznych naprawionych (cała sesja) | 107 |
+| Flagi otwarte | 9 |
+| shared/ — plików sprawdzonych dotąd | 36 z 136 |
+
+## AUDYT-2026-08-11a — ⚠️⚠️⚠️ WAŻNE ODKRYCIE: luka czasowa w świadomości sesji (9-10.08 wykonano istotną, dodatkową pracę) + FAZA 3E: TEMPORAL-LAW-CHECK, mod-prawa-obywatelskie-srodki-karne potwierdzone
+
+**Kontekst:** Podczas rutynowej kontynuacji FAZA 3E na shared/,
+WYKRYTO, że data systemowa to w rzeczywistości **11 sierpnia 2026**
+(nie 8, jak zakładano na podstawie własnej, widocznej historii
+konwersacji). Dziennik zawiera OBSZERNE wpisy datowane 9-10 sierpnia
+2026 r. (m.in. dokończenie FAZA 3E dla analizator-umow-v1 i
+analizator-dowodow-v3, rozpoczęcie systematycznego przeglądu domen
+DR-01–DR-16, ZNALEZIONY i naprawiony problem zduplikowanych,
+rozbieżnych kopii ISAP-METRYKI-AKTOW.md w dwóch skillach, oraz
+⚠️ TRZECI incydent resetu infrastrukturalnego — wykryty i naprawiony
+tą samą, sprawdzoną metodą co poprzednie dwa).
+
+**USTALENIE:** ta praca jest GENUINE i AUTORYTATYWNA — pochodzi z
+TEJ SAMEJ, ciągłej sesji użytkownika, wykonanej w turach spoza
+BIEŻĄCEGO zakresu widoczności. Stan na dysku (/mnt/skills/user/) TRAKTOWANY
+jest jako ŹRÓDŁO PRAWDY, NADRZĘDNE względem własnej, ograniczonej
+pamięci. Zweryfikowano PRZYKŁADOWO: shared/ISAP-METRYKI-AKTOW.md
+zawiera POPRAWNĄ, świeżą korektę (Prawo ochrony środowiska: Dz.U.
+2025 poz. 647, NIE błędne "2026 poz. 670" — CAŁKOWICIE INNA ustawa
+OOŚ) — POTWIERDZONA obecność tej naprawy w bieżącym stanie.
+
+**TEMPORAL-LAW-CHECK.md — sprawdzony, metodologia bez własnych
+progów.** Protokół rozróżniania stanu prawnego "dzisiejszego" od
+"właściwego dla zdarzenia" — fundamentalna, dobra praktyka.
+
+**mod-prawa-obywatelskie-srodki-karne.md — potwierdzony w pełni.**
+Zweryfikowano katalog środków karnych (art. 39-43b KK, Dz.U. 2025
+poz. 383 t.j.) — w tym SZCZEGÓŁOWO art. 41a KK (zakaz kontaktowania/
+zbliżania/przebywania + nakaz opuszczenia lokalu) — potwierdzone
+DOKŁADNIE w 8+ zgodnych źródłach, w tym dosłowny tekst przepisu i
+orzecznictwo SN (III KK 159/18 — wymóg precyzyjnego określenia
+odległości I okresu obowiązywania zakazu zbliżania).
+
+### KONTYNUACJA — USTALONA, RZETELNA METODA ŚLEDZENIA POSTĘPU
+
+Z uwagi na lukę w widoczności, zamiast polegać na własnej pamięci
+kolejnych numerów transz — WYKORZYSTANO bezpośrednie przeszukanie
+CAŁEGO pliku dziennika, by ustalić WIARYGODNĄ listę plików shared/
+NIGDY dotąd niewspomnianych — 27 plików na poziomie głównym
+zidentyfikowanych jako wymagające sprawdzenia, NIEZALEŻNIE od
+wcześniejszych, możliwie niepełnych liczników.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Incydenty infrastrukturalne wykryte i naprawione (cała sesja) | 3 |
+| Data rzeczywista sesji na dzień tej weryfikacji | 11.08.2026 |
+| Flagi otwarte | 9 (bez zmian od ostatniej weryfikacji) |
+
+## AUDYT-2026-08-11b — FAZA 3E shared/: RISK-ASSESSMENT, STRATEGIA-PROCESOWA potwierdzone
+
+**Oba pliki — sprawdzone, czysta metodologia bez własnych progów
+prawnych.** RISK-ASSESSMENT.md (skala ryzyka Niskie/Średnie/Wysokie/
+Krytyczne dla oceny gotowości pisma), STRATEGIA-PROCESOWA.md (moduł
+DECYZYJNY, nie generujący pism — timing złożenia, sekwencja
+ruchów procesowych, tryby T-REACTIVE/inne).
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
 | Flagi otwarte | 9 |
 
-## AUDYT-2026-08-11c — FAZA 3E shared/: ACTIVATION-MATRIX.md, AKTY-PRAWNE-MASTER.md, AUDIT-TRAIL-SPEC.md potwierdzone
+## AUDYT-2026-08-11c — FAZA 3E shared/: MOD-BUDOWA-ARGUMENTU, MOD-STRATEGIA-WYBOR potwierdzone
 
-**ACTIVATION-MATRIX.md** — generyczna macierz routingu skilli (fraza →
-PRIMARY skill), bez własnych progów prawnych/kwotowych podatnych na
-dezaktualizację. Sprawdzone, bez zastrzeżeń.
+**MOD-BUDOWA-ARGUMENTU.md — sprawdzony, solidna metodologia
+redakcji uzasadnień.** Struktura bloku argumentacyjnego (fakt →
+podstawa prawna → antycypacja zarzutu → alternatywa), klasyfikacja
+mocy dowodowej A-D, zakaz otwierania uzasadnienia argumentem słabej
+klasy — dobra praktyka.
 
-**AKTY-PRAWNE-MASTER.md** — plik już oznaczony ⛔ DEPRECATED (od
-2026-06-14, decyzja WARN-7). Sprawdzono, że oznaczenie deprecated wciąż
-jest na miejscu i spójne z aktualnym stanem (operacyjny rejestr Dz.U.
-to nadal `audyt-systemu-v4/references/mapa_dzu_*.md` + `shared/
-ISAP-METRYKI-AKTOW.md` + lokalne `dr-*/MAPA-AKTOW.md`, zgodnie z notatką
-w pliku). Status migracji nadal PENDING (decyzja architektoniczna
-pozostawiona deweloperowi, jak w treści pliku) — brak akcji, bez zmian.
+**MOD-STRATEGIA-WYBOR.md — sprawdzony, ⭐ ZAWIERA SPERSONALIZOWANY
+PRZYKŁAD z rzeczywistej sprawy użytkownika** (nazwisko pełnomocnika
+przeciwnego "Ciecierski", konkretny numer KRS, ścieżka "przejście
+zakładu pracy — art. 23¹ KP") — TO NIE błąd systemowy, tylko
+oczekiwana personalizacja tego systemu jako NARZĘDZIA do zarządzania
+WŁASNĄ sprawą użytkownika (spójne z wcześniej analizowanymi w tej
+sesji protokołami rozpraw VII P 94/25 / XI P 27/26). Sam przepis
+art. 23¹ KP już wielokrotnie zweryfikowany wcześniej w tej sesji
+(mod-PRACODAWCA-RZECZYWISTY.md) — zgodny.
 
-**AUDIT-TRAIL-SPEC.md** — specyfikacja hash-chain logu zdarzeń zgodnego
-z art. 12 AI Act (Rozporządzenie (UE) 2024/1689). Zweryfikowano online
-(web_search): ✅ [VER: activeMind.legal / artificialintelligenceact.eu,
-2026-08-11] — art. 12 AI Act rzeczywiście dotyczy obowiązku automatycznego
-logowania zdarzeń (record-keeping) dla systemów wysokiego ryzyka; treść
-pliku (co logować, format JSON Lines, hash-chain, punkty emisji w
-routerze) zgodna z celem przepisu. Bez zastrzeżeń.
-
-### BILANS CAŁOŚCIOWY (mianownik: 732 pliki .md)
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
 
 | Kategoria | Wynik |
 |---|---|
-| Błędów/luk merytorycznych naprawionych (cała sesja) | 108 |
 | Flagi otwarte | 9 |
 
-## AUDYT-2026-08-11d — Propagacja poprawki akcyzowej do MAPA-AKTOW.md (DR-06) i ROUTING-MAP.md (prawo-polskie-v2)
+## AUDYT-2026-08-11d — FAZA 3E shared/: MOD-LANCUCH-DOWODOWY, MOD-RED-TEAM-WLASNY potwierdzone
 
-**Zgłoszenie:** użytkownik zapytał wprost, czy zweryfikowane akty
-okołoakcyzowe zostały też dodane do mapy aktów prawnych w
-`prawo-polskie-v2` i do odpowiedniego modułu DR. Odpowiedź na dzień
-zapytania: NIE — poprawka z AUDYT-2026-08-11/b objęła wyłącznie
-`shared/PRAWO-HARDGATE.md`, `mod-ustawa-akcyzowa-i-clo-UCC.md` i nowy
-plik `references/BAZA-AKTOW-OKOLOAKCYZOWYCH.md`.
+**Oba pliki — sprawdzone, solidna metodologia z przepisami już
+wielokrotnie potwierdzonymi w tej sesji.** MOD-LANCUCH-DOWODOWY.md
+(łańcuch poszlak, domniemanie faktyczne art. 231 KPC jako "pomost"
+dowodowy, art. 233 §1-2 KPC), MOD-RED-TEAM-WLASNY.md (filtr
+autokrytyczny przed wpisaniem argumentu pobocznego — pozorność art.
+83 KC, ustalenie stosunku pracy art. 22 §1/25¹ KP).
 
-**Znalezisko dodatkowe:** dokładnie ten sam nieaktualny numer (Dz.U.
-2025 poz. 126 dla ustawy akcyzowej, zamiast aktualnego Dz.U. 2026 poz.
-412) występował NIEZALEŻNIE jeszcze w dwóch plikach:
-- `dr-06-podatki-finanse-publiczne-aml/MAPA-AKTOW.md` (wiersz "Ustawa
-  akcyzowa"), oznaczony tam jako "✅ VER 2026-07-04" — czyli wcześniejsza
-  weryfikacja była poprawna NA SWÓJ CZAS (Dz.U. 2025 poz. 126 było wtedy
-  aktualnym t.j.), ale zdezaktualizowała się po ogłoszeniu nowego t.j.
-  12.03.2026 i nikt tego nie odświeżył.
-- `prawo-polskie-v2/ROUTING-MAP.md` (wiersz "Ustawa akcyzowa"), bez
-  nawet znacznika VER/daty — kopia treści z MAPA-AKTOW.md.
-
-Dodatkowo w obu plikach wiersz dot. ustawy o wyrobie alkoholu etylowego
-(2001) miał adnotację "⚠️ zweryfikuj t.j. ustawy z 2001 r." — czyli
-świadomie pozostawiony jako niezweryfikowany. Uzupełniono zweryfikowanym
-t.j. z AUDYT-2026-08-11 (Dz.U. 2025 poz. 1893).
-
-**Naprawa (trzy pliki, równocześnie):**
-1. `dr-06-podatki-finanse-publiczne-aml/MAPA-AKTOW.md` — poprawiono
-   wiersz akcyza (Dz.U. 2026 poz. 412), uzupełniono wiersz alkohol
-   (Dz.U. 2025 poz. 1893), dodano nowy wiersz SENT (Dz.U. 2024 poz. 1218,
-   wcześniej nieobecny w tej mapie mimo że akt jest w bazie referencyjnej).
-2. `prawo-polskie-v2/ROUTING-MAP.md` — analogiczna poprawka wierszy
-   akcyza i alkohol (SENT pominięty tu celowo — ROUTING-MAP to fasada
-   routingu domenowego, nie pełna lista aktów DR-06).
-3. `dr-06-podatki-finanse-publiczne-aml/references/BAZA-AKTOW-OKOLOAKCYZOWYCH.md`
-   → v1.1.0 → v1.2.0 — nowa sekcja 5 dokumentująca ten wzorzec
-   (ten sam fakt katalogowany niezależnie w 3 miejscach, brak
-   automatycznej synchronizacji między nimi).
-
-**Wniosek strukturalny (do rozważenia przy przyszłym audycie systemowym):**
-trzy niezależnie utrzymywane rejestry tego samego faktu (Dz.U. ustawy
-akcyzowej) to ten sam wzorzec ryzyka co wcześniej wykryta duplikacja
-PRAWO-HARDGATE.md / WERYFIKACJA-SLAD.md (v2.3, dwie niezależne
-implementacje tego samego mechanizmu). Rekomendacja: rozważyć, czy
-MAPA-AKTOW.md (lokalne, per-DR) i ROUTING-MAP.md (globalne, fasada) nie
-powinny odsyłać do jednego źródła metryk zamiast duplikować wiersze —
-nie wdrożono w tej sesji (poza zakresem żądania), tylko odnotowano.
-
-### BILANS CAŁOŚCIOWY (mianownik: 732 pliki .md)
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
 
 | Kategoria | Wynik |
 |---|---|
-| Błędów/luk merytorycznych naprawionych (cała sesja) | 110 |
 | Flagi otwarte | 9 |
 
-## AUDYT-2026-08-11e — Analogiczna kontrola aktualności: podatki i ustawy okołopodatkowe (VAT, PIT, CIT, Ordynacja podatkowa, KAS)
+## AUDYT-2026-08-11e — FAZA 3E shared/: MOD-ELIMINACJA-TEZ, LEGAL-QUALITY-GATE potwierdzone
 
-**Kontekst:** na żądanie użytkownika — "zrób analogicznie z podatkami i
-ustawami okołopodatkowymi, których najnowsze wersje musisz pobrać z
-ISAP" — kontynuacja podejścia zastosowanego dla akcyzy (AUDYT-2026-08-11/b).
+**Oba pliki — sprawdzone, solidna metodologia weryfikacji
+przepisów.** MOD-ELIMINACJA-TEZ.md (systematyczne wykluczanie
+przesłanek nieadekwatnych, z przykładem art. 25¹ §3 KP i ścieżką
+alternatywną art. 23¹ §1 KP), LEGAL-QUALITY-GATE.md (bramka
+weryfikacji KAŻDEGO cytowanego przepisu przez ISAP przed wpisaniem
+do pisma — dobra praktyka: wymóg PODANIA prawidłowego artykułu przy
+błędnym numerze, jawne poinformowanie użytkownika o uchyleniu
+przepisu z konkretną datą).
 
-**Metodologia:** web_search + weryfikacja obwieszczeń Marszałka Sejmu
-dla pięciu głównych aktów podatkowych (VAT, PIT, CIT, Ordynacja
-podatkowa, KAS), porównanie z oznaczeniami w `MAPA-AKTOW.md` i
-`ROUTING-MAP.md`.
-
-**Wynik — inny niż przy akcyzie:** wszystkich pięć t.j. było AKTUALNYCH
-(Dz.U. zgodne z najnowszym ogłoszonym tekstem jednolitym). Różnica
-względem akcyzy: tam nieaktualność dotyczyła samego t.j.; tu t.j. były
-poprawne, ale:
-1. Brakowało odnotowania wspólnej, przekrojowej nowelizacji Dz.U. 2026
-   poz. 846 (29.05.2026, zmienia jednocześnie OP, VAT, PIT, CIT, KAS) —
-   dodano jako zastrzeżenie do wszystkich pięciu wierszy w obu plikach.
-2. Znaleziono ⛔ FAKTYCZNĄ ROZBIEŻNOŚĆ przy KAS: nowelizacja oznaczona
-   w obu plikach jako "Dz.U. 2026 poz. 395" — dwa niezależne źródła
-   (gofin.pl, inforlex.pl) wskazują poprawnie **poz. 415**. Poprawiono
-   w obu plikach.
-
-**Naprawa:**
-1. Nowy plik: `dr-06-podatki-finanse-publiczne-aml/references/
-   BAZA-AKTOW-OKOLOPODATKOWYCH.md` (v1.0.0) — analogiczny do
-   BAZA-AKTOW-OKOLOAKCYZOWYCH.md, z sekcją STATUS AKTUALNOŚCI i jawnym
-   zastrzeżeniem, które akty NIE zostały zweryfikowane w tej turze
-   (PCC, spadki/darowizny, lokalne, ryczałt szczegółowo, sektorowe,
-   obligacje, usługi płatnicze, zawody, UFP — do zrobienia w kolejnej
-   sesji, jeśli sprawa tego wymaga).
-2. `dr-06-podatki-finanse-publiczne-aml/MAPA-AKTOW.md` — poprawiono 5
-   wierszy (VAT, PIT, CIT, OP, KAS): dodano nowelizacje post-t.j.,
-   poprawiono numer 395→415 dla KAS.
-3. `prawo-polskie-v2/ROUTING-MAP.md` — analogiczna poprawka tych samych
-   5 wierszy.
-
-**Zakres NIEOBJĘTY tą turą (jawnie odnotowany w bazie, nie pominięty
-milcząco):** PCC, podatek od spadków i darowizn, podatki i opłaty
-lokalne, ryczałt (szczegółowo), podatki sektorowe, obligacje, usługi
-płatnicze, biegli rewidenci, doradztwo podatkowe, UFP.
-
-### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
 
 | Kategoria | Wynik |
 |---|---|
-| Błędów/luk merytorycznych naprawionych (cała sesja) | 112 |
 | Flagi otwarte | 9 |
 
-## AUDYT-2026-08-11f — Druga tura podatkowa: spadki, darowizny, PCC, lokalne, ryczałt, gry hazardowe
+## AUDYT-2026-08-11f — Pełne zbadanie pokrycia akcyzy (na żądanie użytkownika): rozstrzygnięcie spornego weta, przestarzały t.j., luka wyrobów węglowych/gazowych
 
-**Kontekst:** kontynuacja na żądanie użytkownika — "teraz darowizny,
-spadki i dalsza seria różnych podatkowych aktów", po turze VAT/PIT/CIT/
-OP/KAS (AUDYT-2026-08-11e).
+**Kontekst:** Na żądanie użytkownika — kompleksowe zbadanie, czy
+temat akcyzy jest w pełni pokryty w systemie.
 
-**Wyniki:**
-1. ⛔ **Ustawa o podatku od spadków i darowizn** — nieaktualny t.j.
-   (Dz.U. 2024 poz. 1837 zamiast Dz.U. 2026 poz. 478, obwieszczenie z
-   27.03.2026). Dodatkowo: w `MAPA-AKTOW.md` wiersz tej ustawy W OGÓLE
-   NIE ISTNIAŁ — moduł `mod-ustawa-PCC-i-podatek-spadkow-darowizn`
-   obsługuje ten akt, ale lokalna mapa DR-06 go nie katalogowała
-   osobno (tylko PCC). Istniał wyłącznie w `ROUTING-MAP.md`, i to z
-   nieaktualnym numerem. Poprawiono/dodano w obu plikach. Odnotowano
-   też, że między starym a nowym t.j. weszły w życie dwie istotne
-   nowelizacje treściowe (Dz.U. poz. 1064/2025, poz. 1854/2025 — nowy
-   art. 4c), nie tylko techniczna zmiana numeru.
-2. ✅ PCC (Dz.U. 2026 poz. 191), podatki i opłaty lokalne (Dz.U. 2025
-   poz. 707), ryczałt (Dz.U. 2025 poz. 843) — wszystkie zgodne, bez zmian.
-3. ✅ Ustawa o grach hazardowych — wcześniej w ogóle bez przypisanego
-   numeru Dz.U. w wierszu "podatki sektorowe" (tylko "⚠️ zweryfikuj").
-   Ustalono: Dz.U. 2025 poz. 595 t.j. + nowelizacja Dz.U. 2026 poz. 176.
-   Dodano do obu plików.
+**USTALENIE WSTĘPNE:** dedykowany moduł mod-ustawa-akcyzowa-i-clo-
+UCC.md (dr-06) JUŻ był obszerny (366 linii) i SAMOŚWIADOMY (jawne
+flagi przy zmiennych pozycjach) — ZNALEZIONO jednak TRZY konkretne
+luki/nieścisłości wymagające naprawy:
 
-**Naprawa:** `BAZA-AKTOW-OKOLOPODATKOWYCH.md` → v1.0.0 → v1.1.0 (nowa
-sekcja 0a); `MAPA-AKTOW.md` — dodano brakujący wiersz spadki/darowizny,
-uzupełniono sektorowe; `ROUTING-MAP.md` — poprawiono wiersz spadki/
-darowizny, uzupełniono sektorowe.
+**1. ✅ ROZSTRZYGNIĘTA sporna kwestia weta (jawnie oznaczona w
+module jako "SPORNE — NIE ROZSTRZYGNIĘTE").** Zweryfikowano w 8+
+zgodnych, niezależnych źródłach (bankier.pl, alertmedyczny.pl,
+prawo.pl, newsmed.pl, portalspozywczy.pl, tvn24.pl, rynekzdrowia.pl,
+money.pl): Prezydent Nawrocki ZAWETOWAŁ W CAŁOŚCI DWIE odrębne
+ustawy (grudzień 2025) — podwyżkę opłaty cukrowej ORAZ podwyżkę
+skali akcyzy alkoholowej (z 5% do 15% w 2026, z 5% do 10% w 2027).
+⭐⭐ KLUCZOWE USTALENIE: weto NIE ZATRZYMUJE wzrostu cen w ogóle —
+BAZOWA podwyżka 5%/2026 z WCZEŚNIEJSZEJ, ODRĘBNEJ ustawy NADAL
+obowiązuje, zawetowano WYŁĄCZNIE dodatkową nadwyżkę ponad te 5%.
+Potwierdzone MATEMATYCZNIE: już istniejące w module stawki
+piwa/wina PRAWIDŁOWO odzwierciedlają TĘ bazową podwyżkę (222×1,05=
+233,1≈233 zł wino; 10,92×1,05=11,466≈11,47 zł piwo) — stawki w
+tabeli SĄ AKTUALNE, nie wymagały korekty liczbowej, TYLKO
+wyjaśnienia kontekstu.
 
-**Nadal NIEZWERYFIKOWANE (jawnie odnotowane, trzecia tura jeśli
-potrzebna):** podatek tonażowy, opłata cukrowa, podatek od sprzedaży
-detalicznej, ustawa o obligacjach, ustawa o usługach płatniczych,
-ustawa o biegłych rewidentach, ustawa o doradztwie podatkowym, ustawa
-o finansach publicznych (UFP).
+**2. Przestarzały t.j. samej ustawy akcyzowej.** Moduł cytował
+"Dz.U. 2025 poz. 126" — POTWIERDZONO (3+ zgodne źródła, w tym
+inforlex.pl z dosłownym cytatem "Wersja obowiązująca od
+2026.03.27"): aktualny t.j. to **Dz.U. 2026 poz. 412**.
 
-**Wzorzec potwierdzony po raz trzeci w tej sesji:** ta sama klasa
-błędu (stary t.j. mimo wcześniejszego "✅ VER") oraz nowy wariant tego
-samego wzorca (wiersz całkowicie nieobecny w jednym z dwóch równoległych
-rejestrów) — wzmacnia wcześniejszą rekomendację (AUDYT-2026-08-11d) o
-rozważeniu konsolidacji MAPA-AKTOW.md/ROUTING-MAP.md przy przyszłym
-audycie systemowym.
+**3. ⭐⭐ GENUINE LUKA TEMATYCZNA: wyroby węglowe i gazowe (cele
+opałowe) BYŁY CAŁKOWICIE NIEOBECNE w module** — odrębna kategoria
+akcyzowa (Dział II rozdz. 6 u.p.a.) od paliw silnikowych. DODANO
+kompletną nową sekcję: kluczowe zwolnienie dla gospodarstw domowych
+(art. 31a/31b), warunki formalne (dokument tożsamości przy węglu,
+oświadczenie przy gazie), zasady dla spółdzielni/wspólnot, brak
+zwolnienia dla wynajmujących komercyjnie, mechanizm "zakładu
+energochłonnego". Potwierdzone w 6+ zgodnych źródłach, w tym
+dosłowny tekst przepisów (arslege.pl, inforlex.pl) i interpretacja
+KIS (e-prawnik.pl).
 
-### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+DODATKOWO: zaktualizowano lokalną MAPA-AKTOW.md — dodano nowy wiersz
+o wecie z grudnia 2025 jako ODRĘBNYM fakcie od wcześniej już
+odnotowanej, INNEJ nieudanej próby nowelizacji akcyzy (druk 2457,
+skierowany do TK w lipcu 2026) — DWIE różne, kolejne nieudane próby
+zmiany akcyzy w krótkim odstępie czasu.
+
+**Rejestracja:** dr-06 SKILL.md v3.19→v3.20.
+
+### WNIOSEK — ODPOWIEDŹ NA PYTANIE UŻYTKOWNIKA
+
+Temat akcyzy NIE BYŁ w pełni pokryty przed tą weryfikacją — brakowało
+CAŁEJ kategorii (węgiel/gaz opałowy), jedna kluczowa kwestia
+pozostawała jawnie oznaczona jako nierozstrzygnięta, a numer
+tekstu jednolitego był nieaktualny. PO tej transzy: pokrycie
+ZNACZĄCO ROZSZERZONE i ZAKTUALIZOWANE, choć NIE można wykluczyć
+dalszych, drobniejszych luk (np. akcyza na e-papierosy/płyn do
+e-papierosów, saszetki nikotynowe — wspomniane przelotnie w
+wynikach wyszukiwania, ale NIE zbadane szczegółowo w tej transzy).
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
 
 | Kategoria | Wynik |
 |---|---|
-| Błędów/luk merytorycznych naprawionych (cała sesja) | 115 |
 | Flagi otwarte | 9 |
 
-## AUDYT-2026-08-11g — FAZA 3E shared/: AUDYT-KONCOWY.md, BRAKI-FORMALNE.md, CLAIM-VALIDATION.md potwierdzone
+## AUDYT-2026-08-11g — Kontynuacja badania akcyzy: DUŻA luka uzupełniona — wyroby nikotynowe/e-papierosy (mapa akcyzowa 2025-2027)
 
-**AUDYT-KONCOWY.md** — gate jakości pisma (skala 0-10, 6 kategorii),
-metodologia generyczna bez własnych progów prawnych. Sprawdzone, bez
-zastrzeżeń.
+**Kontekst:** Kontynuacja na żądanie użytkownika badania pełnego
+pokrycia tematu akcyzy — sprawdzono wcześniej tylko przelotnie
+wspomniane kategorie e-papierosów i saszetek nikotynowych.
 
-**BRAKI-FORMALNE.md** — klasyfikacja braków formalnych pisma
-(krytyczny/istotny/techniczny), lista generyczna. Sprawdzone, bez
-zastrzeżeń.
+**POTWIERDZONA GENUINE, DUŻA LUKA:** cała kategoria wyrobów
+nikotynowych/waporyzacyjnych — objęta MASOWĄ reformą wprowadzaną
+etapowo 2025-2027 ("mapa akcyzowa") — BYŁA CAŁKOWICIE NIEOBECNA w
+module, mimo że to aktywnie regulowany, dynamicznie rozwijający się
+obszar akcyzy.
 
-**CLAIM-VALIDATION.md** — metodologia walidacji twierdzeń strony
-względem materiału dowodowego i przepisów (KROK C0-C4, CV-ALT).
-Zawiera w historii zmian (v1.1.0) odniesienie do konkretnej sprawy
-(VII P 94/25 — ta sama sprawa co w bieżącej sesji użytkownika, inny
-wątek) jako przykład ilustracyjny w changelogu, nie jako aktywnie
-cytowaną podstawę prawną — numery artykułów tam (art. 94³ §3 KP,
-art. 101¹ KP, art. 6 KEA) są historycznym zapisem incydentu, nie
-twierdzeniem "aktualnie obowiązuje", więc nie podlegają weryfikacji
-aktualności w tym trybie. Bez zastrzeżeń.
+**DODANO kompletną, nową sekcję**, zweryfikowaną w 8+ zgodnych
+źródłach, w tym BEZPOŚREDNIO OpenLEX/sip.lex.pl (dosłowny tekst
+art. 99ca-99cc ustawy akcyzowej, Dz.U.2026.412 t.j.):
+- Harmonogram dwuetapowy: urządzenia/płyn jednorazowy — obowiązek
+  od 1.07.2025 (okres przejściowy do 31.08.2025); saszetki i inne
+  wyroby nikotynowe — okres przejściowy DŁUŻSZY, do 30.04.2026
+- Płyn do e-papierosów: 0,96→1,44→1,80 zł/ml (2025-2027)
+- Urządzenia do waporyzacji + zestawy części: po 40 zł/sztukę
+  (POTWIERDZONE dosłownym tekstem przepisu)
+- Wyroby nowatorskie: 565,52 zł/kg (2025) + 20% w 2026
 
-### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+**⭐⭐ UCZCIWIE ODNOTOWANA, NIEROZSTRZYGNIĘTA rozbieżność:** stawki
+saszetek nikotynowych POKAZUJĄ SPRZECZNE mapy w RÓŻNYCH źródłach
+medialnych (150→200→250 vs 100→150→300 zł/kg) — ZAMIAST wybrać
+JEDNĄ arbitralnie, wykorzystano dosłowny tekst przepisu (art. 99cc
+ust. 5), który definiuje stawkę saszetek jako RELACJĘ ("dwukrotność
+stawki" urządzeń do waporyzacji), NIE kwotę absolutną — dodano
+JAWNE zalecenie weryfikacji na ISAP przed cytowaniem konkretnej
+kwoty, zamiast polegania na wzajemnie sprzecznych mapach medialnych.
+
+**Rejestracja:** dr-06 SKILL.md v3.20→v3.21.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
 
 | Kategoria | Wynik |
 |---|---|
-| Błędów/luk merytorycznych naprawionych (cała sesja) | 115 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11h — Kontynuacja badania akcyzy: olej opałowy vs napędowy — klasyczny mechanizm przeciwdziałania oszustwom, dotąd nieobecny
+
+**Kontekst:** Na żądanie użytkownika — kontynuacja badania pełnego
+pokrycia akcyzy, konkretnie: olej napędowy i kwestia użycia
+opałowego jako napędowego.
+
+**POTWIERDZONA, GENUINE LUKA:** temat CAŁKOWICIE nieobecny w module,
+mimo że to jeden z KLASYCZNYCH, dobrze udokumentowanych mechanizmów
+oszustw akcyzowych w Polsce.
+
+**DODANO kompletną sekcję**, zweryfikowaną w 6+ zgodnych źródłach, w
+tym BEZPOŚREDNIO Trybunał Konstytucyjny (komunikat prasowy, Rząd 1)
+i wyjaśnienia Ministerstwa Finansów:
+
+- Istota problemu: olej opałowy i napędowy są chemicznie zbliżone
+  (opałowy MOŻE być wlany do baku), ale opodatkowane RADYKALNIE
+  różnie (opałowy ok. 4-6× tańszy) — stąd silna pokusa nadużycia
+- Mechanizm znakowania/barwienia (art. 90 u.p.a.): znacznik
+  chemiczny ACCUTRACE PLUS + barwienie na czerwono
+- Mechanizm oświadczeń: sprzedawca MUSI uzyskać identyfikujące
+  oświadczenie nabywcy + miesięczne zestawienia dla organu
+- ⭐⭐ DWUTOROWE sankcje z KLUCZOWYM rozróżnieniem adresata:
+  (A) sankcyjna stawka 1822 zł/1000 l (odpowiedzialność PODATKOWA,
+  niezależna od winy, gdy brak prawidłowych oświadczeń U
+  SPRZEDAWCY), (B) odpowiedzialność KARNA SKARBOWA nabywcy (grzywna
+  do 720 stawek dziennych LUB do 2 lat więzienia LUB oba), GDY
+  sprzedawca dopełnił formalności, a TO nabywca użył oleju
+  niezgodnie z przeznaczeniem — sprzedawca z dochowaną starannością
+  jest CHRONIONY
+- Orzecznictwo WSA Szczecin: znakowanie = warunek PODSTAWOWY,
+  formalności (ewidencja, zabezpieczenie) = warunki POMOCNICZE
+- TK: rygoryzm warunków preferencyjnej stawki UZNANY za zgodny z
+  Konstytucją, mimo surowości
+
+**Rejestracja:** dr-06 SKILL.md v3.21→v3.22.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11i — Automaty do papierosów (case study historyczny) + odpowiedź na pytanie o pełne pokrycie akcyzy paliwowej
+
+**Kontekst:** Na żądanie użytkownika — (1) temat automatów do
+robienia papierosów jako mechanizmu obchodzenia akcyzy, (2) ocena,
+czy akcyza paliwowa jest w pełni pokryta.
+
+**1. Automaty do papierosów — DODANE jako case study historyczny.**
+Zweryfikowano w 5+ zgodnych, głównie historycznych źródłach
+(2013-2015): schemat wykorzystywał BRAK legalnej definicji "suchego
+tytoniu", sądy STOSOWAŁY wykładnię językową na korzyść podatnika
+MIMO sprzeciwu organów podatkowych — LUKA ZAMKNIĘTA reformą od
+1.01.2015 (nowa definicja "produkcji" wykluczająca TYLKO ręczne
+wytwarzanie domowe, wymóg rejestracji jako "skład podatkowy" dla
+maszynowego wytwarzania w punktach handlowych, redefinicja "suszu
+tytoniowego" bez względu na wilgotność). ⭐ Odnotowano, że TEN SAM
+mechanizm ("skład podatkowy" jako warunek legalności) POWTÓRZYŁ SIĘ
+w PÓŹNIEJSZEJ reformie wyrobów nikotynowych 2025-2027 (już
+opisanej wcześniej w tej sesji) — SPÓJNY wzorzec legislacyjny.
+
+**2. Odpowiedź na pytanie "czy w pełni pokryłem akcyzę paliwową":
+NIE BYŁA w pełni pokryta — ZNALEZIONO i UZUPEŁNIONO 3 elementy:**
+
+a) ⭐⭐ Paliwa alternatywne (CNG/LNG/biogaz/wodór) — CAŁKOWICIE
+   nieobecne — stawka **0 zł** (od 14.08.2019) — potwierdzone
+   BEZPOŚREDNIO podatki.gov.pl (Rząd 1)
+
+b) ⭐⭐ Opłata paliwowa i opłata emisyjna — ODRĘBNE od akcyzy daniny,
+   BYŁY wspominane TYLKO fragmentarycznie ("akcyza + opłata
+   paliwowa" bez rozbicia) — DODANO pełne rozróżnienie: opłata
+   paliwowa (2026: 210,29/453,52/256,75 zł zależnie od paliwa,
+   WALORYZOWANA corocznie wg CPI) + opłata emisyjna (80 zł/m³, od
+   2019) — z JASNYM wyjaśnieniem, że PEŁNY koszt fiskalny paliwa =
+   suma TRZECH odrębnych elementów, nie tylko sama akcyza
+
+c) Zaktualizowano NAJBARDZIEJ zmienną pozycję (benzyna/diesel) o
+   NOWSZY punkt danych (1540 zł/1000 l, źródło z 25.06.2026) —
+   POTWIERDZAJĄCY ciągłą, aktywną zmienność — z UTRZYMANYM
+   ostrzeżeniem, by NIE polegać na ŻADNEJ z podanych wartości bez
+   świeżej weryfikacji, z uwagi na WZORZEC POWTARZAJĄCYCH SIĘ,
+   krótkoterminowych przedłużeń pakietu CPN
+
+**Rejestracja:** dr-06 SKILL.md v3.22→v3.23. Moduł akcyzowy urósł w
+TEJ sesji z 366 do 771 linii (ponad dwukrotnie).
+
+### WNIOSEK — PODSUMOWANIE CAŁEJ SERII PYTAŃ O AKCYZĘ
+
+Po SERII pytań użytkownika (weto akcyzy alkoholowej, wyroby
+węglowe/gazowe, wyroby nikotynowe, olej opałowy vs napędowy,
+automaty do papierosów, paliwa alternatywne, opłata paliwowa/
+emisyjna) — moduł akcyzowy przeszedł od PODSTAWOWEGO, częściowo
+niepewnego stanu DO OBSZERNEGO, wielowymiarowego pokrycia. NIE
+MOŻNA jednak twierdzić, że pokrycie jest TERAZ "w 100% wyczerpujące"
+— akcyza to ROZLEGŁA dziedzina (obejmuje TAKŻE m.in. samochody
+osobowe, energię elektryczną, szczegółowe procedury WIA/zawieszenia
+poboru — te JUŻ były wcześniej w module) — KAŻDE KOLEJNE, konkretne
+pytanie MOŻE wciąż odkryć dalsze, niezbadane niuanse.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11j — Kompleksowa taksonomia technik obchodzenia akcyzy (na żądanie użytkownika) — synteza + dwie nowe kategorie
+
+**Kontekst:** Na żądanie użytkownika — zbadanie alternatywnych
+sposobów obchodzenia akcyzy jako CAŁOŚCI, nie pojedynczych,
+punktowych schematów.
+
+**Zbudowano kompleksową, syntetyzującą sekcję** ŁĄCZĄCĄ wcześniej
+opisane schematy (olej opałowy, automaty do papierosów) z DWIEMA
+GENUINE NOWYMI kategoriami, zweryfikowaną w 8+ zgodnych źródłach, w
+tym akademickich (czasopismo naukowe, praca doktorska UŁ) i
+oficjalnych (opinia prof. Modzelewskiego cytowana przez prawo.pl):
+
+**⭐ Strukturalny wgląd:** akcyza ma charakter REGRESYWNY (stawki
+kwotowe, nie procentowe) — WRAZ ze wzrostem skali, udział podatku w
+cenie MALEJE — CZYNI to oszustwa akcyzowe wyjątkowo opłacalnymi,
+"nieporównywalnymi z niczym innym" wg cytowanej opinii eksperckiej.
+
+**⭐⭐⭐ DRAMATYCZNY, historyczny case study — "afera spirytusowa"
+(2004-2010):** import spirytusu konsumpcyjnego z Ukrainy,
+DEKLAROWANEGO na granicy jako "płyn do spryskiwaczy szyb" —
+potwierdzone konkretnymi wyliczeniami: należności z JEDNEJ cysterny
+powinny wynosić 4,5 mln zł, zapłacono 35 tys. — szacunek 80 mln
+litrów przez jedno przejście graniczne w latach 2004-2009, NIK
+potwierdził straty budżetu bliskie 3 mld zł.
+
+**⭐⭐ NOWA kategoria — nadużycie skażonego alkoholu:** technika
+"odkażania" i "skażania sposobem węgierskim" (słabsza metoda
+umożliwiająca odzyskanie spirytusu pitnego) — zdelegalizowana
+reformą z 27.05.2017, ALE ⚠️ ŚWIEŻE źródło (maj 2026) pokazuje, że
+temat POZOSTAJE aktywny — MF proponuje KOLEJNĄ likwidację podobnego
+zwolnienia, branża sama ostrzega przed nadużyciami.
+
+**⭐ NOWA kategoria — firmy słupy/bufory w łańcuchu dostaw:**
+mechanizm zaadaptowany z klasycznych karuzel VAT, z konkretnym,
+udokumentowanym przykładem (inna branża, ale mechanika przenoszalna
+na akcyzę) — osoby-słupy podpisujące dokumenty w restauracjach,
+firmy bez rzeczywistego zaplecza, pozorowane WDT.
+
+Dodano też esklację odpowiedzialności karnej przy przemycie
+zorganizowanym (art. 258 KK + możliwe pranie pieniędzy).
+
+**Rejestracja:** dr-06 SKILL.md v3.23→v3.24. Moduł akcyzowy urósł w
+CAŁEJ tej sesji z 366 do 896 linii (ponad dwukrotnie).
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11k — Techniki obchodzenia cła (na żądanie użytkownika): trzy potwierdzone przykłady, w tym dwie duże, udokumentowane afery krajowe
+
+**Kontekst:** Na żądanie użytkownika — analogicznie do akcyzy,
+zbadanie technik obchodzenia CŁA, z konkretnymi wskazanymi
+przykładami (produkty techniczne/paszowe jako spożywcze po imporcie,
+"postarzanie" kości słoniowej).
+
+**Dodano nową sekcję 14a** do mod-clo-podroznych-limity-towary-
+zabronione.md, zweryfikowaną w 8+ zgodnych źródłach, w tym oficjalne
+wytyczne Komisji Europejskiej (Dz.Urz.UE C 2021/528, Rząd
+1-adjacent):
+
+**⭐⭐⭐ Przykład 1 — "zboże techniczne" (afera 2022-2023):** Ukraińskie
+zboże/rzepak deklarowane na granicy jako "zboże techniczne"
+(niespożywcze, np. na spalanie) — KLUCZOWA luka: ta kategoria W
+OGÓLE nie istnieje formalnie w klasyfikacji celnej (potwierdzone
+rp.pl) — po przekroczeniu granicy "przeistaczało się" w łańcuchu
+sprzedaży w zboże paszowe LUB konsumpcyjne, trafiając do młynów.
+Skala: 7 połączonych postępowań w Rzeszowie, kilkanaście milionów
+kg zboża. Kwalifikacja: oszustwo wielkiej wartości + oszustwa
+celne, do 10 lat więzienia.
+
+**⭐⭐⭐ Przykład 2 — "afera drobiowa" (2022):** Techniczne kwasy
+tłuszczowe z wyraźnym oznaczeniem "nie nadaje się do produkcji
+spożywczej" — "oczyszczane" w laboratorium i sprzedawane jako
+tłuszcze paszowe dla drobiu. Przychód co najmniej 176 mln zł.
+Metoda ukrycia: fałszowanie certyfikatów i wyników badań.
+Kwalifikacja: zorganizowana grupa przestępcza + pranie pieniędzy.
+
+**⭐⭐⭐ Przykład 3 — "postarzanie" kości słoniowej (CITES):**
+wykorzystanie wąskich, legalnych wyjątków (towar sprzed 18.01.1990
+dla słoni afrykańskich, sprzed 1947 r. jako antyk) — technika:
+fizyczne postarzanie świeżo pozyskanej kości, fałszowanie
+dokumentów pochodzenia, mieszanie legalnych antyków z nielegalnym
+materiałem. Opisano "tajlandzką furtkę" — praktycznie niemożliwą do
+zamknięcia lukę międzynarodową, pogłębianą korupcją.
+
+**Dodano cztery wspólne, przenoszalne wnioski metodologiczne:** luka
+definicyjna jako punkt wyjścia, "przeistoczenie" następujące W
+łańcuchu dostaw a nie na samej granicy, legalne wyjątki jako
+"osłona" dla nielegalnego materiału, fałszowanie dokumentacji jako
+wspólny element wszystkich trzech przykładów.
+
+**Rejestracja:** dr-06 SKILL.md v3.24→v3.25.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11l — Ustawa o rachunkowości: znaleziono CAŁKOWITĄ nieobecność fundamentalnej ustawy, nowy moduł utworzony (odpowiedź na pytanie o pełne pokrycie, analogicznie do podatków/akcyzy)
+
+**Kontekst:** Na żądanie użytkownika — zbadanie, czy dziedzina
+rachunkowości jest w pełni pokryta, analogicznie do wcześniejszej
+serii pytań o podatki i akcyzę.
+
+**⭐⭐⭐ ZNALEZISKO MAJOR: fundamentalna Ustawa o rachunkowości z
+29.09.1994 (dotyczy KAŻDEJ spółki prowadzącej pełną księgowość,
+NIEZALEŻNIE od podatków) BYŁA CAŁKOWICIE NIEOBECNA w systemie jako
+samodzielny temat** — jedyne odniesienie to POJEDYNCZA, MYLĄCA
+linia w mod-ustawa-biegli-rewidenci-zawod.md odsyłająca "do modułów
+CIT/Ordynacja podatkowa" — CO BYŁO BŁĘDNE, bo TE moduły dotyczą
+prawa PODATKOWEGO, nie BILANSOWEGO — potwierdzone ZEROWYM wynikiem
+wyszukiwania frazy "księgi rachunkowe"/"zasady rachunkowości" w
+CAŁYM systemie (25-modułowa domena DR-06).
+
+**Utworzono kompletny, nowy moduł**, zweryfikowany w 9+ zgodnych,
+autorytatywnych źródłach, w tym BEZPOŚREDNIO isap.sejm.gov.pl:
+- Aktualny t.j.: Dz.U. 2026 poz. 522 (16.04.2026)
+- ⭐⭐ Kluczowy próg podmiotowy: 2 500 000 EUR przychodów netto —
+  ISTOTNIE PODWYŻSZONY (potwierdzone crowe.com, maj 2026)
+- Fundamentalne zasady: ciągłości (art. 5), memoriałowa/
+  współmierności (art. 6)
+- Terminy sprawozdawcze: do 31.03 sporządzenie+podpisanie, do 30.06
+  zatwierdzenie+złożenie do KRS
+- ⭐⭐⭐ ZŁOŻONY, WIELOWARSTWOWY mechanizm sankcji: art. 77 u.o.r.
+  (ZWYKŁE przestępstwo, NIE karnoskarbowe! — do 2 lat więzienia) +
+  RÓWNOLEGLE art. 60/61 KKS (przestępstwo/wykroczenie skarbowe, do
+  240 stawek dziennych) — z mechanizmem zbiegu: wykonuje się TYLKO
+  najsurowszą karę, ALE środki karne z WSZYSTKICH przepisów MOGĄ
+  być wykonane łącznie. Rozróżniono księgę WADLIWĄ (naruszenie
+  formy) od NIERZETELNEJ (fałszowanie treści).
+
+**Naprawiono błędne odesłanie** w mod-ustawa-biegli-rewidenci-
+zawod.md, TERAZ poprawnie wskazujące na nowy moduł.
+
+**Rejestracja (Reguła 2) + natychmiastowa synchronizacja map
+(konsekwentne stosowanie wcześniej wyciągniętej lekcji):** nowy
+moduł zarejestrowany w SKILL.md dr-06 (25→26 modułów), lokalnej
+MAPA-AKTOW.md ORAZ centralnej ROUTING-MAP.md — wszystko w TEJ samej
+turze. dr-06 SKILL.md v3.25→v3.26.
+
+### WNIOSEK — PODSUMOWANIE SERII PYTAŃ "CZY W PEŁNI POKRYTE"
+
+Trzecia z rzędu (po akcyzie, po podatkach ogólnie) dziedzina, w
+KTÓREJ seria pytań użytkownika o KOMPLETNOŚĆ ujawniła GENUINE,
+ISTOTNE luki — TYM RAZEM SKALA była WIĘKSZA niż poprzednio: CAŁA
+fundamentalna ustawa, NIE tylko pojedyncze podtematy w ramach
+istniejącego modułu.
+
+### BILANS CAŁOŚCIOWY (mianownik: 730+1=731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Nowe moduły utworzone (cała sesja) | 16 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11m — Uczciwa mapa pokrycia dziedziny rachunkowości (na żądanie użytkownika)
+
+**Kontekst:** Użytkownik zapytał wprost, czy dziedzina rachunkowości
+jest już w pełni zbadana, i poprosił o bazę głównych tematów z
+oznaczeniem poziomu pokrycia, jeśli nie.
+
+**UCZCIWA ODPOWIEDŹ: NIE, dziedzina NIE JEST w pełni pokryta.**
+Ustawa o rachunkowości ma 165 artykułów w 12 rozdziałach — nowy
+moduł (v1.0.0) obejmował TYLKO fundamenty.
+
+**Zbudowano tabelę 20 głównych podtematów** z oznaczeniami 🟢/🟡/🔴:
+- 🟢 PEŁNE: 3 pozycje (15%) — zakres podmiotowy/próg, zasady
+  ciągłości i memoriałowa, sankcje
+- 🟡 CZĘŚCIOWE: 2 pozycje (10%) — usługowe prowadzenie ksiąg (tylko
+  wzmianka o OC), forma elektroniczna
+- 🔴 BRAK: 15 pozycji (75%) — W TYM kluczowe, centralne tematy:
+  DOKUMENTACJA księgowa (dowody księgowe), INWENTARYZACJA, WYCENA
+  aktywów/pasywów (jeden z NAJWIĘKSZYCH rozdziałów ustawy),
+  STRUKTURA sprawozdania finansowego (bilans/RZiS/informacja
+  dodatkowa — CENTRALNY temat CAŁEJ ustawy), sprawozdania
+  SKONSOLIDOWANE, badanie/ogłaszanie sprawozdań, uproszczenia dla
+  jednostek MIKRO/MAŁYCH (dotyczy WIĘKSZOŚCI małych spółek z o.o.),
+  przechowywanie dokumentacji, odpowiedzialność cywilna, ESG/CSRD
+
+**Dodano rekomendację priorytetów** dla przyszłej kontynuacji:
+wycena, struktura sprawozdania finansowego, uproszczenia mikro/małe
+— jako trzy tematy o NAJWIĘKSZYM prawdopodobieństwie praktycznego
+zastosowania.
+
+**Rejestracja:** moduł zaktualizowany do v1.1.0. dr-06 SKILL.md
+v3.26→v3.27.
+
+### WNIOSEK METODOLOGICZNY
+
+TA transza pokazuje WARTOŚĆ jawnej, ustrukturyzowanej samooceny
+pokrycia — ZAMIAST mglistego "jeszcze nie wszystko sprawdziłem",
+KONKRETNA tabela z LICZBAMI (15%/10%/75%) daje użytkownikowi
+JASNY, actionable obraz stanu i PODSTAWĘ do decyzji, KTÓRE tematy
+kontynuować w PIERWSZEJ kolejności.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11n — Wypełnianie luk ustawy o rachunkowości: struktura sprawozdania finansowego (luka #9 zamknięta)
+
+**Kontekst:** Na żądanie użytkownika ("pokrywamy te dziedziny") —
+systematyczne wypełnianie luk zidentyfikowanych w mapie pokrycia,
+zaczynając od najwyższego priorytetu.
+
+**DODANO sekcję 4a — struktura sprawozdania finansowego**,
+zweryfikowaną w 7+ zgodnych źródłach, w tym z dosłownym cytowaniem
+art. 45 ustawy:
+
+- Podstawowy skład (art. 45 ust. 2, DOTYCZY WSZYSTKICH): bilans +
+  RZiS + informacja dodatkowa (wprowadzenie + dodatkowe informacje/
+  objaśnienia)
+- ⭐⭐ Rozszerzony skład (art. 45 ust. 3): DODATKOWO zestawienie zmian
+  w kapitale + RPP — DLA jednostek INNYCH niż mikro/małe LUB
+  spełniających próg z art. 64 ust. 1 pkt 4 — ⭐ ODKRYTE BEZPOŚREDNIE
+  POWIĄZANIE strukturalne między progiem "rozszerzonego
+  sprawozdania" a progiem "obowiązkowego badania przez biegłego
+  rewidenta" (ten sam art. 64) — WAŻNA obserwacja łącząca DWIE
+  dotąd oddzielnie identyfikowane luki (#9 i #12)
+- Wymogi formalne: język polski, PLN, WYŁĄCZNIE forma elektroniczna
+  (od 1.10.2018), podpis kwalifikowany/zaufany, odpowiedzialność
+  formalna kierownika jednostki (art. 69) NAWET przy delegacji
+  faktycznego wykonania
+- Forma ustrukturyzowana (XML) — z WYJĄTKIEM "dodatkowych informacji
+  i objaśnień", które NIE mają narzuconego formatu
+
+**Zaktualizowano mapę pokrycia w module:** pozycja #9 zmieniona z
+🔴 BRAK na 🟢 PEŁNE. Nowy bilans: 4/20 PEŁNE (20%), 2/20 CZĘŚCIOWE
+(10%), 14/20 BRAK (70%) — WIDOCZNY, choć wciąż niewielki, postęp.
+
+**Rejestracja:** moduł zaktualizowany do v1.2.0. dr-06 SKILL.md
+v3.27→v3.28.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11o — Wypełnianie luk ustawy o rachunkowości: wycena aktywów i pasywów (luka #8, częściowo domknięta) + naprawa duplikatu treści
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — wypełnianie
+zidentyfikowanych luk, druga transza tej samej tury.
+
+**DODANO sekcję 4b — wycena aktywów i pasywów**, zweryfikowaną w 5+
+zgodnych źródłach, w tym BEZPOŚREDNIO dosłowny tekst art. 28
+(OpenLEX z aktualnym t.j. Dz.U.2026.522): moment wyceny (nie
+rzadziej niż na dzień bilansowy), główne metody wg rodzaju
+składnika (środki trwałe wg ceny nabycia/kosztu wytworzenia/wartości
+przeszacowanej; inwestycje krótkoterminowe wg ceny rynkowej/
+niższej z dwóch/skorygowanej ceny nabycia; rzeczowe składniki
+obrotowe wg niższej z ceny nabycia i sprzedaży netto — klasyczna
+zasada ostrożności; należności w kwocie wymaganej zapłaty),
+definicja "skorygowanej ceny nabycia", odpisy z tytułu trwałej
+utraty wartości, szczególny reżim zakładów ubezpieczeń na życie,
+oraz odniesienie do KSR nr 4 jako pomocniczego źródła.
+
+**⚠️ PRZY OKAZJI: znaleziono i naprawiono BŁĄD WŁASNEJ EDYCJI** —
+aktualizacja podsumowania liczbowego map pokrycia POZOSTAWIŁA
+zduplikowaną, złamaną treść (fragment starej wersji nie został w
+pełni usunięty przy poprzedniej edycji) — NATYCHMIAST wykryte
+weryfikacją po edycji i naprawione.
+
+**Zaktualizowano mapę pokrycia:** pozycja #8 zmieniona z 🔴 BRAK na
+🟡 CZĘŚCIOWE (główne metody wyceny z art. 28 opisane, ALE cały
+rozdział 4 obejmuje art. 28-42 — szczegóły amortyzacji/rezerw/
+ustalania wyniku finansowego POZA art. 28 nadal nieopisane). Nowy
+bilans: 4/20 PEŁNE (20%), 3/20 CZĘŚCIOWE (15%), 13/20 BRAK (65%).
+
+**Rejestracja:** moduł zaktualizowany do v1.3.0. dr-06 SKILL.md
+v3.28→v3.29.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11p — Wypełnianie luk ustawy o rachunkowości: jednostki mikro/małe (luka #13 domknięta) — WSZYSTKIE TRZY pierwotnie rekomendowane priorytety ukończone
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — trzecia transza
+wypełniania luk tego samego dnia.
+
+**DODANO sekcję 4c — jednostki mikro i małe**, zweryfikowaną w 7+
+zgodnych źródłach, w tym z dosłownym cytowaniem art. 3 ust. 1a-1d/1h:
+
+- ⚠️ Ważna data graniczna: od 1.01.2025 zmienione definicje (Dz.U.
+  2024 poz. 1863), stosowane do sprawozdań za rok obrotowy
+  rozpoczynający się PO 31.12.2023
+- Progi jednostki MIKRO: 2 mln zł aktywów / 4 mln zł przychodów /
+  10 osób (2 z 3)
+- Progi jednostki MAŁEJ: 33 mln zł / 66 mln zł / 50 osób (2 z 3)
+- Mechanizm utraty statusu (DWA kolejne lata przekroczenia) i
+  kwalifikacja "przejściowa" (art. 3 ust. 1d)
+- Katalog 6 uproszczeń: uproszczone sprawozdanie wg załączników 4/5,
+  możliwość niesporządzania informacji dodatkowej (tylko mikro),
+  zwolnienie ze sprawozdania z działalności, uproszczona ewidencja
+  środków trwałych, amortyzacja podatkowa = bilansowa, leasing wg
+  zasad podatkowych
+- ⭐ Kluczowe zastrzeżenie: SPEŁNIENIE progów NIE JEST automatyzmem —
+  o STOSOWANIU uproszczeń decyduje kierownik/organ zatwierdzający w
+  formie uchwały
+- Wyłączenia (art. 3 ust. 1h): krajowe instytucje płatnicze, emitenci
+  na rynku regulowanym EOG
+
+**⚠️ Przy aktualizacji podsumowania liczbowego — TYM RAZEM
+ZASTOSOWANO OSTROŻNĄ METODĘ** (pełny, świeży odczyt PRZED edycją,
+jednorazowa zamiana CAŁEGO bloku) — ZAPOBIEGŁO to POWTÓRZENIU
+błędu duplikacji z poprzedniej transzy. DODATKOWO naprawiono
+NIESPÓJNOŚĆ — sekcja "REKOMENDACJA PRIORYTETÓW" wskazywała WCIĄŻ
+JAKO przyszłe priorytety tematy JUŻ ukończone w TEJ turze —
+ZAKTUALIZOWANO na NOWE priorytety (dokumentacja księgowa,
+inwentaryzacja, badanie przez biegłego rewidenta).
+
+**Zaktualizowano mapę pokrycia:** pozycja #13 zmieniona z 🔴 BRAK na
+🟢 PEŁNE. Nowy bilans: 5/20 PEŁNE (25%), 3/20 CZĘŚCIOWE (15%), 12/20
+BRAK (60%) — WSZYSTKIE trzy PIERWOTNIE rekomendowane priorytety
+(#8, #9, #13) SĄ TERAZ ukończone.
+
+**Rejestracja:** moduł zaktualizowany do v1.4.0. dr-06 SKILL.md
+v3.29→v3.30.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11q — Wypełnianie luk ustawy o rachunkowości: dokumentacja księgowa/dowody księgowe (luka #6 domknięta)
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — czwarta transza
+wypełniania luk tego samego dnia.
+
+**DODANO sekcję 3a — dokumentacja księgowa (dowody księgowe)**,
+zweryfikowaną w 8+ zgodnych źródłach, z dosłownym cytowaniem art.
+20-23:
+
+- Trzy podstawowe rodzaje dowodów (zewnętrzne obce/własne,
+  wewnętrzne) + trzy specjalne (zbiorcze, rozliczeniowe, zastępcze)
+- ⭐⭐⭐ WAŻNY wyjątek: dowody ZASTĘPCZE NIE MOGĄ dotyczyć zakupów
+  opodatkowanych VAT ani skupu metali nieżelaznych od ludności —
+  mechanizm anty-nadużyciowy, analogiczny do innych już opisanych
+  w systemie mechanizmów przeciwdziałania oszustwom
+- Sześć obowiązkowych elementów dowodu (art. 21 ust. 1), z
+  wyjątkiem dla "zwykłych" dowodów (art. 21 ust. 1a)
+- Zasady dla walut obcych i dokumentów w języku obcym
+- Wymogi merytoryczne (art. 22, w tym zakaz wymazywania/przeróbek —
+  bezpośrednie powiązanie z pojęciem księgi NIERZETELNEJ z KKS,
+  już opisanym w sekcji 5) i formalne (art. 23)
+
+**Zaktualizowano mapę pokrycia**, tym razem metodą Python (pełna
+kontrola tekstu, zapobiegająca powtórzeniu wcześniejszych błędów
+str_replace przy specjalnych znakach/emoji). Pozycja #6 zmieniona z
+🔴 BRAK na 🟢 PEŁNE. WYKONANO JEDNORAZOWĄ, KOMPLEKSOWĄ aktualizację
+CAŁEGO bloku podsumowania+rekomendacji (nie punktową), z
+POPRZEDZAJĄCYM świeżym odczytem — ZWERYFIKOWANO po edycji: dokładnie
+JEDNO wystąpienie każdej sekcji, ZERO duplikatów.
+
+Nowy bilans: 6/20 PEŁNE (30%), 3/20 CZĘŚCIOWE (15%), 11/20 BRAK
+(55%).
+
+**Rejestracja:** moduł zaktualizowany do v1.5.0. dr-06 SKILL.md
+v3.30→v3.31.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11r — Wypełnianie luk ustawy o rachunkowości: inwentaryzacja (luka #7 domknięta) — dziedzina zbliża się do połowy pokrycia
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — piąta transza
+wypełniania luk tego samego dnia.
+
+**DODANO sekcję 3b — inwentaryzacja**, zweryfikowaną w 6+ zgodnych
+źródłach, z dosłownym cytowaniem art. 26-27 (OpenLEX, aktualny t.j.
+Dz.U.2026.522):
+
+- Trzy metody: spis z natury (najbardziej pracochłonna, dla
+  składników mierzalnych/policzalnych), potwierdzenie sald (banki/
+  kontrahenci), weryfikacja (dla składników niemożliwych do
+  zinwentaryzowania inaczej — grunty, WNiP, rozrachunki
+  publicznoprawne)
+- ⭐⭐⭐ Rozbudowana reguła terminowa (art. 26 ust. 3): dla większości
+  składników — rozpoczęcie nie wcześniej niż 3 miesiące przed
+  końcem roku, zakończenie do 15 dnia następnego roku, z WAŻNYM
+  ograniczeniem (stan wg ksiąg NIE może być ustalony PO dniu
+  bilansowym); dla zapasów w strzeżonych składowiskach z ewidencją
+  ilościowo-wartościową — znacznie dłuższy cykl, raz na 2 lata
+- Szczególny termin dla potwierdzenia sald: 1.10-15.01
+- Dokumentowanie wyników (art. 27) — różnice MUSZĄ być rozliczone
+  w księgach TEGO roku, na który przypadał termin inwentaryzacji
+- Odniesienie do KSR nr 12 jako pomocniczego źródła technik
+  przeprowadzania spisu
+
+**Zaktualizowano mapę pokrycia** (metoda Python + świeży odczyt
+przed edycją bloku podsumowania — konsekwentne stosowanie
+sprawdzonej, bezpiecznej metody). Pozycja #7 zmieniona z 🔴 BRAK na
+🟢 PEŁNE. Zweryfikowano PO edycji: dokładnie jedno wystąpienie
+każdej sekcji, zero duplikatów.
+
+Nowy bilans: 7/20 PEŁNE (35%), 3/20 CZĘŚCIOWE (15%), 10/20 BRAK
+(50%) — DZIEDZINA osiągnęła PUNKT, w którym POŁOWA zidentyfikowanych
+podtematów NIE jest już całkowicie nieopisana (10 pełnych/
+częściowych vs 10 w ogóle brakujących).
+
+**Rejestracja:** moduł zaktualizowany do v1.6.0. dr-06 SKILL.md
+v3.31→v3.32.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11s — Wypełnianie luk ustawy o rachunkowości: badanie przez biegłego rewidenta (luka #12 domknięta) — 40% pełnego pokrycia
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — szósta transza
+wypełniania luk tego samego dnia.
+
+**DODANO sekcję 4d — badanie przez biegłego rewidenta**,
+zweryfikowaną w 7+ zgodnych, AKTUALNYCH źródłach z 2026 r.:
+
+- Progi (art. 64 ust. 1 pkt 4, PO nowelizacji grudniowej): 2,5 mln
+  EUR aktywów / 5 mln EUR przychodów / 50 osób (2 z 3)
+- ⚠️ Ważna zmiana: progi ZMIENIŁY SIĘ dla sprawozdań za rok
+  zakończony PO 31.12.2024 — wcześniej obowiązywały INNE wartości
+- Mechanizm przeliczania walutowego: kurs NBP z OSTATNIEGO dnia
+  bilansowego roku POPRZEDZAJĄCEGO — z konkretnym przykładem
+  liczbowym pokazującym zmienność kwot w PLN mimo tego samego progu
+  w EUR
+- ⭐ Ciekawy, mniej oczywisty przypadek: jednostki, które DLA CELÓW
+  PODATKOWYCH wybrały bilansową metodę ustalania różnic kursowych,
+  RÓWNIEŻ podlegają obowiązkowi audytu — NIEZALEŻNIE od progów
+  wartościowych
+- Procedura: biegły rewident z rejestru KRBR, firma audytorska z
+  listy PANA, wybór przez organ zatwierdzający, minimalna umowa 2
+  lata
+- ⭐⭐⭐ Odrębna sankcja (art. 79, ODMIENNA od art. 77 z sekcji 5):
+  grzywna lub ograniczenie wolności za sam brak poddania badaniu
+- Konsekwencja reputacyjna: brak opinii z badania w KRS widoczny
+  publicznie
+
+**Zaktualizowano mapę pokrycia** (metoda Python + świeży odczyt
+przed edycją — konsekwentnie stosowana, bezpieczna metoda od
+poprzednich transz). Pozycja #12 zmieniona z 🔴 BRAK na 🟢 PEŁNE.
+
+Nowy bilans: 8/20 PEŁNE (40%), 3/20 CZĘŚCIOWE (15%), 9/20 BRAK
+(45%).
+
+**Rejestracja:** moduł zaktualizowany do v1.7.0. dr-06 SKILL.md
+v3.32→v3.33.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11t — Wypełnianie luk ustawy o rachunkowości: pozostałe fundamentalne zasady (luka #3 domknięta) — 45% pokrycia, przy okazji naprawiona literówka cyrylicka
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — siódma transza
+wypełniania luk tego samego dnia.
+
+**ROZBUDOWANO sekcję 3 o sześć dodatkowych, fundamentalnych zasad**
+(pierwotnie opisane były TYLKO dwie z ośmiu), zweryfikowanych w 8+
+zgodnych źródłach, w tym akademickich (bazekon.uek.krakow.pl,
+law.muni.cz) i oficjalnym materiale KNF:
+
+- Zasada rzetelnego i jasnego obrazu (art. 4) — NAJBARDZIEJ ogólna,
+  nadrzędna wobec pozostałych
+- ⭐⭐⭐ Zasada ostrożności (art. 7) — z konkretnymi, wymienionymi
+  elementami i WAŻNYM wnioskiem o ASYMETRYCZNYM traktowaniu strat
+  (ujmowanych gdy prawdopodobne) vs zysków (dopiero gdy pewne)
+- Zasada indywidualnej wyceny + zakaz kompensat (art. 7 ust. 3)
+- ⭐⭐ Zasada przewagi treści nad formą — z HISTORYCZNYMI przykładami
+  z doktryny (leasing finansowy, umowa sprzedaży z obowiązkiem
+  odkupu jako faktyczna pożyczka)
+- Zasada istotności — z powiązaniem do uproszczeń mikro/małe
+  (sekcja 4c)
+- ⭐⭐⭐ Zasada kontynuacji działania (going concern) — z powiązaniem
+  do roli biegłego rewidenta (sekcja 4d)
+- Zasada wprowadzania zmian w rachunkowości
+
+**⚠️ PRZY OKAZJI weryfikacji edycji przez Python — WYKRYTO i
+NAPRAWIONO literówkę: cyrylicka litera "т" zamiast łacińskiej "t" w
+słowie "istotność"** (prawdopodobnie artefakt kodowania Unicode przy
+wcześniejszym wpisywaniu emoji/znaków specjalnych) — DODANO nową
+metodę weryfikacji: precyzyjne sprawdzenie regexem obecności ZNAKÓW
+CYRYLICKICH w całym pliku PO edycji — potwierdzono ZERO takich
+znaków po naprawie.
+
+**Zaktualizowano mapę pokrycia.** Pozycja #3 zmieniona z 🔴 BRAK na
+🟢 PEŁNE.
+
+Nowy bilans: 9/20 PEŁNE (45%), 3/20 CZĘŚCIOWE (15%), 8/20 BRAK
+(40%).
+
+**Rejestracja:** moduł zaktualizowany do v1.8.0. dr-06 SKILL.md
+v3.33→v3.34.
+
+### WNIOSEK METODOLOGICZNY
+
+Edycja PRZEZ Python (zamiast str_replace) DAJE pełną KONTROLĘ nad
+tekstem, ALE NIE JEST odporna NA błędy PRZY RĘCZNYM wpisywaniu
+znaków Unicode w kodzie źródłowym SAMEGO skryptu — WYMAGA
+dodatkowej, KOŃCOWEJ weryfikacji (np. regex NA niepożądane zakresy
+znaków) PO każdej takiej edycji, NIE TYLKO liczenia nagłówków.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
 | Flagi otwarte | 9 |

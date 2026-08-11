@@ -214,6 +214,126 @@ CAŁKOWITY ZAKAZ przewozu BEZ specjalnego zezwolenia — patrz pełne
 
 ---
 
+## 14a. ⭐⭐⭐ TECHNIKI OBCHODZENIA CŁA I KLASYFIKACJI CELNEJ (dodano
+2026-08-11, na żądanie użytkownika)
+
+```
+⭐⭐ WSPÓLNY MIANOWNIK większości technik: FAŁSZYWA/BŁĘDNA
+  DEKLARACJA PRZEZNACZENIA LUB KLASYFIKACJI towaru NA GRANICY —
+  towar deklarowany jako TAŃSZY/NIEOBJĘTY ograniczeniami kategoria,
+  NASTĘPNIE po przekroczeniu granicy — WYKORZYSTYWANY/SPRZEDAWANY
+  NIEZGODNIE z zadeklarowanym przeznaczeniem
+
+⭐⭐⭐ PRZYKŁAD 1 — "ZBOŻE TECHNICZNE" (afera 2022-2023, Ukraina →
+  Polska): SCHEMAT: zboże/rzepak importowane z Ukrainy DEKLAROWANE
+  w zgłoszeniu celnym JAKO "zboże TECHNICZNE" (przeznaczone na cele
+  NIESPOŻYWCZE, np. NA SPALANIE) — ⭐⭐ KLUCZOWA LUKA: "zboże
+  techniczne" NIE JEST W OGÓLE oficjalną kategorią klasyfikacji
+  celnej/prawnej (potwierdzone rp.pl) — SAM ETYKIETA "techniczne"
+  POZWALAŁA praktycznie UNIKNĄĆ standardowych kontroli granicznych
+  (sanitarnej dla zboża konsumpcyjnego, weterynaryjnej dla
+  paszowego) — PO przekroczeniu granicy towar "PRZEISTACZAŁ SIĘ" w
+  łańcuchu sprzedaży KOLEJNYM firmom W ZBOŻE PASZOWE LUB
+  KONSUMPCYJNE, TRAFIAJĄC do MŁYNÓW jako pszenica konsumpcyjna
+  → SKALA: prokuratura w Zamościu — ok. 1000 TON zboża, szkoda 1,5
+    MLN ZŁ w JEDNYM z wielu wątków; Prokuratura Regionalna w
+    Rzeszowie — SIEDEM połączonych postępowań, KILKANAŚCIE MILIONÓW
+    KILOGRAMÓW zboża, KILKADZIESIĄT ustalonych podmiotów
+  → OFIARY: renomowani KRAJOWI producenci mąki (młyny) — WPROWADZENI
+    W BŁĄD co do POCHODZENIA (ukraińskie, NIE podlegające unijnym
+    normom produkcji/transportu) i RZECZYWISTEGO przeznaczenia
+    towaru — sami byli STRONĄ POKRZYWDZONĄ, NIE sprawcami
+  → KWALIFIKACJA PRAWNA: OSZUSTWO WIELKIEJ WARTOŚCI (art. 286 §1 w
+    zw. z art. 294 KK) + OSZUSTWA CELNE — zagrożenie KARĄ DO 10 LAT
+    pozbawienia wolności
+
+⭐⭐⭐ PRZYKŁAD 2 — "AFERA DROBIOWA" (2022, tłuszcze techniczne →
+  pasza): SCHEMAT: TECHNICZNE kwasy tłuszczowe (przeznaczone do
+  produkcji SMARÓW i BIOPALIW, z WYRAŹNYM oznaczeniem "NIE nadaje
+  się do produkcji spożywczej") — sprowadzane z Rosji, Ukrainy,
+  Malezji i Rumunii — NASTĘPNIE "OCZYSZCZANE" w LABORATORIUM i
+  sprzedawane JAKO tłuszcze PASZOWE — WYKORZYSTYWANE do produkcji
+  PASZY dla drobiu (kurczaki, kaczki, indyki) trafiającego NA TUCZ
+  → METODA UKRYCIA: FAŁSZOWANIE CERTYFIKATÓW i WYNIKÓW BADAŃ
+    tłuszczów — DOKUMENTACJA laboratoryjna PODROBIONA, by
+    "potwierdzać" zgodność z normami PASZOWYMI
+  → SKALA: PRZYCHÓD ze sprzedaży CO NAJMNIEJ **176 MLN ZŁ**
+  → KWALIFIKACJA PRAWNA: UDZIAŁ w ZORGANIZOWANEJ GRUPIE PRZESTĘPCZEJ
+    (art. 258 KK) + OSZUSTWO poprzez fałszowanie certyfikatów +
+    PRANIE PIENIĘDZY (dodatkowy zarzut) — AKTORZY: małżeństwo jako
+    główni organizatorzy, ARESZTOWANI (3 miesiące tymczasowego
+    aresztowania), CZĘŚĆ współpodejrzanych PRZYZNAŁA SIĘ do winy i
+    złożyła wyjaśnienia (skróconą procedurę)
+
+⭐⭐⭐ PRZYKŁAD 3 — "POSTARZANIE" KOŚCI SŁONIOWEJ (CITES, obchodzenie
+  ZAKAZU handlu gatunkami zagrożonymi): SCHEMAT: WYKORZYSTANIE
+  WĄSKICH, LEGALNYCH WYJĄTKÓW od zakazu handlu kością słoniową dla
+  towaru NABYTEGO PRZED objęciem gatunku ochroną CITES (**18.01.1990**
+  dla słoni AFRYKAŃSKICH, **1.07.1975** dla słoni INDYJSKICH) LUB
+  jako ANTYK sprzed **1947 R.** (z certyfikacją znaczenia
+  kulturowego wystawianą przez odpowiednie ministerstwo) LUB
+  INSTRUMENT MUZYCZNY sprzed 1975 r.
+  → TECHNIKA OBEJŚCIA: "POSTARZANIE" świeżo pozyskanej (NOWEJ) kości
+    słoniowej — FIZYCZNE zabiegi mające upodobnić NOWY materiał do
+    STAREGO, by FAŁSZYWIE kwalifikował się pod wyjątek "sprzed daty
+    granicznej" — POWIĄZANE techniki: FAŁSZOWANIE DOKUMENTÓW
+    (fałszywe zaświadczenia o pochodzeniu sprzed daty granicznej),
+    MIESZANIE legalnych antyków Z nielegalną, świeżą kością W TEJ
+    SAMEJ partii/kolekcji (utrudnia weryfikację, "PRZEMYCA"
+    nielegalny materiał POD PRETEKSTEM legalnej reszty)
+  → ⭐ "TAJLANDZKA FURTKA" (opisana w reportażu National Geographic,
+    ilustrująca SKALĘ trudności ZAMKNIĘCIA takiej luki
+    międzynarodowo): kość słoniowa, KTÓRA znalazła się w danym
+    kraju PRZED 1989 r., MOŻE być LEGALNIE sprzedawana na RYNKU
+    WEWNĘTRZNYM — KAŻDY PRZYŁAPANY broni się TĄ SAMĄ linią: "moja
+    kość pochodzi sprzed zakazu" — praktycznie NIEMOŻLIWA do
+    zweryfikowania bez zaawansowanych badań (np. datowania
+    radiowęglowego) — DODATKOWO pogłębiana przez KORUPCJĘ (znane
+    przypadki ZNIKANIA skonfiskowanej kości Z magazynów służby
+    celnej)
+  → REAKCJA UE: Komisja Europejska ZALECA (2021) WSTRZYMANIE
+    wydawania ŚWIADECTW POWROTNEGO WYWOZU dla PRZETWORZONYCH okazów
+    kości słoniowej OGÓLNIE, z WĄSKIMI wyjątkami dla antyków
+    sprzed 1947 r. o POTWIERDZONYM znaczeniu kulturowym —
+    ZAOSTRZENIE reakcją NA SKALĘ nadużyć wykorzystujących WCZEŚNIEJ
+    szersze wyjątki
+  → SKALA (przykład rekordowego przechwycenia, Singapur 2019, NIE
+    Polska, ale ILUSTRUJĄCA globalną skalę procederu): 8,8 TONY
+    kości słoniowej (ok. 300 słoni) + 13,1 TONY łusek pangolinów
+    (ok. 2000 osobników), łączna wartość ok. **48,6 MLN DOLARÓW**
+
+⭐ WSPÓLNE WNIOSKI METODOLOGICZNE (przenoszalne między kategoriami):
+  1) LUKA DEFINICYJNA jako punkt wyjścia: kategorie BEZ precyzyjnej,
+     PRAWNEJ definicji ("zboże techniczne" nie istniało jako
+     kategoria; historycznie "suchy tytoń" bez definicji przy
+     automatach do papierosów) SĄ SZCZEGÓLNIE PODATNE na
+     wykorzystanie
+  2) "PRZEISTOCZENIE" W ŁAŃCUCHU DOSTAW: towar ZMIENIA deklarowane
+     przeznaczenie/kategorię DOPIERO PO przekroczeniu granicy/
+     odprawie celnej — SAMA granica/odprawa jest "czystym" momentem
+     (formalnie zgodna deklaracja), NADUŻYCIE następuje PÓŹNIEJ, W
+     OBROCIE KRAJOWYM — TRUDNIEJSZE do wykrycia NA SAMEJ granicy
+  3) LEGALNE WYJĄTKI JAKO OSŁONA: WĄSKIE, LEGALNE wyjątki (przepisy
+     przejściowe, wyjątki dla antyków, wyjątki "na cele techniczne")
+     TWORZĄ "SZARĄ STREFĘ" wykorzystywaną do UKRYCIA nielegalnego
+     materiału POD pozorem zgodności z wyjątkiem — im WIĘKSZY/
+     SZERSZY legalny wyjątek, TYM WIĘKSZA przestrzeń do nadużyć
+  4) FAŁSZOWANIE DOKUMENTACJI jako WSPÓLNY element: certyfikaty
+     jakości/pochodzenia/wieku SĄ regularnie PODRABIANE we WSZYSTKICH
+     trzech przykładach — WERYFIKACJA DOKUMENTÓW SAMA W SOBIE jest
+     NIEWYSTARCZAJĄCA bez NIEZALEŻNEJ weryfikacji fizycznej/
+     laboratoryjnej
+
+Potwierdzone w 8+ zgodnych źródłach: agropolska.pl, portalspozywczy.pl
+[×2], rp.pl [z cytowaną rzeczniczką Prokuratury Regionalnej w
+Rzeszowie], poradnikzdrowie.pl/WP [afera drobiowa], lkszelow.pl,
+national-geographic.pl, prawo.pl/eur-lex.europa.eu [Rząd 1-adjacent,
+oficjalne wytyczne Komisji Europejskiej ws. kości słoniowej,
+Dz.Urz.UE C 2021/528], tvn24.pl.
+```
+
+---
+
 ## 15. CHECKLIST ZBIORCZY
 
 ```
