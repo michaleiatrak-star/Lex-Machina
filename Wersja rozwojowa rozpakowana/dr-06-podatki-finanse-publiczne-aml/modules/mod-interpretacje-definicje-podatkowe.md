@@ -86,7 +86,11 @@ WIĄŻĄCA INFORMACJA AKCYZOWA (WIA):
 ### 2A. Definicja działalności gospodarczej — granica najem prywatny
 
 ```
-⚠️ KLUCZOWE DLA: PIT (źródło przychodów), VAT (limit 200 000 zł), ryczałt
+⚠️ KLUCZOWE DLA: PIT (źródło przychodów), VAT (limit zwolnienia
+   podmiotowego z art. 113 ust. 1 — ⭐ SPROSTOWANE 2026-08-12:
+   **240 000 zł**, nie 200 000 zł; podwyżka ustawą z 24.06.2025 r.,
+   Dz.U. 2025 poz. 896; szczegóły i przepisy przejściowe w
+   mod-VAT-podatek-od-towarow-i-uslug.md), ryczałt
 
 UCHWAŁA NSA II FPS 1/21 z 24.05.2021 r. (weryfikuj: orzeczenia.nsa.gov.pl):
   Teza: "Przychody z najmu, podnajmu, dzierżawy (…) są zaliczane do źródła przychodów

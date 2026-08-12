@@ -4,6 +4,316 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
+## AUDYT-2026-08-12zf — ITERACJA IV: przebudowa sekcji STAWKI VAT z tabeli na BAZĘ WERYFIKACJI + skan homoglifów w DR-06 + naprawa kolizji numeracji wpisów dziennika
+
+**Kontekst i decyzja projektowa użytkownika:** po trzech iteracjach
+uzupełnień sekcja 3 modułu VAT („STAWKI VAT — ORIENTACYJNE") pozostawała
+5-wierszową tabelą i była w F-17 wskazana jako największa pojedyncza
+słabość modułu. Użytkownik przesądził kierunek naprawy: **„zamiast
+tworzenia jakiejś bazy wskaż źródło, gdzie należy weryfikować stawki VAT
+dla poszczególnych towarów i wskaż to jako bazę weryfikacyjną"**.
+
+**Uzasadnienie merytoryczne — udokumentowane w samej sekcji.**
+Weryfikacja wykazała, że rozporządzenie MF z 9.12.2023 r. w sprawie
+obniżonych stawek VAT (Dz.U. 2023 poz. 2670, podstawa: art. 146ej ust. 1
+ustawy) było zmieniane co najmniej DZIEWIĘĆ RAZY (Dz.U. 2024 poz. 387,
+1381, 1399, 1944; 2025 poz. 1253; 2026 poz. 417, 573, 642, 699), a sam
+§ 11a (paliwa) przedłużano kolejno do 15.05.2026 → 31.05.2026 →
+15.06.2026 → 30.06.2026, korygując przy tym zakres kodów CN
+(2710 19 43 → 2710 19 42 i 2710 19 44). Wniosek wpisany do modułu:
+**tabela stawek w pliku statycznym dezaktualizuje się w ciągu tygodni i
+tworzy fałszywe poczucie pewności — groźniejsze niż brak informacji, bo
+zniechęca do sprawdzenia.**
+
+**Nowa sekcja 3 — struktura:**
+
+- **3.1 BAZA WERYFIKACYJNA — cztery poziomy w ustalonej kolejności.**
+  POZIOM A (tekst prawa): ISAP — art. 41, art. 146x (epizodyczne),
+  zał. nr 3 (8%), zał. nr 10 (5%), art. 83 + rozporządzenie
+  Dz.U. 2023/2670 ze strukturą rozdziałów. POZIOM B (klasyfikacja):
+  **ISZTAR4** (`ext-isztar4.mf.gov.pl/taryfa_celna/Browser`) dla kodów CN
+  — z wyeksponowaniem funkcji **DATY SYMULACJI**, pozwalającej odtworzyć
+  stan prawny na datę czynności (jedyne łatwo dostępne narzędzie do tego
+  celu w sporze) oraz zawartości pomocniczej (noty wyjaśniające CN,
+  rozporządzenia klasyfikacyjne KE, wyroki TSUE, WIT); PKWiU 2015 dla
+  usług do 31.12.2027. POZIOM C (praktyka): EUREKA. POZIOM D (ochrona):
+  WIS.
+- **3.2 Procedura sześciokrokowa** z obowiązkową kolejnością, w tym KROK
+  2 (ustal datę czynności → wpisz jako datę symulacji w ISZTAR4) i KROK 5
+  (przepisy epizodyczne — wskazany jako miejsce, gdzie stawka najczęściej
+  „ucieka" analizie) oraz wymóg zapisania ŚLADU WERYFIKACJI.
+- **3.3 Orientacja strukturalna** — mapa „która stawka w którym
+  przepisie", **świadomie BEZ ŻADNEJ WARTOŚCI PROCENTOWEJ**.
+- Zakaz bezwzględny na wejściu: moduł nie podaje stawki dla konkretnego
+  towaru/usługi; odczytanie stawki z pliku = naruszenie PRAWO-HARDGATE.
+
+Quality gate modułu i sekcja CORE/Zakres zsynchronizowane z nową
+procedurą. W `mod-VAT-klasyfikacja-produktow-baza-niejednoznacznosci.md`
+dodano odesłanie kanoniczne z zakazem duplikowania procedury.
+
+**Ustalenie uboczne 1 — HOMOGLIFY CYRYLICKIE (problem NAWRACAJĄCY).**
+Przy kontroli własnej wstawki wykryto w niej znak `п` (U+043F) zamiast
+`p`. Skan wszystkich plików `.md` w DR-06 na 14 najczęstszych homoglifów
+cyrylickich wykazał **2 wystąpienia**, w tym **1 ISTNIEJĄCE WCZEŚNIEJ** w
+`mod-ustawa-akcyzowa-i-clo-UCC.md`. Oba naprawione. ⚠️ **To jest
+NAWRÓT:** wpis AUDYT-2026-08-12s z wcześniejszej sesji tego samego dnia
+odnotowuje „naprawiony NIEZWIĄZANY, przedistniejący artefakt cyrylicki" w
+module definicji/interpretacji podatkowych. Problem pojawia się zatem
+wielokrotnie i jest wykrywany przypadkiem, nie systemowo.
+**Ryzyko:** homoglif jest niewidoczny dla czytelnika, ale ŁAMIE
+WYSZUKIWANIE — `grep` i wyszukiwanie pełnotekstowe nie znajdą słowa
+zawierającego taki znak. Dotyczy to również testów pokrycia stosowanych w
+audytach: test obecności frazy może dać FAŁSZYWY NEGATYW, czyli zgłosić
+lukę tam, gdzie treść istnieje.
+**Rekomendacja systemowa:** dodać skan homoglifów jako test regresyjny
+(`scripts/run_regression_suite.py`) dla WSZYSTKICH skilli. NIE wykonane w
+tej sesji — wymaga decyzji co do zakresu znaków i polityki (blokada vs
+ostrzeżenie).
+
+**UZUPEŁNIENIE do ustaleń ubocznych (kontrola końcowa tej sesji):** skan
+homoglifów rozszerzono na `audyt-systemu-v4`. W `AUDIT-JOURNAL.md`
+znaleziono i naprawiono KOLEJNY przedistniejący artefakt: „момencie"
+(cyrylickie „м" i „о") zamiast „momencie", we wcześniejszym wpisie z tej
+samej daty. Po naprawie w obu skillach pozostaje **6 znaków cyrylickich —
+wszystkie CELOWE**, w cytatach opisujących same artefakty (`п` w tym
+wpisie oraz „т"/„е" w opisie artefaktu „nabyте"). To pokazuje ograniczenie
+automatycznego skanu: prosty test „zero cyrylicy" dałby fałszywy alarm na
+dzienniku audytowym, który z natury CYTUJE znalezione artefakty.
+Projektowany test regresyjny musi dopuszczać wyjątki dla plików
+dziennikowych albo działać w trybie ostrzeżenia, nie blokady.
+Łączny bilans skanu w tej sesji: **4 realne artefakty naprawione**
+(2 w DR-06, w tym 1 przedistniejący w module akcyzowym; 1 w module
+klasyfikacji VAT z tej sesji; 1 przedistniejący w AUDIT-JOURNAL).
+
+**Ustalenie uboczne 2 — KOLIZJA NUMERACJI WPISÓW DZIENNIKA.** Wpisy z tej
+sesji zapisano pierwotnie jako `AUDYT-2026-08-12` i `AUDYT-2026-08-12b`,
+podczas gdy dziennik zawierał już PEŁNĄ serię `12a`–`12zc` z wcześniejszej
+sesji tego samego dnia. Kod `12b` był zatem zdublowany. Wpisy
+przenumerowano na wolne: **`12zd`** (audyt + iteracje I-II) i **`12ze`**
+(iteracja III), a odsyłacze wewnętrzne poprawiono. Niniejszy wpis: `12zf`.
+**Wniosek:** przed dodaniem wpisu należy sprawdzić `grep "^## AUDYT-RRRR-MM-DD"`
+w całym pliku, a nie tylko początek dziennika — wpisy z tego samego dnia
+mogą być rozproszone (najnowsze na górze, starsza seria w dalszej części).
+
+**Flaga F-17 — priorytet OBNIŻONY ze średniego na NISKI:** wszystkie
+pozycje priorytetowe iteracji I-IV domknięte, łącznie z sekcją 3.
+Pozostałe pozycje dotyczą instytucji o wyraźnie niższej częstości spraw.
+Jako pierwszą pozycję iteracji V wskazano art. 42a-42i (pełny tryb WIS) —
+domyka POZIOM D nowej bazy weryfikacyjnej. F-18 bez zmian.
+
+**Pliki zmienione w tej rundzie:**
+
+| Plik | Zmiana |
+|---|---|
+| `dr-06.../modules/mod-VAT-podatek-od-towarow-i-uslug.md` | ZMIENIONY — sekcja 3 przebudowana (baza weryfikacji), quality gate, CORE/Zakres |
+| `dr-06.../modules/mod-VAT-klasyfikacja-produktow-baza-niejednoznacznosci.md` | ZMIENIONY — odesłanie kanoniczne do sekcji 3 + naprawa homoglifu |
+| `dr-06.../modules/mod-ustawa-akcyzowa-i-clo-UCC.md` | ZMIENIONY — naprawa wcześniej istniejącego homoglifu cyrylickiego |
+| `dr-06.../MAPA-AKTOW.md` | ZMIENIONY — wpis o iteracji IV i skanie homoglifów |
+| `audyt-systemu-v4/references/AUDIT-JOURNAL.md` | ZMIENIONY — niniejszy wpis + przenumerowanie wpisów 12zd/12ze |
+| `audyt-systemu-v4/references/WARN-OTWARTE.md` | ZMIENIONY — F-17, priorytet obniżony |
+
+---
+
+## AUDYT-2026-08-12ze — ITERACJA III uzupełnień pokrycia VAT w DR-06 + sprostowanie własnej diagnozy audytowej
+
+**Kontekst:** kontynuacja AUDYT-2026-08-12zd (iteracje I-II). Realizacja
+pozycji priorytetowych z flagi F-17 w zalecanej tam kolejności.
+
+**Dodane sekcje (3):**
+
+| Sekcja | Zakres |
+|---|---|
+| 4n | art. 17 (import usług, nabycie od podmiotu zagranicznego, ust. 1a — udział stałego miejsca) + Dział XIII rozdz. 1c, art. 145e-145k (czasowe odwrotne obciążenie: gaz, energia, uprawnienia do emisji) |
+| 4o | art. 106b (obowiązek i faktura na żądanie, paragon bez NIP), 106e (elementy, adnotacje pkt 18/18a, marża, faktura uproszczona), 106i (terminy, granica 30 dni „w przód"), 106j (faktura korygująca, numer KSeF), 106k (nota korygująca — granica pkt 8-15) |
+| 4p | art. 119 (turystyka — marża, brak odliczenia, świadczenia własne), art. 115-118 (rolnik ryczałtowy, faktura VAT RR wystawiana przez nabywcę) |
+
+**⛔ SPROSTOWANIE WŁASNEJ DIAGNOZY Z AUDYT-2026-08-12zd (iteracja I):**
+w raporcie audytowym i w pierwszej wersji listy luk pozycję opisano jako
+„art. 17 — odwrotne obciążenie krajowe (np. gaz, energia, uprawnienia do
+emisji, art. 17 ust. 1 pkt 5 i 8)". Weryfikacja online wykazała, że jest
+to opis NIEŚCISŁY w dwóch punktach:
+1. **art. 17 ust. 1 pkt 7 i 8 wraz z załącznikami nr 11 i 14 zostały
+   UCHYLONE** — krajowe odwrotne obciążenie dla towarów wrażliwych
+   zastąpiono obowiązkowym mechanizmem podzielonej płatności (zał. 15);
+   zlikwidowano też informację podsumowującą VAT-27.
+2. **Odwrotne obciążenie dla gazu, energii i uprawnień do emisji NIE
+   wynika z art. 17**, lecz z odrębnego rozdziału 1c Działu XIII
+   (art. 145e-145k) — przepisów epizodycznych o charakterze czasowym,
+   z obowiązkiem uprzedniego zawiadomienia naczelnika US (art. 145i) i
+   terminem obowiązywania wymagającym sprawdzenia przy każdej sprawie.
+
+Sprostowanie wpisano wprost do sekcji 4n jako ostrzeżenie o pułapce
+praktycznej (faktury z adnotacją „odwrotne obciążenie" dla towarów
+objętych dziś MPP) oraz do MAPA-AKTOW.md. Wniosek metodologiczny:
+**diagnoza luki formułowana na podstawie testu obecności frazy w pliku
+opisuje CO JEST NIEOBECNE, ale nie gwarantuje poprawnego opisu TEGO, CO
+POWINNO BYĆ** — kwalifikacja prawna luki wymaga takiej samej
+weryfikacji online jak treść wpisywana do modułu.
+
+**Stan modułu po trzech iteracjach:** 2181 → ok. 3600 linii; sekcje
+numerowane 1-7 z podsekcjami 4a-4p, 5, 5a; matryca dowodowa 12 wierszy.
+
+**Flaga F-17 zaktualizowana** (nie zamknięta): wszystkie pozycje
+priorytetowe iteracji III domknięte, lista pozostałych przeredagowana,
+a jako **pierwszą pozycję iteracji IV wskazano sekcję 3 modułu (STAWKI)
+— art. 41 i logikę załączników 3 i 10**. To ustalenie z pierwotnego
+audytu, które przez trzy rundy uzupełnień pozostało niezrealizowane, a
+dotyczy najczęstszej kategorii spraw (spór o stawkę). Flaga F-18
+(weryfikacja przez ŹRÓDŁO-3 zamiast ISAP/ELI) — bez zmian, nadal otwarta
+i dotyczy również sekcji dodanych w tej rundzie.
+
+**Pliki zmienione w tej rundzie:**
+
+| Plik | Zmiana |
+|---|---|
+| `dr-06.../modules/mod-VAT-podatek-od-towarow-i-uslug.md` | ZMIENIONY — sekcje 4n-4p, aktualizacja CORE/Zakres |
+| `dr-06.../MAPA-AKTOW.md` | ZMIENIONY — wpis o iteracji III, sprostowanie kwalifikacji art. 17, przeredagowana lista luk |
+| `audyt-systemu-v4/references/AUDIT-JOURNAL.md` | ZMIENIONY — niniejszy wpis |
+| `audyt-systemu-v4/references/WARN-OTWARTE.md` | ZMIENIONY — aktualizacja F-17 |
+
+PRE-DELIVERY-COMPLETENESS-CHECK (ZASADA 7) wykonany ponownie dla obu
+skilli, wyniki pokazane w odpowiedzi przed `present_files`.
+
+---
+
+## AUDYT-2026-08-12zd — AUDYT POKRYCIA PRAWA VAT W DR-06: 1 BŁĄD MERYTORYCZNY (CRIT-klasy), 5 napraw strukturalnych, 9 nowych sekcji w dwóch iteracjach
+
+**Zakres sesji:** na żądanie użytkownika — audyt pokrycia prawa VAT w
+`dr-06-podatki-finanse-publiczne-aml`, następnie naprawy, następnie
+uzupełnienia. Zbadano: `mod-VAT-podatek-od-towarow-i-uslug.md` (2181
+linii przed sesją), `mod-VAT-klasyfikacja-produktow-baza-
+niejednoznacznosci.md`, `mod-odliczenia-uzytek-mieszany-firma-prywatny-
+KUP.md`, `mod-interpretacje-definicje-podatkowe.md`, `MAPA-AKTOW.md`.
+Metoda: ~90 zapytań kontrolnych o konkretne jednostki redakcyjne ustawy
+o VAT, z weryfikacją kontekstu każdego trafienia (odróżnienie realnego
+opracowania od wzmianki przelotnej).
+
+### 1. BŁĄD MERYTORYCZNY — najpoważniejsze ustalenie sesji
+
+`mod-VAT-podatek-od-towarow-i-uslug.md`, sekcja „Zwrot VAT — terminy"
+podawała **60 dni** jako podstawowy termin zwrotu różnicy podatku z
+powołaniem na art. 87 ust. 2. Aktualne brzmienie art. 87 ust. 2 zd. 1
+przewiduje **40 DNI**. Termin 60-dniowy występuje dziś wyłącznie jako
+termin SKRÓCONY w trybie art. 87 ust. 5a zd. 2 (ze 180 dni, po złożeniu
+zabezpieczenia majątkowego).
+
+**Klasyfikacja:** błąd tej klasy (nieaktualny termin ustawowy podany
+jako obowiązująca zasada, w przepisie wprost powołanym) generuje ryzyko
+błędnego wyliczenia odsetek i błędnej oceny terminu w sporze o zwrot.
+Traktowany jak CRIT treściowy — naprawiony w tej samej sesji, nie
+odłożony.
+
+**Naprawa:** blok zastąpiony pełną, zweryfikowaną siatką terminów
+(40/25/25/15/180/60 dni z podstawami: ust. 2, 6, 6a, 6d-6e, 5a) wraz z
+mechanizmem przedłużenia weryfikacji (ust. 2 zd. 2, 2b, 2c), ścieżką
+odblokowania przez zabezpieczenie (ust. 2a, 4a-4f) i nietypowymi
+terminami zaskarżenia (ust. 6m: 17 dni na zażalenie, 24 dni na
+odwołanie). Do metryki nagłówka modułu dodano jawne OSTRZEŻENIE, że
+pisma i wyliczenia oparte na wcześniejszej wersji wymagają przeliczenia.
+
+### 2. Pozostałe naprawy (5)
+
+1. **Luka numeracji sekcji** — moduł biegł 4a...4f → 6, bez sekcji 5.
+   Utworzono sekcję 5 (ewidencja JPK_V7, art. 109/109a/110) i wypełniono
+   treścią.
+2. **Martwe odesłanie wewnętrzne** — sekcja 4d odsyłała do „sekcji 5
+   wyżej", która nie istniała. Poprawione na „sekcja 5 niżej" z
+   adnotacją o naprawie.
+3. **Ogólnikowe odesłanie do art. 109a** („weryfikuj aktualny sankcyjny
+   art. 109a w ISAP") zastąpione treścią przepisu: dodatkowe
+   zobowiązanie 100% kwoty podatku przy fakturze do paragonu bez NIP,
+   z wyłączeniem przy odpowiedzialności karnoskarbowej.
+4. **Niespójność międzymodułowa** — `mod-interpretacje-definicje-
+   podatkowe.md` (linia 89) niósł limit art. 113 na poziomie 200 000 zł,
+   podczas gdy moduł VAT miał już 240 000 zł. Sprostowane z podaniem
+   ustawy zmieniającej (Dz.U. 2025 poz. 896).
+5. **Brak listy nowelizacji po tekście jednolitym** — do metryki
+   nagłówka dodano: Dz.U. 2025 poz. 894, 896, 1203, 1811; Dz.U. 2026
+   poz. 507, 846 (źródło: podatki.gov.pl — Rząd 1).
+
+Dodatkowo: matryca dowodowa rozszerzona z 4 do 12 wierszy, quality gate
+o 5 pytań kontrolnych, sekcja CORE/Zakres zsynchronizowana z faktyczną
+zawartością modułu.
+
+### 3. Uzupełnienia — iteracja I (5 sekcji)
+
+| Sekcja | Zakres |
+|---|---|
+| 4g | art. 108 — pusta faktura; charakter niesankcyjny wg TK P 40/13; linia obrony; TSUE C-442/22 (faktury pracownika); sprzężenie z art. 62 § 2 KKS |
+| 4h | art. 88 — katalog negatywny odliczenia (ust. 1 pkt 4, 1a, 3a pkt 1-7, 3b, 4, 6) + mapa zarzutów i kontrzarzutów |
+| 4i | art. 90/90a-90c/91 + art. 86 ust. 2a-2h — proporcja, prewspółczynnik, korekta wieloletnia 5/10 lat, art. 91 ust. 9 (korekta po stronie nabywcy ZCP) |
+| 4j | art. 7 ust. 2-4 i 7, art. 8 ust. 2, 2a, 5 — nieodpłatne przekazania, prezenty (100/20 zł), próbki, refakturowanie |
+| 5 | art. 109/109a/110 — ewidencja JPK_V7, ścieżka korekty, kara 500 zł/błąd, sankcja 100% |
+
+### 4. Uzupełnienia — iteracja II (4 sekcje)
+
+| Sekcja | Zakres |
+|---|---|
+| 4k | art. 6 pkt 1-2 — wyłączenie zbycia przedsiębiorstwa i ZCP; sprzężenie z PCC i z art. 91 ust. 9 |
+| 4l | art. 22 ust. 1-2d — miejsce dostawy towarów i transakcje łańcuchowe (dostawa ruchoma/nieruchoma, podmiot pośredniczący, „przełącznik" z ust. 2c) |
+| 4m | art. 15 ust. 6 — organy władzy publicznej, test imperium/dominium, sprzężenie z prewspółczynnikiem |
+| 5a | art. 99-100 — deklaracje, utrata kwartału przez zał. 15, zawieszenie działalności, informacje podsumowujące VAT-UE |
+
+Sekcja 4l usuwa ASYMETRIĘ STRUKTURALNĄ wykrytą w audycie: miejsce
+świadczenia USŁUG miało ok. 220 linii, miejsce dostawy TOWARÓW — zero,
+przez co przy transakcjach mieszanych moduł prowadził tylko połowę
+analizy.
+
+Flaga luki oznaczona w sekcji 5 przy jej tworzeniu (art. 99-100) została
+domknięta w tej samej sesji przez sekcję 5a — zgodnie z ZASADĄ 7
+(naprawa nie jest odkładana), z pozostawieniem węższej, jawnie
+oznaczonej luki (art. 99 ust. 11c, art. 101-102).
+
+### 5. Metoda weryfikacji i jej ograniczenie
+
+Wszystkie przepisy pobrano ze źródeł online — żaden nie pochodzi z
+pamięci modelu (PRAWO-HARDGATE zachowany). Ograniczenie: `isap.sejm.gov.pl`
+blokuje bezpośredni `web_fetch` (ROBOTS_DISALLOWED), a
+`api.sejm.gov.pl/eli/acts/DU/2025/775/text.pdf` to dokument
+228-stronicowy, którego nie da się odczytać fragmentarycznie dostępnymi
+narzędziami. Weryfikacja przebiegła zatem ścieżką ŹRÓDŁO-3 (web-
+fallback) z krzyżowym potwierdzeniem w 2-4 niezależnych źródłach na
+przepis; każda nowa sekcja nosi `✅ [VER: ...]` + `⚠️ [ZALECANA
+WERYFIKACJA ISAP]`. Odnotowane jako flaga **F-18**.
+
+Orzecznictwo: TK P 40/13 potwierdzone komunikatem na `trybunal.gov.pl`
+(Rząd 1) wraz z przytoczoną sentencją; TSUE C-442/22 — opracowanie
+branżowe, z jawnym wymogiem sprawdzenia pełnego tekstu na
+`curia.europa.eu` przed powołaniem w piśmie. Sygnatury NSA/WSA
+napotkane w źródłach NIE zostały wpisane do modułu — zamiast nich
+umieszczono odesłania do `orzeczenia-sadowe-v2`.
+
+### 6. Flagi otwarte
+
+- **F-17** (średni) — pokrycie ustawy o VAT nadal niepełne; lista
+  kilkunastu instytucji do iteracji III wraz z zalecaną kolejnością.
+- **F-18** (średni) — znaczniki weryfikacji oparte na ŹRÓDLE-3, nie na
+  ISAP/ELI; ograniczenie narzędziowe.
+
+Obie zarejestrowane w `references/WARN-OTWARTE.md` zgodnie z ZASADĄ 5.
+
+### 7. PRE-DELIVERY-COMPLETENESS-CHECK (ZASADA 7)
+
+Wykonany osobno dla każdego z dwóch skilli dotkniętych sesją
+(`dr-06-podatki-finanse-publiczne-aml`, `audyt-systemu-v4`), z osobnym
+archiwum per skill, zliczeniem plików przed i po oraz weryfikacją
+bajtową `diff -rq` względem stanu na dysku. Wyniki pokazane w
+odpowiedzi przed `present_files`. Liczba plików w obu skillach bez
+zmian — sesja modyfikowała treść istniejących plików, nie dodawała ani
+nie usuwała plików.
+
+**Pliki zmienione w tej sesji:**
+
+| Plik | Zmiana |
+|---|---|
+| `dr-06.../modules/mod-VAT-podatek-od-towarow-i-uslug.md` | ZMIENIONY — naprawa błędu 40/60 dni, sekcja 5, 9 nowych sekcji (4g-4m, 5, 5a), metryka, matryca dowodowa, quality gate; 2181 → ok. 3180 linii |
+| `dr-06.../modules/mod-interpretacje-definicje-podatkowe.md` | ZMIENIONY — sprostowanie limitu art. 113 (200 000 → 240 000 zł) |
+| `dr-06.../MAPA-AKTOW.md` | ZMIENIONY — wpis o obu iteracjach, błędzie 40/60 dni, liście luk pozostających |
+| `audyt-systemu-v4/references/AUDIT-JOURNAL.md` | ZMIENIONY — niniejszy wpis (ZASADA 2) |
+| `audyt-systemu-v4/references/WARN-OTWARTE.md` | ZMIENIONY — flagi F-17, F-18 (ZASADA 5) |
+
+---
+
 ## AUDYT-2026-07-24d — USUNIĘCIE W CAŁOŚCI zamkniętego rejestru i mechanizmu T10 (monitorowanie plików Nexto/Virtualo, flaga F-12), na wyraźne polecenie użytkownika
 
 **Kontekst:** kontynuacja AUDYT-2026-07-24c (zamknięcie flagi F-12,
@@ -25815,7 +26125,7 @@ Ta transza ilustruje ważną zasadę: gdy źródła są SPRZECZNE co do
 KONKRETNEJ liczby z powodu GENUINE, częstej zmienności przedmiotu
 (nie błędu w źródłach), najlepszą praktyką jest NIE wybierać
 "zwycięskiej" liczby, tylko jawnie oznaczyć ekstremalną zmienność i
-skierować czytelnika do weryfikacji w момencie użycia — próba
+skierować czytelnika do weryfikacji w momencie użycia — próba
 "rozstrzygnięcia" takiej sytuacji przez wybór jednej z sprzecznych
 wartości byłaby fałszywą pewnością.
 
@@ -35772,6 +36082,110 @@ interpretacją KIS:
   jest automatyczny
 
 **Rejestracja:** dr-06 SKILL.md v3.61→v3.62.
+
+### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12za — Uwzględniono postęp z przesłanych archiwów (potwierdzono identyczność) + kontynuacja: podatek od nieruchomości — dodano opodatkowanie garaży, reforma 2025 po wyroku TK
+
+**Kontekst:** Użytkownik PRZESŁAŁ trzy archiwa ZIP (dr-06, dr-10,
+audyt-systemu-v4) Z prośbą O uwzględnienie POSTĘPU I kontynuację.
+
+**WERYFIKACJA:** rozpakowano WSZYSTKIE trzy przesłane archiwa,
+PORÓWNANO Z bieżącym stanem ROBOCZYM przez `diff -rq`. WYNIK: WSZYSTKIE
+trzy IDENTYCZNE Z aktualnym stanem — ZERO rozbieżności, NIC
+dodatkowego DO wchłonięcia. POTWIERDZA to, że przesłane archiwa TO
+DOKŁADNIE te SAME pliki, KTÓRE już wcześniej DOSTARCZONO użytkownikowi
+W tej sesji.
+
+**KONTYNUACJA — podatek od nieruchomości: opodatkowanie GARAŻY.**
+Sprawdzono kolejny, ZNANY z aktywnego SPORU temat — potwierdzona
+GENUINE luka (zero wystąpień "garaż"). DODANO, zweryfikowane W 6+
+zgodnych źródłach, w TYM dosłownie CYTOWANY wyrok TK:
+
+- ⭐⭐⭐ Wyrok TK SK 23/19 (18.10.2023): niekonstytucyjne różnicowanie
+  stawki GARAŻU w budynku mieszkalnym W ZALEŻNOŚCI od statusu
+  prawnego (wyodrębniony vs część WSPÓLNA)
+- Stan OD 1.01.2025: TRZY kategorie — garaż W bryle budynku
+  mieszkalnego (stawka MIESZKANIOWA, niezależnie od statusu
+  prawnego), garaż WOLNOSTOJĄCY (stawka "pozostałe", 10× wyższa),
+  garaż DLA działalności gospodarczej (NAJWYŻSZA stawka)
+- Warunek ŁĄCZNY dla niższej stawki: funkcja pomocnicza + bryła
+  budynku + brak działalności gospodarczej
+- Historyczne PORÓWNANIE: przed reformą DZIESIĘCIOKROTNA różnica
+  między statusem PRAWNYM tego samego, FIZYCZNIE identycznego
+  miejsca — TERAZ zniesiona
+
+**Rejestracja:** dr-06 SKILL.md v3.62→v3.63.
+
+### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12zb — Kontynuacja z częściowo pokrytymi: usługi płatnicze — dodano małą instytucję płatniczą (MIP), odrębną kategorię licencyjną
+
+**Kontekst:** Kontynuacja na żądanie użytkownika (VAT odłożony DO
+dogłębnego zmapowania NA koniec) — usługi płatnicze, wcześniej
+naprawiony TYLKO PSD3.
+
+**ZNALEZIONA GENUINE LUKA:** ZERO wystąpień "mała instytucja
+płatnicza"/"MIP" — CAŁKOWICIE ODRĘBNA, uproszczona kategoria
+LICENCYJNA nieobecna.
+
+**DODANO sekcję o MIP**, zweryfikowaną w 8+ zgodnych, aktualnych
+źródeł, w tym BEZPOŚREDNIO KNF (Rząd 1):
+
+- ⭐⭐⭐ Limit 1,5 mln EUR średniomiesięcznie (art. 117f-117u UUP)
+- Wpis do rejestru (NIE zezwolenie) — 3 miesiące, BEZ minimalnego
+  kapitału, BEZ wymogu formy prawnej
+- ⭐⭐⭐ Trzy kluczowe ograniczenia: brak paszportu UE (tylko Polska),
+  zakaz świadczenia PIS/AIS (zarezerwowane dla KIP), limit
+  przechowywanych środków 2000 EUR/użytkownika
+- ⭐⭐ Zakaz rozszerzania zakresu w trakcie działania pod limitem
+  (art. 117q ust. 4) — chęć PIS/AIS wymaga pełnej licencji
+- Możliwość łączenia z działalnością niefinansową (przykład:
+  marketplace z własnym systemem płatności)
+- Ścieżka przekształcenia MIP→KIP
+
+**Rejestracja:** dr-06 SKILL.md v3.63→v3.64. Moduł urósł z 86 do 150
+linii.
+
+### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12zc — Kontynuacja z częściowo pokrytymi: rynek kapitałowy — CRIT znaleziony (art. 154 to definicja, nie sankcja karna), insider trading znacząco rozbudowany
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — rynek
+kapitałowy, wcześniej naprawione TYLKO progi prospektu.
+
+**⭐⭐⭐ ZNALEZIONO CRIT: moduł BŁĘDNIE cytował art. 154 ustawy o
+obrocie JAKO podstawę SANKCJI karnej za insider TRADING.** Art. 154
+TO w RZECZYWISTOŚCI przepis DEFINICYJNY (definiuje "informację
+poufną"), NIE przepis KARNY. Zweryfikowano w 7+ zgodnych źródeł, w
+tym akademickich:
+
+- ⭐⭐⭐ Prawidłowe podstawy KARNE: art. 181 (WYKORZYSTANIE — grzywna do
+  5 mln zł LUB do 5 lat więzienia, NAJSUROWSZA sankcja) oraz art.
+  180 (UJAWNIENIE — grzywna do 2 mln zł LUB do 4 lat)
+- Rozszerzona definicja informacji poufnej z odniesieniem do
+  Rozporządzenia MAR
+- ⭐⭐ Rozróżnienie insider PIERWOTNY vs WTÓRNY, z sankcją RÓWNIEŻ za
+  samo REKOMENDOWANIE transakcji na podstawie informacji poufnej
+- Dodatkowe, RÓWNOLEGŁE konsekwencje: kary administracyjne KNF (do
+  5 mln EUR/15% przychodów firm), zakaz zajmowania stanowisk,
+  przepadek korzyści
+- Ścieżka postępowania: analiza KNF → zawiadomienie do prokuratury
+
+**Rejestracja:** dr-06 SKILL.md v3.64→v3.65. Moduł urósł z 128 do
+185 linii.
 
 ### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
 

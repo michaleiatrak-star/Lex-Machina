@@ -101,9 +101,66 @@ Zgromadzenie obligatariuszy (art. 46–51 ustawy o obligacjach — weryfikuj w I
   → Przy naruszeniu warunków emisji przez emitenta
   → Może: zmienić warunki, ustanowić administrora, wymagać wcześniejszego wykupu
 
-Insider trading (art. 154 ustawy o obrocie — weryfikuj w ISAP):
-  → Zakaz obrotu na podstawie informacji poufnej niepodanej do publicznej wiadomości
-  → Sankcja: kara pieniężna KNF + odpowiedzialność karna
+⭐⭐⭐ INSIDER TRADING — ROZBUDOWANE 2026-08-12, na żądanie użytkownika
+(POPRZEDNIA wersja BYŁA jednozdaniowa I zawierała BŁĄD — cytowała
+art. 154 jako PODSTAWĘ sankcji karnej):
+
+```
+⚠️ NAPRAWIONY BŁĄD: art. 154 ustawy O obrocie TO PRZEPIS
+  DEFINICYJNY (określa, CZYM jest "INFORMACJA poufna"), NIE
+  podstawa SANKCJI karnej — SAME sankcje ZNAJDUJĄ SIĘ W ZUPEŁNIE
+  innych artykułach (180 I 181), Z ODESŁANIEM do UNIJNEGO
+  Rozporządzenia MAR (596/2014)
+
+⭐⭐⭐ DWA ODRĘBNE CZYNY ZABRONIONE — RÓŻNE sankcje:
+  1) ART. 181 u.o.i.f. — WYKORZYSTANIE informacji poufnej (WBREW
+     zakazowi Z art. 14 lit. a Rozporządzenia MAR): grzywna DO
+     **5 000 000 ZŁ** ALBO kara pozbawienia WOLNOŚCI OD 3 MIESIĘCY
+     DO **5 LAT**, ALBO OBIE kary ŁĄCZNIE — ⭐ TO NAJSUROWSZA sankcja
+     W CAŁYM katalogu
+  2) ART. 180 u.o.i.f. — UJAWNIENIE informacji poufnej: grzywna DO
+     **2 000 000 ZŁ** ALBO kara pozbawienia WOLNOŚCI DO **4 LAT**,
+     ALBO OBIE kary łącznie — ⭐ NIŻSZA sankcja NIŻ za samo
+     WYKORZYSTANIE, ALE NADAL POWAŻNA
+
+⭐⭐ DEFINICJA INFORMACJI POUFNEJ (art. 154 u.o.i.f., Z odwołaniem
+  DO art. 7 Rozporządzenia MAR): informacje OKREŚLONE W sposób
+  PRECYZYJNY, dotyczące BEZPOŚREDNIO LUB pośrednio jednego LUB
+  kilku instrumentów FINANSOWYCH/emitentów, KTÓRE NIE zostały
+  przekazane DO publicznej wiadomości, A MOGŁYBY W istotny SPOSÓB
+  wpłynąć NA ich cenę — ⭐ ROZSZERZENIE dla OSÓB realizujących
+  ZLECENIA klientów: informacje PRZEKAZANE przez klienta O jego
+  zleceniach W TRAKCIE realizacji RÓWNIEŻ się KWALIFIKUJĄ
+
+⭐⭐ ROZRÓŻNIENIE "INSIDER PIERWOTNY" vs "WTÓRNY" (art. 156 ust. 1
+  pkt 1 u.o.i.f.): INSIDER PIERWOTNY — osoba posiadająca INFORMACJĘ
+  poufną W ZWIĄZKU z pełnieniem FUNKCJI w organach SPÓŁKI,
+  posiadaniem AKCJI/udziałów, LUB w związku Z zatrudnieniem/
+  wykonywaniem ZAWODU/umową zlecenia — NIE MOŻE JEJ wykorzystywać —
+  ⭐ REKOMENDOWANIE lub NAKŁANIANIE innych DO transakcji NA
+  podstawie takiej informacji (art. 156 ust. 2 pkt 2) — RÓWNIEŻ
+  ZABRONIONE, sankcjonowane ANALOGICZNIE (grzywna DO 2 mln zł, kara
+  DO 3 lat, LUB OBIE)
+
+⭐⭐ DODATKOWE, ROZSZERZONE konsekwencje (poza karą główną):
+  → KARY FINANSOWE administracyjne KNF (RÓWNOLEGŁE do
+    odpowiedzialności KARNEJ) — MOGĄ sięgać DO 5 MLN EUR DLA osób
+    fizycznych ORAZ DO 15% ROCZNYCH przychodów DLA firm
+  → ZAKAZ zajmowania STANOWISK w organach SPÓŁEK giełdowych —
+    MOŻLIWY do orzeczenia PRZEZ sąd
+  → PRZEPADEK środków UZYSKANYCH w wyniku NIELEGALNYCH transakcji
+
+⭐ ŚCIEŻKA POSTĘPOWANIA: GŁÓWNYM źródłem POSTĘPOWAŃ karnych JEST
+  analiza DOKONANA przez KNF NA podstawie danych OD firm
+  inwestycyjnych LUB GPW — PO przeprowadzeniu postępowania
+  WYJAŚNIAJĄCEGO — Przewodniczący KNF MOŻE złożyć ZAWIADOMIENIE o
+  podejrzeniu POPEŁNIENIA przestępstwa DO prokuratury
+
+Potwierdzone w 7+ zgodnych źródeł, w tym akademickich (tbsp.wpia.
+uj.edu.pl, gov.pl [Rząd 1, publikacja naukowa]) i praktyki prawniczej
+(kkz.com.pl [wrzesień 2025, Z dosłownym cytatem art. 180/181],
+lexfocus.pl [luty 2025], przestepstwagieldowe.pl, tradersarea.pl [×2]).
+```
 
 Potwierdzone w 7+ zgodnych źródeł, w tym BEZPOŚREDNIO KNF (Rząd 1,
 Q&A "Oferty publiczne o wartości poniżej 5.000.000 euro") oraz PARP

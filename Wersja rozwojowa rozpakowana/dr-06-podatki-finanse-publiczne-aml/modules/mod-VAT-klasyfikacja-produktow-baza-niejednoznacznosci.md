@@ -332,6 +332,15 @@ numerem publikacji UE], mddp.pl, eztax.pl [luty 2026], freenance.io
 
 ---
 
+> ⭐⭐⭐ **BAZA WERYFIKACJI STAWEK — ŹRÓDŁO KANONICZNE (dodane
+> 2026-08-12):** pełna, czteropoziomowa procedura ustalania stawki
+> (POZIOM A: ISAP — art. 41, 146x, zał. 3 i 10, art. 83 + rozporządzenie
+> Dz.U. 2023 poz. 2670 ze zmianami; POZIOM B: ISZTAR4 dla kodów CN z
+> funkcją DATY SYMULACJI oraz PKWiU 2015 dla usług; POZIOM C: EUREKA;
+> POZIOM D: WIS) znajduje się w **`mod-VAT-podatek-od-towarow-i-uslug.md`,
+> sekcja 3**. NIE DUPLIKUJ jej tutaj — ten moduł dostarcza KONKRETNE
+> przypadki sporne w obrębie tej procedury, nie zastępuje jej.
+
 ## 3a. ⭐ PUBLICZNA BAZA WIS — SYSTEM EUREKA (dodano 2026-08-12, na
 żądanie użytkownika — konkretny adres bazy, dotąd tylko ogólnie
 wspominanej jako "narzędzie ochronne" bez wskazania URL)

@@ -100,6 +100,54 @@ web_search: "stawki maksymalne podatek nieruchomości 2025 2026 MF obwieszczenie
 web_search: "[nazwa gminy] stawki podatek nieruchomości uchwała 2025"
 ```
 
+### ⭐⭐⭐ OPODATKOWANIE GARAŻY — REFORMA 2025 (dodano 2026-08-12, na
+żądanie użytkownika — dotąd CAŁKOWICIE nieobecny, wcześniej
+AKTYWNIE sporny temat)
+
+```
+⭐⭐⭐ ŹRÓDŁO REFORMY: wyrok Trybunału KONSTYTUCYJNEGO z 18.10.2023,
+  sygn. SK 23/19 — TK UZNAŁ za NIEZGODNE Z KONSTYTUCJĄ przepisy
+  RÓŻNICUJĄCE stawkę podatku DLA garażu W budynku MIESZKALNYM W
+  ZALEŻNOŚCI OD tego, CZY stanowi ODRĘBNĄ własność (WYODRĘBNIONY
+  lokal), CZY jest MIEJSCEM przynależnym DO mieszkania (część
+  nieruchomości WSPÓLNEJ) — TK: TAKIE rozróżnienie NIE MA
+  uzasadnienia — GARAŻ pełni TĘ SAMĄ funkcję NIEZALEŻNIE OD statusu
+  prawnego
+
+⭐⭐ STAN OBOWIĄZUJĄCY OD 1.01.2025 R. — TRZY KATEGORIE:
+  1) GARAŻ/miejsce postojowe W budynku MIESZKALNYM (garaż PODZIEMNY,
+     hala GARAŻOWA W bloku, garaż WBUDOWANY W dom jednorodzinny W
+     TEJ SAMEJ "bryle") — NIEZALEŻNIE OD statusu prawnego
+     (wyodrębniony CZY nie) — stawka WŁAŚCIWA DLA budynków
+     MIESZKALNYCH — 2026: **1,25 ZŁ/m²** (patrz tabela WYŻEJ)
+  2) GARAŻ WOLNOSTOJĄCY (odrębny BUDYNEK, NIE część bryły domu/
+     bloku) — stawka DLA budynków POZOSTAŁYCH — 2026: **12,00
+     ZŁ/m²** — DZIESIĘCIOKROTNIE WYŻSZA niż DLA garażu W bryle
+     budynku mieszkalnego
+  3) GARAŻ/miejsce postojowe WYKORZYSTYWANE DO działalności
+     GOSPODARCZEJ — NIEZALEŻNIE OD statusu prawnego/budowlanego —
+     NAJWYŻSZA stawka, JAK dla budynków ZWIĄZANYCH z działalnością
+     gospodarczą — 2026: **35,53 ZŁ/m²**
+
+⭐⭐ WARUNEK zastosowania NIŻSZEJ (mieszkaniowej) stawki: garaż
+  MUSI FAKTYCZNIE PEŁNIĆ funkcję POMOCNICZĄ dla mieszkania ORAZ być
+  ZBUDOWANY W bryle budynku MIESZKALNEGO (NIE jako odrębny obiekt)
+  ORAZ NIE być wykorzystywany DO działalności GOSPODARCZEJ —
+  SPEŁNIENIE WSZYSTKICH trzech przesłanek ŁĄCZNIE
+
+⭐ PRZED reformą (STAN historyczny, DLA porównania/spraw za lata
+  2023-2024): wyodrębniony PRAWNIE garaż wielostanowiskowy W
+  budynku mieszkalnym BYŁ opodatkowany WYŻSZĄ stawką "POZOSTAŁE",
+  PODCZAS gdy NIEWYODRĘBNIONE miejsce W tej samej HALI garażowej
+  (część nieruchomości WSPÓLNEJ) — stawką MIESZKANIOWĄ — TA
+  RÓŻNICA (dziesięciokrotna) BYŁA właśnie PRZEDMIOTEM skargi
+  konstytucyjnej — OBECNIE zniesiona
+
+Potwierdzone w 6+ zgodnych źródeł, w tym wyrok TK SK 23/19 (cytowany
+dosłownie), podatnik.info [styczeń 2025], wynajmistrz.pl,
+podatkowyreferat.online, vatax.pl [kwiecień 2026, NAJŚWIEŻSZE], pit.pl.
+```
+
 ---
 
 ## 5. NOWE DEFINICJE PO REFORMIE 2025 — KLASYFIKACJA OBIEKTÓW
