@@ -16,6 +16,22 @@ wymagają przeliczenia.
 
 ---
 
+> ⚠️ TEN moduł jest CZĘŚCIĄ RODZINY plików VAT, PODZIELONEJ
+> 2026-08-12 (NOTA-4, audyt-systemu-v4/CHECKLIST-DEDUP.md — moduł
+> źródłowy miał 3652 linie, ~9x próg 400 linii). RODZINA sześciu
+> plików: mod-VAT-podatek-od-towarow-i-uslug.md (rdzeń: alerty,
+> KSeF, stawki, podstawowe mechanizmy), mod-VAT-miejsce-swiadczenia-
+> zwolnienia.md, mod-VAT-obowiazek-podstawa-zwolnienia-nieruchomosci.md,
+> mod-VAT-sankcje-bony-odliczenia.md, mod-VAT-transakcje-
+> fakturowanie.md, mod-VAT-ewidencja-deklaracje.md.
+>
+> **⛔ KRYTYCZNE, GLOBALNE ostrzeżenie (dotyczy CAŁEJ rodziny
+> plików):** audyt z 2026-08-12 wykrył i naprawił błąd merytoryczny
+> — podstawowy termin zwrotu różnicy podatku BYŁ błędnie podawany
+> jako 60 dni, PRAWIDŁOWO to **40 DNI** (art. 87 ust. 2 zd. 1) —
+> pisma/wyliczenia odsetkowe oparte na wcześniejszej wersji WYMAGAJĄ
+> przeliczenia.
+
 ## ⚡ ALERT — PKWiU 2025 — ZMIANA KLASYFIKACJI (ważne dla stawek VAT!)
 
 ```
@@ -935,2718 +951,951 @@ Checklist praktyczny:
   ws. Skandia) NADAL się kształtuje.
 ```
 
-### ⭐⭐⭐ MIEJSCE ŚWIADCZENIA USŁUG (Dział V Rozdział 3, art. 28a–28o
-ustawy VAT) — dodane 2026-08-12, uzupełnienie luki zidentyfikowanej w
-audycie pokrycia DR-06 (dotąd CAŁKOWICIE nieobecne — mechanizm
-FUNDAMENTALNY, decydujący CZY dana usługa W OGÓLE podlega polskiemu
-VAT)
+---
+
+## 5. GRUPA SZYBKA — DOMKNIĘCIE LUK PERYFERYJNYCH (ETAP 2a,
+2026-08-13, na żądanie użytkownika)
+
+Uzupełnienie art. 2 (słownik), art. 3 (właściwość organów), art. 28p
+(zawiadomienie o miejscu opodatkowania), art. 44 (zwolnienia WNT),
+art. 84–85 (szczególne metody ustalania podatku należnego) — dotąd
+CAŁKOWICIE nieobecne w module. Źródło: lexlege.pl (Rząd 2B, t.j.
+Dz.U.2025.0.775, stan prawny wprost oznaczony jako aktualny na
+12.08.2026 — zgodność ze stanem wskazanym w MAPA-AKTOW.md dla tej
+ustawy), potwierdzone krzyżowo w przepisy.gofin.pl i poltax.pl.
+⚠️ [NIEWERYFIKOWANE BEZPOŚREDNIO W ISAP] — ISAP niedostępny do
+web_fetch w tej sesji (blokada robots); potwierdź numer t.j. wprost
+przed pismem procesowym.
+
+### 5.1. Art. 2 — słowniczek ustawowy (52 pozycje)
 
 ```
-⭐⭐⭐ ZNACZENIE PRAKTYCZNE: "miejsce świadczenia" TO w istocie miejsce
-  POWSTANIA obowiązku podatkowego — DECYDUJE, CZY usługa PODLEGA
-  polskiemu VAT, CZY VAT innego KRAJU (lub W OGÓLE nie podlega VAT w
-  UE) — BŁĘDNE ustalenie miejsca świadczenia SKUTKUJE zaniżeniem LUB
-  zawyżeniem podatku, NIEZALEŻNIE od PRAWIDŁOWO ustalonej stawki
+⭐ ROLA SYSTEMOWA: art. 2 jest DEFINICYJNYM fundamentem CAŁEJ ustawy —
+  każde posłużenie się pojęciem z tego katalogu w INNYM przepisie
+  odsyła TU. Poniżej WYŁĄCZNIE pozycje o PRAKTYCZNYM znaczeniu
+  interpretacyjnym, NIE pełna lista 52 punktów (pełny tekst — patrz
+  lexlege.pl/ustawa-o-podatku-od-towarow-i-uslug/art-2/).
 
-⭐⭐ DEFINICJA "PODATNIKA" NA POTRZEBY TEGO ROZDZIAŁU (art. 28a) —
-  SZERSZA niż ogólna definicja Z art. 15:
-  → podmiot SAMODZIELNIE wykonujący działalność GOSPODARCZĄ (art. 15
-    ust. 1–2), NIEZALEŻNIE od CELU i REZULTATU tej działalności
-  → osoba PRAWNA niebędąca podatnikiem wg powyższego, ALE OBOWIĄZANA
-    do IDENTYFIKACJI na potrzeby VAT/podatku o PODOBNYM charakterze
-  → OBEJMUJE również podatnika Z INNEGO państwa członkowskiego ORAZ
-    podatnika Z kraju TRZECIEGO — status "PODATNIKA" NA gruncie
-    Działu V NIE jest ograniczony DO podmiotów polskich
+KLUCZOWE DEFINICJE Z BEZPOŚREDNIM ZASTOSOWANIEM PRAKTYCZNYM:
+□ pkt 6 — TOWARY: rzeczy ORAZ ich części, a TAKŻE wszelkie postacie
+  ENERGII (⭐ energia elektryczna/cieplna/gaz TRAKTOWANE jak towar —
+  konsekwencje dla miejsca dostawy, odmiennego OD usług)
+□ pkt 22 — SPRZEDAŻ: odpłatna DOSTAWA towarów i odpłatne ŚWIADCZENIE
+  usług NA terytorium kraju, EKSPORT towarów oraz WDT — ⭐⭐ TA
+  definicja jest PODSTAWĄ liczenia LIMITU zwolnienia podmiotowego
+  (art. 113) — do wartości SPRZEDAŻY NIE wlicza się KWOTY podatku
+□ pkt 25 — MAŁY PODATNIK: próg RÓWNOWARTOŚCI 2 000 000 EUR wartości
+  sprzedaży (WRAZ z podatkiem) w POPRZEDNIM roku podatkowym; DLA
+  pośredników/maklerów/zarządzających funduszami — RÓWNOWARTOŚĆ
+  45 000 EUR prowizji — przeliczenie wg ŚREDNIEGO kursu NBP z
+  PIERWSZEGO dnia roboczego października ROKU poprzedniego, w
+  zaokrągleniu DO 1000 zł (⭐ status "małego podatnika" WARUNKUJE
+  dostęp do METODY KASOWEJ z art. 21 — patrz mod-VAT-rejestracja-
+  zaplata-metoda-kasowa-likwidacja.md)
+□ pkt 27e — ZORGANIZOWANA CZĘŚĆ PRZEDSIĘBIORSTWA: organizacyjnie I
+  finansowo WYODRĘBNIONY zespół składników materialnych I
+  niematerialnych (W TYM zobowiązania), MOGĄCY stanowić NIEZALEŻNE
+  przedsiębiorstwo — ⭐⭐⭐ KLUCZOWE przy transakcjach M&A (zbycie ZCP
+  jest POZA zakresem VAT na mocy art. 6 pkt 1 — TRZY przesłanki
+  KUMULATYWNE muszą być SPEŁNIONE: wyodrębnienie ORGANIZACYJNE,
+  FINANSOWE i FUNKCJONALNE)
+□ pkt 33 — TERENY BUDOWLANE: grunty PRZEZNACZONE pod zabudowę wg MPZP,
+  a PRZY BRAKU planu — wg DECYZJI o warunkach zabudowy — ⭐ ISTOTNE
+  dla zwolnienia z art. 43 ust. 1 pkt 9 (dostawa GRUNTÓW innych niż
+  budowlane)
+□ pkt 34 — POJAZDY SAMOCHODOWE: DMC NIEPRZEKRACZAJĄCA 3,5 tony —
+  próg RELEWANTNY dla całego reżimu odliczeń z art. 86a (50%/100%)
+□ pkt 41–45 — BONY (jednego/różnego przeznaczenia): patrz sekcja
+  "GRUPA VAT" i mod-VAT-sankcje-bony-odliczenia.md dla PEŁNEGO
+  omówienia mechanizmu
+□ pkt 47–48 — GRUPA VAT / PRZEDSTAWICIEL grupy VAT: patrz sekcja
+  wyżej w TYM module
+□ pkt 49a–52 — SYSTEM KAUCYJNY (opakowania na napoje): definicje
+  DODANE nowelizacją wdrażającą system kaucyjny — ⭐ NOWY temat,
+  wymaga ODRĘBNEGO pogłębienia PRZY sprawie z branży
+  opakowaniowej/napojowej (poza zakresem tego etapu)
 
-⭐⭐⭐ ZASADA OGÓLNA #1 — USŁUGI B2B (art. 28b ust. 1): miejscem
-  świadczenia USŁUG na rzecz PODATNIKA jest miejsce, W KTÓRYM
-  usługobiorca POSIADA SIEDZIBĘ działalności gospodarczej — ⚠️
-  DECYDUJE siedziba NABYWCY, nie sprzedawcy (odwrotnie NIŻ przy B2C)
-  □ WYJĄTEK — STAŁE MIEJSCE PROWADZENIA DZIAŁALNOŚCI (FE, ust. 2):
-    JEŚLI usługa jest świadczona DLA stałego miejsca prowadzenia
-    działalności usługobiorcy, POŁOŻONEGO w INNYM miejscu niż JEGO
-    siedziba — MIEJSCEM świadczenia JEST TO stałe miejsce
-  □ WYJĄTEK — BRAK siedziby/FE (ust. 3): miejscem świadczenia jest
-    MIEJSCE stałego ZAMIESZKANIA/zwykłego pobytu usługobiorcy
-  □ WYJĄTEK — CELE OSOBISTE (ust. 4): usługi PRZEZNACZONE wyłącznie
-    NA cele osobiste PODATNIKA/pracowników/wspólników — STOSUJE SIĘ
-    odpowiednio zasady Z art. 28c (jak DLA konsumenta)
-
-⭐⭐⭐ ZASADA OGÓLNA #2 — USŁUGI B2C (art. 28c ust. 1): miejscem
-  świadczenia USŁUG na rzecz PODMIOTÓW niebędących podatnikami
-  (konsumentów) jest miejsce, W KTÓRYM usługodawca POSIADA siedzibę
-  działalności GOSPODARCZEJ — ⚠️ DECYDUJE siedziba SPRZEDAWCY (ODWROTNIE
-  niż PRZY B2B) — POLSKI usługodawca ŚWIADCZĄCY na rzecz konsumenta
-  (np. Z INNEGO kraju UE) CO DO ZASADY rozlicza VAT W Polsce, chyba że
-  ZASTOSOWANIE ma jeden Z licznych WYJĄTKÓW poniżej
-  □ ANALOGICZNY wyjątek FE PO stronie USŁUGODAWCY (ust. 2)
-
-⭐⭐⭐ KATALOG WYJĄTKÓW OD ZASAD OGÓLNYCH (art. 28d–28n) — DLA
-  KAŻDEGO wyjątku sprawdź, CZY dotyczy TYLKO B2C, TYLKO B2B, CZY OBU:
-
-  → art. 28d — POŚREDNICY działający W IMIENIU i NA rzecz osób
-    NIEBĘDĄCYCH podatnikami: miejsce, GDZIE dokonano TRANSAKCJI
-    podstawowej (dotyczy WYŁĄCZNIE B2C — przy B2B stosuje SIĘ zasadę
-    ogólną art. 28b)
-
-  → art. 28e — USŁUGI ZWIĄZANE Z NIERUCHOMOŚCIĄ (rzeczoznawcy,
-    pośrednicy W obrocie nieruchomościami, ZAKWATEROWANIE, usługi
-    przygotowania/koordynacji ROBÓT budowlanych, UDZIELANIE prawa
-    użytkowania NIERUCHOMOŚCI): miejsce POŁOŻENIA nieruchomości —
-    ⭐ DOTYCZY OBU (B2B i B2C) — WYJĄTEK BEZWZGLĘDNY, NIEZALEŻNY OD
-    statusu nabywcy — ⚠️ CZĘSTY SPÓR: CZY usługa jest "WYSTARCZAJĄCO
-    związana" Z KONKRETNĄ nieruchomością (art. 31a rozp. 282/2011
-    doprecyzowuje: WYMAGANY bezpośredni ZWIĄZEK z OKREŚLONĄ
-    nieruchomością, NIE wystarczy OGÓLNY związek Z branżą
-    nieruchomości)
-
-  → art. 28f — TRANSPORT PASAŻERÓW: miejsce, GDZIE OdBYWA SIĘ
-    transport, proporcjonalnie DO POKONANYCH odległości (dotyczy OBU)
-    | TRANSPORT TOWARÓW: DLA B2B — zasada ogólna art. 28b (siedziba
-    nabywcy); DLA B2C — miejsce ROZPOCZĘCIA transportu, Z WYJĄTKIEM
-    transportu WEWNĄTRZWSPÓLNOTOWEGO (miejsce ROZPOCZĘCIA, ALE inne
-    zasady PRZY podaniu numeru VAT — ⚠️ SZCZEGÓŁOWA analiza WYMAGA
-    odrębnej weryfikacji przy TRANSPORCIE międzynarodowym)
-
-  → art. 28g — USŁUGI KULTURALNE, artystyczne, SPORTOWE, naukowe,
-    edukacyjne, ROZRYWKOWE i PODOBNE (WSTĘP na imprezy + usługi
-    POMOCNICZE): DLA B2C — miejsce, GDZIE usługi SĄ faktycznie
-    wykonywane; DLA B2B — WSTĘP na TAKIE imprezy: miejsce, GDZIE
-    impreza SIĘ odbywa (POZOSTAŁE usługi B2B ZWIĄZANE Z tą
-    działalnością — zasada OGÓLNA art. 28b)
-
-  → art. 28h–28h1 — USŁUGI POMOCNICZE do transportu (załadunek,
-    rozładunek, przeładunek) I WYCENA/prace NA rzeczowym majątku
-    RUCHOMYM: DLA B2C — miejsce FAKTYCZNEGO wykonania
-
-  → art. 28i — USŁUGI RESTAURACYJNE i CATERINGOWE: miejsce
-    FAKTYCZNEGO wykonania (dotyczy OBU) — ⭐ WYJĄTEK: GDY usługi TE są
-    faktycznie WYKONYWANE na POKŁADACH statków, statków POWIETRZNYCH
-    lub W pociągach PODCZAS części transportu PASAŻERÓW wykonanej NA
-    terytorium UE — miejsce ROZPOCZĘCIA transportu PASAŻERÓW (art.
-    28i ust. 2, w ZW. z art. 28f ust. 1a) — POWIĄZANIE Z mechanizmem
-    "gastronomia/catering" opisanym W module klasyfikacji VAT
-    (STAWKA), ALE to ODRĘBNE zagadnienie (MIEJSCE vs STAWKA)
-
-  → art. 28j — KRÓTKOTERMINOWY wynajem ŚRODKÓW transportu (do 30 dni,
-    a DLA jednostek pływających DO 90 dni): miejsce, GDZIE środek
-    transportu jest FAKTYCZNIE oddawany DO dyspozycji usługobiorcy
-    (dotyczy OBU) | DŁUGOTERMINOWY wynajem B2C: miejsce SIEDZIBY/
-    zamieszkania usługobiorcy, Z WYJĄTKIEM jednostek pływających
-    rekreacyjnych (miejsce ODDANIA do dyspozycji, PRZY dodatkowych
-    warunkach)
-
-  → art. 28k — USŁUGI TELEKOMUNIKACYJNE, NADAWCZE i ELEKTRONICZNE
-    na rzecz PODMIOTÓW niebędących podatnikami: miejsce, GDZIE
-    nabywca POSIADA siedzibę/stałe MIEJSCE zamieszkania/zwykłe
-    miejsce POBYTU — ⭐⭐ KLUCZOWE dla e-commerce/usług CYFROWYCH:
-    SPRZEDAWCA rozlicza VAT WEDŁUG stawki KRAJU KONSUMENTA, NIE
-    własnego kraju — ⭐ POWIĄZANIE z mechanizmem VAT OSS (sekcja
-    wyżej W tym module) — REJESTRACJA W OSS pozwala UNIKNĄĆ
-    rejestracji LOKALNEJ w KAŻDYM państwie nabywcy
-
-  → art. 28l — "USŁUGI NIEMATERIALNE" (m.in. DORADCZE, prawnicze,
-    księgowe, INŻYNIERSKIE, tłumaczeń, REKLAMY, przetwarzania
-    danych, dostarczania INFORMACJI, bankowe/finansowe/
-    ubezpieczeniowe, UDOSTĘPNIANIA personelu, WYNAJMU rzeczy
-    ruchomych — Z WYŁĄCZENIEM środków TRANSPORTU): DLA B2C, GDY
-    nabywca MA siedzibę/miejsce zamieszkania POZA terytorium UE —
-    miejsce SIEDZIBY/zamieszkania NABYWCY (a NIE usługodawcy) — ⭐
-    ISTOTNE dla POLSKICH kancelarii/firm DORADCZYCH świadczących
-    USŁUGI dla klientów SPOZA UE (np. USA, Wielka Brytania POZA
-    ramami odrębnych umów) — TAKA usługa MOŻE być POZA zakresem
-    polskiego VAT
-
-  → art. 28n — USŁUGI TURYSTYKI rozliczane W procedurze MARŻY:
-    miejsce SIEDZIBY/stałego miejsca prowadzenia działalności/
-    zwykłego miejsca POBYTU usługodawcy — STATUS usługobiorcy NIE MA
-    znaczenia (JEDYNY wyjątek W całym katalogu, GDZIE nie ROZRÓŻNIA
-    się B2B/B2C)
-
-  → art. 28o — DELEGACJA dla MINISTRA finansów DO określenia W
-    rozporządzeniu INNEGO miejsca świadczenia W szczególnych
-    przypadkach — SPRAWDŹ aktualne rozporządzenia WYKONAWCZE przy
-    nietypowym STANIE faktycznym
-
-⭐⭐⭐ STAŁE MIEJSCE PROWADZENIA DZIAŁALNOŚCI (FE / "Fixed
-  Establishment") — KLUCZOWE, SPORNE pojęcie warunkujące ZASTOSOWANIE
-  wyjątku Z art. 28b ust. 2:
-  □ PODSTAWA: art. 11 rozporządzenia WYKONAWCZEGO Rady (UE) 282/2011
-    — brak ODRĘBNEJ definicji W samej ustawie VAT, STOSUJE SIĘ
-    BEZPOŚREDNIO przepis UNIJNY
-  □ DEFINICJA: miejsce INNE niż siedziba, charakteryzujące SIĘ
-    WYSTARCZAJĄCĄ stałością ORAZ odpowiednią STRUKTURĄ zaplecza
-    PERSONALNEGO i TECHNICZNEGO, umożliwiającą ODBIÓR/wykorzystanie
-    (jako NABYWCA) lub ŚWIADCZENIE (jako sprzedawca) usług
-  □ SAM numer VAT NIE JEST wystarczający DO uznania istnienia FE
-    (utrwalone orzecznictwo TSUE)
-  □ ⭐⭐⭐ ORZECZNICTWO TSUE — LINIA interpretacyjna:
-    → C-931/19 Titanium: SAMA nieruchomość BEZ zasobów LUDZKICH
-      umożliwiających SAMODZIELNE działanie NIE stanowi FE (WYNAJEM
-      nieruchomości bez WŁASNEGO personelu na MIEJSCU — NIE tworzy FE)
-    → C-547/18 Dong Yang Electronics: sama KONTROLA kapitałowa nad
-      spółką ZALEŻNĄ (spółka-córka) NIE oznacza AUTOMATYCZNIE, że
-      spółka MATKA ma FE W kraju spółki córki
-    → C-333/20 Berlin Chemie: WŁASNE zaplecze NIE jest konieczne —
-      WYSTARCZY, że podatnik jest UPRAWNIONY dysponować cudzym
-      zapleczem TAK, jakby BYŁO własne (np. NA podstawie umowy o
-      świadczenie USŁUG) — ALE samo ODDELEGOWANIE czynności
-      technicznych innemu PODMIOTOWI (podwykonawcy) NIE tworzy
-      AUTOMATYCZNIE FE
-    → C-232/22 Cabot Plastics (29.06.2023, ⚠️ ZWERYFIKUJ aktualność
-      cytowania w konkretnej sprawie): potwierdza, że MINIMALNA
-      trwałość W postaci SAMEGO zgromadzenia zasobów, ANI sama
-      kontrola EKONOMICZNA nad zapleczem podwykonawcy — NIE
-      WYSTARCZAJĄ
-    → C-533/22 SC Adient: KONTYNUACJA linii ZAOSTRZAJĄCEJ kryteria —
-      usługodawca i JEGO zaplecze u PODWYKONAWCY NIE tworzą
-      AUTOMATYCZNIE FE nabywcy TYLKO dlatego, że USŁUGI są
-      świadczone WYŁĄCZNIE na jego rzecz
-  □ TRZY PRZESŁANKI łącznie (wg praktyki/objaśnień MF): (1)
-    ODPOWIEDNIE zaplecze PERSONALNE i techniczne, (2) STRUKTURA
-    umożliwiająca SAMODZIELNE wykonywanie czynności opodatkowanych,
-    (3) WYSTARCZAJĄCA stałość
-  □ ⭐ POWIĄZANIE Z KSeF: OD 1.02.2026 r. posiadanie FE W Polsce
-    (przez PODMIOT zagraniczny) MOŻE skutkować OBOWIĄZKIEM
-    wystawiania faktur W KSeF — TYLKO GDY FE "CZYNNIE uczestniczy"
-    W konkretnej TRANSAKCJI — MF opublikowało OBJAŚNIENIA W tym
-    zakresie 28.01.2026 r. — ⚠️ WERYFIKUJ aktualną TREŚĆ objaśnień
-    przy SPRAWACH z udziałem podmiotów ZAGRANICZNYCH
-  □ ⚠️ ROZBIEŻNOŚĆ: wykładnia TSUE jest OGÓLNIE korzystniejsza DLA
-    podatników niż PRAKTYKA polskich organów PODATKOWYCH — choć
-    odnotowuje SIĘ (2026) pewne ZŁAGODZENIE podejścia KRAJOWEGO —
-    PRZY sporze rozważ powołanie SIĘ wprost na LINIĘ TSUE
-
-⭐ ODRĘBNOŚĆ OD "ZAKŁADU" W PODATKACH DOCHODOWYCH: FE (fixed
-  establishment) funkcjonuje WYŁĄCZNIE na gruncie VAT i jest
-  NIEZALEŻNE pojęciowo OD "zakładu" (permanent establishment) na
-  gruncie CIT/umów O unikaniu podwójnego opodatkowania — ⚠️ ISTNIENIE
-  zakładu CIT NIE przesądza AUTOMATYCZNIE o istnieniu FE dla VAT (i
-  ODWROTNIE) — WYMAGANA odrębna ANALIZA dla każdego podatku
-
-⭐ POWIĄZANIE Z WNT/IMPORTEM USŁUG (sekcja wyżej w tym module):
-  USTALENIE miejsca świadczenia USŁUGI (art. 28b) jest KROKIEM
-  POPRZEDZAJĄCYM analizę, CZY dochodzi DO importu usług Z
-  odwrotnym obciążeniem — JEŚLI miejscem świadczenia usługi
-  nabywanej PRZEZ polskiego podatnika OD zagranicznego usługodawcy
-  jest POLSKA (zasada OGÓLNA art. 28b) — DOPIERO wtedy AKTUALIZUJE
-  SIĘ mechanizm importu usług OPISANY wyżej
-
-Checklist praktyczny:
-□ Czy usługobiorca JEST podatnikiem W rozumieniu art. 28a (SZERSZA
-  definicja niż art. 15) — TO PRZESĄDZA, czy STOSOWAĆ zasadę B2B (28b)
-  czy B2C (28c) jako PUNKT wyjścia
-□ Czy usługa MIEŚCI SIĘ w KTÓRYMŚ z wyjątków art. 28d–28n — PRZEJRZYJ
-  KATALOG ZANIM zastosujesz zasadę OGÓLNĄ
-□ PRZY usłudze dotyczącej NIERUCHOMOŚCI (art. 28e) — czy ZWIĄZEK z
-  KONKRETNĄ nieruchomością jest WYSTARCZAJĄCO bezpośredni (art. 31a
-  rozp. 282/2011), CZY to tylko OGÓLNY związek branżowy
-□ Przy TRANSAKCJACH z podmiotem ZAGRANICZNYM — czy KONTRAHENT
-  POSIADA FE w Polsce (LUB odwrotnie) — ZWERYFIKUJ wg TRZECH
-  przesłanek TSUE, nie POPRZESTAWAJ na SAMYM numerze VAT
-□ Czy USTALONE miejsce świadczenia jest SPÓJNE z DEKLAROWANYM
-  traktowaniem transakcji NA fakturze (stawka KRAJOWA vs "poza
-  zakresem VAT w PL"/"odwrotne obciążenie" vs "NP" — wykaz POZA
-  terytorium kraju)
-□ Przy USŁUGACH cyfrowych/elektronicznych DLA konsumentów w UE —
-  czy ROZWAŻONO rejestrację W OSS zamiast rejestracji LOKALNEJ W
-  każdym kraju nabywcy
-
-⚠️ Weryfikuj aktualne brzmienie art. 28a–28o w ISAP oraz NAJNOWSZE
-  orzecznictwo TSUE dot. FE — TO OBSZAR o WYSOKIEJ dynamice
-  interpretacyjnej, SZCZEGÓLNIE przy transakcjach TRANSGRANICZNYCH
-  z udziałem PODMIOTÓW powiązanych/podwykonawców.
+⚠️ Sekcja NIE wymienia wszystkich 52 pozycji — przy konkretnej
+  sprawie wymagającej innej definicji z art. 2, PRZESZUKAJ wprost
+  treść przepisu, NIE zakładaj że dana definicja jest TU pominięta
+  z powodu jej NIEISTNIENIA.
 ```
 
-### ⭐⭐⭐ ZWOLNIENIE PODMIOTOWE (art. 113) I PROCEDURA SME — dodane
-2026-08-12, na żądanie użytkownika (priorytet #1 z mapy pokrycia
-VAT — dotąd TYLKO przelotna wzmianka wewnątrz innej sekcji)
+### 5.2. Art. 3 — właściwość organu podatkowego (przypadki szczególne)
 
 ```
-⚠️⚠️ WAŻNA ZMIANA OD 1.01.2026 R.: limit PODWYŻSZONY Z 200 000 ZŁ
-  NA **240 000 ZŁ** — ⭐ TA zmiana JEST BARDZO ŚWIEŻA (obowiązuje OD
-  początku BIEŻĄCEGO roku) — WIELE starszych, wcześniej
-  ZWERYFIKOWANYCH źródeł/materiałów W SYSTEMIE MOŻE nadal cytować
-  STARY próg 200 000 zł — SPRAWDŹ i SKORYGUJ WSZĘDZIE, gdzie TEN
-  próg JEST wspominany
+⚠️ WAŻNE ZASTRZEŻENIE STRUKTURALNE: art. 3 ust. 1–2 SĄ UCHYLONE —
+  OGÓLNA zasada właściwości miejscowej (naczelnik US wg miejsca
+  wykonywania czynności / siedziby podatnika) WYNIKA DZIŚ z przepisów
+  OGÓLNYCH (Ordynacja podatkowa + rozporządzenie MF ws. właściwości
+  organów podatkowych), NIE z art. 3 ustawy o VAT — art. 3 W OBECNYM
+  BRZMIENIU reguluje WYŁĄCZNIE PRZYPADKI SZCZEGÓLNE, wymienione niżej.
 
-⭐⭐⭐ PODSTAWOWA ZASADA (art. 113 ust. 1): ZWALNIA SIĘ od podatku
-  sprzedaż DOKONYWANĄ przez PODATNIKÓW, U KTÓRYCH wartość SPRZEDAŻY
-  NIE PRZEKROCZYŁA łącznie W POPRZEDNIM roku podatkowym kwoty
-  **240 000 ZŁ** — DO wartości sprzedaży NIE WLICZA się kwoty
-  podatku (LICZY SIĘ NETTO)
+WŁAŚCIWOŚĆ SZCZEGÓLNA (art. 3 ust. 3):
+□ Naczelnik DRUGIEGO Urzędu Skarbowego Warszawa-Śródmieście —
+  DLA podatników: (a) BEZ siedziby/stałego miejsca prowadzenia
+  działalności W POLSCE, (b) UŁATWIAJĄCYCH sprzedaż PRZEZ interfejs
+  elektroniczny (art. 109b), (c) KORZYSTAJĄCYCH z procedur
+  SZCZEGÓLNYCH — OSS/IOSS/procedura NIEUNIJNA (Dział XII rozdz. 6a,
+  7, 9), (d) POŚREDNIKÓW przy procedurze IMPORTU (rozdz. 9), (e)
+  KORZYSTAJĄCYCH ze zwolnienia TRANSGRANICZNEGO SME z art. 113b
+□ Naczelnik ŁÓDZKIEGO Urzędu Skarbowego — DLA podatników
+  ZIDENTYFIKOWANYCH na potrzeby procedur SZCZEGÓLNYCH (OSS/nieunijna/
+  import), DLA których państwem KONSUMPCJI jest RZECZPOSPOLITA Polska
+  (czyli PODATNICY zagraniczni ROZLICZAJĄCY polski VAT PRZEZ polski
+  organ w RAMACH unijnej procedury uproszczonej)
+□ Naczelnik Urzędu Skarbowego Łódź-Śródmieście — DLA podatników
+  korzystających ZE zwolnienia TRANSGRANICZNEGO SME z art. 113a
+  (podatnik Z SIEDZIBĄ w INNYM państwie UE, sprzedający W Polsce)
+  — ⚠️ [NIEJEDNOZNACZNOŚĆ ŹRÓDŁOWA] tekst przepisu W dostępnym
+  źródle WYMIENIA dwa RÓŻNE organy (Łódzki US ORAZ Łódź-Śródmieście)
+  DLA zbliżonych, ale ODMIENNYCH kategorii (art. 113a I 113b) — PRZED
+  zastosowaniem W konkretnej sprawie POTWIERDŹ dokładne brzmienie
+  wprost NA ISAP, ROZRÓŻNIAJĄC precyzyjnie który przepis (113a CZY
+  113b) dotyczy DANEGO podatnika
+□ Organ WŁAŚCIWY dla ZMARŁEGO podatnika w dniu ŚMIERCI (art. 3 ust.
+  6) — DLA następców w PRZYPADKACH z art. 15 ust. 1a i art. 17 ust. 1i
+□ Naczelnik US WŁAŚCIWY dla PRZEDSTAWICIELA grupy VAT (art. 3 ust. 7)
+  — DLA całej GRUPY jako jednego podatnika (spójne Z sekcją "GRUPA
+  VAT" wyżej W tym module)
 
-⭐⭐ CO WLICZA SIĘ DO LIMITU (art. 2 pkt 22 — DEFINICJA "sprzedaży"):
-  ODPŁATNA dostawa TOWARÓW + odpłatne ŚWIADCZENIE usług NA
-  terytorium KRAJU + EKSPORT towarów + WDT (wewnątrzwspólnotowa
-  dostawa TOWARÓW)
-
-⭐⭐⭐ CO NIE WLICZA SIĘ DO LIMITU (art. 113 ust. 2) — CZĘSTY BŁĄD
-  praktyczny:
-  → IMPORT USŁUG
-  → WNT (wewnątrzwspólnotowe NABYCIE towarów)
-  → dostawa, DLA KTÓREJ podatnikiem JEST nabywca (odwrotne
-    obciążenie)
-  → sprzedaż PODLEGAJĄCA opodatkowaniu POZA terytorium POLSKI
-  → WSTO (wewnątrzwspólnotowa SPRZEDAŻ towarów NA odległość)
-    NIEOPODATKOWANA na terytorium POLSKI
-
-⭐ PROPORCJONALNY LIMIT dla NOWYCH podmiotów (art. 113 ust. 9):
-  przedsiębiorca ROZPOCZYNAJĄCY działalność W TRAKCIE roku LICZY
-  limit PROPORCJONALNIE do LICZBY dni PROWADZENIA firmy W danym
-  roku (NIE pełne 240 000 zł OD razu)
-
-⭐⭐⭐ MOMENT UTRATY ZWOLNIENIA: zwolnienie TRACI MOC POCZĄWSZY OD
-  CZYNNOŚCI, KTÓRĄ PRZEKROCZONO limit — ⭐ NIE od POCZĄTKU miesiąca
-  ANI od NASTĘPNEGO dnia — DOKŁADNIE OD TEJ konkretnej TRANSAKCJI,
-  KTÓRA spowodowała PRZEKROCZENIE — WYMAGA precyzyjnego ŚLEDZENIA
-  narastającej sumy SPRZEDAŻY W trakcie roku
-
-⭐⭐⭐ WYŁĄCZENIA — KATALOG PODATNIKÓW BEZ PRAWA do zwolnienia OD
-  PIERWSZEJ sprzedaży (art. 113 ust. 13, ⚠️ NIEZALEŻNIE od
-  wysokości OBROTU — MUSZĄ być czynnymi PODATNIKAMI VAT od SAMEGO
-  początku): ORIENTACYJNIE OBEJMUJE m.in. dostawę WYROBÓW z metali
-  SZLACHETNYCH, świadczenie USŁUG prawniczych, doradczych,
-  jubilerskich — ⚠️ PEŁNY katalog WYMAGA weryfikacji NA ISAP przy
-  KONKRETNEJ branży, TU podane TYLKO PRZYKŁADY
-
-⭐⭐⭐ ⚡ NOWY MECHANIZM — PROCEDURA SME (art. 113b i n., TRANSGRANICZNE
-  zwolnienie DLA małych PRZEDSIĘBIORSTW z UE): ⭐ ROZSZERZENIE
-  zwolnienia NA podmioty ZAGRANICZNE (Z INNYCH państw UE) — WARUNKI:
-  1) POWIADOMIENIE państwa CZŁONKOWSKIEGO, W KTÓRYM podmiot MA
-     SIEDZIBĘ, O zamiarze SKORZYSTANIA ze zwolnienia NA terytorium
-     Polski
-  2) UZYSKANIE W tym PAŃSTWIE indywidualnego NUMERU identyfikacyjnego
-     zawierającego KOD "EX" — SPECJALNY numer NA potrzeby
-     korzystania ZE zwolnienia TRANSGRANICZNEGO
-  → ⭐ TO GENUINE, NOWA instytucja — ROZSZERZAJĄCA logikę zwolnienia
-    podmiotowego POZA granice KRAJOWE, ZGODNIE Z unijną dyrektywą O
-    procedurze SME (small AND medium enterprises)
-
-Potwierdzone w 8+ zgodnych, BARDZO aktualnych źródeł 2026
-(poradnikprzedsiebiorcy.pl [×2, NAJŚWIEŻSZE — jedno sprzed 20 GODZIN,
-drugie sprzed DNIA], BEZPOŚREDNIO inforlex.pl [Praktyczny Leksykon
-VAT 2026, maj 2026, Z dosłownym cytatem art. 113 ust. 1], fakturownia.pl
-[×2], staniekandpartners.pl [maj 2026], symfonia.pl [czerwiec 2026]).
+⭐ PRAKTYCZNA IMPLIKACJA: przy SPRAWACH z elementem TRANSGRANICZNYM
+  (e-commerce, OSS, podatnik zagraniczny) NIE ZAKŁADAJ automatycznie
+  właściwości "zwykłego" naczelnika US wg siedziby klienta — SPRAWDŹ
+  najpierw, CZY sprawa NIE PODLEGA jednej Z powyższych właściwości
+  SZCZEGÓLNYCH Z art. 3.
 ```
 
-### ⭐ PROCEDURA VAT MARŻA (art. 120 ustawy VAT) — dodane 2026-07-19
+### 5.3. Art. 28p — zawiadomienie o wyborze/rezygnacji z miejsca
+opodatkowania
 
 ```
-ZAKRES: WYŁĄCZNIE towary UŻYWANE, dzieła sztuki, przedmioty
-  kolekcjonerskie, antyki — NABYTE PRZEZ PODATNIKA W CELU ODSPRZEDAŻY
-⚠️ NIE MOŻNA stosować VAT marży do towarów NOWYCH — to częsty błąd
+ZAKRES ZASTOSOWANIA: dotyczy DWÓCH kategorii podmiotów:
+□ Dostawcy Z art. 22a ust. 3 i 6 (WSTO — wewnątrzwspólnotowa sprzedaż
+  towarów na ODLEGŁOŚĆ, PONIŻEJ progu 10 000 EUR łącznie DLA usług
+  TBE i WSTO — MOŻLIWOŚĆ wyboru opodatkowania W kraju KONSUMPCJI
+  zamiast kraju DOSTAWCY)
+□ Podatnicy Z art. 28k ust. 4 i 6 (usługi TELEKOMUNIKACYJNE,
+  NADAWCZE, ELEKTRONICZNE — TBE — świadczone NA rzecz konsumentów
+  W innych państwach UE, PONIŻEJ TEGO SAMEGO progu 10 000 EUR)
 
-WARUNEK KLUCZOWY — OD KOGO NABYTO towar (art. 120 ust. 10):
-  □ Od OSOBY FIZYCZNEJ/prawnej/jednostki BEZ osobowości prawnej,
-    NIEBĘDĄCEJ podatnikiem VAT (np. sprzedaż od osoby prywatnej —
-    STĄD "FB VAT marża": skup towarów używanych od osób sprzedających
-    prywatnie np. na Facebook Marketplace, w celu dalszej odsprzedaży
-    w ramach działalności — TO KLASYCZNY, podręcznikowy przypadek
-    zastosowania procedury VAT marża)
-  □ Od podatników, których dostawa BYŁA zwolniona z VAT (art. 43 ust.
-    1 pkt 2 — dostawa towarów używanych wykorzystywanych WYŁĄCZNIE na
-    cele zwolnione, lub art. 113 — zwolnienie podmiotowe "drobnych"
-    przedsiębiorców)
-  □ Od podatników, u których dostawa BYŁA JUŻ opodatkowana procedurą
-    marży (żeby uniknąć wielokrotnego opodatkowania tego samego towaru)
+OBOWIĄZEK: SKŁADANIE, ZA POMOCĄ środków komunikacji ELEKTRONICZNEJ,
+  DO naczelnika urzędu skarbowego, ZAWIADOMIENIA o:
+  □ WYBORZE miejsca opodatkowania (REZYGNACJA Z uproszczenia progowego
+    NA rzecz opodatkowania W KAŻDYM państwie konsumpcji od PIERWSZEJ
+    transakcji), ALBO
+  □ REZYGNACJI z DOKONANEGO wcześniej wyboru
 
-DEFINICJA "TOWARU UŻYWANEGO" (art. 120 ust. 1 pkt 4): RUCHOME dobro
-  materialne, nadające się do DALSZEGO użytku w aktualnym stanie lub po
-  naprawie — WYMAGA rzeczywistego wcześniejszego UŻYTKOWANIA (samo
-  nabycie/magazynowanie/posiadanie BEZ faktycznego korzystania NIE
-  WYSTARCZA, by uznać towar za "używany" w tym rozumieniu) — NIE
-  obejmuje nieruchomości
+⭐ POWIĄZANIE Z art. 28k ust. 4: PO wyborze opodatkowania W kraju
+  konsumpcji, PODATNIK NIE MOŻE zmienić miejsca świadczenia usług
+  WCZEŚNIEJ niż PO upływie 2 KOLEJNYCH LAT, licząc OD dnia wykonania
+  PIERWSZEJ usługi objętej WYBOREM — ⭐⭐ okres ZWIĄZANIA analogiczny
+  koncepcyjnie DO okresu związania wyboru OPODATKOWANIA tonażowego
+  (Część C mod-podatki-sektorowe) — ZASADA "wybór wiąże na czas
+  określony" POWTARZA się W kilku miejscach ustaw podatkowych,
+  WARTO o TYM pamiętać przy DORADZTWIE strategicznym
 
-MECHANIZM: podstawą opodatkowania jest MARŻA = różnica między kwotą
-  SPRZEDAŻY a kwotą NABYCIA, POMNIEJSZONA o VAT (nie cała wartość
-  sprzedaży, jak przy zasadach ogólnych)
+⭐ REZYGNACJA: podatnik Z siedzibą WYŁĄCZNIE W Polsce MOŻE ponownie
+  określić miejsce świadczenia PO uprzednim zawiadomieniu O
+  rezygnacji (PRZED początkiem miesiąca, W którym REZYGNUJE)
 
-FORMALNOŚCI:
-  □ FAKTURA oznaczona jako "procedura marży — towary używane" (bez
-    wykazanej kwoty VAT — art. 106e ust. 3 ustawy VAT)
-  □ EWIDENCJA osobna: cena nabycia + cena sprzedaży dla KAŻDEJ pozycji
-    objętej marżą (jeśli podatnik stosuje RÓWNOLEŻNIE zasady ogólne i
-    marżę — konieczny PODZIAŁ ewidencji)
-  □ Przy BRAKU dowodu nabycia od osoby prywatnej — orzecznictwo/
-    interpretacje dopuszczają stosowanie marży MIMO braku dokumentu
-    zakupu, PRZY zachowaniu rzetelnej, własnej ewidencji
-  □ Przy EKSPORCIE towaru objętego marżą — sama MARŻA (nie cała
-    wartość) podlega stawce 0%
-
-⭐ SPRZEDAŻ PRZEZ OSOBĘ PRYWATNĄ (BEZ działalności gospodarczej):
-  osoby fizyczne NIEPROWADZĄCE działalności gospodarczej MOGĄ
-  sprzedawać używane rzeczy (np. odzież, elektronikę) OKAZJONALNIE, BEZ
-  VAT w ogóle — to NIE JEST "procedura VAT marża" (która dotyczy
-  PODATNIKA odsprzedającego towar), tylko zwykła sprzedaż PRYWATNA poza
-  systemem VAT — rozróżnij te dwie sytuacje: (1) osoba prywatna
-  sprzedająca okazjonalnie na FB → brak VAT w ogóle, (2) podatnik
-  SKUPUJĄCY takie towary w celu odsprzedaży w ramach działalności → VAT
-  marża od jego DALSZEJ sprzedaży
-
-Checklist praktyczny:
-□ Czy towar jest UŻYWANY (rzeczywiste wcześniejsze użytkowanie) czy
-  NOWY — marża dotyczy TYLKO używanych
-□ Czy sprzedawca (podatnik) NABYŁ towar od podmiotu z KRĘGU art. 120
-  ust. 10 (osoba prywatna/zwolniony/już opodatkowany marżą)
-□ Czy prowadzona jest WYMAGANA odrębna ewidencja cen nabycia/sprzedaży
-□ Czy faktura ma PRAWIDŁOWE oznaczenie "procedura marży" i NIE wykazuje
-  kwoty VAT osobno
-□ Przy sprzedaży MIESZANEJ (marża + zasady ogólne) — czy ewidencja jest
-  PODZIELONA
+PRAKTYCZNE ZASTOSOWANIE: dotyczy PRZEDE WSZYSTKIM małych i średnich
+  sprzedawców e-commerce/usług cyfrowych, DLA których PROSTSZE jest
+  opodatkowanie W kraju SIEDZIBY do momentu przekroczenia progu
+  10 000 EUR — ALE CZASAMI korzystniejsze jest DOBROWOLNE opodatkowanie
+  W kraju konsumpcji OD razu (NP. gdy stawki VAT W kraju konsumpcji
+  SĄ niższe niż polskie 23%) — art. 28p JEST narzędziem TEGO wyboru.
 ```
 
-### ⭐ EKSPORT TOWARÓW I WDT — ROZBUDOWANE (dodane 2026-07-19)
-
-> Dotychczas tylko jedna linijka ("0%: Eksport towarów, WDT") w sekcji
-> stawek — poniżej pełne warunki stosowania stawki 0%.
+### 5.4. Art. 44 — zwolnienia WNT (odesłania do zwolnień z art. 43 i
+importu)
 
 ```
-WDT (Wewnątrzwspólnotowa Dostawa Towarów, art. 13 ustawy VAT) — wywóz
-  towaru z Polski na terytorium INNEGO kraju UE, na rzecz podatnika
-  zidentyfikowanego dla transakcji wewnątrzwspólnotowych w tym kraju
+TREŚĆ (przepis KRÓTKI, DWUPUNKTOWY): zwalnia się OD podatku
+  wewnątrzwspólnotowe NABYCIE:
+  1) towarów, DO których miałyby ZASTOSOWANIE przepisy art. 43 ust. 1
+     pkt 5–8 (⭐ ODESŁANIE do zwolnień PRZEDMIOTOWYCH z art. 43 —
+     m.in. dostawa CZĘŚCI ciała/organów/krwi/mleka kobiecego,
+     zwolnienia DLA rolnika ryczałtowego W określonym zakresie —
+     ⚠️ PRZY konkretnej sprawie SPRAWDŹ dokładny zakres pkt 5–8 W
+     aktualnym brzmieniu art. 43, gdyż numeracja PUNKTÓW w tym
+     przepisie ULEGAŁA zmianom historycznie)
+  2) towarów, KTÓRYCH import NA warunkach określonych W przepisach
+     dotyczących importu towarów BYŁBY zwolniony OD podatku (⭐⭐
+     ODESŁANIE "lustrzane" DO całego Rozdziału 3 Działu VIII —
+     zwolnienia Z tytułu IMPORTU, art. 45-82a, OBJĘTE modułem
+     mod-VAT-import-towarow-i-zwolnienia-importowe.md) — MECHANIZM
+     ZAPEWNIA spójność: JEŚLI dany towar BYŁBY zwolniony PRZY imporcie
+     Z PAŃSTWA trzeciego, ANALOGICZNE zwolnienie STOSUJE SIĘ przy
+     WNT Z INNEGO państwa UE — ZASADA NEUTRALNOŚCI między dwoma
+     kanałami nabycia SPOZA terytorium kraju
 
-WARUNKI stawki 0% dla WDT (art. 42 ustawy VAT) — WSZYSTKIE łącznie:
-  1) Dostawa NA RZECZ nabywcy posiadającego WAŻNY numer VAT-UE (z
-     dwuliterowym prefiksem kraju), podany dostawcy
-  2) Dostawca PRZED upływem terminu złożenia deklaracji za dany okres
-     POSIADA DOWODY, że towar został WYWIEZIONY z Polski i DOSTARCZONY
-     do nabywcy w innym kraju UE (dokumenty przewozowe — CMR, list
-     przewozowy, specyfikacja ładunku — art. 42 ust. 3 i art. 45a
-     Rozporządzenia UE 282/2011)
-  3) Dostawca w chwili składania deklaracji jest ZAREJESTROWANY do
-     VAT-UE
-  4) Dostawca ZŁOŻYŁ w terminie (do 25. dnia miesiąca po miesiącu
-     powstania obowiązku) INFORMACJĘ PODSUMOWUJĄCĄ VAT-UE — BRAK tego
-     zgłoszenia WYKLUCZA stawkę 0%, nawet gdy pozostałe warunki
-     spełnione
-
-⭐ BRAK DOKUMENTACJI W TERMINIE — CO ROBIĆ (art. 42 ust. 12-12a):
-  □ Rozliczenie KWARTALNE: jeśli dokumentów brak przed upływem terminu
-    złożenia deklaracji za KOLEJNY kwartał — dostawę wykazuje się z
-    KRAJOWĄ stawką (zwykle 23%), NIE jako WDT — możliwa KOREKTA po
-    późniejszym zebraniu dokumentów
-  □ Analogiczny mechanizm przy rozliczeniu MIESIĘCZNYM
-  □ NSA (uchwała I FPS 1/10): WYSTARCZY posiadanie TYLKO NIEKTÓRYCH z
-    dowodów wymienionych w ustawie — nie wszystkich naraz, jeśli łącznie
-    potwierdzają fakt wywozu/dostarczenia
-
-DOMNIEMANIE z art. 45a Rozporządzenia UE 282/2011: w OKREŚLONYCH
-  okolicznościach (np. dwa niesprzeczne dowody od niezależnych stron)
-  DOMNIEMYWA SIĘ, że towar został wysłany/dostarczony do innego kraju
-  UE — ułatwia spełnienie warunku 2) powyżej
-
-WYJĄTEK PODMIOTOWY: podatnik ZWOLNIONY z VAT (korzystający ze
-  zwolnienia podmiotowego) sprzedający towary do UE — CO DO ZASADY NIE
-  MA obowiązku wykazywania WDT/składania deklaracji w tym zakresie —
-  WYJĄTEK: dostawa NOWYCH ŚRODKÓW TRANSPORTU (zawsze WDT, niezależnie
-  od statusu stron)
-
-ORZECZNICTWO — ZAKRES ODPOWIEDZIALNOŚCI DOSTAWCY (TSUE, postanowienie
-  z 9.01.2023): CO DO ZASADY nie jest rolą podatnika BADANIE, czy
-  kontrahenci na WCZEŚNIEJSZYCH etapach łańcucha dostaw przestrzegali
-  przepisów — to ORGAN PODATKOWY musi WYKAZAĆ, że podatnik dopuścił się
-  oszustwa VAT lub o nim WIEDZIAŁ/mógł wiedzieć — korzystne dla
-  uczciwych podatników w łańcuchach dostaw
-
-EKSPORT TOWARÓW (poza UE, odrębnie od WDT) — analogicznie stawka 0%,
-  ale WYMAGA innych dowodów (dokument celny SAD/potwierdzenie wywozu
-  poza obszar celny UE), NIE dokumentów przewozowych WEWNĄTRZUNIJNYCH
-
-Checklist praktyczny:
-□ Czy nabywca ma WAŻNY i AKTYWNY numer VAT-UE — zweryfikuj w systemie
-  VIES PRZED transakcją
-□ Czy zebrano WYMAGANE dowody wywozu/dostarczenia PRZED terminem
-  deklaracji — jeśli NIE, rozważ wykazanie ze stawką krajową z
-  możliwością późniejszej korekty
-□ Czy złożono INFORMACJĘ PODSUMOWUJĄCĄ VAT-UE w terminie — BRAK tego
-  wyklucza 0% nawet przy pozostałych warunkach spełnionych
-□ Czy to WDT (do kraju UE) czy EKSPORT (poza UE) — różne wymogi
-  dokumentacyjne dla stawki 0% w każdym przypadku
+⭐ ZNACZENIE PRAKTYCZNE: art. 44 JEST rzadko powoływany SAMODZIELNIE —
+  W PRAKTYCE analiza ZWOLNIENIA przy WNT ZAWSZE prowadzi Z POWROTEM
+  DO treści art. 43 ust. 1 pkt 5–8 LUB odpowiedniego przepisu Z
+  Rozdziału 3 (import) — TRAKTUJ art. 44 jako "PRZEŁĄCZNIK", NIE jako
+  SAMODZIELNY katalog przesłanek.
 ```
+
+### 5.5. Art. 84–85 — szczególne metody ustalania podatku należnego
+
+```
+⚠️ ZNACZENIE MALEJĄCE W PRAKTYCE — obie METODY są ALTERNATYWĄ DLA
+  standardowej ewidencji PRZY zastosowaniu kas REJESTRUJĄCYCH
+  (art. 111) i W praktyce DOTYCZĄ WĄSKIEJ grupy podatników NIE
+  objętych obowiązkiem KASY fiskalnej, ALE prowadzących sprzedaż
+  MIESZANĄ (opodatkowana + zwolniona LUB różne stawki).
+
+ART. 84 — METODA "STRUKTURY ZAKUPÓW" (handel):
+  □ DOTYCZY: podatników świadczących USŁUGI W zakresie HANDLU,
+    DOKONUJĄCYCH sprzedaży OPODATKOWANEJ i ZWOLNIONEJ LUB wg RÓŻNYCH
+    stawek, NIEOBOWIĄZANYCH do prowadzenia EWIDENCJI kas fiskalnych
+    (art. 111 ust. 1)
+  □ MECHANIZM: PODZIAŁ sprzedaży W danym okresie ROZLICZENIOWYM W
+    PROPORCJACH wynikających Z UDOKUMENTOWANYCH zakupów Z TEGO
+    samego okresu (W którym DOKONANO zakupu) — DO obliczenia
+    proporcji PRZYJMUJE SIĘ WYŁĄCZNIE towary PRZEZNACZONE do DALSZEJ
+    sprzedaży, WEDŁUG cen UWZGLĘDNIAJĄCYCH podatek
+  □ PRZY PODJĘCIU/WZNOWIENIU działalności: PODZIAŁ może być DOKONANY
+    PRZY zastosowaniu DO obrotu danego okresu PROCENTOWYCH wskaźników
+    podziału ZAKUPÓW Z okresu POPRZEDZAJĄCEGO zakończenie
+
+ART. 85 — METODA "W STU" (usługi, W TYM handel i GASTRONOMIA):
+  □ MECHANIZM: kwota PODATKU należnego MOŻE być OBLICZANA jako
+    ILOCZYN wartości DOSTAWY i STAWKI. ✅ ZWERYFIKOWANE 2026-08-13 —
+    aktualne przeliczniki (potwierdzone w ifirma.pl, Z przykładem
+    rozliczenia ZA styczeń 2023, WIĘC już PO podwyżce stawek z 2011 r.
+    — pierwsza WERSJA tej sekcji błędnie SUGEROWAŁA możliwą
+    nieaktualność, POPRAWIONE po dodatkowej weryfikacji):
+    • 18,70% — DLA towarów/usług opodatkowanych STAWKĄ 23%
+    • 7,41% — DLA towarów/usług opodatkowanych STAWKĄ 8%
+    • 4,76% — DLA towarów/usług opodatkowanych STAWKĄ 5%
+    ⚠️ [POTWIERDZONE POŚREDNIO, NIE WPROST NA ISAP] — źródło
+    (ifirma.pl, Rząd 2B) NIE cytuje wprost numeracji punktów art. 85
+    z aktualnymi przelicznikami — PRZED zastosowaniem W piśmie
+    procesowym POTWIERDŹ dokładne brzmienie NA ISAP, zwłaszcza
+    PRZYPORZĄDKOWANIE konkretnego przelicznika DO konkretnego
+    punktu przepisu.
+
+RELACJA DO ART. 106e (przeliczniki "w stu" NA FAKTURZE): ⭐⭐ ISTOTNE
+  ROZRÓŻNIENIE wykryte PRZY tej weryfikacji — art. 85 I art. 106e
+  ust. 7-11 TO DWA RÓŻNE mechanizmy "w stu", NIE jeden i TEN SAM
+  przepis:
+  • Art. 106e ust. 7-11 — WZÓR do wyliczenia KWOTY podatku wprost NA
+    POJEDYNCZEJ fakturze (KP = WB × SP / (100 + SP), gdzie WB to
+    wartość BRUTTO sprzedaży, SP — stawka procentowa) — ZASTOSOWANIE
+    POWSZECHNE, DLA każdego podatnika WYSTAWIAJĄCEGO faktury,
+    NIEZALEŻNIE od reżimu Z art. 84/85
+  • Art. 85 — ODRĘBNA metoda, ZASTRZEŻONA dla WĄSKIEGO kręgu
+    podatników ŚWIADCZĄCYCH usługi (W TYM handel/gastronomia) BEZ
+    obowiązku EWIDENCJI kasowej Z art. 111 — SŁUŻY do WYLICZENIA
+    zbiorczego podatku NALEŻNEGO za CAŁY okres rozliczeniowy, NIE
+    pojedynczej transakcji
+  ⚠️ NIE MYLIĆ obu mechanizmów PRZY doradztwie — mają RÓŻNY zakres
+  zastosowania I różną PODSTAWĘ prawną, mimo POZORNEGO podobieństwa
+  nazwy potocznej ("metoda w stu").
+
+RELACJA DO ART. 111 (kasy fiskalne): OBIE metody (art. 84 i 85) SĄ
+  wyraźnie skonstruowane JAKO wyjątek DLA podatników NIEOBJĘTYCH
+  obowiązkiem ewidencjonowania PRZY użyciu kas rejestrujących —
+  ⭐ W PRAKTYCE, WOBEC powszechności OBOWIĄZKU kas fiskalnych PO
+  kolejnych nowelizacjach art. 111, KRĄG podatników REALNIE
+  mogących SKORZYSTAĆ Z art. 84–85 JEST dziś WĄSKI — SPRAWDŹ
+  najpierw, CZY klient W OGÓLE jest zwolniony Z obowiązku KASY
+  (patrz sekcja "KASY FISKALNE" wyżej W tym module), ZANIM
+  zaproponujesz metodę Z art. 84 lub 85 jako ROZWIĄZANIE.
+```
+
+⚠️ Sekcja 5 ZAMYKA grupę "szybką" luk peryferyjnych (ETAP 2a). Grupa
+"średnia" (złoto inwestycyjne, taksówki, call-off stock, VAT-REF,
+szacowanie, korekty VAT-UE) i grupa "złożona" (CESOP, procedury
+szczególne Działu XIII, centralizacja JST) POZOSTAJĄ do kolejnych
+etapów — patrz CHANGELOG poniżej i MAPA-AKTOW.md.
 
 ---
 
-## 4a. ⭐⭐⭐ OBOWIĄZEK PODATKOWY — ZASADY OGÓLNE (Dział IV Rozdział 1,
-art. 19a ustawy VAT) — dodane 2026-08-12, uzupełnienie luki
-zidentyfikowanej w audycie pokrycia DR-06 (dotąd CAŁKOWICIE nieobecne
-poza momentem dla WNT — mechanizm FUNDAMENTALNY, decydujący w KTÓRYM
-okresie rozliczeniowym wykazać podatek NALEŻNY)
+## 6. GRUPA ŚREDNIA — DOMKNIĘCIE SAMODZIELNYCH MECHANIZMÓW
+PERYFERYJNYCH (ETAP 2b, 2026-08-13, na żądanie użytkownika)
+
+### 6.1. Art. 121–125 — złoto inwestycyjne
 
 ```
-⭐⭐⭐ ZNACZENIE PRAKTYCZNE: MOMENT powstania obowiązku podatkowego
-  PRZESĄDZA, W KTÓREJ deklaracji/JPK_V7 NALEŻY wykazać podatek NALEŻNY
-  — BŁĘDNE ustalenie SKUTKUJE albo ZANIŻENIEM (wykazanie ZA późno —
-  ryzyko ODSETEK i sankcji), albo NIEPOTRZEBNYM przyspieszeniem
-  rozliczenia (wykazanie ZA wcześnie — ryzyko ZAKWESTIONOWANIA przez
-  organ z ODWROTNYCH przyczyn, choć rzadsze W praktyce)
+DEFINICJA ZŁOTA INWESTYCYJNEGO (art. 121 ust. 1) — DWIE kategorie:
+□ złoto W POSTACI sztabek LUB płytek O PRÓBIE co NAJMNIEJ 995
+  TYSIĘCZNYCH ORAZ złoto REPREZENTOWANE przez papiery WARTOŚCIOWE
+□ złote MONETY, spełniające ŁĄCZNIE WSZYSTKIE cztery warunki:
+  a) próba co NAJMNIEJ 900 tysięcznych
+  b) wybite PO roku 1800
+  c) SĄ lub BYŁY obowiązującym środkiem PŁATNICZYM w kraju POCHODZENIA
+  d) sprzedawane PO cenie NIEPRZEKRACZAJĄCEJ o więcej NIŻ 80% wartości
+     rynkowej ZŁOTA zawartego W monecie
+  ⭐ Monety Z corocznego SPISU w serii C Dziennika Urzędowego UE
+  SPEŁNIAJĄ warunki PRZEZ cały rok OBOWIĄZYWANIA spisu (ust. 2) —
+  UŁATWIENIE dowodowe, nie TRZEBA badać KAŻDEJ monety indywidualnie
+  ⭐⭐ Monety Z powyższej definicji NIE SĄ traktowane jako PRZEDMIOTY
+  kolekcjonerskie O wartości NUMIZMATYCZNEJ (ust. 3) — WYRAŹNE
+  rozgraniczenie OD odrębnej procedury MARŻY dla przedmiotów
+  kolekcjonerskich Z art. 120
 
-⭐⭐⭐ ZASADA OGÓLNA (art. 19a ust. 1): obowiązek PODATKOWY powstaje Z
-  CHWILĄ DOKONANIA dostawy towarów LUB wykonania USŁUGI — NIE Z chwilą
-  wystawienia FAKTURY ani Z chwilą ZAPŁATY (⚠️ CZĘSTY błąd praktyczny:
-  utożsamianie MOMENTU wystawienia faktury Z momentem powstania
-  obowiązku — FAKTURA jest jedynie DOKUMENTEM potwierdzającym
-  wcześniej POWSTAŁY obowiązek, NIE jego ŹRÓDŁEM, poza WYJĄTKAMI
-  wskazanymi niżej)
-  □ USŁUGI PRZYJMOWANE częściowo (ust. 2): usługę UZNAJE się za
-    wykonaną RÓWNIEŻ w przypadku wykonania JEJ części, DLA KTÓREJ
-    określono ZAPŁATĘ (np. ETAPY dużego projektu Z odrębnym
-    wynagrodzeniem ZA każdy etap)
+ZWOLNIENIE (art. 122): DOSTAWA, WNT i IMPORT złota INWESTYCYJNEGO —
+  W TYM złota reprezentowanego PRZEZ certyfikaty NA złoto asygnowane/
+  nieasygnowane, złota Z obrotu NA rachunkach złota, POŻYCZEK w
+  złocie, OPERACJI swap, KONTRAKTÓW futures/forward Z przeniesieniem
+  własności/roszczenia — SĄ zwolnione OD VAT. Zwolnienie OBEJMUJE
+  RÓWNIEŻ usługi AGENTÓW pośredniczących W dostawie złota
+  inwestycyjnego W imieniu ZLECENIODAWCY (art. 122 ust. 2)
 
-⭐⭐⭐ USŁUGI CIĄGŁE/ROZLICZANE OKRESOWO (ust. 3–4) — SZCZEGÓLNIE
-  ISTOTNE dla umów O STAŁĄ obsługę (np. USŁUGI prawne AT/miesięczny
-  ryczałt, najem, ABONAMENTY):
-  □ USŁUGA, DLA KTÓREJ ustalane SĄ następujące PO sobie terminy
-    płatności/rozliczeń → UZNAJE się za WYKONANĄ z UPŁYWEM każdego
-    okresu, DO KTÓREGO odnoszą się TE płatności/rozliczenia — AŻ do
-    ZAKOŃCZENIA świadczenia usługi
-  □ USŁUGA świadczona W sposób CIĄGŁY przez okres DŁUŻSZY niż ROK,
-    DLA KTÓREJ w DANYM roku NIE upływają terminy płatności/rozliczeń
-    → UZNAJE się za wykonaną Z upływem KAŻDEGO roku podatkowego, AŻ
-    do zakończenia ŚWIADCZENIA
-  □ ⚠️ ORZECZNICTWO (WSA w Poznaniu, I SA/Po 1297/16): przepis TEN
-    NIE odnosi się DO wszystkich usług POWTARZAJĄCYCH się, LECZ
-    TYLKO do tych O charakterze RZECZYWIŚCIE ciągłym — GDZIE
-    poszczególnych CZYNNOŚCI usługodawcy NIE sposób WYODRĘBNIĆ jako
-    osobnych ŚWIADCZEŃ — ROZRÓŻNIENIE "usługa ciągła" vs "usługa
-    powtarzalna, ale WYODRĘBNIALNA" jest ŹRÓDŁEM licznych sporów Z
-    organami
-  □ ⭐ TERMIN faktury PRZY usługach ciągłych: art. 106i ust. 1 —
-    NIE później NIŻ 15. dnia MIESIĄCA następującego PO upływie
-    okresu rozliczeniowego (LUB po otrzymaniu ZALICZKI w trakcie
-    okresu) — POTWIERDZONE interpretacją KIS Z 3.06.2025 (sygn.
-    0111-KDIB3-1.4012.212.2025.7.KO)
+REZYGNACJA ZE ZWOLNIENIA (art. 123) — DOSTĘPNA TYLKO dla:
+  1) podatników WYTWARZAJĄCYCH złoto inwestycyjne LUB przetwarzających
+     inne złoto NA inwestycyjne — GDY dostawa NA rzecz innego podatnika
+  2) podatników DOKONUJĄCYCH W ramach przedsiębiorstwa DOSTAWY złota
+     W celach PRZEMYSŁOWYCH (złoto Z art. 121 ust. 1 pkt 1) — GDY
+     dostawa NA rzecz innego podatnika
+  TRYB: pisemne ZAWIADOMIENIE naczelnika US PRZED początkiem miesiąca
+  rezygnacji (LUB przed PIERWSZĄ czynnością — dla ROZPOCZYNAJĄCYCH
+  działalność W trakcie roku)
 
-⭐⭐⭐ ZALICZKI, ZADATKI, PRZEDPŁATY (ust. 8) — ZASADA I WYJĄTEK:
-  □ ZASADA: JEŻELI PRZED dokonaniem dostawy/wykonaniem usługi
-    otrzymano CAŁOŚĆ lub CZĘŚĆ zapłaty (przedpłata, ZALICZKA,
-    zadatek, RATA, wkład budowlany/mieszkaniowy) → obowiązek
-    podatkowy POWSTAJE z CHWILĄ jej OTRZYMANIA, w ODNIESIENIU do
-    otrzymanej KWOTY
-  □ ⭐⭐⭐ WYJĄTEK KLUCZOWY (ust. 8 w zw. Z ust. 5 pkt 4) — ZALICZKA
-    NIE rodzi obowiązku PODATKOWEGO przy: dostawie ENERGII
-    elektrycznej/cieplnej/CHŁODNICZEJ, gazu PRZEWODOWEGO, usługach Z
-    poz. 24–37, 50 i 51 ZAŁĄCZNIKA nr 3 (m.in. dostarczanie WODY,
-    odprowadzanie ŚCIEKÓW, wywóz ODPADÓW), NAJMIE, dzierżawie,
-    LEASINGU lub usługach O podobnym CHARAKTERZE, OCHRONIE osób/
-    mienia, USŁUGACH stałej obsługi PRAWNEJ i BIUROWEJ — DLA tych
-    świadczeń obowiązek PODATKOWY powstaje DOPIERO Z chwilą
-    WYSTAWIENIA faktury (NIE z chwilą otrzymania zaliczki) —
-    ⚠️ POTWIERDZONE liniami ORZECZNICZYMI WSA Kraków (I SA/Kr
-    528/16) i NSA (I FSK 1842/16): SAMO ustalenie W umowie terminu
-    zapłaty ZALICZKI ANI jej FAKTYCZNA zapłata NIE powoduje
-    powstania obowiązku — TYLKO wystawienie FAKTURY
-    → ⭐ PRAKTYCZNA DONIOSŁOŚĆ dla PRAKTYKI kancelaryjnej: umowy O
-      stałą OBSŁUGĘ prawną Z miesięcznym RYCZAŁTEM należą DO tej
-      kategorii — otrzymanie ZALICZKI od klienta NIE generuje
-      obowiązku, DOPÓKI nie wystawiono FAKTURY
+PRAWO DO ODLICZENIA MIMO ZWOLNIENIA (art. 124) — WYJĄTEK od zasady
+  ogólnej: podatnik ZWOLNIONY na podstawie art. 122 ust. 1, KTÓRY
+  wytwarza/przetwarza złoto W inwestycyjne, MA prawo ODLICZYĆ VAT
+  naliczony OD zakupów ZWIĄZANYCH z tym wytworzeniem/przetworzeniem
+  (W TYM WNT/import) — ⭐ RZADKI przypadek "zwolnienia Z PRAWEM do
+  odliczenia" W polskim VAT, ANALOGICZNY konstrukcyjnie DO stawki 0%
 
-⭐⭐ SZCZEGÓLNE MOMENTY (ust. 5) — NAJWAŻNIEJSZE PRZYPADKI:
-  □ pkt 1 — Z chwilą OTRZYMANIA całości/części ZAPŁATY: komis
-    (wydanie TOWARU komisantowi), przeniesienie WŁASNOŚCI Z nakazu
-    organu władzy W zamian za ODSZKODOWANIE, dostawa W trybie
-    EGZEKUCJI (art. 18), usługi NA zlecenie sądów/prokuratury
-    związane Z postępowaniem (Z wyjątkiem usług art. 28b
-    stanowiących IMPORT usług), usługi ZWOLNIONE z art. 43 ust. 1
-    pkt 37–41 (m.in. UBEZPIECZENIOWE/finansowe)
-  □ pkt 3–4 — USŁUGI BUDOWLANE/budowlano-montażowe ORAZ dostawa
-    KSIĄŻEK/czasopism (Z zastrzeżeniami) — SZCZEGÓLNY reżim ust. 7:
-    GDY podatnik NIE wystawił faktury LUB wystawił JĄ Z opóźnieniem
-    → obowiązek POWSTAJE z chwilą UPŁYWU terminu wystawienia
-    faktury (art. 106i ust. 3–4), A gdy TERMINU nie określono — Z
-    chwilą upływu TERMINU płatności
-  □ pkt 4 — MEDIA (energia, gaz, woda, ŚCIEKI) i USŁUGI ciągłe
-    wymienione WYŻEJ (najem, ochrona itd.) — obowiązek Z chwilą
-    WYSTAWIENIA faktury (POWIĄZANE z wyjątkiem OD zaliczek, ust. 8,
-    opisanym wyżej)
+EWIDENCJA (art. 125) — obowiązek PROWADZENIA ewidencji sprzedaży
+  złota inwestycyjnego, Z DANYMI nabywców — ⭐⭐ ISTOTNE Z perspektywy
+  AML/przeciwdziałania praniu PIENIĘDZY, gdyż złoto TRADYCYJNIE jest
+  instrumentem WYSOKIEGO ryzyka prania — SPRAWDŹ POWIĄZANIE z
+  obowiązkami Z mod-ustawa-AML-instytucje-obowiazkowe.md, JEŚLI
+  klient PROWADZI DZIAŁALNOŚĆ w OBROCIE złotem inwestycyjnym
 
-⭐ MOMENT DLA BONÓW JEDNEGO PRZEZNACZENIA (ust. 1a, 4a; art. 8a) —
-  obowiązek PODATKOWY powstaje Z CHWILĄ dokonania TRANSFERU bonu
-  jednego PRZEZNACZENIA (NIE z chwilą jego FAKTYCZNEGO wykorzystania)
-  — ⭐ POWIĄZANIE z Rozdziałem 2a ustawy (opodatkowanie PRZY
-  stosowaniu bonów) — TEMAT dotąd NIEOPISANY w tym module, SYGNAŁ do
-  ewentualnego POGŁĘBIENIA przy sprawie Z udziałem bonów/voucherów
-
-⭐ WNT, WDT, IMPORT TOWARÓW — ODESŁANIE: momenty SZCZEGÓLNE DLA tych
-  kategorii transakcji SĄ uregulowane ODRĘBNIE (art. 20 dla WNT/WDT —
-  patrz sekcja "WNT I IMPORT USŁUG" wyżej w TYM module, gdzie OPISANO
-  termin 15. dnia miesiąca NASTĘPUJĄCEGO po dostawie; art. 19a ust. 9
-  DLA importu towarów — MOMENT powstania DŁUGU celnego, Z odrębnymi
-  zasadami DLA procedury USZLACHETNIANIA czynnego — ⚠️ WYMAGA odrębnej
-  weryfikacji przy KONKRETNEJ sprawie celnej, punkt startowy TYLKO)
-
-Checklist praktyczny:
-□ Czy USTALONO faktyczną datę DOKONANIA dostawy/wykonania usługi —
-  NIE datę wystawienia FAKTURY ani datę ZAPŁATY — jako PUNKT wyjścia
-□ Przy USŁUGACH rozliczanych okresowo — czy ŚWIADCZENIE rzeczywiście
-  ma CHARAKTER ciągły (brak MOŻLIWOŚCI wyodrębnienia poszczególnych
-  czynności), CZY to tylko usługa POWTARZALNA, lecz WYODRĘBNIALNA —
-  RÓŻNE traktowanie na gruncie ust. 3–4
-□ Przy OTRZYMANEJ zaliczce — czy ŚWIADCZENIE, którego DOTYCZY,
-  znajduje SIĘ na LIŚCIE wyjątków ust. 5 pkt 4 (media, NAJEM, ochrona
-  itd.) — JEŚLI tak, obowiązek POWSTAJE dopiero PRZY wystawieniu
-  faktury, NIE przy wpłacie
-□ Przy USŁUGACH budowlanych — czy FAKTURA została wystawiona W
-  terminie (art. 106i ust. 3–4) — PRZY opóźnieniu obowiązek I TAK
-  powstaje Z upływem tego TERMINU (nie można GO odroczyć przez
-  zwłokę w FAKTUROWANIU)
-□ Czy TRANSAKCJA nie jest OBJĘTA odrębnym reżimem szczególnym
-  (WNT/WDT/import towarów/bony) WYMAGAJĄCYM odrębnej analizy
-
-⚠️ Weryfikuj aktualne brzmienie art. 19a w ISAP — przepis ma LICZNE
-  ustępy Z odesłaniami krzyżowymi (1a, 1b, 4a i in.), CZĘSTO
-  nowelizowane PRZY okazji zmian W innych obszarach (KSeF, bony,
-  interfejsy elektroniczne) — SPRAWDŹ najnowszą WERSJĘ przy
-  konkretnej sprawie.
+PRAKTYCZNE ZASTOSOWANIE: RELEWANTNE przy sprawach DOTYCZĄCYCH firm
+  jubilerskich/lombardów/skupów złota — ROZRÓŻNIENIE między złotem
+  INWESTYCYJNYM (zwolnionym) a BIŻUTERIĄ/złomem złota (OPODATKOWANYM
+  wg zasad OGÓLNYCH, ewentualnie procedurą MARŻY z art. 120) jest
+  ŹRÓDŁEM częstych SPORÓW interpretacyjnych — KLUCZOWE kryterium TO
+  PRÓBA i FORMA (sztabka/płytka), NIE sama WARTOŚĆ kruszcu.
 ```
 
-```
-Obowiązkowe dla wszystkich czynnych podatników VAT
-Składane elektronicznie: do 25. dnia miesiąca następnego
-JPK_V7M: rozliczenie miesięczne
-JPK_V7K: rozliczenie kwartalne (ale część ewidencyjna co miesiąc)
+### 6.2. Art. 114 — ryczałt VAT dla taksówek osobowych
 
-Błędy w JPK:
-  → Korekta: złożona przed wszczęciem kontroli → skuteczna
-  → Sankcja: korekta wymuszona (po wezwaniu organu) może nie zwolnić od sankcji
-  → ⭐ SPROSTOWANE 2026-08-12: art. 109a przewiduje dodatkowe
-    zobowiązanie podatkowe w wysokości **100% kwoty podatku** z faktury
-    ujętej w ewidencji, gdy dotyczy ona sprzedaży potwierdzonej
-    PARAGONEM BEZ NIP nabywcy — pełna treść i wyłączenia: sekcja 5 tego
-    modułu (nie mylić z art. 112b–112c, sekcja 4e)
 ```
+ISTOTA: FAKULTATYWNA procedura SZCZEGÓLNA — podatnik świadczący usługi
+  TAKSÓWEK osobowych (Z WYŁĄCZENIEM wynajmu samochodów osobowych Z
+  kierowcą, PKWiU 49.32.11.0) MOŻE wybrać opodatkowanie W FORMIE
+  ryczałtu.
+
+⚠️ ROZBIEŻNOŚĆ TEKST-PRAKTYKA (istotna DLA precyzji cytowania):
+  □ LITERALNE brzmienie art. 114 ust. 1 WSKAZUJE stawkę 3%
+  □ FAKTYCZNIE STOSOWANA stawka TO 4% — NIE na mocy ZMIANY samego
+    art. 114, LECZ na PODSTAWIE ODRĘBNEGO przepisu przejściowego
+    (art. 146aa ust. 1 pkt 4, WCZEŚNIEJ art. 146a pkt 4), KTÓRY
+    PODWYŻSZA stawki O 1 punkt procentowy OD 1.01.2011 r. — MECHANIZM
+    analogiczny DO relacji między NOMINALNĄ stawką podstawową 22%
+    (Z tekstu ustawy) a FAKTYCZNIE stosowaną 23% (PRZEZ przepisy
+    przejściowe) — ⭐⭐ PRZY cytowaniu W piśmie procesowym, WSKAZUJ
+    OBA przepisy łącznie (art. 114 ORAZ art. 146aa ust. 1 pkt 4),
+    NIE tylko art. 114 samodzielnie, ABY uniknąć ZARZUTU
+    nieaktualności powołanej stawki
+
+WARUNKI WYBORU: PISEMNE zawiadomienie NACZELNIKA urzędu skarbowego
+  (formularz VAT-R) W TERMINIE do KOŃCA miesiąca POPRZEDZAJĄCEGO
+  okres, W KTÓRYM podatnik BĘDZIE stosował ryczałt
+
+SKUTKI WYBORU RYCZAŁTU:
+  □ WYŁĄCZENIE prawa DO odliczenia VAT naliczonego (NIE stosuje SIĘ
+    art. 86) — koszt STANOWI wydatek W kwocie BRUTTO
+  □ obowiązek SKŁADANIA skróconej deklaracji PODATKOWEJ (formularz
+    VAT-12) W terminie ANALOGICZNYM do zasad OGÓLNYCH (art. 99 ust. 1)
+    — pierwotnie MIESIĘCZNIE do 25. dnia
+
+REZYGNACJA Z RYCZAŁTU: MOŻLIWA NAJWCZEŚNIEJ po UPŁYWIE 12 MIESIĘCY OD
+  wyboru — PO uprzednim pisemnym ZAWIADOMIENIU naczelnika, W terminie
+  DO końca miesiąca POPRZEDZAJĄCEGO miesiąc, OD którego podatnik
+  PRZESTAJE rozliczać się RYCZAŁTEM — ⭐ ANALOGICZNY mechanizm okresu
+  ZWIĄZANIA wyborem, jak PRZY art. 28k/28p (2 lata) i PODATKU
+  tonażowym — WZORZEC "wybór WIĄŻE na czas OKREŚLONY" powtarza SIĘ
+  konsekwentnie W konstrukcji polskiego VAT
+
+⭐ ODRĘBNOŚĆ OD RYCZAŁTU PIT: ⛔ NIE MYLIĆ Z ryczałtem OD przychodów
+  ewidencjonowanych DLA taksówkarzy NA gruncie PIT (STAWKA 8,5%,
+  ZUPEŁNIE odrębna PODSTAWA — ustawa O zryczałtowanym podatku
+  dochodowym) — TAKSÓWKARZ MOŻE (choć NIE musi) łączyć OBA reżimy
+  ryczałtowe (VAT-owy Z art. 114 ORAZ PIT-owy), gdyż DOTYCZĄ różnych
+  PODATKÓW i mają NIEZALEŻNE od siebie PRZESŁANKI wyboru.
+```
+
+### 6.3. Art. 13a–13l — procedura magazynu typu call-off stock
+
+```
+GENEZA: implementacja art. 17a DYREKTYWY 2006/112/WE (WPROWADZONA
+  dyrektywą 2018/1910), OBOWIĄZUJE OD 1.07.2020 r. — ZASTĄPIŁA
+  wcześniejsze, NIEJEDNOLITE krajowe uproszczenia dot. MAGAZYNÓW
+  KONSYGNACYJNYCH.
+
+ISTOTA: umożliwia UNIKNIĘCIE tzw. NIETRANSAKCYJNEGO WNT/WDT przy
+  PRZEMIESZCZENIU towarów DO magazynu W innym państwie CZŁONKOWSKIM
+  Z przeznaczeniem DLA KONKRETNEGO, z GÓRY znanego nabywcy — ZAMIAST
+  rejestracji VAT DOSTAWCY w kraju MAGAZYNU, transakcja ROZLICZANA
+  jest jako JEDNA, transakcyjna WDT/WNT W MOMENCIE pobrania towaru
+  Z magazynu PRZEZ nabywcę.
+
+DWA ODRĘBNE PODROZDZIAŁY:
+  □ Rozdział 3a (art. 13a-13g) — procedura NA terytorium KRAJU
+    (przemieszczenie Z innego państwa UE DO Polski)
+  □ Rozdział 3b (art. 13h-13l) — procedura NA terytorium INNEGO
+    państwa członkowskiego (przemieszczenie Z Polski DO innego
+    kraju UE)
+
+WARUNKI ŁĄCZNE procedury KRAJOWEJ (art. 13a ust. 2):
+  1) towary WYSYŁANE/transportowane PRZEZ podatnika UE (lub OSOBĘ
+     trzecią NA jego rzecz) Z innego PAŃSTWA UE DO Polski, W CELU
+     dostawy NA późniejszym ETAPIE, DLA z GÓRY oznaczonego nabywcy,
+     upoważnionego DO nabycia prawa ROZPORZĄDZANIA jak WŁAŚCICIEL,
+     zgodnie Z WCZEŚNIEJSZYM porozumieniem
+  2) dostawca ZAGRANICZNY NIE ma siedziby/stałego MIEJSCA prowadzenia
+     działalności W Polsce
+  3) nabywca JEST zarejestrowany JAKO podatnik VAT-UE, Z NUMEREM NIP
+     poprzedzonym KODEM PL, ZNANYM dostawcy W momencie ROZPOCZĘCIA
+     transportu
+
+MECHANIZM ROZLICZENIA (art. 13b): WNT UZNAJE SIĘ za DOKONANE przez
+  NABYWCĘ na terytorium KRAJU W MOMENCIE przeniesienia PRAWA do
+  rozporządzania TOWARAMI jak właściciel — O ILE nastąpi TO w
+  TERMINIE 12 MIESIĘCY od dnia WPROWADZENIA towarów do MAGAZYNU.
+
+ZASTĄPIENIE NABYWCY (art. 13c): jeśli W terminie 12 miesięcy
+  PIERWOTNIE wskazany nabywca ZOSTAJE zastąpiony PRZEZ innego
+  podatnika — UZNAJE się, że W okresie zastąpienia NIE miało miejsca
+  WNT — ⭐ MECHANIZM elastyczności PRZY zmianie kontrahenta W trakcie
+  przechowywania W magazynie, POD warunkiem spełnienia dodatkowych
+  przesłanek FORMALNYCH (ZAWIADOMIENIE, aktualizacja EWIDENCJI)
+
+OBOWIĄZKI EWIDENCYJNE I ZGŁOSZENIOWE:
+  □ Podatnik/podatnik UE PROWADZĄCY magazyn SKŁADA, elektronicznie,
+    ZAWIADOMIENIE naczelnikowi US O prowadzeniu magazynu W tej
+    procedurze
+  □ ZMIANY danych Z zawiadomienia — zgłoszenie W terminie 14 DNI od
+    zaistnienia ZMIANY
+  □ Ewidencja Z art. 109 ust. 11c — ZGODNIE z wymogami art. 54a ust. 1
+    rozporządzenia 282/2011 (SZCZEGÓŁOWY zakres DANYCH o PRZEMIESZCZONYCH
+    towarach)
+
+SKUTEK PRZEKROCZENIA TERMINU 12 MIESIĘCY (art. 13l): JEŻELI w
+  terminie 12 miesięcy NIE dochodzi DO przeniesienia prawa
+  rozporządzania — UZNAJE SIĘ, że NIETRANSAKCYJNE WDT MIAŁO miejsce
+  W dniu NASTĘPUJĄCYM po upływie TEGO terminu (Z zastrzeżeniem
+  wyjątków Z art. 13l ust. 2 i n., NP. powrotny WYWÓZ towarów DO
+  kraju wysyłki PRZED upływem terminu) — ⭐⭐ TO jest KLUCZOWY,
+  RYZYKOWNY punkt PROCEDURY: brak PILNOWANIA terminu 12-MIESIĘCZNEGO
+  SKUTKUJE koniecznością retroaktywnej REJESTRACJI i rozliczenia
+  standardowego WNT/WDT, Z możliwymi ODSETKAMI za ZWŁOKĘ.
+
+⭐ PRAKTYCZNE ZASTOSOWANIE: procedura ISTOTNA przy DORADZTWIE dla
+  klientów prowadzących MAGAZYNY logistyczne/dystrybucyjne W
+  łańcuchach DOSTAW transgranicznych UE — SZCZEGÓLNIE branża
+  motoryzacyjna, FMCG, przemysł — GDZIE towar JEST składowany W
+  kraju docelowym PRZED ostatecznym przekazaniem znanemu Z GÓRY
+  odbiorcy.
+```
+
+### 6.4. Art. 89 — zwrot VAT podmiotom zagranicznym (VAT-REF)
+
+```
+STRUKTURA PRZEPISU (wg systematyki KOMENTARZOWEJ, art. 89 ust. 1-8):
+  1) ust. 1 — KATALOG CZTERECH grup PODMIOTÓW uprawnionych DO zwrotu:
+     służby DYPLOMATYCZNE/konsularne, SIŁY zbrojne (NATO i inne
+     PRZYPADKI szczególne), PODMIOTY zagraniczne Z państw TRZECICH
+     (NA zasadzie WZAJEMNOŚCI) oraz PODATNICY unijni (VAT-REF sensu
+     stricto — patrz NIŻEJ)
+  2) ust. 1a-1g — ZASADY zwrotu DLA trzeciej GRUPY (podmioty
+     zagraniczne SPOZA UE)
+  3) ust. 1h-1l — ZASADY składania WNIOSKU przez POLSKICH podatników
+     O zwrot ZAGRANICZNEGO VAT (KIERUNEK "wychodzący" — polski
+     podatnik ODZYSKUJĄCY VAT zapłacony W innym kraju UE)
+  4) ust. 2-8 — DELEGACJE dla ministra FINANSÓW do wydania
+     rozporządzeń WYKONAWCZYCH
+
+⭐⭐⭐ DWA KIERUNKI PROCEDURY VAT-REF — NIE MYLIĆ:
+  □ KIERUNEK "PRZYCHODZĄCY": podmiot ZAGRANICZNY (UE lub SPOZA UE)
+    ODZYSKUJE VAT zapłacony W POLSCE — WARUNKI: (a) BRAK siedziby/
+    stałego miejsca DZIAŁALNOŚCI w Polsce, (b) status ZAREJESTROWANEGO
+    podatnika VAT/podatku OD wartości dodanej W państwie SIEDZIBY,
+    (c) BRAK wykonywania W Polsce SPRZEDAŻY w rozumieniu art. 2 pkt 22
+    (Z enumeratywnymi WYJĄTKAMI: usługi transportowe/pomocnicze przy
+    imporcie, kontrola RUCHU lotniczego, obsługa STARTU/lądowania/
+    parkowania, procedury SZCZEGÓLNE OSS/nieunijna/import)
+  □ KIERUNEK "WYCHODZĄCY": POLSKI podatnik ODZYSKUJE VAT zapłacony W
+    INNYM państwie UE (art. 89 ust. 1h-1j) — WNIOSEK VAT-REF SKŁADANY
+    ELEKTRONICZNIE za POŚREDNICTWEM właściwego DLA podatnika naczelnika
+    US DO właściwego państwa CZŁONKOWSKIEGO zwrotu — WARUNEK: status
+    CZYNNEGO podatnika VAT (BRAK zwolnień podmiotowych) ORAZ związek
+    zakupów Z czynnościami DAJĄCYMI prawo DO odliczenia W państwie,
+    gdzie WYDATEK poniesiono
+
+WYŁĄCZENIA ZWROTU: kwoty PODATKU zafakturowane NIEZGODNIE z
+  przepisami USTAWY, ORAZ (dla kierunku wychodzącego) OGRANICZENIA
+  analogiczne DO art. 88 ust. 1 pkt 4 (USŁUGI noclegowe/gastronomiczne
+  — Z WYJĄTKIEM gotowych POSIŁKÓW dla pasażerów PRZY usługach
+  przewozu OSÓB) — ⭐ ZASTRZEŻENIE dotyczy WYŁĄCZNIE polskiego podatku
+  naliczonego; ODZYSKANIE VAT zapłaconego ZA noclegi/gastronomię W
+  INNYM kraju UE PODLEGA przepisom TEGO kraju, NIE polskim WYŁĄCZENIOM
+
+⭐⭐ AKTUALIZACJA WYKONAWCZA (2026): rozporządzenie WYKONAWCZE do
+  art. 89 zostało ZMIENIONE rozporządzeniem Ministra Finansów I
+  Gospodarki z 27.05.2026 r. (Dz.U. 2026 poz. 736), KTÓRE weszło W
+  życie 6.06.2026 r. — ⚠️ [WYMAGA POTWIERDZENIA ZAKRESU ZMIANY] treść
+  tej konkretnej NOWELIZACJI nie BYŁA przedmiotem odrębnej, SZCZEGÓŁOWEJ
+  weryfikacji w TEJ sesji — PRZED zastosowaniem PRZY konkretnej sprawie
+  z zakresu VAT-REF, SPRAWDŹ wprost zakres ZMIAN wprowadzonych tą
+  nowelizacją (może DOTYCZYĆ np. terminów, PROGÓW kwotowych, lub
+  zakresu DANYCH we wniosku)
+```
+
+### 6.5. Art. 32 — szacowanie podstawy opodatkowania przy powiązaniach
+
+```
+ISTOTA: WYJĄTEK od zasady OGÓLNEJ (art. 29a ust. 1 — podstawą
+  opodatkowania JEST "wszystko, co STANOWI zapłatę NALEŻNĄ lub
+  OTRZYMANĄ") — organ PODATKOWY OKREŚLA podstawę opodatkowania WEDŁUG
+  wartości RYNKOWEJ, jeśli SPEŁNIONE są ŁĄCZNIE dwie PRZESŁANKI:
+  1) MIĘDZY stronami transakcji ISTNIEJĄ powiązania Z art. 32 ust. 2
+  2) powiązania TE MIAŁY wpływ NA ustalenie WYNAGRODZENIA (wynagrodzenie
+     ODBIEGA od wartości RYNKOWEJ, w KONKRETNYM kierunku opisanym
+     niżej)
+
+WARUNEK KIERUNKOWY (art. 32 ust. 1 pkt 1-2) — szacowanie DZIAŁA
+  wyłącznie GDY zaniżenie/zawyżenie WYNAGRODZENIA prowadziłoby DO
+  UTRATY wpływów PODATKOWYCH:
+  □ wynagrodzenie NIŻSZE od RYNKOWEGO, a NABYWCA NIE MA pełnego prawa
+    DO odliczenia (Z art. 86, 86a, 88, 90) — ryzyko ZANIŻENIA VAT
+    należnego BEZ odpowiadającej UTRATY prawa do ODLICZENIA po stronie
+    nabywcy
+  □ wynagrodzenie NIŻSZE, a DOSTAWCA/usługodawca NIE MA pełnego prawa
+    DO odliczenia — analogiczna LOGIKA z drugiej STRONY transakcji
+  ⭐ MECHANIZM NIE działa AUTOMATYCZNIE przy KAŻDYM odstępstwie od ceny
+  RYNKOWEJ między PODMIOTAMI powiązanymi — TYLKO gdy ISTNIEJE
+  jednocześnie RYZYKO uszczuplenia WPŁYWÓW budżetowych
+
+DEFINICJA POWIĄZAŃ (art. 32 ust. 2) — ⭐⭐⭐ WAŻNA ZMIANA KONSTRUKCYJNA:
+  ustawa DZIŚ NIE zawiera WŁASNEGO, autonomicznego katalogu POWIĄZAŃ,
+  lecz ODSYŁA do:
+  1) powiązań W rozumieniu art. 23m ust. 1 pkt 5 USTAWY o PIT i art.
+     11a ust. 1 pkt 5 USTAWY o CIT (a WIĘC do TEJ SAMEJ definicji, KTÓRA
+     obowiązuje NA gruncie cen TRANSFEROWYCH w podatkach DOCHODOWYCH —
+     powiązania KAPITAŁOWE od progu 25% udziałów/PRAW głosu/udziału
+     W zysku, ZARZĄDCZE, funkcjonalne)
+  2) powiązań WYNIKAJĄCYCH ze stosunku PRACY
+  3) powiązań WYNIKAJĄCYCH z tytułu PRZYSPOSOBIENIA
+  ⚠️ USTĘPY 3-4 (dawny AUTONOMICZNY katalog powiązań RODZINNYCH/
+  kapitałowych NA gruncie SAMEGO VAT) SĄ DZIŚ UCHYLONE — odesłanie DO
+  PIT/CIT ZASTĄPIŁO wcześniejszą, ODRĘBNĄ regulację
+
+WYŁĄCZENIE STOSOWANIA (art. 32 ust. 5): przepis NIE MA zastosowania,
+  GDY właściwy organ PODATKOWY WYDAŁ uprzednie POROZUMIENIE CENOWE
+  (APA) na PODSTAWIE ustawy Z 16.10.2019 r. O rozstrzyganiu SPORÓW
+  dot. podwójnego OPODATKOWANIA oraz zawieraniu UPRZEDNICH porozumień
+  cenowych — ⭐ POSIADANIE ważnego APA DAJE podatnikowi OCHRONĘ również
+  NA gruncie VAT, NIE tylko podatków DOCHODOWYCH, dla TRANSAKCJI nim
+  objętych
+
+⭐⭐ RELACJA DO SZACOWANIA W PODATKACH DOCHODOWYCH: art. 32 ustawy o
+  VAT I przepisy o CENACH transferowych W PIT/CIT (art. 11-11t CIT,
+  art. 23m i n. PIT) TO ODRĘBNE, RÓWNOLEGŁE reżimy — orzecznictwo
+  (przywołane W komentarzu INFORLEX) PODKREŚLA, że ZASADA neutralności
+  i POTRĄCALNOŚCI VAT NIE pozwala NA tak SWOBODNE kształtowanie
+  podstawy OPODATKOWANIA jak W podatku DOCHODOWYM — mechanizmy CEN
+  transferowych PIT/CIT i SZACOWANIE VAT Z art. 32 MOGĄ prowadzić DO
+  RÓŻNYCH wyników DLA TEJ SAMEJ transakcji, WYMAGAJĄ odrębnej analizy
+  KAŻDY na SWOIM gruncie prawnym
+
+⭐ ORZECZNICTWO: NSA w wyroku z 31.08.2021 r. (sygn. I FSK 230/18)
+  potwierdził, że mimo iż przepis GRAMATYCZNIE adresowany jest DO
+  organów PODATKOWYCH (nie WPROST do podatników), PODATNICY SĄ
+  obowiązani STOSOWAĆ tę regułę SAMODZIELNIE przy USTALANIU podstawy
+  opodatkowania DLA częściowo ODPŁATNYCH świadczeń NA rzecz
+  PRACOWNIKÓW — ⚠️ [NIEWERYFIKOWANE BEZPOŚREDNIO] sygnatura WYMAGA
+  potwierdzenia W orzeczenia.nsa.gov.pl PRZED powołaniem W piśmie
+  procesowym, ZGODNIE z regułami PRAWO-HARDGATE
+```
+
+### 6.6. Art. 101–102 — korekta informacji podsumowującej VAT-UE
+
+```
+KONTEKST SYSTEMOWY: art. 101-102 SĄ ściśle POWIĄZANE z art. 100
+  (informacja PODSUMOWUJĄCA VAT-UE, OBJĘTA już mod-VAT-ewidencja-
+  deklaracje.md) — TA sekcja DOMYKA WYŁĄCZNIE mechanizm KOREKTY,
+  dotąd NIEOBECNY.
+
+OBOWIĄZEK KOREKTY (art. 101): W przypadku STWIERDZENIA jakichkolwiek
+  BŁĘDÓW w ZŁOŻONEJ informacji podsumowującej, PODMIOT który JĄ
+  złożył JEST obowiązany złożyć NIEZWŁOCZNIE korektę TEJ informacji
+  ZA pomocą środków komunikacji ELEKTRONICZNEJ.
+  ⭐⭐ BRAK SZTYWNEGO TERMINU W DNIACH — ustawa POSŁUGUJE SIĘ pojęciem
+  nieostrym "NIEZWŁOCZNIE", NIE precyzując KONKRETNEJ liczby dni —
+  W PRAKTYCE oznacza TO obowiązek DZIAŁANIA bez zbędnej ZWŁOKI OD
+  momentu WYKRYCIA błędu, NIE od momentu POWSTANIA pierwotnego
+  obowiązku
+
+CHARAKTER PRZEPISU: art. 101 STANOWI lex SPECIALIS wobec OGÓLNEJ
+  regulacji korekt DEKLARACJI z art. 81 ORDYNACJI podatkowej — ⭐
+  ISTOTNA KONSEKWENCJA: W PRZECIWIEŃSTWIE do art. 81 § 2 OP (KTÓRY
+  wymaga DOŁĄCZENIA pisemnego uzasadnienia PRZYCZYN korekty), art. 101
+  ustawy O VAT NIE przewiduje TAKIEGO wymogu — POTWIERDZONE W
+  interpretacji indywidualnej Dyrektora IZBY Skarbowej w Łodzi z
+  9.03.2012 r. (nr IPTPP2/443-775/11-4/KW) — ⚠️ [NIEWERYFIKOWANE
+  BEZPOŚREDNIO, INTERPRETACJA HISTORYCZNA] sprawdź AKTUALNOŚĆ tej
+  linii interpretacyjnej PRZY konkretnej sprawie, gdyż interpretacja
+  POCHODZI sprzed ponad DEKADY
+
+FORMULARZ VAT-UEK: struktura IDENTYCZNA jak VAT-UE (7 CZĘŚCI A-G), ALE
+  KAŻDA korygowana POZYCJA prezentowana W DWÓCH wierszach: "BYŁO"
+  (dane PIERWOTNIE zgłoszone) I "JEST" (dane PRAWIDŁOWE)
+  ⛔ WAŻNE ROZGRANICZENIE ZAKRESU: VAT-UEK SŁUŻY WYŁĄCZNIE do korekty
+  BŁĘDÓW W pierwotnym RAPORCIE — NIE służy DO raportowania NOWYCH
+  zdarzeń (NP. udzielenie RABATU już PO złożeniu informacji, LUB
+  PODWYŻSZENIE ceny) — TAKIE zdarzenia UJMUJE SIĘ w BIEŻĄCEJ,
+  standardowej informacji VAT-UE ZA okres, W którym ZDARZENIE
+  faktycznie WYSTĄPIŁO, a NIE poprzez KOREKTĘ wcześniejszego okresu
+
+DELEGACJA WYKONAWCZA (art. 102 ust. 1): MINISTER właściwy DS. finansów
+  publicznych OKREŚLA w drodze ROZPORZĄDZENIA wzór informacji
+  PODSUMOWUJĄCEJ (Z objaśnieniami CO do sposobu wypełniania, TERMINU
+  i miejsca SKŁADANIA) ORAZ wzór KOREKTY tej informacji — AKTUALNIE
+  obowiązujące wzory VAT-UE(5) i VAT-UEK(5) WYNIKAJĄ z rozporządzenia
+  MF z 26.06.2020 r. (Dz.U. 2020 poz. 1138), STOSOWANE od rozliczenia
+  za CZERWIEC 2020 r. — ⚠️ [WYMAGA WERYFIKACJI AKTUALNOŚCI] SPRAWDŹ,
+  czy NIE nastąpiła PÓŹNIEJSZA zmiana wzoru FORMULARZA przy konkretnym
+  zastosowaniu, gdyż ŹRÓDŁO tej informacji NIE było datowane NA
+  2026 r.
+
+⭐ POWIĄZANIE Z ART. 42 UST. 1a: NIEZŁOŻENIE informacji podsumowującej
+  (LUB złożenie Z opóźnieniem) MOŻE skutkować UTRATĄ prawa DO
+  zastosowania stawki 0% PRZY WDT — ⭐⭐⭐ STAWKA wysokość praktyczna:
+  BŁĄD w informacji PODSUMOWUJĄCEJ, jeśli NIE zostanie SKORYGOWANY
+  "niezwłocznie", MOŻE W KONSEKWENCJI zagrażać PRAWU do stawki 0%
+  dla CAŁEJ transakcji WDT, KTÓREJ dotyczy — WARTO o TYM pamiętać
+  przy OCENIE pilności korekty, NIE traktować obowiązku Z art. 101
+  jako WYŁĄCZNIE formalnego.
+```
+
+⚠️ Sekcja 6 ZAMYKA grupę "średnią" (ETAP 2b). Grupa "złożona"
+(CESOP, procedury szczególne Działu XIII rozdz. 1b/1ca/1d,
+centralizacja rozliczeń JST, pozostałe fakturowanie art. 106a/106d/
+106f/106l/106m-106q, art. 84 ust. 3-5 wyroby medyczne) POZOSTAJE do
+kolejnego etapu.
 
 ---
 
-## 4b. ⭐⭐⭐ PODSTAWA OPODATKOWANIA I FAKTURY KORYGUJĄCE IN MINUS/IN PLUS
-(Dział VI, art. 29a) — dodane 2026-08-12, uzupełnienie luki
-zidentyfikowanej w audycie pokrycia DR-06 (dotąd CAŁKOWICIE nieobecne
-— DRUGI z dwóch czynników, OBOK stawki, decydujących O wysokości VAT)
+## 7. GRUPA ZŁOŻONA — CESOP, PROCEDURY SZCZEGÓLNE, CENTRALIZACJA
+JST (ETAP 2c, 2026-08-13, na żądanie użytkownika)
+
+### 7.1. Art. 110a–110e — CESOP (raportowanie płatności transgranicznych)
 
 ```
-⭐⭐⭐ ZASADA OGÓLNA (art. 29a ust. 1): podstawą OPODATKOWANIA jest
-  WSZYSTKO, co STANOWI zapłatę, KTÓRĄ dokonujący dostawy/usługodawca
-  OTRZYMAŁ lub MA otrzymać Z tytułu sprzedaży OD nabywcy, usługobiorcy
-  LUB osoby trzeciej — WŁĄCZNIE z otrzymanymi DOTACJAMI, subwencjami I
-  innymi dopłatami O PODOBNYM charakterze, MAJĄCYMI bezpośredni WPŁYW
-  na CENĘ (⭐ dotacja "DO ceny" WLICZA się do podstawy; dotacja NA
-  pokrycie OGÓLNYCH kosztów działalności — CO do zasady NIE)
-  → ⭐ TERMINOLOGICZNIE: dawne pojęcie "OBROTU" (sprzed 2014 r.) ZOSTAŁO
-    zastąpione "PODSTAWĄ opodatkowania" — GDY starsze przepisy
-    wykonawcze LUB orzecznictwo POSŁUGUJĄ się nadal SŁOWEM "obrót",
-    NALEŻY je ROZUMIEĆ jako podstawę OPODATKOWANIA w OBECNYM stanie
-    prawnym
+GENEZA: implementacja unijnego PAKIETU CESOP (Central Electronic
+  System of Payment information) — CZĘŚĆ szerszego pakietu VAT
+  e-commerce, OBOWIĄZUJE OD 1.01.2024 r. CEL: uszczelnienie VAT W
+  handlu transgranicznym B2C przez KRZYŻOWĄ analizę danych O
+  płatnościach zbieranych OD dostawców usług PŁATNICZYCH w CAŁEJ UE.
 
-⭐⭐ CO WLICZA SIĘ DO PODSTAWY (ust. 6):
-  1) PODATKI, cła, opłaty I inne należności O podobnym charakterze,
-     Z WYJĄTKIEM samego podatku VAT
-  2) KOSZTY dodatkowe: PROWIZJE, koszty OPAKOWANIA, transportu I
-     ubezpieczenia, POBIERANE przez dostawcę/usługodawcę OD nabywcy
-     — ⭐ PRAKTYCZNA konsekwencja: KOSZT wysyłki/przesyłki DOLICZONY
-     do sprzedaży NIE jest odrębnym ŚWIADCZENIEM opodatkowanym
-     osobno — DZIELI stawkę VAT TOWARU głównego (świadczenie
-     KOMPLEKSOWE)
+DEFINICJE (art. 110a) — KLUCZOWE pojęcia: AKCEPTANT (odbiorca
+  płatności w rozumieniu ustawy O usługach płatniczych), BIC, DOSTAWCA
+  usług płatniczych (odesłanie DO art. 4 ust. 2 pkt 1-6 i 9 ustawy O
+  usługach płatniczych — a WIĘC KATALOG szerszy niż WYŁĄCZNIE banki:
+  obejmuje TAKŻE instytucje płatnicze, MAŁE instytucje płatnicze,
+  instytucje PIENIĄDZA elektronicznego), IBAN.
 
-⭐⭐⭐ CO NIE WLICZA SIĘ DO PODSTAWY (ust. 7) — CZĘSTY temat SPORNY:
-  1) obniżka CEN w formie RABATU z tytułu WCZEŚNIEJSZEJ zapłaty
-     (skonto)
-  2) UDZIELONE nabywcy OPUSTY i obniżki CEN, uwzględnione W MOMENCIE
-     sprzedaży (RABAT natychmiastowy — NIE wchodzi w OGÓLE do
-     podstawy, W przeciwieństwie do rabatu UDZIELONEGO później,
-     patrz ust. 10 niżej)
-  3) kwoty OTRZYMANE od nabywcy jako ZWROT udokumentowanych wydatków
-     PONIESIONYCH w IMIENIU i NA rzecz nabywcy, ujmowane
-     PRZEJŚCIOWO w EWIDENCJI (tzw. "PRZEJŚCIÓWKI" — np. OPŁATY
-     sądowe/skarbowe UISZCZONE przez pełnomocnika W imieniu klienta
-     — ⭐ ISTOTNE dla PRAKTYKI kancelaryjnej: TAKIE kwoty NIE
-     zwiększają podstawy OPODATKOWANIA honorarium, POD warunkiem
-     właściwej DOKUMENTACJI i ewidencji PRZEJŚCIOWEJ)
+⭐⭐⭐ PRÓG OBOWIĄZKOWEGO RAPORTOWANIA (art. 110b): raportowanie CESOP
+  jest OBLIGATORYJNE, jeśli dostawca usług PŁATNICZYCH przeprowadzi
+  W danym PAŃSTWIE członkowskim WIĘCEJ niż 25 PŁATNOŚCI transgranicznych
+  W trakcie KWARTAŁU wobec TEGO SAMEGO odbiorcy (akceptanta). Płatność
+  TRANSGRANICZNA = płatnik ZNAJDUJE SIĘ w UE, a ODBIORCA płatności —
+  W UE LUB w państwie TRZECIM.
 
-⭐⭐⭐ OBNIŻENIE PODSTAWY PO SPRZEDAŻY (ust. 10) — RABAT POŚREDNI i
-  BEZPOŚREDNI:
-  □ podstawę OBNIŻA się o: kwoty UDZIELONYCH PO dokonaniu sprzedaży
-    OPUSTÓW i obniżek CEN; WARTOŚĆ zwróconych towarów I opakowań (Z
-    zastrzeżeniem ust. 11-12 — patrz OPAKOWANIA zwrotne niżej);
-    zwróconą nabywcy CAŁOŚĆ/część zapłaty PRZED dokonaniem sprzedaży,
-    jeśli DO niej NIE doszło; wartość ZWRÓCONYCH dotacji/subwencji
-  □ ⭐⭐ RABAT POŚREDNI (art. 29a ust. 10 pkt 1, W ZW. z praktyką
-    interpretacyjną): DOPUSZCZALNE jest OBNIŻENIE podstawy
-    opodatkowania PRZEZ producenta/dystrybutora WYPŁACAJĄCEGO premię
-    pieniężną BEZPOŚREDNIO na rzecz ODBIORCY OSTATECZNEGO (np.
-    detalisty), Z KTÓRYM producent NIE ma bezpośredniej RELACJI
-    sprzedażowej (transakcja PRZESZŁA przez pośrednika) — POD
-    warunkiem, że RABAT nie jest WYNAGRODZENIEM za jakiekolwiek
-    ŚWIADCZENIE wzajemne (np. SAMO osiągnięcie określonego OBROTU
-    lub TERMINOWA zapłata NIE stanowią usługi — potwierdzone
-    interpretacjami KIS, m.in. Z 3.06.2025 i 30.06.2023)
+OBOWIĄZKI DOSTAWCY USŁUG PŁATNICZYCH:
+  □ prowadzenie EWIDENCJI odbiorców płatności ORAZ płatności
+    transgranicznych (art. 110b ust. 1), Z określonym ZAKRESEM danych
+    (m.in. IBAN/BIC odbiorcy, KWOTY, daty, informacja O ewentualnych
+    zwrotach, PAŃSTWO pochodzenia/przeznaczenia płatności — art. 110b
+    ust. 3 wg PRZYWOŁANIA w materiałach branżowych)
+  □ RAPORTOWANIE kwartalne W formacie XML — termin DO KOŃCA miesiąca
+    NASTĘPUJĄCEGO po ZAKOŃCZENIU kwartału
+  □ PRZECHOWYWANIE ewidencji W postaci ELEKTRONICZNEJ przez OKRES 3
+    LAT od zakończenia ROKU podatkowego, w KTÓRYM nastąpiła PŁATNOŚĆ
+    (art. 110d)
+  □ UDOSTĘPNIANIE ewidencji NA zasadach art. 24b ust. 1 rozp. RADY
+    (UE) 904/2010 — CZYLI Szefowi KAS (art. 110e), KTÓRY następnie
+    PRZEKAZUJE dane DO unijnego systemu CENTRALNEGO CESOP
 
-⭐⭐⭐ WARUNKI FORMALNE OBNIŻENIA — FAKTURA KORYGUJĄCA IN MINUS (ust.
-  13-14) — ⚠️ ZASADNICZO ZMIENIONE OD 1.02.2026 (KSeF):
-  □ ZASADA OGÓLNA (ust. 13): obniżenia PODSTAWY dokonuje SIĘ za
-    okres, W KTÓRYM wystawiono FAKTURĘ korygującą — POD warunkiem
-    POSIADANIA dokumentacji, Z KTÓREJ wynika, że: (a) UZGODNIONO Z
-    nabywcą WARUNKI obniżenia oraz (b) WARUNKI te ZOSTAŁY spełnione
-  □ ⭐⭐ "UZGODNIENIE" NIE wymaga odrębnego OŚWIADCZENIA — MOŻE
-    wynikać z: postanowienia UMOWY handlowej (np. rabat PO
-    przekroczeniu obrotu), REGULAMINU współpracy, PRZYJĘCIA zwrotu
-    towaru W systemie, uznania REKLAMACJI, korespondencji MAILOWEJ
-    — DECYDUJE uzgodnienie TREŚCI ekonomicznej, NIE formalna
-    "akceptacja" samego DOKUMENTU faktury
-  □ ⭐⭐⭐ NOWY MECHANIZM art. 29a ust. 13a (OD 1.02.2026, ZWIĄZANY z
-    obowiązkowym KSeF): DLA faktur korygujących WYSTAWIONYCH jako
-    faktura USTRUKTURYZOWANA (W KSeF) — sprzedawca OBNIŻA podstawę
-    ZA okres, W KTÓRYM wystawił fakturę KORYGUJĄCĄ w SYSTEMIE (data
-    PRZYJĘCIA przez KSeF PO pozytywnej walidacji) — BEZ konieczności
-    POSIADANIA odrębnej dokumentacji POTWIERDZAJĄCEJ uzgodnienie —
-    ⚠️ UPROSZCZENIE dotyczy TYLKO formy DOKUMENTU, NIE zwalnia z
-    materialnego WARUNKU faktycznego ZAISTNIENIA przesłanek korekty
-    (rabat, ZWROT, błąd) — SAMA obecność DOKUMENTU w systemie NIE
-    tworzy AUTOMATYCZNIE prawa DO obniżenia VAT
-  □ FAKTURA NIE-ustrukturyzowana (papierowa/PDF) — STARA zasada
-    NADAL obowiązuje: obniżenie ZA okres OTRZYMANIA potwierdzenia
-    otrzymania faktury KORYGUJĄCEJ przez nabywcę
-  □ BRAK dokumentacji W momencie wystawienia KOREKTY (przy
-    fakturach nie-ustrukturyzowanych) → obniżenia DOKONUJE się W
-    rozliczeniu ZA okres, w KTÓRYM dokumentację TĘ uzyskano —
-    ODROCZENIE, nie UTRATA prawa
-  □ ⭐ WYJĄTKI od WYMOGU dokumentacji uzgodnienia (ust. 15): EKSPORT
-    towarów i WDT; dostawy/usługi Z miejscem opodatkowania POZA
-    Polską; sprzedaż ENERGII elektrycznej/cieplnej/gazu, USŁUGI
-    dystrybucji energii, TELEKOMUNIKACYJNE i NIEKTÓRE inne z zał. 3;
-    faktura korygująca W formie ustrukturyzowanej (KSeF — pkt WYŻEJ)
+⭐ ADRESAT OBOWIĄZKU (właściwość PAŃSTWA): ewidencja UDOSTĘPNIANA jest
+  Szefowi KAS, GDY Polska JEST "przyjmującym PAŃSTWEM członkowskim"
+  dla DANEGO dostawcy usług płatniczych LUB GDY Polska jest jego
+  PAŃSTWEM macierzystym — ⚠️ [NIEWERYFIKOWANE W PEŁNI] dokładne
+  kryteria rozgraniczenia OBU tych sytuacji NIE były przedmiotem
+  odrębnej, POGŁĘBIONEJ weryfikacji w tej SESJI — przy konkretnej
+  sprawie Z udziałem dostawcy USŁUG płatniczych działającego
+  transgranicznie, SPRAWDŹ wprost właściwe PRZEPISY wykonawcze.
 
-⭐⭐ ZWIĘKSZENIE PODSTAWY — KOREKTA IN PLUS (ust. 17) — ODMIENNE
-  zasady TIMING niż PRZY in minus:
-  □ JEŻELI przyczyną korekty jest BŁĄD w fakturze PIERWOTNEJ →
-    księgowanie NASTĘPUJE wstecz, W okresie wystawienia FAKTURY
-    pierwotnej (KOREKTA "historyczna")
-  □ JEŻELI przyczyną jest NOWE zdarzenie (np. PODWYŻSZENIE ceny po
-    fakcie, dodatkowe usługi DOLICZONE później) → korektę UJMUJE się
-    NA bieżąco, w dacie JEJ wystawienia (BEZ cofania się do okresu
-    pierwotnego)
-  □ PRZY eksporcie towarów I WDT: zwiększenie podstawy NASTĘPUJE nie
-    wcześniej NIŻ w deklaracji SKŁADANEJ za okres, W KTÓRYM wykazano
-    TE transakcje (SPECYFICZNE ograniczenie czasowe)
-
-⭐⭐ OPAKOWANIA ZWROTNE (ust. 11-12) — ⚠️ POWIĄZANE Z systemem
-  KAUCYJNYM (nowelizacja OD 1.01.2025, art. 29a ust. 11a):
-  □ Do PODSTAWY nie wlicza się WARTOŚCI opakowania, JEŻELI dostawca
-    dokonał DOSTAWY w opakowaniu ZWROTNYM, pobierając KAUCJĘ (LUB
-    określając ją W umowie) — dopóki OPAKOWANIE nie zostaje TRWALE
-    "sprzedane"
-  □ Do podstawy NIE wlicza się RÓWNIEŻ kaucji pobieranej ZA
-    opakowanie OBJĘTE systemem KAUCYJNYM (butelki/puszki W systemie
-    kaucyjnym WPROWADZONYM ustawą o gospodarce OPAKOWANIAMI — ⭐
-    NOWY, odrębny REŻIM od "zwykłych" opakowań zwrotnych)
-  □ ⭐⭐⭐ FIKCJA PRAWNA przy NIEZWRÓCENIU (ust. 12): jeśli nabywca NIE
-    zwróci opakowania → PODSTAWĘ opodatkowania PODWYŻSZA się o
-    WARTOŚĆ tego opakowania — W dniu NASTĘPUJĄCYM po dniu, W KTÓRYM
-    umowa PRZEWIDYWAŁA zwrot (JEŚLI termin był OKREŚLONY) — traktuje
-    SIĘ to jak FIKCYJNĄ dostawę opakowania NABYWCY w TYM dniu
-  □ ⭐⭐ ZMIANA OD 1.02.2026 (art. 29a ust. 15c, DODANY nowelizacją Z
-    16.06.2023, art. 1 pkt 2 lit. e — WESZŁA w ŻYCIE dopiero
-    1.02.2026): dla OPAKOWAŃ objętych SYSTEMEM kaucyjnym —
-    WPROWADZAJĄCY produkty W opakowaniach NA napoje PODWYŻSZA
-    podstawę opodatkowania NA ostatni dzień ROKU o RÓŻNICĘ w
-    wartości KAUCJI wynikającą Z wprowadzonych PRZEZ niego DO obrotu
-    w DANYM roku opakowań — MECHANIZM roczny, ODRĘBNY od zasady
-    "dzień PO terminie zwrotu" opisanej wyżej — ⚠️ TA regulacja jest
-    ŚWIEŻA (weszła w życie w TRAKCIE bieżącej sesji audytowej) —
-    SPRAWDŹ aktualne brzmienie PRZY sprawach Z branży NAPOJOWEJ/
-    systemu kaucyjnego
-
-⭐ ODESŁANIA DO PRZEPISÓW SZCZEGÓLNYCH (poza art. 29a):
-  □ art. 30a — podstawa OPODATKOWANIA dla WNT (odpowiednie
-    stosowanie art. 29a ust. 1-1b, 6, 7, 10, 11, 17)
-  □ art. 30b — podstawa OPODATKOWANIA dla IMPORTU towarów (odrębny
-    mechanizm, POWIĄZANY z wartością CELNĄ — WYMAGA odrębnej
-    weryfikacji przy KONKRETNEJ sprawie celnej)
-  □ art. 30c — PRZYPADKI, w KTÓRYCH podstawy opodatkowania SIĘ NIE
-    ustala (bony RÓŻNEGO przeznaczenia — POWIĄZANIE z Rozdziałem 2a
-    ustawy, DOTĄD nieopisanym w TYM module)
-  □ art. 32 — SZACOWANIE podstawy PRZEZ organ PODATKOWY przy
-    powiązaniach MIĘDZY stronami transakcji WPŁYWAJĄCYCH na CENĘ
-    (odesłanie do CEN transferowych — ⭐ POWIĄZANIE Z mod-CIT,
-    sekcja cen TRANSFEROWYCH, jeśli ISTNIEJE)
-
-Checklist praktyczny:
-□ Czy DANY element ceny/dopłaty WLICZA się do podstawy (ust. 6) CZY
-  jest Z niej WYŁĄCZONY (ust. 7) — SZCZEGÓLNIE przy KOSZTACH
-  dodatkowych (transport, OPAKOWANIE) i PRZEJŚCIÓWKACH
-□ PRZY korekcie IN MINUS — czy POSIADANA jest dokumentacja
-  UZGODNIENIA (chyba że FAKTURA jest USTRUKTURYZOWANA w KSeF — WTEDY
-  wymóg ODPADA, ale materialne PRZESŁANKI nadal MUSZĄ być SPEŁNIONE)
-□ Czy KOREKTA in plus wynika Z BŁĘDU pierwotnego (→ WSTECZ) czy Z
-  NOWEGO zdarzenia (→ NA bieżąco) — TO PRZESĄDZA okres ROZLICZENIOWY
-□ PRZY OPAKOWANIACH zwrotnych — czy TO "zwykłe" opakowanie CZY
-  opakowanie W systemie KAUCYJNYM — RÓŻNE mechanizmy (dzień PO
-  terminie ZWROTU vs roczne ROZLICZENIE różnicy od 1.02.2026)
-□ Czy RABAT jest bezpośredni (KONTRAHENT bezpośredni) czy POŚREDNI
-  (wypłacony DALSZEMU ogniwu łańcucha) — OBA typy MOGĄ obniżać
-  podstawę, ALE wymagają INNEJ dokumentacji
-
-⚠️ Weryfikuj aktualne brzmienie art. 29a w ISAP — przepis BYŁ
-  WIELOKROTNIE nowelizowany (SLIM VAT, KSeF, system KAUCYJNY) —
-  SZCZEGÓLNIE sprawdź, CZY dana zmiana (np. ust. 13a, 15c) JUŻ
-  WESZŁA w życie NA dzień analizy KONKRETNEJ sprawy.
+⭐⭐ ZNACZENIE PRAKTYCZNE: CESOP dotyczy WPROST dostawców usług
+  płatniczych (BANKI, instytucje płatnicze), NIE samych SPRZEDAWCÓW
+  towarów/usług — ALE POŚREDNIO wpływa NA sytuację sprzedawców
+  e-commerce, GDYŻ organy PODATKOWE zyskują NARZĘDZIE do WYKRYWANIA
+  niezgłoszonej sprzedaży TRANSGRANICZNEJ (porównanie DANYCH z CESOP
+  Z deklaracjami VAT/OSS sprzedawcy) — PRZY doradztwie DLA klientów
+  prowadzących sprzedaż TRANSGRANICZNĄ B2C, WARTO uwzględnić TEN
+  mechanizm jako CZYNNIK zwiększający RYZYKO wykrycia nieprawidłowości.
 ```
+
+### 7.2. Dział XIII rozdz. 1b — wyroby medyczne (art. 145c–145d)
+
+```
+⛔⛔ PRZEPIS W ZNACZNEJ MIERZE HISTORYCZNY NA DZIEŃ WERYFIKACJI
+  (12.08.2026) — WAŻNE ODKRYCIE tej sesji: przepisy PRZEJŚCIOWE Z art.
+  145c i 145d, POZWALAJĄCE na STOSOWANIE obniżonej STAWKI 8% dla
+  wyrobów MEDYCZNYCH dopuszczonych DO obrotu NA podstawie UCHYLONEJ
+  już ustawy Z 2010 r. o WYROBACH medycznych, OBOWIĄZYWAŁY WYŁĄCZNIE
+  DO 27 MAJA 2025 R. — TERMIN ten JUŻ MINĄŁ na DZIEŃ sporządzania tej
+  sekcji.
+
+GENEZA: ustawa Z 7.04.2022 r. o WYROBACH medycznych ZASTĄPIŁA ustawę Z
+  2010 r., IMPLEMENTUJĄC unijne rozporządzenia MDR (2017/745) i IVDR
+  (2017/746) — ABY UMOŻLIWIĆ podmiotom PŁYNNE przejście, wprowadzono
+  OKRES przejściowy, W KTÓRYM wyroby DOPUSZCZONE do obrotu WEDŁUG
+  STAREJ ustawy MOGŁY nadal KORZYSTAĆ z obniżonej stawki 8% (poz. 13
+  załącznika NR 3 do ustawy O VAT W BRZMIENIU sprzed zmiany) — art.
+  145c dotyczy DOSTAWY takich wyrobów, art. 145d — USŁUG napraw i
+  konserwacji.
+
+⚠️ ZNACZENIE PRAKTYCZNE DZIŚ: PO 27.05.2025 r. klasyfikacja stawki
+  VAT DLA wyrobów medycznych ODBYWA SIĘ już WYŁĄCZNIE na PODSTAWIE
+  AKTUALNIE obowiązującej ustawy Z 2022 r. i ZGODNOŚCI Z rozporządzeniami
+  MDR/IVDR (certyfikaty CE) — art. 145c/145d POZOSTAJĄ w USTAWIE jako
+  przepis EPIZODYCZNY dot. OKRESU już ZAKOŃCZONEGO, RELEWANTNY
+  WYŁĄCZNIE przy analizie STANU prawnego DLA transakcji SPRZED tej
+  daty (np. SPORY podatkowe/kontrole DOTYCZĄCE okresów rozliczeniowych
+  do maja 2025 r.) — ⭐ PRZY BIEŻĄCYM doradztwie DLA klienta Z branży
+  medycznej, SKIERUJ analizę NA aktualne przepisy O wyrobach medycznych
+  (2022) i OGÓLNĄ systematykę stawek VAT (poz. 13 załącznika NR 3 W
+  aktualnym brzmieniu), NIE na TĘ historyczną już regulację
+  przejściową.
+```
+
+### 7.3. Centralizacja rozliczeń VAT jednostek samorządu terytorialnego
+
+```
+⚠️ WAŻNE ZASTRZEŻENIE STRUKTURALNE: centralizacja VAT JST NIE jest
+  regulowana W SAMEJ ustawie o VAT, LECZ W ODRĘBNEJ ustawie z
+  5.09.2016 r. O szczególnych zasadach ROZLICZEŃ podatku od TOWARÓW i
+  usług ORAZ dokonywania zwrotu ŚRODKÓW publicznych przeznaczonych NA
+  realizację projektów FINANSOWANYCH z udziałem środków POCHODZĄCYCH
+  z budżetu UE — TZW. "ustawa CENTRALIZACYJNA" (Dz.U. 2016 poz. 1454,
+  ⚠️ [NIEWERYFIKOWANE] zweryfikuj AKTUALNY t.j. na ISAP). TEMAT był
+  wcześniej BŁĘDNIE traktowany jako "luka W ustawie o VAT" — W
+  RZECZYWISTOŚCI to ODRĘBNY akt, jedynie ŚCIŚLE powiązany Z VAT
+  tematycznie.
+
+GENEZA: wyrok TSUE z 29.09.2015 r. w sprawie C-276/14 (Gmina Wrocław)
+  — Trybunał STWIERDZIŁ, że jednostki BUDŻETOWE gminy NIE MOGĄ być
+  uznane ZA odrębnych od GMINY podatników VAT, GDYŻ nie SPEŁNIAJĄ
+  kryterium SAMODZIELNOŚCI (brak WŁASNEGO majątku, brak PONOSZENIA
+  ryzyka gospodarczego). NASTĘPNIE NSA w uchwale Z 26.10.2015 r. (sygn.
+  I FPS 4/15) ROZSZERZYŁ tę zasadę NA samorządowe ZAKŁADY budżetowe
+  (mimo WIĘKSZEGO stopnia SAMODZIELNOŚCI niż jednostki budżetowe).
+
+SKUTEK: OBOWIĄZKOWA centralizacja rozliczeń VAT OD 1.01.2017 r. —
+  JST (gmina, powiat, WOJEWÓDZTWO) WRAZ ze WSZYSTKIMI swoimi
+  jednostkami ORGANIZACYJNYMI staje SIĘ JEDNYM podatnikiem VAT, ZAMIAST
+  odrębnej REJESTRACJI każdej jednostki Z osobna.
+
+JEDNOSTKI ORGANIZACYJNE OBJĘTE CENTRALIZACJĄ:
+  □ urząd GMINY, starostwo POWIATOWE, urząd MARSZAŁKOWSKI
+  □ utworzone PRZEZ JST (lub ZWIĄZKI JST) samorządowe JEDNOSTKI
+    budżetowe
+  □ utworzone PRZEZ JST (lub ZWIĄZKI JST) samorządowe ZAKŁADY
+    budżetowe
+  ⭐ centralizacji PODLEGAJĄ RÓWNIEŻ związki MIĘDZYGMINNE, związki
+  POWIATÓW i związki POWIATOWO-GMINNE, PRZEJMUJĄCE na PODSTAWIE
+  ustaw prawa I obowiązki JST
+
+⛔ ZASADA "WSZYSTKO ALBO NIC": centralizacji NIE MOŻNA dokonać CZĘŚCIOWO
+  — NIE MOŻNA rozliczać SIĘ w sposób SCENTRALIZOWANY tylko W wybranych
+  obszarach DZIAŁALNOŚCI JST LUB tylko W wybranych OKRESACH
+  rozliczeniowych (NP. w miesiącach PARZYSTYCH), a W pozostałych
+  KONTYNUOWAĆ dotychczasową PRAKTYKĘ odrębnego rozliczania POSZCZEGÓLNYCH
+  jednostek — organ SKARBOWY konsekwentnie EGZEKWUJE pełną, JEDNOLITĄ
+  centralizację
+
+PRAKTYCZNE ZNACZENIE PROCESOWE: NIK w kontroli (przywołanej W
+  wynikach wyszukiwania) ODNOTOWAŁ, że problematyka CENTRALIZACJI
+  generuje wysoką LICZBĘ wniosków O interpretacje indywidualne
+  (369 wniosków W skontrolowanych jednostkach) ORAZ długotrwałe spory
+  SĄDOWO-ADMINISTRACYJNE (średni CZAS postępowania PRZED WSA — POWYŻEJ
+  1000 dni; PRZED NSA — POWYŻEJ 2000 dni) — ⭐⭐ ISTOTNE PRZY doradztwie
+  dla KLIENTÓW z sektora SAMORZĄDOWEGO: sprawy VAT DOTYCZĄCE
+  centralizacji CZĘSTO wymagają WIELOLETNIEGO horyzontu procesowego,
+  co WARTO komunikować klientowi NA wczesnym etapie
+
+⭐ POWIĄZANIE Z GRUPĄ VAT: centralizacja JST i GRUPA VAT (sekcja
+  wyżej w TYM module) TO DWIE ODRĘBNE instytucje O odmiennej
+  PODSTAWIE prawnej — centralizacja JST jest OBOWIĄZKOWA i wynika Z
+  odrębnej ustawy, GRUPA VAT jest FAKULTATYWNA i wynika Z samej
+  ustawy o VAT — NIE MYLIĆ obu mechanizmów, mimo iż OBA prowadzą DO
+  traktowania wielu PODMIOTÓW jako JEDNEGO podatnika VAT.
+```
+
+### 7.4. Art. 43 ust. 3–5 — rezygnacja rolnika ryczałtowego ze zwolnienia
+
+```
+MECHANIZM (art. 43 ust. 3): rolnik RYCZAŁTOWY dokonujący dostawy
+  produktów ROLNYCH lub świadczący USŁUGI rolnicze, ZWOLNIONE na
+  podstawie art. 43 ust. 1 pkt 3, MOŻE zrezygnować Z tego zwolnienia
+  POD warunkiem DOKONANIA zgłoszenia rejestracyjnego Z art. 96 ust.
+  1 i 2 (formularz VAT-R) — ⭐ UPROSZCZENIE od 1.04.2011 r.: dawniej
+  (do 31.03.2011 r.) wymagany BYŁ DODATKOWO próg WARTOŚCI sprzedaży
+  W poprzednim roku PODATKOWYM przekraczający 20 000 zł — TEN
+  dodatkowy WARUNEK ZOSTAŁ zniesiony, DZIŚ wystarcza SAMO zgłoszenie
+  rejestracyjne, BEZ progu kwotowego
+
+SKUTKI REZYGNACJI: rolnik STAJE SIĘ czynnym PODATNIKIEM VAT W
+  zakresie prowadzonej DZIAŁALNOŚCI rolniczej — konsekwencje:
+  □ obowiązek WYSTAWIANIA faktur WEDŁUG zasad OGÓLNYCH
+  □ obowiązek PROWADZENIA ewidencji VAT I składania plików JPK_V7
+  □ PRAWO do odliczenia VAT NALICZONEGO od zakupów ZWIĄZANYCH z
+    działalnością OPODATKOWANĄ (maszyny ROLNICZE, paliwo, CZĘŚCI,
+    usługi remontowe, INWESTYCJE w gospodarstwo) — ⭐ TO jest
+    GŁÓWNA praktyczna KORZYŚĆ rezygnacji, zwłaszcza PRZY znaczących
+    inwestycjach W gospodarstwie
+
+POWRÓT DO ZWOLNIENIA (art. 43 ust. 5): MOŻLIWY DOPIERO po UPŁYWIE 3
+  LAT od DATY rezygnacji — POD warunkiem PISEMNEGO zawiadomienia
+  naczelnika US PRZED początkiem miesiąca (KWARTAŁU), OD którego
+  rolnik PONOWNIE chce SKORZYSTAĆ ze zwolnienia — ⭐⭐ KOLEJNY przykład
+  wzorca "WYBÓR wiąże NA czas określony" (analogicznie DO art. 28k/
+  28p — 2 lata, art. 114 taksówki — 12 miesięcy, PODATEK tonażowy —
+  OKRES wieloletni) — konsekwentnie POWTARZający się mechanizm W
+  konstrukcji polskiego VAT, WART odnotowania PRZY doradztwie
+  strategicznym DLA klientów rozważających DOWOLNY z tych wyborów
+
+⭐ PRAKTYCZNE ZASTOSOWANIE: relevantne PRZY doradztwie dla GOSPODARSTW
+  rolnych planujących ZNACZĄCE inwestycje (np. modernizacja PARKU
+  maszynowego, budowa NOWYCH obiektów gospodarczych) — REZYGNACJA ze
+  zwolnienia MOŻE być OPŁACALNA, jeśli SPODZIEWANY VAT naliczony OD
+  inwestycji PRZEWYŻSZA utracone UPROSZCZENIA rozliczeniowe — WYMAGA
+  jednak KALKULACJI uwzględniającej 3-LETNI okres związania.
+```
+
+### 7.5. Pozostałe pozycje grupy złożonej — ujęcie nawigacyjne
+
+```
+⚠️ Poniższe pozycje POZOSTAJĄ nieopracowane merytorycznie w TYM
+etapie — wskazano WYŁĄCZNIE ich UMIEJSCOWIENIE systemowe I priorytet,
+zgodnie z METODOLOGIĄ już zastosowaną przy Dziale VII/VIII rozdz. 3
+(iteracja VII) — TAM gdzie temat jest WĄSKI/niszowy, moduł WSKAZUJE
+ścieżkę dotarcia zamiast pełnego opracowania NA zapas (ZASADA lazy
+loading):
+
+□ Art. 108c-108g (Rozdział 1a — mechanizm PODZIELONEJ płatności,
+  dalsza część) — KONTYNUACJA regulacji MPP z art. 108a-108b (JUŻ
+  opracowanych we WCZEŚNIEJSZYCH iteracjach) — DOTYCZY szczegółów
+  technicznych rachunku VAT PRZY MPP, mniejszy PRIORYTET praktyczny
+  niż już OPRACOWANE mechanizmy podstawowe
+
+□ Art. 92-95 (Dział IX rozdz. 2 — DALSZA część odliczania częściowego
+  i KOREKTY podatku naliczonego) — UZUPEŁNIENIE już OPRACOWANEJ
+  proporcji/prewspółczynnika Z art. 90/90a-90c/91 (patrz MAPA-AKTOW,
+  wcześniejsze ITERACJE) — dotyczy SZCZEGÓŁOWYCH przypadków korekty
+  wieloletniej
+
+□ Art. 112-112aa (Rozdział 4 — TERMINY przechowywania dokumentów) —
+  temat TECHNICZNY, względnie NISKIE ryzyko sporne, WYSOKI priorytet
+  TYLKO przy konkretnych sporach DOT. przedawnienia obowiązku
+  przechowywania
+
+□ Art. 134a-134c (Rozdział 7a — SZCZEGÓLNA procedura DLA
+  międzynarodowego okazjonalnego PRZEWOZU drogowego osób) — TEMAT
+  WĄSKI, dotyczy WYŁĄCZNIE przewoźników AUTOKAROWYCH w RUCHU
+  międzynarodowym — NISKA częstotliwość W typowej praktyce KANCELARII
+  cywilno-karnej
+
+□ Art. 138i-138j (Rozdział 10 — procedura DEKLAROWANIA i zapłaty
+  podatku Z tytułu IMPORTU towarów, tzw. "IOSS uproszczony") —
+  POWIĄZANE tematycznie Z już OPRACOWANYM w iteracji VII modułem
+  mod-VAT-import-towarow-i-zwolnienia-importowe.md — PRZY sprawie Z
+  tego zakresu, sprawdź NAJPIERW ten moduł, GDYŻ może JUŻ zawierać
+  wystarczające OMÓWIENIE nawigacyjne
+
+□ Art. 106a/106d/106f/106l/106m-106q (SZCZEGÓŁOWE elementy systematyki
+  fakturowania, poza JUŻ opracowanymi w iteracji III art. 106b/106e/
+  106i/106j/106k) — DROBNE, techniczne PRZEPISY o zakresie STOSOWANIA
+  poszczególnych PRZEPISÓW faktur (np. faktury UPROSZCZONE, faktury
+  wystawiane PRZEZ nabywcę — "self-billing", elementy FAKTUR w
+  procedurach SZCZEGÓLNYCH) — NAJNIŻSZY priorytet W tej grupie, DO
+  opracowania PRZY konkretnym stanie FAKTYCZNYM wymagającym analizy
+  jednego Z tych szczegółowych PRZEPISÓW, nie NA zapas.
+
+⭐ REKOMENDACJA METODOLOGICZNA: powyższe POZYCJE, w PRZECIWIEŃSTWIE
+do sekcji 1-4 tego etapu, MAJĄ NISKĄ częstotliwość WYSTĘPOWANIA w
+typowej praktyce kancelaryjnej OBEJMUJĄCEJ prawo cywilne/rodzinne/
+karne/gospodarcze (profil UŻYTKOWNIKA systemu) — dalsze POGŁĘBIANIE
+tych wątków REKOMENDUJE SIĘ WYŁĄCZNIE reaktywnie, PRZY faktycznym
+wystąpieniu sprawy Z danego zakresu, ZAMIAST dalszego wypełniania
+"na zapas" wbrew ZASADZIE lazy loading systemu.
+```
+
+⚠️ Sekcja 7 ZAMYKA grupę "złożoną" (ETAP 2c) w zakresie tematów
+o wyższym priorytecie praktycznym. Pozostałe drobne pozycje z 7.5
+pozostają świadomie nawigacyjne.
 
 ---
 
-## 4c. ⭐⭐⭐ ZWOLNIENIA PRZEDMIOTOWE (art. 43) I VAT A NIERUCHOMOŚCI —
-dodane 2026-08-12, uzupełnienie DWÓCH luk zidentyfikowanych w audycie
-pokrycia DR-06 (dotąd CAŁKOWICIE nieobecne poza fragmentaryczną
-wzmianką przy VAT marża — połączone W jedną sekcję, bo NIERUCHOMOŚCI
-są NAJWAŻNIEJSZYM praktycznie podzbiorem zwolnień przedmiotowych)
+## CHANGELOG (skrócony — pełna historia w MAPA-AKTOW.md)
+
+**ETAP 2a (2026-08-13):** dodano Sekcję 5 — domknięcie grupy "szybkiej"
+luk peryferyjnych: art. 2 (słownik, wybrane kluczowe definicje z 52),
+art. 3 (właściwość organów — wyłącznie przypadki szczególne, art. 3
+ust. 1-2 SĄ uchylone), art. 28p (zawiadomienie o miejscu opodatkowania
+WSTO/TBE), art. 44 (zwolnienia WNT — przepis-przełącznik odsyłający do
+art. 43 i Rozdziału 3), art. 84-85 (szczególne metody ustalania VAT
+należnego — struktura zakupów i metoda "w stu", odróżnione od
+mechanizmu przeliczeniowego z art. 106e). W trakcie weryfikacji
+wykryto i skorygowano własną wstępną hipotezę o nieaktualności
+przeliczników art. 85 — po dodatkowym wyszukiwaniu potwierdzono,
+że przeliczniki 18,70%/7,41%/4,76% (stawki 23%/8%/5%) SĄ aktualne.
+Źródła: lexlege.pl (Rząd 2B, t.j. Dz.U.2025.0.775, stan prawny
+wprost oznaczony jako aktualny na 12.08.2026), przepisy.gofin.pl,
+poltax.pl, ifirma.pl. ⚠️ [NIEWERYFIKOWANE BEZPOŚREDNIO W ISAP] —
+ISAP niedostępny do web_fetch w tej sesji.
+
+**ETAP 2c (2026-08-13):** dodano Sekcję 7 — domknięcie priorytetowej
+części grupy "złożonej": CESOP (art. 110a-110e — próg 25 płatności/
+kwartał, obowiązki dostawców usług płatniczych, powiązanie z
+wykrywalnością nieprawidłowości e-commerce), wyroby medyczne (art.
+145c-145d — WAŻNE ODKRYCIE: przepis przejściowy wygasł 27.05.2025 r.,
+dziś ma charakter w większości historyczny), centralizacja VAT JST
+(WAŻNE ODKRYCIE STRUKTURALNE: to odrębna ustawa z 2016 r., nie luka
+w samej ustawie o VAT — geneza z wyroku TSUE C-276/14 Gmina Wrocław
+i uchwały NSA I FPS 4/15, zasada "wszystko albo nic"), art. 43 ust.
+3-5 (rezygnacja rolnika ryczałtowego — uproszczenie od 2011 r., okres
+związania 3 lata, wzorzec powtarzający się w kilku miejscach ustawy).
+Pozostałe drobne pozycje (108c-108g, 92-95, 112-112aa, 134a-134c,
+138i-138j, szczegółowe fakturowanie 106a/106d/106f/106l/106m-106q)
+potraktowane nawigacyjnie zgodnie z zasadą lazy loading — niska
+częstotliwość w typowej praktyce kancelaryjnej użytkownika, do
+opracowania reaktywnie przy faktycznej sprawie. Źródła: lexlege.pl,
+przepisy.gofin.pl, prawo.pl, deloitte.com, cowzdrowiu.pl,
+isp-modzelewski.pl, enodo.pl, mf-arch2.mf.gov.pl, infor.pl, rp.pl,
+nik.gov.pl, perspektywapodatkowa.com, adwokatpazdan.pl,
+egospodarka.pl, vademecumpodatnika.pl, odpowiedziprawne.pl,
+konskowola.pl, izbapodatkowa.pl, inforfk.pl, praworolne.info.
+
+**ETAP 2b (2026-08-13):** dodano Sekcję 6 — domknięcie grupy
+"średniej": złoto inwestycyjne (art. 121-125), taksówki (art. 114),
+call-off stock (art. 13a-13l), VAT-REF (art. 89), szacowanie
+podstawy przy powiązaniach (art. 32), korekty informacji
+podsumowujących VAT-UE (art. 101-102). Źródła: lexlege.pl, gofin.pl,
+ifirma.pl, poltax.pl, ksiegoboty.pl (art. 89 — z aktualnym
+rozporządzeniem MF i G z 27.05.2026, Dz.U. 2026 poz. 736, weszło
+w życie 6.06.2026), inforlex.pl, bwradwokaci.pl, e-druki.pl.
 
-```
-⭐⭐ ROZRÓŻNIENIE od zwolnienia PODMIOTOWEGO (art. 113, opisanego
-  wyżej): zwolnienie PRZEDMIOTOWE zależy OD rodzaju czynności, NIE od
-  wysokości OBROTU — status podatnika (mały/duży) NIE ma znaczenia —
-  podatnik NIE wybiera zwolnienia przedmiotowego DOBROWOLNIE (poza
-  wyjątkami Z opcją opodatkowania, patrz NIŻEJ) — STOSUJE się je
-  OBLIGATORYJNIE, gdy czynność MIEŚCI się w katalogu USTAWOWYM
-⭐ ZASADA WYKŁADNI: zwolnienia PRZEDMIOTOWE, jako WYJĄTEK od zasady
-  POWSZECHNOŚCI opodatkowania, NALEŻY interpretować ŚCIŚLE — bez
-  wykładni ROZSZERZAJĄCEJ ani zawężającej WPROWADZAJĄCEJ pozaustawowe
-  WARUNKI zwolnienia
 
-⭐⭐⭐ NAJWAŻNIEJSZE KATEGORIE Z KATALOGU art. 43 ust. 1 (⚠️ katalog
-  jest OBSZERNY — poniżej NAJCZĘŚCIEJ spotykane W praktyce, NIE
-  pełna lista):
-  □ pkt 1-2 — dostawa towarów WYKORZYSTYWANYCH wyłącznie NA cele
-    działalności ZWOLNIONEJ, jeśli PRZY nabyciu/imporcie/wytworzeniu
-    NIE przysługiwało prawo DO odliczenia VAT — ⭐ RYGORYSTYCZNE
-    kryteria, W praktyce RZADKO stosowane przy zbywaniu NIERUCHOMOŚCI
-  □ pkt 9-10a — DOSTAWA nieruchomości — patrz ROZBUDOWANA sekcja
-    niżej
-  □ pkt 17-41 — KATALOG opisowy (wprowadzony NOWELIZACJĄ od
-    1.01.2011): usługi POCZTOWE powszechne, FINANSOWE (kredyty,
-    pożyczki, gwarancje, TRANSAKCJE płatnicze, obrót WALUTAMI,
-    zarządzanie FUNDUSZAMI), UBEZPIECZENIOWE i reasekuracyjne,
-    EDUKACYJNE (kształcenie W systemie oświaty, w TYM szkoły
-    NIEPUBLICZNE wpisane DO ewidencji JST, nauczanie PRYWATNE
-    świadczone PRZEZ nauczycieli — pkt 29, m.in. KOREPETYCJE — ⚠️
-    NIE obejmuje DORADZTWA), OPIEKA medyczna (świadczona PRZEZ
-    podmioty LECZNICZE w RAMACH działalności LECZNICZEJ — pkt 18-19),
-    usługi KULTURALNE (świadczone PRZEZ podmioty prawa PUBLICZNEGO
-    lub INNE uznane instytucje KULTURY), transakcje DOTYCZĄCE walut/
-    banknotów/monet jako PRAWNEGO środka płatniczego, krew/OSOCZE/
-    ludzkie ORGANY, znaczki POCZTOWE sprzedawane PO wartości
-    nominalnej, złoto DLA Narodowego Banku Polskiego
-  □ ⭐ NAJEM lokali MIESZKALNYCH na cele MIESZKANIOWE (pkt 36) —
-    ZWOLNIENIE OBLIGATORYJNE (bez opcji rezygnacji) — ⚠️ CZĘSTY
-    przedmiot SPORÓW co DO faktycznego CELU najmu (mieszkaniowy VS
-    inny, np. najem NA rzecz firmy w celu ZAKWATEROWANIA pracowników
-    — WYMAGA odrębnej weryfikacji CELU rzeczywistego użytku)
-
-⭐⭐⭐ VAT A NIERUCHOMOŚCI — art. 43 ust. 1 pkt 10 i 10a (KLUCZOWY,
-  NAJCZĘSTSZY temat W praktyce transakcyjnej):
-  □ ZASADA (pkt 10): dostawa BUDYNKÓW, budowli LUB ich części jest
-    CO do zasady ZWOLNIONA — Z DWOMA WYJĄTKAMI wykluczającymi
-    zwolnienie: (a) dostawa DOKONYWANA w RAMACH pierwszego
-    zasiedlenia LUB przed NIM; (b) MIĘDZY pierwszym zasiedleniem A
-    dostawą upłynął OKRES KRÓTSZY niż 2 LATA
-  □ ⭐⭐⭐ DEFINICJA "PIERWSZEGO ZASIEDLENIA" (art. 2 pkt 14) —
-    KLUCZOWA dla całej analizy: oddanie DO użytkowania PIERWSZEMU
-    nabywcy/użytkownikowi LUB rozpoczęcie użytkowania NA potrzeby
-    WŁASNE budynków/budowli/ich CZĘŚCI, PO: (a) wybudowaniu, LUB
-    (b) ULEPSZENIU — JEŚLI wydatki na ULEPSZENIE (w rozumieniu
-    przepisów O podatku dochodowym) STANOWIŁY co NAJMNIEJ 30%
-    wartości POCZĄTKOWEJ — ⭐ ULEPSZENIE przekraczające TEN próg
-    "ODNAWIA" pierwsze zasiedlenie — budynek PONOWNIE staje się
-    "NOWY" na potrzeby TEGO przepisu, mimo WCZEŚNIEJSZEGO wieloletniego
-    użytkowania
-  □ ⭐ SZEROKA wykładnia "pierwszego ZASIEDLENIA" (utrwalona linia
-    interpretacyjna): OBEJMUJE zarówno ODDANIE budynku w NAJEM PO
-    wybudowaniu, JAK i wykorzystywanie NA potrzeby WŁASNEJ
-    działalności GOSPODARCZEJ podatnika — W OBU przypadkach dochodzi
-    DO "korzystania" Z budynku uruchamiającego BIEG terminu
-  □ ⭐⭐⭐ ZWOLNIENIE "REZERWOWE" — pkt 10a: STOSUJE SIĘ TYLKO gdy
-    dostawa NIE kwalifikuje się DO zwolnienia z pkt 10 (tj. GDY
-    dostawa jest W ramach pierwszego zasiedlenia/przed NIM lub PRZED
-    upływem 2 LAT) — WYMAGA łącznego SPEŁNIENIA DWÓCH przesłanek: (a)
-    W stosunku DO budynku NIE przysługiwało dokonującemu DOSTAWY
-    prawo DO obniżenia VAT naliczonego, (b) dokonujący DOSTAWY nie
-    ponosił WYDATKÓW na jego ULEPSZENIE przekraczających 30% wartości
-    początkowej (LUB ponosił, ale WYKORZYSTYWAŁ budynek W stanie
-    ULEPSZONYM do CZYNNOŚCI opodatkowanych PRZEZ co NAJMNIEJ 5 LAT)
-    — ⚠️ dotyczy WYŁĄCZNIE budynków "GOTOWYCH do oddania DO
-    użytkowania" — NIE obejmuje OBIEKTÓW w TRAKCIE budowy (np. same
-    ŁAWY fundamentowe)
-  □ ⭐⭐⭐ OPCJA OPODATKOWANIA — REZYGNACJA ze zwolnienia (art. 43 ust.
-    10-11) — DOSTĘPNA WYŁĄCZNIE dla zwolnienia Z pkt 10 (⚠️ NIE dla
-    pkt 10a — TAM strony NIE mają możliwości wyboru opodatkowania):
-    → WARUNKI: obie STRONY (dostawca I nabywca) SĄ zarejestrowanymi
-      czynnymi PODATNIKAMI VAT ORAZ złożą, PRZED dniem dokonania
-      dostawy, właściwemu DLA nabywcy naczelnikowi US ZGODNE
-      oświadczenie O wyborze opodatkowania — OŚWIADCZENIE musi
-      zawierać: dane IDENTYFIKACYJNE obu stron, PLANOWANĄ datę
-      zawarcia UMOWY, adres NIERUCHOMOŚCI
-    → ⭐⭐ SENS EKONOMICZNY: pozwala NABYWCY na ODLICZENIE VAT
-      naliczonego (JEŚLI nieruchomość BĘDZIE wykorzystywana do
-      czynności OPODATKOWANYCH) — BEZ opcji, VAT naliczony PRZY
-      zakupie zwolnionym byłby KOSZTEM bezpowrotnym — ⭐ POWIĄZANIE Z
-      PCC: wybór OPODATKOWANIA VAT WYŁĄCZA obowiązek ZAPŁATY PCC od
-      nabycia (PCC I VAT wykluczają SIĘ wzajemnie CO do zasady — PATRZ
-      niżej)
-    → ⚠️ MOMENT złożenia OŚWIADCZENIA przy ZALICZCE/zadatku: JEŻELI
-      strony PLANUJĄ opodatkowanie, oświadczenie MUSI być złożone
-      PRZED dniem ZAPŁATY zaliczki, NIE tylko przed samą DOSTAWĄ —
-      W PRZECIWNYM razie zaliczka ROZLICZANA jest jako ZWOLNIONA
-      (potwierdzone interpretacją KIS Z 31.01.2020, aktualność
-      SPRAWDŹ przy konkretnej sprawie)
-    → ⭐⭐⭐ ROZBIEŻNOŚĆ ORZECZNICZA co do FORMY oświadczenia: WSA w
-      Bydgoszczy (I SA/Bd 419/24, październik 2024) — brak
-      FORMALNEGO oświadczenia z ust. 11 NIE dyskwalifikuje wyboru,
-      JEŻELI z TREŚCI aktu notarialnego I okoliczności wynika ZGODNA
-      wola stron CO do opodatkowania; NSA (I FSK 540/22, czerwiec
-      2025) — PRZECIWNE stanowisko: BEZ oświadczenia spełniającego
-      WSZYSTKIE ustawowe wymogi NIE MA skutecznej rezygnacji ze
-      zwolnienia — ⚠️ ROZBIEŻNOŚĆ istnieje, NIE jest rozstrzygnięta
-      jednolicie — PRZY REDAGOWANIU umowy/aktu notarialnego BEZPIECZNIEJ
-      jest zawsze SPEŁNIĆ WSZYSTKIE formalne wymogi ust. 11 wprost,
-      NIEZALEŻNIE od korzystniejszej linii WSA Bydgoszcz
-    → ⭐ RYZYKO PRAKTYCZNE nieskutecznej rezygnacji (ex post):
-      GDY organ PO LATACH stwierdzi, że rezygnacja NIE była skuteczna
-      — sprzedawca WYKAZAŁ VAT nienależnie (BRAK prostej ścieżki
-      zwrotu), nabywca TRACI prawo do odliczenia Z faktury — ⭐
-      REKOMENDACJA: umowa/akt POWINIEN zawierać klauzule
-      zabezpieczające NA wypadek zmiany KWALIFIKACJI przez organ
-      (kto PONOSI dodatkowy VAT/utracone ODLICZENIE, korekta CENY,
-      kto POKRYWA ewentualne PCC)
-  □ ⭐ GRUNT dzieli LOS podatkowy budynku (art. 29a ust. 8 — POWIĄZANIE
-    z sekcją 4b wyżej): PRZY dostawie budynku/budowli WRAZ z gruntem,
-    NA którym są POSADOWIONE — wartości GRUNTU NIE wyodrębnia się Z
-    podstawy opodatkowania — GRUNT "dzieli byt PRAWNY" budynku:
-    JEŻELI budynek KORZYSTA ze zwolnienia, ZWOLNIONA jest RÓWNIEŻ
-    dostawa gruntu (I odwrotnie — PRZY opodatkowaniu budynku,
-    opodatkowany JEST też grunt)
-  □ ⭐ DZIAŁKI NIEZABUDOWANE — odrębny reżim (art. 43 ust. 1 pkt 9):
-    zwolniona jest DOSTAWA terenów NIEZABUDOWANYCH, INNYCH niż
-    tereny BUDOWLANE — ⚠️ BRAK opcji rezygnacji Z tego zwolnienia
-    (w przeciwieństwie DO pkt 10) — DZIAŁKA budowlana (objęta
-    planem ZAGOSPODAROWANIA lub DECYZJĄ o warunkach zabudowy) jest
-    OPODATKOWANA obligatoryjnie, NIE zwolniona
-
-⭐⭐ VAT A PCC — WZAJEMNA WYŁĄCZNOŚĆ (odesłanie do mod-ustawa-PCC-i-
-  podatek-spadkow-darowizn):
-  □ ZASADA OGÓLNA: transakcja OPODATKOWANA VAT (w TYM zwolniona Z
-    VAT, JEŚLI zwolnienie WYNIKA z przepisów O VAT) CO DO zasady NIE
-    podlega RÓWNOCZEŚNIE PCC — sprzedaż NIERUCHOMOŚCI zwolniona Z
-    VAT na PODSTAWIE pkt 10/10a (BEZ wyboru opcji opodatkowania) →
-    NABYWCA płaci PCC (2% wartości RYNKOWEJ nieruchomości) — sprzedaż
-    OPODATKOWANA VAT (w TYM PRZEZ wybór opcji Z ust. 10-11) → BRAK
-    PCC po stronie NABYWCY
-  □ ⭐ PRAKTYCZNA DECYZJA biznesowa: WYBÓR opodatkowania VAT (zamiast
-    zwolnienia) PRZENOSI ciężar Z jednorazowego PCC (2%, KOSZT
-    bezzwrotny) NA VAT (23%, ALE PODLEGAJĄCY odliczeniu PRZEZ
-    nabywcę będącego CZYNNYM podatnikiem) — DLA nabywcy PROWADZĄCEGO
-    działalność OPODATKOWANĄ, opcja VAT jest ZAZWYCZAJ korzystniejsza
-  □ ⚠️ Szczegółowa ANALIZA relacji VAT-PCC (w TYM przypadki, GDY OBA
-    podatki MOGĄ wystąpić RÓWNOCZEŚNIE przy CZĘŚCIOWYM zwolnieniu) —
-    patrz mod-ustawa-PCC-i-podatek-spadkow-darowizn, JEŚLI zawiera
-    tę tematykę; W PRZECIWNYM razie WYMAGA odrębnego opracowania
-
-⭐ ODESŁANIE DO WIS: PRZY wątpliwości CO do zwolnienia KONKRETNEJ
-  usługi (np. czy DANE świadczenie MIEŚCI się w kategorii
-  "EDUKACYJNej" lub "MEDYCZNEJ") — WIS (sekcja wyżej W tym module)
-  obejmuje RÓWNIEŻ zwolnienia, NIE tylko stawki obniżone
-
-Checklist praktyczny (nieruchomości):
-□ USTAL datę PIERWSZEGO zasiedlenia (art. 2 pkt 14) — sprawdź, czy
-  budynek BYŁ kiedykolwiek ODDANY do użytkowania (najem, WŁASNA
-  działalność) — I czy PÓŹNIEJSZE ulepszenia PRZEKROCZYŁY 30%
-  wartości POCZĄTKOWEJ (co "ODNAWIA" pierwsze zasiedlenie)
-□ POLICZ, czy od pierwszego ZASIEDLENIA do PLANOWANEJ dostawy minęły
-  PEŁNE 2 LATA — jeśli TAK, zastosowanie ma PKT 10 (zwolnienie ZE
-  swobodą wyboru OPODATKOWANIA); jeśli NIE, sprawdź WARUNKI pkt 10a
-  (zwolnienie BEZ opcji)
-□ JEŻELI planowana jest OPCJA opodatkowania — czy OBIE strony są
-  CZYNNYMI podatnikami VAT, czy OŚWIADCZENIE zostanie złożone
-  formalnie I przed właściwym TERMINEM (przed dostawą, a JEŚLI jest
-  zaliczka — PRZED jej zapłatą)
-□ Czy AKT notarialny/umowa zawiera WSZYSTKIE elementy oświadczenia Z
-  ust. 11 WPROST (nie tylko OGÓLNĄ wzmiankę o VAT) — BIORĄC pod
-  uwagę rozbieżność ORZECZNICZĄ WSA/NSA, bezpieczniej SPEŁNIĆ
-  wszystkie wymogi FORMALNE
-□ Czy w UMOWIE zabezpieczono strony NA wypadek ZAKWESTIONOWANIA
-  kwalifikacji przez ORGAN (kto PONOSI dodatkowy VAT/PCC, korekta
-  ceny)
-□ Czy TO nieruchomość ZABUDOWANA (pkt 10/10a) czy NIEZABUDOWANA (pkt
-  9) — RÓŻNE reżimy, przy DZIAŁCE budowlanej brak ZWOLNIENIA w ogóle
-
-⚠️ Weryfikuj aktualne brzmienie art. 43 w ISAP — KATALOG jest
-  OBSZERNY (ust. 1 ma KILKADZIESIĄT punktów) i BYŁ wielokrotnie
-  nowelizowany. Śledź TAKŻE projekt DEREGULACYJNY zmian W VAT
-  planowanych OD 1.10.2026 (skład VAT, split PAYMENT, limit
-  zwolnienia PODMIOTOWEGO, odpowiedzialność SOLIDARNA) — NIE dotyczy
-  bezpośrednio art. 43, ALE MOŻE wpływać NA powiązane mechanizmy —
-  SPRAWDŹ status prac LEGISLACYJNYCH przy sprawach Z terminem BLISKO
-  tej daty.
-```
-
----
-
-## 4d. ⭐⭐⭐ ULGA NA ZŁE DŁUGI (art. 89a–89b ustawy VAT) — dodane
-2026-08-12, uzupełnienie luki zidentyfikowanej w audycie pokrycia
-DR-06 (dotąd CAŁKOWICIE nieobecne — ISTOTNE narzędzie w sporach Z
-niewypłacalnymi kontrahentami, WYSOKA częstotliwość w praktyce
-kancelaryjnej przy WINDYKACJI należności handlowych)
-
-```
-⭐⭐⭐ ISTOTA MECHANIZMU: obowiązek rozliczenia VAT NALEŻNEGO co DO
-  zasady istnieje NIEZALEŻNIE od tego, CZY podatnik OTRZYMAŁ zapłatę
-  — ULGA na złe długi POZWALA wierzycielowi ODZYSKAĆ rozliczony
-  wcześniej podatek NALEŻNY, gdy KONTRAHENT nie zapłacił — LUSTRZANE
-  odbicie PO stronie dłużnika: OBOWIĄZEK skorygowania (ZMNIEJSZENIA)
-  podatku NALICZONEGO, który wcześniej ODLICZYŁ, a NIE zapłacił
-
-⭐⭐⭐ WIERZYCIEL — PRAWO do korekty (art. 89a):
-  □ WARUNEK PODSTAWOWY (ust. 1a): nieściągalność WIERZYTELNOŚCI
-    uważa się za UPRAWDOPODOBNIONĄ, gdy wierzytelność NIE została
-    uregulowana LUB zbyta w JAKIEJKOLWIEK formie w CIĄGU 90 DNI od
-    dnia UPŁYWU terminu jej PŁATNOŚCI określonego w UMOWIE lub na
-    FAKTURZE — ⭐ LICZY się TERMIN płatności (NIE data wystawienia
-    faktury ANI data transakcji) — TERMIN 90-dniowy liczony OD tej
-    daty
-  □ ⭐⭐ WARUNKI aktualne PO nowelizacji 1.10.2021 i wyroku TSUE
-    C-335/19 (art. 89a ust. 2, ⚠️ ISTOTNIE ZMIENIONE względem
-    starszego stanu prawnego): NA dzień poprzedzający dzień ZŁOŻENIA
-    deklaracji, W której dokonuje SIĘ korekty: (a) WIERZYCIEL jest
-    podatnikiem ZAREJESTROWANYM jako czynny PODATNIK VAT; (b) OD
-    daty wystawienia FAKTURY dokumentującej wierzytelność NIE
-    upłynęły 3 LATA, licząc OD końca roku, W KTÓRYM została
-    WYSTAWIONA
-  □ ⭐⭐⭐ USUNIĘTE wymogi (WYROK TSUE C-335/19 z 15.10.2020,
-    STWIERDZAJĄCY niezgodność Z prawem UNIJNYM): DAWNIEJ wymagano
-    RÓWNIEŻ, by (a) dłużnik BYŁ zarejestrowanym czynnym PODATNIKIEM
-    VAT i (b) dłużnik NIE był W trakcie postępowania
-    RESTRUKTURYZACYJNEGO/upadłościowego/likwidacji — OBA te warunki
-    ZOSTAŁY USUNIĘTE nowelizacją OD 1.10.2021 — ⚠️ starsze materiały/
-    komentarze MOGĄ wciąż BŁĘDNIE wymieniać te WARUNKI jako
-    aktualne — SKORYGUJ przy cytowaniu
-  □ ⭐⭐ DODATKOWA ścieżka DLA dłużników NIEBĘDĄCYCH podatnikami VAT
-    czynnymi (art. 89a ust. 2a, dodany OD 1.10.2021): korekta MOŻLIWA,
-    JEŻELI: (1) wierzytelność POTWIERDZONA prawomocnym orzeczeniem
-    SĄDU i skierowana NA drogę postępowania EGZEKUCYJNEGO, LUB (2)
-    wierzytelność WPISANA do rejestru DŁUGÓW prowadzonego na
-    poziomie KRAJOWYM, LUB (3) wobec dłużnika OGŁOSZONO upadłość
-    KONSUMENCKĄ — ⭐ ISTOTNE przy WIERZYTELNOŚCIACH wobec konsumentów/
-    podmiotów NIEBĘDĄCYCH czynnymi podatnikami VAT
-  □ ⭐ MOMENT korekty (ust. 3): W rozliczeniu ZA okres, W KTÓRYM
-    nieściągalność UZNAJE się za uprawdopodobnioną (tj. OKRES, w
-    KTÓRYM upłynął 90. dzień) — POD warunkiem, że DO dnia złożenia
-    deklaracji ZA ten okres wierzytelność NIE została uregulowana/
-    zbyta — ⚠️ korekty NIE dokonuje SIĘ wstecznie za OKRES pierwotnego
-    wykazania FAKTURY — WYŁĄCZNIE na BIEŻĄCO, w okresie SPEŁNIENIA
-    warunku 90 dni
-  □ ⭐⭐ ODWRÓCENIE korekty PRZY późniejszej ZAPŁACIE (ust. 4): jeśli
-    PO skorzystaniu z ulgi NALEŻNOŚĆ zostanie uregulowana LUB zbyta w
-    jakiejkolwiek FORMIE — wierzyciel MA obowiązek zwiększenia
-    podstawy OPODATKOWANIA i podatku NALEŻNEGO w rozliczeniu ZA
-    okres, w KTÓRYM należność ZOSTAŁA uregulowana/zbyta — PRZY
-    częściowym uregulowaniu — ZWIĘKSZENIE proporcjonalnie DO tej
-    części
-  □ ⭐ NASTĘPCY podatkowi: Z ulgi MOGĄ korzystać RÓWNIEŻ następcy
-    podatkowi WIERZYCIELA (sukcesja PRAWNA)
-  □ ⭐ BRAK obowiązku INFORMOWANIA dłużnika przez WIERZYCIELA o
-    skorzystaniu Z ulgi — TO nie tylko uproszczenie ADMINISTRACYJNE,
-    lecz świadome ROZWIĄZANIE ustawowe (dłużnik I TAK ma odrębny,
-    SAMOISTNY obowiązek monitorowania WŁASNYCH zaległości płatniczych
-    — patrz NIŻEJ)
-
-⭐⭐⭐ DŁUŻNIK — OBOWIĄZEK korekty (art. 89b):
-  □ ⭐⭐⭐ ZASADA (ust. 1): W przypadku NIEUREGULOWANIA należności W
-    terminie 90 DNI od dnia upływu TERMINU płatności — dłużnik JEST
-    OBOWIĄZANY do KOREKTY odliczonej kwoty PODATKU naliczonego
-    wynikającej Z tej faktury, W rozliczeniu ZA okres, w KTÓRYM
-    upłynął 90. dzień — ⭐⭐ OBOWIĄZEK ten jest NIEZALEŻNY od tego,
-    czy WIERZYCIEL faktycznie SKORZYSTAŁ z ulgi PO swojej stronie —
-    dłużnik MUSI korygować SAMODZIELNIE, z URZĘDU, niezależnie od
-    działań kontrahenta
-  □ WYJĄTEK: przepisu NIE stosuje się, GDY dłużnik ureguluje
-    należność NAJPÓŹNIEJ w OSTATNIM dniu okresu rozliczeniowego, W
-    KTÓRYM upłynął 90. dzień (tj. ZAPŁATA jeszcze W tym samym
-    okresie ZWALNIA z obowiązku korekty)
-  □ ⭐⭐⭐ ⚠️ NIESPÓJNOŚĆ MIĘDZY art. 89a i 89b PO nowelizacji
-    1.10.2021 (sygnalizowana W piśmiennictwie, dotycząca DŁUŻNIKÓW
-    w RESTRUKTURYZACJI): art. 89a (STRONA wierzyciela) NIE zawiera
-    już WYŁĄCZENIA dla dłużników W restrukturyzacji/upadłości —
-    JEDNAK art. 89b (STRONA dłużnika) W DOSŁOWNYM brzmieniu NADAL
-    nakłada OBOWIĄZEK korekty NAWET gdy dłużnik jest W trakcie
-    postępowania RESTRUKTURYZACYJNEGO w chwili UPŁYWU 90. dnia —
-    ⭐ W piśmiennictwie WSKAZUJE się, że przepisy PRAWA
-    restrukturyzacyjnego (chroniące MASĘ restrukturyzacyjną przed
-    powstawaniem NOWYCH zobowiązań poza planem) MOGĄ mieć
-    PIERWSZEŃSTWO przed art. 89b w TAKIEJ sytuacji — ⚠️ KWESTIA
-    SPORNA i NIEJEDNOZNACZNIE rozstrzygnięta w PRAKTYCE — przy
-    SPRAWIE z udziałem dłużnika W restrukturyzacji WYMAGANA jest
-    odrębna, POGŁĘBIONA analiza (POWIĄZANIE z prawem
-    RESTRUKTURYZACYJNYM, poza zakresem TEGO modułu)
-  □ ⭐⭐ ODWRÓCENIE korekty PRZY późniejszej zapłacie PRZEZ dłużnika
-    (ust. 4): PO uregulowaniu należności PO dokonaniu korekty —
-    dłużnik MA prawo DO ponownego zwiększenia kwoty PODATKU
-    naliczonego W rozliczeniu za OKRES, w KTÓRYM należność
-    UREGULOWANO — PRZY częściowym uregulowaniu — zwiększenie
-    proporcjonalnie DO tej części
-  □ ⭐ PRZYPADEK SZCZEGÓLNY — dłużnik NIGDY nie odliczył podatku Z
-    danej faktury (potwierdzone interpretacją KIS Z 14.09.2021, nr
-    0113-KDIPT1-1.4012.544.2021.1.MSU): JEŚLI dłużnik NIE dokonał
-    ODLICZENIA podatku PRZED upływem 90 dni — art. 89b W OGÓLE nie
-    ma ZASTOSOWANIA (BRAK czego korygować) — DŁUŻNIK zachowuje
-    PRAWO do odliczenia PO uregulowaniu zobowiązania, Z zastrzeżeniem
-    OGÓLNEGO terminu art. 86 ust. 13 (5 LAT od początku roku, w
-    KTÓRYM powstało prawo DO odliczenia)
-
-⭐⭐ ASPEKTY TECHNICZNE — JPK_V7 (POWIĄZANIE z sekcją **5 NIŻEJ** w tym
-  module — „Ewidencja VAT (JPK_V7), korekta ewidencji i sankcje
-  ewidencyjne"; ⚠️ do 2026-08-12 odesłanie wskazywało na „sekcję 5
-  wyżej", która NIE ISTNIAŁA — naprawione wraz z utworzeniem sekcji 5):
-  □ Korekta ULGI NIE wymaga oznaczeń KODÓW GTU ani OZNACZENIA "WEW"
-  □ WIERZYCIEL: pole "KorektaPodstawyOpodt" — art. 89a ust. 1 PRZY
-    zaznaczaniu korekty NA minus (nieuregulowana należność), art.
-    89a ust. 4 PRZY korekcie NA plus (późniejsza ZAPŁATA)
-  □ DŁUŻNIK: pola P_46 (korekta Z art. 89b ust. 1 — TYLKO wartości
-    ujemne LUB zero) i P_47 (zwiększenie PO uregulowaniu — art. 89b
-    ust. 4) — BEZ standardowych pól ODLICZENIA
-  □ OD stycznia 2022: WIERZYCIEL musi wykazywać W części
-    ewidencyjnej JPK TERMIN płatności DLA dokumentów objętych ulgą —
-    UMOŻLIWIA to organowi WERYFIKACJĘ, czy korekta PO stronie
-    dłużnika (OBLIGATORYJNA) rzeczywiście NASTĄPIŁA
-  □ ⭐ PRAKTYCZNA rekomendacja Z interpretacji (2026): WYDRUK z
-    rejestru VAT NA stronie MF (biała LISTA) na DZIEŃ poprzedzający
-    korektę STANOWI akceptowane POTWIERDZENIE statusu VAT dłużnika/
-    wierzyciela — WARTO archiwizować JAKO dowód spełnienia warunków
-
-⭐ PRZESUNIĘCIE terminu PŁATNOŚCI: jeśli STRONY (za zgodą OBU) chcą
-  USTALIĆ nowy termin PŁATNOŚCI — MUSI to nastąpić W okresie, GDY
-  NIE minęło jeszcze 90 dni OD pierwotnego terminu — NIEDOCHOWANIE
-  tego (wg STANOWISKA organów) SKUTKUJE obowiązkiem rozliczenia ulgi
-  MIMO późniejszej zmiany terminu
-
-⭐ UMORZENIE zobowiązania: NIE stanowi "UREGULOWANIA należności" w
-  rozumieniu USTAWY — umorzenie PRZEZ wierzyciela NIE zwalnia go z
-  obowiązku WYKAZANIA podatku należnego (wg ulgi), a DŁUŻNIK traci
-  PRAWO do odliczenia — SKUTKI SYMETRYCZNE do braku ZAPŁATY, nie
-  identyczne Z "uregulowaniem"
-
-Checklist praktyczny (WIERZYCIEL — dochodzenie ulgi):
-□ Czy MINĘŁO 90 dni OD terminu płatności OKREŚLONEGO w umowie/na
-  fakturze (NIE od daty WYSTAWIENIA faktury)
-□ Czy na DZIEŃ poprzedzający złożenie DEKLARACJI wierzyciel jest
-  CZYNNYM podatnikiem VAT ORAZ nie upłynęły 3 LATA od końca roku
-  wystawienia FAKTURY
-□ Jeśli DŁUŻNIK nie jest czynnym PODATNIKIEM VAT — czy SPEŁNIONA
-  jest jedna Z alternatywnych przesłanek ust. 2a (WYROK sądu +
-  EGZEKUCJA, wpis DO rejestru długów, upadłość KONSUMENCKA)
-□ Czy KOREKTA ujęta jest W deklaracji za WŁAŚCIWY okres (moment
-  upływu 90 DNI), nie retrospektywnie
-□ Czy ARCHIWIZOWANY jest dowód STATUSU VAT kontrahenta (wydruk Z
-  białej listy) NA właściwą datę
-
-Checklist praktyczny (DŁUŻNIK — obrona/zgodność):
-□ Czy termin 90 DNI od terminu płatności JUŻ upłynął — JEŚLI tak,
-  obowiązek korekty JEST niezależny od DZIAŁAŃ wierzyciela
-□ Czy DŁUŻNIK w ogóle wcześniej ODLICZYŁ VAT z DANEJ faktury — jeśli
-  NIE, art. 89b nie ma ZASTOSOWANIA
-□ PRZY dłużniku w RESTRUKTURYZACJI — flaguj JAKO obszar SPORNY,
-  wymagający odrębnej analizy Z prawem restrukturyzacyjnym, NIE
-  stosuj automatycznie DOSŁOWNEGO brzmienia art. 89b BEZ tej
-  weryfikacji
-
-⚠️ Weryfikuj aktualne brzmienie art. 89a-89b w ISAP — SZCZEGÓLNIE
-  uważaj na STARSZE materiały cytujące WARUNKI sprzed nowelizacji
-  1.10.2021 (WYMÓG statusu VAT dłużnika, WYŁĄCZENIE przy
-  restrukturyzacji PO stronie wierzyciela) — TE wymogi ZOSTAŁY
-  usunięte w WYNIKU wyroku TSUE C-335/19 i JUŻ NIE obowiązują PO
-  stronie art. 89a.
-```
-
----
-
-## 4e. ⭐⭐⭐ SANKCJE VAT — DODATKOWE ZOBOWIĄZANIE PODATKOWE (art. 112b–
-112c ustawy VAT) — dodane 2026-08-12, uzupełnienie luki
-zidentyfikowanej w audycie pokrycia DR-06 (dotąd CAŁKOWICIE nieobecne
-poza JEDNĄ ogólną wzmianką o "aktualnym sankcyjnym art. 109a" przy
-JPK — TEN artykuł dotyczy INNEJ sankcji; art. 112b/112c to GŁÓWNY,
-systemowy mechanizm sankcyjny VAT)
-
-```
-⭐⭐⭐ ISTOTA: dodatkowe ZOBOWIĄZANIE podatkowe (POTOCZNIE "sankcja
-  VAT") to ADMINISTRACYJNA kara PIENIĘŻNA nakładana PRZEZ organ, GDY
-  podatnik ZANIŻYŁ zobowiązanie PODATKOWE, zawyżył KWOTĘ zwrotu VAT,
-  LUB zawyżył kwotę DO przeniesienia na KOLEJNY okres — NIEZALEŻNA
-  od odpowiedzialności KARNEJ skarbowej (choć WYKLUCZAJĄCA się z nią
-  DLA osób fizycznych — patrz NIŻEJ)
-  → OBOWIĄZUJE od 1.01.2017 (przywrócona PO wcześniejszym
-    funkcjonowaniu DO 30.11.2008) — NIE stosuje SIĘ do okresów
-    rozliczeniowych PRZED tą datą
-
-⭐⭐⭐ ⚡ FUNDAMENTALNA ZMIANA OD 6.06.2023 (nowelizacja W następstwie
-  wyroku TSUE C-935/19, Grupa WARZYWNA) — ⚠️ KLUCZOWE dla PRAWIDŁOWEGO
-  stosowania:
-  → DO 5.06.2023: sankcja BYŁA ustalana SZTYWNO — dokładnie 15%, 20%,
-    30% LUB 100%, bez MOŻLIWOŚCI miarkowania PRZEZ organ
-  → OD 6.06.2023: sankcja jest ustalana "DO" wysokości — DO 30%, DO
-    20% LUB do 15% (art. 112b ust. 1-2a) — organ USTALA wysokość
-    ZINDYWIDUALIZOWANIE, uwzględniając OKOLICZNOŚCI konkretnej
-    sprawy — SANKCJA 100% (art. 112c) POZOSTAJE sankcją SZTYWNĄ, BEZ
-    słowa "do" — DALEJ NIE podlega miarkowaniu
-  → ⚠️ STARSZE materiały/komentarze CYTUJĄCE sztywne stawki 15/20/30%
-    jako OBOWIĄZUJące SĄ NIEAKTUALNE dla okresów PO 6.06.2023 —
-    ZAWSZE weryfikuj, KTÓREGO okresu ROZLICZENIOWEGO dotyczy sprawa
-
-⭐⭐⭐ GENEZA REFORMY — WYROK TSUE C-935/19 "GRUPA WARZYWNA" (15.04.2021):
-  TSUE stwierdził NIEZGODNOŚĆ dawnej, SZTYWNEJ 20% sankcji Z zasadą
-  PROPORCJONALNOŚCI wynikającą Z dyrektywy VAT — STAN faktyczny:
-  podatnik BŁĘDNIE zakwalifikował transakcję ZWOLNIONĄ jako
-  OPODATKOWANĄ (błąd W OCENIE, bez cech OSZUSTWA ani uszczuplenia
-  wpływów) — TRYBUNAŁ: sankcja NIE MOŻE być stosowana BEZ
-  rozróżnienia MIĘDZY sytuacją zwykłego BŁĘDU w ocenie A sytuacją
-  faktycznego OSZUSTWA/uszczuplenia — sposób USTALANIA sankcji MUSI
-  DAWAĆ organowi możliwość ZINDYWIDUALIZOWANIA kary — ⭐ WYROK miał
-  charakter DEFINITYWNY (bez odesłania SPRAWY do sądu krajowego DO
-  oceny w świetle KRYTERIÓW) — orzeczenie WPROST rozstrzygnęło o
-  niezgodności
-  → ⭐ LINIA orzecznicza POLSKICH sądów PRZED formalną nowelizacją
-    (np. WSA w Białymstoku, I SA/Bk 1/23): SANKCJA z art. 112b
-    możliwa WYŁĄCZNIE, gdy DZIAŁANIE podatnika ŚWIADOMIE zmierza DO
-    nadużyć/uszczuplenia — ZWYKŁE zaniedbanie (BEZ cech oszustwa,
-    BEZ realnego USZCZUPLENIA budżetu — np. GDY podatnik ZAPŁACIŁ
-    odsetki, generując DODATKOWY dochód budżetowy) NIE uzasadnia
-    sankcji, NAWET przed formalną korektą PRZEPISÓW
-
-⭐⭐ PRÓG ZAWYŻENIA/ZANIŻENIA I POZIOMY SANKCJI (art. 112b ust. 1-2a):
-  □ DO 30% — PODSTAWOWY próg, GDY podatnik NIE koryguje deklaracji
-    SAMODZIELNIE (organ SAM stwierdza nieprawidłowość I ustala jej
-    wysokość)
-  □ DO 20% — GDY podatnik, PO zakończonej kontroli PODATKOWEJ/celno-
-    skarbowej, ZŁOŻY korektę deklaracji UWZGLĘDNIAJĄCĄ stwierdzone
-    nieprawidłowości I najpóźniej W dniu złożenia TEJ korekty
-    WPŁACI kwotę zobowiązania/zwróci NIENALEŻNY zwrot (art. 112b
-    ust. 2 pkt 1)
-  □ DO 15% — NAJNIŻSZY próg, GDY podatnik ZŁOŻYŁ korektę W TRAKCIE
-    kontroli CELNO-skarbowej, W terminie 14 DNI od doręczenia
-    UPOWAŻNIENIA do kontroli, I NAJPÓŹNIEJ w dniu jej złożenia
-    WPŁACIŁ kwotę zobowiązania/zwrócił NIENALEŻNY zwrot (art. 112b
-    ust. 2a) — SZYBKA reakcja podatnika JEST premiowana NAJNIŻSZYM
-    progiem
-
-⭐⭐⭐ KRYTERIA MIARKOWANIA (uwzględniane PRZEZ organ PRZY ustalaniu
-  konkretnej wysokości W GRANICACH "do X%", wprowadzone nowelizacją
-  6.06.2023, art. 112b ust. 2b): RODZAJ i STOPIEŃ naruszenia
-  ciążącego NA podatniku obowiązku, KTÓRE skutkowało powstaniem
-  nieprawidłowości; WAGA i CZĘSTOTLIWOŚĆ stwierdzanych DOTYCHCZAS
-  nieprawidłowości — ⚠️ przepis TEN NIE odwołuje się DO art. 112c
-  (sankcja 100% POZOSTAJE poza mechanizmem MIARKOWANIA)
-
-⭐⭐⭐ SANKCJA 100% — art. 112c (SZTYWNA, BEZ miarkowania nawet PO
-  nowelizacji 2023):
-  □ STOSOWANA wyłącznie GDY podatnik ŚWIADOMIE uczestniczył W
-    oszustwie — czyli ODLICZYŁ VAT z FAKTUR, które: (1) zostały
-    WYSTAWIONE przez PODMIOT nieistniejący, (2) STWIERDZAJĄ czynności,
-    które NIE zostały dokonane (tzw. PUSTE faktury), (3) PODAJĄ
-    kwoty NIEZGODNE z rzeczywistością (W części dotyczącej TYCH
-    pozycji), (4) POTWIERDZAJĄ czynności OBJĘTE przepisami o
-    POZORNOŚCI/obejściu prawa (art. 58, 83 KC)
-  □ ⭐⭐ ZMIANA OD 6.06.2023 co DO ZAKRESU zastosowania art. 112c
-    (RÓWNIEŻ objęta NOWELIZACJĄ, mimo że wyrok TSUE dotyczył
-    BEZPOŚREDNIO art. 112b): sankcja 100% MA zastosowanie WYŁĄCZNIE,
-    gdy DZIAŁANIE było SKUTKIEM celowego DZIAŁANIA podatnika LUB
-    jego KONTRAHENTA, O KTÓRYM podatnik MIAŁ wiedzę — PRZYPADKI
-    odliczenia Z wadliwych faktur ZWIĄZANE Z brakiem NALEŻYTEJ
-    staranności (BEZ świadomości udziału W oszustwie) NIE SĄ objęte
-    100% sankcją PO tej zmianie
-  □ ⭐ ORZECZNICTWO (WSA w Bydgoszczy, I SA/Bd 165/19): PRZY
-    przyjęciu do rozliczenia FAKTUR z art. 112c — sankcja WYNOSI
-    100%, NIEZALEŻNIE od tego, CZY podatnik SAM koryguje deklarację,
-    CZY robi TO organ — BRAK uzasadnienia dla "PREMIOWANIA"
-    nieuczciwych podatników UJMUJĄCYCH takie faktury
-
-⭐⭐⭐ WYŁĄCZENIA CAŁKOWITE — KIEDY SANKCJA NIE JEST NAKŁADANA (art.
-  112b ust. 3):
-  □ pkt 1 lit. a — podatnik ZŁOŻYŁ korektę deklaracji I zapłacił
-    UISZCZONE zobowiązanie WRAZ z odsetkami ZA zwłokę — PRZED dniem
-    WSZCZĘCIA kontroli podatkowej/celno-skarbowej
-  □ pkt 1 lit. b — podatnik ZŁOŻYŁ brakującą DEKLARACJĘ (uprzednio
-    niezłożoną), wykazał W niej podatek WE właściwej wysokości I
-    zapłacił GO wraz Z odsetkami — PRZED wszczęciem KONTROLI
-  □ pkt 2 lit. a — nieprawidłowość WYNIKA z OCZYWISTYCH błędów
-    RACHUNKOWYCH lub OCZYWISTYCH omyłek POPEŁNIONYCH w DEKLARACJI
-    podatkowej — ⚠️ ⭐ ISTOTNE ograniczenie zakresu: przepis DOTYCZY
-    wyłącznie BŁĘDÓW w SAMEJ deklaracji — NIE obejmuje BŁĘDÓW
-    popełnionych W EWIDENCJI (JPK), mimo że W praktyce TO WŁAŚNIE W
-    ewidencji NAJCZĘŚCIEJ powstają POMYŁKI (deklaracje ELEKTRONICZNE
-    zwykle SAME sumują pozycje) — LUKA w OCHRONIE podatnika,
-    sygnalizowana W piśmiennictwie
-  □ ⭐ RÓWNIEŻ: zaniżenie/zawyżenie ZWIĄZANE z BŁĘDNYM zastosowaniem
-    przepisów PRAWA podatkowego, KTÓRE NIE miało NA celu wyłudzenia
-    nienależnego ZWROTU ani świadomego ZANIŻENIA zobowiązania — NIE
-    MOŻE stanowić PODSTAWY sankcji (linia ORZECZNICZA rozwijająca
-    wyrok TSUE Grupa Warzywna — KRYTERIUM subiektywne: BRAK celowego
-    działania)
-
-⭐⭐ WYŁĄCZENIE PODMIOTOWE — ZBIEG z ODPOWIEDZIALNOŚCIĄ KARNĄ
-  SKARBOWĄ (art. 112b ust. 4, ⭐ POWIĄZANIE z pisma-procesowe-v3/
-  reprezentacją W postępowaniach KARNOSKARBOWYCH): dodatkowego
-  zobowiązania PODATKOWEGO (15/20/30%/100%) NIE stosuje SIĘ wobec
-  OSÓB FIZYCZNYCH, które ZA TEN SAM czyn PONOSZĄ odpowiedzialność ZA
-  wykroczenie SKARBOWE albo PRZESTĘPSTWO skarbowe — ⭐ PRAKTYCZNA
-  KONSEKWENCJA: JEDNOOSOBOWY przedsiębiorca (osoba FIZYCZNA)
-  podlegający ODPOWIEDZIALNOŚCI z KKS za DANY czyn NIE zapłaci
-  RÓWNOLEGLE sankcji administracyjnej Z art. 112b — ⚠️ TO wyłączenie
-  DOTYCZY osób FIZYCZNYCH — SPÓŁKI (osoby PRAWNE) nie korzystają Z
-  tego wyłączenia W ten sam sposób (odpowiedzialność KARNA skarbowa
-  DOTYCZY osób fizycznych DZIAŁAJĄCYCH w imieniu spółki, NIE samej
-  spółki jako TAKIEJ — sankcja administracyjna Z VAT MOŻE być
-  nałożona NA spółkę niezależnie)
-
-⭐ WYŁĄCZENIE PRZY MPP (POWIĄZANIE z sekcją split PAYMENT wyżej w
-  tym module, art. 108c ust. 1): JEŻELI nabywca ZAPŁACIŁ zobowiązanie
-  wynikające Z otrzymanej faktury Z ZASTOSOWANIEM mechanizmu
-  podzielonej PŁATNOŚCI — DO wysokości kwoty ODPOWIADAJĄCEJ kwocie
-  podatku Z tej faktury, naczelnik URZĘDU skarbowego/celno-
-  skarbowego NIE stosuje przepisów O sankcji (112b ust. 1 pkt 1 —
-  30%, ust. 2 pkt 1 — 20%, ust. 2a — 15%, ORAZ 112c — 100%) — ⭐
-  DODATKOWY argument PRZEMAWIAJĄCY za STOSOWANIEM MPP przy
-  transakcjach Z załącznika 15
-
-Checklist praktyczny:
-□ ZWERYFIKUJ, którego OKRESU rozliczeniowego dotyczy sprawa — PRZED/
-  PO 6.06.2023 — różne ZASADY (sztywne stawki vs "do X%")
-□ Czy NIEPRAWIDŁOWOŚĆ wynika Z celowego działania (→ POTENCJALNIE
-  100%, art. 112c) czy Z błędu W ocenie/zaniedbania BEZ cech
-  oszustwa (→ NIŻSZY próg LUB brak sankcji w OGÓLE, zgodnie Z linią
-  Grupa Warzywna)
-□ Czy ZASTOSOWANIE ma KTÓRETKOLWIEK z wyłączeń art. 112b ust. 3
-  (korekta PRZED kontrolą + zapłata, OCZYWISTY błąd rachunkowy W
-  samej deklaracji)
-□ PRZY osobie fizycznej — czy RÓWNOLEGLE toczy się/może TOCZYĆ się
-  postępowanie KARNOSKARBOWE za TEN sam czyn — jeśli TAK, sankcja
-  administracyjna NIE powinna być STOSOWANA
-□ Czy PRZY transakcji z zał. 15 zastosowano MPP — jeśli TAK,
-  sprawdź WYŁĄCZENIE z art. 108c ust. 1
-□ PRZY negocjacji Z organem/odwołaniu — powołaj się WPROST na
-  kryteria MIARKOWANIA z ust. 2b oraz NA linię TSUE Grupa Warzywna,
-  JEŚLI okoliczności wskazują NA brak celowego DZIAŁANIA
-
-⚠️ Weryfikuj aktualne brzmienie art. 112b-112c w ISAP — TO obszar Z
-  ISTOTNĄ, DOŚĆ ŚWIEŻĄ reformą (2023) — STARSZE orzecznictwo/
-  komentarze SPRZED tej daty WYMAGAJĄ ostrożnego STOSOWANIA (część
-  argumentacji, np. CO do samej ZASADY proporcjonalności, POZOSTAJE
-  aktualna; część DOTYCZĄCA sztywnych stawek — NIE).
-```
-
----
-
-## 4f. ⭐⭐⭐ BONY JEDNEGO I RÓŻNEGO PRZEZNACZENIA — SPV/MPV (Dział II
-Rozdział 2a, art. 8a–8b; definicje art. 2 pkt 41-45; podstawa
-opodatkowania art. 29a ust. 1a-1c; obowiązek podatkowy art. 19a ust.
-1a, 4a) — dodane 2026-08-12, uzupełnienie luki zidentyfikowanej w
-audycie pokrycia DR-06 (dotąd CAŁKOWICIE nieobecne, mimo licznych
-odesłań DO tego rozdziału Z innych sekcji modułu — POWSZECHNE W
-praktyce handlowej: karty PODARUNKOWE, vouchery, bony RABATOWE
-sprzedawane ODPŁATNIE)
-
-```
-⭐⭐⭐ DEFINICJA "BONU" (art. 2 pkt 41): instrument, Z KTÓRYM wiąże się
-  OBOWIĄZEK jego PRZYJĘCIA jako wynagrodzenia LUB części wynagrodzenia
-  ZA dostawę towarów/świadczenie USŁUG — GDZIE towary/usługi, KTÓRE
-  MAJĄ zostać dostarczone/wykonane, LUB tożsamość POTENCJALNYCH
-  dostawców/usługodawców SĄ wskazane W samym instrumencie LUB W
-  powiązanej DOKUMENTACJI (w TYM w warunkach jego wykorzystania) —
-  ⭐ BON może mieć FORMĘ materialną (papierowy VOUCHER, karta) LUB
-  elektroniczną (KOD), być PŁATNY lub BEZPŁATNY — NAZWA instrumentu
-  (voucher, TALON, kupon podarunkowy) NIE ma znaczenia — ISTOTNE jest
-  WYŁĄCZNIE, czy UPRAWNIA do zakupu OKREŚLONYCH (lub określalnych)
-  towarów/usług W przyszłości
-
-⭐⭐⭐ CO NIE JEST BONEM (WYŁĄCZENIE Z definicji) — CZĘSTY błąd
-  PRAKTYCZNY:
-  □ KARTY i kupony RABATOWE uprawniające DO określonej zniżki PRZY
-    nabywaniu towarów/usług, ALE NIE dające PRAWA do uzyskania TYCH
-    towarów/usług SAMYCH w sobie — TO NIE jest bon W rozumieniu
-    ustawy
-  □ KOD rabatowy — WPROST NIE jest bonem NA gruncie ustawy o VAT
-  □ ⭐ PRAKTYCZNE rozróżnienie: BON "wymienia się NA towar/usługę"
-    (jest SUBSTYTUTEM zapłaty); RABAT/kod rabatowy "OBNIŻA cenę"
-    towaru/usługi (NIE zastępuje zapłaty, TYLKO ją zmniejsza) —
-    KONSEKWENCJA: rabaty/kody RABATOWE rozliczane są NA zasadach
-    OGÓLNYCH obniżenia podstawy OPODATKOWANIA (art. 29a — SEKCJA
-    wyżej w TYM module), NIE przez mechanizm ROZDZIAŁU 2a
-  □ ⭐ ODESŁANIE: STATUS jako "instrument PŁATNICZY" analizowany PRZY
-    okazji INNYCH przepisów (np. USTAWA o usługach płatniczych) —
-    NIE jest TOŻSAMY ze statusem "bonu" NA gruncie VAT — TO DWIE
-    ODRĘBNE klasyfikacje, MOGĄCE się NAKŁADAĆ, ale niekoniecznie
-
-⭐⭐⭐ DWA RODZAJE BONÓW — KRYTERIUM ROZRÓŻNIAJĄCE (art. 2 pkt 43-44):
-  □ BON JEDNEGO PRZEZNACZENIA (SPV — single-purpose voucher): bon, W
-    PRZYPADKU którego W CHWILI EMISJI ZNANE są ŁĄCZNIE: (a) MIEJSCE
-    dostawy towarów/świadczenia usług, KTÓRYCH bon dotyczy, ORAZ (b)
-    KWOTA należnego PODATKU (VAT/podatku o PODOBNYM charakterze) Z
-    tytułu tej dostawy/usługi
-  □ BON RÓŻNEGO PRZEZNACZENIA (MPV — multi-purpose voucher): KAŻDY
-    bon INNY niż SPV — tj. GDY W chwili emisji NIE można ustalić
-    MIEJSCA opodatkowania LUB kwoty PODATKU należnego (LUB OBU tych
-    elementów) — NAJCZĘSTSZY praktyczny PRZYKŁAD: karta PODARUNKOWA
-    do sieci SKLEPÓW oferującej TOWARY objęte RÓŻNYMI stawkami VAT
-    (5/8/23%) — W momencie WYDANIA karty NIE wiadomo, JAKIE konkretnie
-    towary ZOSTANĄ za nią NABYTE, WIĘC nie da SIĘ ustalić kwoty
-    podatku Z GÓRY
-  □ ⭐ TEST PRAKTYCZNY: JEDNA stawka VAT + JEDNO, znane MIEJSCE
-    dostawy → SPV; RÓŻNE możliwe stawki LUB nieznane miejsce → MPV
-
-⭐⭐⭐ SKUTKI PODATKOWE BONU JEDNEGO PRZEZNACZENIA (SPV, art. 8a) —
-  OPODATKOWANY JUŻ NA ETAPIE TRANSFERU:
-  □ ZASADA (ust. 1): TRANSFER bonu SPV dokonany PRZEZ podatnika
-    działającego WE własnym imieniu UZNAJE się ZA dostawę
-    towarów/świadczenie USŁUG, KTÓRYCH bon DOTYCZY — ⭐ EMISJA bonu
-    ORAZ KAŻDE jego PÓŹNIEJSZE przekazanie (art. 2 pkt 45 —
-    "TRANSFER") SĄ opodatkowane, TAK jakby DOSZŁO do faktycznej
-    dostawy/usługi — UZASADNIENIE: W momencie emisji bonu SPV
-    DOKŁADNIE znana JEST wysokość podatku NALEŻNEGO, WIĘC NIE MA
-    przeszkód, by ROZLICZYĆ VAT już WTEDY
-  □ ⭐⭐ FAKTYCZNA realizacja bonu SPV (ust. 2): faktyczne PRZEKAZANIE
-    towarów/świadczenie USŁUG w zamian ZA bon SPV przyjęty JAKO
-    wynagrodzenie NIE JEST uznawane ZA NIEZALEŻNĄ, ODRĘBNĄ transakcję
-    — VAT ZOSTAŁ już ROZLICZONY na etapie TRANSFERU, WIĘC sama
-    "REALIZACJA"/wymiana bonu NA towar nie GENERUJE drugiego
-    zdarzenia OPODATKOWANEGO
-  □ ⭐ TRANSFER PRZEZ POŚREDNIKA (ust. 3-4): JEŻELI transferu DOKONUJE
-    podatnik DZIAŁAJĄCY w IMIENIU innego podatnika — TRANSFER
-    UZNAJE się za DOSTAWĘ/usługę DOKONANĄ przez TEGO, w KTÓREGO
-    imieniu się DZIAŁA; JEŻELI dostawca/usługodawca NIE JEST
-    podatnikiem, KTÓRY wyemitował BON — UZNAJE się, że TEN
-    dostawca/usługodawca DOKONAŁ dostawy/usługi NA rzecz EMITENTA
-    bonu (⭐ ROZLICZENIE "łańcuchowe" W sieciach franczyzowych/
-    partnerskich)
-  □ ⭐ MOMENT obowiązku PODATKOWEGO (art. 19a ust. 1a, 4a): Z CHWILĄ
-    dokonania TRANSFERU bonu SPV (NIE Z chwilą JEGO faktycznego
-    wykorzystania PRZEZ konsumenta) — POWIĄZANIE z sekcją "obowiązek
-    podatkowy" wyżej W tym module
-
-⭐⭐⭐ SKUTKI PODATKOWE BONU RÓŻNEGO PRZEZNACZENIA (MPV, art. 8b) —
-  OPODATKOWANY DOPIERO PRZY REALIZACJI:
-  □ ZASADA (ust. 1): OPODATKOWANIU podlega WYŁĄCZNIE faktyczne
-    PRZEKAZANIE towarów/świadczenie USŁUG dokonane W ZAMIAN za bon
-    MPV przyjęty JAKO wynagrodzenie — WCZEŚNIEJSZY transfer bonu MPV
-    (EMISJA i KAŻDE kolejne przekazanie) NIE podlega OPODATKOWANIU
-    VAT w OGÓLE — TO logiczna KONSEKWENCJA braku znajomości STAWKI/
-    miejsca w MOMENCIE emisji
-  □ ⭐⭐ TRANSFER przez POŚREDNIKA innego niż WYSTAWCA świadczenia
-    (ust. 2): JEŻELI transferu bonu MPV DOKONUJE podatnik INNY niż
-    TEN, który OSTATECZNIE dokonuje OPODATKOWANEJ czynności (ust. 1)
-    — OPODATKOWANIU podlegają WYŁĄCZNIE usługi POŚREDNICTWA oraz INNE
-    możliwe do ZIDENTYFIKOWANIA usługi (np. DYSTRYBUCJI, promocji)
-    DOTYCZĄCE tego bonu — NIE cała WARTOŚĆ bonu — ⭐ ISTOTNE DLA
-    dystrybutorów/platform SPRZEDAJĄCYCH bony W imieniu wystawcy
-    (np. platformy SPRZEDAJĄCE karty podarunkowe SIECI handlowych)
-
-⭐⭐⭐ PODSTAWA OPODATKOWANIA DLA MPV (art. 29a ust. 1a-1c) —
-  SZCZEGÓLNY mechanizm, ODMIENNY od zasady OGÓLNEJ:
-  □ BON zrealizowany W CAŁOŚCI (ust. 1a): podstawa OPODATKOWANIA
-    RÓWNA się: (1) WYNAGRODZENIU zapłaconemu ZA bon MPV, POMNIEJSZONEMU
-    o KWOTĘ podatku ZWIĄZANĄ z dostarczonymi TOWARAMI/usługami; LUB
-    (2) — GDY informacje O wynagrodzeniu SĄ niedostępne — WARTOŚCI
-    pieniężnej WSKAZANEJ na bonie/W powiązanej DOKUMENTACJI,
-    pomniejszonej O kwotę podatku
-  □ BON zrealizowany W CZĘŚCI (ust. 1b): PODSTAWA opodatkowania równa
-    się ODPOWIEDNIEJ CZĘŚCI powyższych KWOT (proporcjonalnie DO
-    wykorzystanej CZĘŚCI bonu)
-  □ ⭐ PRZYKŁAD PRAKTYCZNY: karta PODARUNKOWA o wartości 100 ZŁ (MPV)
-    wymieniona NA spodnie — PODSTAWĄ opodatkowania JEST wartość
-    NOMINALNA bonu W momencie REALIZACJI (100 zł POMNIEJSZONE o VAT
-    zawarty W tej kwocie), NIE cena NABYCIA samej karty PRZEZ
-    konsumenta (JEŚLI była INNA, np. przy PROMOCYJNEJ sprzedaży
-    karty)
-  □ ODPOWIEDNIE STOSOWANIE (ust. 1c): DO powyższych przypadków
-    stosuje SIĘ odpowiednio ust. 2 i 5 art. 29a (koszt WYTWORZENIA
-    przy nieodpłatnym PRZEKAZANIU towarów, koszt świadczenia PRZY
-    nieodpłatnych usługach — POWIĄZANIE z sekcją 4b wyżej w TYM
-    module)
-
-⭐⭐⭐ NIEZREALIZOWANE BONY MPV — BRAK OPODATKOWANIA (⭐ ISTOTNE
-  praktycznie, potwierdzone INTERPRETACJĄ KIS z 30.05.2025): JEŻELI
-  bon MPV NIGDY nie zostanie ZREALIZOWANY (np. UTRACI ważność, KLIENT
-  go NIE wykorzysta) — ŚRODKI pieniężne OTRZYMANE od klienta PRZY
-  emisji NIE STANOWIĄ kwoty Z tytułu czynności PODLEGAJĄCEJ
-  opodatkowaniu VAT — PONIEWAŻ NIE dochodzi DO "faktycznego
-  świadczenia" WYMAGANEGO przez art. 8b ust. 1 — WNIOSEK: kwoty
-  ZATRZYMANE ze sprzedaży NIEWYKORZYSTANYCH bonów MPV (tzw. "BREAKAGE")
-  POZOSTAJĄ POZA VAT w CAŁOŚCI — ⚠️ TO ODWROTNIE niż PRZY bonach SPV,
-  GDZIE VAT jest ROZLICZANY już PRZY emisji, WIĘC brak realizacji NIE
-  ZMIENIA już DOKONANEGO rozliczenia (BRAK mechanizmu "zwrotu" VAT Z
-  tego tytułu, chyba że NASTĄPI zwrot ŚRODKÓW klientowi — WTEDY
-  zastosowanie MAJĄ zasady OGÓLNE korekty)
-
-⭐ POWIĄZANIE Z INNYMI SEKCJAMI TEGO MODUŁU:
-  □ Sekcja "OBOWIĄZEK podatkowy" (4a) — MOMENT dla SPV to CHWILA
-    transferu (art. 19a ust. 1a), NIE zasada OGÓLNA "dokonania
-    dostawy"
-  □ Sekcja "PODSTAWA opodatkowania" (4b) — MECHANIZM dla MPV (art.
-    29a ust. 1a-1c) to LEX SPECIALIS względem ZASADY ogólnej Z ust. 1
-  □ Sekcja "ZWOLNIENIA przedmiotowe" (4c) — JEŻELI bon DOTYCZY
-    świadczenia OBJĘTEGO zwolnieniem (np. USŁUGI medyczne) — analiza
-    SPV/MPV MUSI uwzględniać RÓWNIEŻ status ZWOLNIENIA, nie TYLKO
-    stawkę
-  □ MECHANIZM VAT marża/OSS — bony W handlu TRANSGRANICZNYM (np.
-    karty PODARUNKOWE platform e-commerce) MOGĄ wymagać ŁĄCZNEJ
-    analizy Z sekcją OSS/IOSS wyżej W module, PRZY sprzedaży
-    KONSUMENTOM w innych KRAJACH UE
-
-Checklist praktyczny:
-□ Czy INSTRUMENT w OGÓLE spełnia definicję "BONU" (art. 2 pkt 41) —
-  CZY to raczej KARTA/kod RABATOWY (POZA zakresem Rozdziału 2a,
-  rozliczane NA zasadach ogólnych OBNIŻENIA podstawy)
-□ Czy W chwili EMISJI znane SĄ ŁĄCZNIE: miejsce OPODATKOWANIA I
-  kwota PODATKU należnego — JEŚLI tak, TO bon SPV (VAT PRZY emisji);
-  jeśli NIE (choćby JEDEN element NIEZNANY) — bon MPV (VAT PRZY
-  realizacji)
-□ PRZY dystrybucji bonów PRZEZ pośrednika/platformę — czy TO
-  transfer bonu SPV (OPODATKOWANY w PEŁNEJ wartości NA każdym
-  etapie) czy MPV (OPODATKOWANA tylko USŁUGA pośrednictwa/dystrybucji)
-□ PRZY realizacji bonu MPV — czy PODSTAWĘ opodatkowania USTALONO wg
-  wynagrodzenia ZAPŁACONEGO za bon (art. 29a ust. 1a PKT 1), CZY —
-  przy BRAKU tej informacji — wg wartości NOMINALNEJ (pkt 2)
-□ Czy PROWADZONA jest ewidencja WYSTARCZAJĄCA do ROZRÓŻNIENIA
-  realizacji CAŁOŚCIOWEJ i CZĘŚCIOWEJ bonu MPV (proporcjonalne
-  ustalenie PODSTAWY)
-□ PRZY bonach NIEZREALIZOWANYCH (breakage) — POTWIERDŹ, że TO MPV
-  (SPV rozliczono JUŻ przy emisji, NIEZALEŻNIE od PÓŹNIEJSZEGO losu)
-
-⚠️ Weryfikuj aktualne brzmienie art. 2 pkt 41-45, art. 8a-8b, art.
-  29a ust. 1a-1c oraz art. 19a ust. 1a/4a w ISAP — REGULACJA
-  bonów WESZŁA w życie 1.01.2019 (implementacja DYREKTYWY UE
-  2016/1065) — STOSUNKOWO STABILNA od tego CZASU, ale ZAWSZE
-  weryfikuj AKTUALNE brzmienie PRZY konkretnej sprawie, SZCZEGÓLNIE
-  przy TRANSAKCJACH transgranicznych/wieloetapowych łańcuchach
-  dystrybucji.
-```
-
----
-
-## 4g. ⭐⭐⭐ PUSTA FAKTURA — OBOWIĄZEK ZAPŁATY PODATKU Z SAMEJ FAKTURY
-(art. 108 ustawy VAT) — dodane 2026-08-12, uzupełnienie luki #1 z audytu
-pokrycia VAT (dotąd moduł zawierał WYŁĄCZNIE art. 108a — MPP — i art.
-108c, a SAM art. 108 nie występował ani razu, mimo że jest to jedna z
-najczęstszych podstaw decyzji wymiarowych i praktycznie zawsze łączy się
-z zarzutem karnoskarbowym)
-
-```
-⭐⭐⭐ TREŚĆ NORMY (art. 108 ust. 1–3):
-  ust. 1 — gdy osoba prawna, jednostka organizacyjna niemająca osobowości
-    prawnej LUB osoba fizyczna WYSTAWI FAKTURĘ, W KTÓREJ WYKAŻE KWOTĘ
-    PODATKU — JEST OBOWIĄZANA DO JEGO ZAPŁATY
-  ust. 2 — przepis ust. 1 stosuje się ODPOWIEDNIO, gdy podatnik wystawi
-    fakturę z kwotą podatku WYŻSZĄ od kwoty podatku należnego
-  ust. 3 — w przypadku z art. 43 ust. 12a do zapłaty podatku obowiązana
-    jest ORGANIZACJA POŻYTKU PUBLICZNEGO
-  ust. 4 — (uchylony)
-
-⭐⭐⭐ TRZY CECHY KONSTRUKCYJNE, KTÓRE DECYDUJĄ O CAŁEJ OBRONIE:
-  1) OBOWIĄZEK POWSTAJE Z SAMEGO WYSTAWIENIA faktury — NIEZALEŻNIE od
-     tego, czy czynność w ogóle zaistniała, czy podlegała opodatkowaniu i
-     czy była zwolniona. To NIE jest podatek od transakcji, lecz
-     samoistny obowiązek od DOKUMENTU
-  2) ADRESATEM jest KAŻDY WYSTAWCA — także podmiot NIEBĘDĄCY podatnikiem
-     VAT (przepis mówi o „osobie prawnej / jednostce organizacyjnej /
-     osobie fizycznej", nie o „podatniku" — inaczej niż ust. 2)
-  3) ⭐ KWOTY Z ART. 108 NIE ROZLICZA SIĘ W DEKLARACJI na zasadach
-     ogólnych i NIE POMNIEJSZA SIĘ jej o podatek naliczony — to
-     zobowiązanie odrębne od rozliczenia okresowego
-
-⭐⭐⭐ CHARAKTER PRAWNY — KLUCZOWY ARGUMENT OBRONY:
-  → Wyrok TK z 21.04.2015 r., sygn. **P 40/13** — TK badał zgodność art.
-    62 § 2 KKS w zakresie, w jakim dopuszcza odpowiedzialność
-    karnoskarbową osoby fizycznej, wobec której za TEN SAM CZYN
-    (wystawienie nierzetelnej faktury) zastosowano uprzednio obowiązek
-    zapłaty z art. 108 ust. 1 ustawy o VAT. TK orzekł o ZGODNOŚCI art. 62
-    § 2 KKS z art. 2 Konstytucji — a rozstrzygnięcie oparł na tezie, że
-    art. 108 ust. 1 NIE MA charakteru SANKCYJNEGO; jego funkcją jest
-    ZAPOBIEŻENIE USZCZUPLENIU wpływów budżetowych (rekompensata ryzyka),
-    a nie karanie
-  → ⭐ PRAKTYCZNA KONSEKWENCJA: skoro celem normy jest USUNIĘCIE RYZYKA
-    USZCZUPLENIA, to TAM, GDZIE RYZYKO ZOSTAŁO W CZASIE WYELIMINOWANE,
-    stosowanie art. 108 traci podstawę. To fundament linii obrony
-  → ⚠️ UWAGA NA DEZAKTUALIZACJĘ: starsze orzecznictwo NSA (sprzed wyroku
-    TK z 2015 r.) opisywało art. 108 jako przepis „sankcyjno-prewencyjny"
-    — powoływanie TAKICH tez dziś jest błędem; niektóre WSA nadal
-    posługują się terminem „sankcja" i TO WYMAGA SPROSTOWANIA w piśmie
-  ✅ [VER: trybunal.gov.pl — komunikat o sprawie P 40/13, rozpoznanie
-     21.04.2015; potwierdzone w 3 niezależnych źródłach z przytoczeniem
-     sentencji, 2026-08-12]
-
-⭐⭐ LINIA OBRONY — KOLEJNOŚĆ ARGUMENTÓW:
-  1. NEGACJA HIPOTEZY: czy dokument jest w ogóle „fakturą" i czy został
-     WPROWADZONY DO OBROTU PRAWNEGO? Faktura wystawiona i niewydana
-     kontrahentowi (wycofana, zniszczona) — brak ryzyka odliczenia po
-     stronie odbiorcy
-  2. WYELIMINOWANIE RYZYKA W CZASIE: korekta faktury „do zera" przed
-     wykorzystaniem przez odbiorcę; jeżeli odbiorca odliczył — wykazanie,
-     że odliczenie zostało cofnięte/skorygowane
-  3. DOBRA WIARA I RZECZYWISTA PRZYCZYNA BŁĘDU: błąd w kwalifikacji
-     towaru/usługi (np. spór o klasyfikację → patrz
-     mod-VAT-klasyfikacja-produktow-baza-niejednoznacznosci.md),
-     omyłka rachunkowa, przedwczesne wystawienie — to NIE JEST „pusta
-     faktura" w rozumieniu praktyki organów
-  4. BRAK PRZYMIOTU WYSTAWCY: faktura wystawiona przez PRACOWNIKA z
-     wykorzystaniem danych pracodawcy, poza jego wiedzą i kontrolą
-     → wyrok TSUE **C-442/22** — obowiązek zapłaty obciąża PRACOWNIKA,
-     a nie pracodawcę, POD WARUNKIEM że pracodawca dochował NALEŻYTEJ
-     STARANNOŚCI rozsądnie wymaganej w celu KONTROLOWANIA DZIAŁAŃ tego
-     pracownika; przy braku takiej staranności (lub złej wierze)
-     odpowiedzialność wraca na pracodawcę
-     ✅ [VER: opracowanie EY dot. C-442/22, 2026-08-12]
-     ⚠️ [ZALECANA WERYFIKACJA pełnego tekstu na curia.europa.eu przed
-        powołaniem w piśmie]
-  5. ⭐ TEST ORGANIZACYJNY po C-442/22 — DO ZBADANIA W KAŻDEJ SPRAWIE
-     PRACOWNICZEJ: czy pracownik miał uprawnienie do wystawiania faktur
-     POZA systemem? czy wymagana była zgoda przełożonego? czy istniały
-     mechanizmy kontroli wewnętrznej? BRAK tych mechanizmów bywa
-     kwalifikowany przez organy jako niedochowanie należytej staranności
-     pracodawcy
-
-⛔ SPRZĘŻENIE KARNOSKARBOWE — OBOWIĄZKOWY KWALIFIKATOR:
-  → Zastosowanie art. 108 ust. 1 NIE WYKLUCZA odpowiedzialności z art. 62
-    § 2 KKS wobec TEJ SAMEJ osoby fizycznej za TEN SAM czyn (wprost
-    przesądzone wyrokiem TK P 40/13)
-  → Przy fakturach o dużej wartości bada się DODATKOWO kwalifikację z
-    Kodeksu karnego (przestępstwa fakturowe) — ⚠️ PRZEPISY KK i KKS
-    WERYFIKUJ w module dr-03 (prawo karne) PRZED powołaniem; NIE
-    przenoś numerów artykułów karnych z tego modułu z pamięci
-  → ⭐ KOLEJNOŚĆ PRACY: ustal najpierw, czy klient jest wystawcą, czy
-    odbiorcą pustej faktury — po stronie ODBIORCY podstawą odmowy
-    odliczenia jest art. 88 ust. 3a pkt 4 lit. a (patrz sekcja 4h
-    niżej), a NIE art. 108
-
-□ POWIĄZANIA WEWNĄTRZ MODUŁU: art. 88 ust. 3a (sekcja 4h) — strona
-  nabywcy | art. 112b–112c (sekcja 4e) — dodatkowe zobowiązanie |
-  art. 109a (sekcja 5) — odrębna sankcja 100% przy fakturze do paragonu
-  bez NIP
-
-✅ [VER: lexlege.pl / arslege.pl / przepisy.gofin.pl — zgodne brzmienie
-   art. 108 ust. 1–3, Dz.U.2025.0.775 t.j., 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP]
-```
-
----
-
-## 4h. ⭐⭐⭐ WYŁĄCZENIA PRAWA DO ODLICZENIA — KATALOG NEGATYWNY
-(art. 88 ustawy VAT) — dodane 2026-08-12, uzupełnienie luki #2 z audytu
-pokrycia VAT (dotąd sekcja o odliczeniu opisywała WYŁĄCZNIE zarzut braku
-dobrej wiary; sam art. 88 — czyli przesłanki NEGATYWNE odliczenia — nie
-występował w całym DR-06)
-
-```
-⭐⭐⭐ UKŁAD NORMY: prawo do odliczenia wymaga spełnienia przesłanek
-  POZYTYWNYCH (art. 86 ust. 1 — związek z czynnościami opodatkowanymi)
-  ORAZ NIEZAISTNIENIA przesłanek NEGATYWNYCH (art. 88). Organ, który
-  odmawia odliczenia, MUSI wskazać KONKRETNĄ jednostkę art. 88 —
-  ⭐ brak precyzyjnej podstawy w decyzji to samodzielny zarzut
-
-⭐⭐ ART. 88 UST. 1 — WYŁĄCZENIA PRZEDMIOTOWE (rodzaj nabycia):
-  pkt 1–3 — (uchylone)
-  pkt 4 — **usługi noclegowe i gastronomiczne**, Z WYJĄTKIEM:
-    a) (uchylona)
-    b) nabycia GOTOWYCH POSIŁKÓW przeznaczonych DLA PASAŻERÓW przez
-       podatników świadczących usługi PRZEWOZU OSÓB
-    c) ⭐ usług NOCLEGOWYCH nabywanych W CELU ICH ODPRZEDAŻY,
-       opodatkowanych u tego podatnika na podstawie art. 8 ust. 2a
-       (refakturowanie) — ⚠️ WYJĄTEK DOTYCZY WYŁĄCZNIE NOCLEGÓW;
-       usługi GASTRONOMICZNE nabywane w celu odprzedaży NIE zostały
-       objęte tym wyjątkiem
-  pkt 5 — (uchylony)
-
-□ ART. 88 UST. 1a — wyłączenie dla wydatków, o których mowa w art. 29a
-  ust. 7 pkt 3 (kwoty otrzymane od nabywcy jako zwrot udokumentowanych
-  wydatków, ponoszonych w imieniu i na rzecz nabywcy)
-
-⭐⭐⭐ ART. 88 UST. 3a — WYŁĄCZENIA DOKUMENTOWE (najczęstsza podstawa
-  odmowy odliczenia w sporach). NIE STANOWIĄ podstawy do obniżenia
-  podatku należnego ani zwrotu — faktury i dokumenty celne, gdy:
-  pkt 1 lit. a — sprzedaż udokumentowano fakturą/fakturą korygującą
-    wystawioną przez **PODMIOT NIEISTNIEJĄCY**; lit. b — (uchylona)
-  pkt 2 — transakcja udokumentowana fakturą **NIE PODLEGA OPODATKOWANIU
-    ALBO JEST ZWOLNIONA** od podatku
-  pkt 3 — (uchylony)
-  pkt 4 — wystawione faktury / faktury korygujące / dokumenty celne:
-    a) **STWIERDZAJĄ CZYNNOŚCI, KTÓRE NIE ZOSTAŁY DOKONANE** — w części
-       dotyczącej tych czynności ⭐ TO JEST PODSTAWOWY ZARZUT PRZY
-       PUSTYCH FAKTURACH PO STRONIE NABYWCY (lustrzane odbicie art. 108
-       po stronie wystawcy — sekcja 4g wyżej)
-    b) **PODAJĄ KWOTY NIEZGODNE Z RZECZYWISTOŚCIĄ** — w części dotyczącej
-       tych pozycji ⭐ ZWRÓĆ UWAGĘ: wyłączenie jest CZĘŚCIOWE, nie
-       obejmuje całej faktury — organ często stosuje je zbyt szeroko
-    c) potwierdzają czynności, do których mają zastosowanie **art. 58 i
-       art. 83 Kodeksu cywilnego** (nieważność bezwzględna, pozorność) —
-       w części dotyczącej tych czynności
-  pkt 5 — faktury/faktury korygujące wystawione PRZEZ NABYWCĘ
-    (samofakturowanie) NIE ZOSTAŁY ZAAKCEPTOWANE przez sprzedającego
-  pkt 6 — (uchylony)
-  pkt 7 — wystawiono faktury z wykazaną kwotą podatku w stosunku do
-    czynności opodatkowanych, dla których NIE WYKAZUJE SIĘ kwoty podatku
-    na fakturze — w części dotyczącej tych czynności (m.in. odwrotne
-    obciążenie / procedura marży)
-
-□ UST. 3b — ust. 3a stosuje się ODPOWIEDNIO do DUPLIKATÓW faktur oraz
-  KOLEJNYCH EGZEMPLARZY faktur
-□ UST. 4 — wyłączenie dla podatników NIEZAREJESTROWANYCH jako VAT czynni
-  zgodnie z art. 96, z wyłączeniem przypadków z art. 86 ust. 2 pkt 7
-  ⭐ ORZECZNICTWO TSUE konsekwentnie ogranicza formalizm rejestracyjny —
-  sama późniejsza rejestracja bywa uznawana za wystarczającą; ⚠️ zweryfikuj
-  aktualną linię PRZED powołaniem
-□ UST. 6 — wyłączenie dla podatku naliczonego z art. 86 ust. 2 pkt 4 lit.
-  c przy WNT „sankcyjnym" z art. 25 ust. 2 (podanie polskiego numeru VAT
-  UE, gdy towary kończą transport w innym państwie członkowskim)
-
-⭐⭐ MAPA ZARZUTÓW I KONTRZARZUTÓW:
-  ZARZUT organu: art. 88 ust. 3a pkt 1 lit. a (podmiot nieistniejący)
-    → OBRONA: „nieistniejący" ≠ „wykreślony z rejestru"; wykaż FAKTYCZNE
-      PROWADZENIE działalności przez kontrahenta w dacie transakcji
-      (adres, personel, magazyn, transport, korespondencja)
-  ZARZUT: art. 88 ust. 3a pkt 4 lit. a (czynność niedokonana)
-    → OBRONA: dowody RZECZYWISTOŚCI świadczenia (WZ, CMR, protokoły,
-      zdjęcia, korespondencja, przepływy pieniężne) + dobra wiara i
-      należyta staranność wg orzecznictwa TSUE
-  ZARZUT: art. 88 ust. 3a pkt 4 lit. b (kwoty niezgodne)
-    → OBRONA: żądaj OGRANICZENIA wyłączenia DO POZYCJI zakwestionowanych
-      — ustawa mówi „w części dotyczącej tych pozycji"
-  ZARZUT: art. 88 ust. 1 pkt 4 (nocleg/gastronomia)
-    → OBRONA: sprawdź, czy nie zachodzi wyjątek lit. c (odprzedaż
-      noclegów) albo czy świadczenie nie jest elementem USŁUGI
-      KOMPLEKSOWEJ o innym charakterze głównym
-
-✅ [VER: lexlege.pl — pełny tekst art. 88 ustawy o VAT, Dz.U.2025.0.775
-   t.j., stan prawny na 12.08.2026; pobrane 2026-08-12; brzmienie
-   potwierdzone dodatkowo w arslege.pl i eureka.mf.gov.pl]
-⚠️ [ZALECANA WERYFIKACJA ISAP]
-```
-
----
-
-## 4i. ⭐⭐⭐ ODLICZENIE CZĘŚCIOWE — PROPORCJA (art. 90), PREWSPÓŁCZYNNIK
-(art. 86 ust. 2a–2h) I KOREKTA WIELOLETNIA (art. 91) — dodane 2026-08-12,
-uzupełnienie luki #3 z audytu pokrycia VAT (dotąd cały mechanizm
-odliczenia częściowego był nieobecny poza JEDNĄ wzmianką o art. 90 ust.
-10c przy grupie VAT — dotyczy każdej działalności mieszanej: JST, ochrona
-zdrowia, edukacja, finanse, NGO, spółdzielnie)
-
-```
-⭐⭐⭐ DWA ODRĘBNE, NAKŁADAJĄCE SIĘ MECHANIZMY — NIE MYLIĆ:
-  ETAP 1 — PREWSPÓŁCZYNNIK (art. 86 ust. 2a): dzieli podatek naliczony
-    między DZIAŁALNOŚĆ GOSPODARCZĄ a CELE INNE NIŻ działalność
-    gospodarcza (np. działalność publicznoprawna gminy, działalność
-    statutowa nieodpłatna)
-  ETAP 2 — PROPORCJA / WSPÓŁCZYNNIK (art. 90 ust. 2): W RAMACH
-    działalności gospodarczej dzieli podatek między czynności
-    OPODATKOWANE a ZWOLNIONE
-  ⭐ Podatnik może podlegać OBU ETAPOM JEDNOCZEŚNIE (najpierw pre-, potem
-    współczynnik) — typowo gmina prowadząca odpłatny najem i sprzedaż
-    zwolnioną obok zadań własnych
-
-⭐⭐ ETAP 1 — PREWSPÓŁCZYNNIK (art. 86 ust. 2a–2h):
-  □ Przesłanka: nabycia wykorzystywane ZARÓWNO do działalności
-    gospodarczej, JAK I do celów innych, gdy PRZYPISANIE w całości do
-    działalności gospodarczej NIE JEST MOŻLIWE
-  □ Kryterium ustawowe (ust. 2b): sposób określenia proporcji ma
-    NAJBARDZIEJ ODPOWIADAĆ SPECYFICE działalności i dokonywanych nabyć —
-    zapewniać odliczenie wyłącznie w części przypadającej na działalność
-    gospodarczą i obiektywnie odzwierciedlać wykorzystanie
-  □ Przykładowe klucze (ust. 2c): OSOBOWY, GODZINOWY, OBROTOWY,
-    POWIERZCHNIOWY — katalog OTWARTY
-  □ Rozporządzenie MF z 17.12.2015 r. w sprawie sposobu określania
-    zakresu wykorzystywania nabywanych towarów i usług do celów
-    działalności gospodarczej w przypadku niektórych podatników
-    (Dz. U. z 2015 r. poz. 2193) — narzuca klucz obrotowy m.in. JST,
-    zakładom budżetowym, uczelniom, instytutom
-  □ ⭐⭐⭐ ART. 86 UST. 2h — PRAWO WYJŚCIA POZA ROZPORZĄDZENIE: podatnik,
-    dla którego sposób określenia proporcji wskazuje rozporządzenie,
-    MOŻE zastosować INNY, BARDZIEJ REPREZENTATYWNY sposób, jeżeli uzna,
-    że metoda rozporządzeniowa nie odpowiada specyfice jego działalności
-    → CIĘŻAR ARGUMENTACJI PO STRONIE PODATNIKA: musi WYKAZAĆ, że metoda
-      alternatywna jest BARDZIEJ WŁAŚCIWA, nie tylko korzystniejsza
-    → ⭐ NAJCZĘSTSZY SPÓR PRAKTYCZNY: gospodarka wodno-kanalizacyjna JST
-      — klucz metrażowy/ilościowy (m³ dostarczonej wody) zamiast klucza
-      obrotowego z rozporządzenia; linia orzecznicza sądów
-      administracyjnych jest tu w znacznej części KORZYSTNA dla gmin
-    ⚠️ [SPRAWDŹ AKTUALNĄ LINIĘ ORZECZNICZĄ przed sporządzeniem pisma —
-       użyj skilla orzeczenia-sadowe-v2; NIE powołuj sygnatur z pamięci]
-  □ Korekta roczna prewspółczynnika: art. 90c (odesłanie do art. 91 ust.
-    2–9); ust. 3 art. 90c ⭐ POZWALA przy korekcie przyjąć INNY sposób
-    określania proporcji niż przyjęty na dany rok, jeżeli byłby bardziej
-    reprezentatywny dla zakończonego roku
-
-⭐⭐ ETAP 2 — PROPORCJA (art. 90):
-  □ ust. 1 — OBOWIĄZEK odrębnego określenia kwot podatku naliczonego
-    związanych z czynnościami dającymi prawo do odliczenia (alokacja
-    bezpośrednia MA PIERWSZEŃSTWO przed proporcją)
-  □ ust. 3 — proporcja = roczny obrót z czynności z prawem do odliczenia
-    / całkowity obrót z czynności z prawem i bez prawa
-  □ ust. 4 — ustalana PROCENTOWO w stosunku rocznym na podstawie obrotu
-    ROKU POPRZEDNIEGO, ZAOKRĄGLANA W GÓRĘ do liczby całkowitej
-  □ ust. 5 — do obrotu NIE WLICZA SIĘ dostawy środków trwałych i WNiP
-    podlegających amortyzacji oraz gruntów i praw wieczystego
-    użytkowania zaliczonych do środków trwałych — używanych na potrzeby
-    działalności podatnika
-  □ ust. 6 — NIE WLICZA SIĘ obrotu z transakcji POMOCNICZYCH w zakresie
-    nieruchomości i pomocniczych transakcji FINANSOWYCH oraz usług z art.
-    43 ust. 1 pkt 7, 12 i 38–41 w zakresie, w jakim mają charakter
-    POMOCNICZY ⭐ „pomocniczość" to samodzielne, częste pole sporu
-  □ ust. 8–9 — proporcja SZACUNKOWA gdy brak obrotu w roku poprzednim
-    albo obrót był niższy niż **30 000 zł**, a także gdy podatnik uzna
-    obrót za NIEREPREZENTATYWNY; ZAWIADOMIENIE naczelnika US do **25.
-    dnia miesiąca** następującego po miesiącu pierwszego zastosowania,
-    nie później niż w dniu przesłania ewidencji z art. 109 ust. 3
-  □ ⭐ ust. 10 — PROGI ZAOKRĄGLENIA: proporcja > **98%** ORAZ kwota
-    nieodliczona w skali roku < **10 000 zł** → można przyjąć **100%**;
-    proporcja ≤ **2%** → można przyjąć **0%**
-    ⚠️ WARUNEK KWOTOWY przy 98% JEST ŁATWY DO PRZEOCZENIA — sama
-    proporcja powyżej 98% NIE WYSTARCZA
-  □ ust. 10a–10b — w JST proporcję ustala się ODRĘBNIE DLA KAŻDEJ
-    jednostki organizacyjnej (jednostka budżetowa, zakład budżetowy,
-    urząd gminy / starostwo / urząd marszałkowski)
-  □ ust. 10c–10g — grupa VAT (proporcja odrębnie dla każdego członka) i
-    reguły po utracie statusu przez grupę / przywróceniu rejestracji z
-    art. 96 ust. 9k
-
-⭐⭐⭐ KOREKTA (art. 91) — NAJCZĘSTSZE ŹRÓDŁO NIEDOSZACOWANEGO RYZYKA:
-  □ ust. 1 — korekta ROCZNA po zakończeniu roku, wg proporcji
-    RZECZYWISTEJ dla zakończonego roku
-  □ ⭐ ust. 1a–1b — MOŻNA NIE KOREGOWAĆ, gdy różnica proporcji ≤ **2
-    PUNKTY PROCENTOWE**; przy proporcji rzeczywistej NIŻSZEJ — dodatkowo
-    kwota nieodliczona (z różnicy proporcji + korekty z ust. 2, bez
-    środków trwałych ≤ 15 000 zł) nie może przekraczać **10 000 zł**
-  □ ⭐⭐⭐ ust. 2 — KOREKTA WIELOLETNIA: środki trwałe i WNiP podlegające
-    amortyzacji oraz grunty i prawa wieczystego użytkowania zaliczone do
-    środków trwałych, o wartości początkowej POWYŻEJ **15 000 zł**:
-    → **5 KOLEJNYCH LAT** (roczna korekta = 1/5)
-    → **10 LAT** dla NIERUCHOMOŚCI i praw wieczystego użytkowania
-      gruntów (roczna korekta = 1/10), licząc OD ROKU ODDANIA DO
-      UŻYTKOWANIA
-    → wartość początkowa ≤ 15 000 zł — korekta JEDNORAZOWA po zakończeniu
-      roku oddania do użytkowania
-  □ ust. 2a — obowiązek korekty 10-letniej NIE dotyczy OPŁAT ROCZNYCH za
-    użytkowanie wieczyste (stosuje się ust. 1)
-  □ ust. 3 — korektę wykazuje się w deklaracji za PIERWSZY OKRES
-    ROZLICZENIOWY roku następnego, a przy zakończeniu działalności — w
-    deklaracji za OSTATNI okres
-  □ ⭐ ust. 4–6 — SPRZEDAŻ w okresie korekty: przyjmuje się, że towar jest
-    nadal wykorzystywany do czynności opodatkowanych AŻ DO KOŃCA okresu
-    korekty, a korekty dokonuje się JEDNORAZOWO za cały pozostały okres.
-    Jeżeli sprzedaż była ZWOLNIONA lub niepodlegająca — dalsze
-    wykorzystanie traktuje się jako związane WYŁĄCZNIE z czynnościami
-    zwolnionymi/niepodlegającymi → ⚠️ TO GENERUJE SKOKOWY ZWROT
-    ODLICZONEGO VAT przy sprzedaży nieruchomości ze zwolnieniem z art. 43
-    ust. 1 pkt 10 — LICZ TO PRZED podjęciem decyzji o opcji opodatkowania
-    (patrz sekcja 4c)
-  □ ust. 7–7d — korekta przy ZMIANIE PRAWA do odliczenia (nabycie z
-    pełnym prawem, potem zmiana przeznaczenia i odwrotnie); ust. 7c —
-    korekty NIE dokonuje się, jeżeli od końca okresu rozliczeniowego
-    wydania do użytkowania upłynęło **12 MIESIĘCY**; ust. 7d — towary
-    handlowe/surowce: korekta w deklaracji za okres, w którym nastąpiła
-    zmiana
-  □ ⭐ ust. 7e — podatnik korzystający ze zwolnień z art. 43 ust. 1 pkt 3,
-    art. 113 ust. 1 albo art. 113a ust. 1 MOŻE skorygować podatek za
-    pozostały okres korekty w deklaracji za OSTATNI okres, w którym był
-    VAT czynnym
-  □ ⭐⭐ ust. 9 — przy ZBYCIU PRZEDSIĘBIORSTWA LUB ZCP korekty z ust. 1–8
-    dokonuje **NABYWCA** — to samodzielna, często pomijana pozycja
-    ryzyka w due diligence transakcyjnym
-
-□ POKREWNE KOREKTY SZCZEGÓLNE:
-  → art. 90a — nieruchomość z art. 86 ust. 7b: zmiana stopnia
-    wykorzystania w ciągu **120 MIESIĘCY** od oddania do użytkowania
-  → art. 90b — pojazdy samochodowe: **60 MIESIĘCY** (a przy wartości
-    początkowej ≤ 15 000 zł — **12 MIESIĘCY**); pełne opracowanie w
-    mod-odliczenia-uzytek-mieszany-firma-prywatny-KUP.md
-
-✅ [VER: lexlege.pl — pełny tekst art. 90, 90a, 90b, 90c i 91 ustawy o
-   VAT, Dz.U.2025.0.775 t.j.; pobrane 2026-08-12. Art. 86 ust. 2a–2h i
-   rozporządzenie Dz.U. 2015 poz. 2193 — potwierdzone w 4 niezależnych
-   źródłach, w tym interpretacji KIS i opracowaniu KPMG]
-⚠️ [ZALECANA WERYFIKACJA ISAP — w szczególności aktualny status i tekst
-   rozporządzenia z 17.12.2015 r., którego metryki NIE potwierdzono w
-   źródle urzędowym]
-```
-
----
-
-## 4j. ⭐⭐ NIEODPŁATNE PRZEKAZANIA I ŚWIADCZENIA — art. 7 ust. 2–4 i 7,
-art. 8 ust. 2, 2a i 5 — dodane 2026-08-12, uzupełnienie luki #5 z audytu
-pokrycia VAT (najczęstszy błąd rozliczeniowy MŚP: darowizny, zużycie
-towarów na cele osobiste, świadczenia dla pracowników)
-
-```
-⭐⭐⭐ ZASADA (art. 7 ust. 2): za dostawę towarów uznaje się RÓWNIEŻ
-  NIEODPŁATNE przekazanie towarów należących do przedsiębiorstwa
-  podatnika, w szczególności:
-    pkt 1 — przekazanie LUB ZUŻYCIE na cele osobiste podatnika, jego
-      pracowników (w tym BYŁYCH pracowników), wspólników, udziałowców,
-      akcjonariuszy, członków spółdzielni i ich domowników, członków
-      organów stanowiących osób prawnych, członków stowarzyszenia
-    pkt 2 — WSZELKIE INNE DAROWIZNY
-  ⭐⭐⭐ WARUNEK KLUCZOWY (część wspólna): opodatkowanie następuje TYLKO
-    JEŻELI podatnikowi przysługiwało — W CAŁOŚCI LUB W CZĘŚCI — PRAWO DO
-    ODLICZENIA z tytułu nabycia, importu lub WYTWORZENIA tych towarów
-    LUB ICH **CZĘŚCI SKŁADOWYCH**
-    → ⭐ „części składowe" to pułapka: towar nabyty bez prawa do
-      odliczenia, ale ULEPSZONY zakupami z odliczeniem, może podlegać
-      opodatkowaniu przy nieodpłatnym przekazaniu
-
-⭐⭐ WYŁĄCZENIA (art. 7 ust. 3–4 i 7) — PREZENTY MAŁEJ WARTOŚCI I PRÓBKI:
-  □ ust. 3 — ust. 2 NIE STOSUJE SIĘ do prezentów o małej wartości i
-    próbek, JEŻELI przekazanie następuje NA CELE ZWIĄZANE Z
-    DZIAŁALNOŚCIĄ GOSPODARCZĄ podatnika
-  □ ⭐⭐ ust. 4 — DWA ROZŁĄCZNE PROGI „prezentu o małej wartości"
-    (na JEDNĄ OSOBĘ):
-    pkt 1 — łączna wartość w roku podatkowym ≤ **100 ZŁ** (bez podatku),
-      POD WARUNKIEM prowadzenia EWIDENCJI pozwalającej ustalić TOŻSAMOŚĆ
-      obdarowanych
-    pkt 2 — bez ewidencji: jednostkowa CENA NABYCIA (a gdy brak — koszt
-      wytworzenia), określona w momencie przekazania, ≤ **20 ZŁ**
-    ⚠️ NAJCZĘSTSZY BŁĄD: stosowanie progu 20 zł „na sztukę" przy
-      jednoczesnym prowadzeniu ewidencji imiennej albo mieszanie obu
-      reżimów — to DWA ODRĘBNE tryby, wybierane osobno
-  □ ust. 7 — PRÓBKA: identyfikowalny jako próbka egzemplarz towaru lub
-    jego niewielka ilość, pozwalające ocenić cechy i właściwości towaru w
-    postaci końcowej, których przekazanie (1) ma na celu PROMOCJĘ tego
-    towaru oraz (2) NIE SŁUŻY zasadniczo zaspokojeniu potrzeb ODBIORCY
-    KOŃCOWEGO — chyba że zaspokojenie tych potrzeb jest nieodłącznym
-    elementem promocji i ma skłaniać do zakupu
-
-⭐⭐ NIEODPŁATNE ŚWIADCZENIE USŁUG (art. 8 ust. 2) — za ODPŁATNE
-  świadczenie usług uznaje się również:
-  pkt 1 — UŻYCIE towarów stanowiących część przedsiębiorstwa do celów
-    INNYCH NIŻ działalność gospodarcza (w tym na cele osobiste podatnika
-    i wymienionego kręgu osób), JEŻELI przysługiwało prawo do odliczenia
-    przy nabyciu/imporcie/wytworzeniu tych towarów LUB ich części
-    składowych
-  pkt 2 — NIEODPŁATNE ŚWIADCZENIE USŁUG na cele osobiste tego kręgu osób
-    ORAZ wszelkie inne nieodpłatne świadczenie usług do celów innych niż
-    działalność gospodarcza podatnika
-    ⭐ RÓŻNICA KONSTRUKCYJNA: przy pkt 2 (usługi) ustawa NIE UZALEŻNIA
-      opodatkowania od prawa do odliczenia — inaczej niż przy pkt 1 i
-      przy art. 7 ust. 2. Decyduje CEL świadczenia
-  □ ust. 5–6 — WYŁĄCZENIE dla użycia POJAZDÓW SAMOCHODOWYCH do celów
-    innych niż działalność gospodarcza, gdy przysługiwało odliczenie
-    obliczone zgodnie z art. 86a ust. 1 (limit 50%); za „nabycie" uznaje
-    się też przyjęcie w używanie na podstawie najmu, dzierżawy, leasingu
-    → pełne opracowanie: mod-odliczenia-uzytek-mieszany-firma-prywatny-KUP.md
-
-⭐⭐⭐ REFAKTUROWANIE (art. 8 ust. 2a) — DOTĄD NIEOBECNE W MODULE:
-  gdy podatnik, działając WE WŁASNYM IMIENIU, ale NA RZECZ OSOBY
-  TRZECIEJ, bierze udział w świadczeniu usług — PRZYJMUJE SIĘ, ŻE TEN
-  PODATNIK SAM OTRZYMAŁ I WYŚWIADCZYŁ TE USŁUGI (fikcja prawna dwóch
-  świadczeń)
-  → KONSEKWENCJE: refakturujący stosuje stawkę i moment powstania
-    obowiązku podatkowego WŁAŚCIWE DLA USŁUGI REFAKTUROWANEJ, nie dla
-    własnej działalności
-  → ⭐ POWIĄZANIE: art. 88 ust. 1 pkt 4 lit. c — odprzedaż usług
-    NOCLEGOWYCH opodatkowanych właśnie na podstawie art. 8 ust. 2a jest
-    JEDYNYM wyjątkiem przywracającym prawo do odliczenia (sekcja 4h)
-
-□ INTAKE DLA TEJ SEKCJI:
-  □ Czy przy nabyciu/wytworzeniu przekazywanego towaru odliczono VAT?
-  □ Czy odliczono VAT od CZĘŚCI SKŁADOWYCH (ulepszeń)?
-  □ Czy prowadzona jest ewidencja obdarowanych (decyduje o progu 100/20 zł)?
-  □ Czy przekazanie ma związek z działalnością gospodarczą?
-  □ Czy świadczenie na rzecz pracownika jest nieodpłatne, czy częściowo
-    odpłatne (wtedy reżim odpłatności + ewentualnie art. 32)?
-
-✅ [VER: lexlege.pl — pełny tekst art. 7 i art. 8 ustawy o VAT,
-   Dz.U.2025.0.775 t.j., stan prawny na 12.08.2026; pobrane 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP]
-```
-
----
-
-## 4k. ⭐⭐⭐ WYŁĄCZENIE ZBYCIA PRZEDSIĘBIORSTWA I ZCP SPOD USTAWY
-(art. 6 pkt 1 i 2 ustawy VAT) — dodane 2026-08-12 (iteracja II audytu
-pokrycia VAT)
-
-```
-⭐⭐⭐ TREŚĆ (art. 6): przepisów ustawy NIE STOSUJE SIĘ do:
-  pkt 1 — TRANSAKCJI ZBYCIA PRZEDSIĘBIORSTWA LUB ZORGANIZOWANEJ CZĘŚCI
-    PRZEDSIĘBIORSTWA
-  pkt 2 — czynności, które NIE MOGĄ BYĆ PRZEDMIOTEM PRAWNIE SKUTECZNEJ
-    UMOWY
-  pkt 3 — (uchylony)
-
-⭐⭐ CHARAKTER WYŁĄCZENIA: to NIE jest zwolnienie, lecz WYŁĄCZENIE
-  PRZEDMIOTOWE — czynność w ogóle POZOSTAJE POZA ZAKRESEM ustawy.
-  KONSEKWENCJE praktyczne, których nie daje zwolnienie:
-  → sprzedawca NIE wykazuje podatku należnego i NIE wystawia faktury VAT
-  → transakcja NIE wchodzi do proporcji z art. 90 (nie jest „obrotem")
-  → ⚠️ PRZECHODZI POD PCC — wyłączenie z VAT otwiera opodatkowanie
-    czynności cywilnoprawnych (patrz mod-ustawa-PCC-i-podatek-spadkow-
-    darowizn.md); to ELEMENT KALKULACJI, nie efekt uboczny
-
-⭐⭐⭐ DEFINICJE — DWA RÓŻNE ŹRÓDŁA, NIE MYLIĆ:
-  □ PRZEDSIĘBIORSTWO — ustawa o VAT NIE DEFINIUJE; stosuje się definicję
-    z **art. 55(1) Kodeksu cywilnego** (zorganizowany zespół składników
-    niematerialnych i materialnych przeznaczony do prowadzenia
-    działalności gospodarczej)
-  □ ZORGANIZOWANA CZĘŚĆ PRZEDSIĘBIORSTWA — definicja WŁASNA ustawy VAT:
-    **art. 2 pkt 27e** ⚠️ [WERYFIKUJ pełne brzmienie w ISAP przed
-    powołaniem — wymaga wyodrębnienia ORGANIZACYJNEGO, FINANSOWEGO i
-    FUNKCJONALNEGO oraz zdolności do samodzielnego realizowania zadań]
-
-⭐⭐ ZAKRES POJĘCIA „TRANSAKCJA ZBYCIA" — utrwalona wykładnia organów:
-  rozumiane SZEROKO, w sposób zbliżony do „dostawy towarów" z art. 7 ust.
-  1 — obejmuje WSZELKIE czynności przenoszące prawo do rozporządzania
-  przedmiotem jak właściciel: sprzedaż, ZAMIANĘ, DAROWIZNĘ, nieodpłatne
-  przekazanie, wniesienie APORTEM
-  → ⭐ APORT przedsiębiorstwa/ZCP JEST objęty wyłączeniem
-  → ⭐ DAROWIZNA ZCP również pozostaje poza VAT (nie stosuje się art. 7
-    ust. 2 — patrz sekcja 4j)
-
-⚠️ ZASADA WYKŁADNI ŚCISŁEJ: ze względu na szczególny charakter art. 6 pkt
-  1 interpretuje się go ŚCIŚLE — nie wolno rozszerzać na zbycie
-  pojedynczych, choćby wartościowych, składników majątku
-
-⭐⭐⭐ NAJCZĘSTSZE POLE SPORU — CZY TO JUŻ ZCP:
-  □ Brak nieruchomości w zbywanym zespole NIE PRZESĄDZA o braku ZCP —
-    decyduje zdolność do samodzielnego funkcjonowania (w orzecznictwie
-    sądów administracyjnych pogląd ugruntowany)
-    ⚠️ [SYGNATURY do potwierdzenia przez orzeczenia-sadowe-v2 przed
-       powołaniem w piśmie — NIE cytuj z tego modułu]
-  □ Zbycie nieruchomości wraz z umowami najmu — spór „ZCP czy dostawa
-    towaru"; ROZSTRZYGA stopień wyodrębnienia i przejęcie umów,
-    personelu, rachunków, zobowiązań
-  □ ⭐ RYZYKO DWUSTRONNE: błędna kwalifikacja jako ZCP → brak podatku
-    należnego u zbywcy (zaległość + odsetki); błędna kwalifikacja jako
-    dostawa → u nabywcy odmowa odliczenia na podstawie art. 88 ust. 3a
-    pkt 2 („transakcja nie podlega opodatkowaniu") — sekcja 4h
-  → ⭐ REKOMENDACJA STANDARDOWA: przy transakcji o istotnej wartości —
-    WNIOSEK O INTERPRETACJĘ INDYWIDUALNĄ przed zawarciem umowy; przy
-    braku czasu — klauzula umowna o podziale ryzyka podatkowego i
-    zabezpieczenie kwoty spornego VAT
-
-⛔ SPRZĘŻENIE Z KOREKTĄ WIELOLETNIĄ: art. 91 ust. 9 — przy zbyciu
-  przedsiębiorstwa lub ZCP korekty z art. 91 ust. 1–8 dokonuje **NABYWCA**
-  (sekcja 4i). To pozycja OBOWIĄZKOWA w due diligence — nabywca przejmuje
-  otwarte okresy korekty 5/10-letniej
-
-✅ [VER: lexlege.pl / arslege.pl / przepisy.gofin.pl — zgodne brzmienie
-   art. 6, Dz.U.2025.0.775 t.j.; wykładnia „transakcji zbycia"
-   potwierdzona w 4 interpretacjach indywidualnych KIS (2025–2026),
-   2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP — w szczególności art. 2 pkt 27e]
-```
-
----
-
-## 4l. ⭐⭐⭐ MIEJSCE DOSTAWY TOWARÓW I TRANSAKCJE ŁAŃCUCHOWE
-(art. 22 ustawy VAT) — dodane 2026-08-12 (iteracja II audytu pokrycia
-VAT; usuwa ASYMETRIĘ STRUKTURALNĄ modułu: miejsce świadczenia USŁUG miało
-ok. 220 linii, miejsce dostawy TOWARÓW — zero)
-
-```
-⭐⭐ MIEJSCE DOSTAWY — KATALOG (art. 22 ust. 1):
-  pkt 1 — towary WYSYŁANE lub TRANSPORTOWANE → miejsce, w którym towary
-    znajdują się w momencie ROZPOCZĘCIA wysyłki lub transportu do nabywcy
-    ⚠️ [BRZMIENIE pkt 1 odtworzone z kontekstu przepisu i praktyki —
-       ZWERYFIKUJ DOSŁOWNIE W ISAP przed cytowaniem w piśmie]
-  pkt 2 — towary INSTALOWANE lub MONTOWANE (z próbnym uruchomieniem lub
-    bez) przez dokonującego dostawy lub podmiot działający na jego rzecz
-    → miejsce INSTALACJI/MONTAŻU; ⭐ NIE UZNAJE SIĘ za instalację/montaż
-    PROSTYCH CZYNNOŚCI umożliwiających funkcjonowanie towaru zgodnie z
-    przeznaczeniem (granica sporna przy dostawach maszyn i urządzeń)
-  pkt 3 — towary NIEWYSYŁANE ani nietransportowane → miejsce, w którym
-    znajdują się W MOMENCIE DOSTAWY
-  pkt 4 — dostawa na pokładach STATKÓW, SAMOLOTÓW, POCIĄGÓW w trakcie
-    części transportu pasażerów wykonywanej na terytorium UE → miejsce
-    ROZPOCZĘCIA TRANSPORTU PASAŻERÓW
-  pkt 5 — dostawa GAZU w systemie gazowym, ENERGII ELEKTRYCZNEJ w
-    systemie elektroenergetycznym, energii CIEPLNEJ/CHŁODNICZEJ przez
-    sieci dystrybucji — do podmiotu będącego podatnikiem
-□ ust. 3 — dostawa NASTĘPUJĄCA PO wysyłce/transporcie uznana za dokonaną
-  w miejscu ZAKOŃCZENIA wysyłki lub transportu
-□ ust. 4 — gdy miejscem rozpoczęcia wysyłki jest terytorium PAŃSTWA
-  TRZECIEGO, dostawę dokonaną przez podatnika będącego również podatnikiem
-  z tytułu IMPORTU uważa się za dokonaną w państwie członkowskim importu
-
-⭐⭐⭐ TRANSAKCJE ŁAŃCUCHOWE — KLUCZ: „DOSTAWA RUCHOMA" vs „NIERUCHOMA"
-  Sytuacja: kilka podmiotów dokonuje dostawy TEGO SAMEGO towaru, a towar
-  jest wydawany BEZPOŚREDNIO od pierwszego dostawcy do ostatniego
-  nabywcy. Transport można przypisać TYLKO JEDNEJ dostawie w łańcuchu —
-  TA JEST „RUCHOMA" (i tylko ona może być WDT ze stawką 0% albo
-  eksportem). Pozostałe są „NIERUCHOME" — opodatkowane lokalnie w
-  miejscu rozpoczęcia albo zakończenia transportu (ust. 3)
-
-⭐⭐ REGUŁY PRZYPORZĄDKOWANIA:
-  □ ust. 2 — REGUŁA OGÓLNA: gdy transport organizuje NABYWCA, który
-    dokonuje również dalszej dostawy — przyjmuje się, że transport jest
-    przyporządkowany dostawie DOKONANEJ DO TEGO NABYWCY, CHYBA ŻE z
-    WARUNKÓW DOSTAWY wynika co innego
-    ⚠️ pojęcie „warunków dostawy" NIE JEST zdefiniowane ustawowo — w
-    praktyce bada się INCOTERMS, moment przejścia ryzyka, kto zawiera
-    umowę przewozu i ponosi jej koszt; TO GŁÓWNE POLE SPORU
-  □ ust. 2a — EKSPORT (towary z terytorium kraju na terytorium państwa
-    trzeciego przez nabywcę dokonującego również dostawy): transport
-    przyporządkowany dostawie DO TEGO NABYWCY, chyba że z warunków
-    dostawy wynika, że należy go przyporządkować JEGO dostawie
-  □ ⭐⭐⭐ ust. 2b — WEWNĄTRZWSPÓLNOTOWO (towar z jednego państwa
-    członkowskiego do innego): wysyłka/transport przyporządkowane
-    WYŁĄCZNIE dostawie dokonanej DO PODMIOTU POŚREDNICZĄCEGO
-  □ ⭐⭐⭐ ust. 2c — WYJĄTEK OD ust. 2b: jeżeli podmiot pośredniczący
-    PRZEKAZAŁ SWOJEMU DOSTAWCY numer identyfikacyjny VAT-UE nadany mu
-    przez państwo członkowskie, Z KTÓREGO towary są wysyłane — transport
-    przypisuje się dostawie DOKONANEJ PRZEZ TEN PODMIOT
-    ⭐ TO JEST JEDYNY, PROSTY „PRZEŁĄCZNIK" W RĘKACH PODATNIKA —
-    przekazanie właściwego numeru VAT-UE przesuwa dostawę ruchomą o
-    jedno ogniwo. Sprawdź to ZAWSZE przed przyjęciem kwalifikacji organu
-  □ ust. 2d — DEFINICJA: PODMIOT POŚREDNICZĄCY to dostawca INNY NIŻ
-    PIERWSZY w kolejności, który wysyła lub transportuje towar
-    SAMODZIELNIE albo za pośrednictwem osoby trzeciej działającej NA JEGO
-    RZECZ
-  ⚠️ ust. 2b–2c NIE MAJĄ ZASTOSOWANIA, gdy transport organizuje PIERWSZY
-    albo OSTATNI podmiot w łańcuchu — wtedy wraca reguła ogólna z ust. 2
-
-□ POWIĄZANIE — TRANSAKCJE TRÓJSTRONNE, PROCEDURA UPROSZCZONA: Dział XII
-  rozdział 8, **art. 135–138** ustawy VAT ⚠️ [DOTĄD NIEOPRACOWANE — nie
-  powołuj warunków procedury z pamięci; zweryfikuj w ISAP]
-
-⭐ CHECKLIST DLA SPRAWY ŁAŃCUCHOWEJ:
-  □ Ilu podmiotów dotyczy łańcuch i jaka jest kolejność fakturowania?
-  □ Kto FAKTYCZNIE organizuje transport (umowa przewozu, koszt, ryzyko)?
-  □ Jakie INCOTERMS zastosowano na każdym etapie?
-  □ Jaki numer VAT-UE podał podmiot pośredniczący i KOMU (ust. 2c)?
-  □ Czy któryś podmiot jest pierwszym/ostatnim organizatorem transportu
-    (wyłączenie ust. 2b–2c)?
-  □ Czy dokumentacja WDT z art. 42 dotyczy WŁAŚCIWEJ dostawy w łańcuchu?
-
-✅ [VER: art. 22 ust. 1 pkt 2–5 oraz ust. 3–4 — przepisy.gofin.pl;
-   art. 22 ust. 2, 2a, 2b, 2c, 2d — zgodnie w 4 niezależnych źródłach
-   (gofin.pl, pit.pl, infor.pl, ksiegowego.pl), 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP — w szczególności dosłowne brzmienie
-   art. 22 ust. 1 pkt 1 oraz art. 135–138]
-```
-
----
-
-## 4m. ⭐⭐ ORGANY WŁADZY PUBLICZNEJ JAKO PODATNIK — IMPERIUM vs DOMINIUM
-(art. 15 ust. 6 ustawy VAT) — dodane 2026-08-12 (iteracja II audytu
-pokrycia VAT; brak tego przepisu odcinał cały segment spraw JST mimo
-istnienia DR-08)
-
-```
-⭐⭐⭐ TREŚĆ (art. 15 ust. 6): NIE UZNAJE SIĘ ZA PODATNIKA organów władzy
-  publicznej oraz urzędów obsługujących te organy — W ZAKRESIE
-  REALIZOWANYCH ZADAŃ NAŁOŻONYCH ODRĘBNYMI PRZEPISAMI PRAWA, DLA
-  REALIZACJI KTÓRYCH ZOSTAŁY ONE POWOŁANE — Z WYŁĄCZENIEM CZYNNOŚCI
-  WYKONYWANYCH NA PODSTAWIE ZAWARTYCH UMÓW CYWILNOPRAWNYCH
-
-⭐⭐⭐ TEST DWUSTOPNIOWY — STOSUJ W TEJ KOLEJNOŚCI:
-  KROK 1 — czy podmiot jest ORGANEM WŁADZY PUBLICZNEJ lub urzędem go
-    obsługującym? (status podmiotowy)
-  KROK 2 — czy czynność mieści się w ZADANIACH NAŁOŻONYCH ODRĘBNYMI
-    PRZEPISAMI, dla których organ powołano — czy raczej wykonywana jest
-    NA PODSTAWIE UMOWY CYWILNOPRAWNEJ?
-  → IMPERIUM (władztwo publiczne, decyzje administracyjne, opłaty
-    publicznoprawne) → POZA VAT
-  → DOMINIUM (umowa cywilnoprawna: najem, dzierżawa, sprzedaż mienia,
-    usługi komunalne na podstawie umowy) → PODATNIK NA ZASADACH OGÓLNYCH
-  ⭐ DECYDUJE CHARAKTER CZYNNOŚCI, NIE STATUS PODMIOTU — ten sam organ
-    jest w części czynności podatnikiem, a w części nie
-
-□ PRZYKŁAD REFERENCYJNY (opłaty za zajęcie pasa drogowego): zarządca
-  drogi pobiera je w drodze DECYZJI ADMINISTRACYJNEJ w ramach zadania
-  publicznego → poza VAT. Gdyby ten sam teren był udostępniony UMOWĄ
-  NAJMU/DZIERŻAWY → czynność opodatkowana
-  ⚠️ [potwierdzone w opracowaniach i interpretacjach; SYGNATURY wyroków
-     zweryfikuj przez orzeczenia-sadowe-v2 przed powołaniem]
-
-⛔ SPRZĘŻENIE Z PREWSPÓŁCZYNNIKIEM: czynności poza VAT na podstawie art.
-  15 ust. 6 to właśnie „cele inne niż działalność gospodarcza" z art. 86
-  ust. 2a. JEDNOSTKA, KTÓRA MA CZYNNOŚCI Z OBU STRON TEJ GRANICY,
-  OBOWIĄZKOWO stosuje prewspółczynnik — patrz sekcja 4i (w tym prawo
-  wyjścia poza rozporządzenie z art. 86 ust. 2h i proporcja odrębna dla
-  każdej jednostki organizacyjnej JST z art. 90 ust. 10a–10b)
-
-□ POWIĄZANIA: dr-08 (samorząd terytorialny) — ustrojowa strona zadań
-  własnych i zleconych | sekcja 4i tego modułu — mechanizm odliczenia |
-  centralizacja rozliczeń JST ⚠️ [odrębna regulacja, NIEOPRACOWANA w tym
-  module]
-
-✅ [VER: lexlege.pl oraz przepisy.gofin.pl — zgodne, dosłowne brzmienie
-   art. 15 ust. 6, Dz.U.2025.0.775 t.j., 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP]
-```
-
----
-
-## 4n. ⭐⭐⭐ ODWROTNE OBCIĄŻENIE W OBROCIE KRAJOWYM — STAN PO REFORMIE
-(art. 17 ustawy VAT + Dział XIII rozdział 1c, art. 145e–145k) — dodane
-2026-08-12 (iteracja III audytu pokrycia VAT)
-
-```
-⛔⛔⛔ NAJWAŻNIEJSZE USTALENIE — SPROSTOWANIE POWSZECHNEGO BŁĘDU:
-  KLASYCZNE krajowe odwrotne obciążenie dla „towarów i usług wrażliwych"
-  — **art. 17 ust. 1 pkt 7 i 8 wraz z załącznikami nr 11 i 14** —
-  ZOSTAŁO UCHYLONE i ZASTĄPIONE OBOWIĄZKOWYM MECHANIZMEM PODZIELONEJ
-  PŁATNOŚCI (zał. 15 — patrz sekcja 4 „Split payment"). Wraz z nim
-  zlikwidowano informację podsumowującą **VAT-27**.
-  → ⚠️ PUŁAPKA PRAKTYCZNA: w obiegu (starsze wzory umów, szablony
-    fakturowe, przestarzałe opracowania) nadal krążą faktury i klauzule
-    z adnotacją „odwrotne obciążenie" dla towarów, które DZIŚ podlegają
-    MPP. Otrzymanie takiej faktury NIE zwalnia nabywcy z zapłaty w
-    mechanizmie podzielonej płatności — a wystawca naraża się na sankcję
-    z art. 108a ust. 7
-  → ⚠️ SPRAWY HISTORYCZNE: dla okresów sprzed uchylenia stosuje się stan
-    prawny z daty czynności — NIE przenoś obecnej kwalifikacji wstecz
-    (zasada z shared/TEMPORAL-LAW-CHECK.md)
-
-⭐⭐ CO POZOSTAŁO W ART. 17 — TRANSAKCJE Z ELEMENTEM ZAGRANICZNYM:
-  □ ust. 1 pkt 1 — import towarów
-  □ ust. 1 pkt 4 — IMPORT USŁUG (usługobiorca podatnikiem)
-  □ ust. 1 pkt 5 — NABYCIE TOWARÓW W KRAJU OD PODMIOTU ZAGRANICZNEGO,
-    warunki ŁĄCZNIE:
-    lit. a) DOKONUJĄCY DOSTAWY nie posiada na terytorium kraju siedziby
-      ani stałego miejsca prowadzenia działalności, a przy dostawie
-      towarów INNYCH niż gaz w systemie gazowym / energia elektryczna w
-      systemie elektroenergetycznym / energia cieplna lub chłodnicza
-      przez sieci dystrybucji ORAZ innej niż transfer bonu jednego
-      przeznaczenia — dodatkowo NIE JEST zarejestrowany zgodnie z art. 96
-      ust. 4
-    lit. b) NABYWCĄ jest — przy nabyciu gazu/energii — podmiot
-      zarejestrowany zgodnie z art. 96 ust. 4 (⚠️ pełne brzmienie lit. b
-      dla pozostałych przypadków: podatnik z siedzibą lub stałym miejscem
-      prowadzenia działalności w kraju albo osoba prawna niebędąca
-      podatnikiem z siedzibą w kraju zarejestrowana jako podatnik VAT UE
-      — ZWERYFIKUJ w ISAP przed powołaniem)
-  □ ⭐ ust. 1a — jeżeli dostawca/usługodawca POSIADA stałe miejsce
-    prowadzenia działalności w Polsce, to miejsce to NIE MOŻE brać
-    udziału w tej konkretnej transakcji, aby odwrotne obciążenie
-    zadziałało → ⭐ TO SPINA SIĘ Z SEKCJĄ o miejscu świadczenia usług
-    (FE/stałe miejsce) — najczęstszy spór: czy polski oddział/magazyn
-    kontrahenta „uczestniczył" w świadczeniu
-  □ ust. 2 — w przypadkach z ust. 1 pkt 4 i 5 USŁUGODAWCA LUB DOKONUJĄCY
-    DOSTAWY NIE ROZLICZA PODATKU NALEŻNEGO
-
-⭐⭐⭐ CZASOWE ODWROTNE OBCIĄŻENIE — GAZ, ENERGIA, UPRAWNIENIA DO EMISJI
-  (Dział XIII rozdział 1c, art. 145e–145k) — TO JEST ODRĘBNA INSTYTUCJA,
-  NIE ART. 17:
-  □ art. 145e ust. 1 — podatnikami są NABYWCY gazu w systemie gazowym /
-    energii elektrycznej w systemie elektroenergetycznym LUB USŁUGOBIORCY
-    usług przenoszenia uprawnień do emisji gazów cieplarnianych —
-    GDY czynności dokonywane są BEZPOŚREDNIO LUB ZA POŚREDNICTWEM
-    UPRAWNIONEGO PODMIOTU na: GIEŁDZIE TOWAROWEJ, RYNKU REGULOWANYM albo
-    ZORGANIZOWANEJ PLATFORMIE OBROTU (OTF)
-    → warunki po stronie nabywcy m.in.: rejestracja zgodnie z art. 96
-      ust. 4; w części przypadków KONCESJA Prezesa URE albo RACHUNEK w
-      rejestrze Unii (system handlu uprawnieniami do emisji)
-  □ art. 145f — dostawca/usługodawca NIE ROZLICZA podatku należnego
-  □ ⭐ art. 145g — FAKTURA dokumentująca te czynności: NIE ZAWIERA danych
-    z art. 106e ust. 1 pkt 12–14 (stawka, wartość netto wg stawek, kwota
-    podatku) i ZAWIERA wyrazy z art. 106e ust. 1 pkt 18, tj. **„odwrotne
-    obciążenie"**
-  □ ⭐ art. 145h — do usług przenoszenia uprawnień do emisji NIE STOSUJE
-    SIĘ art. 108a ust. 1a (obowiązkowego MPP)
-  □ ⛔ art. 145i ust. 1 — OBOWIĄZEK FORMALNY POD RYGOREM: dostawca/
-    usługodawca ORAZ nabywca/usługobiorca SKŁADAJĄ naczelnikowi urzędu
-    skarbowego **ZAWIADOMIENIE O ROZPOCZĘCIU** dokonywania tych
-    czynności — **PRZED DOKONANIEM PIERWSZEJ CZYNNOŚCI**
-    ⭐ TO PIERWSZA RZECZ DO SPRAWDZENIA W SPORZE: brak zawiadomienia
-      podważa zastosowanie całego mechanizmu
-  □ ⏳ CHARAKTER CZASOWY: mechanizm był przedłużany; wg komunikatu
-    Ministerstwa Finansów obowiązywał **do 31 grudnia 2026 r.**
-    ⚠️⚠️ [TERMIN KOŃCOWY WYMAGA SPRAWDZENIA PRZY KAŻDEJ SPRAWIE — to
-       przepis epizodyczny, przedłużany kolejnymi nowelizacjami;
-       web_search: „czasowe odwrotne obciążenie gaz energia uprawnienia
-       do emisji przedłużone termin" + weryfikacja w ISAP]
-
-□ POWIĄZANIA: sekcja 4 (split payment, zał. 15) | sekcja o WNT/imporcie
-  usług | sekcja o miejscu świadczenia usług (FE) | sekcja 4o niżej
-  (adnotacje na fakturze)
-
-✅ [VER: art. 17 ust. 1 pkt 5, ust. 1a, ust. 2 — lexlege.pl i mddp.pl;
-   uchylenie art. 17 ust. 1 pkt 7-8 i zał. 11/14 + likwidacja VAT-27 —
-   poradnikprzedsiebiorcy.pl; art. 145e-145i — przepisy.gofin.pl;
-   przedłużenie do 31.12.2026 — gov.pl/web/finanse (Rząd 1). 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP]
-```
-
----
-
-## 4o. ⭐⭐⭐ FAKTUROWANIE — SYSTEMATYKA (art. 106a–106q ustawy VAT)
-— dodane 2026-08-12 (iteracja III); dotąd moduł opisywał WYŁĄCZNIE KSeF
-i korekty w kontekście art. 29a, bez podstaw fakturowania jako takich
-
-```
-⭐⭐⭐ KIEDY FAKTURA JEST OBOWIĄZKOWA (art. 106b ust. 1) — podatnik jest
-  obowiązany wystawić fakturę dokumentującą m.in.:
-    pkt 1 — sprzedaż, a także dostawę towarów i świadczenie usług na
-      rzecz INNEGO PODATNIKA (podatku, podatku od wartości dodanej lub
-      o podobnym charakterze) albo OSOBY PRAWNEJ niebędącej podatnikiem
-    pkt 4 — OTRZYMANIE CAŁOŚCI LUB CZĘŚCI ZAPŁATY przed dokonaniem
-      czynności z pkt 1 (zaliczka)
-    ⚠️ [pełne brzmienie pkt 2–3 — ZWERYFIKUJ W ISAP]
-  □ ⭐ ust. 1a — NIE MA obowiązku wystawienia faktury zaliczkowej, jeżeli
-    całość lub część zapłaty otrzymano W TYM SAMYM MIESIĄCU, w którym
-    dokonano czynności, na poczet której zapłatę otrzymano
-    (jedna faktura zamiast dwóch)
-
-⭐⭐ FAKTURA NA ŻĄDANIE (art. 106b ust. 3) — TERMIN ZAWITY 3 MIESIĘCY:
-  na żądanie nabywcy podatnik ma obowiązek wystawić fakturę
-  dokumentującą czynności z ust. 1 pkt 1 (gdy obowiązek nie wynika z ust.
-  1 — np. żądanie KONSUMENTA) oraz otrzymanie zapłaty przed ich
-  wykonaniem — JEŻELI żądanie zgłoszono w terminie **3 MIESIĘCY, LICZĄC
-  OD KOŃCA MIESIĄCA**, w którym dostarczono towar / wykonano usługę /
-  otrzymano zapłatę
-  → wyjątki przedmiotowe m.in.: czynności z art. 19a ust. 5 pkt 4 (np.
-    najem), czynności z art. 106a pkt 3 i 4
-  → ⭐ podatnicy ZWOLNIENI (art. 113 ust. 1 i 9 lub rozporządzenia z art.
-    82 ust. 3) RÓWNIEŻ mają obowiązek wystawienia faktury na żądanie
-    (ust. 3 pkt 2)
-  → TERMIN WYSTAWIENIA takiej faktury (art. 106i ust. 6): jeżeli żądanie
-    zgłoszono DO KOŃCA miesiąca — zasady ogólne z ust. 1 i 2; jeżeli PO
-    upływie tego miesiąca — nie później niż **15. DNIA OD DNIA ZGŁOSZENIA
-    ŻĄDANIA**
-
-⛔⛔ PARAGON BEZ NIP — REGUŁA ZAMKNIĘTA (art. 106b ust. 5): przy sprzedaży
-  zaewidencjonowanej na kasie i potwierdzonej paragonem fiskalnym fakturę
-  NA RZECZ PODATNIKA wystawia się **WYŁĄCZNIE**, jeżeli PARAGON zawiera
-  NIP nabywcy
-  → ⭐ SPRZĘŻENIE SANKCYJNE: ujęcie w ewidencji faktury wystawionej
-    wbrew tej regule → dodatkowe zobowiązanie **100%** kwoty podatku z
-    art. 109a (sekcja 5). Sankcja obciąża NABYWCĘ; wystawcę — odrębnie
-  → ⭐ FAKTURA UPROSZCZONA: paragon z NIP do **450 zł** (lub 100 euro)
-    jest UZNAWANY ZA FAKTURĘ na podstawie art. 106e ust. 5 pkt 3 — wtedy
-    NIE wystawia się do niego odrębnej faktury (art. 106h ust. 4)
-
-⭐⭐ ELEMENTY FAKTURY (art. 106e ust. 1) — katalog obligatoryjny, m.in.:
-  data wystawienia (pkt 1); kolejny numer w ramach serii jednoznacznie
-  identyfikujący fakturę (pkt 2); nazwy i adresy stron (pkt 3); NIP
-  sprzedawcy (pkt 4) i nabywcy (pkt 5); data dokonania/zakończenia
-  dostawy lub wykonania usługi albo otrzymania zapłaty, o ile określona i
-  różna od daty wystawienia (pkt 6); nazwa towaru/usługi, miara, ilość,
-  cena jednostkowa netto, opusty (pkt 7–10); wartość sprzedaży netto
-  (pkt 11); stawka, wartość netto wg stawek, kwota podatku, kwota
-  należności ogółem (pkt 12–15)
-  ⭐⭐ ADNOTACJE SZCZEGÓLNE — SPRAWDZAJ ZAWSZE:
-    pkt 18 — **„odwrotne obciążenie"** (gdy do rozliczenia obowiązany
-      jest nabywca)
-    pkt 18a — **„mechanizm podzielonej płatności"** — gdy kwota
-      NALEŻNOŚCI OGÓŁEM przekracza **15 000 zł** (lub równowartość w
-      walucie obcej) i faktura obejmuje towary/usługi z załącznika nr 15
-  □ ust. 3 — PROCEDURA MARŻY (art. 120 ust. 4 i 5): faktura zawiera
-    wyłącznie dane z ust. 1 pkt 1–8 i 15–17 oraz wyrazy „procedura marży
-    — towary używane" / „— dzieła sztuki" / „— przedmioty kolekcjonerskie
-    i antyki"
-  □ ust. 5 pkt 3 — faktura UPROSZCZONA (paragon z NIP, patrz wyżej)
-
-⭐⭐⭐ TERMINY WYSTAWIENIA (art. 106i):
-  □ ust. 1 — ZASADA: nie później niż **15. DNIA MIESIĄCA NASTĘPUJĄCEGO**
-    po miesiącu dokonania dostawy / wykonania usługi
-  □ ust. 2 — ZALICZKI: nie później niż 15. dnia miesiąca następującego po
-    miesiącu otrzymania zapłaty
-  □ ust. 3 — TERMINY SZCZEGÓLNE, m.in.: **30. dnia** od wykonania usług
-    budowlanych/budowlano-montażowych (art. 19a ust. 5 pkt 3 lit. a);
-    **60. dnia** od wydania towarów przy dostawie książek drukowanych
-    (lit. b), a przy umowie przewidującej rozliczenie zwrotów wydawnictw
-    — **120. dnia** od pierwszego dnia wydania towarów
-    ⚠️ [pozostałe pozycje ust. 3–5 — ZWERYFIKUJ W ISAP]
-  □ ⛔ ust. 7 — GRANICA „W PRZÓD": faktury NIE MOGĄ być wystawione
-    WCZEŚNIEJ NIŻ **30. DNIA PRZED** dokonaniem dostawy/wykonaniem usługi
-    albo otrzymaniem zapłaty; ust. 8 — ograniczenie z ust. 7 pkt 1 nie
-    dotyczy m.in. dostaw i usług z art. 19a ust. 3, 4 (świadczenia
-    ciągłe/okresowe)
-    → ⭐ „PRZEDWCZESNA FAKTURA" to samodzielne pole sporu — powiązać z
-      art. 108 (sekcja 4g) oraz z momentem powstania obowiązku
-      podatkowego (sekcja 4a)
-
-⭐⭐ KOREKTA DOKUMENTU — DWA RÓŻNE INSTRUMENTY, NIE MYLIĆ:
-  □ **FAKTURA KORYGUJĄCA (art. 106j)** — wystawia **SPRZEDAWCA**, gdy po
-    wystawieniu faktury: zmieniła się podstawa opodatkowania lub kwota
-    podatku (ust. 1 pkt 1), dokonano zwrotu zapłaty z art. 106b ust. 1
-    pkt 4 (pkt 4), stwierdzono POMYŁKĘ W JAKIEJKOLWIEK POZYCJI faktury
-    (pkt 5)
-    → ⭐ ELEMENT KSeF (ust. 2 pkt 2a): faktura korygująca zawiera NUMER
-      IDENTYFIKUJĄCY W KSeF fakturę korygowaną — z wyjątkiem korekt do
-      faktur, którym numeru KSeF nie nadano (powiązać z alertem KSeF na
-      początku modułu i wymogiem schematu FA(3))
-    → ust. 3 — KOREKTA ZBIORCZA (opust/obniżka do WSZYSTKICH dostaw dla
-      jednego odbiorcy w okresie): musi wskazywać OKRES, może pominąć
-      dane z art. 106e ust. 1 pkt 5 i 6 oraz nazwę towaru/usługi
-    → SKUTKI ROZLICZENIOWE korekt in minus/in plus: sekcja 4b (art. 29a)
-  □ **NOTA KORYGUJĄCA (art. 106k)** — wystawia **NABYWCA**, gdy otrzymał
-    fakturę z pomyłkami — ⛔ Z WYŁĄCZENIEM pomyłek w danych z art. 106e
-    ust. 1 **pkt 8–15** (miara, ilość, cena, opusty, wartość netto,
-    stawka, kwota podatku, należność ogółem)
-    → ⭐ WYMAGA AKCEPTACJI WYSTAWCY faktury (ust. 2)
-    → zawiera m.in. dane stron, dane faktury korygowanej z art. 106e ust.
-      1 pkt 1–6 oraz wskazanie treści korygowanej i treści prawidłowej
-    → ⭐ TEST PRAKTYCZNY: pomyłka w KWOCIE/STAWCE → tylko faktura
-      korygująca sprzedawcy; pomyłka w NAZWIE/ADRESIE/NIP/dacie → nota
-
-□ POZOSTAŁE JEDNOSTKI ROZDZIAŁU 1 DZIAŁU XI ⚠️ [NIEOPRACOWANE — art. 106a
-  (zakres stosowania), 106c (faktury organów egzekucyjnych), 106d
-  (samofakturowanie), 106f (faktura zaliczkowa — elementy), 106g
-  (egzemplarze), 106h (faktura do paragonu), 106l (duplikaty), 106m–106n
-  (autentyczność, integralność, faktury elektroniczne), 106na–106q (KSeF
-  — częściowo w alertach na początku modułu). Zweryfikuj w ISAP przed
-  powołaniem]
-
-✅ [VER: art. 106b ust. 1, 1a, 3, 5; art. 106e ust. 1 pkt 1-15, 18, 18a,
-   ust. 3, ust. 5 pkt 3; art. 106i ust. 1-3, 6-8; art. 106j ust. 1-3;
-   art. 106k ust. 1-3 — zgodnie w 4 źródłach (przepisy.gofin.pl,
-   ksiegowosc.infor.pl, sip.lex.pl, poradnikprzedsiebiorcy.pl),
-   Dz.U.2025.775 t.j., 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP — część źródeł to wersje archiwalne
-   artykułów; przy powoływaniu w piśmie sprawdź brzmienie NA DATĘ
-   CZYNNOŚCI, zwłaszcza dla przepisów zmienianych pakietem KSeF]
-```
-
----
-
-## 4p. ⭐⭐ PROCEDURY SZCZEGÓLNE — TURYSTYKA (art. 119) I ROLNIK
-RYCZAŁTOWY (art. 115–118) — dodane 2026-08-12 (iteracja III)
-
-```
-⭐⭐⭐ USŁUGI TURYSTYKI — PROCEDURA MARŻY (art. 119):
-  □ ust. 1 — PODSTAWĄ OPODATKOWANIA jest KWOTA MARŻY pomniejszona o kwotę
-    należnego podatku (z zastrzeżeniem ust. 5)
-  □ ust. 2 — MARŻA = różnica między kwotą, którą ma zapłacić NABYWCA
-    usługi, a FAKTYCZNYMI KOSZTAMI poniesionymi przez podatnika z tytułu
-    nabycia towarów i usług OD INNYCH PODATNIKÓW **DLA BEZPOŚREDNIEJ
-    KORZYŚCI TURYSTY**
-    ⭐ „dla bezpośredniej korzyści turysty" to POJĘCIE GRANICZNE i główne
-      pole sporu — koszty ogólne biura (najem lokalu, marketing,
-      księgowość) NIE wchodzą do rachunku marży
-  □ ⛔ ust. 4 — CENA ZA PROCEDURĘ: BRAK PRAWA DO ODLICZENIA podatku
-    naliczonego od towarów i usług nabytych dla bezpośredniej korzyści
-    turysty. To nie jest opcja — to element konstrukcyjny procedury
-  □ ⭐ ust. 5 — ŚWIADCZENIA WŁASNE: gdy przy świadczeniu usługi turystyki
-    podatnik wykonuje CZĘŚĆ świadczeń WE WŁASNYM ZAKRESIE, procedura
-    marży stosuje się TYLKO do usług nabytych od innych podatników;
-    świadczenia własne rozlicza się NA ZASADACH OGÓLNYCH → w praktyce
-    JEDNA usługa turystyczna bywa rozliczana DWOMA reżimami równolegle
-    ⚠️ [ust. 3, 3a, 6-10 (warunki podmiotowe, ewidencja, stawka 0% dla
-       usług poza UE) — NIEOPRACOWANE, zweryfikuj w ISAP]
-  □ POWIĄZANIA: art. 28n — miejsce świadczenia usług turystyki w
-    procedurze marży (sekcja o miejscu świadczenia usług); art. 106e ust.
-    3 — oznaczenia na fakturze marżowej (sekcja 4o); art. 120 — marża
-    towary używane (odrębna procedura, sekcja wyżej); art. 88 ust. 1 pkt
-    4 — wyłączenie odliczenia od noclegów i gastronomii (sekcja 4h)
-
-⭐⭐ ROLNIK RYCZAŁTOWY — ZRYCZAŁTOWANY ZWROT (art. 115–118):
-  □ art. 115 ust. 1 — rolnikowi ryczałtowemu dokonującemu dostawy
-    produktów rolnych DLA PODATNIKA, KTÓRY ROZLICZA PODATEK, przysługuje
-    ZRYCZAŁTOWANY ZWROT podatku z tytułu nabywania niektórych środków
-    produkcji dla rolnictwa. ⭐ KWOTĘ ZWROTU WYPŁACA **NABYWCA** produktów
-    rolnych (nie urząd skarbowy)
-  □ ⚠️⚠️ STAWKA — DWA RÓŻNE POZIOMY, OBOWIĄZKOWA WERYFIKACJA:
-    art. 115 ust. 2 stanowi o **6,5%** kwoty należnej z tytułu dostawy
-    produktów rolnych pomniejszonej o kwotę zryczałtowanego zwrotu, ALE
-    przepis EPIZODYCZNY (art. 146ea pkt 3 i przepisy pokrewne) podnosił
-    ją do **7%**
-    ⛔ NIE PODAWAJ STAWKI Z TEGO MODUŁU BEZ SPRAWDZENIA — trzeba ustalić,
-      KTÓRY przepis epizodyczny obowiązuje NA DATĘ CZYNNOŚCI i czy nie
-      wygasł. web_search: „zryczałtowany zwrot podatku rolnik ryczałtowy
-      stawka 7% art. 146 ustawa VAT [rok]" + weryfikacja w ISAP
-  □ art. 116 ust. 1 — nabywca będący **VAT CZYNNYM** wystawia FAKTURĘ
-    **VAT RR** w DWÓCH EGZEMPLARZACH; ORYGINAŁ przekazuje DOSTAWCY
-    (⭐ odwrócenie zwykłego kierunku fakturowania — fakturę wystawia
-    KUPUJĄCY)
-  □ art. 116 ust. 2–3 — faktura zawiera m.in. OŚWIADCZENIE dostawcy o
-    treści: „Oświadczam, że jestem rolnikiem ryczałtowym zwolnionym od
-    podatku od towarów i usług na podstawie art. 43 ust. 1 pkt 3 ustawy o
-    podatku od towarów i usług"
-  □ ⭐ art. 116 ust. 3a — faktura VAT RR MOŻE, ZA ZGODĄ DOSTAWCY, być
-    wystawiana, podpisywana i przesyłana W FORMIE ELEKTRONICZNEJ
-  □ art. 117 — obowiązki rolnika ryczałtowego ⚠️ [treść NIEZWERYFIKOWANA
-    — sprawdź w ISAP]
-  □ art. 118 — przepisy art. 115, art. 116 ust. 1–3a i 5–10 oraz art. 117
-    stosuje się ODPOWIEDNIO do wykonywania przez rolnika ryczałtowego
-    USŁUG ROLNICZYCH na rzecz podatników rozliczających podatek
-  □ POWIĄZANIE: zwolnienie rolnika ryczałtowego wynika z art. 43 ust. 1
-    pkt 3 (sekcja 4c); rezygnacja ze zwolnienia i powrót — art. 43 ust.
-    3–5 ⚠️ [NIEOPRACOWANE]
-
-✅ [VER: art. 119 ust. 1-2 oraz art. 115 ust. 1-2, art. 116 ust. 1-3a,
-   art. 118 — zgodnie w 3 źródłach (przepisy.gofin.pl ×2,
-   ksiegowosc.infor.pl); charakter procedury z art. 119 ust. 4
-   potwierdzony komentarzem INFORLEX. 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP — OBOWIĄZKOWA dla stawki z art. 115 ust. 2
-   i przepisów epizodycznych z art. 146x]
-```
-
----
-
-## 5. ⭐⭐⭐ EWIDENCJA VAT (JPK_V7), KOREKTA EWIDENCJI I SANKCJE
-EWIDENCYJNE — art. 109, 109a, 110 ustawy VAT
-
-> **NAPRAWA STRUKTURALNA (2026-08-12):** moduł miał LUKĘ W NUMERACJI —
-> po sekcji 4f następowała od razu sekcja 6, a sekcja 4d (ulga na złe
-> długi) zawierała ODESŁANIE do nieistniejącej „sekcji 5" dotyczącej
-> JPK_V7. Sekcja została utworzona i wypełniona treścią; odesłanie w 4d
-> poprawiono.
-
-```
-⭐⭐ EWIDENCJA UPROSZCZONA — PODATNICY ZWOLNIENI (art. 109 ust. 1):
-  podatnicy korzystający ze zwolnienia z art. 113 ust. 1 i 9 prowadzą
-  EWIDENCJĘ SPRZEDAŻY ZA DANY DZIEŃ — nie później niż PRZED DOKONANIEM
-  SPRZEDAŻY W DNIU NASTĘPNYM
-  ⛔ ust. 2 — SANKCJA ZA BRAK LUB NIERZETELNOŚĆ: gdy nie da się ustalić
-    wartości sprzedaży z dokumentacji, organ OSZACUJE wartość sprzedaży
-    opodatkowanej; ⭐ JEŻELI NIE MOŻNA OKREŚLIĆ PRZEDMIOTU OPODATKOWANIA
-    — podatek ustala się przy zastosowaniu stawki **22%** (przepis
-    posługuje się stawką historyczną — NIE jest to omyłka modułu)
-  → analogiczny mechanizm szacowania: art. 110 (podmioty niezobowiązane
-    do ewidencji z ust. 3, które dokonały sprzedaży opodatkowanej i nie
-    zapłaciły podatku)
-
-⭐⭐⭐ EWIDENCJA PEŁNA (art. 109 ust. 3) — podstawa JPK_V7. Obowiązek
-  obejmuje wszystkich podatników POZA wykonującymi wyłącznie czynności
-  zwolnione z art. 43 ust. 1 lub z rozporządzeń wydanych na podstawie
-  art. 82 ust. 3 oraz korzystającymi ze zwolnienia z art. 113 ust. 1 i 9
-  albo art. 113a ust. 1. Ewidencja ma zawierać dane pozwalające na
-  PRAWIDŁOWE ROZLICZENIE PODATKU I SPORZĄDZENIE INFORMACJI
-  PODSUMOWUJĄCEJ, w szczególności:
-    1) rodzaj sprzedaży, podstawę opodatkowania, podatek należny (w tym
-       korekty) z podziałem na stawki
-    2) podatek naliczony obniżający podatek należny (w tym korekty)
-    3) kontrahentów
-    4) dowody sprzedaży i zakupów
-  □ ust. 8a — ewidencja prowadzona OBLIGATORYJNIE W POSTACI
-    ELEKTRONICZNEJ przy użyciu programów komputerowych
-  □ ust. 3a — usługi z miejscem świadczenia poza krajem: w ewidencji
-    podaje się NAZWĘ usługi i wartość bez podatku od wartości dodanej,
-    z uwzględnieniem momentu powstania obowiązku podatkowego właściwego
-    dla takich usług świadczonych w kraju (dla art. 28b — odpowiednio
-    art. 19a ust. 1–3 i 8)
-  □ ust. 3d — faktury do paragonów (art. 106h ust. 1) ujmuje się w
-    ewidencji w okresie ICH WYSTAWIENIA i NIE ZWIĘKSZAJĄ one wartości
-    sprzedaży ani podatku należnego za ten okres
-
-⭐⭐ TERMINY PRZESYŁANIA (art. 109 ust. 3b–3c):
-  □ ROZLICZENIE MIESIĘCZNE (JPK_V7M) — ewidencja ŁĄCZNIE z deklaracją,
-    w terminie do złożenia deklaracji
-  □ ROZLICZENIE KWARTALNE (JPK_V7K) — ⭐ CZĘŚĆ EWIDENCYJNA I TAK CO
-    MIESIĄC: za pierwszy i drugi miesiąc kwartału do **25. DNIA**
-    miesiąca następującego po każdym z nich; za ostatni miesiąc kwartału
-    — łącznie z deklaracją
-
-⭐⭐⭐ KOREKTA EWIDENCJI I KARA 500 ZŁ — ŚCIEŻKA KROK PO KROKU
-  (art. 109 ust. 3e–3l):
-  1) ust. 3e — podatnik ma **14 DNI** na przesłanie korekty ewidencji od
-     dnia STWIERDZENIA błędów/niezgodności ze stanem faktycznym LUB od
-     dnia ZMIANY danych zawartych w przesłanej ewidencji
-  2) ust. 3f — naczelnik US, stwierdziwszy błędy UNIEMOŻLIWIAJĄCE
-     weryfikację prawidłowości transakcji, WZYWA do ich skorygowania,
-     WSKAZUJĄC TE BŁĘDY ⭐ wezwanie MUSI konkretyzować błędy — wezwanie
-     ogólnikowe jest wadliwe i to jest zarzut do wykorzystania
-  3) ust. 3g — podatnik ma **14 DNI** od doręczenia wezwania na:
-     przesłanie ewidencji SKORYGOWANEJ w zakresie wskazanych błędów ALBO
-     złożenie WYJAŚNIEŃ wykazujących, że ewidencja błędów nie zawiera
-  4) ⛔ ust. 3h — dopiero przy braku reakcji, reakcji PO TERMINIE albo
-     niewykazaniu w wyjaśnieniach braku błędów — naczelnik US **MOŻE**
-     (uznaniowo, w drodze DECYZJI) nałożyć karę pieniężną **500 ZŁ ZA
-     KAŻDY BŁĄD** wskazany w wezwaniu
-     ⭐ TRZY PUNKTY OBRONY: (a) fakultatywność („może") — żądaj
-     uzasadnienia uznania; (b) liczba błędów jest liczona wg wezwania —
-     kwestionuj zawyżanie; (c) wyjaśnienia złożone W TERMINIE blokują
-     karę, nawet jeśli organ ich nie podziela — o ile wykazują brak błędu
-  5) ⭐⭐ ust. 3i — KARY NIE STOSUJE SIĘ do podatnika będącego OSOBĄ
-     FIZYCZNĄ prowadzącą działalność gospodarczą, który za TEN SAM CZYN
-     ponosi odpowiedzialność za wykroczenie skarbowe lub przestępstwo
-     skarbowe (wyłączenie kumulacji)
-  6) ust. 3k — karę uiszcza się BEZ WEZWANIA w terminie **14 DNI** od
-     doręczenia decyzji; ust. 3l — w pozostałym zakresie stosuje się
-     odpowiednio dział IV Ordynacji podatkowej; ust. 3j — wpływy stanowią
-     dochód budżetu państwa
-
-⛔⛔ ART. 109a — ODRĘBNA SANKCJA 100% (faktura do paragonu bez NIP):
-  gdy podatnik prowadzący ewidencję z art. 109 ust. 3 UJMIE W EWIDENCJI
-  wystawioną DLA NIEGO fakturę dotyczącą sprzedaży potwierdzonej
-  PARAGONEM, KTÓRY NIE ZAWIERA jego NIP — organ USTALA dodatkowe
-  zobowiązanie podatkowe w wysokości **100% kwoty podatku wykazanego na
-  tej fakturze**
-  → wyłączenie: nie ustala się wobec osób fizycznych, które za ten sam
-    czyn ponoszą odpowiedzialność za wykroczenie lub przestępstwo skarbowe
-  → ⭐ SPROSTOWANIE WEWNĘTRZNE: wcześniejsze wersje modułu odsyłały do
-    „aktualnego sankcyjnego art. 109a" bez podania treści — powyżej
-    treść ustalona; TO INNA SANKCJA NIŻ art. 112b–112c (sekcja 4e) i
-    inna niż kara 500 zł z art. 109 ust. 3h
-
-□ EWIDENCJE SZCZEGÓLNE (art. 109) — mapa, gdy sprawa ich dotyczy:
-  ust. 9–10a — towary powierzone/przemieszczane do usług (art. 12, 13)
-  ust. 11 — podmioty z art. 10 ust. 1 pkt 2, próg **50 000 zł** WNT
-  ust. 11b–11e — magazyn call-off stock (art. 54a rozporządzenia 282/2011)
-  ust. 11f — system **TAX FREE** (ewidencja elektroniczna, art. 127 ust. 1)
-  ust. 11g–11i — ⭐ GRUPA VAT: ewidencja czynności wewnątrzgrupowych z
-    art. 8c ust. 1, przesyłana MIESIĘCZNIE do **25. dnia** miesiąca
-    następnego (patrz sekcja o grupie VAT wyżej)
-  ust. 11ia–11ic — system kaucyjny (opakowania na napoje), przechowywanie
-    **5 lat**
-  art. 109b — interfejsy elektroniczne (platformy): ewidencja wg art. 54c
-    rozporządzenia 282/2011, udostępnienie w **14 dni** od żądania,
-    przechowywanie **10 LAT**
-
-✅ [VER: lexlege.pl — pełny tekst art. 109, 109a, 109b i 110 ustawy o VAT,
-   Dz.U.2025.0.775 t.j., stan prawny na 12.08.2026; pobrane 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP]
-✅ [LUKA ZAMKNIĘTA 2026-08-12 (iteracja II): deklaracje (art. 99) i
-   informacje podsumowujące (art. 100) opracowano w sekcji **5a** niżej.
-   Niniejsza sekcja opisuje EWIDENCJĘ, sekcja 5a — DEKLARACJE.
-   ⚠️ POZOSTAJE nieopracowane: art. 99 ust. 11c (tryb przesyłania),
-   art. 101–102 (korekty informacji podsumowujących)]
-```
-
----
-
-## 5a. ⭐⭐⭐ DEKLARACJE I INFORMACJE PODSUMOWUJĄCE
-(art. 99 i art. 100 ustawy VAT) — dodane 2026-08-12 (iteracja II);
-DOMYKA lukę wprost oznaczoną w sekcji 5 przy jej tworzeniu tego samego
-dnia
-
-```
-⭐⭐⭐ DEKLARACJE — ZASADA OGÓLNA (art. 99 ust. 1): podatnicy z art. 15
-  składają w urzędzie skarbowym deklaracje podatkowe ZA OKRESY MIESIĘCZNE
-  w terminie do **25. DNIA** miesiąca następującego po każdym kolejnym
-  miesiącu — z zastrzeżeniem ust. 2–10 oraz art. 130c (procedura unijna
-  OSS), art. 133 (procedura nieunijna) i art. 138g ust. 2 (pośrednik
-  w IOSS)
-  ⭐ DEKLARACJA I EWIDENCJA IDĄ RAZEM: od czasu JPK_V7 deklaracja jest
-    częścią tego samego pliku co ewidencja z art. 109 ust. 3 — patrz
-    sekcja 5 wyżej (art. 109 ust. 3b–3c)
-
-⭐⭐ ROZLICZENIE KWARTALNE (art. 99 ust. 2–3):
-  □ MALI PODATNICY, KTÓRZY WYBRALI METODĘ KASOWĄ — deklaracje ZA OKRESY
-    KWARTALNE do **25. dnia** miesiąca następującego po kwartale
-  □ powrót do rozliczeń miesięcznych — NIE WCZEŚNIEJ niż po upływie
-    **4 KWARTAŁÓW** rozliczanych kwartalnie, po uprzednim pisemnym
-    zawiadomieniu naczelnika US
-  ⚠️ [dokładne warunki wyboru i utraty prawa do kwartału — ust. 3–3c —
-     ZWERYFIKUJ W ISAP; nie odtwarzaj ich z pamięci]
-
-⛔⛔ UTRATA PRAWA DO KWARTAŁU PRZEZ ZAŁĄCZNIK 15 (art. 99 ust. 3a i n.):
-  gdy łączna wartość dostaw towarów z **załącznika nr 15** (bez podatku)
-  przekroczy próg z ust. 3a, podatnik rozliczający się kwartalnie MUSI
-  przejść na deklaracje MIESIĘCZNE — począwszy od rozliczenia za pierwszy
-  miesiąc kwartału:
-  → W KTÓRYM przekroczono kwotę — jeżeli przekroczenie nastąpiło w
-    PIERWSZYM lub DRUGIM miesiącu kwartału (przy przekroczeniu w drugim
-    miesiącu deklarację za pierwszy miesiąc składa się do **25. dnia**
-    miesiąca następującego po drugim miesiącu kwartału)
-  → NASTĘPUJĄCEGO PO kwartale, w którym przekroczono kwotę — jeżeli
-    przekroczenie nastąpiło w TRZECIM miesiącu kwartału
-  ⚠️ [WYSOKOŚĆ PROGU z ust. 3a — NIE PODANA w tym module, ZWERYFIKUJ W
-     ISAP przed użyciem. To ten sam załącznik 15 co przy MPP — sekcja 4]
-
-□ PRZYPADKI SZCZEGÓLNE (art. 99):
-  ust. 7a — ZAWIESZENIE DZIAŁALNOŚCI: brak obowiązku składania deklaracji
-    za okresy, których zawieszenie dotyczy; ⭐ WYŁĄCZENIA (deklarację I
-    TAK trzeba złożyć), m.in.: okres rozliczeniowy niepokryty
-    zawieszeniem w całości; okresy, za które podatnik ma rozliczyć
-    czynności opodatkowane; okresy, za które ma dokonać KOREKTY PODATKU
-    NALICZONEGO (np. korekta roczna z art. 91 — sekcja 4i)
-  ust. 8 — podatnicy inni niż VAT czynni oraz osoby prawne niebędące
-    podatnikami z art. 15, u których wartość WNT przekroczyła kwotę z
-    art. 10 ust. 1 pkt 2 lub którzy skorzystali z opcji z art. 10 ust. 6
-    — deklaracje w zakresie nabyć, MIESIĘCZNIE, do **25. dnia**
-  ust. 8a — przedstawiciel podatkowy składa deklaracje we własnym imieniu
-    na rzecz podatnika, MIESIĘCZNIE, do **25. dnia**
-  ust. 9 — podatnicy z art. 17 ust. 1 pkt 4, 5 (i dalszych) niemający
-    obowiązku z ust. 1–3 lub 8 — deklaracja do **25. dnia** miesiąca
-    następującego po miesiącu POWSTANIA OBOWIĄZKU PODATKOWEGO
-  ⭐ DEKLARACJA „ZEROWA": brak czynności w okresie NIE ZWALNIA z
-    obowiązku złożenia deklaracji (poza trybem zawieszenia z ust. 7a)
-
-⭐⭐ INFORMACJE PODSUMOWUJĄCE VAT-UE (art. 100):
-  □ składane ZA OKRESY MIESIĘCZNE, za pomocą ŚRODKÓW KOMUNIKACJI
-    ELEKTRONICZNEJ, w terminie do **25. DNIA** miesiąca następującego po
-    miesiącu, w którym powstał obowiązek podatkowy z tytułu transakcji
-    objętych obowiązkiem informacyjnym
-    ⚠️⚠️ [OSTRZEŻENIE ŹRÓDŁOWE: w obiegu funkcjonują opracowania
-       podające termin **15. dnia** (papierowo) obok 25. dnia
-       (elektronicznie) — to stan HISTORYCZNY sprzed przejścia na
-       wyłącznie elektroniczną formę. TERMIN I PODSTAWĘ (ust. 3 / ust. 7)
-       ZWERYFIKUJ W ISAP PRZED KAŻDYM UŻYCIEM — rozbieżność źródeł
-       wtórnych jest tu udokumentowana i realna]
-  □ ⚠️ [KWARTALNE informacje podsumowujące i próg 250 000 zł — pojawiają
-     się w źródłach wtórnych jako stan częściowo historyczny; NIE
-     WPISANE do modułu jako obowiązujące. Sprawdź art. 100 ust. 4 w ISAP]
-  □ ⭐ SAM STATUS zarejestrowanego podatnika VAT-UE NIE RODZI obowiązku
-    składania „zerowych" informacji podsumowujących — obowiązek powstaje
-    dopiero przy WYSTĄPIENIU transakcji objętej art. 100 ust. 1
-    (odwrotnie niż przy deklaracji z art. 99 ust. 1)
-  □ art. 101–102 — korekty informacji podsumowujących i delegacje
-    ⚠️ [NIEOPRACOWANE — zweryfikuj w ISAP]
-
-□ SANKCJE ZA UCHYBIENIA DEKLARACYJNE: niezłożenie deklaracji lub
-  informacji podsumowującej w terminie to czyn z Kodeksu karnego
-  skarbowego ⚠️ [KWALIFIKACJA KARNOSKARBOWA — ustal przez moduł dr-03;
-  NIE przenoś numerów artykułów KKS z tego modułu]; odrębnie: kara
-  pieniężna 500 zł za błąd w EWIDENCJI (art. 109 ust. 3h — sekcja 5)
-
-✅ [VER: art. 99 ust. 1, 2, 7a, 8, 8a, 9 oraz mechanizm utraty kwartału
-   przez zał. 15 — zgodnie w 4 źródłach (lexlege.pl, arslege.pl,
-   przepisy.gofin.pl, prawnik.cc), Dz.U.2025.0.775 t.j., 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP — OBOWIĄZKOWA dla: progu z art. 99 ust. 3a,
-   terminu i podstawy z art. 100 ust. 3/7, art. 100 ust. 4, art. 101–102]
-```
-
----
-
-## 6. DOWODY
-
-| Teza | Dowód | Źródło | Siła | Luka | Działanie |
-|---|---|---|---|---|---|
-| Dobra wiara przy odliczeniu | Wydruk z białej listy z daty transakcji + KRS kontrahenta | podatki.gov.pl | wysoka | stary wydruk | data weryfikacji musi być ≤ data transakcji |
-| Rzeczywistość transakcji | Faktury, WZ, CMR, potwierdzenia odbioru | strony | wysoka | brak dokumentów transportu | uzupełnij archiwum |
-| MPP zastosowany | Potwierdzenia przelewów split | bank | wysoka | — | wyciąg bankowy z kodu MPP |
-| KSeF — wystawienie faktury | Numer KSeF + status UPO | KSeF | wysoka (od 01.02/04.2026) | brak wdrożenia | plan wdrożenia + certyfikat |
-| WDT — stawka 0% | Dokumenty przewozowe (CMR), specyfikacja, potwierdzenie odbioru, numer VAT-UE nabywcy z dnia dostawy | strony / VIES | wysoka | brak potwierdzenia odbioru | oświadczenie nabywcy + korespondencja spedytora |
-| Pierwsze zasiedlenie (art. 43 ust. 1 pkt 10) | Pozwolenie na użytkowanie, pierwsza umowa najmu/sprzedaży, ewidencja ulepszeń | inwestor / KW | wysoka | brak dat ulepszeń | zestawienie nakładów z datami i wartością początkową |
-| Ulga na złe długi (art. 89a) | Faktura, wezwanie do zapłaty, status VAT dłużnika, wyciąg braku zapłaty | wierzyciel / biała lista | wysoka | dłużnik w restrukturyzacji | sprawdź KRZ w dacie korekty |
-| Pusta faktura — brak wprowadzenia do obrotu (art. 108) | Dowód wycofania/zniszczenia egzemplarza, korekta „do zera", potwierdzenie braku odliczenia u odbiorcy | wystawca / odbiorca | średnia–wysoka | faktura już odliczona | wystąp do odbiorcy o korektę + udokumentuj datę |
-| Należyta staranność nad pracownikiem (C-442/22) | Zakres czynności, procedury autoryzacji faktur, logi systemu, ślad kontroli wewnętrznej | pracodawca | średnia | brak procedur | rekonstrukcja z regulaminów i korespondencji |
-| Prewspółczynnik bardziej reprezentatywny (art. 86 ust. 2h) | Dane ilościowe (m³, m², godziny), kalkulacja porównawcza obu metod | podatnik | średnia | brak ewidencji ilościowej | wdroż ewidencję przed kolejnym rokiem |
-| Przedłużenie zwrotu — wadliwość postanowienia (art. 87 ust. 2) | Treść postanowienia, brak konkretyzacji wątpliwości, chronologia czynności organu | akta sprawy | wysoka | postanowienie ogólnikowe | zażalenie — pilnuj terminu 17 dni przy doręczeniu zastępczym |
-
----
-
-## 7. STRATEGIA / QUALITY GATE / OUTPUT
-
-**Strategia:** Weryfikuj kontrahentów na białej liście ZANIM dokonasz płatności. Przy odmowie odliczenia — udowodnij dobrą wiarę i należytą staranność. Przy KSeF — sprawdź termin obowiązku dla swojej firmy.
-
-**Quality gate:** Stawka ustalona PROCEDURĄ z sekcji 3 (kod CN/PKWiU w ISZTAR4 na datę czynności → zał. 3/10 i rozp. Dz.U. 2023 poz. 2670 → przepisy epizodyczne art. 146x → EUREKA), ze śladem weryfikacji (źródło + data dostępu + data stanu prawnego)? Nigdy z pamięci ani z tabeli w module? Zał. 15 sprawdzony przy MPP? Biała lista weryfikowana w dacie transakcji? KSeF — termin obowiązku ustalony? ⭐ DODANE 2026-08-12: Czy sprawdzono przesłanki NEGATYWNE z art. 88 (nie tylko art. 86 ust. 1)? Czy przy zwrocie użyto terminu 40 dni (NIE 60)? Czy przy sprzedaży środka trwałego policzono korektę wieloletnią z art. 91 ust. 4-6? Czy przy pustej fakturze rozdzielono stronę wystawcy (art. 108) od strony nabywcy (art. 88 ust. 3a pkt 4)? Czy nałożono nowelizacje po t.j. (poz. 894, 896, 1203, 1811, 2026/507, 2026/846)?
-
-**Output:** Kwalifikacja VAT → stawka → odliczenie/zwrot → MPP → KSeF (termin) → spór (termin 14 dni).
-
-**Powiązania:** `mod-OP-ordynacja-podatkowa` | `mod-KAS-kontrola-celno-skarbowa` | `pisma-procesowe-v3` | `mod-CIT-podatek-dochodowy-prawne` (rozróżnienie grupa VAT vs podatkowa grupa kapitałowa PGK — odrębne instytucje, odrębne warunki)
-
-**Źródła:** https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250000775 | https://ksef.podatki.gov.pl | https://www.podatki.gov.pl/wykaz-podatnikow-vat-wyszukiwarka
-
----
-
-## ANEKS — REJESTRACJA VAT I SOLIDARNA ODPOWIEDZIALNOŚĆ
-
-### Rejestracja VAT
-
-```
-Formularz: VAT-R — złożony elektronicznie do US właściwego dla podatnika
-Odmowa rejestracji: decyzja → odwołanie 14 dni (Op)
-Wykreślenie z rejestru: organ może wykreślić z urzędu (weryfikuj przesłanki w ustawie)
-Weryfikacja statusu VAT kontrahenta:
-  → Biała lista: https://www.podatki.gov.pl/wykaz-podatnikow-vat-wyszukiwarka
-  → API (masowa weryfikacja): https://wl-api.mf.gov.pl
-```
-
-### Solidarna odpowiedzialność nabywcy (art. 105a VAT)
-
-```
-Warunki solidarnej odpowiedzialności nabywcy za VAT sprzedawcy:
-  □ Towar z załącznika 15 do ustawy VAT (tzw. „towary wrażliwe")
-  □ Nabywca wiedział lub miał uzasadnione podstawy do przypuszczenia, że
-    podatek nie zostanie zapłacony przez sprzedawcę
-
-OBRONA NABYWCY:
-  □ Zapłata na rachunek z białej listy podatników VAT
-  □ Zastosowanie split payment (MPP) — zwalnia z odpowiedzialności
-  □ Należyta staranność (weryfikacja sprzedawcy, cena rynkowa)
-  ⚠️ Weryfikuj aktualne przepisy art. 105a VAT w ISAP.
-```

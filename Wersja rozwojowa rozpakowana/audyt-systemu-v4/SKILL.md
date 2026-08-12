@@ -18,7 +18,7 @@ references:
   - references/AUDIT-JOURNAL.md
   - references/WARN-OTWARTE.md   # rejestr żywy TYLKO otwartych flag (WARN + strukturalne) — dodane 2026-07-07, ZASADA 10
   - references/CHECKLIST-DEDUP.md   # mapa pojęć → lokalizacje (5 not, NOTA-6 ORPHAN dodana 06-14g)
-  - references/mapa_dzu_2026-07-15.md   # aktualna mapa Dz.U. (460 wierszy); 07-04 poprzednia wersja
+  - references/mapa_dzu_2026-07-15.md   # aktualna mapa Dz.U. (502 wiersze, sync 2026-08-13); 07-04 poprzednia wersja
   - references/REGRESSION-TEST-PLAN.md   # zestaw testów regresyjnych T1-T8, v1.1 (dodane 2026-07-21) — NAJPIERW zarejestrowany tutaj po odkryciu że plan istniał bez wpisu w SKILL.md
 scripts:
   - scripts/test_module_registration.py   # T1 — rejestracja modułów (KRYTYCZNY)

@@ -19,6 +19,19 @@ compatibility:
 
 # mod-AD — Akcyza: Podatek Akcyzowy / WIA / KKS
 
+**Wersja:** 1.7 | **Rozbudowano:** 2026-08-13 — ETAP audytu pokrycia
+per dział ustawy (pierwszy systematyczny audyt akcyzy, analogiczny do
+wielokrotnie już przeprowadzanego dla VAT). Domknięto Działy II
+(rejestracja CRPA, deklaracje/terminy, zwolnienia), III (składy
+podatkowe, zabezpieczenie akcyzowe), V (samochody osobowe), VI (znaki
+akcyzy — podatkowe/legalizacyjne), VIA (ewidencje), VIb (kary
+pieniężne) — patrz nowa Sekcja 1a. Rozbudowano też Dział IA (WIA) —
+✅ ISTOTNA KOREKTA: organ właściwy zmienił się 1.07.2023 r. z
+Dyrektora IAS we Wrocławiu na Dyrektora KIS, poprzednia wersja
+sekcji WIA była nieaktualna. Dotąd moduł był silny w stawkach i
+kilku tematach szczegółowych (węgiel/gaz, olej opałowy, e-papierosy),
+ale miał poważne luki w rdzeniu proceduralnym ustawy.
+
 ## AKTY PRAWNE — WERYFIKUJ NA ISAP
 
 | Akt | Oznaczenie | Przedmiot |
@@ -602,6 +615,490 @@ Akcyza zawieszona do momentu wyprowadzenia ze składu/dopuszczenia do konsumpcji
 
 ---
 
+## 1a. AUDYT POKRYCIA PER DZIAŁ USTAWY — DOMKNIĘCIE (2026-08-13,
+na żądanie użytkownika, PIERWSZY tego rodzaju systematyczny audyt
+akcyzy w systemie, analogiczny do wielokrotnie już przeprowadzanego
+dla VAT)
+
+⚠️ DOTYCHCZASOWY stan modułu BYŁ silny W stawkach i kilku tematach
+SZCZEGÓŁOWYCH (węgiel/gaz, olej OPAŁOWY, e-papierosy), ALE miał
+POWAŻNE luki systemowe W rdzeniu PROCEDURALNYM ustawy — poniżej
+DOMKNIĘCIE Działów II (rejestracja/deklaracje/zwolnienia), III
+(składy podatkowe/zabezpieczenie), V (samochody osobowe), VI (znaki
+akcyzy), VIA (ewidencje), VIb (kary pieniężne).
+
+### 1a.1. Dział II rozdz. 3 — Rejestracja podmiotów (art. 16–20)
+
+```
+CENTRALNY REJESTR PODMIOTÓW AKCYZOWYCH (CRPA) — OD 1.02.2021 r.
+  ZASTĄPIŁ dotychczasowe PAPIEROWE formularze AKC-R/AKC-Z ORAZ
+  rejestry prowadzone PRZEZ naczelników US.
+
+OBOWIĄZEK REJESTRACJI (art. 16 ust. 1): dotyczy PODATNIKÓW akcyzy
+  ORAZ szeregu INNYCH podmiotów (NIE tylko podatników) — W
+  SZCZEGÓLNOŚCI: podmiotów PROWADZĄCYCH działalność gospodarczą W
+  zakresie wyrobów AKCYZOWYCH, podmiotów ZUŻYWAJĄCYCH wyroby akcyzowe
+  ZWOLNIONE od akcyzy ZE względu na PRZEZNACZENIE, pośredniczących
+  PODMIOTÓW węglowych/gazowych. ⭐ art. 16 ust. 1a (DODANY): zgłoszenia
+  MOŻE dokonać RÓWNIEŻ osoba fizyczna NIEPROWADZĄCA działalności
+  gospodarczej, ZUŻYWAJĄCA zwolnione węglowodory gazowe DO celów
+  OPAŁOWYCH (art. 32 ust. 1 pkt 3).
+  ⭐ WYŁĄCZENIA z obowiązku REJESTRACJI w CRPA: pośredniczące podmioty
+  OLEJOWE, zużywające podmioty OLEJOWE, pośredniczące podmioty
+  TYTONIOWE — MIMO że TE kategorie SĄ formalnie objęte REŻIMEM
+  akcyzowym
+
+TERMIN: PRZED wykonaniem PIERWSZEJ czynności, KTÓREJ przedmiotem SĄ
+  wyroby AKCYZOWE (Z odpowiednim WYPRZEDZENIEM, nie PO fakcie)
+
+FORMA: zgłoszenie PODPISUJE się kwalifikowanym PODPISEM elektronicznym,
+  podpisem ZAUFANYM, podpisem OSOBISTYM albo zaawansowanym PODPISEM
+  elektronicznym Z certyfikatem CELNYM (LUB inny sposób POTWIERDZENIA
+  danych W jednostkach organizacyjnych URZĘDU celno-skarbowego przy
+  BRAKU podpisu elektronicznego)
+
+⭐⭐⭐ KWALIFIKACJA KARNOSKARBOWA BRAKU REJESTRACJI (art. 56b § 2 KKS):
+  "Kto WBREW obowiązkom określonym w art. 16, art. 16b, art. 17 i
+  art. 19 ustawy AKCYZOWEJ NIE składa zgłoszenia rejestracyjnego,
+  zgłoszenia rejestracyjnego UPROSZCZONEGO, powiadomienia, zgłoszenia
+  o ZAPRZESTANIU prowadzenia działalności, ALBO nie zgłasza ZMIANY
+  danych W nich zawartych, ALBO składa JE po terminie LUB podaje W
+  nich dane NIEZGODNE ze stanem RZECZYWISTYM, PODLEGA karze grzywny
+  DO 120 stawek DZIENNYCH" — WYKROCZENIE/przestępstwo skarbowe,
+  ⭐ ODRĘBNE od samego NIEZAPŁACENIA akcyzy — sama LUKA rejestracyjna
+  jest SAMODZIELNYM czynem ZABRONIONYM
+  ⭐⭐ CZYNNY ŻAL (art. 16 KKS): Ministerstwo Finansów WPROST wskazuje,
+  że NIE jest skłonne KARAĆ za samo NIEDOPEŁNIENIE wpisu do REJESTRU,
+  jeśli PODMIOT złoży skuteczny czynny ŻAL (opisujący ISTOTNE
+  okoliczności niedopełnienia OBOWIĄZKU) I JEDNOCZEŚNIE niezwłocznie
+  DOKONA zaległej rejestracji — ⭐ PRAKTYCZNA STRATEGIA obronna w
+  sprawach Z tego zakresu: łączne ZASTOSOWANIE czynnego żalu Z art.
+  16 KKS ORAZ natychmiastowej rejestracji W CRPA
+```
+
+### 1a.2. Dział II rozdz. 4 — Deklaracja podatkowa, terminy płatności
+(art. 21–26)
+
+```
+ZASADA OGÓLNA (art. 21): podatnik SKŁADA właściwemu naczelnikowi US
+  deklarację PODATKOWĄ WEDŁUG ustalonego WZORU ORAZ oblicza I wpłaca
+  akcyzę NA rachunek WŁAŚCIWEGO urzędu — ZA miesięczne okresy
+  ROZLICZENIOWE, W TERMINIE do 25. DNIA miesiąca NASTĘPUJĄCEGO po
+  miesiącu, W KTÓRYM powstał OBOWIĄZEK podatkowy (chyba że PRZEPISY
+  szczególne STANOWIĄ inaczej)
+  ⭐ PRZY zastosowaniu PROCEDURY zawieszenia poboru — TERMIN liczony
+  jest OD miesiąca ZAKOŃCZENIA tej procedury SKUTKUJĄCEGO powstaniem
+  zobowiązania PODATKOWEGO, nie od momentu WYPRODUKOWANIA/nabycia
+
+TERMINY SZCZEGÓLNE — RÓŻNIĄ się W ZALEŻNOŚCI od rodzaju WYROBU:
+  □ WYROBY węglowe (art. 21a): TERMIN wydłużony — DO 25. dnia
+    PRZYPADAJĄCEGO W DRUGIM miesiącu OD miesiąca powstania OBOWIĄZKU
+    (a WIĘC PRAKTYCZNIE 2 miesiące, NIE 1, W porównaniu Z zasadą
+    OGÓLNĄ) — ⭐ WAŻNA różnica DLA praktyki, ŁATWO pomylić Z zasadą
+    ogólną
+  □ ENERGIA elektryczna (art. 24), susz TYTONIOWY (art. 24a), wyroby
+    GAZOWE (art. 24b) — ODRĘBNE przepisy Z własnymi WARIANTAMI
+    terminów/formularzy (AKC-EN, AKC-ST, AKC-WG)
+  □ PRODUKCJA POZA składem podatkowym (art. 22): PRZEDPŁATA akcyzy —
+    obowiązek WPŁATY W wysokości akcyzy JAKA będzie NALEŻNA od
+    wyprodukowanych W danym MIESIĄCU wyrobów, W terminie DO ostatniego
+    dnia MIESIĄCA POPRZEDZAJĄCEGO miesiąc PRODUKCJI (a WIĘC "Z GÓRY",
+    NIE "z dołu" jak PRZY zasadzie ogólnej) — WPŁACONĄ przedpłatę
+    ZALICZA się NA poczet akcyzy NALEŻNEJ za ten MIESIĄC
+  □ art. 24e — KWARTALNE deklaracje DLA wyrobów WĘGLOWYCH objętych
+    zwolnieniem (ALTERNATYWA dla deklaracji MIESIĘCZNEJ, dostępna W
+    określonych PRZYPADKACH)
+
+FORMULARZE: system OBEJMUJE deklarację GŁÓWNĄ AKC-4/AKC-4zo (Z
+  formularzami SZCZEGÓŁOWYMI AKC-4/A do AKC-4/N WEDŁUG grup wyrobów)
+  ORAZ odrębne DEKLARACJE specjalistyczne: AKC-WW/AKC-WWn (WĘGLOWE),
+  AKC-EN (energia ELEKTRYCZNA), AKC-ST/AKC-STn (SUSZ tytoniowy),
+  AKC-WG (wyroby GAZOWE) — FORMA elektroniczna PRZEZ PUESC jest
+  ZASADĄ, papier DOPUSZCZALNY WYJĄTKOWO
+
+⭐ DEKLARACJA "ZEROWA": co DO zasady, JEŻELI podmiot JEST podatnikiem
+  akcyzy, ALE W danym miesiącu NIE wystąpiły CZYNNOŚCI powodujące
+  obowiązek PODATKOWY, CZĘSTO nie MA obowiązku składania "ZEROWEJ"
+  deklaracji — ZALEŻY jednak OD rodzaju działalności I PRZEPISÓW
+  szczególnych, W razie WĄTPLIWOŚCI rozważ WNIOSEK o interpretację
+  INDYWIDUALNĄ.
+```
+
+### 1a.3. Dział II rozdz. 6 — Zwolnienia (art. 30–39)
+
+```
+DWIE GŁÓWNE KATEGORIE zwolnień W ustawie:
+
+□ ZWOLNIENIA "STAŁE"/przedmiotowe (art. 30): energia ELEKTRYCZNA z
+  OZE (na podstawie DOKUMENTU potwierdzającego UMORZENIE świadectwa
+  pochodzenia — zwolnienie STOSUJE się NIE wcześniej niż Z chwilą
+  otrzymania TEGO dokumentu, poprzez OBNIŻENIE akcyzy NALEŻNEJ za
+  NAJBLIŻSZE okresy); UBYTKI wyrobów akcyzowych LUB CAŁKOWITE
+  zniszczenie WSKUTEK zdarzenia LOSOWEGO lub SIŁY wyższej; ALKOHOL
+  etylowy CAŁKOWICIE/częściowo SKAŻONY (Z rozróżnieniem PRODUKOWANEGO
+  krajowo VS nabywanego WEWNĄTRZWSPÓLNOTOWO — RÓŻNE środki SKAŻAJĄCE
+  dopuszczone); alkohol ZAWARTY w PRODUKTACH leczniczych, OLEJKACH
+  eterycznych, ARTYKUŁACH spożywczych
+
+□ ZWOLNIENIA "ZE WZGLĘDU NA PRZEZNACZENIE" (art. 31a-32) — ⭐⭐⭐
+  NAJWAŻNIEJSZA praktycznie KATEGORIA, DZIELĄCA się na DWIE grupy:
+  1) korzystające ZE zwolnienia PRZY KAŻDEJ z wymienionych CZYNNOŚCI
+  2) korzystające TYLKO przy NIEKTÓRYCH z tych CZYNNOŚCI
+  Katalog art. 32 ust. 1 OBEJMUJE m.in.: paliwa LOTNICZE (benzyny/
+  paliwa DO silników odrzutowych, oleje SMAROWE) — DLA statków
+  powietrznych; wyroby ENERGETYCZNE — do celów ŻEGLUGI (włączając
+  REJSY rybackie); pozostałe WĘGLOWODORY gazowe (CN 2711 12 11 —
+  2711 19 00) — do celów OPAŁOWYCH; wyroby ENERGETYCZNE CN 2901 10 00
+  — analogicznie do CELÓW z art. 31b (wyroby GAZOWE opałowe)
+  □ WYROBY węglowe DO celów opałowych (art. 31a ust. 1) — SZEROKI
+  katalog: PRODUKCJA energii elektrycznej, PRODUKCJA wyrobów
+  energetycznych, ZUŻYCIE przez GOSPODARSTWO domowe/organ ADMINISTRACJI
+  publicznej/Siły ZBROJNE/podmiot systemu OŚWIATY/żłobek i KLUB
+  dziecięcy
+
+⭐⭐ WARUNKI FORMALNE (art. 32 ust. 5, 6, 12, 13) — kluczowe DLA
+  SKUTECZNOŚCI zwolnienia: OKREŚLONE oświadczenia NABYWCY, ewidencja
+  Z monitorowaniem SYSTEMEM (dla WĘGLA — próg 30 MLN kg sprzedaży
+  ROCZNIE dla pośredniczącego PODMIOTU węglowego), DODATKOWE warunki
+  Z ust. 6e (żegluga) — ⚠️ TE mechanizmy SĄ już SZCZEGÓŁOWO opisane
+  W istniejących sekcjach modułu DOT. węgla/gazu (patrz WYŻEJ, sekcja
+  "WYROBY WĘGLOWE I GAZOWE") — NIE duplikować, TYLKO odsyłać
+
+ROZPORZĄDZENIE WYKONAWCZE: KATALOG zwolnień jest UZUPEŁNIANY przez
+  rozporządzenie MF Z 8.02.2013 r. W sprawie zwolnień OD podatku
+  akcyzowego — DRUGA, mniej ZNANA warstwa źródeł ZWOLNIEŃ, poza SAMĄ
+  ustawą — ⚠️ [NIEWERYFIKOWANE] sprawdź AKTUALNY t.j. tego
+  rozporządzenia PRZY konkretnej sprawie, gdyż MOGŁO być WIELOKROTNIE
+  nowelizowane OD 2013 r.
+```
+
+### 1a.4. Dział III rozdz. 2 — Składy podatkowe (art. 47–55)
+
+```
+ISTOTA: PRODUKCJA wyrobów akcyzowych Z załącznika NR 2 (objętych
+  STAWKĄ inną niż ZEROWA) MOŻE odbywać SIĘ WYŁĄCZNIE w SKŁADZIE
+  podatkowym (art. 47) — Z określonymi WYJĄTKAMI (np. drobna PRODUKCJA
+  na WŁASNY użytek W pewnych PRZYPADKACH — ⚠️ [NIEWERYFIKOWANE W
+  PEŁNI] dokładny KATALOG wyjątków wymaga POGŁĘBIENIA przy KONKRETNEJ
+  sprawie)
+
+PRZESŁANKI ZEZWOLENIA (art. 48): podmiot MUSI prowadzić CO NAJMNIEJ
+  jeden RODZAJ działalności — PRODUKCJA, przeładowywanie LUB
+  magazynowanie wyrobów AKCYZOWYCH (W TYM będących WŁASNOŚCIĄ innych
+  podmiotów) — PLUS dodatkowe warunki FORMALNE Z art. 48 ust. 1 pkt
+  2-6 (niekaralność, WIARYGODNOŚĆ finansowa, itd. — ⚠️ [NIEWERYFIKOWANE
+  W PEŁNI] szczegółowy KATALOG wymaga pogłębienia PRZY konkretnej
+  sprawie o WYDANIE/odmowę zezwolenia)
+
+TRYB WYDANIA (art. 49): WNIOSEK o zezwolenie NA prowadzenie
+  PIERWSZEGO składu STANOWI JEDNOCZEŚNIE wniosek O nadanie NUMERU
+  akcyzowego. DO wniosku ZAŁĄCZA się PLAN składu PODATKOWEGO, dokumenty
+  POTWIERDZAJĄCE spełnienie WARUNKÓW z art. 48 ORAZ dokumenty
+  wymagane DO przeprowadzenia URZĘDOWEGO sprawdzenia (Z ustawy o
+  KAS). OBOWIĄZEK powiadamiania naczelnika US o ZMIANIE danych z
+  WNIOSKU — W TERMINIE 7 dni OD zaistnienia zmiany.
+
+ZEZWOLENIE WYPROWADZENIA (odrębna instytucja, art. 54 i n.):
+  DOTYCZY sytuacji, GDY podmiot NIEPROWADZĄCY danego SKŁADU chce
+  WYPROWADZAĆ Z NIEGO wyroby POZA procedurą zawieszenia POBORU —
+  wymaga PISEMNEJ zgody PODMIOTU prowadzącego skład ORAZ SPEŁNIENIA
+  warunków ANALOGICZNYCH do art. 48 ust. 1 pkt 2-6
+
+⭐ POWIĄZANE KATEGORIE PODMIOTÓW (Rozdziały 3-5, art. 56-62c):
+  □ PODMIOT pośredniczący (art. 56-56a) — pośredniczy W obrocie
+    wyrobami ZWOLNIONYMI ze względu NA przeznaczenie
+  □ ZAREJESTROWANI odbiorcy (art. 57-59, DAWNIEJ "zarejestrowani
+    handlowcy") — odbierają WYROBY W procedurze ZAWIESZENIA poboru
+    akcyzy BEZ prowadzenia WŁASNEGO składu podatkowego
+  □ NIEZAREJESTROWANI handlowcy (art. 60-62c) — JEDNORAZOWE odbiory
+    wyrobów Z zapłaconą AKCYZĄ w INNYM państwie UE
+```
+
+### 1a.5. Dział III rozdz. 6 — Zabezpieczenie akcyzowe (art. 63–76)
+
+```
+OBOWIĄZEK (art. 63 ust. 1): OKREŚLONE podmioty (m.in. PROWADZĄCY
+  skład PODATKOWY, zarejestrowany ODBIORCA, podmiot Z zezwoleniem
+  WYPROWADZENIA, nabywca WEWNĄTRZWSPÓLNOTOWY z zapłaconą AKCYZĄ,
+  pośredniczący PODMIOT tytoniowy) SĄ obowiązani DO złożenia
+  zabezpieczenia W kwocie POKRYWAJĄCEJ powstałe ALBO mogące POWSTAĆ
+  zobowiązanie PODATKOWE oraz OPŁATĘ paliwową
+
+DWA RODZAJE ZABEZPIECZENIA (art. 65):
+  □ GENERALNE — dla ZAGWARANTOWANIA pokrycia WIELU zobowiązań
+    podatkowych (zasada OGÓLNA DLA większości ZOBOWIĄZANYCH podmiotów)
+  □ RYCZAŁTOWE — UPROSZCZONA, TAŃSZA forma: wysokość USTALANA na
+    poziomie TYLKO 30% wysokości ZABEZPIECZENIA generalnego, DO
+    KTÓREGO byłby OBOWIĄZANY dany PODMIOT — DOSTĘPNE na WNIOSEK, PO
+    spełnieniu TRZECH warunków z art. 64 UST. 1 pkt 1, 3 i 4
+    (⚠️ [NIEWERYFIKOWANE W PEŁNI] dokładna TREŚĆ tych trzech
+    warunków wymaga POGŁĘBIENIA przy konkretnej SPRAWIE, orientacyjnie
+    dotyczą braku ZALEGŁOŚCI/wiarygodności podmiotu)
+
+WYSOKOŚĆ ZABEZPIECZENIA: USTALA się WEDŁUG stawek akcyzy I opłaty
+  paliwowej OBOWIĄZUJĄCYCH w DNIU powstania obowiązku PODATKOWEGO
+  (a GDY tego dnia NIE można USTALIĆ — w DNIU złożenia ZABEZPIECZENIA)
+  — JEŻELI stawki ZMIENIĄ się W trakcie TRWANIA procedury zawieszenia
+  poboru, NACZELNIK koryguje WYSOKOŚĆ zabezpieczenia I POWIADAMIA
+  podmiot
+
+FORMY ZABEZPIECZENIA (art. 67): USTAWA przewiduje PIĘĆ WARIANTÓW
+  złożenia (m.in. DEPOZYT w walucie POLSKIEJ — art. 68, gwarancja
+  BANKOWA/ubezpieczeniowa — poprzez GWARANTA z art. 69, HIPOTEKA na
+  nieruchomości — art. 69a) — WYBÓR formy NALEŻY do PODATNIKA (art. 70)
+
+ODMOWA I KOREKTY: naczelnik MOŻE odmówić PRZYJĘCIA zabezpieczenia
+  (art. 71); przy ZŁOŻENIU zabezpieczenia NIEPOKRYWAJĄCEGO całej
+  kwoty ZOBOWIĄZANIA — odrębne KONSEKWENCJE (art. 72); AKCYZA MOŻE
+  być POKRYTA z zabezpieczenia (art. 73); WYGAŚNIĘCIE zobowiązania
+  podatkowego MA wpływ NA zabezpieczenie (art. 74); ZWRACANE
+  zabezpieczenie NIE JEST oprocentowane — BRAK odsetek OD kwoty
+  zwracanego ZABEZPIECZENIA (art. 75)
+
+ROZPORZĄDZENIE WYKONAWCZE: rozporządzenie MF z 21.12.2018 r. W
+  sprawie ZABEZPIECZEŃ akcyzowych (Dz.U. z 2024 r. poz. 601 —
+  ⚠️ [NIEWERYFIKOWANE BEZPOŚREDNIO] sprawdź AKTUALNOŚĆ tego numeru
+  przy KONKRETNEJ sprawie) — OKREŚLA szczegółowy sposób USTALANIA
+  wysokości zabezpieczenia GENERALNEGO i RYCZAŁTOWEGO, wzory WNIOSKÓW
+
+⭐ PRAKTYCZNE ZNACZENIE: zabezpieczenie AKCYZOWE jest JEDNYM z
+  NAJWIĘKSZYCH kosztów OPERACYJNYCH dla podmiotów PROWADZĄCYCH
+  składy PODATKOWE (zamrożenie ŚRODKÓW lub KOSZT gwarancji BANKOWEJ)
+  — PRZY doradztwie STRATEGICZNYM dla klienta ROZWAŻAJĄCEGO otwarcie
+  składu PODATKOWEGO, WARTO od RAZU zbadać, CZY kwalifikuje się DO
+  zabezpieczenia RYCZAŁTOWEGO (oszczędność 70% kwoty ZABEZPIECZENIA).
+```
+
+### 1a.6. Dział V — Opodatkowanie akcyzą samochodów osobowych (art. 100–113a)
+
+```
+✅ DOMKNIĘTE 2026-08-13 — dotąd W module TYLKO jeden WIERSZ stawki
+w tabeli głównej, BEZ mechaniki proceduralnej.
+
+PRZEDMIOT OPODATKOWANIA (art. 100 ust. 1): CZTERY kategorie ZDARZEŃ:
+  1) IMPORT samochodu osobowego NIEZAREJESTROWANEGO wcześniej NA
+     terytorium kraju (Z WYŁĄCZENIEM przypadków, GDY dług CELNY
+     wygasł NA podstawie art. 124 UKC ust. 1 lit. e-g LUB k)
+  2) NABYCIE wewnątrzwspólnotowe samochodu NIEZAREJESTROWANEGO
+     wcześniej W Polsce
+  3) PIERWSZA sprzedaż NA terytorium kraju samochodu NIEZAREJESTROWANEGO,
+     a) WYPRODUKOWANEGO w Polsce, LUB b) OD którego NIE zapłacono
+     akcyzy Z tytułu pkt 1 ALBO 2
+  ⭐ DODATKOWO (art. 100 ust. 2): DOKONANIE W pojeździe SAMOCHODOWYM
+  innym NIŻ osobowy (np. CIĘŻAROWYM z homologacją), ZAREJESTROWANYM
+  W Polsce, ZMIAN konstrukcyjnych ZMIENIAJĄCYCH rodzaj TEGO pojazdu
+  NA samochód OSOBOWY — ⭐⭐ ISTOTNE dla PRAKTYKI: "przeróbka" pojazdu
+  DOSTAWCZEGO na OSOBOWY (np. usunięcie PRZEGRODY/dodatkowych siedzeń)
+  RODZI OBOWIĄZEK zapłaty AKCYZY, ANALOGICZNIE do PIERWOTNEGO nabycia
+  samochodu OSOBOWEGO
+
+WYŁĄCZENIE Z OBOWIĄZKU (art. 101): OBOWIĄZEK podatkowy Z tytułu WNT
+  albo SPRZEDAŻY niezarejestrowanego samochodu NIE powstaje, JEŻELI
+  samochód ZOSTAŁ dostarczony wewnątrzwspólnotowo LUB wyeksportowany
+  W terminie 30 DNI od dnia nabycia/sprzedaży (FAKT dostawy/eksportu
+  POTWIERDZANY dokumentami z art. 107 ust. 3) — ⭐ ISTOTNE dla
+  POŚREDNIKÓW handlowych W samochodach: krótkie "OKNO" 30-dniowe na
+  DALSZĄ odsprzedaż BEZ zapłaty akcyzy W Polsce
+
+STAWKI (art. 105, potwierdzenie ZGODNE z JUŻ obecną tabelą W module):
+  □ 3,1% podstawy OPODATKOWANIA — silniki O pojemności DO 2000 cm³
+  □ 18,6% podstawy OPODATKOWANIA — silniki O pojemności POWYŻEJ
+    2000 cm³
+  ⭐ PREFERENCJE DLA pojazdów NISKOEMISYJNYCH: SAMOCHODY elektryczne
+  (BEV), wodorowe ORAZ (Z ZASTRZEŻENIAMI czasowymi DO 31.12.2029 r.)
+  hybrydy PLUG-IN (PHEV) O pojemności PONIŻEJ 2000 cm³ — KORZYSTAJĄ
+  z PREFERENCYJNEGO traktowania (⚠️ [NIEWERYFIKOWANE W PEŁNI] dokładny
+  MECHANIZM — czy PEŁNE zwolnienie, CZY obniżona STAWKA — wymaga
+  POTWIERDZENIA wprost NA ISAP przy konkretnej SPRAWIE, gdyż źródła
+  WTÓRNE różnią się W sformułowaniach)
+
+TERMIN I DEKLARACJA: NA opłacenie akcyzy — 30 DNI od SPROWADZENIA
+  pojazdu (LUB innego zdarzenia RODZĄCEGO obowiązek); NA złożenie
+  deklaracji AKC-U/S — 14 DNI od sprowadzenia — ⭐⭐ DWA RÓŻNE terminy
+  W TYM SAMYM postępowaniu, ŁATWO pomylić: krótszy TERMIN deklaracji
+  (14 dni) I dłuższy TERMIN zapłaty (30 dni)
+
+PODSTAWA OPODATKOWANIA PRZY POJAZDACH USZKODZONYCH: PRZY samochodzie
+  uszkodzonym STOSUJE się TE SAME stawki PROCENTOWE, jednak WARTOŚĆ
+  bazowa (CENA transakcyjna Z dokumentu ZAKUPU) jest NIŻSZA — WYMAGA
+  udokumentowania USZKODZEŃ (dokumentacja TECHNICZNA) I wskazania
+  NIŻSZEJ ceny NA umowie — organ MA obowiązek UWZGLĘDNIĆ tę OKOLICZNOŚĆ,
+  jeśli jest ONA odpowiednio WYKAZANA
+
+⭐⭐ ZMIANY OD 1.04.2025 R. (ustawa z 20.02.2025 r.): wprowadzono
+  NOWĄ kategorię ZWOLNIENIA DLA samochodów osobowych REJESTROWANYCH
+  PROFESJONALNIE na terytorium KRAJU w CELU wykonywania jazd TESTOWYCH
+  — ⚠️ [WYMAGA DODATKOWEJ WERYFIKACJI] dokładne WARUNKI tego zwolnienia
+  (adresaci, ZAKRES czasowy, dodatkowe WYTYCZNE) NIE były PRZEDMIOTEM
+  pogłębionej analizy W tej sesji — sprawdź PRZY konkretnej sprawie
+  z branży MOTORYZACYJNEJ/dealerskiej
+
+ZWROT AKCYZY (art. 107): przy DOSTAWIE wewnątrzwspólnotowej lub
+  EKSPORCIE samochodu, OD którego akcyza ZOSTAŁA już ZAPŁACONA w
+  Polsce — PODATNIK może UBIEGAĆ się o ZWROT, potwierdzając transakcję
+  odpowiednimi DOKUMENTAMI (⚠️ [NIEWERYFIKOWANE W PEŁNI] dokładna
+  procedura I termin WNIOSKU o zwrot WYMAGAJĄ pogłębienia PRZY
+  konkretnej sprawie)
+```
+
+### 1a.7. Dział VI — Znaki akcyzy (art. 114–138)
+
+```
+✅ DOMKNIĘTE 2026-08-13 — dotąd W module WYŁĄCZNIE wzmiankowane
+przy okazji KKS ("brak banderol" JAKO najczęstszy zarzut), BEZ
+systematycznego opracowania MECHANIZMU. ⭐⭐⭐ WYSOKI priorytet
+praktyczny — bezpośrednio ZWIĄZANY z Twoimi sprawami KARNOSKARBOWYMI
+dot. nielegalnych wyrobów akcyzowych.
+
+ZAKRES PRZEDMIOTOWY (art. 114): obowiązkowi OZNACZANIA znakami
+  akcyzy PODLEGAJĄ WYŁĄCZNIE wyroby WYMIENIONE w ZAŁĄCZNIKU nr 3 do
+  ustawy (NIE wszystkie wyroby AKCYZOWE automatycznie) — m.in.
+  papierosy, TYTOŃ do palenia, CYGARA i cygaretki (POZ. 10, BEZ
+  względu NA kod CN), napoje ALKOHOLOWE (poz. 2 I n.), PŁYN do
+  papierosów ELEKTRONICZNYCH (poz. 12, bez WZGLĘDU na kod CN)
+
+DWA RODZAJE ZNAKÓW (art. 2 pkt 17):
+  □ PODATKOWE znaki akcyzy (potocznie "BANDEROLE podatkowe") —
+    POTWIERDZENIE wpłaty KWOTY stanowiącej WARTOŚĆ tych znaków —
+    obowiązek OZNACZANIA ciąży NA zarejestrowanym (zgodnie Z art. 16)
+    podmiocie BĘDĄCYM m.in.: podmiotem PROWADZĄCYM skład podatkowy,
+    IMPORTEREM, podmiotem dokonującym NABYCIA wewnątrzwspólnotowego,
+    podmiotem DOKONUJĄCYM produkcji (art. 116 ust. 1)
+  □ LEGALIZACYJNE znaki akcyzy — POTWIERDZENIE PRAWA podmiotu DO
+    przeznaczenia WYROBÓW do SPRZEDAŻY — obowiązek POWSTAJE, GDY
+    poza PROCEDURĄ zawieszenia poboru WYSTĘPUJĄ wyroby NIEOZNACZONE,
+    oznaczone NIEPRAWIDŁOWO lub NIEODPOWIEDNIMI znakami (W SZCZEGÓLNOŚCI
+    uszkodzonymi), a SĄ przeznaczone DO dalszej sprzedaży (art. 116
+    ust. 3) — OBOWIĄZEK naniesienia CIĄŻY na POSIADACZU wyrobów (art.
+    116 ust. 4) — ⭐⭐ ISTOTNE: DOTYCZY RÓWNIEŻ przypadku, GDY podatkowe
+    znaki akcyzy UTRACIŁY ważność (WYGASŁ okres ich OBOWIĄZYWANIA) —
+    wyroby Z NIEWAŻNYMI już banderolami TRAKTOWANE są JAK nieoznaczone
+
+TERMIN NANIESIENIA (art. 117 ust. 1): wyroby AKCYZOWE podlegające
+  OBOWIĄZKOWI oznaczania POWINNY być prawidłowo OZNACZONE przed
+  ZAKOŃCZENIEM procedury zawieszenia POBORU akcyzy (a WIĘC PRZED
+  wprowadzeniem do OBROTU/konsumpcji)
+
+PROCEDURA UZYSKANIA (Rozdz. 3, art. 125-129): WNIOSEK o wydanie
+  banderol PODATKOWYCH LUB o sprzedaż BANDEROL legalizacyjnych,
+  składany DO właściwego naczelnika US W sprawach ZNAKÓW akcyzy —
+  DO wniosku ZAŁĄCZA się DOKUMENTY potwierdzające DANE (chyba że
+  naczelnik JUŻ nimi dysponuje) — legalizacyjne ZNAKI akcyzy SĄ
+  ODPŁATNE, wpłatę NALEŻY dokonać PRZED wydaniem decyzji O sprzedaży
+  (art. 126 ust. 3 pkt 2)
+
+ZWROT/WYMIANA ZNAKÓW W RAZIE STRAT (art. 138): W razie strat ZNAKÓW
+  wskutek UTRATY/uszkodzenia/zniszczenia W procesie OZNACZANIA, W
+  GRANICACH dopuszczalnej NORMY strat — PRZYSŁUGUJE zwrot WPŁACONYCH
+  kwot LUB prawo do OTRZYMANIA nowych ZNAKÓW W zamian
+
+⭐ POWIĄZANIE Z KKS: BRAK oznaczenia znakami AKCYZY lub UŻYCIE znaków
+  PODROBIONYCH/nieprawidłowych to NAJCZĘSTSZY samodzielny zarzut W
+  sprawach KARNOSKARBOWYCH dot. NIELEGALNEGO obrotu wyrobami
+  akcyzowymi (art. 63 § 1-6 KKS I n. — PATRZ istniejąca sekcja
+  "NARUSZENIA — KKS" w TYM module dla PEŁNEJ analizy karnoskarbowej) —
+  TA sekcja DOSTARCZA materialnoprawnego TŁA regulacyjnego (co TO
+  są znaki, KTO je NANOSI, kiedy WYSTĘPUJE obowiązek LEGALIZACYJNY),
+  KTÓRE jest PRZESŁANKĄ prawidłowej KWALIFIKACJI czynu w SPRAWACH
+  karnych.
+```
+
+### 1a.8. Dział VIA — Ewidencje i inne dokumentacje (art. 138a–138ta)
+
+```
+ZASADA OGÓLNA: różne KATEGORIE podmiotów PROWADZĄ różne, WYSPECJALIZOWANE
+  ewidencje W ZALEŻNOŚCI od pełnionej FUNKCJI W łańcuchu obrotu —
+  system NIE przewiduje JEDNEJ uniwersalnej ewidencji, LECZ SZEREG
+  odrębnych OBOWIĄZKÓW ewidencyjnych:
+  □ art. 138a — PODMIOT prowadzący skład PODATKOWY prowadzi
+    ewidencję WYROBÓW akcyzowych; OPERATOR logistyczny PROWADZĄCY
+    skład podatkowy DODATKOWO prowadzi EWIDENCJĘ wyrobów NALEŻĄCYCH
+    do innych PODMIOTÓW
+  □ art. 138e — EWIDENCJA dokumentów HANDLOWYCH towarzyszących
+    PRZEMIESZCZANIU wyrobów (INNYCH niż z załącznika NR 2, objętych
+    stawką INNĄ niż zerowa) — PROWADZONA przez podmiot ZE składu
+    podatkowego I zarejestrowanego WYSYŁAJĄCEGO, zawiera DANE
+    dotyczące PODMIOTÓW i wyrobów, KTÓRYCH dokumenty DOTYCZĄ
+  □ art. 138j — EWIDENCJA wyrobów gazowych, PROWADZONA przez
+    pośredniczące PODMIOTY gazowe (dokonujące SPRZEDAŻY finalnemu
+    nabywcy ORAZ inne kategorie Z art. 138j ust. 1)
+
+TERMIN PRZECHOWYWANIA (art. 138q): ewidencje I inne dokumentacje
+  z art. 138a-138o POWINNY być przechowywane DO celów kontroli PRZEZ
+  OKRES 5 LAT, licząc OD końca roku KALENDARZOWEGO, w KTÓRYM zostały
+  SPORZĄDZONE — ⭐ ANALOGICZNY okres DO standardowego przedawnienia
+  zobowiązań PODATKOWYCH w Ordynacji podatkowej, WARTO PORÓWNAĆ te
+  dwa reżimy PRZY konkretnej sprawie kontrolnej
+
+⭐ ZNACZENIE PRAKTYCZNE: BRAK prowadzenia WYMAGANEJ ewidencji LUB jej
+  NIEKOMPLETNOŚĆ jest CZĘSTYM, samodzielnym PRZEDMIOTEM ustaleń
+  kontrolnych PRZY kontrolach celno-skarbowych składów PODATKOWYCH —
+  WARTO przy DORADZTWIE prewencyjnym dla KLIENTA prowadzącego skład
+  podatkowy ZWERYFIKOWAĆ, KTÓRA/e z powyższych EWIDENCJI (138a, 138e,
+  138j I inne Z zakresu 138a-138o) GO DOTYCZĄ, W ZALEŻNOŚCI od
+  pełnionej FUNKCJI (podmiot PROWADZĄCY skład, OPERATOR logistyczny,
+  zarejestrowany WYSYŁAJĄCY, pośredniczący podmiot GAZOWY itd.).
+```
+
+### 1a.9. Dział VIb — Przepisy o karach pieniężnych (art. 138u–138w)
+
+```
+✅ DOMKNIĘTE 2026-08-13 — dotąd CAŁKOWICIE nieobecne w module,
+mimo iż TO ODRĘBNY od KKS, ADMINISTRACYJNY mechanizm SANKCYJNY
+(kary pieniężne NAKŁADANE decyzją ADMINISTRACYJNĄ, nie WYROKIEM
+sądu karnego).
+
+PRZYKŁADOWA KONSTRUKCJA (art. 138u) — kara ZA naruszenia PROCEDURALNE
+  związane z SYSTEMEM (EMCS): W przypadku GDY podmiot ODBIERAJĄCY,
+  będący UŻYTKOWNIKIEM Systemu, NIE SPORZĄDZI projektu RAPORTU
+  odbioru ALBO nie PRZEDSTAWI naczelnikowi DOKUMENTU zastępującego
+  raport ODBIORU w terminie Z art. 46i ust. 2 — NAKŁADA się KARĘ
+  pieniężną w WYSOKOŚCI 5000 zł.
+
+MECHANIZM ŁAGODZĄCY: naczelnik ODSTĘPUJE od NAŁOŻENIA kary I
+  POPRZESTAJE na pouczeniu, JEŻELI waga NARUSZENIA jest ZNIKOMA A
+  podmiot ZAPRZESTAŁ naruszania PRAWA — ⭐ analogiczny MECHANIZM do
+  "znikomej SZKODLIWOŚCI" znanej Z prawa karnego/wykroczeń, ale W
+  RAMACH postępowania ADMINISTRACYJNEGO
+
+TRYB: kara NAKŁADANA W drodze DECYZJI przez WŁAŚCIWEGO naczelnika US
+  (LUB naczelnika urzędu CELNO-SKARBOWEGO, w ZALEŻNOŚCI od PODSTAWY —
+  art. 138w DOT. importu przewiduje WŁAŚCIWOŚĆ naczelnika CELNO-
+  SKARBOWEGO)
+
+TERMIN UISZCZENIA: 7 DNI od dnia, W KTÓRYM decyzja O nałożeniu STAŁA
+  SIĘ ostateczna
+
+PRZEDAWNIENIE: kara NIE MOŻE być NAŁOŻONA, jeżeli OD dnia
+  NIEDOPEŁNIENIA obowiązku ZAGROŻONEGO tą karą UPŁYNĘŁO 5 LAT — ⭐
+  ANALOGICZNY okres DO przechowywania ewidencji Z art. 138q — SPÓJNA
+  konstrukcja 5-LETNICH terminów W tej CZĘŚCI ustawy
+
+KARA ZA IMPORT PRZY WYGAŚNIĘTYM DŁUGU CELNYM (art. 138w): GDY
+  obowiązek PODATKOWY z tytułu IMPORTU wyrobów akcyzowych NIE powstał
+  Z powodu WYGAŚNIĘCIA długu CELNEGO (na podstawie art. 124 UKC ust.
+  1 lit. e) — NA podmiot który DOKONAŁ importu NAKŁADA się karę
+  PIENIĘŻNĄ w WYSOKOŚCI długu CELNEGO, jaki BY powstał I nie WYGASŁ
+  — ⭐⭐ MECHANIZM zapobiegający OBCHODZENIU obowiązku podatkowego
+  poprzez WYKORZYSTANIE technicznych PRZESŁANEK wygaśnięcia długu
+  celnego (analogicznych DO omówionych już W istniejącej sekcji
+  modułu "TAKSONOMIA TECHNIK obchodzenia AKCYZY")
+
+⭐ RELACJA DO KKS: KARY pieniężne Z Działu VIb SĄ ODRĘBNYM reżimem
+  OD odpowiedzialności KARNOSKARBOWEJ (KKS) — TEORETYCZNIE MOŻLIWA
+  jest KUMULACJA obu (kara PIENIĘŻNA administracyjna ORAZ grzywna
+  za PRZESTĘPSTWO/wykroczenie skarbowe ZA TEN SAM czyn), CHOĆ
+  zasada NE BIS IN IDEM I orzecznictwo TK/ETPCz W tym ZAKRESIE
+  bywają PRZEDMIOTEM sporów — ⚠️ [NIEWERYFIKOWANE, WYMAGA POGŁĘBIENIA
+  PRZY KONKRETNEJ SPRAWIE] jeśli KLIENT stoi wobec RÓWNOCZESNEGO
+  postępowania administracyjnego (kara PIENIĘŻNA) i karnoskarbowego
+  ZA to samo ZDARZENIE, rozważ ARGUMENT podwójnego karania — WYMAGA
+  odrębnej, DEDYKOWANEJ analizy orzeczniczej PRZED powołaniem w
+  PIŚMIE procesowym.
+```
+
+---
+
 ## 2. CŁO / UCC — WYDZIELONE
 
 → `mod-UCC-clo-taryfa-celna.md`: Nomenklatura Scalona (CN/TARIC), Wiążąca
@@ -875,22 +1372,122 @@ Przed końcową odpowiedzią sprawdź:
 
 ---
 
-## ANEKS — WIA: WIĄŻĄCA INFORMACJA AKCYZOWA
+## ANEKS — WIA: WIĄŻĄCA INFORMACJA AKCYZOWA (DZIAŁ IA, art. 7d–7k)
+
+✅ ROZBUDOWANE 2026-08-13 (dalsza część audytu pokrycia per dział) —
+ISTOTNA KOREKTA: poprzednia wersja tej sekcji wskazywała Dyrektora
+Izby Administracji Skarbowej we Wrocławiu jako organ właściwy — TO
+JEST NIEAKTUALNE od 1 lipca 2023 r.
 
 ```
-WIA = akcyzowy odpowiednik WIS (Wiążącej Informacji Stawkowej)
+DEFINICJA I ZAKRES (art. 7d ust. 1): WIA JEST decyzją WYDAWANĄ na
+  POTRZEBY opodatkowania WYROBU akcyzowego ALBO samochodu OSOBOWEGO
+  akcyzą, ORGANIZACJI obrotu wyrobami AKCYZOWYMI, lub OZNACZANIA
+  znakami AKCYZY tych wyrobów — OKREŚLA:
+  1) KLASYFIKACJĘ wyrobu/samochodu W układzie ODPOWIADAJĄCYM
+     Nomenklaturze SCALONEJ (CN), ALBO
+  2) RODZAJ wyrobu AKCYZOWEGO przez OPIS w stopniu SZCZEGÓŁOWOŚCI
+     wystarczającym DO określenia opodatkowania — TA druga OPCJA
+     wydawana JEST, GDY sam kod CN NIE wystarcza DO ustalenia
+     opodatkowania/organizacji obrotu/znaków AKCYZY
 
-Cel: Ustalenie klasyfikacji wyrobu akcyzowego lub kwalifikacji jako wyrób akcyzowy
-     PRZED dokonaniem czynności podlegającej akcyzie
+⭐⭐⭐ ORGAN WŁAŚCIWY — ZMIANA OD 1.07.2023 R. (kluczowa KOREKTA tej
+  sesji): OD 1 lipca 2023 r. WIA WYDAJE Dyrektor Krajowej INFORMACJI
+  Skarbowej (KIS, siedziba W Bielsku-Białej) — NIE (jak DOTĄD BŁĘDNIE
+  wskazywano W tej sekcji ORAZ jak WCIĄŻ podają liczne, NIEAKTUALIZOWANE
+  źródła internetowe — w TYM strony kilku IZB administracji
+  skarbowej) Dyrektor IZBY Administracji Skarbowej WE Wrocławiu —
+  ⭐ TEN organ BYŁ właściwy TYLKO do 30.06.2023 r. WNIOSKI składa się
+  DO Dyrektora KIS ZA pośrednictwem PUESC (od 1.01.2024 r. WYŁĄCZNIE
+  elektronicznie — poprzedni PAPIEROWY wzór wniosku Z rozporządzenia
+  MF z 12.12.2014 r. STRACIŁ moc)
+  ⚠️ [NIEWERYFIKOWANE BEZPOŚREDNIO W ISAP] potwierdzone WPROST na
+  kis.gov.pl (Rząd 1 — oficjalna STRONA KIS) — WYSOKI stopień
+  pewności mimo braku BEZPOŚREDNIEGO dostępu do ISAP w tej SESJI.
 
-Wniosek: Do Dyrektora Izby Administracji Skarbowej właściwego dla wnioskodawcy
-Termin na wydanie: 3 miesiące od złożenia wniosku (weryfikuj w ustawie akcyzowej)
-Wiążąca: dla organów podatkowych przez 5 lat od dnia wydania
-         (chyba że zmianie uległa podstawa klasyfikacji — weryfikuj aktualne przepisy)
+WNIOSEK: DOTYCZY WYŁĄCZNIE jednego WYROBU akcyzowego ALBO jednego
+  samochodu OSOBOWEGO (NIE można łączyć WIELU wyrobów W jednym
+  wniosku) — NIE PODLEGA opłacie (⭐ W przeciwieństwie DO niektórych
+  innych wiążących INFORMACJI — np. WIS ma OPŁATĘ w OKREŚLONYCH
+  przypadkach) — JEŚLI działa PEŁNOMOCNIK, wymagana OPŁATA skarbowa
+  OD pełnomocnictwa w wysokości 17 ZŁ (Z WYJĄTKIEM pełnomocnictwa
+  OGÓLNEGO)
 
-Zaskarżenie WIA:
-  → Skarga do WSA w 30 dniach od doręczenia
+TERMIN NA WYDANIE: 3 MIESIĄCE od dnia ZŁOŻENIA wniosku — ⭐ ANALOGICZNY
+  do terminu WIS w VAT (patrz sekcja "WIS" wyżej W module VAT) — DO
+  tego terminu STOSUJE się zasady ANALOGICZNE jak PRZY interpretacjach
+  indywidualnych (m.in. MOŻLIWOŚĆ przedłużenia W sprawach
+  SKOMPLIKOWANYCH)
 
-⚠️ Weryfikuj aktualne przepisy o WIA w ustawie akcyzowej (Dz.U. 2025 poz. 126) w ISAP.
-web_search: "WIA wiążąca informacja akcyzowa wniosek termin 2025 2026"
+OKRES WAŻNOŚCI: WIA WYDAWANA jest NA okres 5 LAT i JEST ważna OD dnia
+  NASTĘPUJĄCEGO po dniu, W KTÓRYM stała się OSTATECZNA (art. 7d ust. 4)
+  — ⭐ IDENTYCZNY okres jak WIS w VAT
+
+MOC WIĄŻĄCA (art. 7d ust. 3): WIA WIĄŻE organy PODATKOWE ORAZ podmiot,
+  NA rzecz KTÓREGO została WYDANA, W ODNIESIENIU do wyrobów/samochodów,
+  WOBEC których czynności PODLEGAJĄCE opodatkowaniu akcyzą ZOSTAŁY
+  dokonane W okresie WAŻNOŚCI WIA
+
+⭐⭐ WYGAŚNIĘCIE Z MOCY PRAWA: WIA wygasa Z mocy PRAWA, jeżeli ZMIENIĄ
+  się PRZEPISY prawa PODATKOWEGO, do KTÓRYCH odnosi SIĘ decyzja, I
+  jeżeli W związku Z tą zmianą BĘDZIE ona NIEZGODNA z tymi PRZEPISAMI
+  — Z DNIEM wejścia W życie NOWYCH przepisów, Z KTÓRYMI WIA STAŁA się
+  niezgodna — ⭐⭐⭐ MECHANIZM ANALOGICZNY do art. 42h ust. 1 VAT (WIS)
+  — WYGAŚNIĘCIE BEZ formalnego zawiadomienia, wymaga OD posiadacza
+  WIA SAMODZIELNEGO monitorowania ZMIAN przepisów w SWOJEJ branży —
+  ⭐ WZORZEC systemowy: obie WIĄŻĄCE informacje (WIS w VAT I WIA w
+  akcyzie) MAJĄ TĘ SAMĄ, ryzykowną DLA podatnika konstrukcję
+  automatycznego WYGAŚNIĘCIA
+
+PRZESŁANKI ODMOWY WYDANIA (art. 7i ust. 1 pkt 3): organ ODMÓWI
+  wydania WIA, JEŻELI wniosek DOTYCZY informacji O rodzaju wyrobu,
+  DLA którego wnioskodawca POSIADA już interpretację INDYWIDUALNĄ w
+  TYM zakresie — ⭐ RELACJA jednokierunkowa: KOLEJNOŚĆ "najpierw WIA,
+  potem interpretacja INDYWIDUALNA" jest w PEŁNI dopuszczalna, ale
+  ODWROTNA kolejność ("najpierw interpretacja, POTEM WIA dla TEGO
+  SAMEGO wyrobu") SKUTKUJE odmową — ⭐⭐ ISTOTNA wskazówka STRATEGICZNA
+  przy DORADZTWIE: jeśli klient POTRZEBUJE OBU instrumentów, WNIOSEK
+  o WIA powinien BYĆ złożony JAKO pierwszy
+
+FAŁSZYWE OŚWIADCZENIE: wnioskodawca SKŁADA oświadczenie, że W dniu
+  złożenia wniosku NIE toczy się postępowanie PODATKOWE/kontrola
+  podatkowa/kontrola CELNO-SKARBOWA W zakresie PRZEDMIOTOWYM wniosku,
+  ORAZ że sprawa NIE została ROZSTRZYGNIĘTA co DO istoty W decyzji/
+  postanowieniu — OŚWIADCZENIE zawiera KLAUZULĘ "Jestem świadomy
+  odpowiedzialności KARNEJ za złożenie FAŁSZYWEGO oświadczenia" —
+  ⭐⭐⭐ W RAZIE złożenia fałszywego OŚWIADCZENIA — przepis O mocy
+  wiążącej WIA (art. 7d ust. 3) NIE STOSUJE się — decyzja TRACI
+  praktyczną WARTOŚĆ ochronną, mimo FORMALNEGO pozostawania W obrocie
+
+ZASKARŻENIE: SKARGA do WSA W terminie 30 DNI od doręczenia (ZGODNIE
+  z ogólnymi zasadami zaskarżania DECYZJI administracyjnych) — ⚠️
+  [NIEWERYFIKOWANE W PEŁNI] przy KONKRETNEJ sprawie potwierdź, czy
+  ZMIANA organu wydającego (Z IAS Wrocław NA Dyrektora KIS) wpłynęła
+  RÓWNIEŻ na organ ODWOŁAWCZY (WCZEŚNIEJ: Dyrektor IAS w WARSZAWIE) —
+  TA sesja NIE zawierała pogłębionej WERYFIKACJI tego konkretnego
+  aspektu
+
+PUBLIKACJA: decyzje WIA (WRAZ z decyzjami o ZMIANIE/uchyleniu/odmowie
+  wydania, informacjami O okresie ważności) SĄ publikowane W
+  ogólnodostępnym SYSTEMIE Informacji Celno-Skarbowej EUREKA — PO
+  usunięciu danych IDENTYFIKUJĄCYCH wnioskodawcę I danych OBJĘTYCH
+  tajemnicą przedsiębiorstwa (art. 7k) — ⭐ PRAKTYCZNE narzędzie:
+  PRZED złożeniem WŁASNEGO wniosku o WIA, WARTO przeszukać EUREKA
+  pod kątem ANALOGICZNYCH wyrobów, gdzie decyzja JUŻ zapadła —
+  ANALOGICZNIE do bazy weryfikacji STAWEK VAT (poziom C W module
+  rdzenia VAT)
+
+⭐ RELACJA WIA — WIS: obie INSTYTUCJE (wiążąca informacja AKCYZOWA i
+  wiążąca informacja STAWKOWA w VAT) mają WSPÓLNĄ architekturę
+  konstrukcyjną (5 LAT ważności, wygaśnięcie Z mocy prawa PRZY
+  zmianie przepisów, PUBLIKACJA w systemie WYSZUKIWAWCZYM), ale SĄ
+  wydawane PRZEZ RÓŻNE organy i DOTYCZĄ różnych PODATKÓW — NIE MYLIĆ
+  przy doradztwie DLA klienta wprowadzającego NOWY produkt na RYNEK,
+  który MOŻE wymagać OBU instrumentów RÓWNOLEGLE (np. wyrób akcyzowy
+  będący JEDNOCZEŚNIE przedmiotem sporu O stawkę VAT).
+
+⚠️ Weryfikuj aktualne przepisy o WIA w ustawie akcyzowej (Dz.U. 2026
+poz. 412) w ISAP przed każdym zastosowaniem — instytucja podlegała
+w ostatnich latach istotnym zmianom proceduralnym (zmiana organu
+2023, elektronizacja wniosku 2024).
 ```

@@ -4,313 +4,221 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
-## AUDYT-2026-08-12zf — ITERACJA IV: przebudowa sekcji STAWKI VAT z tabeli na BAZĘ WERYFIKACJI + skan homoglifów w DR-06 + naprawa kolizji numeracji wpisów dziennika
+## AUDYT-2026-08-12h — DR-06: iteracja VII pokrycia VAT — domknięcie osi transgranicznej (Dział VII) i POZIOMU D bazy weryfikacji stawek; trzy nowe moduły; nowa flaga F-19
 
-**Kontekst i decyzja projektowa użytkownika:** po trzech iteracjach
-uzupełnień sekcja 3 modułu VAT („STAWKI VAT — ORIENTACYJNE") pozostawała
-5-wierszową tabelą i była w F-17 wskazana jako największa pojedyncza
-słabość modułu. Użytkownik przesądził kierunek naprawy: **„zamiast
-tworzenia jakiejś bazy wskaż źródło, gdzie należy weryfikować stawki VAT
-dla poszczególnych towarów i wskaż to jako bazę weryfikacyjną"**.
+> ⚠️ UWAGA PORZĄDKOWA: kod „08-12f" był już zajęty przez wpis dotyczący
+> rynku kapitałowego z równoległej sesji tego samego dnia. Wpis dot.
+> iteracji VI nosi kod 08-12f (DR-06 / VAT), niniejszy — 08-12h.
+> Przy kolejnym audycie zweryfikować, czy kolizja kodów nie wymaga
+> uporządkowania numeracji dziennej.
 
-**Uzasadnienie merytoryczne — udokumentowane w samej sekcji.**
-Weryfikacja wykazała, że rozporządzenie MF z 9.12.2023 r. w sprawie
-obniżonych stawek VAT (Dz.U. 2023 poz. 2670, podstawa: art. 146ej ust. 1
-ustawy) było zmieniane co najmniej DZIEWIĘĆ RAZY (Dz.U. 2024 poz. 387,
-1381, 1399, 1944; 2025 poz. 1253; 2026 poz. 417, 573, 642, 699), a sam
-§ 11a (paliwa) przedłużano kolejno do 15.05.2026 → 31.05.2026 →
-15.06.2026 → 30.06.2026, korygując przy tym zakres kodów CN
-(2710 19 43 → 2710 19 42 i 2710 19 44). Wniosek wpisany do modułu:
-**tabela stawek w pliku statycznym dezaktualizuje się w ciągu tygodni i
-tworzy fałszywe poczucie pewności — groźniejsze niż brak informacji, bo
-zniechęca do sprawdzenia.**
+**Tryb:** kontynuacja audytu pokrycia (ZASADA 11 — skill dziedzinowy).
+Wywołanie: „kontynuuj pokrywanie luk i wskazuj co i w jakim stopniu
+jest pokryte".
 
-**Nowa sekcja 3 — struktura:**
+**Zamknięte pozycje P2 (trzy nowe moduły, dr-06: 34 → 37):**
 
-- **3.1 BAZA WERYFIKACYJNA — cztery poziomy w ustalonej kolejności.**
-  POZIOM A (tekst prawa): ISAP — art. 41, art. 146x (epizodyczne),
-  zał. nr 3 (8%), zał. nr 10 (5%), art. 83 + rozporządzenie
-  Dz.U. 2023/2670 ze strukturą rozdziałów. POZIOM B (klasyfikacja):
-  **ISZTAR4** (`ext-isztar4.mf.gov.pl/taryfa_celna/Browser`) dla kodów CN
-  — z wyeksponowaniem funkcji **DATY SYMULACJI**, pozwalającej odtworzyć
-  stan prawny na datę czynności (jedyne łatwo dostępne narzędzie do tego
-  celu w sporze) oraz zawartości pomocniczej (noty wyjaśniające CN,
-  rozporządzenia klasyfikacyjne KE, wyroki TSUE, WIT); PKWiU 2015 dla
-  usług do 31.12.2027. POZIOM C (praktyka): EUREKA. POZIOM D (ochrona):
-  WIS.
-- **3.2 Procedura sześciokrokowa** z obowiązkową kolejnością, w tym KROK
-  2 (ustal datę czynności → wpisz jako datę symulacji w ISZTAR4) i KROK 5
-  (przepisy epizodyczne — wskazany jako miejsce, gdzie stawka najczęściej
-  „ucieka" analizie) oraz wymóg zapisania ŚLADU WERYFIKACJI.
-- **3.3 Orientacja strukturalna** — mapa „która stawka w którym
-  przepisie", **świadomie BEZ ŻADNEJ WARTOŚCI PROCENTOWEJ**.
-- Zakaz bezwzględny na wejściu: moduł nie podaje stawki dla konkretnego
-  towaru/usługi; odczytanie stawki z pliku = naruszenie PRAWO-HARDGATE.
+1. `modules/mod-VAT-import-towarow-i-zwolnienia-importowe.md` (NOWY)
+   — domyka **NAJSŁABSZY DZIAŁ CAŁEJ USTAWY**. Dział VII miał pokrycie
+   ~5% (jedna wzmianka o art. 33a), Dział VIII rozdz. 3 — 0%.
+   Zakres: art. 26a (miejsce importu; podstawa odprawy fiskalnej
+   w innym państwie UE → WNT w Polsce), art. 33 (⛔ termin **10 DNI**
+   w modelu SAD/PZC, nie 25. dzień miesiąca), art. 33a w pełnym ujęciu
+   (warunki łączne; ⛔ skutek uboczny — obowiązek rozliczeń
+   MIESIĘCZNYCH, realny konflikt z art. 21 / art. 99 ust. 2-3;
+   mechanizm trzystopniowy: okno korekty **4 miesiące** → utrata prawa
+   + odsetki → decyzja o pozbawieniu prawa na **36 miesięcy**,
+   ⭐ FAKULTATYWNA — punkt zaczepienia obrony), art. 33b, art. 34-40;
+   Dział VIII rozdz. 3 (art. 45-82a) w ujęciu NAWIGACYJNYM.
+   ⛔ **DWA ALERTY WYKRYTE PRZY WERYFIKACJI:**
+   (a) art. 51 / próg 22 EUR — zwolnienie dla małych przesyłek zniesione
+   na poziomie unijnym z dniem **1.07.2021** (usunięcie tytułu IV
+   dyrektywy 2009/132/WE, pakiet VAT e-commerce). Powszechnie dostępne
+   opracowania opisujące ten próg pochodzą sprzed reformy — moduł
+   zawiera wyraźny zakaz powoływania progu bez sprawdzenia w ISAP.
+   (b) art. 52 (przesyłki 45 EUR między osobami fizycznymi) — TSUE
+   zakwestionował polski warunek „odbiorcy PRZEBYWAJĄCEGO na terytorium
+   kraju". ⛔ SYGNATURA NIEUSTALONA W SESJI — odnotowana jako wymagająca
+   weryfikacji, NIE zgadywana.
 
-Quality gate modułu i sekcja CORE/Zakres zsynchronizowane z nową
-procedurą. W `mod-VAT-klasyfikacja-produktow-baza-niejednoznacznosci.md`
-dodano odesłanie kanoniczne z zakazem duplikowania procedury.
+2. `modules/mod-VAT-WIS-tryb-i-ochrona.md` (NOWY) — art. 42a-42i.
+   ⭐⭐⭐ Znaczenie systemowe wykraczające poza sam temat: sekcja 3
+   modułu macierzystego (BAZA WERYFIKACJI STAWEK, iteracja IV) opiera
+   się na czterech poziomach, gdzie POZIOM D to WIS — dotąd opisany
+   jednym akapitem. Baza weryfikacji stawek kończyła się więc na
+   najważniejszym narzędziu bez instrukcji jego użycia. Moduł domyka
+   ten poziom: krąg wnioskodawców (⭐ w tym ZAMAWIAJĄCY z PZP — wejście
+   do DR-07), dwa cele wniosku (art. 42b ust. 4), zakres ochrony
+   (art. 42c — ⛔ warunek faktycznego ZASTOSOWANIA stawki), ważność
+   **5 lat** (art. 42ha ust. 1), ⛔⛔ WYGAŚNIĘCIE Z MOCY PRAWA bez
+   zawiadomienia przy zmianie przepisów (art. 42h ust. 1).
+   ⭐ WNIOSEK OPERACYJNY DLA CAŁEGO SYSTEMU: każda WIS w aktach klienta
+   wymaga ponownego sprawdzenia po KAŻDEJ zmianie stawek/załączników,
+   w tym po zmianach rozp. Dz.U. 2023 poz. 2670 i przepisów
+   epizodycznych — sprzężenie wpisane do obu modułów.
 
-**Ustalenie uboczne 1 — HOMOGLIFY CYRYLICKIE (problem NAWRACAJĄCY).**
-Przy kontroli własnej wstawki wykryto w niej znak `п` (U+043F) zamiast
-`p`. Skan wszystkich plików `.md` w DR-06 na 14 najczęstszych homoglifów
-cyrylickich wykazał **2 wystąpienia**, w tym **1 ISTNIEJĄCE WCZEŚNIEJ** w
-`mod-ustawa-akcyzowa-i-clo-UCC.md`. Oba naprawione. ⚠️ **To jest
-NAWRÓT:** wpis AUDYT-2026-08-12s z wcześniejszej sesji tego samego dnia
-odnotowuje „naprawiony NIEZWIĄZANY, przedistniejący artefakt cyrylicki" w
-module definicji/interpretacji podatkowych. Problem pojawia się zatem
-wielokrotnie i jest wykrywany przypadkiem, nie systemowo.
-**Ryzyko:** homoglif jest niewidoczny dla czytelnika, ale ŁAMIE
-WYSZUKIWANIE — `grep` i wyszukiwanie pełnotekstowe nie znajdą słowa
-zawierającego taki znak. Dotyczy to również testów pokrycia stosowanych w
-audytach: test obecności frazy może dać FAŁSZYWY NEGATYW, czyli zgłosić
-lukę tam, gdzie treść istnieje.
-**Rekomendacja systemowa:** dodać skan homoglifów jako test regresyjny
-(`scripts/run_regression_suite.py`) dla WSZYSTKICH skilli. NIE wykonane w
-tej sesji — wymaga decyzji co do zakresu znaków i polityki (blokada vs
-ostrzeżenie).
+3. `modules/mod-VAT-kursy-walut-rachunek-VAT-tax-free.md` (NOWY) —
+   art. 31a (⭐ test decyzyjny: faktura PRZED czy PO powstaniu
+   obowiązku podatkowego; opcja EBC z przeliczeniem przez euro;
+   opcja spójności z PIT/CIT z **12-miesięcznym** związaniem),
+   art. 31b (korekty po SLIM VAT 3: kurs pierwotny vs jeden kurs
+   zbiorczy przy opuście; wyłączenie dla wybierających art. 31a
+   ust. 2a), art. 108b (uwolnienie środków z rachunku VAT: **60 dni**,
+   ⚠️ ZGODA = POSTANOWIENIE → ZAŻALENIE, ODMOWA = DECYZJA → ODWOŁANIE,
+   rachunek techniczny ust. 10-15 — ⭐ krok pomijany przy likwidacji,
+   dopięty do checklisty likwidacyjnej), art. 126-130 TAX FREE
+   (próg **200 zł**, ⛔ wyłączenie sprzedawców zwolnionych z art. 113
+   — próg 240 000 zł od 1.01.2026, kasa ONLINE, PUESC, okno korekty
+   **10 miesięcy**).
 
-**UZUPEŁNIENIE do ustaleń ubocznych (kontrola końcowa tej sesji):** skan
-homoglifów rozszerzono na `audyt-systemu-v4`. W `AUDIT-JOURNAL.md`
-znaleziono i naprawiono KOLEJNY przedistniejący artefakt: „момencie"
-(cyrylickie „м" i „о") zamiast „momencie", we wcześniejszym wpisie z tej
-samej daty. Po naprawie w obu skillach pozostaje **6 znaków cyrylickich —
-wszystkie CELOWE**, w cytatach opisujących same artefakty (`п` w tym
-wpisie oraz „т"/„е" w opisie artefaktu „nabyте"). To pokazuje ograniczenie
-automatycznego skanu: prosty test „zero cyrylicy" dałby fałszywy alarm na
-dzienniku audytowym, który z natury CYTUJE znalezione artefakty.
-Projektowany test regresyjny musi dopuszczać wyjątki dla plików
-dziennikowych albo działać w trybie ostrzeżenia, nie blokady.
-Łączny bilans skanu w tej sesji: **4 realne artefakty naprawione**
-(2 w DR-06, w tym 1 przedistniejący w module akcyzowym; 1 w module
-klasyfikacji VAT z tej sesji; 1 przedistniejący w AUDIT-JOURNAL).
+**⚠️ ROZRÓŻNIENIE UTRWALONE W MODULE (ryzyko pomyłki systemowej):**
+w rodzinie mod-VAT-* występują teraz DWA terminy 60-dniowe o zupełnie
+różnym znaczeniu — art. 108b ust. 3 (rozpatrzenie wniosku o uwolnienie
+środków) oraz historyczny, BŁĘDNY termin zwrotu różnicy podatku
+(poprawnie **40 dni**, art. 87 ust. 2 zd. 1 — błąd usunięty w rundzie
+napraw 2026-08-12). Moduł zawiera wyraźne ostrzeżenie, by ich nie mylić.
 
-**Ustalenie uboczne 2 — KOLIZJA NUMERACJI WPISÓW DZIENNIKA.** Wpisy z tej
-sesji zapisano pierwotnie jako `AUDYT-2026-08-12` i `AUDYT-2026-08-12b`,
-podczas gdy dziennik zawierał już PEŁNĄ serię `12a`–`12zc` z wcześniejszej
-sesji tego samego dnia. Kod `12b` był zatem zdublowany. Wpisy
-przenumerowano na wolne: **`12zd`** (audyt + iteracje I-II) i **`12ze`**
-(iteracja III), a odsyłacze wewnętrzne poprawiono. Niniejszy wpis: `12zf`.
-**Wniosek:** przed dodaniem wpisu należy sprawdzić `grep "^## AUDYT-RRRR-MM-DD"`
-w całym pliku, a nie tylko początek dziennika — wpisy z tego samego dnia
-mogą być rozproszone (najnowsze na górze, starsza seria w dalszej części).
+**Sprzężenie z ZAZALENIE-ADRESAT-GATE (flaga F-13):** art. 108b to
+podręcznikowy przypadek dwóch różnych form rozstrzygnięcia w jednym
+przepisie (postanowienie vs decyzja). Moduł NIE rozstrzyga adresata
+z własnej treści, tylko kieruje do `shared/ZAZALENIE-ADRESAT-GATE.md` —
+zgodnie z intencją bramki opisaną przy F-13.
 
-**Flaga F-17 — priorytet OBNIŻONY ze średniego na NISKI:** wszystkie
-pozycje priorytetowe iteracji I-IV domknięte, łącznie z sekcją 3.
-Pozostałe pozycje dotyczą instytucji o wyraźnie niższej częstości spraw.
-Jako pierwszą pozycję iteracji V wskazano art. 42a-42i (pełny tryb WIS) —
-domyka POZIOM D nowej bazy weryfikacyjnej. F-18 bez zmian.
+**Pokrycie po iteracji VII (~85% globalnie, wzrost z ~72%):**
+IX ~90% | V ~85% | II ~85% | IV ~85% | VI ~85% (było 70%) |
+**VIII ~85%** (było 45%) | X ~80% | XI ~80% | III ~75% | XII ~75% |
+**VII ~70%** (było 5%) | I ~20% | XIII selektywnie.
 
-**Pliki zmienione w tej rundzie:**
+**Aktualizacje rejestrów:**
+- `dr-06/SKILL.md` — licznik 34 → 37, trzy moduły w liście blokowej,
+  nota iteracji VII z listą pozostających luk.
+- `dr-06/MAPA-AKTOW.md` — trzy nowe wiersze aktów/modułów + rozszerzona
+  lista luk.
+- `audyt-systemu-v4/references/WARN-OTWARTE.md` — F-17 zaktualizowana,
+  **F-19 OTWARTA** (dług weryfikacyjny orzeczeń).
 
-| Plik | Zmiana |
-|---|---|
-| `dr-06.../modules/mod-VAT-podatek-od-towarow-i-uslug.md` | ZMIENIONY — sekcja 3 przebudowana (baza weryfikacji), quality gate, CORE/Zakres |
-| `dr-06.../modules/mod-VAT-klasyfikacja-produktow-baza-niejednoznacznosci.md` | ZMIENIONY — odesłanie kanoniczne do sekcji 3 + naprawa homoglifu |
-| `dr-06.../modules/mod-ustawa-akcyzowa-i-clo-UCC.md` | ZMIENIONY — naprawa wcześniej istniejącego homoglifu cyrylickiego |
-| `dr-06.../MAPA-AKTOW.md` | ZMIENIONY — wpis o iteracji IV i skanie homoglifów |
-| `audyt-systemu-v4/references/AUDIT-JOURNAL.md` | ZMIENIONY — niniejszy wpis + przenumerowanie wpisów 12zd/12ze |
-| `audyt-systemu-v4/references/WARN-OTWARTE.md` | ZMIENIONY — F-17, priorytet obniżony |
+**Status flagi F-17:** OTWARTA, priorytet niski. Pozostałe luki to
+instytucje niszowe (złoto inwestycyjne, taksówki, CESOP, VAT-REF)
+albo warstwa techniczno-porządkowa (słownik art. 2, właściwość art. 3,
+terminy przechowywania art. 112-112aa).
 
----
+**⛔ NOWA FLAGA F-19 — DŁUG WERYFIKACYJNY ORZECZEŃ:** w modułach
+iteracji VI-VII wskazano kilka orzeczeń/interpretacji bez ustalonej
+albo bez zweryfikowanej u źródła sygnatury (TSUE ws. art. 52; TSUE
+ws. wniosku syndyka o środki z rachunku VAT; linia NSA ws. sankcji
+36-miesięcznej; WSA I SA/Łd 190/20 i 417/20; interpretacje KIS podane
+za źródłem wtórnym). Każda pozycja jest w module opatrzona zakazem
+powoływania bez weryfikacji — ryzyko wprowadzenia błędnej sygnatury
+do pisma jest zablokowane bramką, ale dług pozostaje otwarty.
+⭐ To jest świadome zapisanie niepewności zamiast jej ukrycia —
+zgodnie z ZASADĄ 13.
 
-## AUDYT-2026-08-12ze — ITERACJA III uzupełnień pokrycia VAT w DR-06 + sprostowanie własnej diagnozy audytowej
-
-**Kontekst:** kontynuacja AUDYT-2026-08-12zd (iteracje I-II). Realizacja
-pozycji priorytetowych z flagi F-17 w zalecanej tam kolejności.
-
-**Dodane sekcje (3):**
-
-| Sekcja | Zakres |
-|---|---|
-| 4n | art. 17 (import usług, nabycie od podmiotu zagranicznego, ust. 1a — udział stałego miejsca) + Dział XIII rozdz. 1c, art. 145e-145k (czasowe odwrotne obciążenie: gaz, energia, uprawnienia do emisji) |
-| 4o | art. 106b (obowiązek i faktura na żądanie, paragon bez NIP), 106e (elementy, adnotacje pkt 18/18a, marża, faktura uproszczona), 106i (terminy, granica 30 dni „w przód"), 106j (faktura korygująca, numer KSeF), 106k (nota korygująca — granica pkt 8-15) |
-| 4p | art. 119 (turystyka — marża, brak odliczenia, świadczenia własne), art. 115-118 (rolnik ryczałtowy, faktura VAT RR wystawiana przez nabywcę) |
-
-**⛔ SPROSTOWANIE WŁASNEJ DIAGNOZY Z AUDYT-2026-08-12zd (iteracja I):**
-w raporcie audytowym i w pierwszej wersji listy luk pozycję opisano jako
-„art. 17 — odwrotne obciążenie krajowe (np. gaz, energia, uprawnienia do
-emisji, art. 17 ust. 1 pkt 5 i 8)". Weryfikacja online wykazała, że jest
-to opis NIEŚCISŁY w dwóch punktach:
-1. **art. 17 ust. 1 pkt 7 i 8 wraz z załącznikami nr 11 i 14 zostały
-   UCHYLONE** — krajowe odwrotne obciążenie dla towarów wrażliwych
-   zastąpiono obowiązkowym mechanizmem podzielonej płatności (zał. 15);
-   zlikwidowano też informację podsumowującą VAT-27.
-2. **Odwrotne obciążenie dla gazu, energii i uprawnień do emisji NIE
-   wynika z art. 17**, lecz z odrębnego rozdziału 1c Działu XIII
-   (art. 145e-145k) — przepisów epizodycznych o charakterze czasowym,
-   z obowiązkiem uprzedniego zawiadomienia naczelnika US (art. 145i) i
-   terminem obowiązywania wymagającym sprawdzenia przy każdej sprawie.
-
-Sprostowanie wpisano wprost do sekcji 4n jako ostrzeżenie o pułapce
-praktycznej (faktury z adnotacją „odwrotne obciążenie" dla towarów
-objętych dziś MPP) oraz do MAPA-AKTOW.md. Wniosek metodologiczny:
-**diagnoza luki formułowana na podstawie testu obecności frazy w pliku
-opisuje CO JEST NIEOBECNE, ale nie gwarantuje poprawnego opisu TEGO, CO
-POWINNO BYĆ** — kwalifikacja prawna luki wymaga takiej samej
-weryfikacji online jak treść wpisywana do modułu.
-
-**Stan modułu po trzech iteracjach:** 2181 → ok. 3600 linii; sekcje
-numerowane 1-7 z podsekcjami 4a-4p, 5, 5a; matryca dowodowa 12 wierszy.
-
-**Flaga F-17 zaktualizowana** (nie zamknięta): wszystkie pozycje
-priorytetowe iteracji III domknięte, lista pozostałych przeredagowana,
-a jako **pierwszą pozycję iteracji IV wskazano sekcję 3 modułu (STAWKI)
-— art. 41 i logikę załączników 3 i 10**. To ustalenie z pierwotnego
-audytu, które przez trzy rundy uzupełnień pozostało niezrealizowane, a
-dotyczy najczęstszej kategorii spraw (spór o stawkę). Flaga F-18
-(weryfikacja przez ŹRÓDŁO-3 zamiast ISAP/ELI) — bez zmian, nadal otwarta
-i dotyczy również sekcji dodanych w tej rundzie.
-
-**Pliki zmienione w tej rundzie:**
-
-| Plik | Zmiana |
-|---|---|
-| `dr-06.../modules/mod-VAT-podatek-od-towarow-i-uslug.md` | ZMIENIONY — sekcje 4n-4p, aktualizacja CORE/Zakres |
-| `dr-06.../MAPA-AKTOW.md` | ZMIENIONY — wpis o iteracji III, sprostowanie kwalifikacji art. 17, przeredagowana lista luk |
-| `audyt-systemu-v4/references/AUDIT-JOURNAL.md` | ZMIENIONY — niniejszy wpis |
-| `audyt-systemu-v4/references/WARN-OTWARTE.md` | ZMIENIONY — aktualizacja F-17 |
-
-PRE-DELIVERY-COMPLETENESS-CHECK (ZASADA 7) wykonany ponownie dla obu
-skilli, wyniki pokazane w odpowiedzi przed `present_files`.
+**ZASADA 7 — PRE-DELIVERY-COMPLETENESS-CHECK:** wykonana, liczby
+pokazane w odpowiedzi. dr-06: 36 → 39 plików (różnica +3 uzasadniona:
+trzy NOWE moduły). audyt-systemu-v4: 33 → 33. KROK 0 zachowany —
+DWA ODRĘBNE archiwa ZIP.
 
 ---
 
-## AUDYT-2026-08-12zd — AUDYT POKRYCIA PRAWA VAT W DR-06: 1 BŁĄD MERYTORYCZNY (CRIT-klasy), 5 napraw strukturalnych, 9 nowych sekcji w dwóch iteracjach
+## AUDYT-2026-08-12f — DR-06: audyt pokrycia ustawy o VAT WEDŁUG DZIAŁÓW (iteracja VI); dwa nowe moduły; korekta błędnej kwoty ulgi na kasę; aktualizacja flagi F-17
 
-**Zakres sesji:** na żądanie użytkownika — audyt pokrycia prawa VAT w
-`dr-06-podatki-finanse-publiczne-aml`, następnie naprawy, następnie
-uzupełnienia. Zbadano: `mod-VAT-podatek-od-towarow-i-uslug.md` (2181
-linii przed sesją), `mod-VAT-klasyfikacja-produktow-baza-
-niejednoznacznosci.md`, `mod-odliczenia-uzytek-mieszany-firma-prywatny-
-KUP.md`, `mod-interpretacje-definicje-podatkowe.md`, `MAPA-AKTOW.md`.
-Metoda: ~90 zapytań kontrolnych o konkretne jednostki redakcyjne ustawy
-o VAT, z weryfikacją kontekstu każdego trafienia (odróżnienie realnego
-opracowania od wzmianki przelotnej).
+**Tryb:** audyt kompletności merytorycznej (ZASADA 11 — audyt skilla dziedzinowego,
+nie mapy Dz.U.). Wywołany pytaniem użytkownika o zakres pokrycia ustawy o VAT
+w DR-06 „działami i w jakim stopniu dział jest pokryty".
 
-### 1. BŁĄD MERYTORYCZNY — najpoważniejsze ustalenie sesji
+**Metoda — ZMIANA JAKOŚCIOWA WOBEC ITERACJI I-V:** poprzednie pięć iteracji
+uzupełniało moduł VAT **tematycznie**, w reakcji na kolejne pytania użytkownika.
+Iteracja VI po raz pierwszy zmierzyła pokrycie wobec **SYSTEMATYKI SAMEJ USTAWY**
+(13 działów, struktura pobrana i zweryfikowana online 12.08.2026; potwierdzono
+BRAK tekstu jednolitego nowszego niż Dz.U. 2025 poz. 775).
 
-`mod-VAT-podatek-od-towarow-i-uslug.md`, sekcja „Zwrot VAT — terminy"
-podawała **60 dni** jako podstawowy termin zwrotu różnicy podatku z
-powołaniem na art. 87 ust. 2. Aktualne brzmienie art. 87 ust. 2 zd. 1
-przewiduje **40 DNI**. Termin 60-dniowy występuje dziś wyłącznie jako
-termin SKRÓCONY w trybie art. 87 ust. 5a zd. 2 (ze 180 dni, po złożeniu
-zabezpieczenia majątkowego).
+**Ustalenie strukturalne (najważniejszy wniosek sesji):** dotychczasowe pokrycie
+było **skorelowane z historią zapytań, a nie ze strukturą aktu**. Skutek: oś
+„podatnik krajowy w sporze z US" opracowana bardzo dobrze (Dział IX ~90%,
+Dział V ~80%), a oś „transgraniczno-celna" prawie nieobecna (**Dział VII ~5%**,
+zwolnienia importowe art. 45-82a — 0%). Dodatkowo oś „cykl życia podatnika"
+miała dziury na OBU końcach: rejestracja szczątkowa, zakończenie działalności
+(art. 14) nieobecne w ogóle.
 
-**Klasyfikacja:** błąd tej klasy (nieaktualny termin ustawowy podany
-jako obowiązująca zasada, w przepisie wprost powołanym) generuje ryzyko
-błędnego wyliczenia odsetek i błędnej oceny terminu w sporze o zwrot.
-Traktowany jak CRIT treściowy — naprawiony w tej samej sesji, nie
-odłożony.
+**Pokrycie zmierzone (~55-60% globalnie):** IX ~90% | V ~80% | II ~75% | VI ~70% |
+XI ~65% | IV ~60% | XII ~55% | VIII ~45% | III ~45% | X ~40% | I ~20% | VII ~5% |
+XIII selektywnie.
 
-**Naprawa:** blok zastąpiony pełną, zweryfikowaną siatką terminów
-(40/25/25/15/180/60 dni z podstawami: ust. 2, 6, 6a, 6d-6e, 5a) wraz z
-mechanizmem przedłużenia weryfikacji (ust. 2 zd. 2, 2b, 2c), ścieżką
-odblokowania przez zabezpieczenie (ust. 2a, 4a-4f) i nietypowymi
-terminami zaskarżenia (ust. 6m: 17 dni na zażalenie, 24 dni na
-odwołanie). Do metryki nagłówka modułu dodano jawne OSTRZEŻENIE, że
-pisma i wyliczenia oparte na wcześniejszej wersji wymagają przeliczenia.
+**Zweryfikowana obserwacja poboczna:** cztery pozycje wskazane przez użytkownika
+jako rzekome luki (korekta wieloletnia art. 91, grupa VAT, prewspółczynnik/WSS,
+elementy obowiązkowe faktury art. 106e) okazały się **w pełni pokryte** — lista
+pochodziła sprzed podziału modułu VAT z 12.08.2026. Zweryfikowano lokalizacyjnie
+przed przystąpieniem do pracy, zamiast przyjąć premisę na słowo.
 
-### 2. Pozostałe naprawy (5)
+**Naprawa wykonana — DWA NOWE MODUŁY w dr-06 (32 → 34):**
 
-1. **Luka numeracji sekcji** — moduł biegł 4a...4f → 6, bez sekcji 5.
-   Utworzono sekcję 5 (ewidencja JPK_V7, art. 109/109a/110) i wypełniono
-   treścią.
-2. **Martwe odesłanie wewnętrzne** — sekcja 4d odsyłała do „sekcji 5
-   wyżej", która nie istniała. Poprawione na „sekcja 5 niżej" z
-   adnotacją o naprawie.
-3. **Ogólnikowe odesłanie do art. 109a** („weryfikuj aktualny sankcyjny
-   art. 109a w ISAP") zastąpione treścią przepisu: dodatkowe
-   zobowiązanie 100% kwoty podatku przy fakturze do paragonu bez NIP,
-   z wyłączeniem przy odpowiedzialności karnoskarbowej.
-4. **Niespójność międzymodułowa** — `mod-interpretacje-definicje-
-   podatkowe.md` (linia 89) niósł limit art. 113 na poziomie 200 000 zł,
-   podczas gdy moduł VAT miał już 240 000 zł. Sprostowane z podaniem
-   ustawy zmieniającej (Dz.U. 2025 poz. 896).
-5. **Brak listy nowelizacji po tekście jednolitym** — do metryki
-   nagłówka dodano: Dz.U. 2025 poz. 894, 896, 1203, 1811; Dz.U. 2026
-   poz. 507, 846 (źródło: podatki.gov.pl — Rząd 1).
+1. `modules/mod-VAT-rejestracja-zaplata-metoda-kasowa-likwidacja.md` (NOWY)
+   - Dział X rozdz. 1: art. 96-98 — pełny katalog wykreślenia z urzędu
+     (ust. 9 pkt 1-5, ust. 9a pkt 1-4 + kontrargument ust. 9e „specyfika
+     działalności") oraz ⭐⭐⭐ TRZY ODRĘBNE ścieżki przywrócenia
+     (ust. 9h / 9ha / 9j) z terminem **2 miesięcy**; charakter czynności
+     materialno-technicznej i wynikająca z niego pułapka w wyborze środka
+     zaskarżenia; art. 97 VAT-UE + efekt kaskadowy na stawkę 0% przy WDT.
+   - Dział X rozdz. 4: art. 103-105d — termin 25. dnia, ⛔ **pakiet paliwowy:
+     5 DNI** (art. 103 ust. 5a), art. 103a/103b, kaucja gwarancyjna art. 105b
+     wraz z ostrzeżeniem **zał. 13 (105b) vs zał. 15 (105a)**.
+   - Dział IV rozdz. 3: art. 21 — rozróżnienie metody kasowej od rozliczenia
+     kwartalnego, art. 86 ust. 10e u nabywcy, wyjątki (WNT/import usług/
+     odwrotne obciążenie), limit małego podatnika 2026 = 8 517 000 zł
+     (⭐ SPADEK wobec 8 569 000 zł na 2025).
+   - Dział II rozdz. 4: art. 14 — remanent likwidacyjny, sprzężenie z art. 91
+     ust. 4-6 i ze zwrotem ulgi na kasę, zwolnienie 12-miesięczne (art. 14
+     ust. 7), checklist likwidacyjny; ⚠️ MONITORUJ projekt **UD314**
+     (zapowiedziana likwidacja VAT-S1M/VAT-S1K).
 
-Dodatkowo: matryca dowodowa rozszerzona z 4 do 12 wierszy, quality gate
-o 5 pytań kontrolnych, sekcja CORE/Zakres zsynchronizowana z faktyczną
-zawartością modułu.
+2. `modules/mod-VAT-platnicy-egzekucja-kasy-trojstronne.md` (NOWY)
+   - Dział III: art. 18 + art. 106c / 106e ust. 1 pkt 20 / 106g ust. 2 —
+     komornik i organ egzekucyjny jako **PŁATNIK** (art. 8 OP), podatnikiem
+     pozostaje DŁUŻNIK; test poprawności faktury komorniczej; odliczenie
+     u nabywcy i ryzyko art. 88 ust. 3a pkt 2 przy nieruchomości; wątek KSeF
+     (art. 106gc ust. 6, art. 106nb).
+   - Dział XI rozdz. 3 w warstwie USTAWOWEJ (dotąd pokryta tylko warstwa
+     rozporządzeniowa): art. 111 ust. 2 (utrata **30%** odliczenia — nie
+     grzywna), ust. 4-5 (ulga), ust. 6 (zwrot ulgi w okresie **3 lat**),
+     ust. 6ka (kara **300 zł** decyzją), art. 111b.
+   - Dział XII rozdz. 8: art. 135-138 — warunki łączne, ⛔ organizator
+     transportu (pierwszy albo drugi, nigdy ostatni), CZTERY obowiązkowe
+     elementy adnotacji z art. 136 ust. 1, oznaczenie „transakcje trójstronne"
+     w VAT-UE. Zamyka lukę FUNKCJONALNĄ: system opisywał łańcuchy z art. 22
+     ust. 2-2d bez uproszczenia, co prowadziło do fałszywego wniosku
+     o konieczności rejestracji pośrednika za granicą.
 
-### 3. Uzupełnienia — iteracja I (5 sekcji)
+⛔ **USUNIĘTY BŁĄD MERYTORYCZNY (wychwycony PRZED utrwaleniem w module):**
+w roboczej analizie pokrycia ulga na zakup kasy rejestrującej została opisana
+jako „300 zł". POPRAWNIE: ulga = **90% ceny zakupu bez podatku, nie więcej niż
+700 zł** (art. 111 ust. 4); **300 zł to KARA PIENIĘŻNA** nakładana decyzją za
+brak przeglądu technicznego (art. 111 ust. 6ka). Weryfikacja online przed
+pisaniem modułu zadziałała dokładnie tak, jak zakłada PRAWO-HARDGATE —
+sprostowanie utrwalone w treści modułu jako ostrzeżenie na przyszłość.
 
-| Sekcja | Zakres |
-|---|---|
-| 4g | art. 108 — pusta faktura; charakter niesankcyjny wg TK P 40/13; linia obrony; TSUE C-442/22 (faktury pracownika); sprzężenie z art. 62 § 2 KKS |
-| 4h | art. 88 — katalog negatywny odliczenia (ust. 1 pkt 4, 1a, 3a pkt 1-7, 3b, 4, 6) + mapa zarzutów i kontrzarzutów |
-| 4i | art. 90/90a-90c/91 + art. 86 ust. 2a-2h — proporcja, prewspółczynnik, korekta wieloletnia 5/10 lat, art. 91 ust. 9 (korekta po stronie nabywcy ZCP) |
-| 4j | art. 7 ust. 2-4 i 7, art. 8 ust. 2, 2a, 5 — nieodpłatne przekazania, prezenty (100/20 zł), próbki, refakturowanie |
-| 5 | art. 109/109a/110 — ewidencja JPK_V7, ścieżka korekty, kara 500 zł/błąd, sankcja 100% |
+**Aktualizacje rejestrów:**
+- `dr-06/SKILL.md` — licznik 32 → 34, oba moduły dopisane do listy blokowej,
+  nowa nota iteracji VI z listą pozostających luk.
+- `dr-06/MAPA-AKTOW.md` — dwa nowe wiersze aktów/modułów + rozszerzona lista
+  luk VAT uporządkowana DZIAŁAMI (zastępuje listę „iteracji V", która była
+  niepełna: nie obejmowała m.in. art. 14, art. 18, art. 45-82a, art. 103-105,
+  art. 110a-110e, art. 112-112aa, art. 134a-134c, art. 138i-138j).
+- `audyt-systemu-v4/references/WARN-OTWARTE.md` — flaga **F-17 ZAKTUALIZOWANA**
+  (nie zamknięta): dopisane pomiary pokrycia działami, zamknięte pozycje P1,
+  przeorganizowana lista pozostających luk i kolejność iteracji VII.
 
-### 4. Uzupełnienia — iteracja II (4 sekcje)
+**Status flagi F-17:** OTWARTA, priorytet niski. Pozostające luki to głównie
+oś transgraniczno-celna (Dział VII, art. 45-82a, TAX FREE, VAT-REF) o niższej
+częstości w sprawach systemu.
 
-| Sekcja | Zakres |
-|---|---|
-| 4k | art. 6 pkt 1-2 — wyłączenie zbycia przedsiębiorstwa i ZCP; sprzężenie z PCC i z art. 91 ust. 9 |
-| 4l | art. 22 ust. 1-2d — miejsce dostawy towarów i transakcje łańcuchowe (dostawa ruchoma/nieruchoma, podmiot pośredniczący, „przełącznik" z ust. 2c) |
-| 4m | art. 15 ust. 6 — organy władzy publicznej, test imperium/dominium, sprzężenie z prewspółczynnikiem |
-| 5a | art. 99-100 — deklaracje, utrata kwartału przez zał. 15, zawieszenie działalności, informacje podsumowujące VAT-UE |
+**Rekomendacja niezrealizowana w tej sesji (do rozważenia):** utworzenie
+`dr-06/MAPA-POKRYCIA-VAT.md` — tabeli „dział/rozdział → moduł → status", aby
+kolejny audyt nie wymagał rekonstrukcji pokrycia przez grep po treści modułów.
 
-Sekcja 4l usuwa ASYMETRIĘ STRUKTURALNĄ wykrytą w audycie: miejsce
-świadczenia USŁUG miało ok. 220 linii, miejsce dostawy TOWARÓW — zero,
-przez co przy transakcjach mieszanych moduł prowadził tylko połowę
-analizy.
-
-Flaga luki oznaczona w sekcji 5 przy jej tworzeniu (art. 99-100) została
-domknięta w tej samej sesji przez sekcję 5a — zgodnie z ZASADĄ 7
-(naprawa nie jest odkładana), z pozostawieniem węższej, jawnie
-oznaczonej luki (art. 99 ust. 11c, art. 101-102).
-
-### 5. Metoda weryfikacji i jej ograniczenie
-
-Wszystkie przepisy pobrano ze źródeł online — żaden nie pochodzi z
-pamięci modelu (PRAWO-HARDGATE zachowany). Ograniczenie: `isap.sejm.gov.pl`
-blokuje bezpośredni `web_fetch` (ROBOTS_DISALLOWED), a
-`api.sejm.gov.pl/eli/acts/DU/2025/775/text.pdf` to dokument
-228-stronicowy, którego nie da się odczytać fragmentarycznie dostępnymi
-narzędziami. Weryfikacja przebiegła zatem ścieżką ŹRÓDŁO-3 (web-
-fallback) z krzyżowym potwierdzeniem w 2-4 niezależnych źródłach na
-przepis; każda nowa sekcja nosi `✅ [VER: ...]` + `⚠️ [ZALECANA
-WERYFIKACJA ISAP]`. Odnotowane jako flaga **F-18**.
-
-Orzecznictwo: TK P 40/13 potwierdzone komunikatem na `trybunal.gov.pl`
-(Rząd 1) wraz z przytoczoną sentencją; TSUE C-442/22 — opracowanie
-branżowe, z jawnym wymogiem sprawdzenia pełnego tekstu na
-`curia.europa.eu` przed powołaniem w piśmie. Sygnatury NSA/WSA
-napotkane w źródłach NIE zostały wpisane do modułu — zamiast nich
-umieszczono odesłania do `orzeczenia-sadowe-v2`.
-
-### 6. Flagi otwarte
-
-- **F-17** (średni) — pokrycie ustawy o VAT nadal niepełne; lista
-  kilkunastu instytucji do iteracji III wraz z zalecaną kolejnością.
-- **F-18** (średni) — znaczniki weryfikacji oparte na ŹRÓDLE-3, nie na
-  ISAP/ELI; ograniczenie narzędziowe.
-
-Obie zarejestrowane w `references/WARN-OTWARTE.md` zgodnie z ZASADĄ 5.
-
-### 7. PRE-DELIVERY-COMPLETENESS-CHECK (ZASADA 7)
-
-Wykonany osobno dla każdego z dwóch skilli dotkniętych sesją
-(`dr-06-podatki-finanse-publiczne-aml`, `audyt-systemu-v4`), z osobnym
-archiwum per skill, zliczeniem plików przed i po oraz weryfikacją
-bajtową `diff -rq` względem stanu na dysku. Wyniki pokazane w
-odpowiedzi przed `present_files`. Liczba plików w obu skillach bez
-zmian — sesja modyfikowała treść istniejących plików, nie dodawała ani
-nie usuwała plików.
-
-**Pliki zmienione w tej sesji:**
-
-| Plik | Zmiana |
-|---|---|
-| `dr-06.../modules/mod-VAT-podatek-od-towarow-i-uslug.md` | ZMIENIONY — naprawa błędu 40/60 dni, sekcja 5, 9 nowych sekcji (4g-4m, 5, 5a), metryka, matryca dowodowa, quality gate; 2181 → ok. 3180 linii |
-| `dr-06.../modules/mod-interpretacje-definicje-podatkowe.md` | ZMIENIONY — sprostowanie limitu art. 113 (200 000 → 240 000 zł) |
-| `dr-06.../MAPA-AKTOW.md` | ZMIENIONY — wpis o obu iteracjach, błędzie 40/60 dni, liście luk pozostających |
-| `audyt-systemu-v4/references/AUDIT-JOURNAL.md` | ZMIENIONY — niniejszy wpis (ZASADA 2) |
-| `audyt-systemu-v4/references/WARN-OTWARTE.md` | ZMIENIONY — flagi F-17, F-18 (ZASADA 5) |
+**ZASADA 7 — PRE-DELIVERY-COMPLETENESS-CHECK:** wykonana, liczby pokazane
+w odpowiedzi. dr-06: 34 → 36 plików (różnica +2 uzasadniona: dwa NOWE moduły).
+audyt-systemu-v4: 33 → 33 (bez zmiany liczby, edycja treści 2 plików).
+KROK 0 zachowany — DWA ODRĘBNE archiwa ZIP, po jednym na skill.
 
 ---
 
@@ -36191,4 +36099,783 @@ tym akademickich:
 
 | Kategoria | Wynik |
 |---|---|
+| Flagi otwarte | 9 |
+
+
+> ⚠️⚠️⚠️ SCALENIE GAŁĘZI 2026-08-12 (na żądanie użytkownika, po
+> przesłaniu archiwów z równoległej sesji): OD TEGO MIEJSCA dziennik
+> ROZGAŁĘZIA SIĘ na DWIE, NIEZALEŻNE kontynuacje tej samej pracy nad
+> VAT — obie UŻYŁY tych samych sufiksów liter (zd/ze/zf) dla RÓŻNEJ
+> treści. PONIŻEJ: NAJPIERW obszerniejsza, formalna praca "iteracja
+> II-V" (gałąź równoległa, PRZESŁANA przez użytkownika jako archiwum
+> ZIP), POTEM własna praca tej instancji (WCZEŚNIEJSZA runda VAT +
+> późniejszy moduł księgi wieczystej). Numeracja LITEROWA w obu
+> zestawach NIE jest globalnie unikalna — TREŚĆ jest w pełni
+> zachowana z OBU gałęzi, bez utraty.
+
+
+
+> ⚠️ KONIEC WPISÓW Z GAŁĘZI RÓWNOLEGŁEJ (iteracja II-V VAT,
+> przesłanej archiwum ZIP) — PONIŻEJ WZNAWIA SIĘ własna, wcześniej
+> widoczna kontynuacja TEJ instancji (własna, wcześniejsza runda
+> uzupełnień VAT, NASTĘPNIE moduł księgi wieczystej w dr-02).
+
+## AUDYT-2026-08-12zf — ITERACJA IV: przebudowa sekcji STAWKI VAT z tabeli na BAZĘ WERYFIKACJI + skan homoglifów w DR-06 + naprawa kolizji numeracji wpisów dziennika
+
+**Kontekst i decyzja projektowa użytkownika:** po trzech iteracjach
+uzupełnień sekcja 3 modułu VAT („STAWKI VAT — ORIENTACYJNE") pozostawała
+5-wierszową tabelą i była w F-17 wskazana jako największa pojedyncza
+słabość modułu. Użytkownik przesądził kierunek naprawy: **„zamiast
+tworzenia jakiejś bazy wskaż źródło, gdzie należy weryfikować stawki VAT
+dla poszczególnych towarów i wskaż to jako bazę weryfikacyjną"**.
+
+**Uzasadnienie merytoryczne — udokumentowane w samej sekcji.**
+Weryfikacja wykazała, że rozporządzenie MF z 9.12.2023 r. w sprawie
+obniżonych stawek VAT (Dz.U. 2023 poz. 2670, podstawa: art. 146ej ust. 1
+ustawy) było zmieniane co najmniej DZIEWIĘĆ RAZY (Dz.U. 2024 poz. 387,
+1381, 1399, 1944; 2025 poz. 1253; 2026 poz. 417, 573, 642, 699), a sam
+§ 11a (paliwa) przedłużano kolejno do 15.05.2026 → 31.05.2026 →
+15.06.2026 → 30.06.2026, korygując przy tym zakres kodów CN
+(2710 19 43 → 2710 19 42 i 2710 19 44). Wniosek wpisany do modułu:
+**tabela stawek w pliku statycznym dezaktualizuje się w ciągu tygodni i
+tworzy fałszywe poczucie pewności — groźniejsze niż brak informacji, bo
+zniechęca do sprawdzenia.**
+
+**Nowa sekcja 3 — struktura:**
+
+- **3.1 BAZA WERYFIKACYJNA — cztery poziomy w ustalonej kolejności.**
+  POZIOM A (tekst prawa): ISAP — art. 41, art. 146x (epizodyczne),
+  zał. nr 3 (8%), zał. nr 10 (5%), art. 83 + rozporządzenie
+  Dz.U. 2023/2670 ze strukturą rozdziałów. POZIOM B (klasyfikacja):
+  **ISZTAR4** (`ext-isztar4.mf.gov.pl/taryfa_celna/Browser`) dla kodów CN
+  — z wyeksponowaniem funkcji **DATY SYMULACJI**, pozwalającej odtworzyć
+  stan prawny na datę czynności (jedyne łatwo dostępne narzędzie do tego
+  celu w sporze) oraz zawartości pomocniczej (noty wyjaśniające CN,
+  rozporządzenia klasyfikacyjne KE, wyroki TSUE, WIT); PKWiU 2015 dla
+  usług do 31.12.2027. POZIOM C (praktyka): EUREKA. POZIOM D (ochrona):
+  WIS.
+- **3.2 Procedura sześciokrokowa** z obowiązkową kolejnością, w tym KROK
+  2 (ustal datę czynności → wpisz jako datę symulacji w ISZTAR4) i KROK 5
+  (przepisy epizodyczne — wskazany jako miejsce, gdzie stawka najczęściej
+  „ucieka" analizie) oraz wymóg zapisania ŚLADU WERYFIKACJI.
+- **3.3 Orientacja strukturalna** — mapa „która stawka w którym
+  przepisie", **świadomie BEZ ŻADNEJ WARTOŚCI PROCENTOWEJ**.
+- Zakaz bezwzględny na wejściu: moduł nie podaje stawki dla konkretnego
+  towaru/usługi; odczytanie stawki z pliku = naruszenie PRAWO-HARDGATE.
+
+Quality gate modułu i sekcja CORE/Zakres zsynchronizowane z nową
+procedurą. W `mod-VAT-klasyfikacja-produktow-baza-niejednoznacznosci.md`
+dodano odesłanie kanoniczne z zakazem duplikowania procedury.
+
+**Ustalenie uboczne 1 — HOMOGLIFY CYRYLICKIE (problem NAWRACAJĄCY).**
+Przy kontroli własnej wstawki wykryto w niej znak `п` (U+043F) zamiast
+`p`. Skan wszystkich plików `.md` w DR-06 na 14 najczęstszych homoglifów
+cyrylickich wykazał **2 wystąpienia**, w tym **1 ISTNIEJĄCE WCZEŚNIEJ** w
+`mod-ustawa-akcyzowa-i-clo-UCC.md`. Oba naprawione. ⚠️ **To jest
+NAWRÓT:** wpis AUDYT-2026-08-12s z wcześniejszej sesji tego samego dnia
+odnotowuje „naprawiony NIEZWIĄZANY, przedistniejący artefakt cyrylicki" w
+module definicji/interpretacji podatkowych. Problem pojawia się zatem
+wielokrotnie i jest wykrywany przypadkiem, nie systemowo.
+**Ryzyko:** homoglif jest niewidoczny dla czytelnika, ale ŁAMIE
+WYSZUKIWANIE — `grep` i wyszukiwanie pełnotekstowe nie znajdą słowa
+zawierającego taki znak. Dotyczy to również testów pokrycia stosowanych w
+audytach: test obecności frazy może dać FAŁSZYWY NEGATYW, czyli zgłosić
+lukę tam, gdzie treść istnieje.
+**Rekomendacja systemowa:** dodać skan homoglifów jako test regresyjny
+(`scripts/run_regression_suite.py`) dla WSZYSTKICH skilli. NIE wykonane w
+tej sesji — wymaga decyzji co do zakresu znaków i polityki (blokada vs
+ostrzeżenie).
+
+**UZUPEŁNIENIE do ustaleń ubocznych (kontrola końcowa tej sesji):** skan
+homoglifów rozszerzono na `audyt-systemu-v4`. W `AUDIT-JOURNAL.md`
+znaleziono i naprawiono KOLEJNY przedistniejący artefakt: „момencie"
+(cyrylickie „м" i „о") zamiast „momencie", we wcześniejszym wpisie z tej
+samej daty. Po naprawie w obu skillach pozostaje **6 znaków cyrylickich —
+wszystkie CELOWE**, w cytatach opisujących same artefakty (`п` w tym
+wpisie oraz „т"/„е" w opisie artefaktu „nabyте"). To pokazuje ograniczenie
+automatycznego skanu: prosty test „zero cyrylicy" dałby fałszywy alarm na
+dzienniku audytowym, który z natury CYTUJE znalezione artefakty.
+Projektowany test regresyjny musi dopuszczać wyjątki dla plików
+dziennikowych albo działać w trybie ostrzeżenia, nie blokady.
+Łączny bilans skanu w tej sesji: **4 realne artefakty naprawione**
+(2 w DR-06, w tym 1 przedistniejący w module akcyzowym; 1 w module
+klasyfikacji VAT z tej sesji; 1 przedistniejący w AUDIT-JOURNAL).
+
+**Ustalenie uboczne 2 — KOLIZJA NUMERACJI WPISÓW DZIENNIKA.** Wpisy z tej
+sesji zapisano pierwotnie jako `AUDYT-2026-08-12` i `AUDYT-2026-08-12b`,
+podczas gdy dziennik zawierał już PEŁNĄ serię `12a`–`12zc` z wcześniejszej
+sesji tego samego dnia. Kod `12b` był zatem zdublowany. Wpisy
+przenumerowano na wolne: **`12zd`** (audyt + iteracje I-II) i **`12ze`**
+(iteracja III), a odsyłacze wewnętrzne poprawiono. Niniejszy wpis: `12zf`.
+**Wniosek:** przed dodaniem wpisu należy sprawdzić `grep "^## AUDYT-RRRR-MM-DD"`
+w całym pliku, a nie tylko początek dziennika — wpisy z tego samego dnia
+mogą być rozproszone (najnowsze na górze, starsza seria w dalszej części).
+
+**Flaga F-17 — priorytet OBNIŻONY ze średniego na NISKI:** wszystkie
+pozycje priorytetowe iteracji I-IV domknięte, łącznie z sekcją 3.
+Pozostałe pozycje dotyczą instytucji o wyraźnie niższej częstości spraw.
+Jako pierwszą pozycję iteracji V wskazano art. 42a-42i (pełny tryb WIS) —
+domyka POZIOM D nowej bazy weryfikacyjnej. F-18 bez zmian.
+
+**Pliki zmienione w tej rundzie:**
+
+| Plik | Zmiana |
+|---|---|
+| `dr-06.../modules/mod-VAT-podatek-od-towarow-i-uslug.md` | ZMIENIONY — sekcja 3 przebudowana (baza weryfikacji), quality gate, CORE/Zakres |
+| `dr-06.../modules/mod-VAT-klasyfikacja-produktow-baza-niejednoznacznosci.md` | ZMIENIONY — odesłanie kanoniczne do sekcji 3 + naprawa homoglifu |
+| `dr-06.../modules/mod-ustawa-akcyzowa-i-clo-UCC.md` | ZMIENIONY — naprawa wcześniej istniejącego homoglifu cyrylickiego |
+| `dr-06.../MAPA-AKTOW.md` | ZMIENIONY — wpis o iteracji IV i skanie homoglifów |
+| `audyt-systemu-v4/references/AUDIT-JOURNAL.md` | ZMIENIONY — niniejszy wpis + przenumerowanie wpisów 12zd/12ze |
+| `audyt-systemu-v4/references/WARN-OTWARTE.md` | ZMIENIONY — F-17, priorytet obniżony |
+
+---
+
+## AUDYT-2026-08-12ze — ITERACJA III uzupełnień pokrycia VAT w DR-06 + sprostowanie własnej diagnozy audytowej
+
+**Kontekst:** kontynuacja AUDYT-2026-08-12zd (iteracje I-II). Realizacja
+pozycji priorytetowych z flagi F-17 w zalecanej tam kolejności.
+
+**Dodane sekcje (3):**
+
+| Sekcja | Zakres |
+|---|---|
+| 4n | art. 17 (import usług, nabycie od podmiotu zagranicznego, ust. 1a — udział stałego miejsca) + Dział XIII rozdz. 1c, art. 145e-145k (czasowe odwrotne obciążenie: gaz, energia, uprawnienia do emisji) |
+| 4o | art. 106b (obowiązek i faktura na żądanie, paragon bez NIP), 106e (elementy, adnotacje pkt 18/18a, marża, faktura uproszczona), 106i (terminy, granica 30 dni „w przód"), 106j (faktura korygująca, numer KSeF), 106k (nota korygująca — granica pkt 8-15) |
+| 4p | art. 119 (turystyka — marża, brak odliczenia, świadczenia własne), art. 115-118 (rolnik ryczałtowy, faktura VAT RR wystawiana przez nabywcę) |
+
+**⛔ SPROSTOWANIE WŁASNEJ DIAGNOZY Z AUDYT-2026-08-12zd (iteracja I):**
+w raporcie audytowym i w pierwszej wersji listy luk pozycję opisano jako
+„art. 17 — odwrotne obciążenie krajowe (np. gaz, energia, uprawnienia do
+emisji, art. 17 ust. 1 pkt 5 i 8)". Weryfikacja online wykazała, że jest
+to opis NIEŚCISŁY w dwóch punktach:
+1. **art. 17 ust. 1 pkt 7 i 8 wraz z załącznikami nr 11 i 14 zostały
+   UCHYLONE** — krajowe odwrotne obciążenie dla towarów wrażliwych
+   zastąpiono obowiązkowym mechanizmem podzielonej płatności (zał. 15);
+   zlikwidowano też informację podsumowującą VAT-27.
+2. **Odwrotne obciążenie dla gazu, energii i uprawnień do emisji NIE
+   wynika z art. 17**, lecz z odrębnego rozdziału 1c Działu XIII
+   (art. 145e-145k) — przepisów epizodycznych o charakterze czasowym,
+   z obowiązkiem uprzedniego zawiadomienia naczelnika US (art. 145i) i
+   terminem obowiązywania wymagającym sprawdzenia przy każdej sprawie.
+
+Sprostowanie wpisano wprost do sekcji 4n jako ostrzeżenie o pułapce
+praktycznej (faktury z adnotacją „odwrotne obciążenie" dla towarów
+objętych dziś MPP) oraz do MAPA-AKTOW.md. Wniosek metodologiczny:
+**diagnoza luki formułowana na podstawie testu obecności frazy w pliku
+opisuje CO JEST NIEOBECNE, ale nie gwarantuje poprawnego opisu TEGO, CO
+POWINNO BYĆ** — kwalifikacja prawna luki wymaga takiej samej
+weryfikacji online jak treść wpisywana do modułu.
+
+**Stan modułu po trzech iteracjach:** 2181 → ok. 3600 linii; sekcje
+numerowane 1-7 z podsekcjami 4a-4p, 5, 5a; matryca dowodowa 12 wierszy.
+
+**Flaga F-17 zaktualizowana** (nie zamknięta): wszystkie pozycje
+priorytetowe iteracji III domknięte, lista pozostałych przeredagowana,
+a jako **pierwszą pozycję iteracji IV wskazano sekcję 3 modułu (STAWKI)
+— art. 41 i logikę załączników 3 i 10**. To ustalenie z pierwotnego
+audytu, które przez trzy rundy uzupełnień pozostało niezrealizowane, a
+dotyczy najczęstszej kategorii spraw (spór o stawkę). Flaga F-18
+(weryfikacja przez ŹRÓDŁO-3 zamiast ISAP/ELI) — bez zmian, nadal otwarta
+i dotyczy również sekcji dodanych w tej rundzie.
+
+**Pliki zmienione w tej rundzie:**
+
+| Plik | Zmiana |
+|---|---|
+| `dr-06.../modules/mod-VAT-podatek-od-towarow-i-uslug.md` | ZMIENIONY — sekcje 4n-4p, aktualizacja CORE/Zakres |
+| `dr-06.../MAPA-AKTOW.md` | ZMIENIONY — wpis o iteracji III, sprostowanie kwalifikacji art. 17, przeredagowana lista luk |
+| `audyt-systemu-v4/references/AUDIT-JOURNAL.md` | ZMIENIONY — niniejszy wpis |
+| `audyt-systemu-v4/references/WARN-OTWARTE.md` | ZMIENIONY — aktualizacja F-17 |
+
+PRE-DELIVERY-COMPLETENESS-CHECK (ZASADA 7) wykonany ponownie dla obu
+skilli, wyniki pokazane w odpowiedzi przed `present_files`.
+
+---
+
+## AUDYT-2026-08-12zd — AUDYT POKRYCIA PRAWA VAT W DR-06: 1 BŁĄD MERYTORYCZNY (CRIT-klasy), 5 napraw strukturalnych, 9 nowych sekcji w dwóch iteracjach
+
+**Zakres sesji:** na żądanie użytkownika — audyt pokrycia prawa VAT w
+`dr-06-podatki-finanse-publiczne-aml`, następnie naprawy, następnie
+uzupełnienia. Zbadano: `mod-VAT-podatek-od-towarow-i-uslug.md` (2181
+linii przed sesją), `mod-VAT-klasyfikacja-produktow-baza-
+niejednoznacznosci.md`, `mod-odliczenia-uzytek-mieszany-firma-prywatny-
+KUP.md`, `mod-interpretacje-definicje-podatkowe.md`, `MAPA-AKTOW.md`.
+Metoda: ~90 zapytań kontrolnych o konkretne jednostki redakcyjne ustawy
+o VAT, z weryfikacją kontekstu każdego trafienia (odróżnienie realnego
+opracowania od wzmianki przelotnej).
+
+### 1. BŁĄD MERYTORYCZNY — najpoważniejsze ustalenie sesji
+
+`mod-VAT-podatek-od-towarow-i-uslug.md`, sekcja „Zwrot VAT — terminy"
+podawała **60 dni** jako podstawowy termin zwrotu różnicy podatku z
+powołaniem na art. 87 ust. 2. Aktualne brzmienie art. 87 ust. 2 zd. 1
+przewiduje **40 DNI**. Termin 60-dniowy występuje dziś wyłącznie jako
+termin SKRÓCONY w trybie art. 87 ust. 5a zd. 2 (ze 180 dni, po złożeniu
+zabezpieczenia majątkowego).
+
+**Klasyfikacja:** błąd tej klasy (nieaktualny termin ustawowy podany
+jako obowiązująca zasada, w przepisie wprost powołanym) generuje ryzyko
+błędnego wyliczenia odsetek i błędnej oceny terminu w sporze o zwrot.
+Traktowany jak CRIT treściowy — naprawiony w tej samej sesji, nie
+odłożony.
+
+**Naprawa:** blok zastąpiony pełną, zweryfikowaną siatką terminów
+(40/25/25/15/180/60 dni z podstawami: ust. 2, 6, 6a, 6d-6e, 5a) wraz z
+mechanizmem przedłużenia weryfikacji (ust. 2 zd. 2, 2b, 2c), ścieżką
+odblokowania przez zabezpieczenie (ust. 2a, 4a-4f) i nietypowymi
+terminami zaskarżenia (ust. 6m: 17 dni na zażalenie, 24 dni na
+odwołanie). Do metryki nagłówka modułu dodano jawne OSTRZEŻENIE, że
+pisma i wyliczenia oparte na wcześniejszej wersji wymagają przeliczenia.
+
+### 2. Pozostałe naprawy (5)
+
+1. **Luka numeracji sekcji** — moduł biegł 4a...4f → 6, bez sekcji 5.
+   Utworzono sekcję 5 (ewidencja JPK_V7, art. 109/109a/110) i wypełniono
+   treścią.
+2. **Martwe odesłanie wewnętrzne** — sekcja 4d odsyłała do „sekcji 5
+   wyżej", która nie istniała. Poprawione na „sekcja 5 niżej" z
+   adnotacją o naprawie.
+3. **Ogólnikowe odesłanie do art. 109a** („weryfikuj aktualny sankcyjny
+   art. 109a w ISAP") zastąpione treścią przepisu: dodatkowe
+   zobowiązanie 100% kwoty podatku przy fakturze do paragonu bez NIP,
+   z wyłączeniem przy odpowiedzialności karnoskarbowej.
+4. **Niespójność międzymodułowa** — `mod-interpretacje-definicje-
+   podatkowe.md` (linia 89) niósł limit art. 113 na poziomie 200 000 zł,
+   podczas gdy moduł VAT miał już 240 000 zł. Sprostowane z podaniem
+   ustawy zmieniającej (Dz.U. 2025 poz. 896).
+5. **Brak listy nowelizacji po tekście jednolitym** — do metryki
+   nagłówka dodano: Dz.U. 2025 poz. 894, 896, 1203, 1811; Dz.U. 2026
+   poz. 507, 846 (źródło: podatki.gov.pl — Rząd 1).
+
+Dodatkowo: matryca dowodowa rozszerzona z 4 do 12 wierszy, quality gate
+o 5 pytań kontrolnych, sekcja CORE/Zakres zsynchronizowana z faktyczną
+zawartością modułu.
+
+### 3. Uzupełnienia — iteracja I (5 sekcji)
+
+| Sekcja | Zakres |
+|---|---|
+| 4g | art. 108 — pusta faktura; charakter niesankcyjny wg TK P 40/13; linia obrony; TSUE C-442/22 (faktury pracownika); sprzężenie z art. 62 § 2 KKS |
+| 4h | art. 88 — katalog negatywny odliczenia (ust. 1 pkt 4, 1a, 3a pkt 1-7, 3b, 4, 6) + mapa zarzutów i kontrzarzutów |
+| 4i | art. 90/90a-90c/91 + art. 86 ust. 2a-2h — proporcja, prewspółczynnik, korekta wieloletnia 5/10 lat, art. 91 ust. 9 (korekta po stronie nabywcy ZCP) |
+| 4j | art. 7 ust. 2-4 i 7, art. 8 ust. 2, 2a, 5 — nieodpłatne przekazania, prezenty (100/20 zł), próbki, refakturowanie |
+| 5 | art. 109/109a/110 — ewidencja JPK_V7, ścieżka korekty, kara 500 zł/błąd, sankcja 100% |
+
+### 4. Uzupełnienia — iteracja II (4 sekcje)
+
+| Sekcja | Zakres |
+|---|---|
+| 4k | art. 6 pkt 1-2 — wyłączenie zbycia przedsiębiorstwa i ZCP; sprzężenie z PCC i z art. 91 ust. 9 |
+| 4l | art. 22 ust. 1-2d — miejsce dostawy towarów i transakcje łańcuchowe (dostawa ruchoma/nieruchoma, podmiot pośredniczący, „przełącznik" z ust. 2c) |
+| 4m | art. 15 ust. 6 — organy władzy publicznej, test imperium/dominium, sprzężenie z prewspółczynnikiem |
+| 5a | art. 99-100 — deklaracje, utrata kwartału przez zał. 15, zawieszenie działalności, informacje podsumowujące VAT-UE |
+
+Sekcja 4l usuwa ASYMETRIĘ STRUKTURALNĄ wykrytą w audycie: miejsce
+świadczenia USŁUG miało ok. 220 linii, miejsce dostawy TOWARÓW — zero,
+przez co przy transakcjach mieszanych moduł prowadził tylko połowę
+analizy.
+
+Flaga luki oznaczona w sekcji 5 przy jej tworzeniu (art. 99-100) została
+domknięta w tej samej sesji przez sekcję 5a — zgodnie z ZASADĄ 7
+(naprawa nie jest odkładana), z pozostawieniem węższej, jawnie
+oznaczonej luki (art. 99 ust. 11c, art. 101-102).
+
+### 5. Metoda weryfikacji i jej ograniczenie
+
+Wszystkie przepisy pobrano ze źródeł online — żaden nie pochodzi z
+pamięci modelu (PRAWO-HARDGATE zachowany). Ograniczenie: `isap.sejm.gov.pl`
+blokuje bezpośredni `web_fetch` (ROBOTS_DISALLOWED), a
+`api.sejm.gov.pl/eli/acts/DU/2025/775/text.pdf` to dokument
+228-stronicowy, którego nie da się odczytać fragmentarycznie dostępnymi
+narzędziami. Weryfikacja przebiegła zatem ścieżką ŹRÓDŁO-3 (web-
+fallback) z krzyżowym potwierdzeniem w 2-4 niezależnych źródłach na
+przepis; każda nowa sekcja nosi `✅ [VER: ...]` + `⚠️ [ZALECANA
+WERYFIKACJA ISAP]`. Odnotowane jako flaga **F-18**.
+
+Orzecznictwo: TK P 40/13 potwierdzone komunikatem na `trybunal.gov.pl`
+(Rząd 1) wraz z przytoczoną sentencją; TSUE C-442/22 — opracowanie
+branżowe, z jawnym wymogiem sprawdzenia pełnego tekstu na
+`curia.europa.eu` przed powołaniem w piśmie. Sygnatury NSA/WSA
+napotkane w źródłach NIE zostały wpisane do modułu — zamiast nich
+umieszczono odesłania do `orzeczenia-sadowe-v2`.
+
+### 6. Flagi otwarte
+
+- **F-17** (średni) — pokrycie ustawy o VAT nadal niepełne; lista
+  kilkunastu instytucji do iteracji III wraz z zalecaną kolejnością.
+- **F-18** (średni) — znaczniki weryfikacji oparte na ŹRÓDLE-3, nie na
+  ISAP/ELI; ograniczenie narzędziowe.
+
+Obie zarejestrowane w `references/WARN-OTWARTE.md` zgodnie z ZASADĄ 5.
+
+### 7. PRE-DELIVERY-COMPLETENESS-CHECK (ZASADA 7)
+
+Wykonany osobno dla każdego z dwóch skilli dotkniętych sesją
+(`dr-06-podatki-finanse-publiczne-aml`, `audyt-systemu-v4`), z osobnym
+archiwum per skill, zliczeniem plików przed i po oraz weryfikacją
+bajtową `diff -rq` względem stanu na dysku. Wyniki pokazane w
+odpowiedzi przed `present_files`. Liczba plików w obu skillach bez
+zmian — sesja modyfikowała treść istniejących plików, nie dodawała ani
+nie usuwała plików.
+
+**Pliki zmienione w tej sesji:**
+
+| Plik | Zmiana |
+|---|---|
+| `dr-06.../modules/mod-VAT-podatek-od-towarow-i-uslug.md` | ZMIENIONY — naprawa błędu 40/60 dni, sekcja 5, 9 nowych sekcji (4g-4m, 5, 5a), metryka, matryca dowodowa, quality gate; 2181 → ok. 3180 linii |
+| `dr-06.../modules/mod-interpretacje-definicje-podatkowe.md` | ZMIENIONY — sprostowanie limitu art. 113 (200 000 → 240 000 zł) |
+| `dr-06.../MAPA-AKTOW.md` | ZMIENIONY — wpis o obu iteracjach, błędzie 40/60 dni, liście luk pozostających |
+| `audyt-systemu-v4/references/AUDIT-JOURNAL.md` | ZMIENIONY — niniejszy wpis (ZASADA 2) |
+| `audyt-systemu-v4/references/WARN-OTWARTE.md` | ZMIENIONY — flagi F-17, F-18 (ZASADA 5) |
+
+---
+
+
+> ⚠️⚠️⚠️ SCALENIE GAŁĘZI 2026-08-12 (na żądanie użytkownika, po
+> przesłaniu archiwów Z RÓWNOLEGŁEJ sesji): PONIŻEJ trzy wpisy Z
+> GAŁĘZI RÓWNOLEGŁEJ (formalna "iteracja II-IV" audytu pokrycia VAT,
+> Z 1 błędem KLASY CRIT, licznymi naprawami strukturalnymi i 9 nowymi
+> sekcjami) — POCHODZĄ Z przesłanego archiwum ZIP, NIE Z tej,
+> widocznej instancji. NUMERACJA literowa (zd/ze/zf) KOLIDUJE Z
+> WŁASNYMI wpisami TEJ instancji PONIŻEJ (też VAT, ALE INNA,
+> RÓWNOLEGŁA runda uzupełnień) — TREŚĆ obu gałęzi W PEŁNI zachowana,
+> BEZ utraty.
+
+## AUDYT-2026-08-12zd — Mapowanie VAT (na żądanie użytkownika) + wypełnienie dwóch priorytetowych luk: zwolnienie podmiotowe (z ważną korektą progu 200k→240k) i kasy fiskalne
+
+**Kontekst:** Na żądanie użytkownika — pełne, systematyczne
+zmapowanie pokrycia głównego modułu VAT (551 linii), Z oznaczeniem
+🟢/🟡/🔴, NASTĘPNIE wypełnienie dwóch NAJWYŻSZYCH priorytetów.
+
+**ZBUDOWANO PEŁNĄ MAPĘ 23 podtematów:** 🟢 10 (43%), 🟡 4 (17%), 🔴 9
+(39%) — PRZEDSTAWIONO użytkownikowi. 🔴 znalezione: WNT, import
+usług, ulga NA złe długi, korekta WIELOLETNIA środków trwałych,
+KASY fiskalne, grupa VAT, prewspółczynnik, elementy FAKTURY,
+zwolnienie PODMIOTOWE.
+
+**PRIORYTET #1 — zwolnienie PODMIOTOWE (art. 113):** DODANO,
+zweryfikowane W 8+ ZGODNYCH, BARDZO aktualnych źródeł (jedno sprzed
+20 GODZIN):
+
+- ⭐⭐⭐ ⚡ WAŻNA, ŚWIEŻA korekta: limit ZOSTAŁ PODWYŻSZONY OD
+  1.01.2026 R. Z 200 000 NA **240 000 ZŁ** — ⚠️ FLAGA dla CAŁEGO
+  systemu: STARSZE materiały MOGĄ nadal cytować NIEAKTUALNY próg
+  200 tys.
+- Co WLICZA/NIE wlicza się DO limitu (WNT/import usług/odwrotne
+  obciążenie WYŁĄCZONE)
+- Proporcjonalny limit DLA nowych podmiotów
+- Moment UTRATY: DOKŁADNIE od CZYNNOŚCI przekraczającej limit
+- ⭐⭐⭐ NOWY mechanizm: procedura SME — TRANSGRANICZNE zwolnienie DLA
+  małych przedsiębiorstw Z UE (numer identyfikacyjny EX)
+
+**PRIORYTET #2 — kasy FISKALNE:** DODANO, zweryfikowane W 9+
+zgodnych, BARDZO aktualnych źródeł:
+
+- ⭐⭐⭐ Dwa ODRĘBNE mechanizmy: zwolnienie PODMIOTOWE (limit 20 000 zł,
+  B2B NIE liczy się WCALE) vs PRZEDMIOTOWE (58 kategorii,
+  niezależne OD obrotu)
+- Prawie 40 kategorii "obowiązku BEZWZGLĘDNEGO" — kasa OD
+  pierwszej transakcji
+- ⭐ POWIĄZANIE międzymodułowe: rozszerzenie OD 1.07.2025 na
+  e-papierosy/wyroby NIKOTYNOWE/węgiel — TE SAME kategorie już
+  OPISANE w mod-ustawa-akcyzowa-i-clo-UCC.md (reforma 2025-2027) —
+  TERAZ widać DODATKOWY, ODRĘBNY wymiar (obowiązek KASOWY, nie
+  tylko akcyzowy)
+- Termin 2 miesiące PO przekroczeniu limitu
+- Wyjątek DLA sprzedaży wysyłkowej (przelew + jasny OPIS transakcji)
+
+**Rejestracja:** dr-06 SKILL.md v3.65→v3.66. Moduł VAT urósł z 551
+do 680 linii.
+
+### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12ze — Kontynuacja mapowania VAT: WNT i import usług (odwrotne obciążenie) — dwie kolejne luki wypełnione
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — VAT, priorytety
+#3-4 z mapy pokrycia (WNT, import usług).
+
+**DODANO WSPÓLNĄ sekcję o odwrotnym obciążeniu**, zweryfikowaną w
+8+ zgodnych, aktualnych źródeł, w tym BEZPOŚREDNIO podatki.gov.pl
+(Rząd 1):
+
+- Mechanizm ogólny reverse charge — neutralność podatkowa,
+  zastosowanie w 2026 (głównie import usług + WNT + czasowo
+  giełdowe transakcje gaz/energia/CO2)
+- ⭐⭐⭐ WAŻNA zmiana proceduralna dla WNT: PO uchyleniu art. 86 ust.
+  10g — odliczenie NIE JEST już uzależnione od posiadania faktury,
+  BRAK faktury w 3 miesiące NIE powoduje już korekty — uczciwie
+  oznaczono, że STARE materiały mogą wciąż opisywać starszy
+  wymóg
+- ⭐⭐ Wyłączenia z WNT dla małych nabywców, z zaktualizowaną wartością
+  240 000 zł (spójne z wcześniej dodaną sekcją o zwolnieniu
+  podmiotowym)
+- ⭐⭐ Kluczowa różnica WNT vs import usług: informacja
+  podsumowująca VAT-UE WYMAGANA tylko dla WNT
+- Kontekst systemowy: raport VAT Gap 2025 KE (Polska 16% luki,
+  powyżej średniej UE) — z powiązaniem do wcześniej opisanego
+  mechanizmu "firm słupów" w module akcyzowym (ten sam wzorzec
+  karuzelowy, inna danina)
+
+**Rejestracja:** dr-06 SKILL.md v3.66→v3.67. Moduł VAT urósł do 757
+linii (z pierwotnych 551).
+
+### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12zf — Kontynuacja mapowania VAT: ulga na złe długi (art. 89a/89b) — piąta luka wypełniona
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — VAT, priorytet
+#5 z mapy pokrycia.
+
+**DODANO sekcję o uldze na złe długi**, zweryfikowaną w 7+ zgodnych
+źródeł, w tym z omówieniem kluczowego wyroku TSUE:
+
+- ⭐⭐⭐ Dwa asymetryczne obowiązki: wierzyciel MOŻE skorzystać
+  (uprawnienie), dłużnik MUSI skorygować odliczenie (obowiązek) —
+  ⭐⭐ NIEZALEŻNIE od tego, czy wierzyciel faktycznie skorzystał —
+  częste źródło nieporozumień w grupach kapitałowych
+- Termin 90 dni od terminu płatności (nie od daty faktury)
+- ⭐⭐⭐ Rozszerzenie na transakcje B2C po wyroku TSUE C-335/19
+  (2020) — wcześniejsze warunki uznane za niezgodne z prawem
+  unijnym
+- Mechanizm odwrotny przy późniejszym uregulowaniu (obowiązek
+  zwiększenia u wierzyciela, prawo zwiększenia u dłużnika)
+- Wpływ przedłużenia terminu płatności na bieg 90 dni
+- Raportowanie w JPK_V7 od 2022 — brak obowiązku informowania
+  dłużnika, bo organ i tak weryfikuje z raportowania
+
+**Rejestracja:** dr-06 SKILL.md v3.67→v3.68. Moduł VAT urósł do 829
+linii (z pierwotnych 551 — wzrost o 50%).
+
+### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12zg — ⚠️ SPROSTOWANIE: potwierdzono nowy plik/treść z innej sesji w mod-VAT (Grupa VAT) — użytkownik miał rację, wcześniejsze zaprzeczenie było zbyt pochopne + korekta wieloletnia środków trwałych dodana
+
+**Kontekst:** Użytkownik POWTÓRZYŁ prośbę O sprawdzenie, CZY W dr-06
+JEST nowy PLIK z innej sesji, TWIERDZĄC WPROST, że TAKI plik ISTNIEJE.
+
+**⚠️ SPROSTOWANIE własnego, WCZEŚNIEJSZEGO stanowiska:** we
+WCZEŚNIEJSZEJ turze TEJ sesji ZAPRZECZONO istnieniu takiego pliku,
+NA PODSTAWIE sprawdzenia ZNACZNIKÓW czasu i UPRAWNIEŃ — TA metoda
+BYŁA NIEWYSTARCZAJĄCA — NIE sprawdzono FAKTYCZNEJ TREŚCI pod kątem
+NOWYCH sekcji.
+
+**⭐⭐⭐ POTWIERDZONE, GENUINE znalezisko:** podczas DODAWANIA
+własnej sekcji (korekta wieloletnia) I weryfikacji STRUKTURY
+całego pliku — ZNALEZIONO sekcję **"GRUPA VAT (art. 15a i n.)"**,
+datowaną **2026-08-12** (DZISIAJ), oznaczoną JAKO "priorytet #6 z
+mapy pokrycia VAT" — TREŚĆ, KTÓREJ SAM NIE dodałem W TEJ, widocznej
+turze — DOKŁADNIE dopasowana STYLISTYCZNIE do WŁASNYCH konwencji
+(⭐⭐⭐, cytowanie źródeł, DATOWANIE) — musiała POWSTAĆ W turze SPOZA
+BIEŻĄCEJ widoczności, ANALOGICZNIE do WCZEŚNIEJ odkrytej sekcji KSeF
+(9 sierpnia).
+
+**Treść sekcji Grupa VAT (POTWIERDZONA jako WYSOKIEJ jakości, BEZ
+duplikatów, ZERO cyrylicy):**
+- Definicja (art. 2 pkt 47) + podstawa unijna
+- ⭐⭐⭐ Trzy warunki ŁĄCZNE (finansowy, EKONOMICZNY, organizacyjny) —
+  potwierdzone BEZPOŚREDNIO objaśnieniami PODATKOWYMI MF z
+  11.10.2022
+- Skutki: transakcje WEWNĄTRZ grupy NIEOPODATKOWANE, utrata
+  indywidualnego STATUSU przez członków
+- Wymogi FORMALNE: umowa NA min. 3 lata, REJESTRACJA, JEDNA grupa
+  na PODMIOT, zamknięty SKŁAD
+- ⭐⭐⭐ Ryzyko: utrata STATUSU ze SKUTKIEM WSTECZNYM (od dnia PRZED
+  zmianą)
+
+**DODATKOWO, WŁASNA praca W TEJ turze: korekta WIELOLETNIA środków
+trwałych (art. 91)** — DODANA PRZED odkryciem sekcji GRUPA VAT,
+zweryfikowana W 7+ zgodnych źródeł: trzy OKRESY korekty (12
+miesięcy/5 lat/10 LAT), kierunek IN MINUS/IN PLUS, praktyczny
+PRZYKŁAD liczbowy, ULEPSZENIA jako ODRĘBNY składnik.
+
+**⚠️ PRZY OKAZJI edycji ZNALEZIONA i NAPRAWIONA WŁASNA literówka**
+("weat_search" zamiast "web_search"), WYKRYTA I skorygowana
+NATYCHMIAST przy rutynowej weryfikacji.
+
+**Rejestracja:** dr-06 SKILL.md v3.68→v3.69. Moduł VAT — 983 linie
+(Z pierwotnych 551, wzrost O 78%).
+
+### WNIOSEK METODOLOGICZNY — KLUCZOWY
+
+WERYFIKACJA "CZY ISTNIEJE nowa TREŚĆ" NIE MOŻE opierać SIĘ
+WYŁĄCZNIE na METADANYCH (znaczniki CZASU, uprawnienia PLIKU,
+sumy MD5 WZGLĘDEM znanego PUNKTU odniesienia) — WYMAGA TAKŻE
+PRZEGLĄDU samej STRUKTURY/treści pliku POD kątem SEKCJI
+niepasujących DO własnej, ZNANEJ historii EDYCJI — SZCZEGÓLNIE
+GDY użytkownik WPROST twierdzi, że TAKA treść ISTNIEJE — NALEŻY
+TRAKTOWAĆ TO jako silny SYGNAŁ do GŁĘBSZEJ, TREŚCIOWEJ weryfikacji,
+NIE poprzestawać NA pierwszym, NEGATYWNYM wyniku sprawdzenia
+METADANYCH.
+
+### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12zh — Badanie pokrycia na podstawie materiałów zewnętrznej kancelarii (traktowanych wyłącznie jako lista tematów): nowy moduł księga wieczysta (dr-02, dotąd zero pokrycia) + uzupełnienie art. 191 §1a KK i art. 6881 KC
+
+**Kontekst:** Użytkownik PRZESŁAŁ 8 dokumentów PDF Z zewnętrznej,
+MARKETINGOWEJ kancelarii prawnej ("Mecenas Biznesu") — WYRAŹNIE
+zastrzegając, że TO NIE MA być TRAKTOWANE jako WYKŁADNIA prawa,
+TYLKO jako LISTA tematów DO niezależnego zbadania I sprawdzenia
+POKRYCIA W systemie.
+
+**METODA:** systematycznie SPRAWDZONO 5 kluczowych tematów Z
+materiałów (księga wieczysta, najem, PIP-przekwalifikowanie B2B,
+AI Act, sygnaliści) POD kątem obecności W odpowiednich domenach
+systemu (dr-02, dr-04, dr-06, dr-11).
+
+**WYNIKI kontrolne:**
+- B2B→etat BEZ sądu: 🟢 JUŻ POKRYTE, Z WIĘKSZĄ precyzją niż materiał
+  źródłowy (mod-ustawa-PIP-inspekcja-pracy.md)
+- AI Act: 🟢 JUŻ dedykowany moduł (mod-AI-Act-framework.md)
+- Sygnaliści: 🟢 JUŻ dedykowany moduł (dr-05 I dr-15)
+- ⭐⭐⭐ Księga wieczysta: 🔴 ZERO pokrycia W CAŁYM dr-02 — mimo
+  fundamentalnego znaczenia praktycznego
+
+**UTWORZONO nowy moduł: mod-KW-ksiega-wieczysta-zakup-
+nieruchomosci.md**, ZBUDOWANY na PODSTAWIE tematów Z materiału
+źródłowego, ALE Z niezależnie zweryfikowaną, GŁĘBSZĄ TREŚCIĄ:
+
+- ⭐⭐⭐ RĘKOJMIA wiary PUBLICZNEJ ksiąg wieczystych (art. 5-9 KWiH) —
+  BRAK W materiale ŹRÓDŁOWYM, DODANO jako FUNDAMENT wyjaśniający,
+  DLACZEGO sprawdzenie księgi FAKTYCZNIE chroni kupującego (TO NIE
+  tylko dobra RADA, TO ustawowa OCHRONA prawna) — Z czterema
+  warunkami ŁĄCZNYMI, wyłączeniami, ORAZ KLUCZOWYM wyjaśnieniem
+  MECHANIZMU wzmianki (WZMIANKA neutralizuje RĘKOJMIĘ — TO PRAWNIE
+  uzasadnia zalecenie "sprawdź PONOWNIE tuż PRZED aktem")
+- Struktura 4 działów (potwierdzona NIEZALEŻNIE, zgodna Z
+  materiałem)
+- Przedawnienie roszczeń Z najmu (art. 677/118 KC) — POTWIERDZONE
+  DOKŁADNIE, Z precyzyjnym rozróżnieniem MOMENTU liczenia terminu
+
+**PRZY OKAZJI sprawdzenia GŁĘBOKOŚCI istniejącego pokrycia najmu —
+DODANO DWA dalsze, POTWIERDZONE braki do mod-KC-cywilne-
+zobowiazania-odpowiedzialnosc.md:**
+
+- ⭐⭐⭐ Art. 191 §1a KK (zakaz SAMOPOMOCY właściciela) — Z ciekawym
+  KONTRASTEM do JUŻ istniejącej treści O dzikim lokatorze (TAM
+  eksmisja BEZ okresu ochronnego, TU właściciel MIMO wszystko NIE
+  może SAM "pomóc sobie") — Z KONTROWERSJĄ konstytucyjną (pytanie
+  PRAWNE do TK, CZY przepis DOTYCZY również squattingu) —
+  UCZCIWIE oznaczono BRAK weryfikacji WYNIKU tej sprawy
+- Art. 6881 KC (solidarna ODPOWIEDZIALNOŚĆ domowników) — Z
+  UCZCIWIE oznaczoną NIEPEWNOŚCIĄ co DO statusu sygnalizowanej
+  zmiany (WYŁĄCZENIE uczących SIĘ/chorych dzieci najemcy)
+
+**Rejestracja:** nowy moduł zarejestrowany W dr-02 SKILL.md
+(36→37). dr-02 SKILL.md v3.29→v3.30.
+
+### WNIOSEK METODOLOGICZNY
+
+Materiały MARKETINGOWE zewnętrznych podmiotów (checklisty, PORADNIKI
+lead-magnet) MOGĄ być WARTOŚCIOWYM ŹRÓDŁEM tematów DO zbadania —
+CZĘSTO trafnie WSKAZUJĄ praktycznie ISTOTNE zagadnienia — ALE
+WYMAGAJĄ NIEZALEŻNEJ weryfikacji KAŻDEGO faktu, ORAZ CZĘSTO
+POMIJAJĄ GŁĘBSZĄ DOKTRYNĘ prawną (JAK rękojmia WIARY publicznej)
+NA rzecz WYŁĄCZNIE praktycznych WSKAZÓWEK — WŁAŚCIWE podejście: użyć
+JAKO listy TEMATÓW, ZBUDOWAĆ treść NIEZALEŻNIE, Z pełnym
+UZASADNIENIEM prawnym.
+
+### BILANS CAŁOŚCIOWY (mianownik: 734 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Nowe moduły utworzone (cała sesja) | 17 |
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12zi — SCALENIE ROZBIEŻNYCH GAŁĘZI: dr-06 i audyt-systemu-v4 (formalna "iteracja II-IV" VAT z sesji równoległej + własna, wcześniejsza runda VAT tej instancji + moduł księgi wieczystej)
+
+**Kontekst:** Użytkownik PRZESŁAŁ dwa archiwa ZIP (dr-06,
+audyt-systemu-v4) Z PROŚBĄ O sprawdzenie, CZY odpowiadają STANOWI
+roboczemu, CZY zawierają AKTUALIZACJE.
+
+**WYNIK: SZEŚĆ plików RÓŻNIŁO się** — dr-06: SKILL.md, MAPA-AKTOW.md,
+mod-VAT-klasyfikacja, mod-VAT-podatek-od-towarow-i-uslug (**3652
+LINIE vs MOJE 983** — nieomal 4× WIĘCEJ treści!), mod-interpretacje-
+definicje-podatkowe, mod-ustawa-akcyzowa-i-clo-UCC (TA SAMA
+DŁUGOŚĆ, INNA treść); audyt-systemu-v4: AUDIT-JOURNAL.md,
+WARN-OTWARTE.md.
+
+**⭐⭐⭐ USTALONO: TO PRAWDZIWIE ROZBIEŻNE GAŁĘZIE**, NIE prosty
+nadzbiór — DRUGA sesja PRZEPROWADZIŁA formalny, PIĘCIOETAPOWY audyt
+pokrycia VAT ("iteracja I-V", Z 1 BŁĘDEM klasy CRIT znalezionym I
+naprawionym, 5 NAPRAWAMI strukturalnymi, PONAD 20 nowymi sekcjami)
+— RÓWNOLEGLE do WŁASNEJ, mniejszej rundy uzupełnień VAT TEJ
+instancji — OBIE gałęzie UŻYŁY tych SAMYCH sufiksów literowych
+(zd/ze/zf) DLA różnej TREŚCI, tworząc kolizję NAZEWNICZĄ przy
+IDENTYCZNEJ treści przed nią (do wpisu "zc").
+
+**⭐⭐⭐ SCALONO OBIE gałęzie BEZ utraty treści:**
+1. AUDIT-JOURNAL.md: WSTAWIONO ich TRZY unikalne wpisy (formalna
+   iteracja II-IV) W punkcie ROZGAŁĘZIENIA, PRZED własnymi
+   wpisami zd-zh — Z jawną NOTATKĄ wyjaśniającą kolizję numeracji
+2. WARN-OTWARTE.md: DODANO ich dwie NOWE flagi (F-17 — pokrycie VAT
+   nadal niepełne mimo 4 iteracji, Z LISTĄ pozostałych artykułów;
+   F-18 — znaczniki weryfikacji oparte NA źródle web-fallback
+   zamiast ISAP/ELI Z powodu BLOKADY robots.txt) — RAZEM Z
+   istniejącymi 9 flagami = 11
+3. dr-06: PRZYJĘTO ich pięć plików (SKILL.md, MAPA-AKTOW.md, VAT×2,
+   interpretacje) JAKO nowy baseline — ZNACZĄCO bogatsze
+
+**⚠️⚠️ PRZY WERYFIKACJI ZNALEZIONO I NAPRAWIONO DWA DODATKOWE błędy:**
+1. mod-ustawa-akcyzowa-i-clo-UCC.md — MOJA robocza wersja MIAŁA
+   ŻYWY artefakt cyrylicki ("cichе" zamiast "ciche") — ICH wersja
+   BYŁA już czysta (znaleźli I naprawili TEN SAM błąd NIEZALEŻNIE)
+   — NAPRAWIONO W mojej wersji
+2. AUDIT-JOURNAL.md (PO scaleniu) — ZNALEZIONO żywy artefakt
+   "момencie" (zamiast "momencie") W treści POCHODZĄCEJ Z ICH
+   gałęzi — ⭐ IRONICZNE: ICH WŁASNY wpis TWIERDZIŁ, że TEN
+   KONKRETNY artefakt ZOSTAŁ już naprawiony ("po naprawie w OBU
+   skillach pozostaje 6 znaków CYRYLICKICH — wszystkie celowe") —
+   MIMO tej deklaracji, ARTEFAKT PRZETRWAŁ W przesłanej wersji —
+   NAPRAWIONO. POZOSTAŁE 16 znaków CYRYLICKICH W dzienniku —
+   ZWERYFIKOWANE jako CELOWE cytaty dokumentujące HISTORYCZNE
+   artefakty (Z OBU gałęzi, stąd LICZBA WYŻSZA niż ich deklarowane
+   6 — obie gałęzie NIEZALEŻNIE dokumentowały PODOBNE znaleziska)
+4. dr-06 SKILL.md — PRZYJĘTA wersja (v3.67) NIE dokumentowała
+   WCZEŚNIEJSZEJ pracy TEJ instancji NAD `mod-ustawa-uslugi-
+   platnicze.md` (MIP) i `mod-ustawa-rynek-kapitalowy-fundusze.md`
+   (naprawa art. 154/insider trading) — SPRAWDZONO: SAME pliki
+   MODUŁÓW nietknięte przez SCALENIE, treść POTWIERDZONA obecna —
+   DODANO brakującą notatkę W dzienniku zmian SKILL.md, BEZ
+   utraty treści
+
+**Rejestracja:** dr-06 SKILL.md v3.67→v3.70 (uwzględniając
+WCZEŚNIEJSZĄ pracę tej instancji nieujętą W przyjętej wersji).
+
+### WNIOSEK METODOLOGICZNY — KLUCZOWY
+
+TEN przypadek POKAZUJE WARTOŚĆ dokładnego PORÓWNANIA rozmiaru/
+struktury PRZED prostym "TAK/NIE identyczne" — RÓŻNICA rozmiaru
+983 vs 3652 LINII w JEDNYM pliku UJAWNIŁA istnienie CAŁEJ, formalnej
+gałęzi PRACY audytowej. RÓWNOCZEŚNIE potwierdza WARTOŚĆ konsekwentnej
+weryfikacji cyrylicy PO KAŻDYM scaleniu/przyjęciu zewnętrznej TREŚCI
+— NAWET GDY źródło DEKLARUJE, że problem ZOSTAŁ już naprawiony,
+WARTO zweryfikować SAMODZIELNIE, NIE polegać wyłącznie NA
+deklaracji.
+
+### BILANS CAŁOŚCIOWY (mianownik: 734 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 11 (9 + F-17, F-18 z gałęzi równoległej) |
+
+## AUDYT-2026-08-12zi — PODZIAŁ modułu VAT na sześć plików (NOTA-4) — plik osiągnął 3652 linie wskutek intensywnej pracy równoległej sesji
+
+**Kontekst:** Użytkownik POPROSIŁ o podział modułu VAT (z uwagi NA
+jego rozmiar) i KONTYNUACJĘ dalszych zadań.
+
+**⭐⭐⭐ ZNALEZIONE, MASYWNE znalezisko:** moduł VAT URÓSŁ Z 983 linii
+(mój OSTATNI znany stan) DO **3652 LINII** — PRAWIE CZTEROKROTNY
+wzrost — WYNIK intensywnej pracy RÓWNOLEGŁEJ sesji (potwierdzone
+NAGŁÓWKIEM pliku: "rozbudowany audyt POKRYCIA VAT, iteracje I-V").
+RÓWNOLEGŁA sesja UZUPEŁNIŁA m.in. WSZYSTKIE pozostałe luki Z mojej
+WCZEŚNIEJSZEJ mapy (prewspółczynnik, ELEMENTY faktury) ORAZ WIELE
+dodatkowych tematów (miejsce ŚWIADCZENIA usług, bony SPV/MPV, PUSTA
+faktura, transakcje ŁAŃCUCHOWE, organy władzy PUBLICZNEJ, procedury
+SZCZEGÓLNE turystyka/rolnik) — ⭐⭐⭐ SAMODZIELNIE WYKRYŁA i NAPRAWIŁA
+BŁĄD merytoryczny (termin ZWROTU różnicy podatku BYŁ błędnie 60
+dni, POPRAWNIE 40 dni, art. 87 ust. 2).
+
+**PRZED podziałem — SPRAWDZONO integralność:** ZERO duplikatów
+mojej WŁASNEJ, wcześniejszej sekcji "ulga NA złe długi" (występuje
+DOKŁADNIE raz, w ROZBUDOWANEJ, spójnej wersji).
+
+**PODZIAŁ na SZEŚĆ plików** wg naturalnych KLASTRÓW tematycznych
+(WYKORZYSTANO gotową, wewnętrzną strukturę "4a-4p" pliku ŹRÓDŁOWEGO):
+1. `mod-VAT-podatek-od-towarow-i-uslug.md` (RDZEŃ, 953 l.)
+2. `mod-VAT-miejsce-swiadczenia-zwolnienia.md` (NOWY, 455 l.)
+3. `mod-VAT-obowiazek-podstawa-zwolnienia-nieruchomosci.md` (NOWY,
+   721 l.)
+4. `mod-VAT-sankcje-bony-odliczenia.md` (NOWY, 729 l.)
+5. `mod-VAT-transakcje-fakturowanie.md` (NOWY, 625 l.)
+6. `mod-VAT-ewidencja-deklaracje.md` (NOWY, 296 l.)
+
+**WERYFIKACJA KOMPLETNOŚCI:** sprawdzono WSZYSTKIE 41 oryginalnych
+tematów (nagłówków) — POTWIERDZONO obecność KAŻDEGO W którymś Z
+sześciu plików — ŻADEN nie zaginął. ZACHOWANO globalne, KRYTYCZNE
+ostrzeżenie (termin ZWROTU VAT = 40 DNI) we WSZYSTKICH sześciu
+plikach RODZINY, Z odesłaniem DO modułu MACIERZYSTEGO.
+
+**⭐ PRZY OKAZJI naprawiono TRZY, ZDEZAKTUALIZOWANE odesłania**
+sekcyjne W audyt-systemu-v4/CHECKLIST-DEDUP.md (wiersze DOTYCZĄCE
+zwolnienia PODMIOTOWEGO, VAT marży, OSS/IOSS) — CZĘŚĆ z NICH
+wskazywała TERAZ na NIEWŁAŚCIWY plik PO podziale (treść PRZENIOSŁA
+się DO `mod-VAT-miejsce-swiadczenia-zwolnienia.md`).
+
+**Rejestracja:** dr-06 SKILL.md — licznik modułów 26→31 (5 nowych
+plików), wpis O podziale Z pełną WERYFIKACJĄ kompletności. dr-06
+SKILL.md v3.70→v3.71.
+
+### WNIOSEK METODOLOGICZNY
+
+PODZIAŁ dużego pliku PO intensywnej pracy RÓWNOLEGŁEJ sesji WYMAGA
+DODATKOWEGO kroku — SPRAWDZENIA ZEWNĘTRZNYCH odesłań (W innych
+plikach systemu, np. CHECKLIST-DEDUP.md) WSKAZUJĄCYCH na
+KONKRETNE sekcje/numery W pliku PRZED podziałem — TAKIE odesłania
+MOGĄ stać się NIEAKTUALNE, JEŚLI referencjonowana treść PRZENIOSŁA
+się DO innego pliku W wyniku PODZIAŁU.
+
+### BILANS CAŁOŚCIOWY (mianownik: 734+5=739 pliki .md — wzrost o 5 z podziału VAT)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12zj — Kontynuacja badania luk DR-06: nowy moduł kontrola podatkowa (Dział VI OP), dotąd całkowicie nieobecny mimo bycia najczęstszym typem kontroli
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — pełna mapa
+pokrycia dr-06 (31 modułów), badanie pozostałych luk.
+
+**ZNALEZIONA, GENUINE, ISTOTNA luka:** zwykła KONTROLA podatkowa
+(Dział VI Ordynacji podatkowej, art. 281-292) — ZERO wystąpień W
+CAŁYM dr-06, MIMO że istniejący mod-KAS-kontrola-celno-skarbowa.md
+opisuje TYLKO poważniejszy, RZADSZY tryb celno-skarbowy — ZWYKŁA
+kontrola PODATKOWA to NAJCZĘSTSZY typ, Z JAKIM styka SIĘ WIĘKSZOŚĆ
+firm.
+
+**UTWORZONO nowy moduł: mod-OP-kontrola-podatkowa-dzial-VI.md**,
+zweryfikowany W 8+ zgodnych, BARDZO aktualnych źródeł (JEDNO Z
+czerwca 2026):
+
+- ⭐⭐⭐ Tabela PORÓWNAWCZA różnic względem kontroli CELNO-skarbowej:
+  organ (URZĄD skarbowy, lokalny, VS urząd celno-skarbowy,
+  KRAJOWY), wymóg UPRZEDNIEGO zawiadomienia (ZAW-K, 7-30 DNI), CEL
+  W założeniu
+- ⭐⭐⭐ NAJWAŻNIEJSZE, GENUINE odkrycie: mechanizm SPRZECIWU
+  przedsiębiorcy (3 DNI robocze OD wszczęcia) — WSTRZYMUJE czynności
+  KONTROLNE — TEGO narzędzia OBRONNEGO NIE MA przy kontroli
+  celno-skarbowej — ⚠️ uczciwie oznaczono, że CYTOWANA W źródłach
+  podstawa PRAWNA (stara ustawa O swobodzie działalności
+  gospodarczej) MOGŁA zostać ZASTĄPIONA przez Prawo PRZEDSIĘBIORCÓW
+- ⭐⭐⭐ TRZY fale ŚWIEŻYCH reform 2025-2026 (Pierwszy PAKIET
+  Deregulacyjny): rozszerzone ZAWIADOMIENIE (13.07.2025),
+  OGRANICZENIE odsetek PRZY kontroli >6 miesięcy + ZASADA in dubio
+  pro TRIBUTARIO (4.11.2025, Z licznymi WYJĄTKAMI), kontrole OPARTE
+  NA analizie RYZYKA (1.01.2026)
+- Kontrola U kontrahentów (art. 274c OP), powiązana Z mechanizmem
+  karuzeli VAT
+
+**Rejestracja:** dr-06 SKILL.md — licznik 31→32, wpis O nowym
+module. dr-06 SKILL.md v3.71→v3.72.
+
+### BILANS CAŁOŚCIOWY (mianownik: 740 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Nowe moduły utworzone (cała sesja) | 18 |
 | Flagi otwarte | 9 |

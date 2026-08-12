@@ -1,6 +1,6 @@
 ---
 name: dr-06-podatki-finanse-publiczne-aml
-version: 3.67
+version: 3.72
 description: |
   DR-06: Podatki, Finanse Publiczne, AML
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -68,7 +68,246 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   od KC; nowelizacja znosi "wieczne przedawnienie" + wprowadza ugodę
   podatkową od 01.10.2026 (art. 70 i n. OP)
 
-## Moduły (26 łącznie — ✓ 26 OK, ☐ 0 STUB)
+## Moduły (37 łącznie — ✓ 37 OK, ☐ 0 STUB)
+
+**Aktualizacja 2026-08-13 (ETAP 3 — dokończenie podatków sektorowych:
+gry hazardowe i podatek tonażowy, na żądanie użytkownika):** w module
+mod-podatki-sektorowe-bankowy-gry-tonazowy-cukrowy-detaliczny.md
+domknięto Część B (podatek od gier — pełny katalog 7 stawek 2,5%-50%
+zależnie od typu gry, podstawa opodatkowania per rodzaj z zasadą
+niepodlegania sumowaniu, odrębny mechanizm dopłat do 4 funduszy
+celowych w tym Fundusz Rozwiązywania Problemów Hazardowych) i Część C
+(podatek tonażowy — stawka 19% od dochodu liczonego stawką dobową
+wg pojemności NT statku, stawka szczególna 15% dla sprzedaży statków,
+✅ zweryfikowany bezpośrednio w sip.lex.pl 10-letni okres związania
+wyborem — najdłuższy spośród wszystkich mechanizmów opcjonalnych w
+całym systemie DR-06, odnotowano potencjalne znaczenie regionalne ze
+względu na bliskość portów Szczecin/Świnoujście). **Stan po Etapie 3:
+wszystkie pięć podatków sektorowych (bankowy, gry, tonażowy, cukrowy,
+sprzedaż detaliczna) jest w pełni opracowanych — moduł kompletny,
+zamyka pierwotny plan etapowy uzupełniania luk DR-06 zainicjowany
+na żądanie użytkownika.**
+
+**Aktualizacja 2026-08-13 (ETAP 2c — priorytetowa część grupy
+"złożonej" luk VAT, na żądanie użytkownika — ZAMKNIĘCIE serii etapów
+uzupełniania VAT):** w rdzeniu dodano Sekcję 7, domykającą CESOP
+(art. 110a-110e — próg 25 płatności transgranicznych/kwartał wobec
+tego samego odbiorcy, obowiązki dostawców usług płatniczych,
+powiązanie z wykrywalnością nieprawidłowości w e-commerce), wyroby
+medyczne (art. 145c-145d — WAŻNE ODKRYCIE: przepis przejściowy
+wygasł 27.05.2025 r., dziś ma charakter w większości historyczny —
+relewantny wyłącznie dla okresów rozliczeniowych sprzed tej daty),
+centralizację VAT jednostek samorządu terytorialnego (WAŻNE ODKRYCIE
+STRUKTURALNE: to nie luka w samej ustawie o VAT, lecz odrębna ustawa
+z 2016 r. — geneza z wyroku TSUE C-276/14 Gmina Wrocław i uchwały NSA
+I FPS 4/15, zasada "wszystko albo nic" przy centralizacji), art. 43
+ust. 3-5 (rezygnacja rolnika ryczałtowego ze zwolnienia — uproszczenie
+od 2011 r., okres związania 3 lata, kolejny przykład powtarzającego
+się w ustawie wzorca "wybór wiąże na czas określony"). Pozostałe
+drobne pozycje (108c-108g, 92-95, 112-112aa, 134a-134c, 138i-138j,
+szczegółowe fakturowanie 106a/106d/106f/106l/106m-106q) świadomie
+potraktowane nawigacyjnie zgodnie z zasadą lazy loading — niska
+częstotliwość w typowej praktyce kancelaryjnej cywilno-karno-
+gospodarczej, do opracowania reaktywnie przy faktycznej sprawie z
+danego zakresu. Stan po Etapie 2c: wszystkie priorytetowe luki VAT
+zidentyfikowane w audycie pokrycia (iteracje I-VII + etapy 2a-2c)
+są domknięte; pozostają wyłącznie tematy niszowe/techniczne.
+
+**Aktualizacja 2026-08-13 (ETAP 2b — grupa "średnia" luk peryferyjnych
+VAT, na żądanie użytkownika):** w rdzeniu dodano Sekcję 6, domykającą
+art. 121-125 (złoto inwestycyjne — definicja dwuskładnikowa, zwolnienie
+z prawem do odliczenia jako rzadki wyjątek, powiązanie z AML), art. 114
+(taksówki — wykryto i udokumentowano rozbieżność między literalną
+stawką 3% a faktycznie stosowaną 4%, analogiczną do mechanizmu
+22%→23% w stawce podstawowej), art. 13a-13l (call-off stock, oba
+kierunki, ryzyko przekroczenia terminu 12 miesięcy), art. 89 (VAT-REF
+— dwa odrębne kierunki procedury, aktualizacja wykonawcza z 2026 r.),
+art. 32 (szacowanie przy powiązaniach — wykryto, że dawny autonomiczny
+katalog powiązań na gruncie samego VAT jest uchylony i zastąpiony
+odesłaniem do definicji z PIT/CIT), art. 101-102 (korekty informacji
+podsumowującej VAT-UE — brak sztywnego terminu, charakter lex specialis
+wobec Ordynacji podatkowej, powiązanie z ryzykiem utraty stawki 0%
+przy WDT).
+
+**Aktualizacja 2026-08-13 (ETAP 2a — grupa "szybka" luk peryferyjnych
+VAT, na żądanie użytkownika):** w rdzeniu `mod-VAT-podatek-od-
+towarow-i-uslug.md` dodano nową Sekcję 5, domykającą art. 2 (słownik
+— kluczowe definicje z 52 pozycji: sprzedaż, mały podatnik, ZCP,
+tereny budowlane, pojazdy samochodowe, system kaucyjny), art. 3
+(właściwość organu — WYŁĄCZNIE przypadki szczególne: podatnicy
+zagraniczni/OSS/IOSS, SME transgraniczne, grupa VAT; ust. 1-2 SĄ
+uchylone), art. 28p (zawiadomienie o wyborze/rezygnacji z miejsca
+opodatkowania dla WSTO i usług TBE), art. 44 (zwolnienia WNT —
+przepis-przełącznik odsyłający do art. 43 ust. 1 pkt 5-8 i Rozdziału
+3 o imporcie), art. 84-85 (struktura zakupów i metoda "w stu" — w
+trakcie weryfikacji wykryto i SKORYGOWANO własną wstępną hipotezę o
+nieaktualności przeliczników art. 85; ostatecznie potwierdzono, że
+18,70%/7,41%/4,76% dla stawek 23%/8%/5% SĄ aktualne, oraz odróżniono
+ten mechanizm od podobnie nazwanej metody przeliczeniowej z art.
+106e). Metodologia: Rząd 1 (ISAP) niedostępny do web_fetch w tej
+sesji — zastosowano lexlege.pl jako główne źródło Rządu 2B (t.j.
+Dz.U.2025.0.775, stan prawny wprost oznaczony jako aktualny na
+12.08.2026), potwierdzone krzyżowo w przepisy.gofin.pl, poltax.pl,
+ifirma.pl.
+
+**Aktualizacja 2026-08-12 (ITERACJA VII — domknięcie osi transgranicznej
+i poziomu D bazy weryfikacji stawek; TRZY NOWE MODUŁY):** kontynuacja
+audytu pokrycia działami. Domknięto luki priorytetu P2:
+
+- `mod-VAT-import-towarow-i-zwolnienia-importowe.md` (NOWY) — ⭐⭐⭐ domyka
+  **NAJSŁABSZY DZIAŁ CAŁEJ USTAWY** (Dział VII, dotąd ~5%): art. 26a
+  (miejsce importu, podstawa odprawy fiskalnej w innym państwie UE),
+  art. 33 (⛔ termin **10 DNI** w modelu standardowym — NIE 25. dzień),
+  ⭐ art. 33a w pełnym ujęciu (warunki łączne, ⛔ skutek uboczny:
+  obowiązek rozliczeń MIESIĘCZNYCH — konflikt z metodą kasową;
+  mechanizm trzystopniowy: okno korekty **4 miesiące** → utrata prawa
+  + odsetki → ⛔ **fakultatywna** decyzja o pozbawieniu prawa na
+  **36 miesięcy**), art. 33b, art. 34–40; Dział VIII rozdz. 3
+  (art. 45–82a) w ujęciu NAWIGACYJNYM z ⛔ **dwoma alertami**:
+  (a) art. 51/próg 22 EUR — zwolnienie dla małych przesyłek zniesione
+  na poziomie unijnym od 1.07.2021 (pakiet e-commerce), opracowania
+  sprzed reformy są mylące; (b) art. 52 — TSUE zakwestionował warunek
+  „odbiorcy przebywającego na terytorium kraju"
+- `mod-VAT-WIS-tryb-i-ochrona.md` (NOWY) — art. 42a–42i: ⭐⭐⭐ **domyka
+  POZIOM D bazy weryfikacji stawek** z sekcji 3 modułu macierzystego
+  (dotąd poziom D był opisany jednym akapitem). Krąg wnioskodawców
+  (⭐ w tym ZAMAWIAJĄCY z PZP — wejście do DR-07), dwa cele wniosku
+  (stawka vs sama klasyfikacja, art. 42b ust. 4), zakres ochrony
+  (art. 42c — ⛔ warunek: faktyczne ZASTOSOWANIE stawki z WIS),
+  ważność **5 lat** (art. 42ha), ⛔⛔ **WYGAŚNIĘCIE Z MOCY PRAWA**
+  bez zawiadomienia przy zmianie przepisów (art. 42h ust. 1) —
+  operacyjny skutek: każda WIS w aktach wymaga ponownego sprawdzenia
+  po każdej zmianie stawek/załączników
+- `mod-VAT-kursy-walut-rachunek-VAT-tax-free.md` (NOWY) — art. 31a
+  (⭐ test decyzyjny: faktura PRZED czy PO obowiązku podatkowym;
+  opcja EBC; opcja spójności z PIT/CIT z **12-miesięcznym** związaniem),
+  art. 31b (korekty po SLIM VAT 3, kurs pierwotny vs zbiorczy),
+  art. 108b (uwolnienie środków z rachunku VAT: **60 dni**,
+  ⚠️ **postanowienie → zażalenie** vs **decyzja odmowna → odwołanie**,
+  rachunek techniczny ust. 10–15 — ⭐ krok pomijany przy likwidacji),
+  art. 126–130 TAX FREE (próg **200 zł**, ⛔ sprzedawca nie może
+  korzystać ze zwolnienia z art. 113, kasa ONLINE, PUESC,
+  okno korekty **10 miesięcy**)
+
+⚠️ **POZOSTAJĄCE LUKI VAT po iteracji VII:** art. 121–125 (złoto
+inwestycyjne), art. 89 (VAT-REF), art. 110a–110e (CESOP), art. 108g,
+art. 108c–108f, art. 32 (szacowanie — obecny szczątkowo), art. 13a–13l
+(call-off stock), art. 114 (taksówki), art. 84–85, art. 134a–134c,
+art. 138i–138j, art. 2 (systematyczny słownik), art. 3 (właściwość),
+art. 28p, art. 44, art. 92–95, art. 101–102, art. 112–112aa,
+art. 106a/106d/106f/106l/106m–106q, Dział XIII rozdz. 1b/1ca/1d,
+art. 43 ust. 3–5, centralizacja rozliczeń JST.
+
+**Aktualizacja 2026-08-12 (ITERACJA VI — audyt pokrycia VAT DZIAŁAMI,
+DWA NOWE MODUŁY):** przeprowadzono audyt pokrycia ustawy o VAT
+**według systematyki ustawy** (13 działów), a nie — jak dotąd —
+według historii pytań użytkownika. Struktura ustawy zweryfikowana
+online (t.j. Dz.U. 2025 poz. 775; potwierdzono BRAK nowszego tekstu
+jednolitego na 12.08.2026). Wynik: pokrycie globalne ~55–60%, ale
+skrajnie nierówne — Dział IX ~90%, Dział VII ~5%.
+
+⛔ **USUNIĘTY BŁĄD MERYTORYCZNY (wychwycony przez weryfikację online
+PRZED wpisaniem do modułu):** ulga na zakup kasy rejestrującej była
+w roboczej analizie opisana jako „300 zł". POPRAWNIE: ulga wynosi
+**90% ceny zakupu, nie więcej niż 700 zł** (art. 111 ust. 4);
+**300 zł to KARA PIENIĘŻNA** za brak przeglądu technicznego
+(art. 111 ust. 6ka). Sprostowanie utrwalone w module.
+
+Domknięto luki priorytetu P1:
+- `mod-VAT-rejestracja-zaplata-metoda-kasowa-likwidacja.md` (NOWY) —
+  Dział X rozdz. 1 (art. 96–98: pełny katalog wykreślenia z urzędu
+  ust. 9 i 9a + ⭐⭐⭐ TRZY ODRĘBNE ścieżki przywrócenia 9h/9ha/9j
+  z terminem 2 miesięcy + charakter czynności materialno-technicznej
+  i konsekwencja dla wyboru środka zaskarżenia; art. 97 VAT-UE
+  i efekt kaskadowy na stawkę 0% przy WDT), Dział X rozdz. 4
+  (art. 103–105d: termin 25. dnia, ⛔ **PAKIET PALIWOWY — 5 DNI**
+  z art. 103 ust. 5a, art. 103a/103b, ⭐ kaucja gwarancyjna
+  art. 105b + ostrzeżenie zał. 13 vs zał. 15), Dział IV rozdz. 3
+  (art. 21 metoda kasowa — rozróżnienie od rozliczenia kwartalnego,
+  art. 86 ust. 10e u nabywcy, wyjątki WNT/import usług), Dział II
+  rozdz. 4 (art. 14 remanent likwidacyjny — sprzężenie z art. 91
+  ust. 4–6 i ze zwrotem ulgi na kasę, zwolnienie 12-miesięczne,
+  checklist likwidacyjny, ⚠️ MONITORUJ projekt UD314 — zapowiedziana
+  likwidacja VAT-S1M/VAT-S1K)
+- `mod-VAT-platnicy-egzekucja-kasy-trojstronne.md` (NOWY) —
+  Dział III (art. 18 + art. 106c/106e ust. 1 pkt 20/106g ust. 2:
+  ⭐⭐⭐ komornik i organ egzekucyjny jako PŁATNIK, podatnikiem
+  pozostaje DŁUŻNIK; odliczenie u nabywcy i ryzyko art. 88 ust. 3a
+  pkt 2 przy nieruchomości; wątek KSeF), Dział XI rozdz. 3 w warstwie
+  USTAWOWEJ (art. 111 ust. 2 — utrata 30% odliczenia; ust. 4–5 ulga;
+  ust. 6 zwrot ulgi w okresie 3 lat; ust. 6ka kara 300 zł; art. 111b),
+  Dział XII rozdz. 8 (art. 135–138 procedura uproszczona — warunki
+  łączne, ⛔ organizator transportu, CZTERY obowiązkowe elementy
+  adnotacji z art. 136 ust. 1, oznaczenie w VAT-UE)
+
+⚠️ **POZOSTAJĄCE LUKI VAT po iteracji VI** (pełna lista działami
+w `MAPA-AKTOW.md`): Dział VII w całości (art. 33–40, import towarów),
+Dział VIII rozdz. 3 (art. 45–82a, zwolnienia importowe), art. 121–125
+(złoto inwestycyjne), art. 126–130 (TAX FREE), art. 89 (VAT-REF),
+art. 110a–110e (CESOP), art. 108b–108g, art. 31a (kursy walut),
+art. 13a–13l (call-off stock), art. 114 (taksówki), art. 84–85,
+art. 134a–134c, art. 138i–138j, art. 2 (systematyczny słownik),
+art. 3 (właściwość organów), art. 26a, art. 28p, art. 44,
+art. 92–95, art. 112–112aa, Dział XIII rozdz. 1b/1ca/1d.
+
+**Aktualizacja 2026-08-12 (NOWY MODUŁ):** `mod-OP-kontrola-podatkowa-
+dzial-VI.md` — dotąd CAŁKOWICIE nieobecny temat, mimo że to
+NAJCZĘSTSZY typ kontroli — ODRĘBNY od kontroli celno-skarbowej
+(inny organ, właściwość lokalna vs krajowa, wymóg uprzedniego
+zawiadomienia ZAW-K, ⭐⭐⭐ mechanizm SPRZECIWU przedsiębiorcy — 3 dni
+robocze, wstrzymuje czynności kontrolne — CAŁKOWICIE nieobecny przy
+celno-skarbowej). Uwzględnia TRZY fale świeżych reform 2025-2026
+(Pierwszy Pakiet Deregulacyjny): rozszerzone zawiadomienie
+(13.07.2025), ograniczenie odsetek przy kontroli >6 miesięcy +
+zasada in dubio pro tributario (4.11.2025), kontrole oparte na
+analizie ryzyka (1.01.2026).
+
+**Aktualizacja 2026-08-12 (PODZIAŁ modułu VAT, NOTA-4):** moduł VAT
+osiągnął 3652 linie (~9× próg 400 linii z audyt-systemu-v4/
+CHECKLIST-DEDUP.md) — WYNIK intensywnej pracy RÓWNOLEGŁEJ sesji
+(rozbudowany audyt pokrycia VAT, iteracje I-V, uzupełnił m.in.
+prewspółczynnik, elementy faktury, miejsce świadczenia usług, bony
+SPV/MPV, pustą fakturę, transakcje łańcuchowe — WSZYSTKIE
+wcześniej zidentyfikowane luki). PODZIELONO na SZEŚĆ plików wg
+naturalnych klastrów tematycznych:
+- `mod-VAT-podatek-od-towarow-i-uslug.md` (rdzeń, 953 l.) — alerty
+  PKWiU/KSeF, weryfikacja faktury w KSeF, CORE/INTAKE, baza
+  weryfikacji stawek, podstawowe mechanizmy (odliczenie, MPP, zwrot,
+  kasy fiskalne, biała lista, WNT/import usług, OSS/IOSS, WIS)
+- `mod-VAT-miejsce-swiadczenia-zwolnienia.md` (NOWY, 455 l.) —
+  grupa VAT, miejsce świadczenia usług, zwolnienie podmiotowe, VAT
+  marża, eksport/WDT
+- `mod-VAT-obowiazek-podstawa-zwolnienia-nieruchomosci.md` (NOWY,
+  721 l.) — obowiązek podatkowy, podstawa opodatkowania i faktury
+  korygujące, zwolnienia przedmiotowe i VAT a nieruchomości, ulga
+  na złe długi
+- `mod-VAT-sankcje-bony-odliczenia.md` (NOWY, 729 l.) — sankcje/
+  dodatkowe zobowiązanie, bony SPV/MPV, pusta faktura, wyłączenia
+  prawa do odliczenia, proporcja/prewspółczynnik
+- `mod-VAT-transakcje-fakturowanie.md` (NOWY, 625 l.) — nieodpłatne
+  przekazania, zbycie przedsiębiorstwa/ZCP, miejsce dostawy i
+  transakcje łańcuchowe, organy władzy publicznej, odwrotne
+  obciążenie krajowe, fakturowanie, procedury szczególne
+- `mod-VAT-ewidencja-deklaracje.md` (NOWY, 296 l.) — ewidencja
+  JPK_V7, deklaracje, informacje podsumowujące, dowody, rejestracja
+  VAT i solidarna odpowiedzialność
+
+WERYFIKACJA KOMPLETNOŚCI: sprawdzono WSZYSTKIE 41 oryginalnych
+tematów (nagłówków) — POTWIERDZONO obecność KAŻDEGO W którymś z
+sześciu plików, ŻADEN nie zaginął w procesie podziału. Zachowano
+GLOBALNE, krytyczne ostrzeżenie (termin zwrotu VAT = 40 dni, NIE
+60) we WSZYSTKICH sześciu plikach rodziny.
+
+**Aktualizacja 2026-08-12 (scalenie gałęzi):** ten SKILL.md POCHODZI
+z równoległej sesji (rozbudowany audyt pokrycia VAT, iteracje I-V).
+UZUPEŁNIENIE brakującego wpisu o WCZEŚNIEJSZEJ, nietkniętej przez to
+scalenie pracy z INNEJ gałęzi tego samego dnia: `mod-ustawa-
+uslugi-platnicze.md` — dodano MAŁĄ INSTYTUCJĘ PŁATNICZĄ (MIP, limit
+1,5 mln EUR, art. 117f-117u UUP); `mod-ustawa-rynek-kapitalowy-
+fundusze.md` — naprawiono błędną podstawę sankcji karnej (art. 154
+to definicja, nie sankcja — POPRAWNE: art. 180/181) i rozbudowano
+insider trading. OBA pliki modułów SĄ nietknięte przez TO scalenie,
+TREŚĆ potwierdzona obecna.
 
 **Aktualizacja 2026-08-11:**
 - Nowy moduł: `mod-ustawa-rachunkowosci.md` — ustawa o rachunkowości
@@ -113,6 +352,33 @@ przez cross-reference, bez duplikacji treści).
                stawka]; dodano sekcję 5a PODATEK U ŹRÓDŁA/WHT
                [mechanizm pay and refund, próg 2 mln zł, opinia o
                preferencji, oświadczenie WH-OSC/WH-OSP])
+  [✓] NOWY  mod-VAT-import-towarow-i-zwolnienia-importowe
+              (dodany 2026-08-12, iteracja VII: Dział VII w całości
+               [art. 26a, 33, 33a, 33b, 34-40] + Dział VIII rozdz. 3
+               [art. 45-82a, nawigacyjnie]. ⛔ Alerty: termin 10 dni,
+               sankcja 36 miesięcy [fakultatywna], zniesienie progu
+               22 EUR od 1.07.2021, TSUE ws. art. 52)
+  [✓] NOWY  mod-VAT-WIS-tryb-i-ochrona
+              (dodany 2026-08-12, iteracja VII: art. 42a-42i — domyka
+               POZIOM D bazy weryfikacji stawek; ważność 5 lat,
+               ⛔ wygaśnięcie z mocy prawa bez zawiadomienia)
+  [✓] NOWY  mod-VAT-kursy-walut-rachunek-VAT-tax-free
+              (dodany 2026-08-12, iteracja VII: art. 31a-31b kursy,
+               art. 108b uwolnienie środków [⚠️ postanowienie/zażalenie
+               vs decyzja/odwołanie], art. 126-130 TAX FREE)
+  [✓] NOWY  mod-VAT-rejestracja-zaplata-metoda-kasowa-likwidacja
+              (dodany 2026-08-12, iteracja VI audytu pokrycia VAT
+               działami: art. 96-98 rejestracja/wykreślenie/przywrócenie,
+               art. 103-105d zapłata + pakiet paliwowy 5 dni + kaucja
+               gwarancyjna, art. 21 metoda kasowa, art. 14 remanent
+               likwidacyjny — WSZYSTKIE dotąd nieobecne)
+  [✓] NOWY  mod-VAT-platnicy-egzekucja-kasy-trojstronne
+              (dodany 2026-08-12, iteracja VI: art. 18 + 106c komornik
+               jako płatnik VAT, art. 111 warstwa ustawowa [sankcja 30%,
+               ulga 90%/700 zł, zwrot ulgi 3 lata, kara 300 zł za brak
+               przeglądu], art. 135-138 transakcje trójstronne —
+               procedura uproszczona. ⛔ Zawiera SPROSTOWANIE błędnej
+               kwoty ulgi na kasę)
   [✓] OK    mod-VAT-podatek-od-towarow-i-uslug
               (2026-07-21: dodano odesłanie do nowego modułu o
                samochodach/użytku mieszanym)
@@ -135,10 +401,15 @@ przez cross-reference, bez duplikacji treści).
                importu ≤150 EUR])
   [✓] OK    mod-podatki-sektorowe-bankowy-gry-tonazowy-cukrowy-detaliczny
               (dodany 2026-07-19: podatek bankowy [W PEŁNI opracowany
-               — stawka 0,0366%, progi 4/2 mld zł], podatek od gier,
-               tonażowy, opłata cukrowa, podatek od sprzedaży
-               detalicznej [3 ostatnie oznaczone jako punkt startowy].
-               Odpowiedź na audyt pokrycia prawa podatkowego)
+               — stawka 0,0366%, progi 4/2 mld zł]. ROZBUDOWANY
+               2026-08-13 [ETAP 1]: opłata cukrowa [W PEŁNI —
+               art. 12a-12g, stawki 0,50/0,05/0,10 zł, pułap 1,2 zł/l,
+               sankcja 50%, projekt podwyżki UD417] i podatek od
+               sprzedaży detalicznej [W PEŁNI — potwierdzona ciągłość
+               obowiązywania od 2021, PSD-1, właściwość organów, próg
+               17 mln zł, stawki 0,8%/1,4%] W PEŁNI opracowane.
+               Podatek od gier i podatek tonażowy NADAL punkt
+               startowy — do kolejnego etapu)
   [✓] OK    mod-ustawa-ryczalt-przychody
               (2026-07-19: dodano logikę decyzyjną "ryczałt zamiast
                podatku" [kiedy się opłaca vs skala/liniowy] oraz
@@ -161,6 +432,20 @@ przez cross-reference, bez duplikacji treści).
                sekcje 1-10 nazywały kroki bez treści. Odpowiedź na
                pytanie użytkownika)
   [✓] OK    mod-ustawa-akcyzowa-i-clo-UCC
+              (v1.7, ROZBUDOWANY 2026-08-13: pierwszy systematyczny
+               audyt pokrycia PER DZIAŁ ustawy [analogiczny do
+               wielokrotnie już wykonanego dla VAT] — domknięto
+               Działy II [rejestracja CRPA + kwalifikacja karno-
+               skarbowa art. 56b §2 KKS, deklaracje/terminy,
+               zwolnienia], III [składy podatkowe, zabezpieczenie
+               generalne/ryczałtowe 30%], V [samochody osobowe —
+               stawki 3,1%/18,6%, zmiany 1.04.2025], VI [znaki
+               akcyzy podatkowe/legalizacyjne — wysoki priorytet,
+               powiązanie z KKS], VIA [ewidencje, 5-letni termin],
+               VIb [kary pieniężne administracyjne]; ORAZ Dział IA
+               [WIA] — ⭐⭐⭐ ISTOTNA KOREKTA: organ właściwy zmienił
+               się 1.07.2023 r. z Dyrektora IAS Wrocław na Dyrektora
+               KIS, poprzednia wersja podawała nieaktualny organ)
   [✓] OK    mod-alkohol-tyton-regulacja-sprzedazy
               (v1.2, 2026-07-20: dodano sekcję DO MONITOROWANIA — 4
                równoległe, konkurencyjne projekty zmian ustawy
