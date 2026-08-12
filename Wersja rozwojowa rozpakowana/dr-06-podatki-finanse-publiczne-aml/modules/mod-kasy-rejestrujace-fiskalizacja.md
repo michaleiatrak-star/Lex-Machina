@@ -1,196 +1,275 @@
-# Kasy rejestrujące (fiskalne) — moduł podstawowy
-v1.0.0 (dodany 2026-08-11 — audyt pokrycia tematów rachunkowo-księgowych)
+# Kasy rejestrujące (kasy fiskalne) — obowiązek, zwolnienia,
+fiskalizacja
 
-Zweryfikowano 2026-08-11 (ZASADA 14):
-- **Rząd 2A:** prawo.pl, sip.lex.pl (metryka art. 111 ustawy o VAT,
-  Dz.U. 2025 poz. 775 t.j.)
-- **Rząd 2B:** poradnikprzedsiebiorcy.pl (×3), streamsoft.pl,
-  wfirma.pl, kasafiskalna.pl, infor.pl
-- **Rząd 3 (potwierdzenie zbieżności):** mico.pl, salesystem.pl,
-  taxmachine.pl, artbiznes.pl
+v1.0.0 (utworzony 2026-08-13, na żądanie użytkownika — moduł
+odtworzony od podstaw po wykryciu, że był fantomowym wpisem w
+ROUTING-MAP.md, patrz flaga F-20 w audyt-systemu-v4/references/
+WARN-OTWARTE.md — WCZEŚNIEJSZY wpis wskazywał "ROZBIEŻNOŚĆ
+NIEROZSTRZYGNIĘTĄ" numeru Dz.U. między poz. 1902 a poz. 1949 —
+TA sesja ROZSTRZYGA rozbieżność: prawidłowy numer to **1902**,
+potwierdzony bezpośrednio na ISAP)
 
-⚠️⚠️⚠️ ZNALEZISKO AUDYTOWE — NAJPOWAŻNIEJSZE Z TEJ SESJI: fraza „kasa
-fiskalna" / „kasa rejestrująca" NIE WYSTĘPOWAŁA ANI RAZ w CAŁYM systemie
-(grep po wszystkich 30+ skillach, `*.md`). Dziedzina dotycząca
-praktycznie KAŻDEGO podmiotu sprzedającego konsumentom — fryzjer,
-gastronomia, sklep, warsztat, gabinet — miała pokrycie ZEROWE, mimo że
-sąsiednie tematy (VAT, akcyza, PKPiR) były opracowane szeroko.
+**Zweryfikowano 2026-08-13** (ZASADA 14): Rząd 1 — bezpośrednio
+isap.sejm.gov.pl (WDU20240001902, dokument potwierdzony pod tym
+adresem). Rząd 2B — lexlege.pl, inforlex.pl, gofin.pl (×3 warianty
+czasowe), ISP Modzelewski, vademecumpodatnika.pl, taxmachine.pl
+(kompendium, stan na 2026 r.), infor.pl, poradnikprzedsiebiorcy.pl,
+mico.pl, zrozumvat.pl, salesystem.pl, systim.pl — wszystkie zgodne
+co do numeru Dz.U. 2024 poz. 1902.
 
 ---
 
-## 1. PODSTAWA PRAWNA
+## 1. PODSTAWA PRAWNA I ROZSTRZYGNIĘCIE WCZEŚNIEJSZEJ ROZBIEŻNOŚCI
 
 ```
-⭐ OBOWIĄZEK USTAWOWY: art. 111 ust. 1 ustawy z 11 marca 2004 r. o
-  podatku od towarów i usług — t.j. Dz.U. 2025 poz. 775 (numer zgodny z
-  MAPA-AKTOW.md DR-06, VER 2026-07-02g)
+✅ ROZBIEŻNOŚĆ ROZSTRZYGNIĘTA 2026-08-13: prawidłowy numer to
+  Dz.U. 2024 poz. 1902, NIE poz. 1949 (błędny numer wskazywany
+  wcześniej przez jedno źródło w ROUTING-MAP.md) — potwierdzone
+  BEZPOŚREDNIO na isap.sejm.gov.pl pod adresem
+  isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240001902,
+  ORAZ zgodnie w 6+ niezależnych źródłach Rządu 2B.
 
-⭐ ROZPORZĄDZENIE O ZWOLNIENIACH: rozporządzenie MF z 17 grudnia 2024 r.
-  w sprawie zwolnień z obowiązku prowadzenia ewidencji sprzedaży przy
-  zastosowaniu kas rejestrujących
-  → ⚠️⚠️ ROZBIEŻNOŚĆ ŹRÓDŁOWA NIEROZSTRZYGNIĘTA W TEJ SESJI (ZASADA 13):
-    większość źródeł (streamsoft.pl, mico.pl — zgodnie) podaje
-    **Dz.U. 2024 poz. 1902**; jedno źródło (taxmachine.pl, Rząd 3)
-    podaje **Dz.U. 2024 poz. 1949**. NIE ROZSTRZYGNIĘTO, który numer
-    jest prawidłowy — ⛔ ZWERYFIKUJ W ISAP PRZED POWOŁANIEM W PIŚMIE.
-    NIE zgadywano. Numer 1902 ma przewagę liczby zgodnych źródeł, co
-    NIE jest dowodem poprawności (patrz ZASADA 8 — weryfikuj NUMER
-    niezależnie od nazwy)
+USTAWOWA PODSTAWA OBOWIĄZKU: art. 111 ustawy z 11.03.2004 r. o
+  podatku od towarów i usług (⭐ POWIĄZANIE Z mod-VAT-podatek-od-
+  towarow-i-uslug.md, sekcja "KASY FISKALNE — OBOWIĄZEK
+  EWIDENCJONOWANIA" w rdzeniu VAT — TA sekcja modułu KAS jest
+  UZUPEŁNIENIEM proceduralnym, koncentrującym się NA rozporządzeniu
+  wykonawczym o ZWOLNIENIACH, NIE dubluje analizy materialnoprawnej
+  z modułu VAT)
 
-⭐ ROZPORZĄDZENIE TECHNICZNE: rozporządzenie MF z 25 czerwca 2025 r. w
-  sprawie kas rejestrujących (Dz.U. 2025 poz. 998) — fiskalizacja,
-  wymagania techniczne, przeglądy
-  → ⚠️ [NIEWERYFIKOWANE] — pojedyncze źródło Rządu 3 (taxmachine.pl),
-    brak potwierdzenia w Rzędzie 1/2A. NIE POWOŁUJ tego numeru bez
-    sprawdzenia w ISAP
-```
+DWA GŁÓWNE AKTY WYKONAWCZE:
+  □ Rozporządzenie MF z 17.12.2024 r. w sprawie ZWOLNIEŃ z obowiązku
+    prowadzenia EWIDENCJI sprzedaży przy zastosowaniu kas
+    rejestrujących (Dz.U. 2024 poz. 1902) — WESZŁO w życie 1.01.2025 r.,
+    OBOWIĄZUJE do 31.12.2027 r. — ZASTĄPIŁO poprzednie rozporządzenie
+    z 24.11.2023 r. (Dz.U. 2023 poz. 2605), które OBOWIĄZYWAŁO do
+    końca 2024 r. — PATRZ sekcja 2
+  □ Rozporządzenie MF z 25.06.2025 r. w sprawie KAS rejestrujących
+    (Dz.U. 2025 poz. 998) — WYMAGANIA techniczne, fiskalizacja,
+    PRZEGLĄDY — PATRZ sekcja 3
 
-## 2. ⭐⭐ ZAKRES PODMIOTOWY — KTO MUSI EWIDENCJONOWAĆ
-
-```
-⭐ REGUŁA (art. 111 ust. 1): obowiązek dotyczy podatników dokonujących
-  sprzedaży na rzecz:
-  → OSÓB FIZYCZNYCH NIEPROWADZĄCYCH DZIAŁALNOŚCI GOSPODARCZEJ, oraz
-  → ROLNIKÓW RYCZAŁTOWYCH
-
-⭐⭐ KLUCZOWE NIEPOROZUMIENIE DO WYPROSTOWANIA: obowiązek NIE zależy od
-  bycia czynnym podatnikiem VAT. Podatnik ZWOLNIONY z VAT (art. 113)
-  MOŻE mieć obowiązek kasy — to DWA NIEZALEŻNE reżimy. Zwolnienie
-  podmiotowe z VAT ≠ zwolnienie z kasy
-
-⭐ SPRZEDAŻ B2B (na rzecz firm) — co do zasady POZA obowiązkiem
-  kasowym; dokumentowana fakturą
-```
-
-## 3. ⭐⭐⭐ ZWOLNIENIA — TRZY WARSTWY, KTÓRE TRZEBA CZYTAĆ ŁĄCZNIE
-
-```
-WARSTWA 1 — ZWOLNIENIE PODMIOTOWE (limit obrotu), § 3 ust. 1 pkt 1
-  rozporządzenia:
-  → LIMIT: 20 000 zł obrotu na rzecz osób fizycznych nieprowadzących
-    działalności i rolników ryczałtowych w POPRZEDNIM roku podatkowym
-  → OBOWIĄZUJE nie dłużej niż do 31 GRUDNIA 2027 r.
-  → ⭐ ROZPOCZYNAJĄCY SPRZEDAŻ W TRAKCIE ROKU: limit liczony W PROPORCJI
-    do okresu wykonywania czynności
-    wzór: 20 000 zł × (liczba dni prowadzenia sprzedaży do końca roku /
-    liczba dni w roku podatkowym)
-  → ⚠️ NAJCZĘSTSZY BŁĄD KLIENTA: przekonanie, że limit ZAWSZE wynosi
-    pełne 20 000 zł. Przy starcie w połowie roku realny limit to ok.
-    połowa tej kwoty
-
-WARSTWA 2 — ZWOLNIENIA PRZEDMIOTOWE (załącznik do rozporządzenia):
-  katalog czynności i towarów zwolnionych niezależnie od obrotu —
-  m.in. przy płatnościach w całości bezgotówkowych, na rachunek
-  bankowy, z udokumentowaniem, jakiej transakcji dotyczyły
-  ⚠️ [KONKRETNE POZYCJE ZAŁĄCZNIKA — DO WERYFIKACJI W ISAP przy
-  konkretnej sprawie; potwierdzono ISTNIENIE i mechanizm załącznika,
-  nie jego pełną treść]
-
-WARSTWA 3 — ⛔ KATALOG BEZWZGLĘDNY (§ 4) — WYŁĄCZA WSZYSTKIE ZWOLNIENIA:
-  ⭐⭐⭐ MECHANIZM KRYTYCZNY: sprzedaż CHOĆBY JEDNEJ pozycji z katalogu
-  § 4 powoduje utratę prawa do WSZYSTKICH zwolnień — także limitu
-  20 000 zł. Obrót 500 zł rocznie nie chroni, jeśli przedmiot sprzedaży
-  jest w § 4
-  → Kategorie sygnalizowane zgodnie przez źródła Rządu 2B/3 (usługi
-    fryzjerskie, kosmetyczne i kosmetologiczne; wstęp do wesołych
-    miasteczek i na dyskoteki; sprzedaż przez automaty; e-papierosy,
-    wyroby węglowe, alkohol niespożywczy — te ostatnie z okresami
-    przejściowymi)
-  ⚠️ [PEŁNY KATALOG § 4 — DO ODCZYTANIA Z ISAP przy każdej sprawie.
-  Katalog jest zmieniany co edycję rozporządzenia i to najczęstsze
-  źródło błędnej porady]
-```
-
-## 4. ⭐⭐ SANKCJE ZA BRAK EWIDENCJONOWANIA
-
-```
-(A) ⭐ SANKCJA VAT — art. 111 ust. 2 ustawy o VAT: utrata prawa do
-  obniżenia podatku należnego o kwotę stanowiącą równowartość
-  **30% podatku naliczonego** przy nabyciu towarów i usług
-
-  ⭐⭐ OGRANICZENIE ZAKRESU — UCHWAŁA NSA z 16 listopada 1998 r.,
-    sygn. **FPS 7/98**: sankcja dotyczy WYŁĄCZNIE tej części obrotu,
-    która PODLEGA ewidencjonowaniu przy zastosowaniu kas — nie całości
-    zakupów podatnika
-    → ⚠️ [WERYFIKUJ SYGNATURĘ I AKTUALNOŚĆ TEZY w orzeczenia.nsa.gov.pl
-      przed powołaniem w piśmie — uchwała z 1998 r., zapadła na gruncie
-      POPRZEDNIEJ ustawy o VAT z 1993 r.; jej aktualność pod rządami
-      ustawy z 2004 r. wymaga sprawdzenia, mimo że źródła Rządu 2B
-      powołują ją jako nadal miarodajną. To jest dokładnie ten wzorzec
-      ryzyka, przed którym ostrzega PRAWO-HARDGATE]
-
-(B) ODPOWIEDZIALNOŚĆ KARNOSKARBOWA — niewydanie paragonu / prowadzenie
-  sprzedaży z pominięciem kasy: KKS
-  ⚠️ [KONKRETNY PRZEPIS KKS DO USTALENIA — art. 62 KKS dotyczy
-  dokumentowania; NIE POTWIERDZONO w tej sesji, który ustęp obejmuje
-  paragon. Sprawdź w dr-03/mod-KKS-karny-skarbowy-i-AML.md oraz ISAP]
-
-(C) ⚠️ TWIERDZENIE ODRZUCONE JAKO NIEPOTWIERDZONE: jedno źródło Rządu 3
-  wskazywało art. 112b ustawy o VAT jako „sankcję za brak kasy".
-  Art. 112b dotyczy dodatkowego zobowiązania podatkowego w VAT ogólnie —
-  powiązanie go wprost z kasami NIE zostało potwierdzone w żadnym
-  źródle Rządu 1/2A. NIE UŻYWAJ tego powiązania bez weryfikacji
-```
-
-## 5. ULGA NA ZAKUP KASY — I JEJ UTRATA
-
-```
-⭐ PODSTAWA: art. 111 ust. 4 ustawy o VAT
-⭐ WYSOKOŚĆ: 90% ceny zakupu netto, NIE WIĘCEJ NIŻ 700 zł na kasę
-⭐ WARUNKI (łącznie):
-  → rozpoczęcie ewidencjonowania w OBOWIĄZUJĄCYCH terminach przy użyciu
-    kas ONLINE (kasy, o których mowa w art. 111 ust. 6a)
-  → albo — przy braku obowiązku — dobrowolne rozpoczęcie ewidencji na
-    kasie online, jeżeli podatnik NIE UŻYWAŁ wcześniej kas
-  → posiadanie faktury i dowodu zapłaty całości należności
-  → zakup nie później niż w terminie 6 miesięcy od dnia rozpoczęcia
-    ewidencjonowania
-
-⭐ ROZLICZENIE:
-  → czynny podatnik VAT — wykazanie ulgi w pliku JPK_V7
-  → podatnik zwolniony z VAT (art. 113 ust. 1 i 9) — WNIOSEK do
-    naczelnika US (art. 111 ust. 5), składany najwcześniej w miesiącu
-    następującym po miesiącu rozpoczęcia ewidencji; wniosek wskazuje
-    kwotę i numer rachunku bankowego
-
-⭐⭐ OBOWIĄZEK ZWROTU ULGI (art. 111 ust. 6) — PUŁAPKA PRZY LIKWIDACJI
-  DZIAŁALNOŚCI: podatnik zwraca odliczone/zwrócone kwoty, jeżeli w
-  okresie **3 LAT** od dnia rozpoczęcia ewidencjonowania:
-  → zakończy działalność gospodarczą, LUB
-  → nie podda kas obowiązkowemu przeglądowi technicznemu w terminie,
-    LUB
-  → naruszy obowiązki dot. kas online (m.in. brak połączenia z
-    Centralnym Repozytorium Kas — art. 111 ust. 3a pkt 12 / ust. 3ab)
-  → utratę ulgi wykazuje się w JPK_V7
-  ⭐ RYZYKO PRAKTYCZNE: szybka likwidacja działalności po skorzystaniu
-    z ulgi + niewyrejestrowana kasa = argument organu o niespełnieniu
-    warunku 3-letniego używania
-```
-
-## 6. POWIĄZANIA OPERACYJNE
-
-```
-⭐ TERMINAL PŁATNICZY: art. 19a ustawy z 6 marca 2018 r. — Prawo
-  przedsiębiorców (obowiązek od 1.01.2022)
-  ⚠️ [DO WERYFIKACJI W ISAP — pojedyncze źródło Rządu 3; sprawdź też,
-  czy przepis nie został zmieniony/uchylony]
-⭐ PARAGON Z NIP DO 450 zł = FAKTURA UPROSZCZONA: art. 106e ust. 5 pkt 3
-  ustawy o VAT
-  ⚠️ [DO WERYFIKACJI — pojedyncze źródło Rządu 3; kwota i przepis
-  wymagają potwierdzenia w ISAP, zwłaszcza wobec zmian KSeF 2026]
-⭐ EWIDENCJA SPRZEDAŻY BEZ KASY: podatnicy zwolnieni z kasy prowadzą
-  ewidencję sprzedaży za dany dzień → mod-PKPiR-ewidencje-uproszczone.md
-⭐ WPŁYWY ZE SPRZEDAŻY DETALICZNEJ — TERMIN PRZECHOWYWANIA DOWODÓW:
-  art. 74 ust. 2 pkt 3 u.o.r. → mod-ustawa-rachunkowosci.md, sekcja 5b
+⭐ NOWELIZACJA ZAŁĄCZNIKA (2026): rozporządzenie MFiG WPROWADZAJĄCE
+  zmiany W załączniku do rozporządzenia Z 17.12.2024 r. (Dz.U. 2026
+  poz. 420) — WESZŁO w życie Z dniem następującym PO dniu ogłoszenia
+  — ⚠️ [WYMAGA WERYFIKACJI PRZY KONKRETNEJ SPRAWIE] sprawdź dokładny
+  zakres TYCH zmian w załączniku (KATALOG czynności zwolnionych mógł
+  ulec MODYFIKACJI) — potwierdzone Rządem 1 pochodnym (infor.pl,
+  cytujący WPROST treść rozporządzenia)
 ```
 
 ---
 
-## CROSS-REFERENCJE
-- VAT, JPK_V7, KSeF → `mod-VAT-podatek-od-towarow-i-uslug.md`
-- Ewidencje uproszczone, PKPiR → `mod-PKPiR-ewidencje-uproszczone.md`
-- Kontrola, ujawnienie nieewidencjonowanej sprzedaży →
-  `mod-KAS-kontrola-celno-skarbowa.md`
-- Sankcje karnoskarbowe → `dr-03-prawo-karne-wykroczenia-egzekucja/
-  modules/mod-KKS-karny-skarbowy-i-AML.md`
-- Limit płatności gotówkowych → `mod-limit-platnosci-gotowkowych.md`
+## 2. LIMIT ZWOLNIENIA 20 000 ZŁ I KATALOG ZWOLNIEŃ PRZEDMIOTOWYCH
+
+```
+⭐⭐⭐ LIMIT PODMIOTOWY — 20 000 ZŁ: PODSTAWOWE, najpopularniejsze
+  zwolnienie Z obowiązku ewidencjonowania NA kasie rejestrującej —
+  ⭐ LIMIT UTRZYMANY na TYM SAMYM poziomie przez KOLEJNE lata
+  (2024-2027), MIMO wcześniejszych ZAPOWIEDZI/prac nad EWENTUALNĄ
+  zmianą
+
+WARUNKI SZCZEGÓŁOWE (§ 3 rozporządzenia):
+  □ PODATNICY kontynuujący DZIAŁALNOŚĆ: wartość SPRZEDAŻY na rzecz
+    osób FIZYCZNYCH nieprowadzących działalności GOSPODARCZEJ oraz
+    rolników RYCZAŁTOWYCH w POPRZEDNIM roku podatkowym NIE
+    przekroczyła KWOTY 20 000 zł (§ 3 ust. 1 pkt 1)
+  □ PODATNICY rozpoczynający W poprzednim roku PODATKOWYM sprzedaż
+    (jeśli DZIAŁALNOŚĆ rozpoczęto W trakcie roku): limit LICZY się
+    W PROPORCJI do OKRESU wykonywania tych CZYNNOŚCI w POPRZEDNIM
+    roku podatkowym
+  □ PODATNICY rozpoczynający PO 31.12.2024 r. sprzedaż NA rzecz osób
+    fizycznych/rolników RYCZAŁTOWYCH: zwolnienie PRZYSŁUGUJE, jeśli
+    PRZEWIDYWANY obrót Z tego tytułu NIE przekroczy, W PROPORCJI do
+    okresu WYKONYWANIA tych czynności W danym roku PODATKOWYM, kwoty
+    20 000 zł (§ 3 ust. 1 pkt 2)
+  □ WARUNEK "UDZIAŁU PROCENTOWEGO OBROTU" (§ 3 ust. 1 pkt 3-4): DLA
+    podatników sprzedających TOWARY/usługi wymienione W CZĘŚCI I
+    załącznika — zwolnienie PRZYSŁUGUJE, GDY w POPRZEDNIM roku
+    podatkowym UDZIAŁ obrotów z TEJ sprzedaży W CAŁKOWITYM obrocie
+    (realizowanym NA rzecz podmiotów Z art. 111 UST. 1 ustawy o VAT)
+    BYŁ WYŻSZY niż 80% ("udział PROCENTOWY obrotu") — DLA nowych
+    podatników (ROZPOCZYNających po 31.12.2024 r.) — analogiczny
+    próg 80% LICZONY za PIERWSZE 6 miesięcy DZIAŁALNOŚCI (lub DO
+    końca roku, JEŻELI okres wykonywania TYCH czynności jest
+    KRÓTSZY niż 6 miesięcy)
+
+⭐ OBLICZENIE WARTOŚCI SPRZEDAŻY: PRZY obliczaniu wartości SPRZEDAŻY
+  dla celów progu 20 000 zł NIE uwzględnia się NALEŻNEGO podatku od
+  towarów i usług (§ 3 ust. 3 pkt 2) — ⭐⭐ WYŁĄCZONE z TEJ sprzedaży
+  SĄ RÓWNIEŻ: dostawa NIERUCHOMOŚCI, oraz dostawa TOWARÓW i
+  świadczenie USŁUG zaliczanych PRZEZ podatnika DO środków trwałych/
+  wartości niematerialnych I prawnych PODLEGAJĄCYCH amortyzacji
+  (§ 3 ust. 3 pkt 1)
+
+⭐⭐⭐ ZWOLNIENIE PRZEDMIOTOWE (§ 2 + załącznik): NIEZALEŻNIE od progu
+  20 000 zł — ZWALNIA się z OBOWIĄZKU prowadzenia ewidencji W danym
+  roku podatkowym, NIE dłużej niż DO 31.12.2027 r., CZYNNOŚCI
+  wymienione W ZAŁĄCZNIKU do rozporządzenia (⚠️ [ZAKRES NIEOPRACOWANY
+  SZCZEGÓŁOWO W TEJ SESJI] pełna LISTA pozycji załącznika — patrz
+  BEZPOŚREDNIO na ISAP LUB gofin.pl/lexlege.pl PRZY konkretnej sprawie
+  — ZMIANY w 2024 r. objęły m.in. PRZEŁOŻENIE dotychczasowych symboli
+  PKWiU na kody CN, oraz DALSZE modyfikacje wprowadzone rozporządzeniem
+  Z 2026 poz. 420)
+
+⭐ PRZYKŁAD SZCZEGÓLNEGO WYŁĄCZENIA: dostawa WĘGLA, brykietów i
+  podobnych PALIW stałych wytwarzanych Z węgla/węgla BRUNATNEGO/
+  koksu/półkoksu, PRZEZNACZONYCH do celów OPAŁOWYCH, DOKONYWANA przez
+  PRZEDSIĘBIORSTWO górnicze (W TYM kopalnię) — jeśli DOSTAWA W CAŁOŚCI
+  ZOSTAŁA udokumentowana FAKTURĄ — objęta ZWOLNIENIEM od PIERWSZEJ
+  złotówki, BEZ konieczności spełnienia INNYCH warunków
+
+⭐⭐⭐ TOWARY I USŁUGI WYMAGAJĄCE KASY BEZWZGLĘDNIE (§ 4) — WYŁĄCZENIE
+  ZE WSZYSTKICH ZWOLNIEŃ: NIEKTÓRE towary/usługi WYMAGAJĄ kasy
+  fiskalnej ZAWSZE — bez WZGLĘDU na PRÓG 20 000 zł, status ZWOLNIENIA
+  i STAŻ firmy. KATALOG (§ 4 ust. 1 pkt 1-2, potwierdzony W kilku
+  źródłach) OBEJMUJE m.in.:
+  □ wyroby TYTONIOWE (papierosy, cygara, TYTOŃ, e-papierosy z
+    NIKOTYNĄ, podgrzewane wyroby TYTONIOWE)
+  □ napoje ALKOHOLOWE o zawartości POWYŻEJ 0,5% (Z WYŁĄCZENIEM
+    sprzedaży NA pokładzie samolotu)
+  □ PERFUMY, wody TOALETOWE (Z analogicznym wyłączeniem POKŁADOWYM)
+  ⭐ obowiązek instalacji KASY dotyczy TYCH towarów/usług JESZCZE
+  PRZED dokonaniem PIERWSZEJ sprzedaży NA rzecz osób FIZYCZNYCH — NIE
+  można "dorosnąć" DO progu, TRZEBA mieć KASĘ OD pierwszej transakcji
+```
+
+---
+
+## 3. WYMAGANIA TECHNICZNE, FISKALIZACJA I PRZEGLĄDY
+
+```
+PODSTAWA: rozporządzenie MF z 25.06.2025 r. W sprawie kas
+  rejestrujących (Dz.U. 2025 poz. 998) — SZCZEGÓŁOWE wymagania
+  techniczne, FISKALIZACJA, przeglądy — ⚠️ [NIEWERYFIKOWANE
+  BEZPOŚREDNIO W ISAP w tej sesji] potwierdzone POŚREDNIO przez
+  jedno kompleksowe źródło Rządu 2B (taxmachine.pl) — POTWIERDŹ
+  wprost NA ISAP przed pismem procesowym
+
+⭐⭐ CZTERY RODZAJE KAS (potwierdzone taxmachine.pl):
+  1) KASY ONLINE — Z bezpośrednim POŁĄCZENIEM z Centralnym
+     Repozytorium KAS (CRK), STANDARD dla nowych instalacji
+  2) KASY Z elektronicznym zapisem KOPII (EJ)
+  3) KASY papierowe (⭐ STOPNIOWO wycofywane Z obrotu, tylko
+     KONTYNUACJA istniejących instalacji)
+  4) KASY wirtualne (aplikacja/oprogramowanie, DLA określonych
+     kategorii działalności)
+  ⚠️ [ZAKRES NIEOPRACOWANY SZCZEGÓŁOWO W TEJ SESJI] dokładne
+  różnice PROCEDURALNE między rodzajami kas, obowiązek WYBORU
+  konkretnego typu DLA danej branży — DO uzupełnienia reaktywnie
+
+FISKALIZACJA: proces URUCHOMIENIA kasy REJESTRUJĄCEJ, W wyniku
+  KTÓREGO zostaje ONA zaprogramowana DO trwałego zapisu DANYCH — OD
+  MOMENTU fiskalizacji kasa PROWADZI ewidencję W sposób NIEODWRACALNY
+
+PRZEGLĄDY TECHNICZNE: obowiązkowe CO 2 LATA (⭐ potwierdzone
+  taxmachine.pl) — ⭐⭐ POWIĄZANIE Z sankcjami: BRAK terminowego
+  przeglądu SKUTKUJE karą 300 ZŁ (patrz mod-VAT-podatek-od-towarow-
+  i-uslug.md, sekcja o KASACH fiskalnych W rdzeniu VAT, ORAZ mod-
+  podatki-sektorowe-bankowy-gry-tonazowy-cukrowy-detaliczny.md —
+  ⚠️ SPRAWDŹ oba te moduły DLA pełnego omówienia SANKCJI, TA sekcja
+  jest wyłącznie SYGNALIZACYJNA)
+
+⭐⭐ ULGA NA ZAKUP KASY: 90% ceny ZAKUPU, NIE więcej niż 700 ZŁ (art.
+  111a ustawy O VAT — ⭐ ZGODNE z już OPRACOWANĄ treścią w mod-VAT-
+  podatek-od-towarow-i-uslug.md i mod-podatki-sektorowe-... — NIE
+  duplikować szczegółowej analizy, TA sekcja TYLKO potwierdza
+  spójność międzymodułową)
+
+OBOWIĄZEK TERMINALA PŁATNICZEGO: art. 19a ustawy z 6.03.2018 r. —
+  Prawo PRZEDSIĘBIORCÓW — obowiązek POSIADANIA terminala PŁATNICZEGO
+  OD 1.01.2022 r. — ⭐ POWIĄZANY, choć ODRĘBNY OD samego obowiązku
+  kasy FISKALNEJ — dotyczy MOŻLIWOŚCI przyjmowania PŁATNOŚCI
+  bezgotówkowych, NIE ewidencjonowania sprzedaży JAKO takiego —
+  ⚠️ [ZAKRES NIEOPRACOWANY SZCZEGÓŁOWO] dokładne WARUNKI i wyjątki
+  od TEGO obowiązku wymagają POGŁĘBIENIA przy konkretnej sprawie
+
+PARAGON Z NIP JAKO FAKTURA UPROSZCZONA: art. 106e ust. 5 pkt 3
+  ustawy o VAT — PARAGON fiskalny Z NIP nabywcy DO kwoty 450 zł
+  (BRUTTO) TRAKTOWANY jest jako FAKTURA uproszczona — ⭐ POWIĄZANIE
+  z mod-VAT-transakcje-fakturowanie.md (SPRAWDŹ, czy TAMTEN moduł
+  omawia FAKTURY uproszczone szczegółowo — jeśli NIE, rozważ
+  uzupełnienie PRZY przyszłej sesji)
+
+RELACJA Z KSEF: taxmachine.pl SYGNALIZUJE relację KAS fiskalnych Z
+  Krajowym Systemem e-Faktur — ⚠️ [ZAKRES NIEOPRACOWANY SZCZEGÓŁOWO
+  W TEJ SESJI] dokładny MECHANIZM WSPÓŁISTNIENIA obu systemów
+  (KIEDY kasa fiskalna WYSTARCZA, kiedy WYMAGANA jest RÓWNIEŻ faktura
+  w KSeF) wymaga POGŁĘBIENIA — patrz moduły VAT DLA ogólnego kontekstu
+  KSeF
+```
+
+---
+
+## 4. SANKCJE
+
+```
+⭐ ART. 112b USTAWY O VAT — SANKCJE ZA BRAK KASY: ⚠️ [ZAKRES
+  NIEOPRACOWANY SZCZEGÓŁOWO W TEJ SESJI] dokładna WYSOKOŚĆ i
+  MECHANIZM sankcji administracyjnej ZA brak prowadzenia EWIDENCJI
+  przy użyciu kasy REJESTRUJĄCEJ (mimo istniejącego OBOWIĄZKU) — TA
+  sekcja jedynie SYGNALIZUJE istnienie przepisu — DO pogłębienia
+  reaktywnie PRZY konkretnej sprawie, LUB sprawdź POWIĄZANE moduły
+  VAT/KKS dla ANALOGICZNYCH sankcji już OPISANYCH (np. sankcja 30%
+  utraty prawa DO odliczenia z art. 111 ust. 2, JUŻ opracowana W
+  mod-podatki-sektorowe-... i mod-VAT-...)
+
+⭐ ODPOWIEDZIALNOŚĆ KARNOSKARBOWA: brak prowadzenia EWIDENCJI przy
+  użyciu kasy MOŻE stanowić RÓWNIEŻ przesłankę odpowiedzialności NA
+  gruncie KKS (art. 60-62 KKS — nieprowadzenie/wadliwe LUB nierzetelne
+  prowadzenie KSIĘGI, GDZIE "księgą" W rozumieniu KKS JEST TAKŻE
+  ewidencja SPRZEDAŻY prowadzona za POMOCĄ kasy REJESTRUJĄCEJ,
+  analogicznie DO mechanizmu OPISANEGO w mod-ustawa-rachunkowosci.md
+  sekcja 5 DLA ksiąg rachunkowych) — ⚠️ [WYMAGA POTWIERDZENIA PRZY
+  KONKRETNEJ SPRAWIE] czy EWIDENCJA kasowa JEST wprost TRAKTOWANA
+  jako "KSIĘGA" na gruncie art. 53 § 21 KKS
+```
+
+---
+
+## 5. POWIĄZANIA Z INNYMI MODUŁAMI
+
+```
+□ mod-VAT-podatek-od-towarow-i-uslug.md — rdzeń materialnoprawny
+  obowiązku z art. 111 ustawy o VAT ("KASY FISKALNE — OBOWIĄZEK
+  EWIDENCJONOWANIA" w rdzeniu modułu), ulga na zakup kasy, kara
+  300 zł za brak przeglądu, sankcja 30% z art. 111 ust. 2
+□ mod-podatki-sektorowe-bankowy-gry-tonazowy-cukrowy-detaliczny.md —
+  powiązane omówienie art. 111 w kontekście płatników/komornika jako
+  płatnika VAT
+□ mod-VAT-transakcje-fakturowanie.md — faktury uproszczone (paragon
+  z NIP do 450 zł)
+□ mod-ustawa-rachunkowosci.md — sekcja 5 (sankcje) jako analogia
+  konstrukcyjna dla mechanizmu KKS przy nieprowadzeniu ewidencji
+□ mod-PKPiR-ewidencje-uproszczone.md — sekcja 3 (dowody księgowe) —
+  raporty z kasy fiskalnej jako podstawa zapisu w PKPiR
+```
+
+---
+
+## ⚠️ SAMOOCENA POKRYCIA — MODUŁ NOWO UTWORZONY
+
+```
+Ten moduł ZOSTAŁ zbudowany OD PODSTAW 2026-08-13, po wykryciu, że
+BYŁ fantomowym wpisem w ROUTING-MAP.md, Z NIEROZSTRZYGNIĘTĄ
+rozbieżnością numeru Dz.U. (flaga F-18 W kontekście TEGO wcześniejszego
+audytu). Rozbieżność ROZSTRZYGNIĘTA — prawidłowy numer to Dz.U. 2024
+poz. 1902.
+
+ZIDENTYFIKOWANE LUKI DO DALSZEGO POGŁĘBIENIA:
+□ Pełna treść załącznika do rozporządzenia (katalog zwolnień
+  przedmiotowych) — wymieniona tylko przykładowo
+□ Dokładny mechanizm i wysokość sankcji z art. 112b ustawy o VAT
+□ Różnice proceduralne między czterema rodzajami kas (online, EJ,
+  papierowa, wirtualna)
+□ Dokładny mechanizm współistnienia kas fiskalnych z KSeF
+□ Zakres zmian wprowadzonych rozporządzeniem MFiG z 2026 poz. 420
+  (nowelizacja załącznika)
+□ Warunki i wyjątki od obowiązku terminala płatniczego (art. 19a
+  Prawa przedsiębiorców)
+
+⚠️ [NIEWERYFIKOWANE BEZPOŚREDNIO NA ISAP — z WYJĄTKIEM potwierdzenia
+samego numeru Dz.U. 2024 poz. 1902] pozostała treść tego modułu
+oparta na zgodnych źródłach wtórnych. Przed pismem procesowym lub
+wiążącą poradą potwierdź brzmienie kluczowych przepisów wprost na
+isap.sejm.gov.pl.
+```

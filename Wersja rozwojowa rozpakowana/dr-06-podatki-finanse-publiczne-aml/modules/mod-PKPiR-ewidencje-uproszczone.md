@@ -1,216 +1,390 @@
-# PKPiR i ewidencje uproszczone — moduł podstawowy
-v1.0.0 (dodany 2026-08-11 — audyt pokrycia tematów rachunkowo-księgowych)
+# Podatkowa Księga Przychodów i Rozchodów (PKPiR) i inne ewidencje
+uproszczone
 
-Zweryfikowano 2026-08-11 (ZASADA 14, gradacja źródeł):
-- **Rząd 1:** isap.sejm.gov.pl (metryki WDU20190002544, WDU20240001744,
-  WDU20250001299), api.sejm.gov.pl (tekst Dz.U. 2025 poz. 1299 — dostęp
-  przez snippet wyszukiwarki, bezpośredni `web_fetch` = ROBOTS_DISALLOWED)
-- **Rząd 2A:** prawo.pl (×2), lex.pl, pit.pl, inforlex.pl
-- **Rząd 2B:** infor.pl, przepisy.gofin.pl, doradca.lublin.pl,
-  poradnikksiegowego.pl
-- **Rząd 3 (tylko jako potwierdzenie zbieżności):** firmino.pl,
-  biurorachunkowe.kielce.pl
+v1.0.0 (utworzony 2026-08-13, na żądanie użytkownika — moduł
+odtworzony od podstaw po wykryciu, że był fantomowym wpisem w
+ROUTING-MAP.md, patrz flaga F-20 w audyt-systemu-v4/references/
+WARN-OTWARTE.md: poprzedni wpis centralny opisywał ten moduł jako
+istniejący, ale plik fizycznie nie istniał na dysku)
 
-⚠️⚠️ ZNALEZISKO AUDYTOWE: PKPiR — podstawowa forma ewidencji dla
-WIĘKSZOŚCI mikro- i małych firm w Polsce — NIE MIAŁA w systemie
-samodzielnego modułu. Występowała WYŁĄCZNIE jako wzmianka w
-`mod-ustawa-rachunkowosci.md` (kontekst sankcji KKS) i jednozdaniowo w
-`mod-ustawa-ryczalt-przychody.md`. Skutek: system znał SANKCJĘ za wadliwe
-prowadzenie PKPiR, nie znając ZASAD jej prowadzenia.
+**Zweryfikowano 2026-08-13** (ZASADA 14): Rząd 1 — bezpośrednio
+isap.sejm.gov.pl (WDU20250001299), gov.pl/web/finanse (komunikat MF
+o publikacji trzech powiązanych rozporządzeń). Rząd 2B — biznes.gov.pl
+(rządowy portal informacyjny, zgodny z Rządem 1 co do progów i
+struktury), pit.pl, przepisy.gofin.pl, poradnikprzedsiebiorcy.pl,
+taxmachine.pl, firmino.pl, infakt.pl, rarpit.pl, szybkafaktura.pl,
+podatki.biz, jpk.info.pl, formsoft-skp.pl. ⚠️ [NIEWERYFIKOWANE
+BEZPOŚREDNIO PRZEZ PEŁNY TEKST ROZPORZĄDZENIA] — ISAP niedostępny do
+web_fetch w tej sesji (blokada robots), treść ustalona na podstawie
+zgodnych źródeł wtórnych cytujących konkretne paragrafy — przed
+pismem procesowym potwierdź brzmienie wprost na ISAP.
 
 ---
 
-## 1. PODSTAWA PRAWNA — ⭐⭐ ZMIANA STANU PRAWNEGO OD 1.01.2026
+## 1. PODSTAWA PRAWNA I ZAKRES
 
 ```
-⭐⭐⭐ AKT OBOWIĄZUJĄCY: Rozporządzenie Ministra Finansów i Gospodarki
-  z 6 września 2025 r. w sprawie prowadzenia podatkowej księgi
-  przychodów i rozchodów — Dz.U. 2025 poz. 1299
-  → WEJŚCIE W ŻYCIE: 1 stycznia 2026 r.
-  → ISAP: WDU20250001299 (metryka potwierdzona)
+USTAWA: art. 24a ustawy z 26.07.1991 r. o podatku dochodowym od osób
+  fizycznych (delegacja ustawowa dla rozporządzenia wykonawczego)
 
-⛔ AKT UCHYLONY — NIE CYTOWAĆ JAKO OBOWIĄZUJĄCEGO: rozporządzenie MF
-  z 23 grudnia 2019 r. (Dz.U. 2019 poz. 2544, ostatnia zmiana Dz.U.
-  2024 poz. 1744) — UTRACIŁO MOC z dniem 1.01.2026
-  ⚠️ TO JEST TYPOWA PUŁAPKA: większość materiałów w sieci sprzed 2026 r.
-  odsyła do poz. 2544. Przy sprawach dotyczących lat 2020-2025 stan
-  prawny z poz. 2544 POZOSTAJE właściwy (zasada tempus regit actum dla
-  obowiązków ewidencyjnych danego roku) — przy 2026 r. i późniejszych
-  właściwa jest poz. 1299
+ROZPORZĄDZENIE WYKONAWCZE — ZMIANA OD 1.01.2026 R.:
+  □ DO 31.12.2025 r.: rozporządzenie Ministra Finansów z 23.12.2019 r.
+    w sprawie prowadzenia podatkowej księgi przychodów i rozchodów
+    (Dz.U. poz. 2544 ze zm.) — ⛔ UTRACIŁO MOC 1.01.2026 r.
+  □ OD 1.01.2026 r.: rozporządzenie Ministra Finansów i Gospodarki z
+    6.09.2025 r. w sprawie prowadzenia podatkowej księgi przychodów
+    i rozchodów (Dz.U. 2025 poz. 1299) — ✅ POTWIERDZONE bezpośrednio
+    na isap.sejm.gov.pl (WDU20250001299) i gov.pl/web/finanse
+  ⭐ PRZEPIS PRZEJŚCIOWY: do wniosków złożonych na podstawie starego
+    rozporządzenia (do 31.12.2025 r.) stosuje się przepisy
+    DOTYCHCZASOWE — sprawdź, czy sprawa nie dotyczy okresu przed
+    zmianą, zanim zastosujesz nowe rozporządzenie
 
-DELEGACJA USTAWOWA: art. 24a ust. 7 ustawy o PIT
-OBOWIĄZEK PROWADZENIA: art. 24a ust. 1 ustawy o PIT — osoby fizyczne,
-  przedsiębiorstwa w spadku, spółki cywilne osób fizycznych, spółki
-  cywilne osób fizycznych i przedsiębiorstwa w spadku, spółki jawne
-  osób fizycznych, spółki partnerskie — prowadzą PKPiR ALBO księgi
-  rachunkowe
-```
+GENEZA NOWELIZACJI: dostosowanie do NOWEGO obowiązku (wprowadzanego
+  do ustawy o PIT) PROWADZENIA księgi WYŁĄCZNIE w postaci
+  ELEKTRONICZNEJ, przy użyciu PROGRAMÓW komputerowych, oraz
+  PRZESYŁANIA jej po ZAKOŃCZENIU roku podatkowego naczelnikowi
+  urzędu skarbowego w formie USTRUKTURYZOWANEJ (JPK_PKPIR) — w
+  terminie DO upływu terminu ZŁOŻENIA zeznania rocznego
 
-## 2. ⭐⭐⭐ PRÓG ROZGRANICZAJĄCY PKPiR / PEŁNE KSIĘGI — HISTORIA ZMIANY
-
-(uzupełnienie luki #20 z mapy pokrycia w `mod-ustawa-rachunkowosci.md`)
-
-```
-⭐ STAN OBECNY: 2 500 000 EURO (art. 2 ust. 1 pkt 2 u.o.r.)
-⭐ STAN POPRZEDNI: 2 000 000 EURO
-⭐ AKT ZMIENIAJĄCY: ustawa z 6 grudnia 2024 r. o zmianie ustawy o
-  rachunkowości, ustawy o biegłych rewidentach, firmach audytorskich
-  oraz nadzorze publicznym oraz niektórych innych ustaw —
-  **Dz.U. 2024 poz. 1863**
-⭐ OD KIEDY: do roku obrotowego rozpoczynającego się PO 31 grudnia 2024 r.
-  (czyli praktycznie: od 1.01.2025 dla roku = kalendarzowemu)
-
-⭐⭐ DRUGA, MNIEJ ZNANA ZMIANA W TEJ SAMEJ NOWELIZACJI — ZMIENIŁA SIĘ
-  NIE TYLKO KWOTA, ALE I SPOSÓB LICZENIA: z podstawy limitu WYŁĄCZONO
-  przychody z operacji finansowych oraz ze sprzedaży materiałów. Liczą
-  się WYŁĄCZNIE przychody netto ze sprzedaży TOWARÓW i PRODUKTÓW w
-  rozumieniu art. 3 pkt 30a u.o.r. (z uwzględnieniem dotacji, opustów,
-  rabatów; bez VAT i innych podatków bezpośrednio związanych z obrotem)
-  → ⭐ SKUTEK PRAKTYCZNY: podmiot, który przed 2025 r. przekraczał próg
-    dzięki przychodom finansowym lub sprzedaży materiałów, MOŻE dziś
-    być poniżej progu MIMO identycznej skali działalności
-  (potwierdzone: rachunkowosc.com.pl — pismo Stowarzyszenia Księgowych
-  w Polsce, Rząd 2A/2B)
-
-⭐ PRZELICZENIE NA ZŁOTE: średni kurs EUR NBP na PIERWSZY DZIEŃ ROBOCZY
-  PAŹDZIERNIKA roku poprzedzającego rok obrotowy
-  → dla 2025 r.: kurs 4,2846 zł → próg 10 711 500 zł
-  → dla 2026 r.: ⚠️ [DO WERYFIKACJI PRZED CYTOWANIEM] źródła Rządu 2B/3
-    podają 10 646 500 zł — kwota NIE potwierdzona w źródle Rządu 1;
-    PRZELICZ SAMODZIELNIE wg tabeli NBP z 1.10.2025 przed użyciem w
-    piśmie. Sam PRÓG W EURO (2,5 mln) jest niesporny — zmienność wynika
-    WYŁĄCZNIE z kursu, nie ze zmiany przepisu
-
-⭐ WYBÓR DOBROWOLNY: mimo nieprzekroczenia progu można wybrać pełne
-  księgi — wymaga zawiadomienia naczelnika US; może być złożone przez
-  CEIDG (art. 2 ust. 2 u.o.r.)
-```
-
-## 3. ⭐⭐⭐ OBOWIĄZKOWA POSTAĆ ELEKTRONICZNA I JPK_PKPIR — HARMONOGRAM
-
-```
-PODSTAWA: art. 24a ust. 1e ustawy o PIT w brzmieniu od 1.01.2026
-PRZEPIS PRZEJŚCIOWY: art. 66 ust. 1 ustawy zmieniającej z 29 października
-  2021 r. (Dz.U. 2021 poz. 2105 ze zm.)
-
-⭐ HARMONOGRAM (dwie tury):
-  → OD 1.01.2026 — podatnicy PIT obowiązani do przesyłania ewidencji
-    JPK_VAT (czynni podatnicy VAT składający JPK_V7M). Pierwsze pliki
-    za rok 2026, składane z zeznaniem rocznym PIT za 2026 (co do zasady
-    do 30 kwietnia 2027 — art. 45 ust. 1 ustawy o PIT)
-  → OD 1.01.2027 — pozostali podatnicy PIT, w tym rozliczający VAT
-    kwartalnie (JPK_V7K) i opodatkowani ryczałtem
-
-⭐ DWIE STRUKTURY, NIE JEDNA:
-  → JPK_PKPIR — sama podatkowa księga przychodów i rozchodów
-  → JPK_ST — ewidencja środków trwałych oraz wartości niematerialnych
-    i prawnych (dla podmiotów składających JPK_PKPIR)
-  ⚠️ NIE MYLIĆ z JPK_KR_PD / JPK_ST_KR — to struktury dla podmiotów
-    prowadzących PEŁNE KSIĘGI (patrz: mod-JPK-ksiegi-elektroniczne-
-    e-sprawozdania.md)
-
-⭐ FORMA PAPIEROWA — PRAKTYCZNIE ZLIKWIDOWANA: podstawowym sposobem
-  prowadzenia księgi jest użycie programów komputerowych. Papierowo
-  od 1.01.2026 mogą prowadzić księgę WYŁĄCZNIE wąskie kategorie —
-  wg zgodnych źródeł Rządu 2A (prawo.pl): osoby wykonujące działalność
-  na podstawie umów agencyjnych i umów na warunkach zlecenia zawartych
-  na podstawie odrębnych przepisów oraz duchowni
-  ⚠️ [ZAKRES WYJĄTKU DO POTWIERDZENIA W ISAP przed powołaniem w piśmie —
-  potwierdzony w Rzędzie 2A, nie w tekście źródłowym]
-
-⭐ ZNIESIONE UPROSZCZENIE: od 1.01.2026 zlikwidowano uproszczoną księgę
-  dla rolników prowadzących gospodarstwo rolne bez zatrudnienia
-  pracowników (limit 10 000 zł przychodu rocznie) — uproszczony wzór
-  usunięty z nowego rozporządzenia
-```
-
-## 4. ⭐⭐ NOWY WZÓR KSIĘGI — 19 KOLUMN ZAMIAST 17
-
-```
-⭐ ZMIANA STRUKTURALNA: dotychczasowy wzór miał 17 kolumn, nowy ma 19
-⭐ NAJWAŻNIEJSZA NOWA POZYCJA — KOLUMNA NR 3: numer identyfikujący
-  fakturę wystawioną przy użyciu Krajowego Systemu e-Faktur (KSeF)
-  → ⭐⭐ TO JEST SPOIWO MIĘDZY KSeF A EWIDENCJĄ PODATKOWĄ: od 2026 r.
-    numer KSeF przestaje być wyłącznie atrybutem faktury, a staje się
-    elementem WPISU DO KSIĘGI — czyli przedmiotem kontroli rzetelności
-    księgi, nie tylko poprawności faktury
-  → powiązanie: mod-VAT-podatek-od-towarow-i-uslug.md (sekcja KSeF)
-
-⭐ POZOSTAŁE ZMIANY sygnalizowane zgodnie przez źródła Rządu 2A/2B:
-  zmiana terminu księgowania kosztów, zmiany redakcyjne w definicji
-  księgi rzetelnej i niewadliwej, zmiany w zasadach dokumentowania
-  ⚠️ [SZCZEGÓŁY POSZCZEGÓLNYCH PARAGRAFÓW — DO WERYFIKACJI W ISAP przy
-  konkretnej sprawie; w tej sesji potwierdzono FAKT zmian, nie pełną
-  treść każdego przepisu]
-```
-
-## 5. ⭐⭐⭐ RZETELNOŚĆ I NIEWADLIWOŚĆ KSIĘGI — OŚ SPORU Z ORGANEM
-
-```
-⭐ PRZEPIS: § 4 nowego rozporządzenia (Dz.U. 2025 poz. 1299)
-  — ODPOWIEDNIK § 10 starego rozporządzenia (Dz.U. 2019 poz. 2544).
-  ⚠️ PRZY SPRAWACH Z LAT 2020-2025 POWOŁUJ § 10 STAREGO ROZPORZĄDZENIA,
-  NIE § 4 NOWEGO — to najczęstszy błąd redakcyjny w pismach na
-  przełomie stanów prawnych
-
-⭐⭐ ROZRÓŻNIENIE, KTÓRE DECYDUJE O KWALIFIKACJI KARNOSKARBOWEJ
-  (art. 53 § 22-23 KKS — patrz mod-ustawa-rachunkowosci.md, sekcja
-  sankcji, oraz dr-03/mod-KKS-karny-skarbowy-i-AML.md):
-  → KSIĘGA NIERZETELNA = prowadzona NIEZGODNIE ZE STANEM RZECZYWISTYM
-    (zdarzenia, których nie było; zdarzenia pominięte; kwoty inne niż
-    rzeczywiste) — kategoria POWAŻNIEJSZA, bliższa fałszerstwu
-  → KSIĘGA WADLIWA = prowadzona niezgodnie z PRZEPISAMI (uchybienia
-    formalne) — kategoria LŻEJSZA, dotyczy FORMY, nie TREŚCI
-  → ⭐ ZNACZENIE PROCESOWE: nierzetelność księgi otwiera organowi drogę
-    do NIEUZNANIA księgi za dowód i szacowania podstawy opodatkowania
-    (art. 193 i 23 Ordynacji podatkowej — ⚠️ zweryfikuj brzmienie w
-    ISAP przed powołaniem); wadliwość NIEISTOTNA dla rozliczenia co do
-    zasady takiego skutku nie wywołuje
-
-⭐ TRZECIA KATEGORIA — NIEPROWADZENIE (art. 60 § 1 KKS): prowadzenie
-  PKPiR w sytuacji, gdy wymagane były PEŁNE KSIĘGI (przekroczony próg
-  2,5 mln EUR), jest traktowane jako NIEPROWADZENIE właściwej księgi,
-  a NIE jako jej wadliwe prowadzenie — patrz mod-ustawa-rachunkowosci.md
-```
-
-## 6. EWIDENCJE TOWARZYSZĄCE
-
-```
-⭐ EWIDENCJA SPRZEDAŻY: podatnicy niestosujący kas rejestrujących
-  (odesłanie do art. 111 ust. 1 ustawy o VAT) są obowiązani prowadzić
-  ewidencję sprzedaży za dany dzień — nie później niż PRZED dokonaniem
-  sprzedaży w dniu następnym
-⭐ ZAŁOŻENIE KSIĘGI: na dzień 1 stycznia roku podatkowego LUB na dzień
-  rozpoczęcia działalności w trakcie roku (zasada niezmieniona)
-⭐ EWIDENCJA ŚRODKÓW TRWAŁYCH I WNiP: od 1.01.2026 prowadzona przy
-  użyciu programów komputerowych obligatoryjnie przez podatników
-  objętych JPK_VAT (art. 24a ust. 1e PIT); struktura JPK_ST
-⭐ BIURO RACHUNKOWE: zasady prowadzenia księgi stosuje się odpowiednio,
-  gdy księgę prowadzi w imieniu podatnika biuro rachunkowe
-  → wymogi wobec samego biura: mod-ustawa-rachunkowosci.md, sekcja 5c
-    (usługowe prowadzenie ksiąg, rozdz. 8a u.o.r.)
-```
-
-## 7. RYCZAŁT — EWIDENCJA PRZYCHODÓW (odesłanie)
-
-```
-Ewidencja przychodów przy ryczałcie od przychodów ewidencjonowanych
-oraz struktura JPK_EWP → mod-ustawa-ryczalt-przychody.md
-⚠️ NIE MYLIĆ: ryczałtowiec NIE prowadzi PKPiR — prowadzi EWIDENCJĘ
-PRZYCHODÓW (bez kosztów). To odrębny reżim, odrębna struktura JPK
+⭐⭐ TRZY POWIĄZANE ROZPORZĄDZENIA Z 6.09.2025 R. (publikowane RAZEM
+  w Dzienniku Ustaw, potwierdzone bezpośrednio na gov.pl/web/finanse):
+  1) w sprawie prowadzenia podatkowej KSIĘGI przychodów i rozchodów
+     (Dz.U. 2025 poz. 1299) — TA sekcja
+  2) w sprawie prowadzenia EWIDENCJI przychodów i wykazu środków
+     trwałych oraz wartości niematerialnych i prawnych (Dz.U. 2025
+     poz. 1294) — dotyczy RYCZAŁTU od przychodów ewidencjonowanych,
+     patrz sekcja 5 niżej
+  3) w sprawie DODATKOWYCH danych, o które należy uzupełnić prowadzone
+     księgi rachunkowe i ewidencję środków trwałych oraz wartości
+     niematerialnych i prawnych podlegające przekazaniu na podstawie
+     ustawy o PIT (Dz.U. 2025 poz. 1311) — powiązanie z JPK, patrz
+     mod-ustawa-rachunkowosci.md dla ksiąg PEŁNYCH
+  Wszystkie TRZY weszły w życie 1.01.2026 r.
 ```
 
 ---
 
-## CROSS-REFERENCJE
-- Pełne księgi rachunkowe, próg, zasady rachunkowości, sankcje →
-  `mod-ustawa-rachunkowosci.md`
-- JPK_KR_PD / JPK_ST_KR / e-sprawozdania →
-  `mod-JPK-ksiegi-elektroniczne-e-sprawozdania.md`
-- Kasy rejestrujące, ewidencja sprzedaży detalicznej →
-  `mod-kasy-rejestrujace-fiskalizacja.md`
-- KSeF, faktury → `mod-VAT-podatek-od-towarow-i-uslug.md`
-- Szacowanie podstawy opodatkowania, kontrola →
-  `mod-OP-ordynacja-podatkowa.md`, `mod-KAS-kontrola-celno-skarbowa.md`
-- Sankcje KKS → `dr-03-prawo-karne-wykroczenia-egzekucja/modules/
-  mod-KKS-karny-skarbowy-i-AML.md`
+## 2. KTO PROWADZI PKPiR — ZAKRES PODMIOTOWY
+
+```
+PODMIOTY OBOWIĄZANE (art. 24a ust. 1-2 ustawy o PIT) — ŁĄCZNIE trzy
+  warunki:
+  1) FORMA opodatkowania: skala PODATKOWA (12%/32%) ALBO podatek
+     LINIOWY (19%) — ⛔ NIE dotyczy podatników RYCZAŁTU od przychodów
+     ewidencjonowanych (CI prowadzą ODRĘBNĄ ewidencję, patrz sekcja 5)
+  2) FORMA prowadzenia działalności: osoba FIZYCZNA indywidualnie,
+     spółka CYWILNA osób fizycznych, spółka CYWILNA osób fizycznych
+     i przedsiębiorstwo W SPADKU, spółka JAWNA osób fizycznych,
+     spółka PARTNERSKA, przedsiębiorstwo W SPADKU
+  3) PRÓG PRZYCHODÓW: przychody NETTO (bez VAT) z działalności
+     gospodarczej (LUB przychody spółki) NIE PRZEKROCZYŁY w
+     POPRZEDNIM roku 2,5 MLN EUR — ⭐ POTWIERDZONE bezpośrednio na
+     biznes.gov.pl (portal RZĄDOWY)
+
+PODMIOTY DODATKOWE (poza katalogiem GŁÓWNYM z art. 24a):
+  □ osoby PROWADZĄCE działy SPECJALNE produkcji ROLNEJ — JEŚLI
+    ZGŁOSIŁY zamiar prowadzenia ksiąg
+  □ DUCHOWNI, którzy ZREZYGNOWALI z opłacania ZRYCZAŁTOWANEGO
+    podatku dochodowego
+  □ osoby WYKONUJĄCE działalność NA podstawie umów AGENCYJNYCH i
+    umów-ZLECEŃ zawartych na PODSTAWIE odrębnych przepisów
+
+⭐⭐⭐ PRZEKROCZENIE PROGU 2,5 MLN EUR — OBOWIĄZEK PEŁNYCH KSIĄG:
+  jeżeli PRZYCHODY netto ze SPRZEDAŻY towarów, produktów I operacji
+  FINANSOWYCH za POPRZEDNI rok obrotowy OSIĄGNĘŁY LUB przekroczyły
+  RÓWNOWARTOŚĆ w walucie POLSKIEJ progu Z art. 2 ust. 1 pkt 2 ustawy
+  o rachunkowości (2,5 mln EUR — patrz mod-ustawa-rachunkowosci.md,
+  sekcja 2) — PODATNIK MUSI w KOLEJNYM roku prowadzić PEŁNĄ księgowość
+  w formie KSIĄG rachunkowych, NIE MOŻE już korzystać Z uproszczonej
+  PKPiR
+  ⭐ PRZYKŁADOWA kwota LIMITU po PRZELICZENIU dla konkretnego roku
+  (⚠️ [WYMAGA WERYFIKACJI CO ROK] przeliczenie zmienia się co ROK
+  wg kursu ŚREDNIEGO NBP z PIERWSZEGO dnia roboczego października
+  roku POPRZEDZAJĄCEGO — patrz mechanizm szczegółowo omówiony w
+  mod-ustawa-rachunkowosci.md sekcja 2, ta SAMA metodologia dotyczy
+  progu Z ustawy o rachunkowości, DO którego odsyła art. 24a ust. 4
+  ustawy o PIT) — jeden z PRZESZUKANYCH przykładów wskazuje limit
+  10 646 500 zł ORIENTACYJNIE dla przeliczenia na 2026 r. (⚠️
+  [NIEWERYFIKOWANE BEZPOŚREDNIO] — POTWIERDŹ aktualny przelicznik
+  na dany rok PRZED zastosowaniem w konkretnej sprawie)
+
+ZWOLNIENIE Z OBOWIĄZKU PKPiR (na WNIOSEK, wyjątkowe): MOŻLIWE ze
+  względu na SZCZEGÓLNE okoliczności (rodzaj DZIAŁALNOŚCI, stan
+  ZDROWIA, wiek podatnika) — WNIOSEK składa się DO właściwego
+  naczelnika URZĘDU skarbowego — ⚠️ [NIEWERYFIKOWANE W PEŁNI]
+  dokładna PODSTAWA prawna i PRZESŁANKI tego zwolnienia wymagają
+  POGŁĘBIENIA przy konkretnej sprawie
+```
+
+---
+
+## 3. ZAKŁADANIE, PROWADZENIE I FORMA KSIĘGI
+
+```
+ZAŁOŻENIE KSIĘGI: na dzień 1 STYCZNIA każdego roku podatkowego (DLA
+  kontynuujących działalność) ALBO na dzień ROZPOCZĘCIA działalności
+  W ciągu roku podatkowego (DLA nowych podmiotów) — KSIĘGA obejmuje
+  DANY rok podatkowy, NIE MIESZA SIĘ zapisów Z różnych lat
+
+FORMA KSIĘGI — ZMIANA OD 1.01.2026 R.: ⭐⭐⭐ obowiązek PROWADZENIA
+  WYŁĄCZNIE w postaci ELEKTRONICZNEJ przy UŻYCIU programów
+  komputerowych — DOTYCHCZASOWA możliwość prowadzenia W formie
+  PAPIEROWEJ (zbroszurowanej, KOLEJNO ponumerowanej) BYŁA regułą
+  DO 31.12.2025 r., OD 1.01.2026 r. FORMA elektroniczna JEST
+  obowiązkowa — powiązanie Z Krajowym Systemem e-FAKTUR (KSeF)
+
+⭐⭐⭐ TERMINY DOKONYWANIA ZAPISÓW — DWA WARIANTY:
+  □ GDY podatnik prowadzi KSIĘGĘ samodzielnie: zapisy NA bieżąco,
+    RAZ dziennie PO zakończeniu dnia, NIE później niż PRZED
+    rozpoczęciem działalności W dniu NASTĘPNYM (⭐ WYJĄTEK: podatnicy
+    prowadzący sprzedaż NA kasach fiskalnych LUB prowadzący
+    ewidencję sprzedaży MAJĄ prawo DOKONYWANIA wpisów NA koniec
+    KAŻDEGO miesiąca — odpowiednio NA podstawie raportów MIESIĘCZNYCH
+    lub miesięcznego ZESTAWIENIA sprzedaży)
+  □ GDY KSIĘGĘ prowadzi BIURO rachunkowe: zapisów DOKONUJE się
+    CHRONOLOGICZNIE, na PODSTAWIE dokumentów DOSTARCZONYCH przez
+    klienta, W TERMINIE do 20. DNIA każdego miesiąca ZA miesiąc
+    poprzedni (⭐ TERMIN powiązany Z obowiązkiem obliczenia I wpłaty
+    zaliczki NA podatek dochodowy DO tego SAMEGO dnia — dane Z
+    księgi SĄ niezbędne DO tego wyliczenia) — GDY księgę prowadzi
+    biuro RACHUNKOWE, przedsiębiorca NIE dokonuje zapisów SAMODZIELNIE,
+    ale JEST zobowiązany DO prowadzenia EWIDENCJI dodatkowych
+    wskazanych W rozporządzeniu (np. ewidencji ŚRODKÓW trwałych)
+
+JĘZYK I WALUTA: zapisy DOKONYWANE w JĘZYKU polskim I walucie
+  POLSKIEJ, w SPOSÓB staranny, CZYTELNY i trwały, NA podstawie
+  prawidłowych I rzetelnych DOWODÓW
+
+RZETELNOŚĆ I NIEWADLIWOŚĆ KSIĘGI (§ 4 rozporządzenia): podatnik
+  OBOWIĄZANY jest prowadzić KSIĘGĘ RZETELNIE i W sposób NIEWADLIWY.
+  Za NIEWADLIWĄ uznaje się KSIĘGĘ prowadzoną ZGODNIE z przepisami
+  rozporządzenia, WEDŁUG ustalonego wzoru I zgodnie z OBJAŚNIENIAMI
+  do wzoru.
+  ⭐⭐ USTAWOWE WYJĄTKI OD SANKCJI NIERZETELNOŚCI — księga NADAL
+  uznawana za rzetelną, GDY:
+  1) błędy Z sumie NIE PRZEKRACZAJĄ 0,5% przychodu (⚠️ [DO WERYFIKACJI
+     PRZY KONKRETNEJ SPRAWIE] dokładna WYSOKOŚĆ progu procentowego
+     wymaga potwierdzenia — źródła TEJ sesji NIE wskazały wprost
+     tej liczby, ale KATALOG wyjątków JEST szerszy niż wyłącznie
+     próg procentowy, patrz PUNKTY 2-5 niżej)
+  2) BRAK właściwych zapisów jest ZWIĄZANY z NIESZCZĘŚLIWYM wypadkiem
+     LUB zdarzeniem LOSOWYM, które UNIEMOŻLIWIŁY podatnikowi
+     PROWADZENIE księgi
+  3) BŁĘDY spowodowały ZWIĘKSZENIE wysokości PODSTAWY obliczenia
+     podatku, Z WYJĄTKIEM błędów polegających NA niewykazaniu LUB
+     zaniżeniu kosztów ZAKUPU materiałów (surowców) PODSTAWOWYCH,
+     towarów HANDLOWYCH oraz kosztów ROBOCIZNY
+  4) podatnik UZUPEŁNIŁ zapisy LUB poprawił BŁĘDNE zapisy W księdze
+     PRZED rozpoczęciem KONTROLI przez organ PODATKOWY, lub w
+     TERMINIE przysługującego UPRAWNIENIA do złożenia DEKLARACJI/
+     korekty deklaracji (art. 62 UST. 4 ustawy o KAS)
+  5) BŁĘDNE zapisy SĄ skutkiem OCZYWISTEJ omyłki, a PODATNIK posiada
+     dowody KSIĘGOWE odpowiadające WYMAGANIOM formalnym
+```
+
+---
+
+## 4. DOWODY KSIĘGOWE I SPIS Z NATURY
+
+```
+DOWODY KSIĘGOWE STANOWIĄCE PODSTAWĘ ZAPISÓW: faktury VAT (W TYM
+  faktury VAT RR — dla ROLNIKÓW ryczałtowych), DOKUMENTY celne,
+  RACHUNKI, inne dokumenty STWIERDZAJĄCE fakt DOKONANIA operacji
+  gospodarczej zgodnie Z jej rzeczywistym PRZEBIEGIEM (W TYM: noty
+  księgowe SPORZĄDZONE w celu SKORYGOWANIA zapisu, dokumenty
+  wewnętrzne — W ściśle określonych W rozporządzeniu przypadkach,
+  opisy/specyfikacje otrzymanych MATERIAŁÓW lub towarów HANDLOWYCH
+  połączone Z późniejszą FAKTURĄ)
+
+WYMOGI FORMALNE DOWODU: wiarygodne OKREŚLENIE wystawcy LUB wskazanie
+  stron (NAZWĘ i adresy) UCZESTNICZĄCYCH w operacji GOSPODARCZEJ —
+  ⚠️ [NIEWERYFIKOWANE W PEŁNI] pełny katalog WYMOGÓW formalnych
+  analogiczny DO dowodów księgowych z USTAWY o rachunkowości (patrz
+  mod-ustawa-rachunkowosci.md sekcja 3a) — SPRAWDŹ tamtą sekcję DLA
+  pełnego obrazu wymogów dowodowych wspólnych DLA obu reżimów
+
+WYŁĄCZENIE Z ZAKRESU (nowelizacja 2026): dzienne ZESTAWIENIA dowodów
+  (faktur DOTYCZĄCYCH sprzedaży) SPORZĄDZANYCH do ZAKSIĘGOWANIA ich
+  zbiorczym ZAPISEM — WYŁĄCZONE Z katalogu dowodów KSIĘGOWYCH pod
+  nowym rozporządzeniem — PODATNIK BĘDZIE dokonywał zapisów
+  BEZPOŚREDNIO w księdze NA podstawie POSZCZEGÓLNYCH faktur, NIE
+  zbiorczych zestawień
+
+VAT JAKO SKŁADNIK ZAPISU: JEŻELI VAT jest DLA podatnika KOSZTEM
+  uzyskania PRZYCHODU (NP. przy braku prawa DO odliczenia), DO PKPiR
+  wpisuje SIĘ jako KOSZT kwotę BRUTTO z faktury
+
+⭐⭐ SPIS Z NATURY (REMANENT) — obowiązkowe MOMENTY sporządzenia:
+  □ NA dzień ROZPOCZĘCIA działalności gospodarczej (DOTYCZY również
+    przedsiębiorców będących WSPÓLNIKAMI spółek) — OBEJMUJE wszystkie
+    RZECZY kupione PRZED założeniem firmy: TOWARY handlowe, materiały
+    I surowce podstawowe/POMOCNICZE, półwyroby, BRAKI i odpady
+    użytkowe — ⛔ NIE obejmuje SKŁADNIKÓW majątku FIRMY, środków
+    trwałych CZY wyposażenia (komputery, MEBLE, samochody)
+  □ NA koniec KAŻDEGO roku podatkowego (remanent ROCZNY, patrz też
+    mod-ustawa-rachunkowosci.md sekcja 3b DLA metodyki inwentaryzacji
+    ogólnie stosowanej TAKŻE analogicznie W praktyce PKPiR)
+  □ W RAZIE utraty W ciągu roku PODATKOWEGO prawa DO zryczałtowanego
+    opodatkowania podatkiem DOCHODOWYM
+  ⭐ ZEROWY spis Z natury: JEŻELI podatnik NIE posiada ŻADNYCH
+  składników PODLEGAJĄCYCH ujęciu na DZIEŃ rozpoczęcia działalności
+  — MUSI mimo TO przygotować spis Z natury o WARTOŚCI zerowej (NIE
+  zwalnia GO to Z samego obowiązku SPORZĄDZENIA dokumentu)
+```
+
+---
+
+## 5. STRUKTURA KSIĘGI — LICZBA KOLUMN (ZMIANA 2026)
+
+```
+⭐⭐⭐ ZMIANA LICZBY KOLUMN OD 1.01.2026 R.: DO końca 2025 r. — 17
+  kolumn (WCZEŚNIEJ, historycznie, 16 kolumn — ⚠️ [NIEJEDNOZNACZNOŚĆ
+  MIĘDZY ŹRÓDŁAMI] część ŹRÓDEŁ podaje 16, część 17 kolumn DLA STANU
+  przed 2026 r. — RÓŻNICA prawdopodobnie WYNIKA z różnych momentów W
+  czasie, GDY poszczególne źródła BYŁY pisane — SPRAWDŹ dokładną
+  liczbę KOLUMN dla KONKRETNEGO roku podatkowego przy sprawie
+  dotyczącej OKRESU sprzed 2026 r.); OD 1.01.2026 r. — 19 KOLUMN,
+  zgodnych z WYMOGAMI struktury JPK_PKPIR (ustrukturyzowanego pliku
+  przesyłanego DO urzędu skarbowego)
+
+⭐ CEL ZWIĘKSZENIA LICZBY KOLUMN: dostosowanie DO wymogów
+  ustrukturyzowanego RAPORTOWANIA JPK_PKPIR — WIĘKSZA granularność
+  danych UMOŻLIWIAJĄCA automatyczną ANALIZĘ przez organy PODATKOWE
+
+⚠️ [ZAKRES NIEOPRACOWANY SZCZEGÓŁOWO W TEJ SESJI] dokładna TREŚĆ
+  poszczególnych 19 kolumn (numeracja, NAZWY, przeznaczenie każdej)
+  NIE była przedmiotem POGŁĘBIONEJ weryfikacji w TEJ sesji — DO
+  uzupełnienia reaktywnie PRZY konkretnej sprawie wymagającej
+  szczegółowej ANALIZY zapisów W poszczególnych kolumnach — sprawdź
+  wzór KSIĘGI stanowiący załącznik DO rozporządzenia (Dz.U. 2025
+  poz. 1299) bezpośrednio na ISAP.
+```
+
+---
+
+## 6. ZALICZKI, ZEZNANIE ROCZNE, PRZECHOWYWANIE
+
+```
+ZALICZKI NA PODATEK DOCHODOWY: wysokość USTALANA na podstawie zapisów
+  W PKPiR — PŁATNE w terminie DO 20. dnia miesiąca NASTĘPUJĄCEGO po
+  miesiącu/KWARTALE, za który wpłacana JEST zaliczka
+
+ZEZNANIE ROCZNE: sporządzane NA podstawie zapisów W księdze — TERMIN
+  do 30 KWIETNIA roku następującego PO roku podatkowym — FORMULARZ
+  zależny OD formy opodatkowania: PIT-36 (skala PODATKOWA) lub
+  PIT-36L (podatek LINIOWY)
+
+⭐⭐ NOWY OBOWIĄZEK OD 2026 R. — PRZESYŁANIE KSIĘGI DO URZĘDU
+  SKARBOWEGO: PO zakończeniu roku PODATKOWEGO, w TERMINIE do UPŁYWU
+  terminu ZŁOŻENIA zeznania rocznego, PODATNIK przesyła WŁAŚCIWEMU
+  naczelnikowi urzędu SKARBOWEGO księgę W formie USTRUKTURYZOWANEJ
+  (JPK_PKPIR) — WYNIKA z NOWEGO art. 24a ust. 7 ustawy O PIT (dodany
+  NOWELIZACJĄ wprowadzającą zmiany OD 2026 r.) — ⭐ ANALOGICZNY
+  mechanizm DO obowiązków JPK_KR W pełnej księgowości (patrz
+  mod-ustawa-rachunkowosci.md ORAZ ⚠️ powiązanie z modułem
+  mod-JPK-ksiegi-elektroniczne-e-sprawozdania.md — patrz SEKCJA 8
+  niżej, moduł NA razie tylko SZKICOWY)
+
+PRZECHOWYWANIE KSIĘGI I DOWODÓW: OBOWIĄZEK wynika Z art. 86 Ordynacji
+  podatkowej — DO czasu upływu OKRESU przedawnienia zobowiązania
+  PODATKOWEGO (standardowo 5 LAT, licząc OD końca roku
+  KALENDARZOWEGO, w KTÓRYM upłynął termin PŁATNOŚCI podatku), CHYBA
+  że ustawy PODATKOWE stanowią INACZEJ — ⭐ PRZYKŁAD: księga ZA rok
+  2018 (termin PŁATNOŚCI 30.04.2019) WYMAGAŁA przechowywania CO
+  NAJMNIEJ do KOŃCA 2025 r. — POWIĄZANIE z mod-ustawa-rachunkowosci.md
+  sekcja 4e (przechowywanie DOKUMENTACJI księgowej — TA SAMA
+  metodologia 5-LETNIA, choć podstawa PRAWNA częściowo ODRĘBNA —
+  Ordynacja podatkowa DLA PKPiR, u.o.r. DLA pełnych ksiąg)
+
+USUNIĘTE OBOWIĄZKI (nowelizacja 2026, § 8 ust. 3-5 STAREGO
+  rozporządzenia): BRAK obowiązku POSIADANIA przez PRZEDSIĘBIORSTWA
+  wielozakładowe KSIĄG w RAMACH każdego zakładu ORAZ obowiązku
+  sporządzania DOWODÓW przesunięć — TE wymogi ZOSTAŁY zniesione W
+  ramach LIBERALIZACJI/upraszczania przepisów towarzyszącej
+  wprowadzeniu FORMY elektronicznej
+```
+
+---
+
+## 7. METODA KASOWA A MEMORIAŁOWA — MOMENT UJĘCIA KOSZTU
+
+```
+⭐⭐ DWIE METODY ROZLICZANIA KOSZTÓW (WYBÓR podatnika, art. 22 ustawy
+  o PIT — POWIĄZANIE z mod-PIT-podatek-dochodowy-fizyczne.md):
+  □ METODA KASOWA (UPROSZCZONA): za DZIEŃ poniesienia KOSZTU
+    PRZYJMUJE się dzień WYSTAWIENIA faktury (LUB innego dowodu
+    stanowiącego PODSTAWĘ zaksięgowania) — PROSTSZA, WIĘKSZOŚĆ
+    małych przedsiębiorców JĄ stosuje
+  □ METODA MEMORIAŁOWA: WYMAGA rozróżniania KOSZTÓW bezpośrednio i
+    pośrednio ZWIĄZANYCH z osiąganym PRZYCHODEM —
+    • koszty BEZPOŚREDNIE (m.in. towary HANDLOWE, materiały do
+      PRODUKCJI) — ujmowane W okresie, W KTÓRYM powstają ODPOWIADAJĄCE
+      im przychody
+    • koszty POŚREDNIE (np. NAJEM, opłaty, PALIWO, wynagrodzenia) —
+      W dacie ich PONIESIENIA (dacie wystawienia DOKUMENTU księgowego
+      stanowiącego PODSTAWĘ zapisu) — ⭐ koszty POŚREDNIE przypadające
+      NA okres PRZEKRACZAJĄCY dany rok PODATKOWY podlegają
+      PROPORCJONALNEMU podziałowi na LATA (lub miesiące), KTÓRYCH
+      dotyczą
+
+⭐ MOMENT POWSTANIA PRZYCHODU: określony W samej ustawie O PIT (art.
+  14), NIE w rozporządzeniu WYKONAWCZYM — zasada OGÓLNA: dzień
+  WYDANIA rzeczy LUB wykonania usługi (LUB częściowego wykonania),
+  NIE później niż dzień WYSTAWIENIA faktury ALBO uregulowania
+  NALEŻNOŚCI — przychód POMNIEJSZANY o NALEŻNY VAT (dla PODATNIKÓW
+  VAT czynnych)
+```
+
+---
+
+## 8. POWIĄZANIA Z INNYMI MODUŁAMI
+
+```
+□ mod-ustawa-rachunkowosci.md — próg 2,5 mln EUR PRZEJŚCIA na pełne
+  księgi (sekcja 2 tamtego modułu), metodyka PRZELICZENIA walutowego
+  progu, DOWODY księgowe (analogiczne WYMOGI formalne), przechowywanie
+  dokumentacji (WSPÓLNA metodologia 5-letnia)
+□ mod-PIT-podatek-dochodowy-fizyczne.md — moment POWSTANIA przychodu
+  (art. 14 PIT), metody ROZLICZANIA kosztów (art. 22 PIT), FORMULARZE
+  zeznania rocznego (PIT-36/PIT-36L)
+□ mod-ustawa-ryczalt-przychody.md — DLA podatników RYCZAŁTU od
+  przychodów ewidencjonowanych, KTÓRZY NIE prowadzą PKPiR, lecz
+  ODRĘBNĄ ewidencję przychodów — patrz ROZPORZĄDZENIE MFiG z
+  6.09.2025 r. (Dz.U. 2025 poz. 1294), SEKCJA 1 tego modułu
+□ ⚠️ mod-JPK-ksiegi-elektroniczne-e-sprawozdania.md — NA razie moduł
+  wyłącznie SZKICOWY (patrz odrębny wpis W tej samej sesji
+  uzupełniania luk) — DOTYCZY szczegółowo MECHANIZMU przesyłania
+  JPK_PKPIR/JPK_KR wskazanego W sekcji 6 wyżej
+□ mod-OP-ordynacja-podatkowa.md — art. 86 OP jako PODSTAWA obowiązku
+  przechowywania KSIĄG i dowodów
+```
+
+---
+
+## ⚠️ SAMOOCENA POKRYCIA — MODUŁ NOWO UTWORZONY
+
+```
+Ten moduł ZOSTAŁ zbudowany OD PODSTAW 2026-08-13, po wykryciu, że
+BYŁ fantomowym wpisem w ROUTING-MAP.md (nigdy WCZEŚNIEJ nie
+istniał jako PLIK — patrz flaga F-20). Pokrycie WSTĘPNE, oparte
+na jednej SESJI wyszukiwania — NIE przechodził jeszcze przez
+wielokrotne iteracje pogłębiające, W przeciwieństwie do np.
+mod-VAT-podatek-od-towarow-i-uslug.md czy mod-ustawa-akcyzowa-i-
+clo-UCC.md.
+
+ZIDENTYFIKOWANE LUKI DO DALSZEGO POGŁĘBIENIA:
+□ Dokładna treść 19 kolumn PKPiR (numeracja, nazwy, przeznaczenie)
+□ Dokładny próg procentowy błędów przy ocenie rzetelności księgi
+  (0,5%? — niepotwierdzone wprost w tej sesji)
+□ Dokładna podstawa prawna i przesłanki zwolnienia z obowiązku
+  PKPiR ze względu na szczególne okoliczności
+□ Pełny katalog wymogów formalnych dowodu księgowego
+□ Przeliczenie progu 2,5 mln EUR na PLN dla konkretnych lat
+  (mechanizm znany, konkretne kwoty wymagają weryfikacji rocznej)
+
+⚠️ [NIEWERYFIKOWANE BEZPOŚREDNIO NA ISAP] cała treść tego modułu —
+ISAP niedostępny do web_fetch w tej sesji. Przed pismem procesowym
+lub wiążącą poradą potwierdź brzmienie kluczowych przepisów wprost
+na isap.sejm.gov.pl (WDU20250001299).
+```

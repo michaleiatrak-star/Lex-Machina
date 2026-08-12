@@ -36879,3 +36879,103 @@ module. dr-06 SKILL.md v3.71→v3.72.
 |---|---|
 | Nowe moduły utworzone (cała sesja) | 18 |
 | Flagi otwarte | 9 |
+
+## AUDYT-2026-08-13a — ZAMKNIĘCIE FLAGI F-20: utworzenie czterech
+fantomowych modułów DR-06 od podstaw (PKPiR, JPK, kasy rejestrujące,
+rachunkowość budżetowa)
+
+**Kontekst:** flaga F-20 (otwarta 2026-08-13, wcześniejsza sesja tego
+samego dnia) udokumentowała odkrycie, że ROUTING-MAP.md opisywał
+cztery moduły DR-06 jako istniejące ("✅ NOWY"/"✅ ROZBUDOWANE"), mimo
+że pliki fizycznie nie istniały na dysku: `mod-PKPiR-ewidencje-
+uproszczone.md`, `mod-JPK-ksiegi-elektroniczne-e-sprawozdania.md`,
+`mod-kasy-rejestrujace-fiskalizacja.md`, `mod-rachunkowosc-budzetowa-
+JSFP.md`. Hipoteza: przerwana/niezapisana sesja robocza oznaczona w
+ROUTING-MAP jako "2026-08-11u/v/w".
+
+**Działanie w tej sesji (na wyraźne żądanie użytkownika: "zbuduj teraz
+te moduły [...] informacji szukaj online"):** wszystkie cztery moduły
+UTWORZONE OD PODSTAW, każdy z pełną, świeżą sesją wyszukiwania
+internetowego (nie z pamięci), zgodnie z ZASADĄ 13/14 (gradacja
+źródeł, wielokrotna weryfikacja).
+
+**1. mod-PKPiR-ewidencje-uproszczone.md (v1.0.0, 390 linii):**
+zakres podmiotowy (próg 2,5 mln EUR, forma opodatkowania skala/
+liniowy), zmiana rozporządzenia od 1.01.2026 r. (Dz.U. 2025 poz.
+1299, zastępuje 2019 poz. 2544 — potwierdzone bezpośrednio ISAP
+WDU20250001299), trzy powiązane rozporządzenia z 6.09.2025 r. (PKPiR
++ ewidencja ryczałtu poz. 1294 + dane dodatkowe JPK poz. 1311 —
+potwierdzone na gov.pl/web/finanse, Rząd 1), obowiązek elektronicznej
+formy i przesyłania JPK_PKPIR, zmiana liczby kolumn 17→19, terminy
+zapisów (bieżąco vs biuro rachunkowe do 20. dnia), pięć ustawowych
+wyjątków od sankcji nierzetelności księgi, spis z natury (w tym
+"zerowy"), metody kasowa/memoriałowa rozliczania kosztów.
+
+**2. mod-JPK-ksiegi-elektroniczne-e-sprawozdania.md (v1.0.0, 343
+linie):** cała rodzina struktur JPK usystematyzowana: JPK_VAT z
+deklaracją (JPK_V7M/V7K od 1.10.2020, struktura 4-węzłowa XML,
+asymetria wariantów V7K, obowiązek pliku zerowego, wersja struktury
+(3) od 1.02.2026), JPK_CIT (JPK_KR_PD + JPK_ST_KR, harmonogram trzech
+etapów wdrożenia 2025→2026→2027, kluczowe odkrycie: wydłużenie
+terminu z 3 do 7 miesięcy — najpierw rozporządzeniem MFiG z 16.02.2026
+Dz.U. poz. 188 jako rozwiązanie tymczasowe, potem ustawą z 15.05.2026
+Dz.U. poz. 779 jako rozwiązanie trwałe, art. 9 ust. 1c/1e CIT),
+rozszerzony zakres danych od 2026 r., odroczenie JPK_ST_KR o rok
+rozporządzeniem z 13.12.2024, relacja JPK_KR (na żądanie) vs
+JPK_KR_PD (obowiązkowy okresowy).
+
+**3. mod-kasy-rejestrujace-fiskalizacja.md (v1.0.0, 275 linii):**
+⭐⭐⭐ ROZSTRZYGNIĘTO wcześniejszą rozbieżność numeru Dz.U. sygnalizowaną
+we flagi F-18 (inny, niepowiązany kontekst — flaga F-18 istnieje w
+DWÓCH miejscach systemu pod tym samym numerem, dotyczącym różnych
+tematów, NIE MYLIĆ): prawidłowy numer to Dz.U. 2024 poz. 1902 (NIE
+poz. 1949, jak błędnie podawało jedno źródło w poprzedniej wersji
+ROUTING-MAP) — potwierdzone BEZPOŚREDNIO na isap.sejm.gov.pl
+(WDU20240001902) oraz 6+ zgodnych źródeł Rządu 2B (lexlege, inforlex,
+gofin ×3, ISP Modzelewski, vademecumpodatnika). Treść: limit 20 000
+zł (podmiotowy, z proporcjonalnym rozliczeniem dla nowych podmiotów),
+warunek "udziału procentowego obrotu" >80%, wyłączenie wartości VAT/
+środków trwałych z obliczenia limitu, zwolnienie przedmiotowe wg
+załącznika, towary bezwzględnie wymagające kasy (tytoń, alkohol
+>0,5%, perfumy — bez względu na próg), cztery rodzaje kas (online/EJ/
+papierowa/wirtualna), przeglądy techniczne co 2 lata, powiązanie z
+ulgą 90%/700 zł i karą 300 zł (już opisanymi w mod-VAT i mod-podatki-
+sektorowe).
+
+**4. mod-rachunkowosc-budzetowa-JSFP.md (v1.0.0, 328 linii):**
+podwójna podstawa prawna (art. 40 UFP jako delegacja + rozporządzenie
+MRiF z 13.09.2017), pełna historia tekstów jednolitych do aktualnego
+Dz.U. 2026 poz. 909 (obwieszczenie 24.06.2026, ogł. 7.07.2026 —
+potwierdzone bezpośrednio ISAP dla aktu pierwotnego WDU20170001911 i
+nowelizacji 2025 WDU20250000347), zakres podmiotowy (sektor finansów
+publicznych z art. 9 UFP), siedem załączników rozporządzenia (plany
+kont dla budżetu państwa/JST/jednostek budżetowych, wzory bilansów),
+nowe konto 968 "Prywatyzacja" wprowadzone w najnowszym t.j., terminy
+sprawozdań (15 kwietnia jednostka→nadrzędna, 30 kwietnia nadrzędna→
+MF), sygnalizowane (niepotwierdzone krzyżowo) wyłączenie stosowania
+rozdziałów 5/6 u.o.r. dla JSFP.
+
+**Metodologia wspólna dla wszystkich czterech modułów:** każdy moduł
+zawiera wbudowaną sekcję "SAMOOCENA POKRYCIA — MODUŁ NOWO UTWORZONY"
+z jawnym wskazaniem zidentyfikowanych luk pozostałych do pogłębienia
+— pokrycie wstępne (v1.0.0), oparte na jednej sesji wyszukiwania per
+moduł, jawnie oznaczone jako nieporównywalne jeszcze z modułami
+wielokrotnie iterowanymi (VAT, akcyza). Rząd 1 (ISAP) był w tej
+sesji częściowo dostępny — bezpośrednie potwierdzenia uzyskano dla
+głównych numerów Dz.U. (WDU20250001299, WDU20240001902,
+WDU20170001911, WDU20250000347) przez konkretne, przeszukane adresy
+URL, ale PEŁNY tekst żadnego z aktów nie został odczytany przez
+web_fetch — pozostała treść oparta na zgodnych źródłach Rządu 2B.
+
+**Propagacja:** wszystkie cztery moduły zarejestrowane w dr-06/
+SKILL.md (licznik 37→41) i dr-06/MAPA-AKTOW.md (cztery nowe wiersze).
+Wszystkie odpowiadające wpisy w prawo-polskie-v2/ROUTING-MAP.md
+przepisane z "⛔ WPIS FANTOMOWY" na "✅ MODUŁ UTWORZONY 2026-08-13".
+
+**Rejestracja:** dr-06 SKILL.md — licznik 37→41, cztery wpisy o
+nowych modułach. Flaga F-20 w WARN-OTWARTE.md — USUNIĘTA (przeniesiona
+tutaj jako zamknięta). ⚠️ POZOSTAJE OTWARTY punkt (2) z pierwotnej
+rekomendacji F-20: zbadać, czy analogiczny wzorzec fantomowych wpisów
+z sesji "2026-08-11u/v/w" występuje TAKŻE w innych DR-skillach poza
+DR-06 — NIE było przedmiotem tej sesji, rekomendowane jako oddzielne
+zadanie audytowe.

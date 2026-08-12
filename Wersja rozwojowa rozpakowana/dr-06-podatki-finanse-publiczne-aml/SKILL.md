@@ -68,7 +68,39 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   od KC; nowelizacja znosi "wieczne przedawnienie" + wprowadza ugodę
   podatkową od 01.10.2026 (art. 70 i n. OP)
 
-## Moduły (37 łącznie — ✓ 37 OK, ☐ 0 STUB)
+## Moduły (41 łącznie — ✓ 41 OK, ☐ 0 STUB)
+
+**Aktualizacja 2026-08-13 (naprawa flagi F-20 — CZTERY nowe moduły
+utworzone od podstaw, na żądanie użytkownika):** wykryto i naprawiono
+wzorzec systemowy, w którym ROUTING-MAP.md opisywał moduły jako
+istniejące, mimo że pliki fizycznie nie istniały na dysku (patrz
+audyt-systemu-v4/references/WARN-OTWARTE.md, flaga F-20). Utworzono:
+- `mod-PKPiR-ewidencje-uproszczone.md` (v1.0.0) — podatkowa księga
+  przychodów i rozchodów: zakres podmiotowy (próg 2,5 mln EUR),
+  zmiana rozporządzenia od 1.01.2026 (Dz.U. 2025 poz. 1299), obowiązek
+  elektroniczny/JPK_PKPIR, 19 kolumn (wcześniej 17), terminy zapisów,
+  rzetelność/niewadliwość księgi, spis z natury, metody kasowa/
+  memoriałowa
+- `mod-JPK-ksiegi-elektroniczne-e-sprawozdania.md` (v1.0.0) — cały
+  ekosystem JPK: JPK_VAT/V7M/V7K (struktura, terminy, sankcje),
+  JPK_CIT (JPK_KR_PD + JPK_ST_KR, harmonogram trzech etapów wdrożenia
+  2025-2027, wydłużenie terminu do 7 miesięcy), JPK_PKPIR, JPK_KR na
+  żądanie organu
+- `mod-kasy-rejestrujace-fiskalizacja.md` (v1.0.0) — ⭐ ROZSTRZYGNIĘTO
+  wcześniejszą rozbieżność numeru Dz.U. (prawidłowy: 2024 poz. 1902,
+  NIE 1949), limit zwolnienia 20 000 zł, katalog zwolnień
+  przedmiotowych, towary wymagające kasy bezwzględnie, fiskalizacja,
+  przeglądy co 2 lata
+- `mod-rachunkowosc-budzetowa-JSFP.md` (v1.0.0) — rachunkowość
+  jednostek sektora finansów publicznych: podstawa art. 40 ustawy o
+  finansach publicznych, rozporządzenie wykonawcze (t.j. Dz.U. 2026
+  poz. 909), siedem załączników (plany kont, wzory bilansów), terminy
+  sprawozdań 15/30 kwietnia
+
+Wszystkie cztery moduły oznaczone jako v1.0.0, z wbudowaną sekcją
+"SAMOOCENA POKRYCIA" wskazującą zidentyfikowane luki do dalszego
+pogłębienia — pokrycie wstępne, oparte na jednej sesji wyszukiwania,
+nieporównywalne jeszcze z wielokrotnie iterowanymi modułami VAT/akcyzy.
 
 **Aktualizacja 2026-08-13 (ETAP 3 — dokończenie podatków sektorowych:
 gry hazardowe i podatek tonażowy, na żądanie użytkownika):** w module
@@ -308,6 +340,31 @@ fundusze.md` — naprawiono błędną podstawę sankcji karnej (art. 154
 to definicja, nie sankcja — POPRAWNE: art. 180/181) i rozbudowano
 insider trading. OBA pliki modułów SĄ nietknięte przez TO scalenie,
 TREŚĆ potwierdzona obecna.
+
+**Aktualizacja 2026-08-13 (audyt pokrycia + wypełnienie luk, na
+żądanie użytkownika, analogicznie do wcześniejszego audytu VAT i
+akcyzy):** `mod-ustawa-rachunkowosci.md` rozbudowany z v1.9.0 do
+v1.14.0. ⛔ KOREKTA SYSTEMOWA: wykryto, że ROUTING-MAP.md błędnie
+wskazywał wcześniej wersję v1.11.0 z "transzą 3" (sekcje 5b-5h) —
+ta treść fizycznie NIE ISTNIAŁA w pliku na dysku (weryfikacja
+bezpośrednia), prawdopodobnie przerwana/niezapisana sesja z 08-11.
+DODATKOWO wykryto CZTERY inne wpisy w ROUTING-MAP.md odnoszące się
+do modułów, które NIE ISTNIEJĄ na dysku: mod-PKPiR-ewidencje-
+uproszczone, mod-JPK-ksiegi-elektroniczne-e-sprawozdania (3 wpisy),
+mod-kasy-rejestrujace-fiskalizacja (2 wpisy), mod-rachunkowosc-
+budzetowa-JSFP — wszystkie oznaczone w ROUTING-MAP.md jako ⛔ WPIS
+FANTOMOWY, wymagają albo utworzenia modułu od zera, albo usunięcia
+wiersza. W TEJ sesji ODTWORZONO od podstaw i ZWERYFIKOWANO pięć
+głównych luk rachunkowości: skonsolidowane sprawozdania finansowe/
+grupy kapitałowe (sekcja 5b), ESG/CSRD (sekcja 5c — była PODWÓJNĄ
+luką, nieobecna też w DR-15 dokąd błędnie odesłano; pełna
+chronologia trzech nowelizacji 12.2024/07.2025/02.2026), wycena
+walut obcych (sekcja 5d), odpowiedzialność cywilna KSH art. 293/483
+z business judgment rule (sekcja 5e), usługowe prowadzenie ksiąg —
+z istotną korektą: brak wymogu certyfikatu księgowego od 10.08.2014
+r. (sekcja 5f), wynik finansowy zasygnalizowany (sekcja 5g), KSR
+usystematyzowane (sekcja 5h). Pokrycie dziedziny wzrosło z 50% do
+75% wg wbudowanej mapy pokrycia modułu (15/20 podtematów pełnych).
 
 **Aktualizacja 2026-08-11:**
 - Nowy moduł: `mod-ustawa-rachunkowosci.md` — ustawa o rachunkowości

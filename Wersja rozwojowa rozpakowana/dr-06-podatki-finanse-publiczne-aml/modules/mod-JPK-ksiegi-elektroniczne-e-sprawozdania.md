@@ -1,217 +1,343 @@
-# JPK_CIT, księgi elektroniczne i e-sprawozdania finansowe
-v1.0.0 (dodany 2026-08-11 — audyt pokrycia tematów rachunkowo-księgowych)
+# JPK — Jednolity Plik Kontrolny: księgi elektroniczne i
+e-sprawozdania
 
-Zweryfikowano 2026-08-11 (ZASADA 14):
-- **Rząd 1:** podatki.gov.pl/podatki-firmowe/cit/podstawa-prawna
-  (oficjalny wykaz aktów wykonawczych MF), gov.pl/web/kas/struktury-
-  e-sprawozdan, gov.pl/web/finanse/ustawa-csrd
-- **Rząd 2A:** prawo.pl, lex.pl, inforlex.pl, pit.pl, gofin.pl
-- **Rząd 2B:** Deloitte (×2 alerty podatkowe), PwC, ASB Group,
-  vademecumksiegowego.pl, poradnikksiegowego.pl, pibr.org.pl
-- **Rząd 3 (potwierdzenie zbieżności):** axelo.pl, comarch.pl,
-  insert.com.pl, ksiegoboty.pl, audit-tax.pl
+v1.0.0 (utworzony 2026-08-13, na żądanie użytkownika — moduł
+odtworzony od podstaw po wykryciu, że był fantomowym wpisem w
+ROUTING-MAP.md, patrz flaga F-20 w audyt-systemu-v4/references/
+WARN-OTWARTE.md)
 
-⚠️ ZNALEZISKO AUDYTOWE: JPK_KR / JPK_CIT występował w systemie WYŁĄCZNIE
-jako jedna pozycja w tabeli ryzyk w `mod-KAS-kontrola-celno-skarbowa.md`
-(„Brak JPK / niezgodność"). Obowiązek raportowy o skali porównywalnej z
-KSeF, z trzema turami wdrożenia i dwiema zmianami terminów w 2026 r., nie
-miał żadnego opracowania. E-sprawozdania finansowe (XML/JPK_SF) —
-podobnie: jedna wzmianka bez treści.
+**Zweryfikowano 2026-08-13** (ZASADA 14): Rząd 1 — podatki.gov.pl
+(broszura informacyjna JPK_VAT z deklaracją). Rząd 2B — comarch.pl,
+insert.com.pl, poradnikprzedsiebiorcy.pl, haergi.pl, varico.pl,
+accace.pl, symfonia.pl, jpk.info.pl, e-druki.pl, bizneserp.pl,
+ksiegowego.pl. ⚠️ [NIEWERYFIKOWANE BEZPOŚREDNIO PRZEZ ISAP] — ISAP
+niedostępny do web_fetch w tej sesji, treść ustalona na podstawie
+zgodnych źródeł wtórnych — przed pismem procesowym potwierdź
+brzmienie kluczowych przepisów wprost na ISAP.
+
+⚠️ TEMAT WYBITNIE DYNAMICZNY — harmonogram wdrożenia JPK_CIT jest w
+toku (etapy do 2027-2028), a terminy były już raz przedłużane
+rozporządzeniem z 2026 r. Sprawdź aktualny stan przed każdym
+zastosowaniem.
 
 ---
 
-## 1. ⭐⭐⭐ DWIE RODZINY STRUKTUR — NIE MYLIĆ
+## 1. PRZEGLĄD SYSTEMU JPK — RODZINA STRUKTUR
 
 ```
-RODZINA PIT (podmioty na PKPiR lub księgach rachunkowych, opodatkowane
-PIT) → szczegóły: mod-PKPiR-ewidencje-uproszczone.md
-  → JPK_PKPIR — podatkowa księga przychodów i rozchodów
-  → JPK_ST — ewidencja środków trwałych i WNiP
-  → TERMIN: art. 45 ust. 1 ustawy o PIT (co do zasady 30 kwietnia roku
-    następującego po roku podatkowym)
+JPK (Jednolity Plik Kontrolny) TO zbiorcza NAZWA dla RODZINY
+  ustrukturyzowanych plików ELEKTRONICZNYCH (formularze XML wg
+  określonego SCHEMATU XSD), za POMOCĄ których podatnicy PRZEKAZUJĄ
+  dane KSIĘGOWE/podatkowe organom SKARBOWYM — W MIEJSCE (lub
+  UZUPEŁNIENIU) tradycyjnych PAPIEROWYCH/PDF deklaracji.
 
-RODZINA CIT / PEŁNE KSIĘGI (tzw. „JPK_CIT" — parasol na dwie struktury):
-  → **JPK_KR_PD** — pełne księgi rachunkowe rozszerzone o dane podatkowe
-    (dziennik, obroty, salda, znaczniki kont, NIP kontrahentów, numery
-    faktur KSeF, różnice wynik bilansowy vs podatkowy)
-  → **JPK_ST_KR** — ewidencja środków trwałych oraz WNiP
-  ⭐⭐ OBIE STRUKTURY SĄ ODRĘBNE: przygotowanie do JPK_KR_PD NIE
-    zastępuje przygotowania do JPK_ST_KR — inne dane źródłowe, osobna
-    walidacja
-
-⭐ PODSTAWA OBOWIĄZKU: art. 9 ust. 1c i 1e ustawy o CIT
-⭐ RÓWNOLEGŁY OBOWIĄZEK MATERIALNY: od 1.01.2025 księgi rachunkowe
-  prowadzi się WYŁĄCZNIE w formie elektronicznej
-⭐ PODATKOWE GRUPY KAPITAŁOWE: mimo wspólnego zeznania CIT, KAŻDA spółka
-  tworząca PGK przekazuje JPK_KR_PD i JPK_ST_KR ODDZIELNIE, we własnym
-  imieniu (art. 9 ust. 1g ustawy o CIT)
-  ⚠️ [jednostka redakcyjna 1g — potwierdzona w Rzędzie 3 (audit-tax.pl);
-  zweryfikuj w ISAP przed powołaniem w piśmie]
-```
-
-## 2. ⭐⭐ HARMONOGRAM WDROŻENIA — TRZY TURY
-
-```
-TURA 1 — rok podatkowy/obrotowy rozpoczynający się PO 31.12.2024:
-  → podatkowe grupy kapitałowe (PGK)
-  → podatnicy i spółki niebędące osobami prawnymi, u których przychody
-    w poprzednim roku przekroczyły **50 mln EUR**
-  → pierwsze pliki: za 2025 r., składane w 2026 r.
-
-TURA 2 — rok rozpoczynający się PO 31.12.2025 (obowiązek przesyłania od
-  1.01.2026):
-  → podatnicy CIT i spółki niebędące osobami prawnymi zobowiązani do
-    przesyłania JPK_VAT (czynni podatnicy VAT)
-  → oraz podatnicy PIT prowadzący KSIĘGI RACHUNKOWE zobowiązani do
-    JPK_V7M
-  → pierwsze pliki: za 2026 r., składane w 2027 r.
-
-TURA 3 — rok rozpoczynający się PO 31.12.2026:
-  → pozostali podatnicy CIT i spółki niebędące osobami prawnymi
-    (w tym mali podatnicy rozliczający VAT kwartalnie i podatnicy CIT
-    zwolnieni z VAT)
-```
-
-## 3. ⭐⭐⭐ TERMIN PRZESŁANIA — ZMIENIONY DWUKROTNIE W 2026 r.
-
-```
-⛔ STAN ARCHIWALNY (NIE CYTOWAĆ JAKO OBOWIĄZUJĄCEGO): termin do dnia
-  upływu terminu złożenia zeznania CIT-8, tj. co do zasady do końca
-  3. MIESIĄCA po zakończeniu roku podatkowego
-
-⭐ ETAP 1 — ROZPORZĄDZENIE (rozwiązanie tymczasowe): rozporządzenie
-  Ministra Finansów i Gospodarki z **16 lutego 2026 r.** w sprawie
-  przedłużenia terminów przesyłania ksiąg rachunkowych w zakresie
-  podatku dochodowego od osób prawnych — **Dz.U. 2026 poz. 188**
-  → ogłoszone 19.02.2026, w życie 20.02.2026
-  → wydłuża termin do końca **7. MIESIĄCA** po zakończeniu roku
-    podatkowego/obrotowego
-  → zakres: lata rozpoczynające się po 31.12.2024, a KOŃCZĄCE SIĘ przed
-    1.04.2026
-  → dotyczy WYŁĄCZNIE struktury JPK_KR_PD
-  → dodatkowo przedłuża do 31.07.2026 termin z art. 66 ust. 3 ustawy
-    zmieniającej z 29.10.2021 r.
-
-⭐⭐ ETAP 2 — USTAWA (rozwiązanie trwałe): ustawa z **15 maja 2026 r.**
-  o zmianie ustawy o podatku dochodowym (…) — **Dz.U. 2026 poz. 779**
-  → potwierdzona w oficjalnym wykazie MF: podatki.gov.pl/podatki-
-    firmowe/cit/podstawa-prawna (Rząd 1), data publikacji 15.06.2026
-  → w życie od **1 lipca 2026 r.**
-  → TRWALE zapisuje 7-miesięczny termin dla art. 9 ust. 1c i 1e CIT
-  → uzasadnienie MF: termin zatwierdzenia rocznego sprawozdania
-    finansowego to do 6 miesięcy od dnia bilansowego (u.o.r.), a
-    ostateczne zamknięcie ksiąg — do 15 dni od zatwierdzenia; termin
-    3-miesięczny wyprzedzał zatem moment, w którym księgi są ostateczne
-
-⭐⭐⭐ SKUTEK PRAKTYCZNY DLA TURY 1 (rok = kalendarzowy): pierwszy
-  JPK_KR_PD za 2025 r. — do **31 lipca 2026 r.** (zamiast 31.03.2026)
-
-⛔⛔ ROZDZIELENIE OBOWIĄZKÓW — NAJCZĘSTSZY BŁĄD: przedłużenie dotyczy
-  WYŁĄCZNIE terminu PRZESŁANIA KSIĄG. **Termin złożenia zeznania CIT-8
-  NIE ULEGA ZMIANIE.** To dwa odrębne obowiązki z odrębnymi terminami i
-  odrębnymi sankcjami
-```
-
-## 4. ZAKRES DANYCH — UPROSZCZENIA PRZEJŚCIOWE
-
-```
-⭐ ROZPORZĄDZENIE BAZOWE (dane dodatkowe, CIT): rozporządzenie MF z
-  16 sierpnia 2024 r. w sprawie dodatkowych danych, o które należy
-  uzupełnić prowadzone księgi rachunkowe — t.j. Dz.U. 2024 poz. 1314
-  (wg oficjalnego wykazu MF, Rząd 1)
-⭐ ODPOWIEDNIK DLA PIT: rozporządzenie MFiG z 6 września 2025 r.
-  (Dz.U. 2025 poz. 1311) — dane dodatkowe dla ksiąg i ewidencji ŚT/WNiP
-  przekazywanych na podstawie ustawy o PIT, od 1.01.2026
-⭐ ZWOLNIENIE Z CZĘŚCI KSIĄG: rozporządzenie MF z 13 grudnia 2024 r. —
-  t.j. Dz.U. 2024 poz. 1861 (wg wykazu MF); na jego mocy obowiązek
-  JPK_ST_KR ODROCZONO O ROK
-⭐ ZWOLNIENIE DLA MSSF/MSR: rozporządzenie MFiG z 15 grudnia 2025 r.
-  (Dz.U. 2025 poz. 1828) — przedłuża zwolnienie podmiotów stosujących
-  MSSF/MSR z obowiązku oznaczania kont znacznikami do 1.01.2028
-
-⭐ ZA ROK 2025 (tura 1) — ZAKRES OKROJONY: wymagane wyłącznie znaczniki
-  identyfikujące konta (ZOiS). Pełne dane dodatkowe — m.in. NIP
-  kontrahenta na poziomie zapisu dziennika i numery KSeF — obowiązkowe
-  dopiero od roku 2026
-  ⚠️ [§ 5 ust. 1 rozporządzenia z 16.08.2024 jako podstawa uproszczenia
-  — potwierdzone w Rzędzie 3 (ksiegoboty.pl) i pośrednio w Rzędzie 2B;
-  zweryfikuj jednostkę redakcyjną w ISAP przed powołaniem]
-```
-
-## 5. SANKCJA ZA NIEZŁOŻENIE
-
-```
-⭐ Niezłożenie JPK_CIT w terminie traktowane jak nieprzedłożenie
-  informacji podatkowej — **art. 80 KKS**, kara grzywny do 240 stawek
-  dziennych
-  ⚠️ [POTWIERDZONE W RZĘDZIE 3 (inwentaryzujemy.pl) — pojedyncze źródło.
-  ZWERYFIKUJ art. 80 KKS w ISAP oraz w dr-03/mod-KKS-karny-skarbowy-i-
-  AML.md przed powołaniem w piśmie. Nie przenoś tej kwalifikacji
-  automatycznie na JPK_V7 ani na JPK_PKPIR — inne struktury mogą
-  podlegać innym przepisom]
-```
-
-## 6. ⭐⭐ E-SPRAWOZDANIA FINANSOWE (XML / JPK_SF)
-
-```
-PODSTAWA: art. 45 ust. 1f-1h ustawy o rachunkowości, obowiązuje od
-  1 października 2018 r. (wprowadzone ustawą z 26 stycznia 2018 r. o
-  zmianie ustawy o KRS oraz niektórych innych ustaw — Dz.U. 2018
-  poz. 398 ze zm.)
-
-⭐ ART. 45 UST. 1f — FORMA I PODPIS (dotyczy KAŻDEJ jednostki
-  prowadzącej księgi rachunkowe): sprawozdanie finansowe sporządza się
-  w POSTACI ELEKTRONICZNEJ i opatruje kwalifikowanym podpisem
-  elektronicznym, podpisem zaufanym albo podpisem osobistym
-
-⭐⭐ ART. 45 UST. 1g — STRUKTURA LOGICZNA (węższy krąg): jednostki
-  wpisane do rejestru przedsiębiorców KRS sporządzają sprawozdanie w
-  STRUKTURZE LOGICZNEJ i formacie udostępnianym w BIP na stronie
-  urzędu obsługującego ministra właściwego ds. finansów publicznych
-  (w praktyce: XML zgodny ze schemą XSD)
-  → obowiązek formy ustrukturyzowanej obejmuje także: podatników PIT
-    prowadzących księgi rachunkowe obowiązanych do sporządzenia
-    sprawozdania oraz — co do zasady — podatników CIT przekazujących
-    sprawozdanie Szefowi KAS (art. 27 ust. 2 ustawy o CIT)
-
-⭐ ART. 45 UST. 1h — JEDNOSTKI STOSUJĄCE MSR: struktura logiczna
-  obowiązuje, JEŻELI zostanie udostępniona w BIP. ⭐⭐ MF OFICJALNIE
-  INFORMUJE, że struktury dla sprawozdań MSR **NIE BĘDĄ publikowane**
-  (gov.pl/web/kas/struktury-e-sprawozdan — Rząd 1)
-  → SKUTEK: jednostki MSR sporządzają sprawozdanie w postaci
-    elektronicznej w formacie wybranym samodzielnie lub
-    nieustrukturyzowanym. To NIE jest luka ani uchybienie — to
-    świadomy stan wynikający z warunkowego brzmienia ust. 1h
-
-⭐ ART. 49 UST. 7 — SPRAWOZDANIE Z DZIAŁALNOŚCI: jednostki wpisane do
-  rejestru przedsiębiorców KRS sporządzają je w postaci elektronicznej
-  i opatrują kwalifikowanym podpisem elektronicznym lub podpisem
-  zaufanym (⚠️ katalog podpisów w ust. 7 może różnić się od art. 45
-  ust. 1f — zweryfikuj w ISAP, jeśli chodzi o podpis osobisty)
-
-⭐ ADRESACI ZŁOŻENIA — DWA RÓWNOLEGŁE KANAŁY:
-  → KRS (Repozytorium Dokumentów Finansowych) — jednostki wpisane do
-    rejestru przedsiębiorców
-  → Szef KAS — m.in. podatnicy CIT niewpisani do rejestru
-    przedsiębiorców KRS oraz podatnicy PIT prowadzący księgi
-  ⚠️ [DOKŁADNY PODZIAŁ ADRESATÓW zależy od formy prawnej i przepisów
-  podatkowych — ustal indywidualnie, nie stosuj domyślnie]
-
-⭐ DOKUMENTY TOWARZYSZĄCE składane do KRS (uchwała zatwierdzająca,
-  uchwała o podziale zysku, sprawozdanie z badania) nie mają narzuconej
-  struktury XML; dla większości wymagana jest postać elektroniczna, przy
-  czym uchwałę/postanowienie o zatwierdzeniu można dołączyć jako skan
-  (biznes.gov.pl — Rząd 1)
+GŁÓWNE STRUKTURY, W PORZĄDKU chronologicznym WPROWADZENIA:
+  □ JPK_VAT z deklaracją (JPK_V7M/JPK_V7K) — OBOWIĄZUJE od 1.10.2020 r.
+    — PATRZ sekcja 2
+  □ JPK_CIT (JPK_KR_PD + JPK_ST_KR) — WDRAŻANY etapami OD 2025 r. —
+    PATRZ sekcja 3
+  □ JPK_PKPIR — NOWY obowiązek OD 2026 r. DLA podatników PROWADZĄCYCH
+    podatkową księgę PRZYCHODÓW i rozchodów — PATRZ sekcja 4 i
+    mod-PKPiR-ewidencje-uproszczone.md sekcja 6
+  □ JPK_KR (bez "_PD") — STARSZA, WĘŻSZA struktura KSIĄG rachunkowych,
+    PRZESYŁANA WYŁĄCZNIE na ŻĄDANIE organu (kontrola PODATKOWA,
+    celno-skarbowa, POSTĘPOWANIE podatkowe, czynności SPRAWDZAJĄCE)
+    — NIE zlikwidowana PRZEZ wprowadzenie JPK_KR_PD, funkcjonuje
+    RÓWNOLEGLE dla OKRESÓW sprzed obowiązkowego RAPORTOWANIA —
+    PATRZ sekcja 5
+  □ INNE struktury NA żądanie (JPK_FA — faktury, JPK_MAG — magazyn,
+    JPK_WB — wyciągi bankowe, itd.) — ⚠️ [POZA ZAKRESEM TEJ SESJI]
+    wymagają odrębnego OPRACOWANIA reaktywnie
 ```
 
 ---
 
-## CROSS-REFERENCJE
-- Sprawozdanie finansowe: struktura, terminy, badanie, konsolidacja →
-  `mod-ustawa-rachunkowosci.md`
-- PKPiR, JPK_PKPIR, JPK_ST → `mod-PKPiR-ewidencje-uproszczone.md`
-- KSeF, JPK_V7 → `mod-VAT-podatek-od-towarow-i-uslug.md`
-- Kontrola na podstawie plików JPK → `mod-KAS-kontrola-celno-skarbowa.md`
-- CIT-8, art. 9 i 27 ustawy o CIT → `mod-CIT-podatek-dochodowy-prawne.md`
-- Sankcje KKS → `dr-03-prawo-karne-wykroczenia-egzekucja/modules/
-  mod-KKS-karny-skarbowy-i-AML.md`
+## 2. JPK_VAT Z DEKLARACJĄ (JPK_V7M / JPK_V7K)
+
+```
+PODSTAWA: ustawa z 4.07.2019 r. o zmianie ustawy o podatku od
+  towarów i usług oraz innych ustaw — WPROWADZIŁA nową strukturę,
+  ŁĄCZĄCĄ dane WYKAZYWANE dotąd W deklaracji VAT-7/VAT-7K Z plikiem
+  JPK_VAT — OD 1.10.2020 r. ZASTĄPIŁA obie te FORMY.
+
+OBOWIĄZEK: dotyczy WSZYSTKICH czynnych PODATNIKÓW VAT (⛔ nie
+  dotyczy PODATNIKÓW zwolnionych podmiotowo Z VAT — CI w dalszym
+  ciągu NIE mają tego obowiązku)
+
+DWA WARIANTY WEDŁUG OKRESU ROZLICZENIOWEGO:
+  □ JPK_V7M — DLA podatników rozliczających VAT MIESIĘCZNIE
+  □ JPK_V7K — DLA podatników rozliczających VAT KWARTALNIE (⭐ dostęp
+    DO rozliczenia kwartalnego MAJĄ MALI podatnicy zarejestrowani DO
+    VAT PRZEZ okres DŁUŻSZY niż 12 MIESIĘCY — status "małego
+    podatnika" NA gruncie VAT: obrót W ciągu roku PODATKOWEGO NIE
+    przekraczający 1 200 000 EUR — ⭐ ANALOGICZNY, choć NIE identyczny
+    próg DO progu 2,5 mln EUR z u.o.r./PKPiR — NIE MYLIĆ progów Z
+    różnych reżimów)
+
+STRUKTURA PLIKU (4 GŁÓWNE węzły W formacie XML): Naglowek, Podmiot1,
+  Deklaracja, Ewidencja
+  □ CZĘŚĆ deklaracyjna — LUSTRZANE odbicie DAWNEJ deklaracji VAT-7
+  □ CZĘŚĆ ewidencyjna — SZCZEGÓŁOWE dane O transakcjach sprzedaży I
+    zakupu — ZAWIERA dane pozwalające NA prawidłowe rozliczenie
+    podatku NALEŻNEGO i naliczonego, W TYM: numer DOWODU (faktura,
+    faktura korygująca, RAPORT fiskalny), datę wystawienia DOWODU,
+    OZNACZENIA procedur podatkowych, GRUPOWANIA GTU (towarów I usług
+    o PODWYŻSZONYM ryzyku nadużyć)
+
+WARIANTY SKŁADANIA DLA JPK_V7K (kwartalne): ⭐ ASYMETRIA między
+  pierwszymi DWOMA miesiącami kwartału A trzecim:
+  □ ZA pierwsze DWA miesiące kwartału: TYLKO część EWIDENCYJNA
+    (elementy: Naglowek [Z wyjątkiem Kwartał/KodFormularzaDekl/
+    WariantFormularzaDekl], Podmiot1, SprzedazWiersz, SprzedazCtrl,
+    ZakupWiersz, ZakupCtrl)
+  □ ZA trzeci MIESIĄC kwartału: PEŁNY plik — WSZYSTKIE elementy
+    (Naglowek, Podmiot1, DEKLARACJA [dotycząca danych ZA CAŁY
+    kwartał], Ewidencja [OBEJMUJĄCA dane TYLKO za OSTATNI miesiąc
+    kwartału])
+
+TERMIN: DO 25. dnia MIESIĄCA następującego PO miesiącu, KTÓREGO
+  dotyczy ROZLICZENIE (⭐ ten SAM termin dla JPK_V7M co MIESIĄC oraz
+  DLA JPK_V7K ZA trzeci miesiąc kwartału, obejmujący DEKLARACJĘ
+  kwartalną)
+
+⭐⭐ OBOWIĄZEK "ZEROWEGO" JPK_VAT: GDY W ewidencji I deklaracji ZA
+  dany miesiąc/KWARTAŁ podatnik NIE wykonał ŻADNEJ transakcji
+  wpływającej NA podatek VAT — MIMO to SKŁADA tzw. ZEROWY JPK_V7M/
+  JPK_V7K, W KTÓRYM: W polach P_38 i P_51 (element DEKLARACJA)
+  wykazuje "0", W elementach LiczbaWierszySprzedazy oraz
+  LiczbaWierszyZakupow wykazuje "0", W elementach PodatekNalezny
+  oraz PodatekNaliczony wykazuje "0.00" — ⭐ obowiązek TEN NIE ZNIKA
+  wyłącznie DLATEGO, że NIE było TRANSAKCJI — BRAK złożenia
+  ZEROWEGO pliku JEST samodzielnym naruszeniem
+
+FORMA I AUTORYZACJA: WYŁĄCZNIE elektronicznie (E-Urząd Skarbowy,
+  Portal Podatkowy, PROGRAMY FK/ERP) — metody AUTORYZACJI: podpis
+  KWALIFIKOWANY (polski lub UE), Profil ZAUFANY, dane AUTORYZUJĄCE
+  — POTWIERDZENIE złożenia: Urzędowe POŚWIADCZENIE Odbioru (UPO) —
+  DOWÓD terminowego złożenia
+
+⭐ AKTUALNA WERSJA STRUKTURY: JPK_V7M(3)/JPK_V7K(3) — OBOWIĄZUJE OD
+  1.02.2026 r. (WCZEŚNIEJ wersja 2, DO 31.01.2026 r.) — ⚠️ [DO
+  WERYFIKACJI PRZY KONKRETNEJ SPRAWIE] sprawdź, CZY nie WPROWADZONO
+  KOLEJNEJ wersji struktury PO tej dacie
+
+KOREKTY: PO 1.10.2020 r., KOREKTA poprzednich EWIDENCJI odbywa się
+  NA "starych zasadach" (⚠️ [WYMAGA DOPRECYZOWANIA] — DOKŁADNY
+  mechanizm KOREKTY struktury JPK_V7 NIE był przedmiotem POGŁĘBIONEJ
+  weryfikacji W tej sesji, poza OGÓLNYM stwierdzeniem że KOREKTA
+  odbywa SIĘ przez korektę DEKLARACJI VAT/korektę JPK)
+
+MOMENT UJĘCIA DOKUMENTU: podatnicy W ewidencji UJMUJĄ faktury I
+  dokumenty WEDŁUG DATY POWSTANIA OBOWIĄZKU PODATKOWEGO (⛔ NIE wg
+  daty WYSTAWIENIA faktury, daty OTRZYMANIA zaliczki, daty ZAPŁATY
+  ani innej DATY, jeśli W tym TERMINIE nie powstaje OBOWIĄZEK
+  podatkowy) — ⭐ ISTOTNE rozróżnienie, ŹRÓDŁO częstych BŁĘDÓW w
+  ewidencjonowaniu
+
+SANKCJE ZA BŁĘDY: DO 500 ZŁ za KAŻDY błąd LUB brak W ewidencji
+  (⚠️ [WYMAGA POWIĄZANIA] — patrz mod-VAT-podatek-od-towarow-i-uslug.md
+  sekcja o EWIDENCJACH/JPK_V7 W rdzeniu VAT DLA pełnego omówienia
+  ART. 109/109a/110 ustawy O VAT i sankcji 500 ZŁ oraz 100% — TA
+  sekcja JEST uzupełnieniem TECHNICZNYM, nie ZASTĘPUJE analizy
+  materialnoprawnej Z modułu VAT)
+
+STRUKTURY ZASTĄPIONE PRZEZ JPK_V7: deklaracja VAT-7/VAT-7K, plik
+  JPK_VAT (STARY, bez deklaracji), a TAKŻE m.in. VAT-ZT (wniosek O
+  przyspieszenie terminu ZWROTU podatku VAT) — ⭐ NIEKTÓRE odrębne
+  deklaracje POZOSTAŁY w mocy (⚠️ [NIEWERYFIKOWANE W PEŁNI] pełny
+  katalog deklaracji NADAL wymaganych ODRĘBNIE od JPK_V7 wymaga
+  pogłębienia PRZY konkretnej sprawie)
+```
+
+---
+
+## 3. JPK_CIT (JPK_KR_PD I JPK_ST_KR)
+
+```
+✅ NOWY obowiązek — DWIE ODRĘBNE struktury logiczne:
+  □ JPK_KR_PD — dane Z KSIĄG rachunkowych (dziennik, OBROTY, salda,
+    numery FAKTUR z KSeF, NIP kontrahentów)
+  □ JPK_ST_KR — WYŁĄCZNIE ewidencja ŚRODKÓW trwałych oraz wartości
+    NIEMATERIALNYCH i prawnych
+
+⭐⭐⭐ HARMONOGRAM WDROŻENIA — TRZY ETAPY (OD roku podatkowego
+  rozpoczynającego SIĘ po 31.12.2024 r. DO roku rozpoczynającego się
+  po 31.12.2026 r.):
+  □ ETAP 1 (OD 1.01.2025 r.): NAJWIĘKSI podatnicy ORAZ podatkowe
+    grupy KAPITAŁOWE — PIERWSZY plik JPK_KR_PD ZA rok 2025, przesyłany
+    W 2026 r. — DLA spółek Z grupy kapitałowej I podatników Z
+    przychodem POWYŻEJ 50 mln EUR: TERMIN pierwotnie DO 31.03.2026 r.
+    (data upływu TERMINU złożenia zeznania CIT ZA rok podatkowy 2025)
+  □ ETAP 2 (OD roku PODATKOWEGO rozpoczynającego się PO 31.12.2025 r.,
+    a WIĘC OD 2026 r.): pozostali PODATNICY CIT obowiązani DO
+    składania ewidencji JPK_VAT (JPK_V7M/V7K) — ⭐ PODATNICY Z
+    przychodem PONIŻEJ 50 mln EUR, jeśli ROK podatkowy JEST tożsamy
+    Z kalendarzowym, PRZESYŁAJĄ pierwszy plik JPK_KR_PD ZA rok 2026
+    do 31.07.2027 r.
+  □ ETAP 3 (OD roku PODATKOWEGO rozpoczynającego się PO 31.12.2026 r.):
+    POZOSTALI podatnicy CIT (CI, którzy NIE składają JPK_VAT ALBO
+    składają go KWARTALNIE) — ⭐ OSTATNIA grupa
+
+⭐⭐⭐ WYDŁUŻENIE TERMINU — ROZPORZĄDZENIE MFiG Z 16.02.2026 R. (Dz.U.
+  2026 poz. 188, OPUBLIKOWANE 19.02.2026 r.): TERMIN przesyłania
+  pliku JPK_KR_PD ZOSTAŁ WYDŁUŻONY z TRZECH do SIEDMIU miesięcy PO
+  zakończeniu roku PODATKOWEGO lub obrotowego (dla PIERWSZEJ grupy
+  podatników OBJĘTYCH nowym obowiązkiem — DOTYCZY przesyłania KSIĄG
+  za rok PODATKOWY rozpoczynający SIĘ po 31.12.2024 r., a KOŃCZĄCY
+  się przed 1.04.2026 r.) — ⭐ ROZWIĄZANIE oznaczone JAKO TYMCZASOWE
+  W ROUTING-MAP.md (patrz FLAGA F-20) — ⚠️ [WYMAGA WERYFIKACJI]
+  SPRAWDŹ, CZY nie NASTĄPIŁA dalsza ZMIANA terminu PO tej dacie
+  ⭐⭐ POWIĄZANA nowelizacja: ustawa Z 15.05.2026 r. o ZMIANIE ustawy
+  o podatku DOCHODOWYM — WPROWADZAJĄCA TRWAŁY (nie tymczasowy) termin
+  7-MIESIĘCZNY (art. 9 ust. 1c i 1e CIT) — WESZŁA w ŻYCIE 1.07.2026 r.
+  — ⭐ TA ustawa PRZEKSZTAŁCA tymczasowe ROZWIĄZANIE z rozporządzenia
+  W trwałą REGULACJĘ ustawową
+
+ROZSZERZONY ZAKRES DANYCH (od 2026 r., DLA lat podatkowych
+  rozpoczynających SIĘ w PEŁNI po 31.12.2025 r.) — KSIĘGI RACHUNKOWE
+  w formacie JPK_CIT MUSZĄ być UZUPEŁNIONE o:
+  1) dane IDENTYFIKACYJNE kontrahenta PODATNIKA (m.in. NIP, NAZWA
+     lub imię i NAZWISKO)
+  2) numer IDENTYFIKUJĄCY fakturę W Krajowym Systemie e-FAKTUR (o
+     ILE został nadany DO dnia złożenia KSIĄG)
+  3) dane POTWIERDZAJĄCE nabycie, WYTWORZENIE lub wykreślenie Z
+     ewidencji ŚRODKA trwałego LUB wartości niematerialnej I prawnej
+  4) DANE dotyczące różnic MIĘDZY wynikiem BILANSOWYM a podatkowym
+  ⭐ WYJĄTEK PRZEJŚCIOWY: GDY rok podatkowy (obrotowy) ROZPOCZYNA się
+  W trakcie 2025 r. — KSIĘGI NIE muszą zawierać DODATKOWYCH danych z
+  PUNKTÓW 1, 2 i 4 (⚠️ [NIEJEDNOZNACZNE] jeden Z przeszukanych źródeł
+  wymienia RÓWNIEŻ punkt "5", INNY tylko 1/2/4 — ROZBIEŻNOŚĆ MIĘDZY
+  ŹRÓDŁAMI, sprawdź dokładny KATALOG wyłączeń przejściowych PRZY
+  konkretnej sprawie)
+
+⭐ ROZPORZĄDZENIE MF Z 13.12.2024 R. — ODROCZENIE JPK_ST_KR: obowiązek
+  RAPORTOWANIA danych z EWIDENCJI środków trwałych/wartości
+  niematerialnych ZOSTAŁ przesunięty O ROK — PIERWSZYM rokiem
+  podatkowym, za KTÓRY ma być PRZESŁANA struktura JPK_ST_KR JEST rok
+  podatkowy ROZPOCZYNAJĄCY się 1.01.2026 r. LUB później — TERMIN na
+  WYSYŁKĘ tego pliku DLA podmiotów, u KTÓRYCH rok podatkowy POKRYWA
+  się z kalendarzowym: DO KOŃCA marca 2027 r. — ⭐ TO PRZESUNIĘCIE
+  dotyczyło WYŁĄCZNIE największych podmiotów, PIERWOTNIE zobowiązanych
+  do wysyłki JUŻ za 2025 r.
+
+⭐ UŁATWIENIE PRZEJŚCIOWE (transza 2025): PODMIOTY zobowiązane DO
+  złożenia JPK_KR_PD ZA 2025 r. MOGĄ uwzględnić W strukturze
+  logicznej SWOICH ksiąg rachunkowych ZALEDWIE JEDEN element —
+  znaczniki IDENTYFIKUJĄCE konta ksiąg WYKAZYWANE według SŁOWNIKA
+  zawartego W rozporządzeniu MF
+
+⭐ RELACJA DO JPK_KR (BEZ "_PD"): wprowadzenie JPK_KR_PD NIE likwiduje
+  STARSZEJ struktury JPK_KR — TA funkcjonuje NADAL, m.in. DLA okresów
+  SPRZED obowiązkowego raportowania W formie JPK_KR_PD, oraz JAKO
+  struktura PRZESYŁANA na ŻĄDANIE organu (patrz SEKCJA 5)
+
+⚠️ TRWAJĄ PRACE LEGISLACYJNE mające NA celu PRZEDŁUŻENIE i
+  ujednolicenie TERMINÓW dla KOLEJNYCH grup podatników, ABY dostosować
+  termin SKŁADANIA JPK_CIT do PROCESU przygotowywania i ZATWIERDZANIA
+  sprawozdań finansowych — ⚠️ [MONITORUJ] SPRAWDŹ najnowszy stan
+  PRZED konkretną sprawą, temat W TOKU zmian
+```
+
+---
+
+## 4. JPK_PKPIR
+
+```
+✅ NOWY obowiązek OD 2026 r. DLA podatników PROWADZĄCYCH podatkową
+  księgę PRZYCHODÓW i rozchodów (patrz mod-PKPiR-ewidencje-
+  uproszczone.md, sekcja 6, DLA pełnego omówienia OD strony PKPiR).
+
+MECHANIZM: PO zakończeniu roku PODATKOWEGO, w TERMINIE do UPŁYWU
+  terminu ZŁOŻENIA zeznania rocznego, PODATNIK przesyła WŁAŚCIWEMU
+  naczelnikowi urzędu SKARBOWEGO księgę W formie USTRUKTURYZOWANEJ
+  (JPK_PKPIR) — WYNIKA z NOWEGO art. 24a UST. 7 ustawy o PIT
+
+⚠️ [ZAKRES OGRANICZONY W TEJ SESJI] dokładna STRUKTURA techniczna
+  pliku JPK_PKPIR (nazwa węzłów XML, SCHEMAT XSD) NIE była przedmiotem
+  ODRĘBNEJ, pogłębionej weryfikacji W tej sesji — sprawdź WZÓR
+  struktury logicznej BEZPOŚREDNIO w rozporządzeniu (Dz.U. 2025 poz.
+  1299) LUB na PUESC przy konkretnej sprawie.
+
+POWIĄZANE ROZPORZĄDZENIE Z DANYMI DODATKOWYMI: rozporządzenie MFiG z
+  6.09.2025 r. W sprawie DODATKOWYCH danych, o KTÓRE należy uzupełnić
+  prowadzone KSIĘGI rachunkowe i ewidencję ŚRODKÓW trwałych oraz
+  wartości NIEMATERIALNYCH i prawnych podlegające PRZEKAZANIU na
+  podstawie ustawy o PIT (Dz.U. 2025 poz. 1311) — TRZECIE z TRZECH
+  powiązanych rozporządzeń Z 6.09.2025 r. (patrz mod-PKPiR-
+  ewidencje-uproszczone.md sekcja 1)
+```
+
+---
+
+## 5. JPK_KR (BEZ "_PD") — NA ŻĄDANIE ORGANU
+
+```
+CHARAKTER: STRUKTURA JPK dotycząca KSIĄG rachunkowych, PRZESYŁANA
+  wyłącznie NA ŻĄDANIE organów podatkowych W ramach: kontroli
+  PODATKOWEJ, kontroli celno-SKARBOWEJ, postępowania PODATKOWEGO,
+  lub czynności SPRAWDZAJĄCYCH — ⛔ NIE jest to obowiązek OKRESOWY/
+  cykliczny jak JPK_V7 czy JPK_KR_PD, TYLKO reaktywny NA żądanie
+  KONKRETNEGO organu W konkretnej SPRAWIE
+
+RÓŻNICA WZGLĘDEM JPK_KR_PD: nowa struktura JPK_KR_PD JEST
+  ROZBUDOWANA względem STAREGO JPK_KR o DODATKOWE informacje (patrz
+  sekcja 3 wyżej — DANE kontrahenta, numer KSeF, dane O środkach
+  trwałych, RÓŻNICE bilansowo-podatkowe)
+
+⚠️ [ZAKRES NIEOPRACOWANY W TEJ SESJI] szczegółowa PROCEDURA żądania
+  JPK_KR przez ORGAN (forma żądania, TERMIN na odpowiedź PODATNIKA,
+  konsekwencje NIEZŁOŻENIA) NIE była przedmiotem POGŁĘBIONEJ
+  weryfikacji — patrz mod-KAS-kontrola-celno-skarbowa.md i
+  mod-OP-kontrola-podatkowa-dzial-VI.md DLA ogólnych ram PROCEDURALNYCH
+  kontroli, W RAMACH których żądanie JPK_KR MOŻE się POJAWIĆ.
+```
+
+---
+
+## 6. POWIĄZANIA Z INNYMI MODUŁAMI
+
+```
+□ mod-PKPiR-ewidencje-uproszczone.md — sekcja 6 (obowiązek
+  przesyłania JPK_PKPIR), sekcja 1 (trzy powiązane rozporządzenia
+  z 6.09.2025 r.)
+□ mod-ustawa-rachunkowosci.md — pełne księgi rachunkowe jako
+  źródło danych dla JPK_KR_PD/JPK_ST_KR; sekcja 4e (przechowywanie
+  dokumentacji księgowej — powiązanie z retencją danych JPK)
+□ mod-VAT-podatek-od-towarow-i-uslug.md — rdzeń materialnoprawny
+  ewidencji VAT (art. 109/109a/110 ustawy o VAT), sankcje za błędy
+  w ewidencji (500 zł, 100%) — TA sekcja JPK jest uzupełnieniem
+  technicznym/proceduralnym, nie zastępuje analizy materialnoprawnej
+□ mod-CIT-podatek-dochodowy-prawne.md — podatnicy CIT jako adresaci
+  obowiązku JPK_KR_PD/JPK_ST_KR
+□ mod-KAS-kontrola-celno-skarbowa.md, mod-OP-kontrola-podatkowa-
+  dzial-VI.md — procedura żądania JPK_KR w toku kontroli
+```
+
+---
+
+## ⚠️ SAMOOCENA POKRYCIA — MODUŁ NOWO UTWORZONY
+
+```
+Ten moduł ZOSTAŁ zbudowany OD PODSTAW 2026-08-13, po wykryciu, że
+BYŁ fantomowym wpisem w ROUTING-MAP.md (patrz flaga F-20). Pokrycie
+WSTĘPNE, oparte na JEDNEJ sesji wyszukiwania.
+
+ZIDENTYFIKOWANE LUKI DO DALSZEGO POGŁĘBIENIA:
+□ Dokładna struktura techniczna JPK_PKPIR (węzły XML, schemat)
+□ Pełny katalog struktur JPK "na żądanie" poza JPK_KR (JPK_FA,
+  JPK_MAG, JPK_WB i inne)
+□ Procedura żądania JPK_KR przez organ (forma, terminy, sankcje
+  za niezłożenie)
+□ Mechanizm korekty JPK_V7 ("stare zasady") — wymaga doprecyzowania
+□ Aktualny stan prac legislacyjnych ws. ujednolicenia terminów
+  JPK_CIT dla kolejnych grup podatników (temat w toku na dzień
+  weryfikacji)
+□ Rozbieżność źródeł co do dokładnego katalogu wyłączeń przejściowych
+  dla JPK_CIT za lata rozpoczynające się w 2025 r. (punkty 1/2/4 vs
+  1/2/4/5)
+
+⚠️ [NIEWERYFIKOWANE BEZPOŚREDNIO NA ISAP] cała treść tego modułu —
+ISAP niedostępny do web_fetch w tej sesji. Przed pismem procesowym
+lub wiążącą poradą potwierdź brzmienie kluczowych przepisów wprost
+na isap.sejm.gov.pl.
+```

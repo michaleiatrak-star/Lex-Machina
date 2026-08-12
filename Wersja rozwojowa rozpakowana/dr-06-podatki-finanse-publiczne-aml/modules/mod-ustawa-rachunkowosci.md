@@ -1,5 +1,9 @@
 # Ustawa o rachunkowości — moduł podstawowy
-v1.9.0 (dodany 2026-08-11, rozbudowywany wielokrotnie tego samego dnia — na żądanie użytkownika)
+v1.14.0 (dodany 2026-08-11, rozbudowywany wielokrotnie tego samego
+dnia oraz 2026-08-13 — na żądanie użytkownika: audyt pokrycia
+analogiczny do podatków/akcyzy, następnie wypełnienie brakujących
+elementów: konsolidacja, ESG/CSRD, wycena walut, odpowiedzialność
+cywilna KSH, usługowe prowadzenie ksiąg — sekcje 5b-5h)
 pytanie o pełne pokrycie dziedziny rachunkowości, analogicznie do
 podatków i akcyzy)
 
@@ -998,6 +1002,466 @@ ROZSZERZONYM katalogiem czynów z art. 77], rsmpoland.pl [2025 r.],
 chmielniak.com.pl [2025 r.], polexpert.com.pl).
 ```
 
+## 5b. ⭐⭐⭐ SKONSOLIDOWANE SPRAWOZDANIA FINANSOWE, GRUPY KAPITAŁOWE
+(uzupełnienie luki #11 z mapy pokrycia, dodano 2026-08-13, na żądanie
+użytkownika)
+
+```
+✅ DOMKNIĘTE 2026-08-13 — dotąd CAŁKOWICIE nieobecne, mimo istotności
+DLA struktur HOLDINGOWYCH/grup spółek.
+
+OBOWIĄZEK PODSTAWOWY (art. 55 ust. 1): jednostka DOMINUJĄCA, mająca
+  SIEDZIBĘ lub miejsce sprawowania ZARZĄDU na terytorium RP, sporządza
+  ROCZNE skonsolidowane sprawozdanie finansowe GRUPY kapitałowej —
+  OBEJMUJĄCE dane jednostki DOMINUJĄCEJ i jednostek OD niej zależnych
+  WSZYSTKICH szczebli (BEZ względu na ICH siedzibę), zestawione W
+  taki sposób, JAKBY grupa kapitałowa STANOWIŁA jedną jednostkę.
+
+SKŁAD skonsolidowanego sprawozdania: skonsolidowany BILANS,
+  skonsolidowany RACHUNEK zysków i strat, skonsolidowany rachunek
+  PRZEPŁYWÓW pieniężnych, zestawienie ZMIAN w skonsolidowanym kapitale
+  własnym, ORAZ informacja DODATKOWA (wprowadzenie + dodatkowe
+  informacje i OBJAŚNIENIA) — ⭐ do rocznego skonsolidowanego
+  sprawozdania DOŁĄCZA się TAKŻE sprawozdanie z DZIAŁALNOŚCI grupy
+  kapitałowej (art. 55 ust. 2a, wg WYMOGÓW analogicznych do
+  jednostkowego sprawozdania z DZIAŁALNOŚCI — patrz sekcja 4a modułu)
+
+⭐⭐⭐ ZWOLNIENIE Z KONSOLIDACJI ZE WZGLĘDU NA PROGI (art. 56 ust. 1) —
+  jednostka DOMINUJĄCA MOŻE nie sporządzać skonsolidowanego
+  sprawozdania, JEŻELI na dzień BILANSOWY roku obrotowego ORAZ roku
+  POPRZEDZAJĄCEGO, łączne DANE jednostki dominującej i WSZYSTKICH
+  zależnych KAŻDEGO szczebla NIE PRZEKROCZYŁY co NAJMNIEJ dwóch z
+  trzech WIELKOŚCI:
+  □ PRZED wyłączeniami konsolidacyjnymi: 48 mln zł (suma AKTYWÓW),
+    96 mln zł (przychody NETTO ze sprzedaży), 250 OSÓB (średnioroczne
+    zatrudnienie)
+  □ PO wyłączeniach konsolidacyjnych: 40 mln zł (suma AKTYWÓW), 80 mln
+    zł (przychody NETTO ze sprzedaży), 250 OSÓB
+  ⚠️ [ROZBIEŻNOŚĆ MIĘDZY ŹRÓDŁAMI — WYMAGA WERYFIKACJI PRZY SPRAWIE]
+  część źródeł WTÓRNYCH podaje NIŻSZE, historyczne kwoty (38,4 mln/
+  76,8 mln zł) — SYGNAŁ, że progi BYŁY WIELOKROTNIE podwyższane
+  (analogicznie DO progu 2,5 mln EUR z art. 2 — patrz LUKA #20 mapy
+  pokrycia) — PRZED zastosowaniem W konkretnej sprawie, POTWIERDŹ
+  WPROST na ISAP aktualnie OBOWIĄZUJące kwoty, NIE polegaj na ŻADNEJ
+  z powyższych bez ŚWIEŻEJ weryfikacji
+
+⭐⭐ ZWOLNIENIE JEDNOSTKI DOMINUJĄCEJ NIŻSZEGO SZCZEBLA (art. 56 ust. 2
+  i n.): jednostka DOMINUJĄCA, sama ZALEŻNA od INNEJ jednostki
+  dominującej WYŻSZEGO szczebla Z siedzibą/miejscem ZARZĄDU na
+  terytorium EOG, MOŻE nie sporządzać WŁASNEGO skonsolidowanego
+  sprawozdania, JEŻELI:
+  □ jednostka DOMINUJĄCA wyższego szczebla POSIADA 100% udziałów
+    (Z pominięciem udziałów CZŁONKÓW organów administrujących/
+    zarządzających/nadzorujących Z mocy prawa/statutu), LUB
+  □ jednostka DOMINUJĄCA wyższego szczebla POSIADA co NAJMNIEJ 90%
+    udziałów, A pozostali UDZIAŁOWCY zatwierdzili DECYZJĘ o
+    niesporządzaniu
+  ⭐ rozszerzenie ZAKRESU (nowelizacja): PIERWOTNIE zwolnienie
+  dotyczyło WYŁĄCZNIE sytuacji, GDY jednostka wyższego SZCZEBLA
+  miała siedzibę W Polsce — DZIŚ obejmuje RÓWNIEŻ jednostki Z siedzibą
+  w CAŁYM EOG
+
+METODY KONSOLIDACJI (art. 58–61):
+  □ METODA KONSOLIDACJI PEŁNEJ (art. 60) — ZASADA dla jednostek
+    ZALEŻNYCH: sumowanie W PEŁNEJ wartości POSZCZEGÓLNYCH pozycji
+    odpowiednich SPRAWOZDAŃ jednostki dominującej I zależnych,
+    Z dokonaniem WYŁĄCZEŃ konsolidacyjnych (eliminacja TRANSAKCJI
+    wewnątrzgrupowych, WZAJEMNYCH należności/zobowiązań)
+  □ METODA PRAW WŁASNOŚCI — DLA jednostek STOWARZYSZONYCH (art. 55
+    ust. 5): dane jednostek stowarzyszonych WYKAZUJE się TĄ metodą;
+    JEŻELI jednostka stowarzyszona SAMA sporządza skonsolidowane
+    sprawozdanie — metodę PRAW własności STOSUJE się do AKTYWÓW
+    netto Z JEJ skonsolidowanego sprawozdania
+  □ METODA PROPORCJONALNA — DLA jednostek WSPÓŁZALEŻNYCH (w
+    OKREŚLONYCH przypadkach Z art. 57 ust. 1 pkt 2 W związku z ust. 6)
+
+WYŁĄCZENIE JEDNOSTKI ZALEŻNEJ SPOD KONSOLIDACJI (art. 57): KONKRETNE
+  przesłanki, m.in. GDY UDZIAŁY nabyto/zakupiono WYŁĄCZNIE z
+  PRZEZNACZENIEM do PÓŹNIEJSZEJ odsprzedaży (⭐ ISTOTNE dla FUNDUSZY
+  private equity/venture CAPITAL i alternatywnych SPÓŁEK
+  inwestycyjnych — ASI — KTÓRE nie MUSZĄ konsolidować SPÓŁEK
+  portfelowych nabywanych "NA wyjście") — ⚠️ [NIEWERYFIKOWANE W
+  PEŁNI] dokładny PEŁNY katalog przesłanek Z art. 57 ust. 1 (poza
+  omówioną WYŻEJ) wymaga POGŁĘBIENIA przy konkretnej SPRAWIE
+
+DECYZJA O STOSOWANIU MSR: skonsolidowane sprawozdania JEDNOSTEK
+  dominujących NIŻSZEGO szczebla, WCHODZĄCYCH w skład GRUPY, W której
+  jednostka WYŻSZEGO szczebla sporządza SPRAWOZDANIE zgodnie z MSR —
+  MOGĄ być SPORZĄDZANE zgodnie Z MSR — DECYZJĘ podejmuje ORGAN
+  zatwierdzający jednostki DOMINUJĄCEJ (z możliwością ZAPRZESTANIA
+  stosowania MSR PRZY ustaniu okoliczności uzasadniających)
+
+⭐ POWIĄZANIE Z ESG/CSRD: zwolnienie Z obowiązku sporządzenia
+  sprawozdania Z DZIAŁALNOŚCI grupy kapitałowej STOSUJE się, JEŻELI
+  spełnione SĄ warunki Z art. 63z — zwolnienie jednostki DOMINUJĄCEJ
+  Z obowiązku sporządzenia SPRAWOZDAWCZOŚCI zrównoważonego rozwoju
+  grupy kapitałowej (patrz SEKCJA 5c niżej) — DWA reżimy zwolnień SĄ
+  ZE SOBĄ POWIĄZANE proceduralnie.
+```
+
+## 5c. ⭐⭐⭐ ESG/CSRD — SPRAWOZDAWCZOŚĆ ZRÓWNOWAŻONEGO ROZWOJU
+(uzupełnienie luki #18 z mapy pokrycia, dodano 2026-08-13, na żądanie
+użytkownika)
+
+```
+✅ DOMKNIĘTE 2026-08-13 — WAŻNE ODKRYCIE: temat wcześniej ODESŁANY
+do DR-15 (compliance) — SPRAWDZONO w tej sesji: DR-15 NIE ZAWIERA
+ŻADNEJ wzmianki o ESG/CSRD — TO BYŁA PODWÓJNA luka (brak W obu
+miejscach). Dopiero TERAZ opracowane W WŁAŚCIWYM miejscu — u.o.r.
+
+GENEZA I PODSTAWA: NOWY Rozdział 6c ustawy O rachunkowości —
+  "Sprawozdawczość zrównoważonego ROZWOJU" — WPROWADZONY ustawą Z
+  6.12.2024 r. o ZMIANIE ustawy o rachunkowości, ustawy O biegłych
+  rewidentach, FIRMACH audytorskich oraz NADZORZE publicznym oraz
+  niektórych INNYCH ustaw (Dz.U. 2024 poz. 1863) — TRANSPONUJE
+  dyrektywę CSRD (Corporate SUSTAINABILITY Reporting Directive, UE
+  2022/2464) — WESZŁA w ŻYCIE 1.01.2025 r.
+  ⭐⭐ POTWIERDZONE bezpośrednio NA gov.pl/web/finanse/ustawa-csrd
+  (Rząd 1 — oficjalna STRONA Ministerstwa Finansów)
+
+⭐⭐⭐ CHRONOLOGIA TRZECH KOLEJNYCH NOWELIZACJI (KLUCZOWA dla
+  ustalenia AKTUALNEGO stanu prawnego — temat WYBITNIE dynamiczny):
+  1) Ustawa Z 6.12.2024 r. (Dz.U. 2024 poz. 1863) — PIERWOTNE
+     wdrożenie CSRD, W życie OD 1.01.2025 r.
+  2) Ustawa Z 9.07.2025 r. — TZW. "USTAWA STOP-THE-CLOCK" (Dz.U. 2025
+     poz. 1020, opublikowana 28.07.2025, W życie OD 12.08.2025 r.) —
+     wdraża UNIJNĄ dyrektywę 2025/794 ("stop THE clock"), PRZESUWAJĄCĄ
+     terminy RAPORTOWANIA o 1-2 LATA dla większości jednostek
+  3) Ustawa Z 27.02.2026 r. (Dz.U. 2026 poz. 333, W życie OD 14.03.2026
+     r.) — CZĘŚCIOWE wdrożenie pakietu OMNIBUS I (dyrektywa UE
+     2026/470 z 26.02.2026 r.) — DALSZE ZAWĘŻENIE kręgu podmiotów
+     objętych OBOWIĄZKIEM, WYŻSZE progi, DODATKOWE zwolnienia
+
+⭐⭐⭐ HARMONOGRAM OBOWIĄZKU RAPORTOWANIA (stan PO ustawie stop-the-
+  clock, potwierdzony BEZPOŚREDNIO na gov.pl — ⚠️ SPRAWDŹ, czy pakiet
+  Omnibus Z 27.02.2026 r. NIE zmienił TYCH dat PONOWNIE, gdyż TA
+  sesja NIE zawierała odrębnej, POGŁĘBIONEJ weryfikacji wpływu
+  Omnibusa NA konkretne daty):
+  □ ZA 2024 r. (raport W 2025 r.) — NAJWIĘKSZE jednostki
+    zainteresowania PUBLICZNEGO (JZP: emitenci, banki, ZAKŁADY
+    ubezpieczeń) zatrudniające POWYŻEJ 500 pracowników, ORAZ będące
+    JZP jednostki DOMINUJĄCE największych grup KAPITAŁOWYCH — ⭐ TA
+    grupa NIE ZOSTAŁA odroczona przez STOP-the-clock (już RAPORTOWAŁA
+    wcześniej NA podstawie dyrektywy NFRD)
+  □ ZA 2027 r. (PIERWOTNIE za 2025 r., ODROCZONE o 2 LATA) — pozostałe
+    DUŻE jednostki i jednostki DOMINUJĄCE dużej grupy KAPITAŁOWEJ
+  □ ZA 2028 r. (PIERWOTNIE za 2026 r., ODROCZONE o 2 lata) — jednostki
+    ŚREDNIE/małe będące EMITENTAMI papierów wartościowych W EOG, małe
+    i niezłożone INSTYTUCJE, wewnętrzne zakłady UBEZPIECZEŃ/reasekuracji
+    — Z MOŻLIWOŚCIĄ dodatkowego okresowego ZWOLNIENIA z jednostkowej
+    sprawozdawczości ZA lata 2026-2027 (POD warunkiem przedstawienia
+    PRZYCZYN takiej decyzji)
+
+PROGI NOWE (PO ostatniej nowelizacji, wg pakietu OMNIBUS I) — ⭐⭐
+  Omnibus I ZASADNICZO ZAWĘZIŁ krąg PODMIOTÓW objętych obowiązkiem:
+  jednostki Z zatrudnieniem PRZEKRACZAJĄCYM 1000 osób ORAZ przychodami
+  NETTO ze sprzedaży PRZEKRACZAJĄCYMI 450 mln EURO (⚠️ [WYMAGA
+  DODATKOWEJ WERYFIKACJI] — TE liczby POCHODZĄ z JEDNEGO źródła
+  [pit.pl], NIE zostały POTWIERDZONE krzyżowo Z drugim NIEZALEŻNYM
+  źródłem W tej sesji — PRZED zastosowaniem W konkretnej sprawie,
+  zweryfikuj WPROST na gov.pl/web/finanse LUB bezpośrednio NA ISAP)
+
+TREŚĆ RAPORTU: sprawozdawczość ZR (zrównoważonego rozwoju) STANOWI
+  CZĘŚĆ sprawozdania Z DZIAŁALNOŚCI jednostki (NIE odrębny, samodzielny
+  dokument) — OBEJMUJE informacje O wpływie działalności JEDNOSTKI
+  na OBSZAR środowiskowy, SPRAWY społeczne (W TYM prawa CZŁOWIEKA) —
+  sporządzane WEDŁUG europejskich standardów ESRS (European
+  Sustainability REPORTING Standards)
+
+ATESTACJA: sprawozdawczość ZR PODLEGA obowiązkowej ATESTACJI przez
+  biegłego REWIDENTA — Krajowa RADA Biegłych Rewidentów (KRBR) W
+  dniu 23.01.2025 r. PODJĘŁA uchwałę nr 854/20a/2025 W sprawie
+  ustanowienia KRAJOWEGO standardu usług ATESTACJI sprawozdawczości
+  zrównoważonego ROZWOJU — ⭐ POWIĄZANIE Z mod-ustawa-biegli-
+  rewidenci-zawod.md (SPRAWDŹ, czy TAMTEN moduł UWZGLĘDNIA to
+  nowe UPRAWNIENIE/obowiązek biegłych REWIDENTÓW)
+
+⭐⭐ ZWOLNIENIE GRUPOWE Z KONSOLIDACJI ZR (art. 63z, powiązanie Z
+  sekcją 5b): jednostka DOMINUJĄCA MOŻE być zwolniona Z obowiązku
+  sporządzenia sprawozdawczości ZR grupy KAPITAŁOWEJ na analogicznych
+  ZASADACH jak przy zwolnieniu Z konsolidacji finansowej — SPÓJNA
+  architektura OBU reżimów zwolnień
+
+⭐ POWIĄZANE DYREKTYWY DO ODRÓŻNIENIA: CSRD (sprawozdawczość) NIE
+  jest TYM SAMYM co CSDDD (Corporate Sustainability DUE Diligence
+  Directive, ang. dyrektywa O należytej staranności) — CSDDD MA
+  ODRĘBNY, dłuższy harmonogram TRANSPOZYCJI (termin PRZEDŁUŻONY do
+  26.07.2027 r., STOSOWANIE dla pierwszej GRUPY spółek od 26.07.2028
+  r.) — ⚠️ NIE MYLIĆ obu instrumentów PRZY doradztwie, mimo iż
+  CZĘSTO omawiane SĄ razem jako "PAKIET ESG"
+
+⚠️ TEMAT WYBITNIE DYNAMICZNY — sprawdź NA gov.pl/web/finanse ORAZ
+  bezpośrednio na ISAP AKTUALNY stan przed KAŻDYM zastosowaniem;
+  trzy nowelizacje W ciągu 15 MIESIĘCY (12.2024, 07.2025, 02.2026)
+  wskazują NA wysokie prawdopodobieństwo KOLEJNYCH zmian.
+```
+
+## 5d. ⭐⭐⭐ WYCENA WALUT OBCYCH (uzupełnienie części luki #8 i #19
+z mapy pokrycia, dodano 2026-08-13)
+
+```
+✅ DOMKNIĘTE 2026-08-13 (art. 30, w ramach Rozdziału 4 — wycena
+aktywów/pasywów, dotąd opisanego tylko częściowo w sekcji 4b).
+
+DWA ODRĘBNE MOMENTY PRZELICZANIA — NIE MYLIĆ:
+
+□ UJĘCIE operacji W księgach W DNIU jej przeprowadzenia (art. 30
+  ust. 2) — kurs ZALEŻNY od CHARAKTERU operacji:
+  1) kurs FAKTYCZNIE zastosowany W tym DNIU, wynikający Z charakteru
+     operacji — DLA sprzedaży/kupna WALUT oraz ZAPŁATY należności/
+     zobowiązań (⭐ np. PRZY zakupie waluty W banku — kurs BANKOWY
+     faktycznie ZASTOSOWANY)
+  2) kurs ŚREDNI ogłoszony PRZEZ NBP z DNIA POPRZEDZAJĄCEGO ten dzień
+     — DLA zapłaty należności/zobowiązań, JEŻELI kurs Z pkt 1 NIE
+     jest ZASADNY, a TAKŻE dla POZOSTAŁYCH operacji
+
+□ WYCENA bilansowa NA dzień BILANSOWY (art. 30 ust. 1) — NIE rzadziej
+  niż NA dzień bilansowy, WYCENIA się wyrażone W walutach obcych
+  SKŁADNIKI aktywów (Z wyłączeniem UDZIAŁÓW w jednostkach
+  podporządkowanych WYCENIANYCH metodą praw WŁASNOŚCI) i pasywów:
+  1) po OBOWIĄZUJĄCYM na TEN dzień średnim KURSIE NBP dla DANEJ waluty
+  2) WYJĄTEK: gotówka W jednostkach PROWADZĄCYCH kupno/sprzedaż walut
+     — PO kursie, PO którym nastąpił JEJ zakup, JEDNAK nie WYŻSZYM
+     od średniego KURSU NBP na dzień WYCENY
+
+KURSY DLA WALUT BEZ NOTOWANIA NBP (art. 30 ust. 3): JEŻELI aktywa/
+  pasywa SĄ wyrażone W walutach, dla KTÓRYCH NBP NIE ogłasza kursu —
+  kurs TYCH walut USTALA się W RELACJI do wskazanej PRZEZ jednostkę
+  waluty ODNIESIENIA, KTÓREJ kurs JEST ogłaszany przez NBP.
+
+RÓŻNICE KURSOWE Z WYCENY (art. 30 ust. 4): RÓŻNICE kursowe POWSTAŁE
+  z wyceny ŚRODKÓW pieniężnych NA rachunku walutowym ZALICZA się
+  ODPOWIEDNIO do przychodów LUB kosztów FINANSOWYCH.
+  □ DLA należności: RÓŻNICA DODATNIA (przychód finansowy), GDY kurs
+    NA dzień bilansowy JEST WYŻSZY niż kurs NA dzień UJĘCIA należności
+  □ DLA zobowiązań: RÓŻNICA DODATNIA (przychód FINANSOWY), gdy kurs
+    NA dzień bilansowy JEST NIŻSZY niż kurs NA dzień UJĘCIA zobowiązania
+  ⭐ ODWROTNY MECHANIZM dla należności VS zobowiązań — ŹRÓDŁO częstych
+  pomyłek W praktyce księgowej, WARTO to PODKREŚLIĆ przy doradztwie
+
+⭐ RÓŻNICE KURSOWE PRZY METODZIE PODATKOWEJ VS BILANSOWEJ: JEDNOSTKI
+  MOGĄ rozliczać różnice KURSOWE metodą PODATKOWĄ (na podstawie
+  przepisów CIT/PIT — art. 15a) LUB metodą BILANSOWĄ (na podstawie
+  SAMEJ ustawy o rachunkowości, art. 30) — ⭐⭐ WYBÓR metody MA istotne
+  konsekwencje DLA zbieżności/rozbieżności WYNIKU podatkowego i
+  bilansowego — POWIĄZANIE z mod-CIT-podatek-dochodowy-prawne.md
+  (sprawdź, CZY tamten moduł OMAWIA art. 15a CIT — RÓŻNICE kursowe
+  jako TEMAT podatkowy, ODRĘBNY choć POWIĄZANY z TĄ sekcją bilansową)
+```
+
+## 5e. ⭐⭐ ODPOWIEDZIALNOŚĆ CYWILNA CZŁONKÓW ZARZĄDU ZA BŁĘDY KSIĘGOWE
+(uzupełnienie luki #17 z mapy pokrycia, dodano 2026-08-13)
+
+```
+✅ DOMKNIĘTE 2026-08-13 — dotąd zasygnalizowane JAKO "punkt startowy"
+w cross-referencjach sekcji 5 (sankcje), TERAZ opracowane.
+
+⚠️ ZASTRZEŻENIE STRUKTURALNE: TA odpowiedzialność NIE wynika Z SAMEJ
+ustawy o rachunkowości, LECZ z Kodeksu SPÓŁEK handlowych (KSH) — jest
+TO odrębna, RÓWNOLEGŁA warstwa odpowiedzialności OBOK sankcji
+karnych/karnoskarbowych Z sekcji 5 tego modułu.
+
+PODSTAWA PRAWNA — DWA RÓWNOLEGŁE PRZEPISY:
+  □ art. 293 KSH — SPÓŁKA z o.o. (Rozdział 6 "Odpowiedzialność
+    cywilnoprawna" W Dziale I KSH)
+  □ art. 483 KSH — SPÓŁKA akcyjna (Rozdział 7 "Odpowiedzialność
+    cywilnoprawna" W Dziale II KSH)
+  OBIE regulacje MAJĄ analogiczne BRZMIENIE i mechanizm.
+
+TREŚĆ (art. 293 § 1): CZŁONEK zarządu, RADY nadzorczej, komisji
+  REWIZYJNEJ (WYŁĄCZNIE sp. z o.o.) oraz LIKWIDATOR odpowiada WOBEC
+  spółki za SZKODĘ wyrządzoną działaniem LUB zaniechaniem SPRZECZNYM
+  z prawem LUB postanowieniami umowy SPÓŁKI (statutu — DLA spółki
+  akcyjnej), CHYBA że NIE ponosi winy.
+
+KRĄG PODMIOTÓW ODPOWIEDZIALNYCH: członkowie ZARZĄDU, rady NADZORCZEJ,
+  komisji REWIZYJNEJ (tylko sp. Z o.o.), likwidatorzy — ⭐ NIE
+  obejmuje UCZESTNIKÓW najwyższych ORGANÓW (zgromadzenie WSPÓLNIKÓW/
+  walne zgromadzenie AKCJONARIUSZY) — KWESTIA objęcia PROKURENTÓW/
+  pełnomocników JEST SPORNA w DOKTRYNIE (różne POGLĄDY)
+
+CHARAKTER ODPOWIEDZIALNOŚCI: WEWNĘTRZNA (WOBEC samej spółki, NIE
+  osób TRZECICH), OSOBISTA, NIEOGRANICZONA kwotowo, ODSZKODOWAWCZA
+  — obejmuje OKRES zarówno TWORZENIA spółki, JAK i JEJ bieżącego
+  FUNKCJONOWANIA — roszczenia MOGĄ być DOCHODZONE także PO ustąpieniu
+  z FUNKCJI — ⭐⭐ NIE MOŻNA ograniczyć tej ODPOWIEDZIALNOŚCI ani W
+  umowie spółki, ANI w indywidualnej umowie Z członkiem zarządu (ALE
+  MOŻNA ją ROZSZERZYĆ)
+
+PRZESŁANKI: (1) NIEWYKONANIE/nienależyte wykonanie OBOWIĄZKÓW
+  wynikających Z pełnionej funkcji, (2) SZKODA (RZECZYWISTA strata
+  LUB utracone KORZYŚCI — analogicznie DO art. 361 § 2 KC), (3) ZWIĄZEK
+  przyczynowy między niewykonaniem/nienależytym WYKONANIEM a szkodą,
+  (4) WINA (Z DOMNIEMANIEM winy — CIĘŻAR dowodu BRAKU winy SPOCZYWA
+  NA pozwanym członku ORGANU, nie NA spółce)
+
+⭐⭐⭐ "PRAWO DO BŁĘDU" — BUSINESS JUDGMENT RULE (art. 293 § 3, DODANY
+  nowelizacją): CZŁONEK zarządu/rady NADZORCZEJ/komisji rewizyjnej/
+  likwidator NIE narusza obowiązku STARANNOŚCI, JEŻELI POSTĘPUJĄC
+  W sposób LOJALNY wobec spółki, DZIAŁA w GRANICACH uzasadnionego
+  ryzyka GOSPODARCZEGO, W TYM na PODSTAWIE informacji, analiz i
+  OPINII, które POWINNY być W danych OKOLICZNOŚCIACH uwzględnione
+  PRZY dokonywaniu STARANNEJ oceny — ANALOGICZNE uregulowanie
+  WPROWADZONO do art. 483 KSH (spółka AKCYJNA)
+  ⭐⭐ ZNACZENIE PRAKTYCZNE: ODPOWIEDZIALNOŚĆ OCENIANA jest WEDŁUG
+  stanu WIEDZY na DZIEŃ podejmowania DECYZJI, NIE według PÓŹNIEJSZYCH
+  skutków — DECYZJA, KTÓRA okazała się BŁĘDNA Z perspektywy czasu,
+  NIE rodzi automatycznie ODPOWIEDZIALNOŚCI, JEŚLI była PODJĘTA
+  starannie, NA podstawie dostępnych W tamtym MOMENCIE informacji
+
+⭐ POWIĄZANIE Z BŁĘDAMI KSIĘGOWYMI (przykład Z ORZECZNICTWA/praktyki):
+  NIEZŁOŻENIE sprawozdania finansowego W terminie MOŻE prowadzić DO
+  szkody (np. UTRATA wiarygodności GOSPODARCZEJ, koszty ODSETEK od
+  zobowiązań, UTRUDNIONY dostęp DO finansowania) — CO może SKUTKOWAĆ
+  roszczeniami ODSZKODOWAWCZYMI wobec CZŁONKÓW zarządu na PODSTAWIE
+  art. 293 KSH, NIEZALEŻNIE OD równoległej sankcji KARNOSKARBOWEJ z
+  art. 80b KKS (WYKROCZENIE skarbowe ZA nieprzekazanie W terminie
+  sprawozdania FINANSOWEGO/sprawozdania Z badania) — ⭐⭐⭐ TRZY
+  RÓWNOLEGŁE reżimy ODPOWIEDZIALNOŚCI za JEDEN czyn (BŁĄD/zaniedbanie
+  księgowe): (1) art. 77 u.o.r. — PRZESTĘPSTWO POWSZECHNE, (2) art.
+  60/61/80b KKS — PRZESTĘPSTWO/wykroczenie SKARBOWE, (3) art. 293/483
+  KSH — ODPOWIEDZIALNOŚĆ CYWILNA wobec SPÓŁKI — WSZYSTKIE trzy MOGĄ
+  wystąpić RÓWNOCZEŚNIE, DOTYCZĄ jednak RÓŻNYCH podmiotów
+  uprawnionych DO dochodzenia (organy ŚCIGANIA/skarbowe DLA (1)-(2),
+  SAMA spółka — LUB WSPÓLNIK w drodze actio pro SOCIO — dla (3))
+
+⭐ RELACJA DO KKS/ART. 77 U.O.R.: W przeciwieństwie DO sankcji
+  karnych/karnoskarbowych (GDZIE stosuje SIĘ zasadę "TYLKO najsurowsza
+  kara" PRZY zbiegu — patrz sekcja 5), ODPOWIEDZIALNOŚĆ cywilna Z
+  KSH JEST NIEZALEŻNA i KUMULUJE się Z odpowiedzialnością karną —
+  UKARANIE grzywną/pozbawieniem WOLNOŚCI NIE wyklucza RÓWNOLEGŁEGO
+  dochodzenia ODSZKODOWANIA przez SPÓŁKĘ.
+```
+
+## 5f. ⭐⭐ USŁUGOWE PROWADZENIE KSIĄG RACHUNKOWYCH (dopełnienie luki
+#14 z mapy pokrycia, dodano 2026-08-13)
+
+```
+✅ DOMKNIĘTE 2026-08-13 (dotąd TYLKO wzmianka o OBOWIĄZKU ubezpieczenia
+OC w sekcji 5 — TERAZ pełny obraz Rozdziału 8a).
+
+⭐⭐⭐ ISTOTNA HISTORYCZNA ZMIANA — LIBERALIZACJA OD 10.08.2014 R.:
+  USŁUGOWE prowadzenie ksiąg NIE WYMAGA już CERTYFIKATU księgowego
+  (WCZEŚNIEJ wymaganego) — DZIŚ dostęp DO tej działalności JEST
+  ZNACZNIE szerszy, OPARTY jedynie NA przesłankach NEGATYWNYCH —
+  ⭐ WAŻNE przy DORADZTWIE dla klientów ROZWAŻAJĄCYCH otwarcie biura
+  RACHUNKOWEGO — mit O konieczności "CERTYFIKATU księgowego" JEST
+  DZIŚ NIEAKTUALNY, choć WCIĄŻ powszechnie POWTARZANY w obiegowej
+  opinii
+
+DEFINICJA (art. 76a ust. 1): usługowe PROWADZENIE ksiąg rachunkowych
+  JEST działalnością GOSPODARCZĄ w rozumieniu ustawy — Prawo
+  PRZEDSIĘBIORCÓW, polegającą NA świadczeniu usług W zakresie
+  CZYNNOŚCI z art. 4 ust. 3 PKT 2–6 (KATALOG czynności rachunkowo-
+  księgowych OBJĘTYCH ustawą)
+
+WYMOGI OSOBOWE (art. 76a ust. 3) — działalność MOGĄ wykonywać
+  przedsiębiorcy, POD warunkiem że CZYNNOŚCI z TEGO zakresu BĘDĄ
+  wykonywane PRZEZ osoby, KTÓRE:
+  1) MAJĄ pełną ZDOLNOŚĆ do czynności PRAWNYCH
+  2) NIE BYŁY skazane PRAWOMOCNYM wyrokiem SĄDU za przestępstwo
+     PRZECIWKO wiarygodności DOKUMENTÓW, mieniu, OBROTOWI
+     gospodarczemu, obrotowi PIENIĘDZMI i papierami WARTOŚCIOWYMI,
+     za przestępstwo SKARBOWE oraz za PRZESTĘPSTWA z Rozdziału 9
+     ustawy o rachunkowości (a WIĘC m.in. za PRZESTĘPSTWO z art. 77
+     omówione W sekcji 5)
+  ⭐ BRAK dodatkowego wymogu WYKSZTAŁCENIA/certyfikatu/wpisu do
+  REJESTRU zawodowego — WYŁĄCZNIE te DWIE przesłanki negatywne/
+  pozytywne
+
+⭐⭐⭐ OBOWIĄZKOWE UBEZPIECZENIE OC (art. 76h) — JUŻ wcześniej
+  wzmiankowane W module, TERAZ rozwinięte: przedsiębiorcy PROWADZĄCY
+  usługowo KSIĘGI SĄ obowiązani DO zawarcia UMOWY ubezpieczenia
+  odpowiedzialności CYWILNEJ za szkody WYRZĄDZONE w związku Z
+  prowadzoną działalnością — SZCZEGÓŁOWY zakres ubezpieczenia
+  OBOWIĄZKOWEGO (W TYM sumę GWARANCYJNĄ) OKREŚLA rozporządzenie
+  ministra WŁAŚCIWEGO ds. instytucji FINANSOWYCH — ⚠️ [DO
+  WERYFIKACJI PRZY SPRAWIE] aktualna suma GWARANCYJNA na DANY rok
+  (wskazywana W ROUTING-MAP jako Dz.U. 2014 poz. 1616 — ⚠️
+  [NIEWERYFIKOWANE BEZPOŚREDNIO] sprawdź, CZY NIE zastąpiono
+  NOWSZYM aktem WYKONAWCZYM)
+
+⭐ POWIĄZANIE Z SANKCJAMI (art. 77, sekcja 5): PROWADZENIE działalności
+  usługowego PROWADZENIA ksiąg BEZ wymaganego UBEZPIECZENIA OC (art.
+  76h ust. 1) JEST samodzielnym CZYNEM zabronionym Z art. 77 u.o.r.
+  (ROZSZERZONY katalog, patrz SEKCJA 5) — ⭐⭐ PRAKTYCZNA implikacja:
+  KAŻDY klient prowadzący BIURO rachunkowe POWINIEN być zapytany
+  O aktualność POLISY OC PRZED podjęciem współpracy Z NIM jako klient
+  KANCELARII (RYZYKO odpowiedzialności KARNEJ po JEGO stronie, ALE
+  RÓWNIEŻ ryzyko dla KLIENTÓW tego biura W razie SZKODY BEZ pokrycia)
+
+⭐ POWIĄZANIE Z AML: biura RACHUNKOWE (usługowe PROWADZENIE ksiąg) SĄ
+  ZWYKLE "instytucjami OBOWIĄZANYMI" na GRUNCIE ustawy AML — SPRAWDŹ
+  POWIĄZANIE z mod-ustawa-AML-instytucje-obowiazkowe.md, JEŻELI
+  klient PROWADZI/korzysta Z usług BIURA rachunkowego — OBOWIĄZKI
+  AML SĄ ODRĘBNE od samych wymogów Z Rozdziału 8a u.o.r.
+```
+
+## 5g. ⭐ WYNIK FINANSOWY (art. 42–44) — DOPEŁNIENIE ROZDZIAŁU 4
+(uzupełnienie części luki #8 z mapy pokrycia, dodano 2026-08-13)
+
+```
+✅ CZĘŚCIOWO DOMKNIĘTE 2026-08-13 — dotąd sekcja 4b OBEJMOWAŁA GŁÓWNIE
+metody WYCENY z art. 28, BEZ mechanizmu USTALANIA wyniku finansowego.
+
+⭐ ZAKRES ROZDZIAŁU 4 — PEŁNY OBRAZ: Rozdział 4 u.o.r. NOSI tytuł
+  "Wycena AKTYWÓW i pasywów ORAZ ustalenie WYNIKU finansowego" (art.
+  28-44) — DWIE części TEMATYCZNE w JEDNYM rozdziale: (a) WYCENA
+  poszczególnych SKŁADNIKÓW (art. 28-35 i n., ⭐ JUŻ opisana w sekcji
+  4b modułu — metody WYCENY + w TEJ sesji rozszerzona O wycenę WALUT
+  w sekcji 5d), (b) USTALENIE wyniku finansowego (art. 42-44 — TA
+  sekcja)
+
+⚠️ [ZAKRES OGRANICZONY W TEJ SESJI] SZCZEGÓŁOWA treść art. 42-44
+  (WARIANTY rachunku ZYSKÓW i strat — kalkulacyjny VS porównawczy,
+  ustalanie WYNIKU w JEDNOSTKACH prowadzących DZIAŁALNOŚĆ o różnym
+  CHARAKTERZE, MECHANIZM rezerw i ROZLICZEŃ międzyokresowych PRZY
+  ustalaniu wyniku) NIE BYŁA przedmiotem PEŁNEJ, pogłębionej
+  weryfikacji W tej sesji — SYGNALIZOWANA jako TEMAT do dalszego
+  ROZWINIĘCIA, priorytet NIŻSZY niż sekcje 5b-5f powyżej (KTÓRE
+  stanowiły GŁÓWNE, jednoznacznie zidentyfikowane LUKI z mapy
+  pokrycia) — DO opracowania REAKTYWNIE przy konkretnej sprawie
+  wymagającej SZCZEGÓŁOWEJ analizy struktury RZiS.
+
+⭐ POWIĄZANIE ZE STRUKTURĄ SPRAWOZDANIA (sekcja 4a modułu): rachunek
+  ZYSKÓW i strat, JAKO element SPRAWOZDANIA finansowego, JEST już
+  OGÓLNIE wzmiankowany w sekcji 4a (STRUKTURA sprawozdania) — TA
+  sekcja 5g SYGNALIZUJE, że SZCZEGÓŁOWY mechanizm USTALANIA samego
+  WYNIKU (a NIE tylko formalna STRUKTURA dokumentu) POZOSTAJE
+  tematem DO pogłębienia.
+```
+
+## 5h. ⭐ KRAJOWE STANDARDY RACHUNKOWOŚCI (KSR) — USYSTEMATYZOWANIE
+(dodano 2026-08-13)
+
+```
+PODSTAWA PRAWNA: art. 10 ust. 3 u.o.r. — jednostki MOGĄ stosować
+  KRAJOWE standardy RACHUNKOWOŚCI wydawane PRZEZ Komitet Standardów
+  Rachunkowości, W sprawach NIEUREGULOWANYCH przepisami USTAWY.
+
+⚠️ [FLAGA OTWARTA — LICZBA STANDARDÓW SPORNA MIĘDZY ŹRÓDŁAMI] różne
+  źródła PODAJĄ różną LICZBĘ obowiązujących standardów (14 VS 15) —
+  ⚠️ [NIEWERYFIKOWANE W TEJ SESJI] PRZED powołaniem KONKRETNEGO numeru
+  KSR w piśmie PROCESOWYM, zweryfikuj WPROST aktualną LISTĘ w
+  Dzienniku URZĘDOWYM Ministra Finansów (⚠️ KSR SĄ publikowane POZA
+  Dziennikiem Ustaw — ODRĘBNY publikator)
+
+STANDARDY JUŻ PRZYWOŁANE W TYM MODULE (potwierdzenie SPÓJNOŚCI
+  wewnętrznej):
+  □ KSR nr 4 — rezerwy, bierne ROZLICZENIA międzyokresowe kosztów,
+    zobowiązania WARUNKOWE (przywołany W sekcji 4b, wycena)
+  □ KSR nr 12 — inwentaryzacja (przywołany W sekcji 3b)
+
+⭐ ZNACZENIE PRAKTYCZNE: KSR NIE MAJĄ mocy PRAWA powszechnie
+  obowiązującego (W przeciwieństwie DO samej ustawy), ALE STANOWIĄ
+  istotną WYKŁADNIĘ pomocniczą, CZĘSTO przywoływaną PRZEZ biegłych
+  rewidentów PRZY badaniu sprawozdań I przez ORGANY podatkowe/sądy
+  PRZY sporach dot. PRAWIDŁOWOŚCI ujęcia księgowego — WARTO
+  ODWOŁYWAĆ się do KONKRETNEGO numeru KSR PRZY argumentacji
+  dotyczącej PRAWIDŁOWOŚCI konkretnego rozwiązania KSIĘGOWEGO, o ile
+  temat JEST przez dany KSR uregulowany.
+```
+
 ## ⭐⭐⭐ MAPA POKRYCIA DZIEDZINY — UCZCIWA SAMOOCENA (dodano
 2026-08-11, na żądanie użytkownika: "czy w pełni pokryte, jeśli nie
 — przygotuj bazę tematów z oznaczeniem poziomu pokrycia")
@@ -1022,40 +1486,44 @@ OZNACZENIA: 🟢 PEŁNE pokrycie | 🟡 CZĘŚCIOWE (wzmianka/fragment) |
 | 5 | Sankcje (art. 77 u.o.r. + zbieg z KKS) | Rozdz. 9 | 🟢 PEŁNE | Sekcja 5 — NAJDOKŁADNIEJ opracowana część |
 | 6 | ⭐⭐ DOKUMENTACJA KSIĘGOWA — dowody księgowe, wymogi formalne dowodu | Rozdz. 2 (art. 20-25) | 🟢 PEŁNE (2026-08-11) | Sekcja 3a — rodzaje dowodów, elementy obowiązkowe, wyjątek dot. VAT/metali nieżelaznych, wymogi merytoryczne/formalne |
 | 7 | ⭐⭐ INWENTARYZACJA — obowiązek, metody, częstotliwość, terminy | Rozdz. 3 (art. 26-27) | 🟢 PEŁNE (2026-08-11) | Sekcja 3b — trzy metody, reguly terminowe, dokumentowanie wyników, KSR nr 12 |
-| 8 | ⭐⭐⭐ WYCENA AKTYWÓW I PASYWÓW — metody, amortyzacja, rezerwy, odpisy aktualizujące | Rozdz. 4 (art. 28-42) | 🟡 CZĘŚCIOWE (2026-08-11) | Sekcja 4b — GŁÓWNE metody wyceny (art. 28) opisane, ALE cały ROZDZIAŁ 4 obejmuje art. 28-42 — szczegóły amortyzacji, rezerw, ustalania wyniku finansowego POZA art. 28 NADAL nieopisane |
+| 8 | ⭐⭐⭐ WYCENA AKTYWÓW I PASYWÓW — metody, amortyzacja, rezerwy, odpisy aktualizujące | Rozdz. 4 (art. 28-42) | 🟡 CZĘŚCIOWE (2026-08-13) | Sekcja 4b — metody wyceny (art. 28); Sekcja 5d (2026-08-13) — wycena walut obcych (art. 30) W PEŁNI opracowana; Sekcja 5g (2026-08-13) — ustalenie wyniku finansowego (art. 42-44) SYGNALIZOWANE, nieopracowane szczegółowo — priorytet niższy niż inne luki tej sesji |
 | 9 | ⭐⭐⭐ SPRAWOZDANIE FINANSOWE — struktura (bilans, RZiS, informacja dodatkowa, RPP, zestawienie zmian w kapitale) | Rozdz. 5 (art. 45-53) | 🟢 PEŁNE (2026-08-11) | Sekcja 4a — podstawowy i rozszerzony skład, wymogi formalne, forma ustrukturyzowana |
 | 10 | Sprawozdanie z działalności (odrębne od finansowego) | Art. 49 | 🔴 BRAK | — |
-| 11 | ⭐⭐ SKONSOLIDOWANE sprawozdania finansowe, grupy kapitałowe | Rozdz. 6 (art. 55-63) | 🔴 BRAK | Istotne dla HOLDINGÓW/grup spółek |
+| 11 | ⭐⭐ SKONSOLIDOWANE sprawozdania finansowe, grupy kapitałowe | Rozdz. 6 (art. 55-63) | 🟢 PEŁNE (2026-08-13) | Sekcja 5b — obowiązek, progi zwolnienia (⚠️ progi wymagają weryfikacji na ISAP — rozbieżność między źródłami), metody konsolidacji (pełna/praw własności/proporcjonalna), wyłączenia, MSR |
 | 12 | Badanie i ogłaszanie sprawozdań — KTO musi poddać się badaniu przez biegłego rewidenta | Rozdz. 7 (art. 64-65) | 🟢 PEŁNE (2026-08-11) | Sekcja 4d — progi 2,5/5 mln EUR/50 osób, przeliczanie walutowe, sankcje art. 79, powiązanie z sekcją 4a |
 | 13 | Rachunkowość jednostek MIKRO i MAŁYCH — uproszczenia | Art. 3 ust. 1a-1b i powiązane | 🟢 PEŁNE (2026-08-11) | Sekcja 4c — progi, utrata statusu, katalog uproszczeń, procedura decyzyjna, wyłączenia |
-| 14 | Usługowe prowadzenie ksiąg — wymogi dla biur rachunkowych | Rozdz. 8a (art. 76a-76i) | 🟡 CZĘŚCIOWE | Tylko WZMIANKA o obowiązku ubezpieczenia OC (sekcja 5) — BRAK pełnego opisu wymogów |
+| 14 | Usługowe prowadzenie ksiąg — wymogi dla biur rachunkowych | Rozdz. 8a (art. 76a-76i) | 🟢 PEŁNE (2026-08-13) | Sekcja 5f — ⭐ istotna korekta: brak wymogu certyfikatu od 10.08.2014 r. (liberalizacja), wymogi osobowe art. 76a ust. 3, obowiązkowe OC art. 76h, powiązanie z AML |
 | 15 | Przechowywanie dokumentacji księgowej — terminy archiwizacji | Rozdz. 8 (art. 71-74) | 🟢 PEŁNE (2026-08-11) | Sekcja 4e — zróżnicowane okresy, archiwizacja zewnętrzna, interakcja z Ordynacją podatkową/ZUS |
-| 16 | Elektroniczna forma ksiąg, e-sprawozdania (XML/XBRL), KSeF jako powiązanie | Rozdz. 2, przepisy szczególne | 🟡 CZĘŚCIOWE | Wzmianka o formie komputerowej (sekcja 3) — BRAK szczegółów e-sprawozdań |
-| 17 | Odpowiedzialność CYWILNA (odszkodowawcza) za błędy księgowe | Poza samą u.o.r. — KC/KSH | 🔴 BRAK | Zasygnalizowane jako "punkt startowy" w cross-referencjach, NIE opracowane |
-| 18 | ESG/CSRD — obowiązki sprawozdawcze zrównoważonego rozwoju | Nowsze przepisy, powiązanie z u.o.r. | 🔴 BRAK w TYM module | Odesłane do DR-15 (compliance) — SPRAWDŹ, czy TAMTEN moduł faktycznie to pokrywa |
-| 19 | Waluta sprawozdań, przeliczanie walut obcych | Art. 30 i powiązane | 🔴 BRAK | Część "wyceny", ale WARTA odrębnego potraktowania przy transakcjach zagranicznych |
-| 20 | Historia nowelizacji progu 2,5 mln EUR — POPRZEDNIA wartość, DATA zmiany | — | 🔴 BRAK | Sam fakt "podwyższono" jest w module, ALE BEZ konkretnej poprzedniej kwoty i daty wejścia w życie zmiany |
+| 16 | Elektroniczna forma ksiąg, e-sprawozdania (XML/XBRL), KSeF jako powiązanie | Rozdz. 2, przepisy szczególne | 🟡 CZĘŚCIOWE | Wzmianka o formie komputerowej (sekcja 3) — BRAK szczegółów e-sprawozdań — NIE objęte tą sesją, pozostaje priorytetem na przyszłość |
+| 17 | Odpowiedzialność CYWILNA (odszkodowawcza) za błędy księgowe | Poza samą u.o.r. — KC/KSH | 🟢 PEŁNE (2026-08-13) | Sekcja 5e — art. 293/483 KSH, krąg podmiotów, charakter odpowiedzialności, business judgment rule (art. 293 § 3), relacja do trzech równoległych reżimów odpowiedzialności (u.o.r./KKS/KSH) |
+| 18 | ESG/CSRD — obowiązki sprawozdawcze zrównoważonego rozwoju | Nowy Rozdział 6c u.o.r. (art. 49b i n.) | 🟢 PEŁNE (2026-08-13) | Sekcja 5c — ⭐⭐⭐ WAŻNE ODKRYCIE: temat był podwójną luką (brak i tu, i w DR-15 dokąd był odesłany — sprawdzono, DR-15 też nie zawiera ESG/CSRD). Pełna chronologia trzech nowelizacji (12.2024/07.2025/02.2026), harmonogram raportowania, atestacja |
+| 19 | Waluta sprawozdań, przeliczanie walut obcych | Art. 30 i powiązane | 🟢 PEŁNE (2026-08-13) | Sekcja 5d — dwa momenty przeliczania, różnice kursowe, powiązanie z metodą podatkową CIT/PIT art. 15a |
+| 20 | Historia nowelizacji progu 2,5 mln EUR — POPRZEDNIA wartość, DATA zmiany | — | 🔴 BRAK | Sam fakt "podwyższono" jest w module, ALE BEZ konkretnej poprzedniej kwoty i daty wejścia w życie zmiany — NIE objęte tą sesją |
 
-⭐ PODSUMOWANIE LICZBOWE (zaktualizowane 2026-08-11, ÓSMA
-  aktualizacja tego dnia — po dodaniu sekcji o przechowywaniu
-  dokumentacji): z 20 zidentyfikowanych głównych podtematów — 🟢
-  PEŁNE: 10 (50%), 🟡 CZĘŚCIOWE: 3 (15%), 🔴 BRAK: 7 (35%) —
-  ⭐⭐⭐ DZIEDZINA OSIĄGNĘŁA POŁOWĘ PEŁNEGO POKRYCIA — TEN moduł
-  OBEJMUJE TERAZ: zakres podmiotowy, WSZYSTKIE osiem fundamentalnych
-  zasad, terminy, sankcje, strukturę sprawozdania, wycenę,
-  uproszczenia mikro/małe, dokumentację księgową, inwentaryzację,
-  badanie przez biegłego rewidenta ORAZ przechowywanie dokumentacji
+⭐ PODSUMOWANIE LICZBOWE (zaktualizowane 2026-08-13, po domknięciu
+  pięciu głównych luk na żądanie użytkownika: konsolidacja, ESG/CSRD,
+  wycena walut, odpowiedzialność cywilna, usługowe prowadzenie
+  ksiąg): z 20 zidentyfikowanych głównych podtematów — 🟢 PEŁNE: 15
+  (75%), 🟡 CZĘŚCIOWE: 2 (10%), 🔴 BRAK: 3 (15%) —
+  ⭐⭐⭐ DZIEDZINA PRZESKOCZYŁA Z 50% NA 75% POKRYCIA W TEJ SESJI —
+  TEN moduł OBEJMUJE TERAZ DODATKOWO: skonsolidowane sprawozdania
+  finansowe/grupy kapitałowe, ESG/CSRD (sprawozdawczość
+  zrównoważonego rozwoju — wcześniej PODWÓJNA luka, nieobecna też
+  w DR-15), wycenę walut obcych, odpowiedzialność cywilną członków
+  zarządu za błędy księgowe (art. 293/483 KSH), oraz pełny obraz
+  usługowego prowadzenia ksiąg rachunkowych (z istotną korektą:
+  liberalizacja od 2014 r., brak wymogu certyfikatu).
 
-⭐ REKOMENDACJA PRIORYTETÓW na PRZYSZŁOŚĆ (zaktualizowane
-  2026-08-11, szósta aktualizacja): POPRZEDNIE priorytety (#15
-  przechowywanie) SĄ JUŻ POKRYTE — NOWE priorytety NA PRZYSZŁOŚĆ:
-  pozycja #11 (sprawozdania SKONSOLIDOWANE — istotne dla struktur
-  grupowych), pozycja #16 (elektroniczna forma ksiąg, e-sprawozdania
-  — CZĘŚCIOWO już dotknięta, warta DOKOŃCZENIA), pozycja #13
-  (usługowe prowadzenie ksiąg — CZĘŚCIOWO dotknięta, tylko wzmianka
-  o OC) — POZOSTAŁE, mniejsze tematy (jednostki mikro/organizacje
-  pozarządowe, waluty obce, odpowiedzialność cywilna, ESG/CSRD,
-  historia progu 2,5 mln EUR) — NIŻSZY priorytet praktyczny
+⭐ REKOMENDACJA PRIORYTETÓW NA PRZYSZŁOŚĆ (zaktualizowane
+  2026-08-13): pozostałe trzy luki 🔴 BRAK to: #10 (sprawozdanie z
+  działalności — odrębne od finansowego, art. 49), #20 (historia
+  nowelizacji progu 2,5 mln EUR — kwota/data poprzedniej wersji).
+  Dwie pozycje 🟡 CZĘŚCIOWE: #8 (wynik finansowy art. 42-44 —
+  sygnalizowany w sekcji 5g, nieopracowany szczegółowo) i #16
+  (elektroniczna forma ksiąg/e-sprawozdania XML/XBRL — wzmiankowana,
+  bez szczegółów). Wszystkie cztery mają niższy priorytet praktyczny
+  niż tematy domknięte w tej sesji — do opracowania reaktywnie przy
+  konkretnej sprawie tego wymagającej.
 ```
 
 ---
