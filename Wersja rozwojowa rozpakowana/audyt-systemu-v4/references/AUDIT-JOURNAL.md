@@ -4,176 +4,6 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
-## AUDYT-2026-08-11v — TRANSZA 2 audytu pokrycia rachunkowo-księgowego + SYNCHRONIZACJA MAP CENTRALNYCH + ⚠️ INCYDENT KOLIZJI IDENTYFIKATORÓW SESJI
-
-**Kontekst:** kontynuacja AUDYT-2026-08-11u. Użytkownik polecił
-kontynuować uzupełnianie ORAZ objąć synchronizacją mapę w
-`prawo-polskie-v2`, której transza 1 nie ruszyła.
-
-**⚠️⚠️ INCYDENT PROCEDURALNY WYKRYTY I NAPRAWIONY W TEJ SESJI —
-KOLIZJA IDENTYFIKATORÓW:** wpis transzy 1 został pierwotnie nazwany
-`AUDYT-2026-08-11b`, podczas gdy dziennik zawierał JUŻ wpis o tym
-identyfikatorze (FAZA 3E shared/: RISK-ASSESSMENT, STRATEGIA-PROCESOWA)
-— dzień 2026-08-11 miał wtedy sesje od `a` do `t`. Przyczyna: nowy wpis
-został dodany na GÓRZE pliku bez sprawdzenia, jakie sufiksy są już
-zajęte w dalszej części (plik ma ponad 34 tys. wierszy, a wpisy nie są
-posortowane jednolicie — najnowsze są na górze, ale starsze bloki mają
-własną chronologię).
-→ **Naprawa:** transza 1 przenumerowana na `AUDYT-2026-08-11u`, transza
-  2 na `AUDYT-2026-08-11v`; wszystkie znaczniki w `dr-06`,
-  `prawo-polskie-v2` i `WARN-OTWARTE.md` zsynchronizowane (6 plików).
-→ ⭐⭐ WNIOSEK OGÓLNY: przed dodaniem wpisu do AUDIT-JOURNAL należy
-  wykonać `grep -o "^## AUDYT-RRRR-MM-DD[a-z]*" | sort -u` i wybrać
-  pierwszy WOLNY sufiks. Kandydat na kolejny test regresyjny —
-  wykrywanie zduplikowanych nagłówków sesji (patrz flaga F-22).
-
-**Uzupełnienia merytoryczne (dr-06, v3.35 → v3.36):**
-
-1. **Nowy moduł `mod-rachunkowosc-budzetowa-JSFP.md`** — ⚠️ CZWARTA LUKA
-   ZEROWA sesji: fraza „rachunkowość budżetowa" miała 0 wystąpień w
-   całym systemie, mimo rozbudowanego `mod-UFP-finanse-publiczne-NIK-RIO`
-   w DR-06 i całej dziedziny JST w DR-08. System znał budżet i kontrolę
-   RIO/NIK, nie znając reżimu księgowego, który jest przedmiotem
-   większości zastrzeżeń pokontrolnych. Rozporządzenie MRiF z 13.09.2017,
-   ⭐ NOWY t.j. **Dz.U. 2026 poz. 909** (ogł. 7.07.2026) — system nie
-   miał odnotowanego nawet poprzedniego t.j.
-2. **`mod-ustawa-rachunkowosci.md` v1.9.0 → v1.10.0:** sekcja 5f (art. 30
-   waluty — OSTATNIA pozycja 🔴 mapy pokrycia; art. 32 amortyzacja;
-   art. 35b odpisy aktualizujące należności) + sekcja 5g (Krajowe
-   Standardy Rachunkowości, art. 10 ust. 3 u.o.r., wykaz KSR 1-15)
-3. **Mapa pokrycia u.o.r.: 🟢 17 z 20 (85%), 🟡 3, 🔴 0.** Stan przed
-   całą sesją audytową: 🟢 9 / 🟡 3 / 🔴 8
-4. ⚠️ **KOREKTA ZAKRESU:** rozdz. 4 u.o.r. to art. **28-44**, nie „28-42"
-5. ⚠️ **KOREKTA METODOLOGICZNA MAPY:** mapa 20 pozycji obejmowała
-   WYŁĄCZNIE u.o.r., więc 100% jej pokrycia nie oznaczało pokrycia
-   dziedziny. Wada opisana wprost w module
-
-**Synchronizacja map (rdzeń polecenia użytkownika):**
-
-6. **`prawo-polskie-v2/ROUTING-MAP.md` — +12 wierszy** w sekcji DR-06
-   (akty z transz 1 i 2) + aktualizacja wiersza ustawy o rachunkowości
-7. ⚠️⚠️ **NAPRAWIONY DRYF DYSK↔INDEKS CENTRALNY (wzorzec znany z
-   AUDYT-2026-07-02):** ROUTING-MAP miała ustawę akcyzową jako „Dz.U.
-   2025 poz. 126", podczas gdy `dr-06/MAPA-AKTOW.md` została poprawiona
-   2026-08-11 na aktualny t.j. **Dz.U. 2026 poz. 412**. Poprawka punktowa
-   w DR-skillu nie została wtedy propagowana do mapy centralnej —
-   mechanizm udokumentowany już wcześniej i nadal aktywny
-8. ⚠️⚠️ **NAPRAWIONY DRYF LICZNIKA W TABELI STATUSU:** ROUTING-MAP
-   deklarowała dla DR-06 **21** pozycji przy rzeczywistych **32**
-   JESZCZE PRZED tą sesją. Po dopisaniu 12 aktów: **44** (40 ✅ / 4 ⚠️)
-   → ⭐⭐ **TEST T2 TEGO NIE WYKRYWA** — sprawdza liczniki modułów
-     deklarowane w `SKILL.md` DR-skilli, nie liczniki wierszy w TABELI
-     STATUSU `ROUTING-MAP.md`. Ślepa plama zestawu regresyjnego (F-21)
-
-**Świadomie NIEZAMKNIĘTE — bez zgadywania:**
-- Liczba wydanych KSR: rozbieżność 14 vs 15 (status KSR 15 — flaga F-20)
-- art. 35d u.o.r. (rezerwy) — treść nieodczytana ze źródła, NIE opisano
-- art. 42-44 u.o.r. (ustalanie wyniku finansowego)
-- Terminy publikacji sprawozdań w rachunkowości budżetowej (kierunek
-  zmian potwierdzony, liczby nie — świadomie nie podano)
-- Numer rozporządzenia ws. klasyfikacji budżetowej (budżet 2027)
-- Konto 968 „Prywatyzacja" — jedno źródło Rządu 2B
-- Liczniki TABELI STATUSU dla pozostałych 15 dziedzin (F-21)
-
-**Flagi otwarte w tej transzy:** F-20 (KSR), F-21 (ślepa plama T2),
-F-22 (brak kontroli unikalności identyfikatorów sesji — kontrola wykonana po naprawie wykazała **12 wcześniejszych, nienaprawionych duplikatów** w historii dziennika, m.in. AUDYT-2026-08-08z/zd/ze, 2026-07-27z, 2026-07-30z; nie naprawiano ich w tej sesji, bo przenumerowanie wymaga przejścia po wszystkich odniesieniach w systemie).
-
-**Testy regresyjne po zmianach:** T1 OK, T2 OK (liczniki modułów DR-06
-zgodne: 30 = 30).
-
----
-
-## AUDYT-2026-08-11u — AUDYT ZAKRESOWY DZIEDZINY: pokrycie tematów rachunkowo-księgowych w DR-06 (ZASADA 11 — audyt merytoryczny, NIE mapa Dz.U.)
-
-**Typ:** audyt pokrycia dziedziny (nie TRYB DZU, nie FAZA 3A-3D).
-Przedmiotem nie była poprawność numerów w mapie, lecz pytanie: czy
-system w ogóle ZNA tematy rachunkowo-księgowe i gdzie ma dziury.
-
-**Wywołanie:** użytkownik — „zbadaj zakres pokrycia tematów
-rachunkowo-księgowych, uzupełniaj je i po zakończeniu uzupełniania daj
-mi go zgodnie z regułą 7 audyt systemu".
-
-**Metoda:** grep po CAŁYM `/mnt/skills/user/` (wszystkie 30+ skilli,
-`*.md`) na 10 fraz kluczowych dziedziny, następnie weryfikacja online
-wg ZASADY 14 (Rząd 1 → 2A/2B → 3, próg min. 2-3 niezależne źródła).
-Wykonano 9 sesji wyszukiwania; ISAP blokował `web_fetch`
-(ROBOTS_DISALLOWED) — dotarto do Rzędu 1 przez metryki ISAP w wynikach
-wyszukiwania oraz przez `podatki.gov.pl`, `gov.pl/web/kas`,
-`gov.pl/web/finanse`, `biznes.gov.pl`.
-
-**⚠️⚠️⚠️ ZNALEZISKA — TRZY LUKI ZEROWE (temat nieobecny w CAŁYM systemie):**
-
-1. **KASY REJESTRUJĄCE — 0 wystąpień frazy w całym systemie.** Dziedzina
-   dotycząca każdego podmiotu sprzedającego konsumentom (fryzjer,
-   gastronomia, sklep, warsztat) nie miała żadnego pokrycia, mimo
-   rozbudowanych sąsiednich modułów VAT i akcyzy. NAPRAWIONE — nowy
-   moduł `mod-kasy-rejestrujace-fiskalizacja.md`.
-2. **PKPiR — brak samodzielnego modułu.** System znał SANKCJĘ KKS za
-   wadliwe prowadzenie PKPiR, nie znając ZASAD jej prowadzenia.
-   NAPRAWIONE — `mod-PKPiR-ewidencje-uproszczone.md`.
-3. **JPK_CIT / e-sprawozdania — jedna komórka w tabeli ryzyk.**
-   Obowiązek skali porównywalnej z KSeF, z 3 turami wdrożenia i DWIEMA
-   zmianami terminu w 2026 r., bez opracowania. NAPRAWIONE —
-   `mod-JPK-ksiegi-elektroniczne-e-sprawozdania.md`.
-
-**⚠️ ZNALEZISKO STRUKTURALNE — ZERWANE ODESŁANIE (wzorzec do
-monitorowania):** `mod-ustawa-rachunkowosci.md` odsyłał temat ESG/CSRD
-„do DR-15 (compliance)" z własną adnotacją „SPRAWDŹ, czy TAMTEN moduł
-faktycznie to pokrywa". Sprawdzono: `grep -ri "ESG\|CSRD"
-dr-15-compliance-iso-governance-audyt/` → **0 wystąpień**. Odesłanie
-prowadziło donikąd przez cały okres istnienia modułu. Temat osadzono
-tam, gdzie ma podstawę normatywną — w u.o.r. (sekcja 5e).
-→ ⭐ WNIOSEK OGÓLNY DLA PRZYSZŁYCH AUDYTÓW: adnotacja typu „SPRAWDŹ, czy
-  tamten moduł to pokrywa" pozostawiona we WŁASNYM tekście modułu jest
-  sygnałem niezweryfikowanego odesłania i powinna być traktowana jak
-  otwarta flaga, a nie jak cross-referencja. Rozważyć heurystykę
-  testową (kandydat na T11) wykrywającą frazy „sprawdź, czy" /
-  „odesłane do" w cross-referencjach.
-
-**⚠️ ZNALEZISKO PRAWNE — ZMIANA STANU PRAWNEGO NIEODNOTOWANA W SYSTEMIE:**
-rozporządzenie PKPiR z 23.12.2019 (Dz.U. 2019 poz. 2544) **UTRACIŁO MOC
-1.01.2026**, zastąpione rozporządzeniem MFiG z 6.09.2025 (Dz.U. 2025
-poz. 1299). System nie miał tego odnotowanego nigdzie. Analogicznie
-nieodnotowana była podwójna zmiana terminu JPK_KR_PD w 2026 r.
-(rozp. Dz.U. 2026 poz. 188 → ustawa Dz.U. 2026 poz. 779).
-
-**Naprawy wykonane (skill `dr-06-podatki-finanse-publiczne-aml`, v3.34 → v3.35):**
-
-1. **+3 nowe moduły** (26 → 29): `mod-PKPiR-ewidencje-uproszczone.md`,
-   `mod-kasy-rejestrujace-fiskalizacja.md`,
-   `mod-JPK-ksiegi-elektroniczne-e-sprawozdania.md`
-2. `mod-ustawa-rachunkowosci.md` v1.8.0 → **v1.9.0**: +4 sekcje —
-   5b (przechowywanie danych, art. 71-76 + reżim równoległy art. 86 OP),
-   5c (usługowe prowadzenie ksiąg, rozdz. 8a + OC), 5d (konsolidacja,
-   rozdz. 6), 5e (ESG/CSRD)
-3. **Mapa pokrycia dziedziny przeliczona:** 🟢 9 → **16** z 20 (45% →
-   80%), 🟡 3, 🔴 **1** (pozostała: art. 30 — waluta sprawozdań i
-   przeliczanie walut obcych)
-4. `MAPA-AKTOW.md` — **+14 wierszy** (w tym 1 wiersz aktu ARCHIWALNEGO
-   oznaczony ⛔, żeby zapobiec cytowaniu uchylonego rozporządzenia)
-5. `SKILL.md` — licznik modułów, rejestr, nota aktualizacyjna
-
-**Świadomie NIEZAMKNIĘTE — bez zgadywania (ZASADA 1, ZASADA 13):**
-- Progi liczbowe art. 56 ust. 1 u.o.r. (zwolnienie z konsolidacji) —
-  snippety urywały się przed wyliczeniem; kwoty NIE podane
-- Numer rozporządzenia ws. zwolnień z kas: rozbieżność 1902 vs 1949
-  (flaga F-18)
-- Minimalne sumy gwarancyjne OC biur rachunkowych — potwierdzone
-  wyłącznie w Rzędzie 2B, oznaczone jako wymagające weryfikacji
-- Aktualność uchwały NSA FPS 7/98 pod rządami ustawy o VAT z 2004 r.
-- Kwota progu 2,5 mln EUR w złotych na 2026 r. (kurs NBP 1.10.2025)
-
-**Flagi otwarte w tej sesji:** F-18, F-19 (patrz `WARN-OTWARTE.md`).
-
-**Wnioski:** dziedzina rachunkowo-księgowa była pokryta ASYMETRYCZNIE —
-prawo PODATKOWE opracowane szeroko (26 modułów), prawo BILANSOWE i
-EWIDENCYJNE marginalnie. Przyczyną jest prawdopodobnie sposób budowy
-DR-06 wokół „podatków" jako osi, przy której rachunkowość wyglądała na
-temat pochodny. Nie jest pochodny — to odrębna dziedzina prawa
-gospodarczego z własnym reżimem sankcyjnym.
-
----
-
 ## AUDYT-2026-07-24d — USUNIĘCIE W CAŁOŚCI zamkniętego rejestru i mechanizmu T10 (monitorowanie plików Nexto/Virtualo, flaga F-12), na wyraźne polecenie użytkownika
 
 **Kontekst:** kontynuacja AUDYT-2026-07-24c (zamknięcie flagi F-12,
@@ -34737,6 +34567,1213 @@ dodatkowej, KOŃCOWEJ weryfikacji (np. regex NA niepożądane zakresy
 znaków) PO każdej takiej edycji, NIE TYLKO liczenia nagłówków.
 
 ### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11u — Wypełnianie luk ustawy o rachunkowości: przechowywanie dokumentacji (luka #15 domknięta) — dziedzina osiągnęła 50% pokrycia
+
+**Kontekst:** Ósma transza wypełniania luk tego samego dnia (na
+żądanie użytkownika, kontynuowana mimo przejściowej weryfikacji
+stanu systemu — brak rozbieżności potwierdzony).
+
+**DODANO sekcję 4e — przechowywanie dokumentacji księgowej**,
+zweryfikowaną w 6+ zgodnych źródłach, w tym najświeższe z maja
+2026:
+
+- Zróżnicowane okresy: sprawozdanie finansowe i księgi — 5 lat od
+  zatwierdzenia; karty wynagrodzeń — min. 5 lat, ale MOŻE być dłużej
+  wg przepisów emerytalno-rentowych; dowody dot. sprzedaży
+  detalicznej — do dnia zatwierdzenia; ⭐⭐⭐ dowody dot. postępowań
+  sądowych/kredytów — 5 lat OD ZAKOŃCZENIA postępowania (nie od
+  operacji pierwotnej — przy długich sporach faktyczny okres może
+  być znacznie dłuższy)
+- Archiwizacja zewnętrzna: wymóg powiadomienia US w 15 dni
+- ⭐⭐ Interakcja z innymi przepisami: Ordynacja podatkowa (5 lat od
+  przedawnienia) + dokumenty ZUS (5 lat od 2012, ale STARSZE — nadal
+  10 lat) — zalecenie stosowania najdłuższego z konkurujących
+  terminów
+- Zasady przy likwidacji/połączeniu jednostki
+- Powiązanie z sankcjami karnoskarbowymi z sekcji 5
+- ⚠️ Uczciwie odnotowana nierozstrzygnięta kwestia: ustawa NIE
+  reguluje wprost procedury utylizacji dokumentów po upływie
+  terminu
+
+**Zaktualizowano mapę pokrycia.** Pozycja #15 zmieniona z 🔴 BRAK na
+🟢 PEŁNE.
+
+Nowy bilans: 10/20 PEŁNE (50%), 3/20 CZĘŚCIOWE (15%), 7/20 BRAK
+(35%) — DZIEDZINA osiągnęła DOKŁADNIE połowę pełnego pokrycia.
+
+**Rejestracja:** moduł zaktualizowany do v1.9.0. dr-06 SKILL.md
+v3.34→v3.35.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11v — Badanie pokrycia ustaw podatkowych (na żądanie użytkownika): PIT ma tę samą lukę co akcyza/rachunkowość — brak rezydencji podatkowej, uzupełnione
+
+**Kontekst:** Na żądanie użytkownika — zbadanie aktualnego pokrycia
+ustaw podatkowych w systemie i kontynuacja ich pokrywania,
+analogicznie do wcześniejszej, obszernej pracy nad akcyzą i
+rachunkowością.
+
+**USTALENIE WSTĘPNE:** system ma 26 modułów w dr-06, w tym CIT (307
+linii), VAT (551), Ordynacja podatkowa (492, wcześniej znacząco
+rozbudowana), ALE PIT — dotyczący NAJWIĘKSZEJ liczby podatników w
+Polsce — był NAJMNIEJSZY (197 linii).
+
+**POTWIERDZONA GENUINE LUKA:** sprawdzono obecność kilku
+fundamentalnych, powszechnych tematów PIT — ZERO wystąpień dla:
+rezydencji podatkowej, podatku Belki (zyski kapitałowe), PIT-11,
+wspólnego rozliczenia małżonków — TA SAMA charakterystyka luki co
+wcześniej w akcyzie/rachunkowości (dobrze zbudowany rdzeń, ale
+brakujące fundamentalne, powszechne tematy).
+
+**DODANO sekcję 1a — rezydencja podatkowa**, zweryfikowaną w 7+
+zgodnych źródłach, z NAJŚWIEŻSZYM z lipca 2026:
+
+- ⭐⭐ Dwie ALTERNATYWNE (nie kumulatywne) przesłanki (art. 3 ust.
+  1a): ośrodek interesów życiowych LUB >183 dni — spełnienie
+  JEDNEJ wystarczy
+- ⭐⭐⭐ Hierarchia kryteriów potwierdzona orzecznictwem NSA (II FSK
+  2653/16): PIERWSZEŃSTWO jakościowego (ośrodek interesów) NAD
+  ilościowym (183 dni) — kryterium dni ma charakter POMOCNICZY
+- Praktyczna ilustracja: osoba pracująca za granicą >183 dni MOŻE
+  nadal być polskim rezydentem, jeśli zostawiła rodzinę/zobowiązania
+  finansowe w Polsce
+- Skutek: nieograniczony vs ograniczony obowiązek podatkowy
+- ⭐⭐⭐ "Łamana rezydencja" — dopuszczalna ZMIANA rezydencji W
+  TRAKCIE roku podatkowego, potwierdzona interpretacją indywidualną
+  KIS, działająca PROSPEKTYWNIE
+- Konflikt rezydencji między państwami rozstrzygany przez UPO
+
+**Potwierdzenie krzyżowe:** numer aktu PIT (Dz.U. 2026 poz. 592)
+cytowany w NOWYM źródle jest IDENTYCZNY z numerem już WCZEŚNIEJ
+ustalonym w tej sesji — dobry sygnał SPÓJNOŚCI między niezależnymi
+weryfikacjami.
+
+**Rejestracja:** dr-06 SKILL.md v3.35→v3.36.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11w — Kontynuacja badania ustaw podatkowych poza "wielką trójką": ulga mieszkaniowa SD dodana + naprawiony przestarzały t.j.
+
+**Kontekst:** Na WYRAŹNE żądanie użytkownika — kontynuacja
+pokrywania ustaw podatkowych POZA PIT/CIT/VAT.
+
+**USTALENIE WSTĘPNE:** sprawdzono rozmiar pozostałych modułów
+podatkowych — PCC/spadki-darowizny (136 linii, łączy DWA odrębne
+podatki), podatek od nieruchomości (155), ryczałt (166), rynek
+kapitałowy (77) — WSZYSTKIE relatywnie kompaktowe.
+
+**⭐⭐⭐ ZNALEZIONA, GENUINE LUKA: ulga mieszkaniowa (art. 16 ustawy
+SD) BYŁA CAŁKOWICIE NIEOBECNA** — mimo że to JEDEN Z
+NAJSKUTECZNIEJSZYCH mechanizmów ograniczenia podatku od spadków/
+darowizn. DODANO, zweryfikowaną w 7+ zgodnych źródłach, w tym
+BEZPOŚREDNIO OpenLEX (dosłowny tekst art. 16):
+
+- Wyłączenie z podstawy opodatkowania 110 m² powierzchni użytkowej
+- ⭐⭐ Kluczowa wartość praktyczna: DOSTĘPNA RÓWNIEŻ dla Grupy II/III
+  (nie tylko najbliższa rodzina) — najskuteczniejszy sposób na
+  uniknięcie WYSOKIEGO podatku dla DALSZYCH krewnych/osób
+  niespokrewnionych
+- Trzy warunki łączne: brak innej nieruchomości (WSPÓŁWŁASNOŚĆ nie
+  wyłącza — potwierdzone konsekwentnym stanowiskiem organów),
+  zamieszkiwanie+zameldowanie przez 5 lat, terminowe zgłoszenie
+- Moment liczenia 5-letniego okresu i moment oceny warunków (dzień
+  śmierci spadkodawcy, NIE data postanowienia sądu — deklaratoryjny
+  charakter)
+- Zachowanie ulgi przy sprzedaży i zakupie innej nieruchomości
+  (2-letni termin, łączny 5-letni okres zamieszkiwania)
+
+**⚠️ PRZY OKAZJI weryfikacji edycji — ZNALEZIONA I NAPRAWIONA
+DODATKOWA NIESPÓJNOŚĆ**: sekcja CORE modułu cytowała PRZESTARZAŁY
+numer t.j. ustawy SD ("2024 poz. 1837 ze zm.") — TA SAMA
+CHARAKTERYSTYKA błędu jak wcześniej znaleziona przy PIT (mod-
+PIT-podatek-dochodowy-fizyczne.md) i akcyzie — POTWIERDZONO
+BEZPOŚREDNIO ISAP: aktualny t.j. to Dz.U. 2026 poz. 478
+(obwieszczenie z 27.03.2026, konsolidujące poprzedni t.j. z trzema
+kolejnymi nowelizacjami).
+
+**Rejestracja:** dr-06 SKILL.md v3.36→v3.37.
+
+### WNIOSEK METODOLOGICZNY
+
+TRZECI już przypadek W TEJ sesji (PO PIT, AKCYZIE) znalezienia
+PRZESTARZAŁEGO numeru t.j. PRZY OKAZJI innego, GŁÓWNEGO zadania —
+POTWIERDZA to WARTOŚĆ rutynowego SPRAWDZANIA numerów aktów PRZY
+KAŻDEJ okazji dotknięcia danego modułu, NIEZALEŻNIE od PIERWOTNEGO
+celu edycji.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-11x — Pełna mapa pokrycia dr-06 (26 modułów podatkowych/rachunkowości) + CRIT znaleziony w mod-ustawa-uslugi-platnicze (PSD3 termin błędny o prawie 2 lata)
+
+**Kontekst:** Na WYRAŹNE żądanie użytkownika — zbadanie poziomu
+pokrycia POSZCZEGÓLNYCH ustaw podatkowych i rachunkowości w dr-06,
+oznaczenie stanu, i kontynuacja.
+
+**ZBUDOWANO PEŁNĄ MAPĘ** wszystkich 26 modułów dr-06, posortowaną
+wg rozmiaru (32-1071 linii) jako ORIENTACYJNY wskaźnik głębokości
+pokrycia, z jakościowymi oznaczeniami 🟢/🟡/🔴 opartymi NA
+DOTYCHCZASOWEJ pracy tej sesji — PRZEDSTAWIONO użytkownikowi WPROST
+w odpowiedzi (NIE duplikowane w całości tutaj, dla zwięzłości
+dziennika).
+
+**KLUCZOWE WNIOSKI z mapy:**
+- 🟢 Rozbudowane: rachunkowość (1071 linii, WŁASNA wewnętrzna mapa
+  50%), akcyza+cło (896)
+- 🟡 Częściowo dotknięte tej sesji: PIT, PCC/SD, Ordynacja
+  podatkowa, cło podróżnych
+- 🔴 CAŁKOWICIE niesprawdzone w tej sesji: CIT (307 — CZĘŚĆ "wielkiej
+  trójki", ale POMINIĘTA), VAT (551), oraz WIĘKSZOŚĆ mniejszych
+  modułów
+- 🔴 PODEJRZANIE małe: rynek kapitałowy (77), PKWiU (68), AML (46),
+  usługi płatnicze (32, NAJMNIEJSZY)
+
+**⭐⭐⭐ NATYCHMIASTOWE ZNALEZISKO — CRIT w mod-ustawa-uslugi-
+platnicze.md, POTWIERDZONY jako PIERWSZY sprawdzony, NAJMNIEJSZY
+moduł:** poprzednia wersja BŁĘDNIE twierdziła "PSD3 (Dyrektywa UE
+2024/2831) — transpozycja do 09.04.2026 r." — TEN termin BYŁ
+BŁĘDNY, prawdopodobnie MYLĄCY PSD3 z NIEZWIĄZANĄ dyrektywą.
+ZWERYFIKOWANO w 6+ zgodnych, AKTUALNYCH źródłach (NAJŚWIEŻSZE
+sprzed 2 tygodni): PSD3/PSR OTRZYMAŁY ostateczny TEKST kompromisowy
+DOPIERO 17.04.2026 (dokumenty Rady 8221/26 PSR, 8222/26 PSD3),
+publikacja W Dzienniku Urzędowym UE SPODZIEWANA W drugiej połowie
+2026 R. (JESZCZE NIE nastąpiła na dzień weryfikacji), a REALNY
+termin transpozycji (21 miesięcy OD wejścia W życie) OZNACZA
+faktyczne wejście W ŻYCIE dopiero W **2028 R.** — NIE w kwietniu
+2026, JAK błędnie twierdził MODUŁ. Naprawiono KOMPLEKSOWO, DODANO
+pełny, POPRAWNY harmonogram i STRUKTURĘ pakietu (dyrektywa PSD3 +
+ROZPORZĄDZENIE PSR).
+
+**Rejestracja:** dr-06 SKILL.md v3.37→v3.38. Moduł urósł z 32 do 86
+linii.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12a — Kompleksowa weryfikacja wszystkich modułów edytowanych w tej sesji (na żądanie użytkownika) + CIT: dodano rezydencję podatkową osób prawnych
+
+**Kontekst:** Na żądanie użytkownika — sprawdzenie CAŁOŚCI wszystkich
+modułów edytowanych w TEJ (widocznej) sesji pod kątem ukrytych,
+nieuwzględnionych elementów, PRZED kontynuacją.
+
+**METODA:** sprawdzono systematycznie 8 modułów bezpośrednio
+edytowanych w widocznej sesji (akcyza+cło, cło podróżnych,
+rachunkowość, PIT, PCC/SD, biegli rewidenci, usługi płatnicze,
+Ordynacja podatkowa) — PORÓWNANO liczbę linii, znaczniki czasu i
+liczbę wzmianek "2026-08" z oczekiwaniami.
+
+**WYNIK: WSZYSTKIE zgodne z własnymi edycjami** — ŻADNYCH dodatkowych,
+ukrytych elementów PONAD to, co już WCZEŚNIEJ zidentyfikowano (VAT
+KSeF, transza poprzednia). POTWIERDZA to, że mapa STANU po
+poprzedniej weryfikacji BYŁA już KOMPLETNA I dokładna.
+
+**KONTYNUACJA — CIT, sekcja 1a: rezydencja podatkowa osób
+prawnych**, zweryfikowana w 7+ zgodnych źródeł, w tym akademickich
+(SGH):
+
+- Analogiczna konstrukcja do rezydencji fizycznej — DWIE
+  alternatywne przesłanki: siedziba LUB zarząd na terytorium RP
+- ⭐⭐⭐ Rozszerzone, DOMNIEMANE rozumienie "zarządu" (art. 3 ust. 1a,
+  Polski Ład): NIE jest istotne, GDZIE polscy członkowie organów
+  faktycznie DZIAŁAJĄ — wystarczy ich PERSONALNY status jako
+  polskich rezydentów, by ZA takiego rezydenta uznać RÓWNIEŻ
+  podmiot, na RZECZ którego działają
+- Praktyczny test: liczy się GDZIE zapadają decyzje strategiczne/
+  operacyjne, NIE adres rejestracyjny
+- ⭐⭐⭐ Konkretny przykład ryzyka PODWÓJNEJ rezydencji: polska spółka
+  z zarządem CAŁKOWICIE za granicą MOŻE zostać uznana za rezydenta
+  TEGO innego kraju, MIMO polskiej rejestracji
+- Krytyka doktrynalna: regulacja NIE trafia w istotę problemu,
+  istota to ZAWSZE ustalenia faktyczne w KONKRETNEJ sprawie
+
+**Rejestracja:** dr-06 SKILL.md v3.38→v3.39.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12b — Kontynuacja pokrywania ustaw podatkowych: VAT sprawdzony (solidny), ryczałt — dodano szczegóły składki zdrowotnej
+
+**Kontekst:** Kontynuacja na żądanie użytkownika ("kontynuujemy
+pokrywanie tych wszystkich ustaw").
+
+**VAT — sprawdzony pod kątem dodatkowych, poza KSeF, mechanizmów:**
+POTWIERDZONO obecność MPP/split payment, zwolnienia podmiotowego
+(art. 113), białej listy — moduł WYGLĄDA solidnie, BEZ oczywistych
+luk w tej krótkiej weryfikacji.
+
+**RYCZAŁT — dodano sekcję o składce zdrowotnej**, zweryfikowaną w
+7+ zgodnych, BARDZO aktualnych źródeł (NAJŚWIEŻSZE sprzed 12
+godzin):
+
+- ⭐⭐⭐ Fundamentalna różnica: podstawa = PRZYCHÓD, nie dochód —
+  koszty NIE wpływają na wysokość składki
+- Trzy progi (2026, stawka 9%): do 60 000 zł → 498,35 zł/mies.;
+  60-300 tys. → 830,58 zł/mies.; powyżej 300 tys. → 1495,04
+  zł/mies. (podstawa: przeciętne wynagrodzenie GUS za IV kw. 2025,
+  9228,64 zł)
+- Dwie metody: uproszczona (stała kwota, dla działających cały
+  poprzedni rok) vs progresywna (z RYZYKIEM zaległego wyrównania
+  przy przekroczeniu progu w trakcie roku — częsty, praktyczny
+  problem przedsiębiorców bez bieżącej kontroli sumy przychodów)
+- Odliczenie 50% składek OD PRZYCHODU (nie od podatku — łatwo
+  pomylić z innymi formami)
+- ⭐⭐ Ulga dla łączących ryczałt z etatem (art. 82 ust. 9b): pełne
+  zwolnienie przy spełnieniu trzech warunków łącznie (niska
+  podstawa z etatu, niski przychód z działalności, forma ryczałtu)
+
+**Rejestracja:** dr-06 SKILL.md v3.39→v3.40.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12c — Kontynuacja: podatek od nieruchomości — dodano zwolnienia ustawowe, w tym świeży, nierozstrzygnięty spór sądowy (WSA Wrocław 2026)
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — dalsze
+uzupełnianie ustaw podatkowych.
+
+**DODANO sekcję 5a — zwolnienia ustawowe (art. 7)**, zweryfikowaną
+w 6+ zgodnych źródeł, z dosłownym tekstem przepisu:
+
+- Pełny katalog głównych zwolnień: infrastruktura kolejowa/portowa/
+  lotnicza, wały ochronne, nieużytki/użytki ekologiczne, budynki
+  gospodarcze na gruntach rolnych, zabytki, placówki edukacyjne
+- ⭐⭐ Ważne rozróżnienie pojęciowe: grunty rolne i lasy NIE są
+  formalnie "zwolnione" — są WYŁĄCZONE z zakresu (podlegają
+  odrębnemu podatkowi rolnemu, już opisanemu w module)
+- ⭐⭐⭐ ŚWIEŻY, aktywny spór sądowy: reforma 2025 wprowadziła wyjątek
+  wyłączający terminale towarowe ze zwolnienia infrastruktury
+  kolejowej — WSA Wrocław (27.05.2026, nieprawomocny) przyjął
+  interpretację KRYTYKOWANĄ przez komentatorów jako sprzeczną z
+  literalnym brzmieniem przepisu — czeka na rozstrzygnięcie NSA
+- Fakultatywne zwolnienia lokalne uchwałami rad gmin
+
+**Rejestracja:** dr-06 SKILL.md v3.40→v3.41.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12d — Kontynuacja: AML — dodano CRBR (Centralny Rejestr Beneficjentów Rzeczywistych), fundamentalny, dotąd nieobecny element
+
+**Kontekst:** Kontynuacja na żądanie użytkownika ("kontynuuj") —
+dalsze uzupełnianie ustaw podatkowych, wybrano moduł AML (46 linii,
+"podejrzanie mały").
+
+**DODANO kompleksową sekcję o CRBR**, zweryfikowaną w 7+ zgodnych
+źródłach, w tym BEZPOŚREDNIO gov.pl/finanse (Rząd 1):
+
+- Kto podlega: spółki prawa handlowego, PSA, fundacje/
+  stowarzyszenia wpisane do KRS, TRUSTY (szczególna procedura z
+  dedykowanym adresem e-mail)
+- Terminy: pierwsze zgłoszenie 7 dni od wpisu do KRS, aktualizacja
+  14 dni od zmiany
+- ⭐⭐ Domniemanie prawdziwości danych (art. 68) — osoba zgłaszająca
+  ponosi odpowiedzialność za szkodę wyrządzoną nieprawdziwymi
+  danymi
+- ⭐⭐⭐ Kara do 1 mln zł, z KLUCZOWYM zastrzeżeniem: odpowiedzialność
+  za wykonanie spoczywa na osobach uprawnionych do reprezentacji
+  (zarząd) — NIE MOŻE być przeniesiona na pełnomocnika
+- ⭐⭐ Konkretne dane statystyczne z praktyki (Izba Administracji
+  Skarbowej Bydgoszcz): 1415 decyzji za brak zgłoszenia, średnia
+  kara 9257 zł (dla sp. z o.o.: 10897 zł) — nie tylko górna granica
+  ustawowa, ale realna praktyka karania
+- Aktywny temat: trwają prace nad ograniczeniem jawności rejestru
+
+**Rejestracja:** dr-06 SKILL.md v3.41→v3.42. Moduł urósł z 46 do
+123 linii.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12e — Kontynuacja: PKWiU potwierdzone jako poprawne (celowo małe, nie luka) — dokładne daty przejściowe zweryfikowane
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — sprawdzenie
+kolejnego "podejrzanie małego" modułu (PKWiU, 68 linii).
+
+**USTALENIE: TO NIE JEST LUKA — moduł jest CELOWO mały**, jawnie
+wyjaśnione W nagłówku pliku: WYDZIELONY 14.06.2026 Z większego
+modułu specjalnie DLA umożliwienia LAZY LOADING (selektywnego
+ładowania) — architektura ŚWIADOMA, NIE zaniedbanie.
+
+**Zweryfikowano DOKŁADNOŚĆ konkretnych, cytowanych dat
+przejściowych** PKWiU 2015→2025, w 8+ ZGODNYCH, niezależnych
+źródłach (infor.pl, pep.pl, poradnikprzedsiebiorcy.pl, PwC,
+graczyk.com.pl, prawo.pl, thedy.pl) — WSZYSTKIE dokładnie
+POTWIERDZAJĄ treść modułu: PKWiU 2025 formalnie obowiązuje OD
+1.01.2026 (statystyka/rachunkowość), ALE DLA celów VAT — PKWiU 2015
+stosowana DO 31.12.2027 (nowa OBOWIĄZKOWA od 1.01.2028), DLA PIT/
+CIT/ryczałtu — DO 31.12.2028 (nowa obowiązkowa OD 1.01.2029).
+ŻADNYCH rozbieżności NIE znaleziono — moduł JEST poprawny.
+
+### WNIOSEK METODOLOGICZNY
+
+NIE KAŻDY mały moduł TO luka — SAMA wielkość jest TYLKO
+ORIENTACYJNYM wskaźnikiem, WYMAGAJĄCYM weryfikacji TREŚCIOWEJ, NIE
+automatycznego założenia niedostatku. TEN przypadek POKAZUJE
+wartość SPRAWDZENIA zamiast ZAKŁADANIA.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12f — Kontynuacja: rynek kapitałowy — CRIT znaleziony (uproszczona/błędna struktura progów prospektu) + bardzo świeża reforma Listing Act (5.06.2026) dodana
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — sprawdzenie
+modułu rynku kapitałowego (77 linii, wcześniej oznaczony jako
+"podejrzanie mały").
+
+**⭐⭐⭐ ZNALEZIONO — moduł ZNACZĄCO UPRASZCZAŁ/BŁĘDNIE opisywał
+strukturę progów prospektu emisyjnego.** Poprzednia wersja twierdziła
+"próg 2,5 mln EUR + wyjątek <150 osób LUB <1 mln EUR" — TO NIE
+oddawało RZECZYWISTEJ, WIELOPOZIOMOWEJ struktury. Zweryfikowano w
+7+ zgodnych źródłach, w tym BEZPOŚREDNIO KNF (Rząd 1, oficjalne
+Q&A):
+
+- Poniżej 1 mln EUR: rozporządzenie UE W OGÓLE nie ma zastosowania,
+  ALE Polska WYMAGA uproszczonego "dokumentu informacyjnego" dla
+  ofert 100 tys.-1 mln EUR (art. 37a)
+- 1 mln EUR do progu krajowego: memorandum informacyjne (art. 37b)
+  — ODRĘBNY, obszerniejszy dokument
+- Powyżej progu krajowego: pełny prospekt
+- Wyjątek "150 osób" jest NIEZALEŻNY od wartości oferty, Z
+  wymogiem SUMOWANIA adresatów przy kolejnych ofertach w 12
+  miesiącach
+
+**⭐⭐⭐ DODANO BARDZO ŚWIEŻĄ reformę "Listing Act"** — weszła w życie
+**5.06.2026**, ok. 2 miesiące PRZED tą weryfikacją, DOTĄD całkowicie
+nieobecna w module: nowy unijny pułap 12 mln EUR (art. 3 ust. 2
+lit. b Rozporządzenia), Z MOŻLIWOŚCIĄ zaostrzenia przez państwa
+członkowskie — Polska ROZWAŻAŁA ograniczenie do poniżej 5 mln EUR —
+⚠️ UCZCIWIE oznaczono jako NIEZWERYFIKOWANE, czy TA konkretna
+wartość ZOSTAŁA już ostatecznie wdrożona.
+
+**Rejestracja:** dr-06 SKILL.md v3.42→v3.43. Moduł urósł z 77 do
+128 linii.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12g — Kontynuacja: prawo bankowe/BFG — potwierdzone jako w większości poprawne, dodano brakujący termin przedawnienia + świeżą dyrektywę UE (uczciwie oznaczoną jako niepewną co do szczegółów)
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — sprawdzenie
+modułu prawa bankowego (148 linii).
+
+**GWARANCJA DEPOZYTÓW — w większości POTWIERDZONA jako poprawna**:
+tabela kwot (100 000 EUR standardowo, 200 000 EUR czasowo dla
+nieruchomości/odpraw) ZGODNA z 5+ zgodnymi źródłami, w tym
+BEZPOŚREDNIO gov.pl/finanse (Rząd 1).
+
+**DODANO brakujący termin przedawnienia** roszczeń deponenta — 5
+lat od dnia spełnienia warunku gwarancji.
+
+**⚠️ DODANO OSTRZEŻENIE o świeżej dyrektywie UE** — formalnie
+przyjętej 30.03.2026 (dokument Rady PE-CONS 19/26), ZMIENIAJĄCEJ
+dyrektywę 2014/49/UE w zakresie ochrony depozytów — ⚠️ UCZCIWIE
+oznaczono, że SAMA TREŚĆ merytorycznych zmian NIE ZOSTAŁA
+zweryfikowana w tej sesji (dostępny dokument to głównie część
+proceduralna), a termin transpozycji do prawa polskiego
+prawdopodobnie JESZCZE NIE upłynął — dodano jako punkt startowy do
+DALSZEGO badania, NIE jako rozstrzygniętą treść.
+
+**Rejestracja:** dr-06 SKILL.md v3.43→v3.44.
+
+### WNIOSEK METODOLOGICZNY
+
+Ten przypadek POKAZUJE wartość UCZCIWEGO oznaczania GRANIC własnej
+wiedzy — ZAMIAST zgadywać TREŚĆ nowej dyrektywy NA PODSTAWIE
+skąpych, PROCEDURALNYCH fragmentów, DODANO jawne OSTRZEŻENIE i
+KONKRETNY dalszy krok badawczy.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12h — Kontynuacja: limit płatności gotówkowych — uzupełniono jawnie zasygnalizowaną lukę (art. 22p PIT / art. 15d CIT), potwierdzono wysoką jakość reszty modułu
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — sprawdzenie
+modułu limitu płatności gotówkowych (102 linie).
+
+**USTALENIE: moduł jest już WYSOKIEJ jakości** — samoświadomy, z
+dobrze udokumentowaną historią nieudanej próby obniżenia limitu do
+8000 zł i nadchodzącą zmianą unijną (AML 2027) — WYPEŁNIONO
+WYŁĄCZNIE JEDEN, jawnie oznaczony w module brak.
+
+**DODANO konkretny artykuł** — art. 22p ustawy PIT / art. 15d
+ustawy CIT — zweryfikowany w 9+ zgodnych źródłach, w tym dosłowny
+tekst przepisu i interpretacja indywidualna KIS. DODATKOWO
+uzupełniono:
+- Mechanizm korekty przy zmianie formy płatności PO ujęciu w
+  kosztach (zmniejszenie kosztów LUB zwiększenie przychodów)
+- Precyzujące stanowisko MF: OSTATECZNE uregulowanie przelewem
+  (nawet po wcześniejszej płatności gotówkowej) SPEŁNIA warunek
+- Praktyczna definicja "transakcji" z interpretacji KIS, z
+  konkretnymi przykładami (umowa ramowa = jedna transakcja,
+  tankowanie = odrębne transakcje za każdym razem)
+
+**Rejestracja:** moduł zaktualizowany do v1.1.0. dr-06 SKILL.md
+v3.44→v3.45.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12i — Kontynuacja: doradcy podatkowi — konkretne szczegóły reformy 2026 (togi, opłata cukrowa/"od małpek", umowa cywilnoprawna)
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — sprawdzenie
+modułu doradców podatkowych (185 linii).
+
+**USTALENIE: numer aktu POPRAWNY** (Dz.U. 2025 poz. 1882), moduł
+już WCZEŚNIEJ jawnie oznaczał "WERYFIKUJ dokładny zakres
+rozszerzenia" — WYPEŁNIONO tę lukę.
+
+**DODANO konkretne szczegóły reformy**, zweryfikowane w 7+
+zgodnych źródłach, w tym bezpośrednio ISAP:
+
+- Wejście w życie: 1.03.2026, z częściowym "rozsunięciem w czasie"
+- ⭐⭐ Rozszerzenie na opłaty publiczne: opłata cukrowa (POWIĄZANIE z
+  już istniejącym modułem akcyzowym) i opłata "od małpek" (potoczna
+  nazwa opłaty od miniaturowych butelek alkoholu)
+- Nowa podstawa świadczenia usług: umowa cywilnoprawna
+- Wymóg noszenia togi przy określonych czynnościach (zakres nie w
+  pełni zweryfikowany, oznaczono jako punkt startowy)
+- ⭐⭐ Przepis przejściowy: 12-miesięczny okres, w którym podmioty
+  wcześniej niewłaściwe mogą nadal wykonywać nowo objęte czynności
+- Reforma Komisji Egzaminacyjnej (70 członków, wymóg 5-letniego
+  doświadczenia dla części składu)
+
+**Rejestracja:** dr-06 SKILL.md v3.45→v3.46.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12j — Kontynuacja: biegli rewidenci — wypełniono jawnie oznaczoną lukę harmonogramu ESG/CSRD, z uczciwie odnotowaną, pozostałą niepewnością co do progów
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — sprawdzenie
+modułu biegłych rewidentów (189 linii), gdzie moduł SAM jawnie
+prosił o świeżą weryfikację harmonogramu ESG.
+
+**DODANO kompleksowy, aktualny harmonogram**, zweryfikowany w 8+
+zgodnych, BARDZO aktualnych źródłach 2026 r.:
+
+- ⭐⭐ Rozróżnienie DWÓCH nakładających się reform: "stop-the-clock"
+  (2025/794, wyłącznie przesunięcie terminów) vs "Omnibus I"
+  (2026/470, substancyjne zawężenie zakresu podmiotowego)
+- Fala 2 (duże jednostki): przesunięta z 2026 na 2028 (za 2027)
+- Fala 3 (MŚP notowane): przesunięta z 2027 na 2029 (za 2028)
+- ⭐⭐⭐ Zawężenie na przyszłość: od raportowania za lata OD 2027 —
+  tylko NAJWIĘKSZE firmy (>1000 pracowników + próg przychodowy)
+- Dobrowolne zwolnienie dla podmiotów "wypadających" z nowego,
+  zawężonego zakresu za lata 2025-2026
+- Etapy polskiej implementacji (grudzień 2024, lipiec 2025, luty
+  2026)
+
+**⚠️ UCZCIWIE ODNOTOWANA, POZOSTAŁA niepewność**: różne źródła
+podają RÓŻNIĄCE się konkretne progi przychodowe dla nowego,
+zawężonego kryterium (50 mln EUR vs 450 mln EUR) — NIE
+rozstrzygnięto arbitralnie, KTÓRA wartość jest ostatecznie
+poprawna, dodano jawne zalecenie dalszej weryfikacji.
+
+**Rejestracja:** dr-06 SKILL.md v3.46→v3.47.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12k — Kontynuacja: KAS — dodano terminy i mechanizm przekształcenia kontroli w postępowanie, kluczowy dotąd nieobecny element
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — sprawdzenie
+modułu kontroli celno-skarbowej (185 linii, już dobra struktura).
+
+**ZNALEZIONA, GENUINE LUKA:** brak jakichkolwiek terminów kontroli
+lub mechanizmu przekształcenia w postępowanie podatkowe — kluczowy,
+praktyczny element procedury.
+
+**DODANO sekcję 3a**, zweryfikowaną w 7+ zgodnych źródeł, w tym
+BEZPOŚREDNIO dosłowny tekst art. 83 ustawy o KAS (OpenLEX) i
+orzecznictwo NSA:
+
+- Termin zakończenia kontroli: 3 miesiące od wszczęcia,
+  przedłużalny postanowieniem bez prawa zażalenia
+- Mechanizm zakończenia: wynik/protokół → 14 dni na korektę → brak
+  korekty = przekształcenie w postępowanie
+- ⭐⭐⭐ Termin przekształcenia: 6 miesięcy od zakończenia kontroli
+  (potwierdzone wyrokiem NSA I FSK 1264/21)
+- Ciągłość organu: ten sam naczelnik prowadzi całość sprawy
+- Szczególne przypadki: rozwiązanie kontrolowanej spółki w trakcie
+  procedury (kontrola wobec byłych wspólników), utrata statusu PGK
+- Prawa podatnika przy przekroczeniu terminu: ponaglenie, następnie
+  skarga do WSA
+
+**Rejestracja:** dr-06 SKILL.md v3.47→v3.48.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12l — Kontynuacja: UCC-taryfa-celna — dodano przedawnienie i płatność długu celnego, dotąd tylko wzmiankowane w zakresie
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — sprawdzenie
+modułu UCC-taryfa-celna (187 linii).
+
+**ZNALEZIONA LUKA:** "dług celny" był wymieniony W samym ZAKRESIE
+modułu, ALE bez ŻADNEJ konkretnej treści.
+
+**DODANO sekcję 2a**, zweryfikowaną bezpośrednio dosłownym tekstem
+art. 103/108 UCC oraz orzecznictwem TSUE (sprawa C-39/20):
+
+- ⭐⭐⭐ Podstawowy termin powiadomienia: 3 lata od powstania długu
+- ⭐⭐ Wydłużony termin dla długu powiązanego z czynem karalnym: 5-10
+  lat (zgodnie z prawem krajowym) — uczciwie oznaczono, że KONKRETNA
+  polska implementacja tego przedziału nie została zweryfikowana
+- Dwa przypadki zawieszenia terminu (odwołanie, uprzednie
+  poinformowanie o przyczynach)
+- ⭐⭐⭐ Termin zapłaty: 10 dni od powiadomienia — Z rozróżnieniem od
+  ODRĘBNEGO, 14-dniowego terminu na samo zaksięgowanie przez organ
+  (dwie różne czynności, łatwe do pomylenia)
+
+**Rejestracja:** dr-06 SKILL.md v3.48→v3.49.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12m — Kontynuacja: podatki sektorowe — naprawiono lukę SYNCHRONIZACJI międzymodułowej (opłata cukrowa) + dodano konkretne stawki podatku od sprzedaży detalicznej z historią sporu przed TSUE
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — sprawdzenie
+modułu podatków sektorowych (221 linii, pięć odrębnych podatków).
+
+**⭐⭐ ZNALEZIONA LUKA SYNCHRONIZACJI: sekcja D (opłata cukrowa)
+CYTOWAŁA DOKŁADNIE tę SAMĄ sporną kwestię weta prezydenckiego,
+KTÓRĄ już WCZEŚNIEJ rozstrzygnięto w mod-ustawa-akcyzowa-i-clo-
+UCC.md (transza 2026-08-11f), ALE nigdy NIE wróciła synchronizacja
+DO TEGO, DRUGIEGO modułu.** NAPRAWIONE — dodano ROZSTRZYGNIĘCIE Z
+odesłaniem DO pełnego uzasadnienia W module źródłowym.
+
+**SEKCJA E (podatek od sprzedaży detalicznej) — DODANO konkretne
+stawki**, zweryfikowane w 5+ zgodnych źródłach, w tym z 3 tygodni
+przed weryfikacją: kwota wolna 17 mln zł/miesiąc, próg 170 mln zł,
+stawki 0,8%/1,4%.
+
+**⭐⭐ DODATKOWO ZNALEZIONY, wartościowy kontekst HISTORYCZNY:**
+Komisja Europejska UZNAŁA pierwotnie ten podatek za NIEDOZWOLONĄ
+pomoc publiczną — TSUE W WYROKU z 16.05.2019 (T-836/16 i T-624/17)
+STWIERDZIŁ NIEWAŻNOŚĆ decyzji Komisji — Polska WYGRAŁA ten spór.
+
+**Rejestracja:** dr-06 SKILL.md v3.49→v3.50.
+
+### WNIOSEK METODOLOGICZNY
+
+Znalezisko synchronizacji POTWIERDZA WARTOŚĆ regularnego
+SPRAWDZANIA, czy rozstrzygnięcie DOKONANE W jednym module ZOSTAŁO
+POPRAWNIE ODZWIERCIEDLONE we WSZYSTKICH innych miejscach
+CYTUJĄCYCH TĘ SAMĄ, sporną kwestię — POJEDYNCZE rozstrzygnięcie NIE
+GWARANTUJE automatycznej propagacji do POWIĄZANYCH modułów.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12n — Kontynuacja: UFP/NIK/RIO — dodano dedykowaną treść RIO, dotąd tylko przelotnie wzmiankowaną mimo obietnicy w tytule modułu
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — sprawdzenie
+modułu UFP/NIK/RIO (262 linie), już z rozbudowaną sekcją NIK.
+
+**ZNALEZIONA LUKA — TA SAMA logika co wcześniej znaleziona
+asymetria NIK vs RIO**: moduł MA W TYTULE "NIK-RIO", MA obszerną,
+dedykowaną sekcję 11 o NIK (dodaną 21.07.2026), ALE RIO było
+WYŁĄCZNIE wzmiankowane przelotnie (8 wystąpień, ŻADNA dedykowana
+sekcja).
+
+**DODANO sekcję 11z — dedykowana treść RIO**, zweryfikowaną w 7+
+zgodnych źródłach, w tym BEZPOŚREDNIO dosłowny tekst ustawy o RIO:
+
+- Organizacja: kolegium izby + komisja orzekająca ws. dyscypliny
+  finansów publicznych, podległość prezesowi RM
+- Zakres kontroli uchwał JST: budżet, zobowiązania wpływające na
+  dług, dotacje, podatki lokalne, absolutorium
+- ⭐⭐⭐ Dwupoziomowy mechanizm nadzorczy: naruszenie istotne
+  (nieważność) vs nieistotne (tylko wskazanie naruszenia), ze
+  szczególnym trybem dla uchwał budżetowych (wskazanie sposobu i
+  terminu usunięcia PRZED dalszymi działaniami)
+- ⭐⭐⭐ NAJMOCNIEJSZE uprawnienie: jeśli JST nie uchwali budżetu do
+  31 stycznia, RIO SAMA ustala budżet tej jednostki do końca lutego
+- Działalność opiniodawcza (WPF, prawidłowość planowanej kwoty
+  długu) i raport o stanie gospodarki finansowej
+
+**Rejestracja:** dr-06 SKILL.md v3.50→v3.51.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12o — Kontynuacja: KUP-odliczenia potwierdzony jako w pełni opracowany; VAT-klasyfikacja — dodano gastronomię/catering ze świeżym wyrokiem NSA (dieta pudełkowa, lipiec 2026)
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — sprawdzenie
+dwóch modułów.
+
+**mod-odliczenia-uzytek-mieszany-firma-prywatny-KUP.md — POTWIERDZONY
+jako JUŻ w pełni opracowany** (323 linie, dedykowana sesja
+kompletności z 21.07.2026, z utrwalonym orzecznictwem NSA i
+konkretnymi kwotami ryczałtu 250/400 zł) — BEZ wymuszania sztucznej
+luki.
+
+**mod-VAT-klasyfikacja-produktow — DODANO przypadek 2.6:
+gastronomia/catering**, JEDEN z NAJCZĘŚCIEJ spornych obszarów VAT w
+Polsce, dotąd CAŁKOWICIE nieobecny mimo istniejącej bazy
+przypadków dla innych kategorii — zweryfikowano w 8+ zgodnych,
+BARDZO aktualnych źródeł:
+
+- ⭐⭐⭐ Kluczowe kryterium (TSUE C-703/19): DLA kwalifikacji jako
+  usługa (8%) NIE liczy się SPOSÓB przygotowania — liczy się, CZY
+  towarzyszą USŁUGI wspomagające o charakterze PRZEWAŻAJĄCYM — PKWiU
+  SAMO w sobie nie ma decydującego znaczenia
+- Orientacyjna mapa stawek: 8% (posiłki z obsługą), 5% (gotowe
+  produkty pakowane bez usługi), 23% (napoje, bezwzględnie, Z
+  wyjątkiem zestawu)
+- ⭐⭐⭐ ŚWIEŻY, konkretny case: wyrok NSA (lipiec 2026) o "diecie
+  pudełkowej" — potwierdzone, że to USŁUGA (8%), nie dostawa towaru,
+  mimo że danie jest praktycznie gotowe — NSA wprost odrzucił
+  argument, że wymieszanie/podgrzanie oznacza brak gotowości
+- Nadchodząca zmiana (1.07.2026): napoje energetyczne do 23%
+- Powiązane orzeczenie TSUE C-497/21: samo istnienie stolików już
+  nie determinuje automatycznie 8%
+
+**Rejestracja:** dr-06 SKILL.md v3.51→v3.52.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12p — Kontynuacja: VAT-klasyfikacja — dodano suplementy diety, bardzo świeża, masowa fala zmian WIS (1.07.2026, ~6 tygodni przed weryfikacją)
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — dalsze badanie
+podobnych przypadków spornej klasyfikacji VAT.
+
+**DODANO przypadek 2.7 — suplementy diety**, zweryfikowany w 5+
+zgodnych, BARDZO aktualnych źródeł (jedno sprzed tygodnia):
+
+- ⭐⭐⭐ Trzy możliwe stawki (5%/8%/23%) w zależności od szczegółowego
+  składu — spór klasyfikacyjny między CN 2106 (8%) a CN 2202,
+  klasyfikowanym jako "napój" gdy udział soku <20% (23%)
+- ⭐⭐⭐ BARDZO ŚWIEŻE wydarzenie: 1.07.2026 Dyrektor KIS zmienił
+  wcześniej wydaną WIS z 23% na 8%, w wyniku publikacji nowych not
+  wyjaśniających do CN przez Komisję Europejską (13.02.2026) —
+  MASOWA skala: ponad 20 decyzji zmieniających w ciągu jednego
+  miesiąca, nie pojedynczy przypadek
+- Praktyczna rekomendacja MDDP: własna WIS zamiast polegania na
+  ogólnych regułach, z zastrzeżeniem że WIS NIE daje gwarancji
+  trwałości
+- ⚠️ Uczciwie oznaczono niepotwierdzony sygnał (jedno źródło) o
+  planowanym wzroście stawki dla wyrobów medycznych z 8% do 10%
+
+**Rejestracja:** dr-06 SKILL.md v3.52→v3.53.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12q — Napoje energetyczne i obchodzenie zakazu sprzedaży nieletnim (dr-10) + publiczna baza WIS/Eureka dodana jako źródło (dr-06)
+
+**Kontekst:** Na żądanie użytkownika — (1) zbadanie napojów
+energetycznych i sposobu obchodzenia zakazu sprzedaży dzieciom, (2)
+dodanie jako źródła publicznej bazy WIS, wcześniej wielokrotnie
+wspominanej jako narzędzie ochronne bez podania konkretnego adresu.
+
+**1. NAPOJE ENERGETYCZNE (dr-10/mod-ustawa-bezpieczenstwo-
+zywnosci.md, moduł 1781 linii, temat DOTĄD całkowicie nieobecny) —
+dodano kompleksową sekcję, zweryfikowaną w 8+ zgodnych źródłach:**
+
+- Podstawa: ustawa z 17.08.2023, zakaz sprzedaży osobom <18 lat,
+  całkowity zakaz w szkołach i automatach vendingowych (niezależnie
+  od wieku)
+- ⭐⭐⭐⭐ GŁÓWNY, GENUINE sposób "obejścia" — NIE trik czarnorynkowy,
+  LECZ WADA LEGISLACYJNA: pierwotne przepisy BYŁY przez PONAD 2 LATA
+  prawnie NIEWYKONALNE z powodu braku wymaganej notyfikacji Komisji
+  Europejskiej — sądy UMARZAŁY postępowania z TEGO powodu — każdy
+  ścigany sprzedawca MÓGŁ podnieść ten zarzut proceduralny i uniknąć
+  odpowiedzialności NIEZALEŻNIE od faktycznego naruszenia
+- Międzynarodowy wymiar: USA formalnie wniosły o zniesienie CAŁEGO
+  zakazu podczas procedury notyfikacyjnej; UK zgłosiło zastrzeżenia
+  co do samego braku notyfikacji
+- Naprawa: ponowne uchwalenie 17.10.2025 z prawidłową notyfikacją,
+  podpis prezydencki grudzień 2025, pełna moc prawna od 2026
+- Sankcje: 2000 zł dla sprzedawcy vs 200 000 zł/ograniczenie
+  wolności dla producenta bez etykiety — znacząca asymetria
+
+**2. BAZA WIS/EUREKA (dr-06/mod-VAT-klasyfikacja-produktow) —
+dodano konkretny adres i opis, zweryfikowany w 6+ zgodnych
+źródłach:** https://eureka.mf.gov.pl/ — publiczna, bezpłatna, bez
+loginu, oficjalny system MF/KIS, agregujący WIS/WIA/interpretacje/
+orzecznictwo — Z uczciwie odnotowanym zastrzeżeniem praktycznym
+(zgłaszane problemy Z efektywnością samej wyszukiwarki).
+
+**Rejestracja:** dr-06 SKILL.md v3.53→v3.54, dr-10 SKILL.md
+v3.32→v3.33.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12r — PODZIAŁ mod-ustawa-bezpieczenstwo-zywnosci (NOTA-4, przekroczenie progu 400 linii ~4,6x) — na żądanie użytkownika, po dodaniu napojów energetycznych
+
+**Kontekst:** Użytkownik ZAUWAŻYŁ, że moduł dr-10/mod-ustawa-
+bezpieczenstwo-zywnosci.md, DO KTÓREGO dodano sekcję o napojach
+energetycznych W poprzedniej turze, JEST bardzo DUŻY — POPROSIŁ o
+podział ZGODNIE Z zaleceniami audytu.
+
+**ZNALEZIONA, DOKŁADNA REGUŁA:** audyt-systemu-v4/references/
+CHECKLIST-DEDUP.md, NOTA-4: "moduł >400 linii = KANDYDAT do audytu
+PRZY NAJBLIŻSZEJ zmianie TEGO modułu (nie WYMAGA dedykowanej sesji
+— 'przy okazji')". MODUŁ miał **1863 LINIE** — PRZEKROCZENIE progu
+~4,6-krotne.
+
+**⭐⭐⭐ PRZY OKAZJI ANALIZY STRUKTURY — ZNALEZIONO DODATKOWY, GENUINE
+problem: DWIE PARY zduplikowanych sekcji** (obowiązkowe szczepienia
+zwierząt — linie 1229 i 1365; strefy ASF — linie 1150 i 1416), OBIE
+DODANE tego SAMEGO dnia (2026-07-30) POD RÓŻNYMI tytułami —
+SPRAWDZONO dokładnie: to NIE były CZYSTE duplikaty, KAŻDA para MIAŁA
+UNIKALNE elementy W OBU wersjach (np. szczepienia: wersja #1 miała
+podstawę PRAWNĄ kary dla WŁAŚCICIELA, wersja #2 miała PROGRAM
+szczepień LISÓW i KARY dla WETERYNARZY) — SCALONO każdą parę W JEDNĄ,
+kompletną WERSJĘ, zachowując WSZYSTKIE unikalne elementy Z OBU,
+PRZED wykonaniem właściwego podziału pliku.
+
+**PODZIAŁ na TRZY tematycznie spójne moduły** (wg trzech odrębnych
+domen: konsument/żywność vs. weterynaria/hodowla vs. administracyjne
+zezwolenia/gatunki):
+1. `mod-ustawa-bezpieczenstwo-zywnosci.md` (zachowana nazwa) — 926 l.
+   — rdzeń: żywność, sanepid, oznaczenia, substancje zabronione,
+   import, napoje energetyczne
+2. `mod-ustawa-hodowla-zdrowie-zwierzat.md` (NOWY) — 632 l. —
+   hodowla zachowawcza, ubój rytualny halal/koszer, zwierzęta
+   futerkowe, hodowla rasowa, ASF, szczepienia, KROPiK
+3. `mod-ustawa-hodowla-zezwolenia-gatunki.md` (NOWY) — 308 l. —
+   pseudohodowla, zezwolenia na gatunki, gatunki inwazyjne,
+   odpowiedzialność za ucieczkę zwierząt
+
+**WERYFIKACJA KOMPLETNOŚCI:** sprawdzono WSZYSTKIE 29 oryginalnych
+tematów (nagłówków ##) — POTWIERDZONO obecność KAŻDEGO w którymś z
+trzech nowych plików, ŻADEN temat NIE zaginął W procesie podziału.
+
+**Rejestracja:** dr-10/SKILL.md — licznik modułów 29→31, wpis o
+podziale; audyt-systemu-v4/CHECKLIST-DEDUP.md — nowy wiersz w
+tabeli NOTA-4. dr-10 SKILL.md v3.33→v3.34.
+
+### WNIOSEK METODOLOGICZNY
+
+Podział DUŻEGO modułu jest DOBRĄ okazją do WYKRYCIA ukrytych
+duplikatów — sama ANALIZA STRUKTURY nagłówków PRZED podziałem
+UJAWNIŁA problem, KTÓRY mógłby POZOSTAĆ niezauważony, gdyby
+POPRZESTAĆ na mechanicznym POCIĘCIU pliku bez WCZEŚNIEJSZEGO
+przeglądu treści.
+
+### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md — wzrost o 2 z podziału)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12r — Potwierdzenie: mod-ustawa-bezpieczenstwo-zywnosci JUŻ podzielony zgodnie z NOTA-4 (praca z luki widoczności) + naprawiona nieaktualna MAPA-AKTOW
+
+**Kontekst:** Na żądanie użytkownika — sprawdzenie, czy moduł, do
+którego dodano sekcję o napojach energetycznych (poprzednia
+transza), wymaga podziału zgodnie z zaleceniami audytu (próg NOTA-4
+w CHECKLIST-DEDUP.md, >400 linii = kandydat, >600 = priorytet).
+
+**USTALENIE: podział JUŻ ZOSTAŁ WYKONANY** — w LUCE widoczności
+między poprzednią transzą (dodanie napojów energetycznych, moduł
+1781 linii) a TĄ weryfikacją. Potwierdzono BEZPOŚREDNIO w
+CHECKLIST-DEDUP.md (NOTA-4): "mod-ustawa-bezpieczenstwo-zywnosci
+(DR-10) | 1863 | ✅ ZROBIONE 08-12: 926 linii" — WYDZIELONO DWA nowe
+moduły: mod-ustawa-hodowla-zdrowie-zwierzat.md (632 l. — hodowla
+zachowawcza, ubój rytualny, zwierzęta futerkowe, ASF, szczepienia,
+KROPiK) oraz mod-ustawa-hodowla-zezwolenia-gatunki.md (308 l. —
+pseudohodowla, zezwolenia gatunkowe, gatunki inwazyjne). PRZY
+OKAZJI usunięto DWIE pary zduplikowanych sekcji (szczepienia +
+strefy ASF, każda wcześniej dodana DWUKROTNIE 30.07.2026 pod
+różnymi tytułami).
+
+**Weryfikacja SPÓJNOŚCI po podziale:** oba nowe pliki ISTNIEJĄ na
+dysku (631/307 linii — zgodne Z NOTA-4 co do rzędu wielkości), SEKCJA
+o napojach ENERGETYCZNYCH (dodana W poprzedniej transzy) PRAWIDŁOWO
+POZOSTAŁA w GŁÓWNYM module (925 linii PO podziale — temat
+KONSUMENCKI, NIE weterynaryjny, POPRAWNIE nie wydzielony), SKILL.md
+JUŻ zaktualizowany Z odesłaniami DO obu nowych modułów.
+
+**⚠️ ZNALEZIONA I NAPRAWIONA dodatkowa luka: MAPA-AKTOW.md
+POZOSTAWAŁA NIEAKTUALNA** — wciąż OPISYWAŁA stan SPRZED podziału
+("36 sekcji", jeden MODUŁ, BEZ wzmianki O rozdzieleniu) — TA SAMA
+LOGIKA co wcześniej znalezione luki SYNCHRONIZACJI międzymodułowej
+(transza podatki SEKTOROWE/opłata cukrowa) — NAPRAWIONO: dodano
+odesłania DO obu nowych modułów Z rozbiciem TEMATYCZNYM, ORAZ
+uwzględniono NOWO dodaną sekcję O napojach energetycznych.
+
+**Rejestracja:** dr-10 SKILL.md — bump wersji (3.34 ZASTANE →
+3.35 za edycję MAPA-AKTOW).
+
+### WNIOSEK METODOLOGICZNY
+
+DRUGI już przypadek W tej sesji, GDZIE dokumentacja WEWNĘTRZNA
+(CHECKLIST-DEDUP/NOTA-4) WYPRZEDZIŁA aktualizację POWIĄZANEJ mapy
+aktów (MAPA-AKTOW) — POTWIERDZA to WARTOŚĆ regularnego SPRAWDZANIA
+SPÓJNOŚCI między RÓŻNYMI plikami dokumentującymi TEN SAM fakt, NIE
+TYLKO między treścią modułów.
+
+### BILANS CAŁOŚCIOWY (mianownik: 731+2=733 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+| Nowe moduły z podziału (potwierdzone) | 2 |
+
+## AUDYT-2026-08-12s — Kontynuacja: definicje/interpretacje podatkowe — naprawiono URL Eureka + odesłania do rozbudowanej rezydencji + naprawiono NIEZWIĄZANY, przedistniejący artefakt cyrylicki
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — sprawdzenie
+modułu definicji/interpretacji podatkowych (403 linie), przy okazji
+sprawdzono ewentualne nakładanie z treścią dodaną wcześniej dziś
+(rezydencja PIT/CIT, baza WIS).
+
+**ZNALEZIONE, KOMPLEMENTARNE (nie zdublowane) sekcje:**
+
+1. Sekcja 2B (rezydencja podatkowa) — SKRÓCONA, punktowa wersja z
+   "weryfikuj" placeholderami — DODANO odesłanie DO znacznie
+   bogatszej treści dodanej DZIŚ w PIT/CIT (konkretny wyrok NSA,
+   łamana rezydencja, mechanizm konfliktu międzypaństwowego)
+
+2. Sekcja 6 (baza Eureka) — BOGATSZA niż moja wcześniejsza wersja
+   (dekoder sygnatur KIS wg miasta) — ZNALEZIONO jednak NIEPRECYZYJNY
+   adres URL "podatki.gov.pl/eureka" — NAPRAWIONO na potwierdzony w
+   6+ źródłach "eureka.mf.gov.pl" — DODANO RÓWNIEŻ zastrzeżenie
+   praktyczne (cytat prof. Morawskiego UMK o trudnościach z
+   wyszukiwarką)
+
+**⚠️ PRZY OKAZJI, PODCZAS RUTYNOWEJ weryfikacji cyrylicy —
+ZNALEZIONY i NAPRAWIONY NIEZWIĄZANY, PRZEDISTNIEJĄCY artefakt**:
+"nabyте" (cyrylickie "т"+"е") zamiast "nabyte" W sekcji 2D (ulga
+B+R) — SEKCJA, KTÓREJ NIE dotykałem W tej turze — POTWIERDZA to
+WARTOŚĆ konsekwentnego, RUTYNOWEGO sprawdzania CAŁEGO pliku pod
+kątem cyrylicy PO każdej edycji, NIEZALEŻNIE od zakresu WŁASNYCH
+zmian — TAKIE sprawdzenie WYCHWYCIŁO błąd SPRZED bieżącej sesji.
+
+**Rejestracja:** dr-06 SKILL.md v3.54→v3.55.
+
+### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12t — Kontynuacja: alkohol/tytoń — wzbogacenie jawnie oznaczonej flagi (kara za bimbrownictwo, 1 vs 3 lata) o pełny, sprzeczny kontekst źródłowy
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — sprawdzenie
+modułu alkohol/tytoń (519 linii, JUŻ wcześniej bardzo dobrze
+rozbudowany z jawnymi CHANGELOG-ami).
+
+**USTALENIE: moduł MA już WYSOKI standard** — jawna flaga
+niepewności co do górnej granicy kary za bimbrownictwo (1 rok vs 3
+lata). ZBADANO to DOKŁADNIE w 5+ źródłach.
+
+**WYNIK — NIE PROSTE rozstrzygnięcie, LECZ bogatszy KONTEKST:** to
+NIE przypadkowa rozbieżność, TYLKO odzwierciedlenie RZECZYWISTEGO,
+wieloetapowego procesu LEGISLACYJNEGO podnoszenia kary — ALE
+znalezione źródła SĄ WZAJEMNIE SPRZECZNE co do TEGO, KTÓRY etap
+jest AKTUALNIE obowiązujący:
+- Historycznie (uchwała SN I KZP 23/04 z 2004, ustawa z 2006): "do
+  roku"
+- Źródło prasowe z 2022 (farmer.pl): twierdzi, że "OBECNA" kara TO
+  JUŻ 3 lata, nowelizacja MA podnieść do 8
+- ⭐ Dokument RZĄDOWY (gov.pl/premier): OPISUJE odwrotnie — stan
+  "obecny" TO wciąż 1 rok, propozycja PODNOSI do 3 lat
+
+**DECYZJA METODOLOGICZNA:** NIE rozstrzygnięto arbitralnie —
+WZBOGACONO flagę o PEŁNY, przejrzysty opis SPRZECZNOŚCI (z
+możliwymi WYJAŚNIENIAMI: różne, KOLEJNE etapy nowelizacji LUB błąd
+dziennikarski w JEDNYM źródle), z KONKRETNĄ wskazówką dalszego
+kroku (sprawdzić, czy przepis NIE PRZENIÓSŁ SIĘ z ustawy 2001 do
+nowszej z 2006, art. 44, gdzie RÓWNIEŻ toczyły się prace nad
+zaostrzeniem do 8 lat dla typu kwalifikowanego).
+
+**Rejestracja:** dr-06 SKILL.md v3.55→v3.56.
+
+### WNIOSEK METODOLOGICZNY
+
+Nie każda znaleziona rozbieżność DA SIĘ rozstrzygnąć jednoznacznie
+PRZY ROZSĄDNYM nakładzie czasu — WARTOŚCIOWSZE od WYMUSZONEGO
+rozstrzygnięcia JEST UCZCIWE przedstawienie PEŁNEGO kontekstu
+sprzeczności Z konkretnym dalszym krokiem WERYFIKACYJNYM, niż
+ARBITRALNY wybór JEDNEJ wersji.
+
+### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12u — Kontynuacja z częściowo pokrytymi: Ordynacja podatkowa — dodano nadpłatę (art. 72-80), dotąd całkowicie nieobecną mimo praktycznej powszechności
+
+**Kontekst:** Kontynuacja na żądanie użytkownika ("kontynuuj z
+częściowo pokrytymi") — Ordynacja podatkowa wcześniej oznaczona
+jako 🟡 (tylko GAAR opracowany).
+
+**USTALENIE WSTĘPNE:** moduł JEST już znacznie bardziej rozbudowany
+niż wcześniej sądzono (485 linii: przedawnienie, interpretacje,
+GAAR, odpowiedzialność zarządu, KKS czynny żal, zabezpieczenie,
+odsetki) — ALE "korekta deklaracji" wymieniona W zakresie modułu
+BYŁA TYLKO wzmiankowana W schemacie procedury, BEZ dedykowanej
+treści o NADPŁACIE.
+
+**DODANO sekcję 4a — nadpłata podatku (art. 72-80)**, zweryfikowaną
+BEZPOŚREDNIO dosłownym tekstem art. 75-77 (potwierdzone 6+ zgodnymi
+źródłami, z numerem t.j. IDENTYCZNYM jak już cytowany w module —
+dobry sygnał spójności):
+
+- Wniosek o stwierdzenie nadpłaty (art. 75) — kto uprawniony
+  (podatnicy, płatnicy, inkasenci, byli wspólnicy spółki cywilnej,
+  PGK)
+- ⭐⭐ Mechanizm zaliczenia PRZED zwrotem (art. 76): nadpłata
+  najpierw pokrywa zaległości/odsetki/koszty upomnienia/bieżące
+  zobowiązania, dopiero potem faktyczny zwrot
+- ⭐⭐⭐ Sześć różnych terminów zwrotu (art. 77), w tym KLUCZOWA
+  praktyczna różnica: 3 miesiące dla zeznania papierowego vs TYLKO
+  45 dni dla e-deklaracji PIT — istotna zachęta do elektronicznego
+  składania
+- Zwrot nadwyżki zaliczek (art. 77a) z niedookreśloną przesłanką
+  "ważnego interesu podatnika"
+
+**Rejestracja:** dr-06 SKILL.md v3.56→v3.57.
+
+### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12v — Kontynuacja z częściowo pokrytymi: PIT — dodano podatek Belki (zyski kapitałowe), w tym zapowiadana reforma OKI od 2027
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — PIT, wcześniej
+zasygnalizowany jako brakujący podatek Belki (potwierdzone: tylko
+NAZWA formularza PIT-38 wzmiankowana, bez treści merytorycznej).
+
+**DODANO sekcję 4a — podatek Belki**, zweryfikowaną w 7+ zgodnych,
+BARDZO aktualnych źródeł, w tym BEZPOŚREDNIO OpenLEX (dosłowny tekst
+art. 30a):
+
+- Historia: nazwa od ministra Belki, 20%→19% w 2004 przy
+  rozszerzeniu na papiery wartościowe
+- ⭐⭐ Dwie odrębne podstawy: art. 30a (odsetki/dywidendy, pobierane U
+  ŹRÓDŁA przez płatnika) vs art. 30b (zyski ze sprzedaży,
+  rozliczane SAMODZIELNIE, PIT-38)
+- Zasady techniczne: FIFO obowiązkowe, kurs walutowy z dnia T-1
+- Obalone błędne przekonanie: zwykłe obligacje oszczędnościowe NIE
+  są automatycznie zwolnione
+- Cztery legalne sposoby ograniczenia: IKE, IKZE, PPK (istniejące)
+- ⭐⭐⭐ ⚡ OKI (Osobiste Konto Inwestycyjne) — planowane OD 2027,
+  uczciwie oznaczone jako WCIĄŻ na etapie zapowiedzi MF — zwolnienie
+  do 100 000 zł, z NOWĄ konstrukcją podatku ~0,71% rocznie od
+  aktywów powyżej limitu (zamiast 19% od zysku — CAŁKOWICIE inna
+  filozofia)
+
+**Rejestracja:** dr-06 SKILL.md v3.57→v3.58.
+
+### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12w — Najem/podatek od wynajmu (na żądanie użytkownika) — GŁÓWNA klasyfikacja już DOBRZE pokryta, uzupełniono konkretny próg i mechanizm dla małżonków + naprawiono nieprzepropagowany URL Eureka
+
+**Kontekst:** Na WYRAŹNE żądanie użytkownika — sprawdzenie, czy
+temat najmu i podatku od wynajmu jest pokryty W systemie.
+
+**USTALENIE WSTĘPNE: fundamentalna klasyfikacja BYŁA już DOBRZE
+pokryta** (mod-PIT + mod-interpretacje-definicje-podatkowe) — dwie
+kluczowe uchwały NSA (II FPS 1/21 — granica najem prywatny vs DG;
+III FPS 2/24 — stawka podatku od nieruchomości przy wynajmie) —
+ZWERYFIKOWANE wcześniej W tej sesji jako trafne.
+
+**ZNALEZIONA, KONKRETNA luka:** stawki ryczałtu (8,5%/12,5%) BYŁY
+wymienione W DWÓCH miejscach, ALE sam PRÓG decydujący, KIEDY
+stosuje SIĘ którą stawkę, NIGDZIE nie BYŁ podany. DODANO,
+zweryfikowane W 8+ zgodnych, BARDZO aktualnych źródeł:
+
+- Próg **100 000 ZŁ** rocznie, liczony ŁĄCZNIE dla WSZYSTKICH
+  nieruchomości podatnika
+- ⭐⭐ Istotna zmiana HISTORYCZNA od 1.07.2023: PRZED tą datą limit
+  BYŁ wspólny DLA małżonków, PO — KAŻDY MA WŁASNY limit 100 tys.,
+  DOMYŚLNIE po 50/50 (efektywnie 200 tys. łącznie), Z opcją
+  oświadczenia PRZENOSZĄCEGO całość NA jednego małżonka
+- ⭐ "Cicha" przewaga najmu prywatnego: CAŁKOWITE zwolnienie ze
+  składki zdrowotnej/ZUS, W PRZECIWIEŃSTWIE do wynajmu W ramach JDG
+
+**⚠️ PRZY OKAZJI znaleziony i naprawiony NIEPRZEPROPAGOWANY błąd
+URL Eureka** ("podatki.gov.pl/eureka" zamiast poprawnego
+"eureka.mf.gov.pl") — TA SAMA korekta, KTÓRĄ już wykonano W INNYM
+module, ALE NIE przeniosła SIĘ do TEGO miejsca — TRZECI już
+przypadek W tej sesji tego TYPU luki synchronizacji między
+modułami (PO opłacie cukrowej i URL Eureka W definicjach
+podatkowych).
+
+**Rejestracja:** dr-06 SKILL.md v3.58→v3.59.
+
+### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12x — Kontynuacja z częściowo pokrytymi: CIT — dodano reżim spółki holdingowej (PSH), dotąd całkowicie nieobecny mimo znaczenia strukturalnego
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — CIT, wcześniej
+oznaczony jako 🟡 (tylko rezydencja dodana).
+
+**ZNALEZIONA GENUINE LUKA:** zero wystąpień "podatkowa grupa
+kapitałowa"/"spółka holdingowa" w całym module — istotny mechanizm
+strukturalny całkowicie nieobecny.
+
+**DODANO sekcję 4a — spółka holdingowa (PSH, art. 24m-24o)**,
+zweryfikowaną w 7+ zgodnych źródłach, w tym BEZPOŚREDNIO
+interpretacje indywidualne KIS:
+
+- Cztery warunki definicji łącznie (forma prawna w tym PSA,
+  min. 10% udziałów, wykluczenie z PGK, mechanizm anty-trustowy)
+- Dwa zwolnienia: dywidendy (art. 24n) + zbycie udziałów (art. 24o,
+  z wymogiem oświadczenia 5 dni przed transakcją)
+- ⭐⭐⭐ Klauzula nieruchomościowa: brak zwolnienia gdy ≥50% aktywów
+  spółki zależnej to nieruchomości w Polsce
+- ⭐⭐⭐ Realny spór interpretacyjny: KIS wymaga spełnienia warunku
+  10% NA DZIEŃ zbycia, nie wystarczy później
+- Historia zmian: okres wymagany zmienił się z 1 roku (2022) na
+  2 lata (2023) — sporne dla transakcji przejściowych, z
+  rekomendacją strategii "zapłać i wystąpij o nadpłatę" (powiązanie
+  z wcześniej dodaną sekcją o nadpłacie w Ordynacji podatkowej)
+
+**Rejestracja:** dr-06 SKILL.md v3.59→v3.60.
+
+### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12y — Kontynuacja z częściowo pokrytymi: PCC — dodano szczegóły pożyczek, wcześniej zasygnalizowane jako nieznane
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — PCC/SD, konkretna
+luka zasygnalizowana WCZEŚNIEJ tego dnia ("PCC od pożyczek
+nieznane").
+
+**DODANO podsekcję o PCC od pożyczek**, zweryfikowaną w 7+
+zgodnych, BARDZO aktualnych źródeł, w tym BEZPOŚREDNIO
+podatki.gov.pl (Rząd 1, oficjalne Q&A):
+
+- Podstawowa zasada: 0,5%, rozlicza POŻYCZKOBIORCA
+- ⭐⭐⭐ Zwolnienie do 36 120 zł (art. 9 pkt 10 lit. c) — Z WAŻNYM
+  rozróżnieniem: krąg uprawnionych jest SZERSZY niż "grupa 0"
+  (obejmuje DODATKOWO zięcia/synową/teściów), ALE "grupa 0"
+  (bez limitu) dotyczy WYŁĄCZNIE darowizn, NIE pożyczek — częste
+  źródło pomyłek
+- Limit łączny liczony za 5 lat wstecz + rok bieżący
+- Powyżej limitu: zwolnienie WYMAGA dwóch warunków (termin 14 dni +
+  udokumentowany przelew, NIE gotówka)
+- ⭐⭐⭐ Termin 14 dni NIEPRZYWRACALNY — potwierdzone wprost w
+  oficjalnym Q&A
+- Sankcja karna 20% przy powołaniu się na niezgłoszoną/
+  nieudokumentowaną pożyczkę w toku kontroli
+- Krąg wyłączony ze zwolnienia: II grupa (ciotka/wujek/bratanek),
+  III grupa (konkubent) — zawsze 0,5%
+
+**Rejestracja:** dr-06 SKILL.md v3.60→v3.61.
+
+### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
+
+| Kategoria | Wynik |
+|---|---|
+| Flagi otwarte | 9 |
+
+## AUDYT-2026-08-12z — Kontynuacja z częściowo pokrytymi: ryczałt — dodano utratę prawa, kontrintuicyjny dwutorowy mechanizm
+
+**Kontekst:** Kontynuacja na żądanie użytkownika — ryczałt,
+wcześniej dodano składkę zdrowotną, tym razem próg 2 mln EUR był
+wzmiankowany, ale bez mechanizmu utraty prawa.
+
+**DODANO sekcję o utracie prawa do ryczałtu**, zweryfikowaną w 7+
+zgodnych, aktualnych źródeł, w tym BEZPOŚREDNIO cytowaną
+interpretacją KIS:
+
+- ⭐⭐⭐ KONTRINTUICYJNE rozróżnienie dwóch całkowicie różnych
+  mechanizmów: (1) przekroczenie limitu 2 mln EUR NIE powoduje
+  natychmiastowej utraty — dopiero od 1 stycznia następnego roku;
+  (2) określone zdarzenia (sprzedaż byłemu pracodawcy w zakresie
+  odpowiadającym etatowi — klasyczny mechanizm anty-B2B, lub
+  rozpoczęcie działalności wyłączonej) — utrata NATYCHMIASTOWA, od
+  dnia uzyskania przychodu
+- Mechanizm podziału przychodów w miesiącu zmiany + obowiązek spisu
+  z natury
+- Odrębny, niższy próg 200 tys. EUR dla kwartalnych wpłat
+- Mechanizm powrotu po utracie — wymaga nowego oświadczenia, nie
+  jest automatyczny
+
+**Rejestracja:** dr-06 SKILL.md v3.61→v3.62.
+
+### BILANS CAŁOŚCIOWY (mianownik: 733 pliki .md)
 
 | Kategoria | Wynik |
 |---|---|

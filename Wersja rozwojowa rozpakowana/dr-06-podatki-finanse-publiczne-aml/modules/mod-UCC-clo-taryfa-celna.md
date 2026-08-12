@@ -79,6 +79,63 @@ Rozdział 84 — Reaktory jądrowe, kotły, maszyny
 
 ---
 
+## 2a. ⭐⭐⭐ DŁUG CELNY — POWIADOMIENIE, PRZEDAWNIENIE, PŁATNOŚĆ
+(dodano 2026-08-12, na żądanie użytkownika — DOTĄD tylko
+WZMIANKOWANY w zakresie modułu, BEZ konkretnej treści)
+
+```
+⭐⭐⭐ TERMIN POWIADOMIENIA DŁUŻNIKA (art. 103 UCC) — PODSTAWOWY:
+  → O DŁUGU CELNYM NIE POWIADAMIA SIĘ dłużnika PO UPŁYWIE **3 LAT**
+    OD dnia POWSTANIA długu celnego — PO tym terminie dług NIE MOŻE
+    już zostać SKUTECZNIE zakomunikowany
+
+⭐⭐ WYDŁUŻONY termin — DŁUG POWSTAŁY W ZWIĄZKU Z CZYNEM KARALNYM: JEŻELI
+  dług celny POWSTAŁ W WYNIKU czynu, KTÓRY W CZASIE popełnienia
+  PODLEGAŁ sądowemu postępowaniu KARNEMU — 3-letni okres
+  PRZEDŁUŻA SIĘ (zgodnie Z prawem KRAJOWYM danego państwa
+  członkowskiego): MINIMALNIE do **5 LAT**, MAKSYMALNIE do
+  **10 LAT** — ⚠️ POLSKA implementacja TEGO przedziału (KONKRETNY
+  wybrany termin W polskim prawie) NIE zweryfikowana W tej sesji —
+  sprawdź AKTUALNE przepisy krajowe PRZED cytowaniem KONKRETNEJ
+  liczby lat W sprawie związanej Z przestępstwem
+
+⭐⭐ ZAWIESZENIE biegu TERMINU — DWA przypadki:
+  a) ZŁOŻENIE ODWOŁANIA (art. 44 UCC) — zawieszenie OBOWIĄZUJE OD
+     daty złożenia ODWOŁANIA PRZEZ CAŁY okres trwania postępowania
+     odwoławczego
+  b) ORGANY CELNE poinformowały dłużnika (art. 22 ust. 6 UCC) O
+     przyczynach, DLA których ZAMIERZAJĄ powiadomić O długu celnym
+     — zawieszenie OD daty tego POWIADOMIENIA DO końca okresu, W
+     KTÓRYM dłużnik MA możliwość PRZEDSTAWIENIA swojego punktu
+     widzenia
+
+⭐⭐⭐ TERMIN ZAPŁATY (art. 108 UCC) — PO powiadomieniu O długu:
+  → **10 DNI** OD daty powiadomienia dłużnika O długu celnym
+  → ⭐ SZCZEGÓLNY przypadek: GDY kwota NALEŻNOŚCI odpowiada KWOCIE
+    WPISANEJ do zgłoszenia CELNEGO — SAMO zwolnienie TOWARÓW przez
+    organ CELNY jest RÓWNOZNACZNE z powiadomieniem dłużnika O długu
+    celnym (termin 10 DNI liczy się WIĘC OD dnia zwolnienia
+    TOWARÓW, NIE od odrębnej decyzji)
+  → W INNYCH przypadkach: organ CELNY wydaje ODRĘBNĄ decyzję
+    określającą NALEŻNĄ kwotę
+  → ⚠️ ODRĘBNY, DŁUŻSZY termin dotyczy SAMEGO zaksięgowania
+    (rejestracji KSIĘGOWEJ) należności PRZEZ organ celny — **14
+    DNI** (NIE MYLIĆ z 10-dniowym terminem ZAPŁATY przez dłużnika —
+    TO DWA różne, NIEZALEŻNE terminy, dotyczące różnych CZYNNOŚCI)
+
+⭐ MOŻLIWOŚĆ PRZEDŁUŻENIA terminu ZAPŁATY: organy CELNE, NA WNIOSEK
+  dłużnika, MOGĄ przedłużyć TERMIN — SZCZEGÓLNIE gdy NALEŻNA kwota
+  została OKREŚLONA W TOKU kontroli PO zwolnieniu towarów
+
+Potwierdzone w 6+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
+tekst art. 103/108 UCC (lexlege.pl) oraz orzecznictwo TSUE (sprawa
+C-39/20, dot. WYKŁADNI art. 103 ust. 1 i 3 lit. b UCC — zawieszenie
+terminu, stosowanie W CZASIE przepisów regulujących PRZYCZYNY
+zawieszenia).
+```
+
+---
+
 ## 3. WARTOŚĆ CELNA
 
 ### Metody wyceny (art. 70–74 UCC) — hierarchia

@@ -1,6 +1,6 @@
 ---
 name: dr-06-podatki-finanse-publiczne-aml
-version: 3.40
+version: 3.62
 description: |
   DR-06: Podatki, Finanse Publiczne, AML
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -68,143 +68,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   od KC; nowelizacja znosi "wieczne przedawnienie" + wprowadza ugodę
   podatkową od 01.10.2026 (art. 70 i n. OP)
 
-## Moduły (30 łącznie — ✓ 30 OK, ☐ 0 STUB)
-
-**Aktualizacja 2026-08-11 — TRANSZA 3 UZUPEŁNIENIA LUK MAPY POKRYCIA
-DZIEDZINY AKCYZOWEJ — WSZYSTKIE POZYCJE 🔴 DOMKNIĘTE (ZASADA 11):**
-- `mod-ustawa-akcyzowa-i-clo-UCC.md` → v1.3.0: cztery ostatnie sekcje:
-  - **1j Przemieszczanie poza zawieszeniem — System e-DD** (art.
-    46a-46w) — mechanizm e-DD, termin 30 dni (węgiel: 47), potwierdzenie
-    odbioru, powiązanie z karą pieniężną art. 138u
-  - **1k Wyroby poza zawieszeniem — UDT** (art. 77-83a) —
-    uproszczony dokument towarzyszący (3 karty), obowiązki nabywcy
-    WNT, termin 10 dni na deklarację uproszczoną
-  - **1l Zezwolenia zbiorczo + przedsiębiorstwo w spadku** (art. 84,
-    84a-84f) — mechanizm odesłań do przepisów macierzystych, ciągłość
-    zezwoleń przy sukcesji, zwolnienie z zabezpieczenia
-  - **1m Postępowanie przy imporcie** (art. 27-29a) — trzy dokumenty
-    rozliczeniowe, decyzja naczelnika, termin 10 dni na dopłatę
-- ⭐⭐ MAPA POKRYCIA: 🟢 14 → **19/27 (52%→70%)**, 🟡 8, 🔴 5→**0** —
-  **WSZYSTKIE pozycje 🔴 domknięte** (proces trzytranszowy zakończony)
-- Pozostaje 8 pozycji 🟡 wymagających rozszerzenia istniejącej treści
-  (nie tworzenia od zera) — niższy priorytet, do przyszłych sesji
-- Zweryfikowano m.in. w Rządzie 1: finanse-arch.mf.gov.pl (UDT)
-
-**Aktualizacja 2026-08-11 — TRANSZA 2 UZUPEŁNIENIA LUK MAPY POKRYCIA
-DZIEDZINY AKCYZOWEJ (kontynuacja, ZASADA 11):**
-- `mod-ustawa-akcyzowa-i-clo-UCC.md` → v1.2.0: pięć nowych sekcji:
-  - **1e Rejestracja podmiotów — CRPA** (art. 16-20) — termin przed
-    pierwszą czynnością, wyłączenia (PPT, oleje), sankcja KKS + czynny
-    żal, termin aktualizacji danych 7 dni
-  - **1f Rejestracja PPT** (art. 20a-20o) — rejestr ODRĘBNY od CRPA,
-    Dyrektor IAS w Poznaniu (właściwość centralna)
-  - **1g Deklaracje/terminy ogólne** (art. 21-26) — reguła 25. dnia
-    następnego miesiąca, terminy szczególne (węgiel: 2. miesiąc),
-    mechanizm przedpłaty, forma elektroniczna obowiązkowa (art. 24d)
-  - **1h Podmiot pośredniczący** (art. 56-56a) — definicja (art. 2 ust.
-    1 pkt 23), warunki zezwolenia (art. 56, max 3 lata), zabezpieczenie
-    importowe
-  - **1i Ewidencje** (Dział VIA, art. 138a-138ta) — katalog ewidencji,
-    forma papierowa/elektroniczna (art. 138p), możliwość zastąpienia
-    dokumentacją rachunkową, przechowywanie 5 lat
-- ⭐ MAPA POKRYCIA: 🟢 11 → **14/27 (41%→52%)**, 🟡 8, 🔴 7→**5**
-- Zweryfikowano m.in. w Rządzie 1: biznes.gov.pl (rejestracja CRPA/
-  podmiot pośredniczący), podatki.gov.pl (forma ewidencji)
-
-**Aktualizacja 2026-08-11 — UZUPEŁNIENIE LUK MAPY POKRYCIA DZIEDZINY
-AKCYZOWEJ (kontynuacja audytu pokrycia tematycznego, ZASADA 11):**
-- `mod-ustawa-akcyzowa-i-clo-UCC.md` → v1.1.0 (pierwszy raz oznaczony
-  numerem wersji): cztery nowe sekcje uzupełniające zidentyfikowane
-  luki zerowe/krytyczne:
-  - **1a Zabezpieczenie akcyzowe** (Dział III rozdz. 6, art. 63-76) —
-    generalne vs ryczałtowe, 5 form (depozyt, gwarancja, czek, weksel,
-    hipoteka do 65% wartości nieruchomości), odmowa przyjęcia,
-    wygaśnięcie zobowiązania
-  - **1b Normy dopuszczalnych ubytków** (Dział III rozdz. 9, art. 85)
-    — dwa tryby ustalania (wniosek/z urzędu), kryteria, rozliczenie
-    ponad normę, okres przejściowy 6 miesięcy dla nowych podmiotów
-  - **1c Znaki akcyzy + kary pieniężne** (Dział VI art. 114-138w, Dział
-    VIb art. 138u-138w) — podatkowe vs legalizacyjne banderole, zakaz
-    sprzedaży bez oznaczenia, mechanizm kar administracyjnych (5000
-    zł, termin 7 dni, przedawnienie 5 lat) na przykładzie art. 138u
-  - **1d Akcyza na samochody osobowe** (Dział V, art. 100-113a) —
-    przedmiot opodatkowania (CN 8703), terminy 14/30 dni (deklaracja
-    vs zapłata — częsty błąd praktyczny), stawki, zwolnienia
-    elektryki/hybrydy (art. 109a)
-- ⭐ MAPA POKRYCIA DZIEDZINY (nowa, 27 pozycji, analogicznie do u.o.r.):
-  🟢 5 → **11/27 (19%→41%)**, 🟡 9, 🔴 13→**7**
-- ⚠️ NAPRAWIONA pozostałość nieaktualnego t.j. w aneksie WIA (linia
-  cytowała wciąż "Dz.U. 2025 poz. 126" mimo że tabela aktów już miała
-  poprawiony numer poz. 412 z poprzedniej sesji) — teraz potwierdzone
-  BEZPOŚREDNIO w Rządzie 1 (isap.sejm.gov.pl, eli.gov.pl, api.sejm.gov.pl)
-- SYNC: `dr-06/MAPA-AKTOW.md` i `prawo-polskie-v2/ROUTING-MAP.md`
-  zaktualizowane w tej samej sesji (nie odłożone na później)
-- Pozostaje 7 pozycji 🔴 (deklaracje/terminy ogólne, rejestracja
-  podmiotów, podmiot pośredniczący, przemieszczanie poza zawieszeniem,
-  zezwolenia, UDT, ewidencje) — priorytetyzowane w module do kolejnej
-  transzy
-
-**Aktualizacja 2026-08-11 — TRANSZA 3 audytu pokrycia rachunkowo-księgowego
-(kontynuacja AUDYT-2026-08-11v, ZASADA 11 — audyt merytoryczny):**
-- `mod-ustawa-rachunkowosci.md` → v1.11.0: nowa sekcja 5h — art. 42-44
-  (trzy reżimy ustalania wyniku finansowego netto: jednostki ogólne /
-  banki / zakłady ubezpieczeń-reasekuracji) oraz odpowiedzialność
-  cywilna na gruncie KSH (art. 293 sp. z o.o. / art. 483 S.A.,
-  business judgment rule od 13.10.2022, relacja do art. 4 ust. 5
-  u.o.r. jako reżimy równoległe)
-- art. 35d u.o.r. (REZERWY) — placeholder z sekcji 5f zastąpiony pełną
-  treścią (przesłanki tworzenia, ujęcie w kosztach/przychodach,
-  powiązanie z KSR 6, rozjazd podatkowy PIT/CIT)
-- ⭐ MAPA POKRYCIA: 🟢 17 → **19 z 20 (95%)**, 🟡 3 → **1**, 🔴 0 —
-  domknięto #8 (wycena, w tym rezerwy i wynik finansowy) i #17
-  (odpowiedzialność cywilna). Jedyna pozostała 🟡: #10 sprawozdanie z
-  działalności (treść merytoryczna, punkt startowy KSR 9)
-- Zweryfikowano (Rząd 2A/2B, próg ZASADY 14 spełniony ≥2-3 źródła
-  niezależne na każdy artykuł): lexlege.pl, arslege.pl (art. 35d,
-  42-44, 293 KSH), poradnikprzedsiebiorcy.pl, sytyadwokaci.pl,
-  poradca.pl (business judgment rule)
-- ⚠️ Świadomie NIEZAMKNIĘTE: dokładne terminy przedawnienia roszczenia
-  art. 293/483 KSH; odpowiedzialność KARNA za błędy księgowe (art.
-  587-591 KSH) — poza zakresem pozycji #17 (WYŁĄCZNIE cywilna)
-
-**Aktualizacja 2026-08-11v — TRANSZA 2 audytu pokrycia (AUDYT-2026-08-11v):**
-- Nowy moduł: `mod-rachunkowosc-budzetowa-JSFP.md` — ⚠️ fraza
-  „rachunkowość budżetowa" miała ZERO wystąpień w całym systemie, mimo
-  rozbudowanego UFP/NIK/RIO w DR-06 i całej dziedziny JST w DR-08.
-  Rozporządzenie MRiF z 13.09.2017, ⭐ NOWY t.j. **Dz.U. 2026 poz. 909**
-  (ogł. 7.07.2026) — poprzednie: 2025.347, 2020.342, pierwotne 2017.1911
-- `mod-ustawa-rachunkowosci.md` → v1.10.0: sekcja 5f (art. 30 waluty,
-  art. 32 amortyzacja, art. 35b odpisy na należności) + sekcja 5g
-  (Krajowe Standardy Rachunkowości — soft law, art. 10 ust. 3 u.o.r.,
-  publikacja w Dz.Urz. MF). ⭐ MAPA POKRYCIA: 🟢 16 → **17 z 20 (85%)**,
-  🔴 **0** — ostatnia luka (waluty) domknięta
-- ⚠️ KOREKTA ZAKRESU: rozdz. 4 u.o.r. to art. **28-44**, nie „28-42"
-- ⚠️ SYNC MAP: `prawo-polskie-v2/ROUTING-MAP.md` zaktualizowana o
-  wszystkie akty z transz 1 i 2 + naprawiony dryf akcyzy (patrz niżej)
-
-**Aktualizacja 2026-08-11u — AUDYT POKRYCIA TEMATÓW RACHUNKOWO-KSIĘGOWYCH
-(ZASADA 11, audyt zakresowy dziedziny; pełny wpis: audyt-systemu-v4/
-references/AUDIT-JOURNAL.md, AUDYT-2026-08-11u):**
-- ⭐⭐⭐ TRZY NOWE MODUŁY zamykające luki wykryte grepem po CAŁYM systemie:
-  - `mod-PKPiR-ewidencje-uproszczone.md` — PKPiR miała dotąd wyłącznie
-    wzmianki; ⭐ NOWE ROZPORZĄDZENIE Dz.U. 2025 poz. 1299 (od 1.01.2026)
-    zastąpiło Dz.U. 2019 poz. 2544; obowiązkowa postać elektroniczna
-    (JPK_PKPIR), nowy wzór 19 kolumn z numerem KSeF, historia progu
-    2 → 2,5 mln EUR (Dz.U. 2024 poz. 1863)
-  - `mod-kasy-rejestrujace-fiskalizacja.md` — ⚠️ ZEROWE pokrycie w całym
-    systemie przed tą sesją (0 wystąpień frazy „kasa fiskalna/
-    rejestrująca"); art. 111 VAT, limit 20 000 zł, katalog bezwzględny
-    § 4, sankcja 30%, ulga 700 zł i jej utrata
-  - `mod-JPK-ksiegi-elektroniczne-e-sprawozdania.md` — JPK_KR_PD/
-    JPK_ST_KR, 3 tury wdrożenia, ⭐ TERMIN ZMIENIONY DWUKROTNIE W 2026
-    (rozp. Dz.U. 2026 poz. 188 → ustawa Dz.U. 2026 poz. 779, trwale
-    7 miesięcy od 1.07.2026), e-sprawozdania art. 45 ust. 1f-1h
-- `mod-ustawa-rachunkowosci.md` → v1.9.0: +4 sekcje (5b przechowywanie
-  art. 71-76, 5c usługowe prowadzenie ksiąg rozdz. 8a, 5d konsolidacja
-  rozdz. 6, 5e ESG/CSRD). Mapa pokrycia: 🟢 9→16 z 20 (45% → 80%)
-- ⚠️ NAPRAWIONE ZERWANE ODESŁANIE: temat ESG/CSRD był odsyłany „do
-  DR-15" — grep wykazał 0 wystąpień „ESG"/„CSRD" w dr-15. Temat
-  osadzony tam, gdzie ma podstawę normatywną: w u.o.r.
+## Moduły (26 łącznie — ✓ 26 OK, ☐ 0 STUB)
 
 **Aktualizacja 2026-08-11:**
 - Nowy moduł: `mod-ustawa-rachunkowosci.md` — ustawa o rachunkowości
@@ -335,32 +199,6 @@ przez cross-reference, bez duplikacji treści).
                samorząd PIBR; rozp. 25.09.2025 — nowe uprawnienie do
                atestacji sprawozdawczości ESG/CSRD; harmonogram ESG
                wielokrotnie odraczany — zawsze weryfikuj online)
-  [✓] NOWY  mod-rachunkowosc-budzetowa-JSFP
-              (NOWY 2026-08-11v: ⚠️ temat o ZEROWYM pokryciu w całym
-               systemie; rozporządzenie MRiF 13.09.2017 — t.j. Dz.U.
-               2026 poz. 909; plany kont zał. 1-4, zakładowy plan
-               kont § 20 jako oś sporów z RIO, skonsolidowany bilans
-               JST § 29 przez odesłanie do rozdz. 6 u.o.r.)
-  [✓] NOWY  mod-PKPiR-ewidencje-uproszczone
-              (NOWY 2026-08-11u: rozporządzenie MFiG 6.09.2025 —
-               Dz.U. 2025 poz. 1299, w życie 1.01.2026, zastąpiło
-               Dz.U. 2019 poz. 2544; JPK_PKPIR/JPK_ST harmonogram
-               2026/2027; nowy wzór 19 kolumn — kolumna 3 = numer
-               KSeF; historia progu 2→2,5 mln EUR + zmiana sposobu
-               liczenia; rzetelność vs wadliwość księgi)
-  [✓] NOWY  mod-kasy-rejestrujace-fiskalizacja
-              (NOWY 2026-08-11u: ⚠️ temat o ZEROWYM pokryciu w całym
-               systemie przed tą sesją; art. 111 ustawy o VAT, trzy
-               warstwy zwolnień, katalog bezwzględny § 4, sankcja
-               30% podatku naliczonego + uchwała NSA FPS 7/98,
-               ulga 700 zł i obowiązek zwrotu w 3 lata)
-  [✓] NOWY  mod-JPK-ksiegi-elektroniczne-e-sprawozdania
-              (NOWY 2026-08-11u: JPK_KR_PD i JPK_ST_KR jako DWIE
-               odrębne struktury, 3 tury wdrożenia, ⭐ termin 7
-               miesięcy — rozp. Dz.U. 2026 poz. 188 tymczasowo,
-               ustawa Dz.U. 2026 poz. 779 trwale od 1.07.2026;
-               e-sprawozdania art. 45 ust. 1f/1g/1h — MF NIE
-               publikuje struktur dla MSR)
   [✓] NOWY  mod-ustawa-doradcy-podatkowi-zawod
               (Dz.U. 2021 poz. 2117 + nowelizacja Dz.U. 2025 poz. 1882
                [rozszerzenie zakresu doradztwa + zmiana PPSA]; zawód

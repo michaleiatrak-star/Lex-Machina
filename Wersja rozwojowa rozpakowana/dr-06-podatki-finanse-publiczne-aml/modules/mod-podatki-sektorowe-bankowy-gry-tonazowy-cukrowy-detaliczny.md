@@ -123,13 +123,24 @@ PODMIOT ZOBOWIĄZANY: zwykle podmiot SPRZEDAJĄCY napoje objęte opłatą
   do PIERWSZEGO punktu sprzedaży DETALICZNEJ (producent/importer/
   podmiot dokonujący wewnątrzwspólnotowego nabycia)
 ⚠️ Dokładne stawki kwotowe i próg ilości cukru NIE zweryfikowane w
-pełni w tej sesji — punkt startowy. ⚠️ DODANE 2026-07-27: znaleziono
-(w module `mod-ustawa-akcyzowa-i-clo-UCC.md`) SPORNĄ informację o
-planowanej podwyżce stawek (0,50→0,70 zł/l podstawowa; 0,10→1,00 zł/l
-kofeina/tauryna) na 1.01.2026, ORAZ sprzeczną informację o WECIE
-Prezydenta wobec tej podwyżki — NIEROZSTRZYGNIĘTE, czy weto dotyczyło
-całości czy tylko części zmian. Wymaga PILNEJ, dedykowanej weryfikacji
-przed użyciem w konkretnej sprawie.
+pełni w tej sesji — punkt startowy.
+
+✅ ROZSTRZYGNIĘTE 2026-08-12 (na żądanie użytkownika — SYNCHRONIZACJA
+z WCZEŚNIEJ już rozstrzygniętym ustaleniem W mod-ustawa-akcyzowa-
+i-clo-UCC.md, transza 2026-08-11f): Prezydent Karol Nawrocki
+ZAWETOWAŁ W CAŁOŚCI (grudzień 2025) nowelizację ustawy o zdrowiu
+publicznym PODNOSZĄCĄ opłatę cukrową (planowaną podwyżkę stawki
+STAŁEJ z 0,50 na 0,70 zł/l, opłaty ZMIENNEJ z 0,05 na 0,10 zł/g,
+PUŁAPU maksymalnego z 1,2 na 1,8 zł/l) — RÓWNOLEGLE zawetował
+ODRĘBNĄ ustawę PODWYŻSZAJĄCĄ akcyzę alkoholową — WETO objęło
+CAŁY pakiet zmian w OBU ustawach, NIE tylko ich CZĘŚĆ — ⭐⭐
+AKTUALNE stawki opłaty CUKROWEJ POZOSTAJĄ NA poprzednim POZIOMIE:
+0,50 zł/l (podstawowa) + 0,05 zł/g (zmienna), pułap 1,2 zł/l —
+POTWIERDZONE w 8+ zgodnych źródłach (patrz PEŁNE uzasadnienie i
+lista źródeł W mod-ustawa-akcyzowa-i-clo-UCC.md). ⚠️ TA sekcja
+NADAL NIE zawiera osobno zweryfikowanej stawki dodatkowej opłaty
+za KOFEINĘ/TAURYNĘ (0,10→1,00 zł/l) — wymaga ODRĘBNEJ, dedykowanej
+weryfikacji, JEŚLI istotne w konkretnej sprawie.
 ```
 
 ---
@@ -141,12 +152,25 @@ PODSTAWA: ustawa z 6.07.2016 r. o podatku od sprzedaży detalicznej
   (⚠️ zweryfikuj t.j. — ustawa miała BURZLIWĄ historię, w tym
   WIELOLETNIE ZAWIESZENIE stosowania w związku z postępowaniem przed
   Komisją Europejską dot. pomocy publicznej)
+
+⭐ ROZSTRZYGNIĘCIE sporu z KE (dodano 2026-08-12, na żądanie
+  użytkownika): Komisja EUROPEJSKA WSZCZĘŁA postępowanie, UZNAJĄC
+  przepisy ZA niedozwoloną pomoc PUBLICZNĄ dla mniejszych
+  przedsiębiorstw (nieobjętych POWSZECHNYM podatkiem z uwagi na
+  KWOTĘ wolną) — ⭐⭐ TSUE W WYROKU z **16.05.2019 R.** (sygn. T-836/16
+  i T-624/17) STWIERDZIŁ NIEWAŻNOŚĆ decyzji Komisji — POLSKA
+  WYGRAŁA ten spór, podatek OSTATECZNIE mógł być STOSOWANY
+
 PRZEDMIOT: PRZYCHÓD ze sprzedaży DETALICZNEJ (towary konsumentom,
   niezależnie od formy prawnej nabywcy — decyduje CHARAKTER transakcji)
-PROGRESYWNA STRUKTURA STAWEK (⚠️ zweryfikuj aktualne progi na ISAP,
-  orientacyjnie dwa poziomy):
-  □ Niższa stawka — dla przychodu w niższym przedziale miesięcznym
-  □ Wyższa stawka — dla NADWYŻKI przychodu ponad wyższy próg
+PROGRESYWNA STRUKTURA STAWEK (potwierdzono 2026-08-12, w 5+
+  zgodnych źródłach, w tym KONKRETNIE z 3 tygodni PRZED weryfikacją):
+  □ KWOTA WOLNA: nadwyżka przychodu PONAD **17 MLN ZŁ MIESIĘCZNIE**
+    stanowi PODSTAWĘ opodatkowania (sprzedaż NA rzecz
+    PRZEDSIĘBIORCÓW NIE jest WLICZANA do tej podstawy)
+  □ NIŻSZA stawka: **0,8%** — DLA części podstawy NIEPRZEKRACZAJĄCEJ
+    **170 MLN ZŁ**
+  □ WYŻSZA stawka: **1,4%** — DLA nadwyżki podstawy PONAD 170 mln zł
 KWOTA WOLNA miesięczna — przychód PONIŻEJ określonego progu w ogóle
   NIE PODLEGA opodatkowaniu tym podatkiem
 ⚠️ Historia zawieszenia: ustawa BYŁA przedmiotem sporu z Komisją

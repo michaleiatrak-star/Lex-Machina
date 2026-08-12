@@ -1,5 +1,15 @@
 # Moduł — Bezpieczeństwo żywności i żywienia
 
+> ⚠️ PODZIELONY 2026-08-12 (audyt-systemu-v4/CHECKLIST-DEDUP.md —
+> NOTA-4, moduł >400 linii, próg przekroczony ~4.6x przy 1863 liniach).
+> Wydzielono treść o HODOWLI/ZDROWIU ZWIERZĄT (599 l.) →
+> mod-ustawa-hodowla-zdrowie-zwierzat.md, oraz treść o ZEZWOLENIACH/
+> GATUNKACH (281 l.) → mod-ustawa-hodowla-zezwolenia-gatunki.md.
+> Przy okazji USUNIĘTO zduplikowane sekcje (obowiązkowe szczepienia
+> zwierząt, strefy ASF — każda była dodana DWUKROTNIE 2026-07-30 pod
+> różnymi tytułami) — SCALONO w jedną, kompletną wersję każda,
+> zachowując wszystkie unikalne elementy obu wersji.
+
 ## Akt prawny / źródło
 - Ustawa o bezpieczeństwie żywności i żywienia — Dz.U. 2023 poz. 1448 (t.j.)
   ✅ [VER: isap.sejm.gov.pl, 2026-05-31]
@@ -812,967 +822,101 @@ Potwierdzone w 6+ zgodnych źródłach z marca-czerwca 2026 r., w tym
 pochodne KRUS/ARiMR (Rząd 1-adjacent).
 ```
 
-## HODOWLA I UPRAWY ZACHOWAWCZE — OCHRONA ZASOBÓW GENETYCZNYCH
-(dodano 2026-07-30, na żądanie użytkownika)
+---
+
+## ⭐⭐⭐ NAPOJE ENERGETYCZNE — ZAKAZ SPRZEDAŻY NIELETNIM I JEGO
+OBCHODZENIE (dodano 2026-08-12, na żądanie użytkownika — dotąd
+CAŁKOWICIE nieobecny temat)
 
 ```
-Podstawa: Interwencja 6 (zwierzęta) / odrębny pakiet (rośliny) w
-  ramach Planu Strategicznego WPR 2023-2027. ORGAN KLUCZOWY: Instytut
-  Zootechniki — Państwowy Instytut Badawczy (IZ-PIB), upoważniony do
-  KRYTERIÓW zagrożenia rasy, TWORZENIA programu ochrony, NADZORU i
-  KOORDYNACJI
+⭐⭐ PODSTAWA I DEFINICJA: ustawa z 17.08.2023 r. o zmianie ustawy o
+  zdrowiu publicznym oraz niektórych innych ustaw (opublikowana
+  28.08.2023) — zakaz sprzedaży NAPOJU Z DODATKIEM kofeiny LUB
+  tauryny OSOBOM PONIŻEJ 18. roku życia — DEFINICJA: napój będący
+  ŚRODKIEM spożywczym (PKWiU KLASA 10.89 oraz DZIAŁ 11), W KTÓREGO
+  składzie ZNAJDUJE się KOFEINA W proporcji PRZEWYŻSZAJĄCEJ **150
+  MG/L** LUB TAURYNA — Z WYŁĄCZENIEM substancji WYSTĘPUJĄCYCH W
+  nich NATURALNIE
 
-CEL: zachowanie RODZIMYCH RAS zwierząt zagrożonych wyginięciem
-  (bydło, konie, owce, świnie, kozy) z powodu NISKIEJ/MALEJĄCEJ
-  liczebności — ochrona RÓŻNORODNOŚCI GENETYCZNEJ, NIE tylko
-  sentymentalna wartość
+⭐⭐ ZAKRES ZAKAZU (trzy WYMIARY):
+  1) sprzedaż OSOBOM poniżej 18 ROKU życia (WSZĘDZIE)
+  2) sprzedaż NA terenie SZKÓŁ i INNYCH jednostek SYSTEMU oświaty
+     (przedszkola, placówki WYCHOWAWCZE, biblioteki PEDAGOGICZNE) —
+     ⭐ TU zakaz jest CAŁKOWITY, NIEZALEŻNY od WIEKU kupującego
+  3) sprzedaż W AUTOMATACH vendingowych — ⭐ RÓWNIEŻ CAŁKOWITY,
+     niezależny OD wieku (Sejm ODRZUCIŁ propozycję SENATU, BY
+     dopuścić automaty W miejscach NIEDOSTĘPNYCH dla nieletnich)
 
-WARUNKI UZYSKANIA (zwierzęta — Interwencja 6):
-  □ Gospodarstwo MIN. 1 ha użytków rolnych
-  □ Realizacja PROGRAMU OCHRONY dla konkretnej rasy (opracowanego
-    przez IZ-PIB)
-  □ MINIMALNA liczba zwierząt określona W PROGRAMIE (przykład: rasa
-    puławska — min. 10 loch + 1 knur)
-  □ Rejestracja zwierząt w systemie IRZplus
-  □ Plan działalności rolno-środowiskowej + dokumentacja hodowlana
-    przez CAŁY okres zobowiązania
-  □ Oświadczenie POTWIERDZONE przez Instytut Zootechniki
+⭐ OBOWIĄZEK ETYKIETOWANIA: producenci/importerzy MUSZĄ OZNACZYĆ
+  opakowanie JEDNOSTKOWE widoczną, CZYTELNĄ, NIEUSUWALNĄ informacją
+  "NAPÓJ ENERGETYCZNY" lub "NAPÓJ ENERGETYZUJĄCY"
 
-CZAS TRWANIA ZOBOWIĄZANIA: **5 LAT**, płatność COROCZNA w formie
-  ZRYCZAŁTOWANEJ (na podstawie utraconych dochodów + dodatkowych
-  kosztów realizacji zobowiązania)
+⭐⭐ WERYFIKACJA WIEKU: sprzedawca, W RAZIE wątpliwości CO do
+  pełnoletności KUPUJĄCEGO, MOŻE zażądać OKAZANIA dokumentu
+  potwierdzającego WIEK — JEŚLI kupujący NIE potwierdzi wieku —
+  sprzedawca NIE MOŻE sprzedać napoju
 
-ORIENTACYJNE STAWKI (2025, mogą się zmieniać rocznie):
-  □ Świnie rasy rodzime (locha/knur): 1 335 zł/szt.
-  □ Bydło mleczne/mięsne: 2 738 lub 1 752 zł/szt. (zależnie od
-    kierunku użytkowania)
-  □ Konie (konik polski, huculski, małopolski, śląski, zimnokrwiste):
-    2 185-5 925 zł/szt.
-  □ Owce: 500 zł/szt. (stawka uwzględnia też utrzymanie samców)
+⭐⭐⭐ SANKCJE — DWA POZIOMY, ZNACZĄCO różna SUROWOŚĆ:
+  → SPRZEDAWCA (sprzedaż nieletnim W szkołach/automatach): grzywna
+    DO **2000 ZŁ** — ⭐ STOSUNKOWO NISKA sankcja
+  → PRODUCENT (BRAK wymaganego OZNAKOWANIA opakowania): grzywna DO
+    **200 000 ZŁ** ALBO kara OGRANICZENIA wolności, LUB OBIE łącznie
+    — ⭐ ZNACZĄCO surowsza sankcja NIŻ za sprzedaż nieletniemu
 
-ANALOGICZNY PAKIET DLA ROŚLIN — uprawa odmian regionalnych/
-  amatorskich (zarejestrowanych w Krajowym Rejestrze) oraz gatunków
-  zagrożonych EROZJĄ GENETYCZNĄ (przykłady: pszenica płaskurka,
-  pszenica samopsza, żyto krzyca, soczewica, gryka, lędźwian siewny):
-  □ Wsparcie za samą UPRAWĘ: 750 zł/ha
-  □ Wsparcie za WYTWARZANIE NASION/materiału siewnego: 1000 zł/ha
-    (WYŻSZE niż za samą uprawę — nagroda za utrzymanie linii
-    hodowlanej, nie tylko jednorazowy plon)
+⭐⭐⭐⭐ ⚡ GŁÓWNY, GENUINE sposób "OBEJŚCIA" — NIE trik CZARNORYNKOWY,
+  LECZ WADA LEGISLACYJNA: pierwotne przepisy Z 2023 R. BYŁY przez
+  PONAD DWA LATA PRAWNIE NIEWYKONALNE — ⭐⭐⭐ PRZYCZYNA: USTAWA
+  wymagała NOTYFIKACJI Komisji EUROPEJSKIEJ (obowiązkowa procedura
+  DLA regulacji TECHNICZNYCH na gruncie prawa UE) — TEJ notyfikacji
+  NIGDY nie PRZEPROWADZONO przy pierwotnym uchwaleniu — SKUTEK:
+  "UCHWALONE wtedy przepisy NIE MOGĄ stanowić PODSTAWY orzekania
+  sądowego" — SĄDY UMARZAŁY już WSZCZĘTE postępowania Z TEGO
+  WŁAŚNIE powodu — W PRAKTYCE: KAŻDY sprzedawca ŚCIGANY za
+  sprzedaż nieletniemu MÓGŁ powołać SIĘ na TEN defekt PROCEDURALNY
+  i UNIKNĄĆ odpowiedzialności, NIEZALEŻNIE od TEGO, czy FAKTYCZNIE
+  sprzedał napój DZIECKU — ⭐ TO GENERALNA, "SYSTEMOWA" forma
+  obejścia — DOSTĘPNA dla KAŻDEGO, NIE wymagająca ŻADNEJO
+  indywidualnego działania sprawcy, TYLKO ŚWIADOMOŚCI PRAWNEJ
+  (podniesienia ZARZUTU braku notyfikacji)
 
-ZMIANA ZOBOWIĄZANIA W TRAKCIE 5-LETNIEGO OKRESU: MOŻLIWA WYŁĄCZNIE
-  przez zastąpienie zwierząt TEJ SAMEJ rasy lokalnej innymi zwierzętami
-  tej samej rasy (spełniającymi warunki wariantu) — NIE MOŻNA
-  zmienić rasy w trakcie trwania zobowiązania
+⭐⭐ MIĘDZYNARODOWA REAKCJA na BRAK notyfikacji: PODCZAS procedury
+  notyfikacyjnej (przeprowadzonej OSTATECZNIE PÓŹNIEJ) STANY
+  ZJEDNOCZONE formalnie WNIOSŁY O ZNIESIENIE ZARÓWNO zakazu
+  sprzedaży NIELETNIM, JAK I OGÓLNEGO zakazu sprzedaży W automatach
+  (dla OSÓB W KAŻDYM wieku) — WIELKA BRYTANIA zgłosiła ZASTRZEŻENIA
+  DOTYCZĄCE SAMEGO faktu BRAKU notyfikacji — ⭐ POKAZUJE to, że
+  PROBLEM notyfikacyjny MIAŁ RÓWNIEŻ WYMIAR międzynarodowego SPORU
+  handlowego, NIE tylko krajowej WADY proceduralnej
 
-Potwierdzone bezpośrednio przez gov.pl/ARiMR (Rząd 1) i 5+ dodatkowe
-zgodne źródła.
+⭐⭐⭐ NAPRAWA — PONOWNE UCHWALENIE Z PRAWIDŁOWĄ NOTYFIKACJĄ: Sejm
+  PONOWNIE PRZYJĄŁ ustawę **17.10.2025 R.** (po PRAWIDŁOWEJ
+  notyfikacji Komisji EUROPEJSKIEJ tym RAZEM), Prezydent PODPISAŁ
+  poprawioną WERSJĘ (grudzień 2025) — OD **2026 R.** przepisy MAJĄ
+  już PRAWIDŁOWĄ podstawę PRAWNĄ, bez RYZYKA podważenia Z powodu
+  braku notyfikacji
+
+⭐ KONTEKST ZDROWOTNY (uzasadnienie regulacji): W Polsce **3-9 LAT**
+  — dzieci REGULARNIE spożywające napoje ENERGETYZUJĄCE; wśród
+  MŁODZIEŻY 10-17 lat — **35,7%** regularnie SPOŻYWA — podnoszone
+  RYZYKO powikłań SERCOWO-NACZYNIOWYCH i zaburzeń UKŁADU krążenia
+
+Potwierdzone w 8+ zgodnych źródeł, w tym prawo.pl [×2, Z pełną
+historią LEGISLACYJNĄ i CYTOWANYMI zastrzeżeniami USA/UK],
+rynekzdrowia.pl, portalspozywczy.pl [październik 2025], gov.pl/psse
+[Rząd 1], money.pl, znakowo.pl, taknaturze.pl [kwiecień 2026].
 ```
 
-## UBÓJ RYTUALNY — HALAL I KOSZER, PODSTAWA PRAWNA I CERTYFIKACJA
-(dodano 2026-07-30, na żądanie użytkownika)
-
-```
-⚠️ ZŁOŻONA, SPORNA HISTORIA PRAWNA — kluczowe dla zrozumienia
-OBECNEGO stanu:
-
-PODSTAWA UE: Rozp. (WE) 1099/2009 ws. ochrony zwierząt podczas ich
-  uśmiercania — WYRAŹNY wyjątek religijny: zwierzę MOŻE być
-  uśmiercone BEZ uprzedniego ogłuszenia, WYŁĄCZNIE w celu poszanowania
-  wolności religijnej (art. 10 Karty Praw Podstawowych UE) —
-  decyzja SZCZEGÓŁÓW pozostawiona państwom członkowskim
-
-HISTORIA POLSKA (kluczowe dla oceny AKTUALNEGO stanu):
-  1997 — ustawa o ochronie zwierząt: PIERWOTNIE zawierała wyjątek dla
-    obrzędów religijnych
-  2002 — nowelizacja: nakazała OGŁUSZANIE wszystkich zwierząt (zniosła
-    wyjątek religijny NA POZIOMIE USTAWY)
-  2004 — rozporządzenie Ministra Rolnictwa: PONOWNIE zezwoliło na
-    ubój rytualny — ALE na poziomie ROZPORZĄDZENIA, nie ustawy
-  2012 — Trybunał Konstytucyjny: rozporządzenie z 2004 r. UZNANE ZA
-    NIEZGODNE z ustawą (a przez to z Konstytucją) — minister
-    PRZEKROCZYŁ kompetencje, próbując rozporządzeniem uchylić
-    wymóg ustawowy. Przepis STRACIŁ MOC z końcem 2012 r.
-  2014 — nowelizacja USTAWY (nie tylko rozporządzenia): PRZYWRÓCIŁA
-    wyjątek dla uboju rytualnego, ALE tym razem NA POZIOMIE USTAWY —
-    WYŁĄCZNIE na potrzeby CZŁONKÓW polskich gmin i związków
-    wyznaniowych (spór o ograniczenie WYŁĄCZNIE do celów krajowych,
-    z wykluczeniem komercyjnego eksportu, NIE przeszedł ostatecznie —
-    ograniczenie eksportowe zostało USUNIĘTE w toku prac
-    legislacyjnych, wg jednego źródła)
-
-STAN OBECNY: ubój rytualny BEZ OGŁUSZENIA jest LEGALNY w Polsce —
-  wymaga: (1) noża specjalnego, jednego cięcia, BEZ uszkodzenia
-  rdzenia kręgowego, (2) zwierzę NIE MOŻE być wcześniej ogłuszone,
-  (3) nadzoru lekarza weterynarii nad CAŁYM procesem, (4) zgodności z
-  wysokimi normami sanitarnymi pod stałą kontrolą Inspekcji
-  Weterynaryjnej. Mięso z takiego uboju MOŻE być sprzedawane zarówno
-  krajowo, JAK I na eksport (mimo wcześniejszych propozycji
-  ograniczenia do rynku krajowego)
-
-⚠️ KRAJE Z CAŁKOWITYM ZAKAZEM (dla porównania): Szwecja, Norwegia,
-  Szwajcaria, Estonia — ubój rytualny bez ogłuszenia ZAKAZANY
-  całkowicie (mniejszości religijne w tych krajach stanowią śladowy
-  procent populacji, co ogranicza praktyczny konflikt)
-
-TEMAT POZOSTAJE PRZEDMIOTEM SPORU ETYCZNEGO I DEBATY PUBLICZNEJ —
-  między wolnością religijną (chronioną konstytucyjnie i przez prawo
-  UE) a ograniczaniem cierpienia zwierząt — NIE traktuj obecnego
-  stanu prawnego jako niekontrowersyjnego/ostatecznie rozstrzygniętego
-  politycznie, mimo że jest to stan PRAWNIE obowiązujący
-
-Potwierdzone w 6+ zgodnych źródłach (prawo.pl, weterynarianews.pl,
-alhaqhalal.pl, wystawiasz.pl) — co do HISTORII prawnej i obecnego
-stanu; ⚠️ dokładny status propozycji ograniczenia eksportu (czy
-ostatecznie w pełni usunięty z ustawy) WYMAGA dedykowanej weryfikacji
-na ISAP przed cytowaniem w konkretnej sprawie.
-```
-
-## OŚRODKI CERTYFIKACJI HALAL I KOSZER W POLSCE (dodano 2026-07-30,
-na żądanie użytkownika)
-
-```
-HALAL — TRZY GŁÓWNE INSTYTUCJE (potwierdzone przez trade.gov.pl,
-  Rząd 1 — Ministerstwo Rozwoju i Technologii):
-
-1) MUZUŁMAŃSKI ZWIĄZEK RELIGIJNY W RP (MZR) — NAJSTARSZY związek
-   wyznaniowy w Polsce (od 1925 r.), skupia polską społeczność
-   tatarską i muzułmańską. Status prawny RÓWNY innym kościołom,
-   regulowany ODRĘBNĄ ustawą z 21.04.1936 r. (WCIĄŻ obowiązującą).
-   Na czele: MUFTI Rzeczypospolitej Polskiej (obecnie Tomasz
-   Miśkiewicz). Oficjalny reprezentant społeczności muzułmańskiej
-   wobec rządu RP.
-
-2) LIGA MUZUŁMAŃSKA W RP — powstała 2001 r., zarejestrowana
-   6.01.2004 r. w Rejestrze kościołów i innych związków wyznaniowych
-   przy MSWiA
-
-3) POLSKI INSTYTUT HALAL — trzeci główny podmiot certyfikujący
-
-⚠️ DODATKOWE, MNIEJSZE PODMIOTY (nie wymienione jako "trzy główne"
-   przez trade.gov.pl, ale aktywne na rynku): Polskie Centrum
-   Certyfikacji Halal (część Muzułmańskiej Fundacji na rzecz Edukacji
-   i Integracji, KRS 0000905391), Stowarzyszenie Muzułmańskie
-   Ahmadiyya — WERYFIKUJ aktualny zakres uznania/akredytacji przed
-   poleceniem konkretnego podmiotu klientowi, zwłaszcza pod kątem
-   wymagań KRAJU DOCELOWEGO eksportu (niektóre kraje, np. ZEA, mają
-   WŁASNE wymogi co do UZNAWANYCH certyfikatorów)
-
-PROCES CERTYFIKACJI HALAL obejmuje: weryfikację dokumentacji, wsparcie
-  w przygotowaniu zakładu produkcyjnego, NADZÓR nad procesem produkcji
-  (w tym wybór uprawnionego rzezaka rytualnego I kontrolera), audyt,
-  oznakowanie i certyfikację produktów
-
-KOSZER — JEDEN GŁÓWNY PODMIOT INSTYTUCJONALNY:
-
-ZWIĄZEK GMIN WYZNANIOWYCH ŻYDOWSKICH W RP (ZGWŻ) — zarejestrowany
-  1993 r. (kontynuacja Związku Religijnego Wyznania Mojżeszowego z
-  1946 r.), działa na podstawie ODRĘBNEJ ustawy z 20.02.1997 r. o
-  stosunku Państwa do gmin wyznaniowych żydowskich. Zrzesza 8-10 gmin
-  żydowskich (Warszawa, Wrocław, Kraków, Gdańsk, Poznań, Łódź,
-  Szczecin, Katowice, Bielsko-Biała, Legnica)
-
-⚠️ KLUCZOWE — JEDNA OSOBA WYŁĄCZNIE UPRAWNIONA: **NACZELNY RABIN
-  POLSKI** (obecnie Michael Schudrich, od 2004 r., urząd przywrócony
-  po przerwie 1999-2004) — JEDYNA osoba upoważniona z ramienia ZGWŻ
-  do wydawania certyfikatów koszerności (hecszer) w Polsce. Rabin
-  koordynuje WSZYSTKIE sprawy związane z koszernością. W praktyce:
-  aby uzyskać certyfikat, przedsiębiorca musi skontaktować się
-  BEZPOŚREDNIO z (Naczelnym) rabinem, NIE istnieje w Polsce
-  rozbudowana, zdecentralizowana sieć niezależnych certyfikatorów
-  koszerności analogiczna do trzech instytucji halal
-
-⚠️ RÓŻNICA STRUKTURALNA halal vs koszer w Polsce: rynek halal ma
-  WIELOŚĆ konkurencyjnych certyfikatorów (co najmniej 3 główne + kilka
-  mniejszych), podczas gdy koszer jest scentralizowany wokół JEDNEJ
-  instytucji (ZGWŻ) i JEDNEJ osoby (Naczelny Rabin) — WARTO to
-  odnotować przy doradzaniu klientom planującym certyfikację, bo
-  wpływa na dostępność/czas oczekiwania/negocjowalność warunków
-
-Potwierdzone w 6+ zgodnych źródłach, w tym trade.gov.pl (Rząd 1, dla
-halal) i polandkosher.pl / jewishlodz.org.pl (dla koszer, z
-potwierdzeniem roli Naczelnego Rabina).
-```
-
-## ⚡ ZWIERZĘTA FUTERKOWE — CAŁKOWITY ZAKAZ HODOWLI (BARDZO ŚWIEŻE,
-dodano 2026-07-30, na żądanie użytkownika)
-
-```
-⚡ NAJWAŻNIEJSZE ZNALEZISKO: Polska UCHWALIŁA CAŁKOWITY ZAKAZ chowu i
-hodowli zwierząt na futra — ustawa PODPISANA przez Prezydenta Karola
-Nawrockiego **2 GRUDNIA 2025 R.** (BEZ WETA), wejście w życie: 14 dni
-od ogłoszenia — czyli TA USTAWA JUŻ OBOWIĄZUJE na dzień tej weryfikacji
-
-ZAKRES ZAKAZU: zakaz DOTYCZY konkretnych gatunków z art. 2 pkt 4
-  ustawy z 10.12.2020 o organizacji hodowli i rozrodzie zwierząt
-  gospodarskich: lis pospolity i polarny, norka amerykańska, tchórz,
-  jenot, nutria, szynszyla. ⚠️ WYJĄTEK: KRÓLIK — celowo WYŁĄCZONY z
-  zakazu, ponieważ hodowany GŁÓWNIE na pokarm, a pozyskiwanie skór
-  jest jedynie DODATKOWĄ aktywnością producentów mięsa (uzasadnienie
-  ustawodawcy, potwierdzone przez radcaprawny.kirp.pl)
-
-OKRES PRZEJŚCIOWY: istniejące fermy mają WYGASZAĆ działalność DO
-  2033 R. (8-letni okres przejściowy) — zakaz zakładania NOWYCH ferm
-  obowiązuje NATYCHMIAST od wejścia w życie ustawy
-
-MECHANIZM ODSZKODOWAWCZY — MALEJĄCY W CZASIE (zachęta do
-  wcześniejszego zamknięcia):
-  → Zamknięcie do stycznia 2027 r.: **25%** średniego rocznego
-    przychodu ze sprzedaży zwierząt futerkowych z lat 2020-2024
-  → Do końca 2027 r.: **20%**
-  → W kolejnych latach: -5 punktów procentowych ROCZNIE, aż do
-    **5%** w 2030 r.
-
-KONTEKST/PRZYCZYNY (dane potwierdzające zasadność regulacji):
-  → EFSA (raport z lipca 2025 r.): jednoznacznie stwierdziła, że
-    fermy futrzarskie NIE zapewniają odpowiedniego dobrostanu norkom,
-    lisom, jenotom, szynszylom — poprawa warunków w PRAKTYCE
-    NIEMOŻLIWA
-  → Norka amerykańska: wpisana na unijną LISTĘ GATUNKÓW INWAZYJNYCH
-    w sierpniu 2025 r. — dodatkowy argument środowiskowy (nie tylko
-    dobrostanowy)
-  → Skala BRANŻY przed zakazem: ok. 200-318 aktywnych ferm (dane się
-    różnią zależnie od źródła/roku), ok. 2-3 mln zwierząt rocznie
-    (SPADEK o ok. 70% od szczytu w 2015 r.), wkład do PKB ok. 0,01%,
-    zatrudnienie ok. 900 osób (w dużej mierze sezonowe)
-  → GŁOSOWANIE SEJMU: 339 za, 78 przeciw, 19 wstrzymujących się —
-    poparcie MIĘDZYPARTYJNE (KO, Polska 2050, Lewica, część PiS)
-
-⚠️ POZIOM UE: decyzja Komisji Europejskiej ws. inicjatywy "Fur Free
-  Europe" (obywatelska inicjatywa UE) spodziewana w 2026 r. — Polska
-  UPRZEDZIŁA ewentualną regulację unijną własną, krajową ustawą
-
-Potwierdzone w 8+ zgodnych, bardzo aktualnych źródłach (grudzień
-2025 - maj 2026): rp.pl, UMCS (komentarz eksperta), infor.pl,
-money.pl, radcaprawny.kirp.pl, ekoetos.pl, otoprzetargi.pl.
-```
-
-## HODOWLA ZWIERZĄT RASOWYCH — KSIĘGI I REJESTRY (dodano 2026-07-30,
-na żądanie użytkownika)
-
-```
-Podstawa: ustawa z 10.12.2020 o organizacji hodowli i rozrodzie
-  zwierząt gospodarskich + Rozp. UE 2016/1012 (zootechniczne).
-  Organ centralny: Krajowe Centrum Hodowli Zwierząt (KCHZ)
-
-⚠️ KLUCZOWE ROZRÓŻNIENIE PRAWNE — "HODOWLA" vs "CHÓW": to NIE
-  synonimy w tym reżimie prawnym:
-  □ HODOWLA — zespół zabiegów zmierzających do POPRAWIENIA założeń
-    dziedzicznych (genotypu), obejmuje ocenę wartości użytkowej/
-    hodowlanej, selekcję, dobór osobników do kojarzenia — WYMAGA
-    formalnego powiązania z PROGRAMEM HODOWLANYM
-  □ CHÓW — samo utrzymywanie zwierząt, BEZ formalnego programu
-    hodowlanego — OGRANICZA dostęp do niektórych przywilejów prawnych
-    i ekonomicznych (np. część dopłat, uznanie za "zwierzę hodowlane")
-
-STATUS "ZWIERZĘCIA HODOWLANEGO" — zwierzę uzyskuje go, gdy SPEŁNIA
-  CO NAJMNIEJ JEDEN z warunków:
-  a) zostało WPISANE do księgi hodowlanej lub rejestru
-  b) jego RODZICE I DZIADKOWIE zostali wpisani do księgi/rejestru tej
-     samej rasy/linii
-  c) jego wykorzystanie jest PRZEWIDZIANE w programie hodowlanym
-
-"ZWIERZĘ HODOWLANE CZYSTORASOWE" (wyższy standard) — pochodzące co
-  najmniej OD DWÓCH POKOLEŃ przodków wpisanych do księgi danej rasy,
-  spełniające warunki wpisu określone w programie hodowlanym
-  ⚠️ WYJĄTKI dla koniowatych: konie pełnej krwi angielskiej, czystej
-  krwi arabskiej, kuce szetlandzkie, koniki polskie, hucuły — MAJĄ
-  ODRĘBNE zasady (dopuszczalne krzyżowanie z innymi rasami
-  "biorącymi udział w doskonaleniu" bez utraty statusu czystorasowego)
-
-KSIĘGA HODOWLANA — prowadzona przez UPOWAŻNIONY związek hodowców lub
-  inny podmiot, zawiera: dane zwierzęcia, hodowcę, właściciela,
-  POCHODZENIE, wyniki OCENY wartości użytkowej/hodowlanej. Dla
-  bydła/świń/owiec/kóz/koniowatych — prowadzona NA PODSTAWIE
-  PRZEPISÓW UE (zharmonizowane wymogi w całej Unii)
-
-KONSEKWENCJE braku formalnego powiązania z programem hodowlanym:
-  ograniczony dostęp do PRZYWILEJÓW prawnych/ekonomicznych (część
-  dopłat, w tym Interwencja 6 opisana wyżej WYMAGA WŁAŚNIE
-  potwierdzenia przez Instytut Zootechniki jako organ programu
-  ochrony — POWIĄZANIE z sekcją "hodowla zachowawcza" wyżej)
-
-Potwierdzone w 5+ zgodnych źródłach, w tym bezpośrednio tekstem
-ustawy (sejm.gov.pl, prawo.pl, sip.lex.pl).
-```
-
-## WYMOGI DLA HODOWLI ZAMKNIĘTEJ (KLATKOWEJ) I OTWARTEJ — DOBROSTAN
-(dodano 2026-07-30, na żądanie użytkownika)
-
-```
-Podstawa: Dyrektywa 1999/74/WE (kury nioski) + Dyrektywa 2007/43/WE
-  (brojlery) + Dyrektywa 98/58/WE (ogólna ochrona zwierząt
-  hodowlanych, przestarzała, przedmiot rewizji)
-
-KURY NIOSKI — TRZY SYSTEMY, RÓŻNE NORMY:
-  □ Klatki WZBOGACONE (nie "gołe klatki bateryjne" — te ZAKAZANE od
-    końca 2011 r. w całej UE): min. **750 cm²/sztukę** + OBOWIĄZKOWO
-    gniazdo + grzęda + ściółka do grzebania. Obsada max ok. 25 szt./m²
-    budynku (z pełną automatyzacją)
-  □ System ŚCIÓŁKOWY: max **9 szt./m²**
-  □ System WOLNOWYBIEGOWY: max **9 szt./m²** WEWNĄTRZ + DODATKOWO
-    **4 m² wybiegu ZEWNĘTRZNEGO** na sztukę
-
-BROJLERY (kurczęta rzeźne — NIGDY nie trzymane w klatkach, tylko
-  system ściółkowy):
-  → Standardowa obsada: max **33 kg/m²**
-  → Przy DOBREJ WENTYLACJI + DODATKOWYCH CERTYFIKACJACH: do **39
-    kg/m²** (wymaga dodatkowej dokumentacji/potwierdzenia warunków)
-  → Oświetlenie: min. **20 luksów** przez min. 6h ciemności/dobę
-  → Typowa obsada w praktyce: 15-18 szt./m², 6-7 cykli produkcyjnych
-    rocznie
-
-⚠️ WAŻNE — PLANOWANY OGÓLNOUNIJNY ZAKAZ KLATEK ("End the Cage Age")
-  WIELOKROTNIE ODKŁADANY, STATUS NIEPEWNY:
-  → Inicjatywa obywatelska (1,4 mln podpisów) → Komisja Europejska
-    zobowiązała się do rewizji ustawodawstwa (2021)
-  → Szczegóły OBIECANE do końca 2023 r. — NIE PRZEDSTAWIONO do dziś
-  → 2024 r.: komitet obywatelski ZŁOŻYŁ SKARGĘ do TSUE przeciwko
-    Komisji za NIEWYWIĄZANIE SIĘ z obietnicy
-  → Planowana data wejścia w życie zakazu: 2027 r. — ALE stan na
-    kwiecień 2026 r. (oko.press): "mięsne LOBBY kontratakuje i JEST
-    SKUTECZNE" — realne ryzyko DALSZEGO opóźnienia lub WYCOFANIA się
-    z zakazu w ogóle
-  ⚠️ NIE TRAKTUJ zakazu klatek z 2027 r. jako PEWNEGO, w
-  przeciwieństwie do JUŻ OBOWIĄZUJĄCEGO polskiego zakazu ferm
-  futerkowych opisanego wyżej — to fundamentalnie RÓŻNY stopień
-  pewności prawnej
-
-SKALA W POLSCE: ok. **70-80%** kur niosek nadal hodowanych w klatkach
-  (dane z różnych okresów 2025-2026) — Polska POWYŻEJ średniej UE w
-  tym zakresie (dla porównania: Niemcy planują odejście od
-  "ulepszonych klatek" już do końca 2026 r., krajowo, niezależnie od
-  ewentualnej regulacji unijnej)
-
-Potwierdzone w 7+ zgodnych źródłach 2025-2026 (topagrar.pl, TVN24,
-oko.press, otwarteklatki.pl, smarthalls.com).
-```
-
-## STREFY ASF I WPŁYW CHORÓB NA HODOWLĘ — SKRAJNIE DYNAMICZNY OBSZAR
-(dodano 2026-07-30, na żądanie użytkownika)
-
-```
-⚠️ NAJWAŻNIEJSZE OSTRZEŻENIE: to JEDEN Z NAJBARDZIEJ ZMIENNYCH
-TEMATÓW w całym tym module — GRANICE STREF ZMIENIAJĄ SIĘ W SKALI
-TYGODNI, czasem DNI. Każda KONKRETNA gmina/powiat przypisana do
-strefy w tej notatce MOŻE BYĆ NIEAKTUALNA już w chwili czytania —
-ZAWSZE weryfikuj na oficjalnym serwisie (patrz niżej), NIGDY nie
-opieraj się na "zapamiętanej" liście gmin z tej lub innej notatki
-
-SYSTEM STREF ASF (afrykański pomór świń) — TRZY POZIOMY:
-  □ Obszar I (kolor NIEBIESKI) — teren WOLNY od ASF, ale GRANICZĄCY z
-    obszarem, gdzie chorobę wykryto (u dzików LUB świń)
-  □ Obszar II (kolor RÓŻOWY, potocznie "strefa różowa") — chorobę
-    potwierdzono u DZIKÓW
-  □ Obszar III (kolor CZERWONY, potocznie "strefa czerwona") —
-    NAJWYŻSZY poziom restrykcji, wokół OGNISK u ŚWIŃ HODOWLANYCH
-    (nie tylko dzików)
-
-⚡ PRZYKŁAD SKALI ZMIENNOŚCI W SAMYM 2026 R. (potwierdzony w 8+
-zgodnych źródłach z lutego-lipca 2026):
-  → 28 STYCZNIA 2026: KE ZNIOSŁA WSZYSTKIE obszary III (czerwone) w
-    Polsce — PIERWSZY raz od dłuższego czasu ŻADNE województwo nie
-    było objęte najwyższym poziomem restrykcji
-  → 22 MAJA 2026 (Rozp. KE 2026/1136): PONOWNE rozszerzenie obszaru
-    II w 4 województwach (kujawsko-pomorskie, łódzkie, warmińsko-
-    mazurskie, zachodniopomorskie) — po nowych ogniskach u dzików
-  → 18 MAJA 2026: nowe ognisko u ŚWIŃ w gminie Pełczyce
-    (zachodniopomorskie) — gospodarstwo z PONAD 21 000 świń
-  → 7 LIPCA 2026: kolejne ognisko u świń w gminie Świecie (kujawsko-
-    pomorskie) — 774 świnie
-  → 16 LIPCA 2026 (Rozp. Wykonawcze KE 2026/1795 — TYLKO 2 TYGODNIE
-    przed dniem tej weryfikacji): PONOWNE rozszerzenie obszaru III
-    (czerwonego) o części powiatów myśliborskiego, choszczeńskiego
-    (zachodniopomorskie) oraz grudziądzkiego, chełmińskiego,
-    świeckiego (kujawsko-pomorskie)
-  → WNIOSEK: sytuacja "zero czerwonych stref" z 28 stycznia trwała
-    NIECAŁE PÓŁ ROKU — obszary III ZNÓW ISTNIEJĄ na dzień tej
-    weryfikacji (30.07.2026)
-
-⭐ OFICJALNY, AUTORYTATYWNY SERWIS DO WERYFIKACJI AKTUALNEJ STREFY:
-  → Główny Inspektorat Weterynarii — strona główna ASF:
-    https://www.wetgiw.gov.pl/nadzor-weterynaryjny/asf-w-polsce
-  → BEZPOŚREDNIA MAPA interaktywna (BIP GIW):
-    https://bip.wetgiw.gov.pl/asf/mapa/
-  → PODSTAWA PRAWNA restrykcji krajowych: rozporządzenie Ministra
-    Rolnictwa i Rozwoju Wsi z 12.03.2026 r. ws. środków zwalczania
-    ASF (WERYFIKUJ, czy nie zastąpione nowszym na dzień użycia)
-  → REGIONALIZACJA UE (podstawa dla map): kolejne rozporządzenia
-    wykonawcze Komisji Europejskiej — NUMER rozporządzenia zmienia
-    się z każdą aktualizacją (np. 2026/1136, 2026/1795 — TO NIE SĄ
-    "ostateczne" numery, będą KOLEJNE)
-
-WYMOGI DLA HODOWCÓW W ZALEŻNOŚCI OD STREFY (obszary I/II/III):
-  □ Przemieszczanie świń — DODATKOWA dokumentacja, kontrola
-    Inspekcji Weterynaryjnej PRZY KAŻDYM transporcie (szczególnie w
-    strefie III)
-  □ Karmienie zielonką/ziarnem z zagrożonych stref — WYMAGANA obróbka
-    termiczna LUB składowanie w miejscu NIEDOSTĘPNYM dla dzików przez
-    **30 DNI** przed podaniem
-  □ Słoma z obszarów II/III jako ściółka — musi "leżakować"
-    (składowanie) przez **90 DNI** przed użyciem, chyba że poddana
-    obróbce unieszkodliwiającej wirus
-  □ Ubój GOSPODARCZY (na użytek własny) w strefach I/II/III —
-    DOZWOLONY, POD WARUNKIEM że świnia była utrzymywana w TYM
-    gospodarstwie min. **30 DNI** przed ubojem + badanie PRZED- lub
-    POUBOJOWE przez urzędowego lekarza weterynarii (zależnie od strefy)
-  □ ⚠️ ZNAJDOWANIE SIĘ W STREFIE III NIE OZNACZA AUTOMATYCZNEGO ZAKAZU
-    SPRZEDAŻY — transport i obrót MOGĄ być kontynuowane, ALE
-    WYŁĄCZNIE po spełnieniu dodatkowych warunków i za zgodą Inspekcji
-    Weterynaryjnej — to częste błędne przekonanie warte skorygowania
-    przy doradzaniu hodowcom
-
-Potwierdzone w 10+ zgodnych, bardzo aktualnych źródeł (agroprofil.pl,
-agronews.com.pl, agropolska.pl, wiescirolnicze.pl, wetgiw.gov.pl
-[Rząd 1] — wszystkie z okresu styczeń-lipiec 2026 r.).
-```
-
-## OBOWIĄZKOWE SZCZEPIENIA ZWIERZĄT (dodano 2026-07-30, na żądanie
-użytkownika)
-
-```
-⚡ ŚWIEŻA ZMIANA PODSTAWY PRAWNEJ: nowa USTAWA O ZDROWIU ZWIERZĄT z
-21.11.2025 r. (Dz.U. 2025 poz. 1795) — weszła w życie **18 MARCA
-2026 R.**, ZASTĘPUJĄC dotychczasową ustawę z 11.03.2004 r. o ochronie
-zdrowia zwierząt (przepis o szczepieniu: był art. 56, TERAZ art. 44).
-Okres przejściowy 3 miesiące — zakończył się **18 CZERWCA 2026 R.**
-(już minął na dzień tej weryfikacji)
-
-SZCZEPIENIE PRZECIWKO WŚCIEKLIŹNIE (psy) — OBOWIĄZEK NIEZMIENIONY co
-  do ISTOTY, mimo nowej ustawy:
-  → DOTYCZY: wszystkich psów POWYŻEJ 3. miesiąca życia na terytorium RP
-  → TERMIN pierwszego szczepienia: **30 DNI** od ukończenia 3.
-    miesiąca życia
-  → KOLEJNE szczepienia: NIE RZADZIEJ niż co **12 MIESIĘCY** od
-    ostatniego szczepienia
-  → KOSZT: pokrywa WYŁĄCZNIE posiadacz psa
-  → WYKONAWCA: lekarz weterynarii w ramach zakładu leczniczego dla
-    zwierząt
-  → KARA za brak: grzywna (podstawa: art. 102 ust. 1 pkt 1 nowej ustawy)
-
-⚠️ SPÓR NAUKOWO-PRAWNY W TOKU: fundacja zajmująca się ochroną
-  zwierząt SKIEROWAŁA sprawę do RZECZNIKA PRAW OBYWATELSKICH,
-  wskazując, że WYMÓG corocznego szczepienia NIE ODZWIERCIEDLA
-  aktualnej wiedzy naukowej — nowoczesne szczepionki mają CHRONIĆ
-  nawet 3 LATA. MIMO tego, ustawodawca UTRZYMAŁ 12-miesięczny rygor
-  w NOWEJ ustawie z 2025 r. — SPÓR NIEROZSTRZYGNIĘTY na dzień tej
-  weryfikacji, obowiązek POZOSTAJE roczny
-
-⭐ DWIE ISTOTNE NOWOŚCI wprowadzone przez ustawę z 2025 r. (NIE
-  ISTNIAŁY w poprzednim stanie prawnym):
-  1) OBOWIĄZKOWE CZIPOWANIE PRZED szczepieniem — szczepienie MUSI być
-     poprzedzone wszczepieniem transpondera (mikroczipa) LUB
-     odczytem/weryfikacją już istniejącego czipa/tatuażu
-  2) OBOWIĄZKOWA REJESTRACJA hodowli psów/kotów RASOWYCH w
-     Powiatowym Inspektoracie Weterynarii (PIW) — NOWY wymóg
-     administracyjny nieznany wcześniejszej ustawie
-
-NOWY OBOWIĄZEK RAPORTOWANIA lekarza weterynarii do powiatowego
-  lekarza weterynarii: do 3. dnia miesiąca (liczba zaszczepionych
-  psów w poprzednim miesiącu) + do 15. dnia miesiąca (szczegółowy
-  wykaz)
-
-Potwierdzone w 6+ zgodnych źródłach z 2026 r., w tym BEZPOŚREDNIO
-wetgiw.gov.pl (Rząd 1) i izby lekarsko-weterynaryjne.
-```
-
-## ⭐⭐ KRAJOWY REJESTR OZNAKOWANYCH PSÓW I KOTÓW (KROPiK) — NOWA,
-ODRĘBNA USTAWA (dodano 2026-08-08, na żądanie użytkownika,
-zamknięcie flagi F-18 — ROZRÓŻNIĆ od "obowiązkowego czipowania PRZED
-szczepieniem" opisanego wyżej, TO INNA, znacznie SZERSZA regulacja)
-
-```
-PODSTAWA: Ustawa z 15.05.2026 o Krajowym Rejestrze Oznakowanych
-  Psów i Kotów (druk sejmowy nieustalony w tej sesji z pewnością —
-  sprawdź na ISAP) — Sejm 245 za/22 przeciw/171 wstrzymało się —
-  PODPISANA przez Prezydenta Karola Nawrockiego **2.06.2026**
-
-⭐⭐ KLUCZOWA RÓŻNICA względem sekcji wyżej: TA ustawa tworzy
-  CENTRALNY, OGÓLNOKRAJOWY rejestr (zamiast rozproszonych baz
-  lokalnych) — TO SZERSZA, SYSTEMOWA reforma, NIE tylko "czipowanie
-  przed szczepieniem psa" — obejmuje RÓWNIEŻ KOTY (częściowo) i
-  WIĄŻE się z odrębnym, WŁASNYM reżimem kar
-
-ZAKRES OBOWIĄZKU — ASYMETRIA PIES/KOT:
-  → PSY: obowiązek czipowania i rejestracji DOTYCZY WSZYSTKICH psów
-    MAJĄCYCH właściciela — BEZ WYJĄTKU
-  → KOTY: obowiązek OGRANICZONY — DOTYCZY kotów w OBROCIE
-    (sprzedaż/adopcja) oraz w SCHRONISKACH/domach tymczasowych
-    prowadzonych przez organizacje prozwierzęce — czipowanie KOTÓW
-    WOLNO ŻYJĄCYCH jest DOBROWOLNE, decyzja NALEŻY do GMINY (nie ma
-    ogólnokrajowego obowiązku dla tej kategorii)
-
-ORGAN PROWADZĄCY: Agencja Restrukturyzacji i Modernizacji Rolnictwa
-  (ARiMR) — NIE Inspekcja Weterynaryjna (jak w sekcji o szczepieniach
-  wyżej) — TO INNY organ administracyjny
-
-PROCEDURA: właściciel zgłasza się do LEKARZA WETERYNARII →
-  wszczepienie transpondera (czipa) → lekarz weterynarii WPISUJE dane
-  BEZPOŚREDNIO do systemu KROPiK — DANE w rejestrze: informacje o
-  zwierzęciu ORAZ pełne dane właściciela (imię, nazwisko, PESEL,
-  numer telefonu)
-
-TERMIN WYKONANIA OBOWIĄZKU: NAJPÓŹNIEJ do dnia PIERWSZEGO szczepienia
-  psa przeciwko wściekliźnie — POWIĄZANIE z terminem 30 dni od
-  ukończenia 3. miesiąca życia (patrz sekcja wyżej) — W PRAKTYCE
-  oznacza to, że OBA obowiązki (czipowanie przed szczepieniem +
-  rejestracja w KROPiK) ZBIEGAJĄ SIĘ W CZASIE dla większości
-  właścicieli
-
-KOSZTY: MAKSYMALNIE **50 zł** za oznakowanie (czip) + MAKSYMALNIE
-  **50 zł** za rejestrację — POBIERANE przez lekarzy weterynarii za
-  wykonane czynności — ⚠️ USTAWOWY MECHANIZM WALORYZACJI: maksymalna
-  opłata WYRAŻONA jest jako 0,56% przeciętnego wynagrodzenia w
-  gospodarce narodowej (W 2026 R.: **49,86 ZŁ** za KAŻDĄ z dwóch
-  usług) — kwota BĘDZIE się zmieniać co roku wraz ze wzrostem
-  przeciętnego wynagrodzenia
-
-⭐⭐ SANKCJE — DWA POZIOMY:
-  → GRZYWNA za brak rejestracji/oznakowania: **OD 20 ZŁ DO 5000 ZŁ**
-  → ⚠️ SUROWSZA odpowiedzialność KARNA w SKRAJNYCH przypadkach —
-    NP. odmowa odbioru zwierzęcia ze schroniska (mimo obowiązku) —
-    do **3 LAT POZBAWIENIA WOLNOŚCI** — ⚠️ dokładna podstawa
-    prawna/kwalifikacja tego surowszego przepisu NIE w pełni
-    zweryfikowana w tej sesji, punkt startowy do dalszego badania
-
-KONTROLA WYKONANIA: Inspekcja Weterynaryjna, POLICJA, oraz STRAŻ
-  MIEJSKA — SZEROKI krąg organów uprawnionych do kontroli, nie tylko
-  wyspecjalizowana inspekcja
-
-⭐⭐⭐ NAJWAŻNIEJSZY NIUANS PRAKTYCZNY — BARDZO DŁUGIE VACATIO LEGIS:
-  ustawa PRZEWIDUJE **SZEŚCIOLETNI** okres przejściowy — 3 LATA na
-  ZBUDOWANIE i URUCHOMIENIE samego systemu informatycznego, oraz
-  KOLEJNE 3 LATA na PEŁNE oznakowanie/zarejestrowanie WSZYSTKICH
-  objętych ustawą zwierząt — WNIOSEK PRAKTYCZNY: mimo że ustawa JEST
-  już PODPISANA i PRAWNIE ISTNIEJE, PEŁNE, POWSZECHNE obowiązywanie
-  w PRAKTYCE NASTĄPI dopiero za WIELE LAT (orientacyjnie: ok.
-  2032 r.) — NIE TRAKTUJ tego jako natychmiast, w pełni
-  egzekwowalnego obowiązku na dzień weryfikacji
-
-⚠️ SAM PREZYDENT, PODPISUJĄC ustawę, PUBLICZNIE zwrócił uwagę na
-  DWA problemy WYMAGAJĄCE poprawy W TRAKCIE vacatio legis: (1)
-  poziom kar jest "ZDECYDOWANIE ZBYT WYSOKI" i POWINIEN zostać
-  UREALNIONY, (2) kwestia PRZENOSZENIA danych z OBECNYCH,
-  rozproszonych rejestrów DO nowego systemu WYMAGA lepszego
-  rozwiązania — SUGERUJE to, że TREŚĆ ustawy MOŻE ulec DALSZYM
-  zmianom NOWELIZACYJNYM jeszcze PRZED pełnym wejściem w życie
-
-Potwierdzone w 7+ zgodnych, aktualnych źródłach 2026 r. (forsal.pl
-[luty 2026], portalsamorzadowy.pl [kwiecień 2026], prawo.pl [czerwiec
-2026, x2], infowet.pl [x2], munipro.pl [luty 2026], infor.pl [czerwiec
-2026, z bezpośrednim potwierdzeniem podpisu prezydenckiego]).
-```
-
-## OBOWIĄZKOWE SZCZEPIENIA ZWIERZĄT — NOWA USTAWA O ZDROWIU ZWIERZĄT
-(dodano 2026-07-30, na żądanie użytkownika)
-
-```
-⚡ BARDZO ŚWIEŻA PODSTAWA PRAWNA: ustawa z 21.11.2025 r. o zdrowiu
-zwierząt (Dz.U. 2025 poz. 1795) — weszła w życie **18 MARCA 2026 R.**
-(niecałe 4,5 miesiąca przed dniem tej weryfikacji), z 3-miesięcznym
-okresem przejściowym, który upłynął **18 CZERWCA 2026 R.** (niecałe
-6 tygodni temu) — ZASTĄPIŁA dotychczasową ustawę o ochronie zdrowia
-zwierząt oraz zwalczaniu chorób zakaźnych zwierząt
-
-WŚCIEKLIZNA — SZCZEPIENIE PSÓW OBOWIĄZKOWE:
-  → Termin PIERWSZEGO szczepienia: **30 DNI** od ukończenia przez
-    psa 3. miesiąca życia
-  → Powtarzanie: NIE RZADZIEJ niż co **12 MIESIĘCY** od dnia
-    ostatniego szczepienia — NOWA ustawa UTRZYMAŁA ten wymóg BEZ ZMIAN
-    (mimo kontrowersji, patrz niżej)
-  → ⚡ NOWY WYMÓG (2026): OBOWIĄZKOWE OZNAKOWANIE (CZIPOWANIE) psa
-    PRZED podaniem szczepienia — lekarz weterynarii NIE MOŻE zaszczepić
-    psa bez wcześniejszego wszczepienia mikroczipa
-  → ⚡ NOWY WYMÓG: obowiązkowa REJESTRACJA hodowli psów/kotów
-    RASOWYCH w PIW (Powiatowym Inspektoracie Weterynarii) — wprowadzona
-    W ODPOWIEDZI na głośne przypadki nieprawidłowości w hodowlach
-    (szeroko relacjonowane w mediach na początku 2026 r.)
-  → Wwóz na terytorium Polski MŁODYCH psów/kotów/fretek BEZ ważnego
-    szczepienia przeciw wściekliźnie — ZABRONIONY
-
-⚠️ SPÓR NAUKOWO-PRAWNY (aktywny na dzień weryfikacji): fundacja
-  zwierzęca (Vet-Alert) zwróciła się do RPO, argumentując że coroczny
-  wymóg (niezmieniony od 1949 r.) NIE odpowiada aktualnej wiedzy —
-  nowoczesne szczepionki dają ochronę NAWET 3-LETNIĄ. MRiRW
-  ODPOWIEDZIAŁO (6.02.2026 r.) ODMOWNIE — powołując się na SYTUACJĘ
-  EPIDEMIOLOGICZNĄ w Polsce jako uzasadnienie utrzymania wymogu
-  rocznego. SPRAWA NIEROZSTRZYGNIĘTA/w toku na dzień tej weryfikacji.
-
-DZIKIE LISY — SZCZEPIENIA DOUSTNE (odrębny mechanizm): Polska jest
-  rezerwuarem wirusa wścieklizny u lisów rudych — Inspekcja
-  Weterynaryjna prowadzi PROGRAM szczepień lisów wolno żyjących na
-  obszarach najwyższego ryzyka (szczepionka doustna w przynęcie,
-  rozp. MRiRW z 11.03.2026 r. — RÓWNIEŻ bardzo świeże)
-
-KARY ADMINISTRACYJNE dla LEKARZY WETERYNARII (NIE dla właścicieli
-  zwierząt) za niedopełnienie obowiązków dokumentacyjnych (brak
-  zaświadczenia, brak wykazu zaszczepionych, brak przekazania danych
-  w terminie): **0,1-2× przeciętnego wynagrodzenia miesięcznego**
-  (zmienna kwota, ogłaszana przez Prezesa GUS w Monitorze Polskim)
-
-Potwierdzone w 7+ zgodnych, bardzo aktualnych źródłach (styczeń-lipiec
-2026), w tym bezpośrednio gov.pl/wetgiw (Rząd 1).
-```
-
-## STREFY ASF (AFRYKAŃSKI POMÓR ŚWIŃ) — SYSTEM I WPŁYW NA HODOWLĘ
-(dodano 2026-07-30, na żądanie użytkownika)
-
-```
-⚡ AKTYWNA, ZMIENIAJĄCA SIĘ SYTUACJA na dzień weryfikacji — NOWE
-ogniska potwierdzone w maju/lipcu 2026 r., mapa stref ZMIENIA SIĘ
-regularnie rozporządzeniami wykonawczymi KE (najnowsze na dzień
-weryfikacji: Rozp. Wykonawcze KE 2026/1795 z 16.07.2026 r. — sprzed
-zaledwie 2 TYGODNI)
-
-PODSTAWA PRAWNA: ustawa z 21.11.2025 o zdrowiu zwierząt (TA SAMA co
-  wyżej) + rozp. MRiRW z 12.03.2026 ws. środków zwalczania ASF (RÓWNIEŻ
-  bardzo świeże, oba akty zastąpiły starsze przepisy)
-
-DWA RÓWNOLEGŁE SYSTEMY KLASYFIKACJI — nie mylić:
-
-(A) STREFY LOKALNE WOKÓŁ KONKRETNEGO OGNISKA (krajowe, tymczasowe,
-    wyznaczane przez powiatowego lekarza weterynarii/Wojewodę):
-  □ Obszar ZAPOWIETRZONY — promień MIN. 3 KM od ogniska
-  □ Obszar ZAGROŻONY — sięgający MIN. 7 KM POZA obszar zapowietrzony
-    (czyli łącznie min. ~10 km promienia od ogniska) — ⚠️ UWAGA:
-    niektóre rozporządzenia wojewódzkie WYZNACZAJĄ szerzej (np. 10 km
-    bezpośrednio, jak w przykładzie kujawsko-pomorskim z lipca 2026)
-  → CZAS TRWANIA ograniczeń: OKREŚLONY minimalny okres, ALE powiatowy
-    lekarz weterynarii MOŻE GO SKRÓCIĆ do: **30 DNI** (zapowietrzony)
-    / **20 DNI** (zagrożony)
-  → GRANICE NIE zawsze pokrywają się z granicami administracyjnymi
-    gmin — wyznaczane wg położenia miejscowości/dróg/punktów terenowych
-
-(B) STREFY UNIJNE — REGIONALIZACJA DŁUGOTERMINOWA (Rozp. Wykonawcze
-    Komisji Europejskiej, aktualizowane regularnie w miarę rozwoju
-    sytuacji epizootycznej):
-  □ Strefa I — najniższy poziom restrykcji
-  □ Strefa II
-  □ Strefa III ("CZERWONA") — NAJWYŻSZY poziom restrykcji, obejmuje
-    obszary z potwierdzonymi ogniskami u świń domowych (nie tylko
-    dzików)
-
-WPŁYW NA GOSPODARSTWO ZNAJDUJĄCE SIĘ W DANEJ STREFIE:
-  → Gospodarstwo w obszarze zapowietrzonym/zagrożonym: BEZWZGLĘDNY
-    ZAKAZ wyprowadzania świń z gospodarstwa przez czas trwania
-    obszaru (zob. wyżej terminy/skrócenia)
-  → Po tym okresie: konieczność ZGŁOSZENIA do powiatowego lekarza
-    weterynarii CHĘCI uzyskania POZWOLENIA na przemieszczenie zwierząt
-  → ⚠️ WŁĄCZENIE do Strefy III (unijnej) NIE OZNACZA automatycznego
-    zakazu sprzedaży/eksportu świń — transport i obrót MOGĄ być
-    kontynuowane, ALE WYŁĄCZNIE po spełnieniu DODATKOWYCH warunków
-    określonych w przepisach i POD NADZOREM Inspekcji Weterynaryjnej
-    (nie jest to więc "całkowita blokada", tylko ZAOSTRZONY reżim)
-  → Ograniczenia dotyczą TAKŻE mięsa wieprzowego i innych produktów
-    pozyskanych od świń ORAZ od DZIKÓW i ich mięsa — NIE tylko żywych
-    zwierząt
-
-ODSZKODOWANIA: hodowcy, u których wystąpiło ognisko ASF, SPEŁNIAJĄCY
-  wymagania weterynaryjne (W TYM identyfikacji i rejestracji świń —
-  ⚠️ WARUNEK KONIECZNY, brak prawidłowej rejestracji MOŻE wykluczyć
-  odszkodowanie) otrzymują odszkodowanie za: świnie zabite z nakazu
-  Inspekcji, ZNISZCZONE PASZE, oraz SPRZĘT
-
-SERWIS ŚLEDZĄCY STREFY: oficjalna, bieżąco aktualizowana MAPA na
-  stronie GIW (wetgiw.gov.pl/nadzor-weterynaryjny/asf-w-polsce) —
-  JEDYNE oficjalne, wiarygodne źródło aktualnych granic stref — nie
-  polegaj na starszych mapach/artykułach prasowych, sytuacja zmienia
-  się w ciągu tygodni, nie miesięcy
-
-OBOWIĄZEK ZGŁOSZENIA: KAŻDY hodowca, u którego wystąpiły niepokojące
-  objawy chorobowe LUB PADNIĘCIA świń, MUSI zgłosić to bezpośrednio
-  powiatowemu lekarzowi weterynarii, ZA POŚREDNICTWEM opiekującego
-  się gospodarstwem lekarza weterynarii, LUB za pośrednictwem
-  właściwego organu samorządu terytorialnego (wójt/burmistrz/prezydent)
-
-Potwierdzone w 8+ zgodnych, EKSTREMALNIE aktualnych źródłach (maj-lipiec
-2026), w tym bezpośrednio gov.pl/wetgiw (Rząd 1) i rozporządzeniami
-wojewódzkimi z lipca 2026 r.
-```
-
-## PSEUDOHODOWLA — DEFINICJA, ODRÓŻNIENIE OD LEGALNEJ HODOWLI, GDZIE
-ZGŁOSIĆ (dodano 2026-07-30, na żądanie użytkownika)
-
-```
-DEFINICJA: nielegalna/niezarejestrowana hodowla prowadząca MASOWE,
-  niekontrolowane rozmnażanie zwierząt (najczęściej psów/kotów)
-  WYŁĄCZNIE dla zysku, bez dbałości o dobrostan, zdrowie, selekcję
-  genetyczną — termin środowiskowy (kynologiczny), NIE ustawowy wprost
-
-PODSTAWA PRAWNA POŚREDNIA: sprzedaż zwierząt POZA zarejestrowanymi
-  hodowlami jest NIEZGODNA Z PRAWEM od 2012 r. — ⚠️ WAŻNE: samo
-  KUPNO psa od pseudohodowcy NIE JEST nielegalne dla osoby prywatnej
-  (kupujący nie ponosi odpowiedzialności prawnej, choć wspiera
-  nieetyczny proceder)
-
-⚡ POWIĄZANIE Z NOWĄ USTAWĄ O ZDROWIU ZWIERZĄT (patrz sekcja wyżej):
-  każda hodowla psów/kotów RASOWYCH musi być ZGŁOSZONA/ZATWIERDZONA
-  przez powiatowego lekarza weterynarii (PIW) — art. 55 ustawy,
-  otrzymuje WETERYNARYJNY NUMER IDENTYFIKACYJNY (wni). To NOWY,
-  DODATKOWY wymóg OBOK rejestracji w organizacji kynologicznej —
-  pseudohodowcy z definicji OMIJAJĄ OBA te systemy jednocześnie
-
-JAK ODRÓŻNIĆ (sygnały ostrzegawcze):
-  □ Brak rejestracji w oficjalnej organizacji kynologicznej (patrz
-    baza niżej) — LUB rejestracja w FIKCYJNEJ organizacji wystawiającej
-    bezwartościowe "rodowody"
-  □ Brak przydomka hodowlanego (odpowiednik "nazwiska" psa) możliwego
-    do zweryfikowania w rejestrach ZKwP online
-  □ Podejrzanie NISKA cena — legalna hodowla generuje realne koszty
-    (badania genetyczne, opieka weterynaryjna, żywienie)
-  □ Brak dostępu do "emerytów" hodowlanych (starszych zwierząt
-    wycofanych z rozrodu) — w pseudohodowlach bywają wywożone,
-    eksportowane lub usypiane po "zużyciu"
-  □ Zwierzęta w ciasnych, brudnych klatkach, bez socjalizacji
-
-GDZIE ZGŁOSIĆ podejrzenie pseudohodowli:
-  1) POWIATOWY INSPEKTORAT WETERYNARII (PIW) właściwy dla lokalizacji
-     — GŁÓWNY adresat, ma uprawnienia do KONTROLI i NAŁOŻENIA KARY
-  2) Lokalne organizacje prozwierzęce/fundacje rasowe (wsparcie,
-     nagłośnienie, ale BEZ uprawnień kontrolnych)
-  3) ⚠️ ISTOTNE ZASTRZEŻENIE: legalne STOWARZYSZENIE zrzeszające
-     hodowców MOŻE założyć KAŻDY, a hodowle w takim stowarzyszeniu
-     NIE MUSZĄ spełniać ŻADNYCH określonych standardów jakościowych —
-     "zrzeszenie" samo w sobie NIE gwarantuje jakości, kluczowa jest
-     KONKRETNA, uznana organizacja (patrz baza niżej)
-
-Potwierdzone w 6+ zgodnych źródłach 2025-2026 (petlover.com.pl,
-problemyzpsem.pl, wiw.mazowsze.pl [PIW Mazowsze — Rząd 1-adjacent],
-psiparagraf.pl).
-```
-
-## ZWIERZĘTA/HODOWLE NIEWYMAGAJĄCE ŻADNEGO ZEZWOLENIA (dodano
-2026-07-30, na żądanie użytkownika)
-
-```
-ZASADA OGÓLNA: większość TYPOWYCH zwierząt domowych (psy ras
-  NIEUZNANYCH za agresywne, koty, gryzonie domowe, ptaki niebędące
-  gatunkiem chronionym/CITES, popularne akwaria) — NIE WYMAGA
-  żadnego zezwolenia na samo POSIADANIE, TYLKO:
-  □ obowiązkowe szczepienie psa przeciw wściekliźnie (patrz wyżej)
-  □ jeśli HODOWLA rasowa (nie tylko posiadanie) — zgłoszenie do PIW
-    (nowy wymóg 2026, patrz wyżej) + rejestracja w organizacji
-    kynologicznej/felinologicznej (dla obrotu handlowego)
-
-⚠️ NIE MYL: brak zezwolenia na POSIADANIE ≠ brak WSZELKICH
-  obowiązków — nadal obowiązują: obowiązkowe szczepienia, przepisy
-  o dobrostanie (ustawa o ochronie zwierząt), lokalne przepisy
-  porządkowe gminy (np. dot. wyprowadzania na smyczy/w kagańcu w
-  miejscach publicznych — zależnie od uchwały RADY GMINY, NIE
-  jednolite ogólnokrajowo)
-```
-
-## RASY/GATUNKI WYMAGAJĄCE SZCZEGÓLNYCH ZEZWOLEŃ — Z OFICJALNYMI
-BAZAMI (dodano 2026-07-30, na żądanie użytkownika)
-
-```
-(A) PSY RAS UZNAWANYCH ZA AGRESYWNE:
-
-PODSTAWA: Rozporządzenie MSWiA z 28.04.2003 r. (Dz.U. 2003 nr 77
-  poz. 687) — WYKAZ NIEZMIENIONY OFICJALNIE OD 2003 R. (mimo
-  wieloletnich apeli o aktualizację — sprawdź, czy nie doszło do
-  zmiany PO tej weryfikacji)
-
-⭐ OFICJALNA LISTA (11 RAS) — źródło do wykorzystania jako baza:
-  1) amerykański pit bull terrier
-  2) pies z Majorki (Perro de Presa Mallorquin)
-  3) buldog amerykański
-  4) dog argentyński
-  5) pies kanaryjski (Perro de Presa Canario)
-  6) tosa inu
-  7) rottweiler
-  8) akbash dog
-  9) anatolian karabash (owczarek anatolijski)
-  10) moskiewski stróżujący
-  11) owczarek kaukaski
-
-PROCEDURA: wniosek do WÓJTA/BURMISTRZA/PREZYDENTA MIASTA właściwego
-  dla miejsca utrzymania psa/prowadzenia hodowli — termin: **30 DNI**
-  od nabycia psa. Organ WYDA ODMOWĘ, jeśli pies utrzymywany w
-  warunkach stanowiących zagrożenie — z tych samych względów MOŻE
-  COFNĄĆ już wydane zezwolenie. Brak zezwolenia = WYKROCZENIE
-  (grzywna, w skrajnych przypadkach PRZEPADEK psa)
-⚠️ SPÓR PRAKTYCZNY (nieprawomocny wyrok WSA w Łodzi, 19.02.2026,
-  II SAB/Łd 188/25): czy urząd MOŻE żądać sprecyzowania danych psa
-  (np. imienia) na etapie, gdy wnioskodawca DOPIERO ZAMIERZA go
-  nabyć — kwestia NIEROZSTRZYGNIĘTA ostatecznie na dzień weryfikacji
-
-(B) GATUNKI CHRONIONE/EGZOTYCZNE — KONWENCJA WASZYNGTOŃSKA (CITES):
-
-PODSTAWA: Rozp. Rady (WE) 338/97 + Konwencja Waszyngtońska (Polska
-  stroną). OK. 30 000-40 000 gatunków objętych (10 000 zwierząt),
-  podzielonych na ZAŁĄCZNIKI A/B/C/D (malejący rygor):
-  □ Załącznik A — NAJBARDZIEJ zagrożone — zezwolenie WYDAWANE
-    SPORADYCZNIE, ścisła kontrola obrotu
-  □ Załącznik B — wymaga UNIJNEGO zezwolenia importowego
-  □ Załączniki C/D — wystarczy FORMULARZ ZGŁOSZENIA importu, BEZ
-    potrzeby uzyskiwania pełnego zezwolenia
-
-⭐ OFICJALNE BAZY DO WYKORZYSTANIA:
-  □ gov.pl/web/klimat/konwencja-waszyngtonska-cites — Ministerstwo
-    Klimatu i Środowiska, PEŁNA lista gatunków + procedury (Rząd 1)
-  □ Wniosek o zezwolenie importowe: składany do Departamentu Ochrony
-    Przyrody, Ministerstwo Klimatu i Środowiska (Wawelska 52/54,
-    Warszawa) — wzór wg zał. I rozp. wykonawczego KE 792/2012
-  □ REJESTR LOKALNY (dla przetrzymywania/hodowli w Polsce): prowadzi
-    STAROSTA właściwy dla miejsca przetrzymywania — obowiązek
-    wynika z art. 27e ustawy o ochronie przyrody. Do rejestracji:
-    świadectwo legalnego przywozu LUB zaświadczenie weterynarza o
-    urodzeniu w niewoli
-  ⚠️ ZMIANA: nowy obowiązek rejestracji DODATKOWO dla hodowców
-    gatunków z ZAŁĄCZNIKA I CITES (odrębny od rejestru starosty) —
-    sprawdź aktualny komunikat na gov.pl/klimat przed poleceniem
-    klientowi konkretnej procedury, temat wskazany jako "NOWY
-    obowiązek" bez podanej precyzyjnej daty w źródle
-  □ WYŁĄCZENIA z obowiązku rejestracji: podmioty gospodarcze
-    uprawnione do handlu żywymi zwierzętami chronionymi (odrębny
-    reżim), czasowe przetrzymywanie w celu leczenia/rehabilitacji
-
-SANKCJE za brak dokumentacji: kara WIĘZIENIA, kara pieniężna, ORAZ
-  KONFISKATA przewożonych/posiadanych okazów — dotyczy TAKŻE
-  pozornie niewinnych "pamiątek" z zagranicznych wakacji (wyroby z
-  kości słoniowej, skór gadów, koralowców, piór ptaków drapieżnych)
-
-Potwierdzone w 8+ zgodnych źródłach, w tym BEZPOŚREDNIO gov.pl/klimat
-i biznes.gov.pl (oba Rząd 1) oraz podatki.gov.pl.
-```
-
-## GATUNKI INWAZYJNE — WPROWADZANIE, HODOWLA, KONSEKWENCJE (dodano
-2026-07-30, na żądanie użytkownika)
-
-```
-Podstawa: Rozp. UE 1143/2014 + polska ustawa o gatunkach obcych
-  (u.g.o.) + rozporządzenie wykonawcze (weszło w życie, "lista
-  polska" uzupełniająca listę unijną)
-
-⭐ POŁĄCZENIE Z WCZEŚNIEJSZYM ZNALEZISKIEM (sekcja "Zwierzęta
-futerkowe" wyżej) — PRZYKŁAD MODELOWY: NORKA AMERYKAŃSKA stała się
-gatunkiem inwazyjnym w Polsce W ZNACZNEJ MIERZE PRZEZ UCIECZKI Z
-FERM FUTRZARSKICH (zwierzęta "często uciekały z ferm lub były
-wypuszczane celowo") — to BEZPOŚREDNIO tłumaczy, DLACZEGO norka
-trafiła na unijną listę inwazyjną (7.08.2025) RÓWNOLEGLE z
-uchwaleniem zakazu hodowli na futra — DWIE STRONY TEGO SAMEGO
-PROBLEMU: hodowla stworzyła gatunek inwazyjny, zakaz hodowli ma
-ograniczyć DALSZE ryzyko ucieczek
-
-DWA POZIOMY LIST — nie mylić:
-  □ LISTA UNIJNA — powielana z rozporządzenia Komisji Europejskiej,
-    jednolita dla całej UE
-  □ LISTA POLSKA — DODATKOWA, krajowy wkład legislatora (m.in.
-    barszcz Mantegazziego, barszcz Sosnowskiego, niecierpek
-    gruczołowaty, jenot, piżmak, szop pracz)
-  Każda z LIST dzieli się na: "gatunki podlegające SZYBKIEJ ELIMINACJI"
-    (małe, izolowane populacje — obowiązek czynnej likwidacji) vs
-    "gatunki ROZPRZESTRZENIONE na szeroką skalę" (populacja zbyt
-    duża do pełnej eliminacji — zarządzanie/ograniczanie)
-
-ZAKRES ZAKAZU (art. 7 u.g.o., dla gatunków na liście) — SZEROKI
-  KATALOG obejmujący: wprowadzanie do środowiska, przemieszczanie w
-  środowisku, przywóz/wywóz z Polski, TRANSPORT (wyjątek: transport
-  do obiektu w celu eliminacji), PRZETRZYMYWANIE (wyjątek: Centralny
-  Azyl dla Zwierząt), CHÓW LUB HODOWLA, rozmnażanie/uprawa,
-  wprowadzanie do obrotu, wykorzystywanie, wymiana
-
-⚡ SANKCJE KARNE (art. 34 ustawy o gatunkach obcych) — SUROWSZE NIŻ
-  NIEKTÓRE NARKOTYKI:
-  → UMYŚLNE naruszenie zakazów (art. 7 ust. 2): kara POZBAWIENIA
-    WOLNOŚCI od **3 MIESIĘCY DO 5 LAT** (art. 34 ust. 1) — dla
-    porównania: WYŻSZA niż górna granica za uprawę marihuany/koki/maku
-    w niektórych konfiguracjach — potwierdzone przez Fundację Niezłe
-    Chwasty jako świadomie prowokacyjne porównanie edukacyjne
-  → NIEUMYŚLNE naruszenie: grzywna, kara ograniczenia wolności ALBO
-    pozbawienia wolności DO 2 LAT (art. 34 ust. 2)
-  → ADMINISTRACYJNA kara pieniężna: do **1 000 000 ZŁ** za
-    niedostosowanie się do przepisów po dodaniu gatunku do listy
-
-OKRESY PRZEJŚCIOWE dla POSIADACZY zwierząt domowych z gatunku
-  DOPIERO co dodanego do listy (np. norka amerykańska po 7.08.2025):
-  → Posiadacze NIEKOMERCYJNI (zwierzę domowe): termin **DO 7 LUTEGO
-    2026 R.** na wystąpienie o zezwolenie zatrzymania — warunek:
-    OZNAKOWANIE (czipowanie) LUB udokumentowanie cech indywidualnych
-  → Podmioty KOMERCYJNE: rok (do **7 SIERPNIA 2026 R.**) na sprzedaż
-    zapasów podmiotom niekomercyjnym, LUB dwa lata (do **7 SIERPNIA
-    2027 R.**) na przekazanie np. placówkom naukowym
-  → Zezwolenia na odstępstwa (badania naukowe, ochrona ex situ)
-    wydaje GDOŚ lub RDOŚ
-
-OBOWIĄZEK ZGŁOSZENIA: KAŻDY, kto stwierdzi OBECNOŚĆ w środowisku
-  gatunku z listy, MUSI zgłosić to WÓJTOWI/BURMISTRZOWI, który
-  przekazuje informację DALEJ do GDOŚ
-
-⭐ NARZĘDZIE PRAKTYCZNE (baza do wykorzystania): Fundacja Niezłe
-  Chwasty prowadzi WYSZUKIWARKĘ pozwalającą sprawdzić, czy dany
-  gatunek jest obcy/inwazyjny/potencjalnie inwazyjny i czy figuruje
-  na liście zakazanych IGO — przydatne narzędzie WSTĘPNEJ weryfikacji
-  (niezlechwasty.pl), choć dla WIĄŻĄCEGO ustalenia statusu prawnego
-  sprawdź ZAWSZE aktualne rozporządzenie na ISAP
-
-Potwierdzone w 6+ zgodnych, aktualnych źródłach 2025-2026 (teraz-
-srodowisko.pl, inforlex.pl, laspolski.pl, niezlechwasty.pl,
-istotnie.pl, infowet.pl).
-```
-
-## UCIECZKA ZWIERZĄT Z HODOWLI — ODPOWIEDZIALNOŚĆ CYWILNA (dodano
-2026-07-30, na żądanie użytkownika)
-
-```
-PODSTAWA: art. 431 Kodeksu cywilnego — Dz.U.2026.0.795 t.j.
-
-⭐ KLUCZOWA ZASADA: odpowiedzialność za szkodę wyrządzoną przez
-  zwierzę JEST TAKA SAMA niezależnie od tego, czy zwierzę było POD
-  NADZOREM, czy ZABŁĄKAŁO SIĘ LUB UCIEKŁO — ustawodawca WPROST
-  wyklucza argument "ale ono uciekło" jako podstawę zwolnienia z
-  odpowiedzialności
-
-CHARAKTER ODPOWIEDZIALNOŚCI: "wina w nadzorze" (culpa in custodiendo)
-  — domniemanie WINY osoby chowającej/posługującej się zwierzęciem.
-  CIĘŻAR DOWODU: poszkodowany musi wykazać (1) że zwierzę było
-  CHOWANE/używane przez pozwanego, (2) szkodę wyrządzoną PRZEZ
-  zachowanie zwierzęcia, (3) związek przyczynowy — ALE NIE musi
-  udowadniać WINY, bo ta jest DOMNIEMANA (przerzucenie ciężaru
-  dowodu na pozwanego, który może się BRONIĆ wykazaniem BRAKU winy)
-
-WARUNEK ZASTOSOWANIA: zwierzę musi działać z WŁASNEGO POPĘDU
-  (instynktu) — art. 431 NIE stosuje się, gdy zwierzę jest
-  "narzędziem w rękach człowieka" (np. koń podczas jazdy wierzchem
-  pod kontrolą jeźdźca) — WTEDY odpowiedzialność na zasadach
-  OGÓLNYCH (art. 415 KC — zwykła wina sprawcy)
-
-PODMIOT ODPOWIEDZIALNY: KAŻDY, kto zwierzę "CHOWA" (stała piecza) LUB
-  się nim "POSŁUGUJE" (nawet krótkotrwałe, grzecznościowe
-  wykorzystanie) — NIEKONIECZNIE właściciel w sensie prawa
-  własności — może to być np. osoba pilnująca zwierzęcia pod
-  nieobecność właściciela
-
-ART. 431 §2 — DODATKOWA "ODPOWIEDZIALNOŚĆ NA ZASADZIE SŁUSZNOŚCI":
-  nawet gdy chowający NIE PONOSI winy (obalił domniemanie), sąd MOŻE
-  MIMO TO zasądzić całkowite lub częściowe odszkodowanie, jeśli
-  wymagają tego "zasady współżycia społecznego" — w SZCZEGÓLNOŚCI
-  przy porównaniu stanu MAJĄTKOWEGO poszkodowanego i chowającego
-  (np. zamożna ferma vs poszkodowany o skromnych środkach)
-
-⚠️ SZCZEGÓLNE ZNACZENIE DLA HODOWLI ZWIERZĄT NIEBEZPIECZNYCH/
-  EGZOTYCZNYCH: przy ucieczce zwierzęcia z gatunku wymagającego
-  szczególnego zezwolenia (patrz sekcje wyżej — rasy agresywne, CITES)
-  DODATKOWO może dojść do:
-  → ODPOWIEDZIALNOŚCI ADMINISTRACYJNEJ za naruszenie warunków
-    zezwolenia (możliwe COFNIĘCIE zezwolenia na utrzymywanie psa
-    rasy agresywnej, patrz sekcja wyżej)
-  → ODPOWIEDZIALNOŚCI KARNEJ z KK za NARAŻENIE innych osób na
-    niebezpieczeństwo (art. 160 KK i pokrewne — zależnie od
-    konkretnego stanu faktycznego, wymaga odrębnej analizy)
-  → w przypadku gatunku Z LISTY INWAZYJNEJ (patrz sekcja wyżej) —
-    ODPOWIEDZIALNOŚCI z ustawy o gatunkach obcych (art. 34) — jeśli
-    ucieczka wynika z NIEDOSTATECZNEGO zabezpieczenia (nieumyślność)
-    → kara jak w art. 34 ust. 2 (grzywna/ograniczenie wolności/do 2
-    lat pozbawienia wolności)
-
-Potwierdzone jednogłośnie w 6+ zgodnych źródłach, w tym bezpośrednio
-tekstem KC (arslege.pl) i orzecznictwem sądów (rp.pl).
-```
+---
 
 ## Połącz z
 - DR-10/mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny (nadzór GIS)
 - DR-10/mod-ustawa-rolne-zywnosc-weterynaria (GIW produkty zwierzęce)
+- DR-10/mod-ustawa-hodowla-zdrowie-zwierzat (WYDZIELONY 2026-08-12 — hodowla
+  zachowawcza, ubój rytualny, zwierzęta futerkowe, hodowla rasowa,
+  ASF, szczepienia, KROPiK)
+- DR-10/mod-ustawa-hodowla-zezwolenia-gatunki (WYDZIELONY 2026-08-12 —
+  pseudohodowla, zezwolenia na gatunki, gatunki inwazyjne, odpowiedzialność
+  za ucieczkę zwierząt)
 
 ## Weryfikacja online
 ```

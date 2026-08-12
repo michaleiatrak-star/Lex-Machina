@@ -110,6 +110,68 @@ PRZERWANIE (termin biegnie od nowa) — art. 70 §4:
 
 ---
 
+## 4a. ⭐⭐⭐ NADPŁATA PODATKU (rozdz. 9 Op, art. 72-80) — dodano
+2026-08-12, na żądanie użytkownika — dotąd CAŁKOWICIE nieobecny,
+mimo że to JEDEN Z NAJCZĘŚCIEJ praktycznie potrzebnych tematów
+Ordynacji podatkowej
+
+```
+⭐⭐ WNIOSEK O STWIERDZENIE NADPŁATY (art. 75):
+  → §1: PRZYSŁUGUJE, GDY podatnik KWESTIONUJE zasadność POBRANIA
+    przez PŁATNIKA podatku ALBO wysokość POBRANEGO podatku
+  → §2: UPRAWNIENI do złożenia: PODATNICY, PŁATNICY, INKASENCI, ORAZ
+    OSOBY, które BYŁY wspólnikami SPÓŁKI cywilnej W MOMENCIE jej
+    rozwiązania (W ZAKRESIE zobowiązań SPÓŁKI) — PŁATNIK/inkasent —
+    TYLKO GDY wpłacony PODATEK NIE ZOSTAŁ pobrany OD podatnika
+  → §2a: RÓWNIEŻ spółki, KTÓRE tworzyły podatkową GRUPĘ kapitałową
+    (PGK)
+
+⭐⭐ ZALICZENIE vs ZWROT (art. 76 §1): nadpłata WRAZ Z jej
+  OPROCENTOWANIEM PODLEGA W PIERWSZEJ kolejności ZALICZENIU NA
+  poczet: ZALEGŁOŚCI podatkowych WRAZ Z odsetkami ZA zwłokę, KOSZTÓW
+  upomnienia, ORAZ BIEŻĄCYCH zobowiązań PODATKOWYCH — DOPIERO PRZY
+  BRAKU takich pozycji — PODLEGA faktycznemu ZWROTOWI NA rachunek
+  podatnika (POTWIERDZONE przykładem Z praktyki: nadpłata W podatku
+  OD nieruchomości, BRAK zaległości I bieżących ZOBOWIĄZAŃ → zwrot
+  przysługuje)
+
+⭐⭐⭐ TERMINY ZWROTU (art. 77) — ZRÓŻNICOWANE wg PRZYCZYNY powstania
+  nadpłaty, KLUCZOWE praktycznie:
+  1) **30 DNI** od WYDANIA nowej DECYZJI — GDY nadpłata POWSTAŁA W
+     związku Z uchyleniem/stwierdzeniem NIEWAŻNOŚCI decyzji
+  2) **30 DNI** od WYDANIA decyzji STWIERDZAJĄCEJ nadpłatę LUB
+     określającej JEJ wysokość
+  3) **30 DNI** od decyzji O zmianie/uchyleniu/nieważności — GDY NIE
+     wystąpi obowiązek WYDANIA nowej decyzji
+  4) **30 DNI** od ZŁOŻENIA wniosku (art. 74 — nadpłata POWSTAŁA W
+     WYNIKU orzeczeń TK LUB TSUE)
+  4a) **30 DNI** od WEJŚCIA w życie orzeczenia TK LUB publikacji
+     sentencji TSUE — GDY wniosek ZŁOŻONO PRZED tym terminem
+  5) **3 MIESIĄCE** od złożenia ZEZNANIA/deklaracji — STANDARDOWY
+     tryb (art. 73 §2 pkt 1-3)
+  5a) ⭐⭐⭐ **45 DNI** — ZAMIAST 3 miesięcy — GDY zeznanie PIT
+     ZŁOŻONO ZA POŚREDNICTWEM środków KOMUNIKACJI elektronicznej
+     (e-deklaracja) — ISTOTNA ZACHĘTA do elektronicznego składania
+     PIT, znacząco KRÓTSZY termin
+  6) **2 MIESIĄCE** od złożenia wniosku O stwierdzenie NADPŁATY WRAZ
+     ZE skorygowanym zeznaniem/deklaracją
+
+⭐ ZWROT NADWYŻKI WPŁACONYCH ZALICZEK (art. 77a) — ODRĘBNY
+  mechanizm OD "zwykłej" nadpłaty: WYMAGA wykazania "WAŻNEGO
+  INTERESU podatnika" — ⚠️ POJĘCIE NIEDOOKREŚLONE ustawowo,
+  OCENIANE każdorazowo W ŚWIETLE konkretnych OKOLICZNOŚCI sprawy —
+  organ MA swobodę OCENY, brak SZTYWNEJ definicji CZYNI to
+  PRZESŁANKĄ trudną DO przewidzenia bez ANALIZY konkretnego stanu
+  faktycznego
+
+Potwierdzone w 6+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
+tekst art. 75-77 (arslege.pl [×3], lexlege.pl, z aktualnym t.j.
+Dz.U.2026.0.622), podatki.biz, podatkowyreferat.online [sprzed
+tygodnia, z KONKRETNYM przykładem praktycznym].
+```
+
+---
+
 ## 5. INTERPRETACJE PODATKOWE
 
 ```

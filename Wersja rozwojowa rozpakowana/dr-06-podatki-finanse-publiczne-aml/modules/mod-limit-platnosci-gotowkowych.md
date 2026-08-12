@@ -1,5 +1,5 @@
 # Limit płatności gotówkowych między przedsiębiorcami
-v1.0.0 (dodany 2026-07-27, na żądanie użytkownika)
+v1.1.0 (dodany 2026-07-27, rozbudowany 2026-08-12 — na żądanie użytkownika)
 
 **Zweryfikowano 2026-07-27** (ZASADA 14): Rząd 2B — poradnikprzedsiebiorcy.pl
 [aktualizacja "1 dzień temu"], gofin.pl, pit.pl, aktis.net.pl [21.01.2026],
@@ -46,10 +46,39 @@ Konsument ↔ Konsument:                BRAK LIMITU
 ⚠️ **Sankcja dotyczy CAŁEJ kwoty, nie tylko nadwyżki ponad limit.**
 Przedsiębiorca, który zapłaci gotówką za transakcję B2B przekraczającą
 15 000 zł, TRACI PRAWO do zaliczenia CAŁEJ kwoty wydatku do kosztów
-uzyskania przychodu (KUP) — nie tylko części ponad próg. Podstawa:
-przepisy o PIT/CIT wyłączające z KUP płatności dokonane z naruszeniem
-art. 19 Prawa przedsiębiorców — ⚠️ dokładny artykuł ustawy PIT/CIT
-NIEZWERYFIKOWANY w tej sesji, sprawdź w ISAP przed cytowaniem w piśmie.
+uzyskania przychodu (KUP) — nie tylko części ponad próg. ⭐ PODSTAWA
+(dodano 2026-08-12, na żądanie użytkownika — dotąd JAWNIE oznaczona
+luka): **art. 22p ustawy o PIT** oraz **art. 15d ustawy o CIT** —
+potwierdzone jednogłośnie w 9+ zgodnych źródeł, w tym dosłowny tekst
+przepisu (przepisy.gofin.pl) i interpretacja indywidualna KIS
+(0111-KDIB2-3.4010.264.2018.2.AZE).
+
+⭐⭐ MECHANIZM KOREKTY (art. 22p ust. 2 PIT / art. 15d ust. 2 CIT) —
+GDY wydatek ZOSTAŁ NAJPIERW zaliczony DO kosztów podatkowych, A
+NASTĘPNIE zapłacony GOTÓWKĄ (np. zmiana FORMY płatności PO
+ujęciu w księgach): podatnik MUSI, W MIESIĄCU dokonania płatności
+gotówkowej:
+  → ZMNIEJSZYĆ koszty uzyskania przychodów O tę część, ALBO
+  → JEŚLI zmniejszenie NIE jest MOŻLIWE (np. koszty JUŻ zbyt
+    niskie) — ZWIĘKSZYĆ przychody O TĘ kwotę
+
+⭐ WAŻNE PRECYZUJĄCE STANOWISKO (interpretacja MF): JEŚLI
+przedsiębiorca OSTATECZNIE ureguluje CAŁĄ kwotę transakcji ZA
+POŚREDNICTWEM rachunku płatniczego (np. najpierw ZAPŁACIŁ
+częściowo gotówką, potem WYRÓWNAŁ resztę PRZELEWEM I anulował/
+skorygował WCZEŚNIEJSZĄ płatność gotówkową) — WARUNEK
+"pośrednictwa rachunku płatniczego" JEST spełniony, sankcja NIE
+ma zastosowania.
+
+⭐ DEFINICJA "TRANSAKCJI" (ustawa NIE definiuje wprost — praktyka
+interpretacji KIS): TRANSAKCJA to CAŁOŚĆ zobowiązań wynikających Z
+JEDNEJ umowy sprzedaży/świadczenia usługi, NIEZALEŻNIE od liczby
+FAKTUR czy RAT — PRZYKŁADY z praktyki: zakup maszyny za 20 000 zł
+= JEDNA transakcja >15 000 zł; umowa RAMOWA z CZTEREMA dostawami po
+5000 zł (łącznie 20 000 zł) = JEDNA transakcja; TANKOWANIE pojazdu
+na STACJI = KAŻDORAZOWO odrębna transakcja; USŁUGA serwisowa 3000
+zł/miesiąc BEZ określonej KWOTY w umowie = KAŻDA faktura to
+ODRĘBNA transakcja
 
 ## 4. HISTORIA — DLACZEGO CZĘSTO MYLI SIĘ Z "8000 zł"
 

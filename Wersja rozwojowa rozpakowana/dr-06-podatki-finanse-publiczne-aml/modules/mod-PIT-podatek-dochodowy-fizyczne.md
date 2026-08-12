@@ -21,6 +21,90 @@ PIT — podatek dochodowy od osób fizycznych, JDG, najem prywatny, ryczałt ewi
 
 ---
 
+## 1a. ⭐⭐⭐ REZYDENCJA PODATKOWA — FUNDAMENT (dodano 2026-08-11, na
+żądanie użytkownika — dotąd CAŁKOWICIE nieobecne, mimo że TO
+DECYDUJE, CZY polski PIT W OGÓLE ma zastosowanie)
+
+```
+⭐⭐ DWIE, ALTERNATYWNE (NIE kumulatywne) PRZESŁANKI rezydencji (art.
+  3 ust. 1a ustawy PIT) — za OSOBĘ mającą MIEJSCE zamieszkania NA
+  terytorium RP UWAŻA SIĘ osobę FIZYCZNĄ, KTÓRA:
+  1) POSIADA na terytorium RP CENTRUM interesów OSOBISTYCH LUB
+     GOSPODARCZYCH ("OŚRODEK interesów ŻYCIOWYCH"), LUB
+  2) PRZEBYWA na terytorium RP DŁUŻEJ niż **183 DNI** W roku
+     PODATKOWYM
+  ⭐⭐ SPEŁNIENIE CHOĆBY JEDNEJ Z TYCH przesłanek WYSTARCZY — spójnik
+  "LUB" TWORZY dwie AUTONOMICZNE, RÓWNOWAŻNE i ROZŁĄCZNE
+  przesłanki — TO NIE JEST konstrukcja KUMULATYWNA
+
+⭐⭐⭐ HIERARCHIA KRYTERIÓW — PIERWSZEŃSTWO JAKOŚCIOWEGO nad
+  ILOŚCIOWYM: mimo POZORNEJ równorzędności PRZESŁANEK w tekście
+  przepisu, ORZECZNICTWO i OBJAŚNIENIA podatkowe WYPRACOWAŁY
+  HIERARCHIĘ — NSA W WYROKU II FSK 2653/16: "Przy OCENIE, gdzie
+  ZNAJDUJE się OŚRODEK interesów życiowych PODATNIKA, NALEŻY wziąć
+  POD uwagę WSZYSTKIE powiązania OSOBISTE i GOSPODARCZE, A NIE
+  tylko DŁUGOŚĆ pobytu" — KRYTERIUM 183 DNI ma CHARAKTER
+  POMOCNICZY — STOSUJE SIĘ je, GDY NIE MOŻNA jednoznacznie OKREŚLIĆ
+  ośrodka INTERESÓW życiowych INNYMI środkami
+
+⭐ PRAKTYCZNA KONSEKWENCJA (ILUSTRACJA Z PRAKTYKI): OSOBA pracująca
+  ZAROBKOWO za GRANICĄ i SPĘDZAJĄCA tam WIĘCEJ niż 183 DNI w roku
+  NIE zawsze AUTOMATYCZNIE PRZESTAJE być polskim REZYDENTEM — JEŚLI
+  na TERENIE Polski POZOSTAWIŁA rodzinę, KTÓRĄ regularnie
+  ODWIEDZA i KTÓREJ przekazuje ŚRODKI na życie/SPŁATĘ kredytu
+  hipotecznego — WCIĄŻ zachowuje STATUS polskiego REZYDENTA
+  podatkowego (bo OŚRODEK interesów ŻYCIOWYCH ma PIERWSZEŃSTWO nad
+  samą LICZBĄ dni)
+
+⭐⭐ SKUTEK (art. 3 ust. 1) — NIEOGRANICZONY vs OGRANICZONY obowiązek
+  podatkowy:
+  → REZYDENT (miejsce zamieszkania W Polsce): NIEOGRANICZONY
+    obowiązek podatkowy — MUSI rozliczyć SIĘ z polskim FISKUSEM ZE
+    WSZYSTKICH swoich DOCHODÓW, NIEZALEŻNIE OD tego, GDZIE zostały
+    UZYSKANE (w KRAJU czy ZA granicą)
+  → NIEREZYDENT: OGRANICZONY obowiązek PODATKOWY — podatek W
+    Polsce PŁACONY TYLKO od DOCHODÓW osiągniętych NA terytorium RP
+
+⭐⭐⭐ "ŁAMANA REZYDENCJA" — DOPUSZCZALNA ZMIANA W TRAKCIE roku
+  podatkowego: POTWIERDZONA interpretacją INDYWIDUALNĄ KIS
+  (0114-KDIP3-2.4011.944.2024.2.JM): "Fakt DOPUSZCZALNOŚCI łamanej
+  rezydencji PODATKOWEJ jest NIESPORNY" — ⭐ ZMIANA rezydencji
+  DZIAŁA PROSPEKTYWNIE (NA przyszłość), NIE RETROAKTYWNIE —
+  PODATNIK MOŻE być PRZEZ część roku REZYDENTEM (obowiązek
+  nieograniczony), A PRZEZ POZOSTAŁĄ część — NIEREZYDENTEM
+  (obowiązek OGRANICZONY) — WYMAGA PRECYZYJNEGO udokumentowania
+  MOMENTU zmiany: (1) CERTYFIKAT rezydencji PODATKOWEJ z NOWEGO
+  kraju, (2) DOWODY przeniesienia OŚRODKA interesów (umowy NAJMU,
+  PRZEPROWADZKA rodziny)
+
+⭐ KONFLIKT REZYDENCJI między DWOMA państwami: KAŻDE państwo OCENIA
+  rezydencję WEDŁUG WŁASNEGO prawa WEWNĘTRZNEGO — DOPIERO GDY OBA
+  państwa UZNAJĄ daną OSOBĘ za SWOJEGO rezydenta (KONFLIKT
+  pozytywny) — STOSUJE SIĘ reguły ROZSTRZYGAJĄCE przewidziane W
+  ODPOWIEDNIEJ umowie O unikaniu PODWÓJNEGO opodatkowania (UPO) —
+  ⚠️ SZCZEGÓŁY konkretnych reguł ROZSTRZYGAJĄCYCH z UPO (tzw. "tie-
+  breaker rules") NIE zbadane W tej sesji — PUNKT startowy DO
+  dalszego badania PRZY sprawach MIĘDZYNARODOWYCH
+
+⭐ OGRANICZONY obowiązek PODATKOWY OSÓB PRAWNYCH — analogiczna
+  KONSTRUKCJA w CIT: art. 3 ust. 1 ustawy O CIT — OSOBY prawne,
+  KTÓRYCH zarząd LUB siedziba ZNAJDUJE się NA terytorium Polski —
+  PODLEGAJĄ analogicznemu NIEOGRANICZONEMU obowiązkowi (⭐
+  POWIĄZANIE Z mod-CIT-podatek-dochodowy-prawne.md — SPRAWDŹ, czy
+  TAMTEN moduł ma tę treść, JEŚLI NIE — TO RÓWNIEŻ luka DO
+  wypełnienia)
+
+Potwierdzone w 7+ zgodnych źródeł, w tym interpretacja INDYWIDUALNA
+KIS (inforlex.pl, kwiecień 2025, z BEZPOŚREDNIM cytatem przepisu),
+orzecznictwo NSA (bcc.org.pl, pit.pl — obie WRZESIEŃ/listopad 2025,
+z cytowanym wyrokiem II FSK 2653/16), podatnik.info (z aktualnym
+numerem Dz.U. 2026 poz. 592, ZGODNYM z numerem już WCZEŚNIEJ
+potwierdzonym w tej sesji), faktura.pl, rpms.pl [lipiec 2026,
+NAJŚWIEŻSZE źródło].
+```
+
+---
+
 ## 2. INTAKE
 
 ```
@@ -59,6 +143,88 @@ Do 120 000 zł podstawy:    12%
 Powyżej 120 000 zł:        32%
 Kwota wolna od podatku:    30 000 zł (kwota zmniejszająca podatek: 3 600 zł)
 Danina solidarnościowa:    4% od dochodu powyżej 1 000 000 zł (art. 30h PIT)
+```
+
+---
+
+## 4a. ⭐⭐⭐ PODATEK BELKI — ZYSKI KAPITAŁOWE (dodano 2026-08-12, na
+żądanie użytkownika — dotąd tylko WZMIANKOWANY jako nazwa
+formularza PIT-38, BEZ treści merytorycznej)
+
+```
+⭐ NAZWA I HISTORIA: potoczna nazwa OD nazwiska Marka BELKI,
+  ministra FINANSÓW W momencie WPROWADZENIA — PIERWOTNIE (2002)
+  stawka **20%** OD odsetek/zysków Z rachunków bankowych — W 2004 R.
+  "EWOLUOWAŁ": jednolita stawka **19%** + ROZSZERZENIE katalogu O
+  papiery WARTOŚCIOWE — STAWKA niezmieniona OD tego czasu (ponad 20
+  lat)
+
+⭐⭐ DWIE ODRĘBNE PODSTAWY PRAWNE (⚠️ "podatek Belki" UŻYWANY
+  potocznie DLA OBU, WARTO rozróżniać):
+  → ART. 30A PIT — odsetki/dywidendy: odsetki OD wkładów
+    oszczędnościowych/rachunków bankowych, DYWIDENDY i INNE
+    przychody Z udziału W zyskach osób PRAWNYCH, świadczenia Z
+    funduszy KAPITAŁOWYCH (BEZ umarzania tytułów) — ⭐ ZAZWYCZAJ
+    POBIERANY automatycznie PRZEZ płatnika (bank/BROKER) U ŹRÓDŁA —
+    podatnik zwykle NIE musi SAM rozliczać
+  → ART. 30B PIT — zyski Z ODPŁATNEGO zbycia: akcje, ETF,
+    OBLIGACJE, instrumenty POCHODNE (CFD, opcje, FUTURES),
+    kryptowaluty (⭐ TRAKTOWANE jako "WALUTY wirtualne", TEŻ 19%,
+    ALE ROZLICZANE ODRĘBNIE, formularz PIT-38 DEDYKOWANY) —
+    PODSTAWA: PRZYCHÓD POMNIEJSZONY o KOSZTY (NIE sam przychód)
+
+⭐⭐ STAWKA: **19%** OD dochodu — BEZ preferencji DLA
+  DŁUGOTERMINOWYCH inwestycji, BEZ ogólnej KWOTY wolnej (⚠️ patrz
+  planowana REFORMA OKI niżej)
+
+⭐ ROZLICZENIE — ZASADY TECHNICZNE:
+  → METODA kolejności SPRZEDANYCH papierów: **FIFO** (pierwsze
+    WESZŁO, pierwsze WYSZŁO) — W POLSCE OBOWIĄZKOWE, BRAK
+    możliwości WYBORU innej metody
+  → KURS walutowy DLA transakcji W walutach OBCYCH: Z DNIA
+    POPRZEDZAJĄCEGO dzień ROZLICZENIA transakcji (T-1), NIE Z dnia
+    SAMEJ transakcji — DLA akcji Z rozliczeniem T+2, OZNACZA to
+    kurs Z dnia T+1
+  → FORMULARZ: **PIT-38** — roczne ZEZNANIE dla zysków Z odpłatnego
+    zbycia (art. 30b) — SKŁADANE NIEZALEŻNIE od ewentualnego
+    podatku U źródła Z art. 30a
+
+⚠️ BRAK ZWOLNIENIA dla "zwykłych" obligacji OSZCZĘDNOŚCIOWYCH:
+  częste BŁĘDNE przekonanie — obligacje OSZCZĘDNOŚCIOWE Skarbu
+  Państwa NIE SĄ automatycznie zwolnione Z podatku BELKI — MF
+  publikuje ICH odsetki JAKO kwoty PRZED opodatkowaniem
+
+⭐⭐⭐ ISTNIEJĄCE, LEGALNE SPOSOBY OGRANICZENIA/UNIKNIĘCIA (⚠️
+  ⭐ UWAGA: to NIE "luka" DO wykorzystania, TYLKO ŚWIADOMIE
+  wprowadzone przez USTAWODAWCĘ, PREFEROWANE formy OSZCZĘDZANIA
+  DŁUGOTERMINOWEGO):
+  1) **IKE** (Indywidualne Konto EMERYTALNE) — BRAK podatku Belki
+     PRZY wypłacie PO ukończeniu 60. ROKU życia
+  2) **IKZE** (Indywidualne Konto ZABEZPIECZENIA Emerytalnego) —
+     ODLICZENIE wpłat OD podstawy PIT + TYLKO 10% podatku PRZY
+     wypłacie (ZAMIAST 19%)
+  3) **PPK** (Pracownicze PLANY Kapitałowe) — brak PODATKU przy
+     wypłacie PO 60. roku ŻYCIA
+  4) ⭐⭐⭐ ⚡ **OKI** (Osobiste Konto INWESTYCYJNE) — PLANOWANE OD
+     **2027 R.** (⚠️ NA dzień weryfikacji WCIĄŻ na ETAPIE
+     ZAPOWIEDZI/koncepcji MF, NIE uchwalonej ustawy — SPRAWDŹ
+     AKTUALNY status PRZED cytowaniem W konkretnej sprawie) —
+     ZAPOWIADANE zwolnienie Z Belki DO **100 000 ZŁ** aktywów (W
+     TYM DO 25 000 zł W części OSZCZĘDNOŚCIOWEJ — lokaty/obligacje)
+     — BEZ konieczności CZEKANIA do wieku emerytalnego (RÓŻNICA
+     względem IKE/IKZE) — POWYŻEJ limitu: NOWY, ZAPOWIADANY podatek
+     ~**0,71% ROCZNIE** OD wartości aktywów (⚠️ ZAMIAST 19% od
+     zysku — CAŁKOWICIE INNA konstrukcja, warta ODNOTOWANIA jako
+     ISTOTNA zmiana FILOZOFII opodatkowania kapitału, JEŚLI
+     ostatecznie WEJDZIE w życie)
+
+Potwierdzone w 7+ zgodnych, BARDZO aktualnych źródeł 2026 (forsal.pl
+[marzec 2026, Z historią WPROWADZENIA], podatekgieldy.pl [Z
+rozróżnieniem art. 30a/30b i szczegółami FIFO/kursu T-1],
+inwestowanie.edu.pl [kwiecień 2026, aktualizacja marzec 2026, Z
+najpełniejszym opisem OKI], bizky.ai [sprzed miesiąca], rankomat.pl
+[styczeń 2026], totalmoney.pl, BEZPOŚREDNIO OpenLEX [dosłowny tekst
+art. 30a, aktualny t.j. Dz.U.2026.592]).
 ```
 
 ---
@@ -171,7 +337,8 @@ Ryczałt ewidencjonowany:
 > ```
 
 ```
-IP BOX — LINIA KIS 2024–2026 (weryfikuj EUREKA: podatki.gov.pl/eureka):
+IP BOX — LINIA KIS 2024–2026 (weryfikuj EUREKA: eureka.mf.gov.pl —
+  ⚠️ POPRAWIONE 2026-08-12: poprzednio błędnie "podatki.gov.pl/eureka"):
   → Brak wyodrębnionego wynagrodzenia autorskiego na fakturze NIE dyskwalifikuje IP Box
     gdy umowa stanowi o przeniesieniu praw
   → Programista B2B u zagranicznego klienta: TAK przy własnej twórczości
@@ -183,6 +350,47 @@ NAJEM PRYWATNY vs DZIAŁALNOŚĆ GOSPODARCZA:
     Najem = najem prywatny (ryczałt) gdy nieruchomość NIE w majątku firmowym
     Nie ma limitu liczby nieruchomości — kryterium: majątek firmowy
   → Od 01.01.2023: najem prywatny WYŁĄCZNIE ryczałt (8,5% / 12,5%)
+
+⭐⭐⭐ PRÓG 100 000 ZŁ I MECHANIZM DLA MAŁŻONKÓW (dodano 2026-08-12,
+na żądanie użytkownika — konkretny próg wcześniej NIEPODANY, tylko
+same stawki bez wskazania granicy):
+  → **8,5%** — DO 100 000 ZŁ przychodu ROCZNIE (⭐ LICZONE ŁĄCZNIE
+    DLA WSZYSTKICH wynajmowanych NIERUCHOMOŚCI danego podatnika w
+    danym ROKU — NIE osobno dla KAŻDEGO mieszkania)
+  → **12,5%** — OD NADWYŻKI ponad 100 000 zł
+  → PODSTAWA: PRZYCHÓD (czynsz FAKTYCZNIE otrzymany), NIE dochód —
+    BRAK możliwości odliczenia KOSZTÓW (remontów, odsetek od
+    kredytu, amortyzacji, opłat ZA zarządzanie)
+  → FORMULARZ: **PIT-28**, TERMIN złożenia: DO 30 KWIETNIA roku
+    następnego
+
+⭐⭐ MECHANIZM DLA MAŁŻONKÓW ZE WSPÓLNOŚCIĄ MAJĄTKOWĄ — ISTOTNA ZMIANA
+  HISTORYCZNA OD **1.07.2023 R.**:
+  → DO 30.06.2023: limit 100 000 zł BYŁ WSPÓLNY dla OBOJGA
+    małżonków ŁĄCZNIE (NIEZALEŻNIE od USTROJU majątkowego)
+  → OD 1.07.2023 (STAN AKTUALNY): KAŻDY z małżonków MA WŁASNY,
+    ODRĘBNY limit 100 000 zł
+  → ⭐⭐ DOMYŚLNY mechanizm (BEZ oświadczenia): KAŻDY małżonek
+    rozlicza **POŁOWĘ** przychodu Z najmu — W PRAKTYCE oznacza to
+    ŁĄCZNY, EFEKTYWNY limit **200 000 ZŁ** DLA małżeństwa (2×100 000)
+  → ⭐ Z OŚWIADCZENIEM (opcja): małżonkowie MOGĄ złożyć oświadczenie,
+    że CAŁOŚĆ przychodu Z najmu rozlicza TYLKO JEDEN z nich — WTEDY
+    limit 8,5% DLA tej osoby WYNOSI **200 000 ZŁ** (drugi małżonek
+    NIE wykazuje przychodu W OGÓLE) — TERMIN złożenia oświadczenia:
+    DO 20. dnia miesiąca NASTĘPUJĄCEGO po miesiącu UZYSKANIA
+    pierwszego przychodu Z najmu W roku podatkowym
+  → ⚠️ MATEMATYCZNIE: W WIĘKSZOŚCI przypadków OBIE opcje (50/50 vs
+    oświadczenie) DAJĄ TEN SAM wynik podatkowy — RÓŻNICA POJAWIA SIĘ
+    DOPIERO przy przychodzie POWYŻEJ 200 000 zł łącznie, LUB gdy
+    podział NIE jest równy 50/50
+
+⭐ RÓŻNICA WZGLĘDEM WYNAJMU W RAMACH DZIAŁALNOŚCI GOSPODARCZEJ —
+  SKŁADKA ZDROWOTNA: NAJEM PRYWATNY jest CAŁKOWICIE ZWOLNIONY ze
+  składki ZDROWOTNEJ i wszelkich składek ZUS — ryczałt TO JEDYNE
+  obciążenie — ⭐ TO ISTOTNA, "CICHA" przewaga najmu PRYWATNEGO NAD
+  wynajmem W RAMACH JDG, GDZIE składka zdrowotna NALICZANA jest
+  progowo (patrz mod-ustawa-ryczalt-przychody.md, sekcja O składce
+  zdrowotnej — TE SAME progi 498/831/1495 zł MIESIĘCZNIE)
 
 PKWiU 2025 — HARMONOGRAM DLA PIT/RYCZAŁT:
   → PKWiU 2015 stosowana dla PIT i ryczałtu do 31.12.2028 r.

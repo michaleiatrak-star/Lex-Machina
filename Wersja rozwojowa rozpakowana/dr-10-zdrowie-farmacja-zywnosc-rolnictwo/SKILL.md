@@ -1,6 +1,6 @@
 ---
 name: dr-10-zdrowie-farmacja-zywnosc-rolnictwo
-version: 3.32
+version: 3.35
 description: |
   DR-10: Zdrowie, Farmacja, Żywność, Rolnictwo
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -42,7 +42,22 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Zdrowie, farmacja, żywność, rolnictwo — pojęcia dziedzinowe (świadczenie zdrowotne, podmiot leczniczy, produkt leczniczy) zdefiniowane wprost w aktach sektorowych (ustawa o działalności leczniczej, Prawo farmaceutyczne) i pokryte w modułach DR-10. Żaden plik shared/definicje/ nie obejmuje tej dziedziny.
-## Moduły (29 łącznie — ✓ 29 OK, ☐ 0 STUB)
+## Moduły (31 łącznie — ✓ 31 OK, ☐ 0 STUB)
+
+**Aktualizacja 2026-08-12 (NOTA-4):** mod-ustawa-bezpieczenstwo-
+zywnosci przekroczył próg 400 linii ~4.6x (1863 linii) — PODZIELONO,
+z JEDNOCZESNYM usunięciem dwóch par zduplikowanych sekcji (szczepienia
+zwierząt, strefy ASF — obie dodane 2026-07-30 dwukrotnie pod różnymi
+tytułami, scalone bez utraty unikalnej treści):
+- `mod-ustawa-bezpieczenstwo-zywnosci` — 926 l. (rdzeń: żywność,
+  sanepid, oznaczenia, substancje zabronione, import, napoje
+  energetyczne)
+- `mod-ustawa-hodowla-zdrowie-zwierzat` (NOWY, 632 l.) — hodowla
+  zachowawcza, ubój rytualny, zwierzęta futerkowe, hodowla rasowa,
+  ASF, szczepienia, KROPiK
+- `mod-ustawa-hodowla-zezwolenia-gatunki` (NOWY, 308 l.) —
+  pseudohodowla, zezwolenia na gatunki, gatunki inwazyjne,
+  odpowiedzialność za ucieczkę zwierząt
 
 ```
 OŚWIATA:

@@ -30,6 +30,67 @@ Wybor:            Do 20. dnia miesiaca nastepnego po pierwszym przychodzie
 Brak KUP:         Ryczalt = brak prawa do odliczenia kosztow
 ```
 
+## ⭐⭐⭐ UTRATA PRAWA DO RYCZAŁTU (dodano 2026-08-12, na żądanie
+użytkownika — dotąd CAŁKOWICIE nieobecna, mimo że próg 2 mln EUR był
+tylko WZMIANKOWANY, BEZ mechanizmu utraty)
+
+```
+⭐⭐⭐ KONTRINTUICYJNE, DWA CAŁKOWICIE RÓŻNE mechanizmy utraty prawa —
+  ŁATWO POMYLIĆ:
+
+  1) ⭐⭐ PRZEKROCZENIE LIMITU 2 MLN EUR — NIE POWODUJE utraty PRAWA
+     "OD DNIA przekroczenia" — USTAWA NIE PRZEWIDUJE takiego
+     mechanizmu WYŁĄCZNIE z TEGO powodu — utrata NASTĘPUJE DOPIERO
+     **OD 1 STYCZNIA roku NASTĘPNEGO** — POTWIERDZONE interpretacją
+     KIS (0113-KDIPT2-1.4011.469.2023.1.HJ) — CAŁY BIEŻĄCY rok, W
+     KTÓRYM nastąpiło przekroczenie, POZOSTAJE opodatkowany
+     RYCZAŁTEM, BEZ ZMIAN
+
+  2) ⭐⭐⭐ OKREŚLONE ZDARZENIA/DZIAŁALNOŚCI WYŁĄCZONE — ODWROTNY
+     mechanizm, natychmiastowa UTRATA:
+     → SPRZEDAŻ towarów/USŁUG NA rzecz byłego LUB obecnego
+       PRACODAWCY, W ZAKRESIE odpowiadającym CZYNNOŚCIOM ze
+       stosunku PRACY — ⭐ KLASYCZNY mechanizm ANTY-nadużyciowy
+       PRZECIW "przekwalifikowaniu" etatu NA B2B — SKUTKUJE utratą
+       prawa **OD DNIA UZYSKANIA** tego KONKRETNEGO przychodu
+     → ROZPOCZĘCIE działalności WYŁĄCZONEJ z ryczałtu (np. APTEKA,
+       kantor WYMIANY walut) — RÓWNIEŻ utrata **OD DNIA** uzyskania
+       przychodu Z tej działalności
+     → ⭐ SAMO zgłoszenie (rejestracja) działalności W zakresie
+       przychodów WYŁĄCZONYCH, BEZ faktycznego UZYSKANIA takich
+       przychodów, NIE POWODUJE utraty prawa — LICZY SIĘ FAKTYCZNE
+       uzyskanie PRZYCHODU, nie sama REJESTRACJA
+
+⭐⭐ MECHANIZM ROZLICZENIA PRZY UTRACIE W TRAKCIE ROKU (przyczyna
+  #2): W MIESIĄCU, w KTÓRYM nastąpiła zmiana, przychody DZIELI SIĘ
+  NA dwie części — TRANSAKCJE PRZED zmianą POZOSTAJĄ opodatkowane
+  RYCZAŁTEM, WSZYSTKIE przychody OD dnia zmiany — NA zasadach
+  OGÓLNYCH — DODATKOWY obowiązek: sporządzenie SPISU z NATURY na
+  DZIEŃ utraty prawa (§ rozporządzenia W sprawie PKPiR)
+
+⭐ LIMIT KWARTALNEGO opłacania PODATKU — ODRĘBNY, NIŻSZY próg: **200
+  000 EUR** (2026: ok. 851 720 ZŁ) — PRZEKROCZENIE tego (NIŻSZEGO)
+  limitu W roku POPRZEDNIM NIE WYŁĄCZA Z ryczałtu W OGÓLE, TYLKO
+  ODBIERA możliwość KWARTALNYCH (zamiast MIESIĘCZNYCH) wpłat
+
+⭐ PRZELICZENIE limitu NA złote: KURS ŚREDNI euro OGŁASZANY przez
+  NBP NA PIERWSZY dzień ROBOCZY PAŹDZIERNIKA roku POPRZEDZAJĄCEGO
+  rok podatkowy — ⚠️ KONKRETNA kwota W zł ZMIENIA SIĘ CO ROKU wraz Z
+  kursem — NIE cytuj STAREJ kwoty W zł bez SPRAWDZENIA aktualnego
+  przelicznika
+
+⭐ POWRÓT do ryczałtu PO utracie Z powodu przekroczenia LIMITU: MOŻLIWY
+  w KOLEJNYCH latach, GDY przychody SPADNĄ poniżej limitu — ALE NIE
+  jest to AUTOMATYCZNE — WYMAGA złożenia NOWEGO, pisemnego
+  OŚWIADCZENIA do urzędu SKARBOWEGO o WYBORZE opodatkowania ryczałtem
+  NA dany rok (art. 9 ust. 1 ustawy)
+
+Potwierdzone w 7+ zgodnych, aktualnych źródeł 2026 (poradnikprzedsiebiorcy.pl
+[×2], szybkafaktura.pl [marzec 2026], izbapodatkowa.pl [z BEZPOŚREDNIM
+cytatem interpretacji KIS], dwaplusjeden.com [lipiec 2026, NAJŚWIEŻSZE],
+mmbkancelaria.pl [kwiecień 2026], twentytwenty.pl [lipiec 2026]).
+```
+
 ## Deklaracje
 ```
 PIT-28: Do konca lutego roku nastepnego
@@ -111,6 +172,74 @@ Checklist praktyczny:
 □ Porównaj EFEKTYWNE obciążenie (podatek + składka zdrowotna) w KAŻDEJ
   z trzech form dla KONKRETNYCH, prognozowanych liczb klienta — nie
   polegaj na ogólnych "regułach kciuka"
+```
+
+---
+
+## ⭐⭐⭐ SKŁADKA ZDROWOTNA RYCZAŁTOWCÓW — SZCZEGÓŁY (dodano
+2026-08-12, na żądanie użytkownika — uzupełnienie wcześniej tylko
+OGÓLNIKOWO wspomnianej pozycji w checklist)
+
+```
+⭐⭐⭐ FUNDAMENTALNA RÓŻNICA względem innych form: podstawą składki
+  jest PRZYCHÓD (NIE dochód!) — NAWET wysokie KOSZTY prowadzenia
+  działalności NIE WPŁYWAJĄ na wysokość SKŁADKI zdrowotnej — TO
+  ISTOTNY czynnik przy PORÓWNANIU form opodatkowania (patrz sekcja
+  logiki decyzyjnej wyżej) — DLA działalności o WYSOKICH kosztach
+  względem przychodu, RYCZAŁT może być MNIEJ korzystny NIŻ się
+  wydaje na PIERWSZY rzut oka, WŁAŚNIE przez TĘ konstrukcję składki
+
+⭐⭐⭐ TRZY PROGI PRZYCHODOWE (2026, stawka 9% OD podstawy wymiaru —
+  PODSTAWA = przeciętne miesięczne WYNAGRODZENIE w sektorze
+  przedsiębiorstw za IV KWARTAŁ roku POPRZEDNIEGO, ogłaszane przez
+  GUS — W 2026 R.: 9 228,64 zł):
+  → PRZYCHÓD ROCZNY DO 60 000 ZŁ: podstawa = 60% przeciętnego
+    wynagrodzenia → składka **498,35 zł/miesiąc**
+  → PRZYCHÓD 60 000-300 000 ZŁ: podstawa = 100% przeciętnego
+    wynagrodzenia → składka **830,58 zł/miesiąc**
+  → PRZYCHÓD POWYŻEJ 300 000 ZŁ: podstawa = 180% przeciętnego
+    wynagrodzenia → składka **1 495,04 zł/miesiąc**
+  ⚠️ TE kwoty ZMIENIAJĄ SIĘ co roku WRAZ ze wzrostem przeciętnego
+  wynagrodzenia — SPRAWDŹ AKTUALNE dane GUS za IV kw. roku
+  poprzedniego przed cytowaniem
+
+⭐⭐ DWIE METODY ROZLICZANIA:
+  1) UPROSZCZONA (stała kwota PRZEZ CAŁY rok) — DOSTĘPNA dla
+     przedsiębiorców, KTÓRZY prowadzili DZIAŁALNOŚĆ przez CAŁY
+     POPRZEDNI rok — kwota USTALANA na PODSTAWIE przychodu Z ROKU
+     POPRZEDNIEGO, PŁACONA RÓWNO przez CAŁY bieżący rok
+  2) PROGRESYWNA — przychód ŚLEDZONY NA BIEŻĄCO — ⚠️⚠️ PRZY
+     PRZEKROCZENIU danego progu W TRAKCIE roku, JUŻ ZA MIESIĄC, w
+     KTÓRYM nastąpiło przekroczenie, TRZEBA opłacić SKŁADKĘ w
+     WYŻSZEJ wysokości — DODATKOWO: JEŚLI przychód W CIĄGU roku
+     WZROŚNIE do DRUGIEGO lub TRZECIEGO progu, ZA MIESIĄCE
+     POPRZEDNIE KONIECZNE jest zapłacenie WYRÓWNANIA WEDŁUG stawki
+     OBOWIĄZUJĄCEJ za OSTATNI miesiąc w roku — ⭐ TO CZĘSTY,
+     PRAKTYCZNY PROBLEM: przedsiębiorcy BEZ bieżącej kontroli SUMY
+     przychodów MOGĄ NIE ZAUWAŻYĆ momentu PRZEKROCZENIA progu, CO
+     prowadzi DO nagłego, ZALEGŁEGO obciążenia z WYRÓWNANIEM
+
+⭐ ODLICZENIE: MOŻLIWE odliczenie **50%** ZAPŁACONYCH składek
+  zdrowotnych OD PRZYCHODU (⚠️ NIE od PODATKU, jak np. przy skali
+  podatkowej — MECHANIZM jest INNY, ŁATWO POMYLIĆ)
+
+⭐⭐ ULGA DLA OSÓB ŁĄCZĄCYCH RYCZAŁT Z ETATEM (art. 82 ust. 9b
+  ustawy zdrowotnej) — CAŁKOWITE zwolnienie ZE składki zdrowotnej Z
+  DZIAŁALNOŚCI, GDY ŁĄCZNIE spełnione WSZYSTKIE warunki:
+  1) podstawa WYMIARU składek NA ubezpieczenia SPOŁECZNE z UMOWY o
+     PRACĘ NIE PRZEKRACZA kwoty MINIMALNEGO wynagrodzenia (2026:
+     4 806 zł)
+  2) przychód Z PROWADZONEJ działalności NIE WYŻSZY niż 50% kwoty
+     MINIMALNEGO wynagrodzenia obowiązującego NA 1 stycznia DANEGO
+     roku (2026: **2 403 zł**)
+  3) OPŁACA z DZIAŁALNOŚCI podatek dochodowy WŁAŚNIE w FORMIE
+     ryczałtu od PRZYCHODÓW ewidencjonowanych
+
+Potwierdzone w 7+ zgodnych, AKTUALNYCH źródeł 2026 (infakt.pl [×2],
+gofin.pl [luty 2026, z DOSŁOWNYM cytatem art. 82 ust. 9b], symfonia.pl
+[NAJŚWIEŻSZE, sprzed 2 tygodni], poradnikprzedsiebiorcy.pl
+[NAJŚWIEŻSZE, sprzed 12 godzin], morganizer.pl [kwiecień 2026],
+bizky.ai, optimumtax.pl).
 ```
 
 ---

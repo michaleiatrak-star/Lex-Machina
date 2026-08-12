@@ -83,6 +83,67 @@ WSA → NSA
 
 ---
 
+## 3a. ⭐⭐⭐ TERMINY I PRZEKSZTAŁCENIE W POSTĘPOWANIE PODATKOWE
+(dodano 2026-08-12, na żądanie użytkownika — dotąd CAŁKOWICIE
+nieobecny, kluczowy element proceduralny)
+
+```
+⭐⭐ TERMIN ZAKOŃCZENIA kontroli celno-skarbowej: BEZ ZBĘDNEJ
+  zwłoki, NIE PÓŹNIEJ niż W CIĄGU **3 MIESIĘCY** OD dnia jej
+  WSZCZĘCIA (= od DNIA doręczenia kontrolowanemu upoważnienia do
+  jej przeprowadzenia)
+  → MOŻLIWE przedłużenie — ALE WYMAGA zawiadomienia W FORMIE
+    POSTANOWIENIA, Z WSKAZANIEM przyczyn I NOWEGO terminu — NA TO
+    postanowienie NIE SŁUŻY zażalenie
+  → obowiązek DOTRZYMANIA terminu JEST NIEZALEŻNY od tego, CZY
+    opóźnienie WYNIKA z przyczyn LEŻĄCYCH po stronie ORGANU, CZY
+    przyczyn OBIEKTYWNYCH (potwierdzone wyrokiem NSA I FSK 1087/20)
+
+⭐⭐⭐ ZAKOŃCZENIE i PRZEKSZTAŁCENIE (art. 83 ustawy o KAS):
+  1) Kontrola KOŃCZY SIĘ doręczeniem WYNIKU kontroli LUB
+     PROTOKOŁEM (ZALEŻNIE od PRZEDMIOTU kontroli)
+  2) Podatnik MA **14 DNI** od DORĘCZENIA wyniku NA złożenie
+     korekty deklaracji, UWZGLĘDNIAJĄCEJ stwierdzone
+     nieprawidłowości
+  3) JEŚLI korekta NIE ZOSTANIE złożona (LUB organ jej NIE
+     uwzględni W CAŁOŚCI) — zakończona kontrola PRZEKSZTAŁCA SIĘ
+     W POSTĘPOWANIE podatkowe
+  4) ⭐⭐⭐ TERMIN przekształcenia: NIE PÓŹNIEJ niż **6 MIESIĘCY** OD
+     zakończenia kontroli — POTWIERDZONE bezpośrednio orzecznictwem
+     NSA (wyrok I FSK 1264/21, 3.03.2022) — DOTYCZY WYŁĄCZNIE
+     samego PRZEKSZTAŁCENIA, NIE wpływa NA możliwość WSZCZĘCIA
+     nowej kontroli celno-skarbowej PO upływie 6 miesięcy od
+     WCZEŚNIEJSZEJ kontroli PODATKOWEJ (TO ODRĘBNA kwestia)
+  5) PRZEKSZTAŁCENIE NASTĘPUJE Z DNIEM doręczenia POSTANOWIENIA o
+     przekształceniu — NA TO postanowienie RÓWNIEŻ NIE SŁUŻY
+     zażalenie
+  6) ⭐ CIĄGŁOŚĆ ORGANU: NACZELNIK urzędu celno-skarbowego, KTÓRY
+     SPORZĄDZIŁ wynik kontroli, JEST właściwy DO przeprowadzenia
+     POSTĘPOWANIA i WYDANIA decyzji — TEN SAM organ PROWADZI
+     CAŁOŚĆ sprawy
+
+⭐ SZCZEGÓLNE PRZYPADKI PROCEDURALNE:
+  → ROZWIĄZANIE kontrolowanej SPÓŁKI (cywilnej, jawnej, partnerskiej,
+    komandytowej, komandytowo-akcyjnej) W TRAKCIE kontroli/
+    postępowania: kontrola JEST prowadzona wobec BYŁYCH wspólników
+    tej spółki; POSTĘPOWANIE kończy SIĘ decyzją NA podstawie art.
+    115 §4 Ordynacji podatkowej
+  → UTRATA statusu podatnika PRZEZ podatkową GRUPĘ kapitałową W
+    TRAKCIE kontroli/postępowania: kontrolę I postępowanie
+    PROWADZI naczelnik, KTÓRY je WSZCZĄŁ
+
+⭐ PRAWA PODATNIKA przy PRZEKROCZENIU terminu (⚠️ dotyczy głównie
+  kontroli PODATKOWEJ, analogicznie ZASTOSOWANIE do celno-
+  skarbowej): PONAGLENIE do organu WYŻSZEJ instancji, NASTĘPNIE
+  SKARGA na bezczynność/PRZEWLEKŁOŚĆ postępowania DO WSA
+
+Potwierdzone w 7+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
+tekst art. 83 ustawy o KAS (OpenLEX, Dz.U.2025.1131 t.j., wersja od
+16.04.2026) oraz orzecznictwo NSA (I FSK 1264/21, I FSK 1087/20),
+Grant Thornton [×2], ordynacjapodatkowa.pl [×2], rachunkowosc.com.pl,
+asiw.pl [luty 2026], pragmatiq.pl.
+```
+
 ## 4. UPRAWNIENIA FUNKCJONARIUSZY KAS
 
 ```

@@ -21,6 +21,88 @@ CIT — podatek dochodowy od osób prawnych, estoński CIT, podatek minimalny (o
 
 ---
 
+## 1a. ⭐⭐⭐ REZYDENCJA PODATKOWA OSÓB PRAWNYCH (dodano 2026-08-12,
+na żądanie użytkownika — zasygnalizowana wcześniej luka, analogicznie
+do rezydencji fizycznej z mod-PIT-podatek-dochodowy-fizyczne.md)
+
+```
+⭐⭐ DWIE, ALTERNATYWNE przesłanki (art. 3 ust. 1 ustawy CIT) —
+  podatnicy MAJĄCY SIEDZIBĘ LUB ZARZĄD na terytorium RP — PODLEGAJĄ
+  obowiązkowi PODATKOWEMU od CAŁOŚCI swoich dochodów, BEZ WZGLĘDU na
+  miejsce ICH osiągania (NIEOGRANICZONY obowiązek) — ⭐ SAMA
+  konstrukcja "LUB" analogiczna DO rezydencji OSÓB fizycznych —
+  SPEŁNIENIE choćby JEDNEJ przesłanki WYSTARCZY
+
+⭐ SIEDZIBA — ZAZWYCZAJ NIEPROBLEMATYCZNA: KAŻDA spółka POWINNA mieć
+  TĘ kwestię UREGULOWANĄ w UMOWIE/statucie — WPIS do KRS —
+  FORMALNIE łatwa DO ustalenia
+
+⭐⭐⭐ ZARZĄD NA TERYTORIUM RP — GŁÓWNE ŹRÓDŁO SPORÓW: TU pojawia SIĘ
+  praktyczny PROBLEM — art. 3 ust. 1a (WPROWADZONY Polskim Ładem) —
+  ROZSZERZONE, DOMNIEMANE rozumienie "zarządu": podatnik MA zarząd
+  NA terytorium Polski M.IN. GDY na TERYTORIUM Polski SĄ prowadzone
+  W SPOSÓB ZORGANIZOWANY I CIĄGŁY BIEŻĄCE sprawy SPÓŁKI — ⭐⭐
+  KLUCZOWE domniemanie: NIE jest ISTOTNE, GDZIE polscy CZŁONKOWIE
+  organów FAKTYCZNIE wykonują SWOJE działania — WYSTARCZY ich
+  PERSONALNY status JAKO polskich rezydentów PODATKOWYCH, żeby ZA
+  takiego rezydenta UZNAĆ RÓWNIEŻ podmiot, NA rzecz KTÓREGO działają
+
+⭐⭐ PRAKTYCZNY TEST — CO FAKTYCZNIE DECYDUJE: LICZY SIĘ NIE adres
+  REJESTRACYJNY, LECZ TO, GDZIE ZAPADAJĄ kluczowe DECYZJE dotyczące
+  działalności spółki — STRATEGICZNE i OPERACYJNE — CZY W POLSCE
+  odbywa SIĘ RZECZYWISTE zarządzanie SPÓŁKĄ, A NIE tylko FORMALNE
+  podpisywanie DOKUMENTÓW
+
+⭐⭐⭐ PRAKTYCZNY PRZYKŁAD RYZYKA PODWÓJNEJ REZYDENCJI (ILUSTRACJA Z
+  DOKTRYNY): spółka Z o.o. MA siedzibę W Polsce, ALE WSZYSCY
+  członkowie ZARZĄDU mieszkają ZA GRANICĄ (np. w Niemczech) —
+  POSIEDZENIA odbywają SIĘ online, DECYZJE strategiczne ZAPADAJĄ ZA
+  granicą, TAM też PROWADZONA jest korespondencja I nadzór NAD
+  finansami — W TAKIEJ sytuacji ZAGRANICZNY urząd SKARBOWY MOŻE
+  UZNAĆ, że MIEJSCE faktycznego ZARZĄDU znajduje SIĘ NA terytorium
+  TEGO innego państwa, A spółka JEST jego REZYDENTEM podatkowym —
+  MIMO że została ZAREJESTROWANA w Polsce — ⚠️ ZMIANA miejsca
+  faktycznego ZARZĄDU NIE ELIMINUJE AUTOMATYCZNIE obowiązków
+  podatkowych W Polsce — JEŚLI spółka PROWADZI TU jakąkolwiek
+  działalność LUB zatrudnia PRACOWNIKÓW, MOŻE POWSTAĆ ZAKŁAD
+  podatkowy (⚠️ powiązanie z instytucją "zagranicznego zakładu",
+  NIE rozwinięte w tej sesji)
+
+⭐ CEL REGULACJI (art. 3 ust. 1a): Polski Ład MIAŁ na CELU
+  ZAKOŃCZENIE praktyki ZAKŁADANIA zagranicznych SPÓŁEK, KONTROLOWANYCH
+  PRZEZ polskich PODATNIKÓW, ALE SŁUŻĄCYCH optymalizacji ZOBOWIĄZAŃ
+  podatkowych — ⚠️ KRYTYKA DOKTRYNALNA (gazetaprawna.pl): NOWA
+  regulacja W OGÓLE NIE TRAFIA w ISTOTĘ problemu Z rezydencją — ISTOTA
+  sprowadza SIĘ do USTALEŃ FAKTYCZNYCH w KONKRETNEJ sprawie, NIE do
+  UREGULOWAŃ normatywnych — orzecznictwo SĄDOWOADMINISTRACYJNE
+  JEDNOLICIE wskazuje, że MIEJSCEM faktycznego ZARZĄDU jest MIEJSCE,
+  W KTÓRYM odbywa SIĘ faktyczne ZARZĄDZANIE podmiotem, PODEJMOWANE SĄ
+  decyzje W kluczowych DLA podmiotu SPRAWACH — istotnych ZARÓWNO z
+  ekonomicznego, JAK i FUNKCJONALNEGO punktu WIDZENIA
+
+⭐ SKUTEK DLA NIEREZYDENTA (art. 3 ust. 2): podatnicy NIEMAJĄCY na
+  terytorium RP SIEDZIBY ANI zarządu — PODLEGAJĄ obowiązkowi
+  PODATKOWEMU TYLKO od DOCHODÓW osiąganych NA terytorium RP —
+  KATALOG źródeł (art. 3 ust. 3, ⚠️ orientacyjny): działalność
+  PROWADZONA na TERYTORIUM RP (W TYM przez ZAGRANICZNY zakład),
+  nieruchomości POŁOŻONE w RP, PAPIERY wartościowe DOPUSZCZONE do
+  publicznego OBROTU w RP, ZBYCIE udziałów/akcji W spółce polskiej
+
+⭐ POWIĄZANIE z rezydencją OSÓB fizycznych: KONSTRUKCJA ANALOGICZNA
+  (art. 3 ust. 1a i n. ustawy PIT — patrz mod-PIT-podatek-dochodowy-
+  fizyczne.md, sekcja 1a) — RÓŻNICA: dla OSÓB fizycznych DECYDUJE
+  "ośrodek interesów życiowych" LUB 183 dni; DLA osób PRAWNYCH —
+  "siedziba" LUB "zarząd" (Z rozszerzonym DOMNIEMANIEM zarządu)
+
+Potwierdzone w 7+ zgodnych źródeł, w tym akademickich (casp.sgh.
+waw.pl — Centrum Analiz Strategicznych SGH) i praktyki DORADCZEJ
+(polska-ksiegowosc.pl [październik 2025, z KONKRETNYM przykładem
+liczbowym], kancelaria-skarbiec.pl, gazetaprawna.pl [marzec 2026],
+prawo.pl, arslege.pl [dosłowny tekst art. 3]).
+```
+
+---
+
 ## 2. INTAKE
 
 ```
@@ -108,6 +190,90 @@ WYŁĄCZENIA (katalog w art. 24ca ust. 14, NIE zamknięty w tym module —
     0111-KDIB1-1.4010.588.2024.1.MF)
 
 web_search: "podatek minimalny CIT art 24ca 2026 wyłączenia stawka"
+```
+
+---
+
+## 4a. ⭐⭐⭐ SPÓŁKA HOLDINGOWA (PSH) I PODATKOWA GRUPA KAPITAŁOWA
+(PGK) — dodano 2026-08-12, na żądanie użytkownika — dotąd
+CAŁKOWICIE nieobecny temat
+
+```
+⭐⭐ DWA ODRĘBNE, WYKLUCZAJĄCE SIĘ reżimy PREFERENCYJNE dla struktur
+  GRUPOWYCH — spółka NIE MOŻE korzystać Z OBU jednocześnie:
+  → PSH (Polska Spółka Holdingowa, art. 24m-24o CIT) — PROSTSZA,
+    mniej WYMAGAJĄCA formalnie — SKUPIONA na zwolnieniu KONKRETNYCH
+    kategorii przychodów
+  → PGK (Podatkowa Grupa Kapitałowa) — WYMAGA znacznie WYŻSZEGO
+    kapitału zakładowego i INNYCH warunków formalnych — POZWALA
+    NA wspólne rozliczanie DOCHODÓW/strat CAŁEJ grupy jako JEDNEGO
+    podatnika — ⚠️ SZCZEGÓŁY PGK NIE rozwinięte W tej transzy,
+    PSH stanowi "PROSTSZĄ alternatywę"
+
+⭐⭐⭐ DEFINICJA SPÓŁKI HOLDINGOWEJ (art. 24m ust. 1) — WSZYSTKIE
+  warunki ŁĄCZNIE, NIEPRZERWANIE przez CO NAJMNIEJ 2 LATA (art. 24m
+  ust. 2):
+  1) FORMA prawna: sp. Z o.o., S.A., LUB prosta SPÓŁKA akcyjna (PSA
+     — DODANA nowelizacją Z 7.10.2022, WCZEŚNIEJ NIEDOSTĘPNA)
+  2) POSIADA BEZPOŚREDNIO min. **10%** udziałów/AKCJI W kapitale
+     spółki ZALEŻNEJ, na PODSTAWIE tytułu WŁASNOŚCI
+  3) NIE JEST spółką tworzącą PODATKOWĄ grupę kapitałową (PGK) —
+     WYKLUCZENIE wzajemne Z wyżej wymienionym reżimem
+  4) NIE POSIADA tytułów uczestnictwa W funduszu inwestycyjnym/
+     instytucji WSPÓLNEGO inwestowania, ANI innych praw
+     MAJĄTKOWYCH związanych Z prawem DO otrzymania świadczenia
+     JAKO założyciel/beneficjent FUNDACJI, trustu LUB podobnego
+     podmiotu POWIERNICZEGO — ⭐ MECHANIZM anty-nadużyciowy,
+     zapobiegający WYKORZYSTANIU PSH przez struktury TRUSTOWE
+
+⭐⭐⭐ DWA ZWOLNIENIA:
+  1) ART. 24N — zwolnienie DYWIDEND wypłacanych spółce holdingowej
+     PRZEZ spółkę zależną (KRAJOWĄ LUB zagraniczną) — Z 19% CIT
+  2) ART. 24O — zwolnienie DOCHODU ze zbycia UDZIAŁÓW/akcji spółki
+     zależnej NA rzecz PODMIOTU niepowiązanego — ⭐ WARUNEK
+     FORMALNY: OŚWIADCZENIE O zamiarze SKORZYSTANIA ze zwolnienia,
+     złożone WŁAŚCIWEMU naczelnikowi US NA CO NAJMNIEJ **5 DNI**
+     PRZED dniem ZBYCIA — BRAK oświadczenia W terminie = UTRATA
+     prawa DO zwolnienia dla TEJ konkretnej transakcji
+
+⭐⭐⭐ WYŁĄCZENIE ZE ZWOLNIENIA ZBYCIA — "KLAUZULA NIERUCHOMOŚCIOWA"
+  (art. 24o ust. 3): zwolnienie NIE MA zastosowania, GDY co
+  NAJMNIEJ **50%** WARTOŚCI aktywów SPÓŁKI zależnej (bezpośrednio
+  LUB pośrednio) STANOWIĄ nieruchomości POŁOŻONE w Polsce LUB
+  prawa DO takich nieruchomości — TYPOWY mechanizm anty-abuse
+  DLA spółek "NIERUCHOMOŚCIOWO bogatych" (real ESTATE rich
+  companies), ZAPOBIEGAJĄCY wykorzystaniu PSH DO "opakowania"
+  transakcji NIERUCHOMOŚCIOWYCH jako zbycia udziałów
+
+⭐⭐⭐ SPÓR INTERPRETACYJNY — MOMENT OCENY warunku 10% (interpretacja
+  KIS z 2024/2025, cytowana W kilku niezależnych źródłach): organ
+  UZNAŁ, że WARUNEK posiadania 10% udziałów MUSI być SPEŁNIONY NA
+  DZIEŃ uzyskania DOCHODU (tj. dzień ZBYCIA) — SPEŁNIENIE go
+  PÓŹNIEJ (np. PO transakcji) NIE WYSTARCZA — WĄSKA interpretacja,
+  ODRZUCAJĄCA argumentację PODATNIKA, że wystarczy zachowanie
+  minimalnego UDZIAŁU "PO dniu sprzedaży"
+
+⭐ HISTORIA ZMIAN — RYZYKO dla TRANSAKCJI z 2022-2023: WYMAGANY
+  okres NIEPRZERWANEGO posiadania ZMIENIŁ SIĘ Z **1 ROKU** (STAN
+  prawny 2022) NA **2 LATA** (stan PRAWNY 2023) — ⚠️ SPORNE W
+  DOKTRYNIE, CZY transakcje Z tego OKRESU przejściowego MOGĄ
+  korzystać ZE zwolnienia — CYTOWANE źródło (doradca.lublin.pl)
+  REKOMENDUJE OSTROŻNE podejście: zapłacić PODATEK, NASTĘPNIE
+  wystąpić Z wnioskiem O stwierdzenie NADPŁATY (patrz mod-OP-
+  ordynacja-podatkowa.md, sekcja 4a — nadpłata) — Z GOTOWOŚCIĄ DO
+  odwołania W razie ODMOWY
+
+⭐ CEL SYSTEMOWY: zachęcenie GRUP kapitałowych DO lokowania
+  HOLDINGÓW W Polsce (KONKURENCJA Z jurysdykcjami typu Holandia/
+  Luksemburg, TRADYCYJNIE preferowanymi DLA struktur holdingowych
+  W UE)
+
+Potwierdzone w 7+ zgodnych źródeł, w tym BEZPOŚREDNIO interpretacje
+indywidualne KIS (0111-KDIB1-1.4010.124.2025.2.SG, 0114-KDIP2-2.
+4010.267.2022.1.AP) oraz OpenLEX (dosłowny tekst art. 24m/24n/24o),
+poradnikprzedsiebiorcy.pl [×2], pwc.pl/studio [październik 2022, Z
+historią nowelizacji], mddp.pl, akademialtca.pl [Z omówieniem
+ROZBIEŻNOŚCI W orzecznictwie], doradca.lublin.pl.
 ```
 
 ---

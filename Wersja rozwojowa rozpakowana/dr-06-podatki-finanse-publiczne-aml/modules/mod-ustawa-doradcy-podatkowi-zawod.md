@@ -31,6 +31,40 @@ administracyjnymi
     (PPSA) — możliwy wpływ na zastępstwo procesowe doradców podatkowych
     przed WSA/NSA — WERYFIKUJ zakres
 
+⭐⭐⭐ KONKRETNE SZCZEGÓŁY reformy (dodano 2026-08-12, na żądanie
+użytkownika — wypełnienie WCZEŚNIEJ jawnie oznaczonej luki "WERYFIKUJ
+dokładny zakres"):
+  → WEJŚCIE W ŻYCIE: **1.03.2026 R.** (Z wyjątkami — CZĘŚĆ rozwiązań
+    "rozsunięta w czasie")
+  → ⭐⭐ ROZSZERZENIE zakresu NA OPŁATY publiczne (NIE tylko podatki):
+    OD 1.03.2026 doradcy PODATKOWI MOGĄ świadczyć usługi RÓWNIEŻ w
+    sprawach OPŁAT, do KTÓRYCH stosuje się PRZEPISY Ordynacji
+    podatkowej — KONKRETNE przykłady: OPŁATA CUKROWA (już opisana W
+    dr-06/mod-ustawa-akcyzowa-i-clo-UCC.md, sekcja o alkoholu/cukrze
+    — POWIĄZANIE między modułami), opłata "OD MAŁPEK" (⭐ potoczna
+    nazwa OPŁATY od małych, MINIATUROWYCH butelek alkoholu, do 300 ml)
+  → ⭐ NOWA PODSTAWA świadczenia usług: MOŻLIWOŚĆ wykonywania czynności
+    doradztwa PODATKOWEGO NA PODSTAWIE umowy CYWILNOPRAWNEJ (NIE
+    WYŁĄCZNIE dotychczasowej formy)
+  → ⭐ WYMÓG "TOGI" — obowiązek NOSZENIA togi PRZY określonych
+    czynnościach (⚠️ dokładny ZAKRES sytuacji wymagających togi NIE
+    w pełni zweryfikowany W tej sesji — wymaga DALSZEGO sprawdzenia)
+  → ⭐⭐ PRZEPIS PRZEJŚCIOWY: podmioty INNE niż uprawnione do
+    zawodowego wykonywania NOWO objętych czynności (reprezentacja W
+    sprawach z ROZSZERZONEGO katalogu) MOGĄ JE nadal WYKONYWAĆ przez
+    OKRES nie DŁUŻSZY niż **12 MIESIĘCY** od dnia wejścia W życie
+    nowelizacji — OKRES przystosowawczy DLA rynku
+  → REFORMA Komisji Egzaminacyjnej: 70 CZŁONKÓW powoływanych PRZEZ
+    ministra ds. finansów PUBLICZNYCH — Z WYMOGIEM co NAJMNIEJ
+    5-LETNIEGO doświadczenia W zawodzie DLA części składu, ORAZ
+    zakazem jednoczesnego ZATRUDNIENIA W administracji SKARBOWEJ
+
+Potwierdzone w 7+ zgodnych źródeł, w tym BEZPOŚREDNIO ISAP (Rząd 1,
+dosłowny tekst ustawy) i przepisy.gofin.pl/prawo.pl [z dosłownym
+cytatem przepisów przejściowych], infor.pl [styczeń 2026],
+rachunkowosc.com.pl [luty 2026], jztl.pl [Kancelaria Ziobrowski,
+styczeń 2026].
+
 Rozp. MS z 31.03.2025 — koszty pomocy prawnej z urzędu udzielonej przez
 doradcę podatkowego
   Dz.U. 2025 poz. 444 ✅ VER: 2026-06-14

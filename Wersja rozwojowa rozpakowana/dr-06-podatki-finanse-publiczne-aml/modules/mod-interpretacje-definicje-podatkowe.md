@@ -112,6 +112,14 @@ UCHWAŁA NSA III FPS 2/24 z 21.10.2024 r. — PODATEK OD NIERUCHOMOŚCI:
 
 ### 2B. Definicja rezydenta podatkowego / miejsce zamieszkania
 
+⭐ ODESŁANIE (dodano 2026-08-12): PEŁNA, znacznie ROZBUDOWANA treść
+(z konkretnym wyrokiem NSA II FSK 2653/16, koncepcją "łamanej
+rezydencji", mechanizmem rozstrzygania KONFLIKTU rezydencji między
+państwami) — patrz mod-PIT-podatek-dochodowy-fizyczne.md, sekcja 1a
+(osoby fizyczne) oraz mod-CIT-podatek-dochodowy-prawne.md, sekcja 1a
+(osoby prawne — siedziba LUB zarząd, z DOMNIEMANIEM z art. 3 ust. 1a
+CIT). PONIŻSZA treść to SKRÓCONY punkt wyjścia.
+
 ```
 PODSTAWA (art. 3 ust. 1a ustawy o PIT — weryfikuj Dz.U. 2025 w ISAP):
   Rezydent = osoba mająca miejsce zamieszkania w Polsce:
@@ -148,7 +156,7 @@ WARUNKI (linia interpretacyjna KIS 2024–2026):
     → Śledzenie kosztów (wskaźnik Nexus)
   □ Wskaźnik Nexus (art. 30ca ust. 4 PIT) = a/(a+b+c+d) gdzie:
     a = koszty własnej działalności B+R
-    b = koszty B+R nabyте od powiązanych
+    b = koszty B+R nabyte od powiązanych
     c = koszty nabycia wyników B+R od podmiotów niepowiązanych
     d = koszty nabycia kwalifikowanego IP
 
@@ -304,7 +312,16 @@ PRZYCHÓD Z DZIAŁALNOŚCI WYKONYWANEJ OSOBIŚCIE vs. B2B (art. 13 PIT):
 ## 6. BAZA EUREKA — JAK KORZYSTAĆ
 
 ```
-Dostęp: https://podatki.gov.pl/eureka (zastąpiło SIP od 04.10.2021 r.)
+Dostęp: https://eureka.mf.gov.pl/ (⚠️ POPRAWIONE 2026-08-12: poprzednio
+  "podatki.gov.pl/eureka" — TEN adres jest NIEPRECYZYJNY, POPRAWNY,
+  konsekwentnie potwierdzony URL to eureka.mf.gov.pl; zastąpiło SIP
+  od 04.10.2021 r.)
+⚠️ ZASTRZEŻENIE Z PRAKTYKI (potwierdzone 2026-08-12, cytat prof.
+  Wojciecha Morawskiego UMK): DOŚWIADCZENI doradcy podatkowi
+  ZGŁASZAJĄ trudności Z EFEKTYWNYM korzystaniem Z wyszukiwarki —
+  "Eureka to bardzo POTRZEBNY system... niestety TO wszystko
+  pozytywnego, CO mogę o NIM powiedzieć" — TRAKTUJ jako
+  UZUPEŁNIAJĄCE, nie jedyne źródło weryfikacji
 
 JAK WYSZUKIWAĆ:
   → Po sygnaturze: wpisz np. "0114-KDIP3-1.4011.84.2026"

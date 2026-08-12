@@ -325,15 +325,38 @@ oznacza braku RYZYKA prawnego, zwłaszcza przy większych ilościach
 
 ```
 ⚠️ ROZBIEŻNOŚĆ ŹRÓDEŁ co do GÓRNEJ GRANICY kary w typie podstawowym —
-część źródeł podaje "DO ROKU" pozbawienia wolności, inne "DO LAT
-TRZECH" — NIE wybrano arbitralnie jednej wersji, ZWERYFIKUJ DOKŁADNE,
-AKTUALNE brzmienie art. 12a §1 na ISAP przed zastosowaniem w
-konkretnej sprawie (przepis mógł być NOWELIZOWANY, co tłumaczyłoby
-rozbieżność między starszymi i nowszymi źródłami wtórnymi)
+UZUPEŁNIONE 2026-08-12 (na żądanie użytkownika, kontynuacja badania):
+TO NIE przypadkowa rozbieżność, TYLKO ODZWIERCIEDLENIE rzeczywistego,
+WIELOETAPOWEGO procesu LEGISLACYJNEGO podnoszenia kary — ALE źródła
+SĄ SPRZECZNE co do TEGO, KTÓRY etap jest AKTUALNIE obowiązujący:
+  → Historycznie (2001-2006 r., potwierdzone UCHWAŁĄ SN I KZP 23/04
+    z 2004 r. i wielokrotnie cytowanym art. 44 ustawy z 2006 r.):
+    kara PODSTAWOWA wynosiła "DO ROKU"
+  → ŹRÓDŁO prasowe z 2022 R. (farmer.pl, wrzesień 2022, relacja Z
+    UCHWALENIA nowelizacji przez Sejm) twierdzi, że "OBECNA kara —
+    TO maksymalnie 3 LATA więzienia", A nowelizacja MIAŁA podnieść
+    JĄ DALEJ do 8 LAT
+  → ⭐ ALE dokument RZĄDOWY (gov.pl/premier, projekt USTAWY, Rząd 1)
+    OPISUJE propozycję ODWROTNIE: "będzie PODLEGAŁ... karze...
+    pozbawienia wolności DO LAT 3 (OBECNIE do ROKU)" — SUGERUJĄC, że
+    stan PRZED TĄ konkretną nowelizacją TO WCIĄŻ "do roku", NIE "do 3 lat"
+  → ⚠️⚠️ TE DWA źródła SĄ WZAJEMNIE SPRZECZNE co do TEGO, jaki był
+    stan "PRZED" konkretną nowelizacją — MOŻLIWE wyjaśnienia: (a)
+    opisują RÓŻNE, KOLEJNE nowelizacje w RÓŻNYCH momentach czasu
+    (najpierw 1→3, POTEM osobno 3→8, LUB odwrotna KOLEJNOŚĆ), (b)
+    JEDNO źródło ZAWIERA błąd dziennikarski/redakcyjny
+  → NIE WYBRANO arbitralnie JEDNEJ wersji — ZWERYFIKUJ DOKŁADNE,
+    AKTUALNE brzmienie art. 12a §1 NA ISAP przed zastosowaniem W
+    konkretnej sprawie — SPRAWDŹ RÓWNIEŻ, czy PRZEPIS nie ZOSTAŁ
+    PRZENIESIONY z ustawy z 2001 r. DO nowszej ustawy z 2006 R. o
+    wyrobie napojów spirytusowych (art. 44), GDZIE RÓWNIEŻ toczyły
+    SIĘ prace nad ZAOSTRZENIEM (do 8 LAT dla typu KWALIFIKOWANEGO —
+    "stałe źródło DOCHODU" — art. 14 nowszej ustawy)
 
 □ TYP PODSTAWOWY (art. 12a §1): grzywna, kara ograniczenia wolności
   ALBO pozbawienia wolności — górna granica ⚠️ do weryfikacji (1 lub 3
-  lata, patrz zastrzeżenie wyżej)
+  lata, patrz zastrzeżenie wyżej — MOŻLIWE, że OBIE wartości BYŁY
+  poprawne W RÓŻNYCH momentach W CZASIE, wskutek KOLEJNYCH nowelizacji)
 □ TYP KWALIFIKOWANY (art. 12a §2) — gdy alkohol etylowy ZNACZNEJ
   WARTOŚCI: grzywna, ograniczenie wolności albo pozbawienie wolności
   do 2 LAT

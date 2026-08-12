@@ -125,6 +125,79 @@ web_search: "podatek nieruchomości budowla budynek klasyfikacja 2025 2026 WSA o
 
 ---
 
+## 5a. ⭐⭐ ZWOLNIENIA USTAWOWE (art. 7) (dodano 2026-08-12, na żądanie
+użytkownika — dotąd CAŁKOWICIE nieobecny temat)
+
+```
+⭐⭐ KATALOG GŁÓWNYCH ZWOLNIEŃ USTAWOWYCH (art. 7 ust. 1 ustawy o
+  podatkach i opłatach lokalnych, Dz.U.2025.0.707 t.j.):
+  → infrastruktura KOLEJOWA (w rozumieniu ustawy o TRANSPORCIE
+    kolejowym) — ⚠️ patrz WAŻNY WYJĄTEK 2025 poniżej
+  → grunty/budynki/budowle POZOSTAŁE po LIKWIDACJI linii kolejowych
+    — CZASOWO, max **3 LATA** od decyzji/rozporządzenia o likwidacji
+  → infrastruktura PORTOWA (portów morskich/przystani morskich) +
+    grunty POD nią
+  → grunty W POSIADANIU podmiotu ZARZĄDZAJĄCEGO portem, pozyskane NA
+    rozwój portu — max **5 LAT** od objęcia W posiadanie
+  → budynki/budowle/grunty NA terenie CZĘŚCI LOTNICZYCH lotnisk
+    użytku PUBLICZNEGO — O ILE służą WYŁĄCZNIE działalności
+    przewozowej LUB ochronie środowiska
+  → wały OCHRONNE, grunty POD wałami/w MIĘDZYWALACH — Z WYJĄTKIEM
+    zajętych NA działalność gospodarczą PRZEZ podmioty INNE niż
+    spółki WODNE/ich związki
+  → nieużytki, użytki EKOLOGICZNE, grunty ZADRZEWIONE/zakrzewione —
+    Z WYJĄTKIEM zajętych NA działalność gospodarczą
+  → działki PRZYZAGRODOWE członków rolniczych SPÓŁDZIELNI
+    produkcyjnych (WARUNKOWO)
+  → budynki NA terenie rodzinnych OGRODÓW działkowych (altany, W
+    granicach norm powierzchni Z Prawa budowlanego)
+  → budynki GOSPODARCZE na gruntach ROLNYCH, służące WYŁĄCZNIE
+    działalności rolniczej/LEŚNEJ/rybackiej
+  → ZABYTKI wpisane do REJESTRU — WARUNEK: utrzymanie ZGODNIE z
+    przepisami O ochronie zabytków ORAZ BRAK działalności
+    gospodarczej
+  → szkoły, UCZELNIE, instytuty BADAWCZE — grunty/budynki NA cele
+    EDUKACYJNE (o ile NIE prowadzi SIĘ tam działalności ZAROBKOWEJ)
+
+⭐⭐ WAŻNE ROZRÓŻNIENIE POJĘCIOWE: grunty ROLNE (klasy R, Ł, Ps) i
+  LASY (Ls) SAME W SOBIE NIE PODLEGAJĄ W OGÓLE podatkowi od
+  nieruchomości — TO NIE JEST formalnie "zwolnienie", TYLKO
+  WYŁĄCZENIE Z ZAKRESU przedmiotowego — TE grunty PODLEGAJĄ innemu
+  podatkowi — PODATKOWI ROLNEMU (patrz sekcja 6 NIŻEJ, w TYM samym
+  module) — ⭐ ROZRÓŻNIENIE to MA znaczenie PRAKTYCZNE, bo
+  "zwolnienie" i "wyłączenie z zakresu" TO różne KONSTRUKCJE prawne
+
+⭐⭐⭐ ŚWIEŻY, NIEROZSTRZYGNIĘTY SPÓR SĄDOWY (2026) — dot. WYJĄTKU dla
+  infrastruktury KOLEJOWEJ: reforma OD 1.01.2025 WPROWADZIŁA nowy
+  art. 7 ust. 1a UPOL, KTÓRY WYŁĄCZA ze zwolnienia grunty/budynki/
+  budowle wchodzące W SKŁAD obiektu infrastruktury USŁUGOWEJ
+  będącego TERMINALEM TOWAROWYM — ⚠️ WSA WE WROCŁAWIU (wyrok z
+  27.05.2026, sygn. I SA/Wr 167/26, NA dzień weryfikacji
+  NIEPRAWOMOCNY) PRZYJĄŁ WĄSKĄ interpretację — infrastruktura
+  kolejowa ZNAJDUJĄCA SIĘ na TERENIE terminali towarowych NIGDY nie
+  BĘDZIE mogła korzystać ZE zwolnienia, MIMO spełnienia WSZYSTKICH
+  innych przesłanek USTAWOWYCH — ⭐ KOMENTATORZY (Deloitte) OCENIAJĄ
+  to podejście jako SPRZECZNE z LITERALNYM brzmieniem przepisu
+  (który WYŁĄCZA konkretnie infrastrukturę "wchodzącą w SKŁAD"
+  terminala, NIE całą infrastrukturę NA jego TERENIE) — PRZESĄDZAJĄCE
+  znaczenie BĘDZIE miał DOPIERO wyrok NSA — ⚠️ SPRAWDŹ AKTUALNY
+  status TEGO sporu PRZED zastosowaniem w konkretnej SPRAWIE
+  dotyczącej infrastruktury kolejowej na TERENIE terminalu
+
+⭐ DODATKOWE, FAKULTATYWNE zwolnienia LOKALNE: RADA GMINY MOŻE
+  (ale NIE MUSI) wprowadzić DODATKOWE zwolnienia NA swoim terenie,
+  W FORMIE uchwały — CZĘSTO jako FORMA pomocy REGIONALNEJ — ⚠️
+  ZAWSZE sprawdzaj UCHWAŁY konkretnej GMINY, NIE poprzestawaj na
+  katalogu USTAWOWYM
+
+Potwierdzone w 6+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
+tekst art. 7 (lexlege.pl, arslege.pl, z aktualnym t.j. Dz.U.2025.0.707)
+oraz Deloitte Poland [SPRZED 3 tygodni, z omówieniem ŚWIEŻEGO
+orzeczenia WSA], litigato.pl, kalkulatorkatastralny.pl [styczeń 2026].
+```
+
+---
+
 ## 6. PODATEK ROLNY
 
 ```

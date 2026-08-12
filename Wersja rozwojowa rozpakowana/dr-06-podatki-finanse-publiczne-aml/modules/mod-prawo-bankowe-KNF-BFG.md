@@ -104,6 +104,27 @@ Organ resolution: BFG
 | Po sprzedaży nieruchomości | do 200 000 EUR przez 3 miesiące | 7 dni roboczych |
 | Po odprawie pracowniczej | do 200 000 EUR przez 3 miesiące | 7 dni roboczych |
 
+⭐ TERMIN PRZEDAWNIENIA roszczeń deponenta (dodano 2026-08-12, na
+żądanie użytkownika — brakujący dotąd element): roszczenia
+DEPONENTA z TYTUŁU gwarancji PRZEDAWNIAJĄ SIĘ po upływie **5 LAT**
+OD dnia SPEŁNIENIA warunku GWARANCJI — potwierdzone bezpośrednio
+gov.pl/finanse (Rząd 1)
+
+⚠️⚠️ ŚWIEŻA, dotąd NIEUWZGLĘDNIONA dyrektywa UE (dodano 2026-08-12):
+NOWA dyrektywa Parlamentu Europejskiego i Rady, formalnie PRZYJĘTA
+**30.03.2026 R.** (dokument Rady PE-CONS 19/26, COM(2026) 124
+final), ZMIENIAJĄCA dyrektywę 2014/49/UE "W ODNIESIENIU DO ZAKRESU
+ochrony DEPOZYTÓW, wykorzystywania ŚRODKÓW z systemów GWARANCJI
+depozytów, WSPÓŁPRACY transgranicznej i PRZEJRZYSTOŚCI" — ⚠️ SAMA
+TREŚĆ merytorycznych ZMIAN (czy PODWYŻSZA konkretne kwoty
+gwarancji, czy ZMIENIA zakres) NIE ZWERYFIKOWANA w tej sesji —
+DOKUMENT znaleziony to głównie CZĘŚĆ proceduralna/preambuła —
+WYMAGA dedykowanego badania PRZED zastosowaniem w konkretnej
+sprawie, ZWŁASZCZA że TERMIN transpozycji do prawa POLSKIEGO
+prawdopodobnie jeszcze NIE upłynął (dyrektywa PRZYJĘTA dopiero
+30.03.2026) — web_search: "dyrektywa 2026 zmiana 2014/49 zakres
+ochrony depozytów transpozycja Polska" PRZED cytowaniem w sprawie
+
 > ⚠️ Weryfikuj aktualne kwoty w ustawie o BFG: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000487
 
 ---

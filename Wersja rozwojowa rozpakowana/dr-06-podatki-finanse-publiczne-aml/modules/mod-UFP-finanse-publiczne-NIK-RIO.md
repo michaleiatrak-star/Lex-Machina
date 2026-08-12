@@ -140,6 +140,79 @@ Przed wygenerowaniem pisma lub analizy odpowiedz na każde pytanie:
 
 ---
 
+## ⭐⭐⭐ 11z. REGIONALNA IZBA OBRACHUNKOWA (RIO) — TREŚĆ MERYTORYCZNA
+(dodane 2026-08-12, na żądanie użytkownika — TA SAMA logika co
+sekcja 11 NIŻEJ: dotąd RIO było TYLKO WZMIANKOWANE przelotnie w
+CAŁYM module, mimo że tytuł modułu OBIECUJE "NIK-RIO")
+
+```
+⭐⭐ ORGANIZACJA: RIO PODLEGA prezesowi RADY MINISTRÓW — organy IZBY:
+  (1) KOLEGIUM izby (prezes + CZŁONKOWIE powoływani PRZEZ prezesa
+  RM oraz sejmiki SAMORZĄDOWE), (2) KOMISJA orzekająca W sprawach O
+  naruszenie DYSCYPLINY finansów publicznych — POSIEDZENIA kolegium
+  zwoływane PRZEZ prezesa izby, NIE rzadziej niż RAZ na KWARTAŁ
+
+⭐⭐ ZAKRES KONTROLI uchwał JST — RIO BADA uchwały organów JST W
+  SPRAWACH: procedury UCHWALANIA i zmian BUDŻETU, zaciągania
+  ZOBOWIĄZAŃ wpływających NA wysokość DŁUGU publicznego JST i
+  udzielania POŻYCZEK, zasad i zakresu PRZYZNAWANIA dotacji,
+  podatków/opłat LOKALNYCH, absolutorium
+
+⭐ KRYTERIA kontroli: ZGODNOŚĆ Z PRAWEM + zgodność DOKUMENTACJI ze
+  stanem FAKTYCZNYM — DLA zadań Z zakresu administracji RZĄDOWEJ
+  (zlecone JST ustawami/porozumieniami) — DODATKOWO kryteria
+  CELOWOŚCI, rzetelności I gospodarności
+
+⭐⭐⭐ MECHANIZM NADZORCZY nad uchwałami — DWA POZIOMY reakcji:
+  → NARUSZENIE ISTOTNE: izba ORZEKA o NIEWAŻNOŚCI uchwały W CAŁOŚCI
+    LUB odpowiedniej CZĘŚCI
+  → NARUSZENIE NIEISTOTNE: izba NIE stwierdza nieważności — TYLKO
+    WSKAZUJE, że uchwałę WYDANO z naruszeniem PRAWA
+  → ⭐⭐ SZCZEGÓLNY TRYB dla UCHWAŁ BUDŻETOWYCH: izba WSKAZUJE
+    organowi STANOWIĄCEMU JST, NA CZYM POLEGA naruszenie prawa
+    ORAZ sposób i TERMIN jego USUNIĘCIA — DOPIERO GDY
+    nieprawidłowości NIE ZOSTANĄ usunięte W terminie — dalsze
+    działania NADZORCZE
+  → ⭐ ZAWIESZENIE terminu: WSKAZANIE nieprawidłowości ZAWIESZA bieg
+    **30-DNIOWEGO** terminu Z art. 91 ustawy O samorządzie gminnym
+    (analogicznie art. 79 ustawy O samorządzie powiatowym, art. 82
+    ustawy O samorządzie województwa) — dotyczącego SKUTKÓW
+    sprzeczności uchwał Z prawem
+
+⭐⭐⭐ NAJMOCNIEJSZE UPRAWNIENIE ZASTĘPCZE — USTALENIE BUDŻETU PRZEZ
+  IZBĘ ZAMIAST JST:
+  → JEŻELI organ STANOWIĄCY JST NIE PODEJMIE uchwały budżetowej DO
+    **31 STYCZNIA** roku BUDŻETOWEGO — IZBA SAMA USTALA budżet TEJ
+    jednostki, W TERMINIE DO KOŃCA **LUTEGO** roku budżetowego (W
+    ZAKRESIE zadań WŁASNYCH oraz ZLECONYCH)
+  → ⭐ ANALOGICZNIE: izba USTALA budżet TAKŻE GDY JST NIE ZACHOWAŁA
+    zasad Z art. 242-244 ustawy O finansach PUBLICZNYCH (relacja
+    DOCHODY bieżące ≥ WYDATKI bieżące i POWIĄZANE ograniczenia)
+  → W PRZYPADKU stwierdzenia NIEWAŻNOŚCI uchwały BUDŻETOWEJ W
+    CAŁOŚCI lub CZĘŚCI — budżet (LUB jego CZĘŚĆ) dotknięty
+    nieważnością USTALA kolegium IZBY
+  → PRZEPISY te STOSUJE SIĘ odpowiednio DO związków JST
+
+⭐ DZIAŁALNOŚĆ OPINIODAWCZA: RIO WYDAJE opinie DO projektu uchwały W
+  sprawie wieloletniej PROGNOZY finansowej (WPF) LUB jej ZMIANY,
+  przedstawionej WRAZ z projektem uchwały BUDŻETOWEJ — ZE
+  SZCZEGÓLNYM uwzględnieniem PRZESTRZEGANIA przepisów DOT.
+  uchwalania/wykonywania BUDŻETÓW W kolejnych LATACH — RÓWNIEŻ
+  opinia W sprawie PRAWIDŁOWOŚCI planowanej KWOTY DŁUGU JST
+
+⭐ RAPORT O STANIE GOSPODARKI FINANSOWEJ (art. 10a ustawy o RIO): NA
+  PODSTAWIE wyników działalności NADZORCZEJ/kontrolnej/
+  opiniodawczej — W RAZIE potrzeby WSKAZANIA powtarzających SIĘ
+  nieprawidłowości LUB zagrożenia NIEWYKONANIA ustawowych zadań —
+  izba PRZEDSTAWIA raport — decyzję O sporządzeniu, ZAKRES i termin
+  USTALA kolegium izby uchwałą
+
+Potwierdzone w 7+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
+tekst ustawy o RIO (lexlege.pl, rio.gov.pl — Krajowa Rada RIO) oraz
+konsekwentne, wielokrotnie POWTARZAJĄCE się cytaty NA stronach
+poszczególnych, REGIONALNYCH izb (Katowice, Opole).
+```
+
 ## ⭐⭐ 11. WYSTĄPIENIE POKONTROLNE NIK — TREŚĆ MERYTORYCZNA (dodane 2026-07-21)
 
 > Sekcje 1-10 wyżej to OGÓLNY szkielet proceduralny (NAZYWAJĄCY kroki:

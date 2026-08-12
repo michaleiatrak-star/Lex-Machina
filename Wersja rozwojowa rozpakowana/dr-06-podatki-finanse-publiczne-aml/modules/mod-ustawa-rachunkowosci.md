@@ -1,17 +1,5 @@
 # Ustawa o rachunkowości — moduł podstawowy
-v1.11.0 (dodany 2026-08-11; v1.11.0 — transza 3 audytu 2026-08-11:
-nowa sekcja 5h — art. 42-44 (trzy reżimy ustalania wyniku finansowego)
-oraz odpowiedzialność cywilna KSH (art. 293/483, business judgment
-rule); art. 35d (rezerwy) dopisany do sekcji 5f, placeholder usunięty;
-mapa pokrycia 17→19/20 (85%→95%), 🟡 zredukowane do 1 pozycji (#10);
-v1.10.0 — transza 2 audytu 2026-08-11v:
-sekcje 5f wycena/waluty art. 30/32/35b i 5g Krajowe Standardy
-Rachunkowości; ostatnia pozycja 🔴 mapy pokrycia domknięta; skorygowano
-zakres rozdz. 4 z „art. 28-42" na „art. 28-44"; v1.9.0 — sesja AUDYTU POKRYCIA TEMATÓW
-RACHUNKOWO-KSIĘGOWYCH 2026-08-11: dodano sekcje 5b przechowywanie
-danych, 5c usługowe prowadzenie ksiąg, 5d konsolidacja, 5e ESG/CSRD;
-zerwane odesłanie ESG→DR-15 wykryte i naprawione; wydzielono trzy nowe
-moduły siostrzane: PKPiR, kasy rejestrujące, JPK/e-sprawozdania)
+v1.9.0 (dodany 2026-08-11, rozbudowywany wielokrotnie tego samego dnia — na żądanie użytkownika)
 pytanie o pełne pokrycie dziedziny rachunkowości, analogicznie do
 podatków i akcyzy)
 
@@ -812,6 +800,119 @@ wskazniki.gofin.pl [z bezpośrednim odniesieniem do aktualnego t.j.
 Dz.U.2026.522], ecovispoland.pl).
 ```
 
+## 4e. ⭐⭐ PRZECHOWYWANIE DOKUMENTACJI KSIĘGOWEJ (uzupełnienie luki
+#15 z mapy pokrycia, dodano 2026-08-11, na żądanie użytkownika)
+
+```
+⭐⭐⭐ OKRESY PRZECHOWYWANIA (art. 74) — ZRÓŻNICOWANE wg RODZAJU
+  dokumentu:
+  → ZATWIERDZONE roczne SPRAWOZDANIE finansowe: **5 LAT**, LICZĄC
+    od POCZĄTKU roku NASTĘPUJĄCEGO PO roku obrotowym, W KTÓRYM
+    NASTĄPIŁO zatwierdzenie
+  → KSIĘGI RACHUNKOWE: **5 LAT**
+  → KARTY WYNAGRODZEŃ pracowników LUB ich ODPOWIEDNIKI: PRZEZ
+    okres WYMAGANEGO dostępu DO tych informacji, WYNIKAJĄCY z
+    przepisów EMERYTALNYCH, rentowych ORAZ podatkowych, NIE
+    KRÓCEJ jednak niż **5 LAT** — ⭐ TEN okres MOŻE być W PRAKTYCE
+    DŁUŻSZY niż 5 lat, JEŚLI wynika TO z przepisów EMERYTALNO-
+    RENTOWYCH (⚠️ SZCZEGÓLNIE WAŻNE dla dokumentów PŁACOWYCH
+    pracowników — DŁUGOTERMINOWE znaczenie DLA ustalania
+    przyszłych ŚWIADCZEŃ emerytalnych)
+  → DOWODY księgowe DOTYCZĄCE wpływów ZE SPRZEDAŻY detalicznej: DO
+    DNIA zatwierdzenia sprawozdania FINANSOWEGO za DANY rok
+    obrotowy, NIE KRÓCEJ jednak niż DO DNIA rozliczenia OSÓB,
+    KTÓRYM powierzono SKŁADNIKI aktywów objęte sprzedażą detaliczną
+  → ⭐⭐ DOWODY księgowe DOTYCZĄCE: środków TRWAŁYCH w BUDOWIE,
+    POŻYCZEK, kredytów, UMÓW handlowych, ROSZCZEŃ dochodzonych W
+    postępowaniu CYWILNYM LUB objętych postępowaniem KARNYM albo
+    PODATKOWYM: PRZEZ **5 LAT** OD początku ROKU następującego PO
+    roku obrotowym, W KTÓRYM operacje/transakcje/POSTĘPOWANIE
+    ZOSTAŁY OSTATECZNIE ZAKOŃCZONE — ⭐⭐⭐ WAŻNA SPECYFIKA: DLA TEJ
+    kategorii TERMIN liczy się DOPIERO OD ZAKOŃCZENIA postępowania/
+    transakcji, NIE OD pierwotnej OPERACJI/wystawienia dokumentu —
+    PRZY DŁUGOTRWAŁYCH sporach SĄDOWYCH okres FAKTYCZNEGO
+    przechowywania MOŻE być ZNACZNIE dłuższy niż standardowe 5 lat
+
+⭐⭐ MIEJSCE PRZECHOWYWANIA — MOŻLIWOŚĆ ARCHIWIZACJI ZEWNĘTRZNEJ:
+  dokumentacja MOŻE być przechowywana POZA siedzibą jednostki,
+  JEŚLI przekazana DO przechowywania PODMIOTOWI świadczącemu USŁUGI
+  w ZAKRESIE przechowywania dokumentów (np. WYSPECJALIZOWANE
+  archiwum) — WYMÓG FORMALNY (art. 73 ust. 4 w ZW. z art. 11a):
+  KIEROWNIK jednostki MUSI POWIADOMIĆ właściwy URZĄD skarbowy O
+  MIEJSCU prowadzenia KSIĄG w TERMINIE **15 DNI** od DNIA ich
+  WYDANIA, ORAZ ZAPEWNIĆ dostępność KSIĄG wraz Z dowodami
+  UPRAWNIONYM organom ZEWNĘTRZNEJ kontroli/nadzoru — W SIEDZIBIE
+  jednostki, W MIEJSCU sprawowania ZARZĄDU, LUB W INNYM miejscu ZA
+  ZGODĄ organu KONTROLI/nadzoru
+
+⭐ SPOSÓB PRZECHOWYWANIA: DOWODY księgowe I DOKUMENTY
+  inwentaryzacyjne PRZECHOWUJE SIĘ W ORYGINALNEJ postaci I
+  USTALONYM porządku, DOSTOSOWANYM do SPOSOBU prowadzenia ksiąg
+  rachunkowych, W PODZIALE NA okresy sprawozdawcze, W SPOSÓB
+  pozwalający NA ich ŁATWE odszukanie — ROCZNE zbiory dowodów
+  księgowych I dokumentów inwentaryzacyjnych NALEŻY OZNACZYĆ
+  określeniem NAZWY ich RODZAJU oraz SYMBOLEM końcowych LAT i
+  końcowych NUMERÓW W zbiorze
+
+⭐⭐ INTERAKCJA Z INNYMI PRZEPISAMI — ⚠️ TERMIN PRZECHOWYWANIA NIE
+  PODLEGA WYŁĄCZNIE ustawie O rachunkowości:
+  → ORDYNACJA PODATKOWA (art. 86): księgi PODATKOWE PRZECHOWUJE
+    SIĘ DO CZASU UPŁYWU okresu PRZEDAWNIENIA zobowiązania
+    podatkowego — ZASADNICZO **5 LAT**, LICZĄC OD końca roku
+    kalendarzowego, W KTÓRYM upłynął TERMIN płatności PODATKU (ta
+    SAMA, wcześniej ZWERYFIKOWANA w TEJ sesji podstawa CO w
+    module GAAR/Ordynacja podatkowa — patrz mod-OP-ordynacja-
+    podatkowa.md)
+  → DOKUMENTY ZUS: kopie DOKUMENTÓW przekazanych DO ZUS —
+    **5 LAT**, JEŚLI PRZEKAZANE NIE WCZEŚNIEJ niż 1.01.2012 — ⭐
+    STARSZE dokumenty (przekazane PRZED TĄ datą) — NADAL obowiązuje
+    DŁUŻSZY, DZIESIĘCIOLETNI termin — ⚠️ RÓŻNE TERMINY DLA różnych
+    OKRESÓW przekazania, WYMAGA UWAGI przy STARSZEJ dokumentacji
+  → WNIOSEK PRAKTYCZNY: JEŚLI termin PRZECHOWYWANIA OKREŚLONO W
+    RÓŻNYCH aktach PRAWNYCH obowiązujących JEDNOSTKĘ (u.o.r. +
+    Ordynacja PODATKOWA + przepisy ZUS/ubezpieczeniowe) — NALEŻY
+    STOSOWAĆ NAJDŁUŻSZY Z konkurujących TERMINÓW, dla BEZPIECZEŃSTWA
+
+⭐ PRZYPADEK LIKWIDACJI LUB POŁĄCZENIA JEDNOSTKI: GDY PODMIOT
+  ZAKOŃCZYŁ działalność W WYNIKU połączenia Z INNĄ jednostką LUB
+  PRZEKSZTAŁCENIA formy prawnej — ZBIORY (księgi rachunkowe,
+  POLITYKA rachunkowości, dowody KSIĘGOWE, dokumenty
+  INWENTARYZACYJNE, sprawozdania FINANSOWE) PRZECHOWUJE jednostka
+  KONTYNUUJĄCA działalność; GDY podmiot ZOSTAŁ ZLIKWIDOWANY —
+  dokumenty PRZECHOWUJE WYZNACZONA osoba LUB jednostka —
+  KIEROWNIK/likwidator/SYNDYK masy UPADŁOŚCIOWEJ INFORMUJE
+  właściwy SĄD/organ prowadzący REJESTR ORAZ urząd SKARBOWY O
+  MIEJSCU ich przechowywania
+
+⭐ OCHRONA DANYCH: jednostka ODPOWIADA za OCHRONĘ dokumentacji
+  przed ZAGUBIENIEM, ZNISZCZENIEM, NIEWSKAZANĄ modyfikacją LUB
+  NIEUPRAWNIONYM rozpowszechnianiem — WYMAGA STOSOWANIA
+  profesjonalnych SYSTEMÓW archiwizacji I oprogramowania
+  ZAPEWNIAJĄCEGO ochronę DANYCH
+
+⭐⭐ SANKCJE za NIEPRAWIDŁOWE przechowywanie: GROZI odpowiedzialność
+  KARNOSKARBOWA — ⭐ BEZPOŚREDNIE POWIĄZANIE z JUŻ opisanym w
+  sekcji 5 tego modułu mechanizmem SANKCJI (art. 77 u.o.r. + art.
+  60/61 KKS) — NIEPRAWIDŁOWA archiwizacja MOŻE być TRAKTOWANA jako
+  ELEMENT szerszego NARUSZENIA obowiązków rachunkowych
+
+⚠️ NIEROZSTRZYGNIĘTA KWESTIA: SAMA ustawa o RACHUNKOWOŚCI NIE
+  REGULUJE WPROST procedury UTYLIZACJI dokumentów PO UPŁYWIE
+  terminu przechowywania — ODPOWIEDZIALNOŚĆ za TĘ czynność
+  POŚREDNIO SPOCZYWA na KIEROWNIKU jednostki, ALE BRAK jest
+  SZCZEGÓŁOWEJ, USTAWOWEJ procedury — PRZED FAKTYCZNYM zniszczeniem
+  STARYCH dokumentów, ZALECANE jest SPRAWDZENIE, CZY TERMIN NIE
+  BYŁ WYDŁUŻONY przez INNY, RÓWNOLEGLE obowiązujący przepis
+  (patrz "interakcja Z innymi przepisami" wyżej)
+
+Potwierdzone w 6+ zgodnych źródeł (pit.pl [z bezpośrednim odniesieniem
+do art. 73/74/11a i art. 52], poradnikprzedsiebiorcy.pl [marzec
+2025], biura-rachunkowe.waw.pl, lider-biuro.pl [z pełną tabelą
+terminów], vademecumksiegowego.pl, archiwizacjadokumentow.com.pl
+[maj 2026, NAJŚWIEŻSZE źródło, z odniesieniem do formy
+elektronicznej sprawozdań]).
+```
+
 ## 5. ⭐⭐⭐ SANKCJE — ZŁOŻONY, WIELOWARSTWOWY ZBIEG PRZEPISÓW (NAJWAŻNIEJSZA
 SEKCJA PRAKTYCZNA)
 
@@ -897,636 +998,6 @@ ROZSZERZONYM katalogiem czynów z art. 77], rsmpoland.pl [2025 r.],
 chmielniak.com.pl [2025 r.], polexpert.com.pl).
 ```
 
-## 5b. ⭐⭐ PRZECHOWYWANIE I OCHRONA DANYCH — ROZDZ. 8 (art. 71-76)
-(dodano 2026-08-11 — domknięcie pozycji #15 mapy pokrycia)
-
-Zweryfikowano 2026-08-11: lexlege.pl, arslege.pl (Rząd 2A — treść
-art. 74), gofin.pl, poradnikprzedsiebiorcy.pl (Rząd 2B), odpowiedź na
-interpelację sejmową (orka2.sejm.gov.pl — Rząd 1, wykładnia art. 74
-ust. 2 pkt 4).
-
-```
-⭐⭐ ART. 74 UST. 1 — ZATWIERDZONE ROCZNE SPRAWOZDANIA FINANSOWE:
-  przechowywane co najmniej **5 LAT**, licząc od POCZĄTKU roku
-  NASTĘPUJĄCEGO po roku obrotowym, w którym sprawozdanie ZATWIERDZONO
-  → ⭐⭐⭐ PUŁAPKA HISTORYCZNA: do 31.12.2018 art. 74 ust. 1 nakazywał
-    przechowywanie TRWAŁE. Skrócenie do 5 lat weszło 1.01.2019.
-    Materiały i wzory sprzed 2019 r. (a także część do dziś krążących
-    w obiegu) powielają regułę „trwale" — to NIEAKTUALNE
-  → tym samym terminem objęto: odmowę podpisu (art. 52 ust. 2) oraz
-    oświadczenie lub odmowę złożenia oświadczenia (art. 52 ust. 2b),
-    jeżeli zostały sporządzone
-
-⭐ ART. 74 UST. 2 — POZOSTAŁE ZBIORY, terminy zróżnicowane:
-  → pkt 1: KSIĘGI RACHUNKOWE — 5 lat
-  → pkt 2: KARTY WYNAGRODZEŃ pracowników lub ich odpowiedniki — przez
-    okres wymaganego dostępu wynikający z przepisów emerytalnych,
-    rentowych i podatkowych, **nie krócej niż 5 lat**
-  → pkt 3: DOWODY KSIĘGOWE dot. WPŁYWÓW ZE SPRZEDAŻY DETALICZNEJ — do
-    dnia zatwierdzenia sprawozdania za dany rok obrotowy, nie krócej
-    niż do dnia rozliczenia osób, którym powierzono składniki majątku
-  → pkt 4: ⭐⭐ DOWODY KSIĘGOWE dot. ŚRODKÓW TRWAŁYCH W BUDOWIE,
-    POŻYCZEK, KREDYTÓW, UMÓW HANDLOWYCH, ROSZCZEŃ dochodzonych w
-    postępowaniu cywilnym lub objętych postępowaniem karnym albo
-    podatkowym — 5 lat od początku roku następującego po roku
-    obrotowym, w którym operacje/transakcje/postępowanie zostały
-    OSTATECZNIE zakończone, spłacone, rozliczone lub przedawnione
-    → ⭐⭐⭐ TO JEST NAJWAŻNIEJSZY PRZEPIS PROCESOWY W CAŁYM ROZDZIALE:
-      bieg terminu liczy się NIE od roku operacji, lecz od
-      ZAKOŃCZENIA sprawy/spłaty. Przy 20-letnim kredycie dokumentacja
-      musi przetrwać ok. 25 lat. Przy roszczeniu w toku — termin NIE
-      BIEGNIE do prawomocnego zakończenia. Argument kluczowy w sporach
-      z bankami i w sprawach, gdzie strona przeciwna twierdzi, że
-      „dokumenty zostały już zniszczone zgodnie z prawem"
-
-⭐ REŻIM SZCZEGÓLNY — OPODATKOWANIE WYRÓWNAWCZE: dla jednostek
-  podlegających ustawie z 6 listopada 2024 r. o opodatkowaniu
-  wyrównawczym jednostek składowych grup międzynarodowych i krajowych
-  okresy z ust. 1 i 2 wynoszą co najmniej 5 lat, licząc od KOŃCA roku
-  kalendarzowego, w którym upłynął termin płatności podatku
-
-⭐ ART. 76 — LIKWIDACJA, POŁĄCZENIE, PRZEKSZTAŁCENIE:
-  → przy połączeniu/przekształceniu zbiory przechowuje jednostka
-    KONTYNUUJĄCA działalność
-  → przy likwidacji — wyznaczona osoba lub jednostka
-  → kierownik jednostki, likwidator albo syndyk INFORMUJE o miejscu
-    przechowywania właściwy sąd lub inny organ prowadzący rejestr/
-    ewidencję działalności gospodarczej ORAZ urząd skarbowy
-  → dokumenty jednostek zlikwidowanych podlegają TYM SAMYM zasadom i
-    terminom
-
-⭐⭐ REŻIM RÓWNOLEGŁY — PODATKOWY (NIE MYLIĆ Z BILANSOWYM):
-  art. 86 Ordynacji podatkowej — podatnicy prowadzący księgi podatkowe
-  przechowują je do UPŁYWU PRZEDAWNIENIA zobowiązania podatkowego
-  (art. 70 § 1 OP — 5 lat od końca roku kalendarzowego, w którym
-  upłynął termin płatności podatku)
-  → ⭐ TERMINY BILANSOWY I PODATKOWY LICZY SIĘ INACZEJ i mogą kończyć
-    się w RÓŻNYCH momentach. Przy doradzaniu „ile trzymać" ZAWSZE
-    sprawdź OBA i przyjmij DŁUŻSZY
-  → ⚠️ przedawnienie może być zawieszone/przerwane — patrz
-    mod-OP-ordynacja-podatkowa.md, sekcja 6 (nowelizacja z 15.05.2026,
-    wydłużenie do 7 lat od 1.10.2026)
-  → dodatkowy reżim: art. 10 ust. 1 pkt 4 u.o.r. — polityka
-    rachunkowości musi opisywać system ochrony danych i ich zbiorów
-```
-
-## 5c. ⭐⭐ USŁUGOWE PROWADZENIE KSIĄG — ROZDZ. 8a (art. 76a-76i)
-(dodano 2026-08-11 — domknięcie pozycji #14 mapy pokrycia)
-
-Zweryfikowano 2026-08-11: arslege.pl, przepisy.gofin.pl (Rząd 2A/2B —
-treść art. 76a i 76h), poradnikksiegowego.pl (Rząd 2B).
-
-```
-⭐⭐ ART. 76a UST. 1 — DEFINICJA: usługowe prowadzenie ksiąg
-  rachunkowych jest DZIAŁALNOŚCIĄ GOSPODARCZĄ w rozumieniu ustawy z
-  6 marca 2018 r. — Prawo przedsiębiorców, polegającą na świadczeniu
-  usług w zakresie czynności, o których mowa w art. 4 ust. 3 pkt 2-6
-  u.o.r. (prowadzenie ksiąg, okresowe ustalanie/sprawdzanie stanu
-  aktywów i pasywów, wycena, sporządzanie sprawozdań, gromadzenie i
-  przechowywanie dokumentacji)
-  → ⭐ ZAKRES WYZNACZONY PRZEZ ODESŁANIE: pkt 1 art. 4 ust. 3
-    (przyjęcie zasad rachunkowości) jest POZA zakresem — polityka
-    rachunkowości pozostaje odpowiedzialnością KIEROWNIKA JEDNOSTKI,
-    a nie biura. To ma znaczenie przy sporach o odpowiedzialność
-
-⭐⭐⭐ DEREGULACJA — STAN, KTÓRY BYWA MYLONY: od 10 SIERPNIA 2014 r.
-  usługowe prowadzenie ksiąg NIE WYMAGA certyfikatu księgowego ani
-  wpisu na listę. Ust. 2 art. 76a jest UCHYLONY. Wymogi certyfikacyjne
-  opisywane w starszych materiałach NIE OBOWIĄZUJĄ
-  → co POZOSTAŁO jako warunki: pełna zdolność do czynności prawnych,
-    brak skazania za określone przestępstwa oraz obowiązkowe OC
-    ⚠️ [DOKŁADNY KATALOG PRZESŁANEK z art. 76a ust. 3 — ZWERYFIKUJ W
-    ISAP przed powołaniem; w tej sesji potwierdzono ISTNIENIE ust. 3
-    i jego funkcję odsyłającą, nie pełne wyliczenie]
-
-⭐⭐ ART. 76h — OBOWIĄZKOWE UBEZPIECZENIE OC:
-  → ust. 1: przedsiębiorcy z art. 76a ust. 3 są OBOWIĄZANI zawrzeć
-    umowę ubezpieczenia OC za szkody wyrządzone w związku z
-    prowadzoną działalnością
-  → ust. 2: delegacja dla ministra właściwego ds. instytucji
-    finansowych — zakres, termin powstania obowiązku, MINIMALNA SUMA
-    GWARANCYJNA
-  → ust. 3: ⭐ WYŁĄCZENIE — przepisu nie stosuje się do BIEGŁYCH
-    REWIDENTÓW i DORADCÓW PODATKOWYCH będących przedsiębiorcami,
-    jeżeli ubezpieczyli się od OC za szkody przy wykonywaniu tych
-    zawodów w tym samym zakresie (zakaz podwójnego ubezpieczenia)
-
-⭐ AKT WYKONAWCZY: rozporządzenie Ministra Finansów w sprawie
-  obowiązkowego ubezpieczenia OC przedsiębiorców wykonujących
-  działalność z zakresu usługowego prowadzenia ksiąg rachunkowych —
-  **Dz.U. 2014 poz. 1616**
-  ⚠️ [POTWIERDZONE W RZĘDZIE 2B (poradnikksiegowego.pl); ZWERYFIKUJ W
-  ISAP, czy nie wydano nowszego aktu lub tekstu jednolitego]
-
-⭐ MINIMALNE SUMY GWARANCYJNE (na jedno zdarzenie), zróżnicowane wg
-  przedmiotu działalności:
-  → 15 000 EUR — księgi rachunkowe ORAZ czynności doradztwa podatkowego
-  → 10 000 EUR — WYŁĄCZNIE księgi rachunkowe
-  → 5 000 EUR — WYŁĄCZNIE czynności doradztwa podatkowego
-  ⚠️⚠️ [KWOTY POTWIERDZONE WYŁĄCZNIE W RZĘDZIE 2B, w materiale
-  opisującym stan po nowelizacji z 2014 r. NIE POWOŁUJ TYCH KWOT W
-  PIŚMIE bez sprawdzenia aktualnego brzmienia rozporządzenia w ISAP —
-  sumy gwarancyjne są typową pozycją nowelizowaną bez rozgłosu]
-
-⭐ ODPOWIEDZIALNOŚĆ CYWILNA BIURA vs KIEROWNIKA JEDNOSTKI:
-  ⭐⭐⭐ ZASADA, KTÓREJ NIE ZNOSI ŻADNA UMOWA Z BIUREM: art. 4 ust. 5
-  u.o.r. — za wykonywanie obowiązków w zakresie rachunkowości
-  odpowiedzialność ponosi KIEROWNIK JEDNOSTKI, także gdy określone
-  obowiązki zostaną POWIERZONE innej osobie lub przedsiębiorcy za ich
-  zgodą. Powierzenie ksiąg biuru NIE ZWALNIA zarządu z odpowiedzialności
-  publicznoprawnej — może natomiast rodzić odpowiedzialność
-  KONTRAKTOWĄ biura wobec zleceniodawcy (art. 471 KC)
-  ⚠️ [BRZMIENIE art. 4 ust. 5 — ZWERYFIKUJ W ISAP; teza potwierdzona
-  funkcjonalnie w źródłach Rzędu 2B, jednostka redakcyjna nie
-  odczytana z tekstu źródłowego w tej sesji]
-
-⭐ BIURO RACHUNKOWE JAKO INSTYTUCJA OBOWIĄZANA AML: biura prowadzące
-  księgi podatkowe/rachunkowe są instytucjami obowiązanymi w rozumieniu
-  ustawy AML → mod-ustawa-AML-instytucje-obowiazkowe.md
-```
-
-## 5d. ⭐⭐ SKONSOLIDOWANE SPRAWOZDANIA FINANSOWE — ROZDZ. 6 (art. 55-63d)
-(dodano 2026-08-11 — domknięcie pozycji #11 mapy pokrycia)
-
-Zweryfikowano 2026-08-11: lexlege.pl, przepisy.gofin.pl,
-rachunkowosc.com.pl (pismo SKwP), isp-modzelewski.pl.
-
-```
-⭐ ART. 55 UST. 1 — OBOWIĄZEK: jednostka dominująca mająca siedzibę lub
-  miejsce sprawowania zarządu na terytorium RP sporządza ROCZNE
-  SKONSOLIDOWANE sprawozdanie finansowe grupy kapitałowej, obejmujące
-  dane jednostki dominującej i jednostek od niej zależnych WSZYSTKICH
-  SZCZEBLI, BEZ WZGLĘDU na ich siedzibę, zestawione tak, JAKBY GRUPA
-  STANOWIŁA JEDNĄ JEDNOSTKĘ; obejmuje też dane pozostałych jednostek
-  podporządkowanych
-
-⭐ SKŁAD: jak sprawozdanie jednostkowe + informacja dodatkowa
-  (wprowadzenie oraz dodatkowe informacje i objaśnienia); art. 55
-  ust. 2a wprowadza dodatkowe wymogi dot. informacji pozafinansowych
-
-⭐⭐ METODY KONSOLIDACJI — DOBÓR ZALEŻY OD TYPU POWIĄZANIA:
-  → jednostka ZALEŻNA → metoda KONSOLIDACJI PEŁNEJ (art. 59 ust. 1,
-    art. 60)
-  → jednostka WSPÓŁZALEŻNA → metoda PROPORCJONALNA (art. 61) ALBO
-    metoda PRAW WŁASNOŚCI (art. 63)
-  → jednostka STOWARZYSZONA → metoda PRAW WŁASNOŚCI (art. 59 ust. 3)
-
-⭐⭐⭐ ZWOLNIENIA — TRZY NIEZALEŻNE PODSTAWY (nie mylić):
-  (1) ART. 56 UST. 1 — ZWOLNIENIE ZE WZGLĘDU NA WIELKOŚĆ: jednostka
-      dominująca MOŻE nie sporządzać skonsolidowanego sprawozdania,
-      jeżeli na dzień bilansowy roku obrotowego ORAZ na dzień bilansowy
-      roku POPRZEDZAJĄCEGO łączne dane jednostki dominującej i
-      wszystkich jednostek zależnych każdego szczebla — przed
-      dokonaniem wyłączeń konsolidacyjnych z art. 60 — spełniają co
-      najmniej DWA z określonych w przepisie warunków wielkościowych
-      ⚠️⚠️ [PROGI LICZBOWE (suma aktywów / przychody netto / średnie
-      zatrudnienie) NIE ZOSTAŁY odczytane ze źródła w tej sesji —
-      snippety urywały się przed wyliczeniem. ⛔ NIE PODAWAJ KWOT Z
-      PAMIĘCI. Odczytaj art. 56 ust. 1 pkt 1-3 z ISAP przed każdą
-      poradą. Uwaga dodatkowa: progi te były zmieniane m.in. ustawą
-      Dz.U. 2024 poz. 1863, a najnowsza wersja art. 56 pochodzi z
-      t.j. Dz.U. 2026 poz. 522]
-      → ⭐ UTRATA ZWOLNIENIA: jednostka traci prawo do zwolnienia,
-        jeżeli w dwóch kolejnych latach przekroczy warunki — ze
-        skutkiem dla BIEŻĄCEGO roku obrotowego
-  (2) ART. 56 UST. 2/2a — ZWOLNIENIE JEDNOSTKI DOMINUJĄCEJ NIŻSZEGO
-      SZCZEBLA: gdy jednostka dominująca WYŻSZEGO szczebla obejmie
-      konsolidacją zarówno tę jednostkę, jak i wszystkie jej jednostki
-      zależne — pod warunkami: sprawozdanie wyższego szczebla
-      sporządzone zgodnie z prawem państwa EOG lub MSR (ust. 2b),
-      wypełnienie obowiązku z art. 69 ust. 4 oraz ujawnienie
-      odpowiednich informacji w informacji dodatkowej
-  (3) ART. 56 UST. 3 — gdy WSZYSTKIE jednostki zależne wyłączono z
-      konsolidacji na podstawie art. 57 lub art. 58
-
-⭐ ART. 56 UST. 4 — WYŁĄCZENIE ZWOLNIENIA: ust. 1 NIE STOSUJE SIĘ,
-  jeżeli jednostka dominująca lub jej jednostka zależna jest jednostką,
-  o której mowa w art. 3 ust. 1e pkt 1-6 (m.in. jednostki zainteresowania
-  publicznego) ⚠️ [zweryfikuj katalog art. 3 ust. 1e w ISAP]
-
-⭐ ROZRÓŻNIENIE, KTÓRE MYLI SIĘ NAJCZĘŚCIEJ: art. 57 (WYŁĄCZENIE
-  jednostki zależnej SPOD konsolidacji) i art. 58 (ZWOLNIENIE jednostki
-  zależnej z obowiązku konsolidacji) to DWIE ODRĘBNE instytucje o
-  różnych przesłankach — nie używaj ich zamiennie
-```
-
-## 5e. ⭐⭐ SPRAWOZDAWCZOŚĆ ZRÓWNOWAŻONEGO ROZWOJU (ESG/CSRD)
-(dodano 2026-08-11 — domknięcie pozycji #18 mapy pokrycia)
-
-⚠️⚠️ ZNALEZISKO AUDYTOWE — ZERWANE ODESŁANIE: poprzednia wersja tego
-modułu odsyłała temat ESG/CSRD „do DR-15 (compliance)" z adnotacją
-„SPRAWDŹ, czy TAMTEN moduł faktycznie to pokrywa". **SPRAWDZONO
-2026-08-11: NIE POKRYWA.** Grep po całym `dr-15-compliance-iso-
-governance-audyt/` oraz `prawo-polskie-v2/`: 0 wystąpień „ESG" i 0
-wystąpień „CSRD". Odesłanie prowadziło donikąd. Temat jest osadzony
-NORMATYWNIE W USTAWIE O RACHUNKOWOŚCI — i tu jego miejsce.
-
-Zweryfikowano 2026-08-11: gov.pl/web/finanse/ustawa-csrd (Rząd 1 —
-komunikat MF), lex.pl, pit.pl (Rząd 2A), PwC, infor.pl (Rząd 2B).
-
-```
-⭐ ŁAŃCUCH LEGISLACYJNY — TRZY USTAWY, NIE JEDNA:
-  (1) **Dz.U. 2024 poz. 1863** — ustawa z 6 grudnia 2024 r. o zmianie
-      ustawy o rachunkowości, ustawy o biegłych rewidentach (…) —
-      TRANSPOZYCJA dyrektywy CSRD (2022/2464). Wprowadziła obowiązek
-      przedstawiania informacji o wpływie działalności na obszar
-      środowiskowy, spraw społecznych (w tym praw człowieka) i ładu
-      korporacyjnego ORAZ wpływu tych obszarów na jednostkę (podwójna
-      istotność). ⭐ TA SAMA ustawa podniosła próg pełnych ksiąg z
-      2 na 2,5 mln EUR i kryteria mikro/małych jednostek
-      → pierwsze zastosowanie: sprawozdawczość sporządzana w 2025 r.
-        za rok obrotowy 2024, dla jednostek dotąd sporządzających
-        oświadczenie o informacjach niefinansowych (art. 14 ust. 5
-        ustawy zmieniającej)
-  (2) **Dz.U. 2025 poz. 1020** — ustawa z 9 lipca 2025 r., w życie
-      12 sierpnia 2025 r. — wdrożenie dyrektywy „STOP-THE-CLOCK"
-      (dyrektywa 2025/794 z 14 kwietnia 2025 r.): odroczenie o 2 LATA
-      terminów dla DRUGIEJ i TRZECIEJ tury jednostek
-  (3) **Dz.U. 2026 poz. 333** — ustawa z 27 lutego 2026 r. o zmianie
-      ustawy o rachunkowości, obowiązująca od 14 marca 2026 r. —
-      CZĘŚCIOWE wdrożenie pakietu OMNIBUS I: uproszczenie dla
-      przedsiębiorstw raportujących od 2024 r., które wg nowych
-      przepisów unijnych nie będą już objęte obowiązkiem
-
-⭐⭐ KIERUNEK ZMIANY — ZAWĘŻENIE ZAKRESU: docelowo obowiązek ma objąć
-  jednostki zatrudniające ponad **1000 osób** i o przychodach netto
-  powyżej **450 mln EUR**. Jednostki „pierwszej tury" raportują za
-  lata obrotowe 2024, 2025 i 2026
-  ⚠️⚠️ TEN OBSZAR JEST W CIĄGŁYM RUCHU LEGISLACYJNYM (trzy zmiany w
-  20 miesięcy, dalsze prace na forum UE). ⛔ ZAWSZE weryfikuj online
-  aktualny stan przed jakąkolwiek poradą co do objęcia obowiązkiem —
-  treść tej sekcji jest punktem startowym, nie rozstrzygnięciem
-
-⭐ ATESTACJA: uprawnienie biegłych rewidentów do atestacji
-  sprawozdawczości ESG oraz nadzór publiczny w tym zakresie →
-  mod-ustawa-biegli-rewidenci-zawod.md (rozp. 25.09.2025)
-```
-
-## 5f. ⭐⭐⭐ WYCENA — DOPEŁNIENIE ROZDZ. 4 (art. 28-44): WALUTY,
-AMORTYZACJA, ODPISY AKTUALIZUJĄCE, REZERWY
-(dodano 2026-08-11v — domknięcie pozycji #19 i podniesienie #8)
-
-Zweryfikowano 2026-08-11: lexlege.pl, arslege.pl (Rząd 2A — treść art.
-30, 32, 35b), sip.lex.pl (nagłówek „Dz.U.2026.522 t.j." — niezależne
-potwierdzenie numeru t.j. ustawy), gofin.pl, poradnikksiegowego.pl,
-vademecumksiegowego.pl (Rząd 2B).
-
-⚠️ KOREKTA ZAKRESU: dotychczasowa mapa pokrycia opisywała rozdz. 4 jako
-„art. 28-42". Rozdział 4 obejmuje **art. 28-44** (potwierdzone w spisie
-treści ustawy na lexlege.pl i arslege.pl). Poprzednie oznaczenie było
-zaniżone o dwa artykuły.
-
-```
-⭐⭐⭐ ART. 30 — WALUTY OBCE (jedyna pozycja mapy pokrycia oznaczona
-  dotąd jako 🔴 BRAK):
-
-  → UST. 1 PKT 1 — WYCENA BILANSOWA: nie rzadziej niż na DZIEŃ
-    BILANSOWY wyrażone w walutach obcych składniki AKTYWÓW — z
-    WYŁĄCZENIEM udziałów w jednostkach podporządkowanych wycenianych
-    metodą praw własności — i PASYWÓW wycenia się po obowiązującym na
-    ten dzień **średnim kursie ogłoszonym dla danej waluty przez NBP**
-    → ⭐ PRAKTYKA: gdy dzień bilansowy wypada w sobotę lub niedzielę,
-      przyjmuje się kurs z ostatniego dnia roboczego poprzedzającego
-      (tabela z piątku) — NBP nie ogłasza kursów w dni wolne
-  → UST. 1 (dalszy fragment) — GOTÓWKA w jednostkach prowadzących kupno
-    i sprzedaż walut: po kursie, po którym nastąpił jej zakup, jednak
-    NIE WYŻSZYM od średniego kursu NBP na dzień wyceny
-  → UST. 2 PKT 2 — KURS DLA OPERACJI: średni kurs NBP z dnia
-    POPRZEDZAJĄCEGO dzień operacji — w przypadku zapłaty należności lub
-    zobowiązań, jeżeli nie jest zasadne zastosowanie kursu z pkt 1, a
-    także w przypadku POZOSTAŁYCH operacji
-  → UST. 3 — WALUTY BEZ KURSU NBP: kurs określa się w relacji do
-    wskazanej przez jednostkę WALUTY ODNIESIENIA, której kurs jest
-    ogłaszany przez NBP
-  → UST. 4 — UJĘCIE RÓŻNIC KURSOWYCH: różnice kursowe (inne niż
-    dotyczące inwestycji długoterminowych) zalicza się odpowiednio do
-    PRZYCHODÓW lub KOSZTÓW FINANSOWYCH; w UZASADNIONYCH przypadkach —
-    do kosztu wytworzenia produktów, ceny nabycia towarów, a także
-    ceny nabycia lub kosztu wytworzenia środków trwałych, środków
-    trwałych w budowie lub WNiP
-  → RÓŻNICE OD INWESTYCJI DŁUGOTERMINOWYCH: rozliczane w sposób
-    określony w art. 35 ust. 2 i 4 (nie przez wynik finansowy wprost)
-
-  ⭐⭐ LUKA REGULACYJNA WARTA ZAPAMIĘTANIA: ustawa NIE REGULUJE terminu
-    ani sposobu rozliczenia w następnym roku obrotowym różnic ujętych
-    na dzień bilansowy. W praktyce najczęściej storno na pierwszy dzień
-    kolejnego roku — to wybór POLITYKI RACHUNKOWOŚCI jednostki, a nie
-    obowiązek ustawowy. Zarzut „błędnego rozliczenia" wymaga zatem
-    odniesienia do PRZYJĘTEJ POLITYKI, nie do przepisu
-
-  ⭐⭐⭐ DWA RÓWNOLEGŁE REŻIMY RÓŻNIC KURSOWYCH — NAJCZĘSTSZE ŹRÓDŁO
-    BŁĘDU: metoda BILANSOWA (art. 30 u.o.r.) i metoda PODATKOWA
-    (ustawy o PIT/CIT) to ODRĘBNE systemy. Podmiot rozliczający różnice
-    metodą PODATKOWĄ nie może stosować kursu historycznego do wyceny
-    rozchodu waluty z rachunku walutowego; podmiot stosujący metodę
-    bilansową — może (FIFO, LIFO lub średnia ważona kursów). Wybór
-    metody podatkowej ma skutki księgowe i odwrotnie
-    → mod-CIT-podatek-dochodowy-prawne.md / mod-PIT-podatek-dochodowy-
-      fizyczne.md
-
-⭐⭐ ART. 32 — AMORTYZACJA I UMORZENIE ŚRODKÓW TRWAŁYCH:
-  → UST. 1 — odpisów dokonuje się drogą SYSTEMATYCZNEGO, PLANOWEGO
-    rozłożenia wartości początkowej na ustalony okres amortyzacji
-  → UST. 2 — przy ustalaniu okresu i rocznej stawki uwzględnia się
-    OKRES EKONOMICZNEJ UŻYTECZNOŚCI, na który wpływają w szczególności:
-    (1) liczba zmian, na których pracuje środek trwały; (2) tempo
-    postępu techniczno-ekonomicznego; (3) wydajność mierzona liczbą
-    godzin pracy lub liczbą wytworzonych produktów albo innym
-    właściwym miernikiem; (4) prawne lub inne ograniczenia czasu
-    używania; (5) przewidywana przy likwidacji cena sprzedaży netto
-    istotnej pozostałości
-    → ⭐⭐⭐ TO JEST FUNDAMENTALNA RÓŻNICA WOBEC PRAWA PODATKOWEGO:
-      amortyzacja BILANSOWA opiera się na RZECZYWISTEJ użyteczności
-      ekonomicznej ustalanej przez jednostkę, amortyzacja PODATKOWA —
-      na STAWKACH Z WYKAZU. Stawki mogą się różnić i różnią się w
-      praktyce; to nie jest błąd, lecz skutek dwóch reżimów. Zarzut
-      „zawyżonej amortyzacji" wymaga wskazania, KTÓREGO reżimu dotyczy
-  → UST. 3 — okres/stawkę i metodę ustala się NA DZIEŃ PRZYJĘCIA do
-    używania; poprawność stosowanych okresów i stawek podlega
-    OKRESOWEJ WERYFIKACJI przez jednostkę, ze skutkiem w postaci
-    korekty odpisów w NASTĘPNYCH latach obrotowych (nie wstecz)
-  → UST. 4 — przy zmianie technologii produkcji, przeznaczeniu do
-    likwidacji, wycofaniu z używania lub innych przyczynach TRWAŁEJ
-    UTRATY WARTOŚCI: odpis aktualizujący w ciężar POZOSTAŁYCH KOSZTÓW
-    OPERACYJNYCH
-  → UST. 5 — gdy wycena środka była zaktualizowana na podstawie
-    odrębnych przepisów, odpisy z ust. 4 zmniejszają kapitał (fundusz)
-    z aktualizacji wyceny; nadwyżka — do pozostałych kosztów
-    operacyjnych
-  → UPROSZCZENIE dla środków o NISKIEJ jednostkowej wartości
-    początkowej: dopuszczalne zbiorcze odpisy dla grup środków
-    zbliżonych rodzajem i przeznaczeniem albo JEDNORAZOWY odpis
-
-⭐⭐ ART. 35b — ODPISY AKTUALIZUJĄCE WARTOŚĆ NALEŻNOŚCI (przepis o
-  dużym znaczeniu w sporach o wierzytelności):
-  wartość należności aktualizuje się z uwzględnieniem stopnia
-  prawdopodobieństwa zapłaty, w odniesieniu m.in. do:
-  → należności od dłużników postawionych w stan LIKWIDACJI lub
-    UPADŁOŚCI oraz wobec których otwarto postępowanie
-    RESTRUKTURYZACYJNE albo złożono wniosek o zatwierdzenie układu —
-    do wysokości należności NIEOBJĘTEJ gwarancją lub innym
-    zabezpieczeniem, zgłoszonej likwidatorowi/sędziemu-komisarzowi
-    albo umieszczonej w spisie wierzytelności
-  → należności od dłużników, wobec których ODDALONO wniosek o
-    ogłoszenie upadłości, gdy majątek nie wystarcza lub jedynie
-    wystarcza na koszty postępowania — w PEŁNEJ wysokości
-  → należności KWESTIONOWANYCH przez dłużników oraz zaległych, gdy
-    ocena sytuacji majątkowej dłużnika wskazuje na ryzyko
-  → należności PRZETERMINOWANYCH lub NIEPRZETERMINOWANYCH o znacznym
-    stopniu prawdopodobieństwa nieściągalności — w wysokości
-    wiarygodnie oszacowanej kwoty odpisu, w tym odpisu OGÓLNEGO
-  → UJĘCIE: pozostałe koszty operacyjne albo koszty finansowe —
-    zależnie od rodzaju należności
-  → należności UMORZONE, PRZEDAWNIONE lub NIEŚCIĄGALNE zmniejszają
-    dokonane uprzednio odpisy; gdy odpisu nie dokonano lub dokonano w
-    niepełnej wysokości — zalicza się je odpowiednio do pozostałych
-    kosztów operacyjnych lub finansowych
-  → ⭐ POWIĄZANIE PODATKOWE: odpis bilansowy ≠ koszt podatkowy
-    automatycznie — moment uznania za KUP rządzi się przepisami
-    PIT/CIT (typowy rozjazd: odpis w roku X, koszt podatkowy w roku
-    X+1)
-
-⭐ ART. 35 — ODPISY Z TYTUŁU TRWAŁEJ UTRATY WARTOŚCI (aktywa inne niż
-  należności)
-
-⭐⭐⭐ ART. 35d — REZERWY (domknięcie ostatniego placeholdera luki #8,
-  transza 3, 2026-08-11):
-  → UST. 1 — rezerwy tworzy się na:
-    (1) PEWNE lub o DUŻYM STOPNIU PRAWDOPODOBIEŃSTWA przyszłe
-        zobowiązania, których kwotę można w sposób WIARYGODNY
-        oszacować — w szczególności straty z transakcji gospodarczych
-        W TOKU, w tym z tytułu udzielonych gwarancji, poręczeń,
-        operacji kredytowych, skutków toczącego się postępowania
-        sądowego
-    (2) przyszłe zobowiązania spowodowane RESTRUKTURYZACJĄ — TYLKO
-        gdy jednostka jest do niej zobowiązana na podstawie odrębnych
-        przepisów LUB zawarto w tej sprawie WIĄŻĄCE UMOWY, a plany
-        restrukturyzacji pozwalają wiarygodnie oszacować wartość
-        przyszłych zobowiązań
-  → UST. 2 — UJĘCIE: rezerwy zalicza się odpowiednio do POZOSTAŁYCH
-    KOSZTÓW OPERACYJNYCH, KOSZTÓW FINANSOWYCH lub STRAT NADZWYCZAJNYCH
-    — zależnie od okoliczności, z którymi przyszłe zobowiązanie się
-    wiąże
-  → UST. 3 — powstanie zobowiązania, na które uprzednio utworzono
-    rezerwę, ZMNIEJSZA rezerwę (rezerwa nie jest dodatkowym kosztem w
-    momencie realizacji zobowiązania)
-  → UST. 4 — rezerwy NIEWYKORZYSTANE wobec zmniejszenia lub ustania
-    ryzyka: zwiększają na dzień, na który okazały się zbędne,
-    odpowiednio POZOSTAŁE PRZYCHODY OPERACYJNE, PRZYCHODY FINANSOWE
-    lub ZYSKI NADZWYCZAJNE
-  → PRAKTYKA KSIĘGOWA: rezerwy ewidencjonuje się na koncie 84x
-    "Rezerwy" — utworzenie/zwiększenie po stronie Ma, rozwiązanie/
-    zmniejszenie po stronie Wn
-  → POWIĄZANIE: KSR nr 6 "Rezerwy, bierne rozliczenia międzyokresowe
-    kosztów, zobowiązania warunkowe" rozwija szczegółowo kryteria
-    wiarygodnego oszacowania — patrz sekcja 5g (wykaz KSR)
-  ⭐ ROZJAZD PODATKOWY: rezerwy księgowe (art. 35d u.o.r.) CO DO ZASADY
-    NIE stanowią kosztu uzyskania przychodu w PIT/CIT — wyjątki są
-    enumeratywne w ustawach podatkowych (np. niektóre rezerwy w
-    bankach/ubezpieczycielach) → typowe źródło różnicy przejściowej
-    między wynikiem bilansowym a podatkowym
-  Zweryfikowano 2026-08-11 (transza 3): lexlege.pl, arslege.pl (Rząd
-  2A/2B, treść zgodna dwuźródłowo), potwierdzenie dodatkowe infor.pl,
-  gofin.pl, 360ksiegowosc.pl (Rząd 3, zbieżne).
-```
-
-## 5h. ⭐⭐⭐ USTALANIE WYNIKU FINANSOWEGO (ART. 42-44) I ODPOWIEDZIALNOŚĆ
-CYWILNA ZA BŁĘDY KSIĘGOWE — KSH
-(domknięcie luk #8 i #17 z mapy pokrycia, transza 3, dodano 2026-08-11)
-
-### Art. 42-44 u.o.r. — TRZY REŻIMY USTALANIA WYNIKU FINANSOWEGO NETTO
-
-Ustawa różnicuje strukturę wyniku finansowego w zależności od RODZAJU
-jednostki — trzy odrębne przepisy, nie jeden uniwersalny wzór:
-
-```
-⭐⭐⭐ ART. 42 — JEDNOSTKI INNE NIŻ BANKI, ZAKŁADY UBEZPIECZEŃ I ZAKŁADY
-  REASEKURACJI (czyli reguła OGÓLNA — zdecydowana większość klientów
-  kancelarii):
-  → UST. 1 — na wynik finansowy netto składają się:
-    (1) WYNIK DZIAŁALNOŚCI OPERACYJNEJ, w tym z tytułu POZOSTAŁYCH
-        przychodów i kosztów operacyjnych (odrębnych od podstawowej
-        działalności operacyjnej jednostki)
-    (2) WYNIK OPERACJI FINANSOWYCH
-    (3) WYNIK OPERACJI NADZWYCZAJNYCH
-    (4) obowiązkowe OBCIĄŻENIA wyniku finansowego z tytułu podatku
-        dochodowego, którego podatnikiem jest jednostka, i płatności
-        z nim zrównanych na podstawie odrębnych przepisów
-  → UST. 3 — PRZYCHODY Z OPERACJI FINANSOWYCH obejmują w szczególności
-    przychody z tytułu dywidend (udziałów w zyskach), odsetek, zysków
-    ze zbycia inwestycji, aktualizacji wartości inwestycji, nadwyżki
-    dodatnich różnic kursowych nad ujemnymi
-
-⭐⭐ ART. 43 — BANKI (reguła SZCZEGÓLNA):
-  → UST. 1 — wynik finansowy netto: (1) wynik działalności operacyjnej
-    (w tym na działalności bankowej), (2) wynik operacji nadzwyczajnych,
-    (3) obowiązkowe obciążenia z tytułu podatku dochodowego
-  → UST. 2 — WYNIK DZIAŁALNOŚCI BANKOWEJ: wynik z tytułu odsetek,
-    prowizji, przychody z akcji/udziałów/papierów wartościowych, wynik
-    operacji finansowych, wynik z pozycji wymiany
-  → UST. 3 — wynik działalności operacyjnej = wynik działalności
-    bankowej skorygowany o różnicę między pozostałymi przychodami a
-    kosztami operacyjnymi, koszty działania banku, amortyzację,
-    wynik na wartości rezerw z aktualizacji
-
-⭐⭐ ART. 44 — ZAKŁADY UBEZPIECZEŃ I ZAKŁADY REASEKURACJI (reguła
-  SZCZEGÓLNA):
-  → UST. 1 — wynik finansowy netto: (1) WYNIK TECHNICZNY UBEZPIECZEŃ,
-    (2) różnica między przychodami a kosztami z działalności
-    LOKACYJNEJ niezaliczana do wyniku technicznego, (3) obowiązkowe
-    obciążenia z tytułu podatku dochodowego
-  → do wyniku operacji nadzwyczajnych stosuje się odpowiednio art. 43
-    ust. 4 (odesłanie do reguł bankowych w tym zakresie)
-  → REZERWY TECHNICZNO-UBEZPIECZENIOWE (odrębna kategoria od rezerw
-    art. 35d): zapewniają pokrycie bieżących i przyszłych zobowiązań z
-    umów ubezpieczenia/reasekuracji; ustala się je nie później niż na
-    dzień bilansowy, z wyjątkiem rezerwy na wyrównanie szkodowości —
-    ustalanej nie później niż na dzień kończący rok obrotowy
-
-⭐ PRAKTYCZNE ZASTOSOWANIE — który artykuł dla którego klienta:
-  spółka handlowa/produkcyjna/usługowa → art. 42 (reguła ogólna)
-  bank/SKOK → art. 43
-  zakład ubezpieczeń/reasekuracji (w tym TU wzajemnych) → art. 44
-```
-Zweryfikowano 2026-08-11 (transza 3): lexlege.pl (art. 42/43/44 —
-spójny spis treści rozdz. 4, art. 28-44), arslege.pl (treść art. 42/43
-niezależnie zgodna), gofin.pl (Rząd 2B, dodatkowe potwierdzenie art.
-42). Rząd 2A/2B, zgodność międzyźródłowa ≥2 niezależne domeny na każdy
-artykuł.
-
-### Odpowiedzialność CYWILNA na gruncie KSH za błędy księgowe
-(dopełnienie pozycji #17 mapy pokrycia — brakująca strona KSH)
-
-```
-⭐⭐⭐ ART. 293 KSH (sp. z o.o.) i ART. 483 KSH (S.A.) — PODSTAWA
-  ODPOWIEDZIALNOŚCI ODSZKODOWAWCZEJ WOBEC SPÓŁKI:
-  → KRĄG PODMIOTÓW: członek zarządu, członek rady nadzorczej, członek
-    komisji rewizyjnej (WYŁĄCZNIE sp. z o.o.), likwidator — art. 293
-    KSH NIE obejmuje zgromadzenia wspólników / walnego zgromadzenia
-  → PRZESŁANKA: szkoda wyrządzona spółce działaniem lub zaniechaniem
-    SPRZECZNYM Z PRAWEM lub POSTANOWIENIAMI UMOWY/STATUTU spółki —
-    CHYBA że osoba nie ponosi winy (domniemanie winy, ciężar
-    ekskulpacji po stronie pozwanego)
-  → CHARAKTER: odpowiedzialność ODSZKODOWAWCZA, oparta na winie;
-    obejmuje wyrównanie CAŁEGO uszczerbku (damnum emergens i lucrum
-    cessans — analogicznie do art. 361 § 2 KC)
-  → PRZESŁANKI (cztery, kumulatywnie): (1) niewykonanie lub nienależyte
-    wykonanie obowiązków, (2) szkoda, (3) związek przyczynowo-skutkowy,
-    (4) zawinienie
-  → PODMIOT UPRAWNIONY DO DOCHODZENIA: SPÓŁKA (nie wspólnik/akcjonariusz
-    bezpośrednio — dla roszczenia wspólnika właściwa jest odrębna
-    instytucja actio pro socio, poza zakresem tego modułu)
-  → ⭐⭐ BUSINESS JUDGMENT RULE (§ 3, wprowadzony nowelizacją z
-    13.10.2022 r.): członek zarządu/rady nadzorczej/komisji rewizyjnej
-    NIE NARUSZA obowiązku staranności zawodowej, jeżeli — działając
-    LOJALNIE wobec spółki — mieści się w granicach UZASADNIONEGO
-    RYZYKA GOSPODARCZEGO, w tym na podstawie informacji, analiz i
-    opinii, które POWINNY być w danych okolicznościach uwzględnione
-    przy starannej ocenie
-    → ⭐ ZASTOSOWANIE DO BŁĘDÓW KSIĘGOWYCH: decyzja co do przyjętej
-      POLITYKI RACHUNKOWOŚCI (np. metody wyceny, szacunku rezerwy)
-      podjęta w oparciu o rzetelną analizę (np. opinię biegłego
-      rewidenta, biura rachunkowego) może korzystać z ochrony business
-      judgment rule — w odróżnieniu od zaniechania (np. brak
-      jakiejkolwiek dokumentacji, ignorowanie sygnałów o
-      nieprawidłowościach), które ochrony tej nie uzasadnia
-  → RELACJA DO ART. 4 UST. 5 U.O.R. (sekcja 5c powyżej): przepis u.o.r.
-    o NIEPRZENOSZALNOŚCI odpowiedzialności kierownika jednostki za
-    prowadzenie ksiąg NIE WYŁĄCZA odpowiedzialności z art. 293/483 KSH
-    — to dwa RÓWNOLEGŁE reżimy: u.o.r. określa, KTO odpowiada wobec
-    PAŃSTWA/OBOWIĄZKÓW PUBLICZNOPRAWNYCH (art. 4 ust. 5 + sankcje art.
-    77-79, sekcja 5), KSH określa odpowiedzialność WOBEC SPÓŁKI za
-    szkodę wyrządzoną błędną decyzją (w tym błędną decyzją co do
-    ewidencji/wyceny)
-  → PRZEDAWNIENIE: reguły ogólne KC (roszczenie o naprawienie szkody z
-    czynu niedozwolonego/nienależytego wykonania zobowiązania) —
-    ⚠️ [NIEWERYFIKOWANE dokładne terminy w tej transzy — do
-    zweryfikowania punktowo przy konkretnej sprawie, nie zgadywać]
-```
-Zweryfikowano 2026-08-11 (transza 3): lexlege.pl (Rząd 2B, treść art.
-293 dosłowna), poradnikprzedsiebiorcy.pl, sytyadwokaci.pl, poradca.pl
-(Rząd 3, min. 3 źródła zgodne co do treści § 1/§ 3 i daty nowelizacji
-13.10.2022) — próg ZASADY 14 spełniony.
-
-⚠️ ŚWIADOMIE NIEZAMKNIĘTE w tej transzy: dokładne terminy przedawnienia
-roszczenia z art. 293/483 KSH; odpowiedzialność KARNA za błędy
-księgowe (art. 587-591 KSH) — poza zakresem pozycji #17, która dotyczy
-WYŁĄCZNIE odpowiedzialności cywilnej.
-
-## 5g. ⭐⭐ KRAJOWE STANDARDY RACHUNKOWOŚCI (KSR) — SOFT LAW O TWARDYCH
-SKUTKACH
-(dodano 2026-08-11v)
-
-Zweryfikowano 2026-08-11: strona Komitetu Standardów Rachunkowości przy
-MF (Rząd 1), gofin.pl, przepisy.gofin.pl (Rząd 2B), aidergroup.pl,
-wykazy wydawnicze ODDK/ikep (Rząd 3 — wyłącznie jako potwierdzenie
-zbieżności listy).
-
-```
-⭐⭐ STATUS PRAWNY — NAJWAŻNIEJSZA RZECZ DO ZROZUMIENIA: KSR NIE SĄ
-  ŹRÓDŁEM PRAWA POWSZECHNIE OBOWIĄZUJĄCEGO. Podstawa ich stosowania to
-  art. 10 ust. 3 u.o.r. — w sprawach NIEUREGULOWANYCH przepisami
-  ustawy jednostki MOGĄ stosować krajowe standardy rachunkowości
-  wydane przez Komitet Standardów Rachunkowości
-  → ⭐ SKUTEK PRAKTYCZNY MIMO FAKULTATYWNOŚCI: przyjęcie rozwiązania
-    zgodnego z KSR uznaje się za zapewniające rzetelne i jasne
-    przedstawienie sytuacji majątkowej i finansowej. W sporze z
-    biegłym rewidentem, organem lub RIO odstępstwo od KSR nie jest
-    samo w sobie naruszeniem, ale PRZERZUCA na jednostkę ciężar
-    wykazania, że przyjęte rozwiązanie również spełnia art. 4 ust. 1
-  → zasady przyjmowania KSR do polityki rachunkowości: pkt 3.2.1-3.2.8
-    KSR nr 7
-  → publikacja: Dziennik Urzędowy Ministra Finansów (NIE Dziennik
-    Ustaw) — dlatego KSR nie występują w mapach Dz.U. systemu
-
-⭐ WYKAZ STANDARDÓW (stan sygnalizowany na 2026 r.):
-  KSR 1  — Rachunek przepływów pieniężnych
-  KSR 2  — Podatek dochodowy (zaktualizowany, obowiązuje od 1.01.2025)
-  KSR 3  — Niezakończone usługi budowlane
-  KSR 4  — Utrata wartości aktywów
-  KSR 5  — Leasing, najem i dzierżawa (wersja od 1.01.2019)
-  KSR 6  — Rezerwy, bierne rozliczenia międzyokresowe kosztów,
-           zobowiązania warunkowe
-  KSR 7  — Zmiany zasad (polityki) rachunkowości, wartości
-           szacunkowych, poprawianie błędów, zdarzenia następujące po
-           dniu bilansowym
-  KSR 8  — Działalność deweloperska (wersja od 1.01.2019)
-  KSR 9  — Sprawozdanie z działalności
-  KSR 10 — Umowy o partnerstwie publiczno-prywatnym oraz umowy
-           koncesji na roboty budowlane lub usługi
-  KSR 11 — Środki trwałe
-  KSR 12 — Działalność rolnicza
-  KSR 13 — Koszt wytworzenia jako podstawa wyceny produktów
-  KSR 14 — Kontynuacja działalności oraz rachunkowość jednostek przy
-           braku kontynuowania działalności
-  KSR 15 — Przychody ze sprzedaży wyrobów, półproduktów, towarów i
-           materiałów
-
-  ⚠️⚠️ ROZBIEŻNOŚĆ ŹRÓDŁOWA CO DO LICZBY: część źródeł podaje **14**
-  standardów i wymienia „Przychody ze sprzedaży…" jako PROJEKT, inne
-  podają **15** i traktują KSR 15 jako wydany. Prawdopodobne
-  wyjaśnienie: materiał z 14 pozycjami jest nieaktualny. ⛔ PRZED
-  powołaniem KSR 15 sprawdź na stronie Komitetu Standardów
-  Rachunkowości przy MF, czy standard został przyjęty uchwałą i
-  ogłoszony w Dz.Urz. MF. NIE ZGADYWANO
-
-⭐ STANOWISKA KSR (odrębna kategoria, ok. 9 pozycji) — m.in. w sprawie
-  rozrachunków z kontrahentami (istotne przy wycenie walutowej —
-  sekcja 5f), ustalania wartości godziwej przy rozliczaniu połączeń,
-  wykazywania działalności zaprzestanej. Plus REKOMENDACJA KSR ws.
-  sprawozdania finansowego w czasie pandemii COVID-19
-  ⚠️ [pełny wykaz stanowisk NIE został odczytany — sprawdź na stronie
-  KSR przy MF, gdy stanowisko ma być powołane]
-
-⭐ NAJCZĘŚCIEJ UŻYTECZNE POWIĄZANIA:
-  → wycena, amortyzacja, utrata wartości → KSR 4, KSR 11 (sekcja 5f)
-  → rezerwy → KSR 6 (art. 35d opisany w sekcji 5f, transza 3)
-  → inwentaryzacja → KSR 12 wskazany w sekcji 3b tego modułu
-  → sprawozdanie z działalności → KSR 9 (pozycja #10 mapy pokrycia)
-  → korekty błędów lat ubiegłych, zdarzenia po dniu bilansowym →
-    KSR 7
-```
-
 ## ⭐⭐⭐ MAPA POKRYCIA DZIEDZINY — UCZCIWA SAMOOCENA (dodano
 2026-08-11, na żądanie użytkownika: "czy w pełni pokryte, jeśli nie
 — przygotuj bazę tematów z oznaczeniem poziomu pokrycia")
@@ -1551,96 +1022,50 @@ OZNACZENIA: 🟢 PEŁNE pokrycie | 🟡 CZĘŚCIOWE (wzmianka/fragment) |
 | 5 | Sankcje (art. 77 u.o.r. + zbieg z KKS) | Rozdz. 9 | 🟢 PEŁNE | Sekcja 5 — NAJDOKŁADNIEJ opracowana część |
 | 6 | ⭐⭐ DOKUMENTACJA KSIĘGOWA — dowody księgowe, wymogi formalne dowodu | Rozdz. 2 (art. 20-25) | 🟢 PEŁNE (2026-08-11) | Sekcja 3a — rodzaje dowodów, elementy obowiązkowe, wyjątek dot. VAT/metali nieżelaznych, wymogi merytoryczne/formalne |
 | 7 | ⭐⭐ INWENTARYZACJA — obowiązek, metody, częstotliwość, terminy | Rozdz. 3 (art. 26-27) | 🟢 PEŁNE (2026-08-11) | Sekcja 3b — trzy metody, reguly terminowe, dokumentowanie wyników, KSR nr 12 |
-| 8 | ⭐⭐⭐ WYCENA AKTYWÓW I PASYWÓW — metody, amortyzacja, rezerwy, odpisy aktualizujące, ustalanie wyniku finansowego | Rozdz. 4 (art. 28-44) | 🟢 PEŁNE (transza 3, 2026-08-11) | Sekcja 4b (art. 28 — metody) + sekcja 5f (art. 30 waluty, art. 32 amortyzacja, art. 35b odpisy na należności, art. 35d rezerwy) + sekcja 5h (art. 42-44 — trzy reżimy wyniku finansowego: jednostki ogólne / banki / ubezpieczyciele) |
+| 8 | ⭐⭐⭐ WYCENA AKTYWÓW I PASYWÓW — metody, amortyzacja, rezerwy, odpisy aktualizujące | Rozdz. 4 (art. 28-42) | 🟡 CZĘŚCIOWE (2026-08-11) | Sekcja 4b — GŁÓWNE metody wyceny (art. 28) opisane, ALE cały ROZDZIAŁ 4 obejmuje art. 28-42 — szczegóły amortyzacji, rezerw, ustalania wyniku finansowego POZA art. 28 NADAL nieopisane |
 | 9 | ⭐⭐⭐ SPRAWOZDANIE FINANSOWE — struktura (bilans, RZiS, informacja dodatkowa, RPP, zestawienie zmian w kapitale) | Rozdz. 5 (art. 45-53) | 🟢 PEŁNE (2026-08-11) | Sekcja 4a — podstawowy i rozszerzony skład, wymogi formalne, forma ustrukturyzowana |
-| 10 | Sprawozdanie z działalności (odrębne od finansowego) | Art. 49 | 🟡 CZĘŚCIOWE (2026-08-11) | Forma elektroniczna i podpis (art. 49 ust. 7) opisane w `mod-JPK-ksiegi-elektroniczne-e-sprawozdania.md`; TREŚĆ merytoryczna sprawozdania z działalności nadal nieopisana |
-| 11 | ⭐⭐ SKONSOLIDOWANE sprawozdania finansowe, grupy kapitałowe | Rozdz. 6 (art. 55-63d) | 🟢 PEŁNE STRUKTURALNIE (2026-08-11) | Sekcja 5d — obowiązek, metody (pełna/proporcjonalna/praw własności), TRZY podstawy zwolnień, art. 57 vs 58. ⚠️ PROGI LICZBOWE art. 56 ust. 1 świadomie NIEPODANE — do odczytu z ISAP |
+| 10 | Sprawozdanie z działalności (odrębne od finansowego) | Art. 49 | 🔴 BRAK | — |
+| 11 | ⭐⭐ SKONSOLIDOWANE sprawozdania finansowe, grupy kapitałowe | Rozdz. 6 (art. 55-63) | 🔴 BRAK | Istotne dla HOLDINGÓW/grup spółek |
 | 12 | Badanie i ogłaszanie sprawozdań — KTO musi poddać się badaniu przez biegłego rewidenta | Rozdz. 7 (art. 64-65) | 🟢 PEŁNE (2026-08-11) | Sekcja 4d — progi 2,5/5 mln EUR/50 osób, przeliczanie walutowe, sankcje art. 79, powiązanie z sekcją 4a |
 | 13 | Rachunkowość jednostek MIKRO i MAŁYCH — uproszczenia | Art. 3 ust. 1a-1b i powiązane | 🟢 PEŁNE (2026-08-11) | Sekcja 4c — progi, utrata statusu, katalog uproszczeń, procedura decyzyjna, wyłączenia |
-| 14 | Usługowe prowadzenie ksiąg — wymogi dla biur rachunkowych | Rozdz. 8a (art. 76a-76i) | 🟢 PEŁNE (2026-08-11) | Sekcja 5c — definicja i zakres przez odesłanie do art. 4 ust. 3 pkt 2-6, DEREGULACJA od 10.08.2014, OC (art. 76h) + wyłączenie dla biegłych/doradców, odpowiedzialność biura vs kierownika jednostki, status AML |
-| 15 | Przechowywanie dokumentacji księgowej — terminy archiwizacji | Rozdz. 8 (art. 71-76) | 🟢 PEŁNE (2026-08-11) | Sekcja 5b — pełny art. 74 ust. 1-2, pułapka „trwale" sprzed 2019, art. 74 ust. 2 pkt 4 (bieg od zakończenia sprawy), art. 76 (likwidacja), reżim równoległy art. 86 OP |
-| 16 | Elektroniczna forma ksiąg, e-sprawozdania (XML/XBRL), KSeF jako powiązanie | Rozdz. 2 + art. 45 ust. 1f-1h | 🟢 PEŁNE (2026-08-11) | Wydzielone do `mod-JPK-ksiegi-elektroniczne-e-sprawozdania.md` — art. 45 ust. 1f/1g/1h, art. 49 ust. 7, JPK_KR_PD/JPK_ST_KR, harmonogram 3 tur, termin 7-miesięczny |
-| 17 | Odpowiedzialność CYWILNA (odszkodowawcza) za błędy księgowe | Poza samą u.o.r. — KC/KSH | 🟢 PEŁNE (transza 3, 2026-08-11) | Sekcja 5c — zasada nieprzenoszalności odpowiedzialności kierownika jednostki (art. 4 ust. 5 u.o.r.) + odpowiedzialność kontraktowa biura (art. 471 KC). Sekcja 5h — art. 293/483 KSH (krąg podmiotów, przesłanki, business judgment rule), relacja do art. 4 ust. 5 u.o.r. jako reżimy równoległe. ⚠️ Odpowiedzialność KARNA (art. 587-591 KSH) i dokładne terminy przedawnienia świadomie POZA zakresem |
-| 18 | ESG/CSRD — obowiązki sprawozdawcze zrównoważonego rozwoju | Ustawy zmieniające u.o.r. | 🟢 PEŁNE (2026-08-11) | Sekcja 5e — ⚠️ ODESŁANIE DO DR-15 BYŁO ZERWANE (0 wystąpień „ESG"/„CSRD" w dr-15, sprawdzone gerpem). Pełny łańcuch: Dz.U. 2024.1863 → 2025.1020 (stop-the-clock) → 2026.333 (Omnibus I) |
-| 19 | Waluta sprawozdań, przeliczanie walut obcych | Art. 30 | 🟢 PEŁNE (2026-08-11v) | Sekcja 5f — art. 30 ust. 1-4 w całości: kurs bilansowy NBP, kurs operacyjny z dnia poprzedzającego, waluta odniesienia, ujęcie różnic kursowych, luka co do rozliczenia w kolejnym roku, rozjazd reżim bilansowy vs podatkowy |
-| 20 | Historia nowelizacji progu 2,5 mln EUR — POPRZEDNIA wartość, DATA zmiany | Art. 2 ust. 1 pkt 2 | 🟢 PEŁNE (2026-08-11) | `mod-PKPiR-ewidencje-uproszczone.md` sekcja 2 — 2 mln → 2,5 mln EUR, ustawa Dz.U. 2024 poz. 1863, od roku obrotowego po 31.12.2024 + ZMIANA SPOSOBU LICZENIA (wyłączenie przychodów finansowych i ze sprzedaży materiałów) |
+| 14 | Usługowe prowadzenie ksiąg — wymogi dla biur rachunkowych | Rozdz. 8a (art. 76a-76i) | 🟡 CZĘŚCIOWE | Tylko WZMIANKA o obowiązku ubezpieczenia OC (sekcja 5) — BRAK pełnego opisu wymogów |
+| 15 | Przechowywanie dokumentacji księgowej — terminy archiwizacji | Rozdz. 8 (art. 71-74) | 🟢 PEŁNE (2026-08-11) | Sekcja 4e — zróżnicowane okresy, archiwizacja zewnętrzna, interakcja z Ordynacją podatkową/ZUS |
+| 16 | Elektroniczna forma ksiąg, e-sprawozdania (XML/XBRL), KSeF jako powiązanie | Rozdz. 2, przepisy szczególne | 🟡 CZĘŚCIOWE | Wzmianka o formie komputerowej (sekcja 3) — BRAK szczegółów e-sprawozdań |
+| 17 | Odpowiedzialność CYWILNA (odszkodowawcza) za błędy księgowe | Poza samą u.o.r. — KC/KSH | 🔴 BRAK | Zasygnalizowane jako "punkt startowy" w cross-referencjach, NIE opracowane |
+| 18 | ESG/CSRD — obowiązki sprawozdawcze zrównoważonego rozwoju | Nowsze przepisy, powiązanie z u.o.r. | 🔴 BRAK w TYM module | Odesłane do DR-15 (compliance) — SPRAWDŹ, czy TAMTEN moduł faktycznie to pokrywa |
+| 19 | Waluta sprawozdań, przeliczanie walut obcych | Art. 30 i powiązane | 🔴 BRAK | Część "wyceny", ale WARTA odrębnego potraktowania przy transakcjach zagranicznych |
+| 20 | Historia nowelizacji progu 2,5 mln EUR — POPRZEDNIA wartość, DATA zmiany | — | 🔴 BRAK | Sam fakt "podwyższono" jest w module, ALE BEZ konkretnej poprzedniej kwoty i daty wejścia w życie zmiany |
 
-⭐ PODSUMOWANIE LICZBOWE (zaktualizowane transza 3, 2026-08-11): z 20
-  zidentyfikowanych głównych podtematów —
-  🟢 PEŁNE: **19 (95%)**, 🟡 CZĘŚCIOWE: **1 (5%)**, 🔴 BRAK: **0**
-  → stan przed sesją audytową: 🟢 9 / 🟡 3 / 🔴 8
-  → transza 1 (2026-08-11u): domknięto #11, #14, #15, #16, #18, #20
-  → transza 2 (2026-08-11v): domknięto #19 (waluty — ostatnia pozycja
-    🔴), podniesiono #8 do „zaawansowane"
-  → transza 3 (2026-08-11): domknięto #8 (art. 35d rezerwy, art. 42-44
-    wynik finansowy) i #17 (odpowiedzialność KSH art. 293/483) — sekcja
-    5h nowa
+⭐ PODSUMOWANIE LICZBOWE (zaktualizowane 2026-08-11, ÓSMA
+  aktualizacja tego dnia — po dodaniu sekcji o przechowywaniu
+  dokumentacji): z 20 zidentyfikowanych głównych podtematów — 🟢
+  PEŁNE: 10 (50%), 🟡 CZĘŚCIOWE: 3 (15%), 🔴 BRAK: 7 (35%) —
+  ⭐⭐⭐ DZIEDZINA OSIĄGNĘŁA POŁOWĘ PEŁNEGO POKRYCIA — TEN moduł
+  OBEJMUJE TERAZ: zakres podmiotowy, WSZYSTKIE osiem fundamentalnych
+  zasad, terminy, sankcje, strukturę sprawozdania, wycenę,
+  uproszczenia mikro/małe, dokumentację księgową, inwentaryzację,
+  badanie przez biegłego rewidenta ORAZ przechowywanie dokumentacji
 
-⭐⭐ POZOSTAŁA LUKA — STAN JAWNY, BEZ ZAOKRĄGLANIA W GÓRĘ:
-  → #10 🟡 SPRAWOZDANIE Z DZIAŁALNOŚCI — opisano formę (art. 49 ust. 7),
-    nie treść; punkt startowy: KSR nr 9
-  ⭐ ŻADNA pozycja mapy nie jest już oznaczona 🔴; jedyna pozostała 🟡
-    dotyczy treści merytorycznej sprawozdania z działalności (temat
-    odrębny, wymagający własnej sesji weryfikacyjnej wokół KSR nr 9)
-
-⭐⭐ KOREKTA SAMEJ MAPY (2026-08-11v): mapa 20 pozycji dotyczyła
-  WYŁĄCZNIE ustawy o rachunkowości i przez to NIE POKAZYWAŁA braków w
-  dziedzinie rachunkowo-księgowej jako całości. To była wada
-  metodologiczna — 100% pokrycia u.o.r. nie oznaczało pokrycia
-  dziedziny. Obszary spoza u.o.r. domknięte w tej sesji jako odrębne
-  moduły:
-  → `mod-PKPiR-ewidencje-uproszczone.md` (NOWY — dotąd BRAK)
-  → `mod-kasy-rejestrujace-fiskalizacja.md` (NOWY — dotąd ZERO
-    wystąpień w CAŁYM systemie)
-  → `mod-JPK-ksiegi-elektroniczne-e-sprawozdania.md` (NOWY)
-  → `mod-rachunkowosc-budzetowa-JSFP.md` (NOWY — dotąd ZERO wystąpień
-    frazy „rachunkowość budżetowa" w CAŁYM systemie)
-  → KSR — sekcja 5g tego modułu (soft law, publikacja w Dz.Urz. MF, nie
-    w Dz.U. — dlatego nieobecne w mapach Dz.U. systemu)
-
-⭐ ZIDENTYFIKOWANE, NADAL NIEPOKRYTE OBSZARY POZA u.o.r. (do przyszłych
-  sesji, w kolejności praktycznej wagi):
-  1. MSSF/MSR — wzmiankowane w kontekście art. 2 ust. 3, art. 45
-     ust. 1h i zwolnienia ze znaczników JPK; bez samodzielnego
-     opracowania
-  2. Rozporządzenie ws. KLASYFIKACJI BUDŻETOWEJ (nowe, stosowane po
-     raz pierwszy do budżetu na 2027 r.) — sygnalizowane w źródłach
-     Rzędu 2B, numer NIEZWERYFIKOWANY
-  3. Dokumentacja cen transferowych (local/master file, TPR) — pokryta
-     w mod-CIT i mod-OP od strony podatkowej, nie księgowej
-  4. Szczególne zasady rachunkowości BANKÓW i ZAKŁADÓW UBEZPIECZEŃ
-     (odrębne rozporządzenia) — 0 pokrycia
+⭐ REKOMENDACJA PRIORYTETÓW na PRZYSZŁOŚĆ (zaktualizowane
+  2026-08-11, szósta aktualizacja): POPRZEDNIE priorytety (#15
+  przechowywanie) SĄ JUŻ POKRYTE — NOWE priorytety NA PRZYSZŁOŚĆ:
+  pozycja #11 (sprawozdania SKONSOLIDOWANE — istotne dla struktur
+  grupowych), pozycja #16 (elektroniczna forma ksiąg, e-sprawozdania
+  — CZĘŚCIOWO już dotknięta, warta DOKOŃCZENIA), pozycja #13
+  (usługowe prowadzenie ksiąg — CZĘŚCIOWO dotknięta, tylko wzmianka
+  o OC) — POZOSTAŁE, mniejsze tematy (jednostki mikro/organizacje
+  pozarządowe, waluty obce, odpowiedzialność cywilna, ESG/CSRD,
+  historia progu 2,5 mln EUR) — NIŻSZY priorytet praktyczny
 ```
 
 ---
 
 ## CROSS-REFERENCJE
-- ⭐ PKPiR, ewidencje uproszczone, próg 2,5 mln EUR (historia zmiany),
-  JPK_PKPIR/JPK_ST → `mod-PKPiR-ewidencje-uproszczone.md` (NOWY
-  2026-08-11)
-- ⭐ Kasy rejestrujące, zwolnienia, ulga 700 zł, sankcja 30% →
-  `mod-kasy-rejestrujace-fiskalizacja.md` (NOWY 2026-08-11)
-- ⭐ JPK_KR_PD / JPK_ST_KR, terminy 7-miesięczne, e-sprawozdania
-  XML/JPK_SF → `mod-JPK-ksiegi-elektroniczne-e-sprawozdania.md`
-  (NOWY 2026-08-11)
-- Zawód biegłego rewidenta, badanie sprawozdań finansowych, atestacja
-  ESG → `mod-ustawa-biegli-rewidenci-zawod.md` — ⚠️ ZAKTUALIZUJ tamten
+- Zawód biegłego rewidenta, badanie sprawozdań finansowych →
+  `mod-ustawa-biegli-rewidenci-zawod.md` — ⚠️ ZAKTUALIZUJ tamten
   moduł, by ODSYŁAŁ TU (do TEGO modułu), NIE do CIT/Ordynacja
-  podatkowa, dla samego prawa bilansowego (flaga NADAL OTWARTA na
-  2026-08-11 — nie naprawiono w tej sesji)
-- Ordynacja podatkowa, GAAR, przedawnienie, art. 86 OP (przechowywanie
-  ksiąg podatkowych) → `mod-OP-ordynacja-podatkowa.md` — PRAWO
-  PODATKOWE, nie bilansowe — NIE MYLIĆ zakresu
+  podatkowa, dla samego prawa bilansowego
+- Ordynacja podatkowa, GAAR, przedawnienie → `mod-OP-ordynacja-
+  podatkowa.md` — PRAWO PODATKOWE, nie bilansowe — NIE MYLIĆ zakresu
 - KSeF, e-faktury (aspekt techniczny fakturowania, NIE księgowania) →
-  `mod-VAT-podatek-od-towarow-i-uslug.md`
-- ⭐ Rachunkowość jednostek sektora finansów publicznych, plany kont,
-  skonsolidowany bilans JST → `mod-rachunkowosc-budzetowa-JSFP.md`
-  (NOWY 2026-08-11v)
-- Biuro rachunkowe jako instytucja obowiązana →
-  `mod-ustawa-AML-instytucje-obowiazkowe.md`
-- Różnice kursowe — reżim PODATKOWY (odrębny od art. 30 u.o.r.) →
-  `mod-CIT-podatek-dochodowy-prawne.md`, `mod-PIT-podatek-dochodowy-
-  fizyczne.md`
-- Sankcje karnoskarbowe (art. 60, 61, 80 KKS) →
-  `dr-03-prawo-karne-wykroczenia-egzekucja/modules/
-  mod-KKS-karny-skarbowy-i-AML.md`
+  sprawdź moduły VAT

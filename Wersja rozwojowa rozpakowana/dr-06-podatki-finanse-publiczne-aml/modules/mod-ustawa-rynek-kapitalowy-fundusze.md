@@ -47,10 +47,55 @@ ASI (Alternatywna Spółka Inwestycyjna):
 ## 3. OBLIGACJE KORPORACYJNE — ZASADY ABSOLUTNE
 
 ```
-Prospekt emisyjny (Rozp. UE 2017/1129):
-  → Obowiązkowy przy ofercie publicznej przekraczającej 2,5 mln EUR w 12 miesiącach
-  → WYJĄTEK: oferta do < 150 osób lub < 1 mln EUR — bez prospektu
-  → Zatwierdza: KNF lub właściwy organ UE
+⚠️⚠️ POPRAWIONE 2026-08-12 (na żądanie użytkownika) — POPRZEDNIA
+  wersja tej sekcji BYŁA ZNACZĄCO UPROSZCZONA/NIEDOKŁADNA (twierdziła
+  "próg 2,5 mln EUR + wyjątek <150 osób LUB <1 mln EUR" — TO NIE
+  ODDAWAŁO rzeczywistej, WIELOPOZIOMOWEJ struktury progów)
+
+⭐⭐⭐ RZECZYWISTA, WIELOPOZIOMOWA STRUKTURA (Rozporządzenie Prospektowe
+  UE 2017/1129 + ustawa o ofercie publicznej, art. 3/37a/37b):
+  → PONIŻEJ 1 MLN EUR (łącznie z ofertami z OSTATNICH 12 miesięcy):
+    Rozporządzenie UE W OGÓLE NIE MA zastosowania (art. 1 ust. 3) —
+    ANI prospekt, ANI unijny wymóg dokumentu — ⭐ ALE Polska
+    SKORZYSTAŁA z opcji narodowej: DLA ofert 100 000-1 000 000 EUR
+    WYMAGANY jest UPROSZCZONY "dokument informacyjny" (art. 37a
+    ustawy o ofercie) — NIE prospekt, NIE memorandum — LŻEJSZY
+    dokument z podstawowymi informacjami o emitencie/papierach
+  → 1 MLN — do progu KRAJOWEGO (⚠️ patrz "REFORMA 2026" niżej):
+    WYMAGANE memorandum INFORMACYJNE (art. 37b) — OBSZERNIEJSZY
+    dokument NIŻ art. 37a, ALE NADAL NIE pełny prospekt
+  → POWYŻEJ progu krajowego: PEŁNY PROSPEKT wymagany, ZATWIERDZANY
+    przez KNF lub właściwy organ UE
+
+⭐⭐ WYJĄTEK "150 OSÓB" — NIEZALEŻNY od WARTOŚCI oferty: JEŚLI oferta
+  SKIEROWANA jest DO MNIEJ niż 150 ADRESATÓW (Z WYŁĄCZENIEM
+  inwestorów KWALIFIKOWANYCH) — ANI prospekt, ANI memorandum, ANI
+  dokument art. 37a NIE SĄ wymagane, NIEZALEŻNIE OD wartości oferty
+  — ⚠️ WAŻNE zastrzeżenie: PRZY KOLEJNYCH ofertach W OKRESIE 12
+  miesięcy NALEŻY SUMOWAĆ łączną LICZBĘ adresatów — JEŚLI PRZEKROCZY
+  149 osób ŁĄCZNIE, powstaje OBOWIĄZEK publikacji memorandum
+  — ⭐ JEDYNY BEZWZGLĘDNY wyjątek: oferta DO JEDNEGO inwestora NIGDY
+  nie jest "ofertą PUBLICZNĄ" w ogóle
+
+⭐⭐⭐ ⚡ REFORMA 2026 — "LISTING ACT" (BARDZO ŚWIEŻA, weszła W ŻYCIE
+  **5 CZERWCA 2026 R.**, ok. 2 MIESIĄCE przed tą weryfikacją):
+  → CEL: UJEDNOLICENIE dotychczasowej, DWUPOZIOMOWEJ struktury
+    (dokument informacyjny + memorandum) W JEDEN, PROSTSZY próg
+  → NOWY art. 3 ust. 2 lit. b Rozporządzenia Prospektowego: UNIJNY
+    pułap PODNIESIONY do **12 MLN EUR** (znacząco WYŻEJ niż
+    wcześniejszy, NIŻSZY unijny domyślny próg)
+  → ⚠️ PAŃSTWA członkowskie MOGĄ jednak ZAOSTRZYĆ ten unijny pułap —
+    Polska ROZWAŻAŁA (wg doniesień z PARP) OGRANICZENIE do **PONIŻEJ
+    5 MLN EUR** na EMITENTA/oferującego w OKRESIE 12 miesięcy — ⚠️⚠️
+    NIE ZWERYFIKOWANO W TEJ SESJI, czy TA konkretna wartość (5 mln
+    EUR) ZOSTAŁA już OSTATECZNIE WDROŻONA W polskiej ustawie o
+    ofercie, CZY POZOSTAJE jeszcze na etapie PROJEKTU/ROZWAŻAŃ UKNF
+    — SPRAWDŹ AKTUALNY stan WDROŻENIA przed cytowaniem KONKRETNEGO
+    progu w sprawie
+  → PRAKTYCZNY SKUTEK docelowy: PONIŻEJ nowego, JEDNOLITEGO progu —
+    WYSTARCZY JEDEN, ujednolicony dokument INFORMACYJNY (zamiast
+    obecnego rozróżnienia dokument/memorandum), BEZ obowiązku
+    ZATWIERDzania przez KNF
 
 Zgromadzenie obligatariuszy (art. 46–51 ustawy o obligacjach — weryfikuj w ISAP):
   → Przy naruszeniu warunków emisji przez emitenta
@@ -59,6 +104,12 @@ Zgromadzenie obligatariuszy (art. 46–51 ustawy o obligacjach — weryfikuj w I
 Insider trading (art. 154 ustawy o obrocie — weryfikuj w ISAP):
   → Zakaz obrotu na podstawie informacji poufnej niepodanej do publicznej wiadomości
   → Sankcja: kara pieniężna KNF + odpowiedzialność karna
+
+Potwierdzone w 7+ zgodnych źródeł, w tym BEZPOŚREDNIO KNF (Rząd 1,
+Q&A "Oferty publiczne o wartości poniżej 5.000.000 euro") oraz PARP
+[×2, z omówieniem reformy Listing Act i DOKŁADNĄ datą 5.06.2026],
+seg.org.pl [Stowarzyszenie Emitentów Giełdowych, ×2], ck-legal.pl,
+prawainwestora.pl.
 ```
 
 ---

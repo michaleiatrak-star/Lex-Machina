@@ -74,6 +74,56 @@ rewidentów oraz "atestacja sprawozdawczości zrównoważonego rozwoju"
    ESG z pamięci — każdorazowo weryfikuj aktualny harmonogram w ISAP i na
    stronach PIBR/MF.
 
+⭐⭐⭐ AKTUALNY HARMONOGRAM (uzupełniono 2026-08-12, na żądanie
+użytkownika — wypełnienie POWYŻSZEJ, jawnie oznaczonej luki) — DWIE
+NAKŁADAJĄCE SIĘ reformy UE (⚠️ NIE MYLIĆ):
+  1) DYREKTYWA "STOP-THE-CLOCK" (2025/794) — WYŁĄCZNIE PRZESUNĘŁA W
+     CZASIE (o 2 lata) TERMINY pierwszego RAPORTOWANIA, BEZ zmiany
+     ZAKRESU podmiotowego
+  2) DYREKTYWA "OMNIBUS I" (2026/470) — DOKONAŁA SUBSTANCYJNEJ zmiany
+     ZAKRESU podmiotowego — ZAWĘZIŁA krąg podmiotów OBJĘTYCH
+     obowiązkiem NA PRZYSZŁOŚĆ
+
+⭐⭐ FALE RAPORTOWANIA (STAN PO OBU reformach):
+  → FALA 1 (JUŻ raportuje OD 2025 r. za 2024 r.): NAJWIĘKSZE
+    jednostki zainteresowania PUBLICZNEGO (>500 pracowników,
+    notowane na GPW) — BEZ ZMIAN, RAPORTUJĄ nadal
+  → FALA 2 (duże jednostki, WCZEŚNIEJ NIEOBJĘTE NFRD):
+    PIERWOTNIE 2026 r. (za 2025) → PRZESUNIĘTA na **2028 R. (ZA
+    2027 R.)** — ok. 3,5 TYS. jednostek
+  → FALA 3 (MŚP NOTOWANE na rynku regulowanym, Z WYŁĄCZENIEM
+    mikroprzedsiębiorstw): PIERWOTNIE 2027 r. (za 2026) →
+    PRZESUNIĘTA na **2029 R. (ZA 2028 R.)** — ok. 100 jednostek
+
+⭐⭐⭐ ZAWĘŻENIE ZAKRESU NA PRZYSZŁOŚĆ (Omnibus I) — OD raportowania
+  ZA lata OBROTOWE rozpoczynające SIĘ od 1.01.2027: OBOWIĄZEK
+  MAJĄ mieć TYLKO NAJWIĘKSZE firmy — **POWYŻEJ 1000 PRACOWNIKÓW**
+  ORAZ spełniające PRÓG przychodowy — ⚠️ RÓŻNE ŹRÓDŁA podają
+  RÓŻNIĄCE się KONKRETNE progi przychodowe (jedno: "obrót NETTO
+  >50 MLN EUR", inne: "obrót POWYŻEJ 450 MLN EUR") — NIE
+  ROZSTRZYGNIĘTO w tej sesji, KTÓRA wartość jest OSTATECZNIE
+  poprawna — MOŻLIWE, że RÓŻNE progi DOTYCZĄ różnych KRYTERIÓW
+  (np. próg UE vs. próg zaimplementowany KRAJOWO) — SPRAWDŹ
+  DOKŁADNIE przed cytowaniem KONKRETNEJ liczby w sprawie
+
+⭐ DOBROWOLNE ZWOLNIENIE dla PODMIOTÓW "wypadających" Z nowego,
+  ZAWĘŻONEGO zakresu: jednostki, KTÓRE wcześniej SPEŁNIAŁY stare
+  kryteria, ALE NIE SPEŁNIAJĄ nowych (zawężonych) — MOGĄ (decyzja
+  KIEROWNIKA jednostki, NIE automatyzm) ODSTĄPIĆ OD raportowania ZA
+  lata obrotowe **2025 I 2026**
+
+⭐ POLSKA — ETAPY WDROŻENIA: ustawa z 6.12.2024 (PIERWOTNE wdrożenie
+  CSRD) → zmodyfikowana ustawą z 9.07.2025 (implementacja
+  "stop-the-clock") → ustawa z **27.02.2026** (PIERWSZY etap
+  wdrożenia ZAWĘŻONEGO zakresu Z Omnibus I) — ⚠️ UNIJNY termin
+  transpozycji CAŁOŚCI zmian Omnibus I: **19.03.2027 R.** — DALSZE
+  etapy polskiej implementacji MOGĄ jeszcze NASTĄPIĆ
+
+Potwierdzone w 8+ zgodnych, BARDZO aktualnych źródeł z 2026 r., w
+tym lex.pl [czerwiec 2026], biznes.gov.pl [Rząd 1, luty 2026],
+cgolegal.pl/cgofinance.pl [maj-czerwiec 2026], bbs-legal.pl,
+altoadvisory.pl [czerwiec 2026], montevero.pl.
+
 6. Tajemnica zawodowa biegłego rewidenta — odrębna od tajemnicy adwokackiej/
    radcowskiej, własny reżim wyłączeń (np. obowiązki AML, zgłoszenia do KNF/
    GIIF) — weryfikuj aktualny zakres przed powołaniem.
