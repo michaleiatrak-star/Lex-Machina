@@ -36980,172 +36980,191 @@ z sesji "2026-08-11u/v/w" występuje TAKŻE w innych DR-skillach poza
 DR-06 — NIE było przedmiotem tej sesji, rekomendowane jako oddzielne
 zadanie audytowe.
 
----
+## AUDYT-2026-08-13-DR02-ORPHAN — Naprawa: moduł-widmo mod-KRO-opieka-i-kuratela w dr-02
 
-## AUDYT-2026-08-13b — LUKA ZEROWEGO POKRYCIA: rozporządzenie składkowe (podstawa wymiaru składek ZUS) nie istniało w systemie; utworzony mod-ROZP-SKLADKOWE-podstawa-wymiaru + naprawa dryfu licznika DR-04
+**Kontekst:** analiza pokrycia DR-02 wykazała, że `modules/mod-KRO-opieka-i-kuratela.md` (v1.0.0, dodany 2026-08-12, 248 linii) istniał fizycznie na dysku, ale nie figurował w checkliście `[✓]` w SKILL.md ani w MAPA-AKTOW.md.
 
-**Okoliczności odkrycia.** Użytkownik przedstawił do zbadania ofertę
-marketingową typu „obniżymy Twoje koszty ZUS nawet o 25%, legalnie,
-bez dodatkowych kosztów", kierowaną również do biur rachunkowych.
-Analiza wykazała, że jedynym możliwym nośnikiem takiego efektu jest
-katalog wyłączeń z § 2 ust. 1 rozporządzenia składkowego. Po udzieleniu
-odpowiedzi użytkownik zapytał wprost, czy temat jest pokryty w systemie
-skilli.
+**Zbadano ryzyko dublowania treści** względem `mod-ubezwlasnowolnienie-opieka-kuratela.md`: potwierdzono brak dublowania — moduły komplementarne.
 
-**Ustalenie (audyt grep całego drzewa /mnt/skills/user).**
+**Naprawa (dr-02):** SKILL.md — dodano wpis `[✓] NOWY mod-KRO-opieka-i-kuratela` z notą rozgraniczającą; licznik 38→39. MAPA-AKTOW.md — dodano brakujący wiersz.
 
-```
-grep -ril "1106"                       → 1 trafienie, FAŁSZYWY POZYTYW
-                                         (analizator-umow-v1/references/
-                                          b2b-podwykonawcze.md → M.P. 2024
-                                          poz. 1106, odsetki w transakcjach
-                                          handlowych — inny akt, inna materia)
-grep -ril "rozporządzenie składkowe"   → 0
-grep -ril "18 grudnia 1998"            → 0
-grep -ril "§ 2 ust. 1 pkt"             → 0
-```
+**Status:** ZAMKNIĘTE w tej samej sesji.
 
-**ZEROWE POKRYCIE.** Akt wykonawczy regulujący, co wchodzi, a co nie
-wchodzi do podstawy wymiaru składek — a więc podstawa KAŻDEGO sporu
-płatnika z ZUS o domiar — nie występował w systemie w żadnej postaci.
+## AUDYT-2026-08-13-DR02-WYPELNIENIE-LUK — Wypełnienie 2 z 9 luk treściowych DR-02 (KRO opieka Dział I/II + nowy moduł ochrony praw lokatorów) + otwarcie flagi F-21 dla pozostałych 7
 
-**Root cause.** DR-04 pokrywał ubezpieczenia społeczne WYŁĄCZNIE od
-strony ubezpieczonego (`mod-SUS-ZUS-ubezpieczenia-spoleczne`: emerytura,
-renta, kapitał początkowy, odwołanie od decyzji, zasiłki). Perspektywa
-PŁATNIKA — podstawa wymiaru, wyłączenia, wycena świadczeń w naturze,
-30-krotność, kaskada sankcji za zaniżenie — nie miała nośnika. Jest to
-ten sam wzorzec, co wielokrotnie odnotowany w tym dzienniku: dziedzina
-opisana z jednej perspektywy procesowej, druga niewidoczna do momentu,
-aż zada się pytanie z tamtej strony. Ustawa systemowa była w mapie od
-początku; jej akt wykonawczy — nigdy.
+**Naprawa 1 — mod-KRO-opieka-i-kuratela.md:** wypełniono Dział I Rozdział III (art. 165-168, nadzór nad opiekunem), Rozdział IV (art. 169-174, zwolnienie/ustanie opieki), Dział II (art. 175-177, opieka nad ubezwłasnowolnionym całkowicie). 4 zgodne źródła każdorazowo.
 
-**Utworzono:** `dr-04-prawo-pracy-zus-swiadczenia/modules/
-mod-ROZP-SKLADKOWE-podstawa-wymiaru.md` (v1.0.0).
+**Naprawa 2 — nowy moduł mod-ustawa-ochrona-praw-lokatorow-najem-eksmisja.md (v1.0.0):** wypełnienie luki strukturalnej (cała ustawa bez modułu). Zakres: t.j. Dz.U. 2023 poz. 725; trzy limity kaucji wg rodzaju najmu; najem okazjonalny/instytucjonalny; art. 16 okres ochronny; art. 1046 §5¹ KPC; art. 678 KC.
 
-Zawartość unikalna (sprawdzona pod kątem duplikacji przed utworzeniem):
-- pełny katalog § 2 ust. 1 z **ANALIZĄ POJEMNOŚCI** każdego punktu —
-  ustalenie kluczowe: **pkt 26 jest jedyną pozycją katalogu bez limitu
-  kwotowego**, więc każdy schemat obiecujący kilkanaście–kilkadziesiąt
-  procent MUSI przez niego przechodzić; to daje jedno pytanie
-  rozstrzygające zamiast dyskusji o marketingu;
-- § 3 (wycena świadczeń w naturze — przy benefitach kupowanych przez
-  pracodawcę miarodajna jest CENA ZAKUPU, nie „cena detaliczna"
-  z regulaminu), § 5 (rozszerzenie na zleceniobiorców i rady nadzorcze),
-  § 6-9 (30-krotność — jedyne bezryzykowne narzędzie oszczędnościowe
-  w tym akcie), § 10;
-- DETEKTOR SCHEMATÓW OPTYMALIZACYJNYCH: test arytmetyczny (obniżka
-  rachunku o X% ⇒ wyprowadzenie ≈X% funduszu płac z podstawy), test
-  źródła finansowania („bez obciążeń dla firmy" ⇒ płaci pracownik
-  składkami i podstawą przyszłych świadczeń), pytanie rozstrzygające
-  z tabelą interpretacji odpowiedzi, katalog czerwonych flag językowych;
-- 5 przesłanek kumulatywnych pkt 26;
-- kaskada sankcji [1]-[6]: składkowa (5 lat + odsetki + opłata dodatkowa
-  do 100%), podatkowa, wykroczeniowa (art. 98 usus — grzywna do 46 000 zł
-  od 1.06.2025), karna (art. 219 KK z zaznaczeniem, że ZGODA PRACOWNIKA
-  NIE JEST KONTRATYPEM; art. 218 § 1a KK; ZUS jako pokrzywdzony),
-  pracownicza (roszczenia całej załogi za zaniżoną podstawę świadczeń),
-  doradcy/biura rachunkowego (prowizja jednorazowa vs ekspozycja 5-letnia).
+**Rejestracja pozostałych 7 luk:** flaga F-21 otwarta (później w pełni domknięta, patrz niżej).
 
-**Delimitacja anty-duplikacyjna** (sekcja 12 modułu, wpisana wprost):
-`mod-obchodzenie-prawa-pracy-reforma-PIP-2026` opisuje UKRYWANIE
-przychodu („pod stołem") — czyn ewidentnie nielegalny. Nowy moduł
-opisuje PRZEKWALIFIKOWANIE przychodu na wyłączony z podstawy —
-konstrukcję formalnie jawną, sporną co do skutku. Różne zjawiska,
-różne linie obrony, brak nakładki treściowej. Analogiczna delimitacja
-wobec `mod-ustawa-ZFSS` (tam materia ZFŚS, tu wyłącznie skutek
-składkowy pkt 19/20 z odesłaniem) i `mod-SUS-ZUS` (tam ubezpieczony,
-tu płatnik).
+**Weryfikacja liczby plików:** dr-02 PRZED = 40, PO = 41 (+1 nowy moduł).
 
-**Poziom weryfikacji — istotny precedens metodyczny.** Pełny tekst
-jednolity rozporządzenia (Dz.U. 2025 poz. 316) został odczytany
-BEZPOŚREDNIO przez `web_fetch` z `api.sejm.gov.pl/eli/acts/DU/2025/316/
-text.pdf` — ŹRÓDŁO RZĄD 1, nie streszczenie. Jest to dokument
-5-stronicowy, a więc mieszczący się w limitach narzędzia — w przeciwieństwie
-do problemu opisanego we fladze F-18 (228-stronicowa ustawa o VAT,
-niemożliwa do odczytu fragmentarycznego). **Rekomendacja ogólna:
-dla aktów krótkich ścieżka `api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}/text.pdf`
-działa i powinna być domyślna, mimo że `isap.sejm.gov.pl` blokuje
-web_fetch (ROBOTS_DISALLOWED).** Dopisać do PRAWO-HARDGATE przy
-najbliższej edycji.
+## AUDYT-2026-08-13c-DR02-ZAMKNIECIE-F21 — Wypełnienie pozostałych 7 pozycji F-21 + usunięcie 1 niepotwierdzonego cytatu SN. Flaga F-21 ZAMKNIĘTA, otwarta lżejsza F-22
 
-Dzięki temu odczytowi wykryto fakt niedostępny ze źródeł wtórnych:
-nowelizacja Dz.U. 2023 poz. 1665 (od 1.09.2023) **uchyliła** § 2 ust. 1
-pkt 1b, 5, 31, 32 oraz cały § 2 ust. 2-4. Kierunek zmian tego aktu jest
-ZAWĘŻAJĄCY, co merytorycznie obala marketingowy argument „mechanizm
-stabilny i powtarzalny" i stanowi samodzielny argument w sporze.
+**Wypełnione (6 z 7):** EPS (procedura, koszty, terminy), Tytuł X KC (cezura wyrok TK P.4/99 z 14.02.2001), spis inwentarza (art. 637/637¹ KPC), zmiana nazwiska (organ, opłata 37 zł, termin, odwołanie), piecza zastępcza (limit 8 dzieci RDD art. 61), ustawa frankowa 2026 (mechanizm kasacji SN).
 
-**Propagacja (3 pliki):**
-1. `dr-04/SKILL.md` — licznik modułów 30→31, wersja 3.23→3.24, wpis
-   opisowy o nowym module.
-2. `dr-04/MAPA-AKTOW.md` — dwa nowe wiersze: rozporządzenie składkowe
-   oraz zbiorczy wiersz sankcji płatnika (art. 24 ust. 1a/1b/4 + art. 98
-   usus, z odnotowaniem 9-krotnej podwyżki grzywny od 1.06.2025 przez
-   art. 380 pkt 10 ustawy o rynku pracy, Dz.U. 2025 poz. 620).
-3. `prawo-polskie-v2/ROUTING-MAP.md` — nowy wiersz w sekcji DR-04
-   z jawnymi TRIGGERAMI ("optymalizacja składek", "obniżymy ZUS o X%",
-   "podstawa wymiaru składek", "benefity/kafeteria", "korzyści materialne",
-   "30-krotność"), żeby router trafiał tu bez pośrednictwa pytania
-   o konkretny akt.
+**Naprawione przez USUNIĘCIE (1 z 7):** cytat "wyrok SN z 11.12.2018" — niemożliwy do zweryfikowania, usunięty zgodnie z HARD GATE zamiast pozostawiony jako otwarta flaga.
 
-**ZNALEZISKO UBOCZNE — dryf licznika DR-04 w TABELI STATUSU
-ROUTING-MAP.** Przy dopisywaniu wiersza ujawniono, że tabela deklarowała
-dla DR-04 `18 / 0 / 0 / 0 / 18` przy **38 rzeczywistych wierszach
-JESZCZE PRZED tą sesją**. Jest to DOKŁADNIE ten sam defekt, który
-naprawiono dla DR-06 w sesji 2026-08-11v — i który, jak tam odnotowano,
-NIE jest wykrywany przez test T2 (T2 sprawdza liczniki modułów
-w SKILL.md, a nie liczniki wierszy w TABELI STATUSU ROUTING-MAP).
-Licznik naprawiony na `37 / 2 / 0 / 0 / 39` (2 odesłania: KPA, PPSA
-do DR-05) z adnotacją w wierszu.
+**Rejestracja:** F-21 ZAMKNIĘTA. Nowa F-22 dla 5 drobnych podpunktów rezydualnych.
 
-⚠️ **REKOMENDACJA DLA ODDZIELNEJ SESJI:** dryf potwierdzony już
-w DWÓCH niezależnych DR (DR-06, DR-04) — należy założyć, że występuje
-także w pozostałych czternastu. Zadanie: przeliczyć wiersze każdej
-sekcji DR w ROUTING-MAP i zsynchronizować TABELĘ STATUSU, a następnie
-rozszerzyć test T2 (REGRESSION-TEST-PLAN.md) o kontrolę zgodności
-liczników TABELI STATUSU z faktyczną liczbą wierszy sekcji — inaczej
-defekt będzie wracał. Zgłoszone jako **F-22**.
+**Stan po tej sesji:** wszystkie 9 pierwotnie zidentyfikowanych luk DR-02 zamknięte lub naprawione.
 
-**Otwarta flaga F-21:** orzecznictwo w nowym module (11 sygnatur SN/SA/SO)
-pochodzi ze źródeł RZĄD 2 — treść tez potwierdzona krzyżowo, ale
-uzasadnienia nie zostały odczytane u źródła. W module każda pozycja jest
-opatrzona ostrzeżeniem, ale dług weryfikacyjny istnieje.
+## AUDYT-2026-08-13d-DR03-BADANIE-POKRYCIA — Przegląd pokrycia DR-03: 1 luka strukturalna wysokiego priorytetu + 3 zbiorcze/migrowane flagi, BEZ naprawy treści
 
-### DOSTAWA (ZASADA 7 / OUTPUT-COMPLETENESS) — AUDYT-2026-08-13b
+**Stan wyjściowy DR-03:** 57 modułów, rejestr modułów CZYSTY (0 plików-widm, 1 moduł poprawnie przeniesiony do shared/).
 
-**Skille zmodyfikowane w tej sesji — 3, a więc 3 OSOBNE archiwa**
-(KROK 0: „ile skilli, tyle zipów"; `audyt-systemu-v4` traktowany jak
-każdy inny skill, bo jego pliki referencyjne były edytowane):
+**Wynik badania:** środki zapobiegawcze/tymczasowe aresztowanie (KPK Dział VI, art. 249-283) — ZERO pokrycia w 57 modułach → F-23, priorytet WYSOKI. Migracja 2 flag z lokalnej mapy → F-24, F-25. 7 drobnych punktów → F-26.
 
-```
-dr-04-prawo-pracy-zus-swiadczenia   → +1 plik (nowy moduł), 2 pliki zmienione
-prawo-polskie-v2                    → 0 plików +/-, 1 plik zmieniony (ROUTING-MAP)
-audyt-systemu-v4                    → 0 plików +/-, 2 pliki zmienione (AUDIT-JOURNAL, WARN-OTWARTE)
-```
+**Ważna różnica metodologiczna:** w tej sesji NIE naprawiano żadnej treści — badanie bez naprawy, zgodnie z poleceniem użytkownika.
 
-⚠️ **ODSTĘPSTWO PROCEDURALNE — ZGŁOSZONE JAWNIE, NIE UKRYTE.**
-KROK 1-3 PRE-DELIVERY-COMPLETENESS-CHECK przewiduje: policz pliki
-oryginału → skopiuj CAŁE drzewo do katalogu roboczego → **dopiero na
-kopii nanieś zmiany**. W tej sesji edycje zostały naniesione
-**bezpośrednio w `/mnt/skills/user`**, ponieważ naprawa nie była
-prowadzona jako sformalizowany audyt (wyszła z pytania merytorycznego
-użytkownika o pokrycie tematu), a dopiero po jej wykonaniu padło
-polecenie wydania skilla wg Reguły 7.
+## AUDYT-2026-08-13e-DR04-BADANIE-POKRYCIA — Przegląd pokrycia DR-04: 1 luka strukturalna wysokiego priorytetu (błędne zmapowanie Działu VIII KP) + migracja 6 lokalnych flag + 5 drobnych punktów, BEZ naprawy treści
 
-**Skutek dla integralności dostawy: ŻADEN NEGATYWNY** — kierunek
-kopiowania jest zachowany (`/mnt/skills/user` → katalog roboczy → ZIP),
-więc KROK 4b (`diff -rq` archiwum vs stan na dysku) pozostaje pełnoprawnym
-testem i został wykonany. Utracona została wyłącznie możliwość
-porównania „liczba plików PRZED edycją" mierzonej na nietkniętym
-oryginale — zastąpiona **jawnym, uzasadnionym bilansem różnicy**
-(+1 plik w dr-04 = `mod-ROZP-SKLADKOWE-podstawa-wymiaru.md`, świadomie
-dodany; 0 różnicy w dwóch pozostałych skillach).
+**Stan wyjściowy DR-04:** 30 plików, rejestr czysty.
 
-**Rekomendacja do PRE-DELIVERY-COMPLETENESS-CHECK:** dopisać wariant
-proceduralny dla sytuacji „naprawa powstała poza trybem audytowym,
-edycje już naniesione in-place". Obecne brzmienie zakłada, że decyzja
-o dostawie zapada PRZED edycją, co w praktyce sesji roboczych nie
-zawsze zachodzi. Wariant powinien wymagać: (a) jawnego zgłoszenia
-odstępstwa w AUDIT-JOURNAL, (b) bilansu różnicy plików z uzasadnieniem
-każdej pozycji, (c) obowiązkowego KROK 4b bez wyjątków. Zgłoszone jako
-uwaga do rozważenia przy najbliższej edycji `audyt-systemu-v4/SKILL.md`
-— NIE zmieniam treści zasady samodzielnie w tej sesji.
+**Wynik badania — odkrycie kluczowe:** Kodeks pracy Dział VIII (urlopy rodzicielskie) nie ma dedykowanego modułu, a istniejące odesłanie jest BŁĘDNYM ZMAPOWANIEM (wskazuje na moduł o świadczeniu ZUS "Aktywny Rodzic", nie o przepisach KP) → F-27, priorytet WYSOKI.
+
+**6 flag migrowanych → F-28. 5 drobnych → F-29.**
+
+## AUDYT-2026-08-13f-DR05-BADANIE-POKRYCIA — Przegląd pokrycia DR-05: eskalacja PILNEJ flagi systemowej (cudzoziemcy/Ukraina) do centralnego rejestru + 2 flagi migrowane + 1 drobna, BEZ naprawy treści
+
+**Stan wyjściowy DR-05:** 17 modułów, rejestr czysty.
+
+**Wynik badania — odkrycie kluczowe:** lokalna mapa zawierała od miesiąca flagę oznaczoną własnym symbolem ⛔ PILNE (mod-ustawa-cudzoziemcy.md, prawdopodobnie nieaktualna treść po ustawie wygaszającej pomoc Ukraińcom) — nigdy niemigrowaną centralnie → F-30, priorytet WYSOKI, traktować jak CRIT.
+
+**2 flagi migrowane → F-31. 1 drobny → F-32.**
+
+## AUDYT-2026-08-13g-DR06-BADANIE-POKRYCIA — Przegląd pokrycia DR-06: masowa luka rejestracyjna (12/41 modułów bez wpisu w checkliście, 6 z nich całkowicie niewidocznych) + zdezaktualizowana F-17 + 8 drobnych punktów, BEZ naprawy treści
+
+**Stan wyjściowy DR-06:** 41 plików modułów — największy dotąd zbadany DR-skill.
+
+**Wynik badania — odkrycie kluczowe:** 12 z 41 modułów (~29%) bez formalnego wpisu `[✓]` w checkliście, mimo wliczenia w licznik nagłówka. 6 z nich CAŁKOWICIE nieobecnych w OBU rejestrach → F-33, priorytet WYSOKI — największa dotąd wykryta skala tego wzorca.
+
+**F-34:** centralna flaga F-17 zdezaktualizowana. **F-35:** 8 drobnych punktów.
+
+**Ważna korekta metodologiczna:** metoda zbiorczego `comm` jest NIEWYSTARCZAJĄCA — nie odróżnia formalnego wpisu `[✓]` od wzmianki w prozie. Od tej sesji: weryfikacja PER-MODUŁOWA.
+
+## AUDYT-2026-08-13h-DR07-BADANIE-POKRYCIA — Przegląd pokrycia DR-07: nietypowo wysoka koncentracja flag "WYMAGA AKTUALIZACJI" (25% modułów, w tym moduł główny PZP) + 1 luka rejestracyjna + 2 drobne, BEZ naprawy treści
+
+**Stan wyjściowy DR-07:** 16 plików modułów — najmniejszy dotąd zbadany DR-skill. Zastosowano poprawioną metodologię (per-modułową) — checklist CZYSTA, 1 luka w mapie (moduł-córka) → F-37.
+
+**Wynik badania — odkrycie kluczowe:** 4 z 16 modułów (25%) + moduł GŁÓWNY PZP z własnym zastrzeżeniem częściowej re-weryfikacji → F-36, priorytet średni-wysoki — najwyższy odsetek dotąd.
+
+**F-38:** 2 drobne obserwacje.
+
+## AUDYT-2026-08-13i-DR09-BADANIE-POKRYCIA — Przegląd pokrycia DR-09: moduł o niejasnym zakresie + 6 modułów z NIGDY niezweryfikowanym numerem podstawowym (25%) + 3 standardowe flagi treści + 4 drobne, BEZ naprawy treści
+
+**Stan wyjściowy DR-09:** 24 pliki modułów, rejestr CZYSTY (checklist i mapa, 0 rozbieżności).
+
+**Wynik badania — odkrycie kluczowe (nowy typ problemu):** SZEŚĆ modułów oznaczonych "✅ NOWY" ma podstawowy akt, który NIGDY nie przeszedł pierwszej weryfikacji numeru Dz.U. → F-41, priorytet WYSOKI. Jakościowo różne ryzyko od standardowej "WYMAGA AKTUALIZACJI".
+
+**F-39:** moduł bez przypisanego aktu. **F-40:** 3 standardowe flagi migrowane. **F-42:** 4 drobne.
+
+## AUDYT-2026-08-13j-DR10-BADANIE-POKRYCIA — Przegląd pokrycia DR-10: jawne TODO dla podpisanej ustawy + przestarzały sprzeczny wiersz mapy + luki rejestracyjne + świeże niezweryfikowane numery + 2 drobne, BEZ naprawy treści
+
+**Stan wyjściowy DR-10:** 31 plików modułów.
+
+**Odkrycie kluczowe #1:** "ustawa łańcuchowa" (zakaz uwięzi psów/kotów) — mapa WPROST oznacza "⏳ TODO — treść NIE OPRACOWANA" → F-43, priorytet średni-wysoki.
+
+**Odkrycie kluczowe #2 (NOWY WZORZEC — pierwsza instancja):** wiersz mapy "⛔ LUKA SYSTEMOWA" (izby lekarskie) SPRZECZNY z późniejszym wierszem tej samej mapy "✅ F-3 ZAMKNIĘTA" → F-44. Pierwsza instancja wzorca "stara, nieodświeżona notatka" — powtórzy się w DR-11, DR-12 (×2), DR-13.
+
+**F-45:** rejestracyjne + treściowe (2 braki [✓], 1 brak wiersza, 3 "wymaga aktualizacji") — PRZY OKAZJI potwierdzone: ten sam błędny numer dostępności co w DR-05 (F-31). **F-46:** świeże niezweryfikowane numery (futerkowa, KROPiK) + ASF wymaga bieżącego monitoringu. **F-47:** 2 drobne.
+
+## AUDYT-2026-08-13k-DR11-BADANIE-POKRYCIA — Przegląd pokrycia DR-11: transparentny STUB nigdy niescentralizowany + moduły rodziny RODO poza mapą + druga instancja wzorca "stara sprzeczna notatka" + świeża ustawa AI, BEZ naprawy treści
+
+**Stan wyjściowy DR-11:** 22 pliki modułów (CRLF w SKILL.md, bez wpływu na audyt).
+
+**F-48:** (a) 1 moduł UCZCIWIE oznaczony STUB (nie ukryty phantom) — nigdy niescentralizowany; (b) 3 moduły rodziny RODO poza mapą.
+
+**Druga instancja wzorca z DR-10 (F-44):** notatka podsumowująca wciąż wymienia KSC/NIS2 jako otwarte, mimo że wiersz wyżej ma status "✅ OK — ZAMKNIĘTE 2026-07-26" (data późniejsza) → F-49.
+
+**F-50:** ustawa krajowa o AI (KRiBSI) podpisana, numer niezweryfikowany — trzecia instancja wzorca "świeży akt bez weryfikacji" (po F-41, F-46).
+
+**Moduły treściowo BEZ zastrzeżeń** — pierwszy DR-skill bez żadnego wyniku "punkt startowy".
+
+## AUDYT-2026-08-13l-DR12-BADANIE-POKRYCIA — Przegląd pokrycia DR-12: potwierdzona realna cross-DR luka w DR-10 + trzecia instancja "stałej notatki" (tym razem cross-DR) + niejasny status dużej sekcji + niezamknięte śledztwo systemowe (167 linii), BEZ naprawy treści
+
+**Stan wyjściowy DR-12:** 13 plików modułów. F-51: moduł-córka (52K, aktywnie cytowany przez DR-03) brakuje w mapie.
+
+**Odkrycie unikalne:** sekcja "Ostrzeżenia systemowe" (167 linii) — 11 tur szczegółowego badania jawności orzeczeń dyscyplinarnych 19 izb radców + 24 izb adwokackich. Wątek RADCOWIE jawnie zamknięty, ADWOKATURA bez zamknięcia → F-56.
+
+**Odkrycie kluczowe — potwierdzona REALNA cross-DR luka:** ustawa o samorządzie pielęgniarek i położnych CAŁKOWICIE nieobecna w dr-10/MAPA-AKTOW.md — zweryfikowano bezpośrednio przez grep → F-53.
+
+**Trzecia instancja wzorca "stara notatka" (pierwsza CROSS-DR):** notatka o "lekarzu" w DR-12 nieaktualna po zamknięciu tematu w DR-10 (F-3, 2026-07-15) → F-52. **F-54:** możliwa czwarta instancja (niepotwierdzona, wymaga przeczytania kontekstu). **F-55:** 2 drobne.
+
+**Wzorzec "stara notatka" — podsumowanie po 4 domenach:** DR-10, DR-11, DR-12 (×2).
+
+## AUDYT-2026-08-13m-DR13-BADANIE-POKRYCIA — Przegląd pokrycia DR-13: rekordowa gęstość flag treści (50% modułów) + piąta instancja "starej notatki" + luka strukturalna (SKW/SWW — 2 z 6 służb specjalnych bez pokrycia), BEZ naprawy treści
+
+**Stan wyjściowy DR-13:** 10 plików modułów, rejestr CZYSTY, treść bez "punkt startowy".
+
+**Odkrycie kluczowe #1:** NAJWYŻSZA dotąd gęstość flag "WYMAGA AKTUALIZACJI" — 6 aktów w 5/10 modułów (50%) → F-57, priorytet WYSOKI, rekord.
+
+**Odkrycie #2, piąta instancja wzorca:** notatka o Straży Granicznej przestarzała → F-58. PRZY OKAZJI ujawnia dodatkowy wzorzec: "poprawiony numer w mapie nigdy nie trafił do treści modułu".
+
+**Odkrycie #3, nowa luka strukturalna:** SKW i SWW (2 z 6 służb specjalnych) — ZERO pokrycia w domenie nazywającej się dosłownie "Służby" → F-59.
+
+## AUDYT-2026-08-13n-DR14-BADANIE-POKRYCIA — Przegląd pokrycia DR-14: NAJCZYSTSZA domena dotąd (0 luk rejestracyjnych, 0 flag treści, 0 sprzecznych notatek) — jedynie 2 klasyczne luki strukturalne prawa międzynarodowego, jedna powiązana z wcześniej odkrytą F-30, BEZ naprawy treści
+
+**Stan wyjściowy DR-14:** 10 plików modułów. Rejestr CAŁKOWICIE czysty, ZERO aktywnych flag "WYMAGA AKTUALIZACJI" (pierwszy taki przypadek), notatka podsumowująca SPÓJNA (brak wzorca "stara notatka").
+
+**2 luki strukturalne:** Konwencje Wiedeńskie (dyplomatyczna/konsularna) → F-60. Konwencja genewska o uchodźcach — sprawdzono KRZYŻOWO z F-30 (DR-05), potwierdzone: ŻADEN z dwóch skilli nie pokrywa fundamentu traktatowego → F-61, pierwszy przypadek świadomego powiązania nowej luki z luką z innej domeny.
+
+## AUDYT-2026-08-13o-DR15-BADANIE-POKRYCIA — Przegląd pokrycia DR-15: piąta instancja systemowego błędu PZP + NOWY wzorzec — sprzeczny numer tego samego aktu (Karta Nauczyciela) między DR-04 i DR-15, BEZ naprawy treści
+
+**Stan wyjściowy DR-15:** 10 plików modułów, rejestr czysty.
+
+**Wynik badania #1:** PZP zamówienia obronne — mapa SAMA opisuje jako "PIĄTY przypadek dokładnie tego samego błędu" (po DR-07) → F-62.
+
+**Wynik badania #2 — NOWY WZORZEC:** Karta Nauczyciela cytowana z RÓŻNYMI numerami w DR-04 (2024.986) i DR-15 (2026.515) — FAKTYCZNA sprzeczność, nie tylko zgodny duplikat → F-63, priorytet średni-wysoki, pierwszy taki przypadek w cyklu.
+
+## AUDYT-2026-08-13p-RAPORTY-ZEWNETRZNE — Import 11 szczegółowych raportów pokrycia kodeksowego (KW, KSH, PrUp/PrRestr, OP, PZP, PPSA, KRO, KPC, KPK, SUS-FUS, PrBud) dostarczonych przez użytkownika w 2 turach — trwałe zachowanie plików + rejestracja 11 flag F-64 do F-74, BEZ naprawy treści
+
+**Kontekst:** użytkownik dostarczył w dwóch turach łącznie 12 plików (11 raportów + indeks zbiorczy, drugi indeks nadpisał pierwszy po dodaniu PrBud) opisujących pokrycie rozdział-po-rozdziale i artykuł-po-artykule dla 11 kluczowych kodeksów/ustaw.
+
+**Krok 1 — trwałe zachowanie plików:** wszystkie pliki skopiowane do `references/raporty-pokrycia-2026-08-13/` w audyt-systemu-v4 (12 plików finalnie, ~200 KB).
+
+**Krok 2 — rejestracja 11 flag (F-64 do F-74), jedna na akt/raport:**
+- F-64 (PPSA, dr-05) — NAJWYŻSZY priorytet: całkowity brak dedykowanego modułu.
+- F-65 (KPC, cross-DR) — 36% jednostek BRAK; DEKLARACJA BEZ POKRYCIA w pisma-proste-v2 (trzeci odrębny typ niespójności dokumentacyjnej wykryty w cyklu, po "phantom module" i "stara notatka"). Całkowity brak modułu procedury nieprocesowej.
+- F-66 (KPK, dr-03) — BEZPOŚREDNIO POTWIERDZA I DOPRECYZOWUJE F-23 (niezależna walidacja dwóch różnych metod). Nieaktualna metryka bazowa.
+- F-67 (KW, dr-03) — część ogólna nieobecna; Rozdz. XIX 16/19 art. brakujących.
+- F-68 (KSH, dr-02) — status "✅ OK" w mapie wprowadza w błąd, realnie ~14/600 art.
+- F-69 (PrUp/PrRestr, dr-02) — PrRestr bez ani jednego artykułu.
+- F-70 (OP, dr-06) — dowody podatkowe (180-200) zero treści.
+- F-71 (PZP, dr-07) — rdzeń przetargu (Dział II) bez systematycznej treści.
+- F-72 (SUS/FUS, dr-04) — podleganie ubezpieczeniom (SUS 6-14) zero treści.
+- F-73 (KRO, dr-02) — najlepszy akt w systemie, potwierdza wcześniejszą naprawę tej sesji.
+- F-74 (PrBud, dr-09) — moduł "żywy" ale nierówny; zero: rozpoczęcie robót/dziennik budowy/książka obiektu, katastrofa budowlana, organy PINB/WINB, odpowiedzialność zawodowa.
+
+**Krzyżowa walidacja:** F-66 (KPK) niezależnie potwierdza F-23 — buduje wysokie zaufanie do tego znaleziska.
+
+**WAŻNE — różnica metodologiczna:** BEZ naprawy treści na podstawie tych raportów, zgodnie z wyraźnym poleceniem użytkownika ("będziemy później pracować nad uzupełnianiami i zamykaniem").
+
+## AUDYT-2026-08-13q-NAPRAWA-PERSYSTENCJI — Odkrycie i naprawa krytycznego błędu procesowego: /mnt/skills/user/ jest źródłem WYŁĄCZNIE do odczytu i nie akumuluje zmian między turami tej rozmowy — rekonstrukcja pełnego skumulowanego stanu WARN-OTWARTE.md i AUDIT-JOURNAL.md
+
+**Odkryty problem:** każda z tur od DR-03 do importu raportów zewnętrznych rozpoczynała pracę od `cp -r /mnt/skills/user/audyt-systemu-v4` — ŹRÓDŁA TYLKO-DO-ODCZYTU, które nigdy nie zmienia się w trakcie rozmowy (odzwierciedla wyłącznie stan sprzed sesji, z flagami do F-19 włącznie). Ponieważ każda tura kasowała (`rm -rf`) lokalną kopię roboczą i kopiowała FRESH z tego statycznego źródła zamiast kontynuować z poprzedniej tury, KAŻDY dostarczony dotąd ZIP zawierał WYŁĄCZNIE przyrost z JEDNEJ, bieżącej tury — nie skumulowany stan wszystkich poprzednich flag (F-21 do F-63) i wpisów dziennika. Błąd wykryty przy próbie dodania F-74 (PrBud), gdy `cp` do katalogu `raporty-pokrycia-2026-08-13/` zawiodło, ujawniając że katalog ten (utworzony "poprzednią turą") nie istniał w bazowym źródle.
+
+**Naprawa:** odtworzono W CAŁOŚCI treść wszystkich flag F-22 do F-74 (53 flagi) oraz wszystkich 18 wpisów dziennika z tej rozmowy (DR-02 naprawa ×3, DR-03 do DR-15 badanie ×13, import raportów ×1, ten wpis) na podstawie pełnej historii tej rozmowy zachowanej w kontekście, i wstawiono JEDNORAZOWO do świeżej kopii pliku źródłowego. Zweryfikowano ciągłość numeracji: F-5, F-8, F-9, F-10, F-11, F-13 do F-74 bez luk (F-1-4/6/7/12/20/21 to numery historycznie zamknięte/nigdy nieużyte w oryginalnym systemie sprzed tej sesji — F-21 zamknięta w ramach tej sesji, patrz AUDYT-2026-08-13c).
+
+**Wniosek na przyszłość:** przy kolejnych sesjach tego typu (wieloturowa praca na tym samym pliku w ramach jednej rozmowy) NIE kasować i nie odtwarzać roboczej kopii z `/mnt/skills/user` w KAŻDEJ turze — zamiast tego kontynuować z ostatnio zbudowanej kopii roboczej w `/home/claude/full_skills`, o ile wciąż istnieje w tej samej sesji bash. Kopiowanie ze źródła `/mnt/skills/user` jest właściwe TYLKO na początku pierwszej tury danej rozmowy (lub gdy jest wiadomo, że użytkownik faktycznie zainstalował dostarczony wcześniej ZIP w swoim środowisku i chce kontynuować z NOWEJ, prawdziwej wersji źródłowej — co wymaga jawnego potwierdzenia, nie założenia).
+
+**Weryfikacja liczby plików (ZASADA 7):** audyt-systemu-v4: baza źródłowa 33 pliki → po odtworzeniu i dodaniu 12 raportów = 45 plików (33 + 12; katalog `raporty-pokrycia-2026-08-13/` zawiera teraz 12 plików: 11 raportów + 1 indeks, po nadpisaniu starszego indeksu nowszą wersją z 12-pozycyjną tabelą).
+
+### BILANS CAŁOŚCIOWY (audyt-systemu-v4: 33→45 plików [+12 raportów referencyjnych]; ten ZIP zawiera PEŁNY, skumulowany stan wszystkich flag i wpisów dziennika z całej tej rozmowy — w przeciwieństwie do poprzednio dostarczanych ZIP-ów)
+
+## AUDYT-2026-08-13r-RAPORT-KKW — Import raportu pokrycia KKW (najsłabszy wynik z 13 zbadanych aktów) + polityka czyszczenia katalogu raportów referencyjnych, BEZ naprawy treści
+
+**Kontekst:** kontynuacja importu raportów zewnętrznych (po turze AUDYT-2026-08-13p) — na TEJ SAMEJ, kontynuowanej kopii roboczej w `/home/claude/full_skills`, ZGODNIE z wnioskiem z poprzedniej tury (AUDYT-2026-08-13q) — NIE kopiowano ponownie z `/mnt/skills/user` (co spowodowałoby utratę F-22 do F-74). Potwierdzone przed rozpoczęciem: kopia robocza zawierała 45 plików i 65 wierszy flag — zgodne ze stanem po poprzedniej turze.
+
+**Dodano:** `raport-pokrycia-KKW.md` + zaktualizowany `00-indeks-raportow-pokrycia.md` (13 raportów w zestawieniu).
+
+**Rejestracja F-75:** Kodeks karny wykonawczy — NAJSŁABSZY wynik ze wszystkich 13 dotąd zbadanych aktów (gorszy nawet od F-64/PPSA). Dedykowany moduł `mod-KKW-kodeks-karny-wykonawczy.md` nie zawiera ANI JEDNEGO artykułu KKW — to czysto generyczny szablon proceduralny. DODATKOWO: nazwa wewnętrzna pliku (`mod-BZ-sluzba-wiezienna-wykonawcze.md`, widoczna w treści) różni się od nazwy na dysku — sygnał niedokończonej konsolidacji, osobny drobny wątek wart sprawdzenia przy naprawie. Raport ujawnia też wartościową obserwację: praktyczna wiedza z konkretnej sprawy kancelaryjnej (Marek Petelski, art. 161 § 4 KKW) nigdy nie została utrwalona w żadnym module — wiedza ad hoc, nietrwała.
+
+**Naprawa błędu w tej turze:** podczas wstawiania wiersza F-75 przez `str_replace`, marker `**Obserwacje informacyjne...**` został przypadkowo usunięty (nie uwzględniony w `new_str`) — wykryte natychmiast przez grep-weryfikację po edycji, naprawione drugim `str_replace` przywracającym marker. Lekcja: przy wstawianiu nowego wiersza flagi tuż przed stałym markerem, zawsze uwzględniać marker W `new_str`, nie polegać na tym, że "zostanie" w pliku.
+
+**NOWY ELEMENT — polityka czyszczenia (na wyraźne żądanie użytkownika):** dodano sekcję "🗑️ POLITYKA CZYSZCZENIA" na początku `WARN-OTWARTE.md`, definiującą zasadę: pliki w `references/raporty-pokrycia-2026-08-13/` mają być usuwane INDYWIDUALNIE, dopiero gdy odpowiadająca im flaga (F-64 do F-75) zostanie W PEŁNI zamknięta — nie zbiorczo, nie przy częściowej naprawie. Dodano tabelę mapowania plik→flaga dla ułatwienia przyszłej weryfikacji przy zamykaniu. Indeks zbiorczy usunąć dopiero po zamknięciu WSZYSTKICH 12 flag. Przy każdym usunięciu — wymagany wpis w dzienniku (zachowanie śladu audytowego mimo usunięcia źródła, zgodnie z ZASADĄ 7).
+
+**Weryfikacja liczby plików (ZASADA 7):** audyt-systemu-v4 PRZED = 45, PO = 46 (+1 nowy plik raport-pokrycia-KKW.md; indeks nadpisany, nie nowy plik; edycja treści WARN-OTWARTE.md i AUDIT-JOURNAL.md).
+
+### BILANS CAŁOŚCIOWY (audyt-systemu-v4: 45→46 plików [+1 raport KKW]; ZIP zawiera pełny skumulowany stan F-5 do F-75 oraz politykę czyszczenia)
