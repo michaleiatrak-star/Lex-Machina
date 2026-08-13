@@ -907,6 +907,92 @@ skup.io, adwokatmoszczynska.pl [marzec 2026, z cytatem orzeczenia SO],
 kancelariasledcza.pl, homly.to [kwiecień 2026]).
 ```
 
+⭐⭐⭐ ZAKAZ SAMOPOMOCY WŁAŚCICIELA — ART. 191 §1a KK (dodano
+2026-08-12, na żądanie użytkownika — KONTRAST do WYŻEJ opisanej
+sytuacji "dzikiego lokatora": TU chodzi o RYZYKO KARNE właściciela,
+KTÓRY próbuje wyeliminować NIECHCIANEGO lokatora POZA drogą sądową):
+
+```
+⭐⭐⭐ ISTOTA: ODRĘBNY typ przestępstwa ZMUSZANIA (art. 191 §1a KK) —
+  penalizuje SZCZEGÓLNE postaci UTRUDNIANIA innej osobie
+  KORZYSTANIA z zajmowanego LOKALU mieszkalnego, ukierunkowane NA
+  zmuszenie jej DO opuszczenia lokalu — KARA: pozbawienie WOLNOŚCI
+  DO 3 LAT
+
+⭐⭐ PRZYKŁADOWE ZACHOWANIA obejmowane przepisem (potwierdzone W
+  praktyce ORZECZNICZEJ, sygn. II K 292/18, IV Ka 332/20):
+  WYŁĄCZANIE prądu LUB ogrzewania, ODCINANIE dostępu DO wody,
+  DEMONTAŻ okien, ZAMUROWYWANIE wejścia, ⭐⭐⭐ WYMIANA ZAMKÓW BEZ
+  ZGODY lokatora — ⭐ WŁADZTWO faktyczne NAD mieszkaniem NALEŻY DO
+  najemcy PRZEZ CAŁY czas TRWANIA umowy — właściciel NIE MA
+  nieograniczonej SWOBODY, MIMO że TO on JEST formalnym właścicielem
+
+⭐ POWIĄZANY, ODRĘBNY przepis — ART. 193 KK (naruszenie MIRU
+  domowego): kara DO 1 ROKU — obejmuje WTARGNIĘCIE do CUDZEGO
+  mieszkania ALBO niezastosowanie SIĘ do żądania OPUSZCZENIA go
+  przez OSOBĘ uprawnioną (np. GDY samotny lokator SAM wzywa POLICJĘ
+  na WŁAŚCICIELA, który WSZEDŁ bez zgody)
+
+⭐⭐⭐ ORZECZNICTWO SN — GENEZA przepisu: postanowienie SN Z 22.11.2000
+  r. (V KKN 302/98): "W sytuacji, GDY istnieją odpowiednie PROCEDURY
+  prawne DLA wykonania wyroku EKSMISYJNEGO — NIE MOŻNA uznać za
+  dozwoloną SAMOPOMOC samowolnego OPRÓŻNIENIA lokalu PRZEZ
+  właściciela, wywozu RZECZY na wysypisko I ich zniszczenia" — TA
+  linia orzecznicza LEŻAŁA U PODSTAW wprowadzenia art. 191 §1a
+
+⭐⭐⭐ ⚠️ KONTROWERSJA KONSTYTUCYJNA — CZY DOTYCZY RÓWNIEŻ "DZIKIEGO
+  LOKATORA": sąd W Hajnówce SKIEROWAŁ pytanie PRAWNE do TK (sprawa
+  P 17/17) — CZY art. 191 §1a KK W ZAKRESIE, W JAKIM PENALIZUJE
+  zachowanie WŁAŚCICIELA TAKŻE wobec OSOBY zajmującej lokal BEZ
+  jakiegokolwiek TYTUŁU prawnego — JEST zgodny Z art. 64 ust. 1-2
+  Konstytucji (WOLNOŚĆ dysponowania MIENIEM) — ⭐ POKAZUJE to, że
+  NAWET WOBEC osoby zajmującej mieszkanie CAŁKOWICIE bezprawnie
+  (squatting) — WŁAŚCICIEL WCIĄŻ RYZYKUJE odpowiedzialność karną Z
+  TEGO przepisu, JEŚLI podejmie SAMOPOMOC — ⚠️ WYNIK sprawy PRZED TK
+  NIE zweryfikowany W TEJ transzy, WYMAGA sprawdzenia AKTUALNEGO
+  stanu
+
+⭐ PRAKTYCZNA REKOMENDACJA: JEDYNA bezpieczna ŚCIEŻKA to
+  wypowiedzenie UMOWY → pozew O eksmisję → egzekucja PRZEZ
+  komornika — NIEZALEŻNIE OD tego, JAK bardzo UCIĄŻLIWY jest
+  lokator
+
+Potwierdzone w 6+ zgodnych źródeł, w tym akademickich (czpk.pl,
+artykuł krytyczny M. Jakubca), karh.pl [grudzień 2020, Adwokat
+Kraków], specprawnik.pl, ngomazury.pl [styczeń 2026, Z cytowanymi
+sygnaturami], oraz BEZPOŚREDNIO dokumenty Prokuratora Generalnego W
+sprawie PRZED TK (trybunal.gov.pl, Rząd 1).
+```
+
+⭐⭐ SOLIDARNA ODPOWIEDZIALNOŚĆ DOMOWNIKÓW — ART. 6881 KC (dodano
+2026-08-12, na żądanie użytkownika):
+
+```
+⭐⭐ ZASADA: ZA zapłatę CZYNSZU z tytułu NAJMU lokalu ORAZ innych
+  NALEŻNYCH opłat ODPOWIADAJĄ SOLIDARNIE Z najemcą — WSZYSTKIE
+  osoby PEŁNOLETNIE STALE zamieszkujące Z nim W lokalu — NIEZALEŻNIE
+  od TEGO, czy SĄ stroną UMOWY najmu (np. PARTNER życiowy najemcy,
+  KTÓRY wprowadził SIĘ bez formalnego WPISANIA do umowy)
+
+⭐ OGRANICZENIE zakresu ODPOWIEDZIALNOŚCI: dotyczy WYŁĄCZNIE
+  należności ZA OKRES ich FAKTYCZNEGO, stałego ZAMIESZKIWANIA — NIE
+  za CAŁY okres trwania UMOWY najmu
+
+⚠️ SYGNALIZOWANA ZMIANA (⚠️ status LEGISLACYJNY NIE w pełni
+  zweryfikowany W tej transzy, WYMAGA sprawdzenia AKTUALNOŚCI):
+  ŹRÓDŁA wskazują NA planowaną/PROPONOWANĄ zmianę, KTÓRA MIAŁABY
+  WYŁĄCZYĆ Z tej odpowiedzialności ZSTĘPNYCH (dzieci) najemcy,
+  KTÓRZY: kontynuują NAUKĘ, LUB mają przewlekłą CHOROBĘ/
+  niepełnosprawność — TE osoby NIE odpowiadałyby ZA zobowiązania Z
+  najmu, Z momentem OSIĄGNIĘCIA samodzielności EKONOMICZNEJ — BEZ
+  obowiązku zapłaty ZA WCZEŚNIEJSZY okres (TYLKO zobowiązania
+  PRZYSZŁE) — SPRAWDŹ, CZY ta ZMIANA już WESZŁA w ŻYCIE przed
+  cytowaniem W konkretnej SPRAWIE
+
+Potwierdzone w 4+ zgodnych źródłach, w tym kodekscywilny.pl (Z
+dosłownym cytatem art. 6881).
+```
+
 ZASIEDZENIE (art. 172 KC) — ⚠️ ROZBUDOWANE 2026-07-18, PEŁNA TREŚĆ
 PRZENIESIONA do dedykowanego modułu:
   → view /mnt/skills/user/dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-rzeczy-znalezione-zasiedzenie.md

@@ -74,6 +74,103 @@ NIE duplikuje tych technik, tylko dodaje specyfikę dziedzinową spraw rozwodowy
 
 ---
 
+## ⭐⭐⭐ PRAWA I OBOWIĄZKI MAŁŻONKÓW (art. 23-30 KRO) — dodano
+2026-08-12, na żądanie użytkownika — dotąd CAŁKOWICIE nieobecny,
+FUNDAMENTALNY dział Kodeksu (Dział II Tytułu I)
+
+```
+⭐⭐⭐ ART. 23 — CZTERY PODSTAWOWE OBOWIĄZKI (dosłowny tekst,
+  potwierdzony BEZPOŚREDNIO OpenLEX, aktualny t.j. Dz.U.2026.236):
+  "Małżonkowie MAJĄ równe PRAWA i obowiązki W małżeństwie. SĄ
+  obowiązani DO wspólnego POŻYCIA, do WZAJEMNEJ pomocy i
+  WIERNOŚCI oraz DO współdziałania DLA dobra RODZINY, którą
+  PRZEZ swój związek ZAŁOŻYLI" — CZTERY obowiązki: (1) WSPÓLNE
+  pożycie, (2) WZAJEMNA pomoc, (3) WIERNOŚĆ, (4) WSPÓŁDZIAŁANIE dla
+  dobra RODZINY
+
+⭐ ART. 24 — WSPÓLNE rozstrzyganie: małżonkowie ROZSTRZYGAJĄ WSPÓLNIE
+  o ISTOTNYCH sprawach RODZINY — W BRAKU porozumienia — KAŻDY Z
+  nich MOŻE zwrócić SIĘ o rozstrzygnięcie DO sądu
+
+⭐⭐ ART. 25 — NAZWISKO PO ŚLUBIE:
+  → §1: O nazwisku, KTÓRE każdy Z małżonków BĘDZIE nosił PO
+    zawarciu małżeństwa, DECYDUJE JEGO oświadczenie ZŁOŻONE przed
+    kierownikiem URZĘDU stanu CYWILNEGO — MOŻE być złożone
+    BEZPOŚREDNIO po ZAWARCIU małżeństwa ALBO PRZED sporządzeniem
+    zaświadczenia O braku okoliczności WYŁĄCZAJĄCYCH zawarcie
+    małżeństwa
+  → §2: małżonkowie MOGĄ nosić WSPÓLNE nazwisko BĘDĄCE
+    dotychczasowym nazwiskiem JEDNEGO z nich
+  → ⭐ §3 — WAŻNY, DOMYŚLNY skutek: W RAZIE niezłożenia OŚWIADCZENIA
+    w sprawie NAZWISKA — KAŻDY z małżonków ZACHOWUJE swoje
+    DOTYCHCZASOWE nazwisko (BRAK działania = ZACHOWANIE
+    dotychczasowych, ODRĘBNYCH nazwisk, NIE automatyczne przyjęcie
+    wspólnego)
+
+⭐ ART. 26 — ⚠️ UCHYLONY (HISTORYCZNY, PUSTY przepis — WARTO
+  wiedzieć PRZY analizie STARSZYCH pism/orzeczeń odwołujących SIĘ
+  do NUMERACJI artykułów)
+
+⭐⭐ ART. 27-29 — OBOWIĄZEK PRZYCZYNIANIA SIĘ do potrzeb RODZINY (⭐
+  POWIĄZANIE Z już ISTNIEJĄCĄ sekcją "ALIMENTY MIĘDZY MAŁŻONKAMI —
+  ART. 27 VS ART. 60 KRO" NIŻEJ w TYM module):
+  → ART. 27: OBOJE małżonkowie OBOWIĄZANI są, KAŻDY WEDŁUG swych
+    SIŁ oraz MOŻLIWOŚCI zarobkowych/majątkowych, PRZYCZYNIAĆ się
+    DO zaspokajania POTRZEB rodziny — ⭐ ZADOŚĆUCZYNIENIE temu
+    obowiązkowi MOŻE polegać RÓWNIEŻ, W CAŁOŚCI lub CZĘŚCI, NA
+    osobistych STARANIACH o wychowanie DZIECI i NA pracy WE
+    wspólnym gospodarstwie DOMOWYM (⭐ czyli PRACA w DOMU/opieka NAD
+    dziećmi MA WARTOŚĆ prawnie RÓWNOWAŻNĄ wkładowi FINANSOWEMU)
+  → ART. 28 §1: SANKCJA za niespełnianie: JEŻELI jeden Z małżonków
+    POZOSTAJĄCYCH we WSPÓLNYM pożyciu NIE spełnia CIĄŻĄCEGO na NIM
+    obowiązku PRZYCZYNIANIA się do ZASPOKAJANIA potrzeb rodziny —
+    SĄD MOŻE nakazać, ABY wynagrodzenie ZA pracę albo INNE
+    należności PRZYPADAJĄCE mu OD osób trzecich BYŁY, W CAŁOŚCI lub
+    części, WYPŁACANE do RĄK drugiego małżonka
+  → ART. 29: PRZY przemijającej PRZESZKODZIE dotyczącej JEDNEGO z
+    małżonków (POZOSTAJĄCYCH we wspólnym POŻYCIU) — DRUGI małżonek
+    MOŻE za NIEGO działać W sprawach zwykłego ZARZĄDU — W
+    SZCZEGÓLNOŚCI może BEZ pełnomocnictwa (np. ODEBRAĆ przypadające
+    mu ŚWIADCZENIA, zarządzać JEGO majątkiem)
+
+⭐⭐⭐ ⚡ BARDZO ŚWIEŻY, KONTROWERSYJNY WYROK ETPC — WYMIAR PRAW
+  CZŁOWIEKA obowiązku MAŁŻEŃSKIEGO: wyrok ETPC z 23.01.2025 R.,
+  skarga 13805/21, SPRAWA H.W. przeciwko FRANCJI — TRYBUNAŁ uznał,
+  że ORZECZENIE rozwodu Z WYŁĄCZNEJ winy ŻONY, ponieważ NIE
+  CHCIAŁA spełniać "powinności MAŁŻEŃSKIEJ" (współżycia
+  intymnego) — NARUSZA jej PRAWO do poszanowania ŻYCIA rodzinnego
+  (art. 8 EKPC) — ⭐ TO POKAZUJE aktualne, MIĘDZYNARODOWE
+  napięcie MIĘDZY tradycyjnym pojęciem "wzajemnej POMOCY"/
+  "wspólnego pożycia" Z art. 23 KRO A WSPÓŁCZESNYM standardem PRAW
+  człowieka — ⚠️ TO orzeczenie DOTYCZY prawa FRANCUSKIEGO, NIE
+  polskiego, ALE MA znaczenie INTERPRETACYJNE dla POLSKICH sądów
+  (ETPC — wykładnia EKPC, KTÓRĄ Polska RATYFIKOWAŁA) — SZCZEGÓLNIE
+  przy OCENIE "winy" w ROZWODZIE Z powodu ODMOWY współżycia (patrz
+  sekcja "ORZEKANIE O WINIE" NIŻEJ)
+
+⭐ POWIĄZANY WYROK SN: wyrok SN z 11.12.2018 R. — cytowany W
+  DOKTRYNIE pod ROBOCZYM tytułem "Świadoma PRAW i obowiązków
+  wynikających Z zawarcia MAŁŻEŃSTWA wiem, że NIE muszę ICH
+  respektować" — konsekwencje TAKIEJ postawy DLA oceny WINY w
+  rozkładzie POŻYCIA — ⚠️ DOKŁADNA sygnatura i PEŁNA treść
+  wyroku NIE zweryfikowane W tej transzy, PUNKT startowy DO
+  dalszego badania JEŚLI istotne W konkretnej sprawie
+
+⭐ ZANIEDBYWANIE obowiązków MAŁŻEŃSKICH jako WYZNACZNIK winy: W
+  DOKTRYNIE i orzecznictwie — zaniedbywanie OBOWIĄZKÓW z art. 23
+  (W TYM opuszczenie MAŁŻONKA) — TRAKTOWANE jako WYZNACZNIK winy W
+  rozkładzie POŻYCIA — BEZPOŚREDNIE powiązanie Z sekcją "ORZEKANIE
+  O WINIE" niżej W tym MODULE
+
+Potwierdzone w 8+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
+tekst art. 23-29 (OpenLEX/sip.lex.pl [aktualny t.j. Dz.U.2026.236],
+isap.sejm.gov.pl, e-prawnik.pl [×2], przepisy.gofin.pl), ORAZ
+publikacja akademicka (cejsh.icm.edu.pl, Roczniki Nauk Prawnych,
+analiza obowiązku wzajemnej pomocy) i wpia.uwm.edu.pl.
+```
+
+---
+
 ## ROZWÓD — QUICK CHECK
 
 ### Przesłanki (art. 56 KRO — weryfikuj w ISAP)
@@ -85,6 +182,93 @@ NEGATYWNE (stoi na przeszkodzie):
   □ Wskutek rozwodu ucierpi dobro małoletnich dzieci
   □ Żąda rozwodu małżonek wyłącznie winny (zasada clean hands) —
     chyba że drugi małżonek wyraził zgodę LUB odmowa jest sprzeczna z ZWS
+```
+
+### ⭐⭐⭐ PRZESŁANKI NEGATYWNE — ROZBUDOWANE (dodano 2026-08-12, na
+żądanie użytkownika — "quick check" wyżej BYŁ zbyt SKRÓTOWY, w tym
+brak TRZECIEJ, ODRĘBNEJ przesłanki sprzeczności Z ZWS)
+
+```
+⭐⭐⭐ TRZY, SAMOISTNE przesłanki NEGATYWNE (art. 56 §2-3 KRO) —
+  WYKLUCZAJĄ orzeczenie ROZWODU MIMO spełnienia POZYTYWNEJ przesłanki
+  Z §1 (zupełny I trwały ROZKŁAD pożycia):
+
+  1) ⭐⭐⭐ DOBRO WSPÓLNYCH małoletnich DZIECI ucierpiałoby WSKUTEK
+     rozwodu (art. 56 §2, PIERWSZA część) — SĄD bada: WIEK dzieci,
+     ich DOTYCHCZASOWE stosunki Z rodzicami, stan ZDROWIA, stopień
+     WRAŻLIWOŚCI — ⭐ PARADOKSALNY, WAŻNY niuans: sąd BADA, CZY
+     ISTNIEJĄCY MIĘDZY małżonkami stan NAPIĘCIA już WPŁYWA
+     NIEKORZYSTNIE na dzieci W TAKIM stopniu, że WZGLĄD na ICH
+     dobro NIE MÓGŁBY uzasadniać ODMOWY rozwodu — CZYLI: GDY dzieci
+     JUŻ CIERPIĄ Z powodu TOKSYCZNEGO konfliktu rodziców, TO MOŻE
+     PRZEMAWIAĆ ZA rozwodem, NIE przeciw NIEMU
+
+  2) ⭐⭐⭐ SPRZECZNOŚĆ Z ZASADAMI współżycia SPOŁECZNEGO — Z INNYCH
+     względów NIŻ dobro DZIECI (art. 56 §2, DRUGA część, "IN FINE")
+     — ⭐⭐⭐ KLASYCZNA, autorytatywna WYKŁADNIA — uchwała SN (7
+     sędziów) sygn. III CZP 70/66: "PRZEPIS TEN ma NA uwadze
+     sytuacje SZCZEGÓLNE, w KTÓRYCH — mimo CAŁKOWITEJ i
+     NIEODWRACALNEJ martwoty ZWIĄZKU małżeńskiego oraz MIMO braku
+     innych PRZESŁANEK negatywnych — zasady WSPÓŁŻYCIA społecznego
+     PRZEMAWIAJĄ przeciwko ROZWODOWI" — DWIE GŁÓWNE KATEGORIE
+     sytuacji:
+     a) RAŻĄCA KRZYWDA małżonka SPRZECIWIAJĄCEGO się rozwodowi —
+        ⭐ KLASYCZNY, CYTOWANY W ORZECZNICTWIE przykład: PRÓBA
+        opuszczenia WSPÓŁMAŁŻONKA W trakcie JEGO ciężkiej,
+        NIEULECZALNEJ choroby
+     b) POWAŻNE względy SPOŁECZNO-wychowawcze — NIE POZWALAJĄCE,
+        by orzeczenie ROZWODU "SANKCJONOWAŁO stan FAKTYCZNY
+        powstały NA tle złego TRAKTOWANIA i złośliwego STOSUNKU do
+        współmałżonka LUB dzieci ALBO innych PRZEJAWÓW lekceważenia
+        instytucji MAŁŻEŃSTWA i rodziny LUB obowiązków rodzinnych"
+     → ⭐⭐ WAŻNE OGRANICZENIE tej przesłanki — SN: sprzeczność Z
+       ZASADY "Z REGUŁY NIE ZACHODZI", JEŻELI małżonek
+       SPRZECIWIAJĄCY się rozwodowi PONOSI wyłączną WINĘ rozkładu
+       ALBO, PRZY wspólnej winie, BRAK podstaw DO przyjęcia, że
+       wina MAŁŻONKA żądającego ROZWODU jest ZNACZNIE większa (⭐
+       CZYLI: NIE MOŻNA skutecznie POWOŁYWAĆ się na TĘ przesłankę,
+       BĘDĄC SAMEMU głównym WINOWAJCĄ rozkładu)
+     → ⭐ PRZYKŁAD Z PRAKTYKI (nieuleczalna CHOROBA wynikła Z
+       NAŁOGU): sąd MOŻE uznać, że TAKA "choroba" TO uzależnienie,
+       WYNIKŁE Z winy SAMEGO pozwanego, KTÓRY nie WYKAZAŁ minimum
+       silnej WOLI, by PODDAĆ się leczeniu, ANI minimum
+       ODPOWIEDZIALNOŚCI za losy RODZINY — W TAKIM przypadku
+       PRZESŁANKA "rażącej krzywdy" NIE chroni GO przed rozwodem
+
+  3) ⭐⭐⭐ ŻĄDANIE rozwodu PRZEZ małżonka WYŁĄCZNIE winnego rozkładu
+     (art. 56 §3, "ZASADA CLEAN HANDS") — ⭐⭐⭐ WAŻNE: TA przesłanka
+     NIE JEST bezwzględna — USTAWA przewiduje OD niej DWA wyjątki:
+     a) DRUGI małżonek WYRAZI zgodę NA rozwód
+     b) ODMOWA jego ZGODY na ROZWÓD jest W danych OKOLICZNOŚCIACH
+        SPRZECZNA z zasadami WSPÓŁŻYCIA społecznego (⭐ TO ODRĘBNA
+        "sprzeczność Z ZWS" NIŻ ta z PUNKTU 2 wyżej — TU chodzi O
+        NIEROZSĄDNOŚĆ/nieuzasadnioną UPARTOŚĆ NIEWINNEGO małżonka W
+        odmowie zgody, NIE o krzywdę SAMEGO odmawiającego)
+
+⭐⭐⭐ WYMÓG CZASOWY dla ZGODY (pkt 3a wyżej): zgoda NA rozwód MUSI
+  ISTNIEĆ W MOMENCIE wyrokowania — NIE WYSTARCZA wyrażenie ZGODY W
+  toku PROCESU, jeśli NASTĘPNIE została COFNIĘTA — zgoda MOŻE być
+  COFNIĘTA W KAŻDEJ chwili PRZED zamknięciem rozprawy, W TYM RÓWNIEŻ
+  W II instancji — POWINNA być WYRAŹNA oraz WSKAZUJĄCA swobodne
+  wyrażenie WOLI pozwanego
+
+⭐ DODATKOWY kontekst INTERPRETACYJNY — zasada HUMANITARYZMU: PRZY
+  ocenie WSZYSTKICH powyższych przesłanek — SĄD uwzględnia RÓWNIEŻ
+  czas TRWANIA małżeństwa, sytuację OBOJGA małżonków, ICH wiek, stan
+  ZDROWIA, zdolność DO zaspokajania POTRZEB osobistych i WSZELKIE
+  inne OKOLICZNOŚCI mogące mieć ZNACZENIE
+
+⚠️ POJĘCIE "dobra DZIECKA" NIE MA legalnej DEFINICJI — NA jego treść
+  SKŁADAJĄ się liczne UREGULOWANIA z Konwencji, KONSTYTUCJI i KRO —
+  ISTOTNĄ rolę W określeniu ODGRYWA doktryna I orzecznictwo SĄDÓW —
+  PRZYWOŁANE orzecznictwo: wyrok SA W Poznaniu z 12.02.2020, sygn.
+  I ACa 230/19
+
+Potwierdzone w 8+ zgodnych źródeł, w tym CYTOWANA uchwała SN (7
+sędziów) III CZP 70/66, wyrok SA w Poznaniu I ACa 230/19,
+pomoc-prawna-rodzinie.pl [czerwiec 2024], adwokatmdp.pl [×2],
+plazaglab.pl [czerwiec 2025], kancelariapodgorska.pl, separacja.pl,
+adwokatszewczak.pl [październik 2023].
 ```
 
 ### Orzekanie o winie
@@ -200,6 +384,90 @@ Majątek osobisty (art. 33 KRO — weryfikuj w ISAP):
 
 Termin na podział: brak — można żądać w każdym czasie po ustaniu wspólności
   ⚠️ Nieruchomości → podział w formie aktu notarialnego lub przez sąd
+```
+
+### ⭐⭐⭐ GOSPODARSTWO ROLNE W PODZIALE MAJĄTKU (art. 213-218 KC) —
+dodano 2026-08-12, na żądanie użytkownika — dotąd CAŁKOWICIE
+nieobecny, SPECJALISTYCZNY temat, mimo SUROWSZYCH zasad niż zwykły
+podział majątku
+
+```
+⭐ DEFINICJA gospodarstwa ROLNEGO (art. 55³ KC): grunty ROLNE wraz
+  Z gruntami LEŚNYMI, budynkami LUB ich częściami, URZĄDZENIAMI i
+  INWENTARZEM, JEŻELI stanowią LUB mogą stanowić ZORGANIZOWANĄ
+  całość GOSPODARCZĄ, oraz prawami ZWIĄZANYMI z prowadzeniem
+  gospodarstwa — ⭐ próg Z ustawy O kształtowaniu ustroju ROLNEGO
+  (UKUR): powierzchnia NIERUCHOMOŚCI rolnej (łączna) NIE mniejsza
+  niż **1 HA**
+
+⭐⭐⭐ KLUCZOWE, PRAKTYCZNE ustalenie — WYJĄTEK od wymogu "ROLNIKA
+  INDYWIDUALNEGO": nabycie W WYNIKU podziału majątku WSPÓLNEGO po
+  ustaniu MAŁŻEŃSTWA jest WYŁĄCZONE spod PODSTAWOWEGO wymogu UKUR,
+  ABY nabywcą BYŁ rolnik INDYWIDUALNY — ⚠️ TO NIE OZNACZA jednak, że
+  MOŻNA pominąć POZOSTAŁE regulacje — obowiązki ZWIĄZANE z
+  prowadzeniem gospodarstwa, OGRANICZENIA zbycia LUB oddania w
+  posiadanie, ORAZ ewentualne UPRAWNIENIA KOWR (Krajowego Ośrodka
+  Wsparcia Rolnictwa) ZALEŻĄ od sposobu PODZIAŁU, historii
+  WŁASNOŚCI i planowanych DALSZYCH czynności — SPRAWDŹ te
+  KWESTIE dla KONKRETNYCH numerów DZIAŁEK przed UGODĄ
+
+⭐⭐⭐ CEL przepisów art. 213-218 KC — SUROWSZE zasady niż zwykły
+  PODZIAŁ: NIEDOPUSZCZENIE do POWSTANIA gospodarstw NIEZDOLNYCH do
+  samodzielnej PRODUKCJI towarowej — ustawodawca CHRONI zdolność
+  PRODUKCYJNĄ, NIE tylko interesy WSPÓŁWŁAŚCICIELI
+
+⭐⭐⭐ MECHANIZM PRZYZNANIA (art. 213):
+  §1: JEŻELI zniesienie WSPÓŁWŁASNOŚCI przez PODZIAŁ MIĘDZY
+    współwłaścicieli byłoby SPRZECZNE z zasadami PRAWIDŁOWEJ
+    gospodarki rolnej (⭐ OCENA dokonywana PRZEZ biegłego Z zakresu
+    rolnictwa) — sąd PRZYZNA to gospodarstwo TEMU współwłaścicielowi,
+    NA którego wyrażą ZGODĘ wszyscy WSPÓŁWŁAŚCICIELE
+  → W BRAKU zgody wszystkich: sąd PRZYZNA gospodarstwo TEMU, KTÓRY
+    JE prowadzi LUB stale W nim pracuje, CHYBA że interes
+    SPOŁECZNO-gospodarczy przemawia ZA wyborem INNEGO współwłaściciela
+  → GDY powyższe WARUNKI spełnia WIĘCEJ niż JEDEN współwłaściciel
+    LUB nie SPEŁNIA ich ŻADEN — sąd PRZYZNA gospodarstwo TEMU, kto
+    DAJE najlepszą GWARANCJĘ jego NALEŻYTEGO prowadzenia
+  → MOŻLIWE RÓWNIEŻ zniesienie WSPÓŁWŁASNOŚCI przez SPRZEDAŻ
+    gospodarstwa (GDY żadne Z powyższych rozwiązań NIE jest możliwe)
+
+⭐⭐⭐ SPŁATY — SZCZEGÓLNY MECHANIZM, ALE Z WAŻNYM WYJĄTKIEM DLA
+  MAŁŻONKÓW: sąd MOŻE OBNIŻYĆ spłaty NA rzecz pozostałych
+  współwłaścicieli LUB rozłożyć JE na RATY — łączny OKRES nie MOŻE
+  przekroczyć **10 LAT** — ⚠️⚠️ WAŻNY WYJĄTEK: USTAWODAWCA WYŁĄCZYŁ
+  zastosowanie TEGO przepisu O obniżaniu spłat DO spłat NA rzecz
+  MAŁŻONKA, GDY gospodarstwo NALEŻAŁO do MAJĄTKU wspólnego — ⭐
+  OZNACZA to, że TEN korzystny MECHANIZM (obniżenie spłaty) NIE
+  działa PRZY podziale MAJĄTKU wspólnego MIĘDZY małżonkami — DZIAŁA
+  wyłącznie PRZY "zwykłej" współwłasności (np. MIĘDZY rodzeństwem
+  po SPADKU)
+
+⭐ ZAMIESZKIWANIE po ZNIESIENIU: współwłaściciele, KTÓRZY nie
+  OTRZYMALI gospodarstwa (LUB jego części), a DO chwili zniesienia
+  WSPÓŁWŁASNOŚCI w NIM zamieszkiwali — ZACHOWUJĄ uprawnienie DO
+  dalszego zamieszkiwania — OGRANICZONE czasowo DO **5 LAT** (DLA
+  małoletniego — TERMIN liczony OD ukończenia 18 roku ŻYCIA) —
+  OGRANICZENIE terminem NIE dotyczy współwłaścicieli TRWALE
+  niezdolnych DO pracy (DLA nich — BEZ limitu czasowego)
+
+⭐ FORMY zniesienia współwłasności GOSPODARSTWA: podział RZECZY
+  wspólnej, PRZYZNANIE rzeczy JEDNEMU współwłaścicielowi, SPRZEDAŻ
+  rzeczy wspólnej — TRYB UMOWNY (u NOTARIUSZA) MOŻLIWY TYLKO gdy
+  WSZYSCY współwłaściciele SĄ zgodni CO do sposobu podziału I
+  spłat, Z UWZGLĘDNIENIEM ograniczeń UKUR — CZĘSTO KONIECZNA zgoda
+  Dyrektora GENERALNEGO KOWR na NABYCIE ziemi PRZEZ osobę
+  niebędącą ROLNIKIEM
+
+⭐ BRAK PRZEDAWNIENIA: roszczenie O zniesienie współwłasności NIE
+  ulega PRZEDAWNIENIU — analogicznie WNIOSEK o podział MAJĄTKU
+  wspólnego można ZŁOŻYĆ nawet PO wielu latach OD rozwodu
+
+Potwierdzone w 7+ zgodnych, BARDZO aktualnych źródeł (odpowiedziprawne.pl
+[sprzed miesiąca, Z NAJDOKŁADNIEJSZYM omówieniem wyjątku dla
+małżonków], adwokat-wroclaw.biz.pl [grudzień 2025], niciejewski.pl
+[sierpień 2024, Z dosłownym cytatem art. 553 KC], BEZPOŚREDNIO
+dosłowny tekst art. 213 (arslege.pl, standardyprawa.pl),
+podzial.rodzinne.com.pl).
 ```
 
 ---
@@ -492,6 +760,95 @@ Kontakty (art. 113 i n. KRO — weryfikuj w ISAP):
   → sankcja za utrudnianie kontaktów: zagrożenie zapłatą sumy pieniężnej
 ```
 
+### ⭐⭐⭐ TRZY POZIOMY INGERENCJI — ROZBUDOWANE (dodano 2026-08-12,
+na żądanie użytkownika — dotąd tylko OGÓLNIKOWA wzmianka, BEZ
+rozróżnienia PODSTAW i PRAKTYCZNYCH konsekwencji)
+
+```
+⭐⭐⭐ DWA ODRĘBNE TRYBY ograniczenia — RÓŻNA PRZYCZYNA (⚠️ ŁATWO
+  pomylić — OBA prowadzą DO "ograniczenia", ALE Z zupełnie INNEGO
+  powodu):
+  → ART. 107 KRO — RODZICE ŻYJĄCY w ROZŁĄCZENIU (rozwód,
+    separacja, LUB po PROSTU nie mieszkają RAZEM): sąd MOŻE
+    określić SPOSÓB wykonywania władzy — ⭐ PREFERUJE zgodne
+    POROZUMIENIE rodziców — §1: sąd POZOSTAWIA władzę OBOJGU, JEŻELI
+    przedstawili ZGODNE z dobrem DZIECKA porozumienie O wykonywaniu
+    władzy — §2: W BRAKU porozumienia — sąd, UWZGLĘDNIAJĄC prawo
+    DZIECKA do wychowania PRZEZ oboje rodziców, ROZSTRZYGA o
+    sposobie WSPÓLNEGO wykonywania — ⭐ TU NIE chodzi O zagrożenie
+    dobra DZIECKA, TYLKO o PRAKTYCZNE uregulowanie opieki PRZY
+    ROZDZIELONYCH rodzicach
+  → ART. 109 KRO — ZAGROŻENIE dobra DZIECKA: sąd wydaje
+    ZARZĄDZENIA opiekuńcze — MOŻE: zobowiązać rodzica DO
+    określonego postępowania, SKIEROWAĆ dziecko do PLACÓWKI,
+    ustanowić KURATORA rodzinnego nadzorującego wykonywanie WŁADZY,
+    poddać niektóre DECYZJE rodzica zgodzie SĄDU, ⭐ UMIEŚCIĆ
+    dziecko W SYSTEMIE pieczy ZASTĘPCZEJ (art. 109 §2 pkt 5 —
+    POWIĄZANIE z mod-piecza-zastepcza-rodzina-zastepcza.md)
+
+⭐⭐⭐ TYPOWA ŚCIEŻKA ESKALACJI (TRZY poziomy, Z praktyki):
+  1) OGRANICZENIE (art. 109) — ODPOWIEDNIE, gdy PROBLEM jest
+     ROZWIĄZYWALNY (np. alkoholizm — PO terapii może USTĄPIĆ),
+     rodzic WYKAZUJE gotowość do ZMIANY, istnieje SZANSA na poprawę
+     przy WSPARCIU (kurator, terapeuta, ASYSTENT)
+  2) ZAWIESZENIE (art. 110) — rozwiązanie TYMCZASOWE, stosowane PRZY
+     CZASOWEJ przeszkodzie (np. CHOROBA, długotrwała NIEOBECNOŚĆ) —
+     ⭐ władza PRZYWRACANA AUTOMATYCZNIE, gdy przeszkoda USTANIE —
+     rodzic ZACHOWUJE prawo UDZIAŁU w KLUCZOWYCH decyzjach
+     (leczenie, szkoła, wyjazd ZA granicę), ALE NIE sprawuje
+     bieżącej, CODZIENNEJ opieki — decyzje DNIA codziennego
+     podejmuje RODZIC wychowujący dziecko SAMODZIELNIE
+  3) POZBAWIENIE (art. 111) — ŚRODEK OSTATECZNY, KONIECZNY gdy: (a)
+     ograniczenie OKAZAŁO się bezskuteczne (MIMO pomocy BRAK
+     poprawy), (b) zagrożenie JEST skrajne I natychmiastowe
+     (CIĘŻKA przemoc, wykorzystywanie SEKSUALNE), (c) rodzic
+     TRWALE nie INTERESUJE się dzieckiem, (d) ISTNIEJE trwała
+     przeszkoda W wykonywaniu władzy (DŁUGOLETNIE więzienie, CIĘŻKA
+     choroba PSYCHICZNA) — ⭐⭐ POZBAWIENIE OTWIERA drogę DO adopcji
+     dziecka BEZ zgody TEGO rodzica
+
+⭐⭐⭐ TYPOWA ESKALACJA W PRAKTYCE: sąd ORZEKA ograniczenie (nadzór
+  KURATORA + terapia) → rodzic NIE realizuje zobowiązań, KURATOR
+  raportuje BRAK poprawy → sąd ZAOSTRZA ograniczenie (umieszczenie
+  dziecka W pieczy zastępczej) → rodzic NADAL nie reaguje → sąd
+  POZBAWIA władzy rodzicielskiej — ⭐ KAŻDY krok DAJE rodzicowi
+  szansę NA poprawę, ale JEŚLI szanse NIE są wykorzystywane, sąd
+  MUSI chronić DZIECKO
+
+⭐⭐⭐ CZTERY WAŻNE, PRAKTYCZNE ROZRÓŻNIENIA — POZBAWIENIE władzy
+  rodzicielskiej NIE OZNACZA:
+  1) automatycznego POZBAWIENIA kontaktów — TO ODRĘBNA instytucja
+     PRAWNA — rodzic POZBAWIONY władzy NADAL ma PRAWO widywać się Z
+     dzieckiem, CHYBA że sąd ODRĘBNYM postanowieniem ZAKAŻE
+     kontaktów (art. 113³ KRO)
+  2) zwolnienia Z OBOWIĄZKU alimentacyjnego — obowiązek ALIMENTACYJNY
+     ISTNIEJE NIEZALEŻNIE od zakresu WŁADZY rodzicielskiej — rodzic
+     NADAL musi PŁACIĆ alimenty
+  3) UTRATY przez DZIECKO prawa DO dziedziczenia PO takim rodzicu —
+     małoletnie DZIECKO zachowuje PRAWO do dziedziczenia
+  4) MOŻLIWOŚCI dobrowolnej REZYGNACJI — ⭐⭐ WAŻNE: zrzeczenie SIĘ
+     władzy rodzicielskiej NIE JEST możliwe — W polskim PRAWIE
+     rodzic NIE MOŻE SAM zrzec SIĘ władzy rodzicielskiej — DECYZJĘ
+     podejmuje WYŁĄCZNIE sąd
+
+⭐ ODWRACALNOŚĆ: JEŚLI zmienią SIĘ okoliczności — rodzic MOŻE złożyć
+  WNIOSEK o ZMIANĘ orzeczenia — sąd OCENIA aktualną SYTUACJĘ dziecka
+  I rodziców (⭐ dotyczy WSZYSTKICH trzech poziomów — ograniczenie/
+  zawieszenie/pozbawienie NIE SĄ ostateczne W sensie
+  NIEODWOŁALNYM, choć POZBAWIENIE wymaga NAJPOWAŻNIEJSZEJ zmiany
+  okoliczności DO przywrócenia)
+
+⭐ OPŁATA: **100 ZŁ** opłaty STAŁEJ od wniosku (art. 23 ustawy O
+  kosztach SĄDOWYCH w sprawach CYWILNYCH) — ⭐ postępowanie
+  WSZCZĘTE Z URZĘDU jest BEZPŁATNE
+
+Potwierdzone w 6+ zgodnych, BARDZO aktualnych źródeł 2026
+(eadwokat.pl [kwiecień 2026, z aktualnym t.j. Dz.U.2026.0.236],
+adwokat-24.pl [czerwiec 2026], kancelariasprawyrodzinne.pl [maj
+2026], wezprawnika.pl, plazaglab.pl [lipiec 2025], gofin.pl,
+standardyprawa.pl [z katalogiem powiązanego orzecznictwa SN/SR]).
+```
+
 ---
 
 ## MEDIACJA W SPRAWACH ROZWODOWYCH — QUICK CHECK
@@ -694,6 +1051,38 @@ SEPARACJA FAKTYCZNA vs PRAWNA — NIE MYLIĆ: separacja FAKTYCZNA (samo
   rozstanie bez orzeczenia sądu) NIE WYWOŁUJE żadnych z powyższych
   skutków prawnych — TYLKO separacja PRAWNA (orzeczona przez sąd) ma
   znaczenie dla majątku, dziedziczenia, alimentów itd.
+
+⭐⭐⭐ TRYB POSTĘPOWANIA — dodano 2026-08-12, na żądanie użytkownika
+(kontynuacja badania pokrycia separacji — dotąd BRAK tego
+elementu, mimo REALNYCH konsekwencji praktycznych — koszt, forma
+pisma, MOŻLIWOŚĆ żądania ustalenia winy):
+  □ SĄD zawsze WŁAŚCIWY: sąd OKRĘGOWY (art. 17 pkt 1 KPC) —
+    NIEZALEŻNIE od trybu
+  □ ⭐⭐ TRYB NIEPROCESOWY (art. 567¹ i n. KPC) — TYLKO gdy WSZYSTKIE
+    TRZY warunki spełnione ŁĄCZNIE: (1) ZGODA obojga MAŁŻONKÓW na
+    SAMĄ separację, (2) ZGODA obojga na NIEORZEKANIE o winie,
+    (3) BRAK wspólnych MAŁOLETNICH dzieci — pismo wszczynające:
+    WNIOSEK (NIE pozew) — decyzja: POSTANOWIENIE (NIE wyrok) —
+    NIŻSZA opłata sądowa (100 zł od zgodnego WNIOSKU)
+  □ ⭐⭐⭐ TRYB PROCESOWY (pozew) — GDY którykolwiek Z powyższych
+    trzech warunków NIE jest spełniony — W SZCZEGÓLNOŚCI: JEŚLI
+    oboje małżonkowie ZGADZAJĄ się CO do samej separacji, ALE
+    CHOĆBY jedno Z nich ŻĄDA ustalenia WINY — dostępny WYŁĄCZNIE
+    tryb PROCESOWY (⭐ ZGODA co DO separacji NIE wystarcza, JEŚLI
+    brak ZGODY co DO kwestii winy)
+  □ ⚠️ BRAK MOŻLIWOŚCI "PRZEJŚCIA" między trybami: JEŻELI W trakcie
+    postępowania NIEPROCESOWEGO którakolwiek strona ZMIENI
+    stanowisko (zażąda ODDALENIA wniosku LUB USTALENIA winy) — sąd
+    UMARZA postępowanie — BRAK możliwości AUTOMATYCZNEGO
+    przekazania sprawy DO trybu procesowego — małżonek DĄŻĄCY do
+    separacji MUSI złożyć NOWY, ODRĘBNY pozew
+  □ WŁAŚCIWOŚĆ miejscowa (art. 567¹ KPC): sąd W okręgu WSPÓLNEGO
+    zamieszkania małżonków; W braku — sąd MIEJSCA ich wspólnego
+    POBYTU; W braku OBU — sąd właściwy DLA jednego Z małżonków
+
+Potwierdzone w 8+ zgodnych źródeł, w tym infor.pl [×4], adwokatbajtek.pl
+[maj 2024, Z cytowanym komentarzem Osajda/Legalis 2024], adwokatgd.pl,
+BEZPOŚREDNIO dosłowny tekst art. 567¹ KPC (sip.lex.pl, arslege.pl).
 ```
 
 **Checklist — kiedy separacja zamiast rozwodu:**

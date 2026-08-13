@@ -1,6 +1,6 @@
 ---
 name: dr-05-prawo-administracyjne-sadowoadministracyjne
-version: 3.11
+version: 3.19
 description: |
   DR-05: Prawo Administracyjne i Sądownictwo Administracyjne
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -54,7 +54,30 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W21 Informacja przetworzona (UDIP art. 3 — "szczególna istotność")
 - BAS-W29 Pełnomocnik z urzędu — prawo do sądu (art. 117 KPC)
 
-## Moduły (14 łącznie — ✓ 14 OK, ☐ 0 STUB)
+## Moduły (17 łącznie — ✓ 17 OK, ☐ 0 STUB)
+
+**Aktualizacja 2026-08-12 (PODZIAŁ modułu KPA, NOTA-4):** moduł KPA
+osiągnął 1115 linii (~2,8× próg 400 linii) po serii uzupełnień luk
+(zasady ogólne, strona, wyłączenie, doręczenia, dowody, zawieszenie,
+decyzja, odwołanie, postanowienia/zażalenia, rozprawa). PODZIELONO
+na CZTERY pliki wg naturalnych klastrów:
+- `mod-KPA-postepowanie-administracyjne.md` (rdzeń, 406 l.) —
+  zasady ogólne, strona, wyłączenie, doręczenia, terminy, mapa
+  postępowania
+- `mod-KPA-mechanizmy-w-toku-sprawy.md` (NOWY, 257 l.) —
+  zawieszenie, dowody, rozprawa
+- `mod-KPA-decyzja-i-odwolanie.md` (NOWY, 247 l.) — elementy
+  decyzji, procedura odwołania, postanowienia/zażalenia
+- `mod-KPA-tryby-nadzwyczajne-i-strategia.md` (NOWY, 297 l.) —
+  wznowienie, nieważność, 4 dodatkowe instytucje, bezczynność,
+  kary, skarga do WSA, strategia, orzecznictwo
+
+**⚠️ PRZY PODZIALE naprawiono kolejność:** sekcja o postępowaniu
+dowodowym (art. 75-88a) BYŁA omyłkowo wstawiona w nieprawidłowym
+miejscu oryginalnego pliku (między skargą do WSA a checklistem
+dowodowym, zamiast obok zawieszenia/rozprawy) — TERAZ we WŁAŚCIWYM
+miejscu w mod-KPA-mechanizmy-w-toku-sprawy.md. Zweryfikowano
+KOMPLETNOŚĆ — wszystkie tematy potwierdzone obecne po podziale.
 
 ```
   [✓] NOWY  mod-ustawa-RPD

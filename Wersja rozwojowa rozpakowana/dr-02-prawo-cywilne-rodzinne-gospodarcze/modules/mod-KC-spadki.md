@@ -257,6 +257,88 @@ rozrządzenie na PODWAŻENIE przez sąd.
 
 ---
 
+## ⭐⭐⭐ NIEGODNOŚĆ DZIEDZICZENIA (art. 928-930 KC) — dodano
+2026-08-12, na żądanie użytkownika — dotąd TYLKO wzmiankowana PRZY
+okazji nowelizacji 2023 (patrz sekcja "ZMIANY OD 15.11.2023"
+niżej), BEZ wyjaśnienia SAMEJ instytucji
+
+```
+⭐⭐⭐ CEL i CHARAKTER: instytucja POZBAWIENIA spadkobiercy zdolności
+  DZIEDZICZENIA Z powodów ETYCZNYCH — ZAPOBIEGA sytuacji, W KTÓREJ
+  osoba DZIAŁAJĄCA przeciwko SPADKODAWCY czerpałaby KORZYŚCI
+  majątkowe z JEGO śmierci — ⭐⭐ WYMAGA orzeczenia SĄDU W
+  postępowaniu PROCESOWYM (NIE w zwykłym postępowaniu O stwierdzenie
+  nabycia SPADKU) — wyrok MA charakter KONSTYTUTYWNY (TWORZY nowy
+  stan PRAWNY, nie tylko GO potwierdza) — MOŻE nastąpić TYLKO PO
+  otwarciu SPADKU (śmierci spadkodawcy) — NIGDY za JEGO życia
+
+⭐⭐⭐ PRZESŁANKI (art. 928 §1) — KATALOG ZAMKNIĘTY, obejmujący (PO
+  nowelizacji Z 2023 — patrz TEŻ istniejąca sekcja NIŻEJ):
+  1) umyślne dopuszczenie SIĘ ciężkiego PRZESTĘPSTWA przeciwko
+     spadkodawcy
+  2) NAKŁONIENIE go PODSTĘPEM lub GROŹBĄ do sporządzenia/odwołania
+     testamentu
+  3) PODSTĘPNE przeszkodzenie W sporządzeniu/odwołaniu TESTAMENTU
+  4) umyślne UKRYCIE/zniszczenie/podrobienie/przerobienie TESTAMENTU
+     spadkodawcy ALBO świadome KORZYSTANIE z testamentu
+     PODROBIONEGO/przerobionego przez INNĄ osobę
+  5) ⭐⭐ DWIE NOWE przesłanki OD 15.11.2023: uporczywe UCHYLANIE
+     się od PŁACENIA alimentów NA rzecz spadkodawcy; uporczywe
+     UCHYLANIE się OD wykonywania obowiązku PIECZY nad SPADKODAWCĄ
+     — ⭐ OBEJMUJE RÓŻNE rodzaje alimentów (NA rzecz pełnoletniego
+     DZIECKA, dziecka NA rzecz rodzica, Z umowy/UGODY/orzeczenia) —
+     "UPORCZYWOŚĆ" oceniana PRZEZ pryzmat złej WOLI, świadomości,
+     powtarzalności
+
+⭐⭐⭐ PROCEDURA (art. 929):
+  → KTO może ŻĄDAĆ: KAŻDY, kto MA W tym interes — ⚠️ ustawa NIE
+    precyzuje, CZY chodzi WYŁĄCZNIE o interes PRAWNY, czy TEŻ
+    majątkowy — SZEROKI krąg: przyszli SPADKOBIERCY (w miejsce
+    niegodnego), osoby BLISKIE zmarłego, PROKURATOR (art. 7 KPC)
+  → TERMIN (ZAWITY): **1 ROK** od dnia, W KTÓRYM zainteresowany
+    dowiedział SIĘ o przyczynie NIEGODNOŚCI, NIE później niż
+    **3 LATA** od OTWARCIA spadku — PO upływie — POWÓDZTWO
+    niedopuszczalne
+  → Pozew DO sądu WŁAŚCIWEGO dla OSTATNIEGO miejsca zamieszkania
+    spadkodawcy
+  → DOWODY: prawomocne wyroki KARNE, dokumenty, korespondencja,
+    zeznania ŚWIADKÓW, dokumentacja MEDYCZNA — sąd OCENIA zarówno
+    fakt POPEŁNIENIA czynu, JAK i JEGO ciężar GATUNKOWY
+
+⭐⭐⭐ SKUTKI (art. 928 §2): osoba UZNANA za niegodną TRAKTOWANA jest
+  TAK, jakby NIE dożyła chwili OTWARCIA spadku:
+  → dziedziczenie USTAWOWE: udział NIEGODNEGO przechodzi NA osoby
+    powołane W dalszej kolejności
+  → dziedziczenie TESTAMENTOWE: wyłączony — MIEJSCE mogą ZAJĄĆ
+    spadkobiercy PODSTAWIENI (art. 963 KC) LUB udział ULEGA
+    przyrostowi (art. 965 KC)
+  → ⭐⭐ JEŻELI niegodność ZOSTANIE stwierdzona PO prawomocnym
+    stwierdzeniu NABYCIA spadku LUB po DZIALE spadku — wyrok
+    STANOWI podstawę DO uchylenia LUB zmiany wcześniejszych
+    ROZSTRZYGNIĘĆ (⭐ RETROAKTYWNY wpływ NA już ZAKOŃCZONE
+    postępowania spadkowe)
+
+⭐ PRZEBACZENIE (art. 930): spadkodawca MOŻE przebaczyć NIEGODNEMU
+  — SKUTECZNE przebaczenie WYŁĄCZA możliwość UZNANIA za
+  niegodnego, MIMO zaistnienia PRZESŁANKI Z art. 928
+
+⭐⭐⭐ KLUCZOWA RÓŻNICA względem WYDZIEDZICZENIA (⭐ powiązanie Z
+  ISTNIEJĄCĄ już sekcją "WYDZIEDZICZENIE" WYŻEJ w TYM module):
+  → NIEGODNOŚĆ: orzeka SĄD, PO śmierci spadkodawcy — ZABEZPIECZA
+    pozostałych SPADKOBIERCÓW W sytuacji, GDY spadkodawca SAM za
+    życia NIE wydziedziczył TEGO spadkobiercy (np. NIE wiedział O
+    jego nagannym ZACHOWANIU, LUB zmarł ZANIM zdążył zareagować)
+  → WYDZIEDZICZENIE: dokonuje SAM spadkodawca, ZA życia, W drodze
+    TESTAMENTU — WYMAGA jego ŚWIADOMEJ decyzji I działania
+
+Potwierdzone w 8+ zgodnych źródeł, w tym BEZPOŚREDNIO orzecznictwo
+sądowe (saos.org.pl, orzeczenia.ms.gov.pl [wyrok SA I ACa 745/18],
+standardyprawa.pl [zbiór orzeczeń SN dot. art. 928-930]), oraz
+bartoszluc.pl [maj 2026, NAJŚWIEŻSZE, z pełnym omówieniem
+nowelizacji 2023], adrkancelaria.pl, kancelaria-kozlinska.pl [lipiec
+2025], prawnik-rozwod.pl [marzec 2026], adwokatcwikdudus.pl.
+```
+
 ## ⭐ ODPOWIEDZIALNOŚĆ ZA DŁUGI SPADKOWE — PEŁNE OPRACOWANIE (art. 1030-1034³ KC, rozbudowane 2026-07-19)
 
 > Rozbudowa dotychczasowej przelotnej wzmianki o "dobrodziejstwie
@@ -584,6 +666,71 @@ DO zachowania terminu 6 miesięcy wystarczy:
 Gdy złożenie wymaga ZEZWOLENIA SĄDU (małoletni):
   → termin 6 miesięcy ZAWIESZA SIĘ na czas postępowania o zezwolenie
   → Złóż wniosek o zezwolenie PRZED upływem terminu!
+```
+
+---
+
+## ⭐⭐ OCHRONA SPADKOBIERCY — ROSZCZENIE O WYDANIE SPADKU (art. 1029
+KC) — dodano 2026-08-12, na żądanie użytkownika — dotąd CAŁKOWICIE
+nieobecne
+
+```
+⭐⭐⭐ ISTOTA (art. 1029 §1, dosłowny TEKST): "Spadkobierca MOŻE
+  żądać, AŻEBY osoba, KTÓRA włada SPADKIEM jako spadkobierca, LECZ
+  spadkobiercą NIE jest, wydała MU spadek. TO SAMO dotyczy
+  poszczególnych PRZEDMIOTÓW należących do SPADKU" — ⭐ ROSZCZENIE
+  WINDYKACYJNE przeciwko "RZEKOMEMU spadkobiercy" (osobie, KTÓRA
+  PRZEKONANA jest O swoim TYTULE do spadkobrania, ALE nim
+  FAKTYCZNIE nie jest)
+
+⭐⭐ MECHANIZM ROZLICZEŃ (art. 1029 §2): DO roszczeń O
+  wynagrodzenie ZA korzystanie Z przedmiotów SPADKU, zwrot
+  POŻYTKÓW/ich wartości, NAPRAWIENIE szkody Z powodu ZUŻYCIA/
+  pogorszenia/utraty, ORAZ roszczeń O zwrot NAKŁADÓW — STOSUJE się
+  ODPOWIEDNIO przepisy O roszczeniach MIĘDZY właścicielem a
+  SAMOISTNYM posiadaczem rzeczy (⭐ CAŁY aparat prawny Z prawa
+  rzeczowego, ANALOGICZNY do ZWYKŁEJ windykacji)
+
+⭐ SZCZEGÓLNY przypadek (art. 1029 §3): PRZEPISY te STOSUJE się
+  ODPOWIEDNIO, GDY żąda WYDANIA swego MAJĄTKU osoba, CO do KTÓREJ
+  ZOSTAŁO uchylone orzeczenie O uznaniu jej ZA zmarłą — ⭐ RZADKI,
+  ALE CIEKAWY scenariusz: OSOBA uznana ZA zmarłą "WRACA" (JEJ
+  uznanie za ZMARŁĄ zostaje UCHYLONE), a JEJ majątek W międzyczasie
+  TRAFIŁ do "spadkobierców" — MOŻE żądać ZWROTU NA tej samej
+  podstawie
+
+⭐⭐ KTO MOŻE wystąpić: charakter ROSZCZENIA jest DZIEDZICZNY —
+  MOŻE Z nim WYSTĄPIĆ spadkobierca SPADKOBIERCY rzeczywistego
+  (JEŚLI pierwotny UPRAWNIONY zmarł), OSOBA która nabyła SPADEK na
+  podstawie UMOWY zbycia spadku, WIERZYCIEL, który spadek/udział
+  WZIĄŁ w ZASTAW — PRZY kilku/wszystkich SPADKOBIERCACH — mogą
+  wystąpić RAZEM przeciwko RZEKOMEMU spadkobiercy
+
+⭐⭐⭐ WAŻNE OGRANICZENIE (uchwała SN Z 25.07.2019 R., III CZP 12/19):
+  przepis NIE ZNAJDUJE zastosowania, JEŻELI władający SKŁADNIKIEM
+  spadku WYWODZI swój TYTUŁ prawny WYŁĄCZNIE z CZYNNOŚCI prawnej
+  (np. DAROWIZNA, zasiedzenie), A NIE ZE spadkobrania — ⭐ TA SAMA
+  uchwała ROZSTRZYGNĘŁA CIEKAWY przypadek Z praktyki: OSOBA
+  legitymująca SIĘ stwierdzeniem NABYCIA spadku ROZPORZĄDZIŁA
+  prawem NALEŻĄCYM do spadku NA rzecz osoby TRZECIEJ — PÓŹNIEJ
+  okazało SIĘ, że NIE była rzeczywistym SPADKOBIERCĄ (RZECZYWISTYM
+  spadkobiercą było DZIECKO spadkodawcy, W chwili OTWARCIA spadku
+  już POCZĘTE — nasciturus — KTÓRE urodziło SIĘ żywe) — SN uznał, że
+  OSOBA trzecia NIE nabyła TEGO prawa (⭐ ILUSTRUJE interakcję Z
+  art. 1028 KC — ochrona OSÓB trzecich działających W zaufaniu do
+  postanowienia O stwierdzeniu nabycia SPADKU, TEMAT POWIĄZANY, NIE
+  rozwinięty W tej transzy)
+
+⭐ PROCEDURA: pozew O wydanie spadku — SPADKOBIERCA musi UDOWODNIĆ
+  swój TYTUŁ (NAJPEWNIEJ przez PRZEDSTAWIENIE stwierdzenia nabycia
+  spadku), OPISAĆ przedmioty SPADKOWE objęte pozwem, ORAZ wykazać,
+  że SPADKODAWCA w chwili ŚMIERCI miał NAD nimi władztwo
+
+Potwierdzone w 7+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
+tekst art. 1029 (lexlege.pl, arslege.pl [aktualny t.j. Dz.U.2025.0.
+1071], przepisy.gofin.pl, standardyprawa.pl [×2, Z cytowanym
+orzecznictwem]), ORAZ bezpośrednio uchwała SN III CZP 12/19,
+kancelaria-praga.pl [maj 2026, NAJŚWIEŻSZE], kancelariaszkil.pl.
 ```
 
 ---

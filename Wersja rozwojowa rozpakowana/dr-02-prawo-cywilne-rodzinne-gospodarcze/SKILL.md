@@ -1,6 +1,6 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: 3.29
+version: 3.35
 description: |
   DR-02: Prawo Cywilne, Rodzinne i Gospodarcze
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -68,9 +68,28 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (36 łącznie — ✓ 36 OK, ☐ 0 STUB)
+## Moduły (38 łącznie — ✓ 38 OK, ☐ 0 STUB)
+
+**Aktualizacja 2026-08-12 (NOWY MODUŁ):** `mod-KRO-opieka-i-kuratela.md`
+— Tytuł III KRO (art. 145-184), dotąd CAŁKOWICIE nieobecny —
+ODRĘBNY od pieczy zastępczej (inna ustawa). Obejmuje: opiekę nad
+małoletnim (hierarchia wyboru opiekuna art. 149, wymóg zezwolenia
+sądu art. 156), opiekę nad ubezwłasnowolnionym całkowicie, oraz
+SIEDEM rodzajów kurateli (art. 178-184, w tym rzadko omawiany
+⭐⭐⭐ kurator dla dziecka poczętego art. 182, i kurator osoby
+nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
+(ustawa z 2001 — inny zawód/funkcja).
 
 ```
+  [✓] NOWY  mod-KW-ksiega-wieczysta-zakup-nieruchomosci
+              (dodany 2026-08-12, na żądanie użytkownika — dotąd
+               CAŁKOWICIE nieobecny temat: rękojmia wiary publicznej
+               ksiąg wieczystych (art. 5-9 KWiH), struktura 4 działów,
+               mechanizm wzmianki, przedawnienie roszczeń z najmu
+               art. 677/118 KC. Zbadany na podstawie materiałów
+               zewnętrznej kancelarii marketingowej — TRAKTOWANYCH
+               wyłącznie jako lista tematów, NIE źródło prawa —
+               wszystko zweryfikowane niezależnie.)
   [✓] NOWY  mod-ustawa-frankowa-2026-procedura
               (dodany 2026-08-07, na żądanie użytkownika — ustawa z
                29.05.2026, weszła w życie 7.08.2026, łapie sprawy w
