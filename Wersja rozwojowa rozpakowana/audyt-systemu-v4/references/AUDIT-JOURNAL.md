@@ -36979,3 +36979,173 @@ rekomendacji F-20: zbadać, czy analogiczny wzorzec fantomowych wpisów
 z sesji "2026-08-11u/v/w" występuje TAKŻE w innych DR-skillach poza
 DR-06 — NIE było przedmiotem tej sesji, rekomendowane jako oddzielne
 zadanie audytowe.
+
+---
+
+## AUDYT-2026-08-13b — LUKA ZEROWEGO POKRYCIA: rozporządzenie składkowe (podstawa wymiaru składek ZUS) nie istniało w systemie; utworzony mod-ROZP-SKLADKOWE-podstawa-wymiaru + naprawa dryfu licznika DR-04
+
+**Okoliczności odkrycia.** Użytkownik przedstawił do zbadania ofertę
+marketingową typu „obniżymy Twoje koszty ZUS nawet o 25%, legalnie,
+bez dodatkowych kosztów", kierowaną również do biur rachunkowych.
+Analiza wykazała, że jedynym możliwym nośnikiem takiego efektu jest
+katalog wyłączeń z § 2 ust. 1 rozporządzenia składkowego. Po udzieleniu
+odpowiedzi użytkownik zapytał wprost, czy temat jest pokryty w systemie
+skilli.
+
+**Ustalenie (audyt grep całego drzewa /mnt/skills/user).**
+
+```
+grep -ril "1106"                       → 1 trafienie, FAŁSZYWY POZYTYW
+                                         (analizator-umow-v1/references/
+                                          b2b-podwykonawcze.md → M.P. 2024
+                                          poz. 1106, odsetki w transakcjach
+                                          handlowych — inny akt, inna materia)
+grep -ril "rozporządzenie składkowe"   → 0
+grep -ril "18 grudnia 1998"            → 0
+grep -ril "§ 2 ust. 1 pkt"             → 0
+```
+
+**ZEROWE POKRYCIE.** Akt wykonawczy regulujący, co wchodzi, a co nie
+wchodzi do podstawy wymiaru składek — a więc podstawa KAŻDEGO sporu
+płatnika z ZUS o domiar — nie występował w systemie w żadnej postaci.
+
+**Root cause.** DR-04 pokrywał ubezpieczenia społeczne WYŁĄCZNIE od
+strony ubezpieczonego (`mod-SUS-ZUS-ubezpieczenia-spoleczne`: emerytura,
+renta, kapitał początkowy, odwołanie od decyzji, zasiłki). Perspektywa
+PŁATNIKA — podstawa wymiaru, wyłączenia, wycena świadczeń w naturze,
+30-krotność, kaskada sankcji za zaniżenie — nie miała nośnika. Jest to
+ten sam wzorzec, co wielokrotnie odnotowany w tym dzienniku: dziedzina
+opisana z jednej perspektywy procesowej, druga niewidoczna do momentu,
+aż zada się pytanie z tamtej strony. Ustawa systemowa była w mapie od
+początku; jej akt wykonawczy — nigdy.
+
+**Utworzono:** `dr-04-prawo-pracy-zus-swiadczenia/modules/
+mod-ROZP-SKLADKOWE-podstawa-wymiaru.md` (v1.0.0).
+
+Zawartość unikalna (sprawdzona pod kątem duplikacji przed utworzeniem):
+- pełny katalog § 2 ust. 1 z **ANALIZĄ POJEMNOŚCI** każdego punktu —
+  ustalenie kluczowe: **pkt 26 jest jedyną pozycją katalogu bez limitu
+  kwotowego**, więc każdy schemat obiecujący kilkanaście–kilkadziesiąt
+  procent MUSI przez niego przechodzić; to daje jedno pytanie
+  rozstrzygające zamiast dyskusji o marketingu;
+- § 3 (wycena świadczeń w naturze — przy benefitach kupowanych przez
+  pracodawcę miarodajna jest CENA ZAKUPU, nie „cena detaliczna"
+  z regulaminu), § 5 (rozszerzenie na zleceniobiorców i rady nadzorcze),
+  § 6-9 (30-krotność — jedyne bezryzykowne narzędzie oszczędnościowe
+  w tym akcie), § 10;
+- DETEKTOR SCHEMATÓW OPTYMALIZACYJNYCH: test arytmetyczny (obniżka
+  rachunku o X% ⇒ wyprowadzenie ≈X% funduszu płac z podstawy), test
+  źródła finansowania („bez obciążeń dla firmy" ⇒ płaci pracownik
+  składkami i podstawą przyszłych świadczeń), pytanie rozstrzygające
+  z tabelą interpretacji odpowiedzi, katalog czerwonych flag językowych;
+- 5 przesłanek kumulatywnych pkt 26;
+- kaskada sankcji [1]-[6]: składkowa (5 lat + odsetki + opłata dodatkowa
+  do 100%), podatkowa, wykroczeniowa (art. 98 usus — grzywna do 46 000 zł
+  od 1.06.2025), karna (art. 219 KK z zaznaczeniem, że ZGODA PRACOWNIKA
+  NIE JEST KONTRATYPEM; art. 218 § 1a KK; ZUS jako pokrzywdzony),
+  pracownicza (roszczenia całej załogi za zaniżoną podstawę świadczeń),
+  doradcy/biura rachunkowego (prowizja jednorazowa vs ekspozycja 5-letnia).
+
+**Delimitacja anty-duplikacyjna** (sekcja 12 modułu, wpisana wprost):
+`mod-obchodzenie-prawa-pracy-reforma-PIP-2026` opisuje UKRYWANIE
+przychodu („pod stołem") — czyn ewidentnie nielegalny. Nowy moduł
+opisuje PRZEKWALIFIKOWANIE przychodu na wyłączony z podstawy —
+konstrukcję formalnie jawną, sporną co do skutku. Różne zjawiska,
+różne linie obrony, brak nakładki treściowej. Analogiczna delimitacja
+wobec `mod-ustawa-ZFSS` (tam materia ZFŚS, tu wyłącznie skutek
+składkowy pkt 19/20 z odesłaniem) i `mod-SUS-ZUS` (tam ubezpieczony,
+tu płatnik).
+
+**Poziom weryfikacji — istotny precedens metodyczny.** Pełny tekst
+jednolity rozporządzenia (Dz.U. 2025 poz. 316) został odczytany
+BEZPOŚREDNIO przez `web_fetch` z `api.sejm.gov.pl/eli/acts/DU/2025/316/
+text.pdf` — ŹRÓDŁO RZĄD 1, nie streszczenie. Jest to dokument
+5-stronicowy, a więc mieszczący się w limitach narzędzia — w przeciwieństwie
+do problemu opisanego we fladze F-18 (228-stronicowa ustawa o VAT,
+niemożliwa do odczytu fragmentarycznego). **Rekomendacja ogólna:
+dla aktów krótkich ścieżka `api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}/text.pdf`
+działa i powinna być domyślna, mimo że `isap.sejm.gov.pl` blokuje
+web_fetch (ROBOTS_DISALLOWED).** Dopisać do PRAWO-HARDGATE przy
+najbliższej edycji.
+
+Dzięki temu odczytowi wykryto fakt niedostępny ze źródeł wtórnych:
+nowelizacja Dz.U. 2023 poz. 1665 (od 1.09.2023) **uchyliła** § 2 ust. 1
+pkt 1b, 5, 31, 32 oraz cały § 2 ust. 2-4. Kierunek zmian tego aktu jest
+ZAWĘŻAJĄCY, co merytorycznie obala marketingowy argument „mechanizm
+stabilny i powtarzalny" i stanowi samodzielny argument w sporze.
+
+**Propagacja (3 pliki):**
+1. `dr-04/SKILL.md` — licznik modułów 30→31, wersja 3.23→3.24, wpis
+   opisowy o nowym module.
+2. `dr-04/MAPA-AKTOW.md` — dwa nowe wiersze: rozporządzenie składkowe
+   oraz zbiorczy wiersz sankcji płatnika (art. 24 ust. 1a/1b/4 + art. 98
+   usus, z odnotowaniem 9-krotnej podwyżki grzywny od 1.06.2025 przez
+   art. 380 pkt 10 ustawy o rynku pracy, Dz.U. 2025 poz. 620).
+3. `prawo-polskie-v2/ROUTING-MAP.md` — nowy wiersz w sekcji DR-04
+   z jawnymi TRIGGERAMI ("optymalizacja składek", "obniżymy ZUS o X%",
+   "podstawa wymiaru składek", "benefity/kafeteria", "korzyści materialne",
+   "30-krotność"), żeby router trafiał tu bez pośrednictwa pytania
+   o konkretny akt.
+
+**ZNALEZISKO UBOCZNE — dryf licznika DR-04 w TABELI STATUSU
+ROUTING-MAP.** Przy dopisywaniu wiersza ujawniono, że tabela deklarowała
+dla DR-04 `18 / 0 / 0 / 0 / 18` przy **38 rzeczywistych wierszach
+JESZCZE PRZED tą sesją**. Jest to DOKŁADNIE ten sam defekt, który
+naprawiono dla DR-06 w sesji 2026-08-11v — i który, jak tam odnotowano,
+NIE jest wykrywany przez test T2 (T2 sprawdza liczniki modułów
+w SKILL.md, a nie liczniki wierszy w TABELI STATUSU ROUTING-MAP).
+Licznik naprawiony na `37 / 2 / 0 / 0 / 39` (2 odesłania: KPA, PPSA
+do DR-05) z adnotacją w wierszu.
+
+⚠️ **REKOMENDACJA DLA ODDZIELNEJ SESJI:** dryf potwierdzony już
+w DWÓCH niezależnych DR (DR-06, DR-04) — należy założyć, że występuje
+także w pozostałych czternastu. Zadanie: przeliczyć wiersze każdej
+sekcji DR w ROUTING-MAP i zsynchronizować TABELĘ STATUSU, a następnie
+rozszerzyć test T2 (REGRESSION-TEST-PLAN.md) o kontrolę zgodności
+liczników TABELI STATUSU z faktyczną liczbą wierszy sekcji — inaczej
+defekt będzie wracał. Zgłoszone jako **F-22**.
+
+**Otwarta flaga F-21:** orzecznictwo w nowym module (11 sygnatur SN/SA/SO)
+pochodzi ze źródeł RZĄD 2 — treść tez potwierdzona krzyżowo, ale
+uzasadnienia nie zostały odczytane u źródła. W module każda pozycja jest
+opatrzona ostrzeżeniem, ale dług weryfikacyjny istnieje.
+
+### DOSTAWA (ZASADA 7 / OUTPUT-COMPLETENESS) — AUDYT-2026-08-13b
+
+**Skille zmodyfikowane w tej sesji — 3, a więc 3 OSOBNE archiwa**
+(KROK 0: „ile skilli, tyle zipów"; `audyt-systemu-v4` traktowany jak
+każdy inny skill, bo jego pliki referencyjne były edytowane):
+
+```
+dr-04-prawo-pracy-zus-swiadczenia   → +1 plik (nowy moduł), 2 pliki zmienione
+prawo-polskie-v2                    → 0 plików +/-, 1 plik zmieniony (ROUTING-MAP)
+audyt-systemu-v4                    → 0 plików +/-, 2 pliki zmienione (AUDIT-JOURNAL, WARN-OTWARTE)
+```
+
+⚠️ **ODSTĘPSTWO PROCEDURALNE — ZGŁOSZONE JAWNIE, NIE UKRYTE.**
+KROK 1-3 PRE-DELIVERY-COMPLETENESS-CHECK przewiduje: policz pliki
+oryginału → skopiuj CAŁE drzewo do katalogu roboczego → **dopiero na
+kopii nanieś zmiany**. W tej sesji edycje zostały naniesione
+**bezpośrednio w `/mnt/skills/user`**, ponieważ naprawa nie była
+prowadzona jako sformalizowany audyt (wyszła z pytania merytorycznego
+użytkownika o pokrycie tematu), a dopiero po jej wykonaniu padło
+polecenie wydania skilla wg Reguły 7.
+
+**Skutek dla integralności dostawy: ŻADEN NEGATYWNY** — kierunek
+kopiowania jest zachowany (`/mnt/skills/user` → katalog roboczy → ZIP),
+więc KROK 4b (`diff -rq` archiwum vs stan na dysku) pozostaje pełnoprawnym
+testem i został wykonany. Utracona została wyłącznie możliwość
+porównania „liczba plików PRZED edycją" mierzonej na nietkniętym
+oryginale — zastąpiona **jawnym, uzasadnionym bilansem różnicy**
+(+1 plik w dr-04 = `mod-ROZP-SKLADKOWE-podstawa-wymiaru.md`, świadomie
+dodany; 0 różnicy w dwóch pozostałych skillach).
+
+**Rekomendacja do PRE-DELIVERY-COMPLETENESS-CHECK:** dopisać wariant
+proceduralny dla sytuacji „naprawa powstała poza trybem audytowym,
+edycje już naniesione in-place". Obecne brzmienie zakłada, że decyzja
+o dostawie zapada PRZED edycją, co w praktyce sesji roboczych nie
+zawsze zachodzi. Wariant powinien wymagać: (a) jawnego zgłoszenia
+odstępstwa w AUDIT-JOURNAL, (b) bilansu różnicy plików z uzasadnieniem
+każdej pozycji, (c) obowiązkowego KROK 4b bez wyjątków. Zgłoszone jako
+uwaga do rozważenia przy najbliższej edycji `audyt-systemu-v4/SKILL.md`
+— NIE zmieniam treści zasady samodzielnie w tej sesji.

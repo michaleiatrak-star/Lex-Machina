@@ -1,6 +1,6 @@
 ---
 name: dr-04-prawo-pracy-zus-swiadczenia
-version: 3.23
+version: 3.24
 description: |
   DR-04: Prawo Pracy, ZUS, Świadczenia Społeczne
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -64,9 +64,30 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   wspierające (→ mod-niepelnosprawnosc-intelektualna-gluchota.md,
   mod-niewidomy-prawa-prawne.md, mod-prawa-obywatelskie-srodki-karne.md)
 
-## Moduły (30 łącznie — ✓ 30 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
+## Moduły (31 łącznie — ✓ 31 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
 
 ```
+  [✓] NOWY  mod-ROZP-SKLADKOWE-podstawa-wymiaru (v1.0.0)
+              (dodany 2026-08-13 — domyka LUKĘ SYSTEMOWĄ wykrytą przy
+               analizie oferty "obniżymy ZUS o 25%". Audyt grep całego
+               drzewa /mnt/skills/user dał ZERO trafień dla "1106",
+               "rozporządzenie składkowe", "18 grudnia 1998",
+               "§ 2 ust. 1 pkt" — system pokrywał ZUS WYŁĄCZNIE od
+               strony ubezpieczonego (mod-SUS: emerytura/renta/
+               odwołanie), nigdy od strony PŁATNIKA i PODSTAWY
+               WYMIARU. Zawiera: pełny katalog § 2 ust. 1 z ANALIZĄ
+               POJEMNOŚCI każdego punktu (ustalenie kluczowe: tylko
+               pkt 26 nie ma limitu kwotowego, więc każdy schemat
+               "-25%" MUSI przez niego przechodzić), § 3 wycena
+               świadczeń w naturze, § 5 rozszerzenie na zleceniobiorców
+               i rady nadzorcze, § 6-9 30-krotność, DETEKTOR SCHEMATÓW
+               OPTYMALIZACYJNYCH (test arytmetyczny D1, test źródła
+               finansowania D2, pytanie rozstrzygające D3, czerwone
+               flagi D4), 5 przesłanek pkt 26, kaskada sankcji [1]-[6]
+               ze skutkami dla pracowników i doradcy. Alert: nowelizacja
+               Dz.U. 2023 poz. 1665 UCHYLIŁA pkt 1b/5/31/32 i § 2
+               ust. 2-4 — kierunek zmian jest ZAWĘŻAJĄCY, co obala
+               marketingowe "stabilny i powtarzalny")
   [✓] NOWY  mod-obchodzenie-prawa-pracy-reforma-PIP-2026 (v1.0.1)
               (dodany 2026-07-30, POPRAWIONY tego samego dnia po
                wykryciu masywnej duplikacji z mod-ustawa-PIP-
