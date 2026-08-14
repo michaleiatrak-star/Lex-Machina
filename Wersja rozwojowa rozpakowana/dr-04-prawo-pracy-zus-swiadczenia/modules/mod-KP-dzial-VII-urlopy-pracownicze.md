@@ -180,8 +180,12 @@ którego zależą uprawnienia pracownicze (z zastrzeżeniami dla okresów do
   B2B/zlecenia do stażu urlopowego) — NIE duplikuj, tylko odsyłaj.
 - **`mod-KP-dzial-VI-czas-pracy.md`** — wspólna nowelizacja 2026
   (Dz.U. 2026 poz. 25) dot. formy elektronicznej wniosków i ekwiwalentu.
-- **`mod-ustawa-aktywny-rodzic.md`** — urlopy związane z rodzicielstwem
-  (Dział VIII KP) — pozostają w tamtym module, nie tutaj.
+- **`mod-KP-dzial-VIII-rodzicielstwo.md`** — urlopy związane z
+  rodzicielstwem (macierzyński, rodzicielski, ojcowski, wychowawczy —
+  Dział VIII KP). ✅ NAPRAWIONE 2026-08-13 (F-27): poprzednio to
+  odesłanie błędnie wskazywało na `mod-ustawa-aktywny-rodzic.md`, który
+  dotyczy WYŁĄCZNIE świadczenia pieniężnego ZUS/gminnego, nie przepisów
+  KP o samych urlopach.
 - **`mod-KP-dzial-V-XIV-odpowiedzialnosc-materialna-przedawnienie.md`**
   — termin przedawnienia roszczeń o urlop/ekwiwalent.
 

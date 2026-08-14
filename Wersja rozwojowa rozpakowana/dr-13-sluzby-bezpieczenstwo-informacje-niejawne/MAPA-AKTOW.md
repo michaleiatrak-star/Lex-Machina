@@ -13,6 +13,7 @@
 | Ustawa o ABW oraz AW | ✅ Dz.U. 2025 poz. 902 t.j. (WARN-28 ZAMKNIĘTY 2026-07-02 — sesja dedykowana: Dz.U. 2025 poz. 902 to jednolity tekst TEJ SAMEJ ustawy z dnia 24 maja 2002 r. o ABW oraz AW, ogłoszony 7.07.2025, konsolidujący poprzedni t.j. Dz.U. 2024 poz. 812 [nie 2024.1183, który był błędnym numerem już wcześniej] + zmiany z Dz.U. 2024.1222, 1562, 1684, 1871 i 2025.179. Art. 1 "Tworzy się Agencję Bezpieczeństwa Wewnętrznego..." to ORYGINALNY przepis ustawy z 2002 r., nieodmiennie powtarzany w każdym kolejnym tekście jednolitym — NIE jest to nowa ustawa ani reforma instytucjonalna. Data 1.01.2026 dotyczyła innej, niepowiązanej nowelizacji wcześniej mylnie skojarzonej z tym aktem. ✅ [VER: isap.sejm.gov.pl WDU20250000902; ppiop.rcl.gov.pl skorowidz; inforlex.pl (wersja archiwalna wskazuje poprzedni t.j. 2024.812)]) | mod-ustawa-ABW-AW-CBA-sluzby-specjalne | ✅ OK |
 | Ustawa o CBA | ⚠️ Dz.U. 2025 poz. 712 t.j. (POPRAWKA 2026-07-02www — BYŁO błędnie 2024.1392; potwierdzone przez wielokrotne, spójne cytowania niezależnych źródeł) | mod-ustawa-ABW-AW-CBA-sluzby-specjalne | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
 | Ustawa o SOP | Dz.U. 2025 poz. 34 t.j. ✅ VER 2026-07-04 (audyt-DR13 — POPRAWKA: był błędnie "2024 poz. 1672 t.j.", numer nie odpowiadał żadnemu potwierdzonemu dokumentowi tej ustawy): isap, obwieszczenie Marszałka Sejmu z 6.12.2024, potwierdzony łańcuch t.j.: 2023.66 → 2024.325 (obwieszczenie 9.02.2024) → 2025.34 (aktualny) ze zm. (**Dz.U. 2025 poz. 1366** — zakwaterowanie) | mod-ustawa-ABW-AW-CBA-sluzby-specjalne | ✅ OK (numer poprawiony) |
+| Ustawa o Służbie Kontrwywiadu Wojskowego oraz Służbie Wywiadu Wojskowego (SKW/SWW — wojskowe odpowiedniki ABW/AW) | Dz.U. 2026 poz. 157 t.j. (obwieszczenie 5.02.2026) — ✅ VER 2026-08-13 (F-59): potwierdzone 5+ zgodnych źródeł (isap.sejm.gov.pl, inforlex.pl, arslege.pl, lexlege.pl, prawo.pl). ⚠️ Akt pokrewny odrębny: ustawa o służbie funkcjonariuszy SKW/SWW, Dz.U. 2025 poz. 694 ze zm. (718, 1366) — pragmatyka służbowa, poza zakresem nowego modułu | mod-ustawa-SKW-SWW | ✅ NOWY 2026-08-13, naprawa F-59 (luka strukturalna — 2 z 6 polskich służb specjalnych bez pokrycia) |
 | Ustawa o ochronie informacji niejawnych | Dz.U. 2025 poz. 1209 t.j. ✅ VER: 2026-06-14 (TRYB DZU — był 2024/1612; weryfikacja 06-05 przeoczyła t.j. z 11.08.2025) | mod-ustawa-informacje-niejawne | ✅ OK |
 | Ustawa o obronie Ojczyzny | ⚠️ Dz.U. 2025 poz. 825 t.j. (POPRAWKA 2026-07-02uuu — BYŁO błędnie sklasyfikowane jako "nowelizacja" starego 2022.655; w rzeczywistości to NOWY TEKST JEDNOLITY — obwieszczenie Marszałka Sejmu z 11.06.2025, potwierdzone bezpośrednio przez isap.sejm.gov.pl/WDU20250000825) + dalsza nowelizacja 2025.1014 | mod-ustawa-obrona-ojczyzny-mobilizacja | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
 | Ustawa o ochronie ludności i obronie cywilnej | Dz.U. 2024 poz. 1907 ze zm. (zm.: Dz.U. 2025 poz. 1705; **Dz.U. 2026 poz. 646**) ✅ VER: 2026-06-05 | mod-ustawa-zarzadzanie-kryzysowe-obrona-cywilna | ✅ OK |
@@ -41,6 +42,9 @@
 > dokumentowi; prawidłowy łańcuch to 2023.66 → 2024.325 → **2025.34**
 > (aktualny). DR-13 ma teraz 0 pozycji z niepotwierdzonym numerem
 > podstawowym — pozostają liczne flagi "WYMAGA AKTUALIZACJI MODUŁU"
-> (Policja, Straż Graniczna, Żandarmeria, CBA, obrona Ojczyzny, KOZZiD,
-> środki przymusu) dotyczące treści modułów, numery już poprawne z
-> wcześniejszych sesji.
+> (Policja, Żandarmeria, CBA, obrona Ojczyzny, KOZZiD, środki przymusu)
+> dotyczące treści modułów, numery już poprawne z wcześniejszych sesji.
+> ✅ NAPRAWIONE 2026-08-13 (F-58): Straż Graniczna USUNIĘTA z tej listy
+> — jej flaga została ZAMKNIĘTA 2026-07-21 (patrz wiersz tabeli wyżej),
+> ale ta notatka podsumowująca nigdy nie została odświeżona po tym
+> zamknięciu, co tworzyło mylącą sprzeczność wewnątrz tego samego pliku.

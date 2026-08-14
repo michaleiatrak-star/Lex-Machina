@@ -40,10 +40,23 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Zamówienia publiczne, fundusze UE, pomoc publiczna — pojęcia (wykonawca, zamawiający, oferta, rażąco niska cena, kryteria oceny ofert) mają definicje ustawowe wprost w PZP (art. 7) i nie wymagają osobnego pliku w shared/definicje/. Żaden plik tematyczny nie obejmuje dziedziny PZP.
-## Moduły (16 łącznie — ✓ 16 OK, ☐ 0 STUB)
+## Moduły (17 łącznie — ✓ 17 OK, ☐ 0 STUB)
+
+**NAPRAWA 2026-08-14:** dodano `mod-PZP-dzial-II-kwalifikacja-kryteria-
+uniewaznienie.md` — zamyka rdzeń F-71: Dział II PZP (183 art., >1/4
+ustawy), sam rdzeń klasycznego przetargu generujący najwięcej sporów.
 
 ```
   [✓] OK    mod-PZP-zamowienia-publiczne-KIO
+  [✓] NOWY  mod-PZP-dzial-II-kwalifikacja-kryteria-uniewaznienie
+              (dodany 2026-08-14 — naprawa F-71: warunki udziału [112,
+               4 kategorie zamknięte, zasada ciągłości spełniania],
+               JEDZ i mechanizm dwuetapowy [125/126 — pełne dokumenty
+               żąda się TYLKO od zwycięzcy rankingu], kryteria oceny
+               ofert [239-243, wymóg jednoznaczności art. 240 —
+               najczęściej naruszany przepis], unieważnienie [255 —
+               katalog zamknięty obligatoryjny, 256 — fakultatywne,
+               NIE wytrych, z przykładem orzeczniczym])
               (2026-07-18: naprawiono martwy odnośnik "Zamówienia obronne
                → DR-13" oraz rozbudowano przetarg nieograniczony/ograniczony)
   [✓] OK    mod-PZP-dzial-I-podstawy-wylaczenia-szacowanie

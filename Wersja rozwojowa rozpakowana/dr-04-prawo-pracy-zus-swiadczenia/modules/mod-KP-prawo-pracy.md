@@ -107,7 +107,7 @@ Przy umowie na czas OKREŚLONY:
 | Wiek przedemerytalny | art. 39 KP | 4 lata przed uzyskaniem prawa do emerytury |
 | Zwolnienie lekarskie (L4) | art. 41 KP | Zakaz w trakcie zwolnienia (do limitów z art. 53 KP) |
 | Działacz ZZ | art. 32 ustawy o ZZ | Zakaz bez zgody zarządu ZOZ |
-| Urlop macierzyński / rodzicielski | art. 177, 186⁸ KP | Zakaz przez cały urlop |
+| Urlop macierzyński / rodzicielski | art. 177, 186⁸ KP | Zakaz przez cały urlop — ⚠️ TO JEST tylko aspekt OCHRONNY; pełna treść urlopów (długości, warunki) ✅ NAPRAWIONA 2026-08-13 (F-27): patrz `mod-KP-dzial-VIII-rodzicielstwo.md` |
 
 ### Roszczenia pracownika (art. 45 KP)
 

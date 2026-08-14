@@ -28,10 +28,34 @@ Polozna:            Prowadzenie porodow fizjologicznych samodzielnie
 ```
 
 ## Odpowiedzialnosc dyscyplinarna
+
+✅ UZUPEŁNIONE 2026-08-13 (F-53) — podstawa prawna dotąd nieprzywołana:
+odpowiedzialność zawodowa (dyscyplinarna) pielęgniarek/położnych wynika
+z ODRĘBNEJ ustawy, nie z ustawy o zawodach powyżej:
+
+**Ustawa z 1.07.2011 r. o samorządzie pielęgniarek i położnych**
+Tekst jednolity: **Dz.U. 2025 poz. 1760** (obwieszczenie 24.11.2025)
+Rozdział 6 „Odpowiedzialność zawodowa" — ⚠️ zweryfikuj dokładny zakres
+numerów artykułów w ISAP przed cytowaniem w piśmie.
+
 ```
-Organ: Okregowy Sad Pielegniarek i Poloznych -> NSPiP -> SN
-Kary:  Upomnienie, nagana, zawieszenie PWZ (max 5 lat), pozbawienie PWZ
+Organ I inst.:  Okręgowy Sąd Pielęgniarek i Położnych (przy okręgowej
+                izbie właściwej dla członkostwa obwinionej osoby)
+Organ II inst.: Naczelny Sąd Pielęgniarek i Położnych (NSPiP)
+Dalej:          kasacja do Sądu Najwyższego
+Kary:           upomnienie, nagana, zawieszenie PWZ (max 5 lat),
+                pozbawienie prawa wykonywania zawodu
+Postępowanie:   wszczyna Rzecznik Odpowiedzialności Zawodowej (analogia
+                do prokuratora) na wniosek/z urzędu; świadek/biegły
+                zamieszkały poza obszarem działania organu prowadzącego
+                może być przesłuchany przez sąd właściwy dla miejsca
+                zamieszkania (odpowiednie stosowanie KPK)
 ```
+
+⚠️ POZOSTAJE DO POGŁĘBIENIA: dokładne numery artykułów Rozdziału 6
+(zakres art. wg gofin.pl: Rozdział 6 następuje po Rozdziale 5 "Organy
+okręgowej izby", art. 27-35) — nie zweryfikowane wprost w tej sesji,
+sprawdź przed powołaniem konkretnego przepisu w piśmie.
 
 ## Weryfikacja online
 ```

@@ -65,6 +65,92 @@ Tytuły pobytowe (wiza, karta pobytu, pobyt stały, rezydent długoterminowy UE)
 
 ## 3. PROCEDURA
 
+### ⭐⭐⭐ SYSTEM MOS (Moduł Obsługi Spraw) — OBOWIĄZKOWA ELEKTRONIZACJA
+WNIOSKÓW POBYTOWYCH (dodano 2026-08-14, na żądanie użytkownika —
+dotąd CAŁKOWICIE nieobecne w module mimo że system jest w mocy od
+ponad 3 miesięcy)
+
+```
+✅ ZWERYFIKOWANE 5+ zgodnych źródeł (gov.pl/UdSC, prawo.pl, urzędy
+wojewódzkie Gdańsk/Szczecin/Warszawa, legalhr.pl), Rząd 1/2B.
+
+⭐⭐⭐ PODSTAWA PRAWNA: ustawa z 21.11.2025 r. o zmianie ustawy o
+  cudzoziemcach oraz niektórych innych ustaw (wprowadziła art. 225a i
+  n. do ustawy o cudzoziemcach) — PODPISANA przez Prezydenta, weszła w
+  życie stopniowo, PEŁNA funkcjonalność URUCHOMIONA **27 KWIETNIA
+  2026 R.**
+
+⭐⭐⭐ ZAKRES OBJĘTY OBOWIĄZKIEM ELEKTRONICZNYM (art. 225a ust. 1) —
+  TRZY typy wniosków, składane WYŁĄCZNIE przez portal
+  mos.cudzoziemcy.gov.pl:
+  1) zezwolenie na POBYT CZASOWY
+  2) zezwolenie na POBYT STAŁY
+  3) zezwolenie na pobyt REZYDENTA DŁUGOTERMINOWEGO UE
+
+⭐⭐⭐ SANKCJA ZA WNIOSEK PAPIEROWY po 26.04.2026 (⭐ NAJWAŻNIEJSZA
+  PUŁAPKA PRAKTYCZNA): wniosek papierowy, który NIE WPŁYNĄŁ do urzędu
+  wojewódzkiego PRZED 27.04.2026 — POZOSTAWIONY BEZ ROZPOZNANIA (⭐
+  najdotkliwsza sankcja administracyjna — urząd W OGÓLE nie wszczyna
+  postępowania). NIE LICZY SIĘ data stempla pocztowego, tylko data
+  WPŁYWU do urzędu
+
+⭐⭐ WYJĄTKI — sprawy NADAL wymagające formy PAPIEROWEJ (⭐ MYLĄCE:
+  użycie portalu MOS do TYCH spraw też jest błędem, skutkuje TĄ SAMĄ
+  sankcją pozostawienia bez rozpoznania):
+  - mobilność wewnątrzunijna w ramach przeniesienia wewnątrz
+    przedsiębiorstwa (ICT) — kadra kierownicza/specjalista/stażysta
+  - połączenie z rodziną, GDY cudzoziemiec przebywa POZA granicami
+    Polski w chwili składania wniosku
+  - członek rodziny obywatela RP/UE/Wielkiej Brytanii (Umowa
+    Wystąpienia, art. 10 ust. 1 lit. b/d), gdy cudzoziemiec przebywa
+    POZA Polską
+
+⭐⭐ ODRĘBNA ŚCIEŻKA — karta pobytu CUKR ("Poprzednio posiadacz ochrony
+  czasowej", dla byłych beneficjentów ochrony czasowej z Ukrainy,
+  powiązanie z ustawą wygaszającą z 23.01.2026, Aneks A niżej):
+  składanie wniosków MOŻLIWE od **4 MAJA 2026 R.** (osobna data niż
+  start MOS). ⭐ Brak odbioru karty w ciągu 60 DNI → BEZPOWROTNE
+  unieważnienie. Przekształcenie statusu na zezwolenie na pobyt
+  czasowy następuje Z MOCY PRAWA dopiero z DNIEM ODBIORU karty
+
+⭐⭐ CZTERY przypadki sankcji "pozostawienie bez rozpoznania" (⭐
+  praktyczna checklista przy analizie wniosku klienta):
+  1) wniosek papierowy złożony PO uruchomieniu MOS (data wpływu po
+     26.04.2026, niezależnie od daty stempla)
+  2) wniosek przez MOS dla sprawy objętej WYJĄTKIEM (powinna być
+     papierowa — np. ICT, łączenie rodzin przy pobycie za granicą)
+  3) ⚠️ pozostałe 2 przypadki NIEZWERYFIKOWANE w tej sesji — punkt
+     startowy do dalszego badania
+
+⭐ ROLA PEŁNOMOCNIKA (⭐ istotne ograniczenie praktyczne dla
+  kancelarii): dział HR/pełnomocnik NIE SKŁADA wniosku ZA
+  cudzoziemca w systemie MOS — może jedynie AKTYWNIE KOORDYNOWAĆ
+  proces (przygotować dokumenty, przeprowadzić cudzoziemca przez
+  rejestrację, zweryfikować kompletność PRZED wysyłką). Wcześniejsze
+  wątpliwości nt. wykluczenia reprezentacji na etapie uzupełniania/
+  wysyłki wniosków — POTWIERDZONE jako rzeczywiste ograniczenie
+
+⭐ MECHANIZM TECHNICZNY: wniosek wypełniony i zatwierdzony w MOS →
+  wydrukować → odręcznie PODPISAĆ (wraz z załącznikami) → wniosek
+  trafia do "Bazy Wstępnej MOS" (część Krajowego zbioru rejestrów w
+  sprawach cudzoziemców) → weryfikacja poprawności/kompletności przez
+  wojewodę. Integracja z systemem inPOL — numer sprawy + kod SMS do
+  śledzenia statusu
+
+⭐ KOSZTY: dostęp do portalu MOS BEZPŁATNY; opłaty pozostają te same
+  co wcześniej — opłata skarbowa przy składaniu wniosku (zależna od
+  rodzaju zezwolenia) + opłata za wydanie karty pobytu (100 zł)
+
+⚠️ POZOSTAJE DO POGŁĘBIENIA: pełny katalog wyjątków od obowiązku
+  elektronicznego (znaleziono 3 z prawdopodobnie większej liczby),
+  szczegółowa procedura odwoławcza przy błędnym pozostawieniu bez
+  rozpoznania, zakres art. 225a w pełnym brzmieniu (nie zweryfikowano
+  bezpośrednio w ISAP w tej sesji — tylko przez źródła wtórne Rządu
+  2B/gov.pl).
+```
+
+---
+
 ### TERMINY — ABSOLUTNY PRIORYTET
 
 ```

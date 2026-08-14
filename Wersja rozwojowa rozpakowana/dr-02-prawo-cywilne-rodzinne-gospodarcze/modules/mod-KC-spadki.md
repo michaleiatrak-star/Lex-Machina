@@ -545,11 +545,57 @@ WYJĄTEK — SKARB PAŃSTWA zamiast gminy, gdy:
   UE (np. nieruchomość w Polsce i we Francji), EPS pozwala uniknąć
   odrębnych postępowań spadkowych w każdym kraju
 
-⚠️ TA SEKCJA WYMAGA DALSZEGO POGŁĘBIENIA w przyszłej sesji — dokładna
-procedura wydania EPS w Polsce, koszty, terminy, oraz szczegółowe
-zasady jurysdykcji (który sąd/notariusz jest właściwy przy zbiegu
-elementów z kilku krajów) NIE zostały w pełni zbadane. Oznaczone
-WPROST jako PUNKT STARTOWY, zgodnie z ZASADA 13.
+✅ UZUPEŁNIONE 2026-08-13c (wcześniej: "punkt startowy") — zweryfikowane
+w 5+ zgodnych źródłach (kancelarie notarialne, poradnikprzedsiebiorcy.pl),
+Rząd 2B/3:
+
+□ ORGANY WŁAŚCIWE (⭐ DWIE równoległe ścieżki, analogiczne do już
+  istniejących krajowych trybów spadkowych — wnioskodawca WYBIERA):
+  1) SĄD REJONOWY (sąd spadku) — punktem odniesienia jest postępowanie
+     o STWIERDZENIE NABYCIA SPADKU; jeśli między spadkobiercami jest
+     SPÓR lub nie wszyscy mogą stawić się razem — TA ścieżka jest
+     KONIECZNA (notariusz nie rozstrzyga sporów)
+  2) NOTARIUSZ — punktem odniesienia jest postępowanie o wydanie AKTU
+     POŚWIADCZENIA DZIEDZICZENIA (czynności notarialne podlegają
+     instancyjnej kontroli sądowej)
+
+□ WŁAŚCIWOŚĆ MIĘDZYNARODOWA: organ polski (w tym notariusz) może wydać
+  EPS, JEŻELI spadkodawca w chwili śmierci był OBYWATELEM polskim LUB
+  miał miejsce zamieszkania/zwykłego pobytu w RP
+
+□ KOSZTY (⭐ rozbieżność między trybami — WARTO poinformować klienta
+  PRZED wyborem drogi):
+  - u NOTARIUSZA: maksymalna stawka taksy notarialnej za czynność EPS
+    to 400 zł + VAT + koszty wypisów (ok. 6 zł netto/strona + VAT) —
+    do tego DOLICZYĆ koszt protokołu przeszukania rejestru testamentów
+    NORT (ok. 200 zł netto + VAT) oraz opłatę 5 zł za wpis do Rejestru
+    Spadkowego
+  - w SĄDZIE: opłata sądowa od wniosku o wydanie EPS wynosi 300 zł
+  ⭐ PRAKTYCZNA WSKAZÓWKA (zgodna z rekomendacją 2+ źródeł): NIE
+  wyrabiać dwóch odrębnych dokumentów "na zapas" — jeśli w skład
+  spadku wchodzi COKOLWIEK za granicą (nawet drobny składnik), od razu
+  wnioskować o EPS zamiast zwykłego krajowego aktu poświadczenia
+  dziedziczenia/postanowienia — unika się drugiego, odrębnego
+  postępowania
+
+□ TERMINY: u notariusza — zazwyczaj tego samego dnia co czynność, PRZY
+  KOMPLETNEJ dokumentacji (akty stanu cywilnego, testament, PESEL
+  zmarłego); w SĄDZIE — od kilku do KILKUNASTU MIESIĘCY (sądy w Polsce
+  są mocno obciążone, wydanie poprzedza ROZPRAWA)
+
+□ WAŻNOŚĆ: odpisy EPS są ważne przez 6 MIESIĘCY od wydania — po tym
+  czasie wymagane przedłużenie/nowy odpis
+
+□ RELACJA do dokumentów krajowych: EPS NIE ZASTĘPUJE krajowego
+  postanowienia o stwierdzeniu nabycia spadku ani aktu poświadczenia
+  dziedziczenia — UZUPEŁNIA je, służy wyłącznie do wykazywania praw
+  za granicą
+
+⚠️ POZOSTAJE OTWARTE (drobna, niski priorytet): szczegółowe zasady
+jurysdykcji przy RZECZYWISTYM zbiegu elementów z kilku krajów UE (np.
+spadkodawca miał zwykły pobyt w Niemczech, ale wybrał prawo polskie
+przez professio iuris) — wymaga odrębnej analizy przepisów jurysdykcyjnych
+rozporządzenia 650/2012 (art. 4-19), jeśli sprawa tego wymaga.
 ```
 
 ---
@@ -561,13 +607,45 @@ WPROST jako PUNKT STARTOWY, zgodnie z ZASADA 13.
   dziedziczeniu gospodarstw rolnych" — HISTORYCZNIE wprowadzający
   DODATKOWE wymogi dla spadkobierców gospodarstw rolnych (np. wymogi
   kwalifikacji rolniczych)
-⚠️ WIĘKSZOŚĆ przepisów tego Tytułu była SUKCESYWNIE UCHYLANA/
-OGRANICZANA na przestrzeni lat (w tym po wyroku TK z 1990 r. uznającym
-częściową niekonstytucyjność) — DOKŁADNY, AKTUALNY zakres obowiązywania
-NIE został w pełni zbadany w tej sesji. NIE zakładaj, że dawne, znane
-z historii wymogi (np. kwalifikacje rolnicze spadkobiercy) nadal
-obowiązują w pełnym zakresie — zweryfikuj na ISAP KONKRETNE, aktualnie
-obowiązujące artykuły tego Tytułu przed zastosowaniem w piśmie.
+✅ UZUPEŁNIONE 2026-08-13c (wcześniej: "punkt startowy") — zweryfikowane
+w 4+ zgodnych źródłach (w tym cytat sygnatury wyroku), Rząd 2B:
+
+⭐⭐⭐ CEZURA KLUCZOWA — WYROK TK z 31.01.2001 r., sygn. akt **P. 4/99**
+(Dz.U. Nr 11, poz. 91), który WSZEDŁ W ŻYCIE (data ogłoszenia) **14
+LUTEGO 2001 R.**: TK uznał WIĘKSZOŚĆ przepisów ograniczających krąg
+spadkobierców gospodarstwa rolnego (w tym KLUCZOWY art. 1059 —
+przesłanki kwalifikacyjne: praca w rolnictwie / przygotowanie zawodowe
+/ małoletność / trwała niezdolność do pracy) za NIEZGODNE z Konstytucją.
+
+⭐⭐⭐ SKUTEK PRAKTYCZNY (⭐ NAJWAŻNIEJSZA REGUŁA — decyduje DATA ŚMIERCI
+spadkodawcy, nie data postępowania spadkowego):
+  - spadek OTWARTY (= śmierć spadkodawcy) OD 14.02.2001 r. WŁĄCZNIE →
+    gospodarstwo rolne dziedziczy się na ZASADACH OGÓLNYCH (art.
+    931 i nast. KC) — BEZ WZGLĘDU na kwalifikacje rolnicze, pracę w
+    gospodarstwie, zameldowanie itp. Gospodarstwo jest integralną
+    częścią zwykłej masy spadkowej.
+  - spadek otwarty PRZED 14.02.2001 r. → nadal stosuje się STARE,
+    restrykcyjne przepisy Tytułu X wymagające kwalifikacji rolniczych
+    (⚠️ jeśli trafi się sprawa "zaległa" dot. spadku sprzed 2001 r. —
+    wymaga odrębnej, dogłębnej analizy starego stanu prawnego, poza
+    zakresem tego uzupełnienia)
+
+⭐⭐ CO POZOSTAŁO W MOCY z Tytułu X (przepisy, których TK NIE uznał za
+niekonstytucyjne, lub co do których NIE orzekał): art. 1058 (zasada
+ogólna stosowania — grunty >1 ha), 1063, 1067, 1070, 1070¹, 1079, 1081,
+1082, 1086 — TE przepisy nadal obowiązują nawet dla spadków otwartych
+PO 14.02.2001 r. (⚠️ konkretną treść i praktyczne znaczenie tych
+pojedynczych, przetrwałych przepisów — PUNKT startowy do dalszego
+badania, JEŚLI aktywna sprawa tego wymaga; art. 1058 samodzielnie ma
+już znaczenie ograniczone niemal wyłącznie do zakresu stosowania).
+
+⭐ POWIĄZANE OGRANICZENIE (⚠️ NIE dotyczy samego DZIEDZICZENIA, tylko
+PÓŹNIEJSZEGO rozporządzania): ustawa o kształtowaniu ustroju rolnego
+nadal reguluje OBRÓT ziemią rolną (prawo pierwokupu KOWR przy sprzedaży
+nabywcy niebędącemu rolnikiem, ograniczenia przy zniesieniu
+współwłasności/dziale spadku dot. "szachownicy gruntów") — spadkobierca
+NABYWA własność bez przeszkód, ale przy PODZIALE fizycznym gospodarstwa
+lub jego SPRZEDAŻY może napotkać te odrębne ograniczenia.
 □ Powiązanie z ustawą o kształtowaniu ustroju rolnego (ograniczenia
   obrotu ziemią rolną, patrz `mod-ustawa-lesna-lowiecka-ochrona-
   przyrody.md` sekcja o zasiedzeniu nieruchomości rolnych, DR-09/DR-02)
@@ -593,14 +671,45 @@ WPROST jako niedokończony.
   PASYWÓW/długów) — kluczowe dla oceny, czy PRZYJĘCIE z dobrodziejstwem
   inwentarza faktycznie CHRONI spadkobiercę (jeśli długi przewyższają
   aktywa) czy jest ZBĘDNE (majątek wyraźnie dodatni)
-□ WNIOSEK o sporządzenie spisu inwentarza — do SĄDU (lub bezpośrednio
-  do komornika po uzyskaniu odpowiedniego zlecenia) — ⚠️ dokładna
-  procedura, termin, koszty NIE zweryfikowane w pełni w tej sesji
+✅ UZUPEŁNIONE 2026-08-13c (wcześniej: "punkt startowy") — zweryfikowane
+w 4+ zgodnych źródłach (lexlege.pl, arslege.pl, gofin.pl, druk sejmowy
+2707), Rząd 2B:
 
-**Rekomendacja dla przyszłego audytu:** dokładna treść art. 637-641 KPC
-(w tym różnica proceduralna wykaz/spis, koszty, kto może żądać
-sporządzenia spisu — sam spadkobierca czy też WIERZYCIEL) wymaga
-odrębnej weryfikacji — oznaczone WPROST jako niedokończone.
+⭐⭐⭐ KRĄG UPRAWNIONYCH do żądania spisu inwentarza (art. 637 §1) —
+SZERSZY niż tylko spadkobierca (⭐ kluczowe dla wierzyciela spadkodawcy):
+  ten, kto UPRAWDOPODOBNI, że jest: spadkobiercą, uprawnionym do
+  ZACHOWKU, zapisobiercą, LUB: wykonawca testamentu, tymczasowy
+  przedstawiciel, LUB **WIERZYCIEL** mający PISEMNY dowód należności
+  przeciwko spadkodawcy
+
+⭐⭐ SZCZEGÓLNA PROCEDURA przy wniosku WIERZYCIELA (art. 637 §2, ⭐ różni
+  się od wniosku spadkobiercy): sąd wydaje postanowienie DOPIERO PO
+  WYSŁUCHANIU spadkobiercy — chyba że wysłuchanie NIE JEST możliwe
+  (⭐ mechanizm chroniący spadkobiercę przed nagłym, nieuzasadnionym
+  żądaniem osoby trzeciej)
+
+⭐⭐⭐ DWIE ŚCIEŻKI WSZCZĘCIA procedury (art. 637 vs 637¹ — ⭐ istotny
+  wybór praktyczny):
+  1) WNIOSEK DO SĄDU SPADKU — sąd wydaje POSTANOWIENIE o sporządzeniu
+     spisu; sąd niezwłocznie zarządza OGŁOSZENIE o wydaniu postanowienia
+     (na stronie internetowej i tablicy ogłoszeń sądu spadku — inne
+     osoby uprawnione mogą wówczas ZGŁASZAĆ przedmioty spadkowe/długi)
+  2) WNIOSEK BEZPOŚREDNIO DO KOMORNIKA (art. 637¹, ⭐ szybsza ścieżka,
+     analogiczna do bezpośredniego zgłoszenia u komornika przy wykazie
+     inwentarza) — komornik przystępuje NIEZWŁOCZNIE do sporządzenia
+     spisu i ZAWIADAMIA o tym sąd spadku, który następczo wydaje
+     postanowienie w przedmiocie spisu; JEŻELI sąd ODDALI/ODRZUCI
+     wniosek albo UMORZY postępowanie — spis już sporządzony przez
+     komornika RODZI TAKIE SAME SKUTKI jak złożenie wykazu inwentarza
+     (⭐ "nie przepada" mimo formalnej odmowy sądu)
+
+⭐ ZASKARŻALNOŚĆ (art. 637 §4): na postanowienie w przedmiocie
+  sporządzenia spisu inwentarza PRZYSŁUGUJE ZAŻALENIE
+
+⚠️ POZOSTAJE OTWARTE (drobne, niski priorytet): dokładne stawki kosztów
+komorniczych za sporządzenie spisu (rozliczane wg taksy komorniczej za
+czynności, nie jednolita opłata sądowa) — jeśli aktywna sprawa tego
+wymaga, sprawdzić aktualne rozporządzenie o kosztach komorniczych.
 ```
 
 ---

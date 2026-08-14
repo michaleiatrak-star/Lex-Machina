@@ -68,7 +68,15 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   od KC; nowelizacja znosi "wieczne przedawnienie" + wprowadza ugodę
   podatkową od 01.10.2026 (art. 70 i n. OP)
 
-## Moduły (41 łącznie — ✓ 41 OK, ☐ 0 STUB)
+## Moduły (42 łącznie — ✓ 42 OK, ☐ 0 STUB)
+
+**NAPRAWA 2026-08-14:** dodano `mod-OP-dzial-IV-rozdzial-11-dowody.md`
+— zamyka rdzeń F-70: dowody w postępowaniu podatkowym (180-200),
+etap decydujący o wyniku większości sporów podatkowych.
+⚠️ WAŻNE — lekcja z F-33 zastosowana: ten wpis MUSI być potwierdzony
+RÓWNIEŻ w bloku checklisty `[✓]` poniżej I w MAPA-AKTOW.md, nie
+wystarczy sama wzmianka w tej notatce (patrz F-33, 12 modułów
+niezarejestrowanych mimo wliczenia w licznik nagłówka).
 
 **Aktualizacja 2026-08-13 (naprawa flagi F-20 — CZTERY nowe moduły
 utworzone od podstaw, na żądanie użytkownika):** wykryto i naprawiono
@@ -398,6 +406,16 @@ przez cross-reference, bez duplikacji treści).
               (PKWiU 2025 harmonogram VAT/PIT/CIT/ryczałt, PKOB, CN —
                wydzielony 2026-06-14, referencjonowany przez mod-VAT/PIT/CIT)
   [✓] OK    mod-OP-ordynacja-podatkowa
+  [✓] NOWY  mod-OP-dzial-IV-rozdzial-11-dowody
+              (dodany 2026-08-14 — naprawa F-70: OP art. 180-200.
+               Zasady ogólne [187 — obowiązek organu, zasada
+               inkwizycyjności; 188 — prawo strony do inicjatywy
+               dowodowej], katalog środków dowodowych [181, otwarty,
+               księgi na pierwszym miejscu], swobodna ocena dowodów
+               [191] i prawo do wypowiedzenia się [192], dokumenty
+               urzędowe [194], KSIĘGI PODATKOWE [193 — domniemanie
+               mocy dowodowej, rzetelność vs niewadliwość, ciężar
+               obalenia domniemania na organie])
               (główny moduł: postępowanie podatkowe, terminy, GAAR,
                odpowiedzialność zarządu, KKS czynny żal, przedawnienie)
   [✓] OK    mod-KAS-kontrola-celno-skarbowa

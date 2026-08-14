@@ -90,7 +90,119 @@ ZAKRES PODMIOTOWY (art. 3 u.k.k.):
 
 ---
 
-## SPÓR O „WYKONANIE UMOWY" (art. 45 ust. 5) — STAN NA 2026-08-04
+## ⭐⭐⭐ AKTUALIZACJA 2026-08-13 — WYROK SN z 8.07.2026, sygn. II CSKP 89/26
+
+```
+✅ NAJWAŻNIEJSZA ZMIANA od utworzenia modułu — zweryfikowane 5+ zgodnych
+źródeł (prawo.pl, infor.pl, kancelariastalski.pl, rachelski.pl,
+sprawy-przeciwko-bankom.pl), Rząd 2B.
+
+⭐⭐⭐ CHARAKTER ORZECZENIA (⚠️ KLUCZOWE zastrzeżenie — NIE przeceniać):
+  → To WYROK w konkretnej sprawie, KASATORYJNY (uchyla wyrok SO, sprawa
+    wraca do ponownego rozpoznania) — NIE jest to uchwała SN
+  → Uchwała w sprawie III CZP 15/25 POZOSTAJE ZAWIESZONA — formalnie
+    wyrok wiąże tylko w tej jednej sprawie
+  → Układ procesowy: SR orzekł na korzyść konsumenta → SO zmienił i
+    oddalił powództwo → SN uchylił wyrok SO (czyli przywrócił szansę
+    konsumentowi, sprawa wraca do SO)
+  → Znaczenie WYKRACZA poza tę jedną sprawę mimo formalnie wąskiego
+    skutku — obszerne uzasadnienie systematyzuje sporne dotąd kwestie,
+    będzie POWOŁYWANE argumentacyjnie w innych postępowaniach (nie
+    wiąże ich formalnie, ale ma silną moc perswazyjną)
+
+⭐⭐⭐ SIEDEM TEZ SN (kluczowe dla praktyki — checklist przy analizie
+  KAŻDEJ nowej umowy pod kątem SKD):
+
+  1. FUNKCJA SANKCJI — dwie równorzędne: ochrona konsumenta ORAZ
+     funkcja PREWENCYJNA (mobilizowanie banków do prawidłowego
+     konstruowania umów). SN wiąże to z wymogiem TSUE, by sankcje
+     krajowe były skuteczne/proporcjonalne/odstraszające
+
+  2. CAŁKOWITA KWOTA i CAŁKOWITY KOSZT KREDYTU — oceniane wg
+     kryterium OBIEKTYWNEGO, nie subiektywnego rozumienia konsumenta
+
+  3. RRSO — musi odpowiadać RZECZYWISTEMU ekonomicznemu ciężarowi
+     zobowiązania, wyliczone na prawidłowych danych
+
+  4. ⭐⭐⭐ ODSETKI WYŁĄCZNIE OD CAŁKOWITEJ KWOTY KREDYTU — koszty
+     kredytu (prowizja, składka ubezpieczeniowa) NIE PODLEGAJĄ
+     oprocentowaniu. To NIE zwrot w orzecznictwie, lecz KONTYNUACJA:
+     SN zajmował już to stanowisko w wyroku z 3.06.2025, sygn.
+     II CSKP 1953/22 — nowy wyrok je rozwija i osadza w szerszym
+     kontekście obowiązków informacyjnych. Powołanie na TSUE C-377/14
+     i C-744/24 (ten sam wyrok z 23.04.2026, już śledzony w module)
+
+  5. ZMIANA OPŁAT I PROWIZJI — NIE wystarczy formalnie wskazać
+     przesłanek zmiany w umowie; konsument musi mieć możliwość
+     SAMODZIELNEGO zweryfikowania, czy okoliczność uzasadniająca
+     podwyżkę faktycznie zaistniała. Obowiązki informacyjne NIE
+     kończą się w dniu podpisania umowy
+
+  6. ⭐⭐⭐ HARMONOGRAM SPŁAT — NOWY, szeroko zakrojony front (mało
+     dotąd eksploatowany w praktyce, w przeciwieństwie do punktu 4):
+     harmonogram MUSI pokazywać rozbicie KAŻDEJ raty na TRZY pozycje
+     (kapitał / odsetki / pozostałe koszty), NIE tylko dwie (kapitał +
+     odsetki). Ujmowanie prowizji w części KAPITAŁOWEJ raty —
+     NIEDOPUSZCZALNE. ⭐ PRAKTYCZNA WAGA: dwukolumnowy harmonogram to
+     standard rynkowy, nie wyjątek — potencjalnie dotyczy milionów
+     umów, niezależnie od tego, czy odsetki liczono prawidłowo
+
+  7. PRAWO ODSTĄPIENIA — art. 30 ust. 1 czytany łącznie z art. 53
+     u.k.k.; konsument musi znać WSZYSTKIE konsekwencje finansowe
+     odstąpienia. SN powołał własne wcześniejsze stanowisko z wyroku
+     I NSK 9/18: odsetki dzienne po odstąpieniu liczy się OD
+     CAŁKOWITEJ KWOTY kredytu, NIE od kwoty obejmującej też koszty
+
+⭐⭐⭐ "WYSTARCZY JEDNO NARUSZENIE" (⭐ odpowiedź na najczęstszą linię
+  obrony banków — zapamiętać dosłownie mechanizm, nie tylko wniosek):
+  → Do zastosowania SKD wystarczy stwierdzenie JEDNEGO naruszenia
+    ustawy — NIE trzeba wykazywać całego katalogu uchybień
+  → ALE ⚠️ "jedno naruszenie" ≠ "jakiekolwiek naruszenie" — SN
+    zaznacza spójność z testem TSUE z wyroku C-472/23 (13.02.2025,
+    już śledzony w module): sankcja uzasadniona, gdy naruszenie MOGŁO
+    PODWAŻYĆ zdolność konsumenta do oceny zakresu jego zobowiązania —
+    nie chodzi o literówkę, tylko o uchybienie dotykające ISTOTY
+    informacji o koszcie kredytu
+  → SN sam zastosował ten test przy pkt 5 (zmiana opłat): nieprawidłowe
+    przedstawienie zasad = "uniemożliwia ocenę zakresu zobowiązania"
+
+⭐⭐ SUBIEKTYWNE ZROZUMIENIE KONSUMENTA JEST IRRELEWANTNE: sąd bada
+  obiektywną poprawność informacji NAWET gdy konsument oświadczył, że
+  rozumiał warunki umowy — standardowe oświadczenie "zapoznałem się i
+  rozumiem" NIE sanuje wadliwie skonstruowanego dokumentu
+
+⭐ SKALA PRAKTYCZNA (dane branżowe na koniec 2025, cytowane w źródłach):
+  ponad 23 000 spraw sądowych o SKD, ok. 80 000 reklamacji do ZBP;
+  SR dla Warszawy-Woli + SR Poznań-Nowe Miasto i Wilda — łącznie ok.
+  10 000 pozwów (MS pracuje nad zmianą przepisów o właściwości przy
+  cesjach wierzytelności)
+
+⚠️ ZASTRZEŻENIE ŹRÓDŁOWE: jeden z głównych, szeroko cytowanych opisów
+  tego wyroku (sprawy-przeciwko-bankom.pl) pochodzi od pełnomocniczki
+  strony powodowej w TEJ SAMEJ sprawie — fakt ujawniony przez autorkę,
+  nie podważa treści uzasadnienia, ale przed powołaniem wyroku WPROST
+  w piśmie procesowym sięgnąć do PEŁNEGO TEKSTU orzeczenia (nie
+  polegać wyłącznie na komentarzu kancelaryjnym)
+
+ZAKTUALIZOWANA PRAKTYCZNA CHECKLISTA INTAKE (rozszerzona o pkt 2 i 6
+  z wyroku SN — WCZEŚNIEJ moduł koncentrował się głównie na pkt 4):
+  1) Porównaj całkowitą kwotę kredytu z umowy z kwotą realnie
+     przelaną — różnica = skredytowane koszty (już było w module)
+  2) ⭐ NOWE: Sprawdź harmonogram spłat — czy rozbija ratę na TRZY
+     pozycje (kapitał/odsetki/koszty) czy tylko DWIE — jeśli tylko
+     dwie i prowizja "ukryta" w kapitale, to SAMODZIELNA podstawa SKD
+     niezależna od pkt 1
+  3) Sprawdź zapisy o zmianie opłat/prowizji — czy dają się
+     zweryfikować przez konsumenta
+  4) Sprawdź informację o prawie odstąpienia — czy opisuje skutki
+     finansowe (art. 30 ust. 1 + 53 u.k.k.)
+  5) Policz termin z art. 45 ust. 5 (patrz sekcja "SPÓR O WYKONANIE
+     UMOWY" niżej — TEN wyrok NIE rozstrzyga sporu o termin)
+```
+
+
+
+## SPÓR O „WYKONANIE UMOWY" (art. 45 ust. 5) — STAN NA 2026-08-13 (⚠️ ten spór NIE został rozstrzygnięty wyrokiem SN II CSKP 89/26 wyżej — pozostaje odrębny, wciąż otwarty)
 
 ```
 ⚠️⚠️ TEMAT ŻYWY — orzecznictwo zmienia się z tygodnia na tydzień.

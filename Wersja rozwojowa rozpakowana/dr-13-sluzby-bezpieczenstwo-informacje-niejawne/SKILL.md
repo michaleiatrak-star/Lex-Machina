@@ -42,7 +42,12 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Służby, bezpieczeństwo, informacje niejawne — pojęcia (informacja niejawna, klauzula, dostęp) zdefiniowane wprost w ustawie o ochronie informacji niejawnych i pokryte w mod-ustawa-informacje-niejawne. Żaden plik shared/definicje/ nie obejmuje tej dziedziny.
-## Moduły (10 łącznie — ✓ 10 OK, ☐ 0 STUB)
+## Moduły (11 łącznie — ✓ 11 OK, ☐ 0 STUB)
+
+**NAPRAWA 2026-08-13:** dodano `mod-ustawa-SKW-SWW.md` — zamyka F-59:
+SKW i SWW (wojskowe służby specjalne) nie miały dedykowanego pokrycia,
+mimo że cywilne odpowiedniki (ABW, AW) miały je od dawna. Pełny opis:
+`audyt-systemu-v4/references/AUDIT-JOURNAL.md`.
 
 ```
 SŁUŻBY MUNDUROWE:
@@ -69,6 +74,13 @@ SŁUŻBY MUNDUROWE:
 
 SŁUŻBY SPECJALNE:
   [✓] OK    mod-ustawa-ABW-AW-CBA-sluzby-specjalne
+  [✓] NOWY  mod-ustawa-SKW-SWW
+              (dodany 2026-08-13 — naprawa F-59: wojskowe odpowiedniki
+               ABW/AW. Utworzenie i cele [art. 1-2, rozróżnienie
+               kontrwywiad-wewnątrz vs wywiad-zewnątrz], ustrój i
+               nadzór [art. 3/5/13/18, wieloetapowe powoływanie Szefów],
+               współpraca międzynarodowa, uprawnienia operacyjne
+               zasygnalizowane punktowo jako punkt startowy)
               (ABW — Dz.U. 2024 poz. 1183 ze zm.; AW, CBA — Dz.U. 2024 poz. 1392; SOP;
                czynności operacyjno-rozpoznawcze, kontrola operacyjna z sądem,
                skargi: Kolegium/Sejm/RPO/ETPC; ustawa antyterrorystyczna Dz.U. 2024 poz. 1474)

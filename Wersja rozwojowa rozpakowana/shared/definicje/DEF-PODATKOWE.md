@@ -20,7 +20,13 @@ PRZYCHÓD (art. 11 ust. 1 PIT / art. 12 ust. 1 CIT — weryfikuj w ISAP):
   = "Przychodami są otrzymane lub postawione do dyspozycji podatnika pieniądze
   i wartości pieniężne oraz wartość otrzymanych świadczeń w naturze
   i innych nieodpłatnych świadczeń"
-  → PIT: isap.sejm.gov.pl → ustawa o PIT Dz.U. 2024 poz. 226 t.j. art. 11
+  → PIT: isap.sejm.gov.pl → ustawa o PIT Dz.U. 2026 poz. 592 t.j. art. 11
+    (⚠️ POPRAWIONE 2026-08-08: poprzednio "2024 poz. 226" — TEN numer
+    JEST PRZESTARZAŁY, od tego czasu ogłoszono JESZCZE DWA kolejne
+    teksty jednolite [2025 poz. 163, oraz aktualny 2026 poz. 592 z
+    17.04.2026] — potwierdzone bezpośrednio ISAP [Rząd 1] — PIT
+    jest NOWELIZOWANY BARDZO CZĘSTO, sprawdzaj numer t.j. PRZY
+    KAŻDYM użyciu, NIE ufaj numerowi starszemu niż kilka miesięcy)
 
 KOSZT UZYSKANIA PRZYCHODU (art. 22 ust. 1 PIT / art. 15 ust. 1 CIT — weryfikuj):
   = koszty poniesione w celu osiągnięcia przychodów lub zachowania/zabezpieczenia
@@ -87,7 +93,7 @@ PRZYCHÓD vs DOCHÓD (wyjaśnienie IZ6.nsf/6A0E7E37 — MF):
 KOSZTY PRZY UMOWIE ZLECENIA I O DZIEŁO:
   KUP = 20% przychodu pomniejszonego o składki ZUS potrącone przez płatnika
   Podstawa: art. 22 ust. 9 pkt 4 ustawy PIT
-  → Weryfikuj aktualne stawki: isap.sejm.gov.pl → PIT Dz.U. 2024 poz. 226 art. 22
+  → Weryfikuj aktualne stawki: isap.sejm.gov.pl → PIT Dz.U. 2026 poz. 592 art. 22 (⚠️ zob. korekta wyżej — numer 2024 poz. 226 nieaktualny)
 
 ZALICZKA NA PODATEK:
   Przy stosunku pracy: pobiera PŁATNIK (pracodawca), art. 31 PIT

@@ -1,29 +1,6 @@
 # PRAWO-HARDGATE — Zakaz cytowania prawa i orzeczeń z pamięci
 
-> **Wersja:** 2.5 (2026-08-11) — KROK 2C: WERYFIKACJA TREŚCI ARTYKUŁU
-> (nie tylko numeru aktu) + WYMÓG CYTATU PRZED ✅ + FILTR SŁÓW KLUCZOWYCH.
-> Dodano po incydencie: analiza sprawy akcyzowej ("produkcja poza składem
-> podatkowym bez zezwolenia") oznaczyła ✅ [VER] przepis **art. 100 ustawy
-> o podatku akcyzowym** — artykuł ISTNIEJE i jest częścią właściwego aktu
-> (u.a.a.), ale jego treść dotyczy WYŁĄCZNIE opodatkowania akcyzą
-> samochodów osobowych i nie ma żadnego związku z opisywanym stanem
-> faktycznym. Prawidłowa podstawa to art. 63 § 3 KKS lub art. 69a KKS.
-> Root cause: KROK 2B (niżej) łapie niezgodność na poziomie AKTU (tytuł
-> Dz.U. vs teza), ale nie miał odpowiednika na poziomie POJEDYNCZEGO
-> ARTYKUŁU w obrębie prawidłowo dobranego, wieloprzedmiotowego aktu — gate
-> uznawał ✅ już po samym potwierdzeniu, że numer artykułu istnieje w danej
-> ustawie, bez wymogu przeczytania i zacytowania jego treści. Naprawiono
-> trzema elementami: (1) KROK 2C — nowa, obowiązkowa bramka na poziomie
-> artykułu, rozdzielająca "numer istnieje" od "treść pasuje do tezy";
-> (2) wymóg dosłownego fragmentu (cytatu) z pobranej treści jako warunek
-> nadania ✅ — sam numer bez zacytowanego fragmentu nie wystarcza;
-> (3) filtr słów kluczowych — tani, wstępny test tematyczny przed
-> właściwym porównaniem treści, wychwytujący oczywiste niedopasowania
-> działowe (np. "produkcja poza składem podatkowym" vs dział aktu
-> dotyczący samochodów osobowych). Zarejestrowane też w
-> `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-11.
->
-> **Wersja poprzednia:** 2.4 (2026-07-17) — ZASADA PONOWNEJ WERYFIKACJI OZNACZEŃ +
+> **Wersja:** 2.4 (2026-07-17) — ZASADA PONOWNEJ WERYFIKACJI OZNACZEŃ +
 > WYTRWAŁOŚĆ WYSZUKIWANIA + OZNACZANIE PRZY KAŻDYM UŻYCIU. Dodano na
 > wyraźne polecenie użytkownika jako "reguła na przyszłość", po incydencie
 > z niepotwierdzonym oznaczeniem/skrótem prawnym (repertorium postępowań
@@ -280,101 +257,6 @@ KROK 2B-4: Dopiero gdy tytuł aktu wprost odpowiada tezie → kontynuuj KROK 3.
 ⛔ ZAKAZ: oznaczania ✅ [VER: ISAP, data] na podstawie samego potwierdzenia,
 że numer Dz.U. istnieje. Znacznik ✅ [VER] wymaga potwierdzenia ISTNIENIA
 ORAZ PRZEDMIOTU (tytułu) aktu zgodnego z tezą.
-
-## ⛔ KROK 2C — WERYFIKACJA TREŚCI ARTYKUŁU (nie tylko numeru w akcie)
-
-> Dodano: 2026-08-11 (AUDYT-2026-08-11, incydent akcyzowy — patrz nagłówek
-> wersji 2.5 powyżej). Rozszerza KROK 2B na poziom PODJEDNOSTKI REDAKCYJNEJ.
->
-> Nowy typ błędu, odróżniony od KROK 2B: KROK 2B łapie sytuację, gdy CAŁY
-> akt (Dz.U.) jest nie na temat. KROK 2C łapie sytuację, gdy **akt jest
-> właściwy** (poprawny tytuł, poprawna ustawa), ale **konkretny artykuł
-> w jego obrębie** reguluje inny fragment materii niż teza — typowe dla
-> obszernych, wieloprzedmiotowych ustaw (akcyzowa, VAT, Kodeks pracy, KPK,
-> KKS), gdzie sąsiednie/zbliżone numery artykułów dotyczą zupełnie różnych
-> instytucji (np. art. 100 u.a.a. = samochody osobowe, podczas gdy
-> "produkcja poza składem podatkowym" jest regulowana w art. 63/69a KKS,
-> nie w u.a.a. w ogóle).
->
-> **Potwierdzenie, że artykuł o danym numerze ISTNIEJE w danej ustawie,
-> NIE jest równoznaczne z potwierdzeniem, że jego TREŚĆ reguluje tezę,
-> którą się nim popiera.**
-
-```
-KROK 2C-0 — FILTR SŁÓW KLUCZOWYCH (tani wstępny test, wykonaj PRZED
-  właściwym porównaniem treści z KROK 2C-2):
-  (a) Wypisz 2-4 słowa kluczowe z TEZY/stanu faktycznego, który przepis
-      ma poprzeć (np. "produkcja", "skład podatkowy", "zezwolenie").
-  (b) Po pobraniu treści artykułu (KROK 2C-1) sprawdź, czy w treści
-      artykułu LUB w nazwie działu/rozdziału, w którym się znajduje,
-      występuje choć jedno z tych słów kluczowych (lub oczywisty synonim).
-  (c) BRAK żadnego trafienia → ⛔ SYGNAŁ OSTRZEGAWCZY — silne podejrzenie
-      niedopasowania tematycznego. Nie blokuje automatycznie (możliwe
-      różnice terminologiczne), ale WYMUSZA jawne, świadome porównanie
-      w KROK 2C-2 zamiast automatycznego ✅ — i jeśli po tym porównaniu
-      nadal brak związku, przejdź do KROK 2C-4 (odrzucenie).
-  (d) Trafienie znalezione → kontynuuj normalnie do KROK 2C-1/2C-2,
-      bez pomijania ich (filtr jest sygnałem ostrzegawczym, nie
-      substytutem właściwej weryfikacji treści).
-
-KROK 2C-1 — POBIERZ PEŁNĄ TREŚĆ KONKRETNEGO ARTYKUŁU (nie tylko
-  potwierdzenie, że numer istnieje w spisie/indeksie aktu):
-  web_fetch treści artykułu (ISAP text.html/text.pdf pod właściwą
-  jednostką redakcyjną, lub endpoint ELI /text.html z przejściem do
-  właściwego artykułu). Sam wynik web_search pokazujący tytuł ustawy
-  i numer artykułu w wynikach wyszukiwania NIE spełnia tego kroku —
-  wymagana jest treść samego przepisu.
-
-KROK 2C-2 — WYMÓG CYTATU PRZED ✅ (zasada nadrzędna tego kroku):
-  ⛔ ZAKAZ nadawania ✅ [VER] jakiemukolwiek przepisowi bez zacytowania
-  (w wewnętrznym śladzie weryfikacji, poniżej — nie musi trafić do
-  finalnej odpowiedzi w pełnej postaci, ale MUSI zostać sporządzone
-  i porównane) dosłownego fragmentu jego treści, w brzmieniu pobranym
-  w KROK 2C-1.
-  Porównaj ten fragment z tezą/stanem faktycznym, który ma poprzeć:
-    → Fragment WPROST opisuje analizowaną instytucję/czyn/stawkę/termin
-      → ✅ [VER] dozwolone, kontynuuj do KROK 3 głównej procedury.
-    → Fragment dotyczy INNEGO zagadnienia (mimo że artykuł jest z tej
-      samej ustawy, nawet z tego samego działu tematycznego — np.
-      "akcyza" jako wspólny mianownik NIE wystarcza, gdy jeden przepis
-      dotyczy samochodów, a drugi produkcji poza składem podatkowym)
-      → ⛔ KROK 2C-4 (niżej) — NIE nadawaj ✅, ten artykuł jest błędny.
-
-KROK 2C-3 — ŚLAD WERYFIKACJI Z CYTATEM (format obowiązkowy przy ✅):
-  art. X ustawy [...] — ✅ [VER: źródło, data]
-    Cytat potwierdzający (≤15 słów): "[dosłowny fragment z KROK 2C-1]"
-  Jeżeli artykuł jest długi/wieloustępowy — cytuj fragment JEDNOSTKI
-  redakcyjnej (ustęp/punkt), której realnie dotyczy teza, nie przypadkowe
-  pierwsze zdanie artykułu.
-
-KROK 2C-4 — GDY ARTYKUŁ NIE PASUJE (odrzucenie i korekta):
-  ⛔ NIE podawaj tego numeru artykułu użytkownikowi w żadnej postaci
-     (ani jako ✅, ani jako ⚠️ [NIEWERYFIKOWANE] — to nie jest problem
-     braku weryfikacji, tylko POTWIERDZONY błąd doboru przepisu).
-  → Wykonaj NOWE wyszukiwanie właściwej podstawy: web_search
-    "[teza/stan faktyczny] podstawa prawna [ustawa] przepis" lub, dla
-    kwalifikacji karnoskarbowej, przeszukaj właściwy rozdział KKS wg
-    przedmiotu czynu (patrz też baza aktów okołoakcyzowych,
-    `dr-06-podatki-finanse-publiczne-aml/references/BAZA-AKTOW-
-    OKOLOAKCYZOWYCH.md`, jeśli sprawa dotyczy akcyzy).
-  → Jeśli nowe wyszukiwanie znajdzie właściwy artykuł → wróć do
-    KROK 2C-1 dla NOWEGO numeru.
-  → Jeśli żadne wyszukiwanie nie da jednoznacznego trafienia →
-    ⚠️ [NIEWERYFIKOWANE — nie znaleziono przepisu wprost regulującego
-    ten stan faktyczny; wymaga ręcznej weryfikacji] i NIE podawaj
-    żadnego konkretnego numeru artykułu jako podstawy.
-  → Komunikat, jeśli błędny numer był już wcześniej użyty w tej
-    rozmowie/dokumencie: jawnie skoryguj — "Poprzednio wskazany art. X
-    nie reguluje tej materii (dotyczy [rzeczywisty przedmiot]); właściwą
-    podstawą jest art. Y."
-```
-
-⛔ Ten krok jest OBOWIĄZKOWY dla każdego przepisu ustawowego przywoływanego
-jako konkretna podstawa tezy (nie dla ogólnych odesłań opisowych typu
-"zgodnie z przepisami akcyzowymi...") — niezależnie od tego, czy KROK 2B
-(poziom aktu) zakończył się wynikiem pozytywnym. KROK 2B i KROK 2C są
-KOMPLEMENTARNE, nie zamienne: 2B chroni przed złym aktem, 2C przed złym
-artykułem w dobrym akcie.
 
 ## PROCEDURA OBOWIĄZKOWA PRZED KAŻDYM ORZECZENIEM
 
@@ -637,6 +519,39 @@ SCENARIUSZ C — sygnatura istnieje, ale teza jest inna niż podano w źródle w
      użyto tezy z oficjalnej bazy sn.pl."
 ```
 
+> ⭐⭐⭐ PRECEDENS UZASADNIAJĄCY SCENARIUSZ C (dodano 2026-08-14, na
+> żądanie użytkownika) — postanowienie NSA z 23.06.2026, sygn.
+> **I FZ 104/26** (skład: SSNSA Sylwester Marciniak), ✅ zweryfikowane
+> 8+ zgodnych źródeł (rp.pl, infor.pl, inforlex.pl [pełny tekst],
+> gazetaprawna.pl, lex.media.pl, forsal.pl, taxbooster.pl, telko.in).
+>
+> Pełnomocnik w zażaleniu (sprawa o wstrzymanie wykonania decyzji VAT,
+> art. 61 §3 PPSA) powołał TRZY sygnatury NSA: II FZ 230/17, II GZ
+> 452/18, I GZ 164/22 — WSZYSTKIE TRZY SĄ PRAWDZIWE i REALNIE ISTNIEJĄ
+> w CBOSA (⭐⭐⭐ to NIE był Scenariusz B — sygnatury nie były zmyślone).
+> NSA ustalił: (1) każde z tych postanowień zostało wydane W INNEJ
+> DACIE niż podana przez pełnomocnika; (2) ŻADNE nie dotyczyło
+> wstrzymania wykonania (art. 61 §3 PPSA) — dotyczyły braków
+> formalnych skargi i przywrócenia terminu; (3) we wszystkich trzech
+> zażalenia skarżących zostały ODDALONE, a uzasadnienia NIE zawierały
+> tez, które pełnomocnik im przypisał (o nadmiernym formalizmie sądu,
+> obowiązku poszukiwania okoliczności w aktach administracyjnych).
+>
+> NSA wprost nazwał to "jednoznacznie widocznymi śladami tzw.
+> halucynacji AI" i ocenił "nader krytycznie bezrefleksyjne
+> korzystanie z narzędzi AI przez zawodowego pełnomocnika" — z
+> naciskiem na wymiar ETYCZNY (klient płaci za profesjonalną usługę,
+> nie za nieweryfikowany output narzędzia dostępnego każdemu).
+>
+> ⭐⭐⭐ DLACZEGO TO WAŻNIEJSZE niż zmyślona sygnatura (Scenariusz B):
+> weryfikacja "czy sygnatura istnieje" (KROK 0/1 wyżej) NIE WYSTARCZY
+> samodzielnie — sygnatura może być w 100% prawdziwa, a MIMO TO cały
+> "cytat" być halucynacją, jeśli data/przedmiot/teza nie zostały
+> zweryfikowane WPROST z treścią orzeczenia pod TĄ sygnaturą. To
+> dokładnie mechanizm, przed którym chroni Scenariusz C — ten
+> precedens jest jego rzeczywistym uzasadnieniem, nie tylko
+> teoretycznym ryzykiem.
+
 ## SKUTKI NARUSZENIA
 
 Naruszenie tego hardgate = błąd dyskredytujący całą analizę lub pismo.
@@ -687,14 +602,6 @@ Przed wysłaniem odpowiedzi zawierającej sygnaturę orzeczenia odpowiedz na ka�
   (nie zgadnięta)?
     TAK, zweryfikowana → dodaj
     Niepewna/niezweryfikowana → NIE dodawaj kotwicy, zostaw sam URL + lokalizację opisową
-
-□ (dodano 2026-08-11, v2.5) Czy dla KAŻDEGO przepisu oznaczonego ✅ [VER]
-  istnieje w śladzie weryfikacji zacytowany fragment jego treści (KROK
-  2C-2/2C-3), a nie tylko potwierdzenie, że numer artykułu istnieje?
-    TAK, cytat jest i tematycznie pasuje do tezy → ✅ zostaw
-    NIE (brak cytatu, lub cytat dotyczy innego zagadnienia) → ⛔ cofnij
-        się do KROK 2C-1, pobierz treść, porównaj; jeśli nie pasuje →
-        KROK 2C-4 (odrzuć numer, znajdź właściwy lub oznacz ⚠️)
 
 □ (dodano 2026-07-17, v2.4) Czy w tej odpowiedzi PONOWNIE użyto oznaczenia/
   skrótu prawnego (np. nazwy rejestru, repertorium, symbolu aktu), które

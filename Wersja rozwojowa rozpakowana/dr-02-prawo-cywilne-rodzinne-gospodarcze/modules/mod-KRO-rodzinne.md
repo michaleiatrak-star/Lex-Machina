@@ -148,13 +148,17 @@ FUNDAMENTALNY dział Kodeksu (Dział II Tytułu I)
   przy OCENIE "winy" w ROZWODZIE Z powodu ODMOWY współżycia (patrz
   sekcja "ORZEKANIE O WINIE" NIŻEJ)
 
-⭐ POWIĄZANY WYROK SN: wyrok SN z 11.12.2018 R. — cytowany W
-  DOKTRYNIE pod ROBOCZYM tytułem "Świadoma PRAW i obowiązków
-  wynikających Z zawarcia MAŁŻEŃSTWA wiem, że NIE muszę ICH
-  respektować" — konsekwencje TAKIEJ postawy DLA oceny WINY w
-  rozkładzie POŻYCIA — ⚠️ DOKŁADNA sygnatura i PEŁNA treść
-  wyroku NIE zweryfikowane W tej transzy, PUNKT startowy DO
-  dalszego badania JEŚLI istotne W konkretnej sprawie
+⛔ USUNIĘTO 2026-08-13c (był: "wyrok SN z 11.12.2018, cytowany pod
+  roboczym tytułem..."): próba weryfikacji (web_search, kilka zapytań
+  ukierunkowanych na treść/datę/temat) NIE potwierdziła istnienia
+  wyroku SN o tej dacie i tym roboczym tytule w żadnym dostępnym
+  źródle. Zgodnie z HARD GATE (zakaz cytowania z pamięci, zakaz
+  pozostawiania niepotwierdzonych odesłań do orzeczeń) — odesłanie
+  USUNIĘTE zamiast pozostawione jako "punkt startowy". Jeśli temat
+  "świadomość obowiązków małżeńskich a wina rozwodowa" jest aktywny w
+  konkretnej sprawie — poszukać właściwego orzeczenia od nowa przez
+  `orzeczenia-sadowe-v2`, nie zakładać, że powyższy (niepotwierdzony)
+  cytat odnosi się do realnego wyroku.
 
 ⭐ ZANIEDBYWANIE obowiązków MAŁŻEŃSKICH jako WYZNACZNIK winy: W
   DOKTRYNIE i orzecznictwie — zaniedbywanie OBOWIĄZKÓW z art. 23
@@ -740,8 +744,39 @@ dostępna TYLKO w ciągu 3 miesięcy od uprawomocnienia rozwodu, WYŁĄCZNIE
 powrót do nazwiska sprzed małżeństwa. Ustawa z 2008 r. jest szerszym
 mechanizmem, dostępnym zawsze, dla każdego ważnego powodu.
 
-⚠️ Dokładna procedura (termin, koszty, odwołanie) niepotwierdzona w
-pełni w tej sesji — punkt startowy.
+✅ UZUPEŁNIONE 2026-08-13c (wcześniej: "punkt startowy") — zweryfikowane
+w 5+ zgodnych źródłach (portale gov.pl gmin/BIP, adwokatpazdan.pl,
+fundacja.togatus.pl), Rząd 1/2B — akt: Dz.U. 2008 nr 220 poz. 1414,
+t.j. Dz.U. 2021 poz. 1988 ze zm.:
+
+⭐⭐ ORGAN WŁAŚCIWY: kierownik URZĘDU STANU CYWILNEGO właściwy dla
+  miejsca ZAMIESZKANIA (pobytu stałego) wnioskodawcy — osoby za granicą
+  mogą złożyć wniosek za pośrednictwem KONSULA, wskazując właściwy USC
+
+⭐⭐ PRZESŁANKI (katalog ZAMKNIĘTY "ważnych powodów", przykładowo):
+  imię/nazwisko OŚMIESZAJĄCE lub nielicujące z GODNOŚCIĄ człowieka,
+  posługiwanie się od DAWNA innym imieniem/nazwiskiem niż w akcie stanu
+  cywilnego, powrót do nazwiska UŻYWANEGO przed błędną czynnością stanu
+  cywilnego (⭐ TA przesłanka nakłada się z sytuacją opisaną wcześniej
+  w tym module)
+
+⭐⭐ OPŁATA: opłata SKARBOWA za wydanie decyzji — **37 zł** (stan
+  na 2025/2026)
+
+⭐⭐ TERMIN wydania decyzji: DO 30 DNI od złożenia KOMPLETNEGO wniosku;
+  w sprawach BARDZIEJ SKOMPLIKOWANYCH — przedłużenie do 2 MIESIĘCY
+
+⭐⭐⭐ ODWOŁANIE (⭐ istotna różnica względem trybu rozwodowego z art. 59
+  KRO — TU odwołanie idzie do ORGANU ADMINISTRACJI, nie do sądu wyższej
+  instancji): od DECYZJI ODMOWNEJ przysługuje odwołanie do WOJEWODY
+  właściwego dla siedziby USC, w TERMINIE 14 DNI od doręczenia decyzji,
+  za POŚREDNICTWEM kierownika USC, który wydał decyzję. Odwołanie jest
+  WOLNE OD OPŁAT. Strona może też ZRZEC SIĘ prawa do odwołania (decyzja
+  staje się wtedy natychmiast ostateczna).
+
+⭐ TRYB POSTĘPOWANIA: sprawa toczy się wg przepisów KPA (postępowanie
+  administracyjne) — kończy się DECYZJĄ o zmianie ALBO decyzją o
+  ODMOWIE zmiany.
 ```
 
 ---

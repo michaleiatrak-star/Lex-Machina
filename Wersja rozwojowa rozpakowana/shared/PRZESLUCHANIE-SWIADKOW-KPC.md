@@ -62,7 +62,23 @@ Technika: Dokument PRZED pytaniem o zaprzeczenie
 ```
 
 ## PODSTAWY PRAWNE
-- Zakaz pytań sugerujących własnym świadkom: art. 171 §4 KPK / art. 259 §2 KPC
+- Zakaz pytań sugerujących własnym świadkom: art. 171 §4 KPK (WYRAŹNY
+  przepis ustawowy) / w KPC — ⚠️ POPRAWIONE 2026-08-08 (FAZA 3E/
+  ZASADA 14): poprzednia wersja błędnie podawała "art. 259 §2 KPC" —
+  TEN przepis dotyczy CAŁKOWICIE INNEJ kwestii (brak zgody na
+  zwolnienie z obowiązku zachowania tajemnicy państwowej jako
+  przesłanka niemożności bycia świadkiem) — W POSTĘPOWANIU CYWILNYM
+  BRAK JEST wyraźnego, odrębnego przepisu zakazującego pytań
+  sugerujących — jedynie art. 271 §1 KPC reguluje OGÓLNY tryb
+  składania zeznań (świadek najpierw mówi swobodnie, DOPIERO potem
+  sędziowie/strony zadają pytania) — zakaz pytań sugerujących
+  WYNIKA z DOKTRYNY i ORZECZNICTWA (przewodniczący uchyla pytania
+  sugerujące, nieistotne lub niewłaściwe — na zasadzie OGÓLNEGO
+  kierowania rozprawą), NIE z odrębnego przepisu ustawowego jak w
+  KPK — potwierdzone w 6+ zgodnych źródłach (standardyprawa.pl,
+  gasiorowska.eu: "w postępowaniu cywilnym nie jest to nawet
+  określone [w przepisach]... doktryna i orzecznictwo wskazują
+  jedynie, iż przewodniczący uchyla pytania sugerujące")
 - Konfrontacja z wcześniejszymi zeznaniami: art. 272 KPC / art. 391 KPK
 - Prawo do odmowy odpowiedzi: art. 183 KPK / art. 261 KPC
 - Świadek koronny / tajny: odrębne przepisy — weryfikuj KPK

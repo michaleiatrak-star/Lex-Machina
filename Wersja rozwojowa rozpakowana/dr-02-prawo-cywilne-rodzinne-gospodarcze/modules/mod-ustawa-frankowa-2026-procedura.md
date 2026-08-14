@@ -132,10 +132,35 @@ REFERENDARZE SĄDOWI: otrzymali UPRAWNIENIE do UMARZANIA postępowań
   przepisów w życie — sąd Z URZĘDU (bez wniosku) ZWRACA **50%**
   opłaty od pozwu/apelacji
 
-ZMIANY DOT. SKARG KASACYJNYCH do SN — MAJĄ przyczynić się do
-  skrócenia oczekiwania na PRAWOMOCNE wyroki (⚠️ dokładny mechanizm
-  NIE w pełni zweryfikowany w tej sesji — punkt startowy do dalszej
-  weryfikacji, jeśli sprawa dotyczy etapu kasacyjnego)
+✅ UZUPEŁNIONE 2026-08-13c (wcześniej: "punkt startowy") — potwierdzone
+  przez gov.pl/Ministerstwo Sprawiedliwości (Rząd 1) + forsal.pl,
+  prawo.pl (Rząd 2B):
+
+⭐⭐⭐ MECHANIZM: ustawa pozwala Sądowi Najwyższemu **ZMIENIĆ już wydane
+  postanowienie o PRZYJĘCIU do rozpoznania** skargi kasacyjnej BANKU w
+  sprawie frankowej i **ODMÓWIĆ jej przyjęcia**, JEŻELI okaże się, że
+  NIE ZACHODZI potrzeba wykładni PRZEPISÓW budzących poważne wątpliwości
+  ani ROZBIEŻNOŚĆ w orzecznictwie sądów (⭐ czyli standardowe przesłanki
+  przedsądu kasacyjnego z art. 3989 KPC, ale z możliwością REWIZJI
+  wcześniejszej, już pozytywnej decyzji o przyjęciu — to jest ELEMENT
+  NOWY, epizodyczny, dotyczący WYŁĄCZNIE spraw frankowych)
+
+⭐⭐ TRYB: decyzję SN podejmuje na POSIEDZENIU NIEJAWNYM, w SKŁADZIE
+  JEDNEGO SĘDZIEGO (⭐ uproszczenie względem typowego składu — cel:
+  szybkie odciążenie SN od zaległych skarg kasacyjnych banków w
+  sprawach, gdzie linia orzecznicza jest już ustalona)
+
+⭐ CEL SYSTEMOWY: umożliwienie SN "rozładowania zaległości" w sprawach
+  frankowych, które ZDOMINOWAŁY wydziały cywilne SN — MS wskazuje na
+  łączny wpływ blisko pół miliona spraw od 2017 r. do I kw. 2025 r.,
+  z czego sprawy frankowe stanowiły ok. 70% oczekujących spraw w sądach
+  apelacyjnych (dane za I kw. 2026)
+
+⭐ POWIĄZANIE z zachętą finansową (zwrot 50% opłaty przy cofnięciu) —
+  MECHANIZM DZIAŁA RÓWNIEŻ na etapie kasacyjnym: cofnięcie skargi
+  kasacyjnej w ciągu 6 miesięcy od wejścia ustawy w życie (7.08.2026)
+  uprawnia do zwrotu 50% opłaty od skargi kasacyjnej — analogicznie do
+  pozwu/apelacji już opisanych wyżej w tym module.
 ```
 
 ## 4. ⭐⭐⭐ KLUCZOWE ZASTRZEŻENIE PRAKTYCZNE — DECYZJA NALEŻY DO

@@ -68,7 +68,38 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (38 łącznie — ✓ 38 OK, ☐ 0 STUB)
+## Moduły (43 łącznie — ✓ 43 OK, ☐ 0 STUB)
+
+**NAPRAWA 2026-08-14c:** dodano `mod-KPC-prawomocnosc-granice-
+apelacji.md` — zamyka część F-65: prawomocność orzeczeń (365-366) i
+granice apelacji (378, 380-386), dotąd bez podstawy prawnej mimo że
+engine appellate-v8 z nich operacyjnie korzystał. PRZY OKAZJI
+zweryfikowano: "deklaracja bez pokrycia" ws. sprzeciwu od referendarza
+okazała się fałszywym alarmem — treść istnieje w pisma-proste-v2.
+
+**NAPRAWA 2026-08-14b:** dodano `mod-KSH-organy-spolki-zoo.md` — zamyka
+rdzeń F-68: organy sp. z o.o. (art. 201-254), najwyższy priorytet z
+raportu KSH, najpopularniejsza forma spółki w praktyce.
+
+**NAPRAWA 2026-08-14:** dodano `mod-PrRestr-dzial-VI-uklad.md` — zamyka
+rdzeń F-69: Dział VI Prawa restrukturyzacyjnego (Układ, art. 150-179)
+nie miał ani jednego numeru artykułu w systemie. Pełny opis: `audyt-
+systemu-v4/references/AUDIT-JOURNAL.md`.
+
+**NAPRAWA 2026-08-13b:** dodano `mod-ustawa-ochrona-praw-lokatorow-
+najem-eksmisja.md` — wypełnienie luki strukturalnej wykrytej w audycie
+zewnętrznym (standardowa procedura eksmisji dla 3 rodzajów najmu, dotąd
+bez żadnego dedykowanego modułu). Jednocześnie uzupełniono treść
+`mod-KRO-opieka-i-kuratela.md` (Dział I rozdz. III-IV + Dział II —
+wcześniej oznaczone "punkt startowy", teraz pełne opracowanie art.
+165-177 KRO). Pełny opis: `AUDIT-JOURNAL.md`, wpis
+AUDYT-2026-08-13-DR02-WYPELNIENIE-LUK.
+
+**NAPRAWA 2026-08-13:** poprzedni licznik "38 łącznie" już zliczał plik
+`mod-KRO-opieka-i-kuratela.md` fizycznie na dysku, ale sam moduł nie był
+wpisany do checklisty `[✓]` poniżej ani do `MAPA-AKTOW.md` — niespójność
+wykryta w audycie zewnętrznym (nie przez `audyt-systemu-v4`), naprawiona
+w tej sesji zgodnie z ZASADĄ 7 (kompletność dostawy).
 
 **Aktualizacja 2026-08-12 (NOWY MODUŁ):** `mod-KRO-opieka-i-kuratela.md`
 — Tytuł III KRO (art. 145-184), dotąd CAŁKOWICIE nieobecny —
@@ -81,6 +112,43 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
 (ustawa z 2001 — inny zawód/funkcja).
 
 ```
+  [✓] NOWY  mod-KRO-opieka-i-kuratela
+              (dodany 2026-08-12 — NAPRAWA 2026-08-13: moduł istniał jako
+               plik i był opisany w prozie powyżej, ale brakowało go w tej
+               checkliście i w MAPA-AKTOW.md — status "widmowy", wykryty i
+               zamknięty w ramach naprawy dokumentacji. Tytuł III KRO
+               [art. 145-184]: opieka nad małoletnim [Dział I, hierarchia
+               wyboru opiekuna art. 149, wymóg zezwolenia sądu art. 156],
+               opieka nad ubezwłasnowolnionym całkowicie [Dział II, art.
+               175-177 — treść SZCZEGÓŁOWA celowo NIE zbadana w tej
+               transzy, oznaczona jako punkt startowy], siedem rodzajów
+               kurateli [Dział III, art. 178-184, w tym kurator dla
+               dziecka poczętego art. 182 i kurator osoby nieobecnej art.
+               184]. ✅ UZUPEŁNIONE 2026-08-13b: Dział I rozdz. III-IV
+               [art. 165-174, nadzór nad opiekunem, obowiązek
+               sprawozdawczy roczny, zwolnienie opiekuna, rachunek
+               końcowy] oraz Dział II [art. 175-177, odesłanie do
+               Działu I, hierarchia opiekuna art. 176, ustanie z mocy
+               prawa] — wcześniej oznaczone "punkt startowy", teraz
+               pełne opracowanie. ⚠️ ROZGRANICZENIE: NIE dubluje mod-ubezwlasnowolnienie-
+               opieka-kuratela.md [ten ostatni pokrywa PROCEDURĘ
+               ubezwłasnowolnienia z KC/KPC oraz hierarchię opiekunów
+               z art. 176 KRO w PEŁNYM opracowaniu] — mod-KRO-opieka-i-
+               kuratela.md jest szerszym opracowaniem STRUKTURY całego
+               Tytułu III KRO i explicite odsyła do tamtego modułu przy
+               Dziale II, bez powielania treści. Rozgraniczenie także od
+               mod-piecza-zastepcza-rodzina-zastepcza.md [odrębna ustawa,
+               nie KRO] — zaznaczone już w treści modułu.)
+  [✓] NOWY  mod-ustawa-ochrona-praw-lokatorow-najem-eksmisja
+              (dodany 2026-08-13 — naprawa luki strukturalnej: pełna
+               regulacja najmu zwykłego/okazjonalnego/instytucjonalnego,
+               trzy różne limity kaucji [12x zwykły, 6x okazjonalny/
+               instytucjonalny — POPRAWKA względem wcześniejszej
+               uproszczonej wzmianki w mod-KW], art. 16 okres ochronny
+               1.11-31.03 i jego wyjątki, art. 1046 §5¹ KPC, art. 678
+               KC. Rozgraniczone od "dzikiego lokatora" [już pokryte w
+               mod-KC-cywilne-zobowiazania-odpowiedzialnosc, bez
+               duplikacji])
   [✓] NOWY  mod-KW-ksiega-wieczysta-zakup-nieruchomosci
               (dodany 2026-08-12, na żądanie użytkownika — dotąd
                CAŁKOWICIE nieobecny temat: rękojmia wiary publicznej
@@ -196,6 +264,18 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
                +OZSS rozszerzone, +świadkowie w sprawach rozwodowych —
                pointer do shared/MOD-ATAK-NA-SWIADKA.md, bez duplikacji)
   [✓] OK    mod-KSH-spolki-handlowe
+  [✓] NOWY  mod-KSH-organy-spolki-zoo
+              (dodany 2026-08-14 — naprawa F-68: KSH Tytuł III, Dział
+               I, Rozdz. 3, art. 201-254. Zarząd [201-211 — dwie
+               funkcje: prowadzenie spraw + reprezentacja, zakaz
+               ograniczenia reprezentacji wobec osób trzecich art.
+               204 §2, konflikt interesów art. 209], zgromadzenie
+               wspólników [227-254 — tryb obiegowy, kompetencje
+               zastrzeżone art. 228/absolutorium, progi uchwał 229/
+               230, zwyczajne vs nadzwyczajne, zastępcze zwołanie
+               przez radę nadzorczą art. 235 §2]. Rozgraniczone od
+               mod-KSH-spolki-handlowe [art. 299, zaskarżanie uchwał
+               — NIE duplikować])
               (rozbudowany 2026-07-19: KONTROLA PRZEDSIĘBIORCY [Rozdział
                5 Prawa przedsiębiorców — zawiadomienie 7-30 dni, sprzeciw
                3 dni robocze, zakaz podwójnej kontroli] + REGLAMENTACJA
@@ -228,6 +308,18 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
                zastrzeżeniem że to wciąż przejęcie, tylko friendly;
                zatruta pigułka, MBO). Odpowiedź na pytanie użytkownika)
   [✓] OK    mod-PrUpad-upadlosc-restrukturyzacja
+  [✓] NOWY  mod-PrRestr-dzial-VI-uklad
+              (dodany 2026-08-14 — naprawa F-69: Dział VI PrRestr,
+               art. 150-179. Przepisy ogólne [150-154, wierzytelności
+               wyłączone z układu — stosunek pracy wymaga zgody],
+               propozycje układowe [155-163, katalog technik
+               restrukturyzacji, ochrona minimum wynagrodzenia],
+               głosowanie i zatwierdzenie [art. 119 — podwójny próg
+               50%/2/3, mechanizm cramdown, test zaspokojenia — nowość
+               23.08.2025, art. 165 — przesłanki odmowy zatwierdzenia
+               w tym kryterium ochrony najlepszych interesów
+               wierzycieli], skutki układu [166 — moc wiążąca mimo
+               pominięcia w spisie])
   [✓] NOWY  mod-ustawa-doradca-restrukturyzacyjny-zawod
               (Dz.U. 2022 poz. 1007 [licencja, sprawdź nowszy t.j.] +
                Pr. upadłościowe Dz.U. 2025 poz. 614 art. 157 + Pr.
@@ -238,6 +330,18 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
                mod-PrUpad-upadlosc-restrukturyzacja — status osoby vs
                przebieg postępowania)
   [✓] OK    mod-KPC-egzekucja-windykacja
+  [✓] NOWY  mod-KPC-prawomocnosc-granice-apelacji
+              (dodany 2026-08-14 — naprawa F-65: prawomocność orzeczeń
+               [363-366 — formalna vs materialna, tryb stwierdzenia,
+               moc wiążąca, powaga rzeczy osądzonej z dwoma
+               ograniczeniami przedmiotowym/podmiotowym] i granice
+               apelacji [378, 380-386 — związanie granicami
+               zaskarżenia, apelacja pełna art. 382, zakaz
+               reformationis in peius art. 384 z niuansami dla
+               postępowania nieprocesowego]. Weryfikacja: "deklaracja
+               bez pokrycia" ws. sprzeciwu od referendarza okazała
+               się fałszywym alarmem, treść realnie istnieje w
+               pisma-proste-v2/SPH-inne.md)
   [✓] OK    mod-ustawa-prawa-konsumenta
   [✓] OK    mod-ustawa-UZNK-nieuczciwa-konkurencja
   [✓] OK    mod-ustawa-UOKIK-antymonopolowe

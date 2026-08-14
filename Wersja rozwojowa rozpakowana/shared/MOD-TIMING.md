@@ -117,7 +117,23 @@ w ustnej wymianie z sądem; kwestia, co do której sędzia powinien usłyszeć
 odpowiedź przeciwnika "na gorąco."
 
 **Zasada bezpieczeństwa:** sprawdź czy argument nie jest objęty prekluzją
-pisemną (art. 207 §6, art. 217 §2 KPC w brzmieniu na datę — weryfikacja ISAP).
+pisemną — ⚠️⚠️ POPRAWIONE 2026-08-08 (FAZA 3E/ZASADA 14): "art. 207 §6,
+art. 217 §2 KPC" to przepisy Z OKRESU SPRZED nowelizacji z 2019 r. —
+ZOSTAŁY UCHYLONE (potwierdzone w 4+ zgodnych źródłach, w tym rp.pl:
+"Uchylone zostały przepisy art. 207 i 217 kpc, które określały zasady...
+prekluzji dowodowej") — NIE CYTUJ ich jako aktualnie obowiązujących bez
+WYRAŹNEGO zaznaczenia kontekstu historycznego (np. sprawa wszczęta
+przed 7.11.2019, gdzie mogą mieć ZASTOSOWANIE na mocy przepisów
+przejściowych). AKTUALNY mechanizm: utrata prawa powoływania
+twierdzeń/dowodów następuje GŁÓWNIE gdy (1) przewodniczący ZOBOWIĄZAŁ
+stronę do podania WSZYSTKICH twierdzeń/dowodów w piśmie przygotowawczym
+POD RYGOREM utraty tego prawa (konkretne zarządzenie sądu, NIE
+automatyzm ustawowy), LUB (2) w postępowaniach SZCZEGÓLNYCH z WŁASNYM
+reżimem prekluzji: art. 344 §2 KPC (sprzeciw od wyroku zaocznego), art.
+493 §1 KPC (zarzuty od nakazu zapłaty), art. 503 §1 KPC (sprzeciw od
+nakazu w postępowaniu upominawczym) — SPRAWDŹ, KTÓRY z tych
+mechanizmów ma zastosowanie w KONKRETNEJ sprawie, ZAMIAST zakładać
+ogólną prekluzję na wzór starego art. 207/217.
 
 ---
 

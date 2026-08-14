@@ -291,7 +291,7 @@ DOFINANSOWANIE DO WYNAGRODZENIA (art. 26a ustawy rehabilitacyjnej):
 ### 5.5 Ulga rehabilitacyjna (PIT)
 
 ```
-Art. 26 ust. 7a pkt 3 ustawy PIT (Dz.U. 2024 poz. 226 t.j. — weryfikuj):
+Art. 26 ust. 7a pkt 3 ustawy PIT (Dz.U. 2026 poz. 592 t.j. — ⚠️ POPRAWIONE 2026-08-08, było przestarzałe "2024 poz. 226" — weryfikuj):
   Odliczenie od dochodu wydatków na:
   → Zakup i naprawę sprzętu rehabilitacyjnego i środków pomocniczych (laski, psy przewodnicy)
   → Adaptację i wyposażenie mieszkania

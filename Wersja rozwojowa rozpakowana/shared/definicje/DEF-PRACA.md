@@ -117,12 +117,28 @@ MIN. ZADOŚĆUCZYNIENIE — POTWIERDZONA OSTATECZNA KWOTA:
     (dyskryminację) — ODRĘBNIE, NIŻSZY próg: min. WYNAGRODZENIE ZA
     PRACĘ (1-krotność, nie 6-krotność jak przy mobbingu)
 
-OBOWIĄZEK REGULAMINU ANTYMOBBINGOWEGO: pracodawca zatrudniający ≥9
-  OSÓB — musi określić reguły/procedury/częstotliwość
+OBOWIĄZEK REGULAMINU ANTYMOBBINGOWEGO: pracodawca zatrudniający ≥10
+  OSÓB (⚠️ POPRAWIONE 2026-08-08, FAZA 3E/ZASADA 14: poprzednia wersja
+  podawała "≥9" — TO był próg z WCZEŚNIEJSZEGO PROJEKTU rządowego
+  [Rada Ministrów, 17.02.2026] — PODCZAS prac legislacyjnych PRÓG
+  ZMIENIONO na 10 w OSTATECZNEJ, PODPISANEJ ustawie z 19.06.2026 [art.
+  94³a KP] — potwierdzone w 3+ zgodnych, PÓŹNIEJSZYCH źródłach
+  omawiających JUŻ podpisaną ustawę [jdp-law.pl, gwlex.pl, infor.pl] —
+  KONTRASTUJE z WCZEŚNIEJSZYMI źródłami z lutego-czerwca 2026 nadal
+  pokazującymi "9", które opisywały jeszcze NIEOSTATECZNY projekt —
+  ⭐ WNIOSEK METODOLOGICZNY: przy PRÓGACH liczbowych w USTAWACH
+  PRZECHODZĄCYCH przez pełny proces legislacyjny — próg MOŻE się
+  ZMIENIĆ MIĘDZY projektem a wersją OSTATECZNĄ, sprawdzaj datę źródła
+  względem daty PODPISANIA, nie tylko względem daty PUBLIKACJI
+  artykułu) — musi określić reguły/procedury/częstotliwość
   przeciwdziałania mobbingowi w regulaminie pracy LUB obwieszczeniu,
   prowadzić działania profilaktyczne, reagować na zgłoszenia,
   zapewniać realne wsparcie. Mniejsi pracodawcy: BEZ obowiązku
   formalnego regulaminu, ALE NADAL zobowiązani przeciwdziałać
+  ⭐ TERMIN NA DOSTOSOWANIE — doprecyzowane 2026-08-08: 6 MIESIĘCY od
+  WEJŚCIA W ŻYCIE (NIE od ogłoszenia) — co przy 3-miesięcznym vacatio
+  legis DAJE ŁĄCZNIE **9 MIESIĘCY OD OGŁOSZENIA** w Dz.U. — potwierdzone
+  BEZPOŚREDNIO gov.pl/web/rodzina (Rząd 1, MRPiPS)
   mobbingowi
 
 PRAWO REGRESU PRACODAWCY: pracodawca, który wypłacił zadośćuczynienie,

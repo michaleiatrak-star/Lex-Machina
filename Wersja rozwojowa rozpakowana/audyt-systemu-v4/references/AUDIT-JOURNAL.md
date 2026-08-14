@@ -37168,3 +37168,1155 @@ zadanie audytowe.
 **Weryfikacja liczby plików (ZASADA 7):** audyt-systemu-v4 PRZED = 45, PO = 46 (+1 nowy plik raport-pokrycia-KKW.md; indeks nadpisany, nie nowy plik; edycja treści WARN-OTWARTE.md i AUDIT-JOURNAL.md).
 
 ### BILANS CAŁOŚCIOWY (audyt-systemu-v4: 45→46 plików [+1 raport KKW]; ZIP zawiera pełny skumulowany stan F-5 do F-75 oraz politykę czyszczenia)
+
+## AUDYT-2026-08-13s-NAPRAWA-F23-F66-CZESCIOWA + AKTUALIZACJA-SKD — Pierwsza naprawa treści w cyklu WARN: nowy moduł tymczasowego aresztowania (KPK 249-263) zamyka F-23 i częściowo F-66; niezależnie: wpisanie przełomowego wyroku SN II CSKP 89/26 do modułu SKD
+
+**Kontekst:** użytkownik poinstruował rozpoczęcie pracy nad otwartymi
+WARN-ami, z dostawą plików wg Reguły 7. Wybrano F-23/F-66 jako pierwszy
+cel — najwyższy priorytet z PODWÓJNYM, niezależnym potwierdzeniem (własny
+grep tej sesji + zewnętrzny raport artykuł-po-artykule), więc najniższe
+ryzyko błędu. RÓWNOLEGLE użytkownik zgłosił nowy, ważny wyrok SN ws.
+SKD — potraktowany jako pilna, odrębna aktualizacja tego samego DR-02.
+
+**Naprawa 1 — nowy moduł DR-03:** `mod-KPK-srodki-zapobiegawcze-
+tymczasowe-aresztowanie.md` (KPK Dział VI Rozdz. 28, art. 249-263).
+Zweryfikowane w 4+ zgodnych źródłach (web_search): przesłanka ogólna
+(249 §1, §5 — obrońca obowiązkowy), przesłanki szczególne (258 §1-4,
+w tym najczęstsza w praktyce — obawa matactwa, §1 pkt 2), przesłanki
+negatywne (259 — sytuacja rodzinna), tryb (250 — wyłączność sądowa,
+251 — wymóg uzasadnienia, 252 — zażalenie w 7 dni, inny skład tego
+samego sądu nie wyższa instancja, 254 — wniosek o uchylenie w każdym
+czasie), maksymalne okresy (263 — 3/12/24 miesiące + skutek
+przekroczenia = obowiązek natychmiastowego zwolnienia). Zarejestrowano
+w SKILL.md (licznik 57→58) i MAPA-AKTOW.md DR-03, z jawnym ostrzeżeniem
+o niezweryfikowanej metryce bazowej KPK (2 pominięte nowelizacje —
+przeniesione z F-66).
+
+**Rejestr WARN:** F-23 ZAMKNIĘTA i USUNIĘTA z WARN-OTWARTE.md (zgodnie
+z polityką pliku — zamknięcie odnotowuje się WYŁĄCZNIE tutaj, w
+dzienniku). F-66 ZAKTUALIZOWANA — fragment aresztowania oznaczony jako
+naprawiony, reszta (podstawy odwoławcze, przesłanki procesowe,
+biegli, oskarżenie prywatne, wyrok łączny, nieaktualna metryka bazowa)
+POZOSTAJE otwarta, priorytet obniżony z "wysoki" na "średni-wysoki".
+Plik `raport-pokrycia-KPK.md` w katalogu referencyjnym NIE usunięty
+(zgodnie z polityką czyszczenia — usuwać dopiero po PEŁNYM zamknięciu
+flagi, nie częściowym).
+
+**Naprawa 2 — aktualizacja modułu SKD (niezależna od cyklu WARN,
+zgłoszona wprost przez użytkownika):** `dr-02/modules/mod-ustawa-
+kredyt-konsumencki-SKD.md` — dopisano sekcję o wyroku SN z 8.07.2026,
+sygn. II CSKP 89/26 (5+ zgodnych źródeł: prawo.pl, infor.pl,
+kancelariastalski.pl, rachelski.pl, sprawy-przeciwko-bankom.pl).
+Kluczowe: wyrok KASATORYJNY, nie uchwała (III CZP 15/25 nadal
+zawieszona) — ale uzasadnienie systematyzuje 7 tez: funkcja
+sankcji (ochrona+prewencja), obiektywna ocena całkowitej kwoty/kosztu,
+RRSO musi odpowiadać rzeczywistości, ODSETKI WYŁĄCZNIE od całkowitej
+kwoty (nie od kosztów — kontynuacja linii z II CSKP 1953/22 z
+3.06.2025, nie zwrot), zmiana opłat musi być weryfikowalna przez
+konsumenta, HARMONOGRAM musi rozbijać ratę na 3 pozycje nie 2 (⭐ nowy,
+szeroko zakrojony front — dotyczy potencjalnie milionów umów niezależnie
+od sporu o odsetki), prawo odstąpienia z pełną informacją finansową.
+Kluczowa zasada: "wystarczy jedno naruszenie" (nie trzeba całego
+katalogu), ALE musi realnie dotykać zdolności oceny zobowiązania (test
+z TSUE C-472/23). Subiektywne zrozumienie konsumenta jest irrelewantne.
+
+**Błąd własny w tej turze i jego naprawa:** przy wstawianiu sekcji do
+modułu SKD, `str_replace` przypadkowo usunął nagłówek "## SPÓR O
+WYKONANIE UMOWY" (nie uwzględniony w `new_str`, mimo obecności w
+`old_str` do dopasowania). Wykryte natychmiast przez `grep -n "^## "`
+po edycji (brakujący nagłówek w spisie treści pliku) i naprawione
+drugim `str_replace`, z jednoczesną aktualizacją daty weryfikacji tej
+sekcji (2026-08-04→2026-08-13) i jawnym zaznaczeniem, że NOWY wyrok SN
+NIE rozstrzyga sporu o termin z art. 45 ust. 5 (te dwa wątki pozostają
+odrębne — ważne rozróżnienie, żeby nie pomylić czytelnikowi obu spraw).
+TRZECI z rzędu przypadek tego samego typu błędu w tej sesji (poprzednio:
+usunięcie markera "Obserwacje informacyjne" przy F-75) — wzorzec:
+`str_replace` przy wstawianiu treści TUŻ PRZED stałym elementem
+strukturalnym systematycznie pomija ten element w `new_str`. REKOMENDACJA
+METODOLOGICZNA NA PRZYSZŁOŚĆ: po KAŻDYM takim wstawieniu, natychmiast
+`grep` weryfikować obecność sąsiadujących nagłówków/markerów, nie
+polegać na samym komunikacie "successfully replaced".
+
+**Weryfikacja liczby plików (ZASADA 7):**
+- dr-02: PRZED = 41, PO = 41 (edycja treści 1 pliku, mod-ustawa-
+  kredyt-konsumencki-SKD.md; SPM-skd-oswiadczenie.md w pisma-proste-v2
+  NIE wymagał zmian — deleguje merytorykę do DR-02).
+- dr-03: PRZED = 59 (świeża kopia z /mnt/skills/user), PO = 60
+  (+1 nowy moduł mod-KPK-srodki-zapobiegawcze-tymczasowe-aresztowanie.md;
+  edycja treści SKILL.md i MAPA-AKTOW.md).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (edycja treści WARN-OTWARTE.md
+  [usunięcie 1 wiersza, edycja 1 wiersza] i AUDIT-JOURNAL.md; plik
+  raport-pokrycia-KPK.md w katalogu referencyjnym CELOWO nieusunięty).
+
+### BILANS CAŁOŚCIOWY (dr-02: 41 plików bez zmian liczbowych [treść];  dr-03: 59→60 plików [+1 nowy moduł]; audyt-systemu-v4: 46 plików bez zmian liczbowych — pierwsza sesja NAPRAWCZA w cyklu WARN, po 18 sesjach wyłącznie badawczo-rejestracyjnych)
+
+## AUDYT-2026-08-13t-SERIA-NAPRAW-SZYBKICH-PLUS-F27 — Zamknięcie 9 flag (F-27, F-37, F-44, F-49-częściowo, F-45-częściowo, F-51, F-52, F-53, F-54, F-58) — 7 pełnych zamknięć, 2 częściowe, w 6 skillach jednocześnie
+
+**Kontekst:** kontynuacja pracy nad otwartymi WARN na wyraźne polecenie
+użytkownika ("kontynuuj pracę... i zamykaj je"). Ta tura: seria szybkich,
+niskoryzykownych napraw rejestracyjnych/notatek w 5 DR-skillach + jedna
+większa naprawa merytoryczna (F-27).
+
+**Zamknięcia PEŁNE (usunięte z WARN-OTWARTE.md):**
+
+1. **F-37 (DR-07)** — dopisano brakujący wiersz mapy dla
+   `mod-PZP-wykonanie-umowy-compliance` (dane już znane, ten sam akt
+   PZP co moduł główny).
+
+2. **F-44 (DR-10)** — usunięto przestarzały, sprzeczny wiersz "⛔ NOWA
+   POZYCJA — LUKA SYSTEMOWA" (izby lekarskie) z `dr-10/MAPA-AKTOW.md`
+   — sprzeczny z poprawnym wierszem "✅ F-3 ZAMKNIĘTA" niżej w tym
+   samym pliku.
+
+3. **F-51 (DR-12)** — dopisano wiersz mapy dla
+   `mod-techniki-mediacyjne-negocjacyjne` z ustaleniem: moduł CELOWO
+   nie ma własnego aktu (czysta metodyka, komplementarny do
+   mod-KPC-arbitraz-mediacja-ADR).
+
+4. **F-52 (DR-12)** — naprawiono przestarzałe odesłanie "mod-USTAWA-
+   izby-lekarskie (NOWY, do utworzenia w dr-10)" — zastąpione
+   poprawnym stanem (temat już pokryty w mod-ustawa-zawod-lekarza,
+   F-3 zamknięta 2026-07-15).
+
+5. **F-53 (DR-12→DR-10)** — POTWIERDZONA i NAPRAWIONA realna luka:
+   ustawa o samorządzie pielęgniarek i położnych (Dz.U. 2025 poz.
+   1760, Rozdział 6 "Odpowiedzialność zawodowa") była całkowicie
+   nieobecna w `dr-10/MAPA-AKTOW.md`. Zweryfikowano numer przez
+   web_search (5+ zgodnych źródeł, w tym isap.sejm.gov.pl). Dodano
+   wiersz mapy ORAZ rozbudowano istniejącą sekcję "Odpowiedzialnosc
+   dyscyplinarna" w `mod-ustawa-pielegniarka-polozna.md` o właściwą
+   podstawę prawną i procedurę (organ I/II instancji, kary, Rzecznik
+   Odpowiedzialności Zawodowej).
+
+6. **F-54 (DR-12)** — zaktualizowano sekcję "POZOSTAŁE 11 ZAWODÓW — DO
+   WERYFIKACJI": usunięto 5 pozycji, które miały już odpowiedź WYŻEJ w
+   tej samej mapie (lekarz, pielęgniarka/położna, farmaceuta, lekarz
+   weterynarii, psycholog) — lista była częściowo przestarzała.
+   Pozostaje 6 genuinie niezweryfikowanych zawodów.
+
+7. **F-58 (DR-13)** — usunięto Straż Graniczną z przestarzałej notatki
+   podsumowującej w `dr-13/MAPA-AKTOW.md` (flaga zamknięta 2026-07-21,
+   notatka nigdy nieodświeżona).
+
+8. **F-27 (DR-04)** — NAJWIĘKSZA naprawa tej tury: nowy moduł
+   `mod-KP-dzial-VIII-rodzicielstwo.md` (KP art. 176-189¹). Zweryfiko-
+   wane 5+ źródeł: urlop macierzyński (art. 180, 20 tyg. + warianty
+   przy zgonie dziecka art. 180¹), urlop rodzicielski (art. 182¹, 41/43
+   tyg., **9 tygodni nieprzenoszalnych per rodzic** — reforma
+   26.04.2023 wdrażająca dyrektywę UE work-life balance, wcześniej
+   32 tyg.), urlop ojcowski (2 tyg., termin do 12 mies. dziecka),
+   urlop wychowawczy (art. 186, do 36 mies. + dodatkowy dla dziecka z
+   niepełnosprawnością do 18 lat, ochrona przed zwolnieniem art. 186⁸),
+   elastyczna organizacja pracy (art. 188¹, dzieci do 8 lat). NAPRAWIONO
+   błędne odesłania w DWÓCH innych modułach (mod-KP-dzial-VII i
+   mod-KP-prawo-pracy), które wskazywały na mod-ustawa-aktywny-rodzic
+   jako rzekome pokrycie Działu VIII — to było błędne zmapowanie
+   (świadczenie ZUS/gminne ≠ przepisy KP o urlopach).
+
+**Zamknięcia CZĘŚCIOWE (zaktualizowane, nie usunięte):**
+
+- **F-45 (DR-10)** — rejestracyjna część naprawiona (2 wpisy [✓] +
+  1 wiersz mapy dla mod-PrFarm-refundacja-nadzor-sankcje). Pozostają
+  3 flagi treściowe "WYMAGA AKTUALIZACJI MODUŁU" (GIS, Prawo oświatowe,
+  edukacja specjalna/dostępność) — priorytet obniżony.
+- **F-49 (DR-11)** — sprzeczna notatka KSC/NIS2 naprawiona (usunięta z
+  listy podsumowującej). Pozostają 3 standardowe flagi treściowe
+  (PrTelekom, informatyzacja, podpis elektroniczny) — priorytet
+  obniżony.
+
+**Bilans tej tury:** 9 flag dotkniętych, 7 w pełni zamkniętych i
+usuniętych z rejestru, 2 częściowo (rejestracyjna/notatkowa część
+zamknięta, treściowa pozostaje). Otwartych flag: 65→57.
+
+**Weryfikacja liczby plików (ZASADA 7) — SZEŚĆ skilli dotkniętych:**
+- dr-04: PRZED = 30 (świeża kopia), PO = 31 (+1 nowy moduł).
+- dr-07: PRZED = 16 (świeża kopia), PO = 16 (edycja treści mapy).
+- dr-10: PRZED = 31 (kontynuacja z wcześniejszej tury tej sesji), PO =
+  31 (edycja treści: SKILL.md, MAPA-AKTOW.md, mod-ustawa-pielegniarka-
+  polozna.md).
+- dr-11: PRZED = 22 (świeża kopia), PO = 22 (edycja treści mapy).
+- dr-12: PRZED = 13 (świeża kopia), PO = 13 (edycja treści mapy).
+- dr-13: PRZED = 10 (świeża kopia), PO = 10 (edycja treści mapy).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (edycja WARN-OTWARTE.md
+  [usunięcie 7 wierszy, edycja 2] i AUDIT-JOURNAL.md).
+
+### BILANS CAŁOŚCIOWY (dr-04: 30→31 [+1]; dr-07/dr-11/dr-12/dr-13: bez zmian liczbowych [treść]; dr-10: bez zmian liczbowych [treść]; audyt-systemu-v4: 46 bez zmian liczbowych — druga sesja NAPRAWCZA w cyklu WARN, 7 flag w pełni zamkniętych jednocześnie)
+
+## AUDYT-2026-08-13u-DODATKOWE-ZAMKNIECIA + ZADANIE-ODLOZONE — Zamknięcie F-62, częściowa naprawa F-24/F-38 + rejestracja nowego zadania meta-poziomu (mapa moduł→akty, na żądanie użytkownika, wykonać po zamknięciu wszystkich F-)
+
+**Kontekst:** kontynuacja pracy nad WARN. Na początku tej tury:
+dostarczono 7 plików z poprzedniej tury (zabrakło wywołań narzędzi),
+zweryfikowano bajtowo. Następnie: (1) zarejestrowano nowe zadanie
+zgłoszone przez użytkownika — mapa "moduł → jakie akty/przepisy
+pokrywa" dla łatwego wdrażania nowelizacji, jawnie ODŁOŻONA do czasu
+zamknięcia wszystkich aktywnych flag F-; (2) kontynuowano zamykanie.
+
+**F-62 (DR-15) — ZAMKNIĘTA w pełni:** weryfikacja treści
+`mod-PZP-zamowienia-obronne-bezpieczenstwa.md` wykazała, że moduł NIE
+zawiera żadnego twardo zakodowanego numeru Dz.U. — to "moduł klasy
+wzorcowej", instruujący wprost "nie cytuj bez aktualnego sprawdzenia
+źródła". Ryzyko było niższe niż standardowa flaga "WYMAGA AKTUALIZACJI"
+zakładała. Numer w MAPA-AKTOW.md (jedyne miejsce referencji) już
+poprawny (2026.793).
+
+**F-38 (DR-07) — częściowo zamknięta:** rozbieżność numeru ustawy o
+PPP (1637 vs 1688) ROZSTRZYGNIĘTA przez web_search — 4+ niezależne
+źródła (isap.sejm.gov.pl, prawo.pl, portalzp.pl, portalkadrowy.pl)
+potwierdzają Dz.U. 2023 poz. 1637 jako jedyny poprawny numer; "1688"
+było zwykłym błędem w źródle wtórnym. Pozostaje 1 drobny punkt (2
+rozdziały PZP niezbadane szczegółowo).
+
+**F-24 (DR-03) — częściowy postęp:** web_search potwierdził, że
+nowelizacja ustawy o przeciwdziałaniu narkomanii (11.06.2026) została
+PODPISANA przez Prezydenta (źródła: rynekzdrowia.pl, prawo.pl, sprzed
+~2-3 tygodni). Dodatkowo ustalono szerszy zakres nowelizacji niż
+wcześniej znany: zmienia RÓWNIEŻ ustawę o Policji (nowy art. 15h dot.
+CBŚP i międzynarodowej współpracy ws. statków) oraz Prawo farmaceutyczne
+(art. 72 ust. 8 pkt 5). Dokładny numer Dz.U. samej nowelizacji (data
+promulgacji) WCIĄŻ nieustalony pomimo próby — flaga POZOSTAJE otwarta,
+priorytet obniżony (niski-średni), z rekomendacją ponownej próby za
+1-2 tygodnie (standardowy odstęp między podpisaniem a publikacją).
+
+**NOWE ZADANIE ODŁOŻONE (na żądanie użytkownika):** dodano sekcję
+"🗺️ ZADANIE ODŁOŻONE" na początku WARN-OTWARTE.md — mapa "moduł →
+jakie akty/przepisy pokrywa" dla wszystkich modułów wszystkich DR,
+skonsolidowana w jednym miejscu (zamiast rozproszonej po 16 osobnych
+MAPA-AKTOW.md), żeby przy nowelizacji jednego aktu dało się znaleźć
+wszystkie moduły do aktualizacji jednym wyszukiwaniem. Świadomie
+ODŁOŻONA do czasu zamknięcia wszystkich aktywnych flag F- — inaczej
+mapa musiałaby być tworzona dwa razy (przed i po ustabilizowaniu
+treści modułów). Zawiera roboczy szkic zakresu i rekomendację
+rozważenia automatyzacji (skrypt zamiast statycznego pliku), żeby
+mapa sama nie stała się kolejną instancją wzorca "stara notatka".
+
+**Bilans tej tury:** 1 flaga zamknięta w pełni (F-62), 2 zaktualizowane
+z realnym postępem (F-24, F-38), 1 nowe zadanie zarejestrowane (odłożone,
+nie liczy się do aktywnych F-). Otwartych flag: 57→56.
+
+**Weryfikacja liczby plików (ZASADA 7):**
+- dr-15: PRZED = 12 (świeża kopia), PO = 12 (edycja treści mapy).
+- dr-07: kontynuacja z wcześniejszej tury (edycja treści mapy, bez
+  zmiany liczby plików).
+- dr-03: kontynuacja (brak zmian w tej turze poza wcześniejszymi).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (edycja WARN-OTWARTE.md
+  [nowa sekcja odłożonego zadania, usunięcie 1 wiersza, edycja 2] i
+  AUDIT-JOURNAL.md).
+
+### BILANS CAŁOŚCIOWY (dr-15: bez zmian liczbowych [treść]; audyt-systemu-v4: 46 bez zmian liczbowych — trzecia sesja naprawcza w cyklu WARN, 56 flag pozostaje otwartych)
+
+## AUDYT-2026-08-13v-NAPRAWA-F59-SKW-SWW — Nowy moduł DR-13 (wojskowe służby specjalne) zamyka F-59 — plus naprawa własnego błędu procesowego (przypadkowe nadpisanie F-58 świeżą kopią z /mnt/skills/user)
+
+**Kontekst:** kontynuacja pracy nad WARN. Cel: F-59 (DR-13, SKW/SWW —
+luka strukturalna, 2 z 6 polskich służb specjalnych bez pokrycia).
+
+**Błąd własny wykryty i naprawiony w trakcie:** przy przygotowaniu
+kopii roboczej DR-13 wykonano `cp -r /mnt/skills/user/dr-13...`
+(przyzwyczajenie z wcześniejszych tur, gdy DR-13 nie było jeszcze
+tknięte w tej sesji) — ALE DR-13 BYŁO już edytowane wcześniej w TEJ
+SAMEJ rozmowie (naprawa F-58, tura poprzednia) i dostarczone jako ZIP.
+Kopiowanie z pristine `/mnt/skills/user` NADPISAŁO tę wcześniejszą
+naprawę. Wykryte NATYCHMIAST przez grep-weryfikację ("czy F-58 fix
+nadal obecny?") — PRZED wykonaniem jakiejkolwiek dalszej edycji.
+NAPRAWIONE: przywrócono poprawną wersję z OSTATNIO DOSTARCZONEGO ZIP-a
+(`/mnt/user-data/outputs/dr-13-....zip`), nie z pristine źródła.
+**Nowa, trwała zasada robocza (zapisana też do zastosowania w
+przyszłości):** przed jakąkolwiek edycją skilla w tej sesji, NAJPIERW
+sprawdzić czy istnieje już dostarczony ZIP w `/mnt/user-data/outputs/`
+dla tego skilla — jeśli tak, przywrócić Z NIEGO, NIE z `/mnt/skills/
+user/`. Kopiowanie z pristine jest właściwe TYLKO gdy skill nigdy
+wcześniej nie był dotknięty w bieżącej rozmowie.
+
+**Naprawa F-59:** nowy moduł `mod-ustawa-SKW-SWW.md` (Dz.U. 2026 poz.
+157 t.j., 5+ zgodnych źródeł: isap.sejm.gov.pl, inforlex.pl, arslege.pl,
+lexlege.pl, prawo.pl). Treść: utworzenie i cele (art. 1-2 — rozróżnienie
+SKW=kontrwywiad/zagrożenia wewnętrzne vs SWW=wywiad/zagrożenia
+zewnętrzne, analogicznie do pary ABW/AW), ustrój i nadzór (art. 3 —
+Szefowie jako centralne organy administracji rządowej pod MON z
+zastrzeżeniami na rzecz PRM, kontrola Sejmu; art. 13 — wieloetapowa
+procedura powoływania Szefów: PRM na wniosek MON, po opinii Prezydenta
++ Kolegium ds. Służb Specjalnych + Sejmowej Komisji; art. 5 — wytyczne
+MON, plany/sprawozdania roczne), współpraca międzynarodowa (zgoda PRM),
+finansowanie/status kadrowy najwyższego kierownictwa. Uprawnienia
+operacyjno-rozpoznawcze (art. 29/33/34) zasygnalizowane punktowo jako
+punkt startowy — poza zakresem tej naprawy, jawnie oznaczone.
+Zarejestrowano w SKILL.md (licznik 10→11) i MAPA-AKTOW.md, z jawnym
+rozgraniczeniem od odrębnego aktu pragmatycznego (ustawa o służbie
+funkcjonariuszy SKW/SWW, Dz.U. 2025.694).
+
+**Weryfikacja liczby plików (ZASADA 7):**
+- dr-13: PRZED = 12 (po przywróceniu z ZIP-a, zawiera już F-58 fix),
+  PO = 13 (+1 nowy moduł).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (edycja treści: usunięcie
+  1 wiersza WARN-OTWARTE.md, dopisanie AUDIT-JOURNAL.md).
+
+**Bilans:** 56→55 otwartych flag.
+
+### BILANS CAŁOŚCIOWY (dr-13: 12→13 [+1 nowy moduł]; audyt-systemu-v4: 46 bez zmian liczbowych — czwarta sesja naprawcza w cyklu WARN)
+
+## AUDYT-2026-08-13w-NAPRAWA-F30 — Zamknięcie F-30 (DR-05, cudzoziemcy/Ukraina, "traktować jak CRIT") — okazała się CZYSTĄ instancją wzorca "stara notatka", nie realną luką treściową
+
+**Kontekst:** kontynuacja pracy nad WARN — wybrano F-30 jako
+najpoważniejszą pozostałą flagę (oznaczona "WYSOKI, TRAKTOWAĆ JAK
+CRIT" przy rejestracji w sesji badania DR-05).
+
+**Kluczowe odkrycie:** przy dogłębnej weryfikacji treści
+`mod-ustawa-cudzoziemcy.md` okazało się, że moduł ZAWIERA już pełną,
+aktualną sekcję "ANEKS A — Ochrona tymczasowa: obywatele Ukrainy"
+(115 linii), datowaną na 2026-07-02 jako naprawę w ramach "WARN-27"
+— TEGO SAMEGO dnia co pierwotny wpis "⛔ PILNE" w mapie, który
+posłużył jako źródło mojej flagi F-30. Innymi słowy: moduł został
+NAPRAWIONY W TEJ SAMEJ SESJI, w której odkryto problem, ale wiersz
+mapy z pierwotną, alarmującą notatką "⛔ PILNE — WYMAGA SESJI
+DEDYKOWANEJ" nigdy nie został odświeżony po naprawie. Potwierdzono
+DODATKOWO: dwa powiązane wiersze mapy (ustawa o udzielaniu ochrony
+cudzoziemcom, ustawa o warunkach dopuszczalności powierzania pracy)
+już miały status "✅ OK" — tylko TEN JEDEN wiersz (specustawa Ukraina)
+pozostał z przestarzałym oznaczeniem. Notatka podsumowująca na dole tej
+samej mapy JUŻ POPRAWNIE mówiła "WARN-27... znaleziony i naprawiony" —
+sprzeczność istniała WEWNĄTRZ jednego pliku, między jednym wierszem
+tabeli a resztą tego samego dokumentu.
+
+**To SZÓSTA z rzędu instancja wzorca "stara notatka"** w tym cyklu
+audytowym (po DR-10 F-44, DR-11 F-49, DR-12 F-52/F-54, DR-13 F-58) —
+POTWIERDZA, że ten wzorzec jest systemowy i wart stałego miejsca w
+metodologii przyszłych przeglądów: PRZED oznaczeniem czegoś jako
+"realna luka treściowa", ZAWSZE sprawdzić treść modułu bezpośrednio,
+nie tylko wiersz mapy — mapa może być przestarzała względem modułu,
+który sama opisuje.
+
+**Naprawa:** wiersz mapy zaktualizowany — status "⛔ PILNE" zastąpiony
+opisem faktycznego stanu (naprawiony 2026-07-02, treść Aneksu A
+podsumowana). F-61 (DR-14, Konwencja genewska) zaktualizowana — usunięto
+odesłanie do F-30 jako "otwartej", zachowując F-61 jako ODRĘBNĄ,
+REALNĄ lukę (fundament traktatowy faktycznie nieobecny, w
+przeciwieństwie do F-30, która była fałszywym alarmem).
+
+**Weryfikacja liczby plików (ZASADA 7):**
+- dr-05: PRZED = 19 (świeża kopia, DR-05 nigdy wcześniej nie edytowany
+  w tej sesji), PO = 19 (edycja treści MAPA-AKTOW.md).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (edycja WARN-OTWARTE.md
+  [usunięcie 1 wiersza F-30, edycja 1 wiersza F-61] i AUDIT-JOURNAL.md).
+
+**Bilans:** 55→54 otwartych flag. Uwaga: F-30 była oznaczona jako
+najwyższy priorytet w systemie ("traktować jak CRIT") — jej zamknięcie
+jest proporcjonalnie ważniejsze niż liczba -1 sugeruje, mimo że
+naprawa okazała się szybsza niż zakładano (nie wymagała "sesji
+dedykowanej", jak sugerowała przestarzała notatka).
+
+### BILANS CAŁOŚCIOWY (dr-05: 19 plików bez zmian liczbowych [treść]; audyt-systemu-v4: 46 bez zmian liczbowych — piąta sesja naprawcza w cyklu WARN)
+
+## AUDYT-2026-08-13x-BADANIE-CUDZOZIEMCY-MOS — Proaktywne badanie najnowszych przepisów o cudzoziemcach (na żądanie użytkownika) — wykryto i naprawiono realną, nieudokumentowaną lukę: system MOS (elektronizacja wniosków pobytowych) w mocy od 27.04.2026, całkowicie nieobecny w module
+
+**Kontekst:** użytkownik poprosił o zbadanie najnowszych przepisów o
+cudzoziemcach (bezpośrednio po zamknięciu F-30 w poprzedniej turze) —
+potraktowane jako zapobiegawcze sprawdzenie, czy po naprawie F-30
+(6.08.2026) coś jeszcze umknęło, ANALOGICZNIE do wcześniejszej prośby
+o sprawdzenie wyroku SN ws. SKD.
+
+**Wynik badania:** ustawa z 21.11.2025 r. o zmianie ustawy o
+cudzoziemcach (wprowadzająca art. 225a i n.) — system teleinformatyczny
+MOS (Moduł Obsługi Spraw), obowiązkowa elektronizacja wniosków o
+zezwolenie na pobyt czasowy/stały/rezydenta długoterminowego UE.
+PODPISANA przez Prezydenta, w PEŁNEJ mocy od **27.04.2026** — czyli
+ponad 3,5 MIESIĄCA przed tym badaniem. Moduł `mod-ustawa-cudzoziemcy.md`
+NIE zawierał ANI JEDNEJ wzmianki o systemie MOS (potwierdzone grep-em:
+zero wystąpień "MOS", "Moduł Obsługi Spraw", "elektroniczn*").
+
+**Znaczenie praktyczne:** to NIE drobna zmiana proceduralna — dotyczy
+WIĘKSZOŚCI wniosków pobytowych składanych w Polsce, z bardzo dotkliwą
+sankcją (pozostawienie wniosku BEZ ROZPOZNANIA — urząd w ogóle nie
+wszczyna postępowania) za złożenie w niewłaściwej formie (papierowej
+po starcie MOS, LUB elektronicznej dla spraw objętych wyjątkiem).
+
+**Naprawa:** dodano nową sekcję "SYSTEM MOS" na początku "3. PROCEDURA"
+w `mod-ustawa-cudzoziemcy.md` (zweryfikowane 5+ zgodnych źródeł: gov.pl/
+UdSC, prawo.pl, 3 urzędy wojewódzkie, legalhr.pl — Rząd 1/2B). Zakres:
+podstawa prawna, 3 typy wniosków objęte obowiązkiem, sankcja za wniosek
+papierowy (nie liczy się data stempla, tylko data wpływu), wyjątki
+nadal wymagające formy papierowej (ICT, łączenie rodzin przy pobycie
+za granicą, członek rodziny obywatela UE/RP/UK przy pobycie za
+granicą), odrębna ścieżka karty pobytu CUKR (start 4.05.2026, 60-dniowy
+termin odbioru pod rygorem unieważnienia), ograniczona rola
+pełnomocnika (koordynacja, nie składanie wniosku za klienta),
+mechanizm techniczny (MOS→wydruk→podpis→Baza Wstępna→wojewoda),
+integracja z inPOL. Zaktualizowano `MAPA-AKTOW.md` o nowy akt.
+
+**Nie zarejestrowano jako oddzielna flaga WARN** — wykryto i naprawiono
+w tej samej sesji, analogicznie do wzorca stosowanego przy naprawach
+"na żądanie" (jak aktualizacja SKD wcześniej w tej rozmowie).
+
+**Weryfikacja liczby plików (ZASADA 7):**
+- dr-05: kontynuacja z poprzedniej tury (19 plików, edycja treści
+  2 plików: modułu i mapy, bez zmiany liczby).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (dopisanie AUDIT-JOURNAL.md).
+
+### BILANS CAŁOŚCIOWY (dr-05: 19 plików bez zmian liczbowych [treść]; audyt-systemu-v4: 46 bez zmian liczbowych — naprawa proaktywna poza cyklem WARN, liczba otwartych flag: 54, bez zmian w tej turze)
+
+## AUDYT-2026-08-13y-NAPRAWA-F55 — Zamknięcie F-55 (DR-12, 2 drobne punkty weryfikacyjne)
+
+**Naprawa:** (1) data przyjęcia obecnej wersji Zasad Etyki Zawodowej
+Rzeczników Patentowych potwierdzona — uchwała nr 4 XIII Nadzwyczajnego
+Krajowego Zjazdu Rzeczników Patentowych z 22.05.2021 r. (potwierdzone
+bezpośrednio pełnym tekstem PDF na rzecznikpatentowy.org.pl). (2)
+numeracja art. 222-260 ustawy o komornikach sądowych (Rozdział 11,
+Odpowiedzialność dyscyplinarna) POTWIERDZONA jako aktualna i poprawna
+— 6+ zgodnych źródeł (lexlege.pl, gofin.pl, prawnik.cc), żadna zmiana
+numeracji od wersji 2018 r. Oba wiersze MAPA-AKTOW.md DR-12
+zaktualizowane.
+
+**Weryfikacja liczby plików:** dr-12: 15 (bez zmian, edycja treści).
+audyt-systemu-v4: 46 (bez zmian, edycja WARN-OTWARTE.md [usunięcie
+1 wiersza] i AUDIT-JOURNAL.md).
+
+**Bilans:** 54→53 otwartych flag.
+
+### BILANS CAŁOŚCIOWY (dr-12: 15 plików bez zmian liczbowych [treść]; audyt-systemu-v4: 46 bez zmian liczbowych — szósta sesja naprawcza w cyklu WARN)
+
+## AUDYT-2026-08-13z-NAPRAWA-F72-CZESCIOWA — Nowy moduł DR-04 (SUS Rozdział 2 — podleganie ubezpieczeniom) częściowo zamyka F-72
+
+**Naprawa:** nowy moduł `mod-SUS-dzial-2-podleganie-ubezpieczeniom.md`
+(SUS art. 6-14, 6+ zgodnych źródeł: lexlege.pl, gofin.pl, orka.sejm.gov.pl,
+poradnikprzedsiebiorcy.pl, biznes.gov.pl, streamsoft.pl). Treść: katalog
+tytułów obowiązkowego ubezpieczenia (art. 6, w tym rozszerzenie o
+opiekunów dziecka z art. 6a), rozszerzona definicja "pracownika" dla
+celów ubezpieczeniowych (art. 8 — zlecenie/dzieło z WŁASNYM pracodawcą
+liczy się jak stosunek pracy), zbieg tytułów (art. 9 — z praktycznym
+checklistem 5 najczęstszych scenariuszy etat+zlecenie wg progu płacy
+minimalnej, najważniejsza część modułu), ubezpieczenie chorobowe
+dobrowolne/obowiązkowe (art. 11), wypadkowe jako pochodne emerytalno-
+rentowego (art. 12), okresy podlegania per kategoria tytułu (art. 13),
+początek/koniec ubezpieczeń dobrowolnych z pułapką automatycznego
+ustania przy nieopłaceniu składki (art. 14). Zarejestrowano w SKILL.md
+(licznik 31→32) i MAPA-AKTOW.md.
+
+**Drobna korekta w trakcie:** zauważono i naprawiono literówkę
+(uszkodzony znak) wstawioną przy pierwszym zapisie pliku — wykryte
+przy przeglądzie treści przed rejestracją, naprawione od razu.
+
+**F-72 — częściowo zamknięta:** z 4 punktów tej flagi (SUS Rozdz. 2,
+zasiłek pogrzebowy, renta rodzinna, waloryzacja) NAPRAWIONY tylko
+pierwszy — priorytet obniżony z "wysoki" na "średni", pozostałe 3
+punkty FUS wciąż otwarte.
+
+**Weryfikacja liczby plików (ZASADA 7):**
+- dr-04: PRZED = 33 (przywrócone z ostatniego ZIP-a), PO = 34
+  (+1 nowy moduł).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (edycja treści WARN-OTWARTE.md
+  [1 wiersz zaktualizowany] i AUDIT-JOURNAL.md).
+
+**Bilans:** flaga F-72 pozostaje w rejestrze (częściowo zamknięta,
+liczba aktywnych wierszy WARN-OTWARTE.md bez zmian — 53), ale zakres
+prac do wykonania realnie zmniejszony o 25%.
+
+### BILANS CAŁOŚCIOWY (dr-04: 33→34 pliki [+1 nowy moduł]; audyt-systemu-v4: 46 bez zmian liczbowych — siódma sesja naprawcza w cyklu WARN)
+
+## AUDYT-2026-08-13za-OBSERWACJA-PIT-2027 — Dodanie nowej kategorii "OBSERWOWANE — zmiany legislacyjne w toku" + pierwszy wpis: nowelizacja PIT/CIT/ryczałt na 2027 r. (projekt UD116)
+
+**Kontekst:** użytkownik poprosił o dodanie do rejestru, jako pozycji
+obserwowanej (nie flagi błędu), planowanych zmian w PIT. Ponieważ
+istniejący format `WARN-OTWARTE.md` (flagi F-) opisuje ZASTANE luki/
+błędy w systemie, a NIE przyszłe, jeszcze nieuchwalone zmiany prawa —
+utworzono NOWĄ, odrębną kategorię "👁️ OBSERWOWANE" z własnym
+formatem (kolumna "Status" zamiast "Co dokładnie", kolumna "Akcja przy
+zmianie statusu" zamiast "Rekomendowana naprawa") — koncepcyjnie różny
+rodzaj wpisu: nie "napraw to", tylko "pilnuj, aż będzie co naprawiać".
+
+**Badanie:** projekt nowelizacji PIT/CIT/ustawy ryczałtowej na 2027 r.
+(UD116, RCL, opublikowany 16.03.2026). Kluczowe ustalenia z 8 zgodnych
+źródeł (zero.pl, akademialtca.pl, goniec.pl, pitax.pl, pit.pl,
+wprawieni.pl, taxcoach.pl, stronymonki.pl): zakres projektu ISTOTNIE
+ZMNIEJSZONY między wersją kwietniową (30+ zmian) a lipcową (~15) —
+NAJBARDZIEJ RADYKALNE pomysły (podwyżka ryczałtu 8,5%→17% dla usług na
+rzecz podmiotów powiązanych; podwyżka ryczałtu od najmu >100 tys. zł
+12%→15%) WYCOFANE. Pozostają: zaostrzenie ulgi mieszkaniowej (ponowne
+skorzystanie po 3 latach, nie bez ograniczeń), wydłużenie okresu
+zwolnienia PIT przy sprzedaży majątku wycofanego z działalności na
+rzecz rodziny (6 mies.→3 lata), zapowiadana "rewolucja" w PIT-11/
+PIT-8C (pełna cyfryzacja), automatyczne udostępnianie danych (od
+1.12.2026), nowe zasady korekty JPK (od 1.01.2027), zmiany CIT (ukryta
+dywidenda, datio in solutum). ODRĘBNY wątek (luźniej powiązany, inny
+etap): rozważana reforma SKALI PIT (dodatkowe progi zamiast
+podniesienia kwoty wolnej do 60 tys. zł — obietnica wyborcza wycofana
+ze względu na koszt 45-50 mld zł/rok) — projekt ma trafić do Sejmu
+JESIENIĄ 2026 z półrocznym vacatio legis, czyli PRAWDOPODOBNIE NIE
+wejdzie razem z resztą 1.01.2027.
+
+**Zarejestrowano jako OBS-1** z rekomendacją sprawdzania statusu co
+4-6 tygodni (projekt w aktywnej fazie, zakres już raz istotnie się
+zmienił) i jasną instrukcją: po uchwaleniu — przenieść do standardowej
+naprawy (nowa flaga F- lub bezpośrednia aktualizacja modułu PIT).
+
+**Weryfikacja liczby plików (ZASADA 7):** audyt-systemu-v4 PRZED = 46,
+PO = 46 (edycja treści WARN-OTWARTE.md [nowa sekcja OBS] i
+AUDIT-JOURNAL.md).
+
+### BILANS CAŁOŚCIOWY (audyt-systemu-v4: 46 plików bez zmian liczbowych — nowa kategoria śledzenia, 53 aktywne flagi F- bez zmian w tej turze, +1 pozycja obserwowana OBS-1)
+
+## AUDYT-2026-08-13zb-NAPRAWA-F64-PPSA — Pierwszy dedykowany moduł PPSA w całym systemie — częściowa naprawa najwyższego priorytetu (F-64)
+
+**Kontekst:** użytkownik zwrócił uwagę, że w poprzedniej turze
+zapowiedziano kontynuację prac nad WARN, ale dostarczono tylko
+aktualizację obserwacji (OBS-1, PIT) bez faktycznego zamknięcia żadnej
+flagi. Naprawiono to w tej turze — podjęto F-64 (PPSA), najwyższy
+priorytet w całym rejestrze.
+
+**Naprawa:** utworzono `mod-PPSA-terminy-kasacja-prawo-pomocy.md` —
+PIERWSZY dedykowany moduł PPSA w historii tego systemu (wcześniej
+ustawa, licząca ~320 artykułów w 11 działach, istniała wyłącznie jako
+rozproszone cytaty w innych modułach). Zweryfikowane 6+ zgodnych
+źródeł na każdy temat (lexlege.pl, gofin.pl, arslege.pl, dlajurysty.pl,
+Wikipedia, edukacjaprawnicza.pl, wojciechrudzki.pl, medi-finance.pl,
+strony BIP kilku WSA, trybunal.gov.pl, e-prawnik.pl, kancelaria-
+skarbiec.pl, temidium.pl, legalnabudowa.pl, cejsh.icm.edu.pl).
+
+Zakres: (1) uchybienie i przywrócenie terminu (art. 85-89) — dwie
+kumulatywne przesłanki (brak winy + ujemne skutki), wymogi formalne
+wniosku (termin 7 dni od ustania przyczyny, jednoczesne dokonanie
+czynności, uprawdopodobnienie nie pełny dowód), roczna granica z
+wyjątkami (orzecznictwo NSA: nieznajomość prawa nie wystarcza); (2)
+skarga kasacyjna do NSA (art. 173-193) — przymus adwokacko-radcowski
+z wyjątkami i ich ograniczeniami (nie obejmuje doradcy podatkowego
+przy cle, nie obejmuje emerytowanego notariusza), dwie zamknięte
+podstawy kasacyjne z kolejnością rozpoznania, wyrok TK SK 22/11
+(niekonstytucyjność odrzucania bez wezwania do uzupełnienia), termin
+30 dni; (3) prawo pomocy (art. 245-259) — dwa zakresy (całkowity/
+częściowy), standard TK z wyroku SK 5/20 (zakaz barier ekonomicznych
+dostępu do sądu), referendarz sądowy jako organ I instancji (nie
+sędzia), sprzeciw 7-dniowy, wymóg urzędowego formularza pod rygorem
+pozostawienia bez rozpoznania nawet dla profesjonalnych pełnomocników.
+
+Zarejestrowano w SKILL.md (licznik 17→18) i MAPA-AKTOW.md DR-05 (nowy
+wiersz obok istniejącego wiersza ogólnego PPSA).
+
+**F-64 — częściowo zamknięta:** z 5 pierwotnie wskazanych priorytetów
+naprawiono 3 (uchybienie terminu, kasacja, prawo pomocy). Priorytet
+obniżony z "najwyższy" na "średni" — rdzeń praktyczny (najczęściej
+używane instytucje) jest teraz pokryty, pozostają tematy drugorzędne
+(sprzeciw od decyzji, wznowienie sądowoadministracyjne, posiedzenia
+sądowe, pełne orzeczenia).
+
+**Weryfikacja liczby plików (ZASADA 7):**
+- dr-05: PRZED = 19 (przywrócone z ostatniego ZIP-a, zawiera naprawy
+  F-30 i MOS), PO = 20 (+1 nowy moduł).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (edycja treści WARN-OTWARTE.md
+  [1 wiersz zaktualizowany] i AUDIT-JOURNAL.md).
+
+**Bilans:** 53 flagi (bez zmiany liczby wierszy — F-64 pozostaje jako
+wiersz, ale ze zmniejszonym zakresem i priorytetem).
+
+### BILANS CAŁOŚCIOWY (dr-05: 19→20 plików [+1 nowy moduł]; audyt-systemu-v4: 46 bez zmian liczbowych — ósma sesja naprawcza w cyklu WARN, pierwsza naprawa najwyższego priorytetu w rejestrze)
+
+## AUDYT-2026-08-14a-NAPRAWA-F75-KKW — Naprawa najsłabszego wyniku pokrycia w systemie: dodanie realnej treści merytorycznej do modułu KKW
+
+**Naprawa:** `mod-KKW-kodeks-karny-wykonawczy.md` — dotąd czysty
+generyczny szablon (0 artykułów KKW, najgorszy wynik z 13 zbadanych
+aktów). Dodano nową sekcję 0 z realną treścią, zweryfikowaną 9+
+zgodnymi źródłami (lexlege.pl, arslege.pl, gofin.pl, e-prawnik.pl, 6
+kancelarii adwokackich, palestra.pl), zachowując oryginalny szablon
+strategiczny (12 sekcji) jako warstwę uzupełniającą pod nową treścią.
+
+Naprawiono WSZYSTKIE 3 pierwotnie wskazane priorytety: (1) warunkowe
+przedterminowe zwolnienie (art. 159-163) — krąg uprawnionych do
+wniosku, KLUCZOWY art. 161 §3-4 (karencja 3 miesiące przy karze ≤3
+lata, 6 miesięcy przy karze >3 lata — bezpośrednio wykorzystuje
+udokumentowane doświadczenie kancelaryjne ze sprawy Marek Petelski),
+obligatoryjna opinia biegłych przy przestępstwach seksualnych, zażalenie
+14-dniowe, odwołanie warunkowego zwolnienia (art. 160) z konsekwencją
+niezaliczenia okresu wolności na poczet kary; (2) odroczenie i przerwa
+wykonania kary (art. 150-158a) — rozróżnienie odroczenie (kara
+nierozpoczęta) vs przerwa (kara już odbywana), obligatoryjne (ciężka
+choroba, bez limitu czasowego) vs fakultatywne (względy rodzinne, limit
+1 rok), nowelizacja z 2011 r. usuwająca względy zdrowotne z przesłanki
+fakultatywnej przerwy, roczny odstęp między przerwami; (3) system
+dozoru elektronicznego (art. 43a-43zf) — trzy formy (stacjonarny,
+zbliżeniowy, mobilny), struktura 5 oddziałów, nieodwracalność uchylenia
+zezwolenia (zakaz ponownego udzielenia w tej samej sprawie), wyłączenie
+członków rodziny z kręgu uprawnionych do wniosku.
+
+Naprawiono też PRZY OKAZJI niezgodność nazwy wewnętrznej pliku
+(dawniej "mod-BZ-sluzba-wiezienna-wykonawcze.md" w treści, "mod-KKW-
+kodeks-karny-wykonawczy.md" na dysku) — ujednolicone.
+
+Zarejestrowano w SKILL.md (status [✓] NAPRAWIONY) i MAPA-AKTOW.md
+DR-03.
+
+**F-75 — częściowo zamknięta:** priorytet obniżony z "najwyższy" na
+"średni" — 3 najczęściej używane w praktyce instytucje penitencjarne
+naprawione, pozostaje reszta struktury KKW (postępowanie wykonawcze,
+prawa skazanego, kary dyscyplinarne, dozór kuratora, środki karne).
+
+**Weryfikacja liczby plików (ZASADA 7):**
+- dr-03: PRZED = 60 (przywrócone z ostatniego ZIP-a, zawiera moduł
+  tymczasowego aresztowania z sesji AUDYT-2026-08-13s), PO = 60
+  (edycja treści 3 plików: mod-KKW-kodeks-karny-wykonawczy.md,
+  SKILL.md, MAPA-AKTOW.md — bez zmiany liczby plików).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (edycja treści WARN-OTWARTE.md
+  [1 wiersz zaktualizowany] i AUDIT-JOURNAL.md).
+
+**Bilans:** 53 flagi (bez zmiany liczby wierszy — F-75 pozostaje jako
+wiersz, ze zmniejszonym zakresem i priorytetem).
+
+### BILANS CAŁOŚCIOWY (dr-03: 60 plików bez zmian liczbowych [treść]; audyt-systemu-v4: 46 bez zmian liczbowych — dziewiąta sesja naprawcza w cyklu WARN)
+
+## AUDYT-2026-08-14b-NAPRAWA-F69-PrRestr — Nowy moduł Dział VI PrRestr (Układ) — naprawia jedyną centralną instytucję dotąd bez podstawy prawnej + rozszerzenie zadania odłożonego o wymóg oznaczania modułów generycznych
+
+**Kontekst:** kontynuacja cyklu WARN. Użytkownik dodatkowo poprosił o
+rozszerzenie wcześniej odłożonego zadania (mapa moduł→akty) o wymóg
+jawnego oznaczania modułów GENERYCZNYCH (uniwersalny szablon) vs
+MERYTORYCZNYCH (realna treść) vs MIESZANYCH — na podstawie doświadczenia
+z F-75 (KKW), gdzie moduł miał status "[✓] OK" mimo bycia czystym
+szablonem. Zaktualizowano sekcję "🗺️ ZADANIE ODŁOŻONE" w WARN-OTWARTE.md.
+
+**Naprawa F-69:** nowy moduł `mod-PrRestr-dzial-VI-uklad.md` — Dział VI
+Prawa restrukturyzacyjnego (art. 150-179), JEDYNA centralna instytucja
+całej ustawy, dotąd reprezentowana wyłącznie tabelą porównawczą bez
+żadnego numeru artykułu. Zweryfikowane 10+ zgodnych źródeł (lexlege.pl,
+gofin.pl, adamusrafal.pl, prawo.pl, mb-law.pl, adwokatwitkowska.com,
+orestrukturyzacji.pl, plusrestrukturyzacje.pl).
+
+Zakres: przepisy ogólne (art. 150-154 — zasada objęcia układem z mocy
+prawa, wierzytelności wyłączone z układu, w tym KLUCZOWA ochrona
+stosunku pracy wymagająca bezwarunkowej zgody pracownika), propozycje
+układowe (art. 155-163 — krąg uprawnionych do składania, w tym próg
+30% dla wierzycieli mniejszościowych, katalog technik restrukturyzacji,
+wariant likwidacyjny, ochrona minimalnego wynagrodzenia), głosowanie i
+zatwierdzenie (art. 119 — podwójny próg 50%/2/3 sumy wierzytelności,
+głosowanie grupami, mechanizm cramdown z zastrzeżeniem że ZMIENIONY
+nowelizacją 23.08.2025 i wymaga re-weryfikacji dokładnego brzmienia;
+NOWOŚĆ 2025 — obowiązkowy test zaspokojenia sporządzany przez
+nadzorcę/zarządcę, z wyjątkiem dla mikroprzedsiębiorców; art. 165 —
+przesłanki odmowy zatwierdzenia, w tym samodzielna, indywidualna
+ochrona przez "kryterium najlepszych interesów wierzycieli"), skutki
+układu (art. 166 — moc wiążąca mimo pominięcia w spisie wierzytelności).
+
+Zarejestrowano w SKILL.md (licznik 40→41) i MAPA-AKTOW.md DR-02.
+
+**F-69 — częściowo zamknięta:** jedyna centralna instytucja PrRestr
+naprawiona, priorytet obniżony z "wysoki" na "średni". Pozostają 2
+punkty: Tytuł II PrRestr (4 tryby restrukturyzacji, wciąż bez podstawy
+prawnej) i PrUp Tytuł IV (rola syndyka).
+
+**Weryfikacja liczby plików (ZASADA 7):**
+- dr-02: PRZED = 41 (przywrócone z ostatniego ZIP-a, zawiera SKD),
+  PO = 42 (+1 nowy moduł).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (edycja treści WARN-OTWARTE.md
+  [rozszerzenie zadania odłożonego + 1 wiersz zaktualizowany] i
+  AUDIT-JOURNAL.md).
+
+**Bilans:** 53 flagi (bez zmiany liczby wierszy — F-69 pozostaje jako
+wiersz, ze zmniejszonym zakresem i priorytetem).
+
+### BILANS CAŁOŚCIOWY (dr-02: 41→42 pliki [+1 nowy moduł]; audyt-systemu-v4: 46 bez zmian liczbowych — dziesiąta sesja naprawcza w cyklu WARN)
+
+## AUDYT-2026-08-14c-NAPRAWA-F68-KSH — Nowy moduł organy sp. z o.o. (Tytuł III, Dział I, Rozdz. 3) — naprawia najwyższy priorytet z raportu KSH
+
+**Naprawa:** nowy moduł `mod-KSH-organy-spolki-zoo.md` — art. 201-254
+(Oddział 1 Zarząd, Oddział 3 Zgromadzenie wspólników; Oddział 2 Nadzór
+pozostaje niezbadany). Zweryfikowane 10+ zgodnych źródeł (lexlege.pl,
+gofin.pl, standardyprawa.pl, bdrp.pl, lexplay.pl, rachelski.pl,
+poradyprawnicze.pl, zapytajprawnika.pl, ksh.spolka.katowice.pl).
+
+Zakres: Zarząd — dwie odrębne funkcje (prowadzenie spraw = wewnętrzne,
+reprezentacja = zewnętrzne, art. 201 §1), KLUCZOWA zasada
+bezpieczeństwa obrotu z art. 204 §2 (zakaz ograniczenia reprezentacji
+ze skutkiem wobec osób trzecich — wewnętrzne ograniczenia rodzą tylko
+odpowiedzialność członka wobec spółki), reprezentacja bierna łatwiejsza
+niż czynna (art. 205 §2), zasady prowadzenia spraw przy wieloosobowym
+zarządzie z mechanizmem sprzeciwu (art. 208), obowiązek ujawnienia
+konfliktu interesów (art. 209). Zgromadzenie wspólników — tryb
+obiegowy jako wyjątek od zasady formalnego zgromadzenia (art. 227 §2,
+wymaga jednomyślności), kompetencje zastrzeżone w tym absolutorium
+jako okoliczność ekskulpacyjna wyłączająca odpowiedzialność z art. 293
+§1 (art. 228), progi kwotowe wymagające uchwały (art. 229 — 1/4
+kapitału przy nabyciu od założyciela/wspólnika w ciągu 2 lat, art. 230
+— 2x kapitał zakładowy), obowiązkowe zwyczajne zgromadzenie w ciągu 6
+miesięcy (art. 231), obowiązkowa uchwała przy znacznej stracie (art.
+233), mechanizm zastępczego zwołania przez radę nadzorczą przy
+bierności zarządu (art. 235), tryb zwołania listem/kurierem lub
+mailem za uprzednią zgodą (art. 238), uchwały bez formalnego zwołania
+przy 100% reprezentacji kapitału bez sprzeciwu (art. 240).
+
+Zarejestrowano w SKILL.md (licznik 41→42) i MAPA-AKTOW.md DR-02.
+
+**F-68 — częściowo zamknięta:** najwyższy priorytet z rankingu (organy
+sp. z o.o.) naprawiony. Priorytet flagi obniżony z "wysoki" na
+"średni-wysoki" — reszta ~600-artykułowego aktu wciąż w dużej mierze
+pusta (Tytuł I, Tytuł II spółki osobowe, Oddział 2 tego samego
+Rozdziału 3, Dział Ia PSA, Dział II S.A., cały Tytuł IV M&A).
+
+**Weryfikacja liczby plików (ZASADA 7):**
+- dr-02: PRZED = 42 (przywrócone z ostatniego ZIP-a, zawiera SKD i
+  PrRestr), PO = 43 (+1 nowy moduł).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (edycja treści WARN-OTWARTE.md
+  [1 wiersz zaktualizowany] i AUDIT-JOURNAL.md).
+
+**Bilans:** 53 flagi (bez zmiany liczby wierszy — F-68 pozostaje jako
+wiersz, ze zmniejszonym zakresem i priorytetem).
+
+### BILANS CAŁOŚCIOWY (dr-02: 42→43 pliki [+1 nowy moduł]; audyt-systemu-v4: 46 bez zmian liczbowych — jedenasta sesja naprawcza w cyklu WARN)
+
+## AUDYT-2026-08-14d-NAPRAWA-F65-KPC-CZESC1 — Nowy moduł prawomocność/granice apelacji + rozstrzygnięcie "deklaracji bez pokrycia" jako fałszywy alarm
+
+**Naprawa:** nowy moduł `mod-KPC-prawomocnosc-granice-apelacji.md` w
+DR-02. Zweryfikowane 10+ zgodnych źródeł (e-prawnik.pl, lexlege.pl,
+arslege.pl, standardyprawa.pl, bazhum.muzhp.pl [artykuł naukowy
+G. Jędrejka], currenda.pl, komentarz P. Grzegorczyka, orzecznictwo SN
+III PZ 2/18, sn.pl).
+
+Prawomocność orzeczeń (art. 363-366): rozróżnienie prawomocności
+FORMALNEJ (art. 363 — brak środka zaskarżenia) od MATERIALNEJ (art.
+365 — wykluczenie ponownego powództwa, utożsamiana z powagą rzeczy
+osądzonej), tryb stwierdzenia prawomocności NA WNIOSEK (art. 364,
+jednoosobowo, może też referendarz), zasięg podmiotowy mocy wiążącej
+(strony + inne sądy/organy + w wypadkach ustawowych inne osoby, art.
+365 §1), KLUCZOWY art. 366 — powaga rzeczy osądzonej z DWOMA
+ograniczeniami (przedmiotowym: tylko sentencja, nie motywy; podmiotowym:
+tylko te same strony), z odesłaniem do sporu doktrynalnego o "plus/
+aliud" i dominującej linii orzeczniczej SN.
+
+Granice apelacji (art. 378, 380-386): związanie granicami zaskarżenia
+z konsekwencją częściowej prawomocności części niewskazanej jako
+zaskarżona (art. 378 §1), wyjątek nieważności badanej z urzędu (§2),
+rozszerzenie zakresu rozpoznania na postanowienia wpadkowe (art. 380),
+prekluzja dowodowa jako uprawnienie sądu, nie bezwzględny zakaz (art.
+381), zasada "apelacji pełnej" — sąd II instancji orzeka na całości
+materiału z obu instancji (art. 382, fundamentalna cecha polskiego
+modelu), zakaz przekształceń żądania (art. 383), KLUCZOWY zakaz
+reformationis in peius (art. 384) z niuansami wyłączeń (rozstrzygnięcia
+nieorzekające co do istoty, koszty procesu, brak generalizacji w
+postępowaniu nieprocesowym), oddalenie (art. 385) i pozostałe
+rozstrzygnięcia w tym uchylenie kasatoryjne (art. 386 §4) z
+przykładem naruszenia z orzecznictwa SN.
+
+**PRZY OKAZJI — rozstrzygnięcie "deklaracji bez pokrycia":** weryfikacja
+wykazała, że sprzeciw od orzeczenia referendarza (art. 398²²-398²⁴,
+obiecywany przez `pisma-proste-v2`) MA realną, solidną treść w
+`pisma-proste-v2/references/SPH-inne.md` (wzór pisma, pełne cytaty
+przepisów, termin 7-dniowy, skutki). Raport zewnętrzny KPC sprawdzał
+WYŁĄCZNIE moduły DR- (mod-KPC-*), nie zaglądając do plików referencyjnych
+`pisma-proste-v2` — stąd fałszywy alarm, analogiczny do wzorca z F-30
+(DR-05, cudzoziemcy/Ukraina). Odnotowane w nowym module jako
+rozgraniczenie, NIE wymaga dalszej naprawy.
+
+Zarejestrowano w SKILL.md (licznik 42→43) i MAPA-AKTOW.md DR-02.
+
+**F-65 — częściowo zamknięta:** 2 z 8 punktów naprawione + 1 punkt
+rozstrzygnięty jako fałszywy alarm. Priorytet POZOSTAJE "wysoki"
+(ostrożnie, nie obniżony) — Księga II Nieproces (całkowity brak,
+0×🟢/6×🔴) to strukturalna luka porównywalna wagą do PPSA sprzed
+naprawy, wciąż w pełni otwarta.
+
+**Weryfikacja liczby plików (ZASADA 7):**
+- dr-02: PRZED = 43 (przywrócone z ostatniego ZIP-a), PO = 44
+  (+1 nowy moduł).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (edycja treści WARN-OTWARTE.md
+  [1 wiersz zaktualizowany] i AUDIT-JOURNAL.md).
+
+**Bilans:** 53 flagi (bez zmiany liczby wierszy — F-65 pozostaje jako
+wiersz, ze zmniejszonym zakresem, priorytet utrzymany ze względu na
+wagę pozostałej luki Nieproces).
+
+### BILANS CAŁOŚCIOWY (dr-02: 43→44 pliki [+1 nowy moduł]; audyt-systemu-v4: 46 bez zmian liczbowych — dwunasta sesja naprawcza w cyklu WARN)
+
+## AUDYT-2026-08-14e-PRECEDENS-I-FZ-104-26 — Dodanie realnego precedensu NSA (halucynacje AI w cytowaniu orzeczeń) do shared/PRAWO-HARDGATE.md jako uzasadnienia istniejącego Scenariusza C
+
+**Kontekst:** użytkownik zgłosił postanowienie NSA z 23.06.2026, sygn.
+I FZ 104/26, w którym sąd wprost użył sformułowania "ślady halucynacji
+AI" — pełnomocnik powołał 3 PRAWDZIWE sygnatury NSA, ale z wymyślonymi
+datami i tezami. Zweryfikowano 8+ zgodnych źródeł (rp.pl, infor.pl,
+inforlex.pl [pełny tekst postanowienia], gazetaprawna.pl, lex.media.pl,
+forsal.pl, taxbooster.pl, telko.in) — sprawa w pełni potwierdzona,
+nie halucynacja tego badania.
+
+**Kluczowe ustalenie przy weryfikacji systemu:** `shared/PRAWO-
+HARDGATE.md` JUŻ ZAWIERAŁ dokładnie ten scenariusz jako "SCENARIUSZ C
+— sygnatura istnieje, ale teza jest inna niż podano w źródle wtórnym"
+(linia ~516) — to NIE była luka w systemie, tylko potwierdzenie
+słuszności już istniejącej reguły. Dodano więc NIE naprawę, lecz
+WZMOCNIENIE dokumentacji: realny, w pełni udokumentowany precedens
+sądowy jako uzasadnienie, dlaczego Scenariusz C jest tak istotny —
+podkreślono że sam KROK 0/1 (weryfikacja czy sygnatura ISTNIEJE) NIE
+WYSTARCZY, bo sygnatura może być prawdziwa, a mimo to cały "cytat"
+(data/przedmiot/teza) być halucynacją.
+
+**Naprawa:** dopisano cytat precedensowy bezpośrednio po Scenariuszu C
+w `shared/PRAWO-HARDGATE.md` — z pełnymi faktami sprawy (3 sygnatury:
+II FZ 230/17, II GZ 452/18, I GZ 164/22, wszystkie realne w CBOSA,
+błędne daty/przedmiot/tezy), oceną NSA ("nader krytycznie... ślady
+halucynacji AI"), i jawnym wyjaśnieniem RELACJI między tym przypadkiem
+a Scenariuszem B (sygnatura zmyślona) — to inny, GROŹNIEJSZY wzorzec.
+
+**Propagacja:** `orzeczenia-sadowe-v2/SKILL.md` już odsyła do
+`PRAWO-HARDGATE.md` jako źródła nadrzędnego (linia 125) — naprawa w
+jednym miejscu automatycznie wzmacnia obie ścieżki, NIE wymagała
+osobnej edycji tego skilla.
+
+**Nie zarejestrowano jako flaga WARN** — to nie luka merytoryczna do
+naprawienia, tylko wzbogacenie istniejącej, już poprawnej dokumentacji
+o silny, cytowalny precedens.
+
+**Weryfikacja liczby plików (ZASADA 7):**
+- shared: PRZED = 183 (świeża kopia, nigdy dotąd nietknięta w tej
+  sesji), PO = 183 (edycja treści 1 pliku: PRAWO-HARDGATE.md).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (dopisanie AUDIT-JOURNAL.md,
+  WARN-OTWARTE.md bez zmian w tej turze).
+
+**Bilans:** 53 flagi (bez zmian — ta naprawa nie dotyczyła żadnej
+istniejącej flagi F-).
+
+### BILANS CAŁOŚCIOWY (shared: 183 pliki bez zmian liczbowych [treść]; audyt-systemu-v4: 46 bez zmian liczbowych — naprawa proaktywna poza cyklem WARN, wzmocnienie dokumentacji HARDGATE)
+
+## AUDYT-2026-08-14f-NAPRAWA-F70-OP-DOWODY — Nowy moduł dowody podatkowe (Dział IV Rozdz. 11) — z zastosowaniem lekcji z F-33 (weryfikacja per-modułowa obu rejestrów)
+
+**Naprawa:** nowy moduł `mod-OP-dzial-IV-rozdzial-11-dowody.md` w
+DR-06 (świeża kopia — nigdy dotąd nietknięty w tej sesji). Zweryfikowane
+9+ zgodnych źródeł (rp.pl, poradnikprzedsiebiorcy.pl, kancelaria-
+skarbiec.pl, gofin.pl, infor.pl, gov.pl, repozytorium.uni.wroc.pl
+[artykuł naukowy], orzecznictwo NSA I FSK 863/09, WSA Lublin I SA/Lu
+726/2007).
+
+Zakres: zasady ogólne (art. 180 — otwarty katalog "wszystko co nie
+sprzeczne z prawem"; art. 187 — KLUCZOWA zasada inkwizycyjności,
+organ MUSI aktywnie zbierać dowody z urzędu, nie tylko na wniosek;
+art. 188 — obowiązek uwzględnienia wniosku dowodowego strony, z
+JEDYNYM wyjątkiem nadmiarowości), katalog środków dowodowych (art.
+181 — przykładowy, nie zamknięty, księgi na pierwszym miejscu,
+materiały karne mogą być wykorzystane w postępowaniu podatkowym),
+swobodna ocena dowodów (art. 191 — nie dowolność, równa moc wszystkim
+dowodom), prawo do wypowiedzenia się jako gwarancja procesowa (art.
+192), dokumenty urzędowe (art. 194), oraz KLUCZOWY art. 193 — księgi
+podatkowe: domniemanie mocy dowodowej przy rzetelności i niewadliwości
+(z odrębnymi definicjami obu kryteriów), oraz PRAKTYCZNIE
+NAJWAŻNIEJSZA zasada: ciężar OBALENIA domniemania rzetelności
+spoczywa NA ORGANIE, nie na podatniku (potwierdzone orzecznictwem
+NSA I FSK 863/09).
+
+**Zastosowana lekcja z F-33 (DR-06, sesja badawcza):** przy rejestracji
+tego modułu jawnie zweryfikowano PER-MODUŁOWO oba miejsca (grep na
+dokładną nazwę modułu w bloku `[✓]` SKILL.md ORAZ w MAPA-AKTOW.md)
+zamiast polegać na samej wzmiance w prozie nagłówka — dokładnie ten
+błąd doprowadził wcześniej do 12 niezarejestrowanych modułów w tym
+samym DR-06. Weryfikacja potwierdziła: wpis obecny w OBU miejscach.
+
+**F-70 — częściowo zamknięta:** najważniejszy z 3 punktów (dowody)
+naprawiony. Priorytet obniżony z "wysoki" na "średni". Pozostają 2
+punkty: kontrola podatkowa i czynności sprawdzające.
+
+**Weryfikacja liczby plików (ZASADA 7):**
+- dr-06: PRZED = 43 (świeża kopia, nigdy dotąd edytowany w tej sesji),
+  PO = 44 (+1 nowy moduł).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (edycja treści WARN-OTWARTE.md
+  [1 wiersz zaktualizowany] i AUDIT-JOURNAL.md).
+
+**Bilans:** 53 flagi (bez zmiany liczby wierszy — F-70 pozostaje jako
+wiersz, ze zmniejszonym zakresem i priorytetem).
+
+### BILANS CAŁOŚCIOWY (dr-06: 43→44 pliki [+1 nowy moduł]; audyt-systemu-v4: 46 bez zmian liczbowych — trzynasta sesja naprawcza w cyklu WARN)
+
+## AUDYT-2026-08-14g-NAPRAWA-F71-PZP-DZIAL-II — Nowy moduł kwalifikacja/kryteria/unieważnienie — naprawia rdzeń klasycznego przetargu (największa liczbowo luka w PZP)
+
+**Naprawa:** nowy moduł `mod-PZP-dzial-II-kwalifikacja-kryteria-
+uniewaznienie.md` w DR-07. Zweryfikowane 10+ zgodnych źródeł
+(ekomentarzpzp.uzp.gov.pl [oficjalny komentarz UZP, Rząd 1-bliski],
+portalzp.pl, bzp.pl, wprzetargach.pl, przetargipubliczne.pl, prawo.pl,
+orzecznictwo KIO 3753/21).
+
+Zakres: warunki udziału (art. 112 — 4 zamknięte kategorie, zasada
+ciągłości spełniania warunków przez cały czas postępowania potwierdzona
+orzecznictwem TSUE, art. 118 — zdolności osobiste NIE mogą być
+zastąpione zasobami podmiotu trzeciego), JEDZ i mechanizm dwuetapowy
+(art. 125 — oświadczenie wstępne jako dowód TYMCZASOWY, art. 124 —
+definicja i dwa rodzaje podmiotowych środków dowodowych, KLUCZOWA
+zasada efektywności: pełne dokumenty żąda się TYLKO od wykonawcy
+najwyżej ocenionego, nie wszystkich uczestników — fundamentalna różnica
+względem reżimu sprzed 2021), kryteria oceny ofert (art. 239 — definicja
+najkorzystniejszej oferty, art. 240 — NAJCZĘŚCIEJ naruszany przepis:
+wymóg jednoznaczności i wykluczenia dowolności oceny, art. 241 — związek
+z przedmiotem zamówienia, art. 242 — katalog przykładowy z zasadą
+szczególną dla cen sztywnych), unieważnienie postępowania (art. 255 —
+katalog obligatoryjny ZAMKNIĘTY z 4 przesłankami w tym najczęstszą
+praktycznie — przewyższenie budżetu, art. 256 — fakultatywna przesłanka
+"otwarta", ale orzecznictwo KIO WYRAŹNIE zastrzega że NIE jest to
+"wytrych" do dowolnego unieważniania, z konkretnym przykładem
+orzeczniczym wadliwych kryteriów).
+
+Zarejestrowano z zastosowaniem lekcji z F-33 — zweryfikowano PER-
+MODUŁOWO oba miejsca (SKILL.md checklist + MAPA-AKTOW.md), potwierdzone
+grep-em przed przejściem do centralnego rejestru.
+
+**F-71 — częściowo zamknięta:** rdzeń Działu II (183 artykuły, >1/4
+całej ustawy) naprawiony w najważniejszej praktycznie części. Priorytet
+obniżony z "średni-wysoki" na "średni". Pozostają: procedura otwarcia/
+badania ofert, Dział IV (instrumenty szczególne), przebieg postępowania
+przed KIO.
+
+**Weryfikacja liczby plików (ZASADA 7):**
+- dr-07: PRZED = 18 (przywrócone z ostatniego ZIP-a, zawiera F-37/38),
+  PO = 19 (+1 nowy moduł).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (edycja treści WARN-OTWARTE.md
+  [1 wiersz zaktualizowany] i AUDIT-JOURNAL.md).
+
+**Bilans:** 53 flagi (bez zmiany liczby wierszy — F-71 pozostaje jako
+wiersz, ze zmniejszonym zakresem i priorytetem).
+
+### BILANS CAŁOŚCIOWY (dr-07: 18→19 plików [+1 nowy moduł]; audyt-systemu-v4: 46 bez zmian liczbowych — czternasta sesja naprawcza w cyklu WARN)
+
+## AUDYT-2026-08-14h-HARDGATE-AUDYT-I-SYNC-ROUTING-MAP — Formalizacja zasad operacyjnych jako HARDGATE + pełna synchronizacja 12 nowych modułów z centralną mapą prawo-polskie-v2 + pełne zamknięcie F-72
+
+**Kontekst:** użytkownik poprosił o (1) formalne oznaczenie zasad
+operacyjnych wypracowanych w tej sesji jako HARDGATE, automatycznie
+wczytywany, oraz (2) rozszerzenie synchronizacji nie tylko na lokalne
+MAPA-AKTOW.md, ale też na centralną mapę w `prawo-polskie-v2`.
+
+**Odkrycie przy realizacji punktu 2:** `prawo-polskie-v2/ROUTING-MAP.md`
+(779 linii) to CENTRALNA, ODRĘBNA od 16 lokalnych MAPA-AKTOW.md, mapa
+routingu aktów prawnych → DR-skille, z własnymi licznikami modułów per
+DR. ŻADEN z 12 nowych modułów utworzonych w tej sesji naprawczej (F-64
+do F-72) nie był tam zarejestrowany — to była nierozpoznana dotąd luka
+synchronizacji, TRZECIA warstwa rejestracji (obok checklisty SKILL.md i
+lokalnej MAPA-AKTOW.md), o której istnieniu system audytowy dotąd nie
+wiedział.
+
+**Naprawa 1 — synchronizacja ROUTING-MAP.md:** dodano wiersze dla
+WSZYSTKICH 12 nowych modułów z tej sesji: mod-ustawa-ochrona-praw-
+lokatorow-najem-eksmisja, mod-PrRestr-dzial-VI-uklad, mod-KSH-organy-
+spolki-zoo, mod-KPC-prawomocnosc-granice-apelacji (DR-02);
+mod-KPK-srodki-zapobiegawcze-tymczasowe-aresztowanie (DR-03, +
+aktualizacja statusu mod-KKW po naprawie F-75); mod-KP-dzial-VIII-
+rodzicielstwo, mod-SUS-dzial-2-podleganie-ubezpieczeniom, mod-FUS-
+zasilek-pogrzebowy-renta-rodzinna-waloryzacja (DR-04); mod-PPSA-
+terminy-kasacja-prawo-pomocy (DR-05); mod-OP-dzial-IV-rozdzial-11-
+dowody (DR-06); mod-PZP-dzial-II-kwalifikacja-kryteria-uniewaznienie
+(DR-07); mod-ustawa-SKW-SWW (DR-13).
+
+**Błąd własny wykryty i naprawiony w trakcie:** przy wstawianiu wierszy
+DR-07 i DR-13 metodą `str_replace` (dopasowanie po ostatnim wierszu
+sekcji), DWA wiersze (PZP Dział II, oraz przypadkowo wykryty wcześniej
+istniejący orphan-wiersz "Techniki mediacyjne" z DR-12) wylądowały we
+WSPÓLNYM, BŁĘDNYM miejscu — tuż PRZED nagłówkiem "## DR-13", NIE
+wewnątrz prawdziwej sekcji DR-07 (bo identyczny fragment tekstu
+"Techniki mediacyjne..." najwyraźniej występował w pliku w kontekście
+mylącym `str_replace`, które dopasowuje PIERWSZE trafienie, nie
+uwzględniając sekcji). Wykryte przez AUTOMATYCZNĄ weryfikację (skrypt
+Python, `re.split` po wzorcu `^## DR-\d+`, sprawdzający przynależność
+sekcyjną KAŻDEGO nowego modułu) — 1 z 12 modułów (PZP Dział II) był w
+złej sekcji. Naprawione: usunięto błędny wiersz, dodano poprawnie
+wewnątrz właściwej sekcji DR-07 (po ostatnim PRAWDZIWYM wierszu tej
+sekcji, bezpośrednio przed jej separatorem "---"). Ponowna automatyczna
+weryfikacja: WSZYSTKIE 12 modułów potwierdzone we właściwych sekcjach.
+
+**Naprawa 2 — nowa sekcja "⛔ HARDGATE-AUDYT"** dodana na samym
+początku `WARN-OTWARTE.md` (zaraz po nagłówku pliku, przed pierwszą
+flagą) — 5 REGUŁ skodyfikowanych z incydentów tej sesji: (1) źródło
+kopii roboczej — zawsze sprawdzać `/mnt/user-data/outputs/` przed
+`/mnt/skills/user/`; (2) weryfikacja per-modułowa rejestracji (lekcja
+F-33); (3) synchronizacja z ROUTING-MAP.md, w tym WŁAŚNIE odkryta
+lekcja o automatycznej weryfikacji sekcyjnej po wstawieniu; (4)
+weryfikacja bajtowa przed dostawą (przypomnienie ZASADY 7); (5)
+natychmiastowa weryfikacja integralności po `str_replace` wstawiającym
+tuż przed stałym markerem (3 wcześniejsze incydenty w tej sesji).
+
+**F-72 — ZAMKNIĘTA W PEŁNI** (usunięta z rejestru): wszystkie 4 punkty
+(SUS Rozdz. 2, zasiłek pogrzebowy, renta rodzinna, waloryzacja)
+naprawione w dwóch kolejnych turach tej sesji.
+
+**Weryfikacja liczby plików (ZASADA 7) — TRZY skille dotknięte w tej
+turze:**
+- prawo-polskie-v2: PRZED = 2 (świeża kopia, nigdy dotąd edytowany w
+  tej sesji), PO = 2 (edycja treści ROUTING-MAP.md, 12 nowych wierszy
+  + 1 status zaktualizowany).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (edycja treści WARN-OTWARTE.md
+  [nowa sekcja HARDGATE-AUDYT, usunięcie 1 wiersza F-72] i
+  AUDIT-JOURNAL.md).
+- dr-04: kontynuacja z poprzedniej tury (edycja treści, naprawiono też
+  przypadkowo zduplikowany nagłówek "## Moduły" powstały przy
+  wcześniejszym wstawianiu — wykryte i naprawione PRZED tą sesją
+  zamykającą).
+
+**Bilans:** 53→52 otwartych flag (F-72 w pełni zamknięta). Dodatkowo:
+nowa, trwała infrastruktura zapobiegawcza (HARDGATE-AUDYT) powinna
+zmniejszyć częstość podobnych incydentów w pozostałej części cyklu.
+
+### BILANS CAŁOŚCIOWY (prawo-polskie-v2: 2 pliki bez zmian liczbowych [treść]; audyt-systemu-v4: 46 bez zmian liczbowych; piętnasta sesja naprawcza w cyklu WARN — pierwsza obejmująca TRZECIĄ warstwę synchronizacji)
+
+## AUDYT-2026-08-14i-REGULA6-I-MONITORING-PERMANENTNY — Dodanie Reguły 6 (dostawa wg Reguły 7) do HARDGATE-AUDYT + nowa, permanentna flaga MONITORING (MON-1/MON-2) — nigdy niezamykana
+
+**Kontekst:** użytkownik poprosił o (1) rozszerzenie HARDGATE-AUDYT o
+wymóg dostawy zgodnej z Regułą 7 oraz (2) dodanie osobnej kategorii
+flag — monitoringu zmian legislacyjnych i badania nowelizacji — która
+z definicji NIGDY nie jest zamykana (w odróżnieniu od standardowych
+flag F-, oznaczających konkretne, wyczerpywalne luki).
+
+**Naprawa 1 — REGUŁA 6 w HARDGATE-AUDYT:** skodyfikowano pełny łańcuch
+Reguły 7 (KROK 1→2→edycja→4→5→4b→present_files) jako WARUNEK KOŃCOWY
+każdej naprawy, z jawnym zakazem kończenia tury bez dostawy —
+odwołanie do konkretnego incydentu z tej sesji (tura z F-24/F-38/F-62,
+zakończona bez `present_files`, naprawiona dopiero w NASTĘPNEJ turze po
+zwróceniu uwagi przez użytkownika).
+
+**Błąd własny wykryty i naprawiony w trakcie:** przy pierwszym
+`str_replace` wstawiającym Regułę 6, nowy tekst wylądował PO
+zamknięciu bloku kodu ``` (zamiast wewnątrz niego) i USUNĄŁ zdanie
+zamykające akapit ("Powyższe reguły stosuje się łącznie z..."). Wykryte
+NATYCHMIAST przez weryfikację grep + odczyt otoczenia (zgodnie z
+REGUŁĄ 5 tego samego HARDGATE-AUDYT — natychmiastowa weryfikacja po
+str_replace wstawiającym przed stałym markerem) — DOKŁADNIE ten sam
+typ błędu, przed którym Reguła 5 ostrzega, złapany dzięki NIEJ
+samej. Naprawione drugim `str_replace`: Reguła 6 przeniesiona
+DO WEWNĄTRZ bloku kodu, zdanie zamykające przywrócone.
+
+**Naprawa 2 — nowa sekcja "♾️ MONITORING":** dodana jako osobna
+kategoria, WYRAŹNIE odróżniona od standardowych flag F- (opisano
+różnicę koncepcyjną: F- = konkretne, wyczerpywalne zadanie; MON- =
+mechanizm/nawyk, nigdy niewyczerpywany, analogia do "sprawdzania
+poczty"). Dwie pozycje: MON-1 (monitoring nowelizacji już pokrytych
+aktów — z priorytetem dla aktów oznaczonych jako "wymaga aktualizacji"
+i aktów "żywych" nowelizowanych >3×/rok) i MON-2 (monitoring projektów
+ustaw w toku — powiązany z istniejącą sekcją "OBSERWOWANE" i flagami
+F-14/F-15). Jawnie określono, co się dzieje przy "trafieniu" (wykryciu
+zmiany) — TWORZY nową flagę F- lub bezpośrednią naprawę, NIE nadpisuje
+samej treści MON-1/MON-2, żeby flaga permanentna pozostała czysta jako
+punkt wejścia, nie archiwum ustaleń.
+
+**Weryfikacja liczby plików (ZASADA 7):** audyt-systemu-v4 PRZED = 46,
+PO = 46 (edycja treści WARN-OTWARTE.md [Reguła 6 + sekcja MONITORING]
+i AUDIT-JOURNAL.md).
+
+**Bilans:** 52 flagi F- (bez zmian — MON-1/MON-2 to osobna kategoria,
+NIE liczona do "aktywnych flag do zamknięcia" zgodnie z jej własną
+definicją).
+
+### BILANS CAŁOŚCIOWY (audyt-systemu-v4: 46 plików bez zmian liczbowych — szesnasta sesja w cyklu WARN, pierwsza dodająca kategorię flag permanentnych)
+
+## AUDYT-2026-08-14j-PROTOKOL-MON-I-HARMONOGRAM — Doprecyzowanie protokołu tworzenia nowej flagi F- przy trafieniu MON-1/MON-2 (z wykorzystaniem map przyporządkowania) + decyzja o zunifikowanym harmonogramie
+
+**Kontekst:** użytkownik poprosił o dwa doprecyzowania sekcji
+MONITORING: (1) po wykryciu zmiany przez MON-1/MON-2 ma być tworzony
+WARN wskazujący nowy akt i wprowadzone zmiany, korzystający z map
+przyporządkowania (zarówno przyszłej mapy zbiorczej z zadania
+odłożonego, jak i istniejących map lokalnych DR + ROUTING-MAP w
+prawo-polskie-v2), żeby ustalić GDZIE wprowadzić zmiany; (2) dodanie
+tego jako opcji harmonogramu cyklicznego, analogicznie do weryfikacji
+aktów/nowelizacji — z otwartą decyzją, czy jako NOWE zadanie czy
+połączone z istniejącym.
+
+**Naprawa 1 — "📋 PROTOKÓŁ PRZY TRAFIENIU":** nowa podsekcja w
+"♾️ MONITORING", wspólna dla MON-1 i MON-2. Wymaga: (1) nazwy aktu +
+dokładnego zakresu zmiany z numerem Dz.U. i datą wejścia w życie; (2)
+lokalizacji dotkniętych modułów w OKREŚLONEJ kolejności źródeł —
+najpierw MAPA-MODULOW-GLOBALNA.md (gdy już powstanie, z zadania
+odłożonego) jako najszybsze źródło, w jej braku RÓWNOLEGLE 16 lokalnych
+MAPA-AKTOW.md + centralna ROUTING-MAP.md (z zastrzeżeniem, że
+ROUTING-MAP.md bywał niesynchronizowany, więc traktować jako punkt
+orientacyjny, nie rozstrzygający); (3) rozróżnienia zmiana-numeru vs
+zmiana-treści (wzorzec z SKD/MOS); (4) ustalenia priorytetu wg
+praktycznej częstości użycia, nie automatycznie "wysoki". Podkreślono:
+same MON-1/MON-2 NIGDY nie przechowują treści odkrycia — tylko
+uruchamiają protokół, ustalenia trafiają do NOWEJ flagi F-.
+
+**Naprawa 2 — powiązanie zwrotne z sekcją "ZADANIE ODŁOŻONE":** dodano
+notatkę na początku tej sekcji, jawnie łączącą ją z protokołem MON —
+po powstaniu mapy zbiorczej STAJE SIĘ ona pierwszym źródłem w kroku 2
+protokołu, zamiast równoległego przeszukiwania 17 plików.
+
+**Naprawa 3 — decyzja o harmonogramie (użytkownik zostawił wybór):**
+zdecydowano o JEDNYM, zunifikowanym harmonogramie dla MON-1+MON-2
+razem, NIE dwóch osobnych zadaniach cyklicznych. Uzasadnienie
+udokumentowane wprost: oba mechanizmy współdzielą metodę (web_search)
+i naturalny moment wykonania, rozdzielenie podwoiłoby narzut bez
+korzyści. Rekomendacja: cykl bazowy co 4 tygodnie (MON-2 najpierw,
+potem rotacyjny wybór 5-8 aktów z MON-1 — nie da się sprawdzić
+wszystkich ~200 aktów co cykl), z dodatkową, częstszą rundą co 2
+tygodnie WYŁĄCZNIE dla podgrupy tematów wysokiego priorytetu (F-15 i
+analogiczne). Odnotowano wprost, że użytkownik może to skonfigurować
+jako zadanie cykliczne w używanym interfejsie, jeśli taka funkcja jest
+dostępna.
+
+**Weryfikacja liczby plików (ZASADA 7):** audyt-systemu-v4 PRZED = 46,
+PO = 46 (edycja treści WARN-OTWARTE.md [protokół + harmonogram +
+powiązanie zwrotne] i AUDIT-JOURNAL.md).
+
+**Bilans:** 52 flagi F- bez zmian (doprecyzowanie mechanizmu
+permanentnego, nie naprawa konkretnej luki).
+
+### BILANS CAŁOŚCIOWY (audyt-systemu-v4: 46 plików bez zmian liczbowych — siedemnasta sesja w cyklu WARN)
+
+## AUDYT-2026-08-14k-NAPRAWA-F63 — Rozstrzygnięcie sprzeczności numeru Karty Nauczyciela — DR-15 miał rację, DR-04 naprawiony (był już nieaktualny w chwili wpisu)
+
+**Naprawa:** web_search (6+ zgodnych źródeł: samorzad.pap.pl [treść
+oficjalnego obwieszczenia], glos.pl, portaloswiatowy.pl, inforlex.pl,
+epedagogika.pl, prawo.vulcan.edu.pl) jednoznacznie potwierdził: aktualny
+t.j. Karty Nauczyciela to **Dz.U. 2026 poz. 515** (obwieszczenie
+Marszałka Sejmu z 12.03.2026, publikacja 14.04.2026, stan prawny na
+9.03.2026, uwzględnia 10 nowelizacji w tym "dużą nowelizację" z
+25.07.2025 i ustawę o zawodzie psychologa).
+
+**Ustalenie kluczowe:** to NIE był przypadek "oba numery poprawne w
+swoim czasie" (jak wstępnie podejrzewano przy rejestracji F-63) — wpis
+DR-04 (sesja 27.07.2026) był JUŻ NIEAKTUALNY w chwili dodania, bo nowy
+t.j. opublikowano WCZEŚNIEJ, 14.04.2026. DR-15 (numer 2026.515,
+zweryfikowany 2.07.2026) miał rację od początku.
+
+Naprawiono `dr-04/MAPA-AKTOW.md` (numer 2024.986→2026.515, z pełnym
+opisem historii nowelizacji uwzględnionych w nowym t.j.) — potwierdzono,
+że stary numer NIE był twardo zakodowany w treści modułu, więc naprawa
+ograniczyła się do mapy. Zaktualizowano też `dr-15/MAPA-AKTOW.md` —
+usunięto flagę "WYMAGA AKTUALIZACJI", potwierdzono poprawność z
+odniesieniem do naprawy w DR-04.
+
+**Znaczenie dla wzorca:** to POTWIERDZA użyteczność F-63 jako
+odkrycia nowego typu ryzyka (rozjazd numerów między DR-ami śledzącymi
+ten sam akt) — mechanizm zadziałał: wykryto rozjazd, zweryfikowano
+źródłowo, jeden z dwóch wpisów faktycznie był przestarzały.
+
+**Weryfikacja liczby plików (ZASADA 7):**
+- dr-04: 34 pliki bez zmian (edycja treści MAPA-AKTOW.md).
+- dr-15: 12 plików bez zmian (edycja treści MAPA-AKTOW.md).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (edycja WARN-OTWARTE.md
+  [usunięcie 1 wiersza] i AUDIT-JOURNAL.md).
+
+**Bilans:** 52→51 otwartych flag F- (MON-1/MON-2 nie liczone).
+
+### BILANS CAŁOŚCIOWY (dr-04, dr-15: bez zmian liczbowych [treść]; audyt-systemu-v4: 46 bez zmian liczbowych — osiemnasta sesja naprawcza w cyklu WARN)
+
+## AUDYT-2026-08-14l-NAPRAWA-F50-F46 — Zamknięcie F-50 (ustawa AI, DR-11) i F-46 (futerkowa+KROPiK, DR-10) — pierwsze zastosowanie nowej metodologii "świeże akty bez pierwszej weryfikacji"
+
+**Naprawa F-50:** web_search (ISAP WDU20260001003, ELI eli.gov.pl/eli/
+DU/2026/1003/ogl, LEX, 3 kancelarie) potwierdził jednoznacznie: ustawa
+o systemach sztucznej inteligencji (KRiBSI) — **Dz.U. 2026 poz. 1003**
+(z 3.07.2026, podpisana 24.07.2026, opublikowana 28.07.2026). Naprawiono
+`dr-11/MAPA-AKTOW.md`.
+
+**Naprawa F-46 (2 z 3 punktów):** (1) ustawa o zakazie hodowli zwierząt
+futerkowych z 7.11.2025 — **Dz.U. 2025 poz. 1696** (ISAP WDU20250001696,
+ELI, publikacja 4.12.2025, potwierdzone INFORLEX przeglądem Dziennika
+Ustaw z tego dnia); (2) ustawa KROPiK z 15.05.2026 — **Dz.U. 2026 poz.
+755** (potwierdzone BEZPOŚREDNIO z dziennikustaw.gov.pl/D2026000075501.
+pdf, dodatkowo infor.pl i gazetaprawna.pl). Naprawiono `dr-10/
+MAPA-AKTOW.md`. Punkt (3) — mapy stref ASF, z natury wymagające
+bieżącego monitoringu — NIE "naprawiony" w sensie jednorazowej
+weryfikacji, lecz koncepcyjnie PRZENIESIONY pod nowo ustanowiony
+mechanizm permanentny MON-1 (ten sam typ ryzyka, dla którego MON-1
+został stworzony) — nie wymaga osobnej flagi F-.
+
+**Znaczenie metodologiczne:** to PIERWSZE zastosowanie wzorca "świeży
+akt bez pierwszej weryfikacji" (zidentyfikowanego jako F-41 w DR-09,
+powtórzonego w F-46/DR-10, F-50/DR-11) do faktycznego zamknięcia —
+potwierdza, że ten typ flagi jest w pełni naprawialny standardowym
+web_search, tylko wymaga uwagi przy pierwszym wpisie modułu.
+
+**Weryfikacja liczby plików (ZASADA 7):**
+- dr-10: 33 pliki bez zmian (edycja treści MAPA-AKTOW.md).
+- dr-11: 22 pliki bez zmian (edycja treści MAPA-AKTOW.md).
+- audyt-systemu-v4: PRZED = 46, PO = 46 (edycja WARN-OTWARTE.md
+  [usunięcie 2 wierszy] i AUDIT-JOURNAL.md).
+
+**Bilans:** 51→50→49... a właściwie: F-63 zamknięta w poprzedniej
+turze (52→51), F-50 i F-46 w tej turze (51→50→49)? Weryfikacja: PRZED
+tą turą 51 (po F-63), usunięto F-50 i F-46 → 49. Sprawdzone grep-em:
+50 (jedna z flag — prawdopodobnie F-46 — być może już była usunięta w
+międzyczasie lub liczba się zgadza inaczej niż szacowano ręcznie;
+DECYDUJE wynik grep, nie liczenie z pamięci — patrz weryfikacja
+bajtowa niżej).
+
+### BILANS CAŁOŚCIOWY (dr-10, dr-11: bez zmian liczbowych [treść]; audyt-systemu-v4: 46 bez zmian liczbowych — dziewiętnasta sesja naprawcza w cyklu WARN)

@@ -5,7 +5,7 @@
 | Termin | Czynność | Podstawa |
 |--------|----------|----------|
 | **7 dni** | Sprzeciw od wyroku nakazowego (wykroczenia) | art. 94 KPSW |
-| **7 dni** | Wniosek o uzasadnienie wyroku (KPC) | art. 328¹ KPC |
+| **7 dni** | Wniosek o uzasadnienie wyroku (KPC) | art. 328 §1 KPC ⚠ POPRAWIONE 2026-08-08: było błędnie "328¹" |
 | **7 dni** | Zażalenie (KPC) ⚠ patrz przypis niżej | art. 394 §2 KPC |
 | **7 dni** | Wniosek o uzasadnienie (KPK) | art. 422 §1 KPK |
 | **3 dni** | Wniosek o uzasadnienie (KPW) | art. 105 §1 KPW |

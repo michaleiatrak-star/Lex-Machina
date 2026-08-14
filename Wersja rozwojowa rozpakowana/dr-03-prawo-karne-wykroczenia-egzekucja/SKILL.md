@@ -1,6 +1,6 @@
 ---
 name: dr-03-prawo-karne-wykroczenia-egzekucja
-version: 3.31
+version: 3.28
 description: |
   DR-03: Prawo Karne, Wykroczenia, Egzekucja
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -77,12 +77,12 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   mod-niepelnosprawnosc-intelektualna-gluchota.md)
 
 ## Moduły (58 łącznie — ✓ 58 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
-## ⚡ NOWY 2026-08-05: mod-nielegalny-pobor-mediow — na żądanie
-## użytkownika: kradzież prądu (art. 278 §5 KK, zawsze przestępstwo)
-## vs kradzież wody (ODRĘBNY, łagodniejszy reżim — wykroczenie, SN
-## wykluczył wodę z pojęcia "energii"), WiFi sąsiada (art. 267 KK,
-## brak hasła NIE oznacza zgody), podłączenie do wspólnej instalacji
-## w bloku, analogia do wyłudzenia usług hotelowych
+
+**NAPRAWA 2026-08-13:** dodano `mod-KPK-srodki-zapobiegawcze-
+tymczasowe-aresztowanie.md` — zamyka F-23 (audyt zewnętrzny) i F-66
+(raport pokrycia KPK), obie dot. całkowitego braku pokrycia tematu
+tymczasowego aresztowania. Pełny opis: `audyt-systemu-v4/references/
+AUDIT-JOURNAL.md`.
 ## ⚡ NOWY 2026-08-04: mod-podmiana-czesci-naprawa-oszustwo — na
 ## żądanie użytkownika: art. 286 KK (oszustwo — z realnym wyrokiem
 ## SAOS II K 282/16, mechanik zamontował używane części zamiast
@@ -195,7 +195,19 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
               (⚠️ 2026-07-15: rozbudowany o konkretne artykuły KKS —
                art. 54/55/56/62/76, czynny żal art. 16 KKS, zbieg z KK
                przy karuzelach VAT — wcześniej sam szkielet proceduralny)
-  [✓] OK    mod-KKW-kodeks-karny-wykonawczy
+  [✓] NAPRAWIONY 2026-08-14 (F-75)
+              mod-KKW-kodeks-karny-wykonawczy
+              (dotąd generyczny szablon BEZ żadnego artykułu KKW —
+               najgorszy wynik pokrycia z 13 zbadanych aktów w raporcie
+               zewnętrznym. Dodano sekcję 0: warunkowe przedterminowe
+               zwolnienie [159-163, w tym kluczowy art. 161 §3-4 —
+               karencja 3/6 mies. wg wymiaru kary, bezpośrednio
+               wykorzystuje doświadczenie kancelaryjne sprawy Marek
+               Petelski], odroczenie/przerwa wykonania kary [150-158a,
+               rozróżnienie odroczenie vs przerwa, obligatoryjne vs
+               fakultatywne], dozór elektroniczny [43a-43zf, 3 formy,
+               struktura 5 oddziałów]. Naprawiono też niezgodność
+               nazwy wewnętrznej pliku)
   [✓] OK    mod-KPK-tryby-scigania
   [✓] NOWY  mod-tajemnica-zawodowa-poufnosc
               (utworzony 2026-07-15, część 4/6 naprawy; art. 266 KK —
@@ -322,6 +334,16 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
                Odpowiedź na pytanie użytkownika)
   [✓] OK    mod-KK-slupy-fikcyjna-reprezentacja-spolki
   [✓] OK    mod-poreczenie-majatkowe-kaucja-karna
+  [✓] NOWY  mod-KPK-srodki-zapobiegawcze-tymczasowe-aresztowanie
+              (dodany 2026-08-13 — naprawa luki strukturalnej F-23/F-66:
+               KPK Dział VI Rozdz. 28, art. 249-263. Przesłanka ogólna
+               [249 §1] + szczególne [258 §1-4, w tym najczęstsza w
+               praktyce — obawa matactwa] + negatywne [259, sytuacja
+               rodzinna] + tryb [250-252, wyłączność sądowa, zażalenie
+               7 dni] + maksymalne okresy [263, 3/12/24 mies. + skutek
+               przekroczenia]. Rozgraniczone od poręczenia majątkowego
+               [już opisanego wyżej] i od KKW/wykonania aresztu [F-75,
+               poza zakresem])
               (dodany 2026-07-19: poręczenie majątkowe/"kaucja karna"
                [art. 266-269 KPK — alternatywa dla tymczasowego
                aresztowania, zakaz przysporzenia specjalnie na ten cel,

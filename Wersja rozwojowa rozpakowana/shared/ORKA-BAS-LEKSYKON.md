@@ -280,10 +280,10 @@ i regularne wykonywanie czynności opodatkowanych.
 
 ### BAS-100 — PIT
 ```
-Weryfikacja: ustawa o PIT (Dz.U. 2024 poz. 226 t.j.) — ZWERYFIKOWANO
+Weryfikacja: ustawa o PIT (Dz.U. 2026 poz. 592 t.j. — POPRAWIONE 2026-08-08, było przestarzałe "2024 poz. 226") — ZWERYFIKOWANO
 Definicja: Podatek dochodowy od osób fizycznych — podatek bezpośredni od dochodu
 osób fizycznych, osiągany z różnych źródeł przychodów.
-Podstawa: ustawa o PIT (Dz.U. 2024 poz. 226 t.j. — weryfikuj)
+Podstawa: ustawa o PIT (Dz.U. 2026 poz. 592 t.j. — POPRAWIONE 2026-08-08, było przestarzałe "2024 poz. 226" — weryfikuj)
 Reguła: Opodatkowaniu podlega DOCHÓD (przychód - KUP), nie sam przychód
 (z wyjątkami: ryczałt, podatek liniowy od dywidend itp.).
 ```
@@ -1119,7 +1119,7 @@ DEFINICJA USTROJU ROLNEGO (art. 2 u.k.u.r.):
 
 ### BAS-011 — Cel mieszkaniowy (DR-06)
 ```
-Weryfikacja: PIT art. 21 ust. 1 pkt 131 i ust. 25 (Dz.U. 2024 poz. 226 t.j.)
+Weryfikacja: PIT art. 21 ust. 1 pkt 131 i ust. 25 (Dz.U. 2026 poz. 592 t.j. — POPRAWIONE 2026-08-08, było przestarzałe "2024 poz. 226")
   + interpretacja ogólna MF nr DD2.8202.4.2020 z 13.10.2021
   + NSA II FSK 1324/20 (12.05.2023) + interpretacje KIS 2024–2025
 

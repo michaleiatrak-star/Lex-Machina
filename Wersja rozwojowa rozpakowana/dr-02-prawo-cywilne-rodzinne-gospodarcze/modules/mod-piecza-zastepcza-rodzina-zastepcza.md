@@ -79,15 +79,42 @@ FORMA RODZINNA (preferowana ustawowo, ma mieć "szczególne miejsce"):
       — dzieci na podstawie ustawy o wspieraniu i resocjalizacji
       nieletnich)
   □ RODZINNY DOM DZIECKA — forma zbliżona do rodziny zastępczej
-    zawodowej, ale dla WIĘKSZEJ liczby dzieci (do 8, ⚠️ zweryfikuj
-    dokładny limit)
+    zawodowej. ✅ LIMIT ZWERYFIKOWANY 2026-08-13c (art. 61 ustawy,
+    t.j. Dz.U. 2025 poz. 49 — 3+ zgodne źródła): **NIE WIĘCEJ NIŻ 8**
+    dzieci w tym samym czasie (łącznie z osobami pełnoletnimi
+    kontynuującymi pobyt na zasadach art. 37 ust. 2-4/6). WYJĄTEK
+    (art. 61 ust. 2): przy konieczności umieszczenia RODZEŃSTWA — za
+    zgodą prowadzącego + POZYTYWNĄ opinią koordynatora rodzinnej
+    pieczy — dopuszczalne umieszczenie WIĘKSZEJ liczby (⭐ zasada
+    NIEROZDZIELANIA rodzeństwa, już wspomniana wyżej w tym module,
+    ma tu KONKRETNY mechanizm przełamania limitu).
+    ⭐ PRZEKSZTAŁCENIE z rodziny zastępczej zawodowej (art. 61a):
+    OBLIGATORYJNE gdy rodzina wychowuje już CO NAJMNIEJ 6 dzieci i ma
+    min. 3-letnie doświadczenie — starosta MUSI zawrzeć umowę o
+    prowadzenie rodzinnego domu dziecka na wniosek tej rodziny.
   □ RODZINA POMOCOWA — WSPARCIE dla powyższych, na czas np. WYPOCZYNKU
     rodziny zastępczej lub CZASOWEJ niemożności sprawowania opieki
 
-FORMA INSTYTUCJONALNA:
-  □ Placówki opiekuńczo-wychowawcze, regionalne placówki opiekuńczo-
-    terapeutyczne, interwencyjne ośrodki preadopcyjne — ⚠️ szczegóły
-    NIE zweryfikowane w pełni w tej sesji, punkt startowy
+FORMA INSTYTUCJONALNA — ✅ CZĘŚCIOWO UZUPEŁNIONE 2026-08-13c (Rząd 3,
+  1 źródło branżowe — domydziecka.org — NIE potwierdzone krzyżowo w
+  źródle Rządu 1/2, ⚠️ przed użyciem w piśmie zweryfikować limit
+  liczbowy bezpośrednio w art. 95/105 ustawy):
+  □ Placówki OPIEKUŃCZO-WYCHOWAWCZE (socjalizacyjne, specjalistyczno-
+    terapeutyczne, interwencyjne — art. 93 i nast.) — limit liczby
+    dzieci: **max 14** w placówkach utworzonych PO 2011 r., max 30 w
+    placówkach STARSZYCH (trwa stopniowe przekształcanie 30-osobowych
+    w mniejsze jednostki); od 2.01.2021 r. w nowo tworzonej/
+    przekształcanej placówce nie może przebywać więcej niż 14 dzieci.
+    Wojewoda MOŻE, w uzasadnionych przypadkach, wyrazić zgodę na
+    zwiększenie limitu. Prowadzi POWIAT lub podmiot zlecony (NGO,
+    instytucja kościelna).
+  □ Regionalne placówki opiekuńczo-terapeutyczne — dla dzieci
+    wymagających szczególnej opieki (niepełnosprawność, choroba) —
+    ⚠️ szczegółowy limit i procedura NIE zweryfikowane w tej sesji,
+    pozostaje punkt startowy.
+  □ Interwencyjne ośrodki preadopcyjne — ⚠️ szczegóły NIE zweryfikowane
+    w tej sesji, pozostaje punkt startowy (niski priorytet — rzadka
+    forma).
 ```
 
 ### Wynagrodzenie (przykład orientacyjny, ⚠️ ZAWSZE zweryfikuj aktualne stawki — ustalane lokalnie przez rady powiatów/miast, WALORYZOWANE)

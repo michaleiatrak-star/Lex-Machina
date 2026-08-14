@@ -44,6 +44,10 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Zdrowie, farmacja, żywność, rolnictwo — pojęcia dziedzinowe (świadczenie zdrowotne, podmiot leczniczy, produkt leczniczy) zdefiniowane wprost w aktach sektorowych (ustawa o działalności leczniczej, Prawo farmaceutyczne) i pokryte w modułach DR-10. Żaden plik shared/definicje/ nie obejmuje tej dziedziny.
 ## Moduły (31 łącznie — ✓ 31 OK, ☐ 0 STUB)
 
+**NAPRAWA 2026-08-13 (F-45, częściowa):** dodano formalne wpisy `[✓]`
+dla dwóch modułów niżej — istniały fizycznie od 2026-08-12 (podział
+NOTA-4), wzmiankowane tylko w prozie poniżej, bez wpisu w checkliście.
+
 **Aktualizacja 2026-08-12 (NOTA-4):** mod-ustawa-bezpieczenstwo-
 zywnosci przekroczył próg 400 linii ~4.6x (1863 linii) — PODZIELONO,
 z JEDNOCZESNYM usunięciem dwóch par zduplikowanych sekcji (szczepienia
@@ -161,6 +165,16 @@ WYROBY MEDYCZNE I CHEMIA:
               (bezpieczeństwo żywności Dz.U. 2023 poz. 1448 + inspekcja weterynaryjna
                Dz.U. 2024 poz. 12 + ARiMR/PROW + IJHARS)
   [✓] OK    mod-ustawa-bezpieczenstwo-zywnosci
+  [✓] NOWY  mod-ustawa-hodowla-zdrowie-zwierzat
+              (wydzielony 2026-08-12 z mod-ustawa-bezpieczenstwo-
+               zywnosci, NOTA-4 — hodowla zachowawcza, ubój rytualny,
+               zwierzęta futerkowe, hodowla rasowa, ASF, szczepienia,
+               KROPiK. Wpis dodany 2026-08-13, F-45)
+  [✓] NOWY  mod-ustawa-hodowla-zezwolenia-gatunki
+              (wydzielony 2026-08-12, NOTA-4 — pseudohodowla,
+               zezwolenia na gatunki, gatunki inwazyjne,
+               odpowiedzialność za ucieczkę zwierząt. Wpis dodany
+               2026-08-13, F-45)
               (ustawa o bezpieczeństwie żywności i żywienia — zakres podstawowy)
   [✓] OK    mod-ustawa-inspekcja-weterynaryjna
               (inspekcja weterynaryjna: uprawnienia, decyzje, odwołania)

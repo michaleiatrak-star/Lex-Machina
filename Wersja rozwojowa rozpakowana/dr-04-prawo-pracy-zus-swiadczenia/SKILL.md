@@ -1,6 +1,6 @@
 ---
 name: dr-04-prawo-pracy-zus-swiadczenia
-version: 3.24
+version: 3.23
 description: |
   DR-04: Prawo Pracy, ZUS, Świadczenia Społeczne
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -64,30 +64,26 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   wspierające (→ mod-niepelnosprawnosc-intelektualna-gluchota.md,
   mod-niewidomy-prawa-prawne.md, mod-prawa-obywatelskie-srodki-karne.md)
 
-## Moduły (31 łącznie — ✓ 31 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
+## Moduły (33 łącznie — ✓ 33 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
+
+**NAPRAWA 2026-08-14b:** dodano `mod-FUS-zasilek-pogrzebowy-renta-
+rodzinna-waloryzacja.md` — dokańcza F-72: zasiłek pogrzebowy (77-81,
+w tym podwyżka do 7000 zł od 1.01.2026), renta rodzinna (65-74, w tym
+"renta wdowia" — zbieg świadczeń od 1.07.2025), waloryzacja (88-94).
+
+**NAPRAWA 2026-08-13:** dodano `mod-SUS-dzial-2-podleganie-
+ubezpieczeniom.md` — zamyka F-72: SUS Rozdział 2 (art. 6-14, zasady
+podlegania ubezpieczeniom) nigdy nie miał dedykowanego pokrycia mimo
+fundamentalnego znaczenia kwalifikacyjnego. Pełny opis: `audyt-systemu-
+v4/references/AUDIT-JOURNAL.md`.
+
+**NAPRAWA 2026-08-13:** dodano `mod-KP-dzial-VIII-rodzicielstwo.md` —
+zamyka F-27 (audyt zewnętrzny): Dział VIII KP nie miał modułu, a
+istniejące odesłanie było błędnym zmapowaniem na moduł o świadczeniu
+ZUS "Aktywny Rodzic". Pełny opis: `audyt-systemu-v4/references/
+AUDIT-JOURNAL.md`.
 
 ```
-  [✓] NOWY  mod-ROZP-SKLADKOWE-podstawa-wymiaru (v1.0.0)
-              (dodany 2026-08-13 — domyka LUKĘ SYSTEMOWĄ wykrytą przy
-               analizie oferty "obniżymy ZUS o 25%". Audyt grep całego
-               drzewa /mnt/skills/user dał ZERO trafień dla "1106",
-               "rozporządzenie składkowe", "18 grudnia 1998",
-               "§ 2 ust. 1 pkt" — system pokrywał ZUS WYŁĄCZNIE od
-               strony ubezpieczonego (mod-SUS: emerytura/renta/
-               odwołanie), nigdy od strony PŁATNIKA i PODSTAWY
-               WYMIARU. Zawiera: pełny katalog § 2 ust. 1 z ANALIZĄ
-               POJEMNOŚCI każdego punktu (ustalenie kluczowe: tylko
-               pkt 26 nie ma limitu kwotowego, więc każdy schemat
-               "-25%" MUSI przez niego przechodzić), § 3 wycena
-               świadczeń w naturze, § 5 rozszerzenie na zleceniobiorców
-               i rady nadzorcze, § 6-9 30-krotność, DETEKTOR SCHEMATÓW
-               OPTYMALIZACYJNYCH (test arytmetyczny D1, test źródła
-               finansowania D2, pytanie rozstrzygające D3, czerwone
-               flagi D4), 5 przesłanek pkt 26, kaskada sankcji [1]-[6]
-               ze skutkami dla pracowników i doradcy. Alert: nowelizacja
-               Dz.U. 2023 poz. 1665 UCHYLIŁA pkt 1b/5/31/32 i § 2
-               ust. 2-4 — kierunek zmian jest ZAWĘŻAJĄCY, co obala
-               marketingowe "stabilny i powtarzalny")
   [✓] NOWY  mod-obchodzenie-prawa-pracy-reforma-PIP-2026 (v1.0.1)
               (dodany 2026-07-30, POPRAWIONY tego samego dnia po
                wykryciu masywnej duplikacji z mod-ustawa-PIP-
@@ -162,6 +158,17 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
                dodatki 50%/100%, czas wolny), nowelizacja 2026 forma
                elektroniczna wniosków. Najwyższy priorytet z audytu KP)
   [✓] OK    mod-KP-dzial-VII-urlopy-pracownicze
+  [✓] NOWY  mod-KP-dzial-VIII-rodzicielstwo
+              (dodany 2026-08-13 — naprawa F-27: KP Dział VIII, art.
+               176-189¹. Urlop macierzyński [180, 20 tyg. + warianty],
+               rodzicielski [182¹, 41/43 tyg., 9 tyg. nieprzenoszalnych
+               per rodzic — reforma 2023], ojcowski [2 tyg., termin do
+               12 mies. dziecka], wychowawczy [186, do 36 mies. +
+               dodatkowy dla dziecka z niepełnosprawnością, ochrona
+               186⁸], elastyczna organizacja pracy [188¹]. NAPRAWIA
+               błędne odesłanie z mod-KP-dzial-VII i mod-KP-prawo-pracy
+               [wskazywały na mod-ustawa-aktywny-rodzic, który dotyczy
+               INNEGO świadczenia])
               (dodany 2026-07-17: Dział VII KP — wymiar urlopu (20/26 dni),
                zasady udzielania/odwołania, ekwiwalent art. 171 (w tym
                nowe §4-5 z 2026), urlop na żądanie, siła wyższa. Drugi
@@ -184,7 +191,26 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
                logicznie przynależy — sprawdź tam, rozbudowany o
                sekcję 4a: ugoda, milczące załatwienie, zaświadczenia,
                skargi/wnioski Działu VIII)
+  [✓] NOWY  mod-SUS-dzial-2-podleganie-ubezpieczeniom
+              (dodany 2026-08-13 — naprawa F-72: SUS art. 6-14. Katalog
+               tytułów ubezpieczenia [art. 6], rozszerzona definicja
+               pracownika [art. 8 — zlecenie z własnym pracodawcą],
+               zbieg tytułów [art. 9, checklist etat+zlecenie wg progu
+               płacy minimalnej — najczęstsze praktyczne pytanie],
+               chorobowe dobrowolne/obowiązkowe [art. 11], wypadkowe
+               [art. 12], okresy podlegania [art. 13], dobrowolne
+               początek/koniec [art. 14])
   [✓] OK    mod-SUS-ZUS-ubezpieczenia-spoleczne
+  [✓] NOWY  mod-FUS-zasilek-pogrzebowy-renta-rodzinna-waloryzacja
+              (dodany 2026-08-14 — dokańcza F-72. Zasiłek pogrzebowy
+               [77-81, 7000 zł od 1.01.2026 + mechanizm waloryzacji
+               od 1.03 gdy wskaźnik >105, termin 12 mies. prekluzyjny],
+               renta rodzinna [65-74, krąg uprawnionych, wysokość
+               85/90/95% wg liczby uprawnionych, NOWOŚĆ: "renta
+               wdowia" — zbieg 100%+15% od 1.07.2025], waloryzacja
+               [88-94, coroczna od 1 marca, wskaźnik dwuskładnikowy
+               CPI+20% realnego wzrostu płac] + OBSERWACJA: projekt
+               Prezydenta o minimalnej kwocie waloryzacji, w toku)
               (2026-07-21: dodano ANEKS D — interpretacja indywidualna
                ZUS [art. 34 Prawa przedsiębiorców, właściwość WYŁĄCZNIE
                oddziały Gdańsk/Lublin, milcząca zgoda po 30 dniach,

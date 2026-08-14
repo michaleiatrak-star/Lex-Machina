@@ -102,7 +102,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | DR-01 | Ustrój Konstytucyjny | 14 | 1 | 0 | 0 | 15 |
 | DR-02 | Prawo Cywilne/Rodzinne/Gosp. | 19 | 1 | 0 | 0 | 20 |
 | DR-03 | Prawo Karne/Wykroczenia | 16 | 0 | 0 | 2 | 18 |
-| DR-04 | Prawo Pracy/ZUS/Świadczenia | 37 | 2 | 0 | 0 | 39 |  ⚠️ LICZNIK NAPRAWIONY 2026-08-13: deklarowano `18 / 0 / 0 / 0 / 18` przy **38 rzeczywistych wierszach JESZCZE PRZED tą sesją** — ten sam wzorzec dryfu co naprawiony wcześniej w DR-06 (2026-08-11v). Test T2 go nie wykrywa, bo sprawdza liczniki modułów w SKILL.md, a NIE liczniki wierszy w tej tabeli. Po dopisaniu rozporządzenia składkowego: 39 wierszy (37 ✅ + 2 🔗 odesłania do DR-05: KPA, PPSA)
+| DR-04 | Prawo Pracy/ZUS/Świadczenia | 18 | 0 | 0 | 0 | 18 |
 | DR-05 | Prawo Administracyjne | 13 | 2 | 0 | 0 | 15 |
 | DR-06 | Podatki/Finanse/AML | 40 | 0 | 0 | 4 | 44 |  ⚠️ LICZNIK NAPRAWIONY 2026-08-11v: deklarowano 21 przy rzeczywistych 32 wierszach JESZCZE PRZED tą sesją — dryf licznika istniał wcześniej i nie został wykryty przez T2 (test sprawdza liczniki modułów w SKILL.md, NIE liczniki wierszy w TABELI STATUSU ROUTING-MAP). Po dopisaniu 12 aktów rachunkowo-księgowych: 44 wierszy
 | DR-07 | Zamówienia Publiczne/Fundusze | 12 | 2 | 0 | 0 | 14 |
@@ -193,6 +193,10 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Skład sądu — pełne zestawienie (KPC art. 47/367¹, KPK art. 28-30, w tym JEDYNY skład 5 sędziów: apelacja/kasacja od dożywocia) | ✅ Dz.U.2026.0.468 KPC t.j., Dz.U.2026.0.490 KPK t.j. (VER 2026-08-07) | dr-02/modules/mod-sklad-sadu-liczba-sedziow | ✅ NOWY 2026-08-07 |
 | ⚡⚡ Ustawa frankowa z 29.05.2026 — sprawy CHF w toku, posiedzenia niejawne | ✅ Dz.U. 2026 poz. 985 (VER 2026-08-07, weszła w życie tego dnia) | dr-02/modules/mod-ustawa-frankowa-2026-procedura | ✅ NOWY 2026-08-07 |
 | Prawo wekslowe (1936) + Prawo czekowe (1936) + Prawo przedsiębiorców Rozdz. 3-5 (kontrola przedsiębiorcy, koncesje) | Dz.U. 2022 poz. 282 t.j. (wekslowe) + Dz.U. 2016 poz. 462 t.j. (czekowe) + Dz.U. 2025 poz. 1480 t.j. (Prawo przedsiębiorców) | dr-02/modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje | ✅ NOWY 2026-07-19 — DOPISANE do mapy 2026-07-30 (sync) |
+| Ustawa o ochronie praw lokatorów, mieszkaniowym zasobie gminy — najem zwykły/okazjonalny/instytucjonalny, kaucje (3 różne progi), art. 16 okres ochronny, art. 1046 §5¹ KPC, art. 678 KC | Dz.U. 2023 poz. 725 t.j. | dr-02/modules/mod-ustawa-ochrona-praw-lokatorow-najem-eksmisja | ✅ NOWY 2026-08-13 — DOPISANE 2026-08-14 (sync) — naprawa luki strukturalnej (dotąd tylko fragment "dziki lokator" gdzie indziej) |
+| Prawo restrukturyzacyjne — Dział VI, Układ (art. 150-179): przepisy ogólne, propozycje układowe, głosowanie/zatwierdzenie (art. 119, test zaspokojenia — nowelizacja 2025.1085), skutki układu | Dz.U. 2026 poz. 533 t.j. + nowelizacja Dz.U. 2025 poz. 1085 | dr-02/modules/mod-PrRestr-dzial-VI-uklad | ✅ NOWY 2026-08-14 — DOPISANE 2026-08-14 (sync) — naprawa F-69, jedyna centralna instytucja PrRestr dotąd bez podstawy prawnej |
+| KSH — Tytuł III, Dział I, Rozdz. 3, organy sp. z o.o. (art. 201-254): zarząd [art. 204 §2 — zakaz ograniczenia reprezentacji wobec osób trzecich], zgromadzenie wspólników [art. 228 — absolutorium, art. 235 §2 — zastępcze zwołanie] | Dz.U. 2024 poz. 18 t.j. | dr-02/modules/mod-KSH-organy-spolki-zoo | ✅ NOWY 2026-08-14 — DOPISANE 2026-08-14 (sync) — naprawa F-68, najwyższy priorytet z raportu KSH |
+| KPC — prawomocność orzeczeń (363-366, powaga rzeczy osądzonej) i granice apelacji (378, 380-386, zakaz reformationis in peius art. 384) | Dz.U. 2026 poz. 468 t.j. | dr-02/modules/mod-KPC-prawomocnosc-granice-apelacji | ✅ NOWY 2026-08-14 — DOPISANE 2026-08-14 (sync) — naprawa F-65, dawało podstawę merytoryczną dla engine appellate-v8 |
 
 ---
 
@@ -200,6 +204,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
+| KPK Dział VI Rozdz. 28 — środki zapobiegawcze i tymczasowe aresztowanie (art. 249-263: przesłanki ogólne/szczególne/negatywne, tryb, zażalenie 7 dni, maksymalne okresy 3/12/24 mies.) | Dz.U. 2026 poz. 490 t.j. ⚠️ metryka pomija 2 nowelizacje (2026.421, 2026.638) | dr-03/modules/mod-KPK-srodki-zapobiegawcze-tymczasowe-aresztowanie | ✅ NOWY 2026-08-13 — DOPISANE 2026-08-14 (sync) — naprawa F-23/F-66, jeden z najczęściej używanych tematów praktyki karnej, potwierdzona niezależnie dwoma metodami |
 | Kodeks karny (KK) | Dz.U. 2025 poz. 383 ze zm. (zm.: 2025.1818, 2026.638) | dr-03/modules/mod-KK-kodeks-karny | ✅ OK |
 | KK art. 15/17/23 (czynny żal) + KKS art. 16-16a (czynny żal skarbowy) — korekta terminologiczna "samooskarżenie" | Dz.U. 2025 poz. 383 t.j. + Dz.U. 2025 poz. 633 t.j. (KKS) | dr-03/modules/mod-czynny-zal-KK-KKS-samooskarzenie | ✅ NOWY 2026-07-21 |
 | KPK art. 335 i 387 (dobrowolne poddanie się karze) | Dz.U. 2026 poz. 490 t.j. | dr-03/modules/mod-dobrowolne-poddanie-sie-karze-KPK | ✅ NOWY 2026-07-21 |
@@ -213,7 +218,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | KK art. 209 — niealimentacja | Dz.U. 2025 poz. 383 ze zm. | dr-03/modules/mod-KK-KPK-framework-karne → ANEKS alimenty | ✅ OK |
 | Kodeks postępowania karnego (KPK) | Dz.U. 2026 poz. 490 t.j. ze zm. (zm.: ⚡ 2026.638) | dr-03/modules/mod-KK-KPK-framework-karne | ✅ OK |
 | KPK — tryby ścigania | Dz.U. 2026 poz. 490 ze zm. | dr-03/modules/mod-KPK-tryby-scigania | ✅ OK |
-| Kodeks karny wykonawczy (KKW) | Dz.U. 2025 poz. 911 ze zm. | dr-03/modules/mod-KKW-kodeks-karny-wykonawczy | ✅ OK |
+| Kodeks karny wykonawczy (KKW) — warunkowe zwolnienie (159-163, w tym art. 161 §3-4 karencja 3/6 mies.), odroczenie/przerwa kary (150-158a), dozór elektroniczny (43a-43zf) | Dz.U. 2025 poz. 911 ze zm. | dr-03/modules/mod-KKW-kodeks-karny-wykonawczy | ✅ NAPRAWIONY 2026-08-14 (F-75) — DOPISANE 2026-08-14 (sync) — dotąd generyczny szablon bez ani jednego artykułu, najgorszy wynik z 13 zbadanych aktów; naprawiono też niezgodność nazwy wewnętrznej pliku |
 | Kodeks wykroczeń (KW) | Dz.U. 2025 poz. 734 ze zm. (**zm.: Dz.U. 2025 poz. 1872** — art. 86c drift) | dr-03/modules/mod-KW-kodeks-wykroczen | ✅ OK |
 | KPW — Kodeks postępowania w sprawach o wykroczenia | Dz.U. 2025 poz. 860 t.j. | dr-03/modules/mod-KW-KPW-framework-szczegolowy | ✅ OK |
 | KKS + Ustawa AML | Dz.U. 2025 poz. 633 t.j. + Dz.U. 2025 poz. 644 | dr-03/modules/mod-KKS-karny-skarbowy-i-AML | ✅ OK |
@@ -280,7 +285,6 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | PPSA (odesłanie — moduł fizycznie w DR-05, PRZENIESIONY 2026-07-19) | Dz.U. 2026 poz. 143 ze zm. | → DR-05/mod-KPA-postepowanie-administracyjne | 🔗 odesłanie |
 | Ustawa o systemie ubezpieczeń społecznych (SUS/ZUS) + art. 34 Prawa przedsiębiorców (interpretacja indywidualna, ANEKS D) | Dz.U. 2026 poz. 199 t.j. (obwieszczenie 9.02.2026, opublikowane 23.02.2026, POTWIERDZONE na ISAP: WDU20260000199) — ✅ NAPRAWIONE 2026-07-21: poprzedni numer "2025 poz. 1169" był BŁĘDNY jako oznaczenie tej ustawy — to odrębna, wąska ustawa o emeryturach czerwcowych (5.08.2025), pomylona w tym wierszu z bazową ustawą SUS; treść modułu była CAŁY CZAS poprawna, błąd dotyczył wyłącznie tego wiersza mapy | dr-04/modules/mod-SUS-ZUS-ubezpieczenia-spoleczne | ✅ OK |
 | Ustawa z 5.08.2025 o ustalaniu wysokości emerytur z FUS ustalonych w czerwcu w latach 2009-2019 oraz rent rodzinnych ("emerytury czerwcowe") | Dz.U. 2025 poz. 1169 (POTWIERDZONE na ISAP: WDU20250001169), w życie 1.01.2026 | dr-04/modules/mod-SUS-ZUS-ubezpieczenia-spoleczne (tabela ALERTÓW) | ✅ NOWY 2026-07-21 (osobny wiersz dla przejrzystości) |
-| ⭐ **Rozporządzenie MPiPS z 18.12.1998 w sprawie szczegółowych zasad ustalania podstawy wymiaru składek na ubezpieczenia emerytalne i rentowe** ("rozporządzenie składkowe", akt wykonawczy do art. 21 usus). **TRIGGERY:** optymalizacja składek · "obniżymy ZUS o X%" · podstawa wymiaru składek · benefity/kafeteria · świadczenia pozapłacowe · korzyści materialne · 30-krotność · wycena świadczeń w naturze | Dz.U. 1998 nr 161 poz. 1106; **t.j. Dz.U. 2025 poz. 316** — ✅ pełny tekst odczytany 2026-08-13 z api.sejm.gov.pl/eli. ⚡ zm. Dz.U. 2023 poz. 1665 (od 1.09.2023) uchyliła § 2 ust. 1 pkt 1b/5/31/32 i § 2 ust. 2-4 | dr-04/modules/mod-ROZP-SKLADKOWE-podstawa-wymiaru | ✅ NOWY 2026-08-13 — **domyka lukę: akt NIE ISTNIAŁ w systemie** (grep całego drzewa = 0 trafień) |
 | Ustawa o emeryturach i rentach z FUS | Dz.U. 2025 poz. 1749 ze zm. | dr-04/modules/mod-SUS-ZUS-ubezpieczenia-spoleczne | ✅ OK |
 | Ustawa o ubezpieczeniu społecznym rolników (KRUS) | Dz.U. 2025 poz. 1770 t.j. (sync 2026-07-02 z dr-04) | dr-04/modules/mod-KRUS-rolnicze-ubezpieczenia | ✅ OK |
 | Ustawa o rehabilitacji zawodowej i PFRON — ROZBUDOWANE 2026-07-20: ANEKS o likwidacji Wypożyczalni PFRON (temat świeży, w toku) | Dz.U. 2025 poz. 913 ze zm. | dr-04/modules/mod-ustawa-rehabilitacja-PFRON | ✅ OK |
@@ -317,6 +321,9 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Karta Nauczyciela (KN) — aspekty pracownicze (wynagrodzenie, czas pracy, urlopy) | Dz.U. 2024 poz. 986 t.j. + zm. Dz.U. 2024 poz. 1871, Dz.U. 2025 poz. 1160 | dr-04/modules/mod-ustawa-karta-nauczyciela-pracownicze | ✅ NOWY 2026-07-27 — DOPISANE do mapy 2026-07-30 (sync) |
 | Klasyfikacja naruszeń BHP/prawa pracy — właściwy adresat zgłoszenia (PIP/sąd pracy/Policja/ZUS/KAS) | ⚠️ moduł przekrojowy — odsyła do wielu aktów źródłowych (KP, ustawa o PIP, ustawy branżowe BHP), brak jednego "własnego" aktu | dr-04/modules/mod-klasyfikacja-naruszen-bhp-prawa-pracy | ✅ NOWY 2026-07-27 — DOPISANE do mapy 2026-07-30 (sync) |
 | Ustawa z 26.09.2025 o zmianie KP i innych ustaw — reforma stażu pracy (zaliczanie zlecenia/B2B) | Dz.U. 2025 poz. 1423 | dr-04/modules/mod-reforma-stazu-pracy-2025-2026 | ✅ NOWY 2026-07-27 — DOPISANE do mapy 2026-07-30 (sync) |
+| KP Dział VIII — urlopy związane z rodzicielstwem (176-189¹: macierzyński, rodzicielski z 9 tyg. nieprzenoszalnymi, ojcowski, wychowawczy, elastyczna organizacja pracy) | Dz.U. 2025 poz. 277 t.j. | dr-04/modules/mod-KP-dzial-VIII-rodzicielstwo | ✅ NOWY 2026-08-13 — DOPISANE 2026-08-14 (sync) — naprawa F-27, luka strukturalna + błędne zmapowanie na moduł o świadczeniu ZUS |
+| SUS Rozdział 2 — zasady podlegania ubezpieczeniom (art. 6-14: katalog tytułów, definicja pracownika art. 8, zbieg tytułów art. 9 z checklistem) | Dz.U. 2026 poz. 199 t.j. | dr-04/modules/mod-SUS-dzial-2-podleganie-ubezpieczeniom | ✅ NOWY 2026-08-13 — DOPISANE 2026-08-14 (sync) — naprawa F-72, fundamentalne pytanie kwalifikacyjne dotąd bez treści |
+| FUS — zasiłek pogrzebowy (77-81, 7000 zł od 1.01.2026), renta rodzinna (65-74, w tym "renta wdowia" od 1.07.2025), waloryzacja (88-94) | Dz.U. 2025 poz. 1749 t.j. | dr-04/modules/mod-FUS-zasilek-pogrzebowy-renta-rodzinna-waloryzacja | ✅ NOWY 2026-08-14 — DOPISANE 2026-08-14 (sync) — dokańcza naprawę F-72 |
 
 ---
 
@@ -342,6 +349,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o sygnalistach | Dz.U. 2024 poz. 928 ze zm. | dr-05/modules/mod-ustawa-sygnalisci | ✅ OK |
 | Zaskarzanie decyzji / reprywatyzacja | Dz.U. 2025 poz. 1691 (KPA art. 156) + Dz.U. 2021 poz. 795 | dr-05/modules/mod-ustawa-zaskarzanie-decyzji-wlasnosci | ✅ OK |
 | Ustawa o dostępności — osoby ze szczególnymi potrzebami | Dz.U. 2024 poz. 1411 t.j. (sync 2026-07-02 z dr-05/dr-10) | dr-05/modules/mod-ustawa-dostepnosc-niepelnosprawni | ✅ OK |
+| PPSA — uchybienie/przywrócenie terminu (85-89), skarga kasacyjna do NSA (173-193, przymus adwokacko-radcowski), prawo pomocy (245-259, referendarz jako organ I instancji) | Dz.U. 2026 poz. 143 t.j. | dr-05/modules/mod-PPSA-terminy-kasacja-prawo-pomocy | ✅ NOWY 2026-08-14 — DOPISANE 2026-08-14 (sync) — naprawa F-64, PIERWSZY dedykowany moduł PPSA w całym systemie (dotąd ustawa istniała wyłącznie jako rozproszone cytaty) |
 
 ---
 
@@ -393,6 +401,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Podatek rolny | Dz.U. 2025 poz. 1344 t.j. | dr-06/modules/mod-ustawa-podatek-nieruchomosci-i-lokalne | ✅ OK |
 | Ustawa o podatku od wydobycia kopalin | Dz.U. 2024 poz. 44 ze zm. | dr-06/modules/mod-KAS-kontrola-celno-skarbowa | ✅ OK |
 | Prawo przedsiębiorców art. 19 (limit płatności gotówkowych) | Dz.U. 2025 poz. 1480 t.j. | dr-06/modules/mod-limit-platnosci-gotowkowych | ✅ NOWY 2026-07-27 — DOPISANE do mapy 2026-07-30 (sync) |
+| Ordynacja podatkowa — Dział IV Rozdz. 11, dowody w postępowaniu podatkowym (180-200: zasada inkwizycyjności art. 187, otwarty katalog dowodów art. 181, KSIĘGI PODATKOWE art. 193 — ciężar obalenia domniemania na organie) | Dz.U. 2026 poz. 622 t.j. | dr-06/modules/mod-OP-dzial-IV-rozdzial-11-dowody | ✅ NOWY 2026-08-14 — DOPISANE 2026-08-14 (sync) — naprawa F-70, etap decydujący o wyniku większości sporów podatkowych |
 
 ---
 
@@ -423,6 +432,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | PZP Dział XI/XII — kontrola Prezesa UZP, kary pieniężne | Dz.U. 2026 poz. 793 t.j. | dr-07/modules/mod-PZP-dzial-XI-XII-kontrola-kary-UZP | ✅ NOWY 2026-07-18 (dopisane do głównej mapy) |
 | Zamówienia dofinansowane z UE — podwójny reżim PZP + Wytyczne kwalifikowalności, korekty finansowe | Dz.U. 2026 poz. 793 t.j. + Wytyczne kwalifikowalności wydatków 2021-2027 (dokument programowy) | dr-07/modules/mod-PZP-fundusze-UE-podwojny-rezim | ✅ NOWY 2026-07-18 (dopisane do głównej mapy) |
 | PZP art. 99 ust. 4-6 — opis przedmiotu zamówienia, zakaz znaków towarowych | Dz.U. 2026 poz. 793 t.j. | dr-07/modules/mod-PZP-opis-przedmiotu-zakaz-znakow-towarowych | ✅ NOWY 2026-07-18 (dopisane do głównej mapy) |
+| PZP Dział II — kwalifikacja podmiotowa (112-128, JEDZ i mechanizm dwuetapowy), kryteria oceny ofert (239-243, art. 240 najczęściej naruszany), unieważnienie postępowania (255-258) | Dz.U. 2026 poz. 793 t.j. | dr-07/modules/mod-PZP-dzial-II-kwalifikacja-kryteria-uniewaznienie | ✅ NOWY 2026-08-14 — DOPISANE 2026-08-14 (sync) — naprawa F-71, największa liczbowo luka w PZP, sam rdzeń klasycznego przetargu |
 
 ---
 
@@ -633,6 +643,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
+| Ustawa o Służbie Kontrwywiadu Wojskowego oraz Służbie Wywiadu Wojskowego — utworzenie/cele (art. 1-2), ustrój/nadzór (art. 3/5/13/18, wieloetapowe powoływanie Szefów) | Dz.U. 2026 poz. 157 t.j. | dr-13/modules/mod-ustawa-SKW-SWW | ✅ NOWY 2026-08-13 — DOPISANE 2026-08-14 (sync) — naprawa F-59, wojskowe odpowiedniki ABW/AW dotąd bez pokrycia w domenie noszącej nazwę "Służby" |
 | Ustawa o Policji | Dz.U. 2025 poz. 636 t.j. (sync 2026-07-02 z dr-13) (zm.: 2024.1248, 2024.1562, 2025.1366) | dr-13/modules/mod-ustawa-policja | ✅ OK |
 | Ustawa o Straży Granicznej — ROZBUDOWANE 2026-07-21 (kontrola legalności zatrudnienia/pobytu cudzoziemców, sprzeciw wobec kontroli, obowiązki zgłoszeniowe pracodawcy) | Dz.U. 2026 poz. 367 t.j. (sync 2026-07-02 z dr-13) (zm.: 2025.1366 ✅ w pełni w mocy od 14.10.2025, VER 2026-07-13) | dr-13/modules/mod-ustawa-straz-graniczna | ✅ OK |
 | Ustawa o Żandarmerii Wojskowej | Dz.U. 2026 poz. 159 t.j. (sync 2026-07-02 z dr-13) | dr-13/modules/mod-ustawa-zandarmeria-wojskowa | ✅ OK |

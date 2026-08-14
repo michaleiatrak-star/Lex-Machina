@@ -122,12 +122,81 @@ DZIAŁ III: Kuratela (178-184)
 (art. 165-174)
 
 ```
-⚠️ SZCZEGÓŁOWA treść tych DWÓCH rozdziałów NIE zbadana W tej
-  transzy — PUNKT startowy DO dalszego badania: mechanizm
-  BIEŻĄCEGO nadzoru sądu NAD opiekunem (art. 165-168) ORAZ
-  PRZYCZYNY/procedura ZWOLNIENIA opiekuna I zakończenia opieki
-  (art. 169-174, W TYM osiągnięcie PEŁNOLETNOŚCI przez podopiecznego
-  jako NATURALNA przyczyna ustania)
+### Rozdział III — nadzór nad sprawowaniem opieki (art. 165-168)
+✅ UZUPEŁNIONE 2026-08-13 (wcześniej: "nie zbadano w tej transzy") —
+zweryfikowane niezależnie w 4 zgodnych źródłach (e-prawnik.pl, gofin.pl,
+lexlege.pl, money.pl), Rząd 2B:
+
+```
+⭐⭐ ART. 165: sąd OPIEKUŃCZY wykonuje NADZÓR nad sprawowaniem opieki —
+  §1 zaznajamia się BIEŻĄCO z działalnością opiekuna, udziela WSKAZÓWEK
+  i POLECEŃ; §2 MOŻE żądać od opiekuna WYJAŚNIEŃ i dokumentów związanych
+  z opieką (⭐ nadzór ma charakter CIĄGŁY, nie tylko roczny — kontrast
+  względem rozdziału IV niżej)
+
+⭐⭐⭐ ART. 166 — OBOWIĄZEK SPRAWOZDAWCZY (kluczowy dla praktyki):
+  §1: opiekun MUSI, w terminach wyznaczonych przez sąd, NIE RZADZIEJ
+    niż CO ROKU, składać sądowi SPRAWOZDANIA dot. osoby podopiecznego
+    ORAZ RACHUNKI z zarządu jego majątkiem
+  §2: gdy dochody z majątku NIE PRZEKRACZAJĄ prawdopodobnych kosztów
+    utrzymania/wychowania — sąd MOŻE zwolnić opiekuna z obowiązku
+    SZCZEGÓŁOWYCH rachunków, zadowalając się OGÓLNYM sprawozdaniem
+    (⭐ typowa sytuacja przy skromnym majątku podopiecznego)
+
+⭐⭐ ART. 167: sąd BADA sprawozdania/rachunki POD WZGLĘDEM rzeczowym I
+  rachunkowym, może ZARZĄDZIĆ sprostowanie/uzupełnienie, ORZEKA czy
+  i w jakim ZAKRESIE rachunek ZATWIERDZA — ⚠️ ZATWIERDZENIE NIE
+  wyłącza ODPOWIEDZIALNOŚCI opiekuna za SZKODĘ z nienależytego
+  zarządu (§2 — zatwierdzenie rachunku to NIE jest "kwitowanie z
+  odpowiedzialności")
+
+⭐ ART. 168: gdy opiekun NIE sprawuje NALEŻYCIE opieki — sąd WYDAJE
+  odpowiednie ZARZĄDZENIA (⭐ elastyczna, niedookreślona norma —
+  praktycznie: od upomnienia po ODEBRANIE dziecka i zmianę opiekuna,
+  patrz Rozdział IV niżej)
+```
+
+### Rozdział IV — zwolnienie opiekuna i ustanie opieki (art. 169-174)
+✅ UZUPEŁNIONE 2026-08-13 — zweryfikowane niezależnie w 4 zgodnych
+źródłach (e-prawnik.pl, gofin.pl, lexlege.pl, kancelaria-rogowski.pl):
+
+```
+⭐⭐⭐ ART. 169 — DWIE ŚCIEŻKI zwolnienia opiekuna (rozróżnienie
+  praktycznie ważne — kto INICJUJE):
+  §1: Z WAŻNYCH POWODÓW sąd MOŻE zwolnić opiekuna NA JEGO ŻĄDANIE
+    (⭐ opiekun sam REZYGNUJE — fakultatywne dla sądu)
+  §2: sąd ZWOLNI opiekuna (⭐ OBLIGATORYJNIE), jeżeli z powodu
+    przeszkód FAKTYCZNYCH/prawnych opiekun jest NIEZDOLNY do
+    sprawowania opieki, LUB dopuszcza się CZYNÓW/ZANIEDBAŃ
+    naruszających DOBRO podopiecznego (⭐ sąd DZIAŁA z URZĘDU, gdy
+    to WYJdzie na jaw — powiązanie z ART. 168 wyżej)
+  §3: DO CZASU objęcia opieki przez NOWEGO opiekuna — dotychczasowy
+    OBOWIĄZANY prowadzić NADAL pilne sprawy, chyba że sąd postanowi
+    inaczej (⭐ ciągłość ochrony podopiecznego — brak "luki" opieki)
+
+⭐⭐ ART. 170 — USTANIE OPIEKI Z MOCY PRAWA (⭐ BEZ potrzeby
+  odrębnego ORZECZENIA sądu — automatyczne), DWIE przyczyny:
+  1) małoletni osiągnął PEŁNOLETNOŚĆ
+  2) PRZYWRÓCONO władzę rodzicielską (nad tym samym małoletnim)
+
+⭐ ART. 171: gdy w chwili USTANIA opieki istnieje PRZESZKODA do
+  natychmiastowego przejęcia zarządu majątkiem PRZEZ osobę, która
+  była pod opieką (LUB jej przedstawiciela/spadkobierców) — opiekun
+  OBOWIĄZANY nadal prowadzić PILNE sprawy zarządu, chyba że sąd
+  postanowi inaczej
+
+⭐⭐ ART. 172 — RACHUNEK KOŃCOWY: §1 w ciągu 3 MIESIĘCY od
+  zwolnienia/ustania opieki opiekun MUSI złożyć rachunek KOŃCOWY z
+  zarządu majątkiem; §2 stosuje się ODPOWIEDNIO przepisy o rachunku
+  ROCZNYM (⭐ ten sam standard co bieżące sprawozdania z art. 166)
+
+⭐ ART. 173: sąd MOŻE zwolnić opiekuna z obowiązku składania
+  rachunku KOŃCOWEGO (⭐ analogicznie do zwolnienia ze szczegółowych
+  rachunków rocznych przy skromnym majątku — art. 166 §2)
+
+⭐⭐ ART. 174: NIEZWŁOCZNIE po zwolnieniu/ustaniu opieki — opiekun
+  MUSI oddać zarządzany MAJĄTEK osobie, która była pod opieką (lub
+  jej przedstawicielowi ustawowemu/spadkobiercom)
 ```
 
 ---
@@ -136,13 +205,39 @@ DZIAŁ III: Kuratela (178-184)
 (art. 175-177)
 
 ```
-⚠️ SZCZEGÓŁOWA treść NIE zbadana w TEJ transzy — z PRZEPISÓW
-  ODESŁANIA (art. 178 §2, patrz sekcja 4 NIŻEJ) WYNIKA, że W
-  ZAKRESIE nieuregulowanym WPROST — stosuje SIĘ ODPOWIEDNIO przepisy
-  O opiece nad MAŁOLETNIM (Dział I) — PUNKT startowy DO dalszego
-  badania, JEŚLI istotne W konkretnej sprawie (⭐ powiązanie Z
-  ubezwłasnowolnieniem — instytucją Z Kodeksu CYWILNEGO/KPC, NIE
-  wprost KRO)
+✅ UZUPEŁNIONE 2026-08-13 (wcześniej: "nie zbadano w tej transzy") —
+zweryfikowane niezależnie w 4 zgodnych źródłach (e-prawnik.pl,
+lexlege.pl, infor.pl, prawo-porady.pl), Rząd 2B:
+
+```
+⭐⭐ ART. 175 — ODESŁANIE: do opieki nad ubezwłasnowolnionym CAŁKOWICIE
+  stosuje się ODPOWIEDNIO przepisy o opiece nad MAŁOLETNIM (Dział I
+  powyżej — ustanowienie, sprawowanie, nadzór, zwolnienie/ustanie),
+  Z ZACHOWANIEM przepisów SZCZEGÓLNYCH poniższych (art. 176-177)
+  ⭐ PRAKTYCZNA RÓŻNICA CELU (nie ustawowa, lecz doktrynalna — infor.pl):
+  przy MAŁOLETNIM nacisk na WYCHOWANIE; przy UBEZWŁASNOWOLNIONYM
+  nacisk na WŁAŚCIWE LECZENIE i zabezpieczenie interesów (w tym,
+  na podstawie ustawy o ochronie zdrowia psychicznego, możliwość
+  umieszczenia w zakładzie leczniczym za pisemną zgodą opiekuna)
+
+⭐⭐⭐ ART. 176 — HIERARCHIA WYBORU OPIEKUNA dla ubezwłasnowolnionego
+  całkowicie (⚠️ NIE MYLIĆ z pełnym, osobnym opracowaniem TEJ SAMEJ
+  hierarchii w mod-ubezwlasnowolnienie-opieka-kuratela.md — TAM
+  hierarchia jest rozwinięta w kontekście procedury ubezwłasnowolnienia
+  i sytuacji braku rodziny; TU jedynie treść ustawowa dla kompletności
+  struktury Tytułu III):
+  Jeżeli dobro podopiecznego NIE stoi na przeszkodzie — opiekunem
+  powinien zostać PRZEDE WSZYSTKIM MAŁŻONEK, a w JEGO braku — OJCIEC
+  lub MATKA (dalsza kolejność — krewni/osoby bliskie — wynika z
+  ODESŁANIA do art. 149 §2 przez art. 175, patrz Dział I sekcja 2)
+
+⭐⭐ ART. 177 — USTANIE OPIEKI Z MOCY PRAWA (⭐ automatyczne, bez
+  odrębnego orzeczenia — analogicznie do art. 170 w Dziale I), DWIE
+  przyczyny:
+  1) UCHYLENIE ubezwłasnowolnienia (osoba odzyskuje pełną zdolność)
+  2) ZMIANA ubezwłasnowolnienia CAŁKOWITEGO na CZĘŚCIOWE (⭐ wtedy
+     opieka PRZEKSZTAŁCA się w KURATELĘ dla osoby częściowo
+     ubezwłasnowolnionej — patrz Dział III, art. 181 wyżej)
 ```
 
 ---

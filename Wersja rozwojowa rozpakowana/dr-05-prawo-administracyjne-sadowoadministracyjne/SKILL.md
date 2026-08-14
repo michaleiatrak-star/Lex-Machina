@@ -54,7 +54,12 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W21 Informacja przetworzona (UDIP art. 3 — "szczególna istotność")
 - BAS-W29 Pełnomocnik z urzędu — prawo do sądu (art. 117 KPC)
 
-## Moduły (17 łącznie — ✓ 17 OK, ☐ 0 STUB)
+## Moduły (18 łącznie — ✓ 18 OK, ☐ 0 STUB)
+
+**NAPRAWA 2026-08-13:** dodano `mod-PPSA-terminy-kasacja-prawo-
+pomocy.md` — PIERWSZY dedykowany moduł PPSA w całym systemie, zamyka
+F-64 (priorytet strukturalny zerowy). Pełny opis: `audyt-systemu-v4/
+references/AUDIT-JOURNAL.md`.
 
 **Aktualizacja 2026-08-12 (PODZIAŁ modułu KPA, NOTA-4):** moduł KPA
 osiągnął 1115 linii (~2,8× próg 400 linii) po serii uzupełnień luk
@@ -111,6 +116,16 @@ KOMPLETNOŚĆ — wszystkie tematy potwierdzone obecne po podziale.
   [✓] OK    mod-ustawa-zaskarzanie-decyzji-wlasnosci
   [✓] OK    mod-ustawa-dostepnosc-niepelnosprawni
   [✓] OK    mod-ustawa-sygnalisci
+  [✓] NOWY  mod-PPSA-terminy-kasacja-prawo-pomocy
+              (dodany 2026-08-13 — PIERWSZY dedykowany moduł PPSA w
+               systemie, naprawa F-64. Uchybienie/przywrócenie terminu
+               [art. 85-89, checklist formalny, termin roczny],
+               skarga kasacyjna do NSA [173-193, przymus adwokacko-
+               radcowski, 2 podstawy kasacyjne, wyrok TK SK 22/11],
+               prawo pomocy [245-259, zakres całkowity/częściowy,
+               referendarz jako organ I instancji, sprzeciw 7 dni].
+               Komplementarny do mod-KPA-tryby-nadzwyczajne-i-
+               strategia, NIE duplikuje kwalifikacji skargi do WSA)
 ```
 
 ## KPA i PPSA — teraz kanonicznie w DR-05
