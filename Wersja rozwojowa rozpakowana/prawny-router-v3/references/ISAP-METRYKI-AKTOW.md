@@ -22,7 +22,7 @@
 |---|---:|---|---|
 | Kodeks postępowania administracyjnego | Dz.U. 2025 poz. 1691 | aktualny na dzień audytu | ogólna procedura administracyjna; nie stosować do podatków, gdy Ordynacja stanowi lex specialis |
 | Prawo o postępowaniu przed sądami administracyjnymi | Dz.U. 2026 poz. 143 | aktualny na dzień audytu | skargi do WSA, skargi kasacyjne do NSA, bezczynność i przewlekłość |
-| Ustawa o postępowaniu egzekucyjnym w administracji | Dz.U. 2026 poz. 268; tekst jednolity uwzględnia zmiany ogłoszone przed 18.02.2026 | aktualny na dzień audytu | odrębny tryb od egzekucji sądowej |
+| Ustawa o postępowaniu egzekucyjnym w administracji | Dz.U. 2026 poz. 268; tekst jednolity uwzględnia zmiany ogłoszone przed 18.02.2026. ⚠️ PO t.j.: **ustawa z 15.05.2026 (druk sejmowy 2319), Dz.U. 2026 poz. 739** — ustalona 2026-08-15 przy zamykaniu flagi F-16; zakres: art. 3a § 1 (rozszerzenie o środki z doładowań, art. 331 ust. 9 Prawa komunikacji elektronicznej) oraz **nowy art. 67da — „Portal eLicytacje KAS"** (licytacje elektroniczne i sprzedaż z wolnej ręki ruchomości i nieruchomości, obwieszczenia oraz protokoły opisu i oszacowania publikowane na portalu); wejście w życie: 14 dni od ogłoszenia. Źródła: dziennikustaw.gov.pl (Rząd 1, snippet indeksowany — bezpośredni web_fetch ROBOTS_DISALLOWED) + prosteustawy.pl/akt/WDU20260000739 (Rząd 2B) | aktualny na dzień audytu, z zastrzeżeniem nowelizacji poz. 739 | odrębny tryb od egzekucji sądowej |
 | Ustawa o dostępie do informacji publicznej | tekst ujednolicony ISAP `D20011198Lj.pdf` | wymaga sprawdzenia Dz.U. przed cytowaniem | tryb wnioskowy, bezczynność, odmowa decyzją administracyjną |
 
 ---

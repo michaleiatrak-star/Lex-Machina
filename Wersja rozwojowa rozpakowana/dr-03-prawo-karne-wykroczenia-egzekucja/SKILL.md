@@ -76,7 +76,12 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   obrona obligatoryjna art. 79 §1 pkt 2-4 KPK (→ mod-niewidomy-prawa-prawne.md,
   mod-niepelnosprawnosc-intelektualna-gluchota.md)
 
-## Moduły (58 łącznie — ✓ 58 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+## Moduły (60 łącznie — ✓ 60 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+
+**NAPRAWA 2026-08-15:** dodano `mod-KPK-podstawy-odwolawcze-przeslanki-
+zarzuty-biegli.md` — naprawa CZĘŚCIOWA F-66 (priorytet 1/3: art. 17,
+193-206, 313, 438-440). Pełny opis: `audyt-systemu-v4/references/
+AUDIT-JOURNAL.md`.
 
 **NAPRAWA 2026-08-13:** dodano `mod-KPK-srodki-zapobiegawcze-
 tymczasowe-aresztowanie.md` — zamyka F-23 (audyt zewnętrzny) i F-66
@@ -106,6 +111,14 @@ AUDIT-JOURNAL.md`.
               (nowe przestępstwa drogowe: brawurowa jazda, nielegalne wyścigi, art. 115 §26 KK
                przepadek pojazdu ≥1,5‰, dożywotni zakaz — Dz.U. 2025 poz. 1872)
   [✓] OK    mod-KK-KPK-framework-szczegolowy
+  [✓] OK    mod-KKW-kodeks-karny-wykonawczy
+              (Kodeks karny wykonawczy — warunkowe przedterminowe zwolnienie (159-163), odroczenie/przerwa (150-158a), dozór elektroniczny (43a-43zf); ZAREJESTROWANY 2026-08-14e (F-77 rozszerzona) — moduł istniał od naprawy F-75, bez wpisu w checkliście)
+  [✓] OK    mod-przerobki-modyfikacje-pojazdow
+              (v1.1.0 — dopuszczalne modyfikacje pojazdów, homologacja, motocykle, tachografy; ⚠️ zawiera flagę F-14 (projekt ws. UTO/hulajnóg); ZAREJESTROWANY 2026-08-14e (F-77 rozszerzona))
+  [✓] OK    mod-podmiana-czesci-naprawa-oszustwo
+              (Podmiana części przy naprawie jako oszustwo; ⚠️ wątek przywłaszczenia oryginalnej części (284 KK) — punkt otwarty w F-26; ZAREJESTROWANY 2026-08-14e (F-77 rozszerzona))
+  [✓] OK    mod-lincz-ochrona-swiadkow-lowcy-pedofili
+              (Samosąd/lincz, ochrona świadków, tzw. „łowcy pedofilów” — granice legalności działań obywatelskich; ZAREJESTROWANY 2026-08-14e (F-77 rozszerzona))
   [✓] OK    mod-KK-art190a-stalking
   [✓] OK    mod-KK-art207-przemoc-domowa
   [✓] OK    mod-KK-art267-269c-cyberprzestepstwa
@@ -229,6 +242,14 @@ AUDIT-JOURNAL.md`.
               (nowe art. 86c KW — celowy drift/poślizg od 29.01.2026; zloty bez zgłoszenia;
                taryfikator: rozp. Dz.U. 2026 poz. 724 — weryfikuj kody)
   [✓] OK    mod-KW-kodeks-wykroczen
+  [✓] OK    mod-KW-art1-48-czesc-ogolna
+              (dodany 2026-08-14, F-67: pierwszy systematyczny moduł części
+               ogólnej KW — zasady odpowiedzialności (1-17, w tym zbieg
+               przepisów art. 9, kontratypy 15-16), kary i środki karne
+               (18-39, w tym katalog kar art. 18 i środków karnych art. 28),
+               przedawnienie i zatarcie (45-46, TERMIN KRYTYCZNY: 1 rok),
+               stosunek do ustaw szczególnych (48). Dz.U. 2025 poz. 734 t.j.
+               ze zm. 1676/1814)
   [✓] OK    mod-KW-art119-131-przeciwko-mieniu
               (dodany 2026-07-17: Rozdz. XIV KW — kradzież/przywłaszczenie
                (art. 119, próg 800 zł), paserstwo (122), zniszczenie mienia
@@ -271,12 +292,15 @@ AUDIT-JOURNAL.md`.
                przeciwko zdrowiu w tym szczepienia i choroby zakaźne
                (109-118). Kontynuacja uzupełniania KW)
   [✓] OK    mod-KW-art132-166-pozostale-rozdzialy
-              (dodany 2026-07-17: Rozdz. XV-XIX KW — konsumenci (132-139c),
-               obyczajność publiczna (140-142), urządzenia użytku
-               publicznego (143-145), obowiązek ewidencji (146-147a),
-               szkodnictwo leśne/polne/ogrodowe (148-166, częściowo).
-               DOMYKA pokrycie części szczególnej KW — wszystkie 12
-               rozdziałów mają teraz co najmniej podstawowe pokrycie)
+              (dodany 2026-07-17, zaktualizowany 2026-08-14 F-67 część 2:
+               Rozdz. XV-XIX KW — konsumenci (132-139c), obyczajność
+               publiczna (140-142), urządzenia użytku publicznego
+               (143-145), obowiązek ewidencji (146-147a), szkodnictwo
+               leśne/polne/ogrodowe (148-166, OD 2026-08-14 W PEŁNI:
+               19/19 artykułów, w tym art. 158 wyrąb drzewa niezgodny
+               z planem urządzenia lasu — przepis centralny dotąd
+               CAŁKOWICIE nieopisany). DOMYKA pokrycie części szczególnej
+               KW — wszystkie 12 rozdziałów mają teraz pełne pokrycie)
   [✓] OK    mod-grzywny-mandaty-szczegolowe
               (systematyka: grzywna sądowa/mandat/kara adm./grzywna porządkowa/UPEA;
                uchylenie mandatu art.101 KPSW; KPA Dział IVa kary adm.; egzekucja UPEA;
@@ -344,6 +368,31 @@ AUDIT-JOURNAL.md`.
                przekroczenia]. Rozgraniczone od poręczenia majątkowego
                [już opisanego wyżej] i od KKW/wykonania aresztu [F-75,
                poza zakresem])
+  [✓] NOWY  mod-KPK-podstawy-odwolawcze-przeslanki-zarzuty-biegli
+              (dodany 2026-08-15 — naprawa CZĘŚCIOWA F-66. Zakres po
+               7 sesjach tego samego dnia: art. 17 [przesłanki procesowe]
+               + art. 156 Dział IV Rozdz. 17 [dostęp do akt] + art.
+               193-206 Rozdz. 22 [biegli, część] + art. 313 [przedstawienie
+               zarzutów] + art. 425-440 Dział IX Rozdz. 48 [CAŁY rozdział
+               "Przepisy ogólne" postępowania odwoławczego — gravamen 425,
+               zaskarżanie orzeczeń odwoławczych 426, elementy środka 427,
+               wniesienie 428, odmowa przyjęcia 429, pozostawienie bez
+               rozpoznania 430, cofnięcie 431-432, granice rozpoznania
+               433, zakaz reformationis in peius 434, 435-436, PEŁNA
+               treść rodzajów rozstrzygnięć 437 §1-2 [dopełniona w tej
+               sesji, ⚠️ 3. rozbieżność wersji §1 zd.2], PEŁNY katalog
+               podstaw odwoławczych 438-440] + art. 485-499 Dział X
+               Rozdz. 52 [oskarżenie prywatne] + art. 568a-577 Dział XII
+               Rozdz. 60 [wyrok łączny].
+               UWAGA: NAZWA PLIKU nie odzwierciedla już pełnego zakresu
+               (7 sesji tego samego dnia, 8 sekcji) — pełny zakres w
+               spisie treści modułu.
+               ⚠️ POZOSTAJE OTWARTE w F-66: dokładne verbatim kilku
+               przepisów Rozdz. 48 (427§2-3/430/431/432/433/435/436),
+               liczne odesłania, art. 198/199/203-205 Rozdz. 22, art.
+               498 (status niejasny), TRZY rozbieżności wersji czasowych
+               (575§1, 156§5, 437§1) — patrz sekcja "Pozostają otwarte"
+               w samym module)
               (dodany 2026-07-19: poręczenie majątkowe/"kaucja karna"
                [art. 266-269 KPK — alternatywa dla tymczasowego
                aresztowania, zakaz przysporzenia specjalnie na ten cel,

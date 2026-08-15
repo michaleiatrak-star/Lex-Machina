@@ -138,9 +138,66 @@ WYJĄTKOWE WYDANIE ŚRODKA DO SAMODZIELNEGO PRZYJĘCIA (poza zakładem):
   □ WYJAZD ZA GRANICĘ — wydanie środka na własne potrzeby lecznicze
     na podstawie odrębnego przepisu (art. 25 ust. 4 ustawy)
 
-⚡ ŚWIEŻA NOWELIZACJA (ustawa z 11.06.2026 r. — sprzed ~6 tygodni w
-chwili tej sesji, ⚠️ ZWERYFIKUJ czy weszła już w życie i czy nie
-doszły kolejne zmiany): nowe zasady KOŃCZENIA udziału pacjenta w
+⚡ ŚWIEŻA NOWELIZACJA — METRYKA DOPRECYZOWANA 2026-08-14c (F-24):
+
+```
+Tytuł formalny: ustawa z dnia 11 czerwca 2026 r. o zmianie ustawy
+  o przeciwdziałaniu narkomanii oraz niektórych innych ustaw
+Druk sejmowy: 2499
+Podpisana przez Prezydenta: 24.07.2026 (w pakiecie 5 ustaw, razem
+  z ustawą o systemach AI i tzw. ustawą łańcuchową)
+Akt zmieniany: ustawa z 29.07.2005 o przeciwdziałaniu narkomanii,
+  t.j. Dz.U. 2023 poz. 1939
+⛔ NUMER Dz.U. SAMEJ NOWELIZACJI: NADAL NIEUSTALONY — DRUGA
+  nieudana próba (2026-08-13 i 2026-08-14c). Nie zgadywano mimo
+  tego, że ustawy podpisane tego samego dnia mają pozycje 1003
+  (AI) i 1005 (łańcuchowa) — interpolacja numeru byłaby
+  naruszeniem ZASADY 3. Przed powołaniem nowelizacji w piśmie
+  ustal pozycję w ISAP.
+⚠️ ROZBIEŻNOŚĆ ŹRÓDEŁ, NIEROZSTRZYGNIĘTA: tekst ustawy w serwisie
+  Sejmu nosi datę 11 czerwca 2026 r., natomiast LEX podaje
+  uchwalenie na 61. posiedzeniu Sejmu 3.07.2026 r. Prawdopodobne
+  wyjaśnienie (NIEPOTWIERDZONE): 3.07.2026 to rozpatrzenie poprawek
+  Senatu, a akt zachowuje datę pierwotnego uchwalenia. NIE powołuj
+  daty uchwalenia bez sprawdzenia.
+
+ZAKRES ZMIAN — POTWIERDZONY (Rząd 1: orka.sejm.gov.pl, tekst ustawy):
+  □ NOWA DEFINICJA LECZENIA SUBSTYTUCYJNEGO (art. 28): obejmuje
+    (a) produkty o działaniu agonistycznym na receptor opioidowy
+    w ramach PROGRAMU leczenia substytucyjnego ORAZ (b) produkty
+    z BUPRENORFINĄ w ramach ORDYNACJI LEKARSKIEJ — druga ścieżka
+    jest NOWA i odrębna od klasycznego programu
+  □ ORDYNACJA LEKARSKA dostępna WYŁĄCZNIE u: świadczeniodawcy
+    z umową NFZ w rodzaju „opieka psychiatryczna i leczenie
+    uzależnień"; lekarza zatrudnionego/wykonującego zawód u takiego
+    świadczeniodawcy; lekarza w podmiocie leczniczym dla osób
+    POZBAWIONYCH WOLNOŚCI (⭐ istotne dla spraw penitencjarnych)
+  □ ⭐ NOWY art. 28g — WYKAZ prowadzony przez Centrum (KCPU), którego
+    celem jest wykluczenie równoczesnego udziału pacjenta w więcej
+    niż jednym programie ORAZ jednoczesnego leczenia w ramach
+    ordynacji lekarskiej. Wykaz NIE JEST rejestrem medycznym
+    w rozumieniu ustawy o systemie informacji w ochronie zdrowia.
+    Prowadzony w systemie teleinformatycznym. Kierownik programu
+    (lub upoważniony lekarz) składa wniosek o dostęp w terminie
+    7 DNI od uzyskania zezwolenia na prowadzenie leczenia
+    substytucyjnego.
+  □ ZMIANA USTAWY O POLICJI — nowy art. 15h: Komendant CBŚP (lub
+    osoba upoważniona) potwierdza rejestrację statku podnoszącego
+    polską banderę na prośbę państwa-strony Konwencji wiedeńskiej
+    z 20.12.1988 o zwalczaniu nielegalnego obrotu środkami
+    odurzającymi (Dz.U. 1995 poz. 69)
+  □ ZMIANA KODEKSU MORSKIEGO (zakres niezweryfikowany szczegółowo)
+  □ Odesłanie do rozporządzenia UE 2023/1322 (Agencja UE ds.
+    Narkotyków — EUDA, w miejsce uchylonego rozp. 1920/2006)
+
+⚠️ SYGNALIZOWANE, NIEPOTWIERDZONE: zmiana Prawa farmaceutycznego
+  (art. 72 ust. 8 pkt 5) — utrzymana z wcześniejszej sesji jako
+  niezweryfikowana.
+```
+
+Poniższy fragment (zasady kończenia udziału) pochodzi z wcześniejszej
+sesji i NIE został zweryfikowany wobec tekstu ustawy w tej turze:
+nowe zasady KOŃCZENIA udziału pacjenta w
 programie — WYŁĄCZENIE z programu substytucyjnego NASTĘPUJE m.in. przy
 NIEUZASADNIONYM NIESTAWIENNICTWIE pacjenta przez 4 KOLEJNE DNI od
 terminu zgłoszenia się po dawkę (dla programu leczenia substytucyjnego)

@@ -6,6 +6,18 @@ Zweryfikowano 2026-08-04 (ZASADA 14): Rząd 2B — liczne portale
 motoryzacyjne, rp.pl, forsal.pl, biznes.gov.pl (Rząd 1), policja.gov.pl
 (Rząd 1), portale prawnicze.
 
+## AKT REFERENCYJNY (dodane 2026-08-14, F-77)
+
+Ustawa z dnia 20 czerwca 1997 r. — Prawo o ruchu drogowym, **t.j. Dz.U. 2024
+poz. 1251** (obwieszczenie Marszałka Sejmu z 21.06.2024), ze zm. licznymi
+nowelizacjami do Dz.U. 2026 poz. 982 (ustawa z 29.05.2026 — uwaga: to
+NOWELIZACJA, nie nowy t.j.).
+✅ VER: isap.sejm.gov.pl, przepisy.gofin.pl (skorowidz pełnej listy zmian),
+ppiop.rcl.gov.pl — 2026-08-14 (F-77)
+⚠️ akt bardzo często nowelizowany — zweryfikuj ponownie na ISAP przed
+każdym użyciem w piśmie, zwłaszcza w kontekście świeżo aktywnego wątku
+hulajnóg/UTO (sekcja 1 poniżej, flaga F-14)
+
 ---
 
 ## 1. ⚡ ODBLOKOWANIE HULAJNÓG/ROWERÓW ELEKTRYCZNYCH — BARDZO ŚWIEŻY,

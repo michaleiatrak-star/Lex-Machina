@@ -8,7 +8,7 @@
 - Transport kolejowy: **Dz.U. 2025 poz. 1234 t.j.** z 01.09.2025 ✅ VER: 2026-06-05
 - Prawo lotnicze: Dz.U. 2023 poz. 2110 t.j. ze zm. (zm. Dz.U. 2025 poz. 1431)
 - Elektromobilność: Dz.U. 2024 poz. 1634 t.j. ze zm.
-- Kodeks morski: Dz.U. 2023 poz. 1523 t.j. ze zm.
+- Kodeks morski: Dz.U. 2023 poz. 1309 t.j. ze zm. ⛔ [POPRAWKA 2026-08-15n — BYŁO 2023.1523; poz. 1523/2023 to ustawa o delegowaniu kierowców w transporcie drogowym, nie Kodeks morski]
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
 ---
@@ -202,7 +202,19 @@ Operatorzy OC-P: wymagana rejestracja w URE + interoperacyjność
 
 ---
 
-## 8. KODEKS MORSKI (Dz.U. 2023 poz. 1523)
+## 8. KODEKS MORSKI (Dz.U. 2023 poz. 1309 t.j.)
+
+> ⛔ **KOREKTA NUMERU 2026-08-15n (ZASADA 8 — „nazwa zgodna ≠ numer poprawny"):**
+> do 2026-08-15 moduł, ROUTING-MAP i mapa Dz.U. podawały zgodnie **Dz.U. 2023
+> poz. 1523**. Ten numer należy do **ustawy z 28.07.2023 o delegowaniu
+> kierowców w transporcie drogowym** (ISAP `WDU20230001523`) — aktu z TEJ SAMEJ
+> dziedziny transportowej, co maskowało błąd. Właściwy tekst jednolity Kodeksu
+> morskiego pochodzi z obwieszczenia Marszałka Sejmu z 25.05.2023 i ma numer
+> **Dz.U. 2023 poz. 1309**. ✅ [VER 2026-08-15n — 4 niezależne źródła: dwa PDF-y
+> ISAP cytujące ten numer, tekst ustawy z 11.06.2026 na orka.sejm.gov.pl,
+> infor.pl dla identyfikacji poz. 1523]. ⚠️ Przed powołaniem w piśmie —
+> potwierdzić w ISAP, czy nie ma nowszego t.j. (weryfikacja objęła numer, nie
+> aktualność wobec nowelizacji z 2026 r.).
 
 ```
 Armator: właściciel lub użytkownik statku we własnym imieniu i na własny rachunek

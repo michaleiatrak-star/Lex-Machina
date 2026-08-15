@@ -92,6 +92,12 @@ KOMPLETNOŚĆ — wszystkie tematy potwierdzone obecne po podziale.
                art. 7 [udział w TK, kasacja, wniosek do SN, na prawach
                prokuratora w post. cywilnym/administracyjnym/
                nieletnich], immunitet, rozgraniczenie od RPO/RPP)
+  [✓] OK    mod-KPA-decyzja-i-odwolanie
+              (RODZINA KPA, podział NOTA-4 — decyzja administracyjna i odwołanie: elementy decyzji, procedura, postanowienia, zażalenia; ZAREJESTROWANY 2026-08-14e (F-77 rozszerzona))
+  [✓] OK    mod-KPA-mechanizmy-w-toku-sprawy
+              (RODZINA KPA — zawieszenie postępowania, postępowanie dowodowe, rozprawa administracyjna; ZAREJESTROWANY 2026-08-14e (F-77 rozszerzona))
+  [✓] OK    mod-KPA-tryby-nadzwyczajne-i-strategia
+              (RODZINA KPA — tryby nadzwyczajne, bezczynność i przewlekłość, kary, skarga do WSA, warstwa strategiczna; ZAREJESTROWANY 2026-08-14e (F-77 rozszerzona))
   [✓] OK    mod-KPA-postepowanie-administracyjne
               (PRZENIESIONY 2026-07-19 z DR-04, gdzie był błędnie
                umiejscowiony — KPA/PPSA to najbardziej fundamentalne

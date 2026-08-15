@@ -197,6 +197,9 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Prawo restrukturyzacyjne — Dział VI, Układ (art. 150-179): przepisy ogólne, propozycje układowe, głosowanie/zatwierdzenie (art. 119, test zaspokojenia — nowelizacja 2025.1085), skutki układu | Dz.U. 2026 poz. 533 t.j. + nowelizacja Dz.U. 2025 poz. 1085 | dr-02/modules/mod-PrRestr-dzial-VI-uklad | ✅ NOWY 2026-08-14 — DOPISANE 2026-08-14 (sync) — naprawa F-69, jedyna centralna instytucja PrRestr dotąd bez podstawy prawnej |
 | KSH — Tytuł III, Dział I, Rozdz. 3, organy sp. z o.o. (art. 201-254): zarząd [art. 204 §2 — zakaz ograniczenia reprezentacji wobec osób trzecich], zgromadzenie wspólników [art. 228 — absolutorium, art. 235 §2 — zastępcze zwołanie] | Dz.U. 2024 poz. 18 t.j. | dr-02/modules/mod-KSH-organy-spolki-zoo | ✅ NOWY 2026-08-14 — DOPISANE 2026-08-14 (sync) — naprawa F-68, najwyższy priorytet z raportu KSH |
 | KPC — prawomocność orzeczeń (363-366, powaga rzeczy osądzonej) i granice apelacji (378, 380-386, zakaz reformationis in peius art. 384) | Dz.U. 2026 poz. 468 t.j. | dr-02/modules/mod-KPC-prawomocnosc-granice-apelacji | ✅ NOWY 2026-08-14 — DOPISANE 2026-08-14 (sync) — naprawa F-65, dawało podstawę merytoryczną dla engine appellate-v8 |
+| KPC — KSIĘGA II, postępowanie NIEPROCESOWE, część ogólna (506-525): wszczęcie, właściwość (⛔ MIEJSCOWA WYŁĄCZNA wg WNIOSKODAWCY, odwrotnie niż w procesie), zainteresowany vs uczestnik (510), wniosek (511), apelacja vs zażalenie (518) | Dz.U. 2026 poz. 468 t.j. | dr-02/modules/mod-KPC-nieproces-czesc-ogolna | NOWY 2026-08-14d (F-65 cz. II) — pierwszy moduł Księgi II w systemie; SYNC REGUŁA 3 |
+| KRO — opieka i kuratela | Dz.U. — patrz wiersz macierzysty KRO | dr-02/modules/mod-KRO-opieka-i-kuratela | SYNC REGUŁA 3, 2026-08-14e (F-77 rozszerzona) |
+| Księgi wieczyste i hipoteka — zakup nieruchomości | ⛔ numer Dz.U. NIEZWERYFIKOWANY (patrz F-77) | dr-02/modules/mod-KW-ksiega-wieczysta-zakup-nieruchomosci | SYNC REGUŁA 3, 2026-08-14e (F-77 rozszerzona) |
 
 ---
 
@@ -220,6 +223,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | KPK — tryby ścigania | Dz.U. 2026 poz. 490 ze zm. | dr-03/modules/mod-KPK-tryby-scigania | ✅ OK |
 | Kodeks karny wykonawczy (KKW) — warunkowe zwolnienie (159-163, w tym art. 161 §3-4 karencja 3/6 mies.), odroczenie/przerwa kary (150-158a), dozór elektroniczny (43a-43zf) | Dz.U. 2025 poz. 911 ze zm. | dr-03/modules/mod-KKW-kodeks-karny-wykonawczy | ✅ NAPRAWIONY 2026-08-14 (F-75) — DOPISANE 2026-08-14 (sync) — dotąd generyczny szablon bez ani jednego artykułu, najgorszy wynik z 13 zbadanych aktów; naprawiono też niezgodność nazwy wewnętrznej pliku |
 | Kodeks wykroczeń (KW) | Dz.U. 2025 poz. 734 ze zm. (**zm.: Dz.U. 2025 poz. 1872** — art. 86c drift) | dr-03/modules/mod-KW-kodeks-wykroczen | ✅ OK |
+| KW Część ogólna (art. 1–48) — zasady odpowiedzialności, kary i środki karne, przedawnienie/zatarcie | Dz.U. 2025 poz. 734 t.j. ze zm. Dz.U. 2025 poz. 1676, 1814 | dr-03/modules/mod-KW-art1-48-czesc-ogolna | ✅ NOWY 2026-08-14 — F-67 (pierwszy systematyczny moduł części ogólnej, dotąd całkowicie nieobecny mimo bycia podstawą kwalifikacji każdej sprawy wykroczeniowej) |
 | KPW — Kodeks postępowania w sprawach o wykroczenia | Dz.U. 2025 poz. 860 t.j. | dr-03/modules/mod-KW-KPW-framework-szczegolowy | ✅ OK |
 | KKS + Ustawa AML | Dz.U. 2025 poz. 633 t.j. + Dz.U. 2025 poz. 644 | dr-03/modules/mod-KKS-karny-skarbowy-i-AML | ✅ OK |
 | Ustawa Fundusz Pomocy Pokrzywdzonym | Dz.U. 2022 poz. 2256 ze zm. | dr-03/modules/mod-KK-kodeks-karny | ✅ OK |
@@ -273,6 +277,8 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Przeróbki pojazdów: hulajnogi (⚡ projekt, F-14), przyciemnianie szyb, pojazdy "SAM", motocykle A2, tachografy | ⚠️ WIELE aktów, część PROJEKTAMI | dr-03/modules/mod-przerobki-modyfikacje-pojazdow | ✅ NOWY 2026-08-04, ROZBUDOWANY 2026-08-05 — DOPISANE 2026-08-05 (sync) |
 | Podmiana części przez warsztat naprawczy (art. 286/284 KK) | ⚠️ zweryfikuj t.j. KK na ISAP | dr-03/modules/mod-podmiana-czesci-naprawa-oszustwo | ✅ NOWY 2026-08-04 — DOPISANE 2026-08-05 (sync) |
 | Nielegalny pobór mediów (prąd art. 278§5 KK, woda Dz.U. 2024 poz. 757, WiFi art. 267 KK) | ✅ ustawa o zbiorowym zaopatrzeniu w wodę: Dz.U. 2024 poz. 757 t.j. | dr-03/modules/mod-nielegalny-pobor-mediow | ✅ NOWY 2026-08-05 — DOPISANE 2026-08-05 (sync) |
+| KPK art. 266-269 — poręczenie majątkowe (kaucja karna) | Dz.U. 2026 poz. 490 t.j. | dr-03/modules/mod-poreczenie-majatkowe-kaucja-karna | ✅ NOWY 2026-07-19 — ⚠️ PRZENIESIONY 2026-08-14e z sekcji DR-08 do DR-03 (orphan-row wykryty KROKIEM D REGUŁY 3: moduł należy do dr-03, a wiersz stał pod DR-08 od 2026-07-19) |
+| KPK art. 17 + art. 156 (dostęp do akt) + art. 193-206 (biegli) + art. 313 + art. 425-440 (CAŁY Rozdz. 48 — przepisy ogólne postępowania odwoławczego, w tym pełny 437) + art. 485-499 (oskarżenie prywatne) + art. 568a-577 (wyrok łączny) | Dz.U. 2026 poz. 490 t.j. — ⚠️ metryka pomija Dz.U. 2026.421/2026.638; ⚠️ art. 575§1, 156§5, 437§1 — TRZY rozbieżności wersji czasowych nierozstrzygnięte (patrz moduł) | dr-03/modules/mod-KPK-podstawy-odwolawcze-przeslanki-zarzuty-biegli | ✅ NOWY + ROZSZERZONE 2026-08-15 (7 sesji), naprawa CZĘŚCIOWA F-66 |
 
 ---
 
@@ -350,6 +356,9 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Zaskarzanie decyzji / reprywatyzacja | Dz.U. 2025 poz. 1691 (KPA art. 156) + Dz.U. 2021 poz. 795 | dr-05/modules/mod-ustawa-zaskarzanie-decyzji-wlasnosci | ✅ OK |
 | Ustawa o dostępności — osoby ze szczególnymi potrzebami | Dz.U. 2024 poz. 1411 t.j. (sync 2026-07-02 z dr-05/dr-10) | dr-05/modules/mod-ustawa-dostepnosc-niepelnosprawni | ✅ OK |
 | PPSA — uchybienie/przywrócenie terminu (85-89), skarga kasacyjna do NSA (173-193, przymus adwokacko-radcowski), prawo pomocy (245-259, referendarz jako organ I instancji) | Dz.U. 2026 poz. 143 t.j. | dr-05/modules/mod-PPSA-terminy-kasacja-prawo-pomocy | ✅ NOWY 2026-08-14 — DOPISANE 2026-08-14 (sync) — naprawa F-64, PIERWSZY dedykowany moduł PPSA w całym systemie (dotąd ustawa istniała wyłącznie jako rozproszone cytaty) |
+| KPA — decyzja administracyjna i odwołanie (elementy, procedura, postanowienia, zażalenia) | Dz.U. 2025 poz. 1691 t.j. | dr-05/modules/mod-KPA-decyzja-i-odwolanie | RODZINA KPA (NOTA-4); SYNC REGUŁA 3, 2026-08-14e (F-77 rozszerzona) |
+| KPA — mechanizmy w toku sprawy (zawieszenie, dowody, rozprawa) | Dz.U. 2025 poz. 1691 t.j. | dr-05/modules/mod-KPA-mechanizmy-w-toku-sprawy | RODZINA KPA (NOTA-4); SYNC REGUŁA 3, 2026-08-14e (F-77 rozszerzona) |
+| KPA — tryby nadzwyczajne, bezczynność, kary, skarga do WSA, strategia | Dz.U. 2025 poz. 1691 t.j. | dr-05/modules/mod-KPA-tryby-nadzwyczajne-i-strategia | RODZINA KPA (NOTA-4); SYNC REGUŁA 3, 2026-08-14e (F-77 rozszerzona) |
 
 ---
 
@@ -402,6 +411,17 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o podatku od wydobycia kopalin | Dz.U. 2024 poz. 44 ze zm. | dr-06/modules/mod-KAS-kontrola-celno-skarbowa | ✅ OK |
 | Prawo przedsiębiorców art. 19 (limit płatności gotówkowych) | Dz.U. 2025 poz. 1480 t.j. | dr-06/modules/mod-limit-platnosci-gotowkowych | ✅ NOWY 2026-07-27 — DOPISANE do mapy 2026-07-30 (sync) |
 | Ordynacja podatkowa — Dział IV Rozdz. 11, dowody w postępowaniu podatkowym (180-200: zasada inkwizycyjności art. 187, otwarty katalog dowodów art. 181, KSIĘGI PODATKOWE art. 193 — ciężar obalenia domniemania na organie) | Dz.U. 2026 poz. 622 t.j. | dr-06/modules/mod-OP-dzial-IV-rozdzial-11-dowody | ✅ NOWY 2026-08-14 — DOPISANE 2026-08-14 (sync) — naprawa F-70, etap decydujący o wyniku większości sporów podatkowych |
+| Ustawa o VAT — nieodpłatne przekazania, zbycie przedsiębiorstwa/ZCP, transakcje łańcuchowe, organy władzy publicznej, odwrotne obciążenie krajowe, fakturowanie (106b-106k), art. 119 | Dz.U. 2025 poz. 775 t.j. | dr-06/modules/mod-VAT-transakcje-fakturowanie | ✅ RODZINA VAT (podział NOTA-4 2026-08-12), SYNC 2026-08-14 (REGUŁA 3, przy F-33) |
+| Ustawa o VAT — miejsce świadczenia usług (28a-28o), grupa VAT, zwolnienie podmiotowe (113), VAT marża (120), eksport/WDT | Dz.U. 2025 poz. 775 t.j. | dr-06/modules/mod-VAT-miejsce-swiadczenia-zwolnienia | ✅ RODZINA VAT (podział NOTA-4 2026-08-12), SYNC 2026-08-14 (REGUŁA 3, przy F-33) |
+| Ustawa o VAT — obowiązek podatkowy (19a), podstawa opodatkowania i korekty (29a), zwolnienia przedmiotowe i nieruchomości (43), ulga na złe długi (89a-89b) | Dz.U. 2025 poz. 775 t.j. | dr-06/modules/mod-VAT-obowiazek-podstawa-zwolnienia-nieruchomosci | ✅ RODZINA VAT (podział NOTA-4 2026-08-12), SYNC 2026-08-14 (REGUŁA 3, przy F-33) |
+| Ustawa o VAT — sankcje i dodatkowe zobowiązanie (112b-112c), bony SPV/MPV, pusta faktura (108), katalog negatywny (88), proporcja/prewspółczynnik (90-91, 86 ust. 2a-2h) | Dz.U. 2025 poz. 775 t.j. | dr-06/modules/mod-VAT-sankcje-bony-odliczenia | ✅ RODZINA VAT (podział NOTA-4 2026-08-12), SYNC 2026-08-14 (REGUŁA 3, przy F-33) |
+| Ustawa o VAT — ewidencja JPK_V7 i korekta (109-110), deklaracje i informacje podsumowujące (99-100), zwrot i przedłużenie weryfikacji (87 — ⛔ 40 dni, nie 60), rejestracja, solidarna odpowiedzialność | Dz.U. 2025 poz. 775 t.j. | dr-06/modules/mod-VAT-ewidencja-deklaracje | ✅ RODZINA VAT (podział NOTA-4 2026-08-12), SYNC 2026-08-14 (REGUŁA 3, przy F-33) |
+| Ustawa o VAT — import towarów: Dział V rozdz. 2a (26a), Dział VII (33-40, w tym 33a/33b), Dział VIII rozdz. 3 (45-82a zwolnienia importowe) | Dz.U. 2025 poz. 775 t.j. | dr-06/modules/mod-VAT-import-towarow-i-zwolnienia-importowe | ✅ NOWY 2026-08-12 (iteracja VII), SYNC 2026-08-14 (REGUŁA 3, przy F-33) |
+| Ustawa o VAT — WIS: tryb i ochrona (42a-42i), ważność 5 lat, ⛔ wygaśnięcie z mocy prawa bez zawiadomienia | Dz.U. 2025 poz. 775 t.j. | dr-06/modules/mod-VAT-WIS-tryb-i-ochrona | ✅ NOWY 2026-08-12 (iteracja VII), SYNC 2026-08-14 (REGUŁA 3, przy F-33) |
+| Ustawa o VAT — kursy walut (31a-31b), rachunek VAT i uwolnienie środków (108b), TAX FREE (126-130) | Dz.U. 2025 poz. 775 t.j. | dr-06/modules/mod-VAT-kursy-walut-rachunek-VAT-tax-free | ✅ NOWY 2026-08-12 (iteracja VII), SYNC 2026-08-14 (REGUŁA 3, przy F-33) |
+| Ustawa o VAT — rejestracja/wykreślenie/przywrócenie (96-98), zapłata i pakiet paliwowy (103-105d), metoda kasowa (21), remanent likwidacyjny (14) | Dz.U. 2025 poz. 775 t.j. | dr-06/modules/mod-VAT-rejestracja-zaplata-metoda-kasowa-likwidacja | ✅ NOWY 2026-08-12 (iteracja VI), SYNC 2026-08-14 (REGUŁA 3, przy F-33) |
+| Ustawa o VAT — komornik jako PŁATNIK (18, 106c), kasy rejestrujące warstwa ustawowa (111-111b), transakcje trójstronne uproszczone (135-138) | Dz.U. 2025 poz. 775 t.j. | dr-06/modules/mod-VAT-platnicy-egzekucja-kasy-trojstronne | ✅ NOWY 2026-08-12 (iteracja VI), SYNC 2026-08-14 (REGUŁA 3, przy F-33) |
+| Ordynacja podatkowa — Dział VI, kontrola podatkowa (281-292): wszczęcie, upoważnienie, protokół, zastrzeżenia — ⚠️ ODRĘBNA od kontroli celno-skarbowej | Dz.U. 2026 poz. 622 t.j. | dr-06/modules/mod-OP-kontrola-podatkowa-dzial-VI | ✅ NOWY 2026-08-12, SYNC 2026-08-14 (REGUŁA 3, przy F-33) |
 
 ---
 
@@ -469,7 +489,6 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 
 ---
 
-| KPK art. 266-269 — poręczenie majątkowe (kaucja karna) | Dz.U. 2026 poz. 490 t.j. | dr-03/modules/mod-poreczenie-majatkowe-kaucja-karna | ✅ NOWY 2026-07-19 |
 
 ---
 
@@ -499,7 +518,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o gospodarce nieruchomościami (UGN) | Dz.U. 2026 poz. 399 t.j. (sync 2026-07-02 z dr-09) | dr-09/modules/mod-UGN-gospodarka-nieruchomosciami | ✅ OK |
 | Prawo geodezyjne + wywłaszczenia | Dz.U. 2024 poz. 1151 t.j. (sync 2026-07-02 z dr-09) | dr-09/modules/mod-PrGeodezyjne-kartografia-wywlaszczenia | ✅ OK |
 | Prawo geologiczne i górnicze | Dz.U. 2026 poz. 69 t.j. (sync 2026-07-02 z dr-09) | dr-09/modules/mod-prawo-geologiczne-gornicze | ✅ OK |
-| Kodeks morski | Dz.U. 2023 poz. 1523 ze zm. | dr-09/modules/mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski | ✅ OK |
+| Kodeks morski | Dz.U. 2023 poz. 1309 t.j. ze zm. | dr-09/modules/mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski | ⛔ POPRAWIONE 2026-08-15n — BYŁO błędnie 2023.1523 (to ustawa o delegowaniu kierowców w transporcie drogowym, INNY akt); właściwy t.j. z obwieszczenia 25.05.2023 |
 | Ustawa o zapobieganiu szkodom w środowisku | Dz.U. 2007 poz. 75 ze zm. | dr-09/modules/mod-POS-prawo-ochrony-srodowiska | ✅ OK |
 | Ustawa deweloperska | Dz.U. 2024 poz. 695 t.j. | dr-09/modules/mod-UGN-gospodarka-nieruchomosciami | ✅ OK |
 | Ustawa o ochronie praw lokatorów | Dz.U. 2025 poz. 413 ze zm. | dr-09/modules/mod-UGN-gospodarka-nieruchomosciami | ✅ OK |
@@ -570,6 +589,8 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o ochronie zdrowia psychicznego | ⚠️ zweryfikuj t.j. na ISAP | dr-10/modules/mod-ustawa-zdrowie-psychiczne | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — synchronizacja z DR-MAPA-AKTOW) |
 | Ustawa o wyrobach medycznych | ⚠️ zweryfikuj t.j. na ISAP | dr-10/modules/mod-wyroby-medyczne | ✅ NOWY 2026-07-18 (dopisane do głównej mapy — synchronizacja z DR-MAPA-AKTOW) |
 | Prawo oświatowe — prawa ucznia (zakaz skreślenia w obowiązku szkolnym, doręczenia) | Dz.U. 2025 poz. 1043 t.j. + Konstytucja RP art. 53 | dr-10/modules/mod-prawa-ucznia | ✅ DOPISANE do mapy 2026-07-30 (sync) |
+| Hodowla i zdrowie zwierząt (weterynaria) — w tym „ustawa łańcuchowa” Dz.U. 2026 poz. 1005 | patrz MAPA-AKTOW DR-10 | dr-10/modules/mod-ustawa-hodowla-zdrowie-zwierzat | SYNC REGUŁA 3, 2026-08-14e (F-77 rozszerzona) |
+| Hodowla zwierząt — zezwolenia i gatunki (pseudohodowla) | patrz MAPA-AKTOW DR-10 | dr-10/modules/mod-ustawa-hodowla-zezwolenia-gatunki | SYNC REGUŁA 3, 2026-08-14e (F-77 rozszerzona) |
 
 ---
 

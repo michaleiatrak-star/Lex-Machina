@@ -518,11 +518,47 @@ WEJŚCIE W ŻYCIE: **14 DNI od ogłoszenia** — czyli ok. **21.08.2026
   jest INNA podstawa pobytu (wiza pracownicza, zezwolenie na pobyt
   czasowy i pracę, itp.)
 
-⚠️ KONTEKST BRAKUJĄCY W TEJ SESJI: DOKŁADNE uzasadnienie MERYTORYCZNE
-  wyboru WŁAŚNIE TYCH trzech państw (np. dane o nadużyciach ruchu
-  bezwizowego do nielegalnej pracy z tych krajów, kontekst
-  migracyjny) NIE ZOSTAŁO zweryfikowane w tej sesji — punkt
-  startowy do dalszego badania, jeśli istotne dla konkretnej sprawy
+⭐ UZASADNIENIE WYBORU TYCH TRZECH PAŃSTW (ustalone 2026-08-15,
+  zamknięcie flagi audytowej F-32) — inicjatywa NIE pochodziła
+  z MRPiPS: wniosek złożył **minister właściwy do spraw zagranicznych
+  (MSZ)**, poparty przez **MSWiA**; MRPiPS jako organ wydający
+  rozporządzenie wykonał wniosek. Zapowiedź w wykazie prac
+  legislacyjnych MRPiPS: **6.02.2026**, planowane przyjęcie: II kw.
+  2026 (faktycznie: rozporządzenie z 31.07.2026, ogł. 7.08.2026).
+
+  PODANE MOTYWY (za materiałami rządowymi i uzasadnieniem projektu):
+  1) WYSOKIE RYZYKO MIGRACYJNE związane z wjazdem obywateli tych
+     państw do strefy Schengen; potrzeba ograniczenia zagrożeń
+     masowej migracji z tych obszarów;
+  2) SYSTEMOWE NADUŻYWANIE ruchu bezwizowego do podejmowania pracy
+     z obejściem obowiązujących procedur — szara strefa,
+     destabilizacja rynku pracy, wzrost wyzysku cudzoziemców;
+  3) SKUTEK CELOWY: obowiązek uzyskania wizy, a więc poddanie
+     KAŻDEGO cudzoziemca INDYWIDUALNEMU badaniu przesłanki ryzyka
+     migracyjnego w procedurze wizowej — czego ruch bezwizowy
+     z definicji nie zapewnia. To jest prawdziwa ratio regulacji:
+     nie zakaz pracy jako taki, lecz przywrócenie kontroli
+     prewencyjnej na etapie wjazdu.
+  4) W materiałach powoływano dane Straży Granicznej i Policji
+     o skali nielegalnego zatrudnienia — ⚠️ [NIEWERYFIKOWANE]
+     konkretne liczby podawane w prasie (m.in. odsetek obywateli
+     Kolumbii pracujących „na czarno") NIE zostały potwierdzone
+     u źródła; nie powoływać liczb w piśmie.
+
+  ⚠️ ŚLAD WERYFIKACJI (ZASADA 14): motywy 1-3 potwierdzone zgodnie
+  w 4 niezależnych źródłach Rzędu 2B/3 relacjonujących komunikat
+  MRPiPS z 9.02.2026 i uzasadnienie projektu (m.in. rp.pl,
+  portalspozywczy.pl, worksol.pl, cc.info.pl). Sam tekst
+  uzasadnienia projektu w RCL NIE był odczytany bezpośrednio —
+  przy sporze o wykładnię celowościową (np. zarzut nadmiernej
+  ingerencji) sięgnij po oryginał OSR/uzasadnienia z wykazu prac
+  legislacyjnych MRPiPS.
+
+  ⭐ PRAKTYCZNIE: ten materiał jest użyteczny w argumentacji
+  proporcjonalności — regulacja jest wprost adresowana do
+  NADUŻYĆ POBYTU BEZWIZOWEGO, nie do obywatelstwa jako takiego,
+  co ma znaczenie przy zarzucie dyskryminacji ze względu na
+  narodowość.
 
 Potwierdzone BEZPOŚREDNIO dosłownym tekstem Dziennika Ustaw
 dostarczonym przez użytkownika (Dz.U. 2026 poz. 1072, publikacja

@@ -70,6 +70,8 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 
 ## Moduły (43 łącznie — ✓ 43 OK, ☐ 0 STUB)
 
+**KOREKTA LICZNIKA 2026-08-14d:** poprzednia wartość („43” przy 42 modułach na dysku) była ZAWYŻONA O 1 JUŻ PRZED dodaniem mod-KPC-nieproces-czesc-ogolna — wykryte przy mechanicznej kontroli dysk/checklista. Po dodaniu nowego modułu rzeczywisty stan to 43 moduły i 43 wpisy [✓], zero modułów-widm.
+
 **NAPRAWA 2026-08-14c:** dodano `mod-KPC-prawomocnosc-granice-
 apelacji.md` — zamyka część F-65: prawomocność orzeczeń (365-366) i
 granice apelacji (378, 380-386), dotąd bez podstawy prawnej mimo że
@@ -330,6 +332,28 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
                mod-PrUpad-upadlosc-restrukturyzacja — status osoby vs
                przebieg postępowania)
   [✓] OK    mod-KPC-egzekucja-windykacja
+  [✓] NOWY  mod-KPC-nieproces-czesc-ogolna
+              (dodany 2026-08-14d — naprawa F-65, CZĘŚĆ II: PIERWSZY
+               moduł KSIĘGI II KPC w systemie — dotąd cała Księga II
+               nie miała żadnego pokrycia. Tytuł I, art. 506-525:
+               wszczęcie na wniosek [506], właściwość rzeczowa — sądy
+               rejonowe [507], WAŻNE: WŁAŚCIWOŚĆ MIEJSCOWA WYŁĄCZNA
+               wg miejsca zamieszkania WNIOSKODAWCY [508 par. 1 —
+               ODWROTNIE niż w procesie, gdzie decyduje pozwany],
+               przekazanie sprawy [508 par. 2], ZAINTERESOWANY vs
+               UCZESTNIK [510 — rdzeń konstrukcyjny nieprocesu:
+               obowiązek wezwania przez sąd, zażalenie na odmowę
+               dopuszczenia, kurator z urzędu], wymogi wniosku [511 —
+               jak pozew, ale zamiast pozwanego wymienia się
+               zainteresowanych], odrębności dowodowe (przesłuchanie
+               bez przyrzeczenia, pod nieobecność uczestników),
+               apelacja vs zażalenie [518 — kryterium ISTOTY SPRAWY],
+               skarga kasacyjna [519(1) — katalog CZĘŚCIOWY].
+               UWAGA: źródło Rzędu 2 (5 niezależnych serwisów),
+               znacznik [ZALECANA WERYFIKACJA ISAP]; jednostki, których
+               NUMERU nie odczytano, oznaczone w module jako [NR ?].
+               v1.0.0 = TYLKO część ogólna — sprawy spadkowe, rzeczowe,
+               wieczystoksięgowe i ubezwłasnowolnienie NADAL NIEPOKRYTE)
   [✓] NOWY  mod-KPC-prawomocnosc-granice-apelacji
               (dodany 2026-08-14 — naprawa F-65: prawomocność orzeczeń
                [363-366 — formalna vs materialna, tryb stwierdzenia,

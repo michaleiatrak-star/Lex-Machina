@@ -41,6 +41,23 @@ Tytuł wykonawczy administracyjny, upomnienie, zarzuty w postępowaniu egzekucyj
 | KPA | Dz.U. 2025 poz. 1691 t.j. |
 | PPSA | Dz.U. 2026 poz. 143 t.j. |
 
+> ⚠️ **NOWELIZACJA PO TEKŚCIE JEDNOLITYM — ustawa z 15.05.2026, Dz.U. 2026 poz. 739**
+> (ustalona 2026-08-15 przy zamykaniu flagi audytowej F-16; wcześniej znany był
+> wyłącznie numer druku sejmowego 2319). Zakres:
+> 1. **art. 67da — „Portal eLicytacje KAS"**: system teleinformatyczny prowadzony przez
+>    Szefa KAS; naczelnik urzędu skarbowego prowadzi w nim licytacje elektroniczne oraz
+>    sprzedaż z wolnej ręki ruchomości i nieruchomości, a także publikuje obwieszczenia
+>    i protokoły opisu i oszacowania nieruchomości.
+> 2. **art. 3a § 1** — rozszerzenie katalogu o środki z doładowań (art. 331 ust. 9 Prawa
+>    komunikacji elektronicznej).
+> 3. Wejście w życie: po upływie 14 dni od dnia ogłoszenia.
+>
+> ⛔ Wiersz „Zajęcie nieruchomości → licytacja" w sekcji środków egzekucyjnych opisuje
+> stan SPRZED tej zmiany. **Przed powołaniem trybu licytacji w piśmie** — sprawdzić
+> brzmienie art. 67da i przepisów o sprzedaży (art. 105–111f UPEA) w ISAP.
+> Weryfikacja: dziennikustaw.gov.pl (Rząd 1, snippet — bezpośredni `web_fetch`
+> ROBOTS_DISALLOWED) + prosteustawy.pl/akt/WDU20260000739 (Rząd 2B).
+
 ---
 
 ## 2. INTAKE

@@ -6,6 +6,19 @@ Zweryfikowano 2026-08-04 (ZASADA 14): Rząd 2B — liczne kancelarie
 adwokackie, prawo.pl, RPO (bip.brpo.gov.pl), Palestra (czasopismo
 naukowe adwokatury), CEJSH (baza naukowa), gazeta.policja.pl.
 
+## AKTY REFERENCYJNE (dodane 2026-08-14, F-77)
+
+Podstawa główna: Kodeks karny art. 158-159 (bójka/pobicie) — zweryfikowany
+osobno w innych modułach systemu, nie duplikowany tutaj.
+
+Akt DODATKOWY dla wątku ochrony świadków (sekcja 3): ustawa z 28.11.2014 r.
+o ochronie i pomocy dla pokrzywdzonego i świadka, **Dz.U. 2015 poz. 21**
+(pierwotna publikacja — ustawa funkcjonuje w formie nowelizowanej, bez
+odrębnego tekstu jednolitego skonsolidowanego).
+✅ VER: isap.sejm.gov.pl (WDU20150000021), lexlege.pl (cytuje wprost
+2015.21 jako aktualną podstawę, stan na 19.07.2026), policja.pl —
+2026-08-14 (F-77)
+
 ---
 
 ## 1. LINCZ — ODPOWIEDZIALNOŚĆ ZBIOROWA (art. 158-159 KK)

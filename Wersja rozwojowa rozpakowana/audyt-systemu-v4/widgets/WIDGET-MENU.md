@@ -1,5 +1,9 @@
 # WIDGET-MENU — Interaktywne menu wyboru elementów audytu
 
+> **12 pozycji** (od 2026-08-15o). Pozycja **11 = zadanie cykliczne w Cowork**
+> (`references/SCHEDULED-TASK-COWORK.md`) — jedyna pozycja, która nie jest fazą
+> audytu; pozycja 12 to dawna 11 („Aktualizacja references”, FAZA 7).
+
 ## Cel
 Widget React renderowany przez `show_widget` — pozwala użytkownikowi wybrać jeden lub więcej elementów audytu przed jego uruchomieniem. Eliminuje potrzebę przepisywania poleceń tekstowych.
 
@@ -93,6 +97,13 @@ const AUDIT_ITEMS = [
     phase: "FAZA 6"
   },
   {
+    id: "harmonogram",
+    group: "Automatyzacja",
+    label: "⏰ Zadanie cykliczne — cotygodniowa weryfikacja ISAP",
+    desc: "Utwórz w Cowork scheduled task: TRYB DZU co tydzień + raport + gotowy .skill (blok map pokrycia — po zamknięciu F-83)",
+    phase: "SCHEDULED-TASK-COWORK.md"
+  },
+  {
     id: "references",
     group: "Raport",
     label: "💾 Aktualizacja references",
@@ -108,7 +119,8 @@ const PRESETS = [
   { label: "Tylko czystość", ids: ["interlinie", "wstawki", "description"] },
   { label: "Tylko zależności", ids: ["inventory", "paths", "versions"] },
   { label: "Tylko prawo", ids: ["dzu", "antihalucynacje"] },
-  { label: "Raport i zapis", ids: ["scoring", "raport", "references"] }
+  { label: "Raport i zapis", ids: ["scoring", "raport", "references"] },
+  { label: "Automatyzacja", ids: ["harmonogram"] }
 ];
 
 export default function AuditMenu() {
@@ -235,6 +247,28 @@ export default function AuditMenu() {
   );
 }
 ```
+
+---
+
+## Pozycja 11 — obsługa wyboru (⚠️ INNA niż pozostałe pozycje)
+
+Pozycje 1-10 i 12 uruchamiają fazę audytu. Pozycja **11 (`harmonogram`) nie
+audytuje niczego** — tworzy zadanie cykliczne w Cowork. Po jej wybraniu:
+
+1. Wczytaj `references/SCHEDULED-TASK-COWORK.md`.
+2. Sprawdź WARUNEK URUCHOMIENIA (§ 1 tego pliku): praca w Cowork **oraz**
+   brak wcześniej utworzonego zadania. ⛔ Jeśli nie masz pewności co do
+   drugiego warunku — **zapytaj jednym zdaniem**, nie zakładaj.
+3. Poproś o akceptację (wystarczy „tak”) i dopiero wtedy utwórz zadanie,
+   wklejając **dosłownie** treść z § 2A (Description) i § 2B (prompt).
+   ⛔ Nie parafrazuj — treść jest kanoniczna.
+4. Blok map pokrycia (§ 3) dopisuj do promptu **wyłącznie** po zamknięciu
+   flagi **F-83** w `WARN-OTWARTE.md`. Dopóki F-83 otwarta — pomiń i odnotuj.
+5. Odnotuj w `AUDIT-JOURNAL.md`: utworzono / odmówiono / już istniało.
+
+Pozycja 11 może być wybrana **razem** z pozycjami audytowymi — wtedy wykonaj
+najpierw audyt, a utworzenie zadania na końcu, żeby propozycja opierała się na
+świeżym wyniku.
 
 ---
 

@@ -418,6 +418,11 @@ przez cross-reference, bez duplikacji treści).
                obalenia domniemania na organie])
               (główny moduł: postępowanie podatkowe, terminy, GAAR,
                odpowiedzialność zarządu, KKS czynny żal, przedawnienie)
+  [✓] OK    mod-OP-kontrola-podatkowa-dzial-VI
+              (dodany 2026-08-12, ZAREJESTROWANY 2026-08-14 przy
+               naprawie F-33: Dział VI OP — kontrola podatkowa,
+               NAJCZĘSTSZY typ kontroli, z jakim styka się firma;
+               ODRĘBNY od kontroli celno-skarbowej z mod-KAS)
   [✓] OK    mod-KAS-kontrola-celno-skarbowa
   [✓] OK    mod-PIT-podatek-dochodowy-fizyczne
   [✓] OK    mod-CIT-podatek-dochodowy-prawne
@@ -457,6 +462,28 @@ przez cross-reference, bez duplikacji treści).
   [✓] OK    mod-VAT-podatek-od-towarow-i-uslug
               (2026-07-21: dodano odesłanie do nowego modułu o
                samochodach/użytku mieszanym)
+  [✓] OK    mod-VAT-transakcje-fakturowanie
+              (RODZINA VAT — wydzielony 2026-08-12 z modułu
+               macierzystego wg NOTA-4, ZAREJESTROWANY 2026-08-14
+               przy naprawie F-33: nieodpłatne przekazania, zbycie
+               przedsiębiorstwa/ZCP, miejsce dostawy i transakcje
+               łańcuchowe, organy władzy publicznej, odwrotne
+               obciążenie krajowe, fakturowanie, procedury szczególne)
+  [✓] OK    mod-VAT-miejsce-swiadczenia-zwolnienia
+              (RODZINA VAT — j.w.: miejsce świadczenia usług, grupa
+               VAT, zwolnienie podmiotowe, VAT marża, eksport/WDT)
+  [✓] OK    mod-VAT-obowiazek-podstawa-zwolnienia-nieruchomosci
+              (RODZINA VAT — j.w.: obowiązek podatkowy, podstawa
+               opodatkowania, zwolnienia przedmiotowe i nieruchomości,
+               ulga na złe długi)
+  [✓] OK    mod-VAT-sankcje-bony-odliczenia
+              (RODZINA VAT — j.w.: sankcje i dodatkowe zobowiązanie
+               podatkowe, bony SPV/MPV, pusta faktura, wyłączenia
+               i proporcja odliczenia)
+  [✓] OK    mod-VAT-ewidencja-deklaracje
+              (RODZINA VAT — j.w.: ewidencja JPK_V7 i jej korekta,
+               deklaracje, informacje podsumowujące, rejestracja VAT,
+               solidarna odpowiedzialność)
   [✓] OK    mod-odliczenia-uzytek-mieszany-firma-prywatny-KUP
               (dodany 2026-07-21: VAT samochody osobowe [50%/100%,
                VAT-26, ewidencja przebiegu, ryzyko ANPR], ryczałt PIT
@@ -550,6 +577,38 @@ przez cross-reference, bez duplikacji treści).
                miesiące-5 lat]. Odpowiedź na pytanie użytkownika)
               (wydzielony 2026-06-14 z mod-ustawa-akcyzowa-i-clo-UCC: Nomenklatura
                Scalona CN/TARIC, WIT, procedury celne UCC, wartość celna, FTA/GSP)
+  [✓] OK    mod-limit-platnosci-gotowkowych
+              (v1.1.0, dodany 2026-07-27, ZAREJESTROWANY 2026-08-14
+               przy naprawie F-33: art. 19 Prawa przedsiębiorców
+               [t.j. Dz.U. 2025 poz. 1480] — limit płatności
+               gotówkowych między przedsiębiorcami i skutki
+               podatkowe jego przekroczenia)
+  [✓] OK    mod-ustawa-rachunkowosci
+              (v1.14.0, dodany 2026-08-11, ZAREJESTROWANY 2026-08-14
+               przy naprawie F-33: moduł podstawowy ustawy o
+               rachunkowości — konsolidacja, ESG/CSRD, wycena walut,
+               odpowiedzialność za sprawozdanie)
+  [✓] OK    mod-rachunkowosc-budzetowa-JSFP
+              (v1.0.0, utworzony 2026-08-13 przy naprawie F-20,
+               ZAREJESTROWANY 2026-08-14 przy F-33: rachunkowość
+               jednostek sektora finansów publicznych — art. 40 UFP,
+               rozp. wykonawcze t.j. Dz.U. 2026 poz. 909, plany kont,
+               terminy sprawozdań)
+  [✓] OK    mod-JPK-ksiegi-elektroniczne-e-sprawozdania
+              (v1.0.0, utworzony 2026-08-13 przy F-20, ZAREJESTROWANY
+               2026-08-14 przy F-33: JPK_VAT/V7M/V7K, JPK_CIT
+               [JPK_KR_PD + JPK_ST_KR, harmonogram 2025-2027],
+               JPK_PKPIR, JPK_KR na żądanie organu)
+  [✓] OK    mod-PKPiR-ewidencje-uproszczone
+              (v1.0.0, utworzony 2026-08-13 przy F-20, ZAREJESTROWANY
+               2026-08-14 przy F-33: PKPiR — próg 2,5 mln EUR, zmiana
+               rozporządzenia od 1.01.2026 [Dz.U. 2025 poz. 1299],
+               19 kolumn, rzetelność vs niewadliwość, spis z natury)
+  [✓] OK    mod-kasy-rejestrujace-fiskalizacja
+              (v1.0.0, utworzony 2026-08-13 przy F-20, ZAREJESTROWANY
+               2026-08-14 przy F-33: ⭐ rozstrzygnięty numer Dz.U.
+               2024 poz. 1902 [NIE 1949], limit zwolnienia 20 000 zł,
+               fiskalizacja, przeglądy co 2 lata)
   [✓] OK    mod-ustawa-AML-instytucje-obowiazkowe
   [✓] OK    mod-prawo-bankowe-KNF-BFG
   [✓] OK    mod-ustawa-rynek-kapitalowy-fundusze

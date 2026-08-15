@@ -9,10 +9,10 @@ kary pieniężne administracyjne (KPA Dział IVa), przedawnienie, egzekucja
 | Akt | Dz.U. | Uwaga |
 |---|---|---|
 | Kodeks wykroczeń (KW) | Dz.U. 2025 poz. 734 t.j. | art. 24–37 (grzywna sądowa) |
-| KPSW | Dz.U. 2025 poz. 860 t.j. | art. 95–102 (mandat karny) |
+| KPSW | Dz.U. 2025 poz. 860 t.j. ze zm. **Dz.U. 2026 poz. 473** | art. 95–102 (mandat karny). ⛔ 2026 poz. 473 to NOWELIZACJA (ustawa o zmianie ustawy o PIP oraz niektórych innych ustaw), **nie** t.j. — wcześniejszy zapis „2026.473 t.j." był błędny, sprostowany 2026-08-15 |
 | KPA | Dz.U. 2025 poz. 1691 t.j. | Dział IVa art. 189a–189k (adm. kary pieniężne) |
 | KPA art. 88 | j.w. | grzywna porządkowa świadka/biegłego |
-| UPEA | Dz.U. 2023 poz. 2505 t.j. | art. 119–125 (grzywna w celu przymuszenia) |
+| UPEA | Dz.U. 2026 poz. 268 t.j. ze zm. Dz.U. 2026 poz. 739 | art. 119–125 (grzywna w celu przymuszenia). ⛔ POPRAWIONE 2026-08-15: wcześniej moduł podawał 2023 poz. 2505 — numer nieaktualny o DWA cykle t.j. |
 | Ustawa o drogach publicznych (UDP) | Dz.U. 2025 poz. 889 t.j. | art. 13, 13b, 13f (opłaty parkingowe) |
 
 ---
@@ -29,10 +29,30 @@ TYP A — GRZYWNA SĄDOWA (KW art. 24–37):
 
 TYP B — MANDAT KARNY (KPSW art. 95–102):
   → Nakładany przez: policję, ITD, straż miejską, inne uprawnione organy
-  → STAWKI (weryfikuj aktualny taryfikator — Dz.U. 2026 poz. 724 lub wcześniejsze):
+  → ⛔ ZASADA OGÓLNA (art. 96 § 1 KPSW, zweryfikowane 2026-08-15):
+    • do 500 zł, a przy zbiegu przepisów z art. 9 § 1 KW — do 1 000 zł
+    • kwoty 2 500 zł / 5 000 zł podawane niżej NIE wynikają z art. 96 § 1,
+      lecz z przepisów SZCZEGÓLNYCH (taryfikator drogowy, recydywa
+      w wykroczeniach drogowych) — nie mylić poziomów regulacji
+  → KWOTY SZCZEGÓLNE w samym art. 96 KPSW (katalog, stan 2026-08-15):
+    • § 1a — sprawy PIP oraz naruszenia z ustawy o transporcie drogowym:
+      ⭐ **ZMIANA OD 8.07.2026 (Dz.U. 2026 poz. 473):** dla spraw, w których
+      oskarżycielem publicznym jest PIP — **do 5 000 zł** (było: do 2 000 zł);
+      dodany pkt dot. art. 84 ustawy z 20.03.2025 o warunkach dopuszczalności
+      powierzania pracy cudzoziemcom
+    • § 1aa — bezpieczeństwo imprez masowych (art. 54–56, 57a): 2 000 zł
+    • § 1ab — monitorowanie przewozu towarów (art. 32 ust. 1): 5 000–7 500 zł
+    • drogi publiczne (art. 13na ust. 1, 13naa ust. 1 UDP): 1 500 zł
+    • art. 96 § 3 KW (dopuszczenie do prowadzenia pojazdu wbrew przepisom):
+      do 8 000 zł
+  → STAWKI DROGOWE (weryfikuj aktualny taryfikator — Dz.U. 2026 poz. 724
+    lub wcześniejsze):
     • Standardowy: max 2 500 zł
     • Recydywa (ten sam typ w ciągu 24 mies.): max 5 000 zł
   → Mandat gotówkowy: zapłata na miejscu = natychmiastowe uprawomocnienie
+  → Mandat bezgotówkowy: karta/instrument płatniczy, o ile funkcjonariusz
+    ma terminal (art. 98 § 3a-3c KPSW); ⛔ koszty autoryzacji i przekazu
+    ponosi UKARANY, funkcjonariusz ma obowiązek go o tym poinformować
   → Mandat kredytowany: 7 dni na zapłatę
   → ODMOWA mandatu → organ kieruje wniosek o ukaranie do SR
   → UCHYLENIE prawomocnego: art. 101 KPSW — 7 dni ZAWITY (patrz sekcja 3)

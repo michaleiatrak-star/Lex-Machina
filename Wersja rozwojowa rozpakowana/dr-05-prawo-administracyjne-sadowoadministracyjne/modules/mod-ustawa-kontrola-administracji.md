@@ -1,8 +1,8 @@
 # mod-ustawa-kontrola-administracji
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o kontroli w adm. rządowej — Dz.U. 2020 poz. 224 t.j. ze zm. — weryfikuj w ISAP
-**Data weryfikacji online:** 2026-06-05
+**Źródło weryfikacji:** Ustawa o kontroli w administracji rządowej z 15.07.2011 — Dz.U. 2026 poz. 158 t.j. (obwieszczenie Marszałka Sejmu z 9.02.2026, ISAP WDU20260000158) ze zm. — ✅ NAPRAWIONE 2026-08-14 (F-31, pkt 1): numer poprawiony (2020.224→2026.158), TREŚĆ zweryfikowana — jedyna nowelizacja uwzględniona w tym t.j. (Dz.U. 2025 poz. 1158, ustawa o informatyzacji z 25.07.2025) dodała WYŁĄCZNIE możliwość formy ELEKTRONICZNEJ dla czynności pisemnych (art. 13 — pismo utrwalane elektronicznie opatruje się kwalifikowanym podpisem/pieczęcią elektroniczną) oraz elektronicznego prowadzenia akt kontroli — techniczna zmiana proceduralna, NIE dotyka merytoryki samych zasad/trybu kontroli opisanych w tym module poniżej.
+**Data weryfikacji online:** 2026-06-05, potwierdzenie treści: 2026-08-14
 
 ---
 

@@ -600,6 +600,110 @@ weryfikuj).
 
 ---
 
+## ŁĄCZENIE, PODZIAŁ I PRZEKSZTAŁCANIE SPÓŁEK (Tytuł IV KSH, art. 491–584¹³)
+
+> ⛔ **NAPRAWA F-68, priorytet 1 (sesja 2026-08-15v):** dotąd całkowicie
+> nieobecne mimo rosnącego znaczenia praktycznego w transakcjach M&A —
+> ~94 artykuły kompletnie pustej luki. Weryfikacja wielosźródłowa:
+> lexlege.pl, arslege.pl, przepisy.gofin.pl, rp.pl (2024–2025).
+
+**Struktura:** Dział I Łączenie się spółek (491–527), Dział II Podział
+spółek (528–550¹), Dział III Przekształcenia spółek (551–595).
+
+### ŁĄCZENIE SPÓŁEK (Dział I, art. 491–527)
+
+```
+KTO MOŻE SIĘ ŁĄCZYĆ (art. 491):
+□ Spółki kapitałowe mogą łączyć się między sobą ORAZ ze spółkami
+    osobowymi — ale spółka osobowa NIE MOŻE być spółką przejmującą ani
+    nowo zawiązaną
+□ Spółki osobowe mogą łączyć się między sobą WYŁĄCZNIE przez zawiązanie
+    spółki kapitałowej (lub przejęcie przez S.K.A.)
+□ NIE MOŻE łączyć się spółka w likwidacji, która rozpoczęła podział
+    majątku, ani spółka w upadłości
+
+DWIE METODY (art. 492 § 1):
+  1) ŁĄCZENIE PRZEZ PRZEJĘCIE (inkorporacja) — cały majątek spółki
+     przejmowanej przechodzi na spółkę przejmującą za udziały/akcje
+     wydawane wspólnikom przejmowanej
+  2) ŁĄCZENIE PRZEZ ZAWIĄZANIE NOWEJ SPÓŁKI (fuzja/konsolidacja) —
+     majątek WSZYSTKICH łączących się spółek przechodzi na nowo
+     zawiązaną spółkę kapitałową lub S.K.A.
+
+□ Dopłaty gotówkowe dopuszczalne obok udziałów/akcji — do 10% wartości
+    bilansowej/nominalnej przyznanych udziałów (art. 492 § 2)
+□ Sukcesja UNIWERSALNA — spółka przejmująca/nowo zawiązana wstępuje we
+    WSZYSTKIE prawa i obowiązki spółki przejmowanej (art. 494 § 1) —
+    kluczowe dla oceny ryzyka: przejęte zobowiązania, umowy, spory
+□ Spółka przejmowana/łączące się rozwiązują się BEZ likwidacji, z dniem
+    wykreślenia z rejestru (art. 493 § 1)
+□ Dzień połączenia = dzień wpisu do rejestru spółki przejmującej/nowej
+    (art. 493 § 2)
+□ Roszczenia o naprawienie szkody przy łączeniu — przedawnienie 3 LATA
+    od dnia ogłoszenia o połączeniu (art. 527)
+```
+
+### PODZIAŁ SPÓŁEK (Dział II, art. 528–550¹)
+
+```
+□ WYŁĄCZNIE spółka KAPITAŁOWA może być dzielona na dwie lub więcej
+    spółek kapitałowych (art. 528 § 1)
+□ Spółka OSOBOWA NIE PODLEGA podziałowi (art. 528 § 2)
+□ NIE MOŻE być dzielona: spółka akcyjna z niepokrytym w całości
+    kapitałem zakładowym; spółka w likwidacji, która rozpoczęła podział
+    majątku; spółka w upadłości (art. 528 § 1, § 3)
+
+PIĘĆ SPOSOBÓW PODZIAŁU (art. 529 § 1) — ⭐ piąty dodany nowelizacją z
+15.09.2023 r., starsze źródła wskazują wyłącznie 4:
+  1) PODZIAŁ PRZEZ PRZEJĘCIE — cały majątek na inne (istniejące) spółki,
+     wspólnicy dzielonej obejmują udziały/akcje przejmujących
+  2) PODZIAŁ PRZEZ ZAWIĄZANIE NOWYCH SPÓŁEK — cały majątek na nowo
+     zawiązane spółki
+  3) PODZIAŁ PRZEZ PRZEJĘCIE I ZAWIĄZANIE NOWEJ SPÓŁKI — kombinacja 1+2
+  4) PODZIAŁ PRZEZ WYDZIELENIE — CZĘŚĆ majątku na istniejącą/nową
+     spółkę; spółka dzielona NIE TRACI bytu prawnego, kontynuuje
+     działalność; udziały/akcje obejmują WSPÓLNICY spółki dzielonej
+  5) PODZIAŁ PRZEZ WYODRĘBNIENIE (nowość 2023) — CZĘŚĆ majątku na
+     istniejącą/nową spółkę; RÓŻNICA względem wydzielenia: udziały/akcje
+     obejmuje SAMA SPÓŁKA DZIELONA (nie jej wspólnicy) — praktyczne
+     narzędzie do budowy struktur holdingowych bez zaangażowania
+     wspólników w nową strukturę właścicielską
+
+□ Przy wyodrębnieniu — UPROSZCZONY plan podziału (nie wymaga elementów
+    dot. stosunku wymiany udziałów, bo obejmuje je sama spółka dzielona)
+□ Dopłaty gotówkowe — analogicznie do łączenia, do 10%
+```
+
+### PRZEKSZTAŁCENIA SPÓŁEK (Dział III, art. 551–595)
+
+```
+□ Każda spółka handlowa (jawna, partnerska, komandytowa, komandytowo-
+    akcyjna, z o.o., prosta akcyjna, akcyjna) MOŻE być przekształcona
+    w INNĄ spółkę handlową (art. 551 § 1)
+□ Możliwe też przekształcenie PRZEDSIĘBIORCY (osoby fizycznej
+    prowadzącej działalność) w spółkę kapitałową — z odpowiedzialnością
+    tej osoby wobec spółki/wspólników/osób trzecich za szkody z winy
+    (analogicznie do odpowiedzialności biegłego rewidenta)
+□ Elementy postępowania: plan przekształcenia + załączniki + opinia
+    biegłego rewidenta → wpis spółki przekształconej i wykreślenie
+    formy pierwotnej z właściwego rejestru (KRS lub CEIDG)
+□ Firma spółki przekształconej — jeśli zmiana nie ogranicza się do
+    dodania oznaczenia formy prawnej, obowiązek podawania dawnej firmy
+    w nawiasie z dopiskiem "dawniej" przez CO NAJMNIEJ ROK
+```
+
+> ⚠️ **Znaczenie praktyczne dla M&A:** sukcesja uniwersalna przy
+> łączeniu (art. 494 § 1) oznacza, że due diligence musi obejmować
+> WSZYSTKIE zobowiązania spółki przejmowanej — nie da się "wybrać"
+> tylko korzystnych aktywów jak przy nabyciu przedsiębiorstwa. Dla
+> selektywnego nabycia rozważyć podział przez wydzielenie/wyodrębnienie
+> zamiast pełnego łączenia.
+> ⚠️ Weryfikuj aktualne brzmienie i ewentualne dalsze nowelizacje w
+> ISAP przed powołaniem w piśmie — obszar aktywnie nowelizowany
+> (transgraniczność, podział przez wyodrębnienie z 2023 r.).
+
+---
+
 ## WERYFIKACJA ONLINE
 
 ```

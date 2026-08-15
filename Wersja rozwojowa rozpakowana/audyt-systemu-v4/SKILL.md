@@ -20,6 +20,14 @@ references:
   - references/CHECKLIST-DEDUP.md   # mapa pojęć → lokalizacje (5 not, NOTA-6 ORPHAN dodana 06-14g)
   - references/mapa_dzu_2026-07-15.md   # aktualna mapa Dz.U. (502 wiersze, sync 2026-08-13); 07-04 poprzednia wersja
   - references/REGRESSION-TEST-PLAN.md   # zestaw testów regresyjnych T1-T8, v1.1 (dodane 2026-07-21) — NAJPIERW zarejestrowany tutaj po odkryciu że plan istniał bez wpisu w SKILL.md
+  - references/SYNC-DZU-AUTOMATYCZNY.md   # narzędzie WSPIERAJĄCE FAZĘ 3 — automatyzacja wykrywania nowych pozycji Dz.U./M.P. (wprowadzone 2026-07-13, skonsolidowane z osobnego skilla 2026-07-13f) — REJESTROWANE 2026-08-15 po wykryciu jako plik-sierota (użytkownik przesłał starą wersję ZIP i zapytał o funkcję scheduled task; plik istniał na dysku, ale nigdy nie trafił do tego frontmatter)
+  - references/HARMONOGRAM-CRON.md   # przykłady harmonogramu (cron / GitHub Actions) do adaptacji przez developera — powiązane z SYNC-DZU-AUTOMATYCZNY.md — REJESTROWANE 2026-08-15, ten sam powód co wyżej
+  - references/SCHEDULED-TASK-COWORK.md   # POZYCJA 11 menu — zadanie cykliczne w Cowork (TRYB DZU co tydzień): warunek uruchomienia, kanoniczna treść Description+promptu, blok map pokrycia za bramką F-83 — DODANE 2026-08-15o
+  - references/FORMAT-RAPORTU-ROZNIC.md   # format wyjściowy raportu różnic produkowanego przez sync_dzu_eli.py — REJESTROWANE 2026-08-15, ten sam powód co wyżej
+  - references/mapa_dzu_2026-07-04.md   # ARCHIWALNA — poprzednia wersja mapy Dz.U., zachowywana jako materiał historyczny cytowany w AUDIT-JOURNAL.md — REJESTROWANE 2026-08-15 (nigdy formalnie nie wpisana mimo aktywnego cytowania)
+  - references/mapa_dzu_2026-07-02.md   # ARCHIWALNA — jw., wcześniejsza wersja — REJESTROWANE 2026-08-15
+  - references/mapa_dzu_2026-06-14.md   # ARCHIWALNA — jw., najwcześniejsza zachowana wersja — REJESTROWANE 2026-08-15
+  - references/raporty-pokrycia-2026-08-13/   # 12 raportów zewnętrznych pokrycia (KKW, KPC, KPK, KRO, KSH, KW, OP, PPSA, PZP, PrBud, PrUp-PrRestr, SUS-FUS) + indeks zbiorczy = 13 plików — cytowane w F-64 do F-75 — REJESTROWANE 2026-08-15, ⛔ KOREKTA 2026-08-15n: pierwotny wpis podawał „11 raportów" i pomijał `raport-pokrycia-SUS-FUS.md` (F-72); zgodne z `WARN-OTWARTE.md`, które od początku podawało poprawnie 13 plików
 scripts:
   - scripts/test_module_registration.py   # T1 — rejestracja modułów (KRYTYCZNY)
   - scripts/test_module_count.py          # T2 — zgodność liczników (WYSOKI)
@@ -32,6 +40,13 @@ scripts:
   # AUDIT-JOURNAL.md, wpis AUDYT-2026-07-24d
   - scripts/run_regression_suite.py       # orkiestrator — uruchamia T1/T2/T3/T6/T7/T8 w jednym przebiegu
   - scripts/ci_check_shared.py            # T6/T7 — zerwane odwołania / duplikaty (już istniejący, wywoływany przez orkiestrator)
+  - scripts/check_rejestracja_modulow.py  # kontrola spójności rejestracji modułów DR (4 rejestry: dysk/SKILL.md/MAPA-AKTOW.md/ROUTING-MAP.md) — powstał 2026-08-14e (F-77) — REJESTROWANE 2026-08-15, plik-sierota tego samego wzorca jaki sam wykrywa
+  - scripts/sync_dzu_eli.py               # pobiera z Sejm ELI API nowe pozycje Dz.U./M.P., produkuje raport różnic — patrz SYNC-DZU-AUTOMATYCZNY.md — REJESTROWANE 2026-08-15
+  - scripts/mock_eli_server_test.py       # mock serwera ELI do testowania sync_dzu_eli.py bez żywego dostępu do api.sejm.gov.pl — REJESTROWANE 2026-08-15
+  - scripts/bootstrap_last_sync_date.py   # inicjalizacja pliku .last_sync_date przy pierwszym uruchomieniu sync_dzu_eli.py — REJESTROWANE 2026-08-15
+  - scripts/dostarcz_skill.sh             # skrypt automatyzujący łańcuch dostawy (Reguła 4/6/7 HARDGATE-AUDYT: policz/zip/rozpakuj/diff) — REJESTROWANE 2026-08-15
+  - scripts/install_precommit_hook.sh     # instalacja git pre-commit hook wywołującego testy regresyjne przed commitem — REJESTROWANE 2026-08-15
+  - scripts/README.md                     # dokumentacja folderu scripts/ — REJESTROWANE 2026-08-15
 ---
 
 # audyt-systemu-v4 — Orchestrator Audytu Systemu Prawnego
@@ -143,6 +158,23 @@ Po zakończeniu audytu: **obowiązkowa aktualizacja plików references**.
 
 ## FAZA 0 — WCZYTANIE REFERENCES (ZAWSZE PIERWSZE)
 
+> ⚠️ **NAPRAWA 2026-08-15 (F-80, wykryta na skutek pytania użytkownika o
+> scheduled task):** 15 plików istniało fizycznie na dysku (references/
+> i scripts/), ale nie było wpisanych do YAML frontmatter powyżej —
+> dokładnie ten sam wzorzec luki, jaki `scripts/check_rejestracja_modulow.py`
+> wykrywa dla modułów DR (F-33/F-77), tylko dotyczący plików SAMEGO
+> audyt-systemu-v4. Naprawione: wszystkie 15 plików dopisane do
+> `references:`/`scripts:` w YAML. Zawierało: `SYNC-DZU-AUTOMATYCZNY.md` +
+> `HARMONOGRAM-CRON.md` + `FORMAT-RAPORTU-ROZNIC.md` (mechanizm
+> automatyzacji wykrywania nowych pozycji Dz.U. — odpowiedź na pytanie o
+> "scheduled task": TAK, istnieje jako gotowy DO ADAPTACJI kod cron/GitHub
+> Actions, ale wymaga wdrożenia przez developera w środowisku z dostępem do
+> api.sejm.gov.pl — Claude w tej sesji czatu nie ma własnego mechanizmu
+> cyklicznego uruchamiania), 3 archiwalne mapy Dz.U., folder
+> `raporty-pokrycia-2026-08-13/`, oraz 7 skryptów pomocniczych (w tym
+> `check_rejestracja_modulow.py` — ironicznie, sam był plikiem-sierotą).
+> Szczegóły: `AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-15h.
+
 Przed jakimkolwiek działaniem wczytaj:
 
 ```
@@ -179,6 +211,34 @@ view /mnt/skills/user/audyt-systemu-v4/widgets/WIDGET-MENU.md
 3. Czekaj na wybór użytkownika. Po otrzymaniu — uruchom **tylko wskazane fazy/moduły**.
 
 Gdy użytkownik podał konkretny tryb lub zakres → pomiń widget, przejdź bezpośrednio do właściwej fazy.
+
+---
+
+## FAZA 0C — WYKRYCIE PRACY W COWORK I ZADANIE CYKLICZNE (POZYCJA 11)
+
+*(dodane 2026-08-15o — odtworzenie mechanizmu opisanego przez użytkownika jako
+istniejący wcześniej i utworzony z poziomu czatu w Cowork za jego akceptacją.)*
+
+Sprawdź **na końcu sesji audytowej** (nie na początku — propozycja ma się
+opierać na świeżym wyniku), czy zachodzą łącznie:
+
+1. sesja toczy się w **Cowork**;
+2. użytkownik **nie ma jeszcze** zadania cyklicznego „Cotygodniowa weryfikacja
+   ISAP" w harmonogramie Cowork.
+
+⛔ **Warunku 2 NIE zgaduj** — Claude nie widzi listy zadań harmonogramu. Bez
+jednoznacznego potwierdzenia w kontekście: zapytaj jednym zdaniem.
+
+Jeśli oba spełnione → zaproponuj utworzenie zadania i po akceptacji utwórz je
+**dosłownie** wg `references/SCHEDULED-TASK-COWORK.md` (§ 2A Description,
+§ 2B prompt — treść kanoniczna, bez parafrazy). Blok map pokrycia (§ 3 tamże)
+dołączaj do promptu wyłącznie po **zamknięciu flagi F-83**; dopóki otwarta —
+pomiń i odnotuj. Wynik (utworzono / odmowa / już istniało) zapisz w
+AUDIT-JOURNAL.md jednym zdaniem.
+
+W trybie graficznym ta sama funkcja jest **pozycją 11** menu
+(`widgets/WIDGET-MENU.md`, id `harmonogram`) i może być wybrana samodzielnie
+albo razem z pozycjami audytowymi.
 
 ---
 
@@ -314,6 +374,24 @@ Jeśli znaleziono nowe t.j.:
 - Dodaj nowy wiersz do tabeli z: rok, poz., akt, typ=TJ, status=OK, skille (wg mapy), uwagi
 
 ### 3D — Akty oczekujące na wejście w życie (MONITORING)
+
+> ⛔ **UZUPEŁNIENIE LEGENDY 2026-08-15p — brakujący znacznik ⚠️ ALERT.**
+> Prompt zadania cyklicznego (`references/SCHEDULED-TASK-COWORK.md`, § 2B krok 4)
+> każe priorytetyzować „wszelkie ⚠️ ALERT z poprzednich audytów". Kontrola
+> wykazała **0 wystąpień** tego znacznika zarówno w SKILL.md, jak i w mapie
+> Dz.U. — krok 4 promptu odsyłał do konwencji, której nigdy nie wprowadzono,
+> więc sesja wykonawcza nie miała czego szukać.
+>
+> **Definicja (od 2026-08-15p):** `⚠️ ALERT` oznacza w kolumnie uwag mapy akt,
+> którego numer **okazał się błędny lub sporny** i został skorygowany — czyli
+> pozycję o podwyższonym ryzyku nawrotu, wymagającą sprawdzenia w KAŻDYM
+> kolejnym przebiegu, niezależnie od rotacji. Znaczniki `⏳ OCZEKUJE`
+> i `⚡ WCHODZI-90DNI` dotyczą PRZYSZŁOŚCI aktu (vacatio legis); `⚠️ ALERT`
+> dotyczy PRZESZŁOŚCI rejestru (już raz się pomylił).
+>
+> Pierwsze pozycje kwalifikujące się do oznaczenia: Kodeks morski (F-82 —
+> numer należał do innej ustawy), PIT/CIT/KC (F-84 — stary t.j. nieziejący
+> statusu PREV), KPSW (błędna „poprawka" z 2026-07-02q, patrz wpis 08-15d).
 
 Po weryfikacji nowych t.j. (3A–3B) sprawdź i zaktualizuj tabelę aktów opublikowanych, które **nie weszły jeszcze w całości w życie** lub wchodzą etapami.
 
@@ -478,21 +556,41 @@ Po zakończeniu audytu **ZAWSZE** zaktualizuj oba pliki references:
 
 ### 7A — Aktualizacja AUDIT-JOURNAL.md
 
-Dopisz nowy wpis audytu na **początku listy** (po nagłówku i opisie pliku, przed poprzednim wpisem):
+> ⛔ **KOREKTA 2026-08-15p — reguła doprowadzona do zgodności ze stanem faktycznym.**
+> Ta sekcja nakazywała dotąd dopisywanie wpisu „na początku listy" i aktualizację
+> stopki. Kontrola pliku wykazała, że **przez co najmniej 15 kolejnych sesji
+> (wpisy 08-15a … 08-15o) wpisy były dopisywane na KOŃCU**, a stopka
+> `*Ostatnia aktualizacja:*` nie była ruszana od **2026-06-09** i tkwi w połowie
+> pliku (ok. w. 18383). Kolejność wpisów w pliku jest dziś mieszana (24 przejścia
+> rosnące i 24 malejące na 698 wpisów) — nie jest ani chronologiczna, ani odwrotna.
+>
+> **Reguła kanoniczna od 2026-08-15p: NOWE WPISY DOPISUJE SIĘ NA KOŃCU PLIKU.**
+> Uzasadnienie: (a) tak faktycznie działa praktyka ostatnich kilkunastu sesji —
+> zmiana konwencji wstecz wymagałaby przenoszenia setek wpisów; (b) plik ma
+> ~40 tys. linii, a wstawianie na początku przez `str_replace` w tak dużym pliku
+> to udokumentowane ryzyko incydentu REGUŁY 5 (kasowanie sąsiedniego markera);
+> (c) dopisanie na końcu jest operacją bezkolizyjną.
+>
+> **Stopki NIE reanimujemy jako pola do ręcznej aktualizacji** — była martwa
+> przez ponad dwa miesiące, co dowodzi, że nikt jej nie utrzymuje. Datę ostatniego
+> audytu odczytuje się z **tytułu ostatniego wpisu**, który jest samoaktualizujący.
+> Istniejącą stopkę w połowie pliku pozostawiono jako artefakt historyczny
+> z adnotacją.
+>
+> ⚠️ **Historyczny wariant (nieaktualny, zachowany dla zrozumienia starych wpisów):**
+> wpisy sprzed sierpnia 2026 były wstawiane na początku listy.
 
 ```bash
 view /mnt/skills/user/audyt-systemu-v4/references/AUDIT-JOURNAL.md
 ```
 
-Następnie użyj `str_replace` aby wstawić nowy wpis `## AUDYT-YYYY-MM-DD` bezpośrednio po linii:
+Następnie dopisz wpis `## AUDYT-YYYY-MM-DD[litera]` **na końcu pliku**, poprzedzony
+separatorem `---`. Litera po dacie rozróżnia kilka sesji tego samego dnia (a, b, c…);
+przed użyciem sprawdź, która litera jest wolna:
+```bash
+grep -n "^## AUDYT-$(date +%Y-%m-%d)" references/AUDIT-JOURNAL.md
 ```
-> **Zasada:** Po każdym audycie: [...]
-```
-
-Zaktualizuj również stopkę:
-```
-*Ostatnia aktualizacja: YYYY-MM-DD*
-```
+⛔ Nie wstawiaj wpisu na początku pliku ani w środku — patrz korekta wyżej.
 
 ### 7B — Aktualizacja mapa_dzu_YYYY-MM-DD.md
 
@@ -559,6 +657,10 @@ Wywołanie: "sprawdź mapę Dz.U." / "aktualizuj Dz.U."
 ### TRYB TREŚĆ (tylko weryfikacja merytoryczna modułów)
 Wywołanie: "sprawdź czy moduł X wymaga aktualizacji po zmianie Y" / "zweryfikuj treść modułów po nowelizacji"
 → Faza 0 → Faza 3E bezpośrednio (pomija 3A–3D, wskazany akt/moduł podany przez użytkownika lub ostatni wpis MONITORING/mapa_dzu) → Faza 6 (skrócony, sekcja 4C) → Faza 7A.
+
+### TRYB HARMONOGRAM (pozycja 11 — zadanie cykliczne w Cowork)
+Wywołanie: "ustaw cotygodniowy audyt" / "zadanie cykliczne ISAP" / wybór pozycji 11 w menu
+→ FAZA 0C → `references/SCHEDULED-TASK-COWORK.md` (bez uruchamiania faz audytowych)
 
 ### TRYB WARN-CLOSE (zamknięcie ostrzeżeń)
 Wywołanie: "zamknij otwarte warningi" / "sprawdź WARN-X"
@@ -747,6 +849,76 @@ z WARN-OTWARTE.md, dodaj pełny wpis do AUDIT-JOURNAL.md.
     potwierdzenia, nie tylko nazwę domeny. Naruszenie (oznaczenie
     "zweryfikowane" na podstawie wyłącznie 1 źródła Rządu 3, lub bez
     wskazania Rzędu) = **WARN**.
+
+13. ⛔ **ZASADA LIMITU DŁUGOŚCI MODUŁU (dodana 2026-08-14, na żądanie
+    użytkownika) — moduł przekraczający 1000 linii MUSI zostać
+    podzielony wg rozdziałów aktu, który opisuje.**
+
+    **Kiedy sprawdzać:** (a) po KAŻDYM utworzeniu nowego modułu — `wc -l`
+    na plik zaraz po `create_file`, PRZED rejestracją w SKILL.md/mapie/
+    ROUTING-MAP; (b) po KAŻDYM rozbudowaniu istniejącego modułu (kolejna
+    sesja FAZA 3E, dopisanie nowego rozdziału/artykułów) — sprawdzić
+    długość PO edycji, nie tylko przy tworzeniu; (c) okresowo przy
+    audytach kompletności (np. razem z `check_rejestracja_modulow.py`)
+    jako dodatkowa kontrola dla modułów rozrastających się iteracyjnie
+    przez wiele sesji.
+
+    **Próg:** **1000 linii** (`wc -l`). Moduł ≤1000 linii — bez zmian,
+    zostaje jednym plikiem. Moduł >1000 linii — PODZIEL wg rozdziałów
+    aktu (nie wg arbitralnego przecięcia w połowie treści), analogicznie
+    do wzorca już stosowanego w systemie dla dużych kodeksów (np.
+    `mod-KW-art49-64-...`, `mod-KW-art70-118-...`,
+    `mod-KW-art119-131-...`, `mod-KK-art127-139-...` — każdy moduł
+    obejmuje spójny zakres rozdziałów/artykułów, nie cały kodeks
+    naraz).
+
+    **Zakres stosowania (doprecyzowane 2026-08-15n, po pełnym skanie
+    systemu ujawniającym pliki >1000 linii POZA katalogami `modules/`):**
+    - **OBJĘTE:** wszystkie pliki `modules/mod-*.md` w DR-01…DR-16 oraz
+      pliki merytoryczne w `shared/` opisujące jeden akt/jedną dziedzinę
+      (precedens: `ORKA-BAS-LEKSYKON.md`, `PORTALE-BRANZOWE-RZAD-2B.md`
+      już figurują w F-78).
+    - **DO ROZSTRZYGNIĘCIA (nie egzekwować bez decyzji użytkownika):**
+      pliki `SKILL.md` skilli-orchestratorów (`przesluchanie-swiadkow-v2-min90`
+      1809, `analizator-dowodow-v3` 1203, `audyt-systemu-v4` 1170 —
+      stan 2026-08-15n). Podział wg „rozdziałów aktu" nie ma tu
+      zastosowania (nie opisują aktu prawnego), a `SKILL.md` musi
+      pozostać JEDNYM plikiem wejściowym skilla — ewentualny zabieg to
+      wydzielenie sekcji do `modules/`, nie podział pliku.
+    - **WYŁĄCZONE TRWALE:** `references/AUDIT-JOURNAL.md` (40 483 linii
+      na 2026-08-15n) — dziennik przyrostowy, append-only, z definicji
+      rosnący; nie ma rozdziałów aktu, a podział zerwałby chronologię
+      i odesłania `AUDYT-YYYY-MM-DD` używane w całym systemie.
+      Analogicznie pozostałe rejestry historyczne (`mapa_dzu_*.md`).
+
+    **Jak dzielić:** (1) zidentyfikuj naturalne granice rozdziałów w
+    obrębie modułu (np. "Rozdział I", "Rozdział II" aktu źródłowego);
+    (2) pogrupuj rozdziały w 2+ nowe moduły tak, by każdy mieścił się
+    wygodnie poniżej progu, zachowując spójność tematyczną (nie dziel
+    W ŚRODKU pojedynczego rozdziału/artykułu); (3) każdy nowy plik
+    dostaje nazwę wzorowaną na istniejącej konwencji
+    (`mod-<KODEKS>-art<OD>-<DO>-<krotki-opis>.md`); (4) w PIERWSZYM
+    (najniższe numery artykułów) module dodaj sekcję "PODZIAŁ MODUŁU"
+    wskazującą pozostałe części i ich zakres; (5) zarejestruj WSZYSTKIE
+    nowe pliki osobno w SKILL.md/mapie/ROUTING-MAP (Reguła 2/3
+    HARDGATE) — podział zwiększa liczbę zarejestrowanych modułów, co
+    jest zamierzoną, uzasadnioną zmianą liczby plików w Regule 6/
+    ZASADA 7 KROK 1/4; (6) usuń oryginalny, zbyt długi plik dopiero PO
+    potwierdzeniu, że wszystkie nowe pliki poprawnie zastępują jego
+    treść (nic nie zgubione) — porównaj sumę linii nowych plików z
+    linią bazową oryginału jako grubą kontrolę kompletności.
+
+    **Uzasadnienie:** moduły >1000 linii utrudniają nawigację przy
+    `view` (truncation przy dużych plikach), zwiększają ryzyko
+    przypadkowego nadpisania fragmentu przy `str_replace` (niejednoznaczne
+    dopasowanie w długim pliku) i utrudniają utrzymanie spójności przy
+    częściowych aktualizacjach (łatwiej przeoczyć fragment do
+    zaktualizowania w rozdziale odległym od miejsca edycji).
+
+    Naruszenie (dostarczenie/pozostawienie modułu >1000 linii bez próby
+    podziału, lub podział w niewłaściwym miejscu przecinający rozdział)
+    = **WARN**, odnotować w WARN-OTWARTE.md z docelowym podziałem do
+    wykonania.
 
 ---
 

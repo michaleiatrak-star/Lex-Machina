@@ -51,11 +51,13 @@
 
 ### TYTUŁ IV — ŁĄCZENIE, PODZIAŁ I PRZEKSZTAŁCANIE SPÓŁEK (art. 491–584¹³)
 
+> ⚠️ **RAPORT ODŚWIEŻONY 2026-08-15v** — Działy I–III naprawione, patrz status poniżej.
+
 | Dział | Materia | Art. | Status | Moduł |
 |---|---|---|---|---|
-| I | Łączenie się spółek (w tym transgraniczne) | 491–527 | 🔴 Brak | całkowicie nieobecne — tylko ogólne wspomnienie "fuzja" w checkliście intake, bez żadnej treści proceduralnej |
-| II | Podział spółek | 528–550 | 🔴 Brak | tylko wzmianka "podział" w checkliście intake |
-| III | Przekształcenia spółek | 551–584 | 🔴 Brak | tylko wzmianka "przekształcenie" w checkliście intake |
+| I | Łączenie się spółek (w tym transgraniczne) | 491–527 | 🟢 NAPRAWIONE 2026-08-15v | sekcja "Łączenie, podział i przekształcanie spółek" w `mod-KSH-spolki-handlowe.md` dodaje: kto może się łączyć, dwie metody (przejęcie/nowa spółka), sukcesję uniwersalną (art. 494), dopłaty do 10%. Transgraniczne łączenie (Rozdz. 2¹) nadal bez szczegółowej treści |
+| II | Podział spółek | 528–550¹ | 🟢 NAPRAWIONE 2026-08-15v | dodano: kto podlega podziałowi, PIĘĆ sposobów podziału (⭐ w tym podział przez wyodrębnienie — nowość nowelizacji 15.09.2023, art. 529 § 1 pkt 5, poprzednio było ich cztery) |
+| III | Przekształcenia spółek | 551–595 | 🟡 Częściowo naprawione 2026-08-15v | dodano ogólną zasadę przekształcenia (art. 551) i przekształcenie przedsiębiorcy w spółkę kapitałową; szczegółowe wymogi proceduralne per typ przekształcenia (plan, sprawozdanie zarządu, badanie biegłego) nadal nieopracowane |
 | IV | Transgraniczny podział i przekształcenie | 584¹–584¹³ | 🔴 Brak | nieobecne |
 
 **Ocena Tytułu IV: 🔴 całkowity brak.** Cały tytuł (ok. 94 artykuły) istnieje w systemie wyłącznie jako trzy pojedyncze słowa w checkliście intake modułu głównego ("fuzja", "podział", "przekształcenie") — bez żadnej treści proceduralnej, mimo że to bardzo złożone i częste w praktyce M&A postępowania.
