@@ -1,21 +1,158 @@
 # WARN-OTWARTE — rejestr żywy otwartych flag audytowych
 
 **Plik:** `WARN-OTWARTE.md`
-**Opis:** Rejestr WYŁĄCZNIE otwartych flag audytowych (WARN numerowane +
-flagi strukturalne bez numeru). Zawiera TYLKO to, co jest jeszcze do
-zrobienia — bez narracji historycznej, bez wpisów o zamkniętych flagach.
-**Plik siostrzany:** `AUDIT-JOURNAL.md` — dziennik chronologiczny pełnej
-historii sesji (otwarcia, zamknięcia, naprawy, wnioski). Zamknięcie flagi
-NIE zostaje w tym pliku — trafia wyłącznie do AUDIT-JOURNAL jako część
-historii. Ten plik po zamknięciu flagi traci odpowiedni wiersz.
+**Zawiera:** WYŁĄCZNIE to, co jeszcze DO ZROBIENIA — bez narracji, bez opisów
+napraw już wykonanych, bez sekcji „zamknięte".
+**Plik siostrzany:** `AUDIT-JOURNAL.md` — pełna historia (odkrycia, naprawy,
+zamknięcia, wnioski). Nic z niego nie jest usuwane.
+**Ostatnia sesja:** 2026-08-17d (**F-91 ZAMKNIĘTA W CAŁOŚCI — 12/12 rozdziałów
+Prawa łowieckiego**: ostatni brakujący Rozdz. 11, art. 55-64, ZAMKNIĘTY nowym
+modułem `dr-09/mod-lowieckie-przepisy-przejsciowe-koncowe-derogacja.md`;
+⭐⭐⭐ rozstrzygnięty zakres numeracji oznaczony dotąd jako NIEPOTWIERDZONY —
+55-64, bez kolizji z Rozdz. 10; ⭐ cezura wejścia ustawy w życie 17.02.1996
+ustalona w Rządzie 1 (ELI Sejm); reszta punktów F-91 rozdzielona: część
+merytoryczna → nowa **F-93**, ogon punktowy → rejestr REACT-1 sekcja 4;
+zsynchronizowana centralna `prawo-polskie-v2/ROUTING-MAP.md` [REGUŁA 3]
+wraz z naprawą nieaktualnego wiersza katalogowego Rozdz. 6a);
+wcześniej 2026-08-17c (F-91 DALEJ ZAWĘŻONA — Rozdz. 4 działalność
+gospodarcza w zakresie łowiectwa, art. 17-22b, ZAMKNIĘTY: nowy moduł
+`dr-09/mod-lowieckie-dzialalnosc-gospodarcza-turystyka-obrot.md`; ⭐⭐⭐
+ustalenie strukturalne — art. 17, 19, 20 UCHYLONE; ⭐ rozstrzygnięta
+aktualna metryka Prawa przedsiębiorców — Dz.U. 2025 poz. 1480; **TYLKO
+Rozdz. 11 pozostaje** — po jego zamknięciu F-91 kwalifikuje się do
+zamknięcia w całości 12/12); wcześniej 2026-08-17b (F-91 DALEJ ZAWĘŻONA — Rozdz. 1-2 przepisy
+ogólne i organy administracji, art. 1-7, ZAMKNIĘTY: nowy moduł
+`dr-09/mod-lowieckie-przepisy-ogolne-organy-administracji.md`; ⛔⛔ KOREKTA
+ŹRÓDŁOWA KRYTYCZNA — art. 7: organ właściwy to samorząd województwa,
+NIE wojewoda, jak sugerowały nieaktualne źródła; zadanie propagacyjne do
+modułu kłusownictwo odnotowane); wcześniej 2026-08-17 (F-91 DALEJ ZAWĘŻONA — Rozdz. 3 zasady
+gospodarki łowieckiej, art. 8-16a, w tym 8a-8e, ZAMKNIĘTY: nowy moduł
+`dr-09/mod-lowieckie-zasady-gospodarki-lowieckiej-plany.md`; ⭐ przy okazji
+ROZSTRZYGNIĘTA metryka ustawy z 21.11.2025 o zdrowiu zwierząt — Dz.U. 2025
+poz. 1795 — nieustalona od sesji 16d, zadanie propagacyjne do modułu
+Rozdz. 8 pozostaje otwarte); wcześniej 2026-08-16g (F-91 DALEJ ZAWĘŻONA — Rozdz. 7 straż
+łowiecka, art. 36-41 w tym 38a, ZAMKNIĘTY: nowy moduł
+`dr-09/mod-lowieckie-straz-lowiecka-PSL-uprawnienia.md`; 🔴 przy okazji
+NAPRAWIONA LUKA WŁASNA — art. 42ab, pominięty w module Rozdz. 8 z sesji 16d
+mimo deklarowanego zakresu); wcześniej 2026-08-16f (Rozdz. 6 Prawa
+łowieckiego, art. 32-35a oraz **32b**, ZAMKNIĘTY: nowy moduł
+`dr-09/mod-lowieckie-PZL-kola-nadzor-ministra.md`; odkryto art. 32b spoza
+opisu zakresu rozdziału oraz nieopisaną wcześniej odpowiedzialność PZŁ za
+odszkodowania koła z art. 33 ust. 2a-2d); wcześniej 2026-08-16e (F-91 — **PUNKT 1
+priorytetowy ZAMKNIĘTY**: Rozdz. 6a odpowiedzialność dyscyplinarna,
+art. 35b-35t w całości — nowy moduł
+`dr-09/mod-lowieckie-odpowiedzialnosc-dyscyplinarna-PZL.md`; ⭐ korekta
+opisu samej flagi: odwołanie do sądu okręgowego wynika z art. 33 ust. 6,
+NIE z Rozdz. 6a; odnotowano brak art. 35q w numeracji ustawy);
+wcześniej 2026-08-16d (F-91 DALEJ ZAWĘŻONA — Rozdz. 8 Prawa
+łowieckiego, art. 42-45 poza 42aa ZAMKNIĘTY: nowy moduł
+`dr-09/mod-lowieckie-wykonywanie-polowania-uprawnienia.md`; odkryto
+częściowe dane o ustawie z 21.11.2025 o zdrowiu zwierząt — data
+potwierdzona, metryka Dz.U. nadal nieustalona); wcześniej 2026-08-16c
+(F-91 DALEJ ZAWĘŻONA — Rozdz. 5 Prawa
+łowieckiego, art. 23-31 ZAMKNIĘTY: nowy moduł
+`dr-09/mod-lowieckie-obwody-dzierzawa-odszkodowania.md`, priorytet art. 27b
+[oświadczenie o zakazie polowania] wg wskazania tablicy sterującej;
+zamyka też punkt odesłania z art. 48 pkt 7 modułu szkód łowieckich);
+wcześniej 2026-08-16b (F-91 ZAWĘŻONA — punkt 1 ZAMKNIĘTY: nowy
+moduł `dr-09/mod-szkody-lowieckie-szacowanie-odszkodowanie` pokrywa cały
+Rozdz. 9 Prawa łowieckiego, art. 46-50); wcześniej 2026-08-16 (audyt pokrycia
+prawa łowieckiego i ustawy
+o broni i amunicji — OTWARTE F-91 i F-92; naprawiono 6 błędów merytorycznych
+w `mod-lowiectwo-klusownictwo` [wersja 2.0] i utworzono
+`dr-13/mod-BronAmunU-pozwolenia-cofniecie-strzelnice`); wcześniej 2026-08-15nn
+(F-81 ZAMKNIĘTA W CAŁOŚCI — verbatim art.
+427 §2-3, 430-433, 435, 436 oraz brakujące artykuły biegli 197-199, 202-205
+uzupełnione; sekcja 2 modułu KPK ma teraz kompletny ciąg art. 193-206;
+`raport-pokrycia-KPK.md` usunięty); wcześniej 2026-08-15ll (F-28 ZAMKNIĘTA
+W CAŁOŚCI); wcześniej 2026-08-15kk (OBS-5 dodana); wcześniej 2026-08-15jj
+(F-28 pkt 5 ZAMKNIĘTY); wcześniej 2026-08-15ii (F-73 ZAMKNIĘTA W CAŁOŚCI);
+wcześniej 2026-08-15hh (F-73 częściowa naprawa, incydent i naprawa Reguły
+5); wcześniej 2026-08-15gg (F-28 pkt 3,4 ZAMKNIĘTE); wcześniej 2026-08-15ff
+(F-81 pkt 1 ZAMKNIĘTY); wcześniej 2026-08-15ee (F-81 pkt 4 ZAMKNIĘTY);
+wcześniej 2026-08-15dd (F-81 pkt 6 ZAMKNIĘTY); wcześniej 2026-08-15cc
+(F-88 częściowa naprawa — MDR); wcześniej 2026-08-15aa (F-36 ZAMKNIĘTA);
+wcześniej 2026-08-15z (sync ROUTING-MAP, nowy test T11, otwarta F-89);
+wcześniej 2026-08-15y (F-24 ZAMKNIĘTA, F-82 zawężona do 1 punktu);
+wcześniej 2026-08-15x (F-85 ZAMKNIĘTA, F-88 otwarta); porządkowanie
+rejestru: 2026-08-15w — pełna treść sprzed porządkowania zarchiwizowana
+verbatim w `AUDIT-JOURNAL.md`, wpis `AUDYT-2026-08-15w`.
 
-> **Zasada podziału (wprowadzona 2026-07-07, ZASADA 10 w SKILL.md):**
-> - Otwarcie nowej flagi → dodaj wiersz TUTAJ + wpis w AUDIT-JOURNAL.md.
-> - Zamknięcie flagi → USUŃ wiersz STĄD + odnotuj zamknięcie WYŁĄCZNIE
->   w AUDIT-JOURNAL.md (z pełnym opisem naprawy, jak dotychczas).
-> - Ten plik nie rośnie w nieskończoność — to jest "TODO", nie archiwum.
-> - Przed odpowiedzią na pytanie "co jest jeszcze otwarte" / "czy wszystkie
->   WARN zamknięte" — czytaj TEN plik, nie grepuj całego AUDIT-JOURNAL.md.
+> **Zasada podziału (ZASADA 10 w SKILL.md):**
+> - Otwarcie flagi → wiersz TUTAJ + wpis w `AUDIT-JOURNAL.md`.
+> - Zamknięcie flagi → USUŃ wiersz STĄD + pełny opis naprawy WYŁĄCZNIE w dzienniku.
+> - Naprawa CZĘŚCIOWA → NIE opisuj jej tutaj; skróć wiersz do tego, co ZOSTAŁO,
+>   a opis wykonanej części zapisz w dzienniku. Ten plik nie jest kroniką postępu.
+> - Pytanie „co jest otwarte" → czytaj TEN plik, nie grepuj dziennika.
+
+---
+
+## ⚡ TABLICA STERUJĄCA — CO JEST DO ZROBIENIA (czytaj to najpierw)
+
+**Stan na 2026-08-17d:** WARN numerowanych otwartych: **0** (WARN-1…WARN-29
+zamknięte). Flag F- otwartych: **32** — w tym **28 wykonalnych sesją audytową**
+i **4 zależne od dewelopera/środowiska**. Ponadto: 3 flagi permanentne (MON),
+5 pozycji obserwowanych (OBS), **8 pozycji reaktywnych (REACT-1)**, 2 obserwacje (O).
+
+> ℹ️ **Bilans zmiany 2026-08-17d:** F-91 ZAMKNIĘTA (pokrycie Prawa łowieckiego
+> 12/12 rozdziałów), w jej miejsce otwarta **F-93** (merytoryczne pozostałości
+> po F-91, głównie odesłania do ustawy o środkach przymusu bezpośredniego
+> i 2 zadania propagacyjne) → liczba flag F- BEZ ZMIANY (32). Punktowy ogon
+> F-91 (metryki rozporządzeń, orzecznictwo, detale modułowe) zmigrowany do
+> rejestru REACT-1 w sekcji 4: 7 → **8 pozycji**.
+
+⛔ **PRZED jakąkolwiek edycją skilla przeczytaj blok HARDGATE-AUDYT niżej.**
+
+### A. WYKONALNE SESJĄ AUDYTOWĄ — kolejność wg priorytetu
+
+| Flaga | Prio | Dziedzina | Następny krok (jedno zdanie) |
+|---|---|---|---|
+| F-93 | średni-wysoki | dr-09 (+styk dr-13, dr-03) | Następca merytoryczny zamkniętej F-91: ⛔ PRIORYTET — odczytać ze źródła art. 11, 12, 45, 47 ustawy z 24.05.2013 o środkach przymusu bezpośredniego i broni palnej (odesłania z art. 39 ust. 3-4 i art. 40 ust. 1 pkt 1 Prawa łowieckiego — bez tego nie da się ocenić legalności użycia przymusu przez strażników; styk z F-92); dalej: treść art. 42ab ust. 4-5 (tryb sprzeciwu właściciela gruntu); 2 zadania propagacyjne (metryka Dz.U. 2025 poz. 1795 → moduł Rozdz. 8; rozróżnienie 2 wariantów kłusownictwa z art. 4 ust. 3 → mod-lowiectwo-klusownictwo); weryfikacja w ISAP rozbieżności brzmienia art. 22 ust. 1 pkt 2; kontrola nowelizacji po t.j. 2025.539 |
+| F-92 | średni | dr-13 (BrońAmunU) | Potwierdzić t.j. 2024.485 w ISAP ręcznie; rozwinąć Rozdz. 3 (34-44a) ze szkicu; rozporządzenia wykonawcze |
+| F-89 | średni-wysoki | cross (16 DR) | Przejrzeć 205 pozycji z testu T11 — akty obecne w jednym rejestrze, brakujące w innych |
+| F-88 | średni-wysoki | cross (7 DR) | MDR zrobiony (dr-06 sekcja 6a) — zostało: doprecyzować katalog wyłączeń podatkowych MDR + 15 pozostałych obszarów (KKS, VAT, akcyza, PIT, opłata skarbowa, doradztwo podatkowe, prawo bankowe, SKOK, fundusze inwestycyjne, instrumenty finansowe, ubezpieczenia, adwokatura, radcowie, rzecznicy patentowi, sądy administracyjne) |
+| F-74 | średni-wysoki | dr-09 (PrBud) | Rozdz. 3 (17–27a), Rozdz. 8 PINB/WINB (80–89c), Rozdz. 9 karne (90–94) |
+| F-87 | średni | dr-02 (PrRestr) | Nadzorca/zarządca (23–64), potem wierzyciele i spis wierzytelności (65–139) |
+| F-65 | średni | cross (KPC) | Sprawy spadkowe w nieprocesie (680–691), potem prekluzja (205¹–205¹²) |
+| F-64 | średni | dr-05 (PPSA) | Sprzeciw od decyzji (64a–64e), wznowienie sądowoadministracyjne (270–285) |
+| F-68 | średni | dr-02 (KSH) | Spółki osobowe (22–66, 102–124), rada nadzorcza sp. z o.o. (212–226) |
+| F-70 | średni | dr-06 (OP) | Kontrola podatkowa (281–292), czynności sprawdzające (272–280) |
+| F-71 | średni | dr-07 (PZP) | Otwarcie i badanie ofert, przebieg postępowania przed KIO (531–568a) |
+| F-75 | średni | dr-03 (KKW) | Prawa i obowiązki skazanego (101–120), kary dyscyplinarne (142–149) |
+| F-60 | średni | dr-14 | Konwencje wiedeńskie 1961/1963 — nowy moduł lub rozszerzenie mod-ONZ |
+| F-61 | średni | dr-14 (+dr-05) | Konwencja genewska 1951 + Protokół 1967 — fundament traktatowy |
+| F-13 | średni | cross | Zażalenie poziome/pionowe — statyczne pokrycie ~58 plików, DR-02 i DR-03 najpierw |
+| F-19 | średni | dr-06 (VAT) | Zweryfikować 5 pozycji orzeczniczych (a)–(e) przez orzeczenia-sadowe-v2 / EUREKA |
+| F-18 | średni | dr-06 (VAT) | Potwierdzić w ISAP brzmienie przepisów wpisanych ze ŹRÓDŁA-3 |
+| F-79 | średni | cross | Zdobyć tekst ustawy 473/2026 i ustalić zakres zmian w KSCU oraz Ordynacji |
+| F-78 | średni | cross | Podzielić 10 modułów >1000 linii, zaczynając od 2084-liniowego |
+| F-83 | średni | audyt-systemu-v4 | Zbudować mapy pokrycia (format → zasilenie z 12 raportów) i odblokować § 3 |
+| F-40 | średni | dr-09 | FAZA 3E treści 3 modułów po korekcie numerów |
+| F-49 | niski-średni | dr-11 | FAZA 3E treści 3 modułów + mylące nazwy plików |
+| F-45 | niski-średni | dr-10 | FAZA 3E treści 3 modułów |
+| F-86 | bardzo niski | dr-02 (PrUp) | Układ w upadłości (267–305), likwidacja masy (306–334) |
+| F-48 | niski | dr-11 | Rozbudować STUB certyfikacji cyberbezpieczeństwa, gdy przepisy wejdą w życie |
+| F-5 | niski | dr-06 | Moduł ESAP — dopiero gdy pojawi się sprawa z rynku kapitałowego |
+| F-82 | informacyjny | cross | ZOSTAŁ 1 punkt: skan mapy Dz.U. pod kątem numerów nigdy niepotwierdzonych źródłem zewnętrznym |
+| F-90 | średni | dr-02 (UZNK) | Rozdz. 2 art. 5-10, 15a-17h (13 z 24 czynów nieopisanych); Rozdz. 3 art. 19, 21-22; Rozdz. 4 cały (art. 23-27, przepisy karne) |
+
+### B. ZALEŻNE OD DEWELOPERA / ŚRODOWISKA — sesja audytowa ICH NIE ZAMKNIE
+
+| Flaga | Prio | Zakres | Kto musi wykonać |
+|---|---|---|---|
+| F-8 | średni | Podłączenie realnego connectora MCP do api.sejm.gov.pl | Deweloper w środowisku z dostępem do domen .gov.pl |
+| F-10 | średni | Uruchomienie `sync_dzu_eli.py` wobec żywego ELI API | j.w. |
+| F-11 | średni | Uruchomienie `extract_api_verification_log.py` na prawdziwej odpowiedzi API | Deweloper |
+| F-9 | niski | Wdrożenie konwencji znacznika `AUDIT_EVENT` w prompcie portalu | Zespół portalu (poza silnikiem) |
+
+### C. POZOSTAŁE REJESTRY W TYM PLIKU
+
+| Rejestr | Czym jest | Czy liczy się do „flag do zamknięcia" |
+|---|---|---|
+| MON-1, MON-2, MON-3 | Mechanizmy monitorowania — permanentne | ⛔ NIE — nigdy nie zamykane |
+| OBS-1…OBS-5 | Projekty ustaw w toku, śledzone proaktywnie | ⛔ NIE — dopóki nieuchwalone |
+| REACT-1 (7 pozycji) | Punkty uruchamiane wyłącznie sprawą klienta | ⛔ NIE — brak sesji, która je zamknie |
+| O-1, O-2 | Obserwacje informacyjne | ⛔ NIE |
 
 ---
 
@@ -117,43 +254,98 @@ w SKILL.md są bardziej ogólne/międzysesyjne).*
 
 ---
 
+## 1. FLAGI F- OTWARTE — SZCZEGÓŁY
 
+> Kolumna „Pozostały zakres" zawiera WYŁĄCZNIE to, czego jeszcze NIE zrobiono.
+> Historia napraw częściowych — w `AUDIT-JOURNAL.md` pod wskazanym wpisem.
 
-**WARN numerowane otwarte: 0.** Wszystkie WARN-1 do WARN-29 zamknięte —
-pełna historia w `AUDIT-JOURNAL.md`, wpisy AUDYT-2026-07-07a i 07-07b.
+### 1A. Luki treściowe w aktach prawnych (raporty pokrycia 2026-08-13)
 
-**Flagi strukturalne bez numeru WARN — otwarte:**
+| # | Pozostały zakres — DO ZROBIENIA | Skill | Prio | Otwarta od | Historia / źródło |
+|---|---|---|---|---|---|
+| F-64 | PPSA: sprzeciw od decyzji (64a–64e); wznowienie postępowania sądowoadministracyjnego (270–285); posiedzenia sądowe (90–114); orzeczenia poza wąskim wycinkiem (132–144) | dr-05 | średni | 2026-08-13 | `raporty-pokrycia-2026-08-13/raport-pokrycia-PPSA.md` |
+| F-65 | KPC Księga II: spadkowe (680–691) ⚠️ priorytet, rzeczowe (zasiedzenie, zniesienie współwłasności, rozgraniczenie), wieczystoksięgowe, ubezwłasnowolnienie (544–560¹²), depozyt sądowy (692–693¹⁷), pełny katalog 519¹. Księga I: organizacja postępowania/prekluzja (205¹–205¹²), sprawy gospodarcze (458¹–458¹³), ograniczenia egzekucji (829, 833), egzekucja świadczeń niepieniężnych/eksmisja (1041–1059), alimenty (1081–1088), skarga kasacyjna (398¹–398²¹), zażalenie, wznowienie | cross: dr-02, dr-05, dr-12, dr-16 | średni | 2026-08-13 | raport KPC; naprawy: AUDYT-2026-08-14 i 08-14d |
+| F-68 | KSH: Tytuł I i II — spółki osobowe (22–66, 102–124) praktycznie zerowe; Rozdz. 3 Oddz. 2 — nadzór/rada nadzorcza (212–226); Dział Ia (PSA) i Dział II (S.A.) prawie puste (339 art.); Dział IV Tytułu IV — podział/przekształcenie transgraniczne (584¹–584¹³) całkowicie pusty. Dodatkowo: odświeżyć raport pokrycia co do Tytułu IV; ⚠️ `mod-KSH-spolki-handlowe.md` = 850 linii, przy dalszej rozbudowie wydzielić moduł (ZASADA 13) | dr-02 | średni | 2026-08-13 | raport KSH; naprawy: 2026-08-14 i AUDYT-2026-08-15v(7) |
+| F-70 | Ordynacja podatkowa: Dział VI — kontrola podatkowa (281–292); Dział V — czynności sprawdzające (272–280) | dr-06 | średni | 2026-08-13 | raport OP; naprawa: AUDYT-2026-08-14 |
+| F-71 | PZP: otwarcie i badanie ofert krok po kroku; Dział IX — przebieg postępowania przed KIO (531–568a); Dział IV — instrumenty szczególne (311–361) | dr-07 | średni | 2026-08-13 | raport PZP; naprawa: AUDYT-2026-08-14 |
+| F-74 | PrBud: Rozdz. 3 — uczestnicy procesu budowlanego (17–27a, temat zadeklarowany bez treści); Rozdz. 8 — organy PINB/WINB (80–89c); Rozdz. 9 — przepisy karne (90–94); zero treści także w Rozdz. 5/5a/5d (rozpoczęcie robót, dziennik budowy, książka obiektu), Rozdz. 7 (katastrofa budowlana), Rozdz. 10 (odpowiedzialność zawodowa) | dr-09 | średni-wysoki | 2026-08-13 | raport PrBud |
+| F-75 | KKW: Oddz. 4 — prawa i obowiązki skazanego (101–120); Oddz. 9 — kary dyscyplinarne (142–149); Rozdz. IV — postępowanie wykonawcze (9–31); Rozdz. XI — dozór kuratora (169–178a); środki karne i kompensacyjne (179–223n) | dr-03 | średni | 2026-08-13 | raport KKW; naprawa: AUDYT-2026-08-14 |
+| F-86 | PrUp — pozostałe: układ w upadłości (267–305); likwidacja masy (306–334); zakończenie i umorzenie postępowania (361–372); postępowanie międzynarodowe (378–417); postępowania szczególne wobec banków/ubezpieczycieli/deweloperów (418–425+). Dodatkowo: odświeżyć raport pokrycia co do 4 naprawionych sekcji | dr-02 | bardzo niski | 2026-08-15v | raport PrUp-PrRestr sekcja 1 (⚠️ nieaktualny); naprawy: AUDYT-2026-08-15v(3)–(6) |
+| F-87 | PrRestr — pozostałe: przepisy ogólne i podstawy otwarcia (1–13); sąd i sędzia-komisarz (14–22); nadzorca i zarządca z perspektywy PrRestr (23–64); uczestnicy, spis wierzytelności, rada wierzycieli (65–139); pomoc publiczna (139a–149); układ częściowy (180–188); przepisy ogólne o postępowaniu (189–209); postępowanie międzynarodowe (335–380); postępowania odrębne (381–433). Dodatkowo: odświeżyć raport co do Działu VI i Tytułu II | dr-02 | średni | 2026-08-15v | raport PrUp-PrRestr sekcja 2 (⚠️ nieaktualny); naprawy: AUDYT-2026-08-14 i 08-15v(2) |
+| F-90 | **Mapa pokrycia UZNK (ustawa o zwalczaniu nieuczciwej konkurencji, Dz.U. 2026.85 t.j.) — moduł `mod-ustawa-UZNK-nieuczciwa-konkurencja.md` opisuje tylko 8 z 24+ artykułów merytorycznych.** Ustalona 2026-08-15 przy okazji sesji F-36 (na żądanie użytkownika), NIE jest częścią raportów pokrycia 2026-08-13. Struktura ustawy (lexlege.pl, arslege.pl, standardyprawa.pl, isap.sejm.gov.pl — zgodne): Rozdz. 1 Przepisy ogólne (1-4) — **PEŁNE** (art. 1-3 opisane pośrednio przez FAZA 0/katalog, art. 4 wzajemność cudzoziemców nieopisany, drobne). Rozdz. 2 Czyny nieuczciwej konkurencji (5-17h) — **CZĘŚCIOWE**: opisane art. 11 (tajemnica), 12 (nakłanianie), 13 (naśladownictwo), 14 (pomawianie/nieprawdziwe wiadomości), 15 (utrudnianie dostępu do rynku); **BRAK CAŁKOWITY**: art. 5 (mylące oznaczenie przedsiębiorstwa), 6-7 (spory o oznaczenie przy nazwisku/przekształceniu), 8-10 (fałszywe oznaczenie geograficzne i towarów — częsty temat w praktyce gospodarczej), 15a (przekupstwo osoby pełniącej funkcję publiczną), 15b (urządzenia niedozwolone dostępu warunkowego), 15c (odesłanie do praktyk ograniczających konkurencję z u.o.k.k.), 16 (nieuczciwa/zakazana reklama — WYSOKA częstość praktyczna, moduł go nie ma mimo że katalog wspomina "wprowadzanie w błąd... reklama porównawcza" przy art. 14/16 łącznie, myląc dwa odrębne czyny), 17 (system konsorcyjny), 17a-17c (premie, sprzedaż lawinowa), 17d (sieci dyskontowe), 17e-17h (usługi pośrednictwa internetowego, rozp. UE 2019/1150 — nowa, aktywna regulacja). Rozdz. 3 Odpowiedzialność cywilna (18-22) — **CZĘŚCIOWE**: art. 18 (katalog roszczeń) i art. 20 (przedawnienie, już raz naprawiony w FAZA 3E 2026-07-27) opisane; **BRAK**: art. 18a (ciężar dowodu), 19-19a (legitymacja organizacji/stowarzyszeń przy art. 17h), 21-22 (postępowanie zabezpieczające, bezzasadne powództwo — praktycznie ważne dla obrony pozwanego). Rozdz. 3a uchylony — pominąć trwale. Rozdz. 4 Przepisy karne (23-27) — **BRAK CAŁKOWITY**: art. 23 (karalne ujawnienie tajemnicy przedsiębiorstwa — do 2 lat, kwalifikowany do 3 przy działaniu na szkodę), 24 (karalne naśladownictwo/kopiowanie), 24a (organizowanie sprzedaży lawinowej — do 8 lat, istotne dla kwalifikatora karnego), 24b uchylony, 25 (fałszywe oznaczenie towarów), 26-27 (pozostałe typy). ⭐ Priorytet: art. 16 (reklama) i Rozdz. 4 (przepisy karne, zwłaszcza 23/24a z wysokim zagrożeniem karnym) — najwyższa praktyczna użyteczność dla praktyki mieszanej cywilno-karnej kancelarii | dr-02 | średni | 2026-08-15 | ustalone przez web_search wieloźródłowy (lexlege.pl, arslege.pl, standardyprawa.pl, infor.pl, prawo.pl, isap.sejm.gov.pl) w sesji F-36; NIE jest częścią raportów pokrycia 2026-08-13, więc nie ma odpowiadającego pliku w `raporty-pokrycia-2026-08-13/` |
 
-| # | Flaga | Skill / dziedzina | Priorytet | Otwarta od | Opis | Wymaga |
-|---|---|---|---|---|---|---|
-| F-5 | Ustawa ESAP (Dz.U. 2026 poz. 644) skatalogowana, bez modułu dedykowanego | dr-06-podatki-finanse-publiczne-aml | niski | 2026-07-07 (próba weryfikacji 2026-08-05: BEZ ROZSTRZYGNIĘCIA — wyszukiwanie znalazło głównie materiał o obowiązkach sprawozdawczych sektora finansowego wobec ESAP, BEZ jednoznacznego potwierdzenia konkretnego zakresu zmiany w samym KSH; NIE zgadywano odpowiedzi) | Omnibus ~17 ustaw sektora finansowego (rachunkowość, KRS, fundusze emerytalne, Prawo bankowe, KSH incydentalnie, oferta publiczna, obrót instrumentami finansowymi, ubezpieczenia, BFG, biegli rewidenci) — niska aktywność tematyczna w typowych sprawach systemu. UWAGA (2026-07-15): przy okazji naprawy F-6 nie udało się jednoznacznie potwierdzić źródłowo, na czym polega dotknięcie KSH przez tę ustawę — wymaga odrębnej weryfikacji, jeśli temat stanie się aktywny | Moduł dedykowany tylko jeśli sprawy z zakresu rynku kapitałowego/nadzoru finansowego staną się aktywne; przy tej okazji też zweryfikować konkretny zakres zmiany w KSH |
-| F-8 | Żaden realny connector MCP nie jest podłączony do rozmów silnika — protokół (shared/MCP-INTEGRACJA.md) i logika klasyfikacji przetestowane w pełni, w tym od 2026-07-13h realnym serwerem referencyjnym (isap-eli-example) zweryfikowanym prawdziwym klientem MCP przez stdio, ale bez podłączenia w środowisku produkcyjnym i bez testu wobec żywego api.sejm.gov.pl | shared/MCP-INTEGRACJA.md, shared/tools/mcp-servers/isap-eli-example | średni | 2026-07-13 (zaktualizowana 2026-07-13b, 2026-07-13f, 2026-07-13h) | `test_mcp_protocol.py` (6 testów), `connector_health_check.py --self-test` (mock-serwer) — PASS. Od 2026-07-13h: `isap-eli-example/test_protokol_mcp.mjs` — prawdziwy klient MCP (`@modelcontextprotocol/sdk`) połączył się z serwerem przez stdio, wykonał handshake, `tools/list`, `tools/call` — PASS, `isap_lookup` poprawnie zwrócił ERROR przy braku dostępu sieciowego do domen .gov.pl (środowisko audytowe nie ma tego dostępu). Pozostaje: (a) wdrożenie tego lub innego connectora w środowisku developera z dostępem do api.sejm.gov.pl, (b) weryfikacja realnego kształtu odpowiedzi JSON, (c) podłączenie w klencie MCP (Claude Desktop/Code) | Developer uruchamia `npm install && node test_protokol_mcp.mjs` w `shared/tools/mcp-servers/isap-eli-example/`, potwierdza kształt odpowiedzi API, podłącza serwer w konfiguracji klienta MCP |
-| F-9 | audit-trail-portal-v1 to specyfikacja + referencyjne skrypty, konwencja znacznika AUDIT_EVENT nie wdrożona w żadnym prawdziwym prompcie portalu | audit-trail-portal-v1 | niski (odpowiedzialność poza silnikiem) | 2026-07-13 (zaktualizowana 2026-07-13b) | `hash_chain_verify.py`, `append_event.py` (self-test + test integracyjny append→verify na wspólnym pliku) i `router_event_parser.py` (self-test na 4 znacznikach, 2 poprawne/2 celowo błędne) przechodzą w całości. Pozostaje: (a) wdrożenie konwencji znacznika w system promptcie portalu, (b) podłączenie parsera do realnego przepływu odpowiedzi routera, (c) polityka retencji logu | Portal implementuje konwencję znacznika + podłącza pipeline zapisu wg DOKUMENTACJA-WDROZENIOWA-2026-07-13.md, sekcja 3 |
-| F-10 | sync_dzu_eli.py nie przetestowany wobec żywego Sejm ELI API | sync-dzu-automatyczny-v1 | średni | 2026-07-13 (zaktualizowana 2026-07-13b) | Logika parsowania mapy, budowy raportu ORAZ pełny przepływ end-to-end (pobierz→porównaj→raport) przetestowane przez `mock_eli_server_test.py` wobec lokalnego mock-serwera HTTP symulującego Sejm ELI — wszystko przechodzi poprawnie. Dodano też `bootstrap_last_sync_date.py` (idempotentna inicjalizacja stanu, przetestowana). Jedyny pozostały krok: zweryfikować, czy PRAWDZIWE api.sejm.gov.pl ma dokładnie taki kształt odpowiedzi (endpoint/pola JSON) jak założono — środowisko audytowe nie ma dostępu do domen .gov.pl | Developer uruchamia sync_dzu_eli.py wobec żywego API, koryguje `pobierz_nowe_pozycje_eli()` jeśli kształt się różni |
-| F-11 | extract_api_verification_log.py zakłada kształt bloków server_tool_use/*_tool_result wg dokumentacji, nie wobec realnej odpowiedzi API | shared/tools | średni | 2026-07-13d | Logika ekstrakcji przetestowana w pełni na danych syntetycznych (self-test + test end-to-end na fixture `konwersacja_api_przyklad.json` → poprawne 2/4 dopasowania na realnym przykładowym piśmie systemu). Format bloków content[] nie był nigdy skonfrontowany z prawdziwą odpowiedzią Claude API z tego środowiska (sandbox audytowy nie wywołuje API bezpośrednio w ten sposób) | Developer zapisuje jedną prawdziwą odpowiedź API z wywołaniami web_search/web_fetch i uruchamia `extract_api_verification_log.py` wobec niej jako pierwszy test integracyjny przed produkcją |
-| F-13 | Rozróżnienie zażalenie poziome/pionowe — CZĘŚCIOWO naprawione 2026-07-25d: (a) utworzono `shared/ZAZALENIE-ADRESAT-GATE.md` jako HARD GATE, zarejestrowaną w pisma-proste-v2 (KROK 9d) i pisma-procesowe-v3 (sekwencja W2) — wymusza weryfikację adresata przy KAŻDYM piśmie zawierającym środek zaskarżenia, niezależnie od tego, co mówi moduł dziedzinowy; (b) konkretne poprawki treściowe w 7 plikach (MOD-PRAWO.md, mod-UPEA, 3× engines, mod-KSCU, mod-UODO). **NIE zrobiono:** indywidualnej adnotacji pozostałych ok. 58 z 69 plików wspominających "zażalenie" w DR-02, 03, 06-10, 13-16 — te polegają WYŁĄCZNIE na bramce ogólnej, nie na specyficznej wiedzy dziedzinowej wpisanej do pliku | cały system | średni (obniżony z wysokiego — mechanizm systemowy teraz istnieje) | 2026-07-25 (zaktualizowana 2026-07-25d) | Bramka wymusza weryfikację NA BIEŻĄCO przy generowaniu pisma — nie eliminuje ryzyka błędu w SAMEJ tabeli DR-xx, tylko dodaje krok kontrolny przed wydaniem pisma. To złagodzenie ryzyka, nie zamknięcie luki źródłowej w każdym pliku | Jeśli zależy na pełnym pokryciu STATYCZNYM (nie tylko przez bramkę): przejść przez pozostałe ok. 58 plików per dziedzina, w kolejności wg aktywności spraw — DR-02 (cywilne) i DR-03 (karne) najpierw jako najczęściej używane |
+### 1B. Luki strukturalne i treściowe poza raportami pokrycia
 
-| F-18 | Znaczniki weryfikacji w nowych sekcjach modułu VAT oparte na ŹRÓDLE-3 (web-fallback), nie na ISAP/ELI — `isap.sejm.gov.pl` blokuje `web_fetch` (ROBOTS_DISALLOWED), a `api.sejm.gov.pl/eli/.../text.pdf` dla ustawy o VAT to dokument 228-stronicowy, niemożliwy do odczytu fragmentarycznego dostępnymi narzędziami | dr-06-podatki-finanse-publiczne-aml | średni | 2026-08-12 | Treść przepisów pobrano z serwisu reprodukującego tekst jednolity Dz.U.2025.0.775 (stan na 12.08.2026), krzyżowo potwierdzoną w 2-4 niezależnych źródłach na przepis. Każda nowa sekcja nosi `✅ [VER: ...]` + `⚠️ [ZALECANA WERYFIKACJA ISAP]` zgodnie z procedurą ŹRÓDŁO-3 z PRAWO-HARDGATE. To NIE jest naruszenie hard gate'u (przepisy NIE pochodzą z pamięci modelu), ale poziom pewności jest niższy niż przy ŹRÓDLE-0/1 | Przed użyciem którejkolwiek nowej sekcji w piśmie procesowym — potwierdzić brzmienie powoływanej jednostki redakcyjnej w ISAP lub LEX/Legalis. Docelowo: rozwiązać problem fragmentarycznego odczytu dużych aktów przez ELI (np. przez konektor MCP z flagi F-8) |
-| F-19 | Dług weryfikacyjny orzeczeń w nowych modułach VAT (iteracje VI-VII): kilka orzeczeń i interpretacji wskazano BEZ ustalonej albo BEZ zweryfikowanej u źródła sygnatury | dr-06-podatki-finanse-publiczne-aml | średni | 2026-08-12 | Pozycje: (a) TSUE ws. niezgodności art. 52 ust. 1 ustawy o VAT (warunek „odbiorcy przebywającego na terytorium kraju") — sygnatura NIEUSTALONA; (b) TSUE ws. przekazania środków z rachunku VAT na wniosek syndyka masy upadłości — sygnatura NIEUSTALONA; (c) linia NSA ws. fakultatywności decyzji o pozbawieniu prawa do art. 33a na 36 miesięcy — NIEZWERYFIKOWANA; (d) WSA w Łodzi I SA/Łd 190/20 i I SA/Łd 417/20 (charakter czynności wykreślenia z art. 96 ust. 9) — podane za źródłem RZĄD 2, NIEZWERYFIKOWANE u źródła; (e) interpretacje KIS 0114-KDIP1-3.4012.200.2019.2.JF oraz 0114-KDIP1-2.4012.141.2025.1.RM — podane za źródłem wtórnym. ⭐ ŁAGODZENIE: każda z tych pozycji jest w module opatrzona wyraźnym zakazem powoływania bez uprzedniej weryfikacji przez orzeczenia-sadowe-v2 / EUREKA — ryzyko wprowadzenia błędnej sygnatury do pisma jest zablokowane bramką, ale nie u źródła | Sesja dedykowana: przejść pozycje (a)-(e) przez `orzeczenia-sadowe-v2` (orzeczenia.nsa.gov.pl, curia.europa.eu, EUREKA), ustalić sygnatury i tezy, wpisać do modułów albo USUNĄĆ odesłanie, jeśli orzeczenie nie zostanie potwierdzone |
+| # | Pozostały zakres — DO ZROBIENIA | Skill | Prio | Otwarta od | Historia / źródło |
+|---|---|---|---|---|---|
+| F-5 | Moduł dedykowany ustawie ESAP (Dz.U. 2026 poz. 644) — omnibus ~17 ustaw sektora finansowego. Przy tej okazji ustalić, na czym polega dotknięcie KSH (dwie próby bez rozstrzygnięcia: 2026-07-15, 2026-08-05). ⚠️ Uruchamiać wyłącznie, gdy pojawi się sprawa z rynku kapitałowego/nadzoru finansowego | dr-06 | niski | 2026-07-07 | AUDIT-JOURNAL 2026-07-15, 2026-08-05 |
+| F-13 | Zażalenie poziome vs pionowe — indywidualna adnotacja pozostałych ~58 z 69 plików wspominających „zażalenie" (DR-02, 03, 06–10, 13–16). Kolejność wg aktywności spraw: DR-02 i DR-03 najpierw. ⭐ Bramka `shared/ZAZALENIE-ADRESAT-GATE.md` już działa i wymusza weryfikację adresata przy każdym piśmie — to złagodzenie ryzyka, nie zamknięcie luki statycznej | cały system | średni | 2026-07-25 | naprawa częściowa: 2026-07-25d |
+| F-18 | Potwierdzić w ISAP lub LEX/Legalis brzmienie jednostek redakcyjnych VAT wpisanych ze ŹRÓDŁA-3 (web-fallback) przed użyciem którejkolwiek w piśmie. Docelowo rozwiązać fragmentaryczny odczyt dużych aktów przez ELI — zależność od F-8 | dr-06 | średni | 2026-08-12 | sekcje noszą `✅ [VER]` + `⚠️ [ZALECANA WERYFIKACJA ISAP]` |
+| F-19 | Ustalić i zweryfikować sygnatury: (a) TSUE — art. 52 ust. 1 VAT, warunek odbiorcy w kraju; (b) TSUE — środki z rachunku VAT na wniosek syndyka; (c) linia NSA — fakultatywność pozbawienia prawa z art. 33a na 36 mies.; (d) WSA Łódź I SA/Łd 190/20 i 417/20; (e) interpretacje KIS 0114-KDIP1-3.4012.200.2019.2.JF i 0114-KDIP1-2.4012.141.2025.1.RM. Ścieżka: orzeczenia-sadowe-v2 (NSA, curia.europa.eu, EUREKA) → wpisać albo USUNĄĆ odesłanie | dr-06 | średni | 2026-08-12 | ⭐ każda pozycja ma w module zakaz powoływania bez weryfikacji |
+| F-40 | DR-09, FAZA 3E treści po korekcie numerów: (1) `mod-PrGeodezyjne-kartografia-wywlaszczenia.md`; (2) `mod-UGN-gospodarka-nieruchomosciami.md`; (3) `mod-prawo-geologiczne-gornicze.md` | dr-09 | średni | 2026-07-02 | — |
+| F-45 | DR-10, FAZA 3E treści: (1) GIS w `mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny.md`; (2) Prawo oświatowe w `mod-ustawa-oswiata-szkolnictwo-wyzsze.md`; (3) `mod-ustawa-edukacja-specjalna-dostepnosc.md` — ten sam błędny numer źródłowy 2022.2240 co w dawnej F-31. ⛔ KOREKTA 2026-08-15w: F-31 jest ZAMKNIĘTA (2026-08-14o) — punkt (3) naprawiać samodzielnie, nie „razem z F-31" | dr-10 | niski-średni | 2026-07-02 | naprawa części rejestracyjnej: 2026-08-13 |
+| F-48 | Rozbudować `mod-ustawa-certyfikacja-cyberbezpieczenstwa.md` (uczciwie oznaczony STUB) — dopiero gdy przepisy wejdą w życie. Akt bazowy Dz.U. 2025 poz. 1017 potwierdzony | dr-11 | niski | 2026-06-05 | naprawa mapy RODO: 2026-08-14b |
+| F-49 | DR-11, FAZA 3E treści: (1) `mod-PrTelekom-poczta-UKE.md` — ⚠️ nazwa myląca; (2) `mod-ustawa-informatyzacja-podmiotow-publicznych.md`; (3) `mod-ustawa-podpis-elektroniczny.md` — eIDAS 2.0 w toku | dr-11 | niski-średni | 2026-07-02 | naprawa sprzecznej notatki: 2026-08-13 |
+| F-60 | Konwencje Wiedeńskie o stosunkach dyplomatycznych (1961) i konsularnych (1963) — ZERO wzmianek w systemie. Nowy moduł albo rozszerzenie `mod-NATO` / `mod-ONZ` | dr-14 | średni | 2026-08-13 | temat nigdy nieopracowany |
+| F-61 | Konwencja genewska 1951 o statusie uchodźców + Protokół 1967 — ZERO wzmianek w DR-14 i DR-05. Ustalić właściwy DR (rekomendacja: DR-14 jako fundament + odesłanie z DR-05); brak definicji uchodźcy i zasady non-refoulement | dr-14 (+dr-05) | średni | 2026-08-13 | odrębna od zamkniętej F-30 |
+| F-79 | Ustawa o zmianie ustawy o PIP (Dz.U. 2026 poz. 473, w życie 8.07.2026) zmienia SIEDEM aktów. ⛔ NIEUSTALONE: (1) zakres artykułów w KSCU (sam FAKT zmiany potwierdzony — poz. 473 dwukrotnie w amendment trail); (2) zakres artykułów w Ordynacji podatkowej (fakt potwierdzony przez infor.pl i podatkowyreferat.online); (3) wpływ na ustawę o SUS — zero ustaleń; (4) wpływ na ustawę o powierzaniu pracy cudzoziemcom — zero ustaleń; (5) czy moduł dr-04 opisuje nowy art. 11 pkt 7a (decyzja PIP o stosunku pracy) i art. 14b (interpretacje GIP). ⚠️ ISAP `WDU20260000473` blokuje web_fetch — szukać przez orka.sejm.gov.pl (druk 2250) lub sip.lex.pl | cross: dr-02, dr-04, dr-05, dr-06, dr-16 | średni | 2026-08-15 | weryfikacja częściowa: AUDYT-2026-08-15u |
 
+| F-93 | **Następca merytoryczny F-91 (zamkniętej 2026-08-17d po osiągnięciu pokrycia 12/12 rozdziałów Prawa łowieckiego).** Pokrycie rozdziałów NIE jest już przedmiotem tej flagi — wszystkie 11 modułów łowieckich istnieje i jest zarejestrowanych w SKILL.md, MAPA-AKTOW.md i ROUTING-MAP.md. ⛔ **NIEWERYFIKOWANE PRIORYTETOWO (odziedziczone z 16g):** brzmienie **art. 11, 12, 45 i 47 ustawy z 24.05.2013 o środkach przymusu bezpośredniego i broni palnej** — odesłania z art. 39 ust. 3-4 i art. 40 ust. 1 pkt 1 Prawa łowieckiego; bez odczytu ze źródła nie da się ocenić legalności użycia przymusu ani broni przez strażników (styk z F-92). ⚠️ **treść art. 42ab ust. 4-5** (tryb rozpoznania sprzeciwu właściciela gruntu — luka o wysokiej wadze praktycznej). ⭐ **ZADANIA PROPAGACYJNE (oba niewykonane, wymagają osobnej sesji):** (a) metryka ustawy z 21.11.2025 o zdrowiu zwierząt, ROZSTRZYGNIĘTA jako **Dz.U. 2025 poz. 1795** w module Rozdz. 3 — do naniesienia w module Rozdz. 8; (b) rozróżnienie DWÓCH wariantów definicji kłusownictwa z art. 4 ust. 3, ustalone w module Rozdz. 1-2 — do naniesienia w `mod-lowiectwo-klusownictwo`. ⚠️ **MOŻLIWA ROZBIEŻNOŚĆ** brzmienia art. 22 ust. 1 pkt 2 („przepisy o produktach pochodzenia zwierzęcego”) względem formuły ustalonej w module Rozdz. 7 przy art. 37 PSŁ — wymaga weryfikacji bezpośrednio w ISAP. ⛔ **Kontrola nowelizacji po t.j. 2025.539 NADAL NIEWYKONANA** — web_fetch ISAP zablokowany (ROBOTS_DISALLOWED), obejście przez web_search wg ZASADY 14. Punktowy ogon dawnej F-91 (metryki rozporządzeń, orzecznictwo, detale poszczególnych modułów) NIE należy do tej flagi — zmigrowany do rejestru REACT-1, sekcja 4. | dr-09 | średni-wysoki | 2026-08-17d (jako następca F-91 otwartej 2026-08-16) | AUDIT-JOURNAL `AUDYT-2026-08-17d` oraz cała seria `-16`…`-17c`; Rząd 1: isap/api.sejm.gov.pl, eli.sejm.gov.pl, trybunal.gov.pl, sn.pl, dziennikustaw.gov.pl; Rząd 2B: lexlege.pl, arslege.pl, sip.lex.pl |
+| F-92 | **Ustawa o broni i amunicji (t.j. Dz.U. 2024 poz. 485) — moduł utworzony 2026-08-16, zakres niedomknięty.** Akt NIE MIAŁ modułu w żadnym z 16 DR-skilli; nowy `dr-13/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md` pokrywa Rozdz. 1 (ramowo), Rozdz. 2 (9-33, RDZEŃ), Rozdz. 4 (45-49) i Rozdz. 5 (50-51). **POZOSTAJE:** (1) ⛔ potwierdzić RĘCZNIE w ISAP, czy po t.j. 2024.485 ogłoszono nowszy t.j. lub nowelizację — `web_fetch` ISAP i api.sejm.gov.pl zablokowane (ROBOTS_DISALLOWED), ta sama przeszkoda co przy F-79 i F-88; (2) rozwinąć Rozdz. 3 (34-44a — przewóz, przywóz, wywóz, zgody przewozowe, cudzoziemcy, Europejska karta broni palnej) — obecnie SZKIC; (3) Rozdz. 6 (52-56) nieopracowany; (4) rozporządzenia wykonawcze: przechowywanie i ewidencjonowanie (art. 32 ust. 2), wzory dokumentów (art. 31), tryb egzaminu (art. 16 ust. 3), wykaz stanów chorobowych (art. 15 ust. 9), wzorcowy regulamin strzelnic (art. 46 ust. 3); (5) linia orzecznicza — art. 15 ma ~295, art. 18 ~290, art. 10 ~76 odnotowanych orzeczeń, a moduł świadomie NIE zawiera ani jednej sygnatury (HARDGATE) — uruchomić `orzeczenia-sadowe-v2` na CBOSA/NSA i dopisać. ⚠️ Utrzymywać ostrzeżenie o kolizji z ustawą o środkach przymusu bezpośredniego i broni palnej (Dz.U. 2026 poz. 244) | dr-13 (+dr-03, dr-05, dr-09) | średni | 2026-08-16 | AUDIT-JOURNAL `AUDYT-2026-08-16`; źródła Rząd 2: lexlege.pl/arslege.pl, stan 16.08.2026 |
 
+| F-88 | **Propagacja ustawy z 29.05.2026 o zmianie ustawy — Ordynacja podatkowa oraz niektórych innych ustaw (Dz.U. 2026 poz. 846, w życie 1.10.2026).** Odkryta 2026-08-15x przy zamykaniu F-85. ✅ USTALONE u źródła (eli.gov.pl): metryka, daty wejścia w życie z wyjątkami (26.06.2026 i 26.12.2026) oraz LISTA OBSZARÓW dotkniętych wg haseł ELI — Ordynacja podatkowa, KKS, VAT, akcyza, PIT, opłata skarbowa, doradztwo podatkowe, prawo bankowe, SKOK, fundusze inwestycyjne, instrumenty finansowe, działalność ubezpieczeniowa, adwokatura, radcowie prawni, rzecznicy patentowi, sądy administracyjne. ✅ **MDR ZROBIONE 2026-08-15** — dodano sekcję 6a do `mod-OP-ordynacja-podatkowa.md` (dr-06): zniesienie raportowania schematów KRAJOWYCH od 1.10.2026 (tylko transgraniczne pozostają), zniesienie procedury wewnętrznej MDR, likwidacja MDR-2, MDR-3 raz do roku, połączenie promotora/wspomagającego, doprecyzowany katalog cech rozpoznawczych. Potwierdzone w 5 źródłach (Wolters Kluwer/LEX, Crowe, Gekko Taxens, kpitax.pl, portalsamorzadowy.pl/PTWP). ⚠️ NIEUSTALONE nadal: dokładny katalog wyłączeń podatkowych z zakresu MDR (art. 86a i n. Op — wymaga odczytu pełnego tekstu ustawy w ISAP, zablokowany dla web_fetch — próbować przez orka.sejm.gov.pl lub sip.lex.pl jak przy F-79) oraz zakres artykułów w POZOSTAŁYCH 15 obszarach (KKS, VAT, akcyza, PIT, opłata skarbowa, doradztwo podatkowe, prawo bankowe, SKOK, fundusze inwestycyjne, instrumenty finansowe, ubezpieczenia, adwokatura, radcowie, rzecznicy patentowi, sądy administracyjne). Ścieżka dalsza: MOD-PROPAGACJA-NOWELIZACJI, jeden obszar na sesję | cross: dr-06, dr-02, dr-05, dr-12, dr-16, dr-03 (KKS), dr-08 (podatki lokalne) | średni-wysoki (data wejścia w życie 1.10.2026 — coraz bliżej) | 2026-08-15x | ISAP/dziennikustaw.gov.pl blokują web_fetch (robots disallowed) — mapowanie przez web_search wieloźródłowy; ⚠️ ta sama klasa co F-79 (omnibus, system odnotował tylko część skutków) |
 
+| F-89 | **Zaległość synchronizacyjna aktów między trzema rejestrami — ujawniona przez nowy test T11 (`check_sync_aktow.py`, 2026-08-15z).** Stan zastany pierwszego przebiegu: **72** akty obecne w lokalnych `dr-XX/MAPA-AKTOW.md`, a NIEOBECNE w `prawo-polskie-v2/ROUTING-MAP.md`; **80** nieobecnych w mapie Dz.U.; **53** obecne w ROUTING-MAP, a nieobecne w mapie Dz.U. ⚠️ To LISTA DO PRZEGLĄDU, nie lista błędów — akt świadomie skatalogowany bez modułu może legalnie nie mieć wiersza w ROUTING-MAP; heurystyka jest też ślepa na kontekst (numer wymieniony „przy okazji" liczy się jako obecność). **Do zrobienia:** (1) przejrzeć pozycje z lat 2025-2026 (najwyższe ryzyko realnej luki), zaczynając od `--limit 0 --kierunek lokalne`; (2) dla każdej rozstrzygnąć: dopisać wiersz, czy udokumentować świadomy brak; (3) rozważyć dopisanie do T11 listy wyjątków (akty katalogowe bez modułu), żeby wynik zbiegał do zera i test stał się bramką, a nie stałym WARN-em | cross: wszystkie DR + prawo-polskie-v2 + audyt-systemu-v4 | średni-wysoki (zaległość systemowa, czwarty udokumentowany przypadek tej klasy) | 2026-08-15z | `scripts/check_sync_aktow.py`; precedensy: podatki sektorowe 2026-08-13, 12 modułów 2026-08-14, poz. 1003 w sesji 2026-08-15y |
 
+### 1C. Flagi narzędziowe i metodologiczne (audyt-systemu-v4)
 
-## ♾️ MONITORING — FLAGA PERMANENTNA, NIGDY NIE ZAMYKANA (dodano 2026-08-14; MON-3 dodany 2026-08-15 — oba na żądanie użytkownika)
+| # | Pozostały zakres — DO ZROBIENIA | Skill | Prio | Otwarta od | Historia / źródło |
+|---|---|---|---|---|---|
+| F-78 | Podzielić moduły >1000 linii wg rozdziałów aktu, każdy podział = osobna sesja z pełną rejestracją (Reguła 2/3 HARDGATE). Kolejność od największych: (1) `dr-03/mod-KK-kwalifikator-karnomaterialny.md` 2084; (2) `shared/ORKA-BAS-LEKSYKON.md` 1975; (3) `dr-06/mod-VAT-podatek-od-towarow-i-uslug.md` 1901; (4) `dr-06/mod-ustawa-rachunkowosci.md` 1539; (5) `dr-06/mod-ustawa-akcyzowa-i-clo-UCC.md` 1493; (6) `dr-02/mod-KRO-rodzinne.md` 1470; (7) `dr-05/mod-KPA-tryby-nadzwyczajne-i-strategia.md` 1303; (8) `shared/PORTALE-BRANZOWE-RZAD-2B.md` 1088; (9) `dr-02/mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md` 1036; (10) `dr-09/mod-ochrona-zabytkow-obiekty-uzytecznosci-publicznej.md` 1008. ⚠️ Pliki `SKILL.md` >1000 linii (przesluchanie-swiadkow 1809, analizator-dowodow 1203, audyt-systemu 1170) — DO ROZSTRZYGNIĘCIA przez użytkownika (ewentualnie wydzielenie sekcji do `modules/`). ⛔ `AUDIT-JOURNAL.md` i mapy archiwalne — WYŁĄCZONE TRWALE | cross-DR + shared | średni (ryzyko wyłącznie narzędziowe) | 2026-08-14 | pełny skan `wc -l`: AUDYT-2026-08-15n |
+| F-82 | ⚠️ Sam błąd (Kodeks morski pod numerem Dz.U. 2023 poz. 1523 zamiast 1309) NAPRAWIONY 2026-08-15n. ✅ Pkt 2 i 3 ZAMKNIĘTE 2026-08-15y: do `test_cross_map_dzu.py` dopisano ostrzeżenie (docstring + komunikat w wyniku), że zgodność rejestrów NIE jest weryfikacją merytoryczną, wraz z opisem techniki wykrywania tej klasy błędu; ustawa o delegowaniu kierowców (Dz.U. 2023 poz. 1523) dostała własny wiersz w mapie centralnej — decyzja: skatalogowana BEZ modułu, temat reaktywny. ⛔ POZOSTAJE 1 PUNKT: przeskanować mapę Dz.U. pod kątem aktów, których numer nigdy nie był weryfikowany PRZECIW ŹRÓDŁU ZEWNĘTRZNEMU — priorytet dla aktów o statusie „ze zm. — brak nowszego t.j.", bo ten opis sugeruje, że nikt nie sprawdzał od dawna | cross: audyt-systemu-v4, prawo-polskie-v2, dr-09 | informacyjny | 2026-08-15n | ⭐ LEKCJA: błąd przetrwał wszystkie audyty TRYB DZU, bo trzy rejestry były ze sobą ZGODNE — kroswalidacja tej klasy błędu nie wykryje. Technika kontrolna: porównywać metryki aktów zmienianych, cytowane w tekstach nowelizacji, z mapą |
+| F-83 | ⛔ BRAMKA: dopóki otwarta, sesja zadania cyklicznego POMIJA blok § 3 (`SCHEDULED-TASK-COWORK.md`) i odnotowuje to jednym zdaniem. Do wykonania (sesja dedykowana, na akceptację użytkownika): (1) ustalić format mapy pokrycia — wiersz = rozdział/zakres artykułów, kolumny: status PEŁNE/CZĘŚCIOWE/BRAK, moduł pokrywający, data ostatniej weryfikacji treści; (2) rozstrzygnąć lokalizację — rekomendacja: przy `MAPA-AKTOW.md` w DR-skillach; (3) zasilić JEDNORAZOWO z istniejących 12 raportów pokrycia; (4) dopiero potem zamknąć F-83 i dopisać punkt 8 do promptu wg § 3 | cross-DR + audyt-systemu-v4 | średni | 2026-08-15o | mapy pokrycia NIE ISTNIEJĄ — `raporty-pokrycia-2026-08-13/` to migawka z jednego dnia, nie system |
 
-> ⚠️ W ODRÓŻNIENIU od wszystkich pozostałych flag F- w tym rejestrze —
-> TA flaga NIE JEST przeznaczona do zamknięcia. Jej "zamknięcie" byłoby
-> błędem koncepcyjnym: monitorowanie zmian legislacyjnych to zadanie
-> CIĄGŁE z definicji, nie jednorazowa naprawa. NIE usuwać tego wiersza
-> przy porządkowaniu rejestru, NIE liczyć go do "aktywnych flag do
-> zamknięcia" przy raportowaniu postępu cyklu WARN.
+### 1D. Flagi zależne od dewelopera / środowiska
 
-| # | Flaga | Zakres | Częstotliwość | Ostatnie wykonanie | Metoda | Co robić przy trafieniu |
-|---|---|---|---|---|---|---|
-| MON-1 | Monitoring nowelizacji aktów prawnych już pokrytych przez moduły — badanie, czy którykolwiek z ~200+ aktów bazowych śledzonych w 16 lokalnych MAPA-AKTOW.md doczekał się nowej nowelizacji/t.j. od ostatniej weryfikacji | Cały system, wszystkie DR-skille | Patrz "PROPOZYCJA HARMONOGRAMU" niżej | 2026-08-14 (ustanowienie tej flagi; wcześniejsze pojedyncze przypadki: SKD/II CSKP 89/26, system MOS/cudzoziemcy — oba wykryte NA ŻĄDANIE użytkownika, nie przez systematyczny monitoring) | web_search per akt, ze szczególnym naciskiem na akty oznaczone w mapach jako "⚠️ WYMAGA AKTUALIZACJI MODUŁU" (numer już raz się zmienił — statystycznie wyższe ryzyko kolejnej zmiany) oraz akty "żywe" (nowelizowane >3×/rok — KKW, KPK, ustawa o cudzoziemcach, PIT/VAT) | Patrz "PROTOKÓŁ PRZY TRAFIENIU" niżej |
-| MON-2 | Monitoring nowych projektów ustaw / procesu legislacyjnego dla tematów o wysokim prawdopodobieństwie wejścia w życie w najbliższych 6-12 miesiącach | Cały system — priorytet dla tematów już zasygnalizowanych w sekcji "👁️ OBSERWOWANE" powyżej (obecnie: OBS-1, nowelizacja PIT/CIT/ryczałt 2027) oraz w istniejących flagach F-14/F-15 (UTO/hulajnogi, status neosędziów) | Patrz "PROPOZYCJA HARMONOGRAMU" niżej | 2026-08-14 (OBS-1 sprawdzone po raz pierwszy) | web_search per temat, sejm.gov.pl (proces legislacyjny, numery druków), RCL (Rządowe Centrum Legislacji) dla projektów rządowych | Patrz "PROTOKÓŁ PRZY TRAFIENIU" niżej |
-| MON-3 | **Monitoring KWOTOWYCH stawek opłat i podatków** — dodany 2026-08-15 na żądanie użytkownika („dodaj do monitorowania informacje o opłatach od podatku"). ⭐ UZASADNIENIE ODRĘBNOŚCI OD MON-1: kwoty opłat i progi podatkowe zmieniają się w PRZEWAŻAJĄCEJ WIĘKSZOŚCI **nie nowelizacją ustawy, lecz aktem podustawowym albo obwieszczeniem waloryzacyjnym** (obwieszczenie MF o górnych granicach stawek kwotowych podatków i opłat lokalnych, rozporządzenia o stawkach opłat, komunikaty o wskaźnikach). MON-1 śledzi NOWELIZACJE aktów bazowych — takiej zmiany NIE WYKRYJE, bo numer Dz.U. ustawy pozostaje ten sam, a moduł cytujący kwotę cicho się dezaktualizuje. To jest udokumentowana ślepa plamka, nie duplikat. | (1) OPŁATY SĄDOWE — KSCU (dr-16, dr-02); (2) OPŁATA SKARBOWA + opłaty administracyjne (dr-05); (3) OPŁATY EGZEKUCYJNE — komornicze i w egzekucji administracyjnej, w tym kwota wolna od egzekucji (dr-02, dr-03, dr-05); (4) PODATKI I OPŁATY LOKALNE — coroczne obwieszczenie MF o górnych granicach stawek kwotowych (dr-06, dr-08), w tym ⭐ **OPŁATY OD POBYTU/NOCLEGU: opłata miejscowa („klimatyczna"), opłata uzdrowiskowa oraz projektowana opłata turystyczna** — DOPISANE 2026-08-15 na uwagę użytkownika, pierwotnie pominięte; ta podgrupa ma sprzężenie z MON-2/OBS-2, bo równolegle do corocznej waloryzacji stawek toczą się DWA projekty zmiany konstrukcji tych opłat; (5) PROGI I KWOTY W PIT/CIT/RYCZAŁCIE — skala, kwota wolna, limity ryczałtu, limit zwolnienia podmiotowego VAT (dr-06); (6) OPŁATY SEKTOROWE o charakterze sankcyjnym — m.in. opłata produktowa i kaucja (dr-09), opłaty koncesyjne (dr-09); (7) GRZYWNY I MANDATY — kwoty w KW/KPSW (dr-03) | **Rytm ROCZNY, nie 4-tygodniowy** — kluczowe okno: **październik–grudzień** (obwieszczenia MF i rozporządzenia na kolejny rok kalendarzowy) oraz **styczeń** (kontrola, co faktycznie weszło). Poza tym oknem — sprawdzać wyłącznie reaktywnie, przy sprawie dotyczącej konkretnej opłaty | — (ustanowiona 2026-08-15, pierwszy przegląd planowany na okno X–XII.2026) | web_search per grupa opłat + `podatki.gov.pl` i `mf.gov.pl` (obwieszczenia), `isap.sejm.gov.pl` dla rozporządzeń wykonawczych; przy podatkach lokalnych — obwieszczenie MF w Monitorze Polskim, NIE w Dz.U. (⚠️ częsty błąd wyszukiwania) | **PROTOKÓŁ ODRĘBNY OD MON-1/MON-2:** zmiana samej KWOTY zwykle NIE uzasadnia nowej flagi F- — wystarczy punktowa korekta liczby w module + wpis w AUDIT-JOURNAL. Nową flagę F- otwierać TYLKO gdy: (a) zmienia się KONSTRUKCJA opłaty (nowa przesłanka, nowy podmiot zobowiązany, nowy tryb zwolnienia), albo (b) kwota jest cytowana w >3 modułach (koszt propagacji uzasadnia śledzenie). ⛔ Kwoty NIGDY z pamięci — każda liczba wymaga odczytu ze źródła w tej samej sesji, w której trafia do modułu |
+> ⛔ Tych czterech flag NIE DA SIĘ zamknąć sesją audytową — wymagają dostępu
+> do domen `.gov.pl`, prawdziwej odpowiedzi API albo wdrożenia po stronie
+> portalu. Logika i testy po stronie systemu przechodzą w całości.
+
+| # | Pozostały zakres — DO WYKONANIA PRZEZ CZŁOWIEKA | Skill | Prio | Otwarta od |
+|---|---|---|---|---|
+| F-8 | (a) Wdrożyć connector w środowisku z dostępem do api.sejm.gov.pl; (b) zweryfikować realny kształt odpowiedzi JSON; (c) podłączyć w kliencie MCP. Start: `npm install && node test_protokol_mcp.mjs` w `shared/tools/mcp-servers/isap-eli-example/` | shared/MCP-INTEGRACJA.md | średni | 2026-07-13 |
+| F-9 | (a) Wdrożyć konwencję znacznika `AUDIT_EVENT` w system prompcie portalu; (b) podłączyć parser do realnego przepływu odpowiedzi routera; (c) ustalić politykę retencji logu. Wg `DOKUMENTACJA-WDROZENIOWA-2026-07-13.md`, sekcja 3 | audit-trail-portal-v1 | niski | 2026-07-13 |
+| F-10 | Uruchomić `sync_dzu_eli.py` wobec żywego api.sejm.gov.pl i skorygować `pobierz_nowe_pozycje_eli()`, jeśli kształt odpowiedzi różni się od założonego | sync-dzu-automatyczny-v1 | średni | 2026-07-13 |
+| F-11 | Zapisać jedną prawdziwą odpowiedź Claude API z wywołaniami web_search/web_fetch i uruchomić na niej `extract_api_verification_log.py` jako pierwszy test integracyjny | shared/tools | średni | 2026-07-13d |
+
+---
+
+## 2. ♾️ MONITORING — FLAGI PERMANENTNE, NIGDY NIE ZAMYKANE
+
+> ⚠️ Te trzy pozycje NIE SĄ przeznaczone do zamknięcia — monitorowanie zmian
+> legislacyjnych jest zadaniem CIĄGŁYM. NIE usuwać przy porządkowaniu rejestru,
+> NIE liczyć do „aktywnych flag do zamknięcia". F- to konkretne zadanie na
+> liście TODO; MON- to nawyk sprawdzania — nigdy nie jest „zrobiony".
+
+| # | Co monitorujemy | Zakres | Rytm | Ostatnie wykonanie | Metoda |
+|---|---|---|---|---|---|
+| MON-1 | Nowelizacje i nowe t.j. aktów JUŻ pokrytych przez moduły | ~200+ aktów w 16 lokalnych `MAPA-AKTOW.md` | co 4 tyg., rotacyjnie 5–8 aktów na sesję | 2026-08-14 | web_search per akt; priorytet dla aktów z flagą „⚠️ WYMAGA AKTUALIZACJI MODUŁU" oraz aktów żywych (KKW, KPK, ustawa o cudzoziemcach, PIT/VAT) |
+| MON-2 | Nowe projekty ustaw / proces legislacyjny, horyzont 6–12 mies. | pozycje z sekcji OBSERWOWANE (OBS-1…OBS-5) | co 4 tyg.; OBS o priorytecie WYSOKIM — co 2 tyg. | 2026-08-14 | web_search, sejm.gov.pl (druki), RCL |
+| MON-3 | KWOTOWE stawki opłat i podatków — zmieniane aktem podustawowym lub obwieszczeniem waloryzacyjnym, więc MON-1 ich NIE WYKRYJE (numer Dz.U. ustawy się nie zmienia, a moduł cicho się dezaktualizuje) | (1) opłaty sądowe KSCU (dr-16, dr-02); (2) opłata skarbowa i administracyjne (dr-05); (3) opłaty egzekucyjne, w tym kwota wolna od egzekucji (dr-02, dr-03, dr-05); (4) podatki i opłaty lokalne — obwieszczenie MF, w tym ⭐ opłata miejscowa, uzdrowiskowa i projektowana turystyczna (dr-06, dr-08; sprzężenie z OBS-2); (5) progi i kwoty PIT/CIT/ryczałt, limit zwolnienia VAT (dr-06); (6) opłaty sektorowe — produktowa, kaucja, koncesyjne (dr-09); (7) grzywny i mandaty KW/KPSW (dr-03) | ROCZNY: okno X–XII (obwieszczenia na kolejny rok) + I (kontrola); poza oknem — wyłącznie reaktywnie | — (pierwszy przegląd: X–XII.2026) | web_search + podatki.gov.pl, mf.gov.pl; ISAP dla rozporządzeń. ⚠️ podatki lokalne — obwieszczenie MF w **Monitorze Polskim**, NIE w Dz.U. |
+
+**Protokół MON-3 (odrębny od MON-1/MON-2):** zmiana samej KWOTY zwykle NIE
+uzasadnia nowej flagi F- — wystarczy punktowa korekta liczby w module + wpis
+w dzienniku. Nową flagę F- otwierać TYLKO gdy: (a) zmienia się KONSTRUKCJA
+opłaty (nowa przesłanka, nowy podmiot zobowiązany, nowy tryb zwolnienia), albo
+(b) kwota jest cytowana w >3 modułach. ⛔ Kwoty NIGDY z pamięci — każda liczba
+wymaga odczytu ze źródła w tej samej sesji, w której trafia do modułu.
+
+**Harmonogram:** JEDEN zunifikowany przegląd dla MON-1 i MON-2 razem (ta sama
+metoda, ta sama sesja web_search), cykl bazowy 4 tygodnie, dodatkowa runda co
+2 tygodnie wyłącznie dla pozycji o priorytecie WYSOKIM. Zakres jednej sesji:
+(1) MON-2 — przejrzeć OBS-1…OBS-5 pod kątem zmiany statusu; (2) MON-1 — 5–8
+aktów najwyższego ryzyka, rotacyjnie; (3) każde trafienie → protokół niżej.
+Częściej niż co 4 tygodnie = zużywanie budżetu web_search na wyniki „brak zmian".
 
 ### 📋 PROTOKÓŁ PRZY TRAFIENIU (dodano 2026-08-14, na żądanie użytkownika — obowiązkowy dla MON-1 i MON-2 jednakowo)
 
@@ -202,277 +394,40 @@ przechowuje ustalenia. Dzięki temu obie flagi permanentne pozostają
 czytelne i "puste" (jako mechanizm), niezależnie od tego, ile razy
 zostały już uruchomione.
 
-### 🗓️ PROPOZYCJA HARMONOGRAMU (dodano 2026-08-14, na żądanie użytkownika)
-
-**Decyzja: JEDEN zunifikowany harmonogram dla MON-1 i MON-2 razem, NIE
-dwa osobne.** Uzasadnienie: oba mechanizmy używają tej samej metody
-(web_search + przegląd konkretnej listy tematów priorytetowych) i
-naturalnie współdzielą tę samą sesję przeglądową — rozdzielenie na dwa
-osobne zaplanowane zadania podwoiłoby narzut organizacyjny bez realnej
-korzyści (nie ma powodu, dla którego sprawdzanie nowelizacji już
-pokrytych aktów i sprawdzanie nowych projektów miałoby się odbywać w
-INNYCH momentach — oba są tańsze i skuteczniejsze wykonywane razem,
-jedną sesją web_search).
-
-Rekomendowany zakres JEDNEGO cyklicznego zadania (do skonfigurowania
-przez użytkownika jako zadanie cykliczne, np. funkcją harmonogramu
-Claude, jeśli dostępna w używanym interfejsie):
-- **Częstotliwość:** co 4 tygodnie jako cykl bazowy, z WYJĄTKIEM
-  tematów oznaczonych priorytetem WYSOKIM w sekcji OBSERWOWANE lub w
-  aktywnych flagach F- (np. F-15, status neosędziów) — te sprawdzać
-  częściej, co 2 tygodnie, w RAMACH tego samego zadania (dodatkowa runda
-  dla samej podgrupy wysokiego priorytetu).
-- **Zakres jednej sesji:** (1) MON-2 najpierw — przejrzeć sekcję
-  OBSERWOWANE + F-14/F-15 pod kątem zmiany statusu; (2) MON-1 — wybrać
-  do 5-8 aktów z najwyższym ryzykiem (kryteria w kolumnie "Metoda"
-  wyżej) do sprawdzenia w TEJ sesji, rotacyjnie (nie da się sprawdzić
-  wszystkich ~200 aktów co 4 tygodnie — priorytetyzacja rotacyjna jest
-  konieczna); (3) każde trafienie → PROTOKÓŁ PRZY TRAFIENIU wyżej.
-- **Dlaczego NIE częściej:** ryzyko nadmiernego zużycia budżetu
-  narzędzi (web_search) na powtarzalne, w większości negatywne
-  wyniki ("brak zmian") — 4 tygodnie to rozsądny kompromis między
-  aktualnością a kosztem, ZGODNY z rzeczywistym tempem publikacji
-  nowelizacji w polskim systemie prawnym (rzadko coś istotnego zmienia
-  się częściej niż raz na kilka tygodni dla pojedynczego aktu).
-
-
-
-**Odróżnienie MON-1/MON-2 od zwykłych flag F-:** F- oznacza KONKRETNĄ,
-already-zidentyfikowaną lukę o określonym zakresie (da się opisać "co
-dokładnie brakuje" i "kiedy będzie zamknięta"). MON- oznacza SAM
-MECHANIZM/NAWYK sprawdzania — nie ma zakresu, który dałoby się
-"wyczerpać". Analogia: F- to konkretne zadanie na liście TODO; MON- to
-nawyk sprawdzania poczty — nigdy nie jest "zrobiony", tylko wykonywany
-cyklicznie.
-
-
-
-Katalog zawiera 13 plików (12 raportów pokrycia + 1 indeks zbiorczy, dostarczonych przez użytkownika 2026-08-13 w trzech turach) — materiał źródłowy dla flag **F-64 do F-75**. To materiał ROBOCZY/TYMCZASOWY, nie kanoniczna dokumentacja systemu — w przeciwieństwie do `MAPA-AKTOW.md` czy modułów, raporty te są migawką stanu na dzień analizy i staną się nieaktualne, gdy odpowiadające im luki zostaną wypełnione.
-
-**Zasada usuwania — per plik, nie zbiorczo:**
-- Gdy WSZYSTKIE punkty z danej flagi (np. F-75/KKW) zostaną naprawione i flaga zostanie formalnie ZAMKNIĘTA w tabeli powyżej (wpis przeniesiony do sekcji zamkniętych / usunięty z aktywnego rejestru) → odpowiadający plik raportu (np. `raport-pokrycia-KKW.md`) **można usunąć**.
-- **NIE usuwać pliku, jeśli flaga jest tylko CZĘŚCIOWO naprawiona** (np. domknięto 2 z 4 rekomendowanych punktów) — raport nadal ma wartość jako mapa pozostałych, niedomkniętych fragmentów aktu; dopiero pełne zamknięcie flagi czyni raport zbędnym.
-- Plik `00-indeks-raportow-pokrycia.md` usunąć dopiero, gdy WSZYSTKIE flagi F-64–F-75 są zamknięte (indeks odnosi się zbiorczo do całego zestawu).
-- Przy usuwaniu pliku raportu — dopisać w AUDIT-JOURNAL.md jedno zdanie potwierdzające usunięcie i przyczynę (flaga zamknięta, data), żeby ZASADA 7 (ślad audytowy) była zachowana mimo usunięcia samego pliku źródłowego.
-
-**Mapowanie plik → flaga (do sprawdzania przy każdym zamknięciu):**
-
-| Plik | Flaga(i) |
-|---|---|
-| `raport-pokrycia-PPSA.md` | F-64 |
-| `raport-pokrycia-KPC.md` | F-65 |
-| `raport-pokrycia-KPK.md` | F-66 (powiązana z F-23) |
-| `raport-pokrycia-KW.md` | F-67 |
-| `raport-pokrycia-KSH.md` | F-68 |
-| `raport-pokrycia-PrUp-PrRestr.md` | F-69 |
-| `raport-pokrycia-OP.md` | F-70 |
-| `raport-pokrycia-PZP.md` | F-71 |
-| `raport-pokrycia-SUS-FUS.md` | F-72 |
-| `raport-pokrycia-KRO.md` | F-73 |
-| `raport-pokrycia-PrBud.md` | F-74 |
-| `raport-pokrycia-KKW.md` | F-75 |
-
-## DR-02 (naprawa 2026-08-13b/c) — flaga rezydualna
-
-✅ Sekcja bez otwartych flag F-. Dawna **F-22** przeniesiona 2026-08-15n
-do rejestru **🔁 REAKTYWNE (REACT-1)** — treść punktów zachowana tam w całości.
-
-
-## DR-03 (badanie 2026-08-13)
-
-> 🔁 Dawna **F-26** przeniesiona 2026-08-15n do rejestru **REACT-1**
-> (7 punktów „punkt startowy"). W tej sekcji pozostaje wyłącznie F-24.
-
-| F-24 | DR-03 — nowelizacja narkomanii: ✅ METRYKA I ZAKRES DOPRECYZOWANE 2026-08-14c u źródła Rzędu 1 (orka.sejm.gov.pl, tekst ustawy, druk 2499) — ustawa z 11.06.2026 o zmianie ustawy o przeciwdziałaniu narkomanii oraz niektórych innych ustaw, podpisana 24.07.2026, zmienia t.j. Dz.U. 2023 poz. 1939; potwierdzono nową definicję leczenia substytucyjnego (art. 28), art. 28g (Wykaz KCPU), art. 15h ustawy o Policji, zmianę Kodeksu morskiego. ⛔ **NUMER Dz.U. SAMEJ NOWELIZACJI NADAL NIEUSTALONY — 5 nieudanych prób** (08-13, 08-14c, 08-15: 3 zapytania web_search po tytule aktu, treści merytorycznej i formule cytowania „Dz. U. z 2023 r. poz. 1939 oraz z 2026 r. poz. …"; eli.gov.pl/eli/DU/2026 zwraca ROBOTS_DISALLOWED przy web_fetch); NIE interpolowano mimo znanych pozycji 1003 i 1005 z tego samego dnia (zakaz — ZASADA 3). ⭐ **PRÓBY 4-5 i USTALENIA UBOCZNE 2026-08-15n** (Rząd 1: orka.sejm.gov.pl/proc10.nsf/ustawy/2499_u.htm oraz druk 10-RPW-15291-2026): numeru nadal NIE ustalono (3 kolejne zapytania web_search — po tytule z frazą "Dz.U. 2026 poz.", po formule cytowania i po dacie ogłoszenia), ale potwierdzono u źródła: (a) ZAMKNIĘTY katalog aktów zmienianych — **TRZY**: ustawa o Policji (nowy art. 15h), Prawo farmaceutyczne (art. 72 ust. 8 pkt 5) i Kodeks morski; (b) art. 11 aktu: wchodzi w życie **po upływie 30 dni od ogłoszenia** — data wejścia w życie pozostaje nieustalona dopóki nieznany numer/data promulgacji; (c) ⚠️ w samym tekście uchwalonym widnieje luka redakcyjna "(Dz. U. z 2023 r. poz. 1939 oraz z …)" — potwierdza, że numer nadawano po uchwaleniu, więc źródła sejmowe go NIE zawierają z definicji; ⭐ (d) KROSWERYFIKACJA MAPY Dz.U. (efekt uboczny, wartość samodzielna): tekst aktu cytuje **PrFarm Dz.U. 2026 poz. 612** i **KPA Dz.U. 2025 poz. 1691** — oba ZGODNE z `mapa_dzu_2026-07-15.md` (wiersze 205 i 260) → niezależne potwierdzenie Rzędu 1 dla dwóch kluczowych tekstów jednolitych | dr-03-prawo-karne-wykroczenia-egzekucja (`mod-ustawa-narkomania.md`) | niski (obniżony — brakuje wyłącznie technicznego numeru promulgacji, treść i status pewne) | 2026-07-04, aktualizacje: 2026-08-13, 2026-08-14c, 2026-08-15n | ⚠️ NOWA ROZBIEŻNOŚĆ: Sejm datuje akt na 11.06.2026, LEX podaje uchwalenie 3.07.2026 (61. posiedzenie) — prawdopodobnie poprawki Senatu, NIEPOTWIERDZONE | ISAP wyszukiwanie po tytule aktu zmieniającego; alternatywnie eli.gov.pl/eli/DU/2026/ w okolicy poz. 1000-1010 — ale NUMER MUSI być ODCZYTANY, nie wyliczony |
-
-**Flaga cross-DR odkryta 2026-08-15c przy zamykaniu F-25:**
-
-| # | Flaga | Skill / dziedzina | Priorytet | Otwarta od | Opis | Wymaga |
-|---|---|---|---|---|---|---|
-| F-79 | **✅ CZĘŚCIOWO ZWERYFIKOWANE (sesja 2026-08-15u) — wpływ na KSCU i Ordynację podatkową POTWIERDZONY FAKTYCZNIE, dokładny zakres artykułów NADAL nieustalony.** Ustawa z 2026 r. o zmianie ustawy o PIP oraz niektórych innych ustaw (Dz.U. 2026 poz. 473, w życie 8.07.2026) — zmienia SIEDEM aktów, a system odnotował skutki tylko dla CZĘŚCI z nich. Odkryte 2026-08-15 przy zamykaniu F-25. Akt zmienia: ustawę o PIP, Kodeks pracy, Ordynację podatkową, ustawę o warunkach dopuszczalności powierzania pracy cudzoziemcom, KPSW, KSCU oraz ustawę o SUS. ✅ ODNOTOWANE JUŻ WCZEŚNIEJ: PIP i KP (dr-04, wpis 2026-07-18), KPSW (dr-03). ✅ **POTWIERDZONE JAKO FAKTYCZNE (nie tylko przypuszczenie) w sesji 2026-08-15u:** (a) **KSCU** — poz. 473 figuruje DWUKROTNIE w amendment trail ustawy o kosztach sądowych w sprawach cywilnych na przepisy.gofin.pl, więc wpływ na KSCU jest realny, ale KONKRETNY zakres artykułów NIE został ustalony (dostępne źródła — Rząd 2/3 — nie podają numerów zmienianych artykułów KSCU wprost, tylko potwierdzają sam fakt nowelizacji; oficjalny komunikat prezydent.pl blokuje automatyczny dostęp — ROBOTS_DISALLOWED); (b) **Ordynacja podatkowa** — infor.pl (obwieszczenie ws. t.j. Ordynacji, Dz.U. 2026.622) WPROST wymienia poz. 473 jako pozycję 14 na liście aktów zmieniających Ordynację, niezależnie potwierdzone przez podatkowyreferat.online — wpływ potwierdzony faktycznie, zakres artykułów nadal nieustalony. ⛔ **NADAL NIEZBADANE:** dokładny zakres zmian w KSCU i Ordynacji podatkowej (mimo potwierdzenia SAMEGO FAKTU zmiany), wpływ na ustawę o SUS, wpływ na ustawę o powierzaniu pracy cudzoziemcom. ⭐ Odrębnie: nowe uprawnienie PIP do stwierdzania istnienia stosunku pracy w drodze DECYZJI (nowy art. 11 pkt 7a ustawy o PIP) + interpretacje indywidualne GIP (nowy art. 14b) — sprawdzić, czy moduł dr-04 opisuje oba | cross-DR: dr-02, dr-04, dr-05, dr-06, dr-16 | **średni** (obniżony z średni-wysoki — fakt wpływu na KSCU/Ordynację potwierdzony, ryzyko "moduł milczy o czymś nieistniejącym" wykluczone; pozostaje ryzyko "moduł milczy o czymś realnym") | 2026-08-15, częściowa weryfikacja: 2026-08-15u | Tekst aktu: ISAP `WDU20260000473` (Rząd 1, PDF, dostęp zablokowany bezpośrednio przez ROBOTS_DISALLOWED — dane z infor.pl/przepisy.gofin.pl jako Rząd 2 pośredniczące); wykaz zmienianych ustaw potwierdzony w infor.pl (DZU.2026.097.0000473); KSCU — przepisy.gofin.pl (amendment trail); Ordynacja podatkowa — infor.pl (DZU.2026.131.0000622) + podatkowyreferat.online (niezależne potwierdzenie) | 1) Uzyskać pełny tekst ustawy 473 spoza ISAP (np. orka.sejm.gov.pl, druk 2250, lub sip.lex.pl) — dotychczasowe źródła Rządu 2/3 potwierdzają FAKT zmiany, nie PODAJĄ numerów artykułów KSCU/Ordynacji; 2) dr-04 — czy moduł PIP opisuje art. 11 pkt 7a (decyzja o stosunku pracy) i art. 14b (interpretacje GIP); 3) SUS i ustawa o powierzaniu pracy cudzoziemcom — zakres zmiany wciąż całkowicie nieustalony |
-
-## 👁️ OBSERWOWANE — ZMIANY LEGISLACYJNE W TOKU (nie są flagami błędów — projekty ustaw jeszcze nieuchwalone, śledzone proaktywnie żeby nie przeoczyć wejścia w życie)
-
-| ID | Projekt | Zakres dotknięty | Priorytet monitorowania | Status na 2026-08-14 | Źródło | Akcja przy zmianie statusu |
-|---|---|---|---|---|---|---|
-| OBS-1 | **Nowelizacja PIT/CIT/ryczałt na 2027 r.** (projekt UD116, Rządowe Centrum Legislacji, pilotowany przez MF/Andrzej Domański) | dr-06-podatki-finanse-publiczne-aml (`mod-PIT-podatek-dochodowy-fizyczne.md` i pokrewne, `mod-VAT-*` NIE dotyczy — to PIT/CIT/ryczałt) | średni-wysoki (planowane wejście 1.01.2027, ale zakres ISTOTNIE ZMNIEJSZONY między wersją kwietniową a lipcową — z 30+ do ~15 zmian; projekt NADAL na etapie opiniowania, może się zmienić ponownie) | Projekt opublikowany na RCL 16.03.2026, przyjęty przez Radę Ministrów (data dokładna niepotwierdzona w tym badaniu). Wersja z końca lipca 2026 (analiza pokazuje "zeszło z 30+ do ~15 modyfikacji") — kilka pierwotnych, radykalnych pomysłów WYCOFANYCH: podwyżka ryczałtu 8,5%→17% dla usług na rzecz podmiotów powiązanych — WYCOFANA (zostaje 8,5%); podwyżka ryczałtu od najmu >100 tys. zł, 12%→15% — WYCOFANA (zostaje 12%). Pozostałe w projekcie: (1) ulga mieszkaniowa (zwolnienie ze sprzedaży nieruchomości przed 5 lat) — ponowne skorzystanie możliwe dopiero po 3 latach od poprzedniego (obecnie: bez ograniczenia częstotliwości); (2) sprzedaż składników majątku wycofanych z działalności na rzecz rodziny — okres zwolnienia z PIT wydłużony z 6 miesięcy do 3 lat; (3) PIT-11/PIT-8C — zapowiadana "rewolucja" w obiegu informacji rocznych, pełna cyfryzacja (analiza pitax.pl sygnalizuje ryzyko osłabienia pozycji podatnika); (4) automatyczne udostępnianie danych — od 1.12.2026; nowe zasady korekty ksiąg/JPK — od 1.01.2027; (5) CIT: ograniczenie "ukrytej dywidendy" (dzierżawa znaku towarowego/nieruchomości wspólnika dla własnej spółki), datio in solutum jako odpłatne zbycie. **ODRĘBNY, LUŹNIEJSZY wątek** (na wcześniejszym etapie, nie część UD116): rozważana gruntowna reforma SKALI PIT — dodatkowe, pośrednie progi podatkowe zamiast podniesienia kwoty wolnej do 60 tys. zł (obietnica wyborcza WYCOFANA ze względu na koszt 45-50 mld zł/rok) — rząd deklaruje projekt do Sejmu JESIENIĄ 2026, z półrocznym vacatio legis (czyli NIE wejdzie 1.01.2027, raczej w trakcie 2027) | web_search 2026-08-14, 6+ źródeł (zero.pl, akademialtca.pl, goniec.pl, pitax.pl, pit.pl, wprawieni.pl, taxcoach.pl, stronymonki.pl) | Sprawdzić status co 4-6 tygodni (projekt w aktywnej fazie legislacyjnej, zakres już raz istotnie się zmienił). Gdy ustawa zostanie UCHWALONA — przenieść z tej sekcji do standardowej naprawy (nowa flaga F- lub bezpośrednia aktualizacja modułu PIT), z priorytetem WYSOKIM (wejście w życie 1.01.2027 lub w trakcie 2027 przy reformie skali) |
-| OBS-2 | **Opłaty od pobytu/noclegu — DWA równoległe projekty zmiany** (dodane 2026-08-15 na uwagę użytkownika): **(A) RZĄDOWY** — projekt ustawy o zmianie ustawy o podatkach i opłatach lokalnych z 28.05.2026 (RCL); **(B) POSELSKI (Lewica)** — zastąpienie opłaty miejscowej „opłatą turystyczną" przy zachowaniu opłaty uzdrowiskowej bez zmian | dr-06-podatki-finanse-publiczne-aml oraz dr-08-samorzad-terytorialny-prawo-lokalne (ustawa z 12.01.1991 o podatkach i opłatach lokalnych); pośrednio dr-02 (umowy najmu krótkoterminowego / usługi hotelarskie) | **WYSOKI** — projekt (A) zakłada wejście w życie **1.01.2027**, a zmienia PODMIOT ZOBOWIĄZANY, nie tylko stawkę | Stan na 2026-08-15: **(A)** — projekt z 28.05.2026 opublikowany na RCL. ⭐ ISTOTA: opłaty miejscowa i uzdrowiskowa mają być powiązane ze **świadczeniem usług zakwaterowania** (nowa definicja w słowniczku ustawy: usługi hotelarskie w rozumieniu art. 3 ust. 1 pkt 8 ustawy o usługach hotelarskich + noclegi w sanatoriach), a **prowadzący obiekt noclegowy ma stać się PŁATNIKIEM zamiast inkasentem** — to przesunięcie odpowiedzialności publicznoprawnej na hotelarza/wynajmującego, nie kosmetyka. Celem jest likwidacja sporów o CEL pobytu (turystyczny vs służbowy). RPO zgłaszał wątpliwości interpretacyjne (m.in. od kiedy liczy się „doba"/„noc"). **(B)** — projekt poselski: rezygnacja z kryteriów klimatycznych i krajobrazowych, każda gmina mogłaby wprowadzić opłatę turystyczną, także dla wybranych jednostek pomocniczych; opłata uzdrowiskowa bez zmian; samorządy popierają kierunek, zgłaszają uwagi szczegółowe. ⚠️ Oba projekty dotyczą TEJ SAMEJ materii i mogą się wykluczać — śledzić, KTÓRY wejdzie | web_search 2026-08-15: prawo.pl, Serwis Samorządowy PAP, Gazeta Prawna, infor.pl, podatkowyreferat.online (Rząd 2B/3); tekst projektu (A) na RCL, projektu (B) w drukach sejmowych — ⚠️ NUMERY DRUKU/POZYCJI RCL NIEUSTALONE, nie zgadywano | Gdy którykolwiek zostanie UCHWALONY: nowa flaga F- wg PROTOKOŁU PRZY TRAFIENIU, priorytet WYSOKI (zmiana konstrukcji opłaty, nie kwoty — to przypadek, w którym MON-3 NAKAZUJE otwarcie flagi). Sprawdzać co 4 tygodnie, częściej po 1.10.2026 (okno przed planowanym wejściem 1.01.2027) |
-| OBS-3 | **Regulacja UTO/hulajnóg elektrycznych i e-rowerów** (przeniesione 2026-08-15 z flagi **F-14**, otwartej 2026-08-04 — patrz uzasadnienie migracji w AUDIT-JOURNAL, wpis 2026-08-15c). ⚠️ To NIE JEST „delegalizacja UTO" (błędne uproszczenie medialne), lecz REGULACYJNE ZAOSTRZENIE | dr-03-prawo-karne-wykroczenia-egzekucja (`mod-przerobki-modyfikacje-pojazdow.md`, sekcja 1) | niski | Stan na 2026-08-05 (bez zmian do 2026-08-15): komunikat MI z 10.07.2026 — DWIE ustawy do zmiany (o systemach homologacji pojazdów ORAZ o kierujących pojazdami) + rozporządzenie ws. warunków technicznych pojazdów. TDT ma decydować, jakie urządzenia wejdą na rynek; Straż Miejska ma dostać uprawnienia do kontroli parametrów na miejscu (hamownie dla policji do pomiaru mocy/prędkości); ⭐ e-ROWERY powyżej 25 km/h mają wymagać REJESTRACJI jak motorowery. Planowane wejście: 1.01.2027 wg JEDNEGO źródła — NIEPOTWIERDZONE. ⛔ ODRZUCONE ŹRÓDŁO: dane „18 lat, konfiskata 30 dni" (forsal.pl) dotyczą MACEDONII PÓŁNOCNEJ (109. sesja parlamentu, 30.06.2026), NIE Polski | web_search 2026-08-04/05, komunikat MI | Sprawdzać bliżej 1.01.2027; przy uchwaleniu — nowa flaga F- wg PROTOKOŁU PRZY TRAFIENIU |
-| OBS-4 | **Pakiet „praworządnościowy": status neosędziów, KRS, reforma USP** (przeniesione 2026-08-15 z flagi **F-15**, otwartej 2026-08-07). ⚠️ Jedyna pozycja OBSERWOWANA o bezpośrednim wpływie na WAŻNOŚĆ ORZECZEŃ — traktować priorytetowo mimo przeniesienia z rejestru flag | dr-01-ustroj-konstytucyjny-i-zrodla-prawa (`mod-ustawa-KRS-i-ustroj-wladzy.md`, `mod-USP-ustroj-sadow-powszechnych.md`) | **WYSOKI** | Stan zweryfikowany 2026-08-14. ROZSTRZYGNIĘTE: (1) nowelizacja ustawy o KRS (wybór 15 sędziów-członków przez sędziów) uchwalona 23.01.2026, Senat 28.01.2026, **ZAWETOWANA przez Prezydenta 19.02.2026** (zarzut „segregacji sędziów"); (2) „plan B" — uchwała Sejmu z 27.02.2026 o uwzględnieniu woli sędziów wyrażonej w zgromadzeniach, na podstawie wciąż obowiązującej ustawy z 12.05.2011; (3) **15.05.2026 Sejm WYBRAŁ nową KRS** (235 głosów, wymagane 3/5), kadencja od 16.05.2026, pierwsze posiedzenie 9-10.06.2026; (4) węższa nowelizacja USP (asesorzy w wydziałach rodzinnych/nieletnich) UCHWALONA — **Dz.U. 2026 poz. 370**. NADAL W TOKU: (a) szersza ustawa Żurka o STATUSIE neosędziów (kategorie zielona/żółta, unieważnienie części uchwał dawnej KRS, powtórzenie konkursów) — UTKNĘŁA w komisji z braku kworum, odłożona „po wakacjach"; TO JEST główne źródło ryzyka dla ważności orzeczeń; (b) duża reforma USP (UD322/UD323 — spłaszczenie struktury, jednolity status sędziego, szersze kompetencje MS) na etapie opiniowania, RPO zgłosił 34-stronicową opinię z zastrzeżeniami konstytucyjnymi; (c) deadline ETPC (wyrok pilotażowy Wałęsa p. Polsce): listopad 2026 | web_search 2026-08-14 | Sprawdzać **co 2-3 tygodnie** (najkrótszy interwał w całej sekcji), priorytet na powrót prac komisji sejmowej po wakacjach. Przy uchwaleniu ustawy o statusie neosędziów — natychmiast nowa flaga F- o priorytecie NAJWYŻSZYM |
-
-## 🗺️ ZADANIE ODŁOŻONE — WYKONAĆ PO ZAMKNIĘCIU WSZYSTKICH FLAG F- (na żądanie użytkownika, 2026-08-13)
-
-> 🔗 POWIĄZANIE (dodano 2026-08-14): ta mapa jest BEZPOŚREDNIO
-> wykorzystywana przez "📋 PROTOKÓŁ PRZY TRAFIENIU" w sekcji
-> "♾️ MONITORING" wyżej — po jej powstaniu STAJE SIĘ pierwszym,
-> najszybszym źródłem przy lokalizowaniu modułów dotkniętych nową
-> nowelizacją. DOPÓKI nie powstanie, protokół MON korzysta z
-> zapasowej ścieżki (16× lokalna MAPA-AKTOW.md + centralna
-> ROUTING-MAP.md równolegle).
-
-**Cel:** dla każdego modułu w każdym DR-skillu — zwięzła, ustandaryzowana
-mapa "czym moduł się zajmuje + jakie konkretne akty/przepisy pokrywa",
-żeby przy nowelizacji ustawy dało się OD RAZU znaleźć wszystkie moduły
-do aktualizacji, zamiast przeszukiwać treść każdego z osobna.
-
-**Dlaczego na końcu, nie teraz:** tworzenie tej mapy PRZED zamknięciem
-otwartych flag oznaczałoby mapowanie modułów, których treść i tak się
-zmieni (nowe moduły jak F-64/PPSA, F-75/KKW, przepisany od podstaw;
-istniejące moduły uzupełniane o nowe artykuły) — mapa musiałaby być
-tworzona dwa razy. Czekamy, aż stan modułów się ustabilizuje.
-
-**Zakres (roboczy szkic, do doprecyzowania przy realizacji):**
-- Per moduł: nazwa aktu + numer Dz.U. (już częściowo w MAPA-AKTOW.md
-  per-DR, ale ROZPROSZONE po 16 osobnych plików) + lista artykułów/
-  rozdziałów faktycznie opracowanych (nie całego aktu) + data ostatniej
-  weryfikacji treści (odróżnić od daty poprawki samego numeru — patrz
-  wzorzec ryzyka z F-25/F-28/F-31/F-40/F-45/F-49/F-57, gdzie numer był
-  poprawny, ale treść nie zdążyła być re-zweryfikowana)
-- Format: prawdopodobnie JEDEN zbiorczy plik (np. `references/
-  MAPA-MODULOW-GLOBALNA.md` w audyt-systemu-v4) zamiast 16 rozproszonych,
-  żeby przy nowelizacji jednego aktu (np. KPC, używanego w 4+ DR) dało
-  się go znaleźć JEDNYM wyszukiwaniem, nie przeglądaniem 16 plików
-- Rozważyć czy to ma być statyczny plik czy wygenerowany skryptem
-  (bash/python przeszukujący wszystkie MAPA-AKTOW.md + nagłówki modułów)
-  — automatyzacja zmniejszy ryzyko, że mapa sama stanie się nieaktualna
-  (ten sam wzorzec ryzyka co "stara notatka", F-44/F-49/F-52/F-58)
-
-**Status:** ODŁOŻONE — nie rozpoczynać przed zamknięciem wszystkich
-aktywnych flag F- w tym rejestrze.
-
-## DR-04 (badanie 2026-08-13)
-
-> 🔁 Dawna **F-29** przeniesiona 2026-08-15n do rejestru **REACT-1**.
-
-| F-28 | DR-04 — ✅ CZĘŚCIOWO ZAMKNIĘTE 2026-08-14: najpilniejszy punkt (6, ustawa antymobbingowa) NAPRAWIONY — Dz.U. 2026 poz. 1046, w życie 5.11.2026. **Pozostaje 5 flag** ⚠️ istniejących WYŁĄCZNIE lokalnie w `MAPA-AKTOW.md` DR-04 | dr-04-prawo-pracy-zus-swiadczenia | niski-średni (obniżony — najpilniejszy punkt zamknięty) | 2026-07-02 do 2026-07-30, migracja: 2026-08-13, częściowa naprawa: 2026-08-14 | (1) `mod-KRUS-rolnicze-ubezpieczenia` — numer poprawiony (2024.90→2025.1770), TREŚĆ niezweryfikowana; (2) `mod-ustawa-pomoc-spoleczna` — numer poprawiony (2025.1214→2026.639), TREŚĆ niezweryfikowana; (3) `mod-SUS-ZUS-ubezpieczenia-spoleczne` — niepotwierdzona ewentualna zmiana Dz.U. 2026 poz. 507; (4) `mod-ustawa-zwiazki-zawodowe-spory-zbiorowe` — NAZWA modułu myląca (dotyczy układów zbiorowych, nie sporów zbiorowych); (5) `mod-KP-dzial-III-wynagrodzenie-swiadczenia-jawnosc` — status ustawy implementującej Etap 2-3 dyrektywy UE 2023/970 niepotwierdzony | Web_search per punkt |
-
-## DR-05 (badanie 2026-08-13)
-
-✅ Wszystkie flagi tej sekcji zamknięte — F-31 (2026-08-14o) i F-32
-(2026-08-15b). DR-05 ma 0 otwartych flag F-.
-
-## DR-06 (badanie 2026-08-13)
-
-✅ Sekcja bez otwartych flag F-. Dawna **F-35** przeniesiona 2026-08-15n
-do rejestru **REACT-1**.
-
-
-## DR-07 (badanie 2026-08-13)
-
-> 🔁 Dawna **F-38** przeniesiona 2026-08-15n do rejestru **REACT-1**.
-
-| F-36 | DR-07 — nietypowo WYSOKA koncentracja flag "WYMAGA AKTUALIZACJI MODUŁU": 4 z 16 modułów (25%) + moduł GŁÓWNY (PZP) z własnym zastrzeżeniem częściowej re-weryfikacji | dr-07-zamowienia-publiczne-fundusze-ue | średni-wysoki | 2026-07-02, migracja: 2026-08-13 | (1) `mod-PZP-zamowienia-publiczne-KIO.md` (moduł GŁÓWNY) — numer poprawiony (2024.1320→2026.793), reszta modułu nieweryfikowana; (2) `mod-ustawa-Prokuratorii-Generalnej.md` — numer poprawiony (2023.1109→2024.1192); (3) `mod-ustawa-RIO-regionalne-izby.md` — numer poprawiony (2023.1325→2025.7); (4) `mod-ustawa-dyscyplina-finansow-publicznych.md` — numer poprawiony (2024.104→2025.1484); (5) `mod-ustawa-fundusze-UE-pomoc-publiczna.md` — numer poprawiony (2024.1655→2025.1733) | Priorytet: PZP jako moduł główny w pierwszej kolejności |
-
-## DR-09 (badanie 2026-08-13)
-
-> 🔁 Dawna **F-42** przeniesiona 2026-08-15n do rejestru **REACT-1**.
-
-| F-40 | DR-09 — 3 flagi ⚠️ "WYMAGA AKTUALIZACJI MODUŁU" istniejące wyłącznie lokalnie | dr-09-budownictwo-srodowisko-energia-transport | średni | 2026-07-02, migracja: 2026-08-13 | (1) `mod-PrGeodezyjne-kartografia-wywlaszczenia.md` — numer poprawiony (2023.1752→2024.1151); (2) `mod-UGN-gospodarka-nieruchomosciami.md` — numer poprawiony (2024.1899→2026.399); (3) `mod-prawo-geologiczne-gornicze.md` — numer poprawiony (2024.1290→2026.69) | Web_search per punkt |
-
-## DR-10 (badanie 2026-08-13)
-
-> 🔁 Dawna **F-47** przeniesiona 2026-08-15n do rejestru **REACT-1**.
-
-| F-45 | DR-10 — ✅ CZĘŚCIOWO ZAMKNIĘTE 2026-08-13: rejestracyjna część naprawiona — dodano 2 wpisy `[✓]` i 1 wiersz mapy. **Pozostają 3 flagi treściowe "WYMAGA AKTUALIZACJI MODUŁU"** | dr-10-zdrowie-farmacja-zywnosc-rolnictwo | niski-średni (obniżony po zamknięciu części rejestracyjnej) | 2026-07-02 do 2026-08-12, częściowa naprawa: 2026-08-13 | (1) GIS w `mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny.md` — numer poprawiony, treść niezweryfikowana; (2) Prawo oświatowe w `mod-ustawa-oswiata-szkolnictwo-wyzsze.md` — numer poprawiony, treść niezweryfikowana; (3) oba składniki `mod-ustawa-edukacja-specjalna-dostepnosc.md` — POTWIERDZONE: ten sam błędny numer źródłowy 2022.2240 co w DR-05 (F-31, wciąż otwarta) | FAZA 3E dla wszystkich 3 — rozważyć naprawić razem z F-31 (ten sam akt) |
-
-## DR-11 (badanie 2026-08-13)
-
-| F-48 | DR-11 — `mod-ustawa-certyfikacja-cyberbezpieczenstwa.md` jest UCZCIWIE oznaczony jako STUB (nie ukryty "moduł-widmo"), nigdy nierozbudowany. ✅ CZĘŚCIOWO ZAMKNIĘTE 2026-08-14b: lit. (b) — 3 moduły rodziny RODO (DPIA, DSAR, RCP-DPA) DOPISANE do MAPA-AKTOW.md, mapa DR-11 kompletna (22/22) | dr-11-cyfrowe-cyber-ai-dane-ip | niski — świadomie odłożone | 2026-06-05 (STUB), 2026-08-13 (migracja), częściowa naprawa: 2026-08-14b | STUB: akt bazowy (Dz.U. 2025 poz. 1017) już potwierdzony | Rozbudować STUB gdy przepisy wejdą w życie |
-| F-49 | DR-11 — ✅ CZĘŚCIOWO ZAMKNIĘTE 2026-08-13: sprzeczna notatka (KSC/NIS2 wciąż wymieniana jako otwarta mimo zamknięcia 2026-07-26) NAPRAWIONA — usunięta z notatki podsumowującej. **Pozostają 3 standardowe flagi "WYMAGA AKTUALIZACJI MODUŁU"** | dr-11-cyfrowe-cyber-ai-dane-ip | niski-średni (obniżony po naprawie notatki) | 2026-07-02, częściowa naprawa: 2026-08-13 | (1) `mod-PrTelekom-poczta-UKE.md` — numer poprawiony (1220→1221) + NAZWA myląca; (2) `mod-ustawa-informatyzacja-podmiotow-publicznych.md` — numer poprawiony (2024.1557→2025.1703); (3) `mod-ustawa-podpis-elektroniczny.md` — numer poprawiony (2016.147→2016.1579), eIDAS 2.0 w toku | FAZA 3E dla 3 pozostałych |
-
-## DR-12 (badanie 2026-08-13)
-
-✅ Sekcja bez otwartych flag F-. **F-56 ZAMKNIĘTA 2026-08-15n** decyzją
-audytową (wątek adwokatura zamknięty formalnie — patrz AUDIT-JOURNAL.md,
-wpis AUDYT-2026-08-15n). Metodologia i wyniki wątku radcowskiego
-pozostają w dzienniku i mogą zostać odtworzone, jeśli temat wróci.
-
-
-## DR-13 (badanie 2026-08-13)
-
-✅ Wszystkie flagi tej sekcji zamknięte — patrz `AUDIT-JOURNAL.md`, wpis
-AUDYT-2026-08-14aa-F57-ZAMKNIĘTA. DR-13 ma 0 otwartych flag F-.
-
-## DR-14 (badanie 2026-08-13)
-
-| F-60 | DR-14 — luka strukturalna: Konwencje Wiedeńskie o stosunkach dyplomatycznych (1961) i konsularnych (1963) — ZERO wzmianek | dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka | średni | 2026-08-13 | Brak — temat nigdy nie był opracowany | Nowy moduł/rozszerzenie mod-NATO / mod-ONZ |
-| F-61 | DR-14 — luka strukturalna: Konwencja genewska 1951 o statusie uchodźców + Protokół 1967 — ZERO wzmianek w DR-14 I DR-05 | dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka (możliwie też dr-05) | średni | 2026-08-13 | Historycznie sprawdzone razem z F-30 (DR-05, cudzoziemcy/Ukraina — ZAMKNIĘTA 2026-08-13, była tylko przestarzałą notatką, nie realną treściową luką) — TA flaga (F-61) pozostaje otwarta jako ODRĘBNA, REALNA luka: fundament traktatowy (definicja uchodźcy, non-refoulement) wciąż nieobecny w żadnym module | Ustalić właściwy DR dla tego traktatu (prawdopodobnie DR-14 jako fundament + odesłanie z DR-05) |
-
-## DR-15 (badanie 2026-08-13)
-
-
-
-## RAPORTY POKRYCIA 2026-08-13 (materiał zewnętrzny, dostarczony przez użytkownika)
-
-> Pełne raporty (metodologia, tabela rozdział-po-rozdziale, uzasadnienia) zachowane trwale w `references/raporty-pokrycia-2026-08-13/`. Poniższe wiersze to skrócone streszczenia z odniesieniem do pliku źródłowego — przy naprawie zawsze wczytać pełny raport, nie polegać wyłącznie na tym wierszu. Priorytety wg indeksu zbiorczego (`00-indeks-raportow-pokrycia.md`) — patrz też sekcja "Najpilniejsze braki łącznie" w tym pliku dla rankingu cross-kodeksowego.
-
-| F-64 | **PPSA — ✅ CZĘŚCIOWO ZAMKNIĘTE 2026-08-13:** pierwszy dedykowany moduł PPSA UTWORZONY (`mod-PPSA-terminy-kasacja-prawo-pomocy.md`), naprawiając 3 z 5 pierwotnie wskazanych priorytetów: uchybienie/przywrócenie terminu (85-89), skarga kasacyjna do NSA (173-193), prawo pomocy (245-259). Jedna wyspa była już wcześniej dobrze opracowana: kwalifikacja skargi (art. 3 §2, 50–62, 145/147/148/152), NIE dotknięta tą naprawą. **Pozostają otwarte:** sprzeciw od decyzji/postanowienia (64a–64e), wznowienie postępowania sądowoadministracyjnego (270–285), posiedzenia sądowe (90-114), pełne opracowanie orzeczeń poza wąskim wycinkiem (132-144) | dr-05-prawo-administracyjne-sadowoadministracyjne | średni (obniżony z "najwyższy" — rdzeń praktyczny naprawiony, pozostają tematy drugorzędne) | 2026-08-13 (raport zewnętrzny), częściowa naprawa: 2026-08-13 | `references/raporty-pokrycia-2026-08-13/raport-pokrycia-PPSA.md` | 1) Sprzeciw od decyzji/postanowienia (64a-64e) — dopełnienie już dobrze opracowanego milczącego załatwienia z KPA; 2) Wznowienie postępowania sądowoadministracyjnego (270-285) — domknięcie asymetrii względem KPA; 3) Posiedzenia sądowe (90-114) |
-| F-65 | **KPC — ✅ CZĘŚCIOWO ZAMKNIĘTE 2026-08-14d (cz. II):** utworzono `mod-KPC-nieproces-czesc-ogolna.md` — PIERWSZY moduł KSIĘGI II w systemie, domykający wynik 0×/6× z raportu pokrycia. Tytuł I (506-525): wszczęcie, właściwość rzeczowa i ⛔ MIEJSCOWA WYŁĄCZNA wg wnioskodawcy, ⭐⭐ zainteresowany vs uczestnik (510), wniosek (511), odrębności dowodowe, apelacja vs zażalenie (518), skarga kasacyjna (519(1), katalog częściowy) + mapa nawigacyjna Tytułu II. Wcześniej (cz. I, 08-14) naprawiono prawomocność (365-366) i granice apelacji (378, 380-386). **POZOSTAJĄ OTWARTE:** w Księdze II — sprawy spadkowe (680-691), rzeczowe (zasiedzenie, zniesienie współwłasności, rozgraniczenie), wieczystoksięgowe, ubezwłasnowolnienie (544-560(12)), depozyt sądowy (692-693(17)), pełny katalog 519(1); w Księdze I — organizacja postępowania/prekluzja (205(1)-205(12)), sprawy gospodarcze (458(1)-458(13)), ograniczenia egzekucji (829, 833), egzekucja świadczeń niepieniężnych/eksmisja (1041-1059), alimenty (1081-1088), skarga kasacyjna do SN (398(1)-398(21)), zażalenie, wznowienie cywilne | cross-DR (dr-02, dr-05, dr-12, dr-16) | **średni (obniżony z WYSOKIEGO** — całkowita luka strukturalna Księgi II przestała istnieć; pozostałe braki są rozległe, ale każdy ma już ramę ogólną, w której można go osadzić) | 2026-08-13 (raport zewn.), naprawy częściowe: 2026-08-14 (cz. I), 2026-08-14d (cz. II) | `references/raporty-pokrycia-2026-08-13/raport-pokrycia-KPC.md`; szczegóły naprawy: AUDIT-JOURNAL.md, wpis AUDYT-2026-08-14w | 1) Sprawy SPADKOWE w nieprocesie (680-691) — najczęstsza kategoria, ⚠️ sprzężenie: mod-KC-spadki pokrywa stronę materialną, proceduralnej brak; 2) prawo RZECZOWE w nieprocesie; 3) organizacja postępowania/prekluzja (205(1)-205(12)); 4) ograniczenia egzekucji (829, 833) |
-| F-81 | **KPK — reszta po zamknięciu F-66 (2026-08-15, 7 sesji).** F-66 FORMALNIE ZAMKNIĘTA — rdzeń praktyczny modułu `mod-KPK-podstawy-odwolawcze-przeslanki-zarzuty-biegli.md` uznany za wystarczająco solidny (8 sekcji, CAŁY Rozdział 48 postępowania odwoławczego z pełną treścią najważniejszych przepisów praktycznych — 425/426/428/429/430/434/437; art. 17, 156, 193-206 częściowo, 313, 485-499, 568a-577). Ta flaga zbiera WYŁĄCZNIE pozostałe, węższe punkty jako świadomie odłożone drobne doprecyzowania, nie realne luki blokujące użycie modułu: (1) dokładne verbatim brzmienie art. 427 §2-3, 430, 431, 432, 433 §1-2, 435, 436 (obecnie w module: tytuły + kontekst doktrynalny, nie cytat verbatim); (2) odesłania sygnalizowane ale nie sprawdzone: art. 441, 443, 60, 119, 308, 332, 470, 422 §2, 85 KK, 573 §3, 156 §3-4/§6, 159, 250 §2b, 454, 517i §1, 443a (relacja do już opracowanego fragmentu niejasna); (3) art. 198, 199, 203-205 Rozdz. 22 (biegli — pozycje pominięte); (4) art. 498 (status niejasny — możliwe uchylenie analogicznie do 486); (5) TRZY nierozstrzygnięte rozbieżności wersji czasowych — art. 575 §1 (wyrok łączny, uprawomocnienie vs wydanie), art. 156 §5 (dostęp do akt, kolejność klauzuli), art. 437 §1 zd. 2 (możliwe usunięcie nowelizacją 2019 r.) — wszystkie WYMAGAJĄ weryfikacji bezpośrednio w ISAP/eli.gov.pl; (6) spór doktrynalny nierozstrzygnięty: obligatoryjność zgody prokuratora na odpisy w ramach 156 §5a; (7) stary wiersz bazowy KPK w `dr-03/MAPA-AKTOW.md` nadal pomija nowelizacje Dz.U. 2026.421/2026.638 | dr-03-prawo-karne-wykroczenia-egzekucja | niski (żaden punkt nie blokuje typowego użycia modułu w praktyce kancelaryjnej — to doprecyzowania i rozbieżności do wyjaśnienia, nie luki strukturalne) | 2026-08-15 (przy zamknięciu F-66) | `references/raporty-pokrycia-2026-08-13/raport-pokrycia-KPK.md`; pełna historia poprzedniczki: AUDIT-JOURNAL.md, wpisy AUDYT-2026-08-15e do l oraz wpis zamykający AUDYT-2026-08-15m | 1) TRZY rozbieżności wersji czasowych — sesja dedykowana wyłącznie ISAP/eli.gov.pl, rozstrzygająca wszystkie trzy naraz; 2) dokończyć verbatim pozostałych 7 przepisów Rozdz. 48; 3) art. 498 status; 4) reszta Rozdz. 22 (198/199/203-205) i odesłania — niski priorytet, web_search wyłącznie na żądanie konkretnej sprawy |
-| F-68 | **KSH — ✅ CZĘŚCIOWO ZAMKNIĘTE 2026-08-14 i 2026-08-15v.** Organy sp. z o.o. (Tytuł III, Dział I, Rozdz. 3, art. 201-254) NAPRAWIONE 14.08 modułem `mod-KSH-organy-spolki-zoo.md`. ✅ **NAPRAWIONE 2026-08-15v — Tytuł IV, łączenie/podział/przekształcanie (491-584¹³):** dodano sekcję w `mod-KSH-spolki-handlowe.md` obejmującą Dział I Łączenie (dwie metody — przejęcie i zawiązanie nowej spółki, sukcesja uniwersalna art. 494, dopłaty do 10%), Dział II Podział (⭐ PIĘĆ sposobów, nie cztery — nowelizacja 15.09.2023 dodała podział przez wyodrębnienie, art. 529 § 1 pkt 5, rozróżniony od wydzielenia tym, kto obejmuje udziały), Dział III Przekształcenia (ogólna zasada, przekształcenie przedsiębiorcy w spółkę kapitałową). Z praktyczną adnotacją o due diligence przy sukcesji uniwersalnej. ~600 artykułów KSH ogółem — **pozostaje otwarte:** Tytuł I i Tytuł II (spółki osobowe, 129 art.) praktycznie zerowe; Oddział 2 Rozdziału 3 (nadzór/rada nadzorcza, 212-226); Dział Ia (PSA) i Dział II (S.A.) prawie puste (339 art. łącznie) | dr-02-prawo-cywilne-rodzinne-gospodarcze | średni (obniżony z "średni-wysoki" — dwie z trzech głównych wskazanych luk naprawione: organy sp. z o.o. i Tytuł IV) | 2026-08-13 (raport zewnętrzny), częściowa naprawa: 2026-08-14, naprawa Tytułu IV: 2026-08-15v | `references/raporty-pokrycia-2026-08-13/raport-pokrycia-KSH.md` — ⚠️ nieaktualny co do Tytułu IV, naprawiony, raport tego nie pokazuje | 1) Tytuł II — sp. jawna/komandytowa (22-66, 102-124); 2) Rozdz. 3 Oddz. 2 — nadzór/rada nadzorcza (212-226), dopełnienie już opracowanego Rozdziału 3; 3) odświeżyć raport pokrycia co do Tytułu IV; 4) ⚠️ moduł `mod-KSH-spolki-handlowe.md` osiągnął 850 linii (próg ZASADY 13 to 1000) — kolejna znaczna rozbudowa powinna rozważyć wydzielenie do osobnego modułu zamiast dalszego wzrostu tego pliku |
-| F-86 | **⛔ ROZDZIELONA Z F-69 (sesja 2026-08-15v).** Prawo upadłościowe (PrUp), rozdział-po-rozdziale zmapowane. ✅ **CZĘŚCIOWO ZAMKNIĘTE 2026-08-15v — Tytuł IV, kompetencje syndyka (149–235), NAPRAWIONE:** dodano pełną treść (powołanie i wymogi art. 156–157a, podstawowe kompetencje i status prawny art. 160/161/173, obowiązki sprawozdawcze art. 168/176, odwołanie/sankcje art. 169a–172, pięcioskładnikowy system wynagrodzenia art. 162–167b z zaliczkami). ⭐ **Przy naprawie wykryta i skorygowana NIEAKTUALNA podstawa prawna całego modułu (klasa błędu F-84):** moduł wskazywał PrUp jako Dz.U. 2025 poz. 614 t.j., ale ISAP potwierdza nowszy t.j. — **Dz.U. 2026 poz. 913** (obwieszczenie 12.06.2026) — wszystkie odwołania w module skorygowane (metryka, sekcja testu niewypłacalności, źródła online). **🟢 Dobrze pokryte:** test niewypłacalności (art. 11), zgłoszenie wierzytelności (art. 239), czynności bezskuteczne (art. 127–128), **kompetencje syndyka (Tytuł IV, 149–235 — nowe)**, KRZ jako narzędzie proceduralne. **🟡 Częściowo:** wniosek o ogłoszenie upadłości (20–25a, brak elementów formalnych), skutki ogłoszenia upadłości (57–148, tylko czynności bezskuteczne), podział funduszów masy (335–361, tylko art. 336), upadłość konsumencka (opisana ogólnie, bez numerów artykułów). **🔴 Całkowity brak — pozostaje otwarte:** przepisy wstępne i podmiotowy zakres (1–9b), właściwość sądu (18–19), postępowanie zabezpieczające (36–43, wysoka waga praktyczna), przygotowana likwidacja/pre-pack (56a–56h), układ w upadłości (267–305), likwidacja masy (306–334), zakończenie/umorzenie postępowania (361–372), **zakaz prowadzenia działalności gospodarczej (Tytuł X, 373–377 — naturalne dopełnienie art. 299 KSH)**, postępowanie międzynarodowe (378–417), postępowania szczególne wobec banków/ubezpieczycieli/deweloperów (418–425+) | dr-02-prawo-cywilne-rodzinne-gospodarcze | średni (obniżony z "średni-wysoki" — najważniejsza praktycznie luka, rola syndyka, naprawiona) | 2026-08-13 (raport zewnętrzny), rozdzielenie z F-69: 2026-08-15v, naprawa Tytułu IV + korekta t.j.: 2026-08-15v | `references/raporty-pokrycia-2026-08-13/raport-pokrycia-PrUp-PrRestr.md`, sekcja 1 (PrUp) — ⚠️ nieaktualna co do Tytułu IV, patrz wyżej | ✅ **CZĘŚCIOWO ZAMKNIĘTE 2026-08-15v — postępowanie zabezpieczające (36–43), NAPRAWIONE:** dodano treść: charakter fakultatywny zabezpieczenia (art. 36), tymczasowy nadzorca sądowy (art. 38), granica zwykłego zarządu dłużnika pod rygorem nieważności (art. 38a), zawieszenie egzekucji (art. 39), zarząd przymusowy jako środek wzmocniony (art. 40), upadek zabezpieczenia (art. 43). Zweryfikowano też, że rozbieżność brzmienia art. 36/38 między starszymi i nowszymi kopiami źródeł (obligatoryjne vs fakultatywne) NIE jest świeżą nowelizacją — nawet t.j. 2024.794 miał już brzmienie fakultatywne; starsze źródła (orka.sejm.gov.pl) pokazywały PIERWOTNY tekst ustawy z 2003 r. sprzed dawnych nowelizacji, nie aktualny stan. **Pozostaje otwarte:** Tytuł X — zakaz prowadzenia działalności gospodarczej (373–377, dopełnienie art. 299 KSH); przygotowana likwidacja/pre-pack (56a–56h); układ w upadłości (267–305); likwidacja masy (306–334); zakończenie/umorzenie postępowania (361–372); postępowanie międzynarodowe (378–417); postępowania szczególne (418–425+) | dr-02-prawo-cywilne-rodzinne-gospodarcze | niski-średni (obniżony z "średni" — dwie najważniejsze praktycznie luki, rola syndyka i postępowanie zabezpieczające, obie naprawione) | 2026-08-13 (raport zewnętrzny), rozdzielenie z F-69: 2026-08-15v, naprawa Tytułu IV + postępowania zabezpieczającego + korekta t.j.: 2026-08-15v | `references/raporty-pokrycia-2026-08-13/raport-pokrycia-PrUp-PrRestr.md`, sekcja 1 (PrUp) — ⚠️ nieaktualna co do Tytułu IV i postępowania zabezpieczającego, oba naprawione, raport tego nie pokazuje | ✅ **CZĘŚCIOWO ZAMKNIĘTE 2026-08-15v — Tytuł X, zakaz prowadzenia działalności gospodarczej (373–377), NAPRAWIONY:** dodano treść: okres 1–10 lat (art. 373 ust. 1), przesłanki w tym "faktyczny zarządca"/słup (ust. 1a), wyjątek przy złożonym wniosku restrukturyzacyjnym z nieznacznym pokrzywdzeniem, dodatkowa przesłanka dla osób fizycznych (art. 374), recydywa (ust. 3), procedura wyłącznie na wniosek z zamkniętym katalogiem uprawnionych (art. 376), terminy prekluzyjne 1 rok / 3 lata (art. 377) — z adnotacją o sprzężeniu z art. 299 KSH. ⭐ **Przy naprawie skorygowano JEDNO przestarzałe źródło** (2022, "3 do 10 lat") na rzecz aktualnego "1 do 10 lat", potwierdzonego 5+ zgodnymi źródłami — dolna granica została obniżona wcześniejszą nowelizacją. **Pozostaje otwarte:** przygotowana likwidacja/pre-pack (56a–56h); układ w upadłości (267–305); likwidacja masy (306–334); zakończenie/umorzenie postępowania (361–372); postępowanie międzynarodowe (378–417); postępowania szczególne wobec banków/ubezpieczycieli/deweloperów (418–425+) | dr-02-prawo-cywilne-rodzinne-gospodarcze | niski (obniżony z "niski-średni" — trzy najważniejsze praktycznie luki PrUp naprawione: rola syndyka, postępowanie zabezpieczające, zakaz prowadzenia działalności) | 2026-08-13 (raport zewnętrzny), rozdzielenie z F-69: 2026-08-15v, naprawa Tytułu IV + postępowania zabezpieczającego + Tytułu X + korekta t.j.: 2026-08-15v | `references/raporty-pokrycia-2026-08-13/raport-pokrycia-PrUp-PrRestr.md`, sekcja 1 (PrUp) — ⚠️ nieaktualna co do Tytułu IV, postępowania zabezpieczającego i Tytułu X, wszystkie naprawione, raport tego nie pokazuje | ✅ **CZĘŚCIOWO ZAMKNIĘTE 2026-08-15v — przygotowana likwidacja/pre-pack (56a–56h), NAPRAWIONE:** dodano treść: istota (wniosek razem z wnioskiem o upadłość, art. 56a), zasady dla podmiotów powiązanych (art. 56b), przesłanki zatwierdzenia obligatoryjne/fakultatywne z terminami i aukcją (art. 56c–56ca), procedura i zażalenia (art. 56d–56e), skutki sprzedaży analogiczne do egzekucyjnej (art. 56f). **Pozostaje otwarte — niższy priorytet praktyczny:** układ w upadłości (267–305, instytucja odrębna od PrRestr); likwidacja masy (306–334); zakończenie/umorzenie postępowania (361–372); postępowanie międzynarodowe (378–417); postępowania szczególne wobec banków/ubezpieczycieli/deweloperów/emitentów obligacji (418–425+) | dr-02-prawo-cywilne-rodzinne-gospodarcze | bardzo niski (obniżony z "niski" — cztery z pięciu wskazanych priorytetów PrUp naprawione; pozostałe luki dotyczą rzadszych sytuacji praktycznych) | 2026-08-13 (raport zewnętrzny), rozdzielenie z F-69: 2026-08-15v, naprawa Tytułu IV + postępowania zabezpieczającego + Tytułu X + pre-pack + korekta t.j.: 2026-08-15v | `references/raporty-pokrycia-2026-08-13/raport-pokrycia-PrUp-PrRestr.md`, sekcja 1 (PrUp) — ⚠️ nieaktualna co do czterech naprawionych sekcji, patrz wyżej | 1) układ w upadłości (267–305) — jeśli pojawi się sprawa; 2) likwidacja masy (306–334); 3) odświeżyć raport pokrycia co do wszystkich czterech naprawionych sekcji |
-| F-87 | **⛔ ROZDZIELONA Z F-69 (sesja 2026-08-15v) — Prawo restrukturyzacyjne (PrRestr), rozdział-po-rozdziale zmapowane, pokrycie znacznie słabsze niż PrUp.** ✅ CZĘŚCIOWO ZAMKNIĘTE 2026-08-14 (naprawa wykonana pod dawnym numerem F-69, przeniesiona tutaj): Dział VI — Układ (art. 150–179), JEDYNA centralna instytucja całej ustawy, NAPRAWIONY nowym modułem `mod-PrRestr-dzial-VI-uklad.md` (przepisy ogólne, propozycje układowe, głosowanie/zatwierdzenie z art. 119 — próg 50%/2/3, test zaspokojenia z nowelizacji 2025.1085, skutki układu) — zweryfikowane na dysku: moduł istnieje (242 linie), poprawnie zarejestrowany w SKILL.md i MAPA-AKTOW.md. ⚠️ **Raport `raport-pokrycia-PrUp-PrRestr.md` z 2026-08-13 jest NIEAKTUALNY w tym jednym punkcie** — wciąż pokazuje Dział VI jako 🔴, mimo naprawy z 14.08; wymaga odświeżenia przy najbliższej okazji, żeby nie wprowadzać w błąd przy kolejnym odczycie. ✅ **CZĘŚCIOWO ZAMKNIĘTE 2026-08-15v — Tytuł II, cztery tryby restrukturyzacji (210–337), NAPRAWIONY:** tabela "TRYBY RESTRUKTURYZACJI" w module dostała podstawę prawną po raz pierwszy — PZU (Dział I, 210–226h), PPU (Dział II, 227–264), PU (Dział III, 265–282), sanacja (Dział IV, 283–323), z progiem 15% wierzytelności spornych (art. 3 ust. 4 pkt 2) rozdzielającym PZU/PPU od PU, potwierdzonym 7 niezależnymi źródłami. ⭐ **Przy naprawie wykryto i skorygowano pułapkę nieaktualnego źródła:** termin dnia układowego (art. 211 ust. 2) zmieniony nowelizacją Dz.U. 2025 poz. 1085 (w życie 23.08.2025) z trzech na CZTERY miesiące — kilka kopii Rządu 2 wciąż pokazywało "trzy miesiące" mimo poprawnego wpisu nowelizacji we własnym rejestrze zmian; rozstrzygnięte porównaniem wersji datowanych przed/po 23.08.2025 (ta sama klasa błędu co F-82/F-84 — zgodność między kopiami źródła nie jest dowodem aktualności bez sprawdzenia daty). **Pozostaje otwarte — reszta ~400-artykułowej ustawy:** przepisy ogólne, cel ustawy, podstawy otwarcia postępowania (1–13), sąd i sędzia-komisarz (14–22), nadzorca i zarządca z perspektywy samej ustawy restrukturyzacyjnej (23–64 — temat pokrewny jest w `mod-ustawa-doradca-restrukturyzacyjny-zawod`, ale z perspektywy ustawy o licencji, nie art. 23–64 PrRestr), uczestnicy postępowania — spis wierzytelności, zgromadzenie i rada wierzycieli (65–139), pomoc publiczna (139a–149), układ częściowy (180–188), przepisy ogólne o postępowaniu (189–209), postępowanie międzynarodowe (335–380), postępowania odrębne — deweloperzy/emitenci obligacji/banki/SKOK-i (381–433) | dr-02-prawo-cywilne-rodzinne-gospodarcze | średni (obniżony z "wysoki" — praktyczne serce ustawy, cztery tryby z podstawą prawną, naprawione; pozostałe luki dotyczą etapów poprzedzających wybór trybu lub obszarów rzadziej używanych) | 2026-08-13 (raport zewnętrzny), częściowa naprawa: 2026-08-14 (Dział VI Układ), 2026-08-15v (Tytuł II, cztery tryby), rozdzielenie z F-69: 2026-08-15v | `references/raporty-pokrycia-2026-08-13/raport-pokrycia-PrUp-PrRestr.md`, sekcja 2 (PrRestr) — ⚠️ nieaktualna co do Działu VI i Tytułu II, oba już naprawione, raport tego nie pokazuje | 1) odświeżyć raport pokrycia co do Działu VI i Tytułu II (oba naprawione, raport z 13.08 tego nie pokazuje); 2) nadzorca/zarządca z perspektywy PrRestr (23–64), dopełnienie ustawy o licencji; 3) uczestnicy postępowania — wierzyciele, spis wierzytelności (65–139); 4) postępowanie sanacyjne — pozostałe rozdziały poza samym otwarciem (Rozdz. 2 pełny zakres skutków, Rozdz. 3 plan restrukturyzacyjny, 313–319) |
-| F-70 | **OP — ✅ CZĘŚCIOWO ZAMKNIĘTE 2026-08-14:** Dział IV Rozdz. 11 — dowody w postępowaniu podatkowym (180-200), etap decydujący o wyniku większości sporów, NAPRAWIONY nowym modułem `mod-OP-dzial-IV-rozdzial-11-dowody.md` (zasady ogólne, zasada inkwizycyjności organu art. 187, otwarty katalog dowodów art. 181, swobodna ocena art. 191, KSIĘGI PODATKOWE art. 193 — domniemanie mocy dowodowej z ciężarem obalenia na organie). **Pozostają otwarte:** kontrola podatkowa (281-292) i czynności sprawdzające (272-280) — całkowicie nieobecne | dr-06-podatki-finanse-publiczne-aml | średni (obniżony z "wysoki" — najważniejszy z 3 punktów naprawiony) | 2026-08-13 (raport zewnętrzny), częściowa naprawa: 2026-08-14 | `references/raporty-pokrycia-2026-08-13/raport-pokrycia-OP.md` | 1) Dział VI — kontrola podatkowa (281-292, pierwszy kontakt podatnika z organem); 2) Dział V — czynności sprawdzające (272-280, najczęstsza forma weryfikacji deklaracji) |
-| F-71 | **PZP — ✅ CZĘŚCIOWO ZAMKNIĘTE 2026-08-14:** Dział II (183 art., >1/4 ustawy) — kwalifikacja podmiotowa wykonawców (warunki udziału art. 112, JEDZ i mechanizm dwuetapowy art. 125/126 — pełne dokumenty żąda się TYLKO od zwycięzcy), kryteria oceny ofert (239-243, wymóg jednoznaczności art. 240), unieważnienie postępowania (255-258, katalog obligatoryjny zamknięty + fakultatywne NIE jako "wytrych") NAPRAWIONE nowym modułem `mod-PZP-dzial-II-kwalifikacja-kryteria-uniewaznienie.md`. **Pozostają otwarte:** procedura otwarcia i BADANIA ofert krok po kroku (poza samymi kryteriami), Dział IV (umowa ramowa, DSZ, konkurs, partnerstwo innowacyjne — tylko nazwy), przebieg postępowania przed KIO (dowody 531-543, rozprawa, orzeczenia Izby) | dr-07-zamowienia-publiczne-fundusze-ue | średni (obniżony z "średni-wysoki" — sam rdzeń kwalifikacji/kryteriów/unieważnienia naprawiony) | 2026-08-13 (raport zewnętrzny), częściowa naprawa: 2026-08-14 | `references/raporty-pokrycia-2026-08-13/raport-pokrycia-PZP.md` | 1) Otwarcie/badanie ofert — procedura krok po kroku; 2) Dział IX dokończenie — przebieg postępowania przed KIO (531-568a); 3) Dział IV — instrumenty szczególne (311-361) |
-| F-73 | **KRO — najlepiej pokryty akt spośród wszystkich zbadanych.** Potwierdza wcześniejszą naprawę tej sesji (2026-08-13b/c). Pozostałe realne luki: art. 87–91 (obowiązki rodzice-dzieci — poz. 27 indeksu zbiorczego), przepisy ogólne o pokrewieństwie (61⁷–618), macierzyństwo jako instytucja | dr-02-prawo-cywilne-rodzinne-gospodarcze | niski-średni | 2026-08-13 (raport zewnętrzny) | `references/raporty-pokrycia-2026-08-13/raport-pokrycia-KRO.md` | 1) art. 87–91 (niska pracochłonność); 2) art. 61⁷–618; 3) macierzyństwo |
-| F-74 | **PrBud — moduł "żywy", iteracyjnie rozbudowywany, ale nierówny.** Mocne strony: samowola budowlana (Rozdz. 5b, 48–53a — najlepiej opracowany fragment całego aktu), postępowanie poprzedzające roboty (Rozdz. 4), zmiana sposobu użytkowania (71/71a), ścieżka odwoławcza. **Zero treści:** Rozdz. 5/5a/5d (rozpoczęcie robót, dziennik budowy, książka obiektu), Rozdz. 7 (katastrofa budowlana), Rozdz. 8 (organy PINB/WINB — kompetencje znane tylko pośrednio), Rozdz. 10 (odpowiedzialność zawodowa). Rozdz. 3 (prawa/obowiązki uczestników procesu budowlanego, 17–27a) i Rozdz. 9 (przepisy karne) — zadeklarowane w zakresie modułu, ale bez rzeczywistej treści (ta sama rozbieżność deklaracja/wykonanie co przy rencie rodzinnej FUS) | dr-09-budownictwo-srodowisko-energia-transport | średni-wysoki | 2026-08-13 (raport zewnętrzny) | `references/raporty-pokrycia-2026-08-13/raport-pokrycia-PrBud.md` | 1) Rozdz. 3 — uczestnicy procesu budowlanego (17–27a, dokończenie już zadeklarowanego tematu); 2) Rozdz. 8 — organy PINB/WINB (80–89c); 3) Rozdz. 9 — przepisy karne pełna treść (90–94) |
-
-| F-75 | **KKW — ✅ CZĘŚCIOWO ZAMKNIĘTE 2026-08-14:** dodano realną treść merytoryczną (sekcja 0) do modułu, dotąd czysto generycznego szablonu — naprawiono WSZYSTKIE 3 pierwotnie wskazane priorytety: warunkowe przedterminowe zwolnienie (159-163, w tym kluczowy art. 161 §3-4 wykorzystujący doświadczenie sprawy Marek Petelski), odroczenie/przerwa wykonania kary (150-158a), dozór elektroniczny (43a-43zf). Naprawiono też niezgodność nazwy wewnętrznej pliku. Oryginalny szablon strategiczny (12 sekcji) ZACHOWANY jako warstwa uzupełniająca. **Pozostaje otwarte:** cała reszta struktury KKW nadal bez treści — Rozdz. IV postępowanie wykonawcze (9-31), Oddz. 4 prawa/obowiązki skazanego (101-120), Oddz. 9 kary dyscyplinarne (142-149), Rozdz. XI dozór kuratora (169-178a), środki karne/kompensacyjne (179-223n) i dalsze | dr-03-prawo-karne-wykroczenia-egzekucja | średni (obniżony z "najwyższy" — 3 najczęściej używane w praktyce instytucje naprawione, reszta struktury mniej pilna) | 2026-08-13 (raport zewnętrzny), częściowa naprawa: 2026-08-14 | `references/raporty-pokrycia-2026-08-13/raport-pokrycia-KKW.md` | 1) Oddz. 4 — prawa i obowiązki skazanego (101-120, widzenia/korespondencja/opieka zdrowotna); 2) Oddz. 9 — kary dyscyplinarne (142-149); 3) Rozdz. IV — postępowanie wykonawcze (9-31), fundament proceduralny |
-| F-78 | **10 modułów w systemie przekracza limit 1000 linii (ZASADA 13, SKILL.md, dodana 2026-08-14) — wymagają podziału wg rozdziałów aktu.** Wykryte pełnym skanowaniem `wc -l` po ustanowieniu zasady | cross-DR: dr-03 (1), dr-06 (3), dr-02 (2), dr-05 (1), dr-09 (2 — po korekcie 2026-08-15n), shared (2) | średni — żaden moduł nie jest błędny merytorycznie, ryzyko jest WYŁĄCZNIE narzędziowe (trudność nawigacji `view`, ryzyko niejednoznacznego `str_replace`, trudność utrzymania spójności przy częściowych edycjach odległych rozdziałów) | 2026-08-14 | Pełna lista (linie wg `wc -l` na 2026-08-14): (1) `dr-03/modules/mod-KK-kwalifikator-karnomaterialny.md` — 2084; (2) `shared/ORKA-BAS-LEKSYKON.md` — 1975; (3) `dr-06/modules/mod-VAT-podatek-od-towarow-i-uslug.md` — 1901; (4) `dr-06/modules/mod-ustawa-rachunkowosci.md` — 1539; (5) `dr-06/modules/mod-ustawa-akcyzowa-i-clo-UCC.md` — 1493; (6) `dr-02/modules/mod-KRO-rodzinne.md` — 1470; (7) `dr-05/modules/mod-KPA-tryby-nadzwyczajne-i-strategia.md` — 1303; (8) `shared/PORTALE-BRANZOWE-RZAD-2B.md` — 1088; (9) `dr-02/modules/mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md` — 1036; ⛔ **KOREKTA 2026-08-15n:** pozycja `dr-09/modules/mod-ochrona-zabytkow-obiekty-uzytecznosci-publicznej.md` — **1008 linii** — była błędnie opisana jako „blisko progu (nie flagowane)"; **1008 > 1000, więc PRZEKRACZA próg** i jest pozycją **(10)** listy, nie obserwacją. Ponowny pełny skan `wc -l` 2026-08-15n potwierdził wszystkie 9 pozostałych wartości BEZ ZMIAN. ⭐ **NOWE USTALENIE 2026-08-15n — pierwotny skan pomijał pliki spoza `modules/`.** Skan całego drzewa `*.md` ujawnił 3 dalsze pliki >1000 linii: `przesluchanie-swiadkow-v2-min90/SKILL.md` (1809), `analizator-dowodow-v3/SKILL.md` (1203), `audyt-systemu-v4/SKILL.md` (1170) oraz `audyt-systemu-v4/references/AUDIT-JOURNAL.md` (40 483). Rozstrzygnięcie zakresu wpisane do ZASADY 13 (SKILL.md, sekcja „Zakres stosowania"): pliki `SKILL.md` — DO ROZSTRZYGNIĘCIA przez użytkownika (podział wg rozdziałów aktu nie ma zastosowania; SKILL.md musi zostać jednym plikiem wejściowym — ewentualny zabieg to wydzielenie sekcji do `modules/`); `AUDIT-JOURNAL.md` i mapy archiwalne — **WYŁĄCZONE TRWALE** (rejestry przyrostowe). | Podzielić każdy wg rozdziałów aktu źródłowego, zaczynając od najbardziej przekraczających próg (`mod-KK-kwalifikator-karnomaterialny` 2084, `ORKA-BAS-LEKSYKON` 1975, `mod-VAT-...` 1901) — każdy podział to osobna sesja z pełną rejestracją nowych plików (Reguła 2/3 HARDGATE) |
-
-| F-82 | ⛔ **NAPRAWIONE W SESJI ODKRYCIA (2026-08-15n) — wiersz pozostawiony jako OSTRZEŻENIE METODOLOGICZNE, nie jako otwarte zadanie.** Kodeks morski figurował w TRZECH rejestrach jednocześnie pod **błędnym numerem Dz.U. 2023 poz. 1523**; poz. 1523/2023 to **ustawa z 28.07.2023 o delegowaniu kierowców w transporcie drogowym** (ISAP `WDU20230001523`) — akt z TEJ SAMEJ dziedziny transportowej, co maskowało pomyłkę przed wykryciem po nazwie. Poprawny t.j.: **Dz.U. 2023 poz. 1309** (obwieszczenie Marszałka Sejmu z 25.05.2023). ⚠️ **DLACZEGO TO WAŻNE:** błąd przetrwał wszystkie dotychczasowe audyty TRYB DZU, bo wszystkie trzy rejestry były ze sobą ZGODNE — spójność wewnętrzna systemu potwierdzała błąd zamiast go ujawniać. Kroswalidacja `test_cross_map_dzu.py` porównuje rejestry MIĘDZY SOBĄ, więc z definicji tej klasy błędu nie wykryje. ⭐ **OKOLICZNOŚĆ WYKRYCIA:** przypadkowa — przy piątej próbie ustalenia numeru z F-24 tekst ustawy z 11.06.2026 (Rząd 1) zacytował Kodeks morski z numerem 1309, co nie zgadzało się z mapą. | cross-DR: audyt-systemu-v4 (mapa_dzu), prawo-polskie-v2 (ROUTING-MAP), dr-09 (moduł transportowy) | ⛔ **CRIT w chwili odkrycia** (błędny numer aktu w rejestrze kanonicznym) → **naprawiony w tej samej sesji**, pozostaje jako lekcja metodologiczna o priorytecie informacyjnym | 2026-08-15n (otwarta i naprawiona tego samego dnia) | ✅ VER 2026-08-15n, 4 niezależne źródła: dwa PDF-y ISAP cytujące „Kodeks morski (Dz. U. z 2023 r. poz. 1309)", tekst ustawy na orka.sejm.gov.pl, infor.pl dla identyfikacji poz. 1523 | **DO WYKONANIA W PRZYSZŁEJ SESJI (samo źródło błędu, nie ten akt):** 1) przeskanować mapę Dz.U. pod kątem tego samego wzorca — akty, których numer nigdy nie był weryfikowany PRZECIW ŹRÓDŁU ZEWNĘTRZNEMU, a tylko „zgadzał się" między rejestrami; priorytet dla aktów o statusie „ze zm. — brak nowszego t.j." (jak Kodeks morski), bo ten opis sugeruje, że nikt nie sprawdzał od dawna; 2) rozważyć wpisanie do `test_cross_map_dzu.py` ostrzeżenia, że zgodność rejestrów NIE jest weryfikacją merytoryczną; 3) osobno: sprawdzić, czy ustawa o delegowaniu kierowców (Dz.U. 2023 poz. 1523) zasługuje na własny wiersz w dr-09 — obecnie nieobecna w systemie |
-
-| F-83 | **System map pokrycia — BRAMKA AKTYWACJI bloku § 3 zadania cyklicznego Cowork** (`references/SCHEDULED-TASK-COWORK.md`). Odtworzono 2026-08-15o mechanizm pozycji 11 menu audytu (scheduled task „Cotygodniowa weryfikacja ISAP"), którego docelowym elementem jest monitorowanie **map pokrycia** — trwałego rejestru wskazującego, w jakim zakresie rozdziały i akty prawne są pokryte treścią modułów. ⛔ **Taki rejestr NIE ISTNIEJE.** To, co system ma dzisiaj, to `references/raporty-pokrycia-2026-08-13/` — 13 plików jednorazowej analizy zewnętrznej, dostarczonej przez użytkownika, opisanej w tym rejestrze jako materiał ROBOCZY/TYMCZASOWY do skasowania po zamknięciu F-64…F-75. Migawka z jednego dnia nie jest systemem monitorowania: nie odświeża się, nie ma statusów per rozdział, nie reaguje na zmianę Dz.U. ⭐ **Dlaczego to jest bramka, a nie zwykłe zadanie:** dopóki F-83 jest otwarta, sesja wykonawcza zadania cyklicznego MA POMIJAĆ blok map pokrycia i odnotować to jednym zdaniem — bez tej bramki cotygodniowe zadanie improwizowałoby badanie pokrycia „przy okazji", co jest osobną, kosztowną klasą pracy i rozsadziłoby zadanie. | cross-DR (docelowo DR-01…DR-16) + audyt-systemu-v4 | średni — nie blokuje samego zadania cyklicznego (działa bez § 3), blokuje wyłącznie jego rozszerzenie o pokrycie | 2026-08-15o | Stan faktyczny potwierdzony na dysku: `find references/raporty-pokrycia-2026-08-13 -type f | wc -l` = 13 (12 raportów + indeks), brak jakiegokolwiek generowanego rejestru pokrycia | **Do wykonania (sesja dedykowana, na akceptację użytkownika):** 1) ustalić format mapy pokrycia — per akt, wiersz = rozdział/zakres artykułów, kolumny: status (PEŁNE/CZĘŚCIOWE/BRAK), moduł pokrywający, data ostatniej weryfikacji treści; 2) rozstrzygnąć, czy mapy żyją w DR-skillach (przy MAPA-AKTOW.md) czy centralnie — rekomendacja: przy DR, bo tam następuje edycja modułu; 3) zasilić je JEDNORAZOWO z istniejących 12 raportów pokrycia (materiał już jest, nie trzeba go odtwarzać); 4) dopiero po tym ZAMKNĄĆ F-83 i dopisać punkt 8 do promptu zadania wg § 3 SCHEDULED-TASK-COWORK.md |
-
-| F-85 | **✅ ROZSTRZYGNIĘTA CO DO TYTUŁÓW (sesja 2026-08-15s) — TYLKO poz. 779 dotyczy PIT/CIT.** Pierwotny wpis zakładał, że poz. 846 i 912 to "akty zmieniające CIT" — weryfikacja ISAP wykazała, że OBIE pozycje są BŁĘDNIE zidentyfikowane: ⛔ `Dz.U. 2026 poz. 846` to `ustawa z 29.05.2026 o zmianie ustawy – Ordynacja podatkowa oraz niektórych innych ustaw` (ISAP WDU20260000846) — dotyczy Ordynacji podatkowej, NIE CIT (choć CIT może być jedną z "niektórych innych ustaw" — tytuł tego nie precyzuje, wymaga dalszej weryfikacji treści, nie tylko tytułu). ⛔ `Dz.U. 2026 poz. 912` to w ogóle NIE ustawa podatkowa — to nowelizacja ustawy z 20.07.2000 o ogłaszaniu aktów normatywnych (widoczna jako podstawa formalna w obwieszczeniach z 2026 r., np. poz. 913 ws. Prawa upadłościowego cytuje ją jako "Dz. U. z 2019 r. poz. 1461 oraz z 2026 r. poz. 912"), ZERO związku z CIT. ✅ **ZASADA 3 ZADZIAŁAŁA POPRAWNIE** — dyscyplina "nie wpisuj bez potwierdzenia u źródła" w poprzedniej sesji zapobiegła wpisaniu dwóch błędnych aktów do mapy DZU. **Potwierdzone poz. 779** (PIT, jak pierwotnie ustalono — prawo.pl, podatki.gov.pl). | audyt-systemu-v4 (mapa_dzu), dr-06 | niski-średni (obniżony — fałszywy trop 846/912 wyjaśniony, realna praca to tylko poz. 779 + ew. weryfikacja treści 846 pod kątem CIT jako "innej ustawy") | 2026-08-15p, rozstrzygnięcie tytułów: 2026-08-15s | ✅ poz. 779: prawo.pl + podatki.gov.pl. ✅ poz. 846: ISAP WDU20260000846 (pełny tekst, tytuł potwierdzony — Ordynacja podatkowa). ✅ poz. 912: wzorzec cytowań w obwieszczeniach 2026 r. (np. WDU20260000913) potwierdza, że to nowelizacja ustawy o ogłaszaniu aktów normatywnych, nie akt podatkowy | 1) dopisać poz. 779 do mapy DZU (PIT — nowelizacja terminologii art. 24a, "podatkowa księga przychodów i rozchodów"); 2) ✅ CZĘŚCIOWO ROZSTRZYGNIĘTE — przepisy.gofin.pl potwierdza poz. 846 w amendment trails ZARÓWNO PIT jak i CIT jednocześnie, więc główny tytuł aktu to zmiana Ordynacji podatkowej, ale akt rzeczywiście nowelizuje "niektóre inne ustawy" obejmujące i PIT, i CIT — dopisać poz. 846 do mapy DZU pod WŁAŚCIWYM tytułem (Ordynacja podatkowa jako akt główny), z odnotowaniem wtórnego wpływu na PIT/CIT, nie jako samodzielną "nowelizację CIT"; 3) poz. 912 NIE dotyczy dr-06 (to nowelizacja ustawy o ogłaszaniu aktów normatywnych) — zamknąć ten wątek bez dalszej akcji w dr-06; 4) sprawdzić, czy zmiana terminologii z poz. 779 ("podatkowa księga przychodów i rozchodów") nie unieważnia sformułowań w modułach dr-06 — FAZA 3E |
-
-**Obserwacje informacyjne (nie są formalnymi flagami, nie blokują, ale warto pamiętać):**
-
-
-| # | Obserwacja | Skill | Opis |
-|---|---|---|---|
-| O-1 | Nowelizacja ABW/AW ws. treści terrorystycznych (Dz.U. 2024 poz. 1684) nieopisana w module | dr-13-sluzby-bezpieczenstwo-informacje-niejawne | Uprawnienia Szefa ABW do nakazów usunięcia treści terrorystycznych (implementacja rozp. UE 2021/784) nie są opisane w `mod-ustawa-ABW-AW-CBA-sluzby-specjalne.md`. Odkryte przy okazji naprawy WARN-28/29 (2026-07-07a). Wąska kompetencja, rzadko aktywna w typowej sprawie DR-13. |
-| O-2 | F-80 (ZAMKNIĘTA 2026-08-15h) — 15 plików-sierot w audyt-systemu-v4 samym | audyt-systemu-v4 | `check_rejestracja_modulow.py` wykrywa sieroctwo dla modułów DR (4 rejestry: dysk/SKILL.md/MAPA-AKTOW.md/ROUTING-MAP.md), ale NIE ma odpowiednika dla plików `references/`/`scripts/` samego audyt-systemu-v4 — stąd 15 plików (w tym sam `check_rejestracja_modulow.py`) mogło pozostać niezarejestrowanych niewykryte przez rutynowe audyty. Rozważyć w przyszłości: rozszerzenie skryptu lub dodanie kroku FAZA 0/2 sprawdzającego `find references/ scripts/ -type f` vs YAML frontmatter tego właśnie skilla. |
+---
+
+## 3. 👁️ OBSERWOWANE — projekty ustaw w toku (nie są flagami błędów)
+
+> Śledzone proaktywnie przez MON-2, żeby nie przeoczyć wejścia w życie.
+> Po UCHWALENIU → nowa flaga F- wg PROTOKOŁU PRZY TRAFIENIU. Pełny opis
+> stanu prac i źródeł — w `AUDIT-JOURNAL.md` (wpisy 2026-08-14, 08-15c, 08-15w).
+
+| ID | Projekt | Dotyka | Prio | Istota — co się zmieni | Kiedy sprawdzać |
+|---|---|---|---|---|---|
+| OBS-1 | Nowelizacja PIT/CIT/ryczałt na 2027 (UD116, RCL/MF) | dr-06 (`mod-PIT-*`, CIT; NIE dotyczy VAT) | średni-wysoki | Zakres zmniejszony z 30+ do ~15 zmian (podwyżki ryczałtu 8,5%→17% i najmu 12%→15% WYCOFANE). Zostają: ulga mieszkaniowa raz na 3 lata; zbycie majątku wycofanego z działalności — 6 mies. → 3 lata; cyfryzacja PIT-11/PIT-8C; korekty ksiąg/JPK od 1.01.2027; CIT — ukryta dywidenda, datio in solutum. ODRĘBNIE: reforma skali PIT (pośrednie progi zamiast kwoty wolnej 60 tys.) — projekt zapowiadany na jesień 2026 | co 4–6 tyg. |
+| OBS-2 | Opłaty od pobytu/noclegu — DWA równoległe projekty: (A) rządowy z 28.05.2026 (RCL), (B) poselski (Lewica) | dr-06, dr-08 (ustawa o podatkach i opłatach lokalnych); pośrednio dr-02 (najem krótkoterminowy) | **WYSOKI** | (A) opłaty miejscowa i uzdrowiskowa powiązane ze świadczeniem usług zakwaterowania, a prowadzący obiekt staje się **PŁATNIKIEM zamiast inkasenta** — przesunięcie odpowiedzialności publicznoprawnej, nie kosmetyka; wejście planowane 1.01.2027. (B) opłata turystyczna zamiast miejscowej, bez kryteriów klimatycznych, uzdrowiskowa bez zmian. ⚠️ Projekty mogą się wykluczać — śledzić, KTÓRY wejdzie. ⚠️ Numery druku/pozycji RCL NIEUSTALONE | co 4 tyg., częściej po 1.10.2026 |
+| OBS-3 | Regulacja UTO/hulajnóg i e-rowerów (dawna F-14) | dr-03 (`mod-przerobki-modyfikacje-pojazdow.md`) | niski | ⚠️ To NIE „delegalizacja UTO", lecz zaostrzenie regulacyjne: zmiana dwóch ustaw (homologacja, kierujący) + rozporządzenie techniczne; TDT decyduje o dopuszczeniu urządzeń; Straż Miejska z uprawnieniem kontroli parametrów; ⭐ e-rowery >25 km/h — rejestracja jak motorowery. Wejście 1.01.2027 wg JEDNEGO źródła, NIEPOTWIERDZONE. ⛔ Dane „18 lat, konfiskata 30 dni" dotyczą Macedonii Północnej, NIE Polski | bliżej 1.01.2027 |
+| OBS-4 | Pakiet praworządnościowy: status neosędziów, KRS, reforma USP (dawna F-15) | dr-01 (`mod-ustawa-KRS-i-ustroj-wladzy.md`, `mod-USP-ustroj-sadow-powszechnych.md`) | **WYSOKI** ⚠️ jedyna pozycja o bezpośrednim wpływie na WAŻNOŚĆ ORZECZEŃ | ROZSTRZYGNIĘTE: nowelizacja KRS zawetowana 19.02.2026; nowa KRS wybrana przez Sejm 15.05.2026; węższa nowelizacja USP (asesorzy) — Dz.U. 2026 poz. 370. W TOKU: (a) ustawa o STATUSIE neosędziów — utknęła w komisji, główne źródło ryzyka; (b) duża reforma USP (UD322/UD323) w opiniowaniu, RPO z zastrzeżeniami konstytucyjnymi; (c) deadline ETPC (Wałęsa p. Polsce) — listopad 2026 | **co 2–3 tyg.** — przy uchwaleniu ustawy o statusie neosędziów natychmiast flaga F- o priorytecie NAJWYŻSZYM |
+| OBS-5 | Implementacja dyrektywy UE 2023/970 (jawność wynagrodzeń), Etap 2-3 — projekt UC127 (MRPiPS, RCL) | dr-04 (`mod-KP-dzial-III-wynagrodzenie-swiadczenia-jawnosc.md`) | średni-wysoki | Wpisana do monitorowania 2026-08-15 (naprawa F-28 pkt 5). Etap 1 (jawność rekrutacyjna) JUŻ OBOWIĄZUJE od 24.12.2025 (Dz.U. 2025.807), poza zakresem OBS. Etap 2-3: termin transpozycji dyrektywy 7.06.2026 MINĄŁ bez ustawy; projekt UC127 (status "otwarty" na RCL, wersja z 29.04.2026/publ. 4.05.2026) WYRAŹNIE odracza wejście w życie na "6 miesięcy od ogłoszenia" zamiast sztywnej daty — faktycznie NIE WCZEŚNIEJ niż I kw. 2027. Kluczowe elementy projektu do śledzenia: zniesienie tajemnicy wynagrodzeń, obowiązkowe wartościowanie stanowisk (odwołanie do art. 183c §3 KP), odwrócony ciężar dowodu w sporach o dyskryminację płacową, raportowanie luki płacowej (≥100 prac. wg jednej wersji), sankcje (widełki grzywien niespójne między źródłami: 2000-60000 zł vs 3000-50000 zł — do potwierdzenia przy uchwaleniu). ⚠️ Opóźnienie NIE zwalnia Polski z obowiązku transpozycji — ryzyko postępowania KE trwa | co 4–6 tyg. — częściej przy zbliżaniu się do zapowiadanego I kw. 2027 |
 
 ---
 
-## Jak korzystać z tego pliku
+## 4. 🔁 REAKTYWNE (REACT-1) — uruchamiane WYŁĄCZNIE sprawą, nie sesją audytową
 
-- **Pytanie "co jest jeszcze otwarte?"** → odpowiedz na podstawie tabel powyżej, nie grepuj AUDIT-JOURNAL.md.
-- **Zamykasz flagę F-N?** → usuń jej wiersz z tabeli powyżej, dodaj pełny opis naprawy jako nowy wpis w `AUDIT-JOURNAL.md` (z numerem/kodem flagi w tytule wpisu dla identyfikowalności).
-- **Otwierasz nową flagę?** → dodaj wiersz tutaj (kolejny wolny numer F-N lub WARN-N zgodnie z konwencją) ORAZ krótki wpis w AUDIT-JOURNAL.md dokumentujący odkrycie.
-- **Numeracja WARN-N vs F-N:** WARN-N zarezerwowane dla flag odkrytych w toku klasycznego trybu audytowego (TRYB DZU, TRYB WARN-CLOSE). F-N dla flag strukturalnych odkrytych przy innych okazjach (audyty kompletności, sesje tematyczne). Oba typy są "otwartymi flagami" w rozumieniu tego rejestru — nie różnicuj ważności po prefiksie, tylko po kolumnie Priorytet.
-
----
-## 🔁 REAKTYWNE (REACT-1) — punkty uruchamiane WYŁĄCZNIE sprawą, nie sesją audytową
-*(utworzone 2026-08-15n. **To jest RECLASYFIKACJA, nie naprawa merytoryczna** —
-żaden z poniższych punktów nie został zbadany ani zamknięty; przeniesiono
-JEDYNIE sposób ich ewidencjonowania. Precedens: migracja F-14/F-15 →
-OBS-3/OBS-4 z 2026-08-15c.)*
-
-**Powód wydzielenia:** siedem flag F- miało w kolumnie „Wymaga" identyczną
-treść operacyjną — *„web_search per punkt, wyłącznie na żądanie konkretnej
-sprawy"* — czyli z definicji NIE dawały się zamknąć sesją audytową, bo
-warunkiem ich uruchomienia jest pojawienie się sprawy klienta dotykającej
-danego punktu. Trzymane w rejestrze flag F- zawyżały licznik „otwartych
-flag" i konkurowały o uwagę z flagami realnie wykonalnymi (numer Dz.U. do
-ustalenia, luka strukturalna do wypełnienia). To ta sama patologia, którą
-ZASADA 9 opisuje jako „gubienie flag drugorzędnych" — tyle że w odwrotną
-stronę: tu flagi nie giną, lecz zaśmiecają listę zadań wykonalnych.
-
-⚠️ **Zastrzeżenie do dwóch pozycji:** dawne **F-35** i **F-42** miały w
-kolumnie „Wymaga" samo *„Web_search per punkt"*, BEZ dopisku „wyłącznie na
-żądanie" — włączone do REACT-1 przez analogię (ta sama klasa: „drobne
-punkty startowe", priorytet niski, brak wpływu na macierzystą sekcję).
-Jeśli przy przeglądzie okaże się, że któryś ich punkt jednak zasługuje na
-sesję dedykowaną — przywrócić jako osobną flagę F- z nowym numerem.
-
-**Protokół użycia:** przy przyjęciu sprawy dotykającej któregokolwiek
-punktu — wykonać web_search wg PRAWO-HARDGATE (nigdy z pamięci) W TEJ
-SAMEJ sesji, wpisać ustalenie do właściwego modułu, odnotować w
-AUDIT-JOURNAL.md i skreślić punkt z poniższej tabeli. Punkty NIE są
-przedmiotem cyklicznego przeglądu WARN (ZASADA 9) — nie liczyć ich do
-„aktywnych flag do zamknięcia" przy raportowaniu postępu.
+> 7 pozycji przeniesionych 2026-08-15n z rejestru flag F- (reklasyfikacja, NIE
+> naprawa — żaden punkt nie został zbadany). Powód: wszystkie miały w kolumnie
+> „Wymaga" tę samą treść — *„web_search per punkt, wyłącznie na żądanie konkretnej
+> sprawy"* — więc z definicji nie dają się zamknąć sesją audytową, a zawyżały
+> licznik flag i konkurowały o uwagę z zadaniami realnie wykonalnymi.
+>
+> **Protokół użycia:** przy sprawie dotykającej punktu — web_search wg
+> PRAWO-HARDGATE (nigdy z pamięci) W TEJ SAMEJ sesji → wpis do modułu → wpis
+> w `AUDIT-JOURNAL.md` → skreślenie punktu z tabeli. NIE liczyć do „aktywnych
+> flag do zamknięcia" (ZASADA 9).
+>
+> ⚠️ Dawne **F-35** i **F-42** trafiły tu przez analogię (miały „web_search per
+> punkt" bez dopisku „wyłącznie na żądanie"). Jeśli któryś ich punkt zasłuży na
+> sesję dedykowaną — przywrócić jako flagę F- z nowym numerem.
 
 | Dawna flaga | Skill | Priorytet | Otwarta od | Punkty (treść przeniesiona 1:1 z rejestru flag) |
 |---|---|---|---|---|
@@ -483,7 +438,85 @@ przedmiotem cyklicznego przeglądu WARN (ZASADA 9) — nie liczyć ich do
 | **F-38** (zmigrowana) | dr-07-zamowienia-publiczne-fundusze-ue | bardzo niski | 2026-08-13, częściowa naprawa: 2026-08-13 | `mod-PZP-dzial-I...` — Rozdziały 7-8 (komunikacja elektroniczna, dokumentowanie postępowania) niezbadane szczegółowo |
 | **F-42** (zmigrowana) | dr-09-budownictwo-srodowisko-energia-transport | niski | 2026-08-13 | (1) GDDKiA — wycena nieruchomości; (2) formy ochrony przyrody — ochrona gatunkowa; (3) inspekcja GIOŚ/WIOŚ — dodatkowy wątek; (4) ochrona zabytków — status finalizacji nowelizacji rozp. warunków technicznych + projekt zmiany ustawy o własności lokali |
 | **F-47** (zmigrowana) | dr-10-zdrowie-farmacja-zywnosc-rolnictwo | bardzo niski | 2026-08-13 | (1) mod-rzadkie-choroby-genetyczne — odesłanie do sprawdzenia odrębnie; (2) mod-ustawa-hodowla-zdrowie-zwierzat — wątek niezweryfikowany |
+| **F-91** (zmigrowana, 2026-08-17d) | dr-09-budownictwo-srodowisko-energia-transport | niski | 2026-08-16, pokrycie rozdziałów zamknięte 2026-08-17d | Punktowy ogon po zamknięciu pokrycia 12/12 — każdy punkt = osobny web_search przy trafieniu sprawą: (1) rozporządzenia z delegacji art. 49 ust. 1 oraz art. 41 ust. 1-3 (3 akty, metryki nieustalone); (2) metryka rozporządzenia z art. 15 ust. 4 (ekwiwalent) oraz z art. 18 ust. 4-5 (2 akty) i art. 22 ust. 2 (wzór ewidencji skupu); (3) termin zażalenia z art. 39 ust. 10; (4) wykładnia odesłania do zniesionego kolegium ds. wykroczeń (art. 39 ust. 2 pkt 8); (5) status Straży Ochrony Przyrody (art. 39 ust. 8 pkt 1); (6) treść statutu PZŁ i regulaminu sądów łowieckich (akty wewnątrzkorporacyjne, poza Dz.U.); (7) sygnatura II CSK 170/12 do potwierdzenia w sn.pl; (8) orzecznictwo do art. 33 ust. 2a-2d, art. 39, art. 8a (odmowa zatwierdzenia RPŁ) i art. 59 ust. 3 (uprawnienia nabyte przed 17.02.1996); (9) czy zatarcie z art. 35r usuwa przeszkodę z art. 33c ust. 1 pkt 2; (10) tryb zaskarżenia decyzji z art. 35a ust. 9; (11) moduł Rozdz. 5 — katalog wyłączeń art. 26, art. 28 ust. 2 i n., art. 29a, art. 30, art. 31, obwody <3000 ha; (12) moduł Rozdz. 8 — art. 43, 42c, 42e, katalog tematów egzaminu, bioasekuracja, stawka opłaty skarbowej art. 45 ust. 3, aktualność opisu art. 42b; (13) moduł Rozdz. 3 — droga do WSA po wyłączeniu KPA z art. 8d (styk dr-05), aktualność oznaczenia Dz.U. KPA w art. 8d, katalog zwierząt gospodarskich z art. 16 ust. 1; (14) moduł Rozdz. 1-2 — metryka nowelizacji zmieniającej art. 7, rozporządzenie z art. 5, aktualność krajowej listy IGO; (15) moduł Rozdz. 4 — metryka nowelizacji uchylającej art. 17/19/20, standard długości terminu w wezwaniu z art. 22a ust. 1; (16) moduł Rozdz. 11 — treść zmian pominiętych w art. 55-57 (odtworzenie z pierwotnego Dz.U. 1995 poz. 713), dokładne dni upływu terminów z art. 58 ust. 1, art. 60 ust. 2 i art. 62 (w module podane jako miesiąc, wyliczenie własne z cezury 17.02.1996) |
 
-**Bilans migracji:** 7 wierszy usuniętych z rejestru flag F-, 0 punktów
-merytorycznych utraconych (kolumna „Punkty" zawiera pełną, niezmienioną
-treść kolumny „Opis" z pierwotnych wierszy).
+**Bilans migracji:** 8 wierszy usuniętych z rejestru flag F- (7 w migracji
+pierwotnej + F-91 w dniu 2026-08-17d), 0 punktów merytorycznych utraconych
+(kolumna „Punkty" zawiera pełną, niezmienioną treść kolumny „Opis"
+z pierwotnych wierszy). Przy F-91 dodatkowo: część merytoryczna o wyższej
+wadze NIE została zmigrowana, lecz przeniesiona do nowej flagi **F-93**
+(sekcja 1) — migracja objęła wyłącznie punkty typu „web_search per punkt".
+---
+
+## 5. Obserwacje informacyjne (nie są flagami, nie blokują)
+
+| # | Obserwacja | Skill | Co ewentualnie zrobić |
+|---|---|---|---|
+| O-1 | Nowelizacja ABW/AW ws. treści terrorystycznych (Dz.U. 2024 poz. 1684) — uprawnienia Szefa ABW do nakazów usunięcia treści (implementacja rozp. UE 2021/784) nieopisane w `mod-ustawa-ABW-AW-CBA-sluzby-specjalne.md` | dr-13 | Wąska kompetencja, rzadko aktywna — opracować przy sprawie |
+| O-2 | `check_rejestracja_modulow.py` wykrywa sieroctwo plików dla modułów DR (4 rejestry), ale NIE ma odpowiednika dla `references/` i `scripts/` samego audyt-systemu-v4 — stąd 15 plików mogło pozostać niezarejestrowanych (F-80, zamknięta 2026-08-15h) | audyt-systemu-v4 | Rozszerzyć skrypt albo dodać krok FAZA 0/2: `find references/ scripts/ -type f` vs YAML frontmatter |
+
+---
+
+## 6. 🗺️ ZADANIE ODŁOŻONE — MAPA-MODULOW-GLOBALNA (po zamknięciu flag F-)
+
+**Cel:** jeden zbiorczy plik (roboczo `references/MAPA-MODULOW-GLOBALNA.md`)
+odwzorowujący moduł → akty i przepisy faktycznie opracowane + data ostatniej
+weryfikacji TREŚCI (odrębna od daty poprawki numeru), żeby przy nowelizacji
+znaleźć wszystkie moduły do aktualizacji JEDNYM wyszukiwaniem zamiast
+przeglądania 16 plików.
+
+**Powiązanie:** po powstaniu staje się pierwszym krokiem PROTOKOŁU PRZY
+TRAFIENIU (sekcja 2). Dopóki nie istnieje — protokół używa ścieżki zapasowej
+(16× lokalna `MAPA-AKTOW.md` + centralna `ROUTING-MAP.md` równolegle).
+
+**Dlaczego nie teraz:** treść modułów wciąż się zmienia (nowe moduły z F-64…F-87),
+mapa musiałaby powstać dwa razy. Rozważyć generowanie skryptem zamiast pliku
+statycznego — inaczej sama się zdezaktualizuje.
+
+**Status:** ODŁOŻONE — nie rozpoczynać przed zamknięciem aktywnych flag F-.
+
+---
+
+## 7. Raporty pokrycia 2026-08-13 — zasady usuwania
+
+`references/raporty-pokrycia-2026-08-13/` to 13 plików (12 raportów + indeks)
+materiału ROBOCZEGO dostarczonego przez użytkownika — migawka z jednego dnia,
+nie kanoniczna dokumentacja (⚠️ część raportów jest już nieaktualna wobec
+napraw z 14–15.08 — patrz kolumna „Historia" w sekcji 1A).
+
+- Plik raportu usuwać **dopiero po PEŁNYM zamknięciu** odpowiadającej flagi.
+- Przy naprawie CZĘŚCIOWEJ — NIE usuwać: raport nadal mapuje niedomknięte fragmenty.
+- `00-indeks-raportow-pokrycia.md` — usunąć dopiero, gdy wszystkie flagi zamknięte.
+- Każde usunięcie → jedno zdanie w `AUDIT-JOURNAL.md` (ślad audytowy, ZASADA 7).
+
+| Plik | Flaga |
+|---|---|
+| `raport-pokrycia-PPSA.md` | F-64 |
+| `raport-pokrycia-KPC.md` | F-65 |
+| `raport-pokrycia-KPK.md` | F-81 — USUNIĘTY 2026-08-15 (flaga zamknięta w całości) |
+| `raport-pokrycia-KW.md` | F-67 — brak w rejestrze otwartych; przed usunięciem potwierdzić zamknięcie w dzienniku |
+| `raport-pokrycia-KSH.md` | F-68 |
+| `raport-pokrycia-PrUp-PrRestr.md` | F-86 (sekcja 1), F-87 (sekcja 2) |
+| `raport-pokrycia-OP.md` | F-70 |
+| `raport-pokrycia-PZP.md` | F-71 |
+| `raport-pokrycia-SUS-FUS.md` | F-72 — zamknięta (AUDYT-2026-08-14h); plik do usunięcia po kontroli |
+| `raport-pokrycia-KRO.md` | F-73 — USUNIĘTY 2026-08-15 (flaga zamknięta w całości) |
+| `raport-pokrycia-PrBud.md` | F-74 |
+| `raport-pokrycia-KKW.md` | F-75 |
+
+---
+
+## 8. Jak korzystać z tego pliku
+
+- **„Co jest jeszcze otwarte?"** → sekcja ⚡ TABLICA STERUJĄCA. Nie grepuj dziennika.
+- **Zaczynasz naprawę?** → najpierw HARDGATE-AUDYT (Reguły 1–6), potem wiersz flagi
+  w sekcji 1, dopiero potem wskazany wpis dziennika po historię.
+- **Zamykasz flagę?** → usuń jej wiersz z TABLICY i z sekcji 1, dopisz pełny opis
+  naprawy do `AUDIT-JOURNAL.md` **na końcu pliku** (z numerem flagi w tytule wpisu).
+- **Naprawiłeś część?** → skróć wiersz do tego, co ZOSTAŁO. Nie dopisuj tu opisu
+  tego, co zrobione — to jest jedyne źródło rozrostu tego pliku.
+- **Otwierasz flagę?** → wiersz w TABLICY + wiersz w sekcji 1 + wpis w dzienniku.
+- **Numeracja:** WARN-N — flagi z klasycznego trybu audytowego (TRYB DZU,
+  TRYB WARN-CLOSE); F-N — flagi strukturalne z sesji tematycznych. Kolejny wolny
+  numer: **F-94**.
+- **Aktualizuj licznik** w TABLICY STERUJĄCEJ przy każdej zmianie liczby flag.

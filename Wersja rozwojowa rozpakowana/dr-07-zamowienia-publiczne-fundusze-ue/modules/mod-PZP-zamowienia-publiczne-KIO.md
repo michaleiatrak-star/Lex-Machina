@@ -1,8 +1,8 @@
 # mod-PZP-zamowienia-publiczne-KIO
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** PZP — Dz.U. 2024 poz. 1320 t.j. ze zm. (zm.: poz. 769, 1165, 1173) | Progi UE 2026–2027: M.P. 2025 poz. 1247 | Wpisy KIO: Dz.U. 2020 poz. 2437 ✅ VER: 2026-06-09
-**Data weryfikacji online:** 2026-06-05
+**Źródło weryfikacji:** PZP — Dz.U. 2026 poz. 793 t.j. (obwieszczenie Marszałka Sejmu z 27.05.2026, publ. 16.06.2026, zastępuje t.j. 2024.1320; uwzględnia zm.: poz. 620, 769, 794, 1165, 1173, 1235, 252/2026) | Progi UE 2026–2027: M.P. 2025 poz. 1247 | Wpisy KIO: Dz.U. 2020 poz. 2437 ✅ VER: 2026-06-09
+**Data weryfikacji online:** 2026-08-15 (FAZA 3E — audyt-systemu-v4, korekta numeru t.j. + treść art. 226 pkt 17/19)
 **Zasada:** Każde brzmienie przepisu i kwota wpisu → weryfikuj w ISAP / uzp.gov.pl przed powołaniem
 
 ---
@@ -16,6 +16,7 @@
 | **Certyfikacja wykonawców** | **OBOWIĄZUJE od 12.07.2026** — nowa ustawa | Dz.U. 2025 poz. 1235 |
 | **Zm. PZP + ustawa koncesyjna** | **OBOWIĄZUJE** | Dz.U. 2025 poz. 1165 |
 | **Progi UE 2026–2027 (kurs EUR: 4,31 zł)** | **OBOWIĄZUJĄ od 01.01.2026** | M.P. 2025 poz. 1247 |
+| **Nowe przesłanki odrzucenia oferty ICT (art. 226 ust. 1 pkt 17/19)** | **OBOWIĄZUJE od 03.04.2026** — dotyczy też postępowań w toku | Dz.U. 2026 poz. 252 (zm. ustawy o KSC) |
 
 ---
 
@@ -28,7 +29,7 @@ Postępowanie o udzielenie zamówienia publicznego, odwołanie do KIO, skarga na
 
 | Akt | Dz.U. / źródło |
 |---|---|
-| Ustawa PZP | Dz.U. 2024 poz. 1320 t.j. ze zm. (poz. 769, 1165, 1173) |
+| Ustawa PZP | Dz.U. 2026 poz. 793 t.j. (obwieszczenie 27.05.2026; zastępuje t.j. 2024.1320) ze zm. poz. 252/2026 (odrzucenie ofert ICT, w życie 3.04.2026) |
 | Rozporządzenie Prezesa RM o wpisach KIO | Dz.U. 2020 poz. 2437 ✅ VER: 2026-06-09 | Stawki: 7 500 / 15 000 / 20 000 zł |
 | Progi unijne 2026–2027 | M.P. 2025 poz. 1247 — obwieszczenie Prezesa UZP z 08.12.2025 |
 | KC | stosowany posiłkowo do umów (art. 8 PZP) |
@@ -209,6 +210,16 @@ NAJCZĘSTSZE PRZESŁANKI:
   □ Rażąco niska cena (art. 224–225 PZP) — procedura wyjaśnień obowiązkowa PRZED odrzuceniem
   □ Błędy w obliczeniu ceny (pkt 10)
   □ Niezgodność z przepisami prawa (pkt 3)
+  □ ⚡ NOWE (od 3.04.2026, wg [ustawa z 23.01.2026 o zm. ustawy o KSC, Dz.U. 2026
+    poz. 252], stan na 15.06.2026 — zweryfikowano ISAP/UZP): pkt 17 — oferta
+    obejmuje produkt ICT, usługę ICT lub proces ICT wskazane w rekomendacji
+    Pełnomocnika Rządu ds. Cyberbezpieczeństwa (art. 33 ust. 4 ustawy o KSC)
+    jako stwarzające zagrożenie dla podstawowego interesu bezpieczeństwa
+    państwa (zmiana redakcyjna z "urządzenia informatyczne/oprogramowanie" na
+    pojęcia ICT wg rozp. UE 2019/881); pkt 19 (NOWY) — oferta obejmuje produkt
+    ICT, którego typ określono w decyzji o uznaniu dostawcy za dostawcę
+    wysokiego ryzyka. ⚠️ Stosuje się RÓWNIEŻ do postępowań wszczętych i
+    niezakończonych przed 3.04.2026 (brak przepisu przejściowego dla pkt 19)
 
 RAŻĄCO NISKA CENA — PROCEDURA (art. 224–225 PZP):
   Zamawiający MUSI wezwać do wyjaśnień (brak wezwania = naruszenie PZP)

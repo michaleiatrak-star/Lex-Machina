@@ -1,8 +1,16 @@
 # mod-ustawa-fundusze-UE-pomoc-publiczna
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o realizacji funduszy UE 2021–2027 — Dz.U. 2024 poz. 1655 ze zm. | Ustawa o polityce rozwoju — Dz.U. 2025 poz. 1733 t.j. z 10.12.2025 | Ustawa o pomocy publicznej — Dz.U. 2025 poz. 468 t.j. (poprzedni t.j.: Dz.U. 2024 poz. 1635; Dz.U. 2023 poz. 702) ✅ VER: 2026-06-05
-**Data weryfikacji online:** 2026-06-05
+**Źródło weryfikacji:** Ustawa wdrożeniowa 2021-2027 (zasady realizacji zadań finansowanych
+ze środków europejskich w perspektywie finansowej 2021-2027, z 28.04.2022) — Dz.U. 2025
+poz. 1733 t.j. (zastępuje t.j. 2024.1655) | Ustawa o zasadach prowadzenia polityki rozwoju
+(z 6.12.2006) — Dz.U. 2025 poz. 198 t.j. (obwieszczenie 5.02.2025; zastępuje t.j. 2024.324)
+| Ustawa o postępowaniu w sprawach pomocy publicznej — Dz.U. 2025 poz. 468 t.j. (poprzedni
+t.j.: Dz.U. 2024 poz. 1635; Dz.U. 2023 poz. 702) ✅ VER: 2026-08-15
+**Data weryfikacji online:** 2026-08-15 — FAZA 3E (audyt-systemu-v4): ⛔ CRIT-TREŚĆ
+naprawiony — moduł błędnie przypisywał numer 2025.1733 (który należy do ustawy
+WDROŻENIOWEJ 2021-2027) do ustawy o POLITYCE ROZWOJU; to są dwa odrębne akty z odrębnymi
+t.j. (potwierdzone: gofin.pl + isap.sejm.gov.pl, oba źródła niezależnie)
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
 ---
@@ -16,9 +24,9 @@ Perspektywa finansowa UE 2021–2027 (EFRR, EFS+, Fundusz Spójności, FST), ins
 
 | Akt | Dz.U. |
 |---|---|
-| Ustawa o realizacji programów UE 2021–2027 | Dz.U. 2024 poz. 1655 ze zm. |
-| Ustawa o zasadach prowadzenia polityki rozwoju | Dz.U. 2025 poz. 1733 t.j. z 10.12.2025 |
-| Ustawa o postępowaniu w sprawach pomocy publicznej | Dz.U. 2025 poz. 468 t.j. (poprzedni t.j.: Dz.U. 2024 poz. 1635; Dz.U. 2023 poz. 702) ✅ VER: 2026-06-05 |
+| Ustawa wdrożeniowa 2021–2027 (realizacja zadań fin. ze środków europejskich, 28.04.2022) | Dz.U. 2025 poz. 1733 t.j. (zastępuje t.j. 2024.1655) |
+| Ustawa o zasadach prowadzenia polityki rozwoju (6.12.2006) | Dz.U. 2025 poz. 198 t.j. (obwieszczenie 5.02.2025; zastępuje t.j. 2024.324) |
+| Ustawa o postępowaniu w sprawach pomocy publicznej | Dz.U. 2025 poz. 468 t.j. (poprzedni t.j.: Dz.U. 2024 poz. 1635; Dz.U. 2023 poz. 702) ✅ VER: 2026-08-15 |
 | Rozporządzenie ogólne UE 2021/1060 | stosowane bezpośrednio — funduszowe |
 | Rozporządzenia EFRR, EFS+, FS | stosowane bezpośrednio |
 | Rozporządzenie de minimis | Rozp. (UE) 2023/2831 — nowe od 01.01.2024 |
@@ -119,7 +127,7 @@ ZWROT POMOCY NIEZGODNEJ:
 ## 5. DOKUMENTY POLITYKI ROZWOJU
 
 ```
-Ustawa o polityce rozwoju — Dz.U. 2025 poz. 1733 t.j. z 10.12.2025:
+Ustawa o polityce rozwoju — Dz.U. 2025 poz. 198 t.j. (obwieszczenie 5.02.2025):
 
 Hierarchia dokumentów:
   DSRK — Długookresowa Strategia Rozwoju Kraju (> 10 lat)
@@ -152,10 +160,10 @@ Instrumenty realizacji:
 
 **Strategia:** Przy zwrocie dotacji — zaskarż decyzję i kwestionuj taryfikator korekt (nieproporcjonalne). Przy de minimis — zawsze weryfikuj limit w SUDOP przed udzieleniem. Przy kontroli — dostarcz pełną dokumentację zanim wynik kontroli zostanie zatwierdzony.
 
-**Quality gate:** Termin protestu (14 dni) / odwołania (14 dni) obliczony? Nowe de minimis 300 000 EUR (od 01.01.2024) zastosowane? Ustawa polityki rozwoju — aktualny t.j. Dz.U. 2025 poz. 1733?
+**Quality gate:** Termin protestu (14 dni) / odwołania (14 dni) obliczony? Nowe de minimis 300 000 EUR (od 01.01.2024) zastosowane? Ustawa wdrożeniowa 2021-2027 — aktualny t.j. Dz.U. 2025 poz. 1733? Ustawa polityki rozwoju — aktualny t.j. Dz.U. 2025 poz. 198?
 
 **Output:** Kwalifikacja (fundusz / instrument) → etap → termin → dowody → korekty → strategia → rekomendacja.
 
 **Powiązania:** `mod-PZP-zamowienia-publiczne-KIO` (PZP w projektach) | `dr-06` → `mod-UFP-finanse-publiczne-NIK-RIO` | `pisma-procesowe-v3` | `orzeczenia-sadowe-v2`
 
-**Źródła:** https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20241655 | https://funduszeeuropejskie.gov.pl | https://sudop.uokik.gov.pl
+**Źródła:** https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250001733 (ustawa wdrożeniowa) | https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250000198 (polityka rozwoju) | https://funduszeeuropejskie.gov.pl | https://sudop.uokik.gov.pl

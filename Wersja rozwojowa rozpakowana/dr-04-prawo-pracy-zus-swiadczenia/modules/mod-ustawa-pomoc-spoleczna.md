@@ -24,10 +24,71 @@ WSPÓLNE ZASADY DLA MODUŁU:
 
 | Akt | Metryka robocza |
 |---|---|
-| Ustawa o pomocy społecznej | Dz.U. 2025 poz. 1214; sprawdzić późniejsze zmiany 2025/2026 |
+| Ustawa o pomocy społecznej | Dz.U. 2026 poz. 639 t.j. (obwieszczenie Marszałka Sejmu z 13.05.2026, stan na 28.04.2026; zastępuje t.j. 2025.1214) — ✅ ROZSTRZYGNIĘTE 2026-08-15 (F-28 pkt 2) |
 | KPA | Dz.U. 2025 poz. 1691 według rejestru ISAP |
 | PPSA | Dz.U. 2026 poz. 143 według rejestru ISAP |
 | Ustawy świadczeniowe szczególne | każdorazowo sprawdzić ISAP |
+
+## ⭐ KRYTERIA DOCHODOWE I KLUCZOWE ŚWIADCZENIA (dodano 2026-08-15, naprawa F-28 pkt 2)
+
+⚠️ Moduł dotąd nie zawierał ŻADNEJ konkretnej kwoty ani przesłanki
+merytorycznej ustawy — wyłącznie generyczny szkielet proceduralny. Poniższe
+dane potwierdzone w 6+ zgodnych źródłach, w tym OFICJALNYM (gov.pl,
+Ministerstwo Rodziny, Pracy i Polityki Społecznej).
+
+```
+KRYTERIUM DOCHODOWE (art. 8 ustawy, podstawa: rozporządzenie RM z
+  12.07.2024, Dz.U. 2024 poz. 1044) — OBOWIĄZUJE OD 1.01.2025, BEZ ZMIAN
+  W 2026 (weryfikacja co 3 lata, kolejna spodziewana 2028):
+  □ Osoba samotnie gospodarująca: 1010 zł
+  □ Osoba w rodzinie: 823 zł (na osobę)
+  ⚠️ Rada gminy MOŻE, w drodze uchwały, PODWYŻSZYĆ kwoty uprawniające
+  do zasiłków okresowego i celowego (art. 8 ust. 2) — sprawdzić lokalną
+  uchwałę przed odmową z powodu przekroczenia kryterium ustawowego
+
+PRZESŁANKA MATERIALNA (art. 7): dochód poniżej kryterium ORAZ
+  wystąpienie co najmniej JEDNEGO z powodów wymienionych w art. 7 pkt
+  2-15 (⚠️ katalog powodów NIE wypisany w tej sesji — sprawdź ISAP przy
+  konkretnej sprawie) LUB innych okoliczności uzasadniających pomoc
+
+ZASIŁEK STAŁY (dla osób trwale niezdolnych do pracy z powodu wieku lub
+  całkowicie niezdolnych do pracy):
+  □ Osoba samotnie gospodarująca: różnica między 130% kryterium (1313 zł)
+    a dochodem tej osoby, MAX 1000 zł... ⚠️ ROZBIEŻNA maksymalna kwota
+    między źródłami: infor.pl (2 artykuły) podaje starą wartość max
+    1000 zł w jednym miejscu, ale w innym artykule (marzec 2026) oraz
+    gazetaprawna.pl (marzec 2026) i rynekzdrowia.pl (grudzień 2025)
+    ZGODNIE podają NOWY max: **1229,05 zł** (wzrost z 1000 zł) — NOWA
+    wartość jest nowsza czasowo i szerzej potwierdzona, przyjąć 1229,05
+    zł jako aktualną, ale ZWERYFIKOWAĆ w ISAP przed cytowaniem w piśmie
+  □ Osoba w rodzinie: różnica między 130% kryterium na osobę w rodzinie
+    (1069,90 zł) a dochodem na osobę w rodzinie
+
+INNE KWOTY (podwyższone od 2025, potwierdzone stabilne w 2026):
+  □ Pomoc na usamodzielnienie: wzrost do 2066 zł (z 1837 zł)
+  □ Świadczenie na naukę języka polskiego dla cudzoziemców ze statusem
+    uchodźcy/ochroną uzupełniającą/pobytem czasowym: wzrost do 950 zł
+    (z 721 zł) — minimalna kwota
+
+DOCHÓD — SPOSÓB LICZENIA (art. 8 ust. 3 i n.): suma miesięcznych
+  przychodów z miesiąca poprzedzającego wniosek (lub miesiąca złożenia
+  wniosku przy utracie dochodu), pomniejszona o podatek PIT, koszty
+  uzyskania przychodu, składki na ubezpieczenie zdrowotne i społeczne
+
+FORMY POMOCY (art. 15-16): świadczenia PIENIĘŻNE (zasiłki stały,
+  okresowy, celowy — m.in. na żywność, leki, ogrzewanie, pogrzeb) oraz
+  NIEPIENIĘŻNE (praca socjalna, usługi opiekuńcze, interwencja
+  kryzysowa, schronienie, posiłki, poradnictwo specjalistyczne,
+  mieszkania treningowe/wspomagane). Obowiązek realizacji zadań pomocy
+  społecznej spoczywa na JST oraz organach administracji rządowej
+  w zakresie ustalonym ustawą.
+
+⚠️ KONTEKST DODATKOWY: t.j. 2026.639 uwzględnia m.in. ustawę z
+  23.01.2026 r. o WYGASZENIU rozwiązań pomocy obywatelom Ukrainy
+  w związku z konfliktem zbrojnym (Dz.U. 2026 poz. 203) — WPŁYW na
+  krąg cudzoziemców uprawnionych do świadczeń NIE zbadany w tej sesji,
+  wymaga odrębnej weryfikacji przy sprawie dotyczącej obywatela Ukrainy.
+```
 
 ## WALIDACJA
 

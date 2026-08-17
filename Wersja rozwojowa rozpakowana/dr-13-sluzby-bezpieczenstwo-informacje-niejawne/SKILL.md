@@ -42,7 +42,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Służby, bezpieczeństwo, informacje niejawne — pojęcia (informacja niejawna, klauzula, dostęp) zdefiniowane wprost w ustawie o ochronie informacji niejawnych i pokryte w mod-ustawa-informacje-niejawne. Żaden plik shared/definicje/ nie obejmuje tej dziedziny.
-## Moduły (11 łącznie — ✓ 11 OK, ☐ 0 STUB)
+## Moduły (12 łącznie — ✓ 12 OK, ☐ 0 STUB)
 
 **NAPRAWA 2026-08-13:** dodano `mod-ustawa-SKW-SWW.md` — zamyka F-59:
 SKW i SWW (wojskowe służby specjalne) nie miały dedykowanego pokrycia,
@@ -109,6 +109,24 @@ SZCZEGÓLNE ŚRODKI ZABEZPIECZAJĄCE:
               (KOZZiD — Dz.U. 2020 poz. 2001 ze zm.;
                nadzór prewencyjny, izolacja sprawców najcięższych przestępstw)
 
+BROŃ CYWILNA — POZWOLENIA:
+  [✓] NOWY  mod-BronAmunU-pozwolenia-cofniecie-strzelnice
+              (dodany 2026-08-16 — naprawa F-92: ustawa o broni i amunicji
+               nie miała modułu w ŻADNYM z 16 DR-skilli, występowała tylko
+               jako akt pomocniczy w dr-03/mod-KK-art263. Pytanie
+               ADMINISTRACYJNE o pozwolenie trafiało na moduł KARNY.
+               Organ i forma [art. 9, 12, 20], ważna przyczyna i 8 celów
+               [art. 10], przesłanki odmowy obligatoryjne/uznaniowe
+               [art. 15, 17], badania lekarskie i psychologiczne z odrębnym
+               30-dniowym trybem odwoławczym [art. 15a-15l], egzamin i
+               zwolnienia PZŁ/PZSS [art. 16], cofnięcie [art. 18], odebranie
+               broni [art. 19] i odebranie obligatoryjne przy przemocy
+               domowej [art. 19a], strzelnice [art. 45-49], przepisy karne
+               ustawy [art. 50-51])
+              (t.j. Dz.U. 2024 poz. 485; ⚠️ NIE MYLIĆ z ustawą o środkach
+               przymusu bezpośredniego i broni palnej — Dz.U. 2026 poz. 244,
+               mod-ustawa-policja — tamta dotyczy UZBROJENIA SŁUŻB)
+
 OCHRONA PRZECIWPOŻAROWA:
   [✓] OK    mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa
               (PSP — Dz.U. 2025 poz. 1312 t.j.; ochrona przeciwpożarowa —
@@ -139,6 +157,12 @@ view /mnt/skills/user/dr-13-sluzby-bezpieczenstwo-informacje-niejawne/MAPA-AKTOW
 - Cyberbezpieczeństwo państwa → `dr-11` → `mod-KSC-NIS2-cyberbezpieczenstwo-telekom`
 - Zarządzanie kryzysowe JST → `dr-08` → `mod-ustawa-zarzadzanie-kryzysowe`
 - Prawo karne wojskowe / odpowiedzialność karna → `dr-03`
+- Nielegalne posiadanie/wyrób/handel bronią (art. 263 KK) → `dr-03` →
+  `mod-KK-art263-bron-nielegalna`
+- Pozwolenie na broń do celów łowieckich, odstrzał sanitarny → `dr-09` →
+  `mod-lowiectwo-klusownictwo`
+- Odwołanie od decyzji KWP / skarga do WSA → `dr-05` → `mod-KPA-decyzja-i-odwolanie`,
+  `mod-PPSA-terminy-kasacja-prawo-pomocy`
 - Zamówienia obronne (PZP obronna) → `dr-07`
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
 - Weryfikacja: isap.sejm.gov.pl | orzeczenia.ms.gov.pl | nsa.gov.pl | sn.pl

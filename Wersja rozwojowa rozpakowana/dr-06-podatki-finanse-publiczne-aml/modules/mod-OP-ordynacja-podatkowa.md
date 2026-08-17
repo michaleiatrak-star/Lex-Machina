@@ -1,8 +1,8 @@
 # mod-OP-ordynacja-podatkowa
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Op — **Dz.U. 2026 poz. 622** (t.j. kwiecień 2026) | KKS — Dz.U. 2025 poz. 633 t.j. | PPSA — Dz.U. 2026 poz. 143
-**Data weryfikacji online:** 2026-06-05
+**Źródło weryfikacji:** Op — **Dz.U. 2026 poz. 622** (t.j. kwiecień 2026) ze zm. Dz.U. 2026.846 (MDR — patrz sekcja 6a, w życie 1.10.2026) | KKS — Dz.U. 2025 poz. 633 t.j. | PPSA — Dz.U. 2026 poz. 143
+**Data weryfikacji online:** 2026-08-15 (sekcja 6a MDR — naprawa F-88)
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
 ---
@@ -284,6 +284,64 @@ przez Sejm, PODPISANA przez Prezydenta 19.06.2026) — WCHODZI W
 Potwierdzone w 5+ zgodnych źródłach (axelo.pl [czerwiec 2026, z
 cytowanym numerem druku], akademialtca.pl, olesinski.com, oraz
 BEZPOŚREDNIO druk sejmowy 2287 na api.sejm.gov.pl [Rząd 1]).
+```
+
+## 6a. MDR — INFORMACJE O SCHEMATACH PODATKOWYCH (Rozdz. 11a Op)
+⭐ NOWA SEKCJA dodano 2026-08-15 (naprawa F-88, priorytet MDR) — dotąd
+moduł wzmiankował MDR wyłącznie w wykazie interpretacji (KIS), bez
+opracowania instytucji.
+
+```
+⚡ REWOLUCJA OD 1.10.2026 — ustawa z 29.05.2026 o zmianie ustawy —
+  Ordynacja podatkowa oraz niektórych innych ustaw (Dz.U. 2026.846,
+  podpisana przez Prezydenta 19.06.2026, ta sama ustawa co GAAR wyżej —
+  ⚠️ ta sama ustawa zmienia OBA tematy naraz, nie mylić z ODRĘBNĄ
+  drugą nowelizacją Op z tego samego dnia, druk 2352, dot. ugody
+  podatkowej — patrz akapit GAAR powyżej)
+
+STAN DO 30.09.2026 (obowiązuje jeszcze przy zdarzeniach sprzed tej daty):
+  □ Obowiązek raportowania obejmuje SCHEMATY KRAJOWE i TRANSGRANICZNE
+  □ Obowiązkowa wewnętrzna procedura MDR dla podmiotów przekraczających
+    próg przychodów/kosztów 8 mln PLN lub będących podmiotem powiązanym
+    w rozumieniu przepisów o cenach transferowych
+  □ Formularz MDR-2 (zawiadomienie o schemacie standaryzowanym)
+  □ MDR-3 składany wielokrotnie w ciągu roku
+
+STAN OD 1.10.2026 (⚡ ZMIANA FUNDAMENTALNA):
+  □ ⭐ ZNIESIONY obowiązek raportowania SCHEMATÓW KRAJOWYCH — raportowaniu
+    podlegają WYŁĄCZNIE schematy TRANSGRANICZNE (zgodnie z minimalnym
+    zakresem wymaganym przez dyrektywę UE DAC-6)
+  □ Zniesiony obowiązek posiadania wewnętrznej procedury MDR
+  □ Zlikwidowany formularz MDR-2
+  □ MDR-3 składany TYLKO RAZ W ROKU (zamiast wielokrotnie)
+  □ Instytucje promotora i wspomagającego POŁĄCZONE w jedną — promotora
+  □ Doprecyzowany katalog szczególnych cech rozpoznawczych (część
+    usunięta jako przesłanki powstania obowiązku raportowania)
+  □ Doprecyzowany zakres podatków objętych MDR — obejmuje wszystkie
+    podatki w rozumieniu Op z pewnymi wyłączeniami (⚠️ dokładny katalog
+    wyłączeń NIEUSTALONY w tej sesji — zweryfikuj w ISAP przed pismem
+    powołującym się na konkretne wyłączenie)
+  □ Zwolnienie z obowiązku przekazania informacji o schemacie ze względu
+    na obowiązek zachowania prawnie chronionej tajemnicy zawodowej
+    (⚠️ powiązanie z interpretacją DTS5.8092.2.2025 niżej w wykazie —
+    ta interpretacja może wymagać ponownej lektury w świetle nowego stanu
+    prawnego, NIE automatycznie aktualna po 1.10.2026)
+  □ GAAR i ogólne wymogi Ordynacji podatkowej — BEZ ZMIAN, MDR to
+    odrębny, dodatkowy obowiązek sprawozdawczy, nie warunek stosowania
+    klauzuli przeciw unikaniu opodatkowania
+
+⚠️ PODATNIK NADAL MUSI OCENIĆ, czy uzgodnienie nie spełnia definicji
+  schematu TRANSGRANICZNEGO (kryterium kwalifikowanego korzystającego +
+  cechy rozpoznawcze) — likwidacja dotyczy TYLKO schematów krajowych,
+  nie oznacza całkowitego zniesienia MDR
+
+Potwierdzone w 5+ zgodnych źródłach: Wolters Kluwer/LEX (Tomasz Krywan,
+przewodnik po zmianach), Crowe Polska, Gekko Taxens (z datą podpisu przez
+Prezydenta), kpitax.pl, portalsamorzadowy.pl (Sejm/PTWP). ⚠️ Dokładny
+katalog wyłączeń podatkowych z zakresu MDR i pełna nowa definicja
+"schematu podatkowego" (art. 86a i n. Op) NIE zweryfikowane źródłowo w
+tej sesji — wymaga odczytu pełnego tekstu ustawy w ISAP przed użyciem w
+piśmie stwierdzającym brak obowiązku raportowania konkretnego uzgodnienia.
 ```
 
 ## TECHNIKI MANIPULACJI DOKUMENTACJĄ DLA OBNIŻENIA PODATKÓW — GRANICA

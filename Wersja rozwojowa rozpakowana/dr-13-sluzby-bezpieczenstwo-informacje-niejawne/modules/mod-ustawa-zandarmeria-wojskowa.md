@@ -158,3 +158,16 @@ Przed odpowiedzią lub pismem zastosuj:
 - `shared/LEGAL-QUALITY-GATE.md`,
 - `shared/RISK-ASSESSMENT.md`, jeżeli istnieje,
 - `shared/FORMAL-CHECK.md`, jeżeli powstaje pismo.
+
+---
+
+## KLUCZOWE AKTY — ZWERYFIKOWANE 2026-08-14 (F-57)
+
+```
+Ustawa o Żandarmerii Wojskowej i wojskowych organach porządkowych:
+  Dz.U. 2026 poz. 159 t.j. (obwieszczenie Marszałka Sejmu z 5.02.2026,
+  ogłoszone 12.02.2026)
+  — poprzedni t.j. Dz.U. 2024 poz. 1654 NIEAKTUALNY, zastąpiony przez t.j. 2026.159
+  ✅ VER: isap.sejm.gov.pl (WDU20260000159), inforlex.pl, prawo.pl 2026-08-14 (F-57)
+  ⚠️ weryfikuj dalsze zm. w ISAP przed każdym powołaniem
+```

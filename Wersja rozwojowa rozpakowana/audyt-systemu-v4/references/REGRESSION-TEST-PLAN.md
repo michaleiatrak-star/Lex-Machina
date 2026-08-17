@@ -435,3 +435,40 @@ KONKRETNEMU, udokumentowanemu w AUDIT-JOURNAL.md błędowi znalezionemu
 i naprawionemu w TEJ sesji — zgodnie z fundamentalną zasadą testów
 regresyjnych (ponowne wykonanie testów dla PRZESZŁYCH, znanych
 problemów), NIE są to testy hipotetyczne/spekulatywne.
+
+---
+
+## 11. T11 — SYNCHRONIZACJA AKTÓW MIĘDZY REJESTRAMI (dodane 2026-08-15z, flaga F-89)
+
+**Skrypt:** `scripts/check_sync_aktow.py` | **Priorytet:** ⭐⭐ WYSOKI |
+**Charakter:** heurystyka tekstowa → WARN (nie bramka, nie rozstrzyga automatycznie)
+
+**Błąd przeszły, przed którym chroni** (zgodnie z zasadą: każdy test odpowiada
+udokumentowanemu incydentowi, nie hipotezie) — CZTERY udokumentowane przypadki:
+1. 2026-08-13 — cztery podatki sektorowe opisane w dr-06, nieobecne w mapie
+   centralnej i ROUTING-MAP.
+2. 2026-08-14 — 12 nowych modułów zarejestrowanych lokalnie, nieobecnych
+   w ROUTING-MAP (przyczyna powstania REGUŁY 3 w HARDGATE-AUDYT).
+3. 2026-08-15y — ustawa o systemach AI (Dz.U. 2026 poz. 1003) znana w dr-11
+   od 14.08, nieobecna w mapie centralnej.
+4. 2026-08-15z — poz. 1004, 825 i 846 wpisane do mapy Dz.U. i modułów, ale
+   nie do ROUTING-MAP (REGUŁA 3 pominięta przez samego wykonawcę audytu).
+
+**Luka, którą wypełnia:** `test_cross_map_dzu.py` (T3) porównuje NUMER tego
+samego aktu w dwóch mapach — wykrywa ROZBIEŻNOŚĆ, ale nie BRAK.
+`check_rejestracja_modulow.py` sprawdza rejestrację MODUŁÓW, nie AKTÓW.
+Żaden test nie wykrywał aktu obecnego w jednym rejestrze, a nieobecnego
+w drugim — najczęstszego realnego defektu synchronizacji w tym systemie.
+
+**Trzy kierunki kontroli:** lokalne `MAPA-AKTOW.md` → ROUTING-MAP (REGUŁA 3);
+lokalne → mapa Dz.U.; ROUTING-MAP → mapa Dz.U.
+
+**Kryterium wyjścia — ŚWIADOMIE NIE „zero":** rejestry mają różne
+przeznaczenie (mapa Dz.U. to katalog wszystkich aktów, ROUTING-MAP zawiera
+to, co ma routing do modułu), więc akt skatalogowany bez modułu MOŻE legalnie
+nie mieć wiersza w ROUTING-MAP. Kryterium: **zero pozycji z ostatnich
+12 miesięcy bez rozstrzygnięcia** (dopisane albo udokumentowane jako świadomy
+brak). Docelowo — lista wyjątków w skrypcie, żeby test mógł stać się bramką.
+
+**Stan zastany przy wprowadzeniu (2026-08-15z):** 72 / 80 / 53 pozycji
+w trzech kierunkach → flaga F-89.

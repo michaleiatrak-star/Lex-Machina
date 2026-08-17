@@ -781,6 +781,183 @@ t.j. Dz.U. 2021 poz. 1988 ze zm.:
 
 ---
 
+## ⭐ POKREWIEŃSTWO I POWINOWACTWO — PRZEPISY OGÓLNE (art. 617-618 KRO) — dodano 2026-08-15, naprawa F-73
+
+⭐ NAJMNIEJSZY fragment KRO — Dział I Tytułu II, tylko 2 artykuły,
+definicyjne. Potwierdzone zgodnie w 4 źródłach (lexlege.pl, ustawa
+nowelizująca z 6.11.2008 r. wprowadzająca ten dział — sip.lex.pl,
+gofin.pl, prawo.egospodarka.pl — wszystkie zgodne, brak zmian
+merytorycznych od wprowadzenia w 2008 r.).
+
+```
+Art. 617 — Pokrewieństwo, linia i stopień:
+  §1: Krewnymi W LINII PROSTEJ są osoby, z których JEDNA pochodzi od
+      DRUGIEJ (np. rodzic-dziecko-wnuk). Krewnymi W LINII BOCZNEJ są
+      osoby, które pochodzą od WSPÓLNEGO PRZODKA, a NIE są krewnymi
+      w linii prostej (np. rodzeństwo, kuzynostwo).
+  §2: STOPIEŃ pokrewieństwa określa się według LICZBY URODZEŃ, wskutek
+      których pokrewieństwo powstało (np. rodzic-dziecko = 1 stopień,
+      dziadek-wnuk = 2 stopnie, rodzeństwo = 2 stopnie przez wspólnego
+      rodzica).
+
+Art. 618 — Powinowactwo:
+  §1: Z MAŁŻEŃSTWA wynika POWINOWACTWO między małżonkiem a KREWNYMI
+      DRUGIEGO małżonka (np. teściowie, szwagier/szwagierka). Trwa
+      ono MIMO USTANIA małżeństwa (rozwód, śmierć — powinowactwo NIE
+      wygasa automatycznie).
+  §2: LINIĘ i STOPIEŃ powinowactwa określa się WEDŁUG linii i stopnia
+      POKREWIEŃSTWA (odpowiednie zastosowanie zasad z art. 617).
+
+**Znaczenie praktyczne:** te definicje są PODSTAWĄ dla przepisów w innych
+częściach systemu prawa odwołujących się do pokrewieństwa/powinowactwa
+w określonym stopniu — np. wyłączenie sędziego (KPC/KPK), zakaz
+zeznawania świadka spokrewnionego, krąg spadkobierców ustawowych (KC),
+krąg osób zobowiązanych alimentacyjnie (art. 128 i n. KRO — patrz sekcja
+OBOWIĄZEK ALIMENTACYJNY SZERSZEGO KRĘGU KREWNYCH wyżej), przesłanki
+przeszkód małżeńskich (art. 14-15 KRO — pokrewieństwo/powinowactwo jako
+przeszkoda). Trwałość powinowactwa mimo rozwodu (art. 618 §1 zd. 2) bywa
+istotna praktycznie przy ustalaniu kręgu osób wyłączonych od orzekania
+lub zeznawania w sprawach dotyczących byłego współmałżonka.
+```
+
+---
+
+## ⭐ MACIERZYŃSTWO — USTALENIE I ZAPRZECZENIE (art. 619, 6110-6116 KRO) — dodano 2026-08-15, naprawa F-73
+
+Oddział 1 Rozdziału I Działu IA — instytucja odrębna od SUROGACJI opisanej
+wyżej (ta sekcja dotyczy ustalania/zaprzeczania FORMALNEGO stosunku
+macierzyństwa, nie umowy o macierzyństwo zastępcze). Zweryfikowane w
+aktualnym t.j. Dz.U.2026.236 (arslege.pl, lexlege.pl — pełna zgodna
+treść wszystkich 7 artykułów).
+
+```
+Art. 619 — Zasada podstawowa (mater semper certa est):
+  MATKĄ dziecka jest KOBIETA, która je URODZIŁA. Definicja czysto
+  biologiczna/faktyczna — punkt wyjścia dla całego Oddziału.
+
+Art. 6110 — Ustalenie macierzyństwa:
+  §1: Jeżeli sporządzono akt urodzenia dziecka NIEZNANYCH rodziców ALBO
+      macierzyństwo kobiety wpisanej jako matka ZOSTAŁO ZAPRZECZONE —
+      można żądać USTALENIA macierzyństwa.
+  §2: Powództwo wytacza DZIECKO przeciwko MATCE (lub przeciwko
+      kuratorowi, jeśli matka nie żyje). W razie śmierci dziecka,
+      które wytoczyło powództwo — mogą dochodzić JEGO ZSTĘPNI.
+  §3: MATKA wytacza powództwo PRZECIWKO DZIECKU (lub kuratorowi, jeśli
+      dziecko nie żyje).
+
+Art. 6111 — Ograniczenie czasowe dla matki:
+  MATKA NIE MOŻE wytoczyć powództwa o ustalenie macierzyństwa PO
+  osiągnięciu przez dziecko PEŁNOLETNOŚCI. ⭐ Asymetria: dziecko takiego
+  ograniczenia nie ma (patrz art. 6114 niżej — termin inny, dłuższy).
+
+Art. 6112 — Zaprzeczenie macierzyństwa — przesłanka:
+  §1: Jeżeli w akcie urodzenia wpisana jest jako matka kobieta, KTÓRA
+      dziecka NIE URODZIŁA — można żądać ZAPRZECZENIA macierzyństwa.
+
+Art. 6113 — Termin dla matki/kobiety wpisanej jako matka:
+  §1: 6 MIESIĘCY od dnia sporządzenia aktu urodzenia dziecka — termin
+      ZAWITY dla wytoczenia powództwa o zaprzeczenie.
+
+Art. 6114 — Termin dla dziecka:
+  §1: DZIECKO może wytoczyć powództwo o zaprzeczenie macierzyństwa w
+      ciągu 3 LAT OD OSIĄGNIĘCIA PEŁNOLETNOŚCI.
+
+Art. 6115 — Ograniczenie po śmierci dziecka:
+  Ustalenie i zaprzeczenie macierzyństwa NIE jest dopuszczalne PO
+  śmierci dziecka (⚠️ z WYJĄTKIEM uprawnienia zstępnych z art. 6110 §2
+  zd. 2 przy ustaleniu, oraz z wyjątkiem legitymacji prokuratora z
+  art. 6116 niżej — te dwa wyjątki wymagają odrębnego odczytania
+  łącznie z art. 6115, nie w oderwaniu).
+
+Art. 6116 — Legitymacja prokuratora:
+  Powództwo o ustalenie LUB zaprzeczenie macierzyństwa może wytoczyć
+  TAKŻE prokurator, gdy wymaga tego DOBRO DZIECKA lub OCHRONA INTERESU
+  SPOŁECZNEGO. Jeżeli dziecko zmarło PRZED pełnoletnością — prokurator
+  może wytoczyć powództwo o zaprzeczenie DO DNIA, w którym dziecko
+  osiągnęłoby pełnoletność. Wytoczenie przez prokuratora NIEDOPUSZCZALNE,
+  jeżeli dziecko zmarło PO osiągnięciu pełnoletności. (⭐ to brzmienie
+  zastąpiło poprzednie, węższe z 2008 r. — zmiana ustawą z 16.05.2019 r.,
+  rozszerzająca możliwość działania prokuratora po śmierci dziecka w
+  określonych granicach czasowych — potwierdzone: orka.sejm.gov.pl, druk
+  3295, oraz aktualny t.j. wszystkich cytowanych źródeł, brak rozbieżności).
+
+**Właściwość i tryb (kontekst doktrynalny, nie wprost z przepisu):**
+sąd rejonowy (powództwo o prawa stanu, art. 17 pkt 1 KPC).
+```
+
+⚠️ **KONTEKST AKTUALNY (do dalszego śledzenia, POZA zakresem tej naprawy):**
+wyrok ETPC z 7.10.2025 r. (A.W. p. Polsce, skarga 1307/21) dotyczący
+nieprawidłowości w postępowaniach o ustalenie pochodzenia dziecka;
+Komisja Kodyfikacyjna Prawa Rodzinnego wydała stanowisko 18.03.2026 r.
+sygnalizujące możliwą potrzebę zmian ustawowych lub wytycznych
+metodycznych dot. art. 6116 i art. 86 KRO (analogiczny przepis dla
+ojcostwa) — dotyczy głównie art. 86 (nie objętego tą naprawą), ale
+sygnalizuje że temat prokuratorskiej legitymacji w sprawach pochodzenia
+dziecka jest obecnie żywy. Nie stanowi jeszcze zmiany przepisu.
+
+---
+
+## ⭐ STOSUNKI RODZICE-DZIECI — PRZEPISY OGÓLNE (art. 87-91 KRO) — dodano 2026-08-15, naprawa F-73
+
+⭐ NISKA PRACOCHŁONNOŚĆ — krótki, zamknięty fragment (Oddział 1 Rozdziału II
+Tytułu II KRO), poprzedzający władzę rodzicielską. Potwierdzone zgodnie w
+4 źródłach (lexlege.pl, arslege.pl, e-prawnik.pl, gofin.pl — stan na t.j.
+Dz.U.2026.236).
+
+```
+Art. 87 — Wzajemny szacunek i wsparcie:
+  Rodzice i dzieci są obowiązani do wzajemnego SZACUNKU i WSPIERANIA SIĘ.
+  ⭐ Norma o charakterze deklaratoryjnym/moralnym — nie ma bezpośredniej
+  sankcji procesowej, ale bywa przywoływana kontekstowo (np. przy ocenie
+  dobra dziecka, relacji rodzinnych w sprawach opiekuńczych).
+
+Art. 88 — Nazwisko dziecka pochodzącego od męża matki:
+  §1: Dziecko, co do którego istnieje domniemanie pochodzenia od męża
+      matki, nosi nazwisko będące nazwiskiem obojga małżonków. Jeżeli
+      małżonkowie mają różne nazwiska — dziecko nosi nazwisko wskazane
+      w ich zgodnych oświadczeniach (jednego z nich albo połączone
+      nazwisko matki z ojcem).
+
+Art. 89¹ — Jednolitość nazwiska rodzeństwa:
+  Dzieci pochodzące od tych samych rodziców noszą TAKIE SAMO nazwisko,
+  z zastrzeżeniem przepisów wymagających zgody dziecka na zmianę.
+
+Art. 90 — Nazwisko dziecka przy zawarciu małżeństwa przez matkę/ojca
+  z osobą niebędącą rodzicem biologicznym:
+  §1: Małżonkowie mogą złożyć przed kierownikiem USC (lub konsulem)
+      zgodne oświadczenia, że dziecko będzie nosić nazwisko zgodne
+      z art. 88 (jak ich wspólne dziecko). Zmiana nazwiska dziecka,
+      które ukończyło 13 lat, wymaga JEGO zgody.
+  §2: Niedopuszczalne, gdy dziecko już nosi nazwisko ojca albo nazwisko
+      utworzone na podstawie zgodnych oświadczeń rodziców.
+  §3: Stosuje się odpowiednio, gdy to OJCIEC zawarł małżeństwo z kobietą
+      niebędącą matką dziecka.
+
+Art. 90¹ — Ograniczenie liczby członów nazwiska łączonego:
+  Nazwisko dziecka utworzone przez połączenie (matka+ojciec, lub
+  rodzic+małżonek niebędący rodzicem) NIE MOŻE składać się z więcej
+  niż DWÓCH członów; w skład wchodzą PIERWSZE człony nazwisk
+  podlegających połączeniu (chyba że powstałoby nazwisko o jednakowych
+  członach).
+
+Art. 91 — Obowiązki dziecka wobec gospodarstwa domowego rodziców:
+  §1: Dziecko MAJĄCE dochody z własnej pracy, mieszkające u rodziców,
+      powinno przyczyniać się do POKRYWANIA KOSZTÓW utrzymania rodziny.
+  §2: Dziecko POZOSTAJĄCE na utrzymaniu rodziców i mieszkające u nich —
+      obowiązane POMAGAĆ we wspólnym gospodarstwie (w praktyce: zakres
+      proporcjonalny do wieku i możliwości dziecka — kontekst
+      doktrynalny, nie wprost z przepisu).
+
+**Znaczenie praktyczne:** te przepisy rzadko są samodzielną podstawą
+roszczenia procesowego — pełnią funkcję kontekstową/interpretacyjną przy
+ocenie relacji rodzinnych (władza rodzicielska, kontakty, obowiązek
+alimentacyjny) oraz są źródłem reguł ustalania nazwiska dziecka, istotnych
+przy sporządzaniu aktów stanu cywilnego i pism procesowych wymagających
+precyzyjnego oznaczenia stron.
+```
+
+---
+
 ## WŁADZA RODZICIELSKA I KONTAKTY
 
 ```

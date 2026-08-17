@@ -1,8 +1,12 @@
 # Moduł — Regionalne Izby Obrachunkowe (RIO)
 
 ## Akt prawny / źródło
-- Ustawa o regionalnych izbach obrachunkowych — Dz.U. 2023 poz. 1325 (t.j.)
-  ✅ [VER: isap.sejm.gov.pl, 2026-05-31]
+- Ustawa o regionalnych izbach obrachunkowych — Dz.U. 2025 poz. 7 (t.j., obwieszczenie
+  Marszałka Sejmu z 23.12.2024; zastępuje t.j. 2023.1325)
+  ✅ [VER: isap.sejm.gov.pl, 2026-08-15 — FAZA 3E: jedyna zmiana ujęta w nowym t.j.
+  wynika z ustawy o dochodach JST (Dz.U. 2024.1572), nie dotyka art. 1, 11, 90 u.s.g.
+  ani funkcji nadzorczej/kontrolnej/opiniodawczej/orzeczniczej opisanych niżej — treść
+  modułu ZGODNA]
 
 **Weryfikacja:** isap.sejm.gov.pl przed każdym cytowaniem.
 
@@ -28,8 +32,8 @@ Opinia RIO:    Obowiązkowa przy emisji obligacji komunalnych i pożyczkach z BP
 
 ## Weryfikacja online
 ```
-web_search: "ustawa regionalne izby obrachunkowe RIO isap tekst jednolity 2023"
-web_search: "RIO nadzór uchwała nieważność budżet JST 2025"
+web_search: "ustawa regionalne izby obrachunkowe RIO isap tekst jednolity 2025"
+web_search: "RIO nadzór uchwała nieważność budżet JST 2026"
 ```
 
 
@@ -53,4 +57,4 @@ web_search: "RIO nadzór uchwała nieważność budżet JST 2025"
 9. Strategia (podstawowy + ewentualny); 10. Rekomendacja; 11. Kontrola ISAP/temporalności.
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Data weryfikacji online:** 2026-06-05
+**Data weryfikacji online:** 2026-08-15

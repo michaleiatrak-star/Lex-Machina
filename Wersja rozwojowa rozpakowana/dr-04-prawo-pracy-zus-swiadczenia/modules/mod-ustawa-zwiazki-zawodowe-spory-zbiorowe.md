@@ -1,5 +1,7 @@
 # mod-ustawa-zwiazki-zawodowe-spory-zbiorowe
 
+⚠️ **Nazwa pliku jest HISTORYCZNA i węższa niż rzeczywisty zakres** — ✅ ROZSTRZYGNIĘTE 2026-08-15 (F-28 pkt 4): moduł opisuje TRZY tematy, nie dwa sugerowane nazwą: (1) związki zawodowe, (2) UKŁADY ZBIOROWE PRACY (sekcja 3 — pominięte w nazwie, mimo że to jedna z dwóch ustaw źródłowych modułu), (3) spory zbiorowe. Rename pliku ŚWIADOMIE NIE wykonany — wymagałby synchronizacji 4 miejsc w 3 plikach (`SKILL.md`, `MAPA-AKTOW.md`, `prawo-polskie-v2/ROUTING-MAP.md` — 2 wiersze, oraz cross-odesłanie z `mod-ustawa-zwolnienia-grupowe.md`), z realnym ryzykiem rozerwania referencji, przy niskiej korzyści (moduł ma tylko 1 plik, łatwy do znalezienia przez treść). Zamiast tego — ten nagłówek jako trwałe wyjaśnienie zakresu.
+
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** Ustawa o związkach zawodowych — Dz.U. 2026 poz. 549 t.j. | Ustawa o układach zbiorowych i porozumieniach zbiorowych — Dz.U. 2025 poz. 1661 (NOWA — od 13.12.2025)
 **Data weryfikacji online:** 2026-06-05

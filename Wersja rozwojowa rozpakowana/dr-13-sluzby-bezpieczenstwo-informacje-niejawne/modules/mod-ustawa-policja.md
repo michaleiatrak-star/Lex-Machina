@@ -164,19 +164,27 @@ Przed odpowiedzią lub pismem zastosuj:
 
 ---
 
-## KLUCZOWE AKTY — ZWERYFIKOWANE 2026-06-05
+## KLUCZOWE AKTY — ZWERYFIKOWANE 2026-08-14 (F-57)
 
 ```
 Ustawa o Policji:
-  Dz.U. 2024 poz. 1589 t.j. ze zm.:
-  → Dz.U. 2024 poz. 1248 — zm. w związku z zagrożeniem bezpieczeństwa państwa
-  → Dz.U. 2024 poz. 1562 — oddziały o profilu mundurowym / ułatwienie powrotu do służby
+  Dz.U. 2025 poz. 636 t.j. (obwieszczenie Marszałka Sejmu z 10.04.2025)
+  — poprzedni t.j. Dz.U. 2024 poz. 1589 NIEAKTUALNY, zastąpiony przez t.j. 2025.636
+  → nowelizacje uwzględnione w tekście jednolitym 2025.636 m.in.:
+    Dz.U. poz. 1248/2024 (zagrożenie bezpieczeństwa państwa), poz. 1562/2024
+    (oddziały o profilu mundurowym), poz. 1688/2024, poz. 1717/2024, poz. 1871/2024,
+    poz. 179/2025 (Prawo lotnicze)
   → Dz.U. 2025 poz. 1366 — ⚡ zakwaterowanie funkcjonariuszy (zm. Policji, SG, PSP,
-    ABW, AW, SKW, SWW, SOP jednocześnie)
-  ✅ VER: isap.sejm.gov.pl 2026-06-05
+    ABW, AW, SKW, SWW, SOP jednocześnie) — NOWELIZACJA PO t.j. 2025.636, weryfikuj
+    czy uwzględniona w kolejnym t.j.
+  ✅ VER: isap.sejm.gov.pl, api.sejm.gov.pl 2026-08-14 (F-57)
 
 Ustawa o środkach przymusu bezpośredniego i broni palnej:
-  Dz.U. 2023 poz. 202 t.j. ze zm. — weryfikuj w ISAP
+  Dz.U. 2026 poz. 244 t.j. (obwieszczenie Marszałka Sejmu z 20.02.2026)
+  — poprzednie t.j. Dz.U. 2023 poz. 202 i Dz.U. 2025 poz. 555 NIEAKTUALNE,
+    zastąpione przez t.j. 2026.244
+  ✅ VER: isap.sejm.gov.pl, inforlex.pl (Dz.U.2026.061.0000244) 2026-08-14 (F-57)
+  ⚠️ weryfikuj dalsze zm. w ISAP przed każdym powołaniem
 
 Odpowiedzialność odszkodowawcza Skarbu Państwa za działania Policji:
   → Art. 417 KC (delikt władzy publicznej)

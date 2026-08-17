@@ -1,6 +1,6 @@
 ---
 name: audyt-systemu-v4
-version: 6.4
+version: 6.8
 type: governance-audit
 compatibility:
   - Claude
@@ -16,10 +16,10 @@ widgets:
   - widgets/WIDGET-MENU.md        # interaktywne menu wielokrotnego wyboru
 references:
   - references/AUDIT-JOURNAL.md
-  - references/WARN-OTWARTE.md   # rejestr żywy TYLKO otwartych flag (WARN + strukturalne) — dodane 2026-07-07, ZASADA 10
+  - references/WARN-OTWARTE.md   # rejestr żywy TYLKO otwartych flag (WARN + strukturalne) — dodane 2026-07-07, ZASADA 10; ⚡ od 2026-08-15w zaczyna się TABLICĄ STERUJĄCĄ (indeks wszystkich flag + następny krok w jednym zdaniu) — czytaj ją PIERWSZĄ przy pytaniu „co jest do zrobienia"
   - references/CHECKLIST-DEDUP.md   # mapa pojęć → lokalizacje (5 not, NOTA-6 ORPHAN dodana 06-14g)
   - references/mapa_dzu_2026-07-15.md   # aktualna mapa Dz.U. (502 wiersze, sync 2026-08-13); 07-04 poprzednia wersja
-  - references/REGRESSION-TEST-PLAN.md   # zestaw testów regresyjnych T1-T8, v1.1 (dodane 2026-07-21) — NAJPIERW zarejestrowany tutaj po odkryciu że plan istniał bez wpisu w SKILL.md
+  - references/REGRESSION-TEST-PLAN.md   # zestaw testów regresyjnych T1-T9 + T11 (T11 dodany 2026-08-15z, sekcja 11), v1.2 (dodane 2026-07-21) — NAJPIERW zarejestrowany tutaj po odkryciu że plan istniał bez wpisu w SKILL.md
   - references/SYNC-DZU-AUTOMATYCZNY.md   # narzędzie WSPIERAJĄCE FAZĘ 3 — automatyzacja wykrywania nowych pozycji Dz.U./M.P. (wprowadzone 2026-07-13, skonsolidowane z osobnego skilla 2026-07-13f) — REJESTROWANE 2026-08-15 po wykryciu jako plik-sierota (użytkownik przesłał starą wersję ZIP i zapytał o funkcję scheduled task; plik istniał na dysku, ale nigdy nie trafił do tego frontmatter)
   - references/HARMONOGRAM-CRON.md   # przykłady harmonogramu (cron / GitHub Actions) do adaptacji przez developera — powiązane z SYNC-DZU-AUTOMATYCZNY.md — REJESTROWANE 2026-08-15, ten sam powód co wyżej
   - references/SCHEDULED-TASK-COWORK.md   # POZYCJA 11 menu — zadanie cykliczne w Cowork (TRYB DZU co tydzień): warunek uruchomienia, kanoniczna treść Description+promptu, blok map pokrycia za bramką F-83 — DODANE 2026-08-15o
@@ -38,6 +38,7 @@ scripts:
   # T10 (check_nexto_free_files.py, monitorowanie plików Nexto/Virtualo,
   # flaga F-12) USUNIĘTE 2026-07-24d na polecenie użytkownika — patrz
   # AUDIT-JOURNAL.md, wpis AUDYT-2026-07-24d
+  - scripts/check_sync_aktow.py           # T11 — synchronizacja AKTÓW między lokalną MAPA-AKTOW, ROUTING-MAP i mapą Dz.U. (WYSOKI, heurystyka→WARN, dodany 2026-08-15z, flaga F-89) — wykrywa BRAK pozycji, czego T3 (rozbieżność numeru) i check_rejestracja_modulow (moduły) nie robią
   - scripts/run_regression_suite.py       # orkiestrator — uruchamia T1/T2/T3/T6/T7/T8 w jednym przebiegu
   - scripts/ci_check_shared.py            # T6/T7 — zerwane odwołania / duplikaty (już istniejący, wywoływany przez orkiestrator)
   - scripts/check_rejestracja_modulow.py  # kontrola spójności rejestracji modułów DR (4 rejestry: dysk/SKILL.md/MAPA-AKTOW.md/ROUTING-MAP.md) — powstał 2026-08-14e (F-77) — REJESTROWANE 2026-08-15, plik-sierota tego samego wzorca jaki sam wykrywa
@@ -813,6 +814,16 @@ z WARN-OTWARTE.md, dodaj pełny wpis do AUDIT-JOURNAL.md.
       `WARN-OTWARTE.md` ORAZ krótki wpis o odkryciu w `AUDIT-JOURNAL.md`.
     - Flaga zamknięta → USUŃ jej wiersz z `WARN-OTWARTE.md` ORAZ dodaj pełny
       wpis o naprawie w `AUDIT-JOURNAL.md` (jak dotychczas).
+    - ⛔ **Naprawa CZĘŚCIOWA (dodane 2026-08-15w, po porządkowaniu rejestru,
+      który urósł do 489 linii / ~96 KB): SKRÓĆ wiersz flagi do tego, co
+      ZOSTAŁO — NIE dopisuj do niego opisu tego, co właśnie zrobiono.**
+      Opis wykonanej części należy WYŁĄCZNIE do `AUDIT-JOURNAL.md`; w
+      wierszu flagi zostaje co najwyżej odesłanie do wpisu dziennika.
+      Dopisywanie bloków „✅ CZĘŚCIOWO ZAMKNIĘTE …" do komórki opisu było
+      JEDYNĄ przyczyną rozrostu rejestru i doprowadziło do sklejenia
+      czterech struktur wierszowych w jednym wierszu (F-86) oraz do
+      sytuacji, w której odczyt „co mam zrobić" wymagał przeczytania
+      opisu tego, co już zrobione.
     - Pytanie "co jest otwarte" / "czy wszystko zamknięte" → czytaj
       NAJPIERW `WARN-OTWARTE.md`. Grep całego `AUDIT-JOURNAL.md` (ZASADA 9)
       pozostaje jako kontrola co ~10 wpisów, żeby wykryć rozjazd między
@@ -946,6 +957,81 @@ audyt-systemu-v4/
 *Wersja: 5.0 | Ostatnia aktualizacja: 2026-07-04*
 
 ## CHANGELOG
+
+**6.8 (2026-08-15z) — synchronizacja ROUTING-MAP (REGUŁA 3) + nowy test T11 wykrywający tę klasę luki automatycznie:**
+- ⛔ **Wykryta luka procesu:** sesje 08-15x i 08-15y wpisały nowe akty do mapy
+  Dz.U. i modułów, ale NIE do `prawo-polskie-v2/ROUTING-MAP.md` — czyli REGUŁA 3
+  HARDGATE-AUDYT została pominięta. Zsynchronizowano: narkomania → Dz.U. 2026
+  poz. 1004, AI → poz. 1003, Ordynacja → „ze zm. poz. 825 i 846", nowy wiersz
+  katalogowy ustawy o delegowaniu kierowców (2023 poz. 1523).
+- **NOWY TEST T11 (`scripts/check_sync_aktow.py`)** — porównuje ZBIORY numerów
+  Dz.U. w trzech rejestrach i wypisuje akty obecne w jednym, a brakujące
+  w pozostałych. Uzupełnia lukę: T3 wykrywa RÓŻNY numer tego samego aktu,
+  `check_rejestracja_modulow.py` — nierejestrację MODUŁÓW, a NIKT dotąd nie
+  wykrywał BRAKU AKTU w rejestrze. Zarejestrowany w orkiestratorze.
+- **Pierwszy przebieg (stan zastany):** 72 akty z lokalnych map nieobecne
+  w ROUTING-MAP, 80 nieobecnych w mapie Dz.U., 53 z ROUTING-MAP nieobecne
+  w mapie Dz.U. → flaga **F-89**.
+- Pełny opis: `AUDIT-JOURNAL.md`, wpis `AUDYT-2026-08-15z`.
+
+**6.7 (2026-08-15y) — F-24 zamknięta po 8 podejściach; F-82 zawężona; ostrzeżenie F-82 wbudowane w test T3:**
+- **F-24 ZAMKNIĘTA:** nowelizacja narkomanii to **Dz.U. 2026 poz. 1004**
+  (ustawa z 3.07.2026, ogłoszona 27.07.2026, w życie 27.08.2026).
+  ⭐ Metoda, która zadziałała po 7 nieudanych próbach: szukanie **wykazu
+  pozycji Dziennika Ustaw z konkretnego dnia** zamiast kolejnego pytania
+  o sam akt — teksty sejmowe z definicji nie zawierają numeru promulgacji
+  (mają w tym miejscu lukę redakcyjną „oraz z …"). Rekomendowane jako
+  standardowy krok TRYB DZU. Rozbieżność dat 11.06 vs 3.07 wyjaśniona:
+  data sejmowa dotyczy wersji sprzed poprawek Senatu.
+- **F-82 pkt 2:** `test_cross_map_dzu.py` wypisuje teraz przy KAŻDYM
+  przebiegu ostrzeżenie, że zgodność rejestrów nie jest weryfikacją
+  merytoryczną (wynik „OK" był historycznie mylący); docstring rozszerzony
+  o przypadek referencyjny i technikę kontrolną. Naprawiony homoglif telugu
+  w docstringu.
+- **F-82 pkt 3:** ustawa o delegowaniu kierowców (Dz.U. 2023 poz. 1523)
+  dostała własny wiersz w mapie — status „skatalogowana bez modułu".
+- Mapa Dz.U.: dodane 2026.1004, **2026.1003** (ustawa o systemach AI —
+  znana lokalnie w dr-11, nieobecna centralnie) i 2023.1523.
+- Pełny opis: `AUDIT-JOURNAL.md`, wpis `AUDYT-2026-08-15y`.
+
+**6.6 (2026-08-15x) — F-85 zamknięta, F-88 otwarta, mapa Dz.U. uzupełniona o 3 pozycje:**
+- `mapa_dzu_2026-07-15.md`: dodane Dz.U. 2026 poz. **846**, **825** i **779**
+  z pełnymi metrykami i datami wejścia w życie; adnotacje „ze zm." przy
+  tekstach jednolitych OP (622), PIT (592) i CIT (554).
+- ⭐ **poz. 825 wykryta ubocznie** — wcześniej nieobecna w ŻADNYM rejestrze
+  systemu; ujawniła ją metryka OP zacytowana wewnątrz tekstu poz. 846.
+  Technika (porównywanie metryk aktów zmienianych, cytowanych w nagłówkach
+  nowelizacji, z mapą) potwierdzona po raz DRUGI — pierwszy raz przy F-82
+  (Kodeks morski). Rekomendowana jako stały element TRYB DZU.
+- FAZA 3E w dr-06: doprecyzowana metryka nowelizacji art. 24a ustawy o PIT
+  w `mod-PKPiR-ewidencje-uproszczone.md`; ustalono, że zmiana jest
+  terminologiczna, a przepisy wykonawcze z art. 24a ust. 8 zachowują moc —
+  żadne sformułowanie modułu nie zostało unieważnione.
+- **F-88 otwarta:** propagacja omnibusu Dz.U. 2026 poz. 846 (16 obszarów,
+  w życie 1.10.2026, priorytetowy podwątek MDR) — ta sama klasa co F-79.
+- Pełny opis: `AUDIT-JOURNAL.md`, wpis `AUDYT-2026-08-15x`.
+
+**6.5 (2026-08-15w) — porządkowanie `WARN-OTWARTE.md`: rejestr przywrócony do roli TODO:**
+- Plik przebudowany: 489 → 439 linii, ~96 KB → ~45 KB, przy zachowaniu
+  wszystkich 33 flag F-, 3 flag MON, 4 pozycji OBS, 7 pozycji REACT-1
+  i 2 obserwacji. Usunięto wyłącznie narrację napraw JUŻ WYKONANYCH —
+  zarchiwizowaną verbatim w `AUDIT-JOURNAL.md`, wpis `AUDYT-2026-08-15w`.
+- **Nowa ⚡ TABLICA STERUJĄCA na początku pliku** — indeks wszystkich flag
+  z kolumną „następny krok" w jednym zdaniu, rozdzielony na: A. wykonalne
+  sesją audytową (29, sortowane wg priorytetu), B. zależne od dewelopera
+  lub środowiska (4, sesja audytowa ich NIE zamknie), C. rejestry, które
+  z definicji nie są „flagami do zamknięcia" (MON/OBS/REACT-1/O).
+- Flagi pogrupowane tematycznie (1A luki z raportów pokrycia, 1B pozostałe
+  luki, 1C flagi narzędziowe, 1D zależne od dewelopera) zamiast rozproszenia
+  po 12 sekcjach DR, z których 6 nie zawierało żadnej otwartej flagi.
+- **ZASADA 10 rozszerzona** o regułę „naprawa częściowa → skróć wiersz, nie
+  dopisuj opisu" — usuwa przyczynę rozrostu rejestru u źródła.
+- Trzy naprawy uboczne: rozklejony wiersz F-86 (cztery sklejone struktury
+  wierszowe), usunięte nieaktualne odesłanie F-45 → „wciąż otwarta F-31"
+  (zamknięta 2026-08-14o), uzupełniony zakres F-68 o Dział IV Tytułu IV KSH
+  (584¹–584¹³), odnotowany w dzienniku, ale nieobecny w rejestrze zadań.
+- ŻADNEJ flagi nie zamknięto ani nie otwarto — stan merytoryczny systemu
+  po tej sesji jest identyczny jak przed nią.
 
 **5.4 (2026-07-10b) — CRIT wykryty i naprawiony: naruszenie ZASADY 7 (OUTPUT-COMPLETENESS); zasada wzmocniona mechaniczną procedurą:**
 - **Incydent:** naprawa `przesluchanie-swiadkow-v2-min90` (v3.6) oraz

@@ -138,28 +138,41 @@ WYJĄTKOWE WYDANIE ŚRODKA DO SAMODZIELNEGO PRZYJĘCIA (poza zakładem):
   □ WYJAZD ZA GRANICĘ — wydanie środka na własne potrzeby lecznicze
     na podstawie odrębnego przepisu (art. 25 ust. 4 ustawy)
 
-⚡ ŚWIEŻA NOWELIZACJA — METRYKA DOPRECYZOWANA 2026-08-14c (F-24):
+⚡ ŚWIEŻA NOWELIZACJA — ✅ METRYKA KOMPLETNA 2026-08-15y (F-24 ZAMKNIĘTA):
 
 ```
-Tytuł formalny: ustawa z dnia 11 czerwca 2026 r. o zmianie ustawy
+✅ NUMER PROMULGACJI USTALONY: **Dz.U. 2026 poz. 1004**
+Tytuł formalny: ustawa z dnia **3 lipca 2026 r.** o zmianie ustawy
   o przeciwdziałaniu narkomanii oraz niektórych innych ustaw
+Ogłoszenie: **27.07.2026** (Dz.U. 2026, poz. 1001-1007 z tego dnia)
+Wejście w życie: **27.08.2026** — art. 11 aktu: „po upływie 30 dni od
+  dnia ogłoszenia". ⚠️ DATA WYLICZONA z daty ogłoszenia, NIE odczytana
+  wprost ze źródła — przed powołaniem terminu w piśmie potwierdź
+  w ISAP/eli.gov.pl
 Druk sejmowy: 2499
-Podpisana przez Prezydenta: 24.07.2026 (w pakiecie 5 ustaw, razem
-  z ustawą o systemach AI i tzw. ustawą łańcuchową)
+Podpisana przez Prezydenta: 24.07.2026 (w pakiecie 5 ustaw — obok
+  ustawy o systemach sztucznej inteligencji, Dz.U. 2026 poz. 1003,
+  i tzw. ustawy łańcuchowej, poz. 1005)
 Akt zmieniany: ustawa z 29.07.2005 o przeciwdziałaniu narkomanii,
   t.j. Dz.U. 2023 poz. 1939
-⛔ NUMER Dz.U. SAMEJ NOWELIZACJI: NADAL NIEUSTALONY — DRUGA
-  nieudana próba (2026-08-13 i 2026-08-14c). Nie zgadywano mimo
-  tego, że ustawy podpisane tego samego dnia mają pozycje 1003
-  (AI) i 1005 (łańcuchowa) — interpolacja numeru byłaby
-  naruszeniem ZASADY 3. Przed powołaniem nowelizacji w piśmie
-  ustal pozycję w ISAP.
-⚠️ ROZBIEŻNOŚĆ ŹRÓDEŁ, NIEROZSTRZYGNIĘTA: tekst ustawy w serwisie
-  Sejmu nosi datę 11 czerwca 2026 r., natomiast LEX podaje
-  uchwalenie na 61. posiedzeniu Sejmu 3.07.2026 r. Prawdopodobne
-  wyjaśnienie (NIEPOTWIERDZONE): 3.07.2026 to rozpatrzenie poprawek
-  Senatu, a akt zachowuje datę pierwotnego uchwalenia. NIE powołuj
-  daty uchwalenia bez sprawdzenia.
+✅ VER 2026-08-15y: rp.pl — urzędowy wykaz pozycji Dziennika Ustaw
+  z 27.07.2026 (poz. 1001-1007), odczytany bezpośrednio (web_fetch),
+  zgodny z wcześniej ustalonymi sąsiednimi pozycjami 1003 i 1005.
+  ⚠️ [ZALECANA WERYFIKACJA ISAP — pozycja NIE była odczytana z ISAP
+  ani eli.gov.pl, które blokują dostęp automatyczny]
+
+✅ ROZBIEŻNOŚĆ DAT — WYJAŚNIONA (była otwarta od 2026-08-13):
+  Tekst na orka.sejm.gov.pl (druk 2499) nosi datę 11.06.2026, bo jest
+  to wersja UCHWALONA PRZEZ SEJM PRZED poprawkami Senatu. Akt
+  OGŁOSZONY nosi datę **3.07.2026** (61. posiedzenie Sejmu —
+  rozpatrzenie poprawek Senatu), co potwierdza wykaz Dziennika Ustaw
+  i wcześniejsze wskazanie LEX. ⛔ POWOŁUJ DATĘ 3 LIPCA 2026 R.
+  ⚠️ KONSEKWENCJA DLA TREŚCI PONIŻEJ: opis zakresu zmian pochodzi
+  z tekstu sejmowego SPRZED poprawek Senatu. Poprawki mogły zmienić
+  szczegóły redakcyjne — przed cytowaniem konkretnej jednostki
+  redakcyjnej w piśmie sprawdź brzmienie w tekście OGŁOSZONYM
+  (Dz.U. 2026 poz. 1004), nie w druku sejmowym.
+```
 
 ZAKRES ZMIAN — POTWIERDZONY (Rząd 1: orka.sejm.gov.pl, tekst ustawy):
   □ NOWA DEFINICJA LECZENIA SUBSTYTUCYJNEGO (art. 28): obejmuje

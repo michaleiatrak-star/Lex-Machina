@@ -10,7 +10,12 @@ Data wdrożenia: 2026-05-28
 Moduł obejmuje obowiązek obrony, służbę wojskową, kwalifikację wojskową, mobilizację, WCR, świadczenia na rzecz obrony, postępowania służbowe i dyscyplinarne żołnierzy oraz relacje z prawem karnym wojskowym.
 
 ### Akty i źródła kontrolne
-- Ustawa o obronie Ojczyzny — WDU20220000655; ISAP potwierdza tekst ujednolicony i późniejsze zmiany, m.in. Dz.U. 2025 poz. 825 i 1014.
+- Ustawa o obronie Ojczyzny — Dz.U. 2025 poz. 825 t.j. (obwieszczenie Marszałka
+  Sejmu z 11.06.2025) — poprzedni t.j./pierwotna publikacja Dz.U. 2022 poz. 655
+  NIEAKTUALNA, zastąpiona przez t.j. 2025.825; dalsza nowelizacja: Dz.U. 2025 poz.
+  1014. ⚠️ [F-57, 2026-08-14] wcześniejsza wersja tego modułu błędnie podawała
+  2022.655 jako podstawę mimo że mapa DR-13 od 2026-07-02 wskazywała już 2025.825
+  jako aktualny t.j. — naprawione.
 - Kodeks karny — część wojskowa i przepisy szczególne, kontrola ISAP.
 - Akty wykonawcze MON dotyczące kwalifikacji, służby, uposażeń i orzecznictwa — kontrola ISAP.
 
@@ -116,24 +121,33 @@ Wynik pracy modułu powinien mieć strukturę: stan faktyczny → kwalifikacja p
 
 ---
 
-## KLUCZOWE AKTY — ZWERYFIKOWANE 2026-06-05
+## KLUCZOWE AKTY — ZWERYFIKOWANE 2026-08-14 (F-57)
 
 ```
 Ustawa o obronie Ojczyzny:
-  Dz.U. 2022 poz. 655 ze zm.:
-  → Dz.U. 2025 poz. 825 — nowelizacja 2025
-  → Dz.U. 2025 poz. 1014 — kolejna nowelizacja 2025
-  ✅ VER: isap.sejm.gov.pl 2026-06-05
-  ⚠️ Brak nowego t.j. — weryfikuj każdą zmianę w ISAP
+  Dz.U. 2025 poz. 825 t.j. (obwieszczenie Marszałka Sejmu z 11.06.2025)
+  — pierwotna publikacja Dz.U. 2022 poz. 655 NIEAKTUALNA jako podstawa cytowania
+  → Dz.U. 2025 poz. 1014 — nowelizacja po t.j. 2025.825, weryfikuj czy uwzględniona
+    w kolejnym t.j.
+  ✅ VER: isap.sejm.gov.pl (WDU20250000825) 2026-08-14 (F-57) — koryguje poprzedni
+    błędny zapis tego modułu, który mimo poprawki mapy z 2026-07-02 nadal podawał
+    2022.655 jako podstawę
+  ⚠️ weryfikuj każdą kolejną zmianę w ISAP przed powołaniem
 
 Kluczowe procedury:
-  Kwalifikacja wojskowa:
-    → Wezwanie przez WKU (Wojskową Komendę Uzupełnień)
+  Kwalifikacja wojskowa i rekrutacja — WCR (Wojskowe Centrum Rekrutacji):
+    ⚠️ [F-57, korekta 2026-08-14] WKU (Wojskowa Komenda Uzupełnień) NIE jest
+    odrębną instytucją równoległą do WCR — to HISTORYCZNA NAZWA TEGO SAMEGO
+    organu, zniesiona z dniem 23.04.2022 r. wraz z wejściem w życie ustawy
+    o obronie Ojczyzny. Od tej daty WKU → WCR (Wojskowe Centrum Rekrutacji),
+    a Wojewódzkie Sztaby Wojskowe → Centralne Wojskowe Centrum Rekrutacji.
+    "WKU" można używać wyłącznie przy odniesieniu do stanu prawnego/faktycznego
+    SPRZED 23.04.2022 — w pismach dot. spraw bieżących używać wyłącznie WCR.
+    ✅ VER: rdn.pl, informatorbrzeski.pl, suwalki.info (8 zgodnych źródeł) 2026-08-14
+    → Wezwanie przez WCR
     → Orzeczenie Wojskowej Komisji Lekarskiej (WKL)
     → Odwołanie od orzeczenia WKL: do Centralnej Wojskowej Komisji Lekarskiej
     → Zaskarżenie do WSA (w zakresie decyzji administracyjnych)
-
-  WCR (Wojskowe Centrum Rekrutacji):
     → Rejestracja żołnierzy zawodowych i ochotniczej służby
     → Dobrowolna zasadnicza służba wojskowa (DZSW)
 

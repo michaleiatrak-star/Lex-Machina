@@ -16,11 +16,12 @@
 | Ustawa o NIK | Dz.U. 2022 poz. 623 ze zm. | mod-ustawa-NIK | ✅ OK |
 | Ustawa o PPP | Dz.U. 2023 poz. 1637 t.j. (obwieszczenie Marszałka Sejmu z 14.07.2023, w życie 18.08.2023) — ✅ ROZSTRZYGNIĘTE 2026-08-13 (F-38): web_search potwierdził 1637 w 4+ niezależnych źródłach (isap.sejm.gov.pl, prawo.pl, portalzp.pl, portalkadrowy.pl); "1688" był po prostu błędnym numerem w źródle wtórnym, nie odrębnym, równie ważnym wariantem | mod-ustawa-PPP-i-koncesja | ✅ OK |
 | PZP — certyfikacja wykonawców | Dz.U. 2025 poz. 1235 — VER 2026-07-02kk: potwierdzone w ISAP (ustawa z 5.08.2025, WDU20250001235, ORG — nowa ustawa, nie t.j.) | mod-ustawa-PZP-certyfikacja-wykonawcow | ✅ OK |
-| Ustawa o Prokuratorii Generalnej RP | ⚠️ Dz.U. 2024 poz. 1192 t.j. (POPRAWKA 2026-07-02ll — BYŁO błędnie 2023.1109; ten był aktualny w 2023, ale istnieje nowszy t.j. z 6.08.2024) | mod-ustawa-Prokuratorii-Generalnej | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
-| Ustawa o RIO | ⚠️ Dz.U. 2025 poz. 7 t.j. (POPRAWKA 2026-07-02gg — BYŁO błędnie 2023.1325, obwieszczenie 23.12.2024) | mod-ustawa-RIO-regionalne-izby | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
+| Ustawa o Prokuratorii Generalnej RP | Dz.U. 2024 poz. 1192 t.j. (obwieszczenie 28.07.2024; zastępuje t.j. 2023.1109) | mod-ustawa-Prokuratorii-Generalnej | ✅ OK — FAZA 3E 2026-08-15: progi 5 mln/100 mln PLN potwierdzone bez zmian |
+| Ustawa o RIO | Dz.U. 2025 poz. 7 t.j. (obwieszczenie 23.12.2024) | mod-ustawa-RIO-regionalne-izby | ✅ OK — FAZA 3E 2026-08-15: jedyna zmiana t.j. dot. ustawy o dochodach JST, nie dotyka treści modułu |
 | KPC cz. V — arbitraż i mediacja | Dz.U. 2026 poz. 468 ze zm. | mod-ustawa-arbitraz-mediacja | ✅ OK |
-| Ustawa o dyscyplinie finansów publicznych | ⚠️ Dz.U. 2025 poz. 1484 t.j. (POPRAWKA 2026-07-02ii — BYŁO błędnie 2024.104, obwieszczenie 20.10.2025) | mod-ustawa-dyscyplina-finansow-publicznych | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
-| Ustawa o zasadach realizacji programów UE 2021-2027 | ⚠️ Dz.U. 2025 poz. 1733 t.j. (POPRAWKA 2026-07-02mm — BYŁO błędnie 2024.1655; ustawa bazowa z 28.04.2022, Dz.U. 2022.1079, potwierdzony pełny łańcuch t.j. do 2025.1733) | mod-ustawa-fundusze-UE-pomoc-publiczna | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
+| Ustawa o dyscyplinie finansów publicznych | Dz.U. 2025 poz. 1484 t.j. (obwieszczenie 20.10.2025, w życie 28.10.2025) | mod-ustawa-dyscyplina-finansow-publicznych | ✅ OK — FAZA 3E 2026-08-15: kary art. 31/34 potwierdzone bez zmian |
+| Ustawa wdrożeniowa 2021-2027 (zasady realizacji zadań fin. ze środków europejskich, 28.04.2022) | Dz.U. 2025 poz. 1733 t.j. (zastępuje t.j. 2024.1655) | mod-ustawa-fundusze-UE-pomoc-publiczna | ✅ OK — FAZA 3E 2026-08-15: CRIT naprawiony, moduł mylił ten akt z ustawą o polityce rozwoju pod tym samym numerem |
+| Ustawa o zasadach prowadzenia polityki rozwoju (6.12.2006) | Dz.U. 2025 poz. 198 t.j. (obwieszczenie 5.02.2025; zastępuje t.j. 2024.324) | mod-ustawa-fundusze-UE-pomoc-publiczna | ✅ NOWY WIERSZ 2026-08-15 — dotąd błędnie scalony z wierszem ustawy wdrożeniowej pod numerem 1733 |
 
 > Źródło weryfikacji: isap.sejm.gov.pl | uzp.gov.pl | orzeczenia.uzp.gov.pl
 > Aktualizacja: 2026-06-09 (link KIO poprawiony 2026-07-05d — kio.gov.pl nie hostuje wyszukiwarki)
@@ -30,3 +31,11 @@
 > jednoznacznego potwierdzenia, nie zgadywano]. 5 błędów CRIT naprawionych
 > łącznie w kroku 7 [PZP, RIO, dyscyplina finansów publicznych, Prokuratoria
 > Generalna, fundusze UE 2021-2027]. Krok 7/16 UZNAJE SIĘ ZA ZAMKNIĘTY.
+
+> Aktualizacja: 2026-08-15 (FAZA 3E, F-36 audyt-systemu-v4) — treść merytoryczna
+> 5 modułów zweryfikowana wobec aktualnych t.j.: PZP (Dz.U. 2026.793 — dodano
+> nową przesłankę odrzucenia oferty ICT z art. 226 ust. 1 pkt 17/19, CRIT
+> naprawiony), Prokuratoria Generalna, RIO, dyscyplina finansów publicznych
+> (wszystkie 3: ✅ ZGODNE, tylko korekta numeru), fundusze UE — CRIT naprawiony
+> (moduł mylił ustawę wdrożeniową 2021-2027 z ustawą o polityce rozwoju pod
+> wspólnym numerem 1733; rozdzielone na dwa poprawne wiersze). F-36 ZAMKNIĘTA.

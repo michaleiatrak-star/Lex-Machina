@@ -1,13 +1,20 @@
 # mod-KRUS-rolnicze-ubezpieczenia
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** KRUS — Dz.U. 2025 poz. 1770 t.j. ze zm. (POPRAWKA 2026-07-02e:
-było błędnie Dz.U. 2024 poz. 90 — nieaktualny t.j., zastąpiony obwieszczeniem
-przenoszącym ustawę do Dz.U. 2025 poz. 1770; treść merytoryczna modułu poniżej
-NIE była w tej sesji zweryfikowana pod kątem zmian między t.j. — wymaga
-odrębnego przeglądu przy najbliższej sesji targeted na ten moduł)
-**Data weryfikacji online:** 2026-07-02e (wyłącznie numer Dz.U. w nagłówku;
-poprzednia pełna weryfikacja treści: 2026-06-05)
+**Źródło weryfikacji:** KRUS — Dz.U. 2025 poz. 1770 t.j. (obwieszczenie
+Marszałka Sejmu z 20.11.2025, publ. 12.12.2025; zastępuje t.j. 2025.197,
+które zastąpiło 2024.90) ✅ VER: 2026-08-15 (FAZA 3E, naprawa F-28 pkt 1)
+— TREŚĆ MODUŁU POTWIERDZONA ZGODNA. Zmiany między t.j. 2024.90 a 2025.1770
+(ustawa o rynku pracy poz. 620, ustawa o powierzaniu pracy cudzoziemcom
+poz. 621, zmiana Karty Nauczyciela poz. 1160) dotyczą definicji
+podmiotowych (rozszerzenie na obywateli UE/EFTA i określone kategorie
+cudzoziemców) oraz odesłań międzyustawowych — ŻADNA nie dotyka progu
+1 ha przeliczeniowego (art. 6 pkt 1), definicji wypadku przy pracy
+rolniczej (art. 11) ani procedury odwoławczej (KPC art. 477⁸-477¹⁴)
+opisanych w tym module. Próg 1 ha przeliczeniowego potwierdzony jako
+nadal aktualny w 5+ niezależnych źródłach z 2026 r. (infor.pl, inEwi,
+odpowiedziprawne.pl, praworolne.info — wielokrotnie, portalkadrowy.pl).
+**Data weryfikacji online:** 2026-08-15
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
 ---
@@ -21,7 +28,7 @@ Ubezpieczenie społeczne rolników (emerytalno-rentowe, wypadkowe, chorobowe i m
 
 | Akt | Dz.U. |
 |---|---|
-| Ustawa o ubezpieczeniu społecznym rolników (KRUS) | Dz.U. 2024 poz. 90 t.j. ze zm. |
+| Ustawa o ubezpieczeniu społecznym rolników (KRUS) | Dz.U. 2025 poz. 1770 t.j. ze zm. |
 | KPC art. 477⁸–477¹⁴ | Dz.U. 2026 poz. 468 |
 
 ---
@@ -92,4 +99,4 @@ Definicja (weryfikuj art. 11 ustawy KRUS w ISAP):
 
 **Output:** stan faktyczny → kwalifikacja → terminy → dowody → ryzyka → strategia → rekomendacja → ISAP/temporalność.
 
-**Źródła:** https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000090 | https://www.krus.gov.pl
+**Źródła:** https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250001770 | https://www.krus.gov.pl

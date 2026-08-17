@@ -2,7 +2,7 @@
 
 **Status:** moduł uzupełniający do `mod-PZP-zamowienia-publiczne-KIO.md`
 **Wydzielony:** 2026-06-14 (audyt — moduł nadrzędny >400 linii, podział tematyczny)
-**Źródło weryfikacji:** PZP — Dz.U. 2024 poz. 1320 t.j. ze zm. ✅ VER: 2026-06-05
+**Źródło weryfikacji:** PZP — Dz.U. 2026 poz. 793 t.j. (obwieszczenie 27.05.2026; zastępuje t.j. 2024.1320) ✅ VER: 2026-08-15
 **Zasada:** Każde brzmienie przepisu i kwota → weryfikuj w ISAP / uzp.gov.pl przed powołaniem
 
 ---
@@ -169,7 +169,7 @@ web_search: "certyfikacja wykonawców zamówień publicznych Dz.U. 2025 poz. 123
 
 ## ŹRÓDŁA ONLINE
 
-- PZP: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20241320
+- PZP: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000793
 - KIO (wyroki, wyszukiwarka): https://orzeczenia.uzp.gov.pl (kio.gov.pl nie hostuje wyszukiwarki od korekty 2026-07-05d)
 - UZP (wytyczne): https://uzp.gov.pl
 

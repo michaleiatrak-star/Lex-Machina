@@ -7,13 +7,14 @@ raport zewnętrzny KPK — F-66. Przed tym modułem: ZERO pokrycia tematu
 w całym DR-03, mimo że to jeden z najczęściej używanych tematów
 praktyki karnej.)
 
-> ⛔ HARDGATE — zweryfikuj aktualny t.j. na ISAP przed użyciem w piśmie.
-> Akt bazowy: KPK, Dz.U. 2026 poz. 490 t.j. — ⚠️ raport zewnętrzny F-66
-> wskazuje, że ta metryka w `MAPA-AKTOW.md` pomija 2 późniejsze
-> nowelizacje (Dz.U. 2026.421, Dz.U. 2026.638 — ta druga zmienia
-> właściwość rzeczową SO, art. 25 §1 pkt 2, w życie 28.05.2026) —
-> ZWERYFIKUJ przed powołaniem numeru w piśmie, nie polegaj wyłącznie
-> na tej metryce.
+> ✅ ROZSTRZYGNIĘTE 2026-08-15 (F-81 pkt 6, naprawa `MAPA-AKTOW.md`).
+> Akt bazowy: KPK, Dz.U. 2026 poz. 490 t.j. + Dz.U. 2026.421 (art. 213 §1c,
+> tożsamość obywatela państwa trzeciego) + Dz.U. 2026.638 (art. 25 §1 pkt 2,
+> właściwość rzeczowa SO, w życie 28.05.2026). Żaden z artykułów opisanych
+> w tym module (Rozdz. 28, art. 249-277) nie jest dotknięty żadną z tych
+> dwóch nowelizacji — zweryfikowano źródłowo (prawo.pl, sip.lex.pl).
+> ⛔ Mimo to zweryfikuj aktualny t.j. na ISAP przed użyciem w piśmie —
+> zasada ogólna, nie specyficzna dla tych dwóch nowelizacji.
 
 **Rola w systemie:** KPK Dział VI (Środki przymusu), Rozdział 28
 (Środki zapobiegawcze, art. 249-277) — z naciskiem na tymczasowe

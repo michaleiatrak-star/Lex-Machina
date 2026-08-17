@@ -114,6 +114,12 @@ def main():
     print(out)
     results["T9"] = code
 
+    # --- T11: WYSOKI (heurystyka → WARN, dodany 2026-08-15z, F-89) ---
+    print("── T11 (⭐⭐ WYSOKI, heurystyka → WARN) — Synchronizacja aktów między mapami " + "─" * 3)
+    code, out = run_script("check_sync_aktow.py", repo_args + ["--limit", "10"])
+    print(out)
+    results["T11"] = code
+
     # T10 (monitorowanie plików Nexto/Virtualo, flaga F-12) USUNIĘTE
     # 2026-07-24d na wyraźne polecenie użytkownika — cały mechanizm
     # (rejestr + skrypt check_nexto_free_files.py) skasowany, patrz

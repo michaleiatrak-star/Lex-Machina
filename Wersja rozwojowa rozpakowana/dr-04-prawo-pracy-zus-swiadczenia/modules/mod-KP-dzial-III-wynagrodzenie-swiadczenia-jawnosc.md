@@ -132,17 +132,30 @@ ETAP 1 — JUŻ OBOWIĄZUJE od 24 GRUDNIA 2025 r. (nowelizacja KP):
   OCZEKIWANIA finansowe kandydata (to element negocjacji nowej umowy,
   nie weryfikacja przeszłości)
 
-ETAP 2 — termin transpozycji dyrektywy: 7 CZERWCA 2026 (⚠️ część źródeł
-  wskazuje możliwe OPÓŹNIENIE legislacyjne — ustawa wdrażająca pozostałe
-  wymogi jeszcze nieuchwalona na dzień weryfikacji, sprawdź aktualny
-  status projektu UC127):
+ETAP 2 — termin transpozycji dyrektywy: 7 CZERWCA 2026 — ✅ ROZSTRZYGNIĘTE
+  2026-08-15 (F-28 pkt 5): TERMIN MINĄŁ BEZ UCHWALENIA ustawy krajowej.
+  Projekt UC127 (Minister Rodziny, Pracy i Polityki Społecznej, otwarty
+  na RCL od 16.12.2025, zaktualizowana wersja z 29.04.2026/publ. 4.05.2026)
+  ma STATUS "otwarty" — nadal w konsultacjach/uzgodnieniach
+  międzyresortowych, NIE skierowany do Sejmu. Najnowsza wersja projektu
+  WYRAŹNIE ODRACZA termin wejścia w życie: zamiast sztywnej daty 7.06.2026,
+  ustawa ma wejść w życie PO UPŁYWIE 6 MIESIĘCY od dnia ogłoszenia — co
+  przy braku uchwalenia oznacza faktyczne wejście w życie NIE WCZEŚNIEJ
+  niż I kwartał 2027 r. (potwierdzone: sdworx.pl, worksmile.com — oba
+  źródła niezależne, oba z maja/czerwca 2026). ⚠️ Opóźnienie NIE zwalnia
+  Polski z obowiązku transpozycji — ryzyko postępowania KE trwa niezależnie
+  od krajowego harmonogramu legislacyjnego. Do czasu uchwalenia poniższe
+  punkty pozostają STANEM PROJEKTOWANYM, nie obowiązującym prawem:
   □ PRAWO PRACOWNIKA DO INFORMACJI — o własnym poziomie wynagrodzenia
     oraz o ŚREDNICH poziomach wynagrodzeń dla kategorii pracowników
     wykonujących tę samą pracę/pracę o tej samej wartości, w PODZIALE
     NA PŁEĆ (⚠️ NIE oznacza to ujawnienia wynagrodzeń KONKRETNYCH osób
     — częsty błąd interpretacyjny w mediach)
   □ Obowiązkowe WARTOŚCIOWANIE STANOWISK wg obiektywnych, możliwych
-    do udokumentowania kryteriów
+    do udokumentowania kryteriów (⭐ projekt z 29.04.2026 wprowadza
+    kryteria obowiązkowe/ewentualne podkryteria/dodatkowe, odwołujące się
+    do art. 183c §3 KP — porównywalne kwalifikacje, odpowiedzialność,
+    wysiłek, warunki pracy; umiejętności miękkie są kryterium OPCJONALNYM)
   □ Zakaz klauzul POUFNOŚCI wynagrodzenia w zakresie, w jakim
     ograniczałyby ujawnianie informacji SŁUŻĄCE egzekwowaniu prawa do
     równej płacy (art. 7 ust. 5 dyrektywy) — ⚠️ dyrektywa NIE unieważnia
@@ -187,8 +200,13 @@ udowodnić, że doszło.
   płacowe są uporządkowane w sposób umożliwiający przyszłe raportowanie
   luki płacowej wg płci?
 □ Sprawdź AKTUALNY status ustawy implementującej Etap 2-3 przed
-  doradzaniem klientowi — na dzień weryfikacji tej sesji (2026-07-17)
-  ustawa może być nadal na etapie projektu (UC127)
+  doradzaniem klientowi — na dzień 15.08.2026 ustawa NADAL na etapie
+  projektu (UC127, status "otwarty"), z zapowiedzianym odroczeniem
+  wejścia w życie do ok. I kw. 2027 r. ⭐ Temat wpisany do monitorowania
+  systemowego (audyt-systemu-v4, WARN-OTWARTE.md, OBS-5) — status
+  odświeżany co 4-6 tyg. w ramach MON-2, częściej przy zbliżaniu się do
+  I kw. 2027; przy uchwaleniu ustawy → automatyczna flaga F- wg
+  PROTOKOŁU PRZY TRAFIENIU
 ```
 
 ---

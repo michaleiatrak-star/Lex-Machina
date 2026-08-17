@@ -25,7 +25,27 @@ pismem procesowym potwierdź brzmienie wprost na ISAP.
 
 ```
 USTAWA: art. 24a ustawy z 26.07.1991 r. o podatku dochodowym od osób
-  fizycznych (delegacja ustawowa dla rozporządzenia wykonawczego)
+  fizycznych (delegacja ustawowa dla rozporządzenia wykonawczego —
+  ust. 8)
+  ⚠️ NOWELIZACJA ART. 24a — DOPRECYZOWANA METRYKA (dopisane 2026-08-15x,
+    audyt TRYB DZU / F-85): ustawa z 15.05.2026 r. o zmianie ustawy o PIT,
+    ustawy o CIT oraz ustawy o zryczałtowanym podatku dochodowym —
+    **Dz.U. 2026 poz. 779**, publikacja 15.06.2026, w życie **1.07.2026**
+    (wyjątki: art. 1 pkt 7, art. 2 pkt 1 lit. c i art. 3 — dzień po
+    ogłoszeniu). Zmiana ma charakter TERMINOLOGICZNY, nie konstrukcyjny:
+    w ust. 1 skreślono skrót „zwaną dalej »księgą«", a w ust. 1a-1c wyrazy
+    „w prowadzonej księdze albo w prowadzonych księgach rachunkowych,
+    o których mowa w ust. 1" zastąpiono wyrazami „w podatkowej księdze
+    przychodów i rozchodów albo księgach rachunkowych". Przepisy
+    wykonawcze wydane na podstawie art. 24a ust. 8 ZACHOWUJĄ MOC — czyli
+    rozporządzenie z 6.09.2025 r. (niżej) pozostaje aktualne.
+    ⛔ SKUTEK PRAKTYCZNY DLA PISM: w powołaniach na art. 24a ust. 1a-1c
+    NIE używać skrótu „księga" jako terminu ustawowego — od 1.07.2026
+    ustawa posługuje się pełną nazwą „podatkowa księga przychodów
+    i rozchodów". ✅ VER 2026-08-15x: podatki.gov.pl (podstawa prawna
+    PIT/ryczałt), prawo.pl (tekst aktu Dz.U. 2026 poz. 779),
+    przepisy.gofin.pl (rejestr wersji czasowych art. 24a).
+    ⚠️ [ZALECANA WERYFIKACJA ISAP przed powołaniem w piśmie]
 
 ROZPORZĄDZENIE WYKONAWCZE — ZMIANA OD 1.01.2026 R.:
   □ DO 31.12.2025 r.: rozporządzenie Ministra Finansów z 23.12.2019 r.

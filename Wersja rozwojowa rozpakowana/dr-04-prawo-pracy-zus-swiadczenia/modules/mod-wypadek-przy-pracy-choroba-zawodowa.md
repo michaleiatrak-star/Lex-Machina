@@ -19,8 +19,13 @@
 ### Akty prawne (weryfikuj Dz.U. w ISAP)
 ```
 Ustawa z dnia 30.10.2002 r. o ubezpieczeniu społecznym z tytułu wypadków
-przy pracy i chorób zawodowych — Dz.U. 2022 poz. 2189 t.j. ze zm.
-  → weryfikuj: isap.sejm.gov.pl (szukaj "ustawa wypadkowa 2002")
+przy pracy i chorób zawodowych — Dz.U. 2025 poz. 1644 t.j. (obwieszczenie
+Marszałka Sejmu z 28.11.2025), ze zm. Dz.U. 2026 poz. 26
+  ✅ VER: isap.sejm.gov.pl (dokument źródłowy Kancelarii Sejmu, 28.11.2025),
+    dziennikustaw.gov.pl (obwieszczenie MRPiPS 16.03.2026 wciąż cytuje ten
+    t.j. jako aktualny), forsal.pl — 2026-08-14 (F-77)
+  ⚠️ [F-77] poprzedni zapis modułu (Dz.U. 2022 poz. 2189) był DWUKROTNIE
+  nieaktualny — pominięty pośredni t.j. Dz.U. 2025 poz. 257 (21.02.2025)
 
 Kodeks pracy — art. 234–237 KP (obowiązki pracodawcy po wypadku)
   → weryfikuj: Dz.U. 2025 poz. 277 t.j. ze zm.

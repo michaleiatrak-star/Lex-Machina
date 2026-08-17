@@ -4,8 +4,13 @@
 - Ustawa o szczególnych środkach zabezpieczających wobec sprawców najcięższych przestępstw
   przeciwko wolności seksualnej — Dz.U. 2020 poz. 2001 ze zm.
   ✅ [VER: isap.sejm.gov.pl, 2026-05-31]
-- Ustawa o postępowaniu wobec osób z zaburzeniami psychicznymi stwarzającymi zagrożenie
-  życia, zdrowia lub wolności seksualnej innych osób — Dz.U. 2014 poz. 24 ze zm. (KPB)
+- Ustawa z 22.11.2013 r. o postępowaniu wobec osób z zaburzeniami psychicznymi
+  stwarzających zagrożenie życia, zdrowia lub wolności seksualnej innych osób
+  — Dz.U. 2022 poz. 1689 t.j. (obwieszczenie z 11.08.2022)
+  — poprzedni t.j./pierwotna publikacja Dz.U. 2014 poz. 24 NIEAKTUALNA,
+    zastąpiona kolejnymi t.j. (2019.2203, 2020.1346, 2021.1638), ostatecznie 2022.1689
+  ✅ VER: isap.sejm.gov.pl, wikipedia.pl, lexlege.pl (stan 06.08.2026, 20.01.2026 —
+    2 źródła niezależnie potwierdzają BRAK nowszego t.j. niż 2022.1689) 2026-08-14 (F-57)
 
 **Weryfikacja:** isap.sejm.gov.pl przed każdym cytowaniem.
 

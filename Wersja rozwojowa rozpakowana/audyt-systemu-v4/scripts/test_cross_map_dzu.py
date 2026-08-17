@@ -20,7 +20,7 @@ ustawy) — sprawdź czy numer Dz.U. jest IDENTYCZNY. Jeśli NIE — FLAGA
 do weryfikacji (nie wiadomo automatycznie, KTÓRY numer jest aktualny —
 wymaga sprawdzenia na ISAP).
 
-⚠️ OGRANICZENIE: to jest UPROSZCZONA heురystyka tekstowa (dopasowanie
+⚠️ OGRANICZENIE: to jest UPROSZCZONA heurystyka tekstowa (dopasowanie
 przez wspólne słowa kluczowe nazwy aktu), NIE parser struktury tabel
 Markdown — może dawać fałszywe negatywy/pozytywy przy NIETYPOWYM
 formatowaniu wiersza. Traktuj wynik jako PUNKT STARTOWY do weryfikacji,
@@ -28,6 +28,28 @@ nie ostateczny werdykt.
 
 Użycie:
     python3 test_cross_map_dzu.py [--repo-root /mnt/skills/user] [--quiet]
+
+⛔ OSTRZEŻENIE METODOLOGICZNE (dodane 2026-08-15y, flaga F-82, pkt 2):
+ZGODNOŚĆ REJESTRÓW MIĘDZY SOBĄ **NIE JEST** WERYFIKACJĄ MERYTORYCZNĄ.
+Ten test wykrywa wyłącznie sytuację, w której dwa rejestry podają RÓŻNE
+numery. Jest z definicji ŚLEPY na błąd, w którym WSZYSTKIE rejestry
+podają ZGODNIE ten SAM, ale BŁĘDNY numer — a to jest błąd groźniejszy,
+bo wewnętrzna spójność systemu wtedy POTWIERDZA błąd zamiast go ujawniać.
+
+Przypadek referencyjny (F-82, 2026-08-15n): Kodeks morski figurował
+w TRZECH rejestrach jednocześnie pod numerem Dz.U. 2023 poz. 1523, gdy
+poprawny t.j. to Dz.U. 2023 poz. 1309. Poz. 1523/2023 to ustawa
+o delegowaniu kierowców w transporcie drogowym — akt z tej samej
+dziedziny transportowej, co maskowało pomyłkę. Błąd przetrwał wszystkie
+dotychczasowe przebiegi TRYB DZU i tego testu.
+
+⭐ TECHNIKA WYKRYWANIA TEJ KLASY BŁĘDU (potwierdzona dwukrotnie: F-82
+i odkrycie Dz.U. 2026 poz. 825 w sesji 2026-08-15x): czytając tekst
+DOWOLNEJ nowelizacji, porównaj metryki aktów zmienianych, cytowane
+w nagłówkach ("W ustawie z dnia ... (Dz. U. z ... poz. ...)"), z mapą
+Dz.U. To jest ŹRÓDŁO ZEWNĘTRZNE wobec rejestrów systemu, więc wykrywa
+błędy, na które kroswalidacja jest ślepa. WYNIK "OK" TEGO TESTU NIE
+ZWALNIA z takiej kontroli.
 
 Kod wyjścia:
     0 — brak wykrytych rozbieżności
@@ -171,6 +193,12 @@ def main():
         else:
             print("WYNIK T3: OK — brak wykrytych rozbieżności "
                   "(w granicach czułości tej heurystyki tekstowej).")
+        print()
+        print("⛔ UWAGA (F-82): zgodność rejestrów między sobą NIE jest "
+              "weryfikacją merytoryczną — ten test jest ślepy na numer "
+              "błędny, ale wpisany ZGODNIE we wszystkich mapach. "
+              "Kontrola uzupełniająca: porównuj metryki aktów zmienianych, "
+              "cytowane w tekstach nowelizacji, z mapą Dz.U.")
 
     sys.exit(1 if suspicious else 0)
 

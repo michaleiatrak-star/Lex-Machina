@@ -2,8 +2,8 @@
 
 ## Akt prawny
 **Ustawa z 15.12.2016 r. o Prokuratorii Generalnej Rzeczypospolitej Polskiej**
-- Tekst jednolity: **Dz.U. 2023 poz. 1109** (ze zm.)
-  VER: isap.sejm.gov.pl [2026-05-31]
+- Tekst jednolity: **Dz.U. 2024 poz. 1192** (obwieszczenie Marszałka Sejmu z 28.07.2024; zastępuje t.j. 2023.1109) ze zm.
+  VER: isap.sejm.gov.pl [2026-08-15] — FAZA 3E (audyt-systemu-v4): progi kwotowe zastępstwa (5 mln PLN) i opiniowania (100 mln PLN) potwierdzone AKTUALNE — nowy t.j. konsoliduje zmiany redakcyjne (Sąd Polubowny art. 26, portal informacyjny, podpis elektroniczny), bez zmiany progów
 
 **Weryfikacja ISAP przed kazdy cytowaniem.**
 
@@ -34,8 +34,8 @@ Zalecenia:      Dla organow administracji rzadowej - implementacja orzecznictwa
 
 ## Weryfikacja online
 ```
-web_search: "Prokuratoria Generalna RP ustawa Dz.U. 2023 poz. 1109 isap"
-web_search: "Prokuratoria Generalna zastepstwo procesowe Skarb Panstwa 2025"
+web_search: "Prokuratoria Generalna RP ustawa Dz.U. 2024 poz. 1192 isap"
+web_search: "Prokuratoria Generalna zastepstwo procesowe Skarb Panstwa 2026"
 ```
 
 
@@ -59,4 +59,4 @@ web_search: "Prokuratoria Generalna zastepstwo procesowe Skarb Panstwa 2025"
 9. Strategia (podstawowy + ewentualny); 10. Rekomendacja; 11. Kontrola ISAP/temporalności.
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Data weryfikacji online:** 2026-06-05
+**Data weryfikacji online:** 2026-08-15

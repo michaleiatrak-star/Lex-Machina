@@ -2,8 +2,13 @@
 
 ## Akt prawny
 **Ustawa z 17.12.2004 r. o odpowiedzialnosci za naruszenie dyscypliny finansow publicznych**
-- Tekst jednolity: **Dz.U. 2024 poz. 104** (ze zm.)
-  VER: isap.sejm.gov.pl [2026-05-31]
+- Tekst jednolity: **Dz.U. 2025 poz. 1484** (obwieszczenie Marszałka Sejmu z 20.10.2025,
+  w życie 28.10.2025; zastępuje t.j. 2024.104) ze zm.
+  VER: isap.sejm.gov.pl [2026-08-15] — FAZA 3E: kary (art. 31: pieniężna 0,25-3x
+  wynagrodzenia miesięcznego, zapasowo 0,25-5x przeciętnego gdy nie da się ustalić
+  wynagrodzenia; zakaz pełnienia funkcji 1-5 lat wg art. 34) POTWIERDZONE bez zmian;
+  jedyne wyłączenie z t.j. dotyczy niezwiązanego z tym modułem art. 5 ustawy zmieniającej
+  Ordynację podatkową (Dz.U. 2025.497)
 
 **Weryfikacja ISAP przed kazdy cytowaniem.**
 
@@ -40,8 +45,8 @@ Kary:
 
 ## Weryfikacja online
 ```
-web_search: "dyscyplina finansow publicznych ustawa Dz.U. 2024 poz. 104 isap"
-web_search: "naruszenie dyscypliny finansow publicznych kary komisja orzekajaca 2025"
+web_search: "dyscyplina finansow publicznych ustawa Dz.U. 2025 poz. 1484 isap"
+web_search: "naruszenie dyscypliny finansow publicznych kary komisja orzekajaca 2026"
 ```
 
 
@@ -65,4 +70,4 @@ web_search: "naruszenie dyscypliny finansow publicznych kary komisja orzekajaca 
 9. Strategia (podstawowy + ewentualny); 10. Rekomendacja; 11. Kontrola ISAP/temporalności.
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Data weryfikacji online:** 2026-06-05
+**Data weryfikacji online:** 2026-08-15
