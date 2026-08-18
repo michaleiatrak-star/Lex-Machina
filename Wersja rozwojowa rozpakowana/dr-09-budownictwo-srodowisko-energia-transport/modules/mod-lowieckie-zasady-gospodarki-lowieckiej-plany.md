@@ -392,10 +392,16 @@ właściwe do zagospodarowania jej w imieniu Skarbu Państwa, zasady
 pobrania środków ze sprzedaży tusz i ekwiwalentu — z uwzględnieniem
 sposobu pozyskania, gatunku, wielokrotności wartości rynkowej tuszy,
 a dla samców zwierzyny płowej — także wartości trofealnej.
-⚠️ NIEUSTALONE: aktualna metryka rozporządzenia wykonawczego do ust. 4
-oraz aktualne stawki ekwiwalentu — do ustalenia przy konkretnej sprawie
-dot. rozliczenia z tytułu kłusownictwa (styk z modułem kłusownictwo
-i z postępowaniem karnym o zwrot równowartości mienia).
+✅ **ZWERYFIKOWANE (2026-08-18, F-91 pkt 2):** rozporządzenie wykonawcze —
+**rozp. Ministra Środowiska z 21.06.2005 r., Dz.U. 2005 nr 116 poz. 981**,
+"w sprawie zwierzyny bezprawnie pozyskanej" (poprzednik: rozp. z 17.03.1997,
+Dz.U. Nr 30 poz. 170, uchylone na podstawie art. 2 ustawy z 17.06.2004 o
+zmianie ustawy — Prawo łowieckie, Dz.U. Nr 172 poz. 1802) — źródło zbieżne:
+faolex.fao.org (pełny tekst), prawo.pl, strazlowiecka.poznan.uw.gov.pl.
+Przykładowe stawki z 2005 r. (⚠️ mogły ulec zmianie nowelizacją
+niepotwierdzoną w tej sesji — brak dostępu ISAP): 14 000 zł/łoś, 5 800 zł/
+jeleń szlachetny, 2 300 zł/dzik, 2 000 zł/sarna. **Aktualność stawek na
+2026 r. NIE potwierdzona.**
 
 ---
 
@@ -490,16 +496,32 @@ Sprawa dotyczy planu łowieckiego (rocznego)?
    przysługuje skarga do WSA mimo wyłączenia KPA z art. 8d — brak
    ustalonego orzecznictwa w tym module, styk z dr-05 (PPSA), możliwy
    temat sesji dedykowanej (F-13 lub nowa flaga).
-2. Czy oznaczenie Dz.U. KPA cytowane wewnątrz art. 8d ("z 2017 r.
-   poz. 1257 oraz z 2018 r. poz. 149") było aktualizowane przy
-   ostatniej nowelizacji tego artykułu, czy jest to archiwalny zapis
-   nienowelizowany od dawna.
+2. ✅ **ZWERYFIKOWANE (2026-08-18, F-91 pkt 13):** oznaczenie Dz.U. KPA w
+   art. 8d — **AKTUALNE, było nowelizowane**: źródło aktualnej t.j. ustawy
+   (prawo.pl, treść Dz.U.2022.1173 t.j.) cytuje wewnątrz art. 8d oznaczenie
+   "**Dz. U. z 2024 r. poz. 572**" (aktualny t.j. KPA), NIE archiwalne
+   "z 2017 r. poz. 1257 oraz z 2018 r. poz. 149" widoczne w źródle z 2018
+   r. (projekt nowelizacji). Oznacza to, że odesłanie w art. 8d jest
+   aktywnie utrzymywane w zgodzie z kolejnymi tekstami jednolitymi KPA —
+   **nie jest to zapis "zamrożony"/archiwalny**. ⚠️ Nie potwierdzono
+   bezpośrednio w ISAP (ograniczenie strukturalne), ale źródło jest
+   spójne z resztą aktualnego t.j. 2025.539 odczytanego w tej sesji.
 3. Aktualna metryka rozporządzenia wykonawczego z art. 15 ust. 4
    (ekwiwalent za zwierzynę bezprawnie pozyskaną) oraz aktualne stawki.
-4. Kwalifikacja "zwierząt uznanych za zwierzęta gospodarskie na podstawie
-   odrębnych przepisów" z art. 16 ust. 1 — pełny katalog gatunków objętych
-   tym wyjątkiem wg aktualnych przepisów o organizacji hodowli i rozrodzie
-   zwierząt gospodarskich (poza zakresem tego modułu, odrębny akt).
+4. ✅ **ZWERYFIKOWANE (2026-08-18, F-91 pkt 13):** kwalifikacja "zwierząt
+   uznanych za zwierzęta gospodarskie" z art. 16 ust. 1 — źródło: art. 2
+   ustawy z 29.06.2007 r. (a obecnie z 10.12.2020 r.) o organizacji
+   hodowli i rozrodzie zwierząt gospodarskich definiuje kategorię
+   "jeleniowate" jako: **jeleń szlachetny (Cervus elaphus), jeleń sika
+   (Cervus nippon) i daniel (Dama dama)**, utrzymywane w warunkach
+   fermowych w celu pozyskania mięsa/skór, **pod warunkiem że pochodzą z
+   chowu lub hodowli zamkniętej, o których mowa w przepisach prawa
+   łowieckiego** — to dokładne domknięcie odesłania z art. 16 ust. 1.
+   Poza jeleniowatymi wyjątek dotyczy również bażanta (wprost w treści
+   art. 16 ust. 1). Źródło zbieżne: prawo-pl.com (art. 2), orka.sejm.gov.pl
+   (dokumentacja procesu legislacyjnego). ⚠️ Dokładna aktualna metryka
+   Dz.U. tej ustawy (wersja 2020 vs. t.j. z uwzględnieniem nowelizacji)
+   NIE potwierdzona bezpośrednio w ISAP.
 5. Orzecznictwo do art. 8a (spory o odmowę zatwierdzenia RPŁ) — brak
    przeglądu w tej sesji, zalecane osobne zapytanie do
    `orzeczenia-sadowe-v2` przy konkretnej sprawie.

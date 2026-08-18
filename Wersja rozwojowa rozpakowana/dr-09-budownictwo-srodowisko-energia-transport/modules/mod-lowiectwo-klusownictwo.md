@@ -53,6 +53,32 @@ czy dotyczy środowiska wodnego — z RÓŻNYMI sankcjami i RÓŻNYMI organami
 
 ## 2. REŻIM 1 — KŁUSOWNICTWO ŁOWIECKIE (Prawo łowieckie, art. 51-54)
 
+### ✅ DEFINICJA USTAWOWA (propagacja z modułu Rozdz. 1-2, 2026-08-18) —
+### DWA ALTERNATYWNE WARIANTY Z ART. 4 UST. 3
+
+Art. 4 ust. 3 Prawa łowieckiego definiuje kłusownictwo przez DWA odrębne,
+alternatywne warianty — rozróżnienie **niewystępujące dotąd w tym module**
+i o dużym znaczeniu praktycznym dla linii obrony:
+
+| Wariant | Definicja | Przykład |
+|---|---|---|
+| **A. Sposób niebędący polowaniem w ogóle** | działanie, które nigdy nie mieściłoby się w katalogu dozwolonych metod z art. 4 ust. 2, niezależnie od uprawnień sprawcy | sidła/wnyki, trucizna, sieci elektryczne, pojazdy silnikowe do pościgu — metody poza dozwolonym katalogiem |
+| **B. Polowanie z naruszeniem warunków dopuszczalności** | działanie MIEŚCI SIĘ formalnie w katalogu dozwolonych metod (np. strzelanie z broni myśliwskiej), ALE narusza warunek dopuszczalności określony gdzie indziej w ustawie | osoba bez uprawnień łowieckich strzela z broni myśliwskiej; polowanie poza okresem ochronnym; polowanie bez wymaganego upoważnienia z Rozdz. 8 |
+
+**⭐⭐ KLUCZOWE ZNACZENIE PRAKTYCZNE:** wariant B oznacza, że **każde
+naruszenie warunku formalnego** dopuszczalności polowania (brak
+aktualnego uprawnienia, przekroczenie limitu odstrzału, polowanie w
+okresie ochronnym, brak upoważnienia dzierżawcy) **kwalifikuje czyn jako
+kłusownictwo w rozumieniu ustawy** — niezależnie od tego, czy sprawca
+jest doświadczonym, uprawnionym myśliwym. To pojęcie SZERSZE niż potoczne
+rozumienie "kłusownictwa" jako działania osoby całkowicie bez uprawnień
+(które odpowiada tylko wariantowi A). Sankcje karne/wykroczeniowe niżej w
+tym module (art. 51-54) różnicowane są wg wagi naruszenia, ale PUNKT
+WYJŚCIA kwalifikacyjny jest zawsze w art. 4 ust. 3 — przy każdej sprawie
+najpierw ustalić, czy zarzucany czyn to wariant A czy B, bo determinuje to
+sposób budowania obrony (przy B: kwestionowanie samego naruszenia warunku
+formalnego, nie samego faktu wykonywania czynności łowieckiej).
+
 ### Kto może w ogóle legalnie polować
 
 ```
@@ -60,6 +86,7 @@ czy dotyczy środowiska wodnego — z RÓŻNYMI sankcjami i RÓŻNYMI organami
 □ Wymogi: pozwolenie na broń MYŚLIWSKĄ, kilkuletni STAŻ w PZŁ, zdanie
   SPECJALNEGO EGZAMINU
 □ Polowanie BEZ tych uprawnień (niezależnie od gatunku) = kłusownictwo
+  (wariant A lub B w zależności od użytej metody — patrz wyżej)
 ```
 
 ### ⭐ TRÓJSTOPNIOWA GRADACJA ODPOWIEDZIALNOŚCI W ROZDZ. 10

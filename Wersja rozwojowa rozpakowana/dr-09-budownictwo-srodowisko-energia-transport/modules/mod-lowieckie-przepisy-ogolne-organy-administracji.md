@@ -189,11 +189,9 @@ Odesłanie do modułu kłusownictwo (Rozdz. 10, art. 51-54) — tam sankcje
 karne/wykroczeniowe różnicowane wg wagi naruszenia, ale PUNKT WYJŚCIA
 kwalifikacyjny jest zawsze w art. 4 ust. 3.
 
-**⚠️ Do zweryfikowania w module kłusownictwo przy najbliższej aktualizacji:**
-czy oba warianty (A i B) są tam wyraźnie rozróżnione, czy też moduł opisuje
-kłusownictwo jednolicie bez podziału na dwie alternatywne podstawy —
-**zadanie propagacyjne**, nie wykonane w tej sesji (poza zakresem — jeden
-nowy moduł na turę).
+**✅ Propagowane 2026-08-18 (zadanie z F-93):** oba warianty (A i B) zostały
+wpisane do `mod-lowiectwo-klusownictwo.md`, sekcja 2, z pełnym
+rozróżnieniem i wnioskiem praktycznym o znaczeniu dla linii obrony.
 
 ---
 
@@ -296,8 +294,18 @@ Sprawa dotyczy kwalifikacji czynu (polowanie legalne vs kłusownictwo)?
 1. Dokładna metryka i data nowelizacji Prawa łowieckiego, która zmieniła
    art. 7 z "wojewodowie" na "samorząd województwa" — istotne wyłącznie
    przy sporach o stan prawny sprzed tej zmiany.
-2. Aktualna metryka rozporządzenia wykonawczego z art. 5 (lista gatunków
-   zwierząt łownych) oraz pełny, aktualny katalog gatunków.
+2. ✅ **ZWERYFIKOWANE (2026-08-18, F-91 pkt 14):** rozporządzenie z art. 5
+   — **rozp. MŚ z 11.03.2005 r., Dz.U. 2005 poz. 433** "w sprawie
+   ustalenia listy gatunków zwierząt łownych"; **aktualny tekst jednolity:
+   Dz.U. 2023 poz. 2454** (obwieszczenie MKiŚ z 31.10.2023, uwzględnia
+   zmiany z 2017 poz. 1484 i 2022 poz. 696); **ostatnia nowelizacja:
+   rozp. z 22.09.2025 r., Dz.U. 2025 poz. 1286** (uchyla § 1 ust. 1 pkt 2
+   lit. l — jeden gatunek drapieżnika usunięty z listy, gatunek NIE
+   zidentyfikowany źródłowo w tej sesji). Łańcuch metryk **wyjątkowo dobrze
+   udokumentowany** — kolejne obwieszczenia o t.j. i nowelizacje widoczne
+   wprost w wynikach wyszukiwania isap.sejm.gov.pl (tytuły dokumentów), co
+   daje wyższą pewność niż przy pozostałych punktach mimo braku
+   bezpośredniego web_fetch.
 3. Czy zdefiniowane w art. 3a "IGO stwarzające zagrożenie dla Polski"
    (lista krajowa z art. 23 ust. 1 ustawy o gatunkach obcych) obejmuje
    obecnie gatunki istotne dla typowych sporów łowieckich (np. jenot,

@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: 3.20
+version: 3.21
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -70,6 +70,7 @@ required_modules:
   - shared/HIERARCHIA-ZRODEL.md  # kategoryzacja wiarygodności źródeł (Rząd 1/2A/2B/3) — dodane 2026-07-21, ISTNIAŁ od dawna ale ŻADEN DR-skill/router go nie ładował
   - shared/PORTALE-BRANZOWE-RZAD-2B.md  # rejestr portali branżowych per dziedzina, z weryfikacją site: — dodane 2026-07-21, ten sam błąd co wyżej (zbudowany, nigdy niepodłączony)
   - shared/MOD-STEP-TRACKER.md
+  - shared/MOD-REJESTR-POKRYCIA-JEDNOSTEK.md  # KROK 0-RPK — warunkowy, gdy zbiór ≥10 ponumerowanych jednostek
   - shared/MOD-KONTEKST-SESJI.md
   - shared/MOD-SKAN-DOWODOW-KOMPLETNY.md
   - shared/MOD-REJESTR-ZALACZNIKOW-CHECKPOINT.md
@@ -81,6 +82,21 @@ required_modules:
   - references/KROK1-detekcja.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md  # kanoniczny, wg UP-3
 changelog:
+  - "3.21 (2026-08-18): NOWY KROK 0-RPK — router jest teraz jedynym miejscem
+    decydującym, KIEDY inicjować shared/MOD-REJESTR-POKRYCIA-JEDNOSTEK.md
+    (RPK), zamiast zostawiać tę decyzję wyłącznie w opisie biblioteki
+    shared/SKILL.md, która sama w sobie nie jest samodzielnym skillem i nie
+    ma własnej sekwencji wywołania. Powód: użytkownik trafnie zauważył, że
+    dodanie modułu RPK do shared (2026-08-18, AUDYT-2026-08-18, flaga F-93)
+    nie wystarcza — biblioteka nie decyduje SAMA o swoim wywołaniu, potrzebny
+    jest punkt orkiestracji. Krok umieszczony zaraz po KROK 0-ST (analogicznie
+    do MOD-STEP-TRACKER), z jawnymi sygnałami wyzwalającymi (zbiór ≥10
+    ponumerowanych jednostek, plik źródłowy z numeracją ciągłą, zapowiedź
+    pracy partiami). required_modules i SELF-CHECK rozszerzone. Nie zamyka
+    F-93 w całości — propagacja do pozostałych 5 skilli-konsumentów
+    (analizator-przepisow-v2, analizator-dowodow-v3,
+    przesluchanie-swiadkow-v2-min90, chronologia-sprawy-v1, audyt-systemu-v4)
+    pozostaje otwarta, patrz WARN-OTWARTE.md."
   - "3.17 (2026-07-21): NAPRAWIONO — shared/HIERARCHIA-ZRODEL.md (istniał
     od dawna) i shared/PORTALE-BRANZOWE-RZAD-2B.md (zbudowany w tej sesji,
     16 dziedzin z weryfikacją site:) NIE BYŁY ładowane przez ŻADEN DR-skill
@@ -194,6 +210,30 @@ KROK 0-ST → ⛔ [ST-INIT — STEP-TRACKER] (zaraz po HG-ACTIVE, przed jakimkol
           present_files pisma/.docx — także gdy pismo generowane jest bezpośrednio z routera
           bez pełnego pipeline pisma-procesowe-v3. Polecenia „dalej"/„kontynuuj"/„generuj"
           NIE zwalniają z ST-FINAL ani z obowiązku raportowania pominięć (FAZA 2).
+KROK 0-RPK → ⛔ [RPK — REJESTR POKRYCIA JEDNOSTEK] → wykryj, czy zlecenie
+          użytkownika obejmuje ZBIÓR ≥10 PONUMEROWANYCH, DYSKRETNYCH JEDNOSTEK
+          do przerobienia w tej sesji (np. "rozwiąż te 160 kazusów",
+          "przeanalizuj te 40 dokumentów", "przygotuj pytania do 15 świadków",
+          "przejrzyj wszystkie artykuły tej ustawy", seria pozycji w rejestrze
+          dowodów) — NIEZALEŻNIE od tego, czy zadanie wymaga też pisma/analizy
+          objętej innym PRIMARY skillem niżej w routingu.
+          Sygnały: liczba jednostek podana explicite ("160 kazusów"), LUB
+          plik źródłowy z widoczną numeracją ciągłą ≥10 pozycji, LUB
+          zapowiedź pracy "partiami"/"turami" nad wyliczoną listą.
+          JEŚLI TAK:
+          view /mnt/skills/user/shared/MOD-REJESTR-POKRYCIA-JEDNOSTEK.md
+          → wykonaj FAZA 0 (RPK-INIT) PRZED podziałem zbioru na partie.
+          RPK aktywny przez całą sesję, niezależnie od PRIMARY skilla
+          wybranego w KROK 2 — komplementarny do MOD-STEP-TRACKER (ten
+          śledzi kroki WEWNĄTRZ jednej jednostki/pisma, RPK śledzi
+          POKRYCIE zbioru wielu równorzędnych jednostek).
+          ⛔ Każde zamknięcie partii → RPK-COMMIT (FAZA 2 modułu) — commit
+          do pliku PRZED przejściem do kolejnej partii, nie na końcu sesji.
+          ⛔ Po kompaktowaniu sesji, jeśli plik RPK już istniał → RPK-RESUME
+          (FAZA 3 modułu) OBOWIĄZKOWY przed zaufaniem jakiemukolwiek
+          streszczeniu zakresu ukończonej pracy.
+          JEŚLI NIE (zbiór <10 jednostek lub brak numeracji ciągłej) —
+          pomiń, kontynuuj do KROK 0A. Nie inicjuj RPK "na wszelki wypadek".
 KROK 0A → [ANONIMIZER] → view references/KROK0A-anonimizer.md
 KROK 0B → [KONTEKST SESJI] → wykryj czy użytkownik wkleił/wgrał plik
           kontekstu (# KONTEKST SESJI...) lub czy napisał "masz kontekst" /
@@ -566,6 +606,9 @@ Minimalne bramki obowiązkowe przed każdą odpowiedzią:
 □ references/KROK1-detekcja.md wczytany (tryb + hard gate ISAP)?
 □ ⛔ HARD GATE TRWAŁY aktywny? (obowiązuje przez całą rozmowę — nie wygasa)
 □ ⛔ STEP-TRACKER: REJESTR zainicjowany (ST-INIT) i aktualny po każdym kroku?
+□ ⛔ RPK: jeśli zadanie obejmuje zbiór ≥10 ponumerowanych jednostek — plik
+  rpk_*.json zainicjowany, a każda zamknięta partia ma wykonany RPK-COMMIT
+  (status jednostek zaktualizowany w pliku) PRZED przejściem do kolejnej?
 □ ⛔ Przed present_files pisma/.docx → ST-FINAL (REJESTR KROKÓW) wyświetlony?
 □ Każdy artykuł/termin → web_search/web_fetch faktycznie wywołany W TEJ ODPOWIEDZI?
 □ Każdy element → ✅ [VER: źródło] lub ⚠️ [NIEWERYFIKOWANE]?

@@ -303,18 +303,59 @@ uprawie (46 i n.)? Odpowiedź determinuje właściwy moduł i pozwanego.
 
 ## ⚠️ NIEZWERYFIKOWANE — DO USTALENIA PRZY SPRAWIE
 
-1. Pełny katalog wyłączeń z art. 26 (poza parkami narodowymi/rezerwatami
-   i miastami) — ogrody zoologiczne, tereny zamknięte, strefy ochronne.
+1. ✅ **ZWERYFIKOWANE (2026-08-18, F-91 pkt 11):** pełny katalog wyłączeń
+   z art. 26 — **4 punkty, kompletny**: (1) parki narodowe i rezerwaty
+   przyrody, poza wyjątkiem obszarów z dopuszczonym polowaniem wg planu
+   ochrony/zadań ochronnych; (2) tereny w granicach administracyjnych
+   miast (z wyjątkiem większych obszarów leśnych/rolnych, które mogą
+   tworzyć osobny obwód); (3) tereny miejscowości niezaliczanych do miast
+   — zabudowania mieszkalne/gospodarcze z podwórzami, placami, ulicami,
+   drogami wewnętrznymi; (4) budowle, zakłady, urządzenia, tereny na cele
+   społeczne/kultu religijnego/przemysłowe/handlowe/składowe/transportowe
+   i inne gospodarcze oraz obiekty zabytkowe/specjalne — w granicach
+   ogrodzeń. Źródła zbieżne: lexlege, arslege, prawnik.cc, gov.pl
+   (Prawo łowieckie, tekst przekazany przez Sejm). **NIE ma odrębnej
+   pozycji dla ogrodów zoologicznych** — mieszczą się w pkt 4 (obiekty
+   w granicach ogrodzeń).
 2. Szczegółowy tryb i termin skargi na uchwałę sejmiku do WSA (styk z
    dr-05/PPSA).
-3. Pełna treść art. 28 ust. 2 i n. (ośrodki hodowli zwierzyny, wyłączenie
-   z wydzierżawiania).
-4. Pełny katalog elementów obligatoryjnych umowy dzierżawy z art. 29a
-   (poza numerem obwodu).
-5. Mechanizm partycypacji w kosztach ochrony lasu z art. 30.
-6. Dokładny mechanizm podziału czynszu dzierżawnego między uprawnionych
-   właścicieli gruntów z art. 31 (treść tytułu artykułu potwierdzona,
-   pełna treść normatywna — nie w pełni).
+3. ✅ **ZWERYFIKOWANE (2026-08-18, F-91 pkt 11):** art. 28 ust. 2-4 —
+   minister środowiska, po opinii PZŁ, może w drodze **decyzji** wyłączyć
+   obwody z wydzierżawiania i przekazać w zarząd na **min. 10 lat** z
+   przeznaczeniem na ośrodki hodowli zwierzyny (6 celów enumeratywnych:
+   wzorcowe zagospodarowanie, badania naukowe, odtwarzanie zanikających
+   gatunków, hodowla rodzimych gatunków, hodowla gatunków pożytecznych w
+   biocenozach leśnych, szkolenia). Prowadzący: PGL Lasy Państwowe, PZŁ,
+   instytucje naukowo-dydaktyczne, inne jednostki prowadzące takie ośrodki
+   przed wejściem ustawy w życie (1995). Prawo prowadzenia — niezbywalne.
+   Ust. 4: minister określa w rozporządzeniu szczegółowe zasady przekazania
+   w zarząd (metryka rozporządzenia — NIE ustalona w tej sesji, osobny
+   punkt do dociągnięcia).
+4. ✅ **ZWERYFIKOWANE (2026-08-18, F-91 pkt 11):** art. 29a ust. 1 —
+   umowa dzierżawy powinna zawierać m.in.: nr i powierzchnię obwodu,
+   obszar gruntów leśnych/polnych, kategorię obwodu (dalsze elementy poza
+   pierwszymi trzema NIE w pełni wypisane w źródle odczytanym w tej sesji
+   — lista **częściowa**). Ust. 2: umowa rozwiązuje się przy (1) wyłączeniu
+   z wydzierżawiania, (2) rozwiązaniu koła, (3) zgodnym oświadczeniu stron.
+   Ust. 2a: wydzierżawiający może wypowiedzieć bez zachowania terminów przy
+   niezrealizowaniu ≥80% planu pozyskania zwierzyny grubej przez 3 kolejne
+   lata, albo przy negatywnej ocenie gospodarki łowieckiej przez PZŁ.
+   ⭐ **Bonus — realne orzeczenie odnalezione i zweryfikowane w RZĄD 1:**
+   **IX Ca 408/23** (orzeczenia.ms.gov.pl, Portal Orzeczeń Sądów
+   Powszechnych) — dzierżawa obwodu łowieckiego to stosunek o charakterze
+   MIESZANYM: cywilnoprawna forma umowy (art. 29a ust. 1-2), ale treść
+   publicznoprawna (obowiązek gospodarki łowieckiej), zawierana nie przez
+   podmioty z prawami cywilnoprawnymi do gruntu.
+5. ✅ **ZWERYFIKOWANE (2026-08-18, F-91 pkt 11):** art. 30 — przy
+   nieusprawiedliwionym niezrealizowaniu rocznego planu łowieckiego
+   dzierżawcy obowiązani do udziału w kosztach ochrony lasu przed
+   zwierzyną; udział uwzględniany w wysokości czynszu dzierżawnego,
+   przypada w całości właściwemu nadleśnictwu.
+6. ✅ **ZWERYFIKOWANE (2026-08-18, F-91 pkt 11):** art. 31 — wydzierżawiający
+   rozlicza czynsz między nadleśnictwami i gminami: nadleśnictwu przypada
+   czynsz odpowiadający powierzchni gruntów leśnych Skarbu Państwa, gminom
+   — pozostała powierzchnia obwodu. Za obwody wyłączone z wydzierżawiania
+   zarządcy uiszczają ekwiwalent równy średniemu czynszowi dzierżawy.
 7. Tryb tworzenia obwodów o powierzchni mniejszej niż 3000 ha (art. 23
    ust. 2 i n.) — zgoda którego organu, w jakim trybie.
 

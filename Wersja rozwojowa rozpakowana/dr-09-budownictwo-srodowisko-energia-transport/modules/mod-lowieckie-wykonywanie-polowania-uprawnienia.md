@@ -116,10 +116,23 @@ rozpoczęcia polowania zbiorowego — zgłosić **sprzeciw wraz z uzasadnieniem*
 do właściwego wójta (burmistrza, prezydenta miasta). Sprzeciw może dotyczyć
 polowania organizowanego w terminie wskazanym zgodnie z ust. 2.
 
-⚠️ [NIEWERYFIKOWANE] **treść ust. 4 i 5** — tryb rozpoznania sprzeciwu i jego
-skutek prawny nie zostały odczytane ze źródła w tej sesji. To luka
-o wysokiej wadze praktycznej (sprzeciw jest głównym narzędziem właściciela
-gruntu) — **ustalić przed przyjęciem sprawy**.
+✅ **ZWERYFIKOWANE (2026-08-18, F-93):** treść ust. 4 i 5 — **Ust. 4:**
+wójt (burmistrz, prezydent miasta) **niezwłocznie zawiadamia** dzierżawcę
+lub zarządcę obwodu łowieckiego o wniesionym sprzeciwie. **Ust. 5:**
+dzierżawca albo zarządca **uwzględnia sprzeciw WYŁĄCZNIE wtedy, gdy
+wykonywanie polowania będzie zagrażało bezpieczeństwu lub życiu ludzi**
+— to jedyna ustawowa przesłanka uwzględnienia; sam fakt sprzeciwu bez tej
+przesłanki nie wiąże dzierżawcy/zarządcy. Źródła zbieżne: lexlege.pl,
+dlajurysty.pl, prawo.pl (relacja z wystąpienia RPO), lokalna prasa
+cytująca dosłowne brzmienie z aktualnego t.j. Dz.U. 2025 poz. 539.
+⭐⭐ **Kluczowe ustalenie praktyczne (z relacji RPO, prawo.pl):**
+**rozstrzygnięcie dzierżawcy/zarządcy o (nie)uwzględnieniu sprzeciwu NIE
+PODLEGA ZASKARŻENIU** — brak drogi odwoławczej dla właściciela gruntu.
+To czyni instytucję sprzeciwu, zdaniem cytowanego w źródle eksperta,
+"instrumentem niszowym" o ograniczonej sile praktycznej — istotne przy
+doradzaniu klientowi-właścicielowi gruntu, by nie budować oczekiwań co
+do skuteczności sprzeciwu poza wąskim katalogiem przesłanki
+bezpieczeństwa.
 
 **Ust. 6 — tablice ostrzegawcze.** Dzierżawca albo zarządca jest obowiązany
 **przed planowanym terminem rozpoczęcia** polowania zbiorowego **oznakować
@@ -304,18 +317,15 @@ automatycznie bez weryfikacji aktualności).
 
 ---
 
-## 7. ⚠️ SYGNAŁ DO DALSZEGO USTALENIA: USTAWA O ZDROWIU ZWIERZĄT
+## 7. ✅ ROZSTRZYGNIĘTE (2026-08-18, propagacja z F-93/F-91): USTAWA O ZDROWIU ZWIERZĄT
 
 Art. 42aa (opisany w `mod-lowiectwo-klusownictwo.md`) zawiera w katalogu
 wyłączeń od zakazów odesłanie do **"ustawy z dnia 21 listopada 2025 r. o
-zdrowiu zwierząt"** jako odrębnej podstawy prowadzenia odłowów. Ta sama
-ustawa była sygnalizowana jako "nieobecna w żadnym rejestrze systemu" w
-sesji audytowej 2026-08-16 (F-91). Potwierdzona w tej sesji **wyłącznie
-data aktu** (21.11.2025) — metryka Dz.U. (pozycja publikacji) **nadal
-NIEUSTALONA** w tej sesji. ⚠️ [NIEWERYFIKOWANE] — priorytetowo do
-ustalenia w kolejnej sesji dotykającej DR-10 (zdrowie/weterynaria) lub
-DR-09/łowieckie, bo ustawa może modyfikować zasady odłowów sanitarnych
-istotne dla całego Rozdz. 8-9.
+zdrowiu zwierząt"** jako odrębnej podstawy prowadzenia odłowów. Metryka
+Dz.U. **ROZSTRZYGNIĘTA w module Rozdz. 3** (`mod-lowieckie-zasady-gospodarki-lowieckiej-plany.md`,
+sesja 2026-08-16c) i propagowana tu 2026-08-18: **Dz.U. 2025 poz. 1795**,
+ogłoszona 17.12.2025, weszła w życie **18.03.2026**. Zadanie propagacyjne
+z rejestru F-93/WARN-OTWARTE — **ZAMKNIĘTE**.
 
 ---
 
@@ -364,14 +374,35 @@ istotne dla całego Rozdz. 8-9.
 
 ## ⚠️ NIEZWERYFIKOWANE — DO USTALENIA PRZY SPRAWIE
 
-1. Pełna treść art. 43 (cudzoziemcy spoza UE / Polacy stale za granicą).
+1. ✅ **CZĘŚCIOWO ZWERYFIKOWANE (2026-08-18, F-91 pkt 12):** art. 43 —
+   cudzoziemiec/Polak stale za granicą, niebędący członkiem PZŁ lub
+   niespełniający warunków art. 42a, może polować po wykupieniu polowania
+   u przedsiębiorcy (art. 18) albo za zgodą ministra środowiska (na
+   wniosek PZŁ lub zarządcy). Ust. 1a: wyłącznie w obecności przedstawiciela
+   dzierżawcy/zarządcy będącego członkiem PZŁ, odpowiedzialnego za wpis do
+   książki ewidencji (art. 42b). Delegacja rozporządzeniowa (szczegółowe
+   warunki polowania, znakowanie z art. 42c, wzory upoważnienia i książki
+   ewidencji) — **metryka rozporządzenia NIE ustalona w tej sesji**.
 2. Pełna treść art. 42c (oznakowanie przez punkt skupu tusz).
-3. Pełna treść art. 42e (wycena i ewidencja trofeów łowieckich).
+3. ✅ **ZWERYFIKOWANE (2026-08-18, F-91 pkt 12):** rozporządzenie z art. 42e
+   (wycena i ewidencja trofeów łowieckich) — **rozp. MŚ, Dz.U. 2005 nr 96
+   poz. 820** "w sprawie sposobu wyceny oraz ewidencji trofeów łowieckich"
+   (źródła zbieżne: prawo.pl, sip.lex.pl, sip.lex openlex, kkl52.pl,
+   pzlow.pl archiwalna strona). Mechanizm: wycena wstępna (komisje z art.
+   42d, podczas oceny selekcji) i ostateczna (komisje PZŁ, min. 3 miesiące
+   po pozyskaniu), Centralny Rejestr Trofeów prowadzony przez PZŁ.
+   **Aktualność na 2026 r. NIE potwierdzona** (ograniczenie ISAP).
+   ⭐ **Przy okazji potwierdzone (F-91 pkt 12, aktualność art. 42b):** treść
+   art. 42b odczytana w tej sesji zawiera odniesienia do IGO (gatunki
+   inwazyjne obce) — wskazuje na WSPÓŁCZESNĄ, znowelizowaną wersję
+   przepisu, a nie archaiczną; opis modułu można traktować jako aktualny
+   co do struktury (elektroniczna książka ewidencji), choć bez
+   bezpośredniego potwierdzenia w ISAP.
 4. Pełny katalog tematów egzaminu podstawowego — aktualność rozporządzenia
    egzaminacyjnego (źródło z 2005 r., możliwe nowelizacje).
 5. Treść przepisu o bioasekuracji w art. 42 (ostatnie ustępy artykułu).
-6. Metryka Dz.U. ustawy z 21.11.2025 r. o zdrowiu zwierząt (§ 7 wyżej) —
-   powtórzone z F-91, wciąż nieustalone.
+6. ✅ Metryka Dz.U. ustawy z 21.11.2025 r. o zdrowiu zwierząt — **ZAMKNIĘTE
+   2026-08-18** (Dz.U. 2025 poz. 1795, patrz § 7 wyżej, propagacja z F-93).
 7. Aktualna stawka opłaty skarbowej za wniosek z art. 45 ust. 3 (zmienna
    w czasie, nie przyjmować automatycznie z BIP bez weryfikacji daty).
 

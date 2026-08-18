@@ -240,11 +240,21 @@ status wg art. 59-60.
 
 | Zdarzenie | Termin | Podstawa | Status |
 |---|---|---|---|
-| Wejście ustawy w życie | 17.02.1996 | art. 64 | ✅ dana źródłowa |
-| Realizacja dawnych umów przedsiębiorstw | 6 mies. od cezury → sierpień 1996 | art. 58 ust. 1 | ⚠️ wyliczenie własne |
-| Dostosowanie celów obwodu do wymogów OHZ | 1 rok od cezury → luty 1997 | art. 60 ust. 2 | ⚠️ wyliczenie własne |
-| Utrata mocy aktów wykonawczych z 1959 r. | 1 rok od cezury → luty 1997 | art. 62 | ⚠️ wyliczenie własne |
+| Wejście ustawy w życie | 17.02.1996 | art. 63 (nie 64 — poprawka numeracji, patrz niżej) | ✅ dana źródłowa |
+| Realizacja dawnych umów przedsiębiorstw | **6 miesięcy** od cezury → 17.08.1996 | art. 58 ust. 1 | ✅ **ZWERYFIKOWANE 2026-08-18** wprost z tekstu (gov.pl, dokument źródłowy Sejmu): "Przedsiębiorstwa... mogą realizować umowy zawarte przed dniem wejścia w życie ustawy przez okres 6 miesięcy od dnia jej wejścia w życie." Po 6 miesiącach — działalność wymaga koncesji (ust. 2, dziś martwy/zastąpiony reżimem zezwoleń). |
+| Status obwodów wyłączonych z wydzierżawienia | **BEZ TERMINU — konwersja statusu, nie termin** | art. 60 ust. 2 | ✅ **SKORYGOWANE 2026-08-18** — wcześniejsze "1 rok od cezury" było BŁĘDNYM zgadywaniem. Rzeczywista treść: "Obwody wyłączone z wydzierżawienia na podstawie dotychczasowych przepisów **stają się** ośrodkami hodowli zwierzyny w rozumieniu niniejszej ustawy" — to przepis o automatycznej konwersji statusu prawnego z dniem wejścia w życie, **nie ma w nim żadnego terminu dostosowawczego do wyliczenia**. |
+| Moc przepisów wykonawczych z 1959 r. | **BEZ TERMINU — bezterminowo, warunkowo** | art. 62 | ✅ **SKORYGOWANE 2026-08-18** — wcześniejsze "1 rok od cezury" było BŁĘDNYM zgadywaniem. Rzeczywista treść: "Przepisy wydane na podstawie ustawy [z 1959 r.] zachowują swoją moc, **o ile nie są sprzeczne** z niniejszą ustawą" — to nie jest przepis terminowy, tylko warunkowy (moc trwa dopóki brak sprzeczności, bez konkretnej daty wygaśnięcia). |
 | Wygaśnięcie dawnych umów dzierżawy obwodów | **31.03.1997** | art. 61 | ✅ data wpisana w ustawie |
+
+⭐ **Odkrycie sesji 2026-08-18 (F-91 pkt 16):** premisa tego modułu, że art. 60
+ust. 2 i art. 62 zawierają terminy roczne do wyliczenia, była **błędna u
+źródła** — oba przepisy to klauzule bezterminowe (konwersja statusu /
+warunkowe zachowanie mocy), nie przepisy z konkretną datą. Jedyny
+rzeczywisty termin liczbowy w tej grupie to **6 miesięcy z art. 58 ust. 1**
+(17.02.1996 → 17.08.1996), teraz potwierdzony wprost z tekstu źródłowego
+(nie wyliczony przez analogię). To dobra ilustracja, dlaczego Reguła 13
+HARDGATE zakazuje "wyliczeń własnych" bez odczytu źródła — hipoteza o
+symetrii (6 mies. / rok / rok) okazała się nietrafiona dla 2 z 3 pozycji.
 
 ⚠️ Terminy oznaczone jako wyliczenie własne **nie były weryfikowane
 w źródle** co do dokładnego dnia upływu — przy sprawie, w której dzień
@@ -297,14 +307,34 @@ Sprawa dotyczy zdarzenia lub statusu SPRZED 17.02.1996?
 
 ## Punkty ⚠️ NIEUSTALONE (4)
 
-1. **Treść zmian wprowadzonych art. 55-57** — tekst jednolity ją pomija
-   („zmiany pominięto"). Do odtworzenia wyłącznie z pierwotnego tekstu
-   Dz.U. 1995 poz. 713, gdyby sprawa wymagała rekonstrukcji brzmienia
-   ustawy o lasach lub ustawy o ochronie przyrody z 1996 r.
-2. **Dokładne dni upływu terminów 6-miesięcznego (art. 58 ust. 1) oraz
-   rocznych (art. 60 ust. 2, art. 62)** — w module podane jako miesiąc
-   (sierpień 1996 / luty 1997) na podstawie wyliczenia własnego z cezury
-   17.02.1996, bez potwierdzenia metody liczenia w źródle.
+1. ✅ **ODTWORZONE (2026-08-18, F-91 pkt 16):** treść zmian z art. 55-57,
+   pozyskana z verbatim archiwalnego tekstu ustawy pierwotnej (dokument
+   źródłowy gov.pl, zgodny z eli.gov.pl/api/acts/DU/1995/713/text.html):
+   - **Art. 55** — zmiana ustawy z 23.12.1988 r. o działalności
+     gospodarczej (treść szczegółowa NIE odtworzona w tej sesji — akt
+     dawno nieobowiązujący, niska użyteczność praktyczna).
+   - **Art. 56** — zmiana ustawy z 28.09.1991 r. o lasach: w art. 47 ust.
+     8 pkt 1 tej ustawy wyrazy "strażników łowieckich" zastąpiono
+     wyrazami "Państwowej Straży Łowieckiej".
+   - **Art. 57** — zmiana ustawy z 16.10.1991 r. o ochronie przyrody:
+     analogicznie, w art. 18 ust. 8 pkt 1 tej ustawy wyrazy "strażników
+     łowieckich" zastąpiono wyrazami "Państwowej Straży Łowieckiej".
+   Oba przepisy (56-57) miały charakter czysto terminologiczny —
+   dostosowanie nazewnictwa do nowo utworzonej PSŁ (Rozdz. 7 nowej
+   ustawy), nie wprowadzały zmian merytorycznych. Dziś oba akty macierzyste
+   (ustawa o lasach z 1991, ustawa o ochronie przyrody z 1991) są już same
+   nieaktualne/uchylone (ochrona przyrody ma nową ustawę z 2004 r.) —
+   praktyczne znaczenie art. 56-57 jest już wyłącznie historyczne.
+2. ✅ **ROZSTRZYGNIĘTE — PREMISA BYŁA BŁĘDNA (2026-08-18, F-91 pkt 16):**
+   tylko **art. 58 ust. 1 zawiera rzeczywisty termin liczbowy** — 6
+   miesięcy od wejścia w życie ustawy (17.02.1996 → **17.08.1996**),
+   potwierdzone wprost z tekstu źródłowego. **Art. 60 ust. 2 i art. 62 NIE
+   zawierają żadnego terminu** — to klauzule bezterminowe (konwersja
+   statusu prawnego / warunkowe zachowanie mocy "o ile nie sprzeczne"),
+   nie przepisy z datą graniczną. Wcześniejsze "wyliczenie własne 1 rok"
+   dla obu tych przepisów było nieuprawnioną ekstrapolacją bez podstawy
+   źródłowej — poprawione w tabeli wyżej. To konkretny przykład
+   materializacji ryzyka, przed którym ostrzega Reguła 13 HARDGATE.
 3. **Orzecznictwo do art. 59 ust. 3** — czy istnieje linia orzecznicza co
    do zakresu „uprawnień nabytych" (np. czy obejmuje uprawnienia
    zawieszone/odebrane przed cezurą i później przywrócone). Nie badane

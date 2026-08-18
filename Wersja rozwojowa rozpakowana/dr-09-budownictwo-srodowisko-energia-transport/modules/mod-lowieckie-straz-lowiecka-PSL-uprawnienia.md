@@ -342,27 +342,132 @@ sesji 16b). Nie powoływać żadnego z nich bez odczytu ze źródła.
 
 ## ⚠️ NIEZWERYFIKOWANE — DO USTALENIA PRZY SPRAWIE
 
-1. **Brzmienie art. 11, 12, 45 i 47 ustawy o ŚPB i BP** — odesłania z art. 39
-   ust. 3–4 i art. 40 ust. 1 pkt 1; bez odczytu ze źródła nie da się ocenić
-   legalności użycia przymusu ani broni. **Priorytet.**
-2. **Termin do wniesienia zażalenia** z art. 39 ust. 10 (przepis go nie
-   określa).
-3. Metryki i aktualność **trzech rozporządzeń** z art. 41.
-4. Sposób wykładni odesłania do **„kolegium do spraw wykroczeń"**
-   (art. 39 ust. 2 pkt 8) — instytucja zniesiona, brak potwierdzenia
-   orzeczniczego w tej sesji.
-5. **Aktualny status Straży Ochrony Przyrody** (art. 39 ust. 8 pkt 1).
+1. ✅ **W WIĘKSZOŚCI ZWERYFIKOWANE (2026-08-18, F-93 priorytet #1):**
+   brzmienie kluczowych przepisów ustawy z 24.05.2013 o środkach przymusu
+   bezpośredniego i broni palnej (Dz.U. aktualny t.j. 2026 poz. 244):
+   - **Art. 11** (przesłanki użycia środków przymusu bezpośredniego) —
+     katalog otwiera m.in. "konieczność odparcia bezpośredniego,
+     bezprawnego zamachu na życie, zdrowie lub wolność uprawnionego lub
+     innej osoby" (pkt 1) — PSŁ ma odesłanie do pkt 1–3, 8 i 10–14
+     (ustalone w sesji wcześniejszej), więc dysponuje szerokim, ale nie
+     pełnym katalogiem 21 punktów.
+   - **Art. 45** (przesłanki UŻYCIA broni palnej) — pkt 1 lit. a:
+     "konieczność odparcia bezpośredniego, bezprawnego zamachu na życie,
+     zdrowie lub wolność uprawnionego lub innej osoby, albo konieczność
+     przeciwdziałania czynnościom zmierzającym bezpośrednio do takiego
+     zamachu" — PSŁ odesłanie do pkt 1 lit. a i pkt 2 (ustalone wcześniej)
+     = **wyłącznie obrona życia/zdrowia**, NIE obejmuje ochrony mienia czy
+     obiektów (te są w dalszych punktach art. 45, do których PSŁ nie ma
+     dostępu).
+   - **Art. 47** (przesłanki WYKORZYSTANIA broni palnej — czyli strzał NIE
+     w kierunku osoby/zwierzęcia w celu obezwładnienia, tylko np.
+     ostrzegawczy) — 7-punktowy katalog: zatrzymanie pojazdu zagrażającego
+     życiu (pkt 1), pokonanie przeszkody (pkt 2), alarm/wezwanie pomocy
+     (pkt 3), neutralizacja materiałów wybuchowych (pkt 4),
+     **unieszkodliwienie zwierzęcia zagrażającego życiu/zdrowiu (pkt 5)**
+     — praktycznie istotne dla PSŁ, strzał ostrzegawczy (pkt 6). PSŁ
+     odesłanie do pkt 1, 3, 5 i 6 (ustalone wcześniej) — **potwierdza się,
+     że PSŁ MOŻE strzelać do zagrażającego zwierzęcia (pkt 5) oraz oddać
+     strzał ostrzegawczy (pkt 6), ale NIE do zatrzymywania pojazdów (pkt 1
+     jest formalnie w odesłaniu, ale w kontekście łowieckim rzadko
+     aktualny) ani przy pokonywaniu przeszkód budowlanych (pkt 2 poza
+     odesłaniem PSŁ)**.
+   - **Art. 12** (katalog środków przymusu bezpośredniego, pełna lista ~21
+     pozycji) — **NIE odczytany w pełni w tej sesji**; PSŁ ma dostęp do
+     konkretnych numerów (pkt 1, pkt 2 lit. a, pkt 7, 9, pkt 12 lit. a,
+     pkt 13 — ustalone wcześniej), ale ich dokładna treść (co fizycznie
+     oznaczają te środki) pozostaje NIEODCZYTANA źródłowo.
+   **Wniosek praktyczny:** PSŁ ma wyraźnie WĄSKIE uprawnienia w zakresie
+   broni palnej — użycie tylko w obronie życia/zdrowia (nie mienia),
+   wykorzystanie głównie do neutralizacji zagrażającego zwierzęcia i
+   strzału ostrzegawczego. To istotnie zawęża pole manewru prawnego przy
+   ocenie ewentualnego przekroczenia uprawnień przez strażnika.
+2. ✅ **ZWERYFIKOWANE (2026-08-18, F-91 pkt 3):** termin do wniesienia
+   zażalenia z art. 39 ust. 10 — sam przepis Prawa łowieckiego nie określa
+   terminu wprost, ale zgodnie z art. 39 ust. 1 ("na zasadach określonych
+   w KPK i KPW") zastosowanie ma **7-dniowy termin zawity** z **art. 460
+   KPK** (dla czynności w toku spraw o przestępstwa łowieckie) — "zażalenie
+   lub sprzeciw wnosi się w terminie 7 dni od daty ogłoszenia postanowienia,
+   a jeżeli ustawa nakazuje doręczenie postanowienia – od daty doręczenia"
+   (potwierdzone: lexlege.pl, arslege.pl, sip.lex.pl, aktualny t.j.
+   Dz.U.2026.490) — analogicznie **art. 103 KPW** dla spraw o wykroczenia
+   łowieckie (odpowiednik 7-dniowy, NIE odczytany źródłowo w tej sesji —
+   ⚠️ [NIEWERYFIKOWANE] tylko dla gałęzi KPW, gałąź KPK zamknięta).
+3. ✅ **CZĘŚCIOWO ZWERYFIKOWANE (2026-08-18, F-91 pkt 1):** metryki
+   rozporządzeń z delegacji art. 41 ust. 1-3 — **znaleziono, NIE
+   ostatecznie potwierdzono jako aktualnie obowiązujące** (brak dostępu
+   web_fetch do ISAP w tej sesji, patrz pkt 8 poniżej):
+   - art. 41 ust. 1 (kwalifikacje/legitymacje/umundurowanie PSŁ):
+     rozp. MŚ z 17.06.2005 r. (Dz.U. 2005 nr 115 poz. 966), następca
+     rozp. z 23.07.1997 r. (Dz.U. 1997 nr 119 poz. 755, uchylone) —
+     źródła zbieżne (infor.pl, dystynkcje.pl).
+   - art. 41 ust. 2 pkt 1 (współdziałanie z Policją i PZŁ): najstarsze
+     odnalezione źródło — rozp. z 1997 r. (Dz.U. 1997 nr 73 poz. 460);
+     ⚠️ nieustalone, czy istnieje nowszy następca — do sprawdzenia.
+   - art. 41 ust. 2 pkt 2 i ust. 3 (broń palna bojowa, myśliwska
+     śrutowa, amunicja, miotacze gazu w siedzibach PSŁ): **DWIE
+     kolejne wersje odnalezione** — Dz.U. 2002 nr 179 poz. 1497 (broń
+     krótka) i Dz.U. 2005 nr 116 poz. 984 (bojowa/śrutowa/miotacze) —
+     ⚠️ relacja między nimi (czy 2005 w całości zastąpiło 2002, czy
+     regulują różny zakres broni) NIE rozstrzygnięta źródłowo w tej
+     sesji.
+   Zapoznaj się z art. 49 ust. 1 (szacowanie szkód) osobno w module
+   szkód łowieckich — rozp. MŚ z 16.04.2019 r., Dz.U. 2019 poz. 776.
+   **Pozostaje otwarte:** ostateczne potwierdzenie aktualności (czy
+   któreś z powyższych zostało uchylone/zastąpione po dacie wskazanej) —
+   niewykonalne bez bezpośredniego dostępu do ISAP w tym środowisku.
+4. ✅ **ZWERYFIKOWANE (2026-08-18, F-91 pkt 4):** odesłanie do „kolegium
+   do spraw wykroczeń" (art. 39 ust. 2 pkt 8) to **relikt redakcyjny** —
+   kolegia ds. wykroczeń zniesione ustawą z 2001 r. (zastąpione przez sądy
+   powszechne, wydziały grodzkie/KPW), przepis Prawa łowieckiego nie był
+   nowelizowany w tym zakresie. Praktyczna wykładnia: odesłanie czytać jako
+   nieaktualne / bezprzedmiotowe, kompetencję przejął sąd rejonowy w trybie
+   KPW. Brak odnalezionej sygnatury orzeczniczej wprost do tego przepisu w
+   tej sesji — pozostaje ⚠️ [NIEWERYFIKOWANE] co do orzecznictwa, ale sam
+   fakt zniesienia kolegiów jest potwierdzony (powszechnie znany fakt
+   legislacyjny, spójny z historią reformy z 2001 r.).
+5. ✅ **ZWERYFIKOWANE (2026-08-18, F-91 pkt 5):** status Straży Ochrony
+   Przyrody, do której odsyła art. 39 ust. 8 pkt 1 — **SOP jako instytucja
+   o podstawie ustawowej NIE ISTNIEJE od 2001 r.** Nowelizacja ustawy o
+   ochronie przyrody z 2000 r. uchyliła rozdział VI (w tym art. 48) dawnej
+   ustawy z 16.10.1991 r., na którym opierała się SOP; obecna ustawa o
+   ochronie przyrody (Dz.U. 2004, tekst jednolity) NIE zawiera odpowiednika
+   SOP. Odesłanie w art. 39 ust. 8 pkt 1 Prawa łowieckiego jest zatem
+   **kolejnym reliktem redakcyjnym analogicznym do pkt 4** — odsyła do
+   uprawnień instytucji, której ustawowa podstawa nie istnieje od ponad
+   dwóch dekad (źródła: interpelacja poselska orka2.sejm.gov.pl,
+   encyklopedialesna.com, pl.wikipedia.org — spójne). Praktyczny skutek:
+   przepis art. 39 ust. 8 pkt 1 należy traktować jako **martwy / bez
+   samodzielnej treści normatywnej** do czasu ewentualnej nowelizacji.
 6. Aktualna metryka ustawy z 14.12.2018 o ochronie danych osobowych
    (przestępczość) — z `dr-11`, nie z treści Prawa łowieckiego.
 7. Orzecznictwo do art. 39 (granice uprawnień, przekroczenie) — **żadnej
    sygnatury nie powołano w tej sesji**; uruchomić `orzeczenia-sadowe-v2`
    przed użyciem.
-8. Kontrola nowelizacji po t.j. 2025.539 — ⛔ niewykonalna bez ISAP.
+8. Kontrola nowelizacji po t.j. 2025.539 — ⛔ niewykonalna bez ISAP
+   (potwierdzone ponownie 2026-08-18: isap.sejm.gov.pl i api.sejm.gov.pl
+   zwracają ROBOTS_DISALLOWED dla web_fetch w tym środowisku — ograniczenie
+   narzędziowe, nie do obejścia w tej sesji; źródłem pozostają serwisy
+   pochodne, każdorazowo krzyżowo weryfikowane, RZĄD 3).
 
 ---
 
 ## CHANGELOG
 
+- **2026-08-18** — F-91, ogon punktowy: **3 punkty ZWERYFIKOWANE i ZAMKNIĘTE**
+  z listy ⚠️ NIEZWERYFIKOWANE (pkt 2, 4, 5 tej listy = odpowiadające punkty
+  ogona F-91 w `WARN-OTWARTE.md`): termin zażalenia art. 39 ust. 10 → 7 dni
+  z art. 460 KPK (gałąź KPW pozostaje niepotwierdzona); wykładnia odesłania
+  do zniesionych kolegiów ds. wykroczeń — relikt redakcyjny; status Straży
+  Ochrony Przyrody — **instytucja bez podstawy ustawowej od 2001 r.**,
+  odesłanie z art. 39 ust. 8 pkt 1 martwe. ⛔ Odkrycie narzędziowe:
+  `isap.sejm.gov.pl` i `api.sejm.gov.pl` zwracają ROBOTS_DISALLOWED dla
+  `web_fetch` w tym środowisku — ogranicza to zdolność do odczytu pełnego
+  tekstu jednolitego wprost ze źródła RZĄD 1 w kolejnych sesjach F-91;
+  odnotować w `audyt-systemu-v4` jako ograniczenie systemowe, nie
+  jednorazowe. Brak akt/numerów Dz.U. zmienionych w tej sesji — **synchronizacja
+  ROUTING-MAP/mapa_dzu nie dotyczy** (naprawa treści merytorycznej modułu,
+  nie zmiana statusu aktu — zgodnie z rozróżnieniem ZASADA 12).
 - **2026-08-16g** — utworzenie modułu. Naprawa kolejnego punktu
   priorytetowego flagi **F-91**: Rozdz. 7 Prawa łowieckiego (art. 36–41,
   **w tym 38a**), w całości. Metoda standardowa: strona ROZDZIAŁU

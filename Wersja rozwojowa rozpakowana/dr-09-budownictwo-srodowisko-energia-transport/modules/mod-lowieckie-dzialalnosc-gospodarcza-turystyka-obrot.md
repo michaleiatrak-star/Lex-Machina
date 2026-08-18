@@ -262,18 +262,44 @@ Sprawa dotyczy przedsiębiorcy oferującego USŁUGI TURYSTYCZNE z polowaniami
 
 ## Punkty ⚠️ NIEUSTALONE (5)
 
-1. Dokładna metryka i data nowelizacji uchylającej art. 17, 19, 20 —
-   istotne wyłącznie przy sporach o stan prawny sprzed uchylenia (np.
-   historyczny wpis do dawnego rejestru polowań z art. 17).
-2. Aktualne metryki i stawki dwóch rozporządzeń wykonawczych z art. 18
-   ust. 4-5 (minimalna suma gwarancji, szczegółowy zakres ubezpieczenia
-   obowiązkowego).
+1. ✅ **CZĘŚCIOWO ZWERYFIKOWANE (2026-08-18, F-91 pkt 15):** nowelizacja
+   uchylająca dawne art. 17, 19, 20 — **ustawa z 22.03.2018 r. o zmianie
+   ustawy Prawo łowieckie oraz niektórych innych ustaw (Dz.U. 2018 poz.
+   651)**, weszła w życie 1.04.2018 r. (bardzo krótkie vacatio legis —
+   podpisana 29.03, weszła w życie 3 dni później). Ustawa kompleksowo
+   przebudowała Rozdz. 4 (zastąpienie koncesji reżimem
+   zezwoleń/wpisu do rejestru), co jest spójne z ustaleniem sesji
+   2026-08-17 (art. 17/19/20 uchylone). Kontekst geneza: wyrok TK z
+   10.07.2014, sygn. **P 19/13** (niekonstytucyjność poprzedniego reżimu
+   obejmowania nieruchomości obwodem łowieckim bez ochrony prawnej
+   właściciela) — utrata mocy przepisu po 18 mies. wymusiła całą
+   nowelizację 2018. ⚠️ **Dokładne wskazanie, KTÓRY artykuł ustawy
+   zmieniającej uchylił każdy z art. 17/19/20 z osobna — NIE ustalone**
+   (potwierdzony sam fakt i akt nowelizujący, nie numeracja przepisu
+   zmieniającego wewnątrz Dz.U. 2018.651).
+2. ✅ **CZĘŚCIOWO ZWERYFIKOWANE (2026-08-18, F-91 pkt 2):** rozporządzenie
+   wykonawcze z art. 18 ust. 5 (obecna numeracja t.j. 2025.539) — ubezpieczenie
+   OC przedsiębiorcy działalność gospodarcza w zakresie łowiectwa: **rozp.
+   Ministra Finansów z 19.02.2005 r., Dz.U. 2005 nr 32 poz. 283**
+   (potwierdzone zbieżnie: piu.org.pl, atea.pl, pzu.pl — minimalna suma
+   gwarancyjna m.in. 20 tys. euro / 10 tys. euro w zależności od zakresu
+   działalności). ⚠️ Flaga oryginalnie mówiła o "2 aktach" z ust. 4-5 —
+   w tej sesji odnaleziono TYLKO JEDEN akt wykonawczy (do ust. 5 wg
+   obecnej numeracji); drugi akt (jeśli istnieje pod inną numeracją
+   sprzed nowelizacji 2018 r., możliwe przesunięcie ust. 4→5) —
+   NIEODNALEZIONY, pozostaje otwarte. Możliwe, że pierwotna flaga liczyła
+   podwójnie tę samą delegację pod starą i nową numeracją — do wyjaśnienia.
 3. Rozbieżność w brzmieniu art. 22 ust. 1 pkt 2 między źródłem pobranym
    w tej sesji ("przepisy o produktach pochodzenia zwierzęcego") a
    formułą ustaloną wcześniej w module Rozdz. 7 — możliwy efekt
    nowelizacji upraszczającej, wymaga weryfikacji bezpośrednio w ISAP.
-4. Aktualna metryka rozporządzenia wykonawczego z art. 22 ust. 2 (zakres
-   i wzór ewidencji skupu).
+4. ✅ **ZWERYFIKOWANE (2026-08-18, F-91 pkt 2):** rozporządzenie z art. 22
+   ust. 2 (zakres i wzór ewidencji skupu) — **rozp. Ministra Środowiska,
+   Dz.U. 2005 nr 27 poz. 231** "w sprawie ewidencji skupu zwierzyny żywej,
+   tusz zwierzyny i ich części", wydane na podstawie art. 22 ust. 2 ustawy
+   (źródło: prawo.pl). Metryka aktu potwierdzona; **aktualność (czy nadal
+   obowiązuje w tym brzmieniu) NIE potwierdzona** — ograniczenie ISAP,
+   patrz uwaga systemowa w CHANGELOG.
 5. Czy istnieje minimalny standard długości terminu wyznaczanego w
    wezwaniu z art. 22a ust. 1 (np. z odesłania do Prawa przedsiębiorców),
    czy jest to w pełni uznaniowe dla marszałka województwa.

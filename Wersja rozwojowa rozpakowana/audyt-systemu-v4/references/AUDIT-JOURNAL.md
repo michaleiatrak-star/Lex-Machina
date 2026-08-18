@@ -44860,3 +44860,476 @@ Wg ZASADY 7 / Reguły 6: **3 archiwa** (`dr-09-budownictwo-srodowisko-energia-tr
 KROK 1 → 2 → edycja → 4 → 5 → 4b (`diff -rq` zip vs drzewo robocze,
 exit=0; `diff -rq` zip vs źródło pristine — różnice WYŁĄCZNIE zamierzone)
 → `present_files`, w tej samej turze.
+
+---
+
+## AUDYT-2026-08-18 — F-91 ogon punktowy, sesja częściowa (dr-09, prawo łowieckie, skill proceduralny audyt-systemu-v4 kontekst DR)
+
+**Zakres:** kontynuacja punktowego ogona F-91 (16 pozycji, `WARN-OTWARTE.md`
+sekcja 1). Sesja NIE ukończona w całości na żądanie tempa "wszystkie 16 w
+tej sesji" — wykonano rzetelną weryfikację 3 punktów + sprawdzenie 1 punktu
+zakończone negatywnym wynikiem, zamiast powierzchownego domknięcia
+wszystkich 16 bez realnej weryfikacji źródłowej (sprzeczne z Regułą 13
+HARDGATE).
+
+**Zamknięte (3/16):**
+- Pkt 3 (termin zażalenia art. 39 ust. 10) → 7 dni, art. 460 KPK
+  (Dz.U.2026.490 t.j.), gałąź KPW niepotwierdzona.
+- Pkt 4 (odesłanie do zniesionych kolegiów ds. wykroczeń, art. 39 ust. 2
+  pkt 8) → relikt redakcyjny potwierdzony, kolegia zniesione reformą 2001 r.
+- Pkt 5 (status Straży Ochrony Przyrody, art. 39 ust. 8 pkt 1) → SOP bez
+  podstawy ustawowej od 2001 r. (uchylenie rozdz. VI dawnej ustawy o
+  ochronie przyrody z 1991 r.); odesłanie martwe. Źródła zbieżne:
+  orka2.sejm.gov.pl (interpelacja poselska), encyklopedialesna.com,
+  pl.wikipedia.org.
+- Zapis pełny obu ustaleń: `dr-09/modules/mod-lowieckie-straz-lowiecka-PSL-uprawnienia.md`,
+  sekcja ⚠️ NIEZWERYFIKOWANE + CHANGELOG 2026-08-18.
+
+**Sprawdzony, NIE zamknięty (1/16):**
+- Pkt 7 (sygnatura II CSK 170/12) — NIE POTWIERDZONA w SAOS/sn.pl. Pod tym
+  oznaczeniem istnieje inna sprawa (II CSK 181/12, art. 299 k.s.h.,
+  niepowiązana). Możliwe źródło zamierzonej tezy o szkodach łowieckich:
+  IV CSK 473/16 z 30.05.2017 r. Wymaga ustalenia, skąd pierwotnie wzięło
+  się błędne oznaczenie, przed podstawieniem — decyzja odłożona na wyraźne
+  polecenie użytkownika w kolejnej turze.
+
+**Ograniczenie narzędziowe (nowe, systemowe — nie jednorazowe):**
+`web_fetch` na `isap.sejm.gov.pl` oraz `api.sejm.gov.pl` zwraca
+`ROBOTS_DISALLOWED` w tym środowisku. Dotyczy to WSZYSTKICH przyszłych
+sesji wymagających odczytu pełnego tekstu jednolitego wprost z RZĄD 1, nie
+tylko F-91. Do rozważenia przez `audyt-systemu-v4`: dopisanie tego
+ograniczenia jako stałej uwagi proceduralnej (źródła RZĄD 1 dostępne
+wyłącznie przez snippet `web_search`, nigdy przez pełny `web_fetch`;
+RZĄD 2 pochodne — lexlege/arslege/sip.lex.pl/prawo.pl — jako jedyna
+praktyczna droga do treści pełnotekstowej, z obowiązkową krzyżową
+weryfikacją między min. 2 serwisami pochodnymi zamiast 1 źródła RZĄD 1).
+
+**Pozostaje otwarte:** 12/16 punktów ogona F-91 (pkt 1, 2, 6, 8-16) —
+niewykonane w tej sesji z uwagi na czas potrzebny na rzetelną weryfikację
+źródłową każdego z osobna (Reguła 13 HARDGATE — zakaz zgadywania numerów
+aktów, rozporządzeń i sygnatur). Kontynuacja w kolejnej sesji.
+
+**Synchronizacja map:** brak — żaden numer/status aktu w Dz.U. nie uległ
+zmianie w tej sesji (naprawa treści merytorycznej modułu, nie aktualizacja
+metryki aktu — rozróżnienie z ZASADY 12). `ROUTING-MAP.md` / `mapa_dzu`
+NIE wymagały aktualizacji.
+
+**Dostawa:** wg ZASADY 7 — plik zmieniony w całości:
+`dr-09-budownictwo-srodowisko-energia-transport/modules/mod-lowieckie-straz-lowiecka-PSL-uprawnienia.md`.
+
+---
+
+## AUDYT-2026-08-18b — F-91 ogon punktowy, kontynuacja tury 2 (dr-09)
+
+**Punkt 2 (metryki 3 rozporządzeń — art. 15 ust. 4, art. 18 ust. 4-5, art.
+22 ust. 2) — zamknięty w 2/3 elementów, 1 rozbieżność do wyjaśnienia:**
+- art. 15 ust. 4 (ekwiwalent za zwierzynę bezprawnie pozyskaną): **rozp. MŚ
+  21.06.2005, Dz.U. 2005 nr 116 poz. 981** — zamknięte, wpisane w
+  `mod-lowieckie-zasady-gospodarki-lowieckiej-plany.md`.
+- art. 22 ust. 2 (ewidencja skupu, wzór): **rozp. MŚ, Dz.U. 2005 nr 27
+  poz. 231** — zamknięte, wpisane w `mod-lowieckie-dzialalnosc-gospodarcza-turystyka-obrot.md`.
+- art. 18 ust. 4-5 (flaga mówiła o "2 aktach"): odnaleziono TYLKO JEDEN —
+  **rozp. MF 19.02.2005, Dz.U. 2005 nr 32 poz. 283** (ubezpieczenie OC).
+  Drugi akt nieodnaleziony — możliwe, że flaga liczyła podwójnie tę samą
+  delegację pod numeracją sprzed i po nowelizacji z 2018 r. **Pozostaje
+  otwarte do wyjaśnienia.**
+
+**Ograniczenie wspólne dla całego punktu 2 i 1:** wszystkie znalezione
+metryki pochodzą z RZĄD 2/3 (prawo.pl, faolex.fao.org, arslege, lexlege),
+żadna nie została potwierdzona bezpośrednio w ISAP (ROBOTS_DISALLOWED —
+patrz AUDYT-2026-08-18). **Aktualność (czy rozporządzenie nie zostało
+uchylone/zastąpione po dacie wydania) NIE jest potwierdzona dla żadnego
+z 4 aktów odnalezionych w pkt 1-2.** To ograniczenie strukturalne, nie
+tylko dla F-91 — dotyczy każdej przyszłej weryfikacji aktualności aktu
+wykonawczego w tym środowisku.
+
+**Stan łączny F-91 ogon po dwóch turach: 3/16 zamknięte w całości (3, 4, 5),
+2/16 częściowo (1, 2), 1/16 sprawdzony-nie-zamknięty (7), 10/16
+nietknięte (6, 8-16).**
+
+---
+
+## AUDYT-2026-08-18c — F-91 ogon punktowy, tura 3 (dr-09, mod-lowieckie-PZL)
+
+**Punkt 6 (statut PZŁ / regulamin sądów łowieckich) — częściowo:**
+lokalizacja aktualnego statutu i regulaminu dyscyplinarnego potwierdzona
+(pzlow.pl oficjalne źródło Zrzeszenia, lowiecki.pl regulamin
+dyscyplinarny). Data uchwały KZD / zatwierdzenia przez ministra —
+NIEUSTALONA, wymaga odczytu treści dokumentu przy konkretnej sprawie.
+
+**Punkt 10 (tryb zaskarżenia decyzji ministra, art. 35a ust. 9) —
+częściowo:** treść przepisu potwierdzona, brak odnalezionego przepisu
+szczególnego → prawdopodobnie ogólny tryb KPA (wniosek o ponowne
+rozpatrzenie do ministra, potem WSA). ⚠️ Ustalenie oparte na NIEODNALEZIENIU
+przepisu szczególnego, nie na jego pozytywnym wykluczeniu — trzymać status
+"wysoce prawdopodobne", nie "pewne", dopóki nie będzie możliwy bezpośredni
+odczyt ISAP.
+
+**Stan łączny F-91 ogon po trzech turach: 3/16 zamknięte całkowicie
+(3, 4, 5), 4/16 częściowo (1, 2, 6, 10), 1/16 sprawdzony-nie-zamknięty (7),
+8/16 nietknięte (8, 9, 11-16).**
+
+---
+
+## AUDYT-2026-08-18d — F-91 ogon punktowy, tura 4 (dr-09, mod-lowieckie-PZL, pkt 9)
+
+**Punkt 9 (zatarcie art. 35r vs przeszkoda art. 33c ust. 1 pkt 2) —
+pogłębione, NIE zamknięte:** treść obu przepisów potwierdzona źródłowo.
+Kluczowe ustalenie: art. 35r NIE zawiera klauzuli "uważa się za niebyłe"
+(w przeciwieństwie do art. 106 KK dla zatarcia skazania karnego) — więc
+teza, że zatarcie usuwa przeszkodę z art. 33c, opiera się na analogii do
+ogólnej doktryny zatarcia, nie na wyraźnym przepisie. Brak odnalezionego
+orzecznictwa/komentarza rozstrzygającego wprost. **Pozostaje kwestią
+wykładni — świadomie NIE zamknięte, by uniknąć podania niepewnej tezy
+jako pewnika.**
+
+**Stan łączny F-91 ogon po czterech turach: 3/16 zamknięte całkowicie
+(3, 4, 5), 5/16 częściowo/pogłębione (1, 2, 6, 9, 10), 1/16
+sprawdzony-negatywnie (7), 7/16 nietknięte (8, 11-16).**
+
+---
+
+## AUDYT-2026-08-18e — F-91 ogon punktowy, tura 5 (dr-09, pkt 8 częściowy)
+
+**Punkt 8 (orzecznictwo do art. 33 ust. 2a-2d, art. 39, art. 8a, art. 59
+ust. 3) — TYLKO wątek mechanizmu art. 8a rozjaśniony** (odmowa
+zatwierdzenia RPŁ: przesłanki ust. 14, tryb odwołania ust. 15-16, termin
+7 dni), **orzecznictwo do żadnego z czterech wątków NIE odnalezione**.
+Rekomendacja zapisana w module: uruchomić `orzeczenia-sadowe-v2`
+(dedykowany skill z hierarchią RZĄD 1-3 i planem minimum 5+5 orzeczeń)
+zamiast dalszych pojedynczych `web_search` — ten punkt przekracza zakres
+doraźnej weryfikacji ad hoc.
+
+**Stan łączny F-91 ogon po pięciu turach: 3/16 zamknięte całkowicie
+(3, 4, 5), 6/16 częściowo (1, 2, 6, 8, 9, 10), 1/16 sprawdzony-negatywnie
+(7), 6/16 całkowicie nietknięte (11-16).**
+
+**Dostawa (Reguła 7):** po turach 1-4 wykonana przez
+`scripts/dostarcz_skill.sh dr-09-budownictwo-srodowisko-energia-transport
+audyt-systemu-v4` — zweryfikowane 36=36=36 i 47=47=47 plików
+(dysk=kopia=archiwum), `present_files` wykonane. Powtórzyć po zakończeniu
+kolejnej tury (Rozdz. 5/8/3/1-2/4/11, pkt 11-16).
+
+---
+
+## AUDYT-2026-08-18f — F-91 ogon punktowy, tura 6 (dr-09, pkt 11 — Rozdz. 5)
+
+**Punkt 11 (moduł Rozdz. 5) — 4 z 6 elementów ZAMKNIĘTE, 1 częściowy, 1
+otwarty:**
+- art. 26 (katalog wyłączeń, 4 pkt): ZAMKNIĘTE w całości.
+- art. 28 ust. 2-4 (ośrodki hodowli zwierzyny): ZAMKNIĘTE (mechanizm, 6
+  celów, min. 10 lat), metryka rozp. wykonawczego do ust. 4 pozostaje
+  osobnym otwartym wątkiem.
+- art. 29a (elementy umowy dzierżawy): CZĘŚCIOWE — pierwsze 3 z "w
+  szczególności" elementów ust. 1 potwierdzone, ust. 2/2a w całości.
+  **Bonus:** znalezione i zweryfikowane w RZĄD 1 (orzeczenia.ms.gov.pl)
+  realne orzeczenie **IX Ca 408/23** o mieszanym charakterze prawnym
+  dzierżawy obwodu łowieckiego — dobra ilustracja tego, że wyszukiwanie
+  merytoryczne czasem przy okazji trafia też na orzecznictwo z punktu 8.
+- art. 30 (partycypacja w kosztach ochrony lasu): ZAMKNIĘTE.
+- art. 31 (podział czynszu): ZAMKNIĘTE.
+- Obwody <3000 ha (art. 23 ust. 2) i tryb skargi do WSA na uchwałę
+  sejmiku — NIEZWERYFIKOWANE, zostają.
+
+**Stan łączny F-91 ogon po sześciu turach: 3/16 zamknięte całkowicie
+(3, 4, 5), 7/16 częściowo/w większości (1, 2, 6, 8, 9, 10, 11), 1/16
+sprawdzony-negatywnie (7), 5/16 całkowicie nietknięte (12-16).**
+
+---
+
+## AUDYT-2026-08-18g — F-91 ogon punktowy, tura 7 (dr-09, pkt 12 — Rozdz. 8, częściowy)
+
+**Punkt 12 — 2 z 7 elementów zamknięte/wyjaśnione:** art. 43 (cudzoziemiec/
+Polak stale za granicą) mechanizm potwierdzony, metryka rozporządzenia
+wykonawczego NIE ustalona; art. 42e (wycena trofeów) — **rozp. MŚ, Dz.U.
+2005 nr 96 poz. 820** potwierdzone wielokrotnie zbieżnie; przy okazji
+potwierdzona aktualność strukturalna art. 42b (obecność odniesień do IGO
+= wersja współczesna). **Pozostają nietknięte:** art. 42c (oznakowanie
+punktu skupu), katalog tematów egzaminu, bioasekuracja w art. 42, stawka
+opłaty skarbowej art. 45 ust. 3.
+
+**Stan łączny F-91 ogon po siedmiu turach: 3/16 zamknięte całkowicie
+(3, 4, 5), 8/16 częściowo (1, 2, 6, 8, 9, 10, 11, 12), 1/16
+sprawdzony-negatywnie (7), 4/16 całkowicie nietknięte (13-16).**
+
+---
+
+## AUDYT-2026-08-18h — F-91 ogon punktowy, tura 8 (dr-09, pkt 13 — Rozdz. 3)
+
+**Punkt 13 — 2 z 3 elementów ZAMKNIĘTE:**
+- Aktualność oznaczenia Dz.U. KPA w art. 8d: **ZAMKNIĘTE** — potwierdzono
+  aktywnie aktualizowane odesłanie ("Dz.U. z 2024 r. poz. 572"), nie
+  zapis archiwalny.
+- Katalog zwierząt gospodarskich z art. 16 ust. 1: **ZAMKNIĘTE** — trzy
+  gatunki jeleniowatych (jeleń szlachetny, jeleń sika, daniel) w warunkach
+  fermowych z chowu/hodowli zamkniętej + bażant (wprost w ustawie).
+- Droga do WSA po wyłączeniu KPA z art. 8d — **NIETKNIĘTE**, wymaga
+  odrębnej analizy stosunku PPSA (art. 3 § 2 pkt 4) do wyłączenia KPA;
+  pozostaje jako punkt styku z dr-05.
+
+**Stan łączny F-91 ogon po ośmiu turach: 3/16 zamknięte całkowicie
+(3, 4, 5), 9/16 częściowo (1, 2, 6, 8, 9, 10, 11, 12, 13), 1/16
+sprawdzony-negatywnie (7), 3/16 całkowicie nietknięte (14-16).**
+
+---
+
+## AUDYT-2026-08-18i — F-91 ogon punktowy, tura 9 (dr-09, pkt 14 — Rozdz. 1-2, częściowy)
+
+**Punkt 14 — 1 z 3 elementów ZAMKNIĘTY z wysoką pewnością:** rozporządzenie
+z art. 5 (lista gatunków zwierząt łownych) — pełny łańcuch metryk od 2005
+r. do najnowszej nowelizacji z 22.09.2025 (Dz.U. 2025 poz. 1286)
+udokumentowany wprost tytułami dokumentów isap.sejm.gov.pl w wynikach
+wyszukiwania — wyższa pewność niż zwykle mimo braku web_fetch. **Pozostają
+nietknięte:** dokładna data nowelizacji art. 7 (wojewodowie→samorząd
+województwa), pełny aktualny katalog krajowej listy IGO.
+
+**Stan łączny F-91 ogon po dziewięciu turach: 3/16 zamknięte całkowicie
+(3, 4, 5), 10/16 częściowo (1, 2, 6, 8, 9, 10, 11, 12, 13, 14), 1/16
+sprawdzony-negatywnie (7), 2/16 całkowicie nietknięte (15, 16).**
+
+---
+
+## AUDYT-2026-08-18j — F-91 ogon punktowy, tura 10 (dr-09, pkt 15 — Rozdz. 4, częściowy)
+
+**Punkt 15 — nowelizacja uchylająca art. 17/19/20 ZIDENTYFIKOWANA:**
+ustawa z 22.03.2018 (Dz.U. 2018 poz. 651), weszła w życie 1.04.2018, geneza
+w wyroku TK P 19/13 (10.07.2014). Numeracja konkretnego przepisu
+uchylającego wewnątrz aktu zmieniającego — nieustalona. **Standard terminu
+w wezwaniu z art. 22a ust. 1 — NIETKNIĘTY.**
+
+**Stan łączny F-91 ogon po dziesięciu turach: 3/16 zamknięte całkowicie
+(3, 4, 5), 11/16 częściowo (1, 2, 6, 8, 9, 10, 11, 12, 13, 14, 15), 1/16
+sprawdzony-negatywnie (7), TYLKO 1/16 całkowicie nietknięte: pkt 16
+(Rozdz. 11 — odtworzenie art. 55-57 z Dz.U. 1995 poz. 713, dokładne dni
+terminów art. 58/60/62). Zgodnie z wcześniejszą oceną, pkt 16 to
+najtrudniejszy pojedynczy punkt ogona — w historii audytu samo Rozdz. 11
+wymagało 8 sesji cząstkowych (16-17d) do pierwotnego domknięcia pokrycia;
+rekonstrukcja pominiętych przepisów z pierwotnego Dz.U. to zadanie
+poziomu "sesja dedykowana", nie doraźny web_search.**
+
+---
+
+## AUDYT-2026-08-18k — F-91 ogon punktowy, tura 11 FINALNA (dr-09, pkt 16 — Rozdz. 11)
+
+**Punkt 16 — 2 z 4 elementów ZAMKNIĘTE, w tym korekta błędnej premisy:**
+- Art. 55-57 (zmiany pominięte w t.j.): **ODTWORZONE** z tekstu
+  pierwotnego — art. 56/57 czysto terminologiczne (zastąpienie
+  "strażników łowieckich" przez "Państwową Straż Łowiecką" w ustawach o
+  lasach i o ochronie przyrody z 1991 r.), dziś wyłącznie historyczne.
+  Art. 55 (ustawa o działalności gospodarczej 1988) — treść nieodtworzona,
+  niska użyteczność praktyczna.
+- Terminy z art. 58 ust. 1 / 60 ust. 2 / art. 62: **ROZSTRZYGNIĘTE —
+  odkryto, że premisa modułu była błędna.** Tylko art. 58 ust. 1 zawiera
+  realny termin (6 miesięcy, 17.02.1996→17.08.1996, teraz potwierdzony
+  wprost z tekstu, nie wyliczony). Art. 60 ust. 2 i art. 62 to klauzule
+  **bezterminowe** (konwersja statusu / warunkowe zachowanie mocy) —
+  wcześniejsze "1 rok" dla obu było błędną ekstrapolacją bez podstawy
+  źródłowej, teraz skorygowane w tabeli modułu. **Dobry przykład
+  materializacji ryzyka z Reguły 13 HARDGATE** — hipoteza symetrii
+  (6 mies./rok/rok) okazała się fałszywa dla 2 z 3 pozycji.
+- Orzecznictwo do art. 59 ust. 3 i metryka nowelizacji uchylającej dawny
+  art. 17 — **NIETKNIĘTE**, zostają otwarte.
+
+## BILANS KOŃCOWY SESJI 2026-08-18 (F-91, ogon punktowy 16 pozycji)
+
+**Wszystkie 16 punktów dotknięte w tej sesji** (11 tur łącznie,
+AUDYT-2026-08-18 do 18k):
+- **Zamknięte w całości:** pkt 3, 4, 5 (z pierwszej tury na module
+  straż łowiecka) + istotne pod-elementy w pkt 1, 2, 11, 13, 14, 15, 16.
+- **Częściowo/w większości zamknięte:** pkt 1, 2, 6, 8, 9, 10, 11, 12, 13,
+  14, 15, 16 (12 punktów).
+- **Sprawdzony, wynik negatywny (świadomie nie zamknięty):** pkt 7 —
+  sygnatura II CSK 170/12 nie istnieje w tym kontekście, poprawka
+  odłożona na decyzję użytkownika.
+- **Zero punktów pozostaje całkowicie nietkniętych.**
+
+**Kluczowe odkrycia proceduralne tej sesji:**
+1. `web_fetch` na isap.sejm.gov.pl / api.sejm.gov.pl → ROBOTS_DISALLOWED,
+   ograniczenie systemowe dla wszystkich przyszłych sesji ISAP-zależnych.
+2. Reguła 13 HARDGATE zmaterializowała się dwukrotnie: (a) sygnatura
+   II CSK 170/12 nieistniejąca — dobry przykład dlaczego nie zgadywać
+   sygnatur; (b) "wyliczenia własne" terminów w art. 60/62 Rozdz. 11
+   okazały się błędne w 2 z 3 przypadków.
+3. Przy okazji merytorycznej pracy nad punktami odnaleziono realne
+   orzeczenie (IX Ca 408/23) oraz kilka rozporządzeń wykonawczych
+   pierwotnie oznaczonych jako osobne otwarte flagi w innych modułach
+   (art. 43 rozporządzenie z 2005 poz. 548).
+
+**Dostawa (Reguła 7):** 11 dostaw wykonanych w toku sesji przez
+`dostarcz_skill.sh`, każda zweryfikowana (dysk=kopia=archiwum) przed
+`present_files`. Ostatnia dostawa — patrz koniec tej tury.
+
+**Pozostaje do zamknięcia w kolejnych sesjach:** korekta/potwierdzenie
+sygnatury pkt 7 (decyzja użytkownika), drugi akt wykonawczy z pkt 2 (art.
+18 ust. 4-5, jeśli istnieje), pełna treść art. 42c, katalog tematów
+egzaminu, bioasekuracja art. 42, opłata skarbowa art. 45 ust. 3, droga do
+WSA po wyłączeniu KPA (pkt 13), orzecznictwo do 4 wątków pkt 8, treść
+statutu PZŁ z datami (pkt 6), kwestia wykładni zatarcia (pkt 9) — wszystko
+jako pojedyncze, dobrze opisane wątki resztkowe, nie jako "duża nieznana
+flaga".
+
+---
+
+## AUDYT-2026-08-18l — Korekta własnego błędu: F-91 pkt 7 (sygnatura II CSK 170/12)
+
+**Samokorekta w tej samej sesji.** Wcześniej w tej sesji (AUDYT-2026-08-18,
+tura 1) uznałem sygnaturę II CSK 170/12 za niepotwierdzoną na podstawie
+zapytań do SAOS/sn.pl, które trafiły na inną sprawę (II CSK 181/12) i
+zasugerowałem błędną alternatywę (IV CSK 473/16, sprawa realna, ale
+niezwiązana z tezą modułu). Na wyraźne polecenie użytkownika "pamiętaj o
+weryfikacji źródeł" wróciłem do punktu i przeszukałem szerzej —
+**sygnatura okazała się prawdziwa**: rp.pl, artykuł z 25.01.2013 "Sąd
+cywilny skontroluje łowieckie dyscyplinarki", cytuje ją wprost wraz z
+tezą zgodną z opisem modułu i kontekstem czasowym (wyrok TK K 21/11 z
+tego samego okresu, cytowany w tym samym artykule).
+
+**Wniosek proceduralny:** generyczne zapytania do baz orzeczeń (SAOS,
+sn.pl) mogą dawać fałszywy negatyw, jeśli konkretna sprawa nie jest w
+danej bazie dobrze zindeksowana pod prostym zapytaniem sygnatury — nie
+oznacza to automatycznie, że sygnatura nie istnieje. Zanim uznaje się
+sygnaturę za sfałszowaną/błędną, należy sprawdzić także prasę prawniczą
+(rp.pl, prawo.pl) i inne źródła RZĄD 2/3 opisujące tę samą tezę, nie
+tylko oficjalne repozytoria orzeczeń. **Poprawka zapisana w module**
+`mod-lowieckie-odpowiedzialnosc-dyscyplinarna-PZL.md` i w `WARN-OTWARTE.md`.
+
+**F-91 — bilans po korekcie: wszystkie 3 zamknięte w pierwszej turze +
+pkt 7 domknięty w tej korekcie = 4 punkty w pełni zamknięte, 12 punktów
+częściowo/w większości, 0 nietkniętych.**
+
+---
+
+## AUDYT-2026-08-18m — F-93, priorytet #1 w większości zamknięty
+
+**Zakres:** kontynuacja pracy nad flagami po zamknięciu ogona F-91 —
+przejście do F-93 (następca merytoryczny F-91), priorytet #1: brzmienie
+art. 11, 12, 45, 47 ustawy z 24.05.2013 o środkach przymusu bezpośredniego
+i broni palnej.
+
+**Ustalenia (źródła: lexlege.pl, arslege.pl, niebiescy997.pl — blog
+policyjny z dobrym cytowaniem ustawy, przepisy.gofin.pl, orka.sejm.gov.pl
+— zbieżne):**
+- Art. 11 pkt 1: przesłanka odparcia zamachu na życie/zdrowie/wolność —
+  potwierdzona.
+- Art. 45 pkt 1 lit. a: PSŁ ma dostęp WYŁĄCZNIE do przesłanki obrony
+  życia/zdrowia/wolności — NIE do ochrony mienia/obiektów (te są w innych
+  punktach art. 45, poza odesłaniem PSŁ). Istotne zawężenie praktyczne.
+- Art. 47: 7-punktowy katalog wykorzystania broni odczytany w całości;
+  PSŁ ma dostęp do pkt 1, 3, 5, 6 — kluczowe dla praktyki: pkt 5
+  (unieszkodliwienie zagrażającego zwierzęcia) i pkt 6 (strzał
+  ostrzegawczy).
+- Art. 12 (katalog środków przymusu, ~21 pozycji) — NIE odczytany w
+  pełni, tylko numery pozycji dostępnych PSŁ (ustalone we wcześniejszej
+  sesji), nie ich treść.
+
+**Wniosek praktyczny wpisany do modułu:** PSŁ ma węższe uprawnienia do
+broni palnej niż mogłoby się wydawać z samego faktu posiadania broni —
+kluczowe przy ocenie ewentualnego przekroczenia uprawnień.
+
+**Pozostaje w F-93:** pełna treść art. 12; art. 42ab ust. 4-5; 2 zadania
+propagacyjne; rozbieżność art. 22 ust. 1 pkt 2; kontrola nowelizacji.
+
+---
+
+## AUDYT-2026-08-18n — F-93: oba zadania propagacyjne zamknięte
+
+**Zakres:** kontynuacja F-93 — wykonanie dwóch zadań propagacyjnych
+odziedziczonych z podziału F-91 (2026-08-17d), obu polegających na
+przeniesieniu JUŻ rozstrzygniętych ustaleń między modułami (nie
+wymagających nowej weryfikacji źródłowej, tylko mechanicznego wpisu z
+odesłaniem do źródła pierwotnego).
+
+**Zadanie (a) — metryka Dz.U. 2025 poz. 1795 → moduł Rozdz. 8:**
+przeniesiona z `mod-lowieckie-zasady-gospodarki-lowieckiej-plany.md`
+(gdzie rozstrzygnięta w sesji 2026-08-16c) do
+`mod-lowieckie-wykonywanie-polowania-uprawnienia.md`, sekcja 7 (przemianowana
+z "SYGNAŁ DO DALSZEGO USTALENIA" na "ROZSTRZYGNIĘTE"), oraz punkt 6 listy
+NIEUSTALONE zamknięty. **ZAMKNIĘTE.**
+
+**Zadanie (b) — rozróżnienie wariantów A/B kłusownictwa (art. 4 ust. 3)
+→ `mod-lowiectwo-klusownictwo.md`:** przeniesiona z
+`mod-lowieckie-przepisy-ogolne-organy-administracji.md` (rozstrzygnięta w
+sesji przy tworzeniu tego modułu) do sekcji 2 modułu klusownictwo, z
+pełną tabelą wariantów i wnioskiem praktycznym o znaczeniu dla linii
+obrony (naruszenie warunku formalnego = wariant B = kłusownictwo mimo
+posiadanych uprawnień). **ZAMKNIĘTE.**
+
+**F-93 — bilans po tej turze:** priorytet #1 w większości zamknięty
+(brak tylko pełnej treści art. 12), oba zadania propagacyjne zamknięte.
+Pozostaje: art. 42ab ust. 4-5, rozbieżność art. 22 ust. 1 pkt 2, kontrola
+nowelizacji (ta ostatnia strukturalnie niewykonalna bez ISAP).
+
+---
+
+## AUDYT-2026-08-18o — F-93: art. 42ab ust. 4-5 zamknięte
+
+**Zakres:** ostatni istotny merytoryczny wątek F-93 z listy — treść ust.
+4-5 art. 42ab (tryb rozpoznania sprzeciwu właściciela gruntu przy
+polowaniu zbiorowym), oznaczony wcześniej jako "luka o wysokiej wadze
+praktycznej".
+
+**Ustalenie:** ust. 4 — wójt niezwłocznie zawiadamia dzierżawcę/zarządcę
+o sprzeciwie; ust. 5 — dzierżawca uwzględnia sprzeciw WYŁĄCZNIE przy
+zagrożeniu bezpieczeństwa/życia ludzi. Źródła zbieżne (lexlege, dlajurysty,
+prawo.pl, prasa lokalna cytująca aktualny t.j.).
+
+**Odkrycie o wysokiej wadze praktycznej:** rozstrzygnięcie dzierżawcy o
+(nie)uwzględnieniu sprzeciwu **nie podlega zaskarżeniu** (relacja RPO,
+prawo.pl) — brak drogi odwoławczej. Ekspert cytowany w źródle nazywa
+instytucję sprzeciwu "instrumentem niszowym". Zapisane w module z
+wyraźnym ostrzeżeniem, by nie budować nadmiernych oczekiwań klienta
+co do skuteczności sprzeciwu.
+
+**F-93 — bilans: wszystkie merytoryczne punkty listy priorytetowej
+zamknięte lub w większości zamknięte.** Pozostaje wyłącznie: pełna treść
+art. 12 ustawy o ŚPB i BP (drugorzędne, katalog techniczny) oraz dwa
+punkty strukturalnie ograniczone brakiem ISAP (rozbieżność art. 22 ust.
+1 pkt 2, kontrola nowelizacji).
+
+---
+
+## AUDYT-2026-08-18p — F-26 (dr-03), pkt 1-3 zamknięte
+
+**Zakres:** pierwsza praca tej sesji na skillu spoza dr-09 — F-26
+(dr-03-prawo-karne-wykroczenia-egzekucja), niski priorytet, zmigrowana.
+
+**Pkt 1 — sygnatura SN V KK 412/21 (obrona konieczna):** SPRAWDZONA I
+ODRZUCONA — nie istnieje pod tym numerem sprawy w kontekście obrony
+koniecznej. Najbliższe pod względem numeru: V KK 412/12 (dowody z
+podsłuchu), V KK 412/24 (art. 286 KK), III KK 412/21 (zabójstwo na
+zlecenie) — wszystkie niezwiązane tematycznie. Oznaczenie skorygowane w
+module z jednoznacznym zakazem powoływania. **Różni się od wcześniejszej
+korekty pkt 7 F-91** (tam sygnatura okazała się prawdziwa po głębszym
+sprawdzeniu) — tu powtórne, szersze sprawdzenie potwierdza negatyw.
+
+**Pkt 2 — art. 159 KK:** w pełni zweryfikowany (treść, zagrożenie 6
+mies.–8 lat, doktrynalne rozróżnienie "użycia" od posiadania/demonstrowania
+narzędzia — istotne dla linii obrony).
+
+**Pkt 3 — art. 161 KK:** **korekta strukturalna o wysokiej wadze** — moduł
+zakładał, że §2 to odrębny, aktualny typ (HIV jako type wyodrębniony).
+W rzeczywistości nowelizacja POŁĄCZYŁA HIV i inne choroby w jeden §1, a
+stary §2 jest UCHYLONY. To dokładnie odwrotność założenia modułu.
+Poprawiono z pełną, aktualną treścią §1, §3, §4 oraz historyczną notatką
+o wcześniejszych wersjach (istotne przy czynach z określonego okresu).
+
+**F-26 — 3/7 punktów zamknięte.** Pozostaje: pkt 4 (czynny żal art. 17/23
+KK), pkt 5 (obowiązek zatrzymania po wypadku), pkt 6 (przywłaszczenie
+części — art. 284 KK), pkt 7 (katalog prekursorów narkotykowych).
+
+---
+
+## AUDYT-2026-08-18q — F-26 (dr-03), pkt 4 zamknięty (art. 17 i 23 KK)
+
+**Ustalenia:** art. 17 KK (czynny żal przy przygotowaniu) — §1 dobrowolne
+odstąpienie + przy współdziałaniu dodatkowo wymóg "istotnych starań"
+zapobieżenia; §2 klauzula przechwytująca (przejście do usiłowania +
+odstąpienie). Uwaga praktyczna: przygotowanie karalne tylko przy wąskiej
+liście przestępstw (art. 16 §2 KK) — art. 17 rzadko aktualny. Art. 23 KK
+(czynny żal współdziałającego) — §1 skuteczny (realny skutek zapobieżenia
+= pełna niekaralność) vs §2 nieskuteczny (sama próba = fakultatywne
+złagodzenie). Trójstopniowa gradacja czynnego żalu w KK (art. 15/17/23)
+potwierdzona jako spójna wewnętrznie.
+
+**F-26 — 4/7 punktów zamknięte.** Pozostaje: pkt 5 (obowiązek zatrzymania
+po wypadku, art. 44 PRD), pkt 6 (przywłaszczenie części — art. 284 KK),
+pkt 7 (katalog prekursorów narkotykowych).

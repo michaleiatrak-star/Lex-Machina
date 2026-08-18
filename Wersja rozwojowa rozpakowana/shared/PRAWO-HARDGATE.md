@@ -519,6 +519,84 @@ SCENARIUSZ C — sygnatura istnieje, ale teza jest inna niż podano w źródle w
      użyto tezy z oficjalnej bazy sn.pl."
 ```
 
+## ⛔ KROK DODATKOWY — WERYFIKACJA ROLI CYTOWANEGO FRAGMENTU (dodano
+2026-08-14, na żądanie użytkownika: sprawdzić, czy system rozróżnia
+ustalenie sądu / wykładnię prawa / twierdzenie strony — ODPOWIEDŹ PO
+AUDYCIE: NIE rozróżniał. To naprawia lukę.)
+
+⭐⭐⭐ ISTNIENIE sygnatury + ZGODNOŚĆ tezy z oficjalną bazą (Scenariusze
+A-C wyżej) POTWIERDZAJĄ, że cytat POCHODZI z prawdziwego dokumentu —
+ALE NIE MÓWIĄ NIC o tym, CZYJĄ WYPOWIEDŹ w tym dokumencie cytujesz.
+Każde uzasadnienie orzeczenia typowo zawiera TRZY różne warstwy
+tekstu o zupełnie różnej wartości dowodowej dla pisma procesowego:
+
+```
+[1] USTALENIE/ROZSTRZYGNIĘCIE SĄDU — to, co sąd SAM stwierdził jako
+    wynik swojej oceny (zwykle w części "Sąd zważył, co następuje"
+    / "Sąd Najwyższy zważył" / sentencja) — ⭐⭐⭐ JEDYNA warstwa o
+    PEŁNEJ wartości precedensowej, właściwa do powołania jako "sąd
+    orzekł, że..." / "sąd przyjął, że..."
+
+[2] WYKŁADNIA PRAWA dokonana przez sąd — interpretacja przepisu,
+    zasady, doktryny PRZEZ sąd (może występować w części ustaleń,
+    ale też w obszerniejszych wywodach uzasadnienia) — ⭐⭐ WYSOKA
+    wartość, właściwa do powołania jako "sąd wyjaśnił, że..." /
+    "zgodnie z wykładnią przyjętą przez..."
+
+[3] ZREFEROWANE TWIERDZENIE STRONY — fragment, w którym sąd
+    STRESZCZA lub PRZYTACZA argumentację powoda/pozwanego/skarżącego
+    (typowo w części "Stan faktyczny"/"Stanowiska stron"/opis
+    zarzutów apelacji/kasacji, PRZED właściwym wywodem sądu) — ⭐
+    NISKA LUB ZEROWA wartość dla pisma procesowego, GDY cytowana
+    SAMODZIELNIE, bez zaznaczenia że to relacja, nie stanowisko sądu.
+    ⛔ SZCZEGÓLNIE MYLĄCE, gdy sąd TO twierdzenie ODRZUCIŁ lub w ogóle
+    się do niego nie ustosunkował merytorycznie — cytowanie go jako
+    "sąd stwierdził" byłoby WPROST NIEPRAWDZIWE, mimo że tekst
+    dosłownie pochodzi z autentycznego dokumentu sądowego
+```
+
+⭐⭐⭐ SYGNAŁY TEKSTOWE do rozpoznania warstwy [3] (⭐ NIE wyczerpujące,
+ale najbardziej typowe wzorce redakcyjne polskich uzasadnień):
+```
+- "Powód/powódka podniósł/podniosła, że..."
+- "Pozwany wywodził, iż..."
+- "Skarżący w apelacji/kasacji zarzucił..."
+- "Zdaniem strony powodowej..."
+- "W ocenie wnoszącego skargę kasacyjną..."
+- Cały fragment występuje PRZED zwrotem strukturalnym w rodzaju
+  "Sąd zważył, co następuje" / "Sąd Najwyższy zważył" / "Rozpoznając
+  [środek zaskarżenia], Sąd/Trybunał uznał" — fragmenty PRZED tym
+  zwrotem w uzasadnieniach polskich sądów typowo relacjonują STAN
+  SPRAWY i STANOWISKA STRON, nie własną ocenę sądu
+```
+
+⭐⭐⭐ PROCEDURA OBOWIĄZKOWA: PRZED powołaniem JAKIEGOKOLWIEK cytatu z
+orzeczenia jako poparcia tezy w piśmie procesowym — ustal, z KTÓREJ
+warstwy [1]/[2]/[3] pochodzi (patrz web_fetch treści źródłowej, nie
+tylko sam tekst cytatu bez kontekstu). Jeżeli fragment pochodzi z
+warstwy [3] (twierdzenie strony):
+  → NIE cytuj go jako stanowisko/ustalenie SĄDU
+  → JEŻELI mimo to wartościowy kontekstowo (np. pokazuje argumentację,
+    którą sąd PÓŹNIEJ odrzucił lub przyjął) — cytuj WYRAŹNIE oznaczone:
+    "Powód argumentował, że [cytat], CO SĄD [uznał za zasadne /
+    ODRZUCIŁ jako..., wskazując że...]" — z jasnym wskazaniem
+    OSTATECZNEGO stanowiska sądu, nie samego twierdzenia strony w
+    oderwaniu od rozstrzygnięcia
+  → JEŻELI sąd w ogóle nie odniósł się merytorycznie do tego
+    twierdzenia (np. sprawa rozstrzygnięta na innej podstawie) —
+    fragment [3] NIE NADAJE SIĘ do powołania jako poparcie tezy w
+    piśmie procesowym W OGÓLE — pomiń, nie cytuj
+
+⚠️ TA WERYFIKACJA JEST DODATKOWA względem Scenariuszy A-C (istnienie/
+zgodność tezy) — WSZYSTKIE poziomy muszą być spełnione łącznie:
+sygnatura prawdziwa (Scenariusz B) + teza zgodna z oficjalną bazą
+(Scenariusz C) + cytat pochodzi z warstwy [1] lub [2], nie [3] (ten
+krok). Spełnienie tylko pierwszych dwóch, przy zignorowaniu tego
+trzeciego, PROWADZI DOKŁADNIE do tego samego typu ryzyka co sprawa
+I FZ 104/26 (patrz precedens niżej) — z tą różnicą, że TAM były
+błędne DATY/TEZY, TU cytat może być w 100% dosłownie poprawny, a
+mimo to WPROWADZAĆ W BŁĄD co do tego, KTO faktycznie tak twierdzi.
+
 > ⭐⭐⭐ PRECEDENS UZASADNIAJĄCY SCENARIUSZ C (dodano 2026-08-14, na
 > żądanie użytkownika) — postanowienie NSA z 23.06.2026, sygn.
 > **I FZ 104/26** (skład: SSNSA Sylwester Marciniak), ✅ zweryfikowane
@@ -614,6 +692,20 @@ Przed wysłaniem odpowiedzi zawierającej sygnaturę orzeczenia odpowiedz na ka�
         musi mieć widoczne ⚠️ [NIEWERYFIKOWANE] OBOK SIEBIE, nie tylko przy
         pierwszym wprowadzeniu
     NIE → kontynuuj
+
+□ (dodano 2026-08-14, na żądanie użytkownika) Czy ustaliłeś, z KTÓREJ
+  warstwy uzasadnienia pochodzi cytat — [1] ustalenie/rozstrzygnięcie
+  SĄDU, [2] wykładnia prawa DOKONANA przez sąd, czy [3] zreferowane
+  TWIERDZENIE STRONY (patrz "KROK DODATKOWY — WERYFIKACJA ROLI
+  CYTOWANEGO FRAGMENTU" wyżej)?
+    [1] lub [2] → możesz cytować jako stanowisko sądu
+    [3] → NIE cytuj jako "sąd stwierdził" — albo pomiń, albo zacytuj
+        WYRAŹNIE jako twierdzenie strony Z jednoczesnym wskazaniem
+        jak sąd OSTATECZNIE się do niego odniósł (przyjął/odrzucił/
+        nie rozpoznał)
+    Niepewne (nie sprawdziłeś kontekstu, tylko wyrwany cytat) → WRÓĆ
+        do źródła (web_fetch) i ustal kontekst PRZED wysłaniem — nie
+        zgaduj na podstawie samej treści zdania
 ```
 
 **Zasada finalna:** Lepiej podać zasadę prawną bez sygnatury niż sygnaturę nieistniejącą lub niepasującą.

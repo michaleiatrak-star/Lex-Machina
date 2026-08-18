@@ -1,26 +1,14 @@
 ---
 name: shared
-version: 3.14
+version: 3.16
 type: library
 entrypoint: SKILL.md
 compatibility: "wszystkie skille prawne systemu"
-description: |
-  Biblioteka współdzielonych modułów systemu prawnych skilli. NIE jest
-  samodzielnym skillem — zawiera pliki kanoniczne wczytywane przez inne
-  skille przez view.
-
-  Zawiera: PRAWO-HARDGATE (zakaz cytowania prawa/orzeczeń z pamięci),
-  HYBRID-VALIDATION (walidacja po piśmie), INTAKE-GAP (braki danych,
-  pola, tryby 1-3), POST-VALIDATION, MOD-WALIDACJA_v2 (bloki A-J),
-  FACT-SOURCE-LOCK (FSL-A/B/C), LEGAL-STATUS-LOCK (LSL-1..6), terminy
-  (terminy KPC/KPK/KPW/KPA/KP), FAKTY (zgodność faktyczna pisma),
-  raport-sytuacyjny-integracja (widget Raportu Sytuacyjnego v2),
-  MOD-STEP-TRACKER (v1.0.0 — śledzenie kroków i raportowanie pominięć),
-  DEFINICJE-KLUCZOWE (router do 9 plików w definicje/: DEF-PODMIOTY-WLASNOSC,
-  DEF-ODPOWIEDZIALNOSC-SZKODA, DEF-PRACA, DEF-PROCEDURA, DEF-BUDOWLANE-DROGOWE,
-  DEF-PODATKOWE, DEF-CYWILNE-WYKLADNIA, DEF-ADMINISTRACYJNE, METODOLOGIA-ORKA2),
-  mod-niewidomy-prawa-prawne (osoba niewidoma: prawa procesowe KPK/KPC,
-  ulgi, stopnie niepełnosprawności, Konwencja ONZ).
+description: >-
+  Biblioteka plików kanonicznych systemu prawnych skilli — hardgate, walidacja,
+  definicje, terminy, moduły kancelaryjne. NIE jest samodzielnym skillem i NIE
+  odpowiada na zapytania użytkownika: moduły wczytują inne skille przez `view`.
+  Pełny spis modułów — tabele „Zawartość katalogu" w treści tego pliku.
 dependencies:
   requires: []
   # `shared` z definicji powinien być warstwą bazową bez zależności
@@ -63,6 +51,38 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog:
+  - "3.16 (2026-08-18): SKRÓCENIE POLA `description` we frontmatterze — 1172 → 302
+    znaków. Poprzednia wersja wyliczała w opisie wyzwalającym całą zawartość
+    biblioteki (PRAWO-HARDGATE, HYBRID-VALIDATION, INTAKE-GAP, MOD-WALIDACJA_v2,
+    FSL, LSL, terminy, FAKTY, MOD-STEP-TRACKER, MOD-REJESTR-POKRYCIA-JEDNOSTEK,
+    DEFINICJE-KLUCZOWE z listą 9 plików definicje/, mod-niewidomy-prawa-prawne),
+    co (a) przekraczało limit długości description i groziło ucięciem opisu przy
+    ładowaniu, (b) duplikowało tabele 'Zawartość katalogu' w treści pliku,
+    (c) rozmywało jedyny komunikat, który w tym opisie jest istotny: shared NIE
+    jest skillem wyzwalanym zapytaniem użytkownika. Nowy opis mówi czym jest
+    biblioteka, że nie triggeruje się sama, i kieruje po spis do treści pliku.
+    PRZENIESIONE (nie usunięte) do tabeli w sekcji 'Zawartość katalogu':
+    DEFINICJE-KLUCZOWE.md i mod-niewidomy-prawa-prawne.md — jako jedyne dwa
+    moduły z dawnego description NIEOBECNE dotąd w żadnej tabeli treści.
+    PRZY OKAZJI skorygowano liczebność: definicje/ zawiera 10 plików, nie 9
+    (pominięty był DEF-INTERES-WLASNY-WYLACZENIA.md). Zmiana dotyczy wyłącznie
+    frontmattera i tabeli SKILL.md — ŻADEN plik kanoniczny modułu nie ruszony,
+    więc promień rażenia zerowy (patrz limitations)."
+  - "3.15 (2026-08-18): NOWY MODUŁ — MOD-REJESTR-POKRYCIA-JEDNOSTEK.md (RPK),
+    w odpowiedzi na incydent pominięcia kazusów 100, 140, 148 w sesji
+    160-elementowej (rozwiązywanie kazusów cywilnych). Rejestr plikowy
+    (przetrwa kompaktowanie sesji) pokrycia zbiorów ≥10 ponumerowanych
+    jednostek roboczych — komplementarny do MOD-STEP-TRACKER.md (który
+    śledzi kroki WEWNĄTRZ jednego pipeline'u, nie pokrycie WIELU
+    równorzędnych jednostek). Cztery statusy (DO_ZROBIENIA/ZWERYFIKOWANE/
+    POKRYTE/WYMAGA_WERYFIKACJI), kontrola ciągłości numerycznej przed
+    każdą partią, obowiązkowy commit po partii, procedura po
+    kompaktowaniu, raport końcowy generowany programistycznie z pliku
+    zamiast z pamięci modelu. Skille wskazane jako konsumenci (propagacja
+    OTWARTA, patrz WARN-OTWARTE.md): prawny-router-v3, analizator-przepisow-v2,
+    analizator-dowodow-v3, przesluchanie-swiadkow-v2-min90,
+    chronologia-sprawy-v1, audyt-systemu-v4. Pełny opis: AUDIT-JOURNAL.md
+    AUDYT-2026-08-18."
   - "2.7 (2026-07-12, audyt komercyjny silnika, punkty 1-2 + zamknięcie
     duplikatów): ci_check_shared.py (audyt-systemu-v4/scripts/) wykrył 4
     nieudokumentowane duplikaty bajtowe — wszystkie scalone: NAZEWNICTWO-STRON.md
@@ -165,6 +185,9 @@ Nie jest samodzielnym skillem — pełni rolę biblioteki referencji.
 | `FAKTY_v2.md`                        | Weryfikacja zgodności faktycznej pisma ze źródłem (MOD-FAKTY) |
 | `raport-sytuacyjny-integracja.md` | Sekwencja wywołania widgetu Raportu Sytuacyjnego v2 |
 | `MOD-STEP-TRACKER.md` | ⛔ Śledzenie kroków i raportowanie pominięć — inicjowany w KROK 0-TRACKER routera; każde pominięcie = obowiązek poinformowania użytkownika + czekanie na decyzję |
+| `MOD-REJESTR-POKRYCIA-JEDNOSTEK.md` | ⛔ Rejestr plikowy (RPK) pokrycia zbiorów ≥10 ponumerowanych jednostek (kazusy, dokumenty, świadkowie...) w sesji wieloturowej — inicjowany PRZED podziałem na partie, commit po KAŻDEJ partii, obowiązkowy odczyt po kompaktowaniu; zapobiega cichemu pominięciu pojedynczych jednostek |
+| `DEFINICJE-KLUCZOWE.md` | Router do 10 plików w `definicje/`: DEF-PODMIOTY-WLASNOSC, DEF-ODPOWIEDZIALNOSC-SZKODA, DEF-PRACA, DEF-PROCEDURA, DEF-BUDOWLANE-DROGOWE, DEF-PODATKOWE, DEF-CYWILNE-WYKLADNIA, DEF-ADMINISTRACYJNE, DEF-INTERES-WLASNY-WYLACZENIA, METODOLOGIA-ORKA2 |
+| `mod-niewidomy-prawa-prawne.md` | Osoba niewidoma: prawa procesowe KPK/KPC, ulgi, stopnie niepełnosprawności, Konwencja ONZ o prawach osób niepełnosprawnych |
 
 Pliki w `prawny-router-v3/references/` (nie w shared, ale powiązane):
 | `pokrycie-dziedzinowe.md` | Pełna mapa dziedzin → modułów → powiązanych skilli (28 dziedzin) |
@@ -186,6 +209,7 @@ Każdy skill wczytuje pliki z tego katalogu bezpośrednio przez `view`:
 
 ```
 view /mnt/skills/user/shared/MOD-STEP-TRACKER.md  ← KROK 0-TRACKER (przed wszystkim — ST-INIT)
+view /mnt/skills/user/shared/MOD-REJESTR-POKRYCIA-JEDNOSTEK.md  ← RPK-INIT (gdy zbiór ≥10 ponumerowanych jednostek, np. seria kazusów)
 view /mnt/skills/user/shared/PRAWO-HARDGATE.md  ← wymagane przed każdym przepisem/orzeczeniem
 view /mnt/skills/user/shared/HYBRID-VALIDATION.md
 view /mnt/skills/user/shared/INTAKE-GAP.md

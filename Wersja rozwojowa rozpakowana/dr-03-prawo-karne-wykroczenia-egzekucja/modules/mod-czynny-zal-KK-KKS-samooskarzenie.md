@@ -57,11 +57,39 @@ lub PRZYSPIESZENIE, nie o CAŁKOWITE uniknięcie odpowiedzialności)
   już do DOKONANIA innego, odrębnego przestępstwa (np. przy nieudanym
   zabójstwie sprawca ZDĄŻYŁ spowodować uszczerbek na zdrowiu PRZED
   odstąpieniem) — za TO odrębne przestępstwo sprawca NADAL odpowiada
-□ art. 17 KK — analogiczna instytucja dla PRZYGOTOWANIA (rzadsza w
-  praktyce, ⚠️ dokładne warunki niepotwierdzone w pełni w tej sesji)
-□ art. 23 KK — czynny żal przy WSPÓŁDZIAŁANIU przestępczym
-  (współsprawstwo/podżeganie/pomocnictwo) — ⚠️ dokładne warunki
-  niepotwierdzone w pełni w tej sesji, punkt startowy
+□ ✅ **art. 17 KK — ZWERYFIKOWANE (2026-08-18, F-26):** analogiczna
+  instytucja dla PRZYGOTOWANIA. **§1:** nie podlega karze za przygotowanie,
+  kto DOBROWOLNIE od niego odstąpił, w szczególności zniszczył
+  przygotowane środki lub zapobiegł skorzystaniu z nich w przyszłości;
+  jeżeli sprawca wszedł w porozumienie z inną osobą w celu popełnienia
+  czynu, nie podlega karze TEN, kto DODATKOWO podjął ISTOTNE STARANIA
+  zmierzające do zapobieżenia dokonaniu (nie wystarczy samo własne
+  odstąpienie przy współdziałaniu z inną osobą — trzeba też próbować
+  powstrzymać tę drugą osobę, choć nie trzeba odnieść skutku, wystarczy
+  "istotne starania"). **§2:** nie podlega karze za przygotowanie osoba,
+  do której stosuje się art. 15 §1 (czyli ten, kto po przejściu z
+  przygotowania do usiłowania dobrowolnie odstąpił od usiłowania —
+  klauzula "przechwytująca" sprawcę na późniejszym etapie). ⚠️ **Uwaga
+  praktyczna:** przygotowanie samo w sobie jest karalne TYLKO gdy ustawa
+  tak wprost stanowi (art. 16 §2 KK) — dotyczy wąskiej listy przestępstw
+  (m.in. zamach stanu art. 127, przeciwko bezpieczeństwu powszechnemu
+  art. 168, fałszerstwo dokumentów art. 270 §3) — art. 17 aktualizuje się
+  więc rzadko, tylko przy tych typach. Źródła zbieżne: pl.wikipedia.org,
+  standardyprawa.pl, infor.pl, zpe.gov.pl (materiał edukacyjny MEN).
+□ ✅ **art. 23 KK — ZWERYFIKOWANE (2026-08-18, F-26):** czynny żal przy
+  WSPÓŁDZIAŁANIU przestępczym. **§1 (żal SKUTECZNY):** nie podlega karze
+  współdziałający, który DOBROWOLNIE ZAPOBIEGŁ dokonaniu czynu
+  zabronionego — wymaga REALNEGO SKUTKU (czyn faktycznie nie doszedł do
+  skutku dzięki działaniu współdziałającego). **§2 (żal NIESKUTECZNY, ale
+  premiowany łagodniej):** sąd MOŻE (fakultatywnie, nie musi) zastosować
+  nadzwyczajne złagodzenie kary wobec współdziałającego, który
+  DOBROWOLNIE STARAŁ SIĘ zapobiec dokonaniu, ale mu się nie udało —
+  różnica względem §1 to gradacja: §1 = całkowita niekaralność (skutek
+  osiągnięty), §2 = tylko złagodzenie, i to uznaniowe (skutek nieosiągnięty,
+  liczy się sama próba). Źródła zbieżne: pl.wikipedia.org (cytat wprost
+  obu paragrafów), spójne z ogólną strukturą art. 15 (usiłowanie) i art.
+  17 (przygotowanie) — trójstopniowa gradacja czynnego żalu w KK jest
+  wewnętrznie spójna.
 ```
 
 ---

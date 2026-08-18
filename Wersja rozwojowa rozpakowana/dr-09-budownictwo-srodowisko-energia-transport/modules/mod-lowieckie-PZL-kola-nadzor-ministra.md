@@ -421,23 +421,57 @@ sprawdzić przy sprawie przez `dr-05`.
 
 ## ⚠️ NIEZWERYFIKOWANE — DO USTALENIA PRZY SPRAWIE
 
-1. **Aktualna treść statutu PZŁ** — akt wewnątrzkorporacyjny zatwierdzany
-   przez ministra, nie publikowany w Dz.U.; ustalić datę uchwały KZD i datę
-   zatwierdzenia (powtórzone z modułu Rozdz. 6a).
+1. ✅ **CZĘŚCIOWO ZWERYFIKOWANE (2026-08-18, F-91 pkt 6):** aktualna treść
+   statutu PZŁ dostępna na oficjalnej stronie Zrzeszenia —
+   **pzlow.pl/przepisy-prawne/statut-polskiego-zwiazku-lowieckiego/**
+   (Statut PZŁ + uchwały część I i II), oraz regulamin postępowania
+   dyscyplinarnego przed sądami łowieckimi — lowiecki.pl (Regulamin
+   Postępowania Dyscyplinarnego w PZŁ). ⚠️ **Data uchwały KZD i data
+   zatwierdzenia przez ministra — NIE ustalone w tej sesji** (akt
+   wewnątrzkorporacyjny, poza Dz.U., wymaga odczytu treści dokumentu
+   źródłowego, nie tylko potwierdzenia lokalizacji). Do doczytania przy
+   konkretnej sprawie dyscyplinarnej.
 2. Pełny zakres obowiązków PZŁ jako podmiotu ochrony ludności (art. 32b) —
    do opracowania w `dr-13`, wraz z wpływem nowelizacji 2025.1705 i 2026.646.
-3. Czy **zatarcie ukarania** (art. 35r) usuwa przeszkodę z art. 33c ust. 1
-   pkt 2 — brak przepisu przesądzającego wprost, kwestia wykładni.
-4. Tryb zaskarżenia decyzji ministra z art. 35a ust. 9 — czy przepisy
-   szczególne modyfikują tryb KPA (wniosek o ponowne rozpatrzenie sprawy).
+3. ⚠️ **DALEJ NIEROZSTRZYGNIĘTE, z dodatkowym ustaleniem (2026-08-18,
+   F-91 pkt 9):** treść obu przepisów potwierdzona źródłowo — art. 33c
+   ust. 1 pkt 2: przesłanka to osoba "nie skazana prawomocnym wyrokiem za
+   umyślne przestępstwo lub przestępstwo skarbowe **lub nie była ukarana
+   w postępowaniu dyscyplinarnym**"; art. 35r: "ukaranie przez sąd łowiecki
+   ulega zatarciu po upływie 5 lat od uprawomocnienia się orzeczenia
+   dyscyplinarnego". **Brak w art. 35r wyraźnej klauzuli "uważa się za
+   niebyłe"** (jaką ma np. art. 106 KK dla zatarcia skazania) — więc
+   analogia do ogólnej doktryny zatarcia (skutek retroaktywny, usunięcie
+   przeszkody) jest **prawdopodobna, ale NIE wprost przesądzona w tekście
+   ustawy**; brak odnalezionego orzecznictwa lub komentarza rozstrzygającego
+   to wprost w tej sesji. Pozostaje kwestią wykładni.
+4. ✅ **CZĘŚCIOWO ZWERYFIKOWANE (2026-08-18, F-91 pkt 10):** tryb
+   zaskarżenia decyzji ministra z art. 35a ust. 9 — treść przepisu
+   potwierdzona (arslege.pl, dlajurysty.pl): decyzja administracyjna
+   ministra właściwego do spraw środowiska (uchylenie/stwierdzenie
+   nieważności uchwały KZD lub NRŁ niezgodnej z prawem/statutem, albo
+   upomnienie). **Brak odnalezionego przepisu szczególnego** modyfikującego
+   tryb zaskarżenia — wobec braku organu wyższego stopnia nad ministrem
+   zastosowanie ma ogólna zasada z art. 127 § 3 KPA (wniosek o ponowne
+   rozpatrzenie sprawy do tego samego ministra), a następnie skarga do
+   WSA. ⚠️ **Nie potwierdzono źródłowo braku przepisu szczególnego** —
+   ustalenie oparte na braku wzmianki w odczytanych źródłach, nie na
+   pozytywnym potwierdzeniu w ISAP; traktować jako wysoce prawdopodobne,
+   nie pewne.
 5. Metryka Dz.U. ustawy z 21.11.2025 o zdrowiu zwierząt (art. 34 pkt 11a) —
    sygnał otwarty od 2026-08-16, wciąż nieustalony.
 6. Kontrola nowelizacji Prawa łowieckiego po t.j. 2025.539 — ⛔ niewykonalna
    bez ISAP (ROBOTS_DISALLOWED), ta sama przeszkoda co F-79, F-88, F-92.
-7. Linia orzecznicza do art. 33 ust. 2a–2d (odpowiedzialność PZŁ za
-   zobowiązania koła) — serwis odnotowuje orzeczenia przy art. 33, ale
-   sygnatury NIE były weryfikowane w tej sesji; uruchomić
-   `orzeczenia-sadowe-v2` przed powołaniem czegokolwiek.
+7. ⚠️ **CZĘŚCIOWO ROZJAŚNIONE (2026-08-18, F-91 pkt 8, tylko wątek art.
+   8a):** mechanizm odmowy zatwierdzenia rocznego planu łowieckiego
+   potwierdzony źródłowo — art. 8a ust. 14: odmowa możliwa, gdy plan (1)
+   nie spełnia wymogów prawa lub (2) zawiera dane niegwarantujące celów
+   wieloletniego planu hodowlanego; ust. 15-16: odwołanie do dyrektora RDLP
+   albo Dyrektora Generalnego LP, rozpatrzenie w 7 dni. **Orzecznictwo do
+   tego mechanizmu — NIE odnalezione w tej sesji.** Wątki art. 33 ust.
+   2a-2d, art. 39 i art. 59 ust. 3 z tego punktu — **NIETKNIĘTE**,
+   pozostają do kolejnej tury; uruchomić `orzeczenia-sadowe-v2` dla
+   wszystkich czterech wątków łącznie, zamiast pojedynczych web_search.
 
 ---
 

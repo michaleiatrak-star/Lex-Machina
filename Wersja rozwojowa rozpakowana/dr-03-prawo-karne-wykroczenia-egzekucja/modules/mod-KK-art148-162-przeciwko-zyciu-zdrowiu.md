@@ -140,9 +140,22 @@ takim skutkiem (art. 158), NIEZALEŻNIE od indywidualnego "sprawstwa"
 konkretnego ciosu — to WYJĄTEK od zasady indywidualizacji odpowiedzialności
 karnej, uzasadniony TRUDNOŚCIĄ dowodową w chaosie bójki/pobicia
 
-⚠️ Art. 159 KK (typ KWALIFIKOWANY przez UŻYCIE broni/niebezpiecznego
-narzędzia w bójce/pobiciu) — ⚠️ dokładna treść i zagrożenie karą NIE
-zweryfikowane w pełni w tej sesji, punkt startowy.
+✅ **ZWERYFIKOWANE (2026-08-18, F-26):** Art. 159 KK (typ KWALIFIKOWANY
+przez UŻYCIE broni/niebezpiecznego narzędzia w bójce/pobiciu) — treść:
+"Kto, biorąc udział w bójce lub pobiciu człowieka, używa broni palnej,
+noża lub innego podobnie niebezpiecznego przedmiotu, podlega karze
+pozbawienia wolności od 6 miesięcy do lat 8." Źródła zbieżne (arslege.pl,
+kruczek.pl, lukaszoles.pl, adwokat-skoczylas.pl, standardyprawa.pl).
+⭐ **Rozróżnienie kluczowe dla obrony (doktryna, orzecznictwo cytowane w
+standardyprawa.pl):** przepis wymaga **"UŻYCIA"**, nie samego posiadania
+lub demonstrowania przedmiotu — samo trzymanie noża w kieszeni czy nawet
+pokazanie go innym uczestnikom NIE wypełnia znamion; wymagane jest
+funkcjonalne wykorzystanie (zadanie ciosu, strzał). Katalog "innych
+podobnie niebezpiecznych przedmiotów" ustalany kazuistycznie w
+orzecznictwie (żyletka, śrubokręt, nunczako, kastet, metalowy pręt,
+stłuczona butelka "tulipan", młotek gumowy — wszystkie potwierdzone w
+orzecznictwie SA/SN wg standardyprawa.pl, bez odczytu poszczególnych
+sygnatur w tej sesji).
 ```
 
 ---
@@ -179,17 +192,38 @@ utraty życia albo CIĘŻKIEGO uszczerbku na zdrowiu?
 
 ## ⭐ DRZEWO Z.5 — NARAŻENIE NA ZARAŻENIE CHOROBĄ (art. 161 KK) — dodane 2026-07-21
 
+> ⛔ **KOREKTA STRUKTURALNA 2026-08-18 (F-26):** poniższy opis operował na
+> PRZESTARZAŁEJ wersji przepisu sprzed nowelizacji. Art. 161 KK został
+> istotnie znowelizowany — **§1 i dawny §2 zostały POŁĄCZONE w jeden
+> przepis**, a stary §2 jest dziś **UCHYLONY**. To odwrotność wcześniejszego
+> założenia modułu (że HIV i inne choroby są nadal rozdzielone na dwa
+> paragrafy o różnym zagrożeniu karą).
+
+**Aktualna treść (Dz.U.2025.0.383 t.j., źródła zbieżne: arslege.pl,
+lexlege.pl, inforlex.pl):**
 ```
-□ Art. 161 §1 — narażenie BEZPOŚREDNIO na zarażenie chorobą
-  WENERYCZNĄ, ZAKAŹNĄ, ciężką NIEULECZALNĄ LUB realnie zagrażającą
-  życiu (np. HIV) — WIEDZĄC o swoim ZAKAŻENIU → do 3 lat
-□ ⭐ TRYB ŚCIGANIA: NA WNIOSEK pokrzywdzonego (⚠️ zweryfikuj dokładny
-  przepis proceduralny na ISAP)
-□ ⚠️ Art. 161 §2 (narażenie na zarażenie WIRUSEM HIV konkretnie, jako
-  ODRĘBNY typ o WYŻSZYM zagrożeniu) — ⚠️ dokładna treść NIE
-  zweryfikowana w pełni w tej sesji, punkt startowy — NIE MYLIĆ z §1
-  (choroba zakaźna OGÓLNIE)
+□ Art. 161 §1 — POŁĄCZONY typ: "Kto, wiedząc, że jest zarażony wirusem
+  HIV lub dotknięty chorobą weneryczną lub zakaźną, ciężką chorobą
+  nieuleczalną lub realnie zagrażającą życiu, naraża bezpośrednio inną
+  osobę na zarażenie tym wirusem lub taką chorobą" → od 3 miesięcy do
+  lat 5. HIV i inne choroby zakaźne/weneryczne/nieuleczalne/zagrażające
+  życiu (np. COVID) mają TERAZ TĘ SAMĄ sankcję — dawne rozróżnienie
+  zniesione nowelizacją (uzasadnienie MS: wyrównanie sankcji, wcześniej
+  HIV było karane surowiej co budziło zarzut stygmatyzacji).
+□ Art. 161 §2 — (UCHYLONY). NIE POWOŁYWAĆ jako odrębnego typu — to
+  relikt numeracji sprzed nowelizacji.
+□ Art. 161 §3 — typ KWALIFIKOWANY: narażenie WIELU osób → od roku do
+  lat 10.
+□ Art. 161 §4 — TRYB ŚCIGANIA: NA WNIOSEK pokrzywdzonego (potwierdzone
+  wprost, nie wymaga dalszej weryfikacji).
 ```
+⚠️ **Historia zmian (dla spraw o zdarzenia sprzed nowelizacji — stan
+prawny w dacie czynu, nie w dacie orzekania, jest kluczowy):** źródła
+wskazują na wcześniejszą wersję z odrębnymi §1 (HIV, do lat 3 pierwotnie,
+później podniesione do lat 8 przez tarczę antykryzysową z 31.03.2020) i
+§2 (inne choroby, grzywna/ograniczenie wolności/do roku) — **dokładne
+daty wejścia w życie kolejnych wersji NIE ustalone w tej sesji**, istotne
+tylko przy czynach z konkretnego okresu historycznego.
 
 ---
 

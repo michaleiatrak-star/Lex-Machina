@@ -177,7 +177,13 @@ IN PLUS: słabe dowody, brak świadków, kontratyp, niekaralność, mediacja
 IN MINUS: nagranie, przyznanie, wielu świadków, recydywa
 BENCHMARKING: → wywołaj orzeczenia-sadowe-v2 z frazą:
   "obrona konieczna granice SN"
-  (punkt startowy ⚠️ NIEZWERYFIKOWANE: SN V KK 412/21 — wyszukaj URL w sn.pl)
+  (⛔ SPRAWDZONE 2026-08-18: sygnatura SN V KK 412/21 NIE ISTNIEJE w tym
+  kontekście — pod tym oznaczeniem nic nie figuruje w wynikach wyszukiwania;
+  najbliższe pod względem numeru sprawy niepowiązane: V KK 412/12 [dowody
+  z podsłuchu], V KK 412/24 [art. 286 KK oszustwo], III KK 412/21 [zabójstwo
+  na zlecenie, inna izba]. NIE POWOŁYWAĆ tej sygnatury. Do znalezienia
+  właściwego orzeczenia o obronie koniecznej uruchomić `orzeczenia-sadowe-v2`
+  od zera, bez zakładania że chodzi o literówkę powyższej.)
 REKOMENDACJA: □ Warunkowe umorzenie  □ Mediacja  □ Obrona na rozprawie  □ Ugoda
 ```
 

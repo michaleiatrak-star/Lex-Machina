@@ -347,7 +347,7 @@ orzeczenia.ms.gov.pl). Poniższe pozycje pochodzą z wyszukiwania w tej sesji.
 | **IV CZ 102/16** | SN, post. 9.02.2017 | SO działa jako sąd II instancji, stosując odpowiednio przepisy o apelacji | **2** — cytowane w uzasadnieniach SN i SO |
 | **III CZP 46/16** | SN, uchwała 28.09.2016 | Odwołanie z art. 33 ust. 6 wyłącza powództwa o uchylenie/ustalenie nieważności uchwał | **2** — cytowane w orzeczeniu SR (SAOS) |
 | **I KZP 22/15** | SN, post. 30.03.2016 | j.w. — powoływane w tej samej linii | **2** — j.w. |
-| **II CSK 170/12** | SN | Sąd państwowy rozpoznający odwołanie bada także **dolegliwość kary**, nie tylko legalność | **2** — rp.pl; ⚠️ do potwierdzenia w sn.pl przed powołaniem |
+| **II CSK 170/12** | SN | Sąd państwowy rozpoznający odwołanie bada także **dolegliwość kary**, nie tylko legalność | ✅ **POTWIERDZONE 2026-08-18** — rp.pl, art. "Sąd cywilny skontroluje łowieckie dyscyplinarki" (25.01.2013), cytat wprost: "To sedno wczorajszego wyroku Sądu Najwyższego (sygnatura akt: II CSK 170/12)" — teza zgodna, data zgodna (wyrok "wczorajszy" względem publikacji 25.01.2013), kontekst zgodny z równoległym wyrokiem TK K 21/11 z tego samego okresu. Sygnatura ZAMKNIĘTA jako zweryfikowana. |
 | **III CSK 155/16** | SN | Rozgraniczenie: sankcje wyłącznie wewnątrzorganizacyjne pozostają poza kontrolą sądu (na tle stanu sprzed Rozdz. 6a) | **1** — sn.pl |
 
 ⚠️ Sygnatury sądów powszechnych (III C 1245/18 SO Warszawa, II C 399/15 SO
@@ -444,7 +444,7 @@ ilustracyjny** — nie powoływać jako linii orzeczniczej.
    pkt 2 — j.w.
 3. Sposób liczenia terminu z art. 33 ust. 6 przy doręczeniu bez uzasadnienia
    lub bez pouczenia (§ 9).
-4. Sygnatura **II CSK 170/12** — potwierdzić w sn.pl przed powołaniem
+4. ✅ Sygnatura **II CSK 170/12** — POTWIERDZONA 2026-08-18 (rp.pl, cytat wprost z tezą i datą zbieżną). Można powoływać.
    (obecnie Rząd 2, rp.pl).
 5. Czy po t.j. Dz.U. 2025 poz. 539 ogłoszono nowelizację dotykającą
    Rozdz. 6a — ⛔ `web_fetch` ISAP zablokowany (ROBOTS_DISALLOWED, ta sama
