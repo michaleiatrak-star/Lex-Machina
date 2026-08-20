@@ -21,16 +21,34 @@
 
 ## CZYNY NIEUCZCIWEJ KONKURENCJI — KATALOG
 
-> ⚠️ Aktualna lista i przesłanki — weryfikuj art. 3 i n. UZNK w ISAP.
+> ✅ Rozdz. 2 uzupełniony 2026-08-19 (F-90, faza 1/2) — Dz.U. 2026.85 t.j.
 
 | Czyn | Art. UZNK | Opis |
 |---|---|---|
 | Naśladowanie produktu (slavish imitation) | art. 13 | Kopiowanie zewnętrznej postaci produktu — ryzyko konfuzji |
-| Wprowadzanie w błąd | art. 14, 16 | Fałszywe informacje o przedsiębiorcy / produkcie; reklama porównawcza |
+| Pomawianie / nieprawdziwe wiadomości | art. 14 | Rozpowszechnianie nieprawdziwych/wprowadzających w błąd wiadomości o przedsiębiorcy/przedsiębiorstwie w celu szkodzenia |
 | Naruszenie tajemnicy przedsiębiorstwa | art. 11 | Ujawnienie / pozyskanie / użycie informacji poufnych |
 | Utrudnianie dostępu do rynku | art. 15 | Narzucanie warunków, bojkot, dumping |
 | Nieuczciwe pozyskiwanie klientów | art. 12 | Nakłanianie do rozwiązania umowy lub niewykonania |
-| Sprzedaż z nielegalną premią | weryfikuj w ISAP | — |
+| ✅ **Nieuczciwa/zakazana reklama** | **art. 16** | **ZWERYFIKOWANE 2026-08-19.** Katalog OTWARTY ("w szczególności") — 5 czynów: (1) sprzeczna z prawem/dobrymi obyczajami/uchybiająca godności; (2) wprowadzająca klienta w błąd, mogąca wpłynąć na decyzję zakupową — ⭐ przy ocenie uwzględnia się WSZYSTKIE elementy (ilość, jakość, składniki, sposób wykonania, przydatność, naprawa/konserwacja) oraz zachowanie klienta; (3) odwołująca się do uczuć przez lęk, przesądy, łatwowierność DZIECI; (4) "ukryta reklama" — wypowiedź reklamowa sprawiająca wrażenie NEUTRALNEJ informacji; (5) ingerująca w prywatność — nagabywanie w miejscach publicznych, niezamówione towary na koszt klienta, nadużywanie środków przekazu. Pkt 6 UCHYLONY. **Ust. 3 — REKLAMA PORÓWNAWCZA:** stanowi czyn TYLKO gdy sprzeczna z dobrymi obyczajami; jest DOZWOLONA gdy łącznie: nie wprowadza w błąd + rzetelnie/obiektywnie porównuje towary zaspokajające te same potrzeby + porównuje obiektywnie 1+ istotnych, sprawdzalnych cech. |
+| Sprzedaż z nielegalną premią | art. 17a-17c | ⚠️ premie, sprzedaż lawinowa (system konsorcyjny) — pełna treść NIE odczytana w tej sesji, punkt startowy |
+| ✅ **Mylące oznaczenie przedsiębiorstwa** | art. 5 | ZWERYFIKOWANE (już w treści modułu KC innego działu, potwierdzone 2026-08-19): oznaczenie mogące wprowadzić klientów w błąd co do tożsamości przez używanie firmy/nazwy/godła/skrótu wcześniej używanego przez inny podmiot |
+| ⚠️ Fałszywe oznaczenie geograficzne/pochodzenia | art. 8-10 | NIE zweryfikowane w tej sesji — częsty temat w praktyce (produkty regionalne, żywność) |
+| ⚠️ Sieci dyskontowe, usługi pośrednictwa internetowego | art. 17d, 17e-17h | NIE zweryfikowane — art. 17e-17h odsyła do rozp. UE 2019/1150 (nowa, aktywna regulacja) |
+
+⭐⭐ **PRZEPISY KARNE (Rozdz. 4, art. 23-27) — dotąd BRAK CAŁKOWITY,
+CZĘŚCIOWO UZUPEŁNIONE 2026-08-19 (F-90, wysoki priorytet praktyczny):**
+
+| Czyn karalny | Art. | Sankcja |
+|---|---|---|
+| ⚠️ Ujawnienie tajemnicy przedsiębiorstwa | art. 23 | do 2 lat pozbawienia wolności; kwalifikowany (działanie na szkodę przedsiębiorcy) — do 3 lat — NIE zweryfikowane w pełni w tej sesji, punkt startowy z ogona F-90 |
+| ⚠️ Sprzedaż lawinowa/organizowanie systemu | art. 24a | do 8 LAT — wysokie zagrożenie, istotne dla kwalifikatora karnego — NIE zweryfikowane w pełni |
+| ⚠️ Pozostałe (naśladownictwo art. 24, fałszywe oznaczenie art. 25, art. 26-27) | — | NIE zweryfikowane w tej sesji — pozostaje otwarte, patrz F-90 ogon |
+
+> Powyższe wpisy karne SĄ SYGNALIZOWANE (przeniesione z ustaleń F-90
+> sprzed rozpoczęcia weryfikacji szczegółowej), ale wymagają jeszcze
+> web_search per artykuł, zanim zostaną uznane za w pełni zweryfikowane —
+> zgodnie z Regułą 13 HARDGATE nie cytować numerów kar bez potwierdzenia.
 
 ---
 

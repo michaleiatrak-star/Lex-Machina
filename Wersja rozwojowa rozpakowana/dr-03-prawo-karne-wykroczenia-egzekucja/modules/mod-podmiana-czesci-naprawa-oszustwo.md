@@ -64,19 +64,41 @@ CZĘŚCI KLIENTA (art. 284 KK)
   dostarczoną przez klienta (np. by ją PÓŹNIEJ ODSPRZEDAĆ) —
   ZAMIAST po prostu jej NIE UŻYĆ (co samo w sobie JUŻ jest
   oszustwem co do sposobu wykonania usługi, patrz sekcja 1) — MOŻE
-  to DODATKOWO wypełniać znamiona PRZYWŁASZCZENIA (art. 284 §1 KK):
-  "Kto przywłaszcza sobie cudzą rzecz ruchomą... podlega karze
-  pozbawienia wolności do lat 3"
+  to DODATKOWO wypełniać znamiona PRZYWŁASZCZENIA.
+
+  ✅ **ZWERYFIKOWANE 2026-08-18 (F-26) — WAŻNA KOREKTA KWALIFIKACJI:**
+  część dostarczona klientowi przez WARSZTAT do zamontowania jest RZECZĄ
+  POWIERZONĄ w rozumieniu art. 284 §2 KK, NIE podstawowym §1. Pełna
+  treść (Dz.U. aktualny t.j., źródła zbieżne: lexlege.pl, arslege.pl,
+  lukaszoles.pl, sprawy-karne.biz.pl, pwrz.pl):
+  - **§1 (typ PODSTAWOWY):** "Kto przywłaszcza sobie cudzą rzecz ruchomą
+    lub prawo majątkowe" → **do 3 lat**.
+  - **§2 (typ KWALIFIKOWANY — RZECZ POWIERZONA):** przywłaszczenie rzeczy
+    powierzonej → **od 3 miesięcy do 5 lat** — WYŻSZE zagrożenie karą niż
+    §1, bo sprawca nadużywa zaufania związanego z powierzeniem.
+  - **§4:** jeśli przywłaszczenie na szkodę osoby NAJBLIŻSZEJ — ściganie
+    NA WNIOSEK pokrzywdzonego.
+  ⭐⭐ **Znaczenie praktyczne tej korekty:** oryginalna część klienta
+  została mu FIZYCZNIE POWIERZONA warsztatowi w konkretnym celu
+  (zamontowanie) — to podręcznikowy przypadek §2, nie §1. Prawidłowa
+  kwalifikacja to "art. 286 §1 KK w zb. z art. 284 §2 KK w zw. z art.
+  11 §2 KK" (zbieg kumulatywny), nie "art. 286 §1 w zb. z art. 284 §1" —
+  różnica ma znaczenie dla wymiaru kary (górna granica 5 lat, nie 3 lata,
+  przy przywłaszczeniu) i może wpływać na kwalifikację prawną czynu w
+  akcie oskarżenia.
 
   ⚠️ RÓŻNICA MIĘDZY OSZUSTWEM A PRZYWŁASZCZENIEM w tym kontekście:
   → OSZUSTWO (art. 286) — dotyczy MECHANIZMU wprowadzenia klienta w
     błąd co do TEGO, CO OTRZYMUJE (usługę/naprawę wykonaną
     zgodnie z umową) — SKUPIA SIĘ na RELACJI klient-wykonawca
-  → PRZYWŁASZCZENIE (art. 284) — dotyczy SAMEJ RZECZY (części) —
+  → PRZYWŁASZCZENIE (art. 284 §2) — dotyczy SAMEJ RZECZY (części) —
     czy mechanik ROZPORZĄDZIŁ NIĄ jak WŁASNĄ (zatrzymał/sprzedał/
     zniszczył), mimo że WŁAŚCICIELEM POZOSTAWAŁ klient — TU liczy
     się LOS SAMEJ RZECZY, niezależnie od tego, co powiedziano
-    klientowi
+    klientowi. Potwierdzone doktrynalnie (standardyprawa.pl): sprawca
+    przywłaszczenia wchodzi w posiadanie rzeczy NA PODSTAWIE TYTUŁU
+    PRAWNEGO (tu: powierzenie do naprawy) — w przeciwieństwie do
+    oszusta, który uzyskuje rzecz ZABIEGIEM OSZUKAŃCZYM.
   → OBA przepisy MOGĄ zbiegać się KUMULATYWNIE w JEDNYM czynie (art.
     11 §2 KK, zbieg przepisów), jeśli STAN FAKTYCZNY wypełnia
     znamiona OBU jednocześnie — WYMAGA to jednak PRECYZYJNEGO

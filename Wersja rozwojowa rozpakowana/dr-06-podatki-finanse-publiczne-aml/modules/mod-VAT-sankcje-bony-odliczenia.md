@@ -713,6 +713,20 @@ zdrowia, edukacja, finanse, NGO, spółdzielnie)
    VAT, Dz.U.2025.0.775 t.j.; pobrane 2026-08-12. Art. 86 ust. 2a–2h i
    rozporządzenie Dz.U. 2015 poz. 2193 — potwierdzone w 4 niezależnych
    źródłach, w tym interpretacji KIS i opracowaniu KPMG]
+✅ ZAMKNIĘTE 2026-08-20 (F-18) — metryka rozporządzenia z 17.12.2015 r.
+   w sprawie sposobu określania zakresu wykorzystywania nabywanych
+   towarów i usług do celów działalności gospodarczej w przypadku
+   niektórych podatników (na podstawie art. 86 ust. 22 ustawy o VAT)
+   POTWIERDZONA: Dz.U. 2015 poz. 2193 (isap.sejm.gov.pl, adres
+   dokumentu WDU20150002193, widoczny w indeksowanych wynikach
+   wyszukiwania + 6 zgodnych źródeł Rząd 2: infor.pl, inforlex.pl,
+   przepisy.gofin.pl, vademecumpodatnika.pl, platformaedukacyjna.eu,
+   izbapodatkowa.pl). ⭐ USTALENIE DODATKOWE: rozporządzenie doczekało
+   się TEKSTU JEDNOLITEGO — Dz.U. 2021 poz. 999 z 2.06.2021, z
+   późniejszą zmianą Dz.U. 2020 poz. 289 — ⚠️ ten t.j. NIE był dotąd
+   przywoływany w module, rekomendacja: przy najbliższym audycie
+   Ordynacji/VAT rozważyć aktualizację odesłania z "Dz.U. 2015 poz.
+   2193" na "t.j. Dz.U. 2021 poz. 999" dla precyzji cytowania.
 ⚠️ [ZALECANA WERYFIKACJA ISAP — w szczególności aktualny status i tekst
    rozporządzenia z 17.12.2015 r., którego metryki NIE potwierdzono w
    źródle urzędowym]

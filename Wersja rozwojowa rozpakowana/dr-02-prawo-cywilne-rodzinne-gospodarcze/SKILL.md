@@ -309,7 +309,113 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
                złote spadochrony) i reaktywne (biały rycerz — z
                zastrzeżeniem że to wciąż przejęcie, tylko friendly;
                zatruta pigułka, MBO). Odpowiedź na pytanie użytkownika)
+  [✓] NOWY  mod-KSH-spolki-osobowe-rada-nadzorcza
+              (dodany 2026-08-20 — naprawa F-68: spółki osobowe [art.
+               22-124] i rada nadzorcza sp. z o.o. [art. 212-226],
+               dotąd opisane wyłącznie 1-wierszową tabelą bez podstawy
+               prawnej. Spółka jawna: odpowiedzialność solidarno-
+               subsydiarna [art. 22, 31], prowadzenie spraw vs
+               reprezentacja [art. 37-47, rozróżnienie wewnętrzne/
+               zewnętrzne], zakaz konkurencji [art. 56-57], rozwiązanie
+               i wystąpienie wspólnika [art. 58-66, mechanizm przejęcia
+               majątku przy 2 wspólnikach]. Spółka komandytowa: dwie
+               role wspólników [art. 102], odesłanie do spółki jawnej
+               [art. 103], sankcja firmy za nazwisko komandytariusza
+               [art. 104], suma komandytowa i wolność w granicach
+               wkładu [art. 111-112], komandytariusz WYŁĄCZNIE jako
+               pełnomocnik + sankcja art. 118 §2. Rada nadzorcza sp.
+               z o.o.: próg obligatoryjności 500k zł/25 wspólników
+               [art. 213], zakaz łączenia funkcji, zakaz wiążących
+               poleceń zarządowi [art. 219 §2], rozszerzenie uprawnień
+               i zawieszenie członka zarządu [art. 220]. ⚠️
+               [NIEWERYFIKOWANE RZĄD 1] większość treści)
   [✓] OK    mod-PrUpad-upadlosc-restrukturyzacja
+  [✓] NOWY  mod-PrRestr-dzial-III-nadzorca-zarzadca
+              (dodany 2026-08-19 — naprawa F-87 priorytet 1: Dział III
+               PrRestr, art. 23-64. Struktura 4 rozdziałów + tabela
+               kwalifikatora organu wg trybu postępowania; Rozdz. 1
+               przepisy ogólne [wymogi licencji, odpowiedzialność
+               cywilna + obowiązkowe OC, czas trwania funkcji,
+               mediacja]; Rozdz. 2 nadzorca układu [wynagrodzenie
+               umowne z limitem dla mikroprzedsiębiorców]; Rozdz. 3
+               nadzorca sądowy [art. 39 — sankcja NIEWAŻNOŚCI za
+               czynność bez zgody, katalog obowiązków, wzór
+               wynagrodzenia 2x-44x podstawy, redukcja do 40% przy
+               niepowodzeniu]; Rozdz. 4 zarządca [art. 52-53 — pełne
+               przejęcie zarządu masą sanacyjną, działanie we własnym
+               imieniu na rachunek dłużnika]. ⚠️ Oddział 2 Rozdz. 4
+               [wynagrodzenie zarządcy] — luka całkowita, świadomie
+               oznaczona, priorytet dla kolejnej sesji)
+  [✓] NOWY  mod-PrRestr-dzial-IV-uczestnicy-wierzyciele
+              (dodany 2026-08-19 — naprawa F-87 priorytet 2: Dział IV
+               i V PrRestr, art. 65-149. ⭐ Fundamentalna różnica vs
+               PrUp: BRAK instytucji zgłoszenia wierzytelności — spis
+               sporządzany Z URZĘDU przez nadzorcę/zarządcę; Rozdz. 1
+               definicje [wierzytelność bezsporna/sporna, art. 65 ust.
+               7 sankcja utraty uprawnień]; Rozdz. 2 spis wierzytelności
+               [art. 90-94 sprzeciw dłużnika/wierzyciela, termin 14 dni,
+               art. 102 spis z klauzulą wykonalności = tytuł wykonawczy];
+               Rozdz. 3 zgromadzenie wierzycieli [art. 104-105 zwołanie,
+               art. 107 prawo głosu i waga kapitałowa, art. 113 quorum
+               1/5 i próg 2/3 przyjęcia układu]; Rozdz. 4 rada
+               wierzycieli [skład 5+2, art. 128 szeroki katalog
+               kompetencji w tym zezwolenie na kredyt/sprzedaż
+               nieruchomości pod rygorem nieważności, art. 133 uchwała
+               w pełnym składzie może wymusić zmianę nadzorcy/zarządcy].
+               ⚠️ Dział V [pomoc publiczna] — luka niemal całkowita,
+               PLUS wykryte ryzyko przestarzałego odesłania do
+               uchylonego rozporządzenia UE 659/1999, priorytet WYSOKI
+               dla kolejnej sesji)
+  [✓] NOWY  mod-PrRestr-dzial-V-pomoc-publiczna
+              (dodany 2026-08-20 — naprawa F-87 priorytet 3: Dział V
+               PrRestr, art. 140-149 [139a uchylony 2020]. Test
+               prywatnego wierzyciela/inwestora [art. 140]; cele i
+               warunki pomocy [art. 141-142, 4 przesłanki kumulatywne];
+               zasada "one time, last time" — limit 10 lat z 3
+               wyjątkami [art. 143]; wkład własny i środki wyrównujące
+               [art. 144-145]; wyjątek dla usług w ogólnym interesie
+               gospodarczym [art. 146]; próg 10 mln EUR zwalniający z
+               notyfikacji KE dla MŚP [art. 148, przesłanki
+               kumulatywne]. ⚠️ [NIEWERYFIKOWANE RZĄD 1] — ISAP
+               niedostępny w tym środowisku, treść oparta na 4
+               zgodnych źródłach RZĄD 2/3. ⚠️ Ryzyko przestarzałego
+               odesłania do uchylonego rozporządzenia UE 659/1999
+               [odnotowane wcześniej przy mod-dzial-IV] — NIE
+               zweryfikowane w tej sesji, priorytet dla kolejnej.
+               ⚠️ Ustawa z 16.07.2020 o pomocy publicznej w celu
+               ratowania/restrukturyzacji [dawna materia art. 139a]
+               — CAŁKOWICIE nieobecna w systemie, kandydat na nową
+               flagę)
+  [✓] NOWY  mod-ustawa-pomoc-ratowanie-restrukturyzacja-przedsiebiorcow
+              (dodany 2026-08-20 — naprawa F-98: ustawa z 16.07.2020
+               [Dz.U. 2020 poz. 1298], akt CAŁKOWICIE nieobecny w
+               systemie mimo bezpośredniego związku z Działem V PrRestr
+               [art. 50 tej ustawy uchyla dawny art. 139a PrRestr].
+               5 rozdziałów, art. 1-53: pomoc na ratowanie [pożyczka,
+               oprocentowanie stopa bazowa KE +4pp], tymczasowe wsparcie
+               restrukturyzacyjne [WYŁĄCZNIE MŚP, eskalacja do 18 mies.],
+               pomoc na restrukturyzację [formy debt-to-equity, limit
+               wynagrodzeń zarządu 400% średniej, odesłanie wprost do
+               art. 145 PrRestr]. ⚠️ [NIEWERYFIKOWANE RZĄD 1] — ISAP
+               niedostępny, treść oparta na 4 zgodnych źródłach RZĄD 2/3.
+               ⚠️ Numer aktualnego t.j. NIE potwierdzony)
+  [✓] NOWY  mod-PrRestr-dzial-VII-uklad-czesciowy
+              (dodany 2026-08-20 — naprawa F-87, ostatni priorytet z
+               pierwotnego zakresu: Dział VII PrRestr, art. 180-188.
+               Kryteria wyodrębnienia wierzycieli [art. 180, trójwarunkowy
+               test + zakaz manipulacji]; katalog przykładowy
+               wierzytelności [art. 181]; zakaz pokrzywdzenia wierzycieli
+               nieobjętych + bezskuteczność zabezpieczeń przy upadłości
+               w ciągu roku [art. 183]; zastrzeżenia wierzyciela
+               nieobjętego [art. 185]; próg głosowania 2/3, bardziej
+               restrykcyjny niż art. 119 wg doktryny [art. 186]; zakres
+               podmiotowy — art. 166 ust. 1 NIE stosuje się, inaczej niż
+               przy układzie zwykłym [art. 187]; zażalenie wierzyciela
+               nieobjętego ograniczone do zarzutów art. 180/183 [art.
+               188]. ⚠️ [NIEWERYFIKOWANE RZĄD 1]. Rekomendacja: F-87
+               pierwotny zakres W CAŁOŚCI zamknięty — pozostałe segmenty
+               PrRestr [Dział VIII, Tytuł III-IV] kandydują na NOWĄ
+               flagę zamiast rozszerzania F-87)
   [✓] NOWY  mod-PrRestr-dzial-VI-uklad
               (dodany 2026-08-14 — naprawa F-69: Dział VI PrRestr,
                art. 150-179. Przepisy ogólne [150-154, wierzytelności

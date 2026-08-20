@@ -210,10 +210,22 @@
   wyłączenie zwolnienia dla danej kategorii).
   ⛔⛔ ALERT ORZECZNICZY: TSUE zakwestionował polską konstrukcję
   art. 52 ust. 1 w zakresie warunku „odbiorcy PRZEBYWAJĄCEGO na
-  terytorium kraju" jako niezgodną z dyrektywą. ⛔ PRZED powołaniem
-  tego przepisu sprawdź: (a) czy przepis został znowelizowany,
-  (b) aktualną sygnaturę i sentencję wyroku TSUE — przez
-  `orzeczenia-sadowe-v2`. NIE cytuj sygnatury z pamięci.
+  terytorium kraju" jako niezgodną z dyrektywą.
+  ✅ ZWERYFIKOWANE 2026-08-20 (F-19 punkt c) — **TSUE, wyrok z
+  8.05.2025, sygn. C-405/24** (polska sprawa prejudycjalna): zwolnienie
+  z VAT dla importu przesyłek niehandlowych z art. 52 ust. 1 PRZYSŁUGUJE
+  RÓWNIEŻ gdy odbiorca znajduje się w INNYM państwie członkowskim UE niż
+  Polska — warunek "przebywania na terytorium kraju" jest NIEZGODNY z
+  art. 143 ust. 1 lit. b dyrektywy 2006/112/WE. ✅ WYKONANIE KRAJOWE
+  POTWIERDZONE: **NSA, wyrok z 25.07.2025, sygn. I FSK 110/21** —
+  zastosował wprost wykładnię TSUE z C-405/24, uwzględniając skargę
+  spółki obsługującej celnie import paczek dla odbiorców w Polsce i w
+  innych państwach UE. Potwierdzone 3+ źródłami (studio.pwc.pl, mddp.pl,
+  lex4you.pl) — BEZPIECZNE do powołania. ⚠️ NIE POTWIERDZONE w tej
+  sesji: czy przepis krajowy (art. 52 ust. 1) został formalnie
+  ZNOWELIZOWANY w ślad za tym wyrokiem, czy funkcjonuje nadal w
+  brzmieniu niezgodnym (z obowiązkiem prounijnej wykładni przez organy)
+  — sprawdź aktualny stan w ISAP przed powołaniem w piśmie.
 
 ⭐ art. 53–80 — kazuistyka zwolnień celowych (m.in. towary dla
   organizacji charytatywnych, dla osób niepełnosprawnych, próbki,
@@ -276,7 +288,14 @@
 - DR-06/`mod-VAT-miejsce-swiadczenia-zwolnienia` (odprawa fiskalna w innym
   państwie UE → WNT w Polsce)
 - DR-06/`mod-OP-ordynacja-podatkowa` (odwołanie od decyzji, odsetki)
-- `orzeczenia-sadowe-v2` (TSUE ws. art. 52; NSA ws. sankcji 36-miesięcznej)
+- `orzeczenia-sadowe-v2` (TSUE ws. art. 52 — ✅ ZWERYFIKOWANE 2026-08-20,
+  patrz wyżej; NSA ws. sankcji 36-miesięcznej — ⚠️ F-19 punkt e
+  CZĘŚCIOWO: mechanizm ustawowy [art. 33a ust. 10-11 — fakultatywność
+  decyzji, wyjątek dla uchybień "nieistotnych"/"sporadycznych"]
+  POTWIERDZONY wielokrotnie w źródłach wtórnych, ALE konkretna
+  sygnatura NSA budująca "linię orzeczniczą" NIE ZNALEZIONA w tej
+  sesji — punkt startowy dla przyszłej sesji, jeśli teza sądowa
+  [a nie tylko ustawowa] będzie potrzebna w konkretnej sprawie)
 
 ---
 
@@ -293,5 +312,7 @@ RZĄD 2 — praktyka art. 33/33a: mddp.pl (01.2026), taxmachine.pl (05.2026 —
 RZĄD 2 — eur-lex.europa.eu: usunięcie tytułu IV dyrektywy 2009/132/WE
   z 1.07.2021 (zniesienie zwolnienia dla przesyłek ≤22 EUR)
 RZĄD 2 — studio.pwc.pl: sygnalizacja wyroku TSUE ws. art. 52 ust. 1
-  ⛔ SYGNATURA NIEUSTALONA W TEJ SESJI — wymaga weryfikacji przed użyciem
+  ✅ ZWERYFIKOWANE 2026-08-20 (F-19 punkt c) — sygnatura C-405/24
+  (8.05.2025) POTWIERDZONA, wykonanie krajowe NSA I FSK 110/21
+  (25.07.2025) POTWIERDZONE.
 ```

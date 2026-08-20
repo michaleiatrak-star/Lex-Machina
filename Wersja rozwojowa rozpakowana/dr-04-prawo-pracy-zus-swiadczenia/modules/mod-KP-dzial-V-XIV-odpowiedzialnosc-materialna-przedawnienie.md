@@ -187,14 +187,47 @@ sporządzeniem pisma opartego na tym przepisie — to jeden z
 najintensywniej komentowanych fragmentów Działu XIV, co samo w sobie
 sugeruje częste spory o jego wykładnię.
 
-### Pozostałe artykuły Działu XIV (art. 292-295) — ⚠️ nie zbadane w tej sesji
+### Pozostałe artykuły Działu XIV (art. 292-295) — ✅ ZWERYFIKOWANE (2026-08-18, F-29)
 
-Dotyczą prawdopodobnie: skutków przerwania/zawieszenia biegu
-przedawnienia, wpływu postępowania pojednawczego na bieg terminu, oraz
-przepisów szczególnych — **wymagają odrębnego zbadania przy konkretnej
-sprawie**, nie poprzestawaj na tym module dla precyzyjnego wyliczenia
-terminu w skomplikowanym stanie faktycznym (np. z przerwaniem biegu
-przedawnienia przez wezwanie do zapłaty czy postępowanie pojednawcze).
+⭐ **Korekta wcześniejszego przypuszczenia:** te przepisy dotyczą SKUTKU
+przedawnienia i jego ZAWIESZENIA, ale NIE "przerwania biegu przez wezwanie
+do zapłaty" (to instytucja z KC, nie ma odpowiednika w tej formie w
+Dziale XIV KP w art. 292-294; przerwanie biegu jest osobno w art. 295,
+patrz niżej) — moduł wcześniej zgadywał kierunek, teraz potwierdzone
+źródłowo (strefabiznesu.pl, e-prawnik.pl, infor.pl, lexlege.pl — zbieżne):
+
+- **Art. 292 — SKUTEK przedawnienia:** przedawnienie NIE powoduje
+  automatycznego wygaśnięcia roszczenia — daje jedynie prawo UCHYLENIA
+  SIĘ od zaspokojenia (zarzut procesowy, trzeba go PODNIEŚĆ, sąd nie
+  uwzględnia z urzędu). Zrzeczenie się zarzutu przedawnienia PRZED
+  upływem terminu jest NIEWAŻNE (chroni słabszą stronę przed presją) —
+  można się zrzec tylko PO upływie terminu.
+- **Art. 293 — ZAWIESZENIE biegu przy SILE WYŻSZEJ:** bieg nie
+  rozpoczyna się, a rozpoczęty ulega zawieszeniu, na czas przeszkody, gdy
+  z powodu siły wyższej uprawniony nie może dochodzić roszczeń przed
+  właściwym organem. **Art. 293¹ (dodany nowelizacją):** analogiczne
+  zawieszenie biegu przedawnienia roszczenia o URLOP WYPOCZYNKOWY na czas
+  korzystania z urlopu WYCHOWAWCZEGO.
+- **Art. 294 — OCHRONA osób bez pełnej zdolności do czynności prawnych:**
+  przedawnienie względem takiej osoby (lub osoby z podstawą do
+  ubezwłasnowolnienia) nie może zakończyć się wcześniej niż 2 lata od
+  ustanowienia przedstawiciela ustawowego / ustania przyczyny jego
+  ustanowienia. Przy TERMINIE ROCZNYM (np. art. 291 §2 — roszczenie
+  pracodawcy) bieg liczy się DOPIERO od ustanowienia przedstawiciela.
+- **Art. 295 — PRZERWANIE biegu przedawnienia:** przerywa się przez
+  KAŻDĄ czynność przed właściwym organem powołanym do rozstrzygania
+  sporów (sąd pracy, komisja pojednawcza), podjętą w celu dochodzenia,
+  ustalenia, zaspokojenia lub zabezpieczenia roszczenia — **to jest
+  odpowiednik "przerwania przez wezwanie do zapłaty" z KC, ale w formie
+  procesowej (czynność PRZED organem), nie samego pisma do dłużnika** —
+  ⚠️ dokładna pełna treść art. 295 (czy obejmuje też wezwanie
+  pozaprocesowe) NIE odczytana w pełni w tej sesji, wymaga dociągnięcia
+  przy sprawie, gdzie to rozróżnienie jest kluczowe dla obrony.
+
+**Wniosek praktyczny:** checklist niżej pozostaje aktualny, ale punkt o
+"postępowaniu pojednawczym/wezwaniu przerywającym bieg" powinien
+odsyłać do art. 295 (przerwanie), nie art. 292 (skutek) jak wcześniej
+sugerowano.
 
 ### Checklist praktyczny
 
@@ -206,8 +239,10 @@ przedawnienia przez wezwanie do zapłaty czy postępowanie pojednawcze).
   przez pracownika? → SPRAWDŹ ODRĘBNIE art. 291 §2 i aktualne
   orzecznictwo SN — NIE zakładaj automatycznie 3 lat od wymagalności,
   termin może liczyć się inaczej (od powzięcia wiadomości o szkodzie)
-□ Czy istniało postępowanie pojednawcze/wezwanie mogące PRZERWAĆ
-  bieg terminu? → zweryfikuj art. 292 i n. (nie zbadane w tej sesji)
+□ Czy istniało postępowanie przed sądem pracy/komisją pojednawczą mogące
+  PRZERWAĆ bieg terminu? → art. 295 (ZWERYFIKOWANE 2026-08-18) — przerywa
+  KAŻDA czynność PRZED właściwym organem, nie samo pismo/wezwanie
+  pozaprocesowe do dłużnika (⚠️ pełna treść niuansu nie odczytana)
 □ Zawsze licz termin OSOBNO dla każdego rodzaju roszczenia w tej samej
   sprawie (wynagrodzenie, nadgodziny, ekwiwalent za urlop mogą mieć
   różne daty wymagalności, mimo wspólnego źródła sporu)

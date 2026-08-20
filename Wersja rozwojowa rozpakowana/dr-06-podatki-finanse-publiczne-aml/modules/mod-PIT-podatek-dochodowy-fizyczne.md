@@ -82,9 +82,42 @@ DECYDUJE, CZY polski PIT W OGÓLE ma zastosowanie)
   państwa UZNAJĄ daną OSOBĘ za SWOJEGO rezydenta (KONFLIKT
   pozytywny) — STOSUJE SIĘ reguły ROZSTRZYGAJĄCE przewidziane W
   ODPOWIEDNIEJ umowie O unikaniu PODWÓJNEGO opodatkowania (UPO) —
-  ⚠️ SZCZEGÓŁY konkretnych reguł ROZSTRZYGAJĄCYCH z UPO (tzw. "tie-
-  breaker rules") NIE zbadane W tej sesji — PUNKT startowy DO
-  dalszego badania PRZY sprawach MIĘDZYNARODOWYCH
+  obowiązek uwzględniania UPO wynika z **art. 4a ustawy o PIT**.
+
+  ✅ **ZWERYFIKOWANE (2026-08-18, F-35) — TIE-BREAKER RULES z art. 4
+  Modelowej Konwencji OECD (kaskada, stosowana SEKWENCYJNIE, każdy
+  następny krok TYLKO gdy poprzedni nie rozstrzyga):**
+  ```
+  1) STAŁE MIEJSCE ZAMIESZKANIA (permanent home) — jeśli dostępne
+     TYLKO w jednym państwie → rezydencja tam.
+  2) OŚRODEK INTERESÓW ŻYCIOWYCH (centre of vital interests) — jeśli
+     stałe miejsce zamieszkania dostępne w OBU państwach → rezydencja
+     w państwie, z którym powiązania osobiste i gospodarcze SILNIEJSZE.
+  3) MIEJSCE ZWYKŁEGO PRZEBYWANIA (habitual abode) — gdy ośrodka
+     interesów NIE MOŻNA jednoznacznie ustalić (np. RÓWNIE silne
+     powiązania w obu państwach) LUB gdy stałe miejsce zamieszkania
+     NIE jest dostępne w ŻADNYM z państw. Ustala się przez PORÓWNANIE
+     DŁUGOŚCI pobytu w obu państwach, NIEZALEŻNIE od powodu pobytu.
+  4) OBYWATELSTWO — jeśli krok 3 też nie rozstrzyga.
+  5) WZAJEMNE POROZUMIENIE właściwych organów (mutual agreement
+     procedure) — ostatni krok, gdy nic wcześniejszego nie rozstrzyga.
+  ```
+  ⭐⭐ **Kluczowe ustalenie praktyczne (crido.pl, wyrok WSA Kraków):**
+  DKIS w realnej interpretacji uznał, że podatnik ma RÓWNIE silne
+  powiązania osobiste/gospodarcze w Polsce i USA — NIE oznacza to
+  automatycznego rozstrzygnięcia na korzyść żadnego z państw na etapie
+  kroku 2. WSA w Krakowie uchylił interpretację i wskazał, że w takiej
+  sytuacji (nierozstrzygalny ośrodek interesów) trzeba przejść do kroku
+  3 (miejsce zwykłego przebywania) — DKIS pierwotnie pominął tę kaskadę
+  i próbował rozstrzygnąć na etapie kroku 2 mimo remisu.
+  Źródła zbieżne: kancelaria-skarbiec.pl (EN, z odniesieniem do
+  aktualizacji BEPS Action 6 z 2017 r. — kaskada od 5 do 4 kroków w
+  niektórych sformułowaniach, w praktyce 4-5 w zależności od tego, czy
+  liczy się MAP jako osobny krok), podatnik.info, rp.pl, crido.pl.
+  ⚠️ **Uwaga:** dokładne brzmienie danej UPO może się różnić od modelu
+  OECD (np. umowa Polska-USA ma inną numerację liter w art. 4) —
+  ZAWSZE sprawdzić TEKST KONKRETNEJ umowy bilateralnej, nie tylko
+  model OECD, przy realnej sprawie.
 
 ⭐ OGRANICZONY obowiązek PODATKOWY OSÓB PRAWNYCH — analogiczna
   KONSTRUKCJA w CIT: art. 3 ust. 1 ustawy O CIT — OSOBY prawne,

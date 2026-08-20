@@ -44,9 +44,31 @@ genetyczne i wsparcie państwa — dotąd CAŁKOWITA LUKA w całym systemie.
   rozwiązań i przyjęcia projektu, NIGDY nie wszedł do kalendarza prac
   legislacyjnych w TEJ formie
 □ REALIZACJA: obecny "Plan dla Chorób Rzadkich" realizowany jest OD
-  2020 r., w KOLEJNYCH edycjach (m.in. edycja na lata 2024-2025) —
-  ⚠️ SPRAWDŹ NAJNOWSZĄ edycję/aktualizację planu przed użyciem, to
-  dokument CYKLICZNIE odnawiany
+  2020 r., w KOLEJNYCH edycjach — ✅ **ZWERYFIKOWANE 2026-08-19 (F-47),
+  status na dzień weryfikacji:**
+  - Uchwała RM nr 88/2024 z 13.08.2024 — Plan na lata **2024-2025**.
+  - Uchwała RM nr 179/2025 — **Plan dla Chorób Rzadkich na 2026 r.**
+    (edycja roczna, nie dwuletnia jak poprzednia), kontynuacja
+    niedokończonych zadań z 2024-2025: dokończenie sieci Ośrodków
+    Eksperckich Chorób Rzadkich (OECR), uruchomienie Systemu dla
+    Chorób Rzadkich (Rejestr Chorób Rzadkich + Karta Pacjenta +
+    Platforma Informacyjna).
+  - ⭐⭐ **PRZEDŁUŻONY do końca 2026 r.** (potwierdzone: ptchnm.org.pl,
+    środowisko pacjenckie) — pytanie o edycję "po 2026" pozostaje
+    otwarte, MZ rozważa kolejne edycje, ale bez konkretnego zobowiązania.
+  - ⚠️ **"MARTWY PUNKT" (mzdrowie.pl, czerwiec 2026):** ostateczne
+    wdrożenie Systemu dla Chorób Rzadkich UZALEŻNIONE od wejścia w
+    życie odrębnej ustawy o systemie informacji w ochronie zdrowia
+    (SIOZ) — prace informatyczne ZAKOŃCZONE, ale system czeka na
+    podstawę prawną do uruchomienia. To realne, aktualne wąskie
+    gardło — nie samo istnienie Planu, tylko brak ustawowej podstawy
+    dla jego kluczowego elementu informatycznego.
+  ⭐ **Wniosek praktyczny:** przy sprawie dot. dostępu pacjenta do
+  OECR/rejestru — Plan formalnie ISTNIEJE i jest aktywny (do końca
+  2026), ale System dla Chorób Rzadkich (rejestr + karta pacjenta) NIE
+  jest jeszcze operacyjny z powodu braku ustawy SIOZ — to rozróżnienie
+  ma znaczenie przy ocenie realnych praw pacjenta "na papierze" vs "w
+  praktyce".
 ```
 
 ### Sześć głównych obszarów Planu

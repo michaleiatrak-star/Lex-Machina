@@ -124,6 +124,44 @@ INWESTYCJE TRANSGRANICZNE:
                intra-UE; ⛔ Polska NIE ratyfikowała Konwencji ICSID — fakt
                łatwy do pomylenia, jawnie odnotowany w module)
 
+PRAWO DYPLOMATYCZNE I KONSULARNE:
+  [✓] NOWY  mod-konwencje-wiedenskie-dyplomatyczne-konsularne
+              (utworzony 2026-08-20 — naprawa F-60: temat miał ZERO
+               wzmianek w całym systemie. Konwencja 1961 [dyplomatyczna]:
+               persona non grata bez obowiązku uzasadnienia [art. 9],
+               nietykalność pomieszczeń misji [art. 22 ust. 3, zakaz
+               egzekucji], nietykalność osobista ABSOLUTNA i immunitet
+               jurysdykcyjny z 3 wyjątkami cywilnymi [art. 29, 31],
+               zrzeczenie immunitetu WYŁĄCZNIE przez państwo wysyłające
+               [art. 32], hierarchia ochrony rodzina/personel [art.
+               37-38]. Konwencja 1963 [konsularna]: nietykalność
+               archiwów bezterminowa [art. 33], prawo do kontaktu
+               konsularnego przy zatrzymaniu cudzoziemca [art. 36,
+               obowiązek warunkowy na wniosek osoby — potencjalny most
+               do dr-03/KPK], KLUCZOWA różnica: nietykalność konsula
+               WĘŻSZA niż dyplomaty [art. 41 — wyjątek dla ciężkiej
+               zbrodni], immunitet FUNKCJONALNY ratione materiae a nie
+               osobowy ratione personae [art. 43]. ⚠️ [NIEWERYFIKOWANE
+               RZĄD 1] większość treści — ISAP zablokowany)
+
+  [✓] NOWY  mod-konwencja-genewska-uchodzcy-1951-protokol-1967
+              (utworzony 2026-08-20 — naprawa F-61: Konwencja genewska
+               i Protokół nowojorski miały ZERO wzmianek na poziomie
+               traktatowym [dr-05 wspominał tylko ogólnie, bez numerów
+               artykułów]. Definicja uchodźcy — 5 przesłanek
+               kumulatywnych + klauzule ustania [1C] i wyłączające
+               [1F, zbrodnie wojenne] [art. 1]; zasada NON-REFOULEMENT
+               z 2 wyjątkami zamkniętymi [art. 33 — status zbliżony do
+               ius cogens]; niekaranie za nielegalny wjazd przy
+               spełnieniu warunków bezpośredniości i zgłoszenia się
+               [art. 31, z odniesieniem do TSUE C-481/13] — potencjalny
+               most do dr-03; wydalenie uchodźcy legalnie przebywającego
+               tylko z 2 przesłanek [art. 32]; mechanizm Protokołu 1967
+               [odczyt Konwencji bez cezury czasowej, art. 1/3/4/16/33
+               niederogowalne zastrzeżeniami]. ⚠️ [NIEWERYFIKOWANE
+               RZĄD 1] większość treści; numer Dz.U. Protokołu
+               niepotwierdzony)
+
 NARZĘDZIE METODYCZNE:
   [✓] OK    mod-rejestr-zrodla-prawa-lifecycle
               (workflow kancelaryjny aktualności prawa: ISAP audit, stan prawny

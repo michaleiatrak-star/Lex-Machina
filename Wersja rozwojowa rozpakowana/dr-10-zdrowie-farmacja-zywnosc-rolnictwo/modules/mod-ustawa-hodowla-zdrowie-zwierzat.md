@@ -616,6 +616,127 @@ Potwierdzone w 7+ zgodnych, aktualnych źródłach 2026 r. (forsal.pl
 
 ---
 
+## ⭐⭐ „USTAWA ŁAŃCUCHOWA" — ZAKAZ TRZYMANIA PSÓW I KOTÓW NA UWIĘZI
+(dodano 2026-08-14c — naprawa flagi F-43; temat dotąd NIEOPRACOWANY
+w żadnym module systemu, mapa oznaczała go jako „⏳ TODO")
+
+```
+METRYKA AKTU
+  Formalnie: ustawa z dnia 3 lipca 2026 r. o zmianie ustawy
+    o ochronie zwierząt (druk sejmowy 2270)
+  Potocznie: „ustawa łańcuchowa"
+  Nr Dz.U.: Dz.U. 2026 poz. 1005
+  Podpisana przez Prezydenta: 24.07.2026
+  Ogłoszona: koniec lipca 2026 (źródła wskazują 27.07.2026 —
+    „trzy dni po podpisie")
+  ⭐ WEJŚCIE W ŻYCIE: 28 lipca 2027 r. — po upływie 12 MIESIĘCY
+    od ogłoszenia (roczne vacatio legis, świadomie długie: ma dać
+    właścicielom czas na przebudowę posesji)
+
+  ⛔⛔ NAJWAŻNIEJSZA KONSEKWENCJA PRAKTYCZNA DLA SPRAWY PROWADZONEJ
+  DZIŚ: na dzień 2026-08-14 te przepisy JESZCZE NIE OBOWIĄZUJĄ.
+  Do 27.07.2027 r. stan prawny w zakresie trzymania psa na uwięzi
+  reguluje DOTYCHCZASOWE brzmienie ustawy o ochronie zwierząt
+  (art. 9 — warunki utrzymywania, art. 6 — znęcanie się).
+  ⚠️ Powoływanie zakazu uwięzi jako obowiązującego przed 28.07.2027
+  byłoby błędem procesowym. Ustawa ma znaczenie DORADCZE (klient
+  planujący budowę kojca/wybiegu) i PREWENCYJNE, nie sankcyjne.
+
+  ⚠️ [ZALECANA WERYFIKACJA ISAP] — numer pozycji potwierdzony
+  źródłem Rzędu 2 (prawo.pl) i spójny z sekwencją ustaw podpisanych
+  tego samego dnia (ustawa o systemach AI — poz. 1003), ale NIE
+  odczytany bezpośrednio z ISAP. Przed powołaniem w piśmie
+  potwierdź pozycję i DOKŁADNĄ datę ogłoszenia w ISAP.
+```
+
+**ZAKRES ZAKAZU I WYJĄTKI**
+
+```
+ZASADA: generalny zakaz trzymania psów i kotów na uwięzi.
+  Ustawa dotyczy OBU gatunków — nie tylko psów, mimo że debata
+  publiczna koncentrowała się na psach.
+
+WYJĄTKI (uwiązanie nadal dopuszczalne):
+  1) czas transportu zwierzęcia
+  2) udział w wystawie, pokazie, konkursie, występie, treningu
+     lub tresurze
+  3) zabiegi weterynaryjne i pielęgnacyjne
+  4) KRÓTKOTRWAŁE uwiązanie poza miejscem stałego przebywania
+     zwierzęcia (typowy przykład: pies przed sklepem) —
+     pod warunkiem, że nie narusza to jego dobrostanu
+  5) sytuacja, w której zwierzę stwarza BEZPOŚREDNIE zagrożenie
+     dla człowieka lub innego zwierzęcia albo może wyrządzić
+     szkodę, a zastosowanie innego środka nie jest możliwe
+
+  ⚠️ Konstrukcja wyjątku 4 i 5 jest OCENNA („krótkotrwałe",
+  „nie narusza dobrostanu", „inny środek niemożliwy") — to
+  naturalne pole sporu dowodowego w sprawach o wykroczenie
+  lub o znęcanie się. Przy budowaniu obrony/oskarżenia
+  spodziewaj się sporu o te trzy klauzule, nie o sam zakaz.
+```
+
+**OBOWIĄZKI POZYTYWNE (nie tylko zakaz)**
+
+```
+- KOJEC zamiast uwięzi: pies może być utrzymywany w kojcu
+  o odpowiednich wymiarach i parametrach
+- ⭐ CODZIENNY RUCH POZA KOJCEM — sam kojec NIE wystarcza;
+  ruch dostosowany do wieku, stanu zdrowia i potrzeb konkretnego
+  zwierzęcia (kryterium zindywidualizowane, nie ryczałtowe)
+- ODDZIELNA BUDA DLA KAŻDEGO PSA
+- BUDA: z drewna lub materiałów drewnopochodnych stanowiących
+  barierę termiczną
+- Nakaz zapewnienia właściwego schronienia i godnych warunków
+  bytowania
+
+AKT WYKONAWCZY — SPODZIEWANY, JESZCZE NIEWYDANY:
+  minister właściwy ds. rolnictwa, po zasięgnięciu opinii Głównego
+  Lekarza Weterynarii, określi w rozporządzeniu szczegółowe wymagania
+  dla kojców — w tym minimalną powierzchnię, z uwzględnieniem
+  wysokości psa w kłębie, liczby zwierząt w kojcu oraz potrzeb suki
+  karmiącej szczenięta.
+  ⛔ DOPÓKI rozporządzenie nie zostanie wydane, konkretne WYMIARY
+  kojca nie są znane — NIE podawaj klientowi metrażu. Monitoruj.
+```
+
+**KONTEKST LEGISLACYJNY — ISTOTNY DLA WYKŁADNI**
+
+```
+To DRUGIE podejście do tej regulacji. Pierwsza wersja „ustawy
+łańcuchowej", uchwalona przez Sejm w listopadzie 2025 r., została
+ZAWETOWANA przez Prezydenta. Uzasadnienie weta: akt „źle
+przygotowany i przeregulowany", nakładający obowiązki niemożliwe
+do spełnienia przez wielu obywateli.
+
+⚠️ ROZBIEŻNOŚĆ ŹRÓDEŁ, NIEROZSTRZYGNIĘTA: część źródeł datuje weto
+na LISTOPAD 2025, część na GRUDZIEŃ 2025. Jeśli data weta ma
+znaczenie w sprawie (np. przy argumentacji intertemporalnej),
+ustal ją w oficjalnym rejestrze prezydenckim — NIE powołuj się
+na żadną z tych dat na podstawie tego modułu.
+
+ZNACZENIE DLA WYKŁADNI: wersja podpisana jest świadomym
+KOMPROMISEM — usunięto sztywne wymagania, uwzględniono realia
+pracy rolników, hodowców, służb, schronisk i właścicieli psów
+pasterskich. Przy sporze o zakres obowiązku argument z celu
+ustawy powinien uwzględniać tę genezę: intencją nie było
+maksymalizowanie rygoru, lecz wykonalność.
+
+⚠️ DO ZWERYFIKOWANIA PRZED POWOŁANIEM (źródło Rząd 3, pojedyncze):
+zaostrzenie kar za znęcanie się nad zwierzętami, regulacje
+dobrostanu w hodowlach i zwiększenie nadzoru nad schroniskami —
+sygnalizowane jako element tej samej nowelizacji, ale
+NIEPOTWIERDZONE w wystarczającej liczbie źródeł. Jeżeli sprawa
+dotyczy WYMIARU KARY z art. 35 ustawy o ochronie zwierząt,
+sprawdź brzmienie w ISAP — nie opieraj się na tym akapicie.
+```
+
+**Weryfikacja (ZASADA 12):** Rząd 2 — prawo.pl, rp.pl (numer Dz.U.,
+data podpisu, treść zakazu); Rząd 3, wyłącznie jako potwierdzenie
+zbieżności — koteria.org.pl, salon24.pl, 24opole.pl,
+naszszydlowiec.pl, niedziela.pl. Brak bezpośredniego odczytu ISAP.
+
+---
+
 ## Połącz z
 - DR-10/mod-ustawa-bezpieczenstwo-zywnosci (moduł MACIERZYSTY — produkty
   spożywcze, sanepid, oznaczenia, substancje zabronione, import)

@@ -67,9 +67,26 @@ WSZYSTKIE TRZY warunki JEDNOCZEŚNIE:
   VAT-26
 □ Pojazdy CIĘŻAROWE >3,5 t, pojazdy SPECJALNE, BUSY (określone wymogi
   konstrukcyjne art. 86a ust. 9 VAT) — analogicznie 100% automatycznie
-□ Musi być wpisany do CRP-26 (Centralny Rejestr Pojazdów zwolnionych) —
-  ⚠️ dokładna nazwa/mechanizm rejestru niepotwierdzony w pełni w tej
-  sesji, punkt startowy
+□ ✅ **SKORYGOWANE (2026-08-19, F-35):** "CRP-26" — termin
+  **NIEFORMALNY** używany w niektórych źródłach blogowych (np.
+  smartapki.pl), **NIE oficjalna, odrębna nazwa rejestru** w ustawie o
+  VAT ani w przepisach wykonawczych — ustawa o VAT NIE zna instytucji
+  o takiej nazwie. Prawidłowy mechanizm (potwierdzony 6+ zgodnymi
+  źródłami — poradnikprzedsiebiorcy.pl, infor.pl, biznes.gov.pl, vatax.pl,
+  oneclick-workflow.pl): **dla pojazdów KONSTRUKCYJNIE wyłączonych
+  (VAT-1/VAT-2, art. 86a ust. 9) — W OGÓLE BRAK obowiązku zgłoszenia/
+  rejestracji jakiegokolwiek rodzaju** — 100% odliczenia przysługuje
+  AUTOMATYCZNIE z mocy samej konstrukcji pojazdu i wpisu w dowodzie
+  rejestracyjnym, bez VAT-26 i bez żadnego innego formularza. **VAT-26
+  dotyczy WYŁĄCZNIE INNEJ kategorii** — pojazdów NIEwyłączonych
+  konstrukcyjnie (zwykłe osobowe), gdzie podatnik chce mimo to odliczać
+  100%, deklarując wyłączne przeznaczenie firmowe (wymaga: zgłoszenie
+  VAT-26 do naczelnika US w terminie 25. dnia miesiąca po pierwszym
+  wydatku + prowadzenie ewidencji przebiegu + regulamin użytkowania).
+  ⭐ Poprzedni zapis modułu MYLIŁ te dwie odrębne ścieżki, sugerując że
+  VAT-26/"CRP-26" dotyczy TAKŻE pojazdów konstrukcyjnie wyłączonych —
+  to nieprawidłowe, mogło prowadzić do zbędnego doradzenia klientowi
+  złożenia formularza, którego nie musi składać.
 ```
 
 ### 4. ⭐⭐ RYZYKO PRAKTYCZNE — kontrola i sposoby wykrycia naruszenia

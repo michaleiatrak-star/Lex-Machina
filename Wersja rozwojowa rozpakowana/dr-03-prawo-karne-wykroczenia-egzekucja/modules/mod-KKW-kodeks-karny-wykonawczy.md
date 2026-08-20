@@ -187,6 +187,240 @@ z tą instytucją (sprawa Marek Petelski — art. 161 § 4, ryzyko
   pogłębienia przy konkretnej sprawie.
 ```
 
+### 0.4. PRAWA I OBOWIĄZKI SKAZANEGO (Oddział 4, art. 101-120) — dodano
+2026-08-20 (naprawa F-75, druga pozostała pozycja raportu zewnętrznego)
+
+```
+⭐⭐⭐ ART. 102 — KATALOG PRAW skazanego (⭐ katalog otwarty, "w
+  szczególności", najważniejsze pozycje):
+  pkt 1 — odpowiednie ze względu na zachowanie zdrowia wyżywienie,
+    odzież, warunki bytowe, pomieszczenia oraz świadczenia zdrowotne i
+    warunki higieny
+  pkt 2 — wynagrodzenie związane z zatrudnieniem oraz ubezpieczenie
+    społeczne, a także pomoc w uzyskiwaniu świadczeń inwalidzkich
+  pkt 5 — kształcenie, samokształcenie i wykonywanie twórczości
+    własnej, a za zgodą dyrektora ZK — wytwarzanie i zbywanie
+    wykonanych przedmiotów
+  pkt 6 — korzystanie z urządzeń i zajęć kulturalno-oświatowych i
+    sportowych, radia, telewizji, książek i prasy
+  pkt 7 — komunikowanie się z obrońcą, pełnomocnikiem, właściwym
+    kuratorem sądowym oraz wybranym przedstawicielem
+  pkt 10 — składanie WNIOSKÓW, SKARG i PRÓŚB organowi właściwemu do
+    ich rozpatrzenia (⭐⭐⭐ podstawa prawna dla całej praktyki
+    skargowej skazanego — orzecznictwo SN cytowane w doktrynie)
+
+⭐⭐⭐ ART. 103 — SKAZANI MAJĄ PRAWO kierować SKARGI do organów
+  powołanych na podstawie RATYFIKOWANYCH przez RP umów międzynarodowych
+  dot. ochrony praw człowieka (⭐⭐⭐ droga do ETPCz i podobnych organów —
+  odrębna od skargi krajowej do sądu penitencjarnego; kontrola
+  korespondencji z ETPCz podlega SZCZEGÓLNEJ ochronie — orzecznictwo
+  ETPCz cytowane wielokrotnie w doktrynie)
+
+⭐⭐ ART. 104 — GRANICA korzystania z praw: musi następować w sposób NIE
+  NARUSZAJĄCY praw innych osób oraz NIE ZAKŁÓCAJĄCY ustalonego w ZK
+  porządku (⭐ klauzula ogólna ograniczająca)
+
+⭐⭐⭐ ART. 105 §1 — utrzymywanie WIĘZI: skazanemu NALEŻY umożliwiać
+  utrzymywanie więzi PRZEDE WSZYSTKIM z rodziną i innymi osobami
+  bliskimi przez: WIDZENIA, KORESPONDENCJĘ, ROZMOWY TELEFONICZNE,
+  PACZKI i PRZEKAZY PIENIĘŻNE, a w uzasadnionych wypadkach za zgodą
+  dyrektora ZK — również inne środki łączności
+  §2 — skazany CUDZOZIEMIEC może prowadzić korespondencję z właściwym
+  urzędem KONSULARNYM (lub przedstawicielstwem dyplomatycznym) oraz
+  korzystać z widzeń z urzędnikiem konsularnym
+  §3 — ZAKRES i SPOSÓB kontaktów (nadzór nad widzeniami, CENZURA
+  korespondencji, kontrolowanie rozmów) UZALEŻNIONE od rodzaju/typu ZK
+  oraz wymogów indywidualnego oddziaływania, Z WYJĄTKIEM prawa do
+  otrzymywania paczek (⭐ paczki NIE podlegają temu różnicowaniu)
+  §4 — dyrektor ZK decyduje o: ZATRZYMANIU korespondencji, CENZUROWANIU
+  korespondencji (w ZK typu półotwartego/otwartego), KONTROLOWANIU
+  rozmów — Z WYJĄTKIEM przypadków z art. 8 §3 (prawo do obrońcy) oraz
+  art. 8a §2-3 (korespondencja skazanego), JEŻELI wymagają tego
+  względy BEZPIECZEŃSTWA ZK lub PORZĄDKU PUBLICZNEGO — dyrektor
+  INFORMUJE skazanego o zatrzymaniu korespondencji, MOŻE zezwolić na
+  przekazanie WAŻNEJ wiadomości z zatrzymanej korespondencji
+
+⭐⭐ ART. 105a — WIDZENIA — mechanika szczegółowa:
+  §1: widzenie trwa 60 MINUT, TYLKO JEDNO widzenie dziennie (z
+    zastrzeżeniami art. 90 pkt 6 i art. 91 pkt 8)
+  §2: MAKSYMALNIE 2 osoby PEŁNOLETNIE mogą uczestniczyć; liczba
+    NIEPEŁNOLETNICH — BEZ OGRANICZEŃ (pod opieką osoby pełnoletniej)
+  §3: skazani z art. 87a (⚠️ kategoria niezidentyfikowana w tej sesji)
+    MAJĄ PRAWO do DODATKOWEGO widzenia z dziećmi
+  §4: widzenie z osobą NIEBĘDĄCĄ członkiem rodziny/bliskim — WYMAGA
+    zezwolenia dyrektora ZK
+  §5: widzenia pod NADZOREM funkcjonariusza, przy oddzielnym stoliku
+  §7: w razie naruszenia ustalonych zasad — widzenie MOŻE być przerwane
+    lub zakończone przed czasem
+  §9: ograniczenia z §1, 2, 5 NIE MAJĄ zastosowania do widzeń z
+    obrońcą (art. 8 §3) i osobami z art. 105 §2 (urzędnik konsularny)
+
+⭐⭐ ART. 104a — UDZIAŁ skazanych w USUWANIU skutków sytuacji
+  kryzysowych i klęsk żywiołowych — NA WNIOSEK właściwego organu
+  gminy, ZA ZGODĄ dyrektora ZK [⚠️ dalsza treść nie zbadana
+  szczegółowo]
+
+⭐⭐⭐ ART. 116 §1 — OBOWIĄZKI skazanego: przestrzeganie przepisów
+  określających zasady i tryb wykonywania kary, ustalonego w ZK
+  PORZĄDKU oraz wykonywania POLECEŃ przełożonych — W SZCZEGÓLNOŚCI
+  niezwłoczne ZAWIADOMIENIE przełożonego o CHOROBIE własnej i
+  zauważonych OBJAWACH chorobowych u innego skazanego
+  §2-6 — KONTROLA OSOBISTA skazanego (⭐⭐⭐ szeroko cytowana w
+  orzecznictwie ETPCz/SN/SO/SR, 7 pozycji wg doktryny): polega na
+  OGLĘDZINACH ciała oraz SPRAWDZENIU odzieży, bielizny, obuwia i
+  posiadanych przedmiotów (§3) — oględziny ciała/sprawdzenie odzieży w
+  POMIESZCZENIU, BEZ osób postronnych i osób ODMIENNEJ PŁCI, wykonywane
+  przez osobę TEJ SAMEJ PŁCI. Kontrola MOŻE być przeprowadzona w
+  KAŻDYM czasie — dopuszczalne NARUSZENIE plomb gwarancyjnych i
+  USZKODZENIE przedmiotów w niezbędnym zakresie (§4). Przedmioty
+  ZNALEZIONE, których skazany NIE MOŻE posiadać — ZATRZYMANIE; z
+  ustalonym właścicielem — DEPOZYT lub przesłanie na koszt skazanego
+  (§5). ⭐⭐⭐ SKARGA na kontrolę osobistą (odesłanie systemowe do art.
+  223h w Rozdziale XVb, analogiczna konstrukcja): przysługuje do
+  właściwego SĄDU PENITENCJARNEGO w TERMINIE 7 DNI od przeprowadzenia
+  kontroli, W CELU zbadania ZASADNOŚCI, LEGALNOŚCI oraz PRAWIDŁOWOŚCI
+  — składana NA PIŚMIE za pośrednictwem dyrektora ZK/aresztu. Sąd
+  ORZEKA o nieuwzględnieniu LUB stwierdzeniu bezzasadności/nielegalności/
+  nieprawidłowości — W RAZIE stwierdzenia wadliwości sąd ZAWIADAMIA
+  prokuratora oraz właściwego dyrektora okręgowego SW
+
+⭐⭐ ART. 117 — LECZENIE ODWYKOWE skazanego uzależnionego (⚠️ pełna
+  treść nie zbadana w tej sesji — cytowana w doktrynie jako szeroko
+  omawiana w orzecznictwie SA/SN); ART. 118 §1 — jeżeli wykonywanie
+  kary MOŻE ZAGRAŻAĆ życiu skazanego lub spowodować POWAŻNE
+  niebezpieczeństwo dla zdrowia, dyrektor ZK NA WNIOSEK lekarza
+  NIEZWŁOCZNIE powiadamia sędziego penitencjarnego (⭐⭐ mechanizm
+  ostrzegawczy, punkt wyjścia dla odroczenia/przerwy z art. 150-151
+  opisanych w sekcji 0.2)
+
+⭐⭐ ART. 119 — sprawcy przestępstw z art. 197-203 KK popełnionych W
+  ZWIĄZKU z zaburzeniami preferencji seksualnych OBEJMUJE SIĘ, ZA JEGO
+  ZGODĄ, odpowiednim LECZENIEM i REHABILITACJĄ; W RAZIE BRAKU zgody —
+  o STOSOWANIU leczenia/rehabilitacji ORZEKA sąd penitencjarny (⭐⭐
+  powiązanie z opinią biegłych obligatoryjną przy warunkowym zwolnieniu
+  tej kategorii skazanych, patrz sekcja 0.1 wyżej)
+
+⚠️ POZOSTAJE DO POGŁĘBIENIA: pełna treść art. 105b (telefon), 106
+  (wolność religii), 108 (bezpieczeństwo osobiste, nadzór), 113
+  (⚠️ niezidentyfikowana treść w tej sesji), pełny katalog art. 102
+  poza już wymienionymi punktami — punkt startowy.
+```
+
+### 0.5. KARY DYSCYPLINARNE (Oddział 9, art. 142-149) — dodano
+2026-08-20 (naprawa F-75, ostatnia pozycja raportu zewnętrznego)
+
+```
+⭐⭐⭐ ART. 142 §1 — ODPOWIEDZIALNOŚĆ DYSCYPLINARNA za ZAWINIONE
+  naruszenie nakazów/zakazów wynikających z ustawy, regulaminu lub
+  innych przepisów wykonawczych ALBO ustalonego w ZK/miejscu pracy
+  PORZĄDKU — zwane "PRZEKROCZENIEM" (⭐⭐⭐ wymóg ZAWINIENIA — element
+  subiektywny, nie odpowiedzialność obiektywna)
+  §2 — jeżeli przekroczenie zawiera ZNAMIONA WYKROCZENIA, skazany
+  podlega ODPOWIEDZIALNOŚCI DYSCYPLINARNEJ, CHYBA że wykroczenie
+  popełniono W CZASIE POBYTU POZA obrębem ZK (⭐⭐⭐ zasada wyłączności
+  reżimu dyscyplinarnego wewnątrz ZK, z wyjątkiem dla zdarzeń "na
+  zewnątrz" — te podlegają zwykłemu reżimowi wykroczeniowemu)
+
+⭐⭐⭐ ART. 143 §1 — KATALOG kar dyscyplinarnych (⭐⭐⭐ zamknięty, od
+  najłagodniejszej do najsurowszej, gradacja istotna dla oceny
+  proporcjonalności):
+  pkt 1 — NAGANA (⭐ najłagodniejsza)
+  pkt 2 — pozbawienie WSZYSTKICH lub NIEKTÓRYCH niewykorzystanych
+    nagród/ulg ALBO zawieszenie ich wykonania, NA OKRES DO 3 MIESIĘCY
+  pkt 3 — pozbawienie korzystania z udziału w NIEKTÓRYCH zajęciach
+    [⚠️ pełna treść pkt 3 nie w pełni zbadana]
+  pkt 8 (⭐⭐⭐ NAJSUROWSZA, osobno obwarowana gwarancjami — patrz art.
+    145 §3 niżej) — OSADZENIE pojedynczo w celi + UNIEMOŻLIWIENIE
+    kontaktu z innymi skazanymi; W TRAKCIE jej wykonywania skazanego
+    POZBAWIA SIĘ możliwości: (1) korzystania z widzeń i
+    samoinkasujących aparatów telefonicznych, (2) korzystania ze
+    sprzętu audiowizualnego/komputerowego, (3) BEZPOŚREDNIEGO
+    uczestniczenia WSPÓLNIE z innymi w nabożeństwach/spotkaniach
+    religijnych/nauce religii — NA ŻĄDANIE skazanego NALEŻY jednak
+    umożliwić bezpośrednie uczestnictwo w nabożeństwie w warunkach
+    UNIEMOŻLIWIAJĄCYCH kontakt z innymi, (4) korzystania z zajęć
+    kulturalno-oświatowych [⚠️ dalszy katalog ograniczeń §3 nie w
+    pełni wyczerpany]. §3 — karę tę WYMIERZA SIĘ skazanemu, KTÓRY
+    dopuścił się NARUSZENIA NIETYKALNOŚCI CIELESNEJ lub CZYNNEJ
+    NAPAŚCI na funkcjonariusza/pracownika ZK, ORAZ MOŻNA wymierzyć za
+    inne przekroczenie naruszające W POWAŻNYM STOPNIU dyscyplinę i
+    porządek (⭐⭐ dwustopniowa przesłanka: obligatoryjna dla napaści,
+    fakultatywna dla innych poważnych naruszeń)
+
+⭐⭐⭐ ART. 144 §1 — KOMPETENCJA: kary z art. 143 §1 pkt 4, 5 i 7-8
+  wymierza WYŁĄCZNIE dyrektor ZK; INNE kary — RÓWNIEŻ osoba przez
+  niego upoważniona (⭐⭐ najsurowsze kary zastrzeżone dla samego
+  dyrektora, bez możliwości delegacji)
+  §2 — kary wymierza się Z URZĘDU lub na PISEMNY wniosek przełożonego
+  §3 — decyzja MUSI zawierać DOKŁADNE określenie przekroczenia
+  §4 — decyzja SPORZĄDZANA NA PIŚMIE, PODAWANA do wiadomości skazanemu
+    (a gdy względy wychowawcze przemawiają — RÓWNIEŻ innym skazanym/
+    osobom) — analogicznie dla decyzji o UCHYLENIU, DAROWANIU,
+    ODROCZENIU, ZAMIANIE, ZAWIESZENIU lub PRZERWANIU kary, oraz o
+    ODSTĄPIENIU od ukarania
+  §5 — na decyzje z §1 PRZYSŁUGUJE SKARGA (⭐⭐⭐ podstawowy środek
+    zaskarżenia ukarania dyscyplinarnego, patrz też sędzia penitencjarny
+    niżej)
+
+⭐⭐⭐ ART. 145 §1 — DYREKTYWY WYMIARU: uwzględnia się stopień
+  ZAWINIENIA i ZASADY INDYWIDUALIZACJI — W SZCZEGÓLNOŚCI rodzaj i
+  okoliczności czynu, stosunek do przekroczenia, DOTYCHCZASOWĄ postawę,
+  cechy osobowości i STAN ZDROWIA skazanego oraz CELE WYCHOWAWCZE
+  §2 — PRZED wymierzeniem: WYSŁUCHUJE SIĘ obwinionego, ZAPOZNAJE się z
+  opinią WYCHOWAWCY, w razie potrzeby — RÓWNIEŻ z opinią składającego
+  wniosek i INNYCH osób oraz ZEZNANIAMI świadków — postępowanie MOŻE
+  odbywać się W OBECNOŚCI innych skazanych, jeśli przemawiają za tym
+  względy wychowawcze (⭐⭐⭐ gwarancje proceduralne minimum —
+  odpowiednik prawa do obrony w postępowaniu dyscyplinarnym)
+  §3 — PRZED wymierzeniem kary z art. 143 §1 pkt 8 (izolacja) — LEKARZ
+  ALBO PSYCHOLOG wydaje PISEMNĄ opinię o ZDOLNOŚCI skazanego do
+  odbycia tej kary; PRZY BRAKU zdolności — stosuje się art. 146 §3.
+  WYMIERZENIE tej kary POWYŻEJ 14 DNI wymaga ZGODY sędziego
+  penitencjarnego (⭐⭐⭐ dodatkowa gwarancja sądowa dla najdłuższej
+  izolacji)
+  §4-5 — PRZED wymierzeniem kar z art. 143 §1 pkt 4-5 skazanemu,
+  któremu ZE WZGLĘDU na stan zdrowia zezwolono na dodatkowe zakupy/
+  paczki/dietę — ZASIĘGA SIĘ opinii lekarza co do SKUTKÓW dla zdrowia;
+  dyrektor PODEJMUJE decyzję o EWENTUALNYM odroczeniu wykonania
+
+⭐⭐ ART. 146 §1 — ZASADA JEDNEJ KARY: za JEDNO przekroczenie wymierza
+  się TYLKO JEDNĄ karę dyscyplinarną; GDY skazany popełnił WIĘCEJ
+  przekroczeń, ZANIM został ukarany za którekolwiek z nich — wymierza
+  się JEDNĄ karę, ODPOWIEDNIO SUROWSZĄ (⭐⭐ zasada konsumpcji, analogia
+  do kary łącznej)
+
+⭐⭐⭐ ART. 147 §1 — PRZEDAWNIENIE KARALNOŚCI (⭐⭐⭐ dwa terminy
+  alternatywne, KRÓTSZE OGRANICZAJĄ): NIE MOŻNA wymierzyć kary, jeżeli
+  od dnia POWZIĘCIA przez przełożonego wiadomości o przekroczeniu
+  upłynęło 14 DNI LUB od dnia POPEŁNIENIA przekroczenia — 30 DNI. NIE
+  MOŻNA rozpocząć WYKONYWANIA kary dyscyplinarnej po upływie 14 DNI od
+  jej wymierzenia (⭐⭐⭐ trzeci, odrębny termin — na WYKONANIE, nie
+  tylko wymierzenie)
+  §2 — terminy NIE BIEGNĄ, jeżeli skazany przebywa POZA obrębem ZK
+  BEZ zezwolenia, LUB w związku z LECZENIEM wynikłym z samouszkodzenia
+  lub zasadnego zastosowania środków przymusu bezpośredniego, A TAKŻE
+  w okresie ZAWIESZENIA wykonania kary dyscyplinarnej
+  §3 — przedawnienie WYKONANIA nie biegnie W CZASIE wykonywania TAKIEJ
+  SAMEJ kary, wymierzonej WCZEŚNIEJ
+
+⭐⭐⭐ ART. 148 (z materiału wtórnego, ⚠️ dokładny numer artykułu do
+  potwierdzenia) — wymierzoną karę dyscyplinarną WYKONUJE SIĘ
+  BEZZWŁOCZNIE. SĘDZIA PENITENCJARNY MOŻE: WSTRZYMAĆ wykonanie kary
+  NA CZAS potrzebny do wyjaśnienia okoliczności uzasadniających jej
+  wymierzenie, A TAKŻE UCHYLIĆ karę dyscyplinarną Z POWODU jej
+  NIEZASADNOŚCI [⚠️ dalsza treść przepisu, w tym dokładny zakres
+  kompetencji "lub przekaza..." — urwana w źródle, NIE w pełni
+  potwierdzona] (⭐⭐⭐ KLUCZOWY mechanizm kontroli sądowej — sędzia
+  penitencjarny jako organ NADZORU nad decyzjami dyrektora ZK w
+  sprawach dyscyplinarnych, komplementarny do skargi z art. 144 §5)
+
+⚠️ POZOSTAJE DO POGŁĘBIENIA: pełny katalog art. 143 §1 (pkt 4-7 poza
+  już wymienionymi), dokładna treść art. 148-149, tryb i termin skargi
+  z art. 144 §5 (czy to skarga do sędziego penitencjarnego, czy inny
+  organ — NIE jednoznacznie potwierdzone w tej sesji, wymaga
+  rozróżnienia od mechanizmu z art. 148 wyżej).
+```
+
 ---
 
 ## ROZGRANICZENIE (sekcja 0)

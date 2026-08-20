@@ -220,7 +220,17 @@ AUDIT-JOURNAL.md`.
                rozróżnienie odroczenie vs przerwa, obligatoryjne vs
                fakultatywne], dozór elektroniczny [43a-43zf, 3 formy,
                struktura 5 oddziałów]. Naprawiono też niezgodność
-               nazwy wewnętrznej pliku)
+               nazwy wewnętrznej pliku. ✅ ROZSZERZONY 2026-08-20 —
+               F-75 ZAMKNIĘTA W CAŁOŚCI: sekcja 0.4 prawa i obowiązki
+               skazanego [101-120, w tym art. 102 katalog praw, art.
+               105/105a widzenia i korespondencja, art. 116 §2-6
+               kontrola osobista ze skargą 7-dniową do sądu
+               penitencjarnego]; sekcja 0.5 kary dyscyplinarne
+               [142-149, katalog kar z art. 143 w tym izolacja pkt 8,
+               gwarancje proceduralne art. 145, przedawnienie
+               dwutorowe 14/30 dni z art. 147, kontrola sędziego
+               penitencjarnego]. ⚠️ [NIEWERYFIKOWANE RZĄD 1] większość
+               nowej treści)
   [✓] OK    mod-KPK-tryby-scigania
   [✓] NOWY  mod-tajemnica-zawodowa-poufnosc
               (utworzony 2026-07-15, część 4/6 naprawy; art. 266 KK —

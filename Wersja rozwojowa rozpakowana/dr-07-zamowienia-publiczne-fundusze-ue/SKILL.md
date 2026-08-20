@@ -59,6 +59,19 @@ ustawy), sam rdzeń klasycznego przetargu generujący najwięcej sporów.
                NIE wytrych, z przykładem orzeczniczym])
               (2026-07-18: naprawiono martwy odnośnik "Zamówienia obronne
                → DR-13" oraz rozbudowano przetarg nieograniczony/ograniczony)
+  [✓] NOWY  mod-PZP-otwarcie-badanie-ofert-przebieg-KIO
+              (dodany 2026-08-20 — naprawa F-71, pozostała część flagi:
+               otwarcie ofert [art. 222, transparentność nazw/siedzib],
+               badanie i ocena ofert [art. 223, zakaz negocjacji i
+               zmiany treści oferty], uzupełnienie przesłanek odrzucenia
+               [art. 226]; szczegółowy przebieg rozprawy przed KIO —
+               dowody [art. 536/539/541, ⚡ PREKLUZJA DOWODOWA od
+               12.06.2026, nowelizacja deregulacyjna art. 28 ustawy
+               21.05.2025], odroczenie i otwarcie rozprawy na nowo
+               [art. 550-551], rodzaje orzeczeń wyrok/postanowienie
+               [art. 552-555, zakaz orzekania ponad zarzuty — kluczowe
+               dla redakcji odwołania]. ⚠️ [NIEWERYFIKOWANE RZĄD 1]
+               większość treści. F-71 ZAMKNIĘTA W CAŁOŚCI tym modułem)
   [✓] OK    mod-PZP-dzial-I-podstawy-wylaczenia-szacowanie
               (dodany 2026-07-18: próg podstawowy 170 000 zł, wyłączenia
                stosowania ustawy art. 9-15 (usługi prawne, nieruchomości

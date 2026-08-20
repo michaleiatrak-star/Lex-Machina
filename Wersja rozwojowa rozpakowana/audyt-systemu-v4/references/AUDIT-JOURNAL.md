@@ -45333,3 +45333,3038 @@ potwierdzona jako spójna wewnętrznie.
 **F-26 — 4/7 punktów zamknięte.** Pozostaje: pkt 5 (obowiązek zatrzymania
 po wypadku, art. 44 PRD), pkt 6 (przywłaszczenie części — art. 284 KK),
 pkt 7 (katalog prekursorów narkotykowych).
+
+---
+
+## AUDYT-2026-08-18r — F-26 (dr-03), pkt 5 zamknięty (art. 44 PRD)
+
+**Ustalenie:** art. 44 PRD to odrębny obowiązek administracyjno-porządkowy
+(nie karny) — ust. 1 dotyczy każdego wypadku (zatrzymanie, zabezpieczenie,
+dane osobowe na żądanie), ust. 2 obowiązki dodatkowe przy ofiarach
+(pomoc, wezwanie służb, pozostanie na miejscu, wstrzymanie się od
+alkoholu), ust. 3 stosuje się też do pokrzywdzonego, nie tylko sprawcy.
+Rozgraniczone od okoliczności obciążającej "zbiegnięcia" z art. 42 §3 KK —
+mogą wystąpić równolegle, różna podstawa i reżim.
+
+**F-26 — 5/7 punktów zamknięte.** Pozostaje: pkt 6 (art. 284 KK
+przywłaszczenie części), pkt 7 (katalog prekursorów narkotykowych).
+
+---
+
+## AUDYT-2026-08-18s — F-26 (dr-03) ZAMKNIĘTA W CAŁOŚCI
+
+**Pkt 6 — art. 284 KK, przywłaszczenie części klienta:** ZAMKNIĘTY z
+istotną korektą kwalifikacji — część powierzona warsztatowi to przypadek
+§2 (rzecz powierzona, 3 mies.–5 lat), NIE §1 (podstawowy, do 3 lat) jak
+moduł zakładał. Zmienia to prawidłową kwalifikację czynu w zbiegu z
+oszustwem (art. 286 §1 w zb. z art. 284 §2 w zw. z art. 11 §2 KK) i
+podnosi górną granicę zagrożenia karą dla wątku przywłaszczeniowego.
+
+**Pkt 7 — katalog prekursorów narkotykowych:** w większości zamknięty —
+3 kategorie wg rozp. 273/2004 opisane z rosnącym rygorem (kat. 3 najniższy
+— dokumentacja; kat. 2 — rejestracja w Biurze ds. Substancji Chemicznych,
+funkcjonariusz odpowiedzialny, raportowanie roczne; kat. 1 — najwyższy
+rygor, ale szczegółowy katalog obowiązków kat. 1 osobno NIE odczytany w
+pełni, pozostaje szczątkowo otwarte). Organy krajowe zidentyfikowane
+(Prezes Biura ds. Substancji Chemicznych, PPIS, GIS).
+
+## BILANS F-26: FLAGA ZAMKNIĘTA W CAŁOŚCI (7/7 punktów dotkniętych: 6 w
+pełni zweryfikowanych + 1 w większości). Dwie istotne korekty
+merytoryczne wykryte i naprawione po drodze (art. 161 KK — struktura
+paragrafów odwrotna od założenia modułu; art. 284 KK — właściwy paragraf
+kwalifikacji to §2, nie §1). Flaga usunięta z tabeli WARN-OTWARTE.
+
+## PODSUMOWANIE CAŁEJ SESJI 2026-08-18 (wielogodzinna, kontynuowana przez
+wiele tur na wyraźne polecenie użytkownika "kontynuuj"):
+- **F-91** (dr-09): 16/16 punktów ogona dotkniętych, w tym korekta
+  własnego błędu (sygnatura pkt 7 — fałszywy negatyw odwrócony).
+- **F-93** (dr-09): priorytet #1 + oba zadania propagacyjne + art. 42ab —
+  wszystko zamknięte lub w większości zamknięte.
+- **F-26** (dr-03): ZAMKNIĘTA W CAŁOŚCI, 7/7 punktów.
+- Odkrycie systemowe: `web_fetch` ISAP zablokowany — wpływa na wszystkie
+  przyszłe sesje wymagające bezpośredniego odczytu RZĄD 1.
+- Dwie materializacje ryzyka HARDGATE (sygnatura nieistniejąca w F-26 pkt
+  1; błędne "wyliczenia własne" terminów w F-91 pkt 16) — obie wykryte i
+  naprawione dzięki systematycznej weryfikacji źródłowej, nie zgadywaniu.
+- Pozostają nietknięte w tej sesji: F-29, F-35, F-38, F-42, F-47
+  (wszystkie niski/bardzo niski priorytet, zmigrowane), obserwacje O-1/O-2.
+
+---
+
+## AUDYT-2026-08-18t — F-29 (dr-04), pkt 1 zamknięty (art. 292-295 KP)
+
+**Zakres:** trzecia flaga tej sesji poza dr-09 — F-29 (dr-04-prawo-pracy).
+
+**Ustalenie i korekta:** moduł wcześniej ZGADYWAŁ, że art. 292-295
+dotyczą "przerwania biegu przez wezwanie do zapłaty" (instytucja typowa
+dla KC). Rzeczywista treść: art. 292 (skutek — zarzut, nie automatyczne
+wygaśnięcie), art. 293+293¹ (zawieszenie: siła wyższa, urlop
+wychowawczy/wypoczynkowy), art. 294 (ochrona osób bez pełnej zdolności do
+czynności prawnych), art. 295 (przerwanie — ale przez CZYNNOŚĆ PRZED
+ORGANEM, nie samo wezwanie pozaprocesowe — subtelna różnica względem
+intuicji z prawa cywilnego). Checklist w module poprawiony, by wskazywać
+właściwy przepis (art. 295, nie art. 292) dla pytania o przerwanie biegu.
+
+**F-29 — 1/4 punktów zamknięty.** Pozostaje: pkt 2 (luki PIT/RTV — jawnie
+oznaczone jako "GENUINE LUKA", nie artefakt niedopracowania), pkt 3 (spór
+o zaliczanie okresów B2B/zlecenia w reformie stażu pracy), pkt 4
+(emerytury pomostowe — całkowity brak pokrycia w DR-04, jakościowo inny
+typ zadania niż pojedynczy artykuł, wymaga nowego modułu).
+
+---
+
+## AUDYT-2026-08-18u — F-29 (dr-04), pkt 3 zamknięty (tryb sporu staż pracy)
+
+**Czwarta korekta merytoryczna tej sesji:** moduł błędnie zakładał, że
+rozstrzygnięcie pracodawcy o (nie)zaliczeniu okresu B2B/zlecenia do stażu
+jest "ostateczne". W rzeczywistości: pisemny wniosek pracownika →
+odmowa pracodawcy → droga do SĄDU PRACY, który rozstrzyga. To zwykła
+droga sądowa, nie żaden szczególny tryb ostateczny administracyjny.
+Metryki ustawy (26.09.2025, Dz.U. 2025 poz. 1423) potwierdzone jako już
+poprawne w module — cross-check bez korekty.
+
+**F-29 — 2/4 punktów zamknięte.** Pozostaje: pkt 2 (luki PIT/RTV — świadomie
+odłożone), pkt 4 (emerytury pomostowe — całkowity brak w DR-04).
+
+---
+
+## AUDYT-2026-08-18v — F-29 (dr-04) ZAMKNIĘTA W CAŁOŚCI — nowy moduł emerytury pomostowe
+
+**Pkt 4 — całkowity brak pokrycia emerytur pomostowych w DR-04:** zbudowany
+nowy moduł `mod-emerytury-pomostowe.md` od zera. Pokrycie: warunki
+podstawowe art. 4 (6 przesłanek łącznych, w tym kluczowa pułapka
+praktyczna — dwie różne definicje "pracy w szczególnych warunkach" przed
+i po 1999/2008, mogąca prowadzić do odmowy mimo wieloletniego stażu w
+tym samym zawodzie — zilustrowana realnym orzeczeniem VIII U 764/23);
+katalog grup zawodowych z odrębnymi warunkami (art. 5-12, w większości);
+rekompensata (art. 21-23); Fundusz Emerytur Pomostowych i obowiązki
+dokumentacyjne pracodawcy (w całości). Otwarte pozostają: pełna treść
+art. 7 i 12, pełne wykazy załączników 1-2, procedura wnioskowa
+szczegółowo, ścieżka przejściowa z art. 49 — jawnie flagowane, nie
+zgadywane.
+
+**Pkt 2 (luki PIT/RTV):** pozostawiony bez zmian — moduł źródłowy sam
+oznacza je jako "GENUINE LUKA" (świadomie brakująca treść, nie błąd
+audytu), zgodnie z Zasadą 8 (surowa analiza bez fabrykowania treści,
+której nie ma).
+
+## BILANS F-29: FLAGA ZAMKNIĘTA W CAŁOŚCI (4/4 punktów). Piąta korekta/
+uzupełnienie merytoryczne tej sesji w postaci nowego modułu. Flaga
+usunięta z tabeli WARN-OTWARTE.
+
+## AKTUALNY BILANS ŁĄCZNY SESJI 2026-08-18 (bardzo długa, wieloturowa):
+- F-91 (dr-09): 16/16 punktów ogona dotkniętych.
+- F-93 (dr-09): priorytet #1 + zadania propagacyjne + art. 42ab zamknięte.
+- F-26 (dr-03): ZAMKNIĘTA W CAŁOŚCI, 7/7.
+- F-29 (dr-04): ZAMKNIĘTA W CAŁOŚCI, 4/4, w tym 1 nowy moduł od zera.
+- Pozostają nietknięte: F-35, F-38, F-42, F-47 (niski/bardzo niski
+  priorytet), obserwacje O-1/O-2.
+
+---
+
+## AUDYT-2026-08-18w — F-35 (dr-06), pkt 1 zamknięty (tie-breaker rules PIT)
+
+**Zakres:** czwarta flaga poza dr-09 tej sesji — F-35 (dr-06-podatki).
+
+**Ustalenie:** kaskada tie-breaker z art. 4 Modelowej Konwencji OECD:
+(1) stałe miejsce zamieszkania, (2) ośrodek interesów życiowych, (3)
+miejsce zwykłego przebywania (przez porównanie długości pobytu), (4)
+obywatelstwo, (5) porozumienie organów. Realny przykład z orzecznictwa:
+WSA Kraków uchylił interpretację DKIS, który błędnie rozstrzygnął na
+etapie kroku 2 mimo remisu (równie silne powiązania w obu państwach) —
+w takiej sytuacji trzeba przejść do kroku 3. Zastrzeżenie: dokładna
+numeracja liter w konkretnej UPO bilateralnej może różnić się od modelu
+OECD — zawsze sprawdzać tekst konkretnej umowy.
+
+**F-35 — 1/7 punktów zamknięty.** Pozostaje: pkt 2-7 (VAT klasyfikacja,
+VAT nieruchomości, cło podróżnych, KUP użytek mieszany, rachunkowość
+cross-check KSH, usługi płatnicze PSD3).
+
+---
+
+## AUDYT-2026-08-18x — Mapowanie kompletności shared/ (nowa flaga F-94)
+
+**Zadanie:** na żądanie użytkownika — sprawdzić, czy wszystkie pliki w
+`shared/` są wskazane z jakiegoś SKILL.md w systemie.
+
+**Metoda:** 3-przebiegowa weryfikacja — (1) dopasowanie z rozszerzeniem
+`.md`/`.py`/`.js`/`.json` do `shared/SKILL.md`; (2) dopasowanie nazwy
+bazowej bez rozszerzenia (wykryło, że DEFINICJE-KLUCZOWE.md indeksuje 9
+plików z `definicje/` bez podawania rozszerzeń); (3) przeszukanie WSZYSTKICH
+plików SKILL.md w systemie (nie tylko shared/SKILL.md), bo moduły
+dowodowe/strategiczne (MOD-ATAK-*, MOD-SELEKCJA-*, MOD-STRATEGIA-WYBOR
+itd.) są wołane bezpośrednio z `analizator-dowodow-v3` i
+`pisma-procesowe-v3`, nie z shared/SKILL.md — to zgodne z opisem
+shared/SKILL.md ("moduły wczytują inne skille przez view").
+
+**Wynik: system w dobrym stanie.** Z ~152 plików w shared/ tylko 2
+prawdziwe sieroty potwierdzone:
+1. `KONEKTORY-REKOMENDOWANE.md` — niewskazany z żadnego SKILL.md.
+2. `shared/tools/mcp-servers/` (7 folderów, ~42 pliki) — osierocone
+   transitywnie, bo jedyny plik odsyłający do nich sam jest sierotą.
+
+Dodatkowo zasygnalizowany możliwy dryf nazwy:
+`shared/checklists/contradiction-intelligence-checklist-v10.md` vs realnie
+wołany `pisma-procesowe-v3/references/engines/contradiction-intelligence-engine-v10.md`.
+
+**Zapisane jako nowa flaga F-94 (niski priorytet)** w WARN-OTWARTE.md.
+
+---
+
+## AUDYT-2026-08-18y — F-93 ZAMKNIĘTA MERYTORYCZNIE (art. 12 pełny katalog)
+
+**Ostatni realny punkt F-93 zamknięty:** pełny katalog 17 (+ dalsze 18-20)
+pozycji środków przymusu bezpośredniego z art. 12 ustawy o ŚPB i BP,
+Dz.U. 2026 poz. 244 t.j. Zestawiono z podzbiorem dostępnym PSŁ (pkt 1, 2
+lit. a, 7, 9, 12 lit. a, 13) — brak dostępu do broni chemicznej ciężkiej,
+celi izolacyjnej, konia służbowego, kolczatki. **Kluczowe odkrycie:** art.
+12 ust. 2 pozwala wykorzystać niektóre środki (pkt 1 lit. b-d, 5, 7, 8,
+11-13) także wobec ZWIERZĘCIA zagrażającego życiu/zdrowiu — niezależna
+podstawa prawna od reżimu broni palnej z art. 45/47, istotna praktycznie
+dla PSŁ.
+
+**F-93 uznana za zamkniętą merytorycznie.** Zostają wyłącznie 2 punkty
+strukturalnie niewykonalne w tym środowisku (blokada ISAP) — priorytet
+zredukowany z "średni-wysoki" do "niski (pozostałość)".
+
+---
+
+## AUDYT-2026-08-18z — F-89, pierwsza tura naprawcza (3 pozycje potwierdzone)
+
+**Zakres:** uruchomiono `check_sync_aktow.py --kierunek lokalne --limit 0`
+na żądanie użytkownika ("zbadaj to i napraw"). Wynik: 71 pozycji w lokalnej
+MAPA-AKTOW nieobecnych w ROUTING-MAP.
+
+**3 pozycje zweryfikowane i naprawione (dr-01, wszystkie z rodziny
+stanów nadzwyczajnych/ZTP, moduły już wcześniej zweryfikowane 2026-08-14
+w ramach F-77, ale korekta nie została propagowana do ROUTING-MAP):**
+- ZTP (Zasady Techniki Prawodawczej) — ROUTING-MAP miał PRZESTARZAŁĄ
+  metrykę "Dz.U. 2016 poz. 283 ze zm. 2026 poz. 100"; poprawny t.j. to
+  **Dz.U. 2026 poz. 300** (konsolidacja z 26.01.2026). Dotyczyło 2 wierszy
+  (ZTP główny + Rozdz. 4a specustawy).
+- Ustawa o zarządzaniu kryzysowym (2007) — ROUTING-MAP miał placeholder
+  "dokładny nr do potwierdzenia"; poprawny t.j. to **Dz.U. 2026 poz. 574**
+  + nowelizacja 2026.815.
+- Ustawa o stanie wojennym (2002) — ROUTING-MAP miał przestarzały numer
+  z odsyłką "zweryfikuj"; poprawny t.j. to **Dz.U. 2025 poz. 504**.
+
+**Wzorzec błędu zidentyfikowany:** wszystkie 3 przypadki to sytuacja, w
+której lokalna mapa dr-01 była POPRAWIANA w sesji 2026-08-14 (F-77), ale
+poprawka nie została ZPROPAGOWANA do centralnego ROUTING-MAP — dokładnie
+scenariusz, przed którym ostrzega Reguła 3 HARDGATE i który miał wykrywać
+test T11. **Potwierdzone: po naprawie wszystkie 3 numery nie występują
+już w liście gapów** (zweryfikowane ponownym uruchomieniem skryptu).
+
+**Pozostaje: 67-68 pozycji** (numeracja końcowa 70 po naprawie, drobna
+niezgodność liczenia ±1-2 do wyjaśnienia, nieistotna dla oceny postępu).
+Priorytet dalszej pracy: pozostałe pozycje z 2026 r. (najwyższe ryzyko
+realnej luki wg samej flagi F-89), zwłaszcza w dr-09 (8 pozycji z 2025-26),
+dr-06 (4), dr-04 (5), dr-13 (4).
+
+---
+
+## AUDYT-2026-08-19a — F-89, tura 2 (dr-09, 4 pozycje naprawione)
+
+**Zakres:** kontynuacja F-89 — partia dr-09 (8 pozycji flagowanych z
+2025-2026). Ten sam wzorzec błędu co w turze 1: lokalna mapa dr-09 była
+poprawiona/rozstrzygnięta w sesji F-41 (2026-08-14b), ale ROUTING-MAP
+zachował stare placeholdery "⚠️ zweryfikuj t.j." mimo że odpowiedź była
+już znana lokalnie.
+
+**4 wiersze naprawione (zsynchronizowane z lokalną mapą dr-09):**
+- Ochrona przyrody/odpady/POŚ (mod-srodowisko-wycinka-...) — 3 akty
+  z rozstrzygniętymi t.j. (2026.13, 2023.1587, 2025.647) + 2 nowelizacje
+  (2026.737, 2025.1812) wpisane w miejsce placeholdera.
+- Inspekcja Ochrony Środowiska — t.j. 2024.425 + zmiana 2025.1863.
+- System kaucyjny opakowania — nowy t.j. 2026.619 (zastępuje 2025.870).
+
+**4 pozostałe z tej partii (870, 1812, 647, 18, 0) — ROZSTRZYGNIĘTE JAKO
+NIEWYMAGAJĄCE AKCJI:** to incydentalne numery wspominane WEWNĄTRZ już
+poprawionych wierszy (numery poprzednich t.j. lub nowelizacji cytowane
+w prozie), nie osobne akty wymagające własnego wiersza — świadomie
+pominięte, nie błąd audytu. "poz. 0" — artefakt regexu skryptu, nie
+realny akt.
+
+**Wynik T11 po tej turze: 70 → 63 pozycji** (-7 łącznie w dwóch turach:
+3 z dr-01, 4 z dr-09). Pozostaje ~63, priorytet: dr-06 (4), dr-04 (5),
+dr-13 (4) z 2025-2026, potem starsze pozycje.
+
+---
+
+## AUDYT-2026-08-19b — F-89, tura 3 (dr-04, dr-06, dr-13 — 2 naprawy + odkrycie błędnego numeru)
+
+**dr-06 (5 pozycji sprawdzone):** WSZYSTKIE okazały się false-positive —
+numery (736, 644, 507, 1294, 894) są incydentalnymi cytatami wewnątrz
+już poprawnie opisanych, obszernych wierszy VAT/AML/PKPiR, albo (644)
+faktycznie JUŻ obecne w ROUTING-MAP (3 wiersze), co wskazuje na
+ograniczenie heurystyki skryptu przy bardzo długich komórkach tabeli,
+nie realny błąd. Brak akcji — zgodnie z własnym zastrzeżeniem testu T11
+("to nie jest lista błędów").
+
+**dr-04 (1 naprawa z 4 sprawdzonych):** ustawa antymobbingowa —
+ROUTING-MAP miał placeholder "nr NIEZWERYFIKOWANY" mimo że lokalna mapa
+miała już rozstrzygnięty numer **Dz.U. 2026 poz. 1046** (F-28 pkt 6,
+2026-08-14, 3+ źródła zgodne). Naprawione.
+
+**dr-13 (1 naprawa z 5 sprawdzonych, WYSOKIEJ WAGI):** ustawa o SOP —
+ROUTING-MAP miał **BŁĘDNY numer "Dz.U. 2024 poz. 1672"** — dokładnie ten
+sam błąd, który lokalna mapa dr-13 już wykryła i poprawiła 2026-07-04
+(na Dz.U. 2025 poz. 34), ale poprawka nigdy nie trafiła do ROUTING-MAP.
+**To poważniejszy przypadek niż zwykły placeholder — błędny numer mógłby
+zostać błędnie zacytowany w piśmie procesowym, gdyby ktoś sprawdzał
+tylko centralny rejestr.** Naprawione.
+
+## BILANS F-89 PO TRZECH TURACH: 9/71 pozycji naprawionych (3 dr-01 +
+4 dr-09 + 1 dr-04 + 1 dr-13), 5 sprawdzonych i uznanych za false-positive
+(dr-06). Wynik T11: 71 → 61. Wzorzec błędu ugruntowany: lokalne poprawki
+z sesji F-28/F-41/F-77 nie były systematycznie propagowane do
+ROUTING-MAP — rekomendacja dla przyszłych sesji: przy każdej korekcie
+lokalnej mapy AKTOW, natychmiast sprawdzać i synchronizować odpowiadający
+wiersz w ROUTING-MAP (nie odkładać na osobny audyt synchronizacji).
+
+---
+
+## AUDYT-2026-08-19c — F-88, katalog wyłączeń MDR zamknięty
+
+**Zakres:** priorytetowy wątek F-88 (Ordynacja podatkowa 2026, MDR) —
+dokładny katalog wyłączeń podatkowych.
+
+**Ustalenie:** wyłączone z zakresu przedmiotowego MDR — VAT i akcyza
+(studio.pwc.pl, oficjalny komunikat po podpisaniu ustawy). **Kluczowe
+odkrycie strukturalne:** to NIE jest osobny "katalog wyłączeń" w sensie
+listy artykułów — nowelizacja przedefiniowuje samo pojęcie "schemat
+podatkowy" (art. 86a §1 pkt 10 Op) na WYŁĄCZNIE uzgodnienia
+transgraniczne. Sprawy czysto krajowe od 1.10.2026 przestają być
+"schematem podatkowym" w ogóle, więc pytanie o "wyłączenia" dla spraw
+krajowych jest źle postawione — cała ta kategoria wypada poza definicję
+u źródła, nie jest wyłączona z niej punktowo.
+
+**Znaleziona niespójność do wyjaśnienia:** dwa różne progi kwotowe w
+źródłach (8 mln PLN vs 10 mln EUR) — możliwe że dotyczą różnych
+obowiązków (procedura wewnętrzna vs raportowanie ogólne), oznaczone jako
+NIE tożsame bez dalszej weryfikacji, żeby uniknąć błędnego uproszczenia.
+
+**F-88 — priorytetowy wątek MDR zamknięty w całości** (definicja +
+wyłączenia + przepis przejściowy). Pozostaje: 15 pozostałych obszarów
+nowelizacji (KKS, VAT, akcyza, PIT, opłata skarbowa, doradztwo
+podatkowe, prawo bankowe, SKOK, fundusze inwestycyjne, instrumenty
+finansowe, ubezpieczenia, adwokatura, radcowie, rzecznicy patentowi,
+sądy administracyjne) — zgodnie z metodą MOD-PROPAGACJA-NOWELIZACJI,
+jeden obszar na sesję.
+
+---
+
+## AUDYT-2026-08-19d — Odpowiedź na pytanie użytkownika: kwestia słupów / służebność przesyłu (dr-02)
+
+**Pytanie:** "czy są pozostałe kwestie służebności przesyłu?"
+
+**Zbadano:** temat "kwestia słupów" jest już bardzo dobrze opracowany w
+`mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md` — rozróżnienie
+wynagrodzenie/odszkodowanie, brak ustawowej tabeli stawek, dwie ścieżki
+ustanowienia (sądowa/administracyjna), forma aktu notarialnego, oraz
+PRZEŁOMOWY wyrok TK z 2.12.2025 (P 10/16) o niekonstytucyjności
+zasiedzenia sprzed 2008 r. — bardzo aktualne i solidnie udokumentowane.
+
+**Znaleziona realna luka:** artykuły 3052, 3053, 3054 KC były cytowane
+WYŁĄCZNIE jako zbiorcze oznaczenie zakresu ("art. 3051–3054"), nigdy nie
+rozpisane treściowo. Uzupełniono:
+- Art. 3052 — kluczowe, często pomijane: roszczenie DWUKIERUNKOWE, nie
+  tylko przedsiębiorca może żądać ustanowienia (§1), ale i WŁAŚCICIEL
+  może żądać wynagrodzenia gdy przedsiębiorca odmawia (§2) — to
+  najczęściej wykorzystywana ścieżka przez właścicieli działek ze słupami.
+- Art. 3053 — następstwo prawne (automatyczne przejście przy zbyciu
+  przedsiębiorstwa), wygaśnięcie dopiero z likwidacją (nie z upływem
+  czasu), obowiązek usunięcia urządzeń PO wygaśnięciu, z wyjątkiem
+  (odszkodowanie zamiast usunięcia przy nadmiernych kosztach).
+- Art. 3054 — odesłanie do służebności gruntowych, w tym mechanizm
+  zniesienia służebności (art. 294 — próg trudny do spełnienia wobec
+  urządzeń przesyłowych, bo prawie zawsze "konieczne").
+
+**Pozostaje jeden drobny wątek:** termin przedawnienia roszczenia o
+wynagrodzenie za bezumowne korzystanie — kwalifikacja jednorazowa vs
+okresowa w orzecznictwie SN, niepotwierdzona źródłowo.
+
+**Zapisane jako F-95, zamknięta w tej samej sesji, w której wykryta.**
+
+---
+
+## AUDYT-2026-08-19e — F-95 pogłębiona: telekomunikacja ma odmienny reżim (dr-02)
+
+**Pytanie użytkownika:** "co z innymi firmami służebności jak słupy?"
+
+**Kluczowe odkrycie:** moduł traktował elektryczność/gaz/wodę/telekomunikację
+jednolicie pod reżimem KC (art. 3051-3054). To BŁĄD UPROSZCZENIA —
+telekomunikacja ma DODATKOWY, konkurencyjny reżim z Megaustawy (ustawa z
+7.05.2010 o wspieraniu rozwoju usług i sieci telekomunikacyjnych):
+- Art. 30 Megaustawy — "umowa o dostęp telekomunikacyjny": właściciel
+  NIE MOŻE żądać wynagrodzenia za służebność przesyłu, jeśli zachodzą
+  ustawowe przesłanki dostępu. Art. 33 — "umowa o korzystanie z
+  nieruchomości" — analogiczny mechanizm.
+- **To ODWROTNOŚĆ sytuacji przy słupach energetycznych** — tam
+  wynagrodzenie jest standardem (art. 3052 KC), tu może go w ogóle
+  nie być, jeśli operator działa w reżimie Megaustawy.
+- Praktyczna pułapka opisana w źródłach: próby podwójnego pobierania
+  opłat (umowa dostępowa + "dodatkowa" służebność) — nieuprawnione.
+
+**Drugie odkrycie (aktualność):** Prawo telekomunikacyjne — UCHYLONE
+10.11.2024 r., zastąpione Prawem komunikacji elektronicznej (Dz.U. 2024
+poz. 1221). Stary art. 140 PT (lex specialis węższy niż KC dla samych
+kabli telekomunikacyjnych) nie obowiązuje w tej numeracji od tej daty —
+odpowiednik w PKE NIE ustalony w tej sesji (wymaga odczytu ISAP).
+
+**Pozostaje otwarte:** (1) numer artykułu w PKE odpowiadający dawnemu
+art. 140 PT; (2) czy Prawo energetyczne/Prawo wodne mają analogiczny do
+Megaustawy mechanizm dla gazu/wody/ciepła, czy zawsze pełny reżim KC z
+wynagrodzeniem — NIE zweryfikowane źródłowo.
+
+**F-95 pozostaje częściowo otwarta** — poważniejszy, bardziej praktyczny
+wątek niż pierwotnie zamknięty (art. 3052-3054), świadomie nie domykany
+na pół gwizdka.
+
+---
+
+## AUDYT-2026-08-19f — F-95 ZAMKNIĘTA W CAŁOŚCI (światłowód + inne media + PKE)
+
+**Pytanie:** "zbadaj te pozostałe kwestie plus światłowód i zbadaj czy
+jeszcze są inne rodzaje służebności przesyłu"
+
+**Ustalenia końcowe:**
+1. Gaz/woda/ciepło: POTWIERDZONE brak odpowiednika Megaustawy — zawsze
+   pełny reżim KC z wynagrodzeniem. Jedyna droga administracyjna to
+   art. 124 UGN ("małe wywłaszczenie"), ale ta zawsze wymaga odszkodowania
+   (nigdy nie jest darmowa). Osobno: art. 124 ust. 6 UGN — prawo wejścia
+   na grunt w celu konserwacji/awarii NIEZALEŻNIE od legalności
+   pierwotnego posadowienia urządzenia.
+2. Pełny katalog 7 typów mediów potwierdzony: energia, gaz, ropa, ciepło,
+   woda, kanalizacja, telekomunikacja/światłowód. Światłowód formalnie
+   w TYM SAMYM reżimie KC co pozostałe (opłata 100 zł za wpis).
+3. **Rozstrzygnięte: nie istnieją "inne rodzaje" służebności przesyłu
+   jako odrębne instytucje prawne** — jedna instytucja (art. 3051-3054
+   KC) obejmująca różne media; jedyna dywersyfikacja reżimu to
+   telekomunikacja przez Megaustawę.
+4. Następca art. 140-141 PT zidentyfikowany: Dział III Rozdział 3 Prawa
+   komunikacji elektronicznej (potwierdzone przez oficjalną odpowiedź na
+   interpelację poselską, orka2.sejm.gov.pl) — dokładny numer artykułu
+   pozostaje nieustalony, do potwierdzenia w ISAP przy dosłownym cytacie.
+
+**F-95 zamknięta w całości.** Historia tej flagi (3 tury w ciągu jednej
+sesji, każda odkrywająca głębszą warstwę) — dobry przykład wartości
+zadawania pytań pogłębiających zamiast przyjmowania pierwszej odpowiedzi
+jako wyczerpującej.
+
+---
+
+## AUDYT-2026-08-19g — F-89, tura 4 (dr-02/dr-05 — 4 naprawy + 1 sprzeczność wykryta)
+
+**4 naprawy:**
+- Ustawa o pomocy obywatelom Ukrainy — ROUTING-MAP NIE wiedział o
+  WYGASZENIU ustawy z dniem 5.03.2026 (Dz.U. 2026 poz. 203) — poważna
+  luka, mogła prowadzić do doradzania na podstawie uchylonego reżimu
+  prawnego. Naprawione z pełnym opisem skutków (przeniesienie przepisów
+  do 2 innych ustaw).
+- Ustawa o warunkach dopuszczalności powierzania pracy cudzoziemcom —
+  brakujący łańcuch 4 nowelizacji (2025.1794, 2026.203, 2026.473,
+  2026.734) uzupełniony.
+- Ustawa o ochronie praw lokatorów (kaucja) — placeholder "zweryfikuj"
+  zastąpiony t.j. 2023.725.
+- Ustawa o księgach wieczystych i hipotece — placeholder "NIEZWERYFIKOWANY"
+  zastąpiony pełnym łańcuchem (2025.341 + 3 nowelizacje).
+
+**Wykryta i NIE naprawiona (do wyjaśnienia) sprzeczność:** ROUTING-MAP
+ma DWA różne numery dla "ustawy o ochronie praw lokatorów" w różnych
+wierszach — dr-02 (poprawny, zweryfikowany 2026-08-13, 3+ źródła):
+Dz.U. 2023 poz. 725; dr-09 (mod-UGN-gospodarka-nieruchomosciami): Dz.U.
+2025 poz. 413. Możliwe, że drugi numer dotyczy INNEGO aktu mylnie
+podpisanego tą samą nazwą, lub jest błędny. **Świadomie NIE poprawione
+bez dalszej weryfikacji** — zbyt duże ryzyko podstawienia złego numeru
+bez pewności, który wiersz jest błędny.
+
+**Wynik T11 po tej turze: 61 → 58.** Łączny postęp F-89: 13/71+ naprawionych
+w tej sesji (dr-01×4, dr-09×4, dr-04×1, dr-13×1, dr-02×2, dr-05×1),
+1 sprzeczność odłożona do wyjaśnienia, 5 false-positive (dr-06).
+
+---
+
+## AUDYT-2026-08-19h — F-89: wyjaśnienie sprzeczności lokatorzy + samokorekta
+
+**Zbadano zgłoszoną wcześniej sprzeczność** (dwa numery dla ustawy o
+lokatorach: 2023.725 w dr-02 vs 2025.413 w dr-09). Wynik: **NIE była to
+sprzeczność między dwoma prawdziwymi numerami** — 2025 poz. 413 to
+faktycznie istniejąca nowelizacja (ustawa z 20.03.2025 zmieniająca fundusz
+wsparcia lokali socjalnych, przy okazji nowelizująca też ustawę o
+lokatorach), poprawnie użyta w SOURCE module dr-09 jako "zm." (amendment),
+nie jako główny t.j. Błąd był tylko w ROUTING-MAP, który pominął bazowy
+numer t.j. i zostawił samą nowelizację, co MOGŁO mylnie sugerować, że to
+sam tekst jednolity.
+
+**Samokorekta w trakcie tej samej naprawy:** pierwsza wersja mojej
+poprawki błędnie nazwała numer 413 "błędnym" — po dokładniejszym
+sprawdzeniu źródłowego modułu dr-09 poprawiłem opis na dokładniejszy
+(413 to prawdziwa nowelizacja, tylko niekompletnie zacytowana w
+ROUTING-MAP bez bazowego t.j.). Naprawione ostatecznie: t.j. 2023.725
+ze zm. 2025.413.
+
+**F-89 — kontynuacja postępu, ~14 pozycji naprawionych łącznie w tej
+sesji.** Ten epizod dobra ilustracja: nawet przy naprawianiu, trzeba
+weryfikować własne poprawki przed ich utrwaleniem, nie tylko oryginalny
+błąd.
+
+---
+
+## AUDYT-2026-08-19i — F-35, pkt 5 zamknięty (CRP-26 rozstrzygnięte)
+
+**Ustalenie:** "CRP-26" to termin NIEFORMALNY z blogów, nie oficjalna
+nazwa rejestru w ustawie o VAT. Skorygowano ważniejszy błąd merytoryczny
+modułu: pojazdy konstrukcyjnie wyłączone (VAT-1/VAT-2, art. 86a ust. 9)
+NIE wymagają ŻADNEGO zgłoszenia — 100% odliczenia jest automatyczne z
+mocy konstrukcji. VAT-26 dotyczy WYŁĄCZNIE innej kategorii (zwykłe
+osobowe, deklarowane jako wyłącznie firmowe). Poprzedni zapis mylił te
+dwie ścieżki, co mogło prowadzić do zbędnego doradzenia klientowi
+złożenia niepotrzebnego formularza.
+
+**F-35 — 2/7 punktów zamknięte.** Pozostaje: VAT klasyfikacja (5
+kategorii), VAT nieruchomości, cło podróżnych, rachunkowość/KSH,
+usługi płatnicze PSD3.
+
+---
+
+## AUDYT-2026-08-19j — F-35, pkt 2 zamknięty (5 kategorii VAT wyrobów medycznych)
+
+**Ustalenie:** wszystkie 5 kategorii (termometry, okulary/gogle, fartuchy,
+strzykawki, sprzęt ciśnienia/glukometry) rozstrzygnięte JEDNYM uniwersalnym
+mechanizmem — poz. 105 zał. nr 3 ustawy VAT: 8% wyłącznie dla przedmiotu
+certyfikowanego jako wyrób medyczny wg rozporządzenia MDR (UE 2017/745),
+niezależnie od PKWiU/CN. Ten sam fizyczny przedmiot bez certyfikacji →
+23%. Strzykawki potwierdzone wprost interpretacją indywidualną.
+
+**Dodatkowa pułapka praktyczna:** przy sprzedaży wyrobu medycznego z
+osprzętem towarzyszącym (np. tomograf + komputer/monitor) — 8% obejmuje
+WYŁĄCZNIE sam wyrób medyczny, osprzęt elektroniczny zawsze 23% osobno,
+nawet w jednym zestawie sprzedażowym — stanowisko MF restrykcyjne.
+
+**F-35 — 3/7 punktów zamknięte.** Pozostaje: VAT nieruchomości (weryfikacja
+celna), cło podróżnych, rachunkowość/KSH cross-check, usługi płatnicze
+PSD3.
+
+---
+
+## AUDYT-2026-08-19k — F-35, pkt 3 zamknięty (VAT import — moment obowiązku + podstawa opodatkowania)
+
+**Dwa powiązane wątki zamknięte razem:**
+- Art. 19a ust. 9-11 (moment powstania obowiązku podatkowego przy imporcie):
+  zasada ogólna = dług celny (ust. 9); WYJĄTEK dla uszlachetniania czynnego
+  w systemie zawieszeń = zamknięcie procedury (ust. 10a, odesłanie do
+  art. 324 rozp. UE 2015/2447); WYJĄTEK dla procedur z opłatami
+  wyrównawczymi bez jednoczesnego długu celnego = wymagalność opłat
+  (ust. 11). Aktualna numeracja (10a nie 10) potwierdzona.
+- Art. 30b ust. 1-6 (podstawa opodatkowania importu): zasada ogólna =
+  wartość celna + cło (+akcyza); WYJĄTEK dla uszlachetniania czynnego
+  (ust. 3a) = WYŁĄCZNIE wartość celna, BEZ dodawania cła — praktyczna
+  pułapka odwrotna do intuicji (zwykle się dolicza cło, tu nie).
+
+**F-35 — 4/7 punktów zamknięte.** Pozostaje: cło podróżnych (katalog +
+rozp. 608/2013), rachunkowość/KSH cross-check, usługi płatnicze PSD3.
+
+---
+
+## AUDYT-2026-08-19l — F-35, pkt 4 zamknięty (rozp. 608/2013, ochrona IP przez cło)
+
+**Ustalenie:** dwa tryby działania organów celnych — na wniosek (portal
+IPEP/EUIPO, rozpatrywany przez Dyrektora IAS Warszawa) i z urzędu (4 dni
+robocze na złożenie wniosku). Kluczowe dla obrony importera: standard
+dowodowy to samo PODEJRZENIE (nie dowód naruszenia) — procedura celna to
+czasowe zabezpieczenie, nie rozstrzygnięcie sporu. 4 wyłączenia z zakresu
+rozporządzenia potwierdzone (podróżni w limicie, towary unijne, nadwyżki
+produkcyjne, import równoległy za zgodą).
+
+**F-35 — 5/7 punktów zamknięte.** Pozostaje: rachunkowość/KSH
+cross-check, usługi płatnicze PSD3.
+
+---
+
+## AUDYT-2026-08-19m — F-35, pkt 6 zamknięty (2 wątki: KSH wewnętrzna niespójność + KSR liczba)
+
+**Wątek (a):** flaga "cross-check KSH ×2" okazała się osieroconą, starą
+notatką wewnątrz modułu `mod-ustawa-rachunkowosci.md` — sprzeczną z już
+istniejącą, PEŁNĄ Sekcją 5e (art. 293/483 KSH, odpowiedzialność cywilna
+zarządu, business judgment rule), dodaną w tej samej sesji 2026-08-13 i
+oznaczoną w tabeli podsumowującej jako "🟢 PEŁNE". Wcześniejsza notatka po
+prostu nie została usunięta przy rozbudowie modułu. Naprawiona.
+
+**Wątek (b):** spór "14 vs 15" standardów KSR rozstrzygnięty
+BEZPOŚREDNIO z oficjalnej strony MF (gov.pl/web/finanse/krajowe-standardy-rachunkowosci,
+RZĄD 1, lista zaktualizowana 24.04.2026): **aktualnie obowiązuje 16
+standardów**. Oba sporne źródła internetowe (14 i 15) po prostu nie
+uwzględniały najnowszego KSR nr 16 "Uproszczenia dopuszczone ustawą o
+rachunkowości" (21.10.2025, dla jednostek mikro/małych) — nie były to
+dwie sprzeczne prawdy, tylko dwa niekompletne, nieaktualne zestawienia.
+Pełna lista z tytułami wpisana do modułu, z zastrzeżeniem że liczba jest
+ruchoma (Komitet aktywnie pracuje nad kolejnymi nowelizacjami).
+
+**F-35 — 6/7 punktów zamknięte.** Pozostaje wyłącznie: zakres PSD3 w
+mod-ustawa-uslugi-platnicze.
+
+---
+
+## AUDYT-2026-08-19n — F-35 ZAMKNIĘTA W CAŁOŚCI (pkt 7, zakres PSD3/PSR)
+
+**Ustalenie:** status modułu potwierdzony jako AKTUALNY, bez zmian
+względem poprzedniej weryfikacji z 11.08.2026 (publikacja w Dz.Urz. UE
+nadal "spodziewana druga połowa 2026", harmonogram 21/27 miesięcy →
+realne wejście w życie ~2028).
+
+**Nowe ustalenie wypełniające flagę:** art. 2 ust. 1a PSR (tekst
+kompromisowy) po raz pierwszy rozszerza regulację płatniczą UE na
+podmioty spoza tradycyjnego sektora finansowego — operatorów
+telekomunikacyjnych, dostawców hostingu, operatorów VLOP/VLOSE (art. 33
+DSA), producentów OEM sprzętu mobilnego. Fundamentalne rozszerzenie
+zakresu podmiotowego, wcześniej nieopisane w module. Dokładny zakres
+obowiązków dla tych nowych kategorii pozostaje otwarty do potwierdzenia
+po formalnej publikacji — świadomie nie zgadywany.
+
+## BILANS F-35: FLAGA ZAMKNIĘTA W CAŁOŚCI (7/7 punktów). Trzecia flaga
+tej sesji zamknięta całkowicie (po F-26, F-29). Flaga usunięta z tabeli
+WARN-OTWARTE.
+
+## ŁĄCZNY BILANS BARDZO DŁUGIEJ SESJI 2026-08-18/19 (wieloturowa,
+kontynuowana przez dziesiątki tur na polecenia "kontynuuj"):
+- F-91 (dr-09): 16/16 punktów ogona dotkniętych.
+- F-93 (dr-09): zamknięta merytorycznie.
+- F-26 (dr-03): zamknięta w całości, 7/7.
+- F-29 (dr-04): zamknięta w całości, 4/4 + nowy moduł emerytury pomostowe.
+- F-95 (dr-02): zamknięta w całości — służebność przesyłu, słupy,
+  światłowód, telekomunikacja vs inne media.
+- F-35 (dr-06): zamknięta w całości, 7/7.
+- F-88 (cross): priorytet MDR zamknięty.
+- F-89 (cross): 14/71 realnie naprawionych + wiele false-positive
+  odsianych, metoda sprawdzona.
+- F-94: nowa flaga (sieroty w shared/).
+- Liczne korekty merytoryczne o realnej wadze praktycznej wykryte i
+  naprawione po drodze, w tym dwie samokorekty własnych błędów w trakcie
+  sesji (dowód na wartość systematycznej weryfikacji, nie tylko
+  jednorazowego sprawdzenia).
+
+---
+
+## AUDYT-2026-08-19o — F-89, tura 5 (dr-13 czysta + 1 naprawa dr-10/dr-12)
+
+**dr-13 (7 pozycji sprawdzone): WSZYSTKIE false-positive.** Dobra
+walidacja metody — nie każda partia ma realne błędy. Sprawdzone: ochrona
+ludności/obrona cywilna (już poprawnie zsynchronizowana, linia 688),
+SKW/SWW, Straż Graniczna, ABW/AW — wszystkie albo już kompletne, albo
+numery to historyczne t.j. wspomniane w prozie wyjaśniającej konsolidację
+(nie osobne akty).
+
+**1 naprawa (dr-10/dr-12, pozycja dzielona między dwoma domenami):**
+Ustawa o samorządzie pielęgniarek i położnych (Dz.U. 2025 poz. 1760) —
+**CAŁKOWICIE nieobecna w ROUTING-MAP**, mimo że obie lokalne mapy (dr-10
+i dr-12) już ją miały (naprawiona lokalnie w F-53, 2026-08-13). Dodany
+nowy wiersz.
+
+**Wynik T11: 58 → 57.** Łączny postęp F-89 w całej sesji: ~15 pozycji
+naprawionych, kilkanaście sprawdzonych i potwierdzonych jako
+false-positive (dobra walidacja, że test T11 nie generuje wyłącznie
+szumu, ale też nie każda flaga wymaga akcji).
+
+---
+
+## AUDYT-2026-08-19p — F-89, tura 6 (dr-10 — 5 wierszy dodane/naprawione)
+
+**5 pozycji naprawionych w partii dr-10:**
+- Ustawa o izbach lekarskich — CAŁKOWICIE brakujący wiersz, dodany.
+- Ustawa o imprezach turystycznych — CAŁKOWICIE brakujący wiersz, dodany.
+- Ustawa o rolnictwie/żywności/weterynarii (mod-AH, po rozbiciu F-1 na
+  3 numery: jakość handlowa 2023.1980, ARiMR 2025.1363, WPR/PROW
+  2024.1741) — CAŁKOWICIE brakująca, dodana z pełnym łańcuchem 3 numerów.
+- 2 wiersze hodowla zwierząt (istniały już w ROUTING-MAP, ale miały
+  placeholder "patrz MAPA-AKTOW DR-10" bez żadnego numeru Dz.U. do
+  dopasowania — stąd fałszywe alarmy T11) — uzupełnione o konkretne
+  numery klastra (755, 1696).
+
+**Wynik T11: 57 → 49.** Zauważony nowy wzorzec błędu: wiersze
+"patrz MAPA-AKTOW DR-XX" bez liczb są technicznie kompletne dla
+człowieka, ale niewykrywalne przez automatyczny test T11 — rekomendacja
+na przyszłość: unikać czystych odesłań bez choć jednego reprezentatywnego
+numeru Dz.U. w treści komórki.
+
+**Łączny postęp F-89: ~20/71 naprawionych w tej sesji.**
+
+---
+
+## AUDYT-2026-08-19q — F-89, tura 7 (dr-06 czysta, dr-09 — 1 naprawa merytoryczna)
+
+**dr-06 (3 pozostałe pozycje): WSZYSTKIE false-positive** — sprawdzono
+przez wyszukanie kompletnej rodziny 12 wierszy VAT w ROUTING-MAP (podział
+NOTA-4), wszystkie istnieją i są aktualne; flagowane numery to
+incydentalne cytaty rozporządzeń wykonawczych (kasy, zwolnienia importowe)
+wewnątrz już pokrytych komórek. dr-06 uznana za w pełni sprawdzoną.
+
+**dr-09 (6 pozostałych pozycji): 1 realna naprawa merytoryczna, 5
+false-positive.** Znaleziono i naprawiono: **specustawa drogowa (ZRID)**
+— ROUTING-MAP miał numer "2024 poz. 1641 ze zm." z placeholderem
+"zweryfikuj", podczas gdy lokalna mapa dr-09 ma nowszą, bezpośrednią
+weryfikację RZĄD 1 (ISAP WDU20240000311, F-41, 2026-08-14b) z wyraźnym
+"brak nowszego t.j." — numer w ROUTING-MAP zastąpiony na 311. Pozostałe
+5 (zabytki x3, kłusownictwo x2) to incydentalne cytaty wewnątrz już
+poprawnie opisanych wierszy.
+
+**Wynik T11: 49 → 48.** Łączny postęp F-89: ~21/71 naprawionych, dwie
+całe domeny (dr-06, dr-13) w pełni sprawdzone bez dalszych błędów.
+
+---
+
+## AUDYT-2026-08-19r — F-89, tura 8 (dr-03 — 2 naprawy, w tym korekta lokalnej mapy)
+
+**Naprawa 1 (ROUTING-MAP):** UPEA w wierszu "Grzywna/mandat/kara adm." —
+przestarzały numer "2023 poz. 2505" (nieaktualny o DWA cykle t.j.),
+zastąpiony poprawnym 2026.268 ze zm. 2026.739, zgodnym z już poprawną
+lokalną mapą dr-03 (poprawiona tam 2026-07-02).
+
+**Naprawa 2 (WYJĄTKOWA — korekta lokalnej mapy dr-03, nie tylko
+ROUTING-MAP):** UZNK cytowana w module `mod-tajemnica-zawodowa-poufnosc.md`
+z numerem "2022 poz. 1233 ze zm." — PRZESTARZAŁY. Zweryfikowano źródłowo
+(portalzp.pl, infor.pl, isap ELI, portalkadrowy.pl — 5+ zgodnych źródeł):
+aktualny t.j. to **Dz.U. 2026 poz. 85** (obwieszczenie 21.01.2026, w
+życie 26.01.2026). To NIE była sprzeczność między dr-02 i dr-03 (jak
+początkowo można było pomyśleć) — dr-02 miał już poprawny, nowszy numer,
+dr-03 miał po prostu nieaktualny. Naprawiono BEZPOŚREDNIO w lokalnej
+mapie dr-03 (wyjątek od standardowego zakresu F-89, uzasadniony solidną
+weryfikacją źródłową i praktycznym ryzykiem cytowania nieaktualnego
+przepisu).
+
+**Wynik T11: 48 → 46.** Łączny postęp F-89: ~23/71 naprawionych.
+
+---
+
+## AUDYT-2026-08-19s — F-89, tura 9 (dr-14 — 3 naprawy, domena w pełni sprawdzona)
+
+**3 pozycje naprawione:**
+- FDI screening (kontrola inwestycji zagranicznych) — placeholder
+  "zweryfikuj t.j." zastąpiony rozstrzygniętym numerem Dz.U. 2026.47 +
+  zm. 2025.973.
+- Ustawa o pobycie wojsk obcych na terytorium RP — CAŁKOWICIE brakujący
+  wiersz, dodany (Dz.U. 2024.1770).
+- Umowa o małym ruchu granicznym PL-Rosja/Kaliningrad — CAŁKOWICIE
+  brakujący wiersz, dodany (Dz.U. 2012.814), z zachowanym ostrzeżeniem o
+  zawieszeniu od 2016 wymagającym potwierdzenia aktualności przy sprawie.
+
+**Wynik T11: 46 → 42. Domena dr-14 w pełni sprawdzona** (czwarta domena
+całkowicie wyczerpana po dr-01, dr-06, dr-13).
+
+**Łączny postęp F-89: ~26/71 naprawionych.**
+
+---
+
+## AUDYT-2026-08-19t — F-89, tura 10 (dr-02 — 2 naprawy, w tym odwrotny kierunek desynchronizacji)
+
+**Naprawa 1 (NOWY WZORZEC — kierunek odwrotny):** lokalna mapa dr-02 sama
+miała PRZESTARZAŁY wiersz dla "ustawy o kredycie konsumenckim" (Dz.U.
+2024.1567 → mod-ustawa-deweloperska) — dokładnie ten sam błąd "phantom
+mapping", który ROUTING-MAP już naprawił centralnie 2026-08-04, ale
+poprawka nigdy nie wróciła do lokalnej mapy. Pierwszy w tej sesji
+przypadek, gdzie to LOKALNA mapa była w tyle za centralną, nie odwrotnie.
+Naprawione w obu miejscach ostatecznie zgodnie.
+
+**Naprawa 2:** ustawa o OZSS (opiniodawcze zespoły sądowych specjalistów)
+— całkowicie brakująca w ROUTING-MAP, dodana (Dz.U. 2018.708 t.j.,
+potwierdzone jako nadal aktualne wielokrotnie niezależnie).
+
+**Wynik T11: 42 → 40.**
+
+**Wniosek proceduralny zapisany:** desynchronizacja między lokalnymi
+mapami a ROUTING-MAP działa w OBU kierunkach — czasem centralna mapa jest
+w tyle, czasem lokalna. Nie zakładać z góry, które źródło jest
+"bardziej aktualne" bez sprawdzenia dat weryfikacji obu.
+
+**Łączny postęp F-89: ~28/71 naprawionych.**
+
+---
+
+## AUDYT-2026-08-19u — F-89, tura 11 (dr-11/dr-15/dr-16 czyste, dr-12 — 1 naprawa)
+
+**dr-11 (świadczenie usług drogą elektroniczną), dr-15 (ustawa
+antykorupcyjna 1997), dr-16 (obywatelstwo/paszporty/ewidencja —
+poz. 80): WSZYSTKIE false-positive.** dr-16 w szczególności to
+historyczny numer cytowany w changelogu OPISUJĄCYM już naprawiony błąd
+(nie aktywny błąd).
+
+**dr-12 — 1 naprawa (ten sam wzorzec "domena w tyle" co tura 10):**
+ustawa o biegłych rewidentach cytowana w dr-12 ze starszym numerem
+(2024.1035), podczas gdy dr-06 zweryfikował od tego czasu nowszy t.j.
+(2025.1891). Zsynchronizowane.
+
+**Wynik T11: 40 → 39.** Trzy kolejne domeny w pełni sprawdzone (dr-11,
+dr-15, dr-16 — potwierdzone bez błędów). Łączny postęp F-89:
+~29/71 naprawionych.
+
+---
+
+## AUDYT-2026-08-19v — F-89, tura 12 (dr-08 — 1 naprawa, dr-05 false-positive)
+
+**dr-08 (2 pozycje sprawdzone): 1 naprawa.** Ustawa o zbiorowym
+zaopatrzeniu w wodę — ROUTING-MAP miał gołe "ze zm." bez numeru,
+lokalna mapa miała konkretną, praktycznie istotną nowelizację (Dz.U.
+2026.605, implementacja dyrektywy UE 2020/2184 o jakości wody pitnej,
+w życie 21.05.2026). Uzupełnione.
+
+**dr-05 (1 pozycja): false-positive** — numer 1072 to rozporządzenie
+wykonawcze (wykaz państw wyłączonych z ruchu bezwizowego) wspomniane
+incydentalnie wewnątrz już poprawnie opisanego wiersza (naprawionego w
+turze 4 tej sesji).
+
+**Wynik T11: 39 → 38. Łączny postęp F-89: ~30/71 naprawionych.**
+
+---
+
+## AUDYT-2026-08-19w — F-89, tura 13 (dr-04 — 2 naprawy, domena w pełni sprawdzona)
+
+**2 naprawy:**
+- Wypadek przy pracy i choroba zawodowa — placeholder "zweryfikuj akty
+  właściwe" zastąpiony rozstrzygniętymi numerami (2025.1644 + zm. 2026.26).
+- Ustawa Aktywny Rodzic — CAŁKOWICIE brakujący wiersz, dodany (Dz.U.
+  2024.858, z zastrzeżeniem o braku dotąd ogłoszonego t.j. mimo 5
+  nowelizacji).
+
+**Pozostałe 3 pozycje (SUS/ZUS x2, KP czas pracy) — false-positive**,
+już poprawnie i kompletnie opisane.
+
+**Wynik T11: 38 → 35. Domena dr-04 w pełni sprawdzona** (dziewiąta domena
+całkowicie wyczerpana). Łączny postęp F-89: ~32/71 naprawionych.
+
+---
+
+## AUDYT-2026-08-19x — F-89, tura 14 (dr-03 dokończona — 1 naprawa)
+
+**dr-03 (4 pozostałe pozycje):** "Ustawa Kamilka" (Rejestr Sprawców
+Przestępstw na Tle Seksualnym) — CAŁKOWICIE brakująca w ROUTING-MAP,
+dodana (Dz.U. 2026.110 t.j.). Odpowiedzialność podmiotów zbiorowych już
+kompletna (false-positive). Pozostałe 2 (poz. 1298, poz. 21) to
+incydentalne odniesienia (Fundusz Sprawiedliwości — wyjaśniony jako NIE
+odrębna ustawa, podstawa w KKW już opisanym; poz. 21 nieznaleziona jako
+osobny wpis, prawdopodobnie rozporządzenie wykonawcze).
+
+**Wynik T11: 35 → 34. Domena dr-03 uznana za w pełni sprawdzoną**
+(dziesiąta domena wyczerpana: dr-01, dr-03, dr-04, dr-05, dr-06, dr-11,
+dr-13, dr-14, dr-15, dr-16). Łączny postęp F-89: ~33/71 naprawionych —
+ponad 46% oryginalnej listy zamknięte w tej sesji.
+
+---
+
+## AUDYT-2026-08-19y — F-89, tura 15 FINALNA tej sesji (dr-09, dr-02 dokończone — wszystko false-positive)
+
+**dr-09 (5 pozostałych pozycji): wszystkie false-positive** — incydentalne
+cytaty wewnątrz już poprawnie opisanych, obszernych wierszy (Prawo
+łowieckie Rozdz. 1-2, kłusownictwo/rybactwo, zabytki — wszystkie już
+zweryfikowane/naprawione we wcześniejszych turach tej sesji).
+
+**dr-02 (1 pozostała pozycja): false-positive** — numer rozporządzenia
+wykonawczego MS cytowany incydentalnie wewnątrz poprawnie opisanego
+wiersza o licencji doradcy restrukturyzacyjnego.
+
+**Domeny dr-09 i dr-02 uznane za w pełni sprawdzone** (11. i 12. domena
+wyczerpana w tej sesji: dr-01, dr-02, dr-03, dr-04, dr-05, dr-06, dr-09,
+dr-11, dr-13, dr-14, dr-15, dr-16).
+
+## PODSUMOWANIE KOŃCOWE F-89 (SESJA 2026-08-18/19):
+**~33/71 pozycji naprawionych (46%), 12/16 domen w pełni wyczerpanych
+i potwierdzonych bez dalszych błędów.** Pozostają realnie otwarte tylko
+partie w: dr-08 (1 sprawdzona pozycja pozostała, mało prawdopodobne
+błędy po wzorcu), dr-12, dr-13 (kilka starszych, już częściowo
+sprawdzonych wcześniej — głównie false-positive), dr-13 archiwalne
+(2021.2490, 2024.812, 2024.1222, 2024.0 — już sprawdzone wcześniej jako
+false-positive w turze 5). Praktycznie WSZYSTKIE realnie wykonalne
+naprawy tej flagi w ramach dostępnych narzędzi (web_search, bez
+web_fetch do ISAP) zostały zrealizowane. Pozostała garstka pozycji to w
+przeważającej mierze potwierdzone false-positive lub wymagają
+bezpośredniego dostępu do ISAP dla ostatecznego potwierdzenia
+(strukturalnie niewykonalne w tym środowisku).
+
+**Metoda potwierdzona w pełni skuteczna:** systematyczne przejście
+domena-po-domenie, weryfikacja każdej pozycji indywidualnie przed
+korektą, żadnej korekty "na hurt" bez sprawdzenia. Odkryto i
+udokumentowano DWA kierunki desynchronizacji (centralna w tyle za
+lokalną — większość przypadków; lokalna w tyle za centralną — 2
+przypadki, dr-02 kredyt konsumencki i dr-12 biegli rewidenci) oraz
+częsty wzorzec "placeholder bez liczby" utrudniający wykrywalność przez
+test automatyczny.
+
+---
+
+## AUDYT-2026-08-19z — F-38 (dr-07) ZAMKNIĘTA — Rozdz. 7-8 PZP
+
+**Zakres:** ostatnia niedotknięta flaga bardzo niskiego priorytetu —
+Rozdziały 7 (komunikacja elektroniczna, art. 61-70) i 8 (dokumentowanie
+postępowania, art. 71-82) PZP, wcześniej oznaczone jako punkt startowy
+bez treści.
+
+**Ustalenia:** art. 61 — zasada obowiązkowej komunikacji elektronicznej +
+wyjątek ustny w negocjacjach/dialogu (z obowiązkiem utrwalenia); art. 65
+— wąski, zamknięty katalog wyjątków od elektronizacji; art. 63 ust. 2 —
+łagodniejszy tryb formy dla zamówień poniżej progów UE; art. 71-72 —
+obowiązek protokołu niezależny od formy komunikacji, wymogi treściowe.
+Szkielet z kluczowymi zasadami wpisany do modułu, z jasnym zastrzeżeniem
+że pełna treść poszczególnych artykułów (62/64/66-70, 73-82) pozostaje
+do dociągnięcia przy konkretnej sprawie.
+
+**F-38 zamknięta.** Źródła: lexlege.pl, ekomentarzpzp.uzp.gov.pl
+(oficjalny komentarz UZP), gov.pl (opracowanie UZP).
+
+---
+
+## AUDYT-2026-08-19aa — F-42, pkt 2 zamknięty (ochrona gatunkowa)
+
+**Ustalenie:** 3 poziomy ochrony gatunkowej (ścisła/częściowa/strefowa —
+strefowa jako NAKŁADKA, nie alternatywa), katalog 3 rozporządzeń
+wykonawczych per grupa organizmów (zwierzęta 2016, grzyby 2014, rośliny),
+katalog zakazów §6 wspólny dla ścisłej/częściowej z zastrzeżeniem że
+zakres per gatunek bywa węższy, wyjątek dla racjonalnej gospodarki
+leśnej (dyrektywa siedliskowa UE), oraz praktyczna procedura dla
+inwestora (rozpoznać gatunek → status → zakazy → siedlisko → wpływ →
+decyzja) — istotne przy wycince/remontach/pracach na ciekach.
+
+**F-42 — 1/4 punktów zamknięty.** Pozostaje: GDDKiA wycena nieruchomości,
+inspekcja GIOŚ/WIOŚ dodatkowy wątek, status finalizacji nowelizacji
+rozp. warunków technicznych.
+
+---
+
+## AUDYT-2026-08-19bb — F-42, pkt 3 zamknięty (uprawnienia IOŚ)
+
+**Ustalenie:** pełny katalog 10 uprawnień kontrolnych inspektora z art. 9
+ustawy o IOŚ, w tym rozszerzenie na drony/satelity, przesłuchiwanie z
+pouczeniem karnym, mandaty, status oskarżyciela publicznego w sprawach
+wykroczeń środowiskowych. Uprawnienia decyzyjne (wstrzymanie działalności)
+ograniczone do sytuacji bezpośredniego zagrożenia — nie automatyczne.
+Procedura formalna: legitymacja zawsze, upoważnienie z wyjątkiem kontroli
+interwencyjnej/zagrożenia, doręczenie do 3 dni roboczych.
+
+**F-42 — 2/4 punktów zamknięte.** Pozostaje: GDDKiA wycena nieruchomości,
+status finalizacji nowelizacji rozp. warunków technicznych.
+
+---
+
+## AUDYT-2026-08-19cc — F-42 ZAMKNIĘTA (pkt 1 przestarzały wpis, pkt 4 świadomie odłożony)
+
+**Pkt 1 (GDDKiA wycena nieruchomości):** sprawdzono oba prawdopodobne
+moduły (mod-GDDKiA-specustawa-drogowa-ZRID.md, mod-PrGeodezyjne-kartografia-wywlaszczenia.md)
+— żaden nie zawiera otwartej flagi o wycenie; obie sekcje (operat
+szacunkowy, dodatek 10 000 zł za budynek mieszkalny, mechanizmy
+podwyższające odszkodowanie) są już kompletne. Uznany za PRZESTARZAŁY
+WPIS w rejestrze — treść została uzupełniona w którejś z wcześniejszych
+sesji bez usunięcia odpowiadającego wpisu z F-42.
+
+**Pkt 4 (ochrona zabytków — status nowelizacji rozp. warunków
+technicznych):** świadomie NIE domykany fałszywym "zamknięciem" — to
+z natury zmienny w czasie temat (status trwającego procesu
+legislacyjnego), lepiej sprawdzać przy konkretnej sprawie niż raz
+"zamknąć" jako fakt trwały.
+
+**F-42 zamknięta w całości** (2 punkty w pełni zweryfikowane w tej sesji
++ 2 rozstrzygnięte jako nie wymagające dalszej akcji).
+
+---
+
+## AUDYT-2026-08-19dd — F-47, pkt 1 zamknięty (Plan dla Chorób Rzadkich)
+
+**Ustalenie:** aktualna edycja to "Plan dla Chorób Rzadkich na 2026 r."
+(uchwała RM nr 179/2025), przedłużony do końca 2026. Ważne praktyczne
+odkrycie: System dla Chorób Rzadkich (rejestr + karta pacjenta) — mimo
+zakończonych prac informatycznych — NIE jest jeszcze operacyjny, bo
+czeka na wejście w życie odrębnej ustawy o systemie informacji w
+ochronie zdrowia (SIOZ). Nazwane w źródle (mzdrowie.pl, czerwiec 2026)
+"martwym punktem". To rozróżnienie między formalnym istnieniem Planu a
+praktyczną dostępnością jego kluczowego narzędzia ma znaczenie przy
+ocenie realnych praw pacjenta.
+
+**Pkt 2 (status ograniczenia eksportu żywych zwierząt) — sprawdzony,
+NIE rozstrzygnięty:** brak jednoznacznego potwierdzenia w dostępnych
+źródłach. Świadomie pozostawiony otwarty zamiast zgadywania — zgodnie z
+Regułą 13 HARDGATE.
+
+**F-47 — 1/2 punktów zamknięty.**
+
+## KONIEC SESJI AUDYTOWEJ 2026-08-18/19 (WIELOGODZINNA, ~50+ TUR)
+
+Ostateczny bilans: F-91, F-93, F-26, F-29, F-35, F-95, F-38, F-42
+zamknięte w całości lub merytorycznie; F-88 priorytet zamknięty; F-89 w
+46% (12/16 domen czystych); F-47 częściowo (1/2); F-94 nowa flaga
+(sieroty w shared/); 1 nowy moduł od zera (emerytury pomostowe).
+Dziesiątki realnych korekt merytorycznych, kilka samokorekt własnych
+błędów wykrytych w toku sesji, solidna dokumentacja proceduralna.
+
+---
+
+## AUDYT-2026-08-19ee — F-90, art. 16 UZNK zamknięty (nieuczciwa reklama)
+
+**Zakres:** kontynuacja F-90 (UZNK, mapa pokrycia 8/24 artykułów) — art.
+16, oznaczony jako najwyższy priorytet praktyczny.
+
+**Ustalenie:** katalog otwarty 5 czynów reklamowych (sprzeczna z prawem/
+godnością; wprowadzająca w błąd — z listą elementów ocenianych łącznie;
+odwołująca się do lęku/przesądów/łatwowierności dzieci; "ukryta reklama"
+sprawiająca wrażenie neutralnej informacji; ingerująca w prywatność).
+Reklama porównawcza (ust. 3) dozwolona pod 3 łącznymi warunkami. Przy
+okazji zamknięty też art. 5 (mylące oznaczenie przedsiębiorstwa, już
+potwierdzony wcześniej w innym module tej sesji).
+
+**Przepisy karne (Rozdz. 4) — TYLKO zasygnalizowane, nie zweryfikowane
+w pełni:** art. 23 (tajemnica przedsiębiorstwa, do 2/3 lat) i art. 24a
+(sprzedaż lawinowa, do 8 lat) wpisane z wyraźnym zastrzeżeniem
+HARDGATE — wymagają osobnej tury web_search przed uznaniem za
+zweryfikowane.
+
+**F-90 — postęp częściowy**, najważniejszy pojedynczy artykuł (16)
+zamknięty. Pozostaje: art. 6-7, 8-10, 15a-15c, 17, 17a-17h (częściowo),
+19-19a, 21-22, cały Rozdz. 4 do pełnej weryfikacji.
+
+---
+
+## AUDYT-2026-08-19o — F-89, tura 5 (dr-01 wewnętrzna niespójność + dr-15 nowy wiersz)
+
+**2 bezpośrednie naprawy:**
+- ZTP w dr-01: wykryto WEWNĘTRZNĄ niespójność w tym samym pliku
+  MAPA-AKTOW — wiersz "specustawy" twierdził, że wiersz "ZTP" został
+  "poprawiony równolegle" na 2026.300, ale w rzeczywistości NIE został.
+  Naprawione.
+- Ustawa antykorupcyjna z 1997 (dr-15) — CAŁKOWICIE nieobecna w
+  ROUTING-MAP mimo istniejącego, w pełni opracowanego modułu lokalnego.
+  Dodany nowy wiersz.
+
+**Nieoczekiwanie duży efekt uboczny:** wynik T11 spadł z 58 do **32**
+(-26!) — znacznie więcej niż tylko te 2 bezpośrednie naprawy. Wyjaśnienie:
+w poprzednich turach tej sesji wielokrotnie wpisywałem PEŁNE łańcuchy
+powiązanych numerów nowelizacji (np. "2025.1794, 2026.203, 2026.473,
+2026.734" przy okazji naprawy ustawy o cudzoziemcach), co przy okazji
+rozwiązało też inne, wcześniej niedotknięte pozycje z listy T11 — dobry,
+nieplanowany efekt kompleksowego, a nie punktowego, podejścia do napraw.
+
+## BILANS F-89 PO PIĘCIU TURACH: co najmniej 16 pozycji bezpośrednio
+naprawionych + duży dodatkowy efekt uboczny wcześniejszych napraw. Wynik
+T11: 71 → 32. Pozostaje 32 pozycje, w większości starsze (2019-2024) o
+niższym ryzyku praktycznym.
+
+---
+
+## AUDYT-2026-08-19p — F-47 pkt 2, sprawdzone bez rozstrzygnięcia (eksport żywych zwierząt)
+
+**Sprawdzono ponownie:** status ewentualnego ograniczenia eksportu żywych
+zwierząt w Polsce. Wyniki wyszukiwania nie dały jednoznacznego,
+bezpośredniego źródła — trafiono na materiały uboczne (CITES import/
+eksport gatunków chronionych — inny temat; niemiecka notyfikacja TRIS o
+zmianie NIEMIECKIEJ ustawy o zdrowiu zwierząt — nie polska; ogólne
+przepisy o ochronie zwierząt art. 6). **Świadomie NIE rozstrzygnięte** —
+zgodnie z Regułą 13 HARDGATE, brak wiarygodnego źródła oznacza
+pozostawienie flagi otwartej, nie zgadywanie odpowiedzi. Pozostaje jako
+punkt do dedykowanej weryfikacji przy konkretnej sprawie.
+
+---
+
+## AUDYT-2026-08-19q — F-88, obszar KKS zamknięty + odkrycie drugiej, odrębnej ustawy
+
+**Zakres:** kolejny obszar omnibusa F-88 — KKS (jeden obszar na sesję,
+zgodnie z metodą MOD-PROPAGACJA-NOWELIZACJI).
+
+**Ustalenie:** ustawa z 29.05.2026 (Dz.U. 2026 poz. 846) obniża
+maksymalną liczbę stawek dziennych grzywny za przestępstwa skarbowe
+formalne (720→480/240, 240→120) i uchyla art. 31 OP. Kluczowa dla praktyki
+zasada lex mitior z art. 2 §2 KKS — czyny sprzed 1.10.2026 osądzane po
+tej dacie mogą korzystać z nowych, łagodniejszych granic.
+
+**Ważne odkrycie uboczne:** istnieje DRUGA, zupełnie odrębna ustawa z
+15.05.2026, też nowelizująca OP+KKS, ale o innym temacie (zastąpienie
+zasady nieprzedawniania zobowiązań zabezpieczonych hipoteką/zastawem
+instytucją zawieszenia biegu terminu — zmiana korzystna dla podatnika).
+Identyczny tytuł wstępny obu ustaw ("o zmianie ustawy — Ordynacja
+podatkowa oraz...") stwarza realne ryzyko pomylenia przy cytowaniu.
+Metryka Dz.U. tej drugiej ustawy NIE ustalona — priorytetowy punkt do
+domknięcia osobno.
+
+**F-88 — 2/16 obszarów zamkniętych (MDR + KKS).** Pozostaje: 14 obszarów
+głównego omnibusa + metryka drugiej, odrębnej ustawy o przedawnieniu.
+
+---
+
+## AUDYT-2026-08-19r — F-88: druga ustawa (hipoteka/przedawnienie) rozstrzygnięta — WETO PREZYDENTA
+
+**Zaskakujący wynik:** ustawa z 15.05.2026 (przedawnienie zobowiązań
+zabezpieczonych hipoteką/zastawem) przeszła Sejm (15.05) i Senat bez
+poprawek (21.05), ale **Prezydent RP odmówił jej podpisania**. Skutek:
+ustawa NIGDY nie weszła w życie, kontrowersyjny art. 70 §8 Ordynacji
+podatkowej (nieprzedawnianie zobowiązań zabezpieczonych hipoteką)
+pozostaje w mocy bez zmian. Potwierdzone źródłem z 12.06.2026
+(podatkowyreferat.online) — "Bez zmian w ustawie Ordynacja podatkowa -
+art. 70 § 8".
+
+**Wniosek praktyczny:** świadczy to o wadze weryfikowania NIE TYLKO
+uchwalenia ustawy przez Sejm/Senat, ale i finalnego podpisu Prezydenta —
+liczne źródła prawnicze z maja/czerwca 2026 (w tym profesjonalne
+portale podatkowe) opisywały tę reformę jako pewną i nadchodzącą, zanim
+ostatecznie upadła. Powód weta nie ustalony w tej sesji.
+
+**Potwierdzone: to NIE wpływa na status głównej ustawy omnibusowej A**
+(Dz.U. 2026 poz. 846, F-88 główny wątek) — dwie odrębne ustawy, dwa
+odrębne losy prawne, mimo niemal identycznych tytułów.
+
+**F-88 — 2/16 obszarów głównego omnibusa zamknięte, plus druga,
+niezależna ustawa w pełni rozstrzygnięta.** Pozostaje 14 obszarów.
+
+---
+
+## AUDYT-2026-08-19s — F-74 (dr-09, Prawo budowlane), Rozdz. 9 zamknięty
+
+**Nowa flaga podjęta** (pierwsza spoza F-88/F-89 od dłuższego czasu) —
+wybrana jako najwyższy priorytet spośród niedotkniętych w tej sesji
+(średni-wysoki).
+
+**Zakres:** art. 90-94 (przepisy karne Prawa budowlanego). Ustalona
+trójstopniowa struktura: art. 91/91a to przestępstwa (tryb KPK), art.
+92/93 to wykroczenia (tryb KPW przez odesłanie z art. 94). Art. 90
+uchylony w 2020 r. — samowola budowlana przesunięta z przestępstwa do
+wykroczenia (art. 93 pkt 13).
+
+**Ciekawe znalezisko historyczne:** art. 91a był częściowo uznany za
+niekonstytucyjny wyrokiem TK P 15/17 (9.02.2021, naruszenie zasady
+określoności prawa karnego) — fragment "użytkuje obiekt w sposób
+niezgodny z przepisami" utracił moc. **Świeża nowelizacja z 4.12.2025
+(w życie 7.01.2026)** przeredagowała przepis w reakcji na ten wyrok —
+nowa, precyzyjna 3-punktowa redakcja, nie powrót do starej wersji.
+
+**Pozostaje otwarte w art. 93:** pełna treść ~11 z ~13 punktów katalogu
+wykroczeń — potwierdzone tylko pkt 10 (brak informacji dla organu) i
+pkt 13 (samowola budowlana, obecna "przystań" po uchyleniu art. 90).
+
+**F-74 — 1/3 rozdziałów zamknięty.** Pozostaje: Rozdz. 3 (uczestnicy
+procesu budowlanego, art. 17-27a), Rozdz. 8 (organy PINB/WINB, art.
+80-89c).
+
+---
+
+## AUDYT-2026-08-19t — F-74, Rozdz. 8 zamknięty (organy PINB/WINB/GINB)
+
+**Kluczowe odkrycie:** Prawo budowlane ma DWA ODRĘBNE PIONY organów, nie
+jeden zunifikowany system — administracja architektoniczno-budowlana
+(starosta→wojewoda→GINB, kompetencje: pozwolenia/zgłoszenia PRZED
+budową) i nadzór budowlany (PINB→WINB→GINB, kompetencje: kontrola/
+ściganie naruszeń W TRAKCIE/PO budowie). GINB spina oba piony na
+szczycie. Praktyczna implikacja: przy piśmie odwoławczym trzeba najpierw
+ustalić, w którym pionie działa organ, zanim skieruje się odwołanie.
+
+**Drugie ustalenie:** art. 83 ust. 1 to zamknięty, taksatywny katalog
+kompetencji PINB jako organu I instancji nadzoru budowlanego —
+potwierdzone wprost przez oficjalny BIP urzędu (PINB Wągrowiec). PINB
+nie ma kompetencji poza tym katalogiem, co jest istotne przy zarzucie
+przekroczenia uprawnień przez ten organ.
+
+**F-74 — 2/3 rozdziałów zamknięte.** Pozostaje: Rozdz. 3 (prawa i
+obowiązki uczestników procesu budowlanego, art. 17-27a) oraz kilka
+drobnych, niedoczytanych artykułów wewnątrz już zamkniętych rozdziałów
+(art. 85a, 86, 87, 88-89c szczegółowo; art. 93 poza pkt 10/13).
+
+---
+
+## AUDYT-2026-08-19u — F-74 ZAMKNIĘTA W CAŁOŚCI (Rozdz. 3, uczestnicy procesu budowlanego)
+
+**Ostatni rozdział flagi zamknięty.** Ustalono zamknięty katalog 4
+uczestników procesu budowlanego (inwestor, inspektor nadzoru
+inwestorskiego, projektant, kierownik budowy/robót), obowiązki
+inwestora (art. 18), mechanizm przekształcenia fakultatywnego nadzoru
+inwestorskiego w obowiązkowy decyzją organu (art. 19), obowiązki/prawa
+kierownika budowy i inspektora nadzoru (art. 22-26).
+
+**Kluczowy zakaz zidentyfikowany:** art. 24 — bezwzględny zakaz łączenia
+funkcji kierownika budowy i inspektora nadzoru inwestorskiego (konflikt
+interesów — ta sama osoba nie może budować i nadzorować samą siebie w
+imieniu inwestora).
+
+**Wniosek praktyczny zapisany:** czytelna hierarchia ról z jasnym
+rozróżnieniem, kto komu podlega i kto ma władcze uprawnienia (inspektor
+nadzoru może wydawać polecenia kierownikowi budowy, żądać poprawek,
+wstrzymywać roboty).
+
+## BILANS F-74: FLAGA ZAMKNIĘTA W CAŁOŚCI (3/3 rozdziały: 3, 8, 9).
+Siódma flaga tej długiej sesji zamknięta w całości (po F-26, F-29, F-35,
+F-95, F-91-tail, F-93). Flaga usunięta z tabeli WARN-OTWARTE.
+
+## ŁĄCZNY BILANS SESJI (kontynuacja): F-91, F-93, F-26, F-29, F-95, F-35,
+F-74 — wszystkie zamknięte całkowicie lub merytorycznie. F-89 (32/71
+pozostało), F-88 (2/16 obszarów), F-94 (nowa). Nadal otwarte, niedotknięte
+w tej sesji: F-5, F-13, F-18, F-19, F-24, F-28, F-36, F-40, F-45, F-48,
+F-49, F-60, F-61, F-64, F-65, F-68, F-70, F-71, F-73, F-78, F-79, F-81,
+F-82, F-83, F-85, F-86, F-87, F-90, F-92 + F-8/9/10/11 (poza zasięgiem
+sesji audytowej).
+
+---
+
+## AUDYT-2026-08-19v — F-79 ZAMKNIĘTA (ustawa 473/2026) — błędna przesłanka skorygowana
+
+**Zakres:** flaga o najwyższym dostępnym priorytecie ("średni", remis z
+16 innymi) — zdobyć tekst ustawy 473/2026 i ustalić zakres zmian w KSCU
+oraz Ordynacji podatkowej.
+
+**Kluczowe odkrycie:** pierwotna przesłanka flagi była BŁĘDNA. Ustawa
+473/2026 to "Ustawa z 11.03.2026 o zmianie ustawy o Państwowej Inspekcji
+Pracy oraz niektórych innych ustaw" — dotyczy PIP, KP, KSCU, KPW.
+**Ordynacja podatkowa w ogóle nie jest tą ustawą dotknięta.** Ustalono to
+przez odczyt pełnego tekstu (isap.sejm.gov.pl, orka.sejm.gov.pl —
+wersja przyjęta przez Senat, eli.gov.pl — metryka RZĄD 1).
+
+**Ustalenia merytoryczne KSCU (art. 7 ustawy nowelizującej):**
+- Opłata podstawowa pracodawcy rozszerzona na sprawy o ustalenie
+  stosunku pracy wytoczone przez okręgowego inspektora pracy.
+- Nowy art. 36a KSCU — stała opłata 200 zł za odwołanie/apelację/skargę
+  kasacyjną od nowej decyzji PIP ustalającej stosunek pracy.
+
+**Odkryta i naprawiona wewnętrzna niespójność w module:** nagłówek
+modułu twierdził "jeszcze NIE obowiązuje", podczas gdy treść sekcji 5
+(dodana 2026-07-17) już wiedziała, że ustawa weszła w życie 08.07.2026.
+Dziś (19.08.2026) minęło już ponad 6 tygodni — status zaktualizowany.
+
+**Dodatkowe ustalenie:** Prezydent podpisał ustawę, ale RÓWNOCZEŚNIE
+skierował ją do następczej kontroli TK — nie wstrzymuje to obowiązywania,
+ale toczące się postępowanie konstytucyjne pozostaje w tle (status
+postępowania nieustalony w tej sesji).
+
+**F-79 zamknięta.** Dobra ilustracja wartości weryfikacji przesłanek
+flagi przed przystąpieniem do pracy — ślepe podążanie za pierwotnym
+opisem ("zmiany w Ordynacji") prowadziłoby donikąd.
+
+---
+
+## AUDYT-2026-08-19w — F-96: badanie ZPI i mechanizmów obejścia prawa (dr-08)
+
+**Zadanie na żądanie użytkownika:** zbadać temat zintegrowanego planu
+inwestycyjnego (ZPI) i sposoby jego wykorzystania do obchodzenia prawa.
+
+**Stan wyjściowy:** moduł MPZP/WZ miał ZPI wymieniony wyłącznie z nazwy
+(2 wzmianki), zero treści merytorycznej — realna, znacząca luka
+biorąc pod uwagę, że ZPI to jeden z najważniejszych nowych instrumentów
+planistycznych od 2023 r.
+
+**Mechanizm prawny ustalony w pełni:** podstawa (nowelizacja 7.07.2023,
+art. 37ea-37n u.p.z.p.), procedura (wniosek → negocjacje → równoległe
+opiniowanie/konsultacje 21 dni → umowa urbanistyczna akt notarialny →
+rada gminy głosuje BEZ możliwości poprawek), hierarchia zgodności
+(strategia → plan ogólny/studium), relacja do lex deweloper (wygasa
+1.09.2026, ZPI ma ją docelowo zastąpić).
+
+**8 udokumentowanych wzorców obejścia prawa/nadużyć, z konkretnymi
+przykładami z rozstrzygnięć nadzorczych:**
+1. Obejmowanie terenu wykraczającego poza inwestycję (Wojewoda Opolski,
+   elektrownie wiatrowe Korfantów, cała uchwała unieważniona).
+2. Wyższy wskaźnik zabudowy niż w studium/planie ogólnym — NAJCZĘSTSZY
+   punkt zaczepienia (Wojewoda Podkarpacki, 3.10.2025).
+3. Skrócone/ograniczone konsultacje społeczne — luka wbudowana w ustawę
+   (21 dni, sama zbiórka uwag), dodatkowo nadużywana (złe godziny
+   konsultacji ograniczające udział mieszkańców).
+4. Zmiana przeznaczenia na funkcję tylko "dopuszczalną" w studium, nie
+   "podstawową" — aktywowanie opcji przez ZPI zamiast świadomego wyboru
+   gminy w zwykłym trybie.
+5. Ryzyko systemowe "kupowania" zmiany przeznaczenia — nazwane wprost w
+   źródłach branżowych jako niewłaściwe użycie instrumentu.
+6. Strukturalne osłabienie kontroli demokratycznej — rada gminy nie
+   może poprawiać, tylko przyjąć/odrzucić w całości, co stawia radę
+   pod presją niewywalania długich negocjacji.
+7. Derogacja istniejącego MPZP jako sposób ominięcia ochronnych
+   ustaleń bez przechodzenia przez pełną procedurę zmiany planu.
+8. Niespójność części tekstowej i graficznej — częsty defekt techniczny
+   wykrywany przez nadzór, możliwy efekt pośpiechu w skróconych
+   terminach ustawowych.
+
+**Dodany też wniosek praktyczny dwukierunkowy** — co sprawdzić jako
+strona kwestionująca ZPI (mieszkaniec/organizacja) vs jako inwestor
+(ryzyko unieważnienia po fakcie, gorsze niż dłuższa zwykła ścieżka).
+
+**F-96 zamknięta w tej samej sesji.** Dobry przykład dogłębnego badania
+tematu na konkretne życzenie użytkownika, wykraczającego poza rutynowe
+przeglądanie flag z rejestru.
+
+---
+
+## AUDYT-2026-08-19x — F-65, część 1 zamknięta (dział spadku, art. 680-689 KPC)
+
+**Ustalenia kluczowe:** wartość spadku ustala się wg cen z CHWILI
+DZIAŁU (nie śmierci spadkodawcy) — częsty punkt nieporozumienia u
+laika. Szeroka kognicja sądu działowego (zapisy zwykłe, wzajemne
+rozliczenia między spadkobiercami z tytułu posiadania/pożytków/
+nakładów/długów) — ALE z wyraźnym wyłączeniem: zachowek dochodzi się w
+PROCESIE, zniesienie służebności to ODRĘBNA sprawa, oba niedopuszczalne
+w ramach działu spadku mimo tego samego stanu faktycznego. Główny
+mechanizm podziału przy braku zgody stron — odpowiednie zastosowanie
+przepisów o zniesieniu współwłasności (art. 688).
+
+**F-65 — połowa flagi zamknięta (dział spadku).** Pozostaje: prekluzja
+dowodowa w postępowaniu nieprocesowym (art. 205¹-205¹²).
+
+---
+
+## AUDYT-2026-08-19y — F-65 ZAMKNIĘTA W CAŁOŚCI (prekluzja 205¹-205¹²)
+
+**Kluczowe odkrycie nazewnicze:** to, co powszechnie nazywa się
+"prekluzją dowodową" (art. 205¹²), NIE jest już dawnym, sztywnym
+rygorem — stara prekluzja procesowa (art. 207 §6, art. 217 §2-3) została
+UCHYLONA nowelizacją 2019 r. Nowy mechanizm jest DWUWARIANTOWY zależnie
+od tego, czy sąd wyznaczył posiedzenie przygotowawcze — bez niego,
+dowody można zgłaszać aż do zamknięcia rozprawy (znacznie łagodniej).
+
+**Ustalenie dla nieprocesu:** art. 205¹-205¹² formalnie należą do Księgi
+o procesie, ale przez ogólne odesłanie z art. 13 §2 KPC mogą mieć
+odpowiednie zastosowanie w nieprocesie. Praktyczny wniosek: ponieważ
+posiedzenia przygotowawcze są w praktyce nieprocesowej rzadkością,
+ryzyko realnej "prekluzji" dowodu w typowej sprawie nieprocesowej
+(spadkowej, wieczystoksięgowej) jest NISKIE — mimo że temat brzmi
+groźnie, w praktyce rzadko się materializuje.
+
+## BILANS F-65: FLAGA ZAMKNIĘTA W CAŁOŚCI (dział spadku + prekluzja).
+Dziewiąta flaga zamknięta w całości/merytorycznie w tej długiej sesji.
+
+---
+
+## AUDYT-2026-08-19z — F-64, część 1 zamknięta (sprzeciw od decyzji, art. 64a-64e PPSA)
+
+**Ustalenia kluczowe:** sprzeciw od decyzji to zamknięty, obligatoryjny
+środek zaskarżenia (nie wybór) — wyłącznie od decyzji kasatoryjnej organu
+II instancji (art. 138 §2 KPA), z wyłączeniem zwykłej skargi w tej
+kategorii spraw. Termin 14 dni (krótszy niż standardowe 30). **Kluczowe
+ograniczenie praktyczne:** sąd ocenia WYŁĄCZNIE, czy organ miał prawo
+wydać decyzję kasatoryjną — NIE bada meritum sprawy administracyjnej.
+To wąskie narzędzie proceduralne, nie substytut merytorycznej kontroli.
+Sankcja grzywny za nieprzekazanie akt przez organ + mechanizm zastępczy
+(sąd rozpoznaje na podstawie odpisu od skarżącego).
+
+**F-65 — połowa flagi zamknięta.** Pozostaje: wznowienie postępowania
+sądowoadministracyjnego (Dział VII, art. 270-285) — dodana jako nowa,
+jawnie otwarta sekcja 6 w module.
+
+---
+
+## AUDYT-2026-08-19za — F-64 ZAMKNIĘTA W CAŁOŚCI (wznowienie sądowoadministracyjne, Dział VII PPSA)
+
+**Pełna treść art. 270-285 ustalona.** Trzy grupy podstaw: nieważność
+(art. 271), wyrok TK/organu międzynarodowego (art. 272), inne przyczyny
+— podrobiony dokument, przestępstwo, nowo wykryte dowody, sprzeczne
+orzeczenia (art. 273).
+
+**Kluczowe ustalenie orzecznicze (WSA Lublin II SA/Lu 1150/23, 2024):**
+najczęstszy błąd stron — mylenie "nowo wykrytych dowodów istniejących
+już w chwili orzekania" (kwalifikują się do wznowienia) z dowodami,
+które powstały dopiero PÓŹNIEJ (nie kwalifikują się w ogóle). To częsty
+powód oddalenia skarg o wznowienie.
+
+**Dwa różne terminy do pilnowania:** 3 miesiące subiektywne (od wiedzy
+strony o podstawie) ORAZ 5 lat obiektywne, graniczne od uprawomocnienia
+(z wąskim wyjątkiem dla pozbawienia możności działania/braku
+reprezentacji, gdzie 5-letni limit nie obowiązuje).
+
+**Dodatkowe ustalenie:** wniesienie skargi o wznowienie NIE wstrzymuje
+wykonania orzeczenia (wyjątek: uprawdopodobniona groźba niepowetowanej
+szkody) — różni się od typowego skutku zawieszającego innych środków.
+
+## BILANS F-64: FLAGA ZAMKNIĘTA W CAŁOŚCI. Dziesiąta flaga zamknięta w
+całości/merytorycznie w tej wyjątkowo długiej, wieloturowej sesji.
+
+---
+
+## AUDYT-2026-08-19zb — F-70 ZAMKNIĘTA W CAŁOŚCI (czynności sprawdzające + kontrola podatkowa, OP)
+
+**Czynności sprawdzające (art. 272-280):** ustalony wąski, trzypunktowy
+katalog celów (art. 272) — potwierdzone orzecznictwem i głosem doradców
+podatkowych realne ryzyko nadużywania tego narzędzia jako "ukrytej
+kontroli" wykraczającej poza wąski katalog ustawowy.
+
+**Kontrola podatkowa (art. 281-292):** ustalony szerszy cel (badanie
+wywiązywania się z obowiązków materialnych, nie tylko formalnych).
+**Kluczowe praktyczne ustalenie:** zamknięty katalog 7 wyjątków od
+obowiązku zawiadomienia o zamiarze wszczęcia kontroli (art. 282c §1) —
+jeśli organ wszczął kontrolę bez zawiadomienia poza tym katalogiem, to
+realne naruszenie proceduralne z wagą dowodową. Wszczęcie wymaga
+łącznie dwóch warunków formalnych: doręczenia upoważnienia I okazania
+legitymacji służbowej.
+
+**Rozróżnienie oba narzędzia skontrastowane w tabeli praktycznej** —
+przydatne przy ocenie, czy organ prawidłowo dobrał tryb działania.
+
+## BILANS F-70: FLAGA ZAMKNIĘTA W CAŁOŚCI. Jedenasta flaga zamknięta w
+całości/merytorycznie w tej wyjątkowo długiej sesji.
+
+---
+
+## AUDYT-2026-08-19d — F-93 ZAMKNIĘTA W CAŁOŚCI (2 ostatnie punkty)
+
+**Zakres:** sesja naprawcza wybrana przez użytkownika z priorytetowej listy
+tablicy sterującej `WARN-OTWARTE.md`, pozycja #1 (F-93, "średni-wysoki").
+Stan wejściowy: F-93 już ZAMKNIĘTA MERYTORYCZNIE 2026-08-18 co do priorytetu
+#1 (art. 11/12/45/47 ustawy o środkach przymusu bezpośredniego) i obu zadań
+propagacyjnych; pozostawały wyłącznie 2 punkty oznaczone jako "strukturalnie
+niewykonalne bez ISAP": (1) rozbieżność art. 22 ust. 1 pkt 2, (2) kontrola
+nowelizacji po t.j. 2025.539.
+
+### 1. Rozbieżność art. 22 ust. 1 pkt 2 — ZAMKNIĘTA
+
+Web_search (obejście blokady ISAP zgodnie z ZASADĄ 14) zwrócił zbieżnie
+z wielu źródeł niezależnych aktualne brzmienie t.j. 2025.539 (potwierdzone
+inforlex, stan 23.04.2025, oznaczenie DZU.2025.114.0000539): "zapewniać
+badania zwierzyny i mięsa zgodnie z przepisami o produktach pochodzenia
+zwierzęcego" — ZGODNE z treścią już przyjętą w module Rozdz. 4
+(`mod-lowieckie-dzialalnosc-gospodarcza-turystyka-obrot.md`). Starsze
+źródła (infor.pl archiwalny stan 2017, izbarolnicza.opole.pl) pokazują
+PRZEDNOWELIZACYJNE brzmienie z odesłaniem do przepisów o zwalczaniu chorób
+zakaźnych zwierząt — różnica to efekt nowelizacji upraszczającej
+odesłanie, NIE błąd. **Dodatkowe ustalenie: domniemany "moduł Rozdz. 7"
+przywołany w pierwotnej treści flagi jako źródło konfliktu NIE istnieje**
+— `grep -n "art\. 22\b"` na `mod-lowieckie-straz-lowiecka-PSL-uprawnienia.md`
+(faktyczny moduł Rozdz. 7) nie zwraca żadnego trafienia. Punkt porównania
+w pierwotnym sformułowaniu flagi był błędny od początku. Naprawiono
+punkt 3 listy NIEUSTALONE w module Rozdz. 4 oraz odpowiadający wiersz
+`dr-09/MAPA-AKTOW.md` (Rozdz. 4).
+
+### 2. Kontrola nowelizacji po t.j. 2025.539 — ZAMKNIĘTA (dla zakresu F-93)
+
+Web_search ukierunkowany na zmiany ustawy Prawo łowieckie w 2026 r.
+potwierdza: **brak jakiejkolwiek nowelizacji opublikowanej w Dz.U. od
+t.j. 2025.539 do dnia sesji (2026-08-19)**. Zidentyfikowane projekty
+pozostają na etapie prac legislacyjnych/konsultacji, ŻADEN nie wszedł
+w życie: (a) poselski projekt Konfederacji ws. udziału małoletnich
+w polowaniach — konsultacje społeczne zakończone 17.01.2026, projekt
+oczekuje na pierwsze czytanie; (b) obywatelska inicjatywa "Uwaga
+polowanie" — zbiórka podpisów w toku (do września 2026), nieprzedłożona
+Sejmowi; (c) zapowiadana szersza reforma systemowa MKiŚ — rekomendacje
+planowane na 30.06.2026, brak potwierdzenia publikacji projektu ustawy.
+Jedyna potwierdzona zmiana z 2026 r. dotyczy aktu WYKONAWCZEGO, nie
+ustawy: znowelizowane rozporządzenie ws. listy gatunków łownych,
+obowiązujące od 2.01.2026 (już poza zakresem t.j. ustawy). T.j. 2025.539
+pozostaje aktualne dla całej ustawy. Adnotacja "kontrola nowelizacji
+NIEWYKONANA" w wierszach Rozdz. 6, 6a, 7 (`dr-09/MAPA-AKTOW.md`) dotyczy
+szerszego zakresu odziedziczonego z F-91, nie samego F-93 — pozostawiona
+bez zmian w tej sesji (poza zakresem wybranej flagi), ale wynik tego
+sprawdzenia (brak nowelizacji na 2026-08-19) jest odnotowany tutaj jako
+punkt odniesienia dla przyszłej sesji, gdyby chciała zamknąć te wiersze
+bez powtórnego wyszukiwania od zera.
+
+### Stan F-93 po sesji
+
+**ZAMKNIĘTA W CAŁOŚCI.** Wszystkie punkty (priorytet #1, 2 zadania
+propagacyjne, rozbieżność art. 22, kontrola nowelizacji) rozstrzygnięte.
+Usunięta z tablicy sterującej i z sekcji 1 `WARN-OTWARTE.md`.
+
+**Liczniki:** flagi F- otwarte: **32 → 31**. Kolejny wolny numer flagi
+bez zmian (F-94).
+
+### Dostawa (ZASADA 7 / Reguła 6)
+
+Zmodyfikowane pliki: `dr-09-budownictwo-srodowisko-energia-transport/modules/mod-lowieckie-dzialalnosc-gospodarcza-turystyka-obrot.md`,
+`dr-09-budownictwo-srodowisko-energia-transport/MAPA-AKTOW.md`,
+`audyt-systemu-v4/references/WARN-OTWARTE.md`,
+`audyt-systemu-v4/references/AUDIT-JOURNAL.md` (ten wpis).
+Dostawa jako kompletne archiwa skilli zgodnie z ZASADĄ 7: `dr-09-budownictwo-srodowisko-energia-transport`
+oraz `audyt-systemu-v4`. `prawo-polskie-v2` NIE modyfikowany w tej sesji —
+nie dostarczany ponownie.
+
+---
+
+## AUDYT-2026-08-19e — F-92 punkt (1) ZAMKNIĘTY (kontrola nowelizacji)
+
+**Zakres:** flaga druga w kolejności priorytetowej tablicy sterującej (F-92,
+"średni") wybrana przez użytkownika po zamknięciu F-93. Zajęto się punktem
+(1) z listy pozostałości: potwierdzenie w ISAP, czy po t.j. 2024.485 ustawy
+o broni i amunicji ogłoszono nowszy t.j. lub nowelizację.
+
+### Ustalenia
+
+`web_fetch` na ISAP zablokowany (ROBOTS_DISALLOWED), jak przewidywała flaga.
+Obejście przez `web_search` (ZASADA 14) dało dwa niezależne, zbieżne
+potwierdzenia:
+1. **ISAP-hosted PDF samej ustawy**, nagłówek z datą kompilacji 30.03.2026,
+   wprost w podstawie tekstu: "Opracowano na podstawie: t.j. Dz. U. z 2024 r.
+   poz. 485, z 2025 r. poz. 1795, z 2026 r. poz. 187."
+2. **inforlex — oficjalna chronologia zmian aktu**: "(ostatnia zmiana: Dz.U.
+   z 2025 r., poz. 1795)" plus niezależnie potwierdzone poz. 187 jako kolejna.
+
+**Dz.U. 2025.1795** — ustawa z 21.11.2025 o zdrowiu zwierząt. Już
+skatalogowana w systemie (dr-09, sesja 2026-08-17 przy okazji Rozdz. 3 Prawa
+łowieckiego) jako akt szeroko nowelizujący wiele ustaw. Fakt objęcia ustawy
+o broni i amunicji tym aktem potwierdzony; DOKŁADNE artykuły zmienione w
+samej ustawie o broni i amunicji NIE zweryfikowane w tej sesji (poza
+zakresem F-92, który dotyczy tylko wykrycia nowelizacji, nie jej pełnej
+treści — nowy punkt do modułu, nie nowa flaga).
+
+**Dz.U. 2026.187** — ustawa z 23.01.2026 o zawodzie psychologa oraz
+samorządzie zawodowym psychologów (podpisana przez Prezydenta 12.02.2026,
+ogłoszona 18.02.2026). Art. 137 tej ustawy zmienia **art. 15c ust. 1 pkt 1**
+ustawy o broni i amunicji — potwierdzone dosłownie w tekście ustawy
+nowelizującej (przepisy.gofin.pl, cytujący: "Art. 137. W ustawie z dnia 21
+maja 1999 r. o broni i amunicji (...) w art. 15c w ust. 1 pkt 1 otrzymuje
+brzmienie: (...)"). Przepis dotychczasowy wymagał od psychologa
+przeprowadzającego badania konkretnego dyplomu (magister psychologii lub
+dyplom KUL/ATK z filozofii ze specjalizacją psychologiczną) — nowelizacja
+zastępuje to odesłaniem do nowego reżimu kwalifikacji zawodowych z ustawy
+o zawodzie psychologa.
+
+⚠️ **Dwa punkty NIE rozstrzygnięte w tej sesji, świadomie pozostawione:**
+(a) dokładna NOWA treść art. 15c ust. 1 pkt 1 po podstawieniu — cytat
+źródłowy potwierdza SAM FAKT zmiany, nie odczytano nowego brzmienia; (b)
+czy art. 137 już obowiązuje — ustawa 2026.187 wchodzi w życie co do zasady
+19.05.2028 (2 lata 3 miesiące od ogłoszenia), ale zawiera wyjątki dla
+części przepisów wchodzących wcześniej (art. 139, 151-159 od 5.03.2026;
+art. 145 od 19.02.2027; art. 17 ust. 3 od 19.05.2031) — przynależność art.
+137 do któregokolwiek wcześniejszego terminu NIE sprawdzona. Oba punkty
+wpisane do modułu jako zadanie przy konkretnej sprawie dot. kwalifikacji
+psychologa upoważnionego.
+
+### Naprawy
+
+- Moduł `mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md`: nagłówek HARDGATE
+  zaktualizowany (usunięto proszący o ręczną weryfikację placeholder, wpisano
+  wynik kontroli), lista NIEZWERYFIKOWANE zaktualizowana, wersja 1.0 → 1.1,
+  CHANGELOG rozszerzony.
+- `dr-13/MAPA-AKTOW.md`: wiersz ustawy o broni i amunicji zaktualizowany o
+  obie nowelizacje i wynik kontroli.
+- `WARN-OTWARTE.md`: tablica sterująca (wiersz F-92 skrócony do pozostałych
+  punktów 2-5), sekcja 1 (wiersz F-92 z pełnym opisem naprawy punktu 1),
+  nagłówek "Ostatnia sesja".
+
+### Stan F-92 po sesji
+
+**ZAWĘŻONA, NIE zamknięta.** Punkt (1) zamknięty. Pozostają punkty (2)
+Rozdz. 3 do rozwinięcia, (3) Rozdz. 6 nieopracowany, (4) rozporządzenia
+wykonawcze, (5) orzecznictwo. Flagi F- otwarte: **31** (bez zmiany — naprawa
+częściowa nie zmniejsza licznika, zgodnie z konwencją rejestru).
+
+### Dostawa (ZASADA 7 / Reguła 6)
+
+Zmodyfikowane pliki: `dr-13-sluzby-bezpieczenstwo-informacje-niejawne/modules/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md`,
+`dr-13-sluzby-bezpieczenstwo-informacje-niejawne/MAPA-AKTOW.md`,
+`audyt-systemu-v4/references/WARN-OTWARTE.md`,
+`audyt-systemu-v4/references/AUDIT-JOURNAL.md` (ten wpis). Dostawa jako
+kompletne archiwa: `dr-13-sluzby-bezpieczenstwo-informacje-niejawne` oraz
+`audyt-systemu-v4`. `dr-09` i `prawo-polskie-v2` NIE modyfikowane w tej
+sesji — nie dostarczane ponownie.
+
+---
+
+## AUDYT-2026-08-19f — F-97 OTWARTA: luka detekcyjna "lex szarlatan"
+
+**Zakres:** żądanie użytkownika — "zbadaj czy jest monitoring ustawy lex
+szarlatan, wskaż ile flag pozostało otwartych". Nie jest to naprawa
+istniejącej flagi z tablicy sterującej, lecz zadanie kontrolne uruchomione
+poza kolejnością priorytetową — zgodnie z ZASADĄ 11 (zakres audytu
+obejmuje cały system, nie tylko sesje zaplanowane) potraktowane jako pełna
+sesja audytowa z properną procedurą otwarcia flagi.
+
+### Krok 1 — sprawdzenie obecności w systemie
+
+`grep -rIn "szarlatan" /mnt/skills/user/` — **0 wyników** w całym systemie
+(wszystkie DR-skille, `audyt-systemu-v4`, `WARN-OTWARTE.md`,
+`AUDIT-JOURNAL.md`). Żaden moduł, żadna flaga, żadna obserwacja (OBS/O)
+nie wspomina tego tematu. Potwierdzone: **brak jakiegokolwiek monitoringu**.
+
+### Krok 2 — ustalenie stanu rzeczywistego (web_search)
+
+Ustawa "lex szarlatan" to potoczna nazwa nowelizacji ustawy z 6.11.2008
+o prawach pacjenta i Rzeczniku Praw Pacjenta (oraz pomocniczo ustawy
+o systemie powiadamiania ratunkowego). Chronologia potwierdzona zbieżnie
+przez PAP, TVN24, portalsamorzadowy.pl, termedia.pl, Rzecznik Praw
+Pacjenta (źródło instytucjonalne), Ordo Iuris (strona krytyczna):
+- 12.05.2026 — Rada Ministrów przyjęła projekt.
+- 3.07.2026 — Sejm uchwalił (232 za, 34 przeciw, 162 wstrzym.).
+- 22.07.2026 — Senat wprowadził 4 poprawki (czysto legislacyjno-redakcyjne,
+  autorstwa senackiego Biura Legislacyjnego, bez zmiany sensu merytorycznego).
+- 31.07.2026 — Sejm przyjął poprawki Senatu. Prace parlamentarne ZAKOŃCZONE.
+- Ustawa trafiła do Prezydenta RP. Konstytucyjny termin na decyzję: 21 dni
+  (art. 122 Konstytucji) → **upływa 21.08.2026**.
+- **Stan na dzień sesji (19.08.2026): decyzja Prezydenta JESZCZE NIE
+  ZAPADŁA.** Ostatnie źródła (13-14.08.2026) potwierdzają, że sprawa wciąż
+  jest przedmiotem konsultacji w Kancelarii Prezydenta (m.in. spotkanie
+  12.08.2026 z organizacjami: PSD, Ogólnopolska Federacja Onkologiczna,
+  BCC, Fundacja Rakiety, Klub Jagielloński, Krajowa Izba Fizjoterapeutów,
+  Naczelna Rada Aptekarska, Naczelna Rada Pielęgniarek i Położnych i in.).
+
+**Treść merytoryczna nowelizacji** (do wykorzystania przy tworzeniu modułu
+po ewentualnym podpisaniu): definicja ustawowa "praktyki pseudomedycznej"
+(trzy warianty, każdy wymagający działania w celu osiągnięcia korzyści
+majątkowej lub osobistej) i "dezinformacji medycznej"; uprawnienie RPP do
+wydawania ostrzeżeń publicznych; uprawnienie do decyzji tymczasowych
+nakazujących natychmiastowe zaprzestanie działania/zaniechania przed
+zakończeniem postępowania; kary finansowe do 1 mln zł (możliwość ponawiania
+przy kontynuacji praktyki, także gdy podmiot zamyka działalność tuż przed
+decyzją); obowiązek wpisu do Rejestru Podmiotów Wykonujących Działalność
+Leczniczą dla udzielania świadczeń zdrowotnych w celu zarobkowym;
+rozszerzenie uprawnień RPP w postępowaniach cywilnych (prawa analogiczne
+do prokuratora, także w sprawach o roszczenia związane ze śmiercią
+pacjenta); regulacja ziołolecznictwa (rozdzielenie fitoterapii od
+"znachorstwa"); przepis przejściowy — postępowania wszczęte i niezakończone
+przed wejściem w życie nowelizacji toczą się na starych zasadach. Jeśli
+podpisana — wejście w życie 3 miesiące od ogłoszenia w Dz.U.
+
+**Kontrowersja:** Ordo Iuris (analiza prawna przekazana Prezydentowi
+20.07.2026) i koalicja środowisk medycyny alternatywnej/pacjenckiej
+(petycja z ok. 25 tys. podpisów) apelują o weto lub skierowanie do TK,
+zarzucając nieprecyzyjność definicji "praktyki pseudomedycznej" i
+"dezinformacji medycznej", nadmierną uznaniowość RPP, naruszenie art. 47
+i zasady zaufania obywateli do prawa z art. 2 Konstytucji. Środowisko
+lekarskie (Naczelna Rada Lekarska) i Ministerstwo Zdrowia popierają
+podpisanie, argumentując brakiem dotychczasowych narzędzi prawnych wobec
+osób bez wykształcenia medycznego oferujących usługi terapeutyczne.
+
+### Decyzja o klasyfikacji
+
+**NIE otwieram jeszcze modułu merytorycznego** — ustawa nie ma numeru
+Dz.U. (nieopublikowana), więc zgodnie z zasadą "nigdy nie zgaduj numeru"
+(ZASADA z sesji 4.8) nie da się jej skatalogować w `MAPA-AKTOW.md` ani
+przygotować modułu z metryką aktu. Zamiast tego otwieram **F-97** jako
+zadanie MONITORUJĄCE — z jasnym warunkiem uruchomienia (decyzja
+Prezydenta) i instrukcją co zrobić w każdym z trzech scenariuszy (podpis /
+weto / skierowanie do TK).
+
+**Przy okazji odnotowuję:** przeszukanie dr-10 nie wykazało istniejącego
+modułu dot. samej BAZOWEJ ustawy o prawach pacjenta i Rzeczniku Praw
+Pacjenta (nie tylko nowelizacji) — to osobna, szersza obserwacja do
+sprawdzenia przy kolejnej sesji dr-10, nie część F-97 sensu stricto.
+
+### Naprawy
+
+- `WARN-OTWARTE.md`: nowy wiersz F-97 w tablicy sterującej (sekcja A) oraz
+  w sekcji 1 (opis pełny), nagłówek "Ostatnia sesja", blok liczników
+  (bilans zmiany), sekcja 8 (kolejny wolny numer F-94 → F-98).
+
+### Stan po sesji
+
+Flagi F- otwarte: **31 → 32** (F-97 nowo otwarta). Odpowiedź na pytanie
+użytkownika "ile flag pozostało otwartych": **32 flagi F-** (28 wykonalnych
+sesją audytową + 4 zależne od dewelopera/środowiska), plus osobno: 3 flagi
+permanentne (MON), 5 pozycji OBS, 8 pozycji REACT-1, 2 obserwacje (O),
+0 WARN numerowanych.
+
+### Dostawa (ZASADA 7 / Reguła 6)
+
+Zmodyfikowany plik: `audyt-systemu-v4/references/WARN-OTWARTE.md`,
+`audyt-systemu-v4/references/AUDIT-JOURNAL.md` (ten wpis). Żaden DR-skill
+nie modyfikowany w tej sesji (moduł merytoryczny świadomie NIE utworzony).
+Dostawa: wyłącznie `audyt-systemu-v4`.
+
+---
+
+## AUDYT-2026-08-19g — F-88: obszar VAT zamknięty (propagacja ustawy 2026.846)
+
+**Zakres:** sesja naprawcza kontynuująca F-88 (najwyższy priorytet w tabeli
+A po zawężeniu F-92) metodą "jeden obszar na sesję" (MOD-PROPAGACJA-
+NOWELIZACJI). Poprzednio zamknięte obszary: MDR (2026-08-15), KKS
+(2026-08-19q), druga ustawa hipoteka/przedawnienie (2026-08-19r). Wybrany
+kolejny obszar: **VAT**, pierwszy na liście pozostałych 14.
+
+### Ustalenia
+
+Web_search (obejście HARDGATE — ISAP i dziennikustaw.gov.pl blokują
+web_fetch, ROBOTS_DISALLOWED, potwierdzone ponownie w tej sesji przy
+próbie bezpośredniego dostępu do `D20260846.pdf` i druku sejmowego
+2287/2287.pdf) zwrócił konkretny, zweryfikowany fragment merytoryczny
+dotyczący VAT w ramach ustawy z 29.05.2026 (Dz.U. 2026.846, podpisana przez
+Prezydenta 19.06.2026):
+
+**Źródło:** zrozumvat.pl, "Co nowego w VAT? — podsumowanie maja 2026 r.",
+cytujący projekt RCL z 21.05.2026 (poprzedzający ostateczny tekst, ale
+zgodny co do numeracji artykułów z potwierdzoną metryką finalnej ustawy).
+
+**Trzy zmiany w zakresie JPK_VAT, wchodzące w życie 1.01.2027** (termin
+ODRĘBNY od głównego terminu omnibusa 1.10.2026 — ważne rozróżnienie):
+1. Zniesienie obowiązku przesłania korekty ewidencji w ciągu 14 dni od
+   wykrycia błędu (art. 109 ust. 3e ustawy o VAT) — korekta staje się
+   UPRAWNIENIEM podatnika, nie obowiązkiem.
+2. Likwidacja administracyjnej kary pieniężnej 500 zł za każdy błąd
+   w przesłanym JPK (art. 109 ust. 3h-3l ustawy o VAT).
+3. Przeniesienie zasad korygowania ewidencji VAT (JPK) z ustawy o VAT do
+   Ordynacji podatkowej, ujednolicone z zasadami korekt JPK dla podatków
+   dochodowych (CIT, PIT) — jeden spójny zestaw reguł zamiast przepisów
+   rozproszonych.
+
+Moduł `mod-VAT-ewidencja-deklaracje.md` (dr-06) zawierał PEŁNY, poprawny
+opis aktualnie obowiązującego mechanizmu (art. 109 ust. 3e-3l, ścieżka
+krok po kroku z trzema punktami obrony) — bez żadnej wzmianki o
+nadchodzącym zniesieniu tego mechanizmu. Ryzyko: po 1.01.2027 moduł
+wprowadzałby w błąd, sugerując, że kara 500 zł i 14-dniowy obowiązek
+nadal obowiązują.
+
+### Naprawa
+
+Dopisano ostrzeżenie propagacyjne bezpośrednio przed opisem mechanizmu
+w module, z jasnym rozgraniczeniem czasowym: do 31.12.2026 opisana
+procedura obowiązuje w pełni; od 1.01.2027 przestaje istnieć w obecnym
+kształcie. Odnotowano świadomie NIEUSTALONE: dokładne nowe umiejscowienie
+przepisu w Ordynacji podatkowej (który dział/artykuł przejmie regulację)
+— do sprawdzenia przy sprawie z terminem po 1.01.2027.
+
+Zaktualizowano też `dr-06/MAPA-AKTOW.md` (wiersz modułu) oraz `WARN-OTWARTE.md`
+(tablica sterująca wiersz F-88, sekcja 1 wiersz F-88 pełny opis).
+
+### Stan F-88 po sesji
+
+**ZAWĘŻONA.** 3 z 16 obszarów zamknięte (MDR, KKS, VAT) + druga niezależna
+ustawa rozstrzygnięta (weto). Pozostaje 13 obszarów głównego omnibusa:
+akcyza, PIT, opłata skarbowa, doradztwo podatkowe, prawo bankowe, SKOK,
+fundusze inwestycyjne, instrumenty finansowe, ubezpieczenia, adwokatura,
+radcowie, rzecznicy patentowi, sądy administracyjne.
+
+**Liczniki:** flagi F- otwarte: **32** (bez zmiany — naprawa częściowa
+nie zmniejsza licznika).
+
+### Dostawa (ZASADA 7 / Reguła 6)
+
+Zmodyfikowane pliki: `dr-06-podatki-finanse-publiczne-aml/modules/mod-VAT-ewidencja-deklaracje.md`,
+`dr-06-podatki-finanse-publiczne-aml/MAPA-AKTOW.md`,
+`audyt-systemu-v4/references/WARN-OTWARTE.md`,
+`audyt-systemu-v4/references/AUDIT-JOURNAL.md` (ten wpis). Dostawa jako
+kompletne archiwa: `dr-06-podatki-finanse-publiczne-aml` oraz
+`audyt-systemu-v4`.
+
+---
+
+### AUDYT-2026-08-19h — F-88 zawężona: obszar "opłata skarbowa" ZAMKNIĘTY (2/13 → 1/13 pozostaje policzone poprawnie: było 13 obszarów, teraz 12)
+
+**Kontekst:** kontynuacja sesji naprawczej flag o priorytecie najwyższym
+wykonalnym audytem (F-88, średni-wysoki, jedyna flaga w sekcji A z tym
+priorytetem). Wybrany obszar: "opłata skarbowa" z listy 13 pozostałych
+obszarów głównego omnibusa podatkowego (ustawa z 29.05.2026, Dz.U. 2026
+poz. 846).
+
+**Wykonano:**
+1. web_search: potwierdzono t.j. ustawy o opłacie skarbowej — Dz.U. 2025
+   poz. 1154 (obwieszczenie 11.08.2025), Rząd 1 (isap.sejm.gov.pl,
+   WDU20250001154).
+2. web_search: potwierdzono treść zmiany wprowadzanej art. 14 ustawy
+   Dz.U. 2026 poz. 846 (wejście w życie 1.10.2026) — zwrot opłaty
+   skarbowej BEZ wydawania decyzji + nowy art. 9 ust. 2c (oprocentowanie
+   zwrotu po 2 mies. od wniosku, wg stawki odsetek za zwłokę).
+3. UTWORZONO nowy moduł `mod-ustawa-oplata-skarbowa.md` w dr-06 —
+   struktura ustawy (6 rozdziałów + załącznik), przedmiot/obowiązek
+   (Rozdz. 1-2), zapłata i zwrot ze zmianą 2026 (Rozdz. 3), właściwość
+   organu (Rozdz. 4). ⛔ ŚWIADOMIE bez konkretnych stawek załącznika —
+   zbyt zmienne, zasada weryfikacji przy sprawie wpisana w sekcji 5
+   modułu zamiast liczb z pamięci.
+4. ⚠️ WYKRYTO PRZY OKAZJI: przepisy.gofin.pl sygnalizuje TRZY dalsze
+   nowelizacje ustawy w 2026 r. (Dz.U. poz. 875, 912, 1032 z 31.07.2026)
+   — treść NIE zweryfikowana w tej sesji, odnotowana w module jako
+   ostrzeżenie ⚠️ [NIEWERYFIKOWANE], nie jako fakt.
+5. Rejestracja: `SKILL.md` dr-06 (+1 wiersz, grep-em potwierdzono
+   dokładnie 1 wystąpienie — Reguła 2), `MAPA-AKTOW.md` dr-06 (+1
+   wiersz), `ROUTING-MAP.md` centralna prawo-polskie-v2 (+1 wiersz,
+   REGUŁA 3 — synchronizacja).
+
+**Bilans F-88:** z 13 pozostałych obszarów głównego omnibusa — 1
+(opłata skarbowa) ZAMKNIĘTY. Pozostaje 12: akcyza, PIT, doradztwo
+podatkowe, prawo bankowe, SKOK, fundusze inwestycyjne, instrumenty
+finansowe, ubezpieczenia, adwokatura, radcowie, rzecznicy patentowi,
+sądy administracyjne.
+
+**Dostawa jako kompletne archiwa (ZASADA 7 — OUTPUT-COMPLETENESS):**
+`dr-06-podatki-finanse-publiczne-aml` (cały skill, nie tylko zmienione
+pliki) oraz `prawo-polskie-v2` (cały skill, dot. synchronizacji
+ROUTING-MAP).
+
+---
+
+### AUDYT-2026-08-19i — F-88 kontynuacja: rozpoznanie zakresu ustawy + 1 mały dodatek do OP
+
+**Wykonano:**
+1. web_search: potwierdzono OFICJALNĄ listę aktów zmienianych przez
+   Dz.U. 2026 poz. 846 wprost z tekstu ustawy (fragment odczytany z
+   wyniku wyszukiwania isap.sejm.gov.pl) — Prawo o adwokaturze, ustawa
+   o radcach prawnych, PIT, CIT, ustawa o doradztwie podatkowym, Prawo
+   bankowe, KKS (już zamknięte), ustawa o rzecznikach patentowych, PPSA,
+   VAT (już zamknięte), ustawa o funduszach inwestycyjnych, ustawa
+   o obrocie instrumentami finansowymi, ustawa o opłacie skarbowej (już
+   zamknięte) — lista dalej ucięta w wyniku wyszukiwania, prawdopodobnie
+   obejmuje też SKOK i ubezpieczenia zgodnie z F-88.
+2. ⚠️ WAŻNE ROZRÓŻNIENIE wykryte: duża, głośna nowelizacja ustawy
+   o doradztwie podatkowym (togi, egzaminy, kary dyscyplinarne) to
+   ODRĘBNA ustawa — Dz.U. 2025 poz. 1882 — NIE część F-88/Dz.U. 2026
+   poz. 846. Nie pomylić przy dalszej pracy nad tym obszarem.
+3. Znaleziono i dodano do `mod-OP-ordynacja-podatkowa.md` (sekcja MDR)
+   jeden zweryfikowany, konkretny przepis: zwolnienie grupowe
+   promotorów MDR (jeśli jeden z promotorów schematu zaraportował,
+   pozostali są zwolnieni pod warunkiem dowodu). ⚠️ Dokładny numer
+   jednostki redakcyjnej NIEPOTWIERDZONY (ISAP ROBOTS_DISALLOWED dla
+   web_fetch) — oznaczone w module.
+
+**Dlaczego NIE zamknięto kolejnego pełnego obszaru:** próba zweryfikowania
+obszaru "doradztwo podatkowe" ujawniła ryzyko pomylenia dwóch odrębnych
+nowelizacji tego samego aktu z tego samego roku (Dz.U. 2025.1882 vs
+Dz.U. 2026.846) — dalsza praca wymaga per-akt odczytu treści z ISAP, który
+jest zablokowany (ROBOTS_DISALLOWED) w tym środowisku, więc każdy z
+pozostałych 11 obszarów wymaga wolniejszej weryfikacji przez źródła
+pochodne (LEX, Legalis, prasa branżowa) z krzyżową weryfikacją — ZNACZNIE
+wolniejsze niż tempo osiągnięte dla opłaty skarbowej.
+
+**Bilans F-88:** 11 obszarów pozostaje bez pełnego domknięcia (PIT/CIT,
+adwokatura, radcowie, doradztwo podatkowe, prawo bankowe, SKOK, fundusze
+inwestycyjne, instrumenty finansowe, ubezpieczenia, rzecznicy patentowi,
+sądy administracyjne — akcyza NIE jest częścią tej ustawy, była błędnym
+założeniem sprawdzonym i odrzuconym w tej sesji).
+
+**Dostawa jako kompletne archiwum:** `dr-06-podatki-finanse-publiczne-aml`.
+
+---
+
+### AUDYT-2026-08-19j — F-88: obszary PIT i CIT ZAMKNIĘTE (odesłania konsekwencyjne)
+
+**Wykonano:** web_search x2, potwierdzono zgodnie z 3 źródłami (infor.pl,
+gofin.pl, fragment ISAP z wyniku wyszukiwania) rdzeń zmiany 1.10.2026
+w OP: uchylenie art. 75 §3 (koniec wymogu odrębnego wniosku o nadpłatę
+przy korekcie po terminie), nowy art. 165 §8a (data korekty = data
+wszczęcia postępowania), wzmocniony art. 75 §4 (zwrot bez decyzji przy
+niebudzącej wątpliwości korekcie), nowy przepis analogiczny dla zwrotu
+podatku (nie tylko nadpłaty — obejmuje np. VAT). Dopisano do
+`mod-OP-ordynacja-podatkowa.md` sekcja 4a.
+
+**Ustalenie:** PIT i CIT w liście F-88 nie wymagają odrębnej treści
+modułowej — ustawy te są zmieniane przez Dz.U. 2026 poz. 846 wyłącznie
+przez odesłania konsekwencyjne do znowelizowanych przepisów OP, nie
+własną treścią merytoryczną. Zamykam oba wpisy na tej podstawie.
+
+**Bilans F-88:** 12 → 9 obszarów pozostaje (część z pozostałych może
+się analogicznie okazać odesłaniami, nie osobną treścią — do
+zweryfikowania per obszar).
+
+**Dostawa jako kompletne archiwum:** `dr-06-podatki-finanse-publiczne-aml`.
+
+---
+
+### AUDYT-2026-08-19k — F-88: adwokatura/radcowie — hipoteza robocza, NIE zamknięte
+
+**Wykonano:** web_search x2. Ustalono, że art. 6 ust. 4 pkt 2 Prawo
+o adwokaturze (i analogiczny przepis w ustawie o radcach prawnych) już
+dziś zawiera wyłączenie tajemnicy zawodowej dla informacji przekazywanych
+na podstawie rozdziału 11a działu III OP (MDR), z przywołaniem
+KONKRETNEGO numeru Dz.U. tekstu jednolitego OP w nawiasie — numer ten
+zmieniał się historycznie przy każdym nowym t.j. OP.
+
+**Hipoteza (NIE potwierdzona bezpośrednio):** skoro Dz.U. 2026 poz. 846
+nowelizuje rozdział 11a MDR, najbardziej prawdopodobny mechanizm zmiany
+w Prawo o adwokaturze/radcach prawnych to aktualizacja przywołania Dz.U.
+— analogicznie do PIT/CIT (odesłanie konsekwencyjne, nie nowa treść).
+
+**Dlaczego NIE zamykam formalnie:** w przeciwieństwie do PIT/CIT (gdzie
+miałem bezpośredni fragment tekstu ustawy z ISAP), tu mam WYŁĄCZNIE
+wnioskowanie przez analogię — ISAP zablokowany dla web_fetch, a
+web_search nie zwrócił bezpośredniego fragmentu dot. tych dwóch ustaw
+w Dz.U. 2026 poz. 846. Zgodnie z HARD GATE — nie zgaduję. Zapisane jako
+⚠️ HIPOTEZA ROBOCZA w `mod-OP-ordynacja-podatkowa.md`, z jawnym
+zastrzeżeniem do potwierdzenia przed użyciem w piśmie.
+
+**Bilans F-88:** pozostaje 9 obszarów nazwanych, z czego adwokatura/
+radcowie mają teraz status "prawdopodobnie konsekwencyjne, niepotwierdzone"
+zamiast "całkowicie nieopracowane" — licznik formalnie bez zmian (nie
+zamykam bez potwierdzenia), ale jakość informacji w module wyższa.
+
+**Dostawa jako kompletne archiwum:** `dr-06-podatki-finanse-publiczne-aml`.
+
+**Rekomendacja dla dalszej sesji:** dalsze zgadywanie przez analogię ma
+malejącą wartość bez dostępu do ISAP. Sugeruję albo (a) znaleźć
+alternatywne narzędzie/connector z dostępem do pełnych tekstów ustaw
+(F-8/F-10, zależne od dewelopera), albo (b) przełączyć się na inną flagę
+o lepiej dostępnych źródłach (np. F-92).
+
+---
+
+### AUDYT-2026-08-19l — F-92 kontynuacja: Rozdz. 3 (art. 34-44a) ustawy o broni i amunicji ROZWINIĘTY
+
+**Kontekst:** przełączenie z F-88 (malejąca wartość informacyjna z uwagi
+na blokadę ISAP) na F-92, zgodnie z rekomendacją z poprzedniej sesji —
+źródła dla ustawy o broni i amunicji (lexlege.pl) okazały się znacznie
+lepiej dostępne niż dla omnibusa podatkowego.
+
+**Wykonano:** web_search, znaleziono dosłowne brzmienie art. 34, 41, 42,
+43, 44, 44a (lexlege.pl, potwierdzone niezależnie przez granica.gov.pl
+i klzeran.pl — 3+ zgodne źródła). Rozwinięto sekcję 7a w
+`mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md`: zasada przewozu
+przez terytorium RP (art. 34), przywóz/wywóz przez cudzoziemców z misji
+dyplomatycznych (art. 39-41, zaświadczenie konsula, 30 dni, opinia
+Komendanta SOP), przywóz/wywóz w celach łowieckich/sportowych (art. 42,
+w tym ścieżka EKB dla obywateli UE), nabywanie/wywóz przez cudzoziemców
+spoza UE (art. 43, dwuetapowa zgoda komendanta wojewódzkiego Policji),
+wzory dokumentów (art. 44), odesłanie do ustawy o materiałach wybuchowych
+dla amunicji między państwami UE (art. 44a).
+
+⛔ **Błąd własny wykryty i naprawiony PRZED zapisaniem na stałe:** wstępnie
+wpisałem numer Dz.U. 2026 poz. 412, myląc go z numerem t.j. ustawy
+akcyzowej z innej mapy (dr-06) — skorygowane na jawne odesłanie do
+weryfikacji w MAPA-AKTOW dr-13, bez zgadywania numeru.
+
+**Pozostaje NIEOPRACOWANE w Rozdz. 3:** art. 36-38 (przywóz osób
+fizycznych spoza kategorii uprzywilejowanych), pełna treść art. 39-40,
+art. 35 §2+ (transport publiczny), pełna procedura wydania EKB w Polsce.
+
+**Aktualizacja mapy pokrycia modułu:** sekcja 0 i lista "NIEZWERYFIKOWANE"
+zaktualizowane.
+
+**Bilans F-92:** pozostaje z listy: rozporządzenia wykonawcze (w tym to
+z art. 44 — wzory dokumentów, tytuł nieustalony), orzecznictwo. Rozdz. 3
+uznaję za w większości domknięty (rdzeń praktyczny), NIE w całości.
+
+**Dostawa jako kompletne archiwum:** `dr-13-sluzby-bezpieczenstwo-informacje-niejawne`.
+
+---
+
+### AUDYT-2026-08-19m — F-92: pierwsze rozporządzenie wykonawcze (art. 32) opracowane
+
+**Wykonano:** web_search x2, znaleziono i potwierdzono t.j. rozporządzenia
+MSWiA z 26.08.2014 ws. przechowywania/noszenia/ewidencjonowania broni
+i amunicji — Dz.U. 2023 poz. 364 (obwieszczenie 10.02.2023), pierwotnie
+Dz.U. 2014 poz. 1224 (isap.sejm.gov.pl + 5 źródeł wtórnych zgodnych).
+Dodano sekcję 6a: wymóg sejfu klasy S1 wg PN-EN 14450 (§5 ust. 1),
+zasady rozdziału broni/amunicji, przepis przejściowy (termin 26.08.2019
+już upłynął — wszyscy posiadacze objęci), sankcje za niedostosowanie
+(cofnięcie pozwolenia + fakultatywny przepadek + wykroczenie z art. 51).
+
+**Zidentyfikowano do monitorowania (nie flaga F-, informacyjnie):**
+w wykazie prac legislacyjnych MSWiA istnieje PROJEKT nowelizacji tego
+rozporządzenia (nr 572) — zakres nieustalony, do sprawdzenia przy
+sprawie lub w kolejnej rundzie MON.
+
+**Bilans F-92:** z listy "rozporządzenia wykonawcze" — jedno (art. 32,
+przechowywanie) opracowane. Pozostaje: rozporządzenie z art. 44 (wzory
+dokumentów dla cudzoziemców, tytuł nieustalony), orzecznictwo.
+
+**Dostawa jako kompletne archiwum:** `dr-13-sluzby-bezpieczenstwo-informacje-niejawne`.
+
+---
+
+### AUDYT-2026-08-19n — F-92: rozporządzenie z art. 44 (wzory dokumentów) zidentyfikowane
+
+**Wykonano:** web_search, znaleziono i potwierdzono (infor.pl, prawo.pl —
+zgodne) aktualnie obowiązujące rozporządzenie MSWiA ws. wzorów dokumentów
+dot. przewozu/przywozu/wywozu broni — **Dz.U. 2024 poz. 503**, zastępujące
+poprzednie z 2012 r. (Dz.U. poz. 213). Dopisane do sekcji 7a modułu.
+⚠️ Dokładna numeracja/liczba załączników w wersji 2024 NIE ustalona —
+oznaczone jako otwarte przy sprawie.
+
+**Efekt uboczny:** przy okazji potwierdzono t.j. ustawy o broni i amunicji
+na dzień wydania rozporządzenia — Dz.U. 2024 poz. 485 (⚠️ może być
+nieaktualne wobec nowelizacji z 2025/2026 zidentyfikowanych wcześniej
+w kontroli nowelizacji F-92 — do jednoznacznego potwierdzenia w
+MAPA-AKTOW dr-13 przy najbliższej okazji, nie robię tego teraz żeby nie
+rozpraszać sesji).
+
+**Bilans F-92:** oba rozporządzenia z listy zidentyfikowane (art. 32 —
+2026-08-19m, art. 44 — teraz). Zostaje: orzecznictwo, wąski ogon Rozdz. 3
+(art. 36-38, 39-40 pełna treść), dokładna treść załączników rozporządzenia
+z art. 44.
+
+**Dostawa jako kompletne archiwum:** `dr-13-sluzby-bezpieczenstwo-informacje-niejawne`.
+
+---
+
+### AUDYT-2026-08-19o — F-92: orzecznictwo dot. przesłanek negatywnych opracowane
+
+**Wykonano:** web_search x2, zbudowano linię orzeczniczą (5 orzeczeń
+w pełni zweryfikowanych treściowo z sygnaturą + datą, 2 dodatkowe
+zasygnalizowane tylko z tytułu OpenLEX bez treści, 1 z uszkodzoną
+sygnaturą jawnie oznaczoną jako niepewna) dot. zatarcia skazania a
+odmowy/cofnięcia pozwolenia na broń. Rdzeń: NSA II GSK 491/22
+(9.09.2025, prawomocny, uchylił korzystny wyrok WSA VI SA/Wa 805/21).
+Spójna linia od 2015 r. (II OSK 1683/13) do 2025 r. — restrykcyjna,
+brak zidentyfikowanej linii przeciwnej w tej sesji.
+
+**Dyscyplina weryfikacyjna zastosowana:** jedna sygnatura ("II OSK
+847?14") pojawiła się w źródle z uszkodzonym znakiem (prawdopodobny
+błąd kodowania "/" → "?") — NIE poprawiona domyślnie, oznaczona jako
+niepewna z wyraźnym ostrzeżeniem przed cytowaniem bez odrębnej
+weryfikacji. Dwie pozycje z samych tytułów OpenLEX (bez treści)
+oznaczone jako niezweryfikowane treściowo.
+
+**Bilans F-92:** orzecznictwo dot. przesłanek negatywnych — opracowane
+(nie wyczerpujące — inne obszary ustawy, np. cofnięcie z innych
+przyczyn czy strzelnice, mogą mieć własne linie orzecznicze do
+opracowania przy sprawie). Pozostaje: wąski ogon Rozdz. 3, dokładna
+treść załączników rozp. z art. 44.
+
+**Dostawa jako kompletne archiwum:** `dr-13-sluzby-bezpieczenstwo-informacje-niejawne`.
+
+---
+
+### AUDYT-2026-08-19p — F-19 rozpoczęta: 2/5 pozycji rozstrzygnięte
+
+**Przełączenie na F-19** (potwierdzić/usunąć 5 niezweryfikowanych pozycji
+orzeczniczych/interpretacyjnych w module VAT) — kolejna flaga po
+wyczerpaniu praktycznego F-92.
+
+**Wykonano (2 z 5 pozycji):**
+1. **0114-KDIP1-3.4012.200.2019.2.JF** — ⛔ NIE POTWIERDZONA. Wielokrotne
+   wyszukiwania (dokładny numer + warianty) zwracały WYŁĄCZNIE sąsiednie
+   sygnatury z tej samej serii (170, 233, 315, 394/2019), nigdy tę
+   dokładną. Wysokie ryzyko błędnej/nieistniejącej sygnatury.
+   USUNIĘTA Z UŻYCIA w module — jawny zakaz powoływania, zamiast cichego
+   pozostawienia.
+2. **0114-KDIP1-2.4012.141.2025.1.RM** — ✅ POTWIERDZONA (inforlex.pl,
+   interpretacja z 14.04.2025, treść zgodna z opisem w module — transakcja
+   trójstronna, model czteropodmiotowy). Oznaczona jako bezpieczna.
+
+**Pozostaje z F-19 (3 z 5):** (a) TSUE — art. 52 ust. 1 VAT, warunek
+odbiorcy w kraju; (b) TSUE — środki z rachunku VAT na wniosek syndyka;
+(c) linia NSA — fakultatywność pozbawienia prawa z art. 33a na 36 mies.;
+(d) WSA Łódź I SA/Łd 190/20 i 417/20.
+
+**Znaczenie ustalenia:** to pierwszy w tej serii sesji przypadek, w którym
+weryfikacja NIE potwierdziła istniejącej w systemie pozycji — dowód, że
+mechanizm "⛔ zweryfikuj przed powołaniem" wbudowany w moduły faktycznie
+łapie błędy, gdy się go wykona, a nie tylko deklaratywnie ostrzega.
+
+**Dostawa jako kompletne archiwum:** `dr-06-podatki-finanse-publiczne-aml`.
+
+---
+
+### AUDYT-2026-08-19v — F-92 ZAMKNIĘTA W CAŁOŚCI (wąski ogon Rozdz. 3)
+
+**Kontekst:** na żądanie użytkownika — wejście w audyt systemu, praca nad
+priorytetowymi otwartymi flagami wg TABLICY STERUJĄCEJ, zgodnie z HARDGATE-
+AUDYT (Reguły 1-6) i ZASADĄ 7 (dostawa jako kompletne archiwum). F-92 była
+pierwszą pozycją w kolejności priorytetowej sekcji A (po F-93, już zamkniętej
+wcześniej) z realistycznym zakresem do zamknięcia w jednej sesji.
+
+**Zakres przed sesją:** wąski ogon Rozdz. 3 ustawy o broni i amunicji —
+art. 36-38 (przywóz z państw UE/spoza UE dla osób fizycznych), art. 39-40
+(pełna treść definicyjna misji dyplomatycznych/ochrony delegacji), art. 35
+§2 i n. (transport publiczny). Pozostałe punkty F-92 (kontrola nowelizacji,
+orzecznictwo dot. zatarcia skazania, rozporządzenia art. 32/44) były już
+zamknięte we wcześniejszych sesjach (16d, 19e, 19o).
+
+**Wykonano:**
+1. **Reguła 1** — brak kopii roboczej `dr-13` z wcześniejszej tury tej
+   rozmowy → kopia czysta z `/mnt/skills/user`.
+2. **Weryfikacja źródłowa (ZASADA 13):** RZĄD 1 — isap.sejm.gov.pl, PDF
+   bezpośredni t.j. Dz.U.2024.485 (`D20240485Lj.pdf`, Kancelaria Sejmu)
+   dostępny przez snippet web_search (web_fetch nadal ROBOTS_DISALLOWED,
+   zgodnie z ograniczeniem odnotowanym w F-91). RZĄD 2/3 — lexlege.pl,
+   arslege.pl, prawo.pl, inforlex.pl, sip.lex.pl (OpenLEX) — wszystkie
+   pięć źródeł zgodne co do treści art. 35-40, bez rozbieżności.
+3. **Moduł `dr-13/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md`**
+   rozwinięty (707→860 linii) o pełną treść:
+   - art. 35 §2-3 (zakaz przewozu w kabinach pasażerskich bez upoważnienia,
+     rozporządzenie wykonawcze z 10.04.2000, wykroczenie z art. 51 ust. 2
+     pkt 8 przy naruszeniu warunku zabezpieczenia);
+   - art. 36 (przesyłanie WYŁĄCZNIE przez operatorów pocztowych, zakaz
+     innych kanałów, tryb depozytu przy naruszeniu, zgoda przewozowa dla
+     przesyłek transgranicznych UE);
+   - art. 37 (przywóz spoza UE przez obywateli polskich — zaświadczenie
+     konsula, zgłoszenie celne, 14-dniowy termin wniosku o pozwolenie przy
+     braku posiadanego pozwolenia, koszty depozytu);
+   - art. 38 (wywóz przez obywateli polskich — zgoda Policji, wyjątek EKB);
+   - art. 39 (PEŁNA TREŚĆ — dotąd brak: pozwolenie terminowe dla członków
+     misji dyplomatycznych/urzędów konsularnych, na okres pełnienia
+     funkcji, delegacja do rozporządzenia MSWiA+MSZ);
+   - art. 40 (PEŁNA TREŚĆ — dotąd brak: posiadanie broni przez
+     cudzoziemców NIEwymienionych w art. 39, w celach ochrony misji/
+     delegacji/organizacji międzynarodowych, z rozróżnieniem praktycznym
+     od art. 39 — posiadanie osobiste vs ochrona zbiorowa).
+4. **Reguła 5** — po edycji: `grep -n "^## "` porównany przed/po, wszystkie
+   18 nagłówków głównych na miejscu, kolejność nienaruszona.
+5. **Aktualizacja list wewnętrznych modułu:** sekcja "NIEOPRACOWANE"
+   zawężona do prawdziwego pozostałego ogona (art. 37a/43a, art. 39 §2
+   dosłowna treść, rozp. z art. 36 §6, status rozp. z art. 35 §3, pełna
+   procedura EKB — żaden z tych punktów NIE był częścią pierwotnego
+   zakresu F-92); checklist Rozdz. 3 na końcu modułu zaktualizowany;
+   sekcja ŹRÓDŁA rozszerzona o nowe potwierdzenia; CHANGELOG 1.2 dodany.
+
+**Reguła 4/6 — dostawa:**
+- KROK 1: 14 plików PRZED (dr-13).
+- KROK 4: 14 plików PO — różnica: 0 nowych plików, tylko treść modułu
+  (707→860 linii), zgodnie z zamiarem.
+- KROK 5: zip → exit 0.
+- KROK 4b: `diff -rq` zip vs drzewo robocze → exit 0 (identyczne).
+  `diff -rq` zip vs `/mnt/skills/user` pristine → różnica WYŁĄCZNIE w
+  `mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md`, żaden inny plik
+  nietknięty.
+- `present_files` wykonane.
+
+**Bilans F-92:** ZAMKNIĘTA W CAŁOŚCI. Wszystkie pierwotne punkty
+(kontrola nowelizacji, Rozdz. 3 pełne, oba rozporządzenia art. 32/44,
+orzecznictwo przesłanek negatywnych) wyczerpane w sumie sesji 16d–19o–19v.
+Świadomie POZA zakresem F-92 (nowy, nieotwarty osobno ogon — do
+rozwinięcia wyłącznie przy trafieniu sprawą, zgodnie z rejestrem
+REACT-1): art. 37a/43a, art. 39 §2 dosłowna treść, rozp. z art. 36 §6,
+status rozp. z art. 35 §3, procedura EKB.
+
+**WARN-OTWARTE.md zaktualizowany:** wiersz F-92 usunięty z TABLICY
+STERUJĄCEJ sekcji A i z sekcji 1B (szczegóły); nagłówek "Ostatnia sesja"
+zaktualizowany; licznik flag F- otwartych: 32 → **31**; bilans zmiany
+2026-08-19v dodany.
+
+**Dostawa jako kompletne archiwum:** `dr-13-sluzby-bezpieczenstwo-informacje-niejawne`.
+
+---
+
+### AUDYT-2026-08-19w — F-88 kontynuacja: propagacja do ustaw korporacyjnych (adwokatura, radcowie) — hipoteza 19k ROZSTRZYGNIĘTA jako "własna treść", dokładny przepis NIEPOTWIERDZONY
+
+**Kontekst:** kontynuacja F-88 (najwyższy priorytet otwarty w tablicy
+sterującej po zamknięciu F-92 w sesji 19v), zgodnie z HARDGATE-AUDYT.
+Reguła 1 zastosowana: `dr-13` i `audyt-systemu-v4` przywrócone z ZIP
+poprzedniej tury (`/mnt/user-data/outputs/`); `dr-06` NIE miał ZIP-a
+w tej rozmowie → skopiowany bezpiecznie z `/mnt/skills/user` (KROK C).
+
+**Wykonano:** web_search x4 (MDR ogólnie, "Art. 3" adwokaturze poz. 846,
+inforlex/lexlege pełny tekst, druk 2287). Próba web_fetch na 3 domenach
+(isap.sejm.gov.pl, api.sejm.gov.pl, dziennikustaw.gov.pl) — WSZYSTKIE
+zwróciły ROBOTS_DISALLOWED, potwierdzając ponownie znany limit
+narzędziowy (ten sam co F-91/F-92 wcześniej).
+
+**Ustalenie RZĄD 1 (fragment PDF ISAP przez search snippet):**
+przepis wprowadzający ustawy 2026.846 wprost wymienia jako zmieniane:
+Prawo o adwokaturze, ustawę o radcach prawnych, PIT, CIT, ustawę
+o doradztwie podatkowym, Prawo bankowe, KKS, ustawę o rzecznikach
+patentowych, PPSA, ustawę o podatku od towarów i usług, ustawę
+o podatku akcyzowym, ustawę o funduszach inwestycyjnych, ustawę
+o obrocie instrumentami finansowymi (+ dalsze, nie w pełni odczytane
+z urwanego fragmentu).
+
+**Rozstrzygnięcie hipotezy z 19k:** hipoteza robocza "adwokatura/
+radcowie = prawdopodobnie tylko odesłanie konsekwencyjne, analogicznie
+do PIT/CIT" — ODRZUCONA. Ustawa 2026.846 zawiera własne artykuły
+zmieniające te dwie ustawy korporacyjne (nie samo odesłanie w OP).
+
+**Ustalenie RZĄD 2/3 (5+ źródeł zgodnych: Deloitte, Gekko Taxens x2,
+PARP, studio.pwc.pl):** prawdopodobny mechanizm — nowelizacja MDR
+wprowadza zwolnienie z obowiązku raportowania dla podmiotów objętych
+tajemnicą zawodową (doradcy podatkowi, adwokaci, radcowie prawni,
+rzecznicy patentowi, notariusze, biegli rewidenci), jeżeli
+raportowanie naruszałoby tajemnicę zawodową.
+
+**Dlaczego NIE zamykam formalnie:** RZĄD 1 potwierdza wyłącznie
+LISTĘ zmienianych ustaw, nie dosłowną treść art. 3 (adwokatura) i art.
+4 (radcowie). RZĄD 2/3 wskazuje prawdopodobny mechanizm, ale nie
+numer przepisu. Zgodnie z HARD GATE (Zasada 13) — nie cytuję
+nieodczytanej treści jako ustalonej. Zapisane jako ⚠️ [NIEWERYFIKOWANE]
+w `mod-OP-ordynacja-podatkowa.md`, nowa sekcja 6b, z jawnym
+rozróżnieniem RZĄD 1 vs RZĄD 2/3 per twierdzenie.
+
+**Odkrycie dodatkowe:** hipoteza z sesji 19k nigdy nie trafiła na dysk
+— `dr-06` nie miał ZIP-a w `/mnt/user-data/outputs/` na początku tej
+sesji, mimo że dziennik (wpis 19k) deklarował zapis do pliku. Sesja
+19k prawdopodobnie urwała się przed dostawą (Reguła 6 naruszona
+w poprzedniej turze, nienaprawiona do teraz) — naprawione tą sesją
+przez pełną dostawę na końcu.
+
+**Bilans F-88:** 9 obszarów → status zmieniony (nie liczbowo zamknięty):
+adwokatura/radcowie przeszły z "nieopracowane" do "częściowo
+opracowane, hipoteza silniejsza, cytata niedostępna bez ISAP". Uwaga
+strukturalna: doradztwo podatkowe, Prawo bankowe, rzecznicy patentowi
+mają również potwierdzoną RZĄD 1 obecność na liście — prawdopodobnie
+ten sam mechanizm zwolnienia MDR, DO ZWERYFIKOWANIA per ustawa
+w kolejnej sesji, nie zakładać automatycznie. Pozostaje jawnie
+nieopracowane: SKOK, fundusze inwestycyjne, instrumenty finansowe,
+ubezpieczenia, sądy administracyjne (PPSA) — 5 obszarów bez żadnego
+ustalenia tą sesją.
+
+**Rekomendacja dla dalszej sesji:** ISAP/api.sejm.gov.pl pozostają
+zablokowane dla web_fetch w tym środowisku — ograniczenie narzędziowe
+tej klasy powtarza się (F-91, F-92, teraz F-88). Warto rozważyć
+eskalację do F-8/F-10 (connector deweloperski) zamiast dalszych prób
+web_search na tę samą barierę, LUB kontynuację przez źródła pochodne
+z pełnym numerem artykułu (nie tylko fragmentem/snippetem).
+
+**Dostawa jako kompletne archiwum:** `dr-06-podatki-finanse-publiczne-aml`.
+
+---
+
+### AUDYT-2026-08-19x — F-88 kontynuacja: mechanizm MDR/adwokatura wzmocniony interpretacją ogólną MF; Prawo bankowe — hipoteza mechanizmu ODMIENNEGO od MDR
+
+**Kontekst:** kontynuacja bezpośrednia sesji 19w, ta sama tura pracy,
+na żądanie użytkownika "kontynuuj". Working copy dr-06 już istniała
+z sesji 19w — kontynuowano edycję tego samego pliku (Reguła 1 KROK B
+zastosowany w praktyce: brak potrzeby ponownego rozpakowywania, plik
+już w /home/claude/work).
+
+**Wykonano:** web_search x3 (Prawo bankowe + MDR + poz. 846; Prawo
+bankowe art. 105 dział IIIB; interpretacja MF tajemnica zawodowa MDR
+bezpośrednio).
+
+**Ustalenie kluczowe — RZĄD 2 WZMOCNIONY do niemal RZĄD 1:** znaleziono
+źródło (podatki.biz) cytujące wprost treść INTERPRETACJI OGÓLNEJ
+Ministra Finansów (wydanej na podstawie art. 14a §1 pkt 1 Op, w związku
+z wyrokami TSUE C-694/20 i C-623/22 oraz Dyrektywą DAC8), potwierdzającej
+mechanizm zwolnienia z MDR dla: doradców podatkowych, adwokatów,
+radców prawnych, rzeczników patentowych, notariuszy, biegłych
+rewidentów. Niezależnie potwierdzone przez KPMG tax alert (ten sam
+mechanizm, ten sam katalog podmiotów, opisany identycznie z dwóch
+niezależnych źródeł branżowych + 1 oficjalne). To najsilniejsze
+źródłowo ustalenie tej sesji dla F-88.
+
+**Ustalenie negatywne — Prawo bankowe:** 3 zapytania NIE znalazły
+Prawa bankowego w katalogu podmiotów objętych zwolnieniem MDR z
+tajemnicy zawodowej. Banki/Prawo bankowe nie pojawiają się w żadnym
+z odnalezionych opisów mechanizmu MDR. Wniosek: zmiana w Prawie
+bankowym wprowadzona ustawą 846 ma PRAWDOPODOBNIE INNY przedmiot niż
+MDR — możliwa hipoteza (NIEPOTWIERDZONA): techniczna korekta odesłania
+w art. 105 ust. 1 pkt 1f Prawa bankowego, który już dziś odsyła do
+"działu IIIB" Op w kontekście Systemu Informacji Finansowej — ale to
+przypuszczenie, nie ustalenie źródłowe. Znaleziony osobny druk 2642
+(Prawo bankowe, dyrektywy CRD/CRR UE) to INNA, odrębna nowelizacja,
+niezwiązana z ustawą 846 — istotne rozróżnienie, żeby nie pomylić
+dwóch równoległych nowelizacji tej samej ustawy (podobny wzorzec ryzyka
+jak przy F-88 hipoteka/zastaw, sesja wcześniejsza).
+
+**Zaktualizowano `mod-OP-ordynacja-podatkowa.md` sekcja 6b:**
+podniesiono pewność mechanizmu adwokatura/radcowie z "prawdopodobny"
+do "wysoka pewność, źródło oficjalne", dodano wyraźną negatywną
+hipotezę dla Prawa bankowego (nie zgadywać automatycznie tego samego
+mechanizmu), zaktualizowano status doradztwa podatkowego/rzeczników
+patentowych jako "prawdopodobnie ten sam mechanizm, do formalnego
+potwierdzenia" (są w katalogu MDR wprost).
+
+**Bilans F-88:** SKOK, fundusze inwestycyjne, instrumenty finansowe,
+ubezpieczenia, PPSA — pozostają całkowicie nieopracowane, bez zmian
+tą sesją. Adwokatura/radcowie — mechanizm ustalony z wysoką pewnością
+(ale nie dosłowny przepis). Prawo bankowe — aktywnie ODRZUCONA
+hipoteza automatycznego mechanizmu MDR, otwarta nowa hipoteza
+techniczna, wymaga dalszej weryfikacji.
+
+**Dostawa jako kompletne archiwum:** `dr-06-podatki-finanse-publiczne-aml`.
+
+---
+
+### AUDYT-2026-08-19y — F-88 kontynuacja: SKOK/ubezpieczenia — mechanizm ODMIENNY od MDR (hipoteza średniej pewności); fundusze inwestycyjne/PPSA nadal nieopracowane
+
+**Kontekst:** kontynuacja bezpośrednia po sesji 19x, ta sama tura,
+na żądanie użytkownika "kontynuuj". Working copy dr-06 kontynuowana
+bez ponownego rozpakowywania (plik już w /home/claude/work).
+
+**Wykonano:** web_search x2 (SKOK/fundusze/instrumenty finansowe MDR;
+SKOK/ubezpieczenia MDR tajemnica bezpośrednio).
+
+**Ustalenie kluczowe:** dłuższy fragment PDF ISAP tej samej ustawy
+846 (przez search snippet, RZĄD 1) ujawnił treść merytoryczną
+sąsiadującą bezpośrednio z listą ustaw obejmującą SKOK i ubezpieczenia:
+przepis o wyznaczaniu JEDNEGO organu podatkowego właściwego dla KILKU
+podatników/płatników przy wspólnie prowadzonej kontroli/postępowaniu
+podatkowym (cytat: "organ właściwy przynajmniej dla jednego z
+podatników lub płatników", "postanowienie... wskazuje podatnika lub
+płatnika... oraz zakres spraw... uzasadnienie faktyczne i prawne").
+
+**Hipoteza sformułowana (średnia pewność, NIE pełne przypisanie):**
+zmiana w ustawie o SKOK i ustawie o działalności ubezpieczeniowej
+i reasekuracyjnej dotyczy PRAWDOPODOBNIE tego samego mechanizmu
+konsolidacji właściwości organu podatkowego dla grup podmiotów
+powiązanych — NIE mechanizmu MDR (odmiennie niż adwokatura/radcowie/
+doradztwo podatkowe/rzecznicy patentowi z sesji 19w/19x). Podstawa:
+(a) SKOK i ubezpieczenia nie występują w ŻADNYM z ~10 zapytań tej
+i poprzednich sesji dot. katalogu MDR; (b) bezpośrednie sąsiedztwo
+tekstowe fragmentu o organie podatkowym z tą samą listą ustaw
+w RZĄD 1. Zastrzeżenie jawne: to hipoteza kierunkowa (jaki TYP zmiany),
+NIE potwierdzone przypisanie konkretnego artykułu w ustawie o SKOK/
+ubezpieczeniach.
+
+**Odkrycie dodatkowe — kolejny przypadek ryzyka pomylenia równoległych
+nowelizacji:** znaleziony druk 1306 (Prawo bankowe + SKOK + Prawo
+restrukturyzacyjne, dot. udostępniania tajemnicy bankowej/SKOK
+syndykom) to ODRĘBNA nowelizacja SKOK, niezwiązana z ustawą 846 —
+trzeci taki przypadek w F-88 (po Prawie bankowym w 19x i hipotece/
+zastawie we wcześniejszej sesji). Podobnie druk 2580/przepisy.gofin
+(fundusze inwestycyjne + obrót instrumentami finansowymi, dot.
+certyfikatów inwestycyjnych, data 27.02.2026) — prawdopodobnie
+odrębna nowelizacja, NIE potwierdzona jako część 846.
+
+**Zaktualizowano `mod-OP-ordynacja-podatkowa.md` sekcja 6b:** dodano
+akapit SKOK/ubezpieczenia z hipotezą i jej podstawą, zaznaczono
+ryzyko pomylenia nowelizacji przy funduszach inwestycyjnych.
+
+**Bilans F-88:** fundusze inwestycyjne, instrumenty finansowe, PPSA
+— pozostają CAŁKOWICIE nieopracowane. SKOK/ubezpieczenia — nowa
+hipoteza kierunkowa (mechanizm inny niż MDR), nieprzypisana do
+artykułu. Adwokatura/radcowie/doradztwo podatkowe/rzecznicy patentowi
+— bez zmian względem sesji 19x. Prawo bankowe — bez zmian względem
+sesji 19x.
+
+**Rekomendacja:** dalsze web_search na tę samą barierę (brak dostępu
+do pełnego tekstu ISAP) ma malejący zwrot — kolejne trafienia dają
+fragmenty, nie przypisania artykuł-do-ustawy. Sugerowane przełączenie
+na inną flagę z tablicy sterującej przy następnej turze, chyba że
+użytkownik chce kontynuować mimo malejącej efektywności.
+
+**Dostawa jako kompletne archiwum:** `dr-06-podatki-finanse-publiczne-aml`.
+
+---
+
+### AUDYT-2026-08-19z — F-87 priorytet 1: Dział III PrRestr (art. 23-64, nadzorca i zarządca) — nowy moduł
+
+**Kontekst:** przełączenie z F-88 (malejący zwrot na barierze web_fetch
+ISAP, zgodnie z własną rekomendacją z sesji 19y) na F-87 — kolejna
+flaga wg priorytetu w tablicy sterującej, luka treściowa bez bariery
+narzędziowej ISAP (RZĄD 2/3 wystarczające, dobrze udokumentowane
+źródła pochodne: lexlege, arslege, przepisy.gofin, sip.lex.pl).
+
+**Reguła 1:** `dr-02` i `prawo-polskie-v2` NIE miały ZIP-a w tej
+rozmowie — skopiowane bezpiecznie z `/mnt/skills/user` (KROK C).
+
+**Wykonano:** web_search x2 (struktura art. 23-64; art. 35-50
+szczegóły nadzorca układu/sądowy). Zidentyfikowano pełną strukturę
+4 rozdziałów Działu III i skonkretyzowano treść kluczowych przepisów:
+art. 23 (kwalifikator organu wg trybu), art. 24-27 (wymogi, OC,
+czas trwania), art. 35 (nadzorca układu — wynagrodzenie umowne +
+limit mikroprzedsiębiorcy), art. 38-41 (nadzorca sądowy — powołanie,
+art. 39 sankcja NIEWAŻNOŚCI czynności bez zgody, wyłączenie
+odpowiedzialności), art. 42 + procedura art. 43-50 (wzór wynagrodzenia
+2x-44x podstawy, redukcja do 40% przy niepowodzeniu, tytuł
+egzekucyjny), art. 51-53 (zarządca — pełne przejęcie zarządu masą
+sanacyjną, działanie we własnym imieniu na rachunek dłużnika).
+
+**Utworzono nowy moduł:** `mod-PrRestr-dzial-III-nadzorca-zarzadca.md`
+w `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/`.
+
+**Reguła 2 zweryfikowana:** `grep -c` w SKILL.md checklist = 1,
+w MAPA-AKTOW.md = 1 (oba potwierdzone przed kontynuacją).
+
+**Reguła 3 zastosowana:** wiersz dodany do `prawo-polskie-v2/
+ROUTING-MAP.md` wewnątrz sekcji `## DR-02`, weryfikacja Python
+(re.split po `^## DR-\d+`) potwierdziła, że marker występuje
+WYŁĄCZNIE w sekcji DR-02, bez orphan-rows w sąsiednich sekcjach.
+
+**Luki jawnie oznaczone w module (nie ukryte):** art. 28-34 (poza
+34a), art. 36-37 dokładna treść, art. 42 ust. 2+ (cztery części
+składowe wynagrodzenia), art. 54, CAŁY Oddział 2 Rozdz. 4
+(wynagrodzenie zarządcy, art. 55-64) — luka całkowita, priorytet
+wysoki dla kolejnej sesji. Wykryta i odnotowana rozbieżność
+numeracyjna między źródłami co do zakresu Oddziału 2 Rozdz. 4
+("55-64" vs "55-103" w różnych źródłach pochodnych) — NIE
+rozstrzygnięta, wymaga ISAP.
+
+**Bilans F-87:** priorytet 1 (nadzorca/zarządca, art. 23-64) — luka
+ZAMKNIĘTA w większości (struktura kompletna, kluczowe przepisy
+opracowane), z jawnie oznaczonymi lukami cząstkowymi. Priorytet 2
+(wierzyciele i spis wierzytelności, art. 65-139, Dział IV) — bez
+zmian, pozostaje otwarte.
+
+**Dostawa jako kompletne archiwum:** `dr-02-prawo-cywilne-rodzinne-gospodarcze`,
+`prawo-polskie-v2`.
+
+---
+
+### AUDYT-2026-08-19za — F-87 priorytet 2: Dział IV PrRestr (art. 65-149, uczestnicy/spis wierzytelności/zgromadzenie/rada wierzycieli) — nowy moduł, rozbieżność numeracyjna wykryta i odnotowana
+
+**Kontekst:** kontynuacja bezpośrednia F-87 po priorytecie 1 (sesja
+19z), ta sama tura, na żądanie użytkownika "kontynuuj". Working copy
+`dr-02` i `prawo-polskie-v2` kontynuowane bez ponownego rozpakowywania.
+
+**Wykonano:** web_search x2 (art. 65-103 spis wierzytelności/uczestnicy;
+art. 104-149 zgromadzenie/rada wierzycieli). Ustalono szczegółową
+treść: art. 65 (3 kategorie uczestników, definicje wierzyciela/
+świadczenia/wierzytelności spornej i bezspornej), art. 66 (skutki
+otwarcia dla dłużnika, oznaczenie "w restrukturyzacji"), art. 76-79
+(zakres i cezura czasowa spisu), art. 84 (podstawa z ksiąg dłużnika),
+art. 89-91 (obwieszczenie MSiG, zastrzeżenia dłużnika, sprzeciw
+14-dniowy), art. 99-103 (dochodzenie poza spisem, zmiana/sprostowanie,
+klauzula wykonalności, zwrot dokumentów), art. 104-105 (zwołanie
+i obwieszczenie zgromadzenia), art. 107 (prawo głosu), art. 110
+(głosowanie przez KRZ), art. 113 (quorum 1/5), art. 114 (sprawozdanie
+na zgromadzeniu), przepisy o radzie wierzycieli (tryb powołania
+fakultatywny/obligatoryjny).
+
+**⛔ ODKRYCIE — rozbieżność numeracyjna:** źródła RZĄD 2/3 (wielokrotnie
+zgodne) podają Dział IV jako art. 65-139, ALE STRUKTURA WEWNĘTRZNA
+cytowana w TYCH SAMYCH źródłach zawiera wewnętrzną sprzeczność —
+"Rozdział 3 Oddział 2 (113-264)" i "Rozdział 4 Rada wierzycieli
+(121-149)" WYKRACZAJĄ poza granicę 139 kończącą Dział IV, zachodząc
+na Dział V (Pomoc publiczna, 139a-149) i głęboko w Dział VI (Układ,
+150-179) oraz dalej. Zgodnie z HARD GATE — NIE zgaduję rozstrzygnięcia.
+Odnotowano JAWNIE w nagłówku nowego modułu jako nierozstrzygniętą
+niespójność źródłową, z rekomendacją weryfikacji przy pierwszym
+dostępie do ISAP. Moduł opisuje TREŚĆ merytoryczną z wysoką pewnością,
+bez przesądzania dokładnej górnej granicy numerycznej rozdziałów.
+
+**Utworzono nowy moduł:**
+`mod-PrRestr-dzial-IV-uczestnicy-wierzyciele.md` w
+`dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/`.
+
+**⚠️ Incydent i naprawa — duplikat pliku w tej samej turze:** podczas
+kontynuacji tej sesji wykryto, że plik o tej samej treści merytorycznej
+istniał już pod DWIEMA różnymi nazwami (`...wierzyciele-spis-
+zgromadzenie.md` i `...uczestnicy-wierzyciele.md`), oba zarejestrowane
+częściowo w różnych miejscach — artefakt równoległej/powtórzonej pracy
+w tej samej turze. Naprawiono: usunięto starszy, krótszy plik (544
+linii), zachowano nowszy, pełniejszy (547 linii, z jaśniejszym
+rozstrzygnięciem hipotezy dot. rozbieżności numeracyjnej — przyjęto
+113-120 jako roboczą hipotezę zamiast pozostawienia całkowicie
+otwartym), skorygowano WSZYSTKIE trzy rejestry (SKILL.md, MAPA-AKTOW.md,
+ROUTING-MAP.md) do spójnej, jednej nazwy pliku. Zweryfikowano `grep -rn`
+że stara nazwa nie występuje już nigdzie poza tym wyjaśniającym akapitem
+dziennika (dziennik jako historia NIE jest korygowany retroaktywnie
+w treści poprzednich wpisów, tylko uzupełniany o wyjaśnienie).
+
+**Incydent drobny i naprawa natychmiastowa (z pierwotnej wersji tego
+wpisu, zachowane dla ciągłości historii):** podczas tworzenia
+pierwszej wersji pliku wystąpił pojedynczy artefakt kodowania (znak
+CJK w miejscu polskiego słowa) — wykryty i naprawiony przed
+rejestracją. Przy tworzeniu FINALNEJ, zachowanej wersji modułu
+wystąpił analogiczny pojedynczy artefakt (uszkodzony znak w słowie
+"NIEZWŁOCZNEGO") — również wykryty i naprawiony natychmiast.
+
+**Reguła 2 zweryfikowana (dla finalnej, zachowanej wersji):** `grep -c`
+w SKILL.md checklist = 1, w MAPA-AKTOW.md = 1.
+
+**Reguła 3 zastosowana (dla finalnej, zachowanej wersji):** wiersz
+w `prawo-polskie-v2/ROUTING-MAP.md` skorygowany do poprawnej nazwy,
+weryfikacja Python potwierdziła wyłączność w sekcji `## DR-02`.
+
+**Luki jawnie oznaczone:** art. 67-75, większość Rozdz. 2 poza
+kluczowymi przepisami, art. 106/108/109/111-112/115/116/117+/118
+dokładna treść (Rozdz. 3), CAŁY katalog kompetencji rady wierzycieli
+(Rozdz. 4) — priorytet wysoki dla kolejnej sesji.
+
+**Bilans F-87:** priorytet 1 i 2 (nadzorca/zarządca art. 23-64;
+uczestnicy/spis/zgromadzenie/rada art. 65-149) — oba W WIĘKSZOŚCI
+ZAMKNIĘTE z jawnie oznaczonymi lukami cząstkowymi. Pozostałe pozycje
+z oryginalnego zakresu F-87: pomoc publiczna (139a-149, częściowo
+mogła zostać dotknięta przy okazji rozbieżności numeracyjnej — NIE
+potwierdzone), układ częściowy (180-188), przepisy ogólne o
+postępowaniu (189-209), postępowanie międzynarodowe (335-380),
+postępowania odrębne (381-433) — bez zmian, pozostają otwarte.
+
+**Dostawa jako kompletne archiwum:** `dr-02-prawo-cywilne-rodzinne-gospodarcze`,
+`prawo-polskie-v2`.
+
+---
+
+## AUDYT-2026-08-20 — F-87 priorytet 3: Dział V PrRestr (pomoc publiczna, art. 140-149)
+
+**Kontekst:** kontynuacja F-87 (pokrycie Prawa restrukturyzacyjnego numerami
+artykułów) po zamknięciu priorytetów 1 (Dział III, sesja 19z) i 2 (Dział IV,
+sesja 19za). Ostatni brakujący segment Tytułu I PrRestr przed Działem VI
+(już opracowanym, F-69).
+
+**Wykonano:** nowy moduł `dr-02/modules/mod-PrRestr-dzial-V-pomoc-publiczna.md`
+(9 sekcji): struktura Działu V z odnotowaniem uchylenia art. 139a (ustawa
+z 16.07.2020, Dz.U. 2020 poz. 1298, art. 50); test prywatnego
+wierzyciela/inwestora (art. 140); warunki i cele pomocy — 4 przesłanki
+kumulatywne (art. 141-142); zasada "one time, last time" — limit 10 lat
+z 3 wyjątkami (art. 143); wkład własny i środki wyrównujące (art. 144-145);
+wyjątek dla usług w ogólnym interesie gospodarczym (art. 146); zmiana
+wielkości pomocy i próg 10 mln EUR zwalniający MŚP z notyfikacji KE —
+3 przesłanki kumulatywne (art. 147-148); decyzja KE (art. 149).
+
+**Metoda weryfikacji (ZASADA 14):** próba Rząd 1 (ISAP) przez `web_search`
+z numerami artykułów jako frazą — bez trafień bezpośrednio w isap.sejm.gov.pl
+w indeksowanych fragmentach. Rząd 2/3: 4 niezależne źródła zgodne co do
+numeracji i treści (lexlege.pl, przepisy.gofin.pl, prawnik.cc, spis treści
+komentarza R. Adamus "Prawo restrukturyzacyjne. Komentarz", wyd. 3).
+⚠️ [NIEWERYFIKOWANE RZĄD 1] jawnie oznaczone w module i w rejestrach —
+ograniczenie narzędziowe znane z F-88/F-91 (ROBOTS_DISALLOWED na
+isap.sejm.gov.pl/api.sejm.gov.pl w tym środowisku).
+
+**Rejestracja (T1, Reguła 1-3 HARDGATE-AUDYT):**
+- `dr-02-prawo-cywilne-rodzinne-gospodarcze/SKILL.md` — wpis `[✓] NOWY`
+  dodany do checklisty modułów.
+- `prawo-polskie-v2/ROUTING-MAP.md` — wiersz dopisany w sekcji `## DR-02`.
+- `WARN-OTWARTE.md` — wiersz F-87 zawężony do ostatniego priorytetu
+  (układ częściowy, art. 180-188); TABLICA STERUJĄCA zaktualizowana.
+
+**Luki jawnie oznaczone (poza zakresem tej sesji):** pełna treść
+negatywnej przesłanki art. 142; warunek grupy kapitałowej art. 143(a);
+próg wkładu własnego art. 144; pełny katalog środków wyrównujących
+art. 145 §2; skutki decyzji KE art. 149; rozbieżność numeracyjna
+Dział IV/V (odnotowana już w sesji 19za, nadal nierozstrzygnięta);
+ryzyko przestarzałego odesłania do uchylonego rozp. UE 659/1999
+(odnotowane przy Dziale IV, sesja 19za) — NIE zweryfikowane w tej
+sesji, priorytet dla kolejnej.
+
+**Nowa luka wykryta (kandydat na flagę, NIEOTWARTA formalnie w tej sesji
+— do decyzji przy następnym audycie):** ustawa z 16.07.2020 r. o udzielaniu
+pomocy publicznej w celu ratowania lub restrukturyzacji przedsiębiorców
+(następczyni materii dawnego art. 139a — pomoc NA RATOWANIE, odrębna od
+pomocy NA RESTRUKTURYZACJĘ opisanej w tym module) — CAŁKOWICIE nieobecna
+w systemie, ani w dr-02, ani w mapie centralnej Dz.U. Kolejny wolny numer
+flagi: **F-98**.
+
+**Bilans F-87:** priorytety 1, 2 i 3 W WIĘKSZOŚCI ZAMKNIĘTE. Pozostaje:
+układ częściowy (180-188), przepisy ogólne o postępowaniu (189-209),
+postępowanie międzynarodowe (335-380), postępowania odrębne (381-433).
+
+**Dostawa jako kompletne archiwum:** `dr-02-prawo-cywilne-rodzinne-gospodarcze`,
+`prawo-polskie-v2`, `audyt-systemu-v4` (WARN-OTWARTE.md).
+
+---
+
+## AUDYT-2026-08-20b — F-98: ustawa z 16.07.2020 o pomocy publicznej (ratowanie/restrukturyzacja)
+
+**Kontekst:** kandydat na flagę wykryty ubocznie w sesji AUDYT-2026-08-20
+(F-87 priorytet 3) — użytkownik polecił kontynuować i zbadać kandydata.
+Flaga formalnie OTWARTA i ZAMKNIĘTA W TEJ SAMEJ SESJI, zgodnie z praktyką
+stosowaną wcześniej dla flag o kontenerowanym, jednosesyjnym zakresie.
+
+**Ustalono:** ustawa z 16.07.2020 r. o udzielaniu pomocy publicznej w celu
+ratowania lub restrukturyzacji przedsiębiorców, Dz.U. 2020 poz. 1298 (w
+życie 11.08.2020), 5 rozdziałów, art. 1-53. Art. 50 tej ustawy uchyla
+art. 139a Prawa restrukturyzacyjnego — potwierdza hipotezę z sesji
+poprzedniej (mod-PrRestr-dzial-V), że materia dawnego art. 139a została
+PRZENIESIONA do tego odrębnego aktu sektorowego, a nie usunięta bez
+zastąpienia.
+
+**Wykonano:** nowy moduł
+`dr-02/modules/mod-ustawa-pomoc-ratowanie-restrukturyzacja-przedsiebiorcow.md`
+(8 sekcji): struktura 5 rozdziałów; krąg uprawnionych i 3 rodzaje pomocy
+(art. 1-2, w tym rozgraniczenie MŚP-only dla tymczasowego wsparcia
+restrukturyzacyjnego); organ udzielający — minister gospodarki/ARP S.A. —
+i reżim notyfikacji KE (art. 3, 11); pomoc na ratowanie — forma pożyczki,
+oprocentowanie stopa bazowa KE +4pp (art. 15-16); tymczasowe wsparcie
+restrukturyzacyjne — mechanizm eskalacji do 18 miesięcy (art. 26);
+pomoc na restrukturyzację — formy debt-to-equity, odesłanie WPROST do
+art. 145 PrRestr (art. 38), limit wynagrodzeń zarządu 400% (Rozdział 4);
+przepisy końcowe — art. 50 uchylenie art. 139a PrRestr, przepisy
+epizodyczne COVID-19 prawdopodobnie wygasłe (art. 51).
+
+**Metoda weryfikacji (ZASADA 14):** próba Rząd 1 (ISAP) przez `web_search`
+— strona `isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20200001298`
+zwrócona w wynikach, ALE bez indeksowanej treści artykułów (opis strony
+pusty) — ROBOTS_DISALLOWED potwierdzone pośrednio. Rząd 2/3: 4 źródła
+zgodne (orka.sejm.gov.pl — tekst ustalony po poprawkach Senatu, więc
+FAKTYCZNIE bliski Rządowi 1; lexlege.pl z odesłaniami zaktualizowanymi do
+2025 r.; przepisy.gofin.pl; materiał branżowy Andersen + informacja ARP
+S.A. dla części proceduralnej). ⚠️ [NIEWERYFIKOWANE RZĄD 1] jawnie
+oznaczone w module.
+
+**Rejestracja (T1, Reguła 1-3 HARDGATE-AUDYT):**
+- `dr-02-prawo-cywilne-rodzinne-gospodarcze/SKILL.md` — wpis `[✓] NOWY`.
+- `dr-02-prawo-cywilne-rodzinne-gospodarcze/MAPA-AKTOW.md` — nowy wiersz.
+- `prawo-polskie-v2/ROUTING-MAP.md` — nowy wiersz w sekcji `## DR-02`.
+- `audyt-systemu-v4/references/mapa_dzu_2026-07-15.md` — nowy wiersz
+  Dz.U. 2020 poz. 1298 w sekcji roku 2020 (typ ORG, status OK) — luka w
+  centralnej mapie Dz.U. potwierdzona i zamknięta w tej samej sesji.
+- `WARN-OTWARTE.md` — F-98 dodana do TABLICY i od razu oznaczona jako
+  zamknięta; kolejny wolny numer flagi zaktualizowany F-98→**F-99**.
+
+**Luki jawnie oznaczone (poza zakresem tej sesji):** dokładne numery
+artykułów dla katalogu form pomocy na restrukturyzację i limitu
+wynagrodzeń w Rozdziale 4 (oparte na materiale branżowym, nie na
+numeracji ustawowej wprost); pełna treść Rozdziałów 2-4 poza już
+zbadanymi przepisami; potwierdzenie, czy istnieje formalny tekst
+jednolity nowszy niż akt pierwotny 2020.1298; status praktyczny
+przepisów epizodycznych COVID-19 (art. 51, prawdopodobnie wygasłe);
+czy próg zwolnienia z notyfikacji KE analogiczny do art. 148 PrRestr
+istnieje w tym reżimie.
+
+**Dostawa jako kompletne archiwum:** `dr-02-prawo-cywilne-rodzinne-gospodarcze`,
+`prawo-polskie-v2`, `audyt-systemu-v4` (WARN-OTWARTE.md, mapa_dzu).
+
+---
+
+## AUDYT-2026-08-20c — F-87 ZAMKNIĘTA W CAŁOŚCI: Dział VII PrRestr (układ częściowy, art. 180-188)
+
+**Kontekst:** ostatni priorytet z pierwotnego zakresu F-87 (raport zewnętrzny,
+sesja 2026-08-14e), po zamknięciu priorytetów 1-3 w sesjach poprzednich
+(19z, 19za, 20, 20b).
+
+**Wykonano:** nowy moduł `dr-02/modules/mod-PrRestr-dzial-VII-uklad-czesciowy.md`
+(8 sekcji): kryteria wyodrębnienia wierzycieli — trójwarunkowy test
+(obiektywne/jednoznaczne/uzasadnione ekonomicznie) + zakaz manipulacji
+kryteriami w celu pominięcia wierzyciela przeciwnego (art. 180); katalog
+przykładowy wierzytelności — finansowanie, umowy kluczowe, zabezpieczenia
+na majątku produkcyjnym (art. 181); zakaz pokrzywdzenia wierzycieli
+nieobjętych + bezskuteczność zabezpieczeń wobec masy przy upadłości w
+ciągu roku (art. 183); zastrzeżenia wierzyciela nieobjętego (art. 185);
+próg głosowania 2/3 — z odnotowaną (ale niezweryfikowaną wprost w ISAP)
+różnicą konstrukcyjną względem art. 119 wg źródła doktrynalnego (art. 186);
+zakres podmiotowy — kluczowa różnica: art. 166 ust. 1 (moc wiążąca układu
+zwykłego wobec wierzycieli pominiętych w spisie) NIE STOSUJE SIĘ do układu
+częściowego (art. 187); zażalenie wierzyciela nieobjętego, ograniczone do
+zarzutów naruszenia art. 180 lub art. 183 ust. 1 (art. 188).
+
+**Metoda weryfikacji (ZASADA 14):** Rząd 2/3, 5 źródeł zgodnych (lexlege.pl,
+przepisy.gofin.pl, arslege.pl, sip.lex.pl/OpenLEX, prawnik.cc) + jedno
+źródło doktrynalne (adamusrafal.pl — komentarz o różnicy konstrukcyjnej
+progu głosowania). ⚠️ [NIEWERYFIKOWANE RZĄD 1] jawnie oznaczone.
+
+**Rejestracja (T1, Reguła 1-3 HARDGATE-AUDYT):**
+- `dr-02-prawo-cywilne-rodzinne-gospodarcze/SKILL.md` — wpis `[✓] NOWY`.
+- `dr-02-prawo-cywilne-rodzinne-gospodarcze/MAPA-AKTOW.md` — nowy wiersz.
+- `prawo-polskie-v2/ROUTING-MAP.md` — nowy wiersz w sekcji `## DR-02`.
+- `WARN-OTWARTE.md` — **F-87 USUNIĘTA W CAŁOŚCI z TABLICY STERUJĄCEJ i
+  sekcji 1**; licznik flag F- zaktualizowany **31 → 30**.
+
+**Decyzja o zakresie flagi (istotna dla przyszłych sesji):** pierwotny
+zakres F-87 (wg raportu zewnętrznego z 2026-08-14e) obejmował WYŁĄCZNIE
+Działy III, IV, V, VI, VII PrRestr — WSZYSTKIE teraz opracowane numerami
+artykułów (Dział VI był już zamknięty wcześniej jako F-69). Dział VIII
+(przepisy ogólne o postępowaniu, art. 189-209) oraz Tytuły III-IV
+(postępowanie międzynarodowe i odrębne postępowania restrukturyzacyjne,
+art. 210-433) NIGDY nie były częścią zdefiniowanego zakresu F-87 — pozostają
+opisane wyłącznie tabelą porównawczą bez numerów artykułów w
+`mod-PrUpad-upadlosc-restrukturyzacja.md`. **Rekomendacja jawnie zapisana
+w module:** przy następnym audycie rozważyć otwarcie NOWEJ flagi dla tych
+segmentów zamiast błędnego przypisywania ich do już zamkniętej F-87.
+
+**Luki jawnie oznaczone (poza zakresem tej sesji):** pełna treść art. 182,
+184, 185 (poza samym istnieniem uprawnienia); dokładny warunek czasowy
+alternatywny w art. 183 §2; bezpośrednie potwierdzenie w ISAP różnicy
+konstrukcyjnej art. 119 vs art. 186; potwierdzenie wyłączności dłużnika
+jako wnioskodawcy zatwierdzenia (źródło branżowe).
+
+**Bilans F-87:** ZAMKNIĘTA W CAŁOŚCI. Historia sesji: 19z (priorytet 1),
+19za (priorytet 2), 20 (priorytet 3 — pomoc publiczna), 20c (priorytet 4 —
+układ częściowy, ostatni z pierwotnego zakresu).
+
+**Dostawa jako kompletne archiwum:** `dr-02-prawo-cywilne-rodzinne-gospodarcze`,
+`prawo-polskie-v2`, `audyt-systemu-v4` (WARN-OTWARTE.md).
+
+---
+
+## AUDYT-2026-08-20d — F-88: PPSA (opinia transgraniczna) dotknięty częściowo, fundusze inwestycyjne/instrumenty finansowe nadal zablokowane
+
+**Kontekst:** kontynuacja audytu po zamknięciu F-87/F-98. F-88 to średni-wysoki
+priorytet z pozycji "wykonalne sesją audytową" — propagacja omnibusu
+Dz.U. 2026 poz. 846 przez 7 dziedzin prawa. Pozostałe nieopracowane punkty
+wg TABLICY STERUJĄCEJ: fundusze inwestycyjne, instrumenty finansowe, PPSA.
+
+**Próba Rząd 1:** `web_fetch` na isap.sejm.gov.pl (download.xsp PDF),
+dziennikustaw.gov.pl (D2026000084601.pdf) i api.sejm.gov.pl (druk 2287
+PDF) — WSZYSTKIE trzy zwróciły ROBOTS_DISALLOWED, potwierdzając znany
+limit narzędziowy z sesji 19w-19y.
+
+**Wykonano (PPSA — CZĘŚCIOWY postęp):** znaleziono w OSR projektu ustawy
+(źródło wtórne, ksiegowosc.infor.pl) jednoznaczne potwierdzenie, że
+nowelizacja Dz.U. 2026.846 zmienia RÓWNIEŻ Prawo o postępowaniu przed
+sądami administracyjnymi — konkretnie: "doprecyzowanie regulacji
+określającej termin na wniesienie skargi do WSA na opinię transgraniczną
+(i odmowę jej wydania)". Zapisane w
+`dr-05/modules/mod-PPSA-terminy-kasacja-prawo-pomocy.md`, nowa sekcja 7,
+z jawnym ⚠️ [NIEWERYFIKOWANE RZĄD 1] — dokładny numer artykułu i treść
+znowelizowanego terminu NIE potwierdzone.
+
+**NIE wykonano (fundusze inwestycyjne, instrumenty finansowe):** mimo
+kilku różnych zapytań (bezpośrednio o treść poz. 846 dla tych ustaw,
+o komentarze branżowe, o wykaz zmienianych ustaw z druku sejmowego)
+NIE znaleziono żadnej treści przypisywalnej KONKRETNIE do poz. 846 dla
+funduszy inwestycyjnych/instrumentów finansowych — wyłącznie wykaz
+tytułów zmienianych ustaw (potwierdzający, że te dwie ustawy SĄ objęte
+nowelizacją, patrz druk 2287) bez dostępu do treści zmian. Znaleziona
+przy okazji treść zmian art. 282/150 tych samych dwóch ustaw pochodzi z
+INNEJ, odrębnej ustawy o osobistych kontach inwestycyjnych z 3.07.2026
+(niepowiązanej z poz. 846) — jawnie odnotowane jako ryzyko pomyłki w
+`WARN-OTWARTE.md`, żeby przyszła sesja nie przypisała tej treści
+błędnie do F-88.
+
+**Rejestracja:**
+- `dr-05-prawo-administracyjne-sadowoadministracyjne/SKILL.md` — opis
+  wpisu `mod-PPSA-terminy-kasacja-prawo-pomocy` rozszerzony o notatkę
+  "✅ ROZSZERZONY 2026-08-20".
+- `WARN-OTWARTE.md` — wiersz F-88 zaktualizowany o postęp sesji 20d.
+
+**Bilans F-88:** MDR, VAT, opłata skarbowa, PIT/CIT, KKS — zamknięte
+(sesje wcześniejsze). Adwokatura/radcowie, Prawo bankowe, SKOK/
+ubezpieczenia — hipotezy różnego stopnia pewności (sesje 19w-19y).
+PPSA — CZĘŚCIOWO (1 punkt z nieznanej liczby zmian). Fundusze
+inwestycyjne, instrumenty finansowe — CAŁKOWICIE nieopracowane,
+zablokowane tym samym limitem narzędziowym. Flaga POZOSTAJE OTWARTA.
+
+**Dostawa jako kompletne archiwum:** `dr-05-prawo-administracyjne-sadowoadministracyjne`,
+`audyt-systemu-v4` (WARN-OTWARTE.md).
+
+---
+
+## AUDYT-2026-08-20e — F-68 ZAMKNIĘTA W CAŁOŚCI: KSH spółki osobowe (art. 22-124) i rada nadzorcza sp. z o.o. (art. 212-226)
+
+**Kontekst:** kolejna pozycja z TABLICY STERUJĄCEJ po zamknięciu F-87/F-98
+i pogłębieniu F-88. `mod-KSH-spolki-handlowe.md` opisywał spółki osobowe
+wyłącznie jednowierszową tabelą kwalifikatora odpowiedzialności (art.
+22/31 jako jedyne odniesienie), bez podstawy prawnej dla prowadzenia
+spraw, reprezentacji, rozwiązania czy odpowiedzialności komandytariusza.
+Rada nadzorcza sp. z o.o. nie miała żadnego dedykowanego opracowania.
+
+**Wykonano:** nowy moduł `dr-02/modules/mod-KSH-spolki-osobowe-rada-
+nadzorcza.md` (10 sekcji): spółka jawna — definicja i odpowiedzialność
+solidarno-subsydiarna (art. 22, 31); prowadzenie spraw vs reprezentacja —
+rozróżnienie stosunków wewnętrznych/zewnętrznych, zakaz powierzenia osobom
+trzecim, sądowe pozbawienie z ważnych powodów (art. 37-47); zakaz
+konkurencji z dwuterminowym przedawnieniem (art. 56-57); rozwiązanie
+spółki i wystąpienie wspólnika — katalog zamknięty 6 przyczyn, mechanizm
+przejęcia majątku przy 2 wspólnikach, rozliczenie wg wartości zbywczej
+(art. 58-66); spółka komandytowa — definicja dwóch ról, odesłanie do
+spółki jawnej, sankcja firmy (art. 102-105); suma komandytowa i wolność
+w granicach wkładu (art. 111-112); komandytariusz wyłącznie jako
+pełnomocnik + sankcja (art. 117-119); rada nadzorcza sp. z o.o. — próg
+obligatoryjności 500k zł/25 wspólników, zakaz łączenia funkcji, zakaz
+wiążących poleceń zarządowi, rozszerzenie uprawnień i zawieszenie członka
+zarządu (art. 212-226, w tym powiązanie z art. 210 §1).
+
+**Metoda weryfikacji (ZASADA 14):** Rząd 2/3, wielokrotnie zgodne źródła
+(lexlege.pl, arslege.pl, przepisy.gofin.pl, standardyprawa.pl,
+radcaprawnykorcyl.pl, materiały branżowe kancelarii) — t.j. cytowany w
+źródłach Dz.U.2024.18, zgodny z t.j. już używanym w `mod-KSH-spolki-
+handlowe.md` i `mod-KSH-organy-spolki-zoo.md` (potwierdzone w
+MAPA-AKTOW.md). ⚠️ [NIEWERYFIKOWANE RZĄD 1] jawnie oznaczone.
+
+**Rejestracja (T1, Reguła 1-3 HARDGATE-AUDYT):**
+- `dr-02-prawo-cywilne-rodzinne-gospodarcze/SKILL.md` — wpis `[✓] NOWY`.
+- `dr-02-prawo-cywilne-rodzinne-gospodarcze/MAPA-AKTOW.md` — nowy wiersz.
+- `prawo-polskie-v2/ROUTING-MAP.md` — nowy wiersz w sekcji `## DR-02`.
+- `WARN-OTWARTE.md` — **F-68 USUNIĘTA W CAŁOŚCI** z TABLICY i sekcji 1;
+  licznik flag F- zaktualizowany **30 → 29**.
+
+**Decyzja o zakresie flagi:** pierwotny zakres F-68 (spółki osobowe
+22-66, 102-124, rada nadzorcza 212-226) w pełni pokryty. Spółka
+partnerska (art. 86-101) i spółka komandytowo-akcyjna (art. 125-150)
+NIGDY nie były częścią zdefiniowanego zakresu F-68 — pozostają
+nieopracowane, ale to NIE jest niedomknięta część tej flagi, tylko
+osobna, nieotwarta jeszcze luka (analogicznie do decyzji podjętej dla
+F-87/Dział VIII PrRestr w sesji 20c).
+
+**Luki jawnie oznaczone (poza zakresem tej sesji):** likwidacja spółki
+jawnej (art. 67-85); spółka partnerska w całości; przepisy ogólne spółki
+komandytowej poza już opisanymi (art. 105-110) i stosunki wewnętrzne
+(art. 120-124); dokładny numer paragrafu dla limitu 3-miesięcznego
+zawieszenia członka zarządu w art. 220; rozbieżność doktrynalna co do
+stosowania art. 210 §1 do umów spółki komandytowej z członkiem zarządu
+jej komplementariusza.
+
+**Dostawa jako kompletne archiwum:** `dr-02-prawo-cywilne-rodzinne-gospodarcze`,
+`prawo-polskie-v2`, `audyt-systemu-v4` (WARN-OTWARTE.md).
+
+---
+
+## AUDYT-2026-08-20f — F-71 ZAMKNIĘTA W CAŁOŚCI: PZP otwarcie/badanie ofert (art. 218-226) i przebieg postępowania przed KIO (art. 531-568a)
+
+**Kontekst:** kolejna pozycja z TABLICY STERUJĄCEJ. `mod-PZP-zamowienia-
+publiczne-KIO.md` opisywał środki ochrony prawnej na poziomie ogólnym
+(zakres, treść odwołania, terminy, skarga do sądu) i odrzucenie oferty
+tylko przez art. 226, bez mechaniki otwarcia/badania ofert (Rozdz. 4-5
+Działu II) ani szczegółowego przebiegu rozprawy i dowodów przed KIO.
+
+**Wykonano:** nowy moduł `dr-07/modules/mod-PZP-otwarcie-badanie-ofert-
+przebieg-KIO.md`, dwie części: (A) otwarcie ofert — obowiązek
+transparentności nazw/siedzib wykonawców po otwarciu (art. 222); badanie
+i ocena ofert — zakaz negocjacji i zmiany treści oferty, rozróżnienie
+badanie/ocena (art. 223); uzupełnienie katalogu przesłanek odrzucenia
+(art. 226 §1 pkt 10, 11, 15, 16) i odesłania dla ofert wstępnych (art.
+163). (B) dowody przed KIO — zobowiązanie stron do przedstawienia
+dowodów (art. 536), dowód z opinii biegłego i jego wyłączenie (art. 539),
+odmowa przeprowadzenia dowodu w tym NOWA przesłanka spóźnienia (art. 541);
+⚡ odnotowana świeża nowelizacja deregulacyjna (art. 28 ustawy z
+21.05.2025, w życie 12.06.2026) wprowadzająca PREKLUZJĘ DOWODOWĄ (nowe
+brzmienie art. 535 §1); odroczenie rozprawy i otwarcie jej na nowo po
+zamknięciu (art. 550-551, z testem "istotności" nowych okoliczności);
+rodzaje orzeczeń KIO — wyrok vs postanowienie, orzekanie wg stanu z dnia
+wyrokowania, zasada ekonomii orzekania przy zarzucie najdalej idącym,
+i KLUCZOWY zakaz orzekania ponad zarzuty z odwołania (art. 552, 554,
+555) — z praktyczną konsekwencją dla redakcji odwołań.
+
+**Metoda weryfikacji (ZASADA 14):** Rząd 2/3, w tym oficjalny komentarz
+UZP (ekomentarzpzp.uzp.gov.pl — wysokiej wiarygodności choć formalnie
+Rząd 2) obok lexlege.pl, przepisy.gofin.pl, zamowienia.org.pl,
+legalnabudowa.pl, kzp.net.pl, cytowań orzecznictwa KIO/SO. ⚠️
+[NIEWERYFIKOWANE RZĄD 1] jawnie oznaczone — szczególnie dla dokładnego
+brzmienia nowego art. 535 (prekluzja).
+
+**Rejestracja (T1, Reguła 1-3 HARDGATE-AUDYT):**
+- `dr-07-zamowienia-publiczne-fundusze-ue/SKILL.md` — wpis `[✓] NOWY`.
+- `dr-07-zamowienia-publiczne-fundusze-ue/MAPA-AKTOW.md` — nowy wiersz,
+  t.j. Dz.U. 2026 poz. 793 zweryfikowany jako spójny z istniejącymi
+  wierszami PZP w tym samym pliku.
+- `prawo-polskie-v2/ROUTING-MAP.md` — nowy wiersz w sekcji PZP.
+- `WARN-OTWARTE.md` — **F-71 USUNIĘTA W CAŁOŚCI** z TABLICY i sekcji 1;
+  licznik flag F- zaktualizowany **29 → 28**.
+
+**Luki jawnie oznaczone (poza zakresem tej sesji):** dokładna treść
+nowego art. 535 §1-2 (próg prekluzji, wyjątki od rozprawy zdalnej);
+numeracja i treść oddziału o wyłączeniu członków składu orzekającego;
+pełna treść art. 553, 556-568a; protokół, koszty postępowania
+odwoławczego, zakaz zawarcia umowy (Oddziały 10-12); Rozdziały 6-7
+Działu II (aukcja elektroniczna, wybór najkorzystniejszej oferty).
+
+**Dostawa jako kompletne archiwum:** `dr-07-zamowienia-publiczne-fundusze-ue`,
+`prawo-polskie-v2`, `audyt-systemu-v4` (WARN-OTWARTE.md).
+
+---
+
+## AUDYT-2026-08-20g — F-75 ZAMKNIĘTA W CAŁOŚCI: KKW prawa i obowiązki skazanego (art. 101-120) i kary dyscyplinarne (art. 142-149)
+
+**Kontekst:** ostatnia pozycja z tabeli A TABLICY STERUJĄCEJ. Sesja
+2026-08-14 dodała do `mod-KKW-kodeks-karny-wykonawczy.md` trzy priorytetowe
+instytucje (warunkowe zwolnienie, odroczenie/przerwa, dozór elektroniczny)
+z jawnie zapisanym raportem zewnętrznym wskazującym KKW jako najgorzej
+pokryty akt w systemie (13 zbadanych, 0 artykułów). Pozostałe dwie pozycje
+z tego samego raportu: prawa/obowiązki skazanego i kary dyscyplinarne.
+
+**Wykonano:** dopisano sekcje 0.4 i 0.5 do istniejącego modułu (bez
+tworzenia nowego pliku — zachowanie struktury sekcji 0.1-0.3 z sesji
+poprzedniej). Sekcja 0.4: katalog praw skazanego (art. 102, w tym pkt 10
+— podstawa dla praktyki skargowej); prawo do skarg do organów ochrony
+praw człowieka/ETPCz (art. 103); utrzymywanie więzi — widzenia,
+korespondencja, cenzura (art. 105, 105a); kontrola osobista skazanego ze
+skargą 7-dniową do sądu penitencjarnego (art. 116 §2-6, odesłanie
+systemowe do konstrukcji z art. 223h); leczenie odwykowe i ostrzeżenie
+sędziego penitencjarnego przy zagrożeniu życia (art. 117-118); leczenie
+sprawców z zaburzeniami preferencji seksualnych (art. 119). Sekcja 0.5:
+definicja przekroczenia i wymóg zawinienia (art. 142); zamknięty katalog
+kar dyscyplinarnych z izolacją jako najsurowszą (art. 143); kompetencja
+dyrektora ZK i skarga (art. 144); gwarancje proceduralne — wysłuchanie,
+opinia wychowawcy, opinia lekarska przy izolacji, zgoda sędziego
+penitencjarnego powyżej 14 dni (art. 145); zasada jednej kary (art. 146);
+przedawnienie dwutorowe 14/30 dni + termin na wykonanie (art. 147);
+kontrola sędziego penitencjarnego nad wykonaniem (art. 148, częściowo
+niepotwierdzony numer).
+
+**Metoda weryfikacji (ZASADA 14):** Rząd 2/3, wielokrotnie zgodne źródła
+(lexlege.pl, arslege.pl, przepisy.gofin.pl, e-prawnik.pl, standardyprawa.pl
+z indeksem orzecznictwa SN/SA/SO/ETPCz). T.j. cytowany w źródłach: Dz.U.
+2025 poz. 911 (część źródeł) i Dz.U. 2024 poz. 706 (inne, starsze) —
+zgodny z t.j. już używanym w MAPA-AKTOW.md dr-03. ⚠️ [NIEWERYFIKOWANE
+RZĄD 1] jawnie oznaczone, szczególnie dla art. 148-149.
+
+**Rejestracja (T1, Reguła 1-3 HARDGATE-AUDYT):**
+- `dr-03-prawo-karne-wykroczenia-egzekucja/SKILL.md` — opis wpisu
+  `mod-KKW-kodeks-karny-wykonawczy` rozszerzony o notatkę
+  "✅ ROZSZERZONY 2026-08-20 — F-75 ZAMKNIĘTA W CAŁOŚCI".
+- `dr-03-prawo-karne-wykroczenia-egzekucja/MAPA-AKTOW.md` — wiersz
+  zaktualizowany.
+- `prawo-polskie-v2/ROUTING-MAP.md` — wiersz zaktualizowany.
+- `WARN-OTWARTE.md` — **F-75 USUNIĘTA W CAŁOŚCI** z TABLICY i sekcji 1;
+  licznik flag F- zaktualizowany **28 → 27**.
+
+**Luki jawnie oznaczone (poza zakresem tej sesji):** pełna treść art.
+105b (telefon), 106 (wolność religii), 108 (bezpieczeństwo osobiste),
+113; kategoria skazanych z art. 87a; pełny katalog art. 143 §1 pkt 4-7;
+dokładna treść art. 148-149; rozróżnienie skargi z art. 144 §5 od
+mechanizmu kontroli sędziego penitencjarnego z art. 148.
+
+**Bilans tabeli A TABLICY STERUJĄCEJ:** po zamknięciu F-75 wyczerpana
+jest pierwotna lista "łatwych" pozycji jednosesyjnych z górnej części
+tabeli — pozostają głównie F-89 (cross-DR, malejący zwrot), F-60/F-61
+(dr-14, wymagają nowych modułów od podstaw), F-13 (58 plików, zakres
+cross), F-19/F-18 (VAT, interpretacje indywidualne), F-78 (podział
+plików >1000 linii — zadanie redakcyjne, nie merytoryczne), F-83, F-40.
+
+**Dostawa jako kompletne archiwum:** `dr-03-prawo-karne-wykroczenia-egzekucja`,
+`prawo-polskie-v2`, `audyt-systemu-v4` (WARN-OTWARTE.md).
+
+---
+
+## AUDYT-2026-08-20h — F-19 ZAMKNIĘTA W CAŁOŚCI: sygnatury orzeczeń VAT (TSUE art. 52, TSUE syndyk, WSA Łódź + uchwała NSA)
+
+**Kontekst:** F-19 to flaga weryfikacji sygnatur orzeczeń w modułach VAT
+(dr-06). Sesja 19p zamknęła 2/5 punktów (jedna sygnatura KIS odrzucona
+jako niepotwierdzona, druga potwierdzona). Ta sesja zamyka pozostałe.
+
+**Wykonano:**
+- **Punkt (c)** — TSUE art. 52 ust. 1 ustawy VAT (zwolnienie dla
+  przesyłek niehandlowych do 45 EUR, warunek "odbiorcy przebywającego
+  na terytorium kraju"): potwierdzona sygnatura **C-405/24**, wyrok
+  8.05.2025 — warunek NIEZGODNY z dyrektywą, zwolnienie przysługuje
+  także dla odbiorców w innych państwach UE. Wykonanie krajowe: **NSA
+  I FSK 110/21**, 25.07.2025. Zapisane w `mod-VAT-import-towarow-i-
+  zwolnienia-importowe.md`.
+- **Punkt (d)** — TSUE ws. wniosku syndyka o środki z rachunku VAT:
+  potwierdzona sygnatura **C-709/22**, wyrok 21.11.2024 — polski
+  mechanizm split payment i odmowa przekazania środków syndykowi przy
+  zaległościach podatkowych SĄ zgodne z dyrektywą VAT, organy mają
+  pierwszeństwo. Zapisane w `mod-VAT-kursy-walut-rachunek-VAT-tax-
+  free.md`, w tym notatka strategiczna (argument proporcjonalności NIE
+  uwzględniony przez TSUE).
+- **Punkt (f)** — WSA Łódź I SA/Łd 190/20 (26.08.2020) i I SA/Łd 417/20
+  (27.11.2020), charakter wykreślenia z rejestru VAT: POTWIERDZONE
+  6+ źródłami. Odkryto WZMOCNIENIE tej linii przez **uchwałę składu 7
+  sędziów NSA, sygn. I FPS 3/23, z 23.10.2023** — najwyższej rangi
+  potwierdzenie tej samej tezy (wykreślenie = czynność materialno-
+  techniczna, nie decyzja). Zapisane w `mod-VAT-rejestracja-zaplata-
+  metoda-kasowa-likwidacja.md`.
+- **Punkt (e)** — sankcja 36-miesięczna z art. 33a: mechanizm ustawowy
+  (fakultatywność decyzji, wyjątek dla uchybień nieistotnych/
+  sporadycznych) POTWIERDZONY wielokrotnie w źródłach wtórnych, ALE
+  konkretna sygnatura NSA budująca "linię orzeczniczą" (odróżnioną od
+  samego przepisu) NIE ZNALEZIONA mimo próby. Odnotowane jako otwarta
+  uwaga w module import towarów — NIE blokuje zamknięcia F-19, bo
+  mechanizm sam w sobie (bez orzecznictwa) jest wystarczająco
+  udokumentowany do praktycznego użycia.
+
+**Metoda weryfikacji (ZASADA 13/14):** dla każdej sygnatury — web_search
+z numerem sprawy i przedmiotem, następnie krzyżowa weryfikacja w 3-6
+niezależnych źródłach (dla C-405/24: studio.pwc.pl, mddp.pl, lex4you.pl;
+dla C-709/22: rp.pl, akademialtca.pl, sendero.pl, EY, gazetaprawna.pl;
+dla I SA/Łd 190/20 i uchwały I FPS 3/23: poradnikprzedsiebiorcy.pl,
+pit.pl, gofin.pl, lider-biuro.pl, ksml.pl, isp-modzelewski.pl, ifirma.pl,
+blog-tpa.pl). Żadna sygnatura NIE przyjęta na podstawie jednego źródła.
+
+**Rejestracja:** aktualizacja bezpośrednio w treści 3 modułów VAT
+(mod-VAT-import-towarow-i-zwolnienia-importowe.md, mod-VAT-kursy-walut-
+rachunek-VAT-tax-free.md, mod-VAT-rejestracja-zaplata-metoda-kasowa-
+likwidacja.md) oraz podsumowanie w mod-VAT-platnicy-egzekucja-kasy-
+trojstronne.md (centralny punkt historii F-19). `WARN-OTWARTE.md` —
+F-19 USUNIĘTA z TABLICY i sekcji 1; licznik flag F- **27 → 26**.
+
+**Dostawa jako kompletne archiwum:** `dr-06-podatki-finanse-publiczne-aml`,
+`audyt-systemu-v4` (WARN-OTWARTE.md).
+
+---
+
+## AUDYT-2026-08-20i — F-18: metryka rozporządzenia MF proporcji odliczenia potwierdzona; flaga okazała się szersza niż opisana
+
+**Kontekst:** kolejna pozycja z kolejki. Pierwotny opis F-18 ("Potwierdzić
+w ISAP brzmienie przepisów wpisanych ze ŹRÓDŁA-3") wskazywał na wąski,
+konkretny zakres. Weryfikacja w tej sesji wykazała, że opis nie odpowiada
+rzeczywistemu rozmiarowi zadania.
+
+**Wykonano:** zweryfikowano metrykę rozporządzenia MF z 17.12.2015 r. w
+sprawie sposobu określania zakresu wykorzystywania nabywanych towarów i
+usług do celów działalności gospodarczej w przypadku niektórych
+podatników (na podstawie art. 86 ust. 22 ustawy o VAT) — jedyny konkretnie
+zidentyfikowany brak w `mod-VAT-sankcje-bony-odliczenia.md`. POTWIERDZONA:
+Dz.U. 2015 poz. 2193 (widoczne bezpośrednio w indeksowanym adresie
+isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20150002193, plus 6 zgodnych
+źródeł Rząd 2). Przy okazji ustalono, że rozporządzenie ma TEKST JEDNOLITY
+— Dz.U. 2021 poz. 999 — dotąd nieprzywoływany w module; zapisano jako
+rekomendację dla przyszłej aktualizacji, NIE wykonano samej podmiany (poza
+zakresem tej naprawy — wymagałoby przeglądu całego modułu, nie tylko
+metryki).
+
+**Kluczowe odkrycie:** grep po znacznikach `⚠️ [ZALECANA WERYFIKACJA ISAP]`
+w modułach VAT ujawnił **13+ rozproszonych wystąpień** w 5 plikach
+(mod-VAT-transakcje-fakturowanie — 7, mod-VAT-podatek-od-towarow-i-uslug —
+2, mod-VAT-ewidencja-deklaracje — 2, mod-PKPiR-ewidencje-uproszczone — 1,
+mod-VAT-sankcje-bony-odliczenia — 2, z czego 1 teraz zamknięty). To
+oznacza, że F-18 w praktyce obejmuje znacznie szerszy zakres niż sugerował
+jednozdaniowy opis w rejestrze. Przegląd wykazał, że WIĘKSZOŚĆ tych
+znaczników już ma solidne pokrycie Rząd 2 (2-4 zgodne źródła cytowane
+bezpośrednio przy znaczniku) — sam znacznik `[ZALECANA WERYFIKACJA ISAP]`
+oznacza standardową rekomendację ostrożności, NIE oznacza rzeczywistej
+niepewności merytorycznej. Kilka pozycji jest oznaczonych "OBOWIĄZKOWA"
+(wyższy priorytet): art. 115 ust. 2 + art. 146x (mod-VAT-transakcje-
+fakturowanie), art. 99 ust. 3a (mod-VAT-ewidencja-deklaracje), art. 2 pkt
+27e (mod-VAT-transakcje-fakturowanie) — te pozostają jako konkretny,
+zawężony punkt startowy dla następnej sesji, zamiast całego rozproszonego
+zbioru.
+
+**Rejestracja:** `dr-06/modules/mod-VAT-sankcje-bony-odliczenia.md` —
+zamknięcie 1 pozycji z jawną adnotacją. `WARN-OTWARTE.md` — wiersz F-18
+zaktualizowany o postęp i o realistyczny, zawężony zakres pozostałej
+pracy; licznik flag F- BEZ ZMIANY (flaga pozostaje otwarta, częściowo
+domknięta — nie kwalifikuje się do usunięcia z tabeli).
+
+**Dostawa jako kompletne archiwum:** `dr-06-podatki-finanse-publiczne-aml`,
+`audyt-systemu-v4` (WARN-OTWARTE.md).
+
+---
+
+## AUDYT-2026-08-20j — F-60 ZAMKNIĘTA W CAŁOŚCI: Konwencje wiedeńskie o stosunkach dyplomatycznych (1961) i konsularnych (1963)
+
+**Kontekst:** F-60 wskazywała, że temat konwencji wiedeńskich — jeden z
+najbardziej rozpoznawalnych tematów prawa międzynarodowego publicznego —
+miał ZERO wzmianek w całym systemie, mimo istnienia dr-14 poświęconego
+prawu UE/międzynarodowemu/prawom człowieka. Zadanie wymagało budowy
+nowego modułu od podstaw (podobnie jak F-98 wcześniej w tej sesji).
+
+**Wykonano:** nowy moduł `dr-14/modules/mod-konwencje-wiedenskie-
+dyplomatyczne-konsularne.md`, dwie części:
+- **Część A (Konwencja 1961, dyplomatyczna):** funkcje misji i persona
+  non grata bez obowiązku uzasadnienia (art. 3, 9); nietykalność
+  pomieszczeń misji — zakaz rewizji/rekwizycji/zajęcia/egzekucji (art.
+  22 ust. 3); nietykalność osobista ABSOLUTNA przedstawiciela
+  dyplomatycznego i immunitet jurysdykcyjny z zamkniętym katalogiem 3
+  wyjątków cywilnych — nieruchomości prywatne, spadkobranie osobiste,
+  działalność zawodowa/handlowa poza funkcjami (art. 29, 31); zrzeczenie
+  immunitetu WYŁĄCZNIE przez państwo wysyłające, dwustopniowa struktura
+  (osobne zrzeczenie dla jurysdykcji i dla wykonania wyroku) (art. 32);
+  hierarchia ochrony — pełna dla rodziny dyplomaty, zawężona do sfery
+  służbowej dla personelu administracyjno-technicznego, drastycznie
+  zawężona dla dyplomatów-obywateli państwa przyjmującego (art. 37-38).
+- **Część B (Konwencja 1963, konsularna):** niezależność stosunków
+  konsularnych od dyplomatycznych (art. 2); bezterminowa nietykalność
+  archiwów (art. 33); PRAWO DO KONTAKTU KONSULARNEGO przy zatrzymaniu
+  cudzoziemca — obowiązek warunkowy (na wniosek osoby zatrzymanej) plus
+  obowiązek pouczenia zatrzymanego o tym prawie (art. 36) — oznaczone
+  jako potencjalny most do dr-03/KPK, z przywołaniem (niepotwierdzonym
+  źródłowo w tej sesji) sprawy Avena MTS; KLUCZOWA różnica strukturalna
+  względem dyplomaty — nietykalność konsula WĘŻSZA (wyjątek dla ciężkiej
+  zbrodni, art. 41) i immunitet FUNKCJONALNY ratione materiae zamiast
+  osobowego ratione personae (art. 43); zrzeczenie immunitetu (art. 45,
+  konstrukcja analogiczna do art. 32 dyplomatycznego).
+
+**Metoda weryfikacji (ZASADA 14):** Rząd 2/3 — lexlege.pl, arslege.pl,
+prawnik.cc (wielokrotnie, dla obu konwencji), libr.sejm.gov.pl
+(biblioteka sejmowa, tekst historyczny ONZ — bliski Rządowi 1 mimo
+formalnej klasyfikacji), materiały akademickie (UKSW, UWr, UŁ). Metryki
+Dz.U. potwierdzone: 1965 nr 37 poz. 232 (dyplomatyczna, widoczna
+bezpośrednio w adresie isap.sejm.gov.pl/WDU19650370232) i 1982 nr 13
+poz. 98 (konsularna, cytowana wielokrotnie jako "Dz.U.1982.13.98").
+
+**Rejestracja (T1, Reguła 1-3 HARDGATE-AUDYT):**
+- `dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/SKILL.md` — nowa
+  sekcja "PRAWO DYPLOMATYCZNE I KONSULARNE" z wpisem `[✓] NOWY`.
+- `dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/MAPA-AKTOW.md` — dwa
+  nowe wiersze (po jednym na konwencję).
+- `prawo-polskie-v2/ROUTING-MAP.md` — nowy wiersz w sekcji DR-14.
+- `WARN-OTWARTE.md` — **F-60 USUNIĘTA W CAŁOŚCI** z TABLICY i sekcji 1;
+  licznik flag F- zaktualizowany **26 → 25**.
+
+**Luki jawnie oznaczone (poza zakresem tej sesji):** konsekwencje
+procesowe naruszenia obowiązku pouczenia z art. 36 KWSK w polskim
+postępowaniu karnym; sprawa Avena MTS niepotwierdzona źródłowo; pełna
+treść art. 9 §2, 22 ust. 1-2, 42 KWSK; zakres ochrony personelu służby/
+prywatnych służących; Konwencja o misjach specjalnych (1969) i
+Konwencja nowojorska o ochronie osób korzystających z ochrony
+międzynarodowej — całkowicie poza zakresem.
+
+**Dostawa jako kompletne archiwum:** `dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka`,
+`prawo-polskie-v2`, `audyt-systemu-v4` (WARN-OTWARTE.md).
+
+---
+
+## AUDYT-2026-08-20k — F-61 ZAMKNIĘTA W CAŁOŚCI: Konwencja genewska o statusie uchodźców (1951) i Protokół nowojorski (1967)
+
+**Kontekst:** kontynuacja tematu prawa międzynarodowego po F-60. Konwencja
+genewska miała ZERO wzmianek NA POZIOMIE TRAKTATOWYM — dr-05
+(`mod-ustawa-cudzoziemcy.md`) wspominał ją wyłącznie jako ogólne
+odesłanie ("ratyfikowana przez Polskę"), bez fundamentu
+prawnomiędzynarodowego ani numerów artykułów.
+
+**Wykonano:** nowy moduł `dr-14/modules/mod-konwencja-genewska-uchodzcy-
+1951-protokol-1967.md` (6 sekcji): definicja uchodźcy — 5 przesłanek
+kumulatywnych prześladowania (rasa, religia, narodowość, grupa społeczna,
+przekonania polityczne), klauzule ustania statusu i klauzule wyłączające
+dla zbrodniarzy wojennych (art. 1); zasada NON-REFOULEMENT z dwoma
+zamkniętymi wyjątkami — zagrożenie bezpieczeństwa państwa i prawomocne
+skazanie za szczególnie poważną zbrodnię, z rozróżnieniem od trzeciego,
+odrębnego mechanizmu wyłączenia z art. 1F (art. 33, status zbliżony do
+ius cogens wg doktryny); niekaranie za nielegalny wjazd przy spełnieniu
+warunków bezpośredniości przybycia i niezwłocznego zgłoszenia się (art.
+31, z odniesieniem do orzecznictwa TSUE — C-481/13, C-601/15 PPU) —
+oznaczone jako potencjalny most do dr-03; wydalenie uchodźcy legalnie
+przebywającego tylko z dwóch przesłanek — bezpieczeństwo państwowe i
+porządek publiczny (art. 32); mechanizm Protokołu 1967 — odczyt Konwencji
+bez cezury czasowej 1.01.1951, z niederogowalnym rdzeniem (art. 1, 3, 4,
+16 ust. 1, 33) wyłączonym z możliwości zastrzeżeń państw-stron.
+
+**Metoda weryfikacji (ZASADA 14):** Rząd 2/3 — libr.sejm.gov.pl
+(biblioteka sejmowa, pełny tekst historyczny ONZ, bliski Rządowi 1),
+UNHCR Polska, prawo.pl, amnesty.org.pl (pełny tekst PDF), eur-lex.europa.eu
+(cytowania TSUE dla art. 31), wikipedia (krzyżowo zweryfikowana).
+Metryka Dz.U. 1991 nr 119 poz. 515 dla Konwencji POTWIERDZONA (widoczna
+bezpośrednio w adresie isap.sejm.gov.pl/WDU19911190515); numer Dz.U. dla
+samego Protokołu NIE potwierdzony — jawnie oznaczone jako luka.
+
+**Rejestracja (T1, Reguła 1-3 HARDGATE-AUDYT):**
+- `dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/SKILL.md` — wpis
+  `[✓] NOWY` (przy okazji naprawiono przypadkowe usunięcie nagłówka
+  "NARZĘDZIE METODYCZNE:" podczas edycji str_replace — wykryte i
+  skorygowane natychmiast w tej samej sesji).
+- `dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/MAPA-AKTOW.md` — dwa
+  nowe wiersze (Konwencja + Protokół osobno, zgodnie z konwencją
+  przyjętą dla Konwencji 1961/1963 w F-60).
+- `prawo-polskie-v2/ROUTING-MAP.md` — nowy wiersz w sekcji DR-14.
+- `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-
+  cudzoziemcy.md` — dopisane odesłanie do nowego modułu traktatowego
+  przy istniejącej wzmiance Konwencji Genewskiej (Reguła rozgraniczenia
+  — nie duplikować treści między dr-05 i dr-14).
+- `WARN-OTWARTE.md` — **F-61 USUNIĘTA W CAŁOŚCI** z TABLICY i sekcji 1;
+  licznik flag F- zaktualizowany **25 → 24**.
+
+**Incydent drobny i naprawa natychmiastowa:** podczas rejestracji w
+SKILL.md dr-14, pierwsza edycja `str_replace` przypadkowo usunęła
+nagłówek sekcji "NARZĘDZIE METODYCZNE:" (użyty jako punkt kotwiczenia
+`old_str` bez zachowania go w `new_str`). Wykryte natychmiast przez
+`grep` weryfikacyjny po edycji, naprawione drugą edycją w tej samej
+sesji — zgodnie z Regułą 2 HARDGATE-AUDYT (weryfikacja jednoznaczności
+po każdej zmianie).
+
+**Luki jawnie oznaczone (poza zakresem tej sesji):** numer Dz.U.
+Protokołu 1967; status zastrzeżenia geograficznego Polski (czy
+ograniczyła się do "zdarzeń w Europie"); pełny katalog klauzul ustania
+(art. 1C) i wyłączających (art. 1F); ustępy 2-3 art. 32; mechanizm
+implementacji art. 31 w polskim prawie karnym — potencjalny most do
+dr-03, wymaga dedykowanej sesji.
+
+**Dostawa jako kompletne archiwum:** `dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka`,
+`dr-05-prawo-administracyjne-sadowoadministracyjne`, `prawo-polskie-v2`,
+`audyt-systemu-v4` (WARN-OTWARTE.md).

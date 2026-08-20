@@ -69,10 +69,21 @@ TERMIN NA PRZEDŁOŻENIE DOKUMENTÓW: 24 MIESIĄCE od wejścia przepisów w
   uwzględnienia spóźnionych dokumentów
 
 KTO OCENIA: pracodawca ocenia wiarygodność przedłożonych dokumentów i
-  DECYDUJE o zaliczeniu — w razie sporu, rozstrzygnięcie ostateczne
-  (⚠️ tryb sporu NIEZWERYFIKOWANY wprost w tej sesji — prawdopodobnie
-  droga sądowa analogiczna do innych sporów pracowniczych, sprawdź
-  przed poradą)
+  DECYDUJE o zaliczeniu.
+
+✅ **ZWERYFIKOWANE (2026-08-18, F-29) — KOREKTA WCZEŚNIEJSZEGO BŁĘDNEGO
+ZAŁOŻENIA:** rozstrzygnięcie pracodawcy **NIE jest ostateczne** (wcześniej
+moduł błędnie sugerował "rozstrzygnięcie ostateczne"). Faktyczny tryb
+sporu (źródło: klemba.pl, zbieżne z ogólną strukturą dochodzenia praw
+pracowniczych): (1) pracownik składa PISEMNY WNIOSEK do pracodawcy o
+ponowne przeliczenie stażu z kompletem dokumentów (zaświadczenia ZUS,
+umowy, potwierdzenia opłacania składek); (2) przy ODMOWIE pracodawcy —
+pracownik może skierować sprawę do **SĄDU PRACY**, który ROZSTRZYGA, czy
+dane okresy powinny być zaliczone. To zwykła droga sądowa znana z innych
+sporów pracowniczych (Dział XII KP), **nie szczególny, odrębny tryb
+administracyjny** — ⚠️ dokładna podstawa prawna tej drogi sądowej (czy to
+ogólny art. 476 §1 KPC, czy szczególny przepis nowelizacji) NIE odczytana
+źródłowo w pełni w tej sesji.
 ```
 
 ## 3. DWA RODZAJE STAŻU — ROZRÓŻNIENIE KLUCZOWE DLA PRAKTYKI

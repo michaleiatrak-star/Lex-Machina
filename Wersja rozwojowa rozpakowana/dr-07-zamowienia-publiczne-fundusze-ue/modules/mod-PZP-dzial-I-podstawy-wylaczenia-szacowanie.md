@@ -280,11 +280,64 @@ UZYSKANIEM zamówienia przez wykonawcę korzystającego z takich powiązań.
   ofert)?
 ```
 
-⚠️ Rozdziały 7 (komunikacja elektroniczna, art. 61-70) i 8 (dokumentowanie
-postępowania, art. 71-82) NIE zostały w tej sesji zbadane ze szczegółowością
-porównywalną do sekcji 3 i 5 — oznaczone jako punkt startowy, wymagają
-odrębnego opracowania przy konkretnej sprawie dotyczącej np. elektronicznej
-platformy zakupowej lub protokołu postępowania.
+✅ **ROZDZ. 7-8 ZWERYFIKOWANE (2026-08-19, F-38)** — od punktu startowego do
+konkretnej, użytecznej treści:
+
+**ROZDZIAŁ 7 — Komunikacja elektroniczna (art. 61-70):**
+```
+□ Art. 61 ust. 1 — ZASADA: komunikacja w postępowaniu (składanie ofert,
+  wniosków o dopuszczenie, wymiana informacji, dokumenty/oświadczenia)
+  odbywa się WYŁĄCZNIE przy użyciu środków komunikacji ELEKTRONICZNEJ,
+  z wyjątkami określonymi w ustawie. Dotyczy zarówno zamówień, jak i
+  KONKURSÓW.
+□ Art. 61 ust. 2 — WYJĄTEK: komunikacja USTNA dopuszczalna w toku
+  NEGOCJACJI lub DIALOGU oraz co do informacji NIEISTOTNYCH (te NIE
+  obejmują ogłoszenia o zamówieniu, dokumentów zamówienia ani ofert) —
+  ALE treść komunikacji ustnej MUSI być UTRWALONA (protokół, notatka,
+  streszczenie, nagranie) i dołączona jako ZAŁĄCZNIK do protokołu
+  (art. 71 i n.) — ⭐ obowiązek dokumentowania powstaje NIEZALEŻNIE od
+  formy komunikacji.
+□ Wymóg NARZĘDZI: zamawiający może używać TYLKO narzędzi
+  niedyskryminujących, ogólnie dostępnych, interoperacyjnych — jeśli
+  narzędzie NIE jest ogólnie dostępne, musi zapewnić wykonawcom
+  BEZPŁATNY dostęp do niego.
+□ Art. 65 — WYJĄTKI od obowiązku elektronizacji: (1) gdy wymagałoby to
+  specjalistycznych formatów/urządzeń niedostępnych ogólnie (pkt 1);
+  (2) gdy wymagałoby pozyskania specjalistycznych urządzeń biurowych
+  przez zamawiającego (pkt 2) — katalog zamknięty, wąski.
+□ Art. 78¹ §1 KC (forma elektroniczna) — oświadczenie w postaci
+  elektronicznej z kwalifikowanym podpisem elektronicznym wystarcza do
+  zachowania formy elektronicznej wymaganej ustawą.
+□ Art. 63 ust. 2 — dla zamówień PONIŻEJ progów UE: ofertę/oświadczenia
+  składa się pod RYGOREM NIEWAŻNOŚCI w formie elektronicznej ALBO w
+  postaci elektronicznej z podpisem osobistym/zaufanym (szerszy katalog
+  niż powyżej progów UE, gdzie zwykle wymagany kwalifikowany podpis).
+□ Art. 61-70, gdy mowa o "ofercie" — obejmuje TAKŻE ofertę wariantową,
+  częściową, wstępną, dodatkową i podlegającą negocjacjom (rozszerzenie
+  interpretacyjne wprost w ustawie).
+```
+
+**ROZDZIAŁ 8 — Dokumentowanie przebiegu postępowania (art. 71-82):**
+```
+□ Art. 71 i n. — obowiązek prowadzenia PROTOKOŁU postępowania powstaje
+  BEZ WZGLĘDU na przyjęty sposób komunikowania się — zarówno przy
+  komunikacji elektronicznej, jak i przy dopuszczalnych wyjątkach od niej.
+□ Art. 72 — protokół musi zawierać m.in. informację o TRYBIE udzielenia
+  zamówienia i wskazanie OKOLICZNOŚCI uzasadniających jego zastosowanie
+  (przy trybach niekonkurencyjnych — kluczowe dla kontroli legalności).
+□ Dokumentacja z postępowania UDOSTĘPNIANA na wniosek — MUSI być
+  przekazana przy użyciu środków komunikacji ELEKTRONICZNEJ (tak samo
+  jak sam protokół), niezależnie od formy, w jakiej pierwotnie
+  prowadzono postępowanie.
+```
+
+⚠️ Pozostaje do dociągnięcia przy konkretnej sprawie: pełna, szczegółowa
+treść poszczególnych artykułów 62/64/66-70 (specyfika komunikacji przy
+poszczególnych czynnościach) oraz art. 73-82 (elementy protokołu,
+załączniki, okres przechowywania) — powyższe to szkielet z kluczowymi
+zasadami, nie wyczerpujący komentarz. Potwierdzone źródłowo: lexlege.pl,
+ekomentarzpzp.uzp.gov.pl (oficjalny komentarz UZP — Rząd 1-adjacent),
+legalnabudowa.pl, przetargipubliczne.pl, gov.pl (opracowanie UZP).
 
 ---
 
@@ -356,3 +409,11 @@ z art. 16-20, zakaz dzielenia zamówienia (art. 29-30) z kryteriami oceny.
 Odnotowano niepewność: Rozdziały 7-8 (komunikacja elektroniczna,
 dokumentowanie) nie zbadane ze szczegółowością — oznaczone do dalszej
 weryfikacji.
+
+**1.2 (2026-08-19, F-38):** Rozdziały 7-8 uzupełnione — komunikacja
+elektroniczna (art. 61 zasada + wyjątki ustne, art. 65 wyjątki od
+elektronizacji, art. 63 ust. 2 tryb dla zamówień poniżej progów UE) oraz
+dokumentowanie postępowania (art. 71-72 protokół, obowiązek niezależny
+od formy komunikacji, udostępnianie dokumentacji). Szkielet z kluczowymi
+zasadami — pełna treść poszczególnych artykułów pozostaje do dociągnięcia
+przy konkretnej sprawie.

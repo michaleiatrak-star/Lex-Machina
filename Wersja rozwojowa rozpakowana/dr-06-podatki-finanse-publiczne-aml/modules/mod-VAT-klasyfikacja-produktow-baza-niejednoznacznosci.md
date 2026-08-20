@@ -162,16 +162,55 @@ STATUS "PRODUKT WETERYNARYJNY/przemysłowy/dla zwierząt" (te SAME
   konstrukcji produktu
 ```
 
-### 2.5. Inne kategorie z tym samym mechanizmem (⚠️ punkt startowy, wymaga własnej weryfikacji przy konkretnej sprawie)
+### 2.5. Inne kategorie z tym samym mechanizmem — ✅ ZWERYFIKOWANE 2026-08-19
+(F-35) — JEDEN uniwersalny mechanizm rozstrzyga wszystkie poniższe
+
+⭐⭐⭐ **KLUCZOWE USTALENIE:** wszystkie 5 kategorii niżej podlegają
+DOKŁADNIE tej samej regule z **poz. 105 załącznika nr 3 do ustawy o VAT**
+— stawka **8% BEZ WZGLĘDU NA SYMBOL PKWiU**, jeśli przedmiot jest
+"wyrobem medycznym w rozumieniu ustawy o wyrobach medycznych (7.04.2022),
+dopuszczonym do obrotu na terytorium RP" (co obecnie oznacza: zgodność z
+rozporządzeniem UE 2017/745 MDR, ew. z procedurą przejściową z art. 97
+MDR dla wyrobów klasy I). **PKWiU/CN samo w sobie NIE decyduje** —
+decyduje WYŁĄCZNIE status certyfikacyjny/rejestracyjny jako wyrób
+medyczny. Ten sam fizyczny przedmiot bez takiej certyfikacji (wersja
+przemysłowa/kuchenna/hobbystyczna/"wellness") → **23%**, standardowa
+stawka. Potwierdzone: stawkivat.pl (interpretacja MF), ewaflor.pl, kis.gov.pl
+(oficjalny dokument KIS o WIS dla wyrobów medycznych), log24.pl, rp.pl.
 
 ```
-□ Termometry — medyczne (certyfikowane) vs przemysłowe/kuchenne
-□ Okulary/gogle ochronne — laboratoryjne/medyczne vs przemysłowe BHP
-□ Fartuchy jednorazowe — medyczne/chirurgiczne vs gastronomiczne/przemysłowe
-□ Strzykawki/igły — medyczne vs np. do zastosowań przemysłowych/hobbystycznych
-□ Sprzęt do pomiaru ciśnienia/glukometry — medyczne vs "wellness"/fitness
-  (rozróżnienie: wyrób medyczny podlega MDR, urządzenie "wellness" — nie)
+□ Termometry — medyczne (certyfikowane wg MDR, dopuszczone do obrotu) →
+  8% | przemysłowe/kuchenne (brak certyfikacji MDR) → 23%
+□ Okulary/gogle ochronne — laboratoryjne/medyczne (jeśli certyfikowane
+  jako wyrób medyczny — rzadziej niż inne pozycje, zwykle to ŚOI wg
+  odrębnego reżimu, nie MDR) → status DO WERYFIKACJI PRZY KONKRETNYM
+  PRODUKCIE, nie wszystkie okulary ochronne są "wyrobem medycznym" nawet
+  w kontekście medycznym | przemysłowe BHP → 23% zawsze
+□ Fartuchy jednorazowe — medyczne/chirurgiczne (certyfikowane MDR) → 8%
+  | gastronomiczne/przemysłowe (brak certyfikacji) → 23%
+□ Strzykawki/igły — ✅ WPROST POTWIERDZONE (stawkivat.pl, interpretacja
+  indywidualna): strzykawki/filtry do strzykawek jako wyrób medyczny wg
+  poz. 13 zał. nr 3 (dawna numeracja) → 8% | do zastosowań przemysłowych/
+  hobbystycznych (brak certyfikacji medycznej) → 23%
+□ Sprzęt do pomiaru ciśnienia/glukometry — medyczne (certyfikowane MDR)
+  → 8% | urządzenia "wellness"/fitness (BRAK certyfikacji jako wyrób
+  medyczny, mimo mierzenia tych samych parametrów) → 23% — rozróżnienie
+  formalne: wyrób medyczny podlega MDR i ma deklarację zgodności/
+  oznakowanie CE jako wyrób medyczny, urządzenie "wellness" — nie, mimo
+  identycznej funkcji technicznej
 ```
+
+⭐⭐ **WAŻNA DODATKOWA PUŁAPKA (potwierdzona, rp.pl, stanowisko MF/wiceministra
+zdrowia):** przy sprzedaży wyrobu medycznego WRAZ z osprzętem
+towarzyszącym (np. tomograf + komputer/monitor/drukarka do jego obsługi)
+— **8% obejmuje WYŁĄCZNIE sam wyrób medyczny**, towarzyszący sprzęt
+elektroniczny (komputery, monitory) musi być **opodatkowany ODRĘBNIE
+stawką 23%**, nawet jeśli jest technicznie niezbędny do działania
+urządzenia medycznego i sprzedawany w jednym zestawie — MF stoi na
+stanowisku RESTRYKCYJNYM (wbrew wcześniejszemu stanowisku wiceministra
+zdrowia o "jednolitym świadczeniu") — **traktować jako sporne, ale
+praktyka fiskusa RESTRYKCYJNA jest dominująca i bezpieczniejsza do
+przyjęcia przy doradzaniu**.
 
 ### 2.6. ⭐⭐⭐ GASTRONOMIA/CATERING — USŁUGA vs TOWAR (dodano 2026-08-12,
 na żądanie użytkownika — JEDEN z NAJCZĘŚCIEJ spornych obszarów VAT

@@ -204,10 +204,41 @@ CAŁKOWITY ZAKAZ przewozu BEZ specjalnego zezwolenia — patrz pełne
 □ ZABYTKI i DOBRA KULTURY — wywóz z Polski może wymagać POZWOLENIA
   (ustawa o ochronie zabytków) — ⚠️ dokładna procedura NIE zweryfikowana
   w pełni w tej sesji
-□ PODRÓBKI/TOWARY NARUSZAJĄCE PRAWA WŁASNOŚCI INTELEKTUALNEJ —
-  organy celne UPRAWNIONE do zatrzymania towarów podejrzanych o
-  naruszenie praw IP (⚠️ szczegółowa procedura unijna — rozporządzenie
-  608/2013 — NIE zweryfikowana w pełni w tej sesji, punkt startowy)
+□ PODRÓBKI/TOWARY NARUSZAJĄCE PRAWA WŁASNOŚCI INTELEKTUALNEJ — ✅
+  **ZWERYFIKOWANE (2026-08-19, F-35):** organy celne UPRAWNIONE do
+  zatrzymania towarów podejrzanych o naruszenie praw IP na podstawie
+  **rozporządzenia (UE) nr 608/2013** z 12.06.2013 (egzekwowanie praw
+  własności intelektualnej przez organy celne), uzupełnionego
+  rozporządzeniami wykonawczymi Komisji (formularze: nr 1352/2013, zm.
+  2020/2035, 2024/2399) oraz krajowo — rozp. MF z 28.06.2023 (Dz.U. 2023
+  poz. 1267, wyznaczenie Dyrektora IAS w Warszawie jako organu właściwego
+  do spraw celnych IP).
+  **Mechanizm (2 tryby):**
+  1) **Na wniosek** — posiadacz praw (np. właściciel znaku towarowego)
+     składa **wniosek o podjęcie działania** ELEKTRONICZNIE przez portal
+     **IPEP** (Intellectual Property Enforcement Portal, prowadzony przez
+     EUIPO, powiązany z systemem COPIS). W Polsce rozpatruje go **Dyrektor
+     Izby Administracji Skarbowej w Warszawie**. Po uwzględnieniu wniosku
+     ("decyzja ochronna") — trafia do organów celnych wszystkich państw UE.
+  2) **Z urzędu** — organy celne mogą działać BEZ wcześniejszego wniosku;
+     w takim wypadku zawieszenie zwolnienia/zatrzymanie trwa **4 dni
+     robocze**, w czasie których posiadacz praw musi zdążyć złożyć
+     formalny wniosek — jeśli nie złoży, towar zostaje zwolniony.
+  **Standard dowodowy — kluczowe dla obrony importera:** wystarczające
+  jest samo **PODEJRZENIE** naruszenia (zgłoszone przez posiadacza praw,
+  NIE przez organ celny z własnej inicjatywy co do MERITUM sprawy) —
+  procedura NIE rozstrzyga, czy naruszenie faktycznie miało miejsce, to
+  wyłącznie **czasowe zabezpieczenie** towaru do czasu podjęcia dalszych
+  działań (np. postępowania cywilnego) przez posiadacza praw. Organ celny
+  nie jest sądem rozstrzygającym spór. **Wyłączenia z zakresu 608/2013
+  (potwierdzone, uprp.gov.pl):** NIE stosuje się do (a) PODRÓŻNYCH
+  przewożących ilości niehandlowe w granicach dozwolonego limitu, (b)
+  towarów wyprodukowanych w UE krążących po jej terytorium, (c) nadwyżek
+  produkcyjnych wyprodukowanych za zgodą uprawnionego ponad uzgodnioną
+  ilość, (d) importu równoległego za zgodą uprawnionego.
+  Źródła zbieżne: prawo.pl, eur-lex.europa.eu (tekst rozporządzenia),
+  podatki.gov.pl (oficjalna strona KAS — 2 niezależne podstrony),
+  uprp.gov.pl (Urząd Patentowy RP), akademialtca.pl, granica.gov.pl.
 □ ROŚLINY i ZWIERZĘTA (poza CITES) — ogólne wymogi FITOSANITARNE i
   WETERYNARYJNE przy przywozie z krajów trzecich
 ```

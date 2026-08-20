@@ -459,8 +459,29 @@ TERYTORIALNYM:
 > JEDNĄ z PRZESŁANEK obligatoryjnego DOŻYWOTNIEGO zakazu prowadzenia
 > pojazdów (art. 42 §3 KK, przy PRZESTĘPSTWACH z art. 173/177 §2-2a/355
 > §2 popełnionych w stanie NIETRZEŹWOŚCI LUB gdy sprawca zbiegł) — NIE
-> duplikowane tutaj, sprawdź TAM pełną treść. ⚠️ Punkt startowy do
-> DALSZEGO pogłębienia w PRZYSZŁEJ sesji: czy istnieje ODRĘBNY,
-> SAMODZIELNY obowiązek zatrzymania się po wypadku i udzielenia pomocy
-> (art. 44 Prawa o ruchu drogowym) POZA już opisanym kontekstem
-> KARNYM — NIE zweryfikowany w tej sesji, NIE zgadywano treści.
+> ✅ **ZWERYFIKOWANE (2026-08-18, F-26):** TAK — art. 44 Prawa o ruchu
+> drogowym to ODRĘBNY, SAMODZIELNY obowiązek administracyjno-porządkowy
+> (nie karny sensu stricto, ale wykroczeniowy — sankcja z art. 44 ust. 1
+> pkt 4 jako podstawa wniosku o ukaranie w orzecznictwie, np. VI Ka
+> 526/16). **Treść (Dz.U. aktualny t.j. 2024 poz. 1251):**
+> - **Ust. 1 (KAŻDY wypadek):** zatrzymać pojazd bezpiecznie; przedsięwziąć
+>   środki zapewnienia bezpieczeństwa ruchu w miejscu wypadku; usunąć
+>   pojazd z miejsca (jeśli brak zabitego/rannego); podać dane personalne
+>   i dane ubezpieczyciela NA ŻĄDANIE osoby uczestniczącej w wypadku.
+> - **Ust. 2 (TYLKO gdy jest zabity lub ranny) — obowiązki DODATKOWE:**
+>   udzielić niezbędnej pomocy i wezwać ZRM oraz Policję; NIE utrudniać
+>   ustalenia przebiegu wypadku; powstrzymać się od alkoholu do czasu
+>   badania przez Policję (pkt 2a); POZOSTAĆ na miejscu (z możliwością
+>   krótkiego oddalenia się w celu wezwania pomocy, z obowiązkiem powrotu).
+> - **Ust. 3:** te same obowiązki stosuje się ODPOWIEDNIO do INNYCH osób
+>   uczestniczących w wypadku (nie tylko kierującego) — obowiązany jest
+>   zarówno sprawca, jak i POKRZYWDZONY.
+> ⭐ **Rozgraniczenie od kontekstu karnego (uzupełnienie, nie duplikacja):**
+> ten obowiązek administracyjny (art. 44 PRD) jest ODRĘBNY od okoliczności
+> obciążającej "zbiegnięcia z miejsca zdarzenia" jako przesłanki
+> obligatoryjnego dożywotniego zakazu prowadzenia pojazdów z art. 42 §3 KK
+> — mogą wystąpić RÓWNOLEGLE (naruszenie art. 44 PRD jako wykroczenie +
+> ta sama ucieczka jako przesłanka zaostrzenia kary za przestępstwo
+> drogowe), ale mają różną podstawę prawną i różny reżim odpowiedzialności.
+> Źródła zbieżne: arslege.pl, lexlege.pl, dlajurysty.pl, standardyprawa.pl,
+> orzeczenie VI Ka 526/16 (Portal Orzeczeń SO Warszawa-Praga).

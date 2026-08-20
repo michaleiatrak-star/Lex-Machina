@@ -1,6 +1,6 @@
 # mod-BronAmunU-pozwolenia-cofniecie-strzelnice
 
-**Wersja:** 1.0 | **Dodano:** 2026-08-16
+**Wersja:** 1.1 | **Dodano:** 2026-08-16 | **Zaktualizowano:** 2026-08-19 (F-92)
 **Akt:** ustawa z 21.05.1999 r. o broni i amunicji — **t.j. Dz.U. 2024 poz. 485**
 (obwieszczenie Marszałka Sejmu z 21.03.2024, ogł. 2.04.2024)
 **Rola w systemie:** zamknięcie flagi **F-92** — ustawa o broni i amunicji
@@ -12,9 +12,35 @@ trafiało na moduł KARNY i było obsługiwane niewłaściwym materiałem.
 > ⛔ **HARDGATE** — ISAP (`isap.sejm.gov.pl`) i `api.sejm.gov.pl` blokują
 > `web_fetch` (ROBOTS_DISALLOWED). Numer t.j. **2024.485** ustalono z
 > metadanych wyniku ISAP (`WDU20240000485`) + potwierdzenie krzyżowe
-> lexlege.pl/arslege.pl (stan prawny serwisu: 16.08.2026). **Przed użyciem
-> w piśmie potwierdź ręcznie w ISAP, czy po 2024.485 nie ogłoszono nowszego
-> t.j. lub nowelizacji.**
+> lexlege.pl/arslege.pl (stan prawny serwisu: 16.08.2026).
+>
+> ✅ **KONTROLA NOWELIZACJI WYKONANA (2026-08-19, F-92)** — po t.j. 2024.485
+> ogłoszono DWIE nowelizacje, obie potwierdzone niezależnie (inforlex —
+> oficjalna chronologia zmian aktu; ISAP-hosted PDF z nagłówkiem stan na
+> 30.03.2026 wprost wymieniający obie pozycje w podstawie prawnej):
+> 1. **Dz.U. 2025 poz. 1795** — ustawa z 21.11.2025 o zdrowiu zwierząt
+>    (już skatalogowana gdzie indziej w systemie, dr-09 — nie generuje
+>    nowej luki); zakres zmiany w samej ustawie o broni i amunicji NIE
+>    zweryfikowany artykuł po artykule w tej sesji, tylko fakt objęcia.
+> 2. **Dz.U. 2026 poz. 187** — ustawa z 23.01.2026 o zawodzie psychologa
+>    oraz samorządzie zawodowym psychologów. **Art. 137** tej ustawy
+>    zmienia **art. 15c ust. 1 pkt 1** ustawy o broni i amunicji —
+>    zastępuje dotychczasowy wymóg dyplomu (magister psychologii lub
+>    dyplom KUL/ATK z filozofii ze specjalizacją psychologiczną) nowym
+>    odesłaniem do reżimu kwalifikacji zawodowych z ustawy o zawodzie
+>    psychologa. Potwierdzone bezpośrednio w tekście ustawy nowelizującej
+>    (przepisy.gofin.pl, cytujący dosłownie numerację "Art. 137. W ustawie
+>    (...) o broni i amunicji (...) w art. 15c w ust. 1 pkt 1 otrzymuje
+>    brzmienie: (...)"). ⚠️ Dokładna NOWA treść pkt 1 (po podstawieniu)
+>    NIE odczytana w tej sesji — do ustalenia przy sprawie dotyczącej
+>    kwalifikacji psychologa upoważnionego. Ustawa nowelizująca wchodzi
+>    w życie zasadniczo dopiero 19.05.2028 (co do zasady), ale zawiera
+>    wyjątki dla części przepisów wchodzących wcześniej — **czy art. 137
+>    jest objęty którymś z wcześniejszych terminów, NIE ustalone w tej
+>    sesji**, wymaga sprawdzenia przy sprawie (ryzyko: przepis może jeszcze
+>    nie obowiązywać pomimo publikacji).
+> **Przed użyciem w piśmie nadal potwierdź ręcznie w ISAP aktualny stan
+> art. 15c oraz czy w międzyczasie nie doszło do kolejnej nowelizacji.**
 
 > ⚠️ **NIE MYLIĆ Z:** ustawą o środkach przymusu bezpośredniego i broni palnej
 > (t.j. Dz.U. 2026 poz. 244, moduł `mod-ustawa-policja`) — tamta reguluje
@@ -28,7 +54,7 @@ trafiało na moduł KARNY i było obsługiwane niewłaściwym materiałem.
 ```
 Rozdz. 1  art. 1-8a   Przepisy ogólne                       → sekcja 1 (PEŁNE ramowo)
 Rozdz. 2  art. 9-33   Pozwolenia, cofanie, rejestracja      → sekcje 2-6 (RDZEŃ)
-Rozdz. 3  art. 34-44a Przewóz/przywóz/wywóz, cudzoziemcy    → sekcja 7 (SZKIC)
+Rozdz. 3  art. 34-44a Przewóz/przywóz/wywóz, cudzoziemcy    → sekcja 7a (ROZWINIĘTE 2026-08-19, F-92)
 Rozdz. 4  art. 45-49  Strzelnice                            → sekcja 8
 Rozdz. 5  art. 50-51  Przepisy karne (przestępstwo + wykr.) → sekcja 9
 Rozdz. 6  art. 52-56  Przepisy przejściowe i końcowe        → nieopracowane
@@ -162,6 +188,68 @@ naruszyła:
   — oraz wobec osoby, której cofnięto pozwolenie na podstawie art. 18 ust. 1 pkt 4
 ```
 
+### ⭐⭐⭐ ORZECZNICTWO — linia dot. "ważnej przyczyny"/zagrożenia bezpieczeństwa
+publicznego przy zatarciu skazania — dodano 2026-08-19, naprawa F-92
+(zgodnie z PLAN MINIMUM: orzeczenia wspierające restrykcyjną linię NSA;
+BRAK zidentyfikowanej linii przeciwnej w tej sesji — ⚠️ nie oznacza,
+że nie istnieje, tylko że nie znaleziono jej przy tym wyszukiwaniu)
+
+```
+⭐⭐⭐ NSA, wyrok z 9.09.2025 r., sygn. akt II GSK 491/22 — ✅ VER: 2026-08-19
+  (prawo.pl + infor.pl, zgodne co do treści i sygnatury). TEZA: instytucja
+  zatarcia skazania (art. 106 KK) pozwala uznać osobę za niekaraną, ale
+  przy OCENIE WNIOSKODAWCY liczy się nie sam fakt (nie)ukarania, lecz
+  DOTYCHCZASOWE ŻYCIE i sposób postępowania — popełnione wcześniej
+  przestępstwo "nie pozostaje faktem obojętnym" dla oceny zagrożenia
+  porządku/bezpieczeństwa publicznego. UCHYLIŁ korzystny dla żołnierza
+  wyrok WSA w Warszawie z 16.11.2021 r. (VI SA/Wa 805/21) i ODDALIŁ
+  jego skargę — decyzja PRAWOMOCNA.
+
+⭐⭐ NSA, wyrok z 11.10.2023 r., sygn. akt II GSK 1952/22 — ✅ VER:
+  legeartis.org. Podobny stan faktyczny (żołnierz, broń kolekcjonerska).
+  TEZA: sama codzienna służba z bronią maszynową NIE daje automatycznego
+  prawa do pozwolenia cywilnego — przesłanki ocenia się indywidualnie.
+
+⭐⭐ NSA, wyrok z 20.02.2015 r., sygn. akt II OSK 1683/13 — ✅ VER:
+  prawo.pl. TEZA: odstąpienie sądu karnego od wymierzenia kary NIE daje
+  rękojmi, że wnioskodawca w przyszłości nie użyje broni w celu
+  sprzecznym z interesem społecznym.
+
+⭐ WSA w Warszawie, wyrok z 5.11.2021 r., sygn. akt VI SA/Wa 2117/21 —
+  ✅ VER: prawo.pl (przywołany jako spójny z linią II OSK 1683/13).
+
+⭐⭐ NSA, wyrok z 29.09.2019 r., sygn. akt II OSK 3223/14 — ⚠️ [POŚREDNIO
+  ZWERYFIKOWANE — cytat z artykułu branżowego legeartis.org, nie z
+  bezpośredniego źródła orzeczniczego]. TEZA: art. 10 ust. 5 pkt 1
+  ustawy wprowadza WYJĄTEK od zasady ogólnej (art. 10 ust. 4) —
+  zakaz udzielania pozwolenia na broń SZCZEGÓLNIE NIEBEZPIECZNĄ
+  (w tym samoczynną broń palną) w celach kolekcjonerskich; prawo do
+  broni jest prawem REGLAMENTOWANYM, nie konstytucyjnym — brak podstaw
+  do wykładni rozszerzającej.
+
+⚠️ [NIEWERYFIKOWANE — USZKODZONA SYGNATURA] NSA, wyrok z 2.12.2015 r. —
+  dotyczy niedopuszczalności odmowy pozwolenia kolekcjonerskiego
+  WYŁĄCZNIE z powodu żądanej DUŻEJ LICZBY sztuk broni; sygnatura
+  w źródle wyświetliła się USZKODZONA ("II OSK 847?14" — prawdopodobnie
+  II OSK 847/14, ale ZNAK ZAPYTANIA w miejscu ukośnika wskazuje na błąd
+  kodowania źródła). NIE cytować tej sygnatury w piśmie bez odrębnej
+  weryfikacji dokładnego numeru.
+
+⚠️ ZASYGNALIZOWANE, NIE ZWERYFIKOWANE TREŚCIOWO w tej sesji (tylko tytuły
+  z OpenLEX, bez dostępu do treści):
+  □ NSA, II OSK 1097/11 — "zatarcie skazania jako okoliczność uzasadniająca
+    COFNIĘCIE pozwolenia na broń" (inny stan faktyczny niż wyżej — dot.
+    COFNIĘCIA, nie ODMOWY wydania)
+  □ NSA, II OSK 497/20 — "zatarcie skazania a wydanie pozwolenia na broń"
+
+WNIOSEK PRAKTYCZNY: linia orzecznicza NSA jest SPÓJNA i RESTRYKCYJNA —
+zatarcie skazania NIE eliminuje możliwości odmowy/cofnięcia pozwolenia
+na broń, jeśli organ wykaże związek między przeszłym zachowaniem
+a oceną ryzyka na przyszłość. Dotyczy to RÓWNIEŻ żołnierzy zawodowych —
+codzienny kontakt z bronią służbową NIE przekłada się automatycznie na
+uprawnienia cywilne.
+```
+
 ---
 
 ## 4. BADANIA LEKARSKIE I PSYCHOLOGICZNE (art. 15 ust. 3-9, art. 15a-15l)
@@ -276,10 +364,62 @@ cofnięcie (ust. 5). → powiązanie: `dr-02` (przemoc domowa, zabezpieczenie),
 □ art. 28      — użyczać wolno WYŁĄCZNIE broń łowiecką/sportową i wyłącznie
                  osobie z pozwoleniem wydanym w celach łowieckich/sportowych
 □ art. 32      — przechowywanie i noszenie w sposób uniemożliwiający dostęp
-                 osób nieuprawnionych (szczegóły — rozporządzenie MSWiA)
+                 osób nieuprawnionych (szczegóły — sekcja 6a niżej,
+                 ROZPORZĄDZENIE wykonawcze rozwinięte 2026-08-19, F-92)
 □ art. 27 ust. 5 — PZŁ i zarządy stowarzyszeń strzeleckich: coroczne wykazy
                  członków + powiadomienie o WYKLUCZENIU w 30 DNI
 ```
+
+## 6a. ⭐⭐⭐ ROZPORZĄDZENIE WYKONAWCZE — PRZECHOWYWANIE, NOSZENIE,
+EWIDENCJONOWANIE (art. 32 ust. 2) — dodano 2026-08-19, naprawa F-92
+(pierwsze rozporządzenie wykonawcze rozwinięte w tym module)
+
+```
+⭐ PODSTAWA: rozporządzenie Ministra Spraw Wewnętrznych z 26.08.2014 r.
+  w sprawie przechowywania, noszenia oraz ewidencjonowania broni
+  i amunicji — pierwotnie Dz.U. 2014 poz. 1224, wydane na podstawie
+  art. 32 ust. 2 ustawy. TEKST JEDNOLITY ogłoszony obwieszczeniem MSWiA
+  z 10.02.2023 — Dz.U. 2023 poz. 364. ✅ VER: 2026-08-19 (isap.sejm.gov.pl,
+  potwierdzone WDU20230000364), zgodne z 5+ źródłami wtórnymi.
+  ⚠️ Sprawdzić przy sprawie, czy nie zaszła nowsza zmiana po 2023 poz. 364.
+
+⭐⭐⭐ WYMÓG SEJFU/SZAFY (§5 ust. 1) — KLUCZOWY praktycznie:
+  → urządzenie do przechowywania musi spełniać wymagania CO NAJMNIEJ
+    klasy S1 wg normy PN-EN 14450 (certyfikat Instytutu Mechaniki
+    Precyzyjnej + tabliczka znamionowa/hologram)
+  → ZWYKŁE meble (szafa, komoda, szuflada) NIE SPEŁNIAJĄ wymogu —
+    konieczny specjalistyczny sejf/szafa na broń
+  → broń MUSI być przechowywana ROZŁADOWANA, z ROZŁĄCZONYM magazynkiem
+  → amunicja — w pojemnikach/pudełkach UNIEMOŻLIWIAJĄCYCH uderzenie
+    w spłonkę naboju; MOŻE być przechowywana W TYM SAMYM urządzeniu
+    co broń, JEŚLI jest fizycznie WYDZIELONA (osobna skrytka/pojemnik)
+  → dokumentacja (kopie dokumentów zakupu broni/amunicji) —
+    przechowywana W TYM SAMYM urządzeniu
+
+⭐ PRZEPIS PRZEJŚCIOWY (nadal aktualny mechanizm, choć z 2014 r.):
+  → posiadacze pozwolenia WYDANEGO PO 26.08.2014 — obowiązek stosowania
+    wymogów OD RAZU
+  → posiadacze pozwolenia WYDANEGO PRZED 26.08.2014 — mieli 5 LAT na
+    dostosowanie (termin 26.08.2019, już upłynął — obecnie WSZYSCY
+    posiadacze podlegają wymogom bez wyjątku)
+
+⚠️ SANKCJA za niedostosowanie: możliwe COFNIĘCIE pozwolenia + fakultatywny
+  PRZEPADEK broni (art. 18 ust. 5 pkt 4 ustawy — patrz sekcja 6) oraz
+  kara ARESZTU lub GRZYWNY w trybie wykroczeniowym (art. 51 — patrz
+  sekcja 9, ⭐ NOSZENIE/przechowywanie umożliwiające dostęp osób
+  nieuprawnionych jest tam wprost wymienione jako wykroczenie)
+
+⚠️ MONITOROWAĆ: w wykazie prac legislacyjnych MSWiA figuruje PROJEKT
+  rozporządzenia ZMIENIAJĄCEGO to rozporządzenie (nr 572) — status
+  i zakres zmian NIEUSTALONE w tej sesji, do sprawdzenia przy sprawie
+  na gov.pl/web/mswia lub RCL.
+
+Źródła: malopolska.policja.gov.pl (Policja, dosłowny cytat §5 ust. 1),
+sejfzone.pl, krajenskaostoja.pl, metalowe24.pl, allegro.pl/artykul —
+5+ zgodnych źródeł wtórnych + potwierdzenie numeru t.j. na isap.sejm.gov.pl.
+```
+
+---
 
 **Świadectwo broni i dopuszczenie (art. 29-30):** świadectwo broni (pozwolenie
 na okaziciela) dla m.in. wewnętrznych służb ochrony, koncesjonowanych firm
@@ -307,10 +447,103 @@ Pozwolenia NIE WYMAGA m.in.:
     koncesjonowanych przedsiębiorców i rusznikarzy; broń przekazana w celu
     pozbawienia cech użytkowych
 ```
-Rozdz. 3 (art. 34-44a) — przewóz, przywóz z zagranicy, wywóz, Europejska karta
-broni palnej (art. 10a: wydawana na okres **do 5 lat**, traci ważność i podlega
-zwrotowi w razie cofnięcia pozwolenia), zasady posiadania broni przez
-cudzoziemców — **opracowane wyłącznie szkicowo, do rozwinięcia przy sprawie**.
+## 7a. ⭐⭐⭐ ROZDZ. 3 — PRZEWÓZ, PRZYWÓZ, WYWÓZ, CUDZOZIEMCY (art. 34-44a)
+— ROZWINIĘTE 2026-08-19, naprawa F-92 (dotąd wyłącznie szkic)
+
+```
+⭐ ZASADA OGÓLNA PRZEWOZU PRZEZ TERYTORIUM RP (art. 34):
+  → §1: przewóz broni i amunicji PRZEZ terytorium RP — na podstawie
+    ZAŚWIADCZENIA wydanego przez właściwego KONSULA RP
+  → §2: WYJĄTEK — obywatele państwa członkowskiego UE posiadający
+    Europejską Kartę Broni Palnej (EKB) NIE potrzebują zaświadczenia
+    konsula (art. 34 §2)
+  → art. 35 — przewożenie środkami transportu PUBLICZNEGO — zasady
+    szczególne (⚠️ treść §2 i n. NIEUSTALONA w tej sesji)
+
+⭐⭐ PRZYWÓZ/WYWÓZ PRZEZ CUDZOZIEMCÓW Z MISJI DYPLOMATYCZNYCH
+  (art. 39-41, dot. osób z art. 39 [członkowie misji dyplomatycznych,
+  urzędów konsularnych] i art. 40 [ochrona misji/delegacji]):
+  → art. 41 §1: wymaga UPRZEDNIEGO zaświadczenia KONSULA RP —
+    zaświadczenie ZASTĘPUJE pozwolenie na broń na okres DO 30 DNI
+    od dnia przywozu
+  → §1a: po upływie terminu ważności — broń i amunicja podlegają
+    NIEZWŁOCZNEMU złożeniu do DEPOZYTU organu Policji właściwego
+    ze względu na miejsce pobytu cudzoziemca
+  → §3: w SZCZEGÓLNIE UZASADNIONYCH przypadkach właściwy organ
+    POLICJI (nie konsul) może wydać zaświadczenie zastępcze +
+    uprawniające do wywozu, na okres NIE DŁUŻSZY niż 14 DNI
+  → zaświadczenia wydaje się PO uzyskaniu POZYTYWNEJ OPINII
+    Komendanta Służby Ochrony Państwa (SOP)
+
+⭐⭐ PRZYWÓZ/WYWÓZ PRZEZ CUDZOZIEMCÓW W CELACH ŁOWIECKICH/SPORTOWYCH
+  (art. 42):
+  → §1-2: cudzoziemcy mogą przywozić/wywozić broń ODPOWIADAJĄCĄ
+    celom ŁOWIECKIM oraz amunicję
+  → §3: dla cudzoziemców SPOZA art. 39/40 — na podstawie ZAŚWIADCZENIA
+    konsula RP, zastępującego pozwolenie na DO 30 DNI od przywozu
+  → §5: OBYWATELE UE mogą pominąć tryb konsularny — wystarczy
+    Europejska Karta Broni Palnej, JEŚLI broń jest w niej wpisana
+    I cudzoziemiec uzasadni cel podróży z bronią
+  → §6: przywóz/wywóz broni w INNYCH celach niż łowieckie/sportowe
+    przez obywateli UE — na podstawie WPISU w EKB dokonanego przez
+    właściwe władze
+
+⭐⭐ NABYWANIE I WYWÓZ PRZEZ CUDZOZIEMCÓW SPOZA UE (art. 43) —
+  cudzoziemcy NIEBĘDĄCY obywatelami UE i NIEWYMIENIENI w art. 39
+  mogą NABYWAĆ i WYWOZIĆ broń/amunicję, jeżeli otrzymali:
+  1) zaświadczenie UPRAWNIAJĄCE do nabycia określonego rodzaju
+     i liczby egzemplarzy broni/amunicji, ORAZ
+  2) zgodę NA WYWÓZ z terytorium RP — obie wydawane przez
+     KOMENDANTA WOJEWÓDZKIEGO POLICJI właściwego ze względu na
+     miejsce nabycia broni
+
+⭐ REJESTR DANYCH OSOBOWYCH CUDZOZIEMCÓW (art. 43 §6, dot. osób
+  z art. 39, 40, 42 §1-2, 43 §1) — obejmuje: nazwisko, imię, miejsce
+  i datę urodzenia, adres — ⚠️ pełny katalog danych NIEUSTALONY
+  w tej sesji, wymaga odczytu przy sprawie
+
+⭐ WZORY DOKUMENTÓW (art. 44) — ✅ ROZPORZĄDZENIE ZIDENTYFIKOWANE
+  2026-08-19n (F-92): rozporządzenie Ministra Spraw Wewnętrznych
+  i Administracji w sprawie wzorów dokumentów dotyczących przewozu
+  przez terytorium RP, przywozu z zagranicy i wywozu za granicę broni
+  i amunicji — **Dz.U. 2024 poz. 503**, WYDANE na podstawie art. 44
+  ustawy o broni i amunicji w brzmieniu Dz.U. z 2024 r. poz. 485
+  (t.j. ustawy na dzień wydania rozporządzenia — ⚠️ może być nieaktualny
+  wobec nowelizacji z 2025/2026 wykrytych wcześniej przy zamykaniu
+  kontroli nowelizacji F-92, do potwierdzenia przy sprawie).
+  ✅ VER: 2026-08-19 (infor.pl, prawo.pl — zgodne co do numeru Dz.U.
+  i daty). ZASTĄPIŁO poprzednie rozporządzenie z 20.02.2012 (Dz.U.
+  poz. 213), które utraciło moc.
+  ⚠️ Dokładna liczba i numeracja załączników (wzorów) W NOWYM
+  rozporządzeniu z 2024 r. NIEUSTALONA w tej sesji — poprzednie
+  rozporządzenie z 2000 r. miało 5 wzorów (przewóz przez RP; przywóz
+  własny obywateli PL; przywóz/wywóz cudzoziemców; zaświadczenie
+  zastępcze + wywóz; nabycie przez cudzoziemców) — struktura MOŻE,
+  ale nie musi być identyczna w wersji 2024.
+
+⭐ AMUNICJA MIĘDZY PAŃSTWAMI UE (art. 44a) — ODESŁANIE: przemieszczanie
+  amunicji przez granice WEWNĘTRZNE państw UE i stowarzyszonych, przez
+  PRZEDSIĘBIORCĘ/przedsiębiorcę zagranicznego — regulowane ODRĘBNIE,
+  ustawą z 21.06.2002 o materiałach wybuchowych przeznaczonych do
+  użytku cywilnego (poza zakresem tego modułu)
+
+⚠️ NIEOPRACOWANE w tej sesji, do rozwinięcia przy sprawie:
+  □ art. 36-38 (przywóz z państw UE / spoza UE — tryb dla OSÓB
+    FIZYCZNYCH niebędących cudzoziemcami uprzywilejowanymi wyżej)
+  □ art. 39-40 pełna treść definicyjna (kto dokładnie należy do
+    kategorii misji dyplomatycznych/ochrony delegacji)
+  □ art. 35 §2 i n. (szczegóły przewozu środkami transportu publicznego)
+  □ Europejska Karta Broni Palnej — pełna procedura wydania w Polsce
+    (odesłanie do art. 10a w Rozdz. 2, tu tylko przywołane)
+
+Źródła: lexlege.pl (art. 34, 41, 42, 43, 44, 44a — dosłowne brzmienie),
+granica.gov.pl (Straż Graniczna — potwierdza tryb dla cudzoziemców),
+klzeran.pl (koło łowieckie, tekst art. 34-35 zgodny) — 3+ źródła
+zgodne. ⚠️ Aktualny tekst jednolity ustawy o broni i amunicji NIE zweryfikowany
+w tej sesji — przed cytowaniem w piśmie potwierdzić numer Dz.U. na
+isap.sejm.gov.pl (moduł macierzysty MAPA-AKTOW dr-13 zawiera już
+weryfikowany numer z sesji 2026-08-16 — sprawdzić tam, nie zgadywać).
+```
 
 ---
 
@@ -423,11 +656,20 @@ oba wątki równolegle — wynik sprawy wykroczeniowej nie wyczerpuje ryzyka.
 ## ⚠️ NIEZWERYFIKOWANE — DO USTALENIA PRZY SPRAWIE
 
 ```
-□ Czy po t.j. 2024.485 ogłoszono nowszy t.j. lub nowelizację (ISAP ręcznie)
+□ ✅ CZĘŚCIOWO ZAMKNIĘTE (F-92, 2026-08-19): kontrola nowelizacji po t.j.
+  2024.485 wykonana — DWIE nowelizacje potwierdzone (Dz.U. 2025.1795,
+  Dz.U. 2026.187 art. 137 zmieniający art. 15c ust. 1 pkt 1). Pozostaje:
+  dokładna nowa treść art. 15c ust. 1 pkt 1 po podstawieniu; czy art. 137
+  ustawy 2026.187 wszedł już w życie (ustawa co do zasady wchodzi w życie
+  19.05.2028 z wyjątkami — objęcie art. 137 wyjątkiem NIE sprawdzone);
+  zakres zmian wniesionych przez Dz.U. 2025.1795 w treść samej ustawy
+  o broni i amunicji (tylko fakt objęcia potwierdzony, nie artykuły)
 □ Rozporządzenia wykonawcze: przechowywanie/noszenie/ewidencja (art. 32 ust. 2),
   wzory dokumentów (art. 31), tryb egzaminu (art. 16 ust. 3), wykaz stanów
   chorobowych (art. 15 ust. 9), wzorcowy regulamin strzelnic (art. 46 ust. 3)
-□ Rozdz. 3 (art. 34-44a) — opracowany szkicowo, wymaga rozwinięcia
+□ Rozdz. 3 (art. 34-44a) — ROZWINIĘTY 2026-08-19 (F-92, sekcja 7a); pozostaje
+  wyłącznie: art. 36-38 (przywóz os. fizycznych spoza kategorii uprzywilejowanych),
+  art. 39-40 pełna treść, art. 35 §2+ (transport publiczny), pełna procedura EKB
 □ Rozdz. 6 (art. 52-56) — nieopracowany
 □ Orzecznictwo: art. 15 ma 295, art. 18 — 290, art. 10 — 76 odnotowanych
   orzeczeń (lexlege). ⛔ ŻADNEJ sygnatury nie wpisano do tego modułu —
@@ -451,3 +693,15 @@ obligatoryjne odebranie przy przemocy domowej (art. 19a); mapę terminów
 posiadacza; wyłączenia z art. 11; strzelnice (art. 45-49, z decyzją wójta);
 przepisy karne ustawy (art. 50-51) z przepadkiem niezależnym od własności.
 Świadomie NIE wpisano żadnej sygnatury orzeczniczej (HARDGATE).
+
+**1.1 (2026-08-19, F-92):** Kontrola nowelizacji po t.j. 2024.485 wykonana
+(web_search, obejście blokady ISAP zgodnie z ZASADĄ 14 audytu). Ustalono
+DWIE nowelizacje: Dz.U. 2025.1795 (ustawa o zdrowiu zwierząt, fakt objęcia
+potwierdzony, artykuły nie zweryfikowane) i Dz.U. 2026.187 (ustawa o zawodzie
+psychologa, art. 137 zmienia art. 15c ust. 1 pkt 1 — wymóg dyplomu psychologa
+upoważnionego zastąpiony odesłaniem do nowego reżimu kwalifikacji zawodowych).
+Potwierdzone bezpośrednio w tekście ustawy nowelizującej (przepisy.gofin.pl).
+Nowa treść pkt 1 po podstawieniu oraz status wejścia w życie art. 137 (ustawa
+co do zasady wchodzi w życie 19.05.2028, z wyjątkami dla części przepisów —
+przynależność art. 137 do wyjątku NIE ustalona) pozostają do sprawdzenia przy
+konkretnej sprawie. Zaktualizowano nagłówek HARDGATE i listę NIEZWERYFIKOWANE.

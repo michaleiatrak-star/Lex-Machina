@@ -100,8 +100,24 @@ z mapy pokrycia działami: Dział X rozdz. 1 i 4, Dział IV rozdz. 3, Dział II 
 ```
 ⭐⭐⭐ Linia sądowoadministracyjna: wykreślenie z urzędu na podstawie
   art. 96 ust. 9 jest traktowane jako **CZYNNOŚĆ MATERIALNO-TECHNICZNA**,
-  a nie decyzja — organ nie wydaje decyzji ani postanowienia
-  (m.in. WSA w Łodzi, I SA/Łd 190/20, wyrok prawomocny).
+  a nie decyzja — organ nie wydaje decyzji ani postanowienia.
+  ✅ ZWERYFIKOWANE 2026-08-20 (F-19/F-71 punkt f) — linia POTWIERDZONA
+  na NAJWYŻSZYM szczeblu: **NSA, uchwała składu 7 sędziów z 23.10.2023,
+  sygn. I FPS 3/23** — dot. wykreślenia w związku z blokadą konta (STIR)
+  na podstawie art. 96 ust. 9 pkt 5, NSA jednoznacznie potwierdził, że
+  wykreślenie NIE WYMAGA formy decyzji, jest zwykłą czynnością
+  materialno-techniczną (odwołanie do art. 207 Ordynacji podatkowej —
+  brak "sprawy podatkowej" w rozumieniu tego przepisu). ✅ POTWIERDZONE
+  RÓWNIEŻ na poziomie WSA: WSA w Łodzi, 26.08.2020, I SA/Łd 190/20
+  (wyrok obecnie PRAWOMOCNY — ⚠️ w listopadzie 2020, blisko daty
+  wydania, jedno źródło branżowe określało go jako NIEPRAWOMOCNY; stał
+  się prawomocny później wskutek braku skutecznego zaskarżenia —
+  potwierdzone przez WIELE źródeł z lat 2022+ jako "wyrok prawomocny")
+  oraz I SA/Łd 417/20 z 27.11.2020 (przywrócenie do rejestru na
+  podstawie art. 96 ust. 9j). Linia zgodna też z wcześniejszym
+  wyrokiem NSA z 25.06.2012, I FSK 1370/11, oraz szeregiem wyroków WSA
+  z 2019-2020 (Gdańsk I SA/Gd 558/19 i 392/19, Wrocław I SA/Wr 1164/19,
+  Gliwice I SA/Gl 592/19, Olsztyn I SA/Ol 744/19).
 
 ⛔ KONSEKWENCJA PROCESOWA — TO JEST PUŁAPKA:
   skoro to nie decyzja, to ŚRODKIEM nie jest odwołanie w trybie Ordynacji,
@@ -439,7 +455,8 @@ RZĄD 2 — praktyka: prawo.pl, gofin.pl, inforlex.pl, pit.pl,
   poradnikprzedsiebiorcy.pl, biznes.gov.pl (art. 14, spis z natury),
   interpretacje KIS
 RZĄD 2 — orzecznictwo: WSA w Łodzi I SA/Łd 190/20, I SA/Łd 417/20
-  (charakter czynności wykreślenia) — ⛔ PRZED CYTOWANIEM w piśmie
-  zweryfikuj sygnatury i tezy w orzeczenia.nsa.gov.pl przez
-  `orzeczenia-sadowe-v2`
+  ✅ POTWIERDZONE 2026-08-20 (F-19 punkt f) — 6+ źródeł zgodnych
+  (poradnikprzedsiebiorcy.pl, pit.pl, gofin.pl, lider-biuro.pl,
+  ksml.pl, isp-modzelewski.pl, ifirma.pl), WZMOCNIONE uchwałą 7
+  sędziów NSA I FPS 3/23 z 23.10.2023 — BEZPIECZNE do powołania.
 ```

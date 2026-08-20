@@ -131,7 +131,14 @@ KOMPLETNOŚĆ — wszystkie tematy potwierdzone obecne po podziale.
                prawo pomocy [245-259, zakres całkowity/częściowy,
                referendarz jako organ I instancji, sprzeciw 7 dni].
                Komplementarny do mod-KPA-tryby-nadzwyczajne-i-
-               strategia, NIE duplikuje kwalifikacji skargi do WSA)
+               strategia, NIE duplikuje kwalifikacji skargi do WSA.
+               ✅ ROZSZERZONY 2026-08-20 — naprawa F-88, punkt PPSA:
+               nowa sekcja 7, doprecyzowanie ustawą Dz.U. 2026.846
+               [w życie 1.10.2026] terminu skargi do WSA na opinię
+               transgraniczną i odmowę jej wydania. ⚠️ [NIEWERYFIKOWANE
+               RZĄD 1] — dokładny artykuł i treść NIE potwierdzone,
+               ISAP zablokowany; pozostała treść nowelizacji PPSA z tej
+               ustawy NIEOPRACOWANA)
 ```
 
 ## KPA i PPSA — teraz kanonicznie w DR-05

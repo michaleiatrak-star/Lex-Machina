@@ -41,7 +41,7 @@ Tytuły pobytowe (wiza, karta pobytu, pobyt stały, rezydent długoterminowy UE)
 | Ustawa o cudzoziemcach | Dz.U. 2025 poz. 1079 t.j. ze zm. |
 | Ustawa o warunkach dopuszczalności powierzania pracy cudzoziemcom | Dz.U. 2025 poz. 621 |
 | Ustawa o udzielaniu cudzoziemcom ochrony na terytorium RP | weryfikuj aktualny t.j. w ISAP |
-| Konwencja Genewska 1951 (status uchodźcy) | ratyfikowana przez Polskę |
+| Konwencja Genewska 1951 (status uchodźcy) | ratyfikowana przez Polskę — ✅ warstwa traktatowa [definicja uchodźcy, non-refoulement, art. 31/32/33] opracowana 2026-08-20 (F-61) w `dr-14/modules/mod-konwencja-genewska-uchodzcy-1951-protokol-1967.md`, NIE duplikować tutaj |
 | KPA | Dz.U. 2025 poz. 1691 t.j. |
 | PPSA | Dz.U. 2026 poz. 143 t.j. |
 

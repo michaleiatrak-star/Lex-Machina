@@ -221,6 +221,49 @@ WYŁĄCZENIE ART. 48¹ KPC [art. 48¹ ✓ jako przepis wyłączany]
     WINDYKACYJNEGO oraz o DZIAŁ SPADKU
   ⚠️ Podwójne zaprzeczenie — czytaj uważnie: w typowej sprawie
     spadkowej o stwierdzenie nabycia spadku mechanizm DZIAŁA.
+
+PREKLUZJA DOWODOWA (art. 205¹-205¹²) A NIEPROCES — ✅ ZWERYFIKOWANE
+2026-08-19 (F-65):
+  ⭐⭐⭐ KOREKTA NAZEWNICTWA: to, co potocznie/w starszych materiałach
+    nazywa się "prekluzją dowodową" z art. 205¹² KPC, NIE JEST już
+    sztywnym, dawnym rygorem prekluzji procesowej — TA STARA prekluzja
+    (dawny art. 207 §6 i art. 217 §2-3 KPC) została UCHYLONA
+    nowelizacją z 2019 r. i ZASTĄPIONA nowym, ELASTYCZNIEJSZYM
+    mechanizmem z art. 205¹² — nazwa "prekluzja" używana dziś jest
+    potocznym uproszczeniem, nie ścisłym terminem ustawowym.
+  □ Art. 205¹² §1 — DWA WARIANTY zależnie od tego, czy wyznaczono
+    POSIEDZENIE PRZYGOTOWAWCZE:
+    (a) JEŚLI wyznaczono — strona może przytaczać twierdzenia i dowody
+        TYLKO do chwili zatwierdzenia projektu planu rozprawy albo
+        sporządzenia planu rozprawy. Późniejsze — CO DO ZASADY
+        POMIJANE.
+    (b) JEŚLI NIE wyznaczono — strona może przytaczać twierdzenia i
+        dowody AŻ DO ZAMKNIĘCIA ROZPRAWY — znacznie SZERSZE możliwości.
+  □ WENTYL BEZPIECZEŃSTWA: nawet przy wariancie (a), spóźnione dowody
+    NIE są pomijane, jeśli strona UPRAWDOPODOBNI, że ich wcześniejsze
+    powołanie NIE BYŁO MOŻLIWE, albo że POTRZEBA ich powołania
+    WYNIKŁA PÓŹNIEJ — to łagodzi rygor względem stanu sprzed nowelizacji.
+  ⭐⭐⭐ ZASTOSOWANIE W NIEPROCESIE: art. 205¹-205¹² formalnie należą do
+    KSIĘGI PIERWSZEJ (PROCES), nie do Księgi drugiej (postępowanie
+    nieprocesowe, art. 506 i n.) — ALE zgodnie z OGÓLNĄ regułą
+    odesłania z art. 13 §2 KPC ("przepisy o procesie stosuje się
+    odpowiednio do innych rodzajów postępowań, chyba że przepisy
+    szczególne stanowią inaczej") — mechanizm z art. 205¹² MOŻE
+    znajdować ODPOWIEDNIE zastosowanie w nieprocesie, O ILE żaden
+    przepis szczególny Księgi drugiej tego nie wyłącza ani nie
+    reguluje odmiennie. ⚠️ **Nie zidentyfikowano w tej sesji
+    przepisu szczególnego Księgi drugiej WYRAŹNIE wyłączającego
+    zastosowanie art. 205¹² w nieprocesie** — ale też NIE potwierdzono
+    wprost orzecznictwem/komentarzem, że sądy FAKTYCZNIE stosują ten
+    mechanizm w typowych sprawach nieprocesowych (np. o stwierdzenie
+    nabycia spadku, dział spadku) — w praktyce nieprocesowej
+    POSIEDZENIA PRZYGOTOWAWCZE są rzadkością (typowe dla procesu
+    kontradyktoryjnego dwustronnego), więc wariant (b) — BEZ
+    ograniczenia do zamknięcia rozprawy — będzie w nieprocesie
+    NORMĄ, nie wyjątkiem. **Praktyczny wniosek: w typowej sprawie
+    nieprocesowej ryzyko "przekluzji" dowodu jest NISKIE** — twierdzenia
+    i dowody można zwykle zgłaszać aż do zamknięcia rozprawy, chyba że
+    sąd sam zdecydował się na tryb z posiedzeniem przygotowawczym.
 ```
 
 ---

@@ -116,10 +116,41 @@ okresie rozliczeniowym wykazać podatek NALEŻNY)
 ⭐ WNT, WDT, IMPORT TOWARÓW — ODESŁANIE: momenty SZCZEGÓLNE DLA tych
   kategorii transakcji SĄ uregulowane ODRĘBNIE (art. 20 dla WNT/WDT —
   patrz sekcja "WNT I IMPORT USŁUG" wyżej w TYM module, gdzie OPISANO
-  termin 15. dnia miesiąca NASTĘPUJĄCEGO po dostawie; art. 19a ust. 9
-  DLA importu towarów — MOMENT powstania DŁUGU celnego, Z odrębnymi
-  zasadami DLA procedury USZLACHETNIANIA czynnego — ⚠️ WYMAGA odrębnej
-  weryfikacji przy KONKRETNEJ sprawie celnej, punkt startowy TYLKO)
+  termin 15. dnia miesiąca NASTĘPUJĄCEGO po dostawie).
+
+  ✅ **ZWERYFIKOWANE (2026-08-19, F-35) — art. 19a ust. 9-11 dla importu
+  towarów, PEŁNA treść aktualnej numeracji (Dz.U.2025.775 t.j.):**
+  - **Ust. 9 (ZASADA OGÓLNA):** obowiązek podatkowy z tytułu importu
+    towarów powstaje **z chwilą powstania DŁUGU CELNEGO**, z zastrzeżeniem
+    ust. 10a i 11.
+  - **Ust. 10a (PROCEDURA USZLACHETNIANIA CZYNNEGO — WYJĄTEK SZCZEGÓLNY):**
+    obowiązek podatkowy powstaje **z chwilą ZAMKNIĘCIA procedury
+    uszlachetniania czynnego** (zgodnie z art. 324 rozporządzenia
+    wykonawczego UE 2015/2447 do unijnego kodeksu celnego) — NIE z
+    chwilą powstania długu celnego jak w zasadzie ogólnej. ⭐ To
+    KLUCZOWA różnica: przy uszlachetnianiu czynnym dług celny może w
+    ogóle NIE powstać (towar wraca poza UE po przetworzeniu), więc
+    ustawodawca powiązał obowiązek podatkowy z odrębnym zdarzeniem
+    (zamknięciem procedury), nie z długiem celnym.
+  - **Ust. 11 (PROCEDURY Z OPŁATAMI WYRÓWNAWCZYMI, BEZ DŁUGU CELNEGO):**
+    dla procedur: składu celnego, odprawy czasowej z całkowitym
+    zwolnieniem z należności celnych, uszlachetniania czynnego (inny
+    wariant niż ust. 10a — z pobieraniem opłat wyrównawczych), tranzytu,
+    wolnego obszaru celnego — JEŻELI pobierane są opłaty wyrównawcze/
+    podobne, obowiązek podatkowy powstaje **z chwilą WYMAGALNOŚCI TYCH
+    OPŁAT** (nie z chwilą długu celnego, bo dług celny w tych
+    procedurach zwykle NIE powstaje jednocześnie z importem).
+  ⭐⭐ **Wniosek praktyczny:** przy sprawie z procedurą uszlachetniania
+  czynnego kluczowe pytanie brzmi: **który wariant** (ust. 10a — system
+  zawieszeń bez opłat, czy ust. 11 — z opłatami wyrównawczymi)? To
+  determinuje, czy licząca się data to zamknięcie procedury (10a) czy
+  wymagalność opłaty (11) — pomylenie tych dwóch dat może prowadzić do
+  błędnego wyliczenia terminu deklaracji/odliczenia VAT. Potwierdzone w
+  5+ zgodnych źródłach: lexlege.pl, sip.lex.pl (t.j. aktualny), gofin.pl
+  (historia numeracji), isp-modzelewski.pl, poradnikprzedsiebiorcy.pl,
+  z przykładem realnej interpretacji indywidualnej KIS
+  (0114-KDIP1-2.4012.311.2023.2.RM) potwierdzającej praktyczne stosowanie
+  zasady ogólnej ust. 9.
 
 Checklist praktyczny:
 □ Czy USTALONO faktyczną datę DOKONANIA dostawy/wykonania usługi —
@@ -304,9 +335,32 @@ zidentyfikowanej w audycie pokrycia DR-06 (dotąd CAŁKOWICIE nieobecne
 ⭐ ODESŁANIA DO PRZEPISÓW SZCZEGÓLNYCH (poza art. 29a):
   □ art. 30a — podstawa OPODATKOWANIA dla WNT (odpowiednie
     stosowanie art. 29a ust. 1-1b, 6, 7, 10, 11, 17)
-  □ art. 30b — podstawa OPODATKOWANIA dla IMPORTU towarów (odrębny
-    mechanizm, POWIĄZANY z wartością CELNĄ — WYMAGA odrębnej
-    weryfikacji przy KONKRETNEJ sprawie celnej)
+  □ art. 30b — podstawa OPODATKOWANIA dla IMPORTU towarów — ✅
+    **ZWERYFIKOWANE (2026-08-19, F-35), pełna treść ust. 1-6
+    (Dz.U.2025.775 t.j.):**
+    - **Ust. 1 (zasada ogólna):** wartość CELNA + należne CŁO (+ akcyza,
+      jeśli towar akcyzowy).
+    - **Ust. 2 (uszlachetnianie BIERNE):** różnica między wartością celną
+      produktów przetworzonych/zamiennych dopuszczonych do obrotu A
+      wartością towarów wywiezionych czasowo, + należne cło (+ akcyza).
+    - **Ust. 3 (odprawa czasowa z częściowym zwolnieniem celnym):**
+      wartość celna + cło, które BYŁOBY należne, gdyby towar był objęty
+      procedurą dopuszczenia do obrotu (+ akcyza).
+    - **Ust. 3a (uszlachetnianie CZYNNE z art. 324 rozp. 2015/2447):**
+      WYŁĄCZNIE wartość celna (bez dodawania cła — bo w tej procedurze
+      cło zwykle nie jest wymierzane w standardowy sposób).
+    - **Ust. 4 (koszty dodatkowe):** DOLICZA się prowizje, opakowania,
+      transport, ubezpieczenie — O ILE NIE zostały już wliczone do
+      wartości celnej, PONIESIONE do PIERWSZEGO miejsca przeznaczenia
+      na terytorium kraju.
+    - **Ust. 6:** DOLICZA się także inne należności wymagane przez organy
+      celne z tytułu importu.
+    ⭐⭐ **Praktyczna pułapka:** ust. 3a (uszlachetnianie czynne) jest
+    WYJĄTKIEM od reguły "wartość celna + cło" — TU cła się NIE dodaje,
+    tylko sama wartość celna. Pomylenie z zasadą ogólną (ust. 1) prowadzi
+    do zawyżenia podstawy opodatkowania. Potwierdzone w 6+ zgodnych
+    źródłach: lexlege.pl, sip.lex.pl, mddp.pl, ifirma.pl, gofin.pl,
+    izbapodatkowa.pl.
   □ art. 30c — PRZYPADKI, w KTÓRYCH podstawy opodatkowania SIĘ NIE
     ustala (bony RÓŻNEGO przeznaczenia — POWIĄZANIE z Rozdziałem 2a
     ustawy, DOTĄD nieopisanym w TYM module)

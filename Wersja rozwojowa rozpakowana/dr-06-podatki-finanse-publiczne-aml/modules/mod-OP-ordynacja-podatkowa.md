@@ -172,6 +172,205 @@ tygodnia, z KONKRETNYM przykładem praktycznym].
 
 ---
 
+## 4b. ⭐⭐⭐ CZYNNOŚCI SPRAWDZAJĄCE (Dział V Op, art. 272-280) — dodano 2026-08-19 (F-70)
+
+✅ **ZWERYFIKOWANE, 6+ zgodnych źródeł** (arslege.pl, lexlege.pl,
+przepisy.gofin.pl [z pełnym łańcuchem nowelizacji do Dz.U.2026.846],
+ksiegowosc.infor.pl, podatki.biz, praca naukowa repozytorium.uwb.edu.pl
+z orzecznictwem WSA).
+
+```
+Art. 272 — ⭐⭐⭐ ZAMKNIĘTY, WĄSKI CEL czynności sprawdzających (organy
+  I instancji, z zastrzeżeniem art. 272a dla wymiany VAT-UE) — TRZY
+  cele, NIE WIĘCEJ:
+  (1) sprawdzenie TERMINOWOŚCI: składania deklaracji, wpłacania
+      podatków (w tym pobieranych przez płatników/inkasentów)
+  (2) sprawdzenie FORMALNEJ POPRAWNOŚCI dokumentów wymienionych w pkt 1
+  (3) ⭐⭐ USTALENIE STANU FAKTYCZNEGO w zakresie NIEZBĘDNYM do
+      stwierdzenia ZGODNOŚCI z przedstawionymi dokumentami
+  ⭐⭐⭐ **KLUCZOWE OGRANICZENIE POTWIERDZONE ORZECZNICTWEM** (WSA, cyt.
+  za repozytorium.uwb.edu.pl): czynności sprawdzające SĄ WĄSKIE Z
+  ZAŁOŻENIA — NIE dotyczą oceny wywiązywania się ze zobowiązań
+  podatkowych POWSTAJĄCYCH NA MOCY DECYZJI (to domena kontroli
+  podatkowej/postępowania, nie czynności sprawdzających). ⚠️ SYGNALIZOWANE
+  RYZYKO PRAKTYCZNE (ksiegowosc.infor.pl, głos doradców podatkowych):
+  część praktyków ocenia, że organy WYKORZYSTUJĄ szeroką interpretację
+  pkt 3 ("ustalenie stanu faktycznego") jako "DE FACTO UKRYTĄ KONTROLĘ
+  podatnika" pod płaszczykiem czynności sprawdzających — czyli
+  formalnie węższej, mniej sformalizowanej procedury niż pełna kontrola
+  podatkowa (bez uprawnień proceduralnych podatnika właściwych
+  kontroli). **To realny punkt sporny przy ocenie legalności działań
+  organu — jeśli czynności sprawdzające wykraczają poza sprawdzenie
+  ZGODNOŚCI z już złożonymi dokumentami i przechodzą w SAMODZIELNE
+  ustalanie okoliczności faktycznych, argument o przekroczeniu
+  kompetencji jest zasadny.**
+
+Art. 274 — TRYB PRZY BŁĘDACH W DEKLARACJI: jeśli czynności sprawdzające
+  wykażą, że deklaracja zawiera BŁĘDY RACHUNKOWE, INNE OCZYWISTE OMYŁKI,
+  lub wypełniono ją NIEZGODNIE z ustalonymi wymaganiami:
+  (a) kwota korekty ≤ 5000 zł → organ SAMODZIELNIE koryguje deklarację,
+      doręcza podatnikowi UWIERZYTELNIONĄ KOPIĘ skorygowanej deklaracji
+      → podatnik ma 14 DNI na wniesienie SPRZECIWU wobec korekty
+      (⭐ analogia do mechanizmu znanego z nakazu zapłaty — brak
+      sprzeciwu = korekta staje się skuteczna)
+  (b) kwota korekty > 5000 zł (lub inne przypadki) → organ WZZYWA
+      podatnika do dokonania korekty i złożenia wyjaśnień
+
+Art. 274a — BRAK DEKLARACJI / WĄTPLIWOŚCI: §1 — organ MOŻE zażądać
+  wyjaśnień przyczyn NIEZŁOŻENIA deklaracji lub wezwać do jej złożenia.
+  §2 — przy WĄTPLIWOŚCIACH co do poprawności ZŁOŻONEJ deklaracji, organ
+  MOŻE wezwać do wyjaśnień/uzupełnienia, WSKAZUJĄC przyczyny podania w
+  wątpliwość rzetelności danych.
+
+Art. 274b — PRZEDŁUŻENIE terminu ZWROTU podatku: jeśli przeprowadzenie
+  czynności sprawdzających zasadności zwrotu WYMAGA przedłużenia terminu
+  zwrotu — organ MOŻE POSTANOWIENIEM przedłużyć termin DO ZAKOŃCZENIA
+  czynności sprawdzających — ⭐ na to postanowienie SŁUŻY ZAŻALENIE.
+
+Art. 274c — ⭐ ŻĄDANIE OD KONTRAHENTÓW: organ, w związku z prowadzonym
+  postępowaniem podatkowym LUB kontrolą podatkową (⚠️ NIE samymi
+  czynnościami sprawdzającymi — dokładny zakres podmiotowy tego
+  uprawnienia NIE odczytany w pełni w tej sesji), może zażądać od
+  KONTRAHENTÓW podatnika prowadzących działalność gospodarczą
+  przedstawienia dokumentów w określonym zakresie.
+
+Art. 277 — ODESŁANIE: art. 274-276 stosuje się ODPOWIEDNIO przy
+  złożeniu deklaracji LUB WNIOSKU o zwrot podatku.
+
+Art. 278 — WYŁĄCZENIE organu: przy wyłączeniu organu od czynności
+  sprawdzających, deklaracja WCIĄŻ jest składana w organie
+  PODLEGAJĄCYM wyłączeniu — ten organ PRZEKAZUJE ją do organu
+  wyznaczonego, zachowując KOPIĘ.
+
+Art. 278a, 279 — ⛔ UCHYLONE (skreślone).
+
+Art. 280 — ODESŁANIE OGÓLNE do przepisów nieuregulowanych w tym
+  dziale: odpowiednio art. 143 (delegacja kompetencji organu), art.
+  193a (żądanie ksiąg podatkowych prowadzonych elektronicznie) oraz
+  rozdziały 1-3a, 5, 6, 9 działu IV (z wyłączeniem art. 171a — metryka
+  sprawy) i rozdziały 10, 14, 16, 22, 23 działu IV.
+```
+
+⭐⭐ **Wniosek praktyczny:** czynności sprawdzające to formalnie WĄŻSZE,
+mniej inwazyjne narzędzie niż kontrola podatkowa (sekcja niżej) — ALE
+istnieje udokumentowane ryzyko ich nadużywania jako "kontroli w
+przebraniu". Przy piśmie kwestionującym działania organu warto zbadać,
+czy czynności faktycznie mieściły się w wąskim, trzypunktowym katalogu
+z art. 272, czy przekroczyły go w stronę samodzielnego ustalania stanu
+faktycznego wykraczającego poza weryfikację już złożonych dokumentów.
+
+---
+
+## 4c. ⭐⭐⭐ KONTROLA PODATKOWA (Dział VI Op, art. 281-292) — dodano 2026-08-19 (F-70)
+
+✅ **ZWERYFIKOWANE, 8+ zgodnych źródeł** (arslege.pl, przepisy.gofin.pl,
+prawo.pl, oraz WIELOKROTNIE potwierdzone przez oficjalne strony 8+
+różnych Urzędów Skarbowych KAS — Piła, Warszawa-Wawer, Głowno, Opole,
+Sępólno Krajeńskie, Kalisz, Drugi Mazowiecki US — identyczny tekst
+oficjalny, najwyższa możliwa zgodność źródłowa dla treści RZĄD 2/3).
+
+```
+Art. 281 §2 — CEL: sprawdzenie, czy KONTROLOWANI wywiązują się z
+  obowiązków wynikających z przepisów PRAWA PODATKOWEGO (⭐ SZERSZY cel
+  niż wąskie czynności sprawdzające — tu bada się WYWIĄZYWANIE się z
+  obowiązków materialnych, nie tylko formalną poprawność dokumentów).
+
+Art. 282 — kontrolę podejmuje się Z URZĘDU (nie na wniosek podatnika).
+
+⭐⭐⭐ ZAWIADOMIENIE O ZAMIARZE WSZCZĘCIA — ZASADA I WYJĄTKI:
+  ZASADA: kontrolowanego zawiadamia się o zamiarze wszczęcia kontroli
+    (powiązane z art. 47 ust. 1 ustawy Prawo przedsiębiorców — analiza
+    prawdopodobieństwa naruszenia prawa).
+  ⭐⭐⭐ WYJĄTKI OD OBOWIĄZKU ZAWIADOMIENIA (art. 282c §1 — KATALOG
+    ZAMKNIĘTY, potwierdzony dosłownie, arslege.pl) — NIE zawiadamia się,
+    gdy kontrola:
+    a) dotyczy ZASADNOŚCI ZWROTU różnicy podatku/zwrotu podatku
+       naliczonego (VAT)
+    b) ma być wszczęta NA ŻĄDANIE organu prowadzącego postępowanie
+       PRZYGOTOWAWCZE o przestępstwo/przestępstwo skarbowe
+    c) dotyczy opodatkowania przychodów NIEZNAJDUJĄCYCH POKRYCIA w
+       ujawnionych źródłach lub POCHODZĄCYCH ZE ŹRÓDEŁ NIEUJAWNIONYCH
+    d) dotyczy NIEZGŁOSZONEJ do opodatkowania działalności gospodarczej
+    e) ma być podjęta na podstawie informacji z przepisów o
+       PRZECIWDZIAŁANIU PRANIU PIENIĘDZY i finansowaniu terroryzmu
+    f) wszczynana w trybie art. 284a (na podstawie samej legitymacji
+       służbowej — patrz niżej)
+    g) ma charakter DORAŹNY (⚠️ pełna definicja "charakteru doraźnego"
+       nie odczytana w tej sesji)
+  ⭐⭐ **Wniosek praktyczny:** to KATALOG ZAMKNIĘTY wyjątków — jeśli organ
+  wszczął kontrolę BEZ zawiadomienia, a sytuacja NIE mieści się w żadnym
+  z powyższych 7 punktów, to PROCEDURALNE naruszenie z realną wagą
+  dowodową/dyskwalifikującą materiał zebrany w takiej kontroli.
+
+Art. 281a — REPREZENTANT (osoba wyznaczona przez kontrolowanego,
+  np. na czas nieobecności): §2 — jeśli upoważnienie NIE STANOWI
+  inaczej, reprezentant jest uprawniony do CAŁEGO zakresu czynności:
+  odbioru zawiadomienia o zamiarze wszczęcia, wyrażenia zgody z art.
+  282b §3, odbioru upoważnienia do kontroli, ZAKOŃCZENIA kontroli,
+  złożenia wyjaśnień/zastrzeżeń do protokołu, wszystkich czynności
+  kontrolnych — DOMYŚLNIE SZEROKI zakres, chyba że upoważnienie go
+  zawęzi. §3 — przepisy o kontrolowanym stosuje się TAKŻE do osoby
+  wyznaczonej, z wyłączeniem art. 282c §1 pkt 2 i art. 285a §3.
+
+Art. 283 §5 / Art. 284b — ZAKRES kontroli WYZNACZONY upoważnieniem:
+  czynności kontrolne prowadzi się WYŁĄCZNIE w zakresie i CZASIE
+  określonym w upoważnieniu do przeprowadzenia kontroli.
+
+Art. 284 — ⭐⭐⭐ WSZCZĘCIE KONTROLI:
+  §1: NASTĘPUJE przez DORĘCZENIE kontrolowanemu (lub osobie z art.
+     281a) UPOWAŻNIENIA do przeprowadzenia kontroli ORAZ OKAZANIE
+     LEGITYMACJI SŁUŻBOWEJ (⭐ DWA łączne warunki formalne — brak
+     JEDNEGO z nich to wada wszczęcia). Kontrolowany ma obowiązek
+     wskazać osobę reprezentującą go w czasie nieobecności, jeśli nie
+     zrobił tego wcześniej w trybie art. 281a.
+  §3-4: przy NIEMOŻNOŚCI doręczenia upoważnienia/okazania legitymacji —
+     wszczęcie następuje przez UPŁYW TERMINU wskazanego w WEZWANIU do
+     stawienia się kontrolowanego (lub reprezentanta/pełnomocnika) w
+     siedzibie organu.
+
+Art. 284a §1 — ⭐⭐ TRYB NADZWYCZAJNY (na SAMĄ legitymację służbową,
+  BEZ uprzedniego doręczenia upoważnienia): dopuszczalny, gdy czynności
+  kontrolne są NIEZBĘDNE do PRZECIWDZIAŁANIA popełnieniu przestępstwa
+  skarbowego/wykroczenia skarbowego LUB ZABEZPIECZENIA DOWODÓW jego
+  popełnienia — ⭐ to jeden z powodów WYŁĄCZENIA obowiązku zawiadomienia
+  (art. 282c §1 pkt f wyżej).
+
+Art. 285 — OBECNOŚĆ przy czynnościach: czynności kontrolne dokonuje się
+  W OBECNOŚCI kontrolowanego/reprezentanta/pełnomocnika, CHYBA że
+  kontrolowany ZREZYGNUJE z prawa uczestniczenia — rezygnacja MUSI być
+  wyraźna, nie domniemana.
+
+Art. 285a, 285b — MIEJSCE czynności kontrolnych: CO DO ZASADY w
+  SIEDZIBIE kontrolowanego; za ZGODĄ lub NA WNIOSEK kontrolowanego
+  także w INNYM miejscu przechowywania dokumentacji lub związanym z
+  prowadzoną działalnością W GODZINACH jej prowadzenia; za ZGODĄ
+  kontrolowanego — w SIEDZIBIE organu podatkowego.
+
+⚠️ **Pozostaje do dociągnięcia:** pełna treść art. 282b (procedura
+zawiadomienia, terminy), art. 286-292 (szczegółowe uprawnienia
+kontrolujących, protokół kontroli, zastrzeżenia do protokołu, zakończenie
+kontroli) — NIE odczytane w pełni w tej sesji, punkt startowy przy
+konkretnej sprawie.
+```
+
+⭐⭐⭐ **Wniosek praktyczny — czynności sprawdzające vs kontrola
+podatkowa (rozróżnienie kluczowe dla oceny legalności działań organu):**
+```
+CZYNNOŚCI SPRAWDZAJĄCE          | KONTROLA PODATKOWA
+---------------------------------|--------------------------------
+Cel WĄSKI: terminowość +        | Cel SZEROKI: wywiązywanie się
+poprawność formalna + zgodność  | z obowiązków MATERIALNYCH prawa
+z dokumentami (art. 272)        | podatkowego (art. 281 §2)
+Mniej sformalizowana, mniej     | Formalna procedura: upoważnienie
+uprawnień proceduralnych        | + legitymacja, zasadniczo z
+podatnika                       | zawiadomieniem (7 wyjątków)
+Ryzyko: używana jako "ukryta    | Pełne uprawnienia proceduralne
+kontrola" wykraczająca poza     | podatnika (obecność, protokół,
+wąski katalog art. 272          | zastrzeżenia)
+```
+
+---
+
 ## 5. INTERPRETACJE PODATKOWE
 
 ```
@@ -317,10 +516,34 @@ STAN OD 1.10.2026 (⚡ ZMIANA FUNDAMENTALNA):
   □ Instytucje promotora i wspomagającego POŁĄCZONE w jedną — promotora
   □ Doprecyzowany katalog szczególnych cech rozpoznawczych (część
     usunięta jako przesłanki powstania obowiązku raportowania)
-  □ Doprecyzowany zakres podatków objętych MDR — obejmuje wszystkie
-    podatki w rozumieniu Op z pewnymi wyłączeniami (⚠️ dokładny katalog
-    wyłączeń NIEUSTALONY w tej sesji — zweryfikuj w ISAP przed pismem
-    powołującym się na konkretne wyłączenie)
+  □ ✅ **ZWERYFIKOWANE (2026-08-19, F-88):** doprecyzowany zakres podatków
+    objętych MDR — **wyłączone z zakresu przedmiotowego przepisów MDR:
+    podatek od towarów i usług (VAT) oraz podatek akcyzowy** (źródło:
+    studio.pwc.pl, oficjalny komunikat po podpisaniu ustawy przez
+    Prezydenta). Poza tym wyłączeniem — pozostała, fundamentalna zmiana
+    zakresu to NIE osobny "katalog wyłączeń podatkowych" per se, tylko
+    **strukturalne przedefiniowanie samego pojęcia "schemat podatkowy"**
+    (art. 86a §1 pkt 10 Op): po nowelizacji "schemat podatkowy" oznacza
+    WYŁĄCZNIE uzgodnienie TRANSGRANICZNE — uzgodnienie czysto krajowe (bez
+    elementu transgranicznego) **w ogóle przestaje być "schematem
+    podatkowym"** w rozumieniu ustawy od 1.10.2026, więc nie ma potrzeby
+    osobnego katalogu "wyłączeń" dla spraw krajowych — cała ta kategoria
+    wypada poza definicję u źródła. Dodatkowo usunięte: szczególne cechy
+    rozpoznawcze i część ogólnych cech rozpoznawczych WYKRACZAJĄCYCH POZA
+    dyrektywę DAC-6 (przybliżenie polskiego MDR do minimalnego zakresu
+    unijnego). **Próg podmiotowy (przypomnienie, bez zmian nowelizacją):**
+    obowiązek NIE dotyczy podmiotów poniżej progu **10 mln EUR**
+    przychodów/kosztów w rozumieniu art. 86a Op (⚠️ ten konkretny próg
+    10 mln EUR pochodzi z jednego źródła — kpitax.pl — i WYMAGA
+    krzyżowego potwierdzenia z progiem "8 mln PLN" wskazanym wyżej dla
+    stanu DO 30.09.2026; możliwe że to różne progi dla różnych
+    obowiązków [próg wewnętrznej procedury vs próg ogólny raportowania],
+    NIE zakładać tożsamości bez dalszej weryfikacji).
+  □ **Przepis przejściowy (potwierdzone, gofin/kpitax):** do 30.09.2026
+    obowiązują STARE zasady; schematy, dla których obowiązek informacyjny
+    MDR POWSTAŁ przed 1.10.2026, muszą być zaraportowane na STARYCH
+    zasadach nawet jeśli fizyczne zgłoszenie nastąpi później — data
+    powstania obowiązku, NIE data zgłoszenia, jest rozstrzygająca.
   □ Zwolnienie z obowiązku przekazania informacji o schemacie ze względu
     na obowiązek zachowania prawnie chronionej tajemnicy zawodowej
     (⚠️ powiązanie z interpretacją DTS5.8092.2.2025 niżej w wykazie —
@@ -337,11 +560,13 @@ STAN OD 1.10.2026 (⚡ ZMIANA FUNDAMENTALNA):
 
 Potwierdzone w 5+ zgodnych źródłach: Wolters Kluwer/LEX (Tomasz Krywan,
 przewodnik po zmianach), Crowe Polska, Gekko Taxens (z datą podpisu przez
-Prezydenta), kpitax.pl, portalsamorzadowy.pl (Sejm/PTWP). ⚠️ Dokładny
-katalog wyłączeń podatkowych z zakresu MDR i pełna nowa definicja
-"schematu podatkowego" (art. 86a i n. Op) NIE zweryfikowane źródłowo w
-tej sesji — wymaga odczytu pełnego tekstu ustawy w ISAP przed użyciem w
-piśmie stwierdzającym brak obowiązku raportowania konkretnego uzgodnienia.
+Prezydenta), kpitax.pl, portalsamorzadowy.pl (Sejm/PTWP), studio.pwc.pl
+(katalog wyłączeń VAT/akcyza). ✅ Katalog wyłączeń podatkowych ZAMKNIĘTY
+2026-08-19 (F-88) — patrz wyżej. ⚠️ Pozostaje: pełna nowa definicja
+"schematu podatkowego" (dokładna treść znowelizowanego art. 86a §1 pkt 10
+Op) NIE odczytana źródłowo w całości — struktura ustalona (transgraniczne
+only), ale dosłowne brzmienie przepisu wymaga odczytu ISAP przed
+cytowaniem w piśmie.
 ```
 
 ## TECHNIKI MANIPULACJI DOKUMENTACJĄ DLA OBNIŻENIA PODATKÓW — GRANICA

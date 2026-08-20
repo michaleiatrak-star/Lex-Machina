@@ -227,7 +227,249 @@ dla klientów o niskich dochodach
 
 ---
 
-## 4. ROZGRANICZENIE
+## 5. ⭐⭐⭐ SPRZECIW OD DECYZJI (Rozdz. 3a, art. 64a-64f) — dodano 2026-08-19 (F-64)
+
+✅ **ZWERYFIKOWANE, pełna treść, 7+ zgodnych źródeł** (lexlege.pl,
+dlajurysty.pl, przepisy.gofin.pl, rp.pl — 2 artykuły, wpia.uwm.edu.pl —
+artykuł naukowy z historią przepisu).
+
+```
+GENEZA: wprowadzony ustawą z 7.04.2017 (u.z.k.p.a.), obowiązuje od
+  1.06.2017 — reakcja na nadużywanie przez organy II instancji decyzji
+  KASATORYJNYCH (art. 138 §2 KPA — uchylenie i przekazanie do ponownego
+  rozpatrzenia) jako sposobu przewlekania postępowania.
+
+Art. 64a — ZAKRES: od decyzji WYDANEJ NA PODSTAWIE art. 138 §2 KPA
+  (decyzja kasatoryjna organu odwoławczego — uchylająca decyzję I
+  instancji i przekazująca sprawę do ponownego rozpatrzenia) — SKARGA
+  NIE PRZYSŁUGUJE — jedynym środkiem jest SPRZECIW OD DECYZJI.
+  ⭐ To zamknięty, obligatoryjny środek — nie wybór między skargą a
+  sprzeciwem, tylko WYŁĄCZENIE skargi na rzecz sprzeciwu w tej
+  kategorii spraw.
+
+Art. 64b — §1: do sprzeciwu STOSUJE SIĘ ODPOWIEDNIO przepisy o SKARDZE,
+  chyba że ustawa (ten rozdział) stanowi inaczej — odesłanie WEWNĘTRZNE
+  obejmujące całą PPSA i akty wykonawcze dot. skargi.
+  §2: SZCZEGÓLNE wymogi formalne sprzeciwu (lex specialis względem art.
+  57 §1 dot. zwykłej skargi) — ⭐ skarżący NIE MA obowiązku wskazywania
+  naruszenia PRAWA lub INTERESU PRAWNEGO (jak przy zwykłej skardze);
+  jeśli stawia zarzuty, powinny dotyczyć naruszenia PRZEPISÓW
+  POSTĘPOWANIA, które MOGŁO mieć wpływ na wynik sprawy (nie muszą to
+  być zarzuty wyłącznie dot. samego art. 138 §2 KPA, choć w praktyce
+  taki zarzut zwykle się pojawia).
+
+Art. 64c — TERMIN I TRYB:
+  §1: sprzeciw wnosi się w terminie **14 DNI** od doręczenia decyzji
+     (⭐ KRÓCEJ niż 30-dniowy termin zwykłej skargi).
+  §2: wnosi się ZA POŚREDNICTWEM organu, którego decyzja jest
+     przedmiotem sprzeciwu.
+  §3: termin ZACHOWANY także, gdy strona wniosła sprzeciw WPROST do
+     sądu przed jego upływem — wtedy sąd NIEZWŁOCZNIE wzywa organ do
+     przekazania kompletnych akt.
+  §4: organ przekazuje sprzeciw + akta sądowi w terminie **14 DNI** od
+     otrzymania (lub od otrzymania wezwania przy wariancie §3).
+  §5: organ MOŻE w terminie 14 dni UWZGLĘDNIĆ sprzeciw W CAŁOŚCI,
+     uchylając zaskarżoną decyzję i wydając NOWĄ na podstawie art. 138
+     §1 lub §4 KPA (czyli może sam naprawić błąd bez czekania na sąd).
+  §6-7: SANKCJA za bezczynność organu — sąd NA WNIOSEK skarżącego może
+     wymierzyć organowi GRZYWNĘ (wysokość jak w art. 154 §6 — skarga na
+     bezczynność z żądaniem grzywny); jeśli mimo grzywny organ nadal
+     nie przekaże akt, sąd rozpoznaje sprawę na podstawie ODPISU
+     sprzeciwu NADESŁANEGO PRZEZ SKARŻĄCEGO (obejście bezczynności
+     organu).
+
+⭐⭐ RÓŻNICE WZGLĘDEM ZWYKŁEJ SKARGI (potwierdzone wprost, rp.pl):
+  - termin 14 dni zamiast 30
+  - BRAK uprzywilejowanych terminów dla prokuratora/RPO/Rzecznika Praw
+    Dziecka (art. 53 §3 PPSA NIE ma tu zastosowania — układ odesłań na
+    to nie pozwala)
+  - BRAK "odpowiedzi na sprzeciw" jako instytucji procesowej (przy
+    zwykłej skardze organ składa odpowiedź na skargę — tu tego kroku
+    NIE MA w ogóle)
+  - ⚠️ inne różnice (np. dot. zasądzenia kosztów) zasygnalizowane w
+    źródle, ale nie w pełni wyliczone w tej sesji.
+
+Art. 64d — ROZPOZNANIE:
+  §1: sąd rozpoznaje sprzeciw NA POSIEDZENIU NIEJAWNYM w terminie
+     **30 DNI** od wpływu sprzeciwu (⭐ szybka ścieżka, bez rozprawy
+     jako zasada).
+  §2: sąd MOŻE (fakultatywnie) przekazać sprawę do rozpoznania NA
+     ROZPRAWIE.
+
+Art. 64e — ⭐⭐⭐ ZAKRES KOGNICJI SĄDU — WĄSKI: sąd OCENIA WYŁĄCZNIE
+  ISTNIENIE PRZESŁANEK do wydania decyzji kasatoryjnej z art. 138 §2
+  KPA — NIE bada MERYTORYCZNIE samej sprawy administracyjnej (stąd
+  tytuł źródła rp.pl: "sprzeciw od decyzji nie powoduje merytorycznego
+  załatwienia sprawy przez sąd"). To postępowanie kontrolne WĄSKIEGO
+  zakresu — sąd sprawdza TYLKO, czy organ II instancji miał PRAWO
+  wydać decyzję kasatoryjną (czy zachodziły przesłanki z art. 138 §2),
+  nie czy decyzja I instancji była słuszna.
+
+Art. 64f — SPRZECIW OD POSTANOWIENIA: analogiczny mechanizm dla
+  POSTANOWIEŃ, do których odpowiednie zastosowanie ma art. 138 §2 KPA —
+  od takiego postanowienia skarga NIE przysługuje, ale strona może
+  wnieść "sprzeciw od postanowienia" — przepisy art. 64b-64e stosuje
+  się ODPOWIEDNIO.
+```
+
+⭐⭐ **Wniosek praktyczny:** sprzeciw od decyzji to WĄSKIE narzędzie
+proceduralne — nie substytut zwykłej skargi merytorycznej, tylko szybka
+kontrola, czy organ II instancji NADUŻYŁ decyzji kasatoryjnej zamiast
+rozstrzygnąć sprawę samodzielnie. Jeśli sąd UWZGLĘDNI sprzeciw — SKUTEK
+to zwykle nakazanie organowi rozstrzygnięcia sprawy merytorycznie (nie
+samo rozstrzygnięcie przez sąd). Termin 14-dniowy jest ISTOTNIE krótszy
+niż przy zwykłej skardze — łatwa pułapka dla pełnomocnika przyzwyczajonego
+do standardowych 30 dni.
+
+⚠️ **Pozostaje do dociągnięcia:** pełny wykaz WSZYSTKICH różnic
+sprzeciwu względem skargi (rp.pl sygnalizuje więcej niż wymienione
+wyżej, w tym coś dot. zasądzania kosztów — treść urwana w źródle).
+
+---
+
+## 6. ⭐⭐⭐ WZNOWIENIE POSTĘPOWANIA SĄDOWOADMINISTRACYJNEGO (Dział VII, art. 270-285) — ✅ ZAMKNIĘTE 2026-08-19 (F-64)
+
+✅ **ZWERYFIKOWANE, pełna treść, 8+ zgodnych źródeł** (lexlege.pl,
+arslege.pl, dlajurysty.pl, przepisy.gofin.pl, lexplay.pl, prawo.pl,
+inforlex.pl — z orzeczeniem WSA Lublin II SA/Lu 1150/23). Odróżnić od
+wznowienia postępowania ADMINISTRACYJNEGO (KPA, organ) —
+`mod-KPA-tryby-nadzwyczajne-i-strategia.md` — to ODRĘBNA instytucja
+(wznowienie postępowania SĄDOWEGO przed WSA/NSA).
+
+```
+Art. 270 — ZASADA OGÓLNA: w przypadkach z tego działu można żądać
+  wznowienia postępowania ZAKOŃCZONEGO PRAWOMOCNYM orzeczeniem.
+
+⭐⭐ TRZY GRUPY PODSTAW WZNOWIENIA:
+
+GRUPA 1 — NIEWAŻNOŚĆ (art. 271):
+  1) w składzie sądu uczestniczyła OSOBA NIEUPRAWNIONA, albo orzekał
+     sędzia WYŁĄCZONY z mocy ustawy, a strona przed uprawomocnieniem
+     NIE MOGŁA domagać się wyłączenia
+  2) strona NIE MIAŁA zdolności sądowej/procesowej, NIE BYŁA należycie
+     reprezentowana, LUB wskutek naruszenia przepisów była POZBAWIONA
+     MOŻNOŚCI DZIAŁANIA — ⚠️ WYŁĄCZENIE: NIE MOŻNA żądać wznowienia,
+     jeśli przed uprawomocnieniem niemożność działania USTAŁA, brak
+     reprezentacji był PODNIESIONY w drodze zarzutu, albo strona
+     POTWIERDZIŁA dokonane czynności procesowe
+
+GRUPA 2 — WYROK TK / ORGANU MIĘDZYNARODOWEGO (art. 272):
+  §1: gdy TK orzekł o NIEZGODNOŚCI aktu normatywnego z Konstytucją,
+     umową międzynarodową lub ustawą, NA PODSTAWIE którego wydano
+     orzeczenie
+  (dodatkowo, wg lexlege): także gdy potrzeba wznowienia wynika z
+     ROZSTRZYGNIĘCIA organu międzynarodowego działającego na podstawie
+     ratyfikowanej umowy międzynarodowej
+  §2: TERMIN 3-miesięczny liczy się OD DNIA WEJŚCIA W ŻYCIE wyroku TK
+     (⭐ nie od dnia jego ogłoszenia — rozróżnienie istotne praktycznie)
+
+GRUPA 3 — INNE PRZYCZYNY (art. 273):
+  §1: (1) orzeczenie oparte na dokumencie PODROBIONYM/PRZEROBIONYM albo
+      na SKAZUJĄCYM wyroku karnym NASTĘPNIE uchylonym; (2) orzeczenie
+      UZYSKANE za pomocą PRZESTĘPSTWA
+  §2: PÓŹNIEJSZE WYKRYCIE okoliczności faktycznych LUB środków
+      dowodowych, które MOGŁYBY mieć wpływ na wynik sprawy, a z których
+      strona NIE MOGŁA skorzystać w poprzednim postępowaniu — ⭐⭐
+      POTWIERDZONE ORZECZNICTWEM (WSA Lublin, II SA/Lu 1150/23, 2024):
+      okoliczności/dowody MUSZĄ być RZECZYWISTE w chwili wydania
+      zaskarżonego orzeczenia — skarżący musi wykazać, że ISTNIAŁY W
+      DNIU WYDANIA orzeczenia (nie powstały PÓŹNIEJ) i miały WPŁYW na
+      treść rozstrzygnięcia. To częsty powód ODDALENIA skarg o
+      wznowienie — strony mylą "nowe dowody" (powstałe później, NIE
+      kwalifikują się) z "nowo wykrytymi dowodami istniejącymi już
+      wcześniej" (kwalifikują się).
+  §3: PÓŹNIEJSZE WYKRYCIE prawomocnego orzeczenia DOTYCZĄCEGO TEJ SAMEJ
+      sprawy — sąd bada Z URZĘDU wszystkie prawomocne orzeczenia dot.
+      tej sprawy, nie tylko zaskarżone.
+
+WŁAŚCIWOŚĆ SĄDU (art. 274, wg lexplay.pl):
+  - dla NIEWAŻNOŚCI (grupa 1): sąd, który WYDAŁ zaskarżone orzeczenie;
+    jeśli zaskarżono orzeczenia OBU instancji — właściwy NSA
+  - dla INNYCH podstaw (grupy 2-3): sąd, który OSTATNIO orzekał w
+    sprawie
+
+Art. 275 — SĘDZIA WYŁĄCZONY: sędzia, którego udziału/zachowania w
+  POPRZEDNIM postępowaniu dotyczy skarga o wznowienie, jest Z MOCY
+  PRAWA wyłączony od orzekania w postępowaniu WZNOWIENIOWYM.
+
+Art. 276 — BRAK WSTRZYMANIA WYKONANIA: wniesienie skargi o wznowienie
+  NIE TAMUJE wykonania zaskarżonego orzeczenia (⭐ różnica od typowego
+  skutku zawieszającego niektórych innych środków). WYJĄTEK: przy
+  UPRAWDOPODOBNIENIU groźby NIEPOWETOWANEJ SZKODY, sąd MOŻE wstrzymać
+  wykonanie — postanowienie może zapaść na posiedzeniu NIEJAWNYM.
+
+Art. 277 — TERMIN: skargę o wznowienie WNOSI SIĘ w terminie
+  **3-MIESIĘCZNYM**. Liczony OD DNIA, w którym strona DOWIEDZIAŁA SIĘ
+  o PODSTAWIE wznowienia; a gdy podstawą jest pozbawienie możności
+  działania/brak reprezentacji — od dnia, w którym o ORZECZENIU
+  dowiedziała się strona/jej organ/przedstawiciel ustawowy.
+
+Art. 278 — ⭐⭐ TERMIN GRANICZNY (prekluzyjny, poza zwykłym 3-miesięcznym):
+  PO UPŁYWIE 5 LAT od uprawomocnienia się orzeczenia NIE MOŻNA żądać
+  wznowienia — WYJĄTEK: strona była POZBAWIONA możności działania LUB
+  NIE BYŁA należycie reprezentowana (te dwie podstawy z grupy 1 pkt 2
+  NIE PODLEGAJĄ 5-letniemu ograniczeniu).
+
+Art. 279 — WYMOGI FORMALNE skargi: oznaczenie ZASKARŻONEGO orzeczenia,
+  PODSTAWA wznowienia i jej UZASADNIENIE, okoliczności stwierdzające
+  ZACHOWANIE TERMINU do wniesienia skargi, oraz WNIOSEK o UCHYLENIE lub
+  ZMIANĘ zaskarżonego orzeczenia.
+
+Art. 280 (odesłanie proceduralne) — do skargi o wznowienie STOSUJE SIĘ
+  ODPOWIEDNIO przepisy o postępowaniu przed sądem PIERWSZEJ instancji,
+  chyba że przepisy tego działu stanowią inaczej; gdy właściwy jest
+  NSA — odpowiednie stosowanie przepisów o postępowaniu przed NSA.
+
+Art. 281-282 (dwuetapowe rozpoznanie) — sąd NAJPIERW rozstrzyga o
+  DOPUSZCZALNOŚCI wznowienia, a DOPIERO PO stwierdzeniu dopuszczalności
+  bada podstawy wznowienia i orzeka CO DO ISTOTY sprawy (⚠️ dokładna
+  numeracja tego dwuetapowego mechanizmu NIE potwierdzona precyzyjnie
+  w tej sesji — struktura ogólna potwierdzona przez art. 283 §2 niżej).
+
+Art. 283 — SKUTKI PO PONOWNYM ROZPOZNANIU:
+  §2: sąd (a) ODDALA skargę o wznowienie, ALBO (b) UWZGLĘDNIA ją,
+     stosując odpowiednio przepisy o postępowaniu przed sądem, który
+     wznowił postępowanie, ALBO (c) UCHYLA zaskarżone orzeczenie i
+     SKARGĘ ODRZUCA, ALBO (d) postępowanie UMARZA.
+  §3: przy podstawie z art. 273 §3 (późniejsze wykrycie innego
+     prawomocnego orzeczenia w tej samej sprawie) — sąd UCHYLA JEDNO z
+     orzeczeń, utrzymując w mocy DRUGIE, ALBO uchyla WSZYSTKIE i orzeka
+     CO DO ISTOTY, ALBO przekazuje sprawę właściwemu WSA do ponownego
+     rozpoznania.
+
+Art. 284 — ⭐ ZAKAZ WZNOWIENIA WZNOWIONEGO: NIEDOPUSZCZALNE jest DALSZE
+  wznowienie postępowania ZAKOŃCZONEGO prawomocnym orzeczeniem wydanym
+  NA SKUTEK skargi o wznowienie (jednorazowość instytucji) — WYJĄTEK:
+  gdy nowa skarga oparta jest na podstawie z art. 272 (TK/organ
+  międzynarodowy) — tę PODSTAWĘ można powołać nawet po wcześniejszym
+  wznowieniu z innej przyczyny.
+
+Art. 285 — (przepis zamykający dział, ⚠️ dokładna treść nie odczytana w
+  tej sesji).
+```
+
+⭐⭐ **Wniosek praktyczny:**
+```
+DWA RÓŻNE TERMINY do pilnowania:
+  - 3 MIESIĄCE od dowiedzenia się o podstawie (art. 277) — termin
+    zwykły, LICZONY SUBIEKTYWNIE (od wiedzy strony)
+  - 5 LAT od uprawomocnienia (art. 278) — termin GRANICZNY, OBIEKTYWNY,
+    z wąskim wyjątkiem (pozbawienie możności działania/brak
+    reprezentacji) — po tym terminie wznowienie jest WYKLUCZONE
+    niezależnie od tego, kiedy strona dowiedziała się o podstawie
+
+NAJCZĘSTSZY BŁĄD (potwierdzony orzecznictwem): mylenie podstawy z art.
+  273 §2 (nowo WYKRYTE dowody ISTNIEJĄCE już w chwili wydania
+  orzeczenia) z próbą powołania się na dowody/okoliczności, które
+  POWSTAŁY dopiero PÓŹNIEJ — te drugie NIE kwalifikują się do
+  wznowienia w ogóle.
+```
+
+⚠️ **Pozostaje do dociągnięcia:** dokładna, dosłowna treść art. 279-282
+i 285 (struktura dwuetapowego rozpoznania potwierdzona tylko pośrednio) —
+do odczytania przy konkretnej sprawie wymagającej precyzyjnego cytatu.
+
+---
 
 | Temat | Gdzie |
 |---|---|
@@ -235,6 +477,40 @@ dla klientów o niskich dochodach
 | Wznowienie postępowania ADMINISTRACYJNEGO (KPA) | `mod-KPA-tryby-nadzwyczajne-i-strategia.md` — ODRĘBNA instytucja od wznowienia SĄDOWOADMINISTRACYJNEGO (Dział VII PPSA, poza zakresem tego modułu) |
 | Skarga kasacyjna do SN w sprawach ZUS (inny system, KPC) | `mod-SUS-ZUS-ubezpieczenia-spoleczne.md` — NIE mylić z tym modułem (NSA ≠ SN) |
 | Poręczenie majątkowe/kaucja w postępowaniu KARNYM | DR-03, `mod-poreczenie-majatkowe-kaucja-karna.md` — inny system prawny |
+
+## 7. SKARGA NA OPINIĘ TRANSGRANICZNĄ — ZMIANA TERMINU (naprawa F-88,
+punkt PPSA, dodano 2026-08-20)
+
+```
+⚡ Ustawa z 29.05.2026 o zmianie ustawy — Ordynacja podatkowa oraz
+  niektórych innych ustaw (Dz.U. 2026.846, ta sama ustawa co zmiany MDR
+  opisane w `mod-OP-ordynacja-podatkowa.md` sekcja 6a), w życie
+  1.10.2026, zmienia RÓWNIEŻ PPSA.
+
+⭐⭐ DOPRECYZOWANIE TERMINU na wniesienie skargi do WSA na OPINIĘ
+  TRANSGRANICZNĄ (dot. schematów podatkowych transgranicznych w
+  rozumieniu znowelizowanego art. 86a Op, patrz moduł OP sekcja 6a) I
+  na ODMOWĘ jej wydania (⚠️ [NIEWERYFIKOWANE RZĄD 1] — źródło: OSR
+  projektu ustawy, streszczenie ogólne "doprecyzowanie regulacji
+  określającej termin", BEZ dokładnego numeru artykułu PPSA ani
+  dokładnej treści nowego brzmienia terminu — ISAP zablokowany w tym
+  środowisku, ten sam znany limit narzędziowy co F-88 dla funduszy
+  inwestycyjnych/instrumentów finansowych, patrz niżej)
+
+⚠️ KONTEKST SYSTEMOWY: skarga na opinię transgraniczną to podkategoria
+  skargi na pisemną interpretację/opinię z art. 3 §2 pkt 4a-4b PPSA
+  (przywoływana już pośrednio przy okazji zakresu kognicji WSA —
+  ⚠️ dokładne umiejscowienie "opinii w sprawie opodatkowania
+  wyrównawczego" i "opinii transgranicznej" w katalogu art. 3 §2 NIE
+  było dotąd przedmiotem tego modułu, punkt startowy)
+
+⚠️ POZOSTAJE CAŁKOWICIE NIEOPRACOWANE w ramach F-88 (limit narzędziowy
+  ISAP/dziennikustaw.gov.pl/api.sejm.gov.pl — ROBOTS_DISALLOWED w tym
+  środowisku, ten sam co przy adwokaturze/radcach w sesji 19w-19y):
+  pozostałe zmiany PPSA wprowadzone ustawą 2026.846 poza tym jednym
+  doprecyzowaniem terminu — zakres nowelizacji PPSA mógł być szerszy,
+  NIE potwierdzone w tej sesji.
+```
 
 ## ŁĄCZ Z
 
@@ -247,13 +523,12 @@ dla klientów o niskich dochodach
 
 ## ⚠️ POZOSTAJE DO POGŁĘBIENIA (jawnie oznaczone, poza zakresem tej naprawy)
 - PPSA NADAL nie ma pełnego, systematycznego pokrycia całej struktury
-  (11 działów) — ten moduł domyka TYLKO 3 najpilniejsze punkty z
-  rankingu raportu zewnętrznego. Pozostałe rekomendowane priorytety
-  wg tego samego raportu: sprzeciw od decyzji/postanowienia (Rozdz.
-  3a, art. 64a-64e), posiedzenia sądowe (Rozdz. 7, art. 90-114),
+  (11 działów). ✅ Sprzeciw od decyzji (art. 64a-64e) ZAMKNIĘTY
+  2026-08-19 (sekcja 5 wyżej). Pozostałe rekomendowane priorytety wg
+  raportu zewnętrznego: posiedzenia sądowe (Rozdz. 7, art. 90-114),
   wznowienie postępowania sądowoadministracyjnego (Dział VII, art.
-  270-285), pełne opracowanie orzeczeń sądowych poza już opisanym
-  wycinkiem (Rozdz. 10, art. 132-144).
+  270-285 — sekcja 6 wyżej, wciąż otwarte), pełne opracowanie orzeczeń
+  sądowych poza już opisanym wycinkiem (Rozdz. 10, art. 132-144).
 - Dokładne wyłączenia z art. 173 §1 (odesłania do art. 58 §1 pkt 2-4,
   161 §1, 220 §3) — nie zbadane szczegółowo.
 - Status art. 263 (możliwe uchylenie) — do potwierdzenia w ISAP.

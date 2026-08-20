@@ -69,6 +69,22 @@ EWIDENCYJNE — art. 109, 109a, 110 ustawy VAT
 
 ⭐⭐⭐ KOREKTA EWIDENCJI I KARA 500 ZŁ — ŚCIEŻKA KROK PO KROKU
   (art. 109 ust. 3e–3l):
+  ⛔⛔ **PROPAGACJA F-88 (2026-08-19): CAŁY TEN MECHANIZM ZOSTAJE ZNIESIONY
+  OD 1.01.2027** — ustawa z 29.05.2026 o zmianie ustawy Ordynacja podatkowa
+  oraz niektórych innych ustaw (Dz.U. 2026 poz. 846, podpisana 19.06.2026),
+  wśród licznych obszarów tego omnibusa, przenosi zasady korekty ewidencji
+  JPK_VAT z ustawy o VAT do Ordynacji podatkowej i ujednolica je z zasadami
+  dla JPK_CIT/PIT. **Termin wejścia w życie tej konkretnej zmiany to
+  1.01.2027 — inny niż główny termin omnibusa (1.10.2026)**, nie mylić.
+  Dwa konkretne skutki potwierdzone (Rząd 2/3, zrozumvat.pl): (a) 14-dniowy
+  obowiązek przesłania korekty z ust. 3e ZOSTAJE ZNIESIONY — korekta ma
+  stać się UPRAWNIENIEM podatnika, nie obowiązkiem; (b) kara pieniężna
+  500 zł za błąd z ust. 3h ZOSTAJE ZLIKWIDOWANA. ⚠️ Dokładne nowe brzmienie
+  przepisów w Ordynacji podatkowej (który dział/artykuł przejmie tę
+  regulację) NIE ustalone w tej sesji — do sprawdzenia przy sprawie
+  dotyczącej korekt JPK z terminem po 1.01.2027. **Do tego czasu (do
+  31.12.2026) opisana niżej procedura art. 109 ust. 3e-3l NADAL
+  OBOWIĄZUJE w pełni** — moduł pozostaje aktualny dla spraw bieżących.
   1) ust. 3e — podatnik ma **14 DNI** na przesłanie korekty ewidencji od
      dnia STWIERDZENIA błędów/niezgodności ze stanem faktycznym LUB od
      dnia ZMIANY danych zawartych w przesłanej ewidencji

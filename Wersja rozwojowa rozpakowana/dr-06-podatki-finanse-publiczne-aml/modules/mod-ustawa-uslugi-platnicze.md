@@ -50,12 +50,35 @@ użytkownika, kontynuacja badania pokrycia)
   zezwolenie — ALBO SKŁADAJĄC wniosek PONOWNIE, ALBO WYKAZUJĄC
   zgodność Z nowymi standardami PSD3
 
-⭐ KLUCZOWE OBSZARY ZMIAN merytorycznych (⚠️ NIE w pełni zbadane w
-  tej sesji, SYGNALIZOWANE jako punkt startowy): objęcie INSTYTUCJI
-  pieniądza ELEKTRONICZNEGO PEŁNYM zakresem przepisów O instytucjach
-  płatniczych, nowa ODPOWIEDZIALNOŚĆ dostawcy usług PŁATNICZYCH przy
-  "OSZUSTWACH na bank", OBOWIĄZKOWA weryfikacja odbiorcy W KAŻDYM
-  poleceniu PRZELEWU, wzmocnienie WALKI z oszustwami PŁATNICZYMI
+⭐ KLUCZOWE OBSZARY ZMIAN merytorycznych — ✅ **CZĘŚCIOWO DOPRECYZOWANE
+  (2026-08-19, F-35):** objęcie INSTYTUCJI pieniądza ELEKTRONICZNEGO
+  PEŁNYM zakresem przepisów O instytucjach płatniczych, nowa
+  ODPOWIEDZIALNOŚĆ dostawcy usług PŁATNICZYCH przy "OSZUSTWACH na bank",
+  OBOWIĄZKOWA weryfikacja odbiorcy W KAŻDYM poleceniu PRZELEWU (art. 50 i
+  57 PSR — od 27 miesięcy, PÓŹNIEJ niż reszta rozporządzenia), wzmocnienie
+  WALKI z oszustwami PŁATNICZYMI.
+  ⭐⭐⭐ **NOWE USTALENIE — ROZSZERZENIE ZAKRESU PODMIOTOWEGO:** art. 2
+  ust. 1a PSR (tekst kompromisowy Rady z 17.04.2026, dok. 8221/26)
+  **po raz pierwszy w historii regulacji płatniczych UE obejmuje częścią
+  przepisów PODMIOTY SPOZA tradycyjnego sektora finansowego**:
+  dostawców usług komunikacji elektronicznej (operatorzy telekomunikacyjni),
+  dostawców hostingu, operatorów bardzo dużych platform internetowych i
+  wyszukiwarek (VLOP/VLOSE w rozumieniu art. 33 rozporządzenia DSA
+  2022/2065), oraz producentów oryginalnego sprzętu mobilnego (OEM). ⭐
+  To fundamentalne rozszerzenie — regulacja płatnicza sięga poza
+  klasycznych dostawców usług płatniczych do infrastruktury cyfrowej
+  ogólnie, prawdopodobnie w reakcji na rolę dużych platform w
+  ekosystemie płatności mobilnych/wbudowanych. ⚠️ DOKŁADNY zakres, w
+  jakim przepisy PSR dotyczą tych nowych kategorii podmiotów (całość czy
+  tylko wybrane obowiązki) — NIE ustalony w pełni w tej sesji, wymaga
+  odczytu pełnej treści art. 2 ust. 1a po formalnej publikacji.
+  Potwierdzone (2026-08-19): legalgeek.pl (cykl dedykowany PSD3/PSR, z
+  cytatem tekstu kompromisowego), dudkowiak.pl (aktualizacja z 3
+  tygodni wstecz — status BEZ ZMIAN względem poprzedniej weryfikacji z
+  11.08.2026: nadal etap weryfikacji prawno-językowej + formalne
+  przyjęcie, publikacja w Dz.Urz. UE nadal "spodziewana druga połowa
+  2026", harmonogram 21/27 miesięcy → realne wejście w życie ~2028
+  POTWIERDZONY BEZ ZMIAN).
 
 Potwierdzone w 6+ zgodnych, AKTUALNYCH źródłach (dudkowiak.pl [×2,
 NAJŚWIEŻSZE, sprzed 2 tygodni, z DOKŁADNYMI datami i numerami

@@ -349,12 +349,33 @@ RZĄD 1 — isap.sejm.gov.pl: t.j. Dz.U. 2025 poz. 775
 RZĄD 2 — struktura i brzmienie: lexlege.pl / arslege.pl (stan 12.08.2026)
 RZĄD 2 — praktyka art. 18/106c: prawo.pl (01.2026), poradnikprzedsiebiorcy.pl
   (04.2026 i 03.2026 — wątek KSeF a komornik), porozmawiajmyopodatkach.pl,
-  interpretacje KIS (m.in. 0114-KDIP1-3.4012.200.2019.2.JF — ⛔ zweryfikuj
-  w EUREKA przed powołaniem)
+  interpretacje KIS (m.in. 0114-KDIP1-3.4012.200.2019.2.JF — ⛔⛔ SPRAWDZONE
+  2026-08-19 (F-19), NIE POTWIERDZONE: wielokrotne zapytania (dokładna
+  sygnatura, warianty numeru) NIE zwróciły tej pozycji w żadnym z
+  sip.lex.pl/OpenLEX, interpretacje.gofin.pl, inforlex.pl — zwracane były
+  WYŁĄCZNIE sąsiednie numery z tej samej serii 2019 r. (170, 233, 315,
+  394...). WYSOKIE ryzyko, że sygnatura jest BŁĘDNA lub nieistniejąca.
+  ⛔ USUNIĘTE Z UŻYCIA — NIE POWOŁYWAĆ w żadnym piśmie. Jeśli teza jest
+  potrzebna merytorycznie, znaleźć odpowiednik od nowa przez EUREKA)
 RZĄD 2 — kasy: prawo.pl (10.2025), gofin.pl (obowiązek zwrotu ulgi),
   ifirma.pl (art. 111 ust. 6ka), infor.pl; rozporządzenie Dz.U. 2019 poz. 820
 RZĄD 2 — trójstronne: interpretacja KIS 0114-KDIP1-2.4012.141.2025.1.RM
-  (model czteropodmiotowy — ⛔ zweryfikuj w EUREKA), zrozumvat.pl (04.2025),
+  ✅ POTWIERDZONA 2026-08-19 (F-19) — inforlex.pl, interpretacja z
+  14.04.2025, dot. wewnątrzwspólnotowej transakcji trójstronnej, model
+  czteropodmiotowy — TREŚĆ ZGODNA z opisem w module. BEZPIECZNA do
+  powołania.
+  ✅ F-19 ZAMKNIĘTA W CAŁOŚCI 2026-08-20 — pozostałe 3 punkty (c) TSUE
+  art. 52 ust. 1 → `mod-VAT-import-towarow-i-zwolnienia-importowe.md`
+  (sygn. C-405/24 + NSA I FSK 110/21, POTWIERDZONE); (d) TSUE syndyk/
+  rachunek VAT → `mod-VAT-kursy-walut-rachunek-VAT-tax-free.md` (sygn.
+  C-709/22, POTWIERDZONE); (f) WSA Łódź wykreślenie z rejestru →
+  `mod-VAT-rejestracja-zaplata-metoda-kasowa-likwidacja.md` (I SA/Łd
+  190/20 i 417/20 POTWIERDZONE, wzmocnione uchwałą 7 sędziów NSA
+  I FPS 3/23). Punkt (e) — sankcja 36-miesięczna art. 33a — mechanizm
+  ustawowy potwierdzony, ALE konkretna sygnatura NSA "linii orzeczniczej"
+  NIE znaleziona — pozostaje jako uwaga w module import towarów, NIE
+  jako osobna flaga (element bez samodzielnej wagi blokującej).
+  (model czteropodmiotowy), zrozumvat.pl (04.2025),
   poradnikprzedsiebiorcy.pl (04.2026), isp-modzelewski.pl
 ⛔ ŻADNA sygnatura ani interpretacja z tego modułu NIE MOŻE trafić do pisma
   procesowego bez uprzedniej weryfikacji przez `orzeczenia-sadowe-v2` /

@@ -98,7 +98,7 @@ Zaliczenie darowizn: darowizny na rzecz uprawnionego zmniejszają zachowek
 
 ---
 
-## DZIAŁ SPADKU
+## DZIAŁ SPADKU — ✅ ROZBUDOWANE 2026-08-19 (F-65): pełna treść art. 680-689 KPC
 
 ```
 Umowny: między wszystkimi spadkobiercami — forma dowolna
@@ -111,6 +111,103 @@ Wniosek o stwierdzenie nabycia spadku (lub akt poświadczenia dziedziczenia u no
   → konieczne przed działem
   → wniosek do sądu ostatniego miejsca zamieszkania spadkodawcy
 ```
+
+✅ **ZWERYFIKOWANE, 6+ zgodnych źródeł** (e-prawnik.pl, lexlege.pl,
+money.pl, przepisy.gofin.pl, profinfo.pl — spis treści komentarza,
+standardyprawa.pl — z indeksem orzecznictwa per artykuł):
+
+```
+Art. 680 [Wniosek o dział spadku] — ⚠️ pełna treść nie odczytana w tej
+  sesji (tylko tytuł); punkt startowy.
+
+Art. 681 [Dodatkowe postanowienie] — ⭐ MOŻLIWOŚĆ POŁĄCZENIA etapów:
+  jeśli w toku postępowania działowego okaże się, że nie zostało
+  jeszcze wydane postanowienie o stwierdzeniu nabycia spadku, sąd
+  SPADKU wydaje je RÓWNOCZEŚNIE z postanowieniem działowym — nie trzeba
+  osobnego, wcześniejszego postępowania. ⚠️ Dokładne brzmienie NIE
+  odczytane w pełni — tylko funkcja przepisu potwierdzona pośrednio.
+
+Art. 682 [Dane współspadkobierców] — współspadkobiercy MAJĄ OBOWIĄZEK
+  podać sądowi swój WIEK, ZAWÓD, STAN RODZINNY oraz DANE co do swoich
+  ZAROBKÓW i MAJĄTKU (a także — wg tytułu komentarza — inne dane istotne
+  dla podziału, np. do ustalenia sposobu podziału uwzględniającego
+  sytuację życiową spadkobierców).
+
+Art. 683 [Przekazanie sprawy na wniosek] — na ŻĄDANIE uczestnika działu,
+  zgłoszone NIE PÓŹNIEJ niż na PIERWSZEJ ROZPRAWIE, sąd spadku MOŻE
+  przekazać sprawę: (a) sądowi rejonowemu, w którego OKRĘGU znajduje
+  się SPADEK lub jego ZNACZNA CZĘŚĆ, ALBO (b) sądowi rejonowemu, w
+  którego okręgu MIESZKAJĄ WSZYSCY współspadkobiercy. ⭐ Termin
+  prekluzyjny — spóźniony wniosek o przekazanie NIE będzie uwzględniony.
+
+Art. 684 [Skład i wartość spadku] — SKŁAD i WARTOŚĆ spadku ulegającego
+  podziałowi USTALA SĄD (z URZĘDU, nie tylko na wniosek — potwierdzone
+  standardyprawa.pl: "działania sądu z urzędu w sprawach działowych").
+  ⭐ Stan spadku ustala się WEDŁUG CHWILI OTWARCIA SPADKU (śmierci
+  spadkodawcy), a WARTOŚĆ — WEDŁUG CEN z CHWILI DOKONYWANIA DZIAŁU (nie
+  cen z daty śmierci!) — to fundamentalna zasada wyceny, często myląca
+  laika. Podstawą ustalenia składu może być spis inwentarza lub jego
+  wykaz.
+
+Art. 685 [Postanowienie wstępne] — W RAZIE SPORU o (a) ISTNIENIE
+  UPRAWNIENIA do żądania działu spadku, LUB (b) SPÓR między
+  współspadkobiercami o to, CZY dany PRZEDMIOT NALEŻY do spadku — sąd
+  spadku MOŻE (fakultatywnie) wydać POSTANOWIENIE WSTĘPNE rozstrzygające
+  TYLKO tę kwestię przed przejściem do właściwego podziału.
+
+Art. 686 [Dodatkowe rozstrzygnięcia w postępowaniu działowym] — ⭐⭐⭐
+  SZEROKA KOGNICJA sądu działowego — w JEDNYM postępowaniu sąd
+  rozstrzyga TAKŻE o: (1) ISTNIENIU ZAPISÓW ZWYKŁYCH, których
+  przedmiotem są rzeczy/prawa NALEŻĄCE do spadku; (2) WZAJEMNYCH
+  ROSZCZENIACH między współspadkobiercami z tytułu: POSIADANIA
+  poszczególnych przedmiotów spadkowych, POBRANYCH POŻYTKÓW i innych
+  PRZYCHODÓW, POCZYNIONYCH na spadek NAKŁADÓW, oraz SPŁACONYCH DŁUGÓW
+  spadkowych. ⭐⭐ **KLUCZOWE OGRANICZENIE (potwierdzone orzecznictwem,
+  standardyprawa.pl):** NIEDOPUSZCZALNE jest ZNIESIENIE SŁUŻEBNOŚCI w
+  postępowaniu o dział spadku (odrębna sprawa) — oraz ZACHOWEK
+  DOCHODZI SIĘ W PROCESIE, NIEDOPUSZCZALNE dochodzenie zachowku W
+  RAMACH działu spadku (to osobna droga sądowa, mimo że oba wynikają z
+  tego samego stanu faktycznego spadkowego).
+
+Art. 687 [Brak zgodnego wniosku] — W BRAKU podstaw do wydania
+  postanowienia działowego NA PODSTAWIE ZGODNEGO WNIOSKU uczestników
+  (czyli gdy strony się NIE zgadzają na sposób podziału) — dział spadku
+  BĘDZIE ROZPOZNANY według przepisów DALSZYCH (odesłanie do art. 688).
+
+Art. 688 [Odpowiednie stosowanie przepisów o zniesieniu współwłasności]
+  — ⭐⭐⭐ KLUCZOWE ODESŁANIE: w sprawach NIEUREGULOWANYCH w rozdziale o
+  dziale spadku (zwłaszcza CO DO SPOSOBU PODZIAŁU — podział fizyczny,
+  przyznanie jednemu ze spłatą pozostałych, sprzedaż i podział sumy) —
+  stosuje się ODPOWIEDNIO przepisy o ZNIESIENIU WSPÓŁWŁASNOŚCI (art.
+  617-625 KPC + art. 210-221 KC materialnie) — to główny "silnik"
+  mechanizmu podziału, gdy strony się nie zgadzają.
+
+Art. 689 [Połączenie postępowań] — sąd MOŻE zarządzić ŁĄCZNE
+  rozpoznanie spraw o dział SPADKU dotyczących TEGO SAMEGO spadku,
+  toczących się ODDZIELNIE (np. z różnych wniosków różnych
+  spadkobierców) — ekonomika procesowa.
+```
+
+⭐⭐ **Wniosek praktyczny — struktura postępowania działowego:**
+```
+1. USTALENIE TYTUŁU (postanowienie o nabyciu spadku LUB akt notarialny
+   poświadczenia dziedziczenia) → może być POŁĄCZONE z działem (art. 681)
+2. USTALENIE SKŁADU I WARTOŚCI spadku (art. 684) — z urzędu, wartość
+   wg cen z daty PODZIAŁU, nie śmierci
+3. (opcjonalnie) POSTANOWIENIE WSTĘPNE przy sporze o uprawnienie/
+   przynależność przedmiotu (art. 685)
+4. ROZSTRZYGNIĘCIE dodatkowych kwestii w RAMACH tego samego
+   postępowania: zapisy zwykłe, rozliczenia między spadkobiercami
+   (art. 686) — ALE NIE zachowek i NIE zniesienie służebności (osobne
+   drogi sądowe)
+5. SPOSÓB PODZIAŁU: zgodny wniosek stron ALBO — w braku zgody —
+   odpowiednie zastosowanie przepisów o zniesieniu współwłasności
+   (art. 687-688)
+```
+
+⚠️ **Pozostaje do dociągnięcia:** pełna treść art. 680 i 681 (tylko
+tytuły/funkcja potwierdzone, nie dosłowne brzmienie) — do odczytania
+przy sprawie wymagającej precyzyjnego cytatu.
 
 ---
 

@@ -236,13 +236,37 @@ startowy).
   KRAJOWE właściwe do WYKONANIA tych rozporządzeń unijnych — NIE
   tworzy WŁASNEGO, odrębnego reżimu materialnego (poza pewnymi
   uzupełnieniami)
-⚠️ Dokładny KATALOG kategorii prekursorów (rozporządzenia UE
-  wyróżniają KATEGORIE 1/2/3 wg stopnia kontroli) oraz szczegółowe
-  obowiązki przedsiębiorców (rejestracja, zezwolenia, zgłaszanie
-  podejrzanych transakcji) NIE zostały w pełni zweryfikowane w tej
-  sesji — PUNKT STARTOWY, wymaga pogłębienia przy konkretnej sprawie
-  dot. legalnego obrotu substancjami chemicznymi o podwójnym
-  zastosowaniu (przemysłowym i potencjalnie narkotykowym).
+✅ **W WIĘKSZOŚCI ZWERYFIKOWANE (2026-08-18, F-26):** Rozporządzenie (WE)
+  273/2004 dzieli prekursory na **3 kategorie wg stopnia kontroli**
+  (załącznik I do rozporządzenia), z rosnącym rygorem obowiązków od
+  kat. 3 do kat. 1:
+  - **Kategoria 3** (np. kwas chlorowodorowy, kwas siarkowy, eter
+    dietylowy, aceton, keton metylowo-etylowy) — najniższy rygor:
+    obowiązek dokumentacji transakcji, informowanie PPIS TYLKO na
+    żądanie organów (nie okresowo).
+  - **Kategoria 2** (dzieli się dalej na podkategorie 2A/2B) — rygor
+    pośredni: obowiązkowa REJESTRACJA w Biurze ds. Substancji Chemicznych
+    (organ: Prezes Biura ds. Substancji Chemicznych, na podstawie art. 44
+    ust. 4 ustawy o przeciwdziałaniu narkomanii), wyznaczenie
+    "funkcjonariusza odpowiedzialnego za handel substancjami
+    sklasyfikowanymi", coroczne informowanie PPIS o ilościach (do 15
+    lutego), pobranie deklaracji klienta co do sposobu wykorzystania,
+    dokumentacja przechowywana min. 3 lata. Rejestracja NIE dotyczy
+    podkategorii 2B ani operacji poniżej progów ilościowych rocznych.
+  - **Kategoria 1** — **najwyższy rygor** (⚠️ dokładny katalog obowiązków
+    NIE odczytany w pełni w tej sesji, ale potwierdzone źródłowo, że
+    dokumentacja transakcji dla kat. 1 i 2 jest traktowana łącznie i
+    jest bardziej rygorystyczna niż dla kat. 3 — pełna lista wymogów
+    kat. 1 osobno, np. czy wymaga indywidualnej licencji per art. 3 ust.
+    2 rozporządzenia 273/2004, POZOSTAJE do potwierdzenia).
+  **Organy krajowe:** Prezes Biura ds. Substancji Chemicznych (rejestracja
+  krajowa), Państwowy Powiatowy Inspektor Sanitarny — PPIS (nadzór
+  bieżący, zezwolenia na wywóz kat. 2-3), Główny Inspektor Sanitarny —
+  GIS (powiadomienia przed wywozem do krajów trzecich). Podstawa krajowa:
+  ustawa o przeciwdziałaniu narkomanii z 29.07.2005 (aktualny t.j. Dz.U.
+  2023 poz. 1939, wg źródeł z tej sesji — **nie potwierdzone bezpośrednio
+  w ISAP**). Źródła zbieżne: gov.pl (wielokrotne WSSE/PSSE oraz Biuro ds.
+  Substancji Chemicznych), archiwum.chemikalia.gov.pl.
 ```
 
 ## CHECKLIST ZBIORCZY (dodane 2026-07-20)

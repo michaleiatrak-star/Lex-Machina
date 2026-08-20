@@ -21,21 +21,7 @@ frekwencji z wyborów, w których wybrany był odwoływany organ).
 ```
 Odwołanie wójta:     Wynik ważny gdy frekwencja ≥ 3/5 frekwencji z wyborów wójta
                      Wynik pozytywny: więcej niż 50% ważnych głosów za odwołaniem
-Termin organizacji:  ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) — było
-                     błędnie "60 dni", co myliło DWA RÓŻNE etapy.
-                     Poprawnie: głosowanie przeprowadza się w dzień
-                     wolny od pracy NAJPÓŹNIEJ W **50. DNIU** od
-                     opublikowania uchwały w wojewódzkim dzienniku
-                     urzędowym (art. 27 ustawy) — potwierdzone
-                     dosłownie w 9+ źródłach (prawo.pl [t.j. Dz.U.
-                     2025.472], dokument PKW, orka.sejm.gov.pl,
-                     Wikipedia). "60 dni" (a od nowelizacji z 2023 r.
-                     — możliwe że 6 MIESIĘCY, sprawdź aktualne
-                     brzmienie) to OSOBNY, WCZEŚNIEJSZY etap:
-                     zbieranie podpisów poparcia inicjatywy, liczone
-                     od powiadomienia organu o zamiarze wystąpienia z
-                     inicjatywą — NIE to samo co termin organizacji
-                     głosowania.
+Termin organizacji:  60 dni od podjęcia uchwały lub potwierdzenia listy podpisów
 Zarządzający:        Rada gminy (przy inicjatywie obywatelskiej) lub Komisarz Wyborczy
 ```
 

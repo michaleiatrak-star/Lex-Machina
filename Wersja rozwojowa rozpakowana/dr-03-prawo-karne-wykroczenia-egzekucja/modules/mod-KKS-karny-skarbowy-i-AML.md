@@ -26,7 +26,71 @@ compatibility:
 > bez ŻADNYCH konkretnych artykułów KKS (potwierdzone: brak art. 54/56/62/76,
 > brak numeru Dz.U. samego kodeksu). Sekcja niżej naprawia ten brak.
 
-## KLUCZOWE PRZESTĘPSTWA/WYKROCZENIA SKARBOWE (⛔ weryfikuj ISAP przed cytowaniem)
+## ⭐⭐⭐ NOWELIZACJA DEREGULACYJNA 2026 (F-88, obszar KKS) — dodano 2026-08-19
+
+✅ **ZWERYFIKOWANE — DWIE ODRĘBNE, ŁATWE DO POMYLENIA NOWELIZACJE KKS
+w 2026 r., obie w toku równolegle:**
+
+**A) Ustawa z 29.05.2026 o zmianie ustawy — Ordynacja podatkowa oraz
+niektórych innych ustaw (Dz.U. 2026 poz. 846, w życie 1.10.2026)** — TA
+jest przedmiotem głównego wątku F-88 (omnibus 16 obszarów). Zmiany w KKS
+(charakter DEREGULACYJNY, łagodzący):
+- **Obniżenie maksymalnej liczby stawek dziennych grzywny** za
+  przestępstwa skarbowe o charakterze FORMALNYM (tj. nie powodujące
+  bezpośrednich strat podatkowych — np. niezłożenie/opóźnienie
+  obowiązkowych oświadczeń i informacji): z **720 stawek → 480 lub 240**
+  (w zależności od konkretnego typu czynu), oraz z **240 stawek → 120**.
+  Przykład przeliczenia na złotówki (stawka dzienna max wg t.j. 2026):
+  720 stawek = 44 793 504 zł → 480 stawek = 29 862 336 zł, LUB 240
+  stawek = 14 931 168 zł.
+- **Uchylenie art. 31 Ordynacji podatkowej** (obowiązek zgłaszania przez
+  płatnika/inkasenta osób odpowiedzialnych za obliczanie/pobieranie/
+  wpłacanie podatków) — mniej dokumentów do organów, powiązana
+  dekryminalizacja odpowiadającego czynu w KKS.
+- ⭐ **Zasada intertemporalna — KLUCZOWA dla spraw w toku:** art. 2 §2
+  KKS — jeżeli w CZASIE ORZEKANIA obowiązuje ustawa INNA niż w czasie
+  POPEŁNIENIA czynu, stosuje się ustawę NOWĄ, chyba że ustawa
+  OBOWIĄZUJĄCA POPRZEDNIO jest WZGLĘDNIEJSZA dla sprawcy (LEX MITIOR) —
+  **czyny popełnione PRZED 1.10.2026, ale osądzane PO tej dacie, będą
+  korzystać z NOWYCH, ŁAGODNIEJSZYCH granic grzywny**, jeśli są dla
+  sprawcy korzystniejsze. Praktyczna implikacja: przy obronie w sprawie
+  karnoskarbowej o czyn formalny z okresu SPRZED 1.10.2026, warto
+  ROZWAŻYĆ wniosek o zastosowanie nowej, łagodniejszej granicy kary.
+
+**B) ⭐⭐⭐ ODRĘBNA ustawa z 15.05.2026 o zmianie ustawy — Ordynacja
+podatkowa oraz ustawy — Kodeks karny skarbowy — ✅ ROZSTRZYGNIĘTE
+2026-08-19: PREZYDENT ODMÓWIŁ PODPISANIA, USTAWA NIGDY NIE WESZŁA W
+ŻYCIE.** **INNA ustawa, INNY temat, ŁATWA DO POMYLENIA z powyższą (A)
+przez identyczny tytuł wstępny**:
+- Zakładała zastąpienie ZASADY NIEPRZEDAWNIANIA SIĘ zobowiązań
+  podatkowych zabezpieczonych HIPOTEKĄ przymusową lub ZASTAWEM
+  skarbowym (dotychczasowy art. 70 §8 OP) — instytucją **ZAWIESZENIA**
+  biegu terminu przedawnienia. Uchwalona przez Sejm 15.05.2026, Senat
+  NIE wniósł poprawek (21.05.2026), przekazana Prezydentowi RP.
+- ⛔ **PREZYDENT RP ODMÓWIŁ PODPISANIA USTAWY** (potwierdzone:
+  podatkowyreferat.online, wpis z 12.06.2026, "Bez zmian w ustawie
+  Ordynacja podatkowa - art. 70 § 8"). **Skutek: art. 70 §8 OP
+  POZOSTAJE W DOTYCHCZASOWYM BRZMIENIU** — zobowiązania zabezpieczone
+  hipoteką/zastawem NADAL się NIE przedawniają (choć po upływie terminu
+  przedawnienia mogą być egzekwowane TYLKO z przedmiotu hipoteki/zastawu).
+  Kontrowersyjna zasada "wiecznego długu zabezpieczonego hipoteką", od
+  lat krytykowana przez RPO i środowiska biznesowe, **PRZETRWAŁA**.
+- ⚠️ Dokładny powód weta prezydenckiego — NIE ustalony w tej sesji
+  (znaleziono sam fakt weta, nie uzasadnienie). Możliwość ponownego
+  procedowania przez Sejm (odrzucenie weta większością 3/5) — status
+  NIE sprawdzony, wymaga dociągnięcia jeśli sprawa dotyczy przyszłości
+  tej reformy.
+- **Wniosek praktyczny — WAŻNE dla obszaru A wyżej:** ta ustawa (B) jest
+  CAŁKOWICIE ODRĘBNA od głównego omnibusa z 29.05.2026 (Dz.U. 2026 poz.
+  846, obszar A) — jej upadek NIE wpływa na status ustawy A, która
+  weszła w życie niezależnie. Nie mylić dwóch odrębnych losów prawnych
+  dwóch podobnie tytułowanych, ale merytorycznie odrębnych ustaw z tego
+  samego miesiąca.
+
+Źródła zbieżne: eli.gov.pl (metryka A), dziennikustaw.gov.pl (tekst A),
+portalfk.pl, ksiegowosc.infor.pl (szczegóły stawek A); dla (B):
+podatkowyreferat.online (×3, w tym kluczowy wpis o wecie z 12.06.2026),
+inforlex.pl, axelo.pl, podatki-lokalne.com.
 
 ```
 ART. 54 KKS — UCHYLANIE SIĘ OD OPODATKOWANIA

@@ -5,9 +5,14 @@
 **Data weryfikacji online:** 2026-06-13, druga weryfikacja 2026-07-17
 (potwierdzenie wejścia w życie ustawy z 08.07.2026 + uzupełnienie zakazu
 retorsji i retroaktywności ZUS)
-**⏳ NOWELIZACJA W TOKU WEJŚCIA W ŻYCIE:** ustawa z 11.03.2026 o zmianie ustawy o PIP oraz niektórych innych ustaw
-(Dz.U. 2026 poz. 473, ogłoszona 07.04.2026) — wchodzi w życie **08.07.2026** (jeszcze NIE obowiązuje na dzień
-weryfikacji). Pełny opis: sekcja 5.
+**⏳→✅ NOWELIZACJA — STATUS ZAKTUALIZOWANY 2026-08-19 (F-79):** ustawa z 11.03.2026 o zmianie ustawy o PIP oraz niektórych innych
+ustaw (Dz.U. 2026 poz. 473, ogłoszona 07.04.2026) — **WESZŁA W ŻYCIE 08.07.2026 i JEST JUŻ OBOWIĄZUJĄCA** (data
+dzisiejsza 19.08.2026, ponad 6 tygodni po wejściu w życie — poprzedni zapis "jeszcze NIE obowiązuje" był
+NIEAKTUALNY). ⭐ Prezydent RP podpisał ustawę 2.04.2026, ale RÓWNOCZEŚNIE skierował ją do NASTĘPCZEJ kontroli
+Trybunału Konstytucyjnego (zastrzeżenia: szerokie uprawnienia PIP wobec przedsiębiorców, niepełny dialog społeczny)
+— **to NIE wstrzymuje obowiązywania ustawy**, ale oznacza, że jej konstytucyjność jest przedmiotem TOCZĄCEGO SIĘ
+postępowania przed TK — status tego postępowania NIE sprawdzony w tej sesji, do potwierdzenia przy sprawie, gdzie
+miałoby to znaczenie. Pełny opis: sekcja 5.
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl. Dla przepisów z sekcji 6 dodatkowo
 sprawdź, czy data analizy/sprawy jest przed czy po 08.07.2026 — przed tą datą stosuje się stan obecny (sekcje 1–5).
 
@@ -222,7 +227,61 @@ jak wskazywała poprzednia wersja)
   wydawane w postaci elektronicznej; termin odpowiedzi podmiotu kontrolowanego ≤ 30 dni.
 ```
 
-### 6.5 Konsekwencje strategiczne (do uwzględnienia po 08.07.2026)
+### 6.6 ✅ ZWERYFIKOWANE (2026-08-19, F-79) — Zmiany w KSCU i KPW wprowadzone przez tę samą ustawę (art. 6-7)
+
+⭐⭐⭐ **Poprawka wcześniejszej niejasności:** flaga zakładała zmiany "w KSCU
+oraz Ordynacji podatkowej" — **PO ODCZYCIE PEŁNEGO TEKSTU (isap.sejm.gov.pl,
+orka.sejm.gov.pl, potwierdzone 3 niezależnymi źródłami legislacyjnymi):
+ORDYNACJA PODATKOWA W OGÓLE NIE JEST DOTKNIĘTA** tą ustawą — to była
+błędna przesłanka pierwotnej flagi. Ustawa zmienia zamiast tego: ustawę
+o PIP, KP, **KSCU (art. 7)**, i **KPW (art. 6)**.
+
+```
+□ ART. 7 — zmiany w ustawie o kosztach sądowych w sprawach cywilnych
+  (Dz.U. 2025 poz. 1228 ze zm.):
+  1) OPŁATA PODSTAWOWA od pracodawcy — rozszerzona TAKŻE na sprawę o
+     USTALENIE ISTNIENIA lub TREŚCI stosunku pracy, gdy powództwo
+     wytoczył OKRĘGOWY INSPEKTOR PRACY (nowy typ postępowania z reformy
+     PIP — sekcja 6.2 wyżej) — pracodawca płaci tak samo jak w zwykłej
+     sprawie pracowniczej.
+  2) ⭐⭐ NOWY ART. 36a KSCU — OPŁATA STAŁA 200 ZŁ pobierana od:
+     (a) ODWOŁANIA od decyzji okręgowego inspektora pracy (art. 14b
+         ust. 8 ustawy o PIP — nowa decyzja administracyjna ustalająca
+         stosunek pracy, sekcja 6.2), (b) APELACJI w takiej sprawie,
+         (c) SKARGI o stwierdzenie niezgodności z prawem prawomocnego
+         orzeczenia w takiej sprawie. ⭐ Niska, stała opłata (200 zł)
+     niezależnie od wartości przedmiotu sporu — ułatwia dostęp do sądu
+     przy odwołaniu od nowej decyzji PIP.
+  3) Dodanie GIP/okręgowego inspektora pracy/związków zawodowych do
+     katalogu podmiotów zwolnionych z kosztów sądowych w sprawach z
+     zakresu prawa pracy (nowy pkt 8 odpowiedniego przepisu — dokładny
+     numer artykułu macierzystego NIE ustalony w tej sesji).
+□ ART. 6 — zmiana w Kodeksie postępowania w sprawach o wykroczenia
+  (art. 96 KPW) — ⚠️ dokładna treść zmiany NIE odczytana w pełni w tej
+  sesji, tylko sam fakt nowelizacji potwierdzony (orka.sejm.gov.pl).
+```
+
+⭐ **Przepis przejściowy (art. 15-16 ustawy nowelizującej):**
+- Art. 15: do postępowań sądowych WSZCZĘTYCH i NIEZAKOŃCZONYCH przed
+  wejściem w życie (08.07.2026), w których PIP wniosła powództwo o
+  ustalenie stosunku pracy — stosuje się przepisy KPC w BRZMIENIU
+  SPRZED nowelizacji (stary stan prawny dla spraw w toku).
+- Art. 16: **12-MIESIĘCZNA ABOLICJA** (potwierdzenie szczegółów
+  wcześniej ogólnie wspomnianej wyżej) — podmiot, który PRZED wejściem
+  w życie zawarł umowę cywilnoprawną spełniającą cechy stosunku pracy
+  (art. 22 §1 KP) i który w terminie 12 MIESIĘCY od wejścia w życie
+  DOBROWOLNIE doprowadzi do stanu zgodnego z prawem (zawrze umowę o
+  pracę) — NIE PODLEGA odpowiedzialności [za wykroczenie z tego tytułu
+  — dokładny zakres wyłączonej odpowiedzialności do potwierdzenia].
+  Termin abolicji upływa więc **08.07.2027**.
+
+Źródła zbieżne: isap.sejm.gov.pl (WDU20260000473, tekst pełny),
+orka.sejm.gov.pl (proc10.nsf/ustawy/2250_u.htm, wersja przyjęta przez
+Senat), eli.gov.pl (metryka), akademialtca.pl i brightspot.pl (komentarze
+eksperckie z kwietnia 2026, potwierdzające podpis Prezydenta 2.04.2026 i
+skierowanie do TK).
+
+
 
 ```
 □ Spór o kwalifikację B2B/zlecenie ↔ umowa o pracę: rozważ wniosek o interpretację

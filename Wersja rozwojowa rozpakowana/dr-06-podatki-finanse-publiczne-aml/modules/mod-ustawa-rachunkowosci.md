@@ -991,10 +991,16 @@ PODSTAWY ODPOWIEDZIALNOŚCI:
 
 ⭐ SZERSZY KONTEKST ODPOWIEDZIALNOŚCI: sankcje za naruszenia
   rachunkowe REGULOWANE są RÓWNOLEGLE w TRZECH aktach: ustawie o
-  rachunkowości, KKS, ORAZ Kodeksie spółek handlowych (⚠️ szczegóły
-  KSH NIE zweryfikowane w tej sesji — punkt startowy do dalszego
-  badania, jeśli sprawa dotyczy odpowiedzialności CZŁONKÓW ZARZĄDU
-  na gruncie prawa spółek)
+  rachunkowości, KKS, ORAZ Kodeksie spółek handlowych. ✅
+  **ROZSTRZYGNIĘTE (2026-08-19, F-35) — WEWNĘTRZNA NIESPÓJNOŚĆ TEGO
+  MODUŁU NAPRAWIONA:** ta flaga była NIEAKTUALNA — moduł od sesji
+  2026-08-13 ma już PEŁNĄ sekcję o KSH (Sekcja 5e niżej, art. 293/483
+  KSH — odpowiedzialność cywilna zarządu, business judgment rule z art.
+  293 §3, krąg podmiotów, relacja do trzech równoległych reżimów), w
+  tabeli podsumowującej oznaczoną jako "🟢 PEŁNE". Ta wcześniejsza notatka
+  po prostu NIE została usunięta, gdy pełna treść powstała — klasyczny
+  przypadek "starej notatki" nienadążającej za rozbudową modułu w tej
+  samej sesji. Odsyłacz: patrz Sekcja 5e, linia ~1260 niżej.
 
 Potwierdzone w 9+ zgodnych, autorytatywnych źródłach (prawo.pl [×3],
 portalfk.pl, e-deklaracje.pl, mddp-outsourcing.pl [z 2025 r., z
@@ -1439,12 +1445,31 @@ PODSTAWA PRAWNA: art. 10 ust. 3 u.o.r. — jednostki MOGĄ stosować
   KRAJOWE standardy RACHUNKOWOŚCI wydawane PRZEZ Komitet Standardów
   Rachunkowości, W sprawach NIEUREGULOWANYCH przepisami USTAWY.
 
-⚠️ [FLAGA OTWARTA — LICZBA STANDARDÓW SPORNA MIĘDZY ŹRÓDŁAMI] różne
-  źródła PODAJĄ różną LICZBĘ obowiązujących standardów (14 VS 15) —
-  ⚠️ [NIEWERYFIKOWANE W TEJ SESJI] PRZED powołaniem KONKRETNEGO numeru
-  KSR w piśmie PROCESOWYM, zweryfikuj WPROST aktualną LISTĘ w
-  Dzienniku URZĘDOWYM Ministra Finansów (⚠️ KSR SĄ publikowane POZA
-  Dziennikiem Ustaw — ODRĘBNY publikator)
+✅ **ROZSTRZYGNIĘTE ŹRÓDŁOWO (2026-08-19, F-35) — RZĄD 1, bezpośrednio
+z oficjalnej strony Ministerstwa Finansów (gov.pl/web/finanse/krajowe-standardy-rachunkowosci,
+ostatnia aktualizacja listy: 24.04.2026):** **AKTUALNIE OBOWIĄZUJE 16
+Krajowych Standardów Rachunkowości** — spór "14 vs 15" w źródłach
+wtórnych był NIEAKTUALNY, bo obie liczby pomijały **KSR nr 16
+"Uproszczenia dopuszczone ustawą o rachunkowości"** (opublikowany
+21.10.2025) — najnowszy standard, który część źródeł internetowych po
+prostu jeszcze nie uwzględniła w swoich zestawieniach w momencie
+publikacji. Pełna lista z tytułami (KSR 1-16): 1. Rachunek przepływów
+pieniężnych; 2. Podatek dochodowy (ostatnia aktualizacja 2024); 3.
+Niezakończone usługi budowlane; 4. Utrata wartości aktywów; 5. Leasing,
+najem i dzierżawa; 6. Rezerwy, bierne rozliczenia międzyokresowe kosztów,
+zobowiązania warunkowe; 7. Zmiany zasad (polityki) rachunkowości...; 8.
+Działalność deweloperska; 9. Sprawozdanie z działalności (w trakcie
+nowelizacji na 2026); 10. Umowy PPP i koncesje; 11. Środki trwałe; 12.
+Działalność rolnicza; 13. Koszt wytworzenia jako podstawa wyceny
+produktów; 14. Kontynuacja działalności...; 15. Przychody ze sprzedaży
+(zaktualizowany 22.04.2026); 16. Uproszczenia dopuszczone ustawą o
+rachunkowości (21.10.2025, dla jednostek mikro/małych). ⚠️ **Liczba jest
+RUCHOMA** — Komitet aktywnie pracuje nad kolejnymi (np. nowelizacja KSR
+9 sygnalizowana jako w toku) — przy sprawie z odległą datą audytu
+potwierdź aktualną liczbę bezpośrednio na stronie MF, nie polegaj na
+liczbie "16" jako trwale stałej. KSR są publikowane POZA Dziennikiem
+Ustaw — w Dzienniku Urzędowym Ministra Finansów, ODRĘBNY publikator od
+Dz.U.
 
 STANDARDY JUŻ PRZYWOŁANE W TYM MODULE (potwierdzenie SPÓJNOŚCI
   wewnętrznej):

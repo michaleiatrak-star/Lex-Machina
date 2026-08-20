@@ -130,6 +130,17 @@
     wykonane (m.in. sytuacje wskazujące na ryzyko niewykonania).
   ⛔ Zweryfikuj pełny katalog ust. 5 w ISAP — był nowelizowany.
 
+  ✅ POTWIERDZONE 2026-08-20 (F-19 punkt d) — praktyka odmowy wobec
+  WNIOSKU SYNDYKA masy upadłości (chcącego przekazać środki z rachunku
+  VAT upadłego na rachunek masy upadłości) jest ZGODNA z prawem UE:
+  TSUE, wyrok C-709/22 z 21.11.2024 — organy podatkowe MAJĄ
+  pierwszeństwo do środków na rachunku VAT przed roszczeniami masy
+  upadłości, o ile zaległości podatkowe pokrywają wnioskowaną kwotę.
+  ⭐ ISTOTNE dla strategii: argument syndyka o naruszeniu zasady
+  proporcjonalności (uderzenie w pracowników jako wierzycieli
+  uprzywilejowanych w prawie upadłościowym) NIE ZOSTAŁ uwzględniony
+  przez TSUE — nie warto go podnosić jako głównej linii obrony.
+
 ⭐⭐ ŚRODKI ZASKARŻENIA — ⚠️ DWA RÓŻNE, ZALEŻNIE OD FORMY:
   □ ZGODA/określenie niższej kwoty = POSTANOWIENIE → **ZAŻALENIE**
   □ ODMOWA = DECYZJA → **ODWOŁANIE**
@@ -268,7 +279,8 @@
   katalog wypłat z rachunku VAT, rachunek techniczny)
 - `shared/ZAZALENIE-ADRESAT-GATE.md` (⛔ OBOWIĄZKOWO przy piśmie
   kwestionującym rozstrzygnięcie z art. 108b)
-- `orzeczenia-sadowe-v2` (TSUE ws. wniosku syndyka o środki z rachunku VAT)
+- `orzeczenia-sadowe-v2` (TSUE ws. wniosku syndyka o środki z rachunku
+  VAT — ✅ ZWERYFIKOWANE 2026-08-20, patrz niżej sygn. C-709/22)
 
 ---
 
@@ -284,6 +296,16 @@ RZĄD 2 — praktyka art. 108b: gofin.pl (03.2026), pit.pl, isp-modzelewski.pl
 RZĄD 2 — kursy walut: symfonia.pl (02.2026), poradnikprzedsiebiorcy.pl
   (04.2026), gofin.pl (01.2026), fakturaxl.pl, wzajaczkowski.pl (art. 31b)
 RZĄD 2 — TAX FREE: ifirma.pl, infor.pl, poradypodatkowe.pl (2026)
-⛔ Sygnatury TSUE (syndyk/rachunek VAT) NIE ustalone w tej sesji —
-  wymagają weryfikacji przed powołaniem.
+⛔ Sygnatury TSUE (syndyk/rachunek VAT) — ✅ ZWERYFIKOWANE 2026-08-20
+  (F-19 punkt d): **TSUE, wyrok z 21.11.2024, sygn. C-709/22** (polska
+  sprawa prejudycjalna, pytanie WSA we Wrocławiu I SA/Wr 73/22) —
+  Trybunał orzekł, że polski mechanizm split payment (art. 108b VAT) i
+  praktyka ODMOWY przekazania syndykowi masy upadłości środków z
+  rachunku VAT (gdy podatnik ma zaległości podatkowe przekraczające
+  wnioskowaną kwotę) SĄ ZGODNE z zasadą neutralności i proporcjonalności
+  dyrektywy VAT — organy podatkowe MAJĄ pierwszeństwo przed syndykiem
+  do środków na rachunku VAT. Wyrok POPRZEDZONY opinią Rzecznik
+  Generalnej z 11.04.2024, o tej samej treści. Potwierdzone 5+ źródłami
+  (rp.pl, akademialtca.pl, sendero.pl, EY, gazetaprawna.pl) — BEZPIECZNE
+  do powołania, w tym jako argument PRZECIWKO wnioskowi syndyka.
 ```
