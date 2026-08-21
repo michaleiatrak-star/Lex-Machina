@@ -4,7 +4,7 @@
 
 | Tryb | Czynność | Termin | Podstawa |
 |------|----------|--------|----------|
-| KPC | Wniosek o uzasadnienie | **7 dni** | art. 328 KPC (⚠️ POPRAWIONE 2026-08-04: BEZ indeksu "¹" — poprzednia wersja błędnie dodawała zbędny górny indeks; potwierdzone w 7+ zgodnych źródłach, aktualny t.j. Dz.U.2026.0.468) |
+| KPC | Wniosek o uzasadnienie | **7 dni** | art. 328¹ KPC |
 | KPC | Apelacja | **14 dni** od doręcz. uzasadn. | art. 369 §1 KPC |
 | KPC | Zażalenie | **7 dni** | art. 394 §2 KPC |
 | KPC | Sprzeciw od nakazu | **14 dni** | art. 503 §1 KPC |
