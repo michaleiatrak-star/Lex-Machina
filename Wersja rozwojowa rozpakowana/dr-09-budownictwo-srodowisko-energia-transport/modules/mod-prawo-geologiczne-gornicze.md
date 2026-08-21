@@ -1,8 +1,17 @@
 # Moduł — Prawo geologiczne i górnicze
 
 ## Akt prawny / źródło
-- Ustawa Prawo geologiczne i górnicze — Dz.U. 2024 poz. 1290 (t.j.)
-  ✅ [VER: isap.sejm.gov.pl, 2026-05-31]
+- Ustawa Prawo geologiczne i górnicze — Dz.U. 2026 poz. 69 t.j. (POPRAWKA
+  2026-07-02j — było błędnie 2024.1290; obwieszczenie 9.01.2026)
+  ✅ [VER: isap.sejm.gov.pl, 2026-05-31 — metryka]
+  ✅ FAZA 3E ZAMKNIĘTA 2026-08-20 (F-40): sprawdzono 3 nowelizacje między
+  starym a nowym t.j. (Dz.U. 2025 poz. 769 — ustawa deregulacyjna, poz.
+  1023 — WYŁĄCZNIE korekta odnośnika do tytułu ustawy/dyrektyw UE
+  transponowanych, BEZ zmian merytorycznych; poz. 1668 — dot. planowania
+  przestrzennego, poza zakresem treści tego modułu) — ŻADNA nie dotyka
+  treści opisanej w module (koncesje, własność złóż, opłata
+  eksploatacyjna, art. 168 sankcja). Treść modułu POTWIERDZONA jako
+  aktualna mimo zmiany numeru t.j.
 
 **Weryfikacja:** isap.sejm.gov.pl + MŚ przed każdym cytowaniem.
 

@@ -1,5 +1,19 @@
 # Moduł [M] — Prawo Nieruchomości
 
+> ✅ FAZA 3E [F-40] — 2026-08-20: przegląd tego pliku wykazał, że MIMO
+> nazwy pliku (`mod-UGN-gospodarka-nieruchomosciami.md`) TREŚĆ nie cytuje
+> nigdzie samej ustawy o gospodarce nieruchomościami (UGN, Dz.U. 2026
+> poz. 399 t.j.) — moduł dotyczy w całości umowy deweloperskiej, MRP/DFG,
+> wspólnoty mieszkaniowej, ochrony lokatorów, KC i ksiąg wieczystych.
+> Weryfikacja treści UGN pod kątem nowelizacji (przedmiot pierwotny
+> flagi F-40) została WYKONANA w module
+> `mod-PrGeodezyjne-kartografia-wywlaszczenia.md` (sekcja źródeł), gdzie
+> UGN jest faktycznie cytowana (art. 112-113, wywłaszczenie). ⚠️ Nazwa
+> tego pliku jest MYLĄCA względem jego rzeczywistej zawartości —
+> odnotowane jako obserwacja dla przyszłego audytu (ewentualna zmiana
+> nazwy na `mod-nieruchomosci-deweloper-wspolnota-najem.md` lub
+> podobną), NIE otwarto z tego powodu nowej flagi w tej sesji.
+
 **Zakres:** Zakup nieruchomości (due diligence KW, hipoteka), rękojmia przy
 nieruchomościach, umowa deweloperska (ustawa 2021 ze zm.), mieszkaniowy rachunek
 powierniczy (MRP), Deweloperski Fundusz Gwarancyjny (DFG), wspólnota mieszkaniowa

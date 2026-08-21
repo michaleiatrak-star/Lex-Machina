@@ -289,10 +289,22 @@ Sprawa dotyczy przedsiębiorcy oferującego USŁUGI TURYSTYCZNE z polowaniami
    sprzed nowelizacji 2018 r., możliwe przesunięcie ust. 4→5) —
    NIEODNALEZIONY, pozostaje otwarte. Możliwe, że pierwotna flaga liczyła
    podwójnie tę samą delegację pod starą i nową numeracją — do wyjaśnienia.
-3. Rozbieżność w brzmieniu art. 22 ust. 1 pkt 2 między źródłem pobranym
-   w tej sesji ("przepisy o produktach pochodzenia zwierzęcego") a
-   formułą ustaloną wcześniej w module Rozdz. 7 — możliwy efekt
-   nowelizacji upraszczającej, wymaga weryfikacji bezpośrednio w ISAP.
+3. ✅ **ZWERYFIKOWANE (2026-08-19, F-93):** rozbieżność rozstrzygnięta —
+   to NIE błąd, lecz różnica między brzmieniem AKTUALNYM a
+   PRZEDNOWELIZACYJNYM tego samego przepisu. Aktualny t.j. (Dz.U.
+   2025.114.0000539, potwierdzony niezależnie w inforlex — stan na
+   23.04.2025) brzmi: "zapewniać badania zwierzyny i mięsa zgodnie
+   z przepisami o produktach pochodzenia zwierzęcego" — ZGODNE z treścią
+   już przyjętą w tym module. Starsze publikacje (m.in. infor.pl z
+   archiwalnym stanem 2017, izbarolnicza.opole.pl) podają wcześniejsze
+   brzmienie: "...zgodnie z przepisami o zwalczaniu chorób zakaźnych
+   zwierząt, badaniu zwierząt rzeźnych i mięsa oraz Inspekcji
+   Weterynaryjnej" — to źródło nieaktualizowanej wersji sprzed
+   nowelizacji upraszczającej odesłanie. **Domniemany moduł "Rozdz. 7"
+   przywołany w pierwotnej treści tego punktu NIE istnieje** — żaden
+   plik `dr-09/modules/mod-lowieckie-*` dotyczący Rozdz. 7 (straż
+   łowiecka) nie zawiera odniesienia do art. 22 (potwierdzone `grep`);
+   punkt porównania w pierwotnej flagi był błędny. Brak dalszej luki.
 4. ✅ **ZWERYFIKOWANE (2026-08-18, F-91 pkt 2):** rozporządzenie z art. 22
    ust. 2 (zakres i wzór ewidencji skupu) — **rozp. Ministra Środowiska,
    Dz.U. 2005 nr 27 poz. 231** "w sprawie ewidencji skupu zwierzyny żywej,

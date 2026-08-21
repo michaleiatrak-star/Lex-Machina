@@ -50704,3 +50704,547 @@ dostarczony ponownie (67/67 plików, diff zip↔drzewo puste, diff
 drzewo↔oryginał ograniczony do jednego pliku ze skumulowaną treścią
 wszystkich trzech napraw tej sesji). `audyt-systemu-v4.zip`
 zaktualizowany.
+
+---
+
+## AUDYT-2026-08-21k — F-90 ZAMKNIĘTA W CAŁOŚCI
+
+### 1. STATUS OGÓLNY
+
+Kontynuacja F-90 ("kontynuuj"), ostatnia tura: art. 15a-17h (Rozdz. 2,
+reszta czynów nieuczciwej konkurencji). Po tej turze WSZYSTKIE trzy
+rozdziały merytoryczne UZNK (2, 3, 4) mają treść — flaga zamknięta.
+
+### 2. WERYFIKACJA
+
+Rząd 1 (bezpośredni cytat PDF ISAP dla art. 15a, 15c, 17f, 17g) + Rząd 2B
+(lexlege.pl, arslege.pl z cytatem "Dz.U.2026.0.85 t.j.", prawo.pl,
+dlajurysty.pl) + Rząd 3 (skarbiec.biz, lipinskiwalczak.pl — tylko dla
+art. 17d, jawnie oznaczone jako wymagające dalszej weryfikacji zgodnie
+z ZASADĄ 14, próg 2-3 źródeł niezależnych nieosiągnięty dla TEGO JEDNEGO
+artykułu).
+
+### 3. TREŚĆ DODANA
+
+Nowa sekcja "ART. 15a-17h UZNK — POZOSTAŁE CZYNY ROZDZIAŁU 2":
+- **Art. 15b** — urządzenia niedozwolone dostępu warunkowego (dekodery
+  do nielegalnego dostępu do płatnej telewizji/streamingu).
+- **Art. 15c** — przepis odsyłający do zakazu praktyk ograniczających
+  konkurencję (u.o.k.k. + TFUE) — dodatkowa podstawa roszczeń cywilnych.
+- **Art. 17** — odpowiedzialność agencji reklamowej/twórcy reklamy za
+  czyn z art. 16, obok reklamodawcy.
+- **Art. 17a** — sprzedaż premiowana (§1 w pełni zweryfikowany, §2
+  katalog wyjątków oznaczony jako wymagający dalszej weryfikacji).
+- **Art. 17c** — organizowanie systemu sprzedaży lawinowej, z pełnym
+  katalogiem warunków dopuszczalności (§2) i doktrynalnym rozróżnieniem
+  od "piramidy finansowej" (odrębna ustawa z 2007), plus krzyżowe
+  odesłanie do już zweryfikowanego odpowiednika karnego art. 24a.
+- **Art. 17d** — sieci dyskontowe (dominujące wprowadzanie własnych
+  produktów) — jawnie oznaczony jako zweryfikowany TYLKO 1 źródłem
+  Rządu 3, wymaga potwierdzenia przed użyciem w piśmie.
+- **Art. 17f** — biura informacji gospodarczej (BIG) — dwustronna
+  odpowiedzialność wierzyciela i samego biura.
+- **Art. 17g** — nieuzasadnione wydłużanie terminów zapłaty, powiązanie
+  z ustawą o przeciwdziałaniu zatorom płatniczym.
+- **Art. 17h** — usługi pośrednictwa internetowego/wyszukiwarek (rozp.
+  UE 2019/1150) — pełny katalog naruszeń oznaczony jako niedoczytany
+  w całości, punkt startowy na przyszłość.
+
+Odkryto i udokumentowano: **art. 17b i 17e są UCHYLONE** — art. 17e był
+historycznie "systemem konsorcyjnym" (dodanym nowelizacją z 2004 r.), ale
+został później uchylony — ta nazwa czynu, mimo że wciąż pojawia się w
+starszych materiałach (w tym w treści samej flagi F-90 sprzed tej sesji:
+"art. 17 system konsorcyjny"), NIE ISTNIEJE już w obowiązującym prawie.
+Zaktualizowano też tabelę katalogu na początku modułu.
+
+### 4. WERYFIKACJA STRUKTURY (Reguła 5) — DRUGI RAZ BEZ INCYDENTU
+
+Jawne zawarcie docelowego nagłówka "## ROSZCZENIA PRZYSŁUGUJĄCE..." w
+`new_str` (metoda wypracowana po dwóch wcześniejszych incydentach w tej
+sesji) ponownie zapobiegła uszkodzeniu struktury. Kontrola natychmiastowa:
+13 nagłówków, 66 znaczników code-fence (parzyste), 670 linii — bez
+potrzeby korekty.
+
+### 5. DECYZJA O ZAMKNIĘCIU
+
+F-90 (pierwotnie: "moduł opisuje tylko 8 z 24+ artykułów merytorycznych")
+ZAMKNIĘTA W CAŁOŚCI. Wszystkie trzy rozdziały merytoryczne (2, 3, 4) mają
+teraz treść. Pozostałe drobne zastrzeżenia (art. 17a §2 katalog wyjątków,
+art. 17d pojedyncze źródło, art. 17h pełny katalog rozp. 2019/1150,
+art. 19 §1 pkt 1 i §3 szczegóły) NIE uzasadniają utrzymania całej flagi
+otwartej — są to precyzyjnie oznaczone przypisy WEWNĄTRZ już istniejącej,
+solidnej treści modułu (zgodnie z ZASADĄ 14, każdy oznaczony osobno jako
+wymagający dalszej weryfikacji), nie brakująca treść. Wiersz usunięty z
+TABLICY STERUJĄCEJ i sekcji 1 (ZASADA 10).
+
+### 6. STRUKTURA
+
+`dr-02`: 67 plików, bez zmian liczby — moduł UZNK urósł z ~154 do 670
+linii w toku 5 tur tej samej sesji, wciąż bezpiecznie poniżej progu 1000
+(ZASADA 13 LIMITU DŁUGOŚCI MODUŁU).
+
+### 7. WNIOSKI
+
+Ta flaga to przykład efektywnej, wieloturowej pracy w jednej sesji:
+zamiast rozpraszać się między flagami, kontynuacja tej samej flagi przez
+5 tur pozwoliła domknąć ją w całości, z rosnącą sprawnością obsługi
+Reguły 5 (0 incydentów w ostatnich 2 turach po wyciągnięciu lekcji z
+pierwszych 2). Warto rozważyć tę strategię (dokończ jedną flagę do końca
+zamiast przełączać się) jako domyślną przy podobnie ograniczonych,
+dobrze zdefiniowanych lukach treściowych w przyszłości.
+
+**Reguła 7 — zastosowanie:** TAK. `dr-02-prawo-cywilne-rodzinne-gospodarcze.zip`
+dostarczony ponownie (67/67 plików, diff zip↔drzewo puste, diff
+drzewo↔oryginał ograniczony do jednego pliku ze skumulowaną treścią
+wszystkich czterech napraw tej sesji). `audyt-systemu-v4.zip`
+zaktualizowany (F-90 zamknięta, licznik 24→23).
+
+---
+
+## AUDYT-2026-08-21l — F-97 rozstrzygnięta: prezydent skierował "lex szarlatan" do TK
+
+### 1. STATUS OGÓLNY
+
+F-97 miała termin monitorowania dokładnie na dziś (21.08.2026 — 21 dni od
+zakończenia prac parlamentarnych 31.07.2026). Sprawdzono status przed
+przejściem do kolejnej flagi z kolejki.
+
+### 2. USTALENIE
+
+Prezydent Karol Nawrocki ogłosił 20.08.2026 (dzień przed terminem), że
+**NIE PODPISUJE** nowelizacji ustawy o prawach pacjenta i Rzeczniku Praw
+Pacjenta ("lex szarlatan") i kieruje ją do Trybunału Konstytucyjnego w
+trybie **kontroli prewencyjnej** (art. 122 ust. 3 Konstytucji RP) —
+zapowiedział też własną inicjatywę ustawodawczą w tym temacie. To ANI
+podpis, ANI klasyczne weto (zwrot do Sejmu) — to trzecia, odrębna ścieżka
+konstytucyjna. Skutek: ustawa NIE WCHODZI W ŻYCIE i nie otrzyma numeru
+Dz.U., dopóki TK nie orzeknie o jej zgodności z Konstytucją.
+
+Zweryfikowane 4+ zgodnymi źródłami z 20-21.08.2026: polsatnews.pl
+(z bezpośrednim cytatem komentarza premiera Tuska), portalsamorzadowy.pl,
+rynekzdrowia.pl (z komentarzem Ministry Zdrowia), zwrotnikraka.pl.
+
+### 3. DECYZJA
+
+F-97 rozstrzygnięta jako AKTYWNA flaga — usunięta z sekcji A. Temat NIE
+zniknął (TK może orzekać miesiącami/latami, a wynik wpłynie na to, czy
+ustawa kiedykolwiek wejdzie w życie), więc przeniesiona do sekcji
+OBSERWOWANE jako **OBS-7**, z niższą częstotliwością sprawdzania (co
+2-3 miesiące, nie co sesję) — zgodnie z konwencją tej sekcji dla
+projektów ustaw w toku. Brak modułu w dr-10 pozostaje w pełni zasadny.
+
+Przy okazji naprawiono nieaktualne odesłania "OBS-1…OBS-5" (już
+nieaktualne przed tą sesją, od czasu dodania OBS-6) → "OBS-1…OBS-7"
+w 3 miejscach pliku.
+
+### 4. STRUKTURA
+
+Brak zmian plików modułów — tylko `WARN-OTWARTE.md` (usunięcie wiersza
+z sekcji A, dodanie OBS-7, aktualizacja tablicy sterującej, drobna
+korekta odesłań).
+
+### 5. WNIOSKI
+
+Dobry przykład właściwej klasyfikacji: flaga o statusie "czekam na
+zdarzenie z konkretnym terminem" (F-) po zajściu zdarzenia NIE zawsze
+kwalifikuje się do prostego zamknięcia — jeśli zdarzenie samo generuje
+NOWY, dłuższy horyzont czasowy niepewności (tu: nieznany termin orzeczenia
+TK), właściwym miejscem jest przesunięcie do OBS, nie usunięcie z
+rejestru w całości ani pozostawienie jako F- wymagającej działania co
+sesję.
+
+**Reguła 7 — zastosowanie:** TAK (aktualizacja rejestru, bez zmian
+plików modułów). `audyt-systemu-v4.zip` dostarczany ponownie z tym
+wpisem.
+
+---
+
+## AUDYT-2026-08-21m — F-18: trzy pozycje "OBOWIĄZKOWA" zamknięte (VAT)
+
+### 1. STATUS OGÓLNY
+
+Kontynuacja kolejki priorytetowej ("kontynuuj"), po rozstrzygnięciu F-97.
+F-18 wybrana z uwagi na precyzyjnie zidentyfikowane, konkretne pozycje
+priorytetowe (w przeciwieństwie do F-13, gdzie zakres jest szerszy i
+mniej ostry).
+
+### 2. WERYFIKACJA I USTALENIA
+
+**(1) Art. 115 ust. 2 + przepis epizodyczny (mod-VAT-transakcje-
+fakturowanie.md):** Moduł sygnalizował niepewność, KTÓRY przepis
+epizodyczny obowiązuje. Ustalono: **art. 146ef ust. 1 pkt 3** (nie 146ea
+wskazywany w module — ten dotyczył wcześniejszego, już zakończonego
+okresu). Stawka zryczałtowanego zwrotu podatku dla rolnika ryczałtowego:
+bazowa 6,5% (art. 115 ust. 2), podniesiona nieprzerwanie do 7% od
+1.01.2011 przez kolejne przepisy epizodyczne (146a → 146aa → 146ef).
+Obecna wersja art. 146ef obowiązuje od 1.01.2024, uwarunkowana progiem
+wydatków obronnych/PKB, z wersją czasową potwierdzoną (sip.lex.pl:
+"od 1 kwietnia 2026 r. do 31 grudnia 2026 r." — a więc AKTUALNIE
+obowiązująca). 5 zgodnych źródeł: lexlege.pl, przepisy.gofin.pl, qmap.pl,
+inforlex.pl (komentarz), sip.lex.pl.
+
+**(2) Art. 99 ust. 3a (mod-VAT-ewidencja-deklaracje.md):** Moduł miał
+poprawną strukturę (załącznik 15, nie 13 — sprawdzono i POTWIERDZONO że
+to jest aktualne, gdyż zał. 13 został uchylony i wchłonięty do zał. 15
+nowelizacją z 1.11.2019), ale brakowało konkretnej liczby progu.
+Ustalono: **próg 50 000 zł netto**, ograniczony WYŁĄCZNIE do dostawy
+TOWARÓW z zał. 15 (od nowelizacji SLIM VAT 1.01.2021 świadczenie usług
+z tego załącznika NIE wyklucza kwartału — celowe przywrócenie stanu
+sprzed 1.11.2019). 6 zgodnych źródeł, w tym izbapodatkowa.pl z
+bezpośrednim cytatem uzasadnienia MF do projektu SLIM VAT.
+
+**(3) Art. 2 pkt 27e — definicja ZCP (mod-VAT-transakcje-fakturowanie.md):**
+Pełna treść potwierdzona: "organizacyjnie i finansowo wyodrębniony w
+istniejącym przedsiębiorstwie zespół składników materialnych i
+niematerialnych, w tym zobowiązania, przeznaczonych do realizacji
+określonych zadań gospodarczych, który zarazem mógłby stanowić
+niezależne przedsiębiorstwo samodzielnie realizujące te zadania".
+Numeracja stabilna od co najmniej 2019 (ta sama pozycja w komentarzach
+inforlex 2019/2020 i 2024) — niska zmienność potwierdzona tysiącami
+interpretacji KIS odwołujących się do tego samego numeru przepisu.
+
+### 3. NAPRAWY WYKONANE
+
+`dr-06/modules/mod-VAT-transakcje-fakturowanie.md` — 2 znaczniki
+`⚠️ [ZALECANA WERYFIKACJA ISAP]`/`OBOWIĄZKOWA` zamknięte (art. 115 ust. 2
++ 146ef; art. 2 pkt 27e), z pełną adnotacją źródeł przy każdej pozycji.
+
+`dr-06/modules/mod-VAT-ewidencja-deklaracje.md` — 1 znacznik zamknięty
+(art. 99 ust. 3a, próg 50 000 zł), z jawnym potwierdzeniem że numer
+załącznika (15) w module był poprawny — zapobiega przyszłej, błędnej
+"korekcie" na załącznik 13 przez kogoś nieświadomego historii przepisu.
+Pozostały znacznik dla art. 100 ust. 3/4, 101-102 (niższy priorytet,
+nieobjęty tą sesją).
+
+### 4. STRUKTURA
+
+`dr-06`: 65 plików, bez zmian liczby — treść 2 plików zmieniona.
+
+### 5. WNIOSKI
+
+Przypadek (2) to dobry przykład wartości weryfikacji ZANIM wprowadzi się
+poprawkę: początkowe wrażenie (różne numery załączników w różnych
+źródłach) mogło doprowadzić do błędnej "korekty" modułu na załącznik 13,
+gdyby nie sprawdzono chronologii nowelizacji (zał. 13 uchylony
+1.11.2019). Moduł od początku miał rację — weryfikacja to nie zawsze
+naprawa, czasem to POTWIERDZENIE że nie ma błędu.
+
+**Reguła 7 — zastosowanie:** TAK. `dr-06-podatki-finanse-publiczne-aml.zip`
+dostarczony (65/65 plików, diff zip↔drzewo puste, diff drzewo↔oryginał
+ograniczony do 2 zamierzonych plików). `audyt-systemu-v4.zip`
+zaktualizowany (F-18 zawężona, licznik F- bez zmiany — pozostaje
+częściowo otwarta).
+
+---
+
+## AUDYT-2026-08-21n — F-18 ZAMKNIĘTA W CAŁOŚCI
+
+### 1. STATUS OGÓLNY
+
+Kontynuacja F-18 ("kontynuuj"). Domknięto pozostałe znaczniki w
+mod-VAT-ewidencja-deklaracje.md (art. 100 ust. 3/4/7) i sprawdzono
+pozostałe 3 pliki wymienione w opisie flagi.
+
+### 2. WERYFIKACJA I USTALENIA
+
+**Art. 100 ust. 3/4/7 (mod-VAT-ewidencja-deklaracje.md):** Rozbieżność
+źródeł 15/25 dni, sygnalizowana w module jako potencjalny problem, okazała
+się NIE być błędem ani stanem historycznym — to realne rozróżnienie wg
+formy składania: 15. dzień (art. 100 ust. 3, forma papierowa — praktycznie
+martwa) vs 25. dzień (art. 100 ust. 7, forma elektroniczna — jedyna
+praktycznie stosowana). Próg kwartalny (art. 100 ust. 4) POTWIERDZONY
+jako aktualny, nie historyczny: 250 000 zł dla WDT (ust. 1 pkt 1, 3),
+50 000 zł dla WNT (ust. 1 pkt 2). 8 zgodnych źródeł: rp.pl ×2,
+poradnikprzedsiebiorcy.pl (05.2026), przepisy.gofin.pl, lexlege.pl,
+ordynacjapodatkowa.pl ×2, izbapodatkowa.pl, ksiegowego.pl (08.2024).
+
+**Sprawdzenie pozostałych 3 plików z opisu flagi:**
+- `mod-VAT-podatek-od-towarow-i-uslug.md` — BRAK znaczników
+  "ZALECANA WERYFIKACJA ISAP" (opis flagi z 2026-08-12 był już
+  nieaktualny — prawdopodobnie zamknięte we wcześniejszej,
+  nieudokumentowanej w tym wątku sesji).
+- `mod-PKPiR-ewidencje-uproszczone.md` — 1 znacznik, ale przy TREŚCI już
+  potwierdzonej 3 źródłami (podatki.gov.pl, prawo.pl, przepisy.gofin.pl)
+  — to standardowa stopka prudencyjna, nie luka. Pozostawiona bez zmian.
+- `mod-VAT-sankcje-bony-odliczenia.md` — 3 znaczniki: (a) art. 108 —
+  treść już potwierdzona 3 źródłami, stopka prudencyjna; (b) art. 88 —
+  treść już potwierdzona 3 źródłami (w tym eureka.mf.gov.pl), stopka
+  prudencyjna; (c) rozporządzenie 17.12.2015 — **ZNALEZIONA WEWNĘTRZNA
+  SPRZECZNOŚĆ**: znacznik mówił "metryki NIE potwierdzono w źródle
+  urzędowym", podczas gdy adnotacja TUŻ NAD nim już potwierdzała status
+  Rządem 1 (isap.sejm.gov.pl, WDU20150002193) — pozostałość po zamknięciu
+  tej pozycji w sesji 2026-08-20, nigdy nieusunięta. Naprawione przez
+  dodanie jawnej adnotacji zamknięcia z wyjaśnieniem sprzeczności.
+
+### 3. DECYZJA O ZAMKNIĘCIU
+
+F-18 ZAMKNIĘTA W CAŁOŚCI. Wszystkie 5 pozycji priorytetowych
+("OBOWIĄZKOWA" + art. 100) rozstrzygnięte w toku 2 sesji tej rozmowy.
+Pozostałe 2 znaczniki (art. 108, art. 88) to prudencyjne stopki przy już
+solidnie zweryfikowanej treści — zgodnie z pierwotną obserwacją flagi
+("znacznik oznacza życzeniowe, nie krytyczne domknięcie"), nie
+uzasadniają utrzymania całej flagi otwartej. Wiersz usunięty z sekcji A.
+
+### 4. STRUKTURA
+
+`dr-06`: 65 plików, bez zmian liczby — treść 3 plików (2 z tej tury,
+1 z poprzedniej) zmieniona łącznie w toku obu sesji F-18.
+
+### 5. WNIOSKI
+
+Ta flaga demonstruje wartość SYSTEMATYCZNEGO przeglądu wszystkich plików
+wymienionych w opisie, nie tylko pozycji "OBOWIĄZKOWA" — bez tego
+przeglądu wewnętrzna sprzeczność w mod-VAT-sankcje-bony-odliczenia
+(punkt 2c) pozostałaby niewykryta w nieskończoność, mimo że dotyczyła już
+formalnie zamkniętej pozycji.
+
+**Reguła 7 — zastosowanie:** TAK. `dr-06-podatki-finanse-publiczne-aml.zip`
+dostarczony ponownie (65/65 plików, diff zip↔drzewo puste, diff
+drzewo↔oryginał ograniczony do 3 zamierzonych plików ze skumulowaną
+treścią obu sesji F-18). `audyt-systemu-v4.zip` zaktualizowany (F-18
+zamknięta, licznik 22→21).
+
+---
+
+## AUDYT-2026-08-21o — F-13: druga tura przeglądu (21 plików, DR-06/08/09/10/13/14/16)
+
+### 1. STATUS OGÓLNY
+
+Kontynuacja F-13 ("kontynuuj"). Pierwsza sesja (2026-08-20) objęła 14
+plików dr-02/dr-03. Ta sesja: 21 plików w pozostałych 9 dziedzinach
+wspominających "zażalenie" poza dr-02/dr-03.
+
+### 2. METODOLOGIA
+
+`grep -rl "zażalenie"` w dr-06, 07 (0 wyników), 08, 09, 10, 13, 14, 15
+(0 wyników), 16 → 21 plików. Dla każdego sprawdzono kontekst (`grep -B1
+-A2`), rozróżniając: (a) generyczną wzmiankę nawigacyjną "Dobór pisma/
+środka: wniosek / odwołanie / zażalenie / skarga..." — powtarzający się
+blok standardowy w wielu modułach, NIE opisujący KONKRETNEGO środka, więc
+NIE jest realną luką w rozumieniu tej flagi; (b) konkretny opis środka
+BEZ adresata — realna luka; (c) konkretny opis środka Z adresatem już
+wskazanym — już OK, bez akcji.
+
+### 3. WYNIK PRZEGLĄDU
+
+- **10 plików** — generyczna wzmianka nawigacyjna (a), bez realnej luki:
+  akcyzowa-clo/part-06, mod-PrEnergetyczne-URE-OZE, mod-ustawa-rolne-
+  zywnosc-weterynaria, mod-ustawa-sport-turystyka, mod-ustawa-oswiata,
+  mod-PrFarm, mod-ustawa-dzialalnosc-lecznicza, mod-REACH-CLP, mod-
+  ustawa-zarzadzanie-kryzysowe, mod-TFUE-TUE, mod-ustawa-edukacja-
+  specjalna.
+- **9 plików** — kategoria (c), adresat już wskazany, bez akcji:
+  mod-KAS-kontrola-celno-skarbowa (zażalenie NIE SŁUŻY — jasne wprost),
+  mod-UDP-strefy-platnego-parkowania ("do organu wyższego stopnia"),
+  mod-lowieckie-straz-lowiecka-PSL ("zażalenie do PROKURATORA" —
+  wzorcowo kompletny opis, wpisany do checklisty), mod-POS-prawo-
+  ochrony-srodowiska ("organ wyższego stopnia"), mod-ustawa-straz-
+  graniczna ("sąd rozpoznaje"), mod-KPC-odtworzenie-akt-zaginionych
+  (KPC ogólne dewolutywne, już pokryte bramką), mod-UFP-finanse-
+  publiczne-NIK-RIO (kontekst szerszy, adresat zależny od rangi
+  podmiotu — już opisane).
+- **1 plik — GENUINE LUKA znaleziona i naprawiona**:
+  `mod-PrBud-patodeweloperka-uzytkowanie-male-obiekty-ograniczenia.md`
+  — zażalenie na postanowienie o opłacie legalizacyjnej (art. 71a Prawo
+  budowlane) nie miało adresata.
+
+### 4. WERYFIKACJA I NAPRAWA
+
+Ustalono: **dewolutywne, za pośrednictwem** — do Wojewódzkiego
+Inspektora Nadzoru Budowlanego (WINB), jeżeli postanowienie wydał
+Powiatowy Inspektor Nadzoru Budowlanego (PINB, zwykły przypadek); do
+Głównego Inspektora Nadzoru Budowlanego (GINB), jeżeli wydał WINB.
+Za pośrednictwem organu wydającego, termin 7 dni, wniesienie NIE
+wstrzymuje wykonania (art. 143 KPA). 6 zgodnych źródeł: biznes.gov.pl
+×2 (oficjalne), WINB Wrocław (bip-e.pl, oficjalna procedura urzędowa),
+legalnabudowa.pl, budowlaneabc.gov.pl (MRiT), prawo-budowlane.info.
+
+Dodano też OGÓLNY wzorzec "Prawo budowlane — nadzór budowlany" do
+`shared/ZAZALENIE-ADRESAT-GATE.md`, generalizowalny poza ten jeden
+przypadek (obejmuje każde postanowienie PINB/WINB w toku nadzoru
+budowlanego, nie tylko art. 71a) — zgodnie z ZASADĄ tej bramki: rosnąć
+wraz z kolejnymi rozpoznanymi dziedzinami.
+
+### 5. STRUKTURA
+
+`dr-09`: 42 pliki, bez zmian liczby. `shared`: 199 plików, bez zmian
+liczby.
+
+### 6. WNIOSKI
+
+Stosunek 1 genuine luki na 21 przejrzanych plików (~5%) potwierdza
+malejący, ale niezerowy zwrot z dalszego przeglądu — bramka dynamiczna
+skutecznie łagodzi ryzyko dla większości przypadków (10/21 to zresztą
+nie prawdziwe opisy środka, tylko nawigacyjne wzmianki), ale statyczna
+adnotacja wciąż wyłapuje pojedyncze, konkretne luki które bramka sama
+nie wypełni bez ręcznego web_search przy każdym użyciu. Pozostaje ~37
+z 58 plików nieprzejrzanych (DR-07 i DR-15 miały 0 wyników grep — już
+pokryte lub nie dotyczą; reszta DR-10/13/14/16 częściowo przejrzana).
+
+**Reguła 7 — zastosowanie:** TAK. `dr-09-budownictwo-srodowisko-energia-
+transport.zip` (42/42 pliki) i `shared.zip` (199/199 plików) dostarczone,
+oba z czystą weryfikacją bajtową zip↔drzewo, różnice drzewo↔oryginał
+ograniczone do 1 zamierzonego pliku każdy. `audyt-systemu-v4.zip`
+zaktualizowany.
+
+---
+
+## AUDYT-2026-08-21p — F-13: dokończenie dr-02/dr-03 — para bliźniaczych pułapek (Prawo restrukturyzacyjne/upadłościowe)
+
+### 1. STATUS OGÓLNY
+
+Kontynuacja F-13 ("kontynuuj"). Dokończono pierwotną listę 17 plików
+dr-02/dr-03 (8 pozostałych po sesji 2026-08-20, która objęła 14 z 17 —
+korekta: w rzeczywistości 9 sprawdzonych wcześniej, 8 pozostałych).
+
+### 2. NAJWAŻNIEJSZE ODKRYCIE: PARA BLIŹNIACZYCH PUŁAPEK
+
+Art. 200 Prawa restrukturyzacyjnego i art. 222 Prawa upadłościowego to
+niemal identyczne przepisy ogólne — ta sama struktura co już znana
+pułapka art. 795 KPC (klauzula wykonalności):
+- Zażalenie na postanowienie SĘDZIEGO-KOMISARZA → **dewolutywne** (sąd
+  restrukturyzacyjny/upadłościowy jako sąd II instancji)
+- Zażalenie na postanowienie SĄDU restrukturyzacyjnego/upadłościowego →
+  **POZIOME** (inny skład TEGO SAMEGO sądu) — WYJĄTEK: enumeratywna
+  lista konkretnych postanowień (różna dla każdej ustawy), które MIMO
+  pochodzenia od sądu są jednak dewolutywne.
+
+Zweryfikowane: lexlege.pl, arslege.pl (2×), standardyprawa.pl — zgodne
+brzmienie obu artykułów.
+
+### 3. NAPRAWY WYKONANE
+
+- **`mod-PrRestr-dzial-VII-uklad-czesciowy.md`** — art. 188 (zażalenie na
+  zatwierdzenie układu częściowego): postanowienie wydaje SĄD
+  restrukturyzacyjny, art. 188 NIE jest na liście wyjątków art. 200
+  ust. 1a → **POZIOME**.
+- **`mod-PrUpad-upadlosc-restrukturyzacja.md`** — DWA przypadki w jednym
+  pliku, przeciwstawne wyniki:
+  - Art. 56d (zatwierdzenie sprzedaży przedsiębiorstwa upadłego):
+    postanowienie sądu upadłościowego, NIE na liście wyjątków →
+    **POZIOME**.
+  - Art. 172 (odwołanie/upomnienie/grzywna na syndyka): postanowienie
+    SĘDZIEGO-KOMISARZA → dewolutywne z reguły ogólnej, DODATKOWO wprost
+    wymienione w liście wyjątków art. 222 ust. 1a (co potwierdza
+    dewolutywność nawet w razie wątpliwości co do organu wydającego) →
+    **DEWOLUTYWNE**, przypadek bez pułapki.
+
+### 4. WZORCE OGÓLNE DODANE DO BRAMKI
+
+Dodano PARĘ wzorców do `shared/ZAZALENIE-ADRESAT-GATE.md` — wartość
+generalizacyjna wykracza poza te 2 konkretne artykuły, obejmuje CAŁE
+prawo restrukturyzacyjne (art. 200) i upadłościowe (art. 222) jako całe
+kategorie: sędzia-komisarz = dewolutywne; sąd = poziome z wyjątkami do
+sprawdzenia każdorazowo na liście ustawowej.
+
+### 5. POZOSTAŁE 6 Z 8 PRZEJRZANYCH PLIKÓW
+
+Bez akcji — kategoria nawigacyjna lub już adekwatnie opisana:
+mod-PrRestr-dzial-III-nadzorca-zarzadca (porównanie wynagrodzeń, nie
+opis środka), mod-ustawa-doradca-restrukturyzacyjny-zawod (nawigacyjne),
+mod-PrRestr-dzial-VI-uklad (tabela routingu do skilla), mod-KSH-spolki-
+handlowe (już odsyła "wg przepisów KPA" — adekwatne, KPA już w bramce),
+mod-KKS-karny-skarbowy-i-AML (nawigacyjne), mod-KK-przemoc-domowa-
+szczegolowy (zażalenie na bezczynność POLICJI, inny reżim proceduralny
+niż zażalenie na postanowienie sądu — niższy priorytet, nieobjęte tą
+sesją).
+
+### 6. BILANS
+
+**Wszystkie 17 plików z pierwotnej listy dr-02/dr-03 (genesis flagi)
+TERAZ PRZEJRZANE W CAŁOŚCI** — 2 sesje (2026-08-20 + ta), łącznie 3
+genuine luki naprawione (art. 795 KPC, art. 188 PrRestr, art. 56d PrUpad)
++ 1 przypadek potwierdzający regułę bez pułapki (art. 172 PrUpad) + 2
+wzorce ogólne dodane do bramki (nadzór budowlany z tury 1, para
+restrukturyzacyjna/upadłościowa z tej tury).
+
+### 7. STRUKTURA
+
+`dr-02`: 67 plików, bez zmian liczby (3 pliki zmienione łącznie w toku
+całej sesji: UZNK z wcześniejszej tury + 2 z tej). `shared`: 199 plików,
+bez zmian liczby.
+
+### 8. WNIOSKI
+
+Wzorzec "sędzia-komisarz dewolutywne / sąd poziome" w prawie
+restrukturyzacyjnym i upadłościowym to TRZECI udokumentowany przypadek
+tej samej klasy pułapki (po art. 795 KPC) — warto przy przyszłych
+przeglądach świadomie szukać tego wzorca (dwuinstancyjny organ
+orzekający: niższy = sędzia/urzędnik, wyższy = sąd/kolegium) jako
+sygnał ostrzegawczy, że reguła adresata może się różnić zależnie od
+tego, KTÓRY z dwóch organów wydał zaskarżane postanowienie.
+
+**Reguła 7 — zastosowanie:** TAK. `dr-02-prawo-cywilne-rodzinne-
+gospodarcze.zip` (67/67 plików, 3 pliki zmienione łącznie) i
+`shared.zip` (199/199 plików, 1 plik zmieniony) dostarczone ponownie,
+oba z czystą weryfikacją bajtową. `audyt-systemu-v4.zip` zaktualizowany.
+
+---
+
+## AUDYT-2026-08-21q — F-13: DR-04/05/11/12 (19 plików), zero nowych luk; korekta zakresu flagi
+
+### 1. STATUS OGÓLNY
+
+Kontynuacja F-13 ("kontynuuj"). Przejrzano 19 plików w DR-04, DR-05,
+DR-11, DR-12 wspominających "zażalenie".
+
+### 2. WYNIK — ZERO NOWYCH LUK
+
+Wszystkie 19 plików już adekwatnie pokryte:
+- **mod-KSCU-koszty-sadowe-i-pomoc-prawna.md** — wzorcowy przykład,
+  cytuje bramkę wprost z konkretnym przykładem ("odmowa zwolnienia od
+  kosztów = zażalenie poziome") — dokładnie zgodne z wpisem już
+  istniejącym w `shared/ZAZALENIE-ADRESAT-GATE.md` (art. 394¹ᵃ KPC).
+- **mod-PrProkuratura-organy-ochrony-prawa.md** — poprawnie cytuje
+  art. 306 KPK (7 dni, już w bramce jako "wyjątek dewolutywny").
+- **mod-UODO-postepowanie-ochrona-danych.md** — jawne ostrzeżenie
+  wewnątrz modułu: "adresat każdego z tych środków — patrz bramka,
+  ustal PRZED redakcją, nie zakładaj wzorca z innej dziedziny".
+- Pozostałe 15 plików (dr-04 rehabilitacja-PFRON/pomoc-spoleczna,
+  dr-05 UPEA [już pełny adresat z 2026-07-25]/KPA-decyzja-i-odwolanie/
+  KPA-mechanizmy-w-toku-sprawy/3× kpa-tryby-nadzwyczajne/KPA-
+  postepowanie-administracyjne, dr-11 KSC-NIS2, dr-12 biegli-sadowi/
+  adwokatura/radcowie-prawni/regulatorzy/odpowiedzialnosc-dyscyplinarna/
+  komornicy-sadowi) — nawigacyjne lub już poprawnie odsyłające do
+  ogólnej reguły KPA/KPK już obecnej w bramce.
+
+### 3. KOREKTA WAŻNA — ZAKRES FLAGI NIEDOSZACOWANY
+
+Pełny `grep -rl "zażalenie"` na całym systemie (poza samą bramką) zwraca
+**113 plików** — znacznie więcej niż "~58 z 69" założone w opisie flagi
+z genezy 2026-07-25. System urósł od tego czasu (nowe moduły dodane w
+kolejnych sesjach audytowych), a licznik nigdy nie został przeliczony.
+Zaktualizowano opis flagi z tą korektą.
+
+### 4. BILANS CAŁEJ SESJI (3 tury, ta rozmowa)
+
+57 plików przejrzanych łącznie (17 dr-02/03 + 21 DR-06/08/09/10/13/14/16
++ 19 DR-04/05/11/12), 3 genuine luki znalezione i naprawione (nadzór
+budowlany art. 71a, Prawo restrukturyzacyjne art. 188, Prawo
+upadłościowe art. 56d) + 1 potwierdzenie bez pułapki (art. 172 PrUpad).
+Współczynnik trafień malejący z każdą turą: 1/21 (tura 1) → 2/17
+(tura 2) → 0/19 (tura 3) — silny sygnał malejącego zwrotu.
+
+Pozostaje ~56 plików całkowicie nieprzejrzanych w tej rozmowie (113 - 57).
+
+### 5. STRUKTURA
+
+Brak zmian plików modułów w tym wpisie — tylko aktualizacja
+`WARN-OTWARTE.md` z korektą zakresu.
+
+### 6. WNIOSKI
+
+Malejący współczynnik trafień (0% w ostatniej turze) w połączeniu z
+odkryciem, że system jest 2× większy niż zakładano, sugeruje: dalszy
+wyczerpujący przegląd pozostałych ~56 plików ma niski oczekiwany zwrot
+w stosunku do wysiłku. Rekomendacja dla przyszłej sesji: albo (a)
+zaakceptować, że bramka dynamiczna jest głównym mechanizmem
+zabezpieczającym i ograniczyć dalszą statyczną adnotację do sytuacji
+"przy okazji" (jak dotąd), albo (b) rozważyć zamknięcie F-13 z
+przeniesieniem do kategorii REACT-1 (uruchamiane sprawą klienta), skoro
+mechanizm łagodzący (bramka) jest w pełni funkcjonalny niezależnie od
+tempa adnotacji statycznej.
+
+**Reguła 7 — zastosowanie:** TAK (aktualizacja rejestru, bez zmian
+plików modułów). `audyt-systemu-v4.zip` dostarczany ponownie z tym
+wpisem.

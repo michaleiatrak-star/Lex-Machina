@@ -129,9 +129,19 @@ pokrycia VAT)
     niematerialnych i materialnych przeznaczony do prowadzenia
     działalności gospodarczej)
   □ ZORGANIZOWANA CZĘŚĆ PRZEDSIĘBIORSTWA — definicja WŁASNA ustawy VAT:
-    **art. 2 pkt 27e** ⚠️ [WERYFIKUJ pełne brzmienie w ISAP przed
-    powołaniem — wymaga wyodrębnienia ORGANIZACYJNEGO, FINANSOWEGO i
-    FUNKCJONALNEGO oraz zdolności do samodzielnego realizowania zadań]
+    **art. 2 pkt 27e** ✅ ZWERYFIKOWANE 2026-08-21 (F-18) — pełne
+    brzmienie: "organizacyjnie i finansowo wyodrębniony w istniejącym
+    przedsiębiorstwie zespół składników materialnych i niematerialnych,
+    w tym zobowiązania, przeznaczonych do realizacji określonych zadań
+    gospodarczych, który zarazem mógłby stanowić niezależne
+    przedsiębiorstwo samodzielnie realizujące te zadania" — trzy
+    wyodrębnienia potwierdzone (organizacyjne, finansowe, funkcjonalne/
+    zdolność do samodzielnego działania), zgodnie z opisem niżej w tej
+    sekcji. Zweryfikowane: inforlex.pl (komentarz VAT 2019/2020 i 2024,
+    ta sama numeracja w obu edycjach — stabilna od lat), epodatnik.pl
+    (rejestr tysięcy interpretacji KIS odwołujących się do tego przepisu
+    pod tym samym numerem) — niska zmienność tego przepisu potwierdzona
+    powtarzalnością numeracji na przestrzeni 5+ lat.
 
 ⭐⭐ ZAKRES POJĘCIA „TRANSAKCJA ZBYCIA" — utrwalona wykładnia organów:
   rozumiane SZEROKO, w sposób zbliżony do „dostawy towarów" z art. 7 ust.
@@ -173,7 +183,8 @@ pokrycia VAT)
    art. 6, Dz.U.2025.0.775 t.j.; wykładnia „transakcji zbycia"
    potwierdzona w 4 interpretacjach indywidualnych KIS (2025–2026),
    2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP — w szczególności art. 2 pkt 27e]
+✅ [VER 2026-08-21 (F-18): art. 2 pkt 27e w pełni zweryfikowany — patrz
+   adnotacja wyżej. Znacznik ZALECANA WERYFIKACJA zamknięty]
 ```
 
 ---
@@ -578,15 +589,23 @@ RYCZAŁTOWY (art. 115–118) — dodane 2026-08-12 (iteracja III)
     ZRYCZAŁTOWANY ZWROT podatku z tytułu nabywania niektórych środków
     produkcji dla rolnictwa. ⭐ KWOTĘ ZWROTU WYPŁACA **NABYWCA** produktów
     rolnych (nie urząd skarbowy)
-  □ ⚠️⚠️ STAWKA — DWA RÓŻNE POZIOMY, OBOWIĄZKOWA WERYFIKACJA:
-    art. 115 ust. 2 stanowi o **6,5%** kwoty należnej z tytułu dostawy
-    produktów rolnych pomniejszonej o kwotę zryczałtowanego zwrotu, ALE
-    przepis EPIZODYCZNY (art. 146ea pkt 3 i przepisy pokrewne) podnosił
-    ją do **7%**
-    ⛔ NIE PODAWAJ STAWKI Z TEGO MODUŁU BEZ SPRAWDZENIA — trzeba ustalić,
-      KTÓRY przepis epizodyczny obowiązuje NA DATĘ CZYNNOŚCI i czy nie
-      wygasł. web_search: „zryczałtowany zwrot podatku rolnik ryczałtowy
-      stawka 7% art. 146 ustawa VAT [rok]" + weryfikacja w ISAP
+  □ ✅ STAWKA — ZWERYFIKOWANE 2026-08-21 (F-18): art. 115 ust. 2 stanowi
+    o BAZOWEJ **6,5%** kwoty należnej z tytułu dostawy produktów rolnych
+    pomniejszonej o kwotę zryczałtowanego zwrotu, ALE obecnie (i od
+    1.01.2011 nieprzerwanie) podniesiona do **7%** przez przepis
+    EPIZODYCZNY. Ustalony i potwierdzony KONKRETNY, obecnie obowiązujący
+    przepis: **art. 146ef ust. 1 pkt 3** (nie art. 146ea — ten dotyczył
+    wcześniejszego okresu i już nie obowiązuje; nie mylić też z art. 146a
+    [2011-2018] i art. 146aa [2019-2023], oba HISTORYCZNE, ta sama
+    stawka 7% powtórzona w kolejnych przepisach epizodycznych od 2011 r.
+    bez przerwy). Art. 146ef obowiązuje od 1.01.2024, warunkowany progiem
+    wydatków obronnych/PKB (odesłanie do ustawy o obronie Ojczyzny), z
+    obowiązkiem ogłoszenia przez ministra finansów końca okresu do 31.10
+    danego roku — wersja obowiązująca obecnie: od 1.04.2026 do 31.12.2026
+    (sip.lex.pl OpenLEX, wersja czasowa). Zweryfikowane: lexlege.pl,
+    przepisy.gofin.pl, qmap.pl, inforlex.pl (komentarz), sip.lex.pl —
+    5 zgodnych źródeł Rządu 2B, wszystkie cytujące identyczną treść i
+    stawkę 7%.
   □ art. 116 ust. 1 — nabywca będący **VAT CZYNNYM** wystawia FAKTURĘ
     **VAT RR** w DWÓCH EGZEMPLARZACH; ORYGINAŁ przekazuje DOSTAWCY
     (⭐ odwrócenie zwykłego kierunku fakturowania — fakturę wystawia
@@ -610,8 +629,9 @@ RYCZAŁTOWY (art. 115–118) — dodane 2026-08-12 (iteracja III)
    art. 118 — zgodnie w 3 źródłach (przepisy.gofin.pl ×2,
    ksiegowosc.infor.pl); charakter procedury z art. 119 ust. 4
    potwierdzony komentarzem INFORLEX. 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP — OBOWIĄZKOWA dla stawki z art. 115 ust. 2
-   i przepisów epizodycznych z art. 146x]
+✅ [VER 2026-08-21 (F-18): stawka 7% z art. 115 ust. 2 przez art. 146ef
+   ust. 1 pkt 3 — 5 zgodnych źródeł, patrz adnotacja wyżej. Znacznik
+   OBOWIĄZKOWA zamknięty]
 ```
 
 ---

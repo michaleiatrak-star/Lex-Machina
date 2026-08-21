@@ -72,6 +72,17 @@ Organ WNOSI sprzeciw, jeżeli zmiana:
 □ Po sprawdzeniu wykonania obowiązku → OPŁATA LEGALIZACYJNA (postanowienie,
   zaskarżalne zażaleniem) — stawka WEDŁUG art. 59f (kara za
   nieprawidłowości przy kontroli), ale PODWYŻSZONA DZIESIĘCIOKROTNIE
+  ✅ ADRESAT ZAŻALENIA (F-13, zweryfikowane 2026-08-21): **dewolutywne, za
+  pośrednictwem** — do Wojewódzkiego Inspektora Nadzoru Budowlanego
+  (WINB), jeżeli postanowienie wydał Powiatowy Inspektor Nadzoru
+  Budowlanego (PINB, zwykły przypadek); do Głównego Inspektora Nadzoru
+  Budowlanego (GINB), jeżeli postanowienie wydał WINB (rzadszy przypadek,
+  gdy pozwolenie na budowę wydawał wojewoda). Wnosi się ZA POŚREDNICTWEM
+  organu, który wydał postanowienie, w terminie **7 dni** od doręczenia.
+  Wniesienie NIE WSTRZYMUJE wykonania postanowienia (art. 143 KPA).
+  Zweryfikowane 6 zgodnych źródeł: biznes.gov.pl (2×, oficjalne), WINB
+  Wrocław (bip-e.pl, oficjalna procedura urzędowa), legalnabudowa.pl,
+  budowlaneabc.gov.pl (MRiT), prawo-budowlane.info.
 □ Dalsze UŻYTKOWANIE mimo wstrzymania/sprzeciwu = odrębna, surowsza
   konsekwencja (⚠️ dokładny wymiar niepotwierdzony w pełni w tej sesji)
 ```

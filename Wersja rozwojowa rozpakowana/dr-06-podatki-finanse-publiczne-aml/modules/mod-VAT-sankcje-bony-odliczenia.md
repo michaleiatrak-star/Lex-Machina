@@ -730,6 +730,11 @@ zdrowia, edukacja, finanse, NGO, spółdzielnie)
 ⚠️ [ZALECANA WERYFIKACJA ISAP — w szczególności aktualny status i tekst
    rozporządzenia z 17.12.2015 r., którego metryki NIE potwierdzono w
    źródle urzędowym]
+✅ [POZYCJA ZAMKNIĘTA 2026-08-20 (F-18) — znacznik wyżej był NIEAKTUALNY,
+   pozostawiony po fakcie: adnotacja tuż nad nim JUŻ potwierdza status
+   Rządem 1 (isap.sejm.gov.pl, WDU20150002193) + 6 źródeł Rządu 2.
+   Sprzeczność między treścią a znacznikiem wykryta i naprawiona
+   2026-08-21 przy okazji kolejnej sesji F-18]
 ```
 
 ---

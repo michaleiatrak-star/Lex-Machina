@@ -62,7 +62,15 @@ BUDOWNICTWO:
                WKZ, podwójny wymóg pozwolenie WKZ+PrBud, nakaz/
                wstrzymanie konserwatorskie; obiekty użyteczności
                publicznej: bezwzględny wymóg dostępności dla
-               niepełnosprawnych, dane NIK o realnej niezgodności)
+               niepełnosprawnych, dane NIK o realnej niezgodności.
+               ✅ PODZIELONY 2026-08-20 — naprawa F-78, priorytet 10
+               [OSTATNI Z LISTY 10 PRIORYTETOWYCH, 1008 linii]: plik
+               pod NIEZMIENIONĄ nazwą stał się indeksatorem [44 linie],
+               treść 15 sekcji przeniesiona do 6 plików w podkatalogu
+               `ochrona-zabytkow/` [max 219 linii/plik]. Zweryfikowano
+               100% integralność [15 nagłówków = 15]. Naprawiono 2
+               odesłania cross-file [dostępność → część 1, stacje
+               transformatorowe → część 3])
   [✓] OK    mod-PrBud-prawo-budowlane
               (samowola, PINB/WINB, pozwolenie, zgłoszenie, WZ/MPZP, umowa z wykonawcą,
                uchwała NSA 7 sędziów luty 2026 — art. 49f i wcześniejszy nakaz rozbiórki)

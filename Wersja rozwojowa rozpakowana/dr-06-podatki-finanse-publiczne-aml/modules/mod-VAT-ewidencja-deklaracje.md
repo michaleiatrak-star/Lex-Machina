@@ -177,8 +177,26 @@ dnia
      ZWERYFIKUJ W ISAP; nie odtwarzaj ich z pamięci]
 
 ⛔⛔ UTRATA PRAWA DO KWARTAŁU PRZEZ ZAŁĄCZNIK 15 (art. 99 ust. 3a i n.):
+  ✅ ZWERYFIKOWANE 2026-08-21 (F-18): art. 99 ust. 3a przewiduje CZTERY
+  przypadki utraty prawa do kwartalnego rozliczenia: (1) podatnicy
+  zarejestrowani jako VAT czynni od mniej niż 12 miesięcy; (2) dostawa
+  TOWARÓW (nie usług — od nowelizacji SLIM VAT 1.01.2021 świadczenie
+  USŁUG z zał. 15 NIE wyklucza kwartału, tylko dostawa TOWARÓW) z
+  załącznika nr 15, w danym kwartale LUB w poprzedzających go 4
+  kwartałach, o łącznej wartości przekraczającej próg w KTÓRYMKOLWIEK
+  miesiącu tych okresów; (3) import towarów rozliczany procedurą
+  uproszczoną z art. 33a ust. 1; (4) czwarty przypadek nieustalony w tej
+  sesji. **Próg z pkt 2 (dotąd niepodany w module): 50 000 zł netto.**
+  ⚠️ ZAŁĄCZNIK 15 W TYM MODULE JEST POPRAWNY — starsze materiały (sprzed
+  1.11.2019) odwoływały się do załącznika nr 13, uchylonego i wchłoniętego
+  do zał. 15 tą nowelizacją; nie cofać się do zał. 13 jako rzekomej
+  korekty. Zweryfikowane 6 zgodnych źródeł: poradnikprzedsiebiorcy.pl
+  (3 tyg.), izbapodatkowa.pl ×2 (2025, w tym z bezpośrednim cytatem
+  uzasadnienia MF do SLIM VAT), ifirma.pl, ksiegowoscpodatkowa.pl,
+  vademecumpodatnika.pl — wszystkie zgodne co do progu 50 000 zł i
+  ograniczenia do dostawy towarów (nie usług).
   gdy łączna wartość dostaw towarów z **załącznika nr 15** (bez podatku)
-  przekroczy próg z ust. 3a, podatnik rozliczający się kwartalnie MUSI
+  przekroczy próg **50 000 zł**, podatnik rozliczający się kwartalnie MUSI
   przejść na deklaracje MIESIĘCZNE — począwszy od rozliczenia za pierwszy
   miesiąc kwartału:
   → W KTÓRYM przekroczono kwotę — jeżeli przekroczenie nastąpiło w
@@ -187,8 +205,6 @@ dnia
     miesiąca następującego po drugim miesiącu kwartału)
   → NASTĘPUJĄCEGO PO kwartale, w którym przekroczono kwotę — jeżeli
     przekroczenie nastąpiło w TRZECIM miesiącu kwartału
-  ⚠️ [WYSOKOŚĆ PROGU z ust. 3a — NIE PODANA w tym module, ZWERYFIKUJ W
-     ISAP przed użyciem. To ten sam załącznik 15 co przy MPP — sekcja 4]
 
 □ PRZYPADKI SZCZEGÓLNE (art. 99):
   ust. 7a — ZAWIESZENIE DZIAŁALNOŚCI: brak obowiązku składania deklaracji
@@ -210,19 +226,33 @@ dnia
     obowiązku złożenia deklaracji (poza trybem zawieszenia z ust. 7a)
 
 ⭐⭐ INFORMACJE PODSUMOWUJĄCE VAT-UE (art. 100):
+  ✅ ZWERYFIKOWANE 2026-08-21 (F-18): rozbieżność źródeł 15/25 dni NIE
+  jest błędem ani stanem historycznym — to REALNE rozróżnienie wg formy
+  składania: **15. dnia** (art. 100 ust. 3, forma PAPIEROWA — obecnie
+  praktycznie martwa) vs **25. dnia** (art. 100 ust. 7, forma
+  ELEKTRONICZNA — jedyna praktycznie stosowana obecnie). Zweryfikowane
+  6 zgodnych źródeł: rp.pl ×2, poradnikprzedsiebiorcy.pl (05.2026),
+  przepisy.gofin.pl, lexlege.pl, ordynacjapodatkowa.pl ×2,
+  izbapodatkowa.pl, ksiegowego.pl (08.2024).
   □ składane ZA OKRESY MIESIĘCZNE, za pomocą ŚRODKÓW KOMUNIKACJI
     ELEKTRONICZNEJ, w terminie do **25. DNIA** miesiąca następującego po
     miesiącu, w którym powstał obowiązek podatkowy z tytułu transakcji
-    objętych obowiązkiem informacyjnym
-    ⚠️⚠️ [OSTRZEŻENIE ŹRÓDŁOWE: w obiegu funkcjonują opracowania
-       podające termin **15. dnia** (papierowo) obok 25. dnia
-       (elektronicznie) — to stan HISTORYCZNY sprzed przejścia na
-       wyłącznie elektroniczną formę. TERMIN I PODSTAWĘ (ust. 3 / ust. 7)
-       ZWERYFIKUJ W ISAP PRZED KAŻDYM UŻYCIEM — rozbieżność źródeł
-       wtórnych jest tu udokumentowana i realna]
-  □ ⚠️ [KWARTALNE informacje podsumowujące i próg 250 000 zł — pojawiają
-     się w źródłach wtórnych jako stan częściowo historyczny; NIE
-     WPISANE do modułu jako obowiązujące. Sprawdź art. 100 ust. 4 w ISAP]
+    objętych obowiązkiem informacyjnym (art. 100 ust. 7 — forma
+    elektroniczna; art. 100 ust. 3 przewiduje 15. dzień, ale WYŁĄCZNIE
+    dla formy papierowej, praktycznie nieużywanej)
+  □ ✅ PRÓG KWARTALNY POTWIERDZONY JAKO AKTUALNY (art. 100 ust. 4) — NIE
+    jest to stan historyczny, jak sugerowały wcześniejsze wątpliwości w
+    tym module. Informacje podsumowujące MOGĄ być składane za okresy
+    KWARTALNE (zamiast miesięcznych — to PRAWO, nie obowiązek), gdy:
+    1) transakcje z ust. 1 pkt 1 i 3 (WDT + przemieszczenia towarów) —
+       łączna wartość bez VAT NIE przekracza **250 000 zł** w danym
+       kwartale ANI w żadnym z 4 poprzednich kwartałów
+    2) transakcje z ust. 1 pkt 2 (WNT) — łączna wartość bez VAT NIE
+       przekracza **50 000 zł** w danym kwartale
+    □ przy przekroczeniu progu W TRAKCIE kwartału — informacje za
+      poszczególne miesiące, które upłynęły od początku kwartału, składa
+      się do 15. dnia miesiąca następującego po miesiącu przekroczenia
+      (termin 15/25 wg tej samej zasady formy jak wyżej)
   □ ⭐ SAM STATUS zarejestrowanego podatnika VAT-UE NIE RODZI obowiązku
     składania „zerowych" informacji podsumowujących — obowiązek powstaje
     dopiero przy WYSTĄPIENIU transakcji objętej art. 100 ust. 1
@@ -239,8 +269,16 @@ dnia
 ✅ [VER: art. 99 ust. 1, 2, 7a, 8, 8a, 9 oraz mechanizm utraty kwartału
    przez zał. 15 — zgodnie w 4 źródłach (lexlege.pl, arslege.pl,
    przepisy.gofin.pl, prawnik.cc), Dz.U.2025.0.775 t.j., 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP — OBOWIĄZKOWA dla: progu z art. 99 ust. 3a,
-   terminu i podstawy z art. 100 ust. 3/7, art. 100 ust. 4, art. 101–102]
+✅ [VER 2026-08-21 (F-18): próg art. 99 ust. 3a pkt 2 = 50 000 zł,
+   6 zgodnych źródeł — patrz adnotacja wyżej. Znacznik OBOWIĄZKOWA dla
+   tej pozycji zamknięty]
+✅ [VER 2026-08-21 (F-18) — art. 100 ust. 3/4/7: rozbieżność 15/25 dni
+   wyjaśniona (forma papierowa vs elektroniczna), próg kwartalny
+   250 000/50 000 zł potwierdzony jako aktualny, nie historyczny —
+   8 zgodnych źródeł, patrz adnotacja wyżej. Znacznik zamknięty]
+⚠️ [ZALECANA WERYFIKACJA ISAP — pozostaje wyłącznie dla art. 101–102
+   (korekty informacji podsumowujących i delegacje) — NIEOPRACOWANE w
+   tym module]
 ```
 
 ---

@@ -246,21 +246,68 @@ krajobrazowym pokrywającym się z Naturą 2000).
   gdzie decyduje minister/RDOŚ/sejmik województwa)
 ```
 
-### 4.5 Ochrona gatunkowa roślin, zwierząt i grzybów (10. forma)
+### 4.5 Ochrona gatunkowa roślin, zwierząt i grzybów (10. forma) — ✅
+ZWERYFIKOWANE (2026-08-19, F-42)
 
 ```
 □ ⭐ JEDYNA forma NIE OBSZAROWA/PUNKTOWA — dotyczy KONKRETNYCH
   GATUNKÓW, niezależnie od ich lokalizacji (chroniony gatunek jest
   chroniony WSZĘDZIE, gdzie występuje, nie tylko na wyznaczonym
-  terenie)
-□ USTANAWIANA rozporządzeniem MINISTRA środowiska (listy gatunków
-  chronionych — ⚠️ pełny katalog wymaga odrębnej weryfikacji przy
-  konkretnej sprawie)
-□ Zakazy DOTYCZĄ np. zabijania, okaleczania, chwytania, przetrzymywania,
-  niszczenia siedlisk/gniazd chronionych gatunków — ⚠️ dokładny
-  katalog zakazów per kategoria gatunku (ścisła/częściowa ochrona
-  gatunkowa) NIE zweryfikowany w pełni w tej sesji, punkt startowy
+  terenie) — obejmuje NIE TYLKO osobniki, ale TAKŻE siedliska, ostoje,
+  stanowiska, miejsca rozrodu i regularnego przebywania. Zniszczenie
+  siedliska może naruszać prawo NAWET gdy w chwili kontroli nie widać
+  samego osobnika.
+□ USTANAWIANA odrębnymi rozporządzeniami MINISTRA środowiska DLA
+  KAŻDEJ z 3 grup organizmów — ✅ katalog aktów wykonawczych POTWIERDZONY:
+  - Rozporządzenie MŚ z 16.12.2016 r. w sprawie ochrony gatunkowej
+    ZWIERZĄT (weszło w życie 1.01.2017) — załączniki: nr 1 (ochrona
+    ścisła), nr 2 (ochrona częściowa), nr 3 (gatunki dopuszczone do
+    pozyskiwania + sposoby pozyskiwania), nr 4 (gatunki wymagające
+    ochrony strefowej + wielkość stref).
+  - Rozporządzenie MŚ z 9.10.2014 r. w sprawie ochrony gatunkowej
+    GRZYBÓW.
+  - Rozporządzenie MŚ w sprawie ochrony gatunkowej ROŚLIN (analogiczny
+    mechanizm, data nie potwierdzona w tej sesji).
+  ⚠️ Wszystkie 3 rozporządzenia mogły być nowelizowane po dacie
+  pierwotnego wydania — sprawdź aktualny t.j. przy konkretnej sprawie,
+  nie zakładaj automatycznie dat z 2014/2016 bez weryfikacji.
+□ TRZY POZIOMY OCHRONY (potwierdzone jednolicie we wszystkich źródłach):
+  1) **OCHRONA ŚCISŁA (całkowita)** — całkowity zakaz niszczenia,
+     usuwania, zabijania, przenoszenia; najbardziej restrykcyjna.
+  2) **OCHRONA CZĘŚCIOWA** — mniej restrykcyjna, dopuszcza NIEKTÓRE
+     czynności/ingerencję w liczebność osobników wobec objętych nią
+     gatunków (np. wiewiórka pospolita — częściowa).
+  3) **OCHRONA STREFOWA** — DODATKOWY mechanizm (nie alternatywa dla
+     1-2, lecz nakładka) — wyznaczenie fizycznych STREF wokół ostoi,
+     miejsc rozrodu, regularnego przebywania (głównie dla ptaków
+     drapieżnych: orlik krzykliwy, bocian czarny, puchacz, bielik, orzeł
+     przedni, głuszec — przykłady z praktyki RDLP Kraków, 55 stref).
+□ KATALOG ZAKAZÓW (§6 rozporządzenia o zwierzętach) — zestaw wspólny dla
+  gatunków objętych ochroną ścisłą i częściową (zakres per gatunek może
+  być WĘŻSZY, nie każdy zakaz dotyczy każdego gatunku): zabijanie,
+  okaleczanie, chwytanie, przetrzymywanie, płoszenie, niepokojenie,
+  niszczenie jaj/gniazd/nor/siedlisk/stanowisk, zrywanie, wykopywanie,
+  uszkadzanie, pozyskiwanie. ⭐ Dokładny zakres zależy od KONKRETNEGO
+  gatunku i właściwego załącznika — nie zakładać identycznego katalogu
+  dla wszystkich gatunków bez sprawdzenia.
+□ ⭐⭐ WYJĄTEK PRAKTYCZNY: zakazy NIE dotyczą czynności związanych z
+  RACJONALNĄ GOSPODARKĄ LEŚNĄ, jeżeli technologia prac UNIEMOŻLIWIA ich
+  przestrzeganie (odesłanie do dyrektywy siedliskowej UE 92/43/EWG).
+□ ODSTĘPSTWA OD ZAKAZÓW: możliwe za ZEZWOLENIEM (GDOŚ/RDOŚ w zależności
+  od zasięgu) — obecność gatunku chronionego NIE blokuje automatycznie
+  inwestycji, ale wymaga rzetelnej oceny, unikania szkody, działań
+  minimalizujących, właściwego harmonogramu prac (np. poza okresem
+  lęgowym) i czasem formalnego zezwolenia na odstępstwo.
+□ Procedura praktyczna dla inwestora/wykonawcy: rozpoznać gatunek →
+  ustalić status ochronny → sprawdzić właściwe zakazy → ocenić siedlisko
+  → określić wpływ planowanego działania → dopiero potem decyzja —
+  szczególnie istotne przy wycince drzew, remontach budynków, pracach
+  na ciekach wodnych.
 ```
+Potwierdzone w 6+ zgodnych źródłach: gov.pl/web/gdos (Rząd 1 — Generalna
+Dyrekcja Ochrony Środowiska), archiwum.mos.gov.pl (Ministerstwo
+Środowiska), krakow.lasy.gov.pl (RDLP), prawo.pl (pełny tekst
+rozporządzenia), szkoladendrologii.pl, przygodyprzyrody.pl.
 
 ---
 

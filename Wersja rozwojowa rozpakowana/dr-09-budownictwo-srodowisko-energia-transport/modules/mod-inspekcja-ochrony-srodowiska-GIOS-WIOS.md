@@ -60,19 +60,64 @@ strukturze, kompetencjach i uprawnieniach kontrolnych.
 
 ## 3. UPRAWNIENIA KONTROLNE INSPEKTORA — CO MOŻE ZROBIĆ PRZY KONTROLI
 
+✅ **ZWERYFIKOWANE (2026-08-19, F-42)** — pełny katalog z art. 9
+ustawy o Inspekcji Ochrony Środowiska (Dz.U. 2024 poz. 425 t.j.):
+
 ```
 Inspektor IOŚ przy wykonywaniu kontroli jest UPRAWNIONY do:
-  □ WSTĘPU przez CAŁĄ DOBĘ, WRAZ z niezbędnym SPRZĘTEM, na teren
-    nieruchomości/obiektu (lub ich CZĘŚCI), na którym prowadzona jest
-    działalność GOSPODARCZA
-  □ (⚠️ pełny katalog uprawnień — pobieranie próbek, żądanie
-    dokumentów, przesłuchiwanie osób — NIE zweryfikowany w pełni w
-    tej sesji, punkt startowy do pogłębienia)
-
-□ RODZAJE kontroli WIOŚ (⚠️ dokładna klasyfikacja niepotwierdzona w
-  pełni — orientacyjnie): planowe, interwencyjne (na SKUTEK zgłoszenia/
-  skargi), doraźne
+  1) WSTĘPU przez CAŁĄ DOBĘ, wraz z niezbędnym SPRZĘTEM:
+     a) na teren nieruchomości/obiektu (lub ich CZĘŚCI), na którym
+        prowadzona jest działalność GOSPODARCZA,
+     b) do ŚRODKÓW TRANSPORTU,
+     c) na teren NIEZWIĄZANY z prowadzeniem działalności gospodarczej
+        (⭐ rozszerzenie — nie tylko zakłady/firmy)
+  2) przeprowadzania NIEZBĘDNYCH POMIARÓW LUB BADAŃ, w tym POBIERANIA
+     PRÓBEK lub wykonywania innych czynności kontrolnych — W TYM z
+     użyciem BEZZAŁOGOWYCH STATKÓW POWIETRZNYCH (drony) — w celu
+     ustalenia stanu środowiska i oceny go w świetle przepisów
+  3) OBSERWOWANIA I REJESTROWANIA przy użyciu środków technicznych
+     (w tym techniki satelitarne i drony) obrazu zdarzeń oraz dźwięku
+  4) GROMADZENIA I ZABEZPIECZANIA dowodów popełnienia przestępstwa lub
+     wykroczenia
+  5) ŻĄDANIA pisemnych lub ustnych INFORMACJI oraz PRZESŁUCHIWANIA osób
+     w zakresie niezbędnym dla ustalenia stanu faktycznego — z
+     pouczeniem o odpowiedzialności karnej za fałszywe zeznania (KK)
+  6) USTALANIA TOŻSAMOŚCI osób oraz żądania okazania DOKUMENTÓW
+     niezbędnych do wymierzenia grzywny mandatem lub sporządzenia
+     wniosku o ukaranie
+  7) NAKŁADANIA GRZYWIEN w postępowaniu mandatowym za wykroczenia
+  8) dokonywania OGLĘDZIN pomieszczeń i innych miejsc
+  9) zatrzymywania lub przeszukiwania POJAZDÓW przewożących towary +
+     kontroli dokumentów przewozowych
+  10) żądania od kierownika zakładu przeprowadzenia POSTĘPOWANIA
+      SŁUŻBOWEGO przeciw osobom winnym uchybień + informacji o wynikach
 ```
+
+⭐⭐ **UPRAWNIENIA DECYZYJNE w toku kontroli (art. 9, dalsze ustępy):**
+WIOŚ może upoważnić inspektora do wydania W TRAKCIE kontroli decyzji o:
+(a) **WSTRZYMANIU działalności** naruszającej wymagania ochrony
+środowiska — TYLKO gdy zachodzi BEZPOŚREDNIE zagrożenie zdrowia/życia
+ludzi LUB bezpośrednie zagrożenie zniszczenia środowiska w ZNACZNYCH
+rozmiarach; (b) **wstrzymaniu oddania do użytku** obiektu/instalacji
+niespełniających wymagań ochrony środowiska.
+
+⭐ **Procedura formalna kontroli:** legitymacja służbowa OBOWIĄZKOWA
+zawsze; dodatkowo UPOWAŻNIENIE do przeprowadzenia kontroli — z
+WYJĄTKIEM kontroli interwencyjnej (na skutek zgłoszenia/skargi) oraz
+sytuacji bezpośredniego zagrożenia życia/zdrowia/środowiska lub
+przeciwdziałania przestępstwu/wykroczeniu, gdzie wystarczy sama
+legitymacja, a upoważnienie doręcza się NIE PÓŹNIEJ niż w terminie
+**3 dni roboczych** od wszczęcia kontroli. IOŚ ma status **oskarżyciela
+publicznego** w sprawach o wykroczenia przeciwko środowisku.
+
+□ RODZAJE kontroli WIOŚ — ✅ POTWIERDZONE: **planowe, interwencyjne**
+  (na skutek zgłoszenia/skargi), **doraźne** — klasyfikacja zgodna z
+  wcześniejszym orientacyjnym ustaleniem modułu.
+```
+
+Potwierdzone w 6+ zgodnych źródłach: arslege.pl (t.j. Dz.U.2024.0.425,
+art. 9 i 9c), lexlege.pl, prawo.pl, gov.pl/web/wios-gdansk (Rząd 1-adjacent,
+oficjalna strona WIOŚ), okieminspektora.pl.
 
 ---
 

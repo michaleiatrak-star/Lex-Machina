@@ -311,6 +311,17 @@ PROCEDURA I SKUTKI:
     upadłości — określa co najmniej cenę i nabywcę (art. 56d)
 □ Zażalenie: na oddalenie — dłużnik i wnioskodawca; na uwzględnienie —
     dłużnik i KAŻDY WIERZYCIEL; termin 2 tygodnie od obwieszczenia
+    ✅ ADRESAT (F-13, zweryfikowane 2026-08-21): postanowienie zapada
+    RAZEM z postanowieniem o ogłoszeniu upadłości — czyli wydaje je SĄD
+    upadłościowy. Zgodnie z art. 222 ust. 1a Prawa upadłościowego,
+    zażalenia na postanowienia SĄDU upadłościowego rozpoznaje ten sam
+    sąd w INNYM SKŁADZIE (**POZIOME**), z wyjątkiem enumeratywnie
+    wskazanych postanowień (art. 163 ust. 4, 166 ust. 6, 172 ust. 1, 362
+    ust. 1, 365 ust. 3, 366 ust. 3, 368, 370a-f, 371 ust. 3 i in.) — art.
+    56d NIE jest wśród wyjątków → **POZIOME**, ta sama pułapka co art.
+    795 KPC i art. 188 Prawa restrukturyzacyjnego (patrz mod-PrRestr-
+    dzial-VII-uklad-czesciowy.md). Zweryfikowane: lexlege.pl, arslege.pl,
+    standardyprawa.pl.
 □ Umowę sprzedaży zawiera SYNDYK w ciągu 30 dni od prawomocności
     postanowienia (art. 56e) — wyłącznie po wpłacie pełnej ceny
 □ Jeśli umowa nie dojdzie do skutku z winy nabywcy — syndyk zatrzymuje
@@ -444,6 +455,18 @@ PROCEDURA I SKUTKI:
 □ Zmiana na wniosek syndyka LUB uchwałą rady wierzycieli (art. 170 ust. 3)
 □ Zażalenie na odwołanie/upomnienie/grzywnę — przysługuje też syndykowi
     (art. 172)
+    ✅ ADRESAT (F-13, zweryfikowane 2026-08-21): postanowienie wydaje
+    sędzia-komisarz (odwołanie/upomnienie/grzywna na syndyka to
+    kompetencja sędziego-komisarza, nie sądu). Zgodnie z regułą ogólną
+    art. 222 ust. 1 Prawa upadłościowego, zażalenia na postanowienia
+    SĘDZIEGO-KOMISARZA rozpoznaje sąd upadłościowy jako sąd **DRUGIEJ
+    INSTANCJI** (**DEWOLUTYWNE**) — I art. 172 ust. 1 jest DODATKOWO
+    wprost wymieniony w katalogu wyjątków art. 222 ust. 1a, co POTWIERDZA
+    dewolutywność nawet gdyby (hipotetycznie) postanowienie pochodziło od
+    sądu, nie sędziego-komisarza. ⭐ ODWROTNY przypadek niż art. 56d
+    (wyżej w tym pliku) i art. 188 Prawa restrukturyzacyjnego — tu
+    NIE ma pułapki, dewolutywność jest podwójnie potwierdzona.
+    Zweryfikowane: lexlege.pl, arslege.pl, standardyprawa.pl.
 ```
 
 **Wynagrodzenie (art. 162–167b) — pięcioskładnikowy system:**

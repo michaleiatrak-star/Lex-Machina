@@ -8,6 +8,20 @@ Moduł prawa polskiego klasy eksperckiej. Stosować analogicznie do modułów pr
 
 Podstawą jest ISAP. Brzmienie przepisu, Dz.U., status aktu, tekst jednolity, nowelizacje i przepisy przejściowe muszą być sprawdzone w ISAP na dzień użycia. LEX/Legalis można użyć pomocniczo, gdy ISAP nie daje bezpośredniego dostępu do aktu albo gdy potrzebny jest komentarz/praktyka.
 
+✅ FAZA 3E ZAMKNIĘTA 2026-08-20 (F-40): po korekcie numerów t.j. (Prawo
+geodezyjne 2023.1752→2024.1151 t.j.; UGN 2024.1899→2026.399 t.j.)
+sprawdzono nowelizacje międzyokresowe. Prawo geodezyjne: 2 nowelizacje
+techniczne (Dz.U. 2024.1824 — wydłużenie vacatio dla map wektorowych do
+2027; Dz.U. 2025.1542 — porządkowanie tabel opłat/zakresu zbiorów
+danych/rejestru cen nieruchomości) — ŻADNA nie dotyka treści
+wywłaszczeniowej/gospodarki nieruchomościami opisanej w tym module. UGN:
+przegląd obwieszczenia o t.j. 2026.399 wskazuje na nowelizacje techniczne
+(wprowadzenie Prawa komunikacji elektronicznej, przepisy powodziowe,
+Prawo energetyczne, mieszkalnictwo społeczne) — rdzeń przepisów o
+wywłaszczeniu (art. 112-113 i dalsze) POTWIERDZONY jako niezmieniony w
+treści cytowanej (przepisy.gofin.pl). Treść modułu POTWIERDZONA jako
+aktualna mimo zmiany numerów t.j. obu aktów.
+
 ### Akty do sprawdzenia
 - Prawo geodezyjne i kartograficzne;
 - ustawa o gospodarce nieruchomościami;

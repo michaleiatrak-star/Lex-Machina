@@ -287,7 +287,282 @@ WSA → NSA
 
 ---
 
-## MAPA ZAGADNIEŃ
+## ⭐⭐⭐ ROZDZIAŁ 9 — PRZEPISY KARNE (art. 90-94) — dodano 2026-08-19 (F-74)
+
+✅ **ZWERYFIKOWANE, 8+ zgodnych źródeł** (lexlege.pl, arslege.pl, budnews.pl,
+przepisy.gofin.pl, architektura.info, inzynierbudownictwa.pl, sambud.pl):
+
+```
+Art. 90 — ⛔ UCHYLONY (nowelizacją z 13.02.2020, w życie 19.09.2020).
+  Dawniej penalizował SAMOWOLĘ BUDOWLANĄ jako PRZESTĘPSTWO (do 2 lat
+  pozbawienia wolności, postępowanie wg KPK). ⭐ Od nowelizacji 2020 —
+  samowola budowlana to WYŁĄCZNIE WYKROCZENIE z art. 93 pkt 13 (niżej),
+  NIE przestępstwo. NIE POWOŁYWAĆ art. 90 jako obowiązującej podstawy.
+
+Art. 91 §1 — PRZESTĘPSTWO (grzywna, ograniczenie wolności ALBO
+  pozbawienie wolności DO ROKU):
+  1) udaremnianie czynności organów administracji architektoniczno-
+     budowlanej lub nadzoru budowlanego
+  2) wykonywanie samodzielnej funkcji technicznej w budownictwie BEZ
+     wymaganych uprawnień budowlanych lub prawa wykonywania takiej
+     funkcji
+  §2 — (uchylony)
+
+Art. 91a — PRZESTĘPSTWO, naruszenie obowiązku z art. 61 (utrzymanie
+  obiektu) — grzywna NIE MNIEJSZA niż 100 stawek dziennych, ograniczenie
+  wolności ALBO pozbawienie wolności do roku.
+  ⭐⭐⭐ HISTORIA PRZEPISU — KLUCZOWA dla oceny aktualnej treści:
+  - Pierwotne brzmienie obejmowało m.in. "użytkuje obiekt w sposób
+    NIEZGODNY Z PRZEPISAMI" — **TA CZĘŚĆ UZNANA ZA NIEKONSTYTUCYJNĄ**
+    wyrokiem TK z 9.02.2021 r. (sygn. **P 15/17**, Dz.U. poz. 282) —
+    utraciła moc 12.02.2021 z powodu NADMIERNEJ NIEOSTROŚCI znamion
+    czynu zabronionego (naruszenie zasady określoności prawa karnego,
+    art. 42 ust. 1 Konstytucji).
+  - **NOWELIZACJA z 4.12.2025 r. (Dz.U. 2025 poz. 1847, w życie
+    7.01.2026 r.)** przeredagowała przepis w reakcji na wyrok TK —
+    obecnie 3-punktowy, PRECYZYJNY katalog: kto WBREW art. 61 nie
+    spełnia obowiązków: (1) utrzymania obiektu w należytym stanie
+    technicznym, (2) użytkowania obiektu ZGODNIE z jego PRZEZNACZENIEM
+    i WYMAGANIAMI OCHRONY ŚRODOWISKA, (3) zapewnienia BEZPIECZNEGO
+    użytkowania obiektu. ⭐ To NOWA, węższa i bardziej precyzyjna
+    redakcja niż sprzed 2021 r. — NIE jest to powrót do starej,
+    niekonstytucyjnej wersji, tylko nowe podejście doprecyzowujące.
+
+Art. 92 — WYKROCZENIE (areszt, ograniczenie wolności, ALBO grzywna):
+  §1: (1) w razie KATASTROFY budowlanej — niedopełnienie obowiązków
+      (zawiadomienie organu itd.); (2) niespełnienie obowiązku USUNIĘCIA
+      uszkodzeń/uzupełnienia braków mogących zagrażać ludziom/mieniu/
+      środowisku (art. 70 ust. 1); (3) utrudnianie czynności organów.
+  §2: TA SAMA kara dla tego, kto MIMO zastosowania ŚRODKÓW EGZEKUCJI
+      ADMINISTRACYJNEJ (1) nie stosuje się do decyzji organów, (2) nie
+      spełnia obowiązku z art. 61.
+
+Art. 93 — KATALOG WYKROCZEŃ (kara grzywny), NIEWYCZERPUJĄCA lista
+  zweryfikowana częściowo — kluczowe pozycje:
+  □ pkt 10 — nieudzielenie informacji/nieudostępnienie dokumentów z art.
+    81c ust. 1 żądanych przez organ (dot. robót budowlanych, przekazania
+    obiektu do użytkowania, jego utrzymania)
+  □ pkt 13 — ⭐⭐⭐ obecna "PRZYSTAŃ" dla dawnej SAMOWOLI BUDOWLANEJ po
+    uchyleniu art. 90 — wykonywanie robót w przypadkach określonych w
+    art. 48, art. 49b, art. 50 ust. 1 pkt 1 lub art. 50 ust. 1 pkt 2 —
+    ⚠️ pełna treść tego punktu (i pozostałych ~12 punktów katalogu) NIE
+    odczytana w całości w tej sesji — do dociągnięcia przy konkretnej
+    sprawie o wykroczenie budowlane inne niż samowola/pkt 10.
+
+Art. 94 — TRYB ORZEKANIA dla czynów z art. 92 i art. 93 — na podstawie
+  przepisów KODEKSU POSTĘPOWANIA W SPRAWACH O WYKROCZENIA (KPW). ⭐
+  Art. 91 i 91a (przestępstwa) NIE są objęte tym trybem — dla nich
+  właściwy jest zwykły tryb KPK.
+```
+
+⭐⭐ **Wniosek praktyczny — trójstopniowa struktura odpowiedzialności
+karnej w Prawie budowlanym:**
+```
+art. 91, 91a → PRZESTĘPSTWA (KPK) — udaremnianie nadzoru, praca bez
+               uprawnień, zaniedbanie utrzymania obiektu
+art. 92, 93  → WYKROCZENIA (KPW) — katastrofa/uszkodzenia, samowola
+               budowlana (pkt 13), brak informacji dla organu (pkt 10)
+art. 90      → USUNIĘTY z systemu (2020) — samowola PRZESUNIĘTA z
+               przestępstwa do wykroczenia
+```
+⚠️ **Pozostaje do dociągnięcia:** pełna treść pozostałych ~11 punktów
+katalogu art. 93 (poza pkt 10 i 13) — NIE odczytane w tej sesji, punkt
+startowy przy sprawie wymagającej innego wykroczenia z tego katalogu.
+
+---
+
+## ⭐⭐⭐ ROZDZIAŁ 8 — ORGANY ADMINISTRACJI ARCHITEKTONICZNO-BUDOWLANEJ I NADZORU BUDOWLANEGO (art. 80-89c) — dodano 2026-08-19 (F-74)
+
+✅ **ZWERYFIKOWANE, 7+ zgodnych źródeł** (lexlege.pl, przepisy.gofin.pl,
+architektura.info, projektgamma.pl, pinbwagrowiec.bip.gov.pl,
+pinbkolobrzeg.finn.pl, glogow.pinb.pl — BIP-y urzędów, bezpośrednio
+cytujące treść przepisów):
+
+```
+⭐⭐ ART. 80 — DWA ODRĘBNE PIONY (klucz do zrozumienia całej struktury):
+  PION 1 — Administracja architektoniczno-budowlana:
+    starosta / prezydent miasta (I instancja) → wojewoda (II instancja)
+    → Główny Inspektor Nadzoru Budowlanego (GINB, szczególne przypadki)
+  PION 2 — Nadzór budowlany:
+    Powiatowy Inspektor Nadzoru Budowlanego — PINB (I instancja) →
+    Wojewódzki Inspektor Nadzoru Budowlanego — WINB (II instancja) →
+    Główny Inspektor Nadzoru Budowlanego — GINB (najwyższy szczebel)
+  ⭐ TE DWA PIONY SĄ ODRĘBNE — administracja architektoniczno-budowlana
+  wydaje POZWOLENIA/ZGŁOSZENIA (etap PRZED budową), nadzór budowlany
+  KONTROLUJE i ŚCIGA naruszenia (etap W TRAKCIE/PO budowie) — typowy
+  błąd praktyczny: mylenie właściwości obu pionów przy piśmie/skardze.
+
+Art. 81 — PODSTAWOWE OBOWIĄZKI obu pionów łącznie: nadzór i kontrola
+  przestrzegania Prawa budowlanego (zgodność z MPZP, bezpieczeństwo
+  ludzi/mienia, zgodność z przepisami techniczno-budowlanymi, właściwe
+  wykonywanie samodzielnych funkcji technicznych, stosowanie wyrobów
+  zgodnie z art. 10), wydawanie decyzji administracyjnych.
+
+Art. 81a — UPRAWNIENIA KONTROLNE (prawo WEJŚCIA): do obiektu
+  budowlanego, na teren budowy, na teren zakładu pracy. Czynności
+  kontrolne — W OBECNOŚCI inwestora/kierownika budowy/kierownika
+  zakładu (lub upoważnionej osoby), a w LOKALU MIESZKALNYM — w
+  obecności PEŁNOLETNIEGO domownika + przedstawiciela administracji/
+  zarządcy budynku. Przy podmiocie niebędącym przedsiębiorcą, w razie
+  nieobecności tych osób — czynności MOGĄ być dokonane w obecności
+  przywołanego pełnoletniego ŚWIADKA.
+
+Art. 81b — ⛔ UCHYLONY.
+
+Art. 81c — ŻĄDANIE INFORMACJI/DOKUMENTÓW od uczestników procesu
+  budowlanego, właściciela lub zarządcy obiektu: (1) dot. prowadzenia
+  robót, przekazania obiektu do użytkowania, utrzymania/użytkowania;
+  (2) dowodzących wprowadzenia wyrobów budowlanych do obrotu zgodnie z
+  przepisami. Przy uzasadnionych wątpliwościach co do jakości wyrobów/
+  robót/stanu technicznego — organ MOŻE nałożyć POSTANOWIENIEM
+  dodatkowe obowiązki na te osoby.
+
+Art. 82-82b — WŁAŚCIWOŚĆ organów administracji architektoniczno-
+  budowlanej (art. 82); ⭐ ZAKAZ powierzania zadań GMINOM (art. 82a —
+  istotne przeciwko próbom nieformalnego "outsourcingu" kompetencji);
+  prowadzenie REJESTRÓW i współpraca między organami (art. 82b).
+
+Art. 83 — ⭐⭐⭐ WŁAŚCIWOŚĆ organów NADZORU budowlanego: **art. 83 ust. 1
+  = ZAMKNIĘTY, TAKSATYWNY katalog kompetencji PINB jako organu I
+  instancji** (potwierdzone wprost przez BIP PINB Wągrowiec: "do
+  właściwości PINB jako organu nadzoru budowlanego I instancji NALEŻĄ
+  WYŁĄCZNIE zadania i kompetencje określone w art. 83 ust. 1") — m.in.
+  przyjmowanie zawiadomień o terminie rozpoczęcia robót (dla
+  pozwolenia/zgłoszenia budowy z art. 29 ust. 1 pkt 1a, 2b, 19a lub
+  zgłoszenia przebudowy z art. 29 ust. 2 pkt 1b). ⭐ PINB NIE MA
+  kompetencji poza tym katalogiem — istotne przy zarzucie przekroczenia
+  uprawnień przez PINB.
+
+Art. 83a — ⛔ UCHYLONY.
+
+Art. 84 — ZADANIA organów nadzoru budowlanego (ogólnie, oba szczeble):
+  kontrola przestrzegania/stosowania Prawa budowlanego; kontrola
+  DZIAŁANIA organów administracji architektoniczno-budowlanej (⭐ nadzór
+  budowlany kontroluje TAKŻE administrację architektoniczno-budowlaną,
+  nie tylko inwestorów); badanie przyczyn katastrof budowlanych;
+  współdziałanie z organami kontroli państwowej. Obowiązki
+  proceduralne: bezzwłoczne przesyłanie kopii decyzji/postanowień do
+  administracji architektoniczno-budowlanej; prowadzenie ewidencji
+  (decyzji/postanowień/zgłoszeń, obiektów rozpoczętych/oddanych do
+  użytkowania, zawiadomień o kontrolach z art. 62 ust. 1 pkt 3).
+
+Art. 85, 85a — współdziałanie organów; kontrola DZIAŁALNOŚCI
+  GOSPODARCZEJ (⚠️ treść szczegółowa NIE odczytana w tej sesji).
+
+Art. 86, 87 — zadania odrębnie PINB (86) i WINB (87) — ⚠️ pełna treść
+  obu przepisów NIE odczytana w tej sesji, punkt startowy.
+
+Art. 88-89c — ⚠️ pozostałe artykuły rozdziału (kompetencje GINB,
+  przepisy proceduralne) NIE odczytane w pełni w tej sesji.
+```
+
+⭐⭐ **Wniosek praktyczny — dwuinstancyjność w OBU pionach:** przy piśmie
+odwoławczym KLUCZOWE jest ustalenie, w KTÓRYM pionie działa organ,
+którego decyzję się zaskarża — administracja architektoniczno-budowlana
+(starosta→wojewoda) czy nadzór budowlany (PINB→WINB) — te dwie ścieżki
+NIE krzyżują się bezpośrednio, mimo że dotyczą tego samego obiektu na
+różnych etapach jego "życia" prawnego.
+
+⚠️ **Pozostaje do dociągnięcia:** pełna treść art. 85a, 86, 87, 88-89c —
+NIE odczytane w całości w tej sesji, punkt startowy przy konkretnej
+sprawie dotyczącej kompetencji WINB/GINB szczegółowo.
+
+---
+
+## ⭐⭐⭐ ROZDZIAŁ 3 — PRAWA I OBOWIĄZKI UCZESTNIKÓW PROCESU BUDOWLANEGO (art. 17-27a) — dodano 2026-08-19 (F-74, ostatni rozdział flagi)
+
+✅ **ZWERYFIKOWANE, 7+ zgodnych źródeł** (arslege.pl, lexlege.pl,
+pwrz.pl — komentarz internetowy, lezajsk.pinb.gov.pl — BIP urzędu,
+prawo-budowlane.studentnews.pl, wroclaw-adwokat.pl):
+
+```
+Art. 17 — KATALOG ZAMKNIĘTY, 4 uczestników procesu budowlanego:
+  (1) inwestor; (2) inspektor nadzoru inwestorskiego; (3) projektant;
+  (4) kierownik budowy LUB kierownik robót.
+
+Art. 18 — OBOWIĄZKI INWESTORA: zorganizowanie procesu budowy (z
+  uwzględnieniem BHP), w szczególności zapewnienie: (1) opracowania
+  projektu budowlanego i innych projektów wg potrzeb; (2) objęcia
+  kierownictwa budowy przez kierownika budowy; (3) opracowania planu
+  BIOZ; (5) przy WYSOKIM stopniu skomplikowania robót/warunków
+  gruntowych — nadzoru przez osoby o odpowiednich kwalifikacjach.
+  Inwestor MOŻE (fakultatywnie) ustanowić inspektora nadzoru
+  inwestorskiego oraz zobowiązać projektanta do nadzoru AUTORSKIEGO.
+
+Art. 19 — organ administracji architektoniczno-budowlanej MOŻE w
+  DECYZJI o pozwoleniu na budowę NAŁOŻYĆ na inwestora obowiązek
+  ustanowienia inspektora nadzoru inwestorskiego oraz nadzoru
+  autorskiego — przy wysokim skomplikowaniu obiektu/robót lub
+  przewidywanym wpływie na środowisko (a więc to, co fakultatywne z
+  art. 18, może stać się OBOWIĄZKOWE decyzją organu w konkretnym
+  przypadku). Rozporządzenie wykonawcze określa rodzaje obiektów
+  wymagających inspektora oraz kryteria nakładania obowiązku.
+
+Art. 20-21a — OBOWIĄZKI/PRAWA PROJEKTANTA (⚠️ pełna treść art. 20-21
+  NIE odczytana w tej sesji, tylko tytuły; art. 21a — plan
+  bezpieczeństwa i ochrony zdrowia (BIOZ), związany z art. 18 pkt 3).
+
+Art. 22-24 — KIEROWNIK BUDOWY:
+  Art. 22 (obowiązki) — m.in. pkt 9: zgłoszenie obiektu do odbioru
+  wpisem do dziennika budowy + uczestniczenie w odbiorze + zapewnienie
+  usunięcia wad + przekazanie inwestorowi oświadczenia z art. 57 ust. 1
+  pkt 2 (⚠️ pełna lista 9 punktów obowiązków NIE odczytana w całości —
+  tylko pkt 9 potwierdzony wprost, reszta punktu startowego).
+  Art. 23 (prawa) — (1) występowanie do inwestora o zmiany w
+  rozwiązaniach projektowych, jeśli uzasadnione bezpieczeństwem/
+  usprawnieniem procesu; (2) ustosunkowanie się w dzienniku budowy do
+  zaleceń w nim zawartych.
+  Art. 23a — ⛔ UCHYLONY.
+  ⭐⭐⭐ Art. 24 — KLUCZOWY ZAKAZ: **łączenie funkcji kierownika budowy i
+  inspektora nadzoru inwestorskiego JEST NIEDOPUSZCZALNE** (konflikt
+  interesów — ta sama osoba nie może budować i jednocześnie
+  reprezentować inwestora w nadzorze nad sobą samą). Art. 22-23
+  stosuje się ODPOWIEDNIO do kierownika ROBÓT (nie tylko budowy).
+
+Art. 25-26 — INSPEKTOR NADZORU INWESTORSKIEGO:
+  Art. 25 (obowiązki) — reprezentowanie inwestora przez kontrolę
+  zgodności realizacji z projektem/pozwoleniem/przepisami; sprawdzanie
+  dopuszczalności stosowania wyrobów; sprawdzanie i odbiór robót
+  ULEGAJĄCYCH ZAKRYCIU/zanikających + udział w próbach/odbiorach
+  technicznych; potwierdzanie faktycznie wykonanych robót i usunięcia
+  wad + NA ŻĄDANIE inwestora — kontrolowanie rozliczeń budowy.
+  Art. 26 (prawa) — wydawanie kierownikowi budowy/robót POLECEŃ
+  (potwierdzonych wpisem do dziennika budowy) dot.: usunięcia
+  nieprawidłowości/zagrożeń, wykonania prób/badań (także wymagających
+  odkrycia zakrytych elementów), przedstawienia ekspertyz, informacji
+  o zastosowanych wyrobach. ⭐ MOŻE żądać dokonania POPRAWEK lub
+  PONOWNEGO wykonania wadliwych robót, a także WSTRZYMANIA dalszych
+  robót przy zagrożeniu lub niedopuszczalnej niezgodności z projektem/
+  pozwoleniem.
+
+Art. 27 — KOORDYNATOR: przy obiekcie wymagającym inspektorów RÓŻNYCH
+  specjalności — inwestor wyznacza JEDNEGO z nich jako koordynatora
+  ich czynności na budowie.
+
+Art. 27a — udział GEODETY w czynnościach geodezyjnych na potrzeby
+  budownictwa (wg definicji z art. 2 ustawy Prawo geodezyjne i
+  kartograficzne z 17.05.1989) w trakcie projektowania i budowy.
+```
+
+⭐⭐ **Wniosek praktyczny — hierarchia i konflikty ról:**
+```
+INWESTOR → zleca, organizuje, MOŻE (lub MUSI, jeśli tak zdecyduje
+           organ w decyzji z art. 19) ustanowić nadzór inwestorski
+PROJEKTANT → tworzy dokumentację, MOŻE być zobowiązany do nadzoru
+             autorskiego (kontrola zgodności realizacji z PROJEKTEM)
+KIEROWNIK BUDOWY/ROBÓT → wykonuje w terenie, podlega poleceniom
+             inspektora nadzoru inwestorskiego
+INSPEKTOR NADZORU INWESTORSKIEGO → reprezentuje INWESTORA, kontroluje
+             KIEROWNIKA, ma władcze uprawnienia (polecenia, wstrzymanie
+             robót) — ⛔ NIE MOŻE być tą samą osobą co kierownik budowy
+             (art. 24, zakaz bezwzględny)
+```
+
+⚠️ **Pozostaje do dociągnięcia:** pełna treść art. 20-21 (projektant),
+pełna 9-punktowa lista obowiązków kierownika budowy z art. 22 (poza
+pkt 9) — NIE odczytane w całości w tej sesji.
+
+---
 
 ### Samowola budowlana
 

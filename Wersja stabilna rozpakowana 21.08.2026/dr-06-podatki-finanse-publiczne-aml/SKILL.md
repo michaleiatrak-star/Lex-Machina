@@ -302,6 +302,20 @@ celno-skarbowej). Uwzględnia TRZY fale świeżych reform 2025-2026
 zasada in dubio pro tributario (4.11.2025), kontrole oparte na
 analizie ryzyka (1.01.2026).
 
+**Aktualizacja 2026-08-20 (WTÓRNY PODZIAŁ rdzenia, F-78 priorytet 3):**
+`mod-VAT-podatek-od-towarow-i-uslug.md` — sam "rdzeń" z podziału
+2026-08-12 (wtedy 953 l.) — urósł do **1901 linii** wskutek dalszej
+rozbudowy pokrycia (etapy 2a/2b/2c, grupy szybka/średnia/złożona,
+~35 dodatkowych tematów). PODZIELONY PONOWNIE: plik pod NIEZMIENIONĄ
+nazwą stał się lekkim INDEKSATOREM (300 linii, z zachowanymi alertami
+PKWiU/KSeF/weryfikacja faktury jako treścią zawsze-aktywną) + 6 plików
+w NOWYM podkatalogu `vat-podatek-od-towarow-i-uslug/` (max 383 linii/
+plik). ~22 zewnętrznych odsyłaczy (CAŁA rodzina modułów VAT + ROUTING-
+MAP + MAPA-AKTOW) NIE wymagały edycji. ⚠️ Odnotowano istniejącą już w
+oryginale niespójność nazewnictwa nieformalnych etykiet podsekcji
+("sekcja 4a/4c/4h/4p") niepasujących dokładnie do żadnego nagłówka —
+NIE rozstrzygnięto, opisano w indeksie jako wskazówka nawigacyjna.
+
 **Aktualizacja 2026-08-12 (PODZIAŁ modułu VAT, NOTA-4):** moduł VAT
 osiągnął 3652 linie (~9× próg 400 linii z audyt-systemu-v4/
 CHECKLIST-DEDUP.md) — WYNIK intensywnej pracy RÓWNOLEGŁEJ sesji
@@ -310,7 +324,8 @@ prewspółczynnik, elementy faktury, miejsce świadczenia usług, bony
 SPV/MPV, pustą fakturę, transakcje łańcuchowe — WSZYSTKIE
 wcześniej zidentyfikowane luki). PODZIELONO na SZEŚĆ plików wg
 naturalnych klastrów tematycznych:
-- `mod-VAT-podatek-od-towarow-i-uslug.md` (rdzeń, 953 l.) — alerty
+- `mod-VAT-podatek-od-towarow-i-uslug.md` (rdzeń, 953 l. → **1901 l.,
+  patrz aktualizacja 2026-08-20 wyżej — dalszy PODZIAŁ WTÓRNY**) — alerty
   PKWiU/KSeF, weryfikacja faktury w KSeF, CORE/INTAKE, baza
   weryfikacji stawek, podstawowe mechanizmy (odliczenie, MPP, zwrot,
   kasy fiskalne, biała lista, WNT/import usług, OSS/IOSS, WIS)
@@ -460,6 +475,8 @@ przez cross-reference, bez duplikacji treści).
                procedura uproszczona. ⛔ Zawiera SPROSTOWANIE błędnej
                kwoty ulgi na kasę)
   [✓] OK    mod-VAT-podatek-od-towarow-i-uslug
+              (✅ PODZIELONY WTÓRNIE 2026-08-20 — F-78 priorytet 3, patrz
+               notatka wyżej: indeksator 300 l. + 6 plików w podkatalogu)
               (2026-07-21: dodano odesłanie do nowego modułu o
                samochodach/użytku mieszanym)
   [✓] OK    mod-VAT-transakcje-fakturowanie
@@ -534,6 +551,14 @@ przez cross-reference, bez duplikacji treści).
                sekcje 1-10 nazywały kroki bez treści. Odpowiedź na
                pytanie użytkownika)
   [✓] OK    mod-ustawa-akcyzowa-i-clo-UCC
+              (✅ PODZIELONY 2026-08-20 — F-78 priorytet 5: indeksator
+               76 l. [tabela aktów prawnych zachowana] + 8 części w
+               podkatalogu `ustawa-akcyzowa-clo/`, max 263 l./plik.
+               Odnotowano strukturę dwóch nakładających się schematów
+               numeracji w oryginale [sekcje akcyzowe 1-5 + osobny
+               szablon "STANDARDOWE UZUPEŁNIENIE" z własnymi sekcjami
+               1-8] — cecha odziedziczona, nie regresja podziału. 5
+               odesłań krzyżowych zaktualizowanych o plik docelowy)
               (v1.7, ROZBUDOWANY 2026-08-13: pierwszy systematyczny
                audyt pokrycia PER DZIAŁ ustawy [analogiczny do
                wielokrotnie już wykonanego dla VAT] — domknięto
@@ -584,6 +609,12 @@ przez cross-reference, bez duplikacji treści).
                gotówkowych między przedsiębiorcami i skutki
                podatkowe jego przekroczenia)
   [✓] OK    mod-ustawa-rachunkowosci
+              (✅ PODZIELONY 2026-08-20 — F-78 priorytet 4: indeksator
+               179 l. [sekcje 1-2 zachowane] + 7 części w podkatalogu
+               `ustawa-rachunkowosci/`, max 305 l./plik; 6 zewnętrznych
+               odsyłaczy NIE wymagały edycji; wszystkie odesłania
+               krzyżowe między dawnymi sekcjami numerycznymi
+               zaktualizowane o plik docelowy)
               (v1.14.0, dodany 2026-08-11, ZAREJESTROWANY 2026-08-14
                przy naprawie F-33: moduł podstawowy ustawy o
                rachunkowości — konsolidacja, ESG/CSRD, wycena walut,

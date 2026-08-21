@@ -38,6 +38,17 @@ Art. 185 — zastrzeżenia wierzyciela NIEOBJĘTEGO układem częściowym
 Art. 186 — warunki przyjęcia układu częściowego (próg głosowania)
 Art. 187 — zakres podmiotowy układu częściowego (kto jest nim związany)
 Art. 188 — zażalenie na postanowienie o zatwierdzeniu
+  ✅ ADRESAT (F-13, zweryfikowane 2026-08-21): postanowienie o
+  zatwierdzeniu układu częściowego wydaje SĄD restrukturyzacyjny (nie
+  sędzia-komisarz) — zgodnie z ogólną regułą adresata z art. 200 ust. 1a
+  Prawa restrukturyzacyjnego, zażalenia na postanowienia SĄDU
+  restrukturyzacyjnego rozpoznaje **ten sam sąd w INNYM SKŁADZIE**
+  (POZIOME, nie do sądu wyższej instancji), Z WYJĄTKIEM enumeratywnie
+  wskazanych postanowień (art. 30 ust. 5, art. 331 ust. 4, art. 332
+  ust. 3 — ŻADNE z nich nie dotyczy art. 188). Art. 188 NIE jest wśród
+  wyjątków → **POZIOME**, ta sama pułapka redakcyjna co art. 795 KPC
+  (klauzula wykonalności) już opisana w `shared/ZAZALENIE-ADRESAT-GATE.md`.
+  Zweryfikowane: lexlege.pl, arslege.pl (2×) — zgodne brzmienie art. 200.
 ```
 
 ---

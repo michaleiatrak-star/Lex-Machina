@@ -372,11 +372,32 @@ sesji 16b). Nie powoływać żadnego z nich bez odczytu ze źródła.
      jest formalnie w odesłaniu, ale w kontekście łowieckim rzadko
      aktualny) ani przy pokonywaniu przeszkód budowlanych (pkt 2 poza
      odesłaniem PSŁ)**.
-   - **Art. 12** (katalog środków przymusu bezpośredniego, pełna lista ~21
-     pozycji) — **NIE odczytany w pełni w tej sesji**; PSŁ ma dostęp do
-     konkretnych numerów (pkt 1, pkt 2 lit. a, pkt 7, 9, pkt 12 lit. a,
-     pkt 13 — ustalone wcześniej), ale ich dokładna treść (co fizycznie
-     oznaczają te środki) pozostaje NIEODCZYTANA źródłowo.
+   - **Art. 12** (katalog środków przymusu bezpośredniego, pełny) —
+     **✅ ZWERYFIKOWANE (2026-08-18), Dz.U. 2026 poz. 244 t.j., 17 pozycji:**
+     (1) siła fizyczna (techniki: transportowe/obrony/ataku/obezwładnienia);
+     (2) kajdanki (na ręce/na nogi/zespolone); (3) kaftan bezpieczeństwa;
+     (4) pas obezwładniający; (5) siatka obezwładniająca i podobne;
+     (6) kask zabezpieczający; (7) pałka służbowa; (8) wodne środki
+     obezwładniające; (9) pies służbowy; (10) koń służbowy; (11) pociski
+     niepenetracyjne; (12) chemiczne środki obezwładniające (ręczne/
+     plecakowe miotacze, granaty łzawiące, inne urządzenia); (13) przedmioty
+     do obezwładniania energią elektryczną; (14) cela zabezpieczająca;
+     (15) izba izolacyjna; (16) pokój izolacyjny; (17) kolczatka drogowa i
+     podobne (+ dalsze pozycje 18-20 dot. pokonywania przeszkód budowlanych
+     z materiałami wybuchowymi oraz zwalczania dronów — poza podstawowym
+     katalogiem 1-17, odczytane fragmentarycznie z wtórnych odesłań).
+     **PSŁ ma dostęp WYŁĄCZNIE do: pkt 1, pkt 2 lit. a (kajdanki na ręce),
+     pkt 7 (pałka), pkt 9 (pies służbowy), pkt 12 lit. a (ręczny miotacz
+     substancji obezwładniających), pkt 13 (elektryczne)** — BRAK dostępu
+     do broni chemicznej ciężkiej (granaty łzawiące), celi/izby izolacyjnej,
+     konia służbowego, kolczatki. **Ust. 2 art. 12 — WAŻNE:** środki z pkt
+     1 lit. b-d, pkt 5, 7, 8 i 11-13 mogą być wykorzystane TAKŻE wobec
+     ZWIERZĘCIA zagrażającego życiu/zdrowiu — to prawna podstawa dla PSŁ do
+     np. użycia pałki lub miotacza wobec agresywnego zwierzęcia, NIEZALEŻNIE
+     od przepisów o broni palnej z art. 45/47. Źródła zbieżne: arslege.pl,
+     lexlege.pl, orka.sejm.gov.pl (pierwotny tekst 2013), przepisy.gofin.pl
+     (przykłady zastosowania u innych służb — Policja, Straż Leśna, KAS —
+     dające czytelny wzorzec redakcyjny odesłań analogicznych do PSŁ).
    **Wniosek praktyczny:** PSŁ ma wyraźnie WĄSKIE uprawnienia w zakresie
    broni palnej — użycie tylko w obronie życia/zdrowia (nie mienia),
    wykorzystanie głównie do neutralizacji zagrażającego zwierzęcia i
