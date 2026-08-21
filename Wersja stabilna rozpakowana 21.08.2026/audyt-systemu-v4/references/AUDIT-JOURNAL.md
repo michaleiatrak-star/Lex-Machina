@@ -51248,3 +51248,171 @@ tempa adnotacji statycznej.
 **Reguła 7 — zastosowanie:** TAK (aktualizacja rejestru, bez zmian
 plików modułów). `audyt-systemu-v4.zip` dostarczany ponownie z tym
 wpisem.
+
+---
+
+## AUDYT-2026-08-21r — F-86: korekta krytyczna i zamknięcie Tytułu Va (art. 266a-266f)
+
+### 1. STATUS OGÓLNY
+
+Kontynuacja pracy ("kontynuuj"), wybrano F-86 jako naturalną kontynuację
+— dotyczy tego samego pliku (`mod-PrUpad-upadlosc-restrukturyzacja.md`)
+edytowanego przy okazji F-13 w poprzedniej turze.
+
+### 2. ODKRYCIE KRYTYCZNE
+
+Flaga F-86 (opis z 2026-08-15v) zakładała, że trzeba opisać "Układ w
+upadłości (art. 267-305)". Weryfikacja wykazała: **cały ten zakres jest
+UCHYLONY** — dawny Tytuł VI (art. 267-305, wszystkie 5 działów I-V)
+został w całości zastąpiony znacznie krótszym, skonsolidowanym Tytułem
+Va (art. 266a-266f). Zweryfikowane: przepisy.gofin.pl (pełny spis
+treści ustawy z jawnym "(uchylony)" przy każdym z 5 działów), lexlege.pl
+(potwierdzone niezależnie przy 4 różnych artykułach 266a-266e, za
+każdym razem ta sama struktura spisu treści), dlajurysty.pl, sip.lex.pl
+(z jawnym "Dz.U.2025.614 t.j.").
+
+Gdyby nie ta weryfikacja, próba "uzupełnienia" art. 267-305 stworzyłaby
+obszerną treść opisującą przepisy, które PRAWNIE NIE ISTNIEJĄ — poważny
+błąd merytoryczny, którego uniknięto dzięki sprawdzeniu PRZED pisaniem.
+
+### 3. TREŚĆ DODANA
+
+Nowa sekcja "UKŁAD W UPADŁOŚCI (Tytuł Va PrUp, art. 266a-266f)" w
+`mod-PrUpad-upadlosc-restrukturyzacja.md`, z jawną korektą na początku
+ostrzegającą przed dawnym błędnym założeniem:
+- **Art. 266a** — dopuszczalność układu, krąg uprawnionych do propozycji
+  (upadły, wierzyciel, syndyk).
+- **Art. 266b** — wstrzymanie likwidacji masy na czas procedury
+  układowej, z zabezpieczeniem wierzycieli spoza układu.
+- **Art. 266c** — zgromadzenie wierzycieli i głosowanie (fakultatywne
+  vs obowiązkowe zwołanie przy poparciu ≥50%).
+- **Art. 266d** — zakończenie postępowania po zatwierdzeniu układu,
+  odesłanie do art. 362-367.
+- **Art. 266e** — wynagrodzenie syndyka po układzie, z odesłaniem
+  MIĘDZYUSTAWOWYM do Prawa restrukturyzacyjnego (art. 55, 58-61) —
+  premia za doprowadzenie do układu.
+- Art. 266f oznaczony jako niepotwierdzony w pełni — punkt startowy na
+  przyszłość.
+- Krzyżowe odesłanie do wzorca adresata zażaleń (art. 222 PrUp) już
+  dodanego do bramki w poprzedniej turze tej samej sesji.
+
+### 4. WERYFIKACJA STRUKTURY (Reguła 5)
+
+Jawne zawarcie docelowego nagłówka "## QUALITY GATE" w `new_str`
+(metoda wypracowana wcześniej w tej sesji) — czysto za pierwszym razem:
+19 nagłówków, 48 znaczników code-fence (parzyste), 669 linii.
+
+### 5. DECYZJA
+
+Ta część F-86 ("układ w upadłości") ZAMKNIĘTA. Flaga jako całość
+pozostaje otwarta — reszta zakresu (likwidacja masy 306-334, zakończenie/
+umorzenie 361-372, postępowanie międzynarodowe 378-417, postępowania
+szczególne banki/ubezpieczyciele/deweloperzy 418-425+) wciąż
+nieopracowana, ale teraz z poprawnym, zweryfikowanym zakresem (306-334
+potwierdzone jako wciąż LIVE, nie uchylone — sprawdzone przy okazji tej
+samej weryfikacji spisu treści).
+
+### 6. STRUKTURA
+
+`dr-02`: 67 plików, bez zmian liczby.
+
+### 7. WNIOSKI
+
+Drugi w tej sesji przypadek (po art. 21 UZNK) potwierdzenia, że
+pierwotne założenia rejestru mogą być błędne z powodu nowelizacji, które
+zaszły PO sformułowaniu opisu flagi — mechanizm weryfikacji-przed-
+-pisaniem konsekwentnie chroni przed powieleniem takich błędów w nowej
+treści.
+
+**Reguła 7 — zastosowanie:** TAK. `dr-02-prawo-cywilne-rodzinne-
+gospodarcze.zip` dostarczony ponownie (67/67 plików, 4 pliki zmienione
+łącznie w toku całej sesji). `audyt-systemu-v4.zip` zaktualizowany.
+
+---
+
+## AUDYT-2026-08-21s — Zewnętrzna weryfikacja (ChatGPT) potwierdzona: 2 błędy w mod-PrUpad naprawione
+
+### 1. STATUS OGÓLNY
+
+Użytkownik przekazał opinię innego asystenta AI (ChatGPT) o module
+upadłościowym, z prośbą o zbadanie. Obie zgłoszone kwestie
+zweryfikowane niezależnie i POTWIERDZONE jako realne błędy, nie
+nieporozumienia.
+
+### 2. BŁĄD 1 — SZCZEBEL SĄDU (POTWIERDZONY)
+
+Moduł (linia 88, sekcja SCHEMAT POSTĘPOWANIA UPADŁOŚCIOWEGO) wskazywał
+"sąd upadłościowy (wydział gospodarczy SO)" — SO = sąd okręgowy.
+BŁĘDNE. Art. 18 Prawa upadłościowego wprost: "Sądem upadłościowym jest
+sąd rejonowy – sąd gospodarczy", orzekający w składzie 3 sędziów
+zawodowych. Zweryfikowane 8 zgodnych źródeł, w tym bezpośredni cytat
+PDF pierwotnego tekstu ustawy z isap.sejm.gov.pl (Rząd 1) oraz 7 źródeł
+Rządu 2B/3 (arslege.pl, lexlege.pl ×2, e-prawnik.pl,
+edukacjaprawnicza.pl, kancelariafenix.pl, radca-orlowska.pl) —
+wszystkie zgodne, zero rozbieżności. Zgadza się z uwagą użytkownika: to
+NIE kosmetyczna różnica — błędny szczebel sądu prowadziłby klienta do
+złożenia wniosku w niewłaściwym miejscu.
+
+### 3. BŁĄD 2 — NADMIERNE UPROSZCZENIE UPADŁOŚCI KONSUMENCKIEJ (POTWIERDZONY)
+
+Moduł (sekcja UPADŁOŚĆ KONSUMENCKA) przedstawiał "brak celowego
+doprowadzenia do upadłości / brak rażącego niedbalstwa" jako binarny
+WARUNEK dopuszczalności całej uproszczonej procedury — stan prawny
+SPRZED nowelizacji z 1.01.2020. Od tej daty rażące niedbalstwo NIE
+dyskwalifikuje z ogłoszenia upadłości. Rzeczywisty, aktualny system jest
+TRÓJSTOPNIOWY:
+1. Brak winy → plan spłaty standardowo do 36 miesięcy (możliwe też
+   umorzenie bez planu / warunkowe przy niezdolności do spłat).
+2. Rażące niedbalstwo → SANKCJA: plan WYDŁUŻONY do 36-84 miesięcy
+   (art. 491¹⁵ PrUp), ale oddłużenie NADAL następuje po wykonaniu planu.
+3. Umyślność (celowe doprowadzenie do niewypłacalności) → SUROWSZA
+   konsekwencja: możliwa CAŁKOWITA ODMOWA ODDŁUŻENIA (art. 491¹⁴a
+   ust. 1 pkt 1 PrUp) — nie tylko dłuższy plan, brak umorzenia w ogóle.
+
+Zweryfikowane 8 zgodnych źródeł, wszystkie z 2025-2026 (syndyk.katowice.pl,
+szalanskikancelaria.pl ×2, upadlosckonsumenckawarszawa.pl, ryzynski.eu,
+nowackagornicki.pl ×2, kalkulatorxxl.pl) — zgodne co do progów (36/84
+miesięcy), mechanizmu sankcyjnego (nie dyskwalifikującego od 2020) i
+rozróżnienia poziomu 2 vs poziomu 3. Dokładnie zgadza się z opisem
+przekazanym przez użytkownika od ChatGPT.
+
+### 4. NAPRAWY WYKONANE
+
+`dr-02/modules/mod-PrUpad-upadlosc-restrukturyzacja.md`:
+- Linia 88: poprawiony szczebel sądu (sąd rejonowy, nie okręgowy) z
+  pełną adnotacją źródłową.
+- Sekcja UPADŁOŚĆ KONSUMENCKA: rozbudowana z 1-linijkowego binarnego
+  warunku na pełny, trójstopniowy opis z konkretnymi progami czasowymi,
+  podstawami prawnymi (art. 491¹⁴a, 491¹⁵) i konsekwencjami każdego
+  poziomu.
+
+### 5. WERYFIKACJA STRUKTURY (Reguła 5)
+
+19 nagłówków, 50 znaczników code-fence (parzyste), 720 linii — czysto
+za pierwszym razem.
+
+### 6. STRUKTURA
+
+`dr-02`: 67 plików, bez zmian liczby (4 pliki zmienione łącznie w toku
+całej sesji).
+
+### 7. WNIOSKI
+
+Pierwszy w tej sesji przypadek weryfikacji sygnału z ZEWNĄTRZ systemu
+(inne narzędzie AI, nie własny audyt) — obie uwagi okazały się trafne
+po niezależnej weryfikacji źródłowej, co potwierdza wartość
+sprawdzania takich sygnałów zamiast ich odrzucania lub ślepego
+przyjmowania. Metodologia identyczna jak przy własnych odkryciach:
+weryfikacja wieloźródłowa PRZED naniesieniem poprawki, nie akceptacja
+na słowo ani z jednej, ani z drugiej strony.
+
+Nie przypisano tego do żadnej istniejącej flagi F- — to punktowa
+naprawa na konkretne zgłoszenie użytkownika, zamknięta w tej samej
+turze bez pozostawiania śladu w WARN-OTWARTE.md (zgodnie z praktyką:
+w pełni zamknięte, jednorazowe naprawy nie wymagają osobnego wiersza
+rejestru, wystarczy wpis w dzienniku).
+
+**Reguła 7 — zastosowanie:** TAK. `dr-02-prawo-cywilne-rodzinne-
+gospodarcze.zip` dostarczony ponownie (67/67 plików, 4 pliki zmienione
+łącznie). `audyt-systemu-v4.zip` NIE wymaga aktualizacji tym razem —
+brak zmian w WARN-OTWARTE.md, tylko ten wpis dziennika.

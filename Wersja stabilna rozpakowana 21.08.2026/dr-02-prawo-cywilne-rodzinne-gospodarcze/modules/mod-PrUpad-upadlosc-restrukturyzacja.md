@@ -85,7 +85,16 @@ PRZESŁANKA 2 (osoby prawne i jednostki organizacyjne):
 ## SCHEMAT POSTĘPOWANIA UPADŁOŚCIOWEGO
 
 ```
-Wniosek o ogłoszenie upadłości → sąd upadłościowy (wydział gospodarczy SO)
+Wniosek o ogłoszenie upadłości → sąd upadłościowy (⚡ SKORYGOWANE
+    2026-08-21: **sąd REJONOWY — gospodarczy** [nie okręgowy!], art. 18
+    PrUp: "Sądem upadłościowym jest sąd rejonowy – sąd gospodarczy",
+    orzeka w składzie 3 sędziów zawodowych — zweryfikowane 8 zgodnych
+    źródeł: isap.sejm.gov.pl [PDF pierwotny], arslege.pl, lexlege.pl ×2,
+    e-prawnik.pl, edukacjaprawnicza.pl, kancelariafenix.pl, radca-
+    orlowska.pl — POPRZEDNIA WERSJA tego wiersza błędnie wskazywała
+    "wydział gospodarczy SO" [sąd okręgowy] — błąd szczebla sądu, nie
+    kosmetyczny; 29 sądów rejonowych w Polsce ma status sądu
+    upadłościowego, nie każdy SR z wydziałem gospodarczym)
   Uprawnieni: dłużnik (OBOWIĄZEK w 30 dni!), każdy wierzyciel
   ↓
 Postanowienie o ogłoszeniu upadłości
@@ -124,13 +133,55 @@ Likwidacja masy → plan spłaty wierzycieli
 ```
 Uproszczona procedura:
   Wniosek dłużnika → ogłoszenie upadłości → syndyk
-  → plan spłaty (3–7 lat) lub umorzenie bez planu
+  → plan spłaty (standardowo do 36 mies.) lub umorzenie bez planu
   → umorzenie pozostałych długów
 
 Cel: "nowy start" (fresh start) — uwolnienie od długów niemożliwych do spłaty
-Warunek: brak celowego doprowadzenia do upadłości / brak rażącego niedbalstwa
-⚠️ Weryfikuj aktualne przepisy — ustawa wielokrotnie nowelizowana.
 ```
+
+⛔ **KOREKTA 2026-08-21 (zbadane na sygnał użytkownika — inne narzędzie AI
+wykryło nadmierne uproszczenie w poprzedniej wersji tego wiersza):**
+poprzedni zapis "Warunek: brak celowego doprowadzenia do upadłości / brak
+rażącego niedbalstwa" przedstawiał sprawę jako binarny warunek
+dopuszczalności całej procedury — to stan sprzed nowelizacji z 1.01.2020.
+**Od 1.01.2020 r. rażące niedbalstwo NIE dyskwalifikuje z ogłoszenia
+upadłości** — sąd może ją ogłosić nawet przy jego stwierdzeniu. System
+jest obecnie TRÓJSTOPNIOWY, nie binarny:
+
+```
+1) BRAK winy (brak umyślności i rażącego niedbalstwa) — standardowa
+   sytuacja: plan spłaty do 36 miesięcy, możliwe umorzenie bez planu
+   przy trwałej niezdolności do spłat (art. 491¹⁴a — ciężka choroba,
+   podeszły wiek, świadczenia socjalne) lub umorzenie warunkowe na 5 lat
+   przy niezdolności czasowej
+
+2) RAŻĄCE NIEDBALSTWO przy doprowadzeniu/istotnym zwiększeniu stopnia
+   niewypłacalności — SANKCJA: plan spłaty WYDŁUŻONY, od 36 DO 84
+   miesięcy (3-7 lat) — art. 491¹⁵ PrUp — ale oddłużenie NADAL następuje
+   po wykonaniu planu. Rażące niedbalstwo = skrajny brak ostrożności
+   (np. wielokrotne zaciąganie pożyczek bez realnej zdolności spłaty),
+   ocena zależy od okoliczności, wiedzy dłużnika i reakcji na narastające
+   problemy — nie każdy błąd finansowy to rażące niedbalstwo
+
+3) UMYŚLNOŚĆ (celowe doprowadzenie do niewypłacalności lub istotne
+   zwiększenie jej stopnia) — SUROWSZA konsekwencja niż wydłużony plan:
+   art. 491¹⁴a ust. 1 pkt 1 PrUp przewiduje możliwą CAŁKOWITĄ ODMOWĘ
+   ODDŁUŻENIA (nie tylko dłuższy plan — brak umorzenia w ogóle),
+   w szczególności przy roztrwonieniu majątku lub celowym nieregulowaniu
+   długów w terminie. To NAJSUROWSZY z trzech poziomów.
+
+Skrócenie planu (niezależnie od poziomu winy): spłata ≥70% zobowiązań
+→ plan max 1 rok; spłata ≥50% → plan max 2 lata.
+```
+
+Zweryfikowane 8 zgodnych źródeł (wszystkie 2025-2026): syndyk.katowice.pl,
+szalanskikancelaria.pl ×2, upadlosckonsumenckawarszawa.pl, ryzynski.eu,
+nowackagornicki.pl ×2, kalkulatorxxl.pl — zgodne co do progów (36/84
+miesięcy), mechanizmu (sankcyjny, nie dyskwalifikujący od 2020) i
+rozróżnienia rażące niedbalstwo (dłuższy plan) vs umyślność (możliwa
+odmowa oddłużenia w ogóle).
+
+⚠️ Weryfikuj aktualne przepisy — ustawa wielokrotnie nowelizowana.
 
 ---
 
@@ -523,6 +574,85 @@ Wierzytelności z zabezpieczeniem rzeczowym (zastaw, hipoteka):
   Zaspokajane z przedmiotu zabezpieczenia poza kolejnością (art. 336 PrUp)
 ```
 
+
+---
+
+## UKŁAD W UPADŁOŚCI (Tytuł Va PrUp, art. 266a-266f)
+
+```
+⛔⛔ KOREKTA KRYTYCZNA (F-86, 2026-08-21): flaga rejestru zakładała
+opisanie "Układ w upadłości (art. 267-305)" — ZAŁOŻENIE BŁĘDNE. Cały
+dawny Tytuł VI (art. 267-305, wszystkie 5 działów I-V) jest CAŁKOWICIE
+UCHYLONY — zastąpiony znacznie krótszym, skonsolidowanym Tytułem Va
+(art. 266a-266f), wprowadzonym reformą upraszczającą regulację układu
+w toku postępowania upadłościowego. NIE dodawaj treści pod numerami
+267-305 — te przepisy nie istnieją. Zweryfikowane: przepisy.gofin.pl
+(pełny spis treści z jawnym "Tytuł VI. (uchylony)" dla każdego z 5
+działów), lexlege.pl (4× potwierdzone przy różnych artykułach 266a-266e),
+dlajurysty.pl, sip.lex.pl (t.j. Dz.U.2025.614 — ta sama podstawa co
+reszta modułu).
+```
+
+**Art. 266a — dopuszczalność układu i legitymacja**
+```
+§1: W postępowaniu upadłościowym DOPUSZCZALNE jest zawarcie układu
+§2: Propozycje układowe mogą zgłosić: UPADŁY, WIERZYCIEL oraz SYNDYK
+    (⭐ szerszy krąg niż mogłoby się wydawać — nie tylko sam upadły)
+```
+
+**Art. 266b — wstrzymanie likwidacji masy na czas procedury układowej**
+```
+§1: Podmioty uprawnione do złożenia propozycji układowych mogą wraz
+    z nimi złożyć wniosek o CAŁKOWITE lub CZĘŚCIOWE wstrzymanie
+    likwidacji masy upadłości do czasu zatwierdzenia układu
+§2: NIEDOPUSZCZALNE jest wstrzymanie likwidacji, jeżeli propozycje
+    układowe NIE przewidują zaspokojenia wierzytelności NIEOBJĘTYCH
+    układem niezwłocznie po zatwierdzeniu układu i prawomocnym
+    zakończeniu postępowania na tej podstawie (⭐ zabezpieczenie
+    wierzycieli spoza układu przed nadmiernym opóźnieniem)
+```
+
+**Art. 266c — zgromadzenie wierzycieli i głosowanie nad układem**
+```
+§1: Sędzia-komisarz MOŻE zwołać zgromadzenie wierzycieli w celu
+    głosowania nad układem, jeżeli zostało uprawdopodobnione, że układ
+    zostanie przyjęty przez wierzycieli i wykonany
+§2: Sędzia-komisarz MUSI zwołać zgromadzenie, jeżeli wniosek jest
+    popierany przez wierzyciela/wierzycieli posiadających ŁĄCZNIE co
+    najmniej 50% sumy wierzytelności uprawnionych do głosowania
+§3: Zgromadzenie zwołuje się PO zatwierdzeniu listy wierzytelności;
+    przy CZĘŚCIOWYM zatwierdzeniu (poza sprzeciwami) — dopuszczalne,
+    jeżeli suma wierzytelności OBJĘTYCH sprzeciwami NIE przekracza 15%
+    sumy wierzytelności objętych układem
+```
+
+**Art. 266d — zakończenie postępowania po zatwierdzeniu układu**
+```
+Po prawomocnym ZATWIERDZENIU układu sąd wydaje postanowienie o
+ZAKOŃCZENIU postępowania. Przepisy art. 362-367 PrUp (zakończenie i
+umorzenie postępowania upadłościowego) stosuje się ODPOWIEDNIO.
+```
+
+**Art. 266e — wynagrodzenie syndyka po zawarciu układu**
+```
+W przypadku zakończenia postępowania po prawomocnym zatwierdzeniu
+układu, wynagrodzenie OSTATECZNE syndyka MOŻE zostać ustalone na
+podstawie art. 55 oraz art. 58-61 Prawa RESTRUKTURYZACYJNEGO (nie
+upadłościowego — odesłanie międzyustawowe), JEŻELI będzie to
+korzystniejsze dla syndyka i uzasadnione jego zaangażowaniem w
+skuteczne zawarcie układu (⭐ premia za doprowadzenie do układu zamiast
+likwidacji).
+
+⚠️ Art. 266f — treść NIE w pełni potwierdzona w tej sesji (dotyczy
+prawdopodobnie dalszych szczegółów wynagrodzenia/rozliczeń) — punkt
+startowy dla przyszłej weryfikacji.
+
+⭐⭐ ADRESAT ZAŻALEŃ w tym Tytule — patrz `shared/ZAZALENIE-ADRESAT-
+GATE.md`, wzorzec "Prawo upadłościowe (art. 222)": postanowienia
+SĘDZIEGO-KOMISARZA (np. art. 266c decyzja o zwołaniu zgromadzenia) =
+dewolutywne; postanowienia SĄDU (np. art. 266d o zakończeniu
+postępowania) = POZIOME, chyba że na liście wyjątków art. 222 ust. 1a.
+```
 
 ---
 
