@@ -169,6 +169,29 @@ Dz.U.2025.1228]):
   Opłata stała od odwołania od decyzji UOKiK/URE/UKE/UTK: 1 000 zł
   Wniosek o zwolnienie od kosztów: bezpłatny
 
+  ✅ NOWE 2026-08-21 (F-103) — Art. 25 KSCU (opłaty od skarg/zażaleń poza
+  postępowaniem procesowym sensu stricto), dotąd CAŁKOWICIE nieobecny w
+  tym module, mimo że jest to jeden z najczęściej używanych przepisów
+  KSCU w praktyce egzekucyjnej. Luka wykryta 2026-08-21 przy naprawie
+  błędnej kwoty (100 zł zamiast aktualnych 50 zł) w plikach pochodnych
+  pisma-proste-v2 — ten moduł kanoniczny NIE zawierał art. 25 wcale,
+  więc błąd w plikach pochodnych nie był wykrywalny przez porównanie ze
+  źródłem. Zweryfikowane: isap.sejm.gov.pl (D20051398Lj.pdf, Rząd 1),
+  lexlege.pl ×2, arslege.pl (z cytatem "Dz.U.2025.0.1228 t.j.") —
+  wszystkie zgodne:
+    - ust. 1: **50 zł** — skarga na czynności komornika (art. 767 KPC).
+      Jednolita stawka niezależnie od przedmiotu zaskarżenia (w tym
+      postanowienie o umorzeniu postępowania egzekucyjnego — patrz
+      `pisma-proste-v2/references/M6-oplaty.md` dla pełnego rozbicia na
+      tryby zaskarżania działań komornika)
+    - ust. 1a: **100 zł** — zażalenie na odmowę dokonania czynności
+      notarialnej (⚠️ NIE mylić z ust. 1 — inny przedmiot, ten sam
+      poziom 100 zł co dawniej błędnie przypisywano całemu art. 25)
+    - ust. 2: opłata od skargi na orzeczenie referendarza sądowego —
+      w wysokości opłaty od WNIOSKU o wydanie tego orzeczenia, ALE NIE
+      WIĘCEJ niż **100 zł** (górny limit niezależny od faktycznej
+      opłaty bazowej)
+
 Prawo pomocy (sąd adm.) i zwolnienie od kosztów (sąd cyw.):
   → Wniosek o prawo pomocy: do WSA, bez opłaty
   → Zwolnienie: osoba fizyczna — wykazanie niemożności poniesienia kosztów

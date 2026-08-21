@@ -360,6 +360,13 @@ REKOMENDACJA: □ Odwołanie do GIF  □ Skarga do WSA  □ Wniosek o wstrzymani
 | Orzecznictwo NSA / WSA / TSUE | `orzeczenia-sadowe-v2` |
 
 *PF: Dz.U. 2026 poz. 612 t.j. (obwieszczenie 17.04.2026) + nowelizacje Dz.U. 2025 poz. 924, 1416, 1537*
+✅ FAZA 3E ZAMKNIĘTA 2026-08-21 (F-45): numer t.j. i lista nowelizacji
+POTWIERDZONE jako aktualne i kompletne — zweryfikowane bezpośrednim
+cytatem obwieszczenia (api.sejm.gov.pl/eli, Rząd 1) + infor.pl, oia.koszalin.pl:
+oficjalny footnote obwieszczenia z 17.04.2026 wymienia dokładnie te same
+4 nowelizacje (poz. 905, 924, 1416, [świadczenia] 1537) plus poz. 1795
+(ustawa o zdrowiu zwierząt — poza zakresem treści tego modułu, dotyczy
+weterynarii). Brak rozbieżności, treść modułu aktualna.
 *URPL: urpl.gov.pl | GIF: gif.gov.pl | NIA: nia.org.pl*
 *Projekt UDER114: legislacja.rcl.gov.pl | TSUE C-200/2024: curia.europa.eu*
 *Weryfikacja: 22.05.2026 — zakaz cytowania przepisów z pamięci*

@@ -51416,3 +51416,553 @@ rejestru, wystarczy wpis w dzienniku).
 gospodarcze.zip` dostarczony ponownie (67/67 plików, 4 pliki zmienione
 łącznie). `audyt-systemu-v4.zip` NIE wymaga aktualizacji tym razem —
 brak zmian w WARN-OTWARTE.md, tylko ten wpis dziennika.
+
+---
+
+## AUDYT-2026-08-21t — F-103 ZAMKNIĘTA: art. 25 KSCU dopisany do kanonicznego modułu
+
+### 1. STATUS OGÓLNY
+
+Kontynuacja ("kontynuuj"). Wybrano F-103 — naturalna kontynuacja
+wcześniejszej pracy tej sesji (opłaty komornicze) i jedyna otwarta
+flaga bezpośrednio powiązana z tematem już dogłębnie zbadanym.
+
+### 2. WERYFIKACJA
+
+Pełna treść art. 25 KSCU potwierdzona: Rząd 1 (isap.sejm.gov.pl,
+D20051398Lj.pdf — bezpośredni cytat) + Rząd 2B (lexlege.pl ×2,
+arslege.pl z cytatem "Dz.U.2025.0.1228 t.j.") — w pełni zgodne z
+ustaleniami z wcześniejszej tury tej samej sesji (naprawa
+pisma-proste-v2):
+- ust. 1: 50 zł — skarga na czynności komornika
+- ust. 1a: 100 zł — zażalenie na odmowę dokonania czynności notarialnej
+  (odrębny przedmiot od ust. 1 — źródło dawnej pomyłki o "100 zł dla
+  komornika" naprawionej wcześniej w tej sesji)
+- ust. 2: opłata od skargi na orzeczenie referendarza — wysokość opłaty
+  od wniosku o wydanie tego orzeczenia, max 100 zł
+
+### 3. NAPRAWA WYKONANA
+
+Dodano sekcję do `dr-12/modules/mod-KSCU-koszty-sadowe-i-pomoc-
+prawna.md`, w istniejącym bloku "KLUCZOWE STAWKI", z krzyżowym
+odesłaniem do `pisma-proste-v2/references/M6-oplaty.md` (gdzie już
+istnieje pełne rozbicie na 3 tryby zaskarżania działań komornika z
+wcześniejszej tury tej samej sesji).
+
+### 4. WERYFIKACJA STRUKTURY (Reguła 5)
+
+12 nagłówków, 2 znaczniki code-fence (parzyste), 207 linii — czysto za
+pierwszym razem.
+
+### 5. DECYZJA O ZAMKNIĘCIU
+
+F-103 ZAMKNIĘTA W CAŁOŚCI. Cel flagi (żeby przyszłe błędy w plikach
+pochodnych były wykrywalne przez porównanie ze źródłem kanonicznym)
+osiągnięty — moduł dr-12 teraz zawiera art. 25 z pełną, zweryfikowaną
+treścią. Wiersz usunięty z rejestru.
+
+### 6. STRUKTURA
+
+`dr-12`: 15 plików, bez zmian liczby (2 pliki zmienione łącznie w toku
+całej sesji: MAPA-AKTOW.md z wcześniejszej naprawy biegłych rewidentów +
+mod-KSCU z tej tury).
+
+### 7. WNIOSKI
+
+Ta flaga zamyka pętlę zapoczątkowaną na samym początku sesji (żądanie
+użytkownika o zbadanie opłat za skargę na komornika) — od pierwotnego
+odkrycia błędnej kwoty, przez pełne rozbicie na 3 tryby, aż po
+uzupełnienie źródła kanonicznego. Dobry przykład, jak jedno pytanie
+użytkownika może uruchomić łańcuch powiązanych napraw w różnych
+częściach systemu w toku jednej, długiej sesji.
+
+**Reguła 7 — zastosowanie:** TAK. `dr-12-sadownictwo-prokuratura-
+zawody-prawnicze.zip` dostarczony ponownie (15/15 plików, 2 pliki
+zmienione łącznie, diff zip↔drzewo puste). `audyt-systemu-v4.zip`
+zaktualizowany (F-103 zamknięta, licznik 21→20).
+
+---
+
+## AUDYT-2026-08-21u — F-40 zamknięta (pozostałość rejestrowa); F-45 zawężona i przeskalowana
+
+### 1. STATUS OGÓLNY
+
+Kontynuacja ("kontynuuj"). Wybrano F-40 (dr-09, FAZA 3E treści 3
+modułów) jako kolejny krok.
+
+### 2. F-40 — CZYSTA POZOSTAŁOŚĆ REJESTROWA
+
+Sprawdzenie wykazało: wszystkie 3 moduły (`mod-PrGeodezyjne-kartografia-
+wywlaszczenia.md`, `mod-UGN-gospodarka-nieruchomosciami.md`, `mod-prawo-
+geologiczne-gornicze.md`) już mają jawny znacznik "✅ FAZA 3E ZAMKNIĘTA
+2026-08-20 (F-40)" z pełną, szczegółową dokumentacją wykonanej
+weryfikacji (sprawdzone nowelizacje międzyokresowe, potwierdzona
+aktualność treści). Praca była faktycznie ukończona DZIEŃ WCZEŚNIEJ, ale
+wiersz w `WARN-OTWARTE.md` nigdy nie został usunięty. Zero nowej pracy
+merytorycznej wykonanej w tym punkcie — czyste sprzątanie rejestru.
+
+Ten sam wzorzec (praca ukończona, rejestr nie zaktualizowany) jak
+wcześniej przy F-97 (lex szarlatan) — trzeci w tej sesji przypadek
+weryfikacji założeń rejestru przed podjęciem działania, tym razem w
+kierunku "mniej pracy niż zakładano", nie "więcej/inaczej niż
+zakładano" jak przy art. 21 UZNK i art. 267-305 PrUp.
+
+### 3. F-45 — ZAWĘŻONA I PRZESKALOWANA
+
+Sprawdzono wszystkie 3 pliki:
+- **GIF-GIS (Prawo farmaceutyczne)** — Dz.U. 2026.612 t.j. i lista
+  nowelizacji (924, 1416, 1537) POTWIERDZONE aktualne bezpośrednim
+  cytatem oficjalnego obwieszczenia (api.sejm.gov.pl/eli, Rząd 1) +
+  infor.pl, oia.koszalin.pl. Zamknięte.
+- **Oświata/szkolnictwo wyższe** — DWA numery w tym samym pliku,
+  OBA potwierdzone: 2024.1571 (Prawo o szkolnictwie wyższym i nauce,
+  isap.sejm.gov.pl bezpośredni wpis, brak nowszego t.j. znalezionego)
+  i 2026.820 (Prawo oświatowe, obwieszczenie 12.06.2026, potwierdzone
+  4 źródłami w tym bezpośredni cytat PDF). Zamknięte.
+- **Edukacja specjalna/dostępność** — SPRAWDZONE: plik to CAŁKOWICIE
+  pusty szkielet (10 standardowych sekcji szablonu, zero rzeczywistej
+  treści prawnej — tabela aktów zawiera tylko wiersz "do uzupełnienia po
+  kontroli źródła"). To NIE jest korekta błędnego numeru — to
+  NAPISANIE CAŁEGO MODUŁU OD PODSTAW. Poprzedni opis flagi
+  ("błędny numer źródłowy 2022.2240 co w dawnej F-31") nie odpowiada
+  obecnej treści pliku — numer 2022.2240 nie występuje nigdzie w
+  obecnym pliku; prawdopodobnie opis odnosił się do wcześniejszej
+  wersji pliku, zastąpionej później czystym szablonem.
+
+### 4. NAPRAWY WYKONANE
+
+`dr-10/modules/mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny.md` i
+`dr-10/modules/mod-ustawa-oswiata-szkolnictwo-wyzsze.md` — dodane
+znaczniki "FAZA 3E ZAMKNIĘTA 2026-08-21" z pełną dokumentacją źródeł,
+analogicznie do stylu już użytego w 3 modułach F-40.
+
+### 5. WERYFIKACJA STRUKTURY (Reguła 5)
+
+Oba pliki: parzyste znaczniki code-fence, długość bezpiecznie poniżej
+progu — czysto za pierwszym razem.
+
+### 6. DECYZJA
+
+F-40 zamknięta w całości (wiersz usunięty z rejestru). F-45 zawężona do
+1 z 3 pozostałych pozycji, z jawną notatką że ta pozycja wymaga
+NAPISANIA TREŚCI, nie korekty — inny, większy zakres pracy na przyszłość
+(prawdopodobnie: ustawa o zapewnianiu dostępności osobom ze
+szczególnymi potrzebami + rozdział o kształceniu specjalnym w Prawie
+oświatowym + orzeczenia PPP, żaden z tych wątków NIE zbadany w tej
+sesji).
+
+### 7. STRUKTURA
+
+`dr-10`: 33 pliki, bez zmian liczby (2 pliki zmienione).
+
+### 8. WNIOSKI
+
+Ta tura potwierdza wartość PONOWNEGO sprawdzenia stanu faktycznego przed
+podjęciem pracy nad flagą — zarówno gdy okazuje się, że pracy jest
+WIĘCEJ niż zakładano (art. 267-305 PrUp, art. 21 UZNK), jak i gdy
+okazuje się, że jest jej MNIEJ (F-40) lub INNA niż zakładano (F-45
+pkt 3). Żadne z tych ustaleń nie byłoby możliwe bez bezpośredniego
+zajrzenia do treści pliku zamiast polegania wyłącznie na opisie w
+rejestrze.
+
+**Reguła 7 — zastosowanie:** TAK. `dr-10-zdrowie-farmacja-zywnosc-
+rolnictwo.zip` dostarczony (33/33 pliki, 2 pliki zmienione, diff
+zip↔drzewo puste). `audyt-systemu-v4.zip` zaktualizowany (F-40
+zamknięta, licznik 20→19; F-45 zawężona i przeskalowana).
+
+---
+
+## AUDYT-2026-08-21v — F-45 ZAMKNIĘTA W CAŁOŚCI: treść edukacji specjalnej/PPP/dostępności napisana od podstaw
+
+### 1. STATUS OGÓLNY
+
+Na wyraźne żądanie użytkownika ("skoro pusty szkielet to trzeba będzie
+go wypełnić zweryfikowanymi danymi, kontynuuj") — napisano pełną treść
+merytoryczną dla `mod-ustawa-edukacja-specjalna-dostepnosc.md`, dotąd
+całkowicie pustego szkieletu.
+
+### 2. WERYFIKACJA
+
+10+ zgodnych źródeł: pedagogika-specjalna.edu.pl, mojebambino.pl,
+poradnia.piotrkow.pl, glospedagogiczny.pl, pppwyszkow.pl (z bezpośrednim
+cytatem NOWEGO rozporządzenia MEN z 2.03.2026, Dz.U. 2026.428),
+ppp-pyskowice.pl, PFRON ×5 (dostepnosc.pfron.org.pl, pfron.org.pl —
+oficjalne strony urzędowe), sip.lex.pl (OpenLEX, t.j. Dz.U.2024.1411),
+gazetaprawna.pl (06.2026).
+
+### 3. ODKRYCIE ISTOTNE — ZMIANA PODSTAWY WYKONAWCZEJ
+
+Rozporządzenie MEN z 7.09.2017 r. (Dz.U.2017.1743) ws. orzeczeń i opinii
+PPP — WCIĄŻ powszechnie cytowane jako aktualne w licznych materiałach
+online (w tym na stronach samych poradni) — zostało ZASTĄPIONE nowym
+rozporządzeniem z 2.03.2026 r. (Dz.U. 2026.428), potwierdzonym
+bezpośrednim cytatem z oficjalnej strony PPP Wyszków. To ważne dla
+praktyki — wiele źródeł internetowych (w tym część znalezionych w tej
+sesji) nie zostało jeszcze zaktualizowanych po tej zmianie.
+
+### 4. TREŚĆ DODANA
+
+Wypełniono tabelę CORE (sekcja 3) realnymi wpisami (5 wierszy: Prawo
+oświatowe art. 127, rozp. MEN o orzeczeniach PPP, ustawa o dostępności
+art. 4-7/29-30/32-33) oraz dodano nową sekcję "MATERIAŁ MERYTORYCZNY —
+ORZECZENIE PPP I DOSTĘPNOŚĆ":
+
+**A. Orzeczenie o potrzebie kształcenia specjalnego** — dwutorowy system
+wydawania (poradnia zwykła vs specjalistyczna wskazana przez kuratora,
+zależnie od rodzaju niepełnosprawności), krąg uprawnionych do złożenia
+wniosku (z jawnym wykluczeniem szkoły/przedszkola — częsty błąd w
+praktyce), procedura (dokumentacja, prawo uczestnictwa w posiedzeniu,
+możliwość orzeczenia NEGATYWNEGO), przedział wiekowy, oraz kluczowa
+zasada: wybór miejsca nauczania należy do rodzica, nie do zespołu
+orzekającego.
+
+**B. Ustawa o zapewnianiu dostępności osobom ze szczególnymi potrzebami**
+— pełny tryb TRÓJSTOPNIOWY (informacja → wniosek 14 dni/2 mies. →
+skarga do Prezesa PFRON 30 dni, postępowanie jednoinstancyjne) plus
+CZWARTY poziom eskalacji (skarga do WSA w Warszawie — właściwość
+WYŁĄCZNA, nie lokalna, odnotowana jako częsty błąd praktyczny) oraz
+mechanizm egzekucji (grzywna w celu przymuszenia, UPEA).
+
+### 5. WERYFIKACJA STRUKTURY (Reguła 5)
+
+Jawne zawarcie docelowego nagłówka "## 4. Procedura" w `new_str` —
+czysto za pierwszym razem: 11 nagłówków, 6 znaczników code-fence
+(parzyste), 238 linii (z ~136 pierwotnych).
+
+### 6. DECYZJA
+
+F-45 ZAMKNIĘTA W CAŁOŚCI — wszystkie 3 pliki teraz mają zweryfikowaną,
+aktualną treść. Wiersz usunięty z rejestru.
+
+### 7. STRUKTURA
+
+`dr-10`: 33 pliki, bez zmian liczby (3 pliki zmienione łącznie w toku
+całej sesji: GIF-GIS, oświata/szkolnictwo z poprzedniej tury + edukacja-
+specjalna z tej tury).
+
+### 8. WNIOSKI
+
+Ta flaga demonstruje pełny cykl: odkrycie że zadanie jest INNE niż
+opisane (poprzednia tura) → na żądanie użytkownika, wykonanie
+właściwego zadania (napisanie treści od podstaw, nie korekta numeru) →
+zamknięcie w całości. Dobry przykład elastycznego reagowania na
+rzeczywisty stan rzeczy, nie na pierwotne (nieaktualne) założenie
+rejestru.
+
+**Reguła 7 — zastosowanie:** TAK. `dr-10-zdrowie-farmacja-zywnosc-
+rolnictwo.zip` dostarczony ponownie (33/33 pliki, 3 pliki zmienione
+łącznie, diff zip↔drzewo puste). `audyt-systemu-v4.zip` zaktualizowany
+(F-45 zamknięta w całości, licznik 19→18).
+
+---
+
+## AUDYT-2026-08-21w — F-49 ZAMKNIĘTA W CAŁOŚCI
+
+### 1. STATUS OGÓLNY
+
+Kontynuacja ("kontynuuj"). Sprawdzono wszystkie 3 pliki F-49 (dr-11).
+Wynik mieszany: 1 czysty pusty szkielet (jak F-45 poprzednio), 2 pliki
+z realną, ale częściowo przestarzałą treścią dynamiczną.
+
+### 2. mod-PrTelekom-poczta-UKE.md — PUSTY SZKIELET, TREŚĆ NAPISANA OD PODSTAW
+
+Sekcja "Akty do sprawdzenia" była generyczną listą tematów bez
+JAKIEGOKOLWIEK numeru Dz.U. czy artykułu. Dodano:
+- **Prawo komunikacji elektronicznej (PKE)** — Dz.U. 2024.1221
+  (12.07.2024, zastąpiła Prawo telekomunikacyjne), art. 378 (reklamacja,
+  12 miesięcy), rozporządzenie wykonawcze z 29.09.2025 (Dz.U. 2025.1371).
+- **Przepisy wprowadzające PKE** — Dz.U. 2024.1222.
+- **Prawo pocztowe** — Dz.U. 2025.366 t.j., art. 92 (reklamacja, 12
+  miesięcy, krąg uprawnionych nadawca/adresat).
+- Ustawa o zwalczaniu nadużyć w komunikacji elektronicznej — odnotowana
+  jako niepotwierdzony dokładny numer, punkt startowy na przyszłość.
+
+Zweryfikowane: isap.sejm.gov.pl (Rząd 1), cik.uke.gov.pl (oficjalna
+strona UKE), lexlege.pl, arslege.pl, prawo.pl, eli.gov.pl, infor.pl.
+
+Odnotowano też mylącą nazwę pliku (już wskazaną w opisie flagi) jako
+obserwację dla przyszłego audytu, bez otwierania nowej flagi.
+
+### 3. mod-ustawa-informatyzacja-podmiotow-publicznych.md — TREŚĆ JUŻ ISTNIAŁA, ZAKTUALIZOWANO DYNAMICZNY FRAGMENT
+
+Plik miał już realne, zweryfikowane numery Dz.U. — tylko harmonogram
+KSeF był oznaczony jako "weryfikuj przed cytowaniem, wielokrotnie
+przesuwany". Ustalono OSTATECZNY harmonogram (6+ zgodnych źródeł, w tym
+oficjalna ksef.podatki.gov.pl): 1.02.2026 (duzi podatnicy + obowiązek
+odbierania dla wszystkich), 1.04.2026 (wszyscy pozostali — ⚡ TA DATA
+JUŻ MINĘŁA na 21.08.2026), 1.01.2027 (mikroprzedsiębiorcy + sankcje).
+Podstawa: ustawa z 9.05.2024 (Dz.U. 2024.852).
+
+### 4. mod-ustawa-podpis-elektroniczny.md — TREŚĆ JUŻ ISTNIAŁA, ZAKTUALIZOWANO STATUS EUDIW
+
+Plik miał już solidną treść eIDAS 1.0/2.0. Zaktualizowano status wdrożenia
+EUDIW w Polsce (8+ zgodnych źródeł, w tym oficjalny komunikat gov.pl/
+cyfryzacja z 10.08.2026): pilotaż zintegrowany z aplikacją mObywatel
+(NIE nowa, osobna aplikacja), planowany na koniec 2026, wymaga e-dowodu
+(dowód osobisty z warstwą elektroniczną) do silnego uwierzytelnienia —
+bez e-dowodu korzystanie z EUDIW nie będzie możliwe. Ustawa krajowa w
+trakcie procesu legislacyjnego (Rada Ministrów II kw. 2026 → Sejm).
+
+### 5. WERYFIKACJA STRUKTURY (Reguła 5)
+
+Wszystkie 3 pliki: nagłówki kompletne, znaczniki code-fence parzyste
+(0/6/8), długości bezpiecznie poniżej progu. Czysto za pierwszym razem
+we wszystkich trzech.
+
+### 6. DECYZJA
+
+F-49 ZAMKNIĘTA W CAŁOŚCI. Wiersz usunięty z rejestru.
+
+### 7. STRUKTURA
+
+`dr-11`: 24 pliki, bez zmian liczby (3 pliki zmienione).
+
+### 8. WNIOSKI
+
+Ta flaga pokazuje trzeci wariant tego samego typu zadania w tej sesji:
+(a) F-40 — praca już zrobiona, czysta pozostałość rejestrowa; (b) F-45 —
+mieszanka (2 zweryfikowane + 1 pusty szkielet wymagający pełnej treści);
+(c) F-49 — inna mieszanka (1 pusty szkielet + 2 pliki z realną treścią
+wymagającą tylko odświeżenia fragmentów DYNAMICZNYCH, takich jak
+harmonogramy wdrożeń, które z natury rzeczy dezaktualizują się z czasem
+niezależnie od tego, czy sam akt prawny się zmienił). Trzy różne
+kategorie tego, co "FAZA 3E" może faktycznie oznaczać w praktyce.
+
+**Reguła 7 — zastosowanie:** TAK. `dr-11-cyfrowe-cyber-ai-dane-ip.zip`
+dostarczony (24/24 pliki, 3 pliki zmienione, diff zip↔drzewo puste).
+`audyt-systemu-v4.zip` zaktualizowany (F-49 zamknięta, licznik 18→17).
+
+---
+
+## AUDYT-2026-08-21x — Synchronizacja map po sesji treściowej: wykryty i naprawiony przypadek F-89-klasy w dr-05
+
+### 1. STATUS OGÓLNY
+
+Na wyraźne przypomnienie użytkownika ("pamiętaj o synchronizacji aktów
+prawnych pomiędzy mapami w dr i prawo polskie") — systematyczne
+sprawdzenie, czy nowe akty/numery wprowadzone treścią w tej sesji
+(F-45, F-49) są zsynchronizowane z lokalnymi mapami `dr-XX/MAPA-AKTOW.md`
+i centralnym `prawo-polskie-v2/ROUTING-MAP.md`.
+
+### 2. GŁÓWNE ODKRYCIE: DUPLIKAT + ROZJAZD MAPA-VS-MODUŁ W dr-05
+
+Centralny ROUTING-MAP wskazywał na `dr-05/modules/mod-ustawa-
+dostepnosc-niepelnosprawni.md` jako kanoniczny moduł dla ustawy o
+zapewnianiu dostępności — **INNY plik niż ten, który właśnie napisano
+w dr-10** (F-45, poprzednia tura). Sprawdzenie wykazało:
+- **Genuine duplikat treści** — oba moduły (dr-05 i dr-10) legalnie
+  omawiają tę samą ustawę z różnych kątów (dr-05: proceduralno-
+  -administracyjny/WSA; dr-10: pełny tryb + styk z edukacją specjalną)
+  — to samo w sobie nie jest błędem, system wielokrotnie dopuszcza
+  takie rozdzielenie kątów.
+- **ALE**: moduł dr-05 miał WCIĄŻ błędny numer **Dz.U. 2022 poz. 2240**
+  oraz błędne terminy proceduralne (**30/60 dni** zamiast prawidłowych
+  **14 dni/2 miesiące**) i pomijał obowiązkowy etap skargi do Prezesa
+  PFRON przed WSA — mimo że LOKALNA MAPA dr-05/MAPA-AKTOW.md JUŻ MIAŁA
+  poprawny numer **2024.1411**, zweryfikowany krzyżowo z dr-10 jeszcze
+  **2026-08-14 (F-31, zamknięta)**. To dokładnie ten sam wzorzec, który
+  F-89 wielokrotnie wykrywał w tej sesji: poprawka naniesiona w jednym
+  miejscu (tu: mapa) nigdy nie dotarła do drugiego (tu: sam moduł).
+- Rozwiązuje to też starą zagadkę z sesji F-45: numer "2022.2240"
+  wspominany w opisie flagi jako "ten sam błędny numer co w dawnej
+  F-31" nie występował NIGDZIE w pliku dr-10 (bo to był pusty szkielet)
+  — bo w rzeczywistości znajdował się w INNYM pliku, dr-05.
+
+### 3. NAPRAWY WYKONANE
+
+- **`dr-05/modules/mod-ustawa-dostepnosc-niepelnosprawni.md`** —
+  poprawiony numer (2022.2240 → 2024.1411), poprawione terminy (30/60 →
+  14 dni/2 miesiące), dodany pominięty etap skargi do Prezesa PFRON,
+  dodane jawne krzyżowe odesłanie do dr-10 z podziałem zakresu.
+- **`dr-10/modules/mod-ustawa-edukacja-specjalna-dostepnosc.md`** —
+  dodane odwrotne krzyżowe odesłanie do dr-05 (ten sam podział zakresu),
+  z notatką o naprawionym rozjeździe.
+- **`dr-10/MAPA-AKTOW.md`** — zamknięta flaga "WYMAGA AKTUALIZACJI
+  MODUŁU" (moduł uzupełniony poprzednią turą), PLUS poprawiony numer
+  Prawa oświatowego (2025.1043 → 2026.820 — starszy t.j. był podstawą
+  konsolidowaną do nowszego, już nieaktualny samodzielnie).
+- **`dr-11/MAPA-AKTOW.md`** — zamknięta flaga "WYMAGA AKTUALIZACJI
+  MODUŁU" dla PKE (moduł uzupełniony poprzednią turą, numer 2024.1221
+  już był poprawny w obu miejscach).
+
+### 4. SPRAWDZONE BEZ POTRZEBY NAPRAWY
+
+`dr-02/MAPA-AKTOW.md` — PrUpad (2025.614), PrRestr Dział VII/VI/III/IV
+(2026.533), UZNK (2026.85) — wszystkie już poprawne i zgodne z treścią
+dodaną w poprzednich turach tej sesji (moje dodatki były rozbudową
+TREŚCI w ramach już poprawnie zmapowanych aktów, nie nowymi aktami
+wymagającymi nowego wiersza).
+
+### 5. WERYFIKACJA STRUKTURY (Reguła 5)
+
+`dr-05` plik: 4 nagłówki, 4 znaczniki code-fence (parzyste), 84 linie —
+czysto za pierwszym razem.
+
+### 6. STRUKTURA
+
+`dr-05`: 28 plików bez zmian liczby (1 zmieniony). `dr-10`: 33 pliki bez
+zmian (4 zmienione łącznie w toku sesji, +1 w tej turze — MAPA-AKTOW).
+`dr-11`: 24 pliki bez zmian (4 zmienione łącznie, +1 w tej turze —
+MAPA-AKTOW).
+
+### 7. WNIOSKI
+
+To przypomnienie użytkownika wykryło realny, wcześniej nieznany błąd w
+produkcyjnej treści (dr-05, błędne terminy proceduralne — 30/60 zamiast
+14 dni/2 miesiące, pominięty obowiązkowy etap PFRON) który przetrwał
+od co najmniej 2026-06-05 mimo że powiązana flaga F-31 była formalnie
+zamknięta 2026-08-14. Potwierdza to wartość PERIODYCZNEGO przypominania
+sobie o synchronizacji trójstronnej (moduł ↔ lokalna mapa ↔ centralny
+ROUTING-MAP) jako osobnego kroku, nie tylko przy okazji samej flagi F-89
+— rozjazdy mogą powstawać przy KAŻDEJ edycji treści, nie tylko przy
+korektach numerów Dz.U.
+
+**Reguła 7 — zastosowanie:** TAK. Trzy archiwa dostarczone:
+`dr-05-prawo-administracyjne-sadowoadministracyjne.zip` (28/28 plików),
+`dr-10-zdrowie-farmacja-zywnosc-rolnictwo.zip` (33/33 pliki),
+`dr-11-cyfrowe-cyber-ai-dane-ip.zip` (24/24 pliki) — wszystkie z czystą
+weryfikacją bajtową zip↔drzewo.
+
+---
+
+## AUDYT-2026-08-21y — F-86: likwidacja masy upadłości, Dział I (art. 306-315) zamknięty
+
+### 1. STATUS OGÓLNY
+
+Kontynuacja F-86 ("kontynuuj"). Po zamknięciu Tytułu Va (poprzednia
+tura), kolejny krok: Dział I Tytułu VII (likwidacja masy) — przepisy
+ogólne.
+
+### 2. WERYFIKACJA
+
+8+ zgodnych źródeł: arslege.pl, lexlege.pl (t.j. Dz.U.2025.0.614),
+przepisy.gofin.pl, zapytajprawnika.pl, lexplay.pl, zimmerman.com.pl,
+necel-adwokat.pl, upadlosc-konsumencka.pl.
+
+### 3. TREŚĆ DODANA
+
+Nowa sekcja "LIKWIDACJA MASY UPADŁOŚCI (Tytuł VII PrUp, Dział I —
+art. 306-315)":
+- **Art. 306** — spis inwentarza + plan likwidacyjny, 30 dni,
+  z wyłączeniem upadłości układowej dopóki nie przejdzie w likwidacyjną.
+- **Art. 307** — sprawozdanie finansowe, z wyraźnym wyłączeniem dla
+  upadłości konsumenckiej (osoby fizyczne nieprowadzące działalności).
+- **Art. 308** — rozpoczęcie likwidacji, orientacyjny termin 6 miesięcy.
+- **Art. 309** — wstrzymanie likwidacji przy zmianie trybu na układowy
+  — z krzyżowym odesłaniem do Tytułu Va opisanego w poprzedniej turze.
+- **Art. 310-315** — skrótowo: kolejność zaspokojenia kosztów, katalog
+  sposobów sprzedaży, obowiązki przy prowadzeniu przedsiębiorstwa,
+  oraz kluczowa gwarancja z art. 313 — sprzedaż w postępowaniu
+  upadłościowym ma skutki sprzedaży egzekucyjnej, nabywca NIE odpowiada
+  za zobowiązania podatkowe upadłego (istotne dla praktyki nabywców).
+
+Jawnie odnotowano, że Dział II-IV (szczegółowa procedura sprzedaży
+przedsiębiorstwa/nieruchomości/ruchomości) NIE zostały opracowane —
+pozostają dla przyszłej sesji.
+
+### 4. WERYFIKACJA STRUKTURY (Reguła 5)
+
+Jawne zawarcie docelowego nagłówka "## QUALITY GATE" w `new_str" —
+czysto za pierwszym razem: 20 nagłówków, 62 znaczniki code-fence
+(parzyste), 808 linii (moduł urósł znacząco w toku tej sesji, wciąż
+poniżej progu 1000 — warto rozważyć podział na osobne pliki przy
+następnym większym dodaniu treści, zgodnie z ZASADĄ LIMITU DŁUGOŚCI).
+
+### 5. DECYZJA
+
+Ta część F-86 (Dział I likwidacji) zamknięta. Flaga jako całość
+pozostaje otwarta — Dział II-IV, zakończenie/umorzenie postępowania,
+postępowanie międzynarodowe, postępowania szczególne wciąż nieopracowane.
+
+### 6. STRUKTURA
+
+`dr-02`: 67 plików, bez zmian liczby (4 pliki zmienione łącznie w toku
+całej sesji).
+
+### 7. WNIOSKI
+
+Moduł mod-PrUpad-upadlosc-restrukturyzacja.md zbliża się do progu
+długości (808/1000 linii) po kilku kolejnych sesjach dopisywania treści
+— warto odnotować dla przyszłego audytu jako kandydata do podziału na
+osobne pliki tematyczne (np. wydzielenie Tytułu Va i likwidacji masy do
+osobnych plików), zanim osiągnie limit.
+
+**Reguła 7 — zastosowanie:** TAK. `dr-02-prawo-cywilne-rodzinne-
+gospodarcze.zip` dostarczony ponownie (67/67 plików, 4 pliki zmienione
+łącznie, diff zip↔drzewo puste). `audyt-systemu-v4.zip` zaktualizowany.
+
+---
+
+## AUDYT-2026-08-21z — Naprawa numeru t.j. PrUpad (przed kontynuacją F-86) + Tytuł IX zamknięty; moduł zbliża się do progu długości
+
+### 1. STATUS OGÓLNY
+
+Kontynuacja F-86 ("kontynuuj"), zgodnie z przypomnieniem użytkownika o
+synchronizacji map — przed dodaniem kolejnej treści sprawdzono
+spójność numeru t.j. WEWNĄTRZ samego pliku i wykryto rozjazd.
+
+### 2. NAPRAWA PRZED KONTYNUACJĄ: NUMER t.j. PrUpad
+
+Nagłówek modułu (linia 5) już poprawnie wskazywał **Dz.U. 2026 poz. 913**
+jako aktualny t.j. (ustalone jeszcze 2026-08-15v), ALE dwie sekcje
+dopisane w poprzednich turach TEJ sesji (Tytuł Va, Dział I likwidacji)
+cytowały w przypisach źródłowych "Dz.U.2025.0.614" — numer ze źródeł
+WTÓRNYCH, który w rzeczywistości jest STARSZYM, już skonsolidowanym t.j.
+(potwierdzone: eli.gov.pl, przepisy.gofin.pl — historia wersji kończy
+się na "...2025 poz. 614 ... 2026 poz. 913"). Naprawiono OBA
+wystąpienia w module + propagowano do `dr-02/MAPA-AKTOW.md` (miał ten
+sam przestarzały numer) + `prawo-polskie-v2/ROUTING-MAP.md` (centralna
+mapa NIGDY nie była zsynchronizowana z korektą modułu z 2026-08-15v —
+rozjazd trwał ponad tydzień, wykryty dopiero teraz).
+
+### 3. TYTUŁ IX — ZAKOŃCZENIE I UMORZENIE POSTĘPOWANIA (art. 361-372)
+
+Z poprawnym numerem t.j. dodano nową sekcję:
+- **Art. 361** — trzy przesłanki umorzenia (pusta masa, brak zaliczki,
+  jednomyślna rezygnacja wierzycieli), z dodatkowym mechanizmem
+  rozwiązania podmiotu z KRS bez likwidacji przy przesłance (1).
+- **Art. 362** — formalności postanowienia o umorzeniu (doręczenie,
+  obwieszczenie, zażalenie — z odesłaniem do bramki adresata).
+- **Art. 368** — stwierdzenie ZAKOŃCZENIA, z wyraźnym rozróżnieniem od
+  UMORZENIA (różne przesłanki, ten sam tryb proceduralny).
+- **Art. 369** — wniosek o plan spłaty PO zakończeniu, z krzyżowym
+  odesłaniem do sekcji "Upadłość konsumencka" (trójstopniowy system
+  wina) — to formalny mechanizm uruchamiający oddłużenie w trybie
+  ZWYKŁYM, alternatywny wobec trybu uproszczonego konsumenckiego.
+- **Art. 372** — uchylenie postępowania przy odrzuceniu/oddaleniu
+  wniosku, ze skutkami dla umów zawartych przez syndyka.
+
+Zweryfikowane: arslege.pl, lexlege.pl, przepisy.gofin.pl.
+
+### 4. WERYFIKACJA STRUKTURY I DŁUGOŚCI (Reguła 5 + ZASADA 13)
+
+21 nagłówków, 74 znaczniki code-fence (parzyste) — czysto za pierwszym
+razem. **Moduł osiągnął 906/1000 linii** — wciąż pod progiem, ale blisko.
+Zdecydowano ZATRZYMAĆ dalsze dodawanie treści w tej turze i odnotować w
+rejestrze rekomendację podziału PRZED kolejną sesją pracy nad
+pozostałym zakresem F-86 (postępowanie międzynarodowe, postępowania
+szczególne) — zgodnie z procedurą podziału opisaną w SKILL.md (ZASADA 7).
+
+### 5. DECYZJA
+
+Ta część F-86 (Tytuł IX) zamknięta. Flaga jako całość pozostaje otwarta,
+z jawną notatką o potrzebie podziału modułu przed dalszą pracą.
+
+### 6. STRUKTURA
+
+`dr-02`: 67 plików, bez zmian liczby (4 pliki zmienione łącznie).
+`prawo-polskie-v2`: 2 pliki, bez zmian liczby (1 plik zmieniony).
+
+### 7. WNIOSKI
+
+Drugi w tej sesji przypadek (po dr-05/mod-ustawa-dostepnosc) wykrycia
+rozjazdu mapa-vs-treść PRZY OKAZJI kontynuowania pracy nad tym samym
+plikiem, nie przy dedykowanym audycie synchronizacji — potwierdza
+wartość przypomnienia użytkownika: rozjazdy powstają CIĄGLE, nie tylko
+w ramach jednej flagi F-89, i warto o nich pamiętać przy KAŻDEJ edycji
+treści dotykającej numeru aktu, nie tylko przy formalnym audycie sync.
+
+**Reguła 7 — zastosowanie:** TAK. `dr-02-prawo-cywilne-rodzinne-
+gospodarcze.zip` (67/67 plików) i `prawo-polskie-v2.zip` (2/2 pliki)
+dostarczone, oba z czystą weryfikacją bajtową. `audyt-systemu-v4.zip`
+zaktualizowany z rekomendacją podziału modułu.

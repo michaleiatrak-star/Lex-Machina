@@ -57,6 +57,10 @@ Ustal, czy akt jest decyzją administracyjną, czynnością wewnętrzną, uchwa�
 szkolnictwie wyższym i nauce (Dz.U.2024.1571 t.j.). Zweryfikowano
 BEZPOŚREDNIO przez isap.sejm.gov.pl (Rząd 1, pobrany PDF ustawy) oraz
 lexlege.pl/arslege.pl/inforlex.pl (Rząd 2B) — wszystkie zgodne.
+✅ FAZA 3E ZAMKNIĘTA 2026-08-21 (F-45): numer 2024.1571 PONOWNIE
+POTWIERDZONY jako aktualny (isap.sejm.gov.pl bezpośredni wpis, brak
+nowszego obwieszczenia t.j. znalezionego mimo upływu ~2 lat — ustawa
+rzadziej konsolidowana niż Prawo oświatowe).
 
 ```
 Art. 3 ust. 1: "Podstawą systemu szkolnictwa wyższego i nauki jest
@@ -108,6 +112,11 @@ Rozdział 8 (art. 168 i nast. — szkoły i placówki niepubliczne) oraz
 art. 14 (szkoła publiczna). Zweryfikowano: lexlege.pl, arslege.pl
 (t.j. Dz.U.2026.820), mvg.pl, lexedu.pl (kancelaria specjalizująca się
 w prawie oświatowym).
+✅ FAZA 3E ZAMKNIĘTA 2026-08-21 (F-45): numer 2026.820 POTWIERDZONY jako
+NAJNOWSZY t.j. (obwieszczenie 12.06.2026, api.sejm.gov.pl bezpośredni
+cytat — Rząd 1) — nowelizacje uwzględnione w tym t.j. (Karta Nauczyciela,
+zawód psychologa, wygaszenie regulacji ukraińskich) dotyczą tematów
+POZA zakresem treści tego modułu (szkoły publiczne/niepubliczne).
 
 | Kryterium | Szkoła PUBLICZNA | Szkoła NIEPUBLICZNA |
 |---|---|---|

@@ -97,7 +97,8 @@ KOMPLETNOŚĆ — wszystkie tematy potwierdzone obecne po podziale.
   [✓] OK    mod-KPA-mechanizmy-w-toku-sprawy
               (RODZINA KPA — zawieszenie postępowania, postępowanie dowodowe, rozprawa administracyjna; ZAREJESTROWANY 2026-08-14e (F-77 rozszerzona))
   [✓] OK    mod-KPA-tryby-nadzwyczajne-i-strategia
-              (RODZINA KPA — tryby nadzwyczajne, bezczynność i przewlekłość, kary, skarga do WSA, warstwa strategiczna; ZAREJESTROWANY 2026-08-14e (F-77 rozszerzona))
+              (RODZINA KPA — tryby nadzwyczajne, bezczynność i przewlekłość, kary, skarga do WSA, warstwa strategiczna; ZAREJESTROWANY 2026-08-14e (F-77 rozszerzona)
+               ✅ PODZIELONY 2026-08-20 — naprawa F-78, priorytet 7 [1303 linie, sam produkt wcześniejszego podziału NOTA-4 2026-08-12, mimo to ponownie urósł powyżej progu]: plik pod NIEZMIENIONĄ nazwą stał się indeksatorem [99 linii, zachowuje pełną historię podziałów/napraw + tabelę nawigacyjną], treść 18 sekcji przeniesiona do 8 plików w podkatalogu `kpa-tryby-nadzwyczajne/` [max 407 linii/plik: prokurator+kary administracyjne razem, bo Dział IVa w całości wymaga spójnego kontekstu]. Zweryfikowano 100% integralność [18 nagłówków = 18]. Naprawiono 1 odesłanie cross-file [skargi i wnioski Dział VIII → skarga do WSA, teraz w innym pliku])
   [✓] OK    mod-KPA-postepowanie-administracyjne
               (PRZENIESIONY 2026-07-19 z DR-04, gdzie był błędnie
                umiejscowiony — KPA/PPSA to najbardziej fundamentalne

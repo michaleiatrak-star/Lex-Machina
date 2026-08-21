@@ -37,7 +37,26 @@ Cel:     Europejski Portfel Tozsamosci Cyfrowej - dla wszystkich obywateli UE
 Funkcja: Przechowywanie: dowod osobisty, prawo jazdy, atrybuty zdrowotne
          Uzywanie: logowanie do uslug online (nie tylko rządowe)
 Termin:  Panstwa UE musza zaoferowac EUDIW do 31.12.2026 r.
-web_search: "EUDIW eIDAS 2.0 portfel cyfrowy Polska 2025 2026 termin"
+
+✅ STATUS W POLSCE ZWERYFIKOWANY 2026-08-21 (F-49) — 8+ zgodnych źródeł
+(gov.pl/cyfryzacja [oficjalny komunikat MC], rp.pl [10.08.2026], coi.gov.pl,
+gofin.pl, android.com.pl, eurocert.pl, identt.pl, bakertilly-tpa.pl):
+  → Polska wdraża EUDIW jako PILOTAŻ zintegrowany z aplikacją mObywatel
+    (NIE osobna, nowa aplikacja — istniejąca architektura mObywatel
+    rozszerzana o nowe komponenty zgodne z eIDAS 2.0)
+  → Pilotaż planowany na KONIEC 2026 r. (zgodny z unijnym terminem)
+  → WYMÓG DOSTĘPU: jednorazowe silne uwierzytelnienie z użyciem DOWODU
+    OSOBISTEGO Z WARSTWĄ ELEKTRONICZNĄ (e-dowód, wydawany od 4.03.2019,
+    obecnie >11 mln posiadaczy) — BEZ e-dowodu korzystanie z EUDIW
+    NIE BĘDZIE MOŻLIWE — istotne przy doradzaniu klientom bez e-dowodu
+  → Ustawa krajowa wdrażająca: w II kw. 2026 planowane przyjęcie przez
+    Radę Ministrów, dalej proces legislacyjny w Sejmie — ⚠️ status
+    dokładny na dzień użycia WYMAGA odrębnej weryfikacji (proces w toku)
+  → Rozporządzenia wykonawcze UE (podstawowe funkcje/certyfikacja
+    portfeli) weszły w życie 24.12.2024 — 24-miesięczny termin wdrożenia
+    dla państw członkowskich liczy się od tej daty
+web_search: "EUDIW eIDAS 2.0 portfel cyfrowy Polska ustawa Sejm" [dla
+  aktualnego statusu procesu legislacyjnego na dzień użycia]
 ```
 
 ## Weryfikacja online

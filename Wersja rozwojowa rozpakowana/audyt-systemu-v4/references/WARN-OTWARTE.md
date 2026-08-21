@@ -135,9 +135,24 @@ verbatim w `AUDIT-JOURNAL.md`, wpis `AUDYT-2026-08-15w`.
 
 ## ⚡ TABLICA STERUJĄCA — CO JEST DO ZROBIENIA (czytaj to najpierw)
 
-**Stan na 2026-08-21 (po sesji F-89 ZAMKNIĘTA + F-90 ZAMKNIĘTA + F-97→OBS-7 + F-18 ZAMKNIĘTA + F-103 nowa):** WARN numerowanych otwartych: **0**
-(WARN-1…WARN-29 zamknięte). Flag F- otwartych: **21** — w tym **17 wykonalnych
-sesją audytową** i **4 zależne od dewelopera/środowiska**. F-89 ZAMKNIĘTA W CAŁOŚCI
+**Stan na 2026-08-21 (po sesji F-89+F-90+F-18+F-103+F-40+F-45+F-49 ZAMKNIĘTE + F-97→OBS-7):** WARN numerowanych otwartych: **0**
+(WARN-1…WARN-29 zamknięte). Flag F- otwartych: **17** — w tym **13 wykonalnych
+sesją audytową** i **4 zależne od dewelopera/środowiska**. **F-49 ZAMKNIĘTA W
+CAŁOŚCI:** 1 plik był pustym szkieletem (PrTelekom/poczta/UKE — napisano treść
+PKE + Prawo pocztowe od podstaw), 2 pliki miały już realną treść, tylko
+zaktualizowano dynamiczne fragmenty (harmonogram KSeF — teraz OSTATECZNY,
+1.02/1.04.2026 już minęły; status EUDIW w Polsce — pilotaż mObywatel
+potwierdzony, wymóg e-dowodu). Nazwa pliku PrTelekom-poczta-UKE odnotowana
+jako myląca (obserwacja, nie nowa flaga). **F-40 ZAMKNIĘTA
+2026-08-21 — okazała się CZYSTĄ POZOSTAŁOŚCIĄ REJESTROWĄ:** wszystkie 3
+moduły miały już znacznik "FAZA 3E ZAMKNIĘTA 2026-08-20" w treści, praca
+faktycznie ukończona dzień wcześniej, ale wiersz w WARN-OTWARTE.md nigdy nie
+usunięty — zero nowej pracy potrzebnej, tylko sprzątanie rejestru. **F-45
+ZAMKNIĘTA W CAŁOŚCI:** 2 z 3 plików zamknięte przez potwierdzenie aktualności
+numerów (GIF-GIS, oświata/szkolnictwo), 3ci (`mod-ustawa-edukacja-specjalna-
+dostepnosc.md`) był pustym szkieletem — na żądanie użytkownika napisano pełną
+treść od podstaw (orzeczenie o potrzebie kształcenia specjalnego + ustawa
+o zapewnianiu dostępności, 10+ zgodnych źródeł). F-89 ZAMKNIĘTA W CAŁOŚCI
 (wszystkie 32 pierwotne pozycje T11 przejrzane, 5 genuine napraw, potwierdzone
 T11 re-run: 32→27, reszta false-positive/nawigacyjne), F-90 ZAMKNIĘTA W CAŁOŚCI
 (moduł UZNK rozbudowany z 8 do 24+ opisanych artykułów w toku 5 sesji tej samej
@@ -145,13 +160,14 @@ rozmowy — Rozdz. 2, 3, 4 w całości; drobne zastrzeżenia pozostawione jako
 przypisy wewnątrz modułu, nie jako otwarta flaga), F-97 ROZSTRZYGNIĘTA i
 PRZENIESIONA DO OBS-7 (prezydent skierował "lex szarlatan" do TK zamiast
 podpisu/weta — ustawa nie wchodzi w życie, monitorowanie długoterminowe
-zamiast aktywnej flagi), **F-18 ZAMKNIĘTA W CAŁOŚCI** (wszystkie 5 pozycji
+zamiast aktywnej flagi), F-18 ZAMKNIĘTA W CAŁOŚCI (wszystkie 5 pozycji
 priorytetowych VAT rozstrzygnięte w toku 2 sesji — art. 115/146ef, art. 99
 ust. 3a, art. 2 pkt 27e, art. 100 ust. 3/4/7, plus naprawiona 1 wewnętrzna
 sprzeczność znacznika w mod-VAT-sankcje-bony-odliczenia; pozostałe 2
 znaczniki przy art. 108/88 to prudencyjne stopki przy już solidnie
-zweryfikowanej treści, nie luki), F-103 NOWA (luka art. 25 KSCU w kanonicznym module
-dr-12, wykryta przy naprawie błędnej opłaty w pisma-proste-v2). Ponadto: 3 flagi permanentne (MON),
+zweryfikowanej treści, nie luki), **F-103 ZAMKNIĘTA W CAŁOŚCI** (art. 25 KSCU
+— ust. 1/1a/2 — dopisany do kanonicznego modułu dr-12, luka pochodna
+w pisma-proste-v2 rozwiązana wcześniej w tej sesji). Ponadto: 3 flagi permanentne (MON),
 **7 pozycji obserwowanych (OBS)**, **8 pozycji reaktywnych (REACT-1)**, 2 obserwacje (O).
 
 > ℹ️ **Bilans zmiany 2026-08-21 (F-90):** ZAMKNIĘTA W CAŁOŚCI po 5 turach tej
@@ -328,14 +344,10 @@ F-102 otwarta w jej miejsce (bilans bez zmiany liczby). Ponadto: 3 flagi permane
 > 10 priorytetowych modułów >1000 linii podzielone na indeks + części —
 > ostatnia pozycja: ochrona zabytków) → liczba flag F- **24 → 23**.
 | F-83 | średni | audyt-systemu-v4 | Zbudować mapy pokrycia (format → zasilenie z 12 raportów) i odblokować § 3 |
-| F-40 | średni | dr-09 | FAZA 3E treści 3 modułów po korekcie numerów |
-| F-49 | niski-średni | dr-11 | FAZA 3E treści 3 modułów + mylące nazwy plików |
-| F-45 | niski-średni | dr-10 | FAZA 3E treści 3 modułów |
-| F-86 | bardzo niski | dr-02 (PrUp) | ⛔ **KOREKTA KRYTYCZNA 2026-08-21:** "Układ w upadłości (267-305)" — ZAŁOŻENIE BŁĘDNE w pierwotnym opisie flagi. Cały dawny Tytuł VI (art. 267-305, wszystkie 5 działów) jest UCHYLONY, zastąpiony Tytułem Va (art. 266a-266f) — **ZAMKNIĘTY W CAŁOŚCI** tą sesją w `mod-PrUpad-upadlosc-restrukturyzacja.md` (art. 266a-266e opisane, 266f oznaczony jako wymagający dalszej weryfikacji). Zweryfikowane: przepisy.gofin.pl (pełny spis treści z jawnym "uchylony"), lexlege.pl ×4, dlajurysty.pl, sip.lex.pl. **Pozostaje:** likwidacja masy (306-334, POTWIERDZONO że ten zakres jest wciąż LIVE, nie uchylony); zakończenie i umorzenie postępowania (361-372); postępowanie międzynarodowe (378-417); postępowania szczególne wobec banków/ubezpieczycieli/deweloperów (418-425+). |
+| F-86 | bardzo niski | dr-02 (PrUp) | ✅ Tytuł Va, Dział I likwidacji (306-315) i **Tytuł IX zakończenie/umorzenie (361-372) ZAMKNIĘTE 2026-08-21** (przesłanki umorzenia vs zakończenia, wniosek o plan spłaty po zakończeniu — powiązanie z upadłością konsumencką, uchylenie postępowania). ⛔ **MODUŁ OSIĄGNĄŁ 906/1000 LINII** — zbliża się do progu ZASADY LIMITU DŁUGOŚCI; PRZED dalszym dodawaniem treści (postępowanie międzynarodowe 378-417, postępowania szczególne 418-425+) ROZWAŻ PODZIAŁ na osobne pliki tematyczne (np. wydzielić Tytuł Va+Dział I+Tytuł IX do `mod-PrUpad-postepowanie-cz2.md`, zostawiając bazowy plik z FAZA 0/testem niewypłacalności/schematem/upadłością konsumencką/pre-pack/zabezpieczeniem). **Pozostaje:** likwidacja masy Dział II-IV (316-334); postępowanie międzynarodowe (378-417); postępowania szczególne wobec banków/ubezpieczycieli/deweloperów (418-425+). |
 | F-48 | niski | dr-11 | Rozbudować STUB certyfikacji cyberbezpieczeństwa, gdy przepisy wejdą w życie |
 | F-5 | niski | dr-06 | Moduł ESAP — dopiero gdy pojawi się sprawa z rynku kapitałowego |
 | F-82 | informacyjny | cross | ZOSTAŁ 1 punkt: skan mapy Dz.U. pod kątem numerów nigdy niepotwierdzonych źródłem zewnętrznym |
-| F-103 | średni | dr-12 (KSCU) / pisma-proste-v2 | **Luka odkryta 2026-08-21 na żądanie użytkownika:** kanoniczny moduł `dr-12/modules/mod-KSCU-koszty-sadowe-i-pomoc-prawna.md` NIE zawiera w ogóle art. 25 KSCU (opłaty od skarg/zażaleń, w tym skargi na czynności komornika) — luka wykryta przy okazji naprawy BŁĘDNEJ kwoty (100 zł zamiast aktualnych 50 zł, t.j. Dz.U. 2025 poz. 1228) w plikach pochodnych `pisma-proste-v2/references/M6-oplaty.md` i `SPL-skarga-komornik.md` (oba już NAPRAWIONE tą sesją — patrz AUDIT-JOURNAL AUDYT-2026-08-21b). Do zrobienia: dopisać art. 25 (w tym ust. 1a, 2) do modułu macierzystego dr-12, żeby przyszłe błędy w plikach pochodnych były wykrywalne przez porównanie ze źródłem kanonicznym zamiast powtórnie odkrywane ad hoc. |
 
 ### B. ZALEŻNE OD DEWELOPERA / ŚRODOWISKA — sesja audytowa ICH NIE ZAMKNIE
 
@@ -474,7 +486,7 @@ w SKILL.md są bardziej ogólne/międzysesyjne).*
 | F-71 | PZP: otwarcie i badanie ofert krok po kroku; Dział IX — przebieg postępowania przed KIO (531–568a); Dział IV — instrumenty szczególne (311–361) | dr-07 | średni | 2026-08-13 | raport PZP; naprawa: AUDYT-2026-08-14 |
 | F-74 | PrBud: Rozdz. 3 — uczestnicy procesu budowlanego (17–27a, temat zadeklarowany bez treści); Rozdz. 8 — organy PINB/WINB (80–89c); Rozdz. 9 — przepisy karne (90–94); zero treści także w Rozdz. 5/5a/5d (rozpoczęcie robót, dziennik budowy, książka obiektu), Rozdz. 7 (katastrofa budowlana), Rozdz. 10 (odpowiedzialność zawodowa) | dr-09 | średni-wysoki | 2026-08-13 | raport PrBud |
 | F-75 | KKW: Oddz. 4 — prawa i obowiązki skazanego (101–120); Oddz. 9 — kary dyscyplinarne (142–149); Rozdz. IV — postępowanie wykonawcze (9–31); Rozdz. XI — dozór kuratora (169–178a); środki karne i kompensacyjne (179–223n) | dr-03 | średni | 2026-08-13 | raport KKW; naprawa: AUDYT-2026-08-14 |
-| F-86 | PrUp — pozostałe: ⛔ KOREKTA 2026-08-21 — "układ w upadłości (267-305)" był BŁĘDNYM założeniem, ten zakres w całości UCHYLONY (zastąpiony Tytułem Va, art. 266a-266f, ZAMKNIĘTY tą sesją). Pozostaje: likwidacja masy (306-334, potwierdzono LIVE); zakończenie i umorzenie postępowania (361-372); postępowanie międzynarodowe (378-417); postępowania szczególne wobec banków/ubezpieczycieli/deweloperów (418-425+). Dodatkowo: odświeżyć raport pokrycia co do 5 naprawionych sekcji | dr-02 | bardzo niski | 2026-08-21 | raport PrUp-PrRestr sekcja 1 (⚠️ nieaktualny); naprawy: AUDYT-2026-08-15v(3)–(6), AUDYT-2026-08-21r |
+| F-86 | PrUp — pozostałe: ✅ Tytuł Va, Dział I likwidacji, Tytuł IX zakończenie/umorzenie ZAMKNIĘTE 2026-08-21. ⛔ Moduł 906/1000 linii — podział zalecany przed dalszymi dodaniami. Pozostaje: likwidacja masy Dział II-IV (316-334); postępowanie międzynarodowe (378-417); postępowania szczególne wobec banków/ubezpieczycieli/deweloperów (418-425+). Dodatkowo: odświeżyć raport pokrycia co do 7 naprawionych sekcji | dr-02 | bardzo niski | 2026-08-21 | raport PrUp-PrRestr sekcja 1 (⚠️ nieaktualny); naprawy: AUDYT-2026-08-15v(3)–(6), AUDYT-2026-08-21r, AUDYT-2026-08-21y, AUDYT-2026-08-21z |
 | F-87 | PrRestr — pozostałe (po naprawach 2026-08-19z/za): pomoc publiczna (139a–149) ⚠️ NASTĘPNY PRIORYTET, dotknięta częściowo rozbieżnością numeracyjną — sprawdzić przy okazji; układ częściowy (180–188); przepisy ogólne o postępowaniu (189–209); postępowanie międzynarodowe (335–380); postępowania odrębne (381–433). ✅ ZAMKNIĘTE 2026-08-19z: nadzorca i zarządca (23–64) w większości — patrz `mod-PrRestr-dzial-III-nadzorca-zarzadca.md`. ✅ ZAMKNIĘTE 2026-08-19za: uczestnicy, spis wierzytelności, zgromadzenie wierzycieli, rada wierzycieli (65–149, ⚠️ rozbieżność numeracyjna górnej granicy nierozstrzygnięta) — patrz `mod-PrRestr-dzial-IV-uczestnicy-wierzyciele.md`, luka: pełny katalog kompetencji rady wierzycieli. Dodatkowo: odświeżyć raport co do Działu VI i Tytułu II | dr-02 | średni | 2026-08-15v | raport PrUp-PrRestr sekcja 2 (⚠️ nieaktualny); naprawy: AUDYT-2026-08-14, 08-15v(2), 08-19z, 08-19za |
 
 | F-97 | **Ustawa "lex szarlatan" — luka DETEKCYJNA: brak jakiejkolwiek wzmianki w systemie (potwierdzone `grep -rIn "szarlatan" /mnt/skills/user/` = 0 wyników przed tą sesją).** Otwarta na wyraźne żądanie użytkownika ("zbadaj czy jest monitoring ustawy lex szarlatan"). Ustala rzeczywisty stan (web_search, 2026-08-19): nowelizacja ustawy z 6.11.2008 o prawach pacjenta i Rzeczniku Praw Pacjenta, potocznie "lex szarlatan"/"lex Big Pharma". Wprowadza definicję "praktyki pseudomedycznej" i "dezinformacji medycznej", uprawnienia RPP do ostrzeżeń publicznych, decyzji tymczasowych nakazujących natychmiastowe zaprzestanie działania, kar finansowych do 1 mln zł, udziału RPP w postępowaniach cywilnych na prawach prokuratora, rejestru podmiotów rozpowszechniających dezinformację medyczną. Sejm uchwalił 3.07.2026 (232 za / 34 przeciw / 162 wstrzym.), Senat 4 poprawki legislacyjno-redakcyjne 22.07.2026, Sejm przyjął poprawki 31.07.2026 — prace parlamentarne ZAKOŃCZONE. **Na dzień sesji (19.08.2026) ustawa czeka na podpis lub weto Prezydenta RP** (konstytucyjny termin 21 dni od przedłożenia 31.07 → upływa 21.08.2026, a więc DECYZJA JESZCZE NIE ZAPADŁA). Spór: Ordo Iuris i koalicja środowisk medycyny alternatywnej apelują o weto (zarzuty: nieprecyzyjne definicje, nadmierna uznaniowość RPP, naruszenie wolności słowa/badań naukowych/autonomii pacjenta); środowisko lekarskie (NRL) i Ministerstwo Zdrowia popierają podpis. Jeśli podpisana — wejście w życie 3 miesiące od ogłoszenia w Dz.U. **Numer Dz.U. jeszcze nie istnieje** (ustawa nieopublikowana) — nie da się otworzyć modułu z metryką aktu, dopóki nie zapadnie decyzja. Właściwa dziedzina: dr-10 (Zdrowie, Farmacja, Żywność, Rolnictwo) — brak dotąd modułu dot. ustawy o prawach pacjenta i RPP w ogóle w tym skillu, więc nawet BAZOWA ustawa (nie tylko nowelizacja) może wymagać sprawdzenia przy tej okazji. **Do zrobienia:** (1) monitorować decyzję prezydencką (podpis/weto/skierowanie do TK) — sprawdzić ponownie po 21.08.2026; (2) jeśli podpis — otworzyć/rozszerzyć moduł w dr-10 z pełną treścią nowelizacji (definicje, kompetencje RPP, tryb odwoławczy od decyzji tymczasowych, katalog kar) po opublikowaniu numeru Dz.U.; (3) jeśli weto lub skierowanie do TK — odnotować i zamknąć jako nieaktualne na razie, bez tworzenia modułu przedwcześnie | dr-10 | średni | 2026-08-19 | ustalone przez web_search wieloźródłowy (PAP, TVN24, Rzecznik Praw Pacjenta, Ordo Iuris, portalsamorzadowy.pl, termedia.pl) w tej sesji |
@@ -487,10 +499,7 @@ w SKILL.md są bardziej ogólne/międzysesyjne).*
 | F-13 | Zażalenie poziome vs pionowe — indywidualna adnotacja pozostałych ~58 z 69 plików wspominających „zażalenie" (DR-02, 03, 06–10, 13–16). Kolejność wg aktywności spraw: DR-02 i DR-03 najpierw. ⭐ Bramka `shared/ZAZALENIE-ADRESAT-GATE.md` już działa i wymusza weryfikację adresata przy każdym piśmie — to złagodzenie ryzyka, nie zamknięcie luki statycznej | cały system | średni | 2026-07-25 | naprawa częściowa: 2026-07-25d |
 | F-18 | Potwierdzić w ISAP lub LEX/Legalis brzmienie jednostek redakcyjnych VAT wpisanych ze ŹRÓDŁA-3 (web-fallback) przed użyciem którejkolwiek w piśmie. Docelowo rozwiązać fragmentaryczny odczyt dużych aktów przez ELI — zależność od F-8 | dr-06 | średni | 2026-08-12 | sekcje noszą `✅ [VER]` + `⚠️ [ZALECANA WERYFIKACJA ISAP]` |
 | F-19 | Ustalić i zweryfikować sygnatury: (a) TSUE — art. 52 ust. 1 VAT, warunek odbiorcy w kraju; (b) TSUE — środki z rachunku VAT na wniosek syndyka; (c) linia NSA — fakultatywność pozbawienia prawa z art. 33a na 36 mies.; (d) WSA Łódź I SA/Łd 190/20 i 417/20; (e) interpretacje KIS 0114-KDIP1-3.4012.200.2019.2.JF i 0114-KDIP1-2.4012.141.2025.1.RM. Ścieżka: orzeczenia-sadowe-v2 (NSA, curia.europa.eu, EUREKA) → wpisać albo USUNĄĆ odesłanie | dr-06 | średni | 2026-08-12 | ⭐ każda pozycja ma w module zakaz powoływania bez weryfikacji |
-| F-40 | DR-09, FAZA 3E treści po korekcie numerów: (1) `mod-PrGeodezyjne-kartografia-wywlaszczenia.md`; (2) `mod-UGN-gospodarka-nieruchomosciami.md`; (3) `mod-prawo-geologiczne-gornicze.md` | dr-09 | średni | 2026-07-02 | — |
-| F-45 | DR-10, FAZA 3E treści: (1) GIS w `mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny.md`; (2) Prawo oświatowe w `mod-ustawa-oswiata-szkolnictwo-wyzsze.md`; (3) `mod-ustawa-edukacja-specjalna-dostepnosc.md` — ten sam błędny numer źródłowy 2022.2240 co w dawnej F-31. ⛔ KOREKTA 2026-08-15w: F-31 jest ZAMKNIĘTA (2026-08-14o) — punkt (3) naprawiać samodzielnie, nie „razem z F-31" | dr-10 | niski-średni | 2026-07-02 | naprawa części rejestracyjnej: 2026-08-13 |
 | F-48 | Rozbudować `mod-ustawa-certyfikacja-cyberbezpieczenstwa.md` (uczciwie oznaczony STUB) — dopiero gdy przepisy wejdą w życie. Akt bazowy Dz.U. 2025 poz. 1017 potwierdzony | dr-11 | niski | 2026-06-05 | naprawa mapy RODO: 2026-08-14b |
-| F-49 | DR-11, FAZA 3E treści: (1) `mod-PrTelekom-poczta-UKE.md` — ⚠️ nazwa myląca; (2) `mod-ustawa-informatyzacja-podmiotow-publicznych.md`; (3) `mod-ustawa-podpis-elektroniczny.md` — eIDAS 2.0 w toku | dr-11 | niski-średni | 2026-07-02 | naprawa sprzecznej notatki: 2026-08-13 |
 | F-60 | Konwencje Wiedeńskie o stosunkach dyplomatycznych (1961) i konsularnych (1963) — ZERO wzmianek w systemie. Nowy moduł albo rozszerzenie `mod-NATO` / `mod-ONZ` | dr-14 | średni | 2026-08-13 | temat nigdy nieopracowany |
 | F-61 | Konwencja genewska 1951 o statusie uchodźców + Protokół 1967 — ZERO wzmianek w DR-14 i DR-05. Ustalić właściwy DR (rekomendacja: DR-14 jako fundament + odesłanie z DR-05); brak definicji uchodźcy i zasady non-refoulement | dr-14 (+dr-05) | średni | 2026-08-13 | odrębna od zamkniętej F-30 |
 | F-79 | Ustawa o zmianie ustawy o PIP (Dz.U. 2026 poz. 473, w życie 8.07.2026) zmienia SIEDEM aktów. ⛔ NIEUSTALONE: (1) zakres artykułów w KSCU (sam FAKT zmiany potwierdzony — poz. 473 dwukrotnie w amendment trail); (2) zakres artykułów w Ordynacji podatkowej (fakt potwierdzony przez infor.pl i podatkowyreferat.online); (3) wpływ na ustawę o SUS — zero ustaleń; (4) wpływ na ustawę o powierzaniu pracy cudzoziemcom — zero ustaleń; (5) czy moduł dr-04 opisuje nowy art. 11 pkt 7a (decyzja PIP o stosunku pracy) i art. 14b (interpretacje GIP). ⚠️ ISAP `WDU20260000473` blokuje web_fetch — szukać przez orka.sejm.gov.pl (druk 2250) lub sip.lex.pl | cross: dr-02, dr-04, dr-05, dr-06, dr-16 | średni | 2026-08-15 | weryfikacja częściowa: AUDYT-2026-08-15u |

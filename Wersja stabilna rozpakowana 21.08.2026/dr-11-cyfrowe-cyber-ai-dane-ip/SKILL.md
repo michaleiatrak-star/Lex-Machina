@@ -57,6 +57,8 @@ Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Cyfrowe, cyberbezp
 
 ```
 DANE OSOBOWE:
+  [✓] OK    mod-ustawa-certyfikacja-cyberbezpieczenstwa
+              (☐ STUB — uczciwie oznaczony, świadomie odłożony do czasu wejścia przepisów w życie; akt bazowy Dz.U. 2025 poz. 1017 potwierdzony. ZAREJESTROWANY 2026-08-14e (F-77 rozszerzona) — domyka lit. (a) flagi F-48 w warstwie REJESTRACYJNEJ; rozbudowa treści pozostaje otwarta)
   [✓] OK    mod-RODO-GDPR-2016-679
               (RODO Rozp. 2016/679 — zakres, podstawy przetwarzania, prawa podmiotów;
                scalony z: mod-RODO-framework; + sekcja UODO/trzy warstwy ochrony)

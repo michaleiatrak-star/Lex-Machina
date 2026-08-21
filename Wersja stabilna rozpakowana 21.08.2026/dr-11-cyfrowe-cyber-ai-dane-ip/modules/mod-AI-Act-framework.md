@@ -269,10 +269,31 @@ AI Act (Rozp. UE 2024/1689):
 Polska ustawa o systemach AI:
   ⚡ PODPISANA PRZEZ PREZYDENTA 24.07.2026 r. — prace parlamentarne
   ZAKOŃCZONE (Sejm 11.06.2026, Senat 25.06.2026, Sejm ponownie 03.07.2026).
-  → Wejście w życie: sierpień 2026 (dokładna data zależy od publikacji w
-    Dzienniku Ustaw — SPRAWDŹ isap.sejm.gov.pl przed cytowaniem konkretnej
-    daty, ten moduł NIE podaje dokładnej daty wejścia w życie celowo, bo
-    nie było jej jeszcze w źródłach na 27.07.2026)
+  → ⭐ METRYKA USTALONA 2026-08-14 (domknięcie flagi F-50, FAZA 3E —
+    ZASADA 11 treść-po-mapie; poprzednia sesja poprawiła sam wiersz
+    MAPA-AKTOW.md, ale NIE treść tego modułu):
+    • Ustawa z dnia 3 lipca 2026 r. o systemach sztucznej inteligencji
+    • **Dz.U. 2026 poz. 1003** — akt PIERWOTNY (ogłoszenie), NIE t.j.
+    • Podpisana przez Prezydenta: 24.07.2026
+    • Ogłoszona w Dzienniku Ustaw: koniec lipca 2026 (źródła Rzędu 2/3
+      podają 27.07 albo 28.07 — ⚠️ przy powoływaniu DATY OGŁOSZENIA w
+      piśmie potwierdź ją w ISAP, rozbieżność nierozstrzygnięta)
+    • **Wejście w życie: 11 sierpnia 2026 r.** (zasadniczo — ustawa
+      zawiera przepisy o odrębnych terminach; przy terminie
+      procesowym zawsze sprawdź przepis końcowy w ISAP)
+    ŹRÓDŁA (ZASADA 12): Rząd 1 — isap.sejm.gov.pl (WDU20260001003),
+    eli.gov.pl/eli/DU/2026/1003/ogl, gov.pl/web/cyfryzacja;
+    Rząd 3 (potwierdzenie zbieżności, nie samodzielna podstawa) —
+    kancelarie zglegal.pl, dlklegal.com, kancelariamacura.pl
+  → Terminy ustrojowe KRiBSI liczone OD WEJŚCIA W ŻYCIE: przewodniczący
+    w ciągu 2 miesięcy (→ ok. X.2026), pełny skład Komisji w ciągu
+    3 miesięcy (→ ok. XI.2026) — źródło Rząd 1 (Ministerstwo Cyfryzacji)
+  → ⚠️ ZMIANA W TOKU PRAC PARLAMENTARNYCH (źródło Rząd 3, wymaga
+    potwierdzenia w tekście ustawy przed powołaniem w piśmie):
+    zrezygnowano z przyznania KRiBSI uprawnienia do NAKAZANIA wycofania
+    systemu z rynku / usunięcia jego elementów — jeśli budujesz
+    argumentację na zakresie kompetencji KRiBSI, zweryfikuj to
+    bezpośrednio w Dz.U. 2026 poz. 1003
   → Powołuje: KRiBSI (przewodniczący 5-letnia kadencja + 2 zastępców +
     4 członków z UOKiK/UKE/KNF/KRRiT), piaskownice regulacyjne, ścieżka
     skargowa obywateli

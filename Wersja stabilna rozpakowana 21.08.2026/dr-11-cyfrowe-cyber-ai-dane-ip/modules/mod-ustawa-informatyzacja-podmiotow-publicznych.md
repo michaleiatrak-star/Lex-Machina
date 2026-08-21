@@ -18,18 +18,36 @@ obowiązuje od 10.12.2023 dla podmiotów publicznych.
 
 ## Zakres — KSeF
 Krajowy System e-Faktur: obowiązkowe faktury ustrukturyzowane dla podatników VAT.
-Harmonogram wejścia w życie KSeF (podlegał zmianom!):
 
-**Weryfikuj przed cytowaniem** — termin obowiązkowego KSeF był wielokrotnie przesuwany:
+✅ HARMONOGRAM OSTATECZNY, POTWIERDZONY 2026-08-21 (F-49) — 6+ zgodnych
+źródeł (ksef.podatki.gov.pl [oficjalna strona MF], jpk.info.pl ×2 [3 tyg.
+i czerwiec 2026], amavat.pl [06.2026], comarch.pl, infakt.pl), po dwóch
+wcześniejszych przesunięciach terminu (historia od 2022, dobrowolny KSeF):
 ```
-web_search: "KSeF e-faktury obowiązkowe od kiedy 2025 2026 MF"
+1.02.2026 → OBOWIĄZEK WYSTAWIANIA dla dużych podatników (obrót >200 mln
+            zł w 2024 r.) + OBOWIĄZEK ODBIERANIA faktur z KSeF dla
+            WSZYSTKICH podatników VAT (niezależnie od wielkości)
+1.04.2026 → OBOWIĄZEK WYSTAWIANIA dla WSZYSTKICH pozostałych podatników
+            VAT (⚡ TA DATA JUŻ MINĘŁA na dzień 21.08.2026 — obowiązek
+            aktualnie w mocy dla niemal wszystkich firm)
+1.01.2027 → OBOWIĄZEK dla mikroprzedsiębiorców (obrót ≤10 000 zł/mies.);
+            RÓWNOCZEŚNIE: sankcje administracyjne za niewystawienie
+            faktury w KSeF (do 100% kwoty VAT) + obowiązek podawania
+            numeru KSeF we wszystkich przelewach
 ```
+Podstawa: ustawa z 9.05.2024 zmieniająca ustawę o VAT (Dz.U. 2024 poz.
+852) — ustaliła datę 1.02.2026; dalsze doprecyzowanie: ustawa o zmianie
+ustawy o VAT opublikowana 1.09.2025. Do końca 2026 r. dopuszczalne
+paragony z NIP do 450 zł jako faktury uproszczone poza KSeF — wygasa
+1.01.2027.
 
 ## Zasady absolutne
 ```
 e-Doręczenia publiczne:  Obowiązkowe dla podmiotów publ. od 10.12.2023
 e-Doręczenia prywatne:  Stopniowe wdrożenie dla biznesu — weryfikuj harmonogram
-KSeF obowiązek:         WERYFIKUJ AKTUALNY TERMIN (zmieniony przepisami z 2024/2025)
+KSeF obowiązek:         ✅ OSTATECZNY 2026-08-21: 1.02.2026 (duzi) /
+                        1.04.2026 (wszyscy pozostali, JUŻ MINĘŁO) /
+                        1.01.2027 (mikro + sankcje) — patrz sekcja wyżej
 Dostępność cyfrowa:     WCAG 2.1 — strony podmiotów publicznych (Dz.U. 2019 poz. 848)
 ```
 
