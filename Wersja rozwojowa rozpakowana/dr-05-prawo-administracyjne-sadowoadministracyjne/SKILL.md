@@ -54,7 +54,24 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W21 Informacja przetworzona (UDIP art. 3 — "szczególna istotność")
 - BAS-W29 Pełnomocnik z urzędu — prawo do sądu (art. 117 KPC)
 
-## Moduły (18 łącznie — ✓ 18 OK, ☐ 0 STUB)
+## Moduły (20 łącznie — ✓ 20 OK, ☐ 0 STUB)
+
+**NAPRAWA 2026-08-22 (kontynuacja):** dodano `mod-PPSA-orzeczenia-
+sadowe-rozdzial-10.md` — naprawa poz. #8 mapy pokrycia PPSA (ostatnia
+z oryginalnej ósemki): Dział III, Rozdział 10, art. 132-167a
+(orzeczenia sądowe), dokończenie tematu dotąd opisanego wyłącznie
+fragmentarycznie (wąski wycinek skarg na akty JST/nadzoru w
+`czesc-06-skarga-wsa-dowody.md`). Domyka: granice orzekania (art.
+133-136), uwzględnienie skargi na decyzję/postanowienie — trzy
+rodzaje rozstrzygnięć (art. 145), uwzględnienie skargi na akty z
+art. 3 §2 pkt 4-4b — interpretacje podatkowe (art. 146), oddalenie
+skargi (art. 151), uwzględnienie skargi na bezczynność/przewlekłość
+z sankcjami grzywny (art. 149), związanie oceną prawną sądu (art.
+153 — przepis o dużej praktycznej doniosłości), umorzenie
+postępowania (art. 161). Uwzględnia zmianę linii orzeczniczej po
+wyroku TK z 26.02.2025 dot. art. 149 §1 pkt 3. Rząd 1: arslege.pl,
+lexlege.pl (metryka Dz.U.2026.143 t.j.), sip.lex.pl. Pełny opis:
+`audyt-systemu-v4/references/AUDIT-JOURNAL.md`.
 
 **NAPRAWA 2026-08-13:** dodano `mod-PPSA-terminy-kasacja-prawo-
 pomocy.md` — PIERWSZY dedykowany moduł PPSA w całym systemie, zamyka
@@ -139,7 +156,62 @@ KOMPLETNOŚĆ — wszystkie tematy potwierdzone obecne po podziale.
                transgraniczną i odmowę jej wydania. ⚠️ [NIEWERYFIKOWANE
                RZĄD 1] — dokładny artykuł i treść NIE potwierdzone,
                ISAP zablokowany; pozostała treść nowelizacji PPSA z tej
-               ustawy NIEOPRACOWANA)
+               ustawy NIEOPRACOWANA.
+               ✅ ROZSZERZONY 2026-08-22 — naprawa pozycji #9 mapy
+               pokrycia PPSA: nowa sekcja 4, Dział V Rozdz. 1-2 (koszty,
+               wpis, opłata kancelaryjna, art. 199-242) — dopełnienie
+               Rozdz. 3 [prawo pomocy, sekcja 3] tego samego Działu V.
+               ⭐⭐⭐ Zasada odwrócona wobec KPC: w I instancji WSA NIE
+               obowiązuje odpowiedzialność za wynik (art. 199), zwrot
+               kosztów tylko na rzecz skarżącego przy uwzględnieniu
+               skargi (art. 200); przed NSA zasada odwraca się na
+               odpowiedzialność za wynik (art. 203-204). Pułapka
+               prekluzyjna art. 210 (brak zgłoszenia żądania zwrotu
+               kosztów przed zamknięciem rozprawy = trwała utrata) —
+               ten sam wzorzec co art. 105 PPSA/art. 162 KPC.
+               Rząd 1: bip.warszawa.wsa.gov.pl, gliwice.wsa.gov.pl,
+               bip.wroclaw.wsa.gov.pl. Rząd 2B: arslege.pl, lexlege.pl.)
+  [✓] NOWY  mod-PPSA-posiedzenia-sadowe-rozdzial-7
+              (dodany 2026-08-22, F-83 priorytet #6 mapy pokrycia:
+               PPSA Dział III Rozdz. 7, art. 90-114. DRUGI dedykowany
+               moduł PPSA — pokrywa etap MIĘDZY wejściem a wyjściem z
+               postępowania, który moduł F-64 pomijał. ⭐⭐⭐ Trzy rdzenie:
+               [1] art. 90 §2 — sąd MOŻE skierować na rozprawę sprawę
+               podlegającą rozpoznaniu na posiedzeniu niejawnym; tryb
+               niejawny NIE jest jednokierunkowy [narzędzie pomijane];
+               [2] art. 106 §3 — JEDYNE okno dowodowe, WYŁĄCZNIE
+               dokumenty, a "istotne wątpliwości" dotyczą zgodności
+               AKTU Z PRAWEM, nie ustaleń faktycznych [najczęstszy powód
+               oddalenia wniosku]; [3] art. 105 — ⛔ brak zastrzeżenia do
+               protokołu = UTRATA zarzutu procesowego w NSA, odpowiednik
+               art. 162 KPC. Ponadto: terminy zawiadomienia 7 dni / 3 dni
+               w sprawach pilnych [91 §2], odroczenie OBLIGATORYJNE [109]
+               z ⛔ pułapką rutynowej formuły "wnoszę o rozpoznanie pod moją
+               nieobecność", sprostowanie protokołu 30 dni [103], załącznik
+               do protokołu [104], grzywna dla organu [112 → 154 §6],
+               zamknięcie rozprawy [113] z orzecznictwem: art. 113 NIE
+               stanowi samodzielnej podstawy kasacyjnej)
+  [✓] NOWY  mod-PPSA-orzeczenia-sadowe-rozdzial-10
+              (dodany 2026-08-22, naprawa poz. #8 mapy pokrycia — ostatnia
+               pozycja oryginalnej ósemki. PPSA Dział III Rozdz. 10,
+               art. 132-167a. TRZECI dedykowany moduł PPSA — dokończenie
+               tematu opisanego dotąd tylko fragmentarycznie [wąski
+               wycinek JST/nadzoru w czesc-06-skarga-wsa-dowody.md].
+               ⭐⭐⭐ Trzy rdzenie: [1] art. 145 — trzy rodzaje rozstrzygnięć
+               przy uwzględnieniu skargi na decyzję/postanowienie
+               [uchylenie / stwierdzenie nieważności / stwierdzenie
+               wydania z naruszeniem prawa], dotąd CAŁKOWICIE nieobecne
+               mimo najczęstszej kategorii spraw; [2] art. 153 — związanie
+               oceną prawną sądu, przepis o dużej praktycznej doniosłości,
+               samodzielna podstawa zarzutu przy niezastosowaniu się
+               organu; [3] art. 149 — uwzględnienie skargi na bezczynność/
+               przewlekłość z sankcjami [grzywna do 89 035,60 zł w 2026,
+               suma pieniężna do 44 517,80 zł], uwzględniająca zmianę
+               linii orzeczniczej po wyroku TK z 26.02.2025. Ponadto:
+               granice orzekania [134-136, zakaz reformationis in peius],
+               oddalenie skargi [151, uzasadnienie tylko na wniosek],
+               akty z art. 3 §2 pkt 4-4b — interpretacje podatkowe [146],
+               umorzenie postępowania [161])
 ```
 
 ## KPA i PPSA — teraz kanonicznie w DR-05

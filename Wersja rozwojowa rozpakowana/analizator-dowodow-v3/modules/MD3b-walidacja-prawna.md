@@ -11,7 +11,7 @@
 □ TAJEMNICE ZAWODOWE:
   adwokacka (art. 6 PrAdw) · lekarska (art. 40 UZL) · spowiedzi (art. 178 §2 KPK)
 
-□ PREKLUZJA: art. 207 §6 KPC; postęp. gosp.: art. 458¹ KPC
+□ PREKLUZJA: ⛔ **art. 207 §6 KPC UCHYLONY 7.11.2019** — aktualna podstawa ogólna: **art. 205¹² KPC** (§1 gdy wyznaczono posiedzenie przygotowawcze — do zatwierdzenia planu rozprawy; §2 gdy nie wyznaczono — do zamknięcia rozprawy); postęp. gosp.: **art. 458⁵ KPC** (NIE 458¹ — 458¹ definiuje sprawę gospodarczą, 458¹¹ dotyczy wykazywania czynności dokumentem). ✅ VER 2026-08-22
 
 □ ZAKAZ art. 246–247 KPC: zeznania zamiast / przeciw dokumentowi
 ```

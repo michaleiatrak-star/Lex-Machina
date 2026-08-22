@@ -1,6 +1,6 @@
 ---
 name: analizator-dowodow-v3
-version: "5.17.0"
+version: "5.16.1"
 type: executive-analiza
 status: production
 description: |
@@ -21,7 +21,6 @@ dependencies:
     - shared
     - MOD-SKAN-DOWODOW-KOMPLETNY
     - MOD-STEP-TRACKER
-    - MOD-DOKUMENT-GATES
   optional:
     - analizator-umow-v1
     - analiza-sadowa
@@ -37,14 +36,12 @@ validation:
     - PRAWO-HARDGATE
     - SD-VER-GATE-AD
     - STEP-TRACKER-AD
-    - DOKUMENT-GATES-1-8
 pipeline:
   stages:
     - AD-KROK0-BLOKADA
     - AD-KROK0a-MODE
     - AD-KROK0b-SDVER
     - AD-KROK0c-STINIT
-    - AD-KROK0d-DGLOAD
     - AD-KROK1-INTAKE
     - AD-KROK2-ROUTER
     - AD-BLOKG-STRONY
@@ -53,22 +50,17 @@ pipeline:
     - AD-KROK3-WYKONANIE
     - AD-KROK4-DASHBOARD
 changelog: |
-  Wersja bieżąca: 5.17.0. Pełna historia w references/CHANGELOG.md.
-  Skrót 5.17.0 (2026-08-20z): (1) NOWA ZDOLNOŚĆ — KROK 0d DG-LOAD wpina
-  shared/MOD-DOKUMENT-GATES.md (8 bramek pracy na dokumentach, dotąd
-  dostępnych wyłącznie w skillu przesłuchań, F-100 A); (2) 5 bloków
-  strategicznych (KONSEKWENCJE, ATAK, NEGACJA, PROWENIENCJA, DTA-ID)
-  wydzielonych do modules/MD7-bloki-strategiczne.md, treść 1:1, w SKILL.md
-  tablica wyzwalaczy, rejestracja jako E7 w BLOKU E routera (F-100 B);
-  (3) naprawiony nagłówek H1 „v5.1" przy version 5.16.1 (F-101).
-  ⚠️ Wersje 5.16.0 i 5.16.1 nie mają wpisu w żadnym rejestrze — luka
-  odnotowana jawnie w references/CHANGELOG.md.
+  Wersja bieżąca: 5.15.0. Pełna historia (25 wpisów, 4.0.0-5.15.0) w
+  references/CHANGELOG.md — wczytuj na żądanie, NIE trzymaj tu ponownie
+  (F-78, 2026-08-20: to drugie takie porządkowanie tego pola po 2026-07-12;
+  następne audyty dopisujące wpisy wersji NIECH DOPISUJĄ do
+  references/CHANGELOG.md, NIE do tego pola YAML).
+  Skrót ostatniej zmiany: 5.15.0 — dodano BLOK D0 TEZA-GATE (rekonstrukcja
+  tezy centralnej przed oceną mocnych/słabych stron), obowiązkowy przed
+  BLOK D (F-7/ZASADA 11).
 ---
 
-# Analizator Dowodów Procesowych v5
-<!-- TYLKO major - pelny numer w polu `version:` YAML (F-102, 2026-08-20z3).
-     Wczesniej v5.1 przy version 5.16.1; naprawa 08-20z wpisala tu v5.17,
-     co dryfowaloby przy nastepnym podbiciu - stad przejscie na sam major. -->
+# Analizator Dowodów Procesowych v5.1
 
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 > Przed każdą analizą z powołaniem na przepisy lub sygnatury: `view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
@@ -261,36 +253,6 @@ show_widget/present_files.
 stanu REJESTRU (pełny ✅ lub z jawnym ⚠️ POMINIĘTY) — patrz FAZA 3
 ST-FINAL w shared/MOD-STEP-TRACKER.md.
 ```
-
----
-
-## KROK 0d — DG-LOAD: BRAMKI PRACY NA DOKUMENTACH ⛔ OBOWIĄZKOWE (dodane 5.17.0)
-
-> **Nowa zdolność, nie przeniesienie.** Do 2026-08-20z osiem bramek pracy na
-> dokumentach istniało w systemie WYŁĄCZNIE wewnątrz
-> `przesluchanie-swiadkow-v2-min90` — ten skill, którego całym przedmiotem są
-> dokumenty, nie miał do nich dostępu (F-100 A). Po wydzieleniu kanonu do
-> `shared/` są dostępne tutaj.
-
-```
-Warunek: w materiale jest JAKIKOLWIEK dokument (czyli zawsze poza trybem
-pytania teoretycznego).
-→ view /mnt/skills/user/shared/MOD-DOKUMENT-GATES.md
-```
-
-| Bramka | Kiedy odpala się w TYM skillu |
-|---|---|
-| §1 DOCUMENT-SCAN-PROMPT | KROK 0b/1 — każdy skan, podpis, element odręczny |
-| §2 FOUNDATION-VERIFICATION-GATE | przed każdą hipotezą `[H-ŚLEDCZA]` o dokumencie (MP6) i przed [LAPSUS] opartym na wzorcu stylistycznym (BLOK J) |
-| §3 EXHAUSTIVE-EXTRACTION-GATE | MP1 ekstrakcja, BLOK G rejestr stron — „wszystkie przypadki X" |
-| §4 IMMEDIATE-LOGICAL-SCAN | pierwsze czytanie każdego dokumentu; zasila §P1 INTRA-CONTRA |
-| §5 CROSS-DOCUMENT-CONSISTENCY-CHECK | MP3 spójność — nowy dokument vs fakty już ustalone |
-| §6 ENTITY-DISAMBIGUATION-TABLE | BLOK G — dokumenty od ≥2 powiązanych podmiotów |
-| §7 EVIDENCE-THREAD-LINKING | MP13 synteza faktyczna — łączenie ustaleń z różnych tur |
-| §8 QUOTE-VERIFICATION-DEFAULT | każdy cytat z dokumentu w raporcie, dashboardzie i MD-NARR |
-
-⚠️ Pominięcie bramki raportuj jako „⚠️ POMINIĘTY" w REJESTRZE KROKÓW (KROK 0c),
-na tych samych zasadach co pominięcie bloku obowiązkowego.
 
 ---
 
@@ -497,13 +459,6 @@ E5. W materiale pada wiele dat krytycznych / terminów sądowych do śledzenia?
 
 E6. Konieczna kontrola jakości / audyt antyhalucynacyjny analizy?
     TAK → dodaj: MP9
-
-E7. ⛔ ZAWSZE gdy ustalono tezy LUB jest ≥1 dowód (czyli praktycznie każda
-    analiza pełna; NIE dotyczy trybu minimalnego z BLOKU G):
-    → dodaj: MD7 (bloki strategiczne — konsekwencje, atak, negacja,
-      proweniencja, DTA-ID; 262 linie, wydzielone 2026-08-20z)
-    Wyzwalacze poszczególnych bloków — patrz tablica w sekcji
-    „BLOKI STRATEGICZNE — MD7" niżej.
 ```
 
 ---
@@ -900,27 +855,267 @@ Hard gate: nie przygotowuj repliki, odpowiedzi, apelacji ani zażalenia bez spra
 
 ---
 
-## BLOKI STRATEGICZNE — MD7 (konsekwencje, atak, negacja, proweniencja, DTA-ID)
+## BLOK-KONSEKWENCJE — warstwa skutków prawnych tezy
 
-> ⛔ **Wydzielone 2026-08-20z (F-100 B) do `modules/MD7-bloki-strategiczne.md`.**
-> Treść przeniesiona 1:1 — wyzwalacze, progi i procedury BEZ ZMIAN. Poniżej
-> wyłącznie tablica wyzwalaczy; przy trafieniu KTÓREGOKOLWIEK wiersza:
->
-> ```
-> view /mnt/skills/user/analizator-dowodow-v3/modules/MD7-bloki-strategiczne.md
-> ```
+> **Trigger:** ZAWSZE po ustaleniu tez procesowych (MODE A/B/C).
+> **Cel:** każda teza musi generować ≥2 automatyczne skutki prawne.
+> **Zasada:** bez tej warstwy pismo broni tez, ale nie buduje strategii.
+> **Źródło:** DTA W6 (warstwa konsekwencji).
 
-| Blok | Wyzwalacz | Czego dotyczy |
-|---|---|---|
-| **BLOK-KONSEKWENCJE** | ⛔ ZAWSZE po ustaleniu tez (MODE A/B/C) | każda teza musi generować ≥2 skutki prawne (KC1 bezpośredni, KC2 pośredni, KC3 strategiczny); bez tego teza NIE trafia do W1.3 `pisma-procesowe-v3` jako GOTOWA |
-| **BLOK-NEGACJA** | ⛔ ZAWSZE przy ≥1 dowodzie i ≥1 tezie | ciężar dowodu (N1), odporność klas A-G (N2), 12 technik negacji, milczenie jako przyznanie (art. 230 KPC), procedura NG1-NG6 |
-| **BLOK-ATAK-NA-DOWOD** | dowody przeciwnika (MP5 perspektywa = TAK) LUB alert **P!** z proweniencji | 12 wektorów AD-1..AD-12, procedura ofensywna ADIS-1..5 i obronna SHIELD |
-| **BLOK-PROWENIENCJA** | ≥3 dowody klasy C/D LUB ≥2 świadkowie z tego samego miejsca pracy/działu LUB DTA-ID-MODE aktywny; na żądanie: „czy z jednego systemu", „proweniencja" | 7 typów wspólnego pochodzenia, 4 klasy konsekwencji P+/P-/P0/P!, procedura PR1-PR5 |
-| **DTA-ID-MODE** | ⛔ auto: ≥5 plików LUB ≥5 tez w CLAIM-VALIDATION LUB TRYB ETAPOWY; opcjonalnie na żądanie | numeracja krzyżowa D-NNN / F-NNN / T-NN, zakaz wniosku prawnego w polu faktu, zasilenie macierzy D×T |
+Dla każdej tezy T-X z dashboardu wykonaj trzy kroki:
 
-⚠️ Tablica służy ROZPOZNANIU, że blok się aktywował. Do WYKONANIA bloku
-potrzebna jest pełna treść z MD7 — a przy realnej pracy na dowodach
-dodatkowo kanon z `shared/` (ATAK / NEGACJA / PROWENIENCJA).
+```
+KROK KC1 — Skutek bezpośredni:
+  "Co ta teza UDOWADNIA w sensie prawnym?"
+  → wskaż normę prawną którą teza realizuje (z W1.4 / ISAP ⚠ HARDGATE)
+  → format: C-X.1: [skutek] → [norma]
+
+KROK KC2 — Skutek pośredni:
+  "Jakie INNE ROSZCZENIA lub ARGUMENTY wzmacnia udowodnienie tej tezy?"
+  → myśl o tezie jako środku do celu, nie celu samym w sobie
+  → format: C-X.2: [skutek wtórny] → [roszczenie / argument]
+
+KROK KC3 — Skutek strategiczny (gdy nieoczywisty):
+  "Jak udowodnienie tej tezy ZMIENIA pozycję procesową?"
+  → wpływ na ciężar dowodu, zakres pism, orzecznictwo, ugodę
+  → format: C-X.3: [zmiana pozycji] (opcjonalny)
+```
+
+Przykład (sprawa pracownicza — wzorzec VII P 94/25):
+
+```
+T-1: Ciągłość stosunku pracy / tożsamość pracodawcy rzeczywistego
+  C-1.1: Pracodawca rzeczywisty = HPG → żądanie zapłaty od HPG (art. 22 §1 KP)
+  C-1.2: Ciągłość umów = czwarta umowa terminowa → art. 25¹ KP (bezterminowa)
+  C-1.3: Obciąża HPG całością roszczeń: wynagrodzenie, PFRON, gotowość
+
+T-2: Gotowość do pracy — niedopuszczenie po stronie pracodawcy
+  C-2.1: Prawo do wynagrodzenia za przestój (art. 81 §1 KP) od daty niedopuszczenia
+  C-2.2: Przelicza ciężar dowodu — pracodawca musi wykazać brak gotowości powoda
+  C-2.3: Wzmacnia T-1: osobisty akt Prezesa = organ z art. 31 KP → tożsamość podmiotu
+```
+
+**Zasada:** Bez ≥2 konsekwencji per teza → BLOK-KONSEKWENCJE niekompletny.
+Teza bez konsekwencji nie trafia do W1.3 pisma-procesowe-v3 jako GOTOWA.
+
+**Integracja:**
+- Konsekwencje C-X.1 → sekcja petitum pisma (co żądamy i od kogo)
+- Konsekwencje C-X.2 → sekcja uzasadnienia (alternatywne podstawy)
+- Konsekwencje C-X.3 → W2.1 MOD-TIMING / MOD-STRATEGIA-WYBOR
+
+**Dashboard:** nowa tablica `consequences[]` per teza (id tezy, C-X.1, C-X.2, C-X.3, norma).
+
+## BLOK-ATAK-NA-DOWOD — Atak na dowód jako obiekt procesowy
+
+> **Trigger:** gdy w sprawie są dowody przeciwnika (MP5 perspektywa = TAK)
+>   LUB gdy BLOK-PROWENIENCJA wykrył P! (alert autentyczności/custody)
+> **Plik kanoniczny:** `view /mnt/skills/user/shared/MOD-ATAK-NA-DOWOD.md`
+> **Cel:** systematyczna analiza 12 wektorów ataku na dowody przeciwnika
+>   + procedura obrony własnych dowodów przed tymi samymi atakami.
+
+```
+12 WEKTORÓW ATAKU (AD-1..AD-12) — skrót (szczegóły w MOD-ATAK-NA-DOWOD.md):
+  [AD-1]  Autentyczność: metadane, podpis, fałszerstwo, deepfake
+  [AD-2]  Łańcuch przechowywania (custody): przerwy, dostęp, integralność
+  [AD-3]  Relewantność: fakt bez znaczenia / już udowodniony (art. 227 KPC)
+  [AD-4]  Forma: kopia bez oryginału / bez poświadczenia (art. 129 §1 KPC)
+  [AD-5]  Zakaz ustawowy: nagrania (art. 168a KPK), tajemnica, RODO, art. 174 KPK
+  [AD-6]  Wiarygodność treści: retrospektywne, interes autora, sprzeczność
+  [AD-7]  Zakres wniosku: nieokreślony, nieprzydatny (art. 235¹ KPC)
+  [AD-8]  Prekluzja: spóźniony (art. 235² KPC / art. 170 §1 pkt 5-6 KPK)
+  [AD-9]  Kontrdowód aktywny: KD-1 dokument, KD-2 biegły, KD-3 świadek...
+  [AD-10] Dowody elektroniczne: brak metadanych, hash, kontekst, AI/deepfake
+  [AD-11] Jednostronny ex parte: wytworzony przez stronę na potrzeby sporu
+  [AD-12] Systemowy: sprzeczność, cherry-picking, koordynacja, luki
+
+PROCEDURA ADIS (ofensywna — atakowanie dowodów przeciwnika):
+  ADIS-1 → inwentaryzacja dowodów przeciwnika
+  ADIS-2 → screening AD-1..AD-12 per dowód
+  ADIS-3 → priorytety 🔴/🟠/🟡/🟢
+  ADIS-4 → instrument procesowy (wniosek o oddalenie / biegły / oryginał)
+  ADIS-5 → sekcja w piśmie "ZARZUTY CO DO MATERIAŁU DOWODOWEGO"
+
+PROCEDURA SHIELD (obronna — szczepienie własnych dowodów):
+  S Secure → oryginał + metadane + hash
+  H Harden → triangulacja ≥2 klas (P+ z MOD-PROWENIENCJA)
+  I Integrate → każdy dowód = konkretna przesłanka art. X §Y
+  E Enumerate → wszystkie dowody w pozwie / odpowiedzi (prekluzja)
+  L Link → chronologia MP3 + wyjaśnienie pozornych sprzeczności
+  D Document → proweniencja per dowód (MOD-PROWENIENCJA §PR1)
+
+INTEGRACJA:
+  P! z BLOK-PROWENIENCJA → automatycznie AD-1 + AD-2
+  [ZAW] proweniencja → AD-11 + AD-12 SY-3
+  MP5 §5.2 "typ: dowodowe" → rozwiń na AD-X z siłą N/10
+```
+
+---
+
+## BLOK-NEGACJA — Siła dowodów, techniki negacji i odporność pisma
+
+> **Trigger:** ZAWSZE — automatyczny dla każdej sprawy z ≥1 dowodem i ≥1 tezą.
+> **Plik kanoniczny:** `view /mnt/skills/user/shared/MOD-NEGACJA-DOWODOW.md`
+> **Cel:** ocenić siłę każdego dowodu wobec technik negacji przeciwnika,
+> zidentyfikować milczące przyznania i zbudować odporne pismo.
+
+```
+BLOK N1 — CIĘŻAR DOWODU (per teza T-X):
+  KR1: kto wywodzi skutki z faktu? → ten ma ciężar (art. 6 KC)
+  KR2: czy istnieje przepis odwracający ciężar?
+       OD-1 mobbing | OD-2 dyskryminacja | OD-3 dyscyplinarne
+       OD-4 wypowiedzenie | OD-5 wypadek | OD-6 probatio diabolica
+  KR3: czy fakt jest negatywny? → rozważ art. 231 KPC
+  KR4: co wystarczy do SPEŁNIENIA ciężaru przez nas?
+  KR5: co wystarczy przeciwnikowi do ZNIWECZENIA?
+
+BLOK N2 — ODPORNOŚĆ DOWODÓW (per klasa A-G):
+  A (urz.) → obalenie: wymaga klasy A lub G + dowód błędu/fałszu
+  B (pryw.) → obalenie: żądanie oryginału + twierdzenie o przeróbce
+  C (koresp.) → obalenie: zaprzeczenie + wniosek o metadane
+  D (świad. bezp.) → obalenie: motyw stronniczości + zeznanie przeciwne
+  E (świad. pośr.) → samo wskazanie pośredniości obniża do 1/10
+  F (strona) → zaprzeczenie strony p. rodzi sprzeczność (art. 233 §1)
+  G (biegły) → obalenie: atak na metodologię + wniosek o 2. biegłego
+
+12 TECHNIK NEGACJI (N1-N12) — pełna taksonomia w MOD-NEGACJA-DOWODOW.md:
+  [N1]  Gołosłowne zaprzeczenie
+  [N2]  Twierdzenie o nieistnieniu faktu pozytywnego
+  [N3]  Twierdzenie o nieistnieniu elementu prawnego
+  [N4]  Ogólnikowe zaprzeczenie "wszystkiemu"
+  [N5]  Atak na autentyczność dokumentu
+  [N6]  Odmowa przedłożenia dokumentu (art. 233 §2 KPC)
+  [N7]  Zarzut braku formy / wadliwości formalnej
+  [N8]  Atak na wiarygodność świadka
+  [N9]  Zarzut prekluzji dowodowej
+  [N10] Cherry-picking — selektywne cytowanie (MAN-05)
+  [N11] Antycypacja zarzutu / immunizacja twierdzenia
+  [N12] Zniszczenie lub ukrycie dowodu (spoliation / art. 233 §2)
+
+BLOK N4 — MILCZENIE JAKO PRZYZNANIE:
+  Per każde kluczowe twierdzenie faktyczne:
+    M1: czy pismo przeciwnika odnosi się wprost? → NIE → M2
+    M2: czy objęte ogólnym zaprzeczeniem? → jeśli nie → PRZYZ-MIL
+    M3: waga: H (kluczowe) / M (istotne) / L (poboczne)
+    M4: formularz: "T-X pozostaje niezaprzeczone. Art. 230 KPC."
+  Rejestr [PRZYZ-MIL-H/M/L] → sekcja "Fakty bezsporne" pisma.
+
+PROCEDURA NG1-NG6:
+  NG1 mapowanie ciężaru → NG2 odporność → NG3 prognoza N1-N12
+  → NG4 milczenie → NG5 raport BLOK-NEGACJA → NG6 integracja pipeline
+```
+
+---
+
+## BLOK-PROWENIENCJA — Wykrywanie wspólnego pochodzenia dowodów
+
+> **Trigger OBOWIĄZKOWY:**
+>   ≥3 dowodów klasy C lub D (korespondencja, zeznania)
+>   LUB ≥2 świadkowie z tego samego miejsca pracy / działu
+>   LUB DTA-ID-MODE aktywny (≥5 plików)
+> **Trigger na żądanie:** "sprawdź czy z jednego systemu", "czy zeznania skoordynowane",
+>   "skąd pochodzi", "czy ten sam autor", "proweniencja"
+> **Plik kanoniczny:** `view /mnt/skills/user/shared/MOD-PROWENIENCJA-DOWODOW.md`
+> **Cel:** wykryć wspólne źródło ≥2 pozornie niezależnych dowodów i ocenić konsekwencje.
+
+```
+7 TYPÓW PROWENIENCJI (pełna taksonomia w MOD-PROWENIENCJA-DOWODOW.md):
+
+  [SYS]   Wspólny system IT  — format/numeracja/metadane systemowe identyczne
+  [KOM]   Wspólny komunikator — ten sam nadawca/odbiorca/wątek/kanał
+  [ZAW]   Wspólne środowisko zawodowe — ten sam pracodawca/dział/przełożony
+  [AUT]   Wspólny autor — metadane, nawyki typograficzne, identyczne błędy
+  [URZ]   Wspólne urządzenie — EXIF, adres IP, artefakty skanera
+  [LIN]   Podobieństwo tekstu — identyczne zdania, schematy, błędy merytoryczne
+  [CHAIN] Wspólny custody — stemple, braki numeracji, kolejność skanowania
+
+4 KLASY KONSEKWENCJI:
+
+  P+  Wzmacniająca: wspólne niezależne źródło → fakt awansuje do BEZSPORNE/PEWNE
+  P-  Osłabiająca:  pozorna niezależność → oba dokumenty traktuj jak jeden
+  P0  Neutralna:    wspólne źródło znane obu stronom, bez wpływu na siłę
+  P!  Alert:        nieoczekiwane wspólne źródło → [H-PROW] + wniosek dowodowy
+
+PROCEDURA (szczegółowa w MOD-PROWENIENCJA-DOWODOW.md §PR1-PR5):
+  PR1 Inwentaryzacja proweniencyjna (autor/system/kanał per dowód)
+  PR2 Skan par (Di, Dj) pod wszystkie 7 typów
+  PR3 Klasyfikacja P+/P-/P0/P!
+  PR4 Raport proweniencji (klastry + fakty awansowane/zdegradowane + alerty P!)
+  PR5 Integracja: → DTA-ID-MODE → macierz D×T → BLOK-KONSEKWENCJE
+
+INTEGRACJA Z PIPELINE:
+  Fakty awansowane P+ → BEZSPORNE w BLOK-KONSEKWENCJE C-X.1
+  Alerty P! → wnioski dowodowe art. 248 KPC / biegły art. 278 KPC
+  Obniżona wiarygodność P- → RS (ryzyko sporności) w macierzy D×T
+  Hipotezy [H-PROW] → MP6-sledczy §6.12 lista pytań śledczych
+```
+
+---
+
+---
+
+## DTA-ID-MODE — Numeracja krzyżowa D/F/T (tryb dużych spraw)
+> **Trigger opcjonalny:** na żądanie użytkownika przy każdej sprawie.
+> **Cel:** cross-referencja Dowód → Fakt → Teza w raportach i pismach.
+> **Źródło:** DTA Warstwa 1–5 (identyfikacja + ekstrakcja + numeracja).
+
+```
+FORMAT IDENTYFIKATORÓW:
+
+  D-NNN  = Dowód (dokument / plik)
+    Format: D-[numer trzycyfrowy]
+    Przykład: D-001 = Pracownicy13_08_2024.xlsx
+              D-002 = Protokół rozprawy 27.01.2026
+
+  F-NNN  = Fakt (wyekstrahowany z dowodu — TYLKO opis zdarzenia, NIE wniosek)
+    Format: F-[numer trzycyfrowy]
+    Zasada DTA W2: F-NNN zawiera WYŁĄCZNIE fakty, NIGDY wnioski prawne.
+    Przykład: F-101 = "Arkusze HP i HPG w jednym pliku XLS"
+              F-102 = "Numeracja pracowników ciągła — brak resetu po 1.07.2023"
+    ⛔ ZAKAZ: F-101 = "Spółki stanowią jeden organizm" → to wniosek, nie fakt → [LA-WNIOSEK-W-FAKCIE]
+
+  T-NN   = Teza procesowa (wniosek prawny z faktów)
+    Format: T-[numer dwucyfrowy]
+    Przykład: T-01 = "HP i HPG korzystały ze wspólnego systemu kadrowego"
+              T-02 = "Powód manifestował gotowość do pracy"
+
+CROSS-REFERENCE w raportach i pismach:
+  "Jak wynika z D-001 (xlsx), fakt F-102 (ciągła numeracja) potwierdza T-01."
+  "D-007 (RCS Park 21.03.2026) → F-301 (osobiste żądanie zaprzestania kontaktu) → T-02 + T-05"
+```
+
+```
+KIEDY AKTYWOWAĆ DTA-ID-MODE:
+
+  ⛔ OBOWIĄZKOWY (auto-trigger):
+     ≥5 plików dostarczonych przez użytkownika
+     LUB ≥5 tez w CLAIM-VALIDATION
+     LUB TRYB ETAPOWY (>30 plików — HARD GATE z MOD-PORCJOWANIA)
+
+  Opcjonalny (na żądanie):
+     Użytkownik mówi: "numeruj", "D-NNN", "DTA", "cross-reference"
+
+  Nieaktywny (domyślny dla małych spraw):
+     <5 plików i <5 tez → używaj Lp. (prostsze, wystarczające)
+```
+
+```
+PROCEDURA INICJALIZACJI DTA-ID-MODE:
+
+KROK DTA-1: Utwórz rejestr D-NNN
+  D-001: [nazwa pliku] | [typ wg MT1.2 DOK-URZ/DOK-PRY/etc.] | [klasa A-G z DOWODY-METODOLOGIA §5]
+  D-002: ...
+
+KROK DTA-2: Ekstrakcja faktów F-NNN per dowód
+  Dla D-001: wylistuj fakty F-101, F-102, F-103...
+  Zasada: jeden fakt = jedno zdanie opisowe zdarzenia/stanu (bez ocen prawnych)
+
+KROK DTA-3: Budowanie tez T-NN z faktów
+  T-01 wynika z: F-101, F-102, F-103 (D-001), F-205 (D-002)
+  T-02 wynika z: F-301 (D-007), F-302 (D-008), F-303 (D-018)
+
+KROK DTA-4: Zasilenie macierzy D×T (MOD-MACIERZ-DOWOD-TEZA)
+  Macierz używa D-NNN zamiast D1/D2 → pełna cross-referencja
+```
 
 ---
 
@@ -952,7 +1147,6 @@ view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md
 view /mnt/skills/user/shared/RISK-ASSESSMENT.md
 view /mnt/skills/user/shared/MOD-SKAN-DOWODOW-KOMPLETNY.md   ← KROK 0b (SD-VER), już HARD GATE
 view /mnt/skills/user/shared/MOD-STEP-TRACKER.md              ← KROK 0c (ST-INIT), dodane w audycie 5.13.0
-view /mnt/skills/user/shared/MOD-DOKUMENT-GATES.md            ← KROK 0d (DG-LOAD), dodane w audycie 5.17.0
 ```
 
 Raport dowodowy musi wskazywać: fakt istotny, przesłankę prawną, dowód główny, dowody wspierające, lukę, kontrargument i ryzyko pominięcia.
@@ -973,11 +1167,6 @@ Nie wolno domyślnie:
 - **wywoływać KROK 4 (dashboard) lub dostarczać MD-NARR bez wyświetlenia
   stanu REJESTRU KROKÓW** (pełny ✅ lub z jawnym ⚠️ POMINIĘTY) — patrz
   ST-FINAL w shared/MOD-STEP-TRACKER.md (audyt 5.13.0),
-- **pomijać DG-LOAD (KROK 0d) i pracować na dokumentach bez bramek §1-§8**
-  z `shared/MOD-DOKUMENT-GATES.md` — patrz KROK 0d (audyt 5.17.0),
-- **wykonywać bloku obowiązkowego z tablicy MD7 (KONSEKWENCJE, NEGACJA)
-  bez wczytania `modules/MD7-bloki-strategiczne.md`** — sama tablica
-  wyzwalaczy służy rozpoznaniu, nie wykonaniu (audyt 5.17.0),
 - podawać przepisów/orzeczeń z pamięci bez weryfikacji przez PRAWO-HARDGATE,
 - generować oceny siły dowodu bez uzasadnienia i klasy A-D,
 - pomijać alertu o legalności nagrań, gdy materiał zawiera nagranie,

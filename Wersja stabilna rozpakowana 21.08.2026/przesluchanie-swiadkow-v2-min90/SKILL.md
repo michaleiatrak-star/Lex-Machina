@@ -1,6 +1,6 @@
 ---
 name: przesluchanie-swiadkow-v2-min90
-version: "3.23"
+version: "3.22"
 type: legal-skill
 domain: litigation-witness-examination
 status: production
@@ -31,7 +31,6 @@ dependencies:
     - MOD-SKAN-DOWODOW-KOMPLETNY
     - MOD-REJESTR-ZALACZNIKOW-CHECKPOINT
     - MOD-STEP-TRACKER
-    - MOD-DOKUMENT-GATES
   optional:
     - chronologia-sprawy
     - analiza-sadowa
@@ -60,18 +59,14 @@ validation:
     - STEP-TRACKER-WITNESS
     - PRZESLANKI-GATE
     - FORMALNA-ZGODNOSC-GATE
-    - DOKUMENT-GATES-1-8
-    - TYPOLOGIE-LOAD-GATE
 pipeline:
   stages:
     - PRE-W1a-SD-VER
     - PRE-W1a.4-RZ-SHOW
-    - PRE-W1a.5-DG-LOAD
     - KROK-PRE-W1-INTELLIGENCE
     - KROK-0-KONTEKST
     - W1-INTAKE
     - W1-SUPPLEMENT
-    - W2-TYPOLOGIE-LOAD
     - W2-THESES-AND-MODEL
     - CHECKPOINT-W2
     - W3-QUESTIONS
@@ -79,20 +74,17 @@ pipeline:
     - W5-BINDER
     - W6-LIVE-DIRECT
 changelog: |
-  Wersja bieżąca: 3.23. Pełna historia (JEDYNY changelog pakietu) w
-  references/CHANGELOG.md — wczytuj na żądanie, NIE trzymaj tu ponownie.
-  Skrót 3.23 (2026-08-20z): (1) 8 bramek pracy na dokumentach wydzielonych
-  do shared/MOD-DOKUMENT-GATES.md, treść przeniesiona bajtowo, w SKILL.md
-  indeksy wyzwalaczy + nowy HARD GATE PRE-W1a.5 DG-LOAD i wpis w
-  required_gates (wcześniej bramek tam NIE BYŁO — skill jest po zmianie
-  mocniej zabezpieczony); (2) TYPOLOGIE-LOAD w W2 — typologie świadka i
-  sędziego były w pakiecie od początku, ale żaden krok ich nie wczytywał
-  mimo deklaracji w description (F-99); (3) usunięty balast poscaleniowy
-  jsxfix1+jsxfix2, changelog z katalogu głównego scalony do references
-  (F-101). Wcześniejsze: 3.19 obsługa `< truncated lines >`; 3.18
-  rozdzielenie PRAWO-HARDGATE i PRZESŁANKI-GATE + FORMALNA-ZGODNOSC-GATE;
-  3.17 RZ-SHOW-GATE jako twarda zależność. ⚠️ Wersje 3.20-3.22 nie mają
-  wpisu w żadnym rejestrze — luka odnotowana jawnie w references/CHANGELOG.md.
+  Wersja bieżąca: 3.22. Pełna historia (17 wpisów, 3.1-3.19) w
+  references/CHANGELOG.md — wczytuj na żądanie, NIE trzymaj tu ponownie
+  (F-78, 2026-08-20: to drugie takie porządkowanie tego pola po 2026-07-12;
+  następne audyty dopisujące wpisy wersji NIECH DOPISUJĄ do
+  references/CHANGELOG.md, NIE do tego pola YAML).
+  Skrót ostatnich 3 zmian: 3.19 — naprawiono lukę w obsłudze `< truncated
+  lines >` przy odczycie protokołu rozprawy (dziedziczona z
+  shared/MOD-SKAN-DOWODOW-KOMPLETNY). 3.18 — rozdzielono PRAWO-HARDGATE od
+  PRZESŁANKI-GATE jako niezależne obowiązki, dodano FORMALNA-ZGODNOSC-GATE.
+  3.17 — MOD-REJESTR-ZALACZNIKOW-CHECKPOINT jako twarda zależność required
+  (RZ-SHOW-GATE, etap PRE-W1a.4).
 ---
 
 # Przesłuchanie świadków v2-min90
@@ -227,34 +219,6 @@ PRE-W1a.5 — RAPORT SD-VER PRZED PIERWSZĄ ODPOWIEDZIĄ MERYTORYCZNĄ:
 
 ---
 
-## KROK PRE-W1a.5 — DG-LOAD: WCZYTANIE BRAMEK DOKUMENTOWYCH (HARD GATE, dodane w audycie 3.23)
-
-> ⛔ Wykonywany BEZPOŚREDNIO po PRE-W1a.4 (RZ-SHOW), PRZED
-> KROK-PRE-W1-INTELLIGENCE. Warunek uruchomienia: w sprawie występuje
-> JAKIKOLWIEK dokument (akta, protokół, pismo, skan, korespondencja).
-
-```
-view /mnt/skills/user/shared/MOD-DOKUMENT-GATES.md
-```
-
-Powód istnienia tego kroku: w audycie 2026-08-20z osiem bramek pracy na
-dokumentach przeniesiono z tego pliku do modułu współdzielonego (F-100 A),
-żeby korzystał z nich również `analizator-dowodow-v3`. **Samo odesłanie
-byłoby regresem** — historia tego skilla (naprawy 3.6, 3.17, 3.18) pokazuje,
-że bramka opisana wyłącznie w prozie bywa pomijana, dopóki użytkownik nie
-zapyta wprost. Dlatego wczytanie kanonu jest OSOBNYM, twardym krokiem
-pipeline'u, a nie zaleceniem — dokładnie tak, jak SD-VER i RZ-SHOW.
-
-⛔ Zakaz wejścia do KROK-PRE-W1-INTELLIGENCE bez DG-LOAD = ✅, gdy w sprawie
-są dokumenty. Pominięcie raportuj natychmiast jako „⚠️ POMINIĘTY" w rejestrze
-MOD-STEP-TRACKER — na tych samych zasadach co pominięcie SD-VER.
-
-Indeksy wyzwalaczy §1-§4 i §5-§7 zostają w tym pliku (KROK PRE-W1 i KROK 0)
-i wystarczą do ROZPOZNANIA, że bramka się aktywowała. NIE wystarczą do jej
-WYKONANIA — do tego potrzebna jest pełna treść z kanonu.
-
----
-
 ## KROK PRE-W1 — WITNESS INTELLIGENCE (faza przygotowawcza)
 
 > Cel: zanim rozpoczniesz intake W1, zbuduj pełny profil świadka i mapę źródeł.
@@ -277,20 +241,64 @@ WYNIK:
   → Cytaty KROK III-D → BLOK D (sprzeczności z sekwencją 3-pytań)
 ```
 
-> ⛔ **BRAMKI §1-§4 — pełna treść w `shared/MOD-DOKUMENT-GATES.md`**
-> (wydzielone 2026-08-20z, F-100 A — treść przeniesiona 1:1, **żaden obowiązek
-> nie został zniesiony ani złagodzony**; ten sam kanon obsługuje teraz również
-> `analizator-dowodow-v3`). Obowiązek wczytania: KROK PRE-W1a.5 (DG-LOAD).
->
-> | Bramka | Aktywacja | Obowiązek w jednym zdaniu |
-> |---|---|---|
-> | **DOCUMENT-SCAN-PROMPT** (3.6) | nowy dokument ze skanem / odręcznymi elementami / podpisem | Zanim wejdziesz w treść drukowaną — zapytaj (lub sam sprawdź i zgłoś wynik) o dopiski, skreślenia, parafki i fragmenty nieczytelne; przy złej jakości obrazu zgłoś to wprost zamiast zgadywać. |
-> | **FOUNDATION-VERIFICATION-GATE** (3.8) | przed teorią kryminalistyczną / stylistyczną / techniczną o dokumencie | Sprawdź OBA warunki (czy wzorzec występuje też w innych dokumentach sprawy; czy dokument spełnia strukturalny warunek konieczny metody) — inaczej podaj teorię z jawnym „niezweryfikowane". |
-> | **EXHAUSTIVE-EXTRACTION-GATE** (3.8) | przeszukiwanie zbioru pod kątem „wszystkich przypadków X" | Policz WSZYSTKIE trafienia, sprawdź dodatkowe wzmianki w tym samym fragmencie i podaj liczbę znalezionych przypadków — nie przedstawiaj wyniku częściowego jako kompletnego. |
-> | **IMMEDIATE-LOGICAL-SCAN** (3.8) | PIERWSZE czytanie każdego dokumentu | Zgłoś wewnętrzne sprzeczności logiczne i czasowe od razu, nie po pytaniu naprowadzającym użytkownika. |
->
-> ⚠️ Indeks NIE zastępuje treści bramki. Przy trafieniu aktywacji:
-> `view /mnt/skills/user/shared/MOD-DOKUMENT-GATES.md` (§1-§4).
+> 🔴 **DOCUMENT-SCAN-PROMPT (dodane w audycie 3.6):**
+> Przy KAŻDYM nowo wgranym dokumencie zawierającym elementy odręczne,
+> skany, zdjęcia lub podpisy — zanim przejdziesz do ekstrakcji treści
+> drukowanej, zadaj jednozdaniowe pytanie (lub, jeśli jakość obrazu na to
+> pozwala, od razu spróbuj i zgłoś wynik): czy są tam odręczne dopiski,
+> skreślenia, poprawki, parafki lub nieczytelne fragmenty, które warto
+> zbadać. Nie czekaj, aż użytkownik sam zauważy i zapyta — to on dostarczył
+> dokument, ale to system ma systematycznie sprawdzić, czy dokument kryje
+> coś więcej niż tekst główny. Jeśli jakość obrazu nie pozwala na pewny
+> odczyt — zgłoś to wprost i nie zgaduj treści z fałszywą pewnością (patrz
+> KROK III-D: brak VER = nie twierdź, że fakt jest ustalony).
+
+> 🔴 **FOUNDATION-VERIFICATION-GATE (dodane w audycie 3.8):**
+> Przed zaproponowaniem teorii kryminalistycznej, stylistycznej lub
+> technicznej dotyczącej dokumentu (np. artefakt tłumacza maszynowego,
+> język interfejsu programu pocztowego, analiza autorstwa) — sprawdź
+> DWA warunki, zanim przedstawisz teorię jako obiecującą:
+> 1. Czy ten sam wzorzec/artefakt występuje też w INNYCH dostępnych
+>    dokumentach z tej sprawy? Jeśli tak — zmienia to wagę dowodową teorii
+>    (może ją osłabić: wzorzec powszechny ≠ wzorzec unikalny dla jednej
+>    osoby/zdarzenia) i musi być to sprawdzone PRZED zaprezentowaniem,
+>    nie po tym, jak nowy dokument przypadkowo to ujawni.
+> 2. Czy dokument, do którego ma być zastosowana metoda, SPEŁNIA
+>    STRUKTURALNY WARUNEK KONIECZNY tej metody? (np. technika odczytu
+>    języka interfejsu z linii cytowania wymaga, żeby dokument BYŁ
+>    odpowiedzią na wcześniejszą wiadomość — jeśli to samodzielna,
+>    pierwsza wiadomość w wątku, metoda nie ma zastosowania i nie należy
+>    jej proponować jako możliwej do wykonania).
+> Jeśli nie sprawdzono obu warunków — teorię przedstawia się z jawnym
+> zastrzeżeniem "niezweryfikowane" zamiast jako gotowy, mocny wniosek.
+
+> 🔴 **EXHAUSTIVE-EXTRACTION-GATE (dodane w audycie 3.8):**
+> Przy przeszukiwaniu archiwum lub zbioru dokumentów pod kątem "wszystkich
+> przypadków X" (osób, kwot, dat, zdarzeń określonej kategorii):
+> 1. Zbierz i policz WSZYSTKIE trafienia wyszukiwania (grep/keyword search),
+>    nie tylko te najbardziej oczywiste lub pierwsze w kolejności.
+> 2. Dla każdego akapitu/fragmentu zawierającego trafienie — sprawdź, czy
+>    w TYM SAMYM fragmencie występują dodatkowe, powiązane wzmianki
+>    (np. lista kilku nazwisk w jednym zdaniu), które łatwo pominąć,
+>    skupiając się tylko na pierwszym/najlepiej udokumentowanym przykładzie.
+> 3. Przedstaw wynik jako pełną listę z jawnie podaną liczbą znalezionych
+>    przypadków, zanim uznasz zadanie za wykonane — nie przedstawiaj
+>    częściowego wyniku jako kompletnego.
+> Ryzyko zaniechania: użytkownik odkrywa brakujące przypadki dopiero
+> własnymi, kolejnymi pytaniami, mimo że dane były dostępne od pierwszego
+> przeszukania.
+
+> 🔴 **IMMEDIATE-LOGICAL-SCAN (dodane w audycie 3.8):**
+> Przy PIERWSZYM czytaniu każdego dostarczonego dokumentu — niezależnie od
+> tego, czy użytkownik o to prosi — proaktywnie skanuj pod kątem
+> wewnętrznych sprzeczności logicznych lub czasowych w samej treści
+> dokumentu (np. zachowanie opisane słowem sugerującym powtarzalność
+> "systematyczne", "notoryczne", "wielokrotne" przypisane do jednej,
+> pojedynczej daty; role sprawcy i zgłaszającego zamienione miejscami
+> względem opisanych faktów). Takie sprzeczności zgłoś w PIERWSZEJ analizie
+> dokumentu, nie dopiero gdy użytkownik zapyta wprost "czy to nie jest
+> ogólnikowe" lub podobne pytanie naprowadzające — to nie wymaga żadnego
+> dodatkowego materiału, tylko uważnego czytania tego, co już dostępne.
 
 > 🔴 **LEGAL-ELEMENT-MATCH-CHECK → rozbudowany do PRZESŁANKI-GATE (audyt 3.9):**
 > Gdy dokument zarzuca Panu popełnienie czynu zabronionego (powołanie na
@@ -456,19 +464,99 @@ są już dostępne w materiałach — wydobądź systematycznie z transkryptu:
   pytania o sprawę w W1."
 ```
 
-### BRAMKI SPÓJNOŚCI MIĘDZY DOKUMENTAMI (§5-§7 `shared/MOD-DOKUMENT-GATES.md`)
+### CROSS-DOCUMENT-CONSISTENCY-CHECK (dodane w audycie 3.7)
 
-> ⛔ Wydzielone 2026-08-20z (F-100 A) — treść przeniesiona 1:1, **bez zmiany
-> zakresu obowiązków**. Pełna treść: `view /mnt/skills/user/shared/MOD-DOKUMENT-GATES.md`.
->
-> | Bramka | Aktywacja | Obowiązek w jednym zdaniu |
-> |---|---|---|
-> | **CROSS-DOCUMENT-CONSISTENCY-CHECK** (3.7) | każdy nowy dokument dowodowy w sprawie, w której są już ustalone fakty (nie tylko w tej samej wiadomości) | Zestaw nowy dokument z wcześniej ustalonymi faktami, datami i kwotami; sprzeczność zgłoś natychmiast, nie przy okazji późniejszego pytania. |
-> | **ENTITY-DISAMBIGUATION-TABLE** (3.8) | dokumenty od ≥2 powiązanych podmiotów prawnych | Prowadź i aktualizuj tabelę przypisania dokumentów do podmiotów — kto FAKTYCZNIE wystawił dokument, nie kto jest „stroną" w potocznym sensie. |
-> | **EVIDENCE-THREAD-LINKING** (3.11) | każde nowe ustalenie dowodowe | Przeszukaj pamięć CAŁEJ rozmowy pod kątem wcześniejszych ustaleń powiązanych TEMATYCZNIE (nie tylko tymi samymi słowami) i połącz je w jedną narrację. |
->
-> Różnica §5 vs §7 zachowana w kanonie: §5 wykrywa sprzeczności między
-> IDENTYCZNYMI faktami, §7 — powiązania tematyczne między RÓŻNYMI faktami.
+> 🔴 Aktywacja: za każdym razem, gdy w toku **tej samej sprawy** (niekoniecznie
+> tej samej wiadomości) zostaje wgrany nowy dokument dowodowy — nie tylko
+> przy pierwszym KROK 0.
+
+```
+Przy każdym nowym dokumencie dowodowym dotyczącym sprawy już omawianej
+w tej rozmowie:
+
+1. Zidentyfikuj fakty w nowym dokumencie, które DUBLUJĄ lub ROZSZERZAJĄ
+   fakty już ustalone wcześniej w tej rozmowie (daty, kwoty, nazwiska,
+   cytaty przypisywane konkretnym osobom).
+2. Zestaw je wprost z wcześniejszymi ustaleniami. Jeśli występuje
+   rozbieżność (np. ta sama osoba figuruje z inną datą lub kwotą w dwóch
+   różnych dokumentach) — zgłoś to WPROST, zanim jakiekolwiek pytanie
+   oparte na tym fakcie zostanie sformułowane lub zaakceptowane.
+3. Nie wybieraj milcząco "poprawnej" wersji przy rozbieżności — przedstaw
+   obie, ze wskazaniem źródła każdej, i poproś użytkownika o rozstrzygnięcie
+   przed użyciem tego faktu w pytaniu do świadka.
+
+Ryzyko zaniechania: rozbieżność wykryta dopiero na sali (przez świadka lub
+pełnomocnika przeciwnej strony) niszczy wiarygodność całego pytania, nawet
+jeśli istota zarzutu jest słuszna.
+```
+
+### ENTITY-DISAMBIGUATION-TABLE (dodane w audycie 3.8)
+
+> 🔴 Aktywacja: w sprawie występuje więcej niż jeden powiązany podmiot
+> prawny (różne NIP, różne nazwy firm o podobnym brzmieniu, różne adresy
+> e-mail przypisane do tej samej grupy kapitałowej).
+
+```
+Prowadź i proaktywnie aktualizuj (bez czekania na prośbę użytkownika)
+tabelę przypisania dokumentów i faktów do konkretnych podmiotów, np.:
+
+| Podmiot | NIP | Dokumenty/maile z tego podmiotu | Osoby podpisujące |
+|---|---|---|---|
+| Human Park sp. z o.o. | [nr] | [lista] | [imiona] |
+| Human Park Global sp. z o.o. | [nr] | [lista] | [imiona] |
+
+Aktualizuj tę tabelę przy każdym nowym dokumencie odnoszącym się do
+któregokolwiek z podmiotów. Udostępnij ją użytkownikowi, gdy:
+- pojawi się pytanie dotyczące tego, który podmiot jest odpowiedzialny
+  za dane działanie lub zobowiązanie,
+- liczba podmiotów w sprawie przekroczy jeden i nie było jeszcze takiego
+  zestawienia,
+- użytkownik o to poprosi wprost.
+
+Cel: uniknięcie sytuacji, w której przez wiele wiadomości analizuje się
+dokumenty pod kątem treści, nigdy nie zestawiając ich systematycznie
+względem tego, który z powiązanych podmiotów faktycznie je wystawił —
+co może mieć znaczenie dla ustalenia właściwego pozwanego lub adresata
+poszczególnych roszczeń.
+```
+
+### EVIDENCE-THREAD-LINKING (dodane w audycie 3.11)
+
+> 🔴 Różnica względem CROSS-DOCUMENT-CONSISTENCY-CHECK: tamten mechanizm
+> wykrywa sprzeczności między IDENTYCZNYMI faktami (ta sama osoba, inna
+> data). Ten mechanizm wykrywa POWIĄZANIA TEMATYCZNE między pozornie
+> różnymi faktami, które opisują to samo zjawisko z innej strony — nawet
+> gdy nie dzielą żadnego identycznego słowa kluczowego.
+
+```
+Przy każdym nowym ustaleniu dowodowym (nowy dokument, nowa odpowiedź na
+przeszukanie, nowy fragment zeznania) — zanim przejdziesz dalej, zapytaj
+się aktywnie:
+
+1. Czy to ustalenie opisuje TEN SAM przedmiot/zdarzenie/mechanizm co coś,
+   co zostało już ustalone WCZEŚNIEJ w tej samej rozmowie, tylko z innej
+   perspektywy lub w innym słownictwie? (Nie szukaj identycznych słów —
+   szukaj tego samego zjawiska opisanego inaczej: np. "dokument z kwotą
+   do zwrotu" wspomniany w wiadomości WhatsApp i "dokumenty wewnętrzne —
+   transakcje" wspomniane w zeznaniu świadka mogą odnosić się do TEGO
+   SAMEGO dokumentu, opisanego przez dwie różne osoby z przeciwstawnych
+   perspektyw.)
+2. Jeśli tak — przedstaw to POŁĄCZENIE wprost, jako spójną narrację,
+   zamiast zostawiać oba fakty jako osobne, niepowiązane ustalenia,
+   czekając aż użytkownik sam zauważy związek.
+3. Zaznacz wyraźnie, czy połączenie jest PEWNE (te same konkretne dane:
+   nazwisko + kwota + data) czy PRAWDOPODOBNE/DO POTWIERDZENIA (tematyczne
+   podobieństwo bez twardego dowodu tożsamości) — nie przedstawiaj
+   hipotezy jako ustalonego faktu.
+4. Zaproponuj, jeśli to możliwe, jedno pytanie do świadka, które wprost
+   testuje, czy połączenie jest prawdziwe (np. "czy dokument X, o którym
+   Pani zeznała, to ten sam dokument, do którego odwoływałem się w
+   wiadomości Y").
+
+Ryzyko zaniechania: użytkownik traci mocniejszą, zunifikowaną narrację
+dowodową na rzecz kilku osobnych, słabszych faktów, które w istocie
+wzajemnie się potwierdzają i wzmacniają, gdyby je połączyć.
+```
 
 ### PLAIN-TESTIMONY-DEFAULT (dodane w audycie 3.12) — przeciwwaga do FOUNDATION-VERIFICATION-GATE i EVIDENCE-THREAD-LINKING
 
@@ -903,51 +991,6 @@ Na podstawie danych z W1 (i dokumentów z zeznaniami jeśli dostępne) przygotuj
 
 ---
 
-### TYPOLOGIE-LOAD — dobór stylu do typu świadka i typu sędziego ⛔ OBOWIĄZKOWE (dodane w audycie 3.23)
-
-> ⛔ **Naprawa luki F-99 (2026-08-20z).** Skill od początku dostarczał trzy pliki
-> taksonomii, a `description`, sekcja „Kiedy używać" i pole „Prawdopodobny typ
-> sędziego" w profilu W2 deklarowały dobór stylu pytań do typu sędziego —
-> ale ŻADEN krok pipeline'u tych plików nie wczytywał (`grep` nazw plików
-> w SKILL.md = 0 trafień). Zadeklarowana zdolność działała na improwizacji
-> modelu zamiast na dostarczonej taksonomii. Pliki istniały i były poprawne;
-> brakowało wyłącznie wpięcia.
-
-Przed wyborem modelu przesłuchania wczytaj:
-
-```
-view /mnt/skills/user/przesluchanie-swiadkow-v2-min90/typologies/witnesses/witness-types.yaml
-view /mnt/skills/user/przesluchanie-swiadkow-v2-min90/typologies/judges/judge-types.yaml
-view /mnt/skills/user/przesluchanie-swiadkow-v2-min90/typologies/matrices/witness-judge-matrix.md
-```
-
-Procedura (wynik wchodzi do CHECKPOINT-W2 razem z tezami i modelem):
-
-```
-KROK T1 — Typ świadka: dopasuj do `witness_types` (id + label).
-  Podaj: strategia z pola `strategy`, ryzyka z `risks`, pytania sugerowane
-  z `recommended_questions` jako materiał wyjściowy do BLOKU A/B.
-
-KROK T2 — Typ sędziego: dopasuj do `judge_types` na podstawie protokołów
-  wcześniejszych rozpraw (uchylenia pytań, tempo, ingerencje w strukturę).
-  ⚠️ Brak protokołów → NIE zgaduj: oznacz „typ nieustalony — założenie
-  neutralne" i podaj, co trzeba by zaobserwować, żeby go ustalić.
-
-KROK T3 — Para świadek × sędzia: sprawdź `witness-judge-matrix.md`.
-  Jeśli para jest w macierzy — zastosuj jej strategię i ryzyka wprost.
-  Jeśli pary nie ma — złóż strategię z T1 i T2 i oznacz jako złożenie
-  własne, nie jako pozycję macierzy.
-
-KROK T4 — Konflikt strategii T1 vs T2 rozstrzygaj na korzyść T2
-  (typ sędziego decyduje o dopuszczalności formy; typ świadka tylko
-  o skuteczności treści) i odnotuj kompromis jednym zdaniem.
-```
-
-Wynik T1-T4 zasila `MODEL-SELECTION-GATE` poniżej — model przesłuchania
-dobiera się PO ustaleniu obu typów, nie przed.
-
----
-
 ### MODEL-SELECTION-GATE — Modele przesłuchania
 
 Dobierz model do sytuacji. Opisz wybór z uzasadnieniem i podaj model alternatywny.
@@ -1049,9 +1092,6 @@ CHECKPOINT W2 — WERYFIKACJA PRZED GENEROWANIEM PYTAŃ
 
 ŚWIADEK:        [oznaczenie]
 TYP:            [typ 1/2/3/4/5]
-TYP WG TAKSONOMII (T1): [id + label z witness-types.yaml]
-TYP SĘDZIEGO (T2):      [id + label z judge-types.yaml | "nieustalony — założenie neutralne"]
-PARA T3:                [pozycja z witness-judge-matrix.md | "złożenie własne T1+T2"]
 SCORING W2:     [X]/10 — [kwalifikacja]
 MODEL:          [PEACE / LEJEK / ONE-FACT / CHRONOLOGICZNY]
 ALTERNATYWA:    [model zapasowy]
@@ -1234,12 +1274,15 @@ z pełną bramką dla każdego pytania i finalną macierzą.
 > dokumentu nie jest dostępna w rozmowie, oznacz FPW-1 jako ⚠️ NIEZWERYFIKOWANE
 > i zapytaj użytkownika o dokument, zamiast przyjmować twierdzenie wprost.
 
-> 🔴 **QUOTE-VERIFICATION-DEFAULT (audyt 3.7; kanon: `shared/MOD-DOKUMENT-GATES.md` §8):**
-> Każdy fragment przedstawiany jako dosłowny cytat z dokumentu jest
-> weryfikowany słowo-w-słowo względem źródła **w momencie zaproponowania**,
-> nie na późniejsze żądanie; wynik (zgodny / zgodny ze skrótem / niezgodny)
-> podaje się przy pytaniu, a cytatu niemożliwego do zweryfikowania nie
-> włącza się do pytania. Pełna treść i przykłady: §8 kanonu.
+> 🔴 **QUOTE-VERIFICATION-DEFAULT (dodane w audycie 3.7):**
+> Każdy fragment tekstu przedstawiany jako dosłowny cytat z dokumentu
+> (do użycia w pytaniu konfrontacyjnym / technice loopingu) jest
+> weryfikowany słowo-w-słowo względem źródła **w momencie jego
+> zaproponowania**, nie dopiero gdy użytkownik o to wprost zapyta.
+> Wynik weryfikacji (zgodny / zgodny ze skrótem oznaczonym wielokropkiem /
+> niezgodny) podaje się przy pytaniu. Cytatu niemożliwego do zweryfikowania
+> względem dostępnego źródła nie włącza się do pytania — oznacza się jako
+> wymagający weryfikacji przed użyciem.
 
 Każde pytanie musi zawierać:
 
@@ -1516,19 +1559,7 @@ PODCZAS DIRECT EXAMINATION (zeznania na wprost / przesłuchanie przez sąd):
 
 ## Zakaz
 
-> ℹ️ Bramki §1-§8 wymienione niżej (DOCUMENT-SCAN-PROMPT, FOUNDATION-VERIFICATION-GATE,
-> EXHAUSTIVE-EXTRACTION-GATE, IMMEDIATE-LOGICAL-SCAN, CROSS-DOCUMENT-CONSISTENCY-CHECK,
-> ENTITY-DISAMBIGUATION-TABLE, EVIDENCE-THREAD-LINKING, QUOTE-VERIFICATION-DEFAULT)
-> mają od 2026-08-20z kanon w `shared/MOD-DOKUMENT-GATES.md` — zakazy poniżej
-> obowiązują BEZ ZMIAN, zmieniła się wyłącznie lokalizacja pełnej treści.
-
 Nie wolno domyślnie:
-- **wchodzić do KROK-PRE-W1-INTELLIGENCE bez wykonanego DG-LOAD (PRE-W1a.5),
-  gdy w sprawie jest jakikolwiek dokument** — patrz KROK PRE-W1a.5 (audyt 3.23,
-  HARD GATE),
-- **dobierać modelu przesłuchania bez wykonania TYPOLOGIE-LOAD (KROKI T1-T4)
-  ani zgadywać typu sędziego przy braku protokołów** — patrz TYPOLOGIE-LOAD
-  w ETAP W2 (audyt 3.23),
 
 - **odkładać stosowania QUESTION-ADMISSIBILITY-GATE/WHY-GATE do momentu, gdy użytkownik poprosi o ocenę** —
   bramki stosuje się przy pierwszym generowaniu pytań (GATE-DEFAULT-NOW, audyt 3.6),
@@ -1650,7 +1681,6 @@ Nie wolno domyślnie:
 |---|---|
 | `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` | **OBOWIĄZKOWO, BEZPOŚREDNIO, na PRE-W1a** — przed jakimkolwiek profilem świadka lub tezą, niezależnie od tego, czy `analizator-dowodow-v3` jest wczytany (audyt 3.14) |
 | `shared/MOD-REJESTR-ZALACZNIKOW-CHECKPOINT.md` | **OBOWIĄZKOWO, na PRE-W1a.4, w KAŻDEJ turze z dowodami** — bezpośrednio po SD-VER, przed profilem świadka; wyświetla użytkownikowi pełen rejestr plików ze statusem i pyta o kontynuację przy ⬜/🔶 (audyt 3.17-r3) |
-| `shared/MOD-DOKUMENT-GATES.md` | **OBOWIĄZKOWO, na PRE-W1a.5 (DG-LOAD), gdy w sprawie jest jakikolwiek dokument** — kanon 8 bramek pracy na dokumentach (§1-§8), wydzielony z tego skilla 2026-08-20z; indeksy wyzwalaczy zostają w KROK PRE-W1 i KROK 0 |
 | `shared/MOD-STEP-TRACKER.md` | **OBOWIĄZKOWO, na PRE-W1a.3** — inicjalizacja rejestru kroków świadka, aktualizacja po każdym etapie (audyt 3.14) |
 | `analizator-dowodow-v3` | przed W2 jeśli dostępne obszerne akta (uzupełniająco — nie zastępuje bezpośredniego SD-VER z PRE-W1a) |
 | `chronologia-sprawy-v1` | jeśli zdarzenia mają złożoną oś czasu |

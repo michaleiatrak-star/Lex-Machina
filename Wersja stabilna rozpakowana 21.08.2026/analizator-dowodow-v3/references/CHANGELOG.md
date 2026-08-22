@@ -56,16 +56,3 @@
 
 - 4.0.0: zakładka Sprzeczności z cytatami, M3b skanowanie sprzeczności z prawem
 
-
----
-
-## LUKA JAWNA — wersje 5.16.0 i 5.16.1 (odnotowane 2026-08-20z, F-101)
-
-`version: "5.16.1"` widniało w YAML, podczas gdy pole `changelog` deklarowało
-„Wersja bieżąca: 5.15.0", ten plik kończył się na 5.15.0, a nagłówek H1 SKILL.md
-brzmiał „v5.1" — trzy różne numery w jednym pliku. Historii zmian 5.16.0 i 5.16.1
-**nie da się odtworzyć** z materiału w systemie. Odnotowane wprost jako luka,
-zamiast pozostawiać ciszę wyglądającą przy kolejnym audycie na kompletny rejestr.
-Nagłówek H1 naprawiony w tej samej sesji.
-
-- 5.17.0 (2026-08-20z, F-100 A+B i F-101 — sesja badania trzech skilli): **(1) NOWA ZDOLNOŚĆ — KROK 0d DG-LOAD.** Skill dostał dostęp do ośmiu bramek pracy na dokumentach (`shared/MOD-DOKUMENT-GATES.md` §1-§8: DOCUMENT-SCAN-PROMPT, FOUNDATION-VERIFICATION-GATE, EXHAUSTIVE-EXTRACTION-GATE, IMMEDIATE-LOGICAL-SCAN, CROSS-DOCUMENT-CONSISTENCY-CHECK, ENTITY-DISAMBIGUATION-TABLE, EVIDENCE-THREAD-LINKING, QUOTE-VERIFICATION-DEFAULT), które do 2026-08-20z istniały w systemie WYŁĄCZNIE wewnątrz `przesluchanie-swiadkow-v2-min90` — mimo że dotyczą pracy na dokumentach, a nie na świadku, i mimo że ten skill jest PRIMARY dla głębokiej analizy dowodowej wieloplikowej. Dodano tabelę mapującą każdą bramkę na konkretny krok/moduł tego skilla (§2 → MP6 i BLOK J, §3 → MP1 i BLOK G, §4 → §P1 INTRA-CONTRA, §5 → MP3, §6 → BLOK G, §7 → MP13, §8 → raport/dashboard/MD-NARR), wpisano `DOKUMENT-GATES-1-8` do `validation.required_gates`, `MOD-DOKUMENT-GATES` do `dependencies.required`, `AD-KROK0d-DGLOAD` do pipeline'u oraz dwa nowe punkty do sekcji „Zakaz". **(2) Wydzielenie MD7.** Pięć bloków strategicznych (BLOK-KONSEKWENCJE, BLOK-ATAK-NA-DOWOD, BLOK-NEGACJA, BLOK-PROWENIENCJA, DTA-ID-MODE — w. 858-1119, 262 linie) przeniesionych do `modules/MD7-bloki-strategiczne.md`; treść skopiowana bajtowo, weryfikacja porównawcza wykonana przed dostawą. W SKILL.md została tablica wyzwalaczy z progami aktywacji, a moduł zarejestrowano jako pozycję **E7** w BLOKU E routera (KROK 2), czyli w tym samym mechanizmie lazy loadingu co MP6/MP10-MP13. ⚠️ Odnotowane uczciwie: dwa z pięciu bloków są bezwarunkowe („ZAWSZE"), więc przy pełnej analizie moduł i tak zostanie wczytany — realny zysk to tryb minimalny z BLOKU G, przywrócenie SKILL.md roli routera i usunięcie z entrypointu streszczeń, które mogły dryfować względem kanonu w `shared/` (ATAK 692 linie, NEGACJA 684, PROWENIENCJA 457). SKILL.md: 1174 → 983 linie mimo dopisania całego KROKU 0d. **(3)** Naprawiony nagłówek H1 „v5.1" → „v5.17". Pełny opis sesji: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis `AUDYT-2026-08-20z`.

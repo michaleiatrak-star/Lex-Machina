@@ -68,7 +68,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   od KC; nowelizacja znosi "wieczne przedawnienie" + wprowadza ugodę
   podatkową od 01.10.2026 (art. 70 i n. OP)
 
-## Moduły (43 łącznie — ✓ 43 OK, ☐ 0 STUB)
+## Moduły (44 łącznie — ✓ 44 OK, ☐ 0 STUB)
 
 **NAPRAWA 2026-08-14:** dodano `mod-OP-dzial-IV-rozdzial-11-dowody.md`
 — zamyka rdzeń F-70: dowody w postępowaniu podatkowym (180-200),
@@ -448,6 +448,23 @@ przez cross-reference, bez duplikacji treści).
                NIE działa przy samych czynnościach sprawdzających,
                WSA Warszawa III SA/Wa 1251/18], odesłanie proceduralne
                [280])
+  [✓] NOWY  mod-OP-ulgi-w-splacie-dzial-III-rozdzial-7a
+              (dodany 2026-08-22, F-83 priorytet #4 mapy pokrycia: OP
+               Dział III Rozdz. 7a, art. 67a-67e ORAZ ⭐ art. 67da
+               [pominięty w większości spisów treści!] + art. 57
+               opłata prolongacyjna. Katalog trzech ulg [67a —
+               ⛔ umorzyć można TYLKO zaległość, nie podatek przed
+               terminem], dwuetapowość: przesłanka związana vs uznanie
+               administracyjne [granica kontroli WSA], reżimy pomocowe
+               dla przedsiębiorcy [67b — ⭐⭐⭐ de minimis wg rozp.
+               2023/2831, limit 300 000 EUR, NIE 1407/2013; zakaz
+               automatycznego szufladkowania przedsiębiorcy jako
+               beneficjenta pomocy publicznej], ulgi z urzędu [67d],
+               ⭐⭐⭐ WYGAŚNIĘCIE DECYZJI Z MOCY PRAWA [67da — materia
+               przeniesiona z art. 259 od 25.03.2024; trzy raty
+               NIEKONIECZNIE KOLEJNE], właściwość organu [67e —
+               ⛔ odwołanie w podatkach lokalnych do SKO, nie do IAS],
+               opłata prolongacyjna fakultatywna w JST [57 § 7])
   [✓] OK    mod-KAS-kontrola-celno-skarbowa
   [✓] OK    mod-PIT-podatek-dochodowy-fizyczne
   [✓] OK    mod-CIT-podatek-dochodowy-prawne

@@ -8,7 +8,7 @@
 | KPC | Apelacja | **14 dni** od doręcz. uzasadn. | art. 369 §1 KPC |
 | KPC | Zażalenie | **7 dni** | art. 394 §2 KPC |
 | KPC | Sprzeciw od nakazu | **14 dni** | art. 503 §1 KPC |
-| KPC | Odpowiedź na pozew | **14 dni** | art. 207 §2 KPC |
+| KPC | Odpowiedź na pozew | ⛔ **NIE 14 dni** — termin SĄDOWY wyznaczony przez przewodniczącego, **nie krótszy niż 2 tygodnie** | **art. 205¹ §1 KPC** (art. 207 §2 uchylony 7.11.2019) |
 | KPK | Wniosek o uzasadnienie | **7 dni** | art. 422 §1 KPK |
 | KPK | Apelacja karna | **14 dni** | art. 445 §1 KPK |
 | KPW | Wniosek o uzasadnienie | **3 dni** | art. 105 §1 KPW |

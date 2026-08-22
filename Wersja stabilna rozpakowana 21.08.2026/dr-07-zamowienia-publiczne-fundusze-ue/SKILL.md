@@ -40,13 +40,43 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Zamówienia publiczne, fundusze UE, pomoc publiczna — pojęcia (wykonawca, zamawiający, oferta, rażąco niska cena, kryteria oceny ofert) mają definicje ustawowe wprost w PZP (art. 7) i nie wymagają osobnego pliku w shared/definicje/. Żaden plik tematyczny nie obejmuje dziedziny PZP.
-## Moduły (18 łącznie — ✓ 18 OK, ☐ 0 STUB)
+## Moduły (19 łącznie — ✓ 19 OK, ☐ 0 STUB)
+
+**NAPRAWA 2026-08-22:** dodano `mod-PZP-dzial-IV-szczegolne-
+instrumenty.md` — naprawa poz. #3 rekomendowanej kolejności raportu
+pokrycia PZP: Dział IV (art. 311-361), dotąd 🔴 śladowo pokryty
+(tylko wzmiankowane nazwy instrumentów bez treści proceduralnej).
+Obejmuje umowę ramową (311-315, w tym okres obowiązywania max 4 lata
+i relacja do Działu VII), dynamiczny system zakupów (316-324),
+konkurs (325-358, w tym jedyny obligatoryjny przypadek — projektowanie
+architektoniczne) i zamówienia na usługi społeczne (359-361, próg
+750 000 EUR odrębny od progów standardowych). Rząd 1:
+ekomentarzpzp.uzp.gov.pl (komentarz oficjalny UZP), portalzp.pl,
+lexlege.pl.
 
 **NAPRAWA 2026-08-14:** dodano `mod-PZP-dzial-II-kwalifikacja-kryteria-
 uniewaznienie.md` — zamyka rdzeń F-71: Dział II PZP (183 art., >1/4
 ustawy), sam rdzeń klasycznego przetargu generujący najwięcej sporów.
 
 ```
+  [✓] NOWY  mod-PZP-dzial-IV-szczegolne-instrumenty
+              (dodany 2026-08-22, naprawa poz. #3 rekomendowanej
+               kolejności raportu pokrycia PZP. ⭐⭐⭐ Trzy rdzenie:
+               [1] umowa ramowa — NIE jest samodzielnym zamówieniem,
+               nie kreuje wzajemnego zobowiązania stron, max 4 lata
+               [wyjątki: przedmiot/interes zamawiającego, obronność
+               >7 lat], dwa warianty przy jednym wykonawcy [313 §1
+               pełna konsumpcja / §2 uzupełnienie oferty]; [2] konkurs
+               — JEDYNY obligatoryjny przypadek to projektowanie
+               architektoniczne/architektoniczno-budowlane powyżej
+               progów unijnych [325 §2], katalog dziedzin otwarty
+               z nowością projektowania informatycznego i zamierzenia
+               innowacyjnego; [3] usługi społeczne — próg 750 000 EUR
+               ODRĘBNY od progów standardowych, brak własnej procedury,
+               tylko fakultatywne uproszczenia [360]. Ponadto:
+               dynamiczny system zakupów [316-324, wyłącznie usługi/
+               dostawy/roboty OGÓLNIE DOSTĘPNE, pełna elektronizacja
+               komunikacji])
   [✓] OK    mod-PZP-zamowienia-publiczne-KIO
   [✓] NOWY  mod-PZP-dzial-II-kwalifikacja-kryteria-uniewaznienie
               (dodany 2026-08-14 — naprawa F-71: warunki udziału [112,

@@ -144,7 +144,7 @@ złożone w terminie wyznaczonym przez Sąd
 **Termin:** wskazany przez sąd w zarządzeniu (art. 205¹ KPC)
 **Uwagi do pisma przygotowawczego:**
 - Wymaga zezwolenia sądu (art. 127 §3 KPC) lub złożenia w terminie wyznaczonym przez sąd
-- Spóźnione twierdzenia i dowody sąd może pominąć (art. 207 §6 KPC) — zaznacz, że składasz
+- Spóźnione twierdzenia i dowody sąd może pominąć (**art. 205¹² KPC**; w sprawach gospodarczych ostrzej — art. 458⁵. ⛔ art. 207 §6 UCHYLONY 7.11.2019, poprawione 2026-08-22 — ten sam plik dwa wiersze wyżej poprawnie powoływał już art. 205¹) — zaznacz, że składasz
   w terminie lub że twierdzenia są nowe (powstały po doręczeniu pozwu)
 
 ---

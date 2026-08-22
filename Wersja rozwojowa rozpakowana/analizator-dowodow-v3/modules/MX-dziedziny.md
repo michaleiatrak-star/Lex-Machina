@@ -40,7 +40,7 @@ Na podstawie wykrytych dziedzin wskaż listę modułów do uruchomienia
 | `[CYW-ODS]` | Delikt / odszkodowanie | szkoda, bezprawność, wina, związek przyczynowy, art. 415 KC | MD2, MD4 | MP2, MP4 | 4 przesłanki; każda = osobny łańcuch |
 | `[CYW-DOBR]` | Dobra osobiste | zniesławienie, znieważenie, wizerunek, cześć, art. 23–24 KC | MD2 | MP2, MP4, MP6 | Aktywuj M6 (profilowanie reputacyjne) |
 | `[CYW-TERM]` | Terminy / przedawnienie | data, przedawnienie, zarzut, art. 118–125 KC | MD5 | MP2 | Obowiązkowy alert ⚠ ZAWITY |
-| `[CYW-PROC]` | Procedura cywilna | KPC, pozew, odpowiedź, apelacja, postanowienie | MD5 | MP0, MP2 | Sprawdź prekluzję (art. 207 §6 KPC) |
+| `[CYW-PROC]` | Procedura cywilna | KPC, pozew, odpowiedź, apelacja, postanowienie | MD5 | MP0, MP2 | Sprawdź prekluzję (**art. 205¹² KPC**; gosp.: art. 458⁵ — ⛔ art. 207 §6 uchylony 7.11.2019) |
 | `[PRAC-ROZW]` | Rozwiązanie stosunku pracy | wypowiedzenie, dyscyplinarka, art. 52 KP, odwołanie do sądu pracy | MD3a, MD3b | MP2, MP4 | Termin zawity: 21 dni (art. 264 §1 KP) |
 | `[PRAC-MOB]` | Mobbing / dyskryminacja | mobbing, molestowanie, nierówne traktowanie, art. 94³ KP | MD2 | MP2, MP4, MP6 | M6 behawiorystyka; ciężar dowodu obrócony |
 | `[PRAC-WYNA]` | Wynagrodzenie | wynagrodzenie, nadgodziny, premia, potrącenie, EKPS | MD2, MD4 | MP2 | Weryfikuj listy płac i harmonogramy |

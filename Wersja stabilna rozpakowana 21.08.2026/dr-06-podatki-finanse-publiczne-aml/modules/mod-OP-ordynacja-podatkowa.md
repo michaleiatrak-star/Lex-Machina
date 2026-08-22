@@ -569,6 +569,67 @@ only), ale dosłowne brzmienie przepisu wymaga odczytu ISAP przed
 cytowaniem w piśmie.
 ```
 
+## 6b. ⚠️ PROPAGACJA NOWELIZACJI 2026.846 DO SKOK, UBEZPIECZEŃ, FUNDUSZY
+INWESTYCYJNYCH I INSTRUMENTÓW FINANSOWYCH (F-88, stan 2026-08-22 —
+NIEUSTALONE dokładny artykuł, kierunek mechanizmu SILNIE wskazany)
+
+```
+⭐⭐ POTWIERDZONE RZĄD 1 (cytat stopki dziennikustaw.gov.pl/
+D2026000084601.pdf), że ustawa 2026.846 NOWELIZUJE własną treścią (nie
+tylko odesłaniem konsekwencyjnym) CZTERY ustawy sektora finansowego:
+  1) ustawę z 5.11.2009 o spółdzielczych kasach oszczędnościowo-
+     kredytowych (aktualny t.j. Dz.U.2026.595, ⚠️ zweryfikuj przy
+     najbliższej sesji czy to nadal aktualna metryka)
+  2) ustawę z 11.09.2015 o działalności ubezpieczeniowej i reasekuracyjnej
+  3) ustawę z 16.11.2016 o Krajowej Administracji Skarbowej
+  4) ustawę z 9.03.2017 o wymianie informacji podatkowych z innymi
+     państwami
+
+⭐⭐⭐ HIPOTEZA WIODĄCA po sesji 2026-08-22 (silnie wskazana, NIE w pełni
+  potwierdzona per artykuł tych czterech ustaw): mechanizm KONSEKWENCYJNY,
+  nie merytoryczny. Wielokrotnie potwierdzone RZĄD 1+2B (Wolters Kluwer,
+  ATL Law, Studio PwC, EY, PARP, ADN Akademia — 6+ zgodnych źródeł), że
+  ustawa 2026.846 wprowadza DWIE systemowe zmiany zakresu MDR (rozdz.
+  11a Ordynacji podatkowej):
+    a) ograniczenie obowiązku raportowania WYŁĄCZNIE do schematów
+       TRANSGRANICZNYCH (zniesienie MDR dla schematów krajowych)
+    b) WYŁĄCZENIE podatku VAT i akcyzy z zakresu przedmiotowego MDR
+  → JEŻELI hipoteza trafna: SKOK/ubezpieczenia/fundusze/instrumenty są
+    zmieniane WYŁĄCZNIE poprzez odesłania do zmienionych definicji OP
+    (np. definicji "promotora", "korzystającego", "schematu podatkowego"
+    w art. 86a i n. Op, do których te cztery ustawy odsyłają przy
+    określaniu OBOWIĄZKÓW INFORMACYJNYCH podmiotów sektora finansowego
+    wobec organów — analogicznie do PRECEDENSU z 2016 r., gdy nowelizacja
+    ustawy o funduszach inwestycyjnych zmieniła art. 275 §3 Op, przepis
+    o obowiązku informacyjnym SKOK/zakładów ubezpieczeń/funduszy wobec
+    organu egzekucyjnego — TEN SAM krąg czterech typów podmiotów co w
+    obecnej liście F-88, co wzmacnia hipotezę o analogicznym mechanizmie).
+  → NIE mylić z mechanizmem TAJEMNICY ZAWODOWEJ (sekcja 6a, adwokaci/
+    radcowie/doradcy podatkowi/rzecznicy patentowi) — to ODRĘBNY,
+    NIEZWIĄZANY mechanizm MDR, dotyczący innej kategorii podmiotów
+    (zawody prawnicze reprezentujące przed sądem, nie instytucje
+    finansowe).
+
+⛔ OGRANICZENIE NARZĘDZIOWE (utrzymuje się): web_fetch na isap.sejm.gov.pl,
+  api.sejm.gov.pl, dziennikustaw.gov.pl zwraca ROBOTS_DISALLOWED w tym
+  środowisku. Sesja 2026-08-22 wykonała 3 dodatkowe, celowane zapytania
+  web_search łączące numer stopki (D2026000084601) z frazami MDR/promotor/
+  korzystający dla czterech ustaw — BEZ bezpośredniego trafienia na
+  konkretny artykuł. Malejący zwrot z kolejnych zapytań POTWIERDZONY —
+  dalszy postęp wymaga albo (a) connectora deweloperskiego z dostępem do
+  ISAP (F-8/F-10), albo (b) odczytu bezpośrednio z komentarza prawniczego
+  dedykowanego SKOK/ubezpieczeniom (nie ogólnym omówieniom MDR, które
+  koncentrują się na zawodach prawniczych — najpopularniejszy temat
+  medialny tej nowelizacji), albo (c) czekania na publikację branżowych
+  serwisów sektora finansowego (np. KNF, PIU — Polska Izba Ubezpieczeń,
+  Krajowa Rada Spółdzielcza) analizujących wprost tę nowelizację.
+
+**Stan F-88 po sesji 2026-08-22:** hipoteza robocza WZMOCNIONA (z
+"nieprzypisana do artykułu" na "silnie wskazany mechanizm konsekwencyjny,
+analogiczny do precedensu 2016"), ale FORMALNIE NIEZAMKNIĘTA — brak
+bezpośredniego cytatu artykułu w którejkolwiek z czterech ustaw.
+```
+
 ## TECHNIKI MANIPULACJI DOKUMENTACJĄ DLA OBNIŻENIA PODATKÓW — GRANICA
 LEGALNOŚCI (dodano 2026-07-30, na żądanie użytkownika)
 

@@ -62,6 +62,22 @@ RE_POZ = re.compile(
 # mapa Dz.U. trzyma numery w kolumnach tabeli: "| 2026 | 1004 | Ustawa … |"
 RE_WIERSZ_MAPY = re.compile(r"^\|\s*(\d{4})\s*\|\s*(\d{1,5})\s*\|")
 
+# ⭐ FORMA SKRÓCONA BEZ PREFIKSU "Dz.U." — "zm.: 2025.1705", "+2026.176",
+# "(zm. 2025.1863)". RE_POZ jej NIE łapie, bo wymaga prefiksu aktu.
+# Dodane 2026-08-22 (F-106) po przeglądzie 29 trafień: PIĘĆ pozycji było
+# raportowanych jako „brak w ROUTING-MAP", choć numer TAM JEST — tyle że
+# zapisany skrótowo w komentarzu wiersza aktu bazowego (2025.1705, 2025.1366,
+# 2024.80, 2023.1082, 2021.2490). Używane WYŁĄCZNIE do demotowania trafienia
+# z „brak" na „obecny w formie skróconej" — nigdy do zgłaszania nowych braków,
+# bo bez prefiksu wzorzec jest podatny na przypadkowe dopasowania (daty,
+# numery stron). Kierunek zmiany jest zatem wyłącznie w stronę MNIEJ alarmów.
+RE_POZ_LUZNA = re.compile(r"(?<![\d.])((?:19|20)\d{2})\.(\d{1,5})(?!\d)")
+
+# artefakt parsera: "poz. 0" nie istnieje w Dz.U. — powstaje z rozbioru
+# zapisów typu "art. 2025.0" lub uciętych fragmentów tabel
+def artefakt(rok_poz):
+    return rok_poz[1] == "0"
+
 
 def zbierz_mape_dzu(path: Path):
     """Mapa Dz.U. ma format tabelaryczny (rok i pozycja w osobnych kolumnach),
@@ -95,6 +111,9 @@ def main():
                     help="ile pozycji wypisać w każdej kategorii (0 = wszystkie)")
     ap.add_argument("--kierunek", default="wszystkie",
                     choices=["lokalne", "centralna", "mapa", "wszystkie"])
+    ap.add_argument("--bez-filtra", action="store_true",
+                    help="pokaż listę surową, bez odsiewania form skróconych "
+                         "i artefaktów (stan sprzed poprawki F-106)")
     args = ap.parse_args()
 
     root = Path(args.repo_root)
@@ -115,6 +134,10 @@ def main():
         lokalne[d.parent.name] = zbierz(d)
 
     zb_routing = zbierz(routing)
+    zb_routing_luzne = {
+        (m.group(1), m.group(2))
+        for m in RE_POZ_LUZNA.finditer(routing.read_text(encoding="utf-8", errors="replace"))
+    }
     zb_mapa = zbierz_mape_dzu(mapa_dzu)
     zb_lokalne = set().union(*lokalne.values()) if lokalne else set()
 
@@ -143,7 +166,15 @@ def main():
     brakow = 0
 
     if args.kierunek in ("lokalne", "wszystkie"):
-        brak = zb_lokalne - zb_routing
+        brak_surowy = zb_lokalne - zb_routing
+        brak = brak_surowy if args.bez_filtra else {
+            x for x in brak_surowy
+            if x not in zb_routing_luzne and not artefakt(x)}
+        odsiane = len(brak_surowy) - len(brak)
+        if odsiane:
+            print(f"  ℹ️  Odsiano {odsiane} trafień: numer obecny w ROUTING-MAP "
+                  f"w formie skróconej (RRRR.NNN bez prefiksu) lub artefakt "
+                  f'"poz. 0". Pełna lista surowa: --bez-filtra\n')
         brakow += len(brak)
         wypisz("W lokalnej MAPA-AKTOW, BRAK w ROUTING-MAP (REGUŁA 3 HARDGATE)",
                brak, lokalne)

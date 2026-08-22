@@ -222,22 +222,118 @@ pozycji już naprawione — pozostają inne, niżej priorytetowe):
 
 ---
 
+## Kodeks postępowania cywilnego (KPC)
+
+**Stan prawny bazowy:** Dz.U. 2026 poz. 468 t.j.
+**Źródło:** `raport-pokrycia-KPC.md` (13.08.2026 — 106 jednostek redakcyjnych,
+197 unikalnych artykułów przywołanych w systemie, ok. 16% jednostek kodeksu)
+**Data przeniesienia i uzgodnienia ze stanem bieżącym:** 2026-08-22 (F-83)
+**Moduły dedykowane (dr-02):** `mod-KPC-prawomocnosc-granice-apelacji.md`
+(205 l.), `mod-KPC-nieproces-czesc-ogolna.md` (404 l.),
+`mod-KPC-egzekucja-windykacja.md` (383 l.)
+
+> ⛔ **UWAGA METODYCZNA — dlaczego ta sekcja powstała później niż pozostałe.**
+> Raport źródłowy został świadomie NIE przeniesiony 1:1 w sesji 2026-08-22
+> (pierwsza faza F-83), bo część jego luk krytycznych naprawiono już wcześniej
+> we flagach F-65 i F-83, czego plik raportu nie odzwierciedla. Przeniesienie
+> bez uzgodnienia wpisałoby do trwałego rejestru dane fałszywie negatywne.
+> Poniższa tabela to wynik **artykuł po artykule** sprawdzenia 15 luk
+> krytycznych raportu wobec faktycznego stanu plików na 2026-08-22
+> (`grep` na całym `/mnt/skills/user`, z odsianiem kolizji międzykodeksowych
+> — np. art. 162 KK vs KPC, art. 617 KRO vs KPC, art. 833 KC vs KPC).
+
+### Weryfikacja 15 luk krytycznych raportu wobec stanu na 2026-08-22
+
+| # raportu | Przepis | Status wg raportu (13.08) | **Stan faktyczny 22.08** | Gdzie |
+|---|---|---|---|---|
+| 2 | art. 365, 366 — prawomocność, res iudicata | 🔴 luka krytyczna | ✅ **NAPRAWIONE** | `mod-KPC-prawomocnosc-granice-apelacji` |
+| 3 | art. 378, 382–386 — granice apelacji | 🔴 luka krytyczna | ✅ **NAPRAWIONE** | j.w. (ramy dla `appellate-engine-v8`) |
+| — | art. 398²²–398²⁴ — skarga na orzeczenie referendarza („deklaracja bez pokrycia" w raporcie) | 🔴 deklaracja bez pokrycia | ✅ **NAPRAWIONE** — występuje w 5 plikach | `mod-KPC-prawomocnosc-*`, `SPH-inne` |
+| 10 (część) | art. 506–525 — nieproces, przepisy ogólne | 🔴 cała Księga II bez modułu | ✅ **NAPRAWIONE** (art. 506, 518, 519¹, 523) | `mod-KPC-nieproces-czesc-ogolna` |
+| 1 | art. 205¹–205¹² — organizacja postępowania, prekluzja | 🔴 luka krytyczna #1 | 🟡 **CZĘŚCIOWO** — art. 205¹² opisany, ale wyłącznie w kontekście *stosowania w nieprocesie*; brak modułu o organizacji postępowania w procesie (plan rozprawy, posiedzenie przygotowawcze) | `mod-KPC-nieproces-czesc-ogolna` sekcja o prekluzji |
+| 6 | art. 477⁹, 477¹⁴ — odwołanie od decyzji ZUS | 🔴 luka krytyczna | 🟡 **CZĘŚCIOWO** — termin miesięczny obecny w 6 plikach (`shared/terminy`, dr-04), brak systematyki trybu | dr-04, shared |
+| 4 | art. 458¹–458¹³ — sprawy gospodarcze | 🔴 luka krytyczna | 🟡 **WZMIANKI** — art. 458¹ (definicja) w 4 plikach; ⛔ art. 458⁵ (prekluzja gospodarcza) **nie występował w systemie w ogóle** przed poprawką z 22.08 | `mod-KPC-egzekucja-windykacja`, MD3b |
+| 8 | art. 399, 401, 401¹, 403 — wznowienie | 🔴 luka krytyczna | 🟡 **CZĘŚCIOWO** — art. 399 obecny, art. 401/401¹/403 nadal 🔴 | `mod-KPC-prawomocnosc-*` |
+| 5 | art. 829, 833 — rzeczy wyłączone spod egzekucji, kwota wolna | 🔴 luka krytyczna | 🔴 **NADAL LUKA** — art. 829 występuje wyłącznie w tekście tej mapy | — |
+| 7 | art. 350, 351, 352 — sprostowanie, uzupełnienie, wykładnia wyroku | 🔴 luka krytyczna | 🔴 **NADAL LUKA** — art. 351 i 352 zero wystąpień w systemie | — |
+| 11 | art. 1041–1059 — egzekucja świadczeń niepieniężnych | 🔴 luka krytyczna | 🔴 **NADAL LUKA** — zero wystąpień | — |
+| 12 | art. 1081–1088 — egzekucja alimentów | 🔴 luka krytyczna | 🔴 **NADAL LUKA** — zero wystąpień | — |
+| 10 (część) | art. 669–689 — stwierdzenie nabycia spadku, dział spadku | 🔴 luka krytyczna | 🔴 **NADAL LUKA** — art. 669 zero wystąpień; art. 680 tylko przez odesłanie z modułu spadkowego KC | — |
+| 9 | art. 458¹⁴–458¹⁶ — postępowanie z udziałem konsumentów | 🔴 luka krytyczna | 🔴 **NADAL LUKA** | — |
+| 13 | art. 316 §1 — stan rzeczy z chwili zamknięcia rozprawy | 🔴 luka krytyczna | 🟡 **WZMIANKA** — 1 plik (skarga pauliańska) | dr-02 |
+| 14 | art. 162 — zastrzeżenie do protokołu | 🔴 luka krytyczna | ✅ **NAPRAWIONE 2026-08-22** — luka bliźniacza do art. 105 PPSA dr-05, treść zweryfikowana Rząd 1+2B | `mod-KPC-art162-zastrzezenie-protokol` |
+| 15 | art. 617–626¹³ — zniesienie współwłasności, wieczystoksięgowe | 🔴 luka krytyczna | 🔴 **NADAL LUKA** w zakresie KPC — trafienia to art. 617 **KRO** | — |
+
+**Bilans uzgodnienia: 5 luk krytycznych zamkniętych (poz. #14 dodana
+2026-08-22), 5 częściowo, 7 nadal otwartych.** Raport z 13.08 był
+nieaktualny w 4 z 15 pozycji (27%) — czyli w tym samym rzędzie
+wielkości, co przy sześciu mapach korygowanych w pierwszej fazie F-83.
+
+### Stan pokrycia wg ksiąg (po uzgodnieniu)
+
+| Jednostka | Zakres | Status | Uwagi |
+|---|---|---|---|
+| Tytuł wstępny | 1–14 | 🟡 | art. 3, 5, 7, 9 przez bramki walidacyjne; brak art. 1, 2, 6, 13 §2 |
+| Ks. I Tyt. I — Sąd (właściwość, skład, wyłączenie) | 15–54 | 🟢 | `shared/WLASCIWOSC-GATE`, `mod-sklad-sadu-liczba-sedziow`; braki w trybie wyłączenia (50–54) |
+| Ks. I Tyt. II–III — Prokurator, NGO | 55–63 | 🔴 | całe tytuły bez treści |
+| Ks. I — Organizacja postępowania | 205¹–205¹² | 🟡 | patrz tabela wyżej, poz. #1 |
+| Ks. I Dz. III — **Dowody** | 227–315 | 🟢 | ⭐ najmocniejszy fragment całego systemu: `analizator-dowodow-v3` + `MOD-ATAK-NA-DOWOD`/`-SWIADKA`. Art. 233 §1 to najczęściej cytowany przepis w systemie (20 plików) |
+| Ks. I Dz. IV — Orzeczenia | 316–366 | 🟡 | prawomocność 🟢; sprostowanie/uzupełnienie/wykładnia (350–352) 🔴 |
+| Ks. I Dz. V — Środki odwoławcze | 367–424¹² | 🟡 | apelacja 🟢 po F-65; zażalenie przez `ZAZALENIE-ADRESAT-GATE` (F-13) |
+| Ks. I Dz. VI — Wznowienie | 399–416¹ | 🟡 | tylko art. 399 i terminy z 407 |
+| Ks. I — postępowania odrębne (gospodarcze, konsumenckie, pracy) | 458¹–477¹⁶ | 🔴/🟡 | patrz tabela wyżej |
+| Ks. I — nakazowe i upominawcze | 480–505 | 🟢 | pełne szablony w `pisma-proste-v2` |
+| **Ks. II — Nieproces** | 506–1088 | 🟡 | część ogólna 🟢 po F-65; **sprawy spadkowe, rzeczowe i wieczystoksięgowe nadal 🔴** |
+| Cz. III — Egzekucja | 758–1088 | 🟡 | klauzula, skarga na komornika, powództwa przeciwegzekucyjne 🟢; ⛔ ograniczenia egzekucji, świadczenia niepieniężne, alimenty 🔴 |
+| Cz. IV — Jurysdykcja krajowa | 1097–1116 | 🔴 | styk z DR-14 |
+
+### ⭐ Ustalenie uboczne o wadze CRIT — uchylony art. 207 KPC w obiegu
+
+Uzgadnianie raportu ujawniło problem poważniejszy niż same luki: **art. 207
+KPC (uchylony 7.11.2019 wraz z art. 217) był nadal cytowany jako podstawa
+operacyjna w sześciu miejscach systemu**, w tym w pliku kanonicznym terminów.
+Naprawione 2026-08-22 w tej samej sesji — szczegóły i lista plików:
+`AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-22m.
+
+Aktualne podstawy: **art. 205¹ §1** (wezwanie do odpowiedzi na pozew, termin
+sądowy nie krótszy niż 2 tygodnie), **art. 205¹ §2** (zwrot odpowiedzi
+spóźnionej), **art. 205¹²** (prekluzja ogólna), **art. 458⁵** (prekluzja
+gospodarcza).
+
+### Rekomendowana kolejność uzupełniania (zaktualizowana 2026-08-22)
+
+1. ~~art. 365–366 prawomocność~~ ✅ F-65
+2. ~~art. 378, 382–386 granice apelacji~~ ✅ F-65
+3. ~~art. 506–525 nieproces, część ogólna~~ ✅ F-65
+4. **art. 829–839 + 824–826 — ograniczenia egzekucji i kwota wolna** ⭐ najwyższy priorytet: system opisuje egzekucję z wynagrodzenia, ale nie zna granic — asymetria działająca na niekorzyść dłużnika
+5. **art. 205¹–205¹¹ — organizacja postępowania w procesie** (posiedzenie przygotowawcze, plan rozprawy); art. 205¹² już opisany
+6. **art. 458¹–458¹³ — sprawy gospodarcze** (prekluzja 458⁵, umowa dowodowa, ograniczenie dowodu ze świadków 458¹¹)
+7. **art. 669–689 — stwierdzenie nabycia spadku i dział spadku** (dwie najczęstsze sprawy spadkowe, tryb nieprocesowy)
+8. art. 350–352 — sprostowanie, uzupełnienie, wykładnia wyroku
+9. art. 1041–1059 i 1081–1088 — egzekucja świadczeń niepieniężnych i alimentów
+~~10. art. 162 KPC — zastrzeżenie do protokołu~~ ✅ NAPRAWIONE 2026-08-22
+10. art. 617–626¹³ — zniesienie współwłasności i postępowanie wieczystoksięgowe
+11. art. 401, 401¹, 403 — podstawy wznowienia (art. 399 już jest)
+12. art. 458¹⁴–458¹⁶ — postępowanie z udziałem konsumentów
+13. art. 1097–1116 — jurysdykcja krajowa (domknięcie wobec DR-14)
+
+---
+
 ## Akty NIE objęte pełnym rejestrem (raport przestarzały lub niepełny)
 
-**Kodeks postępowania cywilnego (KPC)** ma raport źródłowy (`raport-
-pokrycia-KPC.md`, 354 linie, 106 zbadanych jednostek redakcyjnych,
-197 unikalnych artykułów) — **świadomie NIE przeniesiony w całości do tej
-mapy w tej sesji**, ponieważ w międzyczasie nastąpiły już częściowe
-naprawy (F-65: art. 205¹, prawomocność/apelacja art. 363-386, Księga II
-część ogólna nieprocesu) nieodzwierciedlone w oryginalnym pliku raportu.
-Przeniesienie nieaktualnego materiału 1:1 groziłoby wpisaniem błędnych
-danych do trwałego rejestru. **Do zrobienia w osobnej, dedykowanej
-sesji**: albo świeży audyt KPC, albo staranne, ręczne uzgodnienie starego
-raportu ze stanem aktualnym artykuł po artykule przed przeniesieniem.
+✅ **Kodeks postępowania cywilnego (KPC) — PRZENIESIONY 2026-08-22**, patrz
+sekcja wyżej. Był ostatnim z dziewięciu raportów pokrycia świadomie odlożonym
+w pierwszej fazie F-83; przeniesienie wykonano dopiero po uzgodnieniu
+artykuł po artykule ze stanem faktycznym, zgodnie z zastrzeżeniem zapisanym
+w tym miejscu 2026-08-22 ("albo świeży audyt KPC, albo staranne, ręczne
+uzgodnienie starego raportu ze stanem aktualnym"). Wybrano drugi wariant.
 
-Raport źródłowy KPC pozostaje dostępny w `audyt-systemu-v4/references/
-raporty-pokrycia-2026-08-13/raport-pokrycia-KPC.md` do wglądu — zawiera
-cenne dane (m.in. listę 15 luk krytycznych, w tym art. 829/833 kwota
-wolna od egzekucji, art. 350-352 sprostowanie wyroku, deklarację bez
-pokrycia — "sprzeciw od referendarza" wymieniony w opisie pisma-proste-v2
-bez odpowiadającej treści w żadnym module).
+Raport źródłowy `audyt-systemu-v4/references/raporty-pokrycia-2026-08-13/
+raport-pokrycia-KPC.md` pozostaje na dysku — zgodnie z § 7 `WARN-OTWARTE.md`
+plik raportu usuwa się dopiero po PEŁNYM zamknięciu odpowiadającej flagi (F-65),
+a osiem luk krytycznych pozostaje otwartych.
+
+⚠️ **Pozostałe akty dr-02 bez rejestru pokrycia:** KC (wszystkie księgi), KRO,
+Prawo prywatne międzynarodowe i akty satelickie — audyt źródłowy z 2026-08-13
+objął w tym skillu wyłącznie KSH, PrUp/PrRestr i KPC. Do uzupełnienia nowym
+audytem, jeśli okaże się potrzebny.

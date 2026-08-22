@@ -475,6 +475,43 @@ w trzech kierunkach → flaga F-89.
 
 ---
 
+### 11a. POPRAWKA CZUŁOŚCI 2026-08-22 (F-106) — redukcja fałszywych trafień 29 → 19
+
+Pierwszy pełny przegląd wyniku T11 (29 pozycji, kierunek `lokalne`) ujawnił
+**dwa źródła szumu, oba po stronie testu, nie systemu**:
+
+1. **Forma skrócona numeru bez prefiksu aktu.** `RE_POZ` wymaga prefiksu
+   „Dz.U." przed numerem. Tymczasem ROUTING-MAP zapisuje nowelizacje
+   skrótowo w komentarzu wiersza aktu bazowego — „zm.: 2025.1705",
+   „+2026.176", „(zm. 2025.1863)". Osiem pozycji było raportowanych jako
+   brakujące, choć numer w pliku JEST (2025.1705, 2025.1366, 2024.80,
+   2023.1082, 2021.2490 i dalsze).
+2. **Artefakt „poz. 0"** — numer nieistniejący w Dz.U., produkt rozbioru
+   uciętych zapisów.
+
+**Rozwiązanie:** dodany `RE_POZ_LUZNA` (numer w formie `RRRR.NNN` bez
+prefiksu) zbierany WYŁĄCZNIE dla ROUTING-MAP i używany tylko do
+**demotowania** trafienia z „brak" na „obecny w formie skróconej" —
+nigdy do zgłaszania nowych braków. Uzasadnienie asymetrii: wzorzec bez
+prefiksu jest podatny na przypadkowe dopasowania (daty, numery stron),
+więc dopuszczamy go jedynie tam, gdzie kierunek błędu to MNIEJ alarmów,
+nie więcej. Artefakt „poz. 0" odsiewany funkcją `artefakt()`.
+
+**Przełącznik `--bez-filtra`** przywraca listę surową (stan sprzed
+poprawki) — do kontroli, czy filtr nie ukrywa czegoś istotnego.
+
+⚠️ **Czego poprawka NIE usuwa:** trafień typu „numer nowelizacji
+wymieniony jako »ze zm.« w wierszu aktu bazowego, którego w ROUTING-MAP
+w ogóle nie ma w żadnej formie". To nadal wymaga oceny człowieka — i
+słusznie, bo część takich pozycji to realne braki wiersza.
+
+**Skuteczność poprawki potwierdzona empirycznie:** ten sam przebieg,
+29 → 19 pozycji, przy zachowaniu OBU realnych rozjazdów wykrytych w
+sesji 2026-08-22 (Prawo oświatowe 2026.820, ZTP 2026.300) — filtr nie
+ukrył żadnego prawdziwego błędu.
+
+---
+
 ## 12. T12 — ZGODNOŚĆ METADANYCH WERSJI SKILLA (dodane 2026-08-20z, flaga F-101)
 
 **Skrypt:** `scripts/check_wersje_changelog.py` | **Priorytet:** ⭐ ŚREDNI |

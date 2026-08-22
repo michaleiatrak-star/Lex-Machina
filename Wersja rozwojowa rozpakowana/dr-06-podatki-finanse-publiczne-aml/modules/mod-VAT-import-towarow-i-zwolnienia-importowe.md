@@ -234,8 +234,11 @@
 ⭐ art. 81–82a — delegacje i zwolnienia rozporządzeniowe.
   ⭐⭐ AKT WYKONAWCZY KLUCZOWY: rozporządzenie MF z 20.12.2013
   w sprawie zwolnień od podatku od towarów i usług oraz warunków
-  stosowania tych zwolnień (Dz.U. 2013 poz. 1983 ze zm.) —
-  ⛔ zweryfikuj aktualny tekst jednolity, akt był wielokrotnie zmieniany.
+  stosowania tych zwolnień — ✅ t.j. **Dz.U. 2025 poz. 832**
+  (obwieszczenie MF z 14.06.2025) — NAPRAWIONE 2026-08-22 (F-106),
+  poprzedni numer 2013 poz. 1983 był myłkowy (nie odpowiada temu
+  aktowi w żadnej generacji t.j.; pierwotna publikacja to 2013 poz.
+  1722, kolejne t.j.: 2023.955, 2025.832). Rząd 1: isap.sejm.gov.pl.
 
 ⭐⭐ ROZGRANICZENIE Z INNYMI MODUŁAMI — kto co pokrywa:
   □ zwolnienia dla PODRÓŻNYCH (bagaż osobisty, limity 300/430 EUR,

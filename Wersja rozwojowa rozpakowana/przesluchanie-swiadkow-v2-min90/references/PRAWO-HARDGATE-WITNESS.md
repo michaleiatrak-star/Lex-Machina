@@ -136,7 +136,7 @@ Odesłanie do KPK (art. 39, 41 KPW) — weryfikuj zakres odesłania aktualnym br
 | Zagadnienie | Przykładowe przepisy (orientacyjne — weryfikuj) |
 |---|---|
 | Termin na złożenie wniosku dowodowego | KPC art. 205¹², KPK art. 167 — weryfikuj |
-| Prekluzja dowodowa | KPC art. 205¹², 458¹¹ — weryfikuj |
+| Prekluzja dowodowa | KPC art. 205¹² (ogólna), **art. 458⁵** (gospodarcza) — ⛔ POPRAWIONE 2026-08-22: było 458¹¹, który dotyczy wykazywania czynności DOKUMENTEM, nie prekluzji — weryfikuj |
 | Pismo procesowe zawierające wniosek dowodowy | KPC art. 127, 128 — weryfikuj |
 
 ---

@@ -67,8 +67,11 @@ Zarzuty od nakazu zapłaty (postępowanie nakazowe):
   [ALERT: po upływie nie można kwestionować nakazu co do meritum]
 
 Odpowiedź na pozew:
-  art. 207 § 2 KPC — termin wyznaczony przez sąd (min. 2 tygodnie)
-  [ALERT: przekroczenie = prekluzja twierdzeń i dowodów]
+  **art. 205¹ §1 KPC** — termin sądowy wyznaczony przez przewodniczącego,
+  nie krótszy niż 2 tygodnie (⛔ art. 207 §2 UCHYLONY 7.11.2019, poprawione 2026-08-22)
+  [ALERT: przekroczenie → **art. 205¹ §2 — przewodniczący zarządza ZWROT** odpowiedzi;
+   skutek jak gdyby nie złożono jej wcale, co otwiera drogę do wyroku zaocznego
+   (art. 339 §1 KPC). To DALEJ IDĄCY skutek niż sama prekluzja twierdzeń]
 
 Apelacja:
   art. 369 KPC — 2 tygodnie od doręczenia wyroku z uzasadnieniem

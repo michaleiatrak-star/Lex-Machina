@@ -35,11 +35,16 @@ użyciem w piśmie (HARD GATE), niezależnie od statusu tutaj.
 **Data ostatniej weryfikacji treści:** 2026-08-22 (⛔ NAPRAWIONE — trzecia
 naprawa tego typu w tej sesji; poprzednia wersja znała tylko 2 moduły,
 pominęła 2 nowe dedykowane pliki opracowujące dokładnie priorytety #1 i
-#2 z rekomendowanej kolejności)
-**Moduły:** `mod-OP-ordynacja-podatkowa.md` (554 linie, główny),
+#2 z rekomendowanej kolejności). ⭐ AKTUALIZACJA 2026-08-22 (tura F-83
+priorytet #4): dopisany piąty moduł Op — ulgi w spłacie; przy tej okazji
+wykryto, że raport źródłowy z 13.08 podawał zakres rozdziału 7a jako
+„67a–67e", pomijając art. 67da
+**Moduły:** `mod-OP-ordynacja-podatkowa.md` (837 linii, główny),
 `mod-interpretacje-definicje-podatkowe.md` (powiązany),
-`mod-OP-dzial-IV-rozdzial-11-dowody.md` (211 l., NOWY),
-`mod-OP-kontrola-podatkowa-dzial-VI.md` (157 l., NOWY)
+`mod-OP-dzial-IV-rozdzial-11-dowody.md` (211 l.),
+`mod-OP-kontrola-podatkowa-dzial-VI.md` (157 l.),
+`mod-OP-czynnosci-sprawdzajace-dzial-V.md` (236 l.),
+`mod-OP-ulgi-w-splacie-dzial-III-rozdzial-7a.md` (473 l., NOWY 2026-08-22)
 
 ⭐ Jedyny akt (spośród trzynastu zbadanych w audycie źródłowym) z własną,
 wewnętrzną samooceną pokrycia w mapie centralnej ("4→9/18" jednostek
@@ -62,7 +67,7 @@ działowych) — ten rejestr rozbija tę frakcję na konkretne działy.
 | III, Rozdz. 5 | Zaległość podatkowa | 51–52 | 🔴 | Pojawia się pośrednio przy odpowiedzialności zarządu |
 | III, Rozdz. 6 | **Odsetki za zwłokę i opłata prolongacyjna** | 53–58 | 🟢 | ANEKS modułu — stawki, kalkulator, art. 56a, 56b |
 | III, Rozdz. 7 | Wygaśnięcie zobowiązań podatkowych | 59–66a | 🔴 | — |
-| III, Rozdz. 7a | Ulgi w spłacie (umorzenie, odroczenie, raty) | 67a–67e | 🔴 | Praktycznie istotny temat, zero treści |
+| III, Rozdz. 7a | **Ulgi w spłacie** (umorzenie, odroczenie, raty) | 67a–67e **+ 67da** | 🟢 | `mod-OP-ulgi-w-splacie-dzial-III-rozdzial-7a.md` (473 l., NOWY 2026-08-22) — ⛔ KOREKTA ZAKRESU: rozdział NIE kończy się na 67e; art. 67da (wygaśnięcie decyzji ex lege, przeniesiony z art. 259 od 25.03.2024) pominięty w raporcie źródłowym i w spisach treści portali |
 | III, Rozdz. 8 | **Przedawnienie** | 68–71 | 🟢 | Sekcja 4 — art. 70 (5 lat, zawieszenie §6, przerwanie §4), wyrok TK SK 40/12, rozbudowana 2026-08-08 o nowelizację GAAR |
 | III, Rozdz. 9 | **Nadpłata** | 72–80 | 🟢 | Sekcja 4a, rozbudowana priorytetowo |
 | III, Rozdz. 10 | Korekta deklaracji | 81–81b | 🟢 | Sekcja "Ścieżki odwoławcze" — art. 81, 81b, mechanizm obniżonych odsetek |
@@ -104,7 +109,7 @@ modułami, odnotowana jako celowa).
 1. ~~Dział IV, Rozdz. 11 — dowody~~ ✅ NAPRAWIONE 2026-08-22
 2. ~~Dział VI — kontrola podatkowa~~ ✅ NAPRAWIONE 2026-08-22
 3. ~~Dział V — czynności sprawdzające (art. 272–280)~~ ✅ NAPRAWIONE 2026-08-22
-4. Dział III, Rozdz. 7a — ulgi w spłacie (art. 67a–67e) — klienci w trudnej sytuacji finansowej
+4. ~~Dział III, Rozdz. 7a — ulgi w spłacie (art. 67a–67e **+ 67da**)~~ ✅ NAPRAWIONE 2026-08-22
 5. Dział IIIa, Rozdziały 2, 3, 5 — pełna procedura GAAR
 6. Dział IV, Rozdziały 17–20 — nadzwyczajne tryby wzruszenia decyzji
 7. Dział IIIb — STIR (blokada rachunku bankowego)

@@ -4,7 +4,7 @@
 **Wydzielony:** 2026-06-14 (audyt — moduł nadrzędny >400 linii, podział tematyczny)
 **Źródło weryfikacji:** Ustawa o warunkach dopuszczalności powierzania pracy
 cudzoziemcom — Dz.U. 2025 poz. 621 (w życie 01.06.2025)
-**Data weryfikacji online:** 2026-06-05
+**Data weryfikacji online:** 2026-08-22 (sekcja 0 — dwa rozporządzenia wykonawcze MSZ/MRPiPS dot. Kolumbii, Gruzji, Wenezueli)
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 **⚠️ Przepisy imigracyjne są bardzo często nowelizowane — ZAWSZE weryfikuj aktualne brzmienie.**
 
@@ -17,7 +17,110 @@ Nowa ustawa o pracy cudzoziemców (Dz.U. 2025 poz. 621) — w życie 01.06.2025:
   → Zastąpiła przepisy o zezwoleniach na pracę z ustawy o promocji zatrudnienia
   → Wnioski i oświadczenia: WYŁĄCZNIE ELEKTRONICZNIE przez praca.gov.pl
   → Kary dla pracodawcy: min. 3 000 zł / nielegalnie zatrudnioną osobę, max 50 000 zł łącznie
+
+⭐⭐⭐ NOWE 2026-08-22: KOLUMBIA, GRUZJA, WENEZUELA — koniec ruchu bezwizowego
+  jako podstawy pracy (patrz sekcja 0 niżej, opracowana w pełni tego dnia)
 ```
+
+---
+
+## 0. ⭐⭐⭐ WYŁĄCZENIE RUCHU BEZWIZOWEGO DLA KOLUMBII, GRUZJI I WENEZUELI —
+DWA ODRĘBNE ROZPORZĄDZENIA (dodano 2026-08-22)
+
+✅ **ZWERYFIKOWANE RZĄD 1+2B, wielokrotnie zgodne źródła.** Zmiana opiera się
+na DWÓCH odrębnych rozporządzeniach wykonawczych, wydanych przez dwóch
+różnych ministrów, z różnymi datami wejścia w życie — nie mylić ich ze sobą.
+
+```
+⭐⭐⭐ PODSTAWA USTAWOWA (art. 3 ust. 4-6 ustawy Dz.U. 2025 poz. 621):
+  Art. 3 ust. 5 pkt 6 — cudzoziemiec uprawniony do pobytu W RAMACH RUCHU
+    BEZWIZOWEGO może wykonywać pracę BEZ zezwolenia na pracę/oświadczenia,
+    CHYBA że jest obywatelem państwa z wykazu, o którym mowa w ust. 4.
+  Art. 3 ust. 4 — minister właściwy ds. pracy, NA WNIOSEK ministra ds.
+    wewnętrznych LUB ministra ds. zagranicznych, MOŻE określić w drodze
+    ROZPORZĄDZENIA wykaz państw, których obywatele z zezwoleniem na pracę
+    NIE SĄ uprawnieni do jej wykonywania w ramach ruchu bezwizowego. W
+    rozporządzeniu uwzględnia się zagrożenia bezpieczeństwa i porządku
+    publicznego, w tym wysokie ryzyko wjazdu do strefy Schengen POD
+    POZOREM wykonywania pracy w Polsce.
+
+⭐⭐⭐ ROZPORZĄDZENIE #1 — MRPiPS, PRACA (Dz.U. 2026 poz. 1072):
+  Rozporządzenie Ministra Rodziny, Pracy i Polityki Społecznej z dnia
+  31 lipca 2026 r. w sprawie wykazu państw, których obywatele posiadający
+  zezwolenie na pracę nie są uprawnieni do wykonywania pracy w czasie
+  pobytu na terytorium RP w ramach ruchu bezwizowego.
+  → WYKAZ (art. 1 rozporządzenia — katalog ZAMKNIĘTY, 3 państwa):
+    1) Boliwariańska Republika Wenezueli
+    2) Gruzja
+    3) Republika Kolumbii
+  → WEJŚCIE W ŻYCIE: **22 sierpnia 2026 r.** (ogłoszone 7.08.2026, 14 dni
+    vacatio legis)
+  → SKUTEK PRAKTYCZNY: obywatele tych 3 państw, których podstawą pobytu
+    jest WYŁĄCZNIE ruch bezwizowy, NIE MOGĄ już wykonywać pracy nawet
+    posiadając zezwolenie na pracę — sam ruch bezwizowy przestaje
+    wystarczać jako TYTUŁ POBYTOWY uprawniający do pracy. Wymagana jest
+    ODRĘBNA podstawa pobytowa (wiza, karta pobytu) NIEZALEŻNIE od
+    posiadania zezwolenia na pracę.
+  → ⭐ PRZEPIS PRZEJŚCIOWY: cudzoziemcy, którzy ROZPOCZĘLI legalną pracę
+    PRZED 22.08.2026, objęci są okresem przejściowym (dokładne warunki —
+    patrz treść rozporządzenia, punkt do pogłębienia w kolejnej sesji).
+
+⭐⭐⭐ ROZPORZĄDZENIE #2 — MSZ, WJAZD (Dz.U. 2026 poz. 1085 i poz. 1086):
+  Dwa rozporządzenia Ministra Spraw Zagranicznych z dnia 10 sierpnia
+  2026 r. — ustanowienie wyjątków od zwolnienia z obowiązku wizowego
+  wobec cudzoziemców, o których mowa w art. 6 ust. 1 lit. a (poz. 1085)
+  oraz art. 6 ust. 3 (poz. 1086) rozporządzenia Parlamentu Europejskiego
+  i Rady (UE) 2018/1806 (wykaz państw trzecich objętych/zwolnionych z
+  obowiązku wizowego przy przekraczaniu granic zewnętrznych UE).
+  → SKUTEK: obywatele Gruzji, Republiki Kolumbii oraz Boliwariańskiej
+    Republiki Wenezueli, przy próbie WJAZDU na terytorium RP, muszą
+    LEGITYMOWAĆ SIĘ WIZĄ (odrębnie od kwestii pracy — dotyczy każdego
+    celu podróży objętego wyjątkiem, nie tylko pracy).
+  → ⭐⭐ PRZY KAŻDYM WNIOSKU WIZOWYM: właściwe organy konsularne mają
+    obowiązek SZCZEGÓŁOWO OCENIAĆ przesłanki RYZYKA MIGRACYJNEGO
+    dotyczące KAŻDEGO cudzoziemca z osobna (indywidualna ocena, nie
+    automatyzm).
+  → OGŁOSZENIE: 12 sierpnia 2026 r. — WESZŁO W ŻYCIE Z DNIEM OGŁOSZENIA
+    (12.08.2026), faktycznie stosowane od ok. 15-16.08.2026 wg
+    doniesień prasowych.
+  → ⭐ PRZEPIS PRZEJŚCIOWY: obywatele tych 3 państw, którzy PRZEKROCZYLI
+    granicę Polski PRZED wejściem rozporządzenia w życie, pozostają na
+    DOTYCHCZASOWYCH zasadach (dotychczasowe zwolnienie wizowe).
+
+⭐⭐⭐ DWIE RÓŻNE DATY — ⛔ PUŁAPKA PRAKTYCZNA:
+  Rozporządzenie MSZ (wjazd/wiza) — w mocy od ok. 12-16.08.2026
+  Rozporządzenie MRPiPS (praca) — w mocy od 22.08.2026
+  → W OKRESIE PRZEJŚCIOWYM między obiema datami istniało krótkie okno,
+    w którym obywatel jednego z trzech państw MÓGŁ jeszcze wjechać bez
+    wizy (jeśli przekroczył granicę przed 12-16.08), a mimo to legalnie
+    pracować na dotychczasowych zasadach ruchu bezwizowego — do
+    22.08.2026. Od 22.08.2026 obie bariery działają łącznie: bez wizy
+    NIE MA wjazdu w celu pracy, a nawet przy posiadanej już podstawie
+    pobytowej z ruchu bezwizowego sprzed 22.08 sam fakt tego pobytu
+    NIE uprawnia do podjęcia/kontynuowania pracy bez odrębnego tytułu.
+
+⭐⭐ KONTEKST STATYSTYCZNY (dla oceny skali praktycznej): na koniec
+  czerwca 2026 r. Kolumbia — 23 177 ubezpieczonych w ZUS (4. najliczniejsza
+  narodowość zagraniczna), Gruzja — 22 118 (5. miejsce). Uzasadnienie
+  MSWiA/MSZ: systemowe nadużywanie ruchu bezwizowego do pracy z
+  pominięciem procedur, szara strefa, wyzysk, handel ludźmi.
+
+⭐ KRYTYKA ŚRODOWISKA BIZNESOWEGO (kontekst, nie treść normatywna):
+  Konfederacja Lewiatan i inne organizacje pracodawców wskazują ryzyko
+  pogłębienia niedoboru kadr — w I półroczu 2026 r. wydano ok. 69 tys.
+  nowych zezwoleń na pracę, spadek o ponad 50% r/r. Urzędy ds.
+  cudzoziemców uznawane za niedofinansowane, z wielomiesięcznym czasem
+  oczekiwania na decyzje.
+```
+
+**Weryfikacja (metodologia ZASADA 14):** RZĄD 1 — lexlege.pl/isap.sejm.gov.pl
+(pełny tekst art. 3 ustawy, dziennikustaw.gov.pl PDF D2025000062101.pdf),
+gov.pl/web/kolumbia (placówka dyplomatyczna RP, cytuje wprost treść
+rozporządzenia MRPiPS z numerem Dz.U.), rp.pl (Dziennik Ustaw z 12.08.2026,
+poz. 1084-1088 — potwierdza numery 1085/1086 rozporządzeń MSZ). RZĄD 2B —
+wielokrotnie zgodne relacje prasowe (pulshr.pl, wp.pl, se.pl, biznesinfo.pl,
+kresy.pl, innpoland.pl, stronymonki.pl) — wszystkie niezależnie potwierdzają
+te same daty, numery i mechanizm.
 
 ---
 
@@ -29,6 +132,7 @@ ochronę międzynarodową, ochronę tymczasową (Ukraina).
 
 Ten moduł pokrywa **zezwolenia na pracę cudzoziemców** (ustawa Dz.U. 2025 poz. 621):
 
+0. Wyłączenie ruchu bezwizowego dla Kolumbii, Gruzji i Wenezueli (2026-08-22)
 1. Pełna taksonomia zezwoleń na pracę (typy A/B/C/D/S + oświadczenie PUP)
 2. Matryca: dokument pobytowy → uprawnienie do pracy
 

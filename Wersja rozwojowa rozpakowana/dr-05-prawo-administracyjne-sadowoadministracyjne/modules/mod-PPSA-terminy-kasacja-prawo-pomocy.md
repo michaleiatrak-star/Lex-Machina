@@ -227,6 +227,130 @@ dla klientów o niskich dochodach
 
 ---
 
+## 4. ⭐⭐⭐ KOSZTY, WPIS, OPŁATA KANCELARYJNA (Dział V, Rozdz. 1-2, art.
+199-238 — dodano 2026-08-22, dopełnienie Rozdz. 3 opisanego w sekcji 3)
+
+✅ **ZWERYFIKOWANE Rząd 1** (bip.warszawa.wsa.gov.pl, gliwice.wsa.gov.pl,
+bip.wroclaw.wsa.gov.pl, api.sejm.gov.pl — metryka **Dz.U.2026.0.143 t.j.**
+niezależnie potwierdzona arslege.pl i lexlege.pl, zgodna z metryką z
+sekcji 7 tego samego modułu). Metodologia jak w pozostałych sekcjach:
+minimum Rząd 1 + Rząd 2B zgodne przed oznaczeniem jako zweryfikowane.
+
+```
+⭐⭐⭐ ART. 199 — ZASADA PODSTAWOWA: strony ponoszą koszty postępowania
+  związane ze swym udziałem w sprawie, CHYBA że przepis szczególny
+  stanowi inaczej. ⭐ Odwrotność zasady odpowiedzialności za wynik
+  procesu znanej z art. 98 KPC — w I instancji przed WSA zasada
+  ogólna z art. 98 KPC jest WYŁĄCZONA; zwrot kosztów może nastąpić
+  WYŁĄCZNIE na rzecz skarżącego i tylko przy wyraźnej podstawie
+  ustawowej (art. 200-201). Przed NSA (postępowanie kasacyjne) rygor
+  odwraca się — tam obowiązuje odpowiedzialność strony przegrywającej
+  (art. 203-204), analogicznie do art. 98 KPC.
+
+⭐⭐⭐ ART. 200 — ZWROT KOSZTÓW SKARŻĄCEMU w I instancji: przysługuje
+  OD ORGANU (który wydał zaskarżony akt / podjął zaskarżoną czynność
+  / dopuścił się bezczynności lub przewlekłości) WYŁĄCZNIE w razie
+  UWZGLĘDNIENIA SKARGI, i wyłącznie kosztów NIEZBĘDNYCH do celowego
+  dochodzenia praw.
+
+⭐⭐ ART. 201 — zwrot kosztów przysługuje skarżącemu OD ORGANU także
+  przy UMORZENIU postępowania z przyczyny określonej w art. 54 § 3
+  (autokontrola — organ sam uwzględnia skargę przed przekazaniem jej
+  do sądu). ⭐ Praktyczna konsekwencja: skarżący nie traci prawa do
+  zwrotu kosztów, gdy organ "ubiegnie" wyrok sądu własną korektą.
+
+⭐⭐ ART. 203-204 — postępowanie KASACYJNE, odwrócenie zasady: w razie
+  UWZGLĘDNIENIA skargi kasacyjnej strona wnosząca ją odzyskuje koszty
+  od strony przeciwnej (art. 203); w razie ODDALENIA skargi kasacyjnej
+  strona, która ją wniosła, ZWRACA niezbędne koszty postępowania
+  kasacyjnego stronie przeciwnej (art. 204) — czyli TU obowiązuje
+  odpowiedzialność za wynik, w przeciwieństwie do I instancji.
+
+⭐⭐⭐ ART. 205 — NIEZBĘDNE KOSZTY, dwa różne standardy:
+  §1 — strona działająca OSOBIŚCIE lub przez pełnomocnika NIEBĘDĄCEGO
+    adwokatem/radcą prawnym: koszty sądowe + koszty przejazdów do
+    sądu (strony lub pełnomocnika) + równowartość zarobku utraconego
+    wskutek stawiennictwa (limit wg przepisów odrębnych).
+  §2 (⚠️ numer paragrafu wymaga potwierdzenia przy najbliższej
+    aktualizacji — treść pewna, jednostka redakcyjna nie w pełni
+    zweryfikowana w tej sesji) — strona z ZAWODOWYM pełnomocnikiem
+    (adwokat/radca prawny): koszty ustala się wg przepisów o opłatach
+    za czynności adwokackie/radcowskie, analogicznie do mechanizmu
+    znanego z prawa pomocy (art. 250, sekcja 3 wyżej).
+
+⭐⭐ ART. 208 — ⭐ ZASADA ZAWINIENIA, wyjątek NIEZALEŻNY od wyniku
+  sprawy: sąd MOŻE włożyć na stronę obowiązek zwrotu kosztów (w
+  całości lub części) wywołanych jej NIESUMIENNYM lub OCZYWIŚCIE
+  NIEWŁAŚCIWYM postępowaniem — niezależnie od tego, kto sprawę
+  wygrał (art. 200, 203, 204, 207 nie stosuje się jako ograniczenie).
+  Ocena "niesumienności" należy do UZNANIA sądu (postanowienie NSA
+  FZ 286/04) i dotyczy wyłącznie aktywności STRON, nie ich
+  pełnomocników jako takich.
+
+⭐⭐⭐ ART. 210 — PUŁAPKA PREKLUZYJNA: strona TRACI uprawnienie do
+  żądania zwrotu kosztów, jeżeli NAJPÓŹNIEJ przed zamknięciem
+  rozprawy bezpośrednio poprzedzającej wydanie orzeczenia NIE
+  ZGŁOSI wniosku o przyznanie należnych kosztów. ⛔ Analogicznie do
+  art. 162 KPC/art. 105 PPSA (sekcja 7 tego modułu, dr-02 mod-KPC-
+  art162) — MILCZENIE NA SALI kosztuje zarzut/roszczenie; tu akurat
+  chodzi o roszczenie o zwrot kosztów, nie o zarzut procesowy, ale
+  mechanizm prekluzji identyczny: brak zgłoszenia na czas = trwała
+  utrata uprawnienia.
+
+⭐⭐ WPIS (art. 230-233): DWA RODZAJE — wpis STOSUNKOWY (sprawy o
+  należności PIENIĘŻNE) i wpis STAŁY (wszystkie inne sprawy). Pobiera
+  się od PISM WSZCZYNAJĄCYCH postępowanie w danej instancji: skarga,
+  sprzeciw od decyzji, sprzeciw od postanowienia, skarga kasacyjna,
+  zażalenie, skarga o wznowienie postępowania (katalog ZAMKNIĘTY,
+  art. 230 §2). ⭐ Zwrot CAŁEGO wpisu z urzędu (art. 232 §1): przy
+  piśmie ODRZUCONYM lub COFNIĘTYM do dnia rozpoczęcia rozprawy, oraz
+  przy UWZGLĘDNIONYM zażaleniu na postanowienie o ukaraniu grzywną.
+  Wysokość i szczegółowe zasady poboru — w drodze ROZPORZĄDZENIA Rady
+  Ministrów (art. 233, delegacja ustawowa) — ⚠️ konkretne stawki
+  procentowe/kwotowe POZA zakresem tej sesji, punkt startowy do
+  pogłębienia.
+
+⭐ OPŁATA KANCELARYJNA (art. 234-236, Oddz. 3): pobierana za
+  STWIERDZENIE PRAWOMOCNOŚCI oraz wydanie odpisów/zaświadczeń/
+  wyciągów/innych dokumentów z akt. ⭐⭐ Odrębny reżim dla odpisu
+  ORZECZENIA Z UZASADNIENIEM doręczonego na skutek wniosku zgłoszonego
+  w terminie 7 DNI od ogłoszenia orzeczenia — opłatę pobiera się PRZY
+  ZGŁOSZENIU wniosku, a jeśli nieuiszczona, przewodniczący zarządza
+  jej ściągnięcie po uprzednim wezwaniu strony (art. 234 §2). Czynność
+  tę MOŻE wykonywać referendarz sądowy (art. 234 §4). Nie pobiera się
+  opłaty za odpis orzeczenia z uzasadnieniem doręczany Z URZĘDU
+  (art. 234 §3).
+
+⭐⭐ ZWOLNIENIE Z MOCY USTAWY (art. 239-242, Oddz. 1 Rozdz. 3 — pomost
+  do sekcji 3 "prawo pomocy" wyżej): NIE MAJĄ OBOWIĄZKU uiszczenia
+  kosztów sądowych m.in.: strona skarżąca bezczynność/przewlekłość w
+  sprawach pomocy społecznej, statusu bezrobotnego, chorób
+  zawodowych, stosunków pracy/służbowych, ubezpieczeń społecznych,
+  powszechnego obowiązku obrony (art. 239 §1 pkt 1); prokurator, RPO,
+  RPD (pkt 2); kurator strony (pkt 3); ⭐⭐⭐ strona, KTÓREJ PRZYZNANO
+  PRAWO POMOCY — w zakresie określonym w PRAWOMOCNYM postanowieniu o
+  przyznaniu tego prawa (pkt 4, ⭐ to właśnie ten przepis SPINA
+  Oddział 1 z Oddziałem 2/sekcją 3 tego modułu). Organizacje pożytku
+  publicznego zwolnione częściowo (§2). ⭐ ART. 241 — DOMNIEMANIE
+  ZAKRESU: zwolnienie od kosztów sądowych bez wskazania zakresu w
+  przepisie/postanowieniu = CAŁKOWITE zwolnienie (opłaty + wydatki
+  razem). Art. 242 — wydatki za stronę zwolnioną pokrywa BUDŻET sądu
+  administracyjnego.
+```
+
+**Powiązanie z sekcją 3 (prawo pomocy):** ten fragment domyka Dział V
+w całości — Rozdz. 1 (zwrot kosztów między stronami, art. 199-210) i
+Rozdz. 2 (koszty sądowe: przepisy ogólne, wpis, opłata kancelaryjna,
+wydatki, art. 211-238) opisane tutaj, Rozdz. 3 Oddz. 1 (zwolnienie z
+mocy ustawy, art. 239-242) tutaj, Rozdz. 3 Oddz. 2 (prawo pomocy,
+art. 243-263) w sekcji 3 powyżej. ⚠️ Pozostaje NIEROZSTRZYGNIĘTE (jak
+odnotowano w sekcji 3): rozbieżność numeracji Oddziału 2 między
+raportem źródłowym (243-263) a częścią źródeł wtórnych (239-301,
+łącznie z prawem pomocy) — nie ma to wpływu na treść merytoryczną
+opisaną tutaj, tylko na dokładne granice numeracji.
+
+---
+
 ## 5. ⭐⭐⭐ SPRZECIW OD DECYZJI (Rozdz. 3a, art. 64a-64f) — dodano 2026-08-19 (F-64)
 
 ✅ **ZWERYFIKOWANE, pełna treść, 7+ zgodnych źródeł** (lexlege.pl,
@@ -518,17 +642,19 @@ punkt PPSA, dodano 2026-08-20)
 |---|---|
 | Pismo: wniosek o przywrócenie terminu, skarga kasacyjna, wniosek o prawo pomocy | `pisma-procesowe-v3` |
 | Orzecznictwo NSA dot. terminów, kasacji, prawa pomocy | `orzeczenia-sadowe-v2` |
+| Prekluzja przy braku zgłoszenia na czas (art. 210 PPSA — koszty; art. 105 PPSA — zarzuty procesowe, sekcja 7; art. 162 KPC — zarzuty procesowe, `dr-02/modules/mod-KPC-art162-zastrzezenie-protokol`) | `dr-02` — trzy analogiczne mechanizmy prekluzyjne w dwóch procedurach |
 
 ---
 
 ## ⚠️ POZOSTAJE DO POGŁĘBIENIA (jawnie oznaczone, poza zakresem tej naprawy)
 - PPSA NADAL nie ma pełnego, systematycznego pokrycia całej struktury
   (11 działów). ✅ Sprzeciw od decyzji (art. 64a-64e) ZAMKNIĘTY
-  2026-08-19 (sekcja 5 wyżej). Pozostałe rekomendowane priorytety wg
-  raportu zewnętrznego: posiedzenia sądowe (Rozdz. 7, art. 90-114),
-  wznowienie postępowania sądowoadministracyjnego (Dział VII, art.
-  270-285 — sekcja 6 wyżej, wciąż otwarte), pełne opracowanie orzeczeń
-  sądowych poza już opisanym wycinkiem (Rozdz. 10, art. 132-144).
+  2026-08-19 (sekcja 5 wyżej). ✅ Koszty/wpis/opłata kancelaryjna (art.
+  199-242) ZAMKNIĘTE 2026-08-22 (sekcja 4 wyżej). Pozostałe
+  rekomendowane priorytety wg raportu zewnętrznego: pełne opracowanie
+  orzeczeń sądowych poza już opisanym wycinkiem (Rozdz. 10, art.
+  132-144 — dokończenie tematu, art. 145/147/148/152 już opisane w
+  innym module wg mapy pokrycia).
 - Dokładne wyłączenia z art. 173 §1 (odesłania do art. 58 §1 pkt 2-4,
   161 §1, 220 §3) — nie zbadane szczegółowo.
 - Status art. 263 (możliwe uchylenie) — do potwierdzenia w ISAP.
@@ -536,3 +662,11 @@ punkt PPSA, dodano 2026-08-20)
   wg jednego źródła, 239-301 wg innego) — art. 245-259 są SPÓJNIE
   potwierdzone w obu ujęciach, rozbieżność dotyczy tylko GRANIC
   całego oddziału, nie treści kluczowych przepisów.
+- **Nowe (sekcja 4, 2026-08-22):** dokładna jednostka redakcyjna art.
+  205 §2 (koszty strony z zawodowym pełnomocnikiem) wymaga
+  potwierdzenia przy najbliższej aktualizacji — treść merytoryczna
+  pewna (Rząd 1 wielokrotnie potwierdzony), numer paragrafu przyjęty
+  przez analogię do struktury art. 205 §1, nie zweryfikowany wprost
+  osobnym zapytaniem. Dokładne stawki wpisu stosunkowego/stałego
+  (rozporządzenie wykonawcze do art. 233) — poza zakresem tej sesji,
+  wymaga odrębnego modułu lub sekcji o rozporządzeniach wykonawczych.

@@ -1,7 +1,7 @@
 # mod-prawa-ucznia
 
 **Status:** moduł klasy kancelaryjnej — uzupełnienie mod-ustawa-oswiata-szkolnictwo-wyzsze.md
-**Źródło weryfikacji:** Prawo oświatowe (Dz.U. 2025 poz. 1043 t.j.) + Konstytucja RP art. 53
+**Źródło weryfikacji:** Prawo oświatowe (**Dz.U. 2026 poz. 820 t.j.** — obwieszczenie Marszałka Sejmu z 12.06.2026, publ. 22.06.2026; ✅ VER 2026-08-22 RZĄD 1: api.sejm.gov.pl, eli.gov.pl. ⬆ ZASTĄPIŁ Dz.U. 2025 poz. 1043, do 22.06.2026 podstawa właściwa) + Konstytucja RP art. 53
 **Data weryfikacji online:** 2026-07-27
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
