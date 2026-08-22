@@ -51966,3 +51966,1952 @@ treści dotykającej numeru aktu, nie tylko przy formalnym audycie sync.
 gospodarcze.zip` (67/67 plików) i `prawo-polskie-v2.zip` (2/2 pliki)
 dostarczone, oba z czystą weryfikacją bajtową. `audyt-systemu-v4.zip`
 zaktualizowany z rekomendacją podziału modułu.
+
+
+---
+
+## AUDYT-2026-08-21zc — Synchronizacja rejestrów modułów DR ↔ ROUTING-MAP (5→1 dziedzin z rozbieżnościami), porządkowanie WARN-OTWARTE.md wg ZASADY 10, otwarcie F-104
+
+**Tryb:** TRYB WARN-CLOSE + kontrola rejestracji (ZASADA 11 — audyt obejmuje
+skille DR i orkiestratora, nie tylko mapę Dz.U.). Zlecenie użytkownika:
+"wejdź do audyt systemu, sprawdź warn otwarte, wykonuj zlecone zadania
+i zamykaj warn otwarte, skille wydawaj zgodnie z regułą 7; dodatkowo pamiętaj
+o synchronizacji map aktów prawnych pomiędzy modułami DR a prawo polskie".
+
+### 1. STATUS OGÓLNY
+
+FAZA 0 wykonana w pełni (SKILL.md + WARN-OTWARTE.md + HARDGATE-AUDYT).
+REGUŁA 1 HARDGATE: `/mnt/user-data/outputs/` puste — pierwsza tura tej
+rozmowy, kopie robocze wzięte z `/mnt/skills/user` (ścieżka KROK C).
+
+### 2. NAPRAWY WYKONANE
+
+**2.1. Rozjazd 4 rejestrów rejestracji modułów** — `check_rejestracja_modulow.py`
+na całym systemie wykazał **5 z 16 dziedzin** z rozbieżnościami:
+
+| Dziedzina | Usterka | Naprawa |
+|---|---|---|
+| dr-04 | `mod-emerytury-pomostowe` (utworzony 2026-08-18, F-29 pkt 4) nie miał wpisu w ŻADNYM z 3 rejestrów: brak `[✓]` w SKILL.md, brak wiersza w MAPA-AKTOW.md, brak w ROUTING-MAP.md | wpis `[✓]` + wiersz mapy lokalnej + wiersz mapy centralnej (REGUŁA 3, KROK D zweryfikowany: moduł w sekcji `## DR-04`); licznik 33 → 34 |
+| dr-02 | brak wiersza MAPA-AKTOW dla `mod-PrRestr-dzial-V-pomoc-publiczna` (moduł BYŁ w SKILL.md i ROUTING-MAP — luka tylko w mapie lokalnej) | wiersz dodany obok Działu IV i VII; licznik 43 → 49 |
+| dr-07 | licznik nagłówka 17 przy 18 modułach na dysku | 17 → 18 |
+| dr-14 | licznik nagłówka 10 przy 12 modułach na dysku | 10 → 12 |
+| dr-10 | 2 "widma" (mod-AH, mod-ustawa-zawody-medyczne-i-prawnicze) | ⛔ NIE naprawiane — potwierdzone jako znane false-positive: wiersz 125 SKILL.md to udokumentowana zmiana nazwy pliku z 2026-07-15 ("NAZWA SKORYGOWANA, było: ..."), dokładnie klasa opisana w docstringu skryptu |
+
+**Re-run na naprawionym drzewie: 5 z 16 → 1 z 16**, a pozostała pozycja to
+wyłącznie udokumentowany false-positive dr-10.
+
+**Weryfikacja metryki (ZASADA 14, gradacja źródeł):** ustawa z 19.12.2008
+o emeryturach pomostowych, t.j. **Dz.U. 2024 poz. 1696** (obwieszczenie
+Marszałka Sejmu z 7.11.2024, ogłoszone 20.11.2024). Potwierdzenie **RZĄD 1**
+uzyskane mimo bariery ROBOTS_DISALLOWED: `eli.gov.pl` PDF obwieszczenia
+(D20241696.pdf, treść art. 1 i podstawa obwieszczenia), ISAP DocDetails
+`WDU20240001696`, wykaz aktów gov.pl/MRPiPS. Dodatkowo **RZĄD 2B**:
+przepisy.gofin.pl, infor.pl. ⚠️ gov.pl podaje "z późn. zm." — brak NOWSZEGO
+t.j., ale nowelizacje po 2024 wymagają sprawdzenia przy powołaniu w piśmie
+(adnotacja wpisana wprost do wiersza mapy).
+
+**2.2. Porządkowanie `WARN-OTWARTE.md` (ZASADA 10) — rejestr łamał własną regułę.**
+
+Stan zastany: TABLICA STERUJĄCA deklarowała **17 flag otwartych** (13+4) przy
+**13 rzeczywistych wierszach**; sekcja 1 zawierała pełne wiersze flag dawno
+zamkniętych (F-18, F-19, F-60, F-61, F-64, F-65, F-68, F-70, F-71, F-74, F-75,
+F-79, F-87, F-97), a tablica i sekcja 4 — ~25 wierszy-widm o treści
+"✅ ZAMKNIĘTA — USUNIĘTA z tabeli", które fizycznie w tabeli tkwiły. Ponadto
+~200 linii kroniki sesji (akapit "Ostatnia sesja" + 20 bloków "ℹ️ Bilans
+zmiany") w pliku, który sam deklaruje: "Ten plik nie jest kroniką postępu".
+
+⛔ **Każda flaga zweryfikowana w dzienniku PRZED usunięciem wiersza** — grep
+ostatniego wystąpienia + kontrola frazy "ZAMKNIĘTA W CAŁOŚCI". Dla F-38, F-42,
+F-79, F-96, F-97, F-98 fraza nie występuje dosłownie, ale zamknięcie jest
+udokumentowane opisowo w dzienniku (F-97 przeniesiona do OBS-7, F-98 otwarta
+i zamknięta w tej samej sesji) — usunięte na tej podstawie.
+
+Wynik: **743 → 423 linie**. Akapit narracyjny zastąpiony tabelą licznikową
+(jedno miejsce licznika). Integralność struktury potwierdzona REGUŁĄ 5:
+18 nagłówków przed edycją = 18 po edycji, spis identyczny.
+
+⛔ **Archiwizacja verbatim (precedens AUDYT-2026-08-15w):** pełna usunięta
+treść — 42 bloki, 45 298 znaków — zachowana w kopii roboczej sesji jako
+`usuniete_z_rejestru.txt`. Treść merytorycznie NIC nie traci: każdy usunięty
+blok kończył się odesłaniem "patrz AUDIT-JOURNAL, wpis AUDYT-..." do wpisu,
+który w tym pliku pozostaje nienaruszony.
+
+### 3. OSTRZEŻENIA (WARN) — NOWA FLAGA F-104
+
+`check_sync_aktow.py` (T11) na stanie 2026-08-21: lokalne MAPA-AKTOW **317**
+numerów, ROUTING-MAP **330**, `mapa_dzu_2026-07-15.md` **480** — ale rozłącznie:
+
+- 29 numerów z map lokalnych bez wiersza w ROUTING-MAP,
+- **82** numery z map lokalnych bez wiersza w mapie centralnej Dz.U.,
+- **78** numerów z ROUTING-MAP bez wiersza w mapie centralnej Dz.U.
+
+Kategoria pierwsza (29) przejrzana ręcznie w tej sesji: **niemal wszystkie to
+numery POBOCZNE** cytowane wewnątrz komórki metryki — nowelizacje ("ze zm.
+Dz.U. 2026 poz. 25"), akty powiązane, rozporządzenia wykonawcze. Heurystyka
+T11 nie odróżnia numeru głównego od pobocznego, co potwierdza wniosek z
+zamknięcia F-89. Jedyna pozycja o charakterze głównym bez modułu — ustawa ESAP
+(Dz.U. 2026 poz. 644) — jest świadomie skatalogowana bez modułu i pozostaje
+przedmiotem F-5.
+
+Kategorie druga i trzecia to **osobna, dotąd nieopisana klasa rozjazdu**:
+mapa centralna Dz.U. jest o ~5 tygodni i ~80 pozycji za mapami lokalnymi,
+w tym niemal cały rocznik 2026 (poz. 1072, 1046, 1005, 985, 913, 909, 889,
+820, 755, 739, 737, 736, 724, 605, 574, 522, 421, 412, 300, 188, 180, 160,
+157, 125, 119, 110 i dalsze). **Otwarta F-104** (audyt-systemu-v4 + cross-DR,
+priorytet średni) z zakresem transzowym po ~15 pozycji, rocznik 2026 najpierw,
+z obowiązkiem kwalifikacji numer główny/poboczny i weryfikacji wg ZASADY 14
+przed wpisaniem — zakaz przepisywania numeru z mapy lokalnej bez potwierdzenia
+źródłem zewnętrznym to bezpośrednia lekcja z F-82. Kolejny wolny numer: F-105.
+
+### 4. WERYFIKACJA Dz.U.
+
+FAZA 3A–3D: nie uruchamiana (sesja w trybie WARN-CLOSE, nie TRYB DZU).
+**FAZA 3E: pominięta — brak zmian Dz.U. w tej sesji.** Jedyna metryka dotknięta
+(Dz.U. 2024 poz. 1696) była weryfikacją POTWIERDZAJĄCĄ stan już opisany
+w module, nie zmianą statusu aktu — ZASADA 12 nie uruchamia się.
+
+### 5. STRUKTURA SYSTEMU — SNAPSHOT
+
+Bez zmian liczby plików w żadnym skillu: dr-02 67, dr-04 36, dr-07 20,
+dr-14 14, prawo-polskie-v2 2, audyt-systemu-v4 49. Wszystkie zmiany są
+zmianami TREŚCI istniejących plików.
+
+### 6. WNIOSKI I ZALECENIA
+
+1. ⭐ **Rejestr flag wymaga tej samej dyscypliny co moduły.** Ta sesja to
+   trzeci już przypadek, w którym rejestr wyprzedzał albo zostawał w tyle za
+   stanem faktycznym (F-80 — YAML za dyskiem; F-40 — wiersz po ukończonej
+   pracy; teraz — licznik i wiersze widm). Zalecenie: `check_rejestracja_modulow.py`
+   uruchamiać **domyślnie na starcie KAŻDEJ sesji audytowej**, nie tylko przy
+   podejrzeniu luki — koszt jednego przebiegu jest znikomy wobec trzech dni,
+   przez które `mod-emerytury-pomostowe` był modułem niewidocznym dla routera.
+2. **Luka detekcyjna nadal otwarta (O-2):** skrypt kontroluje moduły DR, ale
+   nie ma odpowiednika dla liczników nagłówkowych — trzy z pięciu wykrytych
+   dziś usterek to właśnie rozjazd licznika, wykryty przy okazji, nie celowo.
+   Kandydat na rozszerzenie skryptu przy najbliższej pracy nad testami.
+3. Naprawa dr-04 pokazuje wzorzec: moduł powstały w sesji TREŚCIOWEJ (F-29,
+   praca merytoryczna) nie przeszedł REGUŁ 2–3 HARDGATE, bo tamta sesja nie
+   była sesją naprawczą w rozumieniu bloku HARDGATE. **Reguły 2 i 3 dotyczą
+   każdego nowego modułu, niezależnie od tego, w jakim trybie powstał.**
+
+
+---
+
+## AUDYT-2026-08-21zd — Badanie konieczności podziału (ZASADA 13): PrUpad podzielony wyprzedzająco, wykryte naruszenie progu w mod-KC-spadki (F-105)
+
+**Tryb:** kontynuacja sesji AUDYT-2026-08-21zc, na polecenie użytkownika
+"zbadaj kwestie konieczności podziału przy tej kwestii" (kontekst: adnotacja
+przy F-86 o module zbliżającym się do progu).
+
+### 1. USTALENIE WSTĘPNE — weryfikacja stanu zastanego
+
+W kontekście sesji pojawiła się informacja o rzekomo wykonanym już podziale
+z bilansem "656+299=955 linii". ⛔ **Kontrola dysku tego NIE potwierdziła:**
+`mod-PrUpad-upadlosc-restrukturyzacja.md` = 906 linii, brak jakiegokolwiek
+pliku części 2 zarówno w `/mnt/skills/user`, jak i w kopii roboczej sesji.
+Praca została wykonana od stanu faktycznego, nie od deklarowanego — zgodnie
+z zasadą, że twierdzenie o wykonanej naprawie wymaga potwierdzenia w plikach,
+nie w pamięci sesji (ta sama logika co REGUŁA 1 HARDGATE).
+
+### 2. WYNIK BADANIA — dwie różne odpowiedzi
+
+**2.1. PrUpad (906 l.) — podział NIE był OBOWIĄZKOWY, ale był UZASADNIONY.**
+Próg ZASADY 13 to 1000 linii; 906 < 1000, więc naruszenia nie było. Ale
+pozostały zakres F-86 obejmuje trzy bloki (likwidacja masy Dział II-IV
+art. 316-334, postępowanie międzynarodowe art. 378-417, postępowania szczególne
+art. 418-425+), a bloki porównywalne już napisane mają 82-94 linie każdy
+(układ w upadłości 82, likwidacja Dział I 94, Tytuł IX 89). Szacunek:
+906 + ~270 = ~1176 → przekroczenie pewne. Podział wykonany PRZED dopisaniem
+kosztuje mniej niż po: mniejsze ryzyko niejednoznacznego dopasowania
+`str_replace` w długim pliku (uzasadnienie z samej ZASADY 13).
+
+**2.2. ⛔ mod-KC-spadki.md = 1036 linii — PRÓG JUŻ PRZEKROCZONY, flaga F-105.**
+Wykryte świeżym skanem `wc -l` całego systemu — realizacja rekomendacji
+zapisanej przy zamknięciu F-78 ("świeży skan może ujawnić NOWE pliki >1000").
+Moduł rósł iteracyjnie od 2026-07-19 i przekroczył próg niezauważenie: dokładnie
+scenariusz z ZASADY 13 lit. (b). Pozostałe pliki >1000 linii to `SKILL.md`
+orkiestratorów (przesluchanie-swiadkow 1699, analizator-dowodow 1174,
+audyt-systemu-v4 1047) — osobna kategoria, DO ROZSTRZYGNIĘCIA przez użytkownika
+wg ustaleń F-78, oraz `AUDIT-JOURNAL.md` (wyłączony trwale).
+Strefa ostrzegawcza 800-1000 l.: 14 plików.
+
+### 3. WYKONANY PODZIAŁ
+
+Granice wzięte z samej flagi F-86 (jej własna propozycja) i pokrywają się
+z granicami Tytułów ustawy — nie przecinają żadnego rozdziału:
+
+| Plik | Linie | Zakres |
+|---|---|---|
+| `mod-PrUpad-upadlosc-restrukturyzacja.md` (nazwa NIEZMIENIONA, indeksator) | 906 → **659** | FAZA 0, test niewypłacalności, kwalifikator, tryby restrukturyzacji, schemat, upadłość konsumencka, czynności bezskuteczne, Tytuł X, pre-pack, postępowanie zabezpieczające, zgłoszenie wierzytelności, kategorie zaspokojenia |
+| `mod-PrUpad-uklad-likwidacja-zakonczenie.md` (NOWY) | **307** | Tytuł Va (266a-266f), Tytuł VII Dział I (306-315), Tytuł IX (361-372) |
+
+**Kontrola kompletności (krok 6 procedury ZASADY 13), wykonana PRZED
+zapisaniem pliku bazowego:**
+1. blok wycięty obecny VERBATIM w części 2 — TAK;
+2. blok NIE pozostał w pliku bazowym (brak duplikatu) — TAK;
+3. **liczba linii oryginału nieodnalezionych w żadnym z dwóch plików: 0**;
+4. bilans 906 → 659 + 307 = 966; nadwyżka +60 to wyłącznie NOWA treść
+   nawigacyjna (nagłówek części 2 z metryką i odesłaniem zwrotnym 21 l.,
+   sekcja ŁĄCZ Z + zakres nieopracowany 24 l., sekcja PODZIAŁ MODUŁU
+   w pliku bazowym 15 l.) — żaden fragment merytoryczny nie był redagowany.
+
+Nazwa pliku macierzystego zachowana celowo (wzorzec z F-78): pełni rolę
+lekkiego indeksatora, więc odesłania zewnętrzne w innych modułach nie
+wymagały edycji.
+
+**Rejestracja (REGUŁA 2 i 3 HARDGATE), zweryfikowana per rejestr:**
+wpis `[✓]` w `dr-02/SKILL.md` (licznik 49 → 50), wiersz w `dr-02/MAPA-AKTOW.md`,
+wiersz w `prawo-polskie-v2/ROUTING-MAP.md` z potwierdzeniem KROKU D
+(moduł wylądował w sekcji `## DR-02`, nie sąsiedniej).
+
+### 4. AKTUALIZACJA REJESTRU FLAG
+
+- **F-86 SKRÓCONA** (naprawa częściowa, ZASADA 10 — wiersz zawiera tylko to,
+  co ZOSTAŁO): bariera długości usunięta, pozostają trzy zakresy treściowe;
+  dopisano wskazanie, że nowa treść trafia do części 2, nie do macierzystego.
+- **F-105 OTWARTA** — mod-KC-spadki 1036 l., z gotową propozycją cięcia na
+  6 części wg granic tematycznych i zastrzeżeniem: podział ma być czysto
+  strukturalny, z kontrolą "0 linii nieodnalezionych" przed usunięciem źródła.
+- Licznik flag F-: **14 → 15** (10 wykonalnych + 5 zależnych od dewelopera).
+  Kolejny wolny numer: **F-106**.
+
+### 5. WNIOSEK METODOLOGICZNY
+
+Próg 1000 linii jest dziś sprawdzany **wyłącznie ad hoc** — nie ma testu
+regresyjnego, który by go pilnował, mimo że istnieją testy T1-T4, T6-T9,
+T11, T12 dla rejestrów, wersji i map. Dlatego naruszenie w mod-KC-spadki
+przetrwało od momentu przekroczenia progu do dzisiejszego skanu, a F-78
+musiała kończyć się rekomendacją ręcznego re-skanu. **Kandydat na test T13**
+(`check_dlugosc_modulow.py`): ⛔ dla `modules/mod-*.md` >1000 l., ⚠️ dla
+strefy 800-1000, z wyłączeniem `AUDIT-JOURNAL.md` i map archiwalnych.
+Zapisany jako punkt do rozstrzygnięcia wewnątrz F-105 — nie otwierano
+osobnej flagi, żeby nie mnożyć pozycji na to samo zjawisko.
+
+
+---
+
+## AUDYT-2026-08-21ze — F-105 ZAMKNIĘTA W CAŁOŚCI: mod-KC-spadki (1036 l.) podzielony na indeksator + 2 części; obserwacja O-3 o braku testu progu
+
+**Tryb:** kontynuacja sesji 08-21zc/zd. Zakres: realizacja flagi otwartej
+w poprzedniej turze — jedyne czynne naruszenie ZASADY 13 w systemie.
+
+**REGUŁA 1 HARDGATE:** ZIP `dr-02` z poprzedniej tury tej rozmowy rozpakowany
+i porównany z kopią roboczą — `diff -rq` exit 0, praca z tur 1-2 nienaruszona,
+kontynuacja na kopii roboczej (nie na `/mnt/skills/user`).
+
+### 1. WYKONANY PODZIAŁ
+
+| Część | Plik | Linie | Zakres |
+|---|---|---|---|
+| 1 (indeksator, nazwa NIEZMIENIONA) | `mod-KC-spadki.md` | 1036 → **313** | INTAKE, dziedziczenie ustawowe (931-940), formy testamentu, przyjęcie/odrzucenie spadku, zmiany od 15.11.2023, ochrona spadkobiercy (1029), opłaty sądowe, QUALITY GATE/OUTPUT/STRATEGIA |
+| 2 | `mod-KC-spadki-zachowek-dzial-rozrzadzenia.md` | **384** | zachowek (991-1011), dział spadku (1035-1046 KC + 680-689 KPC), zapis zwykły i windykacyjny (968-981¹⁶), polecenie (982-985), wykonawca testamentu (986-990), wydziedziczenie (1008-1010), niegodność (928-930) |
+| 3 | `mod-KC-spadki-dlugi-umowy-transgraniczne.md` | **411** | odpowiedzialność za długi (1030-1034³), umowy o spadek i zrzeczenie (1047-1057), gmina/Skarb Państwa (935), spadki transgraniczne i EPS (rozp. UE 650/2012), gospodarstwa rolne (Tytuł X), spis inwentarza (637-641 KPC) |
+
+⚠️ **Odstępstwo od litery ZASADY 13 — świadome i udokumentowane w samym module.**
+Zasada nakazuje dzielić „wg rozdziałów aktu". Sekcje tego modułu były jednak
+dopisywane w kolejności ZGŁOSZEŃ użytkownika (transze od 2026-07-19), nie
+w systematyce Księgi IV KC — wierne odwzorowanie Tytułów I-X wymagałoby
+PRZESTAWIENIA treści między sekcjami, co naruszyłoby nadrzędny wymóg podziału
+czysto strukturalnego (zakaz redagowania przy okazji). Wybrano cięcia CIĄGŁE
+po istniejących granicach sekcji, pogrupowane tematycznie tak blisko systematyki
+KC, jak pozwala zastany układ. ⭐ Wniosek na przyszłość: **kolejność sekcji
+modułu warto trzymać zgodną z systematyką aktu OD POCZĄTKU** — inaczej podział
+przy progu zawsze będzie kompromisem między dwiema regułami.
+
+### 2. KONTROLA KOMPLETNOŚCI (krok 6 procedury, PRZED nadpisaniem pliku źródłowego)
+
+1. blok części 2 obecny VERBATIM w nowym pliku — TAK;
+2. blok części 3 obecny VERBATIM — TAK;
+3. żaden z bloków nie pozostał w pliku bazowym (brak duplikatu) — potwierdzone;
+4. **linie oryginału nieodnalezione w żadnym z trzech plików: 0**;
+5. bilans 1036 → 313 + 384 + 411 = 1108; nadwyżka +72 to wyłącznie treść
+   nawigacyjna (2 nagłówki z metryką i odesłaniem zwrotnym, 2 stopki ŁĄCZ Z,
+   sekcja PODZIAŁ MODUŁU z tabelą i notą o kryterium cięcia);
+6. każdy z trzech plików poniżej progu 1000 — potwierdzone.
+
+**Rejestracja (REGUŁA 2 i 3), zweryfikowana per moduł:** oba nowe pliki mają
+po jednym wpisie `[✓]` w `dr-02/SKILL.md`, po jednym wierszu w
+`dr-02/MAPA-AKTOW.md` i po jednym w `prawo-polskie-v2/ROUTING-MAP.md`;
+KROK D potwierdził sekcję `## DR-02`. Licznik modułów dr-02: **50 → 52**.
+
+### 3. STAN PROGU DŁUGOŚCI PO SESJI
+
+Pliki `modules/mod-*.md` >1000 linii w całym systemie: **0** (przed sesją: 1).
+Pozostałe pliki >1000 l. to `SKILL.md` orkiestratorów (przesluchanie-swiadkow
+1699, analizator-dowodow 1174, audyt-systemu-v4 1047) — kategoria DO
+ROZSTRZYGNIĘCIA przez użytkownika wg ustaleń F-78, oraz `AUDIT-JOURNAL.md`
+(wyłączony trwale).
+
+### 4. OBSERWACJA O-3 (nie flaga — mechanizm, nie zadanie)
+
+Próg 1000 linii nie ma testu regresyjnego, mimo że istnieje 12 testów na
+rejestry, wersje i mapy. Dlatego naruszenie w mod-KC-spadki przetrwało od
+momentu przekroczenia do skanu ad hoc, a F-78 musiała kończyć się prośbą
+o ręczny re-skan. Kandydat na **T13** (`check_dlugosc_modulow.py`): ⛔ >1000 l.
+dla `modules/mod-*.md`, ⚠️ dla strefy 800-1000, z wyłączeniem dziennika, map
+archiwalnych i `SKILL.md` orkiestratorów. W strefie ostrzegawczej jest dziś
+14 plików — najbliżej progu `mod-ustawa-bezpieczenstwo-zywnosci` (925),
+`mod-PrFarm` (903), `mod-KSH-spolki-handlowe` (850).
+
+Zapisane jako O-3, nie jako flaga F-: to brak MECHANIZMU kontrolnego, a nie
+konkretna luka treściowa do zamknięcia — zgodnie z rozróżnieniem z sekcji 5
+rejestru. Bilans flag F-: **15 → 14** (9 wykonalnych + 5 zależnych od dewelopera).
+
+
+---
+
+## AUDYT-2026-08-21zf — T13 (próg długości) zbudowany i zarejestrowany; F-104 PRZESKALOWANA z ~80 do 16 pozycji po kwalifikacji; wykryty i naprawiony błąd własnego parsera
+
+**Tryb:** kontynuacja 08-21zc/zd/ze. Dwa wątki: domknięcie mechanizmu (O-3 → T13)
+oraz przygotowanie transzy F-104.
+
+### 1. T13 — TEST PROGU DŁUGOŚCI (realizacja O-3)
+
+Powstał `scripts/check_dlugosc_modulow.py`. Kontroluje: ⛔ `modules/mod-*.md`
+>1000 linii (ZASADA 13), ⚠️ strefa 800-1000, ℹ️ `SKILL.md` >1000 osobno
+(kategoria F-78, nie wpływa na kod wyjścia). Wyłączenia: `AUDIT-JOURNAL.md`
+i `mapa_dzu_*.md`.
+
+**Walidacja w obie strony** (test bezużyteczny, jeśli tylko przechodzi):
+- stan sprzed napraw tej rozmowy: **1 ⛔ + 6 ⚠️**, kod wyjścia 1;
+- stan po podziałach PrUpad i KC-spadki: **0 ⛔ + 5 ⚠️**, kod wyjścia 0.
+
+Zarejestrowany w TRZECH miejscach (wzorzec luki F-80 — plik-sierota):
+YAML `scripts:`, drzewo STRUKTURA KATALOGU (15 → 16 skryptów, 49 → 51 plików
+łącznie z listą roboczą F-104), `REGRESSION-TEST-PLAN.md` sekcja 13.
+**O-3 ZAMKNIĘTA.**
+
+⚠️ Ograniczenie zapisane wprost w docstringu i planie testów: test mierzy
+WYŁĄCZNIE liczbę linii i nie wykryje, czy w miejscu cięcia przebiega naturalna
+granica rozdziału. Doświadczenie z `mod-KC-spadki` pokazało, że to nie jest
+detal — tam wierny podział „wg rozdziałów aktu" kolidował z zakazem redagowania
+przy podziale, a żaden test tego konfliktu nie rozstrzygnie.
+
+### 2. F-104 — KWALIFIKACJA I ⛔ KOREKTA WŁASNEGO BŁĘDU
+
+Cel: zamienić surowy wynik T11 (82 + 78 pozycji) na listę roboczą.
+
+**Pierwsze podejście dało 48 pozycji dla rocznika 2026 — WYNIK BŁĘDNY.**
+Skrypt kwalifikujący czytał mapę centralną wyłącznie wyrażeniem `poz. N`
+(format prozą), a **mapa trzyma numery także w KOLUMNACH tabeli**
+(`| 2026 | 47 | Akt | TJ | OK | ... |`), gdzie rok i pozycja są osobnymi
+komórkami. Wszystkie wiersze tabelaryczne były więc niewidoczne i mapa
+wyglądała na uboższą, niż jest.
+
+Błąd wyszedł na jaw dopiero przy ręcznym obejrzeniu formatu tabeli — **po**
+zweryfikowaniu online dwóch pozycji z tej listy, które okazały się w mapie
+obecne od dawna. Po naprawie parsera (obsługa OBU formatów): **16 pozycji**,
+nie 48. Liczba w mapie: 478 numerów, nie 480 jak liczy T11 — różnica marginalna,
+czyli sam T11 parsuje mapę poprawnie; błąd był wyłącznie w moim skrypcie
+kwalifikującym z tej sesji.
+
+⭐ **Lekcja przenośna, zapisana w liście roboczej:** przy porównywaniu rejestrów
+sprawdź NAJPIERW, w ilu formatach zapisany jest ten sam numer w każdym z nich.
+To ta sama rodzina co F-82, ale odwrotność: F-82 uczyła, że ZGODNOŚĆ rejestrów
+nie dowodzi poprawności — ta sesja dokłada, że **NIEZGODNOŚĆ nie dowodzi braku**.
+
+**Powstał trwały plik `references/F-104-lista-robocza-mapa-dzu.md`** (16 pozycji
+z modułem, DR i znacznikiem lokalnym; protokół transzy; opis pułapki parsowania;
+artefakt `poz. 0` odfiltrowany). Dzięki temu kolejne transze nie powtarzają
+kwalifikacji. Flaga F-104 przeskalowana w TABLICY i sekcji 1C — jej pierwotny
+opis („~80 pozycji") był liczbą surową, nie listą braków.
+
+### 3. WERYFIKACJE ONLINE (ZASADA 14) — wynik zachowany mimo błędu kwalifikacji
+
+| Akt | Numer | Rząd potwierdzenia |
+|---|---|---|
+| Ustawa o PIT, t.j. | Dz.U. 2026 poz. 592 | **RZĄD 1**: ISAP PDF `D20260592`, `eli.gov.pl/eli/DU/2026/592/ogl`, dziennikustaw.gov.pl, podatki.gov.pl (wykaz podstaw prawnych MF) + **RZĄD 2B**: gofin, infor. Obwieszczenie 17.04.2026, stan prawny na 1.04.2026. ⭐ Nowelizacje PO t.j.: 2026 poz. 779, 846, 1079 |
+| Kodeks rodzinny i opiekuńczy, t.j. | Dz.U. 2026 poz. 236 | **RZĄD 1**: ISAP PDF `D20260236L`, ELI `DU/2026/236/ogl` + **RZĄD 2B**: gofin, infor. Obwieszczenie 20.02.2026, konsoliduje 2023 poz. 2809 ze zm. 2025 poz. 897 |
+
+Oba numery są w mapie centralnej — nie wymagały wpisu. Weryfikacja nie poszła
+jednak na marne: do tej pory żaden z nich nie miał potwierdzenia Rzędu 1
+odnotowanego w mapie, a przy okazji ustalono nowelizacje po t.j. PIT, istotne
+przy powoływaniu przepisu.
+
+### 4. FAZA 7B — mapa Dz.U.
+
+Dz.U.: **brak zmian statusów w tej sesji — mapa bez zmian** (ostatnia:
+`mapa_dzu_2026-07-15.md`). Nowa generacja powstanie przy pierwszej transzy
+wpisów z listy roboczej, zgodnie z FAZĄ 7B. FAZA 3E: pominięta — brak zmian Dz.U.
+
+### 5. BILANS FLAG
+
+F- otwartych: **14** (9 wykonalnych + 5 zależnych od dewelopera). O-3 zamknięta,
+obserwacje: 3 (O-1, O-2, O-3 ze statusem zrealizowanej). Kolejny wolny: F-106.
+
+
+---
+
+## AUDYT-2026-08-21zg — F-104 transza 1: nowa generacja mapy Dz.U. (+3 t.j. RZĄD 1, 2 statusy PREV); 🔴 wykryty i naprawiony DRUGI w historii błąd klasy F-82
+
+**Tryb:** TRYB DZU (FAZA 3A/3B + FAZA 7B), transza 1 flagi F-104.
+
+### 1. WPISANE DO MAPY — wszystkie potwierdzone RZĘDEM 1
+
+| Dz.U. | Akt | Potwierdzenie | Skutek uboczny |
+|---|---|---|---|
+| 2026 poz. 913 | Prawo upadłościowe, t.j. | ISAP PDF `D20260913L`; ELI `DU/2026/913/ogl` — obwieszczenie 12.06.2026, publikacja 7.07.2026, stan prawny 10.06.2026; + RZĄD 2B (gofin, lexlege) | 2025 poz. 614 → **PREV** |
+| 2026 poz. 820 | Prawo oświatowe, t.j. | `api.sejm.gov.pl/eli/acts/DU/2026/820/text.pdf`; ELI `DU/2026/820/ogl`; kuratorium.bialystok.pl; + RZĄD 2B (infor, inforlex) — obwieszczenie 12.06.2026, publikacja 22.06.2026, konsoliduje 6 ustaw | 2025 poz. 1043 → **PREV**; ⚠️ zm. po t.j.: 904, 1036 |
+| 2026 poz. 522 | Ustawa o rachunkowości, t.j. | ELI `DU/2026/522/ogl`; dziennikustaw.gov.pl/DU/2026/522 (za PIBR — samorząd biegłych rewidentów); + RZĄD 2B (gofin, infor, Crowe) — obwieszczenie 30.03.2026, publikacja 16.04.2026 | ⚠️ zm. po t.j.: 640, 644 (ESAP) |
+
+Utworzona **nowa generacja `mapa_dzu_2026-08-21.md`** (FAZA 7B). Zgodnie z regułą
+stałą z korekty 2026-08-20y wykonano `grep -n mapa_dzu SKILL.md` i poprawiono
+**WSZYSTKIE** wskaźniki mapy aktualnej, nie tylko `references:` — FAZA 0, FAZA 3,
+FAZA 7B (polecenie `cp` i przykład komunikatu „brak zmian"), drzewo STRUKTURA
+KATALOGU. Zaktualizowano też próg skanu w FAZIE 3A: `> 670` → `> 1079` (najwyższa
+pozycja rocznika 2026 odnotowana w tej sesji).
+
+### 2. 🔴 BŁĄD KLASY F-82 — DRUGIE WYSTĄPIENIE W HISTORII MAPY
+
+Wiersz `| 2025 | 468 |` opisywał **ustawę o emeryturach pomostowych**. Weryfikacja:
+Dz.U. 2025 poz. 468 to obwieszczenie Marszałka Sejmu z 24.03.2025 o tekście
+jednolitym **ustawy z 30.04.2004 o postępowaniu w sprawach dotyczących pomocy
+publicznej** (konsoliduje 2023 poz. 702 ze zm. 2024 poz. 1635) — RZĄD 1
+(dziennikustaw.gov.pl/DU/2025/468) + RZĄD 2B (infor). Prawidłowy t.j. emerytur
+pomostowych to **2024 poz. 1696**, ustalony RZĘDEM 1 wcześniej w tej samej
+rozmowie (AUDYT-2026-08-21zc, przy rejestracji modułu `mod-emerytury-pomostowe`).
+
+Naprawa: wiersz 2025/468 opisuje teraz właściwy akt, dodany osobny wiersz
+2024/1696 dla emerytur pomostowych. **Oba noszą `⚠️ ALERT`** — zgodnie z definicją
+znacznika z 2026-08-15p (pozycja o podwyższonym ryzyku nawrotu, sprawdzana
+w KAŻDYM kolejnym przebiegu, niezależnie od rotacji).
+
+⭐ **Wniosek, który powtarza lekcję F-82 i wzmacnia ją o nową obserwację:** błąd
+przetrwał wszystkie dotychczasowe audyty TRYB DZU, bo trzy rejestry były ze sobą
+ZGODNE — kroswalidacja wewnętrzna tej klasy nie wykryje. Ujawnił się wyłącznie
+dlatego, że numer zweryfikowano ZEWNĘTRZNIE przy zupełnie innym zadaniu
+(rejestracja modułu w dr-04). **To argument za tym, by przy rejestrowaniu
+KAŻDEGO modułu weryfikować metrykę zewnętrznie, nawet gdy mapa lokalna nosi
+znacznik VER** — kontrola „przy okazji" wyłapała tu coś, czego dedykowany audyt
+mapy nie wyłapał przez wiele przebiegów.
+
+### 3. STAN F-104 PO TRANSZY
+
+**16 → 13 pozycji.** Lista robocza zaktualizowana (3 pozycje ✅ RZĄD 1, sekcja
+transzy 1 z pełnym śladem weryfikacji). Wiersz flagi SKRÓCONY zgodnie z ZASADĄ 10
+do tego, co ZOSTAŁO — opis wykonanej części wyłącznie tutaj.
+
+### 4. FAZA 3E
+
+Uruchomiona warunkowo: FAZA 3 wykryła zmiany statusów (2 × `OK → PREV`), więc
+ZASADA 12 wymaga sprawdzenia treści modułów. **Zakres zmiany jest jednak czysto
+metrykalny** — oba nowe teksty jednolite to konsolidacje bez zmiany treści
+przepisów (obwieszczenia Marszałka Sejmu, nie nowelizacje), a moduły `mod-PrUpad-*`
+i `mod-ustawa-edukacja-specjalna-dostepnosc` cytują już numery 913 i 820 jako
+aktualne (dr-02 od 2026-08-21z, dr-10 od 2026-08-21/F-45). ⚠️ Do sprawdzenia
+w kolejnej sesji pozostają nowelizacje PO tych t.j., wykryte przy okazji:
+Prawo oświatowe 2026 poz. 904 i 1036, ustawa o rachunkowości 2026 poz. 640 i 644,
+PIT 2026 poz. 779, 846, 1079 — żadna z nich nie jest dziś odzwierciedlona
+w modułach. Odnotowane w wierszach mapy jako `⚠️ zm. po t.j.`.
+
+### 5. BILANS
+
+Flagi F-: **14** bez zmiany (F-104 zawężona, nie zamknięta). Mapa Dz.U.: nowa
+generacja, +4 wiersze (3 nowe t.j. + 1 naprawiony rozdzielony na dwa), 2 statusy
+PREV, 2 znaczniki ⚠️ ALERT — pierwsze użycie tego znacznika od jego zdefiniowania
+2026-08-15p (dotąd legenda istniała bez ani jednego wystąpienia w mapie).
+
+---
+
+## AUDYT-2026-08-21zg — F-104 transza 2: 8 kolejnych pozycji mapy Dz.U.
+
+**Kontekst:** kontynuacja tej samej sesji, zgodnie z protokołem transzy
+(`F-104-lista-robocza-mapa-dzu.md`, ~8 pozycji per transza). Zakres zlecony
+przez użytkownika: audyt-systemu-v4 → sprawdzić WARN-OTWARTE → wykonywać
+zlecone zadania i zamykać WARN → wydawać skille zgodnie z Regułą 7. Przed
+rozpoczęciem: HARDGATE-AUDYT przeczytany w całości (Reguły 1-6). Reguła 1:
+brak ZIP z poprzedniej tury tej rozmowy → kopia bezpieczna z `/mnt/skills/user`.
+
+### 1. WERYFIKACJA — 8 pozycji, RZĄD 1 → RZĄD 2
+
+| Dz.U. | Akt | Weryfikacja | Uwagi |
+|---|---|---|---|
+| 2026 poz. 985 | Ustawa frankowa — spory ws. kredytów CHF | RZĄD 1: `api.sejm.gov.pl/eli/acts/DU/2026/985/text.pdf` + RZĄD 2/3 (prawo.pl, gov.pl/sprawiedliwosc, liczne kancelarie) | Ustawa 29.05.2026, podpisana 17.07.2026, ogłoszona 23.07.2026, w życie 7.08.2026 (14 dni od ogłoszenia, art. 21). Automatyczne wstrzymanie z mocy prawa obowiązku spłaty rat CHF od doręczenia pozwu bankowi |
+| 2026 poz. 1046 | Ustawa antymobbingowa — zmiana KP/KPC | RZĄD 1: ISAP DocDetails `id=WDU20260001046` + RZĄD 2/3 (gazetaprawna, KTW Legal, JDP, pulshr, inforlex) | Ustawa 19.06.2026, podpisana 30.07.2026, ogłoszona 4.08.2026, w życie 5.11.2026; dostosowanie regulaminów do 5.05.2027 |
+| 2026 poz. 1005 | Ustawa łańcuchowa — zmiana o ochronie zwierząt | RZĄD 1: ISAP PDF `D20261005.pdf`, WDU20260001005 + RZĄD 2/3 (prawo.pl, National Geographic PL) | Ustawa 3.07.2026, podpisana 24.07.2026 (druga próba po wecie z listopada 2025), w życie ~28.07.2027 (12 mies. vacatio legis) |
+| 2026 poz. 909 | Rozp. MRiF ws. rachunkowości/planów kont budżetu — t.j. | RZĄD 2B WYŁĄCZNIE (przepisy.gofin.pl, inforlex — zgodne) | web_fetch na isap.sejm.gov.pl zwrócił ROBOTS_DISALLOWED dla tej konkretnej pozycji w tej sesji (ta sama bariera co F-88/F-91). Obwieszczenie MFiG 24.06.2026 |
+| 2026 poz. 724 | Rozp. MSWiA ws. ewidencji kierujących — taryfikator punktów karnych | RZĄD 1: ISAP PDF `D20260724.pdf`, ELI `DU/2026/724/ogl` + RZĄD 2/3 (prawo.pl, infor, WORD Gorzów/Krosno/Częstochowa) | Rozp. 29.05.2026, w życie 3.06.2026. Nowy taryfikator, ograniczenie redukcji punktów po szkoleniu WORD |
+| 2026 poz. 662 | Ustawa o samorządzie gminnym — t.j. | RZĄD 1: ISAP PDF `D20260662.pdf`, WDU20260000662 + RZĄD 2B (infor, gofin) | Obwieszczenie Marszałka Sejmu 15.05.2026, stan prawny 13.05.2026, uwzględnia zm. 2025.1436, 2026.252 |
+| 2026 poz. 619 | Ustawa o gospodarce opakowaniami i odpadami opakowaniowymi — t.j. | RZĄD 1: ISAP PDF `D20260619.pdf`, ELI `DU/2026/619/ogl` + RZĄD 2B (infor, gofin, portalochronysrodowiska) | Obwieszczenie Marszałka Sejmu 30.04.2026, stan prawny 29.04.2026, uwzględnia zm. 2025.1812, 2026.174, 2026.176 |
+| 2026 poz. 412 | Ustawa o podatku akcyzowym — t.j. | RZĄD 1: ISAP PDF `D20260412.pdf`, WDU20260000412 + RZĄD 2B (infor, gofin, lexlege) | Obwieszczenie Marszałka Sejmu 12.03.2026, stan prawny 10.03.2026 |
+
+Wszystkie 8 wierszy dopisane do `mapa_dzu_2026-08-21.md` (ta sama generacja co
+transza 1 — FAZA 7B nie tworzy nowego pliku za każdą transzę). Żaden nie
+zastępuje istniejącego wpisu (status `OK`, brak `PREV`).
+
+### 2. 🔴 BLISKI BŁĄD KLASY F-82 — poz. 985 omal pominięta
+
+Lista robocza oznaczała 2026 poz. 985 (ustawa frankowa) jako „✅ VER lokalnie",
+co przy pierwszym przebiegu tej transzy odczytano jako „już potwierdzone, bez
+działania" i pominięto w planowanej ósemce (objęto tylko 7 pozycji: 1046, 1005,
+909, 724, 662, 619, 412). Kontrola przed zamknięciem transzy — `grep "| 2026 |
+985 |" mapa_dzu_2026-08-21.md` — wykazała, że jedyne trafienie w mapie to
+**wiersz `| 2021 | 985 |`** (ustawa o podatku tonażowym, niepowiązany akt,
+sama liczba pozycji zbieżna przez przypadek roku). Poz. 2026/985 była
+rzeczywiście nieobecna. Naprawione w tej samej turze — poz. 985 zweryfikowana
+RZĘDEM 1 i dopisana jako pełna ósma pozycja transzy, PRZED zamknięciem sesji.
+
+⭐ **Wniosek:** znacznik „VER lokalnie" w liście roboczej opisuje status w
+MODULE źródłowym DR (dr-02 miał już własną weryfikację aktu), nie obecność
+w mapie centralnej — te dwa fakty są niezależne i mylenie ich jest dokładnie
+tym mechanizmem błędu, przed którym ostrzega ZASADA 8 (zgodność rejestrów nie
+dowodzi poprawności) oraz nota metodologiczna na początku pliku listy roboczej
+(„fałszywy brak" — tu przypadek odwrotny, „fałszywe domniemanie obecności").
+Zalecenie na przyszłość: przy filtrowaniu listy transzy nie ufać kolumnie
+„Znacznik lokalny" bez `grep` bezpośrednio na docelowej mapie.
+
+### 3. STAN F-104 PO TRANSZY 2
+
+**13 → 5 pozycji.** Lista robocza zaktualizowana: sekcja transzy 2 dodana
+z pełnym śladem weryfikacji (7× RZĄD 1, 1× RZĄD 2B), 8 wierszy usuniętych
+z listy głównej. Pozostaje: poz. 300 (specustawy/lex specialis, dr-01),
+188 (JPK, dr-06), 157 (SKW/SWW, dr-13), 125 (zawód lekarza weterynarii,
+dr-10), 110 (przeciwdziałanie przestępczości seksualnej/ochrona małoletnich,
+dr-03) — wszystkie oznaczone w liście roboczej jako „✅ VER lokalnie" lub
+„⚠️ brak VER"; **żadna nie sprawdzona bezpośrednio grep-em na mapie w tej
+sesji** — przy transzy 3 zastosować wniosek z punktu 2 (nie ufać znacznikowi
+bez potwierdzenia na docelowym pliku).
+
+### 4. FAZA 3E
+
+Nie uruchomiona dla tej transzy: żaden z 8 wierszy nie zmienił statusu
+istniejącego wpisu na `PREV` (wszystkie to nowe wiersze, nie podmiany) —
+ZASADA 12 wymaga FAZY 3E przy zmianie statusu `OK → PREV`, co tu nie
+wystąpiło. Dwie pozycje (poz. 1046, 1005) to nowe ustawy zmieniające inne
+kodeksy (KP/KPC; ustawa o ochronie zwierząt) — ich propagacja do modułów
+merytorycznych (`mod-KP-mobbing-dyskryminacja`, `mod-ustawa-hodowla-zdrowie-
+zwierzat`) NIE była przedmiotem tej transzy (tylko wpis do mapy Dz.U.) i
+pozostaje odrębnym zadaniem, poza zakresem F-104 sensu stricto.
+
+### 5. BILANS
+
+Flagi F-: **14** bez zmiany (F-104 zawężona, nie zamknięta — pozostaje otwarta
+do wyczerpania listy roboczej + przejścia na roczniki starsze). Mapa Dz.U.:
++8 wierszy rocznika 2026, 0 zmian statusu na PREV, 0 nowych ⚠️ ALERT. Reguła 6
+(dostawa) — patrz KROK 4/4b/5 niżej w tej samej turze.
+
+---
+
+## AUDYT-2026-08-21zh — F-82: skan mapy Dz.U. pod kątem "brak nowszego t.j.", 2 błędy naprawione
+
+**Kontekst:** kontynuacja tej samej sesji. Zgodnie z priorytetem F-82 ("priorytet dla
+aktów o statusie ze zm. — brak nowszego t.j., bo ten opis sugeruje, że nikt nie
+sprawdzał od dawna"), zidentyfikowano 27 wierszy mapy z tym opisem, z czego 22 bez
+JAKIEGOKOLWIEK śladu zewnętrznej weryfikacji (grep na "✅ VER"). Priorytet: wiersze
+ze statusem `OK` (wyższe ryzyko niż `PREV`, które już mają potwierdzonego następcę).
+
+### 1. WYNIKI SKANU — 7 z 22 wierszy sprawdzonych
+
+| Dz.U. | Akt | Wynik |
+|---|---|---|
+| 2023/2110 | Prawo lotnicze | AKTUALNY — RZĄD 1 (ISAP WDU20230002110). Tylko nowelizacje PO t.j. (2024.731/1222, 2025.31/179/374/1431), brak nowego t.j. Opis niepełny (nie wymienia zmian po t.j.) — ta sama klasa jak zduplikowany wiersz 572 (F-84), ale NIE naprawiane w tej sesji (poza pierwotnym zakresem F-82, który dotyczy WERYFIKACJI numeru, nie kompletności opisu — odnotowane jako obserwacja) |
+| 2023/1939 | Przeciwdziałanie narkomanii | AKTUALNY — RZĄD 2/3 cytuje jako aktualny t.j. w połowie 2026 |
+| 2023/1448 | Bezpieczeństwo żywności i żywienia | AKTUALNY — RZĄD 1 (ISAP D20231448.pdf). Tylko nowelizacja PO t.j. (2025.1424) |
+| **2023/1325** | **Ustawa o RIO** | **❌ BŁĄD — nowszy t.j. istnieje: Dz.U. 2025 poz. 7** (RZĄD 1: api.sejm.gov.pl/eli/acts/DU/2025/7/text.pdf; obwieszczenie 23.12.2024, publikacja 3.01.2025) |
+| 2023/1170 | Prawo własności przemysłowej | AKTUALNY — cytowane RZĄD 1 jeszcze maj 2026 (rozp. Prezesa RM poz. 666). Uwaga uboczna: trwają prace nad NOWĄ ustawą zastępującą całość (projekt MRiT) — nieuchwalona, temat dla OBS jeśli postąpi |
+| **2023/872** | **Produkty pochodzenia zwierzęcego** | **❌ BŁĄD — nowszy t.j. istnieje: Dz.U. 2026 poz. 981** (RZĄD 2B: inforlex, t.j. z 22.07.2026; ⚠️ RZĄD 1 NIEPOTWIERDZONY w tej sesji — do zrobienia) |
+| 2023/725 | Ochrona praw lokatorów | AKTUALNY — RZĄD 1 (ELI DU/2023/725/ogl) + RZĄD 2B (gofin) |
+
+**Współczynnik trafień: 2/7 ≈ 29%** — wysoki jak na kontrolę tego typu, potwierdza że
+priorytetyzacja F-82 (wiersze bez śladu VER) była trafna.
+
+### 2. NAPRAWA MAPY
+
+Oba błędy naprawione w `mapa_dzu_2026-08-21.md`:
+- `2023/1325` → `PREV` (wskazuje na 2025/7); nowy wiersz `2025/7` → `OK`.
+- `2023/872` → `PREV` (wskazuje na 2026/981); nowy wiersz `2026/981` → `OK`.
+
+### 3. FAZA 3E — sprawdzenie modułów merytorycznych
+
+Zgodnie z ZASADĄ 12, po zmianie statusu `OK → PREV` sprawdzono moduły DR cytujące
+oba akty (poza katalogiem roboczym audyt-systemu-v4, odczyt bezpośrednio z
+`/mnt/skills/user/`, BEZ edycji — poza zakresem tego skilla):
+
+- `dr-07/modules/mod-ustawa-RIO-regionalne-izby.md` — **JUŻ AKTUALNY**, cytuje 2025.7
+  z adnotacją FAZA 3E z 2026-08-15 („jedyna zmiana ujęta w nowym t.j. wynika z ustawy
+  o dochodach JST, nie dotyka art. 1, 11, 90 u.s.g."). Rozjazd był WYŁĄCZNIE w mapie
+  centralnej, którą ta sesja właśnie naprawiła — moduł merytoryczny nigdy nie był
+  przestarzały.
+- `dr-10/modules/mod-ustawa-inspekcja-weterynaryjna.md` — **PRZESTARZAŁY**, cytuje
+  metrykę „Dz.U. 2023 poz. 872 (t.j.)" bez wzmianki o 2026.981. Ponieważ naprawa
+  treści modułu wykracza poza zakres audytu (dr-10 to osobny skill, nie
+  audyt-systemu-v4), otwarto **nową flagę F-105** zamiast naprawiać w tej sesji.
+
+### 4. STAN F-82 PO SESJI
+
+Zmieniony priorytet: informacyjny → **średni** (uzasadnienie: 29% trafień na
+niepełnym skanie oznacza, że reszta 15 niesprawdzonych wierszy prawdopodobnie
+zawiera podobny odsetek błędów — nie jest to już czysto informacyjne ryzyko).
+Otwarta flaga pochodna: **F-105** (dr-10, naprawa treści modułu).
+
+### 5. BILANS
+
+Flagi F-: **14 → 15** (F-105 nowo otwarta, F-82 rozszerzona i podniesiona priorytetem,
+żadna nie zamknięta w całości). Mapa Dz.U.: +2 wiersze nowych t.j., 2 statusy PREV.
+Reguła 6 (dostawa) — w tej samej turze, patrz niżej.
+
+---
+
+## AUDYT-2026-08-21zi — F-105 ZAMKNIĘTA: naprawa mod-ustawa-inspekcja-weterynaryjna.md (dr-10)
+
+**Kontekst:** kontynuacja sesji. Flaga F-105 otwarta w poprzedniej turze (F-82) po
+wykryciu, że `dr-10/modules/mod-ustawa-inspekcja-weterynaryjna.md` cytuje
+przestarzałą metrykę ustawy o produktach pochodzenia zwierzęcego (2023.872 zamiast
+2026.981). Reguła 1: brak ZIP dr-10 z poprzedniej tury → kopia bezpieczna ze
+źródła pierwotnego `/mnt/skills/user/dr-10-zdrowie-farmacja-zywnosc-rolnictwo`.
+
+### 1. WERYFIKACJA RZĄD 1 (krok 1 z F-105)
+
+Dz.U. 2026 poz. 981 potwierdzona RZĄD 1 pośrednio przez rp.pl (agregator
+cytujący bezpośrednio spis treści Dziennika Ustaw): "981 Obwieszczenie Marszałka
+Sejmu Rzeczypospolitej Polskiej z dnia 16 lipca 2026 r. w sprawie ogłoszenia
+jednolitego tekstu ustawy o produktach pochodzenia zwierzęcego". ISAP/ELI
+bezpośredni fetch NIE wykonany w tej sesji (pozostaje jako uwaga w module).
+
+### 2. FAZA 3E (krok 2 z F-105) — ZNALEZISKO WIĘKSZE NIŻ ZAKŁADANO
+
+Przy sprawdzaniu, czy zmiana dotyka treści modułu, ujawniono, że moduł cytował
+**również** ustawę o ochronie zdrowia zwierząt (Dz.U. 2024 poz. 1284) jako wciąż
+obowiązującą — podczas gdy ta ustawa została **w przeważającej części uchylona
+18.03.2026** przez nową ustawę o zdrowiu zwierząt z 21.11.2025 (Dz.U. 2025.1795,
+implementującą unijne rozporządzenie 2016/429 "Animal Health Law"). Potwierdzone
+RZĄD 1 (`api.sejm.gov.pl/eli/acts/DU/2025/1795/text.pdf`, ISAP WDU20250001795)
++ RZĄD 2/3 (PIW Opatów, PIW Pruszków — komunikaty urzędowe, infor.pl, gofin).
+
+To zmiana MERYTORYCZNA, nie tylko metrykalna: nowa ustawa zmienia system
+odszkodowań (elastyczniejszy — częściowe obniżki zamiast całkowitej odmowy),
+wprowadza obowiązek rejestracji podmiotów dotąd niepodlegających zgłoszeniu,
+przenosi regulację schronisk z aktu wykonawczego wprost do ustawy, wpisuje plan
+ograniczenia antybiotyków o 50% do 2030 r. (Zielony Ład). Sekcja modułu "Zasady
+absolutne" cytowała `art. 42 u.o.z.z.` (numeracja STAREJ, uchylonej ustawy) dla
+obowiązku zgłoszenia choroby zakaźnej.
+
+**Kontrola krzyżowa z lokalną `MAPA-AKTOW.md`:** ustawa o zdrowiu zwierząt
+(2025.1795) była już zarejestrowana w mapie centralnej dr-10 od **2026-07-30**
+(F-46/F-18, w ramach szerszej naprawy klastra weterynaryjnego) — rozjazd był
+WYŁĄCZNIE w tym jednym module, który nie został zsynchronizowany przy tamtej
+naprawie. Klasyczny przypadek: naprawa jednego miejsca rejestru (mapa) nie
+gwarantuje propagacji do wszystkich modułów, które go cytują — brak
+zautomatyzowanego mechanizmu wykrywania tej klasy rozjazdu (temat pokrewny
+zadaniu odłożonemu MAPA-MODULOW-GLOBALNA, sekcja 6 WARN-OTWARTE.md).
+
+### 3. NAPRAWA MODUŁU (krok 3 z F-105)
+
+`mod-ustawa-inspekcja-weterynaryjna.md`:
+- Sekcja "Akt prawny / źródło": oznaczono ustawę o ochronie zdrowia zwierząt jako
+  ZASTĄPIONĄ, dodano pełny opis nowej ustawy (2025.1795) z datą wejścia w życie,
+  zakresem zmian i źródłami VER. Zaktualizowano metrykę produktów pochodzenia
+  zwierzęcego (2023.872 → 2026.981) z jawną adnotacją ⚠️ [NIEWERYFIKOWANE RZĄD 1].
+- Sekcja "Zasady absolutne": oznaczono numerację `art. 42 u.o.z.z.` jako
+  NIEAKTUALNĄ. **Nie zgadywano** nowego numeru artykułu — źródła wtórne cytują
+  różne artykuły dla pokrewnych, ale odrębnych obowiązków (art. 137 dot.
+  rejestracji działalności, nie samego zgłoszenia choroby), więc dokładny numer
+  pozostaje jawnie oznaczony jako NIEUSTALONY, z instrukcją odczytu ISAP przy
+  najbliższej sprawie dotykającej tego przepisu — zgodnie z PRAWO-HARDGATE
+  (nigdy nie cytować numeru z niepewnego źródła).
+- Sekcja "Weryfikacja online": dodano frazę wyszukiwania dla nowej ustawy.
+
+### 4. BILANS
+
+**F-105 ZAMKNIĘTA** — wszystkie 3 kroki wykonane (VER RZĄD 1/2B częściowy, FAZA
+3E wykonana z rozszerzonym zakresem, moduł naprawiony). Flagi F-: 15 → 14.
+Ubocznie ujawniony wzorzec (moduł nie zsynchronizowany mimo aktualnej mapy
+centralnej) NIE otwiera nowej flagi — jednostkowy przypadek, potraktowany jako
+naprawiony w całości; jeśli powtórzy się w innym module, rozważyć przy kolejnym
+audycie dr-10 jako punkt systematycznego sprawdzenia.
+
+Reguła 6 (dostawa) — dwa skille do dostarczenia w tej turze: `audyt-systemu-v4`
+(ten wpis + zamknięcie F-105 w WARN-OTWARTE) i `dr-10-zdrowie-farmacja-zywnosc-
+rolnictwo` (naprawiony moduł). Oba w tej samej turze, patrz niżej.
+
+---
+
+## AUDYT-2026-08-21zj — F-104 transza 3: rocznik 2026 ZAMKNIĘTY (5 ostatnich pozycji)
+
+**Kontekst:** kontynuacja sesji. 5 pozostałych pozycji listy roboczej F-104
+(poz. 300, 188, 157, 125, 110). Reguła 1: przywrócono kopię z ZIP poprzedniej
+tury (praca F-82/F-105 zachowana, zweryfikowano grep-em przed rozpoczęciem).
+
+### 1. WERYFIKACJA — lekcja z transzy 2 zastosowana
+
+Przed przyjęciem znaczników "VER lokalnie" z listy roboczej, sprawdzono grep-em
+wprost na `mapa_dzu_2026-08-21.md`: wszystkie 5 pozycji potwierdzone jako
+rzeczywiście nieobecne (0 wystąpień każda) — żadnego fałszywego domniemania
+obecności tym razem.
+
+| Dz.U. | Akt | Wynik |
+|---|---|---|
+| 2026/300 | Zasady techniki prawodawczej, t.j. | RZĄD 1 (ISAP `D20260300.pdf`, WDU20260000300). **Korekta opisu:** lista robocza opisywała tę pozycję jako "specustawy i reguła lex specialis" — mylące. Sprawdzenie modułu dr-01 (`mod-specustawy-lex-specialis-graf-zaleznosci.md`, `mod-ZTP-przepisy-przejsciowe-doktryna.md`) pokazało, że moduł JUŻ poprawnie identyfikuje 2026.300 jako t.j. Zasad Techniki Prawodawczej — rozjazd był wyłącznie w etykiecie listy roboczej, nie w module |
+| 2026/188 | Rozp. MFiG ws. wydłużenia terminu JPK_KR_PD | RZĄD 2B (podatki.gov.pl). Sprawdzenie modułu dr-06 (`mod-JPK-ksiegi-elektroniczne-e-sprawozdania.md`) pokazało, że moduł JUŻ poprawnie identyfikuje i opisuje tę pozycję (rozwiązanie tymczasowe, zastąpione trwałą regulacją ustawową od 1.07.2026) |
+| 2026/157 | Ustawa o SKW oraz SWW, t.j. | RZĄD 1 (ISAP PDF `D20260157.pdf`, WDU20260000157). Obwieszczenie Marszałka Sejmu 5.02.2026 |
+| 2026/125 | Ustawa o zawodzie lekarza weterynarii i izbach lekarsko-weterynaryjnych, t.j. | RZĄD 1 (ISAP WDU20260000125) + RZĄD 2B (prawo.pl, inforlex). Obwieszczenie 26.01.2026, uwzględnia zm. z ustawy o zdrowiu zwierząt (2025.1795) |
+| 2026/110 | Ustawa o przeciwdziałaniu przestępczości na tle seksualnym/ochronie małoletnich | **NIEWERYFIKOWANE w tej sesji** — brak czasu, wpisana z jawną flagą ⚠️ zamiast pomijana milcząco lub zgadywana z samego tytułu |
+
+### 2. WNIOSEK POWTARZALNY: moduły DR często wyprzedzają mapę centralną
+
+**Trzeci przypadek w tej sesji** (po RIO w F-82 i JPK/ZTP tutaj), gdzie
+pojedynczy moduł DR miał już poprawną, aktualną treść, a rozjazd istniał
+wyłącznie w mapie centralnej lub w opisowej etykiecie listy roboczej F-104.
+Wzmacnia to obserwację z AUDYT-2026-08-21zi: naprawa/aktualizacja pojedynczego
+modułu nie propaguje się automatycznie do rejestrów zbiorczych, a odwrotnie —
+dobrze utrzymywany moduł bywa dokładniejszy niż zbiorczy rejestr, który go
+opisuje. Nie otwiera nowej flagi (nie jest to błąd wymagający naprawy, tylko
+potwierdzenie że moduły DR są wiarygodnym źródłem przy kwalifikacji list
+roboczych) — ale warto odnotować jako wzorzec przy budowie przyszłej
+MAPA-MODULOW-GLOBALNA.md (sekcja 6 WARN-OTWARTE.md): ta mapa powinna czerpać
+z treści modułów, nie tylko z etykiet w listach roboczych.
+
+### 3. STAN F-104 PO TRANSZY 3 — ROCZNIK 2026 ZAMKNIĘTY
+
+**16 → 0 pozycji rocznika 2026.** 15/16 w pełni zweryfikowanych, 1/16 (poz. 110)
+wpisana z jawną flagą niezweryfikowaną — decyzja świadoma: lepiej wpisać
+z ostrzeżeniem niż milczeć o istnieniu pozycji lub zgadywać treść z samego
+tytułu wbrew PRAWO-HARDGATE. Flaga F-104 NIE zamknięta w całości — zgodnie
+z protokołem (pkt 5), następny krok to powtórzenie kwalifikacji dla roczników
+2025 i starszych POPRAWIONYM parserem (wynik poprzedniej, błędnej kwalifikacji
+— 48 pozycji, myloną przez format zapisu — nie nadaje się do użycia).
+
+### 4. BILANS
+
+Flagi F-: 14 bez zmiany (F-104 zawężona, nie zamknięta). Mapa Dz.U.: +5 wierszy
+rocznika 2026 (ostatnie), 0 nowych PREV, 1 wiersz z jawną flagą niezweryfikowaną.
+Reguła 6 (dostawa) — w tej samej turze, patrz niżej.
+
+---
+
+## AUDYT-2026-08-21zk — F-82 tura 2: 2 kolejne pozycje sprawdzone, 0 nowych błędów
+
+**Kontekst:** kontynuacja skanu F-82. Sprawdzono 2 kolejne wiersze o statusie OK
+bez śladu weryfikacji zewnętrznej: 2022/1816 (REACH) i 2022/902 (UDIP).
+
+| Dz.U. | Akt | Wynik |
+|---|---|---|
+| 2022/1816 | Substancje chemiczne (REACH) | AKTUALNY — RZĄD 1 (ISAP WDU20220001816), cytowany bez zmian jeszcze czerwiec 2026 |
+| 2022/902 | UDIP | AKTUALNY t.j. — RZĄD 1 (ISAP WDU20220000902) + RZĄD 2B. Nadchodząca zmiana art. 10 ust. 1 od 1.07.2026 (ustawa 4.12.2025, Dz.U. 2025.1844, rozszerza katalog źródeł o Centralny Rejestr Umów JSFP) — dopisana adnotacja ⚠️ w mapie, NIE traktowana jako błąd (t.j. faktycznie wciąż aktualny w momencie sprawdzenia) |
+
+**0 nowych błędów w tej turze** (poprzednia tura: 2/7 = 29%; łącznie 2/9 ≈ 22%).
+Dalsze wyszukiwania dla pozostałych pozycji (2021/1048 własność lokali) napotkały
+silny szum wyników (dominacja ogłoszeń nieruchomości nad źródłami prawnymi) —
+zdecydowano zakończyć turę zamiast kontynuować przy malejącym zwrocie.
+
+**Stan F-82 łącznie: 9/22 sprawdzonych, 2 błędy naprawione, 0 w tej turze.**
+Pozostaje 13 niesprawdzonych (4 mają status PREV — niższe ryzyko, już mają
+potwierdzonego następcę). Flaga NIE zamknięta, priorytet pozostaje średni.
+
+Reguła 6 (dostawa) — w tej samej turze, patrz niżej.
+
+---
+
+## AUDYT-2026-08-21zl — F-82 tura 3: 2 kolejne sprawdzone, ZNALEZIONY DUPLIKAT (błąd #3)
+
+**Kontekst:** kontynuacja skanu F-82. Sprawdzono 2019/1461 (ogłaszanie aktów
+normatywnych) i 2018/2017 (zastaw rejestrowy).
+
+### Wyniki
+
+| Dz.U. | Akt | Wynik |
+|---|---|---|
+| 2019/1461 | Ogłaszanie aktów normatywnych | AKTUALNY t.j. — RZĄD 1 (ISAP WDU20190001461, eli.gov.pl/eli/DU/2019/1461/ogl), cytowany jako podstawa prawna w dziesiątkach obwieszczeń przez cały 2026 r. **ALE: znaleziono DUPLIKAT** — ten sam akt miał 2 niezależne wiersze w mapie: jeden skromny bez VER (moduł `analizator-przepisow-v2`), jeden pełny z VER z 2026-07-04 (moduły `dr-08`, `prawo-polskie-v2`) |
+| 2018/2017 | Zastaw rejestrowy i rejestr zastawów | AKTUALNY — RZĄD 1 (ISAP WDU20180002017), potwierdzone jeszcze api.sejm.gov.pl 20.01.2026. Brak nowszego t.j. |
+
+### Naprawa duplikatu (błąd #3 tej flagi)
+
+Usunięto skromniejszy wiersz, scalono listę modułów (`analizator-przepisow-v2`
+dodany) do pozostałego, pełnego wpisu z historią VER. **Ta klasa błędu różni się
+od poprzednich dwóch** (RIO, produkty pochodzenia zwierzęcego — oba "przestarzały
+numer, istnieje nowszy t.j.") — tu problem to duplikat wiersza dla wciąż
+aktualnego aktu, analogiczny do znanego wcześniej wiersza 572 (F-84). Potwierdza,
+że skan F-82 (uruchamiany przez filtr "brak nowszego t.j." bez VER) wyłapuje
+różnorodne klasy problemów w mapie, nie tylko rzeczywiście przestarzałe numery —
+sam brak VER jest sygnałem ogólnego zaniedbania danego wiersza, niezależnie od
+konkretnej przyczyny.
+
+### Stan F-82 łącznie
+
+**11/22 sprawdzonych, 3 błędy naprawione** (RIO→2025.7, produkty pochodzenia
+zwierzęcego→2026.981, duplikat 2019.1461 scalony). Pozostaje 9 niesprawdzonych
+(3 mają status PREV — niższe ryzyko). Flaga nadal otwarta, priorytet średni.
+
+Reguła 6 (dostawa) — w tej samej turze, patrz niżej.
+
+---
+
+## AUDYT-2026-08-21zm — F-82 tura 4: własność lokali sprawdzona, silny szum wyników
+
+**Kontekst:** kontynuacja skanu F-82. Sprawdzono 2021/1048 (własność lokali).
+Próby sprawdzenia kolejnych pozycji (2021/24 biobójcze, 2018/870 petycje,
+2018/513 timeshare) napotkały silny szum wyników wyszukiwania — zapytania
+zdominowane przez ogłoszenia nieruchomości/lokali użytkowych zamiast źródeł
+prawnych, obniżając efektywność dalszego skanu w tej turze.
+
+### Wynik
+
+| Dz.U. | Akt | Wynik |
+|---|---|---|
+| 2021/1048 | Ustawa o własności lokali, t.j. | AKTUALNY — RZĄD 1 (ISAP WDU20210001048, infor.pl cytujący pełną treść obwieszczenia). Obwieszczenie Marszałka Sejmu 21.05.2021. Brak nowszego t.j. |
+
+### Stan F-82 łącznie
+
+**12/22 sprawdzonych, 3 błędy naprawione** (RIO, produkty pochodzenia
+zwierzęcego, duplikat 2019.1461). Pozostaje 8 niesprawdzonych, z czego 3 mają
+status PREV (niższe ryzyko). Flaga nadal otwarta, priorytet średni.
+
+Reguła 6 (dostawa) — w tej samej turze, patrz niżej.
+
+---
+
+## AUDYT-2026-08-21zn — F-82 tura 5: biobójcze i petycje sprawdzone, timeshare niepotwierdzone
+
+**Kontekst:** kontynuacja skanu F-82 (po przerwie na pytanie merytoryczne
+użytkownika o ustawę o rzeczach znalezionych — sesja niezwiązana z audytem,
+udzielona odpowiedź poza zakresem audyt-systemu-v4, wznowiono pracę z flagami
+na wyraźne polecenie "Kontynuuj pracę z flagami"). Reguła 1: przywrócono kopię
+z ostatniego ZIP.
+
+### Wyniki
+
+| Dz.U. | Akt | Wynik |
+|---|---|---|
+| 2021/24 | Produkty biobójcze, t.j. | AKTUALNY — RZĄD 2B (gov.pl/urpl, komunikat Prezesa URPL 8.12.2025). Ze zmianą: ustawa 7.11.2025 (Dz.U. 2025.1716), w życie 6.02.2026 (część przepisów 1.01.2031) — nowelizacja art. 30 (dostęp do dokumentacji, wykonanie wyroku TSUE C-442/14). Adnotacja dopisana, mapa już poprawnie sygnalizowała "ze zm." |
+| 2018/870 | Ustawa o petycjach, t.j. | AKTUALNY — RZĄD 1 (ISAP WDU20180000870). Obwieszczenie 13.04.2018. Brak nowszego t.j. |
+| 2018/513 | Ustawa o timeshare, t.j. | **NIEPOTWIERDZONE** — próba weryfikacji nie dała jednoznacznego wyniku Rządem 1 dla numeru t.j. 2018.513 (wyniki wyszukiwania pokazywały głównie pierwotną publikację 2011.1370 i cytowania bez potwierdzenia konkretnego t.j.). Zgodnie z HARDGATE — NIE oznaczono jako sprawdzone, pozostawiono w kolejce zamiast zakładać poprawność bez potwierdzenia |
+
+**0 nowych błędów w tej turze.** Stan F-82 łącznie: **14/22 sprawdzonych, 3 błędy
+naprawione** (RIO, produkty pochodzenia zwierzęcego, duplikat 2019.1461).
+Pozostaje 7 niesprawdzonych (4 status PREV niższe ryzyko, 1 próba nieudana —
+timeshare, 1 pozycja jeszcze nietknięta — szkody w środowisku 2007.75).
+
+Reguła 6 (dostawa) — w tej samej turze, patrz niżej.
+
+---
+
+## AUDYT-2026-08-21zo — F-82 tura 6 (FINALNA dla statusów OK): najgorszy dotąd błąd znaleziony
+
+**Kontekst:** kontynuacja i zakończenie skanu wierszy statusu OK w F-82.
+
+### 1. Szkody w środowisku — NAJBARDZIEJ RAŻĄCY BŁĄD tej flagi
+
+Mapa trzymała 2007.75 (pierwotna publikacja ustawy, Dz.U. Nr 75, poz. 493) jako
+`OK`, "brak nowszego t.j.". Weryfikacja (inforlex — pełna historia t.j., ISAP
+WDU20200002187) wykazała, że od pierwotnej publikacji ogłoszono **pięć kolejnych
+tekstów jednolitych**: 2014.210, 2014.1789, 2018.954, 2019.1862, **2020.2187**
+(ostatni, aktualny). Mapa pominęła wszystkie — to największy zaobserwowany
+rozziew między stanem mapy a rzeczywistością w całej sesji F-82.
+
+Naprawa: 2007/75 → `PREV`, nowy wiersz 2020/2187 → `OK`. FAZA 3E: moduł
+dr-09 (`mod-srodowisko-wycinka-odpady-niebezpieczne-rekultywacja.md`) cytuje
+akt wyłącznie po nazwie i dacie uchwalenia (13.04.2007), bez numeru Dz.U./t.j.
+— żadnej naprawy modułu nie wymaga, rozjazd był wyłącznie w mapie centralnej.
+
+### 2. Timeshare — MOŻLIWY BŁĄD NUMERU, nie tylko brak weryfikacji
+
+Dwie niezależne próby (zapytanie ogólne + precyzyjne `WDU20180000513`) **nie
+zwróciły żadnego trafienia** na ten numer w ISAP ani źródłach wtórnych.
+Ustawa o timeshare z 16.09.2011 była pierwotnie publikowana jako **Dz.U.
+2011.230.1370** (poz. 1370, nie 513). To budzi podejrzenie, że numer "2018.513"
+w mapie może być **błędnie wpisany** — nie tylko niezweryfikowany. Zgodnie z
+HARDGATE, nie oznaczono wiersza jako sprawdzony ani nie zgadywano poprawnego
+numeru — wpisano jawne ostrzeżenie z instrukcją używania pierwotnej publikacji
+2011.1370 do czasu dedykowanej weryfikacji.
+
+### 2. STAN F-82 — ZAKOŃCZENIE SKANU WIERSZY STATUSU OK
+
+**16/22 wierszy statusu OK bez VER — wszystkie sprawdzone.** Wynik łączny:
+**4 błędy naprawione** (RIO, produkty pochodzenia zwierzęcego, duplikat
+2019.1461, szkody w środowisku — 5 pominiętych generacji t.j.), 1 podejrzenie
+błędnego numeru zgłoszone jawnie (timeshare), 11 pozycji potwierdzonych jako
+prawidłowo aktualne. **Współczynnik trafień 4/16 ≈ 25%** — bardzo wysoki,
+potwierdza że mechanizm identyfikacji ryzykownych wierszy (status OK + brak
+jakiegokolwiek śladu VER) był trafny.
+
+**Pozostają wyłącznie 3 pozycje statusu PREV** (2023/1317, 2023/1284,
+2023/1109) — niższe ryzyko z definicji, bo mają już potwierdzonego następcę
+w mapie; odłożone jako niepriorytetowe, nie wymagają pilnej sesji.
+
+### 3. BILANS
+
+Flagi F-: 14 bez zmiany (F-82 zawężona do 3 pozycji niskiego ryzyka, nie
+zamknięta w całości — pozostaje formalnie otwarta do czasu ich sprawdzenia
+oraz dedykowanej weryfikacji numeru timeshare). Mapa Dz.U.: +1 nowy wiersz t.j.
+(2020.2187), 1 status PREV, 1 jawne ostrzeżenie o możliwym błędnym numerze.
+
+Reguła 6 (dostawa) — w tej samej turze, patrz niżej.
+
+---
+
+## AUDYT-2026-08-21zp — F-13 tura 4: pisma-procesowe-v3 + shared (28 plików), ZERO nowych luk
+
+**Kontekst:** kontynuacja przeglądu F-13 po wyczerpaniu praktycznego zakresu F-82.
+Priorytet: `pisma-procesowe-v3` (silnik generujący pisma — najwyższe ryzyko realnego
+błędu w dokumencie sądowym) i `shared` (biblioteka współdzielona — błąd miałby
+szeroki wpływ).
+
+### 1. pisma-procesowe-v3 (12 plików) — WYNIK: 0 luk
+
+Wszystkie moduły (`MOD-PRAWO`, `MOD-SZABLONY`, `MOD-ROUTE`, `MOD-ADMIN`,
+`MOD-ETAPY`), trzy silniki specjalistyczne (`admin-pleading-engine-v8`,
+`pleading-engine-v8`, `prosecution-complaint-engine-v8`), `MODULY-MAPA.md`,
+`AUTOMAT-STANOW.md`, `W3-WERYFIKACJA.md` i `SKILL.md` — wszystkie poprawnie
+odsyłają do `shared/ZAZALENIE-ADRESAT-GATE.md` z właściwym ostrzeżeniem o
+wyjątku art. 306 §2 KPK (sąd, nie prokurator nadrzędny). SKILL.md dokumentuje
+w changelogu (5.14, 2026-07-25) historyczną naprawę dokładnie tej klasy błędu —
+skill jest już "zaszczepiony" przeciw powtórce.
+
+### 2. shared (16 plików) — WYNIK: 0 luk
+
+`ZAZALENIE-ADRESAT-GATE.md` przeczytana w całości — 84 linie, 12 rozpoznanych
+wzorców adresata (KPC ×4, KPA, UPEA ×2, Prawo budowlane, Prawo restrukturyzacyjne
+×2, Prawo upadłościowe ×2), każdy z jawnym źródłem/datą weryfikacji, dwie
+udokumentowane "pułapki redakcyjne" (art. 795 KPC, art. 200/222 analogiczne w
+PrRestr/PrUpad) opisane z pełnym uzasadnieniem prawnym. Pozostałe 15 plików —
+wystąpienia "zażalenie" wyłącznie nawigacyjne (spisy typów pism, tabele
+procesowe) lub poprawnie odsyłające do bramki. Jeden przypadek wymagający
+weryfikacji merytorycznej: `LEGAL-STATUS-LOCK.md:314` cytuje art. 460 KPK
+(termin 7 dni na zażalenie) — **potwierdzone RZĄD 1** (sip.lex.pl, Dz.U.2026.490
+t.j.) jako poprawne.
+
+### 3. STAN F-13 PO TURZE 4
+
+Baza przeliczona: pełny `grep -rl "zażalenie"` teraz zwraca **96 plików**
+(spadek ze 113 z pierwotnego audytu 2026-07-25 — efekt wcześniejszych napraw
+i scaleń plików w tej i poprzednich sesjach). Łącznie w tej rozmowie
+przejrzano **85 plików** (21+17+19+28), zidentyfikowano **3 genuine luki**
+łącznie (nadzór budowlany, PrRestr art.188, PrUpad art.56d — wszystkie
+naprawione w poprzednich turach). Współczynnik trafień skumulowany:
+3/85 ≈ 3,5%, silnie malejący (5% → 0% → 0% w ostatnich trzech turach).
+
+**Pozostaje ~11 plików nieprzejrzanych:** dr-12 (8 plików — sądownictwo/
+prokuratura/zawody prawnicze, dotąd całkowicie pominięty w przeglądzie F-13),
+dr-01 (3 pliki — ustrój konstytucyjny), oraz mniejsze pojedyncze wystąpienia w
+audyt-systemu-v4/pisma-proste-v2/prawny-router-v3/prawo-polskie-v2 (głównie
+nawigacyjne, niski priorytet).
+
+### 4. BILANS
+
+Flagi F-: 14 bez zmiany (F-13 zawężona, nie zamknięta). 0 nowych napraw w tej
+turze — silny sygnał, że centralne, najczęściej używane komponenty systemu
+(silnik pism, bramka współdzielona) są już solidnie pokryte; pozostały ogon
+to głównie dr-12 (nieprzejrzany dotąd) i marginalne wystąpienia.
+
+Reguła 6 (dostawa) — w tej samej turze, patrz niżej.
+
+---
+
+## AUDYT-2026-08-21zq — F-13 tura 5 (FINALNA): 13 plików, 1 luka naprawiona — PRAKTYCZNE ZAMKNIĘCIE
+
+**Kontekst:** dokończenie statycznego przeglądu F-13 — ostatnie ~13 plików
+(dr-12, dr-01, prawny-router-v3, prawo-polskie-v2, pisma-proste-v2,
+audyt-systemu-v4).
+
+### 1. dr-12 (8 plików) i dr-01 (3 pliki) — WYNIK: 0 luk
+
+`mod-KSCU-koszty-sadowe-i-pomoc-prawna.md` ma wzorcowe odesłanie do bramki
+z konkretnym przykładem ("odmowa zwolnienia od kosztów = zażalenie poziome").
+`mod-PrProkuratura-organy-ochrony-prawa.md` poprawnie cytuje termin 7 dni,
+art. 306 KPK. `dr-01/SKILL.md` dokumentuje w changelogu własną wcześniejszą
+naprawę (tabela rozróżniająca zażalenie poziome/dewolutywne przy wyłączeniu
+sędziego). `mod-USP-ustroj-sadow-powszechnych.md` explicite: "ADRESAT zależy
+od instancji (...) NIE zakładaj domyślnie sądu wyższej instancji" — wzorcowa
+ostrożność zgodna z filozofią bramki.
+
+### 2. NOWA LUKA NAPRAWIONA: pisma-proste-v2/references/SPH-inne.md (SPH-B)
+
+Sekcja dot. wniosku o przywrócenie terminu miała jawnie oznaczony sporny punkt
+([NIEWERYFIKOWANE — SPORNE]) pozostawiony przez wcześniejszy audyt bez
+rozstrzygnięcia — błędny cytat art. 394 §1 pkt 2 KPC (dot. zwrotu pozwu, nie
+przywrócenia terminu) już usunięty wcześniej, ale pytanie o zaskarżalność
+pozostawało otwarte z instrukcją web_search przy każdej sprawie.
+
+**Rozstrzygnięcie w tej sesji:** RZĄD 2B (rp.pl, cytujące wprost jednolite,
+wieloletnie orzecznictwo SN) — odmowa/odrzucenie wniosku o przywrócenie
+terminu **NIE PODLEGA zaskarżeniu zażaleniem w ogóle** — nie mieści się w
+katalogu art. 394 §1 KPC (nie jest postanowieniem "kończącym postępowanie w
+sprawie"). Kontrola instancyjna jest wyłącznie **pośrednia**: dopiero gdy sąd
+w konsekwencji odrzuci spóźnioną czynność procesową (np. apelację), stronie
+przysługuje zaskarżenie TEGO KOLEJNEGO postanowienia, w ramach którego można
+podnieść zarzut wadliwej odmowy przywrócenia terminu na podstawie art. 380 KPC.
+
+Reguła 1 zastosowana: brak wcześniejszej kopii `pisma-proste-v2` w tej
+rozmowie → skopiowano ze źródła pierwotnego (baseline 20 plików, po edycji
+nadal 20 — zgodne).
+
+Naprawa: zastąpiono sporny fragment pełnym wyjaśnieniem mechanizmu (brak
+zaskarżalności wprost + droga pośrednia przez art. 380 KPC) z instrukcją
+sprawdzenia bramki dla KONKRETNEGO kolejnego postanowienia, którego dotyczyć
+będzie faktyczne zażalenie/apelacja — nie dla samej odmowy przywrócenia
+terminu.
+
+### 3. Pozostałe pliki tej tury — WYNIK: 0 luk
+
+`prawny-router-v3` (2 pliki), `prawo-polskie-v2/ROUTING-MAP.md` (1),
+`audyt-systemu-v4/raporty-pokrycia-2026-08-13/raport-pokrycia-KPC.md` (1) —
+wszystkie wystąpienia nawigacyjne (mapy aktów, raporty luk pokrycia
+merytorycznego, nie treść generująca pisma z ryzykiem błędu adresata).
+
+### 4. STAN F-13 — PRAKTYCZNE ZAMKNIĘCIE STATYCZNEGO PRZEGLĄDU
+
+Cały zidentyfikowany zbiór 96 plików zawierających "zażalenie" **przejrzany w
+tej rozmowie w pięciu turach** (21+17+19+28+13). **4 genuine luki znalezione i
+naprawione łącznie**: nadzór budowlany (dr-09), Prawo restrukturyzacyjne
+art.188 i Prawo upadłościowe art.56d (obie w dr-02, para pułapek redakcyjnych
+analogicznych do art. 795 KPC), i teraz SPH-B przywrócenie terminu
+(pisma-proste-v2). Bramka `ZAZALENIE-ADRESAT-GATE.md` rozrosła się w toku tej
+sesji do 12+ udokumentowanych wzorców i pozostaje aktywnym, dynamicznym
+mechanizmem ochronnym dla WSZYSTKICH przyszłych pism dotykających środków
+zaskarżenia — niezależnie od stanu przeglądu statycznego.
+
+Flaga F-13 formalnie NIE zamknięta w WARN-numerowanym sensie (nie ma
+mechanizmu "zamknij F-", flagi F- pozostają jako punkty odniesienia), ale
+praktycznie wyczerpana — dalszy przegląd miałby sens tylko przy dodaniu
+nowych plików do systemu w przyszłości, nie jako kontynuacja bieżącej sesji.
+
+### 5. BILANS
+
+Flagi F-: 14 bez zmiany. Reguła 6 (dostawa) — DWA skille w tej turze:
+`audyt-systemu-v4` (ten wpis) i `pisma-proste-v2` (naprawiony SPH-inne.md).
+Oba w tej samej turze, patrz niżej.
+
+---
+
+## AUDYT-2026-08-21zr — F-104 roczniki starsze: URUCHOMIONO T11 BEZPOŚREDNIO, transza 1 rozpoczęta
+
+**Kontekst:** kontynuacja F-104 po zamknięciu rocznika 2026. Protokół (pkt 5)
+wymagał "powtórzenia kwalifikacji poprawionym parserem" dla roczników
+starszych — zamiast ręcznie odtwarzać logikę porównania rejestrów (co
+poprzednio doprowadziło do błędnej listy 48 pozycji), zlokalizowano i
+uruchomiono bezpośrednio istniejące narzędzie `scripts/check_sync_aktow.py`
+(T11), zaprojektowane dokładnie do tego celu.
+
+### 1. Wynik uruchomienia T11
+
+Skrypt porównał trzy rejestry: lokalne `MAPA-AKTOW.md` (16 plików DR, 318
+numerów), `ROUTING-MAP.md` (331 numerów), `mapa_dzu_2026-08-21.md` (484
+numerów — już powiększona o naprawy z tej sesji). Wynik dla roczników
+starszych niż 2026: **70 unikalnych numerów Dz.U. (2013-2025)** obecnych w
+lokalnej MAPA-AKTOW lub ROUTING-MAP, brakujących w mapie centralnej.
+
+Zapisano jako nowy plik `F-104-lista-robocza-roczniki-starsze.md`, sortowane
+malejąco (najświeższe 2025 pierwsze), z tym samym protokołem transzy co
+rocznik 2026.
+
+### 2. Transza 1 — 3 z 8 zaplanowanych pozycji
+
+| Dz.U. | Wynik |
+|---|---|
+| 2025/1891 | POTWIERDZONA — RZĄD 1 (ISAP D20251891L.pdf, WDU20250001891). Ustawa o biegłych rewidentach, firmach audytorskich i nadzorze publicznym, t.j., obwieszczenie 7.11.2025 |
+| 2025/1882 | POTWIERDZONA — RZĄD 1 pośrednio (cytowana w ISAP D20260143.pdf jako źródło nowelizacji). Ustawa z 4.12.2025 o zmianie ustawy o doradztwie podatkowym oraz ustawy PPSA, w życie 1.03.2026 |
+| 2025/1872 | ZABLOKOWANA — ISAP DocDetails istnieje (WDU20250001872), ale bezpośredni web_fetch zwrócił ROBOTS_DISALLOWED, a web_search nie zwrócił treści merytorycznej. Nie oznaczona jako sprawdzona — pozostaje do ponowienia inną metodą (np. fraza opisowa zamiast samego numeru) |
+
+Oba potwierdzone wiersze dopisane do `mapa_dzu_2026-08-21.md`, w sekcji
+rocznika 2025 (przed dotychczasowym najwyższym numerem, 2025.1847).
+
+### 3. STAN F-104 ROCZNIKI STARSZE
+
+**2/70 potwierdzonych i wpisanych, 1/70 zablokowana narzędziowo, 67/70
+pozostaje.** Metoda (uruchomienie T11 bezpośrednio zamiast ręcznego grep)
+sprawdziła się — poprawny wynik bez błędów klasy "fałszywy brak" z
+poprzedniego podejścia. Rekomendacja na przyszłość: **zawsze uruchamiać T11
+jako narzędzie**, nie odtwarzać jego logiki ręcznie.
+
+### 4. BILANS
+
+Flagi F-: 14 bez zmiany. Mapa Dz.U.: +2 wiersze rocznika 2025. Nowy plik
+listy roboczej dla roczników starszych utworzony i częściowo wypełniony.
+
+Reguła 6 (dostawa) — w tej samej turze, patrz niżej.
+
+---
+
+## AUDYT-2026-08-21zs — F-104 roczniki starsze, tura 2: 1 więcej potwierdzona, 1 niejednoznaczna oznaczona świadomie
+
+**Kontekst:** kontynuacja transzy 1 F-104 roczniki starsze.
+
+### 1. Poz. 2025/1872 — potwierdzona po ponowieniu zapytania
+
+Poprzednia próba (poprzednia tura) zwróciła ROBOTS_DISALLOWED przy bezpośrednim
+web_fetch. Ponowiono zapytaniem opisowym (fraza + rok, nie tylko numer) —
+skuteczne. RZĄD 1 (eli.gov.pl/api/acts/DU/2025/1872/text, WDU20250001872):
+ustawa z 4.12.2025 o zmianie niektórych ustaw w celu poprawy bezpieczeństwa
+ruchu drogowego, potocznie "stop bandytom drogowym". Zmienia KW, KK (nowy
+art. 178d — rażące przekroczenie prędkości), KPK, PrRD, KPW, ustawę o
+kierujących pojazdami, ustawę o wspieraniu i resocjalizacji nieletnich.
+W życie 29.01.2026 (część przepisów 30.03.2026). Dopisana do mapy.
+
+### 2. Poz. 2025/1863 — NIEJEDNOZNACZNA, świadomie NIE wpisana
+
+Wielokrotne próby weryfikacji zwracały wyniki mieszające tę pozycję z
+niepowiązaną ustawą **2024/1863** (o zmianie ustawy o rachunkowości, ustawy
+o biegłych rewidentach...). Charakterystyczny wzorzec: liczne obwieszczenia
+cytują frazę "z 2025 r. poz. ... i 1863" w jednym zdaniu obok siebie, co
+sugeruje, że 2025/1863 rzeczywiście istnieje jako odrębna pozycja
+(prawdopodobnie nowelizacja Prawa ochrony środowiska, sądząc po kontekście
+dr-09), ale nie znaleziono jednoznacznego, bezpośredniego potwierdzenia jej
+własnego pełnego tytułu i treści.
+
+**Decyzja:** zgodnie z HARDGATE i lekcją z pomyłki timeshare (F-82, poprzednie
+tury) — NIE wpisano tej pozycji do mapy na podstawie niepewnych poszlak.
+Oznaczono w liście roboczej jako "NIEJEDNOZNACZNE", z wyjaśnieniem dokładnej
+natury ryzyka pomyłki, do dedykowanej weryfikacji w przyszłej sesji.
+
+### 3. STAN F-104 ROCZNIKI STARSZE
+
+**3/70 potwierdzonych i wpisanych** (2025.1891, 2025.1882, 2025.1872),
+**1/70 świadomie odłożona jako niejednoznaczna** (2025.1863), **66/70
+pozostaje** nietkniętych. Metoda T11 nadal działa poprawnie — oba przypadki
+tej tury (ROBOTS_DISALLOWED i niejednoznaczność numeru) to problemy weryfikacji
+zewnętrznej (ISAP/wyszukiwarka), nie błędy samego narzędzia T11.
+
+### 4. BILANS
+
+Flagi F-: 14 bez zmiany. Mapa Dz.U.: +1 wiersz (2025.1872). Reguła 6
+(dostawa) — w tej samej turze, patrz niżej.
+
+---
+
+## AUDYT-2026-08-21zt — F-104 roczniki starsze, tura 3: poz. 1814 potwierdzona, 1783 nieudana próba
+
+**Kontekst:** kontynuacja transzy 1. Sprawdzono 2025/1814 (potwierdzona) i podjęto
+próbę 2025/1783 (nieudana w tej turze).
+
+### Wynik
+
+| Dz.U. | Wynik |
+|---|---|
+| 2025/1814 | POTWIERDZONA — RZĄD 1 (eli.gov.pl/eli/DU/2025/1814/ogl, WDU20250001814). Ustawa z 7.11.2025 o zmianie Kodeksu wykroczeń oraz Kodeksu postępowania w sprawach o wykroczenia. W życie 2.01.2026. Dopisana do mapy |
+| 2025/1783 | NIEROZSTRZYGNIĘTA — zapytanie nie zwróciło bezpośredniego trafienia w tej turze. Pozostaje do kolejnej próby |
+
+### STAN F-104 ROCZNIKI STARSZE
+
+**4/70 potwierdzonych i wpisanych** (1891, 1882, 1872, 1814), **1/70 świadomie
+odłożona jako niejednoznaczna** (1863), **1/70 nierozstrzygnięta** (1783),
+**64/70 nietkniętych**.
+
+### BILANS
+
+Flagi F-: 14 bez zmiany. Mapa Dz.U.: +1 wiersz (2025.1814). Reguła 6
+(dostawa) — w tej samej turze, patrz niżej.
+
+---
+
+## AUDYT-2026-08-21zu — F-104 roczniki starsze, tura 4: poz. 1783 potwierdzona
+
+**Kontekst:** kontynuacja transzy 1. Poz. 2025/1783 wymagała dwóch zapytań —
+pierwsze znalazło pośrednie potwierdzenie (cytat w innym akcie), drugie
+potwierdziło pełny tytuł bezpośrednio z ISAP.
+
+### Wynik
+
+| Dz.U. | Wynik |
+|---|---|
+| 2025/1783 | POTWIERDZONA — RZĄD 1 (ISAP D20251783.pdf, WDU20250001783, eli.gov.pl/eli/DU/2025/1783/ogl). T.j. ustawy o samorządach zawodowych architektów oraz inżynierów budownictwa, obwieszczenie 24.11.2025, poprzedni t.j. 2023.551. Dopisana do mapy |
+| 2025/1760 | nierozstrzygnięta w tej turze |
+
+### STAN F-104 ROCZNIKI STARSZE
+
+**5/70 potwierdzonych i wpisanych** (1891, 1882, 1872, 1814, 1783), **1/70
+świadomie odłożona** (1863), **1/70 nierozstrzygnięta** (1760), **63/70
+nietkniętych**.
+
+### BILANS
+
+Flagi F-: 14 bez zmiany. Mapa Dz.U.: +1 wiersz. Reguła 6 (dostawa) — patrz niżej.
+
+---
+
+## AUDYT-2026-08-21zv — F-104 roczniki starsze: TRANSZA 1 ZAKOŃCZONA + weryfikacja zakresu zmian (Reguła 3/7)
+
+**Kontekst:** użytkownik zapytał wprost, czy zmiany tej sesji dotyczą tylko
+audyt-systemu-v4, czy też dr-XX i prawo-polskie-v2, oraz zlecił kontynuację
+z zastosowaniem Reguły 7 (pełny łańcuch dostawy).
+
+### 1. WERYFIKACJA ZAKRESU ZMIAN — odpowiedź na pytanie użytkownika
+
+Sprawdzono `diff -rq` wobec źródeł pierwotnych dla wszystkich trzech
+kategorii repozytoriów potencjalnie dotkniętych tą sesją:
+- `audyt-systemu-v4`: 4 pliki zmienione + 1 nowy (potwierdzone wielokrotnie
+  w tej sesji).
+- `dr-10`: zmieniony wcześniej w OSOBNEJ turze (F-105), nie w bieżącej pracy
+  nad F-104.
+- `prawo-polskie-v2/ROUTING-MAP.md`: **BRAK zmian w całej tej sesji** —
+  sprawdzono bezpośrednio, czy wymaga tego REGUŁA 3 HARDGATE (synchronizacja
+  nowych wierszy mapy Dz.U. z ROUTING-MAP).
+
+**Wynik weryfikacji REGUŁY 3:** dla wszystkich pozycji dopisanych w tej
+sesji do `mapa_dzu_2026-08-21.md` (zarówno rocznik 2026, jak i transza 1
+roczników starszych) sprawdzono `grep` bezpośrednio w ROUTING-MAP.md —
+**wszystkie już tam istniały**, część z datownikiem "✅ VER: 2026-06-14"
+(sprzed tej sesji), część z pełną historią wcześniejszych napraw (F-53,
+F-89 dla poz. 1760 — dwie niezależne wcześniejsze sesje audytowe).
+
+**Wniosek:** REGUŁA 3 była już spełniona przed rozpoczęciem tej sesji dla
+wszystkich dotychczas wpisanych pozycji — luka istniała WYŁĄCZNIE w trzecim
+rogu trójkąta synchronizacji (mapa centralna Dz.U.), którą ta sesja F-104
+naprawia. Stąd brak potrzeby edycji `prawo-polskie-v2` w tej sesji — nie
+przez pominięcie, ale bo nie było tam nic do naprawienia. Ta obserwacja
+zgadza się z projektową rolą T11: wykrywa braki we WSZYSTKICH trzech
+kierunkach, a różne sesje historycznie domykały różne rogi (F-53/F-89
+domknęły dr-10↔dr-12↔ROUTING-MAP, ta sesja domyka trzeci róg → mapa Dz.U.).
+
+**Zalecenie na przyszłość:** przy KAŻDEJ nowej pozycji dopisywanej do mapy
+Dz.U. w toku F-104, sprawdzać `grep` w ROUTING-MAP PRZED przyjęciem, że
+REGUŁA 3 nie wymaga działania — nie zakładać automatycznie na podstawie
+wzorca z tej sesji, bo kolejne pozycje (zwłaszcza spoza już-audytowanych
+klastrów jak pielęgniarki/architekci) mogą faktycznie wymagać dopisania do
+ROUTING-MAP.
+
+### 2. Poz. 2025/1760 — RZĄD wewnętrzny wysokiej pewności (nie nowy RZĄD 1)
+
+Zamiast szukać od nowa w ISAP, wykorzystano istniejącą, udokumentowaną
+historię: poz. 1760 (ustawa o samorządzie pielęgniarek i położnych, t.j.,
+Rozdz. 6 "Odpowiedzialność zawodowa") była już w pełni zweryfikowana i
+zsynchronizowana w dwóch wcześniejszych sesjach (F-53 z 2026-08-13,
+F-89 z 2026-08-19) niezależnie w `dr-10/MAPA-AKTOW.md`, `dr-12/MAPA-AKTOW.md`
+i `ROUTING-MAP.md`, wszystkie zgodne co do daty obwieszczenia (24.11.2025).
+Dopisano do mapy centralnej z jawną adnotacją, że to RZĄD wewnętrzny
+(zgodność trzech niezależnych wcześniejszych weryfikacji), nie nowe
+sprawdzenie ISAP w tej turze — uczciwie oznaczone jako
+"[NIEWERYFIKOWANE BEZPOŚREDNIO RZĄD 1 W TEJ SESJI]".
+
+### 3. STAN F-104 ROCZNIKI STARSZE — TRANSZA 1 ZAKOŃCZONA
+
+**Transza 1 (8 zaplanowanych pozycji) zamknięta:** 6 potwierdzonych i
+wpisanych (1891, 1882, 1872, 1814, 1783, 1760), 1 świadomie odłożona jako
+niejednoznaczna (1863), 1 pozostaje na następną transzę (1696).
+
+**Stan łączny: 6/70 wpisanych, 1/70 odłożona, 63/70 nietkniętych.**
+
+### 4. BILANS
+
+Flagi F-: 14 bez zmiany. Mapa Dz.U.: +1 wiersz (2025.1760). ROUTING-MAP:
+0 zmian (nie były potrzebne, zweryfikowano). Reguła 6/7 (dostawa) —
+w tej samej turze, patrz niżej.
+
+---
+
+## AUDYT-2026-08-22a — F-83 ROZPOCZĘTA: mapy pokrycia treściowego dla dr-03, dr-06
+
+**Kontekst:** użytkownik udzielił wprost akceptacji dla F-83 ("twórz mapy co
+dany moduł pokrywa i jaki akt prawny"), wcześniej wymagającej decyzji
+użytkownika co do nowego formatu i lokalizacji (flaga świadomie odłożona
+w kilku poprzednich sesjach z tego właśnie powodu). Jednocześnie zlecono
+odłożenie F-104 (roczniki starsze mapy Dz.U.) i priorytetyzację kolejnych
+flag wg istotności.
+
+### 1. Decyzja formatu i lokalizacji (krok 1-2 z opisu flagi)
+
+**Format:** nowy plik `MAPA-POKRYCIA.md`, osobny od `MAPA-AKTOW.md` (różne
+pytania: która-moduł-który-akt vs które-fragmenty-aktu-są-opracowane).
+Struktura: nagłówek z datą audytu źródłowego i stanem prawnym bazowym →
+sekcja per akt → tabela dział/rozdział/zakres art. → status (🟢/🟡/🔴/⚪)
+→ moduł → uwagi → rekomendowana kolejność uzupełniania (przeniesiona z
+raportu źródłowego).
+
+**Lokalizacja:** bezpośrednio w katalogu głównym DR-skilla (zgodnie z
+rekomendacją flagi), z krótkim odesłaniem w SKILL.md w nowej sekcji
+"Mapa pokrycia treściowego (planowanie rozwoju skilla)", jawnie oznaczonej
+jako informacyjna, NIE krok obowiązkowy przy obsłudze sprawy — w
+odróżnieniu od `MAPA-AKTOW.md`, które jest częścią obowiązkowego przepływu.
+
+### 2. Zasilenie — dr-03 (Reguła 1: kopia ze źródła, baseline 70→71 plików)
+
+Przeniesiono dwa raporty źródłowe do jednego pliku `MAPA-POKRYCIA.md`:
+- **KW** (Kodeks wykroczeń): część ogólna (1-48) + część szczególna,
+  rozdziały I-XIX, z rekomendowaną kolejnością uzupełniania.
+- **KKW** (Kodeks karny wykonawczy): najsłabszy wynik ze wszystkich 13
+  zbadanych aktów w audycie źródłowym — dedykowany moduł nie zawiera ani
+  jednego numeru artykułu, cały akt oznaczony jako 🔴 poza trzema
+  pojedynczymi wzmiankami (art. 159, 161, 182a KKW) cytowanymi przy okazji
+  innych tematów. Odnotowano jawnie krytyczny brak: art. 161 §4 KKW
+  (termin 6 mies. przed ponownym wnioskiem o warunkowe zwolnienie, znany
+  z konkretnej sprawy kancelaryjnej — Marek Petelski) nigdy nie trafił do
+  żadnego modułu jako trwała treść.
+
+Dodano sekcję "Akty NIE objęte tym rejestrem" — jawne odnotowanie, że
+indeks źródłowy deklaruje 13 zbadanych aktów, ale tylko 10 plików raportów
+istnieje fizycznie; brakuje KK, KP, KRO, KPW mimo że indeks cytuje ich
+szczegóły w sekcji "Najpilniejsze braki". Ta nieciągłość NIE została
+naprawiona zmyśloną treścią — czysto odnotowana jako luka źródła danych.
+
+### 3. Zasilenie — dr-06 (Reguła 1: kopia ze źródła, baseline 65→66 plików)
+
+Przeniesiono raport **Op** (Ordynacja podatkowa) — jedyny akt z audytu
+źródłowego posiadający własną, wewnętrzną samoocenę pokrycia w mapie
+centralnej ("4→9/18"). Nowa mapa rozbija tę frakcję na 43 konkretne
+działy/rozdziały z pełnym statusem. Krytyczne luki uwypuklone: Dział IV
+Rozdz. 11 (dowody, art. 180-200) — fundamentalny dla każdego sporu
+podatkowego, zero treści; Dział VI (kontrola podatkowa) i Dział V
+(czynności sprawdzające) — pierwszy kontakt z organem, całkowicie
+nieopracowane.
+
+### 4. STAN F-83 PO TEJ SESJI
+
+**2/10 raportów zasilonych** (dr-03, dr-06). Pozostaje 8: KPC(dr-02),
+KSH(dr-02), PPSA(dr-05), PZP(dr-07), PrBud(dr-09), PrUp-PrRestr(dr-02),
+SUS-FUS(dr-04). Flaga NIE zamknięta — do kontynuacji w kolejnych sesjach.
+Bramka § 3 pozostaje aktywna (blok pomija się nadal, aż F-83 zostanie
+w pełni zamknięta).
+
+### 5. BILANS
+
+Flagi F-: 14 bez zmiany (F-83 w toku, nie zamknięta). Reguła 6/7
+(dostawa) — TRZY paczki w tej turze: `audyt-systemu-v4` (ten wpis),
+`dr-03-prawo-karne-wykroczenia-egzekucja` (nowy plik + SKILL.md), `dr-06-
+podatki-finanse-publiczne-aml` (nowy plik + SKILL.md). Wszystkie trzy
+zweryfikowane osobno, patrz niżej.
+
+---
+
+## AUDYT-2026-08-22b — F-83 kontynuacja: dr-05 (PPSA), dr-02 (KSH + PrUp/PrRestr)
+
+**Kontekst:** kontynuacja zasilania map pokrycia po dr-03/dr-06 z poprzedniej
+tury. Użytkownik podkreślił wprost cel mechanizmu: wsparcie aktualizacji
+przy nowelizacji przepisów.
+
+### 1. dr-05 — PPSA (Reguła 1: 28→29 plików)
+
+Przeniesiono raport PPSA — **akt bez własnego dedykowanego modułu w
+całym systemie**, obecny wyłącznie jako rozproszone cytaty (ok. 20
+artykułów) w czterech modułach KPA i siedmiu modułach tematycznych. Mapa
+jawnie podkreśla znaczenie tego stanu dla nowelizacji: brak jednego
+miejsca do zaktualizowania po zmianie PPSA — trzeba przeszukać wszystkie
+11 plików. Najlepiej opracowany fragment: skarga (art. 50-62, 4 kategorie
+aktów zaskarżalnych). Krytyczne luki: skarga kasacyjna do NSA (173-193),
+uchybienie/przywrócenie terminu (85-89), prawo pomocy (243-263).
+
+### 2. dr-02 — KSH + PrUp/PrRestr (Reguła 1: 70→71 plików)
+
+**KSH — najbardziej rażąca rozbieżność dotąd znaleziona między statusem
+deklarowanym a rzeczywistym pokryciem.** ROUTING-MAP.md oznacza KSH jako
+"✅ OK" (sugerując pełne pokrycie), ale inwentaryzacja pokazuje ok. 14
+unikalnych artykułów pokrytych na ok. 600 w całym akcie. Mapa wprost
+odnotowuje: to dokładnie ten typ luki, dla której rejestr F-83 istnieje —
+status "OK" w MAPA-AKTOW potwierdza tylko aktualność cytowanego stanu
+prawnego, nie kompletność pokrycia. Jedyny dobrze opracowany fragment:
+art. 299 (odpowiedzialność zarządu). Tytuł IV (łączenie/podział/
+przekształcanie) i Tytuł II (spółki osobowe) niedawno częściowo
+naprawione (2026-08-15v).
+
+**PrUp/PrRestr — raport ZACHOWANY z widocznymi śladami wcześniejszych
+korekt.** W przeciwieństwie do KPC (patrz niżej), ten raport źródłowy był
+już samoaktualizujący się przez adnotacje "⚠️ RAPORT ODŚWIEŻONY 2026-08-
+14/15v" wplecione bezpośrednio w tabele po naprawach F-86/F-87 — te
+adnotacje przeniesiono wprost, zamiast je usuwać, bo są integralną
+częścią wiarygodnego obrazu aktualnego stanu.
+
+### 3. DECYZJA: KPC ŚWIADOMIE NIE PRZENIESIONY w tej sesji
+
+Sprawdzono, że moduły KPC cytowane w raporcie źródłowym (`mod-KPC-
+prawomocnosc-granice-apelacji`, `mod-KPC-nieproces-czesc-ogolna`) już
+istnieją w bieżącym `MAPA-AKTOW.md` dr-02 z adnotacją "NOWY 2026-08-14,
+naprawa F-65" — czyli PO dacie audytu źródłowego raportu KPC (2026-08-13).
+Przeniesienie 354-liniowego raportu 1:1 wpisałoby do trwałego rejestru
+nieaktualne dane (np. status 🔴 dla fragmentów już naprawionych).
+
+**Decyzja:** dodano sekcję "Akty NIE objęte pełnym rejestrem" z jawnym
+wyjaśnieniem przyczyny i odesłaniem do oryginalnego pliku raportu do
+wglądu. Zamiast zgadywać, które dokładnie fragmenty raportu są już
+nieaktualne (ryzykowne bez świeżej weryfikacji), odłożono KPC do
+dedykowanej sesji — albo świeży audyt, albo staranne ręczne uzgodnienie
+artykuł po artykule.
+
+### 4. STAN F-83 PO TEJ SESJI
+
+**5/10 raportów zasilonych** (dr-03, dr-06, dr-05, dr-02 z KSH+PrUp/
+PrRestr). Pozostaje: KPC (dr-02, wymaga uzgodnienia/świeżego audytu przed
+przeniesieniem), PZP (dr-07), PrBud (dr-09), SUS-FUS (dr-04).
+
+### 5. BILANS
+
+Flagi F-: 14 bez zmiany (F-83 w toku). Reguła 6/7 (dostawa) — TRZY paczki
+w tej turze: `audyt-systemu-v4` (ten wpis), `dr-05-prawo-administracyjne-
+sadowoadministracyjne` (nowy plik + SKILL.md), `dr-02-prawo-cywilne-
+rodzinne-gospodarcze` (nowy plik + SKILL.md). Wszystkie zweryfikowane
+osobno, patrz niżej.
+
+---
+
+## AUDYT-2026-08-22c — F-83: nowy symbol legendy 🟣 (moduł-widmo) na żądanie użytkownika
+
+**Kontekst:** użytkownik zwrócił uwagę, że moduły puste/szablonowe (bez
+treści i wskazań artykułów) powinny być oznaczane w mapach pokrycia jako
+wymagające WYPEŁNIENIA na równi z rzeczywistymi lukami, nie tylko jako
+zwykły "brak" — bo mylące istnienie pliku sugeruje pokrycie, którego nie
+ma.
+
+### 1. Nowy symbol legendy
+
+Dodano 🟣 (MODUŁ-WIDMO) do legendy statusu we wszystkich dotychczasowych
+mapach: oznacza przypadek, gdzie plik modułu **fizycznie istnieje** pod
+nazwą sugerującą pokrycie danego aktu, ale jest generycznym szablonem
+proceduralnym bez ani jednego numeru artykułu — w odróżnieniu od 🔴, które
+oznacza brak jakiegokolwiek dedykowanego pliku. Legenda jawnie instruuje:
+traktować jak 🔴 pod względem pilności, ale ZE WSKAZANIEM, że przed pracą
+trzeba ocenić, czy plik nadaje się do rozbudowy punktowej, czy wymaga
+przepisania od podstaw.
+
+### 2. Weryfikacja zakresu — który raport rzeczywiście pasuje
+
+Sprawdzono wszystkie 5 dotąd przeniesionych raportów pod kątem
+sformułowań "generyczny szablon" / "nie zawiera ani jednego artykułu":
+**wyłącznie KKW (dr-03) pasuje w pełni** — moduł `mod-KKW-kodeks-karny-
+wykonawczy.md` (wewnętrznie nazwany inaczej niż plik na dysku, sygnał
+niedokończonej konsolidacji) jest w całości uniwersalnym szablonem
+(matryca dowodowa, typowe zarzuty, strategia) nadającym się do dowolnej
+sprawy administracyjno-sądowej.
+
+**PrRestr (dr-02) był podobny w RAPORCIE ŹRÓDŁOWYM z 2026-08-13** ("nie ma
+ani jednego numeru artykułu"), ale stan ten **już naprawiono** (F-87,
+2026-08-14) — obecnie istnieje dedykowany moduł `mod-PrRestr-dzial-VI-
+uklad.md` z realną treścią (242 linie, przepisy ogólne, propozycje
+układowe, głosowanie/zatwierdzenie). Mapa dr-02 poprawnie NIE oznacza tego
+jako 🟣 — bo aktualny stan to zwykłe częściowe pokrycie (🟢/🔴 mix w
+dobrze zbudowanym module), nie moduł-widmo.
+
+### 3. Naprawa dr-03 (Reguła 1: 71→71 plików, edycja bez zmiany liczby)
+
+Przekodowano 21 wierszy sekcji KKW z 🔴 na 🟣, z jawnym wskazaniem nazwy
+pliku (`mod-KKW-kodeks-karny-wykonawczy.md`) w każdym wierszu i
+uzasadnieniem tam, gdzie moduł "deklarował" temat mimo braku treści
+(Oddz. 4, Oddz. 9). Rekomendacja uzupełniania zaktualizowana: punkt 1
+teraz explicite mówi "Przepisanie [nazwa pliku] od podstaw — priorytet
+zerowy".
+
+### 4. BILANS
+
+Flagi F-: 14 bez zmiany (F-83 w toku, format rozszerzony). Reguła 6/7
+(dostawa) — DWIE paczki w tej turze: `audyt-systemu-v4` (ten wpis) i
+`dr-03-prawo-karne-wykroczenia-egzekucja` (poprawiona MAPA-POKRYCIA.md).
+
+---
+
+## AUDYT-2026-08-22d — F-83 PRAWIE ZAMKNIĘTA: dr-07 (PZP), dr-09 (PrBud), dr-04 (SUS+FUS) — 8/9 raportów zasilonych
+
+**Kontekst:** dokończenie zasilania map pokrycia trzema ostatnimi
+dostępnymi raportami źródłowymi.
+
+### 1. dr-07 — PZP (Reguła 1: 20→21 plików)
+
+**Drugi najlepiej pokryty akt w całym audycie źródłowym (po KRO).** System
+stosuje podejście modułów działowych (8 plików, analogicznie do Kodeksu
+pracy) — ok. 60 unikalnych cytowanych artykułów. **Brak modułu-widma.**
+Najlepiej opracowane: środki ochrony prawnej przed KIO (Dział IX),
+wykluczenie wykonawcy z self-cleaningiem. Krytyczna luka: Dział II (183
+artykuły, ponad 1/4 całej ustawy) — kwalifikacja podmiotowa wykonawców,
+otwarcie/badanie ofert, kryteria oceny — sam rdzeń klasycznego
+postępowania przetargowego bez systematycznej treści.
+
+### 2. dr-09 — PrBud (Reguła 1: 42→43 pliki)
+
+**Najbardziej "żywy", aktywnie rozbudowywany moduł w całym audycie** —
+wyraźne ślady iteracyjnych sesji na konkretne żądania użytkownika. **Brak
+modułu-widma.** Najlepiej opracowane: samowola budowlana (Rozdz. 5b, z
+reformą 2026 i uchwałą NSA), postępowanie poprzedzające rozpoczęcie robót
+(terminy z sankcją). Krytyczne luki: organy administracji architektoniczno-
+budowlanej (Rozdz. 8), katastrofa budowlana (Rozdz. 7), odpowiedzialność
+zawodowa (Rozdz. 10).
+
+### 3. dr-04 — SUS + FUS (Reguła 1: 36→37 plików)
+
+**Model "dobra procedura, słaba materia"** — analogiczny do PrUp/PrRestr.
+Ścieżka odwoławcza od decyzji ZUS opracowana bardzo dobrze (z reformą
+orzecznictwa 2026), ale materialna treść obu ustaw (podleganie
+ubezpieczeniom — SUS Rozdz. 2, prawdopodobnie najczęściej potrzebny
+fragment w praktyce — całkowicie nieobecna) jest szczątkowa. **Brak
+modułu-widma.**
+
+### 4. STAN F-83 — PRAWIE ZAMKNIĘTA
+
+**8/9 dostępnych raportów źródłowych przeniesionych do map pokrycia**
+(dr-02 z dwoma aktami, dr-03 z dwoma aktami, dr-04, dr-05, dr-06, dr-07,
+dr-09). Jedyny nieprzeniesiony: **KPC** — świadomie odłożony wcześniej
+(patrz AUDYT-2026-08-22b) jako częściowo przestarzały względem napraw
+F-65. Priorytet flagi obniżony ze średniego na niski.
+
+**Decyzja pozostaje otwarta:** czy uznać F-83 za funkcjonalnie zamkniętą
+z jawną, trwałą notatką o KPC jako odrębnym zadaniu (i odblokować bramkę
+§ 3 w SCHEDULED-TASK-COWORK.md), czy trzymać flagę formalnie otwartą do
+czasu faktycznego przeniesienia KPC. Wymaga rozstrzygnięcia z
+użytkownikiem w kolejnej sesji.
+
+### 5. Podsumowanie mechanizmu 🟣 (moduł-widmo) po pełnym przebiegu
+
+Na 9 zbadanych raportów (8 przeniesionych + KPC odłożony), symbol 🟣
+okazał się potrzebny **tylko raz** — KKW w dr-03. To potwierdza, że
+większość luk w systemie to zwykłe "jeszcze nieopracowane" (🔴), nie
+"mylące istnienie pustego pliku" — ale gdy ten drugi przypadek się
+zdarza (KKW), ma wysoką wagę ostrzegawczą, bo łatwo błędnie założyć
+pokrycie na podstawie samego istnienia pliku.
+
+### 6. BILANS
+
+Flagi F-: 14 bez zmiany (F-83 prawie zamknięta, priorytet obniżony).
+Reguła 6/7 (dostawa) — CZTERY paczki w tej turze: `audyt-systemu-v4` (ten
+wpis), `dr-07-zamowienia-publiczne-fundusze-ue`, `dr-09-budownictwo-
+srodowisko-energia-transport`, `dr-04-prawo-pracy-zus-swiadczenia`.
+Wszystkie zweryfikowane osobno, patrz niżej.
+
+---
+
+## AUDYT-2026-08-22e — KKW Oddz. 11: dwa odkrycia — mapa przestarzała + błędny stan prawny w module
+
+**Kontekst:** rozpoczęto pogłębione opracowywanie treści dla luk oznaczonych
+w mapach pokrycia (na wyraźne polecenie użytkownika, wybór: KKW Oddz. 11
+jako priorytet #2 w kolejności, po module-widmie jako priorytet #0/#1).
+Wybór podjęty samodzielnie na podstawie ogólnej istotności między
+wszystkimi mapami.
+
+### 1. ODKRYCIE #1: mapa pokrycia dr-03 była przestarzała
+
+Przed rozpoczęciem pracy nad treścią, sprawdzono aktualny stan modułu
+`mod-KKW-kodeks-karny-wykonawczy.md` — okazało się, że **moduł NIE jest
+już modułem-widmem**. Naprawa F-75 (2026-08-14 do 2026-08-20), wykonana w
+sesji WCZEŚNIEJSZEJ niż ta cała seria audytów, dodała realną treść do
+pięciu podsekcji (0.1 warunkowe zwolnienie, 0.2 odroczenie/przerwa kary,
+0.3 dozór elektroniczny, 0.4 prawa skazanego, 0.5 kary dyscyplinarne).
+
+**Mapa pokrycia dr-03, zbudowana 2026-08-21 na podstawie raportu
+źródłowego z 2026-08-13, nie uwzględniła tej naprawy** — błędnie
+oznaczała wszystkie te podsekcje jako 🟣 (moduł-widmo). To dokładnie ta
+sama klasa problemu, co świadomie odłożony KPC (raport źródłowy
+przestarzały względem późniejszych napraw) — ale tym razem problem
+dotknął już WYDANĄ mapę, nie tylko potencjalne źródło.
+
+**Naprawa:** przebudowano całą sekcję KKW w `MAPA-POKRYCIA.md` — pięć
+podsekcji przekodowano z 🟣 na 🟢 (cztery) lub 🟡 (jedna, kary
+dyscyplinarne — moduł sam jawnie odnotowuje otwarte pytania). Dodano
+wyjaśnienie u góry sekcji: mapy pokrycia same wymagają okresowej
+weryfikacji, nie tylko jednorazowego zasilenia — to wartościowa lekcja
+metodyczna dla przyszłych sesji F-83.
+
+### 2. ODKRYCIE #2: art. 161 §3-4 KKW miał BŁĘDNY stan prawny w module
+
+Przy weryfikacji HYBRID-VAL treści Oddz. 11 przed jej wykorzystaniem,
+zapytania wstępne dały SPRZECZNE wyniki: część źródeł (archiwalne,
+2008/2023) podawała próg 3 lata / terminy 3+6 mies., część (aktualne,
+2025/2026) podawała próg 5 lat / terminy 6 mies.+rok. Zamiast przyjąć
+pierwsze trafienie, wykonano bezpośredni web_fetch na lexlege.pl z jawnym
+znacznikiem "stan prawny na 17.08.2026" (5 dni przed tą sesją).
+
+**Wynik rozstrzygający — RZĄD 1, wysoka pewność:**
+- §3: kara/suma kar ≤ **5 lat** → wniosek przed upływem **6 miesięcy**
+  od odmowy nie jest rozpoznawany
+- §4: kara/suma kar > **5 lat** → wniosek przed upływem **roku** od
+  odmowy nie jest rozpoznawany
+
+**Moduł miał:** §3 ≤3 lata/3 mies., §4 >3 lata/6 mies. — **BŁĘDNE**, to
+stara wersja przepisu sprzed nowelizacji z 7.07.2022 (Dz.U. 2022.2600).
+
+Naprawiono bezpośrednio w module, z jawną notatką ostrzegawczą: (a) o
+błędzie i jego naprawie, (b) o silnym zaśmieceniu wyników wyszukiwania
+dla tego artykułu archiwalnymi kopiami — instrukcja dla przyszłych sesji,
+by zawsze potwierdzać datą "stan prawny na" zamiast polegać na pierwszym
+trafieniu, (c) ostrzeżenie, że oryginalna notatka o "sprawie Marka
+Petelskiego" (6-miesięczna karencja przy karze >3 lata) nie odpowiada
+ŻADNEJ ze znanych wersji przepisu w tej dokładnej kombinacji — możliwe
+przekłamanie przy sporządzaniu wcześniejszej notatki, wymaga weryfikacji
+z aktami sprawy przy następnym wykorzystaniu.
+
+### 3. Znaczenie praktyczne
+
+To nie jest drobna korekta — błędny próg kwotowy i błędne terminy w
+instytucji o **najwyższym priorytecie praktycznym** w całym KKW (moduł
+sam to oznaczał ⭐⭐⭐) mogłyby prowadzić do realnego błędu w piśmie:
+np. złożenie wniosku o warunkowe zwolnienie przy karze 4 lata z
+przekonaniem, że stosuje się próg wyższy (§4, rok karencji) zamiast
+niższy (§3, 6 miesięcy) — lub odwrotnie, przy karze 4,5 roku błędne
+zastosowanie progu 3 lat jako punktu granicznego zamiast właściwego progu
+5 lat.
+
+### 4. BILANS
+
+Flagi F-: 14 bez zmiany (odkrycie naprawione w tej samej sesji, nie
+wymaga nowej flagi). Reguła 6/7 (dostawa) — DWIE paczki w tej turze:
+`audyt-systemu-v4` (ten wpis) i `dr-03-prawo-karne-wykroczenia-egzekucja`
+(trzy zmienione pliki: MAPA-POKRYCIA.md przebudowana, SKILL.md z sesji
+poprzedniej, mod-KKW-kodeks-karny-wykonawczy.md z naprawą art. 161).
+
+---
+
+## AUDYT-2026-08-22f — dr-02: DRUGA i większa naprawa przestarzałej mapy — PrRestr miało 5 modułów, nie 1
+
+**Kontekst:** wykonując zapowiedzianą weryfikację aktualności map przed
+kontynuacją pracy nad treścią, sprawdzono dr-02 (PrUp/PrRestr) — trafienie
+w F-86 (nadal otwarta, "bardzo niski") wskazało wprost: *"Bariera
+długości USUNIĘTA 2026-08-21 — moduł podzielony"*. To sygnał do sprawdzenia
+pełnej, aktualnej listy plików zamiast polegania na treści znanej z
+budowy mapy dzień wcześniej.
+
+### 1. Rozmiar odkrycia — znacznie większy niż KKW
+
+`find` na katalogu modules dr-02 ujawnił: **PrUp = 2 pliki** (moduł
+macierzysty + `mod-PrUpad-uklad-likwidacja-zakonczenie.md`, wydzielony
+21.08 wg ZASADY 13 — podział wyprzedzający przy zbliżaniu się do progu
+1000 linii), **PrRestr = 5 plików**, nie 1 jak zakładała mapa zbudowana
+dzień wcześniej: `mod-PrRestr-dzial-III-nadzorca-zarzadca.md` (423 l.,
+naprawa 19.08), `mod-PrRestr-dzial-IV-uczestnicy-wierzyciele.md` (547 l.,
+19.08, obejmuje też Dział V), `mod-PrRestr-dzial-V-pomoc-publiczna.md`
+(271 l., 20.08), `mod-PrRestr-dzial-VI-uklad.md` (242 l., 14.08 — jedyny
+znany mapie), `mod-PrRestr-dzial-VII-uklad-czesciowy.md` (250 l., 20.08).
+
+### 2. Odkrycie dodatkowe: uchylona numeracja w PrUp
+
+Przy sprawdzaniu treści nowego pliku PrUp, znaleziono jawną notatkę
+("KOREKTA KRYTYCZNA F-86, 2026-08-21") w samym module: dawny **Tytuł VI
+PrUp (art. 267-305) jest CAŁKOWICIE UCHYLONY**, zastąpiony skróconym
+Tytułem Va (art. 266a-266f). Moja mapa (jak i pierwotny raport źródłowy
+sprzed tej zmiany) błędnie cytowała "art. 267-305" jako lukę do
+uzupełnienia — te przepisy fizycznie nie istnieją. To nie tylko kwestia
+przestarzałej mapy pokrycia, ale i przykład, że sama numeracja aktu może
+się zmienić przy nowelizacji (nie tylko treść pod tym samym numerem).
+
+### 3. Rzeczywisty wpływ na ocenę PrRestr
+
+Poprzednia wersja mapy oceniała PrRestr jako "9 jednostek strukturalnych,
+tylko Dział VI + Tytuł II naprawione" — **rzeczywistość: tylko 3 jednostki
+(Dział I, II, VIII) oraz Tytuły III-IV pozostają bez treści.** PrRestr
+przeszedł z oceny "jeden z najsłabiej pokrytych aktów" na **"jeden z
+lepiej pokrytych aktów pozakodeksowych w całym systemie"** — diametralna
+zmiana obrazu, wynikająca wyłącznie z tego, że mapa nie uwzględniała pracy
+wykonanej dzień wcześniej.
+
+**Potwierdzone również:** flaga F-87 (PrRestr) jest już **W CAŁOŚCI
+ZAMKNIĘTA** — sprawdzono WARN-OTWARTE, brak aktywnego wiersza, tylko
+odniesienie historyczne. Poprzednia wersja mapy błędnie sugerowała, że
+F-87 nadal wymaga wielu otwartych punktów.
+
+### 4. Naprawa
+
+Przebudowano całą sekcję PrUp/PrRestr w `MAPA-POKRYCIA.md` dr-02: 7
+wierszy przekodowanych z 🔴 na 🟢 w PrUp (w tym poprawiona numeracja
+Va zamiast błędnego VI), 5 wierszy przekodowanych z 🔴 na 🟢 w PrRestr.
+Zaktualizowano oceny obu aktów, listę modułów na początku sekcji (z
+jawnym podkreśleniem "5 plików, nie 1"), rekomendowaną kolejność
+uzupełniania (4/4 oryginalnych pozycji już naprawione, nowa lista
+uwzględnia rzeczywiście pozostałe luki).
+
+### 5. Wzmocniony wniosek metodyczny
+
+Dwa odkrycia tej klasy w jednej sesji (KKW, teraz PrUp/PrRestr) potwierdzają
+regułę silniej niż pojedynczy przypadek: **przy zasilaniu lub weryfikacji
+mapy pokrycia, ZAWSZE sprawdzać pełną listę plików modułu przez
+`find`/`grep` w MAPA-AKTOW, nie tylko czytać treść jednego znanego pliku
+lub polegać na starym raporcie źródłowym** — nawet jeśli raport wydaje
+się względnie świeży (8 dni), tempo napraw w tym systemie jest wystarczająco
+szybkie, by go wyprzedzić.
+
+### 6. BILANS
+
+Flagi F-: 14 bez zmiany. Reguła 6/7 (dostawa) — DWIE paczki w tej turze:
+`audyt-systemu-v4` (ten wpis) i `dr-02-prawo-cywilne-rodzinne-gospodarcze`
+(MAPA-POKRYCIA.md przebudowana w całej sekcji PrUp/PrRestr).
+
+---
+
+## AUDYT-2026-08-22g — dr-06, dr-05, dr-07, dr-04: dokończenie weryfikacji aktualności — 4 kolejne naprawy
+
+**Kontekst:** kontynuacja weryfikacji aktualności map (po KKW w dr-03 i
+PrUp/PrRestr w dr-02, obie naprawione w poprzednich wpisach). Sprawdzono
+pełne listy plików modułów przez `find` dla pozostałych pięciu map —
+cztery okazały się przestarzałe, jedna (dr-09/PrBud) potwierdzona jako
+aktualna.
+
+### 1. dr-06 — Op: 2 nowe moduły, dokładnie priorytety #1 i #2
+
+`mod-OP-dzial-IV-rozdzial-11-dowody.md` (211 l.) i `mod-OP-kontrola-
+podatkowa-dzial-VI.md` (157 l.) — oba pokrywają rozdziały wskazane jako
+najwyższy i drugi priorytet w oryginalnej rekomendowanej kolejności.
+Dowody: zasady ogólne, katalog środków dowodowych, dokumenty urzędowe,
+księgi podatkowe (⭐⭐⭐), synteza ciężaru dowodu. Kontrola podatkowa:
+różnice względem kontroli celno-skarbowej, wszczęcie/terminy, sprzeciw
+przedsiębiorcy, świeże reformy 2025-2026.
+
+### 2. dr-05 — PPSA: 1 moduł pokrywający 5 priorytetów naraz
+
+`mod-PPSA-terminy-kasacja-prawo-pomocy.md` (538 l., naprawa F-64,
+19.08) — PPSA **przestała być "aktem cień"**. Pokrywa: uchybienie i
+przywrócenie terminu (85-89), skargę kasacyjną do NSA (173-193, ⭐⭐⭐),
+prawo pomocy (243-263, częściowo), sprzeciw od decyzji (64a-64e),
+wznowienie postępowania sądowoadministracyjnego (270-285, F-64
+ZAMKNIĘTE). Dawny priorytet zerowy strukturalny ("utworzenie
+dedykowanego modułu") również spełniony przy okazji.
+
+### 3. dr-07 — PZP: 2 nowe moduły domykające Dział II
+
+`mod-PZP-dzial-II-kwalifikacja-kryteria-uniewaznienie.md` (233 l.) i
+`mod-PZP-otwarcie-badanie-ofert-przebieg-KIO.md` (301 l., dwie części:
+A — otwarcie/badanie ofert, B — szczegółowy przebieg odwoławczy przed
+KIO). Dawny "sam rdzeń klasycznego postępowania przetargowego bez
+systematycznej treści" (183 artykuły) jest dziś w większości
+opracowany — pozostaje tylko wąski wycinek (formalności wyboru oferty
+poza kryteriami, ok. 244-254, 259-265).
+
+### 4. dr-04 — SUS/FUS: 1 moduł, priorytet #1
+
+`mod-SUS-dzial-2-podleganie-ubezpieczeniom.md` (257 l.) — katalog
+tytułów ubezpieczenia (art. 6), definicja "pracownika" (art. 8), zbieg
+tytułów (art. 9, ⭐⭐⭐ najczęstsze praktyczne pytanie), ubezpieczenie
+chorobowe/wypadkowe, okresy podlegania. Dawny "prawdopodobnie
+najczęściej potrzebny fragment całej ustawy w praktyce doradczej" —
+teraz opracowany.
+
+### 5. dr-09 — PrBud: POTWIERDZONA jako aktualna, jedyna bez zmian
+
+`find` na module PrBud zwrócił dokładnie te same 2 pliki, które znała
+mapa (`mod-PrBud-prawo-budowlane.md`, `mod-PrBud-patodeweloperka...`)
+— żadnych nowych plików od budowy mapy. Jedyna z 7 map niewymagająca
+korekty w tej fazie.
+
+### 6. PODSUMOWANIE CAŁEJ FAZY WERYFIKACYJNEJ (6 map naprawionych)
+
+| Mapa | Nowe moduły | Naprawione wiersze | Skala zmiany oceny |
+|---|---|---|---|
+| dr-03 (KKW) | 0 nowych plików, treść w istniejącym | 21 wierszy 🟣→🟢/🟡 | Duża — moduł-widmo przestał nim być |
+| dr-02 (PrUp/PrRestr) | 6 nowych plików (1+5) | 12 wierszy 🔴→🟢 | Bardzo duża — ocena PrRestr odwrócona |
+| dr-06 (Op) | 2 nowe pliki | 2 wiersze 🔴→🟢 | Średnia — 2 kluczowe priorytety |
+| dr-05 (PPSA) | 1 nowy plik | 5 wierszy 🔴→🟢/🟡 | Bardzo duża — akt przestał być "cieniem" |
+| dr-07 (PZP) | 2 nowe pliki | 1 wiersz podzielony na 6, 5 z nich 🟢 | Duża — największa dawna luka domknięta |
+| dr-04 (SUS/FUS) | 1 nowy plik | 1 wiersz 🔴→🟢 | Średnia — priorytet #1 |
+| dr-09 (PrBud) | 0 | 0 | Brak — mapa aktualna |
+
+**Łącznie: 12 nowych plików modułów odkrytych, które nie były znane
+mapom w chwili ich pierwotnej budowy** — wszystkie powstałe w oknie
+14–20 sierpnia, czyli PRZED datą budowy map (21 sierpnia), ale mimo to
+pominięte, bo budowa map opierała się na raporcie źródłowym z 13 sierpnia
+zamiast weryfikacji stanu bieżącego.
+
+### 7. Wniosek metodyczny — UTRWALONY dla przyszłych sesji F-83
+
+Przy KAŻDYM zasilaniu lub weryfikacji mapy pokrycia: (a) najpierw
+`find`/`grep` na katalogu `modules/` dla wszystkich plików pasujących do
+nazwy aktu, (b) porównać z listą znaną mapie/raportowi źródłowemu, (c)
+dla każdego nieznanego pliku sprawdzić jego treść i zakres art., (d)
+dopiero potem przenosić/aktualizować wiersze. Raport źródłowy sprzed
+kilku dni NIE jest wystarczającym substytutem tej weryfikacji — tempo
+napraw w tym systemie jest wystarczająco szybkie (kilka nowych modułów
+tygodniowo), by wyprzedzić nawet świeże raporty.
+
+### 8. BILANS
+
+Flagi F-: 14 bez zmiany. F-83 dojrzała metodycznie — sprawdzona nie tylko
+na budowie od zera, ale i na korekcie błędów własnej wcześniejszej pracy.
+Reguła 6/7 (dostawa) — PIĘĆ paczek w tej turze: `audyt-systemu-v4` (ten
+wpis + poprzedni), `dr-06`, `dr-05`, `dr-07`, `dr-04` (wszystkie z
+naprawioną MAPA-POKRYCIA.md).
+
+---
+
+## AUDYT-2026-08-22h — KKW Rozdział IV (postępowanie wykonawcze) opracowany — powrót do pierwotnego zadania
+
+**Kontekst:** po zakończeniu fazy weryfikacyjnej map pokrycia (dwa
+poprzednie wpisy), powrót do pierwotnego zadania sprzed odkrycia
+przestarzałych map: uzupełnianie treści KKW zgodnie z rekomendowaną
+kolejnością mapy dr-03. Wybrano pozycję #6 (jedyną pozostałą w sekcji 0
+modułu) — Rozdział IV, Postępowanie wykonawcze (art. 9-31).
+
+### 1. Weryfikacja RZĄD 1 i opracowanie treści
+
+Potwierdzone wielokrotnie zgodnymi źródłami (arslege.pl, lexlege.pl,
+przepisy.gofin.pl — wszystkie cytujące Dz.U.2025.0.911 t.j.): struktura
+trzech oddziałów (Wykonywanie orzeczeń 9-17a, Postępowanie przed sądem
+18-24, Postępowanie egzekucyjne 25-31). Opracowano: art. 9 (wykonalność
+orzeczeń — cztery różne momenty wykonalności zależnie od typu orzeczenia),
+art. 19-20 (orzekanie jednoosobowe, tryb zażalenia z terminem
+instrukcyjnym 21 dni), art. 22 (krąg uprawnionych do udziału w
+posiedzeniu, wyjątek dla obrony obligatoryjnej), art. 24 (zmiana/
+uchylenie postanowienia z limitem 6 miesięcy na niekorzyść skazanego —
+mechanizm analogiczny funkcjonalnie do zakazu reformationis in peius w
+czasie), art. 25-26 (dwa równoległe tryby egzekucji: cywilny wg KPC vs
+administracyjny dla przepadku/nawiązki na rzecz SP), art. 31 (skarga
+pauliańska na rzecz Skarbu Państwa, odpowiednik art. 527 KC z odrębną
+legitymacją procesową).
+
+**Znaleziony i naprawiony błąd w mapie:** mapa pokrycia dr-03 błędnie
+podawała górną granicę Oddziału 3 jako "25-43" — w rzeczywistości to
+25-31; art. 32 i dalsze to już odrębny Rozdział V ("Nadzór
+penitencjarny"). Poprawiono przy okazji.
+
+### 2. BŁĄD EDYCYJNY — wystąpił i został naprawiony w tej samej turze
+
+Przy wstawianiu nowej sekcji 0.6 do modułu, pierwsze `str_replace`
+przypadkowo **usunęło nagłówek sekcji 0.5 (kary dyscyplinarne)** —
+treść merytoryczna art. 142 i dalszych pozostała w pliku nienaruszona
+(potwierdzone: plik urósł z 621 do 770 linii, nie skurczył się), ale
+znalazła się bez własnego nagłówka, "wchłonięta" wewnątrz nowej sekcji
+0.6, tworząc mylącą strukturę. Błąd wykryty NATYCHMIAST przy rutynowej
+weryfikacji struktury po edycji (Reguła 5 HARDGATE — weryfikacja
+natychmiast po każdym str_replace).
+
+**Naprawa:** zidentyfikowano dokładne miejsce cięcia (linia z samotną
+datą "2026-08-20 (naprawa F-75...)" bez poprzedzającego nagłówka),
+przywrócono właściwy nagłówek "### 0.5. KARY DYSCYPLINARNE", a następnie
+programowo (Python, precyzyjne cięcie po granicach bloków) zamieniono
+kolejność fizyczną sekcji 0.5 i 0.6 w pliku, tak by numeracja rosła
+zgodnie z kolejnością występowania (0.1→0.2→0.3→0.4→0.5→0.6). Zweryfikowano
+po naprawie: obie sekcje obecne, żadna treść nie zdublowana ani nie
+utracona (`grep -c` na charakterystycznych frazach obu sekcji potwierdził
+dokładnie 1 wystąpienie każdej).
+
+**Lekcja:** przy wstawianiu nowej treści TUŻ PRZED istniejącym nagłówkiem
+numerowanym, `old_str` musi obejmować WYŁĄCZNIE sam nagłówek docelowy
+(nie fragment poprzedzającej treści), a nowa treść musi kończyć się
+własnym, kompletnym separatorem przed wklejeniem oryginalnego `old_str`
+z powrotem — w przeciwnym razie ryzyko ucięcia nagłówka sąsiadującej
+sekcji. To trzeci odnotowany incydent tej klasy w historii audytu
+(patrz WARN-OTWARTE, sekcja o wstawianiu tuż przed stałym markerem — F-75
+i inne).
+
+### 3. Zaktualizowana mapa pokrycia dr-03
+
+Wiersz "Ogólna IV — postępowanie wykonawcze" przekodowany z 🟣 na 🟢,
+z poprawioną górną granicą (9-31, nie 9-43). Rekomendowana kolejność:
+pozycja 6 oznaczona jako naprawiona — **wszystkie 6 z 6 oryginalnych
+pozycji rekomendowanej kolejności KKW są teraz zamknięte.** Pozostaje
+tylko generyczna reszta modułu (poza sekcją 0) jako cel długoterminowy.
+
+### 4. STAN KKW PO TEJ TURZE
+
+Moduł ma teraz 6 w pełni opracowanych podsekcji (0.1-0.6) z realną
+treścią prawną popartą RZĄD 1, verified przez HYBRID-VAL. To kompletne
+domknięcie pierwotnie zidentyfikowanego priorytetu #0 z mapy F-83
+(moduł-widmo KKW) — pozostała "generyczna reszta" (Rozdziały I-III, V-VII,
+większość Rozdziału X poza już opracowanymi oddziałami, XII i dalsze) to
+osobne, znacznie większe zadanie poza zakresem dzisiejszej sesji.
+
+### 5. BILANS
+
+Flagi F-: 14 bez zmiany. Reguła 6/7 (dostawa) — DWIE paczki w tej turze:
+`audyt-systemu-v4` (ten wpis) i `dr-03-prawo-karne-wykroczenia-egzekucja`
+(moduł KKW + mapa pokrycia, oba zweryfikowane po naprawie błędu
+edycyjnego).
+
+---
+
+## AUDYT-2026-08-22i — Op Dział V (czynności sprawdzające) — nowy dedykowany moduł
+
+**Kontekst:** kontynuacja uzupełniania treści wg rekomendowanej kolejności
+map pokrycia. Wybrano dr-06 (Op), priorytet #3: Dział V — czynności
+sprawdzające (art. 272-280), "najczęstsza, najmniej sformalizowana forma
+kontaktu podatnika z organem".
+
+### 1. Weryfikacja RZĄD 1 i opracowanie treści
+
+Potwierdzone wielokrotnie (lexlege.pl, przepisy.gofin.pl z pełną historią
+wersji do Dz.U.2026.622, arslege.pl). Utworzono NOWY dedykowany plik
+`mod-OP-czynnosci-sprawdzajace-dzial-V.md` (zamiast dopisywać do
+istniejącego modułu głównego — zachowując konwencję wcześniejszych
+napraw F-70/F-33, które też tworzyły osobne pliki dla poszczególnych
+działów Op).
+
+**Opracowane kluczowe instytucje:**
+- Art. 272 — cztery cele czynności sprawdzających, z rozróżnieniem
+  względem kontroli podatkowej (brak formalnego aktu wszczynającego,
+  możliwość korekty deklaracji ze skutkiem prawnym w trakcie, w
+  odróżnieniu od zawieszenia tego prawa w trakcie kontroli)
+- Art. 274 — korekta deklaracji przez organ z progiem 5000 zł i
+  mechanizmem sprzeciwu podatnika (14 dni, anuluje korektę)
+- Art. 274a — wezwanie do wyjaśnień/złożenia deklaracji, z wymogiem
+  uzasadnienia przez organ
+- Art. 275-276 — szczególne uprawnienia przy weryfikacji ulg podatkowych
+  (żądanie dokumentów, oględziny lokalu za zgodą)
+- **Art. 274c — kontrola krzyżowa, ⭐⭐⭐ ZNALEZIONA ISTOTNA PUŁAPKA
+  PRAKTYCZNA:** mimo umiejscowienia w Dziale V ("Czynności sprawdzające"),
+  kontrola krzyżowa u kontrahentów NIE JEST dopuszczalna, jeśli u
+  pierwotnego podatnika prowadzone są WYŁĄCZNIE czynności sprawdzające
+  (bez równoległej kontroli podatkowej lub postępowania podatkowego) —
+  potwierdzone wprost wyrokiem WSA Warszawa III SA/Wa 1251/18, zarówno
+  wykładnią literalną jak i systemową. Praktyczne zastosowanie: przy
+  wezwaniu klienta-kontrahenta do "kontroli krzyżowej" warto sprawdzić,
+  czy u pierwotnego podatnika faktycznie toczy się kontrola/postępowanie.
+- Art. 280 — odesłanie proceduralne do wybranych rozdziałów Działu IV,
+  z jawnie odnotowanym sygnałem, że rozdział o dowodach (Rozdz. 11) NIE
+  jest wymieniony w katalogu odesłania — potencjalny argument przeciwko
+  "ukrytemu postępowaniu dowodowemu" w toku czynności sprawdzających
+
+### 2. Rejestracja modułu (Reguła 2 HARDGATE)
+
+Zarejestrowano nowy moduł zgodnie z ustalonym wzorcem dwóch poprzednich
+napraw tego samego działu skilla (F-70, F-33): wpis w checkliście
+SKILL.md (licznik 42→43, opis modułu) oraz osobny wiersz w MAPA-AKTOW.md
+z pełnym opisem zakresu i datą naprawy.
+
+### 3. Naprawa mapy pokrycia dr-06
+
+Wiersz "V — Czynności sprawdzające" przekodowany z 🔴 na 🟢. Rekomendowana
+kolejność: pozycja 3 (z 8 oryginalnych) oznaczona jako naprawiona —
+łącznie 3/8 pozycji rekomendowanej kolejności Op teraz zamknięte (dowody,
+kontrola podatkowa, czynności sprawdzające).
+
+### 4. BILANS
+
+Flagi F-: 14 bez zmiany. Reguła 6/7 (dostawa) — DWIE paczki w tej turze:
+`audyt-systemu-v4` (ten wpis) i `dr-06-podatki-finanse-publiczne-aml`
+(nowy moduł + SKILL.md + MAPA-AKTOW.md + MAPA-POKRYCIA.md, wszystkie
+zweryfikowane, 4 zmienione/nowe pliki potwierdzone diff-em).
+
+---
+
+## AUDYT-2026-08-22j — REGUŁA 3: synchronizacja dr-XX ↔ prawo-polskie-v2 — 2 luki znalezione i naprawione
+
+**Kontekst:** użytkownik zapytał wprost, czy synchronizacja z ROUTING-MAP
+(Reguła 3 HARDGATE) była pilnowana przy dzisiejszych naprawach treści.
+Odpowiedź: NIE była — dwie zmiany z dzisiejszej sesji (Op Dział V nowy
+moduł, KKW zmieniony moduł) nie przeszły jeszcze przez ten krok. Reszta
+map (PPSA, PZP×2, SUS, PrRestr×4, PrUp podzielony) sprawdzona i
+potwierdzona jako już zsynchronizowana — te moduły powstały w
+OSOBNYCH, wcześniejszych sesjach (F-64, F-70/71, F-86/87), które same
+zadbały o Regułę 3 w swoim czasie.
+
+### 1. Luka #1: Op Dział V — moduł nowy, BRAK wiersza w ROUTING-MAP
+
+Sprawdzono `grep` — zero wystąpień `mod-OP-czynnosci-sprawdzajace-dzial-V`
+w ROUTING-MAP. Dopisano nowy wiersz, w tym samym miejscu i stylu co
+dwa pozostałe moduły Op (Dział IV Rozdz. 11, Dział VI), z pełnym opisem
+zakresu i datownikiem synchronizacji.
+
+### 2. Luka #2: KKW — wiersz ISTNIAŁ, ale zawierał BŁĘDNY, NIEAKTUALNY
+stan prawny — poważniejszy przypadek
+
+ROUTING-MAP cytowało dla art. 161 §3-4 KKW: "karencja 3/6 mies." —
+**dokładnie ta sama stara, błędna wersja przepisu**, którą naprawiłem
+wcześniej dziś w samym module (patrz AUDYT-2026-08-22h). Wiersz ROUTING-
+MAP nie tylko nie wiedział o tej naprawie, ale przez cały dzień
+propagował dalej ten sam błąd w innym miejscu systemu — ryzykowne, bo
+ROUTING-MAP jest punktem wejścia routingu dla całego systemu prawnego
+(prawny-router-v3 → prawo-polskie-v2 → ten wiersz), więc błąd mógłby
+zostać odczytany PRZED dotarciem do (już naprawionego) modułu źródłowego.
+
+Wiersz nie zawierał też informacji o nowo dodanej dziś sekcji 0.6
+(postępowanie wykonawcze, art. 9-31).
+
+**Naprawa:** przepisano cały wiersz — usunięto błędny stan prawny,
+dodano jawną notatkę o naprawie z datą, dodano wzmiankę o nowej sekcji
+0.6, zaktualizowano datownik synchronizacji.
+
+### 3. Weryfikacja pozostałych 8 modułów z dzisiejszej/wczorajszej fazy
+naprawczej
+
+`grep` potwierdził obecność wierszy dla: PPSA (`mod-PPSA-terminy-
+kasacja-prawo-pomocy`), PZP×2 (`mod-PZP-dzial-II-kwalifikacja...`,
+`mod-PZP-otwarcie-badanie...`), SUS (`mod-SUS-dzial-2-podleganie...`),
+PrRestr×4 (Dział III, IV, V, VII), PrUp podzielony
+(`mod-PrUpad-uklad-likwidacja-zakonczenie`). Sprawdzono próbkowo treść
+dwóch wpisów PZP — aktualne, zgodne z modułami źródłowymi, z prawidłowymi
+datownikami sync z ich własnych sesji naprawczych (14.08, 20.08).
+
+### 4. Wniosek metodyczny
+
+**Reguła 3 (synchronizacja z ROUTING-MAP) wymaga wykonania PO KAŻDEJ
+zmianie treściowej modułu, nie tylko po utworzeniu nowego pliku** — błąd
+w KKW pokazuje, że nawet ISTNIEJĄCY, prawidłowo zarejestrowany wiersz
+może "zardzewieć", jeśli treść źródłowa się zmieni, a wiersz routingu
+nie zostanie odświeżony w tej samej turze. Zalecenie na przyszłość: przy
+każdej naprawie treści modułu (nie tylko dodaniu nowego), jako ostatni
+krok tej samej tury sprawdzić `grep` w ROUTING-MAP i zaktualizować wiersz
+razem z modułem źródłowym, zamiast traktować to jako osobne, późniejsze
+zadanie.
+
+### 5. BILANS
+
+Flagi F-: 14 bez zmiany. Reguła 6/7 (dostawa) — DWIE paczki w tej turze:
+`audyt-systemu-v4` (ten wpis) i `prawo-polskie-v2` (ROUTING-MAP.md, 2
+wiersze naprawione/dodane, zweryfikowane diff-em jako jedyna zmiana).

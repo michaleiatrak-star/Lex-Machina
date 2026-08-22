@@ -43,14 +43,32 @@ z tą instytucją (sprawa Marek Petelski — art. 161 § 4, ryzyko
   (⭐ krąg SZERSZY niż tylko sam skazany/obrońca)
 
 ⭐⭐⭐ ART. 161 §3-4 — TERMIN KARENCJI PO ODMOWIE (⭐⭐⭐ KLUCZOWY
-  przepis praktyczny, uzależniony od WYMIARU KARY — dwa różne okresy):
-  §3: kara/suma kar NIE PRZEKRACZA 3 LAT — wniosek złożony przed
-    upływem 3 MIESIĘCY od odmowy NIE JEST rozpoznawany aż do upływu
-    tego okresu
-  §4: kara/suma kar PRZEKRACZA 3 LATA — wniosek złożony przed upływem
-    6 MIESIĘCY od odmowy NIE JEST rozpoznawany aż do upływu tego
-    okresu (⭐ TEN właśnie przepis — 6-miesięczna karencja przy karze
-    >3 lata — był kluczowy w sprawie Marka Petelskiego)
+  przepis praktyczny, uzależniony od WYMIARU KARY — dwa różne okresy).
+  ⛔ NAPRAWIONE 2026-08-22 (weryfikacja HYBRID-VAL, RZĄD 1: lexlege.pl
+  stan prawny na 17.08.2026, Dz.U.2025.0.911 t.j. — poprzednia wersja
+  tej sekcji cytowała próg 3 lata/3+6 mies., co jest STARĄ wersją
+  przepisu sprzed nowelizacji z 7.07.2022 (Dz.U. 2022.2600); wyniki
+  wyszukiwania są w tej materii silnie zaśmiecone nieaktualnymi/
+  archiwalnymi kopiami przepisu — przy każdej kolejnej weryfikacji tego
+  artykułu wymagane bezpośrednie potwierdzenie ISAP/lexlege z datą
+  "stan prawny na", NIE poleganie na pierwszym trafieniu wyszukiwarki):
+  §3: kara/suma kar NIE PRZEKRACZA 5 LAT — wniosek złożony przed
+    upływem 6 MIESIĘCY od wydania postanowienia o odmowie NIE JEST
+    rozpoznawany aż do upływu tego okresu
+  §4: kara/suma kar PRZEKRACZA 5 LAT — wniosek złożony przed upływem
+    ROKU od wydania postanowienia o odmowie NIE JEST rozpoznawany aż
+    do upływu tego okresu
+  ⚠️ UWAGA HISTORYCZNA — sprawa Marka Petelskiego: jeśli ta sprawa była
+    prowadzona PRZED 7.07.2022 (data nowelizacji Dz.U. 2022.2600) lub
+    dotyczyła stanu prawnego sprzed tej daty, mogła zasadnie opierać się
+    na WCZEŚNIEJSZEJ wersji przepisu (próg 3 lata, terminy 3/6 mies.) —
+    ta wcześniejsza wersja NIE jest już aktualna i nie należy jej
+    stosować do spraw bieżących. Sama nazwa "6-miesięczna karencja przy
+    karze >3 lata" w oryginalnej notatce nie odpowiada ŻADNEJ znanej
+    wersji przepisu (ani starej: >3 lata→6 mies. nie istniało w tej
+    kombinacji, ani nowej: próg to 5 lat nie 3) — możliwe przekłamanie
+    przy sporządzaniu notatki, wymaga weryfikacji z aktami sprawy przy
+    następnym jej wykorzystaniu
   ⭐ PUŁAPKA: karencja dotyczy wniosku SKAZANEGO LUB JEGO OBROŃCY —
     NIE dotyczy wniosków składanych przez dyrektora ZK/kuratora, które
     mogą być składane bez tego ograniczenia czasowego
@@ -422,6 +440,157 @@ z tą instytucją (sprawa Marek Petelski — art. 161 § 4, ryzyko
 ```
 
 ---
+
+### 0.6. POSTĘPOWANIE WYKONAWCZE (Rozdział IV, art. 9-31) — dodano
+2026-08-22, kontynuacja domykania luk wg mapy pokrycia (F-83)
+
+```
+✅ Zweryfikowane RZĄD 1: arslege.pl, lexlege.pl, przepisy.gofin.pl —
+zgodne przy każdym cytowanym artykule, stan Dz.U.2025.0.911 t.j.
+Struktura: Oddział 1 (Wykonywanie orzeczeń, 9-17a), Oddział 2
+(Postępowanie przed sądem, 18-24), Oddział 3 (Postępowanie egzekucyjne,
+25-31 — ⚠️ POPRAWKA: mapa pokrycia BŁĘDNIE podawała górną granicę jako
+"25-43"; art. 32 i dalsze to już Rozdział V "Nadzór penitencjarny",
+oddzielny temat).
+```
+
+**ODDZIAŁ 1 — WYKONYWANIE ORZECZEŃ (art. 9-17a)**
+
+```
+⭐⭐⭐ ART. 9 — WYKONALNOŚĆ ORZECZEŃ (moment rozpoczęcia postępowania
+  wykonawczego — fundament całego rozdziału):
+  §1: postępowanie wykonawcze wszczyna się BEZZWŁOCZNIE, gdy orzeczenie
+    stało się wykonalne
+  §2: wyrok oraz postanowienia z art. 420 KPK (uzupełnienie wyroku)
+    dot. przepadku/dowodów rzeczowych — wykonalne z chwilą
+    UPRAWOMOCNIENIA, chyba że ustawa stanowi inaczej
+  §3: postanowienie W POSTĘPOWANIU WYKONAWCZYM — wykonalne z chwilą
+    WYDANIA (⭐ różnica względem §2 — natychmiastowa wykonalność jako
+    zasada), chyba że sąd wydający lub sąd zażaleniowy wstrzyma
+    wykonanie; ODMOWA wstrzymania NIE WYMAGA uzasadnienia
+  §4: złożenie wniosku o wydanie postanowienia w post. wykonawczym NIE
+    WSTRZYMUJE wykonania orzeczenia, którego dotyczy — chyba że sąd w
+    szczególnie uzasadnionych wypadkach postanowi inaczej
+  §5: w posiedzeniu ws. wstrzymania wykonania orzeczenia — prawo
+    udziału PROKURATORA, jeżeli wstrzymanie skutkowałoby ZWOLNIENIEM
+    skazanego z aresztu/ZK (⭐ szczególne zabezpieczenie interesu
+    publicznego przy zwolnieniach)
+
+⭐⭐ ART. 10 — WYKONAWCY POLECEŃ SĄDU: Policja wykonuje polecenia sądu
+  w zakresie postępowania wykonawczego; ODPOWIEDNIO stosuje się do
+  Żandarmerii Wojskowej/dowódcy wojskowego (gdy skazany jest
+  żołnierzem, z wyjątkiem TSW dyspozycyjnie)
+
+⭐⭐⭐ ART. 26 (⚠️ Oddział 3, ale kluczowo powiązany) — DO TYTUŁÓW
+  EGZEKUCYJNYCH stosuje się ODPOWIEDNIO art. 776-795 KPC (⭐ pomost
+  między KKW a KPC — istotne przy egzekucji roszczeń cywilnych,
+  grzywny, świadczenia pieniężnego, należności sądowych zasądzonych w
+  postępowaniu karnym)
+
+⚠️ POZOSTAJE DO POGŁĘBIENIA: pełna treść art. 11-17a (liczenie
+  terminów kary w tygodniach/miesiącach/latach — zasada 7/30/365 dni
+  potwierdzona źródłowo, ale bez pełnego rozbicia pozostałych
+  artykułów), art. 13 (rozstrzyganie wątpliwości co do wykonania
+  orzeczenia — zażalenie przysługuje).
+```
+
+**ODDZIAŁ 2 — POSTĘPOWANIE PRZED SĄDEM (art. 18-24)**
+
+```
+⭐⭐⭐ ART. 19-20 — TRYB ORZEKANIA I ZASKARŻANIA (rdzeń proceduralny
+  całego postępowania wykonawczego):
+  Art. 19 §1: sąd orzeka NA WNIOSEK prokuratora, skazanego lub jego
+    obrońcy oraz innych uprawnionych, LUB Z URZĘDU
+  Art. 20 §1: w postępowaniu wykonawczym sąd orzeka JEDNOOSOBOWO (⭐
+    zasada ogólna, różni się od zwykłego postępowania karnego)
+  Art. 20 §2: zażalenie wnosi się do sądu, KTÓRY WYDAŁ zaskarżone
+    postanowienie; przekazywane BEZZWŁOCZNIE zarządzeniem do sądu
+    wyższej instancji, CHYBA że sąd orzekający w tym samym składzie
+    PRZYCHYLI SIĘ do zażalenia (⭐ mechanizm autokontroli, analogiczny
+    do art. 395 KPC)
+  Art. 20 §3: sąd wyższej instancji rozpoznaje zażalenie JEDNOOSOBOWO
+  Art. 20 §4: sąd wyższej instancji rozpoznaje zażalenie w TERMINIE 21
+    DNI od przekazania przez sąd I instancji (⭐⭐⭐ termin instrukcyjny,
+    NIE zawity — brak sankcji za przekroczenie, potwierdzone w
+    doktrynie jako świadome odstąpienie ustawodawcy od terminu
+    stanowczego z uwagi na czasochłonność doręczeń)
+
+⭐⭐ ART. 21 — PROKURATOR JAKO STRONA w postępowaniu przed sądem;
+  może składać wnioski, w wypadkach wskazanych ustawą — wnosić
+  zażalenia na postanowienia wydane w postępowaniu wykonawczym
+
+⭐⭐⭐ ART. 22 — PRAWO I OBOWIĄZEK UDZIAŁU W POSIEDZENIU SĄDU:
+  §1: KRĄG UPRAWNIONYCH do udziału (gdy ustawa tak stanowi):
+    prokurator, skazany, obrońca, sądowy kurator zawodowy, pokrzywdzony,
+    oraz inne osoby z art. 19 §1. W posiedzeniu sądu WYŻSZEJ instancji
+    — te same osoby co w I instancji
+  §1a: NIESTAWIENNICTWO osób należycie zawiadomionych NIE WSTRZYMUJE
+    rozpoznania sprawy, Z WYJĄTKIEM obrońcy w wypadkach obrony
+    obligatoryjnej (art. 8 §2) — chyba że sąd orzeka NA KORZYŚĆ lub
+    ZGODNIE z wnioskiem skazanego (⭐ pułapka: obecność obrońcy może być
+    warunkiem ważności posiedzenia, ale tylko przy niekorzystnym dla
+    skazanego rozstrzygnięciu)
+  §2: sąd MOŻE dopuścić do udziału również INNE osoby
+
+⭐⭐ ART. 23 — SPROWADZENIE SKAZANEGO na posiedzenie sądu (fakultatywne
+  zarządzenie sądu); możliwość zlecenia przesłuchania sądowi wezwanemu
+  w okręgu pobytu skazanego
+
+⭐⭐⭐ ART. 24 — ZMIANA LUB UCHYLENIE PRZEZ SĄD POPRZEDNIEGO
+  POSTANOWIENIA (⭐⭐⭐ mechanizm wzruszalności rozstrzygnięć wykonawczych
+  poza zwykłym środkiem zaskarżenia):
+  §1: przy UJAWNIENIU nowych lub poprzednio nieznanych okoliczności
+    istotnych dla rozstrzygnięcia — sąd MOŻE w KAŻDYM CZASIE zmienić
+    lub uchylić poprzednie postanowienie
+  §2: NIEDOPUSZCZALNA zmiana/uchylenie NA NIEKORZYŚĆ skazanego PO
+    UPŁYWIE 6 MIESIĘCY od uprawomocnienia się postanowienia (⭐ termin
+    ochronny dla skazanego, analogiczny funkcjonalnie do zakazu
+    reformationis in peius w czasie)
+  §3: zażalenie na postanowienie z §1 PRZYSŁUGUJE TYLKO gdy
+    przysługiwało również na postanowienie PODLEGAJĄCE zmianie/uchyleniu
+    (⭐ zasada pochodności zaskarżalności — jeśli pierwotne postanowienie
+    było niezaskarżalne, to i jego zmiana/uchylenie też)
+
+⚠️ ODESŁANIE PRAKTYCZNE (forum sędziowskie, nieformalne, wymaga
+  dalszej weryfikacji przy konkretnej sprawie): typowe zastosowania
+  art. 24 — umorzenie/zawieszenie postępowania (zażalenie przysługuje,
+  postanowienie natychmiast wykonalne, bez konieczności posiedzenia),
+  zatarcie skazania (analogicznie). Art. 3 §3a (poza zakresem tej
+  sekcji, Rozdział II): na postanowienie w przedmiocie WŁAŚCIWOŚCI w
+  postępowaniu wykonawczym zażalenie NIE PRZYSŁUGUJE.
+```
+
+**ODDZIAŁ 3 — POSTĘPOWANIE EGZEKUCYJNE (art. 25-31)**
+
+```
+⭐⭐⭐ ART. 25 — WŁAŚCIWOŚĆ PRZEPISÓW EGZEKUCYJNYCH wg rodzaju
+  należności:
+  §1: egzekucję zasądzonych ROSZCZEŃ CYWILNYCH, orzeczonej GRZYWNY,
+    ŚWIADCZENIA PIENIĘŻNEGO oraz NALEŻNOŚCI SĄDOWYCH prowadzi się wg
+    przepisów KPC (⭐ podstawowy tryb — komornik sądowy)
+  (⚠️ dokładna treść §2 i dalszych ustępów art. 25 dot. rozróżnienia
+    przepadku/nawiązki NIE w pełni potwierdzona w tej sesji — punkt
+    startowy do pogłębienia)
+
+⭐⭐⭐ ART. 26 — EGZEKUCJA PRZEPADKU I NAWIĄZKI na rzecz Skarbu Państwa:
+  prowadzi ją NACZELNIK URZĘDU SKARBOWEGO wg przepisów o postępowaniu
+  egzekucyjnym w ADMINISTRACJI (⭐ tryb administracyjny, NIE cywilny —
+  kluczowa różnica względem art. 25 — inny organ egzekucyjny, inna
+  procedura)
+
+⭐⭐ ART. 31 — SKARGA PAULIAŃSKA na rzecz Skarbu Państwa: w razie
+  dokonania przez dłużnika Skarbu Państwa CZYNNOŚCI PRAWNEJ Z
+  POKRZYWDZENIEM WIERZYCIELA, z powództwem występuje PREZES SĄDU
+  OKRĘGOWEGO lub NACZELNIK URZĘDU SKARBOWEGO w sprawach, w których
+  wykonuje orzeczenie (⭐ odpowiednik art. 527 i n. KC, ale z odrębną
+  legitymacją procesową — nie sam wierzyciel, tylko organ publiczny)
+
+⚠️ POZOSTAJE DO POGŁĘBIENIA: pełna treść art. 27-30 (szczegóły
+  postępowania egzekucyjnego — zabezpieczenie majątkowe wykonawcze,
+  środki pieniężne na rachunkach depozytowych Ministra Finansów wg
+  wzmianki w innym miejscu ustawy) — punkt startowy przy konkretnej
+  sprawie egzekucyjnej.
+```
 
 ## ROZGRANICZENIE (sekcja 0)
 

@@ -551,3 +551,59 @@ dnia; po naprawie test zwraca zero.
 
 **Kryterium wyjścia:** zero ⛔. Skill bez `references/CHANGELOG.md` jest poprawny
 tylko dopóki nie ma historii — przy pierwszym wpisie plik zakłada się od razu.
+
+---
+
+## 13. T13 — PRÓG DŁUGOŚCI MODUŁU (dodane 2026-08-21, obserwacja O-3)
+
+**Skrypt:** `scripts/check_dlugosc_modulow.py`
+**Priorytet:** ŚREDNI | **Typ:** pomiar deterministyczny (nie heurystyka)
+**Kod wyjścia:** 0 = brak modułów >1000 linii, 1 = naruszenie progu
+
+### Co kontroluje
+
+| Wynik | Warunek | Znaczenie |
+|---|---|---|
+| ⛔ CRIT | `modules/mod-*.md` > **1000** linii | ZASADA 13 naruszona — podział wymagany |
+| ⚠️ WARN | strefa **800-1000** linii | kolejna transza przekroczy próg; dziel PRZY OKAZJI najbliższej edycji, nie hurtem |
+| ℹ️ INFO | `SKILL.md` > 1000 linii | osobna kategoria wg F-78 — DO ROZSTRZYGNIĘCIA przez użytkownika, NIE wpływa na kod wyjścia |
+
+**Wyłączenia świadome:** `AUDIT-JOURNAL.md` (dziennik append-only, wyłączony
+TRWALE — podział zerwałby chronologię i odesłania `AUDYT-YYYY-MM-DD`),
+`mapa_dzu_*.md` (rejestry historyczne, ta sama logika).
+
+### Dlaczego powstał
+
+Do 2026-08-21 system miał **dwanaście** testów regresyjnych — na rejestrację
+modułów, liczniki, spójność Dz.U., nagłówki, zakres tytułów, przeniesienia do
+`shared/`, synchronizację aktów i metadane wersji — i **ani jednego na długość**,
+mimo że ZASADA 13 jest regułą twardą z progiem liczbowym, czyli najłatwiejszą
+do zautomatyzowania ze wszystkich. Skutek: naruszenie w
+`dr-02/modules/mod-KC-spadki.md` (1036 linii) przetrwało od momentu
+przekroczenia progu do ręcznego skanu ad hoc, a zamknięcie flagi F-78 musiało
+kończyć się rekomendacją *„świeży skan `wc -l` przy następnym audycie"* —
+czyli przerzuceniem kontroli na pamięć audytora. To ta sama klasa problemu co
+F-80 (rejestr nie nadążał za dyskiem), tylko dotycząca rozmiaru, nie istnienia.
+
+### Wynik pierwszego przebiegu (2026-08-21)
+
+Na stanie sprzed napraw: **1 ⛔** (`mod-KC-spadki` 1036) i **6 ⚠️** (strefa
+800-1000: `mod-ustawa-bezpieczenstwo-zywnosci` 925, `mod-PrUpad-upadlosc-
+restrukturyzacja` 906, `mod-PrFarm-prawo-farmaceutyczne` 903,
+`mod-techniki-mediacyjne-negocjacyjne` 856, `mod-KSH-spolki-handlowe` 850,
+`mod-OP-ordynacja-podatkowa` 837). Po podziałach z tej samej sesji (PrUpad
+wyprzedzająco, KC-spadki obligatoryjnie): **0 ⛔, 5 ⚠️**, kod wyjścia 0.
+
+### Ograniczenie — świadome
+
+Test mierzy WYŁĄCZNIE liczbę linii. **Nie ocenia, czy w miejscu, w którym
+wypadałoby ciąć, przebiega naturalna granica rozdziału** — to zawsze pozostaje
+decyzją audytora. Wynik ⛔ znaczy „podział wymagany", nie „podziel w połowie".
+Doświadczenie z podziału `mod-KC-spadki` pokazało, dlaczego to rozróżnienie
+jest istotne: sekcje modułu były dopisywane w kolejności zgłoszeń, nie
+w systematyce Księgi IV KC, więc wierny podział „wg rozdziałów aktu" wymagałby
+przestawienia treści — a to naruszyłoby nadrzędny wymóg podziału czysto
+strukturalnego. Test tego konfliktu nie wykryje i wykryć nie może.
+
+**Kryterium wyjścia:** zero ⛔. Pozycje ⚠️ nie blokują — są sygnałem
+planistycznym na najbliższą edycję danego pliku.

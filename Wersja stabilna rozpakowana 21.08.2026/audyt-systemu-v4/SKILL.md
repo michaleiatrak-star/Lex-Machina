@@ -21,8 +21,10 @@ references:
   - references/AUDIT-JOURNAL.md
   - references/WARN-OTWARTE.md   # rejestr żywy TYLKO otwartych flag (WARN + strukturalne) — dodane 2026-07-07, ZASADA 10; ⚡ od 2026-08-15w zaczyna się TABLICĄ STERUJĄCĄ (indeks wszystkich flag + następny krok w jednym zdaniu) — czytaj ją PIERWSZĄ przy pytaniu „co jest do zrobienia"
   - references/CHECKLIST-DEDUP.md   # mapa pojęć → lokalizacje (5 not, NOTA-6 ORPHAN dodana 06-14g)
-  - references/mapa_dzu_2026-07-15.md   # aktualna mapa Dz.U. (502 wiersze, sync 2026-08-13); 07-04 poprzednia wersja
-  - references/REGRESSION-TEST-PLAN.md   # zestaw testów regresyjnych T1-T9, T11, T12 (T11 dodany 2026-08-15z sekcja 11; T12 dodany 2026-08-20z sekcja 12), v1.2 (dodane 2026-07-21) — NAJPIERW zarejestrowany tutaj po odkryciu że plan istniał bez wpisu w SKILL.md
+  - references/mapa_dzu_2026-08-21.md   # ⭐ AKTUALNA mapa Dz.U. (transza 1 F-104: +3 t.j. rocznika 2026,
+                                          # 2 statusy → PREV, 1 naprawiony błąd klasy F-82 z 2 znacznikami ⚠️ ALERT)
+  - references/mapa_dzu_2026-07-15.md   # POPRZEDNIA generacja (sync 2026-08-13) — zachowana jako materiał historyczny
+  - references/REGRESSION-TEST-PLAN.md   # zestaw testów regresyjnych T1-T9, T11, T12, T13 (T11 — sekcja 11, 2026-08-15z; T12 — sekcja 12, 2026-08-20z; T13 próg długości — sekcja 13, 2026-08-21), v1.2 (dodane 2026-07-21) — NAJPIERW zarejestrowany tutaj po odkryciu że plan istniał bez wpisu w SKILL.md
   - references/SYNC-DZU-AUTOMATYCZNY.md   # narzędzie WSPIERAJĄCE FAZĘ 3 — automatyzacja wykrywania nowych pozycji Dz.U./M.P. (wprowadzone 2026-07-13, skonsolidowane z osobnego skilla 2026-07-13f) — REJESTROWANE 2026-08-15 po wykryciu jako plik-sierota (użytkownik przesłał starą wersję ZIP i zapytał o funkcję scheduled task; plik istniał na dysku, ale nigdy nie trafił do tego frontmatter)
   - references/HARMONOGRAM-CRON.md   # przykłady harmonogramu (cron / GitHub Actions) do adaptacji przez developera — powiązane z SYNC-DZU-AUTOMATYCZNY.md — REJESTROWANE 2026-08-15, ten sam powód co wyżej
   - references/SCHEDULED-TASK-COWORK.md   # POZYCJA 11 menu — zadanie cykliczne w Cowork (TRYB DZU co tydzień): warunek uruchomienia, kanoniczna treść Description+promptu, blok map pokrycia za bramką F-83 — DODANE 2026-08-15o
@@ -30,6 +32,10 @@ references:
   - references/mapa_dzu_2026-07-04.md   # ARCHIWALNA — poprzednia wersja mapy Dz.U., zachowywana jako materiał historyczny cytowany w AUDIT-JOURNAL.md — REJESTROWANE 2026-08-15 (nigdy formalnie nie wpisana mimo aktywnego cytowania)
   - references/mapa_dzu_2026-07-02.md   # ARCHIWALNA — jw., wcześniejsza wersja — REJESTROWANE 2026-08-15
   - references/mapa_dzu_2026-06-14.md   # ARCHIWALNA — jw., najwcześniejsza zachowana wersja — REJESTROWANE 2026-08-15
+  - references/F-104-lista-robocza-mapa-dzu.md   # lista robocza flagi F-104 — 16 aktów rocznika 2026
+                                          # do wpisania do mapy centralnej, po kwalifikacji numer GŁÓWNY vs POBOCZNY;
+                                          # zawiera opis pułapki parsowania (mapa trzyma numer w DWÓCH formatach:
+                                          # prozą `poz. N` i w kolumnach tabeli) — dodane 2026-08-21
   - references/raporty-pokrycia-2026-08-13/   # ⚡ STAN NA 2026-08-20y: 10 raportów + indeks zbiorczy = 11 plików (KKW, KPC, KSH, KW, OP, PPSA, PZP, PrBud, PrUp-PrRestr, SUS-FUS) — cytowane w F-64 do F-75. Pierwotnie 12 raportów + indeks = 13; `raport-pokrycia-KRO.md` usunięty 2026-08-15 (F-73 zamknięta), `raport-pokrycia-KPK.md` usunięty 2026-08-15nn (F-81 zamknięta) — oba zgodnie z § 7 WARN-OTWARTE.md. ⛔ Licznik „13 plików" tkwił tu 5 dni po obu usunięciach — przy KAŻDYM kolejnym usunięciu raportu POPRAW TĘ LINIĘ, inaczej frontmatter znów rozjedzie się ze stanem dysku (ta sama klasa co F-80, tylko w drugą stronę: rejestr wyprzedza dysk zamiast zostawać w tyle)
 scripts:
   - scripts/test_module_registration.py   # T1 — rejestracja modułów (KRYTYCZNY)
@@ -42,6 +48,11 @@ scripts:
   # flaga F-12) USUNIĘTE 2026-07-24d na polecenie użytkownika — patrz
   # AUDIT-JOURNAL.md, wpis AUDYT-2026-07-24d
   - scripts/check_wersje_changelog.py     # T12 — zgodność metadanych wersji skilla: `version:` vs najnowszy wpis references/CHANGELOG.md vs pole `changelog:` vs nagłówek H1 i stopka; wykrywa też pułapkę float (niecytowane `X.10` parsuje się jako X.1, czyli MNIEJ niż X.9). ŚREDNI, dodany 2026-08-20z, flaga F-101 — powstał po wykryciu tego samego rozjazdu w 3 skillach z 3 rodzin w jednej sesji
+  - scripts/check_dlugosc_modulow.py     # T13 — próg długości modułu (ZASADA 13): ⛔ dla `modules/mod-*.md`
+                                          # >1000 linii, ⚠️ dla strefy 800-1000. ŚREDNI, dodany 2026-08-21,
+                                          # obserwacja O-3 — powstał po tym, jak naruszenie w mod-KC-spadki
+                                          # (1036 l.) przetrwało do ręcznego skanu ad hoc, bo system miał
+                                          # 12 testów na rejestry/wersje/mapy i ZERO na długość
   - scripts/check_sync_aktow.py           # T11 — synchronizacja AKTÓW między lokalną MAPA-AKTOW, ROUTING-MAP i mapą Dz.U. (WYSOKI, heurystyka→WARN, dodany 2026-08-15z, flaga F-89) — wykrywa BRAK pozycji, czego T3 (rozbieżność numeru) i check_rejestracja_modulow (moduły) nie robią
   - scripts/run_regression_suite.py       # orkiestrator — uruchamia T1/T2/T3/T6/T7/T8 w jednym przebiegu
   - scripts/ci_check_shared.py            # T6/T7 — zerwane odwołania / duplikaty (już istniejący, wywoływany przez orkiestrator)
@@ -208,7 +219,7 @@ Przed jakimkolwiek działaniem wczytaj:
 view /mnt/skills/user/audyt-systemu-v4/references/AUDIT-JOURNAL.md
 view /mnt/skills/user/audyt-systemu-v4/references/WARN-OTWARTE.md
 view /mnt/skills/user/audyt-systemu-v4/references/CHECKLIST-DEDUP.md
-view /mnt/skills/user/audyt-systemu-v4/references/mapa_dzu_2026-07-15.md
+view /mnt/skills/user/audyt-systemu-v4/references/mapa_dzu_2026-08-21.md
 ```
 
 Celem jest ustalenie:
@@ -346,7 +357,7 @@ Wykonaj skan regex → oceń każde trafienie wg tabeli kwalifikacji → usuń t
 
 ## FAZA 3 — WERYFIKACJA MAPY Dz.U.
 
-Wczytaj: `references/mapa_dzu_2026-07-15.md`
+Wczytaj: `references/mapa_dzu_2026-08-21.md`
 
 ### 3-PULL — Synchronizacja DR-MAPA-AKTOW → ROUTING-MAP → mapa_dzu
 
@@ -396,7 +407,7 @@ Jeśli brakuje → **dodaj do obu plików** jako `⏳ OCZEKUJE`.
 
 Sprawdź w ISAP (isap.sejm.gov.pl) czy pojawiły się nowe teksty jednolite dla kluczowych aktów:
 - KC, KPC, KPK, KRO, KP, KSH, KPA, PB, PrFarm, PIT, CIT, OrdPod, PrNotariat
-- Sprawdź Dz.U. poz. > max_poz z ostatniego audytu (aktualnie: > 670 z 2026)
+- Sprawdź Dz.U. poz. > max_poz z ostatniego audytu (aktualnie: > 1079 z 2026 — najwyższa pozycja odnotowana w sesji 2026-08-21)
 
 ### 3B — Aktualizacja statusów
 
@@ -629,8 +640,9 @@ grep -n "^## AUDYT-$(date +%Y-%m-%d)" references/AUDIT-JOURNAL.md
 Jeśli znaleziono nowe t.j. lub zmiany statusów Dz.U.:
 
 > ⛔ **KOREKTA 2026-08-20y — ta sekcja kopiowała mapę ARCHIWALNĄ.** Polecenie
-> `cp` wskazywało `mapa_dzu_2026-06-14.md`, podczas gdy mapą aktualną jest
-> `mapa_dzu_2026-07-15.md` (tak podaje FAZA 3 i `references:` w YAML). Wykonanie
+> `cp` wskazywało `mapa_dzu_2026-06-14.md`, podczas gdy mapą aktualną była wtedy
+> `mapa_dzu_2026-07-15.md`, a dziś jest `mapa_dzu_2026-08-21.md` (tak podaje FAZA 3
+> i `references:` w YAML). Wykonanie
 > FAZY 7B literalnie cofnęłoby mapę o **trzy generacje** (06-14 → 07-02 → 07-04 →
 > 07-15), kasując ~250 wierszy ustaleń, i to bez żadnego sygnału błędu — nowy plik
 > powstałby poprawnie, tylko z przestarzałą treścią. To DRUGIE wystąpienie tej samej
@@ -639,10 +651,10 @@ Jeśli znaleziono nowe t.j. lub zmiany statusów Dz.U.:
 > `grep -n mapa_dzu SKILL.md` i popraw WSZYSTKIE wystąpienia, nie tylko `references:`.**
 
 1. Utwórz nową wersję pliku z datą bieżącą — źródłem jest **mapa aktualna**
-   (dziś `mapa_dzu_2026-07-15.md`; jeśli nie masz pewności, którą to jest, weź
+   (dziś `mapa_dzu_2026-08-21.md`; jeśli nie masz pewności, którą to jest, weź
    plik o najpóźniejszej dacie w nazwie i potwierdź go z `references:` w YAML):
 ```bash
-cp /mnt/skills/user/audyt-systemu-v4/references/mapa_dzu_2026-07-15.md \
+cp /mnt/skills/user/audyt-systemu-v4/references/mapa_dzu_2026-08-21.md \
    /mnt/skills/user/audyt-systemu-v4/references/mapa_dzu_YYYY-MM-DD.md
 ```
 
@@ -658,7 +670,7 @@ str_replace: mapa_dzu_2026-06-14.md → mapa_dzu_YYYY-MM-DD.md
 
 Jeśli **brak zmian Dz.U.** — plik mapy pozostaje bez zmian, odnotuj w AUDIT-JOURNAL.md:
 ```
-Dz.U.: brak nowych t.j. — mapa bez zmian (ostatnia: mapa_dzu_2026-07-15.md)
+Dz.U.: brak nowych t.j. — mapa bez zmian (ostatnia: mapa_dzu_2026-08-21.md)
 ```
 
 ### 7C — Aktualizacja WARN-OTWARTE.md (ZASADA 10)
@@ -996,7 +1008,7 @@ z WARN-OTWARTE.md, dodaj pełny wpis do AUDIT-JOURNAL.md.
 > to ten sam wzorzec luki, który wykrywa `check_rejestracja_modulow.py`).
 
 ```
-audyt-systemu-v4/                               ← 49 plików (stan 2026-08-20z)
+audyt-systemu-v4/                               ← 52 pliki (stan 2026-08-21)
 ├── SKILL.md                                    ← orchestrator (ten plik)
 ├── modules/                                    ← 5 modułów, pełna lista w YAML `modules:`
 │   ├── MOD-INTERLINIE.md                       ← zbędne puste linie (FAZA 2D-1)
@@ -1006,21 +1018,21 @@ audyt-systemu-v4/                               ← 49 plików (stan 2026-08-20z
 │   └── MOD-PROPAGACJA-NOWELIZACJI.md           ← propagacja nowelizacji przez CAŁY system
 ├── widgets/
 │   └── WIDGET-MENU.md                          ← menu interaktywne (FAZA 0B)
-├── scripts/                                    ← 15 plików: testy T1-T4, T8, T9, T11, T12,
+├── scripts/                                    ← 16 plików: testy T1-T4, T8, T9, T11, T12, T13,
 │   │                                             orkiestrator, ci_check_shared (T6/T7),
 │   │                                             check_rejestracja_modulow, sync ELI (3 pliki),
 │   │                                             2 skrypty .sh, README.md — pełna lista w YAML
 │   └── …                                         `scripts:`
-└── references/                                 ← 27 plików
+└── references/                                 ← 29 plików
     ├── AUDIT-JOURNAL.md                        ← dziennik audytów, ~44 tys. linii, 2,6 MB
     ├── WARN-OTWARTE.md                         ← rejestr żywy otwartych flag (ZASADA 10)
     ├── CHANGELOG.md                            ← historia wersji orkiestratora (F-78)
     ├── CHECKLIST-DEDUP.md                      ← mapa pojęć → lokalizacje kanoniczne
-    ├── REGRESSION-TEST-PLAN.md                 ← testy T1-T9 + T11 + T12
+    ├── REGRESSION-TEST-PLAN.md                 ← testy T1-T9 + T11 + T12 + T13
     ├── SYNC-DZU-AUTOMATYCZNY.md                ← + HARMONOGRAM-CRON.md, FORMAT-RAPORTU-ROZNIC.md
     ├── SCHEDULED-TASK-COWORK.md                ← POZYCJA 11 menu (FAZA 0C)
-    ├── mapa_dzu_2026-07-15.md                  ← mapa Dz.U. AKTUALNA (509 wierszy tabeli)
-    ├── mapa_dzu_2026-07-04 / 07-02 / 06-14.md  ← ARCHIWALNE, cytowane w dzienniku
+    ├── mapa_dzu_2026-08-21.md                  ← mapa Dz.U. AKTUALNA (transza 1 F-104)
+    ├── mapa_dzu_2026-07-15 / 07-04 / 07-02 / 06-14.md  ← POPRZEDNIE generacje, cytowane w dzienniku
     └── raporty-pokrycia-2026-08-13/            ← 10 raportów + indeks = 11 plików
 ```
 

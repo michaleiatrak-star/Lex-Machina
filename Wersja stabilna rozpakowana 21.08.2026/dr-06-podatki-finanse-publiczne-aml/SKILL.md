@@ -68,7 +68,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   od KC; nowelizacja znosi "wieczne przedawnienie" + wprowadza ugodę
   podatkową od 01.10.2026 (art. 70 i n. OP)
 
-## Moduły (42 łącznie — ✓ 42 OK, ☐ 0 STUB)
+## Moduły (43 łącznie — ✓ 43 OK, ☐ 0 STUB)
 
 **NAPRAWA 2026-08-14:** dodano `mod-OP-dzial-IV-rozdzial-11-dowody.md`
 — zamyka rdzeń F-70: dowody w postępowaniu podatkowym (180-200),
@@ -438,6 +438,16 @@ przez cross-reference, bez duplikacji treści).
                naprawie F-33: Dział VI OP — kontrola podatkowa,
                NAJCZĘSTSZY typ kontroli, z jakim styka się firma;
                ODRĘBNY od kontroli celno-skarbowej z mod-KAS)
+  [✓] NOWY  mod-OP-czynnosci-sprawdzajace-dzial-V
+              (dodany 2026-08-22, F-83 priorytet #3 mapy pokrycia: OP
+               art. 272-280. Cztery cele czynności sprawdzających [272],
+               korekta deklaracji przez organ z progiem 5000 zł i
+               mechanizmem sprzeciwu 14 dni [274], wezwanie do wyjaśnień
+               [274a], kontrola krzyżowa u kontrahentów [274c — ⭐⭐⭐
+               PUŁAPKA: wymaga równoległej kontroli/postępowania,
+               NIE działa przy samych czynnościach sprawdzających,
+               WSA Warszawa III SA/Wa 1251/18], odesłanie proceduralne
+               [280])
   [✓] OK    mod-KAS-kontrola-celno-skarbowa
   [✓] OK    mod-PIT-podatek-dochodowy-fizyczne
   [✓] OK    mod-CIT-podatek-dochodowy-prawne
@@ -667,6 +677,17 @@ view /mnt/skills/user/dr-06-podatki-finanse-publiczne-aml/modules/[nazwa-modulu]
 
 ```
 view /mnt/skills/user/dr-06-podatki-finanse-publiczne-aml/MAPA-AKTOW.md
+```
+
+## Mapa pokrycia treściowego (planowanie rozwoju skilla)
+
+Rejestr informacyjny — NIE krok obowiązkowy przy obsłudze konkretnej sprawy.
+Przydatny przy planowaniu, które luki uzupełnić w pierwszej kolejności
+(F-83, zasilony 2026-08-22 z audytu źródłowego 2026-08-13; obejmuje na
+razie wyłącznie Ordynację podatkową):
+
+```
+view /mnt/skills/user/dr-06-podatki-finanse-publiczne-aml/MAPA-POKRYCIA.md
 ```
 
 ## Powiązania zewnętrzne

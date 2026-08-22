@@ -34,6 +34,12 @@ pasującym przepisie; każdy przepis weryfikowany w ISAP przed użyciem
 wyczerpuje znamiona więcej niż jednego przepisu — kwalifikacja kumulatywna
 (art. 11 § 2 KK), nie wybór arbitralny.
 
+⚡ **STRUKTURA 2026-08-20 (F-78):** powyższy plik to teraz LEKKI INDEKSATOR
+(104 linie) z tabelą nawigacyjną — treść merytoryczna 8 bloków tematycznych
+znajduje się w podkatalogu `modules/kwalifikator-karnomaterialny/`. Wczytaj
+najpierw indeks, potem WYŁĄCZNIE właściwy plik części wg tabeli. Ścieżka
+`view` powyżej NIE wymagała zmiany — to zamierzona korzyść tej struktury.
+
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem przepisu, artykułu, terminu lub sygnatury:**
@@ -125,6 +131,29 @@ AUDIT-JOURNAL.md`.
   [✓] OK    mod-KK-cyberprzestepstwa-szczegolowy
   [✓] OK    mod-KK-kodeks-karny
   [✓] OK    mod-KK-kwalifikator-karnomaterialny
+              (✅ PODZIELONY 2026-08-20 — naprawa F-78, priorytet 1
+               [2109 linii, największy plik systemu]: plik pod
+               NIEZMIENIONĄ nazwą stał się lekkim indeksatorem [104
+               linie, tabela nawigacyjna], treść 24 bloków/sekcji
+               przeniesiona do 8 plików w podkatalogu
+               `kwalifikator-karnomaterialny/` [max 537 linii/plik].
+               Decyzja architektoniczna: NIE edytowano ~30 zewnętrznych
+               plików odsyłających do tego modułu — nazwa pliku
+               niezmieniona, więc wszystkie odesłania nadal działają.
+               Zweryfikowano 100% integralność treści [suma linii
+               części = oryginał minus nagłówek]. NAPRAWIONO PRZY
+               OKAZJI: (1) realna luka merytoryczna — DRZEWO B.1 nie
+               ostrzegało o konieczności przekierowania do DRZEWO I.2
+               przy ≥2 napastnikach/≥3 uczestnikach [pobicie/bójka to
+               inny reżim dowodowy — odpowiedzialność zbiorowa]; (2) 5
+               odesłań krzyżowych między blokami zaktualizowanych o
+               wskazanie pliku docelowego; (3) 1 PRZEDTEM ISTNIEJĄCE
+               martwe odesłanie "BLOK poniżej dot. KW" — nigdy nie
+               istniał taki blok, przekierowano do właściwego
+               zewnętrznego modułu mod-KW-kodeks-wykroczen.md. ⚠️
+               Pozostaje nieopracowane: art. 160 KK [narażenie na
+               niebezpieczeństwo] i art. 157a KK [uszkodzenie ciała
+               dziecka poczętego] bez własnych drzew decyzyjnych)
   [✓] OK    mod-czynny-zal-KK-KKS-samooskarzenie
               (dodany 2026-07-21: czynny żal KK [art. 15, dwie formy]
                i KKS [art. 16-16a, KLUCZOWE — nie tylko samo-donos,
@@ -444,6 +473,16 @@ view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/[nazwa-mod
 
 ```
 view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/MAPA-AKTOW.md
+```
+
+## Mapa pokrycia treściowego (planowanie rozwoju skilla)
+
+Rejestr informacyjny — NIE krok obowiązkowy przy obsłudze konkretnej sprawy.
+Przydatny przy planowaniu, które luki uzupełnić w pierwszej kolejności
+(F-83, zasilony 2026-08-22 z audytu źródłowego 2026-08-13):
+
+```
+view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/MAPA-POKRYCIA.md
 ```
 
 ## Powiązania zewnętrzne

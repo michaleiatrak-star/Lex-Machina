@@ -32,54 +32,7 @@
 | Wniosek o przywrócenie terminu | **0 zł** | — |
 | Wniosek o wgląd do akt | **0 zł** | art. 9 KPC |
 | Wniosek o wszczęcie egzekucji | **0 zł** | — |
-| Skarga na czynności komornika — postanowienie o umorzeniu postępowania egzekucyjnego | 50 zł | art. 25 ust. 1 KSCU ⚡ SKORYGOWANE 2026-08-21 (było błędnie 100 zł) |
-| Skarga na czynności komornika — pozostałe czynności/zaniechania konkretnej czynności | 50 zł | art. 25 ust. 1 KSCU ⚡ SKORYGOWANE 2026-08-21 (było błędnie 100 zł) |
-| Skarga na przewlekłość postępowania egzekucyjnego (ogólna opieszałość/bezczynność komornika powodująca przewlekłość) | 200 zł — **zwracana w razie uwzględnienia skargi** | ustawa z 17.06.2004 o skardze na naruszenie prawa strony do rozpoznania sprawy bez nieuzasadnionej zwłoki, stosowana odpowiednio do komornika |
-| Skarga do Prezesa Sądu Rejonowego (nadzór administracyjny nad komornikiem) | **0 zł — bezpłatna** | art. 3 ust. 4, art. 175 ust. 2 pkt 7, art. 179, art. 222 ust. 4 ustawy o komornikach sądowych — NIE jest pismem procesowym objętym KSCU |
-
-> ℹ️ **Trzy odrębne, wyraźnie rozdzielone tryby (na żądanie użytkownika,
-> 2026-08-21) — nie mylić ze sobą:**
->
-> **1. Skarga na czynności komornika (art. 767 §1 KPC)** — dotyczy KONKRETNEJ
-> czynności lub zaniechania KONKRETNEJ czynności (np. błędne zajęcie, zbyt
-> niska wycena, brak doręczenia zawiadomienia). Do sądu rejonowego, za
-> pośrednictwem komornika, termin zawity 7 dni. **50 zł jednolicie** — art. 25
-> ust. 1 KSCU nie różnicuje opłaty wg przedmiotu zaskarżenia; obejmuje to
-> również postanowienie o umorzeniu postępowania (art. 824-825 KPC), które
-> jest zaskarżane w tym samym trybie, nie odrębnym.
->
-> **2. Skarga na przewlekłość postępowania egzekucyjnego** — dotyczy OGÓLNEJ
-> opieszałości/bezczynności (nie konkretnej czynności, którą można by
-> "zaniechać") powodującej nieuzasadnioną zwłokę w całym postępowaniu. Do
-> sądu okręgowego, na podstawie ODRĘBNEJ ustawy z 17.06.2004 (nie KSCU/KPC),
-> stosowanej odpowiednio do komornika. **200 zł, ale zwracana w razie
-> uwzględnienia skargi** — więc nie jest to koszt "utopiony" jak przy trybie 1.
->
-> **3. Skarga do Prezesa Sądu Rejonowego (nadzór administracyjny)** — dotyczy
-> ogólnego sposobu funkcjonowania kancelarii komorniczej: braku komunikacji,
-> chaosu organizacyjnego, naruszeń etyki zawodowej, ogólnej opieszałości bez
-> formalnego żądania uchylenia konkretnej czynności. Podstawa: ustawa o
-> komornikach sądowych (nadzór administracyjny), NIE ustawa o kosztach
-> sądowych w sprawach cywilnych — **skarga w ogóle nie jest pismem
-> procesowym w rozumieniu KSCU, więc nie podlega żadnej opłacie sądowej**.
-> Brak sztywnego terminu ustawowego (prezes rozpatruje w 7-30 dni zależnie
-> od podstawy, ale to termin instrukcyjny dla organu, nie prekluzyjny dla
-> skarżącego). Nie prowadzi do uchylenia/zmiany konkretnej czynności —
-> ma charakter dyscyplinujący/sygnalizacyjny, nie orzeczniczy.
->
-> **Zweryfikowane:** tryb 1 — Rząd 1 (isap.sejm.gov.pl, t.j. Dz.U. 2025 poz.
-> 1228) + Rząd 2B (lexlege.pl, przepisy.gofin.pl, infor.pl, sip.lex.pl) +
-> orzecznictwo (SR, XII 1Co 816/23). Tryb 2 — Rząd 2B/3 zgodne (insolens.pl,
-> tworzewski.pl, mamdlugi.pl, hfhr.pl — kwota 200 zł od 6.01.2017, zwrot przy
-> uwzględnieniu). Tryb 3 — Rząd 3, **2 zgodne źródła** (eurolege.pl 06.2026:
-> "ta skarga jest bezpłatna, nie musisz uiszczać żadnej opłaty sądowej";
-> pamietnikwindykatora.pl: "bezpłatna alternatywa do skargi na czynności
-> komornika") + potwierdzenie strukturalne (ustawa o komornikach sądowych,
-> art. 3/175/179/222 ust. 4, nie zawiera żadnego odesłania do opłaty, a KSCU
-> nie wymienia tej skargi w katalogu pism podlegających opłacie) — ⚠️ niższa
-> kategoria źródła niż tryb 1, brak bezpośredniego potwierdzenia Rząd 1/2,
-> ale zgodność 2 niezależnych źródeł + logika systemowa (skarga administracyjna
-> poza zakresem KSCU) obniżają ryzyko błędu.
+| Skarga na czynności komornika | 100 zł | ustawa o kosztach sądowych w sprawach cywilnych |
 
 ---
 

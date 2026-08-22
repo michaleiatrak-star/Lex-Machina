@@ -488,6 +488,18 @@ view /mnt/skills/user/dr-09-budownictwo-srodowisko-energia-transport/modules/[na
 view /mnt/skills/user/dr-09-budownictwo-srodowisko-energia-transport/MAPA-AKTOW.md
 ```
 
+## Mapa pokrycia treściowego (planowanie rozwoju skilla)
+
+Rejestr informacyjny — NIE krok obowiązkowy przy obsłudze konkretnej sprawy.
+Przydatny przy planowaniu, które luki uzupełnić w pierwszej kolejności, oraz
+przy nowelizacjach — pokazuje od razu czy dotknięty fragment ma treść do
+zaktualizowania. (F-83, zasilony 2026-08-22; obejmuje na razie wyłącznie
+Prawo budowlane):
+
+```
+view /mnt/skills/user/dr-09-budownictwo-srodowisko-energia-transport/MAPA-POKRYCIA.md
+```
+
 ---
 
 ## Powiązania zewnętrzne

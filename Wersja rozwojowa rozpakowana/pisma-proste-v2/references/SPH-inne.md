@@ -231,18 +231,25 @@ Załączniki:
   sąd odrzuci wniosek jako niekompletny (art. 169 §2 KPC).
 - Sąd orzeka o wniosku **postanowieniem** — może wydać je niejawnie
   (bez rozprawy) lub na posiedzeniu.
-- Odmowa przywrócenia → **zażalenie** w terminie 7 dni od doręczenia
-  postanowienia. ⚠️ [NIEWERYFIKOWANE — SPORNE] Poprzednia wersja tej sekcji
-  wskazywała art. 394 §1 pkt 2 KPC, ale ten punkt katalogu dotyczy zwrotu
-  pozwu, nie przywrócenia terminu — cytat był błędny. Zaskarżalność odmowy
-  przywrócenia terminu zależy od tego, czy in concreto stanowi postanowienie
-  "kończące postępowanie w sprawie" (art. 394 §1 zdanie wstępne KPC) — kwestia
-  sporna w doktrynie/orzecznictwie. **Przed sporządzeniem pisma:**
-  web_search "zażalenie odmowa przywrócenia terminu KPC orzecznictwo
-  [aktualny rok]" i potwierdź zarówno dopuszczalność, jak i adresata
-  (sąd II instancji vs inny skład tego samego sądu) na gruncie najnowszego
-  orzecznictwa SN dla konkretnego rodzaju postanowienia, które uchybiona
-  czynność miała poprzedzać.
+- Odmowa przywrócenia terminu → ⛔ **NIEZASKARŻALNA WPROST zażaleniem**
+  (✅ VER 2026-08-21, F-13 — rp.pl cytujące jednolite orzecznictwo SN:
+  postanowienie oddalające lub odrzucające wniosek o przywrócenie terminu
+  NIE mieści się w katalogu art. 394 §1 KPC — nie jest postanowieniem
+  "kończącym postępowanie w sprawie", więc zażalenie na nie **nie
+  przysługuje**. Poprzednia wersja tej sekcji błędnie wskazywała art. 394
+  §1 pkt 2 KPC — ten punkt dotyczy zwrotu pozwu, nie przywrócenia terminu;
+  ten cytat był mylny). **Droga zaskarżenia jest pośrednia**: strona nie
+  może zaskarżyć samej odmowy przywrócenia terminu, ale gdy sąd w
+  konsekwencji odrzuci spóźnioną czynność procesową (np. apelację), można
+  zaskarżyć TO postanowienie odrzucające — i w ramach tego zażalenia/
+  apelacji podnieść zarzut wadliwej odmowy przywrócenia terminu na
+  podstawie art. 380 KPC (kontrola postanowień niezaskarżalnych osobno,
+  w ramach zaskarżenia orzeczenia kończącego). Adresat i termin zależą
+  wówczas od rodzaju TEGO KOLEJNEGO postanowienia (np. odrzucenie
+  apelacji → zażalenie do innego składu sądu II instancji, art. 394² §1
+  KPC) — **przed sporządzeniem pisma** ustal dokładnie, jakie postanowienie
+  faktycznie zamierza się zaskarżyć i sprawdź `shared/ZAZALENIE-ADRESAT-GATE.md`
+  dla TEGO postanowienia, nie dla samej odmowy przywrócenia terminu.
 - Skuteczne przywrócenie terminu ma **moc wsteczną** — czynność uznaje się
   za dokonaną w terminie.
 

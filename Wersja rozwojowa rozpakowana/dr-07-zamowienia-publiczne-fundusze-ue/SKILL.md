@@ -40,7 +40,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Zamówienia publiczne, fundusze UE, pomoc publiczna — pojęcia (wykonawca, zamawiający, oferta, rażąco niska cena, kryteria oceny ofert) mają definicje ustawowe wprost w PZP (art. 7) i nie wymagają osobnego pliku w shared/definicje/. Żaden plik tematyczny nie obejmuje dziedziny PZP.
-## Moduły (17 łącznie — ✓ 17 OK, ☐ 0 STUB)
+## Moduły (18 łącznie — ✓ 18 OK, ☐ 0 STUB)
 
 **NAPRAWA 2026-08-14:** dodano `mod-PZP-dzial-II-kwalifikacja-kryteria-
 uniewaznienie.md` — zamyka rdzeń F-71: Dział II PZP (183 art., >1/4
@@ -127,6 +127,18 @@ view /mnt/skills/user/dr-07-zamowienia-publiczne-fundusze-ue/modules/[nazwa-modu
 
 ```
 view /mnt/skills/user/dr-07-zamowienia-publiczne-fundusze-ue/MAPA-AKTOW.md
+```
+
+## Mapa pokrycia treściowego (planowanie rozwoju skilla)
+
+Rejestr informacyjny — NIE krok obowiązkowy przy obsłudze konkretnej sprawy.
+Przydatny przy planowaniu, które luki uzupełnić w pierwszej kolejności, oraz
+przy nowelizacjach — pokazuje od razu czy dotknięty fragment ma treść do
+zaktualizowania. (F-83, zasilony 2026-08-22; obejmuje na razie wyłącznie
+PZP — drugi najlepiej pokryty akt w całym audycie źródłowym):
+
+```
+view /mnt/skills/user/dr-07-zamowienia-publiczne-fundusze-ue/MAPA-POKRYCIA.md
 ```
 
 ## Powiązania zewnętrzne

@@ -22,42 +22,10 @@ zaniechanie) w toku postępowania egzekucyjnego. Termin zawity: **tydzień
   terminie czynności ani na uiszczenie przez komornika VAT.
 - **art. 767² KPC** — sąd rozpoznaje skargę w terminie tygodniowym od jej
   wpływu (informacyjnie, nie wpływa na termin składania).
-- Opłata: **50 zł** (art. 25 ust. 1 KSCU — ⚡ SKORYGOWANE 2026-08-21, było
-  błędnie podane jako 100 zł; zweryfikowane Rząd 1 [isap.sejm.gov.pl, t.j.
-  Dz.U. 2025 poz. 1228] + Rząd 2B [lexlege.pl, przepisy.gofin.pl, infor.pl,
-  sip.lex.pl]). **Jedna stawka dla OBU trybów skargi** — zarówno gdy
-  zaskarżane jest postanowienie komornika o umorzeniu postępowania
-  egzekucyjnego (art. 824-825 KPC), jak i każda inna czynność/zaniechanie —
-  art. 25 ust. 1 KSCU nie różnicuje opłaty wg przedmiotu zaskarżenia. Nie
-  mylić z odrębną opłatą 100 zł z art. 25 ust. 1a KSCU (zażalenie na odmowę
-  czynności notarialnej — inny przedmiot, nie dotyczy komornika).
+- Opłata: **100 zł** (ustawa o kosztach sądowych w sprawach cywilnych).
 
 > ⚠ Weryfikuj aktualność przepisów na isap.sejm.gov.pl przed użyciem —
 > art. 767 był wielokrotnie nowelizowany (m.in. formularz urzędowy 2019).
-
----
-
-## ⚠️ TEN SZABLON vs DWA INNE TRYBY — NIE MYLIĆ (rozgraniczenie 2026-08-21)
-
-Ten plik (SPL) obsługuje WYŁĄCZNIE skargę na KONKRETNĄ czynność lub
-zaniechanie konkretnej czynności (art. 767 §1 KPC, 50 zł). Jeżeli klient
-opisuje inny problem, eskaluj do właściwego trybu zamiast używać tego
-szablonu:
-
-| Objaw zgłaszany przez klienta | Właściwy tryb | Opłata |
-|---|---|---|
-| Konkretna wadliwa czynność (złe zajęcie, zła wycena, brak doręczenia) LUB konkretne postanowienie o umorzeniu postępowania | **TEN SZABLON** — skarga na czynności komornika, art. 767 §1 KPC, do sądu rejonowego za pośrednictwem komornika, termin 7 dni | 50 zł |
-| Ogólna, długotrwała opieszałość w CAŁYM postępowaniu (przewlekłość) — klient nie wskazuje jednej czynności, tylko "nic się nie dzieje od miesięcy" | Skarga na przewlekłość postępowania egzekucyjnego — ustawa z 17.06.2004, do sądu okręgowego, brak 7-dniowego terminu zawitego | 200 zł (zwracana w razie uwzględnienia) |
-| Brak komunikacji, chaos organizacyjny kancelarii, naruszenie etyki zawodowej, ogólne niezadowolenie z funkcjonowania komornika bez żądania uchylenia konkretnej czynności | Skarga do Prezesa Sądu Rejonowego (nadzór administracyjny) — art. 3 ust. 4, 175 ust. 2 pkt 7, 179, 222 ust. 4 ustawy o komornikach sądowych | **0 zł — bezpłatna** (nie jest pismem procesowym objętym KSCU) |
-
-⚠️ Skarga do Prezesa Sądu ma charakter dyscyplinujący/sygnalizacyjny — NIE
-prowadzi do uchylenia/zmiany zaskarżonej czynności. Jeśli klientowi zależy
-na konkretnym rozstrzygnięciu (np. cofnięcie zajęcia), zawsze pierwszym
-wyborem jest skarga na czynności komornika (ten szablon), nie skarga do
-prezesa — nawet jeśli jest bezpłatna. Zweryfikowane: Rząd 3, 2 zgodne
-źródła (eurolege.pl 06.2026, pamietnikwindykatora.pl) + potwierdzenie
-strukturalne (ustawa o komornikach sądowych nie przewiduje opłaty za tę
-skargę, a KSCU jej nie wymienia w katalogu pism podlegających opłacie).
 
 ---
 

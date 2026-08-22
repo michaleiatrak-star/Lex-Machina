@@ -68,7 +68,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (43 łącznie — ✓ 43 OK, ☐ 0 STUB)
+## Moduły (52 łącznie — ✓ 52 OK, ☐ 0 STUB)
 
 **KOREKTA LICZNIKA 2026-08-14d:** poprzednia wartość („43” przy 42 modułach na dysku) była ZAWYŻONA O 1 JUŻ PRZED dodaniem mod-KPC-nieproces-czesc-ogolna — wykryte przy mechanicznej kontroli dysk/checklista. Po dodaniu nowego modułu rzeczywisty stan to 43 moduły i 43 wpisy [✓], zero modułów-widm.
 
@@ -226,6 +226,17 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
                CSK 321/15] — plus art. 13f KSCU potwierdzony, ale nie
                zintegrowany z regułami kosztów w tym module)
   [✓] OK    mod-KC-spadki
+              (⭐ PODZIELONY 2026-08-21, ZASADA 13 / F-105 — 1036 l. przekraczało
+               próg; plik zachowuje nazwę jako indeksator, zostaje z dziedziczeniem
+               ustawowym, formami testamentu, przyjęciem/odrzuceniem i STRATEGIĄ)
+  [✓] NOWY  mod-KC-spadki-zachowek-dzial-rozrzadzenia
+              (wydzielony 2026-08-21 — zachowek [991-1011], dział spadku
+               [1035-1046 KC + 680-689 KPC], zapis zwykły i windykacyjny,
+               polecenie, wykonawca testamentu, wydziedziczenie, niegodność)
+  [✓] NOWY  mod-KC-spadki-dlugi-umowy-transgraniczne
+              (wydzielony 2026-08-21 — odpowiedzialność za długi [1030-1034³],
+               umowy o spadek i zrzeczenie [1047-1057], gmina/Skarb Państwa [935],
+               spadki transgraniczne i EPS, gospodarstwa rolne, spis inwentarza)
               (v2.0, rozbudowane 2026-07-19: zapis zwykły/windykacyjny,
                polecenie testamentowe, wykonawca testamentu,
                wydziedziczenie [odróżnione od niegodności dziedziczenia],
@@ -375,6 +386,14 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
                i zawieszenie członka zarządu [art. 220]. ⚠️
                [NIEWERYFIKOWANE RZĄD 1] większość treści)
   [✓] OK    mod-PrUpad-upadlosc-restrukturyzacja
+              (⭐ PODZIELONY 2026-08-21, ZASADA 13 — plik zachowuje nazwę
+               jako indeksator; Tytuł Va + Tytuł VII Dział I + Tytuł IX
+               wydzielone do mod-PrUpad-uklad-likwidacja-zakonczenie)
+  [✓] NOWY  mod-PrUpad-uklad-likwidacja-zakonczenie
+              (wydzielony 2026-08-21 z modułu wyżej — podział WYPRZEDZAJĄCY
+               przed dalszymi transzami F-86: układ w upadłości [266a-266f],
+               likwidacja masy Dział I [306-315], zakończenie i umorzenie
+               postępowania [361-372]. ⛔ Dalszą treść F-86 dopisywać TUTAJ)
   [✓] NOWY  mod-PrRestr-dzial-III-nadzorca-zarzadca
               (dodany 2026-08-19 — naprawa F-87 priorytet 1: Dział III
                PrRestr, art. 23-64. Struktura 4 rozdziałów + tabela
@@ -565,6 +584,18 @@ view /mnt/skills/user/dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/[nazwa-mo
 
 ```
 view /mnt/skills/user/dr-02-prawo-cywilne-rodzinne-gospodarcze/MAPA-AKTOW.md
+```
+
+## Mapa pokrycia treściowego (planowanie rozwoju skilla)
+
+Rejestr informacyjny — NIE krok obowiązkowy przy obsłudze konkretnej sprawy.
+Przydatny przy planowaniu, które luki uzupełnić w pierwszej kolejności, oraz
+przy nowelizacjach — pokazuje od razu czy dotknięty fragment ma treść do
+zaktualizowania. (F-83, zasilony 2026-08-22 z KSH i PrUp/PrRestr; KPC
+świadomie pominięty jako częściowo przestarzały względem stanu po F-65):
+
+```
+view /mnt/skills/user/dr-02-prawo-cywilne-rodzinne-gospodarcze/MAPA-POKRYCIA.md
 ```
 
 ## Powiązania zewnętrzne

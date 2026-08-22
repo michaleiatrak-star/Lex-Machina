@@ -165,6 +165,18 @@ view /mnt/skills/user/dr-05-prawo-administracyjne-sadowoadministracyjne/modules/
 view /mnt/skills/user/dr-05-prawo-administracyjne-sadowoadministracyjne/MAPA-AKTOW.md
 ```
 
+## Mapa pokrycia treściowego (planowanie rozwoju skilla)
+
+Rejestr informacyjny — NIE krok obowiązkowy przy obsłudze konkretnej sprawy.
+Przydatny przy planowaniu, które luki uzupełnić w pierwszej kolejności, oraz
+przy nowelizacjach — pokazuje od razu czy dotknięty fragment ma treść do
+zaktualizowania. (F-83, zasilony 2026-08-22; obejmuje na razie wyłącznie
+PPSA — akt bez własnego dedykowanego modułu):
+
+```
+view /mnt/skills/user/dr-05-prawo-administracyjne-sadowoadministracyjne/MAPA-POKRYCIA.md
+```
+
 ## Powiązania zewnętrzne
 - Wchodzi z: `prawo-polskie-v2` → `ROUTING-MAP.md` → ten skill
 - KPA / PPSA: teraz KANONICZNIE tutaj → `mod-KPA-postepowanie-administracyjne` (PRZENIESIONY 2026-07-19 z DR-04)

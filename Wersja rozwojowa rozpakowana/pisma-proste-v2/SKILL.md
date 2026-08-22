@@ -1,9 +1,6 @@
 ---
 name: pisma-proste-v2
-version: "2.11"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: bez niego YAML parsuje ten numer jako float
-                  # (2.1), a 2.1 < 2.9 — porządek wersji odwraca się dla każdego
-                  # narzędzia porównującego liczbowo. Naprawione 2026-08-20z3 (F-102),
-                  # test T12: scripts/check_wersje_changelog.py
+version: 2.10
 type: executive-pisma
 status: production
 description: |
@@ -20,13 +17,6 @@ compatibility:
   tools:
     - web_search
     - web_fetch
-changelog: |
-  Wersja bieżąca: 2.11. ⛔ PEŁNA HISTORIA — WYŁĄCZNIE w references/CHANGELOG.md
-  (standard systemowy 2026-08-20z4: jeden plik, jedna lokalizacja; zakaz sekcji
-  changelogu w korpusie SKILL.md i zakaz pełnej listy wpisów w tym polu).
-  Skrót 2.11 (2026-08-20z4): historia zmian wyniesiona z korpusu SKILL.md do references/CHANGELOG.md
-  (nowy plik, treść 1:1).
-
 ---
 
 # Skill: Pisma Proste v2 — Architektura Modułowa
@@ -373,16 +363,31 @@ Procedura, klasyfikacja błędów, format raportu i nakazy bezwzględne są w FA
 
 ## CHANGELOG
 
-⛔ **Historia zmian tego skilla NIE mieszka w tym pliku.** Pełny changelog:
+- **2026-07-25 (v2.6):** Zarejestrowano `shared/ZAZALENIE-ADRESAT-GATE.md`
+  jako obowiązkową bramkę w KROK 9d — systemowe rozwiązanie luki
+  "zażalenie wymienione, ale bez adresata", potwierdzonej w 69 plikach
+  całego systemu (patrz AUDIT-JOURNAL.md, AUDYT-2026-07-25c/d).
 
-```
-view /mnt/skills/user/pisma-proste-v2/references/CHANGELOG.md
-```
+- **2026-07-25 (v2.5):** Dodano nowy schemat **SPL — Skarga na czynności
+  komornika** (`references/SPL-skarga-komornik.md`, art. 767 KPC) — na
+  żądanie użytkownika, w ramach rozszerzenia o "wnioski i pozostałe
+  dokumenty kierowane do sądu". Zarejestrowano w tabeli schematów, KROK 4
+  ścieżki wykonania i M6-oplaty.md (100 zł). Adresat opisany od razu
+  poprawnie (do komornika, nie bezpośrednio do sądu — art. 767 §5 KPC),
+  zgodnie z wnioskiem z audytu adresatów zażalenia tego samego dnia.
 
-Skrót bieżącej wersji — pole `changelog:` we frontmatterze powyżej.
-Standard systemowy (2026-08-20z4): `references/CHANGELOG.md` jest jedyną
-lokalizacją kanoniczną historii; zakaz odtwarzania sekcji changelogu w korpusie
-SKILL.md i zakaz trzymania pełnej listy wpisów w YAML.
+- **2026-07-25 (v2.4):** CRIT-TREŚĆ — `references/SPH-inne.md`: poprawiono
+  błędny adresat/podstawę zażalenia w SPH-A (odmowa zwolnienia od kosztów
+  sądowych) — było art. 394 §1 KPC (sąd II instancji), jest art. 394¹ᵃ §1
+  pkt 1 KPC (zażalenie poziome, inny skład tego samego sądu). Oznaczono jako
+  sporne/do weryfikacji podstawę zażalenia w SPH-B (odmowa przywrócenia
+  terminu) — poprzedni cytat (art. 394 §1 pkt 2 KPC) treściowo nie pasował.
+  Zweryfikowano online (ISAP, arslege.pl, lexlege.pl). Zob.
+  audyt-systemu-v4/references/AUDIT-JOURNAL.md, wpis 2026-07-25.
+*Dla pism wielowątkowych → pisma-procesowe-v3*
+*Dla analizy dowodów → analizator-dowodow-v3 · Dla orzecznictwa → orzeczenia-sadowe-v2*
+
+---
 
 ## KROK 9d — PROCEDURAL CORE SHARED
 
