@@ -809,7 +809,32 @@ Q&A / pytania użytkownika
 □ Czy używam w KROK I sygnału Q&A ("❓ Masz pytanie...") ?
 □ Czy zebrałem fakty z Q&A i przekazałem do PRIMARY skilla?
 □ Czy disclaimer jest ostatnim elementem odpowiedzi z analizą?
+□ [ANTY-FASADA] (dodane 2026-08-23, v2.6) Czy w odpowiedzi/piśmie jest słowo
+  „zweryfikowano/zweryfikowałem", pole „data weryfikacji" albo URL przy przepisie,
+  dla którego NIE wywołałem narzędzia W TEJ ODPOWIEDZI? TAK → ⛔ usuń deklarację
+  i datę, URL przeformatuj na 🎯 [CEL — RZĄD 1, NIEOTWARTE: …], przepis oznacz
+  ⚠️ [NIEWERYFIKOWANE]. Wyzwalacz to BRAK WYWOŁANIA, nie brak narzędzi w sesji.
+  ⛔ Zastrzeżenie selektywne (przy sygnaturach tak, przy przepisach nie) = naruszenie.
+□ [DOMAIN-LOCK] Odpowiedź/pismo zawiera przepis SPOZA dziedziny wiodącej
+  (KK/KKS/KW/KPK/KPW przy torze cywilnym, pracowniczym lub administracyjnym —
+  albo odwrotnie)? NIE → OK. TAK → (a) konkretny FAKT wypełniający znamię,
+  nie skojarzenie tematyczne? (b) właściwy DR wczytany w TEJ odpowiedzi?
+  (c) przepis przeszedł PRAWO-HARDGATE w TEJ odpowiedzi? Którekolwiek NIE →
+  ⛔ USUŃ powołanie.  → `view /mnt/skills/user/shared/DOMAIN-LOCK.md`
+□ [RATE-COMPLETENESS] Występują odsetki / waloryzacja / wskaźnik zmienny
+  w czasie? NIE → OK. TAK → przedział zapisany + reżim rozstrzygnięty
+  (KC vs transakcje handlowe) + szereg podokresów BEZ LUK + znacznik na
+  KAŻDYM wierszu? NIE → nie podawaj kwoty łącznej, pokaż tabelę z ⬛.
+  → `view /mnt/skills/user/shared/RATE-COMPLETENESS.md`
+□ [STATUSY] Każdy przepis ma znacznik z ZAMKNIĘTEJ hierarchii czterech:
+  ✅ [VER] · 🟡 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
+  Etykieta spoza tej listy = naruszenie hard gate (PRAWO-HARDGATE v2.5).
 ```
+
+> ⛔ Trzy ostatnie pozycje dodane 2026-08-23 (F-109). Przewodnik jest
+> GOSPODARZEM sesji i sam tłumaczy wyniki innych skilli — jeżeli w wyniku
+> pojawi się kwalifikacja spoza dziedziny albo stawka bez szeregu, to TUTAJ
+> jest ostatnie miejsce, w którym da się to zatrzymać przed użytkownikiem.
 
 ---
 

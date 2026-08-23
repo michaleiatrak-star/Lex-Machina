@@ -340,7 +340,32 @@ CHECKLISTA FINALNA (pisma proste)
                     Czy pismo powstało z dostarczonych dokumentów? → OBOWIĄZKOWE.
                     Żadna fikcja faktyczna w treści pisma (⛔ = błąd krytyczny)?
 □ HYBRID-VALIDATION Uruchomiony? Raport braków wyświetlony? Licznik ⬛ podany?
+□ [ANTY-FASADA] (dodane 2026-08-23, v2.6) Czy w odpowiedzi/piśmie jest słowo
+  „zweryfikowano/zweryfikowałem", pole „data weryfikacji" albo URL przy przepisie,
+  dla którego NIE wywołałem narzędzia W TEJ ODPOWIEDZI? TAK → ⛔ usuń deklarację
+  i datę, URL przeformatuj na 🎯 [CEL — RZĄD 1, NIEOTWARTE: …], przepis oznacz
+  ⚠️ [NIEWERYFIKOWANE]. Wyzwalacz to BRAK WYWOŁANIA, nie brak narzędzi w sesji.
+  ⛔ Zastrzeżenie selektywne (przy sygnaturach tak, przy przepisach nie) = naruszenie.
+□ [DOMAIN-LOCK] Odpowiedź/pismo zawiera przepis SPOZA dziedziny wiodącej
+  (KK/KKS/KW/KPK/KPW przy torze cywilnym, pracowniczym lub administracyjnym —
+  albo odwrotnie)? NIE → OK. TAK → (a) konkretny FAKT wypełniający znamię,
+  nie skojarzenie tematyczne? (b) właściwy DR wczytany w TEJ odpowiedzi?
+  (c) przepis przeszedł PRAWO-HARDGATE w TEJ odpowiedzi? Którekolwiek NIE →
+  ⛔ USUŃ powołanie.  → `view /mnt/skills/user/shared/DOMAIN-LOCK.md`
+□ [RATE-COMPLETENESS] Występują odsetki / waloryzacja / wskaźnik zmienny
+  w czasie? NIE → OK. TAK → przedział zapisany + reżim rozstrzygnięty
+  (KC vs transakcje handlowe) + szereg podokresów BEZ LUK + znacznik na
+  KAŻDYM wierszu? NIE → nie podawaj kwoty łącznej, pokaż tabelę z ⬛.
+  → `view /mnt/skills/user/shared/RATE-COMPLETENESS.md`
+□ [STATUSY] Każdy przepis ma znacznik z ZAMKNIĘTEJ hierarchii czterech:
+  ✅ [VER] · 🟡 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
+  Etykieta spoza tej listy = naruszenie hard gate (PRAWO-HARDGATE v2.5).
 ```
+
+> ⛔ Trzy ostatnie pozycje dodane 2026-08-23 (F-109). Obowiązują NIEZALEŻNIE
+> od tego, czy skill został wywołany przez `prawny-router-v3` — pismo proste
+> bywa redagowane bez przejścia przez router, a bramki żyły dotąd wyłącznie
+> w jego SELF-CHECK.
 
 Nie wydawaj pisma jeśli którykolwiek element checklisty nie jest spełniony.
 

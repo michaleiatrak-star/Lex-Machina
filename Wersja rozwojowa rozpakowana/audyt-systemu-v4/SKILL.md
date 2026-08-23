@@ -32,6 +32,9 @@ references:
   - references/mapa_dzu_2026-07-04.md   # ARCHIWALNA — poprzednia wersja mapy Dz.U., zachowywana jako materiał historyczny cytowany w AUDIT-JOURNAL.md — REJESTROWANE 2026-08-15 (nigdy formalnie nie wpisana mimo aktywnego cytowania)
   - references/mapa_dzu_2026-07-02.md   # ARCHIWALNA — jw., wcześniejsza wersja — REJESTROWANE 2026-08-15
   - references/mapa_dzu_2026-06-14.md   # ARCHIWALNA — jw., najwcześniejsza zachowana wersja — REJESTROWANE 2026-08-15
+  - references/F-108-lista-MS-egzamin-2026.md   # lista robocza flagi F-108 — benchmark zewnętrzny: wykaz 52 aktów
+                                          # MS na egzamin wstępny na aplikację 2026; pomiar bazowy pokrycia
+                                          # (39 A / 9 B / 1 C / 3 D) + plan trzyetapowy — dodane 2026-08-23
   - references/F-104-lista-robocza-mapa-dzu.md   # lista robocza flagi F-104 — 16 aktów rocznika 2026
                                           # do wpisania do mapy centralnej, po kwalifikacji numer GŁÓWNY vs POBOCZNY;
                                           # zawiera opis pułapki parsowania (mapa trzyma numer w DWÓCH formatach:
@@ -1008,7 +1011,7 @@ z WARN-OTWARTE.md, dodaj pełny wpis do AUDIT-JOURNAL.md.
 > to ten sam wzorzec luki, który wykrywa `check_rejestracja_modulow.py`).
 
 ```
-audyt-systemu-v4/                               ← 52 pliki (stan 2026-08-21)
+audyt-systemu-v4/                               ← 53 pliki (stan 2026-08-23, +F-108-lista-MS-egzamin-2026.md)
 ├── SKILL.md                                    ← orchestrator (ten plik)
 ├── modules/                                    ← 5 modułów, pełna lista w YAML `modules:`
 │   ├── MOD-INTERLINIE.md                       ← zbędne puste linie (FAZA 2D-1)

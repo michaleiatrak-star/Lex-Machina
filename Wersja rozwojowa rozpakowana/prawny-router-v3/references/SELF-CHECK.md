@@ -22,8 +22,35 @@ JEŚLI BLOK 0A nie zamknięty → STOP. Żaden punkt poniżej nie jest wykonywan
 □ Wczytałem references/KROK0A-anonimizer.md (szczegóły bramki)?
 □ Wczytałem references/KROK1-detekcja.md (tryb + hard gate ISAP)?
 □ web_search/web_fetch dla każdego artykułu/liczby — FAKTYCZNIE wywołałem narzędzie?
-□ Każdy artykuł/termin/orzeczenie ma znacznik ✅ [VER: źródło, data] lub ⚠️?
+□ Każdy artykuł/termin/orzeczenie ma znacznik z ZAMKNIĘTEJ hierarchii czterech:
+  ✅ [VER] · 🟡 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
+  ⛔ Użycie JAKIEJKOLWIEK innej etykiety (w tym opisania pamięci modelu jako
+  szczebla źródła) = naruszenie hard gate. Patrz PRAWO-HARDGATE v2.5.
+□ RZĄD 1 niedostępny (robots)? → sekwencja B-1 web_search → B-2 web_fetch
+  wykonana, a przy blokadzie warunki K-1…K-4 kotwicy urzędowej spełnione?
 □ Sprawa karna → wczytałem mod-N-karne.md → mod-N zdecydował: kwalifikator TAK/NIE?
+□ [ANTY-FASADA] (dodane 2026-08-23, v2.6) Czy w odpowiedzi/piśmie jest słowo
+  „zweryfikowano/zweryfikowałem", pole „data weryfikacji" albo URL przy przepisie,
+  dla którego NIE wywołałem narzędzia W TEJ ODPOWIEDZI? TAK → ⛔ usuń deklarację
+  i datę, URL przeformatuj na 🎯 [CEL — RZĄD 1, NIEOTWARTE: …], przepis oznacz
+  ⚠️ [NIEWERYFIKOWANE]. Wyzwalacz to BRAK WYWOŁANIA, nie brak narzędzi w sesji.
+  ⛔ Zastrzeżenie selektywne (przy sygnaturach tak, przy przepisach nie) = naruszenie.
+□ [DOMAIN-LOCK] ⛔ KONTROLA NA WYJŚCIU (nie na wejściu — dodano 2026-08-23):
+  czy w GOTOWEJ odpowiedzi jest przepis spoza PRIMARY (KK/KKS/KW/KPK/KPW przy
+  torze cywilnym/administracyjnym — lub odwrotnie)?
+    NIE → OK
+    TAK → (a) konkretny FAKT wypełniający znamię, nie skojarzenie?
+          (b) wczytany dr-03 (lub właściwy DR) w TEJ odpowiedzi?
+          (c) przepis przeszedł PRAWO-HARDGATE w TEJ odpowiedzi?
+          którekolwiek NIE → ⛔ USUŃ powołanie.
+          Procedura pełna: view /mnt/skills/user/shared/DOMAIN-LOCK.md
+□ [RATE-COMPLETENESS] Odpowiedź zawiera odsetki / waloryzację / wskaźnik zmienny
+  w czasie (dodano 2026-08-23)?
+    NIE → OK
+    TAK → przedział zapisany + reżim rozstrzygnięty (KC vs transakcje handlowe)
+          + szereg podokresów BEZ LUK + znacznik na każdym wierszu?
+          NIE → nie podawaj kwoty łącznej; pokaż tabelę z jawnymi ⬛.
+          Procedura pełna: view /mnt/skills/user/shared/RATE-COMPLETENESS.md
 □ Sygnatury orzeczeń przeszły V-SYG-1/2/3/4 (shared/SYGNATURY.md)?
 □ Sklasyfikowałem do [1]–[10] (lub BJ–BW)?
 □ Sprawdziłem shared/ACTIVATION-MATRIX.md przy nakładaniu się skillów?
@@ -46,5 +73,7 @@ JEŚLI BLOK 0A nie zamknięty → STOP. Żaden punkt poniżej nie jest wykonywan
 
 JEŚLI BLOK 0A nie zamknięty → wróć do KROK 0A
 JEŚLI przepisy/liczby bez weryfikacji → cofnij się i weryfikuj
+JEŚLI DOMAIN-LOCK wykrył przepis spoza PRIMARY bez podstawy → usuń przed wysłaniem
+JEŚLI szereg stawek ma luki → nie podawaj kwoty łącznej
 JEŚLI brak disclaimera → dodaj przed wysłaniem odpowiedzi
 ```

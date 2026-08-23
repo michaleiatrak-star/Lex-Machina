@@ -1,6 +1,12 @@
 # HIERARCHIA-ZRODEL.md — Kanoniczna Kategoryzacja Źródeł (RZĄD 1/2/3)
 
 > **Plik:** `/mnt/skills/user/shared/HIERARCHIA-ZRODEL.md`
+> **Wersja:** 1.4 (2026-08-23) — dodano `eli.gov.pl` do RZĘDU 1 (nie było go
+>              tam mimo urzędowego charakteru), sekcję REALIA DOSTĘPNOŚCI
+>              RZĘDU 1 (moc źródła ≠ osiągalność źródła), zamknięcie
+>              hierarchii statusów na czterech pozycjach oraz ostrzeżenie
+>              o wersjach archiwalnych na portalach 2B. Wdrożone po analizie
+>              przyczyn testu 3 pilotażu LEX MACHINA.
 > **Wersja:** 1.3 (2026-07-24e) — dodano ZASADĘ OTWARTEJ LISTY w sekcji
 >              Rzędu 3: brak wpisu domeny w tym pliku lub w
 >              `PORTALE-BRANZOWE-RZAD-2B.md` nie blokuje cytowania —
@@ -54,10 +60,36 @@
 ## RZĄD 1 — PIERWSZORZĘDNE (wiążące, wyłączne dla BRZMIENIA przepisu)
 
 1. ISAP — https://isap.sejm.gov.pl — PRIORYTET (tekst jednolity)
-2. Sejm RP — https://www.sejm.gov.pl/prawo/prawo.htm
-3. EUR-Lex — https://eur-lex.europa.eu — prawo UE implementowane w Polsce
-4. UODO — https://uodo.gov.pl — przepisy o ochronie danych
-5. BIP właściwego organu — dla rozporządzeń branżowych
+2. **ELI / Dziennik Ustaw — https://eli.gov.pl** (dodane 2026-08-23, v1.4) —
+   urzędowy portal European Legislation Identifier prowadzony dla Dz.U.;
+   równorzędny z ISAP co do mocy, często SZYBSZY w indeksacji nowych t.j.
+   Wzorzec adresu: `eli.gov.pl/eli/DU/{rok}/{poz}` (metryka),
+   `.../text.html`, `.../text.pdf` (treść).
+3. Sejm RP — https://www.sejm.gov.pl/prawo/prawo.htm
+4. API ELI Sejm — https://api.sejm.gov.pl/eli/... (warstwa strukturalna,
+   `shared/PRAWO-HARDGATE.md` POZIOM B)
+5. EUR-Lex — https://eur-lex.europa.eu — prawo UE implementowane w Polsce
+6. UODO — https://uodo.gov.pl — przepisy o ochronie danych
+7. BIP właściwego organu — dla rozporządzeń branżowych
+
+### ⛔ REALIA DOSTĘPNOŚCI RZĘDU 1 (zweryfikowane 2026-08-23, v1.4)
+
+Przynależność do RZĘDU 1 mówi o **mocy** źródła, nie o jego **osiągalności**.
+W obecnym środowisku wykonawczym pozycje 1, 2 i 4 są dostępne WYŁĄCZNIE
+przez indeks wyszukiwarki (snippet); `web_fetch` na te domeny zwraca
+`ROBOTS_DISALLOWED`. Skutek praktyczny, który trzeba znać przy każdym cytacie:
+
+| Co chcesz ustalić | Osiągalne z RZĘDU 1? |
+|---|---|
+| Tożsamość aktu, numer i data aktualnego t.j., status obowiązywania | **TAK** — snippet ISAP/ELI wystarcza |
+| Dosłowne BRZMIENIE artykułu | **NIE** — wymaga zejścia na RZĄD 2B + 🟡 KOTWICA URZĘDOWA |
+
+⛔ To NIE otwiera drogi do cytowania z pamięci. Otwiera drogę do jednego,
+ściśle opisanego statusu zastępczego — `shared/PRAWO-HARDGATE.md`, sekcja
+„🟡 KOTWICA URZĘDOWA", warunki łączne K-1…K-4. Hierarchia statusów jest
+zamknięta i liczy cztery pozycje:
+`✅ [VER]` > `🟡 [KOTWICA-URZĘDOWA]` > `⚠️ [NIEWERYFIKOWANE]` > `⬛ [DO UZUPEŁNIENIA]`.
+Tworzenie piątej etykiety jest naruszeniem hard gate.
 
 Ten rząd dotyczy WYŁĄCZNIE brzmienia przepisu — obowiązuje tu
 `shared/PRAWO-HARDGATE.md` bez wyjątków.
@@ -109,6 +141,23 @@ dowód istnienia orzeczenia):** lista przykładowa, nie zamknięta:
 - inne duże portale o podobnym profilu: redakcja zawodowa/wydawnicza,
   systematyczna aktualizacja po nowelizacjach, rozpoznawalna marka —
   kryterium przynależności do 2B, nie do Rzędu 3.
+
+### ⛔ OSTRZEŻENIE O WERSJACH ARCHIWALNYCH (dodano 2026-08-23, v1.4)
+
+Portale 2B utrzymują **historyczne wersje czasowe artykułów pod tym samym
+numerem**, często pod URL-em z parametrem daty. Wyszukiwarka potrafi zwrócić
+wersję archiwalną bez żadnego widocznego ostrzeżenia.
+
+Przykład zweryfikowany 2026-08-23: `przepisy.gofin.pl` zwrócił w jednym wyniku
+brzmienie art. 113 KRO sprzed nowelizacji z 2008 r. („sąd opiekuńczy zakaże
+rodzicom pozbawionym władzy rodzicielskiej osobistej styczności z dzieckiem")
+obok brzmienia aktualnego — spod adresu z segmentem `20100801`.
+
+⛔ Skutek dla procedury: **krzyżowanie dwóch portali 2B NIE jest wystarczającym
+zabezpieczeniem**, jeśli oba trafią w ten sam odcinek czasu. Rozstrzyga
+znacznik tekstu jednolitego widoczny NA STRONIE (np. `Dz.U.2026.0.236 t.j.`)
+porównany z numerem t.j. potwierdzonym w indeksie RZĘDU 1. To jest warunek K-3
+statusu 🟡 KOTWICA URZĘDOWA w `shared/PRAWO-HARDGATE.md`.
 
 Kryterium 2B vs Rząd 3: redakcja zawodowa + rozpoznawalna marka wydawnicza/
 medialna + praktyka regularnej aktualizacji treści po zmianach przepisów →

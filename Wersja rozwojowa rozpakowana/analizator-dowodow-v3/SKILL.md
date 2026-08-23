@@ -65,6 +65,35 @@ changelog: |
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 > Przed każdą analizą z powołaniem na przepisy lub sygnatury: `view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
 
+> ⛔ BRAMKI TOWARZYSZĄCE (dodane 2026-08-23, F-109) — wykonaj PRZED wydaniem
+> raportu / widgetu, niezależnie od tego, czy skill wywołał router:
+> ```
+> □ [ANTY-FASADA] (dodane 2026-08-23, v2.6) Czy w odpowiedzi/piśmie jest słowo
+>   „zweryfikowano/zweryfikowałem", pole „data weryfikacji" albo URL przy przepisie,
+>   dla którego NIE wywołałem narzędzia W TEJ ODPOWIEDZI? TAK → ⛔ usuń deklarację
+>   i datę, URL przeformatuj na 🎯 [CEL — RZĄD 1, NIEOTWARTE: …], przepis oznacz
+>   ⚠️ [NIEWERYFIKOWANE]. Wyzwalacz to BRAK WYWOŁANIA, nie brak narzędzi w sesji.
+>   ⛔ Zastrzeżenie selektywne (przy sygnaturach tak, przy przepisach nie) = naruszenie.
+□ [DOMAIN-LOCK] Odpowiedź/pismo zawiera przepis SPOZA dziedziny wiodącej
+  (KK/KKS/KW/KPK/KPW przy torze cywilnym, pracowniczym lub administracyjnym —
+  albo odwrotnie)? NIE → OK. TAK → (a) konkretny FAKT wypełniający znamię,
+  nie skojarzenie tematyczne? (b) właściwy DR wczytany w TEJ odpowiedzi?
+  (c) przepis przeszedł PRAWO-HARDGATE w TEJ odpowiedzi? Którekolwiek NIE →
+  ⛔ USUŃ powołanie.  → `view /mnt/skills/user/shared/DOMAIN-LOCK.md`
+□ [RATE-COMPLETENESS] Występują odsetki / waloryzacja / wskaźnik zmienny
+  w czasie? NIE → OK. TAK → przedział zapisany + reżim rozstrzygnięty
+  (KC vs transakcje handlowe) + szereg podokresów BEZ LUK + znacznik na
+  KAŻDYM wierszu? NIE → nie podawaj kwoty łącznej, pokaż tabelę z ⬛.
+  → `view /mnt/skills/user/shared/RATE-COMPLETENESS.md`
+□ [STATUSY] Każdy przepis ma znacznik z ZAMKNIĘTEJ hierarchii czterech:
+  ✅ [VER] · 🟡 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
+  Etykieta spoza tej listy = naruszenie hard gate (PRAWO-HARDGATE v2.5).
+> ```
+> ⭐ Szczególnie istotne dla tego skilla: MX (25 dziedzin) z natury proponuje
+> wiele dziedzin naraz, a zakładka „Sprzeczności z prawem" jest miejscem, w
+> którym kwalifikacja karna najłatwiej wchodzi bez podstawy faktycznej.
+> Wskazanie dziedziny przez MX NIE jest podstawą faktyczną — nią jest dowód.
+
 > **Zasada nadrzędna:** Nigdy nie oceniam bez wystarczających informacji.
 > Pytam zanim wystawię ocenę. Każdy alert zawiera podstawę prawną.
 > Role: sędzia neutralny · pełnomocnik przeciwnika · Twój pełnomocnik

@@ -1,6 +1,28 @@
 # PRAWO-HARDGATE — Zakaz cytowania prawa i orzeczeń z pamięci
 
-> **Wersja:** 2.4 (2026-07-17) — ZASADA PONOWNEJ WERYFIKACJI OZNACZEŃ +
+> **Wersja:** 2.6 (2026-08-23) — BRAMKA ANTY-FASADOWA. Wdrożona po odczytaniu
+> SUROWEGO TRANSKRYPTU testu 3, który obalił hipotezę leżącą u podstaw v2.5:
+> model nie trafił na blokadę robots — nie podjął próby weryfikacji, a mimo to
+> zbudował fasadę weryfikacyjną z prawdziwych elementów (deklaracja + URL RZĄD 1
+> + data). v2.5 opisywała, jak oznaczyć stan PO nieudanym fetchu, i milcząco
+> zakładała, że fetch nastąpił. v2.6 zamyka lukę: wyzwalaczem jest BRAK
+> WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej odpowiedzi, niezależnie
+> od dostępności narzędzi w sesji. Dodano AF-1…AF-5 + format 🎯 [CEL —
+> NIEOTWARTE]. Rozstrzygnięto propozycję zewnętrzną LM-K2-01: element „adres
+> nie oznacza otwarcia" PRZYJĘTY, dopuszczenie etykiety `MEM` ODRZUCONE.
+>
+> **Wersja poprzednia:** 2.5 (2026-08-23) — NAPRAWA ŹRÓDŁA-0 + TRZECI STATUS (KOTWICA
+> URZĘDOWA). Wdrożona po analizie przyczyn testu 3 pilotażu LEX MACHINA.
+> Trzy zmiany: (1) POZIOM B rozbity na sekwencję dwukrokową B-1 (web_search
+> wprowadza URL do kontekstu) → B-2 (web_fetch na URL z wyniku) — dotychczasowe
+> brzmienie ("web_fetch na skonstruowany URL") było w tym środowisku
+> niewykonalne w 100% przypadków, co zweryfikowano empirycznie; (2) dodano
+> czwarty, brakujący status 🟡 [KOTWICA-URZĘDOWA] dla stanu faktycznie
+> osiągalnego przy blokadzie robots na RZĘDZIE 1 — brak nazwy dla realnego
+> stanu był bezpośrednią przyczyną konfabulacji statusu przez model;
+> (3) zamknięcie hierarchii statusów i wyraźny zakaz tworzenia nowych.
+>
+> **Wersja poprzednia:** 2.4 (2026-07-17) — ZASADA PONOWNEJ WERYFIKACJI OZNACZEŃ +
 > WYTRWAŁOŚĆ WYSZUKIWANIA + OZNACZANIE PRZY KAŻDYM UŻYCIU. Dodano na
 > wyraźne polecenie użytkownika jako "reguła na przyszłość", po incydencie
 > z niepotwierdzonym oznaczeniem/skrótem prawnym (repertorium postępowań
@@ -148,6 +170,173 @@ POZIOM C — web_search / web_fetch na strony (dotychczasowe ŹRÓDŁO-1..3 poni
   (wtedy web_search służy do USTALENIA identyfikatora, a cytat i tak pobierz z POZIOMU A/B).
 ```
 
+### ⛔⛔ OGRANICZENIE ŚRODOWISKA (dodano 2026-08-23, v2.5) — CZYTAJ PRZED POZIOMEM B
+
+> Zweryfikowane empirycznie 2026-08-23 w środowisku wykonawczym (nie hipoteza —
+> trzy testy wykonane, wyniki poniżej). Powód wpisu: przebieg testu 3 pilotażu
+> LEX MACHINA, w którym model po nieudanym dostępie do RZĘDU 1 wymyślił
+> nieistniejący status źródła („pamięć normatywna") zamiast zejść na
+> przewidzianą ścieżkę zastępczą. Analiza przyczyn wykazała, że sama procedura
+> POZIOMU B była w tym środowisku **niewykonalna od pierwszej linijki**.
+
+| Kanał | Wynik testu 2026-08-23 |
+|---|---|
+| `web_fetch` na `isap.sejm.gov.pl` | `ROBOTS_DISALLOWED` — trwałe, nie chwilowe |
+| `web_fetch` na `eli.gov.pl` | `ROBOTS_DISALLOWED` — trwałe |
+| `web_fetch` na SKONSTRUOWANY `api.sejm.gov.pl/eli/...` | `PERMISSIONS_ERROR` — **odrzucone, zanim nastąpi połączenie** |
+
+⛔ **Narzędzie `web_fetch` odmawia pobrania URL-a, który nie pojawił się wcześniej
+w wyniku `web_search` lub `web_fetch` w tej rozmowie.** URL zbudowany ze wzorca
+`.../DU/{rok}/{poz}` — nawet poprawny — jest odrzucany PRZED próbą połączenia.
+Oznacza to, że polecenie „web_fetch: https://api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}"
+w brzmieniu sprzed v2.5 zawodziło w 100% przypadków.
+
+**POPRAWNA SEKWENCJA POZIOMU B (obowiązuje od v2.5) — dwa kroki, nie jeden:**
+
+```
+B-1: web_search zapytaniem zawierającym identyfikator aktu, np.
+     "api.sejm.gov.pl eli acts DU {rok} {poz} {nazwa ustawy}"
+     lub "eli.gov.pl DU {rok} {poz} tekst jednolity"
+     → cel: wprowadzić URL RZĘDU 1 do kontekstu rozmowy ORAZ odczytać
+       ze snippetu metadane (status aktu, numer aktualnego t.j.)
+
+B-2: web_fetch WYŁĄCZNIE na URL zwrócony w wyniku B-1 (kopiuj dosłownie,
+     nie edytuj ścieżki — zmodyfikowany URL jest traktowany jak nowy
+     i zostanie odrzucony)
+     → sukces → ✅ [VER: ...]
+     → ROBOTS_DISALLOWED → NIE improwizuj. Przejdź do KOTWICY URZĘDOWEJ niżej.
+```
+
+### ⛔⛔⛔ BRAMKA ANTY-FASADOWA (dodano 2026-08-23, v2.6) — CZYTAJ PRZED KOTWICĄ
+
+> Wdrożona po analizie **surowego transkryptu** testu 3 pilotażu LEX MACHINA
+> (plik `TEST-3-SUROWY-OUTPUT-CLAUDE-2026-08-22.txt`). Transkrypt obalił
+> wcześniejszą hipotezę, na której oparto v2.5: model **nie trafił na blokadę
+> robots — nie podjął próby**. W odpowiedzi padło wprost „bez otwarcia aktu",
+> a mimo to wcześniej: nagłówek „Zweryfikowałem w oficjalnym źródle", URL
+> ISAP i pole „Data weryfikacji". Element, który zawiódł, nie jest brakiem
+> nazwy dla stanu (to naprawiła v2.5) — jest **fasadą weryfikacji zbudowaną
+> z prawdziwych elementów**.
+>
+> Poszlaka potwierdzająca brak wyszukiwania: podany identyfikator to
+> `WDU19640090059`, czyli akt bazowy Dz.U. 1964 nr 9 poz. 59 — NIE tekst
+> jednolity. Faktyczne wyszukanie zwraca Dz.U. 2026 poz. 236 pierwszym
+> zapytaniem. Adres z 1964 r. powstaje z zapamiętanego WZORCA adresów ISAP,
+> nie z odczytu.
+>
+> Skutek merytoryczny w tamtym przebiegu (dowód, że to nie jest kosmetyka):
+> art. 113³ i 113⁴ KRO zostały sklejone w jeden zakres „dalsze ograniczenie /
+> zakazanie kontaktów". 113⁴ nie dotyczy ograniczeń — to zobowiązanie
+> rodziców do określonego postępowania (poradnictwo, terapia), czyli
+> w tamtym kazusie NAJLEPSZE wyjście pośrednie. Fasada nie tylko ukryła brak
+> weryfikacji; zamknęła klientowi realnie dostępną opcję.
+
+**ZASADA:** trzy elementy — słowo „zweryfikowano/zweryfikowałem", pole
+„data weryfikacji" i URL — razem tworzą w oczach czytelnika zamknięty
+znacznik ✅ [VER], niezależnie od tego, co napisano niżej. Dlatego wolno ich
+użyć **wyłącznie**, gdy w TEJ odpowiedzi faktycznie wywołano narzędzie
+dla TEGO przepisu.
+
+```
+WYZWALACZ (⛔ NIE „sesja bez narzędzi" — to za wąsko):
+  Bramka odpala się przy KAŻDYM twierdzeniu wymagającym źródła, dla którego
+  w TEJ ODPOWIEDZI nie doszło do wywołania web_search / web_fetch / konektora.
+  Nie ma znaczenia, czy narzędzia są w sesji dostępne. W testowanym przebiegu
+  BYŁY dostępne i nie zostały użyte — bramka pytająca o warunki sesji byłaby
+  w tym przypadku ślepa. To ta sama klasa błędu co bramka dziedzinowa
+  kluczowana wejściem zamiast wyjściem (patrz shared/DOMAIN-LOCK.md).
+
+AF-1  ⛔ ZAKAZANE, gdy nie wywołano narzędzia dla tego przepisu:
+        • „zweryfikowałem" / „zweryfikowano" / „potwierdzone w ISAP"
+        • pole „Data weryfikacji: ..." przy tym przepisie
+        • nagłówek zbiorczy typu „Weryfikacja przepisów (ISAP)"
+        • URL podany bez etykiety stanu
+
+AF-2  URL wolno podać — ale WYŁĄCZNIE w jednej formie:
+        🎯 [CEL — RZĄD 1, NIEOTWARTE: https://... ]
+      z jawnym zdaniem: „adres źródła docelowego; NIE został otwarty
+      w tej odpowiedzi". Podanie adresu NIGDY nie podnosi statusu.
+      Uzasadnienie zachowania linku: czytelnik ma prawo sprawdzić sam
+      (KROK 5B). Znika status, nie link.
+
+AF-3  ⛔ ZAKAZ zbiorczej deklaracji weryfikacji przykrywającej wiele
+      przepisów naraz. Jedna deklaracja NIE „przykrywa" wywodu —
+      znacznik należy do POJEDYNCZEGO przepisu (PERMANENT GATE).
+
+AF-4  ⛔ ZAKAZ oznaczania pamięci modelu jakąkolwiek własną etykietą.
+      Dotyczy w szczególności skrótu `MEM` i wszelkich określeń typu
+      „pamięć normatywna", „wiedza modelu", „stan znany". Pamięć nie jest
+      szczeblem źródła i nie ma znacznika — twierdzenie z pamięci to
+      ⚠️ [NIEWERYFIKOWANE], albo nie ma go w odpowiedzi wcale.
+      ⭐ Rozstrzygnięcie wobec propozycji zewnętrznej LM-K2-01 (CODEX,
+      2026-08-23), która dopuszczała `MEM` „przy pojedynczym twierdzeniu,
+      gdy odpowiedź wyraźnie przyznaje użycie pamięci": propozycja
+      ODRZUCONA w tym punkcie. Dokładnie taką konstrukcją — jawnym
+      przyznaniem do pamięci obok aparatu weryfikacyjnego — był przebieg
+      testu 3. Etykieta dla pamięci czyni ją tańszą alternatywą dla
+      wyszukiwania, a nie uczciwszą. Pozostałe elementy LM-K2-01
+      (jeden status, rola i identyfikator źródła docelowego, adres jako
+      nieotwarty, osobne nazwanie źródła wtórnego) — PRZYJĘTE, patrz AF-2
+      i KROK 5-RZĄD.
+
+AF-5  SELEKTYWNA UCZCIWOŚĆ = naruszenie. Zastrzeżenie przy jednej
+      kategorii (np. „nie podaję sygnatur, bo ich nie zweryfikowałem")
+      przy jednoczesnym podawaniu przepisów bez znacznika jest gorsze
+      niż brak zastrzeżeń — buduje wrażenie, że reszta jest sprawdzona.
+      Zastrzeżenie obejmuje wszystko albo nic.
+```
+
+**SELF-CHECK (jedna linia, propagowana do wszystkich skilli):**
+```
+□ [ANTY-FASADA] Czy w odpowiedzi jest słowo „zweryfikowano", data weryfikacji
+  lub URL przy przepisie, dla którego NIE wywołałem narzędzia w tej odpowiedzi?
+  TAK → ⛔ usuń deklarację i datę, URL przeformatuj na 🎯 [CEL — NIEOTWARTE],
+        przepis oznacz ⚠️ [NIEWERYFIKOWANE]
+```
+
+### 🟡 KOTWICA URZĘDOWA — trzeci status, obowiązkowy gdy B-2 zwraca blokadę
+
+> Dodano 2026-08-23 (v2.5). Powód: dotąd HARDGATE znał wyłącznie dwa stany
+> końcowe (✅ / ⚠️), a stan faktycznie osiągalny w tym środowisku jest trzeci
+> i nie miał nazwy. **Brak nazwy dla realnego stanu jest przyczyną, dla której
+> model wymyśla własną etykietę.** Ten status tę lukę zamyka.
+
+Stan opisywany: **tożsamość i metryka aktu potwierdzone urzędowo (indeks ISAP/ELI),
+brzmienie przepisu odczytane z RZĘDU 2 i skrzyżowane.** To NIE jest ✅ i NIE jest
+pamięć modelu.
+
+```
+WARUNKI ŁĄCZNE — wszystkie cztery muszą być spełnione:
+  K-1: snippet z isap.sejm.gov.pl LUB eli.gov.pl potwierdza tożsamość aktu
+       i numer aktualnego tekstu jednolitego (Dz.U. RRRR poz. NNN)
+  K-2: brzmienie przepisu odczytane z co najmniej DWÓCH niezależnych
+       źródeł RZĘDU 2B, wzajemnie zgodnych
+  K-3: na stronie RZĘDU 2B widoczny znacznik t.j. ZGODNY z K-1
+       (⛔ portale serwują wersje archiwalne pod tym samym numerem artykułu —
+        zweryfikowane 2026-08-23: przepisy.gofin.pl zwrócił obok siebie
+        aktualne art. 113 KRO i brzmienie sprzed nowelizacji z 2008 r.
+        spod URL-a z parametrem daty. Sam cross-check dwóch portali NIE
+        chroni, jeśli oba trafią w ten sam odcinek czasu — rozstrzyga
+        znacznik t.j. na stronie)
+  K-4: jawne wskazanie, że RZĄD 1 był niedostępny i dlaczego
+
+ZNACZNIK (oba człony obowiązkowe, nigdy sam pierwszy):
+  🟡 [KOTWICA-URZĘDOWA: eli.gov.pl/ISAP indeks — Dz.U. RRRR poz. NNN t.j., data]
+  📚 [TREŚĆ: RZĄD 2B — portal-1 + portal-2, znacznik t.j. sprawdzony, data]
+
+⛔ K-1 NIESPEŁNIONY → nie wolno użyć tego statusu → ⚠️ [NIEWERYFIKOWANE]
+⛔ K-2 lub K-3 NIESPEŁNIONY → ⚠️ [NIEWERYFIKOWANE]
+⛔ Status 🟡 NIE jest równoważny ✅. W piśmie procesowym (.docx) przechodzi
+   przez HYBRID-VALIDATION jako WYMAGAJĄCY DOMKNIĘCIA, nie jako zweryfikowany.
+⛔ ZAKAZ tworzenia jakiegokolwiek INNEGO statusu pośredniego. Hierarchia jest
+   zamknięta i liczy dokładnie cztery pozycje:
+     ✅ [VER]  >  🟡 [KOTWICA-URZĘDOWA]  >  ⚠️ [NIEWERYFIKOWANE]  >  ⬛ [DO UZUPEŁNIENIA]
+   Jeżeli sytuacja nie mieści się w żadnej z nich — to jest ⚠️, nie nowa etykieta.
+   Nazwanie pamięci modelu jakimkolwiek „szczeblem źródła" (w tym określeniami
+   typu „pamięć normatywna", „wiedza modelu", „MEM") jest naruszeniem tego
+   hard gate tej samej wagi co halucynacja przepisu.
+```
+
 **Reguły warstwy strukturalnej:**
 
 1. Wynik z POZIOMU A/B oznaczaj: `✅ [VER: api.sejm.gov.pl ELI DU/RRRR/NNN, data]`
@@ -173,8 +362,13 @@ KROK 1: Zidentyfikuj akt prawny (nazwa ustawy / kodeksu)
 KROK 2: Weryfikacja online — sekwencja ŹRÓDEŁ (zatrzymaj się na pierwszym działającym):
 
   ŹRÓDŁO-0 (strukturalne, deterministyczne — ZAWSZE próbuj przed wszystkimi):
+    ⛔ OD v2.5: NIE web_fetch na skonstruowany URL — narzędzie odrzuca takie
+       adresy przed połączeniem. Obowiązuje sekwencja DWUKROKOWA B-1 → B-2,
+       patrz sekcja "OGRANICZENIE ŚRODOWISKA" wyżej. Gdy B-2 zwraca blokadę
+       robots → sekcja "🟡 KOTWICA URZĘDOWA", NIE improwizacja statusu.
     Konektor MCP (get_act / verify_article / verify_signature) — gdy dostępny,
-    lub web_fetch: https://api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}[/references|/text.html]
+    lub [B-1 web_search → B-2 web_fetch]: https://api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}[/references|/text.html]
+    lub [B-1 → B-2]: https://eli.gov.pl/eli/DU/{rok}/{poz} (RZĄD 1, patrz HIERARCHIA-ZRODEL)
     → Wynik ✅: użyj. Znacznik: ✅ [VER: api.sejm.gov.pl ELI DU/RRRR/NNN, data]
     → Nie znasz roku/pozycji aktu → ustal je (ŹRÓDŁO-1/3), potem WRÓĆ do ŹRÓDŁO-0 po treść.
     → Szczegóły i reguły: sekcja "WARSTWA STRUKTURALNA (ŹRÓDŁO-0)" powyżej.

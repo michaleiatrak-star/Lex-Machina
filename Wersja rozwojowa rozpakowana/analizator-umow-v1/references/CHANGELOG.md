@@ -1,38 +1,5 @@
 # CHANGELOG — Analizator Umów v1
 
-> ⛔ **WPISY ODTWORZONE 2026-08-20z3 (flaga F-102, test T12).** Poniższe pozycje
-> nie istniały w żadnym changelogu — `version:` był podbijany bez wpisu przez
-> 5 kolejnych sesji. Treść odtworzona z `audyt-systemu-v4/references/AUDIT-JOURNAL.md`,
-> gdzie każde podbicie zostało odnotowane w sekcji Rejestracja wraz z opisem
-> sesji. Wpisy są zatem WTÓRNE wobec dziennika — przy wątpliwości źródłem
-> rozstrzygającym jest dziennik, nie ten plik. Nic nie zostało zmyślone:
-> pozycje bez śladu w dzienniku oznaczono wprost jako lukę.
-
-## v1.30 (2026-08-09h) — odtworzone
-
-FAZA 3E: CRIT w `mod-shared-regulatory-horizon.md` — AI Act, Digital Omnibus
-przesunął termin o ponad rok. Źródło: AUDIT-JOURNAL, wpis AUDYT-2026-08-09h.
-
-## v1.29 (2026-08-09e) — odtworzone
-
-FAZA 3E: CRIT w `mod-shared-esg.md` — CSDDD, przestarzały termin transpozycji
-i zakres po pakiecie Omnibus I. Źródło: AUDYT-2026-08-09e.
-
-## v1.28 (2026-08-09b) — odtworzone
-
-Rozstrzygnięcie otwartej kwestii: podstawa prawna obowiązku przypomnienia
-przed odnowieniem subskrypcji. Źródło: AUDYT-2026-08-09b.
-
-## v1.27 (2026-08-09a) — odtworzone
-
-FAZA 3E: CRIT w `mod-shared-abusive-clauses.md` — art. 17a upk przywołany
-w całkowicie błędnym kontekście. Źródło: AUDYT-2026-08-09a.
-
-## v1.26 (2026-08-08y) — odtworzone
-
-Zamknięcie flagi F-19: odwołanie od decyzji PIP WSTRZYMUJE wykonanie
-(zasada, nie wyjątek). Źródło: AUDYT-2026-08-08y.
-
 ## v1.25 (2026-08-02)
 
 **Kontekst:** użytkownik dopytał wprost, czy reguły w `mod-shared-zlote-

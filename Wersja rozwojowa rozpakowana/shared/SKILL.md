@@ -71,7 +71,10 @@ Nie jest samodzielnym skillem — pełni rolę biblioteki referencji.
 
 | Plik | Rola |
 |------|------|
-| `PRAWO-HARDGATE.md` | ⛔ Globalny zakaz cytowania prawa/orzeczeń z pamięci — wczytaj przed każdym przepisem |
+| `PRAWO-HARDGATE.md` | ⛔ Globalny zakaz cytowania prawa/orzeczeń z pamięci — wczytaj przed każdym przepisem (v2.5: sekwencja B-1→B-2, status 🟡 KOTWICA URZĘDOWA) |
+| `DOMAIN-LOCK.md` | ⛔ Bramka izolacji dziedzinowej — kontrola na WYJŚCIU, zakaz kwalifikacji spoza PRIMARY bez podstawy faktycznej (dodane 2026-08-23) |
+| `RATE-COMPLETENESS.md` | ⛔ Bramka kompletności szeregu stawek — odsetki/waloryzacja jako funkcja czasu, nie pojedyncza liczba (dodane 2026-08-23) |
+| `MOD-GENERATOR-AKTU.md` | Procedura budowy modułu aktu prawnego G-1…G-8 — od spisu treści aktu, nie od pytania (dodane 2026-08-23) |
 | `HYBRID-VALIDATION.md` | Walidacja hybrydowa — auto-raport braków po piśmie (Fazy 1–3) |
 | `INTAKE-GAP.md` | Zarządzanie brakami danych faktycznych (⬛ pola, tryby 1–3) |
 | `POST-VALIDATION.md` | Walidacja spójności po wygenerowaniu gotowego pisma |

@@ -4,6 +4,97 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
+## AUDYT-2026-08-23 — naprawa przyczyn testów 3 i 5 pilotażu LEX MACHINA + otwarcie F-108
+
+**Wyzwalacz:** analiza przyczyn dwóch usterek pilotażu. Ustalenie kluczowe —
+trzy z czterech usterek to NIE brak reguły, tylko reguła, która istniała
+i nie zadziałała.
+
+**Ustalenia empiryczne (testy wykonane w środowisku 2026-08-23):**
+- `web_fetch` na `isap.sejm.gov.pl` → `ROBOTS_DISALLOWED` (trwałe)
+- `web_fetch` na `eli.gov.pl` → `ROBOTS_DISALLOWED` (trwałe)
+- `web_fetch` na SKONSTRUOWANY `api.sejm.gov.pl/eli/...` → `PERMISSIONS_ERROR`,
+  odrzucenie PRZED połączeniem. Narzędzie przyjmuje wyłącznie URL-e obecne
+  wcześniej w kontekście rozmowy. **Cała warstwa POZIOM B w PRAWO-HARDGATE
+  była niewykonalna w 100% przypadków od momentu jej wprowadzenia (2026-07-05).**
+- Indeks wyszukiwarki zwraca snippety ISAP/ELI → metryka aktu osiągalna,
+  brzmienie przepisu — nie.
+- `przepisy.gofin.pl` zwrócił brzmienie art. 113 KRO sprzed nowelizacji z 2008 r.
+  obok aktualnego (URL z segmentem daty) → cross-check dwóch portali 2B NIE
+  chroni przed wersją archiwalną; rozstrzyga znacznik t.j. na stronie.
+
+**Naprawy wykonane:**
+1. `shared/PRAWO-HARDGATE.md` → v2.5. Sekcja OGRANICZENIE ŚRODOWISKA;
+   POZIOM B rozbity na sekwencję B-1 (web_search) → B-2 (web_fetch na URL
+   z wyniku); dodany czwarty status 🟡 [KOTWICA-URZĘDOWA] z warunkami
+   łącznymi K-1…K-4; hierarchia statusów ZAMKNIĘTA na czterech pozycjach
+   z wyraźnym zakazem tworzenia piątej.
+   → przyczyna testu 3: stan faktycznie osiągalny nie miał w systemie nazwy,
+     więc model nazwał go sam („pamięć normatywna"). Brak nazwy dla realnego
+     stanu jest przyczyną konfabulacji statusu — nie „presja spójności".
+2. `shared/HIERARCHIA-ZRODEL.md` → v1.4. `eli.gov.pl` dodany do RZĘDU 1
+   (nie było go tam mimo urzędowego charakteru); sekcja REALIA DOSTĘPNOŚCI
+   (moc źródła ≠ osiągalność); ostrzeżenie o wersjach archiwalnych 2B.
+3. `shared/DOMAIN-LOCK.md` (NOWY) — bramka izolacji dziedzinowej kluczowana
+   **wyjściem**. Przyczyna testu 5 (art. 286 KK w sprawie B2B): istniejący
+   checkbox routera „Sprawa karna → wczytałem mod-N" jest kluczowany
+   WEJŚCIEM; w sprawie cywilnej zamyka się pusto i przepis KK przechodzi
+   bez kontroli. Bramka kluczowana wejściem jest ślepa na kontaminację
+   powstałą po klasyfikacji.
+4. `shared/RATE-COMPLETENESS.md` (NOWY) — stawki jako szereg czasowy.
+   Przyczyna drugiej usterki testu 5: HARDGATE traktuje stawkę jako
+   pojedynczy obiekt i nie zna pojęcia szeregu. Dodana reguła kosztowa
+   rozwiązująca konflikt z PERMANENT GATE (tabela historyczna = jedno
+   źródło na wiele wierszy).
+5. `prawny-router-v3/references/SELF-CHECK.md` — wpięte obie nowe bramki
+   + zamknięta hierarchia statusów + sekwencja B-1/B-2.
+
+**Ustalenie negatywne (istotne):** ani znacznik „MEM", ani określenie
+„pamięć normatywna" NIE występują nigdzie w `/mnt/skills/user/` (grep
+całego drzewa). Zewnętrzny raport błędu cytował regułę systemu o statusie
+„MEM" jako istniejącą — reguła ta nie istnieje. Raport oskarżający system
+o konfabulowanie szczebla źródła sam zacytował nieistniejący przepis
+własnego systemu. Odnotowane, by nie stało się podstawą dalszych zmian.
+
+> ⛔⛔ **SPROSTOWANIE 2026-08-23d — POWYŻSZY AKAPIT BYŁ KRZYWDZĄCY, WYCOFANY
+> W CZĘŚCI OCENIAJĄCEJ.** Po otrzymaniu dokumentu
+> `LM-K2-01-POPRAWKA-DLA-AUTORA-2026-08-23.md` (autor: CODEX) ustalono, że
+> reguła o statusie `MEM` — w brzmieniu niemal dosłownym, wraz z frazą „nie
+> jest wtedy substytutem weryfikacji" — **istnieje jako PROPOZYCJA PATCHA**
+> dla `prawny-router-v3/SKILL.md`, oparta na baseline
+> `3fb42870299738b065cae888ec5526a405fa8f5d`. Autor raportu błędu niczego
+> nie zmyślił: cytował realny dokument, którego w chwili pisania wpisu
+> AUDYT-2026-08-23 nie miałem w kontekście. Pomylił **status dokumentu**
+> (propozycja vs wdrożenie), a to jest zupełnie inna klasa błędu niż
+> halucynacja i nie powinna była zostać tak nazwana.
+>
+> ⭐ LEKCJA METODOLOGICZNA (ważniejsza niż samo sprostowanie): ustalenie
+> „X nie występuje w `/mnt/skills/user/`" dowodzi WYŁĄCZNIE, że X nie jest
+> wdrożone. NIE dowodzi, że X nie istnieje jako dokument, propozycja,
+> gałąź robocza ani ustalenie z innej sesji. Wniosek „cytował nieistniejącą
+> regułę" wykroczył poza to, co grep mógł wykazać — to ten sam typ
+> nadinterpretacji negatywnego wyniku, przed którym ostrzega
+> `PRAWO-HARDGATE` (reguła: „brak w bazie ≠ dowód nieistnienia, jeżeli baza
+> nie pokrywa danego zakresu"). Zastosowałem tę regułę do orzeczeń i nie
+> zastosowałem jej do własnego systemu.
+>
+> W mocy pozostaje ustalenie FAKTYCZNE: `MEM` nie było i nie jest wdrożone.
+> Merytoryczne rozstrzygnięcie co do samej propozycji — ODRZUCONA w punkcie
+> `MEM` (uzasadnienie: AF-4 w `PRAWO-HARDGATE.md` v2.6), PRZYJĘTA w punkcie
+> „adres nie oznacza otwarcia" (AF-2).
+
+**Otwarta F-108** — wykaz 52 aktów MS (egzamin wstępny na aplikację 2026)
+jako zewnętrzny benchmark pokrycia. ETAP 1 zamknięty: 39 A / 9 B / 1 C / 3 D.
+Wartość benchmarku: mapy wewnętrzne rosły reaktywnie (akt trafiał do systemu,
+bo ktoś o niego zapytał) — wykaz zewnętrzny ujawnia luki, o które nikt
+nie zapytał. Plik roboczy: `F-108-lista-MS-egzamin-2026.md`.
+
+**Utworzony `shared/MOD-GENERATOR-AKTU.md`** — brakujące ogniwo między
+„wiem, że jest luka" a „mam moduł". Kroki G-1…G-8. Zasada naczelna: moduł
+buduje się od SPISU TREŚCI aktu, nie od pytania użytkownika (precedens KSH:
+status „✅ OK" przy ~14 z ~600 artykułów). Nie powiela MODULE-STANDARD —
+tamten opisuje strukturę gotowego modułu, ten opisuje proces budowy.
+
 ## AUDYT-2026-08-12h — DR-06: iteracja VII pokrycia VAT — domknięcie osi transgranicznej (Dział VII) i POZIOMU D bazy weryfikacji stawek; trzy nowe moduły; nowa flaga F-19
 
 > ⚠️ UWAGA PORZĄDKOWA: kod „08-12f" był już zajęty przez wpis dotyczący
@@ -55236,3 +55327,246 @@ zależne od dewelopera).
 F-104, F-86, F-102, F-48, F-5; 5 zależnych od dewelopera).
 **Reguła 6/7 (dostawa):** JEDNA paczka — `audyt-systemu-v4` (0 nowych
 plików, treść WARN-OTWARTE.md).
+
+
+---
+
+## AUDYT-2026-08-23b — dostawa ZASADA 7 + otwarcie F-109, F-110, F-111
+
+**Zakres:** wydanie skilli zmodyfikowanych we wpisie AUDYT-2026-08-23 wg
+ZASADY 7 (OUTPUT-COMPLETENESS) + rejestracja nowych plików + trzy nowe flagi.
+
+**Skille objęte dostawą (KROK 0 — ile skilli, tyle zipów):**
+`shared`, `prawny-router-v3`, `audyt-systemu-v4` — trzy osobne archiwa,
+zbiorczego pliku NIE utworzono (precedens AUDYT-2026-07-06l).
+
+**Wynik PRE-DELIVERY-COMPLETENESS-CHECK:**
+
+| Skill | BAZA | KOPIA | Delta | Uzasadnienie |
+|---|---|---|---|---|
+| shared | 199 | 202 | +3 | DOMAIN-LOCK.md, RATE-COMPLETENESS.md, MOD-GENERATOR-AKTU.md |
+| prawny-router-v3 | 21 | 21 | 0 | wyłącznie edycja treści SELF-CHECK.md |
+| audyt-systemu-v4 | 53 | 54 | +1 | references/F-108-lista-MS-egzamin-2026.md |
+
+KROK 4b (weryfikacja bajtowa `diff -rq` archiwum vs dysk): PUSTY dla
+wszystkich trzech. Dostawa dopuszczona.
+
+⛔ **ODSTĘPSTWO OD ZASADY 7 KROK 1/2 — odnotowane jawnie.** Edycje sesji
+AUDYT-2026-08-23 wykonano bezpośrednio na drzewie `/mnt/skills/user/`, a nie
+na kopii roboczej w `/home/claude/full_skills/`. Skutek: linii bazowej
+z KROKU 1 nie zmierzono PRZED edycją — została **zrekonstruowana** jako
+`stan obecny − pliki dodane świadomie w sesji`. Rekonstrukcja jest
+weryfikowalna (lista dodanych plików jest zamknięta i wymieniona wyżej),
+ale nie jest pomiarem. Klasa: naruszenie proceduralne bez skutku
+materialnego — KROK 4b wykazał pełną zgodność treści. Nie otwarto osobnej
+flagi; odnotowano tutaj zgodnie z wymogiem samej ZASADY 7. Na przyszłość:
+kopiować drzewo PRZED pierwszym `str_replace`, nie po ostatnim.
+
+**Rejestracja nowych plików (wzorzec luki F-80 — rejestr vs dysk):**
+- `shared/SKILL.md` — tabela „Zawartość katalogu" rozszerzona o trzy nowe pliki
+- `audyt-systemu-v4/SKILL.md` — `references:` w YAML + licznik w drzewie
+  STRUKTURA KATALOGU (52 → 53 pliki; stan faktyczny z `find` = 54, różnica to
+  plik spoza deklarowanego drzewa — do sprawdzenia przy najbliższym T-teście)
+
+**Flagi otwarte w tej sesji:**
+- **F-109 (wysoki)** — `DOMAIN-LOCK` i `RATE-COMPLETENESS` wpięte wyłącznie
+  w SELF-CHECK routera. Sześć skilli wywoływanych z pominięciem routera obu
+  bramek nie zna. Wzorzec luki identyczny z `HIERARCHIA-ZRODEL.md` v1.0
+  (bramka obowiązująca lokalnie w jednym skillu, nieegzekwowana poza nim).
+  ⭐ To jest flaga o najwyższej wadze z tej sesji: naprawa wpięta w jednym
+  miejscu daje złudzenie, że problem jest zamknięty.
+- **F-110 (średni)** — kolizja symbolu `🟡`: status źródła w PRAWO-HARDGATE
+  v2.5 vs waga braku w HYBRID-VALIDATION § 1.2. Dodatkowo `WERYFIKACJA-SLAD.md`
+  prowadzi własny rejestr statusów, który o kotwicy urzędowej nie wie.
+  Wykryte przy okazji naprawy, nie naprawiane w tej samej sesji świadomie —
+  zmiana symbolu w jednym z trzech plików pogłębiłaby rozjazd.
+- **F-111 (średni)** — przeciążenie instrukcyjne PRAWO-HARDGATE (808 l.).
+  Przesłanka nie jest długością, lecz obserwacją z pilotażu: trzy z czterech
+  usterek to reguła, która istniała i nie zadziałała (ŹRÓDŁO-3 web-fallback
+  był w pliku i został pominięty). Wymaga decyzji użytkownika przed podziałem.
+
+**Kolejny wolny numer flagi: F-112** (§ 8 WARN-OTWARTE zaktualizowany).
+
+
+---
+
+## AUDYT-2026-08-23c — F-109 ZAMKNIĘTA W CAŁOŚCI (propagacja bramek do 6 skilli)
+
+**Zakres:** wpięcie `shared/DOMAIN-LOCK.md` i `shared/RATE-COMPLETENESS.md`
+do quality gate wszystkich skilli, które mogą zostać wywołane z pominięciem
+`prawny-router-v3`. Do sesji AUDYT-2026-08-23b obie bramki żyły wyłącznie
+w `prawny-router-v3/references/SELF-CHECK.md`.
+
+**Wykonane — 6 skilli, 7 plików:**
+
+| Skill | Plik | Miejsce wpięcia |
+|---|---|---|
+| pisma-procesowe-v3 | references/SELF-CHECK-PISMA.md | lista kontrolna przed „STOP. Nie oznaczaj pisma jako gotowego" |
+| pisma-proste-v2 | SKILL.md | CHECKLISTA FINALNA, po HYBRID-VALIDATION |
+| analiza-sadowa-v6 | SKILL.md (2 miejsca) | sekcja HARD GATE (blok bramek) + PRZEJŚCIE IV 4A jako **P6 i P7** |
+| analizator-dowodow-v3 | SKILL.md | blok pod HARD GATE w nagłówku |
+| analizator-umow-v1 | SKILL.md | pod HARD GATE GLOBALNY |
+| przewodnik-prawny-v2 | SKILL.md | SELF-CHECK PRZED KAŻDĄ ODPOWIEDZIĄ |
+
+Do każdego wpięcia dodano trzecią pozycję `[STATUSY]` — kontrolę zamkniętej
+hierarchii czterech znaczników z PRAWO-HARDGATE v2.5. Powód: bramka
+dziedzinowa i stawkowa nie mają sensu, jeśli status źródła może być
+dowolną wymyśloną etykietą (przyczyna testu 3).
+
+**Dostosowania per skill, nie kopia-wklej:**
+- `analiza-sadowa-v6` — bramki wpisane jako **P6/P7 w istniejącym schemacie
+  autokorekty P1–P5**, nie jako obcy blok; skill ma własną, ugruntowaną
+  numerację pytań kontrolnych i doklejenie listy obok niej byłoby
+  ignorowane tak samo jak reguła, której dotyczy F-111.
+- `analizator-dowodow-v3` — dopisano ostrzeżenie, że **wskazanie dziedziny
+  przez MX (25 dziedzin) NIE jest podstawą faktyczną**; zakładka
+  „Sprzeczności z prawem" to najbardziej prawdopodobne miejsce wejścia
+  kwalifikacji karnej bez dowodu.
+- `analizator-umow-v1` — wskazano dwa konkretne ryzyka: klauzule odsetkowe
+  B2B podlegają reżimowi ustawy o nadmiernych opóźnieniach (stawka
+  półroczna, nie KC), a ocena ryzyka klauzuli nie jest podstawą do
+  kwalifikacji karnej wobec kontrahenta.
+- `pisma-procesowe-v3` — dodano regułę twardą: **żądanie odsetkowe
+  z niedomkniętym szeregiem traktuje się jak brak 🔴, nie 🔵** — czyli nie
+  przechodzi do .docx przez automatyczne wstawienie ⬛.
+- `przewodnik-prawny-v2` — uzasadnienie roli: gospodarz sesji tłumaczy
+  wyniki innych skilli, więc jest OSTATNIM miejscem zatrzymania błędu
+  przed użytkownikiem.
+
+**Weryfikacja pokrycia (grep na `DOMAIN-LOCK` / `RATE-COMPLETENESS`):**
+wszystkie 7 ścieżek (6 skilli + router) zwracają trafienia. F-109 zamknięta
+w całości — wiersze usunięte z TABLICY STERUJĄCEJ i z sekcji 1B zgodnie
+z ZASADĄ 10.
+
+**Otwarta F-112 (średni)** — ujawniona przy tej dostawie: ⛔ **ZASADA 7 jest
+wewnętrznie sprzeczna.** KROK 2/3 nakazuje edytować KOPIĘ drzewa
+w `/home/claude/full_skills/`, a KROK 4b wymaga, by `diff -rq` archiwum
+przeciw `/mnt/skills/user/<skill>` był PUSTY. Oba warunki są spełnialne
+łącznie wyłącznie wtedy, gdy zmiany trafiają także na drzewo żywe — czego
+procedura nigdzie nie mówi. Sprzeczność wyszła dopiero przy dwóch
+kolejnych dostawach, bo wcześniejsze sesje najwyraźniej edytowały drzewo
+żywe milcząco i KROK 4b przechodził. Do rozstrzygnięcia: doprecyzować
+KROK 2/3 („kopia służy pakowaniu, nie edycji") albo KROK 4b (przeciw
+czemu diffować).
+
+**ZASADA 7 KROK 1 — w tej sesji wykonany PRAWIDŁOWO**, przed pierwszą
+edycją (odstępstwo z AUDYT-2026-08-23b nie powtórzyło się). Linia bazowa:
+pisma-procesowe-v3 40 · pisma-proste-v2 20 · analiza-sadowa-v6 19 ·
+analizator-dowodow-v3 37 · analizator-umow-v1 58 · przewodnik-prawny-v2 4 ·
+audyt-systemu-v4 54. Żadna edycja nie dodała ani nie usunęła pliku.
+
+**Kolejny wolny numer flagi: F-113.**
+
+
+---
+
+## AUDYT-2026-08-23d — PRAWO-HARDGATE v2.6 (BRAMKA ANTY-FASADOWA), ocena LM-K2-01, sprostowanie „MEM"
+
+**Wyzwalacz:** otrzymanie dwóch dokumentów zewnętrznych — SUROWEGO
+TRANSKRYPTU testu 3 (`TEST-3-SUROWY-OUTPUT-CLAUDE-2026-08-22.txt`) oraz
+propozycji patcha `LM-K2-01` (autor: CODEX).
+
+### 1. Transkrypt OBALIŁ hipotezę leżącą u podstaw v2.5
+
+Wpis AUDYT-2026-08-23 zakładał, że model uderzył w blokadę robots i wobec
+braku nazwy dla osiągalnego stanu zaimprowizował status. **Transkrypt tego
+nie potwierdza.** W odpowiedzi pada wprost „bez otwarcia aktu" — model NIE
+PODJĄŁ PRÓBY weryfikacji. Nie było sekwencji B-1/B-2, nie było ŹRÓDŁA-3.
+
+Poszlaka potwierdzająca: podany identyfikator `WDU19640090059` to akt
+BAZOWY Dz.U. 1964 nr 9 poz. 59, nie tekst jednolity. Faktyczne wyszukanie
+zwraca Dz.U. 2026 poz. 236 pierwszym zapytaniem (zweryfikowane 2026-08-23).
+Adres z 1964 r. powstaje z zapamiętanego WZORCA adresów ISAP.
+
+**Rzeczywisty mechanizm awarii — FASADA WERYFIKACJI zbudowana z prawdziwych
+elementów:** nagłówek „Weryfikacja przepisów (ISAP)" + „Zweryfikowałem
+w oficjalnym źródle" + prawdziwy URL RZĘDU 1 + „Data weryfikacji:
+2026-08-22". Te cztery elementy razem czytają się jak zamknięte ✅ [VER].
+Przyznanie do pamięci pada CZTERY AKAPITY NIŻEJ i nie unieważnia fasady
+w odbiorze. Nazwa „pamięć normatywna" jest objawem, nie chorobą.
+
+⛔ **Konsekwencja dla v2.5:** naprawa była poprawna, ale niewystarczająca —
+opisywała, jak oznaczyć stan PO nieudanym fetchu, milcząco zakładając, że
+fetch nastąpił. Nie pokrywała przypadku, w którym narzędzia SĄ dostępne
+i nie zostają użyte. To ta sama klasa błędu co bramka dziedzinowa kluczowana
+wejściem zamiast wyjściem (naprawiona jako DOMAIN-LOCK) — bramka pytająca
+o WARUNKI jest ślepa na to, co model FAKTYCZNIE ZROBIŁ.
+
+### 2. Skutek merytoryczny w transkrypcie — dowód, że to nie kosmetyka
+
+Wykryty błąd w treści, dotąd niezgłoszony przez żaden raport: art. 113³
+i 113⁴ KRO sklejone w jeden zakres „dalsze ograniczenie / zakazanie
+kontaktów". **113⁴ nie dotyczy ograniczeń** — to zobowiązanie rodziców do
+określonego postępowania (skierowanie do specjalistów, poradnictwo,
+terapia). 🟡 [KOTWICA-URZĘDOWA: indeks ISAP/ELI — Dz.U. 2026 poz. 236 t.j.]
+📚 [TREŚĆ: RZĄD 2B — arslege + adwokatmdp, znacznik t.j. sprawdzony,
+2026-08-23]. W kazusie konfliktu rodziców bez przemocy 113⁴ jest NAJLEPSZYM
+wyjściem pośrednim; zapisanie go po stronie sankcji **zamyka klientowi
+realnie dostępną opcję**. Otwarto F-114 na sprawdzenie, czy ten sam błąd
+siedzi w module `mod-KRO-rodzinne.md` (status niezbadany — błąd wykryto
+w transkrypcie, nie w module).
+
+Odnotowane też: `art. 216¹/576 KPC` podane BEZ znacznika, przy jednoczesnym
+„nie podaję sygnatur orzeczeń, bo ich nie zweryfikowałem" — selektywna
+uczciwość, która buduje wrażenie, że reszta jest sprawdzona (→ AF-5).
+
+Co ZADZIAŁAŁO w tamtym przebiegu, dla równowagi: routing DR-02 poprawny,
+jawne „Bez DR-03 (brak wątku karnego)" — izolacja dziedzinowa zadziałała
+samoistnie; analiza merytoryczna (dobro dziecka jako przesłanka obiektywna
+vs twierdzenia stron, ciężar wykazania podstaw nadzoru po stronie
+żądającego) — dobra. Awaria wyłącznie w warstwie weryfikacji.
+
+### 3. PRAWO-HARDGATE v2.6 — BRAMKA ANTY-FASADOWA
+
+Wyzwalacz: KAŻDE twierdzenie wymagające źródła, dla którego w TEJ ODPOWIEDZI
+nie wywołano narzędzia — **niezależnie od dostępności narzędzi w sesji**.
+AF-1 (zakaz deklaracji/daty/nagłówka zbiorczego bez wywołania), AF-2 (URL
+wyłącznie jako 🎯 [CEL — RZĄD 1, NIEOTWARTE]), AF-3 (zakaz deklaracji
+zbiorczej przykrywającej wiele przepisów), AF-4 (zakaz etykietowania
+pamięci), AF-5 (zakaz selektywnej uczciwości).
+Propagacja: jedna linia self-check `[ANTY-FASADA]` do wszystkich 7 ścieżek
+(router + 6 skilli) — zgodnie z lekcją F-109, bez powtarzania błędu
+wpięcia w jednym miejscu.
+
+### 4. Ocena propozycji zewnętrznej LM-K2-01 (CODEX)
+
+**PRZYJĘTE:** rdzeń propozycji — „taki adres nie oznacza, że został otwarty
+ani nie podnosi statusu do VER" — jest trafniejszy niż cokolwiek w v2.5
+i wdrożony jako AF-2. Przyjęto też: jeden status na twierdzenie, wskazanie
+roli i identyfikatora źródła docelowego, osobne nazwanie źródła wtórnego.
+⭐ Uczciwe odnotowanie: CODEX zauważył wymiar problemu (podanie adresu
+ZAMIAST otwarcia), którego moja v2.5 nie widziała.
+
+**ODRZUCONE — 4 zastrzeżenia:**
+1. ⛔ Wyzwalacz „gdy w sesji nie ma web_search/web_fetch" jest ZA WĄSKI.
+   W teście 3 narzędzia BYŁY dostępne. **Patch nie odpaliłby się w kazusie,
+   którym się uzasadnia.** To wada rozstrzygająca.
+2. ⛔ Dopuszczenie `MEM` „przy pojedynczym twierdzeniu, gdy odpowiedź
+   wyraźnie przyznaje użycie pamięci" — to DOKŁADNIE konstrukcja z testu 3.
+   Etykieta dla pamięci czyni ją tańszą alternatywą dla wyszukiwania.
+   Sprzeczne z zamkniętą hierarchią czterech statusów (v2.5) → AF-4.
+3. ⛔ Trafia do `prawny-router-v3/SKILL.md`. Reguła o statusach źródeł
+   należy do `shared/PRAWO-HARDGATE.md` — wpięcie wyłącznie w router to
+   wzorzec zamknięty jako F-109 (6 skilli omijających router).
+4. ⛔ Baseline `3fb4287` / „Wersja stabilna 21.08.2026" jest sprzed v2.5;
+   patch nałożony dosłownie zduplikuje sekcję o braku dostępu.
+
+**Wada testu R2 (nieujęta w „Ograniczeniach" raportu):** prompt R2 sam
+podaje modelowi kryteria oceny („dokładnie jeden status, rolę oraz
+konkretny identyfikator", „nie łącz statusów MEM/NIEWERYFIKOWANE").
+Model spełni je niezależnie od obecności patcha — R2 mierzy posłuszeństwo
+wobec promptu, nie zmianę zachowania skilla. Przy R1 = FAIL („wpływ
+NIEOCENIALNE") zostaje jedna niekonkluzywna próba. → F-113.
+
+### 5. Sprostowanie „MEM" — patrz wpis AUDYT-2026-08-23, blok SPROSTOWANIE
+
+Zarzut wobec autora zewnętrznego raportu („cytował nieistniejącą regułę")
+został WYCOFANY w części oceniającej. Reguła istnieje jako PROPOZYCJA
+w LM-K2-01; autor pomylił status dokumentu, nie zmyślił treści.
+⭐ Lekcja: grep dowodzi, że coś nie jest WDROŻONE — nie że nie ISTNIEJE.
+Ta sama reguła, którą HARDGATE stosuje do orzeczeń („brak w bazie ≠ dowód
+nieistnienia"), nie została zastosowana do własnego systemu.
+
+**Flagi otwarte:** F-113 (wysoki, test regresyjny z grupą kontrolną),
+F-114 (średni, weryfikacja 113³/113⁴ w module KRO).
+**Kolejny wolny numer: F-115.**
