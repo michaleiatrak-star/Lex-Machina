@@ -171,7 +171,7 @@
 | DR-05 (administracyjne), DR-06 (podatki), DR-07 (PZP), DR-08 (samorząd), DR-09 (budownictwo/środowisko) | `czesc-02-dr05-dr09.md` |
 | DR-10 (zdrowie), DR-11 (cyfrowe/AI), DR-12 (sądownictwo/zawody), DR-13 (służby), DR-14 (UE/międzynarodowe), DR-15 (compliance), DR-16 (pisma/strategia) | `czesc-03-dr10-dr16.md` |
 | Ogólne międzydziedzinowe; rekomendacje do zbadania; stan pokrycia 16 DR; wnioski metodologiczne; procedura użycia rejestru | `czesc-04-ogolne-metodologia.md` |
-| Changelog (pełna historia zmian rejestru) | `czesc-05-changelog.md` |
+| Changelog (pełna historia zmian rejestru) | `shared/references/CHANGELOG.md`, ANEKS A — przeniesiony 2026-08-23 (v3.19); plik `czesc-05-changelog.md` usunięty |
 
 ⚠️ **UWAGA:** DR-01 (ustrój konstytucyjny) NIE MA własnej sekcji w tym
 rejestrze — nieobecność odziedziczona z oryginału, NIE spowodowana

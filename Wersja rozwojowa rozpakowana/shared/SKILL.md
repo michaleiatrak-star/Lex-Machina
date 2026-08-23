@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.18"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.19"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -48,15 +48,21 @@ limitations:
     opisane tu jawnie, żeby FAZA 2E w trybie deklarowanym go NIE zgubiła.
     Decyzja architektoniczna (uznać jako świadomy wzorzec 'plik-most' czy
     wydzielić poza shared/) pozostaje OTWARTA — do następnego audytu."
-  - rozmiar (115 plików, ~1,4 MB) — każda zmiana pliku kanonicznego ma
+  - rozmiar (196 plików, ~2,4 MB — stan 2026-08-23) — każda zmiana pliku kanonicznego ma
     potencjalnie systemowy promień rażenia; edytować tylko przez
     audyt-systemu-v4 z pełną weryfikacją CHECKLIST-DEDUP.md
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.18. ⛔ PEŁNA HISTORIA — WYŁĄCZNIE w references/CHANGELOG.md
+  Wersja bieżąca: 3.19. ⛔ PEŁNA HISTORIA — WYŁĄCZNIE w references/CHANGELOG.md
   (standard systemowy 2026-08-20z4: jeden plik, jedna lokalizacja; zakaz sekcji
   changelogu w korpusie SKILL.md i zakaz pełnej listy wpisów w tym polu).
+  Skrót 3.19 (2026-08-23): usunięto 6 plików historycznych bez roli operacyjnej (202 → 196):
+  AKTY-PRAWNE-MASTER.md (DEPRECATED od 2026-06-14), STATUS.md (rejestr zamrożony 2026-06-09),
+  MOD-WALIDACJA.md (stub bez konsumenta), oba pliki z katalogu checklists/ (zero wywołań;
+  katalog przestał istnieć) oraz portale-branzowe-rzad-2b/czesc-05-changelog.md (treść
+  przeniesiona 1:1 do ANEKSU A w references/CHANGELOG.md). Pełne uzasadnienie per plik
+  oraz lista plików świadomie ZOSTAWIONYCH mimo zerowego wywołania — references/CHANGELOG.md.
   Skrót 3.18 (2026-08-20z4): pole changelog: w YAML miało 111 linii pełnej historii — wyniesione do
   references/CHANGELOG.md (nowy plik); w YAML został skrót.
 
@@ -79,7 +85,6 @@ Nie jest samodzielnym skillem — pełni rolę biblioteki referencji.
 | `INTAKE-GAP.md` | Zarządzanie brakami danych faktycznych (⬛ pola, tryby 1–3) |
 | `POST-VALIDATION.md` | Walidacja spójności po wygenerowaniu gotowego pisma |
 | `MOD-WALIDACJA_v2.md` | ⭐ Walidacja formalna i prawnicza pisma (bloki A–J) — **JEDYNE ŹRÓDŁO PRAWDY** |
-| `MOD-WALIDACJA.md` | STUB → przekierowuje do `MOD-WALIDACJA_v2.md` (zachować dla kompatybilności) |
 | `FACT-SOURCE-LOCK.md` | Klasyfikacja faktów FSL-A/B/C — wywoływany przez MOD-WALIDACJA_v2 (Blok J) |
 | `LEGAL-STATUS-LOCK.md` | Weryfikacja statusów aktów LSL-1..6 — wywoływany przez MOD-WALIDACJA_v2 (Blok J) |
 | `terminy.md` | Tabela terminów zawitych i przedawnień (KPC, KPK, KPW, KPA, KP, PPSA) |
@@ -133,9 +138,12 @@ Nie wczytuj wszystkich naraz — tylko te potrzebne dla danego kroku.
 
 - `DEPENDENCY-GRAPH.md` — pełna mapa zależności: który skill wywołuje który moduł; aktualizuj przy każdej zmianie
 - ⚠️ Katalog `archive/` NIE istnieje na dysku (zweryfikowano 2026-06-14) — wcześniejsze
-  wzmianki o "43 plikach nieaktywnych" są nieaktualne. Pliki uznane za nieaktywne
-  są obecnie oznaczane in-situ (np. ⛔ DEPRECATED w nagłówku, jak AKTY-PRAWNE-MASTER.md)
-  zamiast przenoszenia do archive/.
+  wzmianki o "43 plikach nieaktywnych" są nieaktualne.
+- ⛔ **Oznaczanie in-situ przestało być polityką (2026-08-23, v3.19).** Wcześniej pliki
+  wycofane zostawały na dysku z nagłówkiem „⛔ DEPRECATED" (tak leżał `AKTY-PRAWNE-MASTER.md`
+  przez dwa i pół miesiąca). Wynik: plik bez roli, który mimo to trzeba było czytać przy
+  każdym audycie, żeby stwierdzić, że nie ma roli. Od v3.19 plik wycofany jest **usuwany**,
+  a uzasadnienie i data trafiają do `references/CHANGELOG.md` — historia zostaje, plik nie.
 
 - Wszystkie pliki w tym katalogu są **kanoniczne** — jedyna kopia w systemie
 - Stuby lokalne w katalogach poszczególnych skilli zostały usunięte
@@ -162,7 +170,6 @@ Nie wczytuj wszystkich naraz — tylko te potrzebne dla danego kroku.
 | `STRATEGIA-PROCESOWA.md` | Taktyka procesowa i wybór następnego ruchu |
 | `QUALITY-CHECK.md` | Kontrola jakości pisma: logika, struktura, nadmiar, emocjonalność |
 | `KANCELARIA-WORKFLOW.md` | Sekwencja pracy kancelaryjnej możliwa w `.md skills` |
-| `STATUS.md` | Rejestr wersji i statusów modułów shared |
 | `MOD-TIMING.md` | Strategia timing składania pism — macierz T1–T5, 6 modeli (T-EARLY…T-ADVANCE-NOTICE) |
 | `MOD-PEER-REVIEW.md` | Weryfikacja krzyżowa pisma — 4 role (adwokat diabła, sędzia, klient, spójność) |
 | `MOD-INTRO.md` | Executive summary pisma (str. 1) — 2–5 zdań, max 150 słów, killer argument na str. 1 |

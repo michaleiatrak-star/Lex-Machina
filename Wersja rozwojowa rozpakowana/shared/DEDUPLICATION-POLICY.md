@@ -57,9 +57,7 @@ Następujące pliki były martwymi stubami (nie wywoływanymi przez żaden `view
 | `INTAKE-GAP.md` | Zarządzanie brakami danych faktycznych |
 | `POST-VALIDATION.md` | Walidacja spójności po wygenerowaniu pisma |
 | `MOD-WALIDACJA_v2.md` | Walidacja formalna i prawnicza (bloki A–J) — JEDYNE ŹRÓDŁO |
-| `MOD-WALIDACJA.md` | STUB → przekierowuje do MOD-WALIDACJA_v2.md (zachować dla kompatybilności) |
 | `FAKTY_v2.md` | MOD-FAKTY — weryfikacja zgodności faktycznej ze źródłem |
-| `FAKTY.md` | STUB → przekierowuje do FAKTY_v2.md (zachować dla kompatybilności) |
 | `ISAP-AUDIT-PROTOCOL.md` | Protokół aktualności prawa |
 | `WERYFIKACJA-SLAD.md` | Ślad weryfikacji przepisów i orzeczeń |
 | `terminy.md` | Tabela terminów zawitych (KPC/KPK/KPW/KPA/KP) |

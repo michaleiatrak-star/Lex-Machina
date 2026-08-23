@@ -1,13 +1,22 @@
 # DEPENDENCY-GRAPH.md — Rejestr zależności modułów shared/
 
-*Wygenerowany: 2026-06-04 | Aktualizuj przy każdej zmianie odwołań w systemie*
+*Wygenerowany: 2026-06-04 | Ostatnia aktualizacja: 2026-08-23 (v3.19 — usunięcie plików bez roli)*
+*Aktualizuj przy każdej zmianie odwołań w systemie.*
+
+> ⚠️ **Zakres:** graf opisuje pliki obecne w nim imiennie. Moduły dodane po 2026-07 (m.in.
+> `MOD-*` kancelaryjne, `definicje/`, `orka-bas-leksykon/`, `portale-branzowe-rzad-2b/`,
+> `DOMAIN-LOCK.md`, `RATE-COMPLETENESS.md`, `MOD-GENERATOR-AKTU.md`) są zarejestrowane
+> w tabelach „Zawartość katalogu" w `SKILL.md`, ale NIE mają jeszcze wierszy tutaj —
+> odnotowane 2026-08-23, nienaprawione w tej sesji (osobne zadanie).
 
 ## Legenda
 
 - **ACTIVE** — plik wywołany bezpośrednio przez ≥1 skill poza shared/
 - **INTERNAL** — plik używany tylko wewnątrz shared/ (przez inny moduł shared)
-- **STUB** — plik przekierowujący do pliku kanonicznego (zachować dla kompatybilności)
-- **ARCHIVE** — plik nieaktywny (przeniesiony do shared/archive/)
+- ~~**STUB**~~ — kategoria zniesiona 2026-08-23 (v3.19): stub bez żywego konsumenta jest
+  usuwany, nie oznaczany. Ostatni — `MOD-WALIDACJA.md`.
+- ~~**ARCHIVE**~~ — kategoria martwa: katalog `shared/archive/` nie istnieje (2026-06-14).
+  Plik wycofany jest usuwany, a powód zapisywany w `references/CHANGELOG.md`.
 
 ---
 
@@ -16,7 +25,6 @@
 | Plik | Status | Wywołujące skille |
 |------|--------|-------------------|
 | `MOD-WALIDACJA_v2.md` | **ACTIVE — KANONICZNY** | pisma-procesowe-v3, pisma-proste-v2, prawny-router-v3 |
-| `MOD-WALIDACJA.md` | STUB → v2 | (zachować — kompatybilność wsteczna) |
 | `HYBRID-VALIDATION.md` | ACTIVE | pisma-procesowe-v3, pisma-proste-v2, analizator-umow-v1, prawny-router-v3 |
 | `POST-VALIDATION.md` | ACTIVE | analizator-umow-v1, pisma-procesowe-v3 |
 | `FACT-SOURCE-LOCK.md` | INTERNAL | wywoływany przez MOD-WALIDACJA_v2.md (Blok J), FAKTY_v2.md |
@@ -67,7 +75,6 @@
 | `FORMAL-CHECK.md` | ACTIVE | wszystkie DR-01..DR-16 |
 | `LEGAL-LIFECYCLE-MANAGEMENT.md` | ACTIVE | wybrane DR-skille |
 | `PRAWO-HARDGATE.md` | ACTIVE | wszystkie skille z przepisami |
-| `AKTY-PRAWNE-MASTER.md` | ⛔ DEPRECATED 2026-06-14 (WARN-7, opcja b — nigdy nie wdrożony) | — |
 
 ## Moduły scalone do shared/ 2026-07-12 (audyt komercyjny — ci_check_shared.py)
 
@@ -115,7 +122,6 @@
 | Plik | Status | Wywołujące skille |
 |------|--------|-------------------|
 | `DEDUPLICATION-POLICY.md` | ACTIVE (deweloper) | audyt-systemu-v4 |
-| `STATUS.md` | ACTIVE | shared/SKILL.md, audyt-systemu-v4 |
 | `KANCELARIA-WORKFLOW.md` | INTERNAL | shared/SKILL.md |
 
 ## Raporty i integracje
@@ -129,8 +135,11 @@
 ## Zasady utrzymania
 
 1. **MOD-WALIDACJA_v2.md** jest jedynym plikiem kanonicznym walidacji. Nie twórz v3 bez usunięcia v2.
-2. **MOD-WALIDACJA.md** (stub) zachować — stare odwołania nie spowodują błędu.
-3. Pliki w **archive/** nie są ładowane przez żaden skill — bezpieczne do zignorowania.
+2. **Stubów nie tworzymy i nie utrzymujemy.** Przy zmianie nazwy pliku kanonicznego poprawia się
+   wywołania u konsumentów, nie zostawia przekierowania (v3.19, 2026-08-23).
+3. **Plik bez konsumenta jest usuwany**, nie oznaczany jako nieaktywny. Uzasadnienie i data —
+   `references/CHANGELOG.md`. Wyjątek: pliki wskazane przez otwarte flagi F- (np. `tools/`
+   przy F-8/F-10/F-11) mają konsumenta odroczonego, nie zerowego.
 4. Pliki **INTERNAL** są ładowane tylko przez inne moduły shared/ — nie wymagają odwołań z zewnątrz.
 5. Przy dodawaniu nowego pliku do shared/ — zaktualizuj ten graf i SKILL.md.
 
