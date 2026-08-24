@@ -2,27 +2,16 @@
 """
 check_description.py — TEST T14: obecność i długość pola `description:` w SKILL.md.
 
-Powstał 2026-08-24 (flaga F-130), po wykryciu, że `audyt-systemu-v4` był JEDYNYM
-skillem w całym systemie bez pola `description:` — i że istniejąca kontrola
-(FAZA 2C, modules/MOD-DESCRIPTION.md) nie mogła tego zobaczyć z powodu wady
-konstrukcyjnej: jej skrypt dla pliku bez pola wypisywał `0` i klasyfikował wynik
-jako ✅ OK. Brak pola, stan najgorszy z możliwych, raportowany był jako najzdrowszy.
-
-Dlaczego to nie jest usterka kosmetyczna: `description` jest polem, na podstawie
-którego skill jest WYBIERANY do wywołania. Skill bez niego leży na dysku i może
-nigdy nie zostać uruchomiony automatycznie — a wykryć to można wyłącznie przez
-nieobecność wywołań, czyli praktycznie nigdy.
-
 Kontroluje dla każdego SKILL.md:
   1. czy plik ma frontmatter YAML                      → brak = ⛔
-  2. czy frontmatter zawiera pole `description:`        → brak = ⛔ (F-130)
-  3. czy pole nie jest puste ani samym białym znakiem   → puste = ⛔
-  4. długość treści: >1024 = ⛔, 901–1024 = ⚠️, ≤900 = OK
+  2. czy frontmatter zawiera pole `description:`      → brak = ⛔
+  3. czy pole nie jest puste                          → puste = ⛔
+  4. długość treści w profilu wspólnym Claude+ChatGPT:
+       >200 = ⛔, 181–200 = ⚠️, ≤180 = OK.
 
-⚠️ OGRANICZENIE, JAWNE: test mierzy OBECNOŚĆ i DŁUGOŚĆ, nie JAKOŚĆ opisu.
-Description obecny, ale nietrafnie opisujący skill, przejdzie ten test i nadal
-będzie powodował złe wyzwalanie. Na to nie ma automatu — patrz F-113
-(test skuteczności z grupą kontrolną).
+Limit 200 jest celowo konserwatywnym wspólnym mianownikiem dla jednego,
+identycznego ZIP-a używanego na obu platformach. Test mierzy obecność i długość,
+nie jakość opisu ani skuteczność triggerowania.
 
 Użycie:
     python3 check_description.py [katalog_ze_skillami]
@@ -32,14 +21,23 @@ Kod wyjścia: 0 = brak problemów, 1 = wykryto ⛔ lub ⚠️.
 import os
 import re
 import sys
+from pathlib import Path
 
-DOMYSLNY_KATALOG = "/mnt/skills/user"
-LIMIT_CRIT = 1024
-LIMIT_WARN = 900
+LIMIT_CRIT = 200
+LIMIT_WARN = 180
+
+
+def domyslny_katalog():
+    """Preferuj jawny root; bez niego spróbuj wykryć repo względem skryptu."""
+    env = os.environ.get("LEX_MACHINA_ROOT") or os.environ.get("REPO_ROOT")
+    if env:
+        return env
+    tutaj = Path(__file__).resolve()
+    kandydat = tutaj.parents[2]
+    return str(kandydat)
 
 
 def frontmatter(tresc):
-    """Zwraca surowy blok YAML między pierwszą a drugą linią '---', albo None."""
     if not tresc.startswith("---"):
         return None
     czesci = tresc.split("---", 2)
@@ -47,13 +45,6 @@ def frontmatter(tresc):
 
 
 def wytnij_description(fm):
-    """Zwraca treść description bez składni YAML, albo None gdy pola brak.
-
-    Obsługuje trzy formy zapisu spotykane w tym systemie:
-      description: tekst w jednej linii
-      description: | (albo >, >-, |-)  + wcięty blok
-      description: >-  + wcięty blok
-    """
     m = re.search(r"^description:[ \t]*([|>][-+]?)?[ \t]*(.*)$", fm, re.M)
     if not m:
         return None
@@ -68,8 +59,7 @@ def wytnij_description(fm):
             blok.append(linia.strip())
         else:
             break
-    tekst = " ".join(x for x in ([inline] + blok) if x).strip()
-    return tekst
+    return " ".join(x for x in ([inline] + blok) if x).strip()
 
 
 def sprawdz(sciezka_skilla):
@@ -80,27 +70,24 @@ def sprawdz(sciezka_skilla):
     tresc = open(plik, encoding="utf-8", errors="replace").read()
     fm = frontmatter(tresc)
     if fm is None:
-        return [(nazwa, "⛔ BRAK FRONTMATTERA: plik nie zaczyna się blokiem YAML "
-                        "'---' — pole description nie ma gdzie istnieć.")]
+        return [(nazwa, "⛔ BRAK FRONTMATTERA — pole description nie ma gdzie istnieć.")]
     opis = wytnij_description(fm)
     if opis is None:
-        return [(nazwa, "⛔ BRAK POLA `description:` we frontmatterze (F-130). "
-                        "Skill jest wybierany do wywołania na podstawie tego pola — "
-                        "bez niego może nigdy nie zostać uruchomiony automatycznie, "
-                        "a objawem jest CISZA, nie błąd.")]
+        return [(nazwa, "⛔ BRAK POLA `description:` we frontmatterze.")]
     if not opis:
-        return [(nazwa, "⛔ POLE `description:` PUSTE — skutek identyczny jak brak pola.")]
+        return [(nazwa, "⛔ POLE `description:` PUSTE.")]
     n = len(opis)
     if n > LIMIT_CRIT:
-        return [(nazwa, f"⛔ DŁUGOŚĆ {n} znaków > {LIMIT_CRIT} — description zostanie "
-                        f"obcięty w UI bez ostrzeżenia. Skróć.")]
+        return [(nazwa, f"⛔ DŁUGOŚĆ {n} znaków > {LIMIT_CRIT} — przekracza profil uniwersalny Claude+ChatGPT.")]
     if n > LIMIT_WARN:
-        return [(nazwa, f"⚠️ DŁUGOŚĆ {n} znaków — w przedziale {LIMIT_WARN + 1}–{LIMIT_CRIT}, "
-                        f"blisko twardego limitu. Zalecane skrócenie zapasowo.")]
+        return [(nazwa, f"⚠️ DŁUGOŚĆ {n} znaków — blisko limitu {LIMIT_CRIT}; zalecany zapas.")]
     return []
 
 
 def main(baza):
+    if not os.path.isdir(baza):
+        print(f"BŁĄD: katalog repo nie istnieje: {baza}")
+        return 2
     wyniki = []
     zbadane = 0
     for wpis in sorted(os.listdir(baza)):
@@ -110,11 +97,11 @@ def main(baza):
             wyniki.extend(sprawdz(sciezka))
 
     print("=" * 72)
-    print("TEST T14 — POLE description W SKILL.md (obecność + długość)")
+    print("TEST T14 — description: obecność + profil uniwersalny ≤200 znaków")
     print(f"Katalog: {baza}   |   zbadanych skilli: {zbadane}")
     print("=" * 72)
     if not wyniki:
-        print("\n✅ Każdy skill ma niepuste pole `description:` w limicie długości.")
+        print("\n✅ Każdy skill ma niepuste description w profilu uniwersalnym.")
         return 0
     biezacy = None
     for nazwa, problem in wyniki:
@@ -130,4 +117,4 @@ def main(baza):
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1] if len(sys.argv) > 1 else DOMYSLNY_KATALOG))
+    sys.exit(main(sys.argv[1] if len(sys.argv) > 1 else domyslny_katalog()))
