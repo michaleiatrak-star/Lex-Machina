@@ -15,131 +15,76 @@ jobs:
   package:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout exact branch state
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Stage complete canonical shared tree
+      - name: Stage complete shared tree
         shell: bash
         run: |
           set -euo pipefail
           SRC='Wersja rozwojowa rozpakowana/shared'
           ROOT='staging/shared'
-          rm -rf staging
-          mkdir -p staging
+          rm -rf staging && mkdir -p staging
           cp -a "$SRC" "$ROOT"
-          SRC_COUNT=$(find "$SRC" -type f | wc -l | tr -d ' ')
-          DST_COUNT=$(find "$ROOT" -type f | wc -l | tr -d ' ')
-          echo "original shared files=$SRC_COUNT staged=$DST_COUNT"
-          test "$SRC_COUNT" = "$DST_COUNT"
-          if [ "$SRC_COUNT" -gt 198 ]; then
-            echo "ERROR: shared has $SRC_COUNT source files; manifest+checksums would exceed hard limit 200" >&2
-            exit 1
-          fi
+          A=$(find "$SRC" -type f | wc -l | tr -d ' ')
+          B=$(find "$ROOT" -type f | wc -l | tr -d ' ')
+          echo "source=$A staged=$B"
+          test "$A" = "$B"
+          test "$A" -le 198
 
-      - name: Apply minimal runtime portability patches
+      - name: Patch runtime boundary
         shell: bash
         run: |
           set -euo pipefail
-          ROOT='staging/shared'
-
+          cp '.github/portability/shared-extract-api-verification-log.py' 'staging/shared/tools/extract_api_verification_log.py'
           python - <<'PY'
           from pathlib import Path
           import re
 
-          p = Path('staging/shared/SKILL.md')
-          text = p.read_text(encoding='utf-8')
-          pat = re.compile(r'description: >-\n(?:  .*\n)+?(?=dependencies:)', re.M)
-          repl = ('description: "Kanoniczna biblioteka Lex Machina: hardgate, walidacja, definicje, terminy i moduły wspólne. Nie odpowiada użytkownikowi samodzielnie; zasoby wczytują inne skille."\n')
-          text, n = pat.subn(repl, text, count=1)
-          if n != 1:
-              raise SystemExit('shared description block not found exactly once')
+          root=Path('staging/shared')
+          p=root/'SKILL.md'
+          text=p.read_text(encoding='utf-8')
+          pat=re.compile(r'description: >-\n(?:  .*\n)+?(?=dependencies:)',re.M)
+          repl='description: "Kanoniczna biblioteka Lex Machina: hardgate, walidacja, definicje, terminy i moduły wspólne. Nie odpowiada użytkownikowi samodzielnie; zasoby wczytują inne skille."\n'
+          text,n=pat.subn(repl,text,count=1)
+          if n!=1: raise SystemExit('description block not found')
+          adapter='''## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
 
-          adapter = [
-              '## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)',
-              '',
-              '`shared` pozostaje JEDYNYM kanonicznym SSOT. Ta sekcja nie zmienia treści modułów prawnych; opisuje tylko sposób rozumienia operacji technicznych przez host.',
-              '',
-              '1. `view /mnt/skills/user/shared/<plik>` oznacza świeży odczyt `<plik>` z rootu zainstalowanego skilla `shared`. Literalna ścieżka `/mnt/skills/user` nie jest wymagana. Nie zastępuj obowiązkowego odczytu pamięcią modelu.',
-              '2. Udokumentowane pliki-mosty mogą wskazywać inny osobny skill. `view /mnt/skills/user/<skill>/<plik>` oznacza świeży odczyt zasobu z tego skilla przez mechanizm hosta. Brak obowiązkowego zasobu = fail-closed; NIE kopiuj zasobu do `shared`.',
-              '3. `web_search` / `web_fetch` i pokrewne nazwy oznaczają świeże wyszukanie lub odczyt źródła. Jeśli host ma narzędzie o innej nazwie, użyj równoważnej funkcji. PRAWO-HARDGATE, hierarchia źródeł i statusy pozostają bez zmian.',
-              '4. `/mnt/user-data/...` oznacza rzeczywiste pliki użytkownika dostępne w bieżącym hoście. Wymóg ponownego odczytu oznacza faktyczny odczyt źródła, nie przypomnienie z kontekstu.',
-              '5. `show_widget`, `present_files`, `create_file`, shell/Python i podobne operacje wykonuj równoważną natywną funkcją hosta, jeśli literalna nazwa nie istnieje. Nie pomijaj bramek jakości z powodu innego renderera lub generatora.',
-              '6. `tools/` to kod integracyjny portalu, nie moduły promptowe. `extract_api_verification_log.py` przyjmuje neutralny format `events` i zachowuje zgodność z Claude legacy oraz generycznymi tool-call. Preferuj format neutralny, gdy host nie udostępnia stabilnego surowego transcriptu.',
-              '',
-              '**Zasada nadrzędna:** jeśli istniejąca instrukcja jest zrozumiała i wykonalna w bieżącym hoście, wykonaj ją bez konwersji. Adapter ma znaczenie wyłącznie na granicy runtime.',
-              '',
-          ]
-          marker = '---\n\n# shared/ — Wspólne moduły systemu prawnych skilli'
-          if marker not in text:
-              raise SystemExit('shared frontmatter marker not found')
-          text = text.replace(marker, '---\n\n' + '\n'.join(adapter) + '# shared/ — Wspólne moduły systemu prawnych skilli', 1)
-          p.write_text(text, encoding='utf-8')
-          PY
+`shared` pozostaje JEDYNYM kanonicznym SSOT. Adapter nie zmienia treści modułów prawnych, tylko sposób rozumienia operacji technicznych.
 
-          cp '.github/portability/shared-extract-api-verification-log.py' "$ROOT/tools/extract_api_verification_log.py"
+1. `view /mnt/skills/user/shared/<plik>` = świeży odczyt `<plik>` z rootu zainstalowanego skilla `shared`; literalna ścieżka `/mnt/skills/user` nie jest wymagana. Obowiązkowego odczytu nie zastępuj pamięcią modelu.
+2. Udokumentowane pliki-mosty mogą wskazywać inny osobny skill. `view /mnt/skills/user/<skill>/<plik>` = świeży odczyt zasobu z tego skilla przez mechanizm hosta. Brak obowiązkowego zasobu = fail-closed; NIE kopiuj go do `shared`.
+3. `web_search` / `web_fetch` oznaczają świeże wyszukanie/odczyt źródła. Jeśli host ma inną nazwę narzędzia, użyj równoważnej funkcji. PRAWO-HARDGATE, hierarchia źródeł i statusy pozostają bez zmian.
+4. `/mnt/user-data/...` oznacza rzeczywiste pliki użytkownika dostępne w hoście; wymagany reread jest faktycznym odczytem źródła.
+5. `show_widget`, `present_files`, `create_file`, shell/Python i podobne operacje wykonuj równoważną natywną funkcją hosta, jeśli literalna nazwa nie istnieje. Nie pomijaj bramek jakości.
+6. `tools/` to kod integracyjny portalu. `extract_api_verification_log.py` przyjmuje neutralne `events` i zachowuje zgodność z Claude legacy, generycznymi tool-call oraz Responses-style.
 
-          python - <<'PY'
-          from pathlib import Path
-          p = Path('staging/shared/tools/export_gate.py')
-          text = p.read_text(encoding='utf-8')
-          text = text.replace(
-              'export_gate.py — kompletna bramka "przed present_files/eksportem .docx",\nłącząca extract_api_verification_log.py + walidator_cytowan.py w jeden krok,',
-              'export_gate.py — kompletna bramka przed dostarczeniem/eksportem dokumentu,\nłącząca provider-neutralny extract_api_verification_log.py + walidator_cytowan.py w jeden krok,',
-              1,
-          )
-          text = text.replace(
-              'python3 export_gate.py --document pismo.docx --api-conversation konwersacja_api.json',
-              'python3 export_gate.py --document pismo.docx --verification-input verification_input.json',
-              1,
-          )
-          text = text.replace(
-              'parser = argparse.ArgumentParser(description="Bramka eksportu: ekstrakcja logu API + walidacja cytowań")',
-              'parser = argparse.ArgumentParser(description="Bramka eksportu: provider-neutralna ekstrakcja logu weryfikacji + walidacja cytowań")',
-              1,
-          )
-          old = '''parser.add_argument("--api-conversation", required=False,
+**Zasada nadrzędna:** jeśli istniejąca instrukcja jest zrozumiała i wykonalna w bieżącym hoście, wykonaj ją bez konwersji. Adapter działa tylko na granicy runtime.
+
+'''
+          marker='---\n\n# shared/ — Wspólne moduły systemu prawnych skilli'
+          if marker not in text: raise SystemExit('frontmatter marker not found')
+          text=text.replace(marker,'---\n\n'+adapter+'# shared/ — Wspólne moduły systemu prawnych skilli',1)
+          p.write_text(text,encoding='utf-8')
+
+          p=root/'tools/export_gate.py'
+          text=p.read_text(encoding='utf-8')
+          text=text.replace('parser = argparse.ArgumentParser(description="Bramka eksportu: ekstrakcja logu API + walidacja cytowań")','parser = argparse.ArgumentParser(description="Bramka eksportu: provider-neutralna ekstrakcja logu weryfikacji + walidacja cytowań")',1)
+          old='''parser.add_argument("--api-conversation", required=False,
                          help="Ścieżka do JSON z pełną konwersacją API (format extract_api_verification_log.py)")'''
-          new = '''parser.add_argument("--api-conversation", "--verification-input", dest="api_conversation", required=False,
+          new='''parser.add_argument("--api-conversation", "--verification-input", dest="api_conversation", required=False,
                          help="JSON z logiem weryfikacji: neutralne events, Claude legacy, generic tool-call lub Responses-style")'''
-          if old not in text:
-              raise SystemExit('export_gate argument block not found')
-          text = text.replace(old, new, 1)
-          text = text.replace(
-              'print("Wymagane: --document i --api-conversation (lub --self-test)", file=sys.stderr)',
-              'print("Wymagane: --document i --verification-input/--api-conversation (lub --self-test)", file=sys.stderr)',
-              1,
-          )
-          text = text.replace(
-              'Zdarzeń weryfikacji wydobytych z konwersacji API:',
-              'Zdarzeń weryfikacji wydobytych z wejścia:',
-          )
-          p.write_text(text, encoding='utf-8')
+          if old not in text: raise SystemExit('export_gate arg block not found')
+          text=text.replace(old,new,1)
+          text=text.replace('print("Wymagane: --document i --api-conversation (lub --self-test)", file=sys.stderr)','print("Wymagane: --document i --verification-input/--api-conversation (lub --self-test)", file=sys.stderr)',1)
+          text=text.replace('Zdarzeń weryfikacji wydobytych z konwersacji API:','Zdarzeń weryfikacji wydobytych z wejścia:')
+          p.write_text(text,encoding='utf-8')
+
+          p=root/'tools/README.md'
+          add='''\n\n## Portability — neutralny format wejściowy logu weryfikacji\n\nDla nowych integracji preferuj `{\"session_id\":\"...\",\"events\":[...]}`. Każdy event powinien zawierać `tool` (`web_fetch`/`web_search`), źródło (`url` albo `query` + `result_urls`), opcjonalny `query_context` i status. Format Claude/Anthropic `server_tool_use` + `*_tool_result` pozostaje obsługiwany wstecznie; obsługiwane są też generyczne pary tool-call/result i ukończone wpisy Responses-style. Samo rozpoczęcie wywołania bez wyniku nie jest dowodem weryfikacji.\n'''
+          p.write_text(p.read_text(encoding='utf-8')+add,encoding='utf-8')
           PY
 
-          cat >> "$ROOT/tools/README.md" <<'EOF'
-
-## Portability — neutralny format wejściowy logu weryfikacji
-
-Dla nowych integracji nie wiąż `export_gate.py` z formatem surowej konwersacji jednego dostawcy.
-Preferowany kontrakt wejściowy dla `extract_api_verification_log.py` to:
-
-```json
-{
-  "session_id": "...",
-  "events": [
-    {"tool":"web_fetch","url":"https://...","query_context":"art. 211 KC","status":"success"},
-    {"tool":"web_search","query":"...","result_urls":["https://..."],"query_context":"sygnatura","status":"success"}
-  ]
-}
-```
-
-Format Claude/Anthropic `server_tool_use` + `*_tool_result` pozostaje obsługiwany wstecznie.
-Ekstraktor rozpoznaje też generyczne pary tool-call/result oraz ukończone wpisy Responses-style.
-Jeżeli host nie udostępnia stabilnego surowego transcriptu, jego adapter powinien zapisać powyższe
-znormalizowane `events`. Samo rozpoczęcie wywołania bez wyniku nigdy nie jest dowodem weryfikacji.
-EOF
-
-      - name: Validate shared code
+      - name: Validate code
         shell: bash
         run: |
           set -euo pipefail
@@ -148,77 +93,42 @@ EOF
           python "$ROOT/tools/export_gate.py" --self-test
           python -m py_compile "$ROOT"/tools/*.py
           find "$ROOT" -type d -name '__pycache__' -prune -exec rm -rf {} +
-          if find "$ROOT" -type f \( -name '*.pyc' -o -name '*.pyo' \) | grep -q .; then
-            echo 'ERROR: generated bytecode remains in shared artifact' >&2
-            exit 1
-          fi
-          grep -q '^## ADAPTER RUNTIME — PORTABILITY' "$ROOT/SKILL.md"
+          test -z "$(find "$ROOT" -type f \( -name '*.pyc' -o -name '*.pyo' \) -print -quit)"
 
-      - name: Add manifest and checksums
+      - name: Manifest checksums and final gates
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
-          import hashlib, re
-
-          root = Path('staging/shared')
-          source_count = sum(1 for p in root.rglob('*') if p.is_file())
-          text = (root/'SKILL.md').read_text(encoding='utf-8')
-          m = re.search(r'^description:\s*"(.*?)"\s*$', text, re.M)
-          if not m:
-              raise SystemExit('portable description not found')
-          desc_len = len(m.group(1))
-          if desc_len > 200:
-              raise SystemExit(f'description too long: {desc_len}')
-
-          manifest = [
-              '# Portability manifest — shared','',
-              '- Source repository: `michaleiatrak-star/Lex-Machina`',
-              '- Source baseline: `bdebb4b0b6ba63add44501795c6e4acdc5bfd931`',
-              f'- Complete canonical shared files after in-place portability patches, before manifest/checksums: **{source_count}**',
-              f'- Frontmatter description length: **{desc_len}/200**','',
-              '## SSOT','',
-              '`shared` jest jedyną kanoniczną biblioteką. Nie powiela się jej plików w ZIP-ach innych skilli.','',
-              '## Zmiany runtime','',
-              '1. `SKILL.md` otrzymał adapter dla legacy ścieżek/narzędzi bez masowej zmiany modułów prawnych.',
-              '2. `extract_api_verification_log.py` obsługuje neutralne `events`, Claude legacy, generic tool-call i Responses-style.',
-              '3. `export_gate.py` zachowuje `--api-conversation` i dodaje neutralny alias `--verification-input`.',
-              '4. `tools/README.md` opisuje neutralny kontrakt logu.',
-              '5. Pozostałe moduły, bramki, definicje, narzędzia MCP i świadome pliki-mosty pozostają zachowane.','',
-              '## Zasada nienaruszania instrukcji','',
-              'Nie wykonano masowej zamiany `web_search`, `web_fetch` ani `view`: jeśli host rozumie i może wykonać instrukcję, pozostaje ona bez zmian.',''
-          ]
-          (root/'PORTABILITY-MANIFEST.md').write_text('\n'.join(manifest), encoding='utf-8')
-          rows = []
-          for f in sorted(p for p in root.rglob('*') if p.is_file() and p.name != 'CHECKSUMS.sha256'):
+          import hashlib,re
+          root=Path('staging/shared')
+          before=sum(1 for p in root.rglob('*') if p.is_file())
+          text=(root/'SKILL.md').read_text(encoding='utf-8')
+          m=re.search(r'^description:\s*"(.*?)"\s*$',text,re.M)
+          if not m: raise SystemExit('description missing')
+          if len(m.group(1))>200: raise SystemExit('description >200')
+          manifest=f'''# Portability manifest — shared\n\n- Source baseline: `bdebb4b0b6ba63add44501795c6e4acdc5bfd931`\n- Canonical files before manifest/checksums: **{before}**\n- Description: **{len(m.group(1))}/200**\n\n`shared` pozostaje jedynym SSOT i nie jest kopiowany do innych skilli. Zmiany ograniczono do adaptera runtime w istniejącym `SKILL.md`, provider-neutralnego parsera logu weryfikacji, aliasu CLI w `export_gate.py` i dokumentacji. Nie wykonano masowej zamiany instrukcji, które host już rozumie.\n'''
+          (root/'PORTABILITY-MANIFEST.md').write_text(manifest,encoding='utf-8')
+          rows=[]
+          for f in sorted(p for p in root.rglob('*') if p.is_file() and p.name!='CHECKSUMS.sha256'):
               rows.append(f'{hashlib.sha256(f.read_bytes()).hexdigest()}  {f.relative_to(root).as_posix()}')
-          (root/'CHECKSUMS.sha256').write_text('\n'.join(rows)+'\n', encoding='utf-8')
+          (root/'CHECKSUMS.sha256').write_text('\n'.join(rows)+'\n',encoding='utf-8')
           PY
-
           ROOT='staging/shared'
           COUNT=$(find "$ROOT" -type f | wc -l | tr -d ' ')
           echo "FINAL_FILES=$COUNT"
-          if [ "$COUNT" -gt 200 ]; then
-            echo "ERROR: shared ZIP has $COUNT files; hard limit 200" >&2
-            exit 1
-          fi
-          if [ "$COUNT" -ge 199 ]; then
-            echo "WARNING: shared is at $COUNT/200 files"
-          fi
-          test -f "$ROOT/SKILL.md"
+          test "$COUNT" -le 200
           test -f "$ROOT/PRAWO-HARDGATE.md"
           test -f "$ROOT/MOD-STEP-TRACKER.md"
           test -f "$ROOT/tools/extract_api_verification_log.py"
-          test -f "$ROOT/tools/export_gate.py"
           test -z "$(find "$ROOT" -type d -name '__pycache__' -print -quit)"
           (cd "$ROOT" && sha256sum -c CHECKSUMS.sha256)
 
-      - name: Upload one canonical shared ZIP artifact
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: shared
           path: staging
-          if-no-files-found: error
           include-hidden-files: true
+          if-no-files-found: error
           retention-days: 7
