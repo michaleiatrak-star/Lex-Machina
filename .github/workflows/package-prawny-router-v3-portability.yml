@@ -1,0 +1,27 @@
+name: Package prawny-router-v3 portability
+
+on:
+  push:
+    branches:
+      - portability/prawny-router-v3-01
+    paths:
+      - '.github/workflows/package-prawny-router-v3-portability.yml'
+      - '.github/portability/package_prawny_router.py'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python .github/portability/package_prawny_router.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prawny-router-v3
+          path: staging
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
