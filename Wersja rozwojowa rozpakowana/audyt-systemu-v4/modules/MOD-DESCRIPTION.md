@@ -1,130 +1,53 @@
 # MOD-DESCRIPTION — Walidacja pola description (OBECNOŚĆ + długość)
 
 ## Cel
-Weryfikuje **dwie rzeczy**, nie jedną:
-1. czy pole `description:` w `SKILL.md` **w ogóle istnieje**;
-2. czy jego treść nie przekracza **1024 znaków** (limit techniczny systemu skilli —
-   przekroczenie obcina description w UI bez ostrzeżenia).
+Weryfikuje dwie rzeczy:
+1. czy pole `description:` w `SKILL.md` istnieje i nie jest puste;
+2. czy jego treść mieści się w profilu wspólnym dla jednego ZIP-a używanego
+   zarówno w Claude, jak i w ChatGPT.
 
-> ⛔ **ROZSZERZENIE 2026-08-24 (F-130) — moduł sprawdzał dotąd TYLKO długość.**
-> Skutek był dokładnie odwrotny do zamierzonego: skrypt wykrycia dla pliku BEZ pola
-> `description:` wypisywał `0` i klasyfikował go jako **✅ OK** — czyli brak pola,
-> stan najgorszy z możliwych, raportował jako najzdrowszy. Wykryte, gdy użytkownik
-> przysłał poprawkę do `audyt-systemu-v4/SKILL.md`: **to był JEDYNY skill w całym
-> systemie bez pola `description:`** — i to ten, który audytuje kompletność
-> rejestracji pozostałych. Pozostałe 27 skilli miały je od dawna.
->
-> Dlaczego to nie jest usterka kosmetyczna: `description` jest polem, na podstawie
-> którego skill jest **wybierany do wywołania**. Skill bez niego może nigdy nie
-> zostać uruchomiony automatycznie — istnieje na dysku i jest niewidoczny w praktyce.
+## Progi profilu uniwersalnego
 
----
+**HARD LIMIT: 200 znaków** dla `description`.
 
-## Progi
+- brak pola / pole puste → ❌ CRIT
+- 1–180 znaków → ✅ OK
+- 181–200 znaków → ⚠️ WARN (mały zapas na przyszłe doprecyzowanie)
+- >200 znaków → ❌ CRIT
 
-**HARD LIMIT: 1024 znaki** (licząc wyłącznie treść description, bez wcięć YAML ani cudzysłowów).
+Ten próg jest świadomie bardziej konserwatywny niż limity części implementacji
+Agent Skills. Celem Lex-Machina jest ten sam kompletny ZIP na obu hostach, więc
+walidacja stosuje wspólny mianownik zamiast dwóch forków skilla.
 
-- **brak pola / pole puste → ❌ CRIT** — skill może nie być wyzwalany (F-130)
-- 1–900 znaków → ✅ OK
-- 901–1024 znaki → ⚠️ WARN (blisko limitu — zalecane skrócenie)
-- > 1024 znaki → ❌ CRIT (przekroczenie limitu — obowiązkowa naprawa)
-
-⚠️ **Nie myl „0 znaków” z „OK”.** Każdy skrypt liczenia długości MUSI rozróżniać
-`pole nieobecne` od `pole obecne i krótkie` — inaczej odtworzy lukę F-130.
-Kanoniczne narzędzie: `scripts/check_description.py` (test **T14**).
-
----
+⚠️ Nie myl „0 znaków” z „OK”. Brak pola i puste pole są osobnymi błędami.
+Kanoniczne narzędzie: `scripts/check_description.py` (T14).
 
 ## Wykrycie
 
-```bash
-# Skrypt zliczający znaki description dla każdego SKILL.md
-for f in $(find /mnt/skills/user/ -name "SKILL.md" | grep -v archive | sort); do
-  # Wyciągnij treść description (blok YAML między description: a następnym kluczem)
-  desc=$(python3 -c "
-import sys, re
-content = open('$f').read()
-m = re.search(r'^description:\s*\|?\n((?:[ \t]+.*\n?)*)', content, re.MULTILINE)
-if m:
-    text = re.sub(r'^[ \t]+', '', m.group(1), flags=re.MULTILINE).strip()
-    print(len(text))
-else:
-    # inline description
-    m2 = re.search(r'^description:\s*[\"\'"]?(.+?)[\"\'"]?\s*$', content, re.MULTILINE)
-    print(len(m2.group(1).strip()) if m2 else 0)
-" 2>/dev/null || echo "0")
-  skill=$(echo "$f" | sed 's|/mnt/skills/user/||;s|/SKILL.md||')
-  if [ "$desc" -gt 1024 ]; then
-    echo "❌ CRIT $desc znaków → $skill"
-  elif [ "$desc" -gt 900 ]; then
-    echo "⚠️  WARN $desc znaków → $skill"
-  else
-    echo "✅ OK   $desc znaków → $skill"
-  fi
-done
-```
-
----
-
-## Skrócony wynik (tylko problemy)
+Uruchom:
 
 ```bash
-# Tylko CRIT i WARN
-for f in $(find /mnt/skills/user/ -name "SKILL.md" | grep -v archive | sort); do
-  desc=$(python3 -c "
-import sys, re
-content = open('$f').read()
-m = re.search(r'^description:\s*\|?\n((?:[ \t]+.*\n?)*)', content, re.MULTILINE)
-if m:
-    text = re.sub(r'^[ \t]+', '', m.group(1), flags=re.MULTILINE).strip()
-    print(len(text))
-else:
-    m2 = re.search(r'^description:\s*[\"\'"]?(.+?)[\"\'"]?\s*$', content, re.MULTILINE)
-    print(len(m2.group(1).strip()) if m2 else 0)
-" 2>/dev/null || echo "0")
-  if [ "$desc" -gt 900 ]; then
-    skill=$(echo "$f" | sed 's|/mnt/skills/user/||;s|/SKILL.md||')
-    echo "$desc $skill"
-  fi
-done | sort -rn
+python3 scripts/check_description.py /sciezka/do/katalogu-ze-skillami
 ```
 
----
+Jeżeli środowisko ma ustawione `LEX_MACHINA_ROOT` lub `REPO_ROOT`, albo skrypt
+znajduje się w standardowym drzewie Lex-Machina, argument katalogu można pominąć.
 
-## Procedura naprawy (CRIT)
+## Procedura naprawy
 
-Gdy description przekracza 1024 znaki:
+Gdy description przekracza 200 znaków:
 
-1. Wyświetl aktualną treść:
-```bash
-python3 -c "
-import re
-content = open('/mnt/skills/user/SKILL/SKILL.md').read()
-m = re.search(r'description:.*', content, re.DOTALL)
-print(content[m.start():m.start()+1200] if m else 'brak')
-"
-```
-
-2. Skróć description zachowując:
-   - Główne triggery wywołania (słowa kluczowe)
-   - Wersję skilla (v2, v3 itd.)
-   - Kluczowe ograniczenia (czego NIE robić)
-
-3. Usuń:
-   - Powtórzenia tych samych triggerów innymi słowami
-   - Rozbudowane opisy techniczne (te należą do treści SKILL.md, nie do description)
-   - Listy wyczerpujące (zastąp "m.in." + 3 przykłady)
-
-4. Zastosuj `str_replace` na oryginalnym pliku.
-
-5. Zweryfikuj wynik ponownie skryptem.
-
----
+1. Odczytaj aktualny frontmatter `SKILL.md`.
+2. Skróć description zachowując przede wszystkim:
+   - główne triggery wywołania,
+   - rzeczywisty zakres skilla,
+   - najważniejsze ograniczenie odróżniające go od sąsiednich skilli.
+3. Usuń szczegóły techniczne, historię zmian i wyczerpujące listy — należą do
+   korpusu `SKILL.md` albo `references/`, nie do description.
+4. Nie zmieniaj treści tylko po to, aby użyć innego stylu. Jeżeli instrukcja jest
+   jednoznaczna i działa na obu hostach, pozostaw ją bez zmian.
+5. Uruchom T14 ponownie.
 
 ## Raport
 
-| Skill | Przed (znaki) | Po (znaki) | Status |
-|-------|:-------------:|:----------:|--------|
-| analizator-umow-v1 | 1287 | 980 | ✅ naprawiono |
-
-Wpisz wynik do sekcji `## NAPRAWY WYKONANE` lub `## OSTRZEŻENIA` w raporcie audytu.
+Raportuj co najmniej: skill, długość przed, długość po i status T14.
