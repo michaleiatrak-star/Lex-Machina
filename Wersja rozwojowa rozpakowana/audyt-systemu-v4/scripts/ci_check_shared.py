@@ -2,87 +2,74 @@
 """
 ci_check_shared.py — deterministyczny CI dla silnika skilli prawnych.
 
-Adresuje punkt 2 audytu komercyjnego: "shared/ to punkt osobliwy
-architektury (...) bez CI/testów regresyjnych każda edycja jednego ze 115
-plików może cicho zepsuć 31 zależnych skilli."
+Kontrole:
+  1. zerwane odwołania do plików .md — BŁĄD,
+  2. duplikaty bajtowe — OSTRZEŻENIE,
+  3. portability warnings — nazwy/ścieżki runtime wymagające przeglądu.
 
-Dwie kontrole, oparte wyłącznie na analizie plików na dysku (brak zależności
-sieciowych, brak zależności od LLM — czysto deterministyczne):
-
-  1. ZERWANE ODWOŁANIA (BŁĄD, kod wyjścia 1)
-     Każde `view /mnt/skills/user/...` oraz każda ścieżka *.md w polach
-     frontmatter `required_modules:` / `dependencies: requires:` musi
-     wskazywać na plik, który faktycznie istnieje na dysku.
-
-  2. DUPLIKATY BAJTOWE (OSTRZEŻENIE, nie blokuje)
-     Pliki *.md o identycznym MD5 w różnych lokalizacjach — dokładnie ten
-     typ błędu, jaki znaleziono ręcznie w prawny-router-v3 vs dr-03
-     (kwalifikator-karnomaterialny.md, 2026-07-12). Ten check automatyzuje
-     wykrywanie na przyszłość.
-
-Użycie:
-    python3 ci_check_shared.py [--repo-root /mnt/skills/user] [--quiet]
-
-Kod wyjścia:
-    0 — brak zerwanych odwołań (duplikaty, jeśli są, tylko ostrzegają)
-    1 — znaleziono co najmniej jedno zerwane odwołanie
-
-Przeznaczone do uruchamiania jako git pre-commit hook (patrz
-install_precommit_hook.sh w tym samym katalogu) oraz ręcznie przy każdej
-sesji audyt-systemu-v4.
+Skrypt nie zakłada konkretnego hosta ani katalogu instalacyjnego. Root repo można
+podać przez --repo-root, LEX_MACHINA_ROOT/REPO_ROOT albo wykryć względem skryptu.
 """
 
 import argparse
 import hashlib
+import os
 import re
 import sys
 from pathlib import Path
 
-VIEW_PATTERN = re.compile(r"view\s+(/mnt/skills/user/\S+?\.md)\b")
+# Obsługujemy stary zapis absolutny i nowe, zwykłe ścieżki względne po `view`.
+VIEW_ABS_PATTERN = re.compile(r"view\s+(/mnt/skills/user/\S+?\.md)\b")
+VIEW_REL_PATTERN = re.compile(r"view\s+((?:shared|[a-z0-9][\w-]*)/\S+?\.md)\b", re.I)
 
-# pola frontmatter, w których mogą wystąpić ścieżki względne do plików .md
 FRONTMATTER_PATH_PATTERN = re.compile(
     r"^\s*-\s*([a-zA-Z0-9_\-./]+\.md)\s*$", re.MULTILINE
 )
 
-# katalogi/pliki celowo pomijane w kontroli duplikatów
-# (STUB-y są z definicji krótkimi plikami przekierowującymi — ich treść
-# różni się od kanonicznej, więc i tak nie trafią w duplikat bajtowy;
-# lista zostawiona pusta świadomie, żeby nie maskować przyszłych błędów)
 DUPLICATE_CHECK_IGNORE = set()
-
-# bare placeholder stems używane w dokumentacji jako generyczny przykład
-# wywołania (np. "view .../shared/X.md" = "wywołaj DOWOLNY plik tak") —
-# nie są to realne odwołania i nie powinny być traktowane jak zerwane linki
 PLACEHOLDER_STEMS = {"x", "nazwa", "akt", "nazwa-pliku", "plik"}
+MIN_DUPLICATE_SIZE = 200
+
+PORTABILITY_PATTERNS = {
+    "/mnt/skills/user": re.compile(r"/mnt/skills/user"),
+    "/mnt/user-data": re.compile(r"/mnt/user-data"),
+    "/home/claude": re.compile(r"/home/claude"),
+    "server_tool_use": re.compile(r"\bserver_tool_use\b"),
+    "web_search_tool_result": re.compile(r"\bweb_search_tool_result\b"),
+    "web_fetch_tool_result": re.compile(r"\bweb_fetch_tool_result\b"),
+    "present_files": re.compile(r"\bpresent_files\b"),
+    "show_widget": re.compile(r"\bshow_widget\b"),
+}
+
+
+def auto_root() -> Path:
+    env = os.environ.get("LEX_MACHINA_ROOT") or os.environ.get("REPO_ROOT")
+    if env:
+        return Path(env).resolve()
+    return Path(__file__).resolve().parents[2]
 
 
 def is_placeholder_ref(ref_path: Path) -> bool:
     raw = str(ref_path)
-    if "[" in raw or "]" in raw:
-        return True
-    if ref_path.stem.lower() in PLACEHOLDER_STEMS:
-        return True
-    return False
-
-# minimalny rozmiar pliku brany pod uwagę w kontroli duplikatów (bajty) —
-# odcina puste/prawie puste pliki, które i tak nie są znaczącym duplikatem
-MIN_DUPLICATE_SIZE = 200
+    return "[" in raw or "]" in raw or ref_path.stem.lower() in PLACEHOLDER_STEMS
 
 
 def find_md_files(repo_root: Path):
-    return sorted(p for p in repo_root.rglob("*.md") if ".git" not in p.parts)
+    return sorted(
+        p for p in repo_root.rglob("*.md")
+        if ".git" not in p.parts and "archive" not in p.parts
+    )
 
 
 def resolve_relative_ref(ref: str, source_file: Path, repo_root: Path):
-    """Ścieżki w required_modules bywają względne do repo_root (np.
-    'shared/PRAWO-HARDGATE.md') albo do katalogu skilla (np.
-    'modules/mod-X.md'). Próbujemy obu interpretacji."""
-    candidates = [
-        repo_root / ref,
-        source_file.parent / ref,
-    ]
-    return candidates
+    return [repo_root / ref, source_file.parent / ref]
+
+
+def resolve_legacy_abs(ref: str, repo_root: Path):
+    prefix = "/mnt/skills/user/"
+    if ref.startswith(prefix):
+        return repo_root / ref[len(prefix):]
+    return Path(ref)
 
 
 def check_broken_links(md_files, repo_root: Path):
@@ -94,14 +81,22 @@ def check_broken_links(md_files, repo_root: Path):
             errors.append((f, None, f"BŁĄD ODCZYTU: {e}"))
             continue
 
-        for m in VIEW_PATTERN.finditer(text):
-            ref_path = Path(m.group(1))
+        for m in VIEW_ABS_PATTERN.finditer(text):
+            raw = m.group(1)
+            ref_path = Path(raw)
             if is_placeholder_ref(ref_path):
                 continue
-            if not ref_path.exists():
-                errors.append((f, str(ref_path), "view() wskazuje na nieistniejący plik"))
+            resolved = resolve_legacy_abs(raw, repo_root)
+            if not resolved.exists():
+                errors.append((f, raw, "view wskazuje na nieistniejący plik"))
 
-        # tylko sekcja frontmatter (między pierwszymi --- ... ---)
+        for m in VIEW_REL_PATTERN.finditer(text):
+            ref = m.group(1)
+            if is_placeholder_ref(Path(ref)):
+                continue
+            if not any(c.exists() for c in resolve_relative_ref(ref, f, repo_root)):
+                errors.append((f, ref, "względne view nie rozwiązuje się do istniejącego pliku"))
+
         if text.startswith("---"):
             end = text.find("\n---", 3)
             frontmatter = text[:end] if end != -1 else ""
@@ -110,14 +105,11 @@ def check_broken_links(md_files, repo_root: Path):
                 if is_placeholder_ref(Path(ref)):
                     continue
                 if ref.startswith("/mnt/"):
-                    if not Path(ref).exists():
+                    resolved = resolve_legacy_abs(ref, repo_root)
+                    if not resolved.exists():
                         errors.append((f, ref, "frontmatter wskazuje na nieistniejący plik"))
-                else:
-                    candidates = resolve_relative_ref(ref, f, repo_root)
-                    if not any(c.exists() for c in candidates):
-                        errors.append(
-                            (f, ref, "frontmatter (ścieżka względna) nie rozwiązuje się do istniejącego pliku")
-                        )
+                elif not any(c.exists() for c in resolve_relative_ref(ref, f, repo_root)):
+                    errors.append((f, ref, "frontmatter (ścieżka względna) nie rozwiązuje się do pliku"))
     return errors
 
 
@@ -137,41 +129,63 @@ def check_duplicates(md_files):
     return {h: files for h, files in by_hash.items() if len(files) > 1}
 
 
+def check_portability(md_files, repo_root: Path):
+    hits = []
+    for f in md_files:
+        try:
+            text = f.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        for name, rx in PORTABILITY_PATTERNS.items():
+            for m in rx.finditer(text):
+                line = text.count("\n", 0, m.start()) + 1
+                hits.append((f.relative_to(repo_root), line, name))
+    return hits
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--repo-root", default="/mnt/skills/user")
+    ap.add_argument("--repo-root", default=None)
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
 
-    repo_root = Path(args.repo_root).resolve()
-    md_files = find_md_files(repo_root)
+    repo_root = Path(args.repo_root).resolve() if args.repo_root else auto_root()
+    if not repo_root.is_dir():
+        print(f"BŁĄD: root repo nie istnieje: {repo_root}")
+        return 2
 
+    md_files = find_md_files(repo_root)
     errors = check_broken_links(md_files, repo_root)
     duplicates = check_duplicates(md_files)
+    portability = check_portability(md_files, repo_root)
 
     if not args.quiet:
-        print(f"ci_check_shared.py — {len(md_files)} plików .md przeskanowanych w {repo_root}\n")
-
-        print(f"[1/2] ZERWANE ODWOŁANIA: {len(errors)}")
+        print(f"ci_check_shared.py — {len(md_files)} plików .md w {repo_root}\n")
+        print(f"[1/3] ZERWANE ODWOŁANIA: {len(errors)}")
         for src, ref, msg in errors:
             print(f"  BŁĄD  {src.relative_to(repo_root)}")
             print(f"        → '{ref}' — {msg}")
 
-        print(f"\n[2/2] DUPLIKATY BAJTOWE (MD5): {len(duplicates)} grup")
+        print(f"\n[2/3] DUPLIKATY BAJTOWE: {len(duplicates)} grup")
         for h, files in duplicates.items():
             print(f"  OSTRZEŻENIE  {len(files)} plików identycznych (md5 {h[:10]}...):")
             for f in files:
                 print(f"        - {f.relative_to(repo_root)}")
 
+        print(f"\n[3/3] PORTABILITY — DO PRZEGLĄDU: {len(portability)}")
+        for rel, line, name in portability[:80]:
+            print(f"  {rel}:{line} — {name}")
+        if len(portability) > 80:
+            print(f"  ... i {len(portability) - 80} dalszych")
+
         print()
         if errors:
-            print(f"WYNIK: FAIL — {len(errors)} zerwanych odwołań musi zostać naprawionych.")
+            print(f"WYNIK: FAIL — {len(errors)} zerwanych odwołań.")
         else:
-            print("WYNIK: OK — brak zerwanych odwołań."
-                  + (" Duplikaty powyżej wymagają decyzji, ale nie blokują." if duplicates else ""))
+            print("WYNIK: OK — brak zerwanych odwołań. Portability jest na tym etapie raportem migracyjnym, nie automatycznym FAIL.")
 
-    sys.exit(1 if errors else 0)
+    return 1 if errors else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
