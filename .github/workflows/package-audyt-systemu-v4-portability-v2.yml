@@ -66,6 +66,19 @@ jobs:
               print('shared/' + r)
           PY
 
+      - name: Syntax tests without generated files in artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT='staging/audyt-systemu-v4'
+          python -m py_compile "$ROOT"/scripts/*.py
+          bash -n "$ROOT/scripts/dostarcz_skill.sh"
+          find "$ROOT" -type d -name '__pycache__' -prune -exec rm -rf {} +
+          if find "$ROOT" -type f \( -name '*.pyc' -o -name '*.pyo' \) | grep -q .; then
+            echo 'ERROR: generated Python bytecode remains in staged skill' >&2
+            exit 1
+          fi
+
       - name: Add manifest and checksums; validate package
         shell: bash
         run: |
@@ -111,7 +124,7 @@ jobs:
           PY
 
           ROOT='staging/audyt-systemu-v4'
-          COUNT=$(find "$ROOT" -type f -not -path '*/__pycache__/*' | wc -l | tr -d ' ')
+          COUNT=$(find "$ROOT" -type f | wc -l | tr -d ' ')
           echo "FINAL_FILES=$COUNT"
           if [ "$COUNT" -gt 200 ]; then
             echo "ERROR: final skill has $COUNT files; hard limit 200" >&2
@@ -124,8 +137,7 @@ jobs:
           test -d "$ROOT/scripts"
           test -d "$ROOT/widgets"
           test ! -d "$ROOT/shared"
-          python -m py_compile "$ROOT"/scripts/*.py
-          bash -n "$ROOT/scripts/dostarcz_skill.sh"
+          test -z "$(find "$ROOT" -type d -name '__pycache__' -print -quit)"
           (cd "$ROOT" && sha256sum -c CHECKSUMS.sha256)
 
       - name: Upload one skill as one ZIP artifact
