@@ -1,0 +1,161 @@
+name: Package chronologia-sprawy-v1 portability
+
+on:
+  push:
+    branches:
+      - portability/chronologia-sprawy-v1-01
+    paths:
+      - '.github/workflows/package-chronologia-sprawy-v1-portability.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact branch state
+        uses: actions/checkout@v4
+
+      - name: Stage complete skill and minimally adapt runtime layer
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC='Wersja rozwojowa rozpakowana/chronologia-sprawy-v1'
+          ROOT='staging/chronologia-sprawy-v1'
+          rm -rf staging
+          mkdir -p staging
+          cp -a "$SRC" "$ROOT"
+          SRC_COUNT=$(find "$SRC" -type f | wc -l | tr -d ' ')
+          DST_COUNT=$(find "$ROOT" -type f | wc -l | tr -d ' ')
+          echo "original source files=$SRC_COUNT staged=$DST_COUNT"
+          test "$SRC_COUNT" = "$DST_COUNT"
+          test ! -d "$ROOT/shared"
+
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p=Path('staging/chronologia-sprawy-v1/SKILL.md')
+          text=p.read_text(encoding='utf-8')
+          text=text.replace('compatibility: "web_search, web_fetch, Anthropic API"','compatibility: "live_web_lookup, file_read, optional_interactive_ui"',1)
+          pat=re.compile(r'description: \|\n(?:  .*\n)+?(?=---\n)',re.M)
+          repl=('description: "Chronologia sprawy z dokumentów i dowodów: oś czasu per wątek, klasy pewności, proweniencja, sprzeczności dat/opisów, korelacja finansowa i opcjonalny interaktywny timeline."\n')
+          text,n=pat.subn(repl,text,count=1)
+          if n!=1: raise SystemExit('description block not found exactly once')
+
+          adapter=[
+            '## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)',
+            '',
+            'Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Nie zmienia zasad ekstrakcji zdarzeń, czterech klas pewności, proweniencji, korelacji finansowej, indeksu sprzeczności ani schematu danych osi czasu.',
+            '',
+            '1. `view`, `web_search`, `web_fetch`, `show_widget`, `visualize:read_me`, `present_files`, `sendPrompt` i podobne nazwy traktuj jako nazwy operacji semantycznych, jeśli bieżący host nie udostępnia literalnie narzędzia o tej nazwie. Użyj równoważnej funkcji hosta.',
+            '2. `view /mnt/skills/user/chronologia-sprawy-v1/...` oraz odwołania do `references/`, `assets/` i `upgrade-min8/` oznaczają odczyt plików lokalnych tego skilla. Nie wymagaj literalnego katalogu `/mnt/skills`.',
+            '3. `view /mnt/skills/user/shared/<plik>` oznacza świeży odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tego ZIP-a. Jeżeli obowiązkowy zasób shared jest niedostępny, zastosuj fail-closed zamiast pamięci modelu.',
+            '4. Ścieżki `/mnt/user-data/...` oznaczają rzeczywiste załączniki użytkownika dostępne w bieżącym hoście. Wymóg ponownego odczytu dokumentu oznacza rzeczywisty odczyt pliku, a nie przypomnienie jego treści z kontekstu.',
+            '5. `web_search` / `web_fetch` oznaczają świeże wyszukanie i odczyt źródła. Jeśli chronologia zawiera termin ustawowy, datę wejścia w życie aktu lub sygnaturę, zachowaj PRAWO-HARDGATE i zakaz cytowania z pamięci.',
+            '6. Instrukcje mówiące, że `.jsx` nie renderuje się w `claude.ai`, są ograniczeniem legacy renderera, nie zakazem użycia natywnego UI innego hosta. Preferuj `assets/widget-timeline.html` zgodnie z istniejącą logiką; jeśli host ma własny renderer interaktywny, może użyć równoważnego widoku zachowującego ten sam model danych i funkcje.',
+            '7. `show_widget` oznacza interaktywną oś czasu, gdy host ją obsługuje. Jeżeli nie, zwróć równoważny raport/HTML/natywny artefakt; brak renderera nie może blokować analizy tekstowej TRYB A.',
+            '8. Odwołania do innych skilli, w tym `raport-sytuacyjny-v2`, są integracjami między-skillowymi. Nie kopiuj ich do tej paczki; jeśli brak integracji, wykonaj część lokalną i jawnie oznacz pominięty krok.',
+            '',
+            '**Zasada nadrzędna adaptera:** jeśli istniejąca instrukcja jest zrozumiała i wykonalna przez bieżący host, wykonaj ją bez konwersji. Adapter działa tylko na rzeczywistej granicy runtime.',
+            '',
+          ]
+          marker='---\n\n# Chronologia Sprawy v1.3 — Framework Wielowarstwowy'
+          if marker not in text: raise SystemExit('frontmatter closing marker not found')
+          text=text.replace(marker,'---\n\n'+'\n'.join(adapter)+'# Chronologia Sprawy v1.3 — Framework Wielowarstwowy',1)
+          p.write_text(text,encoding='utf-8')
+          PY
+
+      - name: Verify active shared and local dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          root=Path('staging/chronologia-sprawy-v1')
+          shared=Path('Wersja rozwojowa rozpakowana/shared')
+          text=(root/'SKILL.md').read_text(encoding='utf-8')
+          spats=[
+            re.compile(r'\bview\s+/mnt/skills/user/shared/([A-Za-z0-9_.\-/]+\.(?:md|json|txt|py|sh|ya?ml|html))'),
+            re.compile(r'\bview\s+shared/([A-Za-z0-9_.\-/]+\.(?:md|json|txt|py|sh|ya?ml|html))'),
+          ]
+          srefs=set()
+          for p in spats: srefs.update(m.group(1) for m in p.finditer(text))
+          missing=[r for r in sorted(srefs) if not (shared/r).is_file()]
+          if missing: raise SystemExit('Missing canonical shared dependencies: '+', '.join(missing))
+          print('Verified shared references:',len(srefs))
+
+          lpats=[
+            re.compile(r'\b(?:view|Wczytaj)\s+`?(references/[A-Za-z0-9_.\-/]+\.(?:md|json|html|jsx))`?'),
+            re.compile(r'\bview\s+/mnt/skills/user/chronologia-sprawy-v1/([A-Za-z0-9_.\-/]+\.(?:md|json|html|jsx))'),
+          ]
+          lrefs=set()
+          for p in lpats: lrefs.update(m.group(1) for m in p.finditer(text))
+          missing_local=[r for r in sorted(lrefs) if not (root/r).is_file()]
+          if missing_local: raise SystemExit('Missing local dependencies: '+', '.join(missing_local))
+          print('Verified local references:',len(lrefs))
+          PY
+
+      - name: Manifest checksums and validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib,re
+          root=Path('staging/chronologia-sprawy-v1')
+          source=Path('Wersja rozwojowa rozpakowana/chronologia-sprawy-v1')
+          original_count=sum(1 for p in source.rglob('*') if p.is_file())
+          text=(root/'SKILL.md').read_text(encoding='utf-8')
+          m=re.search(r'^description:\s*"(.*?)"\s*$',text,re.M)
+          if not m: raise SystemExit('portable description not found')
+          desc_len=len(m.group(1))
+          if desc_len>200: raise SystemExit(f'description too long: {desc_len}')
+          manifest=[
+            '# Portability manifest — chronologia-sprawy-v1','',
+            '- Source repository: `michaleiatrak-star/Lex-Machina`',
+            '- Source commit: `bdebb4b0b6ba63add44501795c6e4acdc5bfd931`',
+            '- Original SKILL.md blob: `9337eb7e091761ce40e2d48c6fdf75cd3d04d9bc`',
+            f'- Original skill files copied before portability additions: **{original_count}**',
+            f'- Frontmatter description length: **{desc_len}/200**','',
+            '## Zasada shared','',
+            '`shared` pozostaje osobnym kanonicznym skillem; ten ZIP nie zawiera jego kopii.','',
+            '## Zmiany wyłącznie runtime portability','',
+            '1. `Anthropic API` w compatibility zastąpiono neutralnymi capability.',
+            '2. Skrócono tylko frontmatter `description`; historia wersji i auto-trigger pozostają w treści.',
+            '3. Dodano adapter dla legacy ścieżek, narzędzi oraz renderowania widgetu/JSX.',
+            '4. Pełne `assets`, `references` i archiwalne `upgrade-min8` pozostają w ZIP-ie.',
+            '5. Ekstrakcja, sprzeczności, finanse, pewność i proweniencja nie zostały przepisane.','',
+            '## Zasada nienaruszania instrukcji','',
+            'Instrukcje zrozumiałe i wykonalne przez host pozostają bez zmian; adapter działa tylko na granicy runtime.',''
+          ]
+          (root/'PORTABILITY-MANIFEST.md').write_text('\n'.join(manifest),encoding='utf-8')
+          rows=[]
+          for f in sorted(p for p in root.rglob('*') if p.is_file() and p.name!='CHECKSUMS.sha256'):
+            rows.append(f'{hashlib.sha256(f.read_bytes()).hexdigest()}  {f.relative_to(root).as_posix()}')
+          (root/'CHECKSUMS.sha256').write_text('\n'.join(rows)+'\n',encoding='utf-8')
+          PY
+          ROOT='staging/chronologia-sprawy-v1'
+          COUNT=$(find "$ROOT" -type f | wc -l | tr -d ' ')
+          echo "FINAL_FILES=$COUNT"
+          if [ "$COUNT" -gt 200 ]; then echo "ERROR: final skill has $COUNT files; hard limit 200" >&2; exit 1; fi
+          test -f "$ROOT/SKILL.md"
+          test -d "$ROOT/assets"
+          test -d "$ROOT/references"
+          test -d "$ROOT/upgrade-min8"
+          test ! -d "$ROOT/shared"
+          test -f "$ROOT/assets/widget-timeline.html"
+          test -f "$ROOT/assets/ChronologiaSprawy.jsx"
+          (cd "$ROOT" && sha256sum -c CHECKSUMS.sha256)
+
+      - name: Upload one skill as one ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: chronologia-sprawy-v1
+          path: staging
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 7
