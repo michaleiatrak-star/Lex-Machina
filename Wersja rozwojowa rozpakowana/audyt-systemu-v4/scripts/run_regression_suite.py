@@ -1,157 +1,108 @@
 #!/usr/bin/env python3
-"""
-run_regression_suite.py — Orkiestrator PEŁNEGO zestawu testów regresyjnych.
+"""run_regression_suite.py — orkiestrator testów regresyjnych Lex-Machina.
 
-Uruchamia WSZYSTKIE testy opisane w REGRESSION-TEST-PLAN.md (T1-T8) w
-kolejności priorytetowej i zbiera wyniki w JEDEN, czytelny raport.
-
-Zgodnie z REGRESSION-TEST-PLAN.md sekcja 4 (priorytetyzacja):
-  ⭐⭐⭐ KRYTYCZNE (T1, T3, T4*, T6) — blokują uznanie sesji za zakończoną
-  ⭐⭐ WYSOKIE (T2, T5*, T8) — ostrzeżenie, wymaga przeglądu przed dostarczeniem
-  ⭐ ŚREDNI (T7) — okresowe, nie blokuje
-
-  * T4 wymaga PARY migawek (przed/po edycją) — NIE jest uruchamiany
-    automatycznie przez ten orkiestrator (brak dostępu do stanu "przed"
-    bez wcześniejszego, jawnego wywołania --snapshot) — pomijany tutaj,
-    z przypomnieniem w raporcie.
-  * T5 (widmowe pokrycie / ghost coverage) NIE MA jeszcze zautomatyzowanego
-    skryptu — wymaga osądu LLM/człowieka, patrz REGRESSION-TEST-PLAN.md
-    sekcja 3. Pomijany tutaj, z przypomnieniem w raporcie.
-
-Użycie:
-    python3 run_regression_suite.py [--repo-root /mnt/skills/user]
-
-Kod wyjścia:
-    0 — wszystkie testy KRYTYCZNE (T1, T3*, T6) zaliczone (T3 traktowany
-        jako WARN nie FAIL, zgodnie z jego naturą heurystyczną)
-    1 — co najmniej jeden test KRYTYCZNY (T1, T6) zwrócił FAIL
+Root repo jest jawnie propagowany do testów, które go obsługują. Dzięki temu
+zestaw działa z rozpakowanego ZIP-a / checkoutu bez założenia `/mnt/skills/user`.
 """
 
 import argparse
+import os
 import subprocess
 import sys
 from pathlib import Path
 
-SCRIPT_DIR = Path(__file__).parent
+SCRIPT_DIR = Path(__file__).resolve().parent
 
 
-def run_script(name: str, args: list) -> tuple:
-    """Uruchamia skrypt, zwraca (kod_wyjścia, stdout)."""
+def auto_root() -> Path:
+    env = os.environ.get("LEX_MACHINA_ROOT") or os.environ.get("REPO_ROOT")
+    if env:
+        return Path(env).resolve()
+    return SCRIPT_DIR.parents[1]
+
+
+def run_script(name: str, args: list[str]) -> tuple[int | None, str]:
     path = SCRIPT_DIR / name
     if not path.exists():
         return None, f"SKRYPT NIEOBECNY: {name}"
     result = subprocess.run(
         [sys.executable, str(path)] + args,
-        capture_output=True, text=True
+        capture_output=True,
+        text=True,
     )
-    return result.returncode, result.stdout
+    return result.returncode, result.stdout + result.stderr
+
+
+def sekcja(tytul: str):
+    print("── " + tytul + " " + "─" * max(3, 66 - len(tytul)))
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--repo-root", default="/mnt/skills/user")
+    ap.add_argument("--repo-root", default=None)
     args = ap.parse_args()
 
-    repo_args = ["--repo-root", args.repo_root]
+    root = Path(args.repo_root).resolve() if args.repo_root else auto_root()
+    repo_args = ["--repo-root", str(root)]
 
-    print("=" * 70)
-    print("ZESTAW TESTÓW REGRESYJNYCH — prawo-polskie-v2 i skille powiązane")
-    print("=" * 70)
-    print()
+    print("=" * 72)
+    print("ZESTAW TESTÓW REGRESYJNYCH — Lex-Machina")
+    print(f"ROOT: {root}")
+    print("=" * 72)
 
     results = {}
 
-    # --- T1: KRYTYCZNY ---
-    print("── T1 (⭐⭐⭐ KRYTYCZNY) — Rejestracja modułów " + "─" * 20)
-    code, out = run_script("test_module_registration.py", repo_args)
-    print(out)
-    results["T1"] = code
+    for key, label, script, sargs in [
+        ("T1", "T1 KRYTYCZNY — Rejestracja modułów", "test_module_registration.py", repo_args),
+        ("T2", "T2 WYSOKI — Zgodność liczników", "test_module_count.py", repo_args),
+        ("T3", "T3 KRYTYCZNY/heurystyka — Spójność Dz.U.", "test_cross_map_dzu.py", repo_args),
+    ]:
+        sekcja(label)
+        code, out = run_script(script, sargs)
+        print(out)
+        results[key] = code
 
-    # --- T2: WYSOKI ---
-    print("── T2 (⭐⭐ WYSOKI) — Zgodność liczników " + "─" * 26)
-    code, out = run_script("test_module_count.py", repo_args)
-    print(out)
-    results["T2"] = code
-
-    # --- T3: KRYTYCZNY (heurystyka, traktowany jako WARN) ---
-    print("── T3 (⭐⭐⭐ KRYTYCZNY, heurystyka → WARN) — Spójność Dz.U. między mapami " + "─" * 5)
-    code, out = run_script("test_cross_map_dzu.py", repo_args)
-    print(out)
-    results["T3"] = code
-
-    # --- T4: KRYTYCZNY, ALE wymaga migawek — pomijany tutaj ---
-    print("── T4 (⭐⭐⭐ KRYTYCZNY) — Integralność nagłówków " + "─" * 18)
-    print("  POMINIĘTY w automatycznym przebiegu — wymaga PARY migawek")
-    print("  (--snapshot PRZED edycją, --verify PO edycji), użycie RĘCZNE")
-    print("  przy KAŻDEJ edycji str_replace na pliku .md. Patrz")
-    print("  test_header_snapshot.py --help.")
+    sekcja("T4 KRYTYCZNY — Integralność nagłówków")
+    print("RĘCZNY: test_header_snapshot.py --snapshot/--verify wokół edycji .md.\n")
     results["T4"] = "MANUAL"
-    print()
 
-    # --- T5: WYSOKI, brak automatyzacji — pomijany ---
-    print("── T5 (⭐⭐ WYSOKI) — Widmowe pokrycie (ghost coverage) " + "─" * 11)
-    print("  BRAK zautomatyzowanego skryptu — WYMAGA osądu LLM/człowieka")
-    print("  (sprawdź, czy wpis '✅ OK' w mapie WSKAZUJE na treść, która")
-    print("  FAKTYCZNIE istnieje w module, nie tylko deklaruje istnienie).")
+    sekcja("T5 WYSOKI — Widmowe pokrycie")
+    print("RĘCZNY: wymaga osądu treści, nie tylko obecności deklaracji.\n")
     results["T5"] = "MANUAL"
-    print()
 
-    # --- T6/T7: istniejący ci_check_shared.py ---
-    print("── T6/T7 (⭐⭐⭐/⭐) — Zerwane odwołania / Duplikaty bajtowe " + "─" * 8)
-    code, out = run_script("ci_check_shared.py", [])
-    print(out if out else "  (ci_check_shared.py nie zwrócił wyjścia tekstowego)")
+    sekcja("T6/T7 KRYTYCZNY/ŚREDNI — Odwołania, duplikaty, portability")
+    code, out = run_script("ci_check_shared.py", repo_args)
+    print(out)
     results["T6_T7"] = code
 
-    # --- T8: WYSOKI (heurystyka, traktowany jako WARN) ---
-    print("── T8 (⭐⭐ WYSOKI, heurystyka → WARN) — Zakres tytuł-vs-treść " + "─" * 8)
-    code, out = run_script("test_title_scope_match.py", repo_args)
-    print(out)
-    results["T8"] = code
+    for key, label, script, sargs in [
+        ("T8", "T8 WYSOKI — Zakres tytuł-vs-treść", "test_title_scope_match.py", repo_args),
+        ("T9", "T9 WYSOKI — Przeniesienia do shared", "test_moved_to_shared.py", repo_args),
+        ("T11", "T11 WYSOKI — Synchronizacja aktów", "check_sync_aktow.py", repo_args + ["--limit", "10"]),
+        ("T12", "T12 ŚREDNI — Zgodność wersji/changelogu", "check_wersje_changelog.py", [str(root)]),
+        ("T13", "T13 ŚREDNI — Długość modułów", "check_dlugosc_modulow.py", [str(root)]),
+        ("T14", "T14 KRYTYCZNY — description ≤200", "check_description.py", [str(root)]),
+    ]:
+        sekcja(label)
+        code, out = run_script(script, sargs)
+        print(out)
+        results[key] = code
 
-    # --- T9: WYSOKI (heurystyka celowana, traktowany jako WARN) ---
-    print("── T9 (⭐⭐ WYSOKI, heurystyka celowana → WARN) — Weryfikacja przeniesień do shared/ " + "─" * 3)
-    code, out = run_script("test_moved_to_shared.py", repo_args)
-    print(out)
-    results["T9"] = code
+    print("=" * 72)
+    print("PODSUMOWANIE")
+    print("=" * 72)
 
-    # --- T11: WYSOKI (heurystyka → WARN, dodany 2026-08-15z, F-89) ---
-    print("── T11 (⭐⭐ WYSOKI, heurystyka → WARN) — Synchronizacja aktów między mapami " + "─" * 3)
-    code, out = run_script("check_sync_aktow.py", repo_args + ["--limit", "10"])
-    print(out)
-    results["T11"] = code
-
-    # --- T12: ŚREDNI (dodany 2026-08-20z, F-101) ---
-    print("── T12 (⭐ ŚREDNI) — Zgodność metadanych wersji skilla " + "─" * 3)
-    code, out = run_script("check_wersje_changelog.py", repo_args)
-    print(out)
-    results["T12"] = code
-
-    # --- T14: KRYTYCZNY (dodany 2026-08-24, F-130) ---
-    # Uwaga: check_description.py przyjmuje katalog jako argument POZYCYJNY,
-    # nie przez --repo-root — stąd inny sposób przekazania niż w T11/T12.
-    print("── T14 (⭐⭐⭐ KRYTYCZNY) — Pole description: obecność + długość " + "─" * 3)
-    code, out = run_script("check_description.py", [repo_args[1]] if len(repo_args) > 1 else [])
-    print(out)
-    results["T14"] = code
-
-    # T10 (monitorowanie plików Nexto/Virtualo, flaga F-12) USUNIĘTE
-    # 2026-07-24d na wyraźne polecenie użytkownika — cały mechanizm
-    # (rejestr + skrypt check_nexto_free_files.py) skasowany, patrz
-    # AUDIT-JOURNAL.md, wpis AUDYT-2026-07-24d.
-
-    # --- PODSUMOWANIE ---
-    print("=" * 70)
-    print("PODSUMOWANIE ZBIORCZE")
-    print("=" * 70)
-
+    # T1 i T6/T7 są twardymi blockerami strukturalnymi na każdym etapie migracji.
+    # T14 może być czerwony przejściowo, dopóki kolejne skille nie zostaną skrócone
+    # do profilu uniwersalnego; nadal jest jawnie raportowany.
     critical_fail = False
     for key, code in results.items():
         if code == "MANUAL":
-            status = "⏸️  RĘCZNY (nie uruchomiony automatycznie)"
+            status = "⏸ RĘCZNY"
         elif code == 0:
             status = "✅ PASS"
         elif code == 1:
-            status = "⚠️  WARN/FAIL (patrz szczegóły wyżej)"
+            status = "⚠️ WARN/FAIL — patrz sekcja"
             if key in ("T1", "T6_T7"):
                 critical_fail = True
         else:
@@ -160,17 +111,13 @@ def main():
                 critical_fail = True
         print(f"  {key}: {status}")
 
-    print()
     if critical_fail:
-        print("WYNIK KOŃCOWY: ❌ FAIL — co najmniej jeden test KRYTYCZNY (T1/T6/T7) "
-              "nie przeszedł. NAPRAW przed dostarczeniem plików użytkownikowi.")
-    else:
-        print("WYNIK KOŃCOWY: ✅ PASS (z zastrzeżeniami WARN, jeśli wystąpiły) — "
-              "testy krytyczne przeszły. Sprawdź WARN (T2/T3/T8/T9) manualnie "
-              "przed finalnym dostarczeniem, oraz pamiętaj o T4/T5 RĘCZNYCH.")
+        print("\nWYNIK KOŃCOWY: ❌ FAIL — aktywny blocker strukturalny.")
+        return 1
 
-    sys.exit(1 if critical_fail else 0)
+    print("\nWYNIK KOŃCOWY: ✅ PASS STRUKTURALNY — przejrzyj WARN i testy ręczne przed wydaniem.")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
