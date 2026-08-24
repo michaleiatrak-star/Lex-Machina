@@ -33,7 +33,7 @@ jobs:
           test "$SRC_COUNT" = "$DST_COUNT"
           test ! -d "$ROOT/shared"
 
-      - name: Verify canonical external shared references without copying them
+      - name: Verify active canonical shared references without copying them
         shell: bash
         run: |
           set -euo pipefail
@@ -44,8 +44,8 @@ jobs:
           root = Path('staging/audyt-systemu-v4')
           shared = Path('Wersja rozwojowa rozpakowana/shared')
           pats = [
-              re.compile(r'/mnt/skills/user/shared/([A-Za-z0-9_.\-/]+\.(?:md|json|txt|py|sh|ya?ml|html))'),
-              re.compile(r'(?<![A-Za-z0-9_.\-/])shared/([A-Za-z0-9_.\-/]+\.(?:md|json|txt|py|sh|ya?ml|html))'),
+              re.compile(r'\bview\s+/mnt/skills/user/shared/([A-Za-z0-9_.\-/]+\.(?:md|json|txt|py|sh|ya?ml|html))'),
+              re.compile(r'\bview\s+shared/([A-Za-z0-9_.\-/]+\.(?:md|json|txt|py|sh|ya?ml|html))'),
           ]
           refs = set()
           for f in root.rglob('*'):
@@ -57,12 +57,11 @@ jobs:
                   continue
               for pat in pats:
                   refs.update(m.group(1) for m in pat.finditer(data))
-          placeholders = {'plik.md','nazwa.md','x.md','N.md'}
-          refs = {r for r in refs if Path(r).name not in placeholders and '<' not in r and '{' not in r}
+          refs = {r for r in refs if '<' not in r and '{' not in r and '[' not in r}
           missing = [r for r in sorted(refs) if not (shared / r).is_file()]
           if missing:
-              raise SystemExit('Missing canonical shared dependencies: ' + ', '.join(missing))
-          print('Verified external shared references:', len(refs))
+              raise SystemExit('Missing active canonical shared dependencies: ' + ', '.join(missing))
+          print('Verified active external shared references:', len(refs))
           for r in sorted(refs):
               print('shared/' + r)
           PY
@@ -93,7 +92,7 @@ jobs:
               f'- Complete skill files before manifest/checksums: **{original_count}**',
               f'- Frontmatter description length: **{len(desc)}/200**','',
               '## Zasada shared','',
-              '`shared` pozostaje osobnym kanonicznym skillem. Ten ZIP nie zawiera kopii plików `shared`; build sprawdza jedynie, czy referencjonowane zasoby istnieją w kanonicznym katalogu repo.','',
+              '`shared` pozostaje osobnym kanonicznym skillem. Ten ZIP nie zawiera kopii plików `shared`; build sprawdza aktywne wywołania zasobów shared, a nie historyczne wzmianki w dziennikach audytowych.','',
               '## Zmiany portability już zastosowane na gałęzi','',
               '- T14: profil wspólny Claude + ChatGPT dla `description`.',
               '- Root repo: wykrywany lub przekazywany jawnie; brak wymogu `/mnt/skills/user`.',
