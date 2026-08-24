@@ -151,7 +151,7 @@ Ustawa o kosztach sądowych w sprawach cywilnych (KSCU):
 Kluczowe stawki (⚠️ POPRAWKA 2026-07-27, FAZA 3E/ZASADA 14 — poprzednia
 wersja miała nieaktualny limit i oversimplified strukturę; naprawiono
 na podstawie dosłownego cytatu art. 13 KSCU z arslege.pl [t.j.
-Dz.U.2025.1228]):
+Dz.U. 2025 poz. 1228]):
   Opłata od pozwu — DWA REŻIMY zależnie od WPS (od reformy z 25.07.2025,
   w życie 23.09.2025 — GÓRNY LIMIT OBNIŻONY z 200 000 na 100 000 zł):
     - WPS do 20 000 zł → OPŁATA STAŁA wg tabeli progowej (art. 13 ust. 1):
@@ -177,7 +177,7 @@ Dz.U.2025.1228]):
   pisma-proste-v2 — ten moduł kanoniczny NIE zawierał art. 25 wcale,
   więc błąd w plikach pochodnych nie był wykrywalny przez porównanie ze
   źródłem. Zweryfikowane: isap.sejm.gov.pl (D20051398Lj.pdf, Rząd 1),
-  lexlege.pl ×2, arslege.pl (z cytatem "Dz.U.2025.0.1228 t.j.") —
+  lexlege.pl ×2, arslege.pl (z cytatem "Dz.U.2025.0.1228 t.j.") —  <!-- zapis źródła cytowany dosłownie — CELOWO nieujednolicony (F-125, 2026-08-24d) -->
   wszystkie zgodne:
     - ust. 1: **50 zł** — skarga na czynności komornika (art. 767 KPC).
       Jednolita stawka niezależnie od przedmiotu zaskarżenia (w tym

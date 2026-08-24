@@ -36,7 +36,7 @@ nakaz opuszczenia lokalu przez sprawcę, zakaz zbliżania, izolacja ofiary.
 
 ## KLUCZOWE AKTY PRAWNE — WERYFIKUJ W ISAP PRZED POWOŁANIEM
 
-- Art. 207 KK (znęcanie) → isap.sejm.gov.pl (Dz.U. 2024.17 — weryfikuj)
+- Art. 207 KK (znęcanie) → isap.sejm.gov.pl (Dz.U. 2024 poz. 17 — weryfikuj)
 - Ustawa o przeciwdziałaniu przemocy domowej → isap.sejm.gov.pl (weryfikuj aktualną nazwę i numer)
   ⚠️ UWAGA: Ustawa była nowelizowana — zweryfikuj aktualną wersję w ISAP
 - Art. 275a KPK (zakaz zbliżania jako środek zapobiegawczy) → isap.sejm.gov.pl

@@ -223,6 +223,13 @@ ISTNIENIE. Dla TREŚĆ i FRAGMENT stosuj rozszerzenie:
 🔴 [BLOKADA]                     — rozbieżność kotwicy / stron / treści → usuń przed wysłaniem
 ```
 
+> ℹ️ **Status źródła przepisu (ISTNIENIE) ma czwarty wariant pośredni,**
+> `🟨 [KOTWICA-URZĘDOWA]`, definiowany wyłącznie w `shared/PRAWO-HARDGATE.md`
+> (sekcja "🟨 KOTWICA URZĘDOWA"). Ten plik go NIE powiela — jeśli ślad
+> weryfikacji dotyczy przepisu ocenionego jako KOTWICA (blokada `robots.txt`
+> na RZĄD 2, warunki K-1…K-4 spełnione), przenieś status `🟨` bez zmian
+> i traktuj go w hierarchii ważności jak w źródle: `✅ > 🟨 > ⚠️ > ⬛`.
+
 ⛔ ZAKAZ: cytat w cudzysłowie lub pinpoint bez statusu 🟢 [VER-FRAGMENT].
 ⛔ ZAKAZ: "SN przyjął, że…" z samym ✅ [VER] (istnienie) — parafraza wymaga
    co najmniej poziomu TREŚĆ albo przeformułowania na "orzeczenie dotyczy [tematu]".

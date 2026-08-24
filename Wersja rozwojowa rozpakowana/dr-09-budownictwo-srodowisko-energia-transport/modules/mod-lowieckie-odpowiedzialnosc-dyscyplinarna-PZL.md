@@ -15,7 +15,7 @@ wg tablicy sterującej `WARN-OTWARTE.md` — po Rozdz. 9 (2026-08-16b), Rozdz. 5
 
 **Status weryfikacji źródłowej:** pełna treść normatywna Rozdz. 6a pobrana
 z lexlege.pl (Rząd 2B, stan prawny serwisu deklarowany na 16.08.2026, akt
-oznaczony Dz.U.2025.0.539 t.j.) — **cały rozdział, artykuł po artykule, bez
+oznaczony Dz.U. 2025 poz. 539 t.j.) — **cały rozdział, artykuł po artykule, bez
 luk**. Art. 33 ust. 6 potwierdzony niezależnie w czterech źródłach
 (lexlege.pl, dlajurysty.pl, standardyprawa.pl oraz — co istotniejsze —
 w treści uzasadnień orzeczeń sądów powszechnych cytujących przepis
@@ -460,7 +460,7 @@ ilustracyjny** — nie powoływać jako linii orzeczniczej.
   (audyt-systemu-v4, tablica sterująca `WARN-OTWARTE.md`): Rozdz. 6a Prawa
   łowieckiego, art. 35b–35t w całości, artykuł po artykule, bez luk.
   Źródło pełnej treści: lexlege.pl (Rząd 2B, cały rozdział pobrany jednym
-  fetchem, stan deklarowany 16.08.2026, Dz.U.2025.0.539 t.j.).
+  fetchem, stan deklarowany 16.08.2026, Dz.U. 2025 poz. 539 t.j.).
   ⭐ **Ustalenie korygujące opis flagi:** wbrew skrótowi w tablicy
   sterującej, odwołanie do sądu okręgowego NIE wynika z Rozdz. 6a, lecz
   z **art. 33 ust. 6** (Rozdz. 6) — przepis dopisany do modułu wraz

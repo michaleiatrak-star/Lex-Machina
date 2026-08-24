@@ -54,7 +54,7 @@ Ustal, czy akt jest decyzją administracyjną, czynnością wewnętrzną, uchwa�
 ## 1A. AUTONOMIA UCZELNI (dodano 2026-07-27, na żądanie użytkownika)
 
 **Podstawa:** art. 3 ust. 1 oraz art. 9 ustawy z 20.07.2018 r. — Prawo o
-szkolnictwie wyższym i nauce (Dz.U.2024.1571 t.j.). Zweryfikowano
+szkolnictwie wyższym i nauce (Dz.U. 2024 poz. 1571 t.j.). Zweryfikowano
 BEZPOŚREDNIO przez isap.sejm.gov.pl (Rząd 1, pobrany PDF ustawy) oraz
 lexlege.pl/arslege.pl/inforlex.pl (Rząd 2B) — wszystkie zgodne.
 ✅ FAZA 3E ZAMKNIĘTA 2026-08-21 (F-45): numer 2024.1571 PONOWNIE
@@ -110,7 +110,7 @@ używanie tych nazw bez spełnienia przesłanek jest naruszeniem ustawy.
 **Podstawa:** ustawa z 14.12.2016 r. — Prawo oświatowe, w szczególności
 Rozdział 8 (art. 168 i nast. — szkoły i placówki niepubliczne) oraz
 art. 14 (szkoła publiczna). Zweryfikowano: lexlege.pl, arslege.pl
-(t.j. Dz.U.2026.820), mvg.pl, lexedu.pl (kancelaria specjalizująca się
+(t.j. Dz.U. 2026 poz. 820), mvg.pl, lexedu.pl (kancelaria specjalizująca się
 w prawie oświatowym).
 ✅ FAZA 3E ZAMKNIĘTA 2026-08-21 (F-45): numer 2026.820 POTWIERDZONY jako
 NAJNOWSZY t.j. (obwieszczenie 12.06.2026, api.sejm.gov.pl bezpośredni

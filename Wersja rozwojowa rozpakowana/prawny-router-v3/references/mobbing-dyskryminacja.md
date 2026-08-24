@@ -57,7 +57,7 @@ uchwalony / w Sejmie / wycofany. **NIE stosuj starych przepisów jeśli noweliza
 Planowane zmiany (weryfikuj czy już obowiązują): nowa definicja mobbingu,
 prawo regresu pracodawcy wobec mobbera.
 
-*KP art. 94³ i 18³a–e (Dz.U. 2025.277) — weryfikuj w ISAP aktualne brzmienie*
+*KP art. 94³ i 18³a–e (Dz.U. 2025 poz. 277) — weryfikuj w ISAP aktualne brzmienie*
 *⚠️ NIEZWERYFIKOWANE punkty startowe: SN II PK 292/05 · SN I PK 40/11 — wyszukaj URL przed powołaniem*
 
 ## FAZA 0 — INTAKE

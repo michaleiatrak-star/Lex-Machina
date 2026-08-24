@@ -10,8 +10,8 @@ z **F-92** (broń i amunicja, dr-13) oraz z dr-03 (uprawnienia procesowe).
 
 **Status weryfikacji źródłowej:** pełna treść rozdziału pobrana z lexlege.pl
 (Rząd 2B, strona ROZDZIAŁU, jeden `web_fetch`, stan deklarowany 16.08.2026,
-Dz.U.2025.0.539 t.j.) — artykuł po artykule, z ustępami i punktami.
-Potwierdzenie zbieżne: sip.lex.pl/OpenLEX (Rozdz. 7, Dz.U.2025.539 t.j.) oraz
+Dz.U. 2025 poz. 539 t.j.) — artykuł po artykule, z ustępami i punktami.
+Potwierdzenie zbieżne: sip.lex.pl/OpenLEX (Rozdz. 7, Dz.U. 2025 poz. 539 t.j.) oraz
 arslege.pl. ⛔ Kontrola nowelizacji w ISAP NIEWYKONANA (ROBOTS_DISALLOWED).
 
 > ⚠️ Spis treści ustawy opisuje rozdział jako „36–41", ale zawiera on także
@@ -411,7 +411,7 @@ sesji 16b). Nie powoływać żadnego z nich bez odczytu ze źródła.
    lub sprzeciw wnosi się w terminie 7 dni od daty ogłoszenia postanowienia,
    a jeżeli ustawa nakazuje doręczenie postanowienia – od daty doręczenia"
    (potwierdzone: lexlege.pl, arslege.pl, sip.lex.pl, aktualny t.j.
-   Dz.U.2026.490) — analogicznie **art. 103 KPW** dla spraw o wykroczenia
+   Dz.U. 2026 poz. 490) — analogicznie **art. 103 KPW** dla spraw o wykroczenia
    łowieckie (odpowiednik 7-dniowy, NIE odczytany źródłowo w tej sesji —
    ⚠️ [NIEWERYFIKOWANE] tylko dla gałęzi KPW, gałąź KPK zamknięta).
 3. ✅ **CZĘŚCIOWO ZWERYFIKOWANE (2026-08-18, F-91 pkt 1):** metryki

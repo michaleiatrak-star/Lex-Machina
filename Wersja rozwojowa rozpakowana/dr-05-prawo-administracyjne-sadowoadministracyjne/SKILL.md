@@ -1,6 +1,6 @@
 ---
 name: dr-05-prawo-administracyjne-sadowoadministracyjne
-version: 3.19
+version: "3.20"
 description: |
   DR-05: Prawo Administracyjne i Sądownictwo Administracyjne
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -22,6 +22,25 @@ description: |
 > gradient weryfikacji cytatu): `view shared/PRAWO-HARDGATE.md` — wczytaj
 > PRZED pierwszym przepisem w każdej odpowiedzi. Integruje się z
 > `shared/ISAP-AUDIT-PROTOCOL.md`.
+
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
+>
+> ```
+> view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
+>
+> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
+> oznaczenia, tylko je wymusza.
 
 ---
 
@@ -70,7 +89,7 @@ z sankcjami grzywny (art. 149), związanie oceną prawną sądu (art.
 153 — przepis o dużej praktycznej doniosłości), umorzenie
 postępowania (art. 161). Uwzględnia zmianę linii orzeczniczej po
 wyroku TK z 26.02.2025 dot. art. 149 §1 pkt 3. Rząd 1: arslege.pl,
-lexlege.pl (metryka Dz.U.2026.143 t.j.), sip.lex.pl. Pełny opis:
+lexlege.pl (metryka Dz.U. 2026 poz. 143 t.j.), sip.lex.pl. Pełny opis:
 `audyt-systemu-v4/references/AUDIT-JOURNAL.md`.
 
 **NAPRAWA 2026-08-13:** dodano `mod-PPSA-terminy-kasacja-prawo-
@@ -151,7 +170,7 @@ KOMPLETNOŚĆ — wszystkie tematy potwierdzone obecne po podziale.
                Komplementarny do mod-KPA-tryby-nadzwyczajne-i-
                strategia, NIE duplikuje kwalifikacji skargi do WSA.
                ✅ ROZSZERZONY 2026-08-20 — naprawa F-88, punkt PPSA:
-               nowa sekcja 7, doprecyzowanie ustawą Dz.U. 2026.846
+               nowa sekcja 7, doprecyzowanie ustawą Dz.U. 2026 poz. 846
                [w życie 1.10.2026] terminu skargi do WSA na opinię
                transgraniczną i odmowę jej wydania. ⚠️ [NIEWERYFIKOWANE
                RZĄD 1] — dokładny artykuł i treść NIE potwierdzone,

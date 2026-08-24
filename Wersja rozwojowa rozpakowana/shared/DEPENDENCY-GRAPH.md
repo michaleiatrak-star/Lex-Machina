@@ -75,6 +75,7 @@
 | `FORMAL-CHECK.md` | ACTIVE | wszystkie DR-01..DR-16 |
 | `LEGAL-LIFECYCLE-MANAGEMENT.md` | ACTIVE | wybrane DR-skille |
 | `PRAWO-HARDGATE.md` | ACTIVE | wszystkie skille z przepisami |
+| `PRAWO-HARDGATE-ORZECZENIA.md` | ACTIVE | skille cytujące ORZECZENIA — załącznik do powyższego, wyzwalacz binarny: sygnatura w tekście (podział F-111, 2026-08-23h) |
 
 ## Moduły scalone do shared/ 2026-07-12 (audyt komercyjny — ci_check_shared.py)
 

@@ -8,8 +8,8 @@ w całym DR-03, mimo że to jeden z najczęściej używanych tematów
 praktyki karnej.)
 
 > ✅ ROZSTRZYGNIĘTE 2026-08-15 (F-81 pkt 6, naprawa `MAPA-AKTOW.md`).
-> Akt bazowy: KPK, Dz.U. 2026 poz. 490 t.j. + Dz.U. 2026.421 (art. 213 §1c,
-> tożsamość obywatela państwa trzeciego) + Dz.U. 2026.638 (art. 25 §1 pkt 2,
+> Akt bazowy: KPK, Dz.U. 2026 poz. 490 t.j. + Dz.U. 2026 poz. 421 (art. 213 §1c,
+> tożsamość obywatela państwa trzeciego) + Dz.U. 2026 poz. 638 (art. 25 §1 pkt 2,
 > właściwość rzeczowa SO, w życie 28.05.2026). Żaden z artykułów opisanych
 > w tym module (Rozdz. 28, art. 249-277) nie jest dotknięty żadną z tych
 > dwóch nowelizacji — zweryfikowano źródłowo (prawo.pl, sip.lex.pl).

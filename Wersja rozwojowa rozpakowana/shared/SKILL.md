@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.19"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.21"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -54,18 +54,15 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.19. ⛔ PEŁNA HISTORIA — WYŁĄCZNIE w references/CHANGELOG.md
-  (standard systemowy 2026-08-20z4: jeden plik, jedna lokalizacja; zakaz sekcji
-  changelogu w korpusie SKILL.md i zakaz pełnej listy wpisów w tym polu).
-  Skrót 3.19 (2026-08-23): usunięto 6 plików historycznych bez roli operacyjnej (202 → 196):
-  AKTY-PRAWNE-MASTER.md (DEPRECATED od 2026-06-14), STATUS.md (rejestr zamrożony 2026-06-09),
-  MOD-WALIDACJA.md (stub bez konsumenta), oba pliki z katalogu checklists/ (zero wywołań;
-  katalog przestał istnieć) oraz portale-branzowe-rzad-2b/czesc-05-changelog.md (treść
-  przeniesiona 1:1 do ANEKSU A w references/CHANGELOG.md). Pełne uzasadnienie per plik
-  oraz lista plików świadomie ZOSTAWIONYCH mimo zerowego wywołania — references/CHANGELOG.md.
-  Skrót 3.18 (2026-08-20z4): pole changelog: w YAML miało 111 linii pełnej historii — wyniesione do
-  references/CHANGELOG.md (nowy plik); w YAML został skrót.
-
+  Wersja bieżąca: 3.21. ⛔ PEŁNA HISTORIA — WYŁĄCZNIE w references/CHANGELOG.md
+  (standard 2026-08-20z4: jedna lokalizacja; zakaz sekcji changelogu w korpusie
+  SKILL.md i zakaz pełnej listy wpisów w tym polu — pole to było już raz
+  porządkowane, miało 111 linii).
+  Skrót 3.20 (2026-08-23h, F-111 wariant B): PRAWO-HARDGATE.md podzielony
+  967 → 501 l. rdzenia + nowy PRAWO-HARDGATE-ORZECZENIA.md (464 l.), wyzwalacz
+  binarny (sygnatura w tekście); 88 linii historii bramki wyniesione z korpusu.
+  Skrót 3.19: usunięto 6 plików historycznych bez roli operacyjnej (202 → 196).
+  Skrót 3.18: pole changelog: w YAML miało 111 linii — wyniesione do references/.
 ---
 
 # shared/ — Wspólne moduły systemu prawnych skilli
@@ -77,7 +74,8 @@ Nie jest samodzielnym skillem — pełni rolę biblioteki referencji.
 
 | Plik | Rola |
 |------|------|
-| `PRAWO-HARDGATE.md` | ⛔ Globalny zakaz cytowania prawa/orzeczeń z pamięci — wczytaj przed każdym przepisem (v2.5: sekwencja B-1→B-2, status 🟡 KOTWICA URZĘDOWA) |
+| `PRAWO-HARDGATE.md` | ⛔ Globalny zakaz cytowania prawa/orzeczeń z pamięci — RDZEŃ, wczytaj przed każdym przepisem (zasada absolutna, PERMANENT GATE, hierarchia statusów, BRAMKA ANTY-FASADOWA, KROK 2B/2C). Podzielony 2026-08-23h, F-111: 967 → 501 l. |
+| `PRAWO-HARDGATE-ORZECZENIA.md` | ⛔ ZAŁĄCZNIK orzeczniczy tej samej bramki — wczytaj ZAWSZE, gdy w tekście ma stanąć SYGNATURA (procedura przed orzeczeniem, WTÓRNE-ŹRÓDŁO-STOP, KROK 5A/5B, warstwy uzasadnienia [1]/[2]/[3], self-check orzeczniczy). NIE jest samodzielny — rdzeń obowiązuje równolegle (dodane 2026-08-23h, F-111) |
 | `DOMAIN-LOCK.md` | ⛔ Bramka izolacji dziedzinowej — kontrola na WYJŚCIU, zakaz kwalifikacji spoza PRIMARY bez podstawy faktycznej (dodane 2026-08-23) |
 | `RATE-COMPLETENESS.md` | ⛔ Bramka kompletności szeregu stawek — odsetki/waloryzacja jako funkcja czasu, nie pojedyncza liczba (dodane 2026-08-23) |
 | `MOD-GENERATOR-AKTU.md` | Procedura budowy modułu aktu prawnego G-1…G-8 — od spisu treści aktu, nie od pytania (dodane 2026-08-23) |
@@ -117,7 +115,8 @@ Każdy skill wczytuje pliki z tego katalogu bezpośrednio przez `view`:
 ```
 view /mnt/skills/user/shared/MOD-STEP-TRACKER.md  ← KROK 0-TRACKER (przed wszystkim — ST-INIT)
 view /mnt/skills/user/shared/MOD-REJESTR-POKRYCIA-JEDNOSTEK.md  ← RPK-INIT (gdy zbiór ≥10 ponumerowanych jednostek, np. seria kazusów)
-view /mnt/skills/user/shared/PRAWO-HARDGATE.md  ← wymagane przed każdym przepisem/orzeczeniem
+view /mnt/skills/user/shared/PRAWO-HARDGATE.md  ← wymagane przed każdym przepisem
+view /mnt/skills/user/shared/PRAWO-HARDGATE-ORZECZENIA.md  ← DODATKOWO, zawsze gdy pada SYGNATURA orzeczenia (F-111)
 view /mnt/skills/user/shared/HYBRID-VALIDATION.md
 view /mnt/skills/user/shared/INTAKE-GAP.md
 view /mnt/skills/user/shared/POST-VALIDATION.md

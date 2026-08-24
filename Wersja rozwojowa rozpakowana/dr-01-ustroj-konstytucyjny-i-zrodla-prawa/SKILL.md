@@ -1,6 +1,6 @@
 ---
 name: dr-01-ustroj-konstytucyjny-i-zrodla-prawa
-version: 3.6
+version: "3.7"
 description: |
   DR-01: Ustrój Konstytucyjny i Źródła Prawa
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -22,6 +22,25 @@ description: |
 > gradient weryfikacji cytatu): `view shared/PRAWO-HARDGATE.md` — wczytaj
 > PRZED pierwszym przepisem w każdej odpowiedzi. Integruje się z
 > `shared/ISAP-AUDIT-PROTOCOL.md`.
+
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
+>
+> ```
+> view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
+>
+> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
+> oznaczenia, tylko je wymusza.
 
 ---
 
@@ -138,18 +157,12 @@ odesłaniami, bez duplikacji.
 
 ## CHANGELOG
 
-> **3.3 (2026-07-25, CRIT-TREŚĆ — audyt adresatów zażalenia w sprawach
-> wyłączenia sędziego/neosędziów):** `modules/mod-USP-ustroj-sadow-
-> powszechnych.md`, sekcja "Procedura wyłączenia" — poprzednia wersja
-> kończyła się ogólnikiem "odmowa → zażalenie" bez wskazania adresata.
-> Dodano tabelę rozróżniającą: (1) zażalenie poziome do innego składu tego
-> samego sądu przy oddaleniu wniosku strony (art. 394¹ᵃ §1 pkt 10 KPC dla
-> I instancji, art. 394² §1 KPC dla II instancji); (2) brak zaskarżalności,
-> gdy to sam sędzia zgłosił i uzyskał oddalenie własnego żądania wyłączenia
-> (uchwała SN III CZP 33/69). Doprecyzowano konsekwencję praktyczną dla
-> spraw neosędziowskich: kontrola odwoławcza zwykle zostaje w tym samym
-> sądzie, nie trafia automatycznie do instancji wyższej. Zweryfikowano
-> online (SN, Palestra, gofin.pl, saos.org.pl). Ten sam wzorzec braku
-> (brak adresata zażalenia) wykryto i naprawiono równolegle w
-> pisma-proste-v2 (v2.4) i pisma-procesowe-v3 (v5.14). Pełny opis:
-> audyt-systemu-v4/references/AUDIT-JOURNAL.md, wpis 2026-07-25.
+⛔ **Historia zmian tego skilla NIE mieszka w tym pliku** (ZASADA 15,
+`audyt-systemu-v4/SKILL.md`). Jedyna lokalizacja kanoniczna:
+
+```
+view /mnt/skills/user/dr-01-ustroj-konstytucyjny-i-zrodla-prawa/references/CHANGELOG.md
+```
+
+*(Wpis 3.3 przeniesiony stąd 1:1 dnia 2026-08-24, flaga F-126. Luka 3.4–3.6
+odnotowana tam jawnie jako nieodtworzona — zakaz rekonstrukcji z pamięci.)*

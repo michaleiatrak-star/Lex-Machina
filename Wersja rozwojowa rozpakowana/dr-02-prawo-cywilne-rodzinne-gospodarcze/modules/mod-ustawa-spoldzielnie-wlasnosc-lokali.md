@@ -1,7 +1,7 @@
 # mod-ustawa-spoldzielnie-wlasnosc-lokali
 
-**Źródło weryfikacji:** Ustawa o własności lokali — Dz.U. 2026 poz. 232 t.j. ze zm. | Prawo spółdzielcze — Dz.U. 2026 poz. 521 t.j. ze zm.
-**Data weryfikacji online:** 2026-08-22 (naprawa F-106, poprzednia weryfikacja 2026-06-05 nieaktualna — trzy t.j. przesunięte o kolejne generacje)
+**Źródło weryfikacji:** Ustawa o własności lokali — Dz.U. 2021 poz. 1048 t.j. ze zm. | Prawo spółdzielcze — Dz.U. 2021 poz. 648 t.j. ze zm.
+**Data weryfikacji online:** 2026-06-05
 **ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
 ---
@@ -71,17 +71,16 @@ web_search: "zaskarżenie uchwały wspólnoty mieszkaniowej art 25 termin orzecz
 - `orzeczenia-sadowe-v2` — orzecznictwo SN wspólnoty
 
 ## Źródła online
-- Ustawa o własności lokali: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000232
-- Prawo spółdzielcze: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000521
+- Ustawa o własności lokali: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20210001048
+- Prawo spółdzielcze: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20210000648
 
 ---
 
 ## SPÓŁDZIELNIA MIESZKANIOWA — SZCZEGÓŁY
 
 **Akty prawne:**
-- Ustawa o spółdzielniach mieszkaniowych — Dz.U. 2026 poz. 889 t.j. — ✅ VER 2026-08-22 Rząd 1 (api.sejm.gov.pl PDF pełnego tekstu, obwieszczenie z 12.06.2026, publikacja 2.07.2026)
-- Prawo spółdzielcze (ogólne) — Dz.U. 2026 poz. 521 t.j. — ✅ VER 2026-08-22 Rząd 1 (api.sejm.gov.pl PDF, obwieszczenie z 27.03.2026)
-- ⚠️ Trzeci, ODRĘBNY akt: Ustawa o własności lokali — Dz.U. 2026 poz. 232 t.j. — patrz metryka w nagłówku modułu, dotyczy odrębnej własności, NIE spółdzielni
+- Ustawa o spółdzielniach mieszkaniowych — Dz.U. 2024 poz. 558 t.j. ze zm. — weryfikuj w ISAP
+- Prawo spółdzielcze (ogólne) — Dz.U. 2024 poz. 593 t.j. — weryfikuj w ISAP
 
 ```
 Trzy typy praw do lokalu:

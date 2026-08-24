@@ -1,7 +1,7 @@
 # Moduł — Referendum lokalne
 
 ## Akt prawny / źródło
-- Ustawa o referendum lokalnym — Dz.U. 2025 poz. 472 t.j. — ✅ NAPRAWIONE 2026-08-22 (F-82): poprzedni numer 2023 poz. 1317 był nieaktualny (obwieszczenie z 2025 uwzględnia zmianę wprowadzoną ustawą o ochronie ludności i obronie cywilnej z 5.12.2024)
+- Ustawa o referendum lokalnym — Dz.U. 2023 poz. 1317 (t.j.)
   ✅ [VER: isap.sejm.gov.pl, 2026-05-31]
 
 **Weryfikacja:** isap.sejm.gov.pl przed każdym cytowaniem.
@@ -27,7 +27,7 @@ Zarządzający:        Rada gminy (przy inicjatywie obywatelskiej) lub Komisarz 
 
 ## Weryfikacja online
 ```
-web_search: "ustawa referendum lokalne Dz.U. 2025 poz. 472 isap"
+web_search: "ustawa referendum lokalne Dz.U. 2023 poz. 1317 isap"
 web_search: "referendum odwołanie wójta procedura 2025"
 ```
 

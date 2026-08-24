@@ -73,8 +73,33 @@ RE_WIERSZ_MAPY = re.compile(r"^\|\s*(\d{4})\s*\|\s*(\d{1,5})\s*\|")
 # numery stron). Kierunek zmiany jest zatem wyłącznie w stronę MNIEJ alarmów.
 RE_POZ_LUZNA = re.compile(r"(?<![\d.])((?:19|20)\d{2})\.(\d{1,5})(?!\d)")
 
+# ⭐ NOTACJA LEX/„RRRR.NN.PPPP" — "Dz.U.2026.0.468" (rok . numer dziennika .
+# pozycja; dla aktów po 2012 r. środkowy człon to zawsze 0). Pomiar 2026-08-23g:
+# 95 wystąpień w systemie, m.in. shared/MOD-ATAK-NA-SWIADKA.md, ROUTING-MAP.md
+# i moduły dr-02/dr-06/dr-09. RE_POZ rozbierał je BŁĘDNIE na (rok, "0") — czyli
+# na artefakt, który funkcja artefakt() niżej po cichu odrzucała, przez co
+# PRAWDZIWA pozycja (468) NIGDY nie trafiała do porównania. Skutek: fałszywy
+# NEGATYW — akt obecny w jednym rejestrze i nieobecny w drugim nie mógł zostać
+# wykryty, jeżeli którykolwiek z rejestrów zapisał go w tej notacji.
+# Naprawa (flaga F-125): normalizacja tekstu PRZED parsowaniem.
+RE_LEX = re.compile(r"Dz\.\s?U\.\s*(\d{4})\.(\d{1,3})\.(\d{1,5})", re.IGNORECASE)
+
+
+def normalizuj(txt: str) -> str:
+    """Sprowadza notację 'Dz.U.RRRR.NN.PPPP' do 'Dz.U. RRRR poz. PPPP'.
+
+    Wywoływana na KAŻDYM czytanym pliku, przed uruchomieniem RE_POZ —
+    inaczej środkowy człon (numer dziennika) zostaje odczytany jako pozycja.
+    """
+    return RE_LEX.sub(lambda m: f"Dz.U. {m.group(1)} poz. {m.group(3)}", txt)
+
+
 # artefakt parsera: "poz. 0" nie istnieje w Dz.U. — powstaje z rozbioru
 # zapisów typu "art. 2025.0" lub uciętych fragmentów tabel
+# ⚠️ Po naprawie F-125 ta funkcja NIE powinna już odrzucać notacji LEX —
+# jeśli mimo normalizacji nadal pojawiają się trafienia "poz. 0", to znak,
+# że istnieje TRZECI, jeszcze nierozpoznany format zapisu numeru. Zgłoś go,
+# nie rozszerzaj filtra.
 def artefakt(rok_poz):
     return rok_poz[1] == "0"
 
@@ -87,6 +112,7 @@ def zbierz_mape_dzu(path: Path):
         txt = path.read_text(encoding="utf-8", errors="replace")
     except OSError:
         return set()
+    txt = normalizuj(txt)
     wynik = {(m.group(1), m.group(2)) for m in RE_POZ.finditer(txt)}
     for linia in txt.splitlines():
         m = RE_WIERSZ_MAPY.match(linia)
@@ -101,7 +127,7 @@ def zbierz(path: Path):
         txt = path.read_text(encoding="utf-8", errors="replace")
     except OSError:
         return set()
-    return {(m.group(1), m.group(2)) for m in RE_POZ.finditer(txt)}
+    return {(m.group(1), m.group(2)) for m in RE_POZ.finditer(normalizuj(txt))}
 
 
 def main():

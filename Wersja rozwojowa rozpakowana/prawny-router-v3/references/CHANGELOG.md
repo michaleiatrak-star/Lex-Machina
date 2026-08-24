@@ -1,70 +1,19 @@
-# CHANGELOG — Router Prawny v3
+# CHANGELOG — prawny-router-v3
 
-> Pełna historia zmian tego skilla. **Jedyna lokalizacja kanoniczna** — w SKILL.md
-> historii nie ma; jest tam wyłącznie krótki skrót w polu `changelog:` frontmatteru.
-> Standard ujednolicony 2026-08-20z4 dla całego systemu: plik `references/CHANGELOG.md`,
-> nigdy sekcja w korpusie SKILL.md ani pełna lista w YAML.
-> Wczytuj TYLKO gdy potrzebujesz historii konkretnej naprawy — przy audycie, przy
-> pytaniu „dlaczego to tak działa", przy regresji. W normalnym toku pracy zbędny.
+- 3.23 (2026-08-24, sesja audytowa audyt-systemu-v4, flaga **F-126**): historia wersji sprowadzona do JEDNEJ lokalizacji kanonicznej (ZASADA 15). Usunięte dwa równoległe nośniki: (1) sekcja `## CHANGELOG (prawny-router-v3)` w korpusie `SKILL.md` — wpisy 3.13…3.9, w korpusie zostało odesłanie; (2) pole `changelog:` w YAML liczące 63 linie, czyli pełną historię zamiast skrótu — T12 zgłaszał je jako ⚠️, teraz ma 7 linii i odsyła tutaj. Oba bloki przeniesione 1:1, bez przeredagowania i bez odtwarzania czegokolwiek z pamięci. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-24.
 
----
+- 3.22 (2026-08-23i, sesja audytowa audyt-systemu-v4, flaga F-115): self-check ANTY-FASADA podłączony jako WYWOŁANIE modułu kanonicznego `shared/SELF-CHECK-ANTY-FASADA.md`, kopia treści zastąpiona wywołaniem. Powód modułu zamiast kopii: gdy F-117 dodała regułę AF-6 i drugą pozycję listy do `shared/PRAWO-HARDGATE.md`, żadna z 7 istniejących kopii nie została zaktualizowana — źródło miało 2 pozycje, kopie 1. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-23i.
 
-## 3.22 (2026-08-20z4) — ujednolicenie standardu: historia zmian wyłącznie w tym pliku
-
-Historia scalona z DWÓCH źródeł: sekcji `## CHANGELOG (prawny-router-v3)` w korpusie
-oraz pola `changelog:` w YAML (63 linie). Oba przeniesione 1:1 do nowego pliku.
-Ten skill trzymał historię w trzech miejscach naraz — po tej zmianie w jednym.
-
-**Standard systemowy wprowadzony tego dnia:** pełna historia zmian każdego skilla
-mieszka w `references/CHANGELOG.md` — nigdy w sekcji `## CHANGELOG` korpusu SKILL.md
-i nigdy jako pełna lista wpisów w polu `changelog:` frontmatteru. W SKILL.md zostaje
-wyłącznie kilkulinijkowy skrót bieżącej wersji z odesłaniem do tego pliku.
-
-**Dlaczego to nie jest kosmetyka:** rozproszenie historii między trzy lokalizacje było
-BEZPOŚREDNIĄ przyczyną fałszywych wyników testu T12 w sesji 2026-08-20z3 — test szukał
-wpisów w `references/`, nie znajdował ich (bo leżały w SKILL.md) i raportował luki,
-których nie było. Jedna lokalizacja kanoniczna usuwa całą tę klasę błędu.
-Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis `AUDYT-2026-08-20z4`.
+> Lokalizacja kanoniczna historii wersji (ZASADA 15). Plik założony 2026-08-23i;
+> wersje wcześniejsze nieodtworzone — ślad w audyt-systemu-v4/references/AUDIT-JOURNAL.md.
 
 ---
 
-## HISTORIA PRZENIESIONA Z SKILL.md (2026-08-20z4, ujednolicenie standardu)
+## Wpisy przeniesione z korpusu SKILL.md (F-126, 2026-08-24)
 
-> Poniższa treść pochodzi z sekcji `## CHANGELOG` w korpusie SKILL.md. Przeniesiona **1:1, bez zmiany ani jednego
-> zdania**. Powód: historia zmian ma mieszkać w jednym miejscu — w tym pliku —
-> a nie być rozproszona między korpusem SKILL.md, frontmatterem i `references/`.
-> Rozproszenie było źródłem rozjazdów wykrytych flagami F-101 i F-102: test T12
-> szukał historii w `references/` i raportował fałszywe luki tam, gdzie wpisy
-> istniały, tylko w SKILL.md.
-
-> ⛔ **WPISY ODTWORZONE 2026-08-20z3 (flaga F-102, test T12).** Poniższe pozycje
-> nie istniały w żadnym changelogu — `version:` był podbijany bez wpisu przez
-> 8 kolejnych sesji. Treść odtworzona z `audyt-systemu-v4/references/AUDIT-JOURNAL.md`,
-> gdzie każde podbicie zostało odnotowane w sekcji Rejestracja wraz z opisem
-> sesji. Wpisy są zatem WTÓRNE wobec dziennika — przy wątpliwości źródłem
-> rozstrzygającym jest dziennik, nie ten plik. Nic nie zostało zmyślone:
-> pozycje bez śladu w dzienniku oznaczono wprost jako lukę.
-
-**3.21 (2026-08-09v)** — przejście modułu do `shared/`: znaleziony systemowy
-problem zduplikowanych, ROZBIEŻNYCH kopii tej samej treści w kilku skillach.
-Źródło: AUDIT-JOURNAL, wpis AUDYT-2026-08-09v.
-
-**3.20 (2026-08-04s)** — pomiar prędkości: dokładne zbadanie zagadnienia,
-odnotowany aktywny spór RPO-MSWiA. Źródło: AUDYT-2026-08-04s.
-
-**3.19 (2026-08-04r)** — mandat wypisany nieczytelnie: sąd ocenia legalność,
-nie estetykę. Źródło: AUDYT-2026-08-04r.
-
-**3.18 (2026-07-30z139)** — CRIT: błędny ogólny pułap mandatu karnego.
-Źródło: AUDYT-2026-07-30z139.
-
-**3.17 (2026-07-27g)** — znacznik RZĄD w HG-ACTIVE + nowa pozycja ŹRÓDŁO-GATE.
-Źródło: AUDYT-2026-07-27g.
-
-**3.16, 3.15, 3.14 (2026-07-13g)** — trzy podbicia w jednej sesji, przy
-odkryciu, że `shared/MCP-INTEGRACJA.md` nie była podłączona do skilli
-analitycznych. Dziennik nie rozdziela, co przypadło na który numer —
-⚠️ podział między 3.14/3.15/3.16 pozostaje NIEUSTALONY. Źródło: AUDYT-2026-07-13g.
+> Tekst poniżej przeniesiony 1:1 z sekcji `## CHANGELOG (prawny-router-v3)` w `SKILL.md`.
+> Nic nie przeredagowano ani nie odtworzono z pamięci — przeniesienie
+> istniejącego tekstu, zgodnie z zakazem z wiersza flagi F-126.
 
 **3.13 (2026-07-12) — Reguła 22: TWARDY trigger słowny dla pytań do świadka
 (naprawa F-8b, kontynuacja F-8):**
@@ -138,15 +87,14 @@ analitycznych. Dziennik nie rozdziela, co przypadło na który numer —
 
 ---
 
-## HISTORIA PRZENIESIONA Z SKILL.md (2026-08-20z4, ujednolicenie standardu)
+## Wpisy przeniesione z pola `changelog:` YAML (F-126, 2026-08-24)
 
-> Poniższa treść pochodzi z pola `changelog:` we frontmatterze SKILL.md. Przeniesiona **1:1, bez zmiany ani jednego
-> zdania**. Powód: historia zmian ma mieszkać w jednym miejscu — w tym pliku —
-> a nie być rozproszona między korpusem SKILL.md, frontmatterem i `references/`.
-> Rozproszenie było źródłem rozjazdów wykrytych flagami F-101 i F-102: test T12
-> szukał historii w `references/` i raportował fałszywe luki tam, gdzie wpisy
-> istniały, tylko w SKILL.md.
+> T12 zgłaszał to pole jako ⚠️ — 63 linie to pełna historia, nie skrót
+> (ZASADA 15 dopuszcza w YAML skrót do ~15 linii). Tekst poniżej przeniesiony
+> 1:1, w oryginalnej składni listy YAML, bez przeredagowania i bez
+> odtwarzania czegokolwiek z pamięci.
 
+```yaml
 changelog:
   - "3.21 (2026-08-18): NOWY KROK 0-RPK — router jest teraz jedynym miejscem
     decydującym, KIEDY inicjować shared/MOD-REJESTR-POKRYCIA-JEDNOSTEK.md
@@ -211,3 +159,4 @@ changelog:
     została usunięta w procesie scalenia — required_modules rozszerzone o
     shared/PRE-W2-VERIFICATION-GATE.md, escalation rozszerzone o przypadek
     podmiotu ⬛ bez dostępu do rejestru."
+```

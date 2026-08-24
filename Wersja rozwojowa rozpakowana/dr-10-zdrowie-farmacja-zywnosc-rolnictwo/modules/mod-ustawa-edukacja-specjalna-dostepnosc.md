@@ -40,7 +40,7 @@ Dla każdego używanego przepisu wygeneruj tabelę:
 | Akt | Dz.U./tekst jednolity | Przepis | Brzmienie z ISAP/LEX/Legalis | Znaczenie | Skutek procesowy |
 |---|---|---|---|---|---|
 | Prawo oświatowe | Dz.U. 2026 poz. 820 t.j. (obwieszczenie 12.06.2026) | art. 127 | orzeczenie o potrzebie kształcenia specjalnego wydaje zespół orzekający w publicznej poradni psychologiczno-pedagogicznej | przesłanka dostępu do kształcenia specjalnego | podstawa organizacji nauki/wsparcia w placówce |
-| Rozp. MEN ws. orzeczeń PPP | Dz.U. 2026 poz. 428 (rozporządzenie z 2.03.2026 — ⚡ ZASTĘPUJE dawne rozp. z 7.09.2017, Dz.U.2017.1743, JUŻ NIEOBOWIĄZUJĄCE) | całość | tryb wniosku, skład zespołu orzekającego, katalog przesłanek (niepełnosprawności, niedostosowanie społeczne, zagrożenie niedostosowaniem) | tryb i forma orzeczenia | podstawa odwołania/skargi na orzeczenie |
+| Rozp. MEN ws. orzeczeń PPP | Dz.U. 2026 poz. 428 (rozporządzenie z 2.03.2026 — ⚡ ZASTĘPUJE dawne rozp. z 7.09.2017, Dz.U. 2017 poz. 1743, JUŻ NIEOBOWIĄZUJĄCE) | całość | tryb wniosku, skład zespołu orzekającego, katalog przesłanek (niepełnosprawności, niedostosowanie społeczne, zagrożenie niedostosowaniem) | tryb i forma orzeczenia | podstawa odwołania/skargi na orzeczenie |
 | Ustawa o zapewnianiu dostępności osobom ze szczególnymi potrzebami | Dz.U. 2024 poz. 1411 t.j. (pierwotnie: Dz.U. 2019 poz. 1696) | art. 4-7 | obowiązek podmiotu publicznego: uniwersalne projektowanie lub racjonalne usprawnienia | przesłanka obowiązku dostępności | podstawa wniosku o zapewnienie dostępności |
 | tamże | tamże | art. 29-30 | wniosek o zapewnienie dostępności — dla osoby ze szczególnymi potrzebami po wykazaniu interesu faktycznego; termin 14 dni na realizację (przedłużalny do 2 mies.) | tryb wnioskowy | punkt startowy przed skargą |
 | tamże | tamże | art. 32-33 | skarga na brak dostępności do Prezesa Zarządu PFRON, termin 30 dni od upływu terminu na wniosek/odmowy; postępowanie JEDNOINSTANCYJNE, decyzja nakazowa z terminem realizacji (min. 30 dni, w sprawach skomplikowanych 60 dni) | tryb skargowy | egzekucja przez grzywnę w celu przymuszenia (UPEA) |
@@ -98,7 +98,7 @@ wydaje orzeczenie o BRAKU potrzeby kształcenia specjalnego (nie milczy —
 wydaje formalny akt, który można zaskarżyć).
 
 PODSTAWA PRAWNA PROCEDURY: rozporządzenie MEN z 2.03.2026 r. (Dz.U. 2026
-poz. 428) — ⚡ ZASTĘPUJE dawne rozporządzenie z 7.09.2017 r. (Dz.U.2017.1743),
+poz. 428) — ⚡ ZASTĘPUJE dawne rozporządzenie z 7.09.2017 r. (Dz.U. 2017 poz. 1743),
 które wciąż pojawia się w wielu materiałach online jako aktualna podstawa —
 NIE JEST już aktualne, sprawdzaj datę źródła przed cytowaniem.
 

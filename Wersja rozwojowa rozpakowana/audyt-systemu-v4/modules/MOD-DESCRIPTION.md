@@ -1,17 +1,37 @@
-# MOD-DESCRIPTION — Walidacja długości description
+# MOD-DESCRIPTION — Walidacja pola description (OBECNOŚĆ + długość)
 
 ## Cel
-Weryfikuje, czy pole `description:` w każdym `SKILL.md` nie przekracza **1024 znaków** (limit techniczny systemu skilli). Przekroczenie powoduje obcięcie description w UI bez ostrzeżenia.
+Weryfikuje **dwie rzeczy**, nie jedną:
+1. czy pole `description:` w `SKILL.md` **w ogóle istnieje**;
+2. czy jego treść nie przekracza **1024 znaków** (limit techniczny systemu skilli —
+   przekroczenie obcina description w UI bez ostrzeżenia).
+
+> ⛔ **ROZSZERZENIE 2026-08-24 (F-130) — moduł sprawdzał dotąd TYLKO długość.**
+> Skutek był dokładnie odwrotny do zamierzonego: skrypt wykrycia dla pliku BEZ pola
+> `description:` wypisywał `0` i klasyfikował go jako **✅ OK** — czyli brak pola,
+> stan najgorszy z możliwych, raportował jako najzdrowszy. Wykryte, gdy użytkownik
+> przysłał poprawkę do `audyt-systemu-v4/SKILL.md`: **to był JEDYNY skill w całym
+> systemie bez pola `description:`** — i to ten, który audytuje kompletność
+> rejestracji pozostałych. Pozostałe 27 skilli miały je od dawna.
+>
+> Dlaczego to nie jest usterka kosmetyczna: `description` jest polem, na podstawie
+> którego skill jest **wybierany do wywołania**. Skill bez niego może nigdy nie
+> zostać uruchomiony automatycznie — istnieje na dysku i jest niewidoczny w praktyce.
 
 ---
 
-## Limit
+## Progi
 
 **HARD LIMIT: 1024 znaki** (licząc wyłącznie treść description, bez wcięć YAML ani cudzysłowów).
 
-- ≤ 900 znaków → ✅ OK
+- **brak pola / pole puste → ❌ CRIT** — skill może nie być wyzwalany (F-130)
+- 1–900 znaków → ✅ OK
 - 901–1024 znaki → ⚠️ WARN (blisko limitu — zalecane skrócenie)
 - > 1024 znaki → ❌ CRIT (przekroczenie limitu — obowiązkowa naprawa)
+
+⚠️ **Nie myl „0 znaków” z „OK”.** Każdy skrypt liczenia długości MUSI rozróżniać
+`pole nieobecne` od `pole obecne i krótkie` — inaczej odtworzy lukę F-130.
+Kanoniczne narzędzie: `scripts/check_description.py` (test **T14**).
 
 ---
 

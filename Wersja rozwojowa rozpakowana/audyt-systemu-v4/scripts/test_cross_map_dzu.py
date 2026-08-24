@@ -64,6 +64,17 @@ from pathlib import Path
 
 DZU_PATTERN = re.compile(r"Dz\.?\s*U\.?\s*(\d{4})\s*poz\.?\s*(\d+)", re.IGNORECASE)
 
+# ⭐ NOTACJA LEX "Dz.U.RRRR.NN.PPPP" (np. Dz.U.2026.0.468) — DZU_PATTERN jej
+# NIE łapie w ogóle (wymaga literalnego "poz."), więc akty zapisane w tej
+# notacji były dla T3 niewidoczne: rozbieżność numeru między mapami nie mogła
+# zostać wykryta. 95 wystąpień w systemie, pomiar 2026-08-23g. Flaga F-125.
+RE_LEX = re.compile(r"Dz\.\s?U\.\s*(\d{4})\.(\d{1,3})\.(\d{1,5})", re.IGNORECASE)
+
+
+def normalizuj(txt):
+    """'Dz.U.RRRR.NN.PPPP' -> 'Dz.U. RRRR poz. PPPP'. Uruchamiaj przed DZU_PATTERN."""
+    return RE_LEX.sub(lambda m: "Dz.U. %s poz. %s" % (m.group(1), m.group(3)), txt)
+
 
 def extract_act_dzu_pairs(text: str):
     """Zwraca listę (zbiór_slow_kluczowych, nazwa_aktu_przyblizona, rok, poz)
@@ -84,6 +95,14 @@ def extract_act_dzu_pairs(text: str):
     """
     results = []
     for line in text.splitlines():
+        # ⭐ F-125 (2026-08-23g): normalizacja PRZED dopasowaniem — inaczej
+        # wiersze zapisane notacją LEX ("Dz.U.2026.0.468") są dla tego testu
+        # niewidoczne (DZU_PATTERN wymaga literalnego "poz."), a rozbieżność
+        # numeru w takim wierszu nie może zostać wykryta.
+        # ⚠️ Normalizujemy KOPIĘ linii do dopasowania, ale prefiks tniemy z
+        # linii ORYGINALNEJ byłoby błędem — offsety m.start() odnoszą się do
+        # tekstu znormalizowanego, więc prefiks liczymy z tego samego ciągu.
+        line = normalizuj(line)
         m = DZU_PATTERN.search(line)
         if not m:
             continue

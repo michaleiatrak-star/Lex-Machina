@@ -159,7 +159,7 @@ to wyjaśniać dopiero po interwencji dziennikarskiej):
 
   ✅ ROZSTRZYGNIĘTE 2026-08-04 (na żądanie użytkownika, FLAGA F-15
     ZAMKNIĘTA) — na podstawie DOSŁOWNEGO TEKSTU rozporządzenia ws.
-    znaków i sygnałów drogowych (Dz.U.2019.0.2310 t.j., § dot. znaków
+    znaków i sygnałów drogowych (Dz.U. 2019 poz. 2310 t.j., § dot. znaków
     nakazu, ust. 2, potwierdzone bezpośrednio przez arslege.pl):
     "Umieszczone na jednej tarczy symbole znaków C-13 i C-16
     oddzielone kreską PIONOWĄ oznaczają DROGĘ DLA ROWERÓW I DROGĘ DLA
@@ -192,7 +192,7 @@ to wyjaśniać dopiero po interwencji dziennikarskiej):
       NIEJEDNOZNACZNOŚĆ leżała w PRAKTYCE STOSOWANIA/komunikacji
       urzędowej, NIE w samym przepisie, który jest jasny)
     Potwierdzone bezpośrednio dosłownym tekstem rozporządzenia
-    (arslege.pl, Dz.U.2019.0.2310 t.j.) — Rząd 1/2B.
+    (arslege.pl, Dz.U. 2019 poz. 2310 t.j.) — Rząd 1/2B.
 
 DLA PORÓWNANIA — DROGA WYŁĄCZNIE DLA ROWERÓW (sam znak C-13, BEZ
   C-16): pierwszeństwo ma ROWERZYSTA — piesi CO DO ZASADY NIE MAJĄ
@@ -216,7 +216,7 @@ rp.pl [maj 2026], auto-swiat.pl [kwiecień 2026], oznakowaniedrogi.pl
 duathlonpoznan.pl [maj 2026], kosmalbike.pl, wyposazeniedrogowe24.pl)
 — WCZEŚNIEJSZA rozbieżność między źródłami wtórnymi co do JEDNEGO
 szczegółowego aspektu ROZSTRZYGNIĘTA 2026-08-04 dosłownym tekstem
-rozporządzenia (arslege.pl, Dz.U.2019.0.2310 t.j.) — patrz wyżej.
+rozporządzenia (arslege.pl, Dz.U. 2019 poz. 2310 t.j.) — patrz wyżej.
 ```
 
 ## CROSS-REFERENCJE

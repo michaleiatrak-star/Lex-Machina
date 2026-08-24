@@ -119,7 +119,7 @@ okresie rozliczeniowym wykazać podatek NALEŻNY)
   termin 15. dnia miesiąca NASTĘPUJĄCEGO po dostawie).
 
   ✅ **ZWERYFIKOWANE (2026-08-19, F-35) — art. 19a ust. 9-11 dla importu
-  towarów, PEŁNA treść aktualnej numeracji (Dz.U.2025.775 t.j.):**
+  towarów, PEŁNA treść aktualnej numeracji (Dz.U. 2025 poz. 775 t.j.):**
   - **Ust. 9 (ZASADA OGÓLNA):** obowiązek podatkowy z tytułu importu
     towarów powstaje **z chwilą powstania DŁUGU CELNEGO**, z zastrzeżeniem
     ust. 10a i 11.
@@ -337,7 +337,7 @@ zidentyfikowanej w audycie pokrycia DR-06 (dotąd CAŁKOWICIE nieobecne
     stosowanie art. 29a ust. 1-1b, 6, 7, 10, 11, 17)
   □ art. 30b — podstawa OPODATKOWANIA dla IMPORTU towarów — ✅
     **ZWERYFIKOWANE (2026-08-19, F-35), pełna treść ust. 1-6
-    (Dz.U.2025.775 t.j.):**
+    (Dz.U. 2025 poz. 775 t.j.):**
     - **Ust. 1 (zasada ogólna):** wartość CELNA + należne CŁO (+ akcyza,
       jeśli towar akcyzowy).
     - **Ust. 2 (uszlachetnianie BIERNE):** różnica między wartością celną

@@ -8,9 +8,9 @@ ustawa o jakości w opiece zdrowotnej; NFZ — odmowy.
 
 **Weryfikacja:** 22.05.2026
 **Akty prawne — weryfikuj przed każdym powołaniem w isap.sejm.gov.pl:**
-- Ustawa o prawach pacjenta i RPP: **Dz.U.2024.581 t.j.**
-- Ustawa o jakości w opiece zdrowotnej i bezpieczeństwie pacjenta: **Dz.U.2023.1692**
-- KC (delikt, odszkodowanie): **Dz.U.2025.1071 t.j.**
+- Ustawa o prawach pacjenta i RPP: **Dz.U. 2024 poz. 581 t.j.**
+- Ustawa o jakości w opiece zdrowotnej i bezpieczeństwie pacjenta: **Dz.U. 2023 poz. 1692**
+- KC (delikt, odszkodowanie): **Dz.U. 2025 poz. 1071 t.j.**
 - Ustawa o zawodach lekarza i lekarza dentysty: weryfikuj aktualną wersję w isap
 - Ustawa o działalności leczniczej: **Dz.U. 2026 poz. 156 t.j. z 05.02.2026 ✅ VER: 2026-06-05 (poprzedni: Dz.U. 2025 poz. 450 → ustawa o pielęgniarkach; ustawa o działalności leczniczej to Dz.U. 2026 poz. 156)**
 
@@ -52,7 +52,7 @@ Działa od 06.09.2023 r. | Obsługiwany przez Rzecznika Praw Pacjenta (RPP).
    - Czas postępowania: max **3 miesiące** od złożenia kompletnego wniosku
    - Odwołanie: do Komisji Odwoławczej RPP, następnie skarga do sądu administracyjnego
 
-3. **PRZEDAWNIENIE roszczeń cywilnych (art. 442¹ KC — Dz.U.2025.1071):**
+3. **PRZEDAWNIENIE roszczeń cywilnych (art. 442¹ KC — Dz.U. 2025 poz. 1071):**
    - §1: **3 lata** od dowiedzenia się o szkodzie i sprawcy; max **10 lat** od zdarzenia
    - §2: **20 lat** jeśli szkoda z przestępstwa (zbrodni lub występku)
    - §3: szkoda na osobie — przedawnienie nie może skończyć się wcześniej niż 3 lata od dowiedzenia się
@@ -72,10 +72,10 @@ Działa od 06.09.2023 r. | Obsługiwany przez Rzecznika Praw Pacjenta (RPP).
 
 | Akt | Sygnatura | Zakres |
 |---|---|---|
-| Ustawa o prawach pacjenta i RPP | **Dz.U.2024.581 t.j.** | Prawa pacjenta, FKZM (rozdz. 13b), RPP |
-| Ustawa o jakości w opiece zdrowotnej | **Dz.U.2023.1692** | Zdarzenia niepożądane, autoryzacja |
-| KC art. 415, 430, 444–446 | **Dz.U.2025.1071 t.j.** | Delikt, odszkodowanie, zadośćuczynienie |
-| KC art. 442¹ | **Dz.U.2025.1071 t.j.** | Przedawnienie roszczeń deliktowych |
+| Ustawa o prawach pacjenta i RPP | **Dz.U. 2024 poz. 581 t.j.** | Prawa pacjenta, FKZM (rozdz. 13b), RPP |
+| Ustawa o jakości w opiece zdrowotnej | **Dz.U. 2023 poz. 1692** | Zdarzenia niepożądane, autoryzacja |
+| KC art. 415, 430, 444–446 | **Dz.U. 2025 poz. 1071 t.j.** | Delikt, odszkodowanie, zadośćuczynienie |
+| KC art. 442¹ | **Dz.U. 2025 poz. 1071 t.j.** | Przedawnienie roszczeń deliktowych |
 | Ustawa o zawodach lekarza | weryfikuj w isap | Odpowiedzialność zawodowa, zgoda |
 | Ustawa o działalności leczniczej | **Dz.U. 2026 poz. 156 t.j. z 05.02.2026 ✅ VER: 2026-06-05 (poprzedni: Dz.U. 2025 poz. 450 → ustawa o pielęgniarkach; ustawa o działalności leczniczej to Dz.U. 2026 poz. 156)** | Organizacja podmiotów leczniczych |
 
@@ -211,7 +211,7 @@ OBIE ŚCIEŻKI JEDNOCZEŚNIE: NIE — przyjęcie świadczenia z FKZM = zamknięc
 
 ---
 
-*Weryfikacja: 22.05.2026 | Ustawa o pr. pac.: Dz.U.2024.581 t.j. | KC: Dz.U.2025.1071 t.j.*
+*Weryfikacja: 22.05.2026 | Ustawa o pr. pac.: Dz.U. 2024 poz. 581 t.j. | KC: Dz.U. 2025 poz. 1071 t.j.*
 *KOZM ZLIKWIDOWANE 01.07.2024 | FKZM działa od 06.09.2023 | Wniosek do RPP: gov.pl/web/rpp*
 *Kwoty FKZM podlegają corocznej waloryzacji — weryfikuj aktualną wysokość w RPP*
 

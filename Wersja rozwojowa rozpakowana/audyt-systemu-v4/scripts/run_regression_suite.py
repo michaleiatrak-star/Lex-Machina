@@ -126,6 +126,14 @@ def main():
     print(out)
     results["T12"] = code
 
+    # --- T14: KRYTYCZNY (dodany 2026-08-24, F-130) ---
+    # Uwaga: check_description.py przyjmuje katalog jako argument POZYCYJNY,
+    # nie przez --repo-root — stąd inny sposób przekazania niż w T11/T12.
+    print("── T14 (⭐⭐⭐ KRYTYCZNY) — Pole description: obecność + długość " + "─" * 3)
+    code, out = run_script("check_description.py", [repo_args[1]] if len(repo_args) > 1 else [])
+    print(out)
+    results["T14"] = code
+
     # T10 (monitorowanie plików Nexto/Virtualo, flaga F-12) USUNIĘTE
     # 2026-07-24d na wyraźne polecenie użytkownika — cały mechanizm
     # (rejestr + skrypt check_nexto_free_files.py) skasowany, patrz

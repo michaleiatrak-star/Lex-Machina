@@ -135,7 +135,7 @@ odesłanie bez treści art. 3052-3054):
     korzystaniu) — do potwierdzenia przy konkretnej sprawie.
 
 Potwierdzone w 6+ zgodnych źródłach (e-prawnik.pl, lexlege.pl, lexplay.pl,
-przepisy.gofin.pl, arslege.pl — t.j. Dz.U.2025.0.1071 aktualny).
+przepisy.gofin.pl, arslege.pl — t.j. Dz.U. 2025 poz. 1071 aktualny).
 
 ⭐⭐⭐ **KLUCZOWE ZASTRZEŻENIE (2026-08-19, na żądanie użytkownika — "co
 z innymi firmami służebności jak słupy?"): TELEKOMUNIKACJA MA INNY

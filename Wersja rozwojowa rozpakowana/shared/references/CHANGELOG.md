@@ -9,6 +9,202 @@
 
 ---
 
+## 3.21 (2026-08-23i) — F-115: self-check ANTY-FASADA jako MODUŁ, koniec z kopiami
+
+**Decyzja wykonana: MODUŁ, nie kopia** (rekomendacja z flagi, potwierdzona dowodem
+dryfu). Nowy plik `shared/SELF-CHECK-ANTY-FASADA.md` — jedyna lokalizacja treści
+listy kontrolnej; skille ją WOŁAJĄ, nie powielają.
+
+**Dowód, że kopia nie działa — zmaterializowany, nie hipotetyczny:** F-117 dodała
+regułę AF-6 i drugą pozycję listy do `PRAWO-HARDGATE.md` (2026-08-23f). Żadna z
+7 istniejących kopii nie została wtedy zaktualizowana. Pomiar w tej sesji: źródło
+2 pozycje, wszystkie kopie 1 pozycja, brzmienie kopii identyczne między sobą co do
+znaku — czyli rozjazd nastąpił dokładnie w momencie pierwszej zmiany źródła.
+
+**Wykonane:**
+- 7 kopii → wywołanie modułu: `analizator-dowodow-v3`, `prawny-router-v3`
+  (references/SELF-CHECK.md), `pisma-proste-v2`, `analiza-sadowa-v6`,
+  `przewodnik-prawny-v2`, `pisma-procesowe-v3` (references/SELF-CHECK-PISMA.md),
+  `analizator-umow-v1`. Każda kopia liczyła 6 linii; po zamianie w całym systemie
+  ZERO wystąpień treści listy poza modułem (`grep "zweryfikowano/zweryfikowałem"`).
+- **P1 podłączone:** `orzeczenia-sadowe-v2`, `analizator-przepisow-v2` — dwa
+  skille cytujące odpowiednio orzeczenia i przepisy najczęściej w systemie, a
+  bramki nie miały w ogóle.
+- **P2 podłączone:** `chronologia-sprawy-v1`, `przesluchanie-swiadkow-v2-min90`,
+  `raport-klienta-v1`, `raport-sytuacyjny-v2`.
+- ⛔ **Fałszywa deklaracja sprostowana.** `PRAWO-HARDGATE.md` twierdził, że
+  self-check jest „propagowany do wszystkich skilli" — było 7 z ~25. Zdanie
+  zastąpione opisem stanu faktycznego i odesłaniem do rejestru wołających,
+  który mieszka teraz W MODULE (jedno miejsce prawdy zamiast deklaracji, której
+  nikt nie weryfikował).
+- `prawo-polskie-v2` **świadomie poza zakresem** — czysta fasada routingu,
+  decyzja zapisana w jego SKILL.md (F-123). Odnotowane w rejestrze modułu, żeby
+  nie wracało jako zgłoszenie.
+
+**Pokrycie po zmianie:** 13 skilli + `shared` (`grep -rl SELF-CHECK-ANTY-FASADA`).
+**POZOSTAJE:** P3 — 16 skilli DR-01…DR-16.
+
+⚠️ **Ograniczenie zapisane w samym module:** self-check jest samo-raportujący —
+wykonuje go ten sam proces, który mógł właśnie zbudować fasadę. Fasada z TEST2
+(deklaracja + URL RZĄD 1 + data, wszystko prawdziwe) przeszłaby ten self-check,
+gdyby model uznał, że wywołanie „w zasadzie było". Pomiar — F-113.
+
+---
+
+## 3.20 (2026-08-23h) — PRAWO-HARDGATE podzielony (F-111, wariant B); 88 linii changelogu wyniesione z korpusu bramki
+
+**Decyzja użytkownika (F-111, wariant B z trzech przedstawionych).** Pomiar przed
+podziałem: `PRAWO-HARDGATE.md` **967 linii** (flaga otwarta była przy 808 — plik
+urósł o 159 przez v2.5, v2.6, KROK 2C/F-120 i KOTWICĘ; do progu ZASADY 13 zostały
+33 linie). Ścieżka wczytania: **114 plików, 212 wystąpień, 26 skilli**
+(`grep -rl PRAWO-HARDGATE --include=*.md /mnt/skills/user | wc -l`).
+
+**Znalezisko, którego flaga nie odnotowała:** 88 pierwszych linii pliku to była
+HISTORIA WERSJI (2.0–2.6) — stała POWYŻEJ pierwszej normy. Pierwsza norma
+(`⛔ HARD GATE — BEZWZGLĘDNY`) zaczynała się w wierszu 91, `## ZASADA ABSOLUTNA`
+w 103. Każdy z 114 plików odsyłających do najczęściej wczytywanej bramki systemu
+czytał opisy wersji, zanim dotarł do zakazu. Naruszenie ZASADY 15 w pliku o
+największym zasięgu w systemie. Historia przeniesiona tutaj (niżej, sekcja
+„HISTORIA PRAWO-HARDGATE 2.0–2.6"), w korpusie zostało odesłanie.
+
+**Granica podziału.** Wydzielono `shared/PRAWO-HARDGATE-ORZECZENIA.md` (464 l.) —
+wszystko, co odpala się WYŁĄCZNIE przy sygnaturze orzeczenia: procedura przed
+każdym orzeczeniem (bramka WTÓRNE-ŹRÓDŁO-STOP, KROK 5A, KOTWICA-TEKSTOWA
+KT-1→KT-4), KROK 5B (wyroki TK 2024-2026), postępowanie przy nieudanej
+weryfikacji sygnatury, KROK DODATKOWY (warstwy uzasadnienia [1]/[2]/[3]) oraz
+SELF-CHECK przed odpowiedzią z orzecznictwem.
+
+⚠️ **Odstępstwo od liczby zapowiedzianej użytkownikowi, świadome:** przy
+przedstawianiu wariantu B rdzeń szacowano na ~620 linii (miała przenieść się sama
+„procedura orzecznicza", 261 l.). Po obejrzeniu treści przeniesiono również KROK
+DODATKOWY (111 l.) i SELF-CHECK orzeczniczy (66 l.), bo oba dotyczą wyłącznie
+uzasadnień sądowych. **Powód:** rozdzielenie logiki orzeczniczej między dwa pliki
+— zwłaszcza self-checku, którego pozycje odsyłają wprost do KROKU DODATKOWEGO —
+byłoby gorsze niż jeden większy załącznik. Wynik: rdzeń **501 l.**, załącznik
+**464 l.** Granica przebiega dokładnie tam, gdzie wyzwalacz: *czy w tekście stoi
+sygnatura*.
+
+**Wyzwalacz jest BINARNY, nie ocenny:** „ma paść sygnatura → wczytaj załącznik",
+nie „gdy potrzebujesz procedury szczegółowej". Sformułowanie ocenne odtworzyłoby
+mechanizm awarii z pilotażu LEX MACHINA, gdzie trzy z czterech usterek to reguła
+istniejąca i pominięta, a nie brak reguły.
+
+⛔ **RYZYKO NAZWANE W SAMYM PLIKU, nie tylko tutaj:** treść wydzielona to treść,
+której można NIE wczytać. Podział zamienia tryb awarii „reguła przeczytana i
+pominięta" na „reguła niewczytana" i **nie został zmierzony** — pomiar należy do
+F-113 (test z grupą kontrolną). Zapisane w rdzeniu i w nagłówku załącznika.
+
+**Kontrola kompletności:** suma segmentów 967 = oryginał 967 (zero linii
+zgubionych); wszystkie 18 nagłówków oryginału obecne w nowych plikach; normy
+stałe (ZASADA ABSOLUTNA, PERMANENT GATE, ANTY-FASADA, KOTWICA URZĘDOWA, KROK 2C)
+pozostały w rdzeniu.
+
+**Odblokowane:** F-115 (propagacja self-checku ANTY-FASADA) — self-check został w
+RDZENIU, zgodnie z warunkiem zapisanym w tamtej fladze, więc propagacja może
+ruszyć bez ryzyka dwukrotnej zmiany ścieżki wczytania.
+
+⚠️ **Ścieżki zewnętrzne NIE wymagały zmiany** — `PRAWO-HARDGATE.md` istnieje pod
+tą samą nazwą, więc wszystkie 212 odesłań w 114 plikach pozostają poprawne.
+To była główna zaleta wariantu B nad A.
+
+---
+
+## HISTORIA PRAWO-HARDGATE 2.0–2.6 (przeniesiona z korpusu pliku 2026-08-23h)
+
+*(treść 1:1 z wierszy 3–90 `PRAWO-HARDGATE.md` sprzed podziału, zdjęte wyłącznie
+prefiksy cytatu `> `)*
+
+**Wersja:** 2.6 (2026-08-23) — BRAMKA ANTY-FASADOWA. Wdrożona po odczytaniu
+SUROWEGO TRANSKRYPTU testu 3, który obalił hipotezę leżącą u podstaw v2.5:
+model nie trafił na blokadę robots — nie podjął próby weryfikacji, a mimo to
+zbudował fasadę weryfikacyjną z prawdziwych elementów (deklaracja + URL RZĄD 1
++ data). v2.5 opisywała, jak oznaczyć stan PO nieudanym fetchu, i milcząco
+zakładała, że fetch nastąpił. v2.6 zamyka lukę: wyzwalaczem jest BRAK
+WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej odpowiedzi, niezależnie
+od dostępności narzędzi w sesji. Dodano AF-1…AF-5 + format 🎯 [CEL —
+NIEOTWARTE]. Rozstrzygnięto propozycję zewnętrzną LM-K2-01: element „adres
+nie oznacza otwarcia" PRZYJĘTY, dopuszczenie etykiety `MEM` ODRZUCONE.
+
+**Wersja poprzednia:** 2.5 (2026-08-23) — NAPRAWA ŹRÓDŁA-0 + TRZECI STATUS (KOTWICA
+URZĘDOWA). Wdrożona po analizie przyczyn testu 3 pilotażu LEX MACHINA.
+Trzy zmiany: (1) POZIOM B rozbity na sekwencję dwukrokową B-1 (web_search
+wprowadza URL do kontekstu) → B-2 (web_fetch na URL z wyniku) — dotychczasowe
+brzmienie ("web_fetch na skonstruowany URL") było w tym środowisku
+niewykonalne w 100% przypadków, co zweryfikowano empirycznie; (2) dodano
+czwarty, brakujący status 🟨 [KOTWICA-URZĘDOWA] dla stanu faktycznie
+osiągalnego przy blokadzie robots na RZĘDZIE 1 — brak nazwy dla realnego
+stanu był bezpośrednią przyczyną konfabulacji statusu przez model;
+(3) zamknięcie hierarchii statusów i wyraźny zakaz tworzenia nowych.
+
+**Wersja poprzednia:** 2.4 (2026-07-17) — ZASADA PONOWNEJ WERYFIKACJI OZNACZEŃ +
+WYTRWAŁOŚĆ WYSZUKIWANIA + OZNACZANIE PRZY KAŻDYM UŻYCIU. Dodano na
+wyraźne polecenie użytkownika jako "reguła na przyszłość", po incydencie
+z niepotwierdzonym oznaczeniem/skrótem prawnym (repertorium postępowań
+sprawdzających), gdzie pierwsze zapytanie wyszukiwania ("S og" wprost)
+nie dało jednoznacznego potwierdzenia z aktu źródłowego, a model
+zatrzymał się na hipotezie prawdopodobieństwa zamiast kontynuować
+wyszukiwanie innymi zapytaniami. Zarejestrowane też jako ZASADA 13 w
+`audyt-systemu-v4/SKILL.md` (STAŁA — nie precedens).
+
+**Trzy elementy tej wersji:**
+1. **Ponowna weryfikacja przy powtórnym użyciu:** każde niepotwierdzone
+   źródłowo oznaczenie/skrót prawny, gdy pojawia się PONOWNIE w dalszej
+   części rozmowy jako podstawa wniosku, wymaga NOWEJ weryfikacji przed
+   użyciem — nie wystarczy przywołanie z pamięci wcześniejszej hipotezy,
+   NAWET WŁASNEJ. To rozszerza PERMANENT GATE (linia 37-42 niżej) z
+   "każde nowe powołanie = osobny web_search" na wyraźne uwzględnienie
+   przypadku, gdy wcześniejsze "powołanie" było tylko hipotezą modelu,
+   nie potwierdzoną treścią — taka hipoteza NIE zyskuje statusu ustalonego
+   faktu tylko dlatego, że pojawiła się już wcześniej w tej rozmowie.
+2. **Wytrwałość wyszukiwania — różne zapytania, nie jedna próba:** jeśli
+   pierwsze wyszukiwanie nie daje jednoznacznego potwierdzenia z aktu
+   źródłowego (regulaminu, ustawy, zarządzenia) — kontynuuj wyszukiwanie
+   RÓŻNYMI zapytaniami (np. pełną nazwą instytucji/rejestru zamiast
+   samego skrótu, synonimami, szerszym/węższym ujęciem frazy), zamiast
+   zatrzymywać się na pierwszej hipotezie prawdopodobieństwa. Przykład z
+   incydentu: "repertorium postępowań sprawdzających" jako zapytanie
+   zamiast poprzestania na samym skrócie "S og" wprost.
+3. **Oznaczanie przy KAŻDYM użyciu, nie tylko przy pierwszym wprowadzeniu:**
+   wniosek oparty na niepotwierdzonym oznaczeniu musi mieć widoczne
+   ⚠️ [NIEWERYFIKOWANE] PRZY KAŻDYM wystąpieniu w odpowiedzi/dokumencie —
+   jednorazowe zastrzeżenie przy pierwszym wprowadzeniu skrótu nie
+   zwalnia z ponownego oznaczenia, gdy ten sam skrót jest używany dalej
+   jako podstawa kolejnych zdań/wniosków. Czytelnik nie powinien nigdy
+   natrafić na użycie niepotwierdzonego oznaczenia bez oznaczenia obok.
+
+**Wersja poprzednia:** 2.3 (2026-07-15c) — SCALENIE: mechanizm KOTWICA-TEKSTOWA
+(Text Fragment `#:~:text=`, procedura KT-1→KT-4, FALLBACK, zastrzeżenie
+o wsparciu przeglądarek) przeniesiony tutaj z `shared/WERYFIKACJA-SLAD.md`,
+gdzie powstał niezależnie tego samego dnia (2026-07-15) co KROK 5A w tym
+pliku — dwie osobne implementacje tego samego problemu w dwóch plikach
+shared/, nie połączone przy tworzeniu. Wykryte przez użytkownika po tym,
+jak odpowiedź spoza modułu analizy przepisów (dr-03, analiza karna)
+zawierała cytaty bez żadnej kotwicy — ani z KROK 5A (który akurat nie był
+wczytany w tamtej odpowiedzi), ani z WERYFIKACJA-SLAD.md (do którego
+dodano punktowe odesłanie zamiast sprawdzić najpierw, czy centralny hard
+gate już tego nie zawiera). KROK 5A jest teraz jedyną kanoniczną treścią;
+`WERYFIKACJA-SLAD.md` odsyła tutaj. Pełny opis: AUDIT-JOURNAL.md, wpis
+AUDYT-2026-07-15c (rozszerzenie).
+**Wersja poprzednia:** 2.2 (2026-07-15b) — dodano KROK 5-RZĄD: obowiązkowa
+kategoryzacja źródła (RZĄD 1/2A/2B/3, `shared/HIERARCHIA-ZRODEL.md`)
+OBOK znacznika VER przy każdym linku, nie tylko w module analizy
+przepisów. Rozszerzono BRAMKĘ WTÓRNE-ŹRÓDŁO-STOP o odesłanie do tej
+samej kategoryzacji. Zgłoszone przez użytkownika po tym, jak w rozmowie
+podano linki do stron indywidualnych kancelarii (Rząd 3) bez kategoryzacji.
+**Wersja poprzednia:** 2.1 (2026-07-15) — dodano KROK 5A (lokalizacja w źródle:
+strona/teza/punkt/sekcja + kotwica techniczna gdy zweryfikowana) i
+KROK 5B (link zawsze obowiązkowy, nawet gdy treść tylko z web_search
+bez pełnego web_fetch — nie wolno pomijać linku z powodu braku pełnej
+weryfikacji, tylko obniżyć jego status na ⚠️ [NIEWERYFIKOWANE]).
+Wdrożone na wyraźne polecenie użytkownika, do mechanizmu cytowania jako
+takiego (nie punktowo do jednego modułu) — dotyczy KAŻDEGO cytatu z
+orzeczenia, przepisu LUB dowolnej innej strony internetowej.
+Poprzednia wersja 2.0 (2026-07-05) — WARSTWA STRUKTURALNA (ŹRÓDŁO-0):
+deterministyczne API (ELI Sejm / SAOS / CELLAR) i konektory MCP przed web_search.
+Wzorce: prawo-pl-eli, legal-cite-pl, mcp-isap, sententim (AUDYT-2026-07-05a).
+
+---
+
 ## 3.19 (2026-08-23) — usunięcie plików historycznych bez roli operacyjnej (6 plików, 202 → 196)
 
 Przegląd kompletny: każdy z 202 plików katalogu skonfrontowany z (a) wywołaniami

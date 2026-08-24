@@ -57,7 +57,7 @@ JAK POWAŻNY JEST USZCZERBEK?
 │
 └─ Ciężki uszczerbek (utrata zmysłu, kalectwo, choroba nieuleczalna, zagrożenie życia)
     └─ → ART. 156 §1 KK — CIĘŻKI USZCZERBEK
-         Kara: 3–20 lat PW. Źródło: Dz.U.2025.383 t.j.
+         Kara: 3–20 lat PW. Źródło: Dz.U. 2025 poz. 383 t.j.
          Jeśli następstwem jest śmierć → art. 156 §3: **nie krócej niż 5 lat** (bez explicite górnej granicy w §3; max z art. 37 KK = 25 lat PW)
          Czy działanie było umyślne?
          ├─ TAK → §1 (typ umyślny)

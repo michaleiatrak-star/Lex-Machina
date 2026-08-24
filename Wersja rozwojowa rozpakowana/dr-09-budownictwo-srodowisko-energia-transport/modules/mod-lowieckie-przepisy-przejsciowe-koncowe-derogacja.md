@@ -12,7 +12,7 @@ rozdziałów (Rozdz. 1-2, 3, 4, 5, 6, 6a, 7, 8, 9, 10 [moduł kłusownictwo],
 
 **Status weryfikacji źródłowej:** pełna treść rozdziału pobrana w CAŁOŚCI
 dwoma niezależnymi `web_fetch` — arslege.pl (k539/s6340) i lexlege.pl
-(rozdzial-11.../6340/), oba Rząd 2B, oba deklarujące Dz.U.2025.0.539 t.j.
+(rozdzial-11.../6340/), oba Rząd 2B, oba deklarujące Dz.U. 2025 poz. 539 t.j.
 i stan prawny na 17.08.2026, **treść zbieżna co do słowa**. Zakres
 numeracji potwierdzony niezależnie w spisach treści obu portali oraz
 w archiwum rp.pl. Data wejścia w życie i metryka ogłoszenia potwierdzone

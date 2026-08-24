@@ -1,6 +1,6 @@
 ---
 name: dr-06-podatki-finanse-publiczne-aml
-version: 3.72
+version: "3.73"
 description: |
   DR-06: Podatki, Finanse Publiczne, AML
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -21,6 +21,25 @@ description: |
 
 **Prawo podatkowe, stawki, progi, formularze, obowiązki raportowe, KSeF/JPK oraz praktyka interpretacyjna MF/KIS zmieniają się wielokrotnie w ciągu roku.**
 W sprawach podatkowych sama treść modułu lokalnego jest tylko punktem startu; rozstrzygające jest aktualne brzmienie aktu i aktualna linia interpretacyjna/orzecznicza zweryfikowana online.
+
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
+>
+> ```
+> view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
+>
+> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
+> oznaczenia, tylko je wymusza.
 
 ---
 
@@ -186,7 +205,7 @@ nieaktualności przeliczników art. 85; ostatecznie potwierdzono, że
 ten mechanizm od podobnie nazwanej metody przeliczeniowej z art.
 106e). Metodologia: Rząd 1 (ISAP) niedostępny do web_fetch w tej
 sesji — zastosowano lexlege.pl jako główne źródło Rządu 2B (t.j.
-Dz.U.2025.0.775, stan prawny wprost oznaczony jako aktualny na
+Dz.U. 2025 poz. 775, stan prawny wprost oznaczony jako aktualny na
 12.08.2026), potwierdzone krzyżowo w przepisy.gofin.pl, poltax.pl,
 ifirma.pl.
 

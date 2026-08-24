@@ -5,7 +5,7 @@
 > przepisów w kwalifikatorze. Ten moduł naprawia lukę.
 > ⚠️ Terminy i progi zweryfikowane 2026-07-16 — do potwierdzenia na
 > isap.sejm.gov.pl przed użyciem w piśmie (PRAWO-HARDGATE).
-> ⚠️ Nowelizacja 2015 (obowiązująca od 01.07.2015, Dz.U. 2015.396) znacząco
+> ⚠️ Nowelizacja 2015 (obowiązująca od 01.07.2015, Dz.U. 2015 poz. 396) znacząco
 > ZAOSTRZYŁA dostępność warunkowego zawieszenia — sprawdzaj datę popełnienia
 > czynu (przepisy międzyczasowe, art. 4 §1 KK — stosuje się ustawę względniejszą).
 

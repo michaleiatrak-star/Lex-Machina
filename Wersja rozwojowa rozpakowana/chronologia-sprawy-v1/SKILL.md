@@ -1,6 +1,6 @@
 ---
 name: chronologia-sprawy-v1
-version: 1.5
+version: "1.7"
 type: executive-chronologia
 status: production
 compatibility: "web_search, web_fetch, Anthropic API"
@@ -76,6 +76,20 @@ AUDIT-JOURNAL.md, AUDYT-2026-07-15e.
 > Chronologia może zawierać terminy ustawowe, daty wejścia w życie aktów, terminy zawite.
 > Przed podaniem jakiegokolwiek przepisu lub sygnatury:
 > `view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-23i, flaga F-115 — ten skill cytuje prawo, a bramki nie miał):
+>
+> ```
+> view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
 
 ## ARCHITEKTURA SKILLA
 

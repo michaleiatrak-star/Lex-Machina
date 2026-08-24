@@ -39,7 +39,7 @@ Procedura: shared/PRAWO-HARDGATE.md v2.5
   → POZIOM A (konektor MCP), gdy dostępny
   → POZIOM B: sekwencja DWUKROKOWA B-1 (web_search wprowadza URL RZĘDU 1
     do kontekstu) → B-2 (web_fetch na URL Z WYNIKU, kopiowany dosłownie)
-  → blokada robots na B-2 → 🟡 KOTWICA URZĘDOWA, warunki łączne K-1…K-4
+  → blokada robots na B-2 → 🟨 KOTWICA URZĘDOWA, warunki łączne K-1…K-4
 
 ⛔ BRAMKA: metryka nieustalona → NIE BUDUJ MODUŁU. Zapisz pozycję jako
 ⬛ w mapie pokrycia właściwego DR i przejdź do następnej. Moduł zbudowany
@@ -115,7 +115,7 @@ docelowo A-funkcjonalny.
 Na KAŻDY przepis w module:
   □ pełne oznaczenie z metryki G-1
   □ znacznik z ZAMKNIĘTEJ hierarchii czterech:
-    ✅ [VER] · 🟡 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]
+    ✅ [VER] · 🟨 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]
   □ kategoria RZĘDU źródła (shared/HIERARCHIA-ZRODEL.md)
   □ lokalizacja w źródle (PRAWO-HARDGATE KROK 5A)
 

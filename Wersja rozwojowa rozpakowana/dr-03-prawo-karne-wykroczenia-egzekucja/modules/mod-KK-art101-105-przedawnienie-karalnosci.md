@@ -6,7 +6,7 @@
 > naprawia tę lukę.
 > ⚠️ Wszystkie terminy zweryfikowane 2026-07-16 (lexlege.pl, arslege.pl) —
 > do potwierdzenia na isap.sejm.gov.pl przed użyciem w piśmie (PRAWO-HARDGATE).
-> ⚠️ Nowelizacja 2023 (Dz.U. 2022.2600, wejście w życie 01.10.2023) WYDŁUŻYŁA
+> ⚠️ Nowelizacja 2023 (Dz.U. 2022 poz. 2600, wejście w życie 01.10.2023) WYDŁUŻYŁA
 > terminy przedawnienia karalności — sprawdzaj ZAWSZE, czy czyn popełniono
 > przed czy po tej dacie (przepisy przejściowe, art. 15 ustawy zmieniającej).
 
@@ -42,11 +42,11 @@ liczy się od dnia, gdy skutek nastąpił — art. 101 §3)
 │
 ├─ Zbrodnia zabójstwa (art. 148 KK) → 40 lat (⚠️ POPRAWKA 2026-07-26,
 │  FAZA 3E/ZASADA 14: BYŁO błędnie "30 lat" — to liczba SPRZED
-│  nowelizacji z 7.07.2022 r., Dz.U. 2022.2600, w życie 1.10.2023 r.,
+│  nowelizacji z 7.07.2022 r., Dz.U. 2022 poz. 2600, w życie 1.10.2023 r.,
 │  która wydłużyła ten termin z 30 DO 40 LAT. Ironicznie, ten sam moduł
 │  już wcześniej ostrzegał o istnieniu tej nowelizacji, ale nie
 │  zastosował jej do własnej liczby. Potwierdzone w 7+ źródłach: rp.pl
-│  (Rząd 2B, aktualizacja 13.04.2026), arslege.pl [t.j. Dz.U.2025.383],
+│  (Rząd 2B, aktualizacja 13.04.2026), arslege.pl [t.j. Dz.U. 2025 poz. 383],
 │  gov.pl [publikacja R. Kmiecik, Prokuratura i Prawo], kglegal.pl,
 │  zzbudowlani.pl, adwokat-grube.pl, tvn24.pl)
 │

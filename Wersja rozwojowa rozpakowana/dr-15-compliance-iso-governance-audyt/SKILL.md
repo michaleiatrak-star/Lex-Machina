@@ -1,6 +1,6 @@
 ---
 name: dr-15-compliance-iso-governance-audyt
-version: 3.10
+version: "3.11"
 description: |
   DR-15: Compliance, ISO, Governance, Audyt
   Jeden moduł = jeden akt prawny (Dz.U.) lub norma ISO / rozporządzenie UE.
@@ -25,6 +25,25 @@ description: |
 - AI Act (Rozp. UE 2024/1689) stosowany etapami: zakazy 02.2025, GPAI 08.2025, pełne 08.2026.
 - DORA (Rozp. UE 2022/2554) stosowane od 17.01.2025 — standardy techniczne RTS nadal publikowane.
 - Ustawa AML — weryfikuj aktualny tekst jednolity przed każdym użyciem.
+
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
+>
+> ```
+> view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
+>
+> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
+> oznaczenia, tylko je wymusza.
 
 ---
 

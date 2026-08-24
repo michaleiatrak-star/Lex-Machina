@@ -137,6 +137,6 @@ ETAP 3 ⬛ BUDOWA BRAKUJĄCYCH MODUŁÓW — kolejność ustalona:
 Ten plik NIE zawiera ani jednego numeru Dz.U. ani daty tekstu jednolitego —
 świadomie. Metryki aktów ustala się dopiero w kroku G-1 generatora, przy
 faktycznej budowie modułu, wg `shared/PRAWO-HARDGATE.md` v2.5 (sekwencja
-B-1 → B-2, przy blokadzie robots — 🟡 KOTWICA URZĘDOWA, warunki K-1…K-4).
+B-1 → B-2, przy blokadzie robots — 🟨 KOTWICA URZĘDOWA, warunki K-1…K-4).
 Wpisanie tu numerów „z pamięci", żeby lista wyglądała na kompletną, byłoby
 dokładnie tym błędem, który tę flagę wywołał.

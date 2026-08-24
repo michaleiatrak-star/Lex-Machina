@@ -1,41 +1,22 @@
-# CHANGELOG — Analiza sądowa v6
+# CHANGELOG — analiza-sadowa-v6
 
-> Pełna historia zmian tego skilla. **Jedyna lokalizacja kanoniczna** — w SKILL.md
-> historii nie ma; jest tam wyłącznie krótki skrót w polu `changelog:` frontmatteru.
-> Standard ujednolicony 2026-08-20z4 dla całego systemu: plik `references/CHANGELOG.md`,
-> nigdy sekcja w korpusie SKILL.md ani pełna lista w YAML.
-> Wczytuj TYLKO gdy potrzebujesz historii konkretnej naprawy — przy audycie, przy
-> pytaniu „dlaczego to tak działa", przy regresji. W normalnym toku pracy zbędny.
+- 6.5 (2026-08-24, sesja audytowa audyt-systemu-v4, flaga **F-129**): pole `changelog:` w YAML liczyło 39 linii, czyli pełną historię zamiast skrótu — T12 zgłaszał to jako ⚠️. Wyniesione 1:1 do tego pliku, w YAML został 7-linijkowy skrót z odesłaniem. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-24b.
 
----
+- 6.4 (2026-08-23i, sesja audytowa audyt-systemu-v4, flaga F-115): self-check ANTY-FASADA podłączony jako WYWOŁANIE modułu kanonicznego `shared/SELF-CHECK-ANTY-FASADA.md`, kopia treści zastąpiona wywołaniem. Powód modułu zamiast kopii: gdy F-117 dodała regułę AF-6 i drugą pozycję listy do `shared/PRAWO-HARDGATE.md`, żadna z 7 istniejących kopii nie została zaktualizowana — źródło miało 2 pozycje, kopie 1. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-23i.
 
-## 6.4 (2026-08-20z4) — ujednolicenie standardu: historia zmian wyłącznie w tym pliku
-
-Pole `changelog:` w YAML (39 linii) wyniesione 1:1 do nowo utworzonego
-`references/CHANGELOG.md`.
-
-**Standard systemowy wprowadzony tego dnia:** pełna historia zmian każdego skilla
-mieszka w `references/CHANGELOG.md` — nigdy w sekcji `## CHANGELOG` korpusu SKILL.md
-i nigdy jako pełna lista wpisów w polu `changelog:` frontmatteru. W SKILL.md zostaje
-wyłącznie kilkulinijkowy skrót bieżącej wersji z odesłaniem do tego pliku.
-
-**Dlaczego to nie jest kosmetyka:** rozproszenie historii między trzy lokalizacje było
-BEZPOŚREDNIĄ przyczyną fałszywych wyników testu T12 w sesji 2026-08-20z3 — test szukał
-wpisów w `references/`, nie znajdował ich (bo leżały w SKILL.md) i raportował luki,
-których nie było. Jedna lokalizacja kanoniczna usuwa całą tę klasę błędu.
-Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis `AUDYT-2026-08-20z4`.
+> Lokalizacja kanoniczna historii wersji (ZASADA 15). Plik założony 2026-08-23i;
+> wersje wcześniejsze nieodtworzone — ślad w audyt-systemu-v4/references/AUDIT-JOURNAL.md.
 
 ---
 
-## HISTORIA PRZENIESIONA Z SKILL.md (2026-08-20z4, ujednolicenie standardu)
+## Wpisy przeniesione z pola `changelog:` YAML (F-129, 2026-08-24)
 
-> Poniższa treść pochodzi z pola `changelog:` we frontmatterze SKILL.md. Przeniesiona **1:1, bez zmiany ani jednego
-> zdania**. Powód: historia zmian ma mieszkać w jednym miejscu — w tym pliku —
-> a nie być rozproszona między korpusem SKILL.md, frontmatterem i `references/`.
-> Rozproszenie było źródłem rozjazdów wykrytych flagami F-101 i F-102: test T12
-> szukał historii w `references/` i raportował fałszywe luki tam, gdzie wpisy
-> istniały, tylko w SKILL.md.
+> T12 zgłaszał to pole jako ⚠️ — 39 linii to pełna historia, nie skrót
+> (ZASADA 15 dopuszcza w YAML skrót do ~15 linii). Tekst poniżej przeniesiony
+> 1:1, w oryginalnej składni listy YAML, bez przeredagowania i bez odtwarzania
+> czegokolwiek z pamięci.
 
+```yaml
 changelog:
   - "6.2 (2026-07-12): ZAMKNIĘTE — WARN 'średni priorytet: 13 plików w
     references/ bez odwołań do shared/' (otwarty w sesji 6.1). Sprawdzono
@@ -76,3 +57,4 @@ changelog:
     duplikacji jak w terminy/orzecznictwo; wymaga osobnej sesji per plik,
     nie zgadywania). Zarejestrować w CHECKLIST-DEDUP.md i zamknąć
     odpowiednią pozycję w WARN-OTWARTE.md."
+```

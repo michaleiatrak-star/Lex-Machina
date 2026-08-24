@@ -4,7 +4,7 @@
 - Ustawa o regionalnych izbach obrachunkowych — Dz.U. 2025 poz. 7 (t.j., obwieszczenie
   Marszałka Sejmu z 23.12.2024; zastępuje t.j. 2023.1325)
   ✅ [VER: isap.sejm.gov.pl, 2026-08-15 — FAZA 3E: jedyna zmiana ujęta w nowym t.j.
-  wynika z ustawy o dochodach JST (Dz.U. 2024.1572), nie dotyka art. 1, 11, 90 u.s.g.
+  wynika z ustawy o dochodach JST (Dz.U. 2024 poz. 1572), nie dotyka art. 1, 11, 90 u.s.g.
   ani funkcji nadzorczej/kontrolnej/opiniodawczej/orzeczniczej opisanych niżej — treść
   modułu ZGODNA]
 

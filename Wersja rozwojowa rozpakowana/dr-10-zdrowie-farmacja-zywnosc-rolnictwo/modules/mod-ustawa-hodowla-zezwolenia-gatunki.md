@@ -234,7 +234,7 @@ istotnie.pl, infowet.pl).
 2026-07-30, na żądanie użytkownika)
 
 ```
-PODSTAWA: art. 431 Kodeksu cywilnego — Dz.U.2026.0.795 t.j.
+PODSTAWA: art. 431 Kodeksu cywilnego — Dz.U. 2026 poz. 795 t.j.
 
 ⭐ KLUCZOWA ZASADA: odpowiedzialność za szkodę wyrządzoną przez
   zwierzę JEST TAKA SAMA niezależnie od tego, czy zwierzę było POD

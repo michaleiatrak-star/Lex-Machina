@@ -200,7 +200,7 @@ dodano 2026-08-11, na żądanie użytkownika)
   CIĄGŁĄ raz NA 2 lata
 
 Potwierdzone w 6+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny tekst
-art. 26-27 (sip.lex.pl/OpenLEX z aktualnym t.j. Dz.U.2026.522,
+art. 26-27 (sip.lex.pl/OpenLEX z aktualnym t.j. Dz.U. 2026 poz. 522,
 lexlege.pl, przepisy.gofin.pl), oraz vademecumksiegowego.pl [×2],
 inwentaryzujemy.pl [czerwiec 2026], controlling-24.pl, publikacja
 specjalistyczna dla jednostek sektora finansów publicznych.

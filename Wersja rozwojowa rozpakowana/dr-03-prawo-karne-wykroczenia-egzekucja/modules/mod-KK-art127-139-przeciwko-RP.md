@@ -231,7 +231,7 @@ KROK 6: Czy poszkodowanym jest PAŃSTWO SOJUSZNICZE (nie RP)?
 ## 8. LITERATURA I ŹRÓDŁA (zweryfikowane online 2026-07-17)
 
 - Tekst jednolity KK — ISAP/lexlege.pl/arslege.pl (art. 127-139,
-  Dz.U.2025.383 t.j.).
+  Dz.U. 2025 poz. 383 t.j.).
 - S. Hoc, *Szpiegostwo w znowelizowanym Kodeksie karnym* — krytyczna
   analiza reformy 2023 r., w tym kontrowersje wokół zakresu zmian.
 - F. Hoc (lub inny autor, ⚠️ imię niepotwierdzone w pełni w tej sesji),

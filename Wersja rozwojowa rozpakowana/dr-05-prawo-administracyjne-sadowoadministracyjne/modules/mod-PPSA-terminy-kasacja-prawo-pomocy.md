@@ -231,7 +231,7 @@ dla klientów o niskich dochodach
 199-238 — dodano 2026-08-22, dopełnienie Rozdz. 3 opisanego w sekcji 3)
 
 ✅ **ZWERYFIKOWANE Rząd 1** (bip.warszawa.wsa.gov.pl, gliwice.wsa.gov.pl,
-bip.wroclaw.wsa.gov.pl, api.sejm.gov.pl — metryka **Dz.U.2026.0.143 t.j.**
+bip.wroclaw.wsa.gov.pl, api.sejm.gov.pl — metryka **Dz.U. 2026 poz. 143 t.j.**
 niezależnie potwierdzona arslege.pl i lexlege.pl, zgodna z metryką z
 sekcji 7 tego samego modułu). Metodologia jak w pozostałych sekcjach:
 minimum Rząd 1 + Rząd 2B zgodne przed oznaczeniem jako zweryfikowane.
@@ -607,7 +607,7 @@ punkt PPSA, dodano 2026-08-20)
 
 ```
 ⚡ Ustawa z 29.05.2026 o zmianie ustawy — Ordynacja podatkowa oraz
-  niektórych innych ustaw (Dz.U. 2026.846, ta sama ustawa co zmiany MDR
+  niektórych innych ustaw (Dz.U. 2026 poz. 846, ta sama ustawa co zmiany MDR
   opisane w `mod-OP-ordynacja-podatkowa.md` sekcja 6a), w życie
   1.10.2026, zmienia RÓWNIEŻ PPSA.
 

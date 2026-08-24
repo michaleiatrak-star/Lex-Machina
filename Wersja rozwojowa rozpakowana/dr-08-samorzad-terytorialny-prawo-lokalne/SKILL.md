@@ -1,6 +1,6 @@
 ---
 name: dr-08-samorzad-terytorialny-prawo-lokalne
-version: 3.4
+version: "3.5"
 description: |
   DR-08: Samorząd Terytorialny i Prawo Lokalne
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -17,6 +17,25 @@ description: |
 1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
 2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
 3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
+
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
+>
+> ```
+> view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
+>
+> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
+> oznaczenia, tylko je wymusza.
 
 ---
 
@@ -77,7 +96,7 @@ MODUŁY DZIEDZINOWE (prawo materialne):
               (scalony: wod-kan + transport zbiorowy + czystość i porządek)
   [✓] OK    mod-ustawa-zabytki-rewitalizacja
   [✓] OK    mod-UDP-strefy-platnego-parkowania
-              (SPP/ŚSPP: opłaty art.13/13b/13f UDP Dz.U.2025.889; opłata dodatkowa;
+              (SPP/ŚSPP: opłaty art.13/13b/13f UDP Dz.U. 2025 poz. 889; opłata dodatkowa;
                brak zaskarżalności wezwania do WSA — tylko zarzuty UPEA art.33;
                stawki % płacy min.; karta parkingowa; parking prywatny; zaskarżenie uchwały)
               (scalony: zabytki + rewitalizacja + cmentarze)

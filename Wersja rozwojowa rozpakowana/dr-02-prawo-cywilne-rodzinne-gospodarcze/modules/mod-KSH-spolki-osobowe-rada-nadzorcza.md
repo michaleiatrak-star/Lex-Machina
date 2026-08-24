@@ -13,7 +13,7 @@ dla zarządu i zgromadzenia.)
 > Akt bazowy: Kodeks spółek handlowych. ⚠️ [NIEWERYFIKOWANE RZĄD 1] —
 > większość treści z RZĄD 2/3 (lexlege.pl, arslege.pl, przepisy.gofin.pl,
 > standardyprawa.pl, radcaprawnykorcyl.pl, materiały branżowe), t.j.
-> cytowany w źródłach: Dz.U.2024.18 — ⚠️ ZWERYFIKUJ zgodność z aktualnym
+> cytowany w źródłach: Dz.U. 2024 poz. 18 — ⚠️ ZWERYFIKUJ zgodność z aktualnym
 > t.j. KSH używanym w pozostałych modułach systemu (mod-KSH-spolki-
 > handlowe.md nie podaje jawnie numeru t.j. we fragmencie sprawdzonym
 > w tej sesji) przed cytowaniem w piśmie.
@@ -431,7 +431,7 @@ podział stosunków WEWNĘTRZNYCH vs ZEWNĘTRZNYCH
 - Rozbieżność doktrynalna co do stosowania art. 210 §1 do umów spółki
   komandytowej z członkiem zarządu jej komplementariusza (pkt 8) —
   wymaga pogłębienia przy konkretnej sprawie.
-- Potwierdzenie aktualnego t.j. KSH używanego w tym module (Dz.U.2024.18
+- Potwierdzenie aktualnego t.j. KSH używanego w tym module (Dz.U. 2024 poz. 18
   wg źródeł wtórnych) względem t.j. używanego w `mod-KSH-spolki-
   handlowe.md` i `mod-KSH-organy-spolki-zoo.md` — brak jawnego
   porównania w tej sesji.

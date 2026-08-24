@@ -21,7 +21,7 @@ START: Czy sprawca umyślnie spowodował śmierć człowieka?
    ├─ Typ podstawowy (art. 148 §1) → 10-30 lat pozbawienia wolności
    │  lub dożywocie (⚠️ POPRAWKA 2026-07-26, F-15/MOD-PROPAGACJA-
    │  NOWELIZACJI: USUNIĘTO "25 lat" — ta odrębna kategoria kary
-   │  ZNIESIONA reformą z 7.07.2022, Dz.U. 2022.2600, w życie 1.10.2023;
+   │  ZNIESIONA reformą z 7.07.2022, Dz.U. 2022 poz. 2600, w życie 1.10.2023;
    │  zastąpiona jednolitą karą terminową do 30 lat. Potwierdzone w 8+
    │  źródłach: chmielniak.com.pl, hplegal.pl, weredynscy.pl,
    │  jhcadwokaci.pl, durajreck.com, gov.pl [J. Kluza, Prokuratura i
@@ -199,7 +199,7 @@ utraty życia albo CIĘŻKIEGO uszczerbku na zdrowiu?
 > założenia modułu (że HIV i inne choroby są nadal rozdzielone na dwa
 > paragrafy o różnym zagrożeniu karą).
 
-**Aktualna treść (Dz.U.2025.0.383 t.j., źródła zbieżne: arslege.pl,
+**Aktualna treść (Dz.U. 2025 poz. 383 t.j., źródła zbieżne: arslege.pl,
 lexlege.pl, inforlex.pl):**
 ```
 □ Art. 161 §1 — POŁĄCZONY typ: "Kto, wiedząc, że jest zarażony wirusem

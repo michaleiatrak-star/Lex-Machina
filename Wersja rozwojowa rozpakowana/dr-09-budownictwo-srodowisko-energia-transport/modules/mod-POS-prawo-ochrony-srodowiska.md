@@ -17,13 +17,13 @@ odpowiedzialność karna za przestępstwa przeciwko środowisku (KK art. 181–1
    - Organ: wójt / burmistrz / prezydent (z wyjątkami np. drogi krajowe → RDOŚ)
    - Odwołanie → SKO (14 dni) → WSA → NSA
 2. **UDZIAŁ SPOŁECZEŃSTWA:** W postępowaniu OOŚ każdy może złożyć uwagi i wnioski
-   (art. 29 UOOŚiS — Dz.U.2024.1112 t.j.). Organizacje ekologiczne mają prawa strony w postępowaniach
+   (art. 29 UOOŚiS — Dz.U. 2024 poz. 1112 t.j.). Organizacje ekologiczne mają prawa strony w postępowaniach
    dotyczących środowiska — mogą zaskarżyć decyzję do WSA.
 3. **SZKODA ŚRODOWISKOWA (ustawa o zapobieganiu szkodom):**
    - Sprawca zobowiązany do działań zapobiegawczych / naprawczych
    - Organ: RDOŚ (lub starosta dla wód) nakazuje działania lub prowadzi je na koszt sprawcy
    - Odpowiedzialność niezależna od winy (zasada „zanieczyszczający płaci")
-4. **ODPOWIEDZIALNOŚĆ KARNA (KK art. 181–188a) — Dz.U.2025.383 t.j.:**
+4. **ODPOWIEDZIALNOŚĆ KARNA (KK art. 181–188a) — Dz.U. 2025 poz. 383 t.j.:**
    - **Art. 181 §1 KK**: powodowanie zniszczeń w świecie roślinnym/zwierzęcym w znacznych rozmiarach → **6 miesięcy – 8 lat**
    - **Art. 182 §1 KK**: zanieczyszczenie wody/powietrza/ziemi w znacznych rozmiarach → **6 miesięcy – 8 lat**
    - **Art. 182 §3 KK**: jw. w związku z eksploatacją instalacji wymagającej pozwolenia → **1–10 lat**
@@ -46,12 +46,12 @@ odpowiedzialność karna za przestępstwa przeciwko środowisku (KK art. 181–1
 
 | Akt | Sygnatura t.j. / Uwagi |
 |---|---|
-| **Ustawa o udostępnianiu informacji o środowisku (UOOŚiS)** | **Dz.U.2024.1112 t.j.** (obwieszczenie 14.06.2024) — OOŚ, DŚU, udział społeczeństwa |
-| **Prawo ochrony środowiska (POŚ)** | **Dz.U.2025.647 t.j.** (obwieszczenie 9.05.2025) + nowelizacja Dz.U.2025.1812 — pozwolenia, emisje, IPPC |
-| **Ustawa o odpadach** | **Dz.U.2023.1587 t.j.** + nowelizacje Dz.U.2024.1834 i Dz.U.2024.1914 — weryfikuj aktualny stan w isap |
+| **Ustawa o udostępnianiu informacji o środowisku (UOOŚiS)** | **Dz.U. 2024 poz. 1112 t.j.** (obwieszczenie 14.06.2024) — OOŚ, DŚU, udział społeczeństwa |
+| **Prawo ochrony środowiska (POŚ)** | **Dz.U. 2025 poz. 647 t.j.** (obwieszczenie 9.05.2025) + nowelizacja Dz.U. 2025 poz. 1812 — pozwolenia, emisje, IPPC |
+| **Ustawa o odpadach** | **Dz.U. 2023 poz. 1587 t.j.** + nowelizacje Dz.U. 2024 poz. 1834 i Dz.U. 2024 poz. 1914 — weryfikuj aktualny stan w isap |
 | **Ustawa o ochronie przyrody** | **Dz.U. 2026 poz. 13 t.j. z 08.01.2026 ✅ VER: 2026-06-05 (poprzedni: Dz.U. 2024 poz. 1478)** — parki, rezerwaty, Natura 2000, gatunki chronione |
-| **Ustawa o zapobieganiu szkodom w środowisku** | Dz.U.2007.75.493 — brak nowszego t.j.; weryfikuj aktualny stan w isap.sejm.gov.pl |
-| **Kodeks karny art. 181–188a** | **Dz.U.2025.383 t.j.** — przestępstwa przeciwko środowisku |
+| **Ustawa o zapobieganiu szkodom w środowisku i ich naprawie** | **t.j. Dz.U. 2020 poz. 2187** ✅ VER 2026-08-24 RZĄD 1 (ISAP WDU20200002187 — obwieszczenie Marszałka Sejmu z 18.11.2020, zastępuje t.j. Dz.U. 2019 poz. 1862) + RZĄD 2B (prawo.pl, infor.pl) + źródło rządowe (pgi.gov.pl). ⚠️ KOREKTA 2026-08-24 (F-125): wcześniej stało „Dz.U.2007.75.493 — **brak nowszego t.j.**” — twierdzenie NIEPRAWDZIWE, sprzeczne z własną mapą centralną, która od dawna oznaczała rocznik 2007 jako `PREV`. Zapis w notacji LEX ukrywał to przed testami T3/T11 (ślepota naprawiona przy F-125). ⚠️ NIEUSTALONE, czy po 2020 r. ogłoszono kolejny t.j. — zweryfikuj w ISAP przed powołaniem |
+| **Kodeks karny art. 181–188a** | **Dz.U. 2025 poz. 383 t.j.** — przestępstwa przeciwko środowisku |
 | **KPA** | Postępowanie przed organami ochrony środowiska |
 | **Rozporządzenie OOŚ** | Rozporządzenie Rady Ministrów w sprawie przedsięwzięć — weryfikuj aktualny t.j. w isap |
 
@@ -74,7 +74,7 @@ Odwołanie → GDOŚ (Generalny Dyrektor Ochrony Środowiska)
     ↓ skarga do WSA
 
 POZWOLENIA ZINTEGROWANE (IPPC / IED):
-I instancja — **zależy od rodzaju instalacji** (art. 378 POŚ Dz.U.2025.647):
+I instancja — **zależy od rodzaju instalacji** (art. 378 POŚ Dz.U. 2025 poz. 647):
   → **Marszałek Województwa** — instalacje IPPC mogące zawsze znacząco oddziaływać na środowisko, duże fermy, instalacje komunalne
   → **Starosta / Prezydent miasta na prawach powiatu** — pozostałe instalacje IPPC
   → RDOŚ — instalacje na terenach zamkniętych (wojskowych)
@@ -140,7 +140,7 @@ Inwestycja na obszarze Natura 2000
 
 *⚠️ Moduł strategiczny — wszystkie przepisy i orzecznictwo wymagają weryfikacji
 online w ISAP / orzeczenia.nsa.gov.pl / sn.pl przed powołaniem.*
-*Weryfikacja: 22.05.2026 | UOOŚiS: Dz.U.2024.1112 t.j. | POŚ: Dz.U.2025.647 t.j. | Ochrona przyrody: Dz.U. 2026 poz. 13 t.j. z 08.01.2026 ✅ VER: 2026-06-05 (poprzedni: Dz.U. 2024 poz. 1478) | KK: Dz.U.2025.383 t.j.*
+*Weryfikacja: 22.05.2026 | UOOŚiS: Dz.U. 2024 poz. 1112 t.j. | POŚ: Dz.U. 2025 poz. 647 t.j. | Ochrona przyrody: Dz.U. 2026 poz. 13 t.j. z 08.01.2026 ✅ VER: 2026-06-05 (poprzedni: Dz.U. 2024 poz. 1478) | KK: Dz.U. 2025 poz. 383 t.j.*
 *Zakaz cytowania przepisów i kar z pamięci — każdy artykuł weryfikuj w isap.sejm.gov.pl*
 
 ---

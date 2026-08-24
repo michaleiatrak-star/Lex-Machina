@@ -17,7 +17,7 @@
 > ROZSZERZYŁA zakres przepisu z samych przetargów PUBLICZNYCH na
 > również przetargi PRYWATNE i aukcje. Naprawiono w całości na podstawie
 > DOSŁOWNEGO tekstu z lexlege.pl (Rząd 2B, "Stan prawny aktualny na
-> dzień: 17.07.2026", t.j. Dz.U.2025.383), dodatkowo potwierdzone przez
+> dzień: 17.07.2026", t.j. Dz.U. 2025 poz. 383), dodatkowo potwierdzone przez
 > Bird & Bird [Rząd 2B-adjacent, kancelaria międzynarodowa,
 > twobirds.com] i adwokat-skoczylas.pl [Rząd 3, maj 2026].
 

@@ -202,7 +202,7 @@ przysługuje ZAŻALENIE.
 
 ### Art. 24 — grzywna (przepis intensywnie nowelizowany — sprawdź KAŻDORAZOWO)
 Wysokość standardowa: **20–5000 zł**. Dla wykroczeń wymienionych w §1a
-(m.in. **art. 82 §1-3, 4 i 5** — po nowelizacji Dz.U. 2025.1814; oraz
+(m.in. **art. 82 §1-3, 4 i 5** — po nowelizacji Dz.U. 2025 poz. 1814; oraz
 wykroczenia z **rozdziału XI**, komunikacyjne) — górna granica podniesiona
 do **30 000 zł**. Przy wymiarze bierze się pod uwagę dochody sprawcy,
 warunki osobiste i rodzinne, stosunki majątkowe, możliwości zarobkowe.

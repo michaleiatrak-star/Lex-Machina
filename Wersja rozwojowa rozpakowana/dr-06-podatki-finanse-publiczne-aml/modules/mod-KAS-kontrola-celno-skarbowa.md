@@ -138,7 +138,7 @@ nieobecny, kluczowy element proceduralny)
   SKARGA na bezczynność/PRZEWLEKŁOŚĆ postępowania DO WSA
 
 Potwierdzone w 7+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
-tekst art. 83 ustawy o KAS (OpenLEX, Dz.U.2025.1131 t.j., wersja od
+tekst art. 83 ustawy o KAS (OpenLEX, Dz.U. 2025 poz. 1131 t.j., wersja od
 16.04.2026) oraz orzecznictwo NSA (I FSK 1264/21, I FSK 1087/20),
 Grant Thornton [×2], ordynacjapodatkowa.pl [×2], rachunkowosc.com.pl,
 asiw.pl [luty 2026], pragmatiq.pl.

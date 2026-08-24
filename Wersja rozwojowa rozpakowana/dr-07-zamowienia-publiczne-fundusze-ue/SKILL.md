@@ -1,6 +1,6 @@
 ---
 name: dr-07-zamowienia-publiczne-fundusze-ue
-version: 3.5
+version: "3.6"
 description: |
   DR-07: Zamówienia Publiczne, Fundusze UE, Pomoc Publiczna
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -23,6 +23,25 @@ description: |
 > PRZED pierwszym przepisem w każdej odpowiedzi. Integruje się z
 > `shared/ISAP-AUDIT-PROTOCOL.md`.
 
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
+>
+> ```
+> view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
+>
+> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
+> oznaczenia, tylko je wymusza.
+
 ---
 
 ## Zasada architektoniczna
@@ -40,43 +59,13 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Zamówienia publiczne, fundusze UE, pomoc publiczna — pojęcia (wykonawca, zamawiający, oferta, rażąco niska cena, kryteria oceny ofert) mają definicje ustawowe wprost w PZP (art. 7) i nie wymagają osobnego pliku w shared/definicje/. Żaden plik tematyczny nie obejmuje dziedziny PZP.
-## Moduły (19 łącznie — ✓ 19 OK, ☐ 0 STUB)
-
-**NAPRAWA 2026-08-22:** dodano `mod-PZP-dzial-IV-szczegolne-
-instrumenty.md` — naprawa poz. #3 rekomendowanej kolejności raportu
-pokrycia PZP: Dział IV (art. 311-361), dotąd 🔴 śladowo pokryty
-(tylko wzmiankowane nazwy instrumentów bez treści proceduralnej).
-Obejmuje umowę ramową (311-315, w tym okres obowiązywania max 4 lata
-i relacja do Działu VII), dynamiczny system zakupów (316-324),
-konkurs (325-358, w tym jedyny obligatoryjny przypadek — projektowanie
-architektoniczne) i zamówienia na usługi społeczne (359-361, próg
-750 000 EUR odrębny od progów standardowych). Rząd 1:
-ekomentarzpzp.uzp.gov.pl (komentarz oficjalny UZP), portalzp.pl,
-lexlege.pl.
+## Moduły (18 łącznie — ✓ 18 OK, ☐ 0 STUB)
 
 **NAPRAWA 2026-08-14:** dodano `mod-PZP-dzial-II-kwalifikacja-kryteria-
 uniewaznienie.md` — zamyka rdzeń F-71: Dział II PZP (183 art., >1/4
 ustawy), sam rdzeń klasycznego przetargu generujący najwięcej sporów.
 
 ```
-  [✓] NOWY  mod-PZP-dzial-IV-szczegolne-instrumenty
-              (dodany 2026-08-22, naprawa poz. #3 rekomendowanej
-               kolejności raportu pokrycia PZP. ⭐⭐⭐ Trzy rdzenie:
-               [1] umowa ramowa — NIE jest samodzielnym zamówieniem,
-               nie kreuje wzajemnego zobowiązania stron, max 4 lata
-               [wyjątki: przedmiot/interes zamawiającego, obronność
-               >7 lat], dwa warianty przy jednym wykonawcy [313 §1
-               pełna konsumpcja / §2 uzupełnienie oferty]; [2] konkurs
-               — JEDYNY obligatoryjny przypadek to projektowanie
-               architektoniczne/architektoniczno-budowlane powyżej
-               progów unijnych [325 §2], katalog dziedzin otwarty
-               z nowością projektowania informatycznego i zamierzenia
-               innowacyjnego; [3] usługi społeczne — próg 750 000 EUR
-               ODRĘBNY od progów standardowych, brak własnej procedury,
-               tylko fakultatywne uproszczenia [360]. Ponadto:
-               dynamiczny system zakupów [316-324, wyłącznie usługi/
-               dostawy/roboty OGÓLNIE DOSTĘPNE, pełna elektronizacja
-               komunikacji])
   [✓] OK    mod-PZP-zamowienia-publiczne-KIO
   [✓] NOWY  mod-PZP-dzial-II-kwalifikacja-kryteria-uniewaznienie
               (dodany 2026-08-14 — naprawa F-71: warunki udziału [112,

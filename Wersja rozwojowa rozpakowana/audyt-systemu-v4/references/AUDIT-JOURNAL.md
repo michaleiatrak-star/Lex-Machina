@@ -4,6 +4,393 @@
 **Opis:** Chronologiczny rejestr wszystkich audytów systemu — wyniki, naprawy, status.  
 **Format wpisu:** jedna sekcja `## AUDYT-YYYY-MM-DD` per sesja audytowa.  
 
+## AUDYT-2026-08-23i — F-115 zawężona do P3: self-check ANTY-FASADA jako moduł; F-126 otwarta
+
+**Wyzwalacz:** kontynuacja po zamknięciu F-111 — blokada F-115 zdjęta w tej samej
+sesji, więc propagacja mogła ruszyć bez ryzyka dwukrotnej zmiany ścieżki wczytania.
+
+**Decyzja z flagi wykonana: MODUŁ, nie kopia.** Nowy `shared/SELF-CHECK-ANTY-FASADA.md`.
+
+### Dowód, że wariant „kopia" nie działa — zmaterializowany
+
+Flaga rekomendowała moduł prewencyjnie („25 kopii jednej linii = 25 miejsc dryfu").
+Pomiar w tej sesji potwierdził, że dryf **już nastąpił**: F-117 dodała AF-6 i drugą
+pozycję listy do `PRAWO-HARDGATE.md` (2026-08-23f); żadna z 7 kopii nie została
+wtedy zaktualizowana. Kontrola sum kontrolnych fragmentów: wszystkie 7 kopii
+identyczne między sobą w dwóch wariantach formatowania (5 zwykłych, 2 w bloku
+cytatu), wszystkie z 1 pozycją wobec 2 w źródle. Rozjazd powstał dokładnie przy
+pierwszej kolejnej zmianie brzmienia źródła — czyli w najwcześniejszym możliwym
+momencie.
+
+### Wykonane
+
+| Grupa | Skille | Operacja |
+|---|---|---|
+| 7 kopii | `analizator-dowodow-v3`, `prawny-router-v3` (SELF-CHECK.md), `pisma-proste-v2`, `analiza-sadowa-v6`, `przewodnik-prawny-v2`, `pisma-procesowe-v3` (SELF-CHECK-PISMA.md), `analizator-umow-v1` | kopia 6 l. → wywołanie modułu |
+| P1 | `orzeczenia-sadowe-v2`, `analizator-przepisow-v2` | bramka DODANA — nie miały jej w ogóle |
+| P2 | `chronologia-sprawy-v1`, `przesluchanie-swiadkow-v2-min90`, `raport-klienta-v1`, `raport-sytuacyjny-v2` | bramka DODANA |
+| poza zakresem | `prawo-polskie-v2` | czysta fasada routingu — decyzja z F-123, odnotowana w rejestrze modułu, żeby nie wracała jako zgłoszenie |
+
+**Pokrycie: 7 → 14 plików** (`grep -rl SELF-CHECK-ANTY-FASADA`). Kontrola
+uzupełniająca: `grep "zweryfikowano/zweryfikowałem"` daje ZERO wystąpień treści
+listy poza modułem — nie ma już czego rozjeżdżać.
+
+**Kontrola nienaruszalności (REGUŁA 5):** dla każdego z 7 plików porównano liczbę
+nagłówków i liczbę wystąpień `DOMAIN-LOCK` przed i po — wszystkie zgodne. Bramka
+DOMAIN-LOCK stała bezpośrednio pod usuwanym blokiem w kilku plikach, więc było to
+realne ryzyko, nie kontrola formalna.
+
+### ⛔ Fałszywa deklaracja sprostowana
+
+`PRAWO-HARDGATE.md` twierdził: *„SELF-CHECK (jedna linia, propagowana do wszystkich
+skilli)"*. Było 7 z ~25. Zdanie zastąpione opisem stanu faktycznego wraz z datami,
+odesłaniem do modułu i wskazaniem, że **rejestr wołających mieszka w module** —
+jedno miejsce prawdy zamiast deklaracji, której nikt nie weryfikował. To ta sama
+klasa co F-124 i O-4: rejestr twierdzący coś, czego nie sprawdzono.
+
+### Ograniczenie zapisane w module
+
+Self-check jest samo-raportujący: wykonuje go ten sam proces, który mógł właśnie
+zbudować fasadę. Fasada z TEST2 (deklaracja + URL RZĄD 1 + data — wszystkie
+elementy prawdziwe) **przeszłaby** ten self-check, gdyby model uznał, że wywołanie
+„w zasadzie było". W module zapisano wniosek praktyczny: pozycja pierwsza ma sens
+wyłącznie wtedy, gdy odpowiedź na pytanie „czy wywołałem narzędzie" jest
+konfrontowana z listą FAKTYCZNYCH wywołań w tej odpowiedzi, nie ze wspomnieniem
+o nich. Pomiar — F-113.
+
+### F-126 OTWARTA — skutek uboczny tej sesji, zgłoszony jawnie
+
+Zakładając `references/CHANGELOG.md` dla `analizator-przepisow-v2` i
+`prawny-router-v3` (nie miały go, a potrzebowały wpisu F-115), doprowadziłem do
+stanu, w którym **historia tych skilli mieszka w DWÓCH miejscach** — bo ich
+`SKILL.md` nadal zawiera sekcję `## CHANGELOG` z wpisami. To ⛔ w teście T12,
+zastane (sekcje istniały wcześniej), ale przeze mnie POGŁĘBIONE. Trzeci skill z tą
+wadą: `pisma-procesowe-v3`.
+
+Stan przejściowy oznaczony w obu nowych plikach wprost, z zakazem odtwarzania
+starych wpisów z pamięci (precedens F-102 — groziło dopisanie pięciu zmyślonych
+wpisów do `pisma-procesowe-v3`). Migracja 1:1 z korpusu — flaga **F-126**.
+
+⚠️ Zgłaszam to jako WŁASNY skutek uboczny, nie jako zastane znalezisko —
+alternatywą było zostawienie skilli bez wpisu changelogowego, co naruszałoby
+ZASADĘ 15 w drugą stronę.
+
+### Pozostałe naprawy przy okazji (T12 zszedł z 11 ⛔ do 3 ⛔)
+
+- trzy pola `changelog:` wskazujące wersję sprzed mojego podbicia — poprawione,
+- H1 z numerem minor w `analizator-dowodow-v3` (v5.1 przy `version: 5.16.2`) i
+  `orzeczenia-sadowe-v2` (v2.7 przy 2.10) — sprowadzone do samego MAJOR zgodnie
+  z decyzją generalną F-102(C),
+- `version` ujęty w cudzysłów w 14 edytowanych skillach (F-102(B), profilaktyka
+  pułapki float) — w tym `orzeczenia-sadowe-v2` przeszedł 2.9 → **"2.10"**, czyli
+  dokładnie przez próg, na którym niecytowana wartość parsuje się jako 2.1.
+
+---
+
+## AUDYT-2026-08-23h — F-111 ZAMKNIĘTA: podział PRAWO-HARDGATE.md (wariant B, decyzja użytkownika)
+
+**Wyzwalacz:** użytkownik wskazał flagę („F-111"), następnie wybrał wariant B z
+trzech przedstawionych. ZASADA 11 — audyt skilla współdzielonego, nie mapy Dz.U.
+
+**Zgłoszenie wg ZASADY 14** (status / źródło / reprodukcja):
+- **STATUS:** ✅ [VER: pomiar na drzewie `/mnt/skills/user`, 2026-08-23h] —
+  ustalenia o własnym korpusie, weryfikowalne bezpośrednio.
+- **ŹRÓDŁO:** `shared/PRAWO-HARDGATE.md` (967 l. przed podziałem), w. 1-90
+  (historia), w. 91 (pierwsza norma), w. 516-887 i 902-967 (treść orzecznicza).
+- **REPRODUKCJA:** `wc -l shared/PRAWO-HARDGATE.md` ·
+  `grep -rl "PRAWO-HARDGATE" --include=*.md /mnt/skills/user | wc -l` → 114 ·
+  `grep -ro "PRAWO-HARDGATE\.md" --include=*.md /mnt/skills/user | wc -l` → 212.
+
+---
+
+### Pomiar przed decyzją — dwie rzeczy, których flaga nie odnotowała
+
+**(1) Plik urósł o 159 linii od otwarcia flagi:** 808 → **967**. Doszły v2.5
+(KOTWICA, sekwencja B-1/B-2), v2.6 (BRAMKA ANTY-FASADOWA) i KROK 2C (F-120). Do
+progu ZASADY 13 zostały **33 linie** — najbliższa większa zmiana przekroczyłaby
+go sama z siebie, niezależnie od tej flagi.
+
+**(2) ⭐ 88 linii changelogu stało POWYŻEJ pierwszej normy.** Wiersze 3-90 to były
+opisy wersji 2.0-2.6; `⛔ HARD GATE — BEZWZGLĘDNY` zaczynał się dopiero w w. 91,
+`## ZASADA ABSOLUTNA` w w. 103. Każdy ze 114 plików odsyłających do
+najczęściej wczytywanej bramki systemu czytał historię wersji, ZANIM dotarł do
+zakazu. Naruszenie ZASADY 15 w pliku o największym zasięgu — i jedyna zmiana,
+która była korzystna bez względu na wybrany wariant.
+
+**Skala ścieżki wczytania:** 114 plików, 212 wystąpień, 26 skilli. Flaga mówiła
+o „kilkudziesięciu miejscach" — jest ich trzykrotnie więcej.
+
+---
+
+### Warianty przedstawione użytkownikowi i wybór
+
+| Wariant | Rdzeń | Nowe ścieżki wczytania |
+|---|---|---|
+| A — pełny podział wg flagi | ~440 | kilka, warunkowych |
+| **B — historia + procedura orzecznicza (WYBRANY)** | ~620 (faktycznie 501) | **jedna**, wyzwalacz binarny |
+| C — bez podziału, tylko historia | 879 | zero |
+
+Rekomendacja sesji brzmiała B i została przyjęta. Uzasadnienie: wariant A daje
+mniejszy rdzeń, ale rozbija plik na kilka ścieżek warunkowych, a każda warunkowa
+ścieżka to nowa okazja do niewczytania — przy zysku, którego nikt nie zmierzył.
+
+---
+
+### Wykonanie
+
+**Granica podziału przebiega tam, gdzie wyzwalacz:** *czy w tekście ma stanąć
+sygnatura*. Do `shared/PRAWO-HARDGATE-ORZECZENIA.md` (464 l.) przeniesiono:
+procedurę przed każdym orzeczeniem (bramka WTÓRNE-ŹRÓDŁO-STOP, KROK 5A,
+KOTWICA-TEKSTOWA KT-1→KT-4), KROK 5B (wyroki TK 2024-2026), postępowanie przy
+nieudanej weryfikacji sygnatury, KROK DODATKOWY (warstwy uzasadnienia
+[1]/[2]/[3]) oraz SELF-CHECK przed odpowiedzią z orzecznictwem.
+
+⚠️ **Odstępstwo od liczby zapowiedzianej użytkownikowi — świadome i odnotowane.**
+Wariant B przedstawiono z szacunkiem rdzenia ~620 l. (miała przenieść się sama
+procedura orzecznicza, 261 l.). Po obejrzeniu treści przeniesiono dodatkowo KROK
+DODATKOWY (111 l.) i self-check orzeczniczy (66 l.), bo oba dotyczą wyłącznie
+uzasadnień sądowych, a pozycje self-checku odsyłają WPROST do KROKU DODATKOWEGO.
+Rozdzielenie ich między dwa pliki byłoby gorsze niż jeden większy załącznik.
+Wynik: rdzeń **501 l.**, załącznik **464 l.**
+
+**Wyzwalacz jest BINARNY, nie ocenny** — „ma paść sygnatura → wczytaj", nie „gdy
+potrzebujesz procedury szczegółowej". Sformułowanie ocenne odtworzyłoby dokładnie
+mechanizm awarii z pilotażu LEX MACHINA (trzy z czterech usterek to reguła
+istniejąca i pominięta). W rdzeniu dodano też spis zawartości załącznika, żeby
+nie trzeba było go otwierać w celu ustalenia, czy warto go otwierać.
+
+**Kontrola kompletności podziału:**
+- suma segmentów **967 = 967** oryginału (zero linii zgubionych),
+- wszystkie **18 nagłówków** oryginału obecne w nowych plikach,
+- normy stałe (ZASADA ABSOLUTNA, PERMANENT GATE, ANTY-FASADA, KOTWICA URZĘDOWA,
+  KROK 2C) potwierdzone grepem jako pozostałe w RDZENIU.
+
+**Rejestracja (REGUŁA 2):** nowy plik wpisany do `shared/SKILL.md` (tabela
+„Zawartość katalogu" + blok wywołań `view`) oraz do `shared/DEPENDENCY-GRAPH.md`.
+`shared` 3.19 → 3.20.
+
+⚠️ **Ścieżki zewnętrzne NIE wymagały zmiany** — plik nadrzędny zachował nazwę,
+więc wszystkie 212 odesłań w 114 plikach pozostają poprawne. To była główna
+przewaga wariantu B nad A i główny powód rekomendacji.
+
+---
+
+### ⛔ Ryzyko wprowadzone tym podziałem — zapisane w PLIKACH, nie tylko tutaj
+
+Do 2026-08-23h procedura orzecznicza była w pliku i czytało się ją mimowolnie.
+Po podziale wymaga świadomego kroku: **zamieniamy tryb awarii „reguła przeczytana
+i pominięta" na „reguła niewczytana".** Nie jest oczywiste, że to poprawa, i nie
+zostało zmierzone. Ostrzeżenie w tym brzmieniu stoi w sekcji wyzwalacza w rdzeniu
+ORAZ w nagłówku załącznika — nie wyłącznie w dzienniku, bo dziennika nikt nie
+czyta w toku pracy.
+
+**Pomiar należy do F-113** (test z grupą kontrolną). Do tego czasu obowiązuje
+ta sama ostrożność co wobec pozostałych bramek sesji 2026-08-23: obecność reguły
+w pliku dowodzi obecności reguły, nie zmiany zachowania.
+
+### Skutek dla innych flag
+
+**F-115 ODBLOKOWANA.** Warunek zapisany w tamtej fladze („jeśli podział nastąpi,
+self-check anty-fasadowy musi trafić do RDZENIA") jest spełniony — blok BRAMKA
+ANTY-FASADOWA wraz z linią self-checku został w `PRAWO-HARDGATE.md`. Propagacja
+do `orzeczenia-sadowe-v2` i `analizator-przepisow-v2` (priorytet P1) może ruszyć
+bez ryzyka dwukrotnej zmiany ścieżki wczytania. ⚠️ Wzorzec do wołania pochodzi
+od teraz z RDZENIA — nie z załącznika.
+
+**F-111 pozostaje przesłanką dla ZASADY 13:** rdzeń 501 l. i załącznik 464 l. są
+oba wygodnie poniżej progu 1000, więc bariera długości nie wróci przy najbliższych
+kilku wersjach.
+
+---
+
+## AUDYT-2026-08-23g — TRYB WARN-CLOSE: F-121, F-122, F-123 zamknięte; F-124 i F-125 otwarte i naprawione
+
+**Wyzwalacz:** polecenie użytkownika — „rozpocznij pracę nad WARN otwarte,
+wydawaj skille zgodnie z Regułą 7, jeśli konieczne synchronizuj akty prawne
+w modułach DR i mapach". Tryb: WARN-CLOSE. Wybór zakresu: flagi wykonalne
+BEZ decyzji użytkownika (F-115 zablokowana przez F-111, F-83 i F-111 czekają
+na rozstrzygnięcie, F-113 z założenia wykonywana na końcu).
+
+**Skille dotknięte (4 dostawy, ZASADA 7 KROK 0):** `audyt-systemu-v4`,
+`przesluchanie-swiadkow-v2-min90`, `raport-sytuacyjny-v2` (2.6→2.7),
+`prawo-polskie-v2` (6.1→6.2), `przesluchanie-swiadkow` (3.22→3.23).
+
+---
+
+### F-121 ZAMKNIĘTA — bramka wyjściowa zgłoszenia audytowego
+
+Dodano **ZASADĘ 14 (AUDIT-CLAIM-GATE)** do `SKILL.md`: żadne zgłoszenie nie
+opuszcza skilla jako TWIERDZENIE bez trzech pól — (1) STATUS wg rejestru w
+`shared/PRAWO-HARDGATE.md`, (2) IDENTYFIKATOR ŹRÓDŁA (plik + linia, numer Dz.U.
++ artykuł albo URL z datą), (3) REPRODUKCJA (polecenie, którym druga osoba
+odtworzy ustalenie). Dodano zakaz szczególny: **kwalifikacja cudzego błędu**
+(„halucynacja", „awaria infrastruktury") opisuje PRZYCZYNĘ, która nie jest
+obserwowalna z zewnątrz — zgłaszaj OBJAW, hipotezę przyczyny osobno i osobno
+oznaczoną. To bezpośrednia odpowiedź na trzecią z obalonych diagnoz z TEST1 §5.2
+(`ROBOTS_DISALLOWED` zakwalifikowany jako „błąd krytyczny infrastruktury").
+
+**Odpowiedź na pytanie z kryterium zamknięcia** („czy `FORMAT-RAPORTU-ROZNIC.md`
+wymusza te pola"): **NIE wymuszał** — plik opisywał wyłącznie sposób czytania
+tabeli, nie wymagania wobec twierdzeń budowanych na jej podstawie. Dopisano § 4
+z tabelą trzech pól i jawnym zastrzeżeniem, że wiersz `Akcja sugerowana` z
+raportu jest heurystyką skryptu, nie ustaleniem.
+
+⚠️ **Ograniczenie zapisane w samej zasadzie:** bramka wykrywa BRAK pola, nie
+fałsz jego treści. Pole `ŹRÓDŁO` wypełnione identyfikatorem, którego nikt nie
+otworzył, przechodzi — to fasada tej samej klasy co usterka `VER` w TEST2.
+Pomiar skuteczności należy do **F-113**.
+
+---
+
+### F-122 ZAMKNIĘTA — FUNDAMENT-A w BLOKU A (przesluchanie-swiadkow 3.23)
+
+Weryfikacja przesłanki flagi (⚠️ „sprawdzić najpierw `shared/MOD-ATAK-NA-SWIADKA.md`"):
+moduł **pokrywa** siatkę pojęć — SW-P1 (relacja ze stronami), SW-P3 (kategorie
+źródła wiedzy: BEZPOŚREDNIE / Z RELACJI / WNIOSKOWANE / DOMYSŁ), SW-A1 (konflikt
+interesu), SW-A6 (upływ czasu). Naprawą było zatem **ODESŁANIE**, nie druga kopia
+treści — zgodnie z rekomendacją flagi i CHECKLIST-DEDUP.
+
+Przyczyna luki ustalona precyzyjnie: BLOK A opisywał te obszary jako „przykładowe
+obszary (dobierz do danych z W1)" — czyli jako materiał do wyboru. Bez wywołania
+w prompcie nie powstawały, co tłumaczy, dlaczego luka wystąpiła w OBU wersjach
+porównywanych w TEST3.
+
+Wprowadzono blok `FUNDAMENT-A` z czterema elementami obowiązkowymi (A-1 relacja
+ze stronami — dziś ORAZ w dacie zdarzenia; A-2 interes w wyniku, w tym interes
+NEGATYWNY; A-3 źródło wiedzy per twierdzenie, nie zbiorczo dla świadka; A-4
+warunki obserwacji, obowiązkowe dla świadka typu 2) oraz kontrolę na wyjściu
+(znaczniki ✔/✖ per świadek, przy ✖ jednozdaniowa przyczyna).
+
+Dodano jawne ostrzeżenie o **RÓŻNICY KIERUNKU**: `MOD-ATAK-NA-SWIADKA` analizuje
+zeznanie JUŻ ZŁOŻONE, BLOK A buduje pytania PRZED zeznaniem — ta sama siatka
+pojęć, przeciwny kierunek. Zakaz przenoszenia formuł „Technika pisma" z SW-A1 do
+listy pytań (kolizja z QUESTION-ADMISSIBILITY-GATE, zakaz pytań sugestywnych).
+`MOD-ATAK-NA-SWIADKA` dopisany do `dependencies.required`.
+
+⚠️ Kontrola na wyjściu jest **samo-raportująca** — ✔ dowodzi deklaracji pokrycia,
+nie obecności pytania w liście. Odnotowane w treści skilla, nie tylko tutaj.
+
+---
+
+### F-123 ZAMKNIĘTA — dwa różne rozstrzygnięcia dla dwóch skilli
+
+**`raport-sytuacyjny-v2` (2.7):** dodano HARD GATE odsyłający do
+`shared/PRAWO-HARDGATE.md` przed wpisaniem do blueprintu jakiegokolwiek przepisu,
+terminu, sygnatury lub skutku procesowego. Uzasadnienie zapisane w skillu: widget
+jest **ostatnim ogniwem przed odbiorcą** — co przejdzie tutaj, nie ma już żadnej
+kolejnej kontroli. Dodano rozróżnienie **dwóch niezależnych osi statusu**:
+klasyfikacja A–E ocenia źródło FAKTU w aktach, statusy PRAWO-HARDGATE oceniają
+źródło TWIERDZENIA O PRAWIE; ustalenie ze statusem `A` może stać obok
+niezweryfikowanego przepisu. Bez tego rozróżnienia istniejąca tabela A–E
+sprawiała wrażenie, że kwestia statusów jest w tym skillu już obsłużona.
+
+**`prawo-polskie-v2` (6.2):** decyzja zapisana jako **rozdzielna**, wbrew
+sformułowaniu flagi („czysta fasada routingu, bramka niepotrzebna"). Powód
+odejścia od tego sformułowania: `ROUTING-MAP.md` **nie jest** czystą fasadą —
+nosi numery Dz.U., roczniki i statusy t.j., czyli weryfikowalne twierdzenia o
+stanie prawnym, a błędny numer propaguje się w każdą sprawę przechodzącą przez
+routing (klasa F-82). Rozstrzygnięcie: `SKILL.md` — bramka nie obowiązuje;
+`ROUTING-MAP.md` — reżim mapy (FAZA 3 A–D + ZASADA 8 + REGUŁA 3). Dopisano
+wyzwalacz wygaśnięcia decyzji: pierwsze twierdzenie o TREŚCI prawa w którymkolwiek
+pliku przywraca obowiązek bramki.
+
+⚠️ **Do potwierdzenia przez użytkownika** — decyzja o zakresie bramki jest
+decyzją projektową, a zapisano ją z inicjatywy sesji. Zapisanie było konieczne
+(bez niego `grep` zgłaszałby to samo przy każdym audycie), ale użytkownik może
+ją zmienić; wtedy zmiana idzie do `prawo-polskie-v2/references/CHANGELOG.md`.
+
+---
+
+### F-124 — OTWARTA I ZAMKNIĘTA W TEJ SAMEJ SESJI (bez wiersza w rejestrze, ZASADA 10)
+
+Wykryta przy KROKU 1 ZASADY 7 (liczenie plików przed edycją) — czyli wyłącznie
+dlatego, że łańcuch dostawy wymusza policzenie plików. **Trzeci nawrót wzorca
+F-80**, patrz nowa obserwacja O-4.
+
+| Znalezisko | Reprodukcja |
+|---|---|
+| `references/CHANGELOG.md` — plik-sierota poza YAML, mimo że ZASADA 15 czyni go JEDYNĄ lokalizacją kanoniczną historii i mimo że drzewo STRUKTURA KATALOGU już go wymieniało | `sed -n '/^references:/,/^scripts:/p' SKILL.md \| grep -c CHANGELOG` → 0 |
+| `references/F-104-lista-robocza-roczniki-starsze.md` — j.w. | j.w. |
+| drzewo deklarowało `53 pliki` przy 55 na dysku i `16 skryptów` przy 18; pomijało `README.md` w korzeniu | `find . -type f \| wc -l` → 55 |
+| ⭐ **wariant ODWROTNY, na który nie patrzy żaden test:** `raport-sytuacyjny-v2` obiecywał w drzewie `assets/RaportSytuacyjnyWidget.html`, którego na dysku NIE MA — rejestr wyprzedzał dysk | `find raport-sytuacyjny-v2 -type f` → 1 plik |
+
+Wszystko naprawione w tej samej sesji: YAML uzupełniony o 2 pliki, drzewa obu
+skilli doprowadzone do stanu faktycznego, martwe odesłanie do `assets/` usunięte
+wraz z wyjaśnieniem, skąd widget faktycznie się bierze.
+
+---
+
+### F-125 OTWARTA — ślepota parserów T11/T3 na notację LEX (parser naprawiony)
+
+⛔ **Znalezisko najpoważniejsze w tej sesji, bo to fałszywy NEGATYW, nie fałszywy alarm.**
+
+Zgłoszenie wg ZASADY 14 (pola: status / źródło / reprodukcja):
+- **STATUS:** ✅ [VER: kod źródłowy testów + przebieg kontrolny, 2026-08-23g] —
+  ustalenie o zachowaniu WŁASNEGO kodu, weryfikowalne bezpośrednio, nie wymaga
+  źródła prawnego.
+- **ŹRÓDŁO:** `scripts/check_sync_aktow.py` w. 56-79 (`RE_POZ` + `artefakt()`),
+  `scripts/test_cross_map_dzu.py` w. 65 (`DZU_PATTERN`).
+- **REPRODUKCJA:** `grep -roE "Dz\.U\.[0-9]{4}\.0\.[0-9]+" --include=*.md /mnt/skills/user | wc -l`
+  → **95 wystąpień**.
+
+**Mechanizm:** notacja LEX `Dz.U.RRRR.NN.PPPP` (środkowy człon = numer dziennika,
+dla aktów po 2012 r. zawsze `0`). `RE_POZ` rozbierał `Dz.U.2026.0.468` na
+`("2026", "0")` — czyli na artefakt, który funkcja `artefakt()` po cichu
+odrzucała. **Prawdziwa pozycja (468) nigdy nie trafiała do porównania.** T3 nie
+łapał tej notacji w ogóle (wymaga literalnego `poz.`). Skutek: akt obecny w
+jednym rejestrze i nieobecny w drugim był NIEWYKRYWALNY, jeżeli którykolwiek
+rejestr zapisał go w tej notacji. Ślepy punkt był w kodzie testu, który sam ma
+pilnować spójności rejestrów.
+
+**Naprawa:** funkcja `normalizuj()` (`Dz.U.RRRR.NN.PPPP` → `Dz.U. RRRR poz. PPPP`)
+wołana PRZED dopasowaniem w obu testach. Obsługuje też starą notację z niezerowym
+numerem dziennika (`Dz.U.2000.94.1037` → poz. 1037).
+
+⚠️ **Przy pierwszym podejściu patch w T3 został DODANY, ale NIE WPIĘTY** —
+`normalizuj()` istniała, a pętla nadal wołała `DZU_PATTERN.search(line)` na
+surowej linii. Wykryte dopiero przy weryfikacji (`grep -n DZU_PATTERN`). To
+dokładnie ta klasa pozornej naprawy, przed którą ostrzega F-113: obecność reguły
+w pliku ≠ zmiana zachowania.
+
+**Pomiar kontrolny (przed = `/mnt/skills/user`, po = drzewo robocze):**
+
+| Test | Przed | Po |
+|---|---|---|
+| T11 (`check_sync_aktow.py`) | WARN — 143 pozycje | WARN — **140** pozycji |
+| T3 (`test_cross_map_dzu.py`) | WARN — 8 rozbieżności | WARN — 8 rozbieżności |
+
+Test jednostkowy normalizacji: 5/5 próbek, zero artefaktów `poz. 0` po
+normalizacji. T3 bez zmiany liczby — notacja LEX stała się widoczna, ale nie
+ujawniła nowej rozbieżności w tym korpusie; wartość naprawy jest tu prewencyjna.
+
+**POZOSTAJE (wiersz w rejestrze):** (1) przegląd 3 pozycji, które zmieniły status
+w T11; (2) **decyzja użytkownika** — ujednolicić notację w korpusie (95 wystąpień)
+czy trwale utrzymywać dwie i wymagać obsługi obu w każdym przyszłym narzędziu.
+
+---
+
+### Synchronizacja aktów prawnych — odpowiedź na drugą część polecenia
+
+Żadna z napraw tej sesji nie dotyka treści aktów, więc **nie wymagała**
+synchronizacji `MAPA-AKTOW.md` / `ROUTING-MAP.md` / mapy centralnej (REGUŁA 3
+bez zastosowania — zero nowych ani usuniętych modułów DR).
+
+T11 raportuje 140 pozycji do przeglądu — to **istniejący, otwarty zakres F-104
+i F-106**, nie nowe odkrycie tej sesji. ⛔ Świadomie NIE ruszony: ZASADA 8 wymaga
+weryfikacji Rząd 1 → 2 **per akt**, a `web_fetch` na ISAP zwraca
+`ROBOTS_DISALLOWED` (bariera F-8, potwierdzona jako bieżąca 2026-08-23e).
+Wpisanie transzy numerów bez weryfikacji byłoby naruszeniem ZASADY 3 („mapa
+aktualizowana tylko gdy potwierdzone zmiany online — nie spekuluj").
+
+### FAZA 0C — zadanie cykliczne
+
+Nie proponowano: brak w kontekście potwierdzenia, że sesja toczy się w Cowork
+oraz że użytkownik nie ma jeszcze zadania „Cotygodniowa weryfikacja ISAP"
+(warunku 2 nie wolno zgadywać). F-83 pozostaje otwarta, więc blok § 3
+`SCHEDULED-TASK-COWORK.md` i tak byłby pominięty.
+
+---
+
 ## AUDYT-2026-08-23 — naprawa przyczyn testów 3 i 5 pilotażu LEX MACHINA + otwarcie F-108
 
 **Wyzwalacz:** analiza przyczyn dwóch usterek pilotażu. Ustalenie kluczowe —
@@ -55570,3 +55957,1816 @@ nieistnienia"), nie została zastosowana do własnego systemu.
 **Flagi otwarte:** F-113 (wysoki, test regresyjny z grupą kontrolną),
 F-114 (średni, weryfikacja 113³/113⁴ w module KRO).
 **Kolejny wolny numer: F-115.**
+
+---
+
+## AUDYT-2026-08-23e — meta-analiza testów zewnętrznych TEST1–TEST3, otwarcie F-115…F-123
+
+**Materiał wejściowy:** trzy raporty zewnętrzne porównujące `Lex Machina for Codex`
+z wersją na Claude.ai, kazusy fikcyjne i zanonimizowane:
+- TEST1 — prawo konsumenckie, odstąpienie od umowy zawartej na odległość
+- TEST2 — prawo pracy, wypowiedzenie przesłane e-mailem
+- TEST3 — usługa budowlana, spór o przeciek, dwóch świadków
+
+Kontrola krzyżowa raportów przeciw plikom systemu (`shared/PRAWO-HARDGATE.md`,
+`shared/TEMPORAL-LAW-CHECK.md`, grep propagacji bramek po całym drzewie).
+
+### 1. USTALENIE NADRZĘDNE — testy mierzą nieistniejącą specyfikację
+
+Wszystkie trzy prompty testowe narzucają modelowi kontrakt
+`VER / MEM / NIEWERYFIKOWANE` i wystawiają PASS/FAIL wobec zgodności z nim.
+**System takiego kontraktu nie ma.** AF-4 w `PRAWO-HARDGATE.md` v2.6 zakazuje
+oznaczania pamięci modelu jakąkolwiek etykietą, ze skrótem `MEM` wymienionym
+wprost; propozycja zewnętrzna LM-K2-01 dopuszczająca `MEM` została w tym punkcie
+ODRZUCONA (por. wpis AUDYT-2026-08-23d, blok SPROSTOWANIE).
+
+Kanoniczny rejestr statusów: `✅ [VER]`, `🟢 [VER-TREŚĆ]`, `🟡 [KOTWICA-URZĘDOWA]`,
+`⚠️ [NIEWERYFIKOWANE]`, `🎯 [CEL — NIEOTWARTE]`.
+
+Skutek dla punktacji w raportach:
+
+| Ocena z raportu | Co faktycznie zmierzono |
+|---|---|
+| TEST2 / CL-01: „FAIL K2 — łączono `MEM` i `NIEWERYFIKOWANE`" | zgodność ze specyfikacją, której system nie posiada |
+| TEST1: „Codex nie użył `MEM`" jako przewaga portu | zachowanie WYMAGANE przez AF-4 — zgodność z hardgate, nie przewaga |
+| TEST1: „Claude użył `MEM` dla art. 111 k.c." | naruszenie AF-4 — ale WYMUSZONE treścią promptu |
+| TEST3 / CX-02: „`MEM` przypisany pytaniom do świadków" | zakazana etykieta na treści niebędącej twierdzeniem o prawie |
+
+→ **F-116**, priorytet przed pozostałymi flagami tej sesji.
+
+### 2. Pomiary wykonane 2026-08-23
+
+- `grep -rl ANTY-FASADA` → **7 plików** wobec deklaracji „propagowana do wszystkich
+  skilli" w `PRAWO-HARDGATE.md` w. ~291. Trafienia: `analizator-dowodow-v3`,
+  `prawny-router-v3/references/SELF-CHECK.md`, `pisma-proste-v2`,
+  `analiza-sadowa-v6`, `przewodnik-prawny-v2`,
+  `pisma-procesowe-v3/references/SELF-CHECK-PISMA.md`, `analizator-umow-v1`.
+  **BRAK w `orzeczenia-sadowe-v2` i `analizator-przepisow-v2`** — dwóch skillach,
+  które cytują przepisy i orzeczenia najczęściej. → **F-115**
+- `grep -rl PRAWO-HARDGATE` → **0 odesłań** w `raport-sytuacyjny-v2`
+  i `prawo-polskie-v2`. Pierwszy renderuje użytkownikowi końcowemu widget
+  z twierdzeniami o prawie poza zasięgiem bramki. → **F-123**
+- `shared/TEMPORAL-LAW-CHECK.md` — **36 linii**, brak wymuszenia sprawdzenia
+  aktów zmieniających opublikowanych PO dacie tekstu jednolitego. → **F-120**
+- `web_fetch` na `https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.html`
+  → `ROBOTS_DISALLOWED`. Bariera z F-8/F-10/F-88/F-91/F-92 potwierdzona jako
+  BIEŻĄCA, nie historyczna. Dopisane do wiersza F-8.
+
+### 3. Flagi otwarte w tej sesji
+
+| Flaga | Waga | Przedmiot |
+|---|---|---|
+| F-115 | wysoki | self-check anty-fasadowy nie jest propagowany (7 z ~25 plików) |
+| F-116 | wysoki | testy zewnętrzne oceniają system wobec nieistniejącego kontraktu statusów |
+| F-117 | średni | brak reguły o ZAKRESIE znaczników — treść generowana dostaje status źródła |
+| F-118 | średni | brak minimalnego zestawu pól identyfikatora (przechodzą pseudoidentyfikatory `ISAP-KC`) |
+| F-119 | średni | brak jawnego śladu routingu `ROUTER-WCZYTANY: TAK/NIE` |
+| F-120 | średni | krok AKTUALNOŚCI nie jest bramką |
+| F-121 | średni | skill audytowy nie stosuje wobec siebie kontraktu, którego pilnuje |
+| F-122 | niski | brak bloku pytań o relację świadka ze stronami i źródło wiedzy |
+| F-123 | średni | dwa skille bez odesłania do hardgate |
+
+### 4. Aktualizacje flag istniejących
+
+- **F-113** — zakres rozszerzony o cztery dalsze wady projektu testu:
+  komórki środowiskowe `T0`/`T1`/`T2` z zakazem punktowania braku routingu w `T0`;
+  ślepa ocena surowych transkryptów z losowanymi etykietami wersji;
+  pozycje-pułapki jako bezpośredni pomiar halucynacji; rejestracja wersji modelu
+  i hasha manifestu. Powód: obecne prompty łączą „zakaz narzędzi plikowych"
+  z „wykonaj routing", co jest niewykonalne — router jest plikiem — a skutek jest
+  punktowany jako uchybienie systemu. **System był karany za wykonanie polecenia.**
+- **F-111** — priorytet średni → **wysoki**. Przesłanka behawioralna: ta sama
+  bramka dała DWA PRZECIWNE tryby awarii na dwóch kazusach — fasada weryfikacji
+  w TEST2 (deklaracja + URL + data bez otwarcia aktu) oraz całkowity brak `VER`
+  bez wyjaśnienia w TEST3. Niedeterminizm odpalania, nie brak reguły.
+  F-111 BLOKUJE F-115: propagacja self-checku przed decyzją o podziale HARDGATE
+  zmieniłaby ścieżkę wczytania dwa razy.
+- **F-110** — potwierdzona niezależnie w audycie zewnętrznym (TEST1 sekcja 6).
+  Wykonać w JEDNEJ sesji z F-116 i F-118 — trzy flagi dotykają tego samego rejestru.
+- **F-8** — dopisany dowód aktualności bariery `ROBOTS_DISALLOWED`.
+
+### 5. Ustalenie negatywne (istotne)
+
+Nie potwierdzono **żadnego** błędu behawioralnego właściwego WYŁĄCZNIE dla portu
+Codex. Różnice punktowane w TEST1 jako „przewaga Codex" (weryfikacja urzędowa,
+art. 111 k.c., wykrycie nowelizacji Dz.U. 2025 poz. 1172) wynikają w większości
+z tego, że jedno środowisko miało dostęp do sieci, a drugie nie. Dwa z trzech
+raportów zestawiają surowy output jednej wersji z SAMOOCENĄ drugiej — liczby
+błędów („10 vs 6") nie są porównywalne: inny sędzia, inna granulacja, inna
+motywacja. Cel „równoważność portu" jest niefalsyfikowalny dla dwóch różnych
+modeli bazowych; wykonalny cel to kontrakt behawioralny + zestaw zgodności
+z progami mierzalnymi.
+
+### 6. Zgłoszenia świadomie NIEPRZYJĘTE
+
+| Zgłoszenie | Powód |
+|---|---|
+| `DR-09`/Prawo budowlane pominięte w routingu (TEST3 B-03, S-01) | hipoteza architektoniczna audytu, nie naruszenie polecenia — najpierw zapis wymagania w specyfikacji routera, dopiero potem test |
+| Brak pytania o perspektywę E/F (TEST3 M-03) | poprawa strategii, nie błąd bramki; kandydat na usprawnienie `przewodnik-prawny-v2` |
+| „30 dni" jako halucynacja; niejednoznaczny status niedzieli (TEST1 §5.2) | fałszywe alarmy — obalone; przyczyna zgłoszona jako F-121 |
+| `ROBOTS_DISALLOWED` jako „błąd krytyczny infrastruktury LM" | zbyt szeroka kwalifikacja; zjawisko realne, mieści się w F-8/F-10 i KOTWICY URZĘDOWEJ |
+| CRLF/LF w walidatorze manifestu (TEST2 CX-01) | naprawione i zweryfikowane — nie otwierać ponownie |
+
+### 7. Kolejność wdrożenia
+
+```
+SESJA 1 (statusy — ŁĄCZNIE): F-116 → F-110 → F-118
+        trzy pliki naraz: KARTA-STATUSOW.md, PRAWO-HARDGATE.md, WERYFIKACJA-SLAD.md
+SESJA 2 (decyzja użytkownika, BLOKUJE): F-111 → dopiero potem F-115
+SESJA 3 (niezależne): F-117 | F-119 | F-120 | F-121 | F-122 | F-123
+SESJA 4 (na końcu, projektowana na początku): F-113
+```
+
+### 8. ZASADA 7 — faktycznie użyta kolejność (wymóg F-112)
+
+F-112 pozostaje otwarta, więc zgodnie z jej treścią dostawa opisuje kolejność
+rzeczywistą: **KROK 1 pomiar (54 pliki) → edycja drzewa żywego
+`/mnt/skills/user/audyt-systemu-v4` → kopia do `/home/claude/full_skills/`
+→ KROK 4 pomiar → KROK 5 zip → KROK 4b `diff -rq` (pusty)**. Ta sama kolejność
+co w sesjach 2026-08-23 i 2026-08-23c. Uzasadnienie: KROK 4b wymaga zgodności
+archiwum z drzewem żywym, co przy edycji wyłącznie na kopii jest niespełnialne.
+
+**Pliki zmienione w tej sesji:** `references/WARN-OTWARTE.md`,
+`references/AUDIT-JOURNAL.md` (ten wpis). Zmian w innych skillach: BRAK —
+sesja analityczna, naprawy F-115…F-123 pozostają DO WYKONANIA.
+
+**Licznik:** 19 → **28** flag F- otwartych. Kolejny wolny numer: **F-124**.
+
+## AUDYT-2026-08-23f — F-110 częściowe zamknięcie (kolizja symbolu 🟡/🟨)
+
+### 1. Zakres wykonany
+
+Naprawiono kolizję symbolu `🟡` między `shared/PRAWO-HARDGATE.md`
+(status źródła przepisu — KOTWICA URZĘDOWA) i pozostałymi rejestrami
+statusów w systemie. Metoda: KOTWICA URZĘDOWA przeniesiona na nowy,
+niezajęty symbol `🟨` (zweryfikowano brak wcześniejszego użycia w całym
+`shared/` przed edycją — `grep -rl "🟨"` zwrócił zero trafień).
+
+**Baseline przed edycją:** 29 wystąpień `🟡` łącznie w 11 plikach kodu
+skilli mających choćby jedno wystąpienie frazy KOTWICA-URZĘDOWA.
+
+**Ustalenie kluczowe (F-110 zaniżyła własny zakres):** flaga mówiła
+„shared (3 pliki)"; rzeczywisty zasięg duplikacji frazy `🟡 [KOTWICA-URZĘDOWA]`
+to **11 plików aktywnego kodu** w 8 różnych skillach, nie 3:
+`shared/PRAWO-HARDGATE.md`, `shared/HIERARCHIA-ZRODEL.md`, `shared/SKILL.md`,
+`shared/MOD-GENERATOR-AKTU.md`, `analizator-dowodow-v3/SKILL.md`,
+`prawny-router-v3/references/SELF-CHECK.md`, `pisma-proste-v2/SKILL.md`,
+`analiza-sadowa-v6/SKILL.md`, `przewodnik-prawny-v2/SKILL.md`,
+`pisma-procesowe-v3/references/SELF-CHECK-PISMA.md`, `analizator-umow-v1/SKILL.md`.
+Dodatkowo 2 rejestry audytowe referowały symbol opisowo:
+`WARN-OTWARTE.md` (F-110, F-120), `F-108-lista-MS-egzamin-2026.md`.
+
+**Ustalenie krytyczne przed edycją (uniknięto błędu hurtowej podmiany):**
+w 5 z 11 plików `🟡` ma DODATKOWO lokalne, niezwiązane znaczenie —
+podmiana `sed`-em po samym emoji byłaby błędem:
+- `analizator-dowodow-v3/SKILL.md` — skala priorytetów ryzyka `🔴/🟠/🟡/🟢` (2 wystąpienia, NIETKNIĘTE)
+- `analizator-umow-v1/SKILL.md` — skala triage `🟢/🟡/🔴` (3 wystąpienia, NIETKNIĘTE)
+- `pisma-proste-v2/SKILL.md` — skala braków `🔴/🟡/🔵` (1 wystąpienie, NIETKNIĘTE)
+- `przewodnik-prawny-v2/SKILL.md` — oznaczenie pilności terminu (1 wystąpienie, NIETKNIĘTE)
+- `shared/MOD-GENERATOR-AKTU.md` — skala pokrycia `🟢/🟡/🔴/⚪` (1 wystąpienie, NIETKNIĘTE)
+
+Edycja wykonana wyłącznie `str_replace` po pełnej frazie zawierającej
+`KOTWICA-URZĘDOWA` lub jednoznacznym kontekście linii — nigdy globalnym
+zamiennikiem po samym symbolu. Weryfikacja post-edycji: 0 pozostałych
+`🟡 KOTWICA` w 11 plikach; wszystkie 8 lokalnych alternatywnych znaczeń
+zachowane w niezmienionej liczbie; 21 nowych `🟨` (6+4+1+2+1+1+1+1+1+2+1).
+
+Dodatkowo: `WERYFIKACJA-SLAD.md` (plik trzeci, prowadzący WŁASNY rejestr
+statusów, wcześniej nieświadomy KOTWICY) dostał jawny odsyłacz — jedno
+zdanie wskazujące, że `🟨 [KOTWICA-URZĘDOWA]` jest zdefiniowana
+w `PRAWO-HARDGATE.md` i ma być przenoszona bez zmian, z zachowaniem
+hierarchii ważności `✅ > 🟨 > ⚠️ > ⬛`. Brak duplikacji treści definicji.
+
+### 2. Zakres CELOWO NIEWYKONANY — decyzja użytkownika 2026-08-23f
+
+Użytkownik zapytał wprost o scalenie trzech systemów weryfikacji
+(HARDGATE / WERYFIKACJA-SLAD / HYBRID-VALIDATION) w jeden. Rekomendacja
+przedstawiona i zaakceptowana: **NIE scalać HYBRID-VALIDATION.md**
+z pozostałymi dwoma. Uzasadnienie zapisane w rozmowie: `🟡 ISTOTNY`
+w HYBRID-VALIDATION ocenia inny wymiar (kompletność formalna pisma),
+nie źródło przepisu — scalenie zmusiłoby czytelnika do rozszyfrowywania
+kontekstowego znaczenia symbolu, co jest pogorszeniem, nie poprawą.
+`HYBRID-VALIDATION.md` § 1.2 pozostaje NIETKNIĘTY.
+
+**Odstępstwo od zaplanowanej kolejności w Sekcji 7 (AUDYT-2026-08-23e):**
+tamten wpis zalecał `F-116 → F-110 → F-118` wykonane ŁĄCZNIE, jedną sesją,
+trzy pliki naraz (w tym nowy `KARTA-STATUSOW.md`). Ta sesja wykonała
+WYŁĄCZNIE wąski rdzeń F-110 (kolizja symbolu + brak wiedzy WERYFIKACJA-SLAD
+o KOTWICY), świadomie ODKŁADAJĄC F-116 (nowa karta kanoniczna) i F-118
+(pola identyfikatora źródła). Powód: użytkownik wybrał „jedną dobrze
+zweryfikowaną poprawkę" zamiast równoczesnego trzy-plikowego scalenia;
+ryzyko nazwane w rozmowie — pełna karta kanoniczna bez przepisania
+WSZYSTKICH odsyłających plików na referencje (a nie duplikaty) ryzykuje
+stworzenie TRZECIEGO rejestru obok dwóch pozostałych, dokładnie zgodnie
+z ostrzeżeniem we własnym opisie F-116. F-116 i F-118 POZOSTAJĄ OTWARTE,
+NIEZMIENIONE względem stanu sprzed tej sesji.
+
+### 3. Aktualizacja registru
+
+`WARN-OTWARTE.md`: wiersz F-110 NIE usunięty (zamknięcie częściowe, nie
+całkowite — ZASADA 10 dot. usunięcia wiersza stosuje się dopiero przy
+zamknięciu całkowitym), skrócony do pozostałego zakresu zgodnie z regułą
+podziału pliku. Licznik tablicy sterującej: 28 flag F- pozostaje bez zmian
+(F-110 nadal liczy się jako otwarta, częściowo). `F-120` (referencja
+opisowa do KOTWICY) zaktualizowana `🟡`→`🟨` w tym samym pliku dla spójności.
+
+**Pliki zmienione w tej sesji (14):**
+`shared/PRAWO-HARDGATE.md`, `shared/HIERARCHIA-ZRODEL.md`, `shared/SKILL.md`,
+`shared/MOD-GENERATOR-AKTU.md`, `shared/WERYFIKACJA-SLAD.md`,
+`analizator-dowodow-v3/SKILL.md`, `prawny-router-v3/references/SELF-CHECK.md`,
+`pisma-proste-v2/SKILL.md`, `analiza-sadowa-v6/SKILL.md`,
+`przewodnik-prawny-v2/SKILL.md`, `pisma-procesowe-v3/references/SELF-CHECK-PISMA.md`,
+`analizator-umow-v1/SKILL.md`, `audyt-systemu-v4/references/WARN-OTWARTE.md`,
+`audyt-systemu-v4/references/F-108-lista-MS-egzamin-2026.md`.
+Weryfikacja kompletności: `diff -rq` całych drzew `shared/` i `audyt-systemu-v4/`
+przeciw źródłu potwierdza WYŁĄCZNIE te pliki jako zmienione; pozostałe
+7 dotkniętych skilli — dokładnie po 1 zmienionym pliku każdy, bez efektów
+ubocznych w reszcie ich drzewa.
+
+**Licznik:** 28 flag F- otwartych — bez zmian (F-110 częściowo zamknięta,
+nie usunięta z licznika). F-116 i F-118 bez zmian statusu.
+
+## AUDYT-2026-08-23f (cd.) — F-116 anulowana; odkrycie strukturalne: podwójny zapis wierszy w WARN-OTWARTE.md
+
+### 4. F-116 — anulowanie karty statusów, realizacja realnego problemu bez niej
+
+Użytkownik poprosił: kontynuować pracę nad flagami; jeśli karta statusów
+(`shared/KARTA-STATUSOW.md`, rozwiązanie proponowane przez F-116) jest
+błędem architektonicznym w mojej ocenie — zamknąć flagę z jawną adnotacją
+anulowania, nie zostawiać jej otwartej.
+
+**Ocena wykonana przed decyzją:** F-116 zawierała DWA odrębne problemy
+sklejone w jedną flagę: (A) trzy testy zewnętrzne oceniają system wobec
+kontraktu `MEM`, którego AF-4 zakazuje — zarzut zasadny, niezależny od
+rozwiązania; (B) proponowane rozwiązanie — nowy plik kanoniczny. Zgoda na
+"zamknij, jeśli błąd" nie oznaczała porzucenia problemu (A) razem
+z odrzuceniem rozwiązania (B) — rozdzielono je.
+
+**Wykonane, BEZ nowej karty:**
+1. `REGRESSION-TEST-PLAN.md`, nowa sekcja 14 — reguła metodologiczna dla
+   PRZYSZŁYCH testów zewnętrznych: prompt testowy nie wprowadza własnego
+   rejestru etykiet; jedyne źródło etykiet dopuszczalnych to
+   `PRAWO-HARDGATE.md` + `WERYFIKACJA-SLAD.md` wprost, bez pośredniej karty.
+2. `references/SPROSTOWANIE-LM-2026-08-23.md` — nowy, samodzielny plik,
+   cytowalny w całości, gotowy do wysłania autorowi raportów TEST1-3.
+   Zawiera tabelę z czterema pozycjami do przeliczenia (TEST2 CL-01,
+   TEST1 dwie pozycje, TEST3 CX-02) i rozróżnienie ważne dla dalszej
+   współpracy (propozycja LM-K2-01 istniała, ale została odrzucona —
+   grep nieobecności ≠ dowód nieistnienia propozycji). Zarejestrowany
+   w `SKILL.md` (references:) — Reguła 2 zweryfikowana.
+
+**Uzasadnienie anulowania rozwiązania (B):** ryzyko utworzenia TRZECIEGO
+rejestru statusów obok `PRAWO-HARDGATE.md` i `WERYFIKACJA-SLAD.md` — to
+samo ryzyko, które F-116 nazywała sama we własnym RYZYKO-warunku
+("warunek: oba pliki po zmianie ODSYŁAJĄ do karty, nie powielają jej
+treści"). Warunek ten wymagałby przepisania obu plików źródłowych na
+odsyłacze w JEDNEJ sesji z tworzeniem karty — dokładnie ten sam wzorzec
+"naprawiać wszystko naraz, bo częściowa naprawa pogłębia rozjazd", który
+wcześniej (F-110) already required osobnej, ostrożnej weryfikacji. Ryzyko
+błędu przy przepisywaniu dwóch gęstych plików proceduralnych na odsyłacze
+oceniono jako przewyższające korzyść z jednego pliku zbiorczego.
+
+### 5. Odkrycie strukturalne — podwójny zapis wierszy w WARN-OTWARTE.md
+
+Podczas usuwania wiersza F-116 pierwsza edycja (`str_replace` na treści
+w sekcji "1C. Flagi narzędziowe i metodologiczne") NIE usunęła flagi
+z widoku „otwarte" — bo plik przechowuje **każdą flagę dwukrotnie**:
+raz jako skrót w „⚡ TABLICA STERUJĄCA" (sekcja A, kolumny
+Flaga/Prio/Dziedzina/Następny krok), raz jako pełny wpis w dalszej
+sekcji rejestru (kolumny #/Pozostały zakres/Skill/Prio/Otwarta od/
+Historia). Weryfikacja `grep -oE "^\| F-[0-9]+ \|" | sort | uniq -c`
+potwierdza: WSZYSTKIE 26 flag F- w pliku mają dokładnie 2 wiersze,
+poza F-94 i F-82 (osobne sekcje jednorazowe). To nie jest usterka —
+to zamierzona architektura (szybki przegląd + szczegóły) — ale oznacza,
+że **każda edycja treści merytorycznej flagi wymaga dwóch zsynchronizowanych
+str_replace, nie jednego**, inaczej powstaje rozjazd dokładnie tej klasy,
+którą ten sam plik już wcześniej diagnozował u samego siebie (⛔ przypis
+z 2026-08-21: „licznik rozjechał się... 17 flag przy 13 wierszach").
+
+**Naprawione retroaktywnie w tej sesji:** obie kopie F-110 (linia ~50 i
+~231 przed edycją), obie kopie F-118 (linia ~57 i ~208), obie kopie F-121
+(linia ~55 i ~230) zsynchronizowane. Zweryfikowano zliczeniem: `grep -c`
+frazy-znacznika w obu miejscach każdej flagi = 2 (potwierdzona spójność).
+
+**Rekomendacja dla przyszłych sesji (nieformalna, do rozważenia jako
+osobna flaga jeśli powtórzy się jako źródło błędu):** przy każdej edycji
+treści flagi w tym pliku, PRZED zapisaniem, `grep -n "^| F-XXX |"` żeby
+zobaczyć obie lokalizacje jednocześnie i edytować obie w tej samej turze.
+
+### 6. Rejestracja i weryfikacja
+
+`SKILL.md` — dodano `references/SPROSTOWANIE-LM-2026-08-23.md` do listy
+`references:`, zweryfikowano `grep -c` = 1 (Reguła 2 spełniona).
+
+**Pliki zmienione w tej części sesji:** `references/WARN-OTWARTE.md`
+(usunięcie F-116 z obu lokalizacji, korekta odniesień w F-110/F-118/F-121
+w obu lokalizacjach, korekta licznika i nagłówka sesji),
+`references/REGRESSION-TEST-PLAN.md` (nowa sekcja 14),
+`references/SPROSTOWANIE-LM-2026-08-23.md` (nowy plik), `SKILL.md`
+(rejestracja nowego pliku), `references/AUDIT-JOURNAL.md` (ten wpis).
+
+**Licznik:** 28 → **27** flag F- otwartych (F-116 zamknięta w całości; F-110
+pozostaje w liczniku jako częściowo zamknięta — patrz część 1-3 tego wpisu).
+
+## AUDYT-2026-08-23f (cd. 2) — F-118 zamknięta w całości
+
+### 7. F-118 — minimalny zestaw pól identyfikatora źródła
+
+Kontynuacja sesji na wyraźne polecenie użytkownika ("kontynuuj i miałeś mi
+wydawać zgodnie z regułą 7"). Przed kontynuacją: retroaktywna weryfikacja
+KROK 4b (diff zip vs poprzednia wersja) dla dwóch dotychczasowych dostaw tej
+sesji — potwierdzone, że różnica między `F-110-poprawka-2026-08-23f.zip`
+i `F-116-anulowanie-2026-08-23f.zip` to WYŁĄCZNIE zamierzone zmiany F-116
+(usunięcie wiersza, korekta 3 zależnych flag, korekta liczników) — brak
+przypadkowych różnic.
+
+**Wykonane:** `shared/PRAWO-HARDGATE.md`, sekcja AF-2, rozszerzona o wymóg
+minimalnego zestawu 5 pól identyfikatora (akt, pozycja Dz.U./ELI, jednostka
+redakcyjna, rząd źródła, stan otwarcia) z konkretnym wzorcem i przykładem.
+Jawny zakaz: pseudoidentyfikator bez metryki aktu (np. `ISAP-KC` bez pozycji
+Dz.U. i jednostki redakcyjnej) NIE spełnia formy AF-2, nawet z poprawnym
+nagłówkiem `🎯 [CEL — RZĄD 1, NIEOTWARTE]` — znacznik bez pełnych 5 pól
+jest NIEWAŻNY.
+
+**Sprawdzone przed edycją (uniknięto powtórki błędu z F-110):**
+- `shared/WERYFIKACJA-SLAD.md` — brak wzorca `🎯 [CEL]`, nie wymaga zmiany
+  (dotyczy innego poziomu: TREŚĆ/FRAGMENT, nie identyfikatora celu).
+- 7 skilli propagujących self-check (`analizator-dowodow-v3`,
+  `prawny-router-v3/SELF-CHECK.md`, `pisma-proste-v2`, `analiza-sadowa-v6`,
+  `przewodnik-prawny-v2`, `pisma-procesowe-v3/SELF-CHECK-PISMA.md`,
+  `analizator-umow-v1`) — mają jedynie SKRÓT self-checku z placeholderem
+  `…`, nie pełną specyfikację pól. Świadomie NIETKNIĘTE — pełna definicja
+  ma żyć w jednym miejscu (`PRAWO-HARDGATE.md` AF-2), self-checki odsyłają
+  skrótem, nie duplikują.
+
+**Rejestr:** F-118 zamknięta W CAŁOŚCI (nie częściowo, jak F-110) — realny
+problem opisany we flagi rozwiązany kompletnie: 5 pól wymuszonych, zakaz
+pseudoidentyfikatorów jawny. Wiersz usunięty z obu lokalizacji
+(Tablica Sterująca + sekcja 1C). F-110 skorygowana — usunięto wzmiankę
+"pozostaje otwarte: F-118" jako nieaktualną.
+
+**Pliki zmienione:** `shared/PRAWO-HARDGATE.md` (AF-2), `references/WARN-OTWARTE.md`
+(usunięcie F-118 z obu lokalizacji, korekta F-110, korekta liczników i nagłówka
+sesji), `references/AUDIT-JOURNAL.md` (ten wpis).
+
+**Licznik:** 27 → **26** flag F- otwartych.
+
+## AUDYT-2026-08-23f (cd. 3) — F-112 zamknięta: korekta KROK 4b w ZASADZIE 7
+
+### 8. Diagnoza dokładna (poważniejsza niż pierwotny opis F-112)
+
+Kontynuacja na polecenie użytkownika. F-112 opisywała problem jako "kopia
+służy edycji vs kopia służy pakowaniu" — po dosłownym odczytaniu treści
+KROK 4b w `audyt-systemu-v4/SKILL.md` (linia ~804 przed korektą) ustalono,
+że rzeczywisty błąd jest głębszy: polecenie bash w KROK 4b nakazywało
+`diff -rq /tmp/verify_<skill>/<skill> /mnt/skills/user/<skill>` z wymogiem
+PUSTEGO wyniku. To jest **logicznie niespełnialne dla jakiejkolwiek
+faktycznej naprawy** — zip zawierający naprawę MUSI różnić się od
+nieedytowanego oryginału w `/mnt/skills/user/`, inaczej dostawa nie
+zawierałaby żadnej zmiany. Komentarz w kodzie tuż nad poleceniem mówił
+"porównaj z aktualnym stanem na dysku" — czyli intencja była poprawna,
+ale ścieżka w faktycznym poleceniu nie zgadzała się z własnym komentarzem
+od momentu dodania (2026-07-25).
+
+**Ustalenie dodatkowe:** `references/WARN-OTWARTE.md`, Reguła 4 i Reguła 6
+(dodane 2026-08-14, PO wprowadzeniu wadliwego KROK 4b) już poprawnie
+opisywały krok jako "`diff -rq` zip vs **drzewo robocze**" — czyli błąd
+w `SKILL.md` został po cichu obejściowo skorygowany w innym pliku bez
+poprawienia źródła. Ten sam wzorzec co F-82/F-101 w tym systemie: dwa
+rejestry się rozjechały, ale w tym przypadku młodszy (WARN-OTWARTE) miał
+rację, a starszy (SKILL.md) niósł błąd od 2026-07-25 nienaprawiony przez
+prawie miesiąc kalendarzowy systemu.
+
+### 9. Rozstrzygnięcie wykonane
+
+`audyt-systemu-v4/SKILL.md`, KROK 4b, rozdzielony na DWA osobne polecenia
+o różnym, jawnie nazwanym celu:
+- (a) `diff -rq zip vs /home/claude/full_skills/<skill>` (drzewo robocze
+  PO edycji) — musi być PUSTY; weryfikuje, że pakowanie nie uszkodziło
+  ani nie pominęło treści.
+- (b) `diff -rq zip vs /mnt/skills/user/<skill>` (oryginał sprzed edycji)
+  — NIE musi być pusty; różnica pokazuje ZAKRES zmian i musi zostać
+  jawnie wypisana w odpowiedzi jako potwierdzenie, że to DOKŁADNIE
+  zamierzone zmiany. Dodatkowo, przy wieloturowej sesji: to samo (b)
+  wobec POPRZEDNIEGO dostarczonego zip-a (nie tylko pierwotnego źródła),
+  potwierdzające przyrostowość bez cofnięcia wcześniejszych napraw —
+  dokładnie ta praktyka, którą już stosowano w tej sesji przy dostawach
+  F-110→F-116→F-118 (retroaktywnie zweryfikowane w poprzedniej części
+  tego samego wpisu dziennika).
+
+Reguła 4/6 w `WARN-OTWARTE.md` NIE wymagała zmiany — już była poprawna,
+teraz `SKILL.md` (źródło pierwotne, ZASADA 7) dogoniło jej treść.
+
+### 10. Rejestr
+
+F-112 zamknięta W CAŁOŚCI. Wiersz usunięty z obu lokalizacji. Poprawiono
+też przy okazji drugą (przeoczoną wcześniej) kopię wzmianki o F-118
+w wierszu F-110 sekcji 1C (linia ~228) — ta sama treść co poprawiona
+wcześniej w Tablicy Sterującej, ale osobna kopia wymagająca osobnej edycji;
+potwierdza to ponownie wzorzec z F-116: KAŻDA edycja treści merytorycznej
+flagi w tym pliku wymaga sprawdzenia OBU lokalizacji, bez wyjątku.
+
+**Pliki zmienione:** `audyt-systemu-v4/SKILL.md` (KROK 4b rozdzielony),
+`references/WARN-OTWARTE.md` (usunięcie F-112 z obu lokalizacji, korekta
+drugiej przeoczonej kopii F-110, korekta liczników i nagłówka sesji),
+`references/AUDIT-JOURNAL.md` (ten wpis).
+
+**Licznik:** 26 → **25** flag F- otwartych.
+
+## AUDYT-2026-08-23f (cd. 4) — F-117 zamknięta: reguła AF-6 ZAKRES
+
+### 11. Wykonane
+
+`shared/PRAWO-HARDGATE.md`, blok BRAMKA ANTY-FASADOWA, po AF-5: nowa reguła
+**AF-6 ZAKRES** — znacznik statusu (✅/🟨/⚠️/⬛, identyfikator 🎯 [CEL])
+należy wyłącznie do twierdzenia o przepisie, źródle prawnym lub orzeczeniu;
+zakaz nadawania go treści wygenerowanej w odpowiedzi (pytania do świadków,
+checklisty, tezy robocze, nagłówki, warianty strategii, plany pism). Dodana
+też jedna linia self-checku `[AF-6 ZAKRES]` bezpośrednio po istniejącej
+linii `[ANTY-FASADA]`.
+
+**Decyzja o zakresie edycji:** flaga F-117 wskazuje jako Skill wyłącznie
+`shared` — NIE rozszerzono na 7 skilli propagujących self-check
+(`analizator-dowodow-v3`, `prawny-router-v3`, `pisma-proste-v2`,
+`analiza-sadowa-v6`, `przewodnik-prawny-v2`, `pisma-procesowe-v3`,
+`analizator-umow-v1`), bo pełna propagacja to zakres OSOBNEJ flagi F-115
+(wysoki priorytet, zablokowana przez F-111 — decyzja o podziale HARDGATE
+musi zapaść pierwsza, żeby propagacja nie zmieniała ścieżki wczytania
+dwukrotnie). Rozszerzenie zakresu F-117 na propagację byłoby wykonaniem
+części F-115 przed rozstrzygnięciem blokady, którą sama F-115 nazywa.
+
+**Skutek uboczny odnotowany, nie naprawiony:** ta edycja jest żywym
+dowodem ryzyka, przed którym F-115 ostrzegała przy rekomendacji "moduł
+zamiast 25 kopii" — źródło (`PRAWO-HARDGATE.md`) ma teraz 2 linie
+self-checku, 7 istniejących kopii ma nadal 1. Dopisano to jako
+"DOWÓD DRYFU 2026-08-23f" bezpośrednio w treści F-115, żeby przyszła
+sesja realizująca propagację miała pełny, zaktualizowany kontekst.
+
+### 12. Rejestr
+
+F-117 zamknięta W CAŁOŚCI. Wiersz usunięty z obu lokalizacji. F-115
+zaktualizowana o dowód dryfu (edycja punktowa, flaga pozostaje otwarta
+i zablokowana przez F-111, bez zmiany statusu blokady).
+
+**Pliki zmienione:** `shared/PRAWO-HARDGATE.md` (AF-6 + self-check),
+`references/WARN-OTWARTE.md` (usunięcie F-117 z obu lokalizacji, dopisanie
+dowodu dryfu do F-115, korekta liczników i nagłówka), `references/AUDIT-JOURNAL.md`
+(ten wpis).
+
+**Licznik:** 25 → **24** flag F- otwartych.
+
+### 13. Korekta procedury dostawy — Reguła 7 dosłownie
+
+Użytkownik zwrócił uwagę, że cztery poprzednie dostawy tej sesji
+(F-110/F-116/F-118/F-112) naruszały ZASADĘ 7 dosłownie: `present_files`
+został wywołany na zbiorczych archiwach z wyselekcjonowanymi plikami
+z kilku różnych skilli naraz, zamiast na osobnym, pełnym archiwum
+KAŻDEGO dotkniętego skilla, nazwanym dokładnie jak jego katalog — dwa
+naruszenia jednocześnie: (a) "present_files... wyłącznie na archiwum
+całego katalogu, nigdy na pojedynczym, samodzielnie skopiowanym pliku"
+(w. 788-790 SKILL.md), (b) "KROK 0 — ILE SKILLI, TYLE ZIPÓW... zbiorczy
+plik łączący kilka skili... jest niedopuszczalny" (w. 808-813 SKILL.md).
+
+**Naprawione retroaktywnie:** cztery niezgodne archiwa usunięte z
+`/mnt/user-data/outputs/`, zastąpione 9 osobnymi, pełnymi zipami — po
+jednym na każdy skill dotknięty w sesji do tego momentu (`shared`,
+`audyt-systemu-v4`, `analizator-dowodow-v3`, `prawny-router-v3`,
+`pisma-proste-v2`, `analiza-sadowa-v6`, `przewodnik-prawny-v2`,
+`pisma-procesowe-v3`, `analizator-umow-v1`), każdy nazwany dokładnie
+jak katalog źródłowy. Zweryfikowane pełnym KROK 4b (a+b) dla wszystkich
+9 — zero różnic wobec drzewa roboczego, zakres zmian wobec oryginału
+zgodny z dotychczasową dokumentacją dziennika.
+
+**Od tej pory:** każda kolejna dostawa w tej sesji stosuje ten format —
+jeden zip na skill, cała zawartość katalogu, nazwa zipa = nazwa katalogu,
+niezależnie od tego, ile skilli dotknęła dana tura naprawcza.
+
+## AUDYT-2026-08-23f (cd. 5) — F-114 zamknięta: rozróżnienie 113³/113⁴/113⁶ + korekta błędu w samej fladze
+
+### 14. Weryfikacja online przed edycją (PRAWO-HARDGATE B-1/B-2)
+
+Przed edycją modułu KRO wykonano web_search dla art. 113 i n. KRO oraz
+art. 582¹/598¹⁵/598¹⁶ KPC — zgodnie z zakazem cytowania z pamięci.
+
+**Ustalenie kluczowe (RÓŻNI SIĘ OD TREŚCI SAMEJ FLAGI F-114):** flaga
+wskazywała „art. 582¹ §3-4 KPC (suma pieniężna za naruszenie postanowienia
+o kontaktach)" jako brakującą podstawę prawną. Weryfikacja wykazała, że
+**art. 582¹ KPC dotyczy zabezpieczenia wykonania kontaktów w postanowieniu
+ustalającym kontakty** — jego §3 jedynie ODSYŁA do zasad z art. 598¹⁵ KPC,
+nie jest samodzielną podstawą materialną sankcji. Właściwa podstawa:
+**art. 598¹⁵ KPC** (zagrożenie zapłatą) → **art. 598¹⁶ KPC** (nakazanie
+zapłaty). Dodatkowo: **art. 598¹⁵ §1 KPC jest CZĘŚCIOWO NIEKONSTYTUCYJNY**
+— wyrok TK z 23.06.2022, SK 3/20, utracił moc z 30.06.2022 w zakresie
+obejmującym sytuacje, gdy niewykonanie kontaktów wynika z zachowania
+samego dziecka, niewywołanego przez opiekuna. Fakt ten nie był znany
+ani modułowi, ani treści samej flagi F-114 — to jest DODATKOWA luka,
+którą flaga nie przewidziała, wykryta dopiero przy weryfikacji źródłowej.
+
+⭐ Lekcja analogiczna do F-121 (skill audytowy nie stosuje wobec siebie
+kontraktu, który pilnuje): sama treść flagi audytowej może zawierać
+nieprecyzyjną podstawę prawną, jeśli powstała bez weryfikacji online.
+Bezkrytyczne przepisanie treści flagi do modułu powieliłoby błąd zamiast
+go naprawić.
+
+### 15. Wykonane
+
+`dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/kro-rodzinne/czesc-06-rodzice-dzieci-wladza-ozss.md`
+(NIE `mod-KRO-rodzinne.md` wskazany we flagi — ten plik jest czysto
+nawigacyjny, 110 linii, treść merytoryczna żyje w podkatalogu
+`kro-rodzinne/`; ścieżka we flagi była nieprecyzyjna, odnotowane):
+
+1. Rozróżnienie **art. 113³** (wyłączenie/zakaz kontaktów — środek
+   najdalej idący) vs **art. 113⁴** (zobowiązanie do określonego
+   postępowania — poradnictwo/terapia, NIE sankcja, opcja pośrednia).
+2. Dodano **art. 113⁶** (odpowiednie stosowanie do rodzeństwa, dziadków,
+   powinowatych sprawujących pieczę przez znaczny czas) — dotąd
+   nieobecny w module.
+3. Skorygowano podstawę egzekucji: **598¹⁵/598¹⁶ KPC** zamiast błędnie
+   wskazanego **582¹ §3-4 KPC**, z jawną adnotacją o częściowej
+   niekonstytucyjności 598¹⁵ §1 (TK SK 3/20) i wymogiem ustalenia z urzędu,
+   czy brak kontaktu nie wynikał z decyzji dziecka.
+4. Zachowano istniejącą wzmiankę o 113³ w sekcji „cztery rozróżnienia"
+   (linia ~191, dawna 149) — kontekst tam dotyczy wyłącznie zakazu, co
+   jest poprawne, teraz odsyła spójnie do pełnego wyjaśnienia wyżej.
+
+### 16. Rejestr
+
+F-114 zamknięta W CAŁOŚCI. Wiersz usunięty z obu lokalizacji (Tablica
+Sterująca + sekcja 1C — ten wiersz miał TYLKO JEDNĄ kopię w sekcji A,
+drugą w dalszej liście „Luki strukturalne", oznaczoną numerem 206 przed
+edycją — sprawdzone i usunięte obie).
+
+**Pliki zmienione:** `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/kro-rodzinne/czesc-06-rodzice-dzieci-wladza-ozss.md`
+(treść merytoryczna, pierwsze dotknięcie tego skilla w tej sesji — Reguła 1
+KROK C, kopia z `/mnt/skills/user`), `references/WARN-OTWARTE.md` (usunięcie
+F-114 z obu lokalizacji, korekta liczników i nagłówka), `references/AUDIT-JOURNAL.md`
+(ten wpis).
+
+**Licznik:** 24 → **23** flag F- otwartych.
+
+## AUDYT-2026-08-23f (cd. 6) — incydent Reguły 1: przypadkowe cp -r nadpisało poprawkę F-110
+
+### 17. Incydent i natychmiastowa naprawa
+
+Rozpoczynając pracę nad F-119 (`prawny-router-v3`), wykonano `cp -r
+/mnt/skills/user/prawny-router-v3/* /home/claude/full_skills/prawny-router-v3/`
+bez uprzedniego sprawdzenia, czy katalog już istnieje w drzewie roboczym
+z wcześniejszej tury tej samej sesji — dokładnie naruszenie REGUŁY 1
+KROK A/B, którą ten sam plik już opisuje jako lekcję z incydentu F-58.
+Skutek: nadpisanie poprawki F-110 w `references/SELF-CHECK.md`
+(`🟨`→`🟡` wrócił do stanu sprzed naprawy) — cicho, bez błędu/ostrzeżenia
+systemowego, dokładnie jak ostrzega opis reguły.
+
+**Wykryte natychmiast** przez rutynową weryfikację przed edycją
+(`grep -c "🟨"` — oczekiwano 1, otrzymano 0). Naprawione w tej samej
+turze, przed jakąkolwiek dalszą pracą nad F-119. Zweryfikowane `diff`
+przeciw oryginałowi: dokładnie jedna, zamierzona różnica pozostaje
+w całym skillu — żadna inna treść nie ucierpiała, bo `cp -r` z
+`/mnt/skills/user` w tym przypadku odtworzyło stan IDENTYCZNY z oryginałem
+dla wszystkich plików poza tym jednym, wcześniej edytowanym.
+
+**Przyczyna źródłowa:** przy dotychczasowych 8 skillach dotkniętych w tej
+sesji, `prawny-router-v3` był edytowany TYLKO RAZ, w bardzo wczesnej turze
+(F-110) — do czasu podjęcia F-119 nie było potrzeby ponownego dostępu do
+tego katalogu, więc nawyk "sprawdź KROK A przed KROK C" nie zadziałał
+automatycznie mimo świadomości reguły.
+
+**Zapobieganie na przyszłość w tej sesji:** przed KAŻDYM dostępem do
+katalogu roboczego skilla, niezależnie od tego, jak dawno był ostatnio
+dotknięty — `ls /home/claude/full_skills/<skill>` PRZED jakimkolwiek `cp`,
+nie tylko przy pierwszym dotknięciu. Ten sam wzorzec ryzyka rośnie z
+liczbą dotkniętych skilli w jednej rozmowie (8 obecnie) — im więcej
+katalogów w drzewie roboczym, tym łatwiej o pomyłkę "czy to już tu jest".
+
+**Pliki naprawione retroaktywnie w tym samym kroku:** `prawny-router-v3/references/SELF-CHECK.md`
+(przywrócono `🟨`). Brak wpływu na inne pliki tego skilla — zweryfikowane.
+
+## AUDYT-2026-08-23f (cd. 7) — F-119 zamknięta: obowiązkowy ślad routingu
+
+### 18. Wykonane
+
+`prawny-router-v3/SKILL.md` — dodano **KROK 3A** bezpośrednio po KROK 3
+(Załaduj PRIMARY→SECONDARY→FALLBACK), przed KROK 4: obowiązkowy blok
+`TRYB / PRIMARY (+ROUTER-WCZYTANY) / SECONDARY (+ROUTER-WCZYTANY) /
+ODRZUCONE + powód / WERSJA ROUTERA`. Przy `ROUTER-WCZYTANY: NIE` dla
+PRIMARY — obowiązkowy nagłówek `⛔ TRYB ZDEGRADOWANY — router niewczytany`
+poprzedzający resztę odpowiedzi. Zweryfikowano Regułę 5 (spis `KROK N`
+przed/po) — KROK 4 pozostał nienaruszony, wstawka nie skasowała żadnego
+istniejącego markera.
+
+`prawny-router-v3/references/SELF-CHECK.md` — dodano linię egzekwującą
+`[KROK 3A ŚLAD ROUTINGU]`, zgodnie z dodatkowym wymogiem opisanym w pełnej
+treści flagi ("Sprawdzić, czy SELF-CHECK.md może to egzekwować").
+
+### 19. Incydent Reguły 1 wykryty i naprawiony w tej samej turze
+
+Patrz sekcja 17 tego samego wpisu dziennika — przed rozpoczęciem edycji
+F-119 przypadkowe `cp -r` z `/mnt/skills/user/prawny-router-v3`
+nadpisało wcześniejszą poprawkę F-110 w `references/SELF-CHECK.md`.
+Wykryte natychmiast rutynową weryfikacją, naprawione przed kontynuacją
+pracy nad F-119. Zweryfikowane: dokładnie jedna zamierzona różnica
+(F-110) + druga nowa zamierzona różnica (F-119, ten wpis) w całym skillu,
+żadna inna treść nietknięta.
+
+### 20. Rejestr
+
+F-119 zamknięta W CAŁOŚCI. Wiersz usunięty z obu lokalizacji.
+
+**Pliki zmienione:** `prawny-router-v3/SKILL.md` (KROK 3A),
+`prawny-router-v3/references/SELF-CHECK.md` (naprawa incydentu Reguły 1
++ nowa linia egzekwująca F-119), `audyt-systemu-v4/references/WARN-OTWARTE.md`
+(usunięcie F-119 z obu lokalizacji, korekta liczników i nagłówka),
+`audyt-systemu-v4/references/AUDIT-JOURNAL.md` (ten wpis).
+
+**Licznik:** 23 → **22** flag F- otwartych.
+
+## AUDYT-2026-08-23f (cd. 8) — korekta F-119 po pytaniu użytkownika: samo-raport bez wymuszenia
+
+### 21. Zarzut i jego trafność
+
+Użytkownik zapytał wprost: czy nagłówek `⛔ TRYB ZDEGRADOWANY` nie jest
+zbędny, skoro jeśli router faktycznie nie jest wczytany, model — z tego
+samego powodu, dla którego go nie wczytał — może po prostu NIE WIEDZIEĆ
+o tym i nie wypisać nagłówka wcale.
+
+**Zarzut trafny i nienazwany explicite w pierwotnej wersji F-119.** KROK 3A,
+jak pierwotnie napisany, zakładał milcząco, że model rzetelnie oceni
+własne zachowanie („czy wczytałem plik") — dokładnie ten sam mechanizm
+samooceny, który w TEST1/TEST2/TEST3 już raz zawiódł (router NAZWANY,
+nie WCZYTANY, bez tego samo model orientującego się w tej rozbieżności).
+Formularz do wypełnienia nie ma wbudowanej siły wymuszającej — błądzący
+proces wypełni formularz tak samo błędnie, jak błądził przed jego
+wprowadzeniem.
+
+**Rozróżnienie kluczowe (dodane w tej korekcie):** pole jest wiarygodne
+w DWÓCH różnych sytuacjach o różnej sile dowodowej:
+- (1) narzędzia NIEDOSTĘPNE w środowisku (T0 z F-113) → próba `view`
+  zwraca TWARDY błąd narzędzia → `NIE` wynika z faktu, nie z oceny —
+  WIARYGODNE.
+- (2) narzędzia DOSTĘPNE, ale wywołanie POMINIĘTE z innego powodu →
+  nic nie wymusza poprawnej deklaracji → `TAK` może być fasadą tej samej
+  klasy co `VER` bez weryfikacji w TEST2 — NIEWIARYGODNE bez dodatkowego
+  mechanizmu.
+
+### 22. Wykonane
+
+`prawny-router-v3/SKILL.md`, KROK 3A — dopisany blok „OGRANICZENIE ZNANE"
+nazywający wprost ten limit, bez ukrywania go. Blok NIE rozwiązuje
+problemu fasady w scenariuszu (2) — jawnie to przyznaje — rozwiązuje
+wyłącznie scenariusz (1).
+
+`references/WARN-OTWARTE.md`, F-113 — rozszerzona o zakres **(e)**:
+test regresyjny musi rozróżniać (e1) `NIE` z twardego faktu (wiarygodne)
+od (e2) `TAK` zadeklarowane bez faktycznego wywołania (fasada do
+wykrycia), nie tylko potwierdzać obecność pola.
+
+**Uczciwa ocena stanu:** F-119 pozostaje ZAMKNIĘTA (realny postęp —
+scenariusz środowisk bez narzędzi jest teraz jawny, czego wcześniej
+nie było), ale jej SKUTECZNOŚĆ w scenariuszu (2) jest NIEPOTWIERDZONA
+i wprost nazwana jako niepotwierdzona — zgodnie z tym, co F-113 już
+mówi o całej klasie takich bramek („potwierdzenie obecności w plikach"
+≠ „potwierdzenie skuteczności"). Nie cofnięto zamknięcia F-119, bo
+flaga żądała DODANIA bloku, co wykonano w całości — ale jakość
+rozwiązania jest teraz opisana precyzyjniej, bez zawyżania jego mocy.
+
+**Pliki zmienione:** `prawny-router-v3/SKILL.md` (dopisek ograniczenia
+w KROK 3A), `references/WARN-OTWARTE.md` (rozszerzenie F-113 o zakres (e)
+w obu lokalizacjach), `references/AUDIT-JOURNAL.md` (ten wpis).
+
+**Licznik:** bez zmian — 22 flagi F- otwarte (żadna flaga nie zmieniła
+statusu otwarcia/zamknięcia, tylko treść F-113 i F-119/SKILL.md).
+
+## AUDYT-2026-08-23f (cd. 9) — druga korekta F-119: kontrola na wyjściu zamiast usunięcia
+
+### 23. Pytanie użytkownika i rozstrzygnięcie
+
+Użytkownik zapytał, czy pole `ROUTER-WCZYTANY` nie powinno zostać USUNIĘTE
+w całości — skoro system, nie wczytując routera, i tak się o tym nie
+dowie, samo pole nic nie daje.
+
+**Rozstrzygnięcie: NIE usuwać, ale dodać niezależną kontrolę na wyjściu.**
+Uzasadnienie — rozróżnienie dwóch scenariuszy utrzymane z poprzedniej
+korekty (sekcja 21-22 tego wpisu):
+- Scenariusz (1) — narzędzia niedostępne, próba `view` zwraca TWARDY błąd:
+  pole `NIE` jest tu wiarygodne, bo wynika z faktu, nie z samooceny.
+  USUNIĘCIE pola zgubiłoby wartość, którą pole ma W TYM przypadku.
+- Scenariusz (2) — narzędzia dostępne, wywołanie pominięte bez błędu:
+  pole nic nie wymusza — to jest DOKŁADNIE trafność pytania użytkownika.
+
+**Rozwiązanie zastosowane:** wzorem istniejącej reguły `[DOMAIN-LOCK]`
+w tym samym pliku (`⛔ KONTROLA NA WYJŚCIU — nie na wejściu`), która
+zamiast pytać model o samoocenę procesu, sprawdza OBSERWOWALNY SKUTEK
+w gotowej treści — dodano analogiczną kontrolę `[ŚLAD ROUTINGU]`:
+czy gotowa odpowiedź nosi cechy charakterystyczne użycia PRIMARY-skilla
+(terminologia, struktura, checkpointy) BEZ odpowiadającego wywołania
+`view` widocznego w tej samej odpowiedzi. Wykrycie takiej rozbieżności
+= sygnał, że deklaracja `ROUTER-WCZYTANY: TAK` z KROK 3A jest fasadą.
+
+**Dlaczego to jest silniejsze niż samo pole:** kontrola na wyjściu nie
+pyta "czy wczytałeś" (pytanie do tego samego procesu, który mógł już
+pomylić się przy ocenie własnego zachowania) — pyta "czy treść, którą
+właśnie napisałeś, pasuje do stanu, który zadeklarowałeś". To wciąż nie
+jest dowód matematyczny (oba pytania kieruje się do tego samego modelu
+w tej samej odpowiedzi), ale wymaga SPÓJNOŚCI między dwoma niezależnie
+sformułowanymi obserwacjami, zamiast jednej deklaracji przyjmowanej
+bez konfrontacji z niczym innym — trudniej nieświadomie utrzymać
+fasadę spójną na dwóch niezależnych pytaniach niż na jednym.
+
+**Ograniczenie przyznane wprost:** to nadal nie jest test regresyjny
+z grupą kontrolną (F-113 zakres e) — jest to dodatkowa warstwa w tym
+samym mechanizmie samo-oceny, nie zewnętrzny arbiter. Realne
+potwierdzenie skuteczności czeka na F-113.
+
+### 24. Wykonane
+
+`prawny-router-v3/references/SELF-CHECK.md` — dodano drugą pozycję
+`[ŚLAD ROUTINGU]` (kontrola na wyjściu) obok istniejącej `[KROK 3A ŚLAD
+ROUTINGU]` (przypomnienie o wypisaniu bloku).
+
+`prawny-router-v3/SKILL.md`, KROK 3A — dopisane odesłanie do kontroli
+na wyjściu, z jawnym stwierdzeniem, że deklaracja i obserwacja muszą
+być zgodne.
+
+**Pliki zmienione:** `prawny-router-v3/SKILL.md`, `prawny-router-v3/references/SELF-CHECK.md`,
+`references/AUDIT-JOURNAL.md` (ten wpis). Rejestr WARN-OTWARTE.md bez
+zmian — F-119 pozostaje zamknięta, F-113 bez dalszych zmian w tej części.
+
+**Licznik:** bez zmian — 22 flagi F- otwarte.
+
+## AUDYT-2026-08-23f (cd. 10) — F-120 zamknięta: krok aktualności podniesiony do bramki
+
+### 25. Wykonane
+
+**Reguła 1 zastosowana ostrożnie** po incydencie z poprzedniej części sesji
+(sekcja 17): przed KAŻDYM kopiowaniem z `/mnt/skills/user` sprawdzono
+najpierw, czy plik już istnieje w drzewie roboczym. `shared/TEMPORAL-LAW-CHECK.md`
+i `analizator-przepisow-v2/SKILL.md` — oba pierwsze dotknięcie w tej sesji,
+kopiowanie bezpieczne, zweryfikowane przed wykonaniem.
+
+**Trzy pliki zmienione, zgodnie z pełnym zakresem flagi:**
+
+1. `shared/TEMPORAL-LAW-CHECK.md` — przepisany z listy 7 pytań (deklaratywnej)
+   na wymuszoną sekwencję **KROK T-1…T-5**: osobne zapytanie o nowelizacje
+   PO dacie t.j. (nie to samo zapytanie co znalezienie t.j.), obowiązkowy
+   zapis wyniku nawet negatywnego, status 🟨 KOTWICA przy blokadzie źródła
+   zamiast milczenia. Dodano próg stosowania (obowiązkowy dla przepisów
+   rozstrzygających, opcjonalny dla kontekstowych) i kryterium zamknięcia.
+2. `shared/PRAWO-HARDGATE.md` — nowy **KROK 2C** (po istniejącym KROK 2B,
+   przed KROK 3), odsyłający do pełnej procedury w TEMPORAL-LAW-CHECK.md,
+   wpięty w główną sekwencję weryfikacji przepisu.
+3. `analizator-przepisow-v2/SKILL.md` — krok 4A dopisany do istniejącej
+   sekwencji ekstrakcji przepisu (po kroku 4 "sprawdź datę ostatniej
+   nowelizacji"), z wyjaśnieniem RÓŻNICY między krokiem 1 (szuka t.j.)
+   a krokiem 4A (szuka nowelizacji PO t.j. — inne zapytanie). Karta
+   Przepisu rozszerzona o pole „Sprawdzono po t.j.".
+
+Zweryfikowano Regułę 5 dla obu edycji punktowych (brak duplikacji
+markerów `KARTA PRZEPISU`, `Status:`, `Źródło URL:` w analizator-przepisow-v2;
+brak duplikacji `KROK 2C-1` poza zamierzonym wewnętrznym odesłaniem
+w PRAWO-HARDGATE.md).
+
+### 26. Rejestr
+
+F-120 zamknięta W CAŁOŚCI — wszystkie trzy elementy zakresu (podniesienie
+rangi, wpięcie w analizator-przepisow-v2, wpięcie w PRAWO-HARDGATE KROK 2/2B)
+wykonane. Wiersz usunięty z obu lokalizacji.
+
+**Pliki zmienione:** `shared/TEMPORAL-LAW-CHECK.md`, `shared/PRAWO-HARDGATE.md`
+(KROK 2C), `analizator-przepisow-v2/SKILL.md` (pierwsze dotknięcie tego
+skilla w sesji), `audyt-systemu-v4/references/WARN-OTWARTE.md` (usunięcie
+F-120 z obu lokalizacji, korekta liczników i nagłówka), `audyt-systemu-v4/references/AUDIT-JOURNAL.md`
+(ten wpis).
+
+**Licznik:** 22 → **21** flag F- otwartych.
+
+## AUDYT-2026-08-23f (cd. 11) — drugi incydent Reguły 7 KROK 2: niepełna kopia katalogu
+
+### 27. Incydent i naprawa
+
+Podczas KROK 1/4 (liczenie plików przed pakowaniem F-120) wykryto:
+`analizator-przepisow-v2` ma **3 pliki** w oryginale (`SKILL.md` +
+2 pliki w `references/`), ale tylko **1 plik** w katalogu roboczym.
+Przyczyna: przy pierwszym dotknięciu tego skilla w sesji (sekcja 25,
+ten sam wpis) wykonano `mkdir -p .../analizator-przepisow-v2` i
+skopiowano ręcznie WYŁĄCZNIE `SKILL.md` — nie cały katalog przez
+`cp -r` — naruszając KROK 2 Reguły 7 ("skopiuj CAŁE drzewo, nie
+pojedynczy plik").
+
+**Różnica od poprzedniego incydentu (sekcja 17):** tam błędem było
+NADPISANIE istniejącej poprawki przez zbyt szerokie `cp -r`. Tu błędem
+jest PRZECIWNY kierunek — zbyt WĄSKIE kopiowanie pominęło pliki, które
+powinny być w katalogu roboczym od początku. Oba incydenty pokazują tę
+samą klasę ryzyka (niepełna lub nadmiarowa operacja na drzewie skilla
+zamiast operacji na całym katalogu), ale w przeciwnych kierunkach —
+potwierdza to, że ryzyko rośnie wraz z LICZBĄ dotkniętych skilli w
+jednej sesji, niezależnie od konkretnego mechanizmu pomyłki.
+
+**Wykryte** przez rutynowe KROK 1/4 (policz PRZED, policz PO) — dokładnie
+mechanizm kontrolny, który Reguła 7 nakazuje wykonywać PRZED pakowaniem,
+zanim doszłoby do dostawy niepełnego archiwum. Naprawione natychmiast:
+`mkdir -p references/` + `cp` dwóch brakujących plików z oryginału.
+Zweryfikowano, że jedyna zamierzona edycja treści (`SKILL.md`, krok 4A
+z F-120) pozostała nienaruszona przez operację naprawczą.
+
+**Zapobieganie:** przy tworzeniu katalogu roboczego dla skilla NIGDY
+nie kopiować pojedynczych plików ręcznie — zawsze `cp -r
+/mnt/skills/user/<skill> /home/claude/full_skills/<skill>` w całości,
+nawet jeśli edycja dotyczy tylko jednego pliku wewnątrz. Ręczne
+kopiowanie pojedynczego pliku jest uzasadnione WYŁĄCZNIE gdy katalog
+skilla już istnieje w drzewie roboczym z wcześniejszej tury i chodzi
+o odtworzenie jednego brakującego elementu (jak w naprawie tego
+incydentu) — nie przy pierwszym dotknięciu skilla.
+
+**Pliki naprawione:** `analizator-przepisow-v2/references/MOD-VACATIO-LEGIS.md`,
+`analizator-przepisow-v2/references/MOD-ORZECZ-POWIAZANIA-HISTORIA.md`
+(oba dokopiowane bez zmian treści — nie były i nie miały być edytowane
+w tej sesji, jedynie brakowało ich w katalogu roboczym).
+
+## AUDYT-2026-08-23f (cd. 12) — korekta F-120: pełna lista nowelizacji, nie fakt istnienia
+
+### 28. Pytanie użytkownika i rozstrzygnięcie
+
+Użytkownik zapytał, czy zamiast sprawdzania "daty ostatniej nowelizacji"
+(pojedynczy fakt) nie powinno się sprawdzać WSZYSTKICH nowelizacji od
+ostatniego t.j., ze wskazaniem, które z nich t.j. już obejmuje.
+
+**Trafność zarzutu:** pierwotna redakcja KROK T-2/2C-1/krok-4A pytała
+o SAM FAKT istnienia nowelizacji po t.j. — sformułowanie zachęcające do
+zatrzymania się na pierwszym trafieniu. Jeśli między datą t.j. a datą
+analizy weszły w życie DWIE lub więcej nowelizacji w sekwencji, model
+mógł znaleźć pierwszą, uznać krok za wykonany, i przeoczyć kolejną —
+przepis „sprawdzony pod względem aktualności" mógłby mimo to być błędny.
+To jest dokładnie ta sama klasa ryzyka, którą F-120 już miała naprawiać
+(TEST1: jedno wykonanie znalazło nowelizację ad hoc, drugie nie
+sprawdziło wcale) — korekta usuwa DRUGĄ warstwę tego samego problemu:
+"sprawdzono, ale niekompletnie" zamiast "nie sprawdzono wcale".
+
+**Rozstrzygnięcie:** tak, słuszne — poprawiono wszystkie trzy pliki.
+
+### 29. Wykonane
+
+1. `shared/TEMPORAL-LAW-CHECK.md` — KROK T-1 rozszerzony o wypisanie
+   nowelizacji JUŻ UWZGLĘDNIONYCH w t.j. (z treści obwieszczenia — to
+   informacja dostępna od razu, nie wymaga dodatkowego zapytania). KROK
+   T-2 zmieniony z „czy istnieje nowelizacja" na „wszystkie nowelizacje
+   w całym przedziale od t.j. do dziś", z jawnym zakazem zatrzymania się
+   na pierwszym trafieniu. KROK T-3 wymaga PEŁNEJ LISTY chronologicznej,
+   nie pojedynczego wyniku. KROK T-4 rozszerzony o ustalenie KOLEJNOŚCI
+   nowelizacji i wskazanie, które brzmienie obowiązuje na datę analizy
+   (nie automatycznie najnowsze znalezione — możliwe uchylenie późniejszą
+   zmianą przed wejściem w życie, odroczone vacatio legis).
+2. `shared/PRAWO-HARDGATE.md`, KROK 2C — zsynchronizowany z powyższym.
+3. `analizator-przepisow-v2/SKILL.md` — krok 4 rozdzielony na wypisanie
+   nowelizacji z t.j. (osobne zdanie) i krok 4A poprawiony analogicznie
+   do T-2. Karta Przepisu: pola „Ostatnia zmiana" + „Historia zmian"
+   zastąpione precyzyjniejszym rozróżnieniem „Nowelizacje w t.j." +
+   „Nowelizacje po t.j." (pełna lista, nie pojedynczy fakt). Sprawdzono
+   `grep`, że usunięte pola nie były używane gdzie indziej w pliku —
+   bezpieczne zastąpienie.
+
+Zweryfikowano Regułę 5 dla `analizator-przepisow-v2/SKILL.md` — markery
+strukturalne Karty Przepisu nienaruszone.
+
+### 30. Rejestr
+
+F-120 pozostaje ZAMKNIĘTA (poprawka jakościowa treści już zamkniętej
+flagi, nie nowe otwarcie). Rejestr WARN-OTWARTE.md bez zmian statusu.
+
+**Pliki zmienione:** `shared/TEMPORAL-LAW-CHECK.md`, `shared/PRAWO-HARDGATE.md`
+(KROK 2C), `analizator-przepisow-v2/SKILL.md`, `references/AUDIT-JOURNAL.md`
+(ten wpis).
+
+**Licznik:** bez zmian — 21 flag F- otwartych.
+
+---
+
+## AUDYT-2026-08-24 — TRYB WARN-CLOSE: F-115 i F-126 zamknięte, F-127 wykryta i naprawiona, F-128 otwarta
+
+**Tryb:** WARN-CLOSE (na polecenie użytkownika: „sprawdź warn otwarte, wykonuj
+zlecone zadania i zamykaj warn otwarte, skille wydawaj zgodnie z Regułą 7,
+jeśli modyfikacje tego wymagają — synchronizuj mapę aktów prawnych w danym
+module DR z mapą aktów prawnych w prawo-polskie").
+
+**FAZA 0 wykonana:** `SKILL.md` audytu, `WARN-OTWARTE.md` (TABLICA STERUJĄCA +
+blok HARDGATE-AUDYT), pomiary bazowe T12/T11/T3/`check_rejestracja_modulow`.
+REGUŁA 1 KROK A: `/mnt/user-data/outputs/` puste — brak ZIP-a z wcześniejszej
+tury tej rozmowy, więc KROK C (kopia z `/mnt/skills/user`), potwierdzony
+`diff -rq` kopia vs oryginał = pusty dla wszystkich 24 skilli.
+
+---
+
+### 1. F-127 — NOWA, otwarta i zamknięta w tej samej sesji
+
+**Odkrycie.** Przy kwalifikacji zakresu F-115 P3 sprawdziłem, jak wyglądają
+wstawki wprowadzone w POPRZEDNIEJ sesji (08-23i), żeby powielić ich wzorzec.
+Okazało się, że **5 z nich jest wstawionych wadliwie** — dokładnie klasa błędu
+opisana w REGULE 5 bloku HARDGATE-AUDYT (wstawianie treści bez kontroli
+struktury docelowej):
+
+| Plik | Uszkodzenie |
+|---|---|
+| `analizator-przepisow-v2/SKILL.md` | blok wewnątrz ``` (sekcja „Krok 0.2") |
+| `chronologia-sprawy-v1/SKILL.md` | blok wewnątrz ``` — rozbite drzewo katalogu w ARCHITEKTURA SKILLA |
+| `przesluchanie-swiadkow-v2-min90/SKILL.md` | blok wewnątrz ``` — wewnątrz procedury bramki SD-VER (PRE-W1a) |
+| `raport-klienta-v1/SKILL.md` | blok wewnątrz ``` — rozbite drzewo katalogu w ARCHITEKTURA |
+| `orzeczenia-sadowe-v2/SKILL.md` | blok wstawiony **w środek zdania**: rozerwał frazę „— jako HARD GATE ⟨blok⟩ aktywny w całym systemie" |
+
+**Dlaczego to nie jest usterka kosmetyczna.** Blok wewnątrz ``` renderuje się
+jako listing kodu, nie jako bramka — a jednocześnie rozbija treść, w którą
+został wstawiony. W `chronologia-sprawy-v1` i `raport-klienta-v1` skutkiem było
+drzewo katalogu przecięte na pół blokiem cytatu; w `orzeczenia-sadowe-v2` —
+nieczytelne zdanie o nadrzędności `PRAWO-HARDGATE`. Poprzednia sesja
+zaraportowała „pokrycie 14 plików" na podstawie `grep -rl`, a `grep` widzi
+obecność ciągu znaków, nie jego pozycję strukturalną. To ta sama luka pomiarowa,
+którą F-113 opisuje dla bramek weryfikacyjnych: **obecność w pliku ≠ działanie**.
+
+**Naprawa.** Cztery bloki wyjęte z wnętrza ``` i przeniesione pod kotwicę HARD
+GATE (`view shared/PRAWO-HARDGATE.md`) — czyli tam, gdzie wiersz flagi F-115
+wskazywał od początku. W `orzeczenia-sadowe-v2` blok przeniesiony za zamknięty
+akapit, zdanie sklejone i przywrócone do pierwotnego brzmienia (potwierdzone
+programowo: linia kończąca się na „— jako HARD GATE" ma po sobie „aktywny w
+całym systemie").
+
+**Kontrola po naprawie** (wykonana skryptem dla każdego pliku osobno):
+parzystość znaczników ``` zachowana (40/54/68/32 — bez zmian), spisy nagłówków
+`##`/`###` **identyczne przed i po** we wszystkich 5 plikach, dokładnie 1
+wystąpienie bloku na plik, żadne poza blokiem kodu.
+
+---
+
+### 2. F-115 — ZAMKNIĘTA (P3: 16 skilli DR)
+
+16 skilli DR-01…DR-16 podłączonych do `shared/SELF-CHECK-ANTY-FASADA.md`.
+Kotwica: sekcja `## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI`, obecna dokładnie
+raz w każdym z 16 plików (sprawdzone przed edycją). Wstawka umieszczona na
+KOŃCU tej sekcji, tuż przed jej markerem zamykającym — zgodnie z REGUŁĄ 5
+marker został jawnie zawarty w treści wstawianej, nie pozostawiony „bo i tak
+tam jest".
+
+Wstawka zawiera o dwie linie więcej niż wersja z 08-23i: dopisane wprost, że
+**wyzwalaczem jest brak wywołania narzędzia dla danego twierdzenia, nie brak
+narzędzi w sesji**. Powód: to jest zdanie, które moduł kanoniczny stawia jako
+pierwsze, a którego dotychczasowe wstawki nie powtarzały — a właśnie ono
+odróżnia bramkę od formalności.
+
+**Kontrola:** 1 wstawka na plik, żadna w bloku kodu, parzystość ``` zachowana,
+spisy nagłówków identyczne przed/po — 16/16 ✅.
+**Kryterium zamknięcia z wiersza flagi:** pokrycie 30 plików. Osiągnięte:
+`grep -rl SELF-CHECK-ANTY-FASADA` = **46** plików kodu skilli (34 w kopii
+roboczej tej sesji + 12 w skillach nietkniętych), przy progu 30.
+`prawo-polskie-v2` świadomie poza zakresem (decyzja z F-123) — nie zgłaszane.
+
+Wersje 16 skilli DR podbite o minor. Przy okazji zastosowano zabezpieczenie
+pułapki float (F-102): **każdy minor dwucyfrowy zapisany w cudzysłowie**
+(np. `version: "3.36"`, `version: "4.11"`). To domknęło 13 ostrzeżeń ⚠️ TYP
+YAML, które T12 zgłaszał dla skilli DR — nie było to celem sesji, ale wynikło
+z niej za darmo, bo i tak dotykałem tych pól.
+
+---
+
+### 3. F-126 — ZAMKNIĘTA, zakres ROZSZERZONY o czwarty skill
+
+Wiersz flagi wymieniał 3 skille. Pomiar bazowy T12 pokazał **cztery** ⛔
+„HISTORIA W KORPUSIE" — poza wymienionymi także **`dr-01`**. Rozszerzyłem zakres
+zamiast zamykać flagę wobec niepełnej listy.
+
+| Skill | Co przeniesiono | Dokąd |
+|---|---|---|
+| `analizator-przepisow-v2` | wpisy 2.4 … 2.1 (81 l.) | `references/CHANGELOG.md` |
+| `pisma-procesowe-v3` | wpisy 5.15 … 5.12 + blok odsyłający (59 l.) | j.w. |
+| `prawny-router-v3` | wpisy 3.13 … 3.9 (69 l.) **oraz pole `changelog:` z YAML (63 l.)** | j.w. |
+| `dr-01` | wpis 3.3 (15 l.) | **nowy** `references/CHANGELOG.md` |
+
+⛔ **Zakaz z wiersza flagi dochowany.** Przeniesienie było operacją na
+istniejącym tekście, nie redakcją: dla każdego skilla porównałem programowo,
+czy dokładny blok wycięty z ORYGINAŁU (`/mnt/skills/user`) występuje jako
+podciąg w nowym `references/CHANGELOG.md` — 4/4 ✅. Nic nie przeredagowano i
+nic nie odtworzono z pamięci.
+
+**Luka historii dr-01 (3.4 – 3.6) — świadomie NIEODTWORZONA.** T12 zgłaszał
+`version=3.6` przy najnowszym wpisie 3.3. Tych trzech wersji nie ma nigdzie:
+ani w korpusie, ani w YAML. Zgodnie z precedensem F-102 (groziło dopisanie
+pięciu zmyślonych wpisów) nie zrekonstruowałem ich — zamiast tego luka jest
+**opisana wprost w nowym pliku** jako nieodtworzona, z odesłaniem do tego
+dziennika jako jedynego możliwego śladu. To celowo zostawia widoczny brak
+zamiast wygodnej fikcji ciągłości.
+
+**Pole `changelog:` w YAML routera** liczyło 63 linie, czyli pełną historię
+zamiast skrótu — T12 zgłaszał to jako ⚠️. Przeniesione 1:1 (w oryginalnej
+składni listy YAML, w bloku ```yaml), w YAML został 7-linijkowy skrót bieżącej
+wersji z odesłaniem. Po edycji frontmatter przepuszczony przez `yaml.safe_load`
+— parsuje się poprawnie, `version` = `'3.23'` jako STRING.
+
+**Pomiar skuteczności — T12:**
+
+| | przed | po |
+|---|---|---|
+| zgłoszeń łącznie | 18 | **0** |
+| ⛔ czynnych rozjazdów | 5 | **0** |
+| ⚠️ ryzyk utajonych | 13 | **0** |
+
+---
+
+### 4. Synchronizacja map — POMIAR, nie założenie
+
+Użytkownik polecił synchronizować `MAPA-AKTOW.md` danego DR z mapą aktów w
+`prawo-polskie-v2`, **jeśli modyfikacje tego wymagają**. Sprawdziłem to wprost,
+zamiast założyć:
+
+| Test | przed | po | wniosek |
+|---|---|---|---|
+| T11 (`check_sync_aktow.py`) | 140 poz. WARN | **140** | bez zmian |
+| T3 (`test_cross_map_dzu.py`) | 8 rozbieżności | **8** | bez zmian |
+| `check_rejestracja_modulow.py` | 1/16 z rozbieżnościami | **1/16, ta sama** | bez zmian |
+
+**Wniosek: synchronizacja NIE była wymagana.** Zmiany tej sesji nie dotknęły
+żadnego aktu prawnego, numeru Dz.U. ani rejestracji modułu — dodawały bramki
+i przenosiły historię wersji. REGUŁA 3 bloku HARDGATE-AUDYT nie miała
+zastosowania. Odnotowane jako **O-6**, żeby przyszła sesja o tym samym zakresie
+zmian nie powtarzała pomiaru.
+
+---
+
+### 5. F-128 — NOWA (otwarta, niezamknięta)
+
+`check_rejestracja_modulow.py` zgłasza dla `dr-10` dwa MODUŁY-WIDMA: `mod-AH`
+i `mod-ustawa-zawody-medyczne-i-prawnicze`. Sprawdziłem oba ręcznie —
+**obydwa to fałszywe alarmy**:
+
+- `mod-AH` to alias z pola `name:` pliku `mod-ustawa-rolne-zywnosc-weterynaria.md`,
+  używany w prozie opisu w `MAPA-AKTOW.md` i `ROUTING-MAP.md`;
+- `mod-ustawa-zawody-medyczne-i-prawnicze` to **stara nazwa pliku**, jawnie
+  udokumentowana w opisie zamknięcia flagi F-2 („plik przemianowany na
+  `mod-ustawa-zawody-prawnicze-pokrewne`").
+
+Parser wyławia nazwy modułów z PROZY opisów, nie tylko z wierszy
+rejestracyjnych. Nie naprawiam tego w tej sesji — zmiana parsera wymaga
+rozstrzygnięcia, czy zawężać dopasowanie do kolumn/bloku `[✓]`, czy prowadzić
+rejestr aliasów; to decyzja projektowa, nie poprawka.
+
+**Dlaczego to warto zapisać jako flagę, a nie zignorować.** Koszt nie leży w
+dwóch fałszywych wierszach, tylko w tym, że raport **stale** kończy się
+„Dziedzin z rozbieżnościami: 1 z 16" — a test, który zawsze coś pokazuje, uczy
+czytelnika przewijać wynik. To lustrzane odbicie F-125: tam parser dawał
+fałszywy NEGATYW (ślepota na notację LEX), tu daje fałszywy POZYTYW.
+
+---
+
+### 6. Obserwacja O-5 — 15 skilli DR bez `references/CHANGELOG.md`
+
+`dr-01` dostał plik, bo miał co przenieść. Pozostałe 15 skilli DR **nie mają
+ani katalogu `references/`, ani pliku CHANGELOG**, mimo numerów wersji rzędu
+3.x–4.x (`dr-06` jest na 3.73). Ich historia istnieje wyłącznie w tym dzienniku.
+
+Nie zakładałem im plików. Powód nie jest oszczędnościowy: dla tych skilli nie
+ma czego PRZENIEŚĆ, więc założenie pliku byłoby **tworzeniem** historii, a nie
+jej przeniesieniem — czyli dokładnie tym, czego zakazuje wiersz F-126 i
+precedens F-102. Zostawiam to jako decyzję użytkownika (wariant A: nie zakładać,
+ZASADA 15 dopuszcza brak pliku; wariant B: pliki-zaczątki z wpisem tylko
+bieżącej wersji i jawną adnotacją o luce, wzorem `dr-01`).
+
+---
+
+### 7. Korekty rejestrów wykryte przy okazji
+
+1. **Licznik w TABLICY STERUJĄCEJ deklarował 13 flag wykonalnych przy 14
+   wierszach** — ten sam rozjazd, przed którym ostrzega adnotacja pod samą
+   tabelą („Przy KAŻDEJ zmianie liczby flag aktualizuj tę tabelę"). Skorygowany.
+2. **§ 8 podawał „kolejny wolny numer: F-124"**, mimo że F-124, F-125 i F-126
+   były już nadane — pole wskazywało numer ZUŻYTY. Gdyby ta sesja mu zaufała,
+   F-127 dostałaby numer kolidujący z istniejącą flagą. Skorygowane na F-129
+   z adnotacją, żeby aktualizować je RAZEM z licznikiem.
+
+---
+
+### 7b. Dwa ustalenia z walidacji YAML dostarczanych archiwów
+
+Przed dostawą przepuściłem frontmatter **każdego** SKILL.md przez
+`yaml.safe_load`. Wyszły dwie rzeczy, których nie widać przez `grep`:
+
+**(a) `analizator-przepisow-v2` miał NIEPARSOWALNY frontmatter — błąd ZASTANY,
+nie wprowadzony w tej sesji.** Sprawdzone kontrolnie na oryginale z
+`/mnt/skills/user`: ten sam błąd. Pole `description:` było niecytowanym
+skalarem zawierającym `v2: automatyczne orzecznictwo …` — dwukropek ze spacją
+w środku wartości, przez co YAML widział zagnieżdżone mapowanie i przerywał
+parsowanie. Skutek: **każde narzędzie czytające ten frontmatter programowo
+dostawało wyjątek, nie dane** — w tym T12, który po prostu nie miał czego
+sprawdzić. Naprawione: `description: |` (blok literalny). Po zmianie parsuje
+się poprawnie, długość 699 znaków (FAZA 2C: ✅ w limicie 1024).
+
+To warto zapamiętać jako wzorzec: pole `description` jest jedynym polem, które
+z natury zawiera prozę z dwukropkami, więc jest jedynym systematycznie
+narażonym na tę klasę błędu. Kandydat do dopisania jako kontrola w T12.
+
+**(b) F-102 — pozostały zakres pomniejszony o 6 skilli.** Wiersz flagi mówi:
+cudzysłów profilaktyczny „przy najbliższej edycji każdego z nich, NIE hurtem".
+Ta sesja edytowała 16 skilli DR, więc warunek się ziścił — `version:` ujęto w
+cudzysłów także tam, gdzie minor jest JEDNOCYFROWY i pułapka float jeszcze nie
+gryzie (`dr-01` 3.7, `dr-07` 3.6, `dr-08` 3.5, `dr-13` 3.8, `dr-14` 3.6,
+`dr-16` 3.3). Nie jest to działanie hurtem wbrew flagom — to jej własny
+wyzwalacz. Kontrola końcowa: `version` jest STRINGIEM w 26/26 sprawdzonych
+plików.
+
+---
+
+### 8. STATUS KOŃCOWY
+
+| Pozycja | Stan |
+|---|---|
+| Flagi zamknięte | **F-115, F-126, F-127** |
+| Flagi nowe | **F-128** (otwarta), obserwacje **O-5**, **O-6** |
+| Licznik flag F- | 19 → **18** |
+| T12 | 18 zgłoszeń (5 ⛔) → **0** |
+| T11 / T3 / rejestracja modułów | bez zmian (140/8/1-z-16) — synchronizacja map niewymagana |
+| FAZA 3E | **pominięta** — brak zmian Dz.U. w tej sesji (ZASADA 12 nie uruchamia się) |
+
+**Pliki zmienione:** SKILL.md w 23 skillach (16 DR + `analizator-przepisow-v2`,
+`chronologia-sprawy-v1`, `przesluchanie-swiadkow-v2-min90`, `raport-klienta-v1`,
+`orzeczenia-sadowe-v2`, `pisma-procesowe-v3`, `prawny-router-v3` — z czego
+`dr-01` i `analizator-przepisow-v2` z dwóch tytułów naraz), `references/CHANGELOG.md`
+w 6 skillach + 1 nowy (`dr-01`), oraz `audyt-systemu-v4/references/WARN-OTWARTE.md`
+i `AUDIT-JOURNAL.md` (ten wpis).
+
+**Reguła 7 — zastosowanie:** TAK, pełny łańcuch, KROK 0 (ile skilli, tyle
+zipów) — osobne archiwum dla każdego zmienionego skilla, `audyt-systemu-v4`
+traktowany jak każdy inny.
+
+---
+
+## AUDYT-2026-08-24b — F-128 zamknięta, F-125 pkt (1) wykonany; trzy realne rozjazdy danych ujawnione przez notację LEX
+
+**Tryb:** WARN-CLOSE, kontynuacja sesji 2026-08-24.
+**REGUŁA 1 KROK A/B:** `/mnt/user-data/outputs/` zawierało 24 ZIP-y z tury
+poprzedniej → kopia robocza przywrócona **Z ZIP-ÓW**, nie z `/mnt/skills/user`.
+Markery kontrolne po przywróceniu: F-128 obecna w rejestrze (6 trafień),
+wpis AUDYT-2026-08-24 obecny, 16 skilli DR z bramką ANTY-FASADA — naprawy
+poprzedniej tury nietknięte.
+
+---
+
+### 1. F-128 — ZAMKNIĘTA
+
+**Korekta własnego opisu flagi.** Otwierając F-128 w poprzedniej turze
+napisałem, że parser „czyta nazwy modułów z prozy opisów". To prawda, ale
+opis sugerował odkrycie — a docstring `check_rejestracja_modulow.py`
+**opisywał to ograniczenie od początku i wymieniał obie pozycje DR-10 z
+nazwy**. Flaga nie odkrywała więc nieznanej usterki; jej wartość była inna i
+węższa, i tak powinna była zostać sformułowana od razu.
+
+**Na czym polegał realny koszt.** Skoro trafienia są znane i sprawdzone, a
+mimo to podbijają licznik, raport **każdego** przebiegu kończył się linią
+„Dziedzin z rozbieżnościami: 1 z 16" i kodem wyjścia 1. Test trwale czerwony
+przestaje być sygnałem — uczy przewijać wynik. Dodatkowo blokował sensowne
+wpięcie skryptu w `install_precommit_hook.sh`, bo zawsze zwracałby błąd.
+
+**Naprawa:** rejestr `ALIASY_HISTORYCZNE` z uzasadnieniem per pozycja.
+Wyciszone trafienia są **nadal wypisywane** w raporcie, jako „alias
+historyczny (F-128, nie liczy się do rozbieżności)" — z pełnym wyjaśnieniem,
+skąd się biorą. Nie liczą się tylko do licznika i kodu wyjścia.
+
+**Pomiar:** `Dziedzin z rozbieżnościami: 1 z 16` → **0 z 16**, kod wyjścia
+1 → 0, przy NIEZMIENIONEJ zawartości dr-10.
+
+**Test regresyjny (żeby naprawa nie okazała się wyciszeniem):** wstrzyknąłem
+do `dr-15/MAPA-AKTOW.md` fikcyjny wpis `mod-ustawa-zmyslona-testowa-f128` bez
+pliku na dysku. Wynik: `WIDMA: 1`, pozycja wypisana, `1 z 16`. Prawdziwe
+widma nadal są łapane.
+
+---
+
+### 2. F-125 punkt (1) — WYKONANY, z wynikiem innym niż zakładała flaga
+
+Flaga kazała „przejrzeć 3 pozycje, które zmieniły status w T11 po naprawie
+parsera — czy to realne braki, czy pozycje skatalogowane pod inną notacją".
+
+Odtworzyłem pomiar różnicowy: uruchomiłem T11 dwa razy na tym samym korpusie,
+raz z `normalizuj()`, raz z tą funkcją zastąpioną identycznością (stan sprzed
+F-125). Wynik: **143 → 140**, a różnicę stanowią wyłącznie trzy wiersze
+`Dz.U. 2025 poz. 0` i `Dz.U. 2026 poz. 0`.
+
+**Odpowiedź: to nie były trzy pozycje do przeglądu, tylko trzy artefakty
+własnego parsera.** Naprawa nie ujawniła żadnego nowego braku — usunęła
+śmieci. Zbiór realnych pozycji w raporcie przed i po jest identyczny.
+
+---
+
+### 3. Ale przy okazji wyszło coś groźniejszego — 3 realne rozjazdy danych
+
+Skoro pomiar różnicowy nic nie dał, zadałem inne pytanie: **czy istnieją
+pozycje zapisane WYŁĄCZNIE w notacji LEX**, czyli takie, których żaden
+rejestr nie nosi w notacji zwykłej? Na 25 unikalnych pozycji LEX w korpusie —
+21 występuje też normalnie, **4 wyłącznie po LEX-owsku**. Trzy z nich okazały
+się realnymi błędami danych.
+
+**(a) `Dz.U.2007.75.493` — ustawa o zapobieganiu szkodom w środowisku.**
+Trzy rejestry mówiły trzy różne rzeczy o tym samym akcie:
+
+| Rejestr | Co mówił |
+|---|---|
+| mapa centralna Dz.U. | rocznik 2007 = `PREV`, zastąpiony t.j. **2020 poz. 2187** |
+| `ROUTING-MAP.md` | „Dz.U. 2007 poz. 75 ze zm." ze statusem **✅ OK** |
+| `dr-09/mod-POS` | „Dz.U.2007.75.493 — **brak nowszego t.j.**" |
+| `dr-09/MAPA-AKTOW.md` | akt **nieobecny w ogóle** |
+
+W ROUTING-MAP siedział **numer dziennika w miejscu pozycji**: `75` to Nr
+dziennika, pozycja to `493`. To dokładnie ta klasa błędu, którą F-82 opisała
+dla Kodeksu morskiego — numer należący do czego innego, wpisany zgodnie i
+dlatego niewidoczny dla testów porównujących rejestry między sobą. Notacja
+LEX dodatkowo zasłaniała go przed T3/T11.
+
+Weryfikacja RZĄD 1: ISAP `WDU20200002187` — obwieszczenie Marszałka Sejmu
+z 18.11.2020 ogłaszające t.j. ustawy z 13.04.2007, zastępujące t.j. Dz.U.
+2019 poz. 1862. Potwierdzenie zbieżne: prawo.pl i infor.pl (RZĄD 2B) oraz
+pgi.gov.pl (źródło rządowe). ⚠️ **NIEUSTALONE**, czy po 2020 r. ogłoszono
+kolejny t.j. — bezpośredni `web_fetch` ISAP nadal zablokowany (F-8), więc
+w obu naprawionych miejscach zostawiłem to zastrzeżenie wprost, zamiast
+zapisać liczbę jako pewną.
+
+Naprawione w trzech miejscach: ROUTING-MAP (numer + status + `⚠️ ALERT`),
+moduł dr-09 (fałszywe „brak nowszego t.j."), oraz **REGUŁA 3** — dopisany
+brakujący wiersz do `dr-09/MAPA-AKTOW.md`. KROK D Reguły 3 potwierdzony
+programowo: wiersz ROUTING-MAP leży w sekcji `## DR-09`, nie w sąsiedniej.
+
+**(b) `Dz.U.2024.0.1568` — KPC w module dr-12 (arbitraż/ADR).** Moduł opierał
+termin z art. 1208 §1 („2 miesiące na uchylenie wyroku sądu polubownego") na
+tym t.j. Weryfikacja RZĄD 1 (eli.gov.pl): ten t.j. ma status **„wygaśnięcie
+aktu" z datą 2026-04-06** i został zastąpiony obwieszczeniem z 27.03.2026 —
+**Dz.U. 2026 poz. 468**, status „obowiązujący". Numer 2026.468 nosiły już
+wtedy WSZYSTKIE rejestry systemu, łącznie z `dr-12/MAPA-AKTOW.md`. Rozjazd
+dotyczył wyłącznie treści modułu i był niewidoczny dla T3 przez notację LEX.
+
+⛔ **Terminu NIE zmieniłem i celowo nie potwierdziłem.** Poprzednie
+potwierdzenie (arslege.pl/lexlege.pl, 2026-07-27) dotyczyło brzmienia z t.j.
+2024.1568. Nowy t.j. uwzględnia m.in. nowelizacje KPC z 5.08.2025 (Dz.U.
+poz. 1172) i 9.10.2025 (Dz.U. poz. 1518), więc niezmienność art. 1208 §1 nie
+jest oczywista — a założenie jej byłoby dokładnie tym, czego zakazuje
+PRAWO-HARDGATE. W module stoi znacznik ⛔ z poleceniem weryfikacji w RZĘDZIE 1
+przed powołaniem terminu w piśmie. Pozycja dopisana do pozostałego zakresu
+F-125.
+
+**(c) `Dz.U.2019.0.2310` (dr-02, rozporządzenie ws. znaków drogowych)** —
+kwalifikacja **(a) wg metody F-106**: akt wykonawczy świadomie opisany w
+treści modułu, nie wymaga własnego wiersza w ROUTING-MAP. Bez zmian.
+
+**(d) `Dz.U.2026.061.0000244` (dr-13, mod-ustawa-policja)** — pozycja obecna
+we wszystkich rejestrach, ale zapisana z **zerami wiodącymi**. To **TRZECI
+format** zapisu numeru: `normalizuj()` nie ścina zer, więc `poz. 0000244` nie
+dopasuje się do `poz. 244`. Docstring `check_sync_aktow.py` mówi wprost:
+„jeśli mimo normalizacji nadal pojawiają się trafienia, to znak, że istnieje
+TRZECI format. **Zgłoś go, nie rozszerzaj filtra**". Zastosowałem się —
+zgłoszone do pozostałego zakresu F-125, parser NIETKNIĘTY.
+
+---
+
+### 4. Pomiary kontrolne
+
+| Test | przed turą | po |
+|---|---|---|
+| `check_rejestracja_modulow` | 1 z 16, kod 1 | **0 z 16, kod 0** |
+| T3 | 8 | 8 |
+| T11 | 140 | **141** |
+| notacja LEX w korpusie | 79 wystąpień / 25 pozycji | **64 / 25** |
+
+⚠️ **T11 wzrósł o 1 i to jest oczekiwane, nie regresja.** Dopisanie wiersza
+z `Dz.U. 2020 poz. 2187` do `dr-09/MAPA-AKTOW.md` wprowadziło do porównania
+pozycję, której wcześniej w mapie lokalnej nie było — T11 zgłasza ją teraz
+jako „do przeglądu", bo mapa centralna ma ją w innym kontekście (rocznik 2007
+jako PREV). To poprawne zachowanie testu: pozycja NAPRAWDĘ wymaga domknięcia
+łańcucha 2007→2020 w mapie centralnej, co należy do zakresu F-104/F-106.
+
+---
+
+### 4b. F-129 — otwarta i zamknięta w tej turze (dwa skille niewidoczne dla F-126)
+
+Po korektach uruchomiłem T12 kontrolnie — i zwrócił **2 nowe zgłoszenia**,
+których sesja poranna nie mogła zobaczyć. Powód jest czysto metodologiczny i
+warto go zapamiętać: kopia robocza tury 1 zawierała wyłącznie skille wtedy
+edytowane, więc **T12 mierzył na niepełnym zbiorze**. Dopiero dorównanie
+katalogu o 8 skilli nietkniętych (potrzebne do pomiaru ROUTING-MAP) pokazało
+pełny obraz. **Wniosek do stosowania: T12 i T11 uruchamiaj zawsze na PEŁNYM
+drzewie systemu, nie na katalogu roboczym sesji** — inaczej „0 rozbieżności”
+znaczy tylko „0 w tym, co akurat skopiowałem”.
+
+| Skill | Zgłoszenie | Naprawa |
+|---|---|---|
+| `analiza-sadowa-v6` | pole `changelog:` miało 39 linii — pełna historia w YAML zamiast skrótu | wyniesione 1:1 do `references/CHANGELOG.md`, w YAML 7-linijkowy skrót; 6.4 → 6.5 |
+| `analizator-dowodow-v3` | pole `changelog:` deklarowało 5.15.0 przy `version: 5.16.2` — rozjazd dwóch wydań | skrót zsynchronizowany; **wpisy 5.16.x już istniały** w `references/CHANGELOG.md`, więc nic nie odtwarzano — nieaktualny był wyłącznie skrót |
+
+To ta sama klasa co F-126, tylko w skillach, których wiersz tamtej flagi nie
+wymieniał. **T12 po naprawie: 0 zgłoszeń na pełnym drzewie 32 skilli.**
+
+---
+
+### 5. STATUS KOŃCOWY TURY
+
+| Pozycja | Stan |
+|---|---|
+| Flagi zamknięte | **F-128**, **F-129** (otwarta i zamknięta w tej turze) |
+| Flagi zawężone | **F-125** — pkt (1) wykonany; zostają (2) decyzja o notacji, (3) trzeci format z zerami wiodącymi, (4) weryfikacja art. 1208 §1 |
+| Licznik flag F- | 18 → **17** (F-129 nie weszła do licznika — zamknięta w tej samej turze) |
+| Naprawy CRIT-TREŚĆ | 2 (dr-09 fałszywe „brak nowszego t.j."; dr-12 wygasły t.j. jako podstawa terminu) |
+| Naprawy rejestrowe | 2 (ROUTING-MAP błędny numer; REGUŁA 3 — brakujący wiersz w dr-09/MAPA-AKTOW) |
+| FAZA 3E | **URUCHOMIONA** — ZASADA 12 spełniona: wykryto zmianę statusu aktu (2024.1568 → wygasły) i skonfrontowano treść modułów, nie tylko numery w mapach |
+
+**Pliki zmienione:** `audyt-systemu-v4/scripts/check_rejestracja_modulow.py`,
+`audyt-systemu-v4/references/WARN-OTWARTE.md`, `AUDIT-JOURNAL.md` (ten wpis),
+`prawo-polskie-v2/ROUTING-MAP.md`, `dr-09/MAPA-AKTOW.md`,
+`dr-09/modules/mod-POS-prawo-ochrony-srodowiska.md`,
+`dr-12/modules/mod-KPC-arbitraz-mediacja-ADR.md`, `analiza-sadowa-v6/SKILL.md`
++ jego `references/CHANGELOG.md`, `analizator-dowodow-v3/SKILL.md`.
+
+**Reguła 7 — zastosowanie:** TAK, pełny łańcuch; REGUŁA 1 KROK B (przywrócenie
+z ZIP-ów poprzedniej tury) wykonana i zweryfikowana markerami.
+
+---
+
+## AUDYT-2026-08-24c — F-125 pkt (1) i (4) domknięte; źródło błędu z 24b znalezione w mapie centralnej
+
+**Tryb:** WARN-CLOSE, trzecia tura sesji 2026-08-24.
+**REGUŁA 1:** kopia robocza przywrócona z 27 ZIP-ów ostatniej dostawy.
+Markery kontrolne po przywróceniu: `ALIASY_HISTORYCZNE` w parserze (6 trafień),
+wpis `AUDYT-2026-08-24b` obecny, korekta ROUTING-MAP obecna, 16 skilli DR
+z bramką ANTY-FASADA. Dorobek obu poprzednich tur nietknięty.
+
+---
+
+### 1. F-125 pkt (4) — termin z art. 1208 §1 KPC zweryfikowany
+
+Poprzednia tura zostawiła w `dr-12/mod-KPC-arbitraz-mediacja-ADR.md` znacznik
+⛔ przy terminie „2 miesiące", bo podstawą był t.j. wygasły 2026-04-06.
+Domknięte.
+
+**Ustalenie:** termin dwóch miesięcy **pozostaje aktualny pod t.j. 2026.468**.
+Źródło wiodące: `przepisy.gofin.pl` (RZĄD 2B), które prowadzi wersje czasowe
+art. 1208 i wymienia `Dz. U. z 2026 r. poz. 468` jako ostatnią — brzmienie §1
+pod tą wersją nadal mówi o dwóch miesiącach. Zbieżnie: lexlege.pl.
+
+⚠️ **Oznaczyłem to jako RZĄD 2B, nie RZĄD 1 — i to jest świadome.** ISAP
+pozostaje zablokowany dla `web_fetch` (F-8), a tekst jednolity w ELI to PDF
+liczący ~276 stron, którego nie czytałem. ZASADA 14 pkt 2 zabrania oznaczać
+taki wynik pełnym ✅ [VER — RZĄD 1]. W module stoi zastrzeżenie, żeby przed
+powołaniem terminu w piśmie potwierdzić brzmienie w ISAP.
+
+**Przy okazji dwa uzupełnienia treści modułu:**
+
+- **Ostrzeżenie temporalne.** Termin **3 miesięcy** obowiązywał w pierwotnym
+  brzmieniu Części piątej KPC (dodanej ustawą z 28.07.2005, Dz.U. Nr 178
+  poz. 1478, od 17.10.2005). To wyjaśnia, skąd „3 miesiące" w starszych
+  omówieniach, przed którymi moduł już ostrzegał — teraz z podaną podstawą,
+  nie samym ostrzeżeniem.
+- **Orzecznictwo: uchwała SN z 5.07.2024, III CZP 64/23.** O zachowaniu
+  dwumiesięcznego terminu decyduje chwila wniesienia skargi **do właściwego**
+  sądu apelacyjnego. Skutek praktyczny jest dotkliwy i wcześniej nie był w
+  module odnotowany: wniesienie w terminie do NIEWŁAŚCIWEGO sądu apelacyjnego
+  terminu **nie zachowuje** — to ryzyko odrzucenia skargi, nie przekazania
+  sprawy. Sygnatura potwierdzona w trzech niezależnych źródłach RZĄD 2B
+  (inforlex.pl, prawo.pl, rp.pl — zgodna teza i zgodny skład). ⚠️ Pełny tekst
+  uzasadnienia NIEODCZYTANY; w module stoi wymóg pobrania z sn.pl i podania
+  KOTWICY przed dosłownym cytowaniem (Zasada 2B PRAWO-HARDGATE).
+
+---
+
+### 2. Źródło błędu z tury 24b — było w mapie centralnej, nie w ROUTING-MAP
+
+W poprzedniej turze naprawiłem w `ROUTING-MAP.md` numer „Dz.U. 2007 poz. 75",
+przyjmując, że to lokalny błąd przepisania. **Sprawdziłem, skąd się wziął —
+i okazało się, że nie był lokalny.**
+
+Mapa centralna, wiersz 725, trzymała w **kolumnie pozycji** wartość `75`,
+podczas gdy jej własny opis w tym samym wierszu podawał poprawne „poz. 493".
+Rejestr sam ze sobą był niezgodny w obrębie jednego wiersza — i to z niego
+błąd przepłynął do ROUTING-MAP.
+
+Naprawione: kolumna `75` → `493`, `Nr 75` przeniesiony do opisu, dodany
+znacznik `⚠️ ALERT` (zgodnie z definicją z FAZY 3D: pozycja, której numer
+okazał się błędny i został skorygowany, wymaga sprawdzenia w KAŻDYM
+kolejnym przebiegu).
+
+⚠️ **Obserwacja o naprawie F-82, warta zapamiętania.** Wiersz 724 mapy
+centralnej sam dokumentuje, że **F-82 wykryła ten akt 2026-08-21** i nazwała
+go „najbardziej rażącym dotąd znalezionym przypadkiem nieaktualności".
+Naprawiła jednak wyłącznie mapę centralną — **ani ROUTING-MAP, ani moduł
+dr-09 nie zostały dotknięte**, więc przez trzy dni ROUTING-MAP nadal podawał
+akt PREV jako ✅ OK, a moduł nadal twierdził „brak nowszego t.j.". Dokładnie
+ten wzorzec opisuje `modules/MOD-PROPAGACJA-NOWELIZACJI.md`: naprawa punktowa
+w jednym pliku nie dowodzi, że problem nie żyje dalej gdzie indziej.
+**Wniosek operacyjny: przy każdej zmianie statusu aktu w mapie centralnej
+uruchamiaj MOD-PROPAGACJA-NOWELIZACJI, nie kończ na wierszu mapy.**
+
+---
+
+### 3. T11 wzrósł o 1 — i jest to koszt mojej własnej naprawy
+
+| Test | tura 24b | tura 24c |
+|---|---|---|
+| T11 | 141 | 141 |
+| T3 | 8 | 8 |
+| `check_rejestracja_modulow` | 0 z 16 | 0 z 16 |
+| T12 | 0 | 0 |
+
+Pomiar różnicowy wobec stanu pristine wskazał, że jedyną NOWĄ pozycją w
+raporcie T11 jest `Dz.U. 2019 poz. 1862` — ogniwo pośrednie łańcucha t.j.,
+które **sam wpisałem** do ROUTING-MAP i modułu dr-09, opisując następstwo
+aktów. Test widzi numer w mapie DR, nie widzi własnego wiersza w mapie
+centralnej, więc zgłasza do przeglądu.
+
+**Kwalifikacja (a) wg metody F-106:** akt świadomie opisany w prozie wiersza
+aktu bazowego (2020/2187), nie wymaga własnego wiersza. Zapisałem tę
+kwalifikację wprost w wierszu F-106, żeby następny przegląd T11 nie
+rozstrzygał jej od nowa.
+
+⚠️ Rozważałem usunięcie numeru z ROUTING-MAP, żeby „wyczyścić" T11. Odrzuciłem:
+łańcuch t.j. jest informacją potrzebną przy sprawach z datą wsteczną
+(TEMPORAL-LAW-CHECK), a przycinanie treści pod wynik testu to odwrócenie
+ról między miarą a mierzonym.
+
+---
+
+### 4. STATUS KOŃCOWY TURY
+
+| Pozycja | Stan |
+|---|---|
+| F-125 | zawężona: pkt (1) i (4) wykonane; zostają **dwie decyzje użytkownika** — (2) ujednolicenie notacji LEX, (3) trzeci format z zerami wiodącymi |
+| Licznik flag F- | **17** (bez zmian — F-125 zawężona, nie zamknięta) |
+| Naprawy rejestrowe | 1 (kolumna pozycji w mapie centralnej — źródło błędu z tury 24b) |
+| Uzupełnienia treści | 3 (potwierdzenie terminu, ostrzeżenie temporalne, uchwała SN III CZP 64/23) |
+
+**Pliki zmienione:** `dr-12/modules/mod-KPC-arbitraz-mediacja-ADR.md`,
+`audyt-systemu-v4/references/mapa_dzu_2026-08-21.md`, `WARN-OTWARTE.md`,
+`AUDIT-JOURNAL.md` (ten wpis).
+
+**Reguła 7 — zastosowanie:** TAK, pełny łańcuch.
+
+---
+
+## AUDYT-2026-08-24d — ujednolicenie notacji Dz.U. w całym korpusie (decyzja użytkownika, F-125 pkt 2)
+
+**Tryb:** wykonanie decyzji użytkownika („ujednolić notację LEX").
+**REGUŁA 1:** kopia robocza przywrócona z 27 ZIP-ów ostatniej dostawy;
+markery `AUDYT-2026-08-24c` i `III CZP 64/23` potwierdzone przed edycją.
+
+---
+
+### 1. Zakres okazał się większy, niż mówił wiersz flagi
+
+F-125 mówiła o „64 wystąpieniach, 25 pozycjach". Pomiar przed wykonaniem
+pokazał co innego — i to jest najważniejszy wynik tej tury:
+
+| Forma | Wystąpień | Plików | Czy narzędzia ją widziały? |
+|---|---|---|---|
+| `Dz.U.RRRR.NN.PPPP` (LEX trzyczłonowa) | 108 | 48 | dopiero po naprawie F-125 (`normalizuj()`) |
+| **`Dz.U.RRRR.PPPP` (zwarta dwuczłonowa)** | **508** | **111** | **NIGDY — nieobjęta żadną flagą ani żadnym parserem** |
+
+`RE_LEX` w `check_sync_aktow.py` wymaga TRZECH członów
+(`(\d{4})\.(\d{1,3})\.(\d{1,5})`), więc zapis `Dz.U.2024.695` nie pasuje
+do niego w ogóle — ani do wzorca kanonicznego. **Forma dwuczłonowa była
+pięciokrotnie liczniejsza od tej, którą flaga opisywała, i całkowicie
+niewidoczna.** Naprawa F-125 z 08-23g usunęła mniejszą połowę problemu i
+zamknęła sprawę jako „ślepota na notację LEX" — nie sprawdzając, czy istnieją
+inne formy zapisu. To ta sama lekcja co przy F-82 i F-128: naprawa
+zdiagnozowana wąsko domyka wąsko.
+
+---
+
+### 2. Co zostało zrobione
+
+**Przekonwertowano 370 wystąpień w 126 plikach** do formy kanonicznej
+`Dz.U. RRRR poz. N` (62 trzyczłonowe + 308 dwuczłonowych; różnica wobec
+liczb z tabeli wyżej to wystąpienia w plikach świadomie wyłączonych).
+
+**Wyłączone świadomie — rejestry historyczne:** `AUDIT-JOURNAL.md`
+(append-only, 210 wystąpień — przepisanie historii zniekształciłoby zapis
+tego, jak dokumenty faktycznie wtedy wyglądały) oraz cztery archiwalne
+generacje `mapa_dzu_*`. Mapa AKTUALNA (`2026-08-21`) skonwertowana — to
+rejestr żywy, nie archiwum.
+
+**Wyłączone świadomie — 10 dosłownych cytatów zapisu źródła.** To był
+najtrudniejszy fragment tej roboty i wymagał dwóch dodatkowych przebiegów.
+Moduły w wielu miejscach cytują, jak dane źródło SYGNUJE tekst jednolity —
+np. `arslege.pl z cytatem "Dz.U.2026.0.85 t.j."` albo `nagłówek OpenLEX
+„Dz.U.2026.522 t.j."`. Zamiana wewnątrz takiego cudzysłowu **nie jest
+ujednoliceniem, tylko fałszowaniem cytatu**: zdanie zaczęłoby twierdzić, że
+źródło wyświetla coś, czego nie wyświetla. Wszystkie 10 przypadków
+przywrócono do brzmienia oryginalnego i oznaczono komentarzem
+`<!-- zapis źródła cytowany dosłownie — CELOWO nieujednolicony -->`, żeby
+kolejny przebieg ich nie „poprawił".
+
+Pierwszy przebieg ochronny złapał 9 z 10 — dziesiąty (`mod-BronAmunU`) miał
+słowo „sygnowane" na KOŃCU POPRZEDNIEGO WIERSZA, więc wzorzec jednoliniowy
+go nie widział. Potrzebny był drugi przebieg, patrzący na wiersz poprzedni.
+
+**Przypadek osobny: cytat złamany przez zawijanie wiersza.**
+`dr-02/mod-KC-spadki.md` miał `Dz.U.2025.0.` na końcu jednego wiersza i
+`1071]` na początku następnego. Taki zapis jest niewidoczny dla KAŻDEGO
+narzędzia liniowego — regexy, `grep`, wszystkie testy T3/T11. Sklejone
+ręcznie. ⚠️ To jest klasa błędu, której nie wykryje żaden z obecnych testów;
+odnotowuję ją tutaj, bo nie mam dla niej dobrego automatu.
+
+---
+
+### 3. Weryfikacja bezstratności — i co pokazała
+
+Porównałem ZBIÓR par `(rok, pozycja)` przed i po, per plik, wobec stanu
+sprzed tej tury (rozpakowane ZIP-y, nie pristine — pristine mieszałoby
+dorobek trzech tur):
+
+**Zgubione numery: 0. Zmienione numery: 0.**
+
+Jedna pozycja pokazała się jako „nowa": `Dz.U. 2024 poz. 1863` w mapie
+centralnej. To nie jest nowy numer — zapis brzmiał `Dz.U. 2024.1863.` z
+kropką kończącą zdanie, przez co negatywne wyszukiwanie w moim własnym
+wzorcu pomiarowym go odrzucało. Numer był w tekście od zawsze, tylko żadne
+narzędzie go nie widziało. Trudno o lepszą ilustrację tego, po co ta operacja.
+
+---
+
+### 4. Pomiary
+
+| Miara | przed | po |
+|---|---|---|
+| Wystąpienia w formie KANONICZNEJ (czytelnej dla narzędzi) | 3 894 | **4 317** |
+| Unikalne pozycje widoczne dla narzędzi | 562 | **593** |
+| T11 | 141 | 141 |
+| T3 | 8 | 8 |
+| `check_rejestracja_modulow` | 0 z 16 | 0 z 16 |
+| T12 | 0 | 0 |
+
+**+31 unikalnych pozycji Dz.U. stało się widocznych** — m.in. `2024 poz. 1568`
+(t.j. KPC), `2019 poz. 2310`, `2026 poz. 795`, `2025 poz. 1844`.
+
+⚠️ **T11 i T3 się NIE zmieniły — i to nie jest sprzeczność.** Oba testy
+czytają `MAPA-AKTOW.md`, `ROUTING-MAP.md` i mapę centralną, a nie treść
+modułów. Zdecydowana większość konwersji dotyczyła właśnie modułów, więc te
+dwa liczniki nie miały prawa drgnąć. Zysk jest realny, ale leży gdzie indziej:
+**każde przyszłe narzędzie czytające numery Dz.U. z treści modułów** —
+w tym niezbudowany jeszcze test pokrycia z F-108 — zobaczy teraz o 31 pozycji
+i 423 wystąpienia więcej. Podawanie tu spadku T11 byłoby mierzeniem nie tego,
+co się zmieniło.
+
+---
+
+### 5. Czego to NIE rozwiązuje
+
+⛔ Ujednolicenie jest **sprzątaniem, nie zabezpieczeniem**. Korpus jest dziś
+czysty, ale każde kolejne wklejenie fragmentu z LEX, OpenLEX czy arslege
+wprowadzi starą formę z powrotem — a przy 111 plikach dotkniętych za pierwszym
+razem widać, że dzieje się to samoczynnie i niepostrzeżenie. Trwałym
+rozwiązaniem jest **test wykrywający niekanoniczną notację przy każdym
+przebiegu**, nie okresowe sprzątanie. Nie zbudowałem go w tej turze i nie
+udaję, że problem jest zamknięty: F-125 zostaje otwarta na punkcie (3).
+
+---
+
+### 6. STATUS KOŃCOWY
+
+| Pozycja | Stan |
+|---|---|
+| F-125 | zawężona do pkt (3): decyzja o `normalizuj()` (zera wiodące + forma dwuczłonowa). Priorytet obniżony ze średniego na niski |
+| Licznik flag F- | **17** (bez zmian) |
+| Pliki zmienione | **126** |
+| Konwersje | 370 (62 trzyczłonowe + 308 dwuczłonowych) |
+| Cytaty źródła zachowane dosłownie | 10, oznaczone komentarzem |
+
+**Reguła 7 — zastosowanie:** TAK, pełny łańcuch, osobne archiwum na skill.
+
+---
+
+## AUDYT-2026-08-24e — F-130: audyt-systemu-v4 był jedynym skillem bez pola `description:`
+
+**Wyzwalacz:** użytkownik przysłał `audyt-systemu-v4-fixed.zip` z gotową poprawką
+i poleceniem „wstaw yaml analogicznie".
+
+⚠️ **Przesłanego archiwum NIE wgrałem w całości — i to było konieczne.** Diff
+wykazał, że jest ono zbudowane na stanie SPRZED tury 24d: zawiera starą notację
+Dz.U. w `MOD-PROPAGACJA-NOWELIZACJI.md` i `MOD-TRESC-MERYTORYCZNA.md` oraz
+wcześniejsze wersje `AUDIT-JOURNAL.md`, `WARN-OTWARTE.md`, `CHANGELOG.md` i mapy
+centralnej. Wgranie go cofnęłoby ujednolicenie notacji i cztery wpisy dziennika,
+bez żadnego sygnału błędu — dokładnie scenariusz, przed którym ostrzega REGUŁA 1
+bloku HARDGATE-AUDYT. Przeniosłem **wyłącznie zamierzoną zmianę**: jedną linię
+`description:`, dosłownie w brzmieniu użytkownika.
+
+---
+
+### 1. Ustalenie
+
+Kontrola wszystkich 32 skilli: **`audyt-systemu-v4` był JEDYNYM bez pola
+`description:` we frontmatterze.** Pozostałe 31 miały je od dawna — DR-skille
+na pozycji 3 (po `name` i `version`), skille proceduralne dalej, `shared` też.
+
+Znaczenie nie jest porządkowe: `description` to pole, na podstawie którego skill
+jest **wybierany do wywołania**. Skill bez niego leży na dysku i może nigdy nie
+zostać uruchomiony automatycznie. **Objawem jest CISZA, nie błąd** — a to
+najgorszy możliwy tryb awarii do wykrycia ręcznego, bo nie produkuje niczego,
+co dałoby się zauważyć.
+
+---
+
+### 2. Przyczyna, dla której luka przetrwała nieustaloną liczbę sesji
+
+System MA fazę kontroli tego pola — FAZA 2C i `modules/MOD-DESCRIPTION.md`.
+Nie zgłosiła niczego, i nie mogła: **mierzyła wyłącznie DŁUGOŚĆ**.
+
+Jej skrypt wykrycia dla pliku BEZ pola `description:` wypisywał `0`, po czym
+kwalifikował wynik warunkiem `if desc > 1024 … elif desc > 900 … else ✅ OK`.
+Czyli **brak pola — stan najgorszy z możliwych — był raportowany jako stan
+najzdrowszy**. Kontrola nie tylko przepuszczała usterkę; aktywnie ją
+uwiarygodniała, wypisując zielony znacznik.
+
+To trzeci przypadek tej klasy w tej sesji, po F-125 (parser ślepy na notację
+LEX → fałszywy negatyw) i F-128 (parser czytający prozę → fałszywy pozytyw).
+Wspólny mianownik: **narzędzie kontrolne, którego zakres jest węższy niż nazwa
+sugeruje, i nikt tego nie sprawdził testem negatywnym.**
+
+---
+
+### 3. Co zostało zrobione
+
+1. **`SKILL.md`** — dodane `description:` (191 znaków), w brzmieniu z poprawki
+   użytkownika, na pozycji 2 frontmattera. YAML przechodzi `yaml.safe_load`.
+2. **`modules/MOD-DESCRIPTION.md`** — moduł przemianowany z „Walidacja długości
+   description" na „Walidacja pola description (OBECNOŚĆ + długość)". Dodany
+   próg: **brak pola / pole puste = ⛔ CRIT**, z jawnym ostrzeżeniem, żeby nie
+   mylić „0 znaków" z „OK".
+3. **`scripts/check_description.py` (NOWY, test T14)** — kontroluje obecność
+   frontmattera, obecność pola, niepustość i długość. Obsługuje trzy formy
+   zapisu spotykane w systemie (inline, blok `|`, blok `>-`).
+4. Rejestracja w czterech miejscach: YAML `scripts:`, FAZA 2C, drzewo STRUKTURA
+   KATALOGU (55 → 56 plików, 18 → 19 skryptów), `REGRESSION-TEST-PLAN.md`
+   sekcja 14, oraz wpięcie w `run_regression_suite.py`.
+
+⚠️ Przy wpinaniu w orkiestrator: `check_description.py` przyjmuje katalog jako
+argument POZYCYJNY, a nie przez `--repo-root` jak T11/T12. Odnotowane w kodzie
+komentarzem, bo to typowe miejsce na cichy błąd przy kolejnym dopisywaniu testu.
+
+---
+
+### 4. Walidacja testu — na obu stanach, nie na jednym
+
+| Katalog | Stan | Wynik T14 |
+|---|---|---|
+| `/mnt/skills/user` | sprzed poprawki | **⛔ 1** — dokładnie `audyt-systemu-v4`, „BRAK POLA `description:`" |
+| kopia robocza | po poprawce | **✅ czysto**, 27/27 skilli |
+
+Test negatywny jest tu istotniejszy od pozytywnego: gdyby T14 na stanie sprzed
+poprawki zwrócił „czysto", odtworzyłby wadę, którą ma wykrywać. Warunek ten
+zapisałem w `REGRESSION-TEST-PLAN.md` sekcja 14 jako obowiązkowy przy każdej
+przyszłej zmianie skryptu.
+
+Orkiestrator uruchomiony kontrolnie: `T14: ✅ PASS`, wynik końcowy zestawu bez
+zmian. T12 po podbiciu wersji: 0 rozbieżności.
+
+---
+
+### 5. Ograniczenie, jawne
+
+T14 mierzy OBECNOŚĆ i DŁUGOŚĆ, **nie TRAFNOŚĆ** opisu. Description obecny, ale
+źle opisujący skill, przejdzie test i nadal będzie powodował złe wyzwalanie.
+Na to nie ma automatu i nie udaję, że jest — to zakres **F-113** (test
+skuteczności z grupą kontrolną), nie tego skryptu.
+
+---
+
+### 6. STATUS
+
+| Pozycja | Stan |
+|---|---|
+| F-130 | **otwarta i zamknięta w tej samej sesji** |
+| Licznik flag F- | **17** (bez zmian — F-130 nie weszła do licznika) |
+| Wersja skilla | 6.16 → **6.17** |
+| Nowy test | **T14** (`check_description.py`), KRYTYCZNY |
+| Liczba plików skilla | 55 → **56** (różnica uzasadniona: nowy skrypt) |
+
+**Pliki zmienione:** `audyt-systemu-v4/SKILL.md`, `modules/MOD-DESCRIPTION.md`,
+`scripts/check_description.py` (nowy), `scripts/run_regression_suite.py`,
+`references/REGRESSION-TEST-PLAN.md`, `references/CHANGELOG.md`,
+`references/WARN-OTWARTE.md`, `references/AUDIT-JOURNAL.md` (ten wpis).
+
+**Reguła 7 — zastosowanie:** TAK, pełny łańcuch.
+
+---
+
+## AUDYT-2026-08-24f — F-113: część projektowa wykonana (protokół testu bramek z grupą kontrolną)
+
+**REGUŁA 1:** kopia robocza z 27 ZIP-ów ostatniej dostawy; marker
+`AUDYT-2026-08-24e` potwierdzony przed edycją.
+
+---
+
+### 1. Dlaczego akurat ta flaga i akurat teraz
+
+Wiersz F-113 zawiera instrukcję, którą łatwo przeoczyć: **„WYKONAĆ NA KOŃCU (po
+F-115…F-123), ale ZAPROJEKTOWAĆ NA POCZĄTKU — kryteria zamknięcia nowych flag
+muszą dać się zmierzyć tym testem, nie tylko grepem obecności reguły."**
+
+Warunek pierwszy jest już spełniony: F-115…F-123 zamknięte. Ale projekt nie
+powstał, a w międzyczasie ta sesja zamknęła kolejne flagi (F-126…F-130) — czyli
+system przyrastał o reguły, których miary nadal nie było. To jest właśnie ten
+dług, przed którym flaga ostrzegała.
+
+Wykonuję część PROJEKTOWĄ. Przebiegów nie wykonuję i flagi nie zamykam.
+
+---
+
+### 2. Co powstało
+
+**`references/PLAN-TESTU-BRAMEK-F113.md`** — protokół w 11 sekcjach.
+Konstrukcja odpowiada punkt po punkcie na cztery wady TEST1–TEST3 z zakresu
+rozszerzonego flagi:
+
+| Wada TEST1-3 | Odpowiedź protokołu |
+|---|---|
+| prompt sam podawał kryteria oceny | § 0: **zakaz** wymieniania kryteriów w prompcie; wystąpienie słów „status/identyfikator/oznacz" unieważnia przebieg |
+| „zakaz narzędzi + wykonaj routing" — żądanie niewykonalne, a jego niewykonanie punktowane | § 3: trzy komórki T0/T1/T2 z **twardym zakazem** punktowania braku routingu w T0; tam mierzy się `TRYB ZDEGRADOWANY` zamiast routingu |
+| zestawianie surowego outputu z samooceną drugiej wersji | § 6: ocena **ślepa**, etykiety ramion zastąpione losowym ID, mapowanie odsłaniane po ocenie |
+| brak pomiaru halucynacji | § 4: cztery **typy pułapek** (przepis nieistniejący, uchylony, zmyślona sygnatura, akt pod cudzym numerem) |
+| brak rejestracji warunków | § 9: obowiązkowa metryka przebiegu — wersja modelu, hash manifestu, lista narzędzi, log wywołań |
+
+**Grupa kontrolna (§ 2)** — sedno całej flagi. Ramię A ma bramki **fizycznie
+usunięte z drzewa**, nie „poproszone o niestosowanie". Bez tego nie da się
+odróżnić „bramka działa" od „model i tak by tak odpowiedział".
+
+**Rozróżnienie e1/e2 (§ 5)** — dla bramek samo-raportujących. `ROUTER-WCZYTANY`
+to pole, które model wypełnia o sobie; pytanie idzie do tego samego procesu,
+który w TEST1-3 już raz błędnie ocenił własne zachowanie. Protokół rozdziela:
+**e1** (narzędzia niedostępne → `NIE` jest wiarygodne, bo błąd narzędzia to
+FAKT) od **e2** (narzędzia dostępne, wywołanie pominięte → czy test wykrywa
+fałszywe `TAK`). ⛔ e2 rozstrzyga się **wyłącznie z logu wywołań, nigdy z treści
+odpowiedzi**.
+
+**`scripts/ocena_transkryptow_f113.py`** — trzy tryby: `anonimizuj` (rozdziela
+mapowanie ramion do pliku poza katalogiem ocen), `karta` (pusta karta kryteriów),
+`policz` (Δ między ramionami + klasyfikacja wg progów).
+
+---
+
+### 3. Czego skrypt świadomie NIE robi
+
+**Nie ocenia transkryptów automatycznie.** Kryteria z § 7 wymagają
+rozstrzygnięcia „czy dla TEGO przepisu wywołano narzędzie W TEJ odpowiedzi" —
+czego regex nie ustali bez odtworzenia całego rozumowania. Automatyczny scoring
+dałby liczby wyglądające na pomiar i byłby **dokładnie tym rodzajem fasady,
+którą F-113 ma wykryć**. Ocena zostaje ludzka; skrypt obsługuje tylko to, czego
+ręczne robienie było źródłem błędów w TEST1-3 (anonimizacja, arytmetyka).
+
+---
+
+### 4. Dwie bramki ochronne w skrypcie — obie sprawdzone testem negatywnym
+
+Narzędzie audytowe bez testu negatywnego to trzeci raz ta sama historia w tej
+sesji (F-125, F-128, F-130). Dlatego oba zabezpieczenia sprawdziłem na danych
+syntetycznych, wywołując warunek błędu celowo:
+
+| Zabezpieczenie | Test | Wynik |
+|---|---|---|
+| B5 bez logu wywołań nie może dać PASS | ustawiono `log_wywolan_dostepny: false` dla 2 przebiegów | `B5: ⬛ NIEMIERZALNE — 2 przebiegów bez logu`, wynik NIE policzony ✅ |
+| niepełna karta nie może dać wyniku | wykasowano jedną ocenę | `⛔ Karta niewypełniona… Przerywam.` ✅ |
+
+Przebieg pozytywny na danych syntetycznych (ramię B z zaniżoną usterkowością)
+zwrócił poprawne Δ dla wszystkich sześciu grup kryteriów.
+
+---
+
+### 5. Progi orzekania — i granica, której nie przekraczam
+
+Protokół definiuje cztery przedziały Δ: **≥+30 pp** bramka działa,
+**+10…+30** efekt słaby, **−10…+10** brak efektu (kandydat do usunięcia),
+**<−10** bramka szkodzi.
+
+⛔ Zapisałem wprost — i skrypt to wypisuje przy każdym wyniku — że **przy 5
+przebiegach na ramię żadna z tych granic nie jest istotna statystycznie**. To
+wskaźnik kierunkowy do decyzji projektowej, nie dowód. Piszę to, bo dokładnie
+ten typ nadinterpretacji unieważnił TEST1-3, a wynik z ładną liczbą procentową
+kusi, żeby go później zacytować jako „udowodniono".
+
+⛔ Zapisałem też, że **zamknięcie F-113 nie wymaga, żeby bramki okazały się
+skuteczne — wymaga, żeby ich skuteczność została ZMIERZONA.** Wynik „trzy z
+pięciu bramek nie robią różnicy" jest pełnoprawnym zamknięciem i prawdopodobnie
+cenniejszym niż potwierdzenie, bo pozwala odzyskać kontekst.
+
+---
+
+### 6. Co zostało otwarte i dlaczego nie mogę tego domknąć
+
+Wykonanie przebiegów wymaga **środowiska z logiem wywołań narzędzi**. Bez niego
+B5-e2 pozostaje `NIEMIERZALNE` — i to jest właściwy wynik, nie brak wyniku, bo
+cała wartość tego punktu polega na odróżnieniu deklaracji od faktu. Sesja
+czatowa nie daje mi wglądu we własny log wywołań w formie, którą dałoby się
+zaprotokołować niezależnie, więc przeprowadzenie testu na sobie samym miałoby
+tę samą wadę, którą test ma wykrywać.
+
+---
+
+### 7. STATUS
+
+| Pozycja | Stan |
+|---|---|
+| F-113 | **ZAWĘŻONA** — projekt gotowy, zostaje wyłącznie wykonanie przebiegów |
+| Licznik flag F- | **17** (bez zmian) |
+| Wersja skilla | 6.17 → **6.18** |
+| Liczba plików | 56 → **58** (2 nowe: protokół + skrypt scoringowy) |
+
+**Pliki zmienione:** `SKILL.md`, `references/PLAN-TESTU-BRAMEK-F113.md` (nowy),
+`scripts/ocena_transkryptow_f113.py` (nowy), `references/CHANGELOG.md`,
+`references/WARN-OTWARTE.md`, `references/AUDIT-JOURNAL.md` (ten wpis).
+
+**Reguła 7 — zastosowanie:** TAK, pełny łańcuch.

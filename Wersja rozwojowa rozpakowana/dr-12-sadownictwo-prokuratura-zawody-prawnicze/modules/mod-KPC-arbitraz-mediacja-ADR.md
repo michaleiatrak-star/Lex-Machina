@@ -198,8 +198,42 @@ Przed końcową odpowiedzią sprawdź:
 □ Czy wskazano terminy: na uchylenie wyroku sądu polubownego — ⚠️
   POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14): TERAZ **2 MIESIĄCE** (nie 3
   jak wcześniej) od doręczenia wyroku (art. 1208 §1 KPC, t.j.
-  Dz.U.2024.0.1568 — potwierdzone dosłownie w arslege.pl i lexlege.pl,
-  oba cytujące ten sam aktualny t.j.). ⚠️ STARSZE źródła (money.pl
+  **Dz.U. 2026 poz. 468** — ⚠️ KOREKTA 2026-08-24 (F-125): moduł cytował
+  t.j. `Dz.U. 2024 poz. 1568`, który wg RZĘDU 1 (eli.gov.pl) ma status
+  „wygaśnięcie aktu” z datą 2026-04-06 i został zastąpiony obwieszczeniem
+  Marszałka Sejmu z 27.03.2026 (Dz.U. 2026 poz. 468, status „obowiązujący”,
+  stan prawny na 24.03.2026). Numer 2026.468 nosiły już wtedy WSZYSTKIE
+  rejestry systemu — rozjazd dotyczył wyłącznie treści tego modułu, a
+  notacja LEX ukryła go przed testem T3.
+  ✅ **TERMIN „2 MIESIĄCE” POTWIERDZONY DLA t.j. 2026.468** — weryfikacja
+  2026-08-24 (F-125 pkt 4). Żródło wiodące: **przepisy.gofin.pl (RZĄD 2B)**,
+  które prowadzi wersje czasowe art. 1208 i wymienia `Dz. U. z 2026 r. poz. 468`
+  jako ostatnią — brzmienie §1 pod tą wersją nadal mówi o terminie **dwóch
+  miesięcy** od doręczenia wyroku (albo od doręczenia orzeczenia o wniosku
+  o uzupełnienie/sprostowanie/wykładnię). Zbieżnie: lexlege.pl (RZĄD 2B).
+  ⚠️ **Poziom potwierdzenia: RZĄD 2B, nie RZĄD 1** — `web_fetch` ISAP
+  zablokowany (F-8), a tekst jednolity w ELI to PDF ~276 stron, nieczytany
+  w całości w tej sesji. Zgodnie z ZASADĄ 14 pkt 2 nie oznaczam tego jako
+  pełne ✅ [VER — RZĄD 1]. Przed powołaniem terminu w piśmie procesowym
+  potwierdź brzmienie w ISAP.
+  ⚠️ Uwaga historyczna, istotna przy starszych sprawach: termin **3 miesięcy**
+  obowiązywał w pierwotnym brzmieniu Części piątej KPC (dodanej ustawą
+  z 28.07.2005, Dz.U. Nr 178 poz. 1478, obowiązującej od 17.10.2005) — stąd
+  nieaktualne „3 miesiące” w starszych omówieniach. Stosuj TEMPORAL-LAW-CHECK.
+
+  ⭐ **ORZECZNICTWO — sposób liczenia terminu (dodane 2026-08-24):**
+  uchwała SN z 5.07.2024, **III CZP 64/23** — o zachowaniu dwumiesięcznego
+  terminu z art. 1208 §1 KPC decyduje chwila wniesienia skargi **do właściwego
+  sądu apelacyjnego** (tego, na obszarze którego znajduje się sąd właściwy
+  w braku zapisu na sąd polubowny) — a nie do jakiegokolwiek sądu apelacyjnego.
+  ⛔ **Skutek praktyczny: wniesienie w terminie do NIEWŁAŚCIWEGO sądu
+  apelacyjnego terminu NIE zachowuje** — to ryzyko odrzucenia skargi, nie
+  przekazania sprawy. Ostrzeż klienta o tym PRZED wyborem sądu.
+  ☑ Sygnatura potwierdzona 2026-08-24 w trzech niezależnych źródłach (RZĄD 2B:
+  inforlex.pl, prawo.pl, rp.pl — zgodna teza i zgodny skład). ⚠️ Pełny tekst
+  uzasadnienia NIEODCZYTANY — przed cytowaniem tezy dosłownie w piśmie pobierz
+  orzeczenie z sn.pl (RZĄD 1) i podaj KOTWICĘ do konkretnego fragmentu
+  (`shared/PRAWO-HARDGATE.md`, Zasada 2B). ⚠️ STARSZE źródła (money.pl
   z 2013, e-prawnik.pl) wciąż pokazują nieaktualne "3 miesiące" —
   termin został SKRÓCONY nowelizacją, sprawdź dokładną datę zmiany
   przed cytowaniem. Dodatkowo: BEZWZGLĘDNY termin maksymalny 5 LAT od

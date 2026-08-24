@@ -1,6 +1,6 @@
 ---
 name: przewodnik-prawny-v2
-version: 2.5
+version: "2.6"
 type: ux-guide
 status: production
 description: |
@@ -809,12 +809,11 @@ Q&A / pytania użytkownika
 □ Czy używam w KROK I sygnału Q&A ("❓ Masz pytanie...") ?
 □ Czy zebrałem fakty z Q&A i przekazałem do PRIMARY skilla?
 □ Czy disclaimer jest ostatnim elementem odpowiedzi z analizą?
-□ [ANTY-FASADA] (dodane 2026-08-23, v2.6) Czy w odpowiedzi/piśmie jest słowo
-  „zweryfikowano/zweryfikowałem", pole „data weryfikacji" albo URL przy przepisie,
-  dla którego NIE wywołałem narzędzia W TEJ ODPOWIEDZI? TAK → ⛔ usuń deklarację
-  i datę, URL przeformatuj na 🎯 [CEL — RZĄD 1, NIEOTWARTE: …], przepis oznacz
-  ⚠️ [NIEWERYFIKOWANE]. Wyzwalacz to BRAK WYWOŁANIA, nie brak narzędzi w sesji.
-  ⛔ Zastrzeżenie selektywne (przy sygnaturach tak, przy przepisach nie) = naruszenie.
+□ [ANTY-FASADA + AF-6] Wykonaj self-check antyfasadowy z modułu kanonicznego:
+    view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
+  ⛔ Treść listy NIE jest tu kopiowana (F-115, 2026-08-23i). Poprzednia kopia
+    miała 1 z 2 pozycji: gdy F-117 dodała AF-6 do źródła, kopie nie zostały
+    zaktualizowane. Jedno miejsce prawdy = jedno miejsce aktualizacji.
 □ [DOMAIN-LOCK] Odpowiedź/pismo zawiera przepis SPOZA dziedziny wiodącej
   (KK/KKS/KW/KPK/KPW przy torze cywilnym, pracowniczym lub administracyjnym —
   albo odwrotnie)? NIE → OK. TAK → (a) konkretny FAKT wypełniający znamię,
@@ -827,7 +826,7 @@ Q&A / pytania użytkownika
   KAŻDYM wierszu? NIE → nie podawaj kwoty łącznej, pokaż tabelę z ⬛.
   → `view /mnt/skills/user/shared/RATE-COMPLETENESS.md`
 □ [STATUSY] Każdy przepis ma znacznik z ZAMKNIĘTEJ hierarchii czterech:
-  ✅ [VER] · 🟡 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
+  ✅ [VER] · 🟨 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
   Etykieta spoza tej listy = naruszenie hard gate (PRAWO-HARDGATE v2.5).
 ```
 

@@ -82,13 +82,13 @@ przez indeks wyszukiwarki (snippet); `web_fetch` na te domeny zwraca
 | Co chcesz ustalić | Osiągalne z RZĘDU 1? |
 |---|---|
 | Tożsamość aktu, numer i data aktualnego t.j., status obowiązywania | **TAK** — snippet ISAP/ELI wystarcza |
-| Dosłowne BRZMIENIE artykułu | **NIE** — wymaga zejścia na RZĄD 2B + 🟡 KOTWICA URZĘDOWA |
+| Dosłowne BRZMIENIE artykułu | **NIE** — wymaga zejścia na RZĄD 2B + 🟨 KOTWICA URZĘDOWA |
 
 ⛔ To NIE otwiera drogi do cytowania z pamięci. Otwiera drogę do jednego,
 ściśle opisanego statusu zastępczego — `shared/PRAWO-HARDGATE.md`, sekcja
-„🟡 KOTWICA URZĘDOWA", warunki łączne K-1…K-4. Hierarchia statusów jest
+„🟨 KOTWICA URZĘDOWA", warunki łączne K-1…K-4. Hierarchia statusów jest
 zamknięta i liczy cztery pozycje:
-`✅ [VER]` > `🟡 [KOTWICA-URZĘDOWA]` > `⚠️ [NIEWERYFIKOWANE]` > `⬛ [DO UZUPEŁNIENIA]`.
+`✅ [VER]` > `🟨 [KOTWICA-URZĘDOWA]` > `⚠️ [NIEWERYFIKOWANE]` > `⬛ [DO UZUPEŁNIENIA]`.
 Tworzenie piątej etykiety jest naruszeniem hard gate.
 
 Ten rząd dotyczy WYŁĄCZNIE brzmienia przepisu — obowiązuje tu
@@ -157,7 +157,7 @@ obok brzmienia aktualnego — spod adresu z segmentem `20100801`.
 zabezpieczeniem**, jeśli oba trafią w ten sam odcinek czasu. Rozstrzyga
 znacznik tekstu jednolitego widoczny NA STRONIE (np. `Dz.U.2026.0.236 t.j.`)
 porównany z numerem t.j. potwierdzonym w indeksie RZĘDU 1. To jest warunek K-3
-statusu 🟡 KOTWICA URZĘDOWA w `shared/PRAWO-HARDGATE.md`.
+statusu 🟨 KOTWICA URZĘDOWA w `shared/PRAWO-HARDGATE.md`.
 
 Kryterium 2B vs Rząd 3: redakcja zawodowa + rozpoznawalna marka wydawnicza/
 medialna + praktyka regularnej aktualizacji treści po zmianach przepisów →

@@ -22,7 +22,7 @@ przepisem z tego modułu.
 | Artykuł | Czyn | Próg wartości |
 |---|---|---|
 | 119 | Kradzież/przywłaszczenie cudzej rzeczy ruchomej | ≤800 zł |
-| 120 | Wyrąb drzewa w lesie w celu przywłaszczenia / kradzież drzewa wyrąbanego lub powalonego | ✅ **≤800 zł — ZRÓWNANY z progiem ogólnym** (starsze źródła podają 75 zł/"1/4 minimalnego wynagrodzenia" — to brzmienie SPRZED nowelizacji, obecnie ISAP/lexlege potwierdzają jednolity próg 800 zł, Dz.U.2025.734 t.j.). Obligatoryjna nawiązka w wysokości PODWÓJNEJ wartości drzewa (§3) |
+| 120 | Wyrąb drzewa w lesie w celu przywłaszczenia / kradzież drzewa wyrąbanego lub powalonego | ✅ **≤800 zł — ZRÓWNANY z progiem ogólnym** (starsze źródła podają 75 zł/"1/4 minimalnego wynagrodzenia" — to brzmienie SPRZED nowelizacji, obecnie ISAP/lexlege potwierdzają jednolity próg 800 zł, Dz.U. 2025 poz. 734 t.j.). Obligatoryjna nawiązka w wysokości PODWÓJNEJ wartości drzewa (§3) |
 | 121 | Jazda bez biletu / bez opłaty za przejazd — KWALIFIKOWANA postać: trzecie w ciągu roku wyłudzenie przejazdu mimo dwukrotnie nałożonej kary pieniężnej z taryfy, bez zamiaru zapłaty | — |
 | 122 | Paserstwo (umyślne §1, nieumyślne §2 — łagodniejsze) | ≤800 zł (odpowiednio do progu z art. 119/120) |
 | 123 | ✅ Zabieranie w celu przywłaszczenia cudzych owoców/warzyw/kwiatów Z OGRODU, W NIEZNACZNEJ ILOŚCI — grzywna do 250 zł albo nagana. Ściganie NA WNIOSEK pokrzywdzonego (§2) |

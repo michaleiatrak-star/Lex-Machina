@@ -49,7 +49,7 @@ Deweloper: 14 DNI na pisemne uznanie LUB odrzucenie zgłoszonych wad
 Deweloper: 30 dni na usunięcie UZNANYCH wad od podpisania protokołu
   (POTWIERDZONE 2026-07-27 — art. 41 ust. 6 ustawy z 20.05.2021 r.
   o ochronie praw nabywcy lokalu mieszkalnego lub domu jednorodzinnego
-  oraz Deweloperskim Funduszu Gwarancyjnym, Dz.U. 2021.1177 ze zm.;
+  oraz Deweloperskim Funduszu Gwarancyjnym, Dz.U. 2021 poz. 1177 ze zm.;
   liczone jako dni kalendarzowe, nie robocze)
   ↓ brak usunięcia
 Nabywca: wyznacza dodatkowy termin ALBO

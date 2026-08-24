@@ -651,18 +651,18 @@ oba wątki równolegle — wynik sprawy wykroczeniowej nie wyczerpuje ryzyka.
   ⛔ Bezpośredni `web_fetch` zablokowany (ROBOTS_DISALLOWED).
 - **Rząd 2:** lexlege.pl / arslege.pl — pełne brzmienie Rozdz. 2 (art. 9-33)
   i Rozdz. 5 (art. 50-51), stan prawny serwisu 16.08.2026, sygnowane
-  „Dz.U.2024.0.485 t.j."; struktura rozdziałów potwierdzona krzyżowo.
+  „Dz.U.2024.0.485 t.j."; struktura rozdziałów potwierdzona krzyżowo.  <!-- zapis źródła cytowany dosłownie — CELOWO nieujednolicony (F-125, 2026-08-24d) -->
 
 ## ⚠️ NIEZWERYFIKOWANE — DO USTALENIA PRZY SPRAWIE
 
 ```
 □ ✅ CZĘŚCIOWO ZAMKNIĘTE (F-92, 2026-08-19): kontrola nowelizacji po t.j.
-  2024.485 wykonana — DWIE nowelizacje potwierdzone (Dz.U. 2025.1795,
-  Dz.U. 2026.187 art. 137 zmieniający art. 15c ust. 1 pkt 1). Pozostaje:
+  2024.485 wykonana — DWIE nowelizacje potwierdzone (Dz.U. 2025 poz. 1795,
+  Dz.U. 2026 poz. 187 art. 137 zmieniający art. 15c ust. 1 pkt 1). Pozostaje:
   dokładna nowa treść art. 15c ust. 1 pkt 1 po podstawieniu; czy art. 137
   ustawy 2026.187 wszedł już w życie (ustawa co do zasady wchodzi w życie
   19.05.2028 z wyjątkami — objęcie art. 137 wyjątkiem NIE sprawdzone);
-  zakres zmian wniesionych przez Dz.U. 2025.1795 w treść samej ustawy
+  zakres zmian wniesionych przez Dz.U. 2025 poz. 1795 w treść samej ustawy
   o broni i amunicji (tylko fakt objęcia potwierdzony, nie artykuły)
 □ Rozporządzenia wykonawcze: przechowywanie/noszenie/ewidencja (art. 32 ust. 2),
   wzory dokumentów (art. 31), tryb egzaminu (art. 16 ust. 3), wykaz stanów
@@ -696,8 +696,8 @@ przepisy karne ustawy (art. 50-51) z przepadkiem niezależnym od własności.
 
 **1.1 (2026-08-19, F-92):** Kontrola nowelizacji po t.j. 2024.485 wykonana
 (web_search, obejście blokady ISAP zgodnie z ZASADĄ 14 audytu). Ustalono
-DWIE nowelizacje: Dz.U. 2025.1795 (ustawa o zdrowiu zwierząt, fakt objęcia
-potwierdzony, artykuły nie zweryfikowane) i Dz.U. 2026.187 (ustawa o zawodzie
+DWIE nowelizacje: Dz.U. 2025 poz. 1795 (ustawa o zdrowiu zwierząt, fakt objęcia
+potwierdzony, artykuły nie zweryfikowane) i Dz.U. 2026 poz. 187 (ustawa o zawodzie
 psychologa, art. 137 zmienia art. 15c ust. 1 pkt 1 — wymóg dyplomu psychologa
 upoważnionego zastąpiony odesłaniem do nowego reżimu kwalifikacji zawodowych).
 Potwierdzone bezpośrednio w tekście ustawy nowelizującej (przepisy.gofin.pl).
