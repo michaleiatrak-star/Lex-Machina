@@ -6,6 +6,8 @@ on:
       - portability/shared-01
     paths:
       - '.github/workflows/package-shared-portability.yml'
+      - '.github/portability/package_shared.py'
+      - '.github/portability/shared-extract-api-verification-log.py'
   workflow_dispatch: {}
 
 permissions:
@@ -16,115 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Stage complete shared tree
-        shell: bash
-        run: |
-          set -euo pipefail
-          SRC='Wersja rozwojowa rozpakowana/shared'
-          ROOT='staging/shared'
-          rm -rf staging && mkdir -p staging
-          cp -a "$SRC" "$ROOT"
-          A=$(find "$SRC" -type f | wc -l | tr -d ' ')
-          B=$(find "$ROOT" -type f | wc -l | tr -d ' ')
-          echo "source=$A staged=$B"
-          test "$A" = "$B"
-          test "$A" -le 198
-
-      - name: Patch runtime boundary
-        shell: bash
-        run: |
-          set -euo pipefail
-          cp '.github/portability/shared-extract-api-verification-log.py' 'staging/shared/tools/extract_api_verification_log.py'
-          python - <<'PY'
-          from pathlib import Path
-          import re
-
-          root=Path('staging/shared')
-          p=root/'SKILL.md'
-          text=p.read_text(encoding='utf-8')
-          pat=re.compile(r'description: >-\n(?:  .*\n)+?(?=dependencies:)',re.M)
-          repl='description: "Kanoniczna biblioteka Lex Machina: hardgate, walidacja, definicje, terminy i moduły wspólne. Nie odpowiada użytkownikowi samodzielnie; zasoby wczytują inne skille."\n'
-          text,n=pat.subn(repl,text,count=1)
-          if n!=1: raise SystemExit('description block not found')
-          adapter='''## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
-
-`shared` pozostaje JEDYNYM kanonicznym SSOT. Adapter nie zmienia treści modułów prawnych, tylko sposób rozumienia operacji technicznych.
-
-1. `view /mnt/skills/user/shared/<plik>` = świeży odczyt `<plik>` z rootu zainstalowanego skilla `shared`; literalna ścieżka `/mnt/skills/user` nie jest wymagana. Obowiązkowego odczytu nie zastępuj pamięcią modelu.
-2. Udokumentowane pliki-mosty mogą wskazywać inny osobny skill. `view /mnt/skills/user/<skill>/<plik>` = świeży odczyt zasobu z tego skilla przez mechanizm hosta. Brak obowiązkowego zasobu = fail-closed; NIE kopiuj go do `shared`.
-3. `web_search` / `web_fetch` oznaczają świeże wyszukanie/odczyt źródła. Jeśli host ma inną nazwę narzędzia, użyj równoważnej funkcji. PRAWO-HARDGATE, hierarchia źródeł i statusy pozostają bez zmian.
-4. `/mnt/user-data/...` oznacza rzeczywiste pliki użytkownika dostępne w hoście; wymagany reread jest faktycznym odczytem źródła.
-5. `show_widget`, `present_files`, `create_file`, shell/Python i podobne operacje wykonuj równoważną natywną funkcją hosta, jeśli literalna nazwa nie istnieje. Nie pomijaj bramek jakości.
-6. `tools/` to kod integracyjny portalu. `extract_api_verification_log.py` przyjmuje neutralne `events` i zachowuje zgodność z Claude legacy, generycznymi tool-call oraz Responses-style.
-
-**Zasada nadrzędna:** jeśli istniejąca instrukcja jest zrozumiała i wykonalna w bieżącym hoście, wykonaj ją bez konwersji. Adapter działa tylko na granicy runtime.
-
-'''
-          marker='---\n\n# shared/ — Wspólne moduły systemu prawnych skilli'
-          if marker not in text: raise SystemExit('frontmatter marker not found')
-          text=text.replace(marker,'---\n\n'+adapter+'# shared/ — Wspólne moduły systemu prawnych skilli',1)
-          p.write_text(text,encoding='utf-8')
-
-          p=root/'tools/export_gate.py'
-          text=p.read_text(encoding='utf-8')
-          text=text.replace('parser = argparse.ArgumentParser(description="Bramka eksportu: ekstrakcja logu API + walidacja cytowań")','parser = argparse.ArgumentParser(description="Bramka eksportu: provider-neutralna ekstrakcja logu weryfikacji + walidacja cytowań")',1)
-          old='''parser.add_argument("--api-conversation", required=False,
-                         help="Ścieżka do JSON z pełną konwersacją API (format extract_api_verification_log.py)")'''
-          new='''parser.add_argument("--api-conversation", "--verification-input", dest="api_conversation", required=False,
-                         help="JSON z logiem weryfikacji: neutralne events, Claude legacy, generic tool-call lub Responses-style")'''
-          if old not in text: raise SystemExit('export_gate arg block not found')
-          text=text.replace(old,new,1)
-          text=text.replace('print("Wymagane: --document i --api-conversation (lub --self-test)", file=sys.stderr)','print("Wymagane: --document i --verification-input/--api-conversation (lub --self-test)", file=sys.stderr)',1)
-          text=text.replace('Zdarzeń weryfikacji wydobytych z konwersacji API:','Zdarzeń weryfikacji wydobytych z wejścia:')
-          p.write_text(text,encoding='utf-8')
-
-          p=root/'tools/README.md'
-          add='''\n\n## Portability — neutralny format wejściowy logu weryfikacji\n\nDla nowych integracji preferuj `{\"session_id\":\"...\",\"events\":[...]}`. Każdy event powinien zawierać `tool` (`web_fetch`/`web_search`), źródło (`url` albo `query` + `result_urls`), opcjonalny `query_context` i status. Format Claude/Anthropic `server_tool_use` + `*_tool_result` pozostaje obsługiwany wstecznie; obsługiwane są też generyczne pary tool-call/result i ukończone wpisy Responses-style. Samo rozpoczęcie wywołania bez wyniku nie jest dowodem weryfikacji.\n'''
-          p.write_text(p.read_text(encoding='utf-8')+add,encoding='utf-8')
-          PY
-
-      - name: Validate code
-        shell: bash
-        run: |
-          set -euo pipefail
-          ROOT='staging/shared'
-          python "$ROOT/tools/extract_api_verification_log.py" --self-test
-          python "$ROOT/tools/export_gate.py" --self-test
-          python -m py_compile "$ROOT"/tools/*.py
-          find "$ROOT" -type d -name '__pycache__' -prune -exec rm -rf {} +
-          test -z "$(find "$ROOT" -type f \( -name '*.pyc' -o -name '*.pyo' \) -print -quit)"
-
-      - name: Manifest checksums and final gates
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          from pathlib import Path
-          import hashlib,re
-          root=Path('staging/shared')
-          before=sum(1 for p in root.rglob('*') if p.is_file())
-          text=(root/'SKILL.md').read_text(encoding='utf-8')
-          m=re.search(r'^description:\s*"(.*?)"\s*$',text,re.M)
-          if not m: raise SystemExit('description missing')
-          if len(m.group(1))>200: raise SystemExit('description >200')
-          manifest=f'''# Portability manifest — shared\n\n- Source baseline: `bdebb4b0b6ba63add44501795c6e4acdc5bfd931`\n- Canonical files before manifest/checksums: **{before}**\n- Description: **{len(m.group(1))}/200**\n\n`shared` pozostaje jedynym SSOT i nie jest kopiowany do innych skilli. Zmiany ograniczono do adaptera runtime w istniejącym `SKILL.md`, provider-neutralnego parsera logu weryfikacji, aliasu CLI w `export_gate.py` i dokumentacji. Nie wykonano masowej zamiany instrukcji, które host już rozumie.\n'''
-          (root/'PORTABILITY-MANIFEST.md').write_text(manifest,encoding='utf-8')
-          rows=[]
-          for f in sorted(p for p in root.rglob('*') if p.is_file() and p.name!='CHECKSUMS.sha256'):
-              rows.append(f'{hashlib.sha256(f.read_bytes()).hexdigest()}  {f.relative_to(root).as_posix()}')
-          (root/'CHECKSUMS.sha256').write_text('\n'.join(rows)+'\n',encoding='utf-8')
-          PY
-          ROOT='staging/shared'
-          COUNT=$(find "$ROOT" -type f | wc -l | tr -d ' ')
-          echo "FINAL_FILES=$COUNT"
-          test "$COUNT" -le 200
-          test -f "$ROOT/PRAWO-HARDGATE.md"
-          test -f "$ROOT/MOD-STEP-TRACKER.md"
-          test -f "$ROOT/tools/extract_api_verification_log.py"
-          test -z "$(find "$ROOT" -type d -name '__pycache__' -print -quit)"
-          (cd "$ROOT" && sha256sum -c CHECKSUMS.sha256)
-
+      - name: Build and validate complete shared skill
+        run: python .github/portability/package_shared.py
       - uses: actions/upload-artifact@v4
         with:
           name: shared
