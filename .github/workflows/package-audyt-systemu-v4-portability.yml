@@ -1,0 +1,56 @@
+name: Package audyt-systemu-v4 portability
+
+on:
+  push:
+    branches:
+      - portability/audyt-systemu-v4-01
+    paths:
+      - '.github/workflows/package-audyt-systemu-v4-portability.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact branch state
+        uses: actions/checkout@v4
+
+      - name: Verify complete skill tree and file limit
+        shell: bash
+        run: |
+          set -euo pipefail
+          SKILL='Wersja rozwojowa rozpakowana/audyt-systemu-v4'
+          test -f "$SKILL/SKILL.md"
+          COUNT=$(find "$SKILL" -type f -not -path '*/__pycache__/*' | wc -l | tr -d ' ')
+          echo "FILES=$COUNT"
+          if [ "$COUNT" -gt 200 ]; then
+            echo "ERROR: skill has $COUNT files; hard limit is 200" >&2
+            exit 1
+          fi
+          find "$SKILL" -type f -not -path '*/__pycache__/*' -print0 \
+            | sort -z \
+            | xargs -0 sha256sum
+
+      - name: Stage one-skill tree without omissions
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf staging
+          mkdir -p staging
+          cp -a 'Wersja rozwojowa rozpakowana/audyt-systemu-v4' staging/audyt-systemu-v4
+          SRC=$(find 'Wersja rozwojowa rozpakowana/audyt-systemu-v4' -type f -not -path '*/__pycache__/*' | wc -l | tr -d ' ')
+          DST=$(find staging/audyt-systemu-v4 -type f -not -path '*/__pycache__/*' | wc -l | tr -d ' ')
+          echo "source=$SRC staged=$DST"
+          test "$SRC" = "$DST"
+
+      - name: Upload one skill as one ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: audyt-systemu-v4
+          path: staging
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 7
