@@ -6,7 +6,7 @@ on:
       - portability/shared-01
     paths:
       - '.github/workflows/package-shared-portability.yml'
-      - '.github/portability/package_shared.py'
+      - '.github/portability/package_shared_v2.py'
       - '.github/portability/shared-extract-api-verification-log.py'
   workflow_dispatch: {}
 
@@ -18,11 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Report shared file-count breakdown
-        run: >-
-          python -c "from pathlib import Path; from collections import Counter; r=Path('Wersja rozwojowa rozpakowana/shared'); fs=[p for p in r.rglob('*') if p.is_file()]; c=Counter((p.relative_to(r).parts[0] if len(p.relative_to(r).parts)>1 else '[root]') for p in fs); print('TOTAL',len(fs)); [print(k,v) for k,v in sorted(c.items())]; print('TOOLS FILES'); [print(p.relative_to(r)) for p in fs if p.relative_to(r).parts[0]=='tools']"
       - name: Build and validate complete shared skill
-        run: python .github/portability/package_shared.py
+        run: python .github/portability/package_shared_v2.py
       - uses: actions/upload-artifact@v4
         with:
           name: shared
