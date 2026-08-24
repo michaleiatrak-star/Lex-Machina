@@ -38,68 +38,20 @@ jobs:
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
-          import re
-
+          import base64, re
           p = Path('staging/analiza-sadowa-v6/SKILL.md')
           text = p.read_text(encoding='utf-8')
-
-          # Frontmatter: keep semantics, make only the metadata host-neutral and compact.
-          text = text.replace(
-              'compatibility: "web_search, web_fetch, show_widget"',
-              'compatibility: "live_web_lookup, file_read, optional_interactive_ui"',
-              1,
-          )
-
-          # Replace the multi-line description block only; detailed triggers remain in the body.
+          text = text.replace('compatibility: "web_search, web_fetch, show_widget"','compatibility: "live_web_lookup, file_read, optional_interactive_ui"',1)
           desc_pattern = re.compile(r'description: \|\n(?:  .*\n)+?  v6: model CZTEROPRZEBIEGOWY z obowiązkową DWUKROTNĄ WERYFIKACJĄ dowodów i pism\.\n', re.M)
-          short_desc = (
-              'description: "Analiza akt i dokumentów prawnych: fakty, dowody, normy, orzecznictwo, terminy, koszty i szanse procesowe. Model 4-przebiegowy z dwukrotną weryfikacją; opcjonalny dashboard."\n'
-          )
+          short_desc = 'description: "Analiza akt i dokumentów prawnych: fakty, dowody, normy, orzecznictwo, terminy, koszty i szanse procesowe. Model 4-przebiegowy z dwukrotną weryfikacją; opcjonalny dashboard."\n'
           text, n = desc_pattern.subn(short_desc, text, count=1)
-          if n != 1:
-              raise SystemExit('description block not found exactly once')
-
-          # Remove the only agent-name dependency that changes the subject of an imperative.
-          text = text.replace(
-              'Przed wpisaniem JAKIEJKOLWIEK normy do macierzy fakt-norma Claude MUSI:',
-              'Przed wpisaniem JAKIEJKOLWIEK normy do macierzy fakt-norma asystent MUSI:',
-              1,
-          )
-
-          adapter = r'''## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
-
-Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Nie zmienia metodologii prawnej,
-hard gate'ów, kolejności przejść ani kryteriów dowodowych tego skilla.
-
-1. Nazwy `view`, `web_search`, `web_fetch`, `show_widget`, `visualize:read_me` i `present_files`
-   występujące w tym pliku lub w `references/` traktuj jako **nazwy operacji semantycznych**, a nie
-   wymagane literalne nazwy narzędzi. Użyj równoważnej funkcji dostępnej w bieżącym hoście.
-2. `view /mnt/skills/user/analiza-sadowa-v6/...` oznacza odczyt odpowiedniego pliku lokalnego
-   tego pakietu (np. `references/...`). Nie wymagaj istnienia literalnego katalogu `/mnt/skills`.
-3. `view /mnt/skills/user/shared/<plik>` oznacza odczyt kanonicznego zasobu shared. Rozwiązuj
-   w kolejności: (a) dołączony do ZIP-a `shared/<plik>`, (b) sibling `../shared/<plik>` w repo,
-   (c) zasób udostępniony przez bieżący host. Brak literalnej ścieżki `/mnt/skills` nie jest błędem.
-4. `view /mnt/user-data/uploads/{plik}` oznacza **ponowne otwarcie rzeczywiście załączonego pliku**
-   przez mechanizm plików bieżącego hosta. Nie zastępuj tego pamięcią kontekstu.
-5. `web_search` / `web_fetch` oznaczają świeże wyszukanie i odczyt źródła. Dla prawa i orzecznictwa
-   zachowaj istniejący wymóg źródła urzędowego/oficjalnego i cytowania; nie używaj pamięci modelu.
-6. `show_widget` / `visualize:read_me` oznaczają interaktywny widok, gdy host go obsługuje.
-   Jeśli nie obsługuje, wygeneruj równoważny dashboard jako ustrukturyzowaną odpowiedź/HTML lub
-   inny natywny artefakt hosta. Brak React/JSX nie może blokować analizy merytorycznej.
-7. Odwołania do innych skilli (`prawny-router-v3`, `raport-sytuacyjny-v2`, itp.) są integracjami
-   między-skillowymi, nie plikami tego skilla. Jeżeli integracja nie jest dostępna, wykonaj część
-   lokalną możliwą do wykonania i jawnie wskaż pominięty krok integracyjny — bez zmyślania wyniku.
-
-**Zasada nadrzędna adaptera:** jeżeli stara instrukcja jest wykonalna w bieżącym hoście bez
-konwersji, wykonaj ją wprost. Adapter ma działać tylko tam, gdzie literalna nazwa narzędzia lub
-ścieżka jest zależna od runtime.
-'''
-
+          if n != 1: raise SystemExit('description block not found exactly once')
+          text = text.replace('Przed wpisaniem JAKIEJKOLWIEK normy do macierzy fakt-norma Claude MUSI:','Przed wpisaniem JAKIEJKOLWIEK normy do macierzy fakt-norma asystent MUSI:',1)
+          payload = 'IyMgQURBUFRFUiBSVU5USU1FIOKAlCBQT1JUQUJJTElUWSAoQ2hhdEdQVCAvIENsYXVkZSAvIGlubmUgaG9zdHkpCgpUYSBzZWtjamEgem1pZW5pYSB3ecWCxIVjem5pZSBzcG9zw7NiIHd5a29uYW5pYSBvcGVyYWNqaSB0ZWNobmljem55Y2guIE5pZSB6bWllbmlhIG1ldG9kb2xvZ2lpIHByYXduZWosCmhhcmQgZ2F0ZSfDs3csIGtvbGVqbm/Fm2NpIHByemVqxZvEhyBhbmkgS3J5dGVyacOzdyBkb3dvZG93eWNoIHRlZ28gc2tpbGxhLgoKMS4gTmF6d3kgYHZpZXdgLCBgd2ViX3NlYXJjaGAsIGB3ZWJfZmV0Y2hgLCBgc2hvd193aWRnZXRgLCBgdmlzdWFsaXplOnJlYWRfbWVgIGkgYHByZXNlbnRfZmlsZXNgCiAgIHd5c3TEmXB1asSFY2UgdyB0eW0gcGxpa3UgbHViIHcgYHJlZmVyZW5jZXMvYCB0cmFrdHVqIGpha28gKipOQVpXWSBPUEVSQUNKSSBTRU1BTlRZQ1pOWUNIKiosIGEgbmllCiAgIHd5bWFnYW5lIGxpdGVyYWxuZSBuYXp3eSBuYXJ6xJlkemkuIFXFvHkagIHLDs3dub3dhxbxuZWogZnVua2NqaSBkb3N0xJlwbsSFIFcgYmllxbzEhWN5bSBob8WbY2llLgoKMi4gYHZpZXcgL21udC9za2lsbHMvdXNlci9hbmFsaXphLXNhZG93YS12Ni8uLi5gIG96bmFjemEgb2Rjenl0IG9kcG93aWVkbmllZ28gcGxpa3UgbG9rYWxuZWdvCiAgIHRlZ28gcGFraWV0dSAobnAuIGByZWZlcmVuY2VzLy4uLmApLiBOaWUgd3ltYWdhaiBpc3RuaWVuaWEgbGl0ZXJhbG5lZ28ga2F0YWxvZ3UgYC9tbnQvc2tpbGxzYC4KCjMuIGB2aWV3IC9tbnQvc2tpbGxzL3VzZXIvc2hhcmVkLzxwbGlrPmAgb3puYWN6YSBvZGN6eXQga2Fub25pY3puZWdvIHphc29idSBzaGFyZWQuIFJvendpxIV6dWoKICAgdyBrb2xlam5vxZtjaTogKGEpIGRvxYLEhWN6b255IGRvIFpJUC1hIGBzaGFyZWQvPHBsaWs+YCwgKGIpIHNpYmxpbmcgYC4uL3NoYXJlZC88cGxpaD5gIHcgcmVwbywKICAgKGMpIHphc8OzYiB1ZG9zdMSZcG5pb255IHByemV6IGJpZcW8xIVjeSBob3N0LiBCcmFrIGxpdGVyYWxuZWogxZtjaWXFvGtpIGAvbW50L3NraWxsc2AgbmllIGplc3QgYsWCxJlkZW0uCgo0LiBgdmlldyAvbW50L3VzZXItZGF0YS91cGxvYWRzL3twbGlrfWAgb3puYWN6YSAqKnBvbm93bmUgb3R3YXJjaWUgcnplY3p5d2nFm2NpZSB6YcWCxIVjem9uZWdvIHBsaWt1KioKICAgcHJ6ZXogbWVjaGFuaXptIHBsaWvDs3cgYmllxbzEhWNlZ28gaG9zdGEuIE5pZSB6YXN0xJlwdWogdGVnbyBwYW1pxJlja8SFIGtvbnRla3N0dS4KCjUuIGB3ZWJfc2VhcmNoYCAvIGB3ZWJfZmV0Y2hgIG96bmFjemFqxIUgxZt3aWXFvGUgd3lzenVrYW5pZSBpIG9kY3p5dCDFusOzZMWCYS4gRGxhIHByYXdhIGkgb3J6ZWN6bmljdHdhCiAgIHphY2hvd2FqIGlzdG5pZWrEhWN5IHd5bcOzZyDFusOzZMWCYSB1cnrEmWRvd2Vnby9vZmljamFsbmVnbyBpIGN5dG93YW5pYTsgbmllIHXFvHl3YWogcGFtaxJjaSBtb2RlbHUuCgo2LiBgc2hvd193aWRnZXRgIC8gYHZpc3VhbGl6ZTpyZWFkX21lYCBvem5hY3phasSFIGludGVyYWt0eXdueSB3aWRvaywgZ2R5IGhvc3QgZ28gb2JzxYJ1Z3VqZS4KICAgSmXFm2xpIG5pZSBvYnPFgnVndWplLCB3eWdlbmVydWogcsOzd25vd2HFvG55IGRhc2hib2FyZCBqYWtvIHVzdHJ1a3R1cnl6b3dhbsSFIG9kcG93aWVkxLovSFRNTCBsdWIKICAgaW5ueSBuYXR5d255IGFydGVmYWt0IGhvc3RhLiBCcmFrIFJlYWN0L0pTWCBuaWUgbW/FvGUgYmxva293YcSHIGFuYWxpbnkgbWVyeXRvcnljem5lai4KCjcuIE9kd8WCYW5pYSBkbyBpbm55Y2ggc2tpbGxpIChgcHJhd255LXJvdXRlci12M2AsIGByYXBvcnQtc3l0dWFjeWpueS12MmAsIGl0cC4pIHPEhSBpbnRlZ3JhY2phbWkKICAgbWnEmWR6eS1za2lsbG93eW1pLCBuaWUgcGxpa2FtaSB0ZWdvIHNraWxsYS4gSmXFnmVsaSBpbnRlZ3JhY2phIG5pZSBqZXN0IGRvc3TEmXBuYSwgd3lrb25haiBjensEmcWbxIcKICAgbG9rYWxuxIUgbW/FvGxpd8SFIGRvIHd5a29uYW5pYSBpIGphd25pZSB3c2thxbwgcG9taW5pxJl0eSBrcm9rIGludGVncmFjeWpueSDigJQgYmV6IHptecWbbGFuaWEgd3luaWt1LgoKKipabnNhZGEgbmFkcnrEmWRuYSBhZGFwdGVyYToqKiBqZcW8ZWxpIHN0YXJhIGluc3RydWtjamEgamVzdCB3eWtvbmFsbmEgdyBiaWXFvMSFY3ltIGhvxZtjaWUgYmV6CmNvbndlcnNqaSwgd3lrb25haiBqxIUgd3Byb3N0LiBBZGFwdGVyIG1hIGR6aWHEh2HEhyB0eWxrbzIgdGFtLCBnZHppZSBsaXRlcmFsbmEgbmF6d2EgbmFyesSZZHppYSBsdWIKxZtjaWXFvGthIGplc3QgemFsZcW8bmEgb2QgcnVudGltZS4K'
+          adapter = base64.b64decode(payload).decode('utf-8')
           marker = '---\n\n**Zasada progressive disclosure:**'
-          if marker not in text:
-              raise SystemExit('frontmatter closing marker not found')
+          if marker not in text: raise SystemExit('frontmatter closing marker not found')
           text = text.replace(marker, '---\n\n' + adapter + '\n**Zasada progressive disclosure:**', 1)
-
           p.write_text(text, encoding='utf-8')
           PY
 
@@ -110,57 +62,31 @@ konwersji, wykonaj ją wprost. Adapter ma działać tylko tam, gdzie literalna n
           python - <<'PY'
           from pathlib import Path
           import re, shutil
-
           skill = Path('staging/analiza-sadowa-v6')
           shared_src = Path('Wersja rozwojowa rozpakowana/shared')
           shared_dst = skill / 'shared'
           shared_dst.mkdir(exist_ok=True)
-
-          patterns = [
-              re.compile(r'/mnt/skills/user/shared/([A-Za-z0-9_.\-/]+\.(?:md|json|txt|py|sh|ya?ml))'),
-              re.compile(r'(?<![A-Za-z0-9_.\-/])shared/([A-Za-z0-9_.\-/]+\.(?:md|json|txt|py|sh|ya?ml))'),
-          ]
-
-          copied = set()
-          missing = set()
-
+          patterns = [re.compile(r'/mnt/skills/user/shared/([A-Za-z0-9_.\-/]+\.(?:md|json|txt|py|sh|ya?ml))'),re.compile(r'(?<![A-Za-z0-9_.\-/])shared/([A-Za-z0-9_.\-/]+\.(?:md|json|txt|py|sh|ya?ml))')]
+          copied, missing = set(), set()
           def text_files():
-              for f in skill.rglob('*'):
-                  if f.is_file() and f.suffix.lower() in {'.md','.txt','.json','.py','.sh','.yaml','.yml'}:
-                      yield f
-
+              return [f for f in skill.rglob('*') if f.is_file() and f.suffix.lower() in {'.md','.txt','.json','.py','.sh','.yaml','.yml'}]
           changed = True
           while changed:
               changed = False
               refs = set()
-              for f in list(text_files()):
-                  try:
-                      data = f.read_text(encoding='utf-8')
-                  except UnicodeDecodeError:
-                      continue
-                  for pat in patterns:
-                      refs.update(m.group(1) for m in pat.finditer(data))
-
+              for f in text_files():
+                  try: data = f.read_text(encoding='utf-8')
+                  except UnicodeDecodeError: continue
+                  for pat in patterns: refs.update(m.group(1) for m in pat.finditer(data))
               for rel in sorted(refs):
-                  rel_path = Path(rel)
-                  src = shared_src / rel_path
-                  dst = shared_dst / rel_path
-                  if dst.exists():
-                      continue
-                  if not src.is_file():
-                      missing.add(rel)
-                      continue
+                  src, dst = shared_src / rel, shared_dst / rel
+                  if dst.exists(): continue
+                  if not src.is_file(): missing.add(rel); continue
                   dst.parent.mkdir(parents=True, exist_ok=True)
-                  shutil.copy2(src, dst)
-                  copied.add(rel)
-                  changed = True
-
-          if missing:
-              raise SystemExit('Missing shared dependencies: ' + ', '.join(sorted(missing)))
-
+                  shutil.copy2(src, dst); copied.add(rel); changed = True
+          if missing: raise SystemExit('Missing shared dependencies: ' + ', '.join(sorted(missing)))
           print(f'Bundled shared dependency files: {len(copied)}')
-          for rel in sorted(copied):
-              print('  shared/' + rel)
+          for rel in sorted(copied): print('  shared/' + rel)
           PY
 
       - name: Create portability manifest and checksums
@@ -170,49 +96,25 @@ konwersji, wykonaj ją wprost. Adapter ma działać tylko tam, gdzie literalna n
           python - <<'PY'
           from pathlib import Path
           import hashlib, re
-
           root = Path('staging/analiza-sadowa-v6')
           source_root = Path('Wersja rozwojowa rozpakowana/analiza-sadowa-v6')
           source_count = sum(1 for p in source_root.rglob('*') if p.is_file())
           shared_files = sorted(str(p.relative_to(root)) for p in (root/'shared').rglob('*') if p.is_file())
-
           skill_text = (root/'SKILL.md').read_text(encoding='utf-8')
-          m = re.search(r'^description:\s*["\'](.*?)["\']\s*$', skill_text, re.M)
-          if not m:
-              raise SystemExit('portable description not found')
+          m = re.search(r'^description:\s*"(.*?)"\s*$', skill_text, re.M)
+          if not m: raise SystemExit('portable description not found')
           desc_len = len(m.group(1))
-          if desc_len > 200:
-              raise SystemExit(f'description length {desc_len} > 200')
-
+          if desc_len > 200: raise SystemExit(f'description length {desc_len} > 200')
           manifest = root / 'PORTABILITY-MANIFEST.md'
-          manifest.write_text(
-              '# Portability manifest — analiza-sadowa-v6\n\n'
-              '- Source repository: `michaleiatrak-star/Lex-Machina`\n'
-              '- Source commit: `bdebb4b0b6ba63add44501795c6e4acdc5bfd931`\n'
-              '- Original skill tree SHA: `4ae1d0bab70923a6ff960a2cf85038cb001b10f5`\n'
-              f'- Original skill files preserved before portability additions: **{source_count}**\n'
-              f'- Bundled recursive `shared/` dependency files: **{len(shared_files)}**\n'
-              f'- Frontmatter description length: **{desc_len}/200**\n\n'
-              '## Changes limited to runtime portability\n\n'
-              '1. Host-specific compatibility metadata made tool-name-neutral.\n'
-              '2. Frontmatter description compacted to the common 200-character profile; detailed triggers remain in SKILL.md body.\n'
-              '3. `Claude MUSI` changed to `asystent MUSI` in one imperative.\n'
-              '4. Added a runtime adapter defining legacy tool names and `/mnt/...` paths as semantic aliases.\n'
-              '5. Added local copies of the recursive shared dependency closure for standalone ZIP use.\n'
-              '6. No legal methodology, gates, scoring, report schema, filters or specialist modules were rewritten.\n\n'
-              '## Bundled shared files\n\n' + ''.join(f'- `{x}`\n' for x in shared_files) +
-              '\n## External integrations intentionally not vendored\n\n'
-              'Other skills named in the instructions (for example `prawny-router-v3` or `raport-sytuacyjny-v2`) remain separate skills. '
-              'The runtime adapter defines a graceful fallback when such an integration is unavailable.\n',
-              encoding='utf-8'
-          )
-
+          lines = ['# Portability manifest — analiza-sadowa-v6','', '- Source repository: `michaleiatrak-star/Lex-Machina`','- Source commit: `bdebb4b0b6ba63add44501795c6e4acdc5bfd931`','- Original skill tree SHA: `4ae1d0bab70923a6ff960a2cf85038cb001b10f5`',f'- Original skill files preserved before portability additions: **{source_count}**',f'- Bundled recursive `shared/` dependency files: **{len(shared_files)}**',f'- Frontmatter description length: **{desc_len}/200**','', '## Changes limited to runtime portability','', '1. Host-specific compatibility metadata made tool-name-neutral.','2. Frontmatter description compacted to the common 200-character profile; detailed triggers remain in SKILL.md body.','3. `Claude MUSI` changed to `asystent MUSI` in one imperative.','4. Added a runtime adapter defining legacy tool names and `/mnt/...` paths as semantic aliases.','5. Added local copies of the recursive shared dependency closure for standalone ZIP use.','6. No legal methodology, gates, scoring, report schema, filters or specialist modules were rewritten.','', '## Bundled shared files','']
+          lines += [f'- `{x}`' for x in shared_files]
+          lines += ['', '## External integrations intentionally not vendored','', 'Other skills named in the instructions (for example `prawny-router-v3` or `raport-sytuacyjny-v2`) remain separate skills. The runtime adapter defines a graceful fallback when such an integration is unavailable.','']
+          manifest.write_text('\n'.join(lines), encoding='utf-8')
           checksum = root / 'CHECKSUMS.sha256'
-          rows = []
+          rows=[]
           for f in sorted(p for p in root.rglob('*') if p.is_file() and p.name != 'CHECKSUMS.sha256'):
-              digest = hashlib.sha256(f.read_bytes()).hexdigest()
-              rows.append(f'{digest}  {f.relative_to(root).as_posix()}')
-          checksum.write_text('\n'.join(rows) + '\n', encoding='utf-8')
+              rows.append(f'{hashlib.sha256(f.read_bytes()).hexdigest()}  {f.relative_to(root).as_posix()}')
+          checksum.write_text('\n'.join(rows)+'\n', encoding='utf-8')
           PY
 
       - name: Validate portability and completeness
@@ -225,22 +127,13 @@ konwersji, wykonaj ją wprost. Adapter ma działać tylko tam, gdzie literalna n
           test -f "$ROOT/CHECKSUMS.sha256"
           test -d "$ROOT/references"
           test -d "$ROOT/shared"
-
           COUNT=$(find "$ROOT" -type f | wc -l | tr -d ' ')
           echo "FINAL_FILES=$COUNT"
-          if [ "$COUNT" -gt 200 ]; then
-            echo "ERROR: final skill has $COUNT files; hard limit is 200" >&2
-            exit 1
-          fi
-
+          if [ "$COUNT" -gt 200 ]; then echo "ERROR: final skill has $COUNT files; hard limit is 200" >&2; exit 1; fi
           ! grep -q 'compatibility: "web_search, web_fetch, show_widget"' "$ROOT/SKILL.md"
           ! grep -q 'fakt-norma Claude MUSI' "$ROOT/SKILL.md"
           grep -q '^## ADAPTER RUNTIME — PORTABILITY' "$ROOT/SKILL.md"
-
-          (
-            cd "$ROOT"
-            sha256sum -c CHECKSUMS.sha256
-          )
+          (cd "$ROOT" && sha256sum -c CHECKSUMS.sha256)
 
       - name: Upload one skill as one ZIP artifact
         uses: actions/upload-artifact@v4
