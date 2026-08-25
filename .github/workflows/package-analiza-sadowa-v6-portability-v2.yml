@@ -1,0 +1,33 @@
+name: Package analiza-sadowa-v6 portability v2
+
+on:
+  push:
+    branches:
+      - portability/analiza-sadowa-v6-02
+    paths:
+      - '.github/workflows/package-analiza-sadowa-v6-portability-v2.yml'
+      - '.github/portability/package_analiza_sadowa_v6.py'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build corrected skill
+        run: python .github/portability/package_analiza_sadowa_v6.py
+      - name: Verify checksums and no vendored shared
+        run: |
+          cd staging/analiza-sadowa-v6
+          sha256sum -c CHECKSUMS.sha256
+          test ! -d shared
+      - uses: actions/upload-artifact@v4
+        with:
+          name: analiza-sadowa-v6
+          path: staging
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
