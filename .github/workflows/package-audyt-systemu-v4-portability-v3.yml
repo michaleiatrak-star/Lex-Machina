@@ -1,0 +1,35 @@
+name: Package audyt-systemu-v4 portability v3
+
+on:
+  push:
+    branches:
+      - portability/audyt-systemu-v4-02
+    paths:
+      - '.github/workflows/package-audyt-systemu-v4-portability-v3.yml'
+      - '.github/portability/package_audyt_v3.py'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build host-neutral audyt skill
+        run: python .github/portability/package_audyt_v3.py
+      - name: Verify checksums and distribution invariants
+        run: |
+          cd staging/audyt-systemu-v4
+          sha256sum -c CHECKSUMS.sha256
+          test ! -d shared
+          test -z "$(find . -type d -name '__pycache__' -print -quit)"
+          test -z "$(find . -type f -name '*.pyc' -print -quit)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audyt-systemu-v4
+          path: staging
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
