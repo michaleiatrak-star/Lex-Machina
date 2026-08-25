@@ -1,0 +1,30 @@
+name: Package prawo-polskie-v2 portability
+
+on:
+  push:
+    branches:
+      - portability/prawo-polskie-v2-01
+    paths:
+      - '.github/workflows/package-prawo-polskie-v2-portability.yml'
+      - '.github/portability/package_prawo_polskie.py'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and validate skill
+        run: python .github/portability/package_prawo_polskie.py
+      - name: Verify checksums
+        run: cd staging/prawo-polskie-v2 && sha256sum -c CHECKSUMS.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prawo-polskie-v2
+          path: staging
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
