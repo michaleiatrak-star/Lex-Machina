@@ -1,0 +1,41 @@
+name: Package execution skills portability
+
+on:
+  push:
+    branches:
+      - portability/execution-batch-01
+    paths:
+      - '.github/workflows/package-execution-batch-portability.yml'
+      - '.github/portability/package_execution.py'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        skill:
+          - pisma-procesowe-v3
+          - pisma-proste-v2
+          - orzeczenia-sadowe-v2
+          - przesluchanie-swiadkow-v2-min90
+          - raport-klienta-v1
+          - raport-sytuacyjny-v2
+          - przewodnik-prawny-v2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and validate ${{ matrix.skill }}
+        run: python .github/portability/package_execution.py --skill '${{ matrix.skill }}'
+      - name: Verify checksums
+        run: cd 'staging/${{ matrix.skill }}' && sha256sum -c CHECKSUMS.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.skill }}
+          path: staging
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
