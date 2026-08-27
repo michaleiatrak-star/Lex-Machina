@@ -10,11 +10,11 @@ złej wiary, doliczania posiadania, ograniczeń rolnych; (3) przywłaszczenie
 mienia — JUŻ DOBRZE POKRYTE karnie (art. 284 KK w BLOK A/L kwalifikatora,
 art. 125 KW) — potwierdzone, bez potrzeby duplikacji, patrz sekcja 3.
 
-> ⛔ HARDGATE — zweryfikuj aktualny t.j. na ISAP przed użyciem.
+> ✅ **METRYKA RZĄD 1, VER 2026-08-28:** ustawa o rzeczach znalezionych — **Dz.U. 2023 poz. 501 t.j. ze zm.**; KC — **Dz.U. 2026 poz. 795 t.j.**. Fresh hard gate pozostaje obowiązkowy dla brzmienia konkretnego przepisu.
 
 ---
 
-## CZĘŚĆ A — RZECZY ZNALEZIONE (ustawa z 20.02.2015 r., Dz.U. 2015 poz. 397 — ⚠️ zweryfikuj t.j.)
+## CZĘŚĆ A — RZECZY ZNALEZIONE (ustawa z 20.02.2015 r., **Dz.U. 2023 poz. 501 t.j. ze zm.**, VER ELI 2026-08-28)
 
 ### 1. Podstawowy obowiązek znalazcy (art. 183-187 KC + ustawa szczegółowa)
 
