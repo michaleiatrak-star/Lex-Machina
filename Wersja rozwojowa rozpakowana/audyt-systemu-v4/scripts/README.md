@@ -51,3 +51,18 @@ zgodnie z tą samą logiką klasyfikacji, jaką ten skill stosuje do reszty
 systemu, mieszka w `shared/tools/` — obok modułów, z
 których faktycznie korzysta pipeline produkcyjny (`shared/HYBRID-VALIDATION.md`
 i inne), nie w audycie deweloperskim. Patrz `shared/tools/README.md`.
+
+
+## check_coverage_coherence.py — T18
+
+Kontroluje spójność warstwy pokrycia i routingu po audycie 2026-08-27:
+obecność 16/16 `MAPA-POKRYCIA.md`, istnienie jawnych ścieżek modułów z
+`ROUTING-MAP.md`, moduły-widma w `MAPA-AKTOW.md` oraz przestarzałe
+deklaracje „brak dedykowanego modułu” w mapie dziedzinowej routera.
+
+```bash
+python3 check_coverage_coherence.py "$LEX_MACHINA_SKILLS_ROOT"
+```
+
+Kod 0 oznacza spójność strukturalną. Test nie nadaje statusu kompletności
+merytorycznej aktom prawnym.
