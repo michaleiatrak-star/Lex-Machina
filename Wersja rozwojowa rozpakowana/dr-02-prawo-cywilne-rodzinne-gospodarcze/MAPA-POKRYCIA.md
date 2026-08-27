@@ -24,6 +24,50 @@ wszystkich okresów obowiązywania ustawy. Kompletność historii zmian:
 niepotwierdzona. F-108 pozostaje OTWARTA.
 
 
+## F-108/41 — ubezpieczenia obowiązkowe, UFG i PBUK (2026-08-27)
+
+Moduł: `modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md`,
+poziom B. Struktura i rdzeń zweryfikowane wyłącznie w urzędowym ELI
+(Dz.U. 2026 poz. 783).
+
+| Rozdział | Materia | Status |
+|---|---|---|
+| 1 | przepisy ogólne, likwidacja szkody, actio directa | 🟢 |
+| 2 | OC posiadaczy pojazdów | 🟢 rdzeń |
+| 3 | OC rolników | 🟢 rdzeń |
+| 4 | budynki rolnicze | 🟢 rdzeń |
+| 5 | szkody za granicą | 🟡 routing |
+| 6 | kontrola obowiązku i opłaty | 🟡 bez tabeli kwot rocznych |
+| 7 | UFG | 🟢 rdzeń |
+| 8 | PBUK | 🟢 rdzeń |
+| 9 | zmiany w przepisach | ⚪ historyczne |
+| 10 | epizodyczne/przejściowe/końcowe | 🟡 routing |
+
+F-108 P1/41: **poziom B osiągnięty**. Nie oznacza pełnego komentarza do każdego
+artykułu; kwoty opłat i szczegółowe warianty transgraniczne są weryfikowane
+reaktywnie ze źródła Rządu 1.
+
+## F-108/52 — fundacja rodzinna (2026-08-27)
+
+Moduł: `modules/mod-ustawa-fundacja-rodzinna.md`, poziom B. Mapa 16
+rozdziałów oparta na urzędowym ELI (Dz.U. 2023 poz. 326 ze zmianą poz. 825).
+
+| Rozdziały | Materia | Status |
+|---|---|---|
+| 1–4 | ogólne, fundator, majątek, powstanie | 🟢 rdzeń |
+| 5–7 | statut/spis, beneficjenci, organy | 🟢 rdzeń |
+| 8–10 | odpowiedzialność, audyt, kontrola sądowa | 🟢 rdzeń |
+| 11 | rozwiązanie i likwidacja | 🟡 routing + wejście |
+| 12 | rejestr fundacji rodzinnych | 🟢 rdzeń |
+| 13 | przepis karny | 🟡 routing do DR-03 |
+| 14 | zmiany w innych ustawach | 🟡 odczyt aktów docelowych |
+| 15 | przejściowe/dostosowujące | ⚪ historyczne |
+| 16 | końcowy | 🟢 |
+
+F-108 P1/52: **poziom B osiągnięty**. Podatki, AML i zachowek pozostają
+oddzielnymi torami z własnym HARD GATE, a nie treścią „z pamięci” tego modułu.
+
+
 **Utworzona:** 2026-08-22 (F-83, zasilenie z `audyt-systemu-v4/references/
 raporty-pokrycia-2026-08-13/`) | **Format ustalony przez F-83.**
 
