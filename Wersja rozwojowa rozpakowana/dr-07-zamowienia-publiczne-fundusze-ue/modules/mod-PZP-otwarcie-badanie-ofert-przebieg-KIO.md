@@ -9,9 +9,7 @@ przed KIO [art. 531-568a] — czyli TEGO, co faktycznie dzieje się na
 sali/w systemie podczas rozpoznawania odwołania.)
 
 > ⛔ HARDGATE — zweryfikuj aktualny t.j. na ISAP przed użyciem w piśmie.
-> Akt bazowy: Prawo zamówień publicznych. ⚠️ [NIEWERYFIKOWANE RZĄD 1] —
-> RZĄD 2/3 (lexlege.pl, przepisy.gofin.pl, ekomentarzpzp.uzp.gov.pl —
-> oficjalny komentarz UZP, wysokiej wiarygodności choć formalnie RZĄD 2,
+> **RZĄD 1 / VER 2026-08-28:** Prawo zamówień publicznych, t.j. Dz.U. 2026 poz. 793 (obwieszczenie Marszałka Sejmu z 27.05.2026, stan t.j. 25.05.2026). Zakres art. 218-226 i 531-568a odczytano z urzędowego tekstu ELI. 
 > zamowienia.org.pl, legalnabudowa.pl, kzp.net.pl). ⚡ ISTOTNA
 > NOWELIZACJA: ustawa z 21.05.2025 o zmianie niektórych ustaw w celu
 > deregulacji prawa gospodarczego i administracyjnego (art. 28), ogłoszona
@@ -285,17 +283,23 @@ praktyczna z orzecznictwa, nie z jednego konkretnego przepisu)
 ---
 
 ## ⚠️ POZOSTAJE DO POGŁĘBIENIA (jawnie oznaczone, poza zakresem tej naprawy)
-- Dokładna treść nowego art. 535 §1 (próg czasowy prekluzji dowodowej)
-  i art. 535 §2 (wyjątki od zdalnej rozprawy) — kierunek zmiany znany,
-  literalne brzmienie NIE potwierdzone.
-- Numeracja i treść oddziału dot. wyłączenia członków składu
-  orzekającego (odesłanie do art. 491 w komentarzu — niepotwierdzone
-  jako właściwy numer w aktualnym t.j.).
-- Pełna treść art. 553, 556, 557 (rodzaje orzeczeń w konkretnych
-  stanach faktycznych) i art. 558-568a (dalsza treść Oddziału 9).
+- ✅ **Art. 535 §1-3 — RZĄD 1 ELI 2026-08-28:** dowody co do zasady przedstawia się z odwołaniem, odpowiedzią, przystąpieniem albo innym pismem wniesionym najpóźniej w dniu poprzedzającym wyznaczoną rozprawę/posiedzenie, pod rygorem utraty prawa ich powołania; późniejsze dowody są dopuszczalne, gdy wcześniejsze pozyskanie nie było możliwe albo potrzeba wynikła w toku postępowania. §3 zwalnia z ponownego dołączania dokumentów już znajdujących się w aktach.
+- ✅ **Art. 568a — RZĄD 1 ELI 2026-08-28:** po obaleniu w prawomocnym postępowaniu domniemania wynikającego z certyfikatu wykonawcy Prezes KIO przekazuje właściwemu podmiotowi certyfikującemu informację w terminie do 3 dni roboczych od wydania prawomocnego orzeczenia.
+- Pozostałe art. 558-568 mają charakter uzupełniający względem rdzenia modułu; przed użyciem konkretnej jednostki stosuj fresh hard gate ELI.
 - Protokół (Oddział 10, art. 569-572), koszty postępowania odwoławczego
   (Oddział 11, art. 573-576), zakaz zawarcia umowy (Oddział 12, art.
   577 i dalej) — całkowicie nieopracowane.
 - Rozdział 6 (Aukcja elektroniczna, art. 227-238) i Rozdział 7 (Wybór
   najkorzystniejszej oferty, art. 239-253) — sąsiadują z Częścią A, poza
   zakresem tej naprawy.
+
+
+## RZĄD 1 — punkty kontrolne 2026-08-28
+
+- art. 218 ust. 1-2: jedna oferta, a jej treść zgodna z wymaganiami dokumentów zamówienia;
+- art. 531: dowodzeniu podlegają fakty istotne dla rozstrzygnięcia;
+- art. 534: strony/uczestnicy wskazują dowody dla faktów, z których wywodzą skutki prawne;
+- art. 535: aktualna prekluzja dowodowa i wyjątki zweryfikowane w ELI;
+- art. 568a: obowiązek informacyjny Prezesa KIO wobec podmiotu certyfikującego zweryfikowany w ELI.
+
+**Status:** brak nierozstrzygniętej rozbieżności wersji czasowej w tych jednostkach na 2026-08-28.
