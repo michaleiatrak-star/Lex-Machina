@@ -70,7 +70,7 @@ użyciem w piśmie (HARD GATE), niezależnie od statusu 🟢/🟡/🔴 tutaj.
 
 | Rozdz. | Materia | Art. | Status | Moduł |
 |---|---|---|---|---|
-| VII | Bezpieczeństwo osób i mienia (fragment) | 82 | 🔴 | Tylko nowelizacja odnotowana, brak treści merytorycznej |
+| VII | Bezpieczeństwo osób i mienia (fragment) | 82 | 🟢 NAPRAWIONE 2026-08-27 | `mod-KW-art70-118-bezpieczenstwo-osoba-zdrowie.md` — art. 82 zweryfikowany w ELI; uwzględniono Dz.U. 2025 poz. 1814 |
 | VIII | Porządek publiczny | 49–64 | 🟢 | `mod-KW-art49-64-porzadek-publiczny` — pełne: 49, 49a, 50, 50a, 51, 52, 52a, 52b, 54, 63a, 64. Brak/niepewne: 55–58, 60¹ |
 | X | Bezpieczeństwo osób i mienia | 70–83 | 🟡 | `mod-KW-art70-118-bezpieczenstwo-osoba-zdrowie` — pełne: 70, 71, 77–78, 79, 83. Brak: 72–76, 80–82 |
 | XI | Bezpieczeństwo i porządek w komunikacji | 84–103a | 🟡 | Tylko taryfikatorowo (86, 87, 92a, 94, 96, 86c). Brak: 85, 88–91, 97–103a |
@@ -94,6 +94,8 @@ użyciem w piśmie (HARD GATE), niezależnie od statusu 🟢/🟡/🔴 tutaj.
 
 ## Kodeks karny wykonawczy (KKW)
 
+**Aktualizacja 2026-08-27 — KKW:** dawne pozycje 🟣/🔴 mają teraz co najmniej pokrycie operacyjne B w `mod-KKW-uzupelnienie-pokrycia-2026.md`; status 🟡 oznacza brak pełnego komentarza artykuł-po-artykule, nie brak treści.
+
 **Stan prawny bazowy:** Dz.U. 2025 poz. 911 t.j. (obwieszczenie 11.06.2025)
 **Data ostatniej weryfikacji treści:** 2026-08-22 (⛔ NAPRAWIONE — poprzednia
 wersja tej sekcji, z 2026-08-21, opierała się wyłącznie na raporcie
@@ -114,27 +116,27 @@ nadal jest generycznym szablonem proceduralnym bez numeracji KKW.
 
 | Część / Rozdz. | Materia | Art. (orientacyjnie) | Status | Moduł |
 |---|---|---|---|---|
-| Ogólna I–III | Zakres obowiązywania, organy, skazany (prawa ogólne) | 1–8b | 🟣 | `mod-KKW-kodeks-karny-wykonawczy.md` — poza sekcją 0 (opracowaną), reszta pliku nadal generyczna |
+| Ogólna I–III | Zakres obowiązywania, organy, skazany (prawa ogólne) | 1–8b | 🟡 B — uzupełnione 2026-08-27 | `mod-KKW-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł szczegółowy KKW ma pierwszeństwo dla zakresów już pogłębionych |
 | Ogólna IV | **Postępowanie wykonawcze** (Oddz. 1 wykonywanie orzeczeń, Oddz. 2 postępowanie przed sądem, Oddz. 3 postępowanie egzekucyjne) | 9–31 | 🟢 NAPRAWIONE 2026-08-22 | Sekcja 0.6 modułu — art. 9 (wykonalność orzeczeń), 19-20 (orzekanie jednoosobowe, zażalenie 21 dni), 22 (udział w posiedzeniu), 24 (zmiana/uchylenie postanowienia, limit 6 mies. na niekorzyść), 25-26 (dwa tryby egzekucji: KPC vs administracyjny), 31 (skarga pauliańska SP). ⚠️ Górna granica poprawiona: to 25-31, NIE 25-43 jak wcześniej błędnie w tej mapie — art. 32+ to już Rozdział V |
-| Ogólna V | Nadzór penitencjarny | 32–36 | 🟣 | j.w. |
-| Ogólna VI | Zatarcie skazania (wykonawcze) | 37 | 🟣 | j.w. |
-| Ogólna VII | Uczestnictwo społeczeństwa, Fundusz Pomocy Pokrzywdzonym | 38–43 | 🟣 | j.w. — Fundusz ma ODRĘBNY dobry moduł, ale oparty na rozp. wykonawczym, nie art. 38-43 KKW |
+| Ogólna V | Nadzór penitencjarny | 32–36 | 🟡 B — uzupełnione 2026-08-27 | `mod-KKW-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł szczegółowy KKW ma pierwszeństwo dla zakresów już pogłębionych |
+| Ogólna VI | Zatarcie skazania (wykonawcze) | 37 | 🟡 B — uzupełnione 2026-08-27 | `mod-KKW-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł szczegółowy KKW ma pierwszeństwo dla zakresów już pogłębionych |
+| Ogólna VII | Uczestnictwo społeczeństwa, Fundusz Pomocy Pokrzywdzonym | 38–43 | 🟡 B — uzupełnione 2026-08-27 | `mod-KKW-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł szczegółowy KKW ma pierwszeństwo dla zakresów już pogłębionych |
 | Ogólna VIIa | **System dozoru elektronicznego** | 43a–43zf | 🟢 NAPRAWIONE F-75 | Sekcja 0.3 modułu — 3 formy dozoru (stacjonarny/zbliżeniowy/mobilny), struktura 5 oddziałów, warunki rozpoczęcia, zaliczenie na poczet kary, krąg wnioskodawców. ⚠️ Oddziały 2/2a/3 pozostają do pogłębienia wg jawnej notatki w module |
-| Szczególna IX | Kara ograniczenia wolności | ok. 53–66 | 🟣 | `mod-KKW-kodeks-karny-wykonawczy.md` — generyczna część |
-| Szczególna X, Oddz. 1–2 | Cele kary pozbawienia wolności, zakłady karne | 67–78 | 🟣 | j.w. |
-| Szczególna X, Oddz. 3 | Wykonywanie kary, indywidualizacja | 79–100 | 🟣 | j.w. |
+| Szczególna IX | Kara ograniczenia wolności | ok. 53–66 | 🟡 B — uzupełnione 2026-08-27 | `mod-KKW-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł szczegółowy KKW ma pierwszeństwo dla zakresów już pogłębionych |
+| Szczególna X, Oddz. 1–2 | Cele kary pozbawienia wolności, zakłady karne | 67–78 | 🟡 B — uzupełnione 2026-08-27 | `mod-KKW-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł szczegółowy KKW ma pierwszeństwo dla zakresów już pogłębionych |
+| Szczególna X, Oddz. 3 | Wykonywanie kary, indywidualizacja | 79–100 | 🟡 B — uzupełnione 2026-08-27 | `mod-KKW-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł szczegółowy KKW ma pierwszeństwo dla zakresów już pogłębionych |
 | Szczególna X, Oddz. 4 | **Prawa i obowiązki skazanego** (widzenia, korespondencja, opieka zdrowotna) | 101–120 | 🟢 NAPRAWIONE F-75 | Sekcja 0.4 modułu — katalog praw art. 102 i dalsze (treść pełna, patrz moduł) |
-| Szczególna X, Oddz. 5–7 | Zatrudnienie, nauczanie, działalność kulturalno-oświatowa | 121–136a | 🟣 | `mod-KKW-kodeks-karny-wykonawczy.md` — generyczna część |
-| Szczególna X, Oddz. 8 | Nagrody i ulgi | 137–141a | 🟣 | j.w. |
+| Szczególna X, Oddz. 5–7 | Zatrudnienie, nauczanie, działalność kulturalno-oświatowa | 121–136a | 🟡 B — uzupełnione 2026-08-27 | `mod-KKW-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł szczegółowy KKW ma pierwszeństwo dla zakresów już pogłębionych |
+| Szczególna X, Oddz. 8 | Nagrody i ulgi | 137–141a | 🟡 B — uzupełnione 2026-08-27 | `mod-KKW-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł szczegółowy KKW ma pierwszeństwo dla zakresów już pogłębionych |
 | Szczególna X, Oddz. 9 | **Kary dyscyplinarne** | 142–149 | 🟡 NAPRAWIONE F-75, częściowo | Sekcja 0.5 modułu — treść dobra, ale sam moduł jawnie odnotowuje otwarte pytania (pełny katalog art. 143 §1 pkt 4-7, dokładna treść art. 148-149, tryb skargi z art. 144 §5 niejednoznaczny) |
 | Szczególna X, Oddz. 10 | **Odroczenie i przerwa wykonania kary** | 150–158a | 🟢 NAPRAWIONE F-75 | Sekcja 0.2 modułu — rozróżnienie odroczenie/przerwa, przesłanki obligatoryjne (art. 150) i fakultatywne (art. 151) z limitem roku, przerwa (art. 153) ze szczegółami. ⚠️ Katalog wyłączeń podmiotowych i pełna procedura wniosku (art. 153a i n.) pozostają do pogłębienia wg jawnej notatki w module |
 | Szczególna X, Oddz. 11 | **Warunkowe przedterminowe zwolnienie** | 159–163 | 🟢 NAPRAWIONE F-75, ⛔ POPRAWIONE 2026-08-22 | Sekcja 0.1 modułu — TERAZ w samym module KKW (poprzednia wersja tej mapy błędnie wskazywała treść jako obecną tylko w module KK). Krąg wnioskodawców (161 §1-2), **termin karencji po odmowie (161 §3-4) NAPRAWIONY w tej sesji — był błędny (stara wersja przepisu), teraz poprawny: ≤5 lat→6 mies., >5 lat→rok**, przebieg posiedzenia (161 §1, 162), zaskarżalność (162 §2-3), odwołanie zwolnienia (art. 160). Przesłanki materialne (art. 77-82 KK) świadomie POZA zakresem tego modułu — w `mod-KK-art69-84-warunkowe-zawieszenie-zwolnienie.md` |
-| Szczególna X, Oddz. 12–13 | Zwalnianie z zakładów karnych | 164–168a | 🟣 | `mod-KKW-kodeks-karny-wykonawczy.md` — zero treści |
+| Szczególna X, Oddz. 12–13 | Zwalnianie z zakładów karnych | 164–168a | 🟡 B — uzupełnione 2026-08-27 | `mod-KKW-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł szczegółowy KKW ma pierwszeństwo dla zakresów już pogłębionych |
 | Szczególna XI | Kurator sądowy, dozór, warunkowe umorzenie/zawieszenie (wykonawcze) | ok. 169–182 | 🟡 | Tylko art. 182a (blokada alkoholowa) w `mod-KK-KPK-framework-szczegolowy` i `mod-PRD-nowe-przestepstwa-drogowe-BRD`, NIE w module KKW — NIE dotknięte naprawą F-75 |
-| Szczególna XII | Środki karne, kompensacyjne, przepadek (wykonanie) | ok. 183–201 | 🟣 | `mod-KKW-kodeks-karny-wykonawczy.md` — zero treści |
-| Szczególna, dalsze | Środki zabezpieczające, kary porządkowe, koszty, tymczasowe aresztowanie (wykonanie) | ok. 202–223 | 🟣 | j.w. |
-| Szczególna XVa | Umieszczanie w wydzielonych pomieszczeniach | — | 🟣 | j.w. |
-| Wojskowa | Wykonywanie kar wobec żołnierzy | — | 🟣 | j.w. — niski priorytet dla praktyki cywilnej |
+| Szczególna XII | Środki karne, kompensacyjne, przepadek (wykonanie) | ok. 183–201 | 🟡 B — uzupełnione 2026-08-27 | `mod-KKW-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł szczegółowy KKW ma pierwszeństwo dla zakresów już pogłębionych |
+| Szczególna, dalsze | Środki zabezpieczające, kary porządkowe, koszty, tymczasowe aresztowanie (wykonanie) | ok. 202–223 | 🟡 B — uzupełnione 2026-08-27 | `mod-KKW-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł szczegółowy KKW ma pierwszeństwo dla zakresów już pogłębionych |
+| Szczególna XVa | Umieszczanie w wydzielonych pomieszczeniach | — | 🟡 B — uzupełnione 2026-08-27 | `mod-KKW-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł szczegółowy KKW ma pierwszeństwo dla zakresów już pogłębionych |
+| Wojskowa | Wykonywanie kar wobec żołnierzy | — | 🟡 B — uzupełnione 2026-08-27 | `mod-KKW-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł szczegółowy KKW ma pierwszeństwo dla zakresów już pogłębionych |
 | Końcowa | Przepisy przejściowe i końcowe | 243–259 | ⚪ | Techniczne, niski priorytet |
 
 **Zaktualizowana rekomendowana kolejność uzupełniania** (5 z 7 oryginalnych
