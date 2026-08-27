@@ -1,6 +1,6 @@
 ---
 name: dr-08-samorzad-terytorialny-prawo-lokalne
-version: "3.6"
+version: "3.7"
 description: "Samorząd terytorialny i prawo lokalne: gmina, powiat, województwo, uchwały, akty prawa miejscowego, nadzór, kompetencje JST i lokalne planowanie."
 ---
 
@@ -73,11 +73,15 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-101 Strefa zamieszkania (skutki: pierwszeństwo pieszego, 20 km/h)
 - BAS-107 Droga wewnętrzna (definicja negatywna — mandat zasadniczo niedopuszczalny)
 
-## Moduły (17 łącznie — ✓ 17 OK, ☐ 0 STUB)
+## Moduły (19 łącznie — ✓ 19 OK, ☐ 0 STUB)
 
 ```
 MODUŁY USTROJOWE I PROCEDURALNE:
   [✓] OK    mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa
+  [✓] NOWY  mod-ustawa-samorzad-powiatowy
+              (F-108/27 P3: wydzielony moduł B+, Dz.U. 2025 poz. 1684)
+  [✓] NOWY  mod-ustawa-samorzad-wojewodztwa
+              (F-108/28 P3: wydzielony moduł B+, Dz.U. 2026 poz. 720)
               (USG + USP + USW — ustrój, kompetencje, organy, nadzór)
   [✓] OK    mod-nadzor-wojewody-RIO-legalnosc-uchwal
   [✓] OK    mod-skargi-na-prawo-miejscowe-WSA-NSA
