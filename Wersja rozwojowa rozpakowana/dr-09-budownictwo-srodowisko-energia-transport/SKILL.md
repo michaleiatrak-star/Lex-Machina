@@ -1,6 +1,6 @@
 ---
 name: dr-09-budownictwo-srodowisko-energia-transport
-version: "3.24"
+version: "3.25"
 description: "Budownictwo, środowisko, energia i transport: prawo budowlane, planowanie, odpady, ochrona środowiska, energetyka, drogi i regulacje transportowe."
 ---
 
@@ -83,7 +83,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W10 Obiekt liniowy (art. 3 pkt 3a PrBud — kable w kanalizacji ≠ obiekt!)
 - BAS-W14 ⚠️ Reforma upol 2025 — nowe definicje budynek/budowla (dot. też DR-06)
 
-## Moduły (34 łącznie — ✓ 34 OK, ☐ 0 STUB)
+## Moduły (35 łącznie — ✓ 35 OK, ☐ 0 STUB)
 
 ```
 BUDOWNICTWO:
@@ -103,6 +103,8 @@ BUDOWNICTWO:
                odesłania cross-file [dostępność → część 1, stacje
                transformatorowe → część 3])
   [✓] OK    mod-PrBud-prawo-budowlane
+  [✓] NOWY  mod-PrBud-uzupelnienie-pokrycia-2026
+              (funkcje techniczne, roboty, EDB/c-KOB, katastrofa, e-Budownictwo, organy i odpowiedzialność zawodowa)
               (samowola, PINB/WINB, pozwolenie, zgłoszenie, WZ/MPZP, umowa z wykonawcą,
                uchwała NSA 7 sędziów luty 2026 — art. 49f i wcześniejszy nakaz rozbiórki)
   [✓] OK    mod-UGN-gospodarka-nieruchomosciami
