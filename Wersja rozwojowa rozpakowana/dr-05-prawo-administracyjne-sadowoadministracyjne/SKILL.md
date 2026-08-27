@@ -1,6 +1,6 @@
 ---
 name: dr-05-prawo-administracyjne-sadowoadministracyjne
-version: "3.22"
+version: "3.23"
 description: "Prawo administracyjne i sądowoadministracyjne: KPA, PPSA, decyzje, bezczynność, WSA/NSA, egzekucja administracyjna, cudzoziemcy i postępowania urzędowe."
 ---
 
@@ -85,7 +85,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W21 Informacja przetworzona (UDIP art. 3 — "szczególna istotność")
 - BAS-W29 Pełnomocnik z urzędu — prawo do sądu (art. 117 KPC)
 
-## Moduły (21 łącznie — ✓ 21 OK, ☐ 0 STUB)
+## Moduły (22 łącznie — ✓ 22 OK, ☐ 0 STUB)
 
 **NAPRAWA 2026-08-22 (kontynuacja):** dodano `mod-PPSA-orzeczenia-
 sadowe-rozdzial-10.md` — naprawa poz. #8 mapy pokrycia PPSA (ostatnia
@@ -173,6 +173,8 @@ KOMPLETNOŚĆ — wszystkie tematy potwierdzone obecne po podziale.
   [✓] OK    mod-ustawa-zaskarzanie-decyzji-wlasnosci
   [✓] OK    mod-ustawa-dostepnosc-niepelnosprawni
   [✓] OK    mod-ustawa-sygnalisci
+  [✓] NOWY  mod-PPSA-uzupelnienie-pokrycia-2026
+              (pozostałe działy PPSA: właściwość, strony, pisma, doręczenia, terminy, zażalenie i środki nadzwyczajne)
   [✓] NOWY  mod-PPSA-terminy-kasacja-prawo-pomocy
               (dodany 2026-08-13 — PIERWSZY dedykowany moduł PPSA w
                systemie, naprawa F-64. Uchybienie/przywrócenie terminu
