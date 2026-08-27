@@ -1,6 +1,6 @@
 ---
 name: dr-04-prawo-pracy-zus-swiadczenia
-version: "3.26"
+version: "3.27"
 description: "Prawo pracy, ZUS i świadczenia: KP, zatrudnienie, rozwiązanie stosunku pracy, ubezpieczenia społeczne, emerytury, renty, KRUS, PFRON i pomoc społeczna."
 ---
 
@@ -95,7 +95,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   wspierające (→ mod-niepelnosprawnosc-intelektualna-gluchota.md,
   mod-niewidomy-prawa-prawne.md, mod-prawa-obywatelskie-srodki-karne.md)
 
-## Moduły (36 łącznie — ✓ 36 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
+## Moduły (37 łącznie — ✓ 37 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
 
 ```
   [✓] OK    mod-ROZP-SKLADKOWE-podstawa-wymiaru
@@ -237,6 +237,8 @@ AUDIT-JOURNAL.md`.
                [art. 12], okresy podlegania [art. 13], dobrowolne
                początek/koniec [art. 14])
   [✓] OK    mod-SUS-ZUS-ubezpieczenia-spoleczne
+  [✓] NOWY  mod-ustawa-zasilkowa-choroba-macierzynstwo
+              (F-108/30: dedykowany moduł B+, mapa rozdziałów; Dz.U. 2026 poz. 854, RZĄD 1 ELI)
   [✓] NOWY  mod-FUS-zasilek-pogrzebowy-renta-rodzinna-waloryzacja
               (dodany 2026-08-14 — dokańcza F-72. Zasiłek pogrzebowy
                [77-81, 7000 zł od 1.01.2026 + mechanizm waloryzacji
