@@ -1,7 +1,7 @@
 # Moduł — VAT: obowiązek podatkowy, podstawa opodatkowania, zwolnienia przedmiotowe i nieruchomości, ulga na złe długi
 
 > ⚠️ TEN moduł jest CZĘŚCIĄ RODZINY plików VAT, PODZIELONEJ
-> 2026-08-12 (NOTA-4, audyt-systemu-v4/CHECKLIST-DEDUP.md — moduł
+> 2026-08-12 (NOTA-4, audyt-systemu-v4/references/CHECKLIST-DEDUP.md — moduł
 > źródłowy miał 3652 linie). Moduł MACIERZYSTY (z aktualnym stanem
 > weryfikacji ustawy, ostrzeżeniami o nowelizacjach i alertami
 > KSeF/PKWiU): `mod-VAT-podatek-od-towarow-i-uslug.md`.
@@ -119,7 +119,7 @@ okresie rozliczeniowym wykazać podatek NALEŻNY)
   termin 15. dnia miesiąca NASTĘPUJĄCEGO po dostawie).
 
   ✅ **ZWERYFIKOWANE (2026-08-19, F-35) — art. 19a ust. 9-11 dla importu
-  towarów, PEŁNA treść aktualnej numeracji (Dz.U.2025.775 t.j.):**
+  towarów, PEŁNA treść aktualnej numeracji (Dz.U. 2025 poz. 775 t.j.):**
   - **Ust. 9 (ZASADA OGÓLNA):** obowiązek podatkowy z tytułu importu
     towarów powstaje **z chwilą powstania DŁUGU CELNEGO**, z zastrzeżeniem
     ust. 10a i 11.
@@ -337,7 +337,7 @@ zidentyfikowanej w audycie pokrycia DR-06 (dotąd CAŁKOWICIE nieobecne
     stosowanie art. 29a ust. 1-1b, 6, 7, 10, 11, 17)
   □ art. 30b — podstawa OPODATKOWANIA dla IMPORTU towarów — ✅
     **ZWERYFIKOWANE (2026-08-19, F-35), pełna treść ust. 1-6
-    (Dz.U.2025.775 t.j.):**
+    (Dz.U. 2025 poz. 775 t.j.):**
     - **Ust. 1 (zasada ogólna):** wartość CELNA + należne CŁO (+ akcyza,
       jeśli towar akcyzowy).
     - **Ust. 2 (uszlachetnianie BIERNE):** różnica między wartością celną

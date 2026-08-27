@@ -1,7 +1,7 @@
 # Moduł — KPA: mechanizmy w toku sprawy (zawieszenie, dowody, rozprawa)
 
 > ⚠️ TEN moduł jest CZĘŚCIĄ RODZINY plików KPA, PODZIELONEJ
-> 2026-08-12 (NOTA-4, audyt-systemu-v4/CHECKLIST-DEDUP.md — moduł
+> 2026-08-12 (NOTA-4, audyt-systemu-v4/references/CHECKLIST-DEDUP.md — moduł
 > źródłowy osiągnął 1115 linii, ~2,8x próg 400 linii). RODZINA
 > czterech plików: mod-KPA-postepowanie-administracyjne.md (rdzeń:
 > zasady ogólne, strona, wyłączenie, doręczenia, wszczęcie
@@ -217,7 +217,7 @@ omówieniem art. 74a jako przepisu łączącego z RODO]).
 Potwierdzone w 8+ zgodnych, BARDZO aktualnych źródeł, w tym
 BEZPOŚREDNIO dosłowny tekst art. 97-103 (arslege.pl [×2], lexlege.pl
 [×2], przepisy.gofin.pl [grudzień 2025, NAJŚWIEŻSZE, aktualny
-t.j. Dz.U.2025.0.1691]), dzialkanadmorzem.pl [maj 2026, Z
+t.j. Dz.U. 2025 poz. 1691]), dzialkanadmorzem.pl [maj 2026, Z
 PRAKTYCZNYM checklistem].
 ```
 

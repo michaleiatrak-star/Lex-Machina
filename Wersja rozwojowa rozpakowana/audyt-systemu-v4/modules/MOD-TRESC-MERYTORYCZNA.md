@@ -45,7 +45,7 @@ wskazanego aktu/modułu.
 Dla każdej zmiany wykrytej w FAZA 3 (nowy t.j. / WSZEDŁ / nowszy akt w 3C):
 
 ```bash
-grep -rl "<nazwa aktu lub skrót>" /mnt/skills/user/dr-*/modules/*.md /mnt/skills/user/dr-*/MAPA-AKTOW.md
+grep -rl "<nazwa aktu lub skrót>" dr-*/modules/*.md dr-*/MAPA-AKTOW.md
 ```
 
 Skorzystaj z kolumny `Moduł` w `MAPA-AKTOW.md` danej dziedziny (jeśli
@@ -99,7 +99,7 @@ dotyczy tej nowelizacji).
 
 ### Krok 5 — Naprawa treści (tylko dla CRIT-TREŚĆ)
 
-1. Skopiuj moduł do edycji (nigdy `sed -i` na `/mnt/skills/user/` — read-only mount, patrz zasada w FAZA 2D).
+1. Skopiuj moduł do edycji (nigdy `sed -i` na `` — read-only mount, patrz zasada w FAZA 2D).
 2. `str_replace` na dokładnie tym fragmencie, którego dotyczy nieaktualność — nie przepisuj całego modułu.
 3. Zachowaj styl i strukturę reszty modułu (ten sam poziom szczegółowości, ten sam format list/tabel).
 4. Dodaj przy zmienionym fragmencie adnotację źródła: `(wg [nazwa aktu], stan na DD.MM.RRRR — zweryfikowano ISAP)` — zgodnie z FACT-SOURCE-LOCK ze `shared/`.
@@ -117,8 +117,8 @@ dotyczy tej nowelizacji).
 
 | Akt (zmiana) | Moduł dotknięty | Art. zmienione | Wynik | Akcja |
 |---|---|---|---|---|
-| Ordynacja podatkowa Dz.U. 2026.622 | dr-06/mod-OP-ordynacja-podatkowa.md | art. 70 §1 (termin) | ❌ CRIT-TREŚĆ | naprawiono str_replace, patrz wpis journal |
-| KC Dz.U. 2025.1071 (nowy t.j.) | dr-02/mod-*.md | brak zmian normatywnych (t.j. redakcyjny) | ✅ ZGODNE | brak akcji |
+| Ordynacja podatkowa Dz.U. 2026 poz. 622 | dr-06-podatki-finanse-publiczne-aml/modules/mod-OP-ordynacja-podatkowa.md | art. 70 §1 (termin) | ❌ CRIT-TREŚĆ | naprawiono str_replace, patrz wpis journal |
+| KC Dz.U. 2025 poz. 1071 (nowy t.j.) | dr-02/mod-*.md | brak zmian normatywnych (t.j. redakcyjny) | ✅ ZGODNE | brak akcji |
 ```
 
 Jeśli FAZA 3E była pominięta (brak zmian w tej sesji) — sekcja zawiera

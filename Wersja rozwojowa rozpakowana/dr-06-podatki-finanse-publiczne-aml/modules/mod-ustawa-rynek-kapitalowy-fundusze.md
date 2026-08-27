@@ -1,7 +1,7 @@
 # mod-ustawa-rynek-kapitalowy-fundusze
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Fundusze inwestycyjne — Dz.U. 2024 poz. 1034 t.j. ze zm. | Obrót instrumentami — Dz.U. 2023 poz. 646 t.j. ze zm. | Oferta publiczna — Dz.U. 2024 poz. 620 t.j. ze zm. | Obligacje — Dz.U. 2024 poz. 708 t.j. ze zm. (POPRAWKA 2026-07-02g: było błędnie 2022.2218)
+**Źródło weryfikacji:** Fundusze inwestycyjne — Dz.U. 2024 poz. 1034 t.j. ze zm. | Obrót instrumentami — Dz.U. 2023 poz. 646 t.j. ze zm. | Oferta publiczna — Dz.U. 2025 poz. 592 t.j. ze zm. | Obligacje — Dz.U. 2024 poz. 708 t.j. ze zm. (POPRAWKA 2026-07-02g: było błędnie 2022.2218)
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -16,10 +16,10 @@ Fundusze inwestycyjne (FIO, SFIO, FIZ, ASI), TFI, rynek kapitałowy (GPW, Cataly
 
 | Akt | Dz.U. | Uwaga |
 |---|---|---|
-| Ustawa o funduszach inwestycyjnych | Dz.U. 2024 poz. 1034 t.j. ze zm. | AIFMD II — implementacja 2024 |
-| Ustawa o obrocie instrumentami finansowymi | Dz.U. 2023 poz. 646 t.j. ze zm. — weryfikuj | MiFID II |
-| Ustawa o ofercie publicznej | Dz.U. 2024 poz. 620 t.j. ze zm. — weryfikuj | Rozp. Prospektowy UE 2017/1129 |
-| Ustawa o obligacjach | Dz.U. 2024 poz. 708 t.j. ze zm. (POPRAWKA 2026-07-02g) | zastępuje nieaktualny 2022.2218 |
+| Ustawa o funduszach inwestycyjnych | Dz.U. 2026 poz. 60 t.j. ze zm. | AIFMD II — implementacja 2024 |
+| Ustawa o obrocie instrumentami finansowymi | Dz.U. 2024 poz. 722 t.j. ze zm. — weryfikuj | MiFID II |
+| Ustawa o ofercie publicznej | Dz.U. 2025 poz. 592 t.j. ze zm. — weryfikuj | Rozp. Prospektowy UE 2017/1129 |
+| Ustawa o obligacjach | Dz.U. 2025 poz. 1667 t.j. ze zm. (POPRAWKA 2026-07-02g) | zastępuje nieaktualny 2022.2218 |
 
 ---
 
@@ -171,7 +171,22 @@ prawainwestora.pl.
 
 ---
 
-## 4. QUALITY GATE / OUTPUT
+## 4. MDR A TAJEMNICE SEKTOROWE — OD 1.10.2026
+
+Ustawa z 29.05.2026 r. (Dz.U. 2026 poz. 846) wprowadza dwie precyzyjne
+podstawy przekazywania informacji MDR Szefowi KAS:
+
+- art. 12 nowelizacji dodaje art. 281 ust. 4a ustawy o funduszach
+  inwestycyjnych — przekazanie informacji na podstawie rozdziału 11a
+  Ordynacji podatkowej nie narusza tajemnicy zawodowej;
+- art. 13 nowelizacji dodaje art. 150 ust. 1 pkt 2b ustawy o obrocie
+  instrumentami finansowymi — udostępnienie służy wykonaniu obowiązków
+  MDR przez Szefa KAS.
+
+Oba wyjątki mają zakres wyznaczony przepisami MDR; nie są ogólnym
+wyłączeniem tajemnicy zawodowej.
+
+## 5. QUALITY GATE / OUTPUT
 
 **Quality gate:** Aktualne Dz.U. zweryfikowane? AIFMD II (transpozycja 2024) uwzględniona? Wymogi ESG (SFDR) sprawdzone?
 

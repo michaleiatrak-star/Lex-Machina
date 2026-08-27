@@ -19,7 +19,7 @@ Test jest DETERMINISTYCZNY — nie wymaga LLM ani sieci, wyłącznie
 analiza plików na dysku (ta sama filozofia co ci_check_shared.py).
 
 Użycie:
-    python3 test_module_registration.py [--repo-root /mnt/skills/user] [--quiet]
+    python3 test_module_registration.py [--repo-root SKILLS_ROOT] [--quiet]
 
 Kod wyjścia:
     0 — wszystkie moduły zarejestrowane
@@ -27,6 +27,7 @@ Kod wyjścia:
 """
 
 import argparse
+import os
 import re
 import sys
 from pathlib import Path
@@ -52,6 +53,15 @@ KNOWN_ABBREVIATED_NAMING = {
                               # opisowym, wymaga weryfikacji manualnej czy to
                               # faktyczny brak czy tylko inny format odwołania
 }
+
+
+def semantic_skill_name(skill_dir: Path) -> str:
+    try:
+        head = (skill_dir / "SKILL.md").read_text(encoding="utf-8", errors="strict")[:4000]
+    except OSError:
+        return skill_dir.name
+    match = re.search(r"^name:\s*['\"]?([^'\"\n]+)", head, re.MULTILINE)
+    return match.group(1).strip() if match else skill_dir.name
 
 
 def find_skills_with_modules(repo_root: Path):
@@ -115,7 +125,7 @@ def check_registration(skill_dir: Path, modules_dir: Path, skill_md: Path):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--repo-root", default="/mnt/skills/user")
+    ap.add_argument("--repo-root", default=os.environ.get("LEX_MACHINA_SKILLS_ROOT", "."))
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
 
@@ -127,15 +137,16 @@ def main():
     report_lines = []
 
     for skill_dir, modules_dir, skill_md in skills:
+        skill_name = semantic_skill_name(skill_dir)
         missing, err = check_registration(skill_dir, modules_dir, skill_md)
         if err:
-            report_lines.append(f"  BŁĄD  {skill_dir.name}: {err}")
+            report_lines.append(f"  BŁĄD  {skill_name}: {err}")
             total_missing += 1
             continue
         if missing:
-            if skill_dir.name in KNOWN_ABBREVIATED_NAMING:
+            if skill_name in KNOWN_ABBREVIATED_NAMING:
                 report_lines.append(
-                    f"  ⚠️ DO WERYFIKACJI MANUALNEJ  {skill_dir.name}: "
+                    f"  ⚠️ DO WERYFIKACJI MANUALNEJ  {skill_name}: "
                     f"{len(missing)} plików bez DOSŁOWNEGO dopasowania nazwy "
                     f"(ZNANE odwołania skrótowe w tym skillu — SPRAWDŹ RĘCZNIE, "
                     f"nie traktuj automatycznie jako FAIL):"
@@ -143,7 +154,7 @@ def main():
                 total_flagged_for_review += len(missing)
             else:
                 report_lines.append(
-                    f"  BŁĄD  {skill_dir.name}: {len(missing)} niezarejestrowanych modułów:"
+                    f"  BŁĄD  {skill_name}: {len(missing)} niezarejestrowanych modułów:"
                 )
                 total_missing += len(missing)
             for name in missing:

@@ -1,7 +1,7 @@
 # mod-KC-cywilne-zobowiazania-odpowiedzialnosc — INDEKS (podzielony 2026-08-20, naprawa F-78)
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** KC — Dz.U. 2025 poz. 1071 t.j. ze zm. (zm.: poz. 1172, 1508; Dz.U. 2026 poz. 184) | KPC — Dz.U. 2026 poz. 468 t.j.
+**Źródło weryfikacji:** KC — Dz.U. 2026 poz. 795 t.j. ze zm. (zm.: poz. 1172, 1508; Dz.U. 2026 poz. 184) | KPC — Dz.U. 2026 poz. 468 t.j.
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl | LEX/Legalis wyłącznie pomocniczo
 
@@ -23,9 +23,9 @@ Delikt i kontrakt (dwa reżimy odpowiedzialności), kara umowna i miarkowanie, b
 
 | Akt | Dz.U. | Uwaga |
 |---|---|---|
-| Kodeks cywilny (KC) | Dz.U. 2025 poz. 1071 t.j. ze zm. | Weryfikuj zmiany po t.j. w ISAP |
+| Kodeks cywilny (KC) | Dz.U. 2026 poz. 795 t.j. ze zm. | Weryfikuj zmiany po t.j. w ISAP |
 | Kodeks postępowania cywilnego (KPC) | Dz.U. 2026 poz. 468 t.j. | Nowelizacja: Dz.U. 2025 poz. 1172 (w życie 01.03.2026) |
-| Ustawa o kosztach sądowych (KSCU) | Dz.U. 2024 poz. 959 t.j. | Weryfikuj aktualne opłaty |
+| Ustawa o kosztach sądowych (KSCU) | Dz.U. 2025 poz. 1228 t.j. | Weryfikuj aktualne opłaty |
 
 ---
 

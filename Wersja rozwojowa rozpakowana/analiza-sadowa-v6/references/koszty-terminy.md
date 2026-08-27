@@ -7,7 +7,7 @@
 > §MP12-terminy i `pisma-procesowe-v3`). Przed podaniem jakiegokolwiek
 > terminu:
 > ```
-> view /mnt/skills/user/shared/terminy.md
+> view shared/terminy.md
 > ```
 > Terminy poniżej to WYŁĄCZNIE pozycje UZUPEŁNIAJĄCE, których nie ma w
 > `shared/terminy.md` (żeby uniknąć dwóch rozbieżnych źródeł prawdy —

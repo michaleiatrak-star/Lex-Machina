@@ -22,11 +22,9 @@ temidium.pl (Okręgowa Izba Radców Prawnych, orzecznictwo do art. 106 §3
 i 113). RZĄD 3 potwierdzająco — i-kancelaria.pl, dlajurysty.pl.
 Minimum 2–3 źródła niezależne przy każdym cytowanym artykule.
 
-⚠️ **MONITORING:** Dz.U. 2026 poz. 846 (w życie **1.10.2026**) dotyka
-sądownictwa administracyjnego — zakres wobec PPSA **nieustalony**, patrz
-flaga **F-88** i `dr-05/modules/mod-PPSA-terminy-kasacja-prawo-pomocy.md`
-sekcja 7. Przed powołaniem przepisów tego rozdziału po 1.10.2026 sprawdź,
-czy nie zostały zmienione.
+**Zmiana od 1.10.2026:** Dz.U. 2026 poz. 846 zmienia wyłącznie art. 53 §1
+i art. 264 §2 PPSA; nie zmienia przepisów rozdziału 7 o posiedzeniach.
+Dokładny zakres opisuje `mod-PPSA-terminy-kasacja-prawo-pomocy.md`, sekcja 7.
 
 ---
 
@@ -440,4 +438,4 @@ czy nie zostały zmienione.
   organizacji społecznej (sekcja 5, ⚠️ [NIEWERYFIKOWANE])
 - art. 154 § 6 — aktualna wysokość grzywny (odesłanie z art. 112)
 - orzecznictwo do art. 105 — granica „uchybień branych pod rozwagę z urzędu"
-- ⚠️ zakres zmian wprowadzanych przez Dz.U. 2026 poz. 846 od 1.10.2026 (F-88)
+- zmiany Dz.U. 2026 poz. 846 nie obejmują rozdziału 7 (zweryfikowane w art. 10 nowelizacji)

@@ -1,38 +1,34 @@
 ---
 name: orzeczenia-sadowe-v2
-version: "2.9.2"   # F-102 (2026-08-20z3): pole podawalo 2.9, podczas gdy changelog
-                   # ma wpis 2.9.1 z 2026-07-17 (naprawa YAML w polu description).
-                   # Rozjazd ODWROTNY: wersji nie podbito po wykonanej naprawie,
-                   # wiec `version` cofal skill o jedna zrealizowana zmiane.
-                   # Cudzyslow: patrz pulapka float, test T12.
+version: "2.11"
 type: executive-analiza
 status: production
-compatibility: "web_search, web_fetch, show_widget"
-description: >
-  Wyszukuje, weryfikuje i cytuje realne orzeczenia sądowe z oficjalnych portali
-  (orzeczenia.ms.gov.pl, sn.pl, orzeczenia.nsa.gov.pl, trybunal.gov.pl,
-  otkzu.trybunal.gov.pl, orzeczenia.uzp.gov.pl, saos.org.pl) oraz sieci lokalnej
-  SA/SO/SR i WSA (CBOSA). Stosuj ZAWSZE gdy pyta o orzecznictwo, wyroki, linię
-  orzeczniczą, precedensy — nawet bez tych słów wprost. Dobiera orzeczenia
-  najbliższe oczekiwanemu rozstrzygnięciu; przy licznej linii przeciwnej —
-  obowiązkowy BILANS. PLAN MINIMUM: 5 orzeczeń wspierających + 5 linii
-  przeciwnej (o ile istnieje), każde z przesłankami rozstrzygnięcia. Nigdy nie
-  cytuj z pamięci — zawsze weryfikacja online przed sygnaturą. NIE stosuj gdy
-  pytanie dotyczy tylko przepisów bez orzeczeń.
-  Pełna historia zmian: references/CHANGELOG.md (nie w tym polu — opis
-  wyzwalający musi zostać zwięzły dla trafności triggerowania skilla).
-changelog: |
-  Wersja bieżąca: 2.9.2. ⛔ PEŁNA HISTORIA — WYŁĄCZNIE w references/CHANGELOG.md
-  (standard systemowy 2026-08-20z4: jeden plik, jedna lokalizacja; zakaz sekcji
-  changelogu w korpusie SKILL.md i zakaz pełnej listy wpisów w tym polu).
-  Skrót 2.9.2 (2026-08-20z4): resztka sekcji CHANGELOG usunięta z korpusu SKILL.md — całość historii
-  w references/CHANGELOG.md, gdzie mieszkała już od wersji 2.7.
-
+compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_document_and_interactive_ui"
+description: "Research orzecznictwa: wyszukiwanie, weryfikacja sygnatur i tez, hierarchia źródeł, porównanie orzeczeń oraz dobór judykatury do argumentacji prawnej."
 ---
 
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Metodologia merytoryczna, routing, hard gate’y, checklisty, schematy danych i kryteria finalizacji tego skilla pozostają bez zmian.
+
+1. `view orzeczenia-sadowe-v2/<plik>` oraz względne `view modules/...`, `view references/...`, `view assets/...` oznaczają świeży odczyt lokalnego zasobu tego skilla. Literalny katalog `/mnt/skills/user` nie jest wymagany.
+2. `view shared/<plik>` oznacza odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tej paczki. Brak obowiązkowego zasobu = fail-closed.
+3. `view <inny-skill>/<plik>` oznacza aktywację/odczyt osobnego skilla. Nie vendoryzuj innych skilli.
+4. `web_search` / `web_fetch` oznaczają świeże wyszukanie i odczyt źródła przez równoważną funkcję hosta; zachowaj istniejące wymogi źródeł oficjalnych i statusów weryfikacji.
+5. `present_files`, `create_file` i odwołania do `HOST_CAPABILITY[document_generation]` / generatorów PDF oznaczają użycie natywnej funkcji dokumentowej bieżącego hosta. Brak literalnej nazwy narzędzia nie zwalnia z HYBRID-VALIDATION, POST-VALIDATION, STEP-TRACKER ani innych bramek.
+6. `show_widget`, `visualize:read_me`, `.jsx` i HTML są legacy/natywnymi wariantami UI. Jeśli host ma własny renderer interaktywny, użyj równoważnego widoku zachowującego ten sam model danych i funkcje; jeśli nie, zastosuj pełny fallback tekstowy/plikowy.
+7. `/mnt/user-data/...` oznacza rzeczywiste pliki użytkownika dostępne w hoście; wymagany ponowny odczyt musi być faktycznym odczytem pliku.
+8. Shell/Python/Cowork i podobne operacje traktuj jako techniki pomocnicze. Jeżeli host ich nie udostępnia, użyj natywnej funkcji równoważnej, bez fikcyjnego raportowania wykonania.
+
+**Zasada nadrzędna:** jeśli instrukcja jest już zrozumiała i wykonalna w bieżącym hoście, wykonaj ją bez konwersji. Adapter działa tylko na granicy runtime.
+
+
 # Wyszukiwanie Orzeczeń Sądowych v2
-<!-- TYLKO major - pelny numer w polu `version:` YAML (F-102, 2026-08-20z3).
-     Wczesniej v2.7 przy version 2.9/2.9.1. -->
+
+*(Nagłówek nosi sam MAJOR — decyzja generalna F-102(C); niósł v2.7 przy innym `version:`.)*
 
 Narzędzie procesowe dla pełnomocników, sędziów i stron działających pro se.
 Łączy interaktywny widget HTML (tryb laik / prawnik) z weryfikowanym
@@ -73,7 +69,7 @@ Kod widgetu: patrz `references/widget.md` — wklej jako argument `widget_code` 
 
 ⛔ MOD-WIDGET-IO (OBOWIĄZKOWE — wykonaj PRZED każdym show_widget):
 ```
-view /mnt/skills/user/shared/MOD-WIDGET-IO.md
+view shared/MOD-WIDGET-IO.md
 → wbuduj pasek IO w nagłówek widgetu (powyżej zakładek)
 → IO_SKILL_ID='orzeczenia-sadowe-v2', IO_CASE_ID=sygnatura_sprawy
 → matryca: Export JSON ✅ MD ✅ | Import JSON —
@@ -90,7 +86,7 @@ Widget wywołujesz **dwukrotnie:**
 
 **Zasada 1 — ⛔ PERMANENT GATE: zakaz cytowania z pamięci (przez CAŁĄ rozmowę):**
 Przed każdym web_search/web_fetch poniżej: sprawdź KROK 1 z
-`view /mnt/skills/user/shared/MCP-INTEGRACJA.md` — jeśli connector MCP dla
+`view shared/MCP-INTEGRACJA.md` — jeśli connector MCP dla
 orzecznictwa (np. SAOS/CBOSA) jest podłączony i dostępny w tej rozmowie, użyj
 go najpierw (KROK 2 tamtego pliku); w przeciwnym razie przejdź od razu do
 web_search/web_fetch poniżej, bez zmian względem dotychczasowej procedury.
@@ -100,7 +96,7 @@ Zakaz nie wygasa po żadnej liczbie wiadomości. Nawet gdy model "jest pewny" �
 Jeśli nie możesz zweryfikować: „Nie odnalazłem tego źródła online. Nie powołuję."
 Przed cytowaniem wykonaj procedurę V-SYG z modułu SYGNATURY:
 ```
-view /mnt/skills/user/shared/SYGNATURY.md
+view shared/SYGNATURY.md
 → Wykonaj V-SYG-1 przez V-SYG-4
 → Dopiero po wyniku OK: cytuj z linkiem źródłowym
 ```
@@ -139,6 +135,20 @@ urzędowa, glosa).**
 aktywny w całym systemie, nie tylko w tym module. Treść poniżej pozostaje
 jako szczegółowa specyfikacja robocza dla tego skilla; w razie rozbieżności
 rozstrzyga PRAWO-HARDGATE jako źródło nadrzędne.
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-23i, flaga F-115 — ten skill cytuje prawo, a bramki nie miał):
+>
+> ```
+> view shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
 
 ```
 [5] LOKALIZACJA W ŹRÓDLE — obowiązkowa, w pierwszej pasującej formie:
@@ -296,7 +306,7 @@ zapytanie w orzeczenia.nsa.gov.pl obejmujące całość orzecznictwa administrac
 **Zasada 8 — Uchwały SN z mocą zasady prawnej (Kat. 6A — priorytet):**
 Uchwały pełnego składu SN, połączonych izb lub całej izby oraz uchwały
 składu 7 sędziów SN, którym nadano moc zasady prawnej (art. 87 § 1 ustawy
-z 8 grudnia 2017 r. o Sądzie Najwyższym, Dz.U.2023.1093), tworzą kategorię
+z 8 grudnia 2017 r. o Sądzie Najwyższym, Dz.U. 2023 poz. 1093), tworzą kategorię
 6A — wyższą rangą niż zwykłe orzeczenia SN.
 Wiążą wszystkie składy orzekające SN (odstąpienie wymaga uchwały całej Izby).
 Sędziowie sądów powszechnych nie są nimi formalnie związani, lecz mają
@@ -676,7 +686,7 @@ Uzupełnienie Fazy 1 — stosuj gdy:
 Procedura:
 ```
 1. Ustal właściwy sąd (nazwa + siedziba) z akt sprawy lub pytania użytkownika.
-2. view /mnt/skills/user/orzeczenia-sadowe-v2/references/PORTALE-LOKALNE.md
+2. view orzeczenia-sadowe-v2/references/PORTALE-LOKALNE.md
    → odczytaj wzorzec URL i sprawdź, czy sąd jest na liście głównych portali.
 3. Jeśli sąd nieznany z listy → web_search "orzeczenia [pełna nazwa sądu]"
    → zweryfikuj adres portalu przez web_fetch (musi być subdomena *.gov.pl).
@@ -928,7 +938,7 @@ Skill wykrywa poziom automatycznie. Użytkownik może wpisać „tryb prawnik" /
 Gdy wynik tego skilla trafia do pisma-procesowe-v3, analizator-umow-v1 lub innych konsumentów:
 
 ```
-view /mnt/skills/user/shared/ORZECZENIA-OUTPUT-SCHEMA.md
+view shared/ORZECZENIA-OUTPUT-SCHEMA.md
 → Format rekordu ORZ-REKORD (pola OBL + OPT)
 → Instrukcje per consumer (pisma-procesowe-v3 W3.2, analizator-umow-v1, analiza-sadowa-v6)
 → Reguły integralności (brak URL = ⛔, Kat. 6A priorytet, zakaz ukrywania Kat. 3B)
@@ -944,15 +954,15 @@ kategorię, tezę (≤30 słów), aktualność linii. Brak któregokolwiek = rek
 Jeżeli wynik tego skilla ma służyć do pisma, strategii procesowej, oceny ryzyka albo decyzji terminowej, wczytaj właściwe moduły shared:
 
 ```text
-view /mnt/skills/user/shared/SYGNATURY.md           ← ZAWSZE przed cytowaniem sygnatury
-view /mnt/skills/user/shared/TRYBY-PROCESOWE.md
-view /mnt/skills/user/shared/RISK-ASSESSMENT.md
-view /mnt/skills/user/shared/TERM-CALC.md
-view /mnt/skills/user/shared/DOWODY-METODOLOGIA.md
-view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md
-view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md
-view /mnt/skills/user/shared/QUALITY-CHECK.md
-view /mnt/skills/user/shared/ORZECZENIA-HIERARCHIA.md
+view shared/SYGNATURY.md           ← ZAWSZE przed cytowaniem sygnatury
+view shared/TRYBY-PROCESOWE.md
+view shared/RISK-ASSESSMENT.md
+view shared/TERM-CALC.md
+view shared/DOWODY-METODOLOGIA.md
+view shared/PREKLUZJA-DOWODOWA.md
+view shared/STRATEGIA-PROCESOWA.md
+view shared/QUALITY-CHECK.md
+view shared/ORZECZENIA-HIERARCHIA.md
 ```
 
 Nie dubluj logiki shared w lokalnych plikach. Lokalne moduły mogą tylko doprecyzować analizę dziedzinową.
@@ -961,14 +971,10 @@ Nie dubluj logiki shared w lokalnych plikach. Lokalne moduły mogą tylko doprec
 
 ## CHANGELOG
 
-⛔ **Historia zmian tego skilla NIE mieszka w tym pliku.** Pełny changelog:
-
-```
-view /mnt/skills/user/orzeczenia-sadowe-v2/references/CHANGELOG.md
-```
-
-Skrót bieżącej wersji — pole `changelog:` we frontmatterze powyżej.
-Standard systemowy (2026-08-20z4): `references/CHANGELOG.md` jest jedyną
-lokalizacją kanoniczną historii; zakaz odtwarzania sekcji changelogu w korpusie
-SKILL.md i zakaz trzymania pełnej listy wpisów w YAML.
-
+> Pełna historia wersji (2.1...2.6) wyniesiona do `references/CHANGELOG.md`
+> (redukcja kosztu kontekstu, 2026-07-12 runda 2) — treść zachowana w 100%,
+> tylko przeniesiona: `view orzeczenia-sadowe-v2/references/CHANGELOG.md`
+>
+> Najnowsza pozycja: **2.6 (2026-07-06)** — Zasada 11: PLAN MINIMUM 5
+> orzeczeń wspierających + 5 linii przeciwnej, zawsze z przesłankami
+> rozstrzygnięcia.

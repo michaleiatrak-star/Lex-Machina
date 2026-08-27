@@ -1,5 +1,74 @@
 # F-108 — lista aktów MS (egzamin wstępny na aplikację 2026) jako benchmark pokrycia
 
+## Rejestr postępu — 2026-08-27 (52/52 pozycji)
+
+To rejestr zadań, nie deklaracja merytorycznej weryfikacji 52 ustaw.
+A/B/C/D w kolumnie bazowej to **obecność**, nie poziom jakości modułu.
+Zachowano pomiar 2026-08-23 bez przepisywania go jako wynik dzisiejszy.
+Etap 2 nadal niezaliczony dla 48 pozycji A+B; istniejące starsze mapy nie są
+tu automatycznie zaliczane jako nowy, zakończony przegląd rozdziałowy.
+
+| ID MS | Akt (skrót) | Baza 2026-08-23 | Stan zadania |
+|---|---|---|---|
+| 1 | Prawo wekslowe | A | Etap 2: do audytu rozdziałowego |
+| 2 | TFUE | A | Etap 2: do audytu rozdziałowego |
+| 3 | KPA | A | Etap 2: do audytu rozdziałowego |
+| 4 | KRO | A | Etap 2: do audytu rozdziałowego |
+| 5 | KC | A | Etap 2: do audytu rozdziałowego |
+| 6 | KPC | A | Etap 2: do audytu rozdziałowego |
+| 7 | KW | A | Etap 2: do audytu rozdziałowego |
+| 8 | Opłaty w sprawach karnych | D | P1: do budowy |
+| 9 | KP | A | Etap 2: do audytu rozdziałowego |
+| 10 | Prawo o adwokaturze | A | Etap 2: do audytu rozdziałowego |
+| 11 | Księgi wieczyste i hipoteka | A | Etap 2: do audytu rozdziałowego |
+| 12 | Radcowie prawni | A | Etap 2: do audytu rozdziałowego |
+| 13 | Prawo spółdzielcze | B | Etap 2 + P3: decyzja do podjęcia |
+| 14 | Fundacje | A | Etap 2: do audytu rozdziałowego |
+| 15 | RPO | A | Etap 2: do audytu rozdziałowego |
+| 16 | Prawo o stowarzyszeniach | A | Etap 2: do audytu rozdziałowego |
+| 17 | Samorząd gminny | A | Etap 2: do audytu rozdziałowego |
+| 18 | TUE | A | Etap 2: do audytu rozdziałowego |
+| 19 | Prawo autorskie | A | Etap 2: do audytu rozdziałowego |
+| 20 | Własność lokali | A | Etap 2: do audytu rozdziałowego |
+| 21 | Zastaw rejestrowy | A | Etap 2: do audytu rozdziałowego |
+| 22 | Konstytucja | A | Etap 2: do audytu rozdziałowego |
+| 23 | KK | A | Etap 2: do audytu rozdziałowego |
+| 24 | KPK | A | Etap 2: do audytu rozdziałowego |
+| 25 | KRS | A | Etap 2: do audytu rozdziałowego |
+| 26 | Gospodarka nieruchomościami | A | Etap 2: do audytu rozdziałowego |
+| 27 | Samorząd powiatowy | B | Etap 2 + P3: decyzja do podjęcia |
+| 28 | Samorząd województwa | B | Etap 2 + P3: decyzja do podjęcia |
+| 29 | System ubezpieczeń społecznych | A | Etap 2: do audytu rozdziałowego |
+| 30 | Zasiłki chorobowe i macierzyńskie | B | Etap 2 + P2: do wykonania |
+| 31 | KKS | A | Etap 2: do audytu rozdziałowego |
+| 32 | RPD | A | Etap 2: do audytu rozdziałowego |
+| 33 | KSH | A | Etap 2: do audytu rozdziałowego |
+| 34 | Spółdzielnie mieszkaniowe | B | Etap 2 + P3: decyzja do podjęcia |
+| 35 | Ochrona praw lokatorów | A | Etap 2: do audytu rozdziałowego |
+| 36 | PUSP | A | Etap 2: do audytu rozdziałowego |
+| 37 | KPW | A | Etap 2: do audytu rozdziałowego |
+| 38 | PPSA | A | Etap 2: do audytu rozdziałowego |
+| 39 | Prawo upadłościowe | A | Etap 2: do audytu rozdziałowego |
+| 40 | Zwolnienia grupowe | B | Etap 2 + P2: do wykonania |
+| 41 | Ubezpieczenia obowiązkowe, UFG i PBUK | D | P1: do budowy |
+| 42 | KSCU | A | Etap 2: do audytu rozdziałowego |
+| 43 | Przeciwdziałanie narkomanii | A | Etap 2: do audytu rozdziałowego |
+| 44 | UOKiK | A | Etap 2: do audytu rozdziałowego |
+| 45 | Wojewoda i administracja rządowa | B | Etap 2 + P3: decyzja do podjęcia |
+| 46 | Opóźnienia w transakcjach handlowych | C | P1: rdzeń cywilny B utworzony; administracja i historia częściowe |
+| 47 | Prawa konsumenta | A | Etap 2: do audytu rozdziałowego |
+| 48 | Prawo restrukturyzacyjne | A | Etap 2: do audytu rozdziałowego |
+| 49 | Prawo o prokuraturze | A | Etap 2: do audytu rozdziałowego |
+| 50 | Sąd Najwyższy | B | Etap 2 + P2: do wykonania |
+| 51 | Prawo przedsiębiorców | B | Etap 2 + P2: do wykonania |
+| 52 | Fundacja rodzinna | D | P1: do budowy |
+
+**Następna transza:** P1/41 (ubezpieczenia obowiązkowe, UFG i PBUK).
+P1/46 nie zamyka całej F-108 ani jej etapu 2. Weryfikacja sześciu obwieszczeń
+nie jest dowodem kompletności historii zmian. Testy statyczne/scenariuszowe
+nie są wieloramiennym testem behawioralnym F-113/F-133.
+
+
 > **Otwarta:** 2026-08-23 | **Priorytet:** wysoki | **Zakres:** cross — 16 DR
 > **Plik roboczy flagi.** Wiersz sterujący: `WARN-OTWARTE.md`, sekcja A.
 > **Plik siostrzany:** `AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-23.
@@ -11,11 +80,11 @@ do przygotowania pytań testowych na egzamin wstępny dla kandydatów na
 aplikantów adwokackich i radcowskich — 52 pozycje, stan prawny na dzień
 ogłoszenia.
 
-⚠️ **Metryka aktu prawnego samego wykazu (podstawa prawna ogłoszenia, Dz.U.
-Prawa o adwokaturze i ustawy o radcach prawnych) NIE została zweryfikowana
-w RZĘDZIE 1** — dokument wpłynął do systemu jako tekst przekazany przez
-użytkownika. Do zamknięcia: potwierdzić wykaz na stronie MS/BIP.
-Status: ⚠️ [NIEWERYFIKOWANE — źródło przekazane, nie odczytane]
+✅ **Źródło wykazu zweryfikowane w RZĘDZIE 1 dnia 2026-08-26:** oficjalne
+ogłoszenie Ministerstwa Sprawiedliwości z 2.04.2026,
+`https://www.gov.pl/web/sprawiedliwosc/ogloszenie-w-sprawie-wykazu-tytulow-aktow-prawnych-na-egzamin-wstepny-na-aplikacje-adwokacka-i-radcowska-w-2026-r`.
+Wykaz obejmuje 52 akty. Weryfikacja źródła zamyka etap 1, ale nie zamyka
+F-108: pozostaje pomiar i uzupełnienie pokrycia A+B zgodnie z warunkami niżej.
 
 Dlaczego ta lista ma wartość audytową, której nie mają mapy wewnętrzne:
 jest to **zewnętrzny, niezależny od systemu wykaz aktów uznanych przez
@@ -122,7 +191,7 @@ ETAP 3 ⬛ BUDOWA BRAKUJĄCYCH MODUŁÓW — kolejność ustalona:
 ## Warunki zamknięcia F-108
 
 ```
-□ wykaz MS potwierdzony w RZĘDZIE 1 (strona MS / BIP) — dziś ⚠️
+☑ wykaz MS potwierdzony w RZĘDZIE 1 (strona MS / BIP) — 2026-08-26 i ponownie 2026-08-27
 □ ETAP 2 zamknięty dla wszystkich 48 pozycji A+B
 □ ETAP 3: wszystkie pozycje P1 i P2 mają moduł na poziomie ≥ B
   wg shared/POLISH-LAW-COMPLETENESS-MATRIX.md
@@ -137,6 +206,6 @@ ETAP 3 ⬛ BUDOWA BRAKUJĄCYCH MODUŁÓW — kolejność ustalona:
 Ten plik NIE zawiera ani jednego numeru Dz.U. ani daty tekstu jednolitego —
 świadomie. Metryki aktów ustala się dopiero w kroku G-1 generatora, przy
 faktycznej budowie modułu, wg `shared/PRAWO-HARDGATE.md` v2.5 (sekwencja
-B-1 → B-2, przy blokadzie robots — 🟡 KOTWICA URZĘDOWA, warunki K-1…K-4).
+B-1 → B-2, przy blokadzie robots — 🟨 KOTWICA URZĘDOWA, warunki K-1…K-4).
 Wpisanie tu numerów „z pamięci", żeby lista wyglądała na kompletną, byłoby
 dokładnie tym błędem, który tę flagę wywołał.

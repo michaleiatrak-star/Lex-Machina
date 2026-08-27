@@ -1,5 +1,13 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.5 — F-108/46: rejestracja modułu DR-02; historycznych liczników nie przedstawia się jako pomiaru aktualnego pokrycia. (2026-08-27)
+
+- 6.4 (2026-08-26): skorygowano fałszywe metryki PUSA (`2024/1297` →
+  `2024/1267`), POŚ (`2026/670`, akt OOŚ → `2025/647` t.j. POŚ), Prawa
+  lotniczego i ustawy o timeshare; dodano routing zakresów F-86.
+- 6.3 (2026-08-26): zsynchronizowano ROUTING-MAP z aktualnymi tekstami
+  jednolitymi i centralną mapą Dz.U.; usunięto luki wykryte przez T11.
+
 > Lokalizacja kanoniczna historii wersji tego skilla (ZASADA 15 w
 > `audyt-systemu-v4/SKILL.md`). Plik założony 2026-08-23g przy okazji naprawy
 > F-123 — skill był na wersji 6.1 bez żadnego pliku historii i bez pola

@@ -3,11 +3,11 @@
 Przed oddaniem pisma wczytaj obowiązkowo moduły shared:
 
 ```text
-view /mnt/skills/user/shared/FORMAL-CHECK.md
-view /mnt/skills/user/shared/BRAKI-FORMALNE.md
-view /mnt/skills/user/shared/WARUNKI-SKUTECZNOSCI.md
-view /mnt/skills/user/shared/RISK-ASSESSMENT.md
-view /mnt/skills/user/shared/QUALITY-CHECK.md
+view shared/FORMAL-CHECK.md
+view shared/BRAKI-FORMALNE.md
+view shared/WARUNKI-SKUTECZNOSCI.md
+view shared/RISK-ASSESSMENT.md
+view shared/QUALITY-CHECK.md
 ```
 
 ## Checklista lokalna

@@ -1,7 +1,7 @@
 # mod-PrNotariat-notariat-rejestry
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Prawo o notariacie — Dz.U. 2022 poz. 1799 t.j. ze zm. — weryfikuj aktualny stan w ISAP
+**Źródło weryfikacji:** Prawo o notariacie — Dz.U. 2026 poz. 614 t.j. ze zm. — weryfikuj aktualny stan w ISAP
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -16,9 +16,9 @@ Czynności notarialne (akt notarialny, poświadczenie, depozyt notarialny, proto
 
 | Akt | Dz.U. |
 |---|---|
-| Prawo o notariacie | Dz.U. 2022 poz. 1799 t.j. ze zm. — weryfikuj aktualny w ISAP |
+| Prawo o notariacie | Dz.U. 2026 poz. 614 t.j. ze zm. — weryfikuj aktualny w ISAP |
 | KPC | Dz.U. 2026 poz. 468 t.j. — zaskarżenie odmowy czynności |
-| KC | Dz.U. 2025 poz. 1071 t.j. — forma aktów notarialnych |
+| KC | Dz.U. 2026 poz. 795 t.j. — forma aktów notarialnych |
 
 ---
 

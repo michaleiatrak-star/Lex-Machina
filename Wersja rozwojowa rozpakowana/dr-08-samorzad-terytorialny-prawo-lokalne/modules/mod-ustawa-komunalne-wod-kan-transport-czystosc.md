@@ -4,7 +4,7 @@
 **Źródło weryfikacji:**
 - Wod-kan: Dz.U. 2024 poz. 757 t.j. ✅ VER: 2026-06-05
 - Transport zbiorowy: **Dz.U. 2025 poz. 285 t.j.** z 14.02.2025 ✅ VER: 2026-06-05
-- Czystość i porządek: **Dz.U. 2025 poz. 765 t.j.** ✅ VER: 2026-06-05
+- Czystość i porządek: **Dz.U. 2025 poz. 733 t.j.** ✅ VER: 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
 ---
@@ -80,7 +80,7 @@ Nielegalne składowanie (art. 9x ustawy — weryfikuj w ISAP):
 
 **Output:** Kwalifikacja usługi komunalnej → organ regulacyjny → tryb → terminy → rekomendacja.
 
-**Powiązania:** `mod-lokalne-podatki-oplaty-taryfy` | `dr-09` (Prawo wodne, ochrona środowiska) | `dr-04` → `mod-KPA` | `pisma-procesowe-v3`
+**Powiązania:** `mod-lokalne-podatki-oplaty-taryfy` | `dr-09` (Prawo wodne, ochrona środowiska) | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` | `pisma-procesowe-v3`
 
 **Źródła:**
 - Wod-kan: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000757

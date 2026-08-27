@@ -11,7 +11,7 @@ wcześniejszego błędu kopiowania szablonu, teraz poprawiony)
 ---
 
 > ⚠️ TEN moduł jest CZĘŚCIĄ RODZINY plików KPA, PODZIELONEJ
-> 2026-08-12 (NOTA-4, audyt-systemu-v4/CHECKLIST-DEDUP.md — moduł
+> 2026-08-12 (NOTA-4, audyt-systemu-v4/references/CHECKLIST-DEDUP.md — moduł
 > źródłowy osiągnął 1115 linii, ~2,8x próg 400 linii). RODZINA
 > czterech plików: TEN plik (rdzeń:
 > zasady ogólne, strona, wyłączenie, doręczenia, wszczęcie postępowania,
@@ -55,7 +55,7 @@ Postępowanie administracyjne ogólne (KPA), odwołania od decyzji, tryby nadzwy
 |---|---|---|
 | Kodeks postępowania administracyjnego (KPA) | Dz.U. 2025 poz. 1691 t.j. | |
 | Prawo o postępowaniu przed sądami adm. (PPSA) | Dz.U. 2026 poz. 143 t.j. | |
-| Ustawa o kosztach sądowych w sprawach cywilnych (KSCU) | Dz.U. 2024 poz. 959 t.j. | Opłaty od skarg do WSA |
+| Ustawa o kosztach sądowych w sprawach cywilnych (KSCU) | Dz.U. 2025 poz. 1228 t.j. | Opłaty od skarg do WSA |
 
 ---
 
@@ -571,4 +571,3 @@ e-prawnik.pl, srokowo-online.pl, prawo.link).
 | Decyzja ZUS / KRUS | ZUS / KRUS | Sąd Okręgowy (pracy) |
 
 ---
-

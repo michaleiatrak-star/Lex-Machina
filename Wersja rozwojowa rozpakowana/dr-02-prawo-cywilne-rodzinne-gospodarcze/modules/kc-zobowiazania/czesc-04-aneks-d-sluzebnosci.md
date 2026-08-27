@@ -11,7 +11,7 @@
 ## ANEKS D — SŁUŻEBNOŚCI I PRAWO RZECZOWE (KC Księga II) —
 ROZBUDOWANY 2026-08-05, na żądanie użytkownika
 
-> Weryfikuj przed każdym powołaniem: KC Dz.U. 2025 poz. 1071 t.j. ze zm.
+> Weryfikuj przed każdym powołaniem: KC Dz.U. 2026 poz. 795 t.j. ze zm.
 
 ```
 ⭐⭐ SŁUŻEBNOŚĆ DROGI KONIECZNEJ (art. 145 KC) — PEŁNA TREŚĆ:
@@ -135,7 +135,7 @@ odesłanie bez treści art. 3052-3054):
     korzystaniu) — do potwierdzenia przy konkretnej sprawie.
 
 Potwierdzone w 6+ zgodnych źródłach (e-prawnik.pl, lexlege.pl, lexplay.pl,
-przepisy.gofin.pl, arslege.pl — t.j. Dz.U.2025.0.1071 aktualny).
+przepisy.gofin.pl, arslege.pl — t.j. Dz.U. 2026 poz. 795 aktualny).
 
 ⭐⭐⭐ **KLUCZOWE ZASTRZEŻENIE (2026-08-19, na żądanie użytkownika — "co
 z innymi firmami służebności jak słupy?"): TELEKOMUNIKACJA MA INNY
@@ -326,4 +326,3 @@ Potwierdzone w 8+ zgodnych, bardzo aktualnych źródłach (prawo.pl
 [x2], currenda.pl, trybunal.gov.pl [Rząd 1, oficjalna treść wyroku],
 cgolegal.pl, votum-sa.pl, adwokat-szymczyk.pl, kancelariakg.com).
 ```
-

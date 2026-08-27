@@ -3,7 +3,7 @@
 Plik kanoniczny (jedyne źródło prawdy) przeniesiony do shared/:
 
 ```
-view /mnt/skills/user/shared/MOD-WALIDACJA_v2.md
+view shared/MOD-WALIDACJA_v2.md
 ```
 
 Ten plik jest stałym przekierowaniem — nie zawiera logiki.

@@ -1,13 +1,25 @@
 ---
 name: dr-15-compliance-iso-governance-audyt
-version: 3.10
-description: |
-  DR-15: Compliance, ISO, Governance, Audyt
-  Jeden moduł = jeden akt prawny (Dz.U.) lub norma ISO / rozporządzenie UE.
-  Ładuj TYLKO moduł pasujący do sprawy — lazy loading.
-  Wchodzi z: prawo-polskie-v2 → ROUTING-MAP → ten skill.
-  Weryfikacja: isap.sejm.gov.pl | eur-lex.europa.eu | iso.org | orzeczenia.ms.gov.pl | sn.pl + shared/INTERPRETACJE-URZEDOWE.md (rejestr interpretacji urzędowych per dziedzina)
+version: "3.12"
+description: "Compliance, governance i audyt: systemy zgodności, sygnaliści, AML instytucjonalny, zarządzanie ryzykiem, kontrole, ISO i audyt organizacyjno-prawny."
 ---
+
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedzinowa, mapy aktów, hard gate’y, kolejność modułów i kryteria jakości tego DR-skilla pozostają bez zmian.
+
+1. `view dr-15-compliance-iso-governance-audyt/<plik>` oraz `view modules/...` / `view references/...` oznaczają świeży odczyt odpowiedniego lokalnego pliku tego skilla. Literalna ścieżka `/mnt/skills/user` nie jest wymagana.
+2. `view shared/<plik>` oznacza świeży odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tej paczki. Brak obowiązkowego zasobu shared = fail-closed, nie substytucja pamięcią modelu.
+3. `view <inny-skill>/<plik>` oznacza aktywację/odczyt wskazanego osobnego skilla. Nie vendoryzuj innych skilli do tego ZIP-a.
+4. `web_search` / `web_fetch` i podobne nazwy oznaczają świeże wyszukanie/odczyt online przez równoważną funkcję hosta. Zachowaj wymagane źródła oficjalne, statusy weryfikacji i zakaz cytowania prawa z pamięci.
+5. `show_widget`, `visualize:read_me`, `present_files`, `create_file`, shell/Python i podobne operacje są nazwami semantycznymi. Jeśli host nie ma literalnego narzędzia, użyj równoważnej funkcji natywnej bez omijania bramek jakości.
+6. `/mnt/user-data/...` oznacza rzeczywiste załączniki użytkownika dostępne w bieżącym hoście; wymagany ponowny odczyt ma być faktycznym odczytem źródła.
+
+**Zasada nadrzędna:** instrukcje, które są już zrozumiałe i wykonalne w bieżącym hoście, wykonuj bez konwersji. Adapter działa wyłącznie na granicy runtime.
+
 
 # DR-15 — Compliance, ISO, Governance, Audyt
 
@@ -25,6 +37,25 @@ description: |
 - AI Act (Rozp. UE 2024/1689) stosowany etapami: zakazy 02.2025, GPAI 08.2025, pełne 08.2026.
 - DORA (Rozp. UE 2022/2554) stosowane od 17.01.2025 — standardy techniczne RTS nadal publikowane.
 - Ustawa AML — weryfikuj aktualny tekst jednolity przed każdym użyciem.
+
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
+>
+> ```
+> view shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
+>
+> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
+> oznaczenia, tylko je wymusza.
 
 ---
 
@@ -129,13 +160,13 @@ NORMY ISO — ZARZĄDZANIE I CERTYFIKACJA:
 ## Jak wywołać
 
 ```
-view /mnt/skills/user/dr-15-compliance-iso-governance-audyt/modules/[nazwa-modulu].md
+view dr-15-compliance-iso-governance-audyt/modules/[nazwa-modulu].md
 ```
 
 ## Lokalna mapa aktów prawnych
 
 ```
-view /mnt/skills/user/dr-15-compliance-iso-governance-audyt/MAPA-AKTOW.md
+view dr-15-compliance-iso-governance-audyt/MAPA-AKTOW.md
 ```
 
 ---
@@ -143,7 +174,7 @@ view /mnt/skills/user/dr-15-compliance-iso-governance-audyt/MAPA-AKTOW.md
 ## Powiązania zewnętrzne
 - Wchodzi z: `prawo-polskie-v2` → `ROUTING-MAP.md` → ten skill
 - AML (aspekt karny / KKS) → `dr-03` → `mod-KKS-karny-skarbowy-i-AML`
-- Zamówienia publiczne (PZP ogólne) → `dr-07` → `mod-ustawa-PZP`
+- Zamówienia publiczne (PZP ogólne) → `dr-07-zamowienia-publiczne-fundusze-ue/modules/mod-PZP-zamowienia-publiczne-KIO.md`
 - Cyberbezpieczeństwo / KSC / NIS2 → `dr-11` → `mod-KSC-NIS2-cyberbezpieczenstwo-telekom`
 - RODO / dane osobowe → `dr-11` → `mod-RODO-GDPR-2016-679`
 - Prawo pracy (KP, PIP, zwolnienie sygnalisty) → `dr-04`
@@ -157,7 +188,7 @@ view /mnt/skills/user/dr-15-compliance-iso-governance-audyt/MAPA-AKTOW.md
 Po zakończeniu analizy lub przed oddaniem odpowiedzi zawierającej ocenę prawną:
 
 ```text
-view /mnt/skills/user/shared/DISCLAIMER.md
+view shared/DISCLAIMER.md
 ```
 
 Wybierz wariant odpowiedni do trybu:

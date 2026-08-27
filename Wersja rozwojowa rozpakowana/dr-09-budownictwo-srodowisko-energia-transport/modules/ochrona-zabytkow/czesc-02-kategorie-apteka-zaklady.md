@@ -145,7 +145,7 @@ reżimów, każdy z WŁASNĄ bazą/rejestrem:
   srodowiskowe.md` (DŚU jako WARUNEK poprzedzający pozwolenie na
   budowę zakładu)
 □ SANEPID — kontrola warunków sanitarnych produkcji (zwłaszcza
-  żywności) — patrz `dr-10/mod-ustawa-bezpieczenstwo-zywnosci.md`
+  żywności) — patrz `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-bezpieczenstwo-zywnosci.md`
   (sekcja o kontrolach sanepidu)
 □ POZWOLENIE ZINTEGROWANE (IPPC) — dla NAJWIĘKSZYCH instalacji
   przemysłowych (określone progi mocy/wydajności wg zał. do POŚ) —

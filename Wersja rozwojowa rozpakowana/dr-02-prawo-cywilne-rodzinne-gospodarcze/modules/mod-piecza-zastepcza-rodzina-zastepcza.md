@@ -80,7 +80,7 @@ FORMA RODZINNA (preferowana ustawowo, ma mieć "szczególne miejsce"):
       nieletnich)
   □ RODZINNY DOM DZIECKA — forma zbliżona do rodziny zastępczej
     zawodowej. ✅ LIMIT ZWERYFIKOWANY 2026-08-13c (art. 61 ustawy,
-    t.j. Dz.U. 2025 poz. 49 — 3+ zgodne źródła): **NIE WIĘCEJ NIŻ 8**
+    t.j. Dz.U. 2026 poz. 980 — 3+ zgodne źródła): **NIE WIĘCEJ NIŻ 8**
     dzieci w tym samym czasie (łącznie z osobami pełnoletnimi
     kontynuującymi pobyt na zasadach art. 37 ust. 2-4/6). WYJĄTEK
     (art. 61 ust. 2): przy konieczności umieszczenia RODZEŃSTWA — za

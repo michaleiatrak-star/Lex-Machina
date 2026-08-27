@@ -1,43 +1,107 @@
 ---
 name: raport-sytuacyjny-v2
-version: 2.6
+version: "2.8"
 type: executive-raport
 status: production
-compatibility: "prawny-router-v3, web_search, web_fetch, show_widget"
-description: |
-  Raport Sytuacyjny Sprawy v2 — interaktywny widget graficzny renderowany inline.
-  WYWOŁYWANY przez prawny-router-v3 w trzech trybach:
-  [A] OBOWIĄZKOWY — po wygenerowaniu pisma lub ostatnim podsumowującym kroku.
-  [B] PROPOZYCJA — po wgraniu i analizie dokumentów (tylko sugestia słowna).
-  [C] NA ŻĄDANIE — gdy użytkownik pyta o aktualny stan sprawy.
-  RENDERING: show_widget z HTML vanilla JS — NIE present_files, NIE JSX, NIE React.
-  Dane sprawy wbudowane jako literały JS bezpośrednio w HTML widgetu.
-  Zawiera: chronologię z weryfikacją źródeł, mapę ryzyk P1/P2/P3, sprzeczności
-  i luki dowodowe, rekomendacje procesowe z priorytetem, priorytety aspektów
-  (główne/poboczne) z MOD-PRIORYTETY-ASPEKTOW, historię wariantów strategii
-  z MOD-HISTORIA-STRATEGII, eksport PDF.
-changelog:
-  - "2.6: nowa zakładka Historia strategii (oś czasu wersji z
-    MOD-HISTORIA-STRATEGII, oznaczenie wybranego/odrzuconych wariantów,
-    porównanie wersji, powrót do wariantu); rozszerzenie zakładki Ryzyka o
-    sekcję Priorytety sprawy (aspekty główne/poboczne + metody badawcze z
-    MOD-PRIORYTETY-ASPEKTOW); nowe pola blueprintu: priorytetyAspektow,
-    historiaStrategii"
+compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_document_and_interactive_ui"
+description: "Raport sytuacyjny sprawy: syntetyzuje fakty, ryzyka, dowody, terminy, warianty i priorytety; może generować interaktywny widok sytuacji i eksport danych."
+changelog: |
+  Wersja bieżąca: 2.8. Pełna historia — references/CHANGELOG.md
+  (plik założony 2026-08-23g przy okazji naprawy F-123; do tej daty wpisy
+  mieszkały w tym polu YAML wbrew ZASADZIE 15 audyt-systemu-v4).
+  Skrót: 2.7 — HARD GATE do shared/PRAWO-HARDGATE.md dla twierdzeń o prawie
+  renderowanych w widgecie (F-123). 2.6 — zakładka Historia strategii,
+  sekcja Priorytety sprawy w zakładce Ryzyka.
 ---
 
-# Raport Sytuacyjny Sprawy v2.5
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Metodologia merytoryczna, routing, hard gate’y, checklisty, schematy danych i kryteria finalizacji tego skilla pozostają bez zmian.
+
+1. `view raport-sytuacyjny-v2/<plik>` oraz względne `view modules/...`, `view references/...`, `view assets/...` oznaczają świeży odczyt lokalnego zasobu tego skilla. Literalny katalog `/mnt/skills/user` nie jest wymagany.
+2. `view shared/<plik>` oznacza odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tej paczki. Brak obowiązkowego zasobu = fail-closed.
+3. `view <inny-skill>/<plik>` oznacza aktywację/odczyt osobnego skilla. Nie vendoryzuj innych skilli.
+4. `web_search` / `web_fetch` oznaczają świeże wyszukanie i odczyt źródła przez równoważną funkcję hosta; zachowaj istniejące wymogi źródeł oficjalnych i statusów weryfikacji.
+5. `present_files`, `create_file` i odwołania do `HOST_CAPABILITY[document_generation]` / generatorów PDF oznaczają użycie natywnej funkcji dokumentowej bieżącego hosta. Brak literalnej nazwy narzędzia nie zwalnia z HYBRID-VALIDATION, POST-VALIDATION, STEP-TRACKER ani innych bramek.
+6. `show_widget`, `visualize:read_me`, `.jsx` i HTML są legacy/natywnymi wariantami UI. Jeśli host ma własny renderer interaktywny, użyj równoważnego widoku zachowującego ten sam model danych i funkcje; jeśli nie, zastosuj pełny fallback tekstowy/plikowy.
+7. `/mnt/user-data/...` oznacza rzeczywiste pliki użytkownika dostępne w hoście; wymagany ponowny odczyt musi być faktycznym odczytem pliku.
+8. Shell/Python/Cowork i podobne operacje traktuj jako techniki pomocnicze. Jeżeli host ich nie udostępnia, użyj natywnej funkcji równoważnej, bez fikcyjnego raportowania wykonania.
+
+**Zasada nadrzędna:** jeśli instrukcja jest już zrozumiała i wykonalna w bieżącym hoście, wykonaj ją bez konwersji. Adapter działa tylko na granicy runtime.
+
+
+# Raport Sytuacyjny Sprawy v2
 # Kompatybilny z: prawny-router-v3
+
+*(Nagłówek nosi sam MAJOR — decyzja generalna F-102(C): numer pełny mieszka
+wyłącznie w polu `version:`. Do 2026-08-23g stało tu „v2.5" przy `version: 2.6`
+w YAML — rozjazd o jedną wersję, klasa T12/F-102.)*
+
+---
+
+> ⛔ **HARD GATE — TWIERDZENIA O PRAWIE W WIDGECIE (dodane 2026-08-23g, flaga F-123)**
+>
+> Ten skill **renderuje treść bezpośrednio użytkownikowi końcowemu** — chronologia,
+> mapa ryzyk, rekomendacje procesowe i pole `podstawa` zawierają twierdzenia o
+> obowiązującym prawie (przepisy, terminy, skutki procesowe). Widget jest ostatnim
+> ogniwem przed odbiorcą: co przejdzie tutaj, nie ma już żadnej kolejnej kontroli.
+>
+> Przed wpisaniem do blueprintu JAKIEGOKOLWIEK przepisu, terminu ustawowego,
+> sygnatury orzeczenia lub skutku procesowego:
+>
+> ```
+> view shared/PRAWO-HARDGATE.md
+> ```
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-23i, flaga F-115 — ten skill cytuje prawo, a bramki nie miał):
+>
+> ```
+> view shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
+
+>
+> Obowiązuje w całości, w szczególności: zakaz cytowania z pamięci, hierarchia
+> statusów źródła (`✅ [VER]` / `🟨 [KOTWICA-URZĘDOWA]` / `⚠️ [NIEWERYFIKOWANE]`),
+> self-check ANTY-FASADA (deklaracja „zweryfikowano" bez faktycznego otwarcia
+> źródła jest naruszeniem, nie skrótem).
+>
+> ⛔ **Nie myl tego z klasyfikacją A–E niżej.** Statusy A–E oceniają źródło FAKTU
+> w aktach sprawy (dokument / relacja / twierdzenie strony). Statusy z
+> PRAWO-HARDGATE oceniają źródło TWIERDZENIA O PRAWIE. Ustalenie faktyczne ze
+> statusem `A` może stać obok przepisu, którego nikt nie zweryfikował — to dwie
+> niezależne osie, obie obowiązkowe.
+>
+> Twierdzenie o prawie bez statusu → raport nie może opuścić statusu
+> `WERSJA ROBOCZA` (patrz HARD GATES — ZAKAZY).
 
 ---
 
 ## ARCHITEKTURA
 
 ```
-raport-sytuacyjny-v2/
-├── SKILL.md                ← ten plik — jedyne źródło prawdy
-└── assets/
-    └── RaportSytuacyjnyWidget.html   ← dokumentacja struktury (nie używaj bezpośrednio)
+raport-sytuacyjny-v2/                ← 2 pliki (stan 2026-08-23g)
+├── SKILL.md                         ← ten plik — jedyne źródło prawdy dla treści
+└── references/
+    └── CHANGELOG.md                 ← historia wersji (ZASADA 15; założony 2026-08-23g)
 ```
+
+> ⚠️ **KOREKTA 2026-08-23g:** drzewo wymieniało `assets/RaportSytuacyjnyWidget.html`,
+> którego **nie ma na dysku** (`find` na katalogu skilla: 1 plik przed tą sesją).
+> Odesłanie było martwe — ta sama klasa rozjazdu rejestru ze stanem faktycznym co
+> F-80/F-124 w `audyt-systemu-v4`, tylko w drugą stronę (rejestr obiecywał plik,
+> którego nie było). Widget budowany jest w całości z sekcji SEKWENCJA WYWOŁANIA
+> i BLUEPRINT JSON w tym pliku — żadnego zewnętrznego szablonu HTML nie brakuje.
 
 ---
 
@@ -68,7 +132,7 @@ Wywołaj po **każdym** z poniższych zakończeń pipeline'u:
 | **pisma-procesowe-v3** | Po `present_files` z gotowym `.docx` (KROK 6 routera) |
 | **pisma-proste-v2** | Po checkliście finalnej i `present_files` |
 | **analiza-sadowa-v6** | Po §10 Rekomendacje procesowe (Filtr #10/#11) |
-| **przesluchanie-swiadkow-v2** | Po sekcji „Mowa końcowa" — ostatnim elemencie strategii |
+| **przesluchanie-swiadkow-v2-min90** | Po sekcji „Mowa końcowa" — ostatnim elemencie strategii |
 | **analizator-dowodow-v3** | Po sekcji REKOMENDACJE (ostatni blok analizy) |
 | **analizator-umow-v1** | Po §8 Rekomendacje zmian |
 | **analizator-przepisow-v2** | Po §8 Rekomendacje — tylko przy konkretnej sprawie |
@@ -127,7 +191,7 @@ KROK 2 — Wykonaj walidację kompletności blueprintu (sekcja WALIDACJA)
 KROK 3 — Wywołaj visualize:read_me z modules=["interactive","mockup"]
           (tylko jeśli nie załadowano w tej sesji)
 KROK 3a — ⛔ MOD-WIDGET-IO (OBOWIĄZKOWE przed show_widget):
-           view /mnt/skills/user/shared/MOD-WIDGET-IO.md
+           view shared/MOD-WIDGET-IO.md
            → wbuduj pasek IO w nagłówek widgetu (powyżej zakładek)
            → IO_SKILL_ID='raport-sytuacyjny-v2', IO_CASE_ID=sygnatura
            → matryca: Export JSON ✅ PDF ✅ | Import JSON ✅
@@ -397,7 +461,7 @@ Eskalacje (przyciski sendPrompt w zakładce Rekomendacje):
 | Brak osi czasu | `chronologia-sprawy-v1` |
 | Brak oceny dowodów | `analizator-dowodow-v3` |
 | Potrzeba pisma | `pisma-procesowe-v3` |
-| Pytania do świadka | `przesluchanie-swiadkow-v2` |
+| Pytania do świadka | `przesluchanie-swiadkow-v2-min90` |
 | Problem z podstawą prawną | `analizator-przepisow-v2` |
 | Potrzeba orzecznictwa | `orzeczenia-sadowe-v2` |
 
@@ -447,6 +511,11 @@ Raport nie może być oznaczony jako gotowy gdy:
 - pominięto sprzeczności lub luki mimo widocznych rozbieżności,
 - podano termin bez źródła,
 - podano podstawę prawną bez weryfikacji albo zastrzeżenia,
+- ⛔ jakiekolwiek twierdzenie o prawie (przepis, termin ustawowy, sygnatura,
+  skutek procesowy) trafiło do blueprintu bez statusu wg
+  `shared/PRAWO-HARDGATE.md` — `✅ [VER: źródło, data]`, `🟨 [KOTWICA-URZĘDOWA]`
+  albo `⚠️ [NIEWERYFIKOWANE]` (F-123, 2026-08-23g); dotyczy też pola `podstawa`
+  w mapie ryzyk i treści rekomendacji, nie tylko chronologii,
 - przedstawiono twierdzenie strony (status C) jako fakt udowodniony.
 - `confidence` wynosi 9–10 przy braku źródeł dla kluczowych faktów.
 
@@ -527,7 +596,7 @@ Punkty self-check routera v3:
 Po wygenerowaniu widgetu:
 
 ```
-view /mnt/skills/user/shared/HYBRID-VALIDATION.md
+view shared/HYBRID-VALIDATION.md
 ```
 
 FAZA 1 — auto-raport braków 🔴/🟡/🔵 (bez pytania o zgodę)
@@ -541,13 +610,16 @@ FAZA 3 — licznik ⬛ + zamknięcie
 Gdy wynik ma służyć strategii procesowej, ocenie ryzyka lub decyzji terminowej:
 
 ```
-view /mnt/skills/user/shared/TRYBY-PROCESOWE.md
-view /mnt/skills/user/shared/RISK-ASSESSMENT.md
-view /mnt/skills/user/shared/TERM-CALC.md
-view /mnt/skills/user/shared/DOWODY-METODOLOGIA.md
-view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md
-view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md
-view /mnt/skills/user/shared/QUALITY-CHECK.md
+view shared/PRAWO-HARDGATE.md      ← ⛔ ZAWSZE, gdy w raporcie
+                                                       pada jakikolwiek przepis,
+                                                       termin lub sygnatura (F-123)
+view shared/TRYBY-PROCESOWE.md
+view shared/RISK-ASSESSMENT.md
+view shared/TERM-CALC.md
+view shared/DOWODY-METODOLOGIA.md
+view shared/PREKLUZJA-DOWODOWA.md
+view shared/STRATEGIA-PROCESOWA.md
+view shared/QUALITY-CHECK.md
 ```
 
 Nie dubluj logiki shared w lokalnych plikach.

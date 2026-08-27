@@ -5,7 +5,7 @@
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 > Przed użyciem JAKIEGOKOLWIEK artykułu, numeru Dz.U., brzmienia przepisu, stawki, kary, terminu ustawowego lub sygnatury orzeczenia: wykonaj weryfikację online (KROK P3).
 > Pominięcie P3 = błąd dyskredytujący pismo. Nie ma trybu szybkiego ani wyjątku "jestem pewny".
-> Szczegóły: view /mnt/skills/user/shared/PRAWO-HARDGATE.md
+> Szczegóły: view shared/PRAWO-HARDGATE.md
 
 ## KROK P1 — Identyfikacja dziedziny prawa
 

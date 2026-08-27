@@ -1,7 +1,7 @@
 # Moduł — VAT: ewidencja (JPK_V7), korekta ewidencji, deklaracje, informacje podsumowujące, dowody, rejestracja VAT i solidarna odpowiedzialność
 
 > ⚠️ TEN moduł jest CZĘŚCIĄ RODZINY plików VAT, PODZIELONEJ
-> 2026-08-12 (NOTA-4, audyt-systemu-v4/CHECKLIST-DEDUP.md — moduł
+> 2026-08-12 (NOTA-4, audyt-systemu-v4/references/CHECKLIST-DEDUP.md — moduł
 > źródłowy miał 3652 linie). Moduł MACIERZYSTY (z aktualnym stanem
 > weryfikacji ustawy, ostrzeżeniami o nowelizacjach i alertami
 > KSeF/PKWiU): `mod-VAT-podatek-od-towarow-i-uslug.md`.
@@ -140,7 +140,7 @@ EWIDENCYJNE — art. 109, 109a, 110 ustawy VAT
     przechowywanie **10 LAT**
 
 ✅ [VER: lexlege.pl — pełny tekst art. 109, 109a, 109b i 110 ustawy o VAT,
-   Dz.U.2025.0.775 t.j., stan prawny na 12.08.2026; pobrane 2026-08-12]
+   Dz.U. 2025 poz. 775 t.j., stan prawny na 12.08.2026; pobrane 2026-08-12]
 ⚠️ [ZALECANA WERYFIKACJA ISAP]
 ✅ [LUKA ZAMKNIĘTA 2026-08-12 (iteracja II): deklaracje (art. 99) i
    informacje podsumowujące (art. 100) opracowano w sekcji **5a** niżej.
@@ -268,7 +268,7 @@ dnia
 
 ✅ [VER: art. 99 ust. 1, 2, 7a, 8, 8a, 9 oraz mechanizm utraty kwartału
    przez zał. 15 — zgodnie w 4 źródłach (lexlege.pl, arslege.pl,
-   przepisy.gofin.pl, prawnik.cc), Dz.U.2025.0.775 t.j., 2026-08-12]
+   przepisy.gofin.pl, prawnik.cc), Dz.U. 2025 poz. 775 t.j., 2026-08-12]
 ✅ [VER 2026-08-21 (F-18): próg art. 99 ust. 3a pkt 2 = 50 000 zł,
    6 zgodnych źródeł — patrz adnotacja wyżej. Znacznik OBOWIĄZKOWA dla
    tej pozycji zamknięty]

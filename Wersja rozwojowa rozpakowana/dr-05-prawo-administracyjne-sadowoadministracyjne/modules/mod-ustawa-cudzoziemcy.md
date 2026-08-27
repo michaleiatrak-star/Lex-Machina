@@ -8,7 +8,7 @@
 **Źródło weryfikacji:** Ustawa o cudzoziemcach — Dz.U. 2025 poz. 1079 t.j. ze zm. (zm.: Dz.U. 2025 poz. 1794; Dz.U. 2026 poz. 203) | Ustawa o warunkach dopuszczalności powierzania pracy cudzoziemcom — Dz.U. 2025 poz. 621 (w życie 01.06.2025)
 **Data weryfikacji online:** 2026-07-02 (NAPRAWA WARN-27 — ANEKS A gruntownie
 zaktualizowany po zmianie systemowej z 5.03.2026, ustawa o wygaszeniu
-rozwiązań Dz.U. 2026.203; poprzednia weryfikacja: 2026-06-05)
+rozwiązań Dz.U. 2026 poz. 203; poprzednia weryfikacja: 2026-06-05)
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 **⚠️ Przepisy imigracyjne są bardzo często nowelizowane — ZAWSZE weryfikuj aktualne brzmienie.**
 
@@ -25,7 +25,7 @@ przez praca.gov.pl, kary dla pracodawcy za nielegalne zatrudnienie.
 ustawie wprost poza art. 42 ust. 3-4 — tryb odwoławczy: wniosek o ponowne
 rozpatrzenie przez KONSULA w 14 dni). Pełna rama prawna (umowy z Ukrainą/
 Rosją/Białorusią, aktualny status obowiązywania/zawieszenia) →
-`dr-14/mod-maly-ruch-graniczny.md` (utworzony 2026-07-15).
+`dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/modules/mod-maly-ruch-graniczny.md` (utworzony 2026-07-15).
 
 ---
 
@@ -41,7 +41,7 @@ Tytuły pobytowe (wiza, karta pobytu, pobyt stały, rezydent długoterminowy UE)
 | Ustawa o cudzoziemcach | Dz.U. 2025 poz. 1079 t.j. ze zm. |
 | Ustawa o warunkach dopuszczalności powierzania pracy cudzoziemcom | Dz.U. 2025 poz. 621 |
 | Ustawa o udzielaniu cudzoziemcom ochrony na terytorium RP | weryfikuj aktualny t.j. w ISAP |
-| Konwencja Genewska 1951 (status uchodźcy) | ratyfikowana przez Polskę — ✅ warstwa traktatowa [definicja uchodźcy, non-refoulement, art. 31/32/33] opracowana 2026-08-20 (F-61) w `dr-14/modules/mod-konwencja-genewska-uchodzcy-1951-protokol-1967.md`, NIE duplikować tutaj |
+| Konwencja Genewska 1951 (status uchodźcy) | ratyfikowana przez Polskę — ✅ warstwa traktatowa [definicja uchodźcy, non-refoulement, art. 31/32/33] opracowana 2026-08-20 (F-61) w `dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/modules/mod-konwencja-genewska-uchodzcy-1951-protokol-1967.md`, NIE duplikować tutaj |
 | KPA | Dz.U. 2025 poz. 1691 t.j. |
 | PPSA | Dz.U. 2026 poz. 143 t.j. |
 
@@ -259,7 +259,7 @@ WAŻNE: wizy wydane w celach 01, 02, 11, 14, 20, 23 oraz tranzytowe (od 01.06.20
 | Status uchodźcy | ustawa o ochronie cudzoziemców | bezterminowy | TAK bez zezwoleń | prześladowanie Konwencja Genewska 1951 |
 | Ochrona uzupełniająca | j.w. | do 2 lat (przedłużalne) | TAK bez zezwoleń | ryzyko poważnej krzywdy |
 | Pobyt tolerowany | j.w. | do 1 roku (przedłużalne) | TAK bez zezwoleń | wydalenie sprzeczne z zobow. RP |
-| PESEL UKR (ochrona tymczasowa) | ⛔ OD 5.03.2026: reżim przeniesiony do ustawy o udzielaniu cudzoziemcom ochrony na terytorium RP + ustawy o warunkach dopuszczalności powierzania pracy cudzoziemcom (Dz.U. 2025.621); dawna specustawa 2022.583 w istotnym zakresie wygaszona ustawą 2026.203 — patrz ANEKS A (naprawiony 2026-07-02, WARN-27) | do 4.03.2027 (dotychczasowi beneficjenci) | TAK bez zezwoleń (powiadomienie PUP w 7 dni, system praca.gov.pl) | obywatel UA po 24.02.2022 LUB beneficjent decyzji Rady UE 2022/382; ⚠️ ZAWSZE zob. ANEKS A przed poradą — materia zmieniła się fundamentalnie w 2026 r. |
+| PESEL UKR (ochrona tymczasowa) | ⛔ OD 5.03.2026: reżim przeniesiony do ustawy o udzielaniu cudzoziemcom ochrony na terytorium RP + ustawy o warunkach dopuszczalności powierzania pracy cudzoziemcom (Dz.U. 2025 poz. 621); dawna specustawa 2022.583 w istotnym zakresie wygaszona ustawą 2026.203 — patrz ANEKS A (naprawiony 2026-07-02, WARN-27) | do 4.03.2027 (dotychczasowi beneficjenci) | TAK bez zezwoleń (powiadomienie PUP w 7 dni, system praca.gov.pl) | obywatel UA po 24.02.2022 LUB beneficjent decyzji Rady UE 2022/382; ⚠️ ZAWSZE zob. ANEKS A przed poradą — materia zmieniła się fundamentalnie w 2026 r. |
 
 ---
 

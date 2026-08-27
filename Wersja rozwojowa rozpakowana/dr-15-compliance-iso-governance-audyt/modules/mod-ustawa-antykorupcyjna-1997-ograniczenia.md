@@ -16,7 +16,7 @@
 
 Ustawa realizuje funkcję PREWENCYJNĄ wobec korupcji — nie penalizuje
 konkretnego czynu korupcyjnego (to robią art. 228-231, 296a KK — patrz
-`dr-03/modules/mod-KK-art228-231-korupcja-urzednicza.md`), tylko z góry
+`dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art228-231-korupcja-urzednicza.md`), tylko z góry
 OGRANICZA możliwość powstania konfliktu interesów u osób na
 eksponowanych stanowiskach publicznych, przez zakaz łączenia funkcji
 publicznej z określoną działalnością gospodarczą.

@@ -48,7 +48,7 @@ wymagają przeliczenia.
 ---
 
 > ⚠️ TEN moduł jest CZĘŚCIĄ RODZINY plików VAT, PODZIELONEJ
-> 2026-08-12 (NOTA-4, audyt-systemu-v4/CHECKLIST-DEDUP.md — moduł
+> 2026-08-12 (NOTA-4, audyt-systemu-v4/references/CHECKLIST-DEDUP.md — moduł
 > źródłowy miał 3652 linie, ~9x próg 400 linii). RODZINA sześciu
 > plików: mod-VAT-podatek-od-towarow-i-uslug.md (rdzeń: alerty,
 > KSeF, stawki, podstawowe mechanizmy), mod-VAT-miejsce-swiadczenia-
@@ -271,7 +271,7 @@ mechanizmu przeliczeniowego z art. 106e). W trakcie weryfikacji
 wykryto i skorygowano własną wstępną hipotezę o nieaktualności
 przeliczników art. 85 — po dodatkowym wyszukiwaniu potwierdzono,
 że przeliczniki 18,70%/7,41%/4,76% (stawki 23%/8%/5%) SĄ aktualne.
-Źródła: lexlege.pl (Rząd 2B, t.j. Dz.U.2025.0.775, stan prawny
+Źródła: lexlege.pl (Rząd 2B, t.j. Dz.U. 2025 poz. 775, stan prawny
 wprost oznaczony jako aktualny na 12.08.2026), przepisy.gofin.pl,
 poltax.pl, ifirma.pl. ⚠️ [NIEWERYFIKOWANE BEZPOŚREDNIO W ISAP] —
 ISAP niedostępny do web_fetch w tej sesji.

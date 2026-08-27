@@ -1,13 +1,25 @@
 ---
 name: dr-12-sadownictwo-prokuratura-zawody-prawnicze
-version: 4.10
-description: |
-  DR-12: Sądownictwo, Prokuratura, Zawody Prawnicze
-  Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
-  Ładuj TYLKO moduł pasujący do sprawy — lazy loading.
-  Wchodzi z: prawo-polskie-v2 → ROUTING-MAP → ten skill.
-  Weryfikacja: isap.sejm.gov.pl | orzeczenia.ms.gov.pl | sn.pl | orzeczenia.nsa.gov.pl (kontrola WSA/NSA wg PPSA, gdzie właściwa) + shared/INTERPRETACJE-URZEDOWE.md (rejestr interpretacji urzędowych per dziedzina)
+version: "4.12"
+description: "Sądownictwo, prokuratura i zawody prawnicze: ustrój sądów, prokuratura, adwokaci, radcowie, notariusze, komornicy, koszty i odpowiedzialność zawodowa."
 ---
+
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedzinowa, mapy aktów, hard gate’y, kolejność modułów i kryteria jakości tego DR-skilla pozostają bez zmian.
+
+1. `view dr-12-sadownictwo-prokuratura-zawody-prawnicze/<plik>` oraz `view modules/...` / `view references/...` oznaczają świeży odczyt odpowiedniego lokalnego pliku tego skilla. Literalna ścieżka `/mnt/skills/user` nie jest wymagana.
+2. `view shared/<plik>` oznacza świeży odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tej paczki. Brak obowiązkowego zasobu shared = fail-closed, nie substytucja pamięcią modelu.
+3. `view <inny-skill>/<plik>` oznacza aktywację/odczyt wskazanego osobnego skilla. Nie vendoryzuj innych skilli do tego ZIP-a.
+4. `web_search` / `web_fetch` i podobne nazwy oznaczają świeże wyszukanie/odczyt online przez równoważną funkcję hosta. Zachowaj wymagane źródła oficjalne, statusy weryfikacji i zakaz cytowania prawa z pamięci.
+5. `show_widget`, `visualize:read_me`, `present_files`, `create_file`, shell/Python i podobne operacje są nazwami semantycznymi. Jeśli host nie ma literalnego narzędzia, użyj równoważnej funkcji natywnej bez omijania bramek jakości.
+6. `/mnt/user-data/...` oznacza rzeczywiste załączniki użytkownika dostępne w bieżącym hoście; wymagany ponowny odczyt ma być faktycznym odczytem źródła.
+
+**Zasada nadrzędna:** instrukcje, które są już zrozumiałe i wykonalne w bieżącym hoście, wykonuj bez konwersji. Adapter działa wyłącznie na granicy runtime.
+
 
 # DR-12 — Sądownictwo, Prokuratura, Zawody Prawnicze
 
@@ -24,6 +36,25 @@ PRZED każdym powołaniem:
 
 Naruszenie HARD GATE = błąd kwalifikowany. Nie ma wyjątków.
 ```
+
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
+>
+> ```
+> view shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
+>
+> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
+> oznaczenia, tylko je wymusza.
 
 ## Zasada architektoniczna
 
@@ -274,11 +305,11 @@ ZAWODY PRAWNICZE — USTAWY KORPORACYJNE:
                TYLKO z rozp. MS; NTE art. 777 KPC; odmowa czynności;
                pełny intake/strategia/quality gate)
   [✓] OK    mod-ustawa-komornicy-sadowi-zawod
-              (Dz.U. 2024 poz. 1458; opłaty TYLKO z rozp. MS; OC;
+              (Dz.U. 2026 poz. 881 t.j.; opłaty TYLKO z rozp. MS; OC;
                skarga art. 767 KPC; odpowiedzialność dyscyplinarna;
                wybór komornika; pełny intake/strategia/quality gate)
   [✓] NOWY  mod-ustawa-rzecznicy-patentowi-zawod
-              (Dz.U. 2024 poz. 749 t.j. + nowelizacja Dz.U. 2025 poz. 1679
+              (Dz.U. 2026 poz. 778 t.j. + nowelizacja Dz.U. 2025 poz. 1679
                [PESEL w rejestrze, w życie 3.02.2026]; zawód zaufania
                publicznego z mocy art. 1 ustawy; samorząd PIRP/KRRP;
                zastępstwo przed UP RP/sądami w sprawach IP z wyjątkiem
@@ -288,13 +319,13 @@ ZAWODY PRAWNICZE — USTAWY KORPORACYJNE:
 ## Jak wywołać
 
 ```
-view /mnt/skills/user/dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/[nazwa-modulu].md
+view dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/[nazwa-modulu].md
 ```
 
 ## Lokalna mapa aktów prawnych
 
 ```
-view /mnt/skills/user/dr-12-sadownictwo-prokuratura-zawody-prawnicze/MAPA-AKTOW.md
+view dr-12-sadownictwo-prokuratura-zawody-prawnicze/MAPA-AKTOW.md
 ```
 
 ## Powiązania zewnętrzne
@@ -305,7 +336,7 @@ view /mnt/skills/user/dr-12-sadownictwo-prokuratura-zawody-prawnicze/MAPA-AKTOW.
 - Notariat (czynności notarialne w rejestrach): `dr-07` → `mod-PrNotariat-notariat-rejestry`
 - KPK (obrońca w procesie karnym): `dr-03`
 - Egzekucja komornicza (tryb KPC) — patrz `shared/...` lub `mod-ustawa-komornicy-sadowi-zawod` (sekcja "Łącz obowiązkowo z")
-- PPSA (skargi na regulatorów): `dr-05` → `mod-PPSA-postepowanie-sadowoadministracyjne`
+- PPSA (skargi na regulatorów): `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-PPSA-terminy-kasacja-prawo-pomocy.md` (a dla posiedzeń/orzeczeń doładuj odpowiedni moduł PPSA DR05)
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
 
 ## ⚖️ DISCLAIMER (obowiązkowy)
@@ -313,7 +344,7 @@ view /mnt/skills/user/dr-12-sadownictwo-prokuratura-zawody-prawnicze/MAPA-AKTOW.
 Po zakończeniu analizy lub przed oddaniem odpowiedzi zawierającej ocenę prawną:
 
 ```text
-view /mnt/skills/user/shared/DISCLAIMER.md
+view shared/DISCLAIMER.md
 ```
 
 Wybierz wariant odpowiedni do trybu:

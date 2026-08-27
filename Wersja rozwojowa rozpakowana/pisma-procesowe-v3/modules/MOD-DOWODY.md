@@ -166,8 +166,8 @@ Wyniki z `analizatora-dowodow-v3` integruj wg reguł:
 Przy każdej analizie materiału dowodowego wczytaj:
 
 ```text
-view /mnt/skills/user/shared/DOWODY-METODOLOGIA.md
-view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md
+view shared/DOWODY-METODOLOGIA.md
+view shared/PREKLUZJA-DOWODOWA.md
 ```
 
 Nie klasyfikuj dowodu wyłącznie opisowo. Każdy dowód musi być przypisany do faktu istotnego prawnie i przesłanki prawnej.
@@ -418,7 +418,7 @@ ZARZUT-P4: "Porozumienie / umowa skutecznie zakończyła stosunek"
 ## D8 — Architektura łańcucha dowodowego (pełna — łączy z MOD-LANCUCH-DOWODOWY)
 
 > **Trigger:** ZAWSZE — każde pismo z ≥2 dowodami lub ≥1 tezą główną.
-> **Plik kanoniczny:** `view /mnt/skills/user/shared/MOD-LANCUCH-DOWODOWY.md`
+> **Plik kanoniczny:** `view shared/MOD-LANCUCH-DOWODOWY.md`
 > Zastępuje prosty schemat D2 (który pozostaje jako skrócone przypomnienie).
 
 ```
@@ -446,7 +446,7 @@ Per każda teza główna T-X — pipeline ŁD-1..ŁD-7:
 ## D9 — Atak na łańcuch dowodowy przeciwnika
 
 > **Trigger:** gdy w sprawie znany jest materiał dowodowy strony przeciwnej.
-> **Plik kanoniczny:** `view /mnt/skills/user/shared/MOD-LANCUCH-DOWODOWY.md §CZĘŚĆ II`
+> **Plik kanoniczny:** `view shared/MOD-LANCUCH-DOWODOWY.md §CZĘŚĆ II`
 
 ```
 4 strategie ataku na łańcuch (ŁA-1..ŁA-4):

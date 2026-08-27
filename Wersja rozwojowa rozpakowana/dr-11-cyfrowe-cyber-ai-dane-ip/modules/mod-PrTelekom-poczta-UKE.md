@@ -31,7 +31,7 @@ lexlege.pl, arslege.pl, prawo.pl, eli.gov.pl, infor.pl.
   ustawy, 12.07.2024) — nowelizuje przy okazji dziesiątki innych ustaw
   (KPC, Kodeks pracy, Prawo budowlane, KSH i inne) zastępując odesłania
   do starego Prawa telekomunikacyjnego odesłaniami do PKE.
-- **Prawo pocztowe** — Dz.U. 2025 poz. 366 t.j. (ustawa z 23.11.2012 r.,
+- **Prawo pocztowe** — Dz.U. 2026 poz. 558 t.j. (ustawa z 23.11.2012 r.,
   wielokrotnie nowelizowana, ⚠️ WERYFIKUJ czy nie ukazał się nowszy t.j.
   przed cytowaniem). Kluczowy: **art. 92** (Rozdział 8) — reklamacja
   usługi pocztowej, przysługuje nadawcy LUB adresatowi (gdy nadawca
@@ -55,8 +55,7 @@ lexlege.pl, arslege.pl, prawo.pl, eli.gov.pl, infor.pl.
 skupienie na samym regulatorze, ale treść dotyczy głównie prawa
 materialnego telekomunikacji/poczty — UKE jest tylko jednym z
 wymienionych organów (sekcja "Organy i ścieżki instancyjne" niżej).
-Rozważyć zmianę nazwy pliku przy przyszłym audycie (np.
-`mod-PKE-prawo-pocztowe-komunikacja-elektroniczna.md`).
+Rozważyć zmianę nazwy pliku przy przyszłym audycie na nazwę odzwierciedlającą pełny zakres PKE / poczty / UKE; obecna nazwa pliku pozostaje kanoniczna w tym wydaniu.
 
 ## Zakres spraw
 Umowy telekomunikacyjne, reklamacje, spam, spoofing, smishing, obowiązki operatorów, retencja, dane transmisyjne, decyzje UKE, usługi pocztowe, doręczenia, odpowiedzialność operatorów.

@@ -104,6 +104,6 @@ Data decyzji wywłaszczeniowej / nacjonalizacyjnej: [___]
 
 **Output:** 1. Kwalifikacja (termin od decyzji); 2. Dopuszczalny tryb (nieważność / naruszenie prawa / odszkodowanie); 3. Dowody; 4. Strategia; 5. Rekomendacja.
 
-**Powiązania:** `dr-02` → `mod-KC-cywilne-zobowiazania-odpowiedzialnosc` (odszkodowanie z art. 4171 KC) | `dr-04` → `mod-KPA` | `pisma-procesowe-v3`
+**Powiązania:** `dr-02` → `mod-KC-cywilne-zobowiazania-odpowiedzialnosc` (odszkodowanie z art. 4171 KC) | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` | `pisma-procesowe-v3`
 
 **Źródła:** https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20251691 (KPA) | https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20210000795 (ustawa reprywatyzacyjna)

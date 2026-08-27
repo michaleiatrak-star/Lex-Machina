@@ -16,7 +16,7 @@ Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źr
 > PODATKOWYCH i SYNDYKÓW/DORADCÓW RESTRUKTURYZACYJNYCH istnieją teraz
 > DEDYKOWANE moduły z konkretnymi Dz.U., ZASADAMI ABSOLUTNYMI i mapą
 > proceduralną właściwą dla tych zawodów:
-> - DR-12/`mod-ustawa-rzecznicy-patentowi-zawod` (Dz.U. 2024 poz. 749 t.j.)
+> - DR-12/`mod-ustawa-rzecznicy-patentowi-zawod` (Dz.U. 2026 poz. 778 t.j.)
 > - DR-06/`mod-ustawa-doradcy-podatkowi-zawod` (Dz.U. 2021 poz. 2117 +
 >   nowelizacja Dz.U. 2025 poz. 1882)
 > - DR-02/`mod-ustawa-doradca-restrukturyzacyjny-zawod` (licencja syndyka/

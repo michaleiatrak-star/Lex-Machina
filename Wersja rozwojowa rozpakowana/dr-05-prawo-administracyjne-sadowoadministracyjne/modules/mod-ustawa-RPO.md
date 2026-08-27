@@ -78,6 +78,6 @@ Formularz: bip.brpo.gov.pl → zgłoszenia sygnalistów
 
 **Output:** 1. Kwalifikacja naruszenia; 2. Uprawnienie RPO; 3. Wniosek; 4. Równoległe środki; 5. Rekomendacja.
 
-**Powiązania:** `mod-Konstytucja-TK-skarga-konstytucyjna` (DR-01) | `dr-04` → `mod-KPA` | `pisma-procesowe-v3`
+**Powiązania:** `mod-Konstytucja-TK-skarga-konstytucyjna` (DR-01) | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` | `pisma-procesowe-v3`
 
 **Źródła:** https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20241264 | https://bip.brpo.gov.pl

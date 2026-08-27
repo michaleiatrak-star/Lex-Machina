@@ -1,7 +1,7 @@
 # SELF-CHECK — Lista kontrolna przed każdą odpowiedzią (pisma procesowe)
 
 > Wydzielono z pisma-procesowe-v3/SKILL.md (v5.2) — WARN-14 refaktoryzacja
-> Wywołanie: `view /mnt/skills/user/pisma-procesowe-v3/references/SELF-CHECK-PISMA.md`
+> Wywołanie: `view pisma-procesowe-v3/references/SELF-CHECK-PISMA.md`
 > Zawiera: SELF-CHECK przed odpowiedzią, REGUŁA FINALNA
 
 ---
@@ -10,7 +10,7 @@
 
 ```
 ⛔⛔⛔ KROK 0 — CP-GATE (ABSOLUTNIE PIERWSZY, przed wszystkim innym):
-   view /mnt/skills/user/shared/CP-GATE.md → sprawdź §4 CP-CHECK:
+   view shared/CP-GATE.md → sprawdź §4 CP-CHECK:
    □ CP-REJESTR zainicjalizowany w tej sesji?          TAK / NIE→zainicjalizuj
    □ STATUS DOKUMENTU widoczny w rejestrze?            ⚠️DRAFT / ✅FINAL
    □ Zamierzam teraz wygenerować .docx?
@@ -86,7 +86,7 @@
      □ Czy wszystkie ⬛ mają już ✅ po web_search/web_fetch?             TAK/NIE
      □ Zero ⬛ w nagłówku i treści pisma przed generowaniem?             TAK/NIE
      NIE do któregokolwiek → STOP. Nie przechodzę dalej.
-   Szczegóły + STATUS-LIFECYCLE: view /mnt/skills/user/shared/PRE-W2-VERIFICATION-GATE.md (PRE-W2.0)
+   Szczegóły + STATUS-LIFECYCLE: view shared/PRE-W2-VERIFICATION-GATE.md (PRE-W2.0)
 □ ⛔ MOD-SKAN-DOWODOW-KOMPLETNY (W1.2c-PRE) — wykonaj jako PIERWSZY:
    SD-GATE-0: czy wzmianka o załącznikach + faktyczny brak pliku? → STOP
    SD-INW: WSZYSTKIE pliki zinwentaryzowane (ZIP = zawartość)?
@@ -95,7 +95,7 @@
    Protokół sądowy: wszystkie zeznania per zdanie → SD-FAKTY?
    SD-GATE-4: blokada W2 aktywna dopóki SD-VER ≠ KOMPLET?
    NIE do któregokolwiek → STOP. Nie generuj pisma.
-   view: /mnt/skills/user/shared/MOD-SKAN-DOWODOW-KOMPLETNY.md
+   view: shared/MOD-SKAN-DOWODOW-KOMPLETNY.md
 □ ⛔ PRE-W2-VERIFICATION-GATE + WERYFIKACJA PODMIOTÓW ONLINE:
    ⛔ ZASADA: dane z dokumentów/akt ≠ zweryfikowane. Dane z pamięci ≠ zweryfikowane.
    ⛔ Jedyna weryfikacja = fizyczne wywołanie web_search/web_fetch W TEJ ODPOWIEDZI.
@@ -116,7 +116,7 @@
               NIE → ⛔ STOP. Wyświetl raport zanim W2.1 się rozpocznie.
    Wszystkie ✅ → GATE-OK → przejdź do W2.1.
    Którykolwiek NIE → ⛔ BLOKADA. Wykonaj brakujące wywołanie. Nie generuj pisma.
-   Szczegóły procedury: view /mnt/skills/user/shared/PRE-W2-VERIFICATION-GATE.md
+   Szczegóły procedury: view shared/PRE-W2-VERIFICATION-GATE.md
 □ ⛔ MOD-MACIERZ-DOWOD-TEZA (W1.2c): czy macierz D×T zatwierdzona przez użytkownika?
    Gdy ≥2 dowody dostarczone:
    □ MT1: lista tez T1..Tn i dowodów D1..Dm sporządzona?
@@ -160,19 +160,18 @@
 □ Engines specjalistyczne aktywowane per MODUŁY-MAPA?
    (apelacja → appellate-v8 ✅/N/D; prokuratoria → prosecution-v8 ✅/N/D;
     riposta → rebuttal-v9 ✅/N/D; V10 gdy ≥1 warunek aktywacji ✅/N/D)
-□ [ANTY-FASADA] (dodane 2026-08-23, v2.6) Czy w odpowiedzi/piśmie jest słowo
-  „zweryfikowano/zweryfikowałem", pole „data weryfikacji" albo URL przy przepisie,
-  dla którego NIE wywołałem narzędzia W TEJ ODPOWIEDZI? TAK → ⛔ usuń deklarację
-  i datę, URL przeformatuj na 🎯 [CEL — RZĄD 1, NIEOTWARTE: …], przepis oznacz
-  ⚠️ [NIEWERYFIKOWANE]. Wyzwalacz to BRAK WYWOŁANIA, nie brak narzędzi w sesji.
-  ⛔ Zastrzeżenie selektywne (przy sygnaturach tak, przy przepisach nie) = naruszenie.
+□ [ANTY-FASADA + AF-6] Wykonaj self-check antyfasadowy z modułu kanonicznego:
+    view shared/SELF-CHECK-ANTY-FASADA.md
+  ⛔ Treść listy NIE jest tu kopiowana (F-115, 2026-08-23i). Poprzednia kopia
+    miała 1 z 2 pozycji: gdy F-117 dodała AF-6 do źródła, kopie nie zostały
+    zaktualizowane. Jedno miejsce prawdy = jedno miejsce aktualizacji.
 □ [DOMAIN-LOCK] (dodane 2026-08-23, F-109) Pismo zawiera przepis SPOZA
   dziedziny wiodącej ustalonej w W1 (KK/KKS/KW/KPK/KPW przy torze cywilnym,
   pracowniczym lub administracyjnym — albo odwrotnie)?
   NIE → OK. TAK → (a) konkretny FAKT wypełniający znamię, nie skojarzenie?
   (b) właściwy DR wczytany w TEJ odpowiedzi? (c) przepis przeszedł W3.1 ISAP?
   Którekolwiek NIE → ⛔ USUŃ powołanie z pisma.
-  → view /mnt/skills/user/shared/DOMAIN-LOCK.md
+  → view shared/DOMAIN-LOCK.md
 □ [RATE-COMPLETENESS] (dodane 2026-08-23, F-109) Pismo zawiera żądanie
   odsetkowe / waloryzację / wskaźnik zmienny w czasie?
   NIE → OK. TAK → przedział zapisany + reżim rozstrzygnięty (KC vs transakcje
@@ -180,10 +179,10 @@
   NIE → ⛔ nie wpisuj kwoty łącznej do żądania; tabela z jawnymi ⬛.
   ⛔ Żądanie odsetkowe z niedomkniętym szeregiem NIE przechodzi do .docx —
   traktuj jak brak 🔴, nie 🔵.
-  → view /mnt/skills/user/shared/RATE-COMPLETENESS.md
+  → view shared/RATE-COMPLETENESS.md
 □ [STATUSY] Każdy przepis ma znacznik z ZAMKNIĘTEJ hierarchii czterech:
-  ✅ [VER] · 🟡 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
-  ⛔ 🟡 NIE jest równoważne ✅ — do pisma FINAL wymaga domknięcia albo
+  ✅ [VER] · 🟨 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
+  ⛔ 🟨 NIE jest równoważne ✅ — do pisma FINAL wymaga domknięcia albo
   jawnego ⬛. Etykieta spoza listy = naruszenie hard gate (PRAWO-HARDGATE v2.5).
 Którykolwiek = NIE → STOP. Nie oznaczaj pisma jako gotowego.
 ```

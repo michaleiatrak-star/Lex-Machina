@@ -106,7 +106,7 @@ PODSTAWA: naruszenie zasad etyki lekarskiej lub przepisów o wykonywaniu zawodu
 NIE: nie przyznaje odszkodowania; niezależne od postępowania cywilnego/karnego
 ```
 
-## PRAWA PACJENTA — KATALOG (u.p.p. Dz.U. 2024.581 t.j.)
+## PRAWA PACJENTA — KATALOG (u.p.p. Dz.U. 2024 poz. 581 t.j.)
 | Prawo | Podstawa | Jak egzekwować |
 |---|---|---|
 | Do świadczeń zdrowotnych | art. 6–8 u.p.p. | NFZ / RPP / skarga do NFZ |
@@ -174,10 +174,10 @@ REKOMENDACJA: □ FKZM (do 200 000 zł, szybciej)  □ Pozew cywilny (bez limitu
 | Analiza szans — błąd medyczny | `analiza-sadowa-v6` |
 | Analiza umowy z kliniką / OWU ubezpieczyciela | `analizator-umow-v1` |
 | Orzecznictwo SN / SA (błędy medyczne) | `orzeczenia-sadowe-v2` |
-| Odmowa świadczenia przez NFZ | `mod-G-administracyjne.md` + `kpa-admin.md` |
-| Śmierć pacjenta — roszczenia rodziny | `mod-E-cywilne.md` (art. 446 KC) |
+| Odmowa świadczenia przez NFZ | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` |
+| Śmierć pacjenta — roszczenia rodziny | `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md` (art. 446 KC) |
 
-*Ustawa o pr. pacjenta (u.p.p.): Dz.U. 2024.581 t.j. | KC: Dz.U. 2025.1071 t.j.*
+*Ustawa o pr. pacjenta (u.p.p.): Dz.U. 2024 poz. 581 t.j. | KC: Dz.U. 2026 poz. 795 t.j.*
 *KOZM ZLIKWIDOWANE 01.07.2024 | FKZM działa od 06.09.2023*
 *Kwoty FKZM: coroczna waloryzacja — weryfikuj aktualną wysokość: gov.pl/web/rpp*
 *Ustawa o zawodzie lekarza: weryfikuj aktualny t.j. w isap.sejm.gov.pl*

@@ -9,7 +9,7 @@ Kodeksu rodzinnego i opiekuńczego)
 
 ## Akt prawny
 Kodeks rodzinny i opiekuńczy, Tytuł III (art. 145-184) — aktualny
-t.j. Dz.U.2026.236 ✅ VER: zgodny z mod-KRO-rodzinne.md
+t.j. Dz.U. 2026 poz. 236 ✅ VER: zgodny z mod-KRO-rodzinne.md
 
 ---
 

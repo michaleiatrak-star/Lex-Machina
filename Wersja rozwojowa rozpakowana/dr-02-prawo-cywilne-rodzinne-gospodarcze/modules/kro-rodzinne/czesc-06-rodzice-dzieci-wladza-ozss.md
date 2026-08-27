@@ -13,7 +13,7 @@
 ⭐ NISKA PRACOCHŁONNOŚĆ — krótki, zamknięty fragment (Oddział 1 Rozdziału II
 Tytułu II KRO), poprzedzający władzę rodzicielską. Potwierdzone zgodnie w
 4 źródłach (lexlege.pl, arslege.pl, e-prawnik.pl, gofin.pl — stan na t.j.
-Dz.U.2026.236).
+Dz.U. 2026 poz. 236).
 
 ```
 Art. 87 — Wzajemny szacunek i wsparcie:
@@ -84,6 +84,48 @@ Kontakty (art. 113 i n. KRO — weryfikuj w ISAP):
   → sąd może uregulować, ograniczyć lub zakazać kontaktów
   → wykonanie kontaktów: wniosek do sądu opiekuńczego
   → sankcja za utrudnianie kontaktów: zagrożenie zapłatą sumy pieniężnej
+
+⭐⭐⭐ ROZRÓŻNIENIE ART. 113³ vs 113⁴ KRO (dodano 2026-08-23f, F-114 —
+  transkrypt testu skleił oba w jeden zakres „dalsze ograniczenie/zakazanie
+  kontaktów"; 113⁴ NIE jest sankcją i błąd zamyka klientowi realnie
+  dostępną, pośrednią opcję):
+  → ART. 113³ KRO — WYŁĄCZENIE kontaktów: sąd opiekuńczy zakaże osobistej
+    styczności z dzieckiem, gdy utrzymywanie kontaktów poważnie zagraża
+    dobru dziecka lub je narusza. Środek NAJDALEJ idący — całkowite
+    zerwanie, nie samo ograniczenie sposobu.
+  → ART. 113⁴ KRO — ZOBOWIĄZANIE DO OKREŚLONEGO POSTĘPOWANIA: sąd
+    opiekuńczy, orzekając w sprawie kontaktów, MOŻE zobowiązać rodziców
+    do określonego postępowania, w szczególności skierować ich do
+    placówek lub specjalistów zajmujących się terapią rodzinną,
+    poradnictwem lub świadczących rodzinie inną stosowną pomoc, z
+    jednoczesnym wskazaniem sposobu kontroli wykonania wydanych
+    zarządzeń. ⭐ TO NIE JEST SANKCJA — to najczęściej NAJLEPSZE wyjście
+    pośrednie w kazusie konfliktu rodziców BEZ przemocy: nie zamyka
+    kontaktu (jak 113³), tylko kieruje na terapię/poradnictwo. Mylenie
+    113⁴ z 113³ zamyka klientowi opcję, która realnie mogłaby zostać
+    zasądzona zamiast całkowitego zakazu.
+  → ART. 113⁶ KRO — ODPOWIEDNIE STOSOWANIE do innych osób bliskich:
+    przepisy o kontaktach rodziców z dzieckiem (w tym 113³ i 113⁴)
+    stosuje się odpowiednio do kontaktów dziecka z rodzeństwem,
+    dziadkami, powinowatymi w linii prostej oraz innymi osobami, jeżeli
+    sprawowały nad dzieckiem pieczę przez znaczny czas.
+
+⭐⭐⭐ EGZEKUCJA KONTAKTÓW — PODSTAWA POPRAWNA (skorygowano 2026-08-23f):
+  ⛔ Podstawą sumy pieniężnej za naruszenie obowiązków w przedmiocie
+  kontaktów NIE jest art. 582¹ §3-4 KPC samodzielnie — to przepis
+  o ZABEZPIECZENIU wykonania kontaktów w postanowieniu ustalającym
+  kontakty, którego §3 ODSYŁA do zasad z art. 598¹⁵ KPC. Właściwa
+  podstawa materialna sankcji pieniężnej: **art. 598¹⁵ KPC** (zagrożenie
+  zapłatą oznaczonej sumy za każde naruszenie) → **art. 598¹⁶ KPC**
+  (nakazanie zapłaty należnej sumy, gdy zagrożenie nie poskutkowało).
+  ⛔ ⚠️ art. 598¹⁵ §1 KPC **CZĘŚCIOWO NIEKONSTYTUCYJNY** — wyrok TK
+  z 23.06.2022, sygn. SK 3/20, utracił moc z dniem 30.06.2022 w zakresie,
+  w jakim obejmuje sytuacje, gdy niewłaściwe wykonywanie lub niewykonywanie
+  obowiązków związane jest z zachowaniem SAMEGO DZIECKA, niewywołanym
+  przez osobę sprawującą pieczę. Sąd musi ustalić z urzędu, czy brak
+  kontaktu nie był wyrazem samodzielnej decyzji dziecka, zanim zastosuje
+  sankcję wobec opiekuna. [Do weryfikacji w RZĘDZIE 1 przed cytowaniem
+  w piśmie: aktualne brzmienie po nowelizacji, ISAP]
 ```
 
 ### ⭐⭐⭐ TRZY POZIOMY INGERENCJI — ROZBUDOWANE (dodano 2026-08-12,
@@ -169,7 +211,7 @@ rozróżnienia PODSTAW i PRAKTYCZNYCH konsekwencji)
   WSZCZĘTE Z URZĘDU jest BEZPŁATNE
 
 Potwierdzone w 6+ zgodnych, BARDZO aktualnych źródeł 2026
-(eadwokat.pl [kwiecień 2026, z aktualnym t.j. Dz.U.2026.0.236],
+(eadwokat.pl [kwiecień 2026, z aktualnym t.j. Dz.U. 2026 poz. 236],
 adwokat-24.pl [czerwiec 2026], kancelariasprawyrodzinne.pl [maj
 2026], wezprawnika.pl, plazaglab.pl [lipiec 2025], gofin.pl,
 standardyprawa.pl [z katalogiem powiązanego orzecznictwa SN/SR]).

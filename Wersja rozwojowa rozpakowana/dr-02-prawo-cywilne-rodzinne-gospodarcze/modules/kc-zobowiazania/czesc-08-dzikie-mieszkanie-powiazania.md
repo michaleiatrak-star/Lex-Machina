@@ -173,7 +173,7 @@ dosłownym cytatem art. 6881).
 
 ZASIEDZENIE (art. 172 KC) — ⚠️ ROZBUDOWANE 2026-07-18, PEŁNA TREŚĆ
 PRZENIESIONA do dedykowanego modułu:
-  → view /mnt/skills/user/dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-rzeczy-znalezione-zasiedzenie.md
+  → view dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-rzeczy-znalezione-zasiedzenie.md
   Skrót: nieruchomość 20 lat (dobra wiara) / 30 lat (zła wiara),
   ruchomość 3 lata (dobra wiara) — PEŁNE kryteria dobrej/złej wiary,
   doliczanie posiadania poprzednika (art. 176 KC), ograniczenie dla

@@ -333,7 +333,7 @@ najczęściej DECYDUJĄ o dopuszczalności nałożenia/egzekucji kary
   §2: OD zaległej kary NALICZA się odsetki ZA zwłokę W wysokości
     określonej JAK dla zaległości PODATKOWYCH, chyba że PRZEPISY
     odrębne stanowią INACZEJ (⭐ powiązanie Z Ordynacją podatkową —
-    dr-06/mod-OP-ordynacja-podatkowa.md, ANALOGICZNA konstrukcja
+    dr-06-podatki-finanse-publiczne-aml/modules/mod-OP-ordynacja-podatkowa.md, ANALOGICZNA konstrukcja
     do zasady in DUBIO pro tributario JUŻ zasygnalizowanej przy
     art. 81a KPA)
 

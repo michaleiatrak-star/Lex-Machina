@@ -1,29 +1,47 @@
 ---
 name: analizator-przepisow-v2
-version: "2.5"
+version: "2.6"
 type: executive-analiza
 status: production
-compatibility: "web_search, web_fetch, show_widget"
-description: >-
-  Analizuje przepisy prawa polskiego. Stosuj gdy użytkownik pyta o artykuł, przesłanki, wykładnię, orzecznictwo, zbieg norm, historię zmian przepisu lub chce sprawdzić czy przepis stosuje się do jego sytuacji.
-  v2: automatyczne orzecznictwo (3 orzeczenia + alert rozbieżności linii), mapa powiązań norm, historia nowelizacji z obsługą vacatio legis, interaktywne drzewo przesłanek krok-po-kroku, kontekst praktyczny dla laika.
-  v2.3: RZĄD 1 (ISAP) / RZĄD 2 (orzecznictwo, LEX-Legalis-tekst, ORAZ duże portale: prawo.pl, LEX/Legalis-komentarz, rp.pl, infor.pl, gofin.pl i inne) / RZĄD 3 (strony prawników, kancelarii, NGO, blogów — wysokie ryzyko dezaktualizacji, wymagają daty i krzyżowej weryfikacji).
-changelog: |
-  Wersja bieżąca: 2.5. ⛔ PEŁNA HISTORIA — WYŁĄCZNIE w references/CHANGELOG.md
-  (standard systemowy 2026-08-20z4: jeden plik, jedna lokalizacja; zakaz sekcji
-  changelogu w korpusie SKILL.md i zakaz pełnej listy wpisów w tym polu).
-  Skrót 2.5 (2026-08-20z4): historia zmian przeniesiona z korpusu SKILL.md do references/CHANGELOG.md
-  (treść 1:1); przy okazji naprawiony NIESPARSOWALNY frontmatter — pole
-  description zawierało niecytowane dwukropki (v2:, v2.3:), przez co YAML
-  nie ładował się w ogóle. Usterka zastana, wykryta kontrolą tej sesji.
-
+compatibility: "live_web_lookup, file_read, optional_interactive_ui"
+description: "Analiza przepisów prawa polskiego: aktualne i historyczne brzmienie, przesłanki, wykładnia, orzecznictwo, zbieg norm, nowelizacje, vacatio legis i zastosowanie do stanu faktycznego."
 ---
 
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Nie zmienia hard gate’ów, hierarchii źródeł, analizy przesłanek, logiki orzeczniczej, historii zmian ani modelu vacatio legis.
+
+1. `view`, `web_search`, `web_fetch`, `show_widget`, `sendPrompt` i podobne nazwy traktuj jako nazwy operacji semantycznych, jeżeli bieżący host nie udostępnia literalnie narzędzia o tej nazwie. Użyj równoważnej funkcji hosta.
+2. `view analizator-przepisow-v2/...` oznacza świeży odczyt odpowiedniego pliku lokalnego tego skilla, przede wszystkim `references/...`. Nie wymagaj literalnego katalogu `/mnt/skills`.
+3. `view shared/<plik>` oznacza świeży odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tej paczki. Jeżeli obowiązkowy zasób shared jest niedostępny, zastosuj fail-closed zamiast zastępować go pamięcią modelu.
+4. `web_search` / `web_fetch` oznaczają świeże wyszukanie i odczyt zewnętrznego źródła. Dla przepisów i sygnatur zachowaj istniejący wymóg źródeł oficjalnych/urzędowych i zakaz cytowania z pamięci.
+5. `show_widget` oznacza interaktywny widok, jeśli host go obsługuje. Jeżeli nie, zachowaj ten sam model danych, zakładki, drzewo przesłanek i funkcje jako ustrukturyzowany raport, HTML lub natywny artefakt hosta. Brak renderera nie może blokować analizy merytorycznej.
+6. `sendPrompt(...)` w opisie widgetu oznacza przekazanie wybranych przez użytkownika parametrów z UI z powrotem do bieżącej rozmowy/zadania. Jeśli host nie ma takiego callbacku, pokaż gotowe polecenie lub użyj natywnego mechanizmu interakcji hosta.
+7. Odwołania do innych skilli są integracjami między-skillowymi. Nie kopiuj ich do tej paczki; jeśli integracja nie jest dostępna, wykonaj lokalną część możliwą do wykonania i jawnie oznacz pominięty krok bez wymyślania wyniku.
+
+**Zasada nadrzędna adaptera:** jeżeli istniejąca instrukcja jest zrozumiała i wykonalna przez bieżący host, wykonaj ją bez konwersji. Adapter działa tylko na rzeczywistej granicy runtime.
 # Analizator Przepisów Prawnych v2
 
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 > Przed podaniem jakiegokolwiek przepisu, artykułu, numeru Dz.U. lub sygnatury orzeczenia:
-> `view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
+> `view shared/PRAWO-HARDGATE.md`
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-23i, flaga F-115 — ten skill cytuje prawo, a bramki nie miał):
+>
+> ```
+> view shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
 
 Profesjonalne narzędzie do analizy przepisów prawnych z widgetem wizualnym, automatycznym orzecznictwem (MOD-ORZECZ-PRZEPIS), mapą powiązań norm, historią zmian z obsługą vacatio legis, interaktywnym drzewem przesłanek i kontekstem praktycznym dla laika. (v2)
 
@@ -113,7 +131,7 @@ Paleta: --primary #1B3A6B, --accent #C8960C, --bg #F8F7F4, --success #16a34a, --
 > ⛔ **KANONICZNA LOKALIZACJA (od 2026-07-15):** pełna treść tej hierarchii
 > (definicje RZĄD 1/2A/2B/3, listy domen, zakaz mieszania rzędów, znaczniki
 > obowiązkowe, procedura H-1→H-4) przeniesiona do
-> `view /mnt/skills/user/shared/HIERARCHIA-ZRODEL.md` — plik jest teraz
+> `view shared/HIERARCHIA-ZRODEL.md` — plik jest teraz
 > współdzielony przez `shared/PRAWO-HARDGATE.md`, `shared/WERYFIKACJA-SLAD.md`
 > i każdy inny skill podający linki źródłowe, nie tylko ten moduł.
 > Wczytaj ten plik PRZED podaniem jakiegokolwiek linku/URL w analizie
@@ -132,7 +150,24 @@ Paleta: --primary #1B3A6B, --accent #C8960C, --bg #F8F7F4, --success #16a34a, --
 1. web_search: [nazwa aktu] + "tekst jednolity" + rok na ISAP
 2. web_fetch tekstu jednolitego
 3. Zlokalizuj dokładny przepis (artykuł / paragraf / ustęp / punkt)
-4. Sprawdź datę ostatniej nowelizacji i historię zmian
+4. Z treści obwieszczenia o t.j. wypisz nowelizacje JUŻ UWZGLĘDNIONE
+   (obwieszczenia standardowo wymieniają: „uwzględnia zmiany wprowadzone
+   ustawami z dnia..."). To jest punkt wyjścia — te zmiany są już wliczone,
+   nie trzeba ich szukać ponownie w kroku 4A.
+4A. ⛔ KROK 2C shared/PRAWO-HARDGATE.md — OSOBNE zapytanie o WSZYSTKIE
+    akty zmieniające OPUBLIKOWANE PO dacie t.j. z kroku 1-2 (skorygowano
+    2026-08-23f, po pytaniu użytkownika — NIE zatrzymuj się na pierwszej
+    znalezionej nowelizacji; między t.j. a dziś mogło wejść w życie
+    kilka kolejnych zmian tego samego przepisu). To NIE jest to samo
+    zapytanie co krok 1 — krok 1 szuka t.j., krok 4A szuka WSZYSTKICH
+    nowelizacji OGŁOSZONYCH PO nim, w całym przedziale od daty t.j. do
+    dziś. Zapisz PEŁNĄ LISTĘ chronologiczną wyników zawsze, także gdy
+    pusta (pole „Sprawdzono po t.j." w Karcie Przepisu niżej). Gdy
+    nowelizacji więcej niż jedna — ustal, które brzmienie obowiązuje
+    NA DATĘ ANALIZY (kolejność wejścia w życie, ewentualne vacatio
+    legis), nie zakładaj że najnowsza znaleziona = aktualna. Obowiązkowe
+    dla przepisów NIOSĄCYCH ROZSTRZYGNIĘCIE, opcjonalne dla przywołań
+    kontekstowych.
 5. Sprawdź czy przepis nie został uchylony lub zmieniony
 6. Zapisz DOSŁOWNĄ treść z oficjalnego źródła
 ```
@@ -144,8 +179,10 @@ KARTA PRZEPISU
 Akt prawny:         [pełna nazwa + rok + Dz.U.]
 Numer przepisu:     [art./§/ust./pkt]
 Tekst jednolity z:  [data Dz.U. lub data publikacji ISAP]
-Ostatnia zmiana:    [data i numer nowelizacji]
-Historia zmian:     [liczba nowelizacji + daty kluczowych]
+Nowelizacje w t.j.: [lista ustaw zmieniających już uwzględnionych w t.j.,
+                     z treści obwieszczenia]
+Nowelizacje po t.j.:[TAK: pełna lista chronologiczna / brak — patrz KROK
+                     2C — / NIE sprawdzono]
 Status:             Obowiązuje / Zmieniony / Uchylony
 Data analizy:       [data stanu prawnego]
 Źródło URL:         [link ISAP lub inne źródło]
@@ -420,7 +457,7 @@ Skutek niespełnienia:      [konsekwencje procesowe]
 Wyodrębnione do osobnego pliku referencyjnego (refaktoryzacja 2026-06-14 — eliminacja monolitu 794 linii):
 
 ```
-view /mnt/skills/user/analizator-przepisow-v2/references/MOD-ORZECZ-POWIAZANIA-HISTORIA.md
+view analizator-przepisow-v2/references/MOD-ORZECZ-POWIAZANIA-HISTORIA.md
 ```
 
 Zawiera:
@@ -467,14 +504,14 @@ Wczytaj ten plik na etapie 5–9 i 13 sekwencji obowiązkowej (patrz INSTRUKCJE 
 7. Moduł 7B → MOD-ZBIEZNOSC (jeśli przepis odsyła lub ścieżka B)
 8. Moduł 7C → MOD-HISTORIA-ZMIAN (AUTOMATYCZNIE — w tle, wynik w zakładce widgetu)
    8a. Jeśli wykryto vacatio legis lub nowelizację wieloetapową → MOD-VACATIO-LEGIS
-       `view /mnt/skills/user/analizator-przepisow-v2/references/MOD-VACATIO-LEGIS.md`
+       `view analizator-przepisow-v2/references/MOD-VACATIO-LEGIS.md`
 9. Moduł 7D → MOD-KONTEKST-PRAKTYCZNY (gdy laik lub żądanie wyjaśnienia)
 10. Moduł 4 → raport końcowy
 11. Moduł 5 → zbieg norm (jeśli wiele przepisów)
 12. Moduł 6 → tryb specjalny (karny / admin / proceduralny)
 13. Moduł 8 → Widget wyników HTML z 7 zakładkami (zawsze po analizie)
     ⛔ MOD-WIDGET-IO (OBOWIĄZKOWE przed show_widget):
-    view /mnt/skills/user/shared/MOD-WIDGET-IO.md
+    view shared/MOD-WIDGET-IO.md
     → wbuduj pasek IO w nagłówek widgetu
     → IO_SKILL_ID='analizator-przepisow-v2', IO_CASE_ID=sygnatura_lub_przepis
     → matryca: Export JSON ✅ MD ✅ | Import JSON ✅
@@ -537,13 +574,13 @@ Zapytanie: "Czy art. 415 KC stosuje się do mojej sprawy? Stan na 1.01.2020."
 Jeżeli wynik tego skilla ma służyć do pisma, strategii procesowej, oceny ryzyka albo decyzji terminowej, wczytaj właściwe moduły shared:
 
 ```text
-view /mnt/skills/user/shared/TRYBY-PROCESOWE.md
-view /mnt/skills/user/shared/RISK-ASSESSMENT.md
-view /mnt/skills/user/shared/TERM-CALC.md
-view /mnt/skills/user/shared/DOWODY-METODOLOGIA.md
-view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md
-view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md
-view /mnt/skills/user/shared/QUALITY-CHECK.md
+view shared/TRYBY-PROCESOWE.md
+view shared/RISK-ASSESSMENT.md
+view shared/TERM-CALC.md
+view shared/DOWODY-METODOLOGIA.md
+view shared/PREKLUZJA-DOWODOWA.md
+view shared/STRATEGIA-PROCESOWA.md
+view shared/QUALITY-CHECK.md
 ```
 
 Nie dubluj logiki shared w lokalnych plikach. Lokalne moduły mogą tylko doprecyzować analizę dziedzinową.
@@ -552,14 +589,14 @@ Nie dubluj logiki shared w lokalnych plikach. Lokalne moduły mogą tylko doprec
 
 ## CHANGELOG
 
-⛔ **Historia zmian tego skilla NIE mieszka w tym pliku.** Pełny changelog:
+⛔ **Historia zmian tego skilla NIE mieszka w tym pliku** (ZASADA 15,
+`audyt-systemu-v4/SKILL.md`). Jedyna lokalizacja kanoniczna:
 
 ```
-view /mnt/skills/user/analizator-przepisow-v2/references/CHANGELOG.md
+view analizator-przepisow-v2/references/CHANGELOG.md
 ```
 
-Skrót bieżącej wersji — pole `changelog:` we frontmatterze powyżej.
-Standard systemowy (2026-08-20z4): `references/CHANGELOG.md` jest jedyną
-lokalizacją kanoniczną historii; zakaz odtwarzania sekcji changelogu w korpusie
-SKILL.md i zakaz trzymania pełnej listy wpisów w YAML.
-
+*(Wpisy 2.4 … 2.1 przeniesione stąd 1:1 do `references/CHANGELOG.md`
+dnia 2026-08-24, flaga F-126 — usunięcie stanu przejściowego, w którym
+historia mieszkała w DWÓCH miejscach. Treść nie została przeredagowana
+ani odtworzona z pamięci; przeniesiony został istniejący tekst.)*

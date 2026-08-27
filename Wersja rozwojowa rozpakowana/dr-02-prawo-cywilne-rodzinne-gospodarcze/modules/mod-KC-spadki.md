@@ -2,7 +2,7 @@
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Wersja:** 2.0 | **Data weryfikacji online:** 2026-06-05, rozbudowane 2026-07-19
-**Źródło weryfikacji:** KC Księga IV (art. 922–1088) — Dz.U. 2025 poz. 1071 t.j. ze zm.
+**Źródło weryfikacji:** KC Księga IV (art. 922–1088) — Dz.U. 2026 poz. 795 t.j. ze zm.
 **ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
 ---
@@ -210,8 +210,8 @@ nieobecne
   że SPADKODAWCA w chwili ŚMIERCI miał NAD nimi władztwo
 
 Potwierdzone w 7+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
-tekst art. 1029 (lexlege.pl, arslege.pl [aktualny t.j. Dz.U.2025.0.
-1071], przepisy.gofin.pl, standardyprawa.pl [×2, Z cytowanym
+tekst art. 1029 (lexlege.pl, arslege.pl [aktualny t.j. Dz.U. 2026 poz. 795],
+przepisy.gofin.pl, standardyprawa.pl [×2, Z cytowanym
 orzecznictwem]), ORAZ bezpośrednio uchwała SN III CZP 12/19,
 kancelaria-praga.pl [maj 2026, NAJŚWIEŻSZE], kancelariaszkil.pl.
 ```

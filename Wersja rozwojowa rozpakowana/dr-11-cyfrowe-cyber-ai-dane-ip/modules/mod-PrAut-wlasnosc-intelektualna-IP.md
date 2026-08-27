@@ -61,7 +61,7 @@ wzory przemysłowe, patenty, licencje oprogramowania, DMCA, prawo do wizerunku.
 | Pozew o naruszenie praw autorskich | `pisma-procesowe-v3` |
 | Analiza umowy licencyjnej / przeniesienia praw | `analizator-umow-v1` |
 | Orzecznictwo SN / TSUE w zakresie IP | `orzeczenia-sadowe-v2` |
-| Naruszenie wizerunku + RODO równocześnie | `mod-P-rodo.md` |
+| Naruszenie wizerunku + RODO równocześnie | `dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-RODO-GDPR-2016-679.md` |
 | Analiza szans procesowych | `analiza-sadowa-v6` |
 
 ---

@@ -1,0 +1,13 @@
+interface:
+  display_name: dr 12 sadownictwo prokuratura zawody prawnicze
+  short_description: 'Sądownictwo, prokuratura i zawody prawnicze: ustrój sądów, prokuratura,
+    adwokaci, radcowie, notariusze, komornicy, koszty i odpowiedzialność zawodowa.'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

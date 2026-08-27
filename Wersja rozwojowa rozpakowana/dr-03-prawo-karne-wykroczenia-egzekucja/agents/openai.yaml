@@ -1,0 +1,13 @@
+interface:
+  display_name: dr 03 prawo karne wykroczenia egzekucja
+  short_description: 'Prawo karne, wykroczenia i egzekucja: KK, KPK, KKW, KW, KPW,
+    KKS, kwalifikacja karnomaterialna, tryby ścigania i wykonanie orzeczeń.'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

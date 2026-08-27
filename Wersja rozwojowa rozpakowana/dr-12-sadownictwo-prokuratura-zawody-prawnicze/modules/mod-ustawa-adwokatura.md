@@ -199,6 +199,15 @@ Przed końcową odpowiedzią sprawdź:
 | postępowanie dyscyplinarne | DR-12/`mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow` |
 | obrona karna | DR-03/`mod-KK-kodeks-karny` (art. 178 KPK) |
 
+## Zmiana od 1.10.2026 — tajemnica a MDR
+
+Art. 2 ustawy z 29.05.2026 r. (Dz.U. 2026 poz. 846) nadaje art. 6 ust. 4
+Prawa o adwokaturze brzmienie, według którego tajemnica zawodowa nie
+obejmuje informacji udostępnianych na podstawie przepisów AML — w zakresie
+określonym tymi przepisami. Nowelizacja usuwa dotychczasowe równoległe
+odesłanie do rozdziału 11a Ordynacji podatkowej; zmiana wchodzi w życie
+1.10.2026 r. Nie interpretuj jej jako generalnego uchylenia tajemnicy.
+
 ## Weryfikacja online
 
 ```

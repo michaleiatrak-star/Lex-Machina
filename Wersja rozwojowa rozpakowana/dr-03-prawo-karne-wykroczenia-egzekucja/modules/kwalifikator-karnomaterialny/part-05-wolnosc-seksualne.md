@@ -18,18 +18,40 @@ START: Jaki był charakter działania sprawcy?
 ├─ GROŹBA (zapowiedź zła)
 │   Czy groźba wzbudziła uzasadnioną obawę spełnienia?
 │   ├─ TAK → ART. 190 §1 KK — GROŹBA KARALNA
-│   │   Kara: do 2 lat PW
-│   │   ⚠️ Tryb: prywatnoskargowy (po nowelizacji 2023 — sprawdź aktualny stan)
-│   │   Weryfikuj aktualny tryb ścigania: isap.sejm.gov.pl
+│   │   Kara: POZBAWIENIE WOLNOŚCI DO LAT 3 — sankcja JEDNORODNA
+│   │   ⛔ NIE „do 2 lat" i NIE „grzywna / ograniczenie wolności / PW".
+│   │      Nowelizacja obowiązująca od 1.10.2023 podniosła górną granicę
+│   │      z 2 na 3 lata I usunęła grzywnę oraz ograniczenie wolności
+│   │      z sankcji. Obie zmiany naraz — poprawienie samej liczby lat
+│   │      zostawia drugi błąd.
+│   │   ⛔ TRYB: WNIOSKOWY — ściganie na wniosek pokrzywdzonego (art. 190 §2 KK).
+│   │      NIE prywatnoskargowy. To rozróżnienie zmienia całą ścieżkę:
+│   │      tryb wnioskowy = postępowanie przygotowawcze prowadzi prokuratura
+│   │      po złożeniu wniosku, a po jego złożeniu sprawa toczy się z urzędu;
+│   │      tryb prywatnoskargowy = akt oskarżenia wnosi sam pokrzywdzony
+│   │      (art. 485-499 KPK). Pomyłka prowadzi do skierowania klienta na
+│   │      niewłaściwą drogę i utraty terminów.
+│   │   ✅ [VER: arslege.pl/grozba-karalna (Dz.U.2025.0.383 t.j.) +
+│   │      lexlege.pl/kk/art-190, odczyt 2026-08-25]
 │   └─ NIE → brak przestępstwa (subiektywne odczucie nie wystarczy)
 │
 ├─ POWTARZALNE NĘKANIE
 │   Czy wywołało poczucie zagrożenia lub istotnie naruszyło prywatność?
 │   └─ TAK → ART. 190a §1 KK — STALKING
-│       Kara: do 8 lat PW (po nowelizacji 2023 r.)
-│       ⚠️ Tryb: z urzędu (po nowelizacji 2023 r.) — weryfikuj isap.sejm.gov.pl
+│       Kara: OD 6 MIESIĘCY DO LAT 8 pozbawienia wolności
+│       ⛔ NIE podawaj samego „do 8 lat" — pominięcie DOLNEJ granicy
+│          (6 miesięcy) zmienia ocenę procesową: przy dolnej granicy
+│          6 m-cy nie wchodzi w grę część instytucji zarezerwowanych dla
+│          czynów zagrożonych wyłącznie karą do roku.
+│       §3 (następstwo — targnięcie się pokrzywdzonego na własne życie):
+│          OD LAT 2 DO 15 pozbawienia wolności
+│       ⛔ TRYB: §1 i §2 — na WNIOSEK pokrzywdzonego (art. 190a §4 KK).
+│          Z URZĘDU ścigany jest WYŁĄCZNIE typ kwalifikowany z §3.
+│          Zapis „tryb: z urzędu" dla §1 jest błędny.
+│       ✅ [VER: lexlege.pl/kk/art-190a + arslege.pl/stalking +
+│          standardyprawa.pl/akt/1/art/307, odczyt 2026-08-25]
 │       OBRONA: brak powtarzalności / brak skutku / uzasadniony cel
-│       Plik referencyjny: /mnt/skills/user/shared/STALKING-NEKANIE.md
+│       Plik referencyjny: shared/STALKING-NEKANIE.md
 │
 ├─ ZMUSZANIE do działania / zaniechania / znoszenia
 │   └─ → ART. 191 §1 KK — ZMUSZANIE

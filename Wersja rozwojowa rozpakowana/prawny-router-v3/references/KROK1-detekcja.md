@@ -2,7 +2,7 @@
 
 > Plik wydzielony z prawny-router-v3/SKILL.md (R1).
 > Wczytaj po KROK 0A, przed KROK 2 (klasyfikacja [1]–[10]).
-> Wywołanie: `view /mnt/skills/user/prawny-router-v3/references/KROK1-detekcja.md`
+> Wywołanie: `view prawny-router-v3/references/KROK1-detekcja.md`
 
 ---
 
@@ -115,7 +115,7 @@ KROK K4 → pisma-procesowe-v3 lub pisma-proste-v2
 > ⛔ BEZWZGLĘDNY ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 > Żaden artykuł, numer Dz.U., stawka, termin ustawowy, kara ani sygnatura orzeczenia
 > nie może być podany bez weryfikacji online w tym samym kroku. Dotyczy wszystkich dziedzin.
-> Procedura szczegółowa: `view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
+> Procedura szczegółowa: `view shared/PRAWO-HARDGATE.md`
 >
 > ⛔ HARD GATE TRWAŁY — OBOWIĄZUJE PRZEZ CAŁĄ ROZMOWĘ
 > Zakaz nie wygasa po żadnej liczbie wiadomości. Nie ma znaczenia, czy przepis był
@@ -130,31 +130,33 @@ V1 — Zidentyfikuj ustawy (KK, KPC, KW, KC, KP, KPA, ustawa szczególna)
 
 V2 — Klasyfikacja dziedzinowa i wczytanie skilla (obowiązkowe)
   KROK PODSTAWOWY (zawsze):
-  view /mnt/skills/user/prawo-polskie-v2/SKILL.md
+  view prawo-polskie-v2/SKILL.md
   → ROUTING-MAP wskaże właściwy DR-skill (DR-01…DR-16) i moduł aktu (lazy loading).
 
   SKRÓTY ZWERYFIKOWANE — dla 16 dziedzin istnieją oznaczone moduły "wejściowe"
   (tag [XX] w nagłówku). Jeśli sprawa jednoznacznie dotyczy jednej z nich, można
   wczytać bezpośrednio (równolegle z krokiem podstawowym, nie zamiast niego):
 
-  Karne / kwalifikacja:        view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md
-                               → mod-N decyduje (sekcja DECYZJA O KWALIFIKATORZE)
-                                 czy potrzebny kwalifikator-karnomaterialny.md
-  Wykroczenie:                 view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KW-kodeks-wykroczen.md
-  Stalking / nękanie:          view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art190a-stalking.md
-  Przemoc domowa:              view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art207-przemoc-domowa.md
-  Cyberprzestępczość:          view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art267-269c-cyberprzestepstwa.md
-  Nieruchomości / najem:       view /mnt/skills/user/dr-09-budownictwo-srodowisko-energia-transport/modules/mod-UGN-gospodarka-nieruchomosciami.md
-  IP / autorskie / wizerunek:  view /mnt/skills/user/dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-PrAut-wlasnosc-intelektualna-IP.md
-  RODO:                        view /mnt/skills/user/dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-RODO-GDPR-2016-679.md
-  AI Act / prawo AI:           view /mnt/skills/user/dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-AI-Act-framework.md
-  UOKiK/URE/UKE/KNF (regulacyjne): view /mnt/skills/user/dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF.md
-  UODO (postępowanie):         view /mnt/skills/user/dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-UODO-postepowanie-ochrona-danych.md
-  Prawo farmaceutyczne:        view /mnt/skills/user/dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-PrFarm-prawo-farmaceutyczne.md
-  Błąd medyczny / pacjent:     view /mnt/skills/user/dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-prawa-pacjenta-framework.md
-  Budowlane / samowola:        view /mnt/skills/user/dr-09-budownictwo-srodowisko-energia-transport/modules/mod-PrBud-prawo-budowlane.md
-  Środowisko / OOŚ:            view /mnt/skills/user/dr-09-budownictwo-srodowisko-energia-transport/modules/mod-POS-prawo-ochrony-srodowiska.md
-  Działalność regulowana:      view /mnt/skills/user/dr-08-samorzad-terytorialny-prawo-lokalne/modules/mod-kontrola-administracji-inspekcje.md
+  Karne / kwalifikacja:        view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md
+                               → `mod-KK-KPK-framework-karne.md` decyduje (sekcja DECYZJA O KWALIFIKATORZE)
+                                 czy potrzebny `mod-KK-kwalifikator-karnomaterialny.md`
+  Wykroczenie:                 view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KW-kodeks-wykroczen.md
+  Stalking / nękanie:          view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art190a-stalking.md
+  Przemoc domowa:              view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art207-przemoc-domowa.md
+  Cyberprzestępczość:          view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art267-269c-cyberprzestepstwa.md
+  Najem / lokatorzy prywatni:    view dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-ochrona-praw-lokatorow-najem-eksmisja.md
+  Zakup / księga wieczysta:     view dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KW-ksiega-wieczysta-zakup-nieruchomosci.md
+  UGN / mienie publiczne:       view dr-09-budownictwo-srodowisko-energia-transport/modules/mod-UGN-gospodarka-nieruchomosciami.md
+  IP / autorskie / wizerunek:  view dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-PrAut-wlasnosc-intelektualna-IP.md
+  RODO:                        view dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-RODO-GDPR-2016-679.md
+  AI Act / prawo AI:           view dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-AI-Act-framework.md
+  UOKiK/URE/UKE/KNF (regulacyjne): view dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF.md
+  UODO (postępowanie):         view dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-UODO-postepowanie-ochrona-danych.md
+  Prawo farmaceutyczne:        view dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-PrFarm-prawo-farmaceutyczne.md
+  Błąd medyczny / pacjent:     view dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-prawa-pacjenta-framework.md
+  Budowlane / samowola:        view dr-09-budownictwo-srodowisko-energia-transport/modules/mod-PrBud-prawo-budowlane.md
+  Środowisko / OOŚ:            view dr-09-budownictwo-srodowisko-energia-transport/modules/mod-POS-prawo-ochrony-srodowiska.md
+  Działalność regulowana:      view dr-08-samorzad-terytorialny-prawo-lokalne/modules/mod-kontrola-administracji-inspekcje.md
 
   POZOSTAŁE DZIEDZINY (brak jeszcze oznaczonego modułu wejściowego — wyłącznie
   przez krok podstawowy prawo-polskie-v2 → ROUTING-MAP → DR-skill):
@@ -180,13 +182,13 @@ V5 — Dopiero po V1+V2+V3+V4 → KROK 2
 
 | Sytuacja | Wczytaj |
 |---|---|
-| Nieznana kwalifikacja czynu | `dr-03/modules/mod-KK-KPK-framework-karne.md` (mod-N) → decyzja o kwalifikatorze |
-| Kradzież / rozbój / zniszczenie | mod-N → kwalifikator jeśli mod-N wskaże TAK |
-| Przestępstwo przeciwko osobie | mod-N → kwalifikator jeśli mod-N wskaże TAK |
-| Wykroczenie / mandat | `wykroczenia.md` (ten katalog references/) |
-| Granica wykroczenie/przestępstwo | mod-N → kwalifikator TAK + `wykroczenia.md` |
-| Zatrzymanie / prawa podejrzanego | `dr-03/modules/mod-KK-KPK-framework-karne.md` (mod-N) |
-| Sprawa w toku / obrona | mod-N + skill `analiza-sadowa-v6` |
+| Nieznana kwalifikacja czynu | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` → decyzja o `mod-KK-kwalifikator-karnomaterialny.md` |
+| Kradzież / rozbój / zniszczenie | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` → `mod-KK-kwalifikator-karnomaterialny.md`, jeśli framework wskaże TAK |
+| Przestępstwo przeciwko osobie | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` → `mod-KK-kwalifikator-karnomaterialny.md`, jeśli framework wskaże TAK |
+| Wykroczenie / mandat | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KW-kodeks-wykroczen.md` + w razie potrzeby `mod-KW-KPW-framework-szczegolowy.md` |
+| Granica wykroczenie/przestępstwo | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` → kwalifikator + `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KW-kodeks-wykroczen.md` |
+| Zatrzymanie / prawa podejrzanego | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` |
+| Sprawa w toku / obrona | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` + skill `analiza-sadowa-v6` |
 
 ---
 
@@ -196,23 +198,23 @@ Po detekcji trybu i przed przekazaniem sprawy do skilla dziedzinowego — wczyta
 
 ```text
 Zawsze dla pism / strategii / akt / terminów / ryzyka / dowodów:
-  view /mnt/skills/user/shared/KANCELARIA-WORKFLOW.md
-  view /mnt/skills/user/shared/TRYBY-PROCESOWE.md
-  view /mnt/skills/user/shared/RISK-ASSESSMENT.md
+  view shared/KANCELARIA-WORKFLOW.md
+  view shared/TRYBY-PROCESOWE.md
+  view shared/RISK-ASSESSMENT.md
 
 Gdy pismo lub ocena gotowości pisma:
-  view /mnt/skills/user/shared/FORMAL-CHECK.md
-  view /mnt/skills/user/shared/BRAKI-FORMALNE.md
-  view /mnt/skills/user/shared/WARUNKI-SKUTECZNOSCI.md
-  view /mnt/skills/user/shared/QUALITY-CHECK.md
+  view shared/FORMAL-CHECK.md
+  view shared/BRAKI-FORMALNE.md
+  view shared/WARUNKI-SKUTECZNOSCI.md
+  view shared/QUALITY-CHECK.md
 
 Gdy termin / dowód / roszczenie / orzecznictwo / "co dalej":
-  view /mnt/skills/user/shared/TERM-CALC.md
-  view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md
-  view /mnt/skills/user/shared/DOWODY-METODOLOGIA.md
-  view /mnt/skills/user/shared/ROSZCZENIA.md
-  view /mnt/skills/user/shared/ORZECZENIA-HIERARCHIA.md
-  view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md
+  view shared/TERM-CALC.md
+  view shared/PREKLUZJA-DOWODOWA.md
+  view shared/DOWODY-METODOLOGIA.md
+  view shared/ROSZCZENIA.md
+  view shared/ORZECZENIA-HIERARCHIA.md
+  view shared/STRATEGIA-PROCESOWA.md
 ```
 
 Nie twórz lokalnych kopii tych modułów w routerze — router tylko orkiestruje.
@@ -224,14 +226,14 @@ Nie twórz lokalnych kopii tych modułów w routerze — router tylko orkiestruj
 Przed użyciem każdego modułu prawnego wczytaj:
 
 ```text
-view /mnt/skills/user/shared/ISAP-AUDIT-PROTOCOL.md
-view /mnt/skills/user/shared/ISAP-METRYKI-AKTOW.md
+view shared/ISAP-AUDIT-PROTOCOL.md
+view shared/ISAP-METRYKI-AKTOW.md
 ```
 
 Nowe moduły postępowań publicznoprawnych:
 
 ```text
-view /mnt/skills/user/prawo-polskie-v2/ROUTING-MAP.md
+view prawo-polskie-v2/ROUTING-MAP.md
 ```
 
 ## STANDARD KOMPLETNOŚCI PRAWA POLSKIEGO

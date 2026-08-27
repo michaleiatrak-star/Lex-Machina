@@ -1,55 +1,33 @@
-# CHANGELOG — DR-01 Ustrój konstytucyjny i źródła prawa
+# CHANGELOG — dr-01-ustroj-konstytucyjny-i-zrodla-prawa
 
-> Pełna historia zmian tego skilla. **Jedyna lokalizacja kanoniczna** — w SKILL.md
-> historii nie ma; jest tam wyłącznie krótki skrót w polu `changelog:` frontmatteru.
-> Standard ujednolicony 2026-08-20z4 dla całego systemu: plik `references/CHANGELOG.md`,
-> nigdy sekcja w korpusie SKILL.md ani pełna lista w YAML.
-> Wczytuj TYLKO gdy potrzebujesz historii konkretnej naprawy — przy audycie, przy
-> pytaniu „dlaczego to tak działa", przy regresji. W normalnym toku pracy zbędny.
+- 3.8 (2026-08-26): zsynchronizowano metryki tekstów jednolitych w mapie aktów
+  oraz modułach ZTP, specustaw, partii politycznych i referendum.
 
----
+> Lokalizacja kanoniczna historii wersji (ZASADA 15, `audyt-systemu-v4/SKILL.md`).
+> Plik założony 2026-08-24 w ramach flagi **F-126** — do tej daty jedyny wpis
+> historii tego skilla mieszkał w sekcji `## CHANGELOG` w korpusie `SKILL.md`,
+> co T12 zgłaszał jako ⛔.
 
-## 3.7 (2026-08-20z4) — ujednolicenie standardu: historia zmian wyłącznie w tym pliku
+- 3.7 (2026-08-24, sesja audytowa audyt-systemu-v4, flagi F-115 P3 + F-126):
+  (a) podłączenie self-checku ANTY-FASADA jako WYWOŁANIA modułu kanonicznego
+  `shared/SELF-CHECK-ANTY-FASADA.md` — domknięcie zakresu P3 flagi F-115
+  (16 skilli DR); (b) historia wersji przeniesiona 1:1 z korpusu SKILL.md do
+  tego pliku. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`,
+  wpis AUDYT-2026-08-24.
 
-Historia wyniesiona z korpusu SKILL.md do nowo utworzonego `references/CHANGELOG.md`.
-Wpisy 3.5 i 3.6 pozostają oznaczone jako LUKA JAWNA — brak śladu w dzienniku audytu.
-
-**Standard systemowy wprowadzony tego dnia:** pełna historia zmian każdego skilla
-mieszka w `references/CHANGELOG.md` — nigdy w sekcji `## CHANGELOG` korpusu SKILL.md
-i nigdy jako pełna lista wpisów w polu `changelog:` frontmatteru. W SKILL.md zostaje
-wyłącznie kilkulinijkowy skrót bieżącej wersji z odesłaniem do tego pliku.
-
-**Dlaczego to nie jest kosmetyka:** rozproszenie historii między trzy lokalizacje było
-BEZPOŚREDNIĄ przyczyną fałszywych wyników testu T12 w sesji 2026-08-20z3 — test szukał
-wpisów w `references/`, nie znajdował ich (bo leżały w SKILL.md) i raportował luki,
-których nie było. Jedna lokalizacja kanoniczna usuwa całą tę klasę błędu.
-Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis `AUDYT-2026-08-20z4`.
+⛔ **LUKA HISTORII 3.4 – 3.6 — ŚWIADOMIE NIEODTWORZONA.** Numery 3.4, 3.5 i 3.6
+nie mają wpisu ani tutaj, ani w korpusie SKILL.md, ani w polu `changelog:` YAML.
+Zgodnie z zakazem z wiersza flagi F-126 (precedens F-102: groziło dopisanie
+pięciu zmyślonych wpisów) **nie zostały odtworzone z pamięci**. Ślad tych zmian —
+o ile istnieje — należy szukać w `audyt-systemu-v4/references/AUDIT-JOURNAL.md`
+po dacie sesji, nie w tym pliku.
 
 ---
 
-## HISTORIA PRZENIESIONA Z SKILL.md (2026-08-20z4, ujednolicenie standardu)
+## Wpisy przeniesione z korpusu SKILL.md (F-126, 2026-08-24)
 
-> Poniższa treść pochodzi z sekcji `## CHANGELOG` w korpusie SKILL.md. Przeniesiona **1:1, bez zmiany ani jednego
-> zdania**. Powód: historia zmian ma mieszkać w jednym miejscu — w tym pliku —
-> a nie być rozproszona między korpusem SKILL.md, frontmatterem i `references/`.
-> Rozproszenie było źródłem rozjazdów wykrytych flagami F-101 i F-102: test T12
-> szukał historii w `references/` i raportował fałszywe luki tam, gdzie wpisy
-> istniały, tylko w SKILL.md.
-
-> ⛔ **UZUPEŁNIENIE 2026-08-20z3 (F-102, test T12).** `version` wynosił 3.6
-> przy ostatnim wpisie 3.3. Poniżej: 3.4 odtworzone z AUDIT-JOURNAL,
-> 3.5 i 3.6 — LUKA JAWNA, w dzienniku brak jakiegokolwiek śladu podbicia.
-
-> **3.6 i 3.5 — ⛔ LUKA JAWNA (nieodtwarzalna).** Ani `AUDIT-JOURNAL.md`, ani
-> żaden plik systemu nie zawiera wzmianki o tych dwóch podbiciach. Historii
-> nie da się odtworzyć; odnotowane wprost, żeby rejestr nie wyglądał na
-> kompletny. Jeśli istnieją kopie pakietu sprzed sierpnia 2026 — to jedyne
-> możliwe źródło.
-
-> **3.4 (2026-07-27z6, FAZA 3E)** — trzy moduły dr-01 sprawdzone pod kątem
-> aktualności treści (deklaracja z poprzedniej sesji dotrzymana), dziedzina
-> dr-01 oznaczona jako UKOŃCZONA w przeglądzie 3E. Źródło: AUDIT-JOURNAL,
-> wpis AUDYT-2026-07-27z6.
+> Tekst poniżej przeniesiony 1:1 z sekcji `## CHANGELOG` w `SKILL.md`.
+> Nic nie przeredagowano ani nie odtworzono z pamięci.
 
 > **3.3 (2026-07-25, CRIT-TREŚĆ — audyt adresatów zażalenia w sprawach
 > wyłączenia sędziego/neosędziów):** `modules/mod-USP-ustroj-sadow-

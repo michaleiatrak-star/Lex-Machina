@@ -12,7 +12,7 @@ o hałas).
 > `mod-KW-KPW-framework-szczegolowy.md`. Ten moduł dostarcza WYŁĄCZNIE
 > materialnoprawną treść Rozdziału VIII KW.
 
-**Zasada:** `view /mnt/skills/user/shared/PRAWO-HARDGATE.md` przed każdym
+**Zasada:** `view shared/PRAWO-HARDGATE.md` przed każdym
 przepisem z tego modułu.
 
 ---
@@ -235,7 +235,7 @@ START: Czy zachowanie dotyczy hałasu/krzyku/alarmu/zgorszenia w miejscu
 ## 9. LITERATURA I ŹRÓDŁA (zweryfikowane online 2026-07-17)
 
 - Tekst jednolity KW — ISAP/lexlege.pl/arslege.pl (art. 49, 49a, 50, 51,
-  52 potwierdzone z aktualną treścią, Dz.U.2025.734 t.j.).
+  52 potwierdzone z aktualną treścią, Dz.U. 2025 poz. 734 t.j.).
 - pwrz.pl — komentarz internetowy do art. 51 (definicja charakteru
   chuligańskiego i jego konsekwencji).
 - Odpowiedź na interpelację poselską (orka2.sejm.gov.pl) — oficjalne

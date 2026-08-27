@@ -10,7 +10,7 @@
 > **v1.17 — przed finalizacją strategii/wysłaniem kontrpropozycji:** uruchom
 > systematyczną ocenę adwersarialną zamiast polegać wyłącznie na intuicji co
 > do słabości własnego projektu —
-> `view /mnt/skills/user/analizator-umow-v1/workflows/ocena-drugiej-strony.md`
+> `view analizator-umow-v1/workflows/ocena-drugiej-strony.md`
 > (6 kategorii ataków: niekorzystne potwierdzenia, niejednoznaczności, luki
 > dowodowe, sprzeczności wewnętrzne, błędy obliczeniowe/terminowe, mechanizmy
 > wyjścia). To jest finalna kontrola przed wyjściem dokumentu poza Twoją stronę.

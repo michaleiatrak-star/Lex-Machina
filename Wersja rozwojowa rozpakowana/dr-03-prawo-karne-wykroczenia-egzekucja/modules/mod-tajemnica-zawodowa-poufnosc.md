@@ -95,24 +95,24 @@ ODPOWIEDZIALNOŚĆ PODMIOTU ZBIOROWEGO: jeśli sprawcą był ktoś działający
 | Kategoria tajemnicy | Podstawa prawna | Gdzie w systemie | Sankcja karna |
 |---|---|---|---|
 | Tajemnica zawodowa/służbowa (ogólna, każdy zawód/funkcja) | art. 266 KK | **ten moduł** | grzywna/ogr. wolności/PW do 2 lat (§1) lub 3 lat (§2, funkcjonariusz) |
-| Tajemnica przedsiębiorstwa (know-how, dane handlowe) | art. 23 UZNK + ustawa o ochronie tajemnicy przedsiębiorstwa | analizator-umow-v1/zakaz-konkurencji.md; dr-11/mod-ustawa-prawo-wlasnosci-przemyslowej.md | grzywna/ogr. wolności/PW do 2 lat, wymaga "poważnej szkody" (§1) lub nie (§2) |
-| Tajemnica adwokacka | ustawa Prawo o adwokaturze | dr-12/mod-ustawa-adwokatura.md | brak odrębnej sankcji karnej — naruszenie = odpowiedzialność dyscyplinarna + możliwy zbieg z art. 266 KK |
-| Tajemnica radcy prawnego | ustawa o radcach prawnych | dr-12/mod-ustawa-radcowie-prawni.md | jw. |
-| Tajemnica lekarska | ustawa o zawodach lekarza i lekarza dentysty | dr-10/mod-ustawa-zawod-lekarza.md | jw. + możliwa odpowiedzialność zawodowa przed OSL/NSL |
+| Tajemnica przedsiębiorstwa (know-how, dane handlowe) | art. 23 UZNK + ustawa o ochronie tajemnicy przedsiębiorstwa | analizator-umow-v1/references/zakaz-konkurencji.md; dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-ustawa-prawo-wlasnosci-przemyslowej.md | grzywna/ogr. wolności/PW do 2 lat, wymaga "poważnej szkody" (§1) lub nie (§2) |
+| Tajemnica adwokacka | ustawa Prawo o adwokaturze | dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-ustawa-adwokatura.md | brak odrębnej sankcji karnej — naruszenie = odpowiedzialność dyscyplinarna + możliwy zbieg z art. 266 KK |
+| Tajemnica radcy prawnego | ustawa o radcach prawnych | dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-ustawa-radcowie-prawni.md | jw. |
+| Tajemnica lekarska | ustawa o zawodach lekarza i lekarza dentysty | dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-zawod-lekarza.md | jw. + możliwa odpowiedzialność zawodowa przed OSL/NSL |
 | Tajemnica bankowa | Prawo bankowe | dr-06 (sprawdź istniejący moduł) | odrębna sankcja w Prawie bankowym + możliwy zbieg z art. 266 KK |
-| Tajemnica biegłego rewidenta | ustawa o biegłych rewidentach | dr-06/mod-ustawa-biegli-rewidenci-zawod.md | jw. |
-| Tajemnica skarbowa/podatkowa | Ordynacja podatkowa | dr-06/mod-OP-ordynacja-podatkowa.md | odrębna sankcja w Ordynacji + zbieg z art. 266 §2 KK (funkcjonariusze) |
+| Tajemnica biegłego rewidenta | ustawa o biegłych rewidentach | dr-06-podatki-finanse-publiczne-aml/modules/mod-ustawa-biegli-rewidenci-zawod.md | jw. |
+| Tajemnica skarbowa/podatkowa | Ordynacja podatkowa | dr-06-podatki-finanse-publiczne-aml/modules/mod-OP-ordynacja-podatkowa.md | odrębna sankcja w Ordynacji + zbieg z art. 266 §2 KK (funkcjonariusze) |
 | Informacje niejawne (tajne/ściśle tajne) | ustawa o ochronie informacji niejawnych | dr-13 | odrębny reżim karny, SUROWSZY niż art. 266 §2 — NIE korzystaj z art. 266 dla tych klauzul |
-| Tajemnica przedsiębiorcy regulowanego (UOKiK/URE/UKE/KNF) | ustawy sektorowe | dr-12/mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF.md | sankcje administracyjne + możliwy zbieg z art. 266 KK |
+| Tajemnica przedsiębiorcy regulowanego (UOKiK/URE/UKE/KNF) | ustawy sektorowe | dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF.md | sankcje administracyjne + możliwy zbieg z art. 266 KK |
 | Dane osobowe (RODO) | RODO + ustawa o ochronie danych osobowych | dr-11 | odrębny reżim administracyjny (kary UODO) — NIE jest tożsame z art. 266 KK, ale może współwystępować przy tym samym czynie |
-| Tajemnica korespondencji / podsłuch | art. 267 KK | dr-03/mod-KK-kwalifikator-karnomaterialny.md BLOK G | patrz też planowana Część 5/6 (podsłuch/nagrania) tej sesji |
+| Tajemnica korespondencji / podsłuch | art. 267 KK | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md BLOK G | patrz też planowana Część 5/6 (podsłuch/nagrania) tej sesji |
 
 ## Powiązania z innymi modułami
 
 | Zagadnienie | Moduł |
 |---|---|
-| Hacking / naruszenie tajemnicy korespondencji (art. 267-269c KK) | dr-03/mod-KK-kwalifikator-karnomaterialny.md BLOK G |
-| Odpowiedzialność karna spółek | dr-03/mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych.md |
+| Hacking / naruszenie tajemnicy korespondencji (art. 267-269c KK) | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md BLOK G |
+| Odpowiedzialność karna spółek | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych.md |
 | Zakaz konkurencji, klauzule poufności w umowach | analizator-umow-v1/references/zakaz-konkurencji.md |
 | Informacje niejawne (wyższe klauzule) | dr-13 |
 

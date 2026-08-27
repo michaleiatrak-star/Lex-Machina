@@ -39,7 +39,7 @@ NIE duplikuje tych technik, tylko dodaje specyfikę dziedzinową spraw rozwodowy
   bez treści): pełna procedura (KC art. 12-16, przesłanki całkowite/
   częściowe, KPC, kurator, PROJEKT LIKWIDACJI z 4 nowymi instrumentami
   wspieranego podejmowania decyzji — status: skierowany do Sejmu) →
-  view /mnt/skills/user/shared/mod-niepelnosprawnosc-intelektualna-gluchota.md
+  view shared/mod-niepelnosprawnosc-intelektualna-gluchota.md
   sekcja "BLOK I — NIEPEŁNOSPRAWNOŚĆ INTELEKTUALNA" / I.3 — NIE zatrzymuj
   się na tej checkliście, ta treść żyje w module współdzielonym.
 □ Czy są małoletnie dzieci? → kluczowe dla sądu i trybu

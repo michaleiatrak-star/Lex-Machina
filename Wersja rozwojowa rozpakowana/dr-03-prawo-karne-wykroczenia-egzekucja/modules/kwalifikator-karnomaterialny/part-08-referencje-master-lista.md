@@ -47,7 +47,7 @@
 **Prawidłowa kwalifikacja:** art. 190a §1 KK (stalking — powtarzalne nękanie)
 **Klucz:** Powtarzalność + skutek = stalking, nie groźba.
 **Skutek błędu:** Groźba — wnioskowy (§2), stalking §1,§2 — również wnioskowy (§4), ale zagrożenie karą wyższe (do 8 lat vs do 3 lat). Typ kwalifikowany §3 (targnięcie się na życie) → z urzędu.
-⚠️ Źródło: Dz.U.2025.383 t.j.
+⚠️ Źródło: Dz.U. 2025 poz. 383 t.j.
 
 ---
 
@@ -115,9 +115,9 @@ Jeśli którykolwiek punkt = NIE → wróć do odpowiedniego drzewa.
   saos.org.pl      — wyszukiwarka otwartych orzeczeń
 
 AKTY PRAWNE (weryfikuj aktualność przed użyciem):
-  KK: Dz.U.2025.383 t.j. (wersja od 29.01.2026)
-  KW: Dz.U. 2025.734
-  Ustawa PN: Dz.U. 2023.1939
+  KK: Dz.U. 2025 poz. 383 t.j. (wersja od 29.01.2026)
+  KW: Dz.U. 2025 poz. 734
+  Ustawa PN: Dz.U. 2023 poz. 1939
 ```
 
 ---
@@ -136,24 +136,24 @@ AKTY PRAWNE (weryfikuj aktualność przed użyciem):
 | Rozbój kwalifikowany | art. 280 §2 KK | z urzędu | 3 lata | 20 lat |
 | Kradzież rozbójnicza | art. 281 KK | z urzędu | 1 rok | 10 lat |
 | Wymuszenie rozbójnicze | art. 282 KK | z urzędu | 1 rok | 10 lat |
-| Wypadek mniejszej wagi | art. 283 KK | z urzędu | — | 2 lata |
+| Wypadek mniejszej wagi (typy z art. 279 § 1, art. 280 § 1 lub art. 281) | art. 283 KK | z urzędu | 3 m-ce | 5 lat |
 | Oszustwo | art. 286 §1 KK | z urzędu | 6 m-cy | 8 lat |
 | Oszustwo kredytowe | art. 297 §1 KK | z urzędu | 3 m-ce | 5 lat |
-| Oszustwo informatyczne | art. 287 §1 KK | z urzędu | — | 5 lat |
+| Oszustwo informatyczne | art. 287 § 1 KK | z urzędu; na szkodę osoby najbliższej — na wniosek (§ 3) | 3 m-ce | 5 lat |
 | Naruszenie nietykalności | art. 217 §1 KK | prywatnoskargowy | — | 1 rok |
-| Lekki uszczerbek | art. 157 §2 KK | prywatnoskargowy | — | 1 rok |
+| Lekki uszczerbek | art. 157 § 2 KK | prywatnoskargowy, chyba że pokrzywdzony to osoba najbliższa wspólnie zamieszkująca (§ 4) | — | 2 lata |
 | Średni uszczerbek | art. 157 §1 KK | z urzędu | 3 m-ce | 5 lat |
 | Ciężki uszczerbek | art. 156 §1 KK | z urzędu | 3 lata | 20 lat |
 | Narażenie na niebezpieczeństwo | art. 160 §1 KK | z urzędu | — | 3 lata |
 | Groźba karalna | art. 190 §1 KK | **wnioskowy** (§2) — nie prywatnoskargowy | — | **3 lata** |
 | Stalking | art. 190a §1 KK | **na wniosek** (§4); §3 typ kwalifikowany — z urzędu | 6 m-cy | 8 lat |
-| Zmuszanie | art. 191 §1 KK | z urzędu | — | 3 lata |
+| Zmuszanie | art. 191 § 1 KK | na wniosek pokrzywdzonego (§ 3); wymuszenie zwrotu wierzytelności z § 2 — z urzędu | — | 3 lata |
 | Pozbawienie wolności | art. 189 §1 KK | z urzędu | 3 m-ce | 5 lat |
 | Hacking | art. 267 §1 KK | **na wniosek** (§5) — nie prywatnoskargowy | — | 2 lata |
 | Podsłuch/nagranie osoby trzeciej (urządzenie/oprogramowanie) | art. 267 §3 KK | **na wniosek** (§5) | — | 2 lata |
 | Ujawnienie informacji z hackingu/podsłuchu | art. 267 §4 KK | **na wniosek** (§5) | — | 2 lata |
-| Jazda po alkoholu — wykroczenie | art. 87 §1 KW | z urzędu | — | 30 000 zł |
-| Jazda w stanie nietrzeźwości | art. 178a §1 KK | z urzędu | — | **3 lata** (od 01.10.2023) |
+| Jazda po alkoholu — wykroczenie | art. 87 §1 KW | z urzędu | **areszt 5–30 dni (art. 19 KW)** albo **grzywna nie niższa niż 2 500 zł** | grzywna do 30 000 zł (art. 24 §1a KW) ✅ [VER ELI 2026-08-25] |
+| Jazda w stanie nietrzeźwości | art. 178a §1 KK | z urzędu | — | **3 lata PW** (od 01.10.2023; sankcja JEDNORODNA — bez grzywny i ogr. wolności) ✅ [VER 2026-08-25] |
 | Wypadek drogowy (średni/ciężki) | art. 177 §1 KK | z urzędu | — | 3 lata |
 | Wypadek drogowy ze śmiercią | art. 177 §2 KK | z urzędu | 6 m-cy | 8 lat |
 | Posiadanie narkotyków | art. 62 §1 ustawy PN | z urzędu | — | 3 lata |
@@ -163,7 +163,7 @@ AKTY PRAWNE (weryfikuj aktualność przed użyciem):
 | Założenie/kierowanie grupą/związkiem | art. 258 §3 KK | z urzędu | 2 lata | 15 lat |
 | Założenie/kierowanie grupą terrorystyczną | art. 258 §4 KK | z urzędu | 3 lata | 20 lat |
 | Fałszywa faktura (wystawienie/użycie) | art. 271a §1 KK | z urzędu | 6 m-cy | 8 lat |
-| — wartość >5 mln zł (mienie wielkiej wartości) | art. 271a §2 KK | z urzędu | 3 lata | 15 lat |
+| — wartość >5× mienia wielkiej wartości albo stałe źródło dochodu | art. 271a §2 KK | z urzędu | 3 lata | 20 lat |
 | — wartość >10× mienia wielkiej wartości | art. 277a §1 KK | z urzędu | **5 lat** | **25 lat** |
 | Fałsz materialny dokumentu (podrobienie/przerobienie/użycie) | art. 270 §1 KK | z urzędu | 3 m-ce | 5 lat |
 | Fałsz intelektualny (poświadczenie nieprawdy) | art. 271 §1 KK | z urzędu | 3 m-ce | 5 lat |
@@ -212,7 +212,7 @@ AKTY PRAWNE (weryfikuj aktualność przed użyciem):
 >   `mod-KK-art296-naduzycie-zaufania.md`
 > - Korupcja wyborcza / przekupstwo wyborcze (art. 250a KK) →
 >   `mod-KK-art250a-korupcja-wyborcza.md`
-| Zabójstwo — typ podstawowy | art. 148 §1 KK | z urzędu | 10 lat (⚠️weryfikuj) | 25 lat/dożywocie |
+| Zabójstwo — typ podstawowy | art. 148 §1 KK | z urzędu | 10 lat | **30 lat / dożywocie** — ⛔ NIE „25 lat": odrębna kara 25 lat ZNIESIONA 1.10.2023, górna granica terminowej PW podniesiona do 30 lat ✅ [VER 2026-08-25] |
 | Zabójstwo kwalifikowane | art. 148 §2-3 KK | z urzędu | 15 lat | dożywocie |
 | Zabójstwo w afekcie (uprzywilejowane) | art. 148 §4 KK | z urzędu | 1 rok | 10 lat |
 | Dzieciobójstwo | art. 149 KK | z urzędu | 3 m-ce | 5 lat |
@@ -263,16 +263,16 @@ Analiza konkretnego przepisu (znamiona, wykładnia):
   → analizator-przepisow-v2 (Moduł 5 — zbieg norm, Moduł 6 — tryb karny)
 
 Stalking / nękanie:
-  → moduł [J] SKILL.md + /mnt/skills/user/shared/STALKING-NEKANIE.md
+  → moduł [J] SKILL.md + shared/STALKING-NEKANIE.md
 
 Przesłuchanie sprawcy lub świadka:
-  → przesluchanie-swiadkow-v2 + moduł [K] SKILL.md
+  → przesluchanie-swiadkow-v2-min90 + moduł [K] SKILL.md
 ```
 
 ---
 
 *kwalifikator-karnomaterialny v1.4 · Moduł referencyjny dla prawo-polskie-v2*
-*Re-weryfikacja online: 17.07.2026 | KK Dz.U.2025.383 t.j. (wersja od 29.01.2026)*
+*Re-weryfikacja online: 17.07.2026 | KK Dz.U. 2025 poz. 383 t.j. (wersja od 29.01.2026)*
 *v1.4 (2026-07-17): dodano BLOK R (deepfake/manipulacja głosem-obrazem —
 mapa kwalifikacji 286/190a/270/212/216, brak dedykowanego przestępstwa
 w KK). Rozstrzygnięto NIEROZSTRZYGNIĘTĄ wcześniej rozbieżność: "25 lat
@@ -286,6 +286,6 @@ IV-VI, w tym kara mieszana art. 37a/37b i dyrektywy art. 53) oraz BLOK Q
 *v1.2 (2026-07-17): dodano BLOK M (zbieg przestępstw/kara łączna, Rozdz. IX),
 BLOK N (środki zabezpieczające, Rozdz. X), BLOK O (zatarcie skazania,
 Rozdz. XII).*
-*Integracja: prawo-karne.md + wykroczenia.md + analiza-sadowa-v6 (Filtr #1)*
+*Integracja: `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` + `mod-KW-kodeks-wykroczen.md` + `analiza-sadowa-v6` (Filtr #1).*
 *Weryfikacja przepisów: isap.sejm.gov.pl · Orzecznictwo: sn.pl, orzeczenia.ms.gov.pl*
 *Zakaz cytowania z pamięci AI — każdy próg kwotowy i tryb ścigania weryfikuj przed analizą*

@@ -105,7 +105,7 @@ EUDAMED:
 ## ŹRÓDŁA WERYFIKACJI
 
 ```
-isap.sejm.gov.pl       → ustawa o wyrobach medycznych Dz.U. 2022 poz. 974 (t.j.)
+isap.sejm.gov.pl       → ustawa o wyrobach medycznych Dz.U. 2024 poz. 1620 (t.j.)
 eur-lex.europa.eu      → rozp. MDR 2017/745, IVDR 2017/746, rozp. (UE) 2024/1860
 health.ec.europa.eu/medical-devices-eudamed → status modułów EUDAMED
 gov.pl/web/urpl        → Urząd Rejestracji Produktów Leczniczych, Wyrobów

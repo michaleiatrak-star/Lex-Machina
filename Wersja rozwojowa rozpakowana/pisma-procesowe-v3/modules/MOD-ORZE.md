@@ -161,7 +161,7 @@ argumentacyjną, nie normatywną — sąd może odstąpić, ale musi to uzasadni
 Przed użyciem orzeczenia w piśmie wczytaj:
 
 ```text
-view /mnt/skills/user/shared/ORZECZENIA-HIERARCHIA.md
+view shared/ORZECZENIA-HIERARCHIA.md
 ```
 
 Orzeczenie bez publicznej weryfikacji sygnatury, daty i tezy nie może zostać użyte jako argument procesowy.

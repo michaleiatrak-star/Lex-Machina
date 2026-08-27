@@ -106,10 +106,10 @@ Przed wygenerowaniem pisma lub analizy odpowiedz:
 
 ## 9. POWIĄZANIA
 
-- `mod-Q-podatkowe.md`
-- `mod-AR-postepowanie-podatkowe.md`
-- `mod-X-zamowienia-publiczne.md`
-- `mod-CM-samorzad-terytorialny-nadzor.md`
+- `dr-06-podatki-finanse-publiczne-aml/modules/mod-OP-ordynacja-podatkowa.md`
+- `dr-06-podatki-finanse-publiczne-aml/modules/mod-OP-ordynacja-podatkowa.md`
+- `dr-07-zamowienia-publiczne-fundusze-ue/modules/mod-PZP-zamowienia-publiczne-KIO.md`
+- `dr-08-samorzad-terytorialny-prawo-lokalne/modules/mod-nadzor-wojewody-RIO-legalnosc-uchwal.md`
 
 ## 10. OUTPUT
 

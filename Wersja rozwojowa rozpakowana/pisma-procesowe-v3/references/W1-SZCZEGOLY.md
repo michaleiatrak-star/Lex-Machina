@@ -1,7 +1,7 @@
 # W1-SZCZEGOLY — Szczegóły kroków W1.3–W1.6
 
 > Wydzielono z pisma-procesowe-v3/SKILL.md — redukcja NOTA-4 (>600 linii)
-> Wywołanie: `view /mnt/skills/user/pisma-procesowe-v3/references/W1-SZCZEGOLY.md`
+> Wywołanie: `view pisma-procesowe-v3/references/W1-SZCZEGOLY.md`
 > Zawiera: W1.3 (mapa przesłanka→dowód + tabela), W1.4 (lista przepisów),
 >   W1.4b (roszczenia narastające + tabela-petitum + podwójne żądanie ustalenia),
 >   W1.5 (braki krytyczne), W1.6 (MOD-RED-TEAM-WLASNY), Checkpoint W1→W2.
@@ -144,7 +144,7 @@ FORMAT:
 
 ### W1.6 — MOD-RED-TEAM-WLASNY
 
-> Wywołaj: `view /mnt/skills/user/shared/MOD-RED-TEAM-WLASNY.md`
+> Wywołaj: `view shared/MOD-RED-TEAM-WLASNY.md`
 >
 > Przed przejściem do W2: przejrzyj wszystkie tezy przez pryzmat
 > najsilniejszego możliwego zarzutu przeciwnika. Per każda teza:

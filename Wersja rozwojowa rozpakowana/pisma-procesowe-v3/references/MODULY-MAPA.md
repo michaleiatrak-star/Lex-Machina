@@ -1,7 +1,7 @@
 # MODUŁY-MAPA — Mapa wczytywania skilli i modułów
 
 > Wydzielono z pisma-procesowe-v3/SKILL.md (v5.2) — WARN-14 refaktoryzacja
-> Wywołanie: `view /mnt/skills/user/pisma-procesowe-v3/references/MODULY-MAPA.md`
+> Wywołanie: `view pisma-procesowe-v3/references/MODULY-MAPA.md`
 > Zawiera: matrycę aktywacji modułów per etap (W1.2, W2.4, W3, V10),
 >   pliki kanoniczne shared (kolejność ładowania)
 
@@ -27,12 +27,12 @@ W1 — RAMA I STRATEGIA
 ─────────────────────────────────────────────────────────────────────────────
 CLAIM-VALIDATION       W1.2a      zawsze gdy pismo opiera się na twierdzeniach
                                    faktycznych strony (praktycznie: zawsze);
-                                   view /mnt/skills/user/shared/CLAIM-VALIDATION.md
+                                   view shared/CLAIM-VALIDATION.md
 MOD-DOKUMENT-ANOMALIE  W1.2d-PRE  gdy ≥2 dokumenty strony przeciwnej lub pracodawcy;
                                    ⛔ ZAWSZE gdy umowy o pracę / dokumenty XLSX /
                                    pisma strony przeciwnej z numerami rejestrowymi;
                                    DA-0→DA-5: krzyżowa weryfikacja KRS/NIP/REGON;
-                                   view /mnt/skills/user/shared/MOD-DOKUMENT-ANOMALIE_v1.1.0.md
+                                   view shared/MOD-DOKUMENT-ANOMALIE_v1.1.0.md
 MOD-WARIANTY-POZWU     W1.2b      gdy aktywny (≥2 aspekty główne / sygnał
                                    wieloznaczności / żądanie wariantów)
 MOD-RED-TEAM-WLASNY    W1.6       gdy aktywny (wielopodmiotowość / ciągłość
@@ -146,31 +146,31 @@ judicial-cred-v10      W1.2       view references/engines/judicial-credibility-s
 
 Pliki kanoniczne shared (kolejność ładowania w W3):
 ```
-view /mnt/skills/user/shared/MOD-STEP-TRACKER.md             (KROK 0-TRACKER, zawsze — ST-INIT przed pipeline)
-view /mnt/skills/user/shared/PRAWO-HARDGATE.md
-view /mnt/skills/user/shared/INTAKE-GAP.md
-view /mnt/skills/user/shared/CLAIM-VALIDATION.md             (W1.2a, zawsze)
-view /mnt/skills/user/shared/HYBRID-VALIDATION.md
-view /mnt/skills/user/shared/MOD-WALIDACJA_v2.md             (bloki A–J)
-view /mnt/skills/user/shared/FAKTY_v2.md
-view /mnt/skills/user/shared/FACT-SOURCE-LOCK.md             (Blok J prerequisite)
-view /mnt/skills/user/shared/LEGAL-STATUS-LOCK.md            (Blok J prerequisite)
-view /mnt/skills/user/shared/LEGAL-QUALITY-GATE.md           (W3.4/W3.6a — bramka jakości prawa)
-view /mnt/skills/user/shared/POST-VALIDATION.md              (W3.7 K2 — zawsze)
-view /mnt/skills/user/shared/MOD-PEER-REVIEW.md              (W3.7 K1 — warunkowo)
-view /mnt/skills/user/shared/MOD-INTRO.md                    (W2.2 — pozew/apelacja/>3str)
-view /mnt/skills/user/shared/MOD-KONCENTRACJA.md             (W3.4 Blok C — zawsze)
-view /mnt/skills/user/shared/MOD-DOKTRYNA.md                 (W2.1 — gdy doktryna w uzasadnieniu)
-view /mnt/skills/user/shared/MOD-TIMING.md                   (W2.1 — gdy timing istotny)
-view /mnt/skills/user/shared/raport-sytuacyjny-integracja.md
-view /mnt/skills/user/shared/MOD-WARIANTY-POZWU.md           (W1.2b, gdy aktywny)
-view /mnt/skills/user/shared/MOD-RED-TEAM-WLASNY.md          (W1.6, gdy aktywny)
-view /mnt/skills/user/shared/MOD-ATAK-NA-DRAFT.md            (W2.4, zawsze)
-view /mnt/skills/user/shared/MOD-ATAK-NA-SWIADKA.md          (W2.4c, gdy ogniwa zeznaniowe w ŁD-n)
-view /mnt/skills/user/shared/AUDYT-KONCOWY.md                (W3.6a, zawsze)
-view /mnt/skills/user/shared/MOD-PRIORYTETY-ASPEKTOW.md      (wejście do W1.2b)
-view /mnt/skills/user/shared/MOD-MAPA-PRZEPISOW.md           (Podstawa/Ryzyko w W1.2b)
-view /mnt/skills/user/shared/MOD-HISTORIA-STRATEGII.md       (zapis wariantów W1.2b)
+view shared/MOD-STEP-TRACKER.md             (KROK 0-TRACKER, zawsze — ST-INIT przed pipeline)
+view shared/PRAWO-HARDGATE.md
+view shared/INTAKE-GAP.md
+view shared/CLAIM-VALIDATION.md             (W1.2a, zawsze)
+view shared/HYBRID-VALIDATION.md
+view shared/MOD-WALIDACJA_v2.md             (bloki A–J)
+view shared/FAKTY_v2.md
+view shared/FACT-SOURCE-LOCK.md             (Blok J prerequisite)
+view shared/LEGAL-STATUS-LOCK.md            (Blok J prerequisite)
+view shared/LEGAL-QUALITY-GATE.md           (W3.4/W3.6a — bramka jakości prawa)
+view shared/POST-VALIDATION.md              (W3.7 K2 — zawsze)
+view shared/MOD-PEER-REVIEW.md              (W3.7 K1 — warunkowo)
+view shared/MOD-INTRO.md                    (W2.2 — pozew/apelacja/>3str)
+view shared/MOD-KONCENTRACJA.md             (W3.4 Blok C — zawsze)
+view shared/MOD-DOKTRYNA.md                 (W2.1 — gdy doktryna w uzasadnieniu)
+view shared/MOD-TIMING.md                   (W2.1 — gdy timing istotny)
+view shared/raport-sytuacyjny-integracja.md
+view shared/MOD-WARIANTY-POZWU.md           (W1.2b, gdy aktywny)
+view shared/MOD-RED-TEAM-WLASNY.md          (W1.6, gdy aktywny)
+view shared/MOD-ATAK-NA-DRAFT.md            (W2.4, zawsze)
+view shared/MOD-ATAK-NA-SWIADKA.md          (W2.4c, gdy ogniwa zeznaniowe w ŁD-n)
+view shared/AUDYT-KONCOWY.md                (W3.6a, zawsze)
+view shared/MOD-PRIORYTETY-ASPEKTOW.md      (wejście do W1.2b)
+view shared/MOD-MAPA-PRZEPISOW.md           (Podstawa/Ryzyko w W1.2b)
+view shared/MOD-HISTORIA-STRATEGII.md       (zapis wariantów W1.2b)
 ```
 
 ---

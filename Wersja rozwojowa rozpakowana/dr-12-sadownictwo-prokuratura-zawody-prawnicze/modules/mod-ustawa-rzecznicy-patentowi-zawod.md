@@ -16,7 +16,7 @@ WSPÓLNE ZASADY DLA MODUŁU:
 
 ```
 Ustawa o rzecznikach patentowych (z 11.04.2001):
-  t.j. Dz.U. 2024 poz. 749 ✅ VER: isap.sejm.gov.pl 2026-06-14
+  t.j. Dz.U. 2026 poz. 778 ✅ VER: isap.sejm.gov.pl 2026-06-14
   → https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000749
 
 Nowelizacja: ustawa z 17.10.2025 o zmianie ustawy o rzecznikach patentowych
@@ -161,10 +161,18 @@ web_search: "kompetencje rzecznika patentowego adwokat radca prawny znaki towaro
 |---|---|
 | Postępowanie przed UP RP w sprawach IP (materialne) | DR-11 → moduły IP/własność przemysłowa |
 | Kompetencje adwokata/radcy w sprawach IP | DR-12/`mod-ustawa-adwokatura`, `mod-ustawa-radcowie-prawni` |
-| Skarga do WSA na decyzję UP RP / uchwałę KRRP | DR-05 → `mod-PPSA-postepowanie-sadowoadministracyjne` |
+| Skarga do WSA na decyzję UP RP / uchwałę KRRP | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-PPSA-terminy-kasacja-prawo-pomocy.md` |
 | Pismo: skarga / odwołanie | `pisma-procesowe-v3` albo `pisma-proste-v2` |
 
 ---
+
+## ZMIANA OD 1.10.2026 — TAJEMNICA A MDR
+
+Art. 9 ustawy z 29.05.2026 r. (Dz.U. 2026 poz. 846) nadaje art. 14 ust. 2
+ustawy o rzecznikach patentowych analogiczne, zawężone odesłanie wyłącznie
+do informacji udostępnianych na podstawie przepisów AML, w zakresie przez
+nie określonym. Usunięto równoległe odesłanie do rozdziału 11a Ordynacji
+podatkowej; wejście w życie 1.10.2026 r.
 
 ## ŹRÓDŁA WERYFIKACJI
 
@@ -179,7 +187,7 @@ web_search: "kompetencje rzecznika patentowego adwokat radca prawny znaki towaro
 
 ## ⚖️ DISCLAIMER
 
-Po zakończeniu analizy: `view /mnt/skills/user/shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
+Po zakończeniu analizy: `view shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
 
 ---
 *mod-ustawa-rzecznicy-patentowi-zawod.md · dr-12 · utworzony 2026-06-14*

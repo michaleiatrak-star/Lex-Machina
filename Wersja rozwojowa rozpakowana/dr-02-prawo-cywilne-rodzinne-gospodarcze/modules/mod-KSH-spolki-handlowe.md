@@ -540,7 +540,7 @@ TYPOWA TREŚĆ (minimum 9 elementów wg branżowych wzorców):
 □ procedury decyzyjne (większości głosów, weto, sprawy wymagające zgody
   wszystkich)
 □ zakaz konkurencji po odejściu (okres, zakres, ekwiwalent — patrz
-  analizator-umow-v1/zakaz-konkurencji.md)
+  analizator-umow-v1/references/zakaz-konkurencji.md)
 □ poufność (NDA) — zakres, okres, sankcje
 □ mechanizmy wyjścia/rozstania:
   - lock-up (zakaz sprzedaży udziałów przez określony czas)
@@ -562,7 +562,7 @@ KOLEJNOŚĆ DOKUMENTÓW PRZY WEJŚCIU INWESTORA (osobny etap, nie część FA):
 Founders' Agreement → (gdy pojawia się inwestor) → Term Sheet / LOI →
 Umowa inwestycyjna (reguluje m.in. powoływanie zarządu, prawa nadzorcze
 inwestora, exit plan) → SHA (umowa wspólników/akcjonariuszy, post-investment)
-→ patrz analizator-umow-v1/mod-MA-transakcje.md (MA.2 — LOI/Term Sheet,
+→ patrz analizator-umow-v1/references/mod-MA-transakcje.md (MA.2 — LOI/Term Sheet,
 MA.4 — SHA)
 ```
 

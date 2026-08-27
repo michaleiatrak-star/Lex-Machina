@@ -616,7 +616,7 @@ modułów, liczniki, spójność Dz.U., nagłówki, zakres tytułów, przeniesie
 `shared/`, synchronizację aktów i metadane wersji — i **ani jednego na długość**,
 mimo że ZASADA 13 jest regułą twardą z progiem liczbowym, czyli najłatwiejszą
 do zautomatyzowania ze wszystkich. Skutek: naruszenie w
-`dr-02/modules/mod-KC-spadki.md` (1036 linii) przetrwało od momentu
+`dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-spadki.md` (1036 linii) przetrwało od momentu
 przekroczenia progu do ręcznego skanu ad hoc, a zamknięcie flagi F-78 musiało
 kończyć się rekomendacją *„świeży skan `wc -l` przy następnym audycie"* —
 czyli przerzuceniem kontroli na pamięć audytora. To ta sama klasa problemu co
@@ -644,3 +644,109 @@ strukturalnego. Test tego konfliktu nie wykryje i wykryć nie może.
 
 **Kryterium wyjścia:** zero ⛔. Pozycje ⚠️ nie blokują — są sygnałem
 planistycznym na najbliższą edycję danego pliku.
+
+## 14. WYMÓG WOBEC TESTÓW ZEWNĘTRZNYCH — kontrakt statusów (dodano 2026-08-23f, flaga F-116, część 2/3)
+
+⛔ **Ten punkt dotyczy PROMPTÓW TESTOWYCH pisanych przez osoby trzecie
+(audyty zewnętrzne, benchmarki, recenzje LM), nie testów T1-T13 powyżej.**
+Powstał po stwierdzeniu, że trzy niezależne raporty zewnętrzne (TEST1/TEST2/
+TEST3, 2026-08-23e) oceniały system wobec etykiety `MEM` i rejestru
+`VER/MEM/NIEWERYFIKOWANE`, którego system **nie ma** — `AF-4` w
+`shared/PRAWO-HARDGATE.md` v2.6 wprost ZAKAZUJE etykiety `MEM`. Skutek:
+poprawne zachowanie systemu (odmowa użycia `MEM`) było punktowane jako
+uchybienie, a niedopuszczalne zachowanie portu porównawczego (użycie `MEM`)
+jako jego przewaga.
+
+**Reguła:** prompt testowy oceniający zgodność ze statusami weryfikacji
+NIE WPROWADZA własnego rejestru etykiet ani nie wymienia z góry kryteriów
+oceny w treści polecenia dla modelu. Jedyne poprawne źródło etykiet
+dopuszczalnych to sekcja statusów w `shared/PRAWO-HARDGATE.md`
+(`✅ [VER]` / `🟨 [KOTWICA-URZĘDOWA]` / `⚠️ [NIEWERYFIKOWANE]` /
+`⬛ [DO UZUPEŁNIENIA]`) oraz rozszerzenie poziomu TREŚĆ/FRAGMENT
+w `shared/WERYFIKACJA-SLAD.md`. Etykieta spoza tych dwóch plików
+(w tym `MEM`, „pamięć normatywna", „wiedza modelu", „stan znany")
+użyta w kryteriach oceny czyni **wynik testu wobec tego kryterium
+nieważny niezależnie od uzyskanego wyniku PASS/FAIL** — test mierzy
+wtedy zgodność z fikcyjną specyfikacją, nie zachowanie systemu.
+
+**Decyzja architektoniczna 2026-08-23f:** rozważano stworzenie osobnego
+pliku `shared/KARTA-STATUSOW.md` jako "jednej strony, jedynego źródła
+prawdy" łączącej wszystkie rejestry statusów w systemie. **Odrzucono.**
+Uzasadnienie w AUDIT-JOURNAL, wpis 2026-08-23f, sekcja 2 — ryzyko
+utworzenia TRZECIEGO rejestru obok `PRAWO-HARDGATE.md` i
+`WERYFIKACJA-SLAD.md`, przewyższające korzyść z konsolidacji. Zamiast
+karty, punkt niniejszy odsyła wprost do dwóch istniejących plików
+źródłowych jako jedynego kryterium ważności testu.
+
+---
+
+## 14. T14 — POLE `description:` W SKILL.md (obecność + długość)
+
+**Skrypt:** `scripts/check_description.py`
+**Priorytet:** KRYTYCZNY
+**Dodany:** 2026-08-24, flaga F-130
+**Kod wyjścia:** 0 = czysto, 1 = wykryto ⛔ lub ⚠️
+
+### Co sprawdza
+1. obecność frontmattera YAML w `SKILL.md`;
+2. **obecność pola `description:`** — brak = ⛔;
+3. czy pole nie jest puste — puste = ⛔;
+4. długość w profilu uniwersalnym: >200 = ⛔, 181–200 = ⚠️, ≤180 = OK.
+
+### Po co powstał
+FAZA 2C mierzyła wyłącznie DŁUGOŚĆ. Jej skrypt dla pliku bez pola `description:`
+wypisywał `0` i klasyfikował wynik jako ✅ OK — czyli **stan najgorszy raportował
+jako najzdrowszy**. Skutek: `audyt-systemu-v4` był jedynym skillem w systemie bez
+tego pola i żadna faza tego nie zgłosiła. Wykryte dopiero, gdy użytkownik przysłał
+gotową poprawkę.
+
+`description` jest polem, na podstawie którego skill jest WYBIERANY do wywołania —
+jego brak objawia się CISZĄ (skill po prostu nie wystartuje), nie błędem. To
+najgorszy możliwy tryb awarii do wykrycia ręcznego, więc jedyną sensowną obroną
+jest test.
+
+### Test negatywny (sprawdź przy każdej zmianie skryptu)
+Uruchom na katalogu, w którym któryś `SKILL.md` NIE ma pola `description:` —
+np. `/mnt/skills/user` w stanie sprzed 2026-08-24. Oczekiwane: dokładnie jedno
+⛔ dla `audyt-systemu-v4`. Jeśli skrypt zwraca „✅ czysto" — regresja, ta sama
+wada co w pierwotnej FAZIE 2C.
+
+### Znane ograniczenie (jawne)
+Mierzy OBECNOŚĆ i DŁUGOŚĆ, nie TRAFNOŚĆ opisu. Description obecny, ale źle
+opisujący skill, przejdzie test i nadal będzie powodował złe wyzwalanie —
+na to potrzeba testu z F-113, nie tego.
+
+---
+
+## 17. T17 — STATYCZNY KONTRAKT ROUTERA PRAWNEGO
+
+**Skrypt:** `scripts/test_router_contract.py`
+**Priorytet:** KRYTYCZNY dla wydania routera
+**Dodany:** 2026-08-26
+**Kod wyjścia:** 0 = kontrakt kompletny, 1 = regresja, 2 = router nieodnaleziony
+
+### Co sprawdza
+
+1. `description` zaczyna się od imperatywu `UŻYWAJ ZAWSZE`, obejmuje każdą
+   jurysdykcję i mieści się w 200 znakach;
+2. nagłówek korpusu używa stabilnej wersji major `v3`, a nie martwego numeru
+   minor niezależnego od YAML;
+3. istnieje PATH-SELFTEST i jawny `TRYB ZDEGRADOWANY`;
+4. blok `ŁADOWANE ZAWSZE` poprzedza adapter i wymusza pełny self-check;
+5. korpus ma najwyżej 500 linii, nie zawiera narracji incydentów ani
+   zduplikowanej Reguły 13;
+6. routing [11] wymusza odczyt `AUDYT-KLUCZA-ODPOWIEDZI.md`;
+7. protokół klucza wymusza rachunek N/N i zakazuje „pełnej zgodności" przy
+   choć jednej pozycji obalonej lub nierozstrzygniętej;
+8. ta sama bramka jest obecna w `SELF-CHECK.md`;
+9. identyfikatory reguł są kompletne i zachowują pierwotne znaczenie,
+   z pominięciem 13 oraz fizyczną kolejnością 22 → 23. Usunięcie, zmiana
+   numeru lub przestawienie reguły musi powodować FAIL.
+
+Skrypt rozpoznaje router po polu `name:` w `SKILL.md`, więc działa zarówno
+przy katalogach semantycznych, jak i przy identyfikatorach pakietów hosta.
+
+### Ograniczenie
+
+T17 dowodzi obecności i spójności kontraktu statycznego, nie skuteczności
+behawioralnej. F-113/F-133 pozostają otwarte do testu A/B z transkryptami.

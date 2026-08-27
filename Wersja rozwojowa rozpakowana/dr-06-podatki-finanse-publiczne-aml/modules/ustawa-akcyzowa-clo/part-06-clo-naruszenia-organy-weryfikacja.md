@@ -71,7 +71,7 @@ Cło/CN/TARIC/WIT/FTA → `mod-UCC-clo-taryfa-celna.md` sekcja 6.
 ---
 
 *mod-AD-akcyza-clo · v1.1 · 2026-06-14 — wydzielono mod-UCC-clo-taryfa-celna.md*
-*Powiązane: mod-UCC-clo-taryfa-celna (cło/UCC), mod-Q (PIT/VAT/CIT), mod-AC (REACH/chemikalia), mod-L (gospodarcze)*
+*Powiązane: mod-UCC-clo-taryfa-celna (cło/UCC), `mod-PIT-podatek-dochodowy-fizyczne.md` / `mod-CIT-podatek-dochodowy-prawne.md` / `mod-VAT-podatek-od-towarow-i-uslug.md` według podatku, `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-REACH-CLP-chemikalia.md`, `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KSH-spolki-handlowe.md`*
 *Weryfikacja: isap.sejm.gov.pl*
 
 ---

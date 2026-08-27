@@ -27,9 +27,9 @@ compatibility:
 
 ```
 □ Co się stało: dostęp, utrata danych, blokada konta, phishing, ransomware
-□ Czy dotyczy danych osobowych? → mod-P RODO
+□ Czy dotyczy danych osobowych? → `dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-RODO-GDPR-2016-679.md`
 □ Czy dotyczy systemu istotnego? → NIS2/KSC
-□ Czy jest przestępstwo? → mod-T / mod-N
+□ Czy jest przestępstwo? → `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art267-269c-cyberprzestepstwa.md` + `mod-KK-KPK-framework-karne.md`
 □ Czy trzeba zgłosić incydent? komu i w jakim terminie?
 □ Jak zabezpieczyć dowody: logi, nagłówki e-mail, IP, zrzuty, hash plików
 ```

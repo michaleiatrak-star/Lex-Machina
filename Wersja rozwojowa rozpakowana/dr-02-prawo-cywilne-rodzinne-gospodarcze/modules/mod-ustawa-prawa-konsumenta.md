@@ -1,6 +1,6 @@
 # mod-ustawa-prawa-konsumenta
 
-**Źródło weryfikacji:** Ustawa o prawach konsumenta — Dz.U. 2023 poz. 2759 t.j. ze zm.
+**Źródło weryfikacji:** Ustawa o prawach konsumenta — Dz.U. 2024 poz. 1796 t.j. ze zm.
 **Data weryfikacji online:** 2026-06-05
 **ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 **Uwaga:** Moduł uzupełnia `mod-KC-konsumenckie` — skupia się na ustawie szczególnej.

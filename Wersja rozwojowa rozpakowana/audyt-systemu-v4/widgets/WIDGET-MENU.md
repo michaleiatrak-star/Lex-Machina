@@ -1,8 +1,7 @@
 # WIDGET-MENU — Interaktywne menu wyboru elementów audytu
 
-> **12 pozycji** (od 2026-08-15o). Pozycja **11 = zadanie cykliczne w Cowork**
-> (`references/SCHEDULED-TASK-COWORK.md`) — jedyna pozycja, która nie jest fazą
-> audytu; pozycja 12 to dawna 11 („Aktualizacja references”, FAZA 7).
+> **13 pozycji**. Pozycja 11 tworzy zadanie cykliczne, pozycja 13 synchronizuje
+> pamięć routera; obie są akcjami, nie fazami audytu.
 
 ## Cel
 Widget React renderowany przez `show_widget` — pozwala użytkownikowi wybrać jeden lub więcej elementów audytu przed jego uruchomieniem. Eliminuje potrzebę przepisywania poleceń tekstowych.
@@ -50,8 +49,8 @@ const AUDIT_ITEMS = [
   {
     id: "description",
     group: "Jakość",
-    label: "📏 Długość description (limit 1024)",
-    desc: "Walidacja czy description nie przekracza limitu technicznego",
+    label: "📏 Description (limit 200)",
+    desc: "Walidacja obecności i długości pola description",
     phase: "FAZA 2C / MOD-DESCRIPTION"
   },
   {
@@ -107,20 +106,27 @@ const AUDIT_ITEMS = [
     id: "references",
     group: "Raport",
     label: "💾 Aktualizacja references",
-    desc: "Zapis do AUDIT-JOURNAL.md, mapa Dz.U., SKILLS-MAP-AND-FIXES",
+    desc: "Zapis do AUDIT-JOURNAL.md, mapa Dz.U. i WARN-OTWARTE.md",
     phase: "FAZA 7"
+  },
+  {
+    id: "pamiec-trwala",
+    group: "Automatyzacja",
+    label: "🧠 Pamięć trwała — instrukcje routera",
+    desc: "Porównaj i po zgodzie zsynchronizuj krytyczny kontrakt routera",
+    phase: "PAMIEC-TRWALA-ROUTER.md"
   }
 ];
 
 const GROUPS = [...new Set(AUDIT_ITEMS.map(i => i.group))];
 
 const PRESETS = [
-  { label: "Pełny audyt", ids: AUDIT_ITEMS.map(i => i.id) },
+  { label: "Pełny audyt", ids: AUDIT_ITEMS.filter(i => !["harmonogram", "pamiec-trwala"].includes(i.id)).map(i => i.id) },
   { label: "Tylko czystość", ids: ["interlinie", "wstawki", "description"] },
   { label: "Tylko zależności", ids: ["inventory", "paths", "versions"] },
   { label: "Tylko prawo", ids: ["dzu", "antihalucynacje"] },
   { label: "Raport i zapis", ids: ["scoring", "raport", "references"] },
-  { label: "Automatyzacja", ids: ["harmonogram"] }
+  { label: "Automatyzacja", ids: ["harmonogram", "pamiec-trwala"] }
 ];
 
 export default function AuditMenu() {
@@ -272,6 +278,21 @@ najpierw audyt, a utworzenie zadania na końcu, żeby propozycja opierała się 
 
 ---
 
+## Pozycja 13 — obsługa wyboru
+
+Pozycja **13 (`pamiec-trwala`) nie audytuje niczego**:
+
+1. Wczytaj `references/PAMIEC-TRWALA-ROUTER.md`.
+2. Odczytaj wersję routera i wydzieloną sekcję trwałych preferencji.
+3. Pokaż użytkownikowi dokładny diff i pełną treść docelową; zakończ turę.
+4. Po akceptacji zastąp tylko sekcję markerów albo dopisz ją, jeśli nie istnieje.
+5. Ponownie odczytaj pamięć i odnotuj wynik w `AUDIT-JOURNAL.md`.
+
+Nigdy nie nadpisuj całego pliku preferencji. Brak natywnej pamięci trwałej
+raportuj jako `NIEOBSŁUGIWANE W HOŚCIE`.
+
+---
+
 ## Integracja z SKILL.md
 
 W sekcji `## TRYBY WYWOŁANIA` dodaj:
@@ -285,6 +306,6 @@ Wywołanie: "przeprowadź audyt" / "audytuj system" (bez precyzowania zakresu)
 
 Wywołanie widgetu w kodzie:
 ```
-view /mnt/skills/user/audyt-systemu-v4/widgets/WIDGET-MENU.md
+view audyt-systemu-v4/widgets/WIDGET-MENU.md
 → skopiuj kod JSX → show_widget(...)
 ```

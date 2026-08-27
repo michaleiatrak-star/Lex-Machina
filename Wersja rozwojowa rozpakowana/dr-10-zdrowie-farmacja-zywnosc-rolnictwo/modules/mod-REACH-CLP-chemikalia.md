@@ -13,8 +13,7 @@ description: |
   - zezwolenia REACH (Annex XIV), ograniczenia (Annex XVII), SVHC
   - kontrolę Inspekcji Ochrony Środowiska lub PIP w zakresie chemikaliów
   - naruszenia przepisów REACH/CLP i sankcje (ustawa o substancjach chemicznych)
-  Powiązane: mod-Y (środowisko/DŚU), mod-AA (farmaceutyczne), mod-Q (podatki
-  akcyzowe na niektóre substancje), prawo-polskie-v2.
+  Powiązane: `dr-09-budownictwo-srodowisko-energia-transport/modules/mod-POS-prawo-ochrony-srodowiska.md` (środowisko/DŚU), `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-PrFarm-prawo-farmaceutyczne.md` (farmacja), `dr-06-podatki-finanse-publiczne-aml/modules/mod-ustawa-akcyzowa-i-clo-UCC.md` (akcyza/cło na wybrane substancje), `prawo-polskie-v2`.
 compatibility:
   tools:
     - web_search
@@ -178,11 +177,11 @@ Użytkownik końcowy (nie DU)
 
 | Moduł | Powiązanie |
 |-------|-----------|
-| **mod-Y (środowisko)** | Ocena oddziaływania na środowisko substancji REACH; kody odpadów z SDS sekcja 13 |
-| **mod-AA (farmaceutyczne)** | Substancje aktywne w lekach — równolegle REACH i Prawo farm. |
-| **mod-Q (podatkowe)** | Podatek akcyzowy na niektóre substancje energetyczne i alkohol etylowy |
-| **mod-AD (akcyza/cło)** | Klasyfikacja taryfowa CN substancji chemicznych przy imporcie |
-| **mod-W (budowlane)** | SDS dla materiałów budowlanych (farby, kleje, uszczelniacze) |
+| **DR-09 `mod-POS-prawo-ochrony-srodowiska.md`** | Ocena oddziaływania na środowisko substancji REACH; kody odpadów z SDS sekcja 13 |
+| **`mod-PrFarm-prawo-farmaceutyczne.md`** | Substancje aktywne w lekach — równolegle REACH i Prawo farm. |
+| **DR-06 `mod-ustawa-akcyzowa-i-clo-UCC.md`** | Podatek akcyzowy na niektóre substancje energetyczne i alkohol etylowy |
+| **DR-06 `mod-ustawa-akcyzowa-i-clo-UCC.md` + `mod-UCC-clo-taryfa-celna.md`** | Klasyfikacja taryfowa CN substancji chemicznych przy imporcie |
+| **DR-09 `mod-PrBud-prawo-budowlane.md`** | SDS dla materiałów budowlanych (farby, kleje, uszczelniacze) |
 
 ---
 
@@ -209,7 +208,7 @@ Użytkownik końcowy (nie DU)
 ---
 
 *mod-AC-chemikalia-reach · v1.0 · 2026-05*
-*Powiązane: mod-Y, mod-AA, mod-AD, mod-Q*
+*Powiązane: DR-09 POŚ, Prawo farmaceutyczne, DR-06 akcyza/UCC — używaj pełnych modułów wskazanych w tabeli wyżej.*
 *Weryfikacja przepisów: echa.europa.eu + isap.sejm.gov.pl*
 
 ---

@@ -1,7 +1,7 @@
 # W3-PODMIOT-GATE — Weryfikacja danych podmiotów (W3.0)
 
 > Wydzielono z pisma-procesowe-v3/SKILL.md (v5.5) — redukcja NOTA-4
-> Wywołanie: `view /mnt/skills/user/pisma-procesowe-v3/references/W3-PODMIOT-GATE.md`
+> Wywołanie: `view pisma-procesowe-v3/references/W3-PODMIOT-GATE.md`
 > Zawiera: W3.0 PODMIOT-GATE (kroki P1–P4, formaty raportu, ZAKAZ-7).
 
 ---

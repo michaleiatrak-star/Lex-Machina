@@ -2,7 +2,7 @@
 
 ## Akt prawny
 **Ustawa z 19.08.2011 r. o uslugach platniczych**
-- Tekst jednolity: **Dz.U. 2025 poz. 611** (t.j. z 24.04.2025)
+- Tekst jednolity: **Dz.U. 2026 poz. 623** (t.j. z 24.04.2025)
   VER: isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240001572 [2026-05-31]
 - Implementacja Dyrektywy PSD2 (UE 2015/2366)
 

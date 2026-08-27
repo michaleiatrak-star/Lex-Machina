@@ -1,7 +1,7 @@
 # mod-KPC-egzekucja-windykacja
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** KPC — Dz.U. 2026 poz. 468 t.j. | KSCU — Dz.U. 2024 poz. 959 t.j. | Ustawa o kosztach komorniczych (u.k.k.) — Dz.U. 2024 poz. 377 t.j. | Ustawa o komornikach sądowych — Dz.U. 2024 poz. 1458 t.j.
+**Źródło weryfikacji:** KPC — Dz.U. 2026 poz. 468 t.j. | KSCU — Dz.U. 2025 poz. 1228 t.j. | Ustawa o kosztach komorniczych (u.k.k.) — Dz.U. 2024 poz. 377 t.j. | Ustawa o komornikach sądowych — Dz.U. 2026 poz. 881 t.j. | ✅ ELI 2026-08-25
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 **⚠️ Nowelizacja KPC:** Dz.U. 2025 poz. 1172 — wejście w życie 01.03.2026; weryfikuj aktualne przepisy.
@@ -18,10 +18,10 @@ Windykacja polubowna, postępowanie sądowe o zapłatę (nakazowe, upominawcze, 
 | Akt | Dz.U. |
 |---|---|
 | KPC | Dz.U. 2026 poz. 468 t.j. |
-| KC | Dz.U. 2025 poz. 1071 t.j. ze zm. |
-| KSCU | Dz.U. 2024 poz. 959 t.j. |
+| KC | Dz.U. 2026 poz. 795 t.j. ze zm. |
+| KSCU | Dz.U. 2025 poz. 1228 t.j. |
 | Ustawa o kosztach komorniczych (u.k.k.) | Dz.U. 2024 poz. 377 t.j. |
-| Ustawa o komornikach sądowych | Dz.U. 2024 poz. 1458 t.j. |
+| Ustawa o komornikach sądowych | Dz.U. 2026 poz. 881 t.j. |
 
 ---
 

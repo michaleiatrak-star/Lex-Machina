@@ -9,9 +9,9 @@ description: |
   Eksportuje tekst do czatu przez sendPrompt z zachowaniem znaczników routera.
 compatibility: "html-vanilla, sendPrompt"
 version: "3.2"
-default_renderer: "/mnt/skills/user/prawny-router-v3/anonimizer/assets/AnonimizerPrawny.jsx"
-rules: "/mnt/skills/user/prawny-router-v3/anonimizer/references/REGULY-ANONIMIZACJI.md"
-legacy_renderer: "/mnt/skills/user/prawny-router-v3/anonimizer/assets/anonimizer-widget.legacy.html"
+default_renderer: "prawny-router-v3/anonimizer/assets/AnonimizerPrawny.jsx"
+rules: "prawny-router-v3/anonimizer/references/REGULY-ANONIMIZACJI.md"
+legacy_renderer: "prawny-router-v3/anonimizer/assets/anonimizer-widget.legacy.html"
 ---
 
 # Anonimizer v3.2 — KROK 0A Routera Prawnego
@@ -115,9 +115,9 @@ Anonimizacja zastąpi dane znacznikami typu [PESEL], [ADRES], [E-MAIL] albo inic
 ## Domyślne uruchomienie JSX
 
 ```
-1. view /mnt/skills/user/prawny-router-v3/anonimizer/references/BLUEPRINT-SCHEMA.md
-2. view /mnt/skills/user/prawny-router-v3/anonimizer/references/REGULY-ANONIMIZACJI.md
-3. view /mnt/skills/user/prawny-router-v3/anonimizer/assets/AnonimizerPrawny.jsx
+1. view prawny-router-v3/anonimizer/references/BLUEPRINT-SCHEMA.md
+2. view prawny-router-v3/anonimizer/references/REGULY-ANONIMIZACJI.md
+3. view prawny-router-v3/anonimizer/assets/AnonimizerPrawny.jsx
 4. show_widget z HTML vanilla JS — jedyna metoda renderowania inline w claude.ai (NIE present_files z .jsx)
 ```
 

@@ -1,6 +1,6 @@
 # Moduł — Bezpieczeństwo żywności i żywienia
 
-> ⚠️ PODZIELONY 2026-08-12 (audyt-systemu-v4/CHECKLIST-DEDUP.md —
+> ⚠️ PODZIELONY 2026-08-12 (audyt-systemu-v4/references/CHECKLIST-DEDUP.md —
 > NOTA-4, moduł >400 linii, próg przekroczony ~4.6x przy 1863 liniach).
 > Wydzielono treść o HODOWLI/ZDROWIU ZWIERZĄT (599 l.) →
 > mod-ustawa-hodowla-zdrowie-zwierzat.md, oraz treść o ZEZWOLENIACH/

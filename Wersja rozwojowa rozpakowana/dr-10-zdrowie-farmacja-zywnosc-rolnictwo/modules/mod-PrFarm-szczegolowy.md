@@ -267,7 +267,7 @@ Inwentaryzacja i zwrot do wytwórcy: obowiązki przy wycofaniu z rynku (recall)
 ## CZĘŚĆ VI–VIII — REFUNDACJA, NADZÓR FARMACEUTYCZNY (GIF/WIF), SANKCJE
 
 → Wydzielone do `mod-PrFarm-refundacja-nadzor-sankcje.md`:
-- sekcja 1 — Refundacja leków (ustawa refundacyjna Dz.U. 2025 poz. 907 t.j.,
+- sekcja 1 — Refundacja leków (ustawa refundacyjna Dz.U. 2026 poz. 253 t.j.,
   poziomy odpłatności, decyzja refundacyjna, skargi pacjentów)
 - sekcja 2 — Państwowa Inspekcja Farmaceutyczna: struktura GIF/WIF, kompetencje,
   tryb odwoławczy (WIF → GIF → WSA → NSA)

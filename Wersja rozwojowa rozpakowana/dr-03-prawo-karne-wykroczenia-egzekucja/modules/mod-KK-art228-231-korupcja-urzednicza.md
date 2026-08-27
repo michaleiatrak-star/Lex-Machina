@@ -44,7 +44,9 @@ prawo wydawać decyzje administracyjne)?
    │
    ├─ Korzyść ZNACZNEJ WARTOŚCI (art. 228 §5, w zw. z art. 115 §5-6 —
    │  próg kwotowy weryfikuj aktualnie, indeksowany do minimalnego
-   │  wynagrodzenia) → 2-12 lat
+   │  wynagrodzenia) → 2-15 lat
+   │
+   ├─ Korzyść WIELKIEJ WARTOŚCI (art. 228 §5a) → 3-20 lat
    │
    └─ TYP KWALIFIKOWANY — korzyść PRZYJĘTA ZA ZACHOWANIE STANOWIĄCE
       NARUSZENIE PRZEPISÓW PRAWA (art. 228 §3) → 1-10 lat — ⚠️
@@ -76,7 +78,9 @@ tej funkcji?
 ├─ Korzyść w celu SKŁONIENIA do naruszenia przepisów (art. 229 §3) →
 │  1-10 lat
 │
-├─ Korzyść ZNACZNEJ WARTOŚCI (art. 229 §4) → 2-12 lat
+├─ Korzyść ZNACZNEJ WARTOŚCI (art. 229 §4) → 2-15 lat
+│
+├─ Korzyść WIELKIEJ WARTOŚCI (art. 229 §4a) → 3-20 lat
 │
 └─ ⛔ CZYNNY ŻAL (art. 229 §6 KK) — NIE PODLEGA KARZE sprawca, jeżeli:
    1. korzyść lub obietnicę PRZYJĘTO, oraz
@@ -114,8 +118,6 @@ PRZEKONANIE o istnieniu takich wpływów (niekoniecznie prawdziwych)?
 │
 ├─ Wypadek mniejszej wagi (art. 230 §2) → do 2 lat
 │
-├─ Korzyść znacznej wartości (art. 230 §3) → 2-12 lat
-│
 └─ ODWROTNA STRONA — UDZIELENIE korzyści osobie powołującej się na
    wpływy (art. 230a KK, "czynne" płatna protekcja) → 6 m-cy – 8 lat
    (§1), typ mniejszej wagi (§2) do 2 lat, ZE ZBLIŻONYM czynnym żalem
@@ -147,7 +149,7 @@ lub prywatnego?
 │  uprawnień/zaniechania obowiązków
 │
 ├─ Działanie W CELU OSIĄGNIĘCIA KORZYŚCI MAJĄTKOWEJ LUB OSOBISTEJ
-│  (art. 231 §2) → 3 m-ce – 10 lat (surowszy niż §1 — tu KORZYŚĆ jest
+│  (art. 231 §2) → od roku do 10 lat (surowszy niż §1 — tu KORZYŚĆ jest
 │  motywem, co zbliża do korupcji sensu stricto, choć formalnie to
 │  wciąż nadużycie funkcji, nie łapownictwo — możliwy ZBIEG z art. 228,
 │  jeśli korzyść pochodziła od osoby trzeciej w zamian za konkretne
@@ -174,7 +176,7 @@ analizy konkretnego stanu faktycznego.
 | Płatna protekcja (bierna) | art. 230 §1 | 6 m-cy – 8 lat | brak wprost |
 | Płatna protekcja (czynna) | art. 230a §1 | 6 m-cy – 8 lat | TAK, analogicznie (§3) |
 | Nadużycie funkcji (bez korzyści) | art. 231 §1 | do 3 lat | nie dotyczy |
-| Nadużycie funkcji (dla korzyści) | art. 231 §2 | 3 m-ce – 10 lat | nie dotyczy |
+| Nadużycie funkcji (dla korzyści) | art. 231 §2 | 1–10 lat | nie dotyczy |
 
 ⚠️ WSZYSTKIE zagrożenia i progi kwotowe ("znaczna wartość") do
 potwierdzenia na isap.sejm.gov.pl przed użyciem w piśmie (PRAWO-HARDGATE).

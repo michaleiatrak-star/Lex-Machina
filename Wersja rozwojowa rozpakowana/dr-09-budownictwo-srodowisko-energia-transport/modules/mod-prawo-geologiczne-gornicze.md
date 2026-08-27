@@ -33,7 +33,7 @@ Organ nadzoru:   Wyższy Urząd Górniczy (WUG) — nadzór nad bezpieczeństwem
 ```
 
 ## Połącz z
-- DR-09/mod-POŚ-prawo-ochrony-srodowiska (OOŚ przy wydobyciu)
+- dr-09-budownictwo-srodowisko-energia-transport/modules/mod-POS-prawo-ochrony-srodowiska.md (OOŚ przy wydobyciu)
 - DR-09/mod-PrGeodezyjne-kartografia-wywlaszczenia (kwestie wywłaszczeniowe)
 
 ## Weryfikacja online

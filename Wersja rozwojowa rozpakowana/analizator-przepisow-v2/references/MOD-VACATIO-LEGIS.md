@@ -2,7 +2,7 @@
 
 **Wersja:** 1.0 | **Dodano:** 2026-06-03
 **Wywołaj:** z MODUŁ 7C (MOD-HISTORIA-ZMIAN) gdy wykryto vacatio legis lub nowelizację wieloetapową.
-**Zasada:** `view /mnt/skills/user/shared/PRAWO-HARDGATE.md` przed każdym przepisem z tego modułu.
+**Zasada:** `view shared/PRAWO-HARDGATE.md` przed każdym przepisem z tego modułu.
 
 ---
 
@@ -200,5 +200,5 @@ prawo z **daty dokonania czynności**, nie z daty orzekania.
 - prawo do sądu i gwarancje procesowe (EKPC — weryfikuj aktualny standard),
 - postępowania wszczęte przed zmianą prawa z klauzulą intertemporalną.
 
-Każdy z tych wyjątków → wywołaj `view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
+Każdy z tych wyjątków → wywołaj `view shared/PRAWO-HARDGATE.md`
 i zweryfikuj stosowny przepis przejściowy online.

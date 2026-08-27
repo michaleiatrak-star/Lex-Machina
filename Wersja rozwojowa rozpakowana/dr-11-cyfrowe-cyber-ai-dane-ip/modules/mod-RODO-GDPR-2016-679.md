@@ -64,10 +64,10 @@ Dla pogłębionej analizy, INTAKE, map postępowań, kalkulatorów i predykcji �
 odpowiednie moduły wspólne (lazy loading — tylko właściwy do sprawy):
 
 ```
-view /mnt/skills/user/shared/INTAKE-GAP.md
-view /mnt/skills/user/shared/ROSZCZENIA.md
-view /mnt/skills/user/shared/TERM-CALC.md
-view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md
+view shared/INTAKE-GAP.md
+view shared/ROSZCZENIA.md
+view shared/TERM-CALC.md
+view shared/STRATEGIA-PROCESOWA.md
 ```
 
 Dla BENCHMARKINGU orzeczniczego i predykcji wyniku wywołaj skill `orzeczenia-sadowe-v2`.
@@ -80,8 +80,8 @@ Dla BENCHMARKINGU orzeczniczego i predykcji wyniku wywołaj skill `orzeczenia-sa
 |---|---|
 | Pozew o odszkodowanie RODO | `pisma-procesowe-v3` |
 | Skarga do UODO | `pisma-proste-v2` |
-| Naruszenie wizerunku + IP | `mod-O-wlasnosc-intelektualna.md` |
-| Monitoring w miejscu pracy | `mod-A-prawo-pracy.md` |
+| Naruszenie wizerunku + IP | `dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-PrAut-wlasnosc-intelektualna-IP.md` |
+| Monitoring w miejscu pracy | `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-KP-prawo-pracy.md` |
 | Analiza szans procesowych | `analiza-sadowa-v6` |
 | Redakcja/audyt: polityka prywatności, RCP/RCO, PBI, upoważnienia, IOD, procedura naruszeń, archiwizacja/retencja, regulamin pracy/wynagradzania/ZFŚS | `analizator-umow-v1` → `mod-J21-rodo-archiwizacja-regulaminy.md` (J21) |
 | Klauzule RODO/DPA w umowie z kontrahentem | `analizator-umow-v1` → `mod-shared-rodo.md` |
@@ -95,7 +95,7 @@ Dla BENCHMARKINGU orzeczniczego i predykcji wyniku wywołaj skill `orzeczenia-sa
 Sprawy administracyjne przed Prezesem UODO prowadź przez moduł:
 
 ```text
-view /mnt/skills/user/dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-UODO-postepowanie-ochrona-danych.md
+view dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-UODO-postepowanie-ochrona-danych.md
 ```
 
 Nie mieszaj: skarga do UODO, skarga do WSA na decyzję UODO i powództwo cywilne o odszkodowanie z art. 82 RODO to trzy różne warstwy ochrony.
@@ -106,7 +106,7 @@ Nie mieszaj: skarga do UODO, skarga do WSA na decyzję UODO i powództwo cywilne
 Sprawy administracyjne przed Prezesem UODO prowadź przez moduł:
 
 ```text
-view /mnt/skills/user/dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-UODO-postepowanie-ochrona-danych.md
+view dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-UODO-postepowanie-ochrona-danych.md
 ```
 
 Nie mieszaj: skarga do UODO, skarga do WSA na decyzję UODO i powództwo cywilne o odszkodowanie z art. 82 RODO to trzy różne warstwy ochrony.

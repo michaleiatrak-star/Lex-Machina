@@ -27,7 +27,12 @@ I. WEDŁUG WAGI CZYNU (art. 7 KK):
    WYSTĘPEK — zagrożony grzywną powyżej 30 stawek dziennych (lub powyżej
      5000 zł), karą ograniczenia wolności przekraczającą miesiąc, albo
      karą pozbawienia wolności przekraczającą miesiąc (art. 7 §3 KK).
-   Przykład z tego modułu: zabójstwo (art. 148 §1, min. 8-10 lat — zbrodnia);
+   Przykład z tego modułu: zabójstwo (art. 148 §1 — kara pozbawienia wolności
+     NA CZAS NIE KRÓTSZY OD LAT 10 albo dożywotnie pozbawienie wolności;
+     ⛔ NIE „min. 8-10 lat" — dolna granica wynosi 10 lat, a górna granica
+     terminowej kary pozbawienia wolności to 30 lat od 1.10.2023, kiedy
+     zniesiono odrębną karę 25 lat; ✅ [VER: arslege.pl/zabojstwo +
+     lexlege.pl/kk/art-148, odczyt 2026-08-25] — zbrodnia);
      kradzież zwykła (art. 278 §1, do 5 lat — występek, bo górna granica
      nie przesądza, decyduje DOLNA granica ≥3 lata dla zbrodni).
 
@@ -171,7 +176,7 @@ CZY UŻYTO PRZEMOCY, GROŹBY LUB PODSTĘPU?
 └─ PO zaborze, cel: WYMUSZENIE rozporządzenia mieniem / zaprzestania działalności
     └─ → ART. 282 KK — WYMUSZENIE ROZBÓJNICZE
          Kara: 1–10 lat pozbawienia wolności
-         ⚠️ Źródło: Dz.U.2025.383 t.j. — weryfikuj w ISAP
+         ⚠️ Źródło: Dz.U. 2025 poz. 383 t.j. — weryfikuj w ISAP
          ⚠️ WĘZEŁ GRANICZNY 282 vs 191 §2 KK:
          → 282: żądanie mienia + przemoc/groźba
          → 191 §2: zmuszanie do zaprzestania działalności gospodarczej
@@ -184,7 +189,7 @@ CZY UŻYTO PRZEMOCY, GROŹBY LUB PODSTĘPU?
 ```
 JAKA JEST WARTOŚĆ SKRADZIONEGO MIENIA?
 ⚠️ Aktualny próg od 01.10.2023 — zawsze weryfikuj w isap.sejm.gov.pl
-⚠️ UWAGA art. 115 §5–6 KK: mienie znacznej wartości (>200 000 zł) i wielkiej wartości (>1 000 000 zł) — kwoty zamrożone od 2010 r., niezmienione w Dz.U.2025.383 — jednak realna siła nabywcza dramatycznie spadła (200k = 42x min. wynagrodzenie 2026 vs 152x w 2010). Przy sprawach granicznych zawsze weryfikuj w aktualnym t.j. KK.
+⚠️ UWAGA art. 115 §5–6 KK: mienie znacznej wartości (>200 000 zł) i wielkiej wartości (>1 000 000 zł) — kwoty zamrożone od 2010 r., niezmienione w Dz.U. 2025 poz. 383 — jednak realna siła nabywcza dramatycznie spadła (200k = 42x min. wynagrodzenie 2026 vs 152x w 2010). Przy sprawach granicznych zawsze weryfikuj w aktualnym t.j. KK.
 │
 ├─ ≤ 800 zł → ART. 119 §1 KW — WYKROCZENIE KRADZIEŻY
 │              Kara: areszt / ograniczenie wolności / grzywna do 5 000 zł

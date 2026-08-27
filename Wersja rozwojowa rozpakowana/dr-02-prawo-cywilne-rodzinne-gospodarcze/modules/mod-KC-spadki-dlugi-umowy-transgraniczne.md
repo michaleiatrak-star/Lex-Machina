@@ -13,7 +13,7 @@ dziedziczenie gospodarstw rolnych (Tytuł X KC), spis inwentarza (art. 637-641 K
 ⛔ **Treść przeniesiona VERBATIM** przy podziale 2026-08-21 (ZASADA 13, F-105) — operacja czysto
 strukturalna, żaden fragment nie był redagowany, przenumerowany ani skracany.
 
-**⬅ Plik macierzysty (indeksator, nazwa niezmieniona):** `dr-02/modules/mod-KC-spadki.md`
+**⬅ Plik macierzysty (indeksator, nazwa niezmieniona):** `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-spadki.md`
 
 ---
 

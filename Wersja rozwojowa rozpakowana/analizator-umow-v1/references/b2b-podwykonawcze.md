@@ -49,7 +49,7 @@ przepis to art. 11 ust. 1 pkt 7a ustawy o PIP, NIE "art. 10 ust. 1 pkt
 7a" jak podawała poprzednia wersja — potwierdzone jednoznacznie
 oficjalnym tekstem ustawy [orka.sejm.gov.pl] i 5+ zgodnymi źródłami
 — pełny opis mechanizmu, w tym niuanse temporalne i zakaz
-retorsji: `dr-04/modules/mod-ustawa-PIP-inspekcja-pracy.md` sekcja 6.2,
+retorsji: `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-ustawa-PIP-inspekcja-pracy.md` sekcja 6.2,
 NIE duplikuj tutaj), SAMODZIELNIE stwierdzić istnienie stosunku pracy —
 BEZ POŚREDNICTWA sądu. Kluczowe dla OCENY RYZYKA w tym module:
   □ ✅ ROZSTRZYGNIĘTE 2026-08-08 (FLAGA F-19 ZAMKNIĘTA): odwołanie od

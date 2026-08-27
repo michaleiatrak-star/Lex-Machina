@@ -10,7 +10,7 @@ description: |
   - naruszenia celno-akcyzowe (KKS — kwalifikator karny-skarbowy)
   Cło, UCC, Nomenklatura Scalona (CN), WIT, wartość celna, FTA/GSP →
   `mod-UCC-clo-taryfa-celna.md` (wydzielony 2026-06-14).
-  Powiązane: mod-Q (PIT/VAT/CIT), mod-AC (REACH/chemikalia), mod-L (gospodarcze).
+  Powiązane: `mod-PIT-podatek-dochodowy-fizyczne.md` / `mod-CIT-podatek-dochodowy-prawne.md` / `mod-VAT-podatek-od-towarow-i-uslug.md` według podatku, `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-REACH-CLP-chemikalia.md`, `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KSH-spolki-handlowe.md`.
 compatibility:
   tools:
     - web_search

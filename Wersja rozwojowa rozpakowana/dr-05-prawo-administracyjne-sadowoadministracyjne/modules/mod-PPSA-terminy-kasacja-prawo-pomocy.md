@@ -231,7 +231,7 @@ dla klientów o niskich dochodach
 199-238 — dodano 2026-08-22, dopełnienie Rozdz. 3 opisanego w sekcji 3)
 
 ✅ **ZWERYFIKOWANE Rząd 1** (bip.warszawa.wsa.gov.pl, gliwice.wsa.gov.pl,
-bip.wroclaw.wsa.gov.pl, api.sejm.gov.pl — metryka **Dz.U.2026.0.143 t.j.**
+bip.wroclaw.wsa.gov.pl, api.sejm.gov.pl — metryka **Dz.U. 2026 poz. 143 t.j.**
 niezależnie potwierdzona arslege.pl i lexlege.pl, zgodna z metryką z
 sekcji 7 tego samego modułu). Metodologia jak w pozostałych sekcjach:
 minimum Rząd 1 + Rząd 2B zgodne przed oznaczeniem jako zweryfikowane.
@@ -602,38 +602,25 @@ do odczytania przy konkretnej sprawie wymagającej precyzyjnego cytatu.
 | Skarga kasacyjna do SN w sprawach ZUS (inny system, KPC) | `mod-SUS-ZUS-ubezpieczenia-spoleczne.md` — NIE mylić z tym modułem (NSA ≠ SN) |
 | Poręczenie majątkowe/kaucja w postępowaniu KARNYM | DR-03, `mod-poreczenie-majatkowe-kaucja-karna.md` — inny system prawny |
 
-## 7. SKARGA NA OPINIĘ TRANSGRANICZNĄ — ZMIANA TERMINU (naprawa F-88,
-punkt PPSA, dodano 2026-08-20)
+## 7. ZMIANY PPSA Z DZ.U. 2026 POZ. 846 — DOKŁADNY ZAKRES
 
 ```
 ⚡ Ustawa z 29.05.2026 o zmianie ustawy — Ordynacja podatkowa oraz
-  niektórych innych ustaw (Dz.U. 2026.846, ta sama ustawa co zmiany MDR
+  niektórych innych ustaw (Dz.U. 2026 poz. 846, ta sama ustawa co zmiany MDR
   opisane w `mod-OP-ordynacja-podatkowa.md` sekcja 6a), w życie
   1.10.2026, zmienia RÓWNIEŻ PPSA.
 
-⭐⭐ DOPRECYZOWANIE TERMINU na wniesienie skargi do WSA na OPINIĘ
-  TRANSGRANICZNĄ (dot. schematów podatkowych transgranicznych w
-  rozumieniu znowelizowanego art. 86a Op, patrz moduł OP sekcja 6a) I
-  na ODMOWĘ jej wydania (⚠️ [NIEWERYFIKOWANE RZĄD 1] — źródło: OSR
-  projektu ustawy, streszczenie ogólne "doprecyzowanie regulacji
-  określającej termin", BEZ dokładnego numeru artykułu PPSA ani
-  dokładnej treści nowego brzmienia terminu — ISAP zablokowany w tym
-  środowisku, ten sam znany limit narzędziowy co F-88 dla funduszy
-  inwestycyjnych/instrumentów finansowych, patrz niżej)
+⭐⭐ Art. 10 nowelizacji zmienia wyłącznie dwie jednostki PPSA:
+  1) art. 53 §1 — odesłanie „art. 3 §2 pkt 4a” zastąpiono odesłaniem
+     „art. 3 §2 pkt 4a i 4b”; skutek: 30-dniowy termin z art. 53 §1
+     obejmuje także nową kategorię z pkt 4b;
+  2) art. 264 §2 — do katalogu podmiotów uprawnionych do podjęcia uchwały
+     zwracającej się do NSA o wyjaśnienie przepisów dodano ministra
+     właściwego do spraw finansów publicznych.
 
-⚠️ KONTEKST SYSTEMOWY: skarga na opinię transgraniczną to podkategoria
-  skargi na pisemną interpretację/opinię z art. 3 §2 pkt 4a-4b PPSA
-  (przywoływana już pośrednio przy okazji zakresu kognicji WSA —
-  ⚠️ dokładne umiejscowienie "opinii w sprawie opodatkowania
-  wyrównawczego" i "opinii transgranicznej" w katalogu art. 3 §2 NIE
-  było dotąd przedmiotem tego modułu, punkt startowy)
-
-⚠️ POZOSTAJE CAŁKOWICIE NIEOPRACOWANE w ramach F-88 (limit narzędziowy
-  ISAP/dziennikustaw.gov.pl/api.sejm.gov.pl — ROBOTS_DISALLOWED w tym
-  środowisku, ten sam co przy adwokaturze/radcach w sesji 19w-19y):
-  pozostałe zmiany PPSA wprowadzone ustawą 2026.846 poza tym jednym
-  doprecyzowaniem terminu — zakres nowelizacji PPSA mógł być szerszy,
-  NIE potwierdzone w tej sesji.
+Nie ma w tej ustawie innych zmian PPSA. Powyższy zakres zweryfikowano
+bezpośrednio w urzędowym PDF ELI `D20260846.pdf`; nie opieraj się na
+wcześniejszej hipotezie o odrębnej, nienazwanej „opinii transgranicznej”.
 ```
 
 ## ŁĄCZ Z
@@ -642,7 +629,7 @@ punkt PPSA, dodano 2026-08-20)
 |---|---|
 | Pismo: wniosek o przywrócenie terminu, skarga kasacyjna, wniosek o prawo pomocy | `pisma-procesowe-v3` |
 | Orzecznictwo NSA dot. terminów, kasacji, prawa pomocy | `orzeczenia-sadowe-v2` |
-| Prekluzja przy braku zgłoszenia na czas (art. 210 PPSA — koszty; art. 105 PPSA — zarzuty procesowe, sekcja 7; art. 162 KPC — zarzuty procesowe, `dr-02/modules/mod-KPC-art162-zastrzezenie-protokol`) | `dr-02` — trzy analogiczne mechanizmy prekluzyjne w dwóch procedurach |
+| Prekluzja przy braku zgłoszenia na czas (art. 210 PPSA — koszty; art. 105 PPSA — zarzuty procesowe, sekcja 7; art. 162 KPC — zarzuty procesowe, `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KPC-art162-zastrzezenie-protokol.md`) | `dr-02` — trzy analogiczne mechanizmy prekluzyjne w dwóch procedurach |
 
 ---
 

@@ -166,7 +166,7 @@ VAT
   z ust. 2 zd. 1 i ust. 5a traktuje się jako NADPŁATĘ podlegającą
   oprocentowaniu wg Ordynacji podatkowej
 
-✅ [VER: lexlege.pl — pełny tekst art. 87 ustawy o VAT, Dz.U.2025.0.775
+✅ [VER: lexlege.pl — pełny tekst art. 87 ustawy o VAT, Dz.U. 2025 poz. 775
    t.j., stan prawny na 12.08.2026; pobrane 2026-08-12]
 ⚠️ [ZALECANA WERYFIKACJA ISAP przed powołaniem w piśmie — akt ma
    nowelizacje po t.j.: Dz.U. 2025 poz. 894, 896, 1203, 1811; Dz.U. 2026

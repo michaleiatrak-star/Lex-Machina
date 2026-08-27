@@ -36,7 +36,7 @@ nakaz opuszczenia lokalu przez sprawcę, zakaz zbliżania, izolacja ofiary.
 
 ## KLUCZOWE AKTY PRAWNE — WERYFIKUJ W ISAP PRZED POWOŁANIEM
 
-- Art. 207 KK (znęcanie) → isap.sejm.gov.pl (Dz.U. 2024.17 — weryfikuj)
+- Art. 207 KK (znęcanie) → isap.sejm.gov.pl (Dz.U. 2024 poz. 17 — weryfikuj)
 - Ustawa o przeciwdziałaniu przemocy domowej → isap.sejm.gov.pl (weryfikuj aktualną nazwę i numer)
   ⚠️ UWAGA: Ustawa była nowelizowana — zweryfikuj aktualną wersję w ISAP
 - Art. 275a KPK (zakaz zbliżania jako środek zapobiegawczy) → isap.sejm.gov.pl
@@ -80,8 +80,8 @@ nakaz opuszczenia lokalu przez sprawcę, zakaz zbliżania, izolacja ofiary.
 |---|---|
 | Zawiadomienie o przestępstwie (art. 207 KK) | `pisma-procesowe-v3` |
 | Wniosek o nakaz opuszczenia lokalu (sądowy) | `pisma-procesowe-v3` |
-| Analiza karna / obrona | `mod-N-karne.md` + `analiza-sadowa-v6` |
-| Stalking jako element przemocy | `mod-J-stalking.md` |
-| Przemoc ekonomiczna — separacja majątkowa | `mod-C-rodzinne.md` |
+| Analiza karna / obrona | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` + `analiza-sadowa-v6` |
+| Stalking jako element przemocy | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art190a-stalking.md` |
+| Przemoc ekonomiczna — separacja majątkowa | `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KRO-rodzinne.md` |
 
 *⚠️ Moduł strategiczny — wszystkie przepisy i orzecznictwo wymagają weryfikacji online przed powołaniem.*

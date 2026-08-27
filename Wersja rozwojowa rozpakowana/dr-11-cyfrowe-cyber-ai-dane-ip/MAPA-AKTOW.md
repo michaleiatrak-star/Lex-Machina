@@ -22,7 +22,7 @@
 | MiCA — kryptoaktywa (Rozp. UE 2023/1114) | Dz.Urz. UE L 2023/1114 | mod-MiCA-kryptoaktywa | ✅ OK |
 | Ustawa o informatyzacji podmiotów publicznych i KSeF | ⚠️ Dz.U. 2025 poz. 1703 t.j. (POPRAWKA 2026-07-02bbb — BYŁO błędnie 2024.1557; potwierdzone bezpośrednio przez isap.sejm.gov.pl/WDU20250001703, obwieszczenie 7.11.2025) | mod-ustawa-informatyzacja-podmiotow-publicznych | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
 | Ustawa o otwartych danych i ponownym wykorzystaniu | Dz.U. 2023 poz. 1524 t.j. ✅ VER: 2026-06-14 (TRYB DZU — był 2021/1641, czyli tekst oryginalny; 2023/1524 to jego t.j.) | mod-ustawa-otwarte-dane | ✅ OK |
-| Ustawa o podpisie elektronicznym i usługach zaufania (eIDAS) | ⚠️ Rozp. UE 910/2014 + Dz.U. 2016 poz. 1579 t.j. (POPRAWKA 2026-07-02ddd — BYŁO błędnie 2016.147, potwierdzone bezpośrednio przez isap.sejm.gov.pl; nazwa formalna: ustawa o usługach zaufania oraz identyfikacji elektronicznej z 5.09.2016) + ⚠️ nowelizacja eIDAS 2.0 w toku (projekt z 19.02.2026, termin wdrożenia grudzień 2026) | mod-ustawa-podpis-elektroniczny | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
+| Ustawa o podpisie elektronicznym i usługach zaufania (eIDAS) | ⚠️ Rozp. UE 910/2014 + Dz.U. 2024 poz. 1725 t.j. (POPRAWKA 2026-07-02ddd — BYŁO błędnie 2016.147, potwierdzone bezpośrednio przez isap.sejm.gov.pl; nazwa formalna: ustawa o usługach zaufania oraz identyfikacji elektronicznej z 5.09.2016) + ⚠️ nowelizacja eIDAS 2.0 w toku (projekt z 19.02.2026, termin wdrożenia grudzień 2026) | mod-ustawa-podpis-elektroniczny | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
 | Ustawa Prawo własności przemysłowej | Dz.U. 2023 poz. 1170 t.j. — VER 2026-07-02ccc: nadal aktualne | mod-ustawa-prawo-wlasnosci-przemyslowej | ✅ OK |
 | Ustawa o świadczeniu usług drogą elektroniczną | Dz.U. 2024 poz. 1513 t.j. ✅ VER 2026-07-04 (audyt-DR11 — było "2020.344, niejednoznaczne"): isap WDU20240001513, obwieszczenie 10.10.2024, poprzedni t.j. 2020.344; nowelizacja z 18.12.2025 (implementacja DSA) zmienia treść tego t.j. bez tworzenia nowego — cytować jako "2024.1513 ze zm." | mod-ustawa-uslugi-elektroniczne | ✅ OK (numer ustalony) |
 | Ustawa o krajowym systemie certyfikacji cyberbezpieczeństwa | Dz.U. 2025 poz. 1017 — VER 2026-07-02ddd: nadal aktualne (ustawa z 25.06.2025) | mod-ustawa-certyfikacja-cyberbezpieczenstwa | ✅ OK |
@@ -37,7 +37,7 @@
 > elektroniczne — możliwy nowszy t.j., wymaga domknięcia w kolejnej sesji]
 >
 > **Sesja katalogowania 2026-07-04:** ostatnia niejednoznaczność (usługi
-> elektroniczne) zamknięta — potwierdzony aktualny t.j. Dz.U. 2024.1513
+> elektroniczne) zamknięta — potwierdzony aktualny t.j. Dz.U. 2024 poz. 1513
 > (obwieszczenie 10.10.2024), plus nowelizacja DSA z 18.12.2025 zmieniająca
 > ten sam tekst. DR-11 ma teraz 0 pozycji krajowych z otwartym statusem
 > numeru; pozostają flagi "WYMAGA AKTUALIZACJI MODUŁU" (Prawo komunikacji

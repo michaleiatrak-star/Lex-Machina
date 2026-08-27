@@ -19,7 +19,7 @@ nieadekwatne do bieżącej sytuacji geopolitycznej.
 
 | Artykuł | Nazwa | Znaczenie praktyczne |
 |---|---|---|
-| 127 | Zamach stanu | Najcięższe — kara nie krótsza niż 10 lat, 25 lat lub dożywocie |
+| 127 | Zamach stanu | § 1: kara nie krótsza niż 10 lat albo dożywotnie pozbawienie wolności; § 2 (przygotowanie): 3–20 lat |
 | 128 | Zamach na organ konstytucyjny RP | — |
 | 129 | Zdrada dyplomatyczna | Wąski krąg sprawców (dyplomaci, negocjatorzy z formalnym umocowaniem) |
 | **130** | **Szpiegostwo** | **Radykalnie zaostrzone reformą 2023 — patrz sekcja 2** |
@@ -231,7 +231,7 @@ KROK 6: Czy poszkodowanym jest PAŃSTWO SOJUSZNICZE (nie RP)?
 ## 8. LITERATURA I ŹRÓDŁA (zweryfikowane online 2026-07-17)
 
 - Tekst jednolity KK — ISAP/lexlege.pl/arslege.pl (art. 127-139,
-  Dz.U.2025.383 t.j.).
+  Dz.U. 2025 poz. 383 t.j.).
 - S. Hoc, *Szpiegostwo w znowelizowanym Kodeksie karnym* — krytyczna
   analiza reformy 2023 r., w tym kontrowersje wokół zakresu zmian.
 - F. Hoc (lub inny autor, ⚠️ imię niepotwierdzone w pełni w tej sesji),

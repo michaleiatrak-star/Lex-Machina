@@ -188,7 +188,7 @@ podatkowych) — DOTĄD CAŁKOWICIE NIEOBECNA, mimo że to JEDEN Z
 NAJSKUTECZNIEJSZYCH mechanizmów ograniczenia podatku SD
 
 ```
-PODSTAWA: art. 16 ustawy SD (aktualny t.j. Dz.U.2026.478,
+PODSTAWA: art. 16 ustawy SD (aktualny t.j. Dz.U. 2026 poz. 478,
   potwierdzone bezpośrednio OpenLEX)
 
 ⭐⭐⭐ ISTOTA: WYŁĄCZENIE Z PODSTAWY opodatkowania równowartości
@@ -247,7 +247,7 @@ PODSTAWA: art. 16 ustawy SD (aktualny t.j. Dz.U.2026.478,
   nabyciu W DRODZE dziedziczenia/zapisu
 
 Potwierdzone w 7+ zgodnych źródeł, w tym BEZPOŚREDNIO OpenLEX
-(dosłowny tekst art. 16, aktualny t.j. Dz.U.2026.478) oraz
+(dosłowny tekst art. 16, aktualny t.j. Dz.U. 2026 poz. 478) oraz
 podatki.gov.pl [Rząd 1, maj 2026, z KONKRETNYM przykładem liczenia
 terminu], poradnikprzedsiebiorcy.pl [×2], doradca.lublin.pl,
 prawo-spadkowe-poznan.pl [styczeń 2026], kancelaria-praga.pl

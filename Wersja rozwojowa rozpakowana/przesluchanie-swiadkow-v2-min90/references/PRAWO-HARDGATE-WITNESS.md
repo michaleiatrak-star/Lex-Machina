@@ -1,7 +1,7 @@
 # PRAWO-HARDGATE-WITNESS — Obszary prawne w przesłuchaniu świadków wymagające weryfikacji
 
 > ⛔ Plik pomocniczy do PRAWO-HARDGATE dla skilla przesłuchanie-swiadkow-v2.
-> Nie zastępuje: `view /mnt/skills/user/shared/PRAWO-HARDGATE.md` — wczytaj
+> Nie zastępuje: `view shared/PRAWO-HARDGATE.md` — wczytaj
 > główny moduł HARDGATE przed każdym przepisem.
 
 **Przeznaczenie:** Katalog obszarów, w których skill przesłuchania może powołać
@@ -169,7 +169,7 @@ Gdy w pytaniu lub jego uzasadnieniu pojawia się:
   - stawka opłaty, kara, sankcja:
 
 → ZATRZYMAJ generowanie pytania
-→ view /mnt/skills/user/shared/PRAWO-HARDGATE.md
+→ view shared/PRAWO-HARDGATE.md
 → Wykonaj weryfikację ISAP dla danego przepisu
 → Oznacz ✅ [VER: ISAP, data] w polu DOPUSZCZ. bramki pytania
 → Kontynuuj generowanie

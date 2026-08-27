@@ -50,14 +50,14 @@ PODSTAWOWE PRZEPISY:
     §1:    kara pozbawienia wolności od 3 miesięcy do 5 lat
     §1a:   wobec osoby nieporadnej ze względu na wiek/stan — **6 miesięcy do 8 lat**
     §2:    ze szczególnym okrucieństwem — 1–10 lat
-    §3:    pokrzywdzony targnie się na życie — **2–15 lat** (nowelizacja 7.07.2022, Dz.U.2022.2600, od 1.10.2023)
+    §3:    pokrzywdzony targnie się na życie — **2–15 lat** (nowelizacja 7.07.2022, Dz.U. 2022 poz. 2600, od 1.10.2023)
   TRYB ŚCIGANIA: z urzędu (Policja działa bez wniosku)
 
   Art. 190 KK — groźba karalna (np. groźby SMS, poczta głosowa)
     §1: do 3 lat | TRYB: na wniosek (§2) — ZŁÓŻ WNIOSEK PISEMNIE
 
   Art. 190a KK — stalking / cyberstalking (często łącznie z art. 207)
-    §1/§2: **6 miesięcy – 8 lat** (Dz.U.2025.383)
+    §1/§2: **6 miesięcy – 8 lat** (Dz.U. 2025 poz. 383)
     §3:   targnięcie pokrzywdzonego na życie — **2–15 lat** (art. 190a §3 KK)
     TRYB: na wniosek pokrzywdzonego
 
@@ -149,13 +149,13 @@ REKOMENDACJA: □ Nakaz natychmiastowy  □ Zawiadomienie karne  □ Nakaz sądo
 |---|---|
 | Zawiadomienie o przestępstwie (art. 207 KK) | `pisma-procesowe-v3` |
 | Wniosek o nakaz opuszczenia lokalu (sąd) | `pisma-procesowe-v3` |
-| Wniosek o alimenty / zabezpieczenie | `pisma-procesowe-v3` + `mod-C-rodzinne.md` |
-| Analiza karna / kwalifikacja | `mod-N-karne.md` + `kwalifikator-karnomaterialny.md` |
-| Stalking jako element przemocy | `mod-J-stalking.md` + `stalking-nekanie.md` |
-| Przemoc ekonomiczna — rozdzielność | `mod-C-rodzinne.md` + `prawo-rodzinne.md` |
+| Wniosek o alimenty / zabezpieczenie | `pisma-procesowe-v3` + `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KRO-rodzinne.md` |
+| Analiza karna / kwalifikacja | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` + `mod-KK-kwalifikator-karnomaterialny.md` |
+| Stalking jako element przemocy | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art190a-stalking.md` |
+| Przemoc ekonomiczna — rozdzielność | `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KRO-rodzinne.md` |
 | Orzecznictwo SN / SA | `orzeczenia-sadowe-v2` |
 
 *Art. 207 KK: Dz.U. 2025 poz. 383 t.j. | Art. 190a KK: nowelizacja od 01.10.2023*
-*Ustawa o przec. przemocy w rodzinie: Dz.U. 2021.1249 t.j. — weryfikuj w isap.sejm.gov.pl*
+*Ustawa o przec. przemocy w rodzinie: Dz.U. 2021 poz. 1249 t.j. — weryfikuj w isap.sejm.gov.pl*
 *KRO: Dz.U. 2026 poz. 236 t.j. | KPC: Dz.U. 2026 poz. 468 t.j.*
 *Weryfikacja: 22.05.2026 — zakaz cytowania przepisów z pamięci*

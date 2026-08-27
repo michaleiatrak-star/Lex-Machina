@@ -108,6 +108,6 @@ faktycznym LUB zdarzeniu przyszłym).*
 ## ŹRÓDŁA
 
 - Pełna mapa systemu interpretacji podatkowych, definicje, baza EUREKA
-  → `dr-06/modules/mod-interpretacje-definicje-podatkowe.md` (już
+  → `dr-06-podatki-finanse-publiczne-aml/modules/mod-interpretacje-definicje-podatkowe.md` (już
   istniejący, kompleksowo opracowany moduł DR-06).
 ```

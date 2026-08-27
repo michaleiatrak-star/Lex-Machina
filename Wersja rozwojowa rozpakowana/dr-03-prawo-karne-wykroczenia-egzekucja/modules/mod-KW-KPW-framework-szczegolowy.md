@@ -162,9 +162,9 @@ REKOMENDACJA: □ Sprzeciw od wyroku nakazowego  □ Rozprawa  □ Przyjąć man
 |---|---|
 | Sprzeciw od wyroku nakazowego | `pisma-proste-v2` |
 | Analiza akt wykroczeniowych | `analiza-sadowa-v6` |
-| Obrona na rozprawie (pytania do funkcjonariusza) | moduł [K] `przesluchanie-swiadkow-v2` |
+| Obrona na rozprawie (pytania do funkcjonariusza) | moduł [K] `przesluchanie-swiadkow-v2-min90` |
 | Orzecznictwo SN — wykroczenia | `orzeczenia-sadowe-v2` |
-| Granica z przestępstwem → | `mod-N-karne.md` + kwalifikator |
+| Granica z przestępstwem → | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` + `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md` |
 | Prawo jazdy, punkty karne, cofnięcie/zatrzymanie pj | `mod-PRD-prawo-jazdy-punkty-karne` |
 
 ---
@@ -195,8 +195,8 @@ NOWE PRZESTĘPSTWA KK (NIE wykroczenia — odesłanie):
 ```
 
 ---
-*KW (Dz.U. 2025.734 t.j. ze zm. Dz.U. 2025 poz. 1872) + KPSW (Dz.U. 2025.860 t.j.)*
-*KPK stosowany posiłkowo (Dz.U. 2026.490 t.j.)*
+*KW (Dz.U. 2025 poz. 734 t.j. ze zm. Dz.U. 2025 poz. 1872) + KPSW (Dz.U. 2025 poz. 860 t.j.)*
+*KPK stosowany posiłkowo (Dz.U. 2026 poz. 490 t.j.)*
 *Uchwała SN I KZP 7/25 z 19.03.2026 — sn.pl (weryfikuj URL)*
 *Postanowienie SN IV KK 145/24 z 10.09.2024 — sn.pl*
 *Taryfikator mandatów + punktów karnych: rozp. Dz.U. 2026 poz. 724 — weryfikuj ISAP*

@@ -20,7 +20,7 @@
 > wdrożyć). Dla sporu o naruszenie RODO → DR-11. Dla "napisz/sprawdź naszą
 > politykę prywatności / RCP / regulamin pracy" → ten moduł.
 >
-> ⛔ ZAKRES vs analizator-umow-v1/mod-shared-rodo.md: ten moduł SHARED
+> ⛔ ZAKRES vs analizator-umow-v1/references/mod-shared-rodo.md: ten moduł SHARED
 > obejmuje klauzule RODO W UMOWACH (DPA jako część umowy głównej — art. 28
 > RODO, klauzule powierzenia). TEN moduł J21 obejmuje SAMODZIELNE DOKUMENTY
 > WEWNĘTRZNE organizacji (polityki, rejestry, regulaminy) — nie część

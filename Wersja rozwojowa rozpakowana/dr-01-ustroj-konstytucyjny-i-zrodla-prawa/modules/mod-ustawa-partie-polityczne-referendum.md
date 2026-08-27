@@ -1,7 +1,7 @@
 # mod-ustawa-partie-polityczne-referendum
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o partiach — Dz.U. 2023 poz. 1215 t.j. ✅ VER: 2026-06-05 | Ustawa o referendum — Dz.U. 2020 poz. 851 t.j. ze zm. ✅ VER: 2026-06-05
+**Źródło weryfikacji:** Ustawa o partiach — Dz.U. 2023 poz. 1215 t.j. ✅ VER: 2026-06-05 | Ustawa o referendum — Dz.U. 2025 poz. 300 t.j. ze zm. ✅ VER: 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
 ---
@@ -16,7 +16,7 @@ Partie polityczne (rejestracja, finanse, subwencja, sprawozdania, delegalizacja)
 | Akt | Dz.U. |
 |---|---|
 | Ustawa o partiach politycznych z dnia 27 czerwca 1997 r. | Dz.U. 2023 poz. 1215 t.j. |
-| Ustawa o referendum ogólnokrajowym z dnia 14 marca 2003 r. | Dz.U. 2020 poz. 851 t.j. ze zm. |
+| Ustawa o referendum ogólnokrajowym z dnia 14 marca 2003 r. | Dz.U. 2025 poz. 300 t.j. ze zm. |
 | Ustawa o referendum lokalnym | weryfikuj aktualny t.j. w ISAP |
 | Ustawa o wykonywaniu inicjatywy ustawodawczej przez obywateli | weryfikuj aktualny t.j. w ISAP |
 | Konstytucja RP — art. 11, 13, 62, 118 ust. 2, 125 | Dz.U. 1997 nr 78 poz. 483 |
@@ -101,7 +101,7 @@ Partie odwołujące się w swoich programach do totalitarnych metod i praktyk dz
 
 ## 4. REFERENDUM OGÓLNOKRAJOWE
 
-> **Podstawa:** art. 125 Konstytucji + Ustawa o referendum — Dz.U. 2020 poz. 851 t.j. ze zm.
+> **Podstawa:** art. 125 Konstytucji + Ustawa o referendum — Dz.U. 2025 poz. 300 t.j. ze zm.
 > ⚠️ Weryfikuj aktualne przepisy w ISAP.
 
 ### Rodzaje i zarządzenie

@@ -5,7 +5,7 @@ phishing), art. 190a §2 KK (podszywanie w sieci), art. 212/216 KK (zniesławien
 online), naruszenie wizerunku, fałszywe profile, procedury dowodowe dla cyberprzestępczości.
 
 **Weryfikacja:** 22.05.2026
-**Podstawa:** KK Dz.U.2025.383 t.j. (wersja od 26.03.2025)
+**Podstawa:** KK Dz.U. 2025 poz. 383 t.j. (wersja od 26.03.2025)
 
 ---
 
@@ -28,7 +28,7 @@ online), naruszenie wizerunku, fałszywe profile, procedury dowodowe dla cyberpr
    międzynarodowa) przez prokuraturę. Efekty bardzo powolne.
 5. **PLATFORMY ZAGRANICZNE** → zgłoszenie do platformy (Facebook, Google, X) nie zastępuje
    zawiadomienia o przestępstwie. Obie ścieżki mogą i powinny być równoległe.
-6. **KLAUZULA WHITE-HAT** (art. 269b §1a + art. 269c KK — Dz.U.2025.383):
+6. **KLAUZULA WHITE-HAT** (art. 269b §1a + art. 269c KK — Dz.U. 2025 poz. 383):
    - Art. 269b §1a: nie popełnia przestępstwa (narzędzia hakerskie) ten, kto działa wyłącznie
      w celu zabezpieczenia systemu lub opracowania metody zabezpieczenia
    - Art. 269c: nie podlega karze za art. 267 §2 (nieautoryzowany dostęp) lub art. 269a (DDoS)
@@ -38,7 +38,7 @@ online), naruszenie wizerunku, fałszywe profile, procedury dowodowe dla cyberpr
 
 ---
 
-## KATALOG PRZESTĘPSTW — PEŁNA TABELA (KK Dz.U.2025.383)
+## KATALOG PRZESTĘPSTW — PEŁNA TABELA (KK Dz.U. 2025 poz. 383)
 
 | Art. KK | Nazwa | Kara | Tryb ścigania |
 |---|---|---|---|
@@ -149,15 +149,15 @@ Prywatno-skargowe (212, 216 — zniesławienie/zniewaga online):
 | Sytuacja | Skill / Moduł |
 |---|---|
 | Zawiadomienie karne (hacking, phishing, DDoS) | `pisma-procesowe-v3` |
-| Pozew cywilny o ochronę dóbr osobistych | `pisma-procesowe-v3` + `mod-E-cywilne.md` |
-| Naruszenie danych osobowych (wyciek) — RODO | `mod-P-rodo.md` |
-| Naruszenie wizerunku + prawo autorskie | `mod-O-wlasnosc-intelektualna.md` |
-| Stalking online / podszywanie się | `mod-J-stalking.md` |
+| Pozew cywilny o ochronę dóbr osobistych | `pisma-procesowe-v3` + `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md` |
+| Naruszenie danych osobowych (wyciek) — RODO | `dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-RODO-GDPR-2016-679.md` |
+| Naruszenie wizerunku + prawo autorskie | `dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-PrAut-wlasnosc-intelektualna-IP.md` |
+| Stalking online / podszywanie się | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art190a-stalking.md` |
 | Analiza dowodów cyfrowych | `analizator-dowodow-v3` |
-| Tryby ścigania — pełna tabela | `prawny-router-v3/references/tryby-scigania.md` |
+| Tryby ścigania — pełna tabela | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KPK-tryby-scigania.md` |
 
 ---
 
-*Weryfikacja: 22.05.2026 | KK Dz.U.2025.383 t.j. (wersja od 26.03.2025)*
+*Weryfikacja: 22.05.2026 | KK Dz.U. 2025 poz. 383 t.j. (wersja od 26.03.2025)*
 *Art. 267–269c: Rozdział XXXIII KK — Przestępstwa przeciwko ochronie informacji*
 *Tryby ścigania zweryfikowane w arslege.pl i przepisy.gofin.pl — przed powołaniem weryfikuj w isap*

@@ -21,7 +21,7 @@ z 7.11.2025 — dalsze zmiany art. 24 i powiązanego KPSW art. 96).
 ✅ VER: isap.sejm.gov.pl (WDU20250000734, WDU20250001814), api.sejm.gov.pl,
 infor.pl, prawo.pl, dziennikustaw.gov.pl — 2026-08-14 (F-67)
 
-**Zasada:** `view /mnt/skills/user/shared/PRAWO-HARDGATE.md` przed każdym
+**Zasada:** `view shared/PRAWO-HARDGATE.md` przed każdym
 przepisem z tego modułu — zwłaszcza kwoty grzywien i terminy, które
 bywają nowelizowane.
 
@@ -202,7 +202,7 @@ przysługuje ZAŻALENIE.
 
 ### Art. 24 — grzywna (przepis intensywnie nowelizowany — sprawdź KAŻDORAZOWO)
 Wysokość standardowa: **20–5000 zł**. Dla wykroczeń wymienionych w §1a
-(m.in. **art. 82 §1-3, 4 i 5** — po nowelizacji Dz.U. 2025.1814; oraz
+(m.in. **art. 82 §1-3, 4 i 5** — po nowelizacji Dz.U. 2025 poz. 1814; oraz
 wykroczenia z **rozdziału XI**, komunikacyjne) — górna granica podniesiona
 do **30 000 zł**. Przy wymiarze bierze się pod uwagę dochody sprawcy,
 warunki osobiste i rodzinne, stosunki majątkowe, możliwości zarobkowe.

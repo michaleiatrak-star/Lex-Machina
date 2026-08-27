@@ -52,7 +52,7 @@ klient pyta o "SKD" wprost.
 
 PEŁNA MERYTORYKA (checklist naruszeń, spór o termin art. 45 ust. 5,
 orzecznictwo TSUE/SN, procedura): NIE duplikuj tutaj — wczytaj
-`view /mnt/skills/user/dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-kredyt-konsumencki-SKD.md`
+`view dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-kredyt-konsumencki-SKD.md`
 
 Jeśli klient chce dochodzić SKD (nie tylko analizować/negocjować umowę)
 → przekieruj do generatora pism: pisma-proste-v2 → schemat SPM

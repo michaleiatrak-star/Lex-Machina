@@ -1,6 +1,6 @@
 # Moduł [AB] — Prawo AI / AI Act
 
-> **Plik:** `/mnt/skills/user/prawny-router-v3/references/modules/mod-AB-prawo-ai.md`
+> **Plik:** `dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-AI-Act-framework.md`
 > **Wersja:** 1.1 (2026-07-27)
 > **Status:** AKTUALIZOWANY — polska ustawa o AI podpisana przez prezydenta 24.07.2026
 > **Weryfikacja:** web_search 2026-07-27 (rp.pl, prawo.pl, gazetaprawna.pl, cyberdefence24.pl, tmt.expert, skarbiec.biz)
@@ -228,13 +228,13 @@ Pytanie od użytkownika → moduł AB gdy zawiera:
 
 | Sytuacja | Skill / Moduł |
 |---|---|
-| RODO + AI (dane osobowe w systemach AI) | `mod-P-rodo.md` |
-| Prawa autorskie do treści AI | `mod-O-wlasnosc-intelektualna.md` |
+| RODO + AI (dane osobowe w systemach AI) | `dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-RODO-GDPR-2016-679.md` |
+| Prawa autorskie do treści AI | `dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-PrAut-wlasnosc-intelektualna-IP.md` |
 | AI w umowach (klauzule zgodności) | `analizator-umow-v1` |
 | Pismo / skarga do KRiBSI | `pisma-procesowe-v3` |
 | AI w postępowaniu sądowym (dowód) | `analizator-dowodow-v3` |
-| AI w miejscu pracy (art. 5 zakazy) | `mod-A-prawo-pracy.md` |
-| AI w administracji publicznej | `mod-G-administracyjne.md` |
+| AI w miejscu pracy (art. 5 zakazy) | `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-KP-prawo-pracy.md` |
+| AI w administracji publicznej | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` |
 
 ---
 

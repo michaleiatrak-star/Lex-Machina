@@ -17,7 +17,7 @@ compatibility:
 |---|---|
 | Kodeks karny | oszustwo, przywłaszczenie, szkoda spółki, dokumenty, fałszywe faktury (rozdz. XXXIVa) |
 | Kodeks karny skarbowy (KKS) — Dz.U. 2025 poz. 633 t.j. (obwieszczenie 10.04.2025) ✅ VER 2026-07-15 | podatki, faktury, deklaracje, uszczuplenia — patrz sekcja niżej |
-| Ustawa AML — instytucje obowiązane, GIIF, procedury | dr-06/mod-ustawa-AML-instytucje-obowiazkowe |
+| Ustawa AML — instytucje obowiązane, GIIF, procedury | dr-06-podatki-finanse-publiczne-aml/modules/mod-ustawa-AML-instytucje-obowiazkowe.md |
 | KSH | obowiązki organów spółek |
 
 ## ⚠️ KOREKTA 2026-07-15 — NAPRAWA BRAKU TREŚCI KKS
@@ -178,7 +178,7 @@ wartości) rzadko kwalifikują się z jednego przepisu — typowy zbieg:
        art. 76 (wyłudzenie zwrotu, jeśli dotyczy)
   KK: art. 270a (fałszowanie faktur) + art. 271a (poświadczenie nieprawdy
       w fakturze) + art. 258 (jeśli działanie grupowe/zorganizowane —
-      patrz dr-03/mod-KK-kwalifikator-karnomaterialny.md BLOK H)
+      patrz dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md BLOK H)
   Zagrożenie skrajne: art. 277a §1 KK — przy fakturach o wartości powyżej
   10-krotności mienia wielkiej wartości: KARA OD 5 DO 25 LAT — jeden z
   najsurowszych przepisów w całym KK.

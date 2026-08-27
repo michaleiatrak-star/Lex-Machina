@@ -7,7 +7,7 @@ skorzystaniu z sankcji kredytu darmowego (art. 45 u.k.k.), lub pyta o
 (pojęcie sporne — patrz sekcja TERMIN niżej, ⚠ wskaż na początku odpowiedzi).*
 
 > Merytoryka pełna (katalog naruszeń, spór o termin, orzecznictwo
-> TSUE/SN): `view /mnt/skills/user/dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-kredyt-konsumencki-SKD.md`
+> TSUE/SN): `view dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-kredyt-konsumencki-SKD.md`
 > — wczytaj PRZED redagowaniem tego pisma. Ten plik zawiera tylko
 > strukturę i wzór, nie duplikuj tam podstawy prawnej.
 

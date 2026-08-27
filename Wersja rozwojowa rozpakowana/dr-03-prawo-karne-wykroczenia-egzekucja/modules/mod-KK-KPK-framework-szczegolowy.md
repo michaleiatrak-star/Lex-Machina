@@ -76,7 +76,7 @@ SKUTKI:
 WNIOSEK: pisemny do prokuratora / sądu — złóż jak najwcześniej
 ```
 
-## PRZEDAWNIENIE KARALNOŚCI (art. 101 KK) — Dz.U.2025.383
+## PRZEDAWNIENIE KARALNOŚCI (art. 101 KK) — Dz.U. 2025 poz. 383
 ```
 Zbrodnia zabójstwa:                40 lat od popełnienia  ⚠️ (nie 30!)
 Inna zbrodnia (≥3 lat PW):        20 lat
@@ -94,7 +94,7 @@ Przedłużenie po wszczęciu (art. 102 KK): +10 lat dla przestępstw z §1 / +5 
 |---|---|---|
 | art. 156 | Ciężki uszczerbek na zdrowiu | 3–20 lat |
 | art. 157 §1 | Średni uszczerbek | do 5 lat |
-| art. 178a §1 | Jazda po alkoholu (>0,5‰) — §1 (pierwszy raz) | grzywna / ograniczenie wolności / do 3 lat PW ⚠️ |
+| art. 178a §1 | Jazda po alkoholu (>0,5‰) — §1 (pierwszy raz) | **pozbawienie wolności do lat 3** — sankcja JEDNORODNA, bez grzywny i ograniczenia wolności jako kar samoistnych (od 1.10.2023) ✅ [VER 2026-08-25] |
 | art. 178a §4 | Jazda po alkoholu — RECYDYWA (skazany uprzednio) | 3 m-ce – 5 lat PW ⚠️ |
 | art. 190a | Stalking (§1) | 6 m-cy – 8 lat |
 | art. 207 | Znęcanie się | 3 m-ce – 5 lat |
@@ -104,10 +104,13 @@ Przedłużenie po wszczęciu (art. 102 KK): +10 lat dla przestępstw z §1 / +5 
 | art. 190 §1 | Groźba karalna | do 3 lat PW ⚠️ |
 
 ## ART. 178a KK — JAZDA PO ALKOHOLU / NARKOTYKACH — SZCZEGÓŁY (nowelizacja 14.03.2024)
-⚠️ Weryfikuj każdorazowo w isap.sejm.gov.pl (Dz.U.2025.383 t.j.)
+⚠️ Weryfikuj każdorazowo w isap.sejm.gov.pl (Dz.U. 2025 poz. 383 t.j.)
 
 ### §1 — Typ podstawowy (pierwsza jazda w stanie nietrzeźwości >0,5‰ lub pod wpływem narkotyków)
-- Kara: grzywna, ograniczenie wolności albo PW do 3 lat
+- Kara ustawowa: **pozbawienie wolności do lat 3** — sankcja jednorodna
+  od 1.10.2023 r. Grzywna lub ograniczenie wolności mogą wynikać z
+  odrębnych podstaw części ogólnej (np. art. 37a/58 KK), nie z sankcji
+  wpisanej w art. 178a §1 KK.
 - Zakaz prowadzenia pojazdów: obowiązkowy, min. 3 lata
 - Świadczenie na Fundusz Pomocy Pokrzywdzonym: min. 5 000 zł (sąd może do 60 000 zł)
 - Przepadek pojazdu: OBOWIĄZKOWY gdy stężenie ≥ 1,5‰ (0,75 mg/dm³ powietrza)
@@ -131,13 +134,22 @@ Przedłużenie po wszczęciu (art. 102 KK): +10 lat dla przestępstw z §1 / +5 
 ### GRANICA WYKROCZENIE / PRZESTĘPSTWO (art. 87 KW vs art. 178a KK)
 ```
 0,2–0,5‰ we krwi (lub 0,1–0,25 mg/dm³ w powietrzu) → art. 87 §1 KW (WYKROCZENIE)
-  Kara: do 30 000 zł grzywny + zakaz prowadzenia 6 m-cy – 3 lata
+  Kara: ARESZT 5–30 DNI (art. 19 KW) albo GRZYWNA NIE NIŻSZA NIŻ
+        2 500 zł (dolna granica z art. 87 §1 KW),
+        górna granica 30 000 zł (art. 87 §1 w katalogu art. 24 §1a KW)
+        ⛔ nie podawaj samej górnej granicy bez dolnej — opis byłby niepełny
+  + zakaz prowadzenia pojazdów OBLIGATORYJNY (art. 87 §3 KW)
 > 0,5‰ we krwi (lub > 0,25 mg/dm³ w powietrzu) → art. 178a §1 KK (PRZESTĘPSTWO)
-  Kara: grzywna / ograniczenie wolności / do 3 lat PW + min. 3 lata zakazu
+  Kara: POZBAWIENIE WOLNOŚCI DO LAT 3 (sankcja jednorodna, od 1.10.2023)
+        + zakaz prowadzenia min. 3 lata (art. 42 §2 KK)
+  ⛔ Znaczenie procesowe: 3 lata < 8 lat → art. 258 §2 KPK nie działa;
+     3 lata > 1 rok → art. 259 §3 KPK też nie działa
+✅ [VER: ELI — Dz.U. 2025 poz. 734, art. 19, 24 §1a i 87 §1;
+   Dz.U. 2025 poz. 383, art. 178a §1 — odczyt 2026-08-25]
 ```
 
 ## ART. 190 KK — GROŹBA KARALNA — SZCZEGÓŁY
-⚠️ Weryfikuj w isap.sejm.gov.pl (Dz.U.2025.383 t.j.)
+⚠️ Weryfikuj w isap.sejm.gov.pl (Dz.U. 2025 poz. 383 t.j.)
 
 ### §1 — Znamiona
 - Grożenie popełnieniem PRZESTĘPSTWA (nie wykroczenia!) na szkodę pokrzywdzonego lub osoby mu najbliższej
@@ -194,10 +206,10 @@ REKOMENDACJA: □ Warunkowe umorzenie  □ Mediacja  □ Obrona na rozprawie  �
 | Analiza akt karnych / szanse | `analiza-sadowa-v6` |
 | Ocena dowodów / nagrań | `analizator-dowodow-v3` |
 | Orzecznictwo SN karne | `orzeczenia-sadowe-v2` |
-| Przesłuchanie na rozprawie | moduł [K] SKILL.md + `przesluchanie-swiadkow.md` |
-| Stalking / nękanie jako przestępstwo | moduł [J] SKILL.md + `stalking-nekanie.md` |
+| Przesłuchanie na rozprawie | `shared/PRZESLUCHANIE-SWIADKOW-KPC.md` + skill `przesluchanie-swiadkow-v2-min90` |
+| Stalking / nękanie jako przestępstwo | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art190a-stalking.md` |
 
-*KK (Dz.U. 2025.383 t.j.) + KPK (Dz.U. 2026.490) + KKW (Dz.U. 2025.911)*
+*KK (Dz.U. 2025 poz. 383 t.j.) + KPK (Dz.U. 2026 poz. 490) + KKW (Dz.U. 2025 poz. 911)*
 *Weryfikacja art. 178a i 190 KK: isap.sejm.gov.pl — zmiany nowelizacja 07.07.2022 (w życie 01.10.2023) i 14.03.2024*
 *Audyt: 21.05.2026 — błędy zagrożeń art. 178a §1 (2→3 lata) i art. 190 §1 (2→3 lata) NAPRAWIONE*
 *Weryfikacja: orzeczenia.ms.gov.pl, sn.pl*

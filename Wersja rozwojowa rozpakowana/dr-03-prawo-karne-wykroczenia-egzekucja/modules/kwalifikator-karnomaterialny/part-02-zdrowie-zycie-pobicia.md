@@ -57,8 +57,9 @@ JAK POWAŻNY JEST USZCZERBEK?
 │
 └─ Ciężki uszczerbek (utrata zmysłu, kalectwo, choroba nieuleczalna, zagrożenie życia)
     └─ → ART. 156 §1 KK — CIĘŻKI USZCZERBEK
-         Kara: 3–20 lat PW. Źródło: Dz.U.2025.383 t.j.
-         Jeśli następstwem jest śmierć → art. 156 §3: **nie krócej niż 5 lat** (bez explicite górnej granicy w §3; max z art. 37 KK = 25 lat PW)
+         Kara: 3–20 lat PW. Źródło: Dz.U. 2025 poz. 383 t.j.
+         Jeśli następstwem jest śmierć → art. 156 § 3:
+         **nie krócej niż 5 lat albo dożywotnie pozbawienie wolności**
          Czy działanie było umyślne?
          ├─ TAK → §1 (typ umyślny)
          └─ NIE → §2 (typ nieumyślny, kara do 3 lat)
@@ -100,10 +101,9 @@ START: Czy sprawca umyślnie (zamiar bezpośredni LUB ewentualny) pozbawił
 │      uszkodzić ciało, NIE zabić) → ART. 156 §3 KK
 │
 └─ TAK — TYP PODSTAWOWY → ART. 148 §1 KK
-    ⚠️ ROZBIEŻNOŚĆ ŹRÓDEŁ CO DO DOLNEJ GRANICY — zweryfikuj w ISAP przed
-    sprawą: część źródeł podaje "nie krócej niż 10 lat", inne (starsze)
-    "nie krócej niż 8 lat" — możliwa nowelizacja zaostrzająca między tymi
-    wersjami. Górna granica: 25 lat albo dożywocie. NIE zakładaj z pamięci.
+    Kara: pozbawienie wolności na czas nie krótszy od 10 lat albo
+    dożywotnie pozbawienie wolności. ⛔ Wartości „od 8 lat” oraz odrębna
+    kara 25 lat są historyczne i nie opisują stanu od 1.10.2023 r.
     │
     ├─ TYPY KWALIFIKOWANE (surowsze):
     │   ├─ ART. 148 §2 KK — szczególne okrucieństwo / w związku z wzięciem
@@ -178,4 +178,3 @@ orzeka nawiązkę/obowiązek naprawienia szkody z art. 46 §1-2 KK.
 ```
 
 ---
-

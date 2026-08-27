@@ -12,7 +12,7 @@ description: |
   - odprawy celne, tranzyt (T1/T2), skład celny, uszlachetnianie czynne/bierne
   - zwrot cła, dług celny, zabezpieczenie celne
   Powiązane: mod-ustawa-akcyzowa-i-clo-UCC (podatek akcyzowy, WIA, KKS),
-  mod-Q (PIT/VAT/CIT), mod-AC (REACH/chemikalia).
+  `dr-06-podatki-finanse-publiczne-aml/modules/mod-VAT-import-towarow-i-zwolnienia-importowe.md` (VAT importowy), `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-REACH-CLP-chemikalia.md` (REACH/CLP).
 compatibility:
   tools:
     - web_search
@@ -230,8 +230,8 @@ Naczelny Sąd Administracyjny (NSA)
 | Sytuacja | Skill / Moduł |
 |---|---|
 | Podatek akcyzowy, WIA, KKS, czynny żal | `mod-ustawa-akcyzowa-i-clo-UCC.md` |
-| VAT przy imporcie | `mod-Q` (PIT/VAT/CIT) |
-| Substancje chemiczne / REACH | `mod-AC` (REACH/chemikalia) |
+| VAT przy imporcie | `dr-06-podatki-finanse-publiczne-aml/modules/mod-VAT-import-towarow-i-zwolnienia-importowe.md` |
+| Substancje chemiczne / REACH | `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-REACH-CLP-chemikalia.md` |
 | Pismo: odwołanie / skarga do WSA | `pisma-procesowe-v3` / `pisma-proste-v2` |
 
 ---
@@ -241,4 +241,4 @@ Naczelny Sąd Administracyjny (NSA)
 
 ## ⚖️ DISCLAIMER
 
-Po zakończeniu analizy: `view /mnt/skills/user/shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
+Po zakończeniu analizy: `view shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).

@@ -2,7 +2,7 @@
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 
-**Źródło weryfikacji:** KC — Dz.U. 2025 poz. 1071 t.j. | Ustawa o prawach konsumenta — Dz.U. 2023 poz. 2759 t.j. ze zm. | Ustawa o kredycie konsumenckim — Dz.U. 2024 poz. 1567 t.j.
+**Źródło weryfikacji:** KC — Dz.U. 2026 poz. 795 t.j. | Ustawa o prawach konsumenta — Dz.U. 2024 poz. 1796 t.j. ze zm. | Ustawa o kredycie konsumenckim — Dz.U. 2025 poz. 1362 t.j.
 **Data weryfikacji online:** 2026-06-05
 **ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 

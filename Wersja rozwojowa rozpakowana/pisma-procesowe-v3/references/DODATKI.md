@@ -1,7 +1,7 @@
 # DODATKI — Contradiction Intelligence V10 + Obsługa pisma administracyjnego
 
 > Wydzielono z pisma-procesowe-v3/SKILL.md (v5.5) — redukcja NOTA-4
-> Wywołanie: `view /mnt/skills/user/pisma-procesowe-v3/references/DODATKI.md`
+> Wywołanie: `view pisma-procesowe-v3/references/DODATKI.md`
 > Zawiera: CONTRADICTION INTELLIGENCE V10 (matryca aktywacji + 6 modułów),
 >   OBSŁUGA PISMA ADMINISTRACYJNEGO (KPA/PPSA/WSA/NSA).
 
@@ -12,7 +12,7 @@
 Przy analizie pism przeciwnika (riposta, apelacja, odpowiedź) — w W1 obowiązkowo uruchom:
 
 ```
-view /mnt/skills/user/pisma-procesowe-v3/modules/MOD-OBAL.md
+view pisma-procesowe-v3/modules/MOD-OBAL.md
 ```
 
 Hard gate: nie przygotowuj repliki, odpowiedzi ani apelacji bez sprawdzenia w W1.2
@@ -33,18 +33,18 @@ WARUNEK D: sprzeczności między pismami przeciwnika są kluczowym argumentem
 
 Moduły V10 (wczytaj wszystkie razem — wzajemnie się zasilają):
 ```
-view /mnt/skills/user/pisma-procesowe-v3/references/engines/contradiction-intelligence-engine-v10.md
-view /mnt/skills/user/pisma-procesowe-v3/references/engines/self-destructive-admissions-engine-v10.md
-view /mnt/skills/user/pisma-procesowe-v3/references/engines/timeline-conflict-engine-v10.md
-view /mnt/skills/user/pisma-procesowe-v3/references/engines/cross-pleading-consistency-engine-v10.md
-view /mnt/skills/user/pisma-procesowe-v3/references/engines/strategic-theory-collapse-engine-v10.md
-view /mnt/skills/user/pisma-procesowe-v3/references/engines/judicial-credibility-simulation-engine-v10.md
+view pisma-procesowe-v3/references/engines/contradiction-intelligence-engine-v10.md
+view pisma-procesowe-v3/references/engines/self-destructive-admissions-engine-v10.md
+view pisma-procesowe-v3/references/engines/timeline-conflict-engine-v10.md
+view pisma-procesowe-v3/references/engines/cross-pleading-consistency-engine-v10.md
+view pisma-procesowe-v3/references/engines/strategic-theory-collapse-engine-v10.md
+view pisma-procesowe-v3/references/engines/judicial-credibility-simulation-engine-v10.md
 ```
 
 Po wczytaniu V10 wywołaj też:
 ```
-view /mnt/skills/user/pisma-procesowe-v3/references/engines/opponent-pleading-attack-engine-v9.md
-view /mnt/skills/user/pisma-procesowe-v3/references/checklists/opponent-pleading-audit-checklist-v9.md
+view pisma-procesowe-v3/references/engines/opponent-pleading-attack-engine-v9.md
+view pisma-procesowe-v3/references/checklists/opponent-pleading-audit-checklist-v9.md
 ```
 
 ---

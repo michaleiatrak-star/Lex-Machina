@@ -207,7 +207,7 @@ razem z bezpośrednim zarzutem apelacyjnym.
 
 ## 9. ⭐ POWIĄZANIA Z INNYMI MODUŁAMI
 
-- `dr-05/modules/mod-PPSA-posiedzenia-sadowe-rozdzial-7.md`, sekcja 7 —
+- `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-PPSA-posiedzenia-sadowe-rozdzial-7.md`, sekcja 7 —
   instytucja bliźniacza w procedurze sądowoadministracyjnej (art. 105
   PPSA), wzorzec strukturalny dla tego modułu.
 - `mod-KPC-prawomocnosc-granice-apelacji.md` — mechanizm pośredniej

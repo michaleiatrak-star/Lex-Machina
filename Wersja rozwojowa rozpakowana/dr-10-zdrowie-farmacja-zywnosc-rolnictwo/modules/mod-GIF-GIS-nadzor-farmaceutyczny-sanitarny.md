@@ -351,10 +351,10 @@ REKOMENDACJA: □ Odwołanie do GIF  □ Skarga do WSA  □ Wniosek o wstrzymani
 ## ŁĄCZ Z
 | Sytuacja | Skill |
 |---|---|
-| Odwołanie od decyzji WIF/GIF | `mod-G-administracyjne.md` + `kpa-admin.md` + `pisma-procesowe-v3` |
+| Odwołanie od decyzji WIF/GIF | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` + `pisma-procesowe-v3` |
 | Skarga do WSA | `pisma-procesowe-v3` + `kpa-admin.md` |
-| Błąd medyczny / prawa pacjenta | `mod-V-medyczne.md` + `prawo-medyczne.md` |
-| Naruszenie przepisów — odpow. karna | `mod-N-karne.md` + `kwalifikator-karnomaterialny.md` |
+| Błąd medyczny / prawa pacjenta | `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-prawa-pacjenta-framework.md` + `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-medyczne-szczegolowy.md` |
+| Naruszenie przepisów — odpow. karna | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` + `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md` |
 | Umowa z hurtownią / dystrybucja | `analizator-umow-v1` |
 | Analiza szans odwołania | `analiza-sadowa-v6` |
 | Orzecznictwo NSA / WSA / TSUE | `orzeczenia-sadowe-v2` |

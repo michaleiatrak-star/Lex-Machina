@@ -2,7 +2,7 @@
 # CAŁKOWICIE PRZEBUDOWANY 2026-07-27, ZASADA 14)
 
 > ⛔ Do 2026-07-16 art. 305 KK istniał w systemie WYŁĄCZNIE w ujęciu
-> cywilnym (`dr-02/modules/mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md`
+> cywilnym (`dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md`
 > — odpowiedzialność odszkodowawcza). Ten moduł dodaje brakujące ujęcie
 > KARNE i uzupełnia (nie duplikuje) ujęcie cywilne oraz administracyjne
 > (dr-07, KIO).
@@ -17,7 +17,7 @@
 > ROZSZERZYŁA zakres przepisu z samych przetargów PUBLICZNYCH na
 > również przetargi PRYWATNE i aukcje. Naprawiono w całości na podstawie
 > DOSŁOWNEGO tekstu z lexlege.pl (Rząd 2B, "Stan prawny aktualny na
-> dzień: 17.07.2026", t.j. Dz.U.2025.383), dodatkowo potwierdzone przez
+> dzień: 17.07.2026", t.j. Dz.U. 2025 poz. 383), dodatkowo potwierdzone przez
 > Bird & Bird [Rząd 2B-adjacent, kancelaria międzynarodowa,
 > twobirds.com] i adwokat-skoczylas.pl [Rząd 3, maj 2026].
 
@@ -130,8 +130,8 @@ WYŁĄCZNIE sprawcy czynu z §1 lub §2.
 
 | Sytuacja | Właściwy przepis/tryb | Moduł |
 |---|---|---|
-| Odszkodowanie za szkodę wyrządzoną zmową (droga cywilna, niezależnie od odpowiedzialności karnej) | art. 305 KC (odrębny przepis o tym samym numerze co w KK — UWAGA na pomyłkę między kodeksami!) | `dr-02/modules/mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md` |
-| Wykluczenie wykonawcy z postępowania o zamówienie publiczne za zmowę | Prawo zamówień publicznych, przesłanki wykluczenia | `dr-07/modules/mod-PZP-zamowienia-publiczne-KIO.md` |
+| Odszkodowanie za szkodę wyrządzoną zmową (droga cywilna, niezależnie od odpowiedzialności karnej) | art. 305 KC (odrębny przepis o tym samym numerze co w KK — UWAGA na pomyłkę między kodeksami!) | `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md` |
+| Wykluczenie wykonawcy z postępowania o zamówienie publiczne za zmowę | Prawo zamówień publicznych, przesłanki wykluczenia | `dr-07-zamowienia-publiczne-fundusze-ue/modules/mod-PZP-zamowienia-publiczne-KIO.md` |
 | Naruszenie zakazu porozumień ograniczających konkurencję (prawo antymonopolowe, niezależnie od odpowiedzialności karnej konkretnej osoby) | ustawa o ochronie konkurencji i konsumentów, UOKiK | poza zakresem dr-03 — kandydat do dr-02/dr-16 |
 | Łapówka wręczona urzędnikowi prowadzącemu przetarg (a nie konkurentowi) | art. 228/229/230 KK | `mod-KK-art228-231-korupcja-urzednicza.md` |
 | Eskalacja zbrodniowa przy bardzo dużych kwotach mienia | art. 306b KK (>5 mln zł: 3-20 lat; >10 mln zł: 5-25 lat) — ⚠️ WERYFIKUJ, czy art. 305 jest objęty listą 306b (NIE potwierdzono wprost w tej sesji — 306b w wersji zweryfikowanej dla art. 296/296a/299/303 NIE wymieniał art. 305; nie zakładaj bez potwierdzenia) | `mod-KK-art296-naduzycie-zaufania.md` (opis mechanizmu 306b) |

@@ -254,7 +254,7 @@ Po wykryciu klauzuli z ORP.1 → ZAWSZE generuj sekcję:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Po wygenerowaniu sekcji → WYWOŁAJ orzeczenia-sadowe-v2:
-  view /mnt/skills/user/orzeczenia-sadowe-v2/SKILL.md
+  view orzeczenia-sadowe-v2/SKILL.md
   → wyszukaj aktualne orzeczenia dla wskazanej klauzuli/przepisu
 ```
 

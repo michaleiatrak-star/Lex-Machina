@@ -15,7 +15,7 @@ epizodyczne) — oraz dostarcza narzędzie do mapowania tych zależności (graf)
 > dwoma równolegle obowiązującymi aktami tej samej rangi, (b) ustaw z
 > ustawowo ograniczonym czasem obowiązywania, (c) mapowania tych relacji.
 
-**Zasada:** `view /mnt/skills/user/shared/PRAWO-HARDGATE.md` przed każdym
+**Zasada:** `view shared/PRAWO-HARDGATE.md` przed każdym
 przepisem/aktem z tego modułu.
 
 ---
@@ -307,7 +307,7 @@ lub grafu zależności między reżimami kryzysowymi (nie pojedynczymi
 przepisami) — wywołaj:
 
 ```
-view /mnt/skills/user/dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-stany-nadzwyczajne-sytuacje-kryzysowe.md
+view dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-stany-nadzwyczajne-sytuacje-kryzysowe.md
 ```
 
 Katalog specustaw doraźnych (np. koronawirusowa) POZOSTAJE w niniejszym
@@ -327,7 +327,7 @@ oficjalne), prawo.pl, OpenLEX, BRPO.
 
 **1.0 (2026-07-17):** Utworzenie modułu na wniosek użytkownika (mechanizm
 specustaw + lex specialis + graf zależności). Zweryfikowano online: ZTP
-Rozdział 4a § 29a-29c (przepisy epizodyczne, t.j. Dz.U. 2016 poz. 283 ze
+Rozdział 4a § 29a-29c (przepisy epizodyczne, t.j. Dz.U. 2026 poz. 300 ze
 zm.), katalog przykładowy specustaw (Wikipedia PL), reguła lex specialis
 derogat legi generali i jej kolizja z lex posterior. Zarejestrowano w
 `audyt-systemu-v4/references/CHECKLIST-DEDUP.md` jako lokalizację

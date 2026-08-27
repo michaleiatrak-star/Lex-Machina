@@ -27,7 +27,7 @@ formatowaniu wiersza. Traktuj wynik jako PUNKT STARTOWY do weryfikacji,
 nie ostateczny werdykt.
 
 Użycie:
-    python3 test_cross_map_dzu.py [--repo-root /mnt/skills/user] [--quiet]
+    python3 test_cross_map_dzu.py [--repo-root SKILLS_ROOT] [--quiet]
 
 ⛔ OSTRZEŻENIE METODOLOGICZNE (dodane 2026-08-15y, flaga F-82, pkt 2):
 ZGODNOŚĆ REJESTRÓW MIĘDZY SOBĄ **NIE JEST** WERYFIKACJĄ MERYTORYCZNĄ.
@@ -58,11 +58,36 @@ Kod wyjścia:
 """
 
 import argparse
+import os
 import re
 import sys
 from pathlib import Path
 
 DZU_PATTERN = re.compile(r"Dz\.?\s*U\.?\s*(\d{4})\s*poz\.?\s*(\d+)", re.IGNORECASE)
+
+# ⭐ NOTACJA LEX "Dz.U.RRRR.NN.PPPP" (np. Dz.U.2026.0.468) — DZU_PATTERN jej
+# NIE łapie w ogóle (wymaga literalnego "poz."), więc akty zapisane w tej
+# notacji były dla T3 niewidoczne: rozbieżność numeru między mapami nie mogła
+# zostać wykryta. 95 wystąpień w systemie, pomiar 2026-08-23g. Flaga F-125.
+RE_LEX = re.compile(r"Dz\.\s?U\.\s*(\d{4})\.(\d{1,3})\.(\d{1,5})", re.IGNORECASE)
+
+
+def find_skill_dir(repo_root: Path, skill_name: str) -> Path | None:
+    """Znajdź pakiet po polu `name:`, niezależnie od technicznej nazwy katalogu."""
+    for skill_md in repo_root.glob("*/SKILL.md"):
+        try:
+            head = skill_md.read_text(encoding="utf-8", errors="strict")[:4000]
+        except OSError:
+            continue
+        match = re.search(r"^name:\s*['\"]?([^'\"\n]+)", head, re.MULTILINE)
+        if match and match.group(1).strip() == skill_name:
+            return skill_md.parent
+    return None
+
+
+def normalizuj(txt):
+    """'Dz.U.RRRR.NN.PPPP' -> 'Dz.U. RRRR poz. PPPP'. Uruchamiaj przed DZU_PATTERN."""
+    return RE_LEX.sub(lambda m: "Dz.U. %s poz. %s" % (m.group(1), m.group(3)), txt)
 
 
 def extract_act_dzu_pairs(text: str):
@@ -84,6 +109,14 @@ def extract_act_dzu_pairs(text: str):
     """
     results = []
     for line in text.splitlines():
+        # ⭐ F-125 (2026-08-23g): normalizacja PRZED dopasowaniem — inaczej
+        # wiersze zapisane notacją LEX ("Dz.U.2026.0.468") są dla tego testu
+        # niewidoczne (DZU_PATTERN wymaga literalnego "poz."), a rozbieżność
+        # numeru w takim wierszu nie może zostać wykryta.
+        # ⚠️ Normalizujemy KOPIĘ linii do dopasowania, ale prefiks tniemy z
+        # linii ORYGINALNEJ byłoby błędem — offsety m.start() odnoszą się do
+        # tekstu znormalizowanego, więc prefiks liczymy z tego samego ciągu.
+        line = normalizuj(line)
         m = DZU_PATTERN.search(line)
         if not m:
             continue
@@ -118,12 +151,13 @@ def jaccard(a: set, b: set) -> float:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--repo-root", default="/mnt/skills/user")
+    ap.add_argument("--repo-root", default=os.environ.get("LEX_MACHINA_SKILLS_ROOT", "."))
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
-    main_map = repo_root / "prawo-polskie-v2" / "ROUTING-MAP.md"
+    main_skill = find_skill_dir(repo_root, "prawo-polskie-v2")
+    main_map = (main_skill / "ROUTING-MAP.md") if main_skill else repo_root / "prawo-polskie-v2" / "ROUTING-MAP.md"
 
     if not main_map.exists():
         print(f"BŁĄD: nie znaleziono głównej mapy {main_map}")

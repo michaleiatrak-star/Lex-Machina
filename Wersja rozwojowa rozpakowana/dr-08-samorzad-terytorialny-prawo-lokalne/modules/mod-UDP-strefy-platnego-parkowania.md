@@ -8,7 +8,7 @@
 | Akt | Dz.U. | Art. | Uwaga |
 |---|---|---|---|
 | Ustawa o drogach publicznych (UDP) | **Dz.U. 2025 poz. 889 t.j.** | art. 13, 13b, 13f | Aktualny t.j. — weryfikuj isap.sejm.gov.pl |
-| Ustawa o postępowaniu egzekucyjnym w administracji (UPEA) | Dz.U. 2023 poz. 2505 t.j. | art. 33 (zarzuty) | Obrona w egzekucji |
+| Ustawa o postępowaniu egzekucyjnym w administracji (UPEA) | Dz.U. 2026 poz. 268 t.j. | art. 33 (zarzuty) | Obrona w egzekucji |
 | KW | Dz.U. 2025 poz. 734 | art. 92 §1 | Wykroczenie — brak biletu |
 | KPA | Dz.U. 2025 poz. 1691 | art. 189a i n. | Nie dotyczy bezpośrednio opł. park. |
 
@@ -259,9 +259,9 @@ WERYFIKUJ: orzeczenia.nsa.gov.pl → "SPP uchwała rady gminy zaskarżenie 2023 
 |---|---|
 | Zarzuty do TW (art. 33 UPEA) | `pisma-procesowe-v3` + `dr-05/mod-UPEA-egzekucja-administracyjna` |
 | Klauzule abuzywne parking prywatny | `analizator-umow-v1` → `mod-shared-abusive-clauses` |
-| Zaskarżenie uchwały SPP | `pisma-procesowe-v3` + `dr-05/mod-KPA-postepowanie-administracyjne` |
+| Zaskarżenie uchwały SPP | `pisma-procesowe-v3` + `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` |
 | Kara za wykroczenie parkingowe (art. 92 KW) | `mod-KW-kodeks-wykroczen` + `mod-grzywny-mandaty-szczegolowe` |
-| Odwołanie od decyzji administracyjnej | `dr-05/mod-KPA-postepowanie-administracyjne` |
+| Odwołanie od decyzji administracyjnej | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` |
 | Grzywny i mandaty karne | `mod-grzywny-mandaty-szczegolowe` |
 
 ---

@@ -5,7 +5,9 @@
   Ratyfikowany przez Polskę: Dz.U. 1999 nr 87 poz. 970
   ✅ VER: isap.sejm.gov.pl 2026-06-07
 - Umowa SOFA (Status of Forces Agreement) w ramach NATO — Dz.U. 2000 nr 21 poz. 257
-- Ustawa o obecności sił zbrojnych państw obcych na terytorium RP — Dz.U. 2020 poz. 1287
+- Ustawa o zasadach pobytu wojsk obcych na terytorium RP, ich
+  przemieszczania i udzielania pomocy wojskom sojuszniczym —
+  **Dz.U. 2024 poz. 1770 t.j.** (VER ELI 2026-08-26)
 
 **Weryfikacja:** isap.sejm.gov.pl i nato.int przed każdym cytowaniem.
 

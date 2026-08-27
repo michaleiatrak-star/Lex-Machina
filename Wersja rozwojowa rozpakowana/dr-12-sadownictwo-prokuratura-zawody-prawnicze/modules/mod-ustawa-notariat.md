@@ -47,7 +47,7 @@ KPC art. 777 §1 pkt 4 i 5 — akt notarialny jako tytuł egzekucyjny:
   Dz.U. 2026 poz. 468 t.j. — weryfikuj w ISAP
 
 KC art. 158 — obowiązkowa forma notarialna przeniesienia własności nieruchomości:
-  Dz.U. 2024 poz. 1061 t.j. ze zm. — weryfikuj w ISAP
+  Dz.U. 2026 poz. 795 t.j. ze zm. — weryfikuj w ISAP
 ```
 
 ## ZASADY ABSOLUTNE
@@ -198,7 +198,7 @@ Przed końcową odpowiedzią sprawdź:
 | ryzyka | `shared/RISK-ASSESSMENT.md` |
 | pisma | `pisma-procesowe-v3` albo `pisma-proste-v2` |
 | tytuł egzekucyjny / egzekucja (tryb KPC) | DR-02/`mod-KPC-egzekucja-windykacja`; status zawodu komornika → `mod-ustawa-komornicy-sadowi-zawod` (ten DR) |
-| nieruchomości (forma) | DR-02/`mod-KC-prawo-rzeczowe-nieruchomosci` |
+| nieruchomości (forma) | `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KW-ksiega-wieczysta-zakup-nieruchomosci.md` + `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md` |
 | postępowanie dyscyplinarne | DR-12/`mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow` |
 
 ## Weryfikacja online

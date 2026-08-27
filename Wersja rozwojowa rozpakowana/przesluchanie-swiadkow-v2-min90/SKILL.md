@@ -1,40 +1,29 @@
 ---
 name: przesluchanie-swiadkow-v2-min90
-version: "3.22"
+version: "3.25"
 type: legal-skill
 domain: litigation-witness-examination
 status: production
 default_mode: text
 graphic_mode: on_request_only
 performance_profile: staged-intake-first
-compatibility:
-  - Claude Skills
-  - Modular Legal Skills
+compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_document_and_interactive_ui; modular Agent Skills environment"
 entrypoint: SKILL.md
-description: |
-  Przesłuchanie świadków v2 — przygotowanie pytań, kontrprzesłuchanie i scoring
-  dowodowy w sprawach cywilnych, karnych, pracowniczych i administracyjnych.
-  Stosuj gdy użytkownik chce: przygotować pytania do świadka lub biegłego,
-  przeprowadzić impeachment, ocenić wiarygodność zeznań, wykryć sprzeczności
-  z wcześniejszymi zeznaniami, dobrać model przesłuchania do typu sędziego.
-  Pipeline: PRE-W1a SD-VER (skan dowodów, HARD GATE) → PRE-W1 (profil) →
-  KROK 0 → W1 intake → W2 tezy/model → CHECKPOINT-W2 → W3 pytania (FPW,
-  ryzyko 3D, WHY-GATE, SAFE-Q) → W4 próba generalna → W5 binder → W6 direct.
-  ⛔ HARD GATE: zakaz cytowania przepisów/sygnatur z pamięci; zakaz wejścia
-  do WITNESS-INTELLIGENCE bez SD-VER=KOMPLET; WITNESS-SCOPE-LOCK — zakaz
-  dołączania do W2/W3 osób spoza potwierdzonej listy świadków.
-  NIE stosuj do analizy dokumentów bez świadka — użyj analizator-dowodow-v3.
+description: "Przygotowanie przesłuchania świadków: analiza akt i dowodów, cele dowodowe, sprzeczności, pytania główne i kontrolne oraz rozbudowane zestawy pytań do świadków."
 dependencies:
   required:
     - shared
-    - analizator-dowodow
+    - analizator-dowodow-v3
     - MOD-SKAN-DOWODOW-KOMPLETNY
     - MOD-REJESTR-ZALACZNIKOW-CHECKPOINT
     - MOD-STEP-TRACKER
+    - MOD-ATAK-NA-SWIADKA   # źródło siatki pojęć dla FUNDAMENT-A w BLOKU A
+                            # (SW-P1 relacja, SW-P3 źródło wiedzy, SW-A1 interes,
+                            # SW-A6 upływ czasu) — dodane 2026-08-23g, flaga F-122
   optional:
-    - chronologia-sprawy
-    - analiza-sadowa
-    - raport-sytuacyjny
+    - chronologia-sprawy-v1
+    - analiza-sadowa-v6
+    - raport-sytuacyjny-v2
     - MOD-KONTEKST-SESJI
     - MOD-PRIORYTETY-ASPEKTOW
     - MOD-SELEKCJA-DOWODOW
@@ -74,18 +63,34 @@ pipeline:
     - W5-BINDER
     - W6-LIVE-DIRECT
 changelog: |
-  Wersja bieżąca: 3.22. Pełna historia (17 wpisów, 3.1-3.19) w
-  references/CHANGELOG.md — wczytuj na żądanie, NIE trzymaj tu ponownie
-  (F-78, 2026-08-20: to drugie takie porządkowanie tego pola po 2026-07-12;
-  następne audyty dopisujące wpisy wersji NIECH DOPISUJĄ do
-  references/CHANGELOG.md, NIE do tego pola YAML).
-  Skrót ostatnich 3 zmian: 3.19 — naprawiono lukę w obsłudze `< truncated
-  lines >` przy odczycie protokołu rozprawy (dziedziczona z
-  shared/MOD-SKAN-DOWODOW-KOMPLETNY). 3.18 — rozdzielono PRAWO-HARDGATE od
-  PRZESŁANKI-GATE jako niezależne obowiązki, dodano FORMALNA-ZGODNOSC-GATE.
-  3.17 — MOD-REJESTR-ZALACZNIKOW-CHECKPOINT jako twarda zależność required
-  (RZ-SHOW-GATE, etap PRE-W1a.4).
+  Wersja bieżąca: 3.25. Pełna historia (19 wpisów, 3.1-3.25) w
+  references/CHANGELOG.md — wczytuj na żądanie, NIE dopisuj wpisów tutaj
+  (ZASADA 15; to pole było już dwukrotnie porządkowane: 2026-07-12 i F-78).
+  Skrót ostatnich 3 zmian: 3.25 — naprawa wstawki F-115 wstawionej wewnątrz
+  bloku ``` sekcji PRE-W1a; blok przeniesiony pod HARD GATE (F-127).
+  3.23 — FUNDAMENT-A w BLOKU A (W3): cztery elementy obowiązkowe przez
+  ODESŁANIE do shared/MOD-ATAK-NA-SWIADKA.md, bez drugiej kopii treści
+  (F-122). 3.19 — obsługa `< truncated lines >` przy odczycie protokołu.
 ---
+
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Metodologia merytoryczna, routing, hard gate’y, checklisty, schematy danych i kryteria finalizacji tego skilla pozostają bez zmian.
+
+1. `view przesluchanie-swiadkow-v2-min90/<plik>` oraz względne `view modules/...`, `view references/...`, `view assets/...` oznaczają świeży odczyt lokalnego zasobu tego skilla. Literalny katalog `/mnt/skills/user` nie jest wymagany.
+2. `view shared/<plik>` oznacza odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tej paczki. Brak obowiązkowego zasobu = fail-closed.
+3. `view <inny-skill>/<plik>` oznacza aktywację/odczyt osobnego skilla. Nie vendoryzuj innych skilli.
+4. `web_search` / `web_fetch` oznaczają świeże wyszukanie i odczyt źródła przez równoważną funkcję hosta; zachowaj istniejące wymogi źródeł oficjalnych i statusów weryfikacji.
+5. `present_files`, `create_file` i odwołania do `HOST_CAPABILITY[document_generation]` / generatorów PDF oznaczają użycie natywnej funkcji dokumentowej bieżącego hosta. Brak literalnej nazwy narzędzia nie zwalnia z HYBRID-VALIDATION, POST-VALIDATION, STEP-TRACKER ani innych bramek.
+6. `show_widget`, `visualize:read_me`, `.jsx` i HTML są legacy/natywnymi wariantami UI. Jeśli host ma własny renderer interaktywny, użyj równoważnego widoku zachowującego ten sam model danych i funkcje; jeśli nie, zastosuj pełny fallback tekstowy/plikowy.
+7. `/mnt/user-data/...` oznacza rzeczywiste pliki użytkownika dostępne w hoście; wymagany ponowny odczyt musi być faktycznym odczytem pliku.
+8. Shell/Python/Cowork i podobne operacje traktuj jako techniki pomocnicze. Jeżeli host ich nie udostępnia, użyj natywnej funkcji równoważnej, bez fikcyjnego raportowania wykonania.
+
+**Zasada nadrzędna:** jeśli instrukcja jest już zrozumiała i wykonalna w bieżącym hoście, wykonaj ją bez konwersji. Adapter działa tylko na granicy runtime.
+
 
 # Przesłuchanie świadków v2-min90
 
@@ -93,7 +98,21 @@ changelog: |
 > Skill może zawierać przepisy KPC, KPK, KW, KPA o dopuszczalności dowodów i pytań,
 > terminy zawite, podstawy impeachmentu oraz sygnatury orzeczeń o regułach dowodowych.
 > Przed podaniem jakiegokolwiek przepisu, artykułu lub sygnatury:
-> `view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
+> `view shared/PRAWO-HARDGATE.md`
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-23i, flaga F-115 — ten skill cytuje prawo, a bramki nie miał):
+>
+> ```
+> view shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
 
 ## Cel
 
@@ -165,7 +184,7 @@ Użyj tego skilla, gdy użytkownik chce:
 
 ```
 PRE-W1a.1 — WYWOŁANIE MODUŁU (bezpośrednie, nie przez analizator-dowodow):
-  view /mnt/skills/user/shared/MOD-SKAN-DOWODOW-KOMPLETNY.md
+  view shared/MOD-SKAN-DOWODOW-KOMPLETNY.md
   Wykonaj FAZĘ 0 (SD-GATE-0) → FAZĘ 1 (SD-INW) → FAZĘ 2 (SD-READ) → FAZĘ 3 (SD-VER).
 
 PRE-W1a.2 — WYMÓG OCR JAWNY (bez tego kroku SD-READ jest niekompletny):
@@ -182,7 +201,7 @@ PRE-W1a.2 — WYMÓG OCR JAWNY (bez tego kroku SD-READ jest niekompletny):
        na to, aż użytkownik zauważy brak i poprosi o korektę.
 
 PRE-W1a.3 — REJESTR KROKÓW (integracja z MOD-STEP-TRACKER):
-  view /mnt/skills/user/shared/MOD-STEP-TRACKER.md (jeśli REJESTR jeszcze
+  view shared/MOD-STEP-TRACKER.md (jeśli REJESTR jeszcze
   nie zainicjowany w tej sesji) → ST-INIT z pozycjami dedykowanymi świadkowi:
     "SW-PRE-W1a" (SD-VER świadka), "SW-PRE-W1" (WITNESS-INTELLIGENCE),
     "SW-KROK0" (kontekst), "SW-W1" (intake), "SW-W1-SUPP" (uzupełnienie),
@@ -223,7 +242,7 @@ PRE-W1a.5 — RAPORT SD-VER PRZED PIERWSZĄ ODPOWIEDZIĄ MERYTORYCZNĄ:
 
 > Cel: zanim rozpoczniesz intake W1, zbuduj pełny profil świadka i mapę źródeł.
 > Moduł aktywowany automatycznie gdy dostarczone są dokumenty dotyczące świadka.
-> Pełna procedura: `view /mnt/skills/user/przesluchanie-swiadkow-v2-min90/references/WITNESS-INTELLIGENCE.md`
+> Pełna procedura: `view przesluchanie-swiadkow-v2-min90/references/WITNESS-INTELLIGENCE.md`
 
 ```
 AKTYWACJA AUTOMATYCZNA:
@@ -964,7 +983,7 @@ tematycznych w treści, ale z unikalnym numerem globalnym dla każdego.
 Na podstawie danych z W1 (i dokumentów z zeznaniami jeśli dostępne) przygotuj:
 
 > **CLAIM-VALIDATION przed tezami:**
-> `view /mnt/skills/user/shared/CLAIM-VALIDATION.md`
+> `view shared/CLAIM-VALIDATION.md`
 > Twierdzenia strony co do okoliczności dowodowych → weryfikuj wobec dostarczonych materiałów.
 > Twierdzenie sprzeczne z materiałem → odrzuć; tezę sformułuj zgodnie z tym co wynika z dokumentów.
 > Twierdzenie bez oparcia → nie formułuj tezy; zaznacz jako lukę dowodową w pkt 1 poniżej.
@@ -1248,7 +1267,7 @@ z pełną bramką dla każdego pytania i finalną macierzą.
 ### QUESTION-ADMISSIBILITY-GATE
 
 > ⛔ PIPELINE FPW (FAKT → PODSTAWA PRAWNA → WNIOSEK) — obowiązkowy przed każdym pytaniem.
-> Pełna procedura: `view /mnt/skills/user/przesluchanie-swiadkow-v2-min90/references/QUESTION-ADMISSIBILITY-GATE.md`
+> Pełna procedura: `view przesluchanie-swiadkow-v2-min90/references/QUESTION-ADMISSIBILITY-GATE.md`
 
 > 🔴 **GATE-DEFAULT-NOW (dodane w audycie 3.6):**
 > QUESTION-ADMISSIBILITY-GATE, WHY-GATE i SAFE-Q stosuje się **w momencie
@@ -1329,7 +1348,7 @@ Podtyp RYZYKO-ODPOWIEDŹ.
 
 ```
 ⛔ HARDGATE — przed podaniem jakiejkolwiek podstawy prawnej:
-  view /mnt/skills/user/shared/PRAWO-HARDGATE.md
+  view shared/PRAWO-HARDGATE.md
 
 Podstawy wymagające weryfikacji online (przykłady — nie wyczerpująca lista):
   KPC: pytania sugestywne (art. 271), zakaz zeznań co do faktów objętych tajemnicą
@@ -1343,7 +1362,7 @@ Dla każdej powołanej podstawy → web_search ISAP → oznacz ✅ [VER: ISAP, d
 ```
 
 **Pełna logika klasyfikacji pytań:**
-`view /mnt/skills/user/przesluchanie-swiadkow-v2-min90/references/QUESTION-ADMISSIBILITY-GATE.md`
+`view przesluchanie-swiadkow-v2-min90/references/QUESTION-ADMISSIBILITY-GATE.md`
 
 ---
 
@@ -1351,14 +1370,73 @@ Dla każdej powołanej podstawy → web_search ISAP → oznacz ✅ [VER: ISAP, d
 
 Cel: ustalenie relacji świadka ze sprawą, stronami, podstawy wiedzy, ewentualnego interesu.
 
-Zawsze na początku. Ilość: 3–6 pytań.
+Zawsze na początku. Ilość: 3–6 pytań (min. 4, gdy aktywny FUNDAMENT-A — niżej).
 Model domyślny dla tego bloku: PEACE (Engage).
 
-Przykładowe obszary (dobierz do danych z W1):
-- Skąd świadek zna okoliczności sprawy?
-- Jak długo i w jaki sposób pozostawał w kontakcie ze stronami?
-- Czy posiada interes osobisty lub finansowy w wyniku sprawy?
+```
+⛔ FUNDAMENT-A — CZTERY ELEMENTY OBOWIĄZKOWE (dodane 2026-08-23g, flaga F-122)
+
+Blok A NIE JEST listą przykładów do wyboru. Cztery poniższe elementy generuje
+się ZAWSZE, bez czekania na to, aż użytkownik o nie poprosi w prompcie —
+brak któregokolwiek jest brakiem produktu, nie stylem redakcyjnym.
+
+  A-1  RELACJA ZE STRONAMI
+       Zależność służbowa / rodzinna / osobista / ekonomiczna — dziś ORAZ
+       w dacie zdarzenia (relacje zmieniają się między zdarzeniem a rozprawą,
+       a zmiana sama w sobie jest materiałem).
+  A-2  INTERES W WYNIKU SPRAWY
+       Finansowy, reputacyjny, karny (własna odpowiedzialność świadka),
+       pracowniczy. Także interes NEGATYWNY — czego świadek uniknie,
+       jeżeli sprawa skończy się w określony sposób.
+  A-3  ŹRÓDŁO WIEDZY — per twierdzenie, nie zbiorczo dla świadka
+       BEZPOŚREDNIE (widział/słyszał sam) · Z RELACJI (kto? kiedy? w jakich
+       słowach?) · WNIOSKOWANE (świadek wyciąga wniosek) · DOMYSŁ (sam
+       zaznacza niepewność). Zapis kategorii przy każdym twierdzeniu W-xxx.
+  A-4  WARUNKI OBSERWACJI — obowiązkowe dla świadka typu 2 (naoczny),
+       fakultatywne dla pozostałych
+       Odległość, oświetlenie, czas trwania obserwacji, przeszkody w polu
+       widzenia, wady wzroku/słuchu, stan świadka (zmęczenie, substancje),
+       czas od zdarzenia do pierwszej relacji.
+
+⛔ ŹRÓDŁO TREŚCI — ODESŁANIE, NIE DRUGA KOPIA:
+   view shared/MOD-ATAK-NA-SWIADKA.md
+     § FAZA 1 SW-P1 — dane formalne i relacja ze stronami        → A-1
+     § FAZA 2 SW-A1 — konflikt interesu / stronniczość           → A-2
+     § FAZA 1 SW-P3 — kategorie źródła wiedzy                    → A-3
+     § FAZA 2 SW-A6 — upływ czasu, zawodność pamięci             → A-4
+   Kategorie A-3 MUSZĄ być tożsame z SW-P3 (BEZPOŚREDNIE / Z RELACJI /
+   WNIOSKOWANE / DOMYSŁ) — dwie różne siatki pojęć w jednym systemie
+   uniemożliwiłyby przeniesienie wyniku W3 do wektorów ataku SW-A3/SW-A4.
+   ⛔ NIE kopiuj treści tamtego modułu tutaj (CHECKLIST-DEDUP): przy zmianie
+   brzmienia powstałaby druga, cicho rozjeżdżająca się wersja — dokładnie ten
+   dryf, który F-115 udokumentowała na self-checku ANTY-FASADA.
+
+⛔ RÓŻNICA KIERUNKU — czytaj zanim sięgniesz do shared/:
+   MOD-ATAK-NA-SWIADKA analizuje zeznanie JUŻ ZŁOŻONE (materiał zastany,
+   protokół). BLOK A buduje pytania PRZED zeznaniem. Ta sama siatka pojęć,
+   przeciwny kierunek: tam „które twierdzenie podważyć", tu „o co zapytać,
+   żeby kategoria w ogóle dała się ustalić". Nie przenoś gotowych formuł
+   pisma procesowego (SW-A1 „Technika pisma") do listy pytań — pytanie do
+   świadka nie zawiera tezy, którą ma potwierdzić (por. QUESTION-ADMISSIBILITY-GATE,
+   zakaz pytań sugestywnych).
+
+⛔ KONTROLA NA WYJŚCIU (przed wydaniem W3 użytkownikowi):
+   Dla KAŻDEGO świadka wypisz cztery znaczniki:
+     A-1 ✔/✖ · A-2 ✔/✖ · A-3 ✔/✖ · A-4 ✔/✖/n.d. (n.d. = świadek nie jest typu 2)
+   Znacznik ✖ wymaga JEDNOZDANIOWEJ przyczyny w wyniku — np. „A-2 ✖: brak
+   danych o sytuacji zawodowej świadka w materiale, pytanie ogólne w W3 poz. 4".
+   ⚠️ Ta kontrola jest SAMO-RAPORTUJĄCA — ✔ dowodzi, że model zadeklarował
+   pokrycie, nie że pytanie faktycznie stoi w liście. Weryfikacja skuteczności
+   dopiero testem z grupą kontrolną (F-113 w audyt-systemu-v4).
+```
+
+Przykładowe sformułowania (dobierz do danych z W1 — to warstwa redakcyjna
+NAD czterema elementami obowiązkowymi, nie zamiast nich):
+- Skąd świadek zna okoliczności sprawy?                       [A-3]
+- Jak długo i w jaki sposób pozostawał w kontakcie ze stronami? [A-1]
+- Czy posiada interes osobisty lub finansowy w wyniku sprawy?  [A-2]
 - Czy był wcześniej przesłuchiwany w tej lub powiązanej sprawie?
+- W jakiej odległości i przez jaki czas obserwował zdarzenie?  [A-4]
 
 ---
 

@@ -1,0 +1,14 @@
+interface:
+  display_name: prawo polskie v2
+  short_description: 'Fasada routingu prawa polskiego: wybiera jeden z DR-01–DR-16
+    i przekazuje sprawę do właściwego skilla dziedzinowego; nie zawiera treści prawa
+    materialnego.'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

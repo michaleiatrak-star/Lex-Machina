@@ -2,7 +2,7 @@
 
 **Wersja:** 1.0 | **Wyodrębniono z SKILL.md:** 2026-06-14 (refaktoryzacja — eliminacja monolitu)
 **Wywołaj z:** analizator-przepisow-v2/SKILL.md → INSTRUKCJE OPERACYJNE, kroki 5–9 i 13.
-**Zasada:** `view /mnt/skills/user/shared/PRAWO-HARDGATE.md` przed każdym orzeczeniem i przepisem z tego modułu — sygnatury wyłącznie po weryfikacji online.
+**Zasada:** `view shared/PRAWO-HARDGATE.md` przed każdym orzeczeniem i przepisem z tego modułu — sygnatury wyłącznie po weryfikacji online.
 
 Zawiera moduły: 7 (Linia orzecznicza), 7A (MOD-ORZECZ-PRZEPIS), 7B (MOD-ZBIEZNOSC — mapa powiązań), 7C (MOD-HISTORIA-ZMIAN + MOD-VACATIO-LEGIS), 7D (MOD-KONTEKST-PRAKTYCZNY), 8 (Widget wyników — 7 zakładek).
 
@@ -184,11 +184,11 @@ Wynik prezentuj w dedykowanej zakładce widgetu (Moduł 8 Zakładka 6).
 - nowelizacji wieloetapowej (różne daty wejścia w życie),
 - rozbieżności między wersją w dacie zdarzenia a wersją aktualną.
 ```
-view /mnt/skills/user/analizator-przepisow-v2/references/MOD-VACATIO-LEGIS.md
+view analizator-przepisow-v2/references/MOD-VACATIO-LEGIS.md
 ```
 W środowisku produkcyjnym:
 ```
-view /mnt/skills/user/analizator-przepisow-v2/references/MOD-VACATIO-LEGIS.md
+view analizator-przepisow-v2/references/MOD-VACATIO-LEGIS.md
 ```
 
 ```
@@ -204,7 +204,7 @@ ALERT KRYTYCZNY:
   Jeśli przepis zmieniony w ostatnich 6 miesiącach → ⚠️ ŚWIEŻA NOWELIZACJA
   Jeśli zmiana w trakcie analizowanego okresu → ⚠️ STAN PRAWNY NIESTAŁY
   Jeśli wykryto vacatio legis lub nowelizację wieloetapową:
-    → view /mnt/skills/user/analizator-przepisow-v2/references/MOD-VACATIO-LEGIS.md
+    → view analizator-przepisow-v2/references/MOD-VACATIO-LEGIS.md
     → uruchom procedurę VL-1→VL-4, dodaj alerty VL-A/VL-B/VL-C do raportu
 ```
 

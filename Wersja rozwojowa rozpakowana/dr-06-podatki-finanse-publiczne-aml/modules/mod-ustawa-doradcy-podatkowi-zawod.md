@@ -40,7 +40,7 @@ dokładny zakres"):
     OD 1.03.2026 doradcy PODATKOWI MOGĄ świadczyć usługi RÓWNIEŻ w
     sprawach OPŁAT, do KTÓRYCH stosuje się PRZEPISY Ordynacji
     podatkowej — KONKRETNE przykłady: OPŁATA CUKROWA (już opisana W
-    dr-06/mod-ustawa-akcyzowa-i-clo-UCC.md, sekcja o alkoholu/cukrze
+    dr-06-podatki-finanse-publiczne-aml/modules/mod-ustawa-akcyzowa-i-clo-UCC.md, sekcja o alkoholu/cukrze
     — POWIĄZANIE między modułami), opłata "OD MAŁPEK" (⭐ potoczna
     nazwa OPŁATY od małych, MINIATUROWYCH butelek alkoholu, do 300 ml)
   → ⭐ NOWA PODSTAWA świadczenia usług: MOŻLIWOŚĆ wykonywania czynności
@@ -194,7 +194,7 @@ web_search: "ustawa o doradztwie podatkowym tekst jednolity 2026 isap"
 |---|---|
 | Postępowanie podatkowe — przedmiot doradztwa | DR-06/`mod-OP-ordynacja-podatkowa` |
 | MDR — schematy podatkowe, tajemnica vs obowiązek zgłoszenia | DR-06/`mod-OP-ordynacja-podatkowa`, `mod-interpretacje-definicje-podatkowe` |
-| Reprezentacja przed WSA/NSA — PPSA po nowelizacji 2025/1882 | DR-05/`mod-PPSA-postepowanie-sadowoadministracyjne` |
+| Reprezentacja przed WSA/NSA — PPSA po nowelizacji 2025/1882 | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-PPSA-terminy-kasacja-prawo-pomocy.md` |
 | Kompetencje adwokata/radcy w zakresie podatkowym | DR-12/`mod-ustawa-adwokatura`, `mod-ustawa-radcowie-prawni` |
 | Biegły rewident — zakres nakładający się | DR-06/`mod-ustawa-biegli-rewidenci-zawod` |
 | Pismo: odwołanie / skarga | `pisma-procesowe-v3` albo `pisma-proste-v2` |
@@ -213,7 +213,7 @@ web_search: "ustawa o doradztwie podatkowym tekst jednolity 2026 isap"
 
 ## ⚖️ DISCLAIMER
 
-Po zakończeniu analizy: `view /mnt/skills/user/shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
+Po zakończeniu analizy: `view shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
 
 ---
 *mod-ustawa-doradcy-podatkowi-zawod.md · dr-06 · utworzony 2026-06-14*

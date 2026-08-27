@@ -1,0 +1,13 @@
+interface:
+  display_name: dr 08 samorzad terytorialny prawo lokalne
+  short_description: 'Samorząd terytorialny i prawo lokalne: gmina, powiat, województwo,
+    uchwały, akty prawa miejscowego, nadzór, kompetencje JST i lokalne planowanie.'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

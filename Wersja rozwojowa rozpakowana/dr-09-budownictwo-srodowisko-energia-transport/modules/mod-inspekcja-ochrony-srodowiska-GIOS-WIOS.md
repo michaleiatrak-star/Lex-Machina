@@ -115,7 +115,7 @@ publicznego** w sprawach o wykroczenia przeciwko środowisku.
   wcześniejszym orientacyjnym ustaleniem modułu.
 ```
 
-Potwierdzone w 6+ zgodnych źródłach: arslege.pl (t.j. Dz.U.2024.0.425,
+Potwierdzone w 6+ zgodnych źródłach: arslege.pl (t.j. Dz.U. 2024 poz. 425,
 art. 9 i 9c), lexlege.pl, prawo.pl, gov.pl/web/wios-gdansk (Rząd 1-adjacent,
 oficjalna strona WIOŚ), okieminspektora.pl.
 

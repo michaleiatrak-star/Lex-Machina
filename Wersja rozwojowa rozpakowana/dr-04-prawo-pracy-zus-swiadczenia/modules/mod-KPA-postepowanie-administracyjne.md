@@ -18,7 +18,7 @@ Postępowanie administracyjne ogólne (KPA), odwołania od decyzji, tryby nadzwy
 |---|---|---|
 | Kodeks postępowania administracyjnego (KPA) | Dz.U. 2025 poz. 1691 t.j. | |
 | Prawo o postępowaniu przed sądami adm. (PPSA) | Dz.U. 2026 poz. 143 t.j. | |
-| Ustawa o kosztach sądowych w sprawach cywilnych (KSCU) | Dz.U. 2024 poz. 959 t.j. | Opłaty od skarg do WSA |
+| Ustawa o kosztach sądowych w sprawach cywilnych (KSCU) | Dz.U. 2025 poz. 1228 t.j. | Opłaty od skarg do WSA |
 
 ---
 

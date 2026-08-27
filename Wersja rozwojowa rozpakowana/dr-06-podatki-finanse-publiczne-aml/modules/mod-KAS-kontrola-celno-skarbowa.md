@@ -28,7 +28,7 @@ Kontrola podatkowa (US) i kontrola celno-skarbowa (UCS/KAS), uprawnienia funkcjo
 | Akt | Dz.U. |
 |---|---|
 | Ustawa o KAS | Dz.U. 2025 poz. 1131 t.j. |
-| Ordynacja podatkowa (Op) — działy IV i VI | Dz.U. 2025 poz. 111 t.j. |
+| Ordynacja podatkowa (Op) — działy IV i VI | Dz.U. 2026 poz. 622 t.j. |
 | KKS | Dz.U. 2025 poz. 633 t.j. |
 
 ---
@@ -138,7 +138,7 @@ nieobecny, kluczowy element proceduralny)
   SKARGA na bezczynność/PRZEWLEKŁOŚĆ postępowania DO WSA
 
 Potwierdzone w 7+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
-tekst art. 83 ustawy o KAS (OpenLEX, Dz.U.2025.1131 t.j., wersja od
+tekst art. 83 ustawy o KAS (OpenLEX, Dz.U. 2025 poz. 1131 t.j., wersja od
 16.04.2026) oraz orzecznictwo NSA (I FSK 1264/21, I FSK 1087/20),
 Grant Thornton [×2], ordynacjapodatkowa.pl [×2], rachunkowosc.com.pl,
 asiw.pl [luty 2026], pragmatiq.pl.

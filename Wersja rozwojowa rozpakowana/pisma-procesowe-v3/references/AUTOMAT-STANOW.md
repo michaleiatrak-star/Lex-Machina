@@ -1,7 +1,7 @@
 # AUTOMAT-STANOW — Hard Gate Zero i sekwencja checkpointów
 
 > Wydzielono z pisma-procesowe-v3/SKILL.md (v5.2) — WARN-14 refaktoryzacja
-> Wywołanie: `view /mnt/skills/user/pisma-procesowe-v3/references/AUTOMAT-STANOW.md`
+> Wywołanie: `view pisma-procesowe-v3/references/AUTOMAT-STANOW.md`
 > Zawiera: PROTOKÓŁ CHECKPOINT, AUTOMAT STANÓW (STAN 0–3), ZAKAZY 1–13,
 >   REGUŁA NAPRAWY, REGUŁA KONTYNUACJA, REGUŁA AUTODIAGNOZY
 
@@ -81,7 +81,7 @@ Jeśli generujesz .docx w tej chwili — zatrzymaj się i sprawdź czy CP-PEER =
 
 STAN 0: Routing (Test A → Test B → Test C)
   ⛔ KROK 0-GATE (ABSOLUTNIE PIERWSZY — przed routing):
-     view /mnt/skills/user/shared/CP-GATE.md
+     view shared/CP-GATE.md
      → zainicjalizuj CP-REJESTR (wszystkie CP = ○ OTWARTE)
      → ustaw STATUS = ⚠️ DRAFT — NIE SKŁADAĆ
      → zapamiętaj: każdy wygenerowany .docx przed CP-PEER=PEER-OK
@@ -89,7 +89,7 @@ STAN 0: Routing (Test A → Test B → Test C)
      → dopiero po tym wykonaj routing (Test A → Test B → Test C)
 
   ⛔ KROK 0-TRACKER (PO CP-GATE, PRZED ROUTING):
-     view /mnt/skills/user/shared/MOD-STEP-TRACKER.md
+     view shared/MOD-STEP-TRACKER.md
      → ST-INIT: zainicjalizuj REJESTR KROKÓW (wszystkie etapy = ○ OCZEKUJE)
      → ZASADA PERMANENTNA: każde pominięcie kroku = natychmiastowy
        raport pominięć (FAZA 2) + pytanie a/b + czekanie na decyzję.
@@ -100,11 +100,11 @@ STAN 1: W1 — Rama i strategia
   → W1.1 Typ i tryb
   → W1.2 Teza centralna (wstępna)
   → W1.2a CLAIM-VALIDATION [CP-1a]
-      view /mnt/skills/user/shared/CLAIM-VALIDATION.md
+      view shared/CLAIM-VALIDATION.md
       ⛔ STOP [CP-1a] po zakończeniu → raport → czekaj na użytkownika
 
   → W1.2b MOD-STRATEGIA-WYBOR ⛔ (gdy ≥2 ścieżki LUB anomalia podmiotowa) [CP-1b]
-      view /mnt/skills/user/shared/MOD-STRATEGIA-WYBOR.md
+      view shared/MOD-STRATEGIA-WYBOR.md
       S1 (ścieżki) → S2 (ocena ataków) → S3 (ranking+rekomendacja) →
       S4 (struktura) → S5 (RAPORT użytkownikowi)
       ⛔ Ścieżka z atakiem 🔴 bez kontrargumentu = PORZUĆ lub EWENTUALNA
@@ -115,7 +115,7 @@ STAN 1: W1 — Rama i strategia
 
       KROK W1.2c-PRE (ABSOLUTNIE PIERWSZY — przed wszystkim): [CP-1c-skan]
         ⛔ HARD GATE — wykonaj PRZED PD0 i PRZED macierzą
-        view /mnt/skills/user/shared/MOD-SKAN-DOWODOW-KOMPLETNY.md
+        view shared/MOD-SKAN-DOWODOW-KOMPLETNY.md
         → SD-GATE-0: czy plik faktycznie wgrany gdy wzmianka o załącznikach?
           NIE → ⛔ BLOKADA W1.3 i W2 — zażądaj plików, nie kontynuuj
         → SD-INW: zinwentaryzuj WSZYSTKIE pliki (ZIP → zawartość, nie kontener)
@@ -128,7 +128,7 @@ STAN 1: W1 — Rama i strategia
         ⛔ STOP [CP-1c-skan] → raport SD-VER pełny → czekaj na użytkownika
 
       KROK W1.2c-PD0 (PO SD-VER KOMPLET — zawsze):
-        view /mnt/skills/user/shared/MOD-PORCJOWANIE-DOWODOW.md → PD0 (skan wstępny).
+        view shared/MOD-PORCJOWANIE-DOWODOW.md → PD0 (skan wstępny).
         STATUS BEZPIECZNY → kontynuuj do FSL-D.
         STATUS ≥ OSTRZEŻENIE → PD1 → PD2 (plan partii) → ⛔ STOP [CP-PD].
           Po P1: macierz częściowa (Di z P1 × Tj) → PD4 (checkpoint) → ⛔ STOP [CP-PD].
@@ -138,7 +138,7 @@ STAN 1: W1 — Rama i strategia
       ⛔ KROK W1.2c-FSL-D (PO PD0 — ZAWSZE gdy SD-VER=KOMPLET i ≥1 teza): [CP-FSL-D]
         ⛔ HARD GATE — wykonaj PRZED MACIERZĄ i PRZED budową tez.
         ⛔ ZAKAZ-FSL-D: nie przystępuj do KROK MACIERZ bez FSL-D-REPORT.
-        view /mnt/skills/user/shared/MOD-FSL-DOKUMENTY.md
+        view shared/MOD-FSL-DOKUMENTY.md
         → FSL-D-INIT: pobierz listę tez z CLAIM-VALIDATION + SD-REJ z SD-VER
         → FSL-D-SCAN: per KAŻDA teza T-X → rozbij na twierdzenia atomowe TC[x,k]
                      → per KAŻDE TC: przeszukaj KAŻDY D[id] z SD-REJ (niezależnie od nazwy!)
@@ -156,7 +156,7 @@ STAN 1: W1 — Rama i strategia
         Po zatwierdzeniu: FSL-D-MACIERZ (nie SD-FAKTY bezpośrednio!) → W1.2c-MACIERZ
 
       KROK W1.2c-MACIERZ (gdy STATUS BEZPIECZNY lub po zatwierdzeniu planu P1): [CP-1c-macierz]
-        view /mnt/skills/user/shared/MOD-MACIERZ-DOWOD-TEZA.md
+        view shared/MOD-MACIERZ-DOWOD-TEZA.md
         MT1 (inwentaryzacja tez+dowodów z bieżącej partii) →
         MT2 (skan dwukierunkowy) → MT3 (klasyfikacja K/R/W/RK) →
         MT4 (RAPORT macierzy D×T)
@@ -164,7 +164,7 @@ STAN 1: W1 — Rama i strategia
         Po zatwierdzeniu: MT5 → zasilenie W1.3
 
       KROK W1.2c-LANCUCH (PO MACIERZY — gdy ≥1 teza główna): [CP-1c-lancuch]
-        view /mnt/skills/user/shared/MOD-LANCUCH-DOWODOWY.md
+        view shared/MOD-LANCUCH-DOWODOWY.md
         Per każda teza główna T-X:
           ŁD-1 Przesłanki prawne (z MT1 macierzy)
           ŁD-2 Dobór ogniw: BASE (kl.A/B) + POŚR (kl.C/D) + WZM + NEG
@@ -189,7 +189,7 @@ STAN 1: W1 — Rama i strategia
         Po zatwierdzeniu: lista łańcuchów ŁD-n → zasilenie W1.3 + D7 antycypacje
 
   → W1.2d-PRE MOD-DOKUMENT-ANOMALIE ⛔ (gdy ≥2 dokumenty strony przeciwnej lub pracodawcy) [CP-1d-anomalie]
-      view /mnt/skills/user/shared/MOD-DOKUMENT-ANOMALIE_v1.1.0.md
+      view shared/MOD-DOKUMENT-ANOMALIE_v1.1.0.md
       DA-0 (inwentaryzacja pól identyfikacyjnych: KRS/NIP/REGON/PESEL/adres per dokument) →
       DA-1 (cross-check wewnętrzny: czy KRS = NIP w każdym dokumencie?) →
       DA-2 (cross-check z rejestrem online: web_search per każdy KRS/NIP) →
@@ -203,7 +203,7 @@ STAN 1: W1 — Rama i strategia
       Wynik DA-REJ → wbuduj do uzasadnienia W2 jako sekcja "Anomalie dokumentacyjne"
 
   → W1.2d MOD-POSZLAKI-KONTEKST ⛔ (gdy ≥1 dokument w materiale) [CP-1d]
-      view /mnt/skills/user/shared/MOD-POSZLAKI-KONTEKST.md
+      view shared/MOD-POSZLAKI-KONTEKST.md
       PK0 (trzy warstwy każdego dokumentu — ZAWSZE) →
       PK1 (typy P1–P10: elementy pozornie nieistotne — aktywnie szukaj) →
       PK2 (budowa łańcuchów poszlak L-X z ≥3 ogniw) →
@@ -217,14 +217,14 @@ STAN 1: W1 — Rama i strategia
 
   → W1.3 Mapa przepisów + tezy (lista robocza ⚠️ nieweryfikowane)
   → W1.6 RED-TEAM (gdy aktywny — sprawa złożona / ≥3 żądania / WPS>50k)
-      view /mnt/skills/user/shared/MOD-RED-TEAM-WLASNY.md
+      view shared/MOD-RED-TEAM-WLASNY.md
   → W1 RAPORT KOŃCOWY (typ pisma, teza centralna, ścieżka strategiczna,
       lista przepisów roboczych, lista dowodów z funkcją, słabości wykryte)
   ⛔ STOP [CP-W1] → wyświetl raport W1 → czekaj na zatwierdzenie użytkownika
   ⛔ ZAKAZ: nie przechodzij do STAN 1.5 bez wiadomości "ok"/"kontynuuj"/uwag
 
 STAN 1.5: PRE-W2-VERIFICATION-GATE ⛔ BLOKUJE W2 [CP-PRE-W2]
-  view /mnt/skills/user/shared/PRE-W2-VERIFICATION-GATE.md
+  view shared/PRE-W2-VERIFICATION-GATE.md
   PRE-W2.A → PRE-W2.B (sąd online — web_search/web_fetch) →
   PRE-W2.C (pozwany KRS — ekrs.ms.gov.pl) →
   PRE-W2.D (cross-check numerów rejestrowych z akt) →
@@ -239,23 +239,23 @@ STAN 2: W2 — Projekt pisma
           MOD-TIMING (gdy timing istotny) + MOD-DOKTRYNA (gdy doktryna w uzasadnieniu)
   → W2.3 Lista placeholderów ⚠️[WERYFIKACJA W3]
   → ⛔ W2.4 MOD-ATAK-NA-DRAFT (OBLIGATORYJNY — ZAWSZE, BEZ WYJĄTKU) [CP-ATAK]
-      view /mnt/skills/user/shared/MOD-ATAK-NA-DRAFT.md
+      view shared/MOD-ATAK-NA-DRAFT.md
       D1 (słabości własne) → D2 (ataki przeciwnika) → D3 (luki dowodowe) →
       D5 (ryzyka RP/RD/RPC) → D4 (rekomendacje)
       ── ROZSZERZENIE W2.4a: ATAK NA DOWODY PRZECIWNIKA (gdy znany materiał) ──
-        view /mnt/skills/user/shared/MOD-ATAK-NA-DOWOD.md
+        view shared/MOD-ATAK-NA-DOWOD.md
         ADIS-1 (inwentaryzacja dowodów przeciwnika) →
         ADIS-2 (screening AD-1..AD-12 per dowód) →
         ADIS-3 (priorytety 🔴/🟠/🟡/🟢) →
         ADIS-4 (instrument procesowy per 🔴/🟠) →
         ADIS-5 → sekcja "ZARZUTY CO DO MATERIAŁU DOWODOWEGO" w piśmie
       ── ROZSZERZENIE W2.4b: ATAK NA ŁAŃCUCH DOWODOWY (gdy znany łańcuch) ──
-        view /mnt/skills/user/shared/MOD-LANCUCH-DOWODOWY.md §CZĘŚĆ II
+        view shared/MOD-LANCUCH-DOWODOWY.md §CZĘŚĆ II
         ŁA-1 (najsłabsze ogniwo) + ŁA-2 (kontrdowód) +
         ŁA-3 (logika) + ŁA-4 (proweniencja) →
         sekcja "ZARZUTY CO DO ŁAŃCUCHA DOWODOWEGO" w piśmie
       ── ROZSZERZENIE W2.4c: ATAK NA ŚWIADKA JAKO OGNIWO ⛔ (gdy ≥1 ogniwo = zeznanie) ──
-        view /mnt/skills/user/shared/MOD-ATAK-NA-SWIADKA.md
+        view shared/MOD-ATAK-NA-SWIADKA.md
         SW-DETECT: identyfikuj ogniwa zeznaniowe w łańcuchach ŁD-n
         SW-P1..P5: profil świadka + sprzeczności wewnętrzne + sprzeczności z D[id]
         SW-ATAK: ≤3 wektory priorytetowe (🔴 SW-A2 zaprzeczenie / SW-A5 niespójność /
@@ -282,12 +282,12 @@ STAN 3: W3 — Weryfikacja + walidacja
       ⛔ ZAKAZ: żadna sygnatura bez weryfikacji online — nawet "oczywiste"
   → W3.3 Fakty — FAKTY_v2.md (F0-F3: każdy fakt → źródło w aktach)
   → W3.4 Walidacja — MOD-WALIDACJA_v2 (bloki A–J)
-      view /mnt/skills/user/shared/MOD-WALIDACJA_v2.md
+      view shared/MOD-WALIDACJA_v2.md
       + FACT-SOURCE-LOCK + LEGAL-STATUS-LOCK (prereq. Bloku J)
       + MOD-KONCENTRACJA (limity objętości per typ pisma)
       + QUALITY-CHECK (redakcja + logika + executive summary)
   → W3.5 LEGAL-QUALITY-GATE [CP-QUALITY]
-      view /mnt/skills/user/shared/LEGAL-QUALITY-GATE.md
+      view shared/LEGAL-QUALITY-GATE.md
       PASS → W3.6
       PASS-WITH-WARNING → W3.6 (zaznacz ostrzeżenia)
       FAIL → ⛔ BLOKADA .docx → wróć do W3.1/W3.2 → popraw
@@ -299,8 +299,8 @@ STAN 3: W3 — Weryfikacja + walidacja
       audyt ≥7/10 każda kategoria → W3.7
       audyt <7/10 → wskaż kategorie → popraw → ponów audyt
   → W3.7 PEER-REVIEW + POST-VALIDATION [CP-PEER]
-      view /mnt/skills/user/shared/MOD-PEER-REVIEW.md (gdy WPS>50k / ≥3 żądania / apelacja)
-      view /mnt/skills/user/shared/POST-VALIDATION.md (zawsze)
+      view shared/MOD-PEER-REVIEW.md (gdy WPS>50k / ≥3 żądania / apelacja)
+      view shared/POST-VALIDATION.md (zawsze)
       FAZA 1: auto-raport braków
       FAZA 2: wstawienie danych / zamknięcie ⬛
       ⛔ STOP [CP-PEER] → wyświetl wyniki → czekaj
@@ -533,7 +533,7 @@ NIE traktuj "continue" jako wyjątku od ZAKAZ-1B (PRE-W2-GATE obowiązkowy).
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 > Żaden artykuł, numer Dz.U., stawka, termin ustawowy, kara ani sygnatura orzeczenia
 > nie może być podany bez weryfikacji online. Dotyczy wszystkich trzech wiadomości.
-> Procedura: view /mnt/skills/user/shared/PRAWO-HARDGATE.md
+> Procedura: view shared/PRAWO-HARDGATE.md
 
 ---
 

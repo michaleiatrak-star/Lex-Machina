@@ -5,7 +5,7 @@
 ze środków europejskich w perspektywie finansowej 2021-2027, z 28.04.2022) — Dz.U. 2025
 poz. 1733 t.j. (zastępuje t.j. 2024.1655) | Ustawa o zasadach prowadzenia polityki rozwoju
 (z 6.12.2006) — Dz.U. 2025 poz. 198 t.j. (obwieszczenie 5.02.2025; zastępuje t.j. 2024.324)
-| Ustawa o postępowaniu w sprawach pomocy publicznej — Dz.U. 2025 poz. 468 t.j. (poprzedni
+| Ustawa o postępowaniu w sprawach pomocy publicznej — Dz.U. 2026 poz. 500 t.j. (poprzedni
 t.j.: Dz.U. 2024 poz. 1635; Dz.U. 2023 poz. 702) ✅ VER: 2026-08-15
 **Data weryfikacji online:** 2026-08-15 — FAZA 3E (audyt-systemu-v4): ⛔ CRIT-TREŚĆ
 naprawiony — moduł błędnie przypisywał numer 2025.1733 (który należy do ustawy
@@ -26,7 +26,7 @@ Perspektywa finansowa UE 2021–2027 (EFRR, EFS+, Fundusz Spójności, FST), ins
 |---|---|
 | Ustawa wdrożeniowa 2021–2027 (realizacja zadań fin. ze środków europejskich, 28.04.2022) | Dz.U. 2025 poz. 1733 t.j. (zastępuje t.j. 2024.1655) |
 | Ustawa o zasadach prowadzenia polityki rozwoju (6.12.2006) | Dz.U. 2025 poz. 198 t.j. (obwieszczenie 5.02.2025; zastępuje t.j. 2024.324) |
-| Ustawa o postępowaniu w sprawach pomocy publicznej | Dz.U. 2025 poz. 468 t.j. (poprzedni t.j.: Dz.U. 2024 poz. 1635; Dz.U. 2023 poz. 702) ✅ VER: 2026-08-15 |
+| Ustawa o postępowaniu w sprawach pomocy publicznej | Dz.U. 2026 poz. 500 t.j. (poprzedni t.j.: Dz.U. 2024 poz. 1635; Dz.U. 2023 poz. 702) ✅ VER: 2026-08-15 |
 | Rozporządzenie ogólne UE 2021/1060 | stosowane bezpośrednio — funduszowe |
 | Rozporządzenia EFRR, EFS+, FS | stosowane bezpośrednio |
 | Rozporządzenie de minimis | Rozp. (UE) 2023/2831 — nowe od 01.01.2024 |

@@ -1,6 +1,6 @@
 # mod-ustawa-fundacje-stowarzyszenia
 
-**Źródło weryfikacji:** Ustawa o fundacjach — Dz.U. 2023 poz. 549 t.j. | Prawo o stowarzyszeniach — Dz.U. 2020 poz. 2261 t.j.
+**Źródło weryfikacji:** Ustawa o fundacjach — Dz.U. 2023 poz. 166 t.j. | Prawo o stowarzyszeniach — Dz.U. 2020 poz. 2261 t.j.
 **Data weryfikacji online:** 2026-06-05
 **ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 

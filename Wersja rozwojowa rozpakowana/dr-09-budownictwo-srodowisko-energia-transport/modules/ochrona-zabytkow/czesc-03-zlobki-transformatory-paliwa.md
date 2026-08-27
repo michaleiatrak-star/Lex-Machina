@@ -200,7 +200,7 @@ DODATKOWE WYMOGI OPERACYJNE:
     **2,5 M**, wyposażone w instalację odgromową
 
 Potwierdzone w 8+ zgodnych źródłach, w tym bezpośrednio dosłownym
-tekstem aktualnego rozporządzenia (sip.lex.pl — Dz.U. 2023.1707,
+tekstem aktualnego rozporządzenia (sip.lex.pl — Dz.U. 2023 poz. 1707,
 arslege.pl, archiwum.ciop.pl).
 ```
 

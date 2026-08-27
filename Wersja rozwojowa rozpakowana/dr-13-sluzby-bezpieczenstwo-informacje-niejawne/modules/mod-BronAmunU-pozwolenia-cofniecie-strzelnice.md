@@ -5,7 +5,7 @@
 (obwieszczenie Marszałka Sejmu z 21.03.2024, ogł. 2.04.2024)
 **Rola w systemie:** zamknięcie flagi **F-92** — ustawa o broni i amunicji
 NIE MIAŁA własnego modułu w żadnym z 16 DR-skilli. Występowała wyłącznie jako
-akt pomocniczy przywołany w `dr-03/mod-KK-art263-bron-nielegalna.md`, przez co
+akt pomocniczy przywołany w `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art263-bron-nielegalna.md`, przez co
 pytanie ADMINISTRACYJNE („cofnięto mi pozwolenie", „odmówiono wydania")
 trafiało na moduł KARNY i było obsługiwane niewłaściwym materiałem.
 
@@ -88,8 +88,8 @@ stosuje się KPA/PPSA):**
 decyzja KWP → odwołanie do KOMENDANTA GŁÓWNEGO POLICJI (14 dni, art. 127-129 KPA)
            → skarga do WSA (30 dni od doręczenia decyzji ostatecznej, art. 53 §1 PPSA)
            → skarga kasacyjna do NSA (30 dni, przymus adwokacko-radcowski)
-Warstwa proceduralna → `dr-05/modules/mod-KPA-decyzja-i-odwolanie.md`,
-`dr-05/modules/mod-PPSA-terminy-kasacja-prawo-pomocy.md` — NIE duplikuj tutaj.
+Warstwa proceduralna → `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-decyzja-i-odwolanie.md`,
+`dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-PPSA-terminy-kasacja-prawo-pomocy.md` — NIE duplikuj tutaj.
 ```
 
 **Bramka rozstrzygająca w każdej sprawie:** ustal, czy przepis operuje słowem
@@ -119,7 +119,7 @@ art. 10 ust. 3 — CO JEST „WAŻNĄ PRZYCZYNĄ" dla danego celu:
      zagrożenie życia, zdrowia lub mienia  ⭐ najtrudniejsza do wykazania,
      źródło ~większości spraw sądowoadministracyjnych
   2) cele ŁOWIECKIE → posiadanie uprawnień do wykonywania polowania
-     (→ `dr-09/mod-lowiectwo-klusownictwo.md`, art. 42 Prawa łowieckiego)
+     (→ `dr-09-budownictwo-srodowisko-energia-transport/modules/mod-lowiectwo-klusownictwo.md`, art. 42 Prawa łowieckiego)
   3) cele SPORTOWE → członkostwo w stowarzyszeniu strzeleckim + kwalifikacje
      z art. 10b + licencja polskiego związku sportowego (KOMPLET TRZECH)
   4) rekonstrukcje → członkostwo w stowarzyszeniu + zaświadczenie o czynnym
@@ -557,10 +557,10 @@ weryfikowany numer z sesji 2026-08-16 — sprawdzić tam, nie zgadywać).
 □ art. 47 — ⭐ ZATWIERDZENIE REGULAMINU następuje w drodze DECYZJI
   ADMINISTRACYJNEJ wydawanej przez WÓJTA, BURMISTRZA (PREZYDENTA MIASTA);
   do postępowania stosuje się dział II rozdz. 14 KPA
-  → organ odwoławczy: SKO (nie Policja!) — patrz `dr-05/mod-ustawa-SKO.md`
+  → organ odwoławczy: SKO (nie Policja!) — patrz `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-SKO.md`
 □ art. 48 — wymagania środowiskowe budowy i użytkowania strzelnic
   (rozporządzenie ministra klimatu w porozumieniu z ministrem środowiska)
-  → hałas/emisje: `dr-09/mod-POS-prawo-ochrony-srodowiska.md`
+  → hałas/emisje: `dr-09-budownictwo-srodowisko-energia-transport/modules/mod-POS-prawo-ochrony-srodowiska.md`
 □ art. 49 — strzelnice wyłączone spod stosowania przepisów ustawy
 ```
 
@@ -618,7 +618,7 @@ oba wątki równolegle — wynik sprawy wykroczeniowej nie wyczerpuje ryzyka.
   30-dniowe odwołanie z art. 15h (jest OSTATECZNE — po nim tylko atak
   procesowy na ocenę dowodu w postępowaniu administracyjnym)
 □ Czy toczy się równoległe postępowanie KARNE (art. 263 KK) lub WYKROCZENIOWE
-  (art. 51) — → `dr-03/mod-KK-art263-bron-nielegalna.md`
+  (art. 51) — → `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art263-bron-nielegalna.md`
 □ Czy zachowano terminy własne klienta: 24 h (utrata), 5 dni (rejestracja),
   7 dni (zwrot dokumentów), 14 dni (zmiana pobytu), 30 dni (zbycie broni)
 □ Czy w tle jest przemoc domowa / Niebieskie Karty (art. 19a) — inny reżim,
@@ -629,17 +629,17 @@ oba wątki równolegle — wynik sprawy wykroczeniowej nie wyczerpuje ryzyka.
 
 ## 11. INTEGRACJA Z SYSTEMEM
 
-- **`dr-03/mod-KK-art263-bron-nielegalna.md`** — warstwa karna (nielegalne
+- **`dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art263-bron-nielegalna.md`** — warstwa karna (nielegalne
   posiadanie/wyrób/handel). Ten moduł dostarcza warstwę ADMINISTRACYJNĄ, do
   której art. 263 KK odsyła przez znamię „bez wymaganego zezwolenia".
-- **`dr-05/mod-KPA-decyzja-i-odwolanie.md`**, **`mod-KPA-tryby-nadzwyczajne-i-strategia.md`**,
+- **`dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-decyzja-i-odwolanie.md`**, **`mod-KPA-tryby-nadzwyczajne-i-strategia.md`**,
   **`mod-PPSA-terminy-kasacja-prawo-pomocy.md`** — ścieżka odwoławcza i sądowa.
-- **`dr-09/mod-lowiectwo-klusownictwo.md`** — pozwolenie do celów łowieckich,
+- **`dr-09-budownictwo-srodowisko-energia-transport/modules/mod-lowiectwo-klusownictwo.md`** — pozwolenie do celów łowieckich,
   zwolnienie członków PZŁ z egzaminu, odstrzał sanitarny, świadectwo broni dla
   dzierżawcy obwodu (art. 29 ust. 1 pkt 8).
-- **`dr-13/mod-ustawa-policja.md`** — ustawa o środkach przymusu bezpośredniego
+- **`dr-13-sluzby-bezpieczenstwo-informacje-niejawne/modules/mod-ustawa-policja.md`** — ustawa o środkach przymusu bezpośredniego
   i broni palnej (t.j. Dz.U. 2026 poz. 244) — INNY AKT, uzbrojenie służb.
-- **`dr-05/mod-ustawa-SKO.md`** — organ odwoławczy przy zatwierdzeniu regulaminu
+- **`dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-SKO.md`** — organ odwoławczy przy zatwierdzeniu regulaminu
   strzelnicy (decyzja wójta/burmistrza, art. 47).
 
 ---
@@ -651,18 +651,18 @@ oba wątki równolegle — wynik sprawy wykroczeniowej nie wyczerpuje ryzyka.
   ⛔ Bezpośredni `web_fetch` zablokowany (ROBOTS_DISALLOWED).
 - **Rząd 2:** lexlege.pl / arslege.pl — pełne brzmienie Rozdz. 2 (art. 9-33)
   i Rozdz. 5 (art. 50-51), stan prawny serwisu 16.08.2026, sygnowane
-  „Dz.U.2024.0.485 t.j."; struktura rozdziałów potwierdzona krzyżowo.
+  „Dz.U.2024.0.485 t.j."; struktura rozdziałów potwierdzona krzyżowo.  <!-- zapis źródła cytowany dosłownie — CELOWO nieujednolicony (F-125, 2026-08-24d) -->
 
 ## ⚠️ NIEZWERYFIKOWANE — DO USTALENIA PRZY SPRAWIE
 
 ```
 □ ✅ CZĘŚCIOWO ZAMKNIĘTE (F-92, 2026-08-19): kontrola nowelizacji po t.j.
-  2024.485 wykonana — DWIE nowelizacje potwierdzone (Dz.U. 2025.1795,
-  Dz.U. 2026.187 art. 137 zmieniający art. 15c ust. 1 pkt 1). Pozostaje:
+  2024.485 wykonana — DWIE nowelizacje potwierdzone (Dz.U. 2025 poz. 1795,
+  Dz.U. 2026 poz. 187 art. 137 zmieniający art. 15c ust. 1 pkt 1). Pozostaje:
   dokładna nowa treść art. 15c ust. 1 pkt 1 po podstawieniu; czy art. 137
   ustawy 2026.187 wszedł już w życie (ustawa co do zasady wchodzi w życie
   19.05.2028 z wyjątkami — objęcie art. 137 wyjątkiem NIE sprawdzone);
-  zakres zmian wniesionych przez Dz.U. 2025.1795 w treść samej ustawy
+  zakres zmian wniesionych przez Dz.U. 2025 poz. 1795 w treść samej ustawy
   o broni i amunicji (tylko fakt objęcia potwierdzony, nie artykuły)
 □ Rozporządzenia wykonawcze: przechowywanie/noszenie/ewidencja (art. 32 ust. 2),
   wzory dokumentów (art. 31), tryb egzaminu (art. 16 ust. 3), wykaz stanów
@@ -696,8 +696,8 @@ przepisy karne ustawy (art. 50-51) z przepadkiem niezależnym od własności.
 
 **1.1 (2026-08-19, F-92):** Kontrola nowelizacji po t.j. 2024.485 wykonana
 (web_search, obejście blokady ISAP zgodnie z ZASADĄ 14 audytu). Ustalono
-DWIE nowelizacje: Dz.U. 2025.1795 (ustawa o zdrowiu zwierząt, fakt objęcia
-potwierdzony, artykuły nie zweryfikowane) i Dz.U. 2026.187 (ustawa o zawodzie
+DWIE nowelizacje: Dz.U. 2025 poz. 1795 (ustawa o zdrowiu zwierząt, fakt objęcia
+potwierdzony, artykuły nie zweryfikowane) i Dz.U. 2026 poz. 187 (ustawa o zawodzie
 psychologa, art. 137 zmienia art. 15c ust. 1 pkt 1 — wymóg dyplomu psychologa
 upoważnionego zastąpiony odesłaniem do nowego reżimu kwalifikacji zawodowych).
 Potwierdzone bezpośrednio w tekście ustawy nowelizującej (przepisy.gofin.pl).

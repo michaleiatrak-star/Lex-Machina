@@ -1,13 +1,25 @@
 ---
 name: dr-06-podatki-finanse-publiczne-aml
-version: 3.72
-description: |
-  DR-06: Podatki, Finanse Publiczne, AML
-  Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
-  Ładuj TYLKO moduł pasujący do sprawy — lazy loading.
-  Wchodzi z: prawo-polskie-v2 → ROUTING-MAP → ten skill.
-  Weryfikacja: isap.sejm.gov.pl | podatki.gov.pl/narzedzia/eureka/ | interpretacje.podatki.gov.pl | orzeczenia.nsa.gov.pl + shared/INTERPRETACJE-URZEDOWE.md (rejestr interpretacji urzędowych per dziedzina)
+version: "3.75"
+description: "Podatki, finanse publiczne i AML: Ordynacja podatkowa, PIT, CIT, VAT, akcyza, cło, KAS, finanse publiczne i obowiązki przeciwdziałania praniu pieniędzy."
 ---
+
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedzinowa, mapy aktów, hard gate’y, kolejność modułów i kryteria jakości tego DR-skilla pozostają bez zmian.
+
+1. `view dr-06-podatki-finanse-publiczne-aml/<plik>` oraz `view modules/...` / `view references/...` oznaczają świeży odczyt odpowiedniego lokalnego pliku tego skilla. Literalna ścieżka `/mnt/skills/user` nie jest wymagana.
+2. `view shared/<plik>` oznacza świeży odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tej paczki. Brak obowiązkowego zasobu shared = fail-closed, nie substytucja pamięcią modelu.
+3. `view <inny-skill>/<plik>` oznacza aktywację/odczyt wskazanego osobnego skilla. Nie vendoryzuj innych skilli do tego ZIP-a.
+4. `web_search` / `web_fetch` i podobne nazwy oznaczają świeże wyszukanie/odczyt online przez równoważną funkcję hosta. Zachowaj wymagane źródła oficjalne, statusy weryfikacji i zakaz cytowania prawa z pamięci.
+5. `show_widget`, `visualize:read_me`, `present_files`, `create_file`, shell/Python i podobne operacje są nazwami semantycznymi. Jeśli host nie ma literalnego narzędzia, użyj równoważnej funkcji natywnej bez omijania bramek jakości.
+6. `/mnt/user-data/...` oznacza rzeczywiste załączniki użytkownika dostępne w bieżącym hoście; wymagany ponowny odczyt ma być faktycznym odczytem źródła.
+
+**Zasada nadrzędna:** instrukcje, które są już zrozumiałe i wykonalne w bieżącym hoście, wykonuj bez konwersji. Adapter działa wyłącznie na granicy runtime.
+
 
 # DR-06 — Podatki, Finanse Publiczne, AML
 
@@ -21,6 +33,25 @@ description: |
 
 **Prawo podatkowe, stawki, progi, formularze, obowiązki raportowe, KSeF/JPK oraz praktyka interpretacyjna MF/KIS zmieniają się wielokrotnie w ciągu roku.**
 W sprawach podatkowych sama treść modułu lokalnego jest tylko punktem startu; rozstrzygające jest aktualne brzmienie aktu i aktualna linia interpretacyjna/orzecznicza zweryfikowana online.
+
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
+>
+> ```
+> view shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
+>
+> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
+> oznaczenia, tylko je wymusza.
 
 ---
 
@@ -186,7 +217,7 @@ nieaktualności przeliczników art. 85; ostatecznie potwierdzono, że
 ten mechanizm od podobnie nazwanej metody przeliczeniowej z art.
 106e). Metodologia: Rząd 1 (ISAP) niedostępny do web_fetch w tej
 sesji — zastosowano lexlege.pl jako główne źródło Rządu 2B (t.j.
-Dz.U.2025.0.775, stan prawny wprost oznaczony jako aktualny na
+Dz.U. 2025 poz. 775, stan prawny wprost oznaczony jako aktualny na
 12.08.2026), potwierdzone krzyżowo w przepisy.gofin.pl, poltax.pl,
 ifirma.pl.
 
@@ -687,13 +718,13 @@ przez cross-reference, bez duplikacji treści).
 ## Jak wywołać
 
 ```
-view /mnt/skills/user/dr-06-podatki-finanse-publiczne-aml/modules/[nazwa-modulu].md
+view dr-06-podatki-finanse-publiczne-aml/modules/[nazwa-modulu].md
 ```
 
 ## Lokalna mapa aktów prawnych
 
 ```
-view /mnt/skills/user/dr-06-podatki-finanse-publiczne-aml/MAPA-AKTOW.md
+view dr-06-podatki-finanse-publiczne-aml/MAPA-AKTOW.md
 ```
 
 ## Mapa pokrycia treściowego (planowanie rozwoju skilla)
@@ -704,7 +735,7 @@ Przydatny przy planowaniu, które luki uzupełnić w pierwszej kolejności
 razie wyłącznie Ordynację podatkową):
 
 ```
-view /mnt/skills/user/dr-06-podatki-finanse-publiczne-aml/MAPA-POKRYCIA.md
+view dr-06-podatki-finanse-publiczne-aml/MAPA-POKRYCIA.md
 ```
 
 ## Powiązania zewnętrzne
@@ -720,7 +751,7 @@ view /mnt/skills/user/dr-06-podatki-finanse-publiczne-aml/MAPA-POKRYCIA.md
 Po zakończeniu analizy lub przed oddaniem odpowiedzi zawierającej ocenę prawną:
 
 ```text
-view /mnt/skills/user/shared/DISCLAIMER.md
+view shared/DISCLAIMER.md
 ```
 
 Wybierz wariant odpowiedni do trybu:

@@ -71,9 +71,9 @@ Przed wygenerowaniem pisma lub analizy odpowiedz:
 - czy dobrano właściwy środek procesowy?
 
 ## Powiązania shared
-- `shared/references/modules/LOCAL-LAW-SOURCE-PROTOCOL.md`
-- `shared/references/modules/LOCAL-LAW-AUDIT-GATE.md`
-- `shared/references/modules/MULTI-LEVEL-POLISH-LAW-ROUTER.md`
+- `shared/HIERARCHIA-ZRODEL.md`
+- `shared/LEGAL-QUALITY-GATE.md`
+- `shared/CROSS-DOMAIN-CONFLICT-ROUTER.md`
 - `shared/LEGAL-REGISTRY.md`
 - `shared/LEGAL-LIFECYCLE-MANAGEMENT.md`
 - `shared/TEMPORAL-LAW-CHECK.md`

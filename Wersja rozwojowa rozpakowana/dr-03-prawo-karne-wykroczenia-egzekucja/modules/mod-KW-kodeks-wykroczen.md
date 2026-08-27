@@ -60,7 +60,7 @@ Postanowienie SN IV KK 145/24 z 10.09.2024:
 > **wczytaj drzewo decyzyjne przed kwalifikacją.**
 
 ```
-view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
+view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 ```
 
 ---
@@ -68,7 +68,7 @@ view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwa
 ## SZCZEGÓŁOWY FRAMEWORK
 
 ```
-view /mnt/skills/user/prawny-router-v3/references/wykroczenia.md
+view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KW-KPW-framework-szczegolowy.md
 ```
 
 Zawiera: schemat postępowania, mandat (przyjąć/odmówić), uchylenie prawomocnego
@@ -84,6 +84,6 @@ I KZP 7/25 i IV KK 145/24), przedawnienie i zatarcie, kalkulator terminów.
 |---|---|
 | Sprzeciw od wyroku nakazowego | `pisma-proste-v2` |
 | Analiza sprawy wykroczeniowej | `analiza-sadowa-v6` |
-| Granica z przestępstwem → | `mod-N-karne.md` |
+| Granica z przestępstwem → | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` |
 | Dowody (kamera, GPS, radar) | `analizator-dowodow-v3` |
 | Kwalifikacja czynu (przepisy z indeksu) | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md` |

@@ -1,7 +1,7 @@
 # Moduł — VAT: sankcje, dodatkowe zobowiązanie podatkowe, bony SPV/MPV, pusta faktura, wyłączenia i proporcja odliczenia
 
 > ⚠️ TEN moduł jest CZĘŚCIĄ RODZINY plików VAT, PODZIELONEJ
-> 2026-08-12 (NOTA-4, audyt-systemu-v4/CHECKLIST-DEDUP.md — moduł
+> 2026-08-12 (NOTA-4, audyt-systemu-v4/references/CHECKLIST-DEDUP.md — moduł
 > źródłowy miał 3652 linie). Moduł MACIERZYSTY (z aktualnym stanem
 > weryfikacji ustawy, ostrzeżeniami o nowelizacjach i alertami
 > KSeF/PKWiU): `mod-VAT-podatek-od-towarow-i-uslug.md`.
@@ -474,7 +474,7 @@ z zarzutem karnoskarbowym)
   bez NIP
 
 ✅ [VER: lexlege.pl / arslege.pl / przepisy.gofin.pl — zgodne brzmienie
-   art. 108 ust. 1–3, Dz.U.2025.0.775 t.j., 2026-08-12]
+   art. 108 ust. 1–3, Dz.U. 2025 poz. 775 t.j., 2026-08-12]
 ⚠️ [ZALECANA WERYFIKACJA ISAP]
 ```
 
@@ -565,7 +565,7 @@ występował w całym DR-06)
       noclegów) albo czy świadczenie nie jest elementem USŁUGI
       KOMPLEKSOWEJ o innym charakterze głównym
 
-✅ [VER: lexlege.pl — pełny tekst art. 88 ustawy o VAT, Dz.U.2025.0.775
+✅ [VER: lexlege.pl — pełny tekst art. 88 ustawy o VAT, Dz.U. 2025 poz. 775
    t.j., stan prawny na 12.08.2026; pobrane 2026-08-12; brzmienie
    potwierdzone dodatkowo w arslege.pl i eureka.mf.gov.pl]
 ⚠️ [ZALECANA WERYFIKACJA ISAP]
@@ -710,7 +710,7 @@ zdrowia, edukacja, finanse, NGO, spółdzielnie)
     mod-odliczenia-uzytek-mieszany-firma-prywatny-KUP.md
 
 ✅ [VER: lexlege.pl — pełny tekst art. 90, 90a, 90b, 90c i 91 ustawy o
-   VAT, Dz.U.2025.0.775 t.j.; pobrane 2026-08-12. Art. 86 ust. 2a–2h i
+   VAT, Dz.U. 2025 poz. 775 t.j.; pobrane 2026-08-12. Art. 86 ust. 2a–2h i
    rozporządzenie Dz.U. 2015 poz. 2193 — potwierdzone w 4 niezależnych
    źródłach, w tym interpretacji KIS i opracowaniu KPMG]
 ✅ ZAMKNIĘTE 2026-08-20 (F-18) — metryka rozporządzenia z 17.12.2015 r.

@@ -24,7 +24,7 @@ Zbędna interlinia to:
 
 ```bash
 # Znajdź pliki z ≥2 kolejnymi pustymi liniami
-for f in $(find /mnt/skills/user/ -name "*.md" | grep -v archive); do
+for f in $(find  -name "*.md" | grep -v archive); do
   count=$(grep -c "^$" "$f" || true)
   doubles=$(awk '/^$/{c++; if(c>=2) print NR": "$0} /^./{c=0}' "$f" | wc -l)
   if [ "$doubles" -gt 0 ]; then
@@ -35,7 +35,7 @@ done
 
 ```bash
 # Szczegóły konkretnego pliku (numery linii)
-awk '/^$/{c++; if(c>=2) print NR": [PUSTA]"} /^./{c=0}' /mnt/skills/user/SKILL_PATH/SKILL.md
+awk '/^$/{c++; if(c>=2) print NR": [PUSTA]"} /^./{c=0}' SKILL_PATH/SKILL.md
 ```
 
 ---

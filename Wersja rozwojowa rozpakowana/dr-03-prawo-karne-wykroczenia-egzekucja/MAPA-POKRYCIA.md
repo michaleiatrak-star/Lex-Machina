@@ -50,7 +50,7 @@ użyciem w piśmie (HARD GATE), niezależnie od statusu 🟢/🟡/🔴 tutaj.
 | VIII | Porządek publiczny | 49–64 | 🟢 | `mod-KW-art49-64-porzadek-publiczny` — pełne: 49, 49a, 50, 50a, 51, 52, 52a, 52b, 54, 63a, 64. Brak/niepewne: 55–58, 60¹ |
 | X | Bezpieczeństwo osób i mienia | 70–83 | 🟡 | `mod-KW-art70-118-bezpieczenstwo-osoba-zdrowie` — pełne: 70, 71, 77–78, 79, 83. Brak: 72–76, 80–82 |
 | XI | Bezpieczeństwo i porządek w komunikacji | 84–103a | 🟡 | Tylko taryfikatorowo (86, 87, 92a, 94, 96, 86c). Brak: 85, 88–91, 97–103a |
-| XII | Przeciwko osobie | 104–108 | 🟢 | `mod-KW-art70-118...` — pełne: 104, 105, 106, 107 (z orzecznictwem SN), 108. Niepewne: 107a |
+| XII | Przeciwko osobie | 104–108 | 🟢 | `mod-KW-art70-118...` — pełne: 104, 105, 106, 107 (z orzecznictwem SN), 107a i 108; art. 107a zweryfikowany w ELI 2026-08-25 |
 | XIII | Przeciwko zdrowiu | 109–118 | 🟡 | Pełne: 109, 115, 116, 118. Skrócone: 110, 111, 113, 114. Brak: 112, 117 |
 | XIV | Przeciwko mieniu | 119–131 | 🟢 | `mod-KW-art119-131-przeciwko-mieniu` — pełne: 119–129, 131. Najdokładniej opracowany rozdział |
 | XV | Przeciwko interesom konsumentów | 132–139c | 🔴 | Pełne: 133, 134. Uchylone: 132, 139. Niepewne/brak: 137, 138, 139a–c |

@@ -1,0 +1,13 @@
+interface:
+  display_name: dr 07 zamowienia publiczne fundusze ue
+  short_description: 'Zamówienia publiczne i fundusze UE: PZP, postępowania zakupowe,
+    KIO, środki ochrony prawnej, finansowanie UE i powiązane zagadnienia realizacyjne.'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

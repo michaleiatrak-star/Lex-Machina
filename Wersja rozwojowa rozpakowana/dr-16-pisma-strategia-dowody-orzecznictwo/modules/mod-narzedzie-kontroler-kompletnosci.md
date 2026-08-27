@@ -42,17 +42,17 @@ shared/QUALITY-CHECK.md
 
 | Typ sprawy | Moduł podstawowy | Moduły wspierające |
 |---|---|---|
-| praca / ZUS / mobbing | `mod-A`, `mod-B`, `mod-H` | dowody, pisma, orzeczenia |
-| karne / wykroczenia / stalking / cyber | `mod-N`, `mod-I`, `mod-J`, `mod-T` | przesłuchanie, dowody |
-| cywilne / rodzinne / spadkowe | `mod-C`, `mod-D`, `mod-E` | pisma, dowody, terminy |
-| gospodarcze / KSH / restrukturyzacja | `mod-L`, `mod-AJ` | egzekucja, podatki, KKS |
-| administracyjne / WSA / NSA | `mod-G` | PPSA, formal-check, temporal |
-| podatkowe / KAS / egzekucja admin. | `mod-AR`, `mod-AT`, `mod-AS` | KKS, WSA, dowody |
-| regulacyjne | `mod-AU`, `mod-BC`, `mod-AK`, `mod-AF` | compliance, UE |
-| UODO / RODO / cyber | `mod-BA`, `mod-P`, `mod-BG` | dowody techniczne |
-| cudzoziemcy / pomoc społeczna | `mod-AX`, `mod-AY` | administracyjne, WSA |
-| dyscyplinarne | `mod-AZ`, `mod-BF` | dowody, orzeczenia, etyka |
-| UE/transgraniczne/arbitraż | `mod-BD`, `mod-BE`, `mod-AL` | prawo właściwe, egzekucja |
+| praca / ZUS / mobbing | DR-04: `mod-KP-prawo-pracy.md`, `mod-SUS-ZUS-ubezpieczenia-spoleczne.md`, `mod-KP-mobbing-dyskryminacja.md` | dowody, pisma, orzeczenia |
+| karne / wykroczenia / stalking / cyber | DR-03: `mod-KK-KPK-framework-karne.md`, `mod-KW-kodeks-wykroczen.md`, `mod-KK-art190a-stalking.md`, `mod-KK-art267-269c-cyberprzestepstwa.md` | przesłuchanie, dowody |
+| cywilne / rodzinne / spadkowe | DR-02: `mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md`, `mod-KRO-rodzinne.md`, `mod-KC-spadki.md` | pisma, dowody, terminy |
+| gospodarcze / KSH / restrukturyzacja | DR-02: `mod-KSH-spolki-handlowe.md`, `mod-PrUpad-upadlosc-restrukturyzacja.md` + właściwy `mod-PrRestr-*` | egzekucja, podatki, KKS |
+| administracyjne / WSA / NSA | DR-05: `mod-KPA-postepowanie-administracyjne.md` + właściwy `mod-PPSA-*` | PPSA, formal-check, temporal |
+| podatkowe / KAS / egzekucja admin. | DR-06: `mod-OP-ordynacja-podatkowa.md`, `mod-KAS-kontrola-celno-skarbowa.md`; egzekucja administracyjna → DR-05 `mod-UPEA-egzekucja-administracyjna.md` | KKS, WSA, dowody |
+| regulacyjne | regulatorzy → DR-12 `mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF.md`; energia → DR-09 `mod-PrEnergetyczne-URE-OZE.md`; zamówienia → DR-07 `mod-PZP-zamowienia-publiczne-KIO.md`; konkurencja → DR-02 `mod-ustawa-UOKIK-antymonopolowe.md` | compliance, UE |
+| UODO / RODO / cyber | DR-11: `mod-UODO-postepowanie-ochrona-danych.md`, `mod-RODO-GDPR-2016-679.md`, `mod-KSC-NIS2-cyberbezpieczenstwo-telekom.md` | dowody techniczne |
+| cudzoziemcy / pomoc społeczna | cudzoziemcy → DR-05 `mod-ustawa-cudzoziemcy.md`; pomoc społeczna → DR-04 `mod-ustawa-pomoc-spoleczna.md` | administracyjne, WSA |
+| dyscyplinarne | zawody → DR-12 `mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md`; służby → właściwy moduł konkretnej służby w DR-13 | dowody, orzeczenia, etyka |
+| UE/transgraniczne/arbitraż | DR-14: `mod-TFUE-TUE-prawo-pierwotne-UE.md`, `mod-PMPP-prawo-prywatne-miedzynarodowe.md`, `mod-KPC-egzekucja-transgraniczna-UE.md`; arbitraż → DR-12 `mod-KPC-arbitraz-mediacja-ADR.md` | prawo właściwe, egzekucja |
 
 ## Finalny quality gate
 Nie kończ analizy prawa polskiego bez odpowiedzi na pytania:

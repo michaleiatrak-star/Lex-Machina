@@ -246,4 +246,4 @@ web_search (generuj zawsze przed podaniem konkretnych wartości):
 
 ## ⚖️ DISCLAIMER
 
-Po zakończeniu analizy: `view /mnt/skills/user/shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
+Po zakończeniu analizy: `view shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).

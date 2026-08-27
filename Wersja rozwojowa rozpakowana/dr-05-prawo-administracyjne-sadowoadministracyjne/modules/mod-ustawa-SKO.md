@@ -1,7 +1,7 @@
 # mod-ustawa-SKO
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o SKO — Dz.U. 2023 poz. 825 t.j. | KPA — Dz.U. 2025 poz. 1691
+**Źródło weryfikacji:** Ustawa o SKO — Dz.U. 2018 poz. 570 t.j. | KPA — Dz.U. 2025 poz. 1691
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -16,7 +16,7 @@ Samorządowe Kolegia Odwoławcze jako organ odwoławczy od decyzji organów JST;
 
 | Akt | Dz.U. |
 |---|---|
-| Ustawa o samorządowych kolegiach odwoławczych | Dz.U. 2023 poz. 825 t.j. |
+| Ustawa o samorządowych kolegiach odwoławczych | Dz.U. 2018 poz. 570 t.j. |
 | KPA | Dz.U. 2025 poz. 1691 t.j. |
 | PPSA | Dz.U. 2026 poz. 143 t.j. |
 
@@ -116,7 +116,7 @@ Prezes SKO: nadzór organizacyjny; etatowy; powoływany przez Prezesa RM
 ### Dz.U. — weryfikacja
 
 ```
-Ustawa o SKO: Dz.U. 2023 poz. 825 t.j.
+Ustawa o SKO: Dz.U. 2018 poz. 570 t.j.
   ✅ VER: isap.sejm.gov.pl 2026-06-05
   Nowszy t.j. NIE ogłoszony — Dz.U. 2023 poz. 825 jest aktualnym t.j.
   → Weryfikuj zmiany po t.j. w ISAP: isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20230000825

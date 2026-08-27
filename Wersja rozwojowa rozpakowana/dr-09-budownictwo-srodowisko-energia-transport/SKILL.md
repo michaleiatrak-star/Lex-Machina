@@ -1,13 +1,25 @@
 ---
 name: dr-09-budownictwo-srodowisko-energia-transport
-version: 3.21
-description: |
-  DR-09: Budownictwo, Środowisko, Energia, Transport
-  Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
-  Ładuj TYLKO moduł pasujący do sprawy — lazy loading.
-  Wchodzi z: prawo-polskie-v2 → ROUTING-MAP → ten skill.
-  Weryfikacja: isap.sejm.gov.pl | orzeczenia.nsa.gov.pl | sn.pl + shared/INTERPRETACJE-URZEDOWE.md (rejestr interpretacji urzędowych per dziedzina)
+version: "3.24"
+description: "Budownictwo, środowisko, energia i transport: prawo budowlane, planowanie, odpady, ochrona środowiska, energetyka, drogi i regulacje transportowe."
 ---
+
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedzinowa, mapy aktów, hard gate’y, kolejność modułów i kryteria jakości tego DR-skilla pozostają bez zmian.
+
+1. `view dr-09-budownictwo-srodowisko-energia-transport/<plik>` oraz `view modules/...` / `view references/...` oznaczają świeży odczyt odpowiedniego lokalnego pliku tego skilla. Literalna ścieżka `/mnt/skills/user` nie jest wymagana.
+2. `view shared/<plik>` oznacza świeży odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tej paczki. Brak obowiązkowego zasobu shared = fail-closed, nie substytucja pamięcią modelu.
+3. `view <inny-skill>/<plik>` oznacza aktywację/odczyt wskazanego osobnego skilla. Nie vendoryzuj innych skilli do tego ZIP-a.
+4. `web_search` / `web_fetch` i podobne nazwy oznaczają świeże wyszukanie/odczyt online przez równoważną funkcję hosta. Zachowaj wymagane źródła oficjalne, statusy weryfikacji i zakaz cytowania prawa z pamięci.
+5. `show_widget`, `visualize:read_me`, `present_files`, `create_file`, shell/Python i podobne operacje są nazwami semantycznymi. Jeśli host nie ma literalnego narzędzia, użyj równoważnej funkcji natywnej bez omijania bramek jakości.
+6. `/mnt/user-data/...` oznacza rzeczywiste załączniki użytkownika dostępne w bieżącym hoście; wymagany ponowny odczyt ma być faktycznym odczytem źródła.
+
+**Zasada nadrzędna:** instrukcje, które są już zrozumiałe i wykonalne w bieżącym hoście, wykonuj bez konwersji. Adapter działa wyłącznie na granicy runtime.
+
 
 # DR-09 — Budownictwo, Środowisko, Energia, Transport
 
@@ -20,6 +32,25 @@ description: |
 
 Akty DR-09 (zwłaszcza Prawo budowlane, POŚ, Prawo wodne) są **bardzo często nowelizowane** —
 tekst sprzed 6 miesięcy może być już nieaktualny. Zawsze pobieraj aktualny t.j. przed użyciem.
+
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
+>
+> ```
+> view shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
+>
+> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
+> oznaczenia, tylko je wymusza.
 
 ---
 
@@ -479,25 +510,13 @@ TRANSPORT:
 ## Jak wywołać
 
 ```
-view /mnt/skills/user/dr-09-budownictwo-srodowisko-energia-transport/modules/[nazwa-modulu].md
+view dr-09-budownictwo-srodowisko-energia-transport/modules/[nazwa-modulu].md
 ```
 
 ## Lokalna mapa aktów prawnych
 
 ```
-view /mnt/skills/user/dr-09-budownictwo-srodowisko-energia-transport/MAPA-AKTOW.md
-```
-
-## Mapa pokrycia treściowego (planowanie rozwoju skilla)
-
-Rejestr informacyjny — NIE krok obowiązkowy przy obsłudze konkretnej sprawy.
-Przydatny przy planowaniu, które luki uzupełnić w pierwszej kolejności, oraz
-przy nowelizacjach — pokazuje od razu czy dotknięty fragment ma treść do
-zaktualizowania. (F-83, zasilony 2026-08-22; obejmuje na razie wyłącznie
-Prawo budowlane):
-
-```
-view /mnt/skills/user/dr-09-budownictwo-srodowisko-energia-transport/MAPA-POKRYCIA.md
+view dr-09-budownictwo-srodowisko-energia-transport/MAPA-AKTOW.md
 ```
 
 ---
@@ -516,7 +535,7 @@ view /mnt/skills/user/dr-09-budownictwo-srodowisko-energia-transport/MAPA-POKRYC
 Po zakończeniu analizy lub przed oddaniem odpowiedzi zawierającej ocenę prawną:
 
 ```text
-view /mnt/skills/user/shared/DISCLAIMER.md
+view shared/DISCLAIMER.md
 ```
 
 Wybierz wariant odpowiedni do trybu:

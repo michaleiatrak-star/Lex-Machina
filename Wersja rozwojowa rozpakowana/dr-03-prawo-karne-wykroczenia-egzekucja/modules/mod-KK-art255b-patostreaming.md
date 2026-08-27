@@ -1,266 +1,168 @@
 # mod-KK-art255b-patostreaming
 
-**Wersja:** 1.1 | **Dodano:** 2026-07-18 | **Zaktualizowano:** 2026-07-27
-**Rola w systemie:** odpowiedź na pytanie użytkownika o "patostreamerów" —
-**BARDZO ŚWIEŻE PRAWO, TERAZ Z PRECYZYJNYMI DATAMI (na żądanie
-użytkownika, FAZA 3E/ZASADA 14):**
-  - Sejm uchwalił: 11.06.2026 (419 za, 19 przeciw, 1 wstrzymujący)
-  - Senat przyjął BEZ POPRAWEK: 25.06.2026
-  - Prezydent Karol Nawrocki PODPISAŁ: ok. 17.07.2026
-  - PUBLIKACJA w Dzienniku Ustaw: **23.07.2026 r., Dz.U. 2026 poz. 988**
-    (ustawa z 11.06.2026 r. o zmianie ustawy — Kodeks karny)
-  - ⚡ **WEJŚCIE W ŻYCIE: 22 SIERPNIA 2026 R.** (30-dniowe vacatio legis
-    od publikacji) — **TO ZA OK. 3,5 TYGODNIA od dnia tego audytu
-    (27.07.2026)** — bliski, ważny termin
-  - Potwierdzone w 6+ zgodnych źródłach (czasopismo.legeartis.org,
-    telepolis.pl, stasik-kancelaria.pl, cyberdefence24.pl, tech.wp.pl,
-    natemat.pl, forsal.pl) — wszystkie zgodne co do dat i treści
+**Wersja:** 2.0 | **Dodano:** 2026-07-18 | **Zaktualizowano:** 2026-08-25
+**Stan prawny modułu:** art. 255b KK obowiązuje od **23.08.2026 r.**
+**Źródło urzędowe:** ustawa z 11.06.2026 r. o zmianie ustawy – Kodeks
+karny, ogłoszona 23.07.2026 r. w Dz.U. 2026 poz. 988.
 
-> ⛔⛔ HARDGATE WZMOCNIONY: to przepis, który NIE WSZEDŁ JESZCZE W ŻYCIE
-> na dzień tej sesji (wejdzie 22.08.2026) — ZAWSZE zweryfikuj na ISAP
-> przed poradą, czy data już minęła i czy nie pojawiły się dalsze
-> zmiany/orzecznictwo od tej weryfikacji (2026-07-27).
+> ⛔ HARD GATE: przepis jest bardzo świeży. Przed użyciem w sprawie
+> ponownie sprawdź tekst ustawy nowelizującej i aktualny tekst KK w ELI/ISAP.
+> Moduł nie zastępuje źródła prawa.
 
 ---
 
-## 1. GENEZA I KONTEKST
+## 1. STATUS TEMPORALNY
 
-```
-□ Termin "patostream" = połączenie "patologia" + "stream" — nagrywanie/
-  transmitowanie na żywo materiałów z treściami WULGARNYMI, OBSCENICZNYMI,
-  SZOKUJĄCYMI lub BRUTALNYMI
-□ MODEL BIZNESOWY: twórcy zarabiają głównie na DOBROWOLNYCH WPŁATACH
-  widzów ("donate'y") w zamian za wykonanie OBIECANYCH wcześniej
-  czynności (np. wdanie się w bójkę) — MONETYZACJA przemocy/poniżenia
-□ Platformy: Twitch, YouTube, Kick i podobne
-□ Impuls do zmiany prawa: głośny proces rodziców-patostreamerów z
-  Dąbrowy Górniczej (transmisja na TikToku dręczenia własnego
-  kilkuletniego syna, 2023 r.) — rodzice ograniczeni we władzy
-  rodzicielskiej, nadzór kuratora, zarzut znęcania się do 8 lat
-□ Skala problemu: badanie konsumenckie UKE (wrzesień 2025) — 27,8%
-  dzieci/młodzieży (7-17 lat) miało kontakt z tego typu treściami
-```
-
-**Droga legislacyjna:** RPO od dawna apelował o zmiany (obecne przepisy
-KK/cywilne/RODO oceniane jako NIEWYSTARCZAJĄCE). Pierwszy konkretny
-projekt ustawy — maj 2023 (zasada dyskontynuacji przerwała pierwsze
-podejście). Kolejne podejście: Sejm głosował 7.10.2025. Ostatecznie
-Prezydent PODPISAŁ nowelizację (czerwiec 2026, dokładna data do
-weryfikacji na ISAP).
+- Art. 1 ustawy nowelizującej dodaje art. 255b po art. 255a KK.
+- Art. 2 przewiduje wejście w życie po 30 dniach od ogłoszenia.
+- Ogłoszenie: 23.07.2026 r.; art. 2 przewiduje wejście w życie po upływie
+  30 dni od ogłoszenia, czyli **23.08.2026 r.** (dzień ogłoszenia nie jest
+  wliczany do terminu; metadane ELI: `entryIntoForce: 2026-08-23`).
+- Do czynów sprzed tej daty nie wolno stosować nowego, surowszego typu
+  retroaktywnie. Zastosuj art. 4 § 1 KK i zbadaj przepisy obowiązujące w
+  czasie czynu oraz ewentualne klasyczne typy (np. art. 207, 255–257,
+  190a KK).
 
 ---
 
-## 2. TREŚĆ ART. 255b KK (✅ ROZSTRZYGNIĘTE 2026-07-27 — ustawa opublikowana w Dz.U. 2026 poz. 988)
+## 2. ART. 255b KK — ZNAMIONA I SANKCJE
 
-```
-§ 1 — kto, W CELU OSIĄGNIĘCIA KORZYŚCI MAJĄTKOWEJ LUB OSOBISTEJ, za
-      pośrednictwem sieci teleinformatycznej PUBLICZNIE rozpowszechnia
-      treści przedstawiające: (1) popełnienie czynu zabronionego
-      zagrożonego karą pozbawienia wolności, jeżeli przedmiotem
-      zamachu jest dobro osobiste, (2) przemoc wobec zwierzęcia z
-      naruszeniem przepisów ustawy, (3) poniżające traktowanie innej
-      osoby, NAWET ZA JEJ ZGODĄ → kara pozbawienia wolności DO 3 LAT
-      — ✅ POTWIERDZONE 2026-07-27 (FAZA 3E/ZASADA 14) jako kara
-      bazowa, dosłownym cytatem ustawy w 6+ zgodnych źródłach —
-      wcześniejsza niepewność w tej sesji ROZSTRZYGNIĘTA
+### § 1 — rzeczywiste zachowania
 
-§ 2 — TREŚCI INSCENIZOWANE (w tym deepfake) traktowane TAK SAMO jak rzeczywiste: karze
-      podlega również przedstawienie MOGĄCE WYWOŁAĆ PRZEKONANIE, że
-      pokazuje zakazane zachowania — udawana bójka/pozorowane znęcanie
-      PODLEGA TEJ SAMEJ karze co czyn rzeczywisty
-      ⭐ KLUCZOWA LINIA OBRONY WYŁĄCZONA: "to było ustawione, na niby" —
-      NIE POMAGA, §2 penalizuje POZOROWANIE tak samo jak rzeczywistość
+Odpowiada ten, kto łącznie:
 
-□ PONIŻAJĄCE TRAKTOWANIE — najszersza i praktycznie najważniejsza
-  kategoria dla typowego patostreamu: poniżające traktowanie innej
-  osoby jest karalne NAWET ZA JEJ ZGODĄ
-  ⭐ KLUCZOWA LINIA OBRONY WYŁĄCZONA: "przecież się zgodził/zgodziła" —
-  NIE POMAGA — zgoda osoby pokazywanej NIE WYŁĄCZA odpowiedzialności,
-  celowo (bo w patotreściach "zgoda" bywa KUPIONA lub WYMUSZONA
-  zależnością ekonomiczną/emocjonalną od streamera)
+1. działa **w celu osiągnięcia korzyści majątkowej lub osobistej**;
+2. za pośrednictwem sieci teleinformatycznej;
+3. publicznie rozpowszechnia treści przedstawiające co najmniej jedną z
+   kategorii:
+   - popełnienie czynu zabronionego zagrożonego karą pozbawienia wolności,
+     jeżeli przedmiotem zamachu jest dobro osobiste;
+   - przemoc wobec zwierzęcia z naruszeniem przepisów ustawy;
+   - poniżające traktowanie innej osoby, nawet za jej zgodą.
 
-§ 3 — TYP KWALIFIKOWANY: jeżeli treści z §1 lub §2 przedstawiają
-      MAŁOLETNIEGO (osobę poniżej 18 lat) → kara ROŚNIE: od 3 miesięcy
-      do 5 lat pozbawienia wolności
+**Sankcja:** pozbawienie wolności do lat 3.
 
-§ ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) — USUNIĘTO błędny typ
-    "motyw finansowy, 1-10 lat". W UCHWALONEJ, OPUBLIKOWANEJ wersji
-    ustawy (Dz.U. 2026 poz. 988) SĄ TYLKO 2 PROGI KARY: 3 lata (§1
-    podstawowy) i 5 lat (§3, gdy dotyczy małoletniego) — NIE MA
-    trzeciego, odrębnego typu za "motyw finansowy". To wynika z tego,
-    że CEL OSIĄGNIĘCIA KORZYŚCI MAJĄTKOWEJ/OSOBISTEJ jest już ELEMENTEM
-    SAMEGO TYPU PODSTAWOWEGO (§1) — nie tworzy odrębnej, wyższej kary.
-    Potwierdzone: stasik-kancelaria.pl wprost — "Maksimum w uchwalonej
-    wersji to 5 lat, a nie 8, jak zapowiadano wcześniej" — poprzednia
-    wersja modułu (z 2026-07-18) opisywała PRAWDOPODOBNIE WCZEŚNIEJSZY,
-    NIEUCHWALONY projekt z surowszą, odrębną karą za motyw finansowy,
-    która NIE PRZESZŁA do finalnej wersji.
+⛔ Cel korzyści majątkowej lub osobistej jest znamieniem każdego czynu z
+§ 1, a nie odrębnym typem kwalifikowanym. Sama publikacja bez tego celu nie
+wypełnia art. 255b § 1, choć może realizować inny przepis.
 
-§ 4 — KONTRATYP (okoliczność WYŁĄCZAJĄCA karalność): NIE PODLEGA KARZE
-      ten, kto ŁĄCZNIE:
-        a) NIE JEST sprawcą, podżegaczem ani pomocnikiem czynu
-           zabronionego przedstawionego w transmisji, ORAZ
-        b) działa w celu OBRONY INTERESU PUBLICZNEGO lub ZASŁUGUJĄCEGO
-           NA UWZGLĘDNIENIE interesu prywatnego
-      CEL: wyłączenie karalności DZIENNIKARZY/DOKUMENTALISTÓW/
-      DEMASKATORÓW nagrywających cudze przestępstwo w celu jego
-      UJAWNIENIA (nie promowania) — np. reportaż interwencyjny
-```
+### § 2 — inscenizacja lub treść pozorna
 
-**Osobny, odrębny wątek (Kodeks wykroczeń, NIE mylić z art. 255b KK):**
-w toku prac projektowych rozważano też dodanie **art. 107a KW** —
-ochrona NIEZAKŁÓCONEGO PRZEBIEGU zdalnej komunikacji (systemy
-teleinformatyczne) przed "włamaniami" na czaty/wideokonferencje/
-transmisje/zdalne nauczanie połączonymi z prezentowaniem treści
-obraźliwych/obscenicznych — ⚠️ NIE POTWIERDZONO w tej sesji, czy ten
-przepis wykroczeniowy OSTATECZNIE wszedł do ustawy razem z art. 255b KK,
-czy pozostał odrębnym, niezależnym projektem — zweryfikuj na ISAP.
+Tej samej karze podlega sprawca, który z tym samym celem i w ten sam sposób
+publicznie rozpowszechnia treści **mogące wywołać przekonanie**, że
+przedstawiają zachowania określone w § 1. Obejmuje to w szczególności
+wiarygodną inscenizację lub materiał syntetyczny; ustawa nie używa jednak
+terminu „deepfake”.
+
+**Sankcja:** pozbawienie wolności do lat 3.
+
+### § 3 — przedstawienie małoletniego
+
+Jeżeli treści z § 1 lub § 2 przedstawiają małoletniego, sankcja wynosi
+**od 3 miesięcy do 5 lat pozbawienia wolności**.
+
+### § 4 — ustawowe wyłączenie przestępności
+
+Nie stanowi przestępstwa z § 1–3 czyn podjęty:
+
+- w ramach działalności artystycznej, edukacyjnej, informacyjnej, prasowej
+  lub naukowej, **albo**
+- w celu ochrony interesu publicznego.
+
+⛔ § 4 nie zawiera dodatkowego warunku, by publikujący nie był sprawcą,
+podżegaczem ani pomocnikiem zachowania pokazanego w materiale. Nie wolno
+dopisywać takiego znamienia. Zastosowanie § 4 wymaga jednak indywidualnej,
+ścisłej oceny celu i kontekstu publikacji.
 
 ---
 
-## 3. DOTYCHCZASOWE PODSTAWY PRZED ART. 255b — NADAL AKTUALNE, MOŻLIWY ZBIEG
+## 3. ALGORYTM KWALIFIKACJI
 
-**Ważne zastrzeżenie krytyczne (dr Natalia Daśko, cyt. w analizach
-prawniczych):** DUŻO zachowań typowych dla patostreamingu było już
-KARALNYCH niezależnie od nowego przepisu — przemoc, groźby, znęcanie,
-zniesławienie są przestępstwami NIEZALEŻNIE od tego, czy są transmitowane.
-Część prawników ostrzega, że art. 255b może okazać się częściowo "MARTWY"
-dla LŻEJSZYCH zachowań typowych dla patostreamu, bo **problemem
-historycznie było ŚCIGANIE, nie brak przepisu**.
+```text
+1. Czy publiczne rozpowszechnienie nastąpiło przez sieć teleinformatyczną?
+   NIE → brak art. 255b; sprawdź inne typy.
+   TAK → 2.
 
+2. Czy sprawca działał w celu korzyści majątkowej LUB osobistej?
+   NIE → brak art. 255b § 1–2; sprawdź inne typy.
+   TAK → 3.
+
+3. Czy materiał przedstawia kategorię z § 1 albo może wywołać takie
+   przekonanie (§ 2)?
+   NIE → brak art. 255b.
+   TAK → 4.
+
+4. Czy zachodzi co najmniej jedna podstawa z § 4?
+   TAK → czyn nie stanowi przestępstwa z art. 255b § 1–3.
+   NIE → 5.
+
+5. Czy treść przedstawia małoletniego?
+   TAK → § 3: 3 miesiące–5 lat PW.
+   NIE → § 1 lub § 2: do 3 lat PW.
 ```
-Przepisy MOGĄCE mieć zastosowanie RÓWNOLEGLE/ZAMIAST art. 255b:
-□ Art. 207 KK — znęcanie się (fizyczne/psychiczne) — patrz sprawa
-  z Dąbrowy Górniczej, do 8 lat
-□ Art. 255 KK — nawoływanie do przestępstwa (może obejmować zachęcanie
-  do przemocy w transmisjach)
-□ Art. 256 KK — propagowanie treści nawołujących do nienawiści (jeśli
-  transmisja zawiera elementy mowy nienawiści) — patrz `mod-KK-
-  kwalifikator-karnomaterialny.md` BLOK Q
-□ Art. 257 KK — publiczne znieważanie grup/osób z powodu przynależności
-  narodowej/etnicznej/rasowej/wyznaniowej — BLOK Q, jw.
-□ Art. 190a KK — stalking/uporczywe nękanie, jeśli patostreamer
-  nęka konkretną osobę → `mod-KK-art190a-stalking.md`
-```
+
+Równolegle zawsze zbadaj sprawstwo zachowania pokazanego w materiale i
+ewentualny zbieg z innymi przepisami. Art. 255b penalizuje opisany sposób
+rozpowszechniania; nie zastępuje odpowiedzialności za przemoc, znęcanie,
+groźby, stalking, nawoływanie czy czyny przeciwko zwierzętom.
 
 ---
 
-## 4. ALGORYTM KWALIFIKACJI WSTĘPNEJ
+## 4. ART. 107a KW — ODRĘBNY PRZEPIS
 
-```
-START: Czy treść jest ROZPOWSZECHNIANA za pośrednictwem SIECI
-       (internet, streaming)?
-  NIE → sprawdź klasyczne przepisy (znęcanie, groźby itd.) bez art. 255b
-  TAK → KROK 2
+Art. 107a KW obowiązywał już w tekście jednolitym KW ogłoszonym w Dz.U.
+2025 poz. 734. Nie został dodany ustawą z Dz.U. 2026 poz. 988 i nie jest
+„wykroczeniowym odpowiednikiem” art. 255b KK.
 
-KROK 2: Czy treść przedstawia (rzeczywiście LUB w sposób mogący
-        wywołać przekonanie, że przedstawia) dopuszczenie się CZYNU
-        ZABRONIONEGO wobec innej osoby (lub zwierzęcia)?
-  NIE → art. 255b nie ma zastosowania, sprawdź inne przepisy
-  TAK → KROK 3
+- § 1: nieuprawnione włączenie się w transmisję danych prowadzoną przy
+  użyciu systemu teleinformatycznego **oraz** umyślne udaremnianie lub
+  utrudnianie użytkownikowi przekazywania lub odbioru informacji;
+  sankcja: ograniczenie wolności albo grzywna nie niższa niż 1000 zł.
+- § 2: gdy sprawca czynu z § 1 używa słów powszechnie uznanych za
+  obelżywe albo w inny sposób dopuszcza się nieobyczajnego wybryku;
+  sankcja: areszt, ograniczenie wolności albo grzywna nie niższa niż
+  3000 zł.
 
-KROK 3: Czy sprawca DZIAŁA W CELU obrony interesu publicznego/
-        zasługującego na uwzględnienie interesu prywatnego, I
-        jednocześnie NIE jest sprawcą/podżegaczem/pomocnikiem
-        przedstawionego czynu?
-  TAK (oba łącznie) → KONTRATYP z §4 — brak karalności
-  NIE → KROK 4
+Samo nieuprawnione korzystanie z sieci lub samo wejście do transmisji,
+bez umyślnego udaremniania albo utrudniania przekazywania/odbioru
+informacji, nie realizuje pełnego zespołu znamion § 1.
 
-KROK 4: Czy treść przedstawia MAŁOLETNIEGO?
-  TAK → §3, kara 3 miesiące - 5 lat
-  NIE → KROK 5
+---
 
-KROK 5: Czy działanie miało miejsce W CELU osiągnięcia korzyści
-        majątkowej (donate'y) LUB PO jej osiągnięciu?
-  TAK → typ z motywem finansowym, 1-10 lat — NAJCZĘSTSZY scenariusz
-        dla typowego patostreamu (model biznesowy oparty na donate'ach)
-  NIE → typ podstawowy §1/§2
+## 5. CHECKLIST HARD GATE
 
-RÓWNOLEGLE ZAWSZE SPRAWDŹ: czy nie zachodzi zbieg z art. 207 (znęcanie),
-  255/256/257 (nawoływanie/nienawiść), 190a (stalking) — sekcja 3
+```text
+□ Data czynu: przed czy od 23.08.2026 r.?
+□ Publiczne rozpowszechnienie przez sieć teleinformatyczną?
+□ Konkretny cel korzyści majątkowej lub osobistej?
+□ Która dokładnie kategoria z § 1 pkt 1–3?
+□ Materiał rzeczywisty (§ 1) czy mogący wywołać przekonanie (§ 2)?
+□ Czy przedstawia małoletniego (§ 3)?
+□ Czy zachodzi jedna z alternatywnych podstaw § 4?
+□ Zbieg z odpowiedzialnością za zachowanie pokazane w materiale?
+□ Każda jednostka redakcyjna ponownie sprawdzona w ELI/ISAP?
 ```
 
 ---
 
-## 5. CHECKLIST PRAKTYCZNY
+## 6. ŹRÓDŁA URZĘDOWE
 
-```
-□ Czy ustawa WESZŁA JUŻ W ŻYCIE na dzień sprawy (sprawdź vacatio legis
-  na ISAP — data podpisania ≠ data wejścia w życie)?
-□ Czy zdarzenie miało miejsce PRZED wejściem w życie — jeśli tak,
-  sprawdź art. 4 §1 KK (ustawa względniejsza) i oprzyj się na
-  przepisach z sekcji 3 zamiast art. 255b
-□ Czy da się wykazać kontratyp z §4 (interes publiczny + brak udziału
-  jako sprawca/podżegacz/pomocnik) — to JEDYNA droga uniknięcia
-  odpowiedzialności dla osoby REJESTRUJĄCEJ cudze przestępstwo
-□ Czy przedstawiona treść dotyczy MAŁOLETNIEGO — sprawdź kwalifikowany
-  wymiar kary
-□ Czy istnieje element FINANSOWY (donate'y, monetyzacja) — to
-  najsurowszy wariant (1-10 lat)
-□ NIE PRZYJMUJ linii obrony "to było ustawione" (§2 wyłącza) ani
-  "ofiara się zgodziła" (przy poniżającym traktowaniu zgoda nie
-  wyłącza odpowiedzialności) — obie z góry nieskuteczne
-□ Sprawdź RÓWNOLEGLE klasyczne przepisy (znęcanie, nawoływanie,
-  stalking) — mogą dawać SUROWSZĄ lub PEWNIEJSZĄ podstawę
-  odpowiedzialności niż nowy, niesprawdzony jeszcze w praktyce art. 255b
-```
-
----
-
-## 6. INTEGRACJA Z SYSTEMEM
-
-- **`mod-KK-kwalifikator-karnomaterialny.md`** BLOK Q (mowa nienawiści,
-  art. 256-257) — możliwy zbieg przy transmisjach z elementami
-  nienawiści.
-- **`mod-KK-art190a-stalking.md`** — zbieg gdy patostreamer nęka
-  konkretną osobę.
-- **DR-04** `mod-KP-mobbing-dyskryminacja.md` / prawo rodzinne (władza
-  rodzicielska) — sprawy typu Dąbrowa Górnicza łączą prawo karne z
-  ograniczeniem władzy rodzicielskiej i nadzorem kuratora.
-- **`mod-KK-slupy-fikcyjna-reprezentacja-spolki.md`** — brak
-  bezpośredniego związku, ale WARSTWA FINANSOWA (monetyzacja przez
-  platformy/donate'y) może wymagać analizy przepływów pieniężnych
-  analogicznej do prania korzyści z przestępstwa.
-
----
-
-## 7. LITERATURA I ŹRÓDŁA (zweryfikowane online 2026-07-18)
-
-- bip.brpo.gov.pl — apel RPO o zmiany w prawie karnym wobec
-  patostreamingu, katalog dotychczasowych przepisów (art. 255-257 KK).
-- gazetaprawna.pl — przebieg prac legislacyjnych (głosowanie Sejmu
-  7.10.2025), treść kontratypu z §4.
-- rp.pl — sprawa rodziców-patostreamerów z Dąbrowy Górniczej (2023),
-  kontekst społeczny.
-- glos.pl (Głos Nauczycielski) — decyzja Sejmu, doprecyzowania
-  poprawek komisyjnych (przemoc wobec zwierząt, "przedstawiają
-  małoletniego"), dane UKE o skali zjawiska.
-- checkpress.pl — podpisanie ustawy przez Prezydenta Karola
-  Nawrockiego (czerwiec 2026), historia legislacyjna od 2018 r.
-- stasik-kancelaria.pl — szczegółowa analiza radcy prawnego (stan na
-  czerwiec 2026): treść §1-3, dwie kluczowe linie obrony WYŁĄCZONE
-  ("na niby", "zgoda"), krytyka dr Natalii Daśko o możliwej
-  "martwości" przepisu dla lżejszych zachowań.
-- gov.pl (Prokuratura i Prawo 3/2024) — wcześniejsza analiza
-  projektowanego art. 255b oraz równoległego projektu art. 107a KW.
+- ELI/ISAP: Dz.U. 2026 poz. 988 — ustawa dodająca art. 255b KK.
+- ELI/ISAP: Dz.U. 2025 poz. 383 ze zmianami — Kodeks karny.
+- ELI/ISAP: Dz.U. 2025 poz. 734 ze zmianami — Kodeks wykroczeń,
+  w szczególności art. 107a.
 
 ---
 
 ## CHANGELOG
 
-**1.0 (2026-07-18):** Utworzenie modułu na wyraźne żądanie użytkownika
-("patostreamerzy") — odpowiedź na BARDZO ŚWIEŻE prawo (nowelizacja KK
-podpisana przez Prezydenta czerwiec 2026, droga legislacyjna od 2018 r.).
-Zweryfikowano online: genezę i kontekst społeczny (sprawa Dąbrowy
-Górniczej, dane UKE), treść art. 255b §1-4 (rozpowszechnianie treści
-przedstawiających czyn zabroniony, treści inscenizowane traktowane
-identycznie, typ kwalifikowany dla małoletnich, typ z motywem
-finansowym 1-10 lat, kontratyp interesu publicznego), dwie kluczowe
-linie obrony Z GÓRY WYŁĄCZONE przez ustawę ("na niby", "zgoda ofiary"),
-oraz KRYTYCZNE zastrzeżenie doktrynalne o możliwej częściowej
-nieskuteczności przepisu dla lżejszych zachowań (problem ścigania, nie
-brak przepisu). Odnotowano PILNĄ potrzebę re-weryfikacji: dokładna data
-wejścia w życie, dokładny wymiar kary dla typu podstawowego §1,
-ostateczny status równoległego projektu art. 107a KW — wszystko
-oznaczone jako wymagające sprawdzenia na ISAP z uwagi na wyjątkową
-świeżość tego przepisu.
+**2.0 (2026-08-25):** Pełna korekta z urzędowym tekstem Dz.U. 2026
+poz. 988: oznaczono obowiązywanie od 23.08.2026 r.; usunięto błędny próg
+1–10 lat; przeniesiono cel korzyści do obowiązkowych znamion § 1 i § 2;
+odtworzono prawidłowy, alternatywny katalog § 4 bez pozaustawowego warunku
+braku udziału w czynie; potwierdzono odrębny zakres art. 107a KW; dodano
+kontrolę temporalną i test znamion.
+
+**1.0–1.1 (2026-07-18–2026-07-27):** Wersje historyczne. Zawierały
+sprzeczne informacje o stanie wejścia w życie, sankcji i § 4; zastąpione
+w całości po weryfikacji urzędowej.
