@@ -1,5 +1,14 @@
 # Indeks raportów pokrycia — audyt systemu skilli prawniczych
 
+> ⛔ **BASELINE HISTORYCZNY — 2026-08-13, NIE STAN BIEŻĄCY.**
+> Raporty w tym katalogu są migawką wejściową audytu. Po 13.08.2026 wiele
+> wskazanych luk zostało naprawionych (m.in. KKW, PPSA, SUS Rozdz. 2,
+> PrRestr Dział VI, PZP Dział II, część FUS i KW).
+> **Bieżącym źródłem statusu jest zawsze `dr-XX/MAPA-POKRYCIA.md`**,
+> następnie treść modułu i świeży odczyt prawa. Nie wolno przenosić czerwonego
+> statusu z tych raportów do obecnego stanu bez sprawdzenia delty.
+
+
 **Data:** 2026-08-13
 **Kontekst:** raporty przygotowane jako materiał wyjściowy do planowania dalszej rozbudowy skilla `dr-03-prawo-karne-wykroczenia-egzekucja` i `dr-04-prawo-pracy-zus-swiadczenia`. Każdy raport wskazuje, które rozdziały/działy danego kodeksu są pokryte w pełni, częściowo lub wcale, wraz z rekomendowaną kolejnością uzupełniania luk.
 
