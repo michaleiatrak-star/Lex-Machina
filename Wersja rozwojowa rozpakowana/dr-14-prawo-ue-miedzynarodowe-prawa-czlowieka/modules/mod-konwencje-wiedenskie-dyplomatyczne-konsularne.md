@@ -14,11 +14,7 @@ uprzywilejowanych.)
 > sporządzona w Wiedniu 18.04.1961 — Dz.U. 1965 nr 37 poz. 232;
 > Konwencja wiedeńska o stosunkach konsularnych, sporządzona w Wiedniu
 > 24.04.1963 — Dz.U. 1982 nr 13 poz. 98.
-> ⚠️ [NIEWERYFIKOWANE RZĄD 1] — ISAP zablokowany w tym środowisku;
-> RZĄD 2/3 (lexlege.pl, arslege.pl, prawnik.cc, libr.sejm.gov.pl —
-> biblioteka sejmowa, tekst historyczny ONZ, studocu — materiał
-> akademicki, publikacje naukowe UKSW/UWr/UŁ) wielokrotnie zgodne co do
-> numeracji i treści.
+> ✅ **RZĄD 1 / VER 2026-08-28:** polskie metryki potwierdzone bezpośrednio w ELI (oba akty mają status „obowiązujący”). Treść kluczowych artykułów zweryfikowano dodatkowo w oficjalnych materiałach ONZ: VCDR 1961 oraz VCCR 1963.
 
 **Rola w systemie:** akty FUNDAMENTALNE prawa dyplomatycznego i
 konsularnego — powszechnie ratyfikowane (Konwencja 1961 wiąże obecnie
@@ -51,8 +47,7 @@ powołującej się na status dyplomatyczny/konsularny.
   wysyłające, że szef misji lub jakikolwiek członek personelu
   dyplomatycznego jest persona non grata (⭐⭐⭐ absolutna dyskrecjonalność
   państwa przyjmującego — brak wymogu podania przyczyny, brak środka
-  zaskarżenia tej decyzji dla zainteresowanej osoby) [⚠️ dalsza treść
-  §2 dot. konsekwencji odmowy wyjazdu — nie zbadana w pełni w tej sesji]
+  zaskarżenia tej decyzji dla zainteresowanej osoby) §2: jeżeli państwo wysyłające odmawia wykonania obowiązku odwołania osoby albo zakończenia jej funkcji w rozsądnym terminie, państwo przyjmujące może odmówić uznawania jej za członka misji.
 ```
 
 ### 2. NIETYKALNOŚĆ POMIESZCZEŃ MISJI (art. 22)
@@ -65,8 +60,7 @@ powołującej się na status dyplomatyczny/konsularny.
   komorniczej wobec majątku obcego państwa/placówki dyplomatycznej;
   nie wyklucza to wykonywania jurysdykcji przez państwo przyjmujące w
   innych aspektach — sama nietykalność dotyczy KONKRETNIE rewizji/
-  rekwizycji/zajęcia/egzekucji) [⚠️ ust. 1-2 dot. zgody na wejście
-  przedstawicieli państwa przyjmującego — nie zbadane w pełni]
+  rekwizycji/zajęcia/egzekucji) ust. 1: przedstawiciele państwa przyjmującego nie mogą wejść do pomieszczeń misji bez zgody szefa misji; ust. 2: państwo przyjmujące ma szczególny obowiązek ochrony pomieszczeń przed wtargnięciem, szkodą i zakłóceniem spokoju lub godności misji.
 ```
 
 ### 3. NIETYKALNOŚĆ OSOBISTA I IMMUNITET JURYSDYKCYJNY PRZEDSTAWICIELA
@@ -104,8 +98,7 @@ DYPLOMATYCZNEGO (art. 29, 31) — ⭐⭐⭐ NAJWAŻNIEJSZA PRAKTYCZNIE CZĘŚĆ
   niego NIE MOGĄ być przedsięwzięte ŻADNE środki EGZEKUCYJNE, z
   wyjątkiem przypadków objętych wyjątkami (a)-(c) wyżej — i TO tylko
   gdy egzekucja może nastąpić BEZ naruszenia nietykalności jego osoby
-  lub mieszkania [⚠️ dokładne brzmienie zastrzeżenia dot. egzekucji
-  wymaga potwierdzenia w ISAP]
+  lub mieszkania — środki egzekucyjne są dopuszczalne wyłącznie w sprawach z wyjątków lit. a-c i tylko wtedy, gdy można je przeprowadzić bez naruszenia nietykalności osoby lub mieszkania przedstawiciela.
 ```
 
 ### 4. CZASOWY ZAKRES OCHRONY I ZRZECZENIE SIĘ IMMUNITETU (art. 32, 39)
@@ -272,11 +265,11 @@ KLUCZOWA RÓŻNICA WZGLĘDEM DYPLOMATY
   konsularnych (z wyjątkiem gdy jest zatrzymany/aresztowany — wtedy
   postępowanie wszczyna się w NAJKRÓTSZYM możliwym czasie)
 
-⭐⭐ ART. 42 — w razie ZATRZYMANIA lub TYMCZASOWEGO ARESZTOWANIA
-  członka personelu konsularnego — państwo przyjmujące ZAWIADAMIA
-  niezwłocznie kierownika urzędu konsularnego [⚠️ dalsza treść, w tym
-  czy dotyczy KAŻDEGO zatrzymania czy tylko przy spełnieniu warunku z
-  art. 41, nie w pełni potwierdzona]
+⭐⭐ ART. 42 — gdy członek personelu konsularnego zostaje aresztowany,
+  zatrzymany przed procesem albo wszczęto przeciw niemu postępowanie karne,
+  państwo przyjmujące NIEZWŁOCZNIE zawiadamia kierownika urzędu konsularnego.
+  Jeżeli środek dotyczy samego kierownika — zawiadamia państwo wysyłające
+  drogą dyplomatyczną.
 
 ⭐⭐⭐ ART. 43 ust. 1 — IMMUNITET JURYSDYKCYJNY: urzędnicy konsularni i
   pracownicy konsularni NIE PODLEGAJĄ jurysdykcji władz [SĄDOWYCH i
@@ -290,11 +283,15 @@ KLUCZOWA RÓŻNICA WZGLĘDEM DYPLOMATY
   od charakteru czynności, z wyjątkami tylko dla enumeratywnie
   wskazanych kategorii spraw prywatnych)
 
-⭐ ART. 44 — CZŁONKOWIE urzędu konsularnego MOGĄ być wzywani w
-  charakterze ŚWIADKÓW [⚠️ dalsza treść dot. ewentualnych ograniczeń
-  tego obowiązku i sankcji za odmowę nie w pełni potwierdzona — ale
-  sama zasada KONTRASTUJE z art. 31 dyplomatycznym, gdzie dyplomata
-  NIE JEST obowiązany do zeznań]
+⭐ ART. 44 — członkowie urzędu konsularnego mogą być wzywani jako
+  świadkowie. Pracownik konsularny i personel służby co do zasady nie mogą
+  odmówić zeznań poza zakresem ust. 3; wobec urzędnika konsularnego,
+  który odmawia, nie wolno stosować przymusu ani kary. Organ powinien
+  ograniczać ingerencję w wykonywanie funkcji i może przyjąć zeznanie
+  w siedzibie/urzędzie albo pisemnie. Ust. 3: brak obowiązku zeznań o
+  sprawach związanych z funkcjami, brak obowiązku przedkładania urzędowej
+  korespondencji/dokumentów oraz prawo odmowy opinii eksperckiej o prawie
+  państwa wysyłającego.
 
 ⭐⭐⭐ ART. 45 — ZRZECZENIE SIĘ przywilejów/immunitetów: PAŃSTWO
   WYSYŁAJĄCE MOŻE zrzec się w odniesieniu do członka urzędu
@@ -337,9 +334,6 @@ KLUCZOWA RÓŻNICA WZGLĘDEM DYPLOMATY
 - Konsekwencje naruszenia obowiązku pouczenia z art. 36 KWSK w polskim
   postępowaniu karnym (czy istnieje sankcja procesowa, np. wyłączenie
   dowodu) — NIE zbadane, potencjalny most do dr-03.
-- Dokładna treść art. 9 §2 KWSD (skutki odmowy wyjazdu persona non
-  grata), art. 22 ust. 1-2 (warunki wejścia do pomieszczeń misji za
-  zgodą), art. 42 KWSK (pełna treść obowiązku zawiadomienia).
 - Weryfikacja sprawy Avena (MTS, 2004) — przywołana z pamięci ogólnej,
   NIE potwierdzona źródłowo w tej sesji, wymaga sprawdzenia przed
   powołaniem.
