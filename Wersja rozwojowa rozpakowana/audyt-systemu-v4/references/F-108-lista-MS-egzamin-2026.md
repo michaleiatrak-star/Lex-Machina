@@ -55,7 +55,7 @@ tu automatycznie zaliczane jako nowy, zakończony przegląd rozdziałowy.
 | 43 | Przeciwdziałanie narkomanii | A | Etap 2: do audytu rozdziałowego |
 | 44 | UOKiK | A | Etap 2: do audytu rozdziałowego |
 | 45 | Wojewoda i administracja rządowa | B | ✅ P3 wykonane 2026-08-27: WYDZIELONO, osobny moduł B+ |
-| 46 | Opóźnienia w transakcjach handlowych | C | ✅ P1 wykonane: osobny moduł B; administracja i historia pozostają częściowe |
+| 46 | Opóźnienia w transakcjach handlowych | C | ✅ P1 + ✅ ETAP 2 wykonane 2026-08-27: moduł B+; cywilne, UOKiK, wykroczenia i temporalność 2013/2022/2023 zweryfikowane w ELI |
 | 47 | Prawa konsumenta | A | Etap 2: do audytu rozdziałowego |
 | 48 | Prawo restrukturyzacyjne | A | Etap 2: do audytu rozdziałowego |
 | 49 | Prawo o prokuraturze | A | Etap 2: do audytu rozdziałowego |
@@ -134,7 +134,7 @@ modułu nie jest miarą pokrycia aktu. Dlatego etap 2 tej flagi to badanie
 
 | # | Akt | Uwaga |
 |---|---|---|
-| 46 | o przeciwdziałaniu nadmiernym opóźnieniom w transakcjach handlowych (8.03.2013) | istnieje wyłącznie jako wątek w `dr-02/modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md` i wzmianka w module UZNK. **To jest akt, na którym poległ test 5** — brak modułu oznacza brak tabeli stawek półrocznych, brak progów rekompensaty i brak kryterium „czy to transakcja handlowa". `shared/RATE-COMPLETENESS.md` (utworzony 2026-08-23) opisuje PROCEDURĘ, ale nie ma modułu, który dostarczyłby jej treści. **Najwyższy priorytet z całej flagi** |
+| 46 | o przeciwdziałaniu nadmiernym opóźnieniom w transakcjach handlowych (8.03.2013) | istnieje wyłącznie jako wątek w `dr-02/modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md` i wzmianka w module UZNK. **Stan bazowy przed naprawą:** był to akt, na którym poległ test 5 — brakowało modułu, tabeli stawek, progów rekompensaty i kwalifikatora. **Stan 2026-08-27: NAPRAWIONE, moduł B+, Etap 2 pozycji 46 zamknięty.** `shared/RATE-COMPLETENESS.md` (utworzony 2026-08-23) opisuje PROCEDURĘ, ale nie ma modułu, który dostarczyłby jej treści. **Najwyższy priorytet z całej flagi** |
 
 ### 🟡 B — BEZ WŁASNEJ JEDNOSTKI (priorytet 2–3)
 
