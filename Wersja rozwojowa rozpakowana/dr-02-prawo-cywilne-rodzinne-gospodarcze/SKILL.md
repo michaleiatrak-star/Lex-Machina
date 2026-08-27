@@ -1,6 +1,6 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: "3.42"
+version: "3.43"
 description: "Prawo cywilne, rodzinne i gospodarcze: KC, KPC, spadki, rodzina, spółki, upadłość, restrukturyzacja, windykacja i odpowiedzialność kontraktowa/deliktowa."
 ---
 
@@ -99,19 +99,23 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (61 łącznie — ✓ 61 OK, ☐ 0 STUB)
+## Moduły (64 łącznie — ✓ 64 OK, ☐ 0 STUB)
 
 ```
   [✓] OK    mod-transakcje-handlowe-opoznienia
               (F-108/46: rdzeń cywilny B; gałęzie administracyjne/historyczne częściowe)
   [✓] NOWY  mod-prawo-przedsiebiorcow
               (F-108/51: dedykowany moduł B, pełna mapa rozdziałów; RZĄD 1 ELI)
+  [✓] NOWY  mod-KSH-uzupelnienie-pokrycia-2026
+              (pozostałe tytuły KSH: ogólne, partnerska/SKA, sp. z o.o., PSA, S.A., transgraniczne i karne)
   [✓] NOWY  mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK
               (F-108/41: osobny akt, Dz.U. 2026 poz. 783 t.j.; poziom B, UFG/PBUK/OC)
   [✓] NOWY  mod-ustawa-fundacja-rodzinna
               (F-108/52: ustawa o fundacji rodzinnej; poziom B, mapa 16 rozdziałów)
   [✓] OK    mod-KPC-art162-zastrzezenie-protokol
               (art. 162 KPC oraz powiązania z art. 172 § 2¹ i art. 380)
+  [✓] NOWY  mod-KPC-uzupelnienie-pokrycia-2026
+              (krytyczne luki audytu KPC: orzeczenia, postępowania odrębne, nieproces, egzekucja, jurysdykcja)
   [✓] OK    mod-kaucja-najem-lokalu
               (kaucja przy najmie zwykłym i okazjonalnym)
 ```
@@ -440,6 +444,8 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
                przed dalszymi transzami F-86: układ w upadłości [266a-266f],
                likwidacja masy Dział I [306-315], zakończenie i umorzenie
                postępowania [361-372])
+  [✓] NOWY  mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026
+              (pozostałe puste zakresy PrUp/PrRestr, w tym F-86 od art. 426 i ogólne tryby restrukturyzacji)
   [✓] NOWY  mod-PrUpad-likwidacja-miedzynarodowe-szczegolne
               (dodany 2026-08-26 — częściowe uzupełnienie F-86: likwidacja [316-334],
                postępowanie międzynarodowe [378-417], postępowania po
