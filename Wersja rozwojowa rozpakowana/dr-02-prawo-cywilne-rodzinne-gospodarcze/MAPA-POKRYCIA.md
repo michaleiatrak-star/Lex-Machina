@@ -127,9 +127,9 @@ aktualny co do cytowanego stanu prawnego, NIE że pokrywa cały akt.
 
 | Dział | Materia | Art. | Status | Moduł |
 |---|---|---|---|---|
-| I | Spółka jawna | 22–85 | 🔴 śladowo | Tylko art. 22, 31 (kwalifikator odpowiedzialności, jedno zdanie) |
+| I | Spółka jawna | 22–85 | 🟡 | **22–66 🟢 NAPRAWIONE** w `mod-KSH-spolki-osobowe-rada-nadzorcza.md`: definicja, odpowiedzialność, prowadzenie spraw, reprezentacja, zakaz konkurencji, rozwiązanie/wystąpienie; art. 67–85 nadal poza pełnym opracowaniem |
 | II | Spółka partnerska | 86–101 | 🔴 śladowo | Tylko art. 88 (katalog zawodów, nowelizacja 2026 — psycholodzy) i 95 |
-| III | Spółka komandytowa | 102–124 | 🔴 śladowo | Tylko art. 111 (odpowiedzialność komandytariusza) |
+| III | Spółka komandytowa | 102–124 | 🟢 NAPRAWIONE | `mod-KSH-spolki-osobowe-rada-nadzorcza.md`: definicja, komandytariusz/komplementariusz, suma komandytowa, odpowiedzialność i reprezentacja; zakres F-68 zamknięty |
 | IV | Spółka komandytowo-akcyjna | 125–150 | 🔴 śladowo | Tylko art. 125, 135 |
 
 **Cały Tytuł II (129 art., 4 typy spółek osobowych) reprezentowany
@@ -142,7 +142,7 @@ prowadzeniu spraw, reprezentacji, wystąpieniu wspólnika, likwidacji.**
 |---|---|---|---|---|
 | I, Rozdz. 1 | Sp. z o.o. — powstanie | 151–173 | 🔴 | Tylko wzmianka "kapitały minimalne" |
 | I, Rozdz. 2 | Sp. z o.o. — prawa i obowiązki wspólników | 174–200 | 🔴 | — |
-| I, Rozdz. 3 | Sp. z o.o. — organy | 201–254 | 🟡 | Tylko zaskarżenie uchwał (art. 251, 252 — terminy) i reprezentacja ogólnie; zero o kompetencjach zarządu, radzie nadzorczej, zgromadzeniu |
+| I, Rozdz. 3 | Sp. z o.o. — organy | 201–254 | 🟢 NAPRAWIONE | `mod-KSH-organy-spolki-zoo.md` + `mod-KSH-spolki-osobowe-rada-nadzorcza.md`: zarząd, reprezentacja, nadzór/rada nadzorcza, zgromadzenie wspólników, kompetencje i uchwały; jawne punkty pogłębienia pozostają w modułach |
 | I, Rozdz. 4 | Zmiana umowy spółki | 255–265 | 🔴 | — |
 | I, Rozdz. 5 | Wyłączenie wspólnika | 266–269 | 🔴 | — |
 | I, Rozdz. 6 | Rozwiązanie i likwidacja spółki | 270–290 | 🔴 | — |
@@ -170,9 +170,9 @@ z o.o. poza odpowiedzialnością zarządu + cała PSA + cała S.A., łącznie
 | Przestępstwa na szkodę spółki, fałszywe dane, niezgłoszenie upadłości | 585–595 | 🔴 | Nie opracowane bezpośrednio; temat pokrewny "słupy"/fikcyjna reprezentacja w DR-03 z perspektywy KK, nie Tytułu V KSH |
 
 **Rekomendowana kolejność uzupełniania (wg raportu źródłowego):**
-1. Tytuł III, Dział I, Rozdz. 3 — organy sp. z o.o. (art. 201–254) — najwyższy priorytet praktyczny
+1. ~~Tytuł III, Dział I, Rozdz. 3 — organy sp. z o.o. (art. 201–254)~~ ✅ NAPRAWIONE
 2. Tytuł IV w całości — łączenie, podział, przekształcanie — duża luka przy rosnącym znaczeniu M&A
-3. Tytuł II — spółka jawna i komandytowa (art. 22–66, 102–124) — najpopularniejsze typy osobowe
+3. ~~Tytuł II — spółka jawna 22–66 i komandytowa 102–124~~ ✅ NAPRAWIONE; pozostałe art. 67–85, partnerska i S.K.A. nadal otwarte
 4. Tytuł III, Dział II — spółka akcyjna (art. 301–490) — objętościowo ogromna, całkowicie pusta
 5. Tytuł I — przepisy ogólne + grupa spółek — fundament pojęciowy
 6. Dział Ia — prosta spółka akcyjna — rosnąca popularność wśród startupów
@@ -327,7 +327,7 @@ pozycji już naprawione — pozostają inne, niżej priorytetowe):
 | 10 (część) | art. 669–689 — stwierdzenie nabycia spadku, dział spadku | 🔴 luka krytyczna | 🔴 **NADAL LUKA** — art. 669 zero wystąpień; art. 680 tylko przez odesłanie z modułu spadkowego KC | — |
 | 9 | art. 458¹⁴–458¹⁶ — postępowanie z udziałem konsumentów | 🔴 luka krytyczna | 🔴 **NADAL LUKA** | — |
 | 13 | art. 316 §1 — stan rzeczy z chwili zamknięcia rozprawy | 🔴 luka krytyczna | 🟡 **WZMIANKA** — 1 plik (skarga pauliańska) | dr-02 |
-| 14 | art. 162 — zastrzeżenie do protokołu | 🔴 luka krytyczna | 🔴 **NADAL LUKA** w zakresie KPC — wszystkie 6 trafień to art. 162 **KK**, nie KPC (kolizja międzykodeksowa) | — |
+| 14 | art. 162 — zastrzeżenie do protokołu | 🟢 NAPRAWIONE 2026-08-22 | Dedykowany `mod-KPC-art162-zastrzezenie-protokol.md`: aktualne §1–3, prekluzja dla profesjonalnego pełnomocnika, wyjątki, art. 172 §2¹ i art. 380; kolizja z art. 162 KK jawnie zabezpieczona | `mod-KPC-art162-zastrzezenie-protokol.md` |
 | 15 | art. 617–626¹³ — zniesienie współwłasności, wieczystoksięgowe | 🔴 luka krytyczna | 🔴 **NADAL LUKA** w zakresie KPC — trafienia to art. 617 **KRO** | — |
 
 **Bilans uzgodnienia: 4 luki krytyczne zamknięte, 5 częściowo, 8 nadal
@@ -377,7 +377,7 @@ gospodarcza).
 7. **art. 669–689 — stwierdzenie nabycia spadku i dział spadku** (dwie najczęstsze sprawy spadkowe, tryb nieprocesowy)
 8. art. 350–352 — sprostowanie, uzupełnienie, wykładnia wyroku
 9. art. 1041–1059 i 1081–1088 — egzekucja świadczeń niepieniężnych i alimentów
-10. art. 162 KPC — zastrzeżenie do protokołu (⛔ nie mylić z art. 162 KK)
+10. ~~art. 162 KPC — zastrzeżenie do protokołu~~ ✅ NAPRAWIONE 2026-08-22 (`mod-KPC-art162-zastrzezenie-protokol.md`)
 11. art. 617–626¹³ — zniesienie współwłasności i postępowanie wieczystoksięgowe
 12. art. 401, 401¹, 403 — podstawy wznowienia (art. 399 już jest)
 13. art. 458¹⁴–458¹⁶ — postępowanie z udziałem konsumentów
