@@ -12,16 +12,14 @@ w module, odczyt 2026-08-27. Nie oznacza pełnego audytu innych aktów DR-02.
 | art. 1–4c | 🟢 rdzeń | kwalifikacja, wyłączenia i statusy; sekcje 2–3 |
 | art. 5–9a | 🟢 rdzeń | terminy, podstawy odsetek i cesja; sekcje 4 i 8 |
 | art. 10–11c | 🟢 rdzeń | rekompensata, raty, stopy i nieuczciwość; sekcje 5–8 |
-| art. 12–13 | 🟡 częściowe | droga dochodzenia i nieważność; art. 12 tylko routing |
-| art. 13a–13ab | 🟡 częściowe | raportowanie/korekty: routing, bez pełnego workflow |
-| art. 13b–13y | 🟡 częściowe | próg, rozdział od windykacji i droga kontroli; brak pełnego modelu kar/postępowania |
-| art. 13z–13zb | 🟡 częściowe | odesłanie do DR-03/KPW, bez treści wykroczeń |
+| art. 12–13 | 🟢 B+ | organizacja procesowa art. 12 + nieważność/obejście art. 13; sekcje 9–11 |
+| art. 13a–13ab | 🟢 B+ | raportowanie, wyłączenia, dane, korekta i art. 13ab — sekcja 10.1 |
+| art. 13b–13y | 🟢 B+ | próg, wszczęcie z urzędu, kontrola, KPA, termin 5 mies., decyzje/kary, ponowne rozpatrzenie, WSA, płatność/ulgi/zwrot — sekcje 10.2–10.6 |
+| art. 13z–13zb | 🟢 B+ | typy wykroczeń i tryb KPW opracowane w sekcji 10.7; DR-03 służy pogłębieniu obrony |
 | art. 14 | ⚪ pominięty w t.j. | nie twórz fikcyjnej treści |
-| art. 15–17 i przepisy przejściowe nowelizacji | 🔴 brak pełnego opracowania historycznego | wymagany odrębny przegląd dla starej umowy |
+| art. 15–17 + kluczowe przepisy przejściowe 2022/2414 i 2023/852 | 🟢 B+ | sekcja 11A: gate 28.04.2013, stara ustawa 2003, transakcje/PZP sprzed nowelizacji, art. 9a i raportowanie z odrębnymi datami |
 
-Stawki: 6/6 półroczy 2024–2026 z osobnymi źródłami. Nie jest to pokrycie
-wszystkich okresów obowiązywania ustawy. Kompletność historii zmian:
-niepotwierdzona. F-108 pozostaje OTWARTA.
+Stawki: 6/6 półroczy 2024–2026 z osobnymi źródłami. Dla wcześniejszych okresów stosuj fresh lookup obwieszczenia zamiast ekstrapolacji. **F-108/46 Etap 2: ZAMKNIĘTY na poziomie B+ 2026-08-27** — mapa obejmuje rdzeń cywilny, administrację, wykroczenia i temporalność; pełny audit pozostałych 51 benchmarków pozostaje odrębny.
 
 
 ## F-108/41 — ubezpieczenia obowiązkowe, UFG i PBUK (2026-08-27)
@@ -167,7 +165,7 @@ z o.o. poza odpowiedzialnością zarządu + cała PSA + cała S.A., łącznie
 
 | Materia | Art. | Status | Moduł |
 |---|---|---|---|
-| Przestępstwa na szkodę spółki, fałszywe dane, niezgłoszenie upadłości | 585–595 | 🔴 | Nie opracowane bezpośrednio; temat pokrewny "słupy"/fikcyjna reprezentacja w DR-03 z perspektywy KK, nie Tytułu V KSH |
+| Przepisy karne KSH | 585–595 | 🟡 B — uzupełnione 2026-08-27 | `mod-KSH-uzupelnienie-pokrycia-2026.md` — mapa sprawcy szczególnego, relacje KK/KKS/rachunkowość i hard gate; pogłębienie typu czynu na świeżym ELI |
 
 **Rekomendowana kolejność uzupełniania (wg raportu źródłowego):**
 1. ~~Tytuł III, Dział I, Rozdz. 3 — organy sp. z o.o. (art. 201–254)~~ ✅ NAPRAWIONE
