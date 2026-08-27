@@ -181,8 +181,7 @@ ETAP 2 ⬛ POKRYCIE PO ROZDZIAŁACH — dla każdej pozycji A i B:
        w AUDIT-JOURNAL. Kolejność: najpierw akty o największej
        rozbieżności deklaracja↔treść (wzór: KSH), czyli duże kodeksy
        i ustawy ustrojowe.
-       ⛔ 9 DR nie ma jeszcze pliku MAPA-POKRYCIA.md (są tylko w dr-02..dr-07).
-       Utworzyć przy pierwszej transży dotyczącej danego DR.
+       ✅ INFRASTRUKTURA 2026-08-27: 16/16 kanonicznych DR ma MAPA-POKRYCIA.md. Nowe mapy rozdzielają rejestrację modułu od kompletności treściowej i startują od statusu 🟡 DO AUDYTU, jeśli nie wykonano audytu rozdziałowego.
 
 ETAP 3 ⬛ BUDOWA BRAKUJĄCYCH MODUŁÓW — kolejność ustalona:
        P1: ✅ 46 → ✅ 41 → ✅ 8 → ✅ 52 — ZAKOŃCZONE 2026-08-27, każdy moduł ≥ B
@@ -190,6 +189,8 @@ ETAP 3 ⬛ BUDOWA BRAKUJĄCYCH MODUŁÓW — kolejność ustalona:
        P3: ✅ 13, 34, 27, 28, 45 — wszystkie WYDZIELONE do dedykowanych modułów 2026-08-27
        Procedura: shared/MOD-GENERATOR-AKTU.md, kroki G-1…G-8
 ```
+
+**Stan infrastruktury Etapu 2 po remediacji 2026-08-27:** mapy istnieją dla 16/16 DR, ale audyt rozdziałowy benchmarku pozostaje otwarty. To jawnie oddziela brak infrastruktury od braku dowodu kompletności treści.**
 
 ## Warunki zamknięcia F-108
 
@@ -200,7 +201,7 @@ ETAP 3 ⬛ BUDOWA BRAKUJĄCYCH MODUŁÓW — kolejność ustalona:
   wg shared/POLISH-LAW-COMPLETENESS-MATRIX.md
 ☑ pozycje P3 mają jawną decyzję: wszystkie WYDZIELIĆ; wykonano dedykowane moduły (
   w module łączonym) — decyzja jest wynikiem, brak modułu sam w sobie nie jest
-□ każdy nowy moduł zarejestrowany w TRZECH miejscach (REGUŁA 3):
+☑ każdy nowy moduł Etapu 3 zarejestrowany w TRZECH miejscach (REGUŁA 3):
   dr-XX/SKILL.md · dr-XX/MAPA-AKTOW.md · prawo-polskie-v2/ROUTING-MAP.md
 ```
 
