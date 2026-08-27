@@ -1,8 +1,8 @@
 ---
 module: transakcje-handlowe-opoznienia
-version: "1.0"
+version: "1.1"
 verified_on: "2026-08-27"
-coverage: "B — rdzeń cywilny; administracyjne i historyczne gałęzie częściowe"
+coverage: "B+ — rdzeń cywilny + workflow UOKiK + temporalność 2013/2022/2023"
 ---
 
 # Transakcje handlowe — opóźnienia, odsetki i rekompensata
@@ -17,12 +17,13 @@ Metrykę, treść wskazanych niżej jednostek i sześć obwieszczeń odczytano
 27.08.2026. Jest to zapis wykonanej kontroli, NIE zwolnienie z HARD GATE:
 przy zastosowaniu ponownie odczytaj przepis i każde potrzebne obwieszczenie.
 
-**Historia/aktualność:** wyszukiwania zmian z lat 2024–2026 nie ujawniły
-późniejszej nowelizacji; obwieszczenie M.P. 2026 poz. 642 nadal powołuje
-t.j. 1790. Nie potwierdzono jednak pełnego rejestru zmian przez API ELI
-(błąd odczytu). Brak wyniku wyszukania nie jest dowodem braku zmian.
-Przed kategoryczną oceną stanu na konkretny dzień domknij kontrolę temporalną
-wg `shared/TEMPORAL-LAW-CHECK.md`; nie oznaczaj całej historii jako kompletnej.
+**Historia/aktualność — zweryfikowana warstwa operacyjna:** ELI dla aktu
+pierwotnego potwierdza wcześniejszy tytuł „ustawa o terminach zapłaty w
+transakcjach handlowych”, wejście w życie 28.04.2013 oraz istnienie aktów
+zmieniających. Tekst jednolity Dz.U. 2023 poz. 1790 uwzględnia zmianę
+Dz.U. 2023 poz. 852; wcześniejszy t.j. Dz.U. 2023 poz. 711 dokumentuje
+nowelizację Dz.U. 2022 poz. 2414. Dla zdarzeń historycznych stosuj sekcję 11A
+poniżej i `shared/TEMPORAL-LAW-CHECK.md`.
 
 ## 2. Uruchomienie i wymagane dane
 
@@ -155,25 +156,195 @@ nie procedura UOKiK. Uprawnienia organizacji z art. 12 sprawdź osobno.
 Wezwanie do zapłaty i pozew przekazuj do właściwego skilla pism wraz
 z tabelą podstaw i dat, a nie tylko sumą.
 
-## 10. Gałąź publicznoprawna — częściowa, nie poradnik pełnego postępowania
+## 10. Gałąź publicznoprawna — workflow art. 13a–13y
 
-Oddziel roszczenie wierzyciela od postępowania Prezesa UOKiK. Próg nadmiernego
-opóźniania z art. 13b dotyczy co najmniej 2 mln zł niezapłaconych/opłaconych
-po terminie świadczeń w trzech kolejnych miesiącach, z ustawowymi wyłączeniami;
-nie jest warunkiem dochodzenia pojedynczej faktury. Dotyczy podmiotów
-niepublicznych. UOKiK działa z urzędu; kara zasila budżet, nie wierzyciela.
-[Wyjaśnienia UOKiK](https://uokik.gov.pl/zatory-platnicze) {RZĄD: 1}.
+### 10.1 Raportowanie — art. 13a, 13aa, 13ab
 
-Raportowanie z art. 13a–13ab wymaga osobnej weryfikacji katalogu podmiotów,
-roku danych, wyłączeń i korekt; nie każdy przedsiębiorca raportuje. Termin
-30 kwietnia nie rozstrzyga sam, kogo obowiązek dotyczy.
-Postępowanie, obliczenie kary i ulgi (art. 13c–13y) wymagają odczytu całej
-właściwej gałęzi; weryfikuj drogę sądowoadministracyjną art. 13v ust. 10,
-nie kieruj automatycznie do SOKiK. Dołącz DR-05. Wykroczenia art. 13z–13zb
-→ DR-03 i KPW. **Brak tu kompletnego kalkulatora kar ani pełnego workflow
-sprawozdania/odwołania** — nie deklaruj tego zakresu jako pokrytego.
+Najpierw ustal, czy podmiot należy do katalogu z art. 13a ust. 1. Obowiązek
+nie dotyczy automatycznie każdego dużego przedsiębiorcy. Ustawa odsyła do
+publicznego wykazu podatników CIT i przewiduje wyłączenia, w tym określone
+podmioty lecznicze.
+
+**Termin:** sprawozdanie przekazuje się elektronicznie do ministra właściwego
+do spraw gospodarki do **30 kwietnia** roku następującego po roku, w którym
+indywidualne dane podmiotu zostały podane do publicznej wiadomości.
+
+W sprawozdaniu nie uwzględnia się m.in.:
+- określonych transakcji ubezpieczeniowych/reasekuracyjnych;
+- transakcji wyłącznie wewnątrz tej samej grupy kapitałowej;
+- świadczeń, dla których upłynął termin przedawnienia.
+
+Raport rozbija świadczenia otrzymane/spełnione po terminie na przedziały
+opóźnienia: ≤5 dni, 6–30, 31–60, 61–120 i >120 dni oraz pokazuje udziały
+procentowe. Waluty obce przelicza się według zasad rachunkowości danego
+podmiotu.
+
+**Korekta:** art. 13aa wymaga korekty z uzasadnieniem, gdy co najmniej jedna
+pozycja zmieniła się o co najmniej 10%, z uwzględnieniem wyjątku art. 13ab.
+Art. 13ab kieruje późniejsze zmiany wartości do sprawozdania za rok, w którym
+świadczenie w zmienionej wartości jest wymagalne.
+
+### 10.2 Zakaz zatorów — art. 13b
+
+Zakazane jest nadmierne opóźnianie przez podmiot z art. 2 niebędący podmiotem
+publicznym. Próg ustawowy jest spełniony, gdy w **3 kolejnych miesiącach**
+suma wymagalnych świadczeń niespełnionych i spełnionych po terminie wynosi
+co najmniej **2 000 000 zł**.
+
+Przy obliczeniu:
+- walutę obcą przelicz według właściwego kursu NBP z art. 13b ust. 3;
+- pomiń świadczenia z terminem starszym niż 2 lata przed wszczęciem;
+- pomiń transakcje wyłącznie wewnątrz grupy kapitałowej;
+- pomiń ustawowo wskazane transakcje ubezpieczeniowe/reasekuracyjne.
+
+Próg nie jest przesłanką cywilnego roszczenia o jedną fakturę.
+
+### 10.3 Wszczęcie — art. 13c i wystąpienie bez postępowania
+
+Postępowanie prowadzi **Prezes UOKiK** wobec podmiotów niepublicznych i
+wszczyna je **z urzędu**, gdy posiadane informacje wskazują na zator.
+Wszczęcie poprzedza analiza prawdopodobieństwa obejmująca m.in. szacowaną
+wartość opóźnionych świadczeń i liczbę wierzycieli. Prezes może korzystać
+z danych KAS oraz informacji ze sprawozdań.
+
+Ustawa przewiduje też wystąpienie Prezesa bez wszczynania postępowania;
+adresat może przedstawić stanowisko, a wyznaczony termin nie może być krótszy
+niż ustawowe minimum z art. 13ca.
+
+### 10.4 Dowody i kontrola — art. 13f–13p
+
+W toku sprawy Prezes może żądać informacji i dokumentów. Art. 13h odsyła do
+wybranych przepisów ustawy o ochronie konkurencji i konsumentów.
+
+Kontrolę u przedsiębiorcy może prowadzić upoważniony pracownik UOKiK lub
+Inspekcji Handlowej. Zakres uprawnień obejmuje m.in. wejście do pomieszczeń,
+żądanie ksiąg, dokumentów, korespondencji elektronicznej i danych z systemów,
+sporządzanie kopii oraz żądanie wyjaśnień.
+
+Kontrolowany ma obowiązek współdziałać; prawo odmowy jest ograniczone
+ustawowo. W razie przewidywanego oporu kontrolujący może korzystać z pomocy
+Policji na zasadach art. 13k. Do kontroli odpowiednio stosuje się wskazane
+przepisy Prawa przedsiębiorców, z ustawowymi wyłączeniami.
+
+### 10.5 Procedura i termin — art. 13q–13r
+
+W sprawach nieuregulowanych stosuje się **KPA**, z wyłączeniem art. 31 KPA.
+Postępowanie powinno zostać zakończone nie później niż w terminie
+**5 miesięcy od wszczęcia**.
+
+### 10.6 Decyzja, kary i środki — art. 13t–13y
+
+**Art. 13t:** osobna kara może zostać nałożona za nieudzielenie żądanych
+informacji / informacje nieprawdziwe albo utrudnianie kontroli. Maksimum
+wynika z aktualnego art. 13t i jest związane z przychodem oraz limitem EUR.
+
+**Art. 13u:** jeżeli Prezes nie stwierdzi nadmiernego opóźniania, umarza
+postępowanie **decyzją**.
+
+**Art. 13v:** przy stwierdzeniu nadmiernego opóźniania Prezes może nałożyć
+karę. Maksymalna kara jest liczona ustawowym wzorem progresywnym według
+wartości świadczeń i długości opóźnienia. Nie licz jej z pamięci — zasil
+aktualne WŚ1–WŚ5 z danych transakcyjnych i odczytaj bieżący wzór.
+
+Aktualna regulacja obejmuje m.in.:
+- możliwość obniżenia kary o **20%**, jeżeli w 14 dni od doręczenia decyzji
+  strona zapłaci całość i zrzeknie się prawa do ponownego rozpatrzenia;
+- zwiększenie maksymalnej kary przy ponownym stwierdzeniu zatoru w okresie
+  wskazanym ustawą;
+- obligatoryjne odstąpienie od kary, gdy zator wynikał z siły wyższej;
+- wniosek o ponowne rozpatrzenie sprawy;
+- **skargę do WSA**, a nie do SOKiK.
+
+Art. 13va wymaga załącznika do decyzji z wykazem analizowanych świadczeń.
+Art. 13w reguluje publikację decyzji z ochroną tajemnicy przedsiębiorstwa.
+
+**Zapłata kary:** art. 13x przewiduje 30 dni od ostateczności decyzji.
+Po terminie kara jest ściągana w egzekucji administracyjnej. Art. 13xa
+pozwala w ważnym interesie wnioskodawcy odroczyć płatność lub rozłożyć ją
+na raty. Art. 13y reguluje zwrot kary po uchyleniu/stwierdzeniu nieważności
+lub obniżeniu decyzji.
+
+### 10.7 Wykroczenia — art. 13z–13zb
+
+- art. 13z: odpowiedzialny za sprawozdanie, który dopuszcza do jego
+  nieprzekazania w terminie, oraz osoba utrudniająca/udaremniająca wykonanie
+  tego obowiązku — grzywna;
+- art. 13za: brak wymaganego oświadczenia z art. 4c albo oświadczenie
+  niezgodne ze stanem rzeczywistym — grzywna;
+- art. 13zb: orzekanie odbywa się według KPW.
+
+Dla obrony/kwalifikacji wykroczeniowej uruchom DR-03, ale sama treść
+ustawowych typów jest pokryta tutaj.
 
 ## 11. Relacje i wersja czasowa
+
+KC: pomocniczo, z uwzględnieniem szczególnego art. 4a; UZNK: oddzielna
+kwalifikacja nieuczciwego wydłużania terminów; upadłość/restrukturyzacja:
+kontrola wyłączenia, nie podwójne naliczenie. Dyrektywa 2011/7/UE stanowi
+kontekst implementacyjny, a nie automatyczną zamianę polskiej podstawy.
+
+## 11A. Temporalność — art. 15–17 i kluczowe nowelizacje
+
+### A. Wejście ustawy z 2013 r.
+
+Art. 15 ustawy bazowej:
+- do transakcji zawartych **przed wejściem w życie** ustawy stosuje się
+  przepisy dotychczasowe;
+- tę samą regułę stosuje się do transakcji z zamówień publicznych wszczętych
+  przed wejściem ustawy.
+
+Art. 16 uchylił ustawę z 12.06.2003 r. o terminach zapłaty w transakcjach
+handlowych. Art. 17 ustanowił wejście ustawy po **30 dniach od ogłoszenia**;
+ogłoszenie nastąpiło 28.03.2013, więc gate temporalny dla umów przebiega
+przez 28.04.2013.
+
+### B. Nowelizacja Dz.U. 2022 poz. 2414
+
+Nowelizacja z 4.11.2022 r. zmieniła m.in.:
+- wyłączenia dla upadłości/restrukturyzacji;
+- definicję grupy kapitałowej;
+- oświadczenie dużego przedsiębiorcy;
+- art. 9a o bezskuteczności zakazu cesji w relacji duży dłużnik–MŚP;
+- raportowanie 13a–13ab;
+- próg/wyłączenia zatoru;
+- postępowanie UOKiK i model kar.
+
+**Przepisy przejściowe art. 3 tej nowelizacji:**
+- do transakcji zawartych przed wejściem nowelizacji stosuje się co do zasady
+  przepisy dotychczasowe;
+- analogicznie dla transakcji po wcześniejszych postępowaniach PZP;
+- art. 9a nie stosuje się do transakcji zawartych przed jego własnym wejściem
+  w życie ani wskazanych wcześniejszych postępowań PZP;
+- sprawozdania za 2020/2021 mają szczególny reżim korekt;
+- raport za 2022 i jego korekty stosują nowe zasady;
+- postępowania zatorowe wszczęte i niezakończone przed zmianą prowadzi się
+  według przepisów dotychczasowych, z wyjątkami wskazanymi w art. 3.
+
+**Daty wejścia:** zasadniczo 14 dni od ogłoszenia 23.11.2022; art. 9a
+(art. 1 pkt 4 nowelizacji) po 2 miesiącach od ogłoszenia; wybrane zmiany
+raportowania i wykroczeń od 01.01.2023. Nie sprowadzaj całej nowelizacji
+do jednej daty.
+
+### C. Dz.U. 2023 poz. 852 i t.j. 1790
+
+Tekst jednolity Dz.U. 2023 poz. 1790 uwzględnia zmianę Dz.U. 2023 poz. 852
+ogłoszoną przed 12.07.2023. Obwieszczenie wskazuje zróżnicowane daty wejścia
+poszczególnych przepisów nowelizacji; przy sprawie z 2023 r. ustal konkretną
+zmienioną jednostkę, nie używaj jednej daty dla całej ustawy.
+
+### D. Algorytm starej umowy
+
+1. Ustal datę zawarcia umowy oraz ewentualnego postępowania PZP.
+2. Jeśli przed 28.04.2013 → zacznij od ustawy z 12.06.2003 r.
+3. Jeśli 2013–2022 → odtwórz wersję ustawy przez ELI i akty zmieniające.
+4. Jeśli okolice nowelizacji 2022/2414 → zastosuj art. 3–5 tej nowelizacji
+   i oddziel datę art. 9a / raportowania od daty ogólnej.
+5. Jeśli 2023 → sprawdź także Dz.U. 2023 poz. 852 i datę wejścia zmienianej
+   jednostki.
+6. Dopiero po tym wybierz stopę, termin, cesję, obowiązek raportowy lub
+   regułę UOKiK.
+
+
 
 KC: pomocniczo, z uwzględnieniem szczególnego art. 4a; UZNK: oddzielna
 kwalifikacja nieuczciwego wydłużania terminów; upadłość/restrukturyzacja:
@@ -183,12 +354,13 @@ Stare umowy, odnowienia oraz zdarzenia sprzed zakresu tabeli wymagają
 przepisów przejściowych ustawy i ustaw zmieniających. Nie stosuj obecnych
 progów rekompensaty do każdego historycznego długu.
 
-## 12. Ograniczenia pokrycia i dalsza praca
+## 12. Zakres pokrycia i dalsza praca
 
-Poziom B dotyczy rdzenia cywilnego, nie całej ustawy. Mapa jednostek znajduje
-się w `MAPA-POKRYCIA.md`. Nie wykonano kompletnego przeglądu orzecznictwa,
-całej historii zmian ani wszystkich gałęzi administracyjnych. W sporze
-wymagającym tych elementów wykonaj research i pokaż lukę przed konkluzją.
+Poziom B+ obejmuje rdzeń cywilny, workflow administracyjny UOKiK,
+wykroczenia ustawy i operacyjną temporalność art. 15–17 oraz nowelizacji
+2022/2414 i 2023/852. Nie oznacza kompletnego komentarza orzeczniczego do
+każdej jednostki ani pełnej tabeli wszystkich zmian od 2013 r. Dla konkretnej
+historycznej daty nadal wykonuj fresh temporal check ELI.
 Pomocnicza kontrola organu:
 [MRiT — zatory płatnicze](https://www.gov.pl/web/rozwoj-technologia/walka-z-zatorami-platniczymi) {RZĄD: 1}.
 
@@ -199,7 +371,8 @@ Pomocnicza kontrola organu:
 - Każdy dzień i każdy kapitał mają właściwą stopę oraz świeżo odczytane źródło?
 - Publiczny podmiot nieleczniczy i prywatna lecznica nie dostały niższej stopy?
 - Ryczałt ma właściwy próg, liczbę transakcji/rat i historyczny kurs NBP?
-- Nie udawano zamknięcia historii zmian, orzecznictwa lub gałęzi administracyjnej?
+- Dla starej umowy wykonano algorytm 11A i właściwe przepisy przejściowe?
+- Dla UOKiK rozdzielono raportowanie, próg 13b, kontrolę, decyzję/karę i WSA?
 - Wykonano `shared/SELF-CHECK-ANTY-FASADA.md` i SELF-CHECK routera?
 
 Nieustalona przesłanka = warunkowy wynik z listą braków, nie fikcyjna
