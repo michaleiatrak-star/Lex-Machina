@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.29"
+version: "3.30"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -70,6 +70,7 @@ required_modules:
   - references/AUDYT-KLUCZA-ODPOWIEDZI.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog:
+  - "3.30 (2026-08-27): synchronizacja mapy dziedzinowej z F-108 P1 oraz rzeczywistymi modułami REACH/CLP, akcyzy/cła i cudzoziemców; references/CHANGELOG.md."
   - "3.29 (2026-08-27): stałe identyfikatory reguł i usunięcie resztek historii; references/CHANGELOG.md."
 ---
 
