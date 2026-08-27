@@ -1,6 +1,6 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: "3.43"
+version: "3.44"
 description: "Prawo cywilne, rodzinne i gospodarcze: KC, KPC, spadki, rodzina, spółki, upadłość, restrukturyzacja, windykacja i odpowiedzialność kontraktowa/deliktowa."
 ---
 
@@ -99,7 +99,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (64 łącznie — ✓ 64 OK, ☐ 0 STUB)
+## Moduły (65 łącznie — ✓ 65 OK, ☐ 0 STUB)
 
 ```
   [✓] OK    mod-transakcje-handlowe-opoznienia
@@ -446,6 +446,8 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
                postępowania [361-372])
   [✓] NOWY  mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026
               (pozostałe puste zakresy PrUp/PrRestr, w tym F-86 od art. 426 i ogólne tryby restrukturyzacji)
+  [✓] NOWY  mod-PrUpad-postepowania-odrebne-426-491-38
+              (F-86 DOMKNIĘTA: B+ dla postępowań odrębnych 426–491^38 — banki/SKOK, hipoteczne, transgraniczne, ubezpieczenia, obligacje, konsument i układ konsumencki; RZĄD 1 ELI)
   [✓] NOWY  mod-PrUpad-likwidacja-miedzynarodowe-szczegolne
               (dodany 2026-08-26 — częściowe uzupełnienie F-86: likwidacja [316-334],
                postępowanie międzynarodowe [378-417], postępowania po
