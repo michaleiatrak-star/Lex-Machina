@@ -5,10 +5,10 @@
 **Modułowy system skilli prawniczych AI dla prawa polskiego — z twardymi bramkami antyhalucynacyjnymi**
 
 [![Licencja: GPL v3](https://img.shields.io/badge/Licencja-GPL%20v3-blue.svg)](LICENSE)
-[![Wersja stabilna](https://img.shields.io/badge/stabilna-28.06.2026-2A6F50.svg)](#-wersjonowanie)
+[![Wersja stabilna](https://img.shields.io/badge/stabilna-21.08.2026-2A6F50.svg)](#-wersjonowanie)
 [![Wersja rozwojowa](https://img.shields.io/badge/rozwojowa-aktywna-orange.svg)](#-wersjonowanie)
 [![Skille](https://img.shields.io/badge/skille-33-8A2BE2.svg)](#-katalog-skilli)
-[![Platforma](https://img.shields.io/badge/platforma-Claude%20AI-D97757.svg)](https://claude.ai)
+[![Platforma](https://img.shields.io/badge/platforma-Claude%20%C2%B7%20ChatGPT%20%C2%B7%20Codex-D97757.svg)](#-kompatybilno%C5%9B%C4%87-llm)
 [![Język](https://img.shields.io/badge/j%C4%99zyk-polski-white.svg?labelColor=DC143C)](#)
 
 *System pokrywa 16 dziedzin prawa polskiego i unijnego: od routingu sprawy, przez analizę
@@ -17,6 +17,7 @@ każdego przepisu i każdej sygnatury.*
 
 [Szybki start](#-szybki-start) •
 [Architektura](#%EF%B8%8F-architektura) •
+[Kompatybilność LLM](#-kompatybilno%C5%9B%C4%87-llm) •
 [Katalog skilli](#-katalog-skilli) •
 [Mechanizmy weryfikacji](#%EF%B8%8F-mechanizmy-antyhalucynacyjne) •
 [Baza źródeł](#baza-źródeł-i-portali) •
@@ -40,6 +41,7 @@ z polskim prawem:
 | 🛠️ **Narzędzia wykonawcze** | pisma procesowe, analiza umów i dowodów, przesłuchania świadków, chronologia, raporty |
 | 🛡️ **Antyhalucynacja** | HARD GATE: zakaz cytowania prawa z pamięci, deterministyczne API, gradient weryfikacji cytatu |
 | 📋 **Governance** | dziennik audytów, mapa Dz.U., paczka audytowa AI Act art. 12, polityka deduplikacji |
+| 🔌 **Wieloplatformowość** | host-neutralny adapter runtime: Claude **oraz** hosty zgodne z OpenAI (ChatGPT / Codex / API / Atlas) — te same bramki, bez przepisywania metodologii |
 
 > **Zasada naczelna:** *brak numeru artykułu jest lepszy niż błędny numer artykułu;
 > brak sygnatury jest lepszy niż sygnatura nieweryfikowana lub fałszywa.*
@@ -97,6 +99,44 @@ powołanie przepisu/orzeczenia przechodzi przez bramki `shared/` → wynik z wid
 
 ---
 
+## 🔌 Kompatybilność LLM
+
+Wersja rozwojowa jest **host-neutralna**: ten sam zestaw skilli działa na Claude
+oraz na hostach zgodnych z OpenAI (**ChatGPT, Codex, API, Atlas**), bez przepisywania
+metodologii, HARD GATE ani bramek jakości. Nazwy operacji odziedziczone z jednego
+runtime są traktowane jako semantyka, nie jako wymóg konkretnego API danego dostawcy.
+
+**Warstwa portowalności** (nowość wersji rozwojowej — w wersji stabilnej jej nie ma):
+
+| Element | Lokalizacja | Rola |
+|---|---|---|
+| Adapter runtime | [`shared/UNIVERSAL-RUNTIME-ADAPTER.md`](Wersja%20rozwojowa%20rozpakowana/shared/UNIVERSAL-RUNTIME-ADAPTER.md) | Jeden kontrakt wykonawczy: mapuje operacje zależne od hosta (`view`, `web_search`, `web_fetch`, `create_file`, `show_widget`) na natywne funkcje hosta lub ich odpowiedniki. |
+| Manifest OpenAI | `<skill>/agents/openai.yaml` | Rejestracja skilla w ekosystemie OpenAI (`products: chatgpt, codex, api, atlas`) + `allow_implicit_invocation`. |
+| Manifest integralności | `<skill>/PORTABILITY-MANIFEST.md` | Lista plików + SHA-256 — dowód, że przeniesienie między hostami jest bezstratne. |
+| Pole `compatibility:` | frontmatter `SKILL.md` | Deklaruje wymagane operacje hosta (lub równoważne wg adaptera). |
+
+**Zasady adaptera:**
+
+- **Fail-closed** — jeżeli obowiązkowy zasób nie może zostać świeżo odczytany, skill
+  zatrzymuje się; nie zastępuje go pamięcią modelu.
+- **Bramki bez zmian** — `PRAWO-HARDGATE`, `TEMPORAL-LAW-CHECK`, `LEGAL-QUALITY-GATE`
+  działają identycznie na każdym hoście. Brak natywnego generatora DOCX/PDF nie znosi
+  walidacji — obniża jedynie format wyjścia do raportu strukturalnego.
+- **Prywatność** — statyczne widgety i skrypty **nie wysyłają danych bezpośrednio** do
+  żadnego dostawcy AI; wysyłka do zewnętrznego API tylko przez hosta i po jawnej decyzji
+  użytkownika. Domyślna anonimizacja jest lokalna i deterministyczna.
+- **Ścieżki** — zapis `shared/PLIK.md` oznacza kanoniczny zasób zainstalowanego skilla,
+  a nie konkretny katalog systemowy; historyczne ścieżki `/mnt/...` są normalizowane do
+  `skill/path`.
+
+> **Zakres rolloutu (uczciwie):** warstwę niosą biblioteka `shared/` i skille
+> instalowane przez router. Pojedyncze skille analityczne mogą jeszcze nie mieć
+> własnego `agents/openai.yaml` — działają wtedy wywołane przez router, ale nie
+> pojawiają się samodzielnie w katalogu skilli danego hosta OpenAI. Stan wdrożenia
+> jest odnotowany w dzienniku audytów.
+
+---
+
 ## 📁 Struktura repozytorium
 
 ```
@@ -105,14 +145,16 @@ Lex-Machina/
 ├── LICENSE                                  ← GNU GPL v3
 ├── DOKUMENTACJA-WDROZENIOWA-2026-07-13.md   ← dokumentacja wdrożeniowa systemu
 ├── claude_desktop_config.json               ← przykładowa konfiguracja konektorów MCP
-├── WERSJA STABILNA 12.07.2026/              ← skille spakowane (.zip) — wersja stabilna
+├── WERSJA STABILNA 21.08.2026/              ← skille spakowane (.zip) — wersja stabilna
 ├── WERSJA ROZWOJOWA/                        ← skille spakowane (.zip) — wersja rozwojowa
-├── Wersja stabilna rozpakowana 12.07.2026/  ← źródła skilli — wersja stabilna
+├── Wersja stabilna rozpakowana 21.08.2026/  ← źródła skilli — wersja stabilna (Claude AI)
 └── Wersja rozwojowa rozpakowana/            ← źródła skilli — tu trafiają bieżące zmiany
     ├── shared/                              ← bramki (PRAWO-HARDGATE, SYGNATURY,
-    │   │                                      WERYFIKACJA-SLAD), moduły MOD-*, definicje
+    │   │                                      WERYFIKACJA-SLAD), UNIVERSAL-RUNTIME-ADAPTER,
+    │   │                                      moduły MOD-*, definicje
     │   └── tools/                           ← skrypty audytowe + mcp-servers/ (przykłady
     │                                          konektorów: ISAP/ELI, SAOS, EUR-Lex, KRS…)
+    │   (każdy skill: agents/openai.yaml + PORTABILITY-MANIFEST.md — warstwa host-neutralna)
     ├── prawny-router-v3/                    ← orkiestrator
     ├── prawo-polskie-v2/                    ← mapa routingu dziedzin
     ├── przewodnik-prawny-v2/                ← punkt wejścia dla laika
@@ -190,6 +232,24 @@ w korzeniu — do Claude AI wgrywa się cały folder skilla.
 | Skill | Rola |
 |---|---|
 | `audyt-systemu-v4` | Audyt jakości i aktualności: [dziennik audytów](Wersja%20rozwojowa%20rozpakowana/audyt-systemu-v4/references/AUDIT-JOURNAL.md), mapy Dz.U., deduplikacja |
+
+#### Przejrzystość stanu systemu — co czytać (a czego nie)
+
+Dziennik audytów to pełny ślad forensyczny (ponad 950 sesji, dowody reprodukcji —
+materiał dla audytora i pod AI Act art. 12), **nie** codzienna lektura. Aby poznać
+aktualny stan i granice systemu, użytkownik ma trzy zwięzłe punkty wejścia:
+
+| Artefakt | Plik | Co daje |
+|---|---|---|
+| 🚦 Tablica otwartych flag | [`references/WARN-OTWARTE.md`](Wersja%20rozwojowa%20rozpakowana/audyt-systemu-v4/references/WARN-OTWARTE.md) | „Co jeszcze do zrobienia" w jednym miejscu — tablica sterująca z podziałem flag (wykonalne sesją audytową / reaktywne / zależne od środowiska). Czytaj to zamiast całego dziennika. |
+| 📊 Raporty pokrycia | [`references/raporty-pokrycia-2026-08-13/`](Wersja%20rozwojowa%20rozpakowana/audyt-systemu-v4/references/raporty-pokrycia-2026-08-13/) | Pokrycie per kodeks (🟢 pełne · 🟡 częściowe · 🔴 śladowe) + priorytety uzupełnień — od razu widać, co system pokrywa dobrze, a co śladowo. |
+| 🗺️ Mapa Dz.U. | `references/mapa_dzu_*.md` (najnowsza: `2026-08-26`) | Data „zdjęcia" stanu prawnego — do czego numery Dz.U. są aktualne. |
+
+> **Znane granice pokrycia (na dzień ostatniego audytu):** m.in. KKW (moduł istnieje,
+> ale bez treści artykułów KKW), PPSA (brak dedykowanego modułu — rozproszone cytaty),
+> SUS rozdz. 2 (zasady podlegania ubezpieczeniom), Układ w Prawie restrukturyzacyjnym.
+> Pełna lista i priorytety: indeks raportów pokrycia. System **uczciwie odnotowuje**
+> luki, zamiast je maskować — zgodnie z zasadą naczelną.
 
 ---
 
@@ -327,6 +387,11 @@ dezaktualizacji, obowiązkowe skrzyżowanie z Rzędem 1/2A przed użyciem.
 ## 💾 Instalacja
 
 > **Wymagania:** konto [claude.ai](https://claude.ai) (skille wymagają planu płatnego) · przeglądarka — bez instalacji oprogramowania.
+>
+> **Host zgodny z OpenAI (ChatGPT / Codex / API / Atlas):** wersja rozwojowa niesie
+> `agents/openai.yaml` i wspólny [adapter runtime](#-kompatybilno%C5%9B%C4%87-llm), więc
+> te same foldery skilli wgrywa się analogicznie w ekosystemie OpenAI. Kroki poniżej
+> opisują ścieżkę Claude AI; bramki jakości są identyczne na obu hostach.
 
 <details>
 <summary><b>Krok 1 — Pobierz repozytorium</b></summary>
@@ -433,14 +498,16 @@ Wskazuj wprost tryb z sekcji „TRYBY WYWOŁANIA" w `audyt-systemu-v4/SKILL.md`:
 
 | Kanał | Lokalizacja | Przeznaczenie |
 |---|---|---|
-| 🟢 **Stabilna** | `WERSJA STABILNA 12.07.2026/` + katalog rozpakowany | do codziennej pracy |
-| 🟠 **Rozwojowa** | `WERSJA ROZWOJOWA/` + `Wersja rozwojowa rozpakowana/` | nowe mechanizmy przed promocją do stabilnej |
+| 🟢 **Stabilna** | `WERSJA STABILNA 21.08.2026/` + katalog rozpakowany | do codziennej pracy — profil **Claude AI** |
+| 🟠 **Rozwojowa** | `WERSJA ROZWOJOWA/` + `Wersja rozwojowa rozpakowana/` | nowe mechanizmy przed promocją; dochodzi warstwa **host-neutralna** (Claude + ChatGPT/Codex/API/Atlas) |
 
 Każda zmiana w systemie jest odnotowana w
 [**dzienniku audytów**](Wersja%20rozwojowa%20rozpakowana/audyt-systemu-v4/references/AUDIT-JOURNAL.md)
 (`audyt-systemu-v4/references/AUDIT-JOURNAL.md`) — format: jedna sekcja
 `## AUDYT-YYYY-MM-DD` na sesję, z tabelą zmienionych plików, naprawami
-i otwartymi flagami. Aktualność numerów Dz.U. pilnowana jest w centralnej
+i otwartymi flagami. Bieżący zakres „do zrobienia" (bez przekopywania całego
+dziennika) trzyma [`references/WARN-OTWARTE.md`](Wersja%20rozwojowa%20rozpakowana/audyt-systemu-v4/references/WARN-OTWARTE.md).
+Aktualność numerów Dz.U. pilnowana jest w centralnej
 mapie (`audyt-systemu-v4/references/mapa_dzu_*.md`).
 
 ---
