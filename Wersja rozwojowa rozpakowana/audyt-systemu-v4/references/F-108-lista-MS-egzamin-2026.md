@@ -17,7 +17,7 @@ tu automatycznie zaliczane jako nowy, zakończony przegląd rozdziałowy.
 | 5 | KC | A | Etap 2: do audytu rozdziałowego |
 | 6 | KPC | A | Etap 2: do audytu rozdziałowego |
 | 7 | KW | A | Etap 2: do audytu rozdziałowego |
-| 8 | Opłaty w sprawach karnych | D | P1: do budowy |
+| 8 | Opłaty w sprawach karnych | D | ✅ P1 wykonane 2026-08-27: osobny moduł B+, mapa art. 1–23, RZĄD 1 ELI |
 | 9 | KP | A | Etap 2: do audytu rozdziałowego |
 | 10 | Prawo o adwokaturze | A | Etap 2: do audytu rozdziałowego |
 | 11 | Księgi wieczyste i hipoteka | A | Etap 2: do audytu rozdziałowego |
@@ -50,21 +50,20 @@ tu automatycznie zaliczane jako nowy, zakończony przegląd rozdziałowy.
 | 38 | PPSA | A | Etap 2: do audytu rozdziałowego |
 | 39 | Prawo upadłościowe | A | Etap 2: do audytu rozdziałowego |
 | 40 | Zwolnienia grupowe | B | Etap 2 + P2: do wykonania |
-| 41 | Ubezpieczenia obowiązkowe, UFG i PBUK | D | P1: do budowy |
+| 41 | Ubezpieczenia obowiązkowe, UFG i PBUK | D | ✅ P1 wykonane 2026-08-27: osobny moduł B, mapa 10 rozdziałów, RZĄD 1 ELI |
 | 42 | KSCU | A | Etap 2: do audytu rozdziałowego |
 | 43 | Przeciwdziałanie narkomanii | A | Etap 2: do audytu rozdziałowego |
 | 44 | UOKiK | A | Etap 2: do audytu rozdziałowego |
 | 45 | Wojewoda i administracja rządowa | B | Etap 2 + P3: decyzja do podjęcia |
-| 46 | Opóźnienia w transakcjach handlowych | C | P1: rdzeń cywilny B utworzony; administracja i historia częściowe |
+| 46 | Opóźnienia w transakcjach handlowych | C | ✅ P1 wykonane: osobny moduł B; administracja i historia pozostają częściowe |
 | 47 | Prawa konsumenta | A | Etap 2: do audytu rozdziałowego |
 | 48 | Prawo restrukturyzacyjne | A | Etap 2: do audytu rozdziałowego |
 | 49 | Prawo o prokuraturze | A | Etap 2: do audytu rozdziałowego |
 | 50 | Sąd Najwyższy | B | Etap 2 + P2: do wykonania |
 | 51 | Prawo przedsiębiorców | B | Etap 2 + P2: do wykonania |
-| 52 | Fundacja rodzinna | D | P1: do budowy |
+| 52 | Fundacja rodzinna | D | ✅ P1 wykonane 2026-08-27: osobny moduł B, mapa 16 rozdziałów, RZĄD 1 ELI |
 
-**Następna transza:** P1/41 (ubezpieczenia obowiązkowe, UFG i PBUK).
-P1/46 nie zamyka całej F-108 ani jej etapu 2. Weryfikacja sześciu obwieszczeń
+**Następna transza:** P2/51 → P2/50 → P2/30 → P2/40.\nP1/46, P1/41, P1/8 i P1/52 są wykonane, ale nie zamykają całej F-108 ani etapu 2. Weryfikacja sześciu obwieszczeń
 nie jest dowodem kompletności historii zmian. Testy statyczne/scenariuszowe
 nie są wieloramiennym testem behawioralnym F-113/F-133.
 
@@ -111,7 +110,7 @@ wewnątrz innych wyrazów.
 | 🟢 **A** — dedykowany moduł | **39 / 52** | akt ma własny plik modułu |
 | 🟡 **B** — wewnątrz modułu łączonego lub tylko w mapie | **9 / 52** | treść istnieje, ale bez własnej jednostki i bez mapy rozdziałów |
 | 🟠 **C** — wyłącznie fragment w cudzym module | **1 / 52** | brak samodzielnego opracowania |
-| 🔴 **D** — nieobecny | **3 / 52** | zero treści merytorycznej |
+| 🔴 **D** — nieobecny | **3 / 52** | zero treści merytorycznej |\n\n**Stan nominalny po synchronizacji P1 2026-08-27 (nie zastępuje audytu Etapu 2):** A=43, B=9, C=0, D=0. Zmiana względem bazy: 46 C→A; 8, 41 i 52 D→A. Kategoria A nadal oznacza tylko istnienie dedykowanego modułu, nie kompletność treści.
 
 **Pokrycie nominalne 75% (A), pokrycie realne nieznane** — kategoria A mówi
 tylko, że moduł istnieje. Precedens KSH z `dr-02/MAPA-POKRYCIA.md` (moduł
@@ -182,7 +181,7 @@ ETAP 2 ⬛ POKRYCIE PO ROZDZIAŁACH — dla każdej pozycji A i B:
        Utworzyć przy pierwszej transży dotyczącej danego DR.
 
 ETAP 3 ⬛ BUDOWA BRAKUJĄCYCH MODUŁÓW — kolejność ustalona:
-       P1: 46 (transakcje handlowe) → 41 (UFG) → 8 (opłaty karne) → 52 (fundacja rodzinna)
+       P1: ✅ 46 → ✅ 41 → ✅ 8 → ✅ 52 — ZAKOŃCZONE 2026-08-27, każdy moduł ≥ B
        P2: 51 → 50 → 30 → 40
        P3: decyzja wydzielać/nie wydzielać dla 13, 34, 27, 28, 45
        Procedura: shared/MOD-GENERATOR-AKTU.md, kroki G-1…G-8
