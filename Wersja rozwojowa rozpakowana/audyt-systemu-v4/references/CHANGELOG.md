@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.28 (2026-08-27): domknięto F-86 materiałowo modułem B+ dla Prawa upadłościowego art. 426–491^38; T18 dopisano do REGRESSION-TEST-PLAN i scripts/README; zsynchronizowano metadane wydania po pełnej propagacji modułów pokrycia.
+
 - 6.27 (2026-08-27): wykonano rekomendacje audytu pokrycia: utworzono `MAPA-POKRYCIA.md` dla brakujących 9 DR, dodano T18 `check_coverage_coherence.py` i wpięto do suite, rozdzielono status rejestracji od kompletności treściowej oraz oznaczono raporty 2026-08-13 jako baseline historyczny. F-108 Etap 3: 52/52 dedykowanych modułów.
 
 - 6.26 (2026-08-27): errata dowodu F-108/46 — T3 ma 7 ostrzeżeń,
