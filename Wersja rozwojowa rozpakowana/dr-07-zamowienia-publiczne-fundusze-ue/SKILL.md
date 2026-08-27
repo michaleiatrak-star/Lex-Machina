@@ -1,6 +1,6 @@
 ---
 name: dr-07-zamowienia-publiczne-fundusze-ue
-version: "3.8"
+version: "3.9"
 description: "Zamówienia publiczne i fundusze UE: PZP, postępowania zakupowe, KIO, środki ochrony prawnej, finansowanie UE i powiązane zagadnienia realizacyjne."
 ---
 
@@ -71,12 +71,14 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Zamówienia publiczne, fundusze UE, pomoc publiczna — pojęcia (wykonawca, zamawiający, oferta, rażąco niska cena, kryteria oceny ofert) mają definicje ustawowe wprost w PZP (art. 7) i nie wymagają osobnego pliku w shared/definicje/. Żaden plik tematyczny nie obejmuje dziedziny PZP.
-## Moduły (19 łącznie — ✓ 19 OK, ☐ 0 STUB)
+## Moduły (20 łącznie — ✓ 20 OK, ☐ 0 STUB)
 
 ```
   [✓] OK    mod-PZP-dzial-IV-szczegolne-instrumenty
               (art. 311–361: umowa ramowa, dynamiczny system zakupów,
                konkurs i usługi społeczne)
+  [✓] NOWY  mod-PZP-uzupelnienie-pokrycia-2026
+              (pozostałe luki: plan/mieszane, komunikacja, dokumentowanie, wybór, podprogowe, organy, ADR)
 ```
 
 **NAPRAWA 2026-08-14:** dodano `mod-PZP-dzial-II-kwalifikacja-kryteria-
