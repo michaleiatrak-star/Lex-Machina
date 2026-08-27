@@ -390,8 +390,10 @@ dezaktualizacji, obowiązkowe skrzyżowanie z Rzędem 1/2A przed użyciem.
 >
 > **Host zgodny z OpenAI (ChatGPT / Codex / API / Atlas):** wersja rozwojowa niesie
 > `agents/openai.yaml` i wspólny [adapter runtime](#-kompatybilno%C5%9B%C4%87-llm), więc
-> te same foldery skilli wgrywa się analogicznie w ekosystemie OpenAI. Kroki poniżej
-> opisują ścieżkę Claude AI; bramki jakości są identyczne na obu hostach.
+> te same foldery skilli wgrywa się analogicznie w ekosystemie OpenAI. Kroki 1–4
+> opisują ścieżkę Claude AI; **Krok 5** — instalację w ChatGPT, gdzie te same reguły
+> trafiają do instrukcji niestandardowych w personalizacji. Bramki jakości są
+> identyczne na obu hostach.
 
 <details>
 <summary><b>Krok 1 — Pobierz repozytorium</b></summary>
@@ -454,6 +456,40 @@ uruchomić router, dopytać o charakter sprawy i zaproponować przewodnik.
 | Skill nie pojawia się po wgraniu | wskaż **folder**, nie plik `SKILL.md` |
 | Cytowanie bez weryfikacji | napisz: *„przypomnij sobie zasady HARDGATE"*; sprawdź czy `shared/` zawiera `PRAWO-HARDGATE.md` |
 | Błąd „description too long" | uruchom: *„przeprowadź audyt systemu"* — wskaże winny skill |
+</details>
+
+<details>
+<summary><b>Krok 5 — Instalacja w ChatGPT (host zgodny z OpenAI)</b></summary>
+
+Wersja rozwojowa jest host-neutralna, więc w ChatGPT wgrywa się **te same foldery
+skilli** i w **tej samej kolejności** co w Claude (patrz Krok 2). Każdy skill niesie
+manifest `agents/openai.yaml` (`products: chatgpt, codex, api, atlas`) rozpoznawany
+przez ekosystem OpenAI oraz wspólny [adapter runtime](#-kompatybilno%C5%9B%C4%87-llm),
+który mapuje operacje systemu na natywne funkcje ChatGPT.
+
+**Odpowiednikiem „User Preferences" (Krok 3) jest w ChatGPT pole instrukcji
+niestandardowych w personalizacji** — te same reguły wpisujesz raz, dokładnie tak samo:
+
+ChatGPT → **Ustawienia** → **Personalizacja** → **Instrukcje niestandardowe**
+(*Custom instructions*) → pole *„Jak ChatGPT ma odpowiadać?"* (lub *„Co jeszcze ChatGPT
+powinien wiedzieć?"*) → wklej:
+
+```
+Prawo PL: router→v3 pierwszy, ISAP każdy przepis, HYBRID-VAL przed .docx. Karne: +kwalifikator.
+```
+
+| Fragment | Znaczenie |
+|---|---|
+| `router→v3 pierwszy` | router wczytywany jako pierwszy w każdej sprawie |
+| `ISAP każdy przepis` | weryfikacja każdego przepisu w isap.sejm.gov.pl |
+| `HYBRID-VAL przed .docx` | walidacja hybrydowa przed generowaniem dokumentu |
+| `Karne: +kwalifikator` | w sprawach karnych moduł kwalifikatora karnomaterialnego |
+
+> Instrukcje niestandardowe działają globalnie na koncie — dokładnie jak User
+> Preferences w Claude — więc reguły obowiązują w każdej nowej rozmowie bez
+> powtarzania. Bramki jakości (HARD GATE, weryfikacja online, ZASADA 7) są identyczne.
+> Gdy host nie ma natywnego generatora DOCX/PDF, system zwraca równoważny raport
+> strukturalny — walidacja końcowa nie jest pomijana (patrz adapter runtime).
 </details>
 
 ---
