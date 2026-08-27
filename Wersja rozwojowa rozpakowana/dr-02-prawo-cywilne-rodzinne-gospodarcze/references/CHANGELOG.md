@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.45 (2026-08-27): F-108/46 Etap 2 zamknięty na poziomie B+: moduł transakcji handlowych obejmuje teraz pełny workflow art. 13a–13y, wykroczenia 13z–13zb oraz temporalność art. 15–17 i nowelizacji Dz.U. 2022 poz. 2414 / Dz.U. 2023 poz. 852; usunięto ostatni bieżący czerwony wpis Tytułu V KSH.
+
 - 3.44 (2026-08-27): F-86 domknięta materiałowo: dodano dedykowany moduł B+ Prawa upadłościowego art. 426–491^38 (banki/SKOK, banki hipoteczne, instytucje transgraniczne, ubezpieczyciele, emitenci obligacji, upadłość konsumencka i układ konsumencki), zsynchronizowano SKILL/MAPA-AKTOW/MAPA-POKRYCIA/ROUTING.
 
 - 3.43 (2026-08-27): dodano trzy moduły zamykające luki zerowe KSH, KPC oraz PrUp/PrRestr; zsynchronizowano MAPA-AKTOW, MAPA-POKRYCIA i centralny routing.
