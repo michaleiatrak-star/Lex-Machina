@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.43 (2026-08-27): dodano trzy moduły zamykające luki zerowe KSH, KPC oraz PrUp/PrRestr; zsynchronizowano MAPA-AKTOW, MAPA-POKRYCIA i centralny routing.
+
 - 3.42 — F-108 P3/13 i P3/34: wydzielono Prawo spółdzielcze i ustawę o spółdzielniach mieszkaniowych do odrębnych modułów opartych na RZĄD 1 ELI. (2026-08-27)
 
 - 3.41 — F-108/51: dodano dedykowany moduł Prawa przedsiębiorców, poziom B, ze świeżą metryką i zmianami z RZĄD 1 ELI. (2026-08-27)
