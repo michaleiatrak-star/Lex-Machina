@@ -1,0 +1,38 @@
+name: Lex-Machina regression
+
+on:
+  push:
+    branches:
+      - main
+      - codex/f108-p1-sync-2026-08-27
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile audit scripts
+        working-directory: "Wersja rozwojowa rozpakowana"
+        run: |
+          python -m py_compile audyt-systemu-v4/scripts/*.py
+
+      - name: Run regression suite
+        working-directory: "Wersja rozwojowa rozpakowana"
+        run: |
+          python audyt-systemu-v4/scripts/run_regression_suite.py --repo-root .
+
+      - name: Run T18 explicitly
+        working-directory: "Wersja rozwojowa rozpakowana"
+        run: |
+          python audyt-systemu-v4/scripts/check_coverage_coherence.py .
