@@ -37,7 +37,7 @@ Upowazmienie:  Kontroler legitimuje sie upowazmeniem
 Protokol:      Podpisywany przez kierownika jednostki kontrolowanej (lub zastrzezenia)
 Zastrzezenia:  ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) — poprzednia
                wersja podawała błędnie "14 dni". Aktualny art. 54 ustawy
-               o NIK (t.j. Dz.U. 2022 poz. 623, potwierdzone lexlege.pl,
+               o NIK (t.j. Dz.U.2022.623, potwierdzone lexlege.pl,
                arslege.pl) stanowi: zastrzeżenia do WYSTĄPIENIA
                POKONTROLNEGO wnosi się w terminie 21 DNI od jego
                przekazania. ⚠️ NIEROZSTRZYGNIĘTE W TEJ SESJI: część

@@ -1,11 +1,22 @@
 ---
 name: analizator-przepisow-v2
-version: "2.6"
+version: "2.5"
 type: executive-analiza
 status: production
 compatibility: "web_search, web_fetch, show_widget"
-description: |
-  Analizuje przepisy prawa polskiego. Stosuj gdy użytkownik pyta o artykuł, przesłanki, wykładnię, orzecznictwo, zbieg norm, historię zmian przepisu lub chce sprawdzić czy przepis stosuje się do jego sytuacji. v2: automatyczne orzecznictwo (3 orzeczenia + alert rozbieżności linii), mapa powiązań norm, historia nowelizacji z obsługą vacatio legis, interaktywne drzewo przesłanek krok-po-kroku, kontekst praktyczny dla laika. v2.3: RZĄD 1 (ISAP) / RZĄD 2 (orzecznictwo, LEX-Legalis-tekst, ORAZ duże portale: prawo.pl, LEX/Legalis-komentarz, rp.pl, infor.pl, gofin.pl i inne) / RZĄD 3 (strony prawników, kancelarii, NGO, blogów — wysokie ryzyko dezaktualizacji, wymagają daty i krzyżowej weryfikacji).
+description: >-
+  Analizuje przepisy prawa polskiego. Stosuj gdy użytkownik pyta o artykuł, przesłanki, wykładnię, orzecznictwo, zbieg norm, historię zmian przepisu lub chce sprawdzić czy przepis stosuje się do jego sytuacji.
+  v2: automatyczne orzecznictwo (3 orzeczenia + alert rozbieżności linii), mapa powiązań norm, historia nowelizacji z obsługą vacatio legis, interaktywne drzewo przesłanek krok-po-kroku, kontekst praktyczny dla laika.
+  v2.3: RZĄD 1 (ISAP) / RZĄD 2 (orzecznictwo, LEX-Legalis-tekst, ORAZ duże portale: prawo.pl, LEX/Legalis-komentarz, rp.pl, infor.pl, gofin.pl i inne) / RZĄD 3 (strony prawników, kancelarii, NGO, blogów — wysokie ryzyko dezaktualizacji, wymagają daty i krzyżowej weryfikacji).
+changelog: |
+  Wersja bieżąca: 2.5. ⛔ PEŁNA HISTORIA — WYŁĄCZNIE w references/CHANGELOG.md
+  (standard systemowy 2026-08-20z4: jeden plik, jedna lokalizacja; zakaz sekcji
+  changelogu w korpusie SKILL.md i zakaz pełnej listy wpisów w tym polu).
+  Skrót 2.5 (2026-08-20z4): historia zmian przeniesiona z korpusu SKILL.md do references/CHANGELOG.md
+  (treść 1:1); przy okazji naprawiony NIESPARSOWALNY frontmatter — pole
+  description zawierało niecytowane dwukropki (v2:, v2.3:), przez co YAML
+  nie ładował się w ogóle. Usterka zastana, wykryta kontrolą tej sesji.
+
 ---
 
 # Analizator Przepisów Prawnych v2
@@ -13,20 +24,6 @@ description: |
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 > Przed podaniem jakiegokolwiek przepisu, artykułu, numeru Dz.U. lub sygnatury orzeczenia:
 > `view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
-
-> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
-> (podłączone 2026-08-23i, flaga F-115 — ten skill cytuje prawo, a bramki nie miał):
->
-> ```
-> view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
-> ```
->
-> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
-> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
-> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
-> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
-> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
-> zmianie brzmienia).
 
 Profesjonalne narzędzie do analizy przepisów prawnych z widgetem wizualnym, automatycznym orzecznictwem (MOD-ORZECZ-PRZEPIS), mapą powiązań norm, historią zmian z obsługą vacatio legis, interaktywnym drzewem przesłanek i kontekstem praktycznym dla laika. (v2)
 
@@ -135,24 +132,7 @@ Paleta: --primary #1B3A6B, --accent #C8960C, --bg #F8F7F4, --success #16a34a, --
 1. web_search: [nazwa aktu] + "tekst jednolity" + rok na ISAP
 2. web_fetch tekstu jednolitego
 3. Zlokalizuj dokładny przepis (artykuł / paragraf / ustęp / punkt)
-4. Z treści obwieszczenia o t.j. wypisz nowelizacje JUŻ UWZGLĘDNIONE
-   (obwieszczenia standardowo wymieniają: „uwzględnia zmiany wprowadzone
-   ustawami z dnia..."). To jest punkt wyjścia — te zmiany są już wliczone,
-   nie trzeba ich szukać ponownie w kroku 4A.
-4A. ⛔ KROK 2C shared/PRAWO-HARDGATE.md — OSOBNE zapytanie o WSZYSTKIE
-    akty zmieniające OPUBLIKOWANE PO dacie t.j. z kroku 1-2 (skorygowano
-    2026-08-23f, po pytaniu użytkownika — NIE zatrzymuj się na pierwszej
-    znalezionej nowelizacji; między t.j. a dziś mogło wejść w życie
-    kilka kolejnych zmian tego samego przepisu). To NIE jest to samo
-    zapytanie co krok 1 — krok 1 szuka t.j., krok 4A szuka WSZYSTKICH
-    nowelizacji OGŁOSZONYCH PO nim, w całym przedziale od daty t.j. do
-    dziś. Zapisz PEŁNĄ LISTĘ chronologiczną wyników zawsze, także gdy
-    pusta (pole „Sprawdzono po t.j." w Karcie Przepisu niżej). Gdy
-    nowelizacji więcej niż jedna — ustal, które brzmienie obowiązuje
-    NA DATĘ ANALIZY (kolejność wejścia w życie, ewentualne vacatio
-    legis), nie zakładaj że najnowsza znaleziona = aktualna. Obowiązkowe
-    dla przepisów NIOSĄCYCH ROZSTRZYGNIĘCIE, opcjonalne dla przywołań
-    kontekstowych.
+4. Sprawdź datę ostatniej nowelizacji i historię zmian
 5. Sprawdź czy przepis nie został uchylony lub zmieniony
 6. Zapisz DOSŁOWNĄ treść z oficjalnego źródła
 ```
@@ -164,10 +144,8 @@ KARTA PRZEPISU
 Akt prawny:         [pełna nazwa + rok + Dz.U.]
 Numer przepisu:     [art./§/ust./pkt]
 Tekst jednolity z:  [data Dz.U. lub data publikacji ISAP]
-Nowelizacje w t.j.: [lista ustaw zmieniających już uwzględnionych w t.j.,
-                     z treści obwieszczenia]
-Nowelizacje po t.j.:[TAK: pełna lista chronologiczna / brak — patrz KROK
-                     2C — / NIE sprawdzono]
+Ostatnia zmiana:    [data i numer nowelizacji]
+Historia zmian:     [liczba nowelizacji + daty kluczowych]
 Status:             Obowiązuje / Zmieniony / Uchylony
 Data analizy:       [data stanu prawnego]
 Źródło URL:         [link ISAP lub inne źródło]
@@ -574,14 +552,14 @@ Nie dubluj logiki shared w lokalnych plikach. Lokalne moduły mogą tylko doprec
 
 ## CHANGELOG
 
-⛔ **Historia zmian tego skilla NIE mieszka w tym pliku** (ZASADA 15,
-`audyt-systemu-v4/SKILL.md`). Jedyna lokalizacja kanoniczna:
+⛔ **Historia zmian tego skilla NIE mieszka w tym pliku.** Pełny changelog:
 
 ```
 view /mnt/skills/user/analizator-przepisow-v2/references/CHANGELOG.md
 ```
 
-*(Wpisy 2.4 … 2.1 przeniesione stąd 1:1 do `references/CHANGELOG.md`
-dnia 2026-08-24, flaga F-126 — usunięcie stanu przejściowego, w którym
-historia mieszkała w DWÓCH miejscach. Treść nie została przeredagowana
-ani odtworzona z pamięci; przeniesiony został istniejący tekst.)*
+Skrót bieżącej wersji — pole `changelog:` we frontmatterze powyżej.
+Standard systemowy (2026-08-20z4): `references/CHANGELOG.md` jest jedyną
+lokalizacją kanoniczną historii; zakaz odtwarzania sekcji changelogu w korpusie
+SKILL.md i zakaz trzymania pełnej listy wpisów w YAML.
+

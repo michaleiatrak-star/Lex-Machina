@@ -116,7 +116,7 @@ Reguła K-D (zasada dostępności):
 ```
 W3.4 — MOD-WALIDACJA (blok C — styl procesowy):
   Po bloku C, dodaj krok KROK K1–K4 z MOD-KONCENTRACJA:
-  view /mnt/skills/user/shared/MOD-KONCENTRACJA.md
+  view shared/MOD-KONCENTRACJA.md
   → Wyświetl RAPORT MOD-KONCENTRACJA
   → Wynik KONCENTRACJA-OK → kontynuuj W3.5
   → Wynik WARN/ALERT → przedstaw rekomendacje; decyzja o skróceniu po stronie
@@ -124,7 +124,7 @@ W3.4 — MOD-WALIDACJA (blok C — styl procesowy):
 
 MOD-REDAKCJA (Test A — redakcja gotowego pisma):
   Gdy użytkownik prosi o skrócenie pisma:
-  view /mnt/skills/user/shared/MOD-KONCENTRACJA.md
+  view shared/MOD-KONCENTRACJA.md
   → Uruchom KROK K1–K4 na dostarczonym piśmie
   → Zastosuj reguły K-A / K-B / K-C / K-D
   → Dostarcz wersję skróconą z raportem zmian

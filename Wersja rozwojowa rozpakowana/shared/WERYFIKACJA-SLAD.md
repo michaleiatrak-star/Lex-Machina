@@ -1,6 +1,13 @@
 # WERYFIKACJA-ŚLAD — Moduł Audytu Śladu Weryfikacji
 
-> **Plik:** `/mnt/skills/user/shared/WERYFIKACJA-SLAD.md`
+> **Plik:** `shared/WERYFIKACJA-SLAD.md`
+> **Wersja:** 1.6 (2026-08-27) — dodano REJESTR POKRYCIA WERYFIKACJI (RPW):
+>              checkpoint obowiązkowy przy ≥8 powołaniach, zamykający lukę
+>              "cichego pominięcia" pozycji bez błędu sieciowego — zgłoszone
+>              przez użytkownika po sesji, w której odpowiedź z wieloma
+>              przepisami (art. 249, 249a, 258, 257, 259, 156 §5a, 460, 463,
+>              73, 178a KK — 10 powołań) nie wskazała, do którego momentu
+>              sięgała weryfikacja ani co pozostało nieobjęte (patrz CHANGELOG)
 > **Wersja:** 1.4 (2026-07-15b) — dodano obowiązkową kategoryzację RZĄD
 >              (odesłanie do `shared/HIERARCHIA-ZRODEL.md`) przy każdej
 >              kotwicy tekstowej i w tabeli śladu — zgłoszone przez
@@ -81,7 +88,7 @@ Termin: 2 tygodnie na sprzeciw od nakazu zapłaty (art. 502 §1 KPC) ✅ [VER: i
 > Pełna, kanoniczna procedura (Text Fragment `#:~:text=`, KT-1→KT-4,
 > kategoryzacja RZĄD, zastrzeżenie o wsparciu przeglądarek, FALLBACK) jest
 > teraz WYŁĄCZNIE w:
-> `view /mnt/skills/user/shared/PRAWO-HARDGATE.md` → sekcja KROK 5A
+> `view shared/PRAWO-HARDGATE.md` → sekcja KROK 5A
 >
 > Ten plik (WERYFIKACJA-SLAD.md) pozostaje właściwym miejscem dla znaczników
 > ✅/⚠️ [VER/NIEWERYFIKOWANE] i GRADIENTU (ISTNIENIE/TREŚĆ/FRAGMENT) — patrz
@@ -267,7 +274,7 @@ Orzeczenie                       → ZAWSZE URL bezpośredni do orzeczenia + dat
 > **Obowiązuje dla:** pism procesowych (.docx), umów, regulaminów, wzorców, OWU
 
 ```
-TRIGGER: każdorazowo PRZED wywołaniem view /mnt/skills/public/docx/SKILL.md
+TRIGGER: każdorazowo PRZED wywołaniem view HOST_CAPABILITY[document_generation]
          i przed finalnym zapisem umowy / regulaminu / wzorca.
 
 ⛔ ZAKAZ: znaczniki [VER: …] i [NIEWERYFIKOWANE] NIE mogą pojawić się
@@ -339,6 +346,103 @@ KROK W-4: Przy ≥ 3 nieudanych weryfikacjach z rzędu:
 
 ---
 
+## 🧮 REJESTR POKRYCIA WERYFIKACJI (RPW) — przy dużej liczbie cytowań
+
+> Dodano: 2026-08-27, na zgłoszenie użytkownika. Wzorzec analogiczny do
+> `shared/MOD-REJESTR-POKRYCIA-JEDNOSTEK.md` (RPK), ale zamiast jednostek
+> sprawy (kazusy, świadkowie, dokumenty) pokrywa **powołania wymagające
+> weryfikacji** (przepisy, orzeczenia).
+
+### PROBLEM, KTÓRY RPW ZAMYKA
+
+KROK W-4 (wyżej) reaguje dopiero po **≥3 kolejnych NIEUDANYCH** próbach
+weryfikacji — chroni przed błędem sieciowym, nie przed **cichym
+pominięciem**. Gdy odpowiedź zawiera wiele powołań (np. 8–15 przepisów w
+jednym raporcie o środkach zapobiegawczych), model może zweryfikować
+pierwszą część listy, a resztę pominąć bez żadnego widocznego błędu — po
+prostu nie wracając już do tych pozycji. Użytkownik nie ma wtedy sposobu
+odróżnić "sprawdzone i pominięte celowo" od "sprawdzone i zapomniane" ani
+ustalić, gdzie kończy się realna weryfikacja tej tury. Dotychczasowy
+mechanizm (znacznik przy KAŻDYM elemencie z osobna) nie wymuszał jednego,
+zbiorczego podsumowania zasięgu — dało się rozproszyć znaczniki po tekście
+bez nigdy nie policzenia ich razem.
+
+### PRÓG WYZWALAJĄCY
+
+RPW jest obowiązkowy, gdy odpowiedź / pismo zawiera **≥ 8 odrębnych
+powołań** wymagających weryfikacji (przepis, artykuł ustawy innej niż
+główna, sygnatura orzeczenia). Ten sam artykuł powołany wielokrotnie w
+tekście liczy się **raz**. Próg niższy niż w RPK (≥10 jednostek sprawy),
+bo koszt pominięcia jednego przepisu w piśmie procesowym jest wyższy niż
+koszt pominięcia jednego dokumentu w inwentarzu.
+
+Poniżej progu (< 8 powołań) — wystarcza dotychczasowy ślad per-element
+(✅/⚠️ przy każdym), bez osobnego rejestru.
+
+### PROCEDURA
+
+```
+RPW-INIT (przed pierwszym web_search/web_fetch tej tury):
+  Sporządź NUMEROWANĄ listę wszystkich powołań do zweryfikowania w
+  odpowiedzi, którą zamierzasz napisać — to jest MIANOWNIK (Y pozycji).
+  Lista powstaje z PLANU odpowiedzi, nie jest rekonstruowana po fakcie.
+
+RPW-COMMIT (po każdej próbie weryfikacji, udanej lub nie):
+  Odznacz pozycję na liście w KOLEJNOŚCI listy — nie przeskakuj do
+  wygodniejszej pozycji, nawet jeśli narzędzie już zwróciło wynik dla
+  dalszej pozycji przy okazji innego zapytania.
+
+RPW-CHECKPOINT (obowiązkowy, na końcu odpowiedzi, PRZED disclaimerem
+  i PRZED ewentualną tabelą śladu "poziom pełny" — może ją poprzedzać
+  jednym zdaniem podsumowania):
+
+  "Zweryfikowano {X}/{Y} pozycji (do pozycji {N} na liście włącznie).
+   Pozycje {N+1}…{Y}: ⬛ [DO WERYFIKACJI] — bez próby w tej turze."
+
+  Ten wiersz jest OBOWIĄZKOWY nawet gdy X = Y — wtedy: "Zweryfikowano
+  {Y}/{Y} — pełne pokrycie tej tury."
+  ⛔ Braku tego wiersza przy ≥8 powołaniach NIE usprawiedliwia to, że
+  każdy pojedynczy element miał już swój własny znacznik ✅/⚠️ —
+  RPW-CHECKPOINT to zbiorcze podsumowanie zasięgu, nie duplikat
+  znaczników per-element.
+
+RPW-RESUME (gdy sesja/turę kontynuuje się dalej — dociąganie reszty,
+  porównanie z kluczem, kolejne pytanie o tę samą sprawę):
+  Pierwszym krokiem jest odczyt OSTATNIEGO checkpointu RPW z tej rozmowy
+  i kontynuacja weryfikacji od pozycji {N+1} — nie od nowa (marnotrawstwo)
+  i nie z pominięciem reszty (to właśnie ta luka, którą RPW zamyka).
+```
+
+### FORMAT — rozszerzenie tabeli śladu (poziom pełny)
+
+Przy ≥8 powołaniach tabela z sekcji "Poziom pełny" wyżej dostaje
+dodatkową kolumnę `Nr` (numer porządkowy z RPW-INIT), żeby checkpoint
+dało się odczytać wprost z tabeli:
+
+```
+---
+## 🔍 Ślad weryfikacji
+
+| Nr | Element | Źródło | Data | Status |
+|---|---|---|---|---|
+| 1 | art. 249 §1 KPK — przesłanka ogólna | lexlege.pl / sip.lex.pl (2B) | 2026-08-27 | ✅ |
+| 2 | art. 258 §1-2 KPK — przesłanki szczególne | lexlege.pl (2B), SN II KZ 47/23 (2A) | 2026-08-27 | ✅ |
+| … | … | … | … | … |
+| 9 | art. 73 §4 KPK — wygaśnięcie zastrzeżenia | arslege.pl (2B) | 2026-08-27 | ✅ |
+
+**RPW-CHECKPOINT:** zweryfikowano 9/9 — pełne pokrycie tej tury.
+```
+
+### NARUSZENIE
+
+Odpowiedź z ≥8 powołaniami bez wypisanego RPW-CHECKPOINT = **WARN**
+(ten sam poziom co brak kategoryzacji RZĄD) — odnotować, jeśli operacja
+toczy się w ramach audytu (`audyt-systemu-v4`); w zwykłej rozmowie
+wystarczy, że kolejna odpowiedź w tej samej sprawie uzupełnia brakujący
+checkpoint retroaktywnie, zanim doda nowe powołania.
+
+---
+
 ## OBSŁUGA BŁĘDÓW SIECIOWYCH (naprawa WAŻNE-3: SLA)
 
 ```
@@ -388,6 +492,14 @@ Tryb awaryjny NIE oznacza pominięcia disclaimera — DISCLAIMER.md stosuje się
              kategorię RZĄD 1/2A/2B/3 wg `shared/HIERARCHIA-ZRODEL.md`?
 □ [RZĄD] Czy źródła Rządu 3 mają sprawdzoną datę (>24 mies. → ostrzeżenie)
              i są skrzyżowane z Rzędem 1/2A przed użyciem jako poparcia tezy?
+□ [RPW] Odpowiedź zawiera ≥8 odrębnych powołań? → sporządzony RPW-INIT
+             PRZED weryfikacją i wypisany RPW-CHECKPOINT na końcu, przed
+             disclaimerem?
+□ [RPW] Liczba pozycji w RPW-CHECKPOINT (Y) zgadza się z liczbą odrębnych
+             powołań faktycznie użytych w tekście odpowiedzi (żadne nie
+             pominięte przy liczeniu MIANOWNIKA)?
+□ [RPW] Jeśli X < Y (niepełne pokrycie) — pozycje N+1…Y wypisane wprost
+             jako ⬛ [DO WERYFIKACJI], a nie po prostu nieobecne w tekście?
 ```
 
 ### Dodaj do REGUŁ NADRZĘDNYCH routera (punkt 14):
@@ -401,11 +513,42 @@ Tryb awaryjny NIE oznacza pominięcia disclaimera — DISCLAIMER.md stosuje się
        nie duplikuj tutaj), zbudowaną w tej samej odpowiedzi, z zastrzeżeniem
        o ograniczonym wsparciu przeglądarek i braku gwarancji trwałości
        dopasowania.
+    ⛔ Przy ≥8 odrębnych powołaniach — sekcja RPW (REJESTR POKRYCIA
+       WERYFIKACJI, wyżej) jest obowiązkowa: RPW-INIT przed weryfikacją,
+       RPW-CHECKPOINT na końcu odpowiedzi. Brak checkpointu = WARN, ten
+       sam poziom co brak kategoryzacji RZĄD.
 ```
 
 ---
 
 ## CHANGELOG
+
+**1.6 (2026-08-27) — DODANO: REJESTR POKRYCIA WERYFIKACJI (RPW):**
+- Zgłoszenie użytkownika: w odpowiedzi z 10 powołaniami KPK/KK (analiza
+  kazusów o tymczasowym aresztowaniu) nie było widoczne, do którego
+  momentu sięgała faktyczna weryfikacja i co ewentualnie zostało pominięte
+  — mimo że każdy przepis osobno miał swój ślad, brakowało ZBIORCZEGO
+  podsumowania zasięgu. Zapytanie: "aparat znakowania jest kluczowy, gdyż
+  wskazuje czy nie jest to halucynacja, skąd inaczej użytkownika ma to
+  wiedzieć?" — trafna uwaga o potrzebie widocznego checkpointu, nie tylko
+  znaczników per-element.
+- Rozpoznana luka: KROK W-4 chroni przed serią błędów sieciowych (≥3
+  nieudane z rzędu), nie przed cichym pominięciem pozycji bez błędu —
+  inny mechanizm, inna przyczyna, wymaga osobnej bramki.
+- Naprawa: nowa sekcja RPW (próg ≥8 powołań, RPW-INIT/COMMIT/CHECKPOINT/
+  RESUME, analogiczna do `MOD-REJESTR-POKRYCIA-JEDNOSTEK.md`), kolumna
+  `Nr` w tabeli śladu, 3 punkty w SELF-CHECK, rozszerzenie reguły 14
+  routera.
+- ⚠️ **Ograniczenie znane i jawne (ten sam typ, co przy `KROK 3A` routera
+  i `AUDIT-CLAIM-GATE` w audyt-systemu-v4):** RPW-CHECKPOINT jest
+  deklaracją modelu, nie dowodem niezależnie sprawdzalnym przez drugą
+  osobę. Wiarygodność checkpointu rośnie tylko o tyle, o ile pozycje w
+  nim wymienione dają się zweryfikować (mają URL/źródło przy sobie) —
+  sam fakt istnienia wiersza "RPW-CHECKPOINT: X/Y" nie jest silniejszym
+  dowodem niż dowolna inna samo-deklaracja. Skuteczność tej bramki (czy
+  faktycznie zmienia zachowanie, a nie tylko dodaje tekst) wymaga testu
+  analogicznego do F-113, nie jest tu domyślnie zakładana.
+- Wersja 1.5 → 1.6.
 
 **1.5 (2026-07-15c) — SCALENIE: KOTWICA-TEKSTOWA przeniesiona do shared/PRAWO-HARDGATE.md:**
 - Wykryto: mechanizm KOTWICA-TEKSTOWA (Text Fragment `#:~:text=`) powstał

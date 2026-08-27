@@ -1,7 +1,7 @@
 # MOD-FAKTY — Weryfikacja Zgodności Faktycznej Pisma ze Źródłem
 
-**Plik kanoniczny:** `/mnt/skills/user/shared/FAKTY_v2.md`
-Wywołuj przez: `view /mnt/skills/user/shared/FAKTY_v2.md`
+**Plik kanoniczny:** `shared/FAKTY_v2.md`
+Wywołuj przez: `view shared/FAKTY_v2.md`
 **Wersja:** 2.0 | Aktualizacja: 2026-06-01 (integracja FSL + LSL)
 
 ---
@@ -24,14 +24,14 @@ bez pokrycia w materiale — zanim pismo trafi do użytkownika.
 F0.1 — FACT-SOURCE-LOCK (FSL)
   Cel: klasyfikacja źródła każdego twierdzenia (FSL-A/B/C)
        ZANIM trafi do raportu F2.
-  Wywołaj: view /mnt/skills/user/shared/FACT-SOURCE-LOCK.md
+  Wywołaj: view shared/FACT-SOURCE-LOCK.md
   Wykonaj kroki FSL-1 do FSL-5 dla całego materiału wejściowego.
   Wynik FSL dostarcza klasyfikację do kroku F2.
 
 F0.2 — LEGAL-STATUS-LOCK (LSL) [wywołany automatycznie przez FSL]
   Cel: weryfikacja statusu prawnego każdego aktu
        (prawomocność, ostateczność, skuteczność, ważność).
-  Wywołaj: view /mnt/skills/user/shared/LEGAL-STATUS-LOCK.md
+  Wywołaj: view shared/LEGAL-STATUS-LOCK.md
   LSL uruchamia się automatycznie dla każdego twierdzenia FSL-B
   dotyczącego statusu prawnego aktu.
   Wynik LSL zastępuje tag FSL-B dla danego twierdzenia.

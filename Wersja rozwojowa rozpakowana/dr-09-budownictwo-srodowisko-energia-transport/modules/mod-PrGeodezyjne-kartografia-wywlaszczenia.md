@@ -11,8 +11,8 @@ Podstawą jest ISAP. Brzmienie przepisu, Dz.U., status aktu, tekst jednolity, no
 ✅ FAZA 3E ZAMKNIĘTA 2026-08-20 (F-40): po korekcie numerów t.j. (Prawo
 geodezyjne 2023.1752→2024.1151 t.j.; UGN 2024.1899→2026.399 t.j.)
 sprawdzono nowelizacje międzyokresowe. Prawo geodezyjne: 2 nowelizacje
-techniczne (Dz.U. 2024 poz. 1824 — wydłużenie vacatio dla map wektorowych do
-2027; Dz.U. 2025 poz. 1542 — porządkowanie tabel opłat/zakresu zbiorów
+techniczne (Dz.U. 2024.1824 — wydłużenie vacatio dla map wektorowych do
+2027; Dz.U. 2025.1542 — porządkowanie tabel opłat/zakresu zbiorów
 danych/rejestru cen nieruchomości) — ŻADNA nie dotyka treści
 wywłaszczeniowej/gospodarki nieruchomościami opisanej w tym module. UGN:
 przegląd obwieszczenia o t.j. 2026.399 wskazuje na nowelizacje techniczne
@@ -37,7 +37,7 @@ użytkownika — dotąd wspomniane tylko jako pojęcie, bez konkretnej treści)
 
 ```
 PODSTAWA: art. 112-142 ustawy o gospodarce nieruchomościami (ugn),
-  Dz.U. 2024 poz. 1145 t.j. — WYWŁASZCZENIE dopuszczalne TYLKO na cele
+  Dz.U.2024.1145 t.j. — WYWŁASZCZENIE dopuszczalne TYLKO na cele
   publiczne i za "słusznym odszkodowaniem" (zasada konstytucyjna)
 
 ODSZKODOWANIE:

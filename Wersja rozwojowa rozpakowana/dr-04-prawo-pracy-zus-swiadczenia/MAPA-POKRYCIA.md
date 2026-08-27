@@ -106,7 +106,7 @@ pogrzebowy, waloryzacja — praktycznie nieobecna.
 **Tematy przekrojowe (dobrze pokryte, spoza samych ustaw SUS/FUS):**
 podstawa wymiaru składek (rozporządzenie wykonawcze, inny akt) 🟢;
 emerytury czerwcowe 2009-2019 (odrębna ustawa, alert legislacyjny) 🟢;
-wyrok TK SK 140/20 🟢; reforma orzecznictwa ZUS 2026 (Dz.U. 2026 poz. 26) 🟢;
+wyrok TK SK 140/20 🟢; reforma orzecznictwa ZUS 2026 (Dz.U. 2026.26) 🟢;
 interpretacja indywidualna ZUS (art. 34 Prawa przedsiębiorców) 🟢; zasiłek
 pielęgnacyjny (ustawa o świadczeniach rodzinnych) 🟢; świadczenie
 rehabilitacyjne (ustawa zasiłkowa) 🟢; KRUS — osobny moduł.

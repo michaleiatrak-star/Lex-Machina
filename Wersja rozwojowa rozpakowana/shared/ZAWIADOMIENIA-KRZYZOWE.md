@@ -53,7 +53,7 @@ narażenie życia pracowników na niebezpieczeństwo z art. 220 KK) —
 ma obowiązek zawiadomić prokuratora/Policję na podstawie art. 304 §2
 KPK, NIEZALEŻNIE od własnego postępowania administracyjnego/
 wykroczeniowego prowadzonego w ramach ustawy o PIP. Zob. też
-`dr-04/modules/mod-ustawa-PIP-inspekcja-pracy.md` (sekcja o wymianie
+`dr-04-prawo-pracy-zus-swiadczenia/modules/mod-ustawa-PIP-inspekcja-pracy.md` (sekcja o wymianie
 danych PIP↔ZUS↔KAS — mechanizm ADMINISTRACYJNY, ODRĘBNY od obowiązku
 zawiadomienia karnego z art. 304 §2 KPK).
 
@@ -65,7 +65,7 @@ pospolitego — pranie pieniędzy, fałszerstwo), zawiadamia prokuratora.
 ⚠️ Sprawy STRICTE skarbowe (KKS) same KAS może częściowo prowadzić
 jako finansowy organ postępowania przygotowawczego — rozróżnij to od
 zawiadomienia o przestępstwie POSPOLITYM wykraczającym poza KKS.
-Zob. `dr-06/modules/mod-KAS-kontrola-celno-skarbowa.md`.
+Zob. `dr-06-podatki-finanse-publiczne-aml/modules/mod-KAS-kontrola-celno-skarbowa.md`.
 
 ### SĄD (w toku postępowania cywilnego/administracyjnego)
 Jeśli sąd cywilny/administracyjny w toku SWOJEGO postępowania

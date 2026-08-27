@@ -271,7 +271,7 @@ mechanizmu przeliczeniowego z art. 106e). W trakcie weryfikacji
 wykryto i skorygowano własną wstępną hipotezę o nieaktualności
 przeliczników art. 85 — po dodatkowym wyszukiwaniu potwierdzono,
 że przeliczniki 18,70%/7,41%/4,76% (stawki 23%/8%/5%) SĄ aktualne.
-Źródła: lexlege.pl (Rząd 2B, t.j. Dz.U. 2025 poz. 775, stan prawny
+Źródła: lexlege.pl (Rząd 2B, t.j. Dz.U.2025.0.775, stan prawny
 wprost oznaczony jako aktualny na 12.08.2026), przepisy.gofin.pl,
 poltax.pl, ifirma.pl. ⚠️ [NIEWERYFIKOWANE BEZPOŚREDNIO W ISAP] —
 ISAP niedostępny do web_fetch w tej sesji.

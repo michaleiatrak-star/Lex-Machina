@@ -5,7 +5,7 @@ Ordynacja podatkowa, Dz.U. 2026 poz. 622 t.j.
 
 Utworzony 2026-08-22 (F-83, priorytet #3 mapy pokrycia dr-06 — "najczęstsza,
 najmniej sformalizowana forma kontaktu z organem"). Zweryfikowane RZĄD 1:
-lexlege.pl, przepisy.gofin.pl (historia wersji do Dz.U. 2026 poz. 622), arslege.pl
+lexlege.pl, przepisy.gofin.pl (historia wersji do Dz.U.2026.622), arslege.pl
 — zgodne przy każdym cytowanym artykule.
 
 ## Akt prawny

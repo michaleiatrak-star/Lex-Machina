@@ -1,17 +1,13 @@
 ---
 name: shared
-version: "3.21"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.23"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
 type: library
 entrypoint: SKILL.md
 compatibility: "wszystkie skille prawne systemu"
-description: >-
-  Biblioteka plików kanonicznych systemu prawnych skilli — hardgate, walidacja,
-  definicje, terminy, moduły kancelaryjne. NIE jest samodzielnym skillem i NIE
-  odpowiada na zapytania użytkownika: moduły wczytują inne skille przez `view`.
-  Pełny spis modułów — tabele „Zawartość katalogu" w treści tego pliku.
+description: "Kanoniczna biblioteka Lex Machina: hardgate, walidacja, definicje, terminy i moduły wspólne. Nie odpowiada użytkownikowi samodzielnie; zasoby wczytują inne skille."
 dependencies:
   requires: []
   # `shared` z definicji powinien być warstwą bazową bez zależności
@@ -54,7 +50,10 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.21. ⛔ PEŁNA HISTORIA — WYŁĄCZNIE w references/CHANGELOG.md
+  Wersja bieżąca: 3.23 (2026-08-27): PRAWO-HARDGATE.md — nowa sekcja
+  "OBOWIĄZEK WIDOCZNEGO ZNACZNIKA W DOSTARCZONEJ ODPOWIEDZI", bezwarunkowa:
+  zamyka lukę między weryfikacją wykonaną w tle a znacznikiem widocznym przy
+  cytacie w dostarczonym tekście. ⛔ PEŁNA HISTORIA — WYŁĄCZNIE w references/CHANGELOG.md
   (standard 2026-08-20z4: jedna lokalizacja; zakaz sekcji changelogu w korpusie
   SKILL.md i zakaz pełnej listy wpisów w tym polu — pole to było już raz
   porządkowane, miało 111 linii).
@@ -65,6 +64,23 @@ changelog: |
   Skrót 3.18: pole changelog: w YAML miało 111 linii — wyniesione do references/.
 ---
 
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+`shared` pozostaje JEDYNYM kanonicznym SSOT. Adapter nie zmienia treści modułów prawnych, tylko sposób rozumienia operacji technicznych.
+
+1. `view shared/<plik>` oznacza świeży odczyt `<plik>` z rootu zainstalowanego skilla `shared`. Literalna ścieżka `/mnt/skills/user` nie jest wymagana. Obowiązkowego odczytu nie zastępuj pamięcią modelu.
+2. Udokumentowane pliki-mosty mogą wskazywać inny osobny skill. `view <skill>/<plik>` oznacza świeży odczyt zasobu z tego skilla przez mechanizm hosta. Brak obowiązkowego zasobu = fail-closed; NIE kopiuj go do `shared`.
+3. `web_search` / `web_fetch` oznaczają świeże wyszukanie lub odczyt źródła. Jeśli host ma inną nazwę narzędzia, użyj równoważnej funkcji. PRAWO-HARDGATE, hierarchia źródeł i statusy pozostają bez zmian.
+4. `/mnt/user-data/...` oznacza rzeczywiste pliki użytkownika dostępne w hoście; wymagany ponowny odczyt jest faktycznym odczytem źródła.
+5. `show_widget`, `present_files`, `create_file`, shell/Python i podobne operacje wykonuj równoważną natywną funkcją hosta, jeśli literalna nazwa nie istnieje. Nie pomijaj bramek jakości.
+6. `tools/` to kod integracyjny portalu. `extract_api_verification_log.py` przyjmuje neutralne `events` i zachowuje zgodność z Claude legacy, generycznymi tool-call oraz Responses-style.
+7. Ze względu na twardy limit 200 plików, 42 technicznych plików przykładowych serwerów MCP jest zachowanych bezstratnie w `tools/mcp-servers/mcp-servers-examples.zip` (SHA-256 `6b16d446e08ec5a3c401b371a7bf697e2b898bf2b903e2a1531a2ec818642756`). Gdy potrzebujesz kodu przykładowego serwera, rozpakuj ten plik; moduły promptowe nie zależą od jego rozwinięcia.
+
+**Zasada nadrzędna:** jeśli istniejąca instrukcja jest zrozumiała i wykonalna w bieżącym hoście, wykonaj ją bez konwersji. Adapter działa tylko na granicy runtime.
+
 # shared/ — Wspólne moduły systemu prawnych skilli
 
 Katalog zawiera pliki kanoniczne współdzielone przez wszystkie skille prawne.
@@ -74,6 +90,7 @@ Nie jest samodzielnym skillem — pełni rolę biblioteki referencji.
 
 | Plik | Rola |
 |------|------|
+| `UNIVERSAL-RUNTIME-ADAPTER.md` | Wspólny kontrakt runtime ChatGPT/Claude/Codex: zasoby, narzędzia, prywatność, fallbacki |
 | `PRAWO-HARDGATE.md` | ⛔ Globalny zakaz cytowania prawa/orzeczeń z pamięci — RDZEŃ, wczytaj przed każdym przepisem (zasada absolutna, PERMANENT GATE, hierarchia statusów, BRAMKA ANTY-FASADOWA, KROK 2B/2C). Podzielony 2026-08-23h, F-111: 967 → 501 l. |
 | `PRAWO-HARDGATE-ORZECZENIA.md` | ⛔ ZAŁĄCZNIK orzeczniczy tej samej bramki — wczytaj ZAWSZE, gdy w tekście ma stanąć SYGNATURA (procedura przed orzeczeniem, WTÓRNE-ŹRÓDŁO-STOP, KROK 5A/5B, warstwy uzasadnienia [1]/[2]/[3], self-check orzeczniczy). NIE jest samodzielny — rdzeń obowiązuje równolegle (dodane 2026-08-23h, F-111) |
 | `DOMAIN-LOCK.md` | ⛔ Bramka izolacji dziedzinowej — kontrola na WYJŚCIU, zakaz kwalifikacji spoza PRIMARY bez podstawy faktycznej (dodane 2026-08-23) |
@@ -113,16 +130,16 @@ Wszystkie pliki są kanoniczne — nie istnieją stuby ani kopie w innych lokali
 Każdy skill wczytuje pliki z tego katalogu bezpośrednio przez `view`:
 
 ```
-view /mnt/skills/user/shared/MOD-STEP-TRACKER.md  ← KROK 0-TRACKER (przed wszystkim — ST-INIT)
-view /mnt/skills/user/shared/MOD-REJESTR-POKRYCIA-JEDNOSTEK.md  ← RPK-INIT (gdy zbiór ≥10 ponumerowanych jednostek, np. seria kazusów)
-view /mnt/skills/user/shared/PRAWO-HARDGATE.md  ← wymagane przed każdym przepisem
-view /mnt/skills/user/shared/PRAWO-HARDGATE-ORZECZENIA.md  ← DODATKOWO, zawsze gdy pada SYGNATURA orzeczenia (F-111)
-view /mnt/skills/user/shared/HYBRID-VALIDATION.md
-view /mnt/skills/user/shared/INTAKE-GAP.md
-view /mnt/skills/user/shared/POST-VALIDATION.md
-view /mnt/skills/user/shared/terminy.md
-view /mnt/skills/user/shared/FAKTY_v2.md
-view /mnt/skills/user/shared/raport-sytuacyjny-integracja.md
+view shared/MOD-STEP-TRACKER.md  ← KROK 0-TRACKER (przed wszystkim — ST-INIT)
+view shared/MOD-REJESTR-POKRYCIA-JEDNOSTEK.md  ← RPK-INIT (gdy zbiór ≥10 ponumerowanych jednostek, np. seria kazusów)
+view shared/PRAWO-HARDGATE.md  ← wymagane przed każdym przepisem
+view shared/PRAWO-HARDGATE-ORZECZENIA.md  ← DODATKOWO, zawsze gdy pada SYGNATURA orzeczenia (F-111)
+view shared/HYBRID-VALIDATION.md
+view shared/INTAKE-GAP.md
+view shared/POST-VALIDATION.md
+view shared/terminy.md
+view shared/FAKTY_v2.md
+view shared/raport-sytuacyjny-integracja.md
 ```
 
 Nie wczytuj wszystkich naraz — tylko te potrzebne dla danego kroku.
@@ -146,7 +163,7 @@ Nie wczytuj wszystkich naraz — tylko te potrzebne dla danego kroku.
 
 - Wszystkie pliki w tym katalogu są **kanoniczne** — jedyna kopia w systemie
 - Stuby lokalne w katalogach poszczególnych skilli zostały usunięte
-- Skille wywołują pliki bezpośrednio przez `view /mnt/skills/user/shared/X.md`
+- Skille wywołują pliki bezpośrednio przez `view shared/X.md`
 - Nie twórz lokalnych kopii ani stubów — aktualizuj tylko ten katalog
 
 ## Moduły kancelaryjne v3.0 — obowiązkowe moduły współdzielone
@@ -188,53 +205,53 @@ Nie wczytuj wszystkich naraz — tylko te potrzebne dla danego kroku.
 Przy każdym piśmie gotowym do złożenia generator musi co najmniej wczytać:
 
 ```text
-view /mnt/skills/user/shared/TRYBY-PROCESOWE.md
-view /mnt/skills/user/shared/FORMAL-CHECK.md
-view /mnt/skills/user/shared/BRAKI-FORMALNE.md
-view /mnt/skills/user/shared/WARUNKI-SKUTECZNOSCI.md
-view /mnt/skills/user/shared/RISK-ASSESSMENT.md
-view /mnt/skills/user/shared/QUALITY-CHECK.md
+view shared/TRYBY-PROCESOWE.md
+view shared/FORMAL-CHECK.md
+view shared/BRAKI-FORMALNE.md
+view shared/WARUNKI-SKUTECZNOSCI.md
+view shared/RISK-ASSESSMENT.md
+view shared/QUALITY-CHECK.md
 ```
 
 Gdy występują terminy, dowody, orzecznictwo albo strategia, dodatkowo:
 
 ```text
-view /mnt/skills/user/shared/TERM-CALC.md
-view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md
-view /mnt/skills/user/shared/DOWODY-METODOLOGIA.md
-view /mnt/skills/user/shared/ORZECZENIA-HIERARCHIA.md
-view /mnt/skills/user/shared/ROSZCZENIA.md
-view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md
+view shared/TERM-CALC.md
+view shared/PREKLUZJA-DOWODOWA.md
+view shared/DOWODY-METODOLOGIA.md
+view shared/ORZECZENIA-HIERARCHIA.md
+view shared/ROSZCZENIA.md
+view shared/STRATEGIA-PROCESOWA.md
 ```
 
 Gdy pismo wymaga executive summary, metryki długości lub peer review:
 
 ```text
-view /mnt/skills/user/shared/MOD-INTRO.md           (pozew/apelacja/pismo >3 str.)
-view /mnt/skills/user/shared/MOD-KONCENTRACJA.md    (kontrola długości — zawsze)
-view /mnt/skills/user/shared/MOD-PEER-REVIEW.md     (gdy WPS>50k / ≥3 żądania / apelacja)
-view /mnt/skills/user/shared/MOD-DOKTRYNA.md        (gdy cytowanie komentarzy w W2)
-view /mnt/skills/user/shared/MOD-TIMING.md          (gdy pytanie o timing złożenia)
+view shared/MOD-INTRO.md           (pozew/apelacja/pismo >3 str.)
+view shared/MOD-KONCENTRACJA.md    (kontrola długości — zawsze)
+view shared/MOD-PEER-REVIEW.md     (gdy WPS>50k / ≥3 żądania / apelacja)
+view shared/MOD-DOKTRYNA.md        (gdy cytowanie komentarzy w W2)
+view shared/MOD-TIMING.md          (gdy pytanie o timing złożenia)
 ```
 
 Przed W1.3 (eliminacja tez bez pokrycia) i w trakcie W1.2c-PRE (karta dowodowa), obowiązkowo:
 
 ```text
-view /mnt/skills/user/shared/MOD-ELIMINACJA-TEZ.md  (⛔ W1.2a-POST, po CLAIM-VALIDATION)
-view /mnt/skills/user/shared/MOD-KARTA-DOWODU.md    (⛔ W1.2c-PRE, po SD-SKAN)
+view shared/MOD-ELIMINACJA-TEZ.md  (⛔ W1.2a-POST, po CLAIM-VALIDATION)
+view shared/MOD-KARTA-DOWODU.md    (⛔ W1.2c-PRE, po SD-SKAN)
 ```
 
 W W2.2 (redakcja każdego bloku uzasadnienia), obowiązkowo w tej kolejności:
 
 ```text
-view /mnt/skills/user/shared/MOD-BUDOWA-ARGUMENTU.md    (⛔ każdy akapit uzasadnienia)
-view /mnt/skills/user/shared/MOD-KOSZT-ODPOWIEDZI.md    (⛔ każde główne twierdzenie)
-view /mnt/skills/user/shared/MOD-SKUTEK-PROCESOWY.md    (⛔ koniec bloku klasy A/B)
-view /mnt/skills/user/shared/MOD-MIKROPODSUMOWANIA.md   (⛔ koniec każdego rozdziału)
+view shared/MOD-BUDOWA-ARGUMENTU.md    (⛔ każdy akapit uzasadnienia)
+view shared/MOD-KOSZT-ODPOWIEDZI.md    (⛔ każde główne twierdzenie)
+view shared/MOD-SKUTEK-PROCESOWY.md    (⛔ koniec bloku klasy A/B)
+view shared/MOD-MIKROPODSUMOWANIA.md   (⛔ koniec każdego rozdziału)
 ```
 
 Po W2 (projekt pisma gotowy), przed W3/AUDYT-KOŃCOWY, obowiązkowo:
 
 ```text
-view /mnt/skills/user/shared/MOD-STRESS-TEST.md     (⛔ symulacja odpowiedzi pełnomocnika pozwanego)
+view shared/MOD-STRESS-TEST.md     (⛔ symulacja odpowiedzi pełnomocnika pozwanego)
 ```

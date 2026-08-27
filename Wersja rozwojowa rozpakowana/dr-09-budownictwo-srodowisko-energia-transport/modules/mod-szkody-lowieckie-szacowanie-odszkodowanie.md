@@ -11,7 +11,7 @@ prawie łowieckim: spory rolnik ↔ koło łowieckie.
 
 > ⛔ HARDGATE — `isap.sejm.gov.pl` blokuje `web_fetch` (ROBOTS_DISALLOWED).
 > Brzmienie ustalone ze źródeł Rząd 2 (arslege.pl `k539/s6338`, lexlege.pl,
-> sip.lex.pl — zgodne, sygnowane „Dz.U.2025.0.539 t.j."). Potwierdź t.j.  <!-- zapis źródła cytowany dosłownie — CELOWO nieujednolicony (F-125, 2026-08-24d) -->
+> sip.lex.pl — zgodne, sygnowane „Dz.U.2025.0.539 t.j."). Potwierdź t.j.
 > ręcznie w ISAP przed pismem.
 
 > 🔴 **PUŁAPKA ŹRÓDŁOWA — art. 46b JEST UCHYLONY.** Serwisy Rząd 2 renderują
@@ -323,7 +323,7 @@ powództwo do sądu: 3 MIESIĄCE             wypłata: 30 dni od doręczenia dec
 
 - **Rząd 2:** arslege.pl `k539/s6338` — pełny Rozdz. 9 (art. 46-50);
   lexlege.pl `art-46`, `art-46e`; sip.lex.pl `prawo-lowieckie/roz-9` —
-  trzy niezależne źródła, treść zgodna, wszystkie sygnowane „Dz.U. 2025.539 t.j."  <!-- zapis źródła cytowany dosłownie — CELOWO nieujednolicony (F-125, 2026-08-24d) -->
+  trzy niezależne źródła, treść zgodna, wszystkie sygnowane „Dz.U. 2025.539 t.j."
 - **Rząd 1 (pośrednio):** t.j. Dz.U. 2025 poz. 539 zgodny z `dr-09/MAPA-AKTOW.md`
   (ISAP WDU20250000539 + ELI, weryfikacja 2026-08-14b, F-41).
 

@@ -2,7 +2,7 @@
 
 **Data wdrożenia:** 2026-05-28
 
-> ⛔ HARD GATE — wczytaj view /mnt/skills/user/shared/PRAWO-HARDGATE.md przed pierwszym przepisem w każdej odpowiedzi.
+> ⛔ HARD GATE — wczytaj view shared/PRAWO-HARDGATE.md przed pierwszym przepisem w każdej odpowiedzi.
 
 ## Zasada nadrzędna
 

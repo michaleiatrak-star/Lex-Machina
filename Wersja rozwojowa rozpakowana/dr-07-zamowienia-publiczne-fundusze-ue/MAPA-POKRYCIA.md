@@ -63,7 +63,7 @@ wszystkie dziesięć plików ma realną, specyficzną dla PZP treść.
 | II, Rozdz. 6 | **Unieważnienie postępowania** | 255-258 | 🟢 NAPRAWIONE 2026-08-22 | `mod-PZP-dzial-II-kwalifikacja-kryteria-uniewaznienie.md` sekcja 4 |
 | II, pozostałe | Wybór najkorzystniejszej oferty poza kryteriami (formalności wyboru) | ok. 244-254, 259-265 | 🔴 | Ostatnia pozostała luka w Dziale II — sam wybór (rozstrzygnięcie, zawiadomienie o wyborze) nadal bez treści |
 | III | Postępowanie klasyczne < progi UE | 266–310 | 🟡 | Tryb podstawowy z 3 wariantami (275,276,281,286,296,297) opisany; procedura krok po kroku dla podprogowych nieopracowana |
-| IV | Szczególne instrumenty (umowa ramowa, DSZ, konkurs, partnerstwo innowacyjne) | 311–361 | 🔴 śladowo | Tylko wzmiankowane nazwy, bez treści proceduralnej |
+| IV | Szczególne instrumenty (umowa ramowa, DSZ, konkurs, partnerstwo innowacyjne) | 311–361 | ✅ NAPRAWIONE 2026-08-22 (poz. #3) | `mod-PZP-dzial-IV-szczegolne-instrumenty.md` — umowa ramowa (311-315), dynamiczny system zakupów (316-324), konkurs (325-358, w tym jedyny obligatoryjny przypadek — projektowanie architektoniczne), usługi społeczne (359-361, próg 750 000 EUR) |
 | V | **Zamówienia sektorowe** | 362–394 | 🟢 | `mod-PZP-dzial-V-VI-sektorowe-obronne-infrastruktura-krytyczna` Część A — definicja zamawiającego sektorowego, zakres, wyższe progi |
 | VI | **Obronność/bezpieczeństwo + infrastruktura krytyczna** | 395–430 | 🟢 | Ten sam moduł, Część B — w tym art. 131a |
 | VII | **Umowa i jej wykonanie** | 431–465 | 🟢 | `mod-PZP-wykonanie-umowy-compliance` — compliance SWZ/OPZ, podwykonawstwo (462-475), zabezpieczenie (449-453); + moduł KIO: art. 450,454,455,457,459,464,465 |
@@ -76,14 +76,14 @@ wszystkie dziesięć plików ma realną, specyficzną dla PZP treść.
 
 **Tematy przekrojowe (dobrze pokryte):** fundusze UE — podwójny reżim
 (zasada konkurencyjności, kwalifikowalność, korekty/"taryfikator") 🟢;
-certyfikacja wykonawców (nowa instytucja, Dz.U. 2025 poz. 1235, od 12.07.2026)
+certyfikacja wykonawców (nowa instytucja, Dz.U. 2025.1235, od 12.07.2026)
 🟢; progi wartości zamówień (aktualizowana tabela 2026-2027) 🟢; zdalne
 rozprawy przed KIO 🟢.
 
 **Zaktualizowana rekomendowana kolejność uzupełniania:**
 1. ~~Dział II — kwalifikacja podmiotowa, otwarcie/badanie ofert, kryteria oceny, unieważnienie~~ ✅ NAPRAWIONE 2026-08-22 (poza wyborem oferty poza kryteriami — pozostaje mała luka)
 2. ~~Dział IX dokończenie — przebieg postępowania odwoławczego przed KIO~~ ✅ NAPRAWIONE 2026-08-22
-3. **Dział IV — szczególne instrumenty (umowa ramowa, DSZ, konkurs, partnerstwo innowacyjne)** — następny w kolejności
+3. ~~Dział IV — szczególne instrumenty (umowa ramowa, DSZ, konkurs, partnerstwo innowacyjne)~~ ✅ NAPRAWIONE 2026-08-22
 4. Dział III — pełna procedura postępowań podprogowych (266-310)
 5. Dział VIII — organy właściwe (Prezes UZP, KRZP, Rada Zamówień Publicznych)
 6. Dział I, Rozdz. 7-8 — komunikacja i dokumentowanie postępowania

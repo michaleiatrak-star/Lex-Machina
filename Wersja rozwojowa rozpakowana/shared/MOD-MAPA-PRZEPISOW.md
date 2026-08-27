@@ -174,7 +174,7 @@ GRANICA: jeśli użytkownik pyta o przepis z INNEJ dziedziny niż dziedzina
 
 DELEGACJA DO ANALIZY GŁĘBOKIEJ: jeśli użytkownik PO otrzymaniu mapowania
   prosi o "pełną analizę tego przepisu" / "przesłanki" / "orzecznictwo" —
-  → view /mnt/skills/user/analizator-przepisow-v2/SKILL.md
+  → view analizator-przepisow-v2/SKILL.md
   (MOD-MAPA-PRZEPISOW nie zastępuje analizator-przepisow-v2 — jest punktem
   wejścia, który może do niego eskalować).
 ```

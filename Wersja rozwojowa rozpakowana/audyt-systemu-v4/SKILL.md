@@ -1,7 +1,6 @@
 ---
 name: audyt-systemu-v4
-description: Orkiestrator audytu jakości, spójności i bezpieczeństwa systemu prawniczych skilli AI, obejmujący kontrolę rejestrów, map Dz.U., treści merytorycznej, propagacji nowelizacji i bramek jakości.
-version: "6.18"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY od 6.10: niecytowane `6.10` YAML
+version: "6.13"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY od 6.10: niecytowane `6.10` YAML
                   # parsuje jako float 6.1 — czyli numer NIŻSZY niż 6.9, co cicho
                   # odwraca porządek wersji. Wykryte przy walidacji 2026-08-20z.
                   # Każda kolejna wersja z dwucyfrowym minor — też w cudzysłowie.
@@ -20,23 +19,11 @@ widgets:
   - widgets/WIDGET-MENU.md        # interaktywne menu wielokrotnego wyboru
 references:
   - references/AUDIT-JOURNAL.md
-  - references/CHANGELOG.md   # ⚡ REJESTROWANE 2026-08-23g (F-124) — plik-sierota mimo że ZASADA 15
-                                          # czyni go JEDYNĄ lokalizacją kanoniczną historii wersji tego skilla
-                                          # i mimo że drzewo w sekcji STRUKTURA KATALOGU już go wymieniało;
-                                          # dokładnie ten sam wzorzec co F-80, tylko odwrotny kierunek rozjazdu
-  - references/F-104-lista-robocza-roczniki-starsze.md   # lista robocza F-104 dla roczników 2013-2025
-                                          # (70 pozycji z T11) — REJESTROWANE 2026-08-23g (F-124), plik-sierota
   - references/WARN-OTWARTE.md   # rejestr żywy TYLKO otwartych flag (WARN + strukturalne) — dodane 2026-07-07, ZASADA 10; ⚡ od 2026-08-15w zaczyna się TABLICĄ STERUJĄCĄ (indeks wszystkich flag + następny krok w jednym zdaniu) — czytaj ją PIERWSZĄ przy pytaniu „co jest do zrobienia"
-  - references/SPROSTOWANIE-LM-2026-08-23.md   # dokument do wysłania autorowi raportów TEST1-3 — realizacja F-116 część 3/3, bez treści proceduralnej systemu — dodane 2026-08-23f
   - references/CHECKLIST-DEDUP.md   # mapa pojęć → lokalizacje (5 not, NOTA-6 ORPHAN dodana 06-14g)
   - references/mapa_dzu_2026-08-21.md   # ⭐ AKTUALNA mapa Dz.U. (transza 1 F-104: +3 t.j. rocznika 2026,
                                           # 2 statusy → PREV, 1 naprawiony błąd klasy F-82 z 2 znacznikami ⚠️ ALERT)
   - references/mapa_dzu_2026-07-15.md   # POPRZEDNIA generacja (sync 2026-08-13) — zachowana jako materiał historyczny
-  - references/PLAN-TESTU-BRAMEK-F113.md   # protokół testu SKUTECZNOŚCI bramek z GRUPĄ KONTROLNĄ
-                                          # (F-113, część projektowa, 2026-08-24). Odpowiada na pytanie,
-                                          # którego `grep` nie rozstrzyga: czy bramka ZMIENIA ZACHOWANIE,
-                                          # czy tylko jest obecna w pliku. Zawiera zakaz podawania kryteriów
-                                          # w prompcie, trzy komórki środowiskowe, pozycje-pułapki i progi orzekania
   - references/REGRESSION-TEST-PLAN.md   # zestaw testów regresyjnych T1-T9, T11, T12, T13 (T11 — sekcja 11, 2026-08-15z; T12 — sekcja 12, 2026-08-20z; T13 próg długości — sekcja 13, 2026-08-21), v1.2 (dodane 2026-07-21) — NAJPIERW zarejestrowany tutaj po odkryciu że plan istniał bez wpisu w SKILL.md
   - references/SYNC-DZU-AUTOMATYCZNY.md   # narzędzie WSPIERAJĄCE FAZĘ 3 — automatyzacja wykrywania nowych pozycji Dz.U./M.P. (wprowadzone 2026-07-13, skonsolidowane z osobnego skilla 2026-07-13f) — REJESTROWANE 2026-08-15 po wykryciu jako plik-sierota (użytkownik przesłał starą wersję ZIP i zapytał o funkcję scheduled task; plik istniał na dysku, ale nigdy nie trafił do tego frontmatter)
   - references/HARMONOGRAM-CRON.md   # przykłady harmonogramu (cron / GitHub Actions) do adaptacji przez developera — powiązane z SYNC-DZU-AUTOMATYCZNY.md — REJESTROWANE 2026-08-15, ten sam powód co wyżej
@@ -69,14 +56,6 @@ scripts:
                                           # obserwacja O-3 — powstał po tym, jak naruszenie w mod-KC-spadki
                                           # (1036 l.) przetrwało do ręcznego skanu ad hoc, bo system miał
                                           # 12 testów na rejestry/wersje/mapy i ZERO na długość
-  - scripts/ocena_transkryptow_f113.py    # narzędzie do protokołu F-113: anonimizacja przebiegów
-                                          # (ocena Ślepa), karta ocen, liczenie Δ między ramionami.
-                                          # ⛔ NIE ocenia transkryptów automatycznie — świadomie, patrz docstring
-  - scripts/check_description.py          # T14 — OBECNOŚĆ i długość pola `description:` w SKILL.md.
-                                          # KRYTYCZNY, dodany 2026-08-24, flaga F-130 — powstał po tym, jak `audyt-systemu-v4`
-                                          # okazał się JEDYNYM skillem w systemie bez tego pola, a FAZA 2C nie mogła
-                                          # tego zobaczyć: jej skrypt dla pliku BEZ pola wypisywał `0` i klasyfikował
-                                          # wynik jako ✅ OK. Brak pola raportowany jako stan najzdrowszy.
   - scripts/check_sync_aktow.py           # T11 — synchronizacja AKTÓW między lokalną MAPA-AKTOW, ROUTING-MAP i mapą Dz.U. (WYSOKI, heurystyka→WARN, dodany 2026-08-15z, flaga F-89) — wykrywa BRAK pozycji, czego T3 (rozbieżność numeru) i check_rejestracja_modulow (moduły) nie robią
   - scripts/run_regression_suite.py       # orkiestrator — uruchamia T1/T2/T3/T6/T7/T8 w jednym przebiegu
   - scripts/ci_check_shared.py            # T6/T7 — zerwane odwołania / duplikaty (już istniejący, wywoływany przez orkiestrator)
@@ -343,7 +322,7 @@ Dodaj tu wzorce wg historii napraw z `references/CHANGELOG.md` i `references/CHE
 przetrwało 2 miesiące i ~90 sesji, bo FAZA 2A sprawdza tylko ścieżki `view`, a to
 była nazwa w prozie — wzorzec do uwzględnienia przy rozbudowie testu T6.)*
 
-### 2C — Pole description: OBECNOŚĆ + długość (limit 1024 znaków)
+### 2C — Description length (limit 1024 znaków)
 
 Wczytaj moduł i uruchom procedurę:
 
@@ -351,21 +330,7 @@ Wczytaj moduł i uruchom procedurę:
 view /mnt/skills/user/audyt-systemu-v4/modules/MOD-DESCRIPTION.md
 ```
 
-Kontrola automatyczna (test **T14**, zalecana zamiast ręcznego liczenia):
-
-```bash
-python3 /mnt/skills/user/audyt-systemu-v4/scripts/check_description.py /mnt/skills/user
-```
-
-**Brak pola / pole puste = CRIT** (F-130). Przekroczenie 1024 = **CRIT**.
-Zakres 901–1024 = **WARN**.
-
-> ⛔ **ROZSZERZENIE 2026-08-24 (F-130).** Ta faza sprawdzała dotąd WYŁĄCZNIE
-> długość — i przez to była ślepa na jedyny przypadek, który naprawdę wystąpił:
-> **brak pola w ogóle**. Skrypt z `MOD-DESCRIPTION.md` dla takiego pliku wypisywał
-> `0` znaków i klasyfikował go jako ✅ OK. `audyt-systemu-v4` — ten plik — był
-> JEDYNYM skillem w systemie bez `description:`, przez nieustaloną liczbę sesji,
-> i żadna faza tego nie zgłosiła. Naprawione na wskazanie użytkownika.
+Przekroczenie 1024 = **CRIT**. Zakres 901–1024 = **WARN**.
 
 ---
 
@@ -828,38 +793,16 @@ z WARN-OTWARTE.md, dodaj pełny wpis do AUDIT-JOURNAL.md.
    > były w ogóle pełnymi skillami — zbiorczy ZIP z wyselekcjonowanymi
    > plikami z 5-8 różnych skili naraz, bez weryfikacji treści względem
    > źródła. "Liczba się zgadza" nie jest dowodem, że TREŚĆ w archiwum jest
-   > aktualna i nieuszkodzona. **SKORYGOWANE 2026-08-23f, F-112** — ścieżka
-   > docelowa w poleceniu poniżej była błędna od 2026-07-25: wskazywała
-   > oryginał `/mnt/skills/user/<skill>` sprzed edycji, co czyni krok
-   > logicznie niespełnialnym dla jakiejkolwiek faktycznej naprawy — treść
-   > zip MUSI różnić się od nieedytowanego oryginału, bo inaczej nic nie
-   > naprawiono. Komentarz w kodzie ("porównaj z aktualnym stanem na dysku")
-   > od początku wskazywał właściwy cel; sama ścieżka w poleceniu była
-   > niezgodna z własnym komentarzem.):**
+   > aktualna i nieuszkodzona.):**
    >
    > ```bash
-   > # Po spakowaniu, PRZED present_files — DWA osobne porównania, różny cel:
-   >
-   > # (a) zip vs katalog roboczy PO edycji — potwierdza, że zip wiernie
-   > #     odzwierciedla to, co faktycznie zamierzono dostarczyć (brak
-   > #     uszkodzenia przy pakowaniu, brak pominiętych zmian)
+   > # Po spakowaniu, PRZED present_files — rozpakuj i porównaj TREŚĆ
+   > # każdego pliku w ZIP z aktualnym stanem na dysku:
    > rm -rf /tmp/verify_<skill> && mkdir -p /tmp/verify_<skill>
    > unzip -q /mnt/user-data/outputs/<skill>.zip -d /tmp/verify_<skill>
-   > diff -rq /tmp/verify_<skill>/<skill> /home/claude/full_skills/<skill>
-   > # Musi zwrócić PUSTY wynik. Różnica = błąd pakowania, wstrzymaj dostawę.
-   >
-   > # (b) zip vs oryginał sprzed edycji — pokazuje ZAKRES zmian; różnica
-   > #     MUSI być dokładnie zamierzona (te pliki, te fragmenty, nic więcej)
    > diff -rq /tmp/verify_<skill>/<skill> /mnt/skills/user/<skill>
-   > # NIE musi być pusty — wypisz różniące się pliki w odpowiedzi jako
-   > # potwierdzenie zakresu. Plik spoza zamierzonego zakresu w tym diff = CRIT.
+   > # Musi zwrócić PUSTY wynik. Jakakolwiek różnica = CRIT, wstrzymaj dostawę.
    > ```
-   >
-   > **Dwuwersowa dostawa w tej samej rozmowie (wiele tur naprawczych):**
-   > krok (b) dodatkowo wobec POPRZEDNIEGO dostarczonego zip-a (nie tylko
-   > oryginału z `/mnt/skills/user`) — potwierdza, że różnica między kolejnymi
-   > dostawami to WYŁĄCZNIE przyrost tej tury, bez cofnięcia wcześniejszych
-   > napraw.
    >
    > **KROK 0 — ILE SKILLI, TYLE ZIPÓW (przypomnienie, już obowiązywało,
    > ponownie naruszone 2026-07-25):** gdy sesja dotyczy naprawy wielu
@@ -1056,67 +999,6 @@ z WARN-OTWARTE.md, dodaj pełny wpis do AUDIT-JOURNAL.md.
     = **WARN**, odnotować w WARN-OTWARTE.md z docelowym podziałem do
     wykonania.
 
-14. ⛔ **ZASADA BRAMKI WYJŚCIOWEJ ZGŁOSZENIA (AUDIT-CLAIM-GATE, dodana
-    2026-08-23g, flaga F-121) — skill audytowy stosuje wobec własnych
-    zgłoszeń dokładnie ten kontrakt weryfikacyjny, którego pilnuje u
-    innych.**
-
-    **Przesłanka (TEST1 §5.2):** trzy diagnozy samoaudytu zostały obalone
-    przez recenzenta zewnętrznego, bo powstały bez weryfikacji w źródle —
-    termin „30 dni" zgłoszony jako prawdopodobna halucynacja (podczas gdy
-    termin ten ma podstawę ustawową i wymagał tylko sprawdzenia zakresu
-    zastosowania), status niedzieli opisany jako jednoznaczny mimo że nie
-    jest, oraz `ROBOTS_DISALLOWED` zakwalifikowany jako „błąd krytyczny
-    infrastruktury" cudzego systemu. **Fałszywy alarm audytu kosztuje tyle
-    samo, co błąd przeoczony** — kieruje sesję naprawczą na nieistniejący
-    problem i podważa zaufanie do pozostałych zgłoszeń w tym samym
-    raporcie, w tym tych trafnych.
-
-    **Reguła:** żadne zgłoszenie audytowe (wiersz w `WARN-OTWARTE.md`,
-    punkt raportu, akapit w `AUDIT-JOURNAL.md`, wiersz raportu różnic) NIE
-    opuszcza skilla w postaci TWIERDZENIA, jeśli nie niesie łącznie trzech
-    pól:
-
-    ```
-    (1) STATUS  — wg rejestru statusów w shared/PRAWO-HARDGATE.md:
-        ✅ [VER: źródło, data]        — potwierdzone w Rzędzie 1
-        🟨 [KOTWICA-URZĘDOWA]         — potwierdzone kotwicą urzędową
-        ⚠️ [NIEWERYFIKOWANE — HIPOTEZA] — NIEpotwierdzone; wolno zgłosić
-                                         WYŁĄCZNIE z tym oznaczeniem
-        (F-116 ANULOWANA — brak osobnej karty statusów, rejestr jest
-        i pozostaje w shared/PRAWO-HARDGATE.md)
-    (2) IDENTYFIKATOR ŹRÓDŁA — plik + numer linii, albo numer Dz.U. +
-        artykuł, albo URL z datą odczytu. „Widziałem gdzieś w systemie"
-        NIE jest identyfikatorem.
-    (3) REPRODUKCJA — polecenie lub sekwencja, którą czytelnik odtworzy
-        zgłoszenie samodzielnie (`grep -n …`, `python3 scripts/…`, „otwórz
-        plik X w. N"). Zgłoszenie nieodtwarzalne przez drugą osobę jest
-        opinią, nie ustaleniem audytowym.
-    ```
-
-    **Zakaz szczególny — KWALIFIKACJA CUDZEGO BŁĘDU:** określenia „błąd
-    krytyczny", „halucynacja", „awaria infrastruktury" opisują PRZYCZYNĘ,
-    a przyczyna prawie nigdy nie jest obserwowalna z zewnątrz. Zgłaszaj
-    OBJAW (co dokładnie zwróciło narzędzie, czego zabrakło w odpowiedzi) i
-    dopiero po nim — osobno oznaczoną — hipotezę przyczyny. `ROBOTS_DISALLOWED`
-    to zaobserwowany objaw; „krytyczna awaria serwisu X" to hipoteza.
-
-    **Egzekwowanie:** `references/FORMAT-RAPORTU-ROZNIC.md` § 4 wymusza te
-    trzy pola w raporcie różnic. Dla pozostałych wyjść bramka jest ręczna —
-    przed zamknięciem sesji przejrzyj każde NOWE zgłoszenie i sprawdź
-    obecność (1)(2)(3). Naruszenie = **WARN** (nie CRIT: zgłoszenie bez
-    pól nie niszczy danych, tylko wprowadza w błąd), odnotowywane jak
-    każda inna flaga.
-
-    ⚠️ **Ograniczenie znane i jawne:** ta bramka, jak każda bramka
-    samo-raportująca (por. F-119, `KROK 3A` w `prawny-router-v3`), jest
-    wiarygodna tylko wtedy, gdy pole (2) da się sprawdzić NIEZALEŻNIE.
-    Sama deklaracja „zweryfikowano" bez identyfikatora, który druga osoba
-    otworzy, jest fasadą tej samej klasy co usterka z TEST2. Skuteczność
-    bramki mierzy dopiero test z grupą kontrolną z **F-113** — do jej
-    zamknięcia obecność ZASADY 14 w pliku dowodzi wyłącznie obecności
-    reguły, nie zmiany zachowania.
-
 ---
 
 ## STRUKTURA KATALOGU
@@ -1129,14 +1011,8 @@ z WARN-OTWARTE.md, dodaj pełny wpis do AUDIT-JOURNAL.md.
 > to ten sam wzorzec luki, który wykrywa `check_rejestracja_modulow.py`).
 
 ```
-audyt-systemu-v4/                               ← 58 plików (stan 2026-08-24f, F-113: +PLAN-TESTU-BRAMEK-F113.md
-│                                                  i +ocena_transkryptow_f113.py; wcześniej 56 po F-130:
-│                                                  wcześniej 55 — korekta F-124:
-│                                                  drzewo deklarowało 53 przy 55 na dysku i „16 skryptów"
-│                                                  przy 18; pominięty był też README.md w korzeniu)
+audyt-systemu-v4/                               ← 53 pliki (stan 2026-08-23, +F-108-lista-MS-egzamin-2026.md)
 ├── SKILL.md                                    ← orchestrator (ten plik)
-├── README.md                                   ← opis skilla dla czytelnika ludzkiego (NIE wczytywany
-│                                                  przez żadną fazę; dopisany do drzewa 2026-08-23g)
 ├── modules/                                    ← 5 modułów, pełna lista w YAML `modules:`
 │   ├── MOD-INTERLINIE.md                       ← zbędne puste linie (FAZA 2D-1)
 │   ├── MOD-WSTAWKI.md                          ← wstawki opisowe (FAZA 2D-2)
@@ -1145,12 +1021,12 @@ audyt-systemu-v4/                               ← 58 plików (stan 2026-08-24f
 │   └── MOD-PROPAGACJA-NOWELIZACJI.md           ← propagacja nowelizacji przez CAŁY system
 ├── widgets/
 │   └── WIDGET-MENU.md                          ← menu interaktywne (FAZA 0B)
-├── scripts/                                    ← 20 plików: testy T1-T4, T8, T9, T11, T12, T13, T14,
+├── scripts/                                    ← 16 plików: testy T1-T4, T8, T9, T11, T12, T13,
 │   │                                             orkiestrator, ci_check_shared (T6/T7),
 │   │                                             check_rejestracja_modulow, sync ELI (3 pliki),
 │   │                                             2 skrypty .sh, README.md — pełna lista w YAML
 │   └── …                                         `scripts:`
-└── references/                                 ← 30 plików
+└── references/                                 ← 29 plików
     ├── AUDIT-JOURNAL.md                        ← dziennik audytów, ~44 tys. linii, 2,6 MB
     ├── WARN-OTWARTE.md                         ← rejestr żywy otwartych flag (ZASADA 10)
     ├── CHANGELOG.md                            ← historia wersji orkiestratora (F-78)
@@ -1158,10 +1034,6 @@ audyt-systemu-v4/                               ← 58 plików (stan 2026-08-24f
     ├── REGRESSION-TEST-PLAN.md                 ← testy T1-T9 + T11 + T12 + T13
     ├── SYNC-DZU-AUTOMATYCZNY.md                ← + HARMONOGRAM-CRON.md, FORMAT-RAPORTU-ROZNIC.md
     ├── SCHEDULED-TASK-COWORK.md                ← POZYCJA 11 menu (FAZA 0C)
-    ├── SPROSTOWANIE-LM-2026-08-23.md           ← dokument dla autora raportów TEST1-3
-    ├── F-108-lista-MS-egzamin-2026.md          ← lista robocza F-108 (wykaz 52 aktów MS)
-    ├── F-104-lista-robocza-mapa-dzu.md         ← lista robocza F-104, rocznik 2026
-    ├── F-104-lista-robocza-roczniki-starsze.md ← lista robocza F-104, roczniki 2013-2025 (F-124)
     ├── mapa_dzu_2026-08-21.md                  ← mapa Dz.U. AKTUALNA (transza 1 F-104)
     ├── mapa_dzu_2026-07-15 / 07-04 / 07-02 / 06-14.md  ← POPRZEDNIE generacje, cytowane w dzienniku
     └── raporty-pokrycia-2026-08-13/            ← 10 raportów + indeks = 11 plików
@@ -1169,8 +1041,7 @@ audyt-systemu-v4/                               ← 58 plików (stan 2026-08-24f
 
 ---
 
-*Wersja: 6.18 | Ostatnia aktualizacja: 2026-08-23i (F-115 — moduł self-checku; F-126 otwarta; wcześniej 08-23h (F-111 — podział PRAWO-HARDGATE; wcześniej 08-23g: (ZASADA 14 AUDIT-CLAIM-GATE — F-121;
-rejestr YAML i drzewo doprowadzone do stanu dysku — F-124; naprawa parserów T11/T3 — F-125). Sekcja CHANGELOG poniżej
+*Wersja: 6.13 | Ostatnia aktualizacja: 2026-08-20z4. Sekcja CHANGELOG poniżej
 skrócona 2026-08-20 (F-78) — pełna historia w references/CHANGELOG.md.*
 *(Stopka podawała „5.0 | 2026-07-04" przy `version: 6.8` w YAML — rozjazd
 9 wersji, naprawiony 2026-08-20y. **Stopkę aktualizuj razem z polem `version`**;

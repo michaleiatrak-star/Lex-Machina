@@ -14,7 +14,7 @@ FUNDAMENTALNY dział Kodeksu (Dział II Tytułu I)
 
 ```
 ⭐⭐⭐ ART. 23 — CZTERY PODSTAWOWE OBOWIĄZKI (dosłowny tekst,
-  potwierdzony BEZPOŚREDNIO OpenLEX, aktualny t.j. Dz.U. 2026 poz. 236):
+  potwierdzony BEZPOŚREDNIO OpenLEX, aktualny t.j. Dz.U.2026.236):
   "Małżonkowie MAJĄ równe PRAWA i obowiązki W małżeństwie. SĄ
   obowiązani DO wspólnego POŻYCIA, do WZAJEMNEJ pomocy i
   WIERNOŚCI oraz DO współdziałania DLA dobra RODZINY, którą
@@ -101,7 +101,7 @@ FUNDAMENTALNY dział Kodeksu (Dział II Tytułu I)
   O WINIE" niżej W tym MODULE
 
 Potwierdzone w 8+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
-tekst art. 23-29 (OpenLEX/sip.lex.pl [aktualny t.j. Dz.U. 2026 poz. 236],
+tekst art. 23-29 (OpenLEX/sip.lex.pl [aktualny t.j. Dz.U.2026.236],
 isap.sejm.gov.pl, e-prawnik.pl [×2], przepisy.gofin.pl), ORAZ
 publikacja akademicka (cejsh.icm.edu.pl, Roczniki Nauk Prawnych,
 analiza obowiązku wzajemnej pomocy) i wpia.uwm.edu.pl.

@@ -151,7 +151,7 @@ W3.5 HYBRID-VALIDATION
 W3.6 Pismo finalne
   ↓
 W3.7 MOD-PEER-REVIEW (gdy warunek aktywacji spełniony)
-  view /mnt/skills/user/shared/MOD-PEER-REVIEW.md
+  view shared/MOD-PEER-REVIEW.md
   → Wykonaj 4 role
   → Wyświetl RAPORT MOD-PEER-REVIEW
   → Wynik PEER-OK lub PEER-UWAGI → generuj .docx

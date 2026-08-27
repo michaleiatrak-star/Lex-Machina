@@ -3,24 +3,8 @@ name: przewodnik-prawny-v2
 version: "2.6"
 type: ux-guide
 status: production
-description: |
-  Przewodnik Prawny v2 — gospodarz całej sesji prawnej.
-  Stosuj ZAWSZE gdy użytkownik: nie wie od czego zacząć w sprawie prawnej,
-  pyta "co mam zrobić" / "jak to działa" / "czy mam szansę", dostarcza
-  dokument i chce wiedzieć czy jest poprawny, pyta o znaczenie pojęć lub
-  chce sprawdzić cytaty/podstawy prawne, jest zagubiony i potrzebuje
-  prowadzenia krok po kroku, wcześniej użył innego skilla i nie rozumie
-  wyniku, pyta "co możesz dla mnie zrobić" / "jakie masz narzędzia",
-  chce trybu Q&A, jest prawnikiem i pyta jak używać systemu, chce
-  sprawdzić gotowe pismo (KROK F.0) lub chce jego redakcji (MOD-REDAKCJA),
-  chce "surowej analizy" / "bez interpretacji" / samych źródeł i cytatów
-  z lokalizacją bez oceny czy rekomendacji AI (Zasada 8, v2.5).
-  Przewodnik = GOSPODARZ — sam zbiera dane, wywołuje skille, tłumaczy
-  wyniki, proponuje dalej. Wywołuje: wszystkie skille systemu prawnego.
-compatibility:
-  tools:
-    - web_search
-    - web_fetch
+description: "Przewodnik prawny i fallback routera: pomaga zidentyfikować problem, właściwą ścieżkę postępowania, potrzebne dokumenty i kolejny specjalistyczny skill."
+compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_document_and_interactive_ui"
 changelog:
   - "2.5: Zasada 8 — TRYB SUROWEJ ANALIZY (references/TRYB-SUROWA-ANALIZA.md).
     Orthogonalny do LAIK/PRAWNIK: wyłącza kwalifikację/ocenę/rekomendację,
@@ -34,6 +18,25 @@ changelog:
     Integracja z MOD-REDAKCJA (pisma-procesowe-v3) gdy użytkownik prosi
     o poprawki po raporcie. Nowe pozycje menu LAIK/PRAWNIK."
 ---
+
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Metodologia merytoryczna, routing, hard gate’y, checklisty, schematy danych i kryteria finalizacji tego skilla pozostają bez zmian.
+
+1. `view przewodnik-prawny-v2/<plik>` oraz względne `view modules/...`, `view references/...`, `view assets/...` oznaczają świeży odczyt lokalnego zasobu tego skilla. Literalny katalog `/mnt/skills/user` nie jest wymagany.
+2. `view shared/<plik>` oznacza odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tej paczki. Brak obowiązkowego zasobu = fail-closed.
+3. `view <inny-skill>/<plik>` oznacza aktywację/odczyt osobnego skilla. Nie vendoryzuj innych skilli.
+4. `web_search` / `web_fetch` oznaczają świeże wyszukanie i odczyt źródła przez równoważną funkcję hosta; zachowaj istniejące wymogi źródeł oficjalnych i statusów weryfikacji.
+5. `present_files`, `create_file` i odwołania do `HOST_CAPABILITY[document_generation]` / generatorów PDF oznaczają użycie natywnej funkcji dokumentowej bieżącego hosta. Brak literalnej nazwy narzędzia nie zwalnia z HYBRID-VALIDATION, POST-VALIDATION, STEP-TRACKER ani innych bramek.
+6. `show_widget`, `visualize:read_me`, `.jsx` i HTML są legacy/natywnymi wariantami UI. Jeśli host ma własny renderer interaktywny, użyj równoważnego widoku zachowującego ten sam model danych i funkcje; jeśli nie, zastosuj pełny fallback tekstowy/plikowy.
+7. `/mnt/user-data/...` oznacza rzeczywiste pliki użytkownika dostępne w hoście; wymagany ponowny odczyt musi być faktycznym odczytem pliku.
+8. Shell/Python/Cowork i podobne operacje traktuj jako techniki pomocnicze. Jeżeli host ich nie udostępnia, użyj natywnej funkcji równoważnej, bez fikcyjnego raportowania wykonania.
+
+**Zasada nadrzędna:** jeśli instrukcja jest już zrozumiała i wykonalna w bieżącym hoście, wykonaj ją bez konwersji. Adapter działa tylko na granicy runtime.
+
 
 # Przewodnik Prawny v2 — Gospodarz Sesji
 
@@ -107,7 +110,7 @@ terminu jako pojęcia, Zasada 0 dotyczy każdej kolejnej wiadomości.)
 **Zasada 3 — Weryfikacja zawsze online + HARDGATE**
 Każdy przepis, artykuł, termin → web_search/web_fetch ISAP przed podaniem.
 ⛔ PRZED pierwszym przytoczeniem przepisu lub sygnatury w sesji:
-`view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
+`view shared/PRAWO-HARDGATE.md`
 Brak dostępu do ISAP → oznacz ⚠ NIEWERYFIKOWANE i wskaż isap.sejm.gov.pl.
 Zakaz podawania sygnatur orzeczeń z pamięci — zawsze oznacz [PRZYKŁADOWA] lub weryfikuj online.
 
@@ -201,7 +204,7 @@ Walidacja pisma → KROK F
 ## KROK M — MENU MOŻLIWOŚCI SYSTEMU
 
 ```
-view /mnt/skills/user/przewodnik-prawny-v2/references/KROK-M.md
+view przewodnik-prawny-v2/references/KROK-M.md
 ```
 
 ---
@@ -259,7 +262,7 @@ Implikacja procesowa: [co to oznacza praktycznie dla sprawy]
 
 ```
 ⛔ Jeśli PRAWO-HARDGATE nie był jeszcze wczytany w tej sesji:
-view /mnt/skills/user/shared/PRAWO-HARDGATE.md
+view shared/PRAWO-HARDGATE.md
 
 OBOWIĄZKOWO przed każdą odpowiedzią zawierającą przepis/termin/kwotę:
 
@@ -329,16 +332,16 @@ Po wyborze → wyjaśnij co zrobisz (1 zdanie) → wywołaj skill → tłumacz w
 
 Umowa / OWU / regulamin:
   "Sprawdzam każdą klauzulę pod kątem prawa i balansu..."
-  → view /mnt/skills/user/analizator-umow-v1/SKILL.md
+  → view analizator-umow-v1/SKILL.md
   → Wynik: tłumacz przez KROK H (język laika) lub raport techniczny (prawnik)
 
 Pismo procesowe / wyrok / nakaz:
   → SPRAWDŹ TERMIN ZAWITY NAJPIERW (KROK G)
-  → view /mnt/skills/user/analiza-sadowa-v6/SKILL.md
+  → view analiza-sadowa-v6/SKILL.md
   → Wynik: tłumacz przez KROK H
 
 Dowody / dokumenty do sprawy:
-  → view /mnt/skills/user/analizator-dowodow-v3/SKILL.md
+  → view analizator-dowodow-v3/SKILL.md
   → Wynik: tłumacz przez KROK H
 ```
 
@@ -436,7 +439,7 @@ Często kończy sprawę bez sądu. Chcesz żebym pomógł je napisać?"
 
 PROSTE (jedno żądanie, jedna podstawa prawna):
   Wyjaśnij: "To pismo możemy napisać szybko. Potrzebuję kilku danych..."
-  → view /mnt/skills/user/pisma-proste-v2/SKILL.md
+  → view pisma-proste-v2/SKILL.md
   → INTAKE sekwencyjny (jedno pytanie na raz z wyjaśnieniem po co)
   → MOD-FAKTY (jeśli są materiały źródłowe)
   → HYBRID-VALIDATION → docx-skill → present_files
@@ -444,7 +447,7 @@ PROSTE (jedno żądanie, jedna podstawa prawna):
 ZŁOŻONE (wiele wątków, orzecznictwo, obalanie strony przeciwnej):
   Wyjaśnij: "To bardziej złożone — pismo wymaga analizy prawnej
   i wyroków sądów. Przeprowadzę Cię krok po kroku..."
-  → view /mnt/skills/user/pisma-procesowe-v3/SKILL.md
+  → view pisma-procesowe-v3/SKILL.md
   → INTAKE + KROK D.2
 ```
 
@@ -452,7 +455,7 @@ ZŁOŻONE (wiele wątków, orzecznictwo, obalanie strony przeciwnej):
 
 ```
 ⛔ Przed rozpoczęciem zbierania danych:
-view /mnt/skills/user/shared/INTAKE-GAP.md
+view shared/INTAKE-GAP.md
 
 Dla każdego wymaganego pola — PRZED pytaniem wyjaśnij po co:
 
@@ -476,7 +479,7 @@ Pola opcjonalne → "(możesz pominąć — wpisz 'dalej')"
 
 ```
 Gdy użytkownik dostarczył dokumenty jako materiał źródłowy:
-→ view /mnt/skills/user/shared/FAKTY_v2.md
+→ view shared/FAKTY_v2.md
 → "Sprawdzam teraz czy każdy fakt który trafi do pisma
    ma potwierdzenie w Twoich dokumentach..."
 → Wynik ✅ wymagany przed generowaniem
@@ -496,7 +499,7 @@ Brak dokumentów:
    📌 Zachowaj potwierdzenie złożenia
    📌 Termin: do [data]"
 3. Zaproponuj Raport Sytuacyjny jeśli sprawa złożona:
-   view /mnt/skills/user/shared/raport-sytuacyjny-integracja.md
+   view shared/raport-sytuacyjny-integracja.md
 4. PRAWNIK — zaproponuj raport dla klienta:
    "Czy wygenerować raport statusu sprawy dla klienta?
    → Powiedz 'raport dla klienta' żebym przygotował dokument zewnętrzny."
@@ -570,7 +573,7 @@ Pełnomocnictwo:
 ## KROK F — WALIDACJA PISMA UŻYTKOWNIKA
 
 ```
-view /mnt/skills/user/przewodnik-prawny-v2/references/KROK-F.md
+view przewodnik-prawny-v2/references/KROK-F.md
 ```
 
 ---
@@ -579,8 +582,8 @@ view /mnt/skills/user/przewodnik-prawny-v2/references/KROK-F.md
 
 ```
 ⛔ PRZED podaniem jakiegokolwiek terminu:
-view /mnt/skills/user/shared/PRAWO-HARDGATE.md
-view /mnt/skills/user/shared/terminy.md
+view shared/PRAWO-HARDGATE.md
+view shared/terminy.md
 
 ⚠ ZANIM cokolwiek — gdy pismo ma datę lub użytkownik wspomina decyzję/wyrok:
 
@@ -718,52 +721,52 @@ SYTUACJA → CO WYJAŚNIAM PRZED → WYWOŁANIE → PO WYNIKU
 Analiza umowy/OWU/ugody
   → "Sprawdzam każdą klauzulę jak prawnik — co jest zakazane,
      co krzywdzące i co zmienić."
-  → view /mnt/skills/user/analizator-umow-v1/SKILL.md → KROK H → KROK I
+  → view analizator-umow-v1/SKILL.md → KROK H → KROK I
 
 Analiza szans / pozycja procesowa
   → "Sprawdzam sprawę z 3 perspektyw: sędzia, Twój prawnik,
      prawnik przeciwnika. Pełny obraz."
-  → view /mnt/skills/user/analiza-sadowa-v6/SKILL.md → KROK H → KROK I
+  → view analiza-sadowa-v6/SKILL.md → KROK H → KROK I
 
 Analiza dowodów
   → "Oceniam każdy dowód — jak mocny, czy legalny,
      czego brakuje. Pokrycie przesłanek."
-  → view /mnt/skills/user/analizator-dowodow-v3/SKILL.md → KROK H → KROK I
+  → view analizator-dowodow-v3/SKILL.md → KROK H → KROK I
 
 Pismo proste (1 wątek, 1 podstawa)
   → "Pismo możemy napisać szybko. Pytam jedno po jednym."
-  → view /mnt/skills/user/pisma-proste-v2/SKILL.md → INTAKE D.2 → D.3 → D.4
+  → view pisma-proste-v2/SKILL.md → INTAKE D.2 → D.3 → D.4
 
 Pismo złożone (wielowątkowe, apelacja, pozew)
   → "Złożone pismo — analiza prawna + wyroki + weryfikacja.
      Krok po kroku."
-  → view /mnt/skills/user/pisma-procesowe-v3/SKILL.md → INTAKE D.2 → D.3 → D.4
+  → view pisma-procesowe-v3/SKILL.md → INTAKE D.2 → D.3 → D.4
 
 Redakcja/poprawa GOTOWEGO pisma (styl, ton, długość — nie nowa argumentacja)
   → "Poprawię styl i formę Twojego pisma — ton [stanowczy/neutralny/
      negocjacyjny], długość, logikę. Nie zmieniam żądań, przepisów,
      dat ani kwot bez Twojej zgody."
-  → view /mnt/skills/user/pisma-procesowe-v3/modules/MOD-REDAKCJA.md → KROK I
+  → view pisma-procesowe-v3/modules/MOD-REDAKCJA.md → KROK I
 
 Orzecznictwo
   → "Szukam prawdziwych wyroków sądów. Tylko zweryfikowane —
      żadnych wymyślonych. Każda sygnatura sprawdzona online."
-  → view /mnt/skills/user/orzeczenia-sadowe-v2/SKILL.md → KROK H → KROK I
+  → view orzeczenia-sadowe-v2/SKILL.md → KROK H → KROK I
 
 Analiza przepisu
   → "Sprawdzam art. X w oficjalnym systemie prawa — przesłanki,
      wykładnia, orzecznictwo SN/SA do tego przepisu."
-  → view /mnt/skills/user/analizator-przepisow-v2/SKILL.md → KROK H → KROK I
+  → view analizator-przepisow-v2/SKILL.md → KROK H → KROK I
 
 Przesłuchanie świadka
   → "Przygotowuję listę pytań + strategię. Mogę też zasymulować
      zachowanie świadka żebyś mógł/a ćwiczyć."
-  → view /mnt/skills/user/przesluchanie-swiadkow-v2-min90/SKILL.md → KROK H → KROK I
+  → view przesluchanie-swiadkow-v2-min90/SKILL.md → KROK H → KROK I
 
 Raport sytuacyjny sprawy
   → "Tworzę przegląd całej sprawy — co wiadomo, co brakuje,
      co pilne."
-  → view /mnt/skills/user/raport-sytuacyjny-v2/SKILL.md → widget → KROK I
+  → view raport-sytuacyjny-v2/SKILL.md → widget → KROK I
 
 Q&A / pytania użytkownika
   → KROK Q — bez wywołania zewnętrznego skilla
@@ -810,7 +813,7 @@ Q&A / pytania użytkownika
 □ Czy zebrałem fakty z Q&A i przekazałem do PRIMARY skilla?
 □ Czy disclaimer jest ostatnim elementem odpowiedzi z analizą?
 □ [ANTY-FASADA + AF-6] Wykonaj self-check antyfasadowy z modułu kanonicznego:
-    view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
+    view shared/SELF-CHECK-ANTY-FASADA.md
   ⛔ Treść listy NIE jest tu kopiowana (F-115, 2026-08-23i). Poprzednia kopia
     miała 1 z 2 pozycji: gdy F-117 dodała AF-6 do źródła, kopie nie zostały
     zaktualizowane. Jedno miejsce prawdy = jedno miejsce aktualizacji.
@@ -819,12 +822,12 @@ Q&A / pytania użytkownika
   albo odwrotnie)? NIE → OK. TAK → (a) konkretny FAKT wypełniający znamię,
   nie skojarzenie tematyczne? (b) właściwy DR wczytany w TEJ odpowiedzi?
   (c) przepis przeszedł PRAWO-HARDGATE w TEJ odpowiedzi? Którekolwiek NIE →
-  ⛔ USUŃ powołanie.  → `view /mnt/skills/user/shared/DOMAIN-LOCK.md`
+  ⛔ USUŃ powołanie.  → `view shared/DOMAIN-LOCK.md`
 □ [RATE-COMPLETENESS] Występują odsetki / waloryzacja / wskaźnik zmienny
   w czasie? NIE → OK. TAK → przedział zapisany + reżim rozstrzygnięty
   (KC vs transakcje handlowe) + szereg podokresów BEZ LUK + znacznik na
   KAŻDYM wierszu? NIE → nie podawaj kwoty łącznej, pokaż tabelę z ⬛.
-  → `view /mnt/skills/user/shared/RATE-COMPLETENESS.md`
+  → `view shared/RATE-COMPLETENESS.md`
 □ [STATUSY] Każdy przepis ma znacznik z ZAMKNIĘTEJ hierarchii czterech:
   ✅ [VER] · 🟨 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
   Etykieta spoza tej listy = naruszenie hard gate (PRAWO-HARDGATE v2.5).
@@ -843,7 +846,7 @@ Q&A / pytania użytkownika
  (nie tylko KROK H po analizie), wpisany do SELF-CHECK per-wiadomość.*
 *Wywołuje: analizator-umow-v1 · analiza-sadowa-v6 · analizator-dowodow-v3*
 *           pisma-procesowe-v3 · pisma-proste-v2 · orzeczenia-sadowe-v2*
-*           analizator-przepisow-v2 · przesluchanie-swiadkow-v2 · raport-sytuacyjny-v2*
+*           analizator-przepisow-v2 · przesluchanie-swiadkow-v2-min90 · raport-sytuacyjny-v2*
 *           raport-klienta-v1 (tryb PRAWNIK, po wygenerowaniu pisma — D.4)*
 *Prawo: isap.sejm.gov.pl · Orzeczenia: sn.pl, orzeczenia.ms.gov.pl*
 *Tryb Q&A: weryfikacja online przy każdej odpowiedzi — ZAKAZ odpowiedzi z pamięci*

@@ -36,7 +36,7 @@ w toku postępowania upadłościowego. NIE dodawaj treści pod numerami
 267-305 — te przepisy nie istnieją. Zweryfikowane: przepisy.gofin.pl
 (pełny spis treści z jawnym "Tytuł VI. (uchylony)" dla każdego z 5
 działów), lexlege.pl (4× potwierdzone przy różnych artykułach 266a-266e),
-dlajurysty.pl, sip.lex.pl (numer w źródłach wtórnych: t.j. Dz.U. 2025 poz. 614
+dlajurysty.pl, sip.lex.pl (numer w źródłach wtórnych: t.j. Dz.U.2025.614
 — ⚡ POPRAWIONE 2026-08-21: aktualny t.j. to **Dz.U. 2026 poz. 913**,
 zgodnie z nagłówkiem tego modułu; 2025.614 był podstawą konsolidowaną,
 już nieaktualny samodzielnie — treść artykułów 266a-266e NIE zmienia
@@ -111,7 +111,7 @@ postępowania) = POZIOME, chyba że na liście wyjątków art. 222 ust. 1a.
 ```
 ✅ NOWA SEKCJA 2026-08-21 (F-86, kontynuacja) — Dział I dotąd
 nieopisany. Zweryfikowane: arslege.pl, lexlege.pl (numer w źródłach
-wtórnych: t.j. Dz.U. 2025 poz. 614 — ⚡ POPRAWIONE 2026-08-21: aktualny t.j.
+wtórnych: t.j. Dz.U.2025.0.614 — ⚡ POPRAWIONE 2026-08-21: aktualny t.j.
 to **Dz.U. 2026 poz. 913**, zgodnie z nagłówkiem tego modułu; treść
 art. 306-315 NIE zmienia się przez samą zmianę numeru t.j., ale
 CYTOWANIE wymaga korekty — to samo zastrzeżenie już odnotowane wyżej

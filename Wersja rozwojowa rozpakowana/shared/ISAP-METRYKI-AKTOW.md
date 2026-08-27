@@ -22,7 +22,7 @@
 |---|---:|---|---|
 | Kodeks postępowania administracyjnego | Dz.U. 2025 poz. 1691 | aktualny na dzień audytu | ogólna procedura administracyjna; nie stosować do podatków, gdy Ordynacja stanowi lex specialis |
 | Prawo o postępowaniu przed sądami administracyjnymi | Dz.U. 2026 poz. 143 | aktualny na dzień audytu | skargi do WSA, skargi kasacyjne do NSA, bezczynność i przewlekłość |
-| Ustawa o postępowaniu egzekucyjnym w administracji | Dz.U. 2026 poz. 268; tekst jednolity uwzględnia zmiany ogłoszone przed 18.02.2026 — ✅ POTWIERDZONE bezpośrednio na ISAP (Rząd 1) — ⚠️ UWAGA (zsynchronizowane 2026-08-09 z prawny-router-v3/ISAP-METRYKI-AKTOW.md): TA sama ustawa ma JUŻ TRZY kolejne, PÓŹNIEJSZE nowelizacje: Dz.U. 2026 poz. 516, poz. 739, poz. 1003 — sam numer "poz. 268" NIE WYSTARCZY do cytowania AKTUALNEGO stanu | aktualny na dzień audytu | odrębny tryb od egzekucji sądowej |
+| Ustawa o postępowaniu egzekucyjnym w administracji | Dz.U. 2026 poz. 268; tekst jednolity uwzględnia zmiany ogłoszone przed 18.02.2026 — ✅ POTWIERDZONE bezpośrednio na ISAP (Rząd 1) — ⚠️ UWAGA (zsynchronizowane 2026-08-09 z prawny-router-v3/references/ISAP-METRYKI-AKTOW.md): TA sama ustawa ma JUŻ TRZY kolejne, PÓŹNIEJSZE nowelizacje: Dz.U. 2026 poz. 516, poz. 739, poz. 1003 — sam numer "poz. 268" NIE WYSTARCZY do cytowania AKTUALNEGO stanu | aktualny na dzień audytu | odrębny tryb od egzekucji sądowej |
 | Ustawa o dostępie do informacji publicznej | tekst ujednolicony ISAP `D20011198Lj.pdf` | wymaga sprawdzenia Dz.U. przed cytowaniem | tryb wnioskowy, bezczynność, odmowa decyzją administracyjną |
 
 ---

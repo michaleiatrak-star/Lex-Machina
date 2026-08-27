@@ -1,6 +1,6 @@
 # MOD-PORCJOWANIE-DOWODOW — Zarządzanie oknem kontekstowym przy dużych zbiorach dowodów
 
-> **Plik:** `/mnt/skills/user/shared/MOD-PORCJOWANIE-DOWODOW.md`
+> **Plik:** `shared/MOD-PORCJOWANIE-DOWODOW.md`
 > **Wersja:** 1.0.0 (2026-06-21)
 > **Status:** PRODUKCJA — plik kanoniczny shared
 > **Pozycja w pipeline:**

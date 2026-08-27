@@ -1,6 +1,6 @@
 # MOD-ATAK-NA-SWIADKA — Podważanie świadka jako ogniwa łańcucha dowodowego
 
-> **Plik:** `/mnt/skills/user/shared/MOD-ATAK-NA-SWIADKA.md`
+> **Plik:** `shared/MOD-ATAK-NA-SWIADKA.md`
 > **Wersja:** 1.1.0 (2026-07-02) — naprawa WARN-22: dodano FAZA 6 (specyfika
 > dziedzinowa DR-02/03/04/05), zastępująca nieaktualne odwołania CHECKLIST-DEDUP
 > do nieistniejącej struktury §CZĘŚĆ I-IV / TA-1..TA-9 (patrz HISTORIA ZMIAN)
@@ -367,7 +367,7 @@ Sygnały typowe (poglądowe, do rozwinięcia w DR-03):
 
 ```
 Pełna specyfika: dr-04-prawo-pracy-zus-swiadczenia/modules/
-  mod-KP-art943-mobbing-dyskryminacja.md (częściowo — świadkowie mobbingu)
+  `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-KP-mobbing-dyskryminacja.md` (częściowo — świadkowie mobbingu)
   — pełne rozwinięcie SW-specyfiki: DO OPRACOWANIA.
 
 Sygnały typowe (poglądowe):

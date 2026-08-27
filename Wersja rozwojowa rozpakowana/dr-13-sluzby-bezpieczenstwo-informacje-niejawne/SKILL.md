@@ -1,6 +1,6 @@
 ---
 name: dr-13-sluzby-bezpieczenstwo-informacje-niejawne
-version: "3.8"
+version: 3.7
 description: |
   DR-13: Służby, Bezpieczeństwo, Informacje Niejawne
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -21,25 +21,6 @@ description: |
 **Prawo służb mundurowych było wielokrotnie nowelizowane w 2024–2025.**
 Dz.U. 2025 poz. 1366 zmienia równocześnie: Policję, SG, PSP, ABW, AW, SKW, SWW, SOP.
 Ustawa o obronie Ojczyzny (Dz.U. 2022 poz. 655) nie ma nowego t.j. — weryfikuj każdą nowelizację.
-
-
-> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
-> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
->
-> ```
-> view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
-> ```
->
-> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
-> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
-> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
-> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
-> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
-> zmianie brzmienia).
->
-> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
-> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
-> oznaczenia, tylko je wymusza.
 
 ---
 

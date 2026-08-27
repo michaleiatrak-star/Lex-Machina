@@ -5,9 +5,9 @@ obligatoryjna/screening, Natura 2000, kary administracyjne WIOŚ, odpowiedzialno
 za szkody w środowisku, predykcja wyniku. Uzupełnia `mod-POS-prawo-ochrony-srodowiska.md`.
 
 **Weryfikacja:** 2026-06-05
-**Akty:** UOOŚiS: Dz.U. 2024 poz. 1112 t.j. | POŚ: Dz.U. 2025 poz. 647 t.j. + Dz.U. 2025 poz. 1812
+**Akty:** UOOŚiS: Dz.U.2024.1112 t.j. | POŚ: Dz.U.2025.647 t.j. + Dz.U.2025.1812
          Ochrona przyrody: **Dz.U. 2026 poz. 13 t.j. z 08.01.2026** ✅ VER: 2026-06-05
-         KK: Dz.U. 2025 poz. 383 t.j. | KPA: Dz.U. 2025 poz. 1691 t.j.
+         KK: Dz.U.2025.383 t.j. | KPA: Dz.U.2025.1691 t.j.
 
 ---
 
@@ -101,7 +101,7 @@ ORGANIZACJA EKOLOGICZNA (art. 44 u.u.i.ś.):
 
 ## KARY ADMINISTRACYJNE — WIOŚ
 
-### Administracyjne kary pieniężne (POŚ art. 298–318 — Dz.U. 2025 poz. 647)
+### Administracyjne kary pieniężne (POŚ art. 298–318 — Dz.U.2025.647)
 
 ```
 NARUSZENIA KARALNE ADMINISTRACYJNIE (m.in.):

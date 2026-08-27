@@ -1,20 +1,43 @@
-# CHANGELOG — analizator-przepisow-v2
+# CHANGELOG — Analizator Przepisów v2
 
-- 2.6 (2026-08-24, sesja audytowa audyt-systemu-v4, flaga **F-127**): NAPRAWA wstawki F-115 z sesji 08-23i — blok `SELF-CHECK ANTY-FASADA` był wstawiony WEWNĄTRZ bloku ``` w sekcji „Krok 0.2 — Wybierz ścieżkę analizy", przez co renderował się jako tekst kodu, a nie jako bramka. Blok przeniesiony pod kotwicę HARD GATE na początku pliku. Klasa błędu: REGUŁA 5 bloku HARDGATE-AUDYT (`audyt-systemu-v4/references/WARN-OTWARTE.md`) — wstawianie treści bez kontroli struktury docelowej. Kontrola po naprawie: parzystość znaczników ``` zachowana, spis nagłówków identyczny przed/po. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-24.
-- 2.6 (2026-08-24, sesja audytowa audyt-systemu-v4, flaga **F-126**): sekcja `## CHANGELOG` usunięta z korpusu `SKILL.md`, wpisy przeniesione 1:1 do tego pliku (ZASADA 15 — jedna lokalizacja kanoniczna historii). W korpusie zostało wyłącznie odesłanie. Treści NIE odtwarzano z pamięci — przeniesiony został istniejący tekst. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-24.
-
-- 2.5 (2026-08-23i, sesja audytowa audyt-systemu-v4, flaga F-115): self-check ANTY-FASADA podłączony jako WYWOŁANIE modułu kanonicznego `shared/SELF-CHECK-ANTY-FASADA.md`, bramka dodana — skill jej NIE MIAŁ mimo że cytuje przepisy najczęściej w systemie (P1). Powód modułu zamiast kopii: gdy F-117 dodała regułę AF-6 i drugą pozycję listy do `shared/PRAWO-HARDGATE.md`, żadna z 7 istniejących kopii nie została zaktualizowana — źródło miało 2 pozycje, kopie 1. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-23i.
-
-> Lokalizacja kanoniczna historii wersji (ZASADA 15). Plik założony 2026-08-23i;
-> wersje wcześniejsze nieodtworzone — ślad w audyt-systemu-v4/references/AUDIT-JOURNAL.md.
+> Pełna historia zmian tego skilla. **Jedyna lokalizacja kanoniczna** — w SKILL.md
+> historii nie ma; jest tam wyłącznie krótki skrót w polu `changelog:` frontmatteru.
+> Standard ujednolicony 2026-08-20z4 dla całego systemu: plik `references/CHANGELOG.md`,
+> nigdy sekcja w korpusie SKILL.md ani pełna lista w YAML.
+> Wczytuj TYLKO gdy potrzebujesz historii konkretnej naprawy — przy audycie, przy
+> pytaniu „dlaczego to tak działa", przy regresji. W normalnym toku pracy zbędny.
 
 ---
 
-## Wpisy przeniesione z korpusu SKILL.md (F-126, 2026-08-24)
+## 2.5 (2026-08-20z4) — ujednolicenie standardu: historia zmian wyłącznie w tym pliku
 
-> Tekst poniżej przeniesiony 1:1 z sekcji `## CHANGELOG` w `SKILL.md`.
-> Nic nie przeredagowano ani nie odtworzono z pamięci — przeniesienie
-> istniejącego tekstu, zgodnie z zakazem z wiersza flagi F-126.
+Treść przeniesiona z korpusu SKILL.md 1:1. Przy okazji naprawiony NIESPARSOWALNY
+frontmatter: pole `description` zawierało niecytowane dwukropki (`v2:`, `v2.3:`),
+przez co YAML nie ładował się w ogóle — `yaml.safe_load` zwracał błąd „mapping values
+are not allowed here". Usterka ZASTANA (obecna też w stanie pierwotnym), wykryta
+kontrolą parsowalności w tej sesji. Naprawa: blok `>-` zamiast skalara jednoliniowego.
+
+**Standard systemowy wprowadzony tego dnia:** pełna historia zmian każdego skilla
+mieszka w `references/CHANGELOG.md` — nigdy w sekcji `## CHANGELOG` korpusu SKILL.md
+i nigdy jako pełna lista wpisów w polu `changelog:` frontmatteru. W SKILL.md zostaje
+wyłącznie kilkulinijkowy skrót bieżącej wersji z odesłaniem do tego pliku.
+
+**Dlaczego to nie jest kosmetyka:** rozproszenie historii między trzy lokalizacje było
+BEZPOŚREDNIĄ przyczyną fałszywych wyników testu T12 w sesji 2026-08-20z3 — test szukał
+wpisów w `references/`, nie znajdował ich (bo leżały w SKILL.md) i raportował luki,
+których nie było. Jedna lokalizacja kanoniczna usuwa całą tę klasę błędu.
+Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis `AUDYT-2026-08-20z4`.
+
+---
+
+## HISTORIA PRZENIESIONA Z SKILL.md (2026-08-20z4, ujednolicenie standardu)
+
+> Poniższa treść pochodzi z sekcji `## CHANGELOG` w korpusie SKILL.md. Przeniesiona **1:1, bez zmiany ani jednego
+> zdania**. Powód: historia zmian ma mieszkać w jednym miejscu — w tym pliku —
+> a nie być rozproszona między korpusem SKILL.md, frontmatterem i `references/`.
+> Rozproszenie było źródłem rozjazdów wykrytych flagami F-101 i F-102: test T12
+> szukał historii w `references/` i raportował fałszywe luki tam, gdzie wpisy
+> istniały, tylko w SKILL.md.
 
 **2.4 (2026-07-15):**
 - **DEDUP — wydzielono hierarchię źródeł (RZĄD 1/2A/2B/3)** z Modułu 1 do

@@ -1,6 +1,6 @@
 # DOMAIN-LOCK — bramka izolacji dziedzinowej (kontrola na WYJŚCIU)
 
-> **Plik:** `/mnt/skills/user/shared/DOMAIN-LOCK.md`
+> **Plik:** `shared/DOMAIN-LOCK.md`
 > **Wersja:** 1.0 (2026-08-23)
 > **Status:** KANONICZNY — hard gate, wykonywany PRZED wysłaniem każdej
 > odpowiedzi zawierającej analizę prawną.
@@ -17,8 +17,8 @@ przeprowadził tor cywilny — i **dołożył kwalifikację z art. 286 KK
 i bez weryfikacji przepisu.
 
 Diagnoza przyczyny (audyt 2026-08-23): istniejąca bramka w
-`prawny-router-v3/references/SELF-CHECK.md` brzmiała *„Sprawa karna →
-wczytałem mod-N-karne.md → mod-N zdecydował: kwalifikator TAK/NIE?"*.
+`prawny-router-v3/references/SELF-CHECK.md` brzmiała historycznie *„Sprawa karna →
+wczytałem dawny moduł prawa karnego → dawny moduł zdecydował: kwalifikator TAK/NIE?"*. W aktualnej wersji alias ten jest zastąpiony kanonicznym `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md`.
 Jest **kluczowana wejściem** — klasyfikacją sprawy w KROKU 1. W sprawie
 zaklasyfikowanej jako cywilna odpowiedź na to pytanie brzmi „to nie jest
 sprawa karna", checkbox zamyka się PUSTO, a przepis KK w treści odpowiedzi
@@ -57,8 +57,8 @@ DL-3  Trafienie? → zadaj TRZY pytania. Każde musi mieć odpowiedź TAK:
           ⛔ "zachowywał się konfliktowo" NIE jest faktem wskazującym
              na znęcanie
       (b) Czy w TEJ odpowiedzi wczytano właściwy skill dziedzinowy
-          (dla karnego: dr-03 → mod-KK-KPK-framework-karne.md, a gdy
-          mod-N wskaże TAK — mod-KK-kwalifikator-karnomaterialny.md)?
+          (dla karnego: `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md`, a gdy
+          framework wskaże TAK — `mod-KK-kwalifikator-karnomaterialny.md`)?
       (c) Czy przepis przeszedł pełną weryfikację wg
           `shared/PRAWO-HARDGATE.md` w TEJ odpowiedzi?
 

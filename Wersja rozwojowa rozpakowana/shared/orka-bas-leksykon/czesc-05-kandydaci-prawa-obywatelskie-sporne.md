@@ -99,7 +99,7 @@ CO NIE WRACA z zatarciem: stanowiska, odznaczenia, stopień wojskowy, uprawnieni
   zawodowe regulowane (lekarz, adwokat, notariusz) — wymagają odrębnych czynności
 
 PEŁNA TREŚĆ:
-  view /mnt/skills/user/shared/mod-prawa-obywatelskie-srodki-karne.md
+  view shared/mod-prawa-obywatelskie-srodki-karne.md
 ```
 
 ---
@@ -113,7 +113,7 @@ PEŁNA TREŚĆ:
 ```
 ⚠️ TREŚĆ PRZENIESIONA 2026-06-12 — eliminacja duplikacji z DEFINICJE-KLUCZOWE.md D.1
 → Pełna treść (definicja ustawowa + linia SN + alert nowelizacji 2026):
-  view /mnt/skills/user/shared/definicje/DEF-PRACA.md
+  view shared/definicje/DEF-PRACA.md
 ```
 
 ### BAS-W21 — Informacja przetworzona (UDIP art. 3 ust. 1 pkt 1)

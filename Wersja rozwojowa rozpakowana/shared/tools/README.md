@@ -118,3 +118,10 @@ narzędziem dla deweloperów utrzymujących system. `walidator_cytowan.py`
 audytuje PRODUKT PRACY (konkretne pismo) i jest narzędziem produkcyjnym
 uruchamianym w pipeline portalu dla każdego klienta. Pełny opis rozdziału
 w `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-07-12g.
+
+
+## Portability — neutralny log i archiwum przykładów MCP
+
+Dla nowych integracji preferuj `{"session_id":"...","events":[...]}`. Event zawiera `tool`, źródło, opcjonalny `query_context` i status. Claude/Anthropic legacy pozostaje obsługiwany; obsługiwane są też generyczne tool-call/result i ukończone wpisy Responses-style. Sam call bez wyniku nie jest weryfikacją.
+
+Twardy limit 200 plików wymaga kompaktowania wyłącznie technicznych przykładów MCP: 42 plików z dawnego `tools/mcp-servers/**` znajduje się byte-for-byte w `tools/mcp-servers/mcp-servers-examples.zip` (SHA-256 `6b16d446e08ec5a3c401b371a7bf697e2b898bf2b903e2a1531a2ec818642756`). Rozpakuj archiwum przed uruchamianiem przykładowego serwera.

@@ -205,10 +205,10 @@ brak już aktywnego wiersza, tylko odniesienie historyczne).
 
 | Temat | Status | Moduł |
 |---|---|---|
-| Status zawodowy syndyka/nadzorcy/zarządcy | 🟢 | `mod-ustawa-doradca-restrukturyzacyjny-zawod` — inny akt (Dz.U. 2022 poz. 1007) |
+| Status zawodowy syndyka/nadzorcy/zarządcy | 🟢 | `mod-ustawa-doradca-restrukturyzacyjny-zawod` — inny akt (Dz.U. 2022.1007) |
 | KRZ — Krajowy Rejestr Zadłużonych | 🟢 | Sekcja dedykowana w module głównym PrUp |
 | Odpowiedzialność zarządu sp. z o.o. (powiązanie z KSH art. 299) | 🟢 | Odesłanie do `mod-KSH-spolki-handlowe` — spójność zachowana |
-| Nowelizacja 25.07.2025 (Dz.U. 2025 poz. 1085) — zmiana 3 ustaw (PrRestr/PrUp/KRZ) | 🟢 | Uwzględniona w naprawionych modułach (test zaspokojenia Dział VI, termin dnia układowego Tytuł II) |
+| Nowelizacja 25.07.2025 (Dz.U. 2025.1085) — zmiana 3 ustaw (PrRestr/PrUp/KRZ) | 🟢 | Uwzględniona w naprawionych modułach (test zaspokojenia Dział VI, termin dnia układowego Tytuł II) |
 
 **Zaktualizowana rekomendowana kolejność uzupełniania** (4 z 4 oryginalnych
 pozycji już naprawione — pozostają inne, niżej priorytetowe):
@@ -261,13 +261,13 @@ pozycji już naprawione — pozostają inne, niżej priorytetowe):
 | 10 (część) | art. 669–689 — stwierdzenie nabycia spadku, dział spadku | 🔴 luka krytyczna | 🔴 **NADAL LUKA** — art. 669 zero wystąpień; art. 680 tylko przez odesłanie z modułu spadkowego KC | — |
 | 9 | art. 458¹⁴–458¹⁶ — postępowanie z udziałem konsumentów | 🔴 luka krytyczna | 🔴 **NADAL LUKA** | — |
 | 13 | art. 316 §1 — stan rzeczy z chwili zamknięcia rozprawy | 🔴 luka krytyczna | 🟡 **WZMIANKA** — 1 plik (skarga pauliańska) | dr-02 |
-| 14 | art. 162 — zastrzeżenie do protokołu | 🔴 luka krytyczna | 🔴 **NADAL LUKA** w zakresie KPC — wszystkie 6 trafień to art. 162 **KK**, nie KPC (kolizja międzykodeksowa) | — |
+| 14 | art. 162 — zastrzeżenie do protokołu | 🔴 luka krytyczna | ✅ **NAPRAWIONE 2026-08-22** — luka bliźniacza do art. 105 PPSA dr-05, treść zweryfikowana Rząd 1+2B | `mod-KPC-art162-zastrzezenie-protokol` |
 | 15 | art. 617–626¹³ — zniesienie współwłasności, wieczystoksięgowe | 🔴 luka krytyczna | 🔴 **NADAL LUKA** w zakresie KPC — trafienia to art. 617 **KRO** | — |
 
-**Bilans uzgodnienia: 4 luki krytyczne zamknięte, 5 częściowo, 8 nadal
-otwartych.** Raport z 13.08 był nieaktualny w 4 z 15 pozycji (27%) — czyli
-w tym samym rzędzie wielkości, co przy sześciu mapach korygowanych w
-pierwszej fazie F-83.
+**Bilans uzgodnienia: 5 luk krytycznych zamkniętych (poz. #14 dodana
+2026-08-22), 5 częściowo, 7 nadal otwartych.** Raport z 13.08 był
+nieaktualny w 4 z 15 pozycji (27%) — czyli w tym samym rzędzie
+wielkości, co przy sześciu mapach korygowanych w pierwszej fazie F-83.
 
 ### Stan pokrycia wg ksiąg (po uzgodnieniu)
 
@@ -311,11 +311,11 @@ gospodarcza).
 7. **art. 669–689 — stwierdzenie nabycia spadku i dział spadku** (dwie najczęstsze sprawy spadkowe, tryb nieprocesowy)
 8. art. 350–352 — sprostowanie, uzupełnienie, wykładnia wyroku
 9. art. 1041–1059 i 1081–1088 — egzekucja świadczeń niepieniężnych i alimentów
-10. art. 162 KPC — zastrzeżenie do protokołu (⛔ nie mylić z art. 162 KK)
-11. art. 617–626¹³ — zniesienie współwłasności i postępowanie wieczystoksięgowe
-12. art. 401, 401¹, 403 — podstawy wznowienia (art. 399 już jest)
-13. art. 458¹⁴–458¹⁶ — postępowanie z udziałem konsumentów
-14. art. 1097–1116 — jurysdykcja krajowa (domknięcie wobec DR-14)
+~~10. art. 162 KPC — zastrzeżenie do protokołu~~ ✅ NAPRAWIONE 2026-08-22
+10. art. 617–626¹³ — zniesienie współwłasności i postępowanie wieczystoksięgowe
+11. art. 401, 401¹, 403 — podstawy wznowienia (art. 399 już jest)
+12. art. 458¹⁴–458¹⁶ — postępowanie z udziałem konsumentów
+13. art. 1097–1116 — jurysdykcja krajowa (domknięcie wobec DR-14)
 
 ---
 

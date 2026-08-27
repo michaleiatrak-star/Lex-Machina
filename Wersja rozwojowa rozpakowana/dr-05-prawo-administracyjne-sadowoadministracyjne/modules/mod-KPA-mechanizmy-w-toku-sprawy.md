@@ -217,7 +217,7 @@ omówieniem art. 74a jako przepisu łączącego z RODO]).
 Potwierdzone w 8+ zgodnych, BARDZO aktualnych źródeł, w tym
 BEZPOŚREDNIO dosłowny tekst art. 97-103 (arslege.pl [×2], lexlege.pl
 [×2], przepisy.gofin.pl [grudzień 2025, NAJŚWIEŻSZE, aktualny
-t.j. Dz.U. 2025 poz. 1691]), dzialkanadmorzem.pl [maj 2026, Z
+t.j. Dz.U.2025.0.1691]), dzialkanadmorzem.pl [maj 2026, Z
 PRAKTYCZNYM checklistem].
 ```
 

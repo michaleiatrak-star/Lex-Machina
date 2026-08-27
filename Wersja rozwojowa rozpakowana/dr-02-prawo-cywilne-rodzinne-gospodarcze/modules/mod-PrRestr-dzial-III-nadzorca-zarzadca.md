@@ -82,7 +82,7 @@ przejmuje zarząd masą sanacyjną w pełnym zakresie).
   Koszty ubezpieczenia NIE stanowią kosztów postępowania
   restrukturyzacyjnego (obciążają nadzorcę/zarządcę osobiście, nie
   masę).
-- ⚠️ art. 25a — istnieje wersja czasowa od Dz.U. 2025 poz. 1085 (w życie
+- ⚠️ art. 25a — istnieje wersja czasowa od Dz.U. 2025.1085 (w życie
   23.08.2025) — DOKŁADNA TREŚĆ tej zmiany NIE ustalona tą sesją,
   ⚠️ [NIEWERYFIKOWANE], priorytet dla kolejnej sesji lub sprawdzenia
   przy konkretnej sprawie.
@@ -414,7 +414,7 @@ rozstrzygnięte ostatecznie bez ISAP).
    znaczenie praktyczne przy postępowaniu sanacyjnym).
 7. Rozbieżność numeracyjna Oddziału 2 Rozdz. 4 ("55-64" vs "55-103"
    w różnych źródłach pochodnych) — DO ROZSTRZYGNIĘCIA.
-8. Art. 25a (nowelizacja Dz.U. 2025 poz. 1085) — treść zmiany nieustalona.
+8. Art. 25a (nowelizacja Dz.U. 2025.1085) — treść zmiany nieustalona.
 
 **Rekomendacja:** przy trafieniu sprawą dot. wynagrodzenia
 nadzorcy/zarządcy — bezwzględnie zweryfikować aktualne stawki

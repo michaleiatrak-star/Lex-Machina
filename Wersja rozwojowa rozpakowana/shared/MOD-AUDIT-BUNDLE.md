@@ -1,6 +1,6 @@
 # MOD-AUDIT-BUNDLE — Paczka Audytowa Outputu (AI Act art. 12)
 
-> **Plik:** `/mnt/skills/user/shared/MOD-AUDIT-BUNDLE.md`
+> **Plik:** `shared/MOD-AUDIT-BUNDLE.md`
 > **Wersja:** 1.0.0 (2026-07-05)
 > **Status:** NOWY — AUDYT-2026-07-05a
 > **Wzorzec:** legal-ai-audit-bundle (fundament-weryfikacyjny, awesome-matematic-skills-pl)

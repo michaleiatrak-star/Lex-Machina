@@ -160,7 +160,7 @@ Zasada Garnera: jeden celny cytat lepszy niż pięć marginalnych.
 W W2 — gdy redagowane jest uzasadnienie prawne:
 ```
 Czy jest potrzeba powołania doktryny?
-  TAK → view /mnt/skills/user/shared/MOD-DOKTRYNA.md
+  TAK → view shared/MOD-DOKTRYNA.md
         → Zastosuj D-1/D-2/D-3/D-4
         → Ustal poziom hierarchii (§2)
         → Zastosuj format z §3

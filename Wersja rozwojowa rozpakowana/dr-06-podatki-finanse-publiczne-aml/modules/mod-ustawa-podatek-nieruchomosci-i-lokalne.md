@@ -178,7 +178,7 @@ użytkownika — dotąd CAŁKOWICIE nieobecny temat)
 
 ```
 ⭐⭐ KATALOG GŁÓWNYCH ZWOLNIEŃ USTAWOWYCH (art. 7 ust. 1 ustawy o
-  podatkach i opłatach lokalnych, Dz.U. 2025 poz. 707 t.j.):
+  podatkach i opłatach lokalnych, Dz.U.2025.0.707 t.j.):
   → infrastruktura KOLEJOWA (w rozumieniu ustawy o TRANSPORCIE
     kolejowym) — ⚠️ patrz WAŻNY WYJĄTEK 2025 poniżej
   → grunty/budynki/budowle POZOSTAŁE po LIKWIDACJI linii kolejowych
@@ -239,7 +239,7 @@ użytkownika — dotąd CAŁKOWICIE nieobecny temat)
   katalogu USTAWOWYM
 
 Potwierdzone w 6+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
-tekst art. 7 (lexlege.pl, arslege.pl, z aktualnym t.j. Dz.U. 2025 poz. 707)
+tekst art. 7 (lexlege.pl, arslege.pl, z aktualnym t.j. Dz.U.2025.0.707)
 oraz Deloitte Poland [SPRZED 3 tygodni, z omówieniem ŚWIEŻEGO
 orzeczenia WSA], litigato.pl, kalkulatorkatastralny.pl [styczeń 2026].
 ```

@@ -1,6 +1,6 @@
 # MOD-GENERATOR-AKTU — procedura budowy modułu dla aktu prawnego
 
-> **Plik:** `/mnt/skills/user/shared/MOD-GENERATOR-AKTU.md`
+> **Plik:** `shared/MOD-GENERATOR-AKTU.md`
 > **Wersja:** 1.0 (2026-08-23)
 > **Status:** KANONICZNY — obowiązkowa ścieżka tworzenia KAŻDEGO nowego modułu
 > aktu prawnego oraz uzupełniania luk rozdziałowych w module istniejącym.

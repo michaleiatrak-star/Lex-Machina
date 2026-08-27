@@ -24,16 +24,10 @@ istniejącej nazwy oraz odesłania do modułów z innych DR), ale trzecia
 klasa pozostaje: WZMIANKI HISTORYCZNE, np. udokumentowana zmiana nazwy
 pliku („było: mod-stara-nazwa") albo dawny skrót przywołany w opisie
 zamkniętej flagi. Takie wpisy są POPRAWNE i nie wolno ich usuwać.
+Przykład rzeczywisty: DR-10 raportuje mod-AH i
+mod-ustawa-zawody-medyczne-i-prawnicze — oba to zapisy historyczne
+przy zamknięciu flag F-1 i F-2 z 2026-07-15, nie luki rejestracyjne.
 Zanim uznasz widmo za błąd — sprawdź kontekst wiersza.
-
-⚡ ZMIANA 2026-08-24 (F-128): dwa trafienia z DR-10 (mod-AH oraz
-mod-ustawa-zawody-medyczne-i-prawnicze — zapisy historyczne przy
-zamknięciu flag F-1 i F-2 z 2026-07-15) przeniesiono z docstringu do
-rejestru ALIASY_HISTORYCZNE poniżej. Są nadal WYPISYWANE w raporcie,
-ale nie podbijają licznika rozbieżności ani kodu wyjścia. Powód: samo
-udokumentowanie ograniczenia w docstringu nie usuwało jego kosztu —
-raport każdego przebiegu kończył się „1 z 16" i kodem 1, więc test był
-trwale czerwony, a trwale czerwony test przestaje być sygnałem.
 
 Użycie:
     python3 check_rejestracja_modulow.py [katalog_ze_skillami]
@@ -47,37 +41,6 @@ import sys
 WZ_MODUL = re.compile(r'mod-[A-Za-z0-9_-]+')
 WZ_CHECK = re.compile(r'\[✓\][^\n]*?(mod-[A-Za-z0-9_-]+)')
 WZ_LICZNIK = re.compile(r'##\s*Moduły\s*\((\d+)\s*łącznie')
-
-# ---------------------------------------------------------------------------
-# ALIASY HISTORYCZNE — trafienia SPRAWDZONE RĘCZNIE i potwierdzone jako
-# poprawne zapisy, nie luki rejestracyjne (F-128, 2026-08-24).
-#
-# Do 2026-08-24 te dwie pozycje figurowały WYŁĄCZNIE w docstringu jako
-# „znane ograniczenie, wymaga przeglądu ręcznego". Skutek uboczny był
-# jednak realny: raport KAŻDEGO przebiegu kończył się linią
-# „Dziedzin z rozbieżnościami: 1 z 16" i kodem wyjścia 1 — czyli test,
-# który ZAWSZE coś pokazuje. Test zawsze czerwony przestaje być sygnałem;
-# uczy czytelnika przewijać wynik, a przy okazji blokuje sensowne wpięcie
-# skryptu w pre-commit hook (`install_precommit_hook.sh`), bo zawsze
-# zwracałby błąd.
-#
-# ⛔ To NIE jest wyciszenie problemu — każde wyciszone trafienie zostaje
-# WYPISANE w raporcie jako pozycja „alias historyczny (F-128)", tylko nie
-# podbija licznika rozbieżności. Dopisanie nowej pozycji tutaj wymaga
-# WCZEŚNIEJSZEGO sprawdzenia ręcznego i zdania uzasadnienia — inaczej
-# rejestr stanie się śmietnikiem na niewygodne alarmy.
-ALIASY_HISTORYCZNE = {
-    'mod-AH': (
-        'dr-10 — alias z pola `name:` pliku mod-ustawa-rolne-zywnosc-'
-        'weterynaria.md, używany w prozie MAPA-AKTOW.md i ROUTING-MAP.md '
-        '(zamknięcie flagi F-1, 2026-07-15)'
-    ),
-    'mod-ustawa-zawody-medyczne-i-prawnicze': (
-        'dr-10 — STARA nazwa pliku, przemianowanego na mod-ustawa-zawody-'
-        'prawnicze-pokrewne przy zamknięciu flagi F-2 (2026-07-15); nazwa '
-        'przywołana w opisie zamknięcia, nie w wierszu rejestracyjnym'
-    ),
-}
 
 
 def czytaj(sciezka):
@@ -155,12 +118,8 @@ def main(baza):
         # realnie istniejącego pliku. Bez tego filtra DR-12 raportował
         # 7 widm, z których wszystkie były skrótami (wykryte 2026-08-14e).
         kandydaci = (check | mapa) - globalne
-        wszystkie_widma = sorted(k for k in kandydaci
-                                 if not any(d.startswith(k) for d in globalne))
-        # F-128: aliasy sprawdzone ręcznie wypisujemy, ale nie liczymy
-        # jako rozbieżność — patrz komentarz przy ALIASY_HISTORYCZNE.
-        widma = [k for k in wszystkie_widma if k not in ALIASY_HISTORYCZNE]
-        aliasy = [k for k in wszystkie_widma if k in ALIASY_HISTORYCZNE]
+        widma = sorted(k for k in kandydaci
+                       if not any(d.startswith(k) for d in globalne))
 
         m = WZ_LICZNIK.search(skill_md)
         licznik = int(m.group(1)) if m else None
@@ -193,9 +152,6 @@ def main(baza):
                                 ('  MODUŁ-WIDMO (wpis bez pliku)', widma)):
             for nazwa in lista:
                 print('%s: %s' % (etykieta, nazwa))
-        for nazwa in aliasy:
-            print('  alias historyczny (F-128, nie liczy się do rozbieżności): '
-                  '%s — %s' % (nazwa, ALIASY_HISTORYCZNE[nazwa]))
 
     print('-' * 92)
     print('Dziedzin z rozbieżnościami: %d z %d' % (problemy, len(skille)))

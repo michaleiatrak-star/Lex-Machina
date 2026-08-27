@@ -436,7 +436,7 @@ TERYTORIALNYM:
 ### Literatura i źródła (zweryfikowane online 2026-07-21)
 
 - lexlege.pl (2×), e-prawnik.pl (2×), sip.lex.pl — pełna treść art.
-  278-280 KPK (Dz.U. 2026 poz. 490 t.j.), przesłanki, treść listu gończego,
+  278-280 KPK (Dz.U.2026.490 t.j.), przesłanki, treść listu gończego,
   skutki ujęcia.
 - adwokatkkr.pl, adwokat-skoczylas.pl, obrona24h.pl, kancelarialexacta.pl
   — praktyczne aspekty (etapy postępowania, forma postanowienia,

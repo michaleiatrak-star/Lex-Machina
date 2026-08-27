@@ -11,7 +11,7 @@
 > i obowiązuje RÓWNOLEGLE. Jeśli czytasz ten plik, nie wczytawszy nadrzędnego:
 >
 > ```
-> view /mnt/skills/user/shared/PRAWO-HARDGATE.md
+> view shared/PRAWO-HARDGATE.md
 > ```
 >
 > **Dlaczego wydzielone:** plik nadrzędny miał 967 linii i był wczytywany przez
@@ -122,7 +122,7 @@ KROK 5: Podaj URL źródłowy razem z sygnaturą
 KROK 5-RZĄD — KATEGORYZACJA ŹRÓDŁA (dodano 2026-07-15, obowiązkowa dla
 KAŻDEGO linku/URL podanego użytkownikowi, nie tylko dla orzeczeń):
   ⛔ Przed podaniem linku → sklasyfikuj domenę wg
-     `view /mnt/skills/user/shared/HIERARCHIA-ZRODEL.md` (RZĄD 1/2A/2B/3)
+     `view shared/HIERARCHIA-ZRODEL.md` (RZĄD 1/2A/2B/3)
      i dołącz odpowiedni znacznik (✅/📚/⚠️📚) OBOK znacznika VER z KROK 5.
   ⛔ Pominięcie kategoryzacji RZĄD przy podaniu linku jest błędem tego
      samego rzędu co brak znacznika VER/NIEWERYFIKOWANE — nie jest to

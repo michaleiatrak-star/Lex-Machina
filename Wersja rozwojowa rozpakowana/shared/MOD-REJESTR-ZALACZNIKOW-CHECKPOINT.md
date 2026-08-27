@@ -1,6 +1,6 @@
 # MOD-REJESTR-ZALACZNIKOW-CHECKPOINT — Widoczny rejestr plików + checkpoint kontynuacji
 
-> **Plik:** `/mnt/skills/user/shared/MOD-REJESTR-ZALACZNIKOW-CHECKPOINT.md`
+> **Plik:** `shared/MOD-REJESTR-ZALACZNIKOW-CHECKPOINT.md`
 > **Wersja:** 1.0.0 (2026-07-12, aktualizacja opisu integracji 2026-07-14)
 > **Status:** PRODUKCJA — plik kanoniczny shared
 > **Pozycja w pipeline:**

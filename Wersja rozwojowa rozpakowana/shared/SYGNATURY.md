@@ -1,6 +1,6 @@
 # SYGNATURY — Moduł Walidacji Sygnatur Sądowych
 
-> **Plik:** `/mnt/skills/user/shared/SYGNATURY.md`
+> **Plik:** `shared/SYGNATURY.md`
 > **Wersja:** 1.1 (2026-07-05) — dodano KONTRAKT WYNIKU WERYFIKACJI
 >              (FOUND/NOT_FOUND/AMBIGUOUS/OUT_OF_SCOPE, wzorzec sententim; AUDYT-2026-07-05a)
 > **Wersja poprzednia:** 1.0 (2026-05-25)
@@ -211,7 +211,7 @@ każdym cytowaniem orzeczenia. Instrukcja integracji:
 
 ```
 // W orzeczenia-sadowe-v2, przed cytowaniem:
-view /mnt/skills/user/shared/SYGNATURY.md
+view shared/SYGNATURY.md
 → Wykonaj V-SYG-1 przez V-SYG-4
 → Dopiero po wyniku OK: cytuj z linkiem źródłowym
 ```

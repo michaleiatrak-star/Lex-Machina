@@ -1,7 +1,7 @@
 # LEGAL-STATUS-LOCK (LSL) — Weryfikacja Statusu Prawnego Aktów
 
-**Plik kanoniczny:** `/mnt/skills/user/shared/LEGAL-STATUS-LOCK.md`
-Wywołuj przez: `view /mnt/skills/user/shared/LEGAL-STATUS-LOCK.md`
+**Plik kanoniczny:** `shared/LEGAL-STATUS-LOCK.md`
+Wywołuj przez: `view shared/LEGAL-STATUS-LOCK.md`
 **Wersja:** 1.0 | Data wprowadzenia: 2026-06-01
 
 ---

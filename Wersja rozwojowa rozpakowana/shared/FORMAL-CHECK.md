@@ -81,7 +81,7 @@ Decyzja: ✅ / ⚠️ / ⛔
 ## 6. Nazewnictwo stron — tabela referencyjna (cross-ref: NAZEWNICTWO-STRON.md)
 
 > Pełne tabele T1–T10 i wzory nagłówków N1–N7:
-> `view /mnt/skills/user/shared/NAZEWNICTWO-STRON.md`
+> `view shared/NAZEWNICTWO-STRON.md`
 
 **Skrócona reguła do szybkiej weryfikacji (przed wysłaniem pisma):**
 

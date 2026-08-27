@@ -1,6 +1,6 @@
 ---
 name: analizator-dowodow-v3
-version: "5.16.2"
+version: "5.16.1"
 type: executive-analiza
 status: production
 description: |
@@ -50,22 +50,17 @@ pipeline:
     - AD-KROK3-WYKONANIE
     - AD-KROK4-DASHBOARD
 changelog: |
-  Wersja bieżąca: 5.16.2. Pełna historia (27 wpisów, 4.0.0-5.16.2) w
+  Wersja bieżąca: 5.15.0. Pełna historia (25 wpisów, 4.0.0-5.15.0) w
   references/CHANGELOG.md — wczytuj na żądanie, NIE trzymaj tu ponownie
   (F-78, 2026-08-20: to drugie takie porządkowanie tego pola po 2026-07-12;
   następne audyty dopisujące wpisy wersji NIECH DOPISUJĄ do
   references/CHANGELOG.md, NIE do tego pola YAML).
-  Skrót ostatniej zmiany: 5.16.2 — self-check ANTY-FASADA podłączony jako
-  WYWOŁANIE modułu kanonicznego shared/SELF-CHECK-ANTY-FASADA.md zamiast
-  kopii treści (F-115).
-  ⚠️ Pole podawało 5.15.0 przy version: 5.16.2 — rozjazd dwóch wydań,
-  wykryty przez T12 i naprawiony 2026-08-24 (F-129). Wpisy 5.16.x istniały
-  w references/CHANGELOG.md; nieaktualny był wyłącznie ten skrót.
+  Skrót ostatniej zmiany: 5.15.0 — dodano BLOK D0 TEZA-GATE (rekonstrukcja
+  tezy centralnej przed oceną mocnych/słabych stron), obowiązkowy przed
+  BLOK D (F-7/ZASADA 11).
 ---
 
-# Analizator Dowodów Procesowych v5
-
-*(Nagłówek nosi sam MAJOR — decyzja generalna F-102(C); niósł v5.1 przy innym `version:`.)*
+# Analizator Dowodów Procesowych v5.1
 
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 > Przed każdą analizą z powołaniem na przepisy lub sygnatury: `view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
@@ -73,11 +68,12 @@ changelog: |
 > ⛔ BRAMKI TOWARZYSZĄCE (dodane 2026-08-23, F-109) — wykonaj PRZED wydaniem
 > raportu / widgetu, niezależnie od tego, czy skill wywołał router:
 > ```
-> □ [ANTY-FASADA + AF-6] Wykonaj self-check antyfasadowy z modułu kanonicznego:
->     view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
->   ⛔ Treść listy NIE jest tu kopiowana (F-115, 2026-08-23i). Poprzednia kopia
->     miała 1 z 2 pozycji: gdy F-117 dodała AF-6 do źródła, kopie nie zostały
->     zaktualizowane. Jedno miejsce prawdy = jedno miejsce aktualizacji.
+> □ [ANTY-FASADA] (dodane 2026-08-23, v2.6) Czy w odpowiedzi/piśmie jest słowo
+>   „zweryfikowano/zweryfikowałem", pole „data weryfikacji" albo URL przy przepisie,
+>   dla którego NIE wywołałem narzędzia W TEJ ODPOWIEDZI? TAK → ⛔ usuń deklarację
+>   i datę, URL przeformatuj na 🎯 [CEL — RZĄD 1, NIEOTWARTE: …], przepis oznacz
+>   ⚠️ [NIEWERYFIKOWANE]. Wyzwalacz to BRAK WYWOŁANIA, nie brak narzędzi w sesji.
+>   ⛔ Zastrzeżenie selektywne (przy sygnaturach tak, przy przepisach nie) = naruszenie.
 □ [DOMAIN-LOCK] Odpowiedź/pismo zawiera przepis SPOZA dziedziny wiodącej
   (KK/KKS/KW/KPK/KPW przy torze cywilnym, pracowniczym lub administracyjnym —
   albo odwrotnie)? NIE → OK. TAK → (a) konkretny FAKT wypełniający znamię,
@@ -90,7 +86,7 @@ changelog: |
   KAŻDYM wierszu? NIE → nie podawaj kwoty łącznej, pokaż tabelę z ⬛.
   → `view /mnt/skills/user/shared/RATE-COMPLETENESS.md`
 □ [STATUSY] Każdy przepis ma znacznik z ZAMKNIĘTEJ hierarchii czterech:
-  ✅ [VER] · 🟨 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
+  ✅ [VER] · 🟡 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
   Etykieta spoza tej listy = naruszenie hard gate (PRAWO-HARDGATE v2.5).
 > ```
 > ⭐ Szczególnie istotne dla tego skilla: MX (25 dziedzin) z natury proponuje

@@ -210,8 +210,8 @@ nieobecne
   że SPADKODAWCA w chwili ŚMIERCI miał NAD nimi władztwo
 
 Potwierdzone w 7+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
-tekst art. 1029 (lexlege.pl, arslege.pl [aktualny t.j. Dz.U. 2025 poz. 1071],
-przepisy.gofin.pl, standardyprawa.pl [×2, Z cytowanym
+tekst art. 1029 (lexlege.pl, arslege.pl [aktualny t.j. Dz.U.2025.0.
+1071], przepisy.gofin.pl, standardyprawa.pl [×2, Z cytowanym
 orzecznictwem]), ORAZ bezpośrednio uchwała SN III CZP 12/19,
 kancelaria-praga.pl [maj 2026, NAJŚWIEŻSZE], kancelariaszkil.pl.
 ```

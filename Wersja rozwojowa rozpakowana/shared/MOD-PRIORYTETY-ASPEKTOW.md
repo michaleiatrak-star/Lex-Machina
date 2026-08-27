@@ -97,7 +97,7 @@ narzucana bez możliwości edycji.
 ### 3.2 Widget — checklist z trzema kolumnami
 
 ```
-view /mnt/skills/user/shared/MOD-METODY-BADAWCZE.md  (przed renderem — pobierz opisy metod)
+view shared/MOD-METODY-BADAWCZE.md  (przed renderem — pobierz opisy metod)
 
 show_widget(
   title="priorytety_aspektow_sprawy",

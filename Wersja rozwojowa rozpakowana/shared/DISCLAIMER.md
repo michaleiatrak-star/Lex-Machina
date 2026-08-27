@@ -1,6 +1,6 @@
 # DISCLAIMER — Moduł Zastrzeżenia Prawnego
 
-> **Plik kanoniczny:** `/mnt/skills/user/shared/DISCLAIMER.md`
+> **Plik kanoniczny:** `shared/DISCLAIMER.md`
 > **Wersja:** 2.1 | Aktualizacja: 2026-07-05b (R5 — klauzula profesjonalnej
 >              weryfikacji dla pism kierowanych do sądu; NSA I FZ 104/26)
 
@@ -110,7 +110,7 @@ Widget (raport/dash.) → sekcja "Informacje prawne" na końcu widgetu
 ### prawny-router-v3 (KROK 7) ✅ Zintegrowany
 
 Router weryfikuje disclaimer w SELF-CHECK (punkt [DISCLAIMER]).
-Wywołanie: `view /mnt/skills/user/shared/DISCLAIMER.md` przed generowaniem outputu.
+Wywołanie: `view shared/DISCLAIMER.md` przed generowaniem outputu.
 
 ### analiza-sadowa-v6 ⚠️ Wymaga dodania
 
@@ -118,7 +118,7 @@ Dodać do sekcji RAPORT KOŃCOWY (Wiadomość 5, sekcja §11):
 
 ```markdown
 ### §11 — Zastrzeżenie prawne
-view /mnt/skills/user/shared/DISCLAIMER.md
+view shared/DISCLAIMER.md
 [wklej wariant LAIK lub PRAWNIK zależnie od trybu sesji]
 ```
 
@@ -128,11 +128,11 @@ Dodać do sekcji W3.6 — Pismo finalne, po generowaniu .docx:
 
 ```markdown
 Po W3.6 — po generowaniu .docx:
-- view /mnt/skills/public/docx/SKILL.md → generuj .docx → present_files
+- view HOST_CAPABILITY[document_generation] → generuj .docx → present_files
 - Dodaj disclaimer: wariant LAIK/PRAWNIK JAK DOTĄD, plus OBOWIĄZKOWO
   wariant PISMO SĄDOWE (v2.1) bezpośrednio po nim — patrz sekcja wyżej
-  → view /mnt/skills/user/shared/DISCLAIMER.md
-- view /mnt/skills/user/shared/raport-sytuacyjny-integracja.md → propozycja Raportu Sytuacyjnego
+  → view shared/DISCLAIMER.md
+- view shared/raport-sytuacyjny-integracja.md → propozycja Raportu Sytuacyjnego
 ```
 
 ### pisma-proste-v2 ⚠️ Wymaga dodania
@@ -141,7 +141,7 @@ Dodać do KROK 9 (końcowy):
 
 ```markdown
 KROK 9c → DISCLAIMER (obowiązkowy)
-→ view /mnt/skills/user/shared/DISCLAIMER.md
+→ view shared/DISCLAIMER.md
 → Dodaj jako ostatni element wiadomości (LAIK: uproszczony / PRAWNIK: pełny)
   + WARIANT PISMO SĄDOWE (v2.1) bezpośrednio po wariancie PRAWNIK
 ```
@@ -152,7 +152,7 @@ Dodać do sekcji WYNIK / RAPORT:
 
 ```markdown
 Na końcu każdego raportu z orzeczeniami:
-→ view /mnt/skills/user/shared/DISCLAIMER.md (wariant PRAWNIK)
+→ view shared/DISCLAIMER.md (wariant PRAWNIK)
 Uwaga: orzecznictwo cytowane z oficjalnych baz nie zastępuje porady prawnej.
 ```
 
@@ -161,7 +161,7 @@ Uwaga: orzecznictwo cytowane z oficjalnych baz nie zastępuje porady prawnej.
 Dodać do sekcji RAPORT KOŃCOWY widgetu (sekcja "Informacje prawne"):
 
 ```markdown
-→ view /mnt/skills/user/shared/DISCLAIMER.md
+→ view shared/DISCLAIMER.md
 Widget: dodaj sekcję "Informacje prawne" na końcu widgetu z disclaimerem wariantu LAIK.
 ```
 
@@ -171,7 +171,7 @@ Dodać do sekcji WYNIK ANALIZY:
 
 ```markdown
 Po raporcie analizy umowy:
-→ view /mnt/skills/user/shared/DISCLAIMER.md (PRAWNIK: pełny)
+→ view shared/DISCLAIMER.md (PRAWNIK: pełny)
 ```
 
 ### DR-01–DR-16 ⚠️ Wymaga dodania
@@ -179,7 +179,7 @@ Po raporcie analizy umowy:
 Dla każdego DR-skill: dodać do sekcji OUTPUT / WYNIK:
 
 ```markdown
-→ view /mnt/skills/user/shared/DISCLAIMER.md
+→ view shared/DISCLAIMER.md
 [wariant zależnie od trybu sesji]
 ```
 

@@ -1,6 +1,6 @@
 # HIERARCHIA-ZRODEL.md — Kanoniczna Kategoryzacja Źródeł (RZĄD 1/2/3)
 
-> **Plik:** `/mnt/skills/user/shared/HIERARCHIA-ZRODEL.md`
+> **Plik:** `shared/HIERARCHIA-ZRODEL.md`
 > **Wersja:** 1.4 (2026-08-23) — dodano `eli.gov.pl` do RZĘDU 1 (nie było go
 >              tam mimo urzędowego charakteru), sekcję REALIA DOSTĘPNOŚCI
 >              RZĘDU 1 (moc źródła ≠ osiągalność źródła), zamknięcie

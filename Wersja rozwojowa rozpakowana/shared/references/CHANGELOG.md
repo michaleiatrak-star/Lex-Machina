@@ -1,5 +1,25 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.23 — PRAWO-HARDGATE.md: nowa sekcja "OBOWIĄZEK WIDOCZNEGO ZNACZNIKA
+  W DOSTARCZONEJ ODPOWIEDZI — BEZWARUNKOWY" (2026-08-27, na żądanie
+  użytkownika). Luka źródłowa: przepisy zweryfikowane faktycznym
+  `web_search` w danej turze, ale dostarczona odpowiedź nie niosła
+  widocznego znacznika statusu przy żadnym cytacie (sprawa: analiza
+  kazusów o tymczasowym aresztowaniu, dr-03/mod-KPK-srodki-zapobiegawcze-
+  tymczasowe-aresztowanie.md). Nowa reguła: znacznik ✅/🟨/⚠️/🎯 obowiązkowy
+  PRZY KAŻDYM powołaniu w tekście odpowiedzi, niezależnie od trybu
+  (LAIK/PRAWNIK), formy odpowiedzi (pismo/analiza/notatka/konwersacja) i
+  tego, czy weryfikacja miała miejsce we wcześniejszym kroku tej samej
+  odpowiedzi. Zbiorczy nagłówek weryfikacyjny bez powtórzenia znacznika
+  przy każdym przepisie = wariant BRAMKI ANTY-FASADOWEJ. Nie zmienia
+  definicji samych znaczników ani hierarchii źródeł — dokłada wymóg
+  WIDOCZNOŚCI w warstwie wyjścia.
+
+- 3.22 — F-108/46: RATE-COMPLETENESS 1.1 rozróżnia publiczny podmiot leczniczy od pozostałych dłużników; odsyła do kanonicznych danych DR-02. (2026-08-27)
+  Manifest uzgodniono z 155 rzeczywistymi plikami: stary zawierał wpisy
+  nieobecnych narzędzi tools/. Nie usunięto żadnego pliku; brakujących
+  narzędzi nie odtworzono ani nie oznaczono jako dostępnych.
+
 > Pełna historia zmian tego skilla. **Jedyna lokalizacja kanoniczna** — w SKILL.md
 > historii nie ma; jest tam wyłącznie krótki skrót w polu `changelog:` frontmatteru.
 > Standard ujednolicony 2026-08-20z4 dla całego systemu: plik `references/CHANGELOG.md`,

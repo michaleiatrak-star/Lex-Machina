@@ -188,7 +188,7 @@ Potwierdzone w 7+ zgodnych, AKTUALNYCH źródłach z 2026 r. (montevero.pl
 [×3, z JASNYM wyjaśnieniem zmiany progów i konkretnymi przykładami
 kursowymi], quantumaudyt.pl [luty 2026], finanseicontrolling.pl,
 wskazniki.gofin.pl [z bezpośrednim odniesieniem do aktualnego t.j.
-Dz.U. 2026 poz. 522], ecovispoland.pl).
+Dz.U.2026.522], ecovispoland.pl).
 ```
 
 ## 4e. ⭐⭐ PRZECHOWYWANIE DOKUMENTACJI KSIĘGOWEJ (uzupełnienie luki

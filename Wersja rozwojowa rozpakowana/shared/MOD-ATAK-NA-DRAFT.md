@@ -235,7 +235,7 @@ W2.2 Redakcja pisma
 W2.3 Lista kontrolna placeholderów
   ↓
 W2.4 MOD-ATAK-NA-DRAFT  ← TEN MODUŁ
-  view /mnt/skills/user/shared/MOD-ATAK-NA-DRAFT.md
+  view shared/MOD-ATAK-NA-DRAFT.md
   → D1: skan kategorycznych
   → D2: test pełnomocnika akapit po akapicie
   → D3: skan sprzeczności

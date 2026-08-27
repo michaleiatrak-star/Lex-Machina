@@ -1,7 +1,7 @@
 # RATE-COMPLETENESS — bramka kompletności szeregu stawek i wskaźników
 
-> **Plik:** `/mnt/skills/user/shared/RATE-COMPLETENESS.md`
-> **Wersja:** 1.0 (2026-08-23)
+> **Plik:** `shared/RATE-COMPLETENESS.md`
+> **Wersja:** 1.1 (2026-08-27)
 > **Status:** KANONICZNY — hard gate, blokuje zamknięcie analizy zawierającej
 > odsetki, waloryzację lub inną wielkość zmienną w czasie.
 > **Konsumenci:** `prawny-router-v3/references/SELF-CHECK.md`,
@@ -46,12 +46,15 @@ RC-2  ROZDZIEL REŻIMY. Nie mieszaj ich w jednej rubryce — mają różne
         • odsetki maksymalne (KC — limit umowny)
         • odsetki w transakcjach handlowych (ustawa z 8.03.2013
           o przeciwdziałaniu nadmiernym opóźnieniom) — ZMIENIANE PÓŁROCZNIE,
-          osobna stawka dla dłużnika publicznego i pozostałych
+          niższa stawka WYŁĄCZNIE dla dłużnika publicznego będącego
+          podmiotem leczniczym; inni publiczni dłużnicy i prywatne
+          podmioty lecznicze należą do pozostałych
         • odsetki podatkowe (Ordynacja podatkowa)
         • odsetki od zaległości ZUS
       ⛔ Wskazanie reżimu wymaga weryfikacji, czy umowa jest transakcją
         handlową w rozumieniu ustawy z 2013 r. — status stron rozstrzyga
-        o stawce. Nie zakładaj.
+        o stawce. Nie zakładaj. Kwalifikacja i tabela źródłowa:
+        view dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-transakcje-handlowe-opoznienia.md
 
 RC-3  ZBUDUJ SZEREG. Dla WYBRANEGO reżimu wypisz KAŻDY podokres w przedziale
       z RC-1, w tabeli, bez luk i bez zaokrągleń przedziałów:

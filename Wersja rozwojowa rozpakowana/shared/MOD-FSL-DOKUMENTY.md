@@ -1,7 +1,7 @@
 # MOD-FSL-DOKUMENTY — Fact-Source-Lock dla Dokumentów (FSL-D)
 # Per-teza weryfikacja dowodów z zakazem cytowania z pamięci
 
-> **Plik:** `/mnt/skills/user/shared/MOD-FSL-DOKUMENTY.md`
+> **Plik:** `shared/MOD-FSL-DOKUMENTY.md`
 > **Wersja:** 1.0.0 (2026-06-27)
 > **Status:** PRODUKCJA — plik kanoniczny shared
 > **Pozycja w pipeline:**

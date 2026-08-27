@@ -1,6 +1,6 @@
 # MOD-STEP-TRACKER — Śledzenie Kroków i Raportowanie Pominięć
 
-> **Plik:** `/mnt/skills/user/shared/MOD-STEP-TRACKER.md`
+> **Plik:** `shared/MOD-STEP-TRACKER.md`
 > **Wersja:** 1.2.0 (2026-07-11)
 > **Status:** PRODUKCJA — plik kanoniczny shared
 > **Pozycja w pipeline:**

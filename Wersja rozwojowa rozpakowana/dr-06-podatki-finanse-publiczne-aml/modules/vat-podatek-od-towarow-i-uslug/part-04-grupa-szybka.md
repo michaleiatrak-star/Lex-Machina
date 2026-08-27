@@ -15,7 +15,7 @@ Uzupełnienie art. 2 (słownik), art. 3 (właściwość organów), art. 28p
 (zawiadomienie o miejscu opodatkowania), art. 44 (zwolnienia WNT),
 art. 84–85 (szczególne metody ustalania podatku należnego) — dotąd
 CAŁKOWICIE nieobecne w module. Źródło: lexlege.pl (Rząd 2B, t.j.
-Dz.U. 2025 poz. 775, stan prawny wprost oznaczony jako aktualny na
+Dz.U.2025.0.775, stan prawny wprost oznaczony jako aktualny na
 12.08.2026 — zgodność ze stanem wskazanym w MAPA-AKTOW.md dla tej
 ustawy), potwierdzone krzyżowo w przepisy.gofin.pl i poltax.pl.
 ⚠️ [NIEWERYFIKOWANE BEZPOŚREDNIO W ISAP] — ISAP niedostępny do

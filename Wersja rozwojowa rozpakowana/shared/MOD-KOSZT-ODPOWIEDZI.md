@@ -1,9 +1,9 @@
 # MOD-KOSZT-ODPOWIEDZI — Optymalizacja Kosztu Procesowego dla Przeciwnika
 
-> **Plik:** `/mnt/skills/user/shared/MOD-KOSZT-ODPOWIEDZI.md`
+> **Plik:** `shared/MOD-KOSZT-ODPOWIEDZI.md`
 > **Status:** PRODUKCJA — plik kanoniczny shared
 > **Pozycja w pipeline:** W2.2 (redakcja) + W3.6a (AUDYT-KONCOWY)
-> **Wywołanie:** `view /mnt/skills/user/shared/MOD-KOSZT-ODPOWIEDZI.md`
+> **Wywołanie:** `view shared/MOD-KOSZT-ODPOWIEDZI.md`
 > **Trigger:** OBOWIĄZKOWY w W2.2 dla każdego głównego twierdzenia
 
 ---

@@ -7,7 +7,7 @@
 > Zależności: `MOD-PRIORYTETY-ASPEKTOW.md` (filtr roszczeń głównych),
 > `MOD-MAPA-PRZEPISOW.md` (kandydaci przepisów z głębokością/zgodnością —
 > pole "Podstawa"/"Ryzyko" §2.2), `MOD-HISTORIA-STRATEGII.md` (zapis
-> wariantów), `shared/MOD-REDAKCJA.md` (parametr TON — derywacja stylu §3).
+> wariantów), `pisma-procesowe-v3/modules/MOD-REDAKCJA.md` (parametr TON — derywacja stylu §3).
 
 ---
 

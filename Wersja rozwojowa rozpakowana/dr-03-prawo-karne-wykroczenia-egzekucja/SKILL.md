@@ -1,6 +1,6 @@
 ---
 name: dr-03-prawo-karne-wykroczenia-egzekucja
-version: "3.29"
+version: 3.28
 description: |
   DR-03: Prawo Karne, Wykroczenia, Egzekucja
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -46,25 +46,6 @@ najpierw indeks, potem WYŁĄCZNIE właściwy plik części wg tabeli. Ścieżka
 1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
 2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
 3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
-
-
-> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
-> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
->
-> ```
-> view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
-> ```
->
-> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
-> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
-> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
-> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
-> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
-> zmianie brzmienia).
->
-> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
-> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
-> oznaczenia, tylko je wymusza.
 
 ---
 
@@ -244,7 +225,7 @@ AUDIT-JOURNAL.md`.
                przestępczość zorganizowana art. 258 KK; BLOK I —
                zabójstwa/pobicia art. 148/158-159 KK; BLOK J — przestępstwa
                seksualne art. 197-205 KK w tym wobec dzieci/niepełnosprawnych
-               + Rejestr Sprawców Dz.U. 2026 poz. 110; BLOK L — uszkodzenie
+               + Rejestr Sprawców Dz.U. 2026.110; BLOK L — uszkodzenie
                mienia art. 288 KK / art. 124 KW z progiem 800 zł (część
                2/6 naprawy); BLOK G rozbudowany — podsłuch/nagrania,
                rozróżnienie uczestnik/osoba trzecia art. 267 §2-4 KK,

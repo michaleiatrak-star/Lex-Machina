@@ -1,6 +1,6 @@
 # MOD-REJESTR-POKRYCIA-JEDNOSTEK — Rejestr Pokrycia Wieloelementowych Zbiorów
 
-> **Plik:** `/mnt/skills/user/shared/MOD-REJESTR-POKRYCIA-JEDNOSTEK.md`
+> **Plik:** `shared/MOD-REJESTR-POKRYCIA-JEDNOSTEK.md`
 > **Wersja:** 1.0.0 (2026-08-18)
 > **Status:** PRODUKCJA — plik kanoniczny shared
 > **Skrót roboczy:** RPK (Rejestr Pokrycia Kazusów/jednostek)

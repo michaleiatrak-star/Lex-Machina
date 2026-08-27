@@ -1,6 +1,10 @@
 ---
 name: orzeczenia-sadowe-v2
-version: "2.11"
+version: "2.9.2"   # F-102 (2026-08-20z3): pole podawalo 2.9, podczas gdy changelog
+                   # ma wpis 2.9.1 z 2026-07-17 (naprawa YAML w polu description).
+                   # Rozjazd ODWROTNY: wersji nie podbito po wykonanej naprawie,
+                   # wiec `version` cofal skill o jedna zrealizowana zmiane.
+                   # Cudzyslow: patrz pulapka float, test T12.
 type: executive-analiza
 status: production
 compatibility: "web_search, web_fetch, show_widget"
@@ -17,11 +21,18 @@ description: >
   pytanie dotyczy tylko przepisów bez orzeczeń.
   Pełna historia zmian: references/CHANGELOG.md (nie w tym polu — opis
   wyzwalający musi zostać zwięzły dla trafności triggerowania skilla).
+changelog: |
+  Wersja bieżąca: 2.9.2. ⛔ PEŁNA HISTORIA — WYŁĄCZNIE w references/CHANGELOG.md
+  (standard systemowy 2026-08-20z4: jeden plik, jedna lokalizacja; zakaz sekcji
+  changelogu w korpusie SKILL.md i zakaz pełnej listy wpisów w tym polu).
+  Skrót 2.9.2 (2026-08-20z4): resztka sekcji CHANGELOG usunięta z korpusu SKILL.md — całość historii
+  w references/CHANGELOG.md, gdzie mieszkała już od wersji 2.7.
+
 ---
 
 # Wyszukiwanie Orzeczeń Sądowych v2
-
-*(Nagłówek nosi sam MAJOR — decyzja generalna F-102(C); niósł v2.7 przy innym `version:`.)*
+<!-- TYLKO major - pelny numer w polu `version:` YAML (F-102, 2026-08-20z3).
+     Wczesniej v2.7 przy version 2.9/2.9.1. -->
 
 Narzędzie procesowe dla pełnomocników, sędziów i stron działających pro se.
 Łączy interaktywny widget HTML (tryb laik / prawnik) z weryfikowanym
@@ -128,20 +139,6 @@ urzędowa, glosa).**
 aktywny w całym systemie, nie tylko w tym module. Treść poniżej pozostaje
 jako szczegółowa specyfikacja robocza dla tego skilla; w razie rozbieżności
 rozstrzyga PRAWO-HARDGATE jako źródło nadrzędne.
-
-> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
-> (podłączone 2026-08-23i, flaga F-115 — ten skill cytuje prawo, a bramki nie miał):
->
-> ```
-> view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
-> ```
->
-> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
-> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
-> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
-> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
-> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
-> zmianie brzmienia).
 
 ```
 [5] LOKALIZACJA W ŹRÓDLE — obowiązkowa, w pierwszej pasującej formie:
@@ -299,7 +296,7 @@ zapytanie w orzeczenia.nsa.gov.pl obejmujące całość orzecznictwa administrac
 **Zasada 8 — Uchwały SN z mocą zasady prawnej (Kat. 6A — priorytet):**
 Uchwały pełnego składu SN, połączonych izb lub całej izby oraz uchwały
 składu 7 sędziów SN, którym nadano moc zasady prawnej (art. 87 § 1 ustawy
-z 8 grudnia 2017 r. o Sądzie Najwyższym, Dz.U. 2023 poz. 1093), tworzą kategorię
+z 8 grudnia 2017 r. o Sądzie Najwyższym, Dz.U.2023.1093), tworzą kategorię
 6A — wyższą rangą niż zwykłe orzeczenia SN.
 Wiążą wszystkie składy orzekające SN (odstąpienie wymaga uchwały całej Izby).
 Sędziowie sądów powszechnych nie są nimi formalnie związani, lecz mają
@@ -964,10 +961,14 @@ Nie dubluj logiki shared w lokalnych plikach. Lokalne moduły mogą tylko doprec
 
 ## CHANGELOG
 
-> Pełna historia wersji (2.1...2.6) wyniesiona do `references/CHANGELOG.md`
-> (redukcja kosztu kontekstu, 2026-07-12 runda 2) — treść zachowana w 100%,
-> tylko przeniesiona: `view /mnt/skills/user/orzeczenia-sadowe-v2/references/CHANGELOG.md`
->
-> Najnowsza pozycja: **2.6 (2026-07-06)** — Zasada 11: PLAN MINIMUM 5
-> orzeczeń wspierających + 5 linii przeciwnej, zawsze z przesłankami
-> rozstrzygnięcia.
+⛔ **Historia zmian tego skilla NIE mieszka w tym pliku.** Pełny changelog:
+
+```
+view /mnt/skills/user/orzeczenia-sadowe-v2/references/CHANGELOG.md
+```
+
+Skrót bieżącej wersji — pole `changelog:` we frontmatterze powyżej.
+Standard systemowy (2026-08-20z4): `references/CHANGELOG.md` jest jedyną
+lokalizacją kanoniczną historii; zakaz odtwarzania sekcji changelogu w korpusie
+SKILL.md i zakaz trzymania pełnej listy wpisów w YAML.
+

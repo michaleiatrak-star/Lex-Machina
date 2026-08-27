@@ -1,11 +1,11 @@
 # MOD-KARTA-DOWODU — Karta Dowodowa i Graf Faktów
 
-> **Plik:** `/mnt/skills/user/shared/MOD-KARTA-DOWODU.md`
+> **Plik:** `shared/MOD-KARTA-DOWODU.md`
 > **Status:** PRODUKCJA — plik kanoniczny shared
 > **Pozycja w pipeline:**
 >   - pisma-procesowe-v3: W1.2c-PRE (po SD-SKAN, przed MT1 macierzy)
 >   - analizator-dowodow-v3: BLOK-B2 (po ekstrakcji, przed MD2)
-> **Wywołanie:** `view /mnt/skills/user/shared/MOD-KARTA-DOWODU.md`
+> **Wywołanie:** `view shared/MOD-KARTA-DOWODU.md`
 > **Trigger:** OBOWIĄZKOWY gdy ≥2 dokumenty dostarczone przez użytkownika
 
 ---

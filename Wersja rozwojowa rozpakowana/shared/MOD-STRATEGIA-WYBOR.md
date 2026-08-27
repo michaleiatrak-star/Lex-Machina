@@ -1,6 +1,6 @@
 # MOD-STRATEGIA-WYBOR — Obligatoryjna ocena i ranking ścieżek strategicznych
 
-> **Plik:** `/mnt/skills/user/shared/MOD-STRATEGIA-WYBOR.md`
+> **Plik:** `shared/MOD-STRATEGIA-WYBOR.md`
 > **Wersja:** 1.0.0 (2026-06-21)
 > **Status:** PRODUKCJA
 > **Pozycja w pipeline:** W1.2b — między W1.2a (CLAIM-VALIDATION) a W1.3
@@ -274,7 +274,7 @@ RELACJA z istniejącymi modułami:
 
 WYWOŁANIE w SKILL.md:
   Po W1.2a, przed W1.3:
-  view /mnt/skills/user/shared/MOD-STRATEGIA-WYBOR.md
+  view shared/MOD-STRATEGIA-WYBOR.md
   Wykonaj S1 → S2 → S3 → S4 → S5
   ⛔ ZAKAZ przejścia do W1.3 bez zamkniętego S5 (zatwierdzenie użytkownika)
      gdy warunek aktywacji spełniony.

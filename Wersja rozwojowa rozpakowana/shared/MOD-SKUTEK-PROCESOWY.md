@@ -1,9 +1,9 @@
 # MOD-SKUTEK-PROCESOWY — Obowiązkowy Blok Skutku Procesowego
 
-> **Plik:** `/mnt/skills/user/shared/MOD-SKUTEK-PROCESOWY.md`
+> **Plik:** `shared/MOD-SKUTEK-PROCESOWY.md`
 > **Status:** PRODUKCJA — plik kanoniczny shared
 > **Pozycja w pipeline:** W2.2 — koniec każdego bloku uzasadnienia klasy A/B
-> **Wywołanie:** `view /mnt/skills/user/shared/MOD-SKUTEK-PROCESOWY.md`
+> **Wywołanie:** `view shared/MOD-SKUTEK-PROCESOWY.md`
 > **Trigger:** OBOWIĄZKOWY po każdym bloku uzasadnienia zawierającym tezę klasy A lub B
 
 ---

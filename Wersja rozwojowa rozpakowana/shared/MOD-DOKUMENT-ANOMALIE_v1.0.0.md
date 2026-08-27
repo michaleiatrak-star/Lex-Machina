@@ -1,6 +1,6 @@
 # MOD-DOKUMENT-ANOMALIE — Wykrywanie Anomalii w Dokumentach Pracodawcy/Strony Przeciwnej
 
-> **Plik:** `/mnt/skills/user/shared/MOD-DOKUMENT-ANOMALIE_v1.0.0.md`
+> **Plik:** `shared/MOD-DOKUMENT-ANOMALIE_v1.0.0.md`
 > **Wersja:** 1.1.0 (2026-06-23)
 > ⚠ **Niespójność wykryta 2026-07-12:** nazwa fizyczna pliku ma sufiks
 > `_v1.0.0`, a deklarowana wersja w treści to 1.1.0. Nie zmieniono nazwy
@@ -85,7 +85,7 @@ DA-3: KLASYFIKACJA ANOMALII
     EFEKT: wniosek o zbadanie autentyczności dokumentu (art. 253 k.p.c.)
 
 ⛔ TRIGGER ISU — PO DA-3, GDY KLASA I LUB II (rozbieżność identyfikatorów podmiotu):
-  → view /mnt/skills/user/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
+  → view shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
   → Wykonaj ISU-1 → ISU-2 → ISU-3 → ISU-4 (jeśli wynik niejednoznaczny) → ISU-5
   → Formuła ISU-5 [A] = gotowy akapit "Identyfikacja strony" do DA-5
   → Wynik ISU wchodzi do DA-REJ jako kolumna "Podmiot wskazany / element błędny"
@@ -164,7 +164,7 @@ REGUŁA-ADRES-DWUWERSJA:
 ```
 WYWOŁANIE w pisma-procesowe-v3:
   Po SD-VER KOMPLET, równolegle z MOD-POSZLAKI-KONTEKST, przed W1.3:
-  view /mnt/skills/user/shared/MOD-DOKUMENT-ANOMALIE_v1.0.0.md
+  view shared/MOD-DOKUMENT-ANOMALIE_v1.0.0.md
   → DA-0 → DA-1 → DA-2 → DA-3 → DA-4 (DA-REJ) → DA-5
   ⛔ STOP [CP-DA] po DA-4 → wyświetl DA-REJ → czekaj na zatwierdzenie
   Po zatwierdzeniu → DA-5 → zasilenie W1.3

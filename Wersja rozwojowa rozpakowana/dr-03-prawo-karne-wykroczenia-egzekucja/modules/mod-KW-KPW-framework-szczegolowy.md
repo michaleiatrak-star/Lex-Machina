@@ -195,8 +195,8 @@ NOWE PRZESTĘPSTWA KK (NIE wykroczenia — odesłanie):
 ```
 
 ---
-*KW (Dz.U. 2025 poz. 734 t.j. ze zm. Dz.U. 2025 poz. 1872) + KPSW (Dz.U. 2025 poz. 860 t.j.)*
-*KPK stosowany posiłkowo (Dz.U. 2026 poz. 490 t.j.)*
+*KW (Dz.U. 2025.734 t.j. ze zm. Dz.U. 2025 poz. 1872) + KPSW (Dz.U. 2025.860 t.j.)*
+*KPK stosowany posiłkowo (Dz.U. 2026.490 t.j.)*
 *Uchwała SN I KZP 7/25 z 19.03.2026 — sn.pl (weryfikuj URL)*
 *Postanowienie SN IV KK 145/24 z 10.09.2024 — sn.pl*
 *Taryfikator mandatów + punktów karnych: rozp. Dz.U. 2026 poz. 724 — weryfikuj ISAP*

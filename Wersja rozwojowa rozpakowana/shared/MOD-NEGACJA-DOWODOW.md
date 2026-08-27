@@ -421,7 +421,7 @@ Siła: 6/10 przy świadku kl. D; 8/10 przy świadku zależnym służbowo.
 
 ⛔ PEŁNA TAKSONOMIA 9 TECHNIK ATAKU NA ŚWIADKA (TA-1..TA-9) + 9 METOD
    ATAKU NA BIEGŁEGO (B1-B9) + PROCEDURA OBRONY (AC1-AC4):
-   → view /mnt/skills/user/shared/MOD-ATAK-NA-SWIADKA.md
+   → view shared/MOD-ATAK-NA-SWIADKA.md
 
 Skrót — najczęstsze techniki:
   TA-1 Sprzeczność z wcześniejszymi zeznaniami → 3 C's (Commit/Credit/Confront)

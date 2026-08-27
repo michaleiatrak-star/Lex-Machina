@@ -160,11 +160,12 @@
 □ Engines specjalistyczne aktywowane per MODUŁY-MAPA?
    (apelacja → appellate-v8 ✅/N/D; prokuratoria → prosecution-v8 ✅/N/D;
     riposta → rebuttal-v9 ✅/N/D; V10 gdy ≥1 warunek aktywacji ✅/N/D)
-□ [ANTY-FASADA + AF-6] Wykonaj self-check antyfasadowy z modułu kanonicznego:
-    view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
-  ⛔ Treść listy NIE jest tu kopiowana (F-115, 2026-08-23i). Poprzednia kopia
-    miała 1 z 2 pozycji: gdy F-117 dodała AF-6 do źródła, kopie nie zostały
-    zaktualizowane. Jedno miejsce prawdy = jedno miejsce aktualizacji.
+□ [ANTY-FASADA] (dodane 2026-08-23, v2.6) Czy w odpowiedzi/piśmie jest słowo
+  „zweryfikowano/zweryfikowałem", pole „data weryfikacji" albo URL przy przepisie,
+  dla którego NIE wywołałem narzędzia W TEJ ODPOWIEDZI? TAK → ⛔ usuń deklarację
+  i datę, URL przeformatuj na 🎯 [CEL — RZĄD 1, NIEOTWARTE: …], przepis oznacz
+  ⚠️ [NIEWERYFIKOWANE]. Wyzwalacz to BRAK WYWOŁANIA, nie brak narzędzi w sesji.
+  ⛔ Zastrzeżenie selektywne (przy sygnaturach tak, przy przepisach nie) = naruszenie.
 □ [DOMAIN-LOCK] (dodane 2026-08-23, F-109) Pismo zawiera przepis SPOZA
   dziedziny wiodącej ustalonej w W1 (KK/KKS/KW/KPK/KPW przy torze cywilnym,
   pracowniczym lub administracyjnym — albo odwrotnie)?
@@ -181,8 +182,8 @@
   traktuj jak brak 🔴, nie 🔵.
   → view /mnt/skills/user/shared/RATE-COMPLETENESS.md
 □ [STATUSY] Każdy przepis ma znacznik z ZAMKNIĘTEJ hierarchii czterech:
-  ✅ [VER] · 🟨 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
-  ⛔ 🟨 NIE jest równoważne ✅ — do pisma FINAL wymaga domknięcia albo
+  ✅ [VER] · 🟡 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
+  ⛔ 🟡 NIE jest równoważne ✅ — do pisma FINAL wymaga domknięcia albo
   jawnego ⬛. Etykieta spoza listy = naruszenie hard gate (PRAWO-HARDGATE v2.5).
 Którykolwiek = NIE → STOP. Nie oznaczaj pisma jako gotowego.
 ```

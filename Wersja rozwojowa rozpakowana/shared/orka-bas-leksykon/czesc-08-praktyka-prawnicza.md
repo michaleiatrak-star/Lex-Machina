@@ -21,14 +21,14 @@
 ⚠️ TREŚĆ PRZENIESIONA 2026-06-12 — eliminacja duplikacji z DEFINICJE-KLUCZOWE.md C.1
 → Pełna treść (definicja orzecznicza + granica sporna damnum/lucrum + szkoda
   niemajątkowa + reguła adekwatnego związku):
-  view /mnt/skills/user/shared/definicje/DEF-ODPOWIEDZIALNOSC-SZKODA.md
+  view shared/definicje/DEF-ODPOWIEDZIALNOSC-SZKODA.md
 ```
 
 ### BAS-W27 — Termin zawity vs termin przedawnienia vs termin instrukcyjny
 ```
 ⚠️ TREŚĆ PRZENIESIONA 2026-06-12 — eliminacja duplikacji z DEFINICJE-KLUCZOWE.md E.1
 → Pełna treść (3 instytucje + tabela różnic + reguła praktyczna):
-  view /mnt/skills/user/shared/definicje/DEF-PROCEDURA.md
+  view shared/definicje/DEF-PROCEDURA.md
 ```
 
 ### BAS-W28 — Nadużycie prawa (art. 5 KC / art. 8 KP)

@@ -225,7 +225,7 @@ AF-6  ZAKRES (dodano 2026-08-23f, F-117 — TEST3 CX-02 wykazał wygenerowany
 **SELF-CHECK WYKONAWCZY — treść w module kanonicznym, nie tutaj:**
 
 ```
-view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
+view shared/SELF-CHECK-ANTY-FASADA.md
 ```
 
 ⛔ **Deklaracja „propagowana do wszystkich skilli" była NIEPRAWDZIWA** od
@@ -441,7 +441,7 @@ JEŻELI w odpowiedzi, piśmie lub dokumencie ma się pojawić SYGNATURA
 ORZECZENIA — w jakiejkolwiek postaci, także niepełnej, także „z pamięci",
 także jako przykład, także w cudzysłowie cudzej wypowiedzi:
 
-    view /mnt/skills/user/shared/PRAWO-HARDGATE-ORZECZENIA.md
+    view shared/PRAWO-HARDGATE-ORZECZENIA.md
 
 NIE WOLNO kontynuować bez tego wczytania.
 ```
@@ -477,6 +477,48 @@ zasada absolutna, PERMANENT GATE, reguła aktualności, hierarchia statusów
 BRAMKA ANTY-FASADOWA (AF-1…AF-6) i procedura przed każdym PRZEPISEM.
 Załącznik ich nie powtarza i nie zastępuje — **dokłada się do nich**.
 
+## ⛔⛔ OBOWIĄZEK WIDOCZNEGO ZNACZNIKA W DOSTARCZONEJ ODPOWIEDZI — BEZWARUNKOWY
+
+> Dodano: 2026-08-27, na żądanie użytkownika — luka wykryta w sesji: przepisy
+> zostały faktycznie zweryfikowane przez `web_search` w tej samej turze, ale
+> dostarczona odpowiedź nie niosła przy żadnym z cytatów widocznego znacznika
+> statusu. Z perspektywy odbiorcy odpowiedź bez znacznika przy przepisie jest
+> nieodróżnialna od cytatu z pamięci — niezależnie od tego, co faktycznie
+> wykonano w tle. Weryfikacja niewidoczna w dostarczonym tekście **nie
+> spełnia** tego HARD GATE.
+
+**Reguła, bez wyjątków:**
+
+Każde powołanie przepisu, artykułu, paragrafu, ustępu, punktu, stawki,
+terminu, kary, sankcji lub sygnatury orzeczenia **w tekście dostarczonej
+użytkownikowi odpowiedzi** musi nieść bezpośrednio przy sobie jeden ze
+znaczników statusu zdefiniowanych w tym pliku: `✅ [VER: źródło, data]` /
+`🟨 [KOTWICA-URZĘDOWA]` / `⚠️ [NIEWERYFIKOWANE]` / `🎯 [CEL — NIEOTWARTE]`.
+
+Obowiązek ten NIE zależy od (wyliczenie zamknięte):
+
+1. trybu odpowiedzi (LAIK / PRAWNIK);
+2. formy odpowiedzi (pismo procesowe, analiza kazusu, notatka, odpowiedź
+   konwersacyjna) — dotyczy również sytuacji, gdy treść merytoryczna
+   pochodzi z modułu dziedzinowego już oznaczonego jako zweryfikowany przy
+   poprzedniej edycji tego modułu; weryfikacja modułu w przeszłości nie jest
+   weryfikacją cytatu w bieżącej odpowiedzi;
+3. liczby przepisów cytowanych w jednej odpowiedzi;
+4. subiektywnej pewności modelu co do treści przepisu;
+5. tego, czy weryfikacja miała miejsce we wcześniejszym kroku TEJ SAMEJ
+   odpowiedzi bez pokazania znacznika w miejscu samego cytatu.
+
+⛔ Znacznik pokazany zbiorczo w JEDNYM miejscu odpowiedzi (np. nagłówek
+„podstawa: ... zweryfikowano dnia ...") NIE zwalnia z oznaczenia PRZY KAŻDYM
+pojedynczym powołaniu w dalszej części tekstu. Zbiorczy nagłówek
+weryfikacyjny, niepowtórzony przy każdym przepisie, jest wariantem BRAMKI
+ANTY-FASADOWEJ opisanej wyżej: buduje w oczach czytelnika wrażenie pełnego
+pokrycia, którego pojedyncze cytaty w treści faktycznie nie niosą.
+
+Brak znacznika przy jakimkolwiek powołaniu w dostarczonej odpowiedzi =
+naruszenie HARD GATE na równi z cytowaniem z pamięci — niezależnie od tego,
+czy weryfikacja faktycznie miała miejsce w tle.
+
 ## SKUTKI NARUSZENIA
 
 Naruszenie tego hardgate = błąd dyskredytujący całą analizę lub pismo.
@@ -502,5 +544,5 @@ pierwszej normy** — każdy z 114 plików odsyłających do tej bramki czytał 
 wersji 2.0–2.6, zanim dotarł do zakazu. Przeniesione do:
 
 ```
-view /mnt/skills/user/shared/references/CHANGELOG.md
+view shared/references/CHANGELOG.md
 ```

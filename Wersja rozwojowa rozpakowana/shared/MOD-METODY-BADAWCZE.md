@@ -125,7 +125,7 @@ WYNIK SZKICU: lista 1-3 fragmentów + obserwacja wg wzorca §1a, naklad_szacowan
 ```
 ```
 PROCEDURA GŁĘBOKA (KROK B, po wyborze "Analiza głęboka"):
-  view /mnt/skills/user/analizator-dowodow-v3/SKILL.md → wczytaj MP6 zgodnie
+  view analizator-dowodow-v3/SKILL.md → wczytaj MP6 zgodnie
   z dotychczasową logiką (BLOK E2) — pełne profilowanie/VSA/HUMINT dla
   fragmentów wskazanych w szkicu (nie dla całego materiału, jeśli szkic
   zawęził zakres).

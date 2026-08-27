@@ -21,7 +21,7 @@
 
 ## CZYNY NIEUCZCIWEJ KONKURENCJI — KATALOG
 
-> ✅ Rozdz. 2 uzupełniony 2026-08-19 (F-90, faza 1/2) — Dz.U. 2026 poz. 85 t.j.
+> ✅ Rozdz. 2 uzupełniony 2026-08-19 (F-90, faza 1/2) — Dz.U. 2026.85 t.j.
 
 | Czyn | Art. UZNK | Opis |
 |---|---|---|
@@ -61,7 +61,7 @@ NIEAKTUALNYM szkicem sprzed pełnej weryfikacji, zachowanym tylko jako
 17f, 17g, 17h dotąd całkowicie nieopisane; art. 17b i 17e USTALONE JAKO
 UCHYLONE. Zweryfikowane: Rząd 1 (bezpośredni cytat PDF ISAP,
 D19930211Lj.pdf, dla art. 15a/15c/17f/17g) + Rząd 2B (lexlege.pl,
-arslege.pl z cytatem "Dz.U.2026.0.85 t.j.", prawo.pl, dlajurysty.pl,  <!-- zapis źródła cytowany dosłownie — CELOWO nieujednolicony (F-125, 2026-08-24d) -->
+arslege.pl z cytatem "Dz.U.2026.0.85 t.j.", prawo.pl, dlajurysty.pl,
 skarbiec.biz, lipinskiwalczak.pl). ⚠️ Art. 17d oznaczony niżej jako
 zweryfikowany WYŁĄCZNIE 1 źródłem Rządu 3 (lipinskiwalczak.pl) — zgodnie
 z ZASADĄ 14 wymaga DALSZEJ weryfikacji przed cytowaniem w piśmie
@@ -259,7 +259,7 @@ przez wcześniejszy wpis flagi F-90 jako wymagający treści merytorycznej
 "postępowanie zabezpieczające" — NIE MA takiej treści, bo przepis nie
 istnieje). Zweryfikowane: Rząd 1 (bezpośredni cytat PDF ISAP,
 D19930211Lj.pdf, wprost: "Art. 21. (uchylony)") + Rząd 2B (lexlege.pl,
-arslege.pl, prawo.pl, sip.lex.pl z cytatem "Dz.U.2026.85 t.j." dla art.  <!-- zapis źródła cytowany dosłownie — CELOWO nieujednolicony (F-125, 2026-08-24d) -->
+arslege.pl, prawo.pl, sip.lex.pl z cytatem "Dz.U.2026.85 t.j." dla art.
 18/19/21, standardyprawa.pl, kruczek.pl).
 ```
 
@@ -347,7 +347,7 @@ błędnie podawała "3 lata od dowiedzenia się o czynie i osobie
 zobowiązanej, max 10 lat od czynu" — TA KONSTRUKCJA JEST BŁĘDNA,
 przypomina ogólną zasadę deliktową z KC, nie aktualne brzmienie UZNK.
 
-Dosłowne brzmienie art. 20 UZNK (t.j. Dz.U. 2026 poz. 85), potwierdzone
+Dosłowne brzmienie art. 20 UZNK (t.j. Dz.U.2026.85), potwierdzone
 zgodnie w 4 źródłach Rządu 2B (prawo.pl, lexlege.pl, arslege.pl —
 identyczny tekst):
 
@@ -380,8 +380,8 @@ nieopisane (art. 5 był już zweryfikowany wcześniej, patrz tabela wyżej).
 Zweryfikowane 6+ zgodnymi źródłami, w tym BEZPOŚREDNI CYTAT PDF z ISAP
 (Rząd 1: isap.sejm.gov.pl/isap.nsf/download.xsp/WDU19930470211/U/
 D19930211Lj.pdf) + Rząd 2B (lexlege.pl, inforlex.pl z cytatem "Dz.U.
-2026 r." wprost, arslege.pl z cytatem "Dz.U.2026.0.85 t.j.", dlajurysty.pl,  <!-- zapis źródła cytowany dosłownie — CELOWO nieujednolicony (F-125, 2026-08-24d) -->
-portalzp.pl, krn.pl) — wszystkie zgodne co do treści. t.j. Dz.U. 2026 poz. 85,
+2026 r." wprost, arslege.pl z cytatem "Dz.U.2026.0.85 t.j.", dlajurysty.pl,
+portalzp.pl, krn.pl) — wszystkie zgodne co do treści. t.j. Dz.U. 2026.85,
 ta sama podstawa co reszta modułu.
 ```
 
@@ -504,7 +504,7 @@ mogą uzasadniać OBA reżimy jednocześnie, nie wykluczają się.
 ```
 ✅ NOWA SEKCJA 2026-08-21 (F-90) — Rozdział 4 UZNK dotąd CAŁKOWICIE
 nieopisany w tym module. Zweryfikowane zgodnie w 4+ źródłach Rządu 2B
-(lexlege.pl, inforlex.pl [z jawnym cytatem "Dz.U.2026.0.85 t.j."],  <!-- zapis źródła cytowany dosłownie — CELOWO nieujednolicony (F-125, 2026-08-24d) -->
+(lexlege.pl, inforlex.pl [z jawnym cytatem "Dz.U.2026.0.85 t.j."],
 arslege.pl, standardyprawa.pl) — t.j. Dz.U. 2026 poz. 85, ta sama
 podstawa co już zweryfikowany art. 20 (przedawnienie, wyżej w tym pliku).
 ⚠️ Weryfikuj ponownie w ISAP przed użyciem w piśmie procesowym — sekcja

@@ -13,7 +13,7 @@ definicyjny macierzysty.
 
 **Status weryfikacji źródłowej:** pełna treść obu rozdziałów pobrana
 w CAŁOŚCI dwoma `web_fetch`/`web_search` ze stron rozdziałowych arslege.pl
-(Rząd 2B, k539/s6330 i s6331, Dz.U. 2025 poz. 539 t.j., stan deklarowany
+(Rząd 2B, k539/s6330 i s6331, Dz.U.2025.0.539 t.j., stan deklarowany
 17.08.2026). Potwierdzenie zbieżne: lexlege.pl, prawo.pl (oficjalny portal
 Wolters Kluwer, cytujący pełny tekst t.j. Dz.U. 2025 poz. 539),
 lowiecki.pl, prawnik.cc, standardyprawa.pl, dwa PDF-y kancelaryjne/
@@ -29,9 +29,9 @@ izbowe (Zarząd Okręgowy PZŁ Włocławek, kpodr.pl).
 >
 > **ROZSTRZYGNIĘCIE:** wersja aktualna (samorząd województwa) potwierdzona
 > w **6 niezależnych źródłach** przy oznaczeniu aktualnego t.j.
-> Dz.U. 2025 poz. 539: lexlege.pl, lowiecki.pl, **prawo.pl** (Wolters Kluwer,
+> Dz.U.2025.0.539: lexlege.pl, lowiecki.pl, **prawo.pl** (Wolters Kluwer,
 > R2A — wysoka wiarygodność, cytuje pełny tekst t.j. z bezpośrednim
-> odesłaniem do `Dz.U. 2025 poz. 539 t.j.`), PDF Zarządu Okręgowego PZŁ
+> odesłaniem do `Dz.U. 2025.539 t.j.`), PDF Zarządu Okręgowego PZŁ
 > Włocławek, PDF kpodr.pl, standardyprawa.pl. Wersja "wojewodowie" pochodzi
 > z tekstu SPRZED nowelizacji przenoszącej kompetencję na samorząd
 > województwa — **nie jest aktualnym stanem prawnym i NIE MOŻE być

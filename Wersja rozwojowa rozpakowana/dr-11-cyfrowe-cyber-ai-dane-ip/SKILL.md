@@ -1,6 +1,6 @@
 ---
 name: dr-11-cyfrowe-cyber-ai-dane-ip
-version: "3.11"
+version: 3.10
 description: |
   DR-11: Cyfrowe, Cyberbezpieczeństwo, AI, Dane, IP
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
@@ -28,25 +28,6 @@ Kluczowe daty na 2026-06-05:
 - ✅ DORA: obowiązuje od 17.01.2025
 - ✅ MiCA: w pełni od 30.12.2024
 - ⏳ CRA (Cyber Resilience Act): stosowanie do 11.12.2027
-
-
-> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
-> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
->
-> ```
-> view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
-> ```
->
-> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
-> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
-> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
-> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
-> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
-> zmianie brzmienia).
->
-> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
-> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
-> oznaczenia, tylko je wymusza.
 
 ---
 

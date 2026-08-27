@@ -23,17 +23,18 @@ JEŚLI BLOK 0A nie zamknięty → STOP. Żaden punkt poniżej nie jest wykonywan
 □ Wczytałem references/KROK1-detekcja.md (tryb + hard gate ISAP)?
 □ web_search/web_fetch dla każdego artykułu/liczby — FAKTYCZNIE wywołałem narzędzie?
 □ Każdy artykuł/termin/orzeczenie ma znacznik z ZAMKNIĘTEJ hierarchii czterech:
-  ✅ [VER] · 🟨 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
+  ✅ [VER] · 🟡 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
   ⛔ Użycie JAKIEJKOLWIEK innej etykiety (w tym opisania pamięci modelu jako
   szczebla źródła) = naruszenie hard gate. Patrz PRAWO-HARDGATE v2.5.
 □ RZĄD 1 niedostępny (robots)? → sekwencja B-1 web_search → B-2 web_fetch
   wykonana, a przy blokadzie warunki K-1…K-4 kotwicy urzędowej spełnione?
 □ Sprawa karna → wczytałem mod-N-karne.md → mod-N zdecydował: kwalifikator TAK/NIE?
-□ [ANTY-FASADA + AF-6] Wykonaj self-check antyfasadowy z modułu kanonicznego:
-    view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
-  ⛔ Treść listy NIE jest tu kopiowana (F-115, 2026-08-23i). Poprzednia kopia
-    miała 1 z 2 pozycji: gdy F-117 dodała AF-6 do źródła, kopie nie zostały
-    zaktualizowane. Jedno miejsce prawdy = jedno miejsce aktualizacji.
+□ [ANTY-FASADA] (dodane 2026-08-23, v2.6) Czy w odpowiedzi/piśmie jest słowo
+  „zweryfikowano/zweryfikowałem", pole „data weryfikacji" albo URL przy przepisie,
+  dla którego NIE wywołałem narzędzia W TEJ ODPOWIEDZI? TAK → ⛔ usuń deklarację
+  i datę, URL przeformatuj na 🎯 [CEL — RZĄD 1, NIEOTWARTE: …], przepis oznacz
+  ⚠️ [NIEWERYFIKOWANE]. Wyzwalacz to BRAK WYWOŁANIA, nie brak narzędzi w sesji.
+  ⛔ Zastrzeżenie selektywne (przy sygnaturach tak, przy przepisach nie) = naruszenie.
 □ [DOMAIN-LOCK] ⛔ KONTROLA NA WYJŚCIU (nie na wejściu — dodano 2026-08-23):
   czy w GOTOWEJ odpowiedzi jest przepis spoza PRIMARY (KK/KKS/KW/KPK/KPW przy
   torze cywilnym/administracyjnym — lub odwrotnie)?
@@ -54,20 +55,6 @@ JEŚLI BLOK 0A nie zamknięty → STOP. Żaden punkt poniżej nie jest wykonywan
 □ Sklasyfikowałem do [1]–[10] (lub BJ–BW)?
 □ Sprawdziłem shared/ACTIVATION-MATRIX.md przy nakładaniu się skillów?
 □ Wczytałem PRIMARY skill PRZED analizą?
-□ [KROK 3A ŚLAD ROUTINGU] Wypisałem blok TRYB/PRIMARY/SECONDARY/ODRZUCONE/
-  WERSJA ROUTERA/ROUTER-WCZYTANY zaraz po KROK 3, przed KROK 4? Jeśli
-  ROUTER-WCZYTANY: NIE dla PRIMARY → dodałem nagłówek ⛔ TRYB ZDEGRADOWANY?
-□ [ŚLAD ROUTINGU] ⛔ KONTROLA NA WYJŚCIU (analogicznie do DOMAIN-LOCK, nie
-  polegaj wyłącznie na własnej deklaracji z KROK 3A — dodano 2026-08-23f,
-  po pytaniu użytkownika: pole ROUTER-WCZYTANY jest samo-raportem, który
-  nic nie wymusza, jeśli wywołanie zostało pominięte bez błędu narzędzia):
-  czy GOTOWA odpowiedź zawiera treść charakterystyczną dla PRIMARY-skilla
-  (jego terminologia, struktura, checkpointy, formularze) BEZ odpowiadającego
-  jej wywołania `view` widocznego w TEJ odpowiedzi?
-    NIE → OK, ślad routingu wiarygodny
-    TAK → ⛔ deklaracja ROUTER-WCZYTANY: TAK w KROK 3A jest FASADĄ — cofnij
-          się, faktycznie wywołaj `view` na PRIMARY, PRZEPISZ blok KROK 3A
-          zgodnie ze stanem faktycznym po wywołaniu
 □ Sprawdziłem termin zawity (nakaz/wyrok)?
 □ [INTENT-DOCX] Pismo procesowe → delegowane do pisma-procesowe-v3?
    Status DRAFT/FINAL, watermark, CP-GATE — wyłącznie w pisma-procesowe-v3.

@@ -115,7 +115,7 @@ Uzupełnia F.2 (przepisy) i F.3 (orzeczenia) — F.2/F.3 sprawdzają czy
 PRZYWOŁANE źródła są prawdziwe; F.5 sprawdza czy ARGUMENTACJA jako całość
 ma sens, niezależnie od poprawności poszczególnych cytatów.
 
-view /mnt/skills/user/shared/QUALITY-CHECK.md
+view shared/QUALITY-CHECK.md
 
 □ SPÓJNOŚĆ: czy argumenty wynikają jeden z drugiego, czy są ze sobą
   niesprzeczne (daty, kwoty, twierdzenia)?
@@ -157,11 +157,11 @@ poprawności pisma (to F.2-F.5), lecz jego KONSEKWENCJE.
 
 □ TERMIN: zob. KROK G (ZAWSZE PIERWSZE w tym trybie) — czy pismo uruchamia
   termin na reakcję? Jaki i od kiedy biegnie?
-view /mnt/skills/user/shared/TERM-CALC.md  (jeśli potrzebne obliczenie)
+view shared/TERM-CALC.md  (jeśli potrzebne obliczenie)
 
 □ OBOWIĄZEK REAKCJI: czy brak odpowiedzi na to pismo ma skutek (np.
   uznanie twierdzeń, prekluzja, domyślne rozstrzygnięcie)?
-view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md  (jeśli dotyczy)
+view shared/PREKLUZJA-DOWODOWA.md  (jeśli dotyczy)
 
 □ RYZYKO: czy pismo (własne lub przeciwnika) zawiera coś, co działa na
   niekorzyść użytkownika — przyznanie, brak zarzutu, przekroczony termin?
@@ -169,12 +169,12 @@ view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md  (jeśli dotyczy)
 □ KOSZT: jeśli pismo wszczyna postępowanie lub jest odpowiedzią na
   wezwanie do zapłaty — czy są koszty do rozważenia (opłata, ryzyko kosztów
   przegranej)?
-view /mnt/skills/user/analizator-dowodow-v3/modules/MP10-koszty.md  (jeśli
+view analizator-dowodow-v3/modules/MP10-koszty.md  (jeśli
   potrzebna głębsza analiza kosztowa)
 
 □ DALSZY KROK: konkretna rekomendacja — co złożyć, do kiedy, w jakiej
   kolejności
-view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md  (jeśli sprawa wymaga
+view shared/STRATEGIA-PROCESOWA.md  (jeśli sprawa wymaga
   decyzji taktycznej, nie tylko jednego kroku)
 
 WYNIK DLA LAIKA:

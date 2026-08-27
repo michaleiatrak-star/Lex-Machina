@@ -14,12 +14,12 @@ o przestępstwie, zakaz zbliżania (środek zapobiegawczy i nakazowy).
    ⚠️ DODANE 2026-07-27 (FAZA 3E/ZASADA 14) — brakująca kara dla §3:
    pozbawienie wolności OD 2 DO 15 LAT. Potwierdzone dosłownym cytatem
    w 2 zgodnych źródłach Rządu 2B z AKTUALNYM t.j. (lexlege.pl,
-   arslege.pl — oba Dz.U. 2025 poz. 383). ⚠️ UWAGA: część źródeł (w tym
+   arslege.pl — oba Dz.U.2025.0.383). ⚠️ UWAGA: część źródeł (w tym
    Rządu 3) wciąż pokazuje NIEAKTUALNE "2 do 12 lat" — to stan
    SPRZED podwyższenia górnej granicy; NIE cytuj tej starszej wartości.
 
 2. **UWAGA: GROŹBA KARALNA (art. 190 KK) — ODRĘBNY PRZEPIS**
-   - Art. 190 §1 KK (Dz.U. 2025 poz. 383): kara do **3 lat** pozbawienia wolności
+   - Art. 190 §1 KK (Dz.U.2025.383): kara do **3 lat** pozbawienia wolności
    - Art. 190 §2 KK: „Ściganie następuje na wniosek pokrzywdzonego"
    - **Wyjątek procesowy — art. 12 §4 KPK (od 01.10.2023):** można wszcząć BEZ wniosku
      jeżeli zachodzi duże prawdopodobieństwo, że niezłożenie wniosku wynika z **obawy przed

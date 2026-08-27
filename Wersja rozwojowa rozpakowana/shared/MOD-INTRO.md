@@ -124,7 +124,7 @@ W pisma-procesowe-v3, W2, po W2.2 (struktura):
 ```
 W2.2 → struktura pisma (nagłówek + petitum + szkielet uzasadnienia)
   ↓
-W2.2a → MOD-INTRO: view /mnt/skills/user/shared/MOD-INTRO.md
+W2.2a → MOD-INTRO: view shared/MOD-INTRO.md
          → Wygeneruj executive summary (2–5 zdań)
          → Wstaw jako pierwszy akapit pisma, przed petitum
          → Przepisy oznacz ⚠️[...] jak w reszcie W2

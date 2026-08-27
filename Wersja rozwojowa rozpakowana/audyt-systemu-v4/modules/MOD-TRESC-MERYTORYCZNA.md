@@ -117,8 +117,8 @@ dotyczy tej nowelizacji).
 
 | Akt (zmiana) | Moduł dotknięty | Art. zmienione | Wynik | Akcja |
 |---|---|---|---|---|
-| Ordynacja podatkowa Dz.U. 2026 poz. 622 | dr-06/mod-OP-ordynacja-podatkowa.md | art. 70 §1 (termin) | ❌ CRIT-TREŚĆ | naprawiono str_replace, patrz wpis journal |
-| KC Dz.U. 2025 poz. 1071 (nowy t.j.) | dr-02/mod-*.md | brak zmian normatywnych (t.j. redakcyjny) | ✅ ZGODNE | brak akcji |
+| Ordynacja podatkowa Dz.U. 2026.622 | dr-06/mod-OP-ordynacja-podatkowa.md | art. 70 §1 (termin) | ❌ CRIT-TREŚĆ | naprawiono str_replace, patrz wpis journal |
+| KC Dz.U. 2025.1071 (nowy t.j.) | dr-02/mod-*.md | brak zmian normatywnych (t.j. redakcyjny) | ✅ ZGODNE | brak akcji |
 ```
 
 Jeśli FAZA 3E była pominięta (brak zmian w tej sesji) — sekcja zawiera

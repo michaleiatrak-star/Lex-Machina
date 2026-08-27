@@ -25,7 +25,7 @@ kuratora, zakaz prowadzenia pojazdów, przestępstwa przeciwko mieniu, zdrowiu.
    Porozumienie z pokrzywdzonym → podstawa warunkowego umorzenia lub
    nadzwyczajnego złagodzenia kary.
 
-5. **PRZEDAWNIENIE KARALNOŚCI (art. 101 KK) — Dz.U. 2025 poz. 383:**
+5. **PRZEDAWNIENIE KARALNOŚCI (art. 101 KK) — Dz.U.2025.383:**
 
    | Kategoria (art. 101 §1) | Termin |
    |---|---|

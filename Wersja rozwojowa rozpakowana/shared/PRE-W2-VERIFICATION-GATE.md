@@ -1,6 +1,6 @@
 # PRE-W2-VERIFICATION-GATE — Bramka Weryfikacji Przed Redakcją Pisma
 
-> **Plik:** `/mnt/skills/user/shared/PRE-W2-VERIFICATION-GATE.md`
+> **Plik:** `shared/PRE-W2-VERIFICATION-GATE.md`
 > **Wersja:** 1.0.0 (2026-06-21)
 > **Status:** PRODUKCJA — naprawa błędów krytycznych sesji VII P 94/25
 > **Pozycja w pipeline:** między W1 (checkpoint) a W2 (redakcja) — BLOKUJE W2
@@ -193,12 +193,12 @@ Gdy w aktach sprawy widnieją RÓŻNE NIP lub RÓŻNE KRS przy zbliżonej nazwie
 Gdy weryfikacja wykryje KAT-I, KAT-II lub KAT-III (patrz poniżej):
 
 KROK 1 — Identyfikacja strony każdej umowy:
-  → NATYCHMIAST: view /mnt/skills/user/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
+  → NATYCHMIAST: view shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
   → Wykonaj ISU-1 → ISU-2 → ISU-3 → ISU-4 (jeśli konieczne) → ISU-5
   → Formuła ISU-5 [A] = akapit "Identyfikacja strony" do pisma
 
 KROK 2 — Scalenie pracodawców / kontrahentów (gdy KAT-II — seria z różnych podmiotów):
-  → view /mnt/skills/user/pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md
+  → view pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md
   → Wykonaj R1→R2→R3 (warstwy W1–W4) →R4→R5
   → ⛔ ZAKAZ przejścia do PRE-W2.D bez RAPORTU R5
 
@@ -228,9 +228,9 @@ w umowie 3 → trigger (ta sama liczba przy innej nazwie = anomalia wymagająca 
 
 ⛔ [MOD-IDENTYFIKACJA-TRIGGER] — PO WERYFIKACJI NUMERÓW:
 Gdy PRE-W2.D wykryje ROZBIEŻNOŚĆ (KRS lub NIP z akt ≠ dane z rejestru):
-KROK 1: view /mnt/skills/user/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md → ISU-1→ISU-5
+KROK 1: view shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md → ISU-1→ISU-5
          (kto jest stroną każdej umowy z osobna)
-KROK 2: view /mnt/skills/user/pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md → R1→R5
+KROK 2: view pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md → R1→R5
          (scalenie podmiotów — tylko gdy KAT-II — seria z różnych podmiotów)
 ⛔ ZAKAZ przejścia do PRE-W2.E bez zamkniętego ISU-5 i (jeśli KAT-II) R5
 
@@ -320,7 +320,7 @@ NOWA SEKWENCJA (po naprawie):
 
 WYWOŁANIE w SKILL.md pisma-procesowe-v3:
   Po checkpoincie W1→W2, przed W2.1:
-  view /mnt/skills/user/shared/PRE-W2-VERIFICATION-GATE.md
+  view shared/PRE-W2-VERIFICATION-GATE.md
   Wykonaj PRE-W2.A → PRE-W2.B → PRE-W2.C → PRE-W2.D → PRE-W2.E → PRE-W2.F
   ⛔ ZAKAZ przejścia do W2.1 bez zamkniętego GATE (GATE-OK lub GATE-WARN)
 ```

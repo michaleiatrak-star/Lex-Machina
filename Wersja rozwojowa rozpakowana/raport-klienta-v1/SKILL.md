@@ -1,6 +1,6 @@
 ---
 name: raport-klienta-v1
-version: "1.4"
+version: 1.2
 type: ux-raport
 status: production
 compatibility: "prawny-router-v3, raport-sytuacyjny-v2, show_widget"
@@ -22,20 +22,6 @@ description: |
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 > Raport może zawierać terminy, przepisy lub sygnatury — przed ich podaniem:
 > `view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
-
-> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
-> (podłączone 2026-08-23i, flaga F-115 — ten skill cytuje prawo, a bramki nie miał):
->
-> ```
-> view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
-> ```
->
-> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
-> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
-> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
-> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
-> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
-> zmianie brzmienia).
 
 ---
 

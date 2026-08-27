@@ -183,7 +183,7 @@ Ustawa o środkach przymusu bezpośredniego i broni palnej:
   Dz.U. 2026 poz. 244 t.j. (obwieszczenie Marszałka Sejmu z 20.02.2026)
   — poprzednie t.j. Dz.U. 2023 poz. 202 i Dz.U. 2025 poz. 555 NIEAKTUALNE,
     zastąpione przez t.j. 2026.244
-  ✅ VER: isap.sejm.gov.pl, inforlex.pl (Dz.U. 2026 poz. 244) 2026-08-14 (F-57)
+  ✅ VER: isap.sejm.gov.pl, inforlex.pl (Dz.U.2026.061.0000244) 2026-08-14 (F-57)
   ⚠️ weryfikuj dalsze zm. w ISAP przed każdym powołaniem
 
 Odpowiedzialność odszkodowawcza Skarbu Państwa za działania Policji:

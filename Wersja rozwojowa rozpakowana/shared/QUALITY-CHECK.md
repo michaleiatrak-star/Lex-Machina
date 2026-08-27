@@ -41,7 +41,7 @@ Wymagane poprawki: ...
 Po kontroli redakcyjnej i logicznej — zawsze uruchom:
 
 ```
-view /mnt/skills/user/shared/MOD-KONCENTRACJA.md
+view shared/MOD-KONCENTRACJA.md
 ```
 
 Moduł ocenia czy pismo mieści się w limicie orientacyjnym per typ
@@ -55,7 +55,7 @@ Sprawdź czy pismo zawiera executive summary (str. 1):
 ```
 Czy pismo ma executive summary (2–5 zdań przed petitum)?
   NIE i typ pisma wymaga (pozew / apelacja / pismo >3 str.):
-    → view /mnt/skills/user/shared/MOD-INTRO.md
+    → view shared/MOD-INTRO.md
     → Wygeneruj executive summary i wstaw przed petitum
   TAK → sprawdź czy spełnia wymogi z MOD-INTRO §3 (max 150 słów,
         max 2 przepisy, brak emocji)

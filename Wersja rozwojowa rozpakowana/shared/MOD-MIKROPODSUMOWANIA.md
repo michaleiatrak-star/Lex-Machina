@@ -1,9 +1,9 @@
 # MOD-MIKROPODSUMOWANIA — Obowiązkowe Podsumowanie Każdego Rozdziału
 
-> **Plik:** `/mnt/skills/user/shared/MOD-MIKROPODSUMOWANIA.md`
+> **Plik:** `shared/MOD-MIKROPODSUMOWANIA.md`
 > **Status:** PRODUKCJA — plik kanoniczny shared
 > **Pozycja w pipeline:** W2.2 — koniec każdego rozdziału/sekcji numerowanej
-> **Wywołanie:** `view /mnt/skills/user/shared/MOD-MIKROPODSUMOWANIA.md`
+> **Wywołanie:** `view shared/MOD-MIKROPODSUMOWANIA.md`
 > **Trigger:** OBOWIĄZKOWY po każdym numerowanym rozdziale uzasadnienia
 
 ---

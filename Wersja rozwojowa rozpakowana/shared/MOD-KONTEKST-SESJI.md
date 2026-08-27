@@ -146,7 +146,7 @@ Nieweryfikowane orzeczenia (⚠️ do W3): [lista — opisowo]
 Wersje modułów użytych w sesji:
 - analizator-dowodow-v3: [version]
 - pisma-procesowe-v3: [version] (jeśli użyty)
-- przesluchanie-swiadkow-v2: [version] (jeśli użyty)
+- przesluchanie-swiadkow-v2-min90: [version] (jeśli użyty)
 Metody badawcze wykonane: [lista ID E2a-j]
 Metody badawcze — szkic bez głębokiej: [lista ID]
 
@@ -244,7 +244,7 @@ KROK I4 — Integracja z modułami:
   MOD-SELEKCJA-DOWODOW — korpus_dowodow_wstepny i ostrzezenia_krzyzowe z I2
     jako stan wyjściowy; jeśli użytkownik dostarczył NOWE dokumenty →
     uruchom KROK 3B.3 dla nowych + utrzymaj decyzje z poprzedniej sesji.
-  przesluchanie-swiadkow-v2 — wyniki_metod i chronologia z I2 traktowane
+  przesluchanie-swiadkow-v2-min90 — wyniki_metod i chronologia z I2 traktowane
     jak wynik KROK 0 (§ KROK 0 w SKILL.md przesluchania) — nie ma potrzeby
     ponownego intake dotyczącego sprawy.
 
@@ -259,7 +259,7 @@ KROK I5 — Flaga IMPORT_AKTYWNY = true dla tej sesji.
 ## 5. Integracja z przesłuchaniem świadków
 
 ```
-Gdy przesluchanie-swiadkow-v2 KROK 0 wykryje IMPORT_AKTYWNY lub wyniki KROK 3B
+Gdy przesluchanie-swiadkow-v2-min90 KROK 0 wykryje IMPORT_AKTYWNY lub wyniki KROK 3B
 z bieżącej sesji — następujące sekcje kontekstu zasilają W1 intake:
 
   §2 ROSZCZENIA GŁÓWNE → tezy do wykazania przez świadka (WARSTWA A,

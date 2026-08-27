@@ -83,7 +83,7 @@ B. PLATFORMA / PORTAL:
 
 C. POWÓDZTWO CYWILNE O UJAWNIENIE DANYCH:
    → Sąd cywilny może nakazać operatorowi ujawnienie danych abonenta
-   → Podstawa: art. 159 ust. 2 pkt 4 Prawa telekomunikacyjnego (Dz.U. 2024 poz. 1221 t.j.) lub odpowiednik w ustawie o komunikacji elektronicznej — weryfikuj aktualnie w isap.sejm.gov.pl
+   → Podstawa: art. 159 ust. 2 pkt 4 Prawa telekomunikacyjnego (Dz.U. 2024.1221 t.j.) lub odpowiednik w ustawie o komunikacji elektronicznej — weryfikuj aktualnie w isap.sejm.gov.pl
    → Skuteczne np. wobec operatorów polskich — szybsze niż MLAT
 
 D. EUROPEJSKI NAKAZ ZACHOWANIA DANYCH (e-Evidence):
@@ -158,7 +158,7 @@ REKOMENDACJA: □ Zawiadomienie karne  □ Pozew cywilny  □ Zgłoszenie platfo
 | Orzecznictwo SN / SA | `orzeczenia-sadowe-v2` |
 
 *KK: Dz.U. 2025 poz. 383 t.j. | Rozdział XXXIII — Przestępstwa przeciwko ochronie informacji*
-*Prawo telekomunikacyjne: Dz.U. 2024 poz. 1221 t.j. — weryfikuj w isap.sejm.gov.pl*
+*Prawo telekomunikacyjne: Dz.U. 2024.1221 t.j. — weryfikuj w isap.sejm.gov.pl*
 *DSA (Rozp. UE 2022/2065): stosowany od 17.02.2024 dla wszystkich platform*
 *e-Evidence (Rozp. UE 2023/1543): wdrożenie transgraniczne — weryfikuj stan w EUR-LEX*
 *Weryfikacja: 22.05.2026 — zakaz cytowania przepisów z pamięci*

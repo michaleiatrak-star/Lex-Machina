@@ -1,6 +1,6 @@
 ---
 name: raport-sytuacyjny-v2
-version: "2.8"
+version: 2.6
 type: executive-raport
 status: production
 compatibility: "prawny-router-v3, web_search, web_fetch, show_widget"
@@ -16,84 +16,28 @@ description: |
   i luki dowodowe, rekomendacje procesowe z priorytetem, priorytety aspektów
   (główne/poboczne) z MOD-PRIORYTETY-ASPEKTOW, historię wariantów strategii
   z MOD-HISTORIA-STRATEGII, eksport PDF.
-changelog: |
-  Wersja bieżąca: 2.8. Pełna historia — references/CHANGELOG.md
-  (plik założony 2026-08-23g przy okazji naprawy F-123; do tej daty wpisy
-  mieszkały w tym polu YAML wbrew ZASADZIE 15 audyt-systemu-v4).
-  Skrót: 2.7 — HARD GATE do shared/PRAWO-HARDGATE.md dla twierdzeń o prawie
-  renderowanych w widgecie (F-123). 2.6 — zakładka Historia strategii,
-  sekcja Priorytety sprawy w zakładce Ryzyka.
+changelog:
+  - "2.6: nowa zakładka Historia strategii (oś czasu wersji z
+    MOD-HISTORIA-STRATEGII, oznaczenie wybranego/odrzuconych wariantów,
+    porównanie wersji, powrót do wariantu); rozszerzenie zakładki Ryzyka o
+    sekcję Priorytety sprawy (aspekty główne/poboczne + metody badawcze z
+    MOD-PRIORYTETY-ASPEKTOW); nowe pola blueprintu: priorytetyAspektow,
+    historiaStrategii"
 ---
 
-# Raport Sytuacyjny Sprawy v2
+# Raport Sytuacyjny Sprawy v2.5
 # Kompatybilny z: prawny-router-v3
-
-*(Nagłówek nosi sam MAJOR — decyzja generalna F-102(C): numer pełny mieszka
-wyłącznie w polu `version:`. Do 2026-08-23g stało tu „v2.5" przy `version: 2.6`
-w YAML — rozjazd o jedną wersję, klasa T12/F-102.)*
-
----
-
-> ⛔ **HARD GATE — TWIERDZENIA O PRAWIE W WIDGECIE (dodane 2026-08-23g, flaga F-123)**
->
-> Ten skill **renderuje treść bezpośrednio użytkownikowi końcowemu** — chronologia,
-> mapa ryzyk, rekomendacje procesowe i pole `podstawa` zawierają twierdzenia o
-> obowiązującym prawie (przepisy, terminy, skutki procesowe). Widget jest ostatnim
-> ogniwem przed odbiorcą: co przejdzie tutaj, nie ma już żadnej kolejnej kontroli.
->
-> Przed wpisaniem do blueprintu JAKIEGOKOLWIEK przepisu, terminu ustawowego,
-> sygnatury orzeczenia lub skutku procesowego:
->
-> ```
-> view /mnt/skills/user/shared/PRAWO-HARDGATE.md
-> ```
-
-> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
-> (podłączone 2026-08-23i, flaga F-115 — ten skill cytuje prawo, a bramki nie miał):
->
-> ```
-> view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
-> ```
->
-> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
-> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
-> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
-> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
-> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
-> zmianie brzmienia).
-
->
-> Obowiązuje w całości, w szczególności: zakaz cytowania z pamięci, hierarchia
-> statusów źródła (`✅ [VER]` / `🟨 [KOTWICA-URZĘDOWA]` / `⚠️ [NIEWERYFIKOWANE]`),
-> self-check ANTY-FASADA (deklaracja „zweryfikowano" bez faktycznego otwarcia
-> źródła jest naruszeniem, nie skrótem).
->
-> ⛔ **Nie myl tego z klasyfikacją A–E niżej.** Statusy A–E oceniają źródło FAKTU
-> w aktach sprawy (dokument / relacja / twierdzenie strony). Statusy z
-> PRAWO-HARDGATE oceniają źródło TWIERDZENIA O PRAWIE. Ustalenie faktyczne ze
-> statusem `A` może stać obok przepisu, którego nikt nie zweryfikował — to dwie
-> niezależne osie, obie obowiązkowe.
->
-> Twierdzenie o prawie bez statusu → raport nie może opuścić statusu
-> `WERSJA ROBOCZA` (patrz HARD GATES — ZAKAZY).
 
 ---
 
 ## ARCHITEKTURA
 
 ```
-raport-sytuacyjny-v2/                ← 2 pliki (stan 2026-08-23g)
-├── SKILL.md                         ← ten plik — jedyne źródło prawdy dla treści
-└── references/
-    └── CHANGELOG.md                 ← historia wersji (ZASADA 15; założony 2026-08-23g)
+raport-sytuacyjny-v2/
+├── SKILL.md                ← ten plik — jedyne źródło prawdy
+└── assets/
+    └── RaportSytuacyjnyWidget.html   ← dokumentacja struktury (nie używaj bezpośrednio)
 ```
-
-> ⚠️ **KOREKTA 2026-08-23g:** drzewo wymieniało `assets/RaportSytuacyjnyWidget.html`,
-> którego **nie ma na dysku** (`find` na katalogu skilla: 1 plik przed tą sesją).
-> Odesłanie było martwe — ta sama klasa rozjazdu rejestru ze stanem faktycznym co
-> F-80/F-124 w `audyt-systemu-v4`, tylko w drugą stronę (rejestr obiecywał plik,
-> którego nie było). Widget budowany jest w całości z sekcji SEKWENCJA WYWOŁANIA
-> i BLUEPRINT JSON w tym pliku — żadnego zewnętrznego szablonu HTML nie brakuje.
 
 ---
 
@@ -503,11 +447,6 @@ Raport nie może być oznaczony jako gotowy gdy:
 - pominięto sprzeczności lub luki mimo widocznych rozbieżności,
 - podano termin bez źródła,
 - podano podstawę prawną bez weryfikacji albo zastrzeżenia,
-- ⛔ jakiekolwiek twierdzenie o prawie (przepis, termin ustawowy, sygnatura,
-  skutek procesowy) trafiło do blueprintu bez statusu wg
-  `shared/PRAWO-HARDGATE.md` — `✅ [VER: źródło, data]`, `🟨 [KOTWICA-URZĘDOWA]`
-  albo `⚠️ [NIEWERYFIKOWANE]` (F-123, 2026-08-23g); dotyczy też pola `podstawa`
-  w mapie ryzyk i treści rekomendacji, nie tylko chronologii,
 - przedstawiono twierdzenie strony (status C) jako fakt udowodniony.
 - `confidence` wynosi 9–10 przy braku źródeł dla kluczowych faktów.
 
@@ -602,9 +541,6 @@ FAZA 3 — licznik ⬛ + zamknięcie
 Gdy wynik ma służyć strategii procesowej, ocenie ryzyka lub decyzji terminowej:
 
 ```
-view /mnt/skills/user/shared/PRAWO-HARDGATE.md      ← ⛔ ZAWSZE, gdy w raporcie
-                                                       pada jakikolwiek przepis,
-                                                       termin lub sygnatura (F-123)
 view /mnt/skills/user/shared/TRYBY-PROCESOWE.md
 view /mnt/skills/user/shared/RISK-ASSESSMENT.md
 view /mnt/skills/user/shared/TERM-CALC.md

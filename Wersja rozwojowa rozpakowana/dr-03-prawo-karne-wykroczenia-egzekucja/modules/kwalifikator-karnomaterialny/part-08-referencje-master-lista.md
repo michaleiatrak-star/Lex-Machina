@@ -47,7 +47,7 @@
 **Prawidłowa kwalifikacja:** art. 190a §1 KK (stalking — powtarzalne nękanie)
 **Klucz:** Powtarzalność + skutek = stalking, nie groźba.
 **Skutek błędu:** Groźba — wnioskowy (§2), stalking §1,§2 — również wnioskowy (§4), ale zagrożenie karą wyższe (do 8 lat vs do 3 lat). Typ kwalifikowany §3 (targnięcie się na życie) → z urzędu.
-⚠️ Źródło: Dz.U. 2025 poz. 383 t.j.
+⚠️ Źródło: Dz.U.2025.383 t.j.
 
 ---
 
@@ -115,9 +115,9 @@ Jeśli którykolwiek punkt = NIE → wróć do odpowiedniego drzewa.
   saos.org.pl      — wyszukiwarka otwartych orzeczeń
 
 AKTY PRAWNE (weryfikuj aktualność przed użyciem):
-  KK: Dz.U. 2025 poz. 383 t.j. (wersja od 29.01.2026)
-  KW: Dz.U. 2025 poz. 734
-  Ustawa PN: Dz.U. 2023 poz. 1939
+  KK: Dz.U.2025.383 t.j. (wersja od 29.01.2026)
+  KW: Dz.U. 2025.734
+  Ustawa PN: Dz.U. 2023.1939
 ```
 
 ---
@@ -272,7 +272,7 @@ Przesłuchanie sprawcy lub świadka:
 ---
 
 *kwalifikator-karnomaterialny v1.4 · Moduł referencyjny dla prawo-polskie-v2*
-*Re-weryfikacja online: 17.07.2026 | KK Dz.U. 2025 poz. 383 t.j. (wersja od 29.01.2026)*
+*Re-weryfikacja online: 17.07.2026 | KK Dz.U.2025.383 t.j. (wersja od 29.01.2026)*
 *v1.4 (2026-07-17): dodano BLOK R (deepfake/manipulacja głosem-obrazem —
 mapa kwalifikacji 286/190a/270/212/216, brak dedykowanego przestępstwa
 w KK). Rozstrzygnięto NIEROZSTRZYGNIĘTĄ wcześniej rozbieżność: "25 lat

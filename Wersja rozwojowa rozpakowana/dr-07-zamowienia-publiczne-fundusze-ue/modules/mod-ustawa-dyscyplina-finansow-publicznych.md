@@ -8,7 +8,7 @@
   wynagrodzenia miesięcznego, zapasowo 0,25-5x przeciętnego gdy nie da się ustalić
   wynagrodzenia; zakaz pełnienia funkcji 1-5 lat wg art. 34) POTWIERDZONE bez zmian;
   jedyne wyłączenie z t.j. dotyczy niezwiązanego z tym modułem art. 5 ustawy zmieniającej
-  Ordynację podatkową (Dz.U. 2025 poz. 497)
+  Ordynację podatkową (Dz.U. 2025.497)
 
 **Weryfikacja ISAP przed kazdy cytowaniem.**
 

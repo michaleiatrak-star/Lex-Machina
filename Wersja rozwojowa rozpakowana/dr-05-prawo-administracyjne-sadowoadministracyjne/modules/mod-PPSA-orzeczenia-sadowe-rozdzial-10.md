@@ -11,7 +11,7 @@ data: 2026-08-22
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 Treść zweryfikowana RZĄD 1: arslege.pl i lexlege.pl (oba wskazują metrykę
-**Dz.U. 2026 poz. 143 t.j.**, zgodną z metryką już przyjętą w pozostałych
+**Dz.U.2026.143 t.j.**, zgodną z metryką już przyjętą w pozostałych
 modułach PPSA tego skillu — `mod-PPSA-posiedzenia-sadowe-rozdzial-7.md`,
 `mod-PPSA-terminy-kasacja-prawo-pomocy.md`), sip.lex.pl/OpenLEX,
 dlajurysty.pl, i-kancelaria.pl (pełne cytaty przepisów). Orzecznictwo

@@ -59,7 +59,7 @@ ustawodawca celowo wyłączył z tej eskalacji) dotyczy mienia/szkody:
 > 5 mln zł  → art. 306b §1 → 3-20 lat (ZBRODNIA)
 > 10 mln zł → art. 306b §2 → 5-25 lat (ZBRODNIA)
 ```
-Potwierdzone w 6+ źródłach (arslege.pl [t.j. Dz.U. 2025 poz. 383], kairp.pl,
+Potwierdzone w 6+ źródłach (arslege.pl [t.j. Dz.U.2025.383], kairp.pl,
 adwokatdulniak.pl, kancelarierp.pl, chmielniak.com.pl,
 russellbedford.pl) — wejście w życie 1.10.2023. Zob. też
 `mod-KK-art296-naduzycie-zaufania.md` DRZEWO N.1 dla pełnego opisu

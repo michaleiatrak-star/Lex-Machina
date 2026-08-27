@@ -96,7 +96,7 @@ towarów na cele osobiste, świadczenia dla pracowników)
     odpłatne (wtedy reżim odpłatności + ewentualnie art. 32)?
 
 ✅ [VER: lexlege.pl — pełny tekst art. 7 i art. 8 ustawy o VAT,
-   Dz.U. 2025 poz. 775 t.j., stan prawny na 12.08.2026; pobrane 2026-08-12]
+   Dz.U.2025.0.775 t.j., stan prawny na 12.08.2026; pobrane 2026-08-12]
 ⚠️ [ZALECANA WERYFIKACJA ISAP]
 ```
 
@@ -180,7 +180,7 @@ pokrycia VAT)
   otwarte okresy korekty 5/10-letniej
 
 ✅ [VER: lexlege.pl / arslege.pl / przepisy.gofin.pl — zgodne brzmienie
-   art. 6, Dz.U. 2025 poz. 775 t.j.; wykładnia „transakcji zbycia"
+   art. 6, Dz.U.2025.0.775 t.j.; wykładnia „transakcji zbycia"
    potwierdzona w 4 interpretacjach indywidualnych KIS (2025–2026),
    2026-08-12]
 ✅ [VER 2026-08-21 (F-18): art. 2 pkt 27e w pełni zweryfikowany — patrz
@@ -323,7 +323,7 @@ istnienia DR-08)
   module]
 
 ✅ [VER: lexlege.pl oraz przepisy.gofin.pl — zgodne, dosłowne brzmienie
-   art. 15 ust. 6, Dz.U. 2025 poz. 775 t.j., 2026-08-12]
+   art. 15 ust. 6, Dz.U.2025.0.775 t.j., 2026-08-12]
 ⚠️ [ZALECANA WERYFIKACJA ISAP]
 ```
 
@@ -545,7 +545,7 @@ i korekty w kontekście art. 29a, bez podstaw fakturowania jako takich
    ust. 3, ust. 5 pkt 3; art. 106i ust. 1-3, 6-8; art. 106j ust. 1-3;
    art. 106k ust. 1-3 — zgodnie w 4 źródłach (przepisy.gofin.pl,
    ksiegowosc.infor.pl, sip.lex.pl, poradnikprzedsiebiorcy.pl),
-   Dz.U. 2025 poz. 775 t.j., 2026-08-12]
+   Dz.U.2025.775 t.j., 2026-08-12]
 ⚠️ [ZALECANA WERYFIKACJA ISAP — część źródeł to wersje archiwalne
    artykułów; przy powoływaniu w piśmie sprawdź brzmienie NA DATĘ
    CZYNNOŚCI, zwłaszcza dla przepisów zmienianych pakietem KSeF]

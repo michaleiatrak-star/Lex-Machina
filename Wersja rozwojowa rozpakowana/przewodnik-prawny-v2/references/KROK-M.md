@@ -114,7 +114,7 @@ Co Cię interesuje najbardziej?"
     Wyjście: analiza przesłankowa + pokrycie + orzecznictwo.
     → Wywołaj: "przeanalizuj art. X [ustawa]"
 
-[7] PRZESŁUCHANIE ŚWIADKA (przesluchanie-swiadkow-v2)
+[7] PRZESŁUCHANIE ŚWIADKA (przesluchanie-swiadkow-v2-min90)
     Wejście: opis świadka, cel przesłuchania, znane zeznania
     Mechanizm: moduł osobowości, trener pytań, analizator błędów,
     symulacja świadka, strategia cross-examination.
@@ -148,7 +148,7 @@ SYGNAŁ: "jak działa [moduł]" / "co dokładnie robi" / "jaki jest pipeline"
         "jak mogę przeanalizować dowody i wyciągnąć X do pisma"
 
 AKCJA:
-1. view /mnt/skills/user/[skill]/SKILL.md
+1. view [skill]/SKILL.md
 2. Wyjaśnij mechanizm w języku użytkownika:
    LAIK: "To narzędzie robi X. Potrzebuję od Ciebie Y. Na końcu dostaniesz Z."
    PRAWNIK: "Pipeline: wejście → MOD-X → weryfikacja → wyjście. Szczegóły: [...]"

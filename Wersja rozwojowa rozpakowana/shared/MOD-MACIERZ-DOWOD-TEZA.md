@@ -1,6 +1,6 @@
 # MOD-MACIERZ-DOWOD-TEZA — Macierz Dowód × Teza (skan dwukierunkowy)
 
-> **Plik:** `/mnt/skills/user/shared/MOD-MACIERZ-DOWOD-TEZA.md`
+> **Plik:** `shared/MOD-MACIERZ-DOWOD-TEZA.md`
 > **Wersja:** 1.2.0 (2026-06-26)
 > **Status:** PRODUKCJA — plik kanoniczny shared
 > **Pozycja w pipeline:**

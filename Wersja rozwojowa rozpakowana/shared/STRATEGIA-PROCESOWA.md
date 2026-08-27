@@ -34,7 +34,7 @@ Ruchy niewskazane: ...
 Gdy pytanie dotyczy terminu złożenia pisma lub kolejności ruchów:
 
 ```
-view /mnt/skills/user/shared/MOD-TIMING.md
+view shared/MOD-TIMING.md
 ```
 
 MOD-TIMING realizuje macierz T1–T5 i sześć modeli timing:

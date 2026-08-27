@@ -1,6 +1,6 @@
 ---
 name: analiza-sadowa-v6
-version: "6.5"
+version: 6.3
 type: executive-analiza
 status: production
 compatibility: "web_search, web_fetch, show_widget"
@@ -14,13 +14,45 @@ description: |
   pyta "co mam zrobić" / "czy mam szansę" / "czy to zgodne z prawem".
   v6: model CZTEROPRZEBIEGOWY z obowiązkową DWUKROTNĄ WERYFIKACJĄ dowodów i pism.
 changelog:
-  # ⛔ ZASADA 15: skrót bieżącej wersji, nie historia.
-  # Pełna historia (w tym 39 linii przeniesionych stąd 2026-08-24, F-129):
-  #   view /mnt/skills/user/analiza-sadowa-v6/references/CHANGELOG.md
-  - "6.5 (2026-08-24, flaga F-129): historia wersji wyniesiona z pola YAML
-    do references/CHANGELOG.md — jedna lokalizacja kanoniczna. Treść
-    przeniesiona 1:1, bez rekonstrukcji. Opis: audyt-systemu-v4/references/
-    AUDIT-JOURNAL.md, wpis AUDYT-2026-08-24b."
+  - "6.2 (2026-07-12): ZAMKNIĘTE — WARN 'średni priorytet: 13 plików w
+    references/ bez odwołań do shared/' (otwarty w sesji 6.1). Sprawdzono
+    treść, nie tylko obecność odwołań, każdego z 13 plików: MOD-A..MOD-F
+    (6 wąskich modułów tematycznych — błędy pełnomocnika, groźba bezprawna,
+    nagrania, podwójna kwalifikacja kwoty, konto e-mail pracownika, szkoda
+    od własnego pełnomocnika), PRZEBIEG-1/2/3 (model czteroprzebiegowy
+    własny dla tego skilla — ekstrakcja/struktura/predykcja, nie istnieje
+    odpowiednik w shared/ ani w analizator-dowodow-v3, który używa zupełnie
+    innej architektury MP0-MP13 + macierz D×T), WERYFIKACJA-DOWODOW.md
+    (protokół W1-W4/O1-O5 przypięty do własnego modelu Przejść I-IV, nie
+    do FACT-SOURCE-LOCK/PRAWO-HARDGATE z shared/), filtry-analityczne.md
+    (11 filtrów własnych, sprawdzone przeciw shared/MOD-NEGACJA-DOWODOW —
+    inny zakres: filtry oceniają kompletność analizy, MOD-NEGACJA-DOWODOW
+    ocenia odporność dowodu na obalenie), moduly-spec.md (świadomy fallback
+    awaryjny agregujący MOD-A..F w jednym pliku na wypadek braku dostępu do
+    plików osobnych — duplikacja WEWNĄTRZ tego samego skilla, udokumentowana
+    i zamierzona, nie międzyskillowa). WYNIK: brak potwierdzonej duplikacji
+    z shared/ ani z analizator-dowodow-v3 w żadnym z 13 plików — treść jest
+    unikalna dla własnej metodologii tego skilla. Brak odwołań do shared/
+    był więc fałszywym sygnałem ostrzegawczym, nie dowodem duplikacji.
+    Żadna treść nie została zmieniona — to weryfikacja zamykająca, nie
+    refaktor."
+  - "6.1 (2026-07-12): naprawa nakładania kompetencji z analizator-dowodow-v3
+    (WARN z audytu silnika). references/koszty-terminy.md i
+    references/orzecznictwo.md przestały utrzymywać własne, niezależne
+    kopie terminów procesowych i hierarchii orzecznictwa — teraz wskazują
+    na kanoniczne shared/terminy.md i shared/ORZECZENIA-HIERARCHIA.md,
+    zachowując lokalnie WYŁĄCZNIE pozycje uzupełniające (terminy) i format
+    cytowania (orzecznictwo). Dodano sekcję 'GRANICA KOMPETENCJI vs.
+    analizator-dowodow-v3'. Przy okazji wykryto i zgłoszono błędną
+    klasyfikację 'Odpowiedź na pozew' (art. 207 §2 KPC) jako ZAWITY w
+    shared/terminy.md, powinien być INSTRUKCYJNY — patrz changelog
+    shared/terminy.md. UWAGA: pozostałe 13 plików w references/ (MOD-A..F,
+    filtry-analityczne, PRZEBIEG-1..3, WERYFIKACJA-DOWODOW, moduly-spec,
+    BLUEPRINT-SCHEMA) nadal nie mają żadnych odwołań do shared/ — to
+    świadomie NIE zostało ruszone w tej sesji (brak w nich potwierdzonej
+    duplikacji jak w terminy/orzecznictwo; wymaga osobnej sesji per plik,
+    nie zgadywania). Zarejestrować w CHECKLIST-DEDUP.md i zamknąć
+    odpowiednią pozycję w WARN-OTWARTE.md."
 ---
 
 **Zasada progressive disclosure:** Zacznij od tego pliku. Doładuj references/ tylko gdy
@@ -178,11 +210,12 @@ kontrolują, CZY ten przepis w ogóle powinien się w analizie znaleźć oraz cz
 liczba jest kompletna. Wykonuj je w PRZEJŚCIU IV (4A, pytania P6–P7):
 
 ```
-□ [ANTY-FASADA + AF-6] Wykonaj self-check antyfasadowy z modułu kanonicznego:
-    view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
-  ⛔ Treść listy NIE jest tu kopiowana (F-115, 2026-08-23i). Poprzednia kopia
-    miała 1 z 2 pozycji: gdy F-117 dodała AF-6 do źródła, kopie nie zostały
-    zaktualizowane. Jedno miejsce prawdy = jedno miejsce aktualizacji.
+□ [ANTY-FASADA] (dodane 2026-08-23, v2.6) Czy w odpowiedzi/piśmie jest słowo
+  „zweryfikowano/zweryfikowałem", pole „data weryfikacji" albo URL przy przepisie,
+  dla którego NIE wywołałem narzędzia W TEJ ODPOWIEDZI? TAK → ⛔ usuń deklarację
+  i datę, URL przeformatuj na 🎯 [CEL — RZĄD 1, NIEOTWARTE: …], przepis oznacz
+  ⚠️ [NIEWERYFIKOWANE]. Wyzwalacz to BRAK WYWOŁANIA, nie brak narzędzi w sesji.
+  ⛔ Zastrzeżenie selektywne (przy sygnaturach tak, przy przepisach nie) = naruszenie.
 □ [DOMAIN-LOCK] Odpowiedź/pismo zawiera przepis SPOZA dziedziny wiodącej
   (KK/KKS/KW/KPK/KPW przy torze cywilnym, pracowniczym lub administracyjnym —
   albo odwrotnie)? NIE → OK. TAK → (a) konkretny FAKT wypełniający znamię,
@@ -195,7 +228,7 @@ liczba jest kompletna. Wykonuj je w PRZEJŚCIU IV (4A, pytania P6–P7):
   KAŻDYM wierszu? NIE → nie podawaj kwoty łącznej, pokaż tabelę z ⬛.
   → `view /mnt/skills/user/shared/RATE-COMPLETENESS.md`
 □ [STATUSY] Każdy przepis ma znacznik z ZAMKNIĘTEJ hierarchii czterech:
-  ✅ [VER] · 🟨 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
+  ✅ [VER] · 🟡 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
   Etykieta spoza tej listy = naruszenie hard gate (PRAWO-HARDGATE v2.5).
 ```
 

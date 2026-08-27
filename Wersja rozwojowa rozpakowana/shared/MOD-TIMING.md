@@ -177,7 +177,7 @@ Ryzyko timing:   [BRAK / NISKIE / WYSOKIE]
 Moduł wczytaj w W1 jako krok W1.6 (po W1.5 — braki krytyczne):
 
 ```
-view /mnt/skills/user/shared/MOD-TIMING.md
+view shared/MOD-TIMING.md
 → Wypełnij macierz T1–T5
 → Wybierz model timing
 → Wstaw RAPORT MOD-TIMING do checkpointu W1
@@ -187,6 +187,6 @@ view /mnt/skills/user/shared/MOD-TIMING.md
 Moduł wczytaj też z STRATEGIA-PROCESOWA.md §4 gdy pytanie dotyczy "kiedy":
 
 ```
-view /mnt/skills/user/shared/MOD-TIMING.md
+view shared/MOD-TIMING.md
 → Wygeneruj raport timing jako część analizy strategicznej
 ```

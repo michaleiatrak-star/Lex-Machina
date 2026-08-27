@@ -2,7 +2,7 @@
 
 > **Wersja:** 1.0 (2026-06-23)
 > **Typ:** moduł shared — JEDYNE ŹRÓDŁO PRAWDY dla IO widgetów
-> **Wywołanie:** `view /mnt/skills/user/shared/MOD-WIDGET-IO.md`
+> **Wywołanie:** `view shared/MOD-WIDGET-IO.md`
 >   przed każdym `show_widget` w skillach analitycznych
 
 ---
@@ -290,7 +290,7 @@ IO-8: Status (✅/❌/⚠️) wyświetla się przez 3 sekundy i znika automatycz
 ## 7. TRIGGER WYWOŁANIA
 
 ```
-WYWOŁAJ ten moduł (view /mnt/skills/user/shared/MOD-WIDGET-IO.md):
+WYWOŁAJ ten moduł (view shared/MOD-WIDGET-IO.md):
   → ZANIM wygenerujesz kod HTML widgetu analitycznego
   → Skopiuj pasek IO (§3), style (§4), funkcje JS (§5) do widgetu
   → Zaimplementuj ioGetState / ioSetState / ioGetMarkdown per dane widgetu

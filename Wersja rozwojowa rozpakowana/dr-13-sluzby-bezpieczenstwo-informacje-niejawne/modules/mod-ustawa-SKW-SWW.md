@@ -129,7 +129,7 @@ naprawy, sygnalizacja tylko orientacyjna)
 | Temat | Gdzie |
 |---|---|
 | ABW, AW (cywilne odpowiedniki) | `mod-ustawa-ABW-AW-CBA-sluzby-specjalne.md` — struktura analogiczna, NIE duplikować |
-| Pragmatyka służbowa funkcjonariuszy SKW/SWW (uposażenie, awanse, odpowiedzialność dyscyplinarna) | Ustawa o służbie funkcjonariuszy SKW/SWW (Dz.U. 2025 poz. 694) — ODRĘBNY akt, poza zakresem tego modułu |
+| Pragmatyka służbowa funkcjonariuszy SKW/SWW (uposażenie, awanse, odpowiedzialność dyscyplinarna) | Ustawa o służbie funkcjonariuszy SKW/SWW (Dz.U. 2025.694) — ODRĘBNY akt, poza zakresem tego modułu |
 | Klauzula ŚCIŚLE TAJNE dla pionu wojskowego | `mod-ustawa-informacje-niejawne.md` — już wzmiankuje SKW jako organ wydający, nie duplikować |
 | Zakwaterowanie funkcjonariuszy (nowelizacja wspólna dla 8 służb) | `mod-ustawa-policja.md` i pokrewne — wspólna nowelizacja, wzmiankowana tam |
 

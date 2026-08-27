@@ -215,7 +215,7 @@ TYLKO CZĘŚCIĄ wymogu, NIE całością
 
 ## 5. LITERATURA I ŹRÓDŁA (zweryfikowane online 2026-07-21)
 
-- infor.pl, lexlege.pl, sip.lex.pl (Dz.U. 2025 poz. 633 t.j.) — pełna treść
+- infor.pl, lexlege.pl, sip.lex.pl (Dz.U.2025.633 t.j.) — pełna treść
   art. 16 i 16a KKS.
 - akademialtca.pl — kluczowe ustalenie: czynny żal NIE jest tylko
   samo-donosem, wymóg ujawnienia współdziałających.

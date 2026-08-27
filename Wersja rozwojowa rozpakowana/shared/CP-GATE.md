@@ -1,7 +1,7 @@
 # MOD-CP-GATE v1.0 — Centralny Kontroler Checkpointów Pisma Procesowego
 
-**Plik kanoniczny:** `/mnt/skills/user/shared/CP-GATE.md`
-Wywołanie: `view /mnt/skills/user/shared/CP-GATE.md`
+**Plik kanoniczny:** `shared/CP-GATE.md`
+Wywołanie: `view shared/CP-GATE.md`
 
 > ⛔ Wczytaj ten moduł na początku każdej sesji pisma procesowego,
 > PRZED jakimkolwiek innym krokiem pipeline'u.
@@ -299,7 +299,7 @@ Wywołanie CP-GATE w pipeline:
 
 ```
 STAN 0 (przed routing):
-  view /mnt/skills/user/shared/CP-GATE.md
+  view shared/CP-GATE.md
   → zainicjalizuj CP-REJESTR
   → STATUS = DRAFT
 

@@ -37,7 +37,7 @@
 > elektroniczne — możliwy nowszy t.j., wymaga domknięcia w kolejnej sesji]
 >
 > **Sesja katalogowania 2026-07-04:** ostatnia niejednoznaczność (usługi
-> elektroniczne) zamknięta — potwierdzony aktualny t.j. Dz.U. 2024 poz. 1513
+> elektroniczne) zamknięta — potwierdzony aktualny t.j. Dz.U. 2024.1513
 > (obwieszczenie 10.10.2024), plus nowelizacja DSA z 18.12.2025 zmieniająca
 > ten sam tekst. DR-11 ma teraz 0 pozycji krajowych z otwartym statusem
 > numeru; pozostają flagi "WYMAGA AKTUALIZACJI MODUŁU" (Prawo komunikacji

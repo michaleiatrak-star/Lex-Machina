@@ -1,6 +1,6 @@
 # PORTALE-BRANZOWE-RZAD-2B.md — Rejestr Portali per Dziedzina — INDEKS
 
-> **Plik:** `/mnt/skills/user/shared/PORTALE-BRANZOWE-RZAD-2B.md`
+> **Plik:** `shared/PORTALE-BRANZOWE-RZAD-2B.md`
 
 > ⚡ **ZMIANA STRUKTURALNA 2026-08-20 (F-78, priorytet 8):** ten plik był
 > 1088 linii. Treść 22 sekcji PODZIELONA na 5 plików w podkatalogu

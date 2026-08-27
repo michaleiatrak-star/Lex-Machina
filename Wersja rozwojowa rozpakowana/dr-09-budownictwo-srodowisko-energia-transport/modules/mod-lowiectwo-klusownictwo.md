@@ -379,7 +379,7 @@ pamięci. Zweryfikuj przepis źródłowo i dopisz sekcję albo utwórz moduł.
 
 **Weryfikacja źródłowa 2026-08-16 (korekta 2.0):**
 - Rząd 2: arslege.pl `k539/s6339` — PEŁNE brzmienie Rozdz. 10 (art. 51-54),
-  sygnowane „Dz.U.2025.0.539 t.j."; arslege.pl `zakazy/k539/a110773` —  <!-- zapis źródła cytowany dosłownie — CELOWO nieujednolicony (F-125, 2026-08-24d) -->
+  sygnowane „Dz.U.2025.0.539 t.j."; arslege.pl `zakazy/k539/a110773` —
   pełne brzmienie art. 42aa (16 zakazów); lexlege.pl — struktura rozdziałów
   1-11 z zakresami artykułów, potwierdzona krzyżowo.
 - Rząd 1 (pośrednio): t.j. **Dz.U. 2025 poz. 539** zgodny z wpisem w

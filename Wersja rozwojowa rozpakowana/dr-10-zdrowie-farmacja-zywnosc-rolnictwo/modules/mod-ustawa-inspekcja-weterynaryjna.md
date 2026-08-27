@@ -26,11 +26,11 @@
   ✅ [VER: 2026-08-21, RZĄD 2B (inforlex, rp.pl — obwieszczenie 16.07.2026)
   ⚠️ [NIEWERYFIKOWANE RZĄD 1] — ISAP/ELI nie potwierdzone bezpośrednio w tej
   sesji, do zrobienia przy najbliższej okazji]
-  — nowy t.j. konsoliduje ustawę z 12.09.2025 (Dz.U. 2025 poz. 1424: nowe art. 21f–21j,
+  — nowy t.j. konsoliduje ustawę z 12.09.2025 (Dz.U. 2025.1424: nowe art. 21f–21j,
   zasady kontynuacji produkcji w zakładzie przy zmianie podmiotu prowadzącego —
   zmiana merytoryczna dot. przenoszenia decyzji administracyjnych powiatowego
   lekarza weterynarii) oraz zmiany konsekwencyjne z ustawy o zdrowiu zwierząt
-  (Dz.U. 2025 poz. 1795, odesłania terminologiczne)
+  (Dz.U. 2025.1795, odesłania terminologiczne)
 
 **Weryfikacja:** isap.sejm.gov.pl + GIW.gov.pl przed każdym cytowaniem.
 
@@ -47,7 +47,7 @@ Ubojnia: wymagany lekarz weterynarii urzędowy; badanie przedubojowe i poubojowe
 Choroba zakaźna:  Obowiązek natychmiastowego zgłoszenia
                   ⛔ [NUMERACJA NIEAKTUALNA 2026-08-21] — poprzednio art. 42 u.o.z.z.
                   (ustawy uchylonej 18.03.2026). Odpowiednik w nowej ustawie o
-                  zdrowiu zwierząt (Dz.U. 2025 poz. 1795) POTWIERDZONY źródłami wtórnymi
+                  zdrowiu zwierząt (Dz.U. 2025.1795) POTWIERDZONY źródłami wtórnymi
                   jako obowiązujący nadal (RolnikInfo, LEX, PROKURENT — kary do
                   ~50 tys. zł za niezgłoszenie), ale DOKŁADNY numer artykułu
                   NIEUSTALONY w tej sesji (źródła cytują różne artykuły dla

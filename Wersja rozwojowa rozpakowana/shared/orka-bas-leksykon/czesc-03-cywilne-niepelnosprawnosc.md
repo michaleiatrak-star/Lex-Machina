@@ -219,10 +219,10 @@ KLUCZOWE PRAWO PROCESOWE:
   Prawo o notariacie: obowiązek przywołania OSOBY ZAUFANEJ na życzenie niewidomego
 
 PEŁNA TREŚĆ:
-  → view /mnt/skills/user/shared/mod-niewidomy-prawa-prawne.md
+  → view shared/mod-niewidomy-prawa-prawne.md
      (390 linii: definicje, KPK, KPC, notariat, ulgi, pies przewodnik,
       Konwencja ONZ, quality gate)
-  → view /mnt/skills/user/shared/mod-osoba-niewidoma-prawa-sad.md
+  → view shared/mod-osoba-niewidoma-prawa-sad.md
      (390 linii: bloki I–IV z mapą działań procesowych)
 ```
 
@@ -254,7 +254,7 @@ Obrona obligatoryjna:
   → web_search: "likwidacja ubezwłasnowolnienia ustawa Sejm 2026 pierwsze czytanie"
 
 PEŁNA TREŚĆ:
-  view /mnt/skills/user/shared/mod-niepelnosprawnosc-intelektualna-gluchota.md
+  view shared/mod-niepelnosprawnosc-intelektualna-gluchota.md
 ```
 
 ### BAS-133 — Głuchota / niedosłuch (03-L) — odesłanie
@@ -275,7 +275,7 @@ Administracja: ustawa o języku migowym (Dz.U. 2023 poz. 20)
 Świadczenie wspierające od 2024: ≥70 pkt WZON → 752–4134 zł/mies.
 
 PEŁNA TREŚĆ:
-  view /mnt/skills/user/shared/mod-niepelnosprawnosc-intelektualna-gluchota.md
+  view shared/mod-niepelnosprawnosc-intelektualna-gluchota.md
 ```
 
 ---

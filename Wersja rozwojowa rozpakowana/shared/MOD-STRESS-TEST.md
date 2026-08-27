@@ -1,9 +1,9 @@
 # MOD-STRESS-TEST — Symulacja Odpowiedzi Pełnomocnika Pozwanego
 
-> **Plik:** `/mnt/skills/user/shared/MOD-STRESS-TEST.md`
+> **Plik:** `shared/MOD-STRESS-TEST.md`
 > **Status:** PRODUKCJA — plik kanoniczny shared
 > **Pozycja w pipeline:** Po W2 (projekcie pisma), przed W3 / AUDYT-KOŃCOWY
-> **Wywołanie:** `view /mnt/skills/user/shared/MOD-STRESS-TEST.md`
+> **Wywołanie:** `view shared/MOD-STRESS-TEST.md`
 > **Trigger:** OBOWIĄZKOWY po wygenerowaniu projektu pisma (draft W2),
 >   przed finalnym .docx
 

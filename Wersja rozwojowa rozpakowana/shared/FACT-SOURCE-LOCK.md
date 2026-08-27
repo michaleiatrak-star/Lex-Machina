@@ -1,7 +1,7 @@
 # FACT-SOURCE-LOCK (FSL) — Klasyfikacja i Blokada Twierdzeń Bez Źródła
 
-**Plik kanoniczny:** `/mnt/skills/user/shared/FACT-SOURCE-LOCK.md`
-Wywołuj przez: `view /mnt/skills/user/shared/FACT-SOURCE-LOCK.md`
+**Plik kanoniczny:** `shared/FACT-SOURCE-LOCK.md`
+Wywołuj przez: `view shared/FACT-SOURCE-LOCK.md`
 **Wersja:** 1.0 | Data wprowadzenia: 2026-06-01
 
 ---
@@ -111,7 +111,7 @@ KROK FSL-3: WERYFIKACJA KRZYŻOWA FSL-B
 KROK FSL-4: TWIERDZENIA O STATUSIE AKTÓW
   Jeśli FSL-B dotyczy statusu prawnego aktu (prawomocność,
   ostateczność, skuteczność, ważność) → OBOWIĄZKOWO uruchom LSL:
-  view /mnt/skills/user/shared/LEGAL-STATUS-LOCK.md
+  view shared/LEGAL-STATUS-LOCK.md
   Wynik LSL zastępuje tag FSL-B dla tego twierdzenia.
 
 KROK FSL-5: TAGOWANIE I UŻYCIE W PIŚMIE

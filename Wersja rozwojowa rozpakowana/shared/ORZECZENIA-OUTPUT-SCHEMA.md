@@ -1,6 +1,6 @@
 # ORZECZENIA-OUTPUT-SCHEMA — Protokół danych wyjściowych orzeczenia-sadowe-v2
 
-> **Plik:** `/mnt/skills/user/shared/ORZECZENIA-OUTPUT-SCHEMA.md`
+> **Plik:** `shared/ORZECZENIA-OUTPUT-SCHEMA.md`
 > **Wersja:** 1.3
 > **Właściciel:** orzeczenia-sadowe-v2
 > **Konsumenci:** pisma-procesowe-v3 (W3.2), analizator-umow-v1, analiza-sadowa-v6
@@ -197,13 +197,13 @@ Gdy pisma-procesowe-v3 lub inny skill potrzebuje orzeczeń:
 
 ```
 // W3.2 pisma-procesowe-v3 — szerokie wyszukiwanie:
-view /mnt/skills/user/orzeczenia-sadowe-v2/SKILL.md
+view orzeczenia-sadowe-v2/SKILL.md
 → Przekaż: dziedzina, przepis/instytucja prawna, lista przesłanek P1..Pn
 → Odbierz: listę rekordów ORZ-REKORD w formacie powyżej
 → Zamknij placeholdery ⚠️On w W2 wynikami z rekordów
 
 // analizator-umow-v1 — weryfikacja orzecznicza klauzuli:
-view /mnt/skills/user/orzeczenia-sadowe-v2/SKILL.md
+view orzeczenia-sadowe-v2/SKILL.md
 → Przekaż: typ umowy, klauzula/ryzyko, przepis bazowy
 → Odbierz: listę rekordów z polem pokrycie_p = ["klauzula_X"]
 ```

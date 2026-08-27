@@ -22,7 +22,7 @@ Ten moduł sprawdza **CAŁY SYSTEM** na 1 nowelizację (konkretne artykuły).
 
 **Geneza:** w transzy FAZA 3E-l (AUDYT-2026-07-26l) znaleziono, że
 `mod-KK-art101-105-przedawnienie-karalnosci.md` **sam ostrzegał** o
-nowelizacji z 2022 r. (Dz.U. 2022 poz. 2600), ale nie zastosował jej do
+nowelizacji z 2022 r. (Dz.U. 2022.2600), ale nie zastosował jej do
 własnej liczby (30→40 lat dla zabójstwa). To rodzi pytanie: czy INNE
 pliki w systemie, które WSPOMINAJĄ zabójstwo/art. 148 KK/przedawnienie
 w innym kontekście (np. cross-referencje, przykłady w modułach

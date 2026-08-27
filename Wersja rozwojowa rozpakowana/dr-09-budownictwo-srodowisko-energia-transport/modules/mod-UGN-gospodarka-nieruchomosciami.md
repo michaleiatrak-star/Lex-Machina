@@ -22,18 +22,18 @@ służebności.
 
 **Weryfikacja:** 22.05.2026
 **Akty w wersji obowiązującej — weryfikuj przed każdym powołaniem:**
-- Ustawa deweloperska: **Dz.U. 2024 poz. 695 t.j.** (zm. Dz.U. 2025 poz. 758, Dz.U. 2026 poz. 27)
-- Ustawa o własności lokali: **Dz.U. 2021 poz. 1048** — weryfikuj aktualną wersję w isap
-- Ustawa o ochronie praw lokatorów: **Dz.U. 2023 poz. 725** (zm. Dz.U. 2025 poz. 413)
-- KC (zasiedzenie, rękojmia, służebności): **Dz.U. 2025 poz. 1071 t.j.**
-- Ustawa o KW i hipotece: **Dz.U. 2025 poz. 341**
+- Ustawa deweloperska: **Dz.U.2024.695 t.j.** (zm. Dz.U.2025.758, Dz.U.2026.27)
+- Ustawa o własności lokali: **Dz.U.2021.1048** — weryfikuj aktualną wersję w isap
+- Ustawa o ochronie praw lokatorów: **Dz.U.2023.725** (zm. Dz.U.2025.413)
+- KC (zasiedzenie, rękojmia, służebności): **Dz.U.2025.1071 t.j.**
+- Ustawa o KW i hipotece: **Dz.U.2025.341**
 
 ---
 
 ## ZASADY ABSOLUTNE
 
 1. **UMOWA DEWELOPERSKA = AKT NOTARIALNY** (art. 35 ust. 1 ustawy deweloperskiej
-   Dz.U. 2024 poz. 695). Brak aktu = nieważność bezwzględna.
+   Dz.U.2024.695). Brak aktu = nieważność bezwzględna.
    MRP (mieszkaniowy rachunek powierniczy) — obowiązek od 01.07.2022.
    Deweloperski Fundusz Gwarancyjny (DFG) — dodatkowe zabezpieczenie nabywcy.
 
@@ -76,11 +76,11 @@ służebności.
 
 | Akt | Tekst jednolity | Uwagi |
 |---|---|---|
-| Ustawa deweloperska (2021) | Dz.U. 2024 poz. 695 t.j. | Zm. Dz.U. 2025 poz. 758 (jawność cen), Dz.U. 2026 poz. 27 |
-| Ustawa o własności lokali | Dz.U. 2021 poz. 1048 | Weryfikuj w isap — brak nowszego t.j. potwierdzony |
-| Ustawa o ochronie lokatorów | Dz.U. 2023 poz. 725 | Zm. Dz.U. 2025 poz. 413 |
-| KC (rękojmia, zasiedzenie) | Dz.U. 2025 poz. 1071 t.j. | Art. 172 (zasiedzenie), art. 568 (rękojmia) |
-| Ustawa o KW i hipotece | Dz.U. 2025 poz. 341 | Art. 5 (rękojmia wiary publ. KW) |
+| Ustawa deweloperska (2021) | Dz.U.2024.695 t.j. | Zm. Dz.U.2025.758 (jawność cen), Dz.U.2026.27 |
+| Ustawa o własności lokali | Dz.U.2021.1048 | Weryfikuj w isap — brak nowszego t.j. potwierdzony |
+| Ustawa o ochronie lokatorów | Dz.U.2023.725 | Zm. Dz.U.2025.413 |
+| KC (rękojmia, zasiedzenie) | Dz.U.2025.1071 t.j. | Art. 172 (zasiedzenie), art. 568 (rękojmia) |
+| Ustawa o KW i hipotece | Dz.U.2025.341 | Art. 5 (rękojmia wiary publ. KW) |
 
 ---
 

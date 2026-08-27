@@ -1,7 +1,7 @@
 # mod-OP-ordynacja-podatkowa
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Op — **Dz.U. 2026 poz. 622** (t.j. kwiecień 2026) ze zm. Dz.U. 2026 poz. 846 (MDR — patrz sekcja 6a, w życie 1.10.2026) | KKS — Dz.U. 2025 poz. 633 t.j. | PPSA — Dz.U. 2026 poz. 143
+**Źródło weryfikacji:** Op — **Dz.U. 2026 poz. 622** (t.j. kwiecień 2026) ze zm. Dz.U. 2026.846 (MDR — patrz sekcja 6a, w życie 1.10.2026) | KKS — Dz.U. 2025 poz. 633 t.j. | PPSA — Dz.U. 2026 poz. 143
 **Data weryfikacji online:** 2026-08-15 (sekcja 6a MDR — naprawa F-88)
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -166,7 +166,7 @@ Ordynacji podatkowej
 
 Potwierdzone w 6+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
 tekst art. 75-77 (arslege.pl [×3], lexlege.pl, z aktualnym t.j.
-Dz.U. 2026 poz. 622), podatki.biz, podatkowyreferat.online [sprzed
+Dz.U.2026.0.622), podatki.biz, podatkowyreferat.online [sprzed
 tygodnia, z KONKRETNYM przykładem praktycznym].
 ```
 
@@ -175,7 +175,7 @@ tygodnia, z KONKRETNYM przykładem praktycznym].
 ## 4b. ⭐⭐⭐ CZYNNOŚCI SPRAWDZAJĄCE (Dział V Op, art. 272-280) — dodano 2026-08-19 (F-70)
 
 ✅ **ZWERYFIKOWANE, 6+ zgodnych źródeł** (arslege.pl, lexlege.pl,
-przepisy.gofin.pl [z pełnym łańcuchem nowelizacji do Dz.U. 2026 poz. 846],
+przepisy.gofin.pl [z pełnym łańcuchem nowelizacji do Dz.U.2026.846],
 ksiegowosc.infor.pl, podatki.biz, praca naukowa repozytorium.uwb.edu.pl
 z orzecznictwem WSA).
 
@@ -492,7 +492,7 @@ opracowania instytucji.
 
 ```
 ⚡ REWOLUCJA OD 1.10.2026 — ustawa z 29.05.2026 o zmianie ustawy —
-  Ordynacja podatkowa oraz niektórych innych ustaw (Dz.U. 2026 poz. 846,
+  Ordynacja podatkowa oraz niektórych innych ustaw (Dz.U. 2026.846,
   podpisana przez Prezydenta 19.06.2026, ta sama ustawa co GAAR wyżej —
   ⚠️ ta sama ustawa zmienia OBA tematy naraz, nie mylić z ODRĘBNĄ
   drugą nowelizacją Op z tego samego dnia, druk 2352, dot. ugody
@@ -578,7 +578,7 @@ NIEUSTALONE dokładny artykuł, kierunek mechanizmu SILNIE wskazany)
 D2026000084601.pdf), że ustawa 2026.846 NOWELIZUJE własną treścią (nie
 tylko odesłaniem konsekwencyjnym) CZTERY ustawy sektora finansowego:
   1) ustawę z 5.11.2009 o spółdzielczych kasach oszczędnościowo-
-     kredytowych (aktualny t.j. Dz.U. 2026 poz. 595, ⚠️ zweryfikuj przy
+     kredytowych (aktualny t.j. Dz.U.2026.595, ⚠️ zweryfikuj przy
      najbliższej sesji czy to nadal aktualna metryka)
   2) ustawę z 11.09.2015 o działalności ubezpieczeniowej i reasekuracyjnej
   3) ustawę z 16.11.2016 o Krajowej Administracji Skarbowej

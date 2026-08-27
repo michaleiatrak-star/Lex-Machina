@@ -14,7 +14,7 @@ bezpośrednim kontekstem ustrojowym zamkniętego Rozdz. 6a.
 
 **Status weryfikacji źródłowej:** pełna treść rozdziału pobrana z lexlege.pl
 (Rząd 2B, strona ROZDZIAŁU, jeden `web_fetch`, stan deklarowany 16.08.2026,
-oznaczenie Dz.U. 2025 poz. 539 t.j.) — artykuł po artykule, z ustępami
+oznaczenie Dz.U.2025.0.539 t.j.) — artykuł po artykule, z ustępami
 i punktami. Art. 32b zweryfikowany dodatkowo co do źródła nowelizacji
 (ustawa z 5.12.2024 o ochronie ludności i obronie cywilnej, Dz.U. 2024
 poz. 1907 — akt już skatalogowany w systemie: dr-01, dr-08, dr-13).

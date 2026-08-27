@@ -1,6 +1,6 @@
 # MOD-IDENTYFIKACJA-STRONY-UMOWY — Ustalenie strony czynności prawnej metodą danych większościowych
 
-> **Plik:** `/mnt/skills/user/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md`
+> **Plik:** `shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md`
 > **Wersja:** 1.1.0 (2026-06-27)
 > **Status:** PRODUKCJA
 > **Typ:** moduł shared — wywoływany przez wiele skilli
@@ -172,9 +172,9 @@ KROK P2 — DEKODOWANIE DATY URODZENIA
   DZIEŃ = P5*10 + P6  (1–31; sprawdź czy dzień istnieje w danym miesiącu)
   DATA_PESEL = ROK-MIESIĄC-DZIEŃ
 
-  Przykład PESEL 84030315255:
+  Przykład PESEL YYMMDDSSSSC:
     P1P2=84, P3P4=03, P5P6=15 → M=03 ∈ [1-12] → ROK=1984, MIE=03, DZIEŃ=15
-    DATA_PESEL = 1984-03-15
+    DATA_PESEL = [ROK]-[MIESIĄC]-[DZIEŃ]
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 KROK P3 — WERYFIKACJA DATY Z DOKUMENTEM
@@ -197,7 +197,7 @@ KROK P4 — DEKODOWANIE PŁCI
     PŁEĆ_PESEL != PŁEĆ_ZNANA? → ⛔ NIEZGODNOŚĆ PŁCI
       → Np. "Michał" z P10=0 → MĘŻCZYZNA w PESEL = KOBIETA → błąd P10
 
-  Przykład PESEL 84030315255:
+  Przykład PESEL YYMMDDSSSSC:
     P10=5 (nieparzysta) → MĘŻCZYZNA → zgodne z "Michał" ✅
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -210,7 +210,7 @@ KROK P5 — SUMA KONTROLNA (cyfra 11)
     K == P11 → ✅ SUMA KONTROLNA POPRAWNA
     K != P11 → ⛔ BŁĘDNA SUMA KONTROLNA
 
-  Przykład PESEL 84030315255:
+  Przykład PESEL YYMMDDSSSSC:
     Cyfry:  8  4  0  3  0  3  1  5  2  5  5
     Wagi:   1  3  7  9  1  3  7  9  1  3
     Iloczyn:8 12  0 27  0  9  7 45  2 15 = 125
@@ -508,7 +508,7 @@ WYNIK ISU-2 per umowę:
 ⚠️ OGRANICZENIE: ISU ustala STRONĘ każdej umowy z osobna.
    Scalenie do jednego pracodawcy / jednej strony zobowiązania dla celów
    art. 25¹ KP lub odpowiedzialności solidarnej → DALEJ stosuj:
-   view /mnt/skills/user/pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md
+   view pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md
    (warstwy W1–W4: pracodawca rzeczywisty, obejście prawa, venire, dowody operacyjne)
 ```
 
@@ -577,7 +577,7 @@ INTERPRETACJE MF / KIS:
 
 ```
 Po MOD-DOKUMENT-ANOMALIE DA-3 (klasyfikacja anomalii), gdy wykryto Klasę I lub II:
-  → view /mnt/skills/user/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
+  → view shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
   → ISU-1 → ISU-2 → ISU-3 → ISU-4 (jeśli konieczne) → ISU-5
   → Formuła ISU-5 [A] wchodzi do W1.3 (mapa cel → przesłanka → dowód)
     i do W2.2 (uzasadnienie pisma) jako akapit "Identyfikacja strony dokumentu"
@@ -587,8 +587,8 @@ Po MOD-DOKUMENT-ANOMALIE DA-3 (klasyfikacja anomalii), gdy wykryto Klasę I lub 
 
 ```
 Po PRE-W2.C/D gdy wykryto T1/T2/T3 (rozbieżność podmiotowa):
-  → view /mnt/skills/user/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md (ISU-1 → ISU-5)
-  → view /mnt/skills/user/pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md
+  → view shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md (ISU-1 → ISU-5)
+  → view pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md
     (R1→R5, warstwy W0→W4 — dla scalenia pracodawców)
   Kolejność: ISU PRZED MOD-PRACODAWCA-RZECZYWISTY
   (ISU ustala stronę każdej umowy → MOD-PR-RZECZ scal je w jednego pracodawcę)
@@ -598,7 +598,7 @@ Po PRE-W2.C/D gdy wykryto T1/T2/T3 (rozbieżność podmiotowa):
 
 ```
 W fazie identyfikacji stron umowy, gdy dane stron są rozbieżne lub niekompletne:
-  → view /mnt/skills/user/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
+  → view shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
   → ISU-1 → ISU-2 → ISU-5 [A] lub [B]
   → Wynik ISU wchodzi do raportu analizy umowy jako sekcja "Identyfikacja stron"
 ```
@@ -608,7 +608,7 @@ W fazie identyfikacji stron umowy, gdy dane stron są rozbieżne lub niekompletn
 ```
 W BLOK-B (analiza dokumentów), gdy dokument strony przeciwnej zawiera
 rozbieżne elementy identyfikacyjne:
-  → view /mnt/skills/user/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md (ISU-1 → ISU-4)
+  → view shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md (ISU-1 → ISU-4)
   → Wynik ISU-4 wchodzi do DA-REJ jako anomalia Klasy I lub II (MOD-DOKUMENT-ANOMALIE)
 ```
 
@@ -638,7 +638,7 @@ PRE-W2-VERIFICATION-GATE (PRE-W2.C/D):
 ## HISTORIA ZMIAN
 
 ```
-1.1.0 (2026-06-27) — Dodano algorytm ISU-PESEL (P1-P6): weryfikacja PESEL przez format, dekodowanie daty urodzenia z uwzględnieniem wszystkich stuleci, dekodowanie płci (P10), suma kontrolna wagowa [1,3,7,9,1,3,7,9,1,3], raport ERR-F/ERR-D/ERR-PL/ERR-CK z klasyfikacją anomalii Klasa I/III. Przykład obliczeniowy dla PESEL 84030315255.
+1.1.0 (2026-06-27) — Dodano algorytm ISU-PESEL (P1-P6): weryfikacja PESEL przez format, dekodowanie daty urodzenia z uwzględnieniem wszystkich stuleci, dekodowanie płci (P10), suma kontrolna wagowa [1,3,7,9,1,3,7,9,1,3], raport ERR-F/ERR-D/ERR-PL/ERR-CK z klasyfikacją anomalii Klasa I/III. Przykład obliczeniowy dla PESEL YYMMDDSSSSC.
 
 1.0.0 (2026-06-27) — Pierwsza wersja. Wydzielono z WARSTWA 0 modułu
   MOD-PRACODAWCA-RZECZYWISTY v2.1.0 (WARN-19) w odpowiedzi na propozycję

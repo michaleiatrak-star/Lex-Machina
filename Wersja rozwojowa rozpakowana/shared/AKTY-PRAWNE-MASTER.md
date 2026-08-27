@@ -264,8 +264,8 @@ architektoniczna — PENDING, do podjęcia przez dewelopera.
 Zastępuje (pliki do archiwizacji po wdrożeniu):
   shared/LEGAL-REGISTRY.md
   shared/ISAP-METRYKI-AKTOW.md
-  shared/ONLINE-VERIFIED-LEGAL-UPDATES-2026-05-29.csv
-  shared/ONLINE-VERIFIED-LEGAL-UPDATES-ROUND2-2026-05-29.csv
-  shared/ONLINE-VERIFIED-LEGAL-UPDATES-ROUND3-2026-05-29.csv
-  shared/ONLINE-VERIFIED-LEGAL-UPDATES-ROUND4-2026-05-29.csv
+  ONLINE-VERIFIED-LEGAL-UPDATES-2026-05-29.csv — HISTORYCZNY/nieobecny w bieżącym wydaniu; NIE używaj operacyjnie
+  ONLINE-VERIFIED-LEGAL-UPDATES-ROUND2-2026-05-29.csv — HISTORYCZNY/nieobecny w bieżącym wydaniu; NIE używaj operacyjnie
+  ONLINE-VERIFIED-LEGAL-UPDATES-ROUND3-2026-05-29.csv — HISTORYCZNY/nieobecny w bieżącym wydaniu; NIE używaj operacyjnie
+  ONLINE-VERIFIED-LEGAL-UPDATES-ROUND4-2026-05-29.csv — HISTORYCZNY/nieobecny w bieżącym wydaniu; NIE używaj operacyjnie
 ```

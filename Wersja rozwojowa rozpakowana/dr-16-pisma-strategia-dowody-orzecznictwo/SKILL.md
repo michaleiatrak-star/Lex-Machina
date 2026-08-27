@@ -1,6 +1,6 @@
 ---
 name: dr-16-pisma-strategia-dowody-orzecznictwo
-version: "3.3"
+version: 3.2
 description: |
   DR-16: Pisma, Strategia, Dowody, Orzecznictwo
   Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony obszar procesowy.
@@ -24,25 +24,6 @@ description: |
 - E-doręczenia i portal sądowy — przepisy wdrażane etapami; sprawdź aktualny stan w ISAP.
 - Prawo prasowe — ustawa z 1984 r. wielokrotnie nowelizowana; weryfikuj Dz.U. ze zm.
 - Ustawa o archiwach — sprawdź aktualny tekst jednolity w ISAP.
-
-
-> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
-> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
->
-> ```
-> view /mnt/skills/user/shared/SELF-CHECK-ANTY-FASADA.md
-> ```
->
-> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
-> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
-> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
-> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
-> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
-> zmianie brzmienia).
->
-> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
-> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
-> oznaczenia, tylko je wymusza.
 
 ---
 

@@ -58,7 +58,7 @@ lub zeznawania w sprawach dotyczących byłego współmałżonka.
 Oddział 1 Rozdziału I Działu IA — instytucja odrębna od SUROGACJI opisanej
 wyżej (ta sekcja dotyczy ustalania/zaprzeczania FORMALNEGO stosunku
 macierzyństwa, nie umowy o macierzyństwo zastępcze). Zweryfikowane w
-aktualnym t.j. Dz.U. 2026 poz. 236 (arslege.pl, lexlege.pl — pełna zgodna
+aktualnym t.j. Dz.U.2026.236 (arslege.pl, lexlege.pl — pełna zgodna
 treść wszystkich 7 artykułów).
 
 ```
@@ -228,7 +228,7 @@ Domniemanie ojcostwa (art. 62 KRO):
   LUB przed upływem 300 dni od ustania/unieważnienia/separacji
 
 TERMINY NA ZAPRZECZENIE:
-  Mąż matki (art. 63 KRO — po nowelizacji Dz.U. 2019 poz. 2089):
+  Mąż matki (art. 63 KRO — po nowelizacji Dz.U.2019.2089):
     → 1 ROK od dowiedzenia się, że dziecko od niego NIE POCHODZI
     → NIE od daty urodzenia dziecka (zmiana od 30.11.2019!)
     → Nie później niż do pełnoletności dziecka

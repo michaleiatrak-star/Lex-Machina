@@ -1,6 +1,6 @@
 # MOD-SKAN-DOWODOW-KOMPLETNY — Pełna inwentaryzacja i weryfikacja odczytania 100% stron
 
-> **Plik:** `/mnt/skills/user/shared/MOD-SKAN-DOWODOW-KOMPLETNY.md`
+> **Plik:** `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md`
 > **Wersja:** 1.6.0 (2026-07-15)
 > **Status:** PRODUKCJA — plik kanoniczny shared
 > **Pozycja w pipeline:**
@@ -309,7 +309,7 @@ Przed uruchomieniem W2 (projekt pisma) / MD2 (macierz dowód-teza):
 
   Wszystkie = TAK:
     → ⛔ OBOWIĄZKOWY NASTĘPNY KROK: MOD-FSL-DOKUMENTY (W1.2c-FSL-D)
-       view /mnt/skills/user/shared/MOD-FSL-DOKUMENTY.md
+       view shared/MOD-FSL-DOKUMENTY.md
        ZAKAZ przekazywania SD-FAKTY bezpośrednio do macierzy D×T z pominięciem FSL-D.
        FSL-D wykonuje per-teza przeszukanie WSZYSTKICH D[id] z zakazem cytowania z pamięci.
        Dopiero FSL-D-MACIERZ (nie SD-FAKTY) trafia do W1.3 / MOD-MACIERZ-DOWOD-TEZA.
@@ -564,7 +564,7 @@ Naprawa: (1) dodano do FAZA 2 (SD-READ) nowy typ pliku "[PLIK TEKSTOWY
 Przyczyna: sprawa świadka Marii Korolevej — model zbudował trzy tezy
   i pytania przesłuchania wyłącznie na plikach tekstowych + 1 zrasteryzowanym
   dokumencie, pomijając 130 stron trzech dużych zeskanowanych plików akt
-  osobowych (dependencies.required tego modułu w przesluchanie-swiadkow-v2
+  osobowych (dependencies.required tego modułu w przesluchanie-swiadkow-v2-min90
   było tylko POŚREDNIE, przez analizator-dowodow — pomijalne). Dodatkowo
   model pomylił odręczny, przekreślony dopisek pracownika na upomnieniu
   z odrębną "notatką służbową", której istnienia nie zweryfikował w materiale.

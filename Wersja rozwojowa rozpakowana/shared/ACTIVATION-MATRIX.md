@@ -1,6 +1,6 @@
 # ACTIVATION-MATRIX — Macierz Aktywacji Skilli
 
-> **Plik kanoniczny:** `/mnt/skills/user/shared/ACTIVATION-MATRIX.md`
+> **Plik kanoniczny:** `shared/ACTIVATION-MATRIX.md`
 > **Wersja:** 1.0 | Data: 2026-06-02
 > **Cel:** Eliminacja konfliktu deskryptorów — każda fraza mapuje do JEDNEGO skilla.
 
@@ -39,7 +39,7 @@ Router sprawdza tę macierz gdy fraza wyzwalająca pasuje do ≥2 skillów.
 | "analiza umowy" / "czy mogę podpisać" / klauzule | `analizator-umow-v1` | analiza-sadowa-v6 |
 | "co to znaczy" / "nie rozumiem pisma" / wyjaśnienie | `przewodnik-prawny-v2` | analizator-przepisow-v2 |
 | ZUS / KRUS / niepełnosprawność / emerytura | `DR routing BJ–BW` via prawo-polskie-v2 | analiza-sadowa-v6 |
-| świadek / pytania do przesłuchania / cross-examination | `przesluchanie-swiadkow-v2` | analizator-dowodow-v3 |
+| świadek / pytania do przesłuchania / cross-examination | `przesluchanie-swiadkow-v2-min90` | analizator-dowodow-v3 |
 | chronologia / oś czasu / timeline | `chronologia-sprawy-v1` (bramka auto) | — |
 | "raport dla klienta" / "wyślij klientowi" | `raport-klienta-v1` | raport-sytuacyjny-v2 |
 | "stan sprawy" / "aktualny status" / raport ogólny | `raport-sytuacyjny-v2` | raport-klienta-v1 |
@@ -106,7 +106,7 @@ CEL: orzecznictwo jako wsparcie do budowanego pisma (W3.2)
 | Akta + riposta + orzecznictwo | analiza-sadowa-v6 | → pisma-procesowe-v3 → orzeczenia-sadowe-v2 |
 | Pismo złożone + orzecznictwo | pisma-procesowe-v3 | → orzeczenia-sadowe-v2 (W3.2) |
 | Dowody + terminy + koszty | analizator-dowodow-v3 | → analiza-sadowa-v6 |
-| Świadek + strategia | przesluchanie-swiadkow-v2 | → analizator-dowodow-v3 |
+| Świadek + strategia | przesluchanie-swiadkow-v2-min90 | → analizator-dowodow-v3 |
 | Przepis + pismo | analizator-przepisow-v2 | → orzeczenia-sadowe-v2 → pisma-procesowe-v3 |
 | Laik bez pojęcia | przewodnik-prawny-v2 | → dowolny skill zależnie od odpowiedzi |
 | Raport dla klienta | raport-klienta-v1 | ← raport-sytuacyjny-v2 (źródło danych) |

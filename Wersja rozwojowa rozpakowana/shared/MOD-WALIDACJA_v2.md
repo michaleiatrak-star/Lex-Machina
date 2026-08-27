@@ -7,12 +7,12 @@
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA Z PAMIĘCI
 > Każdy artykuł powołany w raporcie walidacyjnym musi być zweryfikowany online przed podaniem.
 > Każda sygnatura orzeczenia musi być zweryfikowana w oficjalnej bazie przed podaniem.
-> Procedura: view /mnt/skills/user/shared/PRAWO-HARDGATE.md
+> Procedura: view shared/PRAWO-HARDGATE.md
 
 > ⛔ HARD GATE — ZAKAZ PRZYJMOWANIA TWIERDZEŃ STRONY JAKO FAKTÓW (nowość v2.0)
 > Przed każdą walidacją wykonaj F0 z MOD-FAKTY:
->   view /mnt/skills/user/shared/FACT-SOURCE-LOCK.md  (klasyfikacja FSL-A/B/C)
->   view /mnt/skills/user/shared/LEGAL-STATUS-LOCK.md (weryfikacja statusów aktów)
+>   view shared/FACT-SOURCE-LOCK.md  (klasyfikacja FSL-A/B/C)
+>   view shared/LEGAL-STATUS-LOCK.md (weryfikacja statusów aktów)
 > Każde twierdzenie o statusie prawnym aktu (prawomocność, skuteczność, ważność)
 > musi przejść przez LSL przed użyciem w piśmie.
 > Twierdzenie strony/organu o statusie = FSL-B = wymaga weryfikacji = NIE jest faktem.
@@ -274,7 +274,7 @@ WYNIK SKRZYŻOWANIA:
 
 ```
 Uruchom ZAWSZE gdy pismo zawiera twierdzenie o statusie jakiegokolwiek aktu.
-Wywołaj: view /mnt/skills/user/shared/LEGAL-STATUS-LOCK.md
+Wywołaj: view shared/LEGAL-STATUS-LOCK.md
 
 SKANUJ pismo pod kątem:
 ☐ Twierdzeń o prawomocności / nieprawomocności orzeczeń
@@ -345,7 +345,7 @@ Twierdzenia bez dowodu: [lista lub "brak"]
 Dowody niepowołane w piśmie: [lista lub "brak"]
 
 WERYFIKACJA STATUSÓW AKTÓW — FSL/LSL (Blok J — nowość v2.0):
-[wykonaj view /mnt/skills/user/shared/LEGAL-STATUS-LOCK.md jeśli nie wykonano w F0]
+[wykonaj view shared/LEGAL-STATUS-LOCK.md jeśli nie wykonano w F0]
 Akty zweryfikowane przez LSL: [lista z tagami ✅/⚠️/❓/🔴]
 Twierdzenia FSL-B użyte w piśmie: [lista z oznaczeniem "wg twierdzeń [strona]" lub "brak"]
 Konflikty LSL (🔴): [lista lub "brak"]

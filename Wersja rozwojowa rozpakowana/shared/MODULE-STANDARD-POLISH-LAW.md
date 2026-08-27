@@ -1,13 +1,13 @@
 # MODULE-STANDARD-POLISH-LAW — standard modułu prawa polskiego
 
 ## Cel
-Każdy moduł prawa polskiego ma działać jak moduły wzorcowe `mod-A-prawo-pracy.md` i `mod-N-karne.md`: nie jako opis dziedziny, lecz jako praktyczny workflow kancelaryjny.
+Każdy moduł prawa polskiego ma działać jak moduły wzorcowe `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-KP-prawo-pracy.md` i `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md`: nie jako opis dziedziny, lecz jako praktyczny workflow kancelaryjny.
 
 ## Zakaz podstawowy — ⛔ HARD GATE
 
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA Z PAMIĘCI
 > Aktywny globalnie we wszystkich modułach prawa polskiego. Bez wyjątków.
-> Szczegółowa procedura: view /mnt/skills/user/shared/PRAWO-HARDGATE.md
+> Szczegółowa procedura: view shared/PRAWO-HARDGATE.md
 
 Nie wolno cytować ani parafrazować aktualnego brzmienia przepisu z pamięci modelu. Przed podaniem przepisu, terminu ustawowego, progu kwotowego, sankcji, właściwości organu lub Dz.U. uruchom kontrolę:
 

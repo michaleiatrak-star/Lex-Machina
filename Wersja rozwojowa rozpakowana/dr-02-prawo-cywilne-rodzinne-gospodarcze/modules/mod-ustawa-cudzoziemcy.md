@@ -39,7 +39,7 @@
 | Pobyt stały | Bezterminowy | TAK (pełny dostęp) | 5 lat pobyt LUB małżonek PL ≥ 3 lata LUB dziecko PL LUB Karta Polaka; art. 195 u.c. |
 | Rezydent długoterminowy UE | Bezterminowy | TAK (pełny dostęp + mobilność UE) | 5 lat ciągłego pobytu; dochód; ubezpieczenie; j. polski; art. 211 u.c. |
 | Status uchodźcy / ochron. uzupeł. | do 2 lat (przedłuż.) | TAK bez zezwoleń | Konwencja Genewska / ryzyko krzywdy |
-| PESEL UKR (ochrona tymczasowa) | do 4.03.2027 (dotychczasowi beneficjenci) | TAK (powiadomienie PUP w 7 dni, praca.gov.pl) | ⛔ POPRAWKA 2026-07-02 (WARN-27): OD 5.03.2026 reżim przeniesiony do ustawy o udzielaniu cudzoziemcom ochrony na terytorium RP + ustawy o warunkach dopuszczalności powierzania pracy cudzoziemcom (Dz.U. 2025 poz. 621) — dawna specustawa 2022.583 w istotnym zakresie wygaszona ustawą z 23.01.2026 (Dz.U. 2026 poz. 203). Pełny opis: DR-05/mod-ustawa-cudzoziemcy.md ANEKS A |
+| PESEL UKR (ochrona tymczasowa) | do 4.03.2027 (dotychczasowi beneficjenci) | TAK (powiadomienie PUP w 7 dni, praca.gov.pl) | ⛔ POPRAWKA 2026-07-02 (WARN-27): OD 5.03.2026 reżim przeniesiony do ustawy o udzielaniu cudzoziemcom ochrony na terytorium RP + ustawy o warunkach dopuszczalności powierzania pracy cudzoziemcom (Dz.U. 2025.621) — dawna specustawa 2022.583 w istotnym zakresie wygaszona ustawą z 23.01.2026 (Dz.U. 2026.203). Pełny opis: DR-05/mod-ustawa-cudzoziemcy.md ANEKS A |
 
 > ⚠️ Warunki orientacyjne — weryfikuj dokładne przesłanki w aktualnej ustawie w ISAP.
 > Pełny wykaz celów wizy D (art. 60 u.c.) i matryca dokument → uprawnienie do pracy:
