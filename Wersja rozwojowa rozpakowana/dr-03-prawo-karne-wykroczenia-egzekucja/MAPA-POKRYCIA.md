@@ -62,9 +62,9 @@ użyciem w piśmie (HARD GATE), niezależnie od statusu 🟢/🟡/🔴 tutaj.
 
 | Zakres | Status | Moduł | Uwagi |
 |---|---|---|---|
-| Art. 1, 7, 15–17 (znikoma szkodliwość, błąd co do faktu, okoliczności wyłączające winę/bezprawność) | 🟡 | `mod-KW-KPW-framework-szczegolowy` | Wzmiankowane fragmentarycznie w "5 liniach obrony", brak osobnego opracowania |
-| Art. 24 §1, §1a (grzywna, wykroczenia kwalifikowane) | 🟡 | (przy okazji taryfikatora i nowelizacji art. 82) | Kwoty i mechanizm omówione punktowo |
-| Formy stadialne, zbieg przepisów, kary/środki karne systematycznie, art. 45 (przedawnienie), art. 46 (zatarcie) | 🔴 | — | Przedawnienie/zatarcie podane wyłącznie proceduralnie (mandat/nakaz), nie jako opracowanie samych przepisów |
+| Art. 1–17 — zasady odpowiedzialności, lex mitior, wiek, zbieg, usiłowanie, formy zjawiskowe, kontratypy, niepoczytalność | 🟢 NAPRAWIONE | `mod-KW-art1-48-czesc-ogolna` | Dedykowany, systematyczny moduł części ogólnej |
+| Art. 18–39 — kary, środki karne i wymiar | 🟢 NAPRAWIONE | `mod-KW-art1-48-czesc-ogolna` | Katalog, zasady wymiaru i relacje do przepisów szczególnych |
+| Art. 40–48 — środki wychowawcze, zawieszenie aresztu, przedawnienie, zatarcie, definicje i ustawy szczególne | 🟢 NAPRAWIONE | `mod-KW-art1-48-czesc-ogolna` | Art. 45–46 opracowane materialnoprawnie; HARD GATE przed użyciem |
 
 ### Część szczególna, rozdziały I–XIX
 
@@ -77,15 +77,15 @@ użyciem w piśmie (HARD GATE), niezależnie od statusu 🟢/🟡/🔴 tutaj.
 | XII | Przeciwko osobie | 104–108 | 🟢 | `mod-KW-art70-118...` — pełne: 104, 105, 106, 107 (z orzecznictwem SN), 107a i 108; art. 107a zweryfikowany w ELI 2026-08-25 |
 | XIII | Przeciwko zdrowiu | 109–118 | 🟡 | Pełne: 109, 115, 116, 118. Skrócone: 110, 111, 113, 114. Brak: 112, 117 |
 | XIV | Przeciwko mieniu | 119–131 | 🟢 | `mod-KW-art119-131-przeciwko-mieniu` — pełne: 119–129, 131. Najdokładniej opracowany rozdział |
-| XV | Przeciwko interesom konsumentów | 132–139c | 🔴 | Pełne: 133, 134. Uchylone: 132, 139. Niepewne/brak: 137, 138, 139a–c |
+| XV | Przeciwko interesom konsumentów | 132–139c | 🟡 | `mod-KW-art132-166-pozostale-rozdzialy`: rozdział ma punkt startowy; 133–134 opisane, 132/139 uchylone, 137–139c nadal wymagają świeżej pełnej weryfikacji |
 | XVI | Przeciwko obyczajności publicznej | 140–142 | 🟢 | `mod-KW-art132-166-pozostale-rozdzialy` — kompletny rozdział |
-| XVII | Przeciwko urządzeniom użytku publicznego | 143–145 | 🟡 | 144, 145 opisane; 143 niepotwierdzone |
-| XVIII | Przeciwko obowiązkowi ewidencji | 146–147a | 🟡 | 146, 147a opisane; 147 niepotwierdzone w pełni |
-| XIX | Szkodnictwo leśne, polne i ogrodowe | 148–166 | 🔴 | Pełne: 148–150. Brak: 151–166 (16/19 art., ok. 90% rozdziału) — kłusownictwo, szkody rolne, art. 158 |
+| XVII | Przeciwko urządzeniom użytku publicznego | 143–145 | 🟡 | `mod-KW-art132-166-pozostale-rozdzialy`: 144–145 opisane; art. 143 pozostaje punktem do pełnej weryfikacji |
+| XVIII | Przeciwko obowiązkowi ewidencji | 146–147a | 🟡 | `mod-KW-art132-166-pozostale-rozdzialy`: 146 i 147a opisane; 147 pozostaje do pełnej weryfikacji |
+| XIX | Szkodnictwo leśne, polne i ogrodowe | 148–166 | 🟢 NAPRAWIONE F-67 | `mod-KW-art132-166-pozostale-rozdzialy` — 19/19 artykułów; art. 151–166 zweryfikowane 2026-08-14, wcześniejsze 148–150 również opracowane |
 
 **Rekomendowana kolejność uzupełniania (wg raportu źródłowego):**
-1. Rozdz. XIX art. 151–166 (największa luka ilościowa)
-2. Część ogólna art. 1–48 (brak systematycznego modułu)
+1. ~~Rozdz. XIX art. 151–166~~ ✅ NAPRAWIONE F-67
+2. ~~Część ogólna art. 1–48~~ ✅ NAPRAWIONE (`mod-KW-art1-48-czesc-ogolna`)
 3. Rozdz. XI poza taryfikatorem
 4. Rozdz. XV art. 137–139c
 5. Rozdz. X i XIII (domknięcie brakujących artykułów)
