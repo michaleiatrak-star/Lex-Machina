@@ -1,6 +1,6 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: "3.40"
+version: "3.41"
 description: "Prawo cywilne, rodzinne i gospodarcze: KC, KPC, spadki, rodzina, spółki, upadłość, restrukturyzacja, windykacja i odpowiedzialność kontraktowa/deliktowa."
 ---
 
@@ -99,11 +99,13 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (58 łącznie — ✓ 58 OK, ☐ 0 STUB)
+## Moduły (59 łącznie — ✓ 59 OK, ☐ 0 STUB)
 
 ```
   [✓] OK    mod-transakcje-handlowe-opoznienia
               (F-108/46: rdzeń cywilny B; gałęzie administracyjne/historyczne częściowe)
+  [✓] NOWY  mod-prawo-przedsiebiorcow
+              (F-108/51: dedykowany moduł B, pełna mapa rozdziałów; RZĄD 1 ELI)
   [✓] NOWY  mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK
               (F-108/41: osobny akt, Dz.U. 2026 poz. 783 t.j.; poziom B, UFG/PBUK/OC)
   [✓] NOWY  mod-ustawa-fundacja-rodzinna
