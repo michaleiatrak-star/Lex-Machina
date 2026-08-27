@@ -1,5 +1,29 @@
 # DR-03 — Mapa Pokrycia Treściowego
 
+## F-108/8 — opłaty w sprawach karnych (2026-08-27)
+
+Moduł: `modules/mod-ustawa-oplaty-w-sprawach-karnych.md`, poziom B+.
+Źródło: urzędowy ELI, Dz.U. 2023 poz. 123, z uwzględnieniem aktualnego
+brzmienia art. 2 obowiązującego od 14.03.2023.
+
+| Zakres | Materia | Status |
+|---|---|---|
+| art. 1 | zasada opłat | 🟢 |
+| art. 2–7 | opłaty w I instancji | 🟢 |
+| art. 8–12 | postępowanie odwoławcze | 🟢 |
+| art. 13–14 | oskarżyciel posiłkowy/prywatny | 🟢 |
+| art. 15 | opłaty od wniosków i próśb | 🟢 |
+| art. 16–18 | określenie, zwolnienie, zażalenie | 🟢 |
+| art. 19 | opłata kancelaryjna | 🟢 |
+| art. 20 | przedawnienie | 🟢 |
+| art. 21 | KKS/wykroczenia/sprawy wojskowe | 🟢 |
+| art. 22–23 | uchylone | ⚪ |
+
+F-108 P1/8: **poziom B+ osiągnięty**. Moduł rozdziela ustawę o opłatach
+karnych od KSCU oraz od wydatków/kosztów procesu z KPK.
+
+---
+
 **Utworzona:** 2026-08-22 (F-83, zasilenie jednorazowe z `audyt-systemu-v4/
 references/raporty-pokrycia-2026-08-13/`) | **Format ustalony przez F-83.**
 
