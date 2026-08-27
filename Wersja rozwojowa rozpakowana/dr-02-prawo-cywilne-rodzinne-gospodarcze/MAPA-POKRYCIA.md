@@ -232,10 +232,24 @@ postępowania wobec podmiotów regulowanych od art. 426 pozostają zakresem
 reaktywnym.** **Część piąta (upadłość konsumencka): 🟡 częściowo.**
 
 **Ocena PrUp — ZAKTUALIZOWANA:** siedem instytucji o najwyższej częstości
-praktycznej naprawionych; F-86 częściowo uzupełniono mapą dalszej likwidacji,
+praktycznej naprawionych; **F-86 DOMKNIĘTA 2026-08-27** dedykowanym modułem B+ dla art. 426–491^38,
 postępowania międzynarodowego oraz postępowań z art. 418–425s. Moduł ma
 charakter nawigacyjny: nie zastępuje świeżej weryfikacji jednostki. F-86
 pozostaje otwarta dla dalszych odrębnych postępowań od art. 426.
+
+### Prawo upadłościowe — postępowania odrębne art. 426–491^38
+
+| Zakres | Art. | Status | Moduł |
+|---|---:|---|---|
+| Banki i SKOK — przepisy ogólne | 426–441 | 🟢 B+ F-86 | `mod-PrUpad-postepowania-odrebne-426-491-38` |
+| Banki hipoteczne | 442–450 | 🟢 B+ F-86 | j.w. |
+| Instytucje kredytowe / transgraniczne | 451–470 | 🟢 B+ F-86 | j.w. |
+| Ubezpieczyciele i reasekuratorzy | 471–482 | 🟢 B+ F-86 | j.w. |
+| Emitenci obligacji | 483–491 | 🟢 B+ F-86 | j.w. |
+| Upadłość konsumencka | 491^1–491^24 | 🟢 B+ F-86 | j.w. |
+| Układ konsumencki | 491^25–491^38 | 🟢 B+ F-86 | j.w. |
+
+**Status:** F-86 domknięta materiałowo 2026-08-27. Poziom B+ oznacza pełną mapę zakresu i operacyjne reguły legitymacji, organów, mas, oddłużenia i terminów; każda jednostka nadal podlega fresh hard gate ELI przy użyciu.
 
 ### Prawo restrukturyzacyjne (art. 1–433)
 
