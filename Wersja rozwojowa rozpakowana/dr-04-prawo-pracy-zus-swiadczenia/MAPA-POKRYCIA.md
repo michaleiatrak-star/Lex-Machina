@@ -86,19 +86,19 @@ praktyce — całkowicie nieobecny.
 | II, Rozdz. 3a | Emerytury górnicze | 50a–50f | 🔴 | — |
 | II, Rozdz. 4 | Ustalanie wysokości emerytur | 51–56 | 🔴 | — |
 | III, Rozdz. 1 | **Renta z tytułu niezdolności do pracy** | 57–64 | 🟢 | ANEKS A — **art. 57 wprost cytowany**, pełne 3 przesłanki (niezdolność, staż z tabelą progową wg wieku, okres powstania niezdolności z wyjątkiem 25-letniego stażu) |
-| III, Rozdz. 2 | Renta rodzinna | 65–74 | 🔴 | Wymieniona w "zakresie modułu" jako temat objęty — deklaracja bez treści |
+| III, Rozdz. 2 | Renta rodzinna | 65–74 | 🟢 NAPRAWIONE | `mod-FUS-zasilek-pogrzebowy-renta-rodzinna-waloryzacja.md` — warunek po zmarłym, krąg uprawnionych, ustalanie wysokości i routing do zbiegu świadczeń |
 | IV | **Dodatki do emerytur i rent** (dodatek pielęgnacyjny) | 75–76 | 🟢 | `mod-dodatek-pielegnacyjny-swiadczenie-rehabilitacyjne-wyrownawcze.md` — warunki nabycia, wysokość, wyłączenia, rozróżnienie od zasiłku pielęgnacyjnego (inna ustawa) |
-| V | Zasiłek pogrzebowy | 77–81 | 🔴 | Bardzo częste, praktyczne świadczenie, zero treści |
+| V | Zasiłek pogrzebowy | 77–81 | 🟢 NAPRAWIONE | `mod-FUS-zasilek-pogrzebowy-renta-rodzinna-waloryzacja.md` — uprawnieni, koszty, wysokość, wniosek; jawne punkty pogłębienia w module |
 | VI | Świadczenia w szczególnym trybie (uznaniowe decyzje Prezesa RM) | 82–84 | 🔴 | — |
 | VII, Rozdz. 1 | Dolna i górna granica wysokości świadczeń | 85–87 | 🔴 | — |
-| VII, Rozdz. 2 | **Waloryzacja świadczeń** | 88–94 | 🔴 | Coroczna waloryzacja emerytur — istotne praktycznie, zero treści |
+| VII, Rozdz. 2 | **Waloryzacja świadczeń** | 88–94 | 🟢 NAPRAWIONE | `mod-FUS-zasilek-pogrzebowy-renta-rodzinna-waloryzacja.md` — mechanizm coroczny, wskaźnik, ogłoszenia i relacja do zmian ustawowych |
 | VII, Rozdz. 3 | Zbieg prawa do świadczeń | 95–99 | 🔴 | — |
 | VIII, Rozdz. 1 | Powstanie i ustanie prawa do świadczeń | 100–102 | 🔴 | — |
 | VIII, Rozdz. 2 | Zawieszanie lub zmniejszanie świadczeń | 103–106 | 🔴 | Istotne przy emerytach kontynuujących pracę zarobkową |
 | VIII, Rozdz. 3 | Zmiany w prawie do świadczeń i ich wysokości | 107–114 | 🔴 | — |
 | IX | Postępowanie w sprawach świadczeń i wypłata | 115–144 | 🟡 | Ogólna ścieżka odwoławcza opisana dobrze, ale numeracja odwołuje się do KPC, nie do samej ustawy FUS |
 
-**Ocena FUS: nierówna, z dwoma dobrze opracowanymi wyspami** (renta z
+**Ocena FUS: nierówna, ale cztery wcześniejsze luki wysokiego priorytetu są już naprawione** (renta z
 niezdolności art. 57, dodatek pielęgnacyjny art. 75-76). Reszta — cały
 mechanizm obliczania emerytury w starym systemie, renta rodzinna, zasiłek
 pogrzebowy, waloryzacja — praktycznie nieobecna.
@@ -113,9 +113,9 @@ rehabilitacyjne (ustawa zasiłkowa) 🟢; KRUS — osobny moduł.
 
 **Zaktualizowana rekomendowana kolejność uzupełniania:**
 1. ~~SUS Rozdział 2 — zasady podlegania ubezpieczeniom (art. 6–14)~~ ✅ NAPRAWIONE 2026-08-22
-2. **FUS Dział V — zasiłek pogrzebowy (art. 77–81)** — bardzo częste, niska pracochłonność (5 artykułów), następny w kolejności
-3. FUS Rozdz. VII, Rozdz. 2 — waloryzacja świadczeń (art. 88–94)
-4. FUS Dział III, Rozdz. 2 — renta rodzinna (art. 65–74) — dokończenie już zadeklarowanego tematu
+2. ~~FUS Dział V — zasiłek pogrzebowy (77–81)~~ ✅ NAPRAWIONE
+3. ~~FUS Rozdz. VII Rozdz. 2 — waloryzacja (88–94)~~ ✅ NAPRAWIONE
+4. ~~FUS Dział III Rozdz. 2 — renta rodzinna (65–74)~~ ✅ NAPRAWIONE
 5. FUS art. 103–106 — zawieszanie/zmniejszanie świadczeń przy pracy zarobkowej
 6. SUS Rozdział 3 — zasady ustalania składek (art. 15–32)
 7. FUS Dział II, Rozdz. 2 i 4 — emerytura w starym systemie (art. 27–45, 51–56)
