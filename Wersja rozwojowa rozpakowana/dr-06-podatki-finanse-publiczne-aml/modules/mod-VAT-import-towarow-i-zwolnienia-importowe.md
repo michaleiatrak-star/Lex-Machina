@@ -17,7 +17,7 @@
 (jedna wzmianka o art. 33a przy odliczeniu), a Dział VIII rozdz. 3 w 0%.
 
 > ⭐⭐⭐ **DLACZEGO TO BYŁA LUKA STRUKTURALNA, NIE DROBIAZG:** system miał
-> moduły celne (`mod-UCC-clo-taryfa-celna`, `mod-clo-podroznych-limity`),
+> moduły celne (`dr-06-podatki-finanse-publiczne-aml/modules/mod-UCC-clo-taryfa-celna.md`, `dr-06-podatki-finanse-publiczne-aml/modules/mod-clo-podroznych-limity-towary-zabronione.md`),
 > ale one opisują reżim **CELNY**. VAT-owy reżim importu to ODRĘBNA warstwa
 > w ustawie o VAT — cło i VAT importowy mają wspólne zdarzenie (dług celny),
 > ale różne podstawy, różne zwolnienia i różne terminy. Analiza sprawy

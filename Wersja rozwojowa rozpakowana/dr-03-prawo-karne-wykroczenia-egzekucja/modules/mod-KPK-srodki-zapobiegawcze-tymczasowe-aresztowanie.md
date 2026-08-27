@@ -1,236 +1,219 @@
 # mod-KPK-srodki-zapobiegawcze-tymczasowe-aresztowanie
 
-**Wersja:** 1.0.0 | **Dodano:** 2026-08-13 (NAPRAWA — wypełnienie luki
-strukturalnej F-23, wykrytej w audycie zewnętrznym 2026-08-13, potem
-niezależnie potwierdzonej i doprecyzowanej artykuł-po-artykule przez
-raport zewnętrzny KPK — F-66. Przed tym modułem: ZERO pokrycia tematu
-w całym DR-03, mimo że to jeden z najczęściej używanych tematów
-praktyki karnej.)
+**Wersja:** 2.0.0 | **Dodano:** 2026-08-13 | **Zaktualizowano:** 2026-08-25
+**Podstawa urzędowa:** KPK, Dz.U. 2026 poz. 490 t.j., tekst odczytany
+w ELI 2026-08-25.
 
-> ✅ ROZSTRZYGNIĘTE 2026-08-15 (F-81 pkt 6, naprawa `MAPA-AKTOW.md`).
-> Akt bazowy: KPK, Dz.U. 2026 poz. 490 t.j. + Dz.U. 2026.421 (art. 213 §1c,
-> tożsamość obywatela państwa trzeciego) + Dz.U. 2026.638 (art. 25 §1 pkt 2,
-> właściwość rzeczowa SO, w życie 28.05.2026). Żaden z artykułów opisanych
-> w tym module (Rozdz. 28, art. 249-277) nie jest dotknięty żadną z tych
-> dwóch nowelizacji — zweryfikowano źródłowo (prawo.pl, sip.lex.pl).
-> ⛔ Mimo to zweryfikuj aktualny t.j. na ISAP przed użyciem w piśmie —
-> zasada ogólna, nie specyficzna dla tych dwóch nowelizacji.
-
-**Rola w systemie:** KPK Dział VI (Środki przymusu), Rozdział 28
-(Środki zapobiegawcze, art. 249-277) — z naciskiem na tymczasowe
-aresztowanie jako środek izolacyjny. Zamyka F-23/F-66.
+> ⛔ HARD GATE: przed poradą lub pismem sprawdź ponownie aktualne brzmienie
+> każdej powoływanej jednostki. Tymczasowe aresztowanie (TA) jest
+> **środkiem zapobiegawczym**, nie środkiem zabezpieczającym.
 
 ---
 
-## 1. PRZESŁANKA OGÓLNA (art. 249) — wspólna dla WSZYSTKICH środków
-zapobiegawczych, nie tylko aresztu
+## 1. PRZESŁANKI I ULTIMA RATIO
 
-```
-⭐⭐⭐ ART. 249 §1 — DWA warunki, które MUSZĄ wystąpić ŁĄCZNIE, aby
-  zastosować JAKIKOLWIEK środek zapobiegawczy (w tym areszt):
-  1) zebrane DOWODY wskazują na DUŻE PRAWDOPODOBIEŃSTWO, że
-     podejrzany/oskarżony POPEŁNIŁ przestępstwo
-  2) istnieje POTRZEBA zabezpieczenia PRAWIDŁOWEGO TOKU postępowania
-     (⭐ LUB — w wypadku szczególnym — zapobieżenia popełnieniu przez
-     oskarżonego NOWEGO, ciężkiego przestępstwa)
+### Art. 249 § 1 KPK — przesłanka ogólna
 
-⭐⭐ ART. 249 §5 — obligatoryjny UDZIAŁ OBROŃCY w posiedzeniu w
-  przedmiocie tymczasowego aresztowania: jeśli podejrzany NIE MA
-  obrońcy — wyznacza się OBROŃCĘ Z URZĘDU (⭐ jedyny etap postępowania
-  przygotowawczego z bezwzględnym przymusem obrończym w tym zakresie).
-  Niestawiennictwo należycie zawiadomionego obrońcy NIE tamuje
-  rozpoznania sprawy.
+Każdy środek zapobiegawczy wymaga dowodów wskazujących na duże
+prawdopodobieństwo, że oskarżony popełnił **przestępstwo**, oraz celu w
+postaci zabezpieczenia prawidłowego toku postępowania, a wyjątkowo także
+zapobieżenia nowemu ciężkiemu przestępstwu.
 
-⭐ ZASADA OGÓLNA (art. 257 §1, kontekstowo): tymczasowe aresztowanie
-  NIE MOŻE być stosowane, jeżeli WYSTARCZAJĄCY jest środek
-  ŁAGODNIEJSZY (⭐⭐ zasada ULTIMA RATIO/proporcjonalności — areszt
-  jako środek OSTATECZNY, dopiero gdy dozór policyjny, poręczenie
-  majątkowe [już opisane w `mod-poreczenie-majatkowe-kaucja-karna.md`]
-  czy zakaz opuszczania kraju są NIEWYSTARCZAJĄCE)
-```
+### Art. 258 KPK — podstawy szczególne
 
----
+- § 1 pkt 1: uzasadniona obawa ucieczki lub ukrycia się;
+- § 1 pkt 2: uzasadniona obawa matactwa lub innego bezprawnego utrudniania;
+- § 2: zarzut zbrodni lub występku zagrożonego w górnej granicy co
+  najmniej 8 lat pozbawienia wolności albo nieprawomocne skazanie przez
+  sąd I instancji na co najmniej 3 lata; grożąca surowa kara może
+  uzasadniać obawę utrudniania, ale nie zwalnia z indywidualnej oceny;
+- § 3: wyjątkowa podstawa prewencyjna dotycząca obawy nowego przestępstwa
+  przeciwko życiu, zdrowiu lub bezpieczeństwu powszechnemu;
+- § 4: sąd uwzględnia rodzaj, charakter i nasilenie konkretnych obaw.
 
-## 2. PRZESŁANKI SZCZEGÓLNE (art. 258) — CO NAJMNIEJ JEDNA obok
-przesłanki ogólnej
+### Art. 257 i 259 KPK — proporcjonalność i bariery
 
-```
-⭐⭐⭐ ART. 258 §1 — DWIE najczęstsze w praktyce:
-  PKT 1 — uzasadniona OBAWA UCIECZKI lub UKRYCIA SIĘ — szczególnie gdy
-    NIE MOŻNA ustalić tożsamości podejrzanego LUB NIE MA on w kraju
-    stałego miejsca pobytu
-  PKT 2 — uzasadniona OBAWA MATACTWA — nakłanianie do fałszywych
-    zeznań/wyjaśnień lub inne bezprawne utrudnianie postępowania (⭐⭐⭐
-    W PRAKTYCE NAJCZĘŚCIEJ stosowana przesłanka — jednocześnie
-    NAJŁATWIEJSZA do nadużycia, bo trudno ją obalić z góry, zanim
-    dowody zostaną zabezpieczone — kluczowy punkt zaczepienia dla
-    obrony: żądać KONKRETNEGO uzasadnienia, nie ogólnikowej obawy)
-
-⭐⭐ ART. 258 §2 — PRZESŁANKA SZCZEGÓLNA wynikająca z SUROWOŚCI
-  GROŻĄCEJ KARY: jeżeli oskarżonemu zarzuca się popełnienie ZBRODNI
-  LUB występku zagrożonego karą pozbawienia wolności, której górna
-  granica wynosi CO NAJMNIEJ 8 LAT, ALBO gdy sąd I instancji skazał go
-  na karę pozbawienia wolności NIE NIŻSZĄ niż 3 lata — obawa surowej
-  kary MOŻE UZASADNIAĆ areszt (⭐ SAMODZIELNIE, bez potrzeby wykazania
-  konkretnej obawy ucieczki/matactwa — to WYJĄTEK od reguły, że sama
-  wysokość zagrożenia nie wystarcza)
-
-⭐ ART. 258 §3 — przesłanka PREWENCYJNA (rzadsza): WYJĄTKOWO można
-  zastosować areszt, gdy zachodzi uzasadniona obawa, że oskarżony o
-  ZBRODNIĘ lub umyślny WYSTĘPEK popełni przestępstwo przeciwko życiu/
-  zdrowiu/bezpieczeństwu powszechnemu — zwłaszcza gdy SAM groził
-  popełnieniem takiego czynu
-
-⭐⭐ ART. 258 §4 — DYREKTYWA WAŻENIA: decydując o zastosowaniu aresztu,
-  sąd UWZGLĘDNIA rodzaj i charakter OBAW stanowiących podstawę
-  stosowania środka ORAZ NASILENIE zagrożenia dla prawidłowego
-  przebiegu postępowania W DANEJ sprawie (⭐ indywidualizacja, nie
-  automatyzm — argument obronny: "sama kwalifikacja czynu to za
-  mało, potrzebna KONKRETNA ocena okoliczności TEJ sprawy")
-```
+- Art. 257 § 1: TA nie stosuje się, jeżeli wystarczy inny środek.
+- Art. 251 § 3: uzasadnienie musi wyjaśnić, dlaczego środek nieizolacyjny
+  nie wystarczy.
+- Art. 259 § 1: co do zasady odstąpienie przy poważnym zagrożeniu życia lub
+  zdrowia albo wyjątkowo ciężkich skutkach dla oskarżonego lub rodziny.
+- Art. 259 § 2: TA nie stosuje się, gdy można przewidywać karę z
+  warunkowym zawieszeniem albo karę łagodniejszą niż pozbawienie wolności,
+  chyba że oskarżony ukrywa się, uporczywie nie stawia na wezwania lub w
+  inny bezprawny sposób utrudnia postępowanie albo nie można ustalić jego
+  tożsamości.
+- Art. 259 § 3: TA nie może być stosowane, gdy czyn jest zagrożony karą
+  pozbawienia wolności nieprzekraczającą roku, chyba że zachodzą wyjątki
+  wskazane w tym przepisie.
 
 ---
 
-## 3. PRZESŁANKI NEGATYWNE (art. 259) — kiedy sąd POWINIEN odstąpić od
-aresztu MIMO spełnienia przesłanek z art. 249/258
+## 2. DOSTĘP DO MATERIAŁU ARESZTOWEGO
 
-```
-⭐⭐⭐ ART. 259 §1 — jeżeli TYMCZASOWE ARESZTOWANIE spowodowałoby dla
-  oskarżonego lub jego NAJBLIŻSZYCH:
-  PKT 1 — poważne niebezpieczeństwo dla ŻYCIA lub ZDROWIA, LUB
-  PKT 2 — pociągałoby za sobą WYJĄTKOWO CIĘŻKIE skutki
-  ⭐ obejmuje w szczególności sytuację JEDYNEGO ŻYWICIELA rodziny z
-  małoletnimi dziećmi lub osobą wymagającą stałej opieki — ⭐⭐ mocny
-  argument obronny, wymaga UDOKUMENTOWANIA sytuacji rodzinnej we
-  wniosku o uchylenie/zmianę środka
+### Art. 156 § 5a, art. 249a § 1 i art. 250 § 2a–2b
 
-⚠️ RELACJA do przesłanek z art. 258 §2 (surowa kara ≥8 lat): przesłanki
-  negatywne z art. 259 STOSUJE SIĘ RÓWNIEŻ przy tej podstawie — ciężka
-  sytuacja rodzinna może przeważyć NAWET przy zarzucie zagrożonym
-  wysoką karą, choć w praktyce próg przekonania sądu jest wtedy wyższy
-  (⚠️ PUNKT STARTOWY — dokładna praktyka orzecznicza tego zderzenia
-  przesłanek pozytywnych §2 i negatywnych art. 259 niezbadana w tej
-  sesji, sprawdź orzecznictwo przy konkretnej sprawie)
-```
+- Prokurator niezwłocznie udostępnia podejrzanemu i obrońcy część akt
+  zawierającą treść dowodów **dołączonych do wniosku** o zastosowanie albo
+  przedłużenie TA. Wyjątek dotyczy zeznań świadka, którego danych nie
+  ujawnia się na podstawie art. 184 § 1 KPK (art. 250 § 2b).
+- Podstawę orzeczenia o zastosowaniu albo przedłużeniu TA mogą stanowić
+  ustalenia oparte na dowodach jawnych dla oskarżonego i obrońcy, z
+  wyjątkiem dowodów z art. 250 § 2b (art. 249a § 1).
+- Wniosek prokuratora musi wymieniać dowody wskazujące na duże
+  prawdopodobieństwo popełnienia przestępstwa, okoliczności uzasadniające
+  obawy lub podstawę prewencyjną, podstawę szczególną i konieczność TA
+  (art. 250 § 2a).
 
----
+### Kazus: tom VI ujawniony dopiero w zażaleniu prokuratora
 
-## 4. TRYB STOSOWANIA (art. 250-252) — KTO decyduje i jak zaskarżyć
+Jeżeli sąd I instancji odmówił TA, a prokurator w zażaleniu po raz pierwszy
+powołuje dowody z nieudostępnionego tomu VI, obrona powinna:
 
-```
-⭐⭐⭐ ART. 250 §1 — WYŁĄCZNOŚĆ SĄDOWA: tymczasowe aresztowanie MOŻE
-  nastąpić WYŁĄCZNIE na mocy postanowienia SĄDU (⭐ nigdy samodzielnie
-  przez prokuratora czy Policję — w przeciwieństwie do zatrzymania)
+1. zażądać niezwłocznego dostępu do powołanych dowodów i realnego czasu na
+   odpowiedź (art. 156 § 5a, art. 42 ust. 2 Konstytucji, art. 6 EKPC);
+2. zarzucić, że dowód niejawny dla obrony nie może być podstawą orzeczenia
+   o TA z uwagi na art. 249a § 1, o ile nie zachodzi wyjątek art. 250 § 2b;
+3. wskazać, że § 5a obejmuje dowody dołączone do wniosku, więc zarzut
+   „nieudostępnienia podstawy pierwotnego wniosku” zależy od tego, czy tom
+   VI rzeczywiście był do niego dołączony; jeśli pojawił się dopiero w
+   zażaleniu, centralny jest art. 249a § 1 i prawo do skutecznej obrony;
+4. wnosić o nieuwzględnienie zażalenia, ewentualnie o niedokonywanie oceny
+   nowych dowodów przed ich ujawnieniem obronie.
 
-⭐⭐ ART. 250 §2 — w POSTĘPOWANIU PRZYGOTOWAWCZYM: areszt stosuje NA
-  WNIOSEK PROKURATORA sąd REJONOWY właściwy dla okręgu, w którym
-  prowadzi się postępowanie (w wypadkach niecierpiących zwłoki —
-  także INNY sąd rejonowy). PO WNIESIENIU aktu oskarżenia — areszt
-  stosuje sąd, PRZED KTÓRYM sprawa się toczy
-
-⭐ ART. 250 §3c — POSIEDZENIE ZDALNE dopuszczalne (urządzenia
-  techniczne z jednoczesnym przekazem obrazu/dźwięku), jeśli zapewniony
-  jest udział podejrzanego — MOŻNA odstąpić od przymusowego
-  doprowadzenia do sądu
-
-⭐⭐ ART. 251 — POSTANOWIENIE o zastosowaniu aresztu WYMAGA
-  UZASADNIENIA (§1-3) — MUSI wskazywać KONKRETNE fakty i dowody
-  świadczące o spełnieniu przesłanek z art. 249 i 258, nie tylko
-  cytować przepis (⭐⭐ podstawowy zarzut zażaleniowy: "postanowienie
-  nie wyjaśnia, DLACZEGO w TEJ sprawie zachodzi konkretna obawa" —
-  uzasadnienie musi być zindywidualizowane, nie szablonowe)
-
-⭐⭐⭐ ART. 252 — ZAŻALENIE (⭐ ZAWSZE przysługuje na postanowienie w
-  przedmiocie środka zapobiegawczego — dotyczy zastosowania,
-  przedłużenia, ODMOWY zastosowania, ORAZ uchylenia):
-  §2 — na postanowienie PROKURATORA zażalenie idzie do SĄDU
-    REJONOWEGO właściwego dla okręgu postępowania
-  §1/§3 — na postanowienie SĄDU zażalenie rozpoznaje TEN SAM sąd, ale
-    w INNYM składzie (⭐ zwykle 3 sędziów, nie sąd wyższej instancji —
-    to WAŻNA różnica względem typowego dwuinstancyjnego zażalenia)
-  ⭐⭐⭐ TERMIN ROZPOZNANIA: sąd rozpoznaje zażalenie NIEZWŁOCZNIE, a
-    zażalenie na postanowienie w PRZEDMIOCIE TYMCZASOWEGO ARESZTOWANIA
-    — NIE PÓŹNIEJ niż przed upływem 7 DNI od przekazania sądowi
-    zażalenia wraz z niezbędnymi aktami (⭐ termin USTAWOWY, gwarancyjny
-    — jeśli sąd go przekracza, to samodzielny argument proceduralny)
-
-⭐⭐ ART. 254 — WNIOSEK O UCHYLENIE LUB ZMIANĘ środka zapobiegawczego:
-  podejrzany/oskarżony MOŻE składać go W KAŻDYM CZASIE (⭐ nie jest to
-  jednorazowa szansa przy zastosowaniu — można wnioskować ponownie,
-  gdy zmienią się okoliczności, np. ustanie obawa matactwa po
-  zakończeniu czynności dowodowych z udziałem świadków)
-```
+Nie wolno formułować zarzutu, że tom VI „stanowił podstawę postanowienia o
+zastosowaniu TA”, jeżeli sąd w rzeczywistości odmówił zastosowania środka.
 
 ---
 
-## 5. MAKSYMALNE OKRESY TRWANIA (art. 263) — ⭐⭐⭐ NAJCZĘŚCIEJ
-sprawdzany przepis w praktyce (kontrola terminów)
+## 3. ORGAN, POSIEDZENIE I OBROŃCA
 
-```
-⭐⭐⭐ ART. 263 §1 — OKRES POCZĄTKOWY: w postępowaniu przygotowawczym
-  sąd oznacza termin aresztu na okres NIE DŁUŻSZY niż 3 MIESIĄCE
-
-⭐⭐⭐ ART. 263 §2 — PIERWSZE PRZEDŁUŻENIE: jeśli ze względu na
-  szczególne okoliczności NIE MOŻNA było ukończyć postępowania
-  przygotowawczego w 3 miesiące — NA WNIOSEK PROKURATORA sąd I
-  instancji właściwy do rozpoznania sprawy MOŻE przedłużyć areszt na
-  okres, który ŁĄCZNIE NIE MOŻE przekroczyć 12 MIESIĘCY
-
-⭐⭐⭐ ART. 263 §3 — GRANICA DO PIERWSZEGO WYROKU: łączny okres aresztu
-  DO CHWILI wydania PIERWSZEGO wyroku przez sąd I instancji NIE MOŻE
-  przekroczyć 2 LAT
-
-⭐⭐ ART. 263 (dalsze paragrafy, wg źródeł wtórnych — ⚠️ ZWERYFIKUJ
-  DOKŁADNĄ numerację paragrafów w ISAP przed cytowaniem, mapowanie
-  §-numerów na treść poniżej NIE w pełni potwierdzone w tej sesji):
-  — POWYŻEJ 2 lat: dalsze przedłużenie MOŻLIWE WYŁĄCZNIE przez sąd
-    APELACYJNY, w szczególnie uzasadnionych przypadkach
-  — PO WYDANIU WYROKU (przed prawomocnością): każdorazowe przedłużenie
-    na okres NIE DŁUŻSZY niż 6 MIESIĘCY
-  — WNIOSEK prokuratora o przedłużenie MUSI wpłynąć NIE PÓŹNIEJ niż
-    14 DNI przed upływem dotychczasowego terminu, WRAZ z aktami sprawy
-    przesłanymi do sądu (⭐⭐ termin gwarancyjny — liczy się DATA
-    WPŁYWU wniosku do biura podawczego sądu, NIE data jego podpisania
-    — częsty punkt kontroli formalnej dla obrony)
-
-⭐⭐⭐ SKUTEK PRZEKROCZENIA TERMINU: przekroczenie maksymalnego okresu
-  BEZ postanowienia o przedłużeniu SKUTKUJE OBOWIĄZKIEM NATYCHMIASTOWEGO
-  zwolnienia tymczasowo aresztowanego — ⭐ to NIE jest fakultatywne,
-  sąd/prokurator MUSI zwolnić z urzędu
-
-⭐ KAŻDE POSTANOWIENIE O PRZEDŁUŻENIU wymaga zbadania sprawy OD NOWA —
-  sąd nie może automatycznie powielić poprzedniej decyzji, musi
-  PONOWNIE ustalić aktualność przesłanki ogólnej (art. 249 §1) i co
-  najmniej jednej przesłanki szczególnej (art. 258)
-```
+- Art. 250 § 1: TA może nastąpić wyłącznie na mocy postanowienia sądu.
+- W postępowaniu przygotowawczym sąd działa na wniosek prokuratora;
+  właściwość określa art. 250 § 2.
+- Art. 249 § 3a: obrońcę z urzędu wyznacza się w szczególnej sytuacji,
+  gdy przesłuchanie oskarżonego jest niemożliwe z powodu okoliczności z
+  art. 313 § 1a. Nie jest to ogólna reguła obligatoryjnej obrony na każdym
+  posiedzeniu aresztowym.
+- Art. 249 § 5: prokurator i obrońca mogą uczestniczyć w posiedzeniu o
+  przedłużenie TA i w rozpoznaniu zażalenia; na żądanie oskarżonego, który
+  nie ma obrońcy, wyznacza się obrońcę z urzędu. Należycie zawiadomione
+  niestawiennictwo nie tamuje rozpoznania.
 
 ---
 
-## 6. ROZGRANICZENIE — powiązanie z już opisanymi tematami DR-03
+## 4. ZAŻALENIE I WNIOSEK O ZMIANĘ
 
-| Temat | Gdzie |
+- Art. 252 § 1: na postanowienie w przedmiocie środka zapobiegawczego
+  przysługuje zażalenie na zasadach ogólnych, z wyjątkami ustawowymi.
+- Art. 252 § 2: na postanowienie prokuratora właściwy jest sąd rejonowy,
+  w którego okręgu prowadzi się postępowanie.
+- Droga zażalenia na postanowienie sądu wynika z zasad ogólnych; nie wolno
+  z art. 252 wyprowadzać uniwersalnej reguły „ten sam sąd w składzie trzech
+  sędziów”. Art. 426 § 2 przewiduje zażalenia poziome tylko w wymienionych
+  tam sytuacjach.
+- Art. 460: termin wniesienia zażalenia wynosi 7 dni od ogłoszenia
+  postanowienia, a gdy doręczenie jest wymagane — od doręczenia.
+- Art. 463 § 2: zażalenie dotyczące TA przekazuje się do rozpoznania w
+  ciągu 48 godzin.
+- Art. 252 § 3: sąd rozpoznaje zażalenie dotyczące TA nie później niż w
+  ciągu 7 dni od przekazania go wraz z niezbędnymi aktami.
+- Art. 254: oskarżony może w każdym czasie żądać uchylenia lub zmiany
+  środka; nowe okoliczności należy udokumentować.
+
+---
+
+## 5. OKRESY — ART. 263 KPK
+
+- § 1: początkowo w postępowaniu przygotowawczym najwyżej 3 miesiące.
+- § 2: przy szczególnych okolicznościach sąd właściwy do rozpoznania
+  sprawy w I instancji może przedłużyć na łączny okres do 12 miesięcy.
+- § 3: łączny okres do wydania pierwszego wyroku przez sąd I instancji
+  nie może przekroczyć 2 lat.
+- § 4: przedłużenie ponad limity § 2 i § 3 należy do właściwego sądu
+  apelacyjnego i wymaga jednej z enumeratywnie wskazanych szczególnych
+  przyczyn. Przed cytowaniem trzeba odtworzyć właściwy punkt § 4.
+- § 4b: co do zasady brak przedłużenia ponad limit § 2, gdy realnie grożąca
+  kara nie przekroczy 3 lat, oraz ponad limit § 3, gdy nie przekroczy 5
+  lat; wyjątek dotyczy celowego przewlekania postępowania przez oskarżonego.
+- § 5: na postanowienie sądu apelacyjnego wydane na podstawie § 4
+  przysługuje zażalenie do tego sądu w składzie trzech sędziów.
+- § 6: wniosek o przedłużenie wraz z aktami powinien wpłynąć do sądu nie
+  później niż 14 dni przed upływem terminu.
+- § 7: po wydaniu pierwszego wyroku każde przedłużenie może nastąpić na
+  okres nie dłuższy niż 6 miesięcy.
+
+Brak obowiązującego postanowienia stanowiącego podstawę dalszej izolacji
+wymaga zwolnienia; każde przedłużenie wymaga ponownego zbadania aktualności
+przesłanek.
+
+---
+
+## 6. KAZUS: KIEROWCA PO ALKOHOLU
+
+### Tylko art. 87 § 1 KW
+
+Jeżeli stężenie odpowiada stanowi po użyciu alkoholu, czyn jest
+wykroczeniem. Art. 249 § 1 KPK wymaga prawdopodobieństwa **przestępstwa**,
+więc TA w postępowaniu karnym jest niedopuszczalne. Sąd powinien odmówić
+TA; po ujawnieniu, że czyn jest wykroczeniem, właściwe znaczenie ma art. 18
+KPK. Obrońca zaskarża TA i żąda jego uchylenia.
+
+### Art. 178a § 1 KK
+
+Przy stanie nietrzeźwości czyn może wypełniać art. 178a § 1 KK, którego
+sankcja od 1.10.2023 r. wynosi do 3 lat pozbawienia wolności. To jednak nie
+czyni TA automatycznym:
+
+- art. 258 § 2 w wariancie zagrożenia ustawowego nie działa, bo 3 lata to
+  mniej niż wymagane 8 lat;
+- dobrowolne stawiennictwo, przyznanie się, stałe miejsce pobytu i
+  zabezpieczenie kluczowych dowodów osłabiają obawy ucieczki i matactwa;
+- trzeba zastosować art. 257 § 1 i art. 259 § 2 oraz rozważyć brak środka
+  albo środek nieizolacyjny.
+
+Obrońca wnosi zażalenie w terminie z art. 460 KPK, zarzucając naruszenie
+art. 249 § 1, odpowiedniej jednostki art. 258, art. 257 § 1, art. 259 § 2
+i art. 251 § 3 — zależnie od uzasadnienia sądu. Nie należy powoływać
+art. 177 KK bez wypadku i skutku na osobie. Na policyjne zatrzymanie
+przysługuje odrębne zażalenie z art. 246 KPK; art. 243 reguluje ujęcie
+obywatelskie, a art. 244 zatrzymanie przez Policję.
+
+---
+
+## 7. KONTAKT Z OBROŃCĄ PO 14 DNIACH — ART. 73 § 2–4
+
+W postępowaniu przygotowawczym prokurator może zastrzec swoją obecność
+przy porozumiewaniu się tymczasowo aresztowanego z obrońcą, a w szczególnie
+uzasadnionych wypadkach także kontrolę korespondencji. Zastrzeżenia te nie
+mogą być utrzymywane ani dokonane po upływie 14 dni od dnia TA.
+
+Po upływie terminu ograniczenie wygasa z mocy ustawy. Obrońca powinien
+niezwłocznie zażądać od prokuratora i administracji aresztu zapewnienia
+niekontrolowanego kontaktu, dokumentować odmowę i powołać art. 73 § 4 KPK,
+art. 42 ust. 2 Konstytucji oraz art. 6 EKPC. „Wniosek do sądu o uchylenie”
+nie jest warunkiem wygaśnięcia ograniczenia.
+
+---
+
+## 8. POWIĄZANIA
+
+| Zadanie | Skill/moduł |
 |---|---|
-| Poręczenie majątkowe (kaucja) jako środek ALTERNATYWNY wobec aresztu | `mod-poreczenie-majatkowe-kaucja-karna.md` (nie duplikować) |
-| Wykonanie tymczasowego aresztowania (warunki bytowe, prawa aresztowanego w areszcie) — KKW, nie KPK | poza zakresem DR-03/tego modułu — patrz F-75 (KKW), moduł tego aktu wymaga przepisania od podstaw |
-| Odszkodowanie za NIESŁUSZNE tymczasowe aresztowanie (art. 552-559 KPK, Rozdział 58) | ⚠️ NIE opracowane w tej sesji — poza zakresem tego modułu, kandydat do przyszłego rozszerzenia |
-| List gończy i poszukiwanie oskarżonego (Rozdział 29-30 KPK) — powiązane, gdy przesłanka to obawa ucieczki | ⚠️ NIE opracowane w tej sesji |
-
-## ŁĄCZ Z
-
-| Sytuacja | Skill / Moduł |
-|---|---|
-| Pismo: wniosek o uchylenie/zmianę środka, zażalenie na areszt | `pisma-procesowe-v3` |
-| Orzecznictwo — przesłanki aresztu, kontrola terminów | `orzeczenia-sadowe-v2` |
-| Strategia obrończa przy wniosku o areszt | `analiza-sadowa-v6` |
+| Zażalenie lub wniosek o uchylenie/zmianę | `pisma-procesowe-v3` |
+| Orzecznictwo o przesłankach TA | `orzeczenia-sadowe-v2` |
+| Strategia i dowody | `analiza-sadowa-v6` |
+| Poręczenie majątkowe | `mod-poreczenie-majatkowe-kaucja-karna.md` |
 
 ---
 
-## ⚠️ POZOSTAJE DO POGŁĘBIENIA (jawnie oznaczone, poza zakresem tej naprawy)
-- Dokładna numeracja paragrafów art. 263 §4 i dalszych (przedłużenie
-  przez sąd apelacyjny, przedłużenie po wyroku) — zweryfikować wprost
-  w ISAP, nie tylko przez źródła wtórne.
-- Zderzenie przesłanki pozytywnej z art. 258 §2 (zagrożenie ≥8 lat) z
-  przesłankami negatywnymi z art. 259 — praktyka orzecznicza.
-- Odszkodowanie za niesłuszny areszt (Rozdział 58 KPK).
-- 2 nowelizacje KPK pominięte w metryce `MAPA-AKTOW.md` (Dz.U.
-  2026.421, 2026.638) — sprawdzić, czy dotykają Rozdziału 28.
+## CHANGELOG
+
+**2.0.0 (2026-08-25):** Weryfikacja z Dz.U. 2026 poz. 490. Naprawiono
+art. 249 § 3a/§ 5, art. 252 i drogę zażaleniową, art. 263 § 4–7; dodano
+art. 156 § 5a, 249a § 1, 250 § 2a–2b, kazus z tomem VI, kwalifikację
+art. 87 KW/art. 178a KK, prawidłowe podstawy zaskarżenia zatrzymania oraz
+regułę kontaktu z obrońcą po 14 dniach.
+
+**1.0.0 (2026-08-13):** Wersja pierwotna; zastąpiona po audycie zakresu
+i jednostek redakcyjnych.

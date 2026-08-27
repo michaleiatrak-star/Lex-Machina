@@ -1,7 +1,7 @@
 # mod-prawo-bankowe-KNF-BFG
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Prawo bankowe — **Dz.U. 2026 poz. 38 t.j.** (nowelizacje 2025: poz. 1170, 1191) ✅ VER: 2026-06-05 | KNF — Dz.U. 2025 poz. 640 t.j. | BFG — Dz.U. 2024 poz. 487 t.j.
+**Źródło weryfikacji:** Prawo bankowe — **Dz.U. 2026 poz. 38 t.j.** (nowelizacje 2025: poz. 1170, 1191) ✅ VER: 2026-06-05 | KNF — Dz.U. 2026 poz. 935 t.j. | BFG — Dz.U. 2026 poz. 620 t.j.
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
 ---
@@ -16,9 +16,9 @@ Prawo bankowe (czynności bankowe, tajemnica bankowa, kredyty, gwarancje), nadz�
 | Akt | Dz.U. | Uwaga |
 |---|---|---|
 | Prawo bankowe | Dz.U. 2026 poz. 38 t.j. | Poprzedni t.j.: Dz.U. 2024 poz. 1646; zm. 2025: poz. 1170, 1191 |
-| Ustawa o nadzorze nad rynkiem finansowym | Dz.U. 2025 poz. 640 t.j. | |
-| Ustawa o BFG | Dz.U. 2024 poz. 487 t.j. | |
-| Ustawa o grach hazardowych | Dz.U. 2023 poz. 227 t.j. ze zm. | KAS jako organ nadzoru |
+| Ustawa o nadzorze nad rynkiem finansowym | Dz.U. 2026 poz. 935 t.j. | |
+| Ustawa o BFG | Dz.U. 2026 poz. 620 t.j. | |
+| Ustawa o grach hazardowych | Dz.U. 2025 poz. 595 t.j. ze zm. | KAS jako organ nadzoru |
 
 ---
 
@@ -129,7 +129,16 @@ ochrony depozytów transpozycja Polska" PRZED cytowaniem w sprawie
 
 ---
 
-## 7. QUALITY GATE / OUTPUT
+## 7. MDR A TAJEMNICA BANKOWA — OD 1.10.2026
+
+Art. 7 ustawy z 29.05.2026 r. (Dz.U. 2026 poz. 846) dodaje w art. 105
+ust. 1 pkt 1k Prawa bankowego lit. c. Bank może udzielić Szefowi KAS
+informacji objętych tajemnicą bankową w celu wykonania obowiązków z
+działu III rozdziału 11a Ordynacji podatkowej, w zakresie informacji
+o schematach podatkowych. Jest to szczególna podstawa ujawnienia, nie
+generalne zniesienie tajemnicy bankowej.
+
+## 8. QUALITY GATE / OUTPUT
 
 **Quality gate:** Aktualny Dz.U. Prawa bankowego (2026 poz. 38) zweryfikowany? Nowelizacje 2025 uwzględnione? Kwoty BFG zweryfikowane?
 
@@ -143,7 +152,7 @@ ochrony depozytów transpozycja Polska" PRZED cytowaniem w sprawie
 
 ## ANEKS — GRY HAZARDOWE (ustawa z 19.11.2009 r.)
 
-**Akt:** Ustawa o grach hazardowych — Dz.U. 2023 poz. 227 t.j. ze zm.
+**Akt:** Ustawa o grach hazardowych — Dz.U. 2025 poz. 595 t.j. ze zm.
 ✅ VER: isap.sejm.gov.pl [2026-06-05] — weryfikuj nowsze zmiany w ISAP
 
 ```

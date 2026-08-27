@@ -35,7 +35,7 @@ Ustawa o licencji doradcy restrukturyzacyjnego (z 15.06.2007 — pierwotnie
      (poniżej) spowodowała wydanie nowego obwieszczenia o t.j.
 
 Prawo upadłościowe (z 28.02.2003):
-  t.j. Dz.U. 2025 poz. 614 ✅ VER: isap.sejm.gov.pl 2026-06-15
+  t.j. Dz.U. 2026 poz. 913 ✅ VER: isap.sejm.gov.pl 2026-06-15
   → obwieszczenie Marszałka Sejmu z 24.03.2025
   → art. 157 i n. — wymogi dla osoby/spółki pełniącej funkcję syndyka
 
@@ -255,7 +255,7 @@ web_search: "cofnięcie licencji doradcy restrukturyzacyjnego Minister Sprawiedl
 
 ## ⚖️ DISCLAIMER
 
-Po zakończeniu analizy: `view /mnt/skills/user/shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
+Po zakończeniu analizy: `view shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
 
 ---
 *mod-ustawa-doradca-restrukturyzacyjny-zawod.md · dr-02 · utworzony 2026-06-15*

@@ -10,7 +10,7 @@ NAJCZĘŚCIEJ praktycznie potrzebnych tematów prawa NIERUCHOMOŚCI.
 
 ## Akt prawny
 Ustawa z 6.07.1982 r. o księgach wieczystych i hipotece — aktualny
-t.j. Dz.U.2025.341 ✅ VER: 2026-08-12 (potwierdzone bezpośrednio
+t.j. Dz.U. 2026 poz. 1066 ✅ VER: 2026-08-12 (potwierdzone bezpośrednio
 sip.lex.pl/arslege.pl)
 
 ---
@@ -192,7 +192,7 @@ zakupu, ALE CZĘSTO relewantne dla WŁAŚCICIELI nieruchomości)
   WYŁĄCZNIE do roszczeń WPROST wskazanych W TYM przepisie
 
 Potwierdzone w 7+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
-tekst art. 677 KC (sip.lex.pl, Dz.U.2026.795 t.j., przepisy.gofin.pl),
+tekst art. 677 KC (sip.lex.pl, Dz.U. 2026 poz. 795 t.j., przepisy.gofin.pl),
 adwokatmoszczynska.pl, legaartis.com [z cytowaną uchwałą SN VII
 sędziów III CZP 42/04 dot. odsetek], infor.pl.
 ```

@@ -2,7 +2,7 @@
 
 ## Akt prawny
 **Ustawa z 27.03.2003 r. o planowaniu i zagospodarowaniu przestrzennym**
-- Tekst jednolity: **Dz.U. 2024 poz. 1130 t.j.** (obwieszczenie z 03.07.2024)
+- Tekst jednolity: **Dz.U. 2026 poz. 538 t.j.** (obwieszczenie z 03.07.2024)
   Zmiany po t.j.: Dz.U. 2024 poz. 1907, poz. 1940; Dz.U. 2025 poz. 527, poz. 680
   ✅ VER: isap.sejm.gov.pl [2026-06-05] — zawsze weryfikuj aktualny stan w ISAP
   REFORMA 2023: Ustawa z 07.07.2023 o zmianie u.p.z.p. — gruntowna reforma narzędzi
@@ -58,7 +58,7 @@ web_search: "Zintegrowany Plan Inwestycyjny ZPI lex deweloper 2025"
 
 ## QUALITY GATE / STATUS KANCELARSKI
 
-- [ ] Aktualny t.j. UPZP zweryfikowany w ISAP (Dz.U. 2024 poz. 1130 t.j. + zmiany — Dz.U. 2024 poz. 1907, 1940; Dz.U. 2025 poz. 527, 680)?
+- [ ] Aktualny t.j. UPZP zweryfikowany w ISAP (Dz.U. 2026 poz. 538 t.j. + zmiany — Dz.U. 2024 poz. 1907, 1940; Dz.U. 2025 poz. 527, 680)?
 - [ ] Plan Ogólny Gminy uchwalony przez daną gminę — sprawdź BIP?
 - [ ] Reforma 2023 uwzględniona (POG zastąpił Studium)?
 - [ ] Terminy odwołania (WZ → SKO 14 dni → WSA 30 dni) obliczone?

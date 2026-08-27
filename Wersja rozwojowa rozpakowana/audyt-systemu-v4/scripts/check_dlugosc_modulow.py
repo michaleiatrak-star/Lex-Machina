@@ -3,7 +3,7 @@
 check_dlugosc_modulow.py — T13 (próg długości modułu, ZASADA 13).
 
 Powstał 2026-08-21 (obserwacja O-3) po tym, jak naruszenie progu w
-`dr-02/modules/mod-KC-spadki.md` (1036 linii) przetrwało od momentu
+`dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-spadki.md` (1036 linii) przetrwało od momentu
 przekroczenia aż do ręcznego skanu ad hoc. System miał wtedy DWANAŚCIE
 testów regresyjnych na rejestry, wersje i mapy — i ANI JEDNEGO na długość,
 mimo że ZASADA 13 jest regułą twardą. Zamknięcie flagi F-78 musiało się
@@ -34,7 +34,7 @@ pozostaje decyzją audytora. Wynik ⛔ oznacza "podział wymagany", nie "podziel
 w połowie pliku".
 
 Użycie:
-    python3 check_dlugosc_modulow.py [katalog_ze_skillami]   # domyślnie /mnt/skills/user
+    python3 check_dlugosc_modulow.py [katalog_ze_skillami]   # domyślnie LEX_MACHINA_SKILLS_ROOT lub cwd
     python3 check_dlugosc_modulow.py --strefa                # pokaż też strefę 800-1000
 
 Kod wyjścia: 0 = brak naruszeń progu, 1 = wykryto plik >1000 linii.
@@ -79,7 +79,8 @@ def zbierz(katalog):
     return moduly, skille, pominiete
 
 
-def main(katalog='/mnt/skills/user', pokaz_strefe=True):
+def main(katalog=None, pokaz_strefe=True):
+    katalog = katalog or os.environ.get('LEX_MACHINA_SKILLS_ROOT', os.getcwd())
     moduly, skille, pominiete = zbierz(katalog)
     crit = sorted([x for x in moduly if x[0] > PROG_CRIT], reverse=True)
     warn = sorted([x for x in moduly if PROG_WARN < x[0] <= PROG_CRIT], reverse=True)
@@ -131,5 +132,5 @@ def main(katalog='/mnt/skills/user', pokaz_strefe=True):
 
 if __name__ == '__main__':
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
-    sys.exit(main(args[0] if args else '/mnt/skills/user',
+    sys.exit(main(args[0] if args else None,
                   pokaz_strefe='--strefa' in sys.argv or True))

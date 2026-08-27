@@ -19,20 +19,20 @@
 | ZUS / świadczenia | dr-04 | mod-SUS-ZUS-ubezpieczenia-spoleczne.md | pisma-proste-v2, pisma-procesowe-v3 |
 | Wykroczenia / mandaty | dr-03 | mod-KW-kodeks-wykroczen.md | pisma-proste-v2 |
 | Stalking / nękanie | dr-03 | mod-KK-art190a-stalking.md | analizator-dowodow-v3 |
-| Przesłuchanie świadków | przesluchanie-swiadkow-v2 | SKILL.md | — |
+| Przesłuchanie świadków | przesluchanie-swiadkow-v2-min90 | SKILL.md | — |
 | Prawo gospodarcze / spółki | dr-02 | mod-KSH-spolki-handlowe.md | analizator-umow-v1, analiza-sadowa-v6 |
 | Nieruchomości / najem | dr-02 | mod-ustawa-deweloperska.md | analizator-umow-v1 |
 | Prawo karne | dr-03 | mod-KK-KPK-framework-karne.md → mod-KK-kwalifikator-karnomaterialny.md | analiza-sadowa-v6, analizator-dowodow-v3 |
 | IP / prawo autorskie | dr-11 | mod-PrAut-wlasnosc-intelektualna-IP.md | analizator-umow-v1, pisma-procesowe-v3 |
 | RODO / ochrona danych | dr-11 | mod-RODO-GDPR-2016-679.md | pisma-procesowe-v3, pisma-proste-v2 |
-| Prawo podatkowe | dr-06 | mod-ustawa-podatki-framework.md | pisma-procesowe-v3, analiza-sadowa-v6 |
+| Prawo podatkowe | dr-06 | mod-OP-ordynacja-podatkowa.md → następnie właściwy mod-PIT / mod-CIT / mod-VAT według podatku | pisma-procesowe-v3, analiza-sadowa-v6 |
 | Ubezpieczeniowe | dr-02 | mod-KC-ubezpieczenia.md | analizator-umow-v1, pisma-procesowe-v3 |
 | Przemoc domowa | dr-03 | mod-KK-art207-przemoc-domowa.md | pisma-procesowe-v3 |
 | Cyberprzestępczość | dr-03 | mod-KK-art267-269c-cyberprzestepstwa.md | analizator-dowodow-v3, pisma-procesowe-v3 |
 | Cudzoziemcy / legalizacja | dr-02 | mod-ustawa-cudzoziemcy.md | pisma-procesowe-v3 |
 | Prawo medyczne | dr-10 | mod-ustawa-prawa-pacjenta-framework.md | pisma-procesowe-v3, analiza-sadowa-v6 |
 | Prawo budowlane | dr-09 | mod-PrBud-prawo-budowlane.md | pisma-procesowe-v3 |
-| Zamówienia publiczne / KIO / PZP | dr-07 | mod-PZP-prawo-zamowien-publicznych.md | pisma-procesowe-v3, analiza-sadowa-v6 |
+| Zamówienia publiczne / KIO / PZP | dr-07 | mod-PZP-zamowienia-publiczne-KIO.md | pisma-procesowe-v3, analiza-sadowa-v6 |
 | Ochrona środowiska | dr-09 | mod-POS-prawo-ochrony-srodowiska.md | pisma-procesowe-v3 |
 | Windykacja / egzekucja | dr-02 | mod-KPC-egzekucja-windykacja.md | pisma-procesowe-v3, pisma-proste-v2, analiza-sadowa-v6 |
 | Prawo farmaceutyczne | dr-10 | mod-PrFarm-prawo-farmaceutyczne.md | pisma-procesowe-v3 |
@@ -41,7 +41,7 @@
 | Chemikalia / REACH / CLP | dr-09 | *(brak dedykowanego modułu — przez prawo-polskie-v2)* | pisma-procesowe-v3 |
 | Akcyza / cło / celne | dr-06 | *(brak dedykowanego modułu — przez prawo-polskie-v2)* | pisma-procesowe-v3 |
 | Działalność regulowana | dr-08 | mod-kontrola-administracji-inspekcje.md | pisma-procesowe-v3 |
-| Compliance SWZ/OPZ | dr-07 | *(przez mod-PZP-prawo-zamowien-publicznych.md)* | pisma-procesowe-v3 |
+| Compliance SWZ/OPZ | dr-07 | mod-PZP-opis-przedmiotu-zakaz-znakow-towarowych.md + mod-PZP-wykonanie-umowy-compliance.md | pisma-procesowe-v3 |
 | Prawo UE / MPH | dr-14 | mod-TFUE-TUE-prawo-pierwotne-UE.md | pisma-procesowe-v3 |
 | Compliance / ISO | dr-15 | SKILL.md (routing per norma) | pisma-procesowe-v3 |
 | Sądownictwo / zawody prawnicze | dr-12 | SKILL.md | — |

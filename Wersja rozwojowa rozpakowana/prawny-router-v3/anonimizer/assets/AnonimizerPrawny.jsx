@@ -1,3 +1,11 @@
+
+const universalExternalAIRequest = async () => {
+  throw new Error(
+    'Tryb zewnętrznego AI jest wyłączony w uniwersalnym artefakcie. ' +
+    'Użyj lokalnej anonimizacji albo wykonaj operację przez natywną funkcję hosta po jawnej zgodzie użytkownika.'
+  );
+};
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -279,7 +287,7 @@ async function anonymizeText(){
     try{
       const selC=CATS.filter(c=>selCats.has(c.id)).map(c=>c.label).join(', ');
       const lang=document.getElementById('doc-lang').value;
-      const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:4000,messages:[{role:'user',content:`Zanonimizuj poniższy tekst zastępując dane z kategorii: ${selC} FIKCYJNYMI ale realistycznie brzmiącymi danymi (język: ${lang}). Zachowaj pełny sens i strukturę. Zwróć WYŁĄCZNIE zanonimizowany tekst bez żadnych komentarzy.\n\nTekst:\n${text.substring(0,6000)}`}]})});
+      const resp=await universalExternalAIRequest({method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:4000,messages:[{role:'user',content:`Zanonimizuj poniższy tekst zastępując dane z kategorii: ${selC} FIKCYJNYMI ale realistycznie brzmiącymi danymi (język: ${lang}). Zachowaj pełny sens i strukturę. Zwróć WYŁĄCZNIE zanonimizowany tekst bez żadnych komentarzy.\n\nTekst:\n${text.substring(0,6000)}`}]})});
       const data=await resp.json();
       workText=data.content?.map(b=>b.text||'').join('')||workText;
       anonymizedText=workText;
@@ -295,7 +303,7 @@ async function anonymizeText(){
     try{
       const selC=CATS.filter(c=>selCats.has(c.id)).map(c=>c.label).join(', ');
       const lang=document.getElementById('doc-lang').value;
-      const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:`Przeanalizuj tekst i znajdź TYLKO dane osobowe z kategorii: ${selC}. Odpowiedz WYŁĄCZNIE w JSON bez żadnych innych słów:\n{"found":[{"original":"wykryta_fraza","category":"kategoria","replace":"zastąp_czym"}]}\nTekst (język: ${lang}):\n${text.substring(0,3000)}`}]})});
+      const resp=await universalExternalAIRequest({method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:`Przeanalizuj tekst i znajdź TYLKO dane osobowe z kategorii: ${selC}. Odpowiedz WYŁĄCZNIE w JSON bez żadnych innych słów:\n{"found":[{"original":"wykryta_fraza","category":"kategoria","replace":"zastąp_czym"}]}\nTekst (język: ${lang}):\n${text.substring(0,3000)}`}]})});
       const data=await resp.json();
       const raw=data.content?.map(b=>b.text||'').join('');
       const cleaned=raw.replace(/```json|```/g,'').trim();
@@ -369,7 +377,7 @@ async function anonymizeFile(){
       const useAI=document.getElementById('ai-assist').checked;
       const modeDesc={label:'etykietami opisowymi (np. [IMIĘ NAZWISKO], [PESEL], [ADRES])',black:'czarnymi blokami ████████',star:'gwiazdkami ****',remove:'(usuń całkowicie, bez zastępnika)',generic:'fikcyjnymi ale realistycznymi polskimi danymi'}[mode];
       setProgress(40);
-      const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:8000,messages:[{role:'user',content:[{type:'document',source:{type:'base64',media_type:mediaType,data:base64}},{type:'text',text:`Wykonaj dwie rzeczy jednocześnie:\n1. Wyodrębnij PEŁNY tekst dokumentu zachowując układ, wcięcia, akapity i formatowanie jak najdokładniej.\n2. Zanonimizuj go zastępując dane z kategorii: ${selC} — ${modeDesc}.\nJęzyk dokumentu: ${lang}.\n${useAI?'Wykryj też inne dane osobowe niewidoczne w typowych wzorcach regex.':''}\nZwróć WYŁĄCZNIE zanonimizowany tekst bez żadnych komentarzy, wyjaśnień ani znaczników markdown.`}]}]})});
+      const resp=await universalExternalAIRequest({method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:8000,messages:[{role:'user',content:[{type:'document',source:{type:'base64',media_type:mediaType,data:base64}},{type:'text',text:`Wykonaj dwie rzeczy jednocześnie:\n1. Wyodrębnij PEŁNY tekst dokumentu zachowując układ, wcięcia, akapity i formatowanie jak najdokładniej.\n2. Zanonimizuj go zastępując dane z kategorii: ${selC} — ${modeDesc}.\nJęzyk dokumentu: ${lang}.\n${useAI?'Wykryj też inne dane osobowe niewidoczne w typowych wzorcach regex.':''}\nZwróć WYŁĄCZNIE zanonimizowany tekst bez żadnych komentarzy, wyjaśnień ani znaczników markdown.`}]}]})});
       setProgress(80);
       const data=await resp.json();
       if(data.error)throw new Error(data.error.message);

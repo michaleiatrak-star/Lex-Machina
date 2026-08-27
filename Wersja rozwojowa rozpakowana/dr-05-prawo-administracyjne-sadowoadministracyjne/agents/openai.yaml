@@ -1,0 +1,13 @@
+interface:
+  display_name: dr 05 prawo administracyjne sadowoadministracyjne
+  short_description: 'Prawo administracyjne i sądowoadministracyjne: KPA, PPSA, decyzje,
+    bezczynność, WSA/NSA, egzekucja administracyjna, cudzoziemcy i postępowania urzędowe.'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

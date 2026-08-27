@@ -1,7 +1,7 @@
 # Moduł — KPA: decyzja administracyjna i odwołanie (elementy, procedura, postanowienia, zażalenia)
 
 > ⚠️ TEN moduł jest CZĘŚCIĄ RODZINY plików KPA, PODZIELONEJ
-> 2026-08-12 (NOTA-4, audyt-systemu-v4/CHECKLIST-DEDUP.md — moduł
+> 2026-08-12 (NOTA-4, audyt-systemu-v4/references/CHECKLIST-DEDUP.md — moduł
 > źródłowy osiągnął 1115 linii, ~2,8x próg 400 linii). RODZINA
 > czterech plików: mod-KPA-postepowanie-administracyjne.md (rdzeń:
 > zasady ogólne, strona, wyłączenie, doręczenia, wszczęcie

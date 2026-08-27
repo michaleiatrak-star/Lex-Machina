@@ -345,7 +345,7 @@ DODATKOWO ZAWSZE SPRAWDŹ: czy samo POSIADANIE narzędzi do kłusownictwa
   gospodarki łowieckiej. ⚠️ Uwaga: tamten moduł jest SKORUPĄ proceduralną
   (deklaruje szkody łowieckie i decyzje LP bez ani jednego przepisu) —
   patrz flaga F-91.
-- **`dr-13/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md`** (nowy,
+- **`dr-13-sluzby-bezpieczenstwo-informacje-niejawne/modules/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md`** (nowy,
   2026-08-16) — pozwolenie na broń do celów ŁOWIECKICH (art. 10 ust. 2
   pkt 3 i ust. 3 pkt 2 BrońAmunU), zwolnienie członków PZŁ z egzaminu
   policyjnego (art. 16 ust. 2), świadectwo broni dla dzierżawcy/zarządcy
@@ -379,7 +379,7 @@ pamięci. Zweryfikuj przepis źródłowo i dopisz sekcję albo utwórz moduł.
 
 **Weryfikacja źródłowa 2026-08-16 (korekta 2.0):**
 - Rząd 2: arslege.pl `k539/s6339` — PEŁNE brzmienie Rozdz. 10 (art. 51-54),
-  sygnowane „Dz.U.2025.0.539 t.j."; arslege.pl `zakazy/k539/a110773` —
+  sygnowane „Dz.U.2025.0.539 t.j."; arslege.pl `zakazy/k539/a110773` —  <!-- zapis źródła cytowany dosłownie — CELOWO nieujednolicony (F-125, 2026-08-24d) -->
   pełne brzmienie art. 42aa (16 zakazów); lexlege.pl — struktura rozdziałów
   1-11 z zakresami artykułów, potwierdzona krzyżowo.
 - Rząd 1 (pośrednio): t.j. **Dz.U. 2025 poz. 539** zgodny z wpisem w

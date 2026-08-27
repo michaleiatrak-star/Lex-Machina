@@ -1,70 +1,167 @@
-# CHANGELOG — Router Prawny v3
+# CHANGELOG — prawny-router-v3
 
-> Pełna historia zmian tego skilla. **Jedyna lokalizacja kanoniczna** — w SKILL.md
-> historii nie ma; jest tam wyłącznie krótki skrót w polu `changelog:` frontmatteru.
-> Standard ujednolicony 2026-08-20z4 dla całego systemu: plik `references/CHANGELOG.md`,
-> nigdy sekcja w korpusie SKILL.md ani pełna lista w YAML.
-> Wczytuj TYLKO gdy potrzebujesz historii konkretnej naprawy — przy audycie, przy
-> pytaniu „dlaczego to tak działa", przy regresji. W normalnym toku pracy zbędny.
+- 3.29 (2026-08-27): przywrócono stałe identyfikatory reguł po skróceniu,
+  bez Reguły 13, z kolejnością 22 → 23. Odwołania w SELF-CHECK i modułach
+  zachowują znaczenie. Usunięto pozostałe notatki historyczne z korpusu i YAML.
+  Końcowy SKILL.md: 391 linii wobec 924 przed przebudową.
+
+- 3.28 (2026-08-26): korpus routera skrócono z 924 do około 400 linii.
+  Na początku dodano siedmiopunktowy blok `ŁADOWANE ZAWSZE`. Szczegóły
+  warunkowe pozostawiono w kanonicznych modułach, a z korpusu usunięto
+  narracje incydentów, przykłady spraw, zduplikowane źródła, Regułę 13,
+  tabelę kombinacji i lokalne warianty disclaimera. `SELF-CHECK.md` zachowuje
+  pełne bramki wykonawcze bez opisów historycznych.
+
+- 3.27 (2026-08-26): porównanie z kluczem dostało osobny, obowiązkowy protokół
+  `AUDYT-KLUCZA-ODPOWIEDZI.md`: inwentarz wszystkich twierdzeń prawnych,
+  atomizacja wg VER-GRAIN, HARD GATE per jednostka oraz jawny licznik pokrycia.
+  Werdykt „pełna zgodność" jest teraz dozwolony wyłącznie przy wyniku N/N,
+  bez pozycji obalonych i nierozstrzygniętych. Kategoria [11], REGUŁA 27 i oba
+  self-checki wskazują tę samą kanoniczną procedurę. Imperatyw `description`
+  skrócono z 336 do 170 znaków (profil uniwersalny ≤200), a nagłówek korpusu
+  zmieniono z martwego „v3.13" na stabilne „v3", aby nie dublował wersji YAML.
+
+- 3.26 (2026-08-25b, flaga **F-134**): naprawa czterech wad wskazanych w
+  zewnętrznej opinii porównawczej — po **audycie samej opinii**, nie po
+  przyjęciu jej na wiarę (REGUŁA 25 zastosowana do materiału, który tę regułę
+  chwalił).
+
+  **(1) description — przywrócony imperatyw.** Pole było jedynym miejscem
+  decydującym o załadowaniu skilla, a w 3.24 wymieniono w nim imperatyw
+  („UŻYWAJ ZAWSZE i AUTOMATYCZNIE. Nigdy nie analizuj bez wczytania tego
+  pliku") na neutralny opis funkcji. Zysk dla walidatora, strata dla
+  wyzwalania. Przywrócono imperatyw i rozszerzono go o przypadek ujawniony
+  w F-132 („nie oceniaj cudzej analizy bez wczytania"), zachowując opis
+  funkcjonalny dla czytelności.
+
+  **(2) compatibility — realne nazwy.** `live_web_lookup, file_read` nie
+  odpowiadały żadnej faktycznej funkcji, co rozluźniało wiązanie HARD GATE
+  z konkretnym wywołaniem. Przywrócono nazwy realne z jawnym dopiskiem
+  „lub równoważne funkcje hosta wg `shared/UNIVERSAL-RUNTIME-ADAPTER.md`" —
+  to zachowuje uniwersalność bez utraty wiązania.
+
+  **(3) PATH-SELFTEST — wykrywanie fail zamiast deklaracji fail-closed.**
+  Ścieżki semantyczne (bez prefiksu hosta) są warstwą deklaratywną: jeśli
+  host wymaga ścieżki bezwzględnej, odczyt zwróci błąd, a domyślnym
+  zachowaniem modelu jest wtedy cicha odpowiedź z pamięci. „Fail-closed
+  wymaga, by ktoś wykrył fail". Rozwiązanie NIE polega na powrocie do
+  ścieżek jednego hosta (to zabiłoby uniwersalność) ani na dwóch wariantach
+  plików (koszt utrzymania), tylko na uczynieniu PIERWSZEGO odczytu w sesji
+  testem: forma względna → jeśli błąd, ustal prefiks hosta i powtórz →
+  jeśli nadal błąd, jawny `⛔ TRYB ZDEGRADOWANY` z nazwą zasobu i błędu.
+
+  **(4) REGUŁA 26 — skill nie jest źródłem prawa.** Przyczyna zmierzona
+  w F-134: wartość „do 2 lat" dla art. 178a §1 KK, którą model podał
+  użytkownikowi, pochodziła z modułu `dr-03`, nie z pamięci. Moduł nie był
+  drugim źródłem — był jedynym i był w błędzie. Reguła rozdziela role:
+  moduł odpowiada „KTÓRY przepis", źródło odpowiada „CO on dziś stanowi";
+  znacznik ✅ [VER: data] w module dokumentuje stan na tę datę, nie dziś.
+
+  **Czego z opinii NIE wprowadzono i dlaczego — art. 87 §1 KW.** Opinia
+  zgłaszała wartość „30 000 zł" w modułach jako błąd wymagający zamiany na
+  „2 500 zł". Weryfikacja: **obie wartości są prawdziwe i opisują różne
+  granice tej samej sankcji** — 2 500 zł to dolna granica grzywny z art. 87
+  §1 KW, a 30 000 zł to górna granica, bo art. 87 §1 jest wymieniony
+  w katalogu art. 24 §1a KW ✅ [VER: lexlege.pl/kw/art-24, odczyt
+  2026-08-25]. Zamiana jednej liczby na drugą przeniosłaby błąd, nie
+  usunęła. Moduły uzupełniono o OBIE granice z zakazem podawania samej
+  górnej. To zastosowanie reguły 25 do samej opinii — trafna diagnoza
+  („ta liczba jest niepełna") z błędną korektą.
+
+- 3.25 (2026-08-25, flaga **F-132**): kategoria routingu **[11] WERYFIKACJA
+  CUDZEGO MATERIAŁU PRAWNEGO** (→ PRIMARY `analizator-przepisow-v2`) oraz
+  **REGUŁA 24 (VER-GRAIN)** i **REGUŁA 25 (ADVERSARIAL-SOURCE)**.
+
+  **Incydent (ta sama rozmowa co F-131, tura następna).** Po naprawie 3.24
+  model w turze „porównaj z kluczem" wykonał już weryfikację online — ale
+  TYLKO dla części powołań. Zweryfikował definicje stanu po użyciu alkoholu
+  (art. 46 ust. 2 ustawy o wychowaniu w trzeźwości), a NIE zweryfikował
+  ponownie górnej granicy kary z art. 178a §1 KK i przepisał z pamięci
+  wartość „do lat 2", nieaktualną od 1.10.2023 (obowiązuje „do lat 3").
+  Wartość ta była BŁĘDNA także w ocenianym kluczu — czyli błąd nie został
+  wychwycony, tylko POWIELONY, mimo że jedno ze źródeł w wynikach
+  wyszukiwania podawało wartość poprawną. Rozbieżność między źródłami
+  została nierozpoznana jako ślad nowelizacji.
+
+  **Dwie odrębne przyczyny, dwie odrębne reguły:**
+
+  (1) *Ziarnistość i kompletność* — reguła 23 wymagała „osobnego wyszukiwania
+  dla KAŻDEGO powołania", ale nie definiowała, CO jest powołaniem (teza czy
+  liczba?), ani nie ustanawiała kontroli kompletności na wyjściu. Reguła
+  spełnialna wybiórczo: model weryfikuje to, co samo wyda mu się wątpliwe,
+  a przeoczenie z definicji nie zgłasza się samo. Naprawa: REGUŁA 24 —
+  jednostka weryfikacji zdefiniowana wprost (artykuł + §/ust./pkt, każda
+  liczba, data, sygnatura, granice kary), INWENTARZ POWOŁAŃ jako czynność
+  na wyjściu (lista powołań zestawiona 1:1 z wywołaniami), zakaz znacznika
+  ✅ [VER] „hurtem" dla akapitu, oraz reguła 24(c): rozbieżność między
+  źródłami = sygnał nowelizacji, nie szum do przegłosowania.
+
+  (2) *Postawa wobec cudzego materiału* — zadanie „porównaj z kluczem"
+  weszło do routingu przez skill dziedzinowy (`dr-XX`), bo tabela [1]–[10]
+  nie miała pozycji dla weryfikacji cudzego opracowania. `dr-XX` odpowiada
+  na pytanie „czy argumentacja jest trafna", nie „czy każda dana w tym
+  tekście jest prawdziwa". Skutek: ocena toku rozumowania klucza wypadła
+  poprawnie, a ani jedna jednostka redakcyjna klucza nie została sprawdzona
+  (niezależna analiza zewnętrzna tego samego materiału wykazała m.in. art.
+  250 §2 zamiast §2a, art. 243 zamiast art. 246 §1, grzywnę 100 zł zamiast
+  2500 zł, przepadek pojazdu przypisany art. 178a zamiast art. 44b KK,
+  oraz zarzut niezgodny ze stanem faktycznym kazusu). Naprawa: kategoria
+  [11] z PRIMARY `analizator-przepisow-v2` + REGUŁA 25 — cudzy materiał jako
+  hipoteza do obalenia, zgodność ≠ potwierdzenie (dwa teksty mogą powielać
+  ten sam błąd), test spójności wewnętrznej jako ustalenie samodzielne,
+  zakaz milczącej adopcji cudzej danej bez znacznika.
+
+  **Zakres uniwersalny (portability):** obie reguły i kategoria [11] są
+  sformułowane w kategoriach OPERACJI SEMANTYCZNYCH (wyszukanie/odczyt
+  źródła, wczytanie skilla), bez nazw narzędzi konkretnego hosta i bez
+  ścieżek bezwzględnych — zgodnie z sekcją ADAPTER RUNTIME i
+  `shared/UNIVERSAL-RUNTIME-ADAPTER.md`. Działają identycznie na hoście
+  bez `web_search`/`view`, o ile host ma funkcje równoważne; brak takich
+  funkcji = fail-closed (⚠️ [NIEWERYFIKOWANE]), nie substytucja pamięcią.
+
+  ⚠️ **Skuteczność NIEZMIERZONA** — jak przy F-131 i całej sesji 2026-08-23,
+  potwierdzona jest wyłącznie OBECNOŚĆ bramek w plikach, nie ich wpływ na
+  zachowanie. Bramka „inwentarz powołań" jest samo-raportująca (klasa e2 wg
+  `PLAN-TESTU-BRAMEK-F113.md`) — model, który pominął weryfikację, może z
+  tego samego powodu błędnie zaliczyć inwentarz. Pomiar objęty flagą F-133
+  (otwarta, `WARN-OTWARTE.md`).
+
+- 3.24 (2026-08-25, flaga **F-131**): REGUŁA 23 — twardy trigger re-check
+  HARD GATE/PRIMARY na KAŻDEJ turze rozmowy prawnej, nie tylko pierwszej.
+  Incydent: router wczytany raz na starcie rozmowy o kazusach KPK (TA),
+  HARD GATE zastosowany poprawnie w pierwszej turze (6 web_search), ale w
+  kolejnej turze tej samej rozmowy ("porównaj z kluczem użytkownika") model
+  wykonał zero web_search i nigdy nie wczytał PRIMARY dr-03, mimo że treść
+  dotyczyła tych samych przepisów KPK/KK/KW. Root cause: reguła 9 (HARD GATE
+  TRWAŁY) i formuła SELF-CHECK "przed każdą odpowiedzią" były sformułowane
+  jako stan trwały w pliku już przeczytanym, nie jako mechaniczny trigger
+  niezależny od klasyfikacji charakteru kolejnej wiadomości ("to tylko
+  porównanie, nie nowa analiza" — dokładnie ta klasyfikacja była punktem
+  awarii, analogicznie do F-8/F-8b dla świadka). Naprawa: REGUŁA 23 (wzorzec
+  reguły 22) + pozycja w bloku SELF-CHECK, niezależna od oceny czy tura jest
+  "nowym pytaniem" czy "recenzją/oceną/pytaniem meta" — trigger zależy
+  wyłącznie od obecności treści prawnej w odpowiedzi, nie od gatunku tury.
+  Dodatkowo odnotowana (nie naprawiona w tej sesji, ⬛ NIEPOTWIERDZONA —
+  wymaga testu kontrolowanego) hipoteza uboczna: sekcja ADAPTER RUNTIME
+  (ścieżki semantyczne zamiast bezwzględnych `/mnt/skills/user/...`) mogła
+  dołożyć koszt pośredniości zwiększający ryzyko pominięcia wykonania —
+  patrz `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-25,
+  sekcja 3-4 dla pełnej analizy i zastrzeżenia metodologicznego.
+
+- 3.23 (2026-08-24, sesja audytowa audyt-systemu-v4, flaga **F-126**): historia wersji sprowadzona do JEDNEJ lokalizacji kanonicznej (ZASADA 15). Usunięte dwa równoległe nośniki: (1) sekcja `## CHANGELOG (prawny-router-v3)` w korpusie `SKILL.md` — wpisy 3.13…3.9, w korpusie zostało odesłanie; (2) pole `changelog:` w YAML liczące 63 linie, czyli pełną historię zamiast skrótu — T12 zgłaszał je jako ⚠️, teraz ma 7 linii i odsyła tutaj. Oba bloki przeniesione 1:1, bez przeredagowania i bez odtwarzania czegokolwiek z pamięci. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-24.
+
+- 3.22 (2026-08-23i, sesja audytowa audyt-systemu-v4, flaga F-115): self-check ANTY-FASADA podłączony jako WYWOŁANIE modułu kanonicznego `shared/SELF-CHECK-ANTY-FASADA.md`, kopia treści zastąpiona wywołaniem. Powód modułu zamiast kopii: gdy F-117 dodała regułę AF-6 i drugą pozycję listy do `shared/PRAWO-HARDGATE.md`, żadna z 7 istniejących kopii nie została zaktualizowana — źródło miało 2 pozycje, kopie 1. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-23i.
+
+> Lokalizacja kanoniczna historii wersji (ZASADA 15). Plik założony 2026-08-23i;
+> wersje wcześniejsze nieodtworzone — ślad w audyt-systemu-v4/references/AUDIT-JOURNAL.md.
 
 ---
 
-## 3.22 (2026-08-20z4) — ujednolicenie standardu: historia zmian wyłącznie w tym pliku
+## Wpisy przeniesione z korpusu SKILL.md (F-126, 2026-08-24)
 
-Historia scalona z DWÓCH źródeł: sekcji `## CHANGELOG (prawny-router-v3)` w korpusie
-oraz pola `changelog:` w YAML (63 linie). Oba przeniesione 1:1 do nowego pliku.
-Ten skill trzymał historię w trzech miejscach naraz — po tej zmianie w jednym.
-
-**Standard systemowy wprowadzony tego dnia:** pełna historia zmian każdego skilla
-mieszka w `references/CHANGELOG.md` — nigdy w sekcji `## CHANGELOG` korpusu SKILL.md
-i nigdy jako pełna lista wpisów w polu `changelog:` frontmatteru. W SKILL.md zostaje
-wyłącznie kilkulinijkowy skrót bieżącej wersji z odesłaniem do tego pliku.
-
-**Dlaczego to nie jest kosmetyka:** rozproszenie historii między trzy lokalizacje było
-BEZPOŚREDNIĄ przyczyną fałszywych wyników testu T12 w sesji 2026-08-20z3 — test szukał
-wpisów w `references/`, nie znajdował ich (bo leżały w SKILL.md) i raportował luki,
-których nie było. Jedna lokalizacja kanoniczna usuwa całą tę klasę błędu.
-Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis `AUDYT-2026-08-20z4`.
-
----
-
-## HISTORIA PRZENIESIONA Z SKILL.md (2026-08-20z4, ujednolicenie standardu)
-
-> Poniższa treść pochodzi z sekcji `## CHANGELOG` w korpusie SKILL.md. Przeniesiona **1:1, bez zmiany ani jednego
-> zdania**. Powód: historia zmian ma mieszkać w jednym miejscu — w tym pliku —
-> a nie być rozproszona między korpusem SKILL.md, frontmatterem i `references/`.
-> Rozproszenie było źródłem rozjazdów wykrytych flagami F-101 i F-102: test T12
-> szukał historii w `references/` i raportował fałszywe luki tam, gdzie wpisy
-> istniały, tylko w SKILL.md.
-
-> ⛔ **WPISY ODTWORZONE 2026-08-20z3 (flaga F-102, test T12).** Poniższe pozycje
-> nie istniały w żadnym changelogu — `version:` był podbijany bez wpisu przez
-> 8 kolejnych sesji. Treść odtworzona z `audyt-systemu-v4/references/AUDIT-JOURNAL.md`,
-> gdzie każde podbicie zostało odnotowane w sekcji Rejestracja wraz z opisem
-> sesji. Wpisy są zatem WTÓRNE wobec dziennika — przy wątpliwości źródłem
-> rozstrzygającym jest dziennik, nie ten plik. Nic nie zostało zmyślone:
-> pozycje bez śladu w dzienniku oznaczono wprost jako lukę.
-
-**3.21 (2026-08-09v)** — przejście modułu do `shared/`: znaleziony systemowy
-problem zduplikowanych, ROZBIEŻNYCH kopii tej samej treści w kilku skillach.
-Źródło: AUDIT-JOURNAL, wpis AUDYT-2026-08-09v.
-
-**3.20 (2026-08-04s)** — pomiar prędkości: dokładne zbadanie zagadnienia,
-odnotowany aktywny spór RPO-MSWiA. Źródło: AUDYT-2026-08-04s.
-
-**3.19 (2026-08-04r)** — mandat wypisany nieczytelnie: sąd ocenia legalność,
-nie estetykę. Źródło: AUDYT-2026-08-04r.
-
-**3.18 (2026-07-30z139)** — CRIT: błędny ogólny pułap mandatu karnego.
-Źródło: AUDYT-2026-07-30z139.
-
-**3.17 (2026-07-27g)** — znacznik RZĄD w HG-ACTIVE + nowa pozycja ŹRÓDŁO-GATE.
-Źródło: AUDYT-2026-07-27g.
-
-**3.16, 3.15, 3.14 (2026-07-13g)** — trzy podbicia w jednej sesji, przy
-odkryciu, że `shared/MCP-INTEGRACJA.md` nie była podłączona do skilli
-analitycznych. Dziennik nie rozdziela, co przypadło na który numer —
-⚠️ podział między 3.14/3.15/3.16 pozostaje NIEUSTALONY. Źródło: AUDYT-2026-07-13g.
+> Tekst poniżej przeniesiony 1:1 z sekcji `## CHANGELOG (prawny-router-v3)` w `SKILL.md`.
+> Nic nie przeredagowano ani nie odtworzono z pamięci — przeniesienie
+> istniejącego tekstu, zgodnie z zakazem z wiersza flagi F-126.
 
 **3.13 (2026-07-12) — Reguła 22: TWARDY trigger słowny dla pytań do świadka
 (naprawa F-8b, kontynuacja F-8):**
@@ -138,15 +235,14 @@ analitycznych. Dziennik nie rozdziela, co przypadło na który numer —
 
 ---
 
-## HISTORIA PRZENIESIONA Z SKILL.md (2026-08-20z4, ujednolicenie standardu)
+## Wpisy przeniesione z pola `changelog:` YAML (F-126, 2026-08-24)
 
-> Poniższa treść pochodzi z pola `changelog:` we frontmatterze SKILL.md. Przeniesiona **1:1, bez zmiany ani jednego
-> zdania**. Powód: historia zmian ma mieszkać w jednym miejscu — w tym pliku —
-> a nie być rozproszona między korpusem SKILL.md, frontmatterem i `references/`.
-> Rozproszenie było źródłem rozjazdów wykrytych flagami F-101 i F-102: test T12
-> szukał historii w `references/` i raportował fałszywe luki tam, gdzie wpisy
-> istniały, tylko w SKILL.md.
+> T12 zgłaszał to pole jako ⚠️ — 63 linie to pełna historia, nie skrót
+> (ZASADA 15 dopuszcza w YAML skrót do ~15 linii). Tekst poniżej przeniesiony
+> 1:1, w oryginalnej składni listy YAML, bez przeredagowania i bez
+> odtwarzania czegokolwiek z pamięci.
 
+```yaml
 changelog:
   - "3.21 (2026-08-18): NOWY KROK 0-RPK — router jest teraz jedynym miejscem
     decydującym, KIEDY inicjować shared/MOD-REJESTR-POKRYCIA-JEDNOSTEK.md
@@ -211,3 +307,4 @@ changelog:
     została usunięta w procesie scalenia — required_modules rozszerzone o
     shared/PRE-W2-VERIFICATION-GATE.md, escalation rozszerzone o przypadek
     podmiotu ⬛ bez dostępu do rejestru."
+```

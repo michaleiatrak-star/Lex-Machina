@@ -103,11 +103,11 @@ Przed wygenerowaniem pisma lub analizy odpowiedz:
 
 ## 9. POWIĄZANIA
 
-- `mod-E-cywilne.md`
-- `mod-C-rodzinne.md`
-- `mod-D-spadkowe.md`
-- `mod-L-gospodarcze.md`
-- `mod-BE-arbitraz-mediacja-egzekucja-transgraniczna.md`
+- `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md`
+- `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KRO-rodzinne.md`
+- `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-spadki.md`
+- `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KSH-spolki-handlowe.md`
+- `dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-KPC-arbitraz-mediacja-ADR.md` + `dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/modules/mod-KPC-egzekucja-transgraniczna-UE.md`
 
 ## 10. OUTPUT
 

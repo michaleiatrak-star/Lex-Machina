@@ -86,7 +86,7 @@ TRYBUNAŁY:
 | Brak bezstronności sędziego | Wniosek o wyłączenie sędziego |
 | Organizacja pracy sądu | Skarga administracyjna do prezesa sądu |
 | Zachowanie osoby wykonującej zawód | Tryb dyscyplinarny — dla sędziów/asesorów: Sąd Dyscyplinarny przy Sądzie Apelacyjnym (art. 110 USP) → SN Izba Odpowiedzialności Zawodowej; bazy orzeczeń i zastrzeżenia co do jawności: `dr-12` → `mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md`, sekcja "Orzecznictwo dyscyplinarne — instancje i bazy" |
-| Naruszenie prawa do sądu | Zarzut konstytucyjny (art. 45 Konstytucji → mod-TK) |
+| Naruszenie prawa do sądu | Zarzut konstytucyjny (art. 45 Konstytucji → `dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-Konstytucja-TK-skarga-konstytucyjna.md`) |
 
 ### Warunki skuteczności pisma
 Sprawdź: właściwość organu/sądu, legitymację, termin, formę, opłatę, podpis, załączniki, pełnomocnictwo, odpisy, tryb doręczenia, żądanie, podstawę faktyczną, podstawę prawną, dowody.
@@ -104,7 +104,7 @@ z mocy ustawy + art. 49 KPC na wniosek + KRYTYCZNY alert: wyroki TK P 10/19 (202
 z 23.02.2022 ws. neoKRS jako podstawy wyłączenia, oraz napięcie z linią
 ETPCz) jest teraz w jednym miejscu — wcześniej ten moduł miał WŁASNY,
 KRÓTSZY opis BEZ wzmianki o P 10/19/P 7/23:
-→ `view /mnt/skills/user/shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md`
+→ `view shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md`
   (sekcja 2 — wyłączenie sędziego/biegłego)
 
 Odpowiedniki w innych procedurach (weryfikuj aktualne art. w ISAP):

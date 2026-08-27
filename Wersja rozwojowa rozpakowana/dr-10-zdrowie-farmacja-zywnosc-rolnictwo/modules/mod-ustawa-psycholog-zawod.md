@@ -276,7 +276,7 @@ web_search: "odpowiedzialność cywilna psychologa błąd terapeutyczny orzeczni
 
 ## ⚖️ DISCLAIMER
 
-Po zakończeniu analizy: `view /mnt/skills/user/shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
+Po zakończeniu analizy: `view shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
 Dla tego modułu DODATKOWO zaznacz, że stan prawny jest w okresie przejściowym
 i może się zmienić w trakcie 2026-2028 — odpowiedź odzwierciedla stan na
 dzień udzielenia odpowiedzi.

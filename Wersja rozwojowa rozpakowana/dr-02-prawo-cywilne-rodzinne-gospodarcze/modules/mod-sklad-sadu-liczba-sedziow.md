@@ -100,7 +100,7 @@ ZASADA (art. 47 §1 KPC): w PIERWSZEJ instancji sąd rozpoznaje sprawy
     pośredniego szczebla 5-osobowego)
 
 Potwierdzone w 6+ zgodnych źródłach (arslege.pl [dosłowny tekst
-Dz.U.2026.0.468 t.j.], edukacjaprawnicza.pl, sn.pl [Rząd 1-adjacent],
+Dz.U. 2026 poz. 468 t.j.], edukacjaprawnicza.pl, sn.pl [Rząd 1-adjacent],
 monitorkonstytucyjny.eu [z konkretnym przykładem uchwały 7 sędziów z
 24.09.2025]).
 ```
@@ -164,7 +164,7 @@ ZASADA (art. 28 §1 KPK): NA ROZPRAWIE GŁÓWNEJ sąd orzeka w składzie
   reguły NIE wymagają pełnego składu)
 
 Potwierdzone w 8+ zgodnych, jednolitych źródłach (arslege.pl
-[dosłowny tekst Dz.U.2026.0.490 t.j.], lexlege.pl, legalhelp.pl
+[dosłowny tekst Dz.U. 2026 poz. 490 t.j.], lexlege.pl, legalhelp.pl
 [słownik pojęć prawnych, z jasną syntezą całej hierarchii]).
 ```
 
@@ -197,4 +197,4 @@ Potwierdzone w 8+ zgodnych, jednolitych źródłach (arslege.pl
 - Ustrój sądów powszechnych, ogólna struktura → `dr-01/modules/
   mod-USP-ustroj-sadow-powszechnych.md`
 - Reforma KRS/status neosędziów (⚠️ FLAGA F-15, WYSOKI priorytet) →
-  `dr-01/modules/mod-ustawa-KRS-i-ustroj-wladzy.md`
+  `dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-ustawa-KRS-i-ustroj-wladzy.md`

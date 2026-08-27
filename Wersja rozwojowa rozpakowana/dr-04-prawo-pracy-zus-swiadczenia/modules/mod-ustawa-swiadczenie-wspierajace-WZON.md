@@ -1,7 +1,7 @@
 # mod-ustawa-swiadczenie-wspierajace-WZON
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o świadczeniu wspierającym — Dz.U. 2023 poz. 1429 | Ustawa o rehabilitacji — Dz.U. 2024 poz. 44 t.j. ze zm.
+**Źródło weryfikacji:** Ustawa o świadczeniu wspierającym — Dz.U. 2023 poz. 1429 | Ustawa o rehabilitacji — Dz.U. 2026 poz. 884 t.j. ze zm.
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu i aktualne kwoty przed powołaniem → isap.sejm.gov.pl + web_search
 
@@ -34,7 +34,7 @@ OD 01.01.2026: świadczenie wspierające przysługuje WSZYSTKIM z decyzją WZON
 | Akt | Dz.U. |
 |---|---|
 | Ustawa z dnia 7 lipca 2023 r. o świadczeniu wspierającym | Dz.U. 2023 poz. 1429 ze zm. |
-| Ustawa o rehabilitacji zawodowej i społecznej oraz zatrudnianiu osób niepełnosprawnych | Dz.U. 2024 poz. 44 t.j. ze zm. |
+| Ustawa o rehabilitacji zawodowej i społecznej oraz zatrudnianiu osób niepełnosprawnych | Dz.U. 2026 poz. 884 t.j. ze zm. |
 | Rozp. MRPiPS w sprawie ustalania poziomu potrzeby wsparcia | Dz.U. 2023 — weryfikuj aktualny w ISAP |
 
 ---

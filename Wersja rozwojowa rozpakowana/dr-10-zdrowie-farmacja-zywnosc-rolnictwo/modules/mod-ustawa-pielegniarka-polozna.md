@@ -2,9 +2,9 @@
 
 ## Akt prawny
 **Ustawa z 15.07.2011 r. o zawodach pielegniarki i poloznej**
-- Tekst jednolity: **Dz.U. 2025 poz. 450** (t.j. z 14.04.2025 - NAJNOWSZY!)
-  VER: isap.sejm.gov.pl/isap.nsf/download.xsp/WDU20250000450 [2026-05-31]
-- Poprzedni t.j.: Dz.U. 2024 poz. 814
+- Tekst jednolity: **Dz.U. 2026 poz. 15** (obwieszczenie z 4.12.2025 r.)
+  ✅ VER: ELI/ISAP WDU20260000015 [2026-08-25]
+- Poprzednie t.j.: Dz.U. 2025 poz. 450 i Dz.U. 2024 poz. 814
 
 **Weryfikacja ISAP przed kazdy cytowaniem.**
 

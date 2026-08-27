@@ -201,7 +201,7 @@ KROK 4: Czy JEDNOCZEŚNIE spełnione są przesłanki stosowania przepisów
   uzyskiwania informacji z niejawnego wykazu RCB / współpracy ze służbami
   przy ocenie statusu infrastruktury krytycznej — jeśli DR-13 rozwinie
   taki moduł w przyszłości, odesłanie powinno być DWUKIERUNKOWE.
-- **`dr-01/mod-stany-nadzwyczajne-sytuacje-kryzysowe.md`** — ogólne
+- **`dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-stany-nadzwyczajne-sytuacje-kryzysowe.md`** — ogólne
   ramy ochrony infrastruktury krytycznej (ustawa o zarządzaniu
   kryzysowym) — ten moduł dostarcza WYŁĄCZNIE aspekt zamówieniowy.
 - **`mod-KK-art163-172-bezpieczenstwo-powszechne.md`** (DR-03) — ochrona

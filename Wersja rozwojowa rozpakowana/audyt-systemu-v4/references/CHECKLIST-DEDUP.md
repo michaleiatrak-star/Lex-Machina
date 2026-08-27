@@ -1,4 +1,13 @@
 # CHECKLIST-DEDUP.md
+
+## F-108/46 — właściciel treści (2026-08-27)
+
+Terminy, kwalifikacja, stawki półroczne i rekompensata za opóźnienia handlowe:
+`dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-transakcje-handlowe-opoznienia.md`.
+`shared/RATE-COMPLETENESS.md` jest właścicielem procedury kompletności szeregu,
+nie kopią stawek. Fragment KC i moduł UZNK odsyłają do nowego modułu.
+Definicje ogólne BAS-W34 pozostają w shared; nie duplikowano ich katalogu.
+
 ## audyt-systemu-v4 · Mapa pojęć → lokalizacje (proaktywne wykrywanie duplikatów)
 
 > **Cel:** przed dodaniem NOWEJ definicji/pojęcia do systemu — sprawdź tę
@@ -182,7 +191,7 @@
 | Antycypacja zarzutów universalna U1–U9 | `shared/MOD-POSZLAKI-KONTEKST.md` PK5 + `pisma-procesowe-v3/modules/MOD-DOWODY.md` D7 (triggery) — NIE scalać (różne poziomy szczegółowości) | pisma-procesowe-v3 | ✅ 2026-06-23 |
 | Sądy wojskowe — status weryfikowalności orzeczeń (brak portalu, wyjątek SN Izba Karna) | `shared/ORZECZENIA-HIERARCHIA.md` §4.1 | orzeczenia-sadowe-v2, dr-13, dr-12 (dyscyplinarka sędziów wojsk. — nie mylić) | ✅ 2026-07-06 |
 | Dyscyplinarka Policja/PSP — status weryfikowalności (baza niepubliczna, skarga do WSA/NSA weryfikowalna normalnie) | `shared/ORZECZENIA-HIERARCHIA.md` §4.2 | orzeczenia-sadowe-v2, dr-13 | ✅ 2026-07-06 |
-| OSP — status prawny (stowarzyszenie, nie sąd/służba szczególna) + PSP/ochrona przeciwpożarowa/OSP jako akty | `shared/ORZECZENIA-HIERARCHIA.md` §4.3 (status prawny) + `dr-13/modules/mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa.md` | dr-13 | ✅ 2026-07-07 — WARN-29 zamknięty, moduł poziom A napisany i wdrożony |
+| OSP — status prawny (stowarzyszenie, nie sąd/służba szczególna) + PSP/ochrona przeciwpożarowa/OSP jako akty | `shared/ORZECZENIA-HIERARCHIA.md` §4.3 (status prawny) + `dr-13-sluzby-bezpieczenstwo-informacje-niejawne/modules/mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa.md` | dr-13 | ✅ 2026-07-07 — WARN-29 zamknięty, moduł poziom A napisany i wdrożony |
 | ISU-PESEL: algorytm weryfikacji PESEL — format P1, dekodowanie daty P2 (5 stuleci), niezgodność daty P3, płeć z P10 P4, suma kontrolna wagowa P5 [1,3,7,9,1,3,7,9,1,3], raport ERR-F/D/PL/CK P6; Klasa I (ERR-D/PL/F) / Klasa III (ERR-CK) | `shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md` §ISU-PESEL (v1.1.0) — WYŁĄCZNA lokalizacja; NIE duplikować w MOD-DOKUMENT-ANOMALIE ani REGUŁA-PESEL-ROZBIEZ | wszystkie skille z EL-OSOBA: pisma-procesowe-v3, analizator-umow-v1, analizator-dowodow-v3, pisma-proste-v2 | ✅ 2026-06-27e |
 | MOD-IDENTYFIKACJA-STRONY-UMOWY v1.0.0: identyfikacja strony czynności prawnej metodą danych większościowych; katalog EL-PODMIOT/EL-OSOBA/EL-FAKTURA (25 elementów z wagami); procedura ISU-1-5; próg 60% sumy ważonej; ISU-4 rozstrzyganie uzupełniające (ZUS/JPK/korespondencja); ISU-5 formuła do pisma; 6 typów sporu; art. 65§1 KC jako podstawa | `shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md` v1.0.0 — WYŁĄCZNA lokalizacja; NIE duplikować mechaniki w MOD-DOKUMENT-ANOMALIE ani W0 MOD-PRACODAWCA-RZECZYWISTY | pisma-procesowe-v3 (W1.2d), analizator-umow-v1, analizator-dowodow-v3, PRE-W2-VERIFICATION-GATE (v1.4.0) | ✅ 2026-06-27d |
 | MOD-PRACODAWCA-RZECZYWISTY v2.1.0: WARSTWA 0 (dane większościowe — identyfikacja strony umowy przez ≥4/7 elementów identyfikacyjnych, art.65§1KC); 4-warstwowy argument (W1 pracodawca rzeczywisty art.3KP + W2 obejście prawa art.58§1KC + W3 venire art.8KP + W4 dowody operacyjne); trigger PRE-W2 T1-T4; ZAKAZ-R1; protokół R1-R5; KAT-I/II/III 4-warstwowy argument (pracodawca rzeczywisty art.3KP + obejście prawa art.58§1KC + venire art.8KP + dowody operacyjne); trigger PRE-W2 T1-T4; ZAKAZ-R1 (zakaz "ten sam KRS" gdy KRS błędny); protokół R1-R5; KAT-I/II/III | `pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md` v2.0.0 — WYŁĄCZNA lokalizacja; NIE duplikować w shared/; plik /home/claude/MOD-PRACODAWCA-RZECZYWISTY.md scalony i usunięty | pisma-procesowe-v3 (W1.2 linia 669, wywołanie z PRE-W2.C/D po wykryciu T1-T4), PRE-W2-VERIFICATION-GATE (v1.3.0) | ✅ 2026-06-27b |
@@ -385,7 +394,7 @@ NOTA-10 — WSZYSTKIE ZAMKNIĘTE. Zero otwartych WARN/NOTA w tym pliku.*
 
 ---
 
-### NOTA-11: DUPLIKAT — prawny-router-v3/references/kwalifikator-karnomaterialny.md vs dr-03/modules/mod-KK-kwalifikator-karnomaterialny.md — ✅ ZAMKNIĘTE 2026-07-12
+### NOTA-11: DUPLIKAT — prawny-router-v3/references/kwalifikator-karnomaterialny.md vs dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md — ✅ ZAMKNIĘTE 2026-07-12
 
 Zgłoszone jako ZNALEZISKO w prawny-router-v3/SKILL.md (limitations, 2026-07-04),
 poza zakresem ówczesnej sesji standaryzacji metadanych. Podjęte w ramach
@@ -401,8 +410,8 @@ Kanoniczny: `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator
 USUNIĘTY. Realne miejsca wywołania, które nadal wskazywały na kopię w
 routerze — oba wewnątrz DR-03, mimo że kanoniczny plik leży w tym samym
 katalogu:
-- `dr-03/modules/mod-KW-kodeks-wykroczen.md` (linia z `view` + wiersz tabeli ŁĄCZ Z)
-- `dr-03/modules/mod-KK-KPK-framework-karne.md` (linia z `view` + wiersz tabeli ŁĄCZ Z)
+- `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KW-kodeks-wykroczen.md` (linia z `view` + wiersz tabeli ŁĄCZ Z)
+- `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` (linia z `view` + wiersz tabeli ŁĄCZ Z)
 
 Oba przekierowane na ścieżkę kanoniczną. prawny-router-v3/SKILL.md
 zaktualizowany (v3.13 → 3.14, limitations + changelog).
@@ -413,7 +422,7 @@ WARN-OTWARTE.md, jeśli nie zostały jawnie tam wpisane jako WARN/F — warto
 przy kolejnym pełnym audycie DZU przeszukać `limitations:` wszystkich
 SKILL.md pod kątem podobnych niezamkniętych znalezisk.
 
-### NOTA-12: DUPLIKAT — dr-03/modules/mod-KK-stalking-szczegolowy.md vs prawny-router-v3/references/stalking-nekanie.md — ✅ ZAMKNIĘTE 2026-07-12
+### NOTA-12: DUPLIKAT — dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-stalking-szczegolowy.md vs prawny-router-v3/references/stalking-nekanie.md — ✅ ZAMKNIĘTE 2026-07-12
 
 Wykryte automatycznie przez `audyt-systemu-v4/scripts/ci_check_shared.py`
 (audyt gotowości komercyjnej, pierwsze uruchomienie). `diff`+`md5sum`: bajt-w-bajt
@@ -421,7 +430,7 @@ identyczne (116 linii).
 
 Oba faktycznie używane: `dr-03/SKILL.md` (checklist modułów) i
 `dr-03/MAPA-AKTOW.md` śledziły `mod-KK-stalking-szczegolowy` jako moduł DR-03;
-`dr-03/modules/mod-KK-art190a-stalking.md` i `mod-KK-kwalifikator-karnomaterialny.md`
+`dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art190a-stalking.md` i `mod-KK-kwalifikator-karnomaterialny.md`
 odwoływały się (view + 2× prosa) do kopii routera. Router sam deklaruje zasadę
 "nie duplikuj treści modułów dziedzinowych w routerze" (prawny-router-v3/SKILL.md,
 "Zasada odciążenia routera") — kopia w `references/` była jej naruszeniem.
@@ -432,7 +441,7 @@ identyczna z obu usuniętych). Oba oryginały usunięte. Zaktualizowane:
 (2× prosa), `dr-03/SKILL.md` (checklist 20→19 + nota o relokacji),
 `dr-03/MAPA-AKTOW.md` (wskaźnik modułu).
 
-### NOTA-13: DUPLIKAT — dr-16/modules/mod-KPC-przesluchanie-swiadkow.md vs prawny-router-v3/references/przesluchanie-swiadkow.md — ✅ ZAMKNIĘTE 2026-07-12
+### NOTA-13: DUPLIKAT — dr-16-pisma-strategia-dowody-orzecznictwo/modules/mod-KPC-przesluchanie-swiadkow.md vs prawny-router-v3/references/przesluchanie-swiadkow.md — ✅ ZAMKNIĘTE 2026-07-12
 
 Wykryte tą samą sesją co NOTA-12. Bajt-w-bajt identyczne (99 linii, art.
 258-305 KPC — ramowy framework, NIE mylić z pełnym skillem
@@ -441,7 +450,7 @@ strategia przesłuchania, nie podstawy ustawowe).
 
 Oba faktycznie używane: `dr-16/SKILL.md` (checklist), `dr-16/MAPA-AKTOW.md`
 i `prawo-polskie-v2/ROUTING-MAP.md` (centralna mapa routingu) śledziły moduł
-pod nazwą `dr-16/modules/mod-KPC-przesluchanie-swiadkow`.
+pod nazwą `dr-16-pisma-strategia-dowody-orzecznictwo/modules/mod-KPC-przesluchanie-swiadkow.md`.
 
 **Rozwiązanie:** nowy plik kanoniczny `shared/PRZESLUCHANIE-SWIADKOW-KPC.md`.
 Oba oryginały usunięte. Zaktualizowane: `dr-16/SKILL.md` (checklist 11→10 +

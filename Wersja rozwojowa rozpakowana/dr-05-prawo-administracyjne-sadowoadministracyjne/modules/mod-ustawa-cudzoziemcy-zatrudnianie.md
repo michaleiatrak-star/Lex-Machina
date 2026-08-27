@@ -278,4 +278,4 @@ web_search: "ustawa praca cudzoziemców Dz.U. 2025 poz. 621 elektronizacja isap"
 
 ## ⚖️ DISCLAIMER
 
-Po zakończeniu analizy: `view /mnt/skills/user/shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
+Po zakończeniu analizy: `view shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).

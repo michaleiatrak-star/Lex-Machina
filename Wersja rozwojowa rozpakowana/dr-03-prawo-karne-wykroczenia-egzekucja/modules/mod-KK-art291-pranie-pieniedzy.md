@@ -32,7 +32,7 @@ Art. 299 § 2:  ⚠️ POPRAWKA 2026-07-26b (FAZA 3E/ZASADA 14 — korekta
                przyjmuje środki płatnicze/instrumenty finansowe itd. —
                KARA TA SAMA CO §1 (6 m-cy — 8 lat), nie osobny, wyższy
                wymiar. Potwierdzone WPROST cytatem z arslege.pl (t.j.
-               Dz.U.2025.383): "Karze określonej w §1 podlega, kto będąc
+               Dz.U. 2025 poz. 383): "Karze określonej w §1 podlega, kto będąc
                pracownikiem lub działając w imieniu lub na rzecz banku,
                instytucji finansowej lub kredytowej..." — dosłowne
                brzmienie nie pozostawia wątpliwości.
@@ -83,7 +83,7 @@ jeśli czyn z art. 299 **§1, §2, §5 LUB §6** dotyczy mienia/szkody:
 > 5 mln zł  → art. 306b §1 → 3-20 lat (ZBRODNIA)
 > 10 mln zł → art. 306b §2 → 5-25 lat (ZBRODNIA)
 ```
-Wejście w życie 1.10.2023. Potwierdzone: arslege.pl (t.j. Dz.U.2025.383),
+Wejście w życie 1.10.2023. Potwierdzone: arslege.pl (t.j. Dz.U. 2025 poz. 383),
 kairp.pl, adwokatdulniak.pl, kancelarierp.pl, chmielniak.com.pl,
 russellbedford.pl.
 

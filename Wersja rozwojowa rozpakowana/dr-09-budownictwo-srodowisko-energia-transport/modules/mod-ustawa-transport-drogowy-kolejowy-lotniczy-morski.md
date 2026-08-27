@@ -2,12 +2,12 @@
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:**
-- Transport drogowy: Dz.U. 2024 poz. 1539 t.j. ze zm. ✅ VER: 2026-06-05
+- Transport drogowy: Dz.U. 2025 poz. 1490 t.j. ze zm. ✅ VER: 2026-06-05
 - Drogi publiczne: **Dz.U. 2025 poz. 889 t.j.** z 26.06.2025 ✅ VER: 2026-06-05
-- Specustawa drogowa ZRID: Dz.U. 2024 poz. 1641 t.j. ze zm. ✅ VER: 2026-06-05
+- Specustawa drogowa ZRID: Dz.U. 2024 poz. 311 t.j. ze zm. ✅ VER: 2026-06-05
 - Transport kolejowy: **Dz.U. 2025 poz. 1234 t.j.** z 01.09.2025 ✅ VER: 2026-06-05
-- Prawo lotnicze: Dz.U. 2023 poz. 2110 t.j. ze zm. (zm. Dz.U. 2025 poz. 1431)
-- Elektromobilność: Dz.U. 2024 poz. 1634 t.j. ze zm.
+- Prawo lotnicze: Dz.U. 2025 poz. 1431 t.j. — VER RZĄD 1: ELI, 2026-08-26
+- Elektromobilność: Dz.U. 2024 poz. 1289 t.j. ze zm.
 - Kodeks morski: Dz.U. 2023 poz. 1309 t.j. ze zm. ⛔ [POPRAWKA 2026-08-15n — BYŁO 2023.1523; poz. 1523/2023 to ustawa o delegowaniu kierowców w transporcie drogowym, nie Kodeks morski]
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -25,7 +25,7 @@ Licencje i zezwolenia transportu drogowego, kary ITD/Inspekcji Transportu Drogow
 ### Akty i organy
 
 ```
-Ustawa o transporcie drogowym (Dz.U. 2024 poz. 1539 t.j. ze zm. — weryfikuj w ISAP)
+Ustawa o transporcie drogowym (Dz.U. 2025 poz. 1490 t.j. ze zm. — weryfikuj w ISAP)
 Organ kontrolny: ITD (Inspekcja Transportu Drogowego)
 Organ licencyjny: starosta (licencja taxi, przewóz osób) / Główny Inspektor Transportu Drogowego
 
@@ -146,7 +146,7 @@ Odmowa dostępu: decyzja PLK → odwołanie do Prezesa UTK → WSA
 
 ---
 
-## 6. PRAWO LOTNICZE (Dz.U. 2023 poz. 2110 ze zm.)
+## 6. PRAWO LOTNICZE (Dz.U. 2025 poz. 1431 t.j.)
 
 ### Organy i certyfikacja
 

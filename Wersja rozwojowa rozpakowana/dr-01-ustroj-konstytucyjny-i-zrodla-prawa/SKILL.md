@@ -1,13 +1,25 @@
 ---
 name: dr-01-ustroj-konstytucyjny-i-zrodla-prawa
-version: 3.6
-description: |
-  DR-01: Ustrój Konstytucyjny i Źródła Prawa
-  Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
-  Ładuj TYLKO moduł pasujący do sprawy — lazy loading.
-  Wchodzi z: prawo-polskie-v2 → ROUTING-MAP → ten skill.
-  Weryfikacja: isap.sejm.gov.pl | trybunal.gov.pl | sn.pl | nsa.gov.pl | orzeczenia.ms.gov.pl + shared/INTERPRETACJE-URZEDOWE.md (rejestr interpretacji urzędowych per dziedzina)
+version: "3.8"
+description: "Prawo konstytucyjne i ustrojowe: Konstytucja, organy państwa, TK, źródła prawa, legislacja i skarga konstytucyjna; analiza z aktualną weryfikacją źródeł."
 ---
+
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedzinowa, mapy aktów, hard gate’y, kolejność modułów i kryteria jakości tego DR-skilla pozostają bez zmian.
+
+1. `view dr-01-ustroj-konstytucyjny-i-zrodla-prawa/<plik>` oraz `view modules/...` / `view references/...` oznaczają świeży odczyt odpowiedniego lokalnego pliku tego skilla. Literalna ścieżka `/mnt/skills/user` nie jest wymagana.
+2. `view shared/<plik>` oznacza świeży odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tej paczki. Brak obowiązkowego zasobu shared = fail-closed, nie substytucja pamięcią modelu.
+3. `view <inny-skill>/<plik>` oznacza aktywację/odczyt wskazanego osobnego skilla. Nie vendoryzuj innych skilli do tego ZIP-a.
+4. `web_search` / `web_fetch` i podobne nazwy oznaczają świeże wyszukanie/odczyt online przez równoważną funkcję hosta. Zachowaj wymagane źródła oficjalne, statusy weryfikacji i zakaz cytowania prawa z pamięci.
+5. `show_widget`, `visualize:read_me`, `present_files`, `create_file`, shell/Python i podobne operacje są nazwami semantycznymi. Jeśli host nie ma literalnego narzędzia, użyj równoważnej funkcji natywnej bez omijania bramek jakości.
+6. `/mnt/user-data/...` oznacza rzeczywiste załączniki użytkownika dostępne w bieżącym hoście; wymagany ponowny odczyt ma być faktycznym odczytem źródła.
+
+**Zasada nadrzędna:** instrukcje, które są już zrozumiałe i wykonalne w bieżącym hoście, wykonuj bez konwersji. Adapter działa wyłącznie na granicy runtime.
+
 
 # DR-01 — Ustrój Konstytucyjny i Źródła Prawa
 
@@ -22,6 +34,25 @@ description: |
 > gradient weryfikacji cytatu): `view shared/PRAWO-HARDGATE.md` — wczytaj
 > PRZED pierwszym przepisem w każdej odpowiedzi. Integruje się z
 > `shared/ISAP-AUDIT-PROTOCOL.md`.
+
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
+>
+> ```
+> view shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
+>
+> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
+> oznaczenia, tylko je wymusza.
 
 ---
 
@@ -75,13 +106,13 @@ ugruntowane definicje doktrynalne, kazuistyka TK). Pomocniczo:
 ## Jak wywołać
 
 ```
-view /mnt/skills/user/dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/[nazwa-modulu].md
+view dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/[nazwa-modulu].md
 ```
 
 ## Lokalna mapa aktów prawnych
 
 ```
-view /mnt/skills/user/dr-01-ustroj-konstytucyjny-i-zrodla-prawa/MAPA-AKTOW.md
+view dr-01-ustroj-konstytucyjny-i-zrodla-prawa/MAPA-AKTOW.md
 ```
 
 ## Powiązania zewnętrzne
@@ -95,7 +126,7 @@ view /mnt/skills/user/dr-01-ustroj-konstytucyjny-i-zrodla-prawa/MAPA-AKTOW.md
 Po zakończeniu analizy lub przed oddaniem odpowiedzi zawierającej ocenę prawną:
 
 ```text
-view /mnt/skills/user/shared/DISCLAIMER.md
+view shared/DISCLAIMER.md
 ```
 
 Wybierz wariant odpowiedni do trybu:
@@ -138,18 +169,12 @@ odesłaniami, bez duplikacji.
 
 ## CHANGELOG
 
-> **3.3 (2026-07-25, CRIT-TREŚĆ — audyt adresatów zażalenia w sprawach
-> wyłączenia sędziego/neosędziów):** `modules/mod-USP-ustroj-sadow-
-> powszechnych.md`, sekcja "Procedura wyłączenia" — poprzednia wersja
-> kończyła się ogólnikiem "odmowa → zażalenie" bez wskazania adresata.
-> Dodano tabelę rozróżniającą: (1) zażalenie poziome do innego składu tego
-> samego sądu przy oddaleniu wniosku strony (art. 394¹ᵃ §1 pkt 10 KPC dla
-> I instancji, art. 394² §1 KPC dla II instancji); (2) brak zaskarżalności,
-> gdy to sam sędzia zgłosił i uzyskał oddalenie własnego żądania wyłączenia
-> (uchwała SN III CZP 33/69). Doprecyzowano konsekwencję praktyczną dla
-> spraw neosędziowskich: kontrola odwoławcza zwykle zostaje w tym samym
-> sądzie, nie trafia automatycznie do instancji wyższej. Zweryfikowano
-> online (SN, Palestra, gofin.pl, saos.org.pl). Ten sam wzorzec braku
-> (brak adresata zażalenia) wykryto i naprawiono równolegle w
-> pisma-proste-v2 (v2.4) i pisma-procesowe-v3 (v5.14). Pełny opis:
-> audyt-systemu-v4/references/AUDIT-JOURNAL.md, wpis 2026-07-25.
+⛔ **Historia zmian tego skilla NIE mieszka w tym pliku** (ZASADA 15,
+`audyt-systemu-v4/SKILL.md`). Jedyna lokalizacja kanoniczna:
+
+```
+view dr-01-ustroj-konstytucyjny-i-zrodla-prawa/references/CHANGELOG.md
+```
+
+*(Wpis 3.3 przeniesiony stąd 1:1 dnia 2026-08-24, flaga F-126. Luka 3.4–3.6
+odnotowana tam jawnie jako nieodtworzona — zakaz rekonstrukcji z pamięci.)*

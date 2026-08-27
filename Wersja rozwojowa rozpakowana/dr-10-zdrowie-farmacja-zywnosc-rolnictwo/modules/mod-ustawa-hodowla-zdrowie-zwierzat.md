@@ -1,7 +1,7 @@
 # Moduł — Hodowla i zdrowie zwierząt (weterynaria)
 
 > WYDZIELONY 2026-08-12 z mod-ustawa-bezpieczenstwo-zywnosci.md, w ramach
-> realizacji NOTA-4 (audyt-systemu-v4/CHECKLIST-DEDUP.md — moduł >400
+> realizacji NOTA-4 (audyt-systemu-v4/references/CHECKLIST-DEDUP.md — moduł >400
 > linii). Obejmuje hodowlę zachowawczą, ubój rytualny (halal/koszer),
 > zakaz hodowli zwierząt futerkowych, hodowlę zwierząt rasowych, wymogi
 > dobrostanu, strefy ASF, obowiązkowe szczepienia oraz KROPiK.

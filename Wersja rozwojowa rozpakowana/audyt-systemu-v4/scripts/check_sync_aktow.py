@@ -38,7 +38,7 @@ z rejestrów sprawdza, czy występuje też w dwóch pozostałych:
   - Nie rozstrzyga, KTÓRY rejestr ma rację — to robi człowiek/LLM po ISAP.
 
 Użycie:
-    python3 check_sync_aktow.py [--repo-root /mnt/skills/user] [--limit N]
+    python3 check_sync_aktow.py [--repo-root SKILLS_ROOT] [--limit N]
                                 [--kierunek lokalne|centralna|mapa|wszystkie]
 
 Kod wyjścia:
@@ -48,13 +48,14 @@ Kod wyjścia:
 """
 
 import argparse
+import os
 import re
 import sys
 from pathlib import Path
 
 # "Dz.U. 2023 poz. 1939", "Dz. U. z 2023 r. poz. 1939", "Dz.U. 2023.1939"
 RE_POZ = re.compile(
-    r"Dz\.\s?U\.\s*(?:z\s*)?(\d{4})\s*(?:r\.\s*)?(?:poz\.\s*|\.)(\d{1,5})",
+    r"Dz\.\s?U\.\s*(?:z\s*)?(\d{4})\s*(?:r\.\s*)?(?:poz\.\s*|\.)(\d{1,8})(?!\d)",
     re.IGNORECASE,
 )
 
@@ -73,8 +74,43 @@ RE_WIERSZ_MAPY = re.compile(r"^\|\s*(\d{4})\s*\|\s*(\d{1,5})\s*\|")
 # numery stron). Kierunek zmiany jest zatem wyłącznie w stronę MNIEJ alarmów.
 RE_POZ_LUZNA = re.compile(r"(?<![\d.])((?:19|20)\d{2})\.(\d{1,5})(?!\d)")
 
+# ⭐ NOTACJA LEX/„RRRR.NN.PPPP" — "Dz.U.2026.0.468" (rok . numer dziennika .
+# pozycja; dla aktów po 2012 r. środkowy człon to zawsze 0). Pomiar 2026-08-23g:
+# 95 wystąpień w systemie, m.in. shared/MOD-ATAK-NA-SWIADKA.md, ROUTING-MAP.md
+# i moduły dr-02/dr-06/dr-09. RE_POZ rozbierał je BŁĘDNIE na (rok, "0") — czyli
+# na artefakt, który funkcja artefakt() niżej po cichu odrzucała, przez co
+# PRAWDZIWA pozycja (468) NIGDY nie trafiała do porównania. Skutek: fałszywy
+# NEGATYW — akt obecny w jednym rejestrze i nieobecny w drugim nie mógł zostać
+# wykryty, jeżeli którykolwiek z rejestrów zapisał go w tej notacji.
+# Naprawa (flaga F-125): normalizacja tekstu PRZED parsowaniem.
+RE_LEX = re.compile(
+    r"Dz\.\s?U\.\s*(\d{4})\.(?:(\d{1,3})\.)?(\d{1,8})",
+    re.IGNORECASE,
+)
+
+
+def numer(rok: str, poz: str):
+    """Kanoniczna para bez zer wiodących w pozycji."""
+    return rok, str(int(poz))
+
+
+def normalizuj(txt: str) -> str:
+    """Sprowadza notację 'Dz.U.RRRR.NN.PPPP' do 'Dz.U. RRRR poz. PPPP'.
+
+    Wywoływana na KAŻDYM czytanym pliku, przed uruchomieniem RE_POZ —
+    inaczej środkowy człon (numer dziennika) zostaje odczytany jako pozycja.
+    """
+    return RE_LEX.sub(
+        lambda m: f"Dz.U. {m.group(1)} poz. {int(m.group(3))}", txt
+    )
+
+
 # artefakt parsera: "poz. 0" nie istnieje w Dz.U. — powstaje z rozbioru
 # zapisów typu "art. 2025.0" lub uciętych fragmentów tabel
+# ⚠️ Po naprawie F-125 ta funkcja NIE powinna już odrzucać notacji LEX —
+# jeśli mimo normalizacji nadal pojawiają się trafienia "poz. 0", to znak,
+# że istnieje TRZECI, jeszcze nierozpoznany format zapisu numeru. Zgłoś go,
+# nie rozszerzaj filtra.
 def artefakt(rok_poz):
     return rok_poz[1] == "0"
 
@@ -87,11 +123,12 @@ def zbierz_mape_dzu(path: Path):
         txt = path.read_text(encoding="utf-8", errors="replace")
     except OSError:
         return set()
-    wynik = {(m.group(1), m.group(2)) for m in RE_POZ.finditer(txt)}
+    txt = normalizuj(txt)
+    wynik = {numer(m.group(1), m.group(2)) for m in RE_POZ.finditer(txt)}
     for linia in txt.splitlines():
         m = RE_WIERSZ_MAPY.match(linia)
         if m:
-            wynik.add((m.group(1), m.group(2)))
+            wynik.add(numer(m.group(1), m.group(2)))
     return wynik
 
 
@@ -101,12 +138,16 @@ def zbierz(path: Path):
         txt = path.read_text(encoding="utf-8", errors="replace")
     except OSError:
         return set()
-    return {(m.group(1), m.group(2)) for m in RE_POZ.finditer(txt)}
+    return {numer(m.group(1), m.group(2)) for m in RE_POZ.finditer(normalizuj(txt))}
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--repo-root", default="/mnt/skills/user")
+    ap.add_argument(
+        "--repo-root",
+        default=os.environ.get("LEX_MACHINA_SKILLS_ROOT", "."),
+        help="katalog korzenia skilli; domyślnie $LEX_MACHINA_SKILLS_ROOT lub bieżący katalog",
+    )
     ap.add_argument("--limit", type=int, default=25,
                     help="ile pozycji wypisać w każdej kategorii (0 = wszystkie)")
     ap.add_argument("--kierunek", default="wszystkie",
@@ -118,24 +159,32 @@ def main():
 
     root = Path(args.repo_root)
 
-    routing = root / "prawo-polskie-v2" / "ROUTING-MAP.md"
-    if not routing.exists():
-        print(f"BŁĄD: brak {routing}")
+    routing_candidates = sorted(root.glob("*/ROUTING-MAP.md"))
+    routing = routing_candidates[0] if len(routing_candidates) == 1 else None
+    if routing is None:
+        for candidate in routing_candidates:
+            skill_file = candidate.parent / "SKILL.md"
+            head = skill_file.read_text(encoding="utf-8", errors="replace")[:3000] if skill_file.exists() else ""
+            if re.search(r"(?m)^name:\s*prawo-polskie-v2\s*$", head):
+                routing = candidate
+                break
+    if routing is None:
+        print(f"BŁĄD: brak ROUTING-MAP.md fasady prawa polskiego pod {root}")
         sys.exit(2)
 
-    mapy_dzu = sorted((root / "audyt-systemu-v4" / "references").glob("mapa_dzu_*.md"))
+    mapy_dzu = sorted(root.glob("*/references/mapa_dzu_*.md"))
     if not mapy_dzu:
         print("BŁĄD: brak pliku mapa_dzu_*.md")
         sys.exit(2)
     mapa_dzu = mapy_dzu[-1]  # najnowsza wg nazwy (data w nazwie)
 
     lokalne = {}
-    for d in sorted(root.glob("dr-*/MAPA-AKTOW.md")):
+    for d in sorted(root.glob("*/MAPA-AKTOW.md")):
         lokalne[d.parent.name] = zbierz(d)
 
     zb_routing = zbierz(routing)
     zb_routing_luzne = {
-        (m.group(1), m.group(2))
+        numer(m.group(1), m.group(2))
         for m in RE_POZ_LUZNA.finditer(routing.read_text(encoding="utf-8", errors="replace"))
     }
     zb_mapa = zbierz_mape_dzu(mapa_dzu)

@@ -37,13 +37,13 @@ Po zakończeniu audytu: **obowiązkowa aktualizacja plików references**.
 # Frazy meta-opisowe
 grep -rn \
   -e "Ten skill\|Ten moduł\|Celem tego\|Poniżej znajdziesz\|W tej sekcji\|Niniejszy\|służy do\|ma na celu\|pozwala na\|umożliwia użytkownikowi\|został stworzony\|jest przeznaczony" \
-  /mnt/skills/user/ --include="*.md" | grep -v archive | grep -v "MOD-WSTAWKI"
+   --include="*.md" | grep -v archive | grep -v "MOD-WSTAWKI"
 ```
 
 ```bash
 # Outro-akapity (ostatnie linie sekcji przed ---)
 awk '/^---$/{if(prev~/Zapraszamy|Powodzenia|Mamy nadzieję|W razie pytań/) print NR-1": "prev} {prev=$0}' \
-  /mnt/skills/user/SKILL_PATH/SKILL.md
+  SKILL_PATH/SKILL.md
 ```
 
 ---

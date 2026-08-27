@@ -194,7 +194,7 @@ Stosuj bezwzględnie `shared/DISABILITY-FUNCTIONAL-ASSESSMENT.md`.
 
 ## ANEKS — ŚWIADCZENIE UZUPEŁNIAJĄCE (500+ dla niepełnosprawnych)
 
-**Akt:** Ustawa z 31.07.2019 r. o świadczeniu uzupełniającym — Dz.U. 2025 poz. 913 t.j.
+**Akt:** Ustawa z 31.07.2019 r. o świadczeniu uzupełniającym — Dz.U. 2026 poz. 884 t.j.
 **⚠️ Kwoty zmieniane rokrocznie — ZAWSZE weryfikuj przed cytowaniem:**
 ```
 web_search: "świadczenie uzupełniające 500+ kwota kryterium dochodowe 2025 2026 ZUS"

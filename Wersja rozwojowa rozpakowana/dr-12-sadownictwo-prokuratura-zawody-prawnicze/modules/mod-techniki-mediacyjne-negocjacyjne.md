@@ -746,7 +746,7 @@ KROK 7 — Po zakończeniu (niezależnie od wyniku) — przeprowadź analizę
 KPK, sprawiedliwość naprawcza, przesłanki kwalifikacji, poufność/art. 178a
 KPK) ma OSOBNY moduł ze względu na odrębną podstawę prawną i ideę:
 ```
-view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KPK-mediacja-sprawiedliwosc-naprawcza.md
+view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KPK-mediacja-sprawiedliwosc-naprawcza.md
 ```
 Ogólne techniki z niniejszego modułu (5 zasad, BATNA/ZOPA, style, komunikacja,
 caucus) mają zastosowanie również tam — wywołaj oba moduły łącznie przy

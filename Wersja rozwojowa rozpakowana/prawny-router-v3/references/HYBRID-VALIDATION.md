@@ -4,7 +4,7 @@ Pełna logika walidacji hybrydowej znajduje się w bibliotece shared.
 
 **Wczytaj przed użyciem:**
 ```
-view /mnt/skills/user/shared/HYBRID-VALIDATION.md
+view shared/HYBRID-VALIDATION.md
 ```
 
 Uruchom zgodnie z instrukcją tamtego pliku — wszystkie fazy, format raportu

@@ -1,13 +1,25 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: 3.35
-description: |
-  DR-02: Prawo Cywilne, Rodzinne i Gospodarcze
-  Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony rozdział aktu.
-  Ładuj TYLKO moduł pasujący do sprawy — lazy loading.
-  Wchodzi z: prawo-polskie-v2 → ROUTING-MAP → ten skill.
-  Weryfikacja: isap.sejm.gov.pl | orzeczenia.ms.gov.pl | sn.pl + shared/INTERPRETACJE-URZEDOWE.md (rejestr interpretacji urzędowych per dziedzina)
+version: "3.39"
+description: "Prawo cywilne, rodzinne i gospodarcze: KC, KPC, spadki, rodzina, spółki, upadłość, restrukturyzacja, windykacja i odpowiedzialność kontraktowa/deliktowa."
 ---
+
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedzinowa, mapy aktów, hard gate’y, kolejność modułów i kryteria jakości tego DR-skilla pozostają bez zmian.
+
+1. `view dr-02-prawo-cywilne-rodzinne-gospodarcze/<plik>` oraz `view modules/...` / `view references/...` oznaczają świeży odczyt odpowiedniego lokalnego pliku tego skilla. Literalna ścieżka `/mnt/skills/user` nie jest wymagana.
+2. `view shared/<plik>` oznacza świeży odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tej paczki. Brak obowiązkowego zasobu shared = fail-closed, nie substytucja pamięcią modelu.
+3. `view <inny-skill>/<plik>` oznacza aktywację/odczyt wskazanego osobnego skilla. Nie vendoryzuj innych skilli do tego ZIP-a.
+4. `web_search` / `web_fetch` i podobne nazwy oznaczają świeże wyszukanie/odczyt online przez równoważną funkcję hosta. Zachowaj wymagane źródła oficjalne, statusy weryfikacji i zakaz cytowania prawa z pamięci.
+5. `show_widget`, `visualize:read_me`, `present_files`, `create_file`, shell/Python i podobne operacje są nazwami semantycznymi. Jeśli host nie ma literalnego narzędzia, użyj równoważnej funkcji natywnej bez omijania bramek jakości.
+6. `/mnt/user-data/...` oznacza rzeczywiste załączniki użytkownika dostępne w bieżącym hoście; wymagany ponowny odczyt ma być faktycznym odczytem źródła.
+
+**Zasada nadrzędna:** instrukcje, które są już zrozumiałe i wykonalne w bieżącym hoście, wykonuj bez konwersji. Adapter działa wyłącznie na granicy runtime.
+
 
 # DR-02 — Prawo Cywilne, Rodzinne i Gospodarcze
 
@@ -22,6 +34,25 @@ description: |
 > gradient weryfikacji cytatu): `view shared/PRAWO-HARDGATE.md` — wczytaj
 > PRZED pierwszym przepisem w każdej odpowiedzi. Integruje się z
 > `shared/ISAP-AUDIT-PROTOCOL.md`.
+
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
+>
+> ```
+> view shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
+>
+> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
+> oznaczenia, tylko je wymusza.
 
 ---
 
@@ -68,19 +99,16 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (53 łącznie — ✓ 53 OK, ☐ 0 STUB)
+## Moduły (56 łącznie — ✓ 56 OK, ☐ 0 STUB)
 
-**NAPRAWA 2026-08-22:** dodano `mod-KPC-art162-zastrzezenie-protokol.md`
-— zamyka poz. #14 mapy pokrycia KPC (🔴 luka krytyczna): art. 162 KPC,
-zastrzeżenie do protokołu / prekluzja zarzutów procesowych. Odkryta
-jako luka bliźniacza do art. 105 PPSA (`dr-05`, sesja audytowa
-2026-08-22e) — obie instytucje mają identyczną konstrukcję i skutek.
-Treść zweryfikowana RZĄD 1 (tekst ustawy nowelizującej z 4.07.2019,
-orka.sejm.gov.pl) + RZĄD 2B (arslege.pl, lexlege.pl — metryka
-Dz.U.2026.0.468 t.j. zgodna z pozostałymi modułami KPC). Obejmuje
-orzecznictwo SN (III CSKP 23/21, III UK 7/19, uchwała III CZP 55/05) i
-powiązanie z art. 172 §2¹ oraz art. 380 KPC. Pełny opis: `audyt-systemu-v4/
-references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-22.
+```
+  [✓] OK    mod-transakcje-handlowe-opoznienia
+              (F-108/46: rdzeń cywilny B; gałęzie administracyjne/historyczne częściowe)
+  [✓] OK    mod-KPC-art162-zastrzezenie-protokol
+              (art. 162 KPC oraz powiązania z art. 172 § 2¹ i art. 380)
+  [✓] OK    mod-kaucja-najem-lokalu
+              (kaucja przy najmie zwykłym i okazjonalnym)
+```
 
 **KOREKTA LICZNIKA 2026-08-14d:** poprzednia wartość („43” przy 42 modułach na dysku) była ZAWYŻONA O 1 JUŻ PRZED dodaniem mod-KPC-nieproces-czesc-ogolna — wykryte przy mechanicznej kontroli dysk/checklista. Po dodaniu nowego modułu rzeczywisty stan to 43 moduły i 43 wpisy [✓], zero modułów-widm.
 
@@ -405,7 +433,11 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
               (wydzielony 2026-08-21 z modułu wyżej — podział WYPRZEDZAJĄCY
                przed dalszymi transzami F-86: układ w upadłości [266a-266f],
                likwidacja masy Dział I [306-315], zakończenie i umorzenie
-               postępowania [361-372]. ⛔ Dalszą treść F-86 dopisywać TUTAJ)
+               postępowania [361-372])
+  [✓] NOWY  mod-PrUpad-likwidacja-miedzynarodowe-szczegolne
+              (dodany 2026-08-26 — częściowe uzupełnienie F-86: likwidacja [316-334],
+               postępowanie międzynarodowe [378-417], postępowania po
+               śmierci dłużnika i wobec deweloperów [418-425s])
   [✓] NOWY  mod-PrRestr-dzial-III-nadzorca-zarzadca
               (dodany 2026-08-19 — naprawa F-87 priorytet 1: Dział III
                PrRestr, art. 23-64. Struktura 4 rozdziałów + tabela
@@ -547,7 +579,7 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
                postępowania nieprocesowego]. Weryfikacja: "deklaracja
                bez pokrycia" ws. sprzeciwu od referendarza okazała
                się fałszywym alarmem, treść realnie istnieje w
-               pisma-proste-v2/SPH-inne.md)
+               pisma-proste-v2/references/SPH-inne.md)
   [✓] OK    mod-ustawa-prawa-konsumenta
   [✓] OK    mod-ustawa-UZNK-nieuczciwa-konkurencja
   [✓] OK    mod-ustawa-UOKIK-antymonopolowe
@@ -584,25 +616,18 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
   [✓] OK    mod-KP-art943-mobbing-dyskryminacja
   [✓] OK    mod-ustawa-cudzoziemcy
   [✓] OK    mod-ustawa-timeshare-zastaw-rejestrowy
-  [✓] NOWY  mod-KPC-art162-zastrzezenie-protokol
-              (dodany 2026-08-22 — art. 162 KPC, zastrzeżenie do
-               protokołu/prekluzja zarzutów procesowych. Naprawa poz.
-               #14 mapy pokrycia KPC, luka bliźniacza do art. 105 PPSA
-               dr-05. Rząd 1: orka.sejm.gov.pl [ustawa nowelizująca
-               4.07.2019]. Rząd 2B: arslege.pl, lexlege.pl [metryka
-               Dz.U.2026.0.468 t.j.])
 ```
 
 ## Jak wywołać
 
 ```
-view /mnt/skills/user/dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/[nazwa-modulu].md
+view dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/[nazwa-modulu].md
 ```
 
 ## Lokalna mapa aktów prawnych
 
 ```
-view /mnt/skills/user/dr-02-prawo-cywilne-rodzinne-gospodarcze/MAPA-AKTOW.md
+view dr-02-prawo-cywilne-rodzinne-gospodarcze/MAPA-AKTOW.md
 ```
 
 ## Mapa pokrycia treściowego (planowanie rozwoju skilla)
@@ -614,7 +639,7 @@ zaktualizowania. (F-83, zasilony 2026-08-22 z KSH i PrUp/PrRestr; KPC
 świadomie pominięty jako częściowo przestarzały względem stanu po F-65):
 
 ```
-view /mnt/skills/user/dr-02-prawo-cywilne-rodzinne-gospodarcze/MAPA-POKRYCIA.md
+view dr-02-prawo-cywilne-rodzinne-gospodarcze/MAPA-POKRYCIA.md
 ```
 
 ## Powiązania zewnętrzne
@@ -630,7 +655,7 @@ view /mnt/skills/user/dr-02-prawo-cywilne-rodzinne-gospodarcze/MAPA-POKRYCIA.md
 Po zakończeniu analizy lub przed oddaniem odpowiedzi zawierającej ocenę prawną:
 
 ```text
-view /mnt/skills/user/shared/DISCLAIMER.md
+view shared/DISCLAIMER.md
 ```
 
 Wybierz wariant odpowiedni do trybu:

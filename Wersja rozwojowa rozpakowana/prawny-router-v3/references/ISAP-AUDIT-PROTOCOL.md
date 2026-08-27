@@ -1,6 +1,6 @@
 # ISAP-AUDIT-PROTOCOL — stub (sub-referencja routera)
 
-> **Status:** STUB — plik kanoniczny to `/mnt/skills/user/shared/ISAP-AUDIT-PROTOCOL.md`
+> **Status:** STUB — plik kanoniczny to `shared/ISAP-AUDIT-PROTOCOL.md`
 
 ---
 
@@ -10,7 +10,7 @@ Pełna procedura protokołu aktualności prawa (sekwencja 1–7, format metryki,
 zakazy) znajduje się w pliku kanonicznym:
 
 ```
-view /mnt/skills/user/shared/ISAP-AUDIT-PROTOCOL.md
+view shared/ISAP-AUDIT-PROTOCOL.md
 ```
 
 Ten stub jest utrzymywany wyłącznie dla kompatybilności ze ścieżką references/

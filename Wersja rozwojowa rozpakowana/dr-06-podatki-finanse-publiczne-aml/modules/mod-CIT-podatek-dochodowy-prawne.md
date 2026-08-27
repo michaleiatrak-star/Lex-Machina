@@ -423,7 +423,7 @@ web_search: "estoński CIT 2025 2026 stawka warunki wybór MF"
 
 > Pełne zestawienie definicji estońskiego CIT, IP Box (CIT), MDR, PKWiU 2025:
 > ```
-> view /mnt/skills/user/dr-06-podatki-finanse-publiczne-aml/modules/mod-interpretacje-definicje-podatkowe.md
+> view dr-06-podatki-finanse-publiczne-aml/modules/mod-interpretacje-definicje-podatkowe.md
 > ```
 
 ---

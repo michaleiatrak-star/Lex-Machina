@@ -199,23 +199,12 @@ Górna granica: SUMA wszystkich kar, ale NIE WIĘCEJ niż:
     jednostkowych jest już 30 lat, tę karę orzeka się WPROST jako
     karę łączną, art. 86 §1 zd. 2)
 
-⚠️ **Poniższe dwa akapity (próg art. 86 §1a i art. 88) opisują mechanizm
-oparty na karze "25 lat pozbawienia wolności" jako ODRĘBNYM rodzaju kary
-— po ustaleniu (patrz BLOK P, sekcja "Katalog kar"), że ta kara została
-USUNIĘTA z katalogu reformą 2022/2023, treść poniższa jest
-PRAWDOPODOBNIE NIEAKTUALNA lub dotyczy WYŁĄCZNIE stanów sprzed reformy
-(dla czynów popełnionych przed 2023 r., stosowanych na zasadzie art. 4 §1
-KK jeśli względniejsze). NIE zweryfikowano w tej sesji, czy art. 86 §1a
-i art. 88 zostały uchylone/przeredagowane w ramach tej samej reformy —
-PRZED użyciem w piśmie sprawdź WPROST aktualne brzmienie (lub brak) tych
-przepisów na ISAP.**
-
-Szczególny próg (art. 86 §1a): jeśli suma kar pozbawienia wolności ≥25 lat
-  I choćby jedna z łączonych kar wynosi ≥10 lat
-  → sąd MOŻE orzec karę łączną 25 lat pozbawienia wolności
-
-Art. 88: jeśli najsurowszą karą jednostkową jest 25 lat lub dożywocie
-  → tę karę orzeka się WPROST jako karę łączną (nie sumuje się)
+Art. 86 §1a jest uchylony. Art. 88 obecnie stanowi, że gdy najsurowszą
+karą jednostkową jest dożywotnie pozbawienie wolności, orzeka się je jako
+karę łączną. Przy zbiegu co najmniej dwóch kar pozbawienia wolności w
+wymiarze przynajmniej 25 lat sąd może orzec jako karę łączną dożywotnie
+pozbawienie wolności. Liczba 25 lat oznacza tu wymiar terminowej kary,
+nie dawny odrębny rodzaj kary.
 ```
 
 ### Ciąg przestępstw (art. 91) — odmiana szczególna
@@ -444,14 +433,8 @@ portali (dlajurysty.pl) miał wprost widoczną datę ostatniej modyfikacji
 dlaczego portale wtórne bez wyraźnej daty aktualizacji nie mogą być
 jedynym źródłem przy przepisach intensywnie nowelizowanych.
 
-⚠️ Konsekwencja dla przepisów odsyłających do "25 lat pozbawienia
-wolności" jako kary (np. art. 88 KK — kara łączna 25 lat, cytowana w
-BLOK M) — możliwe, że TAKŻE te przepisy zostały zmienione/uchylone w
-ramach tej samej reformy (skoro sama kara jako rodzaj przestała istnieć).
-**NIE rozstrzygnięto tego w tej sesji** — jeśli sprawa wymaga powołania
-art. 88 lub podobnego przepisu odsyłającego do "kary 25 lat", zweryfikuj
-NAJPIERW czy przepis nadal obowiązuje w tym brzmieniu, czy został
-uchylony/przeredagowany w ramach reformy 2022/2023.
+Konsekwencję dla kary łącznej rozstrzygnięto powyżej na podstawie
+aktualnego art. 86 §1, uchylonego art. 86 §1a i aktualnego art. 88 KK.
 
 ### Kara mieszana/sekwencyjna — art. 37a i 37b (istotne narzędzie obrony)
 
@@ -541,4 +524,3 @@ ogólną (obecnie explicite dotyczy tylko art. 54 — nieletni/młodociani).
 ```
 
 ---
-

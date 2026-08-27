@@ -187,11 +187,11 @@ KROK 2 — Szybka diagnoza (bez generowania jeszcze nowej treści):
              bez wskazania
 
 KROK 3 — Wczytaj moduły wsparcia:
-         view /mnt/skills/user/shared/QUALITY-CHECK.md
-         view /mnt/skills/user/shared/MOD-WALIDACJA_v2.md   (sekcja BLOK C)
+         view shared/QUALITY-CHECK.md
+         view shared/MOD-WALIDACJA_v2.md   (sekcja BLOK C)
          Jeśli pismo procesowe i użytkownik prosi o sprawdzenie formalne
          (zob. R.6) → dodatkowo:
-         view /mnt/skills/user/shared/FORMAL-CHECK.md
+         view shared/FORMAL-CHECK.md
 
 KROK 4 — Wygeneruj poprawioną wersję, zachowując:
          - wszystkie żądania/wnioski (petitum) w niezmienionej kolejności
@@ -229,7 +229,7 @@ KROK G2 — AUDYT-KONCOWY (uproszczony — 2 kategorie):
   Nie blokuj całości .docx za te dwie kategorie — tylko sygnalizuj w R.5.
 
 KROK G3 — HYBRID-VALIDATION (auto-raport braków formalnych):
-  view /mnt/skills/user/shared/HYBRID-VALIDATION.md
+  view shared/HYBRID-VALIDATION.md
   FAZA 1: wylistuj braki 🔴/🟡/🔵 bez pytania o zgodę.
   FAZA 2: jeśli użytkownik dostarczył dane → wstaw. Jeśli nie → ⬛.
   Braki 🔴 blokują oznaczenie pisma jako gotowego.

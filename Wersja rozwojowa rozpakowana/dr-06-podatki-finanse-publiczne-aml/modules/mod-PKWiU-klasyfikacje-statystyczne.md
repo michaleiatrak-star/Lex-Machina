@@ -2,7 +2,7 @@
 ## DR-06 · Podatki · Klasyfikacje statystyczne (PKWiU/CN/PKOB/KŚT)
 
 > Wydzielony 2026-06-14 z mod-interpretacje-definicje-podatkowe.md
-> (sekcja 4), w ramach realizacji NOTA-4 (audyt-systemu-v4/CHECKLIST-DEDUP.md
+> (sekcja 4), w ramach realizacji NOTA-4 (audyt-systemu-v4/references/CHECKLIST-DEDUP.md
 > — moduł >400 linii). Temat przekrojowy — referencjonowany przez
 > mod-VAT, mod-PIT, mod-CIT — wydzielenie umożliwia selektywne ładowanie
 > (lazy loading) bez wczytywania całego modułu interpretacji podatkowych.
@@ -64,5 +64,5 @@ NOMENKLATURA SCALONA (CN):
 | Stawki VAT, WIS, split payment | `mod-VAT-podatek-od-towarow-i-uslug` |
 | Ryczałt ewidencjonowany, IP Box | `mod-PIT-podatek-dochodowy-fizyczne` |
 | Amortyzacja (KŚT) | `mod-CIT-podatek-dochodowy-prawne` |
-| Podatek od nieruchomości (PKOB) | `dr-08/modules/mod-lokalne-podatki-oplaty-taryfy.md` |
+| Podatek od nieruchomości (PKOB) | `dr-08-samorzad-terytorialny-prawo-lokalne/modules/mod-lokalne-podatki-oplaty-taryfy.md` |
 | Interpretacje i definicje podatkowe ogólne | `mod-interpretacje-definicje-podatkowe.md` |

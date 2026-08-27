@@ -196,7 +196,7 @@ web_search: "ustawa o zawodzie farmaceuty 2020 tekst jednolity isap"
 
 ## ⚖️ DISCLAIMER
 
-Po zakończeniu analizy: `view /mnt/skills/user/shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
+Po zakończeniu analizy: `view shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
 
 ---
 *mod-ustawa-aptekarz-zawod.md · dr-10 · utworzony 2026-06-14*

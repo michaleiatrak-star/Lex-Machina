@@ -1,7 +1,7 @@
 # Moduł — VAT: miejsce świadczenia usług, grupa VAT, zwolnienie podmiotowe, VAT marża, eksport/WDT
 
 > ⚠️ TEN moduł jest CZĘŚCIĄ RODZINY plików VAT, PODZIELONEJ
-> 2026-08-12 (NOTA-4, audyt-systemu-v4/CHECKLIST-DEDUP.md — moduł
+> 2026-08-12 (NOTA-4, audyt-systemu-v4/references/CHECKLIST-DEDUP.md — moduł
 > źródłowy miał 3652 linie). Moduł MACIERZYSTY (z aktualnym stanem
 > weryfikacji ustawy, ostrzeżeniami o nowelizacjach i alertami
 > KSeF/PKWiU): `mod-VAT-podatek-od-towarow-i-uslug.md`.

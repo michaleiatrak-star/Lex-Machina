@@ -1,6 +1,6 @@
 # mod-ustawa-timeshare-zastaw-rejestrowy
 
-**Źródło weryfikacji:** Ustawa o timeshare — Dz.U. 2018 poz. 513 (weryfikuj nowszy t.j. w ISAP) | Ustawa o zastawie rejestrowym — Dz.U. 2018 poz. 2017 ze zm. (weryfikuj w ISAP)
+**Źródło weryfikacji:** Ustawa o timeshare — Dz.U. 2011 Nr 230, poz. 1370 (publikacja pierwotna; akt obowiązujący, VER RZĄD 1 ELI 2026-08-26) | Ustawa o zastawie rejestrowym — Dz.U. 2018 poz. 2017 ze zm. (weryfikuj w ELI)
 **Data weryfikacji online:** 2026-06-05
 **ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -39,7 +39,7 @@ WYMOGI FORMALNE:
 ## Weryfikacja online
 
 ```
-web_search: "ustawa timeshare Dz.U. 2018 poz. 513 isap.sejm.gov.pl aktualna"
+web_search: "ustawa o timeshare Dz.U. 2011 poz. 1370 eli.gov.pl aktualna"
 web_search: "timeshare prawo odstąpienia polskie przepisy UOKiK klauzule"
 ```
 
@@ -98,7 +98,7 @@ web_fetch: https://rzs.ms.gov.pl
 
 ## Źródła online
 
-- Ustawa o timeshare: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20180000513
+- Ustawa o timeshare: https://eli.gov.pl/eli/DU/2011/1370/ogl
 - Ustawa o zastawie rejestrowym: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20182017
 - Rejestr zastawów sądowy: https://rzs.ms.gov.pl
 

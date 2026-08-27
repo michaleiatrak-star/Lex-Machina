@@ -1,0 +1,14 @@
+interface:
+  display_name: chronologia sprawy v1
+  short_description: 'Chronologia sprawy z dokumentów i dowodów: oś czasu per wątek,
+    klasy pewności, proweniencja, sprzeczności dat/opisów, korelacja finansowa i opcjonalny
+    interaktywny timeline.'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

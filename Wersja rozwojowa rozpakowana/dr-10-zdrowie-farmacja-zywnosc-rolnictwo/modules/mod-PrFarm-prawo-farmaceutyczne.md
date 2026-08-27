@@ -23,7 +23,7 @@ Farmaceutyczna (GIF/WIF), sankcje karne i administracyjne.
 |---|---|---|
 | Prawo farmaceutyczne z 6.09.2001 | **Dz.U. 2026 poz. 612 t.j.** | isap.sejm.gov.pl |
 | Nowelizacja PF z 24.06.2025 | Dz.U. 2025 poz. 924 | isap.sejm.gov.pl |
-| Ustawa o refundacji leków z 12.05.2011 | Dz.U. 2025 poz. 907 t.j. | isap.sejm.gov.pl |
+| Ustawa o refundacji leków z 12.05.2011 | Dz.U. 2026 poz. 253 t.j. | isap.sejm.gov.pl |
 | Nowelizacja ustawy refundacyjnej z 25.07.2025 | Dz.U. 2025 poz. 1192 | isap.sejm.gov.pl |
 | Ustawa o wyrobach medycznych z 7.04.2022 | Dz.U. 2022 poz. 974 | isap.sejm.gov.pl |
 | Rozporządzenie MDR 2017/745 (UE) | Dz.Urz. UE | eur-lex.europa.eu |
@@ -79,10 +79,10 @@ roszczenia procesowe → `shared/TERM-CALC.md`, `shared/ROSZCZENIA.md`.
 
 | Sytuacja | Skill / Moduł |
 |---|---|
-| Odwołanie od decyzji WIF/GIF | `mod-G-administracyjne.md` + `pisma-procesowe-v3` |
-| Skarga do WSA na decyzję org. farmaceutycznych | `mod-G-administracyjne.md` |
-| Błąd medyczny / prawa pacjenta | `mod-V-medyczne.md` |
-| Naruszenie przepisów — odpowiedzialność karna | `mod-N-karne.md` |
+| Odwołanie od decyzji WIF/GIF | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` + `pisma-procesowe-v3` |
+| Skarga do WSA na decyzję org. farmaceutycznych | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` |
+| Błąd medyczny / prawa pacjenta | `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-prawa-pacjenta-framework.md` |
+| Naruszenie przepisów — odpowiedzialność karna | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` |
 | Umowa z hurtownią / dystrybucja | `analizator-umow-v1` |
 | Pismo do GIF / WIF | `pisma-procesowe-v3` |
 | Analiza szans odwołania | `analiza-sadowa-v6` |
@@ -415,10 +415,10 @@ REKOMENDACJA: □ Odwołanie do GIF  □ Skarga do WSA  □ Wniosek o wstrzymani
 ## ŁĄCZ Z
 | Sytuacja | Skill |
 |---|---|
-| Odwołanie od decyzji WIF/GIF | `mod-G-administracyjne.md` + `kpa-admin.md` + `pisma-procesowe-v3` |
+| Odwołanie od decyzji WIF/GIF | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` + `pisma-procesowe-v3` |
 | Skarga do WSA | `pisma-procesowe-v3` + `kpa-admin.md` |
-| Błąd medyczny / prawa pacjenta | `mod-V-medyczne.md` + `prawo-medyczne.md` |
-| Naruszenie przepisów — odpow. karna | `mod-N-karne.md` + `kwalifikator-karnomaterialny.md` |
+| Błąd medyczny / prawa pacjenta | `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-prawa-pacjenta-framework.md` + `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-medyczne-szczegolowy.md` |
+| Naruszenie przepisów — odpow. karna | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` + `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md` |
 | Umowa z hurtownią / dystrybucja | `analizator-umow-v1` |
 | Analiza szans odwołania | `analiza-sadowa-v6` |
 | Orzecznictwo NSA / WSA / TSUE | `orzeczenia-sadowe-v2` |
@@ -696,7 +696,7 @@ Inwentaryzacja i zwrot do wytwórcy: obowiązki przy wycofaniu z rynku (recall)
 
 ## CZĘŚĆ VI — REFUNDACJA LEKÓW
 
-### Ustawa refundacyjna z 12.05.2011 (Dz.U. 2025 poz. 907 t.j.)
+### Ustawa refundacyjna z 12.05.2011 (Dz.U. 2026 poz. 253 t.j.)
 
 ```
 LISTA LEKÓW REFUNDOWANYCH:
@@ -893,7 +893,7 @@ Prawo farmaceutyczne: Dz.U. 2026 poz. 612 t.j.
   Oryginał DR-10 miał Dz.U. 2022 poz. 974 — NIEAKTUALNY
   → https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000612
 
-Ustawa refundacyjna: Dz.U. 2025 poz. 907 t.j. ze zm. (zm.: Dz.U. 2025 poz. 1192)
+Ustawa refundacyjna: Dz.U. 2026 poz. 253 t.j. ze zm. (zm.: Dz.U. 2025 poz. 1192)
   ✅ VER: isap.sejm.gov.pl 2026-06-05
 
 Ustawa o działalności leczniczej: Dz.U. 2026 poz. 156 t.j.

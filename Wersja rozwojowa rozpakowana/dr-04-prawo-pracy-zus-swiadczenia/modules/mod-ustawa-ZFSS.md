@@ -52,7 +52,7 @@ JEŚLI NIE działa zakładowa organizacja związkowa:
     po tej nowelizacji (ujednolicenie reprezentacji załogi)
 
 Pełna checklist redakcyjna regulaminu ZFŚS po tej zmianie →
-analizator-umow-v1/mod-J21-rodo-archiwizacja-regulaminy.md, sekcja J21.5
+analizator-umow-v1/references/mod-J21-rodo-archiwizacja-regulaminy.md, sekcja J21.5
 ```
 
 ## Odpis podstawowy (WERYFIKUJ AKTUALNIE!)

@@ -248,7 +248,7 @@ bankoweabc.pl).
 
 ## CROSS-REFERENCJE
 - Sankcja Kredytu Darmowego (odrębny temat konsumencki) →
-  `dr-02/modules/mod-ustawa-kredyt-konsumencki-SKD.md`
+  `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-kredyt-konsumencki-SKD.md`
 - Skład sądu, posiedzenia niejawne — ogólne zasady → `dr-02/modules/
   mod-sklad-sadu-liczba-sedziow.md`
 - ⭐⭐ ASPEKT MATERIALNOPRAWNY sporów frankowych (abuzywność klauzul
@@ -256,7 +256,7 @@ bankoweabc.pl).
   vs. dwóch kondykcji, orzecznictwo TSUE C-260/18 Dziubak i C-520/21)
   — POTWIERDZONE, ISTNIEJĄCY moduł DEDYKOWANY tej stronie sporu,
   ZAKTUALIZOWANY 2026-08-08 z powiązaniem zwrotnym do TEGO modułu →
-  `dr-02/modules/mod-KC-kredyty-frankowe.md` — TEN moduł (procedura)
+  `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-kredyty-frankowe.md` — TEN moduł (procedura)
   i TAMTEN (prawo materialne) CELOWO POZOSTAJĄ ODRĘBNE, NIE
   scalone — zgodnie z ustalonym wzorcem systemu (lazy loading wg
   tematu, patrz nota o wydzieleniu w mod-KC-kredyty-frankowe.md)

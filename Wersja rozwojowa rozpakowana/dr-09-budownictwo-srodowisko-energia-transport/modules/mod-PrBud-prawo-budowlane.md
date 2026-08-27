@@ -254,7 +254,7 @@ NIE SĄ małą architekturą: wolnostojące reklamy, tymczasowe obiekty
 | Akt | Aktualna sygnatura | Uwagi |
 |---|---|---|
 | **Prawo budowlane (PrBud)** | **Dz.U. 2026 poz. 524 t.j.** (obwieszczenie Marszałka Sejmu z 27.03.2026 r.) | Weryfikuj w isap.sejm.gov.pl przed każdym cytowaniem — kluczowy akt |
-| Ustawa o planowaniu i zagospodarowaniu przestrzennym | **Dz.U. 2024 poz. 1130 t.j.** + zmiany (poz. 1907, 1940; Dz.U. 2025 poz. 527, 680) — zawsze weryfikuj aktualny t.j. w ISAP | MPZP, WZ, decyzje lokalizacyjne |
+| Ustawa o planowaniu i zagospodarowaniu przestrzennym | **Dz.U. 2026 poz. 538 t.j.** + zmiany (poz. 1907, 1940; Dz.U. 2025 poz. 527, 680) — zawsze weryfikuj aktualny t.j. w ISAP | MPZP, WZ, decyzje lokalizacyjne |
 | Kodeks cywilny art. 647–658 | **tekst ujednolicony KC: Dz.U. 2025 poz. 1071, 1172, 1508 oraz Dz.U. 2026 poz. 184 i 507 t.j.** | Umowa o roboty budowlane |
 | Rozporządzenie w sprawie warunków technicznych (WT) | Weryfikuj aktualną wersję w isap | Wymagania techniczne obiektów |
 | KPA | **Dz.U. 2025 poz. 1691** | Postępowanie adm. przed PINB/WINB |
@@ -618,11 +618,11 @@ Sprawdź stan postępowań PRZED złożeniem wniosku o uproszczoną legalizację
 
 | Sytuacja | Skill / Moduł |
 |---|---|
-| Odwołanie od decyzji PINB / Starosty | `pisma-procesowe-v3` + `mod-G-administracyjne.md` |
+| Odwołanie od decyzji PINB / Starosty | `pisma-procesowe-v3` + `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` |
 | Skarga do WSA (budowlana) | `pisma-procesowe-v3` |
 | Pozew o wady robót / odszkodowanie | `pisma-procesowe-v3` |
 | Analiza umowy z wykonawcą | `analizator-umow-v1` |
-| Nieruchomość — KW, deweloper, najem | `mod-M-nieruchomosci.md` |
+| Nieruchomość — KW, deweloper, najem | `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KW-ksiega-wieczysta-zakup-nieruchomosci.md` + `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-deweloperska.md` + `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-ochrona-praw-lokatorow-najem-eksmisja.md` |
 | Analiza szans procesowych | `analiza-sadowa-v6` |
 | Orzecznictwo NSA / WSA (budowlane) | `orzeczenia-sadowe-v2` |
 
@@ -640,7 +640,7 @@ na budowę/użytkowanie albo pyta „co wolno zrobić na działce / w lokalu”,
 na ogólnym module budowlanym. Załaduj dodatkowo:
 
 ```
-view /mnt/skills/user/dr-08-samorzad-terytorialny-prawo-lokalne/modules/mod-MPZP-WZ-planowanie-przestrzenne.md
+view dr-08-samorzad-terytorialny-prawo-lokalne/modules/mod-MPZP-WZ-planowanie-przestrzenne.md
 ```
 
 Następnie wykonaj analizę dokumentową: symbol terenu → definicje → przeznaczenie
@@ -648,5 +648,5 @@ podstawowe/dopuszczalne → zakazy → parametry → zgodność planowanej dzia�
 Przy działalnościach takich jak restauracja, warsztat, hurtownia, żłobek, salon kosmetyczny
 lub magazyn załaduj także moduł procedur kontrolnych/inspekcyjnych:
 ```
-view /mnt/skills/user/dr-08-samorzad-terytorialny-prawo-lokalne/modules/mod-kontrola-administracji-inspekcje.md
+view dr-08-samorzad-terytorialny-prawo-lokalne/modules/mod-kontrola-administracji-inspekcje.md
 ```

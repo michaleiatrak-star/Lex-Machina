@@ -13,7 +13,7 @@ zatwierdzanie przez nadleśniczego, tusze i zwierzyna jako własność).
 
 **Status weryfikacji źródłowej:** pełna treść rozdziału pobrana w CAŁOŚCI
 jednym `web_fetch` ze strony rozdziałowej arslege.pl/lexlege (Rząd 2B,
-Dz.U.2025.0.539 t.j., stan deklarowany 17.08.2026) — artykuł po artykule,
+Dz.U. 2025 poz. 539 t.j., stan deklarowany 17.08.2026) — artykuł po artykule,
 z ustępami i punktami. Potwierdzenie zbieżne: ISAP PDF (Rząd 1,
 `isap.sejm.gov.pl/isap.nsf/download.xsp/WDU19951470713/U/D19950713Lj.pdf`)
 oraz gov.pl attachment (Rząd 1/2A) — zgodność treści art. 8, 15, 16
@@ -498,7 +498,7 @@ Sprawa dotyczy planu łowieckiego (rocznego)?
    temat sesji dedykowanej (F-13 lub nowa flaga).
 2. ✅ **ZWERYFIKOWANE (2026-08-18, F-91 pkt 13):** oznaczenie Dz.U. KPA w
    art. 8d — **AKTUALNE, było nowelizowane**: źródło aktualnej t.j. ustawy
-   (prawo.pl, treść Dz.U.2022.1173 t.j.) cytuje wewnątrz art. 8d oznaczenie
+   (prawo.pl, treść Dz.U. 2025 poz. 539 t.j.) cytuje wewnątrz art. 8d oznaczenie
    "**Dz. U. z 2024 r. poz. 572**" (aktualny t.j. KPA), NIE archiwalne
    "z 2017 r. poz. 1257 oraz z 2018 r. poz. 149" widoczne w źródle z 2018
    r. (projekt nowelizacji). Oznacza to, że odesłanie w art. 8d jest

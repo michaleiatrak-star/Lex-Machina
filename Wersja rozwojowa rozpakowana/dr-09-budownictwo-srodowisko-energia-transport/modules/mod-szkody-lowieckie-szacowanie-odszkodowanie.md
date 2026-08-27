@@ -11,7 +11,7 @@ prawie łowieckim: spory rolnik ↔ koło łowieckie.
 
 > ⛔ HARDGATE — `isap.sejm.gov.pl` blokuje `web_fetch` (ROBOTS_DISALLOWED).
 > Brzmienie ustalone ze źródeł Rząd 2 (arslege.pl `k539/s6338`, lexlege.pl,
-> sip.lex.pl — zgodne, sygnowane „Dz.U.2025.0.539 t.j."). Potwierdź t.j.
+> sip.lex.pl — zgodne, sygnowane „Dz.U.2025.0.539 t.j."). Potwierdź t.j.  <!-- zapis źródła cytowany dosłownie — CELOWO nieujednolicony (F-125, 2026-08-24d) -->
 > ręcznie w ISAP przed pismem.
 
 > 🔴 **PUŁAPKA ŹRÓDŁOWA — art. 46b JEST UCHYLONY.** Serwisy Rząd 2 renderują
@@ -195,7 +195,7 @@ WYPŁATA (ust. 3): ZE ŚRODKÓW DZIERŻAWCY albo ZARZĄDCY obwodu, nie później
 
 **Odesłanie do KPA (art. 49a):** w zakresie nieuregulowanym do postępowania
 nadleśniczego / dyrektora RDLP stosuje się ODPOWIEDNIO przepisy KPA
-(→ `dr-05/mod-KPA-postepowanie-administracyjne.md`).
+(→ `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md`).
 ⭐ **Wyłączenie szczególne (ust. 2-3):** nadleśniczy, dyrektor RDLP lub ich
 przedstawiciel **podlega wyłączeniu**, jeżeli jest CZŁONKIEM KOŁA ŁOWIECKIEGO
 będącego dzierżawcą obwodu, którego dotyczy postępowanie; stosuje się
@@ -308,13 +308,13 @@ powództwo do sądu: 3 MIESIĄCE             wypłata: 30 dni od doręczenia dec
   gatunków objętych OCHRONĄ GATUNKOWĄ (żubr, wilk, ryś, niedźwiedź, bóbr):
   art. 126 ustawy o ochronie przyrody, ODRĘBNY reżim i odrębny podmiot
   odpowiedzialny.
-- **`dr-05/mod-KPA-postepowanie-administracyjne.md`** — odesłanie z art. 49a
+- **`dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md`** — odesłanie z art. 49a
   ust. 1; art. 24 §3-4 KPA przy wyłączeniu z ust. 2-3.
 - **`dr-02`** (KPC, art. 362 i 481 KC) i **`dr-16`** — powództwo z art. 46e
   ust. 4, przyczynienie, odsetki.
 - **`dr-08`** — uchwała sejmiku województwa określająca okresy zbioru
   (art. 48 pkt 2) jako akt prawa miejscowego.
-- **`dr-13/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md`** — świadectwo
+- **`dr-13-sluzby-bezpieczenstwo-informacje-niejawne/modules/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md`** — świadectwo
   broni dla dzierżawcy/zarządcy obwodu (art. 29 ust. 1 pkt 8 BrońAmunU).
 
 ---
@@ -323,7 +323,7 @@ powództwo do sądu: 3 MIESIĄCE             wypłata: 30 dni od doręczenia dec
 
 - **Rząd 2:** arslege.pl `k539/s6338` — pełny Rozdz. 9 (art. 46-50);
   lexlege.pl `art-46`, `art-46e`; sip.lex.pl `prawo-lowieckie/roz-9` —
-  trzy niezależne źródła, treść zgodna, wszystkie sygnowane „Dz.U. 2025.539 t.j."
+  trzy niezależne źródła, treść zgodna, wszystkie sygnowane „Dz.U. 2025.539 t.j."  <!-- zapis źródła cytowany dosłownie — CELOWO nieujednolicony (F-125, 2026-08-24d) -->
 - **Rząd 1 (pośrednio):** t.j. Dz.U. 2025 poz. 539 zgodny z `dr-09/MAPA-AKTOW.md`
   (ISAP WDU20250000539 + ELI, weryfikacja 2026-08-14b, F-41).
 

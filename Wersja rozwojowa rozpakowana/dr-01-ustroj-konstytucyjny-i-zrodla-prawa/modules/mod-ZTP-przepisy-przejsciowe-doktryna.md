@@ -12,7 +12,7 @@ prawna i konstytucyjna, jak ją zakwalifikować w argumentacji).
 > Ten moduł (MOD-ZTP) odpowiada na PÓŹNIEJSZE pytanie: **jaką technikę zastosował
 > ustawodawca i czy jest ona zgodna z Konstytucją** — komplementarnie, nie zamiennie.
 
-**Zasada:** `view /mnt/skills/user/shared/PRAWO-HARDGATE.md` przed każdym przepisem z tego modułu.
+**Zasada:** `view shared/PRAWO-HARDGATE.md` przed każdym przepisem z tego modułu.
 
 ---
 
@@ -20,7 +20,7 @@ prawna i konstytucyjna, jak ją zakwalifikować w argumentacji).
 
 **Rozporządzenie Prezesa Rady Ministrów z dnia 20 czerwca 2002 r. w sprawie
 „Zasad techniki prawodawczej” (ZTP)**
-Dz.U. 2002 nr 100 poz. 908 → t.j. Dz.U. 2016 poz. 283 → ze zm. Dz.U. 2026
+Dz.U. 2002 nr 100 poz. 908 → t.j. Dz.U. 2026 poz. 300 → ze zm. Dz.U. 2026
 poz. 100 → **t.j. Dz.U. 2026 poz. 300** (obwieszczenie konsolidujące
 nowelizację z 26.01.2026, opublikowane przez RCL, "szeroki zakres
 wprowadzanych zmian" — luty 2026)
@@ -219,7 +219,7 @@ rozporządzenia niż niniejszy moduł) lub wymaga zmapowania, które przepisy
 aktu ogólnego wyłącza konkretna specustawa (graf zależności) — wywołaj:
 
 ```
-view /mnt/skills/user/dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-specustawy-lex-specialis-graf-zaleznosci.md
+view dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-specustawy-lex-specialis-graf-zaleznosci.md
 ```
 
 ## CHANGELOG

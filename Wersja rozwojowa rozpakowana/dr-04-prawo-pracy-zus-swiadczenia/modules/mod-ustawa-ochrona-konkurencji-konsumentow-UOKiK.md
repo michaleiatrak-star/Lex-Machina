@@ -1,7 +1,7 @@
 # mod-ustawa-ochrona-konkurencji-konsumentow-UOKiK
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o ochronie konkurencji i konsumentów (UOKIK) — Dz.U. 2024 poz. 1221 t.j. ze zm. | Ustawa o przeciwdziałaniu nieuczciwym praktykom rynkowym — weryfikuj t.j. w ISAP
+**Źródło weryfikacji:** Ustawa o ochronie konkurencji i konsumentów (UOKIK) — Dz.U. 2025 poz. 1714 t.j. ze zm. | Ustawa o przeciwdziałaniu nieuczciwym praktykom rynkowym — weryfikuj t.j. w ISAP
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -16,8 +16,8 @@ UOKiK (Urząd Ochrony Konkurencji i Konsumentów), praktyki naruszające zbiorow
 
 | Akt | Dz.U. / źródło |
 |---|---|
-| Ustawa o ochronie konkurencji i konsumentów | Dz.U. 2024 poz. 1221 t.j. ze zm. |
-| Ustawa o prawach konsumenta | Dz.U. 2023 poz. 2759 t.j. ze zm. |
+| Ustawa o ochronie konkurencji i konsumentów | Dz.U. 2025 poz. 1714 t.j. ze zm. |
+| Ustawa o prawach konsumenta | Dz.U. 2024 poz. 1796 t.j. ze zm. |
 | Ustawa o przeciwdziałaniu nieuczciwym praktykom rynkowym | weryfikuj aktualny t.j. w ISAP |
 | KC art. 385¹–385³ | klauzule abuzywne | Dz.U. 2025 poz. 1071 t.j. |
 | Dyrektywa Omnibus (2019/2161) | ceny promocyjne, opinie | wdrożona do prawa polskiego |
@@ -108,7 +108,7 @@ Rejestr klauzul niedozwolonych UOKiK:
 
 ```
 Obowiązek: przy promocji podawać najniższą cenę z 30 dni poprzedzających obniżkę
-  → art. 4a ustawy o prawach konsumenta (Dz.U. 2023 poz. 2759 t.j.)
+  → art. 4a ustawy o prawach konsumenta (Dz.U. 2024 poz. 1796 t.j.)
   ⚠️ Weryfikuj aktualne brzmienie w ISAP
 
 Naruszenie: kara UOKiK + roszczenie cywilne konsumenta

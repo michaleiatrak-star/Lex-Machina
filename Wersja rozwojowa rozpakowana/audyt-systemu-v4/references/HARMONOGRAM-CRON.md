@@ -7,7 +7,7 @@
 # Codziennie o 05:00, logi do pliku, raport trafia do katalogu współdzielonego
 # z zespołem odpowiedzialnym za sesje audytowe.
 0 5 * * * /usr/bin/python3 /opt/portal/sync-dzu/sync_dzu_eli.py \
-  --mapa /opt/portal/skills/audyt-systemu-v4/references/mapa_dzu_aktualna.md \
+  --mapa /opt/portal/skills/audyt-systemu-v4/references/mapa_dzu_2026-08-21.md \
   --since $(cat /opt/portal/sync-dzu/.last_sync_date) \
   --out /opt/portal/raporty/raport_roznic_$(date +\%Y-\%m-\%d).md \
   && date +\%Y-\%m-\%d > /opt/portal/sync-dzu/.last_sync_date
@@ -33,7 +33,7 @@ jobs:
       - name: Uruchom detekcję różnic
         run: |
           python skills/audyt-systemu-v4/scripts/sync_dzu_eli.py \
-            --mapa skills/audyt-systemu-v4/references/mapa_dzu_aktualna.md \
+            --mapa skills/audyt-systemu-v4/references/mapa_dzu_2026-08-21.md \
             --since "$(cat .last_sync_date)" \
             --out raporty/raport_roznic_$(date +%Y-%m-%d).md
       - name: Zapisz nową datę synchronizacji

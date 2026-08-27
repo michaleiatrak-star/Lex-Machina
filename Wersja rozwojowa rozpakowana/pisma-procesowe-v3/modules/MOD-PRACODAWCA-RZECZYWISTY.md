@@ -1,6 +1,6 @@
 # MOD-PRACODAWCA-RZECZYWISTY — Identyfikacja pracodawcy rzeczywistego w sprawach wielopodmiotowych
 
-> **Plik:** `/mnt/skills/user/pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md`
+> **Plik:** `pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md`
 > **Wersja:** 2.2.0 (2026-06-27)
 > **Status:** PRODUKCJA
 > **Pozycja w pipeline:** (A) W1.2 po CLAIM-VALIDATION gdy warunek poniżej; (B) PRE-W2.C gdy wykryto rozbieżność podmiotową
@@ -16,7 +16,7 @@ T2: ≥2 różne KRS przy tym samym pracodawcy w aktach
 T3: weryfikacja online pokazuje że KRS z umów ≠ KRS podmiotu wskazanego jako pracodawca
 T4: zmiana nazwy pracodawcy w kolejnych umowach bez trybu art. 23¹ KP
 
-→ NATYCHMIAST view /mnt/skills/user/pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md
+→ NATYCHMIAST view pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md
 → Wykonaj R1 → R2 → R3 → R4 → R5 (protokół poniżej)
 → Dopiero po RAPORCIE R5 z wynikiem OK → kontynuuj PRE-W2.D → W2.1
 ⛔ ZAKAZ przejścia do W2.1 bez zamkniętego RAPORTU R5 gdy T1/T2/T3/T4 aktywne
@@ -112,7 +112,7 @@ KAT-III: POZORNA ZMIANA (ten sam podmiot, inna nazwa)
 WARSTWA 0 — Dane większościowe (identyfikacja strony umowy) [KAT-I i KAT-II]
   ─────────────────────────────────────────────────────────────────────────────
   ⛔ WYWOŁAJ NAJPIERW — przed warstwami 1–4:
-  view /mnt/skills/user/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
+  view shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
   → Wykonaj ISU-1 → ISU-2 → ISU-3 → ISU-4 (jeśli konieczne) → ISU-5
   → Formuła ISU-5 [A] = gotowy akapit "Identyfikacja strony umowy" do pisma
 
@@ -150,7 +150,7 @@ WARSTWA 2 — Obejście prawa (art. 58 §1 k.c. w zw. z art. 300 k.p.)
   Teza: przeniesienie pracownika do powiązanej spółki bez art. 23¹ KP i bez przerwy,
   ze skutkiem resetowania limitu z art. 25¹ §1 KP, jest czynnością nieważną jako
   zmierzającą do obejścia normy ochronnej.
-  Podstawa: art. 58 §1 KC (Dz.U. z 2025 r. poz. 1071 t.j.) — "czynność mająca
+  Podstawa: art. 58 §1 KC (Dz.U. z 2026 r. poz. 795 t.j.) — "czynność mająca
   na celu obejście ustawy jest nieważna".
   Orzeczenie: SN z 01.04.2014 r., I PK 241/13 — "umową mającą na celu obejście
   prawa jest umowa, której treść formalnie nie sprzeciwia się ustawie, ale
@@ -276,11 +276,11 @@ HEDGE: OPCJA A (obie spółki aktywne — pozwanie współpozwanych)
 
 ```
 Wywołaj PRZED tym modułem (z PRE-W2):
-  view /mnt/skills/user/shared/PRE-W2-VERIFICATION-GATE.md (PRE-W2.C/D — wykrycie T1-T4)
+  view shared/PRE-W2-VERIFICATION-GATE.md (PRE-W2.C/D — wykrycie T1-T4)
 
 Wywołaj PRZED tym modułem (z W1.2):
-  view /mnt/skills/user/shared/MOD-STRATEGIA-WYBOR.md   (S1 identyfikuje ścieżki)
-  view /mnt/skills/user/pisma-procesowe-v3/modules/MOD-DOWODY.md (D6 eksploracja)
+  view shared/MOD-STRATEGIA-WYBOR.md   (S1 identyfikuje ścieżki)
+  view pisma-procesowe-v3/modules/MOD-DOWODY.md (D6 eksploracja)
 
 Zasilaj PO tym module:
   W1.3 (mapa cel→przesłanka→dowód) — tabela PR z R3 + RAPORT R5
@@ -529,8 +529,8 @@ Konkluzja: [podmiot X = pracodawca rzeczywisty / niejednoznaczne / brak podstaw]
 
 ```
 Wczytaj PRZED tym modułem:
-  view /mnt/skills/user/shared/MOD-STRATEGIA-WYBOR.md   (S1 identyfikuje ścieżki)
-  view /mnt/skills/user/pisma-procesowe-v3/modules/MOD-DOWODY.md (D6 eksploracja dowodów)
+  view shared/MOD-STRATEGIA-WYBOR.md   (S1 identyfikuje ścieżki)
+  view pisma-procesowe-v3/modules/MOD-DOWODY.md (D6 eksploracja dowodów)
 
 Zasilaj PO tym module:
   W1.3 (mapa cel→przesłanka→dowód) — używaj tabeli z PR4

@@ -10,7 +10,7 @@ Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źr
 - akty wykonawcze MSWiA
 - ⚠️ Kontrola przekraczania granicy w ramach małego ruchu granicznego (MRG) —
   rama prawna, umowy dwustronne i aktualny status obowiązywania/zawieszenia
-  → `dr-14/mod-maly-ruch-graniczny.md` (utworzony 2026-07-15, temat zmienny
+  → `dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/modules/mod-maly-ruch-graniczny.md` (utworzony 2026-07-15, temat zmienny
   politycznie — zawsze weryfikuj aktualny status przed sprawą)
 
 Nie cytuj literalnego brzmienia przepisu bez aktualnego sprawdzenia źródła. Przed użyciem artykułu ustal:

@@ -37,7 +37,7 @@ Pozew cywilny (dobra osobiste):   art. 4421 KC — 3 lata od dowiedzenia się o 
 | Sabotaż systemów informatycznych | art. 268a KK | do 3 (§1) / do 5 lat (§2) | na wniosek gdy os. bliska (art. 268a §3 KK) |
 | Zakłócenie pracy systemu (DDoS) | art. 269a KK | do 5 lat | z urzędu |
 | Wytwarzanie/obrót narzędziami hakerskimi | art. 269b KK | do 2 lat | z urzędu |
-| Phishing / wyłudzenie danych / oszustwo komputerowe | art. 287 KK | do 5 lat (§1); §3 (szkoda znaczna) do 8 lat | na wniosek gdy os. bliska (art. 287 §4 KK) |
+| Oszustwo komputerowe (phishing tylko wtedy, gdy spełnia znamiona przepisu) | art. 287 KK | 3 miesiące–5 lat (§ 1); wypadek mniejszej wagi: grzywna, ograniczenie wolności albo do roku (§ 2) | na wniosek, gdy czyn popełniono na szkodę osoby najbliższej (art. 287 § 3 KK) |
 | Kradzież tożsamości / podszywanie się | art. 190a §2 KK | 6 m–8 lat | na wniosek |
 | Stalking online | art. 190a §1 KK | 6 m–8 lat | na wniosek |
 | Groźby przez internet | art. 190 §1 KK | do 3 lat | na wniosek |
@@ -81,10 +81,15 @@ B. PLATFORMA / PORTAL:
    → Zgłoszenie naruszenia regulaminu (abuse report) — usunięcie treści (nie identyfikacja)
    → Platformy UE objęte DSA (Digital Services Act): obowiązek odpowiedzi na wniosek organu
 
-C. POWÓDZTWO CYWILNE O UJAWNIENIE DANYCH:
-   → Sąd cywilny może nakazać operatorowi ujawnienie danych abonenta
-   → Podstawa: art. 159 ust. 2 pkt 4 Prawa telekomunikacyjnego (Dz.U. 2024.1221 t.j.) lub odpowiednik w ustawie o komunikacji elektronicznej — weryfikuj aktualnie w isap.sejm.gov.pl
-   → Skuteczne np. wobec operatorów polskich — szybsze niż MLAT
+C. CYWILNE ŻĄDANIE IDENTYFIKACJI / ZABEZPIECZENIA DANYCH:
+   → Nie powołuj automatycznie art. 159 dawnego Prawa telekomunikacyjnego.
+     Dz.U. 2024 poz. 1221 to pierwotne ogłoszenie Prawa komunikacji
+     elektronicznej (PKE), a nie tekst jednolity Prawa telekomunikacyjnego.
+   → Przed żądaniem ustal aktualną podstawę w PKE, RODO/DSA, prawie
+     procesowym oraz status adresata (operator/platforma). Zakres tajemnicy
+     komunikowania i dopuszczalność ujawnienia zależą od rodzaju danych,
+     celu oraz właściwego trybu; sam pozew nie tworzy ogólnego obowiązku
+     wydania danych abonenta.
 
 D. EUROPEJSKI NAKAZ ZACHOWANIA DANYCH (e-Evidence):
    → Od 2026 r. wchodzi rozporządzenie UE e-Evidence — ułatwia trans-graniczne żądania
@@ -115,7 +120,7 @@ PODSTAWY (art. 23–24 KC + art. 448 KC):
   → Roszczenia: usunięcie skutków / przeproszenie / zadośćuczynienie / odszkodowanie
 
 PRAWO DO USUNIĘCIA TREŚCI:
-  → Platforma polska / EU: RODO art. 17 (bycie zapomnianym) → `mod-P-rodo.md`
+  → Platforma polska / EU: RODO art. 17 (bycie zapomnianym) → `dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-RODO-GDPR-2016-679.md`
   → Google: wniosek o usunięcie z wyników wyszukiwania (prawo do bycia zapomnianym)
   → DSA (Digital Services Act): procedury Notice & Action
 
@@ -148,17 +153,18 @@ REKOMENDACJA: □ Zawiadomienie karne  □ Pozew cywilny  □ Zgłoszenie platfo
 | Sytuacja | Skill |
 |---|---|
 | Zawiadomienie karne (hacking, phishing, DDoS) | `pisma-procesowe-v3` |
-| Pozew cywilny (dobra osobiste, wizerunek) | `pisma-procesowe-v3` + `mod-E-cywilne.md` |
-| Naruszenie danych osobowych (wyciek) | `mod-P-rodo.md` + `prawo-rodo.md` |
-| Naruszenie wizerunku + prawo autorskie | `mod-O-wlasnosc-intelektualna.md` |
-| Stalking online | `mod-J-stalking.md` + `stalking-nekanie.md` |
+| Pozew cywilny (dobra osobiste, wizerunek) | `pisma-procesowe-v3` + `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md` |
+| Naruszenie danych osobowych (wyciek) | `dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-RODO-GDPR-2016-679.md` + `dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-RODO-GDPR-2016-679.md` |
+| Naruszenie wizerunku + prawo autorskie | `dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-PrAut-wlasnosc-intelektualna-IP.md` |
+| Stalking online | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art190a-stalking.md` |
 | Analiza dowodów cyfrowych | `analizator-dowodow-v3` |
-| Tryby ścigania — pełna tabela | `tryby-scigania.md` |
-| Kwalifikacja karno-materialna | `kwalifikator-karnomaterialny.md` |
+| Tryby ścigania — pełna tabela | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KPK-tryby-scigania.md` |
+| Kwalifikacja karno-materialna | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md` |
 | Orzecznictwo SN / SA | `orzeczenia-sadowe-v2` |
 
 *KK: Dz.U. 2025 poz. 383 t.j. | Rozdział XXXIII — Przestępstwa przeciwko ochronie informacji*
-*Prawo telekomunikacyjne: Dz.U. 2024.1221 t.j. — weryfikuj w isap.sejm.gov.pl*
+*Prawo komunikacji elektronicznej: Dz.U. 2024 poz. 1221 (akt pierwotny,
+nie t.j.) — weryfikuj w ELI/ISAP wraz z późniejszymi zmianami*
 *DSA (Rozp. UE 2022/2065): stosowany od 17.02.2024 dla wszystkich platform*
 *e-Evidence (Rozp. UE 2023/1543): wdrożenie transgraniczne — weryfikuj stan w EUR-LEX*
 *Weryfikacja: 22.05.2026 — zakaz cytowania przepisów z pamięci*

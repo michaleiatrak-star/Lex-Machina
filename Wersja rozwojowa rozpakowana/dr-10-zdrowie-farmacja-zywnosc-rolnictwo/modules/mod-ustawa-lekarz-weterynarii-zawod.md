@@ -198,7 +198,7 @@ web_search: "odpowiedzialność cywilna lekarza weterynarii błąd w leczeniu or
 
 ## ⚖️ DISCLAIMER
 
-Po zakończeniu analizy: `view /mnt/skills/user/shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
+Po zakończeniu analizy: `view shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
 
 ---
 *mod-ustawa-lekarz-weterynarii-zawod.md · dr-10 · utworzony 2026-06-14*

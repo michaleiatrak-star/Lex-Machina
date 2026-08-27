@@ -18,7 +18,7 @@ leczniczych, wytwarzanie/GMP, reklamę, apteki, hurtownie.
 Ten moduł pokrywa **stronę regulacyjno-egzekucyjną** Prawa farmaceutycznego
 i ustawy refundacyjnej:
 
-1. Refundacja leków (ustawa z 12.05.2011, Dz.U. 2025 poz. 907 t.j.)
+1. Refundacja leków (ustawa z 12.05.2011, Dz.U. 2026 poz. 253 t.j.)
 2. Państwowa Inspekcja Farmaceutyczna (GIF/WIF) — struktura, tryb odwoławczy
 3. Sankcje karne i kary pieniężne (rozdział 9 PF, art. 124–129, 127)
 
@@ -26,7 +26,7 @@ i ustawy refundacyjnej:
 
 ## 1. REFUNDACJA LEKÓW
 
-### Ustawa refundacyjna z 12.05.2011 (Dz.U. 2025 poz. 907 t.j.)
+### Ustawa refundacyjna z 12.05.2011 (Dz.U. 2026 poz. 253 t.j.)
 
 ```
 LISTA LEKÓW REFUNDOWANYCH:
@@ -200,4 +200,4 @@ Odwołanie: do GIF / wniosek o uchylenie → skarga do WSA
 
 ## ⚖️ DISCLAIMER
 
-Po zakończeniu analizy: `view /mnt/skills/user/shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
+Po zakończeniu analizy: `view shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).

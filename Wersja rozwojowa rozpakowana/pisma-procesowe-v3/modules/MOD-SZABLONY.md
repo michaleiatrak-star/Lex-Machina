@@ -340,14 +340,14 @@ Teza 2: [...]
 
 ```
 Przed redakcją (W2.1) wczytaj DODATKOWO:
-  view /mnt/skills/user/shared/MOD-BUDOWA-ARGUMENTU.md     (schemat 7-el.)
-  view /mnt/skills/user/shared/MOD-KOSZT-ODPOWIEDZI.md     (KO-2/KO-6 inline)
-  view /mnt/skills/user/shared/MOD-SKUTEK-PROCESOWY.md     (SP-1 — nowe)
-  view /mnt/skills/user/shared/MOD-MIKROPODSUMOWANIA.md    (MK-1 — nowe)
-  view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md
+  view shared/MOD-BUDOWA-ARGUMENTU.md     (schemat 7-el.)
+  view shared/MOD-KOSZT-ODPOWIEDZI.md     (KO-2/KO-6 inline)
+  view shared/MOD-SKUTEK-PROCESOWY.md     (SP-1 — nowe)
+  view shared/MOD-MIKROPODSUMOWANIA.md    (MK-1 — nowe)
+  view shared/STRATEGIA-PROCESOWA.md
 
 Po W2 (przed W3):
-  view /mnt/skills/user/shared/MOD-STRESS-TEST.md          (ST-1 — OBOWIĄZKOWY)
+  view shared/MOD-STRESS-TEST.md          (ST-1 — OBOWIĄZKOWY)
   → Wykonaj ST-1. Wyświetl raport ST-2 użytkownikowi.
   → STATUS PASS → kontynuuj do W3/AUDYT-KOŃCOWY
   → STATUS FAIL → wróć do W2.2 + ST-FIX + ponów ST-1

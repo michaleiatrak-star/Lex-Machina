@@ -25,7 +25,7 @@ Marszałka Sejmu z 28.11.2025), ze zm. Dz.U. 2026 poz. 26
     dziennikustaw.gov.pl (obwieszczenie MRPiPS 16.03.2026 wciąż cytuje ten
     t.j. jako aktualny), forsal.pl — 2026-08-14 (F-77)
   ⚠️ [F-77] poprzedni zapis modułu (Dz.U. 2022 poz. 2189) był DWUKROTNIE
-  nieaktualny — pominięty pośredni t.j. Dz.U. 2025 poz. 257 (21.02.2025)
+  nieaktualny — pominięty pośredni t.j. Dz.U. 2025 poz. 1644 (21.02.2025)
 
 Kodeks pracy — art. 234–237 KP (obowiązki pracodawcy po wypadku)
   → weryfikuj: Dz.U. 2025 poz. 277 t.j. ze zm.
@@ -37,7 +37,7 @@ Kodeks pracy — art. 234–237 KP (obowiązki pracodawcy po wypadku)
 konieczne (nagłość/przyczyna zewnętrzna/uraz lub śmierć/związek z pracą),
 typy wypadków (lekki/ciężki/śmiertelny/zbiorowy) i wypadek zrównany (art. 3 ust.2)
 są w jednym, bardziej szczegółowym miejscu:
-→ `view /mnt/skills/user/shared/definicje/DEF-PRACA.md` (sekcja H.1.4)
+→ `view shared/definicje/DEF-PRACA.md` (sekcja H.1.4)
 
 ### INTAKE wypadkowy — pytania obowiązkowe
 ```

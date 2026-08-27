@@ -55,9 +55,9 @@ START: Czy naruszenie nietykalności (art. 222) połączone było z
 DZIAŁANIEM WSPÓLNYM Z INNĄ OSOBĄ lub UŻYCIEM BRONI PALNEJ, NOŻA lub
 INNEGO PODOBNIE NIEBEZPIECZNEGO PRZEDMIOTU albo ŚRODKA OBEZWŁADNIAJĄCEGO?
 │
-└─ TAK → art. 223 §1 KK → 3 m-ce – 5 lat (typ kwalifikowany względem
+└─ TAK → art. 223 §1 KK → od roku do 10 lat (typ kwalifikowany względem
    art. 222) — §2: ze skutkiem w postaci ciężkiego uszczerbku na
-   zdrowiu → 1-10 lat
+   zdrowiu → od 2 do 15 lat
 ```
 
 ---
@@ -69,9 +69,12 @@ START: Czy sprawca przemocą lub groźbą bezprawną wywierał wpływ na
 czynności urzędowe funkcjonariusza (zmuszał do przedsięwzięcia lub
 zaniechania prawnej czynności) LUB stawiał OPÓR czynności służbowej?
 │
-├─ Zmuszanie (art. 224 §1) → do 3 lat
-└─ Opór lub przemoc wobec funkcjonariusza/osoby przybranej podczas
-   pełnienia obowiązków (art. 224 §2) → 3 m-ce – 5 lat
+├─ Wpływ przemocą lub groźbą na czynności urzędowe organu (art. 224 §1)
+│  → do 3 lat
+├─ Przemoc lub groźba w celu zmuszenia funkcjonariusza albo osoby
+│  przybranej do podjęcia lub zaniechania prawnej czynności służbowej
+│  (art. 224 §2) → do 3 lat
+└─ Skutek z art. 156 §1 albo art. 157 §1 (art. 224 §3) → 3 m-ce – 5 lat
 ```
 
 ⚠️ **Różnica 222 vs 224 §2:** art. 222 dotyczy naruszenia NIETYKALNOŚCI
@@ -89,8 +92,10 @@ kumulatywny w praktyce.
 | Znieważenie funkcjonariusza | art. 226 §1 | grzywna/ogr. wolności/do 1 roku | z urzędu |
 | Znieważenie organu konstytucyjnego | art. 226 §3 | grzywna/ogr. wolności/do 2 lat | z urzędu |
 | Naruszenie nietykalności funkcjonariusza | art. 222 §1 | grzywna/ogr. wolności/do 3 lat | z urzędu |
-| Czynna napaść (grupa/broń) | art. 223 §1 | 3 m-ce – 5 lat | z urzędu |
-| Zmuszanie / opór | art. 224 §1-2 | do 3 lat / 3 m-ce – 5 lat | z urzędu |
+| Czynna napaść (wspólnie/broń/niebezpieczny przedmiot/środek obezwładniający) | art. 223 §1 | 1–10 lat | z urzędu |
+| Czynna napaść ze skutkiem ciężkiego uszczerbku | art. 223 §2 | 2–15 lat | z urzędu |
+| Wpływ na organ / zmuszanie funkcjonariusza | art. 224 §1-2 | do 3 lat | z urzędu |
+| Zmuszanie ze skutkiem z art. 156 §1 lub 157 §1 | art. 224 §3 | 3 m-ce – 5 lat | z urzędu |
 
 ⚠️ Zagrożenia do potwierdzenia na isap.sejm.gov.pl przed użyciem w
 piśmie (PRAWO-HARDGATE).

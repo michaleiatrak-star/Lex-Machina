@@ -143,10 +143,10 @@ Mechanizmy współpracy przewidziane w Konwencji: ekstradycja, wzajemna
 
 | Zagadnienie | Moduł |
 |---|---|
-| Art. 258 KK (udział w grupie/związku przestępczym) | dr-03/mod-KK-kwalifikator-karnomaterialny.md BLOK H |
-| Pranie pieniędzy (art. 299 KK) | dr-03/mod-KK-art291-pranie-pieniedzy.md |
-| Przestępstwa skarbowe (KKS), zbieg z art. 258 przy karuzelach VAT | dr-03/mod-KKS-karny-skarbowy-i-AML.md |
-| Ramy ogólne prawa UE, autonomia prawa UE, TSUE | dr-14/mod-TFUE-TUE-prawo-pierwotne-UE.md |
+| Art. 258 KK (udział w grupie/związku przestępczym) | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md BLOK H |
+| Pranie pieniędzy (art. 299 KK) | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art291-pranie-pieniedzy.md |
+| Przestępstwa skarbowe (KKS), zbieg z art. 258 przy karuzelach VAT | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KKS-karny-skarbowy-i-AML.md |
+| Ramy ogólne prawa UE, autonomia prawa UE, TSUE | dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/modules/mod-TFUE-TUE-prawo-pierwotne-UE.md |
 | Ekstradycja jako część immunitetów/stosunków dyplomatycznych | dr-13 (służby, jeśli dotyczy) |
 
 ## Weryfikacja online

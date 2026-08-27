@@ -110,10 +110,10 @@ Przed wygenerowaniem pisma lub analizy odpowiedz:
 
 ## 9. POWIĄZANIA
 
-- `mod-CB-zandarmeria-wojskowa-obrona.md`
-- `mod-BT-sluzby-mundurowe-dyscyplinarne.md`
-- `mod-N-karne.md`
-- `mod-BR-prawo-medyczne-orzecznicze-i-komisje.md`
+- `dr-13-sluzby-bezpieczenstwo-informacje-niejawne/modules/mod-ustawa-zandarmeria-wojskowa.md`
+- `dr-13-sluzby-bezpieczenstwo-informacje-niejawne/SKILL.md` → dobierz właściwy moduł ustawy danej służby (Policja/SG/PSP/ABW-AW-CBA/SKW-SWW/ŻW)
+- `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md`
+- `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-medyczne-szczegolowy.md`
 
 ## 10. OUTPUT
 

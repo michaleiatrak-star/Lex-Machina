@@ -15,7 +15,7 @@ Zakres: dostępność architektoniczna, cyfrowa i informacyjno-komunikacyjna obi
 
 **Akt:** Ustawa z 19.07.2019 r. o zapewnianiu dostępności osobom ze szczególnymi potrzebami — Dz.U. 2024 poz. 1411 t.j. (⚡ SKORYGOWANE 2026-08-21 — poprzednia wersja tego modułu błędnie cytowała Dz.U. 2022 poz. 2240, mimo że lokalna mapa dr-05/MAPA-AKTOW.md już od 2026-08-14 miała poprawny numer 2024.1411, zweryfikowany krzyżowo z dr-10).
 
-⭐ **PODZIAŁ ZAKRESU Z dr-10/mod-ustawa-edukacja-specjalna-dostepnosc.md**
+⭐ **PODZIAŁ ZAKRESU Z dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-edukacja-specjalna-dostepnosc.md**
 (uzupełniony 2026-08-21, F-45): TEN moduł (dr-05) — kątem administracyjno-
 -proceduralnym, eskalacja do WSA; dr-10 — pełne omówienie trybu
 trójstopniowego (informacja/wniosek/skarga PFRON) oraz styk z edukacją

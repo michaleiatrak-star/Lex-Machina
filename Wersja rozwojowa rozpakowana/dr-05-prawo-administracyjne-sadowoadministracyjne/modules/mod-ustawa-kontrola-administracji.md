@@ -10,7 +10,7 @@
 
 Zakres: kontrola planowa i doraźna działalności organów administracji rządowej i jednostek podległych; prawa i obowiązki kontrolowanego; protokół kontroli; zalecenia pokontrolne; sankcje za niewykonanie.
 
-**Akt:** Ustawa z 15.07.2011 r. o kontroli w administracji rządowej — Dz.U. 2020 poz. 224 t.j. ze zm.
+**Akt:** Ustawa z 15.07.2011 r. o kontroli w administracji rządowej — Dz.U. 2026 poz. 158 t.j. ze zm.
 
 ---
 
@@ -58,7 +58,7 @@ Zalecenia pokontrolne:
 
 **Output:** Kwalifikacja kontroli → prawa i obowiązki → zastrzeżenia → realizacja zaleceń → rekomendacja.
 
-**Powiązania:** DR-07 (NIK, RIO) | `dr-04` → `mod-KPA` | `pisma-procesowe-v3`
+**Powiązania:** DR-07 (NIK, RIO) | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` | `pisma-procesowe-v3`
 
 **Źródła:** https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20200000224
 
@@ -67,7 +67,7 @@ Zalecenia pokontrolne:
 ## WERYFIKACJA Dz.U.
 
 ```
-Ustawa o kontroli w administracji rządowej: Dz.U. 2020 poz. 224 t.j.
+Ustawa o kontroli w administracji rządowej: Dz.U. 2026 poz. 158 t.j.
   ✅ VER: isap.sejm.gov.pl 2026-06-05
   Nowszy t.j. NIE został ogłoszony — Dz.U. 2020 poz. 224 jest aktualnym t.j.
   → Weryfikuj zmiany po t.j. w ISAP: isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20200000224

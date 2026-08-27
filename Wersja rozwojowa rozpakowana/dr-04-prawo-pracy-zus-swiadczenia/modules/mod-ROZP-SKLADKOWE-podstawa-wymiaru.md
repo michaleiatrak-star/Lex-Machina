@@ -314,7 +314,7 @@ składkowy:
        Dz.U. 2025 poz. 620) — ponad 9-krotny wzrost
     → cross-ref: mod-ustawa-rynek-pracy-zatrudnienie
 
-[4] KARNA  → kwalifikacja przez dr-03/mod-KK-kwalifikator-karnomaterialny.md
+[4] KARNA  → kwalifikacja przez dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
     art. 219 KK  — niezgłoszenie/zgłoszenie nieprawdziwych danych mających
                    wpływ na prawo do świadczeń albo ich wysokość
                    → grzywna / ogr. wolności / do 2 LAT
@@ -385,7 +385,7 @@ stanie faktycznym, nie chroni.
 □ Czy przy pkt 26 sprawdzono WSZYSTKIE 5 przesłanek (P1-P5), w tym § 3?
 □ Czy przy ZFŚS sprawdzono kryterium socjalne i RZECZYWISTE zróżnicowanie kwot?
 □ Czy przedstawiono PEŁNĄ kaskadę sankcji [1]-[6], w tym skutki dla pracowników?
-□ Czy — przy wątku karnym — wczytano dr-03/mod-KK-kwalifikator-karnomaterialny.md?
+□ Czy — przy wątku karnym — wczytano dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md?
 □ Czy zaznaczono, że orzecznictwo z sekcji 8 wymaga weryfikacji uzasadnień?
 □ Czy DISCLAIMER jest ostatnim elementem odpowiedzi?
 ```

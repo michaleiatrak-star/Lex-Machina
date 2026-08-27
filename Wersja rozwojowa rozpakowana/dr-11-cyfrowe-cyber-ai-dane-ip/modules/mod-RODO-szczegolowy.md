@@ -122,7 +122,7 @@ WARUNKI LEGALNOŚCI MONITORINGU WIZYJNEGO:
     miejsc odpoczynku (chyba że wymagają tego szczególne warunki — art. 22² §2 KP)
   □ Przechowywanie: max 3 miesiące (chyba że dowód w postępowaniu)
 
-MONITORING POCZTY E-MAIL (art. 22³ KP — weryfikuj numerację w aktualnym t.j. KP Dz.U. 2025.277):
+MONITORING POCZTY E-MAIL (art. 22³ KP — weryfikuj numerację w aktualnym t.j. KP Dz.U. 2025 poz. 277):
   → Cel: weryfikacja wykonania pracy
   → Zakaz naruszania tajemnicy korespondencji i dóbr osobistych
   → Te same wymogi informacyjne jak monitoring wizyjny
@@ -177,13 +177,13 @@ REKOMENDACJA: □ Skarga UODO  □ Pozew cywilny  □ Oba  □ Wezwanie przedsą
 | Pozew o odszkodowanie RODO | `pisma-procesowe-v3` |
 | Skarga do UODO | `pisma-proste-v2` |
 | Wezwanie przedsądowe do ADM | `pisma-proste-v2` |
-| Naruszenie wizerunku + IP | `mod-O-wlasnosc-intelektualna.md` |
-| Monitoring pracowników — KP | `mod-A-prawo-pracy.md` + `prawo-pracy.md` |
+| Naruszenie wizerunku + IP | `dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-PrAut-wlasnosc-intelektualna-IP.md` |
+| Monitoring pracowników — KP | `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-KP-prawo-pracy.md` |
 | Analiza szans procesowych | `analiza-sadowa-v6` |
 | Orzecznictwo TSUE / sądy polskie | `orzeczenia-sadowe-v2` |
 | Redakcja/audyt: polityka prywatności, RCP/RCO, IOD, naruszenia (procedura wewnętrzna), archiwizacja/retencja, regulamin pracy/wynagradzania/ZFŚS/monitoringu | `analizator-umow-v1` → `mod-J21-rodo-archiwizacja-regulaminy.md` (J21) |
 
 *RODO (UE) 2016/679 → eur-lex.europa.eu*
-*Ustawa o ODO (Dz.U. 2019.1781 — weryfikuj aktualny t.j. w isap.sejm.gov.pl)*
-*KP art. 22²–22³ (Dz.U. 2025.277 t.j.) | Wytyczne EROD: edpb.europa.eu*
+*Ustawa o ODO (Dz.U. 2019 poz. 1781 — weryfikuj aktualny t.j. w isap.sejm.gov.pl)*
+*KP art. 22²–22³ (Dz.U. 2025 poz. 277 t.j.) | Wytyczne EROD: edpb.europa.eu*
 *Weryfikacja: 22.05.2026 — zakaz cytowania przepisów z pamięci*

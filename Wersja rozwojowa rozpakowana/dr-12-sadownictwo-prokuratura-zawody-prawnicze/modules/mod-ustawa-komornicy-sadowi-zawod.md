@@ -22,7 +22,7 @@ odpowiedzialność karna (przekroczenie uprawnień).
 
 ```
 Ustawa o komornikach sądowych:
-  Dz.U. 2024 poz. 1458 t.j.
+  Dz.U. 2026 poz. 881 t.j.
   ✅ VER: isap.sejm.gov.pl 2026-06-05
   → https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240001458
 

@@ -1,7 +1,7 @@
 # W3-WERYFIKACJA — Weryfikacja przepisów, orzeczeń i walidacja (W3.1–W3.7)
 
 > Wydzielono z pisma-procesowe-v3/SKILL.md (v5.5) — redukcja NOTA-4
-> Wywołanie: `view /mnt/skills/user/pisma-procesowe-v3/references/W3-WERYFIKACJA.md`
+> Wywołanie: `view pisma-procesowe-v3/references/W3-WERYFIKACJA.md`
 > Zawiera: W3.1 (ISAP), W3.2 (orzeczenia + ZAKRES-STOSOWANIA), W3.3 (MOD-FAKTY),
 >   W3.4 (MOD-WALIDACJA bloki A–J + moduły warunkowe), W3.5 (HYBRID-VALIDATION),
 >   W3.6 (raport W3 + pismo finalne), W3.6a (AUDYT-KOŃCOWY), W3.7 (PEER-REVIEW + PV).
@@ -108,7 +108,7 @@ Nie cytuj orzeczeń na podstawie samej tezy bez weryfikacji stanu faktycznego.
 Orzeczenia z ograniczonym zakresem (WARN-ZAKRES) można użyć tylko pomocniczo,
 z jawnym wskazaniem ograniczenia i równoległym silniejszym orzeczeniem.
 
-`view /mnt/skills/user/orzeczenia-sadowe-v2/SKILL.md`  (gdy potrzebne szerokie wyszukiwanie)
+`view orzeczenia-sadowe-v2/SKILL.md`  (gdy potrzebne szerokie wyszukiwanie)
 
 ---
 
@@ -116,7 +116,7 @@ z jawnym wskazaniem ograniczenia i równoległym silniejszym orzeczeniem.
 
 ```
 Czy użytkownik dostarczył materiały źródłowe?
-  TAK → view /mnt/skills/user/shared/FAKTY_v2.md
+  TAK → view shared/FAKTY_v2.md
         Procedura F1/F2/F3 — weryfikacja każdego faktu w piśmie
         ⛔ FIKCJA lub ⛔ BRAK ŹRÓDŁA → BLOKADA finalizacji
   NIE → pomiń W3.3
@@ -127,7 +127,7 @@ Czy użytkownik dostarczył materiały źródłowe?
 ### W3.4 — MOD-WALIDACJA (zawsze)
 
 ```
-view /mnt/skills/user/shared/MOD-WALIDACJA_v2.md
+view shared/MOD-WALIDACJA_v2.md
 ```
 
 Wykonaj wszystkie bloki A–J. Raport walidacyjny obowiązkowy:
@@ -136,66 +136,66 @@ Wykonaj wszystkie bloki A–J. Raport walidacyjny obowiązkowy:
 BLOK A — wymogi proceduralne (właściwość, strony, opłata, podpis)
 BLOK B — spójność wewnętrzna (fakty ↔ dowody, kwoty, daty)
 BLOK C — styl procesowy (oceny moralne, ogólne negacje, precyzja wniosków)
-         Po Bloku C zawsze: view /mnt/skills/user/shared/MOD-KONCENTRACJA.md
+         Po Bloku C zawsze: view shared/MOD-KONCENTRACJA.md
          → raport długości per typ pisma (WARN/ALERT gdy za długie)
-         → view /mnt/skills/user/shared/QUALITY-CHECK.md (kontrola redakcyjna + logiczna)
-         → QUALITY-CHECK §5: view /mnt/skills/user/shared/MOD-INTRO.md (executive summary)
+         → view shared/QUALITY-CHECK.md (kontrola redakcyjna + logiczna)
+         → QUALITY-CHECK §5: view shared/MOD-INTRO.md (executive summary)
 BLOK D — terminy i prekluzja
-         view /mnt/skills/user/shared/TERM-CALC.md (zawsze gdy termin zawity lub
+         view shared/TERM-CALC.md (zawsze gdy termin zawity lub
          środek zaskarżenia lub przedawnienie)
 BLOK E — logika prawna (przepis + fakt + dowód dla każdego roszczenia)
-         view /mnt/skills/user/shared/ROSZCZENIA.md (gdy ≥2 roszczenia lub żądanie ewentualne)
+         view shared/ROSZCZENIA.md (gdy ≥2 roszczenia lub żądanie ewentualne)
 BLOK F — ryzyka procesowe (co można zaatakować, przyznania niekorzystne)
-         view /mnt/skills/user/shared/RISK-ASSESSMENT.md (zawsze)
+         view shared/RISK-ASSESSMENT.md (zawsze)
 BLOK G — intertemporalność (brzmienie na datę zdarzenia)
-         view /mnt/skills/user/shared/ISAP-AUDIT-PROTOCOL.md (gdy akty mogły być
+         view shared/ISAP-AUDIT-PROTOCOL.md (gdy akty mogły być
          nowelizowane między datą zdarzenia a datą pisma)
 BLOK H — zgodność z materiałem źródłowym (zakaz fabrykowania faktów)
 BLOK I — skrzyżowanie pismo ↔ dostarczone dowody
-         view /mnt/skills/user/shared/DOWODY-METODOLOGIA.md (gdy ≥3 dowody lub
+         view shared/DOWODY-METODOLOGIA.md (gdy ≥3 dowody lub
          dowód pośredni/ryzykowny)
-         view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md (gdy pismo w toku
+         view shared/PREKLUZJA-DOWODOWA.md (gdy pismo w toku
          postępowania lub sprawa gospodarcza)
-         view /mnt/skills/user/shared/EXPERT-OPINION-AUDIT.md (gdy w aktach jest
+         view shared/EXPERT-OPINION-AUDIT.md (gdy w aktach jest
          opinia biegłego lub pismo kwestionuje biegłego)
 BLOK J — weryfikacja statusu prawnego aktów (FSL/LSL) — nowość v2.0:
           przed Blokiem J wywołaj:
-          view /mnt/skills/user/shared/FACT-SOURCE-LOCK.md
-          view /mnt/skills/user/shared/LEGAL-STATUS-LOCK.md
+          view shared/FACT-SOURCE-LOCK.md
+          view shared/LEGAL-STATUS-LOCK.md
 ```
 
 Moduły proceduralne shared (wczytaj zawsze przed blokami):
 ```text
-view /mnt/skills/user/shared/TRYBY-PROCESOWE.md
-view /mnt/skills/user/shared/FORMAL-CHECK.md
-view /mnt/skills/user/shared/BRAKI-FORMALNE.md
-view /mnt/skills/user/shared/WARUNKI-SKUTECZNOSCI.md
-view /mnt/skills/user/shared/RISK-ASSESSMENT.md
-view /mnt/skills/user/shared/QUALITY-CHECK.md
+view shared/TRYBY-PROCESOWE.md
+view shared/FORMAL-CHECK.md
+view shared/BRAKI-FORMALNE.md
+view shared/WARUNKI-SKUTECZNOSCI.md
+view shared/RISK-ASSESSMENT.md
+view shared/QUALITY-CHECK.md
 ```
 
 Moduły jakości prawnej (zawsze po BLOK E):
 ```text
-view /mnt/skills/user/shared/LEGAL-QUALITY-GATE.md   (bramka: PASS/PASS-WITH-WARNING/FAIL
+view shared/LEGAL-QUALITY-GATE.md   (bramka: PASS/PASS-WITH-WARNING/FAIL
                                                        — blokuje .docx gdy FAIL)
-view /mnt/skills/user/shared/ORZECZENIA-HIERARCHIA.md (gdy pismo powołuje orzecznictwo)
+view shared/ORZECZENIA-HIERARCHIA.md (gdy pismo powołuje orzecznictwo)
 ```
 
 Moduły warunkowe (triggery obowiązkowe — NIE "zależnie od sprawy"):
 ```text
-view /mnt/skills/user/shared/TERM-CALC.md            → ZAWSZE gdy: termin zawity / środek
+view shared/TERM-CALC.md            → ZAWSZE gdy: termin zawity / środek
                                                         zaskarżenia / przedawnienie roszczenia
-view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md   → ZAWSZE gdy: pismo po pierwszym /
+view shared/PREKLUZJA-DOWODOWA.md   → ZAWSZE gdy: pismo po pierwszym /
                                                         sprawa gospodarcza / twierdzenia nowe
-view /mnt/skills/user/shared/DOWODY-METODOLOGIA.md   → ZAWSZE gdy: ≥3 dowody w sprawie /
+view shared/DOWODY-METODOLOGIA.md   → ZAWSZE gdy: ≥3 dowody w sprawie /
                                                         dowód pośredni lub kontekstowy
-view /mnt/skills/user/shared/ROSZCZENIA.md           → ZAWSZE gdy: ≥2 roszczenia /
+view shared/ROSZCZENIA.md           → ZAWSZE gdy: ≥2 roszczenia /
                                                         żądanie ewentualne / alternatywne
-view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md  → ZAWSZE gdy: pismo kończące etap /
+view shared/STRATEGIA-PROCESOWA.md  → ZAWSZE gdy: pismo kończące etap /
                                                         ryzyko procesowe WYSOKIE lub KRYTYCZNE
-view /mnt/skills/user/shared/ISAP-AUDIT-PROTOCOL.md  → ZAWSZE gdy: akty mogły być nowelizowane
+view shared/ISAP-AUDIT-PROTOCOL.md  → ZAWSZE gdy: akty mogły być nowelizowane
                                                         między datą zdarzenia a datą pisma
-view /mnt/skills/user/shared/EXPERT-OPINION-AUDIT.md → ZAWSZE gdy: opinia biegłego w aktach /
+view shared/EXPERT-OPINION-AUDIT.md → ZAWSZE gdy: opinia biegłego w aktach /
                                                         pismo kwestionuje biegłego
 ```
 
@@ -204,7 +204,7 @@ view /mnt/skills/user/shared/EXPERT-OPINION-AUDIT.md → ZAWSZE gdy: opinia bieg
 ### W3.5 — HYBRID-VALIDATION (zawsze po walidacji)
 
 ```
-view /mnt/skills/user/shared/HYBRID-VALIDATION.md
+view shared/HYBRID-VALIDATION.md
 ```
 
 FAZA 1: auto-raport braków 🔴/🟡/🔵 bez pytania o zgodę
@@ -234,20 +234,20 @@ STATUS PISMA: [GOTOWE / PROJEKT — uzupełnij przed złożeniem]
 
 ### W3.6a — AUDYT-KOŃCOWY (gate przed .docx)
 
-> Wywołaj: `view /mnt/skills/user/shared/AUDYT-KONCOWY.md`
+> Wywołaj: `view shared/AUDYT-KONCOWY.md`
 
 Wykonuj zawsze, niezależnie od typu pisma — bez warunku aktywacji.
 
 **Krok 1 — COURT-SIMULATION (przed punktową oceną):**
 ```
-view /mnt/skills/user/pisma-procesowe-v3/references/engines/court-simulation-engine.md
+view pisma-procesowe-v3/references/engines/court-simulation-engine.md
 ```
 Wykonaj 10 pytań symulacji sądu. Wyniki zasilają bezpośrednio kategorię
 "Realizm sądowy" w AUDYT-KONCOWY (nie wykonuj obu niezależnie).
 
 **Krok 2 — LEGAL-QUALITY-GATE (bramka jakości prawa):**
 ```
-view /mnt/skills/user/shared/LEGAL-QUALITY-GATE.md
+view shared/LEGAL-QUALITY-GATE.md
 ```
 Wynik: PASS → kontynuuj; PASS-WITH-WARNING → zaznacz w raporcie;
 FAIL → ⛔ BLOKADA .docx — wróć do W3.1 dla problematycznych przepisów.
@@ -274,7 +274,7 @@ Aktywuj gdy CHOĆBY JEDNO jest prawdą:
   □ użytkownik użył zwrotu "peer review" / "adwokat diabła" / "sprawdź jeszcze raz"
 
 Jeśli aktywny:
-view /mnt/skills/user/shared/MOD-PEER-REVIEW.md
+view shared/MOD-PEER-REVIEW.md
 
 Wykonaj 4 role: Adwokat diabła (ATAK-n), Sędzia (UWAGA-SĄDU-n),
 Klient (INTERES-KLIENTA-n), Audyt spójności (SPÓJNOŚĆ-n).
@@ -284,7 +284,7 @@ PEER-STOP = ⛔ BLOKADA .docx — wykonaj wskazaną korektę, powtórz ocenę.
 
 **Krok 2 — POST-VALIDATION (zawsze):**
 ```
-view /mnt/skills/user/shared/POST-VALIDATION.md
+view shared/POST-VALIDATION.md
 
 FAZA 1: automatyczny raport braków 🔴/🟡/🔵 (bez pytania o zgodę)
 FAZA 2: wstaw dane użytkownika per numer → jeśli brak → ⬛
@@ -322,11 +322,11 @@ Zawartość: generuj dynamicznie per sprawę na podstawie:
 ### Po W3.7 — generowanie .docx i finalizacja
 
 ```
-⛔ STRIP-VER-GATE → view /mnt/skills/user/shared/WERYFIKACJA-SLAD.md § STRIP-VER-GATE
+⛔ STRIP-VER-GATE → view shared/WERYFIKACJA-SLAD.md § STRIP-VER-GATE
   Wykonaj SVG-1 → SVG-2 → SVG-3 przed generowaniem pliku.
   Blokada: nie wywołuj docx/SKILL.md dopóki SVG-1–SVG-3 niezamknięte.
 
-view /mnt/skills/public/docx/SKILL.md → generuj .docx
+view HOST_CAPABILITY[document_generation] → generuj .docx
 
 ⛔ HARD GATE STEP-DISCLOSURE → wykonaj ST-FINAL (REJESTR KROKÓW).
   Jeśli ≥1 krok wymagany ma status ⚠️ POMINIĘTY lub ○ OCZEKUJE →
@@ -335,5 +335,5 @@ view /mnt/skills/public/docx/SKILL.md → generuj .docx
 
 present_files (dopiero gdy ST-FINAL = FINAL, albo po świadomej zgodzie „a")
 
-view /mnt/skills/user/shared/raport-sytuacyjny-integracja.md → propozycja Raportu Sytuacyjnego
+view shared/raport-sytuacyjny-integracja.md → propozycja Raportu Sytuacyjnego
 ```

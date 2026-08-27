@@ -140,7 +140,7 @@ Standard odpowiedzi/pisma:
 
 ```
 Prawo o prokuraturze:
-  Dz.U. 2024 poz. 390 t.j. ze zm.
+  Dz.U. 2026 poz. 810 t.j. ze zm.
   ✅ VER: isap.sejm.gov.pl 2026-06-05
   → https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000390
 

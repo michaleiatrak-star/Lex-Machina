@@ -9,7 +9,7 @@ ulgi innowacyjne, estoński CIT — definicje precyzowane przez KIS/MF/NSA.
 
 | Akt | Dz.U./źródło | Uwaga |
 |---|---|---|
-| Ordynacja podatkowa (Op) | Dz.U. 2025 poz. 111 t.j. ze zm. | art. 14a–14p (interpretacje), art. 86a–86o (MDR) |
+| Ordynacja podatkowa (Op) | Dz.U. 2026 poz. 622 t.j. ze zm. | art. 14a–14p (interpretacje), art. 86a–86o (MDR) |
 | KPA | Dz.U. 2025 poz. 1691 t.j. | tryb posiłkowy w interpretacjach (ograniczony) |
 | Baza EUREKA | podatki.gov.pl/eureka | wyszukiwarka interpretacji od 04.10.2021 |
 | Baza interpretacji MF | interpretacje.podatki.gov.pl | dodatkowe szukanie |
@@ -235,7 +235,7 @@ DEFINICJA UKRYTEGO ZYSKU (art. 28m ust. 3 CIT — weryfikuj ISAP):
 ## 3. SCHEMATY PODATKOWE (MDR) — DEFINICJE I KLUCZOWE INTERPRETACJE
 
 ```
-PODSTAWA: art. 86a–86o Op (Dz.U. 2025 poz. 111 t.j.) + dyrektywa DAC6
+PODSTAWA: art. 86a–86o Op (Dz.U. 2026 poz. 622 t.j.) + dyrektywa DAC6
 
 DEFINICJA SCHEMATU PODATKOWEGO (art. 86a §1 Op — weryfikuj):
   Uzgodnienie spełniające kryterium głównej korzyści LUB inny szczególny wyróżnik
@@ -376,7 +376,7 @@ AKTUALNE SZUKANIA (generuj web_search gdy sprawdzasz konkretny temat):
 
 | Temat | Skill / Moduł |
 |---|---|
-| Interpretacja indywidualna — odwołanie do WSA | `dr-05/mod-KPA-postepowanie-administracyjne` + `pisma-procesowe-v3` |
+| Interpretacja indywidualna — odwołanie do WSA | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` + `pisma-procesowe-v3` |
 | IP Box — ewidencja, ulga B+R | `mod-PIT-podatek-dochodowy-fizyczne` + `mod-CIT-podatek-dochodowy-prawne` |
 | PKWiU i stawki VAT | `mod-VAT-podatek-od-towarow-i-uslug` |
 | WIS — wiążąca informacja stawkowa | `mod-VAT-podatek-od-towarow-i-uslug` |

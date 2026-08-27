@@ -2,7 +2,7 @@
 ## DR-02 · Prawo Cywilne · Kredyty frankowe — abuzywność klauzul (art. 385¹ KC)
 
 > Wydzielony 2026-06-14 z mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md
-> (ANEKS F), w ramach realizacji NOTA-4 (audyt-systemu-v4/CHECKLIST-DEDUP.md
+> (ANEKS F), w ramach realizacji NOTA-4 (audyt-systemu-v4/references/CHECKLIST-DEDUP.md
 > — moduł >400 linii). Temat masowy, samodzielny — wydzielenie umożliwia
 > selektywne ładowanie (lazy loading) bez wczytywania całego modułu
 > zobowiązań/odpowiedzialności.

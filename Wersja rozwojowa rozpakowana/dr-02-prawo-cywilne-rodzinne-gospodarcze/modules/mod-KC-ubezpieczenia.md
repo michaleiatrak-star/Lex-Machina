@@ -2,7 +2,7 @@
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 
-**Źródło weryfikacji:** KC art. 805–834 — Dz.U. 2025 poz. 1071 t.j. | Ustawa o ubezpieczeniach obowiązkowych — Dz.U. 2025 poz. 367 t.j.
+**Źródło weryfikacji:** KC art. 805–834 — Dz.U. 2026 poz. 795 t.j. | Ustawa o ubezpieczeniach obowiązkowych — Dz.U. 2026 poz. 783 t.j.
 **Data weryfikacji online:** 2026-06-05
 **ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -40,7 +40,7 @@ ZASADA INDEMNIZACJI: odszkodowanie nie może przekroczyć szkody (nie źródło 
 
 ## OC KOMUNIKACYJNE — QUICK CHECK
 
-> **Podstawa:** Ustawa o ubezpieczeniach obowiązkowych — Dz.U. 2025 poz. 367 t.j.
+> **Podstawa:** Ustawa o ubezpieczeniach obowiązkowych — Dz.U. 2026 poz. 783 t.j.
 > ⚠️ Weryfikuj aktualne przepisy w ISAP przed każdą sprawą.
 
 ```

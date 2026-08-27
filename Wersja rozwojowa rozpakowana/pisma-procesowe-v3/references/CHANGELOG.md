@@ -1,11 +1,18 @@
 # CHANGELOG — pisma-procesowe-v3
 
+- 5.20 (2026-08-26): skorygowano metrykę podstawy prawnej w module pracodawcy
+  rzeczywistego.
+
 > Pełna historia napraw i zmian wersji. Wyniesiona z SKILL.md 2026-07-12
 > (runda 2 — redukcja kosztu kontekstu) — treść skopiowana 1:1, bez zmian,
 > żeby nie tracić żadnej informacji z historii audytów. Wczytuj TYLKO gdy
 > potrzebujesz historii konkretnej naprawy (np. przy audycie, przy pytaniu
 > 'dlaczego to tak działa', przy regresji). Nie jest potrzebna w normalnym
 > toku pracy nad pismem.
+
+- 5.19 (2026-08-24, sesja audytowa audyt-systemu-v4, flaga **F-126**): sekcja `## CHANGELOG` usunięta z korpusu `SKILL.md`, wpisy przeniesione 1:1 do tego pliku (ZASADA 15 — jedna lokalizacja kanoniczna historii). W korpusie zostało wyłącznie odesłanie. Treści NIE odtwarzano z pamięci — przeniesiony został istniejący tekst. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-24.
+
+- 5.18 (2026-08-23i, sesja audytowa audyt-systemu-v4, flaga F-115): self-check ANTY-FASADA podłączony jako WYWOŁANIE modułu kanonicznego `shared/SELF-CHECK-ANTY-FASADA.md`, kopia treści zastąpiona wywołaniem. Powód modułu zamiast kopii: gdy F-117 dodała regułę AF-6 i drugą pozycję listy do `shared/PRAWO-HARDGATE.md`, żadna z 7 istniejących kopii nie została zaktualizowana — źródło miało 2 pozycje, kopie 1. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-23i.
 
 ## CHANGELOG
 
@@ -108,3 +115,71 @@ Naprawa w KROK MT (W1.2c):
   Roszczenie | Na okoliczność
 - Obowiązkowe: strona protokołu i godzina dla zeznań; numer załącznika dla dokumentów
 - Symbole ●/★/[K]/[W]/RK — tylko do użytku wewnętrznego modelu, nie trafiają do pisma
+
+---
+
+## Wpisy przeniesione z korpusu SKILL.md (F-126, 2026-08-24)
+
+> Tekst poniżej przeniesiony 1:1 z sekcji `## CHANGELOG` w `SKILL.md`.
+> Nic nie przeredagowano ani nie odtworzono z pamięci — przeniesienie
+> istniejącego tekstu, zgodnie z zakazem z wiersza flagi F-126.
+
+> **5.15 (2026-07-25, naprawa systemowa F-13 — częściowa):** zarejestrowano
+> `shared/ZAZALENIE-ADRESAT-GATE.md` jako HARD GATE (obok MOD-ADMIN.md w
+> sekwencji W2). `modules/MOD-PRAWO.md`: dodano adresat dla art. 306 KPK
+> (sąd rejonowy — wyjątek od reguły ogólnej). Dopiski `⚠️ adresat` dodane
+> w trzech plikach `references/engines/` (admin-pleading-engine-v8.md,
+> pleading-engine-v8.md, prosecution-complaint-engine-v8.md). Pełny opis
+> zakresu i tego, co POZOSTAJE nienaprawione: audyt-systemu-v4/references/
+> AUDIT-JOURNAL.md, wpis AUDYT-2026-07-25d.
+
+> **5.14 (2026-07-25, audyt adresatów zażalenia/odwołania — CRIT-TREŚĆ):**
+> `modules/MOD-ADMIN.md` — dodano wyjaśnienie, że odwołanie i zażalenie w KPA
+> wnosi się **za pośrednictwem organu I instancji do organu wyższego stopnia**
+> (art. 129 §1 / art. 141 §1 KPA), czego tabela pism wcześniej nie
+> precyzowała. `shared/terminy.md` — dodano przypis rozróżniający zażalenie
+> **dewolutywne/pionowe** (do sądu II instancji, art. 394 §1 KPC) od
+> **poziomego** (do innego składu tego samego sądu, art. 394¹ᵃ/394² KPC) —
+> wcześniej wiersz "Zażalenie (KPC)" sugerował jeden, uniwersalny adresat.
+> Ten sam wzorzec braku wykryto i naprawiono równolegle w pisma-proste-v2
+> (v2.4) i dr-01/mod-USP (v3.3). Pełny opis: audyt-systemu-v4/references/
+> AUDIT-JOURNAL.md, wpis 2026-07-25.
+
+> **5.13 (2026-07-15, F-7 / ZASADA 11 — audyt proceduralny):** dodano
+> R.1b TEZA-GATE do `modules/MOD-REDAKCJA.md`, obowiązkowy przed KROK 2
+> (diagnoza stylu) — rekonstrukcja jednym zdaniem tezy centralnej
+> dostarczonego gotowego pisma, przed jakąkolwiek redakcją stylu/tonu.
+> Przyczyna: ścieżka Test A (redakcja gotowego pisma) jawnie omija W1-W2-W3
+> ("NIE wykonuj W1-W2-W3" — routing KROK 0), a MOD-REDAKCJA nie miała
+> NIGDZIE (grep 0 wyników na "teza"/"rekonstrukcja"/"CLAIM") mechanizmu
+> ustalenia, czego pismo faktycznie broni, zanim zaczęto poprawiać jego
+> formę — ryzyko wzmacniania tonu twierdzeń bez uważnego czytania ich
+> zasadności. Analogiczny wzorzec braku jak w przesluchanie-swiadkow-v2
+> przed naprawą 3.6 (IMPORTED-QUESTIONS-GATE). Pozostałe 3 wzorce z
+> ZASADY 11 były już dobrze pokryte w tym skillu (HARD GATE MRG/SD-GATE
+> od startu, CG-GATE z jawną akceptacją, ST-INIT z jawnym zgłaszaniem
+> pominięć) — nie wymagały zmian. Pełny opis: audyt-systemu-v4/
+> AUDIT-JOURNAL.md, AUDYT-2026-07-15e.
+
+> **5.12 (2026-07-14, sprawa XI P 27/26 — dziedziczenie naprawy SD-GATE-TRUNC):**
+> Ten skill pobiera SD-REJ z `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` jako HARD
+> GATE (patrz linia ~471, blok PRZED-MACIERZ). Naprawa wprowadzona w module
+> współdzielonym (1.4.0 → 1.5.0: bramka SD-GATE-TRUNC — obowiązkowe domykanie
+> znaczników `< truncated lines X-Y >` zwracanych przez `view` przed
+> ekstrakcją faktów) jest dziedziczona automatycznie, bez zmian w logice tego
+> pliku — zgodnie z zasadą unikania duplikacji (CHECKLIST-DEDUP). Wersja
+> podbita wyłącznie dla odnotowania zależności. Pełny opis incydentu:
+> `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-07-14b.
+
+> Pełna historia napraw (5.7...5.11, każda z root cause i opisem naprawy)
+> wyniesiona do `references/CHANGELOG.md` (redukcja kosztu kontekstu,
+> 2026-07-12 runda 2) — treść zachowana w 100%, tylko przeniesiona:
+> `view /mnt/skills/user/pisma-procesowe-v3/references/CHANGELOG.md`
+>
+> Najnowsza pozycja (kontekst do bieżącej pracy): **5.11 (2026-07-12)** —
+> naprawiono 7 martwych odwołań do modułów ⛔ obowiązkowych w W2.2
+> (MOD-BUDOWA-ARGUMENTU, MOD-ELIMINACJA-TEZ, MOD-KARTA-DOWODU,
+> MOD-KOSZT-ODPOWIEDZI, MOD-MIKROPODSUMOWANIA, MOD-SKUTEK-PROCESOWY,
+> MOD-STRESS-TEST — odzyskane do shared/), naprawiono nazwę pliku
+> MOD-DOKUMENT-ANOMALIE_v1.1.0.md w MODULY-MAPA.md i AUTOMAT-STANOW.md,
+> oraz wyniesiono tę sekcję CHANGELOG do osobnego pliku.

@@ -257,7 +257,7 @@ rozróżnieniem art. 30a/30b i szczegółami FIFO/kursu T-1],
 inwestowanie.edu.pl [kwiecień 2026, aktualizacja marzec 2026, Z
 najpełniejszym opisem OKI], bizky.ai [sprzed miesiąca], rankomat.pl
 [styczeń 2026], totalmoney.pl, BEZPOŚREDNIO OpenLEX [dosłowny tekst
-art. 30a, aktualny t.j. Dz.U.2026.592]).
+art. 30a, aktualny t.j. Dz.U. 2026 poz. 592]).
 ```
 
 ---
@@ -366,7 +366,7 @@ Ryczałt ewidencjonowany:
 
 > Pełna mapa IP Box, B+R, PKWiU 2025, uchwały NSA (najem), estoński CIT:
 > ```
-> view /mnt/skills/user/dr-06-podatki-finanse-publiczne-aml/modules/mod-interpretacje-definicje-podatkowe.md
+> view dr-06-podatki-finanse-publiczne-aml/modules/mod-interpretacje-definicje-podatkowe.md
 > ```
 
 ```

@@ -98,7 +98,7 @@ Wskaż organ/tryb: reklamacja do sprzedawcy/operatora, spór do URE, sąd powsze
 Dla koncesji, taryf, przyłączeń, kar Prezesa URE i rynku energii wczytaj:
 
 ```text
-view /mnt/skills/user/dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF.md
+view dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF.md
 ```
 
 Metryka kontrolna Prawa energetycznego: Dz.U. 2026 poz. 43.

@@ -221,7 +221,7 @@ web_search: "samorząd zawodowy urbanistów 2026 przywrócenie status"
 
 ## ⚖️ DISCLAIMER
 
-Po zakończeniu analizy: `view /mnt/skills/user/shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
+Po zakończeniu analizy: `view shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
 
 ---
 *mod-ustawa-architekci-inzynierowie-budownictwa-zawod.md · dr-09 · utworzony 2026-06-14*

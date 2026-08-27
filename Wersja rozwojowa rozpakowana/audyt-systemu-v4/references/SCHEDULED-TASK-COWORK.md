@@ -99,29 +99,21 @@ ozdobnikami; ich usunięcie zmienia zachowanie sesji wykonawczej.
 
 ---
 
-## 3. BLOK WARUNKOWY — monitoring map pokrycia (aktywacja odroczona)
+## 3. Monitoring map pokrycia — aktywny od 2026-08-26
 
 Zadanie ma docelowo monitorować także **system map pokrycia** — map
 wskazujących, w jakim zakresie rozdziały i akty prawne są pokryte treścią
 modułów.
 
-⛔ **BRAMKA AKTYWACJI — blok § 3 pozostaje NIEAKTYWNY dopóki oba warunki nie
-są spełnione:**
-1. system map pokrycia został **utworzony** (istnieje trwały, generowany
-   rejestr pokrycia, a nie jednorazowe raporty zewnętrzne
-   z `references/raporty-pokrycia-2026-08-13/`);
-2. odpowiadająca mu flaga w `WARN-OTWARTE.md` (**F-83**) została
-   **ZAMKNIĘTA**.
+Warunki aktywacji zostały spełnione: system map pokrycia został zasilony
+9/9 raportami, a F-83 zamknięto. Pełną rewalidację map wykonuj **co dwa
+tygodnie**; w pozostałych przebiegach uruchamiaj punkt 8 tylko dla aktu,
+którego zmianę wykrył bieżący monitoring Dz.U.
 
-Do czasu spełnienia obu warunków sesja wykonawcza zadania **pomija § 3
-i odnotowuje jedno zdanie** w AUDIT-JOURNAL.md: `Blok map pokrycia: pominięty
-— F-83 otwarta`. Nie improwizuj zastępczego badania pokrycia „przy okazji" —
-to osobna, kosztowna klasa pracy, która rozsadziłaby cotygodniowe zadanie.
-
-**Treść do DOPISANIA do promptu § 2B jako punkt 8, dopiero po zamknięciu F-83:**
+**Punkt 8 promptu § 2B:**
 
 ```
-8. Sprawdź mapy pokrycia (uruchamiane tylko gdy flaga F-83 w WARN-OTWARTE.md jest ZAMKNIĘTA): dla każdego aktu, w którym krok 3 wykrył zmianę Dz.U., otwórz odpowiadającą mapę pokrycia i sprawdź, czy zmiana dotyczy rozdziału oznaczonego jako pokryty. Jeżeli tak — oznacz ten rozdział jako WYMAGA PONOWNEJ WERYFIKACJI i przekaż sprawę do FAZY 3E (MOD-TRESC-MERYTORYCZNA.md); pokrycie oznaczone wcześniej jako pełne przestaje nim być z chwilą zmiany przepisu. Jeżeli zmiana dotyczy rozdziału nigdy niepokrytego — odnotuj to jako lukę o podwyższonym priorytecie (akt żywy, zmieniany), nie jako zwykłą lukę. Nie zmieniaj statusów pokrycia na podstawie samego numeru Dz.U. — status "pokryty" wymaga sprawdzenia treści modułu, nie metryki aktu.
+8. Sprawdź mapy pokrycia: dla każdego aktu, w którym krok 3 wykrył zmianę Dz.U., otwórz odpowiadającą mapę pokrycia i sprawdź, czy zmiana dotyczy rozdziału oznaczonego jako pokryty. Jeżeli tak — oznacz ten rozdział jako WYMAGA PONOWNEJ WERYFIKACJI i przekaż sprawę do FAZY 3E (MOD-TRESC-MERYTORYCZNA.md); pokrycie oznaczone wcześniej jako pełne przestaje nim być z chwilą zmiany przepisu. Jeżeli zmiana dotyczy rozdziału nigdy niepokrytego — odnotuj to jako lukę o podwyższonym priorytecie (akt żywy, zmieniany), nie jako zwykłą lukę. Nie zmieniaj statusów pokrycia na podstawie samego numeru Dz.U. — status "pokryty" wymaga sprawdzenia treści modułu, nie metryki aktu.
 ```
 
 ---

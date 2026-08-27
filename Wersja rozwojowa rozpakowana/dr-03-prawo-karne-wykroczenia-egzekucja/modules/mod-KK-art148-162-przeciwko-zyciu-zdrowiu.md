@@ -21,7 +21,7 @@ START: Czy sprawca umyślnie spowodował śmierć człowieka?
    ├─ Typ podstawowy (art. 148 §1) → 10-30 lat pozbawienia wolności
    │  lub dożywocie (⚠️ POPRAWKA 2026-07-26, F-15/MOD-PROPAGACJA-
    │  NOWELIZACJI: USUNIĘTO "25 lat" — ta odrębna kategoria kary
-   │  ZNIESIONA reformą z 7.07.2022, Dz.U. 2022.2600, w życie 1.10.2023;
+   │  ZNIESIONA reformą z 7.07.2022, Dz.U. 2022 poz. 2600, w życie 1.10.2023;
    │  zastąpiona jednolitą karą terminową do 30 lat. Potwierdzone w 8+
    │  źródłach: chmielniak.com.pl, hplegal.pl, weredynscy.pl,
    │  jhcadwokaci.pl, durajreck.com, gov.pl [J. Kluza, Prokuratura i
@@ -81,12 +81,14 @@ START: Jaki był SKUTEK zdrowotny?
 │  wzroku/słuchu/mowy/zdolności płodzenia, inne ciężkie kalectwo,
 │  choroba realnie zagrażająca życiu, choroba psychiczna trwale
 │  nieuleczalna, całkowita/znaczna trwała niezdolność do pracy,
-│  trwałe zeszpecenie/zniekształcenie → 1-10 lat (umyślnie);
+│  trwałe, istotne zeszpecenie/zniekształcenie → 3-20 lat
+│  (umyślnie; art. 156 § 1 w brzmieniu obowiązującym od 1.10.2023);
 │  §2 (nieumyślnie) → do 3 lat
 │  │
 │  └─ Ze skutkiem śmiertelnym (sprawca chciał ciężkiego uszczerbku,
 │     śmierć była skutkiem nieumyślnym — art. 156 §3, zbieg umyślno-
-│     -nieumyślny) → 2-15 lat — ⚠️ NIE MYLIĆ z zabójstwem (148),
+│     -nieumyślny) → co najmniej 5 lat albo dożywotnie pozbawienie
+│     wolności — ⚠️ NIE MYLIĆ z zabójstwem (148),
 │     kluczowa jest strona podmiotowa co do SKUTKU ŚMIERTELNEGO
 │     (musi być nieumyślna, inaczej to już 148)
 │
@@ -97,7 +99,7 @@ START: Jaki był SKUTEK zdrowotny?
 └─ LEKKI uszczerbek (art. 157 §2) — naruszenie/rozstrój ≤7 dni →
    do 2 lat, ŚCIGANIE PRYWATNOSKARGOWE (§4) — WYJĄTEK: jeśli
    pokrzywdzonym jest osoba najbliższa wspólnie zamieszkująca ze
-   sprawcą → ściganie z urzędu (§3, kontekst przemocy domowej —
+   sprawcą → ściganie z urzędu (§ 4, kontekst przemocy domowej —
    patrz mod-KK-art207-przemoc-domowa.md)
 ```
 
@@ -128,9 +130,18 @@ strony konfliktu, z których KAŻDA liczy min. 1 osobę, ŁĄCZNIE min. 3)?
 │     ŁĄCZNIE w jednym przepisie
 │
 ├─ TYP KWALIFIKOWANY — SKUTEK w postaci CIĘŻKIEGO uszczerbku (art. 158
-│  §2) → 6 m-cy – 8 lat
+│  §2) → OD ROKU DO LAT 10
+│  ⛔ NIE „6 m-cy – 8 lat" — to brzmienie SPRZED nowelizacji z 7.07.2022
+│     (Dz.U. 2022 poz. 2600), obowiązującej od 1.10.2023
 │
-└─ TYP KWALIFIKOWANY — SKUTEK śmiertelny (art. 158 §3) → 1-10 lat
+└─ TYP KWALIFIKOWANY — SKUTEK śmiertelny (art. 158 §3) → OD LAT 2 DO 15
+   ⛔ NIE „1-10 lat" — jw., wartość sprzed 1.10.2023. Dolna granica 2 lata
+      ma znaczenie procesowe: wyklucza warunkowe zawieszenie bez
+      nadzwyczajnego złagodzenia i przesuwa ocenę przesłanek TA.
+   ✅ [VER: arslege.pl/udzial-w-bojce-lub-pobiciu + inforlex (przypis
+      nowelizacyjny [108]-[110] do art. 158), odczyt 2026-08-25]
+   ⚠️ Typ podstawowy §1: od 3 miesięcy do lat 5 (też podniesiony tą samą
+      nowelizacją)
 
 ⭐⭐ KLUCZOWA CECHA DOWODOWA — ODPOWIEDZIALNOŚĆ ZBIOROWA: przy bójce/
 pobiciu ZAKOŃCZONYM ciężkim uszczerbkiem/śmiercią, GDY nie da się
@@ -199,7 +210,7 @@ utraty życia albo CIĘŻKIEGO uszczerbku na zdrowiu?
 > założenia modułu (że HIV i inne choroby są nadal rozdzielone na dwa
 > paragrafy o różnym zagrożeniu karą).
 
-**Aktualna treść (Dz.U.2025.0.383 t.j., źródła zbieżne: arslege.pl,
+**Aktualna treść (Dz.U. 2025 poz. 383 t.j., źródła zbieżne: arslege.pl,
 lexlege.pl, inforlex.pl):**
 ```
 □ Art. 161 §1 — POŁĄCZONY typ: "Kto, wiedząc, że jest zarażony wirusem
@@ -321,7 +332,7 @@ Checklist praktyczny:
 | Zabójstwo w afekcie | art. 148 §4 | 1-10 lat | z urzędu |
 | Eutanazja | art. 150 | 3 m-ce – 5 lat (możliwe odstąpienie) | z urzędu |
 | Pomoc/namowa do samobójstwa | art. 151 | 3 m-ce – 5 lat | z urzędu |
-| Ciężki uszczerbek (umyślnie) | art. 156 §1 | 1-10 lat | z urzędu |
+| Ciężki uszczerbek (umyślnie) | art. 156 § 1 | 3-20 lat | z urzędu |
 | Średni uszczerbek | art. 157 §1 | 3 m-ce – 5 lat | z urzędu |
 | Lekki uszczerbek | art. 157 §2 | do 2 lat | prywatnoskargowy (wyjątek: przemoc domowa) |
 
@@ -361,7 +372,7 @@ użyciem w piśmie (PRAWO-HARDGATE).
     WYKROCZENIE z art. 283 §1 Kodeksu pracy (nie przestępstwo)
   → Pełne aspekty ADMINISTRACYJNE/pracownicze (klasyfikacja wypadku,
     obowiązki zgłoszeniowe pracodawcy, świadczenia dla rodziny) →
-    `dr-04/mod-wypadek-przy-pracy-choroba-zawodowa.md` — TEN moduł
+    `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-wypadek-przy-pracy-choroba-zawodowa.md` — TEN moduł
     (dr-03) dostarcza WYŁĄCZNIE aspekt KARNY, unikaj duplikacji
   Potwierdzone w 6+ zgodnych źródłach, w tym PIP (pip.gov.pl, Rząd 1)
   i orzecznictwem SN (V KK 64/12).

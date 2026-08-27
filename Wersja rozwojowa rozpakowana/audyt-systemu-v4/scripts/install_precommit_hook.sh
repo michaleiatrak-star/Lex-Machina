@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Instaluje run_regression_suite.py (PEŁNY zestaw testów regresyjnych
-# T1-T8) jako git pre-commit hook w repozytorium /mnt/skills/user/.
+# T1-T8) jako git pre-commit hook w repozytorium .
 #
 # ⚠️ WERSJA 2.0 (2026-07-21) — POPRAWKA znaleziona przy przeglądzie na
 # żądanie użytkownika ("czy jeszcze jakieś testy są wymagane, aby mieć
@@ -17,10 +17,10 @@
 # (T2) NIE blokują (ostrzeżenie, nie FAIL), zgodnie z logiką
 # run_regression_suite.py.
 #
-# Użycie: bash install_precommit_hook.sh [/mnt/skills/user]
+# Użycie: bash install_precommit_hook.sh [SKILLS_ROOT]
 
 set -euo pipefail
-REPO_ROOT="${1:-/mnt/skills/user}"
+REPO_ROOT="${1:-${LEX_MACHINA_SKILLS_ROOT:-$(pwd)}}"
 HOOK_PATH="$REPO_ROOT/.git/hooks/pre-commit"
 SCRIPT_PATH="$REPO_ROOT/audyt-systemu-v4/scripts/run_regression_suite.py"
 

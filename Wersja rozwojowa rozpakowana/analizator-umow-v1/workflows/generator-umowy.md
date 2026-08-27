@@ -21,7 +21,7 @@ sygnały zanim przejdziesz dalej.
 
 ### KROK 2 — WYWIAD / INTAKE (BRAMKA 2)
 
-Zbierz dane wg zasad `INTAKE-GAP` (`view /mnt/skills/user/shared/INTAKE-GAP.md`):
+Zbierz dane wg zasad `INTAKE-GAP` (`view shared/INTAKE-GAP.md`):
 
 - strony (pełne dane, sposób reprezentacji, KRS/NIP jeśli osoba prawna),
 - przedmiot umowy i essentialia specyficzne dla typu (z modułu z KROKU 1),
@@ -77,7 +77,7 @@ systemami AI — sprawdź, czy dotyczy `references/generator/doktryna-uzupelnien
 
 Przed zwróceniem finalnej wersji:
 
-1. `view /mnt/skills/user/shared/HYBRID-VALIDATION.md` — wykonaj pełną walidację.
+1. `view shared/HYBRID-VALIDATION.md` — wykonaj pełną walidację.
 2. Jeśli umowa > 15 stron / > 15 § / > 10 odesłań → uruchom dodatkowo
    `workflows/weryfikacja-spojnosci-odeslan.md` (dwuetapowa: inwentaryzacja →
    weryfikacja) — OBOWIĄZKOWE przy tych progach, nie opcjonalne.
@@ -96,9 +96,9 @@ Potwierdź: „tak, generuj" — lub wskaż co poprawić.
 5. Przed eksportem do `.docx` → zastosuj standard typografii/layoutu z
    `view references/generator/legal-design-produkcyjny.md` (v1.17 — czcionka,
    bordery, ew. tabela „Kluczowe warunki" i spis treści wg progów LD-P.4),
-   następnie `view /mnt/skills/user/shared/WERYFIKACJA-SLAD.md § STRIP-VER-GATE`
+   następnie `view shared/WERYFIKACJA-SLAD.md § STRIP-VER-GATE`
    oraz uruchom skill `docx` do formatowania pliku wynikowego.
-6. Po wygenerowaniu → `view /mnt/skills/user/shared/POST-VALIDATION.md`.
+6. Po wygenerowaniu → `view shared/POST-VALIDATION.md`.
 
 Wyjątek: „tryb express" / „zrób bez pytania" → generuj, ale dodaj nagłówek
 `[DRAFT — DO WERYFIKACJI]`.

@@ -15,7 +15,7 @@ wg tablicy sterującej `WARN-OTWARTE.md` — po Rozdz. 9 (2026-08-16b), Rozdz. 5
 
 **Status weryfikacji źródłowej:** pełna treść normatywna Rozdz. 6a pobrana
 z lexlege.pl (Rząd 2B, stan prawny serwisu deklarowany na 16.08.2026, akt
-oznaczony Dz.U.2025.0.539 t.j.) — **cały rozdział, artykuł po artykule, bez
+oznaczony Dz.U. 2025 poz. 539 t.j.) — **cały rozdział, artykuł po artykule, bez
 luk**. Art. 33 ust. 6 potwierdzony niezależnie w czterech źródłach
 (lexlege.pl, dlajurysty.pl, standardyprawa.pl oraz — co istotniejsze —
 w treści uzasadnień orzeczeń sądów powszechnych cytujących przepis
@@ -140,7 +140,7 @@ błąd taktyczny.
 - wyjątek: gdy przewinienie **zawiera znamiona przestępstwa**, przedawnienie
   następuje dopiero z upływem okresu przedawnienia **karalności tego
   przestępstwa** (odesłanie do art. 101 i n. KK — sprawdzić przez
-  `dr-03/mod-KK-kwalifikator-karnomaterialny.md`).
+  `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md`).
 
 **Zatarcie ukarania (art. 35r):** **5 lat od uprawomocnienia się** orzeczenia
 dyscyplinarnego. Uwaga na sprzężenie z art. 35o ust. 3 pkt 2 — ukaranie
@@ -423,7 +423,7 @@ ilustracyjny** — nie powoływać jako linii orzeczniczej.
   prawo do sądu jako podstawa testu z K 21/11.
 - **Punkt styku dr-13 (broń):** ukaranie dyscyplinarne jako okoliczność
   w postępowaniu o cofnięcie pozwolenia na broń — zob.
-  `dr-13/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md` (F-92).
+  `dr-13-sluzby-bezpieczenstwo-informacje-niejawne/modules/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md` (F-92).
 - **Skille procesowe:** `orzeczenia-sadowe-v2` (obowiązkowa weryfikacja
   sygnatur z § 11), `pisma-procesowe-v3` (odwołanie do sądu okręgowego —
   pismo wielowątkowe), `analizator-dowodow-v3` (dowody z etapu
@@ -460,7 +460,7 @@ ilustracyjny** — nie powoływać jako linii orzeczniczej.
   (audyt-systemu-v4, tablica sterująca `WARN-OTWARTE.md`): Rozdz. 6a Prawa
   łowieckiego, art. 35b–35t w całości, artykuł po artykule, bez luk.
   Źródło pełnej treści: lexlege.pl (Rząd 2B, cały rozdział pobrany jednym
-  fetchem, stan deklarowany 16.08.2026, Dz.U.2025.0.539 t.j.).
+  fetchem, stan deklarowany 16.08.2026, Dz.U. 2025 poz. 539 t.j.).
   ⭐ **Ustalenie korygujące opis flagi:** wbrew skrótowi w tablicy
   sterującej, odwołanie do sądu okręgowego NIE wynika z Rozdz. 6a, lecz
   z **art. 33 ust. 6** (Rozdz. 6) — przepis dopisany do modułu wraz

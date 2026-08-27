@@ -6,7 +6,7 @@
 > > komentarz) oraz test aktualności linii orzeczniczej wykonuj wyłącznie wg
 > pliku kanonicznego, żeby nie utrzymywać dwóch niezależnych ocen wagi:
 > ```
-> view /mnt/skills/user/shared/ORZECZENIA-HIERARCHIA.md
+> view shared/ORZECZENIA-HIERARCHIA.md
 > ```
 > (ten sam plik jest źródłem prawdy dla `analizator-dowodow-v3` i
 > `pisma-procesowe-v3` — patrz CHECKLIST-DEDUP.md).

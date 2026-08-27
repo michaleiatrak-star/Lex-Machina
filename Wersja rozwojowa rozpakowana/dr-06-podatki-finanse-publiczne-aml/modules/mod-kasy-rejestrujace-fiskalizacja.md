@@ -45,7 +45,7 @@ DWA GŁÓWNE AKTY WYKONAWCZE:
     z 24.11.2023 r. (Dz.U. 2023 poz. 2605), które OBOWIĄZYWAŁO do
     końca 2024 r. — PATRZ sekcja 2
   □ Rozporządzenie MF z 25.06.2025 r. w sprawie KAS rejestrujących
-    (Dz.U. 2025 poz. 998) — WYMAGANIA techniczne, fiskalizacja,
+    (Dz.U. 2025 poz. 845) — zasady używania, ewidencja, fiskalizacja,
     PRZEGLĄDY — PATRZ sekcja 3
 
 ⭐ NOWELIZACJA ZAŁĄCZNIKA (2026): rozporządzenie MFiG WPROWADZAJĄCE
@@ -139,7 +139,7 @@ WARUNKI SZCZEGÓŁOWE (§ 3 rozporządzenia):
 
 ```
 PODSTAWA: rozporządzenie MF z 25.06.2025 r. W sprawie kas
-  rejestrujących (Dz.U. 2025 poz. 998) — SZCZEGÓŁOWE wymagania
+  rejestrujących (Dz.U. 2025 poz. 845) — SZCZEGÓŁOWE wymagania
   techniczne, FISKALIZACJA, przeglądy — ⚠️ [NIEWERYFIKOWANE
   BEZPOŚREDNIO W ISAP w tej sesji] potwierdzone POŚREDNIO przez
   jedno kompleksowe źródło Rządu 2B (taxmachine.pl) — POTWIERDŹ

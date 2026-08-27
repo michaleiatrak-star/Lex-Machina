@@ -1,21 +1,29 @@
 ---
 name: chronologia-sprawy-v1
-version: 1.5
+version: "1.7"
 type: executive-chronologia
 status: production
-compatibility: "web_search, web_fetch, Anthropic API"
-description: |
-  Chronologia Sprawy v1.3 — wielowarstwowa ekstrakcja i porządkowanie zdarzeń prawnych
-  z dokumentów procesowych, akt i dowodów. AUTO-TRIGGER przez prawny-router-v3: ≥2
-  dokumenty wieloetapowe LUB słowa kluczowe (chronologia, oś czasu, timeline, kolejność
-  zdarzeń, kiedy+potem). Na żądanie: ustalanie kolejności faktów, wykrywanie sprzeczności
-  dat, przygotowanie stanu faktycznego do pozwu/apelacji/odpowiedzi. Osobna oś czasu per
-  wątek prawny, cztery klasy pewności zdarzenia (BEZSPORNE/PEWNE/WYDEDUKOWANE/SPORNE),
-  proweniencja każdego zdarzenia, automatyczny indeks sprzeczności dat i opisów,
-  obowiązkowa korelacja finansowa (kwoty, terminy, strony płatności) z zestawieniem
-  krzyżowym. Integruje się z raport-sytuacyjny-v2.
+compatibility: "live_web_lookup, file_read, optional_interactive_ui"
+description: "Chronologia sprawy z dokumentów i dowodów: oś czasu per wątek, klasy pewności, proweniencja, sprzeczności dat/opisów, korelacja finansowa i opcjonalny interaktywny timeline."
 ---
 
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Nie zmienia zasad ekstrakcji zdarzeń, czterech klas pewności, proweniencji, korelacji finansowej, indeksu sprzeczności ani schematu danych osi czasu.
+
+1. `view`, `web_search`, `web_fetch`, `show_widget`, `visualize:read_me`, `present_files`, `sendPrompt` i podobne nazwy traktuj jako nazwy operacji semantycznych, jeśli bieżący host nie udostępnia literalnie narzędzia o tej nazwie. Użyj równoważnej funkcji hosta.
+2. `view chronologia-sprawy-v1/...` oraz odwołania do `references/`, `assets/` i `upgrade-min8/` oznaczają odczyt plików lokalnych tego skilla. Nie wymagaj literalnego katalogu `/mnt/skills`.
+3. `view shared/<plik>` oznacza świeży odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tego ZIP-a. Jeżeli obowiązkowy zasób shared jest niedostępny, zastosuj fail-closed zamiast pamięci modelu.
+4. Ścieżki `/mnt/user-data/...` oznaczają rzeczywiste załączniki użytkownika dostępne w bieżącym hoście. Wymóg ponownego odczytu dokumentu oznacza rzeczywisty odczyt pliku, a nie przypomnienie jego treści z kontekstu.
+5. `web_search` / `web_fetch` oznaczają świeże wyszukanie i odczyt źródła. Jeśli chronologia zawiera termin ustawowy, datę wejścia w życie aktu lub sygnaturę, zachowaj PRAWO-HARDGATE i zakaz cytowania z pamięci.
+6. Instrukcje mówiące, że `.jsx` nie renderuje się w `claude.ai`, są ograniczeniem legacy renderera, nie zakazem użycia natywnego UI innego hosta. Preferuj `assets/widget-timeline.html` zgodnie z istniejącą logiką; jeśli host ma własny renderer interaktywny, może użyć równoważnego widoku zachowującego ten sam model danych i funkcje.
+7. `show_widget` oznacza interaktywną oś czasu, gdy host ją obsługuje. Jeżeli nie, zwróć równoważny raport/HTML/natywny artefakt; brak renderera nie może blokować analizy tekstowej TRYB A.
+8. Odwołania do innych skilli, w tym `raport-sytuacyjny-v2`, są integracjami między-skillowymi. Nie kopiuj ich do tej paczki; jeśli brak integracji, wykonaj część lokalną i jawnie oznacz pominięty krok.
+
+**Zasada nadrzędna adaptera:** jeśli istniejąca instrukcja jest zrozumiała i wykonalna przez bieżący host, wykonaj ją bez konwersji. Adapter działa tylko na rzeczywistej granicy runtime.
 # Chronologia Sprawy v1.3 — Framework Wielowarstwowy
 
 ## Historia wersji
@@ -66,7 +74,7 @@ dokumentu" w FAZA EKSTRAKCJI ZDARZEŃ. Przyczyna: skill ekstrahuje chronologię
 bezpośrednio z dokumentów, ale nie miał NIGDZIE (grep 0 wyników na "SD-VER"/
 "SD-GATE"/"SKAN-DOWODOW") mechanizmu weryfikacji kompletności odczytu —
 dokładnie ten sam mechanizm luki, co udokumentowany incydent w
-przesluchanie-swiadkow-v2 (sprawa XI P 27/26, AUDYT-2026-07-14b): częściowo
+przesluchanie-swiadkow-v2-min90 (sprawa XI P 27/26, AUDYT-2026-07-14b): częściowo
 odczytany dokument generuje chronologię z cichą luką, nieodróżnialną od
 "w dokumencie po prostu nic więcej nie było". Pełny opis: audyt-systemu-v4/
 AUDIT-JOURNAL.md, AUDYT-2026-07-15e.
@@ -75,7 +83,21 @@ AUDIT-JOURNAL.md, AUDYT-2026-07-15e.
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 > Chronologia może zawierać terminy ustawowe, daty wejścia w życie aktów, terminy zawite.
 > Przed podaniem jakiegokolwiek przepisu lub sygnatury:
-> `view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
+> `view shared/PRAWO-HARDGATE.md`
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-23i, flaga F-115 — ten skill cytuje prawo, a bramki nie miał):
+>
+> ```
+> view shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
 
 ## ARCHITEKTURA SKILLA
 
@@ -154,7 +176,7 @@ Gdy użytkownik wpisuje "widget" / "pokaż oś czasu" / "timeline" / "aplikację
 KROK B1 — Wyciągnij z rozmowy zdarzenia jako strukturę chronologiczną (schemat poniżej)
 KROK B2 — Wywołaj visualize:read_me z modules=["interactive","mockup"]
 KROK B2a — ⛔ MOD-WIDGET-IO (OBOWIĄZKOWE przed show_widget):
-            view /mnt/skills/user/shared/MOD-WIDGET-IO.md
+            view shared/MOD-WIDGET-IO.md
             → wbuduj pasek IO w nagłówek widgetu (powyżej osi czasu)
             → IO_SKILL_ID='chronologia-sprawy-v1', IO_CASE_ID=sygnatura
             → matryca: Export JSON ✅ MD ✅ | Import JSON ✅
@@ -219,7 +241,7 @@ SCHEMAT DANYCH (wbuduj jako literały JS w HTML):
 
 ```
 Zanim rozpoczniesz "Sekwencję dla każdego dokumentu": view
-/mnt/skills/user/shared/MOD-SKAN-DOWODOW-KOMPLETNY.md i zastosuj FAZA 1-3
+shared/MOD-SKAN-DOWODOW-KOMPLETNY.md i zastosuj FAZA 1-3
 w pełni (inwentaryzacja, SD-GATE-TRUNC, SD-GATE-PORCJA, SD-VER) dla
 WSZYSTKICH dokumentów wgranych do sesji.
 
@@ -807,13 +829,13 @@ Plik `assets/ChronologiaSprawy.jsx` to dokumentacja struktury — nie kopiuj go.
 Jeżeli wynik tego skilla ma służyć do pisma, strategii procesowej, oceny ryzyka albo decyzji terminowej, wczytaj właściwe moduły shared:
 
 ```text
-view /mnt/skills/user/shared/TRYBY-PROCESOWE.md
-view /mnt/skills/user/shared/RISK-ASSESSMENT.md
-view /mnt/skills/user/shared/TERM-CALC.md
-view /mnt/skills/user/shared/DOWODY-METODOLOGIA.md
-view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md
-view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md
-view /mnt/skills/user/shared/QUALITY-CHECK.md
+view shared/TRYBY-PROCESOWE.md
+view shared/RISK-ASSESSMENT.md
+view shared/TERM-CALC.md
+view shared/DOWODY-METODOLOGIA.md
+view shared/PREKLUZJA-DOWODOWA.md
+view shared/STRATEGIA-PROCESOWA.md
+view shared/QUALITY-CHECK.md
 ```
 
 Nie dubluj logiki shared w lokalnych plikach. Lokalne moduły mogą tylko doprecyzować analizę dziedzinową.

@@ -14,7 +14,7 @@
 | **Reforma stażu pracy** (wliczanie zlecenia, JDG, służb mundurowych) | **Sektor publiczny: od 01.01.2026 | Sektor prywatny: od ~01.04.2026** — weryfikuj datę wejścia w życie | Dz.U. 2025 poz. 1423 — art. 30², 302¹ KP |
 | **Jawność wynagrodzeń** (art. 183ca KP — nowy) | **OBOWIĄZUJE** — pracodawca musi ujawnić widełki wynagrodzenia w ogłoszeniu o pracę | Dz.U. 2025 poz. 807 |
 | Minimalne wynagrodzenie 2026 | **4 806 zł brutto/mies. od 01.01.2026 | stawka godz.: 31,40 zł** | Dz.U. 2025 poz. 1242 |
-| ⚡ **Regulamin pracy/wynagradzania — próg 20→50 pracowników** + forma "papierowa lub elektroniczna" dla wielu czynności KP + procedura uzgadniania ZFŚS bez ZZ | **OBOWIĄZUJE od 26/27.01.2026** (sprawdź dokładną datę) — bez przepisów przejściowych. Szczegóły i checklist redakcyjna → `analizator-umow-v1/mod-J21-rodo-archiwizacja-regulaminy.md` (J21.4-J21.5) | Dz.U. 2026 poz. 25 — art. 104, 77² KP |
+| ⚡ **Regulamin pracy/wynagradzania — próg 20→50 pracowników** + forma "papierowa lub elektroniczna" dla wielu czynności KP + procedura uzgadniania ZFŚS bez ZZ | **OBOWIĄZUJE od 26/27.01.2026** (sprawdź dokładną datę) — bez przepisów przejściowych. Szczegóły i checklist redakcyjna → `analizator-umow-v1/references/mod-J21-rodo-archiwizacja-regulaminy.md` (J21.4-J21.5) | Dz.U. 2026 poz. 25 — art. 104, 77² KP |
 | Projekt zniesienia umów cywilnoprawnych w stosunku pracy | Status: projekt — weryfikuj isap.sejm.gov.pl | — |
 
 ---
@@ -29,7 +29,7 @@ Nawiązanie i rozwiązanie stosunku pracy, wypowiedzenie (wymogi formalne, przyc
 | Akt | Dz.U. | Uwaga |
 |---|---|---|
 | Kodeks pracy (KP) | Dz.U. 2025 poz. 277 t.j. ze zm. | Weryfikuj wszystkie nowelizacje w ISAP |
-| Ustawa o minimalnym wynagrodzeniu | Dz.U. 2024 poz. 642 t.j. | Kwota co roku z rozporządzenia RM |
+| Ustawa o minimalnym wynagrodzeniu | Dz.U. 2024 poz. 1773 t.j. | Kwota co roku z rozporządzenia RM |
 | Rozp. RM w sprawie wys. min. wynagrodzenia | Dz.U. 2025 poz. 1242 (2026 r.) | Weryfikuj przez web_search co rok |
 
 ---
@@ -296,7 +296,7 @@ REKOMENDACJA: □ Sąd — odwołanie  □ Ugoda / negocjacje  □ PIP
 
 | Sytuacja | Skill / Moduł |
 |---|---|
-| Mobbing / dyskryminacja | `dr-02` → `mod-KP-art943-mobbing-dyskryminacja` |
+| Mobbing / dyskryminacja | `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-KP-mobbing-dyskryminacja.md` |
 | Zwolnienia grupowe | `mod-ustawa-zwolnienia-grupowe` |
 | Inspekcja pracy | `mod-ustawa-PIP-inspekcja-pracy` |
 | ZUS (składki, zasiłki) | `mod-SUS-ZUS-ubezpieczenia-spoleczne` |

@@ -132,7 +132,7 @@ Jeśli termin już upłynął: ⛔ TERMIN UPŁYNĄŁ — oceń możliwość przy
 Przy każdym terminie albo opłacie wczytaj:
 
 ```text
-view /mnt/skills/user/shared/TERM-CALC.md
+view shared/TERM-CALC.md
 ```
 
 Terminy krytyczne oznacz jako wymagające sprawdzenia z aktualnym kalendarzem i aktualnym tekstem ustawy.

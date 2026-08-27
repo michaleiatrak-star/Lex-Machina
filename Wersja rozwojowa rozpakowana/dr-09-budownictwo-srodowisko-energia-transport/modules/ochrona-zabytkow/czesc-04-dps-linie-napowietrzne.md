@@ -53,7 +53,7 @@ ZEZWOLENIE NA PROWADZENIE: wymaga określonych dokumentów (wg wzoru
 ⚠️ HOSPICJA — BRAK ODRĘBNEGO, DEDYKOWANEGO aktu prawnego "o
   hospicjach" — hospicja stacjonarne funkcjonują jako PODMIOTY
   LECZNICZE w rozumieniu ustawy o działalności leczniczej (patrz
-  `dr-10/mod-ustawa-dzialalnosc-lecznicza-pacjent.md`) — WYMOGI
+  `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-dzialalnosc-lecznicza-pacjent.md`) — WYMOGI
   lokalowe/sanitarne WYNIKAJĄ z OGÓLNYCH przepisów dla podmiotów
   leczniczych (nie z odrębnej, specyficznej dla hospicjów normy
   powierzchniowej analogicznej do DPS) — NIE ZNALEZIONO w tej sesji

@@ -1,7 +1,7 @@
 # Moduł — Hodowla zwierząt: zezwolenia i gatunki
 
 > WYDZIELONY 2026-08-12 z mod-ustawa-bezpieczenstwo-zywnosci.md, w ramach
-> realizacji NOTA-4 (audyt-systemu-v4/CHECKLIST-DEDUP.md — moduł >400
+> realizacji NOTA-4 (audyt-systemu-v4/references/CHECKLIST-DEDUP.md — moduł >400
 > linii). Obejmuje pseudohodowlę, zwierzęta niewymagające zezwolenia,
 > rasy/gatunki wymagające szczególnych zezwoleń, gatunki inwazyjne oraz
 > odpowiedzialność cywilną za ucieczkę zwierząt z hodowli.
@@ -234,7 +234,7 @@ istotnie.pl, infowet.pl).
 2026-07-30, na żądanie użytkownika)
 
 ```
-PODSTAWA: art. 431 Kodeksu cywilnego — Dz.U.2026.0.795 t.j.
+PODSTAWA: art. 431 Kodeksu cywilnego — Dz.U. 2026 poz. 795 t.j.
 
 ⭐ KLUCZOWA ZASADA: odpowiedzialność za szkodę wyrządzoną przez
   zwierzę JEST TAKA SAMA niezależnie od tego, czy zwierzę było POD

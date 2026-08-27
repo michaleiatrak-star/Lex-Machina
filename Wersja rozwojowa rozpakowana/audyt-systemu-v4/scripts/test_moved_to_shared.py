@@ -30,7 +30,7 @@ próbnego, szerokiego skanera, który dawał zbyt dużo szumu do
 praktycznego użytku — patrz REGRESSION-TEST-PLAN.md sekcja 10).
 
 Użycie:
-    python3 test_moved_to_shared.py [--repo-root /mnt/skills/user] [--quiet]
+    python3 test_moved_to_shared.py [--repo-root SKILLS_ROOT] [--quiet]
 
 Kod wyjścia:
     0 — wszystkie odnalezione deklaracje przeniesienia mają
@@ -40,6 +40,7 @@ Kod wyjścia:
 """
 
 import argparse
+import os
 import re
 import sys
 from pathlib import Path
@@ -86,7 +87,7 @@ def shared_file_exists_by_stem_or_mention(shared_dir: Path, name: str) -> bool:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--repo-root", default="/mnt/skills/user")
+    ap.add_argument("--repo-root", default=os.environ.get("LEX_MACHINA_SKILLS_ROOT", "."))
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
 

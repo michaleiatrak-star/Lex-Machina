@@ -1,15 +1,33 @@
 ---
 name: prawo-polskie-v2
-version: 6.1
+version: "6.5"
 type: domain-router
 status: production
-compatibility: "web_search, web_fetch"
-description: |
-  Fasada routera — 16 dziedzin prawa polskiego (DR-01 do DR-16).
-  Wchodzi z: prawny-router-v3 → KROK 1B lub prawny-router-v3 → [10].
-  Wychodzi do: właściwy DR-skill → moduł aktu prawnego.
-  Zasada: ten plik zawiera TYLKO routing. Treść prawna → w DR-skills.
+compatibility: "live_web_lookup, cross_skill_file_read"
+description: "Fasada routingu prawa polskiego: wybiera jeden z DR-01–DR-16 i przekazuje sprawę do właściwego skilla dziedzinowego; nie zawiera treści prawa materialnego."
+changelog: |
+  Wersja bieżąca: 6.5. Historia — references/CHANGELOG.md (plik założony
+  2026-08-23g; wersje sprzed 6.2 nieodtworzone — LUKA JAWNA, ślad wyłącznie
+  w audyt-systemu-v4/references/AUDIT-JOURNAL.md).
+  Skrót: 6.5 — moduł transakcji handlowych (F-108/46); 6.2 — zapisana decyzja o zakresie shared/PRAWO-HARDGATE.md w tym
+  skillu, rozdzielna dla SKILL.md (nie obowiązuje) i ROUTING-MAP.md
+  (reżim mapy: FAZA 3 + ZASADA 8 + REGUŁA 3) — flaga F-123.
 ---
+
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Routing DR-01–DR-16 i decyzja o nieduplikowaniu treści prawnej pozostają bez zmian.
+
+1. `view prawo-polskie-v2/ROUTING-MAP.md` oznacza świeży odczyt lokalnego `ROUTING-MAP.md` tego skilla. Literalna ścieżka `/mnt/skills/user` nie jest wymagana.
+2. `view <skill>/...` oznacza aktywację/odczyt wskazanego osobnego skilla przez mechanizm bieżącego hosta. Nie kopiuj DR-skilli ani `shared` do tej paczki.
+3. `view shared/<plik>` oznacza świeży odczyt z kanonicznego skilla `shared`; brak obowiązkowego zasobu = fail-closed, nie substytucja pamięcią modelu.
+4. `web_search` / `web_fetch` oznaczają świeżą weryfikację online przez dostępne narzędzie hosta. Dla `ROUTING-MAP.md` zachowaj istniejący reżim weryfikacji numerów Dz.U. i statusów.
+5. Jeżeli ten skill zostanie wywołany bez `prawny-router-v3`, zachowaj istniejącą regułę: najpierw aktywuj router.
+
+**Zasada nadrzędna:** instrukcje zrozumiałe i wykonalne w hoście wykonuj bez konwersji; adapter dotyczy tylko granicy runtime.
 
 # prawo-polskie-v2 — Fasada Routera DR-01 do DR-16
 
@@ -28,6 +46,36 @@ jeśli ten plik zostanie kiedykolwiek wywołany bezpośrednio, z pominięciem
 routera (np. błąd w innym skillu) — potraktuj to jako naruszenie UP-1 i
 najpierw wczytaj `prawny-router-v3/SKILL.md` zanim przejdziesz dalej.
 
+## ⛔ DECYZJA ZAPISANA — ZAKRES `shared/PRAWO-HARDGATE.md` W TYM SKILLU
+
+*(zapisana 2026-08-23g, flaga F-123 w `audyt-systemu-v4`. Powód zapisania, nie
+tylko podjęcia: pomiar `grep -rl PRAWO-HARDGATE` wykazał tu ZERO odesłań i
+zgłosił to jako lukę. Bez utrwalonej decyzji ten sam wynik wracałby jako nowe
+zgłoszenie przy każdym kolejnym audycie — a każdy fałszywy alarm kosztuje tyle
+co błąd przeoczony, patrz ZASADA 14 w `audyt-systemu-v4/SKILL.md`.)*
+
+**Rozstrzygnięcie jest rozdzielne dla dwóch plików tego skilla:**
+
+| Plik | Czy podlega PRAWO-HARDGATE | Uzasadnienie |
+|---|---|---|
+| `SKILL.md` (ten plik) | **NIE** | Czysta fasada routingu: kieruje do DR-skilla, nie twierdzi niczego o treści prawa — nie podaje przesłanek, terminów ani skutków. Bramka przed cytowaniem przepisu odpala się w DR-skillu, czyli w miejscu, w którym przepis faktycznie pada. Wpisanie jej także tutaj byłoby duplikacją bez zysku (CHECKLIST-DEDUP). |
+| `ROUTING-MAP.md` | **TAK, w zakresie ograniczonym** | ⚠️ Ten plik **nie jest** czystą fasadą: nosi numery Dz.U., roczniki, pozycje i statusy tekstów jednolitych. To są weryfikowalne twierdzenia o stanie prawnym, a błędny numer propaguje się dalej w każdą sprawę, która przez ten routing przejdzie (klasa błędu F-82: numer należący do innego aktu o pokrewnym tytule). |
+
+**Reżim dla `ROUTING-MAP.md`** — nie pełna bramka cytowania, lecz reżim mapy:
+`audyt-systemu-v4` FAZA 3 (A–D) + ZASADA 8 (weryfikuj NUMER niezależnie od
+zgodności NAZWY) + REGUŁA 3 HARDGATE-AUDYT (synchronizacja z lokalnymi
+`MAPA-AKTOW.md` i mapą centralną Dz.U.). Numer wpisany do tego pliku bez
+weryfikacji w Rzędzie 1/2 jest naruszeniem tego reżimu.
+
+⛔ **Wyzwalacz zmiany decyzji.** Jeżeli do któregokolwiek pliku tego skilla
+trafi kiedykolwiek twierdzenie o TREŚCI prawa — przesłanka, termin, właściwość
+sądu, skutek procesowy, cokolwiek poza nazwą aktu, jego numerem i wskazaniem
+modułu — decyzja wygasa z automatu i `view shared/PRAWO-HARDGATE.md`
+staje się obowiązkowe. Zakres „tylko routing" jest warunkiem tej decyzji, nie
+jej trwałą cechą.
+
+---
+
 ## Zasada
 
 ```
@@ -45,7 +93,7 @@ Nie ładuj wszystkich DR-skills naraz. Wczytaj JEDEN pasujący.
 ## Centralna mapa routingu
 
 ```
-view /mnt/skills/user/prawo-polskie-v2/ROUTING-MAP.md
+view prawo-polskie-v2/ROUTING-MAP.md
 ```
 
 ## Routing błyskawiczny
@@ -72,9 +120,9 @@ view /mnt/skills/user/prawo-polskie-v2/ROUTING-MAP.md
 ## Jak wywołać DR-skill
 
 ```
-view /mnt/skills/user/dr-[XX]-[Nazwa]/SKILL.md
+view dr-[XX]-[Nazwa]/SKILL.md
 # następnie:
-view /mnt/skills/user/dr-[XX]-[Nazwa]/modules/mod-[akt].md
+view dr-[XX]-[Nazwa]/modules/mod-[akt].md
 ```
 
 ## Weryfikacja
@@ -114,4 +162,11 @@ audyt-systemu-v4/references/mapa_dzu_*.md  ← rejestr Dz.U.
 | Akt uchylony przed wejściem | Status `❌`, usuń z MONITORING, odnotuj w AUDIT-JOURNAL |
 | Wejście w ciągu 90 dni od daty audytu | Zmień na `⚡ WCHODZI` — priorytetowa aktualizacja modułu |
 
-*Wersja: 5.2 | 2026-07-02 (WARN-28 zamknięty — ABW/AW to nowy t.j. tej samej ustawy z 2002 r., nie reforma; sync ROUTING-MAP)*
+*Numer wersji: wyłącznie pole `version:` we frontmatterze — decyzja generalna
+F-102(C), dwa źródła prawdy o wersji zawsze się rozjeżdżają (ta stopka niosła
+„5.2" przy `version: 6.1`, rozjazd o dziewięć wersji, usunięty 2026-08-23g).*
+
+*Ostatnia zmiana treści: 2026-08-23g — zapisana decyzja o zakresie
+`shared/PRAWO-HARDGATE.md` w tym skillu (F-123). Wcześniej: 2026-07-02,
+WARN-28 zamknięty — ABW/AW to nowy t.j. tej samej ustawy z 2002 r., nie
+reforma; sync ROUTING-MAP.*

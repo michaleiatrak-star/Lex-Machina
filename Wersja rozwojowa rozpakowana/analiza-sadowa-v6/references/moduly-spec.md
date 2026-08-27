@@ -153,7 +153,7 @@ Kluczowe pytanie: domena pracodawcy czy zewnętrzna?
 | @spółka.pl (domena pracodawcy) | Pracodawca co do zasady uprawniony do dostępu |
 | @gmail.com, @wp.pl (domena zewnętrzna) | Konto należy do dostawcy — zmiana hasła może naruszać art. 49 Konstytucji RP, art. 267 KK |
 
-Nawet jeśli zewnętrzne konto ma w adresie nazwę firmy (np. firma.jan@gmail.com)
+Nawet jeśli zewnętrzne konto ma w adresie nazwę firmy (np. konto@zewnetrzna-poczta.example)
 — jest to konto zewnętrzne, nie firmowe.
 
 Weryfikacja adresu w pismach procesowych:

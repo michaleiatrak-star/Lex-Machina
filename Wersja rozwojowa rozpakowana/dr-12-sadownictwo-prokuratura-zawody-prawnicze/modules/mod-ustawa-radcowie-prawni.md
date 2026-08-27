@@ -204,6 +204,14 @@ Przed końcową odpowiedzią sprawdź:
 | postępowanie dyscyplinarne | DR-12/`mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow` |
 | porównanie z adwokaturą | DR-12/`mod-ustawa-adwokatura` |
 
+## Zmiana od 1.10.2026 — tajemnica a MDR
+
+Art. 3 ustawy z 29.05.2026 r. (Dz.U. 2026 poz. 846) nadaje art. 3 ust. 6
+ustawy o radcach prawnych brzmienie, według którego tajemnica zawodowa
+nie obejmuje informacji udostępnianych na podstawie przepisów AML — w
+zakresie określonym tymi przepisami. Usunięto równoległe odesłanie do
+rozdziału 11a Ordynacji podatkowej; wejście w życie 1.10.2026 r.
+
 ## Weryfikacja online
 
 ```

@@ -1,6 +1,6 @@
 # Kwalifikator Karnomaterialny v3.0 — INDEKS (podzielony 2026-08-20, naprawa F-78)
 # Moduł: Drzewo Decyzyjne Podobnych Czynów Zabronionych
-# Dla: prawo-polskie-v2 / prawo-karne.md / analiza-sadowa-v6
+# Dla: prawo-polskie-v2 / `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` / analiza-sadowa-v6
 
 > ⚡ **ZMIANA STRUKTURALNA 2026-08-20 (F-78):** ten plik był 2109 linii —
 > ryzyko gubienia kontekstu przy pracy nad pojedynczym blokiem oraz przy
@@ -30,6 +30,29 @@ KROK 0 — Wybierz właściwą CZĘŚĆ z tabeli niżej wg tematu sprawy i wczyt
   WYŁĄCZNIE ten jeden plik (`view kwalifikator-karnomaterialny/part-0X-*.md`).
   NIE wczytuj wszystkich 8 części naraz — to unieważniałoby cel podziału
   (mniejszy, spójniejszy kontekst na jedną analizę).
+
+  ⛔ **KROK 0-CROSS — BRAMKA ANTY-SILOSOWA (dodana 2026-08-25b, flaga F-134).**
+  Zasada „wczytaj WYŁĄCZNIE jeden plik" jest poprawna dla NAWIGACJI, ale
+  tworzy silos dla WARTOŚCI LICZBOWYCH: ta sama sankcja bywa opisana w kilku
+  częściach i w modułach spoza kwalifikatora, a naprawa wpisana do jednej
+  z nich nie propaguje się do pozostałych. Przypadek zmierzony: naprawa
+  zagrożenia art. 178a §1 KK (2 → 3 lata) z 21.05.2026 objęła
+  `mod-KK-KPK-framework-szczegolowy.md` i `part-08`, ale NIE `part-04` —
+  a UP-3 kieruje sprawy drogowe właśnie do `part-04`. Kto wszedł tą ścieżką,
+  strukturalnie nie mógł zobaczyć wartości poprawnej.
+
+  Dlatego: jeżeli z części, którą wczytałeś, zamierzasz PODAĆ DALEJ
+  konkretną WARTOŚĆ LICZBOWĄ (granicę kary, próg kwotowy, promile, termin),
+  wartość ta NIE pochodzi z tego pliku jako źródła — pochodzi z aktu
+  prawnego. Zweryfikuj ją w źródle w tej samej odpowiedzi (HARD GATE,
+  reguła 24 VER-GRAIN routera). Sam odczyt części kwalifikatora NIE zalicza
+  weryfikacji, nawet gdy wartość jest tu opatrzona znacznikiem ✅ [VER] —
+  ten znacznik dokumentuje stan na DATĘ przy nim podaną, nie stan dzisiejszy.
+
+  ⛔ Odwrotnie dla EDYCJI: naprawiając wartość w którejkolwiek części, ustal
+  najpierw wszystkie miejsca jej wystąpienia w całym skillu (wyszukanie po
+  numerze artykułu w plikach `modules/`), a naprawę wprowadź we WSZYSTKICH
+  naraz. Naprawa w jednym pliku = flaga niezamknięta.
 
 KROK 1 — Zbierz fakty przed drzewem:
   □ Co sprawca zabrał / zrobił? (przedmiot czynu)

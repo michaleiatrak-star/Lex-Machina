@@ -1,7 +1,7 @@
 # mod-MPZP-WZ-planowanie-przestrzenne
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o planowaniu i zagospodarowaniu przestrzennym — Dz.U. 2024 poz. 1130 t.j. ze zm. | Weryfikuj aktualne zmiany w ISAP
+**Źródło weryfikacji:** Ustawa o planowaniu i zagospodarowaniu przestrzennym — Dz.U. 2026 poz. 538 t.j. ze zm. | Weryfikuj aktualne zmiany w ISAP
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -11,7 +11,7 @@
 
 ```
 USTAWA z 07.07.2023 r. o zmianie ustawy o planowaniu i zagospodarowaniu przestrzennym
-  → Nowe t.j. Dz.U. 2024 poz. 1130
+  → Nowe t.j. Dz.U. 2026 poz. 538
   → Zlikwidowano STUDIUM UWARUNKOWAŃ — zastąpione przez PLAN OGÓLNY GMINY
   → Plan ogólny: akt prawa miejscowego obowiązkowy dla każdej gminy
     Termin uchwalenia planu ogólnego: 31.12.2025 r. (pierwotnie)
@@ -31,7 +31,7 @@ Miejscowy Plan Zagospodarowania Przestrzennego (MPZP), decyzja o Warunkach Zabud
 
 | Akt | Dz.U. |
 |---|---|
-| Ustawa o planowaniu i zagospodarowaniu przestrzennym | Dz.U. 2024 poz. 1130 t.j. ze zm. |
+| Ustawa o planowaniu i zagospodarowaniu przestrzennym | Dz.U. 2026 poz. 538 t.j. ze zm. |
 | Ustawa Prawo budowlane | → DR-09 |
 | Specustawa drogowa, kolejowa, mieszkaniowa | → DR-09 |
 

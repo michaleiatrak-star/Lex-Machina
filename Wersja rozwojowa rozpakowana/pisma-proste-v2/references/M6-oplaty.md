@@ -15,7 +15,7 @@
 | Pozew do 7 500 zł | 400 zł | art. 27 pkt 4 KSCU |
 | Pozew do 15 000 zł | 500 zł | art. 27 pkt 5 KSCU |
 | Pozew do 20 000 zł | 750 zł | art. 27 pkt 6 KSCU |
-| Pozew powyżej 20 000 zł | 5% WPS, max 100 000 zł (⚠️ POPRAWKA 2026-07-27, FAZA 3E/ZASADA 14 — było błędnie "max 200 000 zł"; limit OBNIŻONY nowelizacją z 25.07.2025, w życie 23.09.2025 — ta sama poprawka co w dr-12/mod-KSCU-koszty-sadowe-i-pomoc-prawna.md, potwierdzona dosłownym cytatem art. 13 z arslege.pl [t.j. Dz.U.2025.1228] i kancelarii Ziemski&Partners) | art. 13 §2 KSCU |
+| Pozew powyżej 20 000 zł | 5% WPS, max 100 000 zł (⚠️ POPRAWKA 2026-07-27, FAZA 3E/ZASADA 14 — było błędnie "max 200 000 zł"; limit OBNIŻONY nowelizacją z 25.07.2025, w życie 23.09.2025 — ta sama poprawka co w dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-KSCU-koszty-sadowe-i-pomoc-prawna.md, potwierdzona dosłownym cytatem art. 13 z arslege.pl [t.j. Dz.U.2025.1228] i kancelarii Ziemski&Partners) | art. 13 §2 KSCU |
 | Apelacja cywilna | = opłata od pozwu (od WPZ) | art. 18 §1 KSCU |
 | Zarzuty od nakazu | 3/4 opłaty od pozwu | art. 19 §3 KSCU |
 | Sprzeciw od nakazu (EPU/zwykły, w terminie) | **brak** | art. 505³ §3 KPC |

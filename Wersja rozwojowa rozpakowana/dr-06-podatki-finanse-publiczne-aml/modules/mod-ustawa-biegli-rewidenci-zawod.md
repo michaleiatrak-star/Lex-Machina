@@ -233,7 +233,7 @@ web_search: "harmonogram CSRD ESG Polska 2026 odroczenie ustawa"
 
 ## ⚖️ DISCLAIMER
 
-Po zakończeniu analizy: `view /mnt/skills/user/shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
+Po zakończeniu analizy: `view shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
 
 ---
 *mod-ustawa-biegli-rewidenci-zawod.md · dr-06 · utworzony 2026-06-14*

@@ -126,7 +126,7 @@ z mapy pokrycia działami: Dział X rozdz. 1 i 4, Dział IV rozdz. 3, Dział II 
   PPSA), poprzedzona wyczerpaniem trybu z art. 52 PPSA.
   ⚠️ NIE przyjmuj tej kwalifikacji automatycznie — zweryfikuj AKTUALNĄ
   linię w `orzeczenia.nsa.gov.pl` NA DATĘ SPRAWY i skonsultuj z
-  `dr-05` → `mod-PPSA` przed wyborem środka. Błąd w wyborze środka =
+  `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-PPSA-terminy-kasacja-prawo-pomocy.md` przed wyborem środka. Błąd w wyborze środka =
   utrata terminu.
   ⭐ RÓWNOLEGLE zawsze rozważ wniosek z art. 96 ust. 9h — jest szybszy,
   tańszy i nie wyklucza drogi sądowej.
@@ -438,7 +438,7 @@ z mapy pokrycia działami: Dział X rozdz. 1 i 4, Dział IV rozdz. 3, Dział II 
   dla art. 103 ust. 5a)
 - DR-06/`mod-OP-ordynacja-podatkowa` (płatnik — art. 8 OP; odsetki za
   zwłokę od zaległości z art. 103)
-- DR-05/`mod-PPSA` (środek zaskarżenia na czynność materialno-techniczną
+- `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-PPSA-terminy-kasacja-prawo-pomocy.md` (środek zaskarżenia na czynność materialno-techniczną
   wykreślenia — ⚠️ zweryfikuj kwalifikację przed wyborem środka)
 - `orzeczenia-sadowe-v2` (linia WSA/NSA ws. wykreślenia i przywrócenia)
 

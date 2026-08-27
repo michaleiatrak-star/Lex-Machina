@@ -2,7 +2,7 @@
 
 > Plik wydzielony z prawny-router-v3/SKILL.md (R1).
 > Wczytaj gdy: router uruchamia KROK 0A.
-> Wywołanie: `view /mnt/skills/user/prawny-router-v3/references/KROK0A-anonimizer.md`
+> Wywołanie: `view prawny-router-v3/references/KROK0A-anonimizer.md`
 
 ---
 
@@ -53,7 +53,7 @@ KROK 0A.5 → Dopiero po odpowiedzi (lub znaczniku sesji) → przejdź do KROK 1
 | Sygnał | Przykład | Priorytet |
 |---|---|---|
 | Imię + Nazwisko | "Jan Kowalski" | WYSOKI |
-| PESEL (11 cyfr) | "92010112345" | WYSOKI |
+| PESEL (11 cyfr) | "YYMMDDSSSSC" | WYSOKI |
 | NIP | "123-456-78-90" | WYSOKI |
 | Adres z ulicą | "ul. Lipowa 5/3, 00-001 Warszawa" | WYSOKI |
 | Numer konta | "PL61 1090 1014..." | WYSOKI |
@@ -98,7 +98,7 @@ Zanonimizowany dokument trafi automatycznie do analizy.
 
 ```
 1. visualize:read_me  modules=["interactive"]
-2. view /mnt/skills/user/prawny-router-v3/anonimizer/assets/AnonimizerPrawny.jsx
+2. view prawny-router-v3/anonimizer/assets/AnonimizerPrawny.jsx
 3. visualize:show_widget
      title="anonimizer_prawny"
      widget_code → [zawartość z kroku 2]
@@ -139,4 +139,4 @@ Jeśli brak ##ANON_START## / ##PLIK_ORYGINALNY## w oknie 10 wiadomości
 i brak wyraźnej decyzji z poprzedniego kroku → traktuj decyzja_sesji=null → KROK 0A.2.
 ```
 
-Szczegóły: `view /mnt/skills/user/prawny-router-v3/anonimizer/anonimizer-skill.md`
+Szczegóły: `view prawny-router-v3/anonimizer/anonimizer-skill.md`

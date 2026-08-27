@@ -3,7 +3,7 @@
 **Status:** moduł NOWY — utworzony 2026-07-15 (część 3/6 sesji naprawczej).
 Temat był CAŁKOWICIE NIEOBECNY w systemie do tej naprawy (potwierdzone
 grep-em: zero wyników na "przymusow.*odwyk", "leczenie odwykowe" w całym
-`/mnt/skills/user/`).
+``).
 
 ⛔ Ważna korekta terminologiczna na wstępie: "przymusowe leczenie" to
 potoczna nazwa. Prawnie ścisła nazwa to **zobowiązanie do poddania się
@@ -157,7 +157,7 @@ Art. 72 §1 pkt 6 KK: sąd, zawieszając wykonanie kary, MOŻE zobowiązać
 ```
 Gdy uzależnienie współwystępuje z zaburzeniem psychicznym uzasadniającym
   przyjęcie bez zgody do szpitala psychiatrycznego — patrz
-  dr-10/mod-ustawa-zdrowie-psychiczne.md (art. 22-24, 45-46a ustawy o
+  dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-zdrowie-psychiczne.md (art. 22-24, 45-46a ustawy o
   ochronie zdrowia psychicznego) — INNA podstawa prawna, INNA procedura
   (nie GKRPA/sąd rodzinny, lecz przyjęcie szpitalne + kontrola sądowa
   następcza).
@@ -167,10 +167,10 @@ Gdy uzależnienie współwystępuje z zaburzeniem psychicznym uzasadniającym
 
 | Zagadnienie | Moduł |
 |---|---|
-| Przymusowe leczenie psychiatryczne (inne niż uzależnienia) | dr-10/mod-ustawa-zdrowie-psychiczne.md |
+| Przymusowe leczenie psychiatryczne (inne niż uzależnienia) | dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-zdrowie-psychiczne.md |
 | Nieletni — postępowanie w sprawach nieletnich | dr-04 lub dedykowany moduł resocjalizacji nieletnich (sprawdź istnienie) |
-| Przestępstwa narkotykowe — kwalifikacja czynu (posiadanie/obrót/uprawa) | dr-03/mod-KK-kwalifikator-karnomaterialny.md BLOK D |
-| Przemoc domowa współwystępująca z alkoholizmem | dr-03/mod-KK-przemoc-domowa-szczegolowy.md |
+| Przestępstwa narkotykowe — kwalifikacja czynu (posiadanie/obrót/uprawa) | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md BLOK D |
+| Przemoc domowa współwystępująca z alkoholizmem | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-przemoc-domowa-szczegolowy.md |
 | Warunkowe zawieszenie wykonania kary, obowiązki probacyjne | mod-KK-KPK-framework-szczegolowy.md (sprawdź czy art. 72-75 KK są tam opisane) |
 
 ## Weryfikacja online (⛔ obowiązkowa przed każdą sprawą)

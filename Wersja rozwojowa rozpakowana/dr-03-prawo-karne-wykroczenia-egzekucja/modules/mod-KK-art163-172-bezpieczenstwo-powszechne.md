@@ -135,7 +135,8 @@ energii lub zabezpieczeniu przed niebezpieczeństwem powszechnym.
 Kto gromadzi, przekazuje lub oferuje środki płatnicze, papiery
 wartościowe, wartości dewizowe, rzeczy ruchome lub nieruchomości W CELU
 sfinansowania przestępstwa o charakterze terrorystycznym → pozbawienie
-wolności **od 2 do 12 lat**. Powiązanie z ustawą o przeciwdziałaniu praniu
+wolności **od 2 do 15 lat**. Tej samej karze podlega udostępnienie takiego
+mienia podmiotom wskazanym w art. 165a § 2. Powiązanie z ustawą o przeciwdziałaniu praniu
 pieniędzy i finansowaniu terroryzmu (AML) — patrz `mod-KKS-karny-skarbowy-
 i-AML.md`.
 
@@ -224,7 +225,7 @@ dlajurysty.pl) — WERYFIKUJ aktualność na isap.sejm.gov.pl przed użyciem.
 
 ## 7. INTEGRACJA Z SYSTEMEM
 
-- **`dr-01/mod-stany-nadzwyczajne-sytuacje-kryzysowe.md`** — ramy
+- **`dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-stany-nadzwyczajne-sytuacje-kryzysowe.md`** — ramy
   konstytucyjne reakcji na katastrofy/zagrożenia; ten moduł dostarcza
   odpowiedzialność KARNĄ za SPOWODOWANIE takich zdarzeń, nie zarządzanie
   kryzysowe jako takie.
@@ -273,7 +274,7 @@ bezpieczeństwo infrastruktury krytycznej podniesione do priorytetu w
 kontekście obecnej sytuacji geopolitycznej. Zweryfikowano online: pełną
 treść art. 163 (z praktycznymi przykładami sabotażu infrastruktury),
 art. 165 (§1 pkt 3-4 — SERCE ochrony infrastruktury krytycznej fizycznej
-i cyfrowej w KK), art. 165a (finansowanie terroryzmu, 2-12 lat),
+i cyfrowej w KK), art. 165a (finansowanie terroryzmu, obecnie 2-15 lat),
 art. 168-169 (przygotowanie i czynny żal). Odnotowano terminologiczną
 różnicę między KK ("urządzenie użyteczności publicznej") a ustawowym
 pojęciem "infrastruktura krytyczna" z odrębnych aktów — wyjaśnione, że

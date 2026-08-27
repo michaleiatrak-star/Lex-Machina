@@ -1,7 +1,7 @@
 # QUESTION-ADMISSIBILITY-GATE — v3.3
 
 > ⛔ HARDGATE — przy każdej powołanej podstawie prawnej:
-> `view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
+> `view shared/PRAWO-HARDGATE.md`
 
 ---
 
@@ -17,7 +17,7 @@ KROK FPW-1 — FAKT:
   Jeśli fakt nie wynika z żadnego źródła → pytanie niedopuszczalne (spekulacja).
 
 KROK FPW-2 — PODSTAWA PRAWNA (weryfikacja ISAP):
-  ⛔ HARDGATE → view /mnt/skills/user/shared/PRAWO-HARDGATE.md
+  ⛔ HARDGATE → view shared/PRAWO-HARDGATE.md
   Wskaż przepis regulujący obowiązek/uprawnienie będące przedmiotem pytania LUB
   decydujący o skutku prawnym odpowiedzi.
   Weryfikacja: web_search przepisu w ISAP → oznacz ✅ [VER: ISAP, data].

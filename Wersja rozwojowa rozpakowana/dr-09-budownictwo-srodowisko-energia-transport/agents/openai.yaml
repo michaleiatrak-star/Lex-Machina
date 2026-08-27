@@ -1,0 +1,13 @@
+interface:
+  display_name: dr 09 budownictwo srodowisko energia transport
+  short_description: 'Budownictwo, środowisko, energia i transport: prawo budowlane,
+    planowanie, odpady, ochrona środowiska, energetyka, drogi i regulacje transportowe.'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

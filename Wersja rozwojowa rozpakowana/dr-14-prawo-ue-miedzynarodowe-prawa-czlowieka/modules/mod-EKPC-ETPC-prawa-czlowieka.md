@@ -103,9 +103,9 @@ Przed wygenerowaniem pisma lub analizy odpowiedz:
 
 ## 9. POWIĄZANIA
 
-- `mod-BD-prawo-ue-i-procedury-unijne.md`
-- `mod-CY-ue-transgraniczne-egzekucja.md`
-- `mod-DD-konstytucyjne-tk-skarga-konstytucyjna.md`
+- `dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/modules/mod-TFUE-TUE-prawo-pierwotne-UE.md`
+- `dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/modules/mod-KPC-egzekucja-transgraniczna-UE.md`
+- `dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-Konstytucja-TK-skarga-konstytucyjna.md`
 
 ## 10. OUTPUT
 

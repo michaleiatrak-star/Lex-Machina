@@ -10,8 +10,8 @@ z **F-92** (broń i amunicja, dr-13) oraz z dr-03 (uprawnienia procesowe).
 
 **Status weryfikacji źródłowej:** pełna treść rozdziału pobrana z lexlege.pl
 (Rząd 2B, strona ROZDZIAŁU, jeden `web_fetch`, stan deklarowany 16.08.2026,
-Dz.U.2025.0.539 t.j.) — artykuł po artykule, z ustępami i punktami.
-Potwierdzenie zbieżne: sip.lex.pl/OpenLEX (Rozdz. 7, Dz.U.2025.539 t.j.) oraz
+Dz.U. 2025 poz. 539 t.j.) — artykuł po artykule, z ustępami i punktami.
+Potwierdzenie zbieżne: sip.lex.pl/OpenLEX (Rozdz. 7, Dz.U. 2025 poz. 539 t.j.) oraz
 arslege.pl. ⛔ Kontrola nowelizacji w ISAP NIEWYKONANA (ROBOTS_DISALLOWED).
 
 > ⚠️ Spis treści ustawy opisuje rozdział jako „36–41", ale zawiera on także
@@ -179,7 +179,7 @@ ustawy**. Ich treści merytorycznej NIE ustalono w tej sesji.
 (ustawa o środkach przymusu bezpośredniego i broni palnej, **Dz.U. 2026
 poz. 244** wg mapy centralnej — metryka do potwierdzenia). Zobacz też
 ostrzeżenie o kolizji terminologicznej w
-`dr-13/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md` (F-92).
+`dr-13-sluzby-bezpieczenstwo-informacje-niejawne/modules/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md` (F-92).
 
 **Pozostałe ustępy:** ust. 6 — **(uchylony)**; ust. 7 — do czynności z ust. 2
 stosuje się **odpowiednio przepisy o Policji**; ust. 9 — **(uchylony)**.
@@ -213,7 +213,7 @@ przypadek zażalenia o **nietypowym adresacie** — organ prokuratorski, nie są
 korzystają z ochrony prawnej przewidzianej w **KK dla funkcjonariusza
 publicznego**. ⭐ Skutek dwustronny: czynna napaść lub znieważenie strażnika
 podlega kwalifikacji z przepisów o funkcjonariuszu publicznym (zob.
-`dr-03/mod-KK-kwalifikator-karnomaterialny.md`) — istotne przy sprawach
+`dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md`) — istotne przy sprawach
 o zdarzenia w trakcie kontroli.
 
 ---
@@ -255,7 +255,7 @@ w przepisach o broni i amunicji**.
 Warunki użycia z pkt 2 (łącznie): cel **ochrony zwierzyny przed
 drapieżnikami znajdującymi się na liście zwierząt łownych**; **zgodność
 z rocznym planem łowieckim**; strażnik **jest członkiem PZŁ**.
-→ zob. `dr-13/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md` oraz
+→ zob. `dr-13-sluzby-bezpieczenstwo-informacje-niejawne/modules/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md` oraz
 `mod-lowieckie-obwody-dzierzawa-odszkodowania.md` (roczny plan łowiecki).
 
 ---
@@ -411,7 +411,7 @@ sesji 16b). Nie powoływać żadnego z nich bez odczytu ze źródła.
    lub sprzeciw wnosi się w terminie 7 dni od daty ogłoszenia postanowienia,
    a jeżeli ustawa nakazuje doręczenie postanowienia – od daty doręczenia"
    (potwierdzone: lexlege.pl, arslege.pl, sip.lex.pl, aktualny t.j.
-   Dz.U.2026.490) — analogicznie **art. 103 KPW** dla spraw o wykroczenia
+   Dz.U. 2026 poz. 490) — analogicznie **art. 103 KPW** dla spraw o wykroczenia
    łowieckie (odpowiednik 7-dniowy, NIE odczytany źródłowo w tej sesji —
    ⚠️ [NIEWERYFIKOWANE] tylko dla gałęzi KPW, gałąź KPK zamknięta).
 3. ✅ **CZĘŚCIOWO ZWERYFIKOWANE (2026-08-18, F-91 pkt 1):** metryki

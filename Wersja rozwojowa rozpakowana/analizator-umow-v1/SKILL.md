@@ -1,34 +1,36 @@
 ---
 name: analizator-umow-v1
-version: 1.30
+version: "1.31"
 type: executive-umowy
 status: production
-description: |
-  Analiza, redakcja, negocjacje i generowanie od zera umów oraz dokumentów
-  korporacyjnych/HR/RODO. Stosuj gdy użytkownik: chce ocenić, poprawić,
-  wynegocjować lub napisać umowę (B2B, o pracę, zakaz konkurencji, najem,
-  nieruchomości, dystrybucja, finansowanie, IT/SaaS, PZP/FIDIC, B2C,
-  IP/prawa autorskie, ubezpieczenia, dokumenty founders'/spółka/statut,
-  RODO/regulaminy) lub dokument korporacyjny/regulamin/pełnomocnictwo;
-  chce triage ryzyka klauzul, ocenę z perspektywy drugiej strony, lub
-  poprawę pojedynczego fragmentu umowy.
-  Przepisy, akty UE i klauzule UOKiK weryfikować wyłącznie w źródłach
-  urzędowych przed użyciem — nigdy z pamięci.
-  Pełna historia zmian i metodologia: references/CHANGELOG.md (nie w tym
-  polu — opis wyzwalający musi zostać zwięzły dla trafności triggerowania
-  skilla).
-compatibility:
-  tools:
-    - official_sources_only
-  shared_library: /mnt/skills/user/shared/
+description: "Analiza, redakcja, negocjacje i generowanie umów oraz dokumentów korporacyjnych, HR i RODO: ryzyka klauzul, B2B/B2C, praca, najem, IT/SaaS, IP, founders, finansowanie i PZP."
+compatibility: "Requires current official legal sources and access to the separately installed canonical shared skill; document generation is optional."
 ---
+
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Nie zmienia metodologii analizy umów, scoringu ryzyka, routingów J/G/H/I/K, hard gate’ów, checklist ani wymogów finalizacji.
+
+1. `view`, `web_search`, `web_fetch`, `present_files`, `create_file`, `bash`, `python` i podobne nazwy traktuj jako nazwy operacji semantycznych, jeżeli bieżący host nie udostępnia literalnie narzędzia o tej nazwie. Użyj równoważnej funkcji hosta.
+2. `view analizator-umow-v1/...` oraz `view references/...` oznaczają świeży odczyt odpowiedniego pliku lokalnego tego skilla (`references/`, `workflows/`). Nie wymagaj literalnego katalogu `/mnt/skills`.
+3. `view shared/<plik>` oznacza świeży odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tej paczki. Jeżeli obowiązkowy zasób shared jest niedostępny, zastosuj fail-closed zamiast zastępować go pamięcią modelu.
+4. `web_search` / `web_fetch` oznaczają świeże wyszukanie i odczyt źródła. Dla prawa, orzecznictwa, UOKiK, EUR-Lex, NBP i innych danych regulacyjnych zachowaj istniejący wymóg źródła oficjalnego i zakaz cytowania z pamięci.
+5. `present_files` / `create_file` oznaczają utworzenie i przekazanie użytkownikowi dokumentu przez natywną funkcję plikową/dokumentową bieżącego hosta. Brak literalnej funkcji `present_files` nie zwalnia z bramek AU-HYBRID/AU-STRIP/AU-POST/AU-DISC i ST-GATE-FINAL.
+6. Ścieżki `/mnt/user-data/...` oznaczają rzeczywiste pliki użytkownika dostępne w bieżącym hoście. Wymagany ponowny odczyt dokumentu ma być rzeczywistym odczytem pliku, nie przypomnieniem z kontekstu.
+7. Polecenia shell/Python i narzędzia dokumentowe są technikami pomocniczymi, gdy host je udostępnia. Jeżeli nie, użyj natywnego parsera/generatora dokumentów, zachowując te same kryteria kompletności i walidacji.
+8. Odwołania do innych skilli są integracjami między-skillowymi. Nie kopiuj ich do tego ZIP-a. Jeśli integracja nie jest dostępna, wykonaj lokalną część możliwą do wykonania i jawnie oznacz pominięty krok bez tworzenia fikcyjnego wyniku.
+
+**Zasada nadrzędna adaptera:** jeśli istniejąca instrukcja jest zrozumiała i wykonalna przez bieżący host, wykonaj ją bez konwersji. Adapter działa tylko na rzeczywistej granicy runtime.
 # Skill: Analizator Umów i Porozumień v1
 
 ---
 
 ## ⛔ HARD GATE GLOBALNY — ZAKAZ CYTOWANIA PRAWA Z PAMIĘCI
 
-> `view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
+> `view shared/PRAWO-HARDGATE.md`
 > Jeśli źródło niedostępne → oznacz `⚠️ [NIEWERYFIKOWANE]` i kontynuuj bez treści przepisu.
 
 **STOP przed podaniem jakiegokolwiek artykułu, terminu, kwoty, kary, orzeczenia.**
@@ -36,25 +38,24 @@ compatibility:
 > ⛔ BRAMKI TOWARZYSZĄCE (dodane 2026-08-23, F-109) — przed wydaniem analizy,
 > redakcji klauzuli lub gotowej umowy:
 > ```
-> □ [ANTY-FASADA] (dodane 2026-08-23, v2.6) Czy w odpowiedzi/piśmie jest słowo
->   „zweryfikowano/zweryfikowałem", pole „data weryfikacji" albo URL przy przepisie,
->   dla którego NIE wywołałem narzędzia W TEJ ODPOWIEDZI? TAK → ⛔ usuń deklarację
->   i datę, URL przeformatuj na 🎯 [CEL — RZĄD 1, NIEOTWARTE: …], przepis oznacz
->   ⚠️ [NIEWERYFIKOWANE]. Wyzwalacz to BRAK WYWOŁANIA, nie brak narzędzi w sesji.
->   ⛔ Zastrzeżenie selektywne (przy sygnaturach tak, przy przepisach nie) = naruszenie.
+> □ [ANTY-FASADA + AF-6] Wykonaj self-check antyfasadowy z modułu kanonicznego:
+>     view shared/SELF-CHECK-ANTY-FASADA.md
+>   ⛔ Treść listy NIE jest tu kopiowana (F-115, 2026-08-23i). Poprzednia kopia
+>     miała 1 z 2 pozycji: gdy F-117 dodała AF-6 do źródła, kopie nie zostały
+>     zaktualizowane. Jedno miejsce prawdy = jedno miejsce aktualizacji.
 □ [DOMAIN-LOCK] Odpowiedź/pismo zawiera przepis SPOZA dziedziny wiodącej
   (KK/KKS/KW/KPK/KPW przy torze cywilnym, pracowniczym lub administracyjnym —
   albo odwrotnie)? NIE → OK. TAK → (a) konkretny FAKT wypełniający znamię,
   nie skojarzenie tematyczne? (b) właściwy DR wczytany w TEJ odpowiedzi?
   (c) przepis przeszedł PRAWO-HARDGATE w TEJ odpowiedzi? Którekolwiek NIE →
-  ⛔ USUŃ powołanie.  → `view /mnt/skills/user/shared/DOMAIN-LOCK.md`
+  ⛔ USUŃ powołanie.  → `view shared/DOMAIN-LOCK.md`
 □ [RATE-COMPLETENESS] Występują odsetki / waloryzacja / wskaźnik zmienny
   w czasie? NIE → OK. TAK → przedział zapisany + reżim rozstrzygnięty
   (KC vs transakcje handlowe) + szereg podokresów BEZ LUK + znacznik na
   KAŻDYM wierszu? NIE → nie podawaj kwoty łącznej, pokaż tabelę z ⬛.
-  → `view /mnt/skills/user/shared/RATE-COMPLETENESS.md`
+  → `view shared/RATE-COMPLETENESS.md`
 □ [STATUSY] Każdy przepis ma znacznik z ZAMKNIĘTEJ hierarchii czterech:
-  ✅ [VER] · 🟡 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
+  ✅ [VER] · 🟨 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
   Etykieta spoza tej listy = naruszenie hard gate (PRAWO-HARDGATE v2.5).
 > ```
 > ⭐ Szczególnie istotne dla tego skilla: (a) klauzule o odsetkach za
@@ -88,7 +89,7 @@ ZAKAZ oznaczania ✅ [VER] bez faktycznego wykonania web_search / web_fetch.
 
 ## KROK 0-ST — REJESTR KROKÓW ⛔ HARD GATE (ST-GATE)
 
-> `view /mnt/skills/user/shared/MOD-STEP-TRACKER.md`
+> `view shared/MOD-STEP-TRACKER.md`
 > Wzorem pisma-procesowe-v3 i analizator-dowodow-v3 — to jest BRAMKA, nie
 > zalecenie. Każde pominięcie obowiązkowego etapu MUSI być odnotowane i
 > zakomunikowane użytkownikowi. Przejście dalej lub dostarczenie dokumentu/
@@ -251,25 +252,25 @@ ST-INIT: zainicjuj podzbiór REJESTRU właściwy dla wykrytego trybu:
 
 | Sytuacja | Moduł | Ścieżka |
 |---|---|---|
-| Śledzenie kroków i raportowanie pominięć — ⛔ HARD GATE (KROK 0-ST / ST-GATE, blokuje ROUTING DO MODUŁÓW i present_files) | **STEP-TRACKER** | `view /mnt/skills/user/shared/MOD-STEP-TRACKER.md` |
-| Brakujące dane w Fazie 0 (⬛ pola) | **INTAKE-GAP** | `view /mnt/skills/user/shared/INTAKE-GAP.md` |
-| Przed wygenerowaniem umowy / klauzul | **HYBRID-VALIDATION** | `view /mnt/skills/user/shared/HYBRID-VALIDATION.md` |
-| Przed eksportem .docx / przekazaniem umowy | **STRIP-VER-GATE** | `view /mnt/skills/user/shared/WERYFIKACJA-SLAD.md § STRIP-VER-GATE` |
-| Po wygenerowaniu dokumentu — walidacja spójności | **POST-VALIDATION** | `view /mnt/skills/user/shared/POST-VALIDATION.md` |
-| Formalna walidacja pisma (bloki A–J) | **MOD-WALIDACJA** | `view /mnt/skills/user/shared/MOD-WALIDACJA_v2.md` |
-| Weryfikacja zgodności treści z faktami źródłowymi | **FAKTY** | `view /mnt/skills/user/shared/FAKTY_v2.md` |
-| Terminy procesowe KPC/KP/KPA | **terminy** | `view /mnt/skills/user/shared/terminy.md` |
-| Po Raporcie F — widget statusu sprawy | **raport-sytuacyjny** | `view /mnt/skills/user/shared/raport-sytuacyjny-integracja.md` |
-| Każda odpowiedź z analizą prawną | **DISCLAIMER** | `view /mnt/skills/user/shared/DISCLAIMER.md` |
-| Walidacja formatu/istnienia sygnatury sądowej | **SYGNATURY** | `view /mnt/skills/user/shared/SYGNATURY.md` |
-| Znaczniki VER przy przepisach/terminach/orzeczeniach | **WERYFIKACJA-ŚLAD** | `view /mnt/skills/user/shared/WERYFIKACJA-SLAD.md` |
+| Śledzenie kroków i raportowanie pominięć — ⛔ HARD GATE (KROK 0-ST / ST-GATE, blokuje ROUTING DO MODUŁÓW i present_files) | **STEP-TRACKER** | `view shared/MOD-STEP-TRACKER.md` |
+| Brakujące dane w Fazie 0 (⬛ pola) | **INTAKE-GAP** | `view shared/INTAKE-GAP.md` |
+| Przed wygenerowaniem umowy / klauzul | **HYBRID-VALIDATION** | `view shared/HYBRID-VALIDATION.md` |
+| Przed eksportem .docx / przekazaniem umowy | **STRIP-VER-GATE** | `view shared/WERYFIKACJA-SLAD.md § STRIP-VER-GATE` |
+| Po wygenerowaniu dokumentu — walidacja spójności | **POST-VALIDATION** | `view shared/POST-VALIDATION.md` |
+| Formalna walidacja pisma (bloki A–J) | **MOD-WALIDACJA** | `view shared/MOD-WALIDACJA_v2.md` |
+| Weryfikacja zgodności treści z faktami źródłowymi | **FAKTY** | `view shared/FAKTY_v2.md` |
+| Terminy procesowe KPC/KP/KPA | **terminy** | `view shared/terminy.md` |
+| Po Raporcie F — widget statusu sprawy | **raport-sytuacyjny** | `view shared/raport-sytuacyjny-integracja.md` |
+| Każda odpowiedź z analizą prawną | **DISCLAIMER** | `view shared/DISCLAIMER.md` |
+| Walidacja formatu/istnienia sygnatury sądowej | **SYGNATURY** | `view shared/SYGNATURY.md` |
+| Znaczniki VER przy przepisach/terminach/orzeczeniach | **WERYFIKACJA-ŚLAD** | `view shared/WERYFIKACJA-SLAD.md` |
 
 > **Priorytet systemowy:** moduły `user/shared` mają pierwszeństwo przed lokalnymi odpowiednikami.
 > **HYBRID-VALIDATION wczytaj ZAWSZE przed wygenerowaniem jakiegokolwiek dokumentu wyjściowego.**
 > **DISCLAIMER dodaj ZAWSZE na końcu każdej odpowiedzi zawierającej analizę prawną.**
 > **WERYFIKACJA-ŚLAD: każdy przepis/termin/orzeczenie — znacznik ✅ [VER: źródło] lub ⚠️ [NIEWERYFIKOWANE].**
 > **⛔ STRIP-VER-GATE: po HYBRID-VALIDATION, przed eksportem umowy / regulaminu / OWU / wzorca —**
-> **view /mnt/skills/user/shared/WERYFIKACJA-SLAD.md § STRIP-VER-GATE → SVG-1→SVG-2→SVG-3→SVG-4.**
+> **view shared/WERYFIKACJA-SLAD.md § STRIP-VER-GATE → SVG-1→SVG-2→SVG-3→SVG-4.**
 > **Blokada: nie generuj .docx ani nie przekazuj dokumentu bez zamknięcia SVG-1–SVG-3.**
 
 ---
@@ -445,7 +446,7 @@ Przed każdą analizą lub redakcją ustal JEDNYM pytaniem zbiorczym:
 ```
 
 **Braki danych (⬛ pola nieuzupełnione):**
-Jeśli wymagane informacje nie zostały podane → `view /mnt/skills/user/shared/INTAKE-GAP.md`
+Jeśli wymagane informacje nie zostały podane → `view shared/INTAKE-GAP.md`
 → zastosuj tryb 1, 2 lub 3 zgodnie z modułem. Nie generuj dokumentu z ⬛ polami
 bez uprzedniego przejścia przez INTAKE-GAP.
 
@@ -457,7 +458,7 @@ bez uprzedniego przejścia przez INTAKE-GAP.
   → Potwierdź: firma rejestrowa + KRS + NIP + REGON + adres + status (aktywna?)
   → Gdy w dokumencie rozbieżność identyfikatorów (np. KRS≠NIP co do podmiotu):
     ⛔ TRIGGER ISU:
-    view /mnt/skills/user/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
+    view shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
     → ISU-1 → ISU-2 → ISU-3 → ISU-4 → ISU-5
     → Formuła ISU-5 wchodzi do sekcji "Identyfikacja stron" raportu
   → Gdy PESEL osoby fizycznej w dokumencie:
@@ -533,7 +534,7 @@ na żądanie         → zawsze F.1 niezależnie od kwoty
 *             + UNIDROIT Principles art. 7.1.7 / 6.2.1-6.2.3 (Opcje A/B/C rozwiązania)*
 *             mod-shared-neg-strategia: ZOPA z BATNA + principled negotiation 4 zasady*
 *             (Fisher/Ury/Patton, Getting to Yes, Harvard Negotiation Project) — NEG.1B nowe*
-*SHARED systemowe (/mnt/skills/user/shared/): INTAKE-GAP · HYBRID-VALIDATION · POST-VALIDATION*
+*SHARED systemowe (shared/): INTAKE-GAP · HYBRID-VALIDATION · POST-VALIDATION*
 *             MOD-WALIDACJA_v2 · FAKTY_v2 · terminy · raport-sytuacyjny-integracja*
 *             DISCLAIMER · SYGNATURY · WERYFIKACJA-SLAD*
 *Weryfikacja: isap.sejm.gov.pl · rejestr.uokik.gov.pl · uokik.gov.pl · eur-lex.europa.eu*

@@ -1,13 +1,25 @@
 ---
 name: dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka
-version: 3.5
-description: |
-  DR-14: Prawo UE, Międzynarodowe, Prawa Człowieka
-  Jeden moduł = jeden akt prawny (Dz.U.) lub wydzielony obszar prawa UE / prawa międzynarodowego.
-  Ładuj TYLKO moduł pasujący do sprawy — lazy loading.
-  Wchodzi z: prawo-polskie-v2 → ROUTING-MAP → ten skill.
-  Weryfikacja: isap.sejm.gov.pl | eur-lex.europa.eu | echr.coe.int | sn.pl + shared/INTERPRETACJE-URZEDOWE.md (rejestr interpretacji urzędowych per dziedzina)
+version: "3.7"
+description: "Prawo UE, międzynarodowe i prawa człowieka: prawo pierwotne i wtórne UE, TSUE, EKPC/ETPC, traktaty, kolizje jurysdykcji i standardy praw człowieka."
 ---
+
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedzinowa, mapy aktów, hard gate’y, kolejność modułów i kryteria jakości tego DR-skilla pozostają bez zmian.
+
+1. `view dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/<plik>` oraz `view modules/...` / `view references/...` oznaczają świeży odczyt odpowiedniego lokalnego pliku tego skilla. Literalna ścieżka `/mnt/skills/user` nie jest wymagana.
+2. `view shared/<plik>` oznacza świeży odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tej paczki. Brak obowiązkowego zasobu shared = fail-closed, nie substytucja pamięcią modelu.
+3. `view <inny-skill>/<plik>` oznacza aktywację/odczyt wskazanego osobnego skilla. Nie vendoryzuj innych skilli do tego ZIP-a.
+4. `web_search` / `web_fetch` i podobne nazwy oznaczają świeże wyszukanie/odczyt online przez równoważną funkcję hosta. Zachowaj wymagane źródła oficjalne, statusy weryfikacji i zakaz cytowania prawa z pamięci.
+5. `show_widget`, `visualize:read_me`, `present_files`, `create_file`, shell/Python i podobne operacje są nazwami semantycznymi. Jeśli host nie ma literalnego narzędzia, użyj równoważnej funkcji natywnej bez omijania bramek jakości.
+6. `/mnt/user-data/...` oznacza rzeczywiste załączniki użytkownika dostępne w bieżącym hoście; wymagany ponowny odczyt ma być faktycznym odczytem źródła.
+
+**Zasada nadrzędna:** instrukcje, które są już zrozumiałe i wykonalne w bieżącym hoście, wykonuj bez konwersji. Adapter działa wyłącznie na granicy runtime.
+
 
 # DR-14 — Prawo UE, Międzynarodowe, Prawa Człowieka
 
@@ -24,6 +36,25 @@ description: |
 - EKPC: termin skargi do ETPC = **4 miesiące** (od 01.02.2022; poprzednio 6 miesięcy)
 - Bruksela Ia: znosi exequatur w UE (od 10.01.2015) — weryfikuj wyjątki
 - Pytanie prejudycjalne art. 267 TFUE: sąd ostatniej instancji ma OBOWIĄZEK, niższy — prawo
+
+
+> ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
+> (podłączone 2026-08-24, flaga F-115 P3 — zamknięcie zakresu 16 skilli DR):
+>
+> ```
+> view shared/SELF-CHECK-ANTY-FASADA.md
+> ```
+>
+> Sprawdza dwie rzeczy: (1) czy w tekście stoi „zweryfikowano", data weryfikacji
+> albo URL przy przepisie, dla którego NIE wywołano narzędzia W TEJ ODPOWIEDZI;
+> (2) czy znacznik statusu nie został nadany treści WYGENEROWANEJ w tej odpowiedzi
+> (AF-6). Treść listy jest w module, nie tutaj — celowo, żeby nie powstało kolejne
+> miejsce dryfu (7 wcześniejszych kopii rozjechało się ze źródłem przy pierwszej
+> zmianie brzmienia).
+>
+> ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
+> oznaczenia, tylko je wymusza.
 
 ---
 
@@ -46,7 +77,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Prawo UE, międzynarodowe, prawa człowieka — definicje TFUE/TUE/KPP/EKPC mają charakter pierwotny (prawo traktatowe) i są pokryte wprost w modułach dziedzinowych (mod-KPP-karta-praw-podstawowych-UE, mod-EKPC-ETPC-prawa-czlowieka). Żaden plik shared/definicje/ nie obejmuje tej dziedziny.
-## Moduły (10 łącznie — ✓ 10 OK, ☐ 0 STUB)
+## Moduły (12 łącznie — ✓ 12 OK, ☐ 0 STUB)
 
 ```
 PRAWO PIERWOTNE UE I PROCEDURY TSUE:
@@ -104,8 +135,8 @@ NATO I UMOWY OBRONNE:
 GRANICE I RUCH OSOBOWY:
   [✓] NOWY  mod-maly-ruch-graniczny
               (utworzony 2026-07-15; rozp. UE 1931/2006 + 1342/2011; umowy
-               dwustronne PL-Ukraina (Dz.U. 2009.103.858), PL-Rosja
-               (Dz.U. 2012.814, zawieszona od 2016), PL-Białoruś (Dz.U.
+               dwustronne PL-Ukraina (Dz.U. 2009 poz. 858), PL-Rosja
+               (Dz.U. 2012 poz. 814, zawieszona od 2016), PL-Białoruś (Dz.U.
                2010.122.823, nigdy nie weszła w życie) — ⛔ temat wysoce
                zmienny politycznie, zawsze web_search aktualnego statusu)
 
@@ -175,13 +206,13 @@ NARZĘDZIE METODYCZNE:
 ## Jak wywołać
 
 ```
-view /mnt/skills/user/dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/modules/[nazwa-modulu].md
+view dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/modules/[nazwa-modulu].md
 ```
 
 ## Lokalna mapa aktów prawnych
 
 ```
-view /mnt/skills/user/dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/MAPA-AKTOW.md
+view dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/MAPA-AKTOW.md
 ```
 
 ---
@@ -203,7 +234,7 @@ view /mnt/skills/user/dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/MAPA-AKTOW.m
 Po zakończeniu analizy lub przed oddaniem odpowiedzi zawierającej ocenę prawną:
 
 ```text
-view /mnt/skills/user/shared/DISCLAIMER.md
+view shared/DISCLAIMER.md
 ```
 
 Wybierz wariant odpowiedni do trybu:

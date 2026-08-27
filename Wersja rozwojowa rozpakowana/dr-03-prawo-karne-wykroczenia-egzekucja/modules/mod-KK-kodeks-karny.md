@@ -6,7 +6,7 @@ scentralizowane w DR-03, który jest właściwym domem dla spraw karnych.
 
 ## Kanonik
 ```
-view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md
+view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md
 ```
 
 ## Akty prawne obsługiwane przez kanonik
@@ -16,11 +16,11 @@ view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK
 ## Dla zakresu DR-06 (podatki/KAS/AML)
 Przestępstwa i wykroczenia skarbowe (KKS):
 ```
-view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KKS-karny-skarbowy-i-AML.md
+view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KKS-karny-skarbowy-i-AML.md
 ```
 Pranie pieniędzy i AML:
 ```
-view /mnt/skills/user/dr-06-podatki-finanse-publiczne-aml/modules/mod-ustawa-AML-instytucje-obowiazkowe.md
+view dr-06-podatki-finanse-publiczne-aml/modules/mod-ustawa-AML-instytucje-obowiazkowe.md
 ```
 
 ## Źródła

@@ -1,0 +1,14 @@
+interface:
+  display_name: dr 13 sluzby bezpieczenstwo informacje niejawne
+  short_description: 'Służby, bezpieczeństwo i informacje niejawne: Policja, ABW/AW
+    i inne służby, obrona, ochrona informacji niejawnych oraz publicznoprawne ramy
+    bezpieczeństwa.'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

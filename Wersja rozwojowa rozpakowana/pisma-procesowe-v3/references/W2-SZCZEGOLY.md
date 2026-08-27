@@ -1,7 +1,7 @@
 # W2-SZCZEGOLY — Struktura pisma i lista placeholderów (W2.2–W2.3)
 
 > Wydzielono z pisma-procesowe-v3/SKILL.md (v5.5) — redukcja NOTA-4
-> Wywołanie: `view /mnt/skills/user/pisma-procesowe-v3/references/W2-SZCZEGOLY.md`
+> Wywołanie: `view pisma-procesowe-v3/references/W2-SZCZEGOLY.md`
 > Zawiera: W2.2 (obowiązkowa struktura pisma), W2.3 (lista kontrolna placeholderów).
 
 ---
@@ -9,7 +9,7 @@
 ### W2.2 — Struktura pisma (obowiązkowa)
 
 > Przed redakcją: sprawdź czy pismo wymaga executive summary (pozew, apelacja,
-> pismo >3 str.) — jeśli tak, wygeneruj je przez `view /mnt/skills/user/shared/MOD-INTRO.md`
+> pismo >3 str.) — jeśli tak, wygeneruj je przez `view shared/MOD-INTRO.md`
 > i wstaw jako pierwsze akapity (przed [ŻĄDANIA]).
 > QUALITY-CHECK §5 i MOD-PEER-REVIEW ROLA 2 (PR-B1) weryfikują obecność intro w W3.
 

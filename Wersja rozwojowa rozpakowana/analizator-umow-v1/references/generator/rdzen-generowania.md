@@ -13,7 +13,7 @@
 
 Każdy artykuł, próg kwotowy, termin ustawowy lub wymóg formy przywołany podczas
 generowania dokumentu podlega globalnemu HARD GATE tego skilla
-(`view /mnt/skills/user/shared/PRAWO-HARDGATE.md`) — **bez wyjątku dla trybu
+(`view shared/PRAWO-HARDGATE.md`) — **bez wyjątku dla trybu
 generowania**. Tworzenie dokumentu od zera jest tu równie ryzykowne jak analiza:
 błędny artykuł w wygenerowanej umowie/regulaminie trafia bezpośrednio do obrotu.
 
@@ -46,7 +46,7 @@ BRAMKA 4  STYL, FORMAT       `view references/generator/style-format-generowania
 BRAMKA 4B SPÓJNOŚĆ ODESŁAŃ   dla dokumentów > 15 stron/§/odesłań —
                              `view workflows/weryfikacja-spojnosci-odeslan.md`
                              (dwuetapowa: inwentaryzacja → weryfikacja)
-BRAMKA 5  HYBRID-VALIDATION  `view /mnt/skills/user/shared/HYBRID-VALIDATION.md`
+BRAMKA 5  HYBRID-VALIDATION  `view shared/HYBRID-VALIDATION.md`
                              — OBOWIĄZKOWA przed zwróceniem finalnej wersji
                              i przed każdym eksportem .docx
 ```

@@ -70,7 +70,7 @@ WNIOSEK KPA (art. 221): propozycja ulepszenia, udoskonalenia pracy organu
 
 **Output:** Kwalifikacja (petycja / skarga / wniosek KPA) → wniesienie → monitoring terminu → skarga WSA przy bezczynności.
 
-**Powiązania:** `dr-04` → `mod-KPA` | `pisma-procesowe-v3`
+**Powiązania:** `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` | `pisma-procesowe-v3`
 
 **Źródła:** https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20180000870
 

@@ -4,7 +4,7 @@
 **Źródło weryfikacji:**
 - USG — **Dz.U. 2026 poz. 662 t.j.** z 21.05.2026 (obwieszczenie 15.05.2026, stan na 13.05.2026) ✅ VER: 2026-07-26 — POPRAWKA: poprzedni numer 2025.1153 był nieaktualny (flaga otwarta od 2026-07-02, nigdy niedomknięta w treści modułu — naprawiono przy audycie pełnego systemu)
 - USP — **Dz.U. 2025 poz. 1684 t.j.** z 07.11.2025 ✅ VER: 2026-06-05
-- USW — **Dz.U. 2025 poz. 581 t.j.** z 24.03.2025 ✅ VER: 2026-06-05
+- USW — **Dz.U. 2026 poz. 720 t.j.** (obwieszczenie z 27.05.2026) ✅ VER: ELI 2026-08-25
 - Ustawa o wojewodzie — **Dz.U. 2025 poz. 428 t.j.** z 24.03.2025 ✅ VER: 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -21,7 +21,7 @@ Trójstopniowy samorząd terytorialny: gmina (USG), powiat (USP), województwo (
 |---|---|---|
 | Ustawa o samorządzie gminnym | USG | Dz.U. 2026 poz. 662 t.j. |
 | Ustawa o samorządzie powiatowym | USP | Dz.U. 2025 poz. 1684 t.j. |
-| Ustawa o samorządzie województwa | USW | Dz.U. 2025 poz. 581 t.j. |
+| Ustawa o samorządzie województwa | USW | Dz.U. 2026 poz. 720 t.j. |
 | Ustawa o wojewodzie i administracji rządowej w województwie | — | Dz.U. 2025 poz. 428 t.j. |
 
 ---

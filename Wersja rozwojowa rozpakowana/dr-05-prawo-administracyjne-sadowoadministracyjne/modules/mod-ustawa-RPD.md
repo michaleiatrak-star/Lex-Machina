@@ -144,8 +144,8 @@ Wniosek o wyrażenie zgody na pociągnięcie RPD do odpowiedzialności
 
 | Sytuacja | Właściwy organ |
 |---|---|
-| Naruszenie konstytucyjnych praw/wolności DOROSŁEGO obywatela | RPO — `dr-05/modules/mod-ustawa-RPO.md` |
-| Naruszenie PRAW PACJENTA (dorosłego lub dziecka jako pacjenta) | Rzecznik Praw Pacjenta — `dr-10/modules/mod-rzecznik-praw-pacjenta-RPP.md` |
+| Naruszenie konstytucyjnych praw/wolności DOROSŁEGO obywatela | RPO — `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-RPO.md` |
+| Naruszenie PRAW PACJENTA (dorosłego lub dziecka jako pacjenta) | Rzecznik Praw Pacjenta — `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-rzecznik-praw-pacjenta-RPP.md` |
 | Naruszenie PRAW DZIECKA (jako takiego, poza kontekstem pacjenta) | **RPD — ten moduł** |
 | Sprawa opiekuńcza/rodzinna (władza rodzicielska, kontakty) BEZ elementu naruszenia praw dziecka wymagającego interwencji RPD | Sąd rodzinny bezpośrednio, bez pośrednictwa RPD — zob. moduły KRO w dr-02 |
 | Zgłoszenie sygnalisty dot. dziedziny z katalogu ustawy o sygnalistach, gdzie POKRZYWDZONYM jest dziecko (np. praca dzieci, handel ludźmi) | Tryb sygnalisty (dr-15) LUB RPD RÓWNOLEGLE — nie wykluczają się |
@@ -182,12 +182,12 @@ KONTEKŚCIE szerszego naruszenia praw człowieka.
 
 | Sytuacja | Moduł |
 |---|---|
-| RPO (dorosły, konstytucyjne prawa/wolności) | `dr-05/modules/mod-ustawa-RPO.md` |
-| RPP (prawa pacjenta) | `dr-10/modules/mod-rzecznik-praw-pacjenta-RPP.md` |
-| Sygnaliści (jeśli sprawa dot. dziedziny z katalogu, np. praca dzieci) | `dr-15/modules/mod-ustawa-sygnalisci.md` |
-| Piecza zastępcza, władza rodzicielska | `dr-02/modules/mod-piecza-zastepcza-rodzina-zastepcza.md` |
+| RPO (dorosły, konstytucyjne prawa/wolności) | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-RPO.md` |
+| RPP (prawa pacjenta) | `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-rzecznik-praw-pacjenta-RPP.md` |
+| Sygnaliści (jeśli sprawa dot. dziedziny z katalogu, np. praca dzieci) | `dr-15-compliance-iso-governance-audyt/modules/mod-ustawa-sygnalisci.md` |
+| Piecza zastępcza, władza rodzicielska | `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-piecza-zastepcza-rodzina-zastepcza.md` |
 | Postępowanie w sprawach nieletnich | `dr-03` — moduły dot. nieletnich (jeśli istnieją, sprawdź) |
-| Skarga kasacyjna, procedura KPC ogólnie | `dr-16/modules/mod-KPC-wzory-pism-procesowych.md` |
+| Skarga kasacyjna, procedura KPC ogólnie | `dr-16-pisma-strategia-dowody-orzecznictwo/modules/mod-KPC-wzory-pism-procesowych.md` |
 
 ---
 

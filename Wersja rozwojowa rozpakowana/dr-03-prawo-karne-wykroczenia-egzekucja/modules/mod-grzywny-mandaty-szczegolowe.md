@@ -235,7 +235,7 @@ WERYFIKUJ: isap.sejm.gov.pl → KPA → Dział IVa art. 189a–189k
 ## 5. EGZEKUCJA ADMINISTRACYJNA NIEZAPŁACONYCH GRZYWIEN/KAR
 
 ```
-Podstawa: UPEA Dz.U. 2023 poz. 2505 t.j. (weryfikuj nowelizacje)
+Podstawa: UPEA Dz.U. 2026 poz. 268 t.j. (weryfikuj nowelizacje)
 Organ egzekucyjny: naczelnik US / wójt (burmistrz/prezydent) / inne
 
 TRYB EGZEKUCJI NALEŻNOŚCI PIENIĘŻNYCH:

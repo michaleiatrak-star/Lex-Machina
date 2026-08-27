@@ -1,7 +1,7 @@
 # mod-OP-ordynacja-podatkowa
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Op — **Dz.U. 2026 poz. 622** (t.j. kwiecień 2026) ze zm. Dz.U. 2026.846 (MDR — patrz sekcja 6a, w życie 1.10.2026) | KKS — Dz.U. 2025 poz. 633 t.j. | PPSA — Dz.U. 2026 poz. 143
+**Źródło weryfikacji:** Op — **Dz.U. 2026 poz. 622** (t.j. kwiecień 2026) ze zm. Dz.U. 2026 poz. 846 (MDR — patrz sekcja 6a, w życie 1.10.2026) | KKS — Dz.U. 2025 poz. 633 t.j. | PPSA — Dz.U. 2026 poz. 143
 **Data weryfikacji online:** 2026-08-15 (sekcja 6a MDR — naprawa F-88)
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -166,7 +166,7 @@ Ordynacji podatkowej
 
 Potwierdzone w 6+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny
 tekst art. 75-77 (arslege.pl [×3], lexlege.pl, z aktualnym t.j.
-Dz.U.2026.0.622), podatki.biz, podatkowyreferat.online [sprzed
+Dz.U. 2026 poz. 622), podatki.biz, podatkowyreferat.online [sprzed
 tygodnia, z KONKRETNYM przykładem praktycznym].
 ```
 
@@ -175,7 +175,7 @@ tygodnia, z KONKRETNYM przykładem praktycznym].
 ## 4b. ⭐⭐⭐ CZYNNOŚCI SPRAWDZAJĄCE (Dział V Op, art. 272-280) — dodano 2026-08-19 (F-70)
 
 ✅ **ZWERYFIKOWANE, 6+ zgodnych źródeł** (arslege.pl, lexlege.pl,
-przepisy.gofin.pl [z pełnym łańcuchem nowelizacji do Dz.U.2026.846],
+przepisy.gofin.pl [z pełnym łańcuchem nowelizacji do Dz.U. 2026 poz. 846],
 ksiegowosc.infor.pl, podatki.biz, praca naukowa repozytorium.uwb.edu.pl
 z orzecznictwem WSA).
 
@@ -403,7 +403,7 @@ OPINIA ZABEZPIECZAJĄCA (art. 119w Op):
 
 > Pełna mapa systemu interpretacji, definicji i kluczowych uchwał NSA:
 > ```
-> view /mnt/skills/user/dr-06-podatki-finanse-publiczne-aml/modules/mod-interpretacje-definicje-podatkowe.md
+> view dr-06-podatki-finanse-publiczne-aml/modules/mod-interpretacje-definicje-podatkowe.md
 > ```
 
 ---
@@ -492,7 +492,7 @@ opracowania instytucji.
 
 ```
 ⚡ REWOLUCJA OD 1.10.2026 — ustawa z 29.05.2026 o zmianie ustawy —
-  Ordynacja podatkowa oraz niektórych innych ustaw (Dz.U. 2026.846,
+  Ordynacja podatkowa oraz niektórych innych ustaw (Dz.U. 2026 poz. 846,
   podpisana przez Prezydenta 19.06.2026, ta sama ustawa co GAAR wyżej —
   ⚠️ ta sama ustawa zmienia OBA tematy naraz, nie mylić z ODRĘBNĄ
   drugą nowelizacją Op z tego samego dnia, druk 2352, dot. ugody
@@ -569,33 +569,36 @@ only), ale dosłowne brzmienie przepisu wymaga odczytu ISAP przed
 cytowaniem w piśmie.
 ```
 
-## 6b. ⚠️ PROPAGACJA NOWELIZACJI 2026.846 DO SKOK, UBEZPIECZEŃ, FUNDUSZY
-INWESTYCYJNYCH I INSTRUMENTÓW FINANSOWYCH (F-88, stan 2026-08-22 —
-NIEUSTALONE dokładny artykuł, kierunek mechanizmu SILNIE wskazany)
+## 6b. PROPAGACJA NOWELIZACJI 2026.846 — DOKŁADNE JEDNOSTKI (F-88)
 
 ```
-⭐⭐ POTWIERDZONE RZĄD 1 (cytat stopki dziennikustaw.gov.pl/
-D2026000084601.pdf), że ustawa 2026.846 NOWELIZUJE własną treścią (nie
-tylko odesłaniem konsekwencyjnym) CZTERY ustawy sektora finansowego:
-  1) ustawę z 5.11.2009 o spółdzielczych kasach oszczędnościowo-
-     kredytowych (aktualny t.j. Dz.U.2026.595, ⚠️ zweryfikuj przy
-     najbliższej sesji czy to nadal aktualna metryka)
-  2) ustawę z 11.09.2015 o działalności ubezpieczeniowej i reasekuracyjnej
-  3) ustawę z 16.11.2016 o Krajowej Administracji Skarbowej
-  4) ustawę z 9.03.2017 o wymianie informacji podatkowych z innymi
-     państwami
+⭐⭐⭐ ZWERYFIKOWANE WPROST w urzędowym PDF Dz.U. 2026 poz. 846:
+  1) Prawo bankowe — art. 7 nowelizacji dodaje w art. 105 ust. 1 pkt 1k
+     lit. c: udostępnianie informacji Szefowi KAS dla MDR;
+  2) ustawa o funduszach inwestycyjnych — art. 12 dodaje art. 281 ust. 4a:
+     przekazanie Szefowi KAS informacji MDR nie narusza tajemnicy;
+  3) ustawa o obrocie instrumentami finansowymi — art. 13 dodaje
+     art. 150 ust. 1 pkt 2b o przekazaniu Szefowi KAS informacji MDR;
+  4) ustawa o SKOK — art. 16 zmienia art. 9f ust. 1 pkt 5ca, dodając
+     odesłanie do działu III rozdziału 11a Op w zakresie MDR;
+  5) ustawa o działalności ubezpieczeniowej i reasekuracyjnej — art. 17
+     dodaje art. 35 ust. 6b: przekazanie informacji MDR Szefowi KAS nie
+     narusza tajemnicy;
+  6) ustawa o KAS — art. 18 zmienia art. 35 i 35b oraz dalsze przepisy
+     techniczne dotyczące kont i komunikacji;
+  7) ustawa o wymianie informacji podatkowych — art. 19 dostosowuje
+     definicje i wymianę informacji do nowych numerów oraz pojęć MDR.
 
-⭐⭐⭐ HIPOTEZA WIODĄCA po sesji 2026-08-22 (silnie wskazana, NIE w pełni
-  potwierdzona per artykuł tych czterech ustaw): mechanizm KONSEKWENCYJNY,
-  nie merytoryczny. Wielokrotnie potwierdzone RZĄD 1+2B (Wolters Kluwer,
-  ATL Law, Studio PwC, EY, PARP, ADN Akademia — 6+ zgodnych źródeł), że
+Mechanizm jest obecnie ustalony źródłowo: przepisy sektorowe tworzą
+wyraźne wyjątki od tajemnic albo podstawy przekazania informacji Szefowi
+KAS. Odesłują do znowelizowanego rozdziału 11a Op, który:
   ustawa 2026.846 wprowadza DWIE systemowe zmiany zakresu MDR (rozdz.
   11a Ordynacji podatkowej):
     a) ograniczenie obowiązku raportowania WYŁĄCZNIE do schematów
        TRANSGRANICZNYCH (zniesienie MDR dla schematów krajowych)
     b) WYŁĄCZENIE podatku VAT i akcyzy z zakresu przedmiotowego MDR
-  → JEŻELI hipoteza trafna: SKOK/ubezpieczenia/fundusze/instrumenty są
-    zmieniane WYŁĄCZNIE poprzez odesłania do zmienionych definicji OP
+  → SKOK/ubezpieczenia/fundusze/instrumenty są zmieniane przez własne
+    jednostki ustaw sektorowych oraz odesłania do zmienionych definicji OP
     (np. definicji "promotora", "korzystającego", "schematu podatkowego"
     w art. 86a i n. Op, do których te cztery ustawy odsyłają przy
     określaniu OBOWIĄZKÓW INFORMACYJNYCH podmiotów sektora finansowego
@@ -610,24 +613,9 @@ tylko odesłaniem konsekwencyjnym) CZTERY ustawy sektora finansowego:
     (zawody prawnicze reprezentujące przed sądem, nie instytucje
     finansowe).
 
-⛔ OGRANICZENIE NARZĘDZIOWE (utrzymuje się): web_fetch na isap.sejm.gov.pl,
-  api.sejm.gov.pl, dziennikustaw.gov.pl zwraca ROBOTS_DISALLOWED w tym
-  środowisku. Sesja 2026-08-22 wykonała 3 dodatkowe, celowane zapytania
-  web_search łączące numer stopki (D2026000084601) z frazami MDR/promotor/
-  korzystający dla czterech ustaw — BEZ bezpośredniego trafienia na
-  konkretny artykuł. Malejący zwrot z kolejnych zapytań POTWIERDZONY —
-  dalszy postęp wymaga albo (a) connectora deweloperskiego z dostępem do
-  ISAP (F-8/F-10), albo (b) odczytu bezpośrednio z komentarza prawniczego
-  dedykowanego SKOK/ubezpieczeniom (nie ogólnym omówieniom MDR, które
-  koncentrują się na zawodach prawniczych — najpopularniejszy temat
-  medialny tej nowelizacji), albo (c) czekania na publikację branżowych
-  serwisów sektora finansowego (np. KNF, PIU — Polska Izba Ubezpieczeń,
-  Krajowa Rada Spółdzielcza) analizujących wprost tę nowelizację.
-
-**Stan F-88 po sesji 2026-08-22:** hipoteza robocza WZMOCNIONA (z
-"nieprzypisana do artykułu" na "silnie wskazany mechanizm konsekwencyjny,
-analogiczny do precedensu 2016"), ale FORMALNIE NIEZAMKNIĘTA — brak
-bezpośredniego cytatu artykułu w którejkolwiek z czterech ustaw.
+Źródło urzędowe odczytane bezpośrednio 2026-08-26: PDF ELI
+`D20260846.pdf`, art. 2–19. F-88 może zostać zamknięta; nie pozostała
+nieustalona jednostka redakcyjna w katalogu aktów zmienianych ustawą.
 ```
 
 ## TECHNIKI MANIPULACJI DOKUMENTACJĄ DLA OBNIŻENIA PODATKÓW — GRANICA
@@ -849,7 +837,7 @@ REKOMENDACJA: □ Odwołanie  □ Skarga do WSA  □ Korekta  □ Czynny żal  �
 | Sytuacja | Skill / Moduł |
 |---|---|
 | Kontrola KAS | `mod-KAS-kontrola-celno-skarbowa` |
-| Podatek dochodowy (PIT/CIT) | `mod-PIT` / `mod-CIT` |
+| Podatek dochodowy (PIT/CIT) | `dr-06-podatki-finanse-publiczne-aml/modules/mod-PIT-podatek-dochodowy-fizyczne.md` / `dr-06-podatki-finanse-publiczne-aml/modules/mod-CIT-podatek-dochodowy-prawne.md` |
 | VAT | `mod-VAT-podatek-od-towarow-i-uslug` |
 | Pismo: odwołanie od decyzji US | `pisma-procesowe-v3` |
 | Orzecznictwo NSA | `orzeczenia-sadowe-v2` |

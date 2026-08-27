@@ -218,7 +218,7 @@ Taki pracownik ma do wyboru RÓWNOLEGLE (nie wykluczające się):
    nielegalne polecenie (np. pod presją, przed uzyskaniem porady
    prawnej) — możliwość UNIKNIĘCIA KARY przez zawiadomienie organu
    ścigania/KAS o popełnieniu czynu zabronionego, zanim organ sam się
-   o tym dowie (zob. `dr-06/modules/mod-OP-ordynacja-podatkowa.md`
+   o tym dowie (zob. `dr-06-podatki-finanse-publiczne-aml/modules/mod-OP-ordynacja-podatkowa.md`
    sekcja KKS/czynny żal, jeśli istnieje — WERYFIKUJ dokładne warunki
    skuteczności czynnego żalu przed poradą).
 
@@ -263,7 +263,7 @@ wobec tej poprawki). PRAKTYCZNE KONSEKWENCJE:
   ustawa o PIP), NIE przez tryb sygnalisty. 📌 Pełna klasyfikacja
   naruszeń BHP/prawa pracy WEDŁUG RODZAJU (8 typów, z właściwym
   adresatem dla każdego — PIP/sąd pracy/Policja/ZUS/KAS) →
-  `dr-04/modules/mod-klasyfikacja-naruszen-bhp-prawa-pracy.md`
+  `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-klasyfikacja-naruszen-bhp-prawa-pracy.md`
   (dodano 2026-07-27)
 
 | # | Dziedzina (art. 3 ust. 1) | Organ właściwy (przykładowy, WERYFIKUJ każdorazowo) |
@@ -502,7 +502,7 @@ Przed odpowiedzią lub pismem stosuj:
 
 ## Weryfikacja online
 ```
-web_search: "ustawa sygnaliści ochrona Dz.U. 2024 poz. 928 tekst jednolity isap"
+web_search: "ustawa sygnaliści ochrona Dz.U. 2024 poz. 928 akt pierwotny isap"
 web_search: "ustawa sygnaliści kanał zgłoszeń obowiązki pracodawcy 2024 2025"
 web_search: "whistleblower dyrektywa 2019/1937 implementacja Polska RPO zgłoszenia"
 web_search: "sygnalista działania odwetowe orzecznictwo Polska 2025"

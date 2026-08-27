@@ -101,7 +101,7 @@ uzyskany dla pojedynczej klauzuli w B.1, raport musi to wprost odnotować
 („§X samodzielnie neutralny, ale w połączeniu z §Y i §Z wskazuje na...").
 
 > **Dokument długi (> 15 stron / > 15 § / > 10 odesłań):** przed zamknięciem
-> Modułu B uruchom dodatkowo `view /mnt/skills/user/analizator-umow-v1/workflows/weryfikacja-spojnosci-odeslan.md`
+> Modułu B uruchom dodatkowo `view analizator-umow-v1/workflows/weryfikacja-spojnosci-odeslan.md`
 > (v1.16) — dwuetapowa procedura inwentaryzacja→weryfikacja odesłań i
 > spójności, adresująca attention dilution w długim kontekście. Wynik wchodzi
 > do Modułu F jako osobna sekcja, przed „9. BRAKUJĄCE KLAUZULE".
@@ -354,19 +354,19 @@ TRYB 2 — REDAKCJA Z DANYCH (mam dane, napisz umowę):
   → Faza 0 → ustal typ umowy → wczytaj moduł PRIMARY/DOMAIN
   → Zbuduj dokument wg checklisty modułu
   → Zastosuj moduły SHARED: salwatoryjna, forma zmian, DPA jeśli IT/B2B
-  → [WYMAGANE] view /mnt/skills/user/shared/HYBRID-VALIDATION.md → walidacja przed output
+  → [WYMAGANE] view shared/HYBRID-VALIDATION.md → walidacja przed output
   → Raport F.2 (skrócony) z oceną gotowego dokumentu
 
 TRYB 3 — DRAFT BEZ DANYCH (szablon z placeholderami):
   → Wczytaj właściwy moduł → generuj z placeholderami «NAZWA», «KWOTA», «DATA»
   → Zaznacz sekcje wymagające uzupełnienia: [DO UZUPEŁNIENIA: opis]
-  → [WYMAGANE] view /mnt/skills/user/shared/HYBRID-VALIDATION.md → walidacja przed output
+  → [WYMAGANE] view shared/HYBRID-VALIDATION.md → walidacja przed output
   → Dołącz instrukcję wypełnienia na końcu dokumentu
 
 TRYB 4 — UZUPEŁNIENIE (mam szkielet, uzupełnij):
   → Zidentyfikuj luki w dokumencie (Moduł A + J0 master checklista)
   → Dla POJEDYNCZEGO fragmentu/klauzuli: użyj formatu i źródeł klauzul z
-    `view /mnt/skills/user/analizator-umow-v1/workflows/popraw-fragment.md`
+    `view analizator-umow-v1/workflows/popraw-fragment.md`
     (v1.17) zamiast improwizować brzmienie — ma ustandaryzowany format
     „ZMIANA" (przed/po/uzasadnienie/źródło) i wskazuje, z którego modułu
     wziąć brzmienie zamiast pisać od zera
@@ -405,7 +405,7 @@ TRYB 4 — UZUPEŁNIENIE (mam szkielet, uzupełnij):
 
 > **v1.17:** dla szybkiej, jednoznacznej decyzji „podpisać / analizować /
 > odrzucić" (nie tylko listy kontrolnej) użyj
-> `view /mnt/skills/user/analizator-umow-v1/workflows/triage-szybki.md` —
+> `view analizator-umow-v1/workflows/triage-szybki.md` —
 > daje kategorię 🟢/🟡/🔴 z jawnymi kryteriami i regułą eskalacji do pełnej
 > analizy. Lista poniżej zostaje jako szybki, nieskategoryzowany przegląd,
 > gdy triage pełny jest zbędny (np. finalny rzut oka tuż przed podpisem po
@@ -485,7 +485,7 @@ Krok 2: [działanie]
 Dokument: [gotowy do podpisania / wymaga zmian M / wymaga zmian S+M / nie podpisywać]
 
 ## 13. DISCLAIMER
-[wczytaj /mnt/skills/user/shared/DISCLAIMER.md → dodaj wariant LAIK lub PRAWNIK]
+[wczytaj shared/DISCLAIMER.md → dodaj wariant LAIK lub PRAWNIK]
 ```
 
 ### F.1-LITE Raport pośredni (umowy 10 000–50 000 PLN)
@@ -530,7 +530,7 @@ Worst case: [kwota PLN] — klauzula: §[X]
 
 Po zakończeniu analizy (Raport F.1 / F.1-LITE / F.2) → wczytaj i zastosuj sekwencję:
 ```
-view /mnt/skills/user/shared/raport-sytuacyjny-integracja.md
+view shared/raport-sytuacyjny-integracja.md
 ```
 Widget renderowany inline jako show_widget HTML — nie jako present_files.
 Dane wbudowane bezpośrednio w HTML jako literały JS.
@@ -653,32 +653,32 @@ Porównanie dwóch wersji umowy / "co się zmieniło" / konsekwencje poprawek?
 ### Moduły systemowe (user/shared/) — PRIORYTETOWE
 ```
 Użytkownik nie podał wymaganych danych / formularz niekompletny?
-  → view /mnt/skills/user/shared/INTAKE-GAP.md
+  → view shared/INTAKE-GAP.md
 
 PRZED wygenerowaniem umowy, klauzuli, aneksu — ZAWSZE:
-  → view /mnt/skills/user/shared/HYBRID-VALIDATION.md
+  → view shared/HYBRID-VALIDATION.md
 
 PO wygenerowaniu dokumentu — walidacja spójności:
-  → view /mnt/skills/user/shared/POST-VALIDATION.md
+  → view shared/POST-VALIDATION.md
 
 Terminy procesowe / zawite / przedawnienia (KPC, KP, KPA)?
-  → view /mnt/skills/user/shared/terminy.md
+  → view shared/terminy.md
 
 Weryfikacja zgodności treści dokumentu z faktami źródłowymi?
-  → view /mnt/skills/user/shared/FAKTY_v2.md
+  → view shared/FAKTY_v2.md
 
 Po zakończeniu raportu F.1 / F.1-LITE / F.2 — widget statusu sprawy:
-  → view /mnt/skills/user/shared/raport-sytuacyjny-integracja.md
+  → view shared/raport-sytuacyjny-integracja.md
 
 Każda odpowiedź zawierająca analizę prawną (umowy, klauzule, ocena prawna)?
-  → view /mnt/skills/user/shared/DISCLAIMER.md
+  → view shared/DISCLAIMER.md
   → dodaj disclaimer JAKO OSTATNI ELEMENT odpowiedzi (tryb LAIK lub PRAWNIK)
 
 Sygnatura sądowa w piśmie lub raporcie — walidacja formatu i istnienia?
-  → view /mnt/skills/user/shared/SYGNATURY.md
+  → view shared/SYGNATURY.md
 
 Przepis / termin / orzeczenie w odpowiedzi — wymóg znacznika weryfikacji?
-  → view /mnt/skills/user/shared/WERYFIKACJA-SLAD.md
+  → view shared/WERYFIKACJA-SLAD.md
   → każdy artykuł i orzeczenie: ✅ [VER: źródło, data] lub ⚠️ [NIEWERYFIKOWANE]
 ```
 

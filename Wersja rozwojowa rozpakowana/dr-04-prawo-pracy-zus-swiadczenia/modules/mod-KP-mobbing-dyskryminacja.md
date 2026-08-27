@@ -47,7 +47,7 @@ korekty zgodnie z nową definicją).
 ⚠️ TREŚĆ PRZENIESIONA 2026-06-12 — definicja ustawowa, 5 przesłanek i pełna
 linia orzecznicza SN (przesłanki sporne: długotrwałość, uporczywość, wzorzec
 "ofiary rozsądnej", zamiar sprawcy) są w jednym miejscu:
-→ `view /mnt/skills/user/shared/definicje/DEF-PRACA.md` (sekcja MOBBING)
+→ `view shared/definicje/DEF-PRACA.md` (sekcja MOBBING)
 
 ### Roszczenia
 

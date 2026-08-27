@@ -42,7 +42,7 @@ Ochrona sygnalisty zgłaszającego naruszenia: dobór kanału zgłoszenia (wewn�
 □ Jaki rodzaj naruszenia: korupcja / prawo podatkowe / ochrona środowiska /
   zamówienia publiczne / ochrona konsumentów / usługi finansowe / AML / inne?
   ⚠️ POPRAWKA KRYTYCZNA 2026-07-27 (FAZA 3E/ZASADA 14, ta sama poprawka
-  co w dr-15/mod-ustawa-sygnalisci.md): PRAWO PRACY, WŁĄCZNIE Z BHP,
+  co w dr-15-compliance-iso-governance-audyt/modules/mod-ustawa-sygnalisci.md): PRAWO PRACY, WŁĄCZNIE Z BHP,
   ZOSTAŁO WPROST USUNIĘTE Z ZAMKNIĘTEGO KATALOGU na etapie senackim,
   mimo że pierwotny projekt MRPiPS je zawierał (potwierdzone: inforlex.pl,
   forbes.pl, sygnalista24.info). W TYM MODULE (perspektywa pracownicza)
@@ -150,7 +150,7 @@ OCHRONA MAJĄTKOWA SYGNALISTY (przy działaniach odwetowych):
   zmieniające art. 42 KP vs próba zamaskowania kary porządkowej poza
   zamkniętym katalogiem art. 108 KP) — stosuj oba łącznie
 - `pisma-procesowe-v3` — pozew o odszkodowanie za odwet, zawiadomienie do RPO
-- `dr-04/mod-klasyfikacja-naruszen-bhp-prawa-pracy.md` — GDZIE ZGŁOSIĆ
+- `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-klasyfikacja-naruszen-bhp-prawa-pracy.md` — GDZIE ZGŁOSIĆ
   naruszenie BHP/prawa pracy, skoro NIE w trybie sygnalisty (dodano 2026-07-27)
 - `dr-15` → `mod-ustawa-sygnalisci.md` — perspektywa compliance pracodawcy / CMS / ISO 37301
 

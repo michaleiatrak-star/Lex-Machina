@@ -104,9 +104,10 @@ Odsetki ustawowe za opóźnienie (art. 481 §2):
 Odsetki maksymalne za opóźnienie (art. 481 §2¹):
   dwukrotność odsetek ustawowych za opóźnienie
 
-Odsetki transakcyjne B2B:
-  ustawa o przeciwdziałaniu nadmiernym opóźnieniom w transakcjach handlowych
-  → weryfikuj aktualny t.j. w ISAP (wyższe niż ustawowe za opóźnienie)
+Odsetki w transakcjach handlowych:
+  → view modules/mod-transakcje-handlowe-opoznienia.md
+  Kwalifikacja, terminy, stawki i rekompensata wyłącznie w tym module.
+  Nie przenoś poniższej reguły wezwania z KC do art. 6 ustawy handlowej.
 
 Od kiedy liczyć:
   → dzień po upływie terminu płatności z umowy / faktury
@@ -114,4 +115,3 @@ Od kiedy liczyć:
 ```
 
 ---
-

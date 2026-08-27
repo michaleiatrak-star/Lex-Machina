@@ -2,7 +2,7 @@
 
 ## Akt prawny / źródło
 - Ustawa o informatyzacji działalności podmiotów realizujących zadania publiczne
-  Dz.U. 2024 poz. 1557 (t.j.)
+  Dz.U. 2025 poz. 1703 (t.j.)
   ✅ [VER: isap.sejm.gov.pl, 2026-05-31]
 - Ustawa o krajowym systemie e-Faktur — Dz.U. 2021 poz. 1237 ze zm.
   Nowelizacja: Dz.U. 2023 poz. 1598 (obowiązkowy KSeF przesunięty)

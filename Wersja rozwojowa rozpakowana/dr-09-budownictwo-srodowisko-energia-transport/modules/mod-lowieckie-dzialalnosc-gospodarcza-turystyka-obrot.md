@@ -12,7 +12,7 @@ w obrocie zwierzyną.
 
 **Status weryfikacji źródłowej:** pełna treść rozdziału pobrana w CAŁOŚCI
 jednym `web_fetch` strony rozdziałowej arslege.pl (Rząd 2B, k539/s6333,
-Dz.U.2025.0.539 t.j., stan deklarowany 17.08.2026). Potwierdzenie zbieżne:
+Dz.U. 2025 poz. 539 t.j., stan deklarowany 17.08.2026). Potwierdzenie zbieżne:
 lexlege.pl, lowiecki.pl (art. 18 dosłownie).
 
 > ⭐⭐⭐ **USTALENIE STRUKTURALNE KLUCZOWE:** rozdział zawiera TRZY artykuły
@@ -276,7 +276,7 @@ Sprawa dotyczy przedsiębiorcy oferującego USŁUGI TURYSTYCZNE z polowaniami
    nowelizację 2018. ⚠️ **Dokładne wskazanie, KTÓRY artykuł ustawy
    zmieniającej uchylił każdy z art. 17/19/20 z osobna — NIE ustalone**
    (potwierdzony sam fakt i akt nowelizujący, nie numeracja przepisu
-   zmieniającego wewnątrz Dz.U. 2018.651).
+   zmieniającego wewnątrz Dz.U. 2018 poz. 651).
 2. ✅ **CZĘŚCIOWO ZWERYFIKOWANE (2026-08-18, F-91 pkt 2):** rozporządzenie
    wykonawcze z art. 18 ust. 5 (obecna numeracja t.j. 2025.539) — ubezpieczenie
    OC przedsiębiorcy działalność gospodarcza w zakresie łowiectwa: **rozp.

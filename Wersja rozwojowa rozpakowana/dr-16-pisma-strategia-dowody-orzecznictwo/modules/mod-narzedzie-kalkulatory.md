@@ -111,7 +111,7 @@ SYSTEM STARY (urodzeni przed 01.01.1949 lub uprawnienia mieszane):
 EMERYTURA POMOSTOWA:
   → praca w szczególnych warunkach lub o szczególnym charakterze
   → minimum 15 lat pracy szczególnej
-  → Wykaz prac szczególnych: Ustawa o emeryturach pomostowych Dz.U. 2025 poz. 468 t.j. ✅ VER: 2026-06-09
+  → Wykaz prac szczególnych: Ustawa o emeryturach pomostowych Dz.U. 2024 poz. 1696 t.j. ✅ VER: 2026-06-09
     (pierwotnie Dz.U. 2008 nr 237 poz. 1656 — zastąpiony przez t.j. 2025.468)
 
 UWAGA: Dokładne wyliczenie wymaga danych z konta ZUS (PUE ZUS: pue.zus.pl)

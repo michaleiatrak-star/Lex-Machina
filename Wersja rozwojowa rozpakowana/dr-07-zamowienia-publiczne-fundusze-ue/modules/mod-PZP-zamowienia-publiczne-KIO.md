@@ -365,7 +365,7 @@ Wyszukiwarka orzeczeń (KIO + SO/SA/SN): https://orzeczenia.uzp.gov.pl
 UZP (wytyczne i interpretacje): https://uzp.gov.pl
 
 → Dla wyszukiwania orzecznictwa KIO ZAWSZE deleguj do:
-  view /mnt/skills/user/orzeczenia-sadowe-v2/SKILL.md → Faza 1-K
+  view orzeczenia-sadowe-v2/SKILL.md → Faza 1-K
   (procedura zweryfikowana bezpośrednim fetchem: Home/Search?Phrase=...,
   cytowanie z polem "Sposób rozstrzygnięcia" jako tani test zgodności tezy)
 

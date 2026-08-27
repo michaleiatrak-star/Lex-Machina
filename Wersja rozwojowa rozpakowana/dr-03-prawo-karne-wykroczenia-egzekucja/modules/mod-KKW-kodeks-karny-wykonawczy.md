@@ -45,9 +45,9 @@ z tą instytucją (sprawa Marek Petelski — art. 161 § 4, ryzyko
 ⭐⭐⭐ ART. 161 §3-4 — TERMIN KARENCJI PO ODMOWIE (⭐⭐⭐ KLUCZOWY
   przepis praktyczny, uzależniony od WYMIARU KARY — dwa różne okresy).
   ⛔ NAPRAWIONE 2026-08-22 (weryfikacja HYBRID-VAL, RZĄD 1: lexlege.pl
-  stan prawny na 17.08.2026, Dz.U.2025.0.911 t.j. — poprzednia wersja
+  stan prawny na 17.08.2026, Dz.U. 2025 poz. 911 t.j. — poprzednia wersja
   tej sekcji cytowała próg 3 lata/3+6 mies., co jest STARĄ wersją
-  przepisu sprzed nowelizacji z 7.07.2022 (Dz.U. 2022.2600); wyniki
+  przepisu sprzed nowelizacji z 7.07.2022 (Dz.U. 2022 poz. 2600); wyniki
   wyszukiwania są w tej materii silnie zaśmiecone nieaktualnymi/
   archiwalnymi kopiami przepisu — przy każdej kolejnej weryfikacji tego
   artykułu wymagane bezpośrednie potwierdzenie ISAP/lexlege z datą
@@ -59,7 +59,7 @@ z tą instytucją (sprawa Marek Petelski — art. 161 § 4, ryzyko
     ROKU od wydania postanowienia o odmowie NIE JEST rozpoznawany aż
     do upływu tego okresu
   ⚠️ UWAGA HISTORYCZNA — sprawa Marka Petelskiego: jeśli ta sprawa była
-    prowadzona PRZED 7.07.2022 (data nowelizacji Dz.U. 2022.2600) lub
+    prowadzona PRZED 7.07.2022 (data nowelizacji Dz.U. 2022 poz. 2600) lub
     dotyczyła stanu prawnego sprzed tej daty, mogła zasadnie opierać się
     na WCZEŚNIEJSZEJ wersji przepisu (próg 3 lata, terminy 3/6 mies.) —
     ta wcześniejsza wersja NIE jest już aktualna i nie należy jej
@@ -446,7 +446,7 @@ z tą instytucją (sprawa Marek Petelski — art. 161 § 4, ryzyko
 
 ```
 ✅ Zweryfikowane RZĄD 1: arslege.pl, lexlege.pl, przepisy.gofin.pl —
-zgodne przy każdym cytowanym artykule, stan Dz.U.2025.0.911 t.j.
+zgodne przy każdym cytowanym artykule, stan Dz.U. 2025 poz. 911 t.j.
 Struktura: Oddział 1 (Wykonywanie orzeczeń, 9-17a), Oddział 2
 (Postępowanie przed sądem, 18-24), Oddział 3 (Postępowanie egzekucyjne,
 25-31 — ⚠️ POPRAWKA: mapa pokrycia BŁĘDNIE podawała górną granicę jako

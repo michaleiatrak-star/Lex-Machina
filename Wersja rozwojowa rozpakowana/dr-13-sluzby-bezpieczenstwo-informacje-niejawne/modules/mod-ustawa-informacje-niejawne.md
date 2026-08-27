@@ -165,7 +165,7 @@ Przed odpowiedzią lub pismem zastosuj:
 
 ```
 Ustawa o ochronie informacji niejawnych:
-  Dz.U. 2024 poz. 1612 t.j. ze zm. — weryfikuj w ISAP
+  Dz.U. 2025 poz. 1209 t.j. ze zm. — weryfikuj w ISAP
   ✅ VER: isap.sejm.gov.pl 2026-06-05
 
 Klauzule tajności:

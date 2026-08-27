@@ -7,8 +7,8 @@ v1.0.0 (dodany 2026-07-27, domyka F-19 z WARN-OTWARTE.md)
 > `mod-ustawa-ZFSS.md`. Ten moduł wypełnia tę lukę.
 > 📌 Cross-referencja: aspekty ADMINISTRACYJNO-DYSCYPLINARNE Karty
 > Nauczyciela (awans zawodowy, dyscyplinarka, ocena pracy) → NIE tutaj,
-> patrz `dr-15/modules/mod-ustawa-nauczyciele-uczelnie.md` oraz
-> `dr-10/modules/mod-ustawa-oswiata-szkolnictwo-wyzsze.md`. Ten moduł
+> patrz `dr-15-compliance-iso-governance-audyt/modules/mod-ustawa-nauczyciele-uczelnie.md` oraz
+> `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-oswiata-szkolnictwo-wyzsze.md`. Ten moduł
 > pokrywa WYŁĄCZNIE stronę pracowniczą (płaca, czas pracy, urlopy).
 
 ## Akt prawny
@@ -177,7 +177,7 @@ art. 20: całkowita/częściowa likwidacja szkoły) i własną procedurę.
 **Szczegółowa analiza wykracza poza ten moduł** (pracowniczy) i
 częściowo krzyżuje się z dyscyplinarką — dla PEŁNEJ analizy
 rozwiązania stosunku pracy w kontekście dyscyplinarnym/administracyjnym
-zob. `dr-15/modules/mod-ustawa-nauczyciele-uczelnie.md`. Ten moduł
+zob. `dr-15-compliance-iso-governance-audyt/modules/mod-ustawa-nauczyciele-uczelnie.md`. Ten moduł
 sygnalizuje temat, nie zastępuje dedykowanej analizy.
 
 ---
@@ -194,10 +194,10 @@ uwzględnienia tej odrębności.
 
 ## CROSS-REFERENCJE
 
-- Awans zawodowy, dyscyplinarka, ocena pracy → `dr-15/modules/mod-ustawa-nauczyciele-uczelnie.md`
-- Szerszy kontekst administracyjny (kuratorium, decyzje) → `dr-10/modules/mod-ustawa-oswiata-szkolnictwo-wyzsze.md`
+- Awans zawodowy, dyscyplinarka, ocena pracy → `dr-15-compliance-iso-governance-audyt/modules/mod-ustawa-nauczyciele-uczelnie.md`
+- Szerszy kontekst administracyjny (kuratorium, decyzje) → `dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-oswiata-szkolnictwo-wyzsze.md`
 - ZFŚS ogólne zasady → `mod-ustawa-ZFSS.md` (ten skill)
-- Ochrona nauczyciela jak funkcjonariusza publicznego (art. 63 KN, w związku z KK) → `dr-03/modules/mod-KK-art222-226-ochrona-funkcjonariusza.md`
+- Ochrona nauczyciela jak funkcjonariusza publicznego (art. 63 KN, w związku z KK) → `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art222-226-ochrona-funkcjonariusza.md`
 
 ⚠️ WSZYSTKIE liczby i terminy w tym module wymagają potwierdzenia na
 isap.sejm.gov.pl przed użyciem w piśmie procesowym lub poradzie —

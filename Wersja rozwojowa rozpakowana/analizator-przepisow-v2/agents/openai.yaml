@@ -1,0 +1,14 @@
+interface:
+  display_name: analizator przepisow v2
+  short_description: 'Analiza przepisów prawa polskiego: aktualne i historyczne brzmienie,
+    przesłanki, wykładnia, orzecznictwo, zbieg norm, nowelizacje, vacatio legis i
+    zastosowanie do stanu faktycznego.'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

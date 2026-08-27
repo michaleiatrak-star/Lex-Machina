@@ -1,5 +1,29 @@
 # DR-02 — Mapa Pokrycia Treściowego
 
+## F-108/46 — transakcje handlowe (2026-08-27)
+
+Moduł: `modules/mod-transakcje-handlowe-opoznienia.md`, poziom B dla rdzenia
+cywilnego. Poniższe nazwy są **segmentami analitycznymi**, nie tytułami
+nieistniejących rozdziałów ustawy. Podstawa: urzędowy tekst ELI wskazany
+w module, odczyt 2026-08-27. Nie oznacza pełnego audytu innych aktów DR-02.
+
+| Zakres | Pokrycie | Dowód / pozostała luka |
+|---|---|---|
+| art. 1–4c | 🟢 rdzeń | kwalifikacja, wyłączenia i statusy; sekcje 2–3 |
+| art. 5–9a | 🟢 rdzeń | terminy, podstawy odsetek i cesja; sekcje 4 i 8 |
+| art. 10–11c | 🟢 rdzeń | rekompensata, raty, stopy i nieuczciwość; sekcje 5–8 |
+| art. 12–13 | 🟡 częściowe | droga dochodzenia i nieważność; art. 12 tylko routing |
+| art. 13a–13ab | 🟡 częściowe | raportowanie/korekty: routing, bez pełnego workflow |
+| art. 13b–13y | 🟡 częściowe | próg, rozdział od windykacji i droga kontroli; brak pełnego modelu kar/postępowania |
+| art. 13z–13zb | 🟡 częściowe | odesłanie do DR-03/KPW, bez treści wykroczeń |
+| art. 14 | ⚪ pominięty w t.j. | nie twórz fikcyjnej treści |
+| art. 15–17 i przepisy przejściowe nowelizacji | 🔴 brak pełnego opracowania historycznego | wymagany odrębny przegląd dla starej umowy |
+
+Stawki: 6/6 półroczy 2024–2026 z osobnymi źródłami. Nie jest to pokrycie
+wszystkich okresów obowiązywania ustawy. Kompletność historii zmian:
+niepotwierdzona. F-108 pozostaje OTWARTA.
+
+
 **Utworzona:** 2026-08-22 (F-83, zasilenie z `audyt-systemu-v4/references/
 raporty-pokrycia-2026-08-13/`) | **Format ustalony przez F-83.**
 
@@ -133,10 +157,9 @@ pierwotny raport źródłowy) — wszystkie potwierdzone bezpośrednio w
 
 ### Prawo upadłościowe — Część pierwsza (art. 1–377)
 
-**Moduły:** `mod-PrUpad-upadlosc-restrukturyzacja.md` (moduł macierzysty,
-906 linii) + `mod-PrUpad-uklad-likwidacja-zakonczenie.md` (wydzielony
-2026-08-21, 307 linii — ZASADA 13, podział wyprzedzający przy zbliżaniu
-się do progu 1000 linii, treść przeniesiona verbatim)
+**Moduły:** `mod-PrUpad-upadlosc-restrukturyzacja.md`,
+`mod-PrUpad-uklad-likwidacja-zakonczenie.md` oraz
+`mod-PrUpad-likwidacja-miedzynarodowe-szczegolne.md`.
 
 | Tytuł | Materia | Art. | Status | Moduł |
 |---|---|---|---|---|
@@ -154,22 +177,21 @@ się do progu 1000 linii, treść przeniesiona verbatim)
 | V | **Zgłoszenie i ustalenie wierzytelności** | 236–266 | 🟢 | Art. 239 (obowiązkowe elementy zgłoszenia), kategorie zaspokojenia I-IV, sprzeciw do sędziego-komisarza. Moduł macierzysty |
 | Va | **Układ w upadłości** (NOWA numeracja — dawny Tytuł VI art. 267-305 CAŁKOWICIE UCHYLONY) | 266a–266f | 🟢 NAPRAWIONE 2026-08-21 | `mod-PrUpad-uklad-likwidacja-zakonczenie.md` — ⛔ ta mapa WCZEŚNIEJ błędnie cytowała nieaktualny "Dział VI, art. 267-305" jako brakujący; te przepisy NIE ISTNIEJĄ, zastąpione skróconym Tytułem Va. Art. 266a (dopuszczalność, legitymacja: upadły/wierzyciel/syndyk) opisany |
 | VII, Dział I | **Likwidacja masy upadłości** — spis inwentarza, plan likwidacyjny | 306–315 | 🟢 NAPRAWIONE 2026-08-21 | `mod-PrUpad-uklad-likwidacja-zakonczenie.md` |
-| VII, Dział II-IV | Likwidacja masy — dalsze działy (sprzedaż, rozliczenia) | 316–334 | 🔴 | Świadomie odłożone, patrz "ZAKRES NIEOPRACOWANY" w module |
+| VII, Dział II-IV | Likwidacja masy — przedsiębiorstwo i nieruchomości, ruchomości i zastaw rejestrowy, wierzytelności i prawa | 316–334 | 🟢 MAPA 2026-08-26 | `mod-PrUpad-likwidacja-miedzynarodowe-szczegolne.md` |
 | VIII | Podział funduszów masy upadłości | 335–361 | 🟡 | Tylko art. 336 (zaspokojenie wierzytelności zabezpieczonych rzeczowo poza kolejnością). Moduł macierzysty |
 | IX | **Zakończenie i umorzenie postępowania** | 361–372 | 🟢 NAPRAWIONE 2026-08-21 | `mod-PrUpad-uklad-likwidacja-zakonczenie.md` — art. 361 (przesłanki umorzenia, w tym "pusta masa") i dalsze |
 | X | **Zakaz prowadzenia działalności gospodarczej** | 373–377 | 🟢 | Okres 1-10 lat, przesłanki (w tym faktyczny zarządca), wyjątek restrukturyzacyjny, terminy prekluzyjne 1 rok/3 lata, sprzężenie z art. 299 KSH. Moduł macierzysty |
 
-**Część druga (międzynarodowe postępowanie, art. 378-417): 🔴 całkowity
-brak.** **Część trzecia (banki, ubezpieczyciele, deweloperzy, art.
-418-425+): 🔴 całkowity brak, niski priorytet.** **Część piąta (upadłość
-konsumencka): 🟡 częściowo.**
+**Część druga (międzynarodowe postępowanie, art. 378–417): 🟢 mapa
+operacyjna.** **Część trzecia: art. 418–425s 🟢 mapa operacyjna; dalsze
+postępowania wobec podmiotów regulowanych od art. 426 pozostają zakresem
+reaktywnym.** **Część piąta (upadłość konsumencka): 🟡 częściowo.**
 
 **Ocena PrUp — ZAKTUALIZOWANA:** siedem instytucji o najwyższej częstości
-praktycznej naprawionych (syndyk, zabezpieczenie, zakaz działalności,
-pre-pack, TERAZ TAKŻE układ w upadłości, likwidacja masy Dział I,
-zakończenie/umorzenie). Pozostają: likwidacja masy Działy II-IV,
-postępowanie międzynarodowe, postępowania szczególne. Powiązana flaga:
-**F-86** (priorytet obniżony do "bardzo niski" po tej naprawie).
+praktycznej naprawionych; F-86 częściowo uzupełniono mapą dalszej likwidacji,
+postępowania międzynarodowego oraz postępowań z art. 418–425s. Moduł ma
+charakter nawigacyjny: nie zastępuje świeżej weryfikacji jednostki. F-86
+pozostaje otwarta dla dalszych odrębnych postępowań od art. 426.
 
 ### Prawo restrukturyzacyjne (art. 1–433)
 
@@ -205,10 +227,10 @@ brak już aktywnego wiersza, tylko odniesienie historyczne).
 
 | Temat | Status | Moduł |
 |---|---|---|
-| Status zawodowy syndyka/nadzorcy/zarządcy | 🟢 | `mod-ustawa-doradca-restrukturyzacyjny-zawod` — inny akt (Dz.U. 2022.1007) |
+| Status zawodowy syndyka/nadzorcy/zarządcy | 🟢 | `mod-ustawa-doradca-restrukturyzacyjny-zawod` — inny akt (Dz.U. 2022 poz. 1007) |
 | KRZ — Krajowy Rejestr Zadłużonych | 🟢 | Sekcja dedykowana w module głównym PrUp |
 | Odpowiedzialność zarządu sp. z o.o. (powiązanie z KSH art. 299) | 🟢 | Odesłanie do `mod-KSH-spolki-handlowe` — spójność zachowana |
-| Nowelizacja 25.07.2025 (Dz.U. 2025.1085) — zmiana 3 ustaw (PrRestr/PrUp/KRZ) | 🟢 | Uwzględniona w naprawionych modułach (test zaspokojenia Dział VI, termin dnia układowego Tytuł II) |
+| Nowelizacja 25.07.2025 (Dz.U. 2025 poz. 1085) — zmiana 3 ustaw (PrRestr/PrUp/KRZ) | 🟢 | Uwzględniona w naprawionych modułach (test zaspokojenia Dział VI, termin dnia układowego Tytuł II) |
 
 **Zaktualizowana rekomendowana kolejność uzupełniania** (4 z 4 oryginalnych
 pozycji już naprawione — pozostają inne, niżej priorytetowe):
@@ -261,13 +283,13 @@ pozycji już naprawione — pozostają inne, niżej priorytetowe):
 | 10 (część) | art. 669–689 — stwierdzenie nabycia spadku, dział spadku | 🔴 luka krytyczna | 🔴 **NADAL LUKA** — art. 669 zero wystąpień; art. 680 tylko przez odesłanie z modułu spadkowego KC | — |
 | 9 | art. 458¹⁴–458¹⁶ — postępowanie z udziałem konsumentów | 🔴 luka krytyczna | 🔴 **NADAL LUKA** | — |
 | 13 | art. 316 §1 — stan rzeczy z chwili zamknięcia rozprawy | 🔴 luka krytyczna | 🟡 **WZMIANKA** — 1 plik (skarga pauliańska) | dr-02 |
-| 14 | art. 162 — zastrzeżenie do protokołu | 🔴 luka krytyczna | ✅ **NAPRAWIONE 2026-08-22** — luka bliźniacza do art. 105 PPSA dr-05, treść zweryfikowana Rząd 1+2B | `mod-KPC-art162-zastrzezenie-protokol` |
+| 14 | art. 162 — zastrzeżenie do protokołu | 🔴 luka krytyczna | 🔴 **NADAL LUKA** w zakresie KPC — wszystkie 6 trafień to art. 162 **KK**, nie KPC (kolizja międzykodeksowa) | — |
 | 15 | art. 617–626¹³ — zniesienie współwłasności, wieczystoksięgowe | 🔴 luka krytyczna | 🔴 **NADAL LUKA** w zakresie KPC — trafienia to art. 617 **KRO** | — |
 
-**Bilans uzgodnienia: 5 luk krytycznych zamkniętych (poz. #14 dodana
-2026-08-22), 5 częściowo, 7 nadal otwartych.** Raport z 13.08 był
-nieaktualny w 4 z 15 pozycji (27%) — czyli w tym samym rzędzie
-wielkości, co przy sześciu mapach korygowanych w pierwszej fazie F-83.
+**Bilans uzgodnienia: 4 luki krytyczne zamknięte, 5 częściowo, 8 nadal
+otwartych.** Raport z 13.08 był nieaktualny w 4 z 15 pozycji (27%) — czyli
+w tym samym rzędzie wielkości, co przy sześciu mapach korygowanych w
+pierwszej fazie F-83.
 
 ### Stan pokrycia wg ksiąg (po uzgodnieniu)
 
@@ -311,11 +333,11 @@ gospodarcza).
 7. **art. 669–689 — stwierdzenie nabycia spadku i dział spadku** (dwie najczęstsze sprawy spadkowe, tryb nieprocesowy)
 8. art. 350–352 — sprostowanie, uzupełnienie, wykładnia wyroku
 9. art. 1041–1059 i 1081–1088 — egzekucja świadczeń niepieniężnych i alimentów
-~~10. art. 162 KPC — zastrzeżenie do protokołu~~ ✅ NAPRAWIONE 2026-08-22
-10. art. 617–626¹³ — zniesienie współwłasności i postępowanie wieczystoksięgowe
-11. art. 401, 401¹, 403 — podstawy wznowienia (art. 399 już jest)
-12. art. 458¹⁴–458¹⁶ — postępowanie z udziałem konsumentów
-13. art. 1097–1116 — jurysdykcja krajowa (domknięcie wobec DR-14)
+10. art. 162 KPC — zastrzeżenie do protokołu (⛔ nie mylić z art. 162 KK)
+11. art. 617–626¹³ — zniesienie współwłasności i postępowanie wieczystoksięgowe
+12. art. 401, 401¹, 403 — podstawy wznowienia (art. 399 już jest)
+13. art. 458¹⁴–458¹⁶ — postępowanie z udziałem konsumentów
+14. art. 1097–1116 — jurysdykcja krajowa (domknięcie wobec DR-14)
 
 ---
 

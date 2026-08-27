@@ -25,7 +25,7 @@ kuratora, zakaz prowadzenia pojazdów, przestępstwa przeciwko mieniu, zdrowiu.
    Porozumienie z pokrzywdzonym → podstawa warunkowego umorzenia lub
    nadzwyczajnego złagodzenia kary.
 
-5. **PRZEDAWNIENIE KARALNOŚCI (art. 101 KK) — Dz.U.2025.383:**
+5. **PRZEDAWNIENIE KARALNOŚCI (art. 101 KK) — Dz.U. 2025 poz. 383:**
 
    | Kategoria (art. 101 §1) | Termin |
    |---|---|
@@ -53,12 +53,12 @@ kuratora, zakaz prowadzenia pojazdów, przestępstwa przeciwko mieniu, zdrowiu.
 | Czyn | Art. KK | Tryb | Kluczowy wyjątek |
 |---|---|---|---|
 | Ciężki uszczerbek | art. 156 | Z urzędu | — |
-| Średni uszczerbek | art. 157 §1 | Z urzędu | **Na wniosek gdy sprawca = os. najbliższa** |
-| Lekki uszczerbek | art. 157 §2 | Prywatno-skargowy | **Z urzędu gdy wspólne zamieszkiwanie** |
-| Nieumyślny uszczerbek | art. 157 §3 | Na wniosek | Bezwzględnie wnioskowe |
+| Średni uszczerbek | art. 157 § 1 | Z urzędu | Gdy popełniony nieumyślnie (§ 3) na szkodę osoby najbliższej — na jej wniosek (§ 5) |
+| Lekki uszczerbek | art. 157 § 2 | Prywatnoskargowy | Z urzędu, gdy pokrzywdzony to osoba najbliższa wspólnie zamieszkująca (§ 4) |
+| Nieumyślny uszczerbek | art. 157 § 3 | Zależnie od skutku i relacji | Przy skutku ≤7 dni: prywatnoskargowy z wyjątkiem § 4; gdy pokrzywdzony jest osobą najbliższą: na wniosek (§ 5) |
 | Groźba karalna | art. 190 §1 | **Na wniosek** (§2 KK) | art. 12 §4 KPK: bez wniosku gdy obawa odwetu / interes społ. |
 | Stalking | art. 190a §1,2 | Na wniosek | §3 (skutek śmiertelny) → z urzędu |
-| Zmuszanie | art. 191 | Z urzędu | — (nie mylić z art. 190!) |
+| Zmuszanie | art. 191 § 1 i 1a | Na wniosek (§ 3) | Wymuszenie zwrotu wierzytelności z § 2 — z urzędu |
 | Znęcanie | art. 207 | Z urzędu | — |
 | Kradzież | art. 278 | Z urzędu | **Na wniosek gdy sprawca = os. najbliższa** |
 | Zniesławienie | art. 212 | Prywatno-skargowy | art. 60 §1 KPK: prokurator = interes społ. |
@@ -66,7 +66,7 @@ kuratora, zakaz prowadzenia pojazdów, przestępstwa przeciwko mieniu, zdrowiu.
 
 **Pełna tabela z mechanizmami procesowymi:**
 ```
-view /mnt/skills/user/prawny-router-v3/references/tryby-scigania.md
+view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KPK-tryby-scigania.md
 ```
 
 ---
@@ -118,7 +118,7 @@ view /mnt/skills/user/prawny-router-v3/references/tryby-scigania.md
 
 **Jeśli decyzja: TAK — załaduj:**
 ```
-view /mnt/skills/user/dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
+view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 ```
 Przejdź przez drzewo decyzyjne PRZED wydaniem jakiejkolwiek kwalifikacji.
 
@@ -130,9 +130,9 @@ Etapy postępowania, prawa zatrzymanego/podejrzanego i strategie procesowe są
 obsługiwane przez skille wykonawcze (lazy loading — wczytaj wg potrzeby sprawy):
 
 ```
-view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md
-view /mnt/skills/user/shared/TERM-CALC.md
-view /mnt/skills/user/shared/TRYBY-PROCESOWE.md
+view shared/STRATEGIA-PROCESOWA.md
+view shared/TERM-CALC.md
+view shared/TRYBY-PROCESOWE.md
 ```
 
 Pełna analiza etapowa (dochodzenie/śledztwo → akt oskarżenia → rozprawa → wyrok →
@@ -151,9 +151,9 @@ skill `analiza-sadowa-v6`.
 | Analiza akt karnych / ocena szans | `analiza-sadowa-v6` |
 | Ocena i wycena dowodów (nagrania, billingi) | `analizator-dowodow-v3` |
 | Orzecznictwo SN karne | `orzeczenia-sadowe-v2` |
-| Stalking (art. 190a KK) | `mod-J-stalking.md` |
-| Wykroczenie na granicy z przestępstwem | `mod-I-wykroczenia.md` |
-| Przesłuchanie świadka w KPK | `mod-K-przesluchanie.md` / `przesluchanie-swiadkow-v2` |
+| Stalking (art. 190a KK) | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art190a-stalking.md` |
+| Wykroczenie na granicy z przestępstwem | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KW-kodeks-wykroczen.md` |
+| Przesłuchanie świadka w KPK | `przesluchanie-swiadkow-v2-min90/SKILL.md` |
 | Kwalifikacja czynu (przepisy z indeksu) | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md` |
 
 ---
@@ -189,7 +189,7 @@ Art. 302 KK — FAWORYZOWANIE WIERZYCIELA (przy grożącej upadłości):
   → Zaspokojenie jednego z wierzycieli kosztem innych w toku postępowania
   → Zagrożenie: do 3 lat
 
-PRZESTĘPSTWA SKARBOWE → dr-06/mod-KKS-karny-skarbowy-i-AML.md
+PRZESTĘPSTWA SKARBOWE → dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KKS-karny-skarbowy-i-AML.md
 ```
 
 ### Art. 209 KK — Niealimentacja

@@ -76,5 +76,5 @@ web_search: "decyzja środowiskowa OOŚ DŚU procedura 2025 2026"
 | Pozwolenie na budowę po DŚU | `mod-PrBud-prawo-budowlane` |
 | Orzecznictwo NSA (środowiskowe) | `orzeczenia-sadowe-v2` |
 
-*Weryfikacja: 2026-06-05 | UOOŚiS: Dz.U. 2024 poz. 1112 t.j.*
+*Weryfikacja: 2026-06-05 | UOOŚiS: Dz.U. 2026 poz. 670 t.j.*
 *Zakaz cytowania przepisów z pamięci — weryfikuj w isap.sejm.gov.pl*

@@ -2,7 +2,7 @@
 
 **Data:** 2026-08-23f. **Adresat:** autor/zespół raportów porównawczych
 TEST1, TEST2, TEST3. **Kontekst:** trzy raporty oceniały odpowiedzi systemu
-prawnego (skille `/mnt/skills/user/`) wobec kryteriów zawierających etykietę
+prawnego (skille ``) wobec kryteriów zawierających etykietę
 `MEM` i rejestr statusów `VER / MEM / NIEWERYFIKOWANE`.
 
 ## Istota sprostowania

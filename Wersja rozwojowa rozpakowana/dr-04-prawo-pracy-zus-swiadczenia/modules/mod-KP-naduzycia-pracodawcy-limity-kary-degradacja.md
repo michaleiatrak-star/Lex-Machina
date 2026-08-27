@@ -333,7 +333,7 @@ Ochrona sygnalistów i mechanizm "domniemania odwetu" (każda niekorzystna
 zmiana sytuacji PO zgłoszeniu = domniemanie, że to odwet, z przerzuceniem
 ciężaru dowodu na pracodawcę) są już opracowane w:
 ```
-view /mnt/skills/user/dr-15-compliance-iso-governance-audyt/modules/mod-ustawa-sygnalisci.md
+view dr-15-compliance-iso-governance-audyt/modules/mod-ustawa-sygnalisci.md
 ```
 oraz równolegle w DR-05. **Ten moduł (DR-04) dostarcza BEZPOŚREDNIE
 POWIĄZANIE z tematem niniejszego pliku:** jeśli działaniem odwetowym
@@ -352,10 +352,9 @@ wobec sygnalisty jest WŁAŚNIE degradacja (Część C) — zastosuj RÓWNOCZEŚ
 `mod-ustawa-sygnalisci.md` (zarówno DR-15, jak i DR-05) — obie wersje
 teraz wskazują wprost na ten plik dla przypadków, gdy odwet przybiera
 formę pracowniczą (degradacja, kara porządkowa). Przy okazji skorygowano
-w wersji DR-15 dwie nieaktualne nazwy modułów DR-04 (`mod-KP-kodeks-pracy`
-→ `mod-KP-prawo-pracy`; `mod-ustawa-PIP-panstwowa-inspekcja-pracy` →
-`mod-ustawa-PIP-inspekcja-pracy`), które nie odpowiadały rzeczywistym
-nazwom plików.
+w wersji DR-15 dwie nieaktualne nazwy modułów DR-04 zostały
+skorygowane na istniejące `mod-KP-prawo-pracy.md` oraz
+`mod-ustawa-PIP-inspekcja-pracy.md`; dawne aliasy nie są już używane operacyjnie.
 
 ---
 

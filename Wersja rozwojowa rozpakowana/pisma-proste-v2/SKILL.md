@@ -1,23 +1,30 @@
 ---
 name: pisma-proste-v2
-version: 2.10
+version: "2.11"
 type: executive-pisma
 status: production
-description: |
-  Redagowanie pism procesowych o niskim stopniu złożoności, jeden wątek
-  prawny. Stosuj dla: klauzuli wykonalności, sprzeciwu/zarzutów od
-  nakazu zapłaty, wszczęcia egzekucji, zabezpieczenia roszczenia,
-  zwolnienia od kosztów, zawezwania do ugody, przywrócenia terminu,
-  wglądu do akt, wezwania do zapłaty, uzasadnienia wyroku, doręczenia
-  przez komornika, sprzeciwu od referendarza, interpretacji ZUS, skargi
-  do UODO, oświadczenia o skorzystaniu z sankcji kredytu darmowego (SKD,
-  art. 45 u.k.k.). NIE stosuj do pism wielowątkowych (apelacje, pozwy
-  złożone, w tym pozew o zwrot nadpłaty po SKD) — użyj pisma-procesowe-v3.
-compatibility:
-  tools:
-    - web_search
-    - web_fetch
+description: "Proste pisma prawne i urzędowe: wezwania, wnioski, odpowiedzi i krótsze dokumenty; kompletność danych, aktualna weryfikacja prawa i walidacja przed wygenerowaniem pliku."
+compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_document_and_interactive_ui"
 ---
+
+> **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
+
+
+## ADAPTER RUNTIME — PORTABILITY (ChatGPT / Claude / inne hosty)
+
+Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Metodologia merytoryczna, routing, hard gate’y, checklisty, schematy danych i kryteria finalizacji tego skilla pozostają bez zmian.
+
+1. `view pisma-proste-v2/<plik>` oraz względne `view modules/...`, `view references/...`, `view assets/...` oznaczają świeży odczyt lokalnego zasobu tego skilla. Literalny katalog `/mnt/skills/user` nie jest wymagany.
+2. `view shared/<plik>` oznacza odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tej paczki. Brak obowiązkowego zasobu = fail-closed.
+3. `view <inny-skill>/<plik>` oznacza aktywację/odczyt osobnego skilla. Nie vendoryzuj innych skilli.
+4. `web_search` / `web_fetch` oznaczają świeże wyszukanie i odczyt źródła przez równoważną funkcję hosta; zachowaj istniejące wymogi źródeł oficjalnych i statusów weryfikacji.
+5. `present_files`, `create_file` i odwołania do `HOST_CAPABILITY[document_generation]` / generatorów PDF oznaczają użycie natywnej funkcji dokumentowej bieżącego hosta. Brak literalnej nazwy narzędzia nie zwalnia z HYBRID-VALIDATION, POST-VALIDATION, STEP-TRACKER ani innych bramek.
+6. `show_widget`, `visualize:read_me`, `.jsx` i HTML są legacy/natywnymi wariantami UI. Jeśli host ma własny renderer interaktywny, użyj równoważnego widoku zachowującego ten sam model danych i funkcje; jeśli nie, zastosuj pełny fallback tekstowy/plikowy.
+7. `/mnt/user-data/...` oznacza rzeczywiste pliki użytkownika dostępne w hoście; wymagany ponowny odczyt musi być faktycznym odczytem pliku.
+8. Shell/Python/Cowork i podobne operacje traktuj jako techniki pomocnicze. Jeżeli host ich nie udostępnia, użyj natywnej funkcji równoważnej, bez fikcyjnego raportowania wykonania.
+
+**Zasada nadrzędna:** jeśli instrukcja jest już zrozumiała i wykonalna w bieżącym hoście, wykonaj ją bez konwersji. Adapter działa tylko na granicy runtime.
+
 
 # Skill: Pisma Proste v2 — Architektura Modułowa
 
@@ -36,8 +43,8 @@ jest skrócona do potwierdzenia aktualności przepisu i ewentualnej opłaty.
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 
 > Przed podaniem jakiegokolwiek artykułu, terminu, opłaty lub sygnatury:
-> `view /mnt/skills/user/shared/NAZEWNICTWO-STRON.md  ← tabele T1-T10, wzory N1-N7
-view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
+> `view shared/NAZEWNICTWO-STRON.md  ← tabele T1-T10, wzory N1-N7
+view shared/PRAWO-HARDGATE.md`
 > Jeśli źródło niedostępne → oznacz `⚠️ [NIEWERYFIKOWANE]`.
 
 ---
@@ -75,7 +82,7 @@ Nie cytuj przepisów ani orzeczeń z pamięci bez weryfikacji online.
 | **M2 — Intake i identyfikacja** | `references/M2-intake.md` | ZAWSZE na początku — zbieranie danych |
 | **M3 — Weryfikacja online** | `references/M3-weryfikacja.md` | Gdy pismo zawiera kwotę, opłatę lub nowelizowany przepis |
 | **M4 — Struktura i nagłówek** | `references/M4-struktura.md` | ZAWSZE przy redagowaniu pisma |
-| **M5 — Terminy zawite** | view /mnt/skills/user/shared/terminy.md | Gdy pismo ma termin zawity (sprzeciw, zarzuty, uzasadnienie, apelacja) |
+| **M5 — Terminy zawite** | view shared/terminy.md | Gdy pismo ma termin zawity (sprzeciw, zarzuty, uzasadnienie, apelacja) |
 | **M6 — Opłaty sądowe** | `references/M6-oplaty.md` | Gdy pismo wymaga opłaty lub pytasz o jej wysokość |
 | **M7 — Eskalacja i orzecznictwo** | `references/M7-eskalacja.md` | Gdy sprawa może wymagać pisma-procesowe-v3 lub orzecznictwa |
 | **M8 — Lista kontrolna** | `references/M8-checklista.md` | ZAWSZE przed wydaniem gotowego pisma |
@@ -109,8 +116,8 @@ Nie cytuj przepisów ani orzeczeń z pamięci bez weryfikacji online.
 KROK 1  → Wczytaj references/M1-zasady.md             [zawsze]
 KROK 2  → Wczytaj references/M2-intake.md             [zawsze — ustal typ pisma i dane]
 KROK 3  → Wczytaj:
-           view /mnt/skills/user/shared/terminy.md            [jeśli pismo ma termin zawity]
-KROK 4  → Wczytaj właściwy schemat SPA–SPM albo SPE-O [na podstawie wyniku M2; dla wezwania ostatecznego: references/SPE-ostateczne.md; dla SPM wczytaj NAJPIERW dr-02/modules/mod-ustawa-kredyt-konsumencki-SKD.md]
+           view shared/terminy.md            [jeśli pismo ma termin zawity]
+KROK 4  → Wczytaj właściwy schemat SPA–SPM albo SPE-O [na podstawie wyniku M2; dla wezwania ostatecznego: references/SPE-ostateczne.md; dla SPM wczytaj NAJPIERW dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-kredyt-konsumencki-SKD.md]
 KROK 5  → Wczytaj references/M6-oplaty.md             [jeśli pismo wymaga opłaty]
 KROK 6  → Wczytaj references/M3-weryfikacja.md        [jeśli kwota/przepis wymaga weryfikacji]
 KROK 7  → Wczytaj references/M7-eskalacja.md          [jeśli sprawa może być złożona lub wymaga orzecznictwa]
@@ -120,7 +127,7 @@ KROK 9b → WERYFIKACJA FAKTYCZNA (M-FAKTY)             [zawsze gdy pismo z dost
            Porównaj każde twierdzenie faktyczne z materiałem źródłowym.
            Wyświetl Raport MOD-FAKTY przed oddaniem pisma. (patrz sekcja poniżej)
 KROK 9c → Wczytaj:
-           view /mnt/skills/user/shared/HYBRID-VALIDATION.md    [zawsze — auto-raport braków]
+           view shared/HYBRID-VALIDATION.md    [zawsze — auto-raport braków]
 KROK 10 → Wczytaj references/M9-format.md             [zawsze — prezentacja odpowiedzi]
 ```
 
@@ -137,7 +144,7 @@ Np. proste wezwanie do zapłaty bez terminu zawitego → pomijasz M5 i M7.
 **Skan kompletności dokumentów (naprawa F-7/ZASADA 11, 2026-07-15)** — jeśli
 użytkownik dostarczył JAKIKOLWIEK dokument (nakaz, tytuł wykonawczy, wyrok,
 umowa, korespondencja), wykonaj PRZED weryfikacją twierdzeń poniżej:
-> `view /mnt/skills/user/shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` — zastosuj
+> `view shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` — zastosuj
 > FAZA 1-3 w pełni (SD-GATE-TRUNC, SD-GATE-PORCJA, SD-VER), nawet dla
 > jednego krótkiego dokumentu. Przyczyna: pismo proste bazuje zwykle na
 > 1 dokumencie źródłowym — błąd w jego odczycie (obcięcie przez `view`,
@@ -145,11 +152,11 @@ umowa, korespondencja), wykonaj PRZED weryfikacją twierdzeń poniżej:
 > drugiej szansy na wykrycie w wielodokumentowej korelacji krzyżowej.
 
 **Weryfikacja twierdzeń strony** — wykonaj przed redagowaniem:
-> `view /mnt/skills/user/shared/CLAIM-VALIDATION.md`
+> `view shared/CLAIM-VALIDATION.md`
 > Twierdzenie sprzeczne z materiałem → zastąp tym co wynika z dokumentów; poinformuj użytkownika.
 > Twierdzenie bez oparcia → oznacz jako lukę; nie umieszczaj w piśmie.
 
-Gdy brakuje danych faktycznych — wczytaj: view /mnt/skills/user/shared/INTAKE-GAP.md:
+Gdy brakuje danych faktycznych — wczytaj: view shared/INTAKE-GAP.md:
 - **Dane krytyczne** (strony, typ, istota): jedno pytanie zbiorcze
 - **Dane uzupełniające**: wstaw `⬛ [UZUPEŁNIJ: opis]` w treść
 - **Na żądanie wzoru**: pismo ze wszystkimi polami jako ⬛
@@ -180,7 +187,7 @@ Przed redagowaniem ustal (patrz references/M2-intake.md — szczegóły):
   → web_search "[nazwa spółki] KRS NIP adres"
   → Potwierdź: firma rejestrowa + KRS + NIP + REGON + adres siedziby + status
   → Gdy rozbieżność identyfikatorów:
-    view /mnt/skills/user/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md → ISU-1→ISU-5
+    view shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md → ISU-1→ISU-5
   ✅ [VER: URL, data] lub ⚠️ [ROZBIEŻNOŚĆ: opis]
 ```
 
@@ -206,9 +213,9 @@ Jeśli użytkownik nie podał wszystkich danych — zapytaj o brakujące
 
 ---
 
-## TERMINY ZAWITE — CZERWONA LINIA (szczegóły: view /mnt/skills/user/shared/terminy.md)
+## TERMINY ZAWITE — CZERWONA LINIA (szczegóły: view shared/terminy.md)
 
-**Przy każdym piśmie z terminem zawitym (→ view /mnt/skills/user/shared/terminy.md):**
+**Przy każdym piśmie z terminem zawitym (→ view shared/terminy.md):**
 1. Podaj termin **BOLD** na początku odpowiedzi
 2. Oblicz datę graniczną od podanej daty doręczenia
 3. Podaj liczbę pozostałych dni
@@ -228,7 +235,7 @@ Jeśli użytkownik nie podał wszystkich danych — zapytaj o brakujące
 | Odwołanie od wypowiedzenia (KP) | 21 dni od doręczenia | Utrata roszczenia |
 | Przywrócenie terminu | 7 dni od ustania przeszkody | Niedopuszczalność |
 
-*Terminy zawite — pełna tabela z podstawami prawnymi: view /mnt/skills/user/shared/terminy.md*
+*Terminy zawite — pełna tabela z podstawami prawnymi: view shared/terminy.md*
 
 ---
 
@@ -315,7 +322,7 @@ SYTUACJA C — niestandardowy stan faktyczny
 📅 CO DALEJ
    [następny krok po złożeniu pisma]
 
-📋 HYBRID-VALIDATION (zawsze — wczytaj view /mnt/skills/user/shared/HYBRID-VALIDATION.md)
+📋 HYBRID-VALIDATION (zawsze — wczytaj view shared/HYBRID-VALIDATION.md)
    Auto-raport braków 🔴/🟡/🔵. Użytkownik uzupełnia wybrane → wstaw do pisma.
    Licznik: "Pismo zawiera ⬛ [X] pól do uzupełnienia."
 ```
@@ -340,25 +347,24 @@ CHECKLISTA FINALNA (pisma proste)
                     Czy pismo powstało z dostarczonych dokumentów? → OBOWIĄZKOWE.
                     Żadna fikcja faktyczna w treści pisma (⛔ = błąd krytyczny)?
 □ HYBRID-VALIDATION Uruchomiony? Raport braków wyświetlony? Licznik ⬛ podany?
-□ [ANTY-FASADA] (dodane 2026-08-23, v2.6) Czy w odpowiedzi/piśmie jest słowo
-  „zweryfikowano/zweryfikowałem", pole „data weryfikacji" albo URL przy przepisie,
-  dla którego NIE wywołałem narzędzia W TEJ ODPOWIEDZI? TAK → ⛔ usuń deklarację
-  i datę, URL przeformatuj na 🎯 [CEL — RZĄD 1, NIEOTWARTE: …], przepis oznacz
-  ⚠️ [NIEWERYFIKOWANE]. Wyzwalacz to BRAK WYWOŁANIA, nie brak narzędzi w sesji.
-  ⛔ Zastrzeżenie selektywne (przy sygnaturach tak, przy przepisach nie) = naruszenie.
+□ [ANTY-FASADA + AF-6] Wykonaj self-check antyfasadowy z modułu kanonicznego:
+    view shared/SELF-CHECK-ANTY-FASADA.md
+  ⛔ Treść listy NIE jest tu kopiowana (F-115, 2026-08-23i). Poprzednia kopia
+    miała 1 z 2 pozycji: gdy F-117 dodała AF-6 do źródła, kopie nie zostały
+    zaktualizowane. Jedno miejsce prawdy = jedno miejsce aktualizacji.
 □ [DOMAIN-LOCK] Odpowiedź/pismo zawiera przepis SPOZA dziedziny wiodącej
   (KK/KKS/KW/KPK/KPW przy torze cywilnym, pracowniczym lub administracyjnym —
   albo odwrotnie)? NIE → OK. TAK → (a) konkretny FAKT wypełniający znamię,
   nie skojarzenie tematyczne? (b) właściwy DR wczytany w TEJ odpowiedzi?
   (c) przepis przeszedł PRAWO-HARDGATE w TEJ odpowiedzi? Którekolwiek NIE →
-  ⛔ USUŃ powołanie.  → `view /mnt/skills/user/shared/DOMAIN-LOCK.md`
+  ⛔ USUŃ powołanie.  → `view shared/DOMAIN-LOCK.md`
 □ [RATE-COMPLETENESS] Występują odsetki / waloryzacja / wskaźnik zmienny
   w czasie? NIE → OK. TAK → przedział zapisany + reżim rozstrzygnięty
   (KC vs transakcje handlowe) + szereg podokresów BEZ LUK + znacznik na
   KAŻDYM wierszu? NIE → nie podawaj kwoty łącznej, pokaż tabelę z ⬛.
-  → `view /mnt/skills/user/shared/RATE-COMPLETENESS.md`
+  → `view shared/RATE-COMPLETENESS.md`
 □ [STATUSY] Każdy przepis ma znacznik z ZAMKNIĘTEJ hierarchii czterech:
-  ✅ [VER] · 🟡 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
+  ✅ [VER] · 🟨 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]?
   Etykieta spoza tej listy = naruszenie hard gate (PRAWO-HARDGATE v2.5).
 ```
 
@@ -375,7 +381,7 @@ Nie wydawaj pisma jeśli którykolwiek element checklisty nie jest spełniony.
 
 **Plik kanoniczny — wczytaj zawsze:**
 ```
-view /mnt/skills/user/shared/FAKTY_v2.md
+view shared/FAKTY_v2.md
 ```
 
 Uruchamiaj zawsze gdy pismo powstaje z dostarczonych przez użytkownika dokumentów,
@@ -419,32 +425,32 @@ Procedura, klasyfikacja błędów, format raportu i nakazy bezwzględne są w FA
 Przed oddaniem jakiegokolwiek pisma, nawet prostego, wczytaj i zastosuj:
 
 ```text
-view /mnt/skills/user/shared/TRYBY-PROCESOWE.md
-view /mnt/skills/user/shared/FORMAL-CHECK.md
-view /mnt/skills/user/shared/BRAKI-FORMALNE.md
-view /mnt/skills/user/shared/WARUNKI-SKUTECZNOSCI.md
-view /mnt/skills/user/shared/RISK-ASSESSMENT.md
-view /mnt/skills/user/shared/QUALITY-CHECK.md
+view shared/TRYBY-PROCESOWE.md
+view shared/FORMAL-CHECK.md
+view shared/BRAKI-FORMALNE.md
+view shared/WARUNKI-SKUTECZNOSCI.md
+view shared/RISK-ASSESSMENT.md
+view shared/QUALITY-CHECK.md
 ```
 
 Jeżeli pismo dotyczy terminu, sprzeciwu, zarzutów, uzasadnienia, apelacji, zażalenia albo przywrócenia terminu, dołącz:
 
 ```text
-view /mnt/skills/user/shared/TERM-CALC.md
+view shared/TERM-CALC.md
 ```
 
 Jeżeli pismo dotyczy JAKIEGOKOLWIEK środka zaskarżenia (zażalenie, odwołanie,
 sprzeciw, zarzuty, skarga) — obowiązkowo dołącz, ZANIM wskażesz adresata w piśmie:
 
 ```text
-view /mnt/skills/user/shared/ZAZALENIE-ADRESAT-GATE.md
+view shared/ZAZALENIE-ADRESAT-GATE.md
 ```
 
 Jeżeli pismo zawiera dowody lub zarzuty faktyczne, dołącz:
 
 ```text
-view /mnt/skills/user/shared/DOWODY-METODOLOGIA.md
-view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md
+view shared/DOWODY-METODOLOGIA.md
+view shared/PREKLUZJA-DOWODOWA.md
 ```
 
 Pismo proste nie może ominąć walidacji tylko dlatego, że jest krótkie.

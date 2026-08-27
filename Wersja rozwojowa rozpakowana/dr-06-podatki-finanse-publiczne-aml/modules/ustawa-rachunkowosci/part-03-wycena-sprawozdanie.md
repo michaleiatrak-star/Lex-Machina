@@ -96,7 +96,7 @@ pokrycia, dodano 2026-08-11, na żądanie użytkownika)
   wyceny, NIE ogólną teorią zasad
 
 Potwierdzone w 5+ zgodnych źródłach, w tym BEZPOŚREDNIO dosłowny
-tekst art. 28 (sip.lex.pl/OpenLEX z aktualnym t.j. Dz.U.2026.522,
+tekst art. 28 (sip.lex.pl/OpenLEX z aktualnym t.j. Dz.U. 2026 poz. 522,
 arslege.pl, lexlege.pl) oraz poradnikprzedsiebiorcy.pl (z
 odniesieniem do KSR nr 4).
 ```

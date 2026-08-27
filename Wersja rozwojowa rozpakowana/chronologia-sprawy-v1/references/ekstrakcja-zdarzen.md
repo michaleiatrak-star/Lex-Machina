@@ -484,7 +484,7 @@ PROBLEM: Ten sam świadek zeznaje inaczej w różnych momentach postępowania
 TYPOWE W: każdy rodzaj sprawy (zeznania policyjne vs sądowe)
 ROZSTRZYGNIĘCIE: Wcześniejsze zeznanie (bliższe zdarzeniu) często wiarygodniejsze;
                  wyjaśnij przyczynę zmiany
-WPŁYW: impeachment świadka — użyj w przesluchanie-swiadkow-v2
+WPŁYW: impeachment świadka — użyj w przesluchanie-swiadkow-v2-min90
 ```
 
 ---

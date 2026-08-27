@@ -18,7 +18,7 @@ tonażowy, cukrowy, sprzedaż detaliczna) — W PEŁNI opracowane.
 
 ## CZĘŚĆ A — PODATEK OD NIEKTÓRYCH INSTYTUCJI FINANSOWYCH ("podatek bankowy")
 
-**Podstawa:** ustawa z 15.01.2016 r. (Dz.U. 2016 poz. 68 ze zm.)
+**Podstawa:** ustawa z 15.01.2016 r.; t.j. Dz.U. 2023 poz. 623 ze zm.
 
 ```
 PODATNICY: banki krajowe, oddziały banków zagranicznych, oddziały

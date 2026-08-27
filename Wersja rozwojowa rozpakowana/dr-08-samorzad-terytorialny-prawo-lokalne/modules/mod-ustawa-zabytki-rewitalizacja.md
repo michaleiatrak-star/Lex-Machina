@@ -4,7 +4,7 @@
 **Źródło weryfikacji:**
 - Zabytki: Dz.U. 2024 poz. 1292 t.j. z 19.08.2024 ✅ VER: 2026-06-05
 - Rewitalizacja: Dz.U. 2024 poz. 278 t.j. ze zm. ✅ VER: 2026-06-05
-- Cmentarze: Dz.U. 2025 poz. 1590 t.j. — ✅ NAPRAWIONE 2026-08-22 (F-82): poprzedni numer 2023 poz. 1284 nieaktualny (obwieszczenie 7.11.2025, nowszy niż nawet pośredni t.j. 2024.576)
+- Cmentarze: Dz.U. 2025 poz. 1590 t.j. ze zm. — weryfikuj w ISAP
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
 ---
@@ -70,7 +70,7 @@ Specjalna Strefa Rewitalizacji (SSR):
 
 ---
 
-## 4. CMENTARZE (Dz.U. 2025 poz. 1590)
+## 4. CMENTARZE (Dz.U. 2023 poz. 1284)
 
 ```
 Gmina: obowiązek zapewnienia cmentarza komunalnego
@@ -94,7 +94,7 @@ Czas pochowania: 72 godz. od zgonu (lub 96 przy balsamowaniu)
 
 **Output:** Kwalifikacja (zabytki/rewitalizacja/cmentarze) → obowiązki/prawa → organ → sankcje → rekomendacja.
 
-**Powiązania:** `mod-MPZP-WZ-planowanie-przestrzenne` | `dr-09` (pozwolenie na budowę przy zabytku) | `dr-05` → `mod-KPA` | `pisma-procesowe-v3`
+**Powiązania:** `mod-MPZP-WZ-planowanie-przestrzenne` | `dr-09` (pozwolenie na budowę przy zabytku) | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` | `pisma-procesowe-v3`
 
 **Źródła:**
 - Zabytki: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20241292

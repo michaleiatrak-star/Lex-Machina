@@ -4,7 +4,7 @@ lukę odkrytą przy okazji korekty mod-ustawa-sygnalisci.md: prawo
 pracy/BHP NIE jest objęte trybem ustawy o sygnalistach, więc wymaga
 WŁASNEGO, szczegółowego mechanizmu klasyfikacji)
 
-> ⛔ **PUNKT WYJŚCIA (przypomnienie z dr-15/mod-ustawa-sygnalisci.md):**
+> ⛔ **PUNKT WYJŚCIA (przypomnienie z dr-15-compliance-iso-governance-audyt/modules/mod-ustawa-sygnalisci.md):**
 > prawo pracy, WŁĄCZNIE Z BHP, zostało WPROST usunięte z katalogu
 > ustawy o ochronie sygnalistów (poprawka senacka, potwierdzona w 4+
 > źródłach). Naruszenia opisane w tym module NIE korzystają z trybu/
@@ -120,7 +120,7 @@ Adresat — WSZYSTKIE TRZY RÓWNOLEGLE, każdy dla swojego aspektu:
   (b) ZUS — zaległe składki, brak zgłoszenia do ubezpieczeń
   (c) KAS — aspekt podatkowy (niezgłoszony przychód, unikanie PIT/
       składek zdrowotnych)
-  Zob. `dr-04/modules/mod-ustawa-PIP-inspekcja-pracy.md` (sekcja o
+  Zob. `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-ustawa-PIP-inspekcja-pracy.md` (sekcja o
   wymianie danych PIP↔ZUS↔KAS, mechanizm ADMINISTRACYJNY, odrębny od
   obowiązku karnoprocesowego)
 ```
@@ -171,10 +171,10 @@ Adresat: jeśli naruszenie ma ZNAMIONA KORUPCJI (np. żądanie łapówki
 ## CROSS-REFERENCJE
 
 - Mechanizm zawiadomień krzyżowych (art. 304 KPK) → `shared/ZAWIADOMIENIA-KRZYZOWE.md`
-- Katalog dziedzin sygnalisty (potwierdzenie że prawo pracy JEST wyłączone) → `dr-15/modules/mod-ustawa-sygnalisci.md`
-- Mobbing/dyskryminacja, szczegóły odszkodowania → `dr-02/modules/mod-KP-art943-mobbing-dyskryminacja.md`
-- PIP ogólnie (kontrola, decyzje, wymiana danych z ZUS/KAS) → `dr-04/modules/mod-ustawa-PIP-inspekcja-pracy.md`
-- Karta Nauczyciela (odrębny reżim BHP dla nauczycieli) → `dr-04/modules/mod-ustawa-karta-nauczyciela-pracownicze.md`
+- Katalog dziedzin sygnalisty (potwierdzenie że prawo pracy JEST wyłączone) → `dr-15-compliance-iso-governance-audyt/modules/mod-ustawa-sygnalisci.md`
+- Mobbing/dyskryminacja, szczegóły odszkodowania → `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-KP-mobbing-dyskryminacja.md`
+- PIP ogólnie (kontrola, decyzje, wymiana danych z ZUS/KAS) → `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-ustawa-PIP-inspekcja-pracy.md`
+- Karta Nauczyciela (odrębny reżim BHP dla nauczycieli) → `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-ustawa-karta-nauczyciela-pracownicze.md`
 
 ⚠️ Wszystkie kwalifikacje karne (art. 220, 221, 218 §1a KK) wymagają
 weryfikacji na isap.sejm.gov.pl przed użyciem w konkretnej sprawie —

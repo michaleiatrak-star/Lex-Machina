@@ -1,7 +1,7 @@
 # mod-nadzor-wojewody-RIO-legalnosc-uchwal
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** USG — Dz.U. 2025 poz. 1153 | USP — Dz.U. 2025 poz. 1684 | USW — Dz.U. 2025 poz. 581 | Ustawa o Wojewodzie — Dz.U. 2025 poz. 428 | Ustawa o RIO — Dz.U. 2023 poz. 1325
+**Źródło weryfikacji:** USG — Dz.U. 2026 poz. 662 t.j. | USP — Dz.U. 2025 poz. 1684 t.j. | USW — Dz.U. 2026 poz. 720 t.j. | Ustawa o Wojewodzie — Dz.U. 2025 poz. 428 t.j. | Ustawa o RIO — Dz.U. 2025 poz. 7 t.j. | ✅ ELI 2026-08-25
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -16,11 +16,11 @@ Nadzór Wojewody nad legalnością uchwał i zarządzeń organów JST (nie celow
 
 | Akt | Dz.U. |
 |---|---|
-| USG art. 85–102 | Dz.U. 2025 poz. 1153 t.j. |
+| USG art. 85–102 | Dz.U. 2026 poz. 662 t.j. |
 | USP art. 76–92 | Dz.U. 2025 poz. 1684 t.j. |
-| USW art. 78–92 | Dz.U. 2025 poz. 581 t.j. |
+| USW art. 78–92 | Dz.U. 2026 poz. 720 t.j. |
 | Ustawa o Wojewodzie | Dz.U. 2025 poz. 428 t.j. |
-| Ustawa o RIO | Dz.U. 2023 poz. 1325 t.j. |
+| Ustawa o RIO | Dz.U. 2025 poz. 7 t.j. |
 
 ---
 
