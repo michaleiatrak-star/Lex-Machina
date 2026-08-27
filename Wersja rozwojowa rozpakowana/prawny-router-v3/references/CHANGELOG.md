@@ -1,5 +1,7 @@
 # CHANGELOG — prawny-router-v3
 
+- 3.30 (2026-08-27): zsynchronizowano `pokrycie-dziedzinowe.md` ze stanem faktycznym repozytorium: REACH/CLP → DR-10, akcyza/cło → istniejące moduły DR-06, cudzoziemcy → kanoniczny DR-05; dodano wejścia F-108 P1/41, P1/8 i P1/52.
+
 - 3.29 (2026-08-27): przywrócono stałe identyfikatory reguł po skróceniu,
   bez Reguły 13, z kolejnością 22 → 23. Odwołania w SELF-CHECK i modułach
   zachowują znaczenie. Usunięto pozostałe notatki historyczne z korpusu i YAML.
