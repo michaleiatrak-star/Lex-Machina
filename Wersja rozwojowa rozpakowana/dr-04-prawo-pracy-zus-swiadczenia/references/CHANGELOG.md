@@ -1,5 +1,7 @@
 # CHANGELOG — dr-04-prawo-pracy-zus-swiadczenia
 
+- 3.28 (2026-08-27): dodano moduły uzupełniające SUS i FUS dla rozdziałów wcześniej bez treści; zsynchronizowano mapy i routing.
+
 - 3.27 (2026-08-27): F-108 P2/30 i P2/40 — dodano dedykowany moduł ustawy zasiłkowej (Dz.U. 2026 poz. 854, B+) oraz ponownie zweryfikowano i skorygowano procedurę zwolnień grupowych w RZĄD 1 ELI.
 
 - 3.26 (2026-08-26): zarejestrowano istniejący moduł podstawy wymiaru
