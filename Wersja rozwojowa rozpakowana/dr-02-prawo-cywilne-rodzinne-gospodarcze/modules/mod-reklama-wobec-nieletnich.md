@@ -6,7 +6,7 @@ agresywną wobec nieletnich" — dotąd całkowita luka, mimo BARDZO AKTUALNEJ
 praktyki egzekwowania przez UOKiK (postępowania przeciwko influencerom,
 listopad 2025).
 
-> ⛔ HARDGATE — zweryfikuj aktualny t.j. na ISAP.
+> ✅ **METRYKI RZĄD 1, VER 2026-08-28:** UPNPR — **Dz.U. 2023 poz. 845 t.j.**; ustawa o radiofonii i telewizji — **Dz.U. 2022 poz. 1722 t.j. ze zm.**. Przy art. 16b/18/53 sprawdź akty zmieniające po t.j.
 
 ---
 
