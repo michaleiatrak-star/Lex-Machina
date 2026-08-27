@@ -750,3 +750,37 @@ przy katalogach semantycznych, jak i przy identyfikatorach pakietów hosta.
 
 T17 dowodzi obecności i spójności kontraktu statycznego, nie skuteczności
 behawioralnej. F-113/F-133 pozostają otwarte do testu A/B z transkryptami.
+
+
+---
+
+## 18. T18 — SPÓJNOŚĆ MAP POKRYCIA I ROUTINGU
+
+**Skrypt:** `scripts/check_coverage_coherence.py`  
+**Priorytet:** KRYTYCZNY dla wydania map/routingu  
+**Dodany:** 2026-08-27 po audycie kompletności dziedzin prawa  
+**Kod wyjścia:** 0 = spójność strukturalna, 1 = rozbieżność
+
+### Co sprawdza
+
+1. każdy z 16 kanonicznych DR ma `MAPA-POKRYCIA.md`;
+2. jawne ścieżki `dr-XX/.../modules/mod-*.md` w centralnym
+   `prawo-polskie-v2/ROUTING-MAP.md` istnieją fizycznie;
+3. moduły wymienione w lokalnych `MAPA-AKTOW.md` rozwiązują się do
+   rzeczywistych plików (z tolerancją jawnych historycznych prefiksów);
+4. mapa dziedzinowa routera nie deklaruje „brak dedykowanego modułu”,
+   jeżeli w korpusie istnieje odpowiadający moduł.
+
+### Regresja, przed którą chroni
+
+Raport 2026-08-27 wykazał dwa niezależne typy dryfu:
+- 9/16 DR nie miało `MAPA-POKRYCIA.md`, przez co kompletności nie dało się
+  certyfikować nawet przy rozbudowanej treści modułów;
+- mapa dziedzinowa routera deklarowała brak modułów m.in. dla REACH/CLP
+  i akcyzy/cła, mimo że moduły fizycznie już istniały.
+
+### Ograniczenie
+
+T18 dowodzi spójności **strukturalnej**, nie kompletności materialnej prawa.
+Status `✅ OK` w ROUTING/MAPA-AKTOW nie może być automatycznie zamieniony
+na `🟢` w MAPA-POKRYCIA.
