@@ -152,7 +152,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
-| Ustawa o przeciwdziałaniu nadmiernym opóźnieniom w transakcjach handlowych | Dz.U. 2023 poz. 1790 t.j.; ELI odczyt 2026-08-27, pełna historia zmian niepotwierdzona | dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-transakcje-handlowe-opoznienia.md | B — rdzeń cywilny; administracja i historia częściowe (F-108/46) |
+| Ustawa o przeciwdziałaniu nadmiernym opóźnieniom w transakcjach handlowych | Dz.U. 2023 poz. 1790 t.j.; temporalność 2013/2022/2023 VER ELI 2026-08-27 | dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-transakcje-handlowe-opoznienia.md | ✅ B+ — cywilne + UOKiK + wykroczenia + temporalność; F-108/46 Etap 2 zamknięty |
 | Kodeks cywilny — zobowiązania, roszczenia | Dz.U. 2025 poz. 1071 ze zm. | dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md | ✅ OK |
 | Kodeks cywilny — konsumenckie | Dz.U. 2025 poz. 1071 ze zm. | dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-konsumenckie.md | ✅ OK |
 | Kodeks cywilny — Księga IV Spadki (art. 922-1088, w tym zapis windykacyjny, wykonawca testamentu, wydziedziczenie, odpowiedzialność za długi spadkowe, dziedziczenie przez gminę/Skarb Państwa art. 935) + Rozporządzenie UE 650/2012 (spadki transgraniczne, ⚠️ punkt startowy) | Dz.U. 2025 poz. 1071 ze zm. + Rozp. UE 650/2012 | dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-spadki.md (v2.0) | ✅ ROZBUDOWANE 2026-07-19 (sync z DR-02/MAPA-AKTOW) |
