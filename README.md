@@ -41,7 +41,7 @@ z polskim prawem:
 | 🛠️ **Narzędzia wykonawcze** | pisma procesowe, analiza umów i dowodów, przesłuchania świadków, chronologia, raporty |
 | 🛡️ **Antyhalucynacja** | HARD GATE: zakaz cytowania prawa z pamięci, deterministyczne API, gradient weryfikacji cytatu |
 | 📋 **Governance** | dziennik audytów, mapa Dz.U., paczka audytowa AI Act art. 12, polityka deduplikacji |
-| 🔌 **Wieloplatformowość** | host-neutralny adapter runtime: Claude **oraz** hosty zgodne z OpenAI (ChatGPT / Codex / API / Atlas) — te same bramki, bez przepisywania metodologii |
+| 🔌 **Wieloplatformowość** | host-neutralny adapter runtime: Claude, hosty zgodne z OpenAI (ChatGPT / Codex / API / Atlas) **oraz** Grok (pobiera skille wprost z repozytorium) — te same bramki, bez przepisywania metodologii |
 
 > **Zasada naczelna:** *brak numeru artykułu jest lepszy niż błędny numer artykułu;
 > brak sygnatury jest lepszy niż sygnatura nieweryfikowana lub fałszywa.*
@@ -101,10 +101,19 @@ powołanie przepisu/orzeczenia przechodzi przez bramki `shared/` → wynik z wid
 
 ## 🔌 Kompatybilność LLM
 
-Wersja rozwojowa jest **host-neutralna**: ten sam zestaw skilli działa na Claude
-oraz na hostach zgodnych z OpenAI (**ChatGPT, Codex, API, Atlas**), bez przepisywania
-metodologii, HARD GATE ani bramek jakości. Nazwy operacji odziedziczone z jednego
-runtime są traktowane jako semantyka, nie jako wymóg konkretnego API danego dostawcy.
+Wersja rozwojowa jest **host-neutralna**: ten sam zestaw skilli działa na Claude,
+na hostach zgodnych z OpenAI (**ChatGPT, Codex, API, Atlas**) oraz na **Grok**, bez
+przepisywania metodologii, HARD GATE ani bramek jakości. Skille to zwykły Markdown
+czytany pod wspólnym adapterem, więc nazwy operacji odziedziczone z jednego runtime
+są traktowane jako semantyka, nie jako wymóg konkretnego API danego dostawcy.
+
+> **Grok — automatyczne pobranie z repozytorium.** Grokowi wystarczy **wskazać
+> repozytorium** (URL GitHub) i **którą wersję** ma wziąć — rozwojową
+> (`Wersja rozwojowa rozpakowana/`) albo stabilną
+> (`Wersja stabilna rozpakowana 21.08.2026/`). Grok pobiera i instaluje skille
+> samodzielnie, bez ręcznego wgrywania folderów. Reguły sterujące (odpowiednik
+> User Preferences) wskazujesz w jego instrukcjach/personalizacji tak samo jak na
+> pozostałych hostach — patrz [Instalacja](#-instalacja).
 
 **Warstwa portowalności** (nowość wersji rozwojowej — w wersji stabilnej jej nie ma):
 
@@ -388,12 +397,12 @@ dezaktualizacji, obowiązkowe skrzyżowanie z Rzędem 1/2A przed użyciem.
 
 > **Wymagania:** konto [claude.ai](https://claude.ai) (skille wymagają planu płatnego) · przeglądarka — bez instalacji oprogramowania.
 >
-> **Host zgodny z OpenAI (ChatGPT / Codex / API / Atlas):** wersja rozwojowa niesie
-> `agents/openai.yaml` i wspólny [adapter runtime](#-kompatybilno%C5%9B%C4%87-llm), więc
-> te same foldery skilli wgrywa się analogicznie w ekosystemie OpenAI. Kroki 1–4
-> opisują ścieżkę Claude AI; **Krok 5** — instalację w ChatGPT, gdzie te same reguły
-> trafiają do instrukcji niestandardowych w personalizacji. Bramki jakości są
-> identyczne na obu hostach.
+> **Inne hosty:** wersja rozwojowa jest host-neutralna (wspólny
+> [adapter runtime](#-kompatybilno%C5%9B%C4%87-llm)). Kroki 1–4 opisują ścieżkę
+> Claude AI; **Krok 5** — instalację w ChatGPT (hosty zgodne z OpenAI), a **Krok 6** —
+> w Grok, który pobiera skille wprost z repozytorium po wskazaniu wersji. Na każdym
+> hoście te same reguły trafiają do jego instrukcji/personalizacji, a bramki jakości
+> są identyczne.
 
 <details>
 <summary><b>Krok 1 — Pobierz repozytorium</b></summary>
@@ -492,6 +501,35 @@ Prawo PL: router→v3 pierwszy, ISAP każdy przepis, HYBRID-VAL przed .docx. Kar
 > strukturalny — walidacja końcowa nie jest pomijana (patrz adapter runtime).
 </details>
 
+<details>
+<summary><b>Krok 6 — Instalacja w Grok (automatyczne pobranie z repozytorium)</b></summary>
+
+Grok nie wymaga ręcznego wgrywania folderów — potrafi **sam pobrać skille z
+repozytorium**. Wystarczy:
+
+1. **Wskaż repozytorium** — podaj Grokowi adres:
+   `https://github.com/michaleiatrak-star/Lex-Machina`.
+2. **Wskaż wersję** — którą gałąź/katalog ma wziąć:
+
+   | Wersja | Katalog w repozytorium |
+   |---|---|
+   | 🟠 rozwojowa (host-neutralna) | `Wersja rozwojowa rozpakowana/` |
+   | 🟢 stabilna (profil Claude) | `Wersja stabilna rozpakowana 21.08.2026/` |
+
+3. Grok pobiera i instaluje skille automatycznie (zaczynając od `shared/`, potem
+   router i skille DR — kolejność jak w Kroku 2).
+4. **Reguły sterujące** wpisz w instrukcjach/personalizacji Grok — ta sama kanoniczna
+   reguła co w Claude i ChatGPT:
+
+   ```
+   Prawo PL: router→v3 pierwszy, ISAP każdy przepis, HYBRID-VAL przed .docx. Karne: +kwalifikator.
+   ```
+
+> Bramki jakości (HARD GATE, weryfikacja online, ZASADA 7) obowiązują identycznie.
+> Do brzmienia przepisu i sygnatur Grok korzysta z weryfikacji online zgodnie z
+> adapterem runtime — nie cytuje prawa z pamięci.
+</details>
+
 ---
 
 ## Zadania cykliczne (scheduled tasks) w Cowork
@@ -535,7 +573,7 @@ Wskazuj wprost tryb z sekcji „TRYBY WYWOŁANIA" w `audyt-systemu-v4/SKILL.md`:
 | Kanał | Lokalizacja | Przeznaczenie |
 |---|---|---|
 | 🟢 **Stabilna** | `WERSJA STABILNA 21.08.2026/` + katalog rozpakowany | do codziennej pracy — profil **Claude AI** |
-| 🟠 **Rozwojowa** | `WERSJA ROZWOJOWA/` + `Wersja rozwojowa rozpakowana/` | nowe mechanizmy przed promocją; dochodzi warstwa **host-neutralna** (Claude + ChatGPT/Codex/API/Atlas) |
+| 🟠 **Rozwojowa** | `WERSJA ROZWOJOWA/` + `Wersja rozwojowa rozpakowana/` | nowe mechanizmy przed promocją; dochodzi warstwa **host-neutralna** (Claude + ChatGPT/Codex/API/Atlas + Grok) |
 
 Każda zmiana w systemie jest odnotowana w
 [**dzienniku audytów**](Wersja%20rozwojowa%20rozpakowana/audyt-systemu-v4/references/AUDIT-JOURNAL.md)
