@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.40 — F-108 P1: dodano odrębny moduł ustawy o ubezpieczeniach obowiązkowych/UFG/PBUK oraz moduł ustawy o fundacji rodzinnej; rozdzielono metrykę Dz.U. 2026 poz. 783 od KC. (2026-08-27)
+
 - 3.39 — F-108/46: operacyjny rdzeń transakcji handlowych, sześć półroczy, rekompensata i jawna mapa luk; KC/UZNK odsyłają do jednego modułu. (2026-08-27)
 
 - 3.38 (2026-08-26): zarejestrowano istniejące moduły art. 162 KPC oraz
