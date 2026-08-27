@@ -22,7 +22,7 @@ tu automatycznie zaliczane jako nowy, zakończony przegląd rozdziałowy.
 | 10 | Prawo o adwokaturze | A | Etap 2: do audytu rozdziałowego |
 | 11 | Księgi wieczyste i hipoteka | A | Etap 2: do audytu rozdziałowego |
 | 12 | Radcowie prawni | A | Etap 2: do audytu rozdziałowego |
-| 13 | Prawo spółdzielcze | B | Etap 2 + P3: decyzja do podjęcia |
+| 13 | Prawo spółdzielcze | B | ✅ P3 wykonane 2026-08-27: WYDZIELONO, osobny moduł B, RZĄD 1 ELI |
 | 14 | Fundacje | A | Etap 2: do audytu rozdziałowego |
 | 15 | RPO | A | Etap 2: do audytu rozdziałowego |
 | 16 | Prawo o stowarzyszeniach | A | Etap 2: do audytu rozdziałowego |
@@ -36,34 +36,34 @@ tu automatycznie zaliczane jako nowy, zakończony przegląd rozdziałowy.
 | 24 | KPK | A | Etap 2: do audytu rozdziałowego |
 | 25 | KRS | A | Etap 2: do audytu rozdziałowego |
 | 26 | Gospodarka nieruchomościami | A | Etap 2: do audytu rozdziałowego |
-| 27 | Samorząd powiatowy | B | Etap 2 + P3: decyzja do podjęcia |
-| 28 | Samorząd województwa | B | Etap 2 + P3: decyzja do podjęcia |
+| 27 | Samorząd powiatowy | B | ✅ P3 wykonane 2026-08-27: WYDZIELONO, osobny moduł B+ |
+| 28 | Samorząd województwa | B | ✅ P3 wykonane 2026-08-27: WYDZIELONO, osobny moduł B+ |
 | 29 | System ubezpieczeń społecznych | A | Etap 2: do audytu rozdziałowego |
-| 30 | Zasiłki chorobowe i macierzyńskie | B | Etap 2 + P2: do wykonania |
+| 30 | Zasiłki chorobowe i macierzyńskie | B | ✅ P2 wykonane 2026-08-27: osobny moduł B+, Dz.U. 2026 poz. 854 |
 | 31 | KKS | A | Etap 2: do audytu rozdziałowego |
 | 32 | RPD | A | Etap 2: do audytu rozdziałowego |
 | 33 | KSH | A | Etap 2: do audytu rozdziałowego |
-| 34 | Spółdzielnie mieszkaniowe | B | Etap 2 + P3: decyzja do podjęcia |
+| 34 | Spółdzielnie mieszkaniowe | B | ✅ P3 wykonane 2026-08-27: WYDZIELONO, osobny moduł B+ |
 | 35 | Ochrona praw lokatorów | A | Etap 2: do audytu rozdziałowego |
 | 36 | PUSP | A | Etap 2: do audytu rozdziałowego |
 | 37 | KPW | A | Etap 2: do audytu rozdziałowego |
 | 38 | PPSA | A | Etap 2: do audytu rozdziałowego |
 | 39 | Prawo upadłościowe | A | Etap 2: do audytu rozdziałowego |
-| 40 | Zwolnienia grupowe | B | Etap 2 + P2: do wykonania |
+| 40 | Zwolnienia grupowe | B | ✅ P2 wykonane 2026-08-27: dedykowany moduł B+, procedura art. 2–6 ponownie zweryfikowana w ELI |
 | 41 | Ubezpieczenia obowiązkowe, UFG i PBUK | D | ✅ P1 wykonane 2026-08-27: osobny moduł B, mapa 10 rozdziałów, RZĄD 1 ELI |
 | 42 | KSCU | A | Etap 2: do audytu rozdziałowego |
 | 43 | Przeciwdziałanie narkomanii | A | Etap 2: do audytu rozdziałowego |
 | 44 | UOKiK | A | Etap 2: do audytu rozdziałowego |
-| 45 | Wojewoda i administracja rządowa | B | Etap 2 + P3: decyzja do podjęcia |
+| 45 | Wojewoda i administracja rządowa | B | ✅ P3 wykonane 2026-08-27: WYDZIELONO, osobny moduł B+ |
 | 46 | Opóźnienia w transakcjach handlowych | C | ✅ P1 wykonane: osobny moduł B; administracja i historia pozostają częściowe |
 | 47 | Prawa konsumenta | A | Etap 2: do audytu rozdziałowego |
 | 48 | Prawo restrukturyzacyjne | A | Etap 2: do audytu rozdziałowego |
 | 49 | Prawo o prokuraturze | A | Etap 2: do audytu rozdziałowego |
-| 50 | Sąd Najwyższy | B | Etap 2 + P2: do wykonania |
-| 51 | Prawo przedsiębiorców | B | Etap 2 + P2: do wykonania |
+| 50 | Sąd Najwyższy | B | ✅ P2 wykonane 2026-08-27: osobny moduł B, RZĄD 1 ELI |
+| 51 | Prawo przedsiębiorców | B | ✅ P2 wykonane 2026-08-27: osobny moduł B, RZĄD 1 ELI |
 | 52 | Fundacja rodzinna | D | ✅ P1 wykonane 2026-08-27: osobny moduł B, mapa 16 rozdziałów, RZĄD 1 ELI |
 
-**Następna transza:** P2/51 → P2/50 → P2/30 → P2/40.\nP1/46, P1/41, P1/8 i P1/52 są wykonane, ale nie zamykają całej F-108 ani etapu 2. Weryfikacja sześciu obwieszczeń
+**Etap 3 — budowa/wydzielenie modułów: ZAKOŃCZONY 2026-08-27.** P1, P2 i P3 mają dedykowane moduły ≥ B. Pozostaje Etap 2 — rzeczywisty audyt treściowy benchmarku. Weryfikacja sześciu obwieszczeń
 nie jest dowodem kompletności historii zmian. Testy statyczne/scenariuszowe
 nie są wieloramiennym testem behawioralnym F-113/F-133.
 
@@ -110,7 +110,11 @@ wewnątrz innych wyrazów.
 | 🟢 **A** — dedykowany moduł | **39 / 52** | akt ma własny plik modułu |
 | 🟡 **B** — wewnątrz modułu łączonego lub tylko w mapie | **9 / 52** | treść istnieje, ale bez własnej jednostki i bez mapy rozdziałów |
 | 🟠 **C** — wyłącznie fragment w cudzym module | **1 / 52** | brak samodzielnego opracowania |
-| 🔴 **D** — nieobecny | **3 / 52** | zero treści merytorycznej |\n\n**Stan nominalny po synchronizacji P1 2026-08-27 (nie zastępuje audytu Etapu 2):** A=43, B=9, C=0, D=0. Zmiana względem bazy: 46 C→A; 8, 41 i 52 D→A. Kategoria A nadal oznacza tylko istnienie dedykowanego modułu, nie kompletność treści.
+| 🔴 **D** — nieobecny | **3 / 52** | zero treści merytorycznej |
+
+**Stan nominalny po synchronizacji P1 2026-08-27:** A=43, B=9, C=0, D=0.
+
+**Stan nominalny po Etapie 3 2026-08-27:** **A=52, B=0, C=0, D=0**. To wyłącznie pokrycie strukturalne obecnością dedykowanych modułów; nie jest certyfikacją kompletności merytorycznej. Etap 2 nadal bada treść.
 
 **Pokrycie nominalne 75% (A), pokrycie realne nieznane** — kategoria A mówi
 tylko, że moduł istnieje. Precedens KSH z `dr-02/MAPA-POKRYCIA.md` (moduł
@@ -182,8 +186,8 @@ ETAP 2 ⬛ POKRYCIE PO ROZDZIAŁACH — dla każdej pozycji A i B:
 
 ETAP 3 ⬛ BUDOWA BRAKUJĄCYCH MODUŁÓW — kolejność ustalona:
        P1: ✅ 46 → ✅ 41 → ✅ 8 → ✅ 52 — ZAKOŃCZONE 2026-08-27, każdy moduł ≥ B
-       P2: 51 → 50 → 30 → 40
-       P3: decyzja wydzielać/nie wydzielać dla 13, 34, 27, 28, 45
+       P2: ✅ 51 → ✅ 50 → ✅ 30 → ✅ 40 — ZAKOŃCZONE 2026-08-27
+       P3: ✅ 13, 34, 27, 28, 45 — wszystkie WYDZIELONE do dedykowanych modułów 2026-08-27
        Procedura: shared/MOD-GENERATOR-AKTU.md, kroki G-1…G-8
 ```
 
@@ -192,9 +196,9 @@ ETAP 3 ⬛ BUDOWA BRAKUJĄCYCH MODUŁÓW — kolejność ustalona:
 ```
 ☑ wykaz MS potwierdzony w RZĘDZIE 1 (strona MS / BIP) — 2026-08-26 i ponownie 2026-08-27
 □ ETAP 2 zamknięty dla wszystkich 48 pozycji A+B
-□ ETAP 3: wszystkie pozycje P1 i P2 mają moduł na poziomie ≥ B
+☑ ETAP 3: wszystkie pozycje P1 i P2 mają moduł na poziomie ≥ B
   wg shared/POLISH-LAW-COMPLETENESS-MATRIX.md
-□ pozycje P3 mają jawną, uzasadnioną DECYZJĘ (wydzielić / zostawić
+☑ pozycje P3 mają jawną decyzję: wszystkie WYDZIELIĆ; wykonano dedykowane moduły (
   w module łączonym) — decyzja jest wynikiem, brak modułu sam w sobie nie jest
 □ każdy nowy moduł zarejestrowany w TRZECH miejscach (REGUŁA 3):
   dr-XX/SKILL.md · dr-XX/MAPA-AKTOW.md · prawo-polskie-v2/ROUTING-MAP.md
