@@ -1,6 +1,6 @@
 ---
 name: dr-03-prawo-karne-wykroczenia-egzekucja
-version: "3.32"
+version: "3.33"
 description: "Prawo karne, wykroczenia i egzekucja: KK, KPK, KKW, KW, KPW, KKS, kwalifikacja karnomaterialna, tryby ścigania i wykonanie orzeczeń."
 ---
 
@@ -113,7 +113,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   obrona obligatoryjna art. 79 §1 pkt 2-4 KPK (→ mod-niewidomy-prawa-prawne.md,
   mod-niepelnosprawnosc-intelektualna-gluchota.md)
 
-## Moduły (63 łącznie — ✓ 63 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+## Moduły (64 łącznie — ✓ 64 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
 
 ```
   [✓] OK    mod-nielegalny-pobor-mediow
@@ -155,6 +155,8 @@ AUDIT-JOURNAL.md`.
   [✓] OK    mod-KK-KPK-framework-szczegolowy
   [✓] OK    mod-KKW-kodeks-karny-wykonawczy
               (Kodeks karny wykonawczy — warunkowe przedterminowe zwolnienie (159-163), odroczenie/przerwa (150-158a), dozór elektroniczny (43a-43zf); ZAREJESTROWANY 2026-08-14e (F-77 rozszerzona) — moduł istniał od naprawy F-75, bez wpisu w checkliście)
+  [✓] NOWY  mod-KKW-uzupelnienie-pokrycia-2026
+              (pozostałe części KKW: ogólna, penitencjarna, ograniczenie wolności, zwolnienie, środki i część wojskowa)
   [✓] NOWY  mod-ustawa-oplaty-w-sprawach-karnych
               (F-108/8: ustawa z 23.06.1973 r.; poziom B+, pełna mapa art. 1–23 i aktualne stawki z Rządu 1)
   [✓] OK    mod-przerobki-modyfikacje-pojazdow
