@@ -53,18 +53,18 @@ widma** — treść jest realna tam, gdzie istnieje.
 
 | Rozdział | Materia | Art. | Status | Moduł |
 |---|---|---|---|---|
-| 1 | Przepisy ogólne (zakres ubezpieczeń, zasada równego traktowania) | 1–5 | 🔴 | — |
+| 1 | Przepisy ogólne (zakres ubezpieczeń, zasada równego traktowania) | 1–5 | 🟡 B — uzupełnione 2026-08-27 | `mod-SUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
 | 2 | **Zasady podlegania ubezpieczeniom społecznym** | 6–14 | 🟢 NAPRAWIONE 2026-08-22 (znaleziona przy weryfikacji), ⭐⭐⭐ | `mod-SUS-dzial-2-podleganie-ubezpieczeniom.md` — katalog tytułów obowiązkowego ubezpieczenia (art. 6), definicja "pracownika" dla celów ubezpieczeniowych (art. 8), **zbieg tytułów ubezpieczenia (art. 9, ⭐⭐⭐ najczęstsze praktyczne pytanie)**, ubezpieczenie chorobowe dobrowolne vs obowiązkowe (art. 11), ubezpieczenie wypadkowe (art. 12), okresy podlegania — początek/koniec (art. 13-14). Dawny "najczęściej potrzebny fragment w praktyce", teraz opracowany |
-| 3 | Zasady ustalania składek | 15–32 | 🔴 | Nieobecne w module głównym; temat podstawy wymiaru składek pokryty w OSOBNYM module `mod-ROZP-SKLADKOWE-podstawa-wymiaru.md`, ale to rozporządzenie wykonawcze, nie sama ustawa SUS |
-| 4 | Zgłoszenia, konta, rejestry, rozliczanie składek i zasiłków | 33–50a | 🔴 | — |
-| 5 | Fundusz Ubezpieczeń Społecznych (jako fundusz) | 51–57 | 🔴 | — |
-| 6 | Fundusz Rezerwy Demograficznej | 58–65 | 🔴 | — |
-| 7 | Zakład Ubezpieczeń Społecznych (organizacja, zadania) | 66–79b | 🔴 | Brak nawet podstawowego opisu kompetencji ZUS jako organu |
+| 3 | Zasady ustalania składek | 15–32 | 🟡 B — uzupełnione 2026-08-27 | `mod-SUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
+| 4 | Zgłoszenia, konta, rejestry, rozliczanie składek i zasiłków | 33–50a | 🟡 B — uzupełnione 2026-08-27 | `mod-SUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
+| 5 | Fundusz Ubezpieczeń Społecznych (jako fundusz) | 51–57 | 🟡 B — uzupełnione 2026-08-27 | `mod-SUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
+| 6 | Fundusz Rezerwy Demograficznej | 58–65 | 🟡 B — uzupełnione 2026-08-27 | `mod-SUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
+| 7 | Zakład Ubezpieczeń Społecznych (organizacja, zadania) | 66–79b | 🟡 B — uzupełnione 2026-08-27 | `mod-SUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
 | 8 | Obowiązki ubezpieczonych oraz tryb odwoławczy | 80–83f | 🟡 | **Tryb odwoławczy opracowany bardzo dobrze** (schemat postępowania, właściwość SR/SO), ale bez numerów tego rozdziału; obowiązki ubezpieczonych nieopisane |
-| 9 | Zwrot nienależnie pobranych świadczeń oraz odsetki | 84–85 | 🔴 | Praktycznie istotny temat, zero treści |
+| 9 | Zwrot nienależnie pobranych świadczeń oraz odsetki | 84–85 | 🟡 B — uzupełnione 2026-08-27 | `mod-SUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
 | 9a | Orzekanie dla celów świadczeń | — | 🟢 | Sekcja "Reforma orzecznictwa ZUS" — 3 etapy reformy 2026 (nowe uprawnienia pielęgniarek/fizjoterapeutów, badania zdalne, terminy) |
-| 10 | Kontrola wykonywania zadań ubezpieczeń społecznych | 86–97 | 🔴 | Brak opisu uprawnień kontrolnych ZUS wobec płatników |
-| 11 | Odpowiedzialność za wykroczenia | 98 | 🔴 | — |
+| 10 | Kontrola wykonywania zadań ubezpieczeń społecznych | 86–97 | 🟡 B — uzupełnione 2026-08-27 | `mod-SUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
+| 11 | Odpowiedzialność za wykroczenia | 98 | 🟡 B — uzupełnione 2026-08-27 | `mod-SUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
 | 12–13 | Zmiany w przepisach, przepisy przejściowe i końcowe | 99+ | ⚪ | Techniczne, niski priorytet |
 
 **Ocena SUS: bardzo wąskie pokrycie.** Z 13 rozdziałów tylko fragment
@@ -76,29 +76,29 @@ praktyce — całkowicie nieobecny.
 
 | Dział | Materia | Art. | Status | Moduł |
 |---|---|---|---|---|
-| I, Rozdz. 1 | Zakres podmiotowy i przedmiotowy | 1–4 | 🔴 | — |
+| I, Rozdz. 1 | Zakres podmiotowy i przedmiotowy | 1–4 | 🟡 B — uzupełnione 2026-08-27 | `mod-FUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
 | I, Rozdz. 2 | **Okresy uwzględniane przy ustalaniu prawa do świadczeń** | 5–11 | 🟡 | Wymienione jako "typowe przyczyny zaniżonej emerytury" (pominięte okresy), bez numerów artykułów |
 | I, Rozdz. 3 | **Niezdolność do pracy** (definicja, stopnie) | 12–14 | 🟡 | Przesłanka wymieniona w ANEKSIE A (renta), bez odniesienia do art. 12-14 |
 | I, Rozdz. 4 | **Podstawa wymiaru emerytur i rent** | 15–23 | 🟡 | Ogólny wzór opisany, bez numerów artykułów |
 | II, Rozdz. 1 | **Emerytura — nowy system** (urodzeni po 31.12.1948) | 24–26c | 🟡 | Wzór obliczenia opisany merytorycznie, bez cytowania art. 24-26c |
 | II, Rozdz. 2 | Emerytura — stary system (urodzeni przed 1.01.1949) | 27–45 | 🟡 | **Art. 25 ust. 1b wprost cytowany** (wyrok TK SK 140/20) — jeden z niewielu precyzyjnych przepisów FUS; reszta rozdziału nieopisana |
-| II, Rozdz. 3 | Przepisy szczególne dla roczników przejściowych | 46–50 | 🔴 | Tylko wzmianka o "roczniku 1953" (odrębna ustawa) |
-| II, Rozdz. 3a | Emerytury górnicze | 50a–50f | 🔴 | — |
-| II, Rozdz. 4 | Ustalanie wysokości emerytur | 51–56 | 🔴 | — |
+| II, Rozdz. 3 | Przepisy szczególne dla roczników przejściowych | 46–50 | 🟡 B — uzupełnione 2026-08-27 | `mod-FUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
+| II, Rozdz. 3a | Emerytury górnicze | 50a–50f | 🟡 B — uzupełnione 2026-08-27 | `mod-FUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
+| II, Rozdz. 4 | Ustalanie wysokości emerytur | 51–56 | 🟡 B — uzupełnione 2026-08-27 | `mod-FUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
 | III, Rozdz. 1 | **Renta z tytułu niezdolności do pracy** | 57–64 | 🟢 | ANEKS A — **art. 57 wprost cytowany**, pełne 3 przesłanki (niezdolność, staż z tabelą progową wg wieku, okres powstania niezdolności z wyjątkiem 25-letniego stażu) |
-| III, Rozdz. 2 | Renta rodzinna | 65–74 | 🔴 | Wymieniona w "zakresie modułu" jako temat objęty — deklaracja bez treści |
+| III, Rozdz. 2 | Renta rodzinna | 65–74 | 🟢 NAPRAWIONE | `mod-FUS-zasilek-pogrzebowy-renta-rodzinna-waloryzacja.md` — warunek po zmarłym, krąg uprawnionych, ustalanie wysokości i routing do zbiegu świadczeń |
 | IV | **Dodatki do emerytur i rent** (dodatek pielęgnacyjny) | 75–76 | 🟢 | `mod-dodatek-pielegnacyjny-swiadczenie-rehabilitacyjne-wyrownawcze.md` — warunki nabycia, wysokość, wyłączenia, rozróżnienie od zasiłku pielęgnacyjnego (inna ustawa) |
-| V | Zasiłek pogrzebowy | 77–81 | 🔴 | Bardzo częste, praktyczne świadczenie, zero treści |
-| VI | Świadczenia w szczególnym trybie (uznaniowe decyzje Prezesa RM) | 82–84 | 🔴 | — |
-| VII, Rozdz. 1 | Dolna i górna granica wysokości świadczeń | 85–87 | 🔴 | — |
-| VII, Rozdz. 2 | **Waloryzacja świadczeń** | 88–94 | 🔴 | Coroczna waloryzacja emerytur — istotne praktycznie, zero treści |
-| VII, Rozdz. 3 | Zbieg prawa do świadczeń | 95–99 | 🔴 | — |
-| VIII, Rozdz. 1 | Powstanie i ustanie prawa do świadczeń | 100–102 | 🔴 | — |
-| VIII, Rozdz. 2 | Zawieszanie lub zmniejszanie świadczeń | 103–106 | 🔴 | Istotne przy emerytach kontynuujących pracę zarobkową |
-| VIII, Rozdz. 3 | Zmiany w prawie do świadczeń i ich wysokości | 107–114 | 🔴 | — |
+| V | Zasiłek pogrzebowy | 77–81 | 🟢 NAPRAWIONE | `mod-FUS-zasilek-pogrzebowy-renta-rodzinna-waloryzacja.md` — uprawnieni, koszty, wysokość, wniosek; jawne punkty pogłębienia w module |
+| VI | Świadczenia w szczególnym trybie (uznaniowe decyzje Prezesa RM) | 82–84 | 🟡 B — uzupełnione 2026-08-27 | `mod-FUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
+| VII, Rozdz. 1 | Dolna i górna granica wysokości świadczeń | 85–87 | 🟡 B — uzupełnione 2026-08-27 | `mod-FUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
+| VII, Rozdz. 2 | **Waloryzacja świadczeń** | 88–94 | 🟢 NAPRAWIONE | `mod-FUS-zasilek-pogrzebowy-renta-rodzinna-waloryzacja.md` — mechanizm coroczny, wskaźnik, ogłoszenia i relacja do zmian ustawowych |
+| VII, Rozdz. 3 | Zbieg prawa do świadczeń | 95–99 | 🟡 B — uzupełnione 2026-08-27 | `mod-FUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
+| VIII, Rozdz. 1 | Powstanie i ustanie prawa do świadczeń | 100–102 | 🟡 B — uzupełnione 2026-08-27 | `mod-FUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
+| VIII, Rozdz. 2 | Zawieszanie lub zmniejszanie świadczeń | 103–106 | 🟡 B — uzupełnione 2026-08-27 | `mod-FUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
+| VIII, Rozdz. 3 | Zmiany w prawie do świadczeń i ich wysokości | 107–114 | 🟡 B — uzupełnione 2026-08-27 | `mod-FUS-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
 | IX | Postępowanie w sprawach świadczeń i wypłata | 115–144 | 🟡 | Ogólna ścieżka odwoławcza opisana dobrze, ale numeracja odwołuje się do KPC, nie do samej ustawy FUS |
 
-**Ocena FUS: nierówna, z dwoma dobrze opracowanymi wyspami** (renta z
+**Ocena FUS po 2026-08-27:** brak luk zerowych w zmapowanych działach; zakresy wcześniej czerwone mają co najmniej pokrycie operacyjne B, a moduły szczegółowe zachowują wyższy poziom. (renta z
 niezdolności art. 57, dodatek pielęgnacyjny art. 75-76). Reszta — cały
 mechanizm obliczania emerytury w starym systemie, renta rodzinna, zasiłek
 pogrzebowy, waloryzacja — praktycznie nieobecna.
@@ -113,9 +113,9 @@ rehabilitacyjne (ustawa zasiłkowa) 🟢; KRUS — osobny moduł.
 
 **Zaktualizowana rekomendowana kolejność uzupełniania:**
 1. ~~SUS Rozdział 2 — zasady podlegania ubezpieczeniom (art. 6–14)~~ ✅ NAPRAWIONE 2026-08-22
-2. **FUS Dział V — zasiłek pogrzebowy (art. 77–81)** — bardzo częste, niska pracochłonność (5 artykułów), następny w kolejności
-3. FUS Rozdz. VII, Rozdz. 2 — waloryzacja świadczeń (art. 88–94)
-4. FUS Dział III, Rozdz. 2 — renta rodzinna (art. 65–74) — dokończenie już zadeklarowanego tematu
+2. ~~FUS Dział V — zasiłek pogrzebowy (77–81)~~ ✅ NAPRAWIONE
+3. ~~FUS Rozdz. VII Rozdz. 2 — waloryzacja (88–94)~~ ✅ NAPRAWIONE
+4. ~~FUS Dział III Rozdz. 2 — renta rodzinna (65–74)~~ ✅ NAPRAWIONE
 5. FUS art. 103–106 — zawieszanie/zmniejszanie świadczeń przy pracy zarobkowej
 6. SUS Rozdział 3 — zasady ustalania składek (art. 15–32)
 7. FUS Dział II, Rozdz. 2 i 4 — emerytura w starym systemie (art. 27–45, 51–56)

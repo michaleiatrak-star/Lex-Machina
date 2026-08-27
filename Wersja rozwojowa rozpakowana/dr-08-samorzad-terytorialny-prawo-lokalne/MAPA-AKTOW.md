@@ -7,8 +7,8 @@
 | Akt prawny | Dz.U. (t.j.) | Moduł | Status |
 |---|---|---|---|
 | Ustawa o samorządzie gminnym (USG) | Dz.U. 2026 poz. 662 t.j. (obwieszczenie 15.05.2026, publ. 21.05.2026, stan na 13.05.2026, uwzględnia zmiany z 12.09.2025 [fundusz sołecki] i 23.01.2026 [cyberbezpieczeństwo]) | mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa | ✅ OK — ZAMKNIĘTE 2026-07-26 (audyt pełnego systemu): moduł zaktualizowany (4 wystąpienia starego numeru 2025.1153 poprawione), główna mapa routingu również zsynchronizowana (była nieaktualna) |
-| Ustawa o samorządzie powiatowym (USP) | Dz.U. 2025 poz. 1684 t.j. — VER 2026-07-02pp: nadal aktualne (obwieszczenie 7.11.2025) | mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa | ✅ OK (wspólny) |
-| Ustawa o samorządzie województwa (USW) | Dz.U. 2026 poz. 720 t.j. — obwieszczenie z 27.05.2026 r., potwierdzone w ELI 2026-08-25; zastępuje Dz.U. 2025 poz. 581 | mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa | ✅ OK (wspólny) |
+| Ustawa o samorządzie powiatowym (USP) | Dz.U. 2025 poz. 1684 t.j. — RZĄD 1 ELI | mod-ustawa-samorzad-powiatowy | ✅ F-108/27 P3 — wydzielony moduł B+ |
+| Ustawa o samorządzie województwa (USW) | Dz.U. 2026 poz. 720 t.j. — RZĄD 1 ELI, stan t.j. 25.05.2026 | mod-ustawa-samorzad-wojewodztwa | ✅ F-108/28 P3 — wydzielony moduł B+ |
 | Ustawa o Wojewodzie i administracji rządowej w województwie | Dz.U. 2025 poz. 428 t.j. — VER 2026-07-02qq: nadal aktualne (obwieszczenie 24.03.2025) | mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa | ✅ OK (wspólny) |
 | Nadzór Wojewody i RIO — legalność uchwał | USG/USP/USW + rozporządzenia Prezesa RM | mod-nadzor-wojewody-RIO-legalnosc-uchwal | ✅ OK |
 | Skargi na prawo miejscowe — WSA/NSA | PPSA + USG | mod-skargi-na-prawo-miejscowe-WSA-NSA | ✅ OK |

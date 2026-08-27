@@ -2,8 +2,8 @@
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** Ustawa o zwolnieniach grupowych — Dz.U. 2025 poz. 570 t.j.
-**Data weryfikacji online:** 2026-06-05
-**Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
+**Data weryfikacji online:** 2026-08-27 — RZĄD 1 ELI
+**Zasada:** Każde brzmienie przepisu przed powołaniem → ELI/ISAP. Źródło RZĄD 1: https://eli.gov.pl/eli/DU/2025/570/ogl
 
 ---
 
@@ -27,9 +27,9 @@ Rozwiązywanie stosunków pracy z przyczyn niedotyczących pracowników (ekonomi
 □ Ile wypowiedzeń planowane w ciągu 30 dni? → sprawdź czy próg zwolnień grupowych
 □ Jakie przyczyny: ekonomiczne / organizacyjne / technologiczne?
 □ Czy przeprowadzono konsultację z ZOZ lub reprezentantami?
-□ Czy powiadomiono PIP i PUP?
+□ Czy przekazano informacje i zawiadomienia właściwemu PUP? (ustawa nie ustanawia tu równoległego obowiązku zawiadomienia PIP)
 □ Czy pracownik otrzymał odprawę? Jaka wysokość?
-□ Czy przestrzegano terminu 30 dni od zawiadomienia PUP przed wypowiedzeniami?
+□ Czy odróżniono moment dopuszczalności wypowiedzenia od momentu rozwiązania stosunku pracy (art. 6)?
 ```
 
 ---
@@ -50,17 +50,22 @@ Przyczyny: niedotyczące pracowników
 
 ```
 1. Konsultacja z ZOZ / reprezentantami pracowników:
-   → min. 20 dni kalendarzowych
-   → Przekazanie informacji pisemnie (liczba, grupy, przyczyny, terminy)
+   → pracodawca przekazuje informacje wymagane art. 2 ust. 3
+   → konsultacje mają dotyczyć możliwości uniknięcia/zmniejszenia zwolnień i spraw pracowniczych
+   → porozumienie zawiera się w terminie NIE DŁUŻSZYM niż 20 dni od zawiadomienia z art. 2 ust. 3 (art. 3 ust. 1)
 
-2. Pisemne powiadomienie PIP i PUP:
-   → Dane o pracownikach, przyczynach, grupach zawodowych
+2. Informacja / zawiadomienie do właściwego PUP:
+   → art. 2 ust. 6: przekazanie informacji o zamiarze grupowego zwolnienia
+   → art. 4 ust. 1: po porozumieniu/regulaminie pisemne zawiadomienie PUP o przyjętych ustaleniach
+   → NIE dopisuj PIP jako adresata obowiązku z art. 2–4
 
-3. Porozumienie z ZOZ LUB regulamin zwolnień grupowych:
-   → Gdy brak ZOZ lub nie zawarto porozumienia
+3. Porozumienie z ZOZ LUB regulamin:
+   → gdy nie można zawrzeć porozumienia, pracodawca ustala zasady w regulaminie zgodnie z art. 3 ust. 4/5
 
-4. Wypowiedzenia — po 30 dniach od zawiadomienia PUP
-   lub wcześniej za zgodą PUP
+4. Art. 6 — dwa różne momenty:
+   → WYPOWIEDZENIE może nastąpić po dokonaniu zawiadomienia z art. 4 ust. 1 (albo po porozumieniu/regulaminie, gdy zawiadomienie nie jest wymagane)
+   → ROZWIĄZANIE stosunku pracy co do zasady nie wcześniej niż po 30 dniach od właściwego zdarzenia wskazanego w art. 6 ust. 2
+   → nie zapisuj automatycznie „30 dni przed wypowiedzeniem”
 ```
 
 ---
@@ -111,9 +116,9 @@ Pracodawca ma obowiązek ponownego zatrudnienia zwolnionego pracownika:
 
 ### Perspektywa pracownika
 
-1. Sprawdź czy zachowano procedurę (konsultacja, PIP, PUP, termin 30 dni).
+1. Sprawdź procedurę (konsultacja, porozumienie/regulamin, PUP, rozdzielenie terminów z art. 6).
 2. Oblicz należną odprawę (uwzględnij reformę stażu — zlecenia i JDG!).
-3. Jeśli przyczyna pozorna (pracodawca zatrudnia nowych) → odwołanie do sądu.
+3. Jeśli przyczyna jest kwestionowana lub dobór pracownika budzi zastrzeżenia → odwołanie do sądu po analizie KP i aktualnego orzecznictwa.
 4. Sprawdź prawo do pierwszeństwa ponownego zatrudnienia w ciągu 15 miesięcy.
 
 ### Perspektywa pracodawcy
@@ -126,7 +131,7 @@ Pracodawca ma obowiązek ponownego zatrudnienia zwolnionego pracownika:
 
 | Ryzyko | Opis | Działanie zaradcze |
 |---|---|---|
-| Wadliwa procedura | Brak konsultacji, brak powiadomień | Uchybienie = roszczenia + kary PIP |
+| Wadliwa procedura | Brak konsultacji / wymaganych zawiadomień | ryzyko wadliwości procedury i roszczeń; sankcje oceniaj z właściwej podstawy |
 | Pozorność przyczyny | Nowe zatrudnienia po zwolnieniu | Udokumentuj rzeczywiste przyczyny ekonomiczne |
 | Błędna odprawa | Zaniżona o reformę stażu 2025/2026 | Przelicz uwzględniając nowe art. 30² KP |
 

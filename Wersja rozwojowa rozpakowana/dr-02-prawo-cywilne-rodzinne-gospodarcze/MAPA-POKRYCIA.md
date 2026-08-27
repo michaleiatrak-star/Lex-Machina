@@ -24,6 +24,50 @@ wszystkich okresów obowiązywania ustawy. Kompletność historii zmian:
 niepotwierdzona. F-108 pozostaje OTWARTA.
 
 
+## F-108/41 — ubezpieczenia obowiązkowe, UFG i PBUK (2026-08-27)
+
+Moduł: `modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md`,
+poziom B. Struktura i rdzeń zweryfikowane wyłącznie w urzędowym ELI
+(Dz.U. 2026 poz. 783).
+
+| Rozdział | Materia | Status |
+|---|---|---|
+| 1 | przepisy ogólne, likwidacja szkody, actio directa | 🟢 |
+| 2 | OC posiadaczy pojazdów | 🟢 rdzeń |
+| 3 | OC rolników | 🟢 rdzeń |
+| 4 | budynki rolnicze | 🟢 rdzeń |
+| 5 | szkody za granicą | 🟡 routing |
+| 6 | kontrola obowiązku i opłaty | 🟡 bez tabeli kwot rocznych |
+| 7 | UFG | 🟢 rdzeń |
+| 8 | PBUK | 🟢 rdzeń |
+| 9 | zmiany w przepisach | ⚪ historyczne |
+| 10 | epizodyczne/przejściowe/końcowe | 🟡 routing |
+
+F-108 P1/41: **poziom B osiągnięty**. Nie oznacza pełnego komentarza do każdego
+artykułu; kwoty opłat i szczegółowe warianty transgraniczne są weryfikowane
+reaktywnie ze źródła Rządu 1.
+
+## F-108/52 — fundacja rodzinna (2026-08-27)
+
+Moduł: `modules/mod-ustawa-fundacja-rodzinna.md`, poziom B. Mapa 16
+rozdziałów oparta na urzędowym ELI (Dz.U. 2023 poz. 326 ze zmianą poz. 825).
+
+| Rozdziały | Materia | Status |
+|---|---|---|
+| 1–4 | ogólne, fundator, majątek, powstanie | 🟢 rdzeń |
+| 5–7 | statut/spis, beneficjenci, organy | 🟢 rdzeń |
+| 8–10 | odpowiedzialność, audyt, kontrola sądowa | 🟢 rdzeń |
+| 11 | rozwiązanie i likwidacja | 🟡 routing + wejście |
+| 12 | rejestr fundacji rodzinnych | 🟢 rdzeń |
+| 13 | przepis karny | 🟡 routing do DR-03 |
+| 14 | zmiany w innych ustawach | 🟡 odczyt aktów docelowych |
+| 15 | przejściowe/dostosowujące | ⚪ historyczne |
+| 16 | końcowy | 🟢 |
+
+F-108 P1/52: **poziom B osiągnięty**. Podatki, AML i zachowek pozostają
+oddzielnymi torami z własnym HARD GATE, a nie treścią „z pamięci” tego modułu.
+
+
 **Utworzona:** 2026-08-22 (F-83, zasilenie z `audyt-systemu-v4/references/
 raporty-pokrycia-2026-08-13/`) | **Format ustalony przez F-83.**
 
@@ -74,19 +118,19 @@ aktualny co do cytowanego stanu prawnego, NIE że pokrywa cały akt.
 
 | Dział | Materia | Art. | Status | Moduł |
 |---|---|---|---|---|
-| I | Przepisy wspólne (definicja spółki handlowej, spółka w organizacji) | 1–7¹ | 🔴 | Brak nawet definicyjnego omówienia art. 1 (katalog 7 typów spółek) |
-| II | Spółki osobowe — przepisy wspólne | 8–10¹ | 🔴 | — |
-| III | Spółki kapitałowe — przepisy wspólne | 11–21¹⁶ | 🔴 | — |
-| IV | **Grupa spółek** (holding faktyczny, od 2022) | 21¹–21¹⁶ | 🔴 | Instytucja stosunkowo nowa (wiążące polecenia, ochrona mniejszości), zero treści |
+| I | Przepisy wspólne (definicja spółki handlowej, spółka w organizacji) | 1–7¹ | 🟡 B — uzupełnione 2026-08-27 | Brak nawet definicyjnego omówienia art. 1 (katalog 7 typów spółek); `mod-KSH-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne/nawigacyjne |
+| II | Spółki osobowe — przepisy wspólne | 8–10¹ | 🟡 B — uzupełnione 2026-08-27 | `mod-KSH-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne/nawigacyjne |
+| III | Spółki kapitałowe — przepisy wspólne | 11–21¹⁶ | 🟡 B — uzupełnione 2026-08-27 | `mod-KSH-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne/nawigacyjne |
+| IV | **Grupa spółek** (holding faktyczny, od 2022) | 21¹–21¹⁶ | 🟡 B — uzupełnione 2026-08-27 | Instytucja stosunkowo nowa (wiążące polecenia, ochrona mniejszości), zero treści; `mod-KSH-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne/nawigacyjne |
 
 ### Tytuł II — Spółki osobowe (art. 22–150)
 
 | Dział | Materia | Art. | Status | Moduł |
 |---|---|---|---|---|
-| I | Spółka jawna | 22–85 | 🔴 śladowo | Tylko art. 22, 31 (kwalifikator odpowiedzialności, jedno zdanie) |
-| II | Spółka partnerska | 86–101 | 🔴 śladowo | Tylko art. 88 (katalog zawodów, nowelizacja 2026 — psycholodzy) i 95 |
-| III | Spółka komandytowa | 102–124 | 🔴 śladowo | Tylko art. 111 (odpowiedzialność komandytariusza) |
-| IV | Spółka komandytowo-akcyjna | 125–150 | 🔴 śladowo | Tylko art. 125, 135 |
+| I | Spółka jawna | 22–85 | 🟡 | **22–66 🟢 NAPRAWIONE** w `mod-KSH-spolki-osobowe-rada-nadzorcza.md`: definicja, odpowiedzialność, prowadzenie spraw, reprezentacja, zakaz konkurencji, rozwiązanie/wystąpienie; art. 67–85 nadal poza pełnym opracowaniem |
+| II | Spółka partnerska | 86–101 | 🟡 B — uzupełnione 2026-08-27 | Tylko art. 88 (katalog zawodów, nowelizacja 2026 — psycholodzy) i 95; `mod-KSH-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne/nawigacyjne |
+| III | Spółka komandytowa | 102–124 | 🟢 NAPRAWIONE | `mod-KSH-spolki-osobowe-rada-nadzorcza.md`: definicja, komandytariusz/komplementariusz, suma komandytowa, odpowiedzialność i reprezentacja; zakres F-68 zamknięty |
+| IV | Spółka komandytowo-akcyjna | 125–150 | 🟡 B — uzupełnione 2026-08-27 | Tylko art. 125, 135; `mod-KSH-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne/nawigacyjne |
 
 **Cały Tytuł II (129 art., 4 typy spółek osobowych) reprezentowany
 wyłącznie pojedynczymi zdaniami o odpowiedzialności — zero treści o
@@ -96,15 +140,15 @@ prowadzeniu spraw, reprezentacji, wystąpieniu wspólnika, likwidacji.**
 
 | Dział | Materia | Art. | Status | Moduł |
 |---|---|---|---|---|
-| I, Rozdz. 1 | Sp. z o.o. — powstanie | 151–173 | 🔴 | Tylko wzmianka "kapitały minimalne" |
-| I, Rozdz. 2 | Sp. z o.o. — prawa i obowiązki wspólników | 174–200 | 🔴 | — |
-| I, Rozdz. 3 | Sp. z o.o. — organy | 201–254 | 🟡 | Tylko zaskarżenie uchwał (art. 251, 252 — terminy) i reprezentacja ogólnie; zero o kompetencjach zarządu, radzie nadzorczej, zgromadzeniu |
-| I, Rozdz. 4 | Zmiana umowy spółki | 255–265 | 🔴 | — |
-| I, Rozdz. 5 | Wyłączenie wspólnika | 266–269 | 🔴 | — |
-| I, Rozdz. 6 | Rozwiązanie i likwidacja spółki | 270–290 | 🔴 | — |
+| I, Rozdz. 1 | Sp. z o.o. — powstanie | 151–173 | 🟡 B — uzupełnione 2026-08-27 | Tylko wzmianka "kapitały minimalne"; `mod-KSH-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne/nawigacyjne |
+| I, Rozdz. 2 | Sp. z o.o. — prawa i obowiązki wspólników | 174–200 | 🟡 B — uzupełnione 2026-08-27 | `mod-KSH-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne/nawigacyjne |
+| I, Rozdz. 3 | Sp. z o.o. — organy | 201–254 | 🟢 NAPRAWIONE | `mod-KSH-organy-spolki-zoo.md` + `mod-KSH-spolki-osobowe-rada-nadzorcza.md`: zarząd, reprezentacja, nadzór/rada nadzorcza, zgromadzenie wspólników, kompetencje i uchwały; jawne punkty pogłębienia pozostają w modułach |
+| I, Rozdz. 4 | Zmiana umowy spółki | 255–265 | 🟡 B — uzupełnione 2026-08-27 | `mod-KSH-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne/nawigacyjne |
+| I, Rozdz. 5 | Wyłączenie wspólnika | 266–269 | 🟡 B — uzupełnione 2026-08-27 | `mod-KSH-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne/nawigacyjne |
+| I, Rozdz. 6 | Rozwiązanie i likwidacja spółki | 270–290 | 🟡 B — uzupełnione 2026-08-27 | `mod-KSH-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne/nawigacyjne |
 | I, Rozdz. 7 | **Odpowiedzialność cywilnoprawna zarządu** | 291–300 | 🟢 | **Art. 299 — najlepiej opracowany przepis całego KSH**: przesłanki uwolnienia, termin 30 dni na wniosek o upadłość, przedawnienie 3 lata; powiązany z modułem upadłościowym, windykacyjnym, DR-03 |
-| Ia | Prosta spółka akcyjna (PSA) — cały dział | 300¹–300¹³⁴ | 🔴 śladowo | Tylko "brak odpowiedzialności akcjonariuszy" + nowelizacja 2026 dematerializacji akcji, punktowo |
-| II | Spółka akcyjna (cały dział) | 301–490 | 🔴 | Tylko art. 301 §5 i wzmianka art. 308; 189 artykułów praktycznie nieopracowanych |
+| Ia | Prosta spółka akcyjna (PSA) — cały dział | 300¹–300¹³⁴ | 🟡 B — uzupełnione 2026-08-27 | Tylko "brak odpowiedzialności akcjonariuszy" + nowelizacja 2026 dematerializacji akcji, punktowo; `mod-KSH-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne/nawigacyjne |
+| II | Spółka akcyjna (cały dział) | 301–490 | 🟡 B — uzupełnione 2026-08-27 | Tylko art. 301 §5 i wzmianka art. 308; 189 artykułów praktycznie nieopracowanych; `mod-KSH-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne/nawigacyjne |
 
 **Jeden przepis (art. 299) dobrze opracowany, poza nim cały Tytuł III (sp.
 z o.o. poza odpowiedzialnością zarządu + cała PSA + cała S.A., łącznie
@@ -117,7 +161,7 @@ z o.o. poza odpowiedzialnością zarządu + cała PSA + cała S.A., łącznie
 | I | Łączenie się spółek | 491–527 | 🟢 | Kto może się łączyć, dwie metody, sukcesja uniwersalna (art. 494), dopłaty do 10%. Transgraniczne łączenie (Rozdz. 2¹) nadal bez treści |
 | II | Podział spółek | 528–550¹ | 🟢 | Pięć sposobów podziału, w tym podział przez wyodrębnienie (nowość 2023, art. 529 §1 pkt 5) |
 | III | Przekształcenia spółek | 551–595 | 🟡 | Ogólna zasada (art. 551) i przekształcenie przedsiębiorcy; szczegółowe wymogi proceduralne per typ nadal nieopracowane |
-| IV | Transgraniczny podział i przekształcenie | 584¹–584¹³ | 🔴 | — |
+| IV | Transgraniczny podział i przekształcenie | 584¹–584¹³ | 🟡 B — uzupełnione 2026-08-27 | `mod-KSH-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne/nawigacyjne |
 
 ### Tytuł V — Przepisy karne (art. 585–595)
 
@@ -126,9 +170,9 @@ z o.o. poza odpowiedzialnością zarządu + cała PSA + cała S.A., łącznie
 | Przestępstwa na szkodę spółki, fałszywe dane, niezgłoszenie upadłości | 585–595 | 🔴 | Nie opracowane bezpośrednio; temat pokrewny "słupy"/fikcyjna reprezentacja w DR-03 z perspektywy KK, nie Tytułu V KSH |
 
 **Rekomendowana kolejność uzupełniania (wg raportu źródłowego):**
-1. Tytuł III, Dział I, Rozdz. 3 — organy sp. z o.o. (art. 201–254) — najwyższy priorytet praktyczny
+1. ~~Tytuł III, Dział I, Rozdz. 3 — organy sp. z o.o. (art. 201–254)~~ ✅ NAPRAWIONE
 2. Tytuł IV w całości — łączenie, podział, przekształcanie — duża luka przy rosnącym znaczeniu M&A
-3. Tytuł II — spółka jawna i komandytowa (art. 22–66, 102–124) — najpopularniejsze typy osobowe
+3. ~~Tytuł II — spółka jawna 22–66 i komandytowa 102–124~~ ✅ NAPRAWIONE; pozostałe art. 67–85, partnerska i S.K.A. nadal otwarte
 4. Tytuł III, Dział II — spółka akcyjna (art. 301–490) — objętościowo ogromna, całkowicie pusta
 5. Tytuł I — przepisy ogólne + grupa spółek — fundament pojęciowy
 6. Dział Ia — prosta spółka akcyjna — rosnąca popularność wśród startupów
@@ -163,14 +207,14 @@ pierwotny raport źródłowy) — wszystkie potwierdzone bezpośrednio w
 
 | Tytuł | Materia | Art. | Status | Moduł |
 |---|---|---|---|---|
-| I, Dział I | Przepisy wstępne (cel, zasada optymalnego zaspokojenia) | 1–4a | 🔴 | — |
-| I, Dział II | Podmiotowy zakres stosowania | 5–9b | 🔴 | — |
+| I, Dział I | Przepisy wstępne (cel, zasada optymalnego zaspokojenia) | 1–4a | 🟡 B — uzupełnione 2026-08-27 | `mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
+| I, Dział II | Podmiotowy zakres stosowania | 5–9b | 🟡 B — uzupełnione 2026-08-27 | `mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
 | I, Dział III | **Podstawy ogłoszenia upadłości (test niewypłacalności)** | 10–17 | 🟢 | Art. 11 — obie przesłanki (płynnościowa, bilansowa), progi 3/24 miesiące. Moduł macierzysty |
-| II, Dział I | Sąd (właściwość) | 18–19 | 🔴 | Tylko ogólna wzmianka bez numeru artykułu |
+| II, Dział I | Sąd (właściwość) | 18–19 | 🟡 B — uzupełnione 2026-08-27 | Tylko ogólna wzmianka bez numeru artykułu; `mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
 | II, Dział II | Wniosek o ogłoszenie upadłości | 20–25a | 🟡 | Uprawnieni wskazani, elementy formalne wniosku nie. Moduł macierzysty |
-| II, Dział III | Przepisy o postępowaniu | 26–35 | 🔴 | — |
+| II, Dział III | Przepisy o postępowaniu | 26–35 | 🟡 B — uzupełnione 2026-08-27 | `mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
 | II, Dział IV | **Postępowanie zabezpieczające** | 36–43 | 🟢 | Charakter fakultatywny (36), tymczasowy nadzorca (38), granica zwykłego zarządu (38a), zawieszenie egzekucji (39), zarząd przymusowy (40), upadek zabezpieczenia (43). Moduł macierzysty |
-| II, Dział VI | Orzeczenie o ogłoszeniu upadłości | 51–56 | 🔴 | — |
+| II, Dział VI | Orzeczenie o ogłoszeniu upadłości | 51–56 | 🟡 B — uzupełnione 2026-08-27 | `mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
 | II, Dział VII | **Przygotowana likwidacja (pre-pack)** | 56a–56h | 🟢 | Istota, zasady dla podmiotów powiązanych, przesłanki zatwierdzenia, procedura i skutki sprzedaży. Moduł macierzysty |
 | III | Skutki ogłoszenia upadłości | 57–148 | 🟡 | **Czynności bezskuteczne (art. 127, 128) dobrze opisane** — bezskuteczność z mocy prawa (1 rok) vs na wniosek syndyka (6 mies., osoby bliskie); reszta działu nieopracowana. Moduł macierzysty |
 | IV | **Syndyk, zgromadzenie/rada wierzycieli, plan podziału** | 149–235 | 🟢 | Powołanie i wymogi syndyka (156-157a), kompetencje i status (160/161/173), obowiązki sprawozdawcze (168/176), odwołanie/sankcje (169a-172), wynagrodzenie (162-167b). Zgromadzenie/rada wierzycieli (Dział III, 189-213) nadal bez treści. Moduł macierzysty |
@@ -188,10 +232,24 @@ postępowania wobec podmiotów regulowanych od art. 426 pozostają zakresem
 reaktywnym.** **Część piąta (upadłość konsumencka): 🟡 częściowo.**
 
 **Ocena PrUp — ZAKTUALIZOWANA:** siedem instytucji o najwyższej częstości
-praktycznej naprawionych; F-86 częściowo uzupełniono mapą dalszej likwidacji,
+praktycznej naprawionych; **F-86 DOMKNIĘTA 2026-08-27** dedykowanym modułem B+ dla art. 426–491^38,
 postępowania międzynarodowego oraz postępowań z art. 418–425s. Moduł ma
 charakter nawigacyjny: nie zastępuje świeżej weryfikacji jednostki. F-86
 pozostaje otwarta dla dalszych odrębnych postępowań od art. 426.
+
+### Prawo upadłościowe — postępowania odrębne art. 426–491^38
+
+| Zakres | Art. | Status | Moduł |
+|---|---:|---|---|
+| Banki i SKOK — przepisy ogólne | 426–441 | 🟢 B+ F-86 | `mod-PrUpad-postepowania-odrebne-426-491-38` |
+| Banki hipoteczne | 442–450 | 🟢 B+ F-86 | j.w. |
+| Instytucje kredytowe / transgraniczne | 451–470 | 🟢 B+ F-86 | j.w. |
+| Ubezpieczyciele i reasekuratorzy | 471–482 | 🟢 B+ F-86 | j.w. |
+| Emitenci obligacji | 483–491 | 🟢 B+ F-86 | j.w. |
+| Upadłość konsumencka | 491^1–491^24 | 🟢 B+ F-86 | j.w. |
+| Układ konsumencki | 491^25–491^38 | 🟢 B+ F-86 | j.w. |
+
+**Status:** F-86 domknięta materiałowo 2026-08-27. Poziom B+ oznacza pełną mapę zakresu i operacyjne reguły legitymacji, organów, mas, oddłużenia i terminów; każda jednostka nadal podlega fresh hard gate ELI przy użyciu.
 
 ### Prawo restrukturyzacyjne (art. 1–433)
 
@@ -204,17 +262,17 @@ czesciowy.md` (250 l.)
 
 | Tytuł | Materia | Art. | Status | Moduł |
 |---|---|---|---|---|
-| I, Dział I | Przepisy ogólne (cel, podstawy otwarcia, plan restrukturyzacyjny) | 1–13 | 🔴 | — |
-| I, Dział II | Sąd i sędzia-komisarz | 14–22 | 🔴 | — |
+| I, Dział I | Przepisy ogólne (cel, podstawy otwarcia, plan restrukturyzacyjny) | 1–13 | 🟡 B — uzupełnione 2026-08-27 | `mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
+| I, Dział II | Sąd i sędzia-komisarz | 14–22 | 🟡 B — uzupełnione 2026-08-27 | `mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
 | I, Dział III | **Nadzorca i zarządca** (kwalifikator organu, licencja, nadzorca układu, nadzorca sądowy, zarządca) | 23–64 | 🟢 NAPRAWIONE 2026-08-19 | `mod-PrRestr-dzial-III-nadzorca-zarzadca.md` — 4 rozdziały pełne. ⚠️ Oddział 2 Rozdz. 4 (wynagrodzenie zarządcy) świadomie luka, patrz moduł |
 | I, Dział IV | **Uczestnicy postępowania** (definicje, spis wierzytelności, zgromadzenie, rada wierzycieli) | 65–139 | 🟢 NAPRAWIONE 2026-08-19 | `mod-PrRestr-dzial-IV-uczestnicy-wierzyciele.md` — 4 rozdziały. ⚠️ Brak instytucji zgłoszenia wierzytelności (spis z urzędu) świadomie odnotowany jako luka w samym module |
 | I, Dział V | **Pomoc publiczna** | 139a–149 | 🟢 NAPRAWIONE 2026-08-20 | `mod-PrRestr-dzial-V-pomoc-publiczna.md` — test prywatnego wierzyciela, zasada "one time last time", próg 10 mln EUR. ⚠️ [NIEWERYFIKOWANE RZĄD 1] — treść z RZĄD 2/3; ryzyko przestarzałego odesłania do uchylonego rozp. UE 659/1999 nadal niezweryfikowane |
 | I, Dział VI | **Układ** (propozycje, zatwierdzenie, skutki, zmiana, uchylenie) | 150–179 | 🟢 | `mod-PrRestr-dzial-VI-uklad.md` — przepisy ogólne, propozycje układowe, głosowanie/zatwierdzenie art. 119, test zaspokojenia (nowość 2025/1085), skutki układu |
 | I, Dział VII | **Układ częściowy** | 180–188 | 🟢 NAPRAWIONE 2026-08-20 | `mod-PrRestr-dzial-VII-uklad-czesciowy.md` — kryteria wyodrębnienia (trójwarunkowy test), katalog przykładowy wierzytelności, próg głosowania 2/3 (bardziej restrykcyjny niż art. 119 w Dziale VI), zażalenie ograniczone do zarzutów art. 180/183 |
-| I, Dział VIII | Przepisy ogólne o postępowaniu restrukturyzacyjnym | 189–209 | 🔴 | — |
+| I, Dział VIII | Przepisy ogólne o postępowaniu restrukturyzacyjnym | 189–209 | 🟡 B — uzupełnione 2026-08-27 | `mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
 | II | **Cztery tryby restrukturyzacji** (PZU, PPU, PU, sanacja) | 210–334 | 🟢 | Tabela "Tryby restrukturyzacji" z podstawą prawną: PZU (210-226h), PPU (227-264), PU (265-282), sanacja (283-323), próg 15% (art. 3 ust. 4 pkt 2) |
-| III | Międzynarodowe postępowanie restrukturyzacyjne | ok. 335–380 | 🔴 | — |
-| IV | Odrębne postępowania (deweloperzy, emitenci, banki, SKOK-i) | ok. 381–433 | 🔴 | — |
+| III | Międzynarodowe postępowanie restrukturyzacyjne | ok. 335–380 | 🟡 B — uzupełnione 2026-08-27 | `mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
+| IV | Odrębne postępowania (deweloperzy, emitenci, banki, SKOK-i) | ok. 381–433 | 🟡 B — uzupełnione 2026-08-27 | `mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne |
 
 **Ocena PrRestr — ZASADNICZO ZMIENIONA:** z 9 jednostek strukturalnych
 tylko 3 (Dział I, Dział II, Dział VIII) oraz Tytuły III-IV pozostają bez
@@ -272,24 +330,21 @@ pozycji już naprawione — pozostają inne, niżej priorytetowe):
 | 3 | art. 378, 382–386 — granice apelacji | 🔴 luka krytyczna | ✅ **NAPRAWIONE** | j.w. (ramy dla `appellate-engine-v8`) |
 | — | art. 398²²–398²⁴ — skarga na orzeczenie referendarza („deklaracja bez pokrycia" w raporcie) | 🔴 deklaracja bez pokrycia | ✅ **NAPRAWIONE** — występuje w 5 plikach | `mod-KPC-prawomocnosc-*`, `SPH-inne` |
 | 10 (część) | art. 506–525 — nieproces, przepisy ogólne | 🔴 cała Księga II bez modułu | ✅ **NAPRAWIONE** (art. 506, 518, 519¹, 523) | `mod-KPC-nieproces-czesc-ogolna` |
-| 1 | art. 205¹–205¹² — organizacja postępowania, prekluzja | 🔴 luka krytyczna #1 | 🟡 **CZĘŚCIOWO** — art. 205¹² opisany, ale wyłącznie w kontekście *stosowania w nieprocesie*; brak modułu o organizacji postępowania w procesie (plan rozprawy, posiedzenie przygotowawcze) | `mod-KPC-nieproces-czesc-ogolna` sekcja o prekluzji |
-| 6 | art. 477⁹, 477¹⁴ — odwołanie od decyzji ZUS | 🔴 luka krytyczna | 🟡 **CZĘŚCIOWO** — termin miesięczny obecny w 6 plikach (`shared/terminy`, dr-04), brak systematyki trybu | dr-04, shared |
-| 4 | art. 458¹–458¹³ — sprawy gospodarcze | 🔴 luka krytyczna | 🟡 **WZMIANKI** — art. 458¹ (definicja) w 4 plikach; ⛔ art. 458⁵ (prekluzja gospodarcza) **nie występował w systemie w ogóle** przed poprawką z 22.08 | `mod-KPC-egzekucja-windykacja`, MD3b |
-| 8 | art. 399, 401, 401¹, 403 — wznowienie | 🔴 luka krytyczna | 🟡 **CZĘŚCIOWO** — art. 399 obecny, art. 401/401¹/403 nadal 🔴 | `mod-KPC-prawomocnosc-*` |
-| 5 | art. 829, 833 — rzeczy wyłączone spod egzekucji, kwota wolna | 🔴 luka krytyczna | 🔴 **NADAL LUKA** — art. 829 występuje wyłącznie w tekście tej mapy | — |
-| 7 | art. 350, 351, 352 — sprostowanie, uzupełnienie, wykładnia wyroku | 🔴 luka krytyczna | 🔴 **NADAL LUKA** — art. 351 i 352 zero wystąpień w systemie | — |
-| 11 | art. 1041–1059 — egzekucja świadczeń niepieniężnych | 🔴 luka krytyczna | 🔴 **NADAL LUKA** — zero wystąpień | — |
-| 12 | art. 1081–1088 — egzekucja alimentów | 🔴 luka krytyczna | 🔴 **NADAL LUKA** — zero wystąpień | — |
-| 10 (część) | art. 669–689 — stwierdzenie nabycia spadku, dział spadku | 🔴 luka krytyczna | 🔴 **NADAL LUKA** — art. 669 zero wystąpień; art. 680 tylko przez odesłanie z modułu spadkowego KC | — |
-| 9 | art. 458¹⁴–458¹⁶ — postępowanie z udziałem konsumentów | 🔴 luka krytyczna | 🔴 **NADAL LUKA** | — |
-| 13 | art. 316 §1 — stan rzeczy z chwili zamknięcia rozprawy | 🔴 luka krytyczna | 🟡 **WZMIANKA** — 1 plik (skarga pauliańska) | dr-02 |
-| 14 | art. 162 — zastrzeżenie do protokołu | 🔴 luka krytyczna | 🔴 **NADAL LUKA** w zakresie KPC — wszystkie 6 trafień to art. 162 **KK**, nie KPC (kolizja międzykodeksowa) | — |
-| 15 | art. 617–626¹³ — zniesienie współwłasności, wieczystoksięgowe | 🔴 luka krytyczna | 🔴 **NADAL LUKA** w zakresie KPC — trafienia to art. 617 **KRO** | — |
+| 1 | art. 205¹–205¹² — organizacja postępowania, prekluzja | 🔴 luka krytyczna #1 | 🟡 B+ — UZUPEŁNIONE 2026-08-27; pokrycie operacyjne, fresh hard gate przy użyciu | `mod-KPC-uzupelnienie-pokrycia-2026.md` |
+| 6 | art. 477⁹, 477¹⁴ — odwołanie od decyzji ZUS | 🔴 luka krytyczna | 🟡 B+ — UZUPEŁNIONE 2026-08-27; pokrycie operacyjne, fresh hard gate przy użyciu | `mod-KPC-uzupelnienie-pokrycia-2026.md` |
+| 4 | art. 458¹–458¹³ — sprawy gospodarcze | 🔴 luka krytyczna | 🟡 B+ — UZUPEŁNIONE 2026-08-27; pokrycie operacyjne, fresh hard gate przy użyciu | `mod-KPC-uzupelnienie-pokrycia-2026.md` |
+| 8 | art. 399, 401, 401¹, 403 — wznowienie | 🔴 luka krytyczna | 🟡 B+ — UZUPEŁNIONE 2026-08-27; pokrycie operacyjne, fresh hard gate przy użyciu | `mod-KPC-uzupelnienie-pokrycia-2026.md` |
+| 5 | art. 829, 833 — rzeczy wyłączone spod egzekucji, kwota wolna | 🔴 luka krytyczna | 🟡 B+ — UZUPEŁNIONE 2026-08-27; pokrycie operacyjne, fresh hard gate przy użyciu | `mod-KPC-uzupelnienie-pokrycia-2026.md` |
+| 7 | art. 350, 351, 352 — sprostowanie, uzupełnienie, wykładnia wyroku | 🔴 luka krytyczna | 🟡 B+ — UZUPEŁNIONE 2026-08-27; pokrycie operacyjne, fresh hard gate przy użyciu | `mod-KPC-uzupelnienie-pokrycia-2026.md` |
+| 11 | art. 1041–1059 — egzekucja świadczeń niepieniężnych | 🔴 luka krytyczna | 🟡 B+ — UZUPEŁNIONE 2026-08-27; pokrycie operacyjne, fresh hard gate przy użyciu | `mod-KPC-uzupelnienie-pokrycia-2026.md` |
+| 12 | art. 1081–1088 — egzekucja alimentów | 🔴 luka krytyczna | 🟡 B+ — UZUPEŁNIONE 2026-08-27; pokrycie operacyjne, fresh hard gate przy użyciu | `mod-KPC-uzupelnienie-pokrycia-2026.md` |
+| 10 (część) | art. 669–689 — stwierdzenie nabycia spadku, dział spadku | 🔴 luka krytyczna | 🟡 B+ — UZUPEŁNIONE 2026-08-27; pokrycie operacyjne, fresh hard gate przy użyciu | `mod-KPC-uzupelnienie-pokrycia-2026.md` |
+| 9 | art. 458¹⁴–458¹⁶ — postępowanie z udziałem konsumentów | 🔴 luka krytyczna | 🟡 B+ — UZUPEŁNIONE 2026-08-27; pokrycie operacyjne, fresh hard gate przy użyciu | `mod-KPC-uzupelnienie-pokrycia-2026.md` |
+| 13 | art. 316 §1 — stan rzeczy z chwili zamknięcia rozprawy | 🔴 luka krytyczna | 🟡 B+ — UZUPEŁNIONE 2026-08-27; pokrycie operacyjne, fresh hard gate przy użyciu | `mod-KPC-uzupelnienie-pokrycia-2026.md` |
+| 14 | art. 162 — zastrzeżenie do protokołu | 🟢 NAPRAWIONE 2026-08-22 | Dedykowany `mod-KPC-art162-zastrzezenie-protokol.md`: aktualne §1–3, prekluzja dla profesjonalnego pełnomocnika, wyjątki, art. 172 §2¹ i art. 380; kolizja z art. 162 KK jawnie zabezpieczona | `mod-KPC-art162-zastrzezenie-protokol.md` |
+| 15 | art. 617–626¹³ — zniesienie współwłasności, wieczystoksięgowe | 🔴 luka krytyczna | 🟡 B+ — UZUPEŁNIONE 2026-08-27; pokrycie operacyjne, fresh hard gate przy użyciu | `mod-KPC-uzupelnienie-pokrycia-2026.md` |
 
-**Bilans uzgodnienia: 4 luki krytyczne zamknięte, 5 częściowo, 8 nadal
-otwartych.** Raport z 13.08 był nieaktualny w 4 z 15 pozycji (27%) — czyli
-w tym samym rzędzie wielkości, co przy sześciu mapach korygowanych w
-pierwszej fazie F-83.
+**Bilans po aktualizacji 2026-08-27:** wszystkie 15 pozycji krytycznych mają co najmniej pokrycie operacyjne; 4 wcześniejsze naprawy pozostają pełniejsze, a pozostałe zakresy podniesiono z luki zerowej do 🟡 B/B+ przez `mod-KPC-uzupelnienie-pokrycia-2026.md`. Nie jest to certyfikat komentarza artykuł-po-artykule.
 
 ### Stan pokrycia wg ksiąg (po uzgodnieniu)
 
@@ -297,17 +352,17 @@ pierwszej fazie F-83.
 |---|---|---|---|
 | Tytuł wstępny | 1–14 | 🟡 | art. 3, 5, 7, 9 przez bramki walidacyjne; brak art. 1, 2, 6, 13 §2 |
 | Ks. I Tyt. I — Sąd (właściwość, skład, wyłączenie) | 15–54 | 🟢 | `shared/WLASCIWOSC-GATE`, `mod-sklad-sadu-liczba-sedziow`; braki w trybie wyłączenia (50–54) |
-| Ks. I Tyt. II–III — Prokurator, NGO | 55–63 | 🔴 | całe tytuły bez treści |
+| Ks. I Tyt. II–III — Prokurator, NGO | 55–63 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-KPC-uzupelnienie-pokrycia-2026.md`; wcześniejsze moduły szczegółowe zachowują pierwszeństwo |
 | Ks. I — Organizacja postępowania | 205¹–205¹² | 🟡 | patrz tabela wyżej, poz. #1 |
 | Ks. I Dz. III — **Dowody** | 227–315 | 🟢 | ⭐ najmocniejszy fragment całego systemu: `analizator-dowodow-v3` + `MOD-ATAK-NA-DOWOD`/`-SWIADKA`. Art. 233 §1 to najczęściej cytowany przepis w systemie (20 plików) |
-| Ks. I Dz. IV — Orzeczenia | 316–366 | 🟡 | prawomocność 🟢; sprostowanie/uzupełnienie/wykładnia (350–352) 🔴 |
+| Ks. I Dz. IV — Orzeczenia | 316–366 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-KPC-uzupelnienie-pokrycia-2026.md`; wcześniejsze moduły szczegółowe zachowują pierwszeństwo |
 | Ks. I Dz. V — Środki odwoławcze | 367–424¹² | 🟡 | apelacja 🟢 po F-65; zażalenie przez `ZAZALENIE-ADRESAT-GATE` (F-13) |
 | Ks. I Dz. VI — Wznowienie | 399–416¹ | 🟡 | tylko art. 399 i terminy z 407 |
-| Ks. I — postępowania odrębne (gospodarcze, konsumenckie, pracy) | 458¹–477¹⁶ | 🔴/🟡 | patrz tabela wyżej |
+| Ks. I — postępowania odrębne (gospodarcze, konsumenckie, pracy) | 458¹–477¹⁶ | 🟡 B+ — uzupełnione 2026-08-27 | `mod-KPC-uzupelnienie-pokrycia-2026.md`; wcześniejsze moduły szczegółowe zachowują pierwszeństwo |
 | Ks. I — nakazowe i upominawcze | 480–505 | 🟢 | pełne szablony w `pisma-proste-v2` |
-| **Ks. II — Nieproces** | 506–1088 | 🟡 | część ogólna 🟢 po F-65; **sprawy spadkowe, rzeczowe i wieczystoksięgowe nadal 🔴** |
-| Cz. III — Egzekucja | 758–1088 | 🟡 | klauzula, skarga na komornika, powództwa przeciwegzekucyjne 🟢; ⛔ ograniczenia egzekucji, świadczenia niepieniężne, alimenty 🔴 |
-| Cz. IV — Jurysdykcja krajowa | 1097–1116 | 🔴 | styk z DR-14 |
+| **Ks. II — Nieproces** | 506–1088 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-KPC-uzupelnienie-pokrycia-2026.md`; wcześniejsze moduły szczegółowe zachowują pierwszeństwo |
+| Cz. III — Egzekucja | 758–1088 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-KPC-uzupelnienie-pokrycia-2026.md`; wcześniejsze moduły szczegółowe zachowują pierwszeństwo |
+| Cz. IV — Jurysdykcja krajowa | 1097–1116 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-KPC-uzupelnienie-pokrycia-2026.md`; wcześniejsze moduły szczegółowe zachowują pierwszeństwo |
 
 ### ⭐ Ustalenie uboczne o wadze CRIT — uchylony art. 207 KPC w obiegu
 
@@ -322,23 +377,24 @@ sądowy nie krótszy niż 2 tygodnie), **art. 205¹ §2** (zwrot odpowiedzi
 spóźnionej), **art. 205¹²** (prekluzja ogólna), **art. 458⁵** (prekluzja
 gospodarcza).
 
-### Rekomendowana kolejność uzupełniania (zaktualizowana 2026-08-22)
+### Rekomendowana kolejność uzupełniania — stan po 2026-08-27
 
 1. ~~art. 365–366 prawomocność~~ ✅ F-65
 2. ~~art. 378, 382–386 granice apelacji~~ ✅ F-65
 3. ~~art. 506–525 nieproces, część ogólna~~ ✅ F-65
-4. **art. 829–839 + 824–826 — ograniczenia egzekucji i kwota wolna** ⭐ najwyższy priorytet: system opisuje egzekucję z wynagrodzenia, ale nie zna granic — asymetria działająca na niekorzyść dłużnika
-5. **art. 205¹–205¹¹ — organizacja postępowania w procesie** (posiedzenie przygotowawcze, plan rozprawy); art. 205¹² już opisany
-6. **art. 458¹–458¹³ — sprawy gospodarcze** (prekluzja 458⁵, umowa dowodowa, ograniczenie dowodu ze świadków 458¹¹)
-7. **art. 669–689 — stwierdzenie nabycia spadku i dział spadku** (dwie najczęstsze sprawy spadkowe, tryb nieprocesowy)
-8. art. 350–352 — sprostowanie, uzupełnienie, wykładnia wyroku
-9. art. 1041–1059 i 1081–1088 — egzekucja świadczeń niepieniężnych i alimentów
-10. art. 162 KPC — zastrzeżenie do protokołu (⛔ nie mylić z art. 162 KK)
-11. art. 617–626¹³ — zniesienie współwłasności i postępowanie wieczystoksięgowe
-12. art. 401, 401¹, 403 — podstawy wznowienia (art. 399 już jest)
-13. art. 458¹⁴–458¹⁶ — postępowanie z udziałem konsumentów
-14. art. 1097–1116 — jurysdykcja krajowa (domknięcie wobec DR-14)
+4. ~~art. 829–839 + 824–826 — ograniczenia egzekucji~~ 🟡 B+ — `mod-KPC-uzupelnienie-pokrycia-2026.md`
+5. ~~art. 205¹–205¹² — organizacja postępowania~~ 🟡 B+
+6. ~~art. 458¹–458¹³ — sprawy gospodarcze~~ 🟡 B+
+7. ~~art. 669–689 — sprawy spadkowe~~ 🟡 B+
+8. ~~art. 350–352 — sprostowanie/uzupełnienie/wykładnia~~ 🟡 B+
+9. ~~art. 1041–1059 i 1081–1088 — egzekucja niepieniężna/alimenty~~ 🟡 B+
+10. ~~art. 162 KPC~~ ✅ dedykowany moduł
+11. ~~art. 617–626¹³ — współwłasność/KW~~ 🟡 B+
+12. ~~art. 401, 401¹, 403 — wznowienie~~ 🟡 B+
+13. ~~art. 458¹⁴–458¹⁶ — konsumenci~~ 🟡 B+
+14. ~~art. 1097–1116 — jurysdykcja krajowa~~ 🟡 B+
 
+**Pozostały cel jakościowy:** pogłębianie żółtych pozycji artykuł-po-artykule; brak pozycji z zerowym pokryciem w tej liście.
 ---
 
 ## Akty NIE objęte pełnym rejestrem (raport przestarzały lub niepełny)

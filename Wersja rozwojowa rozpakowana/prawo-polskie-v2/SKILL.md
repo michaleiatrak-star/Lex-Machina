@@ -1,15 +1,15 @@
 ---
 name: prawo-polskie-v2
-version: "6.5"
+version: "6.6"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
 description: "Fasada routingu prawa polskiego: wybiera jeden z DR-01–DR-16 i przekazuje sprawę do właściwego skilla dziedzinowego; nie zawiera treści prawa materialnego."
 changelog: |
-  Wersja bieżąca: 6.5. Historia — references/CHANGELOG.md (plik założony
+  Wersja bieżąca: 6.6. Historia — references/CHANGELOG.md (plik założony
   2026-08-23g; wersje sprzed 6.2 nieodtworzone — LUKA JAWNA, ślad wyłącznie
   w audyt-systemu-v4/references/AUDIT-JOURNAL.md).
-  Skrót: 6.5 — moduł transakcji handlowych (F-108/46); 6.2 — zapisana decyzja o zakresie shared/PRAWO-HARDGATE.md w tym
+  Skrót: 6.6 — F-108 P1/41, P1/8 i P1/52 + korekta metryki KC/UFG; 6.5 — moduł transakcji handlowych (F-108/46); 6.2 — zapisana decyzja o zakresie shared/PRAWO-HARDGATE.md w tym
   skillu, rozdzielna dla SKILL.md (nie obowiązuje) i ROUTING-MAP.md
   (reżim mapy: FAZA 3 + ZASADA 8 + REGUŁA 3) — flaga F-123.
 ---

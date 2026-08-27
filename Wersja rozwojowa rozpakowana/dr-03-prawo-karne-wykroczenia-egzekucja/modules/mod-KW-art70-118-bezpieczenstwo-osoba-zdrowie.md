@@ -1,6 +1,6 @@
 # mod-KW-art70-118-bezpieczenstwo-osoba-zdrowie
 
-**Wersja:** 1.0 | **Dodano:** 2026-07-17
+**Wersja:** 1.1 | **Dodano:** 2026-07-17 | **Aktualizacja:** 2026-08-27 (art. 82)
 **Rola w systemie:** kontynuacja uzupełniania pokrycia Kodeksu wykroczeń
 — trzy rozdziały o wysokiej częstości praktycznej, dotąd CAŁKOWICIE
 nieobecne w systemie: bezpieczeństwo osób i mienia (X), przeciwko osobie
@@ -62,6 +62,30 @@ publiczności → grzywna do 250 zł albo nagana. Kto ZE ZŁOŚLIWOŚCI lub
 SWAWOLI takie oświetlenie gasi → grzywna do 500 zł (typ umyślny,
 surowszy niż samo zaniechanie).
 
+### Art. 82 — bezpieczeństwo pożarowe
+
+Art. 82 obejmuje zachowania mogące spowodować pożar, jego
+rozprzestrzenianie, utrudnić działanie ratownicze albo ewakuację. Katalog
+§ 1 obejmuje m.in. niedozwolone używanie otwartego ognia i innych źródeł
+zapłonu, prace pożarowo niebezpieczne bez wymaganego zabezpieczenia,
+używanie niesprawnych lub niekontrolowanych instalacji/urządzeń w warunkach
+mogących sprzyjać pożarowi lub wybuchowi, naruszenia zasad dotyczących
+materiałów niebezpiecznych pożarowo oraz inne ustawowo wskazane zachowania.
+
+**Aktualizacja sankcji:** ustawa z 7.11.2025 r. — Dz.U. 2025 poz. 1814
+zmieniła sankcje w art. 82 § 1, 2, 4 i 5 oraz § 3. W aktualnym reżimie
+wskazane jednostki przewidują karę aresztu, ograniczenia wolności albo
+grzywny. Ta sama nowelizacja zmieniła art. 24 § 1a KW i art. 96 § 1ad KPW,
+co ma znaczenie dla maksymalnej grzywny mandatowej.
+
+**RZĄD 1 / weryfikacja 2026-08-27:**
+- ELI, t.j. KW: Dz.U. 2025 poz. 734;
+- ELI, nowelizacja: Dz.U. 2025 poz. 1814.
+
+Przed kwalifikacją konkretnego zachowania odczytaj pełny właściwy paragraf
+art. 82 oraz przepisy ochrony przeciwpożarowej, do których znamiona mogą
+odsyłać.
+
 ### Art. 83 — materiały niebezpieczne
 
 Kto NIEOSTROŻNIE obchodzi się z materiałami wybuchowymi, łatwo
@@ -72,8 +96,8 @@ z `mod-KK-art163-172-bezpieczenstwo-powszechne.md` — przy poważniejszym
 skutku (zagrożenie życia wielu osób/mienia wielkich rozmiarów)
 kwalifikacja przechodzi do art. 163 KK.
 
-⚠️ Pozostałe artykuły rozdziału (72-76, 80-82) NIE zostały w pełni
-zweryfikowane w tej sesji — zweryfikuj na ISAP jeśli sprawa dotyczy
+⚠️ Pozostałe artykuły rozdziału (72-76, 80-81) NIE zostały w pełni
+zweryfikowane w tej sesji; **art. 82 zweryfikowano w ELI 2026-08-27** — zweryfikuj na ISAP jeśli sprawa dotyczy
 zagadnień spoza omówionych wyżej (np. materiały wybuchowe w innych
 kontekstach, ostrzeżenia przy pracach budowlanych).
 

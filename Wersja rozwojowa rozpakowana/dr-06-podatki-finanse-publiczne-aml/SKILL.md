@@ -1,6 +1,6 @@
 ---
 name: dr-06-podatki-finanse-publiczne-aml
-version: "3.75"
+version: "3.76"
 description: "Podatki, finanse publiczne i AML: Ordynacja podatkowa, PIT, CIT, VAT, akcyza, cło, KAS, finanse publiczne i obowiązki przeciwdziałania praniu pieniędzy."
 ---
 
@@ -99,7 +99,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   od KC; nowelizacja znosi "wieczne przedawnienie" + wprowadza ugodę
   podatkową od 01.10.2026 (art. 70 i n. OP)
 
-## Moduły (44 łącznie — ✓ 44 OK, ☐ 0 STUB)
+## Moduły (45 łącznie — ✓ 45 OK, ☐ 0 STUB)
 
 **NAPRAWA 2026-08-14:** dodano `mod-OP-dzial-IV-rozdzial-11-dowody.md`
 — zamyka rdzeń F-70: dowody w postępowaniu podatkowym (180-200),
@@ -464,6 +464,8 @@ przez cross-reference, bez duplikacji treści).
                obalenia domniemania na organie])
               (główny moduł: postępowanie podatkowe, terminy, GAAR,
                odpowiedzialność zarządu, KKS czynny żal, przedawnienie)
+  [✓] NOWY  mod-OP-uzupelnienie-pokrycia-2026
+              (pozostałe działy OP: organy, zobowiązania, następstwo, STIR, procedura, tryby nadzwyczajne, tajemnica i zaświadczenia)
   [✓] OK    mod-OP-kontrola-podatkowa-dzial-VI
               (dodany 2026-08-12, ZAREJESTROWANY 2026-08-14 przy
                naprawie F-33: Dział VI OP — kontrola podatkowa,

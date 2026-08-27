@@ -1,5 +1,9 @@
 # CHANGELOG — dr-03-prawo-karne-wykroczenia-egzekucja
 
+- 3.33 (2026-08-27): dodano moduł uzupełniający KKW, zweryfikowano art. 82 KW w ELI i zsynchronizowano mapy pokrycia/routing.
+
+- 3.32 (2026-08-27): F-108/8 — dodano i zarejestrowano moduł ustawy o opłatach w sprawach karnych, z pełną mapą art. 1–23 i stawkami zweryfikowanymi w ELI.
+
 - 3.31 (2026-08-26): zarejestrowano istniejący moduł nielegalnego poboru
   mediów i zsynchronizowano licznik modułów 62/62.
 - 3.30 (2026-08-26): pełna propagacja korekt sankcji i jednostek redakcyjnych

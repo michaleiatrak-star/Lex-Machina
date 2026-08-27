@@ -1,7 +1,7 @@
 ---
 name: audyt-systemu-v4
 description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych skilli: zależności, wersje, mapy Dz.U., treść merytoryczna, propagacja zmian, deduplikacja i bramki jakości."
-version: "6.26"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY od 6.10: niecytowane `6.10` YAML
+version: "6.27"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY od 6.10: niecytowane `6.10` YAML
                   # parsuje jako float 6.1 — czyli numer NIŻSZY niż 6.9, co cicho
                   # odwraca porządek wersji. Wykryte przy walidacji 2026-08-20z.
                   # Każda kolejna wersja z dwucyfrowym minor — też w cudzysłowie.
@@ -81,7 +81,7 @@ scripts:
   - scripts/check_sync_aktow.py           # T11 — synchronizacja AKTÓW między lokalną MAPA-AKTOW, ROUTING-MAP i mapą Dz.U. (WYSOKI, heurystyka→WARN, dodany 2026-08-15z, flaga F-89) — wykrywa BRAK pozycji, czego T3 (rozbieżność numeru) i check_rejestracja_modulow (moduły) nie robią
   - scripts/run_regression_suite.py       # orkiestrator — uruchamia T1/T2/T3/T6/T7/T8 w jednym przebiegu
   - scripts/ci_check_shared.py            # T6/T7 — zerwane odwołania / duplikaty (już istniejący, wywoływany przez orkiestrator)
-  - scripts/check_rejestracja_modulow.py  # kontrola spójności rejestracji modułów DR (4 rejestry: dysk/SKILL.md/MAPA-AKTOW.md/ROUTING-MAP.md) — powstał 2026-08-14e (F-77) — REJESTROWANE 2026-08-15, plik-sierota tego samego wzorca jaki sam wykrywa
+  - scripts/check_rejestracja_modulow.py  # kontrola spójności rejestracji modułów DR (4 rejestry: dysk/SKILL.md/MAPA-AKTOW.md/ROUTING-MAP.md) — powstał 2026-08-14e (F-77) — REJESTROWANE 2026-08-15, plik-sierota tego samego wzorca jaki sam wykrywa\n  - scripts/check_coverage_coherence.py  # T18 — wszystkie 16 MAPA-POKRYCIA, jawne ścieżki routingu, moduły-widma i stale deklaracje „brak modułu”; KRYTYCZNY, dodany 2026-08-27 po audycie pokrycia
   - scripts/sync_dzu_eli.py               # pobiera z Sejm ELI API nowe pozycje Dz.U./M.P., produkuje raport różnic — patrz SYNC-DZU-AUTOMATYCZNY.md — REJESTROWANE 2026-08-15
   - scripts/audit_tj_inventory.py         # T15 — sprawdza wszystkie operacyjne deklaracje t.j. względem rocznych indeksów Sejm ELI; tryby maps/operational/all; błąd API = exit 2, dodane 2026-08-26
   - scripts/audit_amendment_scope.py      # T16 — pełny inwentarz dyspozycji nowelizacji i propagacja każdej zmienionej jednostki przez cały korpus; bez ścieżek hosta

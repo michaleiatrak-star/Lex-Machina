@@ -18,6 +18,7 @@
 | Administracyjne / KPA | dr-05 | mod-KPA-postepowanie-administracyjne.md | pisma-procesowe-v3, orzeczenia-sadowe-v2 |
 | ZUS / świadczenia | dr-04 | mod-SUS-ZUS-ubezpieczenia-spoleczne.md | pisma-proste-v2, pisma-procesowe-v3 |
 | Wykroczenia / mandaty | dr-03 | mod-KW-kodeks-wykroczen.md | pisma-proste-v2 |
+| Opłaty w sprawach karnych | dr-03 | mod-ustawa-oplaty-w-sprawach-karnych.md | pisma-procesowe-v3, pisma-proste-v2 |
 | Stalking / nękanie | dr-03 | mod-KK-art190a-stalking.md | analizator-dowodow-v3 |
 | Przesłuchanie świadków | przesluchanie-swiadkow-v2-min90 | SKILL.md | — |
 | Prawo gospodarcze / spółki | dr-02 | mod-KSH-spolki-handlowe.md | analizator-umow-v1, analiza-sadowa-v6 |
@@ -27,9 +28,11 @@
 | RODO / ochrona danych | dr-11 | mod-RODO-GDPR-2016-679.md | pisma-procesowe-v3, pisma-proste-v2 |
 | Prawo podatkowe | dr-06 | mod-OP-ordynacja-podatkowa.md → następnie właściwy mod-PIT / mod-CIT / mod-VAT według podatku | pisma-procesowe-v3, analiza-sadowa-v6 |
 | Ubezpieczeniowe | dr-02 | mod-KC-ubezpieczenia.md | analizator-umow-v1, pisma-procesowe-v3 |
+| Ubezpieczenia obowiązkowe / UFG / PBUK | dr-02 | mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md | pisma-procesowe-v3, analizator-dowodow-v3 |
+| Fundacja rodzinna | dr-02 | mod-ustawa-fundacja-rodzinna.md | analizator-umow-v1, pisma-procesowe-v3 |
 | Przemoc domowa | dr-03 | mod-KK-art207-przemoc-domowa.md | pisma-procesowe-v3 |
 | Cyberprzestępczość | dr-03 | mod-KK-art267-269c-cyberprzestepstwa.md | analizator-dowodow-v3, pisma-procesowe-v3 |
-| Cudzoziemcy / legalizacja | dr-02 | mod-ustawa-cudzoziemcy.md | pisma-procesowe-v3 |
+| Cudzoziemcy / legalizacja | dr-05 | mod-ustawa-cudzoziemcy.md (kanoniczny administracyjny) | dr-02 tylko perspektywa prywatno-pracownicza; pisma-procesowe-v3 |
 | Prawo medyczne | dr-10 | mod-ustawa-prawa-pacjenta-framework.md | pisma-procesowe-v3, analiza-sadowa-v6 |
 | Prawo budowlane | dr-09 | mod-PrBud-prawo-budowlane.md | pisma-procesowe-v3 |
 | Zamówienia publiczne / KIO / PZP | dr-07 | mod-PZP-zamowienia-publiczne-KIO.md | pisma-procesowe-v3, analiza-sadowa-v6 |
@@ -38,8 +41,8 @@
 | Prawo farmaceutyczne | dr-10 | mod-PrFarm-prawo-farmaceutyczne.md | pisma-procesowe-v3 |
 | AI Act / prawo AI | dr-11 | mod-AI-Act-framework.md | analizator-umow-v1, pisma-procesowe-v3 |
 | Chronologia / oś czasu | chronologia-sprawy-v1 | SKILL.md | — |
-| Chemikalia / REACH / CLP | dr-09 | *(brak dedykowanego modułu — przez prawo-polskie-v2)* | pisma-procesowe-v3 |
-| Akcyza / cło / celne | dr-06 | *(brak dedykowanego modułu — przez prawo-polskie-v2)* | pisma-procesowe-v3 |
+| Chemikalia / REACH / CLP | dr-10 | mod-REACH-CLP-chemikalia.md | pisma-procesowe-v3 |
+| Akcyza / cło / celne | dr-06 | mod-ustawa-akcyzowa-i-clo-UCC.md + mod-UCC-clo-taryfa-celna.md | pisma-procesowe-v3 |
 | Działalność regulowana | dr-08 | mod-kontrola-administracji-inspekcje.md | pisma-procesowe-v3 |
 | Compliance SWZ/OPZ | dr-07 | mod-PZP-opis-przedmiotu-zakaz-znakow-towarowych.md + mod-PZP-wykonanie-umowy-compliance.md | pisma-procesowe-v3 |
 | Prawo UE / MPH | dr-14 | mod-TFUE-TUE-prawo-pierwotne-UE.md | pisma-procesowe-v3 |

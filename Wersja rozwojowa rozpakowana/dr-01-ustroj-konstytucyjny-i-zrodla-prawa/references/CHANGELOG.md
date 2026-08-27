@@ -1,5 +1,7 @@
 # CHANGELOG — dr-01-ustroj-konstytucyjny-i-zrodla-prawa
 
+- 3.9 (2026-08-27): F-108/50 — dodano dedykowany moduł ustawy o Sądzie Najwyższym (poziom B), oparty na RZĄD 1 ELI; oddzielono zmianę prospektywną z Dz.U. 2026 poz. 1123 od prawa obowiązującego.
+
 - 3.8 (2026-08-26): zsynchronizowano metryki tekstów jednolitych w mapie aktów
   oraz modułach ZTP, specustaw, partii politycznych i referendum.
 
