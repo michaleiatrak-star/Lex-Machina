@@ -72,9 +72,9 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 # łącznie w DR-03 (było 52).)
 #
 # Format: Akt prawny | Dz.U. | DR-skill | Moduł | Status
-# Status: ✅ OK = moduł merytoryczny | 🔗 odesłanie = w innym DR | ☐ BRAK = do zbudowania
+# Status: ✅ OK = moduł ZAREJESTROWANY / trasa istnieje; NIE oznacza kompletności całego aktu.\n#         Pokrycie treściowe ustala wyłącznie odpowiedni DR/MAPA-POKRYCIA.md.\n#         🔗 odesłanie = w innym DR | ☐ BRAK = brak jednostki do zbudowania
 #
-# Zasada: jeden akt prawny = jeden wpis w tej tabeli = jeden moduł
+# BRAMKA SEMANTYCZNA STATUSU (2026-08-27):\n#   MAPA-AKTOW / ROUTING odpowiadają „gdzie jest akt?”, a MAPA-POKRYCIA „ile aktu naprawdę opracowano?”.\n#   Zakaz wnioskowania: ✅ OK w tej mapie -> pełne pokrycie.\n#\n# Zasada: jeden akt prawny = jeden wpis w tej tabeli = jeden moduł
 # Wyjątek: rozdziały tego samego aktu mogą mieć osobne moduły (oznaczone w kolumnie Moduł)
 #
 # ═══════════════════════════════════════════════════════════════════════════════
