@@ -8,7 +8,7 @@ ale NIE miał modułu o prawie ANTYMONOPOLOWYM (ochrona konkurencji jako
 takiej, nie tylko uczciwości praktyk rynkowych) — to DWIE różne gałęzie
 prawa gospodarczego, często mylone.
 
-> ⛔ HARDGATE — zweryfikuj aktualny t.j. na ISAP.
+> ✅ **METRYKA RZĄD 1, VER 2026-08-28:** ustawa o ochronie konkurencji i konsumentów — **Dz.U. 2025 poz. 1714 t.j.**. Przy konkretnej jednostce nadal sprawdź późniejsze akty zmieniające w ELI.
 
 ---
 
