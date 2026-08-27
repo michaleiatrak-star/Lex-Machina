@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.27 (2026-08-27): wykonano rekomendacje audytu pokrycia: utworzono `MAPA-POKRYCIA.md` dla brakujących 9 DR, dodano T18 `check_coverage_coherence.py` i wpięto do suite, rozdzielono status rejestracji od kompletności treściowej oraz oznaczono raporty 2026-08-13 jako baseline historyczny. F-108 Etap 3: 52/52 dedykowanych modułów.
+
 - 6.26 (2026-08-27): errata dowodu F-108/46 — T3 ma 7 ostrzeżeń,
   T11 ma 26 pozycji do przeglądu; nie są globalnym PASS. Test nowego modułu
   nadal 18/18 PASS. Bez zmiany statusu F-108 i bez zmian treści prawa.
