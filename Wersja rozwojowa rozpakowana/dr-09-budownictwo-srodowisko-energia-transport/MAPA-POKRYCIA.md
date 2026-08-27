@@ -30,6 +30,8 @@ Każdy przepis nadal wymaga weryfikacji ISAP przed użyciem (HARD GATE).
 
 ## Prawo budowlane (PrBud)
 
+**Aktualizacja 2026-08-27 — PrBud:** wszystkie wcześniej czerwone rozdziały mają teraz co najmniej pokrycie operacyjne B+ w `mod-PrBud-uzupelnienie-pokrycia-2026.md`; status żółty zachowuje wymóg pełnego odczytu ELI przy konkretnej sprawie.
+
 **Stan prawny bazowy w chwili audytu źródłowego:** Dz.U. 2026 poz. 524 t.j.
 (obwieszczenie Marszałka Sejmu 27.03.2026)
 **Data ostatniej weryfikacji treści (zasilenie z raportu):** 2026-08-13
@@ -49,20 +51,20 @@ ustawy.
 | Rozdział | Materia | Art. | Status | Moduł |
 |---|---|---|---|---|
 | 1 | **Przepisy ogólne** (definicje, zasady projektowania/budowy/użytkowania) | 1–11 | 🟡 | Art. 3 (definicje — obiekt budowlany, mała architektura), art. 9 (odstępstwo od warunków technicznych) opisane w kontekście konkretnych tematów; art. 5 wzmiankowany przy zabytkach. **Brak: art. 1-2, 4, 5a-8, 10-11** |
-| 2 | Samodzielne funkcje techniczne (uprawnienia budowlane) | 12–12b | 🔴 | Nieobecne w samym module PrBud — temat zawodowy architektów/inżynierów pokryty gdzie indziej (`mod-ustawa-architekci-inzynierowie-budownictwa-zawod`), ale to inna ustawa |
+| 2 | Samodzielne funkcje techniczne (uprawnienia budowlane) | 12–12b | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PrBud-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł główny i sektorowe mają pierwszeństwo dla pogłębionych tematów |
 | 3 | **Prawa i obowiązki uczestników procesu budowlanego** (inwestor, kierownik budowy, projektant, inspektor nadzoru) | 17–27a | 🟡 | Zakres modułu DEKLARUJE ten temat, ale bez konkretnych artykułów — deklaracja szersza niż rzeczywista treść |
 | 4 | **Postępowanie poprzedzające rozpoczęcie robót** (pozwolenie, zgłoszenie, WZ/MPZP) | 28–40a | 🟢 | Art. 29-30 (zwolnienia, progi metrażowe), art. 35 (termin 65/30 dni, sankcja 500 zł/dzień), art. 36a (istotne odstępstwo od projektu, z kryterium z orzecznictwa) — jeden z najlepiej opracowanych rozdziałów |
-| 5 | Rozpoczęcie i prowadzenie robót budowlanych | 41–47 | 🔴 | — |
-| 5a | Dziennik budowy | 47a–47v | 🔴 | — |
+| 5 | Rozpoczęcie i prowadzenie robót budowlanych | 41–47 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PrBud-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł główny i sektorowe mają pierwszeństwo dla pogłębionych tematów |
+| 5a | Dziennik budowy | 47a–47v | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PrBud-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł główny i sektorowe mają pierwszeństwo dla pogłębionych tematów |
 | 5b | **Samowola budowlana** (postępowanie z naruszeniem ustawy) | 48–53a | 🟢 najlepsze | Najlepiej opracowany fragment całego modułu: art. 48 (nakaz rozbiórki), art. 49f-49i (uproszczona legalizacja, próg 20→10 lat, bez opłaty), dwie ścieżki legalizacji, wzór opłaty legalizacyjnej, "żółta kartka" (reforma 2026), uchwała NSA 7 sędziów z lutego 2026 |
 | 5c | Zakończenie budowy (zawiadomienie, pozwolenie na użytkowanie) | 54–60 | 🟡 | Pozwolenie na użytkowanie wzmiankowane jako "Zasada absolutna nr 4", bez konkretnych artykułów proceduralnych (zawiadomienie, terminy na sprzeciw) |
-| 5d | Książka obiektu budowlanego | 60a–60r | 🔴 | Nowa instytucja, zero treści |
+| 5d | Książka obiektu budowlanego | 60a–60r | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PrBud-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł główny i sektorowe mają pierwszeństwo dla pogłębionych tematów |
 | 6 | **Utrzymanie obiektów budowlanych** (zmiana sposobu użytkowania) | 61–72a | 🟢 | `mod-PrBud-patodeweloperka...` Część A — art. 71/71a (definicja zmiany sposobu użytkowania, procedura zgłoszenia, przesłanki sprzeciwu, konsekwencje bez zgłoszenia); reszta rozdziału (kontrole okresowe, obowiązki właściciela — art. 61-66) nieopracowana |
-| 7 | Katastrofa budowlana | 73–79 | 🔴 | — |
-| 7a | Portal e-Budownictwo | 79a–79k | 🔴 | — |
-| 8 | Organy administracji architektoniczno-budowlanej i nadzoru budowlanego | 80–89c | 🔴 | Nieobecne jako samodzielny temat — organy (PINB, WINB, Starosta, Wojewoda) wzmiankowane przy ścieżce odwoławczej, bez opisania kompetencji |
+| 7 | Katastrofa budowlana | 73–79 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PrBud-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł główny i sektorowe mają pierwszeństwo dla pogłębionych tematów |
+| 7a | Portal e-Budownictwo | 79a–79k | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PrBud-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł główny i sektorowe mają pierwszeństwo dla pogłębionych tematów |
+| 8 | Organy administracji architektoniczno-budowlanej i nadzoru budowlanego | 80–89c | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PrBud-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł główny i sektorowe mają pierwszeństwo dla pogłębionych tematów |
 | 9 | Przepisy karne | 90–94 | 🟡 | Jedno zdanie ogólne, bez rozbicia na typy czynów (art. 90 samowola, 91 udaremnienie kontroli, 91a niewłaściwe użytkowanie) |
-| 10 | Odpowiedzialność zawodowa w budownictwie | 95–103 | 🔴 | — |
+| 10 | Odpowiedzialność zawodowa w budownictwie | 95–103 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PrBud-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduł główny i sektorowe mają pierwszeństwo dla pogłębionych tematów |
 
 **Tematy przekrojowe (dobrze pokryte, spoza samego PrBud):** ścieżka
 odwoławcza (PINB→WINB→WSA→NSA, Starosta→Wojewoda→WSA→NSA) 🟢; umowa o
