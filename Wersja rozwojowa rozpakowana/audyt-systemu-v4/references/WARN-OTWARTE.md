@@ -17,7 +17,7 @@ wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md`.
 | Flaga | Priorytet | Pozostały zakres | Kryterium zamknięcia |
 |---|---|---|---|
 | F-86 | niski | Uzupełnić dalsze odrębne postępowania upadłościowe od art. 426; dotychczasowy moduł jest mapą nawigacyjną, nie pełnym opracowaniem całego zakresu flagi. | Pozostałe zakresy opisane i mapa pokrycia odświeżona; kontrola treści jednostek odrębna od kontroli metryki. |
-| F-108 | wysoki | Źródło MS/BIP: 52 akty, ponowny odczyt 2026-08-27. **P1 zakończone:** 46, 41, 8, 52 mają osobne moduły ≥ B; nominalnie A=43/B=9/C=0/D=0. Pozostaje etap 2 dla bazowych 48 A+B, P2 (51, 50, 30, 40) i decyzje P3 (13, 34, 27, 28, 45). | Pełne warunki i rejestr 52 pozycji w `F-108-lista-MS-egzamin-2026.md`; flaga OTWARTA. |
+| F-108 | wysoki | Źródło MS/BIP: 52 akty, ponowny odczyt 2026-08-27. **Etap 3 zakończony:** wszystkie P1/P2/P3 mają dedykowane moduły ≥ B; nominalnie A=52/B=0/C=0/D=0. Pozostaje wyłącznie Etap 2: treściowy audyt 52 aktów/zakresów bez utożsamiania obecności modułu z kompletnością. | Pełne warunki i rejestr 52 pozycji w `F-108-lista-MS-egzamin-2026.md`; flaga OTWARTA do zamknięcia Etapu 2. |
 | F-135 | średni | Dokończyć cross-check wartości prawnych w pozostałych DR, elementów unikalnych oraz `shared`. Batch 2 skorygował PUSA, POŚ, PKPiR, Prawo lotnicze i timeshare oraz dodał kontrolę tytułu aktu. | Zero nieuzasadnionych rozbieżności albo jawne oznaczenie nieweryfikowalnych pozycji. |
 
 ## Reaktywne
