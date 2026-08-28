@@ -1,146 +1,54 @@
 # DR-12 — Lokalna Mapa Aktów Prawnych
 
-## Sądownictwo, Prokuratura, Zawody Prawnicze
+**Stan operacyjny:** 2026-08-28
 
-| Akt prawny | Dz.U. (t.j.) | Moduł | Status |
+Mapa zawiera wyłącznie akty i źródła używane obecnie. Historia korekt należy do audytu/changelogu.
+
+## Sądownictwo, prokuratura, zawody prawnicze
+
+| Akt / zakres | Aktualna podstawa operacyjna | Moduł | Status |
 |---|---|---|---|
-| Ustawa Prawo o ustroju sądów powszechnych | Dz.U. 2024 poz. 334 ze zm. | → DR-01/mod-USP-ustroj-sadow-powszechnych | 🔗 odesłanie |
-| Ustawa Prawo o prokuraturze + organy ochrony prawa | Dz.U. 2024 poz. 390 ze zm. — VER 2026-07-02eee: nadal aktualne (potwierdzone krzyżowo przez gov.pl/MS + orka.sejm.gov.pl) | mod-PrProkuratura-organy-ochrony-prawa | ✅ OK |
-| KPC — arbitraż i mediacja (cz. V) | Dz.U. 2026 poz. 468 ze zm. | mod-KPC-arbitraz-mediacja-ADR | ✅ OK |
-| Ustawa o regulatorach (UOKiK, URE, UKE, KNF) | UOKiK: Dz.U. 2025 poz. 1714 t.j. + URE: Prawo energetyczne Dz.U. 2026 poz. 43 t.j. + UKE: Prawo komunikacji elektronicznej Dz.U. 2024 poz. 1221 + ustawa o wspieraniu rozwoju usług i sieci telekom. Dz.U. 2026 poz. 562 t.j. + KNF: ustawy sektorowe (sprawdzać każdorazowo) ✅ VER: 2026-06-14 (TRYB DZU — był 2024/1221 sam; to PKE/UKE, nie UOKiK — rozwinięto wiersz, zgodny z tabelą wewnętrzną modułu) | mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF | ✅ OK |
-| Ustawa o sędziach, referendarzach i kuratorach | Dz.U. 2024 poz. 334 ze zm. | mod-ustawa-sedziowie-referendarze-kuratorzy | ✅ OK |
-| Ustawa o odpowiedzialności dyscyplinarnej zawodów | Ustawy korporacyjne | mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow | ✅ OK |
-| Ustawa o kosztach sądowych i pomocy prawnej (KSCU) | Dz.U. 2025 poz. 1228 t.j. ✅ VER: 2026-06-14 (TRYB DZU — był 2024/1303) | mod-KSCU-koszty-sadowe-i-pomoc-prawna | ✅ OK |
-| KPC — biegli sądowi i opinie | Dz.U. 2026 poz. 468 ze zm. | mod-KPC-biegli-sadowi-opinie | ✅ OK |
-| Ustawa Prawo o adwokaturze | Dz.U. 2024 poz. 1564 ze zm. — VER 2026-07-02eee: nadal aktualne (obwieszczenie 11.10.2024, potwierdzone bezpośrednio przez isap.sejm.gov.pl/WDU20240001564 + gov.pl/MS). Odnotowuje się, że TEN SAM numer (2024.1564) był omyłkowo cytowany w dr-10/MAPA-AKTOW.md jako "zbiorczy" dla "zawodów medycznych i prawniczych" — potwierdza to wcześniejsze ustalenie (sesja 2026-07-02y), że ten wiersz w dr-10 był błędnie skonstruowany: 2024.1564 to WYŁĄCZNIE Prawo o adwokaturze, nie zbiorczy numer dla wielu zawodów | mod-ustawa-adwokatura | ✅ OK |
-| Ustawa o radcach prawnych | Dz.U. 2024 poz. 499 ze zm. — VER 2026-07-02eee: nadal aktualne (potwierdzone krzyżowo) | mod-ustawa-radcowie-prawni | ✅ OK |
-| Ustawa Prawo o notariacie | Dz.U. 2026 poz. 614 t.j. ✅ VER: 2026-06-14 (TRYB DZU — był 2022/1799) | mod-ustawa-notariat | ✅ OK |
-| Ustawa o komornikach sądowych (zawód) | Dz.U. 2026 poz. 881 t.j. — obwieszczenie z 12.06.2026 r., potwierdzone w ELI 2026-08-25; zastępuje Dz.U. 2024 poz. 1458 | mod-ustawa-komornicy-sadowi-zawod | ✅ OK |
-| Ustawa o rzecznikach patentowych (zawód) | Dz.U. 2026 poz. 778 t.j. ✅ VER 2026-07-04 (audyt WARN-RZPAT): isap/infor.pl — obwieszczenie Marszałka Sejmu z 29.05.2026, jednolity tekst ustawy z 11.04.2001 r., stan prawny na 27.05.2026, zastępujący bezpośrednio poprzedni t.j. Dz.U. 2024 poz. 749. KOREKTA: poprzedni wpis "2025 poz. 591" był BŁĘDNY — ten numer to rozporządzenie Ministra Sprawiedliwości w sprawie postępowania dyscyplinarnego (akt wykonawczy wydany NA PODSTAWIE ustawy, a nie jej tekst jednolity) | mod-ustawa-rzecznicy-patentowi-zawod | ✅ OK |
+| Prawo o ustroju sądów powszechnych | aktualny tekst ELI/ISAP; kanonicznie DR-01 | → DR-01/`mod-USP-ustroj-sadow-powszechnych` | 🔗 |
+| Prawo o prokuraturze | Dz.U. 2024 poz. 390 t.j. + późn. zm.; fresh gate ELI | `mod-PrProkuratura-organy-ochrony-prawa` | ✅ |
+| KPC — arbitraż i mediacja | Dz.U. 2026 poz. 468 t.j. + późn. zm. | `mod-KPC-arbitraz-mediacja-ADR` | ✅ |
+| regulatorzy UOKiK / URE / UKE / KNF | właściwe bieżące ustawy sektorowe; nie istnieje jeden zbiorczy Dz.U. | `mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF` | ✅ / fresh gate per regulator |
+| sędziowie, referendarze, kuratorzy | właściwe bieżące ustawy ustrojowe i zawodowe | `mod-ustawa-sedziowie-referendarze-kuratorzy` | ✅ / fresh gate |
+| odpowiedzialność dyscyplinarna zawodów | właściwa ustawa korporacyjna + kodeks etyki danego zawodu | `mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow` | ✅ |
+| koszty sądowe w sprawach cywilnych | Dz.U. 2025 poz. 1228 t.j. + późn. zm. | `mod-KSCU-koszty-sadowe-i-pomoc-prawna` | ✅ |
+| KPC — biegli sądowi i opinie | Dz.U. 2026 poz. 468 t.j. + późn. zm. | `mod-KPC-biegli-sadowi-opinie` | ✅ |
+| Prawo o adwokaturze | Dz.U. 2024 poz. 1564 t.j. + późn. zm.; ELI wskazuje akty zmieniające po t.j. | `mod-ustawa-adwokatura` | ✅ B+/COV |
+| ustawa o radcach prawnych | Dz.U. 2024 poz. 499 t.j. + późn. zm., w tym Dz.U. 2026 poz. 731 obowiązujący od 18.06.2026 | `mod-ustawa-radcowie-prawni` | ✅ B+/COV |
+| Prawo o notariacie | Dz.U. 2026 poz. 614 t.j. + późn. zm. | `mod-ustawa-notariat` | ✅ |
+| ustawa o komornikach sądowych | Dz.U. 2026 poz. 881 t.j. + późn. zm. | `mod-ustawa-komornicy-sadowi-zawod` | ✅ |
+| ustawa o rzecznikach patentowych | Dz.U. 2026 poz. 778 t.j. + późn. zm. | `mod-ustawa-rzecznicy-patentowi-zawod` | ✅ |
 
-> 🔗 Prawo o ustroju sądów powszechnych jest kanonicznie w DR-01 (ustrój konstytucyjny).
-> ℹ️ Prawo o notariacie: moduł `mod-PrNotariat-notariat-rejestry` w DR-07 (aspekt rejestrowy/zamówieniowy); tutaj `mod-ustawa-notariat` obsługuje zawód notariusza i odpowiedzialność dyscyplinarną.
+## Kodeksy etyki zawodowej — źródła kanoniczne
 
-> Aktualizacja: 2026-07-02eee (TRYB DZU krok 10/16 wg WARN-26, ZAMKNIĘTY:
-> 0 błędów CRIT — wszystkie sprawdzone pozycje potwierdzone aktualne
-> [Prawo o prokuraturze, Prawo o adwokaturze, radcy prawni] + pozostałe
-> większość już VER 2026-06-14 (KSCU, Prawo o notariacie, komornicy,
-> rzecznicy patentowi, regulatorzy UOKiK/URE/UKE/KNF) lub potwierdzone via
-> FAZA 3A/dr-07 tego samego dnia (KPC). Efekt uboczny: rozstrzygnięto
-> częściowo niejasność strukturalną z dr-10 (numer 2024.1564 = wyłącznie
-> Prawo o adwokaturze, nie zbiorczy dla wielu zawodów)
+Kodeksy etyki są aktami korporacyjnymi właściwych samorządów, a nie aktami publikowanymi w Dzienniku Ustaw. Przed użyciem pobierz bieżący tekst z oficjalnej strony właściwego organu.
 
-## KODEKSY ETYKI ZAWODOWEJ — ZAWODY ZAUFANIA PUBLICZNEGO (dodano 2026-07-02, na żądanie użytkownika)
-
-⚠️ **Uwaga systemowa:** kodeksy etyki zawodowej to akty KORPORACYJNE
-(uchwały organów samorządów zawodowych), NIE akty prawa powszechnie
-obowiązującego — NIE publikuje się ich w Dz.U., więc TRYB DZU (weryfikacja
-przez ISAP) nie ma tu zastosowania wprost. Źródłem prawdy jest strona
-właściwego samorządu zawodowego. Poniższa tabela obejmuje zawody prawnicze
-(w pełni zweryfikowane w tej sesji) oraz zawody pokrewne z innych DR-skilli
-(nazwa kodeksu i organ ustalone z wysoką pewnością, ale DOKŁADNY numer i
-data najnowszej uchwały wymagają potwierdzenia na stronie samorządu przed
-użyciem w piśmie — oznaczone poniżej).
-
-| Zawód | Kodeks etyki | Organ uchwalający | Status weryfikacji | DR-skill |
-|---|---|---|---|---|
-| Adwokat | Kodeks Etyki Adwokackiej (Zbiór Zasad Etyki Adwokackiej i Godności Zawodu) | Naczelna Rada Adwokacka (NRA) | ✅ W PEŁNI ZWERYFIKOWANE 2026-07-02: t.j. Uchwała nr 174/2026 Prezydium NRA z 23.06.2026 + zmiana z 12-13.06.2026 (zasady AI) | dr-12/mod-ustawa-adwokatura |
-| Radca prawny | Kodeks Etyki Radcy Prawnego | Krajowy Zjazd Radców Prawnych / Prezydium KRRP | ✅ W PEŁNI ZWERYFIKOWANE 2026-07-02: obowiązuje od 1.07.2015, t.j. Uchwała nr 884/XI/2023 Prezydium KRRP z 7.02.2023 | dr-12/mod-ustawa-radcowie-prawni |
-| Notariusz | Kodeks Etyki Zawodowej Notariusza | Krajowa Rada Notarialna | ✅ ZWERYFIKOWANE 2026-07-02: bazowa Uchwała Nr 19/97 KRN z 12.12.1997 r., obowiązuje od stycznia 1998, ze zm. (tekst ujednolicony wielokrotnie aktualizowany) | dr-12/mod-ustawa-notariat |
-| Komornik sądowy | Kodeks Etyki Zawodowej Komornika Sądowego | Krajowa Rada Komornicza | ✅ ZWERYFIKOWANE 2026-07-02: bazowa Uchwała nr 1603/V KRK z 6.09.2016 r. ze zm. (m.in. uchwała nr 2048/VI z 15.01.2019) | dr-12/mod-ustawa-komornicy-sadowi-zawod |
-| Rzecznik patentowy | Zasady Etyki Zawodowej Rzeczników Patentowych | Krajowa Rada Rzeczników Patentowych / Krajowy Zjazd Rzeczników Patentowych | ✅ ZAMKNIĘTE 2026-08-13 (F-55, uzupełnia częściową weryfikację z 2026-07-02): obecna wersja przyjęta **uchwałą nr 4 XIII Nadzwyczajnego Krajowego Zjazdu Rzeczników Patentowych z 22 MAJA 2021 R.** — potwierdzone bezpośrednio (rzecznikpatentowy.org.pl, pełny tekst PDF Zasad Etyki, załącznik do tej uchwały) | dr-12/mod-ustawa-rzecznicy-patentowi-zawod |
-| Lekarz / lekarz dentysta | Kodeks Etyki Lekarskiej (KEL) | Naczelna Rada Lekarska / Krajowy Zjazd Lekarzy | ✅ ZWERYFIKOWANE 2026-07-02: przyjęty 1991 (II Nadzwyczajny KZL), znowelizowany 1993, 2003 i najnowsza rewizja **2024 r.** (Nadzwyczajny XVI Zjazd Krajowy Lekarzy w Łodzi) | dr-10 (moduły medyczne) |
-| Pielęgniarka / położna | Kodeks Etyki Zawodowej Pielęgniarki i Położnej RP | Naczelna Rada Pielęgniarek i Położnych / Krajowy Zjazd | ✅ ZWERYFIKOWANE 2026-07-02: aktualny t.j. — Uchwała nr 18 VIII Krajowego Zjazdu Pielęgniarek i Położnych z **17.05.2023 r.**, zastąpiła wersję z 2003 r. | dr-10 |
-| Farmaceuta (aptekarz) | Kodeks Etyki Aptekarza RP | Naczelna Rada Aptekarska / Krajowy Zjazd Aptekarzy | ✅ ZWERYFIKOWANE 2026-07-02: bazowa Uchwała Nr VI/25/2012 VI Krajowego Zjazdu Aptekarzy z **22.01.2012 r.** ze zm. | dr-10 |
-| Lekarz weterynarii | Kodeks Etyki Lekarza Weterynarii | Krajowa Rada Lekarsko-Weterynaryjna / Krajowy Zjazd Lekarzy Weterynarii | ⚠️ CZĘŚCIOWO ZWERYFIKOWANE 2026-07-02: kodeks zastąpił poprzedni z 2001 r., ALE trwał proces konsultacji społecznych PROJEKTU ZMIAN z terminem uwag do 18.04.2025 — **możliwe, że w 2025/2026 nastąpiła nowelizacja nieustalona w tej sesji**, wymaga potwierdzenia aktualnej wersji na vetpol.org.pl | dr-10 |
-| Diagnosta laboratoryjny | Kodeks Etyki Diagnosty Laboratoryjnego | Krajowa Izba Diagnostów Laboratoryjnych (KIDL) — organ NIE zmienił nazwy mimo reformy zawodu (ustawa o medycynie laboratoryjnej 2022), wcześniejsza niepewność ROZSTRZYGNIĘTA | ✅ W PEŁNI ZWERYFIKOWANE 2026-07-02: pierwotnie uchwalony 11.12.2004 (II KZDL), wielokrotnie nowelizowany, **obecna wersja obowiązuje od grudnia 2022 r.** (potwierdzone bezpośrednio przez wywiad z przedstawicielką KRDL) | dr-10 |
-| Doradca podatkowy | Zasady Etyki Doradców Podatkowych | Krajowy Zjazd Doradców Podatkowych / Krajowa Izba Doradców Podatkowych | ✅ CZĘŚCIOWO ZWERYFIKOWANE 2026-07-02: aktualna wersja zawiera świeże przepisy o AI (obowiązek weryfikacji wyników narzędzi AI przed wykorzystaniem) — dokładny numer i data uchwały wprowadzającej te przepisy NIEUSTALONE, ale sama treść i aktualność potwierdzone bezpośrednio na kidp.pl | dr-06/mod-ustawa-doradcy-podatkowi-zawod |
-| Biegły rewident | Kodeks etyki zawodowej biegłych rewidentów (Międzynarodowy Kodeks Etyki IESBA, wydanie 2022, przyjęty do porządku krajowego) | Krajowa Rada Biegłych Rewidentów (KRBR) + zatwierdzenie Polskiej Agencji Nadzoru Audytowego (PANA) | ✅ W PEŁNI ZWERYFIKOWANE 2026-07-02: Uchwała Nr 207/7a/2023 KRBR z 17.12.2023 (zmieniona Uchwałą Nr 240/8a/2023 z 22.12.2023), zatwierdzona Uchwałą Rady PANA nr 47/I/2023 z 19.12.2023 — obowiązuje od **1.07.2024 r.** dla zleceń uzgodnionych od tej daty | dr-06/mod-ustawa-biegli-rewidenci-zawod |
-| Architekt | Kodeks Etyki Zawodowej Architektów (KEZA) | Krajowa Izba Architektów RP / Krajowy Zjazd Izby Architektów RP | ✅ W PEŁNI ZWERYFIKOWANE 2026-07-02: Krajowy Zjazd Izby Architektów RP z **6.12.2025 r.** przyjął nowelizację, w życie od **1.01.2026 r.** — tekst jednolity na dzień 1.01.2026 | dr-09/mod-ustawa-architekci-inzynierowie-budownictwa-zawod |
-| Inżynier budownictwa | Kodeks Etyki Zawodowej Członków Polskiej Izby Inżynierów Budownictwa (PIIB) | Polska Izba Inżynierów Budownictwa / Krajowy Zjazd PIIB | ✅ W PEŁNI ZWERYFIKOWANE 2026-07-02: CAŁKOWICIE NOWY kodeks przyjęty Uchwałą Nr PIIB/KZ/0016/2024 XXIII Krajowego Zjazdu PIIB z **14.06.2024 r.**, zastępujący poprzedni z 2007 r. (nowelizowany 2013) | dr-09/mod-ustawa-architekci-inzynierowie-budownictwa-zawod |
-| Psycholog | Kodeks Etyczno-Zawodowy Psychologa (część główna) + Kodeks Diagnozy Psychologicznej (część II, uzupełniająca) | Polskie Towarzystwo Psychologiczne (PTP) — ⚠️ status prawny NIE jest tożsamy z korporacyjnymi kodeksami zawodów regulowanych ustawowo, ponieważ samorząd zawodowy psychologów NIE jest jeszcze w pełni ukonstytuowany mimo ustawy o zawodzie psychologa 2026.187 | ✅ CZĘŚCIOWO ROZSTRZYGNIĘTE 2026-07-02: część główna obowiązuje jako kodeks środowiskowy PTP; część II (diagnoza psychologiczna) przyjęta Uchwałą nr 5 Nadzwyczajnego Walnego Zgromadzenia Delegatów PTP z **29.02.2020 r.**, ale WYRAŹNIE jako dokument "POMOCNICZY" (nie w pełni wiążący) — wcześniejsza niepewność co do statusu prawnego POTWIERDZONA jako zasadna | dr-10 |
-
-**Podsumowanie finalne weryfikacji 2026-07-02:** 11 z 15 pozycji w pełni zweryfikowanych z konkretną datą/numerem uchwały. 4 pozycje (rzecznik patentowy, weterynarz, doradca podatkowy, psycholog) częściowo zweryfikowane — treść/aktualność potwierdzona, ale dokładna data ostatniej uchwały nieustalona lub status prawny odmienny od typowego kodeksu korporacyjnego. **Żadna pozycja nie pozostaje całkowicie niezweryfikowana** — to kompletne zamknięcie zadania specjalnego.
-
-## SĄDY/ORGANY DYSCYPLINARNE I PODSTAWY PRAWNE POSTĘPOWAŃ (dodano 2026-07-02, na żądanie użytkownika)
-
-⚠️ **Zakres tej sesji:** w pełni zweryfikowano 4 zawody prawnicze (adwokat,
-radca prawny, notariusz, komornik sądowy) — te mają dyscyplinarkę uregulowaną
-BEZPOŚREDNIO w tych samych ustawach, których numery Dz.U. już potwierdzono
-wcześniej w tej sesji. Pozostałe 11 zawodów (rzecznik patentowy + 10 spoza
-dr-12) WYMAGAJĄ odrębnej sesji weryfikacyjnej — nie zgadywano nazw organów
-ani podstaw prawnych bez potwierdzenia.
-
-| Zawód | Organ I instancji | Organ II instancji | Podstawa prawna (ta sama ustawa co już zweryfikowany numer Dz.U.) |
-|---|---|---|---|
-| Adwokat | Sąd dyscyplinarny izby adwokackiej | Wyższy Sąd Dyscyplinarny | Prawo o adwokaturze (Dz.U. 2024 poz. 1564), Dział VIII "Odpowiedzialność dyscyplinarna", art. 45-95m; organy adwokatury określone w art. 9 (m.in. Wyższy Sąd Dyscyplinarny, Rzecznik Dyscyplinarny Adwokatury); zakres sądu dyscyplinarnego — art. 50; skład — art. 51 (prezes, wiceprezes, 6-23 członków, 3 zastępców; orzeka w składzie 3 sędziów) |
-| Radca prawny | Okręgowy sąd dyscyplinarny (I instancja) | Wyższy Sąd Dyscyplinarny (II i ostatnia instancja) | Ustawa o radcach prawnych (Dz.U. 2024 poz. 499), organy samorządu — art. 42 (m.in. Wyższy Sąd Dyscyplinarny, Główny Rzecznik Dyscyplinarny, okręgowy sąd dyscyplinarny, rzecznik dyscyplinarny); odpowiedzialność dyscyplinarna — art. 64 i nast.; ostrzeżenie dziekańskie — art. 66 |
-| Notariusz | Sąd Dyscyplinarny przy Radzie Izby Notarialnej (wybierany przez Walne Zgromadzenie notariuszy na 3-letnią kadencję) | Wyższy Sąd Dyscyplinarny | Prawo o notariacie (Dz.U. 2026 poz. 614), Rozdział 6 "Odpowiedzialność dyscyplinarna", art. 50-63c; Rzecznik Dyscyplinarny Notariatu — art. 70 i nast.; pomocniczo stosuje się przepisy postępowania karnego |
-| Komornik sądowy | Komisja dyscyplinarna (33 członków powoływanych przez Krajową Radę Komorniczą spośród kandydatów zgłoszonych przez rady izb komorniczych) | ⚠️ Sąd apelacyjny jako sąd odwoławczy (organ PAŃSTWOWY, nie korporacyjny — inaczej niż w pozostałych 3 zawodach powyżej) | Ustawa o komornikach sądowych (Dz.U. 2026 poz. 881 t.j.), Rozdział 11 "Odpowiedzialność dyscyplinarna", art. 222-260 — numeracja potwierdzona 2026-08-25 |
-| Lekarz / lekarz dentysta | Okręgowy Sąd Lekarski (I instancja) | Naczelny Sąd Lekarski (II instancja) — odwołanie w 14 dni; dalej możliwa KASACJA do Sądu Najwyższego | ✅ VER 2026-07-04 (audyt-DR12), ✅ NAPRAWIONE 2026-08-13 (F-52): podstawą jest ODRĘBNA ustawa — ustawa z 2.12.2009 r. o izbach lekarskich, t.j. **Dz.U. 2021 poz. 1342**. Rozdział 5 "Odpowiedzialność zawodowa", art. 53-112. Treść JUŻ ISTNIEJE w dr-10 (`mod-ustawa-zawod-lekarza.md`, sekcja "Odpowiedzialnosc dyscyplinarna", zamknięte tam jako F-3 2026-07-15) — POPRZEDNIA notatka tutaj ("NOWY, do utworzenia") była przestarzała, sugerując błędnie potrzebę nowego pliku | mod-ustawa-zawod-lekarza w dr-10 (NIE nowy plik) |
-| Pielęgniarka / położna | Okręgowy Sąd Pielęgniarek i Położnych (I instancja) | Naczelny Sąd Pielęgniarek i Położnych (II instancja) | ⛔ DRUGI PRZYPADEK TEGO SAMEGO WZORCA: **ustawa z 1.07.2011 r. o samorządzie pielęgniarek i położnych** (t.j. Dz.U. 2025 poz. 1760), Rozdział 6 "Odpowiedzialność zawodowa", art. 36-88. Również CAŁKOWICIE brakująca w dr-10/MAPA-AKTOW.md przed tą sesją |
-| Farmaceuta (aptekarz) | Sąd Aptekarski (I instancja) | Naczelny Sąd Aptekarski (II instancja) — orzeczenia prawomocne z chwilą ogłoszenia | ✅ BEZ NOWEJ LUKI: podstawa — ustawa o izbach aptekarskich z 19.04.1991 r., JUŻ POPRAWNIE ŚLEDZONA w dr-10 jako "Ustawa o izbach aptekarskich" (Dz.U. 2025 poz. 1693, VER 2026-06-14). Różnica względem lekarzy/pielęgniarek: tu przepisy o izbach/samorządzie i sądzie dyscyplinarnym są częścią TEJ SAMEJ ustawy co przepisy o zawodzie, nie osobnym aktem |
-| Lekarz weterynarii | Sąd Lekarsko-Weterynaryjny (I instancja) | Krajowy Sąd Lekarsko-Weterynaryjny (II instancja, dawniej "Naczelny" — zmiana nazwy nowelizacją z 2013 r.) — kasacja do SN możliwa w terminie 6 mies. | ✅ BEZ NOWEJ LUKI: podstawa — ustawa o zawodzie lekarza weterynarii i izbach lekarsko-weterynaryjnych z 21.12.1990 r., JUŻ POPRAWNIE ŚLEDZONA w dr-10 (Dz.U. 2026 poz. 125, VER 2026-06-14) — dokładnie ten sam numer potwierdzony niezależnie w tej sesji. Ta sama struktura co aptekarze: izby/sąd dyscyplinarny w TEJ SAMEJ ustawie co zawód |
-| Diagnosta laboratoryjny | Sąd Diagnostów Laboratoryjnych (I instancja) | Wyższy Sąd Diagnostów Laboratoryjnych (II instancja) — kasacja do SN możliwa | Ustawa o medycynie laboratoryjnej z 15.09.2022 r., Rozdział 7 "Odpowiedzialność zawodowa"; aktualny t.j. **Dz.U. 2025 poz. 1295**, potwierdzony w ELI 2026-08-25; zastępuje Dz.U. 2023 poz. 2125. Organ: Krajowa Izba Diagnostów Laboratoryjnych (KIDL) |
-| Rzecznik patentowy | Sąd Dyscyplinarny (I instancja) | Odwoławczy Sąd Dyscyplinarny (II instancja, odwołanie w 1 miesiąc) | ✅ VER 2026-07-04: podstawa — ustawa o rzecznikach patentowych z 11.04.2001 r., Rozdział 6 "Odpowiedzialność dyscyplinarna", art. 57-68. Aktualny t.j.: **Dz.U. 2026 poz. 778** (obwieszczenie 29.05.2026) — poprzednio błędnie cytowane 2025.591 i 2024.749 |
-| Doradca podatkowy | Sąd Dyscyplinarny KIDP (I instancja) | Wyższy Sąd Dyscyplinarny KIDP (II instancja) | ⚠️ HYBRYDOWY WZORZEC (podobny do komorników): od orzeczenia II instancji przysługuje DALSZE odwołanie do właściwego SĄDU APELACYJNEGO (wydział pracy i ubezpieczeń społecznych) — organu PAŃSTWOWEGO. Podstawa — ustawa o doradztwie podatkowym z 5.07.1996 r., Rozdział 9 "Odpowiedzialność dyscyplinarna", art. 64-80. Ostatni potwierdzony t.j. bazowy: Dz.U. 2021 poz. 2117 (zgodny z wcześniejszym ustaleniem tej sesji dot. dr-06) |
-| Biegły rewident | Krajowy Sąd Dyscyplinarny (8-10 członków, orzeka w składzie 3) | ⚠️ Struktura specyficzna — nadzór publiczny sprawuje Polska Agencja Nadzoru Audytowego (PANA); art. 178 wskazuje właściwość SĄDU OKRĘGOWEGO w niektórych sprawach określonych ustawą | Ustawa o biegłych rewidentach, firmach audytorskich oraz nadzorze publicznym z 11.05.2017 r. (✅ SKORYGOWANE 2026-08-21, F-89: t.j. **Dz.U. 2025 poz. 1891**, VER 2026-06-14 — poprzedni numer 2024.1035 cytowany tu był NIEAKTUALNY, moduł macierzysty dr-06/mod-ustawa-biegli-rewidenci-zawod już zaktualizowany 2026-08-11, ten wiersz nie był z nim zsynchronizowany), Rozdział 9 "Odpowiedzialność dyscyplinarna biegłych rewidentów", art. 139-181 |
-| Architekt | Okręgowy Sąd Dyscyplinarny (I instancja) | Krajowy Sąd Dyscyplinarny (II instancja, odwołanie w 14 dni) — orzeczenia podlegają kontroli SĄDU APELACYJNEGO | JEDNA WSPÓLNA ustawa dla architektów i inżynierów budownictwa: ustawa o samorządach zawodowych architektów oraz inżynierów budownictwa z 15.12.2000 r. (Dz.U. 2025 poz. 1783 t.j., potwierdzone wcześniej tej sesji), Rozdział 5 "Odpowiedzialność dyscyplinarna" |
-| Inżynier budownictwa | Okręgowy Sąd Dyscyplinarny (I instancja) | Krajowy Sąd Dyscyplinarny (II instancja) — ta sama struktura co architekci | TA SAMA ustawa co architekci (Dz.U. 2025 poz. 1783 t.j.) — jeden akt obsługuje oba odrębne samorządy zawodowe (Izba Architektów RP + PIIB), każdy ma własne okręgowe/krajowe sądy dyscyplinarne działające na tej samej podstawie ustawowej |
-| Psycholog | ⛔ BRAK USTAWOWO UMOCOWANEGO SĄDU DYSCYPLINARNEGO | — | Potwierdza się wcześniejsze ustalenie tej sesji: samorząd zawodowy psychologów NIE jest jeszcze w pełni ukonstytuowany (mimo ustawy o zawodzie psychologa 2026.187) — brak więc formalnego, ustawowego sądu dyscyplinarnego analogicznego do pozostałych 14 zawodów. Odpowiedzialność ma obecnie charakter głównie środowiskowy (PTP), nie korporacyjno-ustawowy |
-
-### ⛔⛔ WZORZEC SYSTEMOWY — SPRECYZOWANY (nie uniwersalny, ale realny dla 2/4 sprawdzonych zawodów medycznych)
-
-Po sprawdzeniu 4 zawodów medycznych: **lekarz i pielęgniarka/położna MAJĄ
-lukę** (osobna ustawa "o samorządzie/izbach" nieśledzona w dr-10), ale
-**aptekarz i weterynarz NIE MAJĄ tej luki** (przepisy o samorządzie są
-częścią tej samej, już śledzonej ustawy "o zawodzie"). Wzorzec nie jest
-więc uniwersalny — zależy od tego, czy ustawodawca połączył przepisy o
-zawodzie i o izbach w jeden akt, czy rozdzielił je na dwa. **Diagnosta
-laboratoryjny pozostaje niesprawdzony pod tym kątem** — biorąc pod uwagę
-niedawną reformę tego zawodu (ustawa o medycynie laboratoryjnej z 2022 r.,
-patrz wcześniejsza poprawka 2026-07-02s), struktura organizacyjna mogła
-się zmienić i wymaga odrębnego sprawdzenia.
-
-### POZOSTAŁE ZAWODY — STATUS PO NAPRAWIE 2026-08-13 (F-54)
-
-✅ NAPRAWIONE — poprzednia lista "11 zawodów do weryfikacji" była
-CZĘŚCIOWO PRZESTARZAŁA: 5 z 11 pozycji miały już odpowiedź WYŻEJ w tej
-samej mapie (tabela 4 zawodów medycznych + wiersz Psycholog), tylko
-lista zbiorcza nie została zaktualizowana po ich rozwiązaniu:
-- **Lekarz/lekarz dentysta** — ✅ ROZWIĄZANE (wiersz wyżej, F-52)
-- **Pielęgniarka/położna** — ✅ ROZWIĄZANE (wiersz wyżej — MA lukę,
-  naprawioną w dr-10, patrz F-53)
-- **Farmaceuta** (aptekarz) — ✅ ROZWIĄZANE (wiersz wyżej — NIE MA
-  luki, przepisy o samorządzie w tej samej ustawie co zawód)
-- **Lekarz weterynarii** — ✅ ROZWIĄZANE (wiersz wyżej — analogicznie
-  do farmaceuty, NIE MA luki)
-- **Psycholog** — ✅ ROZWIĄZANE (wiersz wyżej — brak jeszcze w pełni
-  ukonstytuowanego sądu dyscyplinarnego, stan środowiskowy nie
-  korporacyjno-ustawowy)
-
-**Rzeczywiście POZOSTAJĄ do weryfikacji (6 z 11):** rzecznik
-patentowy (⚠️ CZĘŚCIOWO zweryfikowany, patrz F-55 — data przyjęcia
-aktualnego kodeksu etyki nieustalona), diagnosta laboratoryjny
-(wprost oznaczony wyżej jako niesprawdzony po reformie 2022 r.),
-doradca podatkowy, biegły rewident, architekt, inżynier budownictwa.
-Dla większości prawdopodobne, że dyscyplinarka jest uregulowana w tej
-samej ustawie zawodowej, której numer Dz.U. już potwierdzono w tabeli
-kodeksów etyki powyżej — ale nazwa organu i dokładne artykuły NIE
-zostały zweryfikowane i nie powinny być zgadywane.
-
-**Zasada stosowania:** kodeksy etyki NIE są źródłem powszechnie obowiązującego
-prawa w rozumieniu art. 87 Konstytucji RP, ale mają istotne znaczenie
-dowodowe i dyscyplinarne — naruszenie kodeksu etyki może stanowić podstawę
-odpowiedzialności dyscyplinarnej na mocy odrębnej ustawy zawodowej (np.
-Prawo o adwokaturze art. 80 i nast. dla adwokatów). Przy powoływaniu się na
-konkretny paragraf kodeksu w piśmie procesowym lub opinii — ZAWSZE
-weryfikować aktualność na stronie właściwego samorządu, gdyż kodeksy te są
-nowelizowane częściej i mniej przewidywalnie niż ustawy (przykład z tej
-sesji: zmiana KEA ws. AI z czerwca 2026, kilka tygodni przed audytem).
-
-## Moduł metodyczny bez własnego aktu prawnego
-
-| Moduł | Charakter | Podstawa prawna |
+| Zawód | Bieżące źródło kanoniczne | Status |
 |---|---|---|
-| mod-techniki-mediacyjne-negocjacyjne | ✅ NAPRAWIONE 2026-08-13 (F-51) — ustalono w toku naprawy: moduł CELOWO nie ma własnego aktu — dostarcza wyłącznie warstwę technik/metodyki mediacyjnej (dobra praktyka, nie prawo powszechnie obowiązujące), komplementarną do mod-KPC-arbitraz-mediacja-ADR (ten ma podstawę ustawową: KPC art. 1831-18315) | Brak — świadomie, patrz zasada "NIE DUBLUJ" w nagłówku samego modułu. Aktywnie cytowany jako cel odesłania z DR-03 (`mod-czynny-zal-KK-KKS-samooskarzenie.md`) |
+| adwokat | NRA — Kodeks Etyki Adwokackiej, tekst jednolity uchwała nr 174/2026 Prezydium NRA z 23.06.2026 | ✅ B+/COV |
+| radca prawny | KIRP/KRRP — KERP, tekst jednolity uchwała nr 884/XI/2023 Prezydium KRRP | ✅ B+/COV |
+| notariusz | Krajowa Rada Notarialna — aktualny Kodeks Etyki Zawodowej Notariusza | fresh gate |
+| komornik sądowy | Krajowa Rada Komornicza — aktualny Kodeks Etyki Zawodowej Komornika Sądowego | fresh gate |
+| rzecznik patentowy | właściwy samorząd rzeczników patentowych — aktualne Zasady Etyki | fresh gate |
+| lekarz / lekarz dentysta | Naczelna Izba Lekarska / Krajowy Zjazd Lekarzy | routing DR-10 |
+| pielęgniarka / położna | NIPiP / Krajowy Zjazd | routing DR-10 |
+| farmaceuta | Naczelna Izba Aptekarska | routing DR-10 |
+| lekarz weterynarii | Krajowa Izba Lekarsko-Weterynaryjna | routing DR-10 |
+| diagnosta laboratoryjny | KIDL | routing DR-10 |
+| doradca podatkowy | KIDP | routing DR-06 |
+| biegły rewident | PIBR/KRBR + PANA w zakresie zatwierdzeń/nadzoru | routing DR-15 |
+| architekt / inżynier budownictwa | IARP / PIIB | routing DR-09/15 |
+
+## Zmiany przyszłe
+
+Dz.U. 2026 poz. 846 zasadniczo wchodzi w życie 1.10.2026 i modyfikuje m.in. przepisy dotyczące tajemnicy zawodowej adwokatów i radców prawnych w związku z obowiązkami raportowymi. **Na dzień 2026-08-28 nie jest to bieżące brzmienie tych jednostek.**
+
+## Reguła runtime
+
+1. Mapa wskazuje akt i moduł, nie historię jego korekt.
+2. `MAPA-POKRYCIA.md` wskazuje bieżącą głębokość pokrycia.
+3. Każda konkretna jednostka prawa wymaga fresh gate do ELI/ISAP.
+4. Kodeks etyki wymaga fresh gate do oficjalnego samorządu.
