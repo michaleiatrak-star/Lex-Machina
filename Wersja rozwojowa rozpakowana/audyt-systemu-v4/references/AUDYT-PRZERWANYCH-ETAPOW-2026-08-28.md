@@ -60,9 +60,15 @@ Kontrola potwierdziła realny rozjazd metadanych:
 
 Do zamknięcia pozostaje spójny bump wersji obu skilli wraz z ich changelogami, wykonany po zakończeniu batcha map, aby nie generować wielu pustych wersji pośrednich.
 
+## Korekta rejestru otwartych flag
+
+F-108 została usunięta z `WARN-OTWARTE.md`, ponieważ jej kryterium strukturalne zostało spełnione: 52/52 aktów ma B+/COV. Pozostała praca nie jest kontynuacją F-108.
+
+Utworzono F-138 jako odrębną flagę techniczną końcowej migracji current-state: cleanup pozostałych `MAPA-AKTOW.md`, końcowy bump wersji audytora/routera i realny test spójności. Dzięki temu rejestr otwartych prac nie miesza zamkniętego benchmarku prawnego z długiem technicznym.
+
 ## Testy
 
-Dla sprawdzonego headu GitHub nie zwrócił uruchomionych workflowów Actions. Nie raportować CI jako `PASS`. Końcowy status może być nadany dopiero po realnym wykonaniu testów lub równoważnej reprodukcji.
+Dla sprawdzonego headu GitHub nie zwrócił uruchomionych workflowów Actions. Nie raportować CI jako `PASS`. Próba pobrania repozytorium do lokalnego środowiska wykonawczego nie powiodła się z powodu braku rozwiązywania hosta GitHub w tym środowisku; nie traktować tego jako wyniku testu repozytorium.
 
 ## Zasada dalszej pracy
 
