@@ -1,90 +1,98 @@
 # DR-02 — Lokalna Mapa Aktów Prawnych
 
-## Prawo Cywilne, Rodzinne i Gospodarcze
+## Prawo cywilne, rodzinne i gospodarcze
 
-| Akt prawny | Dz.U. (t.j.) | Moduł | Status |
+Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł**. Historia napraw, poprzednie metryki, zamknięte flagi i opisy sesji audytowych pozostają poza runtime.
+
+### Kodeks cywilny i KPC
+
+**KC:** Dz.U. 2026 poz. 795 t.j. ze zm.  
+**KPC:** Dz.U. 2026 poz. 468 t.j. ze zm.
+
+| Zakres | Moduł / routing | Status runtime |
+|---|---|---|
+| KC — indeks current-state całego kodeksu | `mod-KC-current-state-COV.md` | 🟢 B+/COV |
+| KC — zobowiązania / odpowiedzialność | `mod-KC-cywilne-zobowiazania-odpowiedzialnosc` | ✅ aktywny; fresh gate |
+| KC — konsumenckie | `mod-KC-konsumenckie` | ✅ aktywny; fresh gate |
+| KC — spadki, część główna | `mod-KC-spadki` | ✅ aktywny |
+| KC — zachowek / dział / rozrządzenia | `mod-KC-spadki-zachowek-dzial-rozrzadzenia` | ✅ aktywny |
+| KC — długi spadkowe / umowy / transgraniczne | `mod-KC-spadki-dlugi-umowy-transgraniczne` | ✅ aktywny; fresh gate UE |
+| KC — ubezpieczenia | `mod-KC-ubezpieczenia` | ✅ aktywny |
+| KC — kredyty frankowe / abuzywność | `mod-KC-kredyty-frankowe` | ✅ aktywny; fresh gate |
+| Rzeczy znalezione / zasiedzenie | `mod-rzeczy-znalezione-zasiedzenie` | ✅ aktywny |
+| Odpowiedzialność za zwierzę / droga rowerowa | `mod-pies-droga-rowerowa-odpowiedzialnosc.md` | ✅ aktywny; fresh gate |
+| KPC — indeks current-state całego kodeksu | `mod-KPC-current-state-COV.md` | 🟢 B+/COV |
+| KPC — egzekucja / windykacja | `mod-KPC-egzekucja-windykacja` | ✅ aktywny |
+| KPC — prawomocność / granice apelacji | `mod-KPC-prawomocnosc-granice-apelacji` | ✅ aktywny |
+| KPC — nieproces, część ogólna | `mod-KPC-nieproces-czesc-ogolna` | ✅ aktywny |
+| KPC — uzupełnienie pokrycia | `mod-KPC-uzupelnienie-pokrycia-2026` | 🟡 B+ |
+| Pełnomocnicy / aplikanci / skład sądu | `mod-liczba-pelnomocnikow-strona-samodzielna.md` + `mod-sklad-sadu-liczba-sedziow.md` | ✅ aktywny; fresh gate |
+
+### Rodzina i piecza
+
+| Akt / zakres | Bieżąca podstawa | Moduł / routing | Status runtime |
 |---|---|---|---|
-| Ustawa o przeciwdziałaniu nadmiernym opóźnieniom w transakcjach handlowych | Dz.U. 2023 poz. 1790 t.j.; odczyt ELI 2026-08-27, pełna historia zmian niepotwierdzona | mod-transakcje-handlowe-opoznienia | B — rdzeń cywilny; administracyjne/historyczne częściowo, szczegóły w MAPA-POKRYCIA.md |
-| Kodeks cywilny — zobowiązania, roszczenia + ⭐ ANEKS E (wywłaszczenie, dodany 2026-08-05) + przełomowy wyrok TK P 10/16 z 2.12.2025 ws. zasiedzenia służebności przesyłu (dodany do ANEKSU D, 2026-08-05) | Dz.U. 2025 poz. 1071 ze zm. (+2025.1508, +2026.184, +2026.795 — VER 2026-07-02) — wyrok TK: sprawdź publikację w Dz.U. TK na trybunal.gov.pl | mod-KC-cywilne-zobowiazania-odpowiedzialnosc | ✅ OK, ROZBUDOWANY 2026-08-05 |
-| Ustawa o ochronie konkurencji i konsumentów (UOKiK) — monopole, koncentracje | **Dz.U. 2025 poz. 1714 t.j.** — RZĄD 1 ELI, VER 2026-08-28 | mod-ustawa-UOKIK-antymonopolowe | ✅ METRYKA ZWERYFIKOWANA 2026-08-28 |
-| Monopole państwowe — art. 216 ust. 3 Konstytucji, ustawa o grach hazardowych, Prawo pocztowe + KPC art. 165 §2 | Konstytucja RP + **gry hazardowe: Dz.U. 2025 poz. 595 t.j. ze zm. 2026 poz. 176; nowelizacja Dz.U. 2026 poz. 1040 wchodzi zasadniczo 1.09.2026, część 1.01.2027** + **Prawo pocztowe: Dz.U. 2026 poz. 558 t.j.** + **KPC: Dz.U. 2026 poz. 468 t.j.; art. 165 §2 VER ELI 2026-08-28** | mod-ustawa-monopole-panstwowe | ✅ METRYKI I ART. 165 §2 ZWERYFIKOWANE; alert przyszłej zmiany hazardowej zachowany |
-| KSH — wrogie przejęcie, techniki obrony (strategia, nie procedura) | Dz.U. — ten sam KSH co mod-KSH-spolki-handlowe, inny aspekt (praktyka, nie tylko przepisy) | mod-KSH-wrogie-przejecie-obrona-bialy-rycerz | ✅ NOWY 2026-07-18, odpowiedź na pytanie użytkownika |
-| Ustawa o rzeczach znalezionych (20.02.2015) + KC art. 172-176 (zasiedzenie) | **Dz.U. 2023 poz. 501 t.j. ze zm.** + KC **Dz.U. 2026 poz. 795 t.j.** — RZĄD 1 ELI VER 2026-08-28 | mod-rzeczy-znalezione-zasiedzenie | ✅ METRYKA ZWERYFIKOWANA |
-| Kodeks cywilny — konsumenckie | Dz.U. 2025 poz. 1071 ze zm. (⚠️ 2025.1508 dot. oświadczenia o charakterze zawodowym umowy — art. 385⁵/556⁴ — sprawdź czy uwzględnione w module) | mod-KC-konsumenckie | ⚠️ DO SPRAWDZENIA (nowelizacja 2025.1508) |
-| Kodeks cywilny — Księga IV Spadki (art. 922-1088, w tym zapis windykacyjny, wykonawca testamentu, wydziedziczenie, odpowiedzialność za długi spadkowe, dziedziczenie przez gminę/Skarb Państwa art. 935) + Rozporządzenie UE 650/2012 (spadki transgraniczne, ⚠️ punkt startowy) | Dz.U. 2025 poz. 1071 ze zm. + Rozp. UE 650/2012 | mod-KC-spadki (v2.0) | ✅ ROZBUDOWANE 2026-07-19, odpowiedź na pytanie o pełne pokrycie prawa spadkowego + brak spadkobierców |
-| KC Księga IV — zachowek (991-1011), dział spadku (1035-1046 KC + 680-689 KPC), zapis zwykły i windykacyjny (968-981¹⁶), polecenie (982-985), wykonawca testamentu (986-990), wydziedziczenie (1008-1010), niegodność (928-930) | ten sam akt co wiersz wyżej | mod-KC-spadki-zachowek-dzial-rozrzadzenia | ⭐ WYDZIELONY 2026-08-21 (ZASADA 13 / F-105 — plik macierzysty miał 1036 l.); treść verbatim, 0 linii utraconych |
-| KC Księga IV — odpowiedzialność za długi spadkowe (1030-1034³), umowy dotyczące spadku i zrzeczenie (1047-1057), dziedziczenie przez gminę/Skarb Państwa (935), spadki transgraniczne i EPS (rozp. UE 650/2012), gospodarstwa rolne (Tytuł X), spis inwentarza (637-641 KPC) | ten sam akt co wiersz wyżej | mod-KC-spadki-dlugi-umowy-transgraniczne | ⭐ WYDZIELONY 2026-08-21 (ZASADA 13 / F-105); treść verbatim, 0 linii utraconych |
-| Kodeks cywilny — ubezpieczenia (art. 805–834 KC) | Dz.U. 2026 poz. 795 t.j. — RZĄD 1, obwieszczenie 27.05.2026 | mod-KC-ubezpieczenia | ✅ ZSYNCHRONIZOWANE 2026-08-27 — usunięto błędne przypisanie Dz.U. 2026 poz. 783 (to odrębna ustawa UFG/PBUK) |
-| Ustawa o ubezpieczeniach obowiązkowych, UFG i PBUK | Dz.U. 2026 poz. 783 t.j. — RZĄD 1, stan prawny 27.05.2026 | mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK | ✅ NOWY F-108/41, poziom B; mapa 10 rozdziałów |
-| KP art. 94³ — mobbing, dyskryminacja | Dz.U. 2025 poz. 277 ze zm. | mod-KP-art943-mobbing-dyskryminacja | ✅ OK |
-| KPC — egzekucja i windykacja | Dz.U. 2026 poz. 468 ze zm. | mod-KPC-egzekucja-windykacja | ✅ OK |
-| KPC — prawomocność orzeczeń (363-366) i granice apelacji (378, 380-386) | Dz.U. 2026 poz. 468 t.j. — ten sam akt co wiersz wyżej | mod-KPC-prawomocnosc-granice-apelacji | ✅ NOWY 2026-08-14, naprawa F-65 (krytyczne luki wg raportu KPC — engine appellate-v8 operacyjnie korzystał z tych instytucji bez podstawy merytorycznej) |
-| KPC — KSIĘGA II, POSTĘPOWANIE NIEPROCESOWE: część ogólna (Tytuł I, art. 506-525) + mapa nawigacyjna Tytułu II | Dz.U. 2026 poz. 468 t.j. — ten sam akt co wiersze wyżej. Treść przepisów potwierdzona w źródłach Rzędu 2 (lexlege.pl, arslege.pl, e-prawnik.pl, next-kp.pl, standardyprawa.pl — 5 niezależnych, wzajemnie zgodnych), BEZ bezpośredniego odczytu ISAP — w module znacznik [ZALECANA WERYFIKACJA ISAP] | mod-KPC-nieproces-czesc-ogolna | NOWY 2026-08-14d, naprawa F-65 cz. II — domknięcie luki STRUKTURALNEJ (cała Księga II bez modułu, 0/6 wg raportu pokrycia). UWAGA: v1.0.0 obejmuje WYŁĄCZNIE część ogólną; sprawy spadkowe (680-691), rzeczowe, wieczystoksięgowe, ubezwłasnowolnienie (544-560(12)) i depozyt sądowy (692-693(17)) NADAL NIEPOKRYTE |
-| Kodeks rodzinny i opiekuńczy | Dz.U. 2026 poz. 236 t.j. — VER 2026-07-02: nadal aktualne — ROZBUDOWANE 2026-07-19: separacja (art. 61¹-61⁶), ustrój majątkowy małżeński/intercyza (art. 31-54), ustalenie ojcostwa (art. 62, 72-86), eksmisja małżonka (art. 58 §2-4), obowiązek alimentacyjny szerszego kręgu (art. 128-144¹), surogacja, konkubinat; ROZBUDOWANE 2026-08-15 (F-73, ZAMKNIĘTA W CAŁOŚCI): pokrewieństwo/powinowactwo — przepisy ogólne (art. 617-618), stosunki rodzice-dzieci — przepisy ogólne (art. 87-91), macierzyństwo — ustalenie i zaprzeczenie (art. 619, 6110-6116) | mod-KRO-rodzinne | ✅ OK |
-| KPC — mediacja rodzinna (art. 436, 445², 183¹–183¹⁵) + art. 233 §1 (ocena dowodów) | Dz.U. 2026 poz. 468 t.j. | mod-KRO-rodzinne (sekcje MEDIACJA + ŚWIADKOWIE) | ✅ NOWY 2026-07-02 |
-| Ustawa o opiniodawczych zespołach sądowych specjalistów (OZSS) | t.j. Dz.U. 2018 poz. 708 ✅ VER 2026-07-04 (audyt-DR02): potwierdzone niezależnie (BIP SO Gdańsk; regulacja wykonawcza MS z 2024 nadal cytuje 2018.708 jako podstawę; ustawa o zawodzie psychologa z 2026 cytuje ten sam akt bez nowszego numeru) — nadal aktualne, brak nowszego t.j. | mod-KRO-rodzinne (sekcja OZSS — ROZSZERZONE) | ✅ OK (nowo zweryfikowane) |
-| Kodeks spółek handlowych | Dz.U. 2024 poz. 18 t.j. — VER 2026-07-15: nadal aktualne (+2026.176 — dematerializacja akcji/rejestr akcjonariuszy, TREŚĆ DODANA do mod-KSH 2026-07-15; +2026.187 — KOREKTA: zmienia art. 88 KSH, NIE art. 130 jak wcześniej błędnie zapisano — dodaje zawód psychologa do katalogu zawodów w spółce partnerskiej, TREŚĆ DODANA do mod-KSH 2026-07-15; +2026.644 — WARN-24 zamknięty 2026-07-07: ustawa ESAP dotyka KSH tylko incydentalnie, związek nie potwierdzony źródłowo w sesji 2026-07-15, patrz F-5) | mod-KSH-spolki-handlowe | ✅ F-6 ZAMKNIĘTA 2026-07-15 — art. 88 (2026.187) i dematerializacja (2026.176) uwzględnione w treści modułu. §ESAP-KSH z 2026.644 pozostaje nierozstrzygnięty — patrz F-5 (osobna flaga, nieblokująca) |
-| Kodeks spółek handlowych — uzupełnienie pokrycia: Tytuł I, spółka partnerska/S.K.A., pozostałe rozdziały sp. z o.o., PSA, S.A., operacje transgraniczne i przepisy karne | Dz.U. 2024 poz. 18 t.j. — ten sam akt bazowy | mod-KSH-uzupelnienie-pokrycia-2026 | 🟡 B — pokrycie operacyjne/nawigacyjne; nie oznacza pełnego komentarza artykuł-po-artykule |
-| KSH — Tytuł III, Dział I, Rozdz. 3, organy sp. z o.o. (art. 201-254): zarząd, nadzór, zgromadzenie wspólników | Dz.U. 2024 poz. 18 t.j. — ten sam akt co wiersz wyżej | mod-KSH-organy-spolki-zoo | ✅ NOWY 2026-08-14, naprawa F-68 (rdzeń) — najwyższy priorytet z raportu zewnętrznego, najpopularniejsza forma spółki w praktyce |
-| KSH — Tytuł II, spółki osobowe (art. 22-124: spółka jawna 22-66, spółka komandytowa 102-124) i rada nadzorcza sp. z o.o. (art. 212-226): odpowiedzialność solidarno-subsydiarna, prowadzenie spraw vs reprezentacja, zakaz konkurencji, rozwiązanie i wystąpienie wspólnika, suma komandytowa, komandytariusz wyłącznie jako pełnomocnik, próg obligatoryjności rady nadzorczej, zakaz wiążących poleceń zarządowi | Dz.U. 2024 poz. 18 t.j. — ten sam akt co wiersz wyżej | mod-KSH-spolki-osobowe-rada-nadzorcza | ✅ NOWY 2026-08-20, naprawa F-68 W CAŁOŚCI (pierwotny zakres flagi: 22-66, 102-124, 212-226 — wszystko pokryte). Spółka partnerska (86-101) i S.K.A. (125-150) NIGDY nie były w zakresie F-68, pozostają nieopracowane jako osobna, nieotwarta luka |
-| Kodeks rodzinny i opiekuńczy — zawarcie małżeństwa, przeszkody, bigamia (art. 1-22 KRO) + KK art. 206 (bigamia karna) + Prawo prywatne międzynarodowe (małżeństwo zagraniczne) + TSUE C-713/23 (25.11.2025)/NSA (20.03.2026) — małżeństwo jednopłciowe | Dz.U. 2026 poz. 236 t.j. + KK 2025.383 t.j. + PPM **Dz.U. 2023 poz. 503 t.j.** + orzecznictwo TSUE/NSA (nie ustawa) | mod-KRO-zawarcie-malzenstwa-bigamia-transgraniczne | ✅ NOWY 2026-07-19, odpowiedź na pytanie użytkownika, temat ŻYWY politycznie — re-weryfikuj status TK |
-| KRO — przysposobienie krajowe (art. 114-127) + Konwencja haska 1993 (przysposobienie międzynarodowe) | Dz.U. 2026 poz. 236 t.j. + Konwencja haska Dz.U. 2000 nr 39 poz. 448 | mod-KRO-przysposobienie-adopcja-miedzynarodowa | ✅ NADROBIONA ZALEGŁOŚĆ 2026-07-19 (moduł istniał, brak wpisu w mapie) |
-| Ustawa o wspieraniu rodziny i systemie pieczy zastępczej (9.06.2011) | **Dz.U. 2026 poz. 980 t.j.** — RZĄD 1 ELI, VER 2026-08-28 | mod-piecza-zastepcza-rodzina-zastepcza | ✅ NAJNOWSZY T.J. ZWERYFIKOWANY |
-| KC art. 13/16 (ubezwłasnowolnienie) + KRO art. 145-184 (opieka i kuratela) + KPC art. 544-560 | Dz.U. 2026 poz. 795 t.j. (KC) + Dz.U. 2026 poz. 236 t.j. (KRO) + Dz.U. 2026 poz. 468 t.j. (KPC) | mod-ubezwlasnowolnienie-opieka-kuratela | ✅ NOWY 2026-07-19, odpowiedź na pytanie użytkownika o sytuację osoby bez rodziny |
-| Kodeks rodzinny i opiekuńczy — Tytuł III, opieka i kuratela w pełnej strukturze (art. 145-184: Dział I opieka nad małoletnim, Dział II opieka nad ubezwłasnowolnionym całkowicie, Dział III siedem rodzajów kurateli) | Dz.U. 2026 poz. 236 t.j. — zgodny z mod-KRO-rodzinne.md | mod-KRO-opieka-i-kuratela | ✅ NAPRAWIONE 2026-08-13 (rejestracja) + ✅ UZUPEŁNIONE 2026-08-13b (treść Działu I rozdz. III-IV i Działu II, wcześniej "punkt startowy" — patrz AUDIT-JOURNAL) |
-| Prawo upadłościowe | ✅ SKORYGOWANE 2026-08-21: Dz.U. 2026 poz. 913 t.j. (obwieszczenie 12.06.2026, potwierdzone eli.gov.pl + przepisy.gofin.pl historia wersji) — poprzedni numer 2025.614 w tym wierszu był NIEAKTUALNY (moduł sam już wskazywał 2026.913 w nagłówku, ale kilka wewnętrznych sekcji dopisanych 2026-08-21 przy okazji F-86 omyłkowo cytowało starszy numer ze źródeł wtórnych — naprawione tam i tu) | mod-PrUpad-upadlosc-restrukturyzacja | ✅ ZSYNCHRONIZOWANE 2026-08-21 |
-| Prawo upadłościowe — Tytuł Va układ w upadłości (art. 266a-266f), Tytuł VII Dział I likwidacja masy (art. 306-315), Tytuł IX zakończenie i umorzenie postępowania (art. 361-372) | Dz.U. 2026 poz. 913 t.j. (ten sam akt co wiersz wyżej) | mod-PrUpad-uklad-likwidacja-zakonczenie | ⭐ WYDZIELONY 2026-08-21 z `mod-PrUpad-upadlosc-restrukturyzacja` — podział wyprzedzający wg ZASADY 13 |
-| Prawo upadłościowe — dalsza likwidacja masy (art. 316–334), postępowanie międzynarodowe (art. 378–417), odrębne postępowania po śmierci dłużnika i wobec deweloperów (art. 418–425s) | Dz.U. 2026 poz. 913 t.j. | mod-PrUpad-likwidacja-miedzynarodowe-szczegolne | ✅ NOWY 2026-08-26 — częściowe uzupełnienie F-86; operacyjna mapa zakresów, każda jednostka wymaga świeżego HARD GATE przy powołaniu |
-| Prawo upadłościowe — postępowania odrębne od art. 426: banki/SKOK (426–441), banki hipoteczne (442–450), instytucje transgraniczne (451–470), ubezpieczyciele/reasekuratorzy (471–482), emitenci obligacji (483–491), upadłość konsumencka (491^1–491^24), układ konsumencki (491^25–491^38) | Dz.U. 2026 poz. 913 t.j. — RZĄD 1 ELI, stan t.j. 10.06.2026 | mod-PrUpad-postepowania-odrebne-426-491-38 | ✅ F-86 DOMKNIĘTA 2026-08-27 — poziom B+, odrębne legitymacje/organy/masy/terminy |
-| Prawo upadłościowe + Prawo restrukturyzacyjne — uzupełnienie pozostałych luk: zakres podmiotowy, sąd/postępowanie, orzeczenie o upadłości, dalsze postępowania szczególne od art. 426; PrRestr przepisy ogólne, organy, przepisy wspólne, cztery tryby, międzynarodowe i odrębne | PrUp Dz.U. 2026 poz. 913 t.j. + PrRestr Dz.U. 2026 poz. 533 t.j. — RZĄD 1 ELI | mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026 | 🟡 B — zamknięcie luk zerowych/F-86 na poziomie operacyjnym |
-| Ustawa o licencji doradcy restrukturyzacyjnego (zawód regulowany, BEZ samorządu) + Prawo restrukturyzacyjne (osoba) | Dz.U. 2022 poz. 1007 t.j. ✅ VER 2026-07-04 (audyt-DR02 — było "sprawdź nowszy t.j."): potwierdzone jako nadal aktualne, cytowane jako podstawa w rozporządzeniu MS z 25.06.2024 (Dz.U. 2024 poz. 950); brak nowszego t.j. w żadnym sprawdzonym źródle + Pr. restrukturyzacyjne Dz.U. 2026 poz. 533 t.j. (nowy, koryguje 2024/1428 w mod-PrUpad) + nowelizacja Dz.U. 2025 poz. 1085 (w życie 23.08.2025) | mod-ustawa-doradca-restrukturyzacyjny-zawod | ✅ OK (nowo zweryfikowane) |
-| Ustawa z 16.07.2020 o udzielaniu pomocy publicznej w celu ratowania lub restrukturyzacji przedsiębiorców (5 rozdziałów, art. 1-53): pomoc na ratowanie [Rozdz. 2, pożyczka + oprocentowanie], tymczasowe wsparcie restrukturyzacyjne [Rozdz. 3, wyłącznie MŚP], pomoc na restrukturyzację [Rozdz. 4, formy + limit wynagrodzeń 400%, art. 38 odesłanie do art. 145 PrRestr]; art. 50 uchyla dawny art. 139a PrRestr | **Dz.U. 2026 poz. 113 t.j.** — RZĄD 1 ELI, VER 2026-08-28 | mod-ustawa-pomoc-ratowanie-restrukturyzacja-przedsiebiorcow | ✅ RZĄD 1 ZWERYFIKOWANE 2026-08-28, naprawa F-98 — akt CAŁKOWICIE nieobecny w systemie mimo bezpośredniego związku z Działem V PrRestr, wykryty ubocznie przy pracy nad tym Działem |
-| Prawo restrukturyzacyjne — Dział VII, Układ częściowy (art. 180-188): kryteria wyodrębnienia wierzycieli [trójwarunkowy test + zakaz manipulacji], katalog przykładowy wierzytelności, zakaz pokrzywdzenia wierzycieli nieobjętych, próg głosowania 2/3 [bardziej restrykcyjny niż art. 119], art. 166 ust. 1 NIE stosuje się, zażalenie wierzyciela nieobjętego ograniczone do zarzutów art. 180/183 | Dz.U. 2026 poz. 533 t.j. (ten sam akt co wiersz wyżej) | mod-PrRestr-dzial-VII-uklad-czesciowy | ✅ NOWY 2026-08-20, naprawa F-87 — ostatni priorytet z pierwotnego zakresu flagi, F-87 W CAŁOŚCI zamknięty po tym module |
-| Prawo restrukturyzacyjne — Dział VI, Układ (art. 150-179): przepisy ogólne, propozycje układowe, głosowanie/zatwierdzenie (w tym art. 119 — próg 50%/2/3, test zaspokojenia z nowelizacji 2025.1085), skutki układu | Dz.U. 2026 poz. 533 t.j. + nowelizacja Dz.U. 2025 poz. 1085 (w życie 23.08.2025, ten sam akt co wiersz wyżej) | mod-PrRestr-dzial-VI-uklad | ✅ NOWY 2026-08-14, naprawa F-69 (rdzeń — dotąd cała ustawa PrRestr istniała wyłącznie jako tabela porównawcza BEZ ani jednego numeru artykułu) |
-| Prawo restrukturyzacyjne — Dział III, Nadzorca i zarządca (art. 23-64): kwalifikator organu wg trybu postępowania, wymogi licencji, odpowiedzialność cywilna + OC, nadzorca układu [Rozdz. 2, wynagrodzenie umowne + limit mikroprzedsiębiorcy], nadzorca sądowy [Rozdz. 3, art. 39 sankcja nieważności, wzór wynagrodzenia 2x-44x podstawy], zarządca [Rozdz. 4, pełne przejęcie zarządu masą sanacyjną] | Dz.U. 2026 poz. 533 t.j. (ten sam akt co wiersz wyżej) | mod-PrRestr-dzial-III-nadzorca-zarzadca | ✅ NOWY 2026-08-19, naprawa F-87 priorytet 1 — ⚠️ Oddział 2 Rozdz. 4 (wynagrodzenie zarządcy) świadomie pozostawiony jako luka, patrz moduł sekcja "POZOSTAJE DO POGŁĘBIENIA" |
-| Prawo restrukturyzacyjne — Dział IV, Uczestnicy postępowania i Dział V (art. 65-149, ⚠️ rozbieżność numeracyjna górnej granicy Oddziału 2 Rozdz. 3 jawnie odnotowana w module): ⭐ brak instytucji zgłoszenia wierzytelności (spis z urzędu), art. 65 definicje + sankcja utraty uprawnień, art. 90-94 sprzeciw 14-dniowy, art. 102 spis z klauzulą wykonalności jako tytuł wykonawczy, art. 104-114 zgromadzenie wierzycieli [quorum 1/5, próg 2/3 przyjęcia układu], art. 121-133 rada wierzycieli [skład 5+2, art. 128 kompetencje, art. 133 zmiana nadzorcy/zarządcy] | Dz.U. 2026 poz. 533 t.j. (ten sam akt co wiersz wyżej) | mod-PrRestr-dzial-IV-uczestnicy-wierzyciele | ✅ NOWY 2026-08-19, naprawa F-87 priorytet 2 — ✅ Dział V wydzielony do `mod-PrRestr-dzial-V-pomoc-publiczna`; brak dawnej luki treściowej |
-| Prawo restrukturyzacyjne — Dział V, Pomoc publiczna (art. 139a-149; art. 139a uchylony) | **Dz.U. 2026 poz. 533 t.j.**, RZĄD 1 ELI VER 2026-08-28. Art. 140-149 zweryfikowane; art. 144: min. 25%/40%/50%; art. 145: środki strukturalne/behawioralne/otwarcia rynku; art. 149 literalnie odsyła do uchylonego 659/1999, przy czym art. 35 rozporządzenia 2015/1589 nakazuje czytać takie odwołania jako odwołania do 2015/1589 | mod-PrRestr-dzial-V-pomoc-publiczna | ✅ RZĄD 1 ZWERYFIKOWANE 2026-08-28 |
-| Prawo przedsiębiorców | Dz.U. 2025 poz. 1480 t.j.; późniejsze zmiany urzędowe m.in. Dz.U. 2025 poz. 1795, 1826 i Dz.U. 2026 poz. 507 — RZĄD 1 ELI, VER 2026-08-27 | mod-prawo-przedsiebiorcow | ✅ F-108/51 P2 — dedykowany moduł B, pełna mapa rozdziałów |
-| Prawo wekslowe (28.04.1936) + Prawo czekowe (28.04.1936) | Dz.U. 2022 poz. 282 t.j. (wekslowe) + Dz.U. 2016 poz. 462 t.j. (czekowe) ⚠️ zweryfikuj aktualne t.j. | mod-prawo-wekslowe-czekowe | ✅ NOWY 2026-07-19, odpowiedź na audyt pokrycia prawa gospodarczego |
-| Prawo wekslowe (1936) + Prawo czekowe (1936) + Prawo przedsiębiorców Rozdz. 3-5 (kontrola przedsiębiorcy, koncesje/zezwolenia/wpis do rejestru działalności regulowanej) | Dz.U. 2022 poz. 282 t.j. (wekslowe) + Dz.U. 2016 poz. 462 t.j. (czekowe) + Dz.U. 2025 poz. 1480 t.j. (Prawo przedsiębiorców, ta sama pozycja co wyżej, inne rozdziały) | mod-wekslowe-kontrola-przedsiebiorcy-koncesje | ✅ NOWY 2026-07-19, odpowiedź na audyt pokrycia prawa gospodarczego |
-| Ustawa o KRS — rejestr sądowy | Dz.U. 2025 poz. 869 t.j. | mod-ustawa-KRS-rejestr-sadowy | ✅ OK |
-| Ustawa UZNK — nieuczciwa konkurencja | Dz.U. 2026 poz. 85 t.j. | mod-ustawa-UZNK-nieuczciwa-konkurencja | ✅ OK |
-| Ustawa o cudzoziemcach | Dz.U. 2025 poz. 1079 ze zm. | mod-ustawa-cudzoziemcy | ✅ OK |
-| Kodeks postępowania cywilnego — uzupełnienie krytycznych luk audytu: organizacja procesu, orzeczenia 316/350–352, wznowienie, gospodarcze/konsumenckie, ZUS, ograniczenia i szczególne rodzaje egzekucji, nieproces spadkowy/rzeczowy, jurysdykcja | Dz.U. 2026 poz. 468 t.j. — RZĄD 1 ELI | mod-KPC-uzupelnienie-pokrycia-2026 | 🟡 B+ — operacyjne uzupełnienie luk krytycznych |
-| Ustawa o kredycie konsumenckim | ✅ **SKORYGOWANE 2026-08-19 (F-89):** t.j. **Dz.U. 2025 poz. 1362** (obwieszczenie 26.09.2025, obowiązuje od 10.10.2025) — poprzedni zapis "2024.1567 → mod-ustawa-deweloperska" był BŁĘDNY (phantom mapping, wykryty i naprawiony centralnie w ROUTING-MAP 2026-08-04, ale poprawka nie trafiła z powrotem do tej lokalnej mapy) — właściwy moduł to `mod-ustawa-kredyt-konsumencki-SKD`, NIE `mod-ustawa-deweloperska` (ta ostatnia dotyczy zupełnie innego aktu — ochrony nabywcy lokalu, Dz.U. 2024 poz. 695) | mod-ustawa-kredyt-konsumencki-SKD | ✅ ZSYNCHRONIZOWANE 2026-08-19 |
-| Ustawa o fundacjach i stowarzyszeniach | Dz.U. 2023 poz. 549 ze zm. | mod-ustawa-fundacje-stowarzyszenia | ✅ OK |
-| Ustawa o fundacji rodzinnej | Dz.U. 2023 poz. 326 ze zm. Dz.U. 2023 poz. 825 — RZĄD 1 ELI | mod-ustawa-fundacja-rodzinna | ✅ NOWY F-108/52, poziom B; mapa 16 rozdziałów |
-| Ustawa o prawach konsumenta | Dz.U. 2023 poz. 2759 ze zm. | mod-ustawa-prawa-konsumenta | ✅ OK |
-| Ustawa o własności lokali | Dz.U. 2026 poz. 232 t.j. | mod-ustawa-spoldzielnie-wlasnosc-lokali | ✅ OK — moduł zachowuje zakres wspólnot/własności lokali |\n| Prawo spółdzielcze | Dz.U. 2026 poz. 521 t.j. — RZĄD 1 ELI | mod-prawo-spoldzielcze | ✅ F-108/13 P3 — wydzielony moduł B |\n| Ustawa o spółdzielniach mieszkaniowych | Dz.U. 2026 poz. 889 t.j. — RZĄD 1 ELI, stan t.j. 10.06.2026 | mod-ustawa-spoldzielnie-mieszkaniowe | ✅ F-108/34 P3 — wydzielony moduł B+ |
-| Ustawa o timeshare + zastaw rejestrowy | Dz.U. 2011 Nr 230, poz. 1370 (timeshare, publikacja pierwotna; akt obowiązujący) + Dz.U. 2018 poz. 2017 t.j. (zastaw rejestrowy) | mod-ustawa-timeshare-zastaw-rejestrowy | ✅ KOREKTA F-82 2026-08-26: Dz.U. 2018 poz. 513 dotyczy choroby Aujeszkyego, nie timeshare |
-| Kodeks cywilny art. 385¹ (klauzule abuzywne — kredyty frankowe) | ta sama pozycja co główny KC — zweryfikuj t.j. na ISAP | mod-KC-kredyty-frankowe | ✅ WYDZIELONY 2026-06-14 z mod-KC-cywilne-zobowiazania-odpowiedzialnosc (NOTA-4) — DOPISANE 2026-07-30 (sync) |
-| Ustawa o przeciwdziałaniu nieuczciwym praktykom rynkowym (UPNPR) + Ustawa o radiofonii i telewizji art. 16b/18/53 | **UPNPR: Dz.U. 2023 poz. 845 t.j.**; **radiofonia i telewizja: Dz.U. 2022 poz. 1722 t.j. ze zm.** — RZĄD 1 ELI, VER 2026-08-28 | mod-reklama-wobec-nieletnich | ✅ METRYKI ZWERYFIKOWANE; przy art. 16b/18/53 fresh hard gate ze względu na akty zmieniające po t.j. |
-| art. 431 KC (odpowiedzialność za zwierzę, niezależnie od smyczy) + art. 362 KC (przyczynienie się) + Prawo o ruchu drogowym (znak C-13/C-16, pierwszeństwo pieszy/rowerzysta) | ⚠️ zweryfikuj aktualny t.j. KC na ISAP | mod-pies-droga-rowerowa-odpowiedzialnosc.md | ✅ NOWY 2026-08-04 — DOPISANE do mapy 2026-08-05 (sync) |
-| art. 304 KK (lichwa) + art. 388 KC (wyzysk) + art. 36a ustawy o kredycie konsumenckim + Prawo bankowe art. 171 + ustawa o konsumenckiej pożyczce lombardowej + ustawa antylichwiarska | KC Dz.U. 2026 poz. 795 t.j.; KK Dz.U. 2025 poz. 383 ze zm.; **ustawa lombardowa: Dz.U. 2024 poz. 1111 t.j.**; ustawa antylichwiarska Dz.U. 2022 poz. 2339 / zmiany wdrożone — RZĄD 1 ELI VER 2026-08-28 | mod-parabanki-chwilowki-lombardy-lichwa.md | ✅ USUNIĘTO PRZESTARZAŁE OZNACZENIE „PROJEKT” DLA USTAWY LOMBARDOWEJ |
-| KPC Dział V (pełnomocnicy procesowi, art. 87/91/97/117/379/871) + art. 47 §2 (skład sądu z ławnikami w sprawach pracowniczych) + KPK (limit 3 obrońców) + § 32 KEA + Regulamin aplikacji adwokackiej §13 / radcowskiej §6 (upoważnienie aplikanta do zastępstwa) | ⚠️ zweryfikuj aktualny t.j. KPC/KEA/regulaminów na ISAP/NRA/KIRP | mod-liczba-pelnomocnikow-strona-samodzielna.md | ✅ NOWY 2026-08-05, ROZBUDOWANY trzykrotnie tego samego dnia (aplikanci + skład sądu z ławnikami) |
-| KPC art. 47 (skład sądu, pełne zestawienie) + art. 367¹ (apelacja jednoosobowa po reformie) + KPK art. 28-30 (skład sądu karnego, w tym 5 sędziów przy dożywociu) | ⚠️ zweryfikuj aktualny t.j. KPC/KPK na ISAP (aktualny t.j. na dzień weryfikacji: Dz.U. 2026 poz. 468 KPC, Dz.U. 2026 poz. 490 KPK) | mod-sklad-sadu-liczba-sedziow.md | ✅ NOWY 2026-08-07 |
-| ⚡⚡ Ustawa z 29.05.2026 o szczególnych rozwiązaniach ws. spraw kredytów CHF ("ustawa frankowa") | ✅ Dz.U. 2026 poz. 985 (VER 2026-08-07, weszła w życie TEGO DNIA) — ⚠️ zweryfikuj dokładny numer na ISAP | mod-ustawa-frankowa-2026-procedura.md | ✅ NOWY 2026-08-07 |
+| Kodeks rodzinny i opiekuńczy | Dz.U. 2026 poz. 236 t.j. ze zm. | `mod-KRO-rodzinne` | 🟢 B+/COV |
+| KRO — zawarcie małżeństwa / bigamia / transgraniczne | jw. + właściwe prawo międzynarodowe | `mod-KRO-zawarcie-malzenstwa-bigamia-transgraniczne` | ✅ aktywny; fresh gate |
+| KRO — przysposobienie | jw. + Konwencja haska 1993 | `mod-KRO-przysposobienie-adopcja-miedzynarodowa` | ✅ aktywny |
+| KRO — opieka i kuratela | jw. | `mod-KRO-opieka-i-kuratela` | ✅ aktywny |
+| Ubezwłasnowolnienie / opieka / kuratela | KC/KRO/KPC jw. | `mod-ubezwlasnowolnienie-opieka-kuratela` | ✅ aktywny |
+| OZSS | Dz.U. 2018 poz. 708 t.j. ze zm. | `mod-KRO-rodzinne` | ✅ aktywny |
+| Piecza zastępcza | Dz.U. 2026 poz. 980 t.j. ze zm. | `mod-piecza-zastepcza-rodzina-zastepcza` | ✅ aktywny |
 
-> Źródło weryfikacji: Dz.U. 2025 poz. 1071 ze zm. | orzeczenia.ms.gov.pl | sn.pl
-> Aktualizacja: 2026-07-02b (TRYB DZU — KC/KSH: nowelizacje 2025.1508/2026.795/
-> 2026.187/2026.644 dopisane, patrz audyt-systemu-v4/references/mapa_dzu_2026-07-02.md)
->
-> **Sesja katalogowania 2026-07-04:** 4 pozycje uprzednio oznaczone "weryfikuj
-> w ISAP" / "sprawdź nowszy t.j." zostały w pełni zweryfikowane i zamknięte:
-> OZSS (2018.708 — potwierdzone jako nadal aktualne), Kodeks karny art. 233
-> (2025.383 — zsynchronizowane z centralnym wpisem dr-03), doradca
-> restrukturyzacyjny licencja (2022.1007 — potwierdzone jako nadal aktualne).
-| Ustawa o ochronie praw lokatorów, mieszkaniowym zasobie gminy i o zmianie KC — najem zwykły/okazjonalny/instytucjonalny, kaucje, eksmisja, okres ochronny | Dz.U. 2023 poz. 725 t.j. ✅ VER 2026-08-13 (3+ zgodne źródła Rządu 2B) — ⚠️ akt powiązany Dz.U. 2026 poz. 889 (przekształcenia spółdzielcze) niezweryfikowany w pełni co do relacji z t.j. | mod-ustawa-ochrona-praw-lokatorow-najem-eksmisja | ✅ NOWY 2026-08-13, wypełnienie luki strukturalnej (dotąd tylko fragment "dziki lokator" w mod-KC-cywilne) |
-| Ustawa o księgach wieczystych i hipotece | ✅ Dz.U. 2026 poz. 1066 t.j. (obwieszczenie Marszałka Sejmu z 6.03.2025) ze zm. Dz.U. 2025 poz. 1669, 1792, 1793 oraz Dz.U. 2026 poz. 119 — VER 2026-08-14 (F-77): isap.sejm.gov.pl, sip.lex.pl, lexlege.pl, prawo.pl (4 zgodne źródła) | mod-KW-ksiega-wieczysta-zakup-nieruchomosci | ✅ ZWERYFIKOWANE 2026-08-14 — F-77 domknięta dla tego wiersza |
-| Ustawa o kredycie konsumenckim (SKD — sankcja kredytu darmowego) | ✅ Dz.U. 2025 poz. 1362 t.j. (obwieszczenie Marszałka Sejmu z 26.09.2025) — VER 2026-08-14 (F-77): ktzr.pl (cytuje t.j. wprost, marzec 2026), isap.sejm.gov.pl (WDU...). ⭐ Najpilniejsza pozycja F-77 — temat aktywny w pisma-proste-v2 (SKD). Uwaga OBSERWACYJNA (nie flaga błędu): projekt NOWEJ ustawy o kredycie konsumenckim (UC82, implementacja dyrektywy CCD II 2023/2225) w toku legislacyjnym na RCL, planowane wejście w życie 20.11.2026 — monitorować | mod-ustawa-kredyt-konsumencki-SKD | ✅ ZWERYFIKOWANE 2026-08-14 — F-77 domknięta dla tego wiersza |
-> Kodeks cywilny (2025.1071) i KSH (2024.18) potwierdzone jako aktualne
-> podstawowe t.j. (flagi "SPRAWDŹ czy nowelizacja X uwzględniona w module"
-> to kwestie pokrycia treści modułu, nie numeru Dz.U. — pozostają otwarte,
-> poza zakresem tej sesji). 0 pozycji z otwartym statusem "weryfikuj numer".
->
-> **Naprawa 2026-08-13 (ZASADA 7):** dopisano wiersz dla
-> `mod-KRO-opieka-i-kuratela` — moduł fizycznie istniał od 2026-08-12,
-> ale był nieobecny w tej mapie i w checkliście `SKILL.md` (wykryte w
-> audycie zewnętrznym). Pełny opis naprawy: `AUDIT-JOURNAL.md`, wpis
-> AUDYT-2026-08-13-DR02-ORPHAN. Liczba pozycji w mapie 38→39, licznik
-> modułów SKILL.md 38→39.
+### Spółki, przedsiębiorcy, restrukturyzacja i rejestry
+
+| Akt / zakres | Bieżąca podstawa | Moduł / routing | Status runtime |
+|---|---|---|---|
+| Kodeks spółek handlowych | Dz.U. 2024 poz. 18 t.j. ze zm. | `mod-KSH-spolki-handlowe` | ✅ aktywny; fresh gate |
+| KSH — wrogie przejęcie / obrona | jw. | `mod-KSH-wrogie-przejecie-obrona-bialy-rycerz` | ✅ aktywny |
+| KSH — uzupełnienie pokrycia | jw. | `mod-KSH-uzupelnienie-pokrycia-2026` | 🟡 B |
+| KSH — organy sp. z o.o. | jw. | `mod-KSH-organy-spolki-zoo` | ✅ aktywny |
+| KSH — spółki osobowe / rada nadzorcza | jw. | `mod-KSH-spolki-osobowe-rada-nadzorcza` | ✅ aktywny |
+| Prawo przedsiębiorców — current-state | Dz.U. 2025 poz. 1480 t.j. ze zm. | `mod-Prawo-przedsiebiorcow-current-state-COV.md` + `mod-prawo-przedsiebiorcow` | 🟢 B+/COV |
+| Prawo przedsiębiorców — kontrola / koncesje + weksle | jw. + akty wekslowe | `mod-wekslowe-kontrola-przedsiebiorcy-koncesje` | ✅ aktywny |
+| KRS | Dz.U. 2025 poz. 869 t.j. ze zm. | `mod-ustawa-KRS-rejestr-sadowy` | 🟢 B+/COV |
+| UZNK | Dz.U. 2026 poz. 85 t.j. ze zm. | `mod-ustawa-UZNK-nieuczciwa-konkurencja` | ✅ aktywny |
+| Prawo upadłościowe | Dz.U. 2026 poz. 913 t.j. ze zm. | `mod-PrUpad-upadlosc-restrukturyzacja` + rodzina PrUp | ✅ aktywny; fresh gate |
+| PrUp — układ / likwidacja / zakończenie | jw. | `mod-PrUpad-uklad-likwidacja-zakonczenie` | ✅ aktywny |
+| PrUp — likwidacja / międzynarodowe / szczególne | jw. | `mod-PrUpad-likwidacja-miedzynarodowe-szczegolne` | ✅ aktywny |
+| PrUp — postępowania odrębne | jw. | `mod-PrUpad-postepowania-odrebne-426-491-38` | ✅ aktywny |
+| PrUp + PrRestr — uzupełnienie | PrUp jw. + PrRestr Dz.U. 2026 poz. 533 t.j. ze zm. | `mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026` | 🟡 B |
+| Prawo restrukturyzacyjne — układ | Dz.U. 2026 poz. 533 t.j. ze zm. | `mod-PrRestr-dzial-VI-uklad` | ✅ aktywny |
+| PrRestr — układ częściowy | jw. | `mod-PrRestr-dzial-VII-uklad-czesciowy` | ✅ aktywny |
+| PrRestr — nadzorca / zarządca | jw. | `mod-PrRestr-dzial-III-nadzorca-zarzadca` | ✅ aktywny |
+| PrRestr — uczestnicy / wierzyciele | jw. | `mod-PrRestr-dzial-IV-uczestnicy-wierzyciele` | ✅ aktywny |
+| PrRestr — pomoc publiczna | jw. | `mod-PrRestr-dzial-V-pomoc-publiczna` | ✅ aktywny |
+| Pomoc publiczna na ratowanie / restrukturyzację | Dz.U. 2026 poz. 113 t.j. ze zm. | `mod-ustawa-pomoc-ratowanie-restrukturyzacja-przedsiebiorcow` | ✅ aktywny |
+| Doradca restrukturyzacyjny | Dz.U. 2022 poz. 1007 t.j. ze zm. | `mod-ustawa-doradca-restrukturyzacyjny-zawod` | ✅ aktywny |
+
+### Konsument, nieruchomości, spółdzielczość i instrumenty
+
+| Akt / zakres | Bieżąca podstawa | Moduł / routing | Status runtime |
+|---|---|---|---|
+| Prawa konsumenta | Dz.U. 2024 poz. 1796 t.j. ze zm. | `mod-ustawa-prawa-konsumenta` | 🟢 B+/COV |
+| UOKiK | Dz.U. 2025 poz. 1714 t.j. ze zm. | `mod-ustawa-UOKIK-antymonopolowe` | 🟢 B+/COV |
+| Kredyt konsumencki / SKD | Dz.U. 2025 poz. 1362 t.j. ze zm. | `mod-ustawa-kredyt-konsumencki-SKD` | ✅ aktywny; fresh gate |
+| Parabanki / lombardy / lichwa | KC/KK + ustawa lombardowa Dz.U. 2024 poz. 1111 t.j. ze zm. + akty szczególne | `mod-parabanki-chwilowki-lombardy-lichwa.md` | ✅ aktywny; fresh gate |
+| Reklama wobec nieletnich | UPNPR Dz.U. 2023 poz. 845 t.j. + ustawa o radiofonii i telewizji Dz.U. 2022 poz. 1722 t.j. ze zm. | `mod-reklama-wobec-nieletnich` | ✅ aktywny; fresh gate |
+| Ochrona praw lokatorów | Dz.U. 2023 poz. 725 t.j. ze zm. | `mod-ustawa-ochrona-praw-lokatorow-najem-eksmisja` | 🟢 B+/COV |
+| Własność lokali | Dz.U. 2026 poz. 232 t.j. ze zm. | `mod-ustawa-spoldzielnie-wlasnosc-lokali` | 🟢 B+/COV |
+| Księgi wieczyste i hipoteka | Dz.U. 2026 poz. 1066 t.j. ze zm. | `mod-KW-ksiega-wieczysta-zakup-nieruchomosci` | 🟢 B+/COV |
+| Prawo spółdzielcze | Dz.U. 2026 poz. 521 t.j. ze zm. | `mod-prawo-spoldzielcze` | 🟢 B+/COV |
+| Spółdzielnie mieszkaniowe | Dz.U. 2026 poz. 889 t.j. ze zm. | `mod-ustawa-spoldzielnie-mieszkaniowe` | 🟢 B+/COV |
+| Fundacje / stowarzyszenia | właściwe aktualne ustawy | `mod-ustawa-fundacje-stowarzyszenia` | 🟢 B+/COV; fresh gate |
+| Fundacja rodzinna | Dz.U. 2023 poz. 326 ze zm. | `mod-ustawa-fundacja-rodzinna` | 🟢 B+/COV |
+| Prawo wekslowe + Prawo czekowe | Dz.U. 2022 poz. 282 t.j. + Dz.U. 2016 poz. 462 t.j. | `mod-prawo-wekslowe-czekowe` | 🟢 B+/COV |
+| Timeshare + zastaw rejestrowy | ustawa o timeshare: Dz.U. 2011 nr 230 poz. 1370 ze zm.; zastaw: Dz.U. 2018 poz. 2017 t.j. ze zm. | `mod-ustawa-timeshare-zastaw-rejestrowy` + `mod-ustawa-zastaw-rejestrowy` | ✅ aktywny / B+/COV |
+| Ubezpieczenia obowiązkowe / UFG / PBUK | Dz.U. 2026 poz. 783 t.j. ze zm. | `mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK` | 🟢 B+/COV |
+| Monopole państwowe | Konstytucja + właściwe ustawy sektorowe, w tym hazard/poczta | `mod-ustawa-monopole-panstwowe` | ✅ aktywny; temporal gate |
+| Transakcje handlowe / opóźnienia | Dz.U. 2023 poz. 1790 t.j. ze zm. | `mod-transakcje-handlowe-opoznienia` | 🟡 B |
+| Cudzoziemcy — routing gospodarczy/cywilny | Dz.U. 2025 poz. 1079 t.j. ze zm. | `mod-ustawa-cudzoziemcy` | 🔗 routing DR-05 |
+| Ustawa frankowa 2026 — procedura | Dz.U. 2026 poz. 985 | `mod-ustawa-frankowa-2026-procedura.md` | ✅ aktywny; fresh gate |
+
+## Reguły runtime
+
+- każdy fizyczny moduł DR-02 pozostaje jawnie rejestrowany w tej mapie zgodnie z `check_rejestracja_modulow.py`;
+- mapy nie przechowują dawnych metryk, opisów napraw, `NOWY/ZAMKNIĘTE/NAPRAWIONE`, raportów pokrycia ani historii sesji;
+- przy KSH, restrukturyzacji, konsumentach, instrumentach finansowych i regulacjach dynamicznych obowiązuje fresh/temporal gate;
+- `COV` oznacza aktualną strukturę/routing, nie `FULL` artykuł-po-artykule.
