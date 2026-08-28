@@ -27,6 +27,25 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 | urządzenia użytku publicznego / ewidencja | 🟡 | jw. |
 | szkodnictwo leśne, polne i ogrodowe | 🟢 | jw. |
 
+## Kodeks postępowania w sprawach o wykroczenia
+
+**Baza operacyjna:** Dz.U. 2025 poz. 860 t.j.; przed użyciem konkretnej jednostki obowiązuje świeża kontrola ELI/ISAP.
+
+| Zakres | Status bieżący | Dowód pokrycia |
+|---|---|---|
+| Dział I — zasady ogólne | 🟢/🟡 B+ | `mod-KPW-kodeks-postepowania-w-sprawach-o-wykroczenia.md` |
+| Dział II — sąd | 🟢/🟡 B+ | jw. |
+| Dział III — strony, obrońcy i pełnomocnicy | 🟢/🟡 B+ | jw. |
+| Dział IV — czynności procesowe | 🟢/🟡 B+ | jw. |
+| Dział V — dowody | 🟢/🟡 B+ | jw. |
+| Dział VI — środki przymusu | 🟢/🟡 B+ | jw. |
+| Dział VII — czynności wyjaśniające | 🟢/🟡 B+ | jw. |
+| Dział VIII — postępowanie zwyczajne | 🟢/🟡 B+ | jw. |
+| Dział IX — postępowania szczególne | 🟢/🟡 B+ | jw. |
+| Dział X — środki odwoławcze | 🟢/🟡 B+ | jw. |
+| Dział XI — nadzwyczajne środki zaskarżenia | 🟢/🟡 B+ | jw. |
+| Dział XII — postępowanie po prawomocności | 🟢/🟡 B+ | jw. |
+
 ## Kodeks karny wykonawczy
 
 | Zakres | Status bieżący | Dowód pokrycia |
@@ -59,11 +78,10 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 |---|---|
 | opłaty w sprawach karnych | 🟢/🟡 B+; osobny moduł, art. 1–23 zmapowane |
 | przeciwdziałanie narkomanii | 🟢/🟡; metryka Dz.U. 2026 poz. 1004, obowiązywanie od 27.08.2026 |
-| KPW | 🟡; wymaga dalszego pogłębienia proceduralnego |
 
 ## Aktywne luki
 
 1. KW: komunikacja, zdrowie, interesy konsumentów oraz kilka jednostek pozostałych rozdziałów wymagają pogłębienia.
-2. KPW nie ma jeszcze pełnego audytu rozdziałowego.
+2. KPW ma pełny bieżący rejestr 12 działów i poziom B+/COV, ale nie status `FULL` artykuł-po-artykule.
 3. KKW ma szerokie pokrycie operacyjne, ale nie status `FULL` całego kodeksu.
 4. Każdy konkretny przepis wymaga świeżego odczytu ELI/ISAP przed użyciem.
