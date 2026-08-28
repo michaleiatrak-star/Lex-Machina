@@ -97,6 +97,8 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 
 ## Moduły (39 łącznie — ✓ 39 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
 
+  [✓] OK    mod-KP-current-state-COV
+
 ```
   [✓] OK    mod-ROZP-SKLADKOWE-podstawa-wymiaru
               (podstawa wymiaru składek i wyłączenia składkowe)
