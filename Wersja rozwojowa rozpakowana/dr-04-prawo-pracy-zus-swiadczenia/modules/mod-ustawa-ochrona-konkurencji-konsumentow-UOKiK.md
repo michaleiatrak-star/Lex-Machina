@@ -19,7 +19,7 @@ UOKiK (Urząd Ochrony Konkurencji i Konsumentów), praktyki naruszające zbiorow
 | Ustawa o ochronie konkurencji i konsumentów | Dz.U. 2025 poz. 1714 t.j. ze zm. |
 | Ustawa o prawach konsumenta | Dz.U. 2024 poz. 1796 t.j. ze zm. |
 | Ustawa o przeciwdziałaniu nieuczciwym praktykom rynkowym | weryfikuj aktualny t.j. w ISAP |
-| KC art. 385¹–385³ | klauzule abuzywne | Dz.U. 2025 poz. 1071 t.j. |
+| KC art. 385¹–385³ | klauzule abuzywne | Dz.U. 2026 poz. 795 t.j. |
 | Dyrektywa Omnibus (2019/2161) | ceny promocyjne, opinie | wdrożona do prawa polskiego |
 | DSA (Rozp. UE 2022/2065) | platformy cyfrowe | bezpośrednio stosowane |
 | P2B (Rozp. UE 2019/1150) | relacje platformy–przedsiębiorcy | bezpośrednio stosowane |
@@ -86,7 +86,7 @@ K6. Wybierz ścieżkę procesową (patrz niżej)
 
 ## 5. KLAUZULE ABUZYWNE — QUICK CHECK
 
-> **Podstawa:** art. 385¹–385³ KC (Dz.U. 2025 poz. 1071) | weryfikuj w ISAP.
+> **Podstawa:** art. 385¹–385³ KC (Dz.U. 2026 poz. 795) | weryfikuj w ISAP.
 
 ```
 Przesłanki abuzywności (art. 385¹ §1 KC):
