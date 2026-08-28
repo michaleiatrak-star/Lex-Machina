@@ -21,7 +21,7 @@
 OSOBA FIZYCZNA: każdy człowiek od urodzenia do śmierci (art. 8 KC)
   Zdolność prawna: od urodzenia
   Zdolność do czynności prawnych: pełna po ukończeniu 18 lat (art. 11 KC)
-  → isap.sejm.gov.pl: KC Dz.U. 2025 poz. 1071 art. 8–24
+  → isap.sejm.gov.pl: KC Dz.U. 2026 poz. 795 art. 8–24
 
 OSOBA PRAWNA: Skarb Państwa + jednostki, którym przepisy przyznają osobowość prawną
   (art. 33 KC) — m.in.: spółki kapitałowe (sp. z o.o., SA), fundacje, stowarzyszenia
@@ -60,7 +60,7 @@ MIKRO/MAŁY/ŚREDNI PRZEDSIĘBIORCA (art. 7 Prawa przedsiębiorców):
 DEFINICJA USTAWOWA (art. 22¹ KC):
   "Za konsumenta uważa się osobę fizyczną dokonującą z przedsiębiorcą czynności
   prawnej niezwiązanej bezpośrednio z jej działalnością gospodarczą lub zawodową."
-  → KC Dz.U. 2025 poz. 1071 art. 22¹ (weryfikuj aktualny t.j.)
+  → KC Dz.U. 2026 poz. 795 art. 22¹ (weryfikuj aktualny t.j.)
 
 ROZSZERZONA OCHRONA: "PRZEDSIĘBIORCA NA PRAWACH KONSUMENTA" (art. 385⁵ KC):
   od 01.01.2021 (ustawa z 31.07.2019 Dz.U. 2019 poz. 1495):
@@ -82,7 +82,7 @@ DEFINICJA USTAWOWA (art. 46 §1 KC):
   własności (grunty), jak również budynki trwale z gruntem związane lub części
   takich budynków, jeżeli na mocy przepisów szczególnych stanowią odrębny
   od gruntu przedmiot własności."
-  → KC Dz.U. 2025 poz. 1071 art. 46
+  → KC Dz.U. 2026 poz. 795 art. 46
 
 TRZY RODZAJE NIERUCHOMOŚCI:
   a) Nieruchomość gruntowa: wyodrębniona działka ewidencyjna
