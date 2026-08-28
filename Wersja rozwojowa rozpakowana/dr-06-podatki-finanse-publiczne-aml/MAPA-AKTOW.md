@@ -27,6 +27,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | VAT — sankcje / bony / odliczenia | jw. | `mod-VAT-sankcje-bony-odliczenia` | ✅ aktywny |
 | VAT — ewidencja / deklaracje / zwrot | jw.; zmiany przyszłe stosować wyłącznie wg daty wejścia w życie | `mod-VAT-ewidencja-deklaracje` | ✅ aktywny; temporal gate |
 | VAT — klasyfikacja produktów / PKWiU / CN / WIS | jw. + właściwe klasyfikacje i akty UE | `mod-VAT-klasyfikacja-produktow-baza-niejednoznacznosci` | ✅ aktywny; fresh gate |
+| VAT / PIT / CIT — użytek mieszany i koszty samochodowe | właściwe bieżące przepisy VAT/PIT/CIT | `mod-odliczenia-uzytek-mieszany-firma-prywatny-KUP` | ✅ aktywny; fresh gate |
 | Ustawa o Krajowej Administracji Skarbowej | Dz.U. 2025 poz. 1131 t.j. ze zm. | `mod-KAS-kontrola-celno-skarbowa` | ✅ aktywny |
 | Kodeks karny skarbowy — routing podatkowo-karny | Dz.U. 2025 poz. 633 t.j. ze zm. | DR-03 `mod-KKS-karny-skarbowy-i-AML.md` | 🟢 B+/COV |
 | Ustawa o finansach publicznych | Dz.U. 2025 poz. 1483 t.j. ze zm. | `mod-UFP-finanse-publiczne-NIK-RIO` | ✅ aktywny |
@@ -55,5 +56,6 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 ## Reguły runtime
 
 - mapa nie przechowuje historycznych iteracji audytu, dawnych błędów, wet, projektów ani innych faktów negatywnych; takie informacje należą do dziennika audytowego i monitoringu temporalnego;
+- każdy fizyczny moduł DR-06 pozostaje jawnie rejestrowany w tej mapie zgodnie z `check_rejestracja_modulow.py`;
 - kwoty, stawki, progi, formularze, klasyfikacje, terminy i przepisy z odroczonym wejściem w życie zawsze wymagają fresh gate do ELI/ISAP, MF albo EUR-Lex;
 - `COV` oznacza bieżącą mapę struktury/routingu, nie `FULL` artykuł-po-artykule.
