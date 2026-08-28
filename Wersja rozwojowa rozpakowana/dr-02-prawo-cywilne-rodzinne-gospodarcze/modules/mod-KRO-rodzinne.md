@@ -1,110 +1,61 @@
-# mod-KRO-rodzinne — INDEKS (podzielony 2026-08-20, naprawa F-78)
+# mod-KRO-rodzinne — indeks bieżący
 
-**Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Wersja:** 2.0.0 (2026-08-20) — struktura indeksatora, treść bez zmian merytorycznych
-**Źródło weryfikacji:** KRO — Dz.U. 2026 poz. 236 t.j. | KPC — Dz.U. 2026 poz. 468 t.j.
-**ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
-**ZASADA (świadkowie):** techniki ataku na wiarygodność świadka (SW-A1..SW-A8) i obrona
-ante-cross (AC1-AC4) są KANONICZNE w `shared/MOD-ATAK-NA-SWIADKA.md` — ten moduł
-NIE duplikuje tych technik, tylko dodaje specyfikę dziedzinową spraw rozwodowych.
+**Stan operacyjny:** 2026-08-28  
+**Źródło kanoniczne:** ELI — Kodeks rodzinny i opiekuńczy, Dz.U. 2026 poz. 236 t.j., status obowiązujący.  
+**Powiązana procedura:** aktualny KPC — pobieraj oddzielnie dla konkretnego trybu.
 
-> ⚡ **ZMIANA STRUKTURALNA 2026-08-20 (F-78, priorytet 6):** ten plik był
-> 1647 linii. Treść 32 sekcji PODZIELONA na 8 plików w podkatalogu
-> `kro-rodzinne/`. TEN plik pozostaje pod NIEZMIENIONĄ nazwą jako LEKKI
-> INDEKSATOR — odsyłacze w systemie NIE WYMAGAŁY EDYCJI. ALERT
-> LEGISLACYJNY, FAZA 0 (INTAKE) i TRYBY POSTĘPOWANIA — KWALIFIKATOR
-> (treść stosowana ZAWSZE, niezależnie od szukanej części) POZOSTAJĄ w
-> tym indeksie.
+## Funkcja modułu
 
----
+Ten plik jest indeksem operacyjnym KRO. Treść szczegółowa jest podzielona na osiem plików tematycznych; historia podziału i dawnych zmian nie jest częścią runtime.
 
-## ⚡ ALERT LEGISLACYJNY
+## Główne obszary KRO
 
-**Dz.U. 2025 poz. 897 (wejście w życie: 08.10.2025) — zmiana art. 59 KRO:**
-- Termin na powrót do nazwiska po rozwodzie: **było 3 miesiące → jest 12 miesięcy** od uprawomocnienia wyroku
-- Przepis przejściowy: jeśli 3-miesięczny termin nie upłynął przed 08.10.2025 → automatycznie wydłużony do 1 roku
-
-**Projekt zniesienia orzekania o winie (Komisja Kodyfikacyjna, 2025):**
-- STATUS na 2026-06-05: **wyłącznie projekt — NIE uchwalony, NIE podpisany.**
-- Orzekanie o winie wciąż obowiązuje (art. 57 KRO, Dz.U. 2026 poz. 236).
-
----
-
-## FAZA 0 — INTAKE
-
-```
-□ Jaki problem: rozwód / separacja / alimenty / władza rodzicielska /
-  kontakty / podział majątku / ubezwłasnowolnienie / ustalenie ojcostwa?
-  ⚠️ UBEZWŁASNOWOLNIENIE (naprawa 2026-07-15 — wcześniej tylko wzmianka
-  bez treści): pełna procedura (KC art. 12-16, przesłanki całkowite/
-  częściowe, KPC, kurator, PROJEKT LIKWIDACJI z 4 nowymi instrumentami
-  wspieranego podejmowania decyzji — status: skierowany do Sejmu) →
-  view shared/mod-niepelnosprawnosc-intelektualna-gluchota.md
-  sekcja "BLOK I — NIEPEŁNOSPRAWNOŚĆ INTELEKTUALNA" / I.3 — NIE zatrzymuj
-  się na tej checkliście, ta treść żyje w module współdzielonym.
-□ Czy są małoletnie dzieci? → kluczowe dla sądu i trybu
-□ Jaka właściwość sądu? (SO / SR — zależy od rodzaju sprawy)
-□ Czy strony mają wspólny majątek do podziału?
-□ Ostatnie wspólne miejsce zamieszkania (właściwość SO w rozwodzie)?
-□ Czy zachodzą przesłanki do zabezpieczenia (alimenty, kontakty)?
-□ Czy istnieją widoki na ugodowe załatwienie sprawy → rozważ mediację
-  (art. 436 §1 KPC, zob. sekcję MEDIACJA) — zwłaszcza PRZED eskalacją sporu
-□ Czy przemoc domowa w relacji? → JEŚLI TAK: mediacja PRZECIWWSKAZANA
-□ Czy planowane powołanie świadków rodzinnych/bliskich? → zaplanuj profil
-  wiarygodności z wyprzedzeniem (zob. sekcję ŚWIADKOWIE + shared/MOD-ATAK-
-  NA-SWIADKA.md)
-```
-
----
-
-## TRYBY POSTĘPOWANIA — KWALIFIKATOR
-
-> ⚠️ Błędny tryb = odrzucenie pisma bez merytorycznego rozpoznania.
-
-| Sprawa | Tryb | Właściwy sąd |
+| Obszar | Zakres operacyjny | Plik |
 |---|---|---|
-| Rozwód / separacja | Procesowy | Sąd **Okręgowy** (ostatnie wspólne miejsce zamieszkania) |
-| Alimenty (pierwotne) | Procesowy | Sąd **Rejonowy** (miejsce zamieszkania pozwanego LUB uprawnionego — wybór powoda) |
-| Ustalenie ojcostwa | Procesowy | Sąd Rejonowy |
-| Zaprzeczenie ojcostwa | Procesowy | Sąd Rejonowy |
-| Władza rodzicielska | Nieprocesowy | Sąd Rejonowy — sąd opiekuńczy |
-| Kontakty z dzieckiem | Nieprocesowy | Sąd Rejonowy — sąd opiekuńczy |
-| Podział majątku | Nieprocesowy | Sąd Rejonowy (właściwy wg miejsca położenia majątku) |
-| Ubezwłasnowolnienie | Nieprocesowy | Sąd **Okręgowy** |
-| Adopcja | Nieprocesowy | Sąd Rejonowy — sąd opiekuńczy |
+| małżeństwo i prawa/obowiązki małżonków | zawarcie małżeństwa, prawa i obowiązki, ustroje majątkowe | `kro-rodzinne/czesc-01-malzenstwo-ustroj-konkubinat.md` |
+| rozwód i separacja | przesłanki, skutki, mieszkanie/eksmisja, nazwisko | `kro-rodzinne/czesc-02-rozwod-separacja-eksmisja.md` |
+| podział majątku | relacja KRO–KC–KPC, majątek wspólny i osobisty | `kro-rodzinne/czesc-03-podzial-majatku.md` |
+| alimenty | dzieci, krewni, małżonkowie, zakres obowiązku | `kro-rodzinne/czesc-04-alimenty.md` |
+| pochodzenie dziecka | macierzyństwo, ojcostwo, uznanie, zaprzeczenie | `kro-rodzinne/czesc-05-pochodzenie-dziecka.md` |
+| rodzice i dzieci | władza rodzicielska, kontakty, piecza, reprezentacja | `kro-rodzinne/czesc-06-rodzice-dzieci-wladza-ozss.md` |
+| procedura i dowody | właściwość, mediacja, zabezpieczenie, świadkowie, dane osobowe | `kro-rodzinne/czesc-07-procedura-dowody-zmiana-danych.md` |
+| strategia i quality gate | routing, źródła urzędowe, kontrola kompletności | `kro-rodzinne/czesc-08-referencje-strategia.md` |
+| opieka i kuratela | odrębny moduł tematyczny | `mod-KRO-opieka-i-kuratela.md` |
 
-**Zasada nadrzędna: dobro dziecka** — art. 56 §2, art. 95 KRO.
+## Kwalifikator sprawy rodzinnej
 
----
-
-
----
-
-## TABELA NAWIGACYJNA — KTÓRA CZĘŚĆ, W KTÓRYM PLIKU
-
-| Temat | Sekcje oryginału | Plik |
-|---|---|---|
-| Małżeństwo — prawa/obowiązki, ustrój majątkowy/intercyza, konkubinat | Prawa i obowiązki małżonków (art. 23-30), Ustrój majątkowy (art. 31-54), Konkubinat | `czesc-01-malzenstwo-ustroj-konkubinat.md` |
-| Rozwód, separacja, eksmisja małżonka | Rozwód quick check, Największe trudności praktyczne, Separacja (art. 61¹-61⁶), Eksmisja małżonka (art. 58 §2-4) | `czesc-02-rozwod-separacja-eksmisja.md` |
-| Podział majątku wspólnego | Podział majątku quick check | `czesc-03-podzial-majatku.md` |
-| Alimenty — wszystkie kategorie | Alimenty quick check, Obowiązek szerszego kręgu krewnych (art. 128-144¹), Alimenty na pełnoletnie dziecko (art. 133), Alimenty między małżonkami (art. 27 vs 60), Alimenty — niuanse (art. 135 §3) | `czesc-04-alimenty.md` |
-| Pochodzenie dziecka — macierzyństwo, ojcostwo, surogacja | Pokrewieństwo/powinowactwo (art. 617-618), Macierzyństwo — ustalenie/zaprzeczenie (art. 619, 6110-6116), Ustalenie ojcostwa (art. 62, 72-86), Zaprzeczenie ojcostwa — terminy zawite, Macierzyństwo zastępcze/surogacja | `czesc-05-pochodzenie-dziecka.md` |
-| Stosunki rodzice-dzieci, władza rodzicielska, OZSS | Stosunki rodzice-dzieci (art. 87-91), Władza rodzicielska i kontakty, Opinia OZSS rozszerzona | `czesc-06-rodzice-dzieci-wladza-ozss.md` |
-| Procedura, dowody, zmiana danych osobowych | Mediacja w sprawach rozwodowych, Świadkowie w sprawach rozwodowych (art. 233 KPC/KK), Opłaty sądowe, Kalkulator kluczowych terminów, Zmiana imienia i nazwiska | `czesc-07-procedura-dowody-zmiana-danych.md` |
-| Referencje i strategia | Weryfikacja online, Łącz z, Źródła online, Quality gate, Output, Strategia | `czesc-08-referencje-strategia.md` |
-
----
-
-## JAK UŻYWAĆ TEGO MODUŁU
-
-```
-KROK 1 — Przejdź przez FAZĘ 0 (INTAKE) i TRYBY POSTĘPOWANIA — KWALIFIKATOR
-  (wyżej w tym indeksie) — ZAWSZE, niezależnie od tematu sprawy.
-KROK 2 — Znajdź właściwy TEMAT w tabeli nawigacyjnej wyżej.
-KROK 3 — Wczytaj WYŁĄCZNIE plik zawierający ten temat (view czesc-0X-*.md
-  z podkatalogu `kro-rodzinne/`) — NIE wczytuj wszystkich 8 naraz.
-KROK 4 — Sprawdź QUALITY GATE (część 8) przed wydaniem analizy/pisma.
+```text
+1. Ustal relację stron i status małoletnich.
+2. Ustal materię: małżeństwo / rozwód / majątek / alimenty / pochodzenie / władza / kontakty / opieka.
+3. Ustal tryb KPC i właściwy sąd — nie wyprowadzaj procedury wyłącznie z KRO.
+4. Ustal stan prawny na datę zdarzenia oraz stan aktualny.
+5. Jeżeli sprawa dotyczy dziecka, jawnie oceń dobro dziecka w zakresie wymaganym przez właściwy przepis.
+6. Przy przemocy domowej dołącz DR-03 i właściwe ustawy ochronne; nie zakładaj mediacji jako rozwiązania domyślnego.
 ```
 
----
-*mod-KRO-rodzinne.md · dr-02/modules/ · indeks utworzony 2026-08-20 (F-78, priorytet 6)*
+## Twarde bramki
+
+- **Rozwód:** przed analizą pobierz aktualne przepisy o przesłankach rozwodu, winie, dzieciach, kontaktach, alimentach i mieszkaniu; nie opieraj się na projektach legislacyjnych.
+- **Nazwisko po rozwodzie:** termin i organ ustalaj z aktualnego art. 59; nie przechowuj w module historycznych długości terminu.
+- **Władza rodzicielska i kontakty:** odróżniaj władzę rodzicielską od kontaktów — ograniczenie jednego nie przesądza automatycznie o drugim.
+- **Alimenty:** odrębnie ustal krąg zobowiązanych, przesłanki, usprawiedliwione potrzeby oraz możliwości zarobkowe/majątkowe według aktualnego KRO.
+- **Pochodzenie dziecka:** terminy zawite i legitymację procesową pobieraj z aktualnego KRO/KPC dla konkretnego roszczenia.
+- **Majątek:** odróżniaj przynależność składnika do majątku wspólnego/osobistego od sposobu rozliczenia nakładów i od samego postępowania działowego.
+- **Opieka/kuratela:** używaj dedykowanego modułu; nie mieszaj z władzą rodzicielską.
+
+## Intake minimalny
+
+```text
+□ rodzaj sprawy i żądanie
+□ data i miejsce zdarzeń rodzinnych
+□ dzieci: wiek, miejsce pobytu, aktualne rozstrzygnięcia
+□ istniejące orzeczenia/ugody/akty stanu cywilnego
+□ majątek i zobowiązania, jeśli relewantne
+□ przemoc / ryzyko dla dziecka / potrzeba zabezpieczenia
+□ właściwy tryb KPC, sąd i terminy
+□ stan prawny właściwy temporalnie
+```
+
+## Fresh gate
+
+Przed powołaniem konkretnego przepisu KRO pobierz aktualny tekst ujednolicony ELI/ISAP dla Dz.U. 2026 poz. 236 i sprawdź późniejsze zmiany. Procedurę, opłaty i terminy procesowe weryfikuj oddzielnie w aktualnym KPC/KSCU.
