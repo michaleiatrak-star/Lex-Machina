@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.32"
+version: "3.33"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -42,6 +42,9 @@ confidence: verified-online
 escalation:
   - brak możliwości pobrania aktu lub jego tekstu z ISAP
     → wykonaj references/ZRODLA-AKTOW-FALLBACK.md; sam błąd ISAP nie kończy weryfikacji
+  - brak dostępu do orzeczenia.ms.gov.pl / sn.pl / nsa.gov.pl
+    → wykonaj właściwą procedurę weryfikacji orzecznictwa; jeśli brak potwierdzenia
+    po dostępnych alternatywach, oznacz ⚠️ [NIEWERYFIKOWANE] i poinformuj użytkownika
   - brak źródła dla powołania po wykorzystaniu dostępnych alternatyw
     → oznacz ⚠️ [NIEWERYFIKOWANE] i poinformuj użytkownika, nie kontynuuj cicho
   - sprawa transgraniczna / prawo obce → pomiń prawo-polskie-v2 i ISAP,
@@ -75,6 +78,7 @@ required_modules:
   - references/AUDYT-KLUCZA-ODPOWIEDZI.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog:
+  - "3.33 (2026-08-28): przywrócono jawne domeny orzecznicze w escalation; zachowano BI i fallback ISAP z 3.32; references/CHANGELOG.md."
   - "3.32 (2026-08-28): poprawne odwołanie BI w DR-16; ISAP pierwszy, LEX/Legalis/ArsLege po nieudanym pobraniu tekstu; references/CHANGELOG.md."
   - "3.31 (2026-08-28): runtime mapy aktów działają w modelu current-state-only; historia pozostaje w dziennikach/changelogach, a routing korzysta z bieżących COV."
   - "3.30 (2026-08-27): synchronizacja mapy dziedzinowej z F-108 P1 oraz rzeczywistymi modułami REACH/CLP, akcyzy/cła i cudzoziemców; references/CHANGELOG.md."
