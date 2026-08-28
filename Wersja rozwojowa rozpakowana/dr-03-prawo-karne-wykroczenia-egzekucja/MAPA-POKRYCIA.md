@@ -6,95 +6,73 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 
 ## Legenda
 
-- 🟢 — pokrycie pogłębione / praktycznie użyteczne;
-- 🟡 B/B+ — pokrycie operacyjne, niepełne artykuł-po-artykule;
-- 🔴 — brak rzeczywistej treści;
-- ⚪ — zakres uchylony/techniczny.
+- 🟢 B+ / COV — aktualna struktura aktu zmapowana do realnych modułów i fresh gate;
+- 🟡 — pokrycie operacyjne wymagające dalszego pogłębienia;
+- `FULL` — wyłącznie po audycie artykuł-po-artykule.
 
-## Kodeks wykroczeń
+## Kodeks karny
 
-| Zakres | Status bieżący | Dowód pokrycia |
-|---|---|---|
-| część ogólna art. 1–48 | 🟢 | `mod-KW-art1-48-czesc-ogolna.md` |
-| porządek publiczny | 🟢/🟡 | `mod-KW-art49-64-porzadek-publiczny.md` |
-| bezpieczeństwo osób i mienia | 🟡 | `mod-KW-art70-118-bezpieczenstwo-osoba-zdrowie.md` |
-| komunikacja | 🟡 | moduły taryfikatorowe i tematyczne; brak pełnego komentarza całego rozdziału |
-| przeciwko osobie | 🟢 | `mod-KW-art70-118-bezpieczenstwo-osoba-zdrowie.md` |
-| przeciwko zdrowiu | 🟡 | jw. |
-| przeciwko mieniu | 🟢 | `mod-KW-art119-131-przeciwko-mieniu.md` |
-| interesy konsumentów | 🟡 | `mod-KW-art132-166-pozostale-rozdzialy.md` |
-| obyczajność publiczna | 🟢 | jw. |
-| urządzenia użytku publicznego / ewidencja | 🟡 | jw. |
-| szkodnictwo leśne, polne i ogrodowe | 🟢 | jw. |
-
-## Kodeks postępowania w sprawach o wykroczenia
-
-**Baza operacyjna:** Dz.U. 2025 poz. 860 t.j.; przed użyciem konkretnej jednostki obowiązuje świeża kontrola ELI/ISAP.
+**Baza:** Dz.U. 2025 poz. 383 ze zmianami po t.j.
 
 | Zakres | Status bieżący | Dowód pokrycia |
 |---|---|---|
-| Dział I — zasady ogólne | 🟢/🟡 B+ | `mod-KPW-kodeks-postepowania-w-sprawach-o-wykroczenia.md` |
-| Dział II — sąd | 🟢/🟡 B+ | jw. |
-| Dział III — strony, obrońcy i pełnomocnicy | 🟢/🟡 B+ | jw. |
-| Dział IV — czynności procesowe | 🟢/🟡 B+ | jw. |
-| Dział V — dowody | 🟢/🟡 B+ | jw. |
-| Dział VI — środki przymusu | 🟢/🟡 B+ | jw. |
-| Dział VII — czynności wyjaśniające | 🟢/🟡 B+ | jw. |
-| Dział VIII — postępowanie zwyczajne | 🟢/🟡 B+ | jw. |
-| Dział IX — postępowania szczególne | 🟢/🟡 B+ | jw. |
-| Dział X — środki odwoławcze | 🟢/🟡 B+ | jw. |
-| Dział XI — nadzwyczajne środki zaskarżenia | 🟢/🟡 B+ | jw. |
-| Dział XII — postępowanie po prawomocności | 🟢/🟡 B+ | jw. |
+| część ogólna — rozdz. I–XV | 🟢 B+ / COV | `mod-KK-current-state-COV.md` + kwalifikator karnomaterialny |
+| część szczególna — rozdz. XVI–XXXVII | 🟢 B+ / COV | `mod-KK-current-state-COV.md` + części tematyczne kwalifikatora |
+| część wojskowa — rozdz. XXXVIII–XLIV | 🟢 B+ / COV | `mod-KK-current-state-COV.md`; aktywować przy właściwym statusie sprawcy |
+
+## Kodeks postępowania karnego
+
+**Baza:** Dz.U. 2026 poz. 490, stan t.j. 16.03.2026, z późniejszymi zmianami.
+
+| Zakres | Status bieżący | Dowód pokrycia |
+|---|---|---|
+| current-state całość KPK | 🟢 B+ / COV | `mod-KPK-current-state-COV.md` + rodzina modułów KPK |
+| dostęp do akt | 🟢 B+ / COV | art. 156 §1–6 ponownie zweryfikowany w RZĄD 1 |
+| środki odwoławcze | 🟢 B+ / COV | art. 437 §1–2 ponownie zweryfikowany w RZĄD 1 |
+| postępowanie nakazowe | 🟢 B+ / COV | art. 498 ponownie zweryfikowany w RZĄD 1 |
+| wyrok łączny | 🟢 B+ / COV | art. 575 §1 skorygowany do aktualnego brzmienia |
+
+## Kodeks wykroczeń i KPW
+
+| Akt / zakres | Status bieżący | Dowód pokrycia |
+|---|---|---|
+| KW — część ogólna i główne rozdziały | 🟢/🟡 B+ | rodzina modułów KW; niszowe rozdziały pozostają do pogłębienia |
+| KPW — Dz.U. 2025 poz. 860, wszystkie 12 działów | 🟢 B+ / COV | `mod-KPW-kodeks-postepowania-w-sprawach-o-wykroczenia.md` |
 
 ## Kodeks karny wykonawczy
 
 | Zakres | Status bieżący | Dowód pokrycia |
 |---|---|---|
-| zasady ogólne / prawa skazanego | 🟡 B | `mod-KKW-uzupelnienie-pokrycia-2026.md` |
-| postępowanie wykonawcze | 🟢 | moduł KKW + uzupełnienie pokrycia |
-| nadzór penitencjarny | 🟡 B | `mod-KKW-uzupelnienie-pokrycia-2026.md` |
-| SDE | 🟢 | moduły KKW/SDE |
-| odroczenie / przerwa wykonania kary | 🟢 | moduły KKW |
-| warunkowe zwolnienie | 🟢 | moduły KKW |
-| prawa i obowiązki / dyscyplina | 🟢/🟡 | moduły KKW |
-| pozostałe zakresy wykonawcze | 🟡 B | `mod-KKW-uzupelnienie-pokrycia-2026.md` |
-
-## KPK / KK
-
-| Zakres | Status bieżący | Uwagi |
-|---|---|---|
-| framework KK/KPK | 🟢/🟡 | `mod-KK-KPK-framework-karne.md` + kwalifikator karnomaterialny |
-| środki odwoławcze KPK | 🟢/🟡 B+ | art. 437 §1–2 ponownie zweryfikowany w RZĄD 1 2026-08-28 |
-| dostęp do akt KPK | 🟢/🟡 B+ | art. 156 §1–6 ponownie zweryfikowany w RZĄD 1 2026-08-28 |
-| postępowanie nakazowe | 🟢/🟡 B+ | art. 498 ponownie zweryfikowany w RZĄD 1 2026-08-28 |
-| wyrok łączny | 🟢/🟡 B+ | art. 575 §1 skorygowany do aktualnego brzmienia |
-| stalking / nękanie | 🟢 | `mod-KK-art190a-stalking.md` |
-| przemoc domowa | 🟢 | `mod-KK-art207-przemoc-domowa.md` |
-| cyberprzestępczość | 🟢 | `mod-KK-art267-269c-cyberprzestepstwa.md` |
+| postępowanie wykonawcze / SDE / odroczenie / przerwa / warunkowe zwolnienie | 🟢/🟡 B+ | rodzina modułów KKW |
+| nadzór penitencjarny i pozostałe zakresy | 🟡 | `mod-KKW-uzupelnienie-pokrycia-2026.md` |
 
 ## Kodeks karny skarbowy
 
-**Baza operacyjna:** Dz.U. 2025 poz. 633 t.j., ze zmianami po stanie tekstu jednolitego; przy każdej konkretnej jednostce obowiązuje kontrola ELI i daty wejścia w życie.
+**Baza:** Dz.U. 2025 poz. 633 ze zmianami.
 
 | Zakres | Status bieżący | Dowód pokrycia |
 |---|---|---|
-| Tytuł I — część ogólna | 🟢 B+ / COV | `mod-KKS-karny-skarbowy-i-AML.md`; odpowiedzialność, kary, zbieg, przedawnienie i odpowiedzialność posiłkowa zmapowane |
-| Tytuł I — część szczególna | 🟢 B+ / COV | jw.; podatki, cło, dewizy, akcyza, hazard i inne czyny skarbowe zmapowane jako routing do aktualnego przepisu |
-| Tytuł II — postępowanie | 🟢 B+ / COV | jw.; lex specialis KKS + odpowiednie stosowanie KPK, tryby szczególne i postępowanie sądowe zmapowane |
-| Tytuł III — wykonanie | 🟢 B+ / COV | jw.; odpowiednie stosowanie KKW, zabezpieczenie i organy wykonawcze zmapowane |
-| intertemporalność / nowelizacje po t.j. | 🟢 B+ / COV | jawny gate dla Dz.U. 2026 poz. 347, 846 i 901; zmian przyszłych nie stosować przed wejściem w życie |
+| Tytuł I — część ogólna i szczególna | 🟢 B+ / COV | `mod-KKS-karny-skarbowy-i-AML.md` |
+| Tytuł II — postępowanie | 🟢 B+ / COV | jw. + KPK |
+| Tytuł III — wykonanie | 🟢 B+ / COV | jw. + KKW |
+| intertemporalność | 🟢 B+ / COV | fresh gate dla późniejszych nowelizacji |
+
+## Przeciwdziałanie narkomanii
+
+**Baza current-state:** t.j. Dz.U. 2023 poz. 1939 + obowiązująca od 27.08.2026 ustawa zmieniająca Dz.U. 2026 poz. 1004.
+
+| Zakres | Status bieżący | Dowód pokrycia |
+|---|---|---|
+| rozdziały 1–8: definicje, zadania, profilaktyka, leczenie, substancje/prekursory, uprawy, kary pieniężne i przepisy karne | 🟢 B+ / COV | `mod-narkomania-current-state-COV.md` + `mod-ustawa-narkomania.md` |
 
 ## Inne akty
 
 | Akt / zakres | Status bieżący |
 |---|---|
-| opłaty w sprawach karnych | 🟢/🟡 B+; osobny moduł, art. 1–23 zmapowane |
-| przeciwdziałanie narkomanii | 🟢/🟡; metryka Dz.U. 2026 poz. 1004, obowiązywanie od 27.08.2026 |
+| opłaty w sprawach karnych | 🟢 B+ / COV — art. 1–23 zmapowane |
 
 ## Aktywne luki
 
-1. KW: komunikacja, zdrowie, interesy konsumentów oraz kilka jednostek pozostałych rozdziałów wymagają pogłębienia.
-2. KPW ma pełny bieżący rejestr 12 działów i poziom B+/COV, ale nie status `FULL` artykuł-po-artykule.
-3. KKW ma szerokie pokrycie operacyjne, ale nie status `FULL` całego kodeksu.
-4. KKS ma bieżący status B+/COV; konkretne znamiona, sankcje i progi pozostają przedmiotem fresh gate z ELI i właściwych źródeł finansowych.
-5. Każdy konkretny przepis wymaga świeżego odczytu ELI/ISAP przed użyciem.
+1. Wszystkie akty F-108 przypisane do DR-03 mają bieżący status B+/COV.
+2. Dalszego pogłębienia wymagają niszowe rozdziały KW oraz część zakresów KKW.
+3. `COV` nie oznacza `FULL`; znamiona, sankcje, terminy i progi wymagają świeżego odczytu ELI/ISAP przed użyciem.
