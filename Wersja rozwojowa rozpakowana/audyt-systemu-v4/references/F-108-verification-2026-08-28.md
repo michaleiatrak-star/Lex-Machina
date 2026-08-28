@@ -9,19 +9,25 @@ Tryb prawny: `prawny-router-v3` → routing [11] (weryfikacja cudzego materiału
 
 ## Wynik pokrycia
 
+### Etap kontrolny — wykrycie regresji semantycznej
+
+Ponowny audyt najpierw skorygował wcześniejsze, zbyt szerokie 52/52 do **48/52 B+/COV**: KW (7), SUS (29), ustawa zasiłkowa (30) i zwolnienia grupowe (40) miały routing i treść, lecz bez wystarczającego current-state indeksu całego aktu.
+
+### Stan po domknięciu F-108
+
 - inwentarz/routing: **52/52**;
-- status B+/COV potwierdzony przez kanoniczne mapy: **48/52**;
-- poniżej COV: **4/52**;
+- status B+/COV potwierdzony przez kanoniczne mapy: **52/52**;
+- poniżej COV: **0/52**;
 - FULL: **0/52**.
 
-| ID | Akt | Stan 2026-08-28 | Powód braku COV |
-|---:|---|---|---|
-| 7 | Kodeks wykroczeń | B+ | `DR-03/MAPA-POKRYCIA.md` jawnie pozostawia niszowe rozdziały do pogłębienia |
-| 29 | System ubezpieczeń społecznych | B/B+ | `DR-04/MAPA-POKRYCIA.md` zawiera działy B/B+ i nie deklaruje COV całego aktu |
-| 30 | Ustawa zasiłkowa | B+ | pełna mapa rozdziałów, ale moduł/mapa nie deklarują COV całego aktu |
-| 40 | Zwolnienia grupowe | B+ | moduł operacyjny, bez audytu strukturalnego wystarczającego do COV |
+| ID | Akt | Domknięcie strukturalne |
+|---:|---|---|
+| 7 | Kodeks wykroczeń | `mod-KW-current-state-COV.md` + nowy `mod-KW-art65-69-instytucje.md`, który usuwał ostatnią rzeczywistą lukę między art. 64 i 70 |
+| 29 | System ubezpieczeń społecznych | `mod-SUS-current-state-COV.md` — jawny routing wszystkich 13 rozdziałów; lokalna głębokość B/B+ nie jest utożsamiana z FULL |
+| 30 | Ustawa zasiłkowa | `mod-ustawa-zasilkowa-current-state-COV.md` — jawna mapa wszystkich 13 rozdziałów i temporal gate |
+| 40 | Zwolnienia grupowe | `mod-zwolnienia-grupowe-current-state-COV.md` — rdzeń art. 1–12 oraz jawna warstwa przepisów przejściowych/końcowych |
 
-Wniosek: wcześniejsza deklaracja „52/52 B+/COV” mieszała **obecność modułu/rejestrację** z **pokryciem strukturalnym**. F-108 należy traktować jako ponownie otwartą wyłącznie w tych czterech pozycjach; nie ma luki inwentarzowej.
+Wniosek końcowy: F-108 jest **zamknięta 52/52 B+/COV**. Poprzedni etap 48/52 pozostaje w tym raporcie jako dowód, że obecność modułu nie była automatycznie traktowana jako COV.
 
 ## Błędy aktualności / tożsamości wykryte i naprawione
 
@@ -101,7 +107,7 @@ Legenda: `TJ` = najnowszy zidentyfikowany tekst jednolity; `TJ+` = najnowszy t.j
 
 **Przed naprawą: nie.** Aktywne indeksy zawierały zarówno nieaktualne t.j., jak i błędne przypisania numerów do aktów.
 
-**Po naprawie tej gałęzi:** dla 52 pozycji F-108 metryki bazowe wskazują najnowszy zidentyfikowany t.j. albo prawidłowy odpowiednik (EUR-Lex / Konstytucja / akt pierwotny bez nowego t.j.). To nadal **nie oznacza**, że sam tekst jednolity wystarcza do ustalenia brzmienia przepisu na konkretny dzień: przy pozycjach `TJ+` obowiązuje fresh/temporal gate na akty zmieniające, daty wejścia w życie i przepisy przejściowe.
+**Po pełnym domknięciu F-108:** dla 52 pozycji metryki bazowe wskazują najnowszy zidentyfikowany t.j. albo prawidłowy odpowiednik (EUR-Lex / Konstytucja / akt pierwotny bez nowego t.j.), a 52/52 pozycji ma strukturalny B+/COV. To nadal **nie oznacza**, że sam tekst jednolity wystarcza do ustalenia brzmienia przepisu na konkretny dzień: przy pozycjach `TJ+` obowiązuje fresh/temporal gate na akty zmieniające, daty wejścia w życie i przepisy przejściowe.
 
 ## Źródła urzędowe kontrolne
 
