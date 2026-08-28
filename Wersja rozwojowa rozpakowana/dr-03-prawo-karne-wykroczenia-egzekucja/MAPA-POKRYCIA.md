@@ -72,6 +72,18 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 | przemoc domowa | 🟢 | `mod-KK-art207-przemoc-domowa.md` |
 | cyberprzestępczość | 🟢 | `mod-KK-art267-269c-cyberprzestepstwa.md` |
 
+## Kodeks karny skarbowy
+
+**Baza operacyjna:** Dz.U. 2025 poz. 633 t.j., ze zmianami po stanie tekstu jednolitego; przy każdej konkretnej jednostce obowiązuje kontrola ELI i daty wejścia w życie.
+
+| Zakres | Status bieżący | Dowód pokrycia |
+|---|---|---|
+| Tytuł I — część ogólna | 🟢 B+ / COV | `mod-KKS-karny-skarbowy-i-AML.md`; odpowiedzialność, kary, zbieg, przedawnienie i odpowiedzialność posiłkowa zmapowane |
+| Tytuł I — część szczególna | 🟢 B+ / COV | jw.; podatki, cło, dewizy, akcyza, hazard i inne czyny skarbowe zmapowane jako routing do aktualnego przepisu |
+| Tytuł II — postępowanie | 🟢 B+ / COV | jw.; lex specialis KKS + odpowiednie stosowanie KPK, tryby szczególne i postępowanie sądowe zmapowane |
+| Tytuł III — wykonanie | 🟢 B+ / COV | jw.; odpowiednie stosowanie KKW, zabezpieczenie i organy wykonawcze zmapowane |
+| intertemporalność / nowelizacje po t.j. | 🟢 B+ / COV | jawny gate dla Dz.U. 2026 poz. 347, 846 i 901; zmian przyszłych nie stosować przed wejściem w życie |
+
 ## Inne akty
 
 | Akt / zakres | Status bieżący |
@@ -84,4 +96,5 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 1. KW: komunikacja, zdrowie, interesy konsumentów oraz kilka jednostek pozostałych rozdziałów wymagają pogłębienia.
 2. KPW ma pełny bieżący rejestr 12 działów i poziom B+/COV, ale nie status `FULL` artykuł-po-artykule.
 3. KKW ma szerokie pokrycie operacyjne, ale nie status `FULL` całego kodeksu.
-4. Każdy konkretny przepis wymaga świeżego odczytu ELI/ISAP przed użyciem.
+4. KKS ma bieżący status B+/COV; konkretne znamiona, sankcje i progi pozostają przedmiotem fresh gate z ELI i właściwych źródeł finansowych.
+5. Każdy konkretny przepis wymaga świeżego odczytu ELI/ISAP przed użyciem.
