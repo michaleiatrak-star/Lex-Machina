@@ -1,174 +1,126 @@
-# mod-BQ-prokuratura-sluzby-organy-ochrony-prawa — PROKURATURA I ORGANY OCHRONY PRAWA
+# Prawo o prokuraturze — ustrój i status prokuratorów
 
-Status: moduł prawa polskiego klasy wzorcowej, uzupełniony do standardu prawa pracy i prawa karnego.
-Data wdrożenia: 2026-05-28.
-Zakres: prokuratura, policja, służby, skargi, odpowiedzialność służbowa, kontrola czynności.
+**Stan weryfikacji:** 2026-08-28  
+**Tekst jednolity:** Dz.U. 2026 poz. 810  
+**Źródło kanoniczne:** ELI/ISAP  
+**Zakres modułu:** ustawa z 28.01.2016 r. — Prawo o prokuraturze. Proceduralne uprawnienia prokuratora w konkretnej sprawie wynikają także z KPK, KPC, PPSA i ustaw szczególnych.
 
-## Wspólne moduły obowiązkowe
+## 1. Bramka źródłowa
 
-Zawsze stosuj razem z:
+ELI: `https://eli.gov.pl/eli/DU/2026/810/ogl`
 
-- `shared/MODULE-STANDARD-POLISH-LAW.md`,
-- `shared/ISAP-AUDIT-PROTOCOL.md`,
-- `shared/TEMPORAL-LAW-CHECK.md`,
-- `shared/LEGAL-LIFECYCLE-MANAGEMENT.md`,
-- `shared/LEGAL-QUALITY-GATE.md`,
-- `shared/RISK-ASSESSMENT.md`,
-- `shared/QUALITY-CHECK.md`.
+Obwieszczenie Marszałka Sejmu z 29.05.2026 r. ogłasza aktualny tekst jednolity ustawy. Przed cytowaniem przepisu sprawdź ELI pod kątem późniejszych zmian i ich dat wejścia w życie.
 
-## 1. Zakaz pracy z pamięci
+## 2. Mapa ustawy
 
-Dziennik Ustaw, status aktu, data wejścia w życie, brzmienie przepisu i przepisy przejściowe muszą być sprawdzone w ISAP na dzień użycia. Jeżeli ISAP nie daje bezpośredniego dostępu do tekstu aktu albo aktu wykonawczego, wolno użyć LEX/Legalis wyłącznie pomocniczo i oznaczyć źródło w raporcie. Nie wolno rekonstruować brzmienia przepisu z pamięci.
+Moduł obejmuje operacyjnie następujące warstwy:
+- zadania prokuratury i zasady jej działania;
+- Prokuratora Generalnego i Prokuratora Krajowego;
+- strukturę jednostek organizacyjnych prokuratury;
+- kompetencje kierownicze, nadzór i relacje służbowe;
+- status prokuratora, powołanie, przeniesienie, delegowanie i stan spoczynku;
+- prawa i obowiązki prokuratorów;
+- odpowiedzialność dyscyplinarną;
+- relację prokuratury krajowej do szczególnych mechanizmów unijnych, w tym EPPO, gdy sprawa należy do ich zakresu.
 
-## 2. Intake obowiązkowy
+Status tego modułu: **B+/COV** — bieżąca mapa ustrojowa i routing są użyteczne, ale nie jest to komentarz do każdej jednostki ustawy.
 
-Ustal:
+## 3. Intake
 
-1. typ sprawy i tryb;
-2. organ/sąd/właściwy samorząd;
-3. daty zdarzeń, decyzji, doręczeń i terminów;
-4. stan prawny na dzień zdarzenia, decyzji i wniesienia środka;
-5. interes prawny i legitymację;
-6. rozstrzygnięcie zaskarżane lub czynność kwestionowaną;
-7. dowody podstawowe i brakujące;
-8. możliwe równoległe tryby: cywilny, karny, administracyjny, dyscyplinarny, pracowniczy.
+Przed analizą ustal:
+1. czy problem dotyczy ustroju/statusu prokuratora czy czynności w konkretnym postępowaniu;
+2. właściwą jednostkę organizacyjną prokuratury;
+3. etap postępowania i właściwy kodeks proceduralny;
+4. czy kwestionowana czynność jest decyzją procesową, czynnością nadzorczą, służbową czy dyscyplinarną;
+5. datę zdarzenia i stan prawny na ten dzień;
+6. czy sprawa ma wymiar unijny i może należeć do kompetencji Prokuratury Europejskiej.
 
-## 3. Warstwa normatywna CORE
+## 4. Ustrój a procedura — obowiązkowe rozdzielenie
 
-Dla każdego używanego przepisu wygeneruj tabelę:
+**Prawo o prokuraturze** odpowiada przede wszystkim na pytania ustrojowe i statusowe. Nie wyprowadzaj z niego samodzielnie terminu zażalenia na odmowę wszczęcia, umorzenie, zatrzymanie rzeczy ani inną decyzję procesową.
 
-| Akt | Dz.U./tekst jednolity | Przepis | Brzmienie z ISAP/LEX/Legalis | Znaczenie | Skutek procesowy |
-|---|---|---|---|---|---|
-| do uzupełnienia po kontroli źródła | do uzupełnienia | art. ... | cytuj tylko po weryfikacji | przesłanka/tryb/termin | zwrot/oddalenie/uchylenie/odpowiedzialność |
+Dla czynności w postępowaniu karnym dołącz aktualny KPK. Dla udziału prokuratora w postępowaniu cywilnym — KPC. Dla postępowania administracyjnego i sądowoadministracyjnego — właściwe ustawy DR-05.
 
-Nie wpisuj literalnego brzmienia, jeżeli nie zostało pobrane z aktualnego źródła urzędowego albo wskazanego systemu prawniczego.
+## 5. Jednostki organizacyjne i właściwość
 
-## 4. Procedura
+Przed wskazaniem „właściwej prokuratury” ustal:
+- rodzaj i wagę sprawy;
+- właściwość miejscową;
+- czy sprawa została przejęta albo przekazana;
+- czy dotyczy jednostki wyspecjalizowanej;
+- czy istnieje właściwość szczególna wynikająca z rozporządzenia lub zarządzenia organizacyjnego.
 
-Wybierz właściwy tor:
+Nie utożsamiaj Prokuratury Krajowej z jednostką właściwą do każdej sprawy o dużym ciężarze gatunkowym.
 
-- wniosek pierwotny;
-- odwołanie/zażalenie/sprzeciw;
-- skarga do WSA;
-- środek do sądu powszechnego;
-- skarga kasacyjna/kasacja;
-- skarga dyscyplinarna;
-- wniosek dowodowy;
-- skarga administracyjna;
-- skarga na przewlekłość;
-- zawiadomienie karne albo deliktowe, jeżeli zachowanie przekracza zwykłe naruszenie proceduralne.
+## 6. Niezależność, polecenia i nadzór
 
-## 5. Dowody
+Przy sporze dotyczącym polecenia służbowego, nadzoru albo ingerencji w prowadzenie sprawy odczytaj aktualne przepisy ustawy dotyczące:
+- niezależności prokuratora przy wykonywaniu czynności;
+- dopuszczalności i formy poleceń;
+- obowiązku ujawnienia/utrwalenia polecenia, jeżeli ustawa go przewiduje;
+- kompetencji prokuratora przełożonego;
+- zasad przejęcia lub zmiany decyzji procesowej.
 
-Każda teza musi mieć przypisany dowód. Obowiązkowa tabela:
+Nie rekonstruuj tych reguł z ogólnej hierarchiczności prokuratury.
 
-| Teza | Dowód | Źródło | Siła | Luka | Działanie |
-|---|---|---|---|---|---|
-| przesłanka ustawowa | dokument/zeznanie/opinia | akta/organ/sąd | wysoka/średnia/niska | co nieudowodnione | uzupełnić/wnioskować/atakować |
+## 7. Status służbowy i odpowiedzialność dyscyplinarna
 
-## 6. Biegli i opinie
+W sprawie statusowej ustal:
+- powołanie/odwołanie albo przeniesienie;
+- delegowanie;
+- immunitet lub odpowiedzialność właściwą dla statusu;
+- stan spoczynku;
+- przewinienie dyscyplinarne i datę czynu;
+- właściwy rzecznik i sąd dyscyplinarny;
+- środek zaskarżenia i ewentualną kontrolę Sądu Najwyższego według aktualnej ustawy.
 
-Jeżeli sprawa zawiera element specjalistyczny, zastosuj `shared/EXPERT-OPINION-AUDIT.md`.
+Kasacja lub inny nadzwyczajny środek do SN nie jest zwykłą „trzecią instancją”.
 
-W szczególności sprawdź:
+## 8. EPPO — Prokuratura Europejska
 
-- zakres tezy dowodowej;
-- kwalifikacje biegłego;
-- kompletność dokumentacji;
-- metodologię;
-- odpowiedź na pytania sądu/organu;
-- funkcjonalne skutki ustaleń;
-- możliwość opinii uzupełniającej albo innego biegłego.
+Przy podejrzeniu przestępstwa naruszającego interesy finansowe UE nie zakładaj automatycznie właściwości krajowej ani EPPO na podstawie samej kwoty szkody.
 
-## 7. Strategia
+Sprawdź łącznie:
+- rozporządzenie Rady (UE) 2017/1939 w EUR-Lex;
+- przepisy o ochronie interesów finansowych UE i implementację dyrektywy PIF;
+- polskie przepisy dostosowujące po przystąpieniu do EPPO;
+- właściwość materialną i terytorialną w konkretnym stanie faktycznym;
+- zasady przejęcia, przekazania lub konsultacji sprawy.
 
-Zawsze wygeneruj:
+**Routing:** EPPO → DR-14 + DR-03/06 według przestępstwa i materii finansowej.
 
-1. najkorzystniejszą konstrukcję roszczenia/wniosku/środka;
-2. argument podstawowy;
-3. argument ewentualny;
-4. najsilniejszy kontrargument organu/przeciwnika;
-5. odpowiedź na kontrargument;
-6. ryzyka formalne;
-7. ryzyka dowodowe;
-8. ryzyka kosztowe;
-9. rekomendowane następne pismo.
+## 9. Skargi i środki dotyczące czynności prokuratora
 
-## 8. Orzecznictwo
+Nie istnieje jeden uniwersalny „środek na prokuratora”. Najpierw zakwalifikuj przedmiot:
+- decyzja procesowa w KPK → środek z KPK;
+- czynność lub bezczynność służbowa → właściwy tor nadzorczy/skargowy;
+- przewlekłość postępowania → odrębna ustawa o skardze na przewlekłość, jeżeli ma zastosowanie;
+- przewinienie służbowe/dyscyplinarne → reżim ustawy;
+- naruszenie praw jednostki → możliwy równoległy tor RPO, ale nie zamiast środka procesowego.
 
-Nie twórz fikcyjnych sygnatur. Orzecznictwo pobieraj z oficjalnych baz sądów, SN, NSA/CBOSA albo wiarygodnych systemów prawniczych. Dla każdego orzeczenia wskaż:
+Terminy zawsze pobieraj z aktualnego aktu proceduralnego.
 
-- sąd;
-- datę;
-- sygnaturę;
-- tezę użyteczną;
-- relację do stanu faktycznego;
-- aktualność linii orzeczniczej;
-- czy jest to argument główny, pomocniczy, czy ryzykowny.
+## 10. Routing
 
-## 9. Quality gate
+- KPK / śledztwo / środki zaskarżenia → DR-03;
+- KPC / udział prokuratora w cywilnym → DR-02;
+- KPA/PPSA → DR-05;
+- ustrój sądów i konstytucyjny → DR-01;
+- zawód/status/dyscyplinarne → DR-12;
+- EPPO / prawo UE → DR-14;
+- przestępstwa przeciw interesom finansowym / podatki → DR-03 + DR-06.
 
-Nie kończ analizy bez odpowiedzi:
+## 11. Quality gate
 
-- czy sprawdzono aktualność aktu;
-- czy stan prawny jest właściwy temporalnie;
-- czy wskazano pełną podstawę prawną;
-- czy znane jest brzmienie przepisu z aktualnego źródła;
-- czy każda przesłanka ma dowód;
-- czy istnieje termin i czy nie upłynął;
-- czy dobrano właściwy tryb;
-- czy wnioski są procesowo wykonalne.
+- [ ] aktualny tekst Dz.U. 2026 poz. 810 sprawdzony w ELI/ISAP;
+- [ ] ustrojową podstawę odróżniono od przepisu proceduralnego;
+- [ ] właściwa jednostka organizacyjna została ustalona, a nie założona;
+- [ ] termin i środek procesowy pobrano z właściwego kodeksu;
+- [ ] w sprawie EPPO sprawdzono rozporządzenie 2017/1939 w EUR-Lex i polskie przepisy dostosowujące;
+- [ ] status służbowy i dyscyplinarny oceniono według prawa na datę zdarzenia;
+- [ ] nie zastosowano uproszczonego progu kwotowego jako jedynego testu właściwości EPPO.
 
-## 10. Output
+## 12. Źródła urzędowe
 
-Standard odpowiedzi/pisma:
-
-1. stan faktyczny;
-2. stan prawny i źródła;
-3. przesłanki;
-4. dowody;
-5. zarzuty;
-6. analiza ryzyk;
-7. strategia;
-8. wnioski;
-9. załączniki;
-10. kontrola ISAP/temporalności.
-
----
-
-## KLUCZOWE AKTY PRAWNE — ZWERYFIKOWANE
-
-```
-Prawo o prokuraturze:
-  Dz.U. 2026 poz. 810 t.j. ze zm.
-  ✅ VER: isap.sejm.gov.pl 2026-06-05
-  → https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000390
-
-⚡ ALERT — PROKURATURA EUROPEJSKA:
-  Ustawa z 24.01.2025 r. o zmianie niektórych ustaw w związku z przystąpieniem RP
-  do wzmocnionej współpracy w zakresie Prokuratury Europejskiej (EPPO):
-  → Dz.U. 2025 poz. 304
-  ✅ VER: isap.sejm.gov.pl 2026-06-05
-
-  Co zmienia przystąpienie do EPPO:
-  → EPPO (European Public Prosecutor's Office) = organ UE ścigający przestępstwa
-    na szkodę budżetu UE (VAT-karuzele, nadużycia funduszy UE)
-  → EPPO może wszcząć postępowanie w Polsce bez zgody prokuratury krajowej
-  → Prokuratorzy krajowi mogą być oddelegowani do EPPO
-  → Sprawy EPPO: przestępstwa > 10 000 EUR szkody dla budżetu UE (Rozp. UE 2017/1939)
-  → Strony mają prawa procesowe jak w polskim KPK (art. 86 i n. KPK — obrońca, dostęp do akt)
-
-Zakres spraw prokuratorskich — kluczowe pytania INTAKE:
-  □ Czy to sprawa krajowa (prokuratura powszechna / PK) czy unijska (EPPO)?
-  □ Czy złożono zażalenie na odmowę wszczęcia / umorzenie?
-  □ Termin na zażalenie: 7 dni od doręczenia postanowienia (art. 306 KPK — weryfikuj)
-  □ Czy jest możliwe działanie posiłkowego pełnomocnika pokrzywdzonego?
-  □ Czy sprawa dotyczy nadużycia środków UE → właściwy EPPO
-
-Skargi na czynności prokuratora:
-  → Zażalenie na odmowę wszczęcia śledztwa / umorzenie (art. 306 KPK)
-  → Zażalenie na inne czynności (art. 302 KPK)
-  → Skarga administracyjna do prokuratury przełożonej
-  → Skarga do Rzecznika Praw Obywatelskich (RPO)
-  ⚠️ Weryfikuj aktualne przepisy KPK w ISAP (Dz.U. 2025 poz. 1390 lub aktualny t.j.)
-```
+- ELI — Prawo o prokuraturze, Dz.U. 2026 poz. 810: `https://eli.gov.pl/eli/DU/2026/810/ogl`
+- EUR-Lex — rozporządzenie Rady (UE) 2017/1939: oficjalny EUR-Lex, fresh gate przed użyciem.
