@@ -1,7 +1,7 @@
 ---
 name: audyt-systemu-v4
 description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych skilli: zależności, wersje, mapy Dz.U., treść merytoryczna, propagacja zmian, deduplikacja i bramki jakości."
-version: "6.29"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
+version: "6.30"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
                   # parsuje jako float 6.1 — czyli numer NIŻSZY niż 6.9, co cicho
                   # odwraca porządek wersji. Wykryte przy walidacji 2026-08-20z.
                   # Każda kolejna wersja z dwucyfrowym minor — też w cudzysłowie.
@@ -46,7 +46,7 @@ references:
   - references/mapa_dzu_2026-07-04.md   # ARCHIWALNA — poprzednia wersja mapy Dz.U., zachowywana jako materiał historyczny cytowany w AUDIT-JOURNAL.md — REJESTROWANE 2026-08-15 (nigdy formalnie nie wpisana mimo aktywnego cytowania)
   - references/mapa_dzu_2026-07-02.md   # ARCHIWALNA — jw., wcześniejsza wersja — REJESTROWANE 2026-08-15
   - references/mapa_dzu_2026-06-14.md   # ARCHIWALNA — jw., najwcześniejsza zachowana wersja — REJESTROWANE 2026-08-15
-  - references/F-108-lista-MS-egzamin-2026.md   # benchmark 52 aktów MS; stan po re-audycie: 52/52 routing, 48/52 COV, 4 B/B+
+  - references/F-108-lista-MS-egzamin-2026.md   # benchmark 52 aktów MS; stan końcowy F-108: 52/52 routing i 52/52 B+/COV, 0 FULL
   - references/F-108-verification-2026-08-28.md  # dowód ponownej weryfikacji pokrycia i aktualności t.j./Dz.U.
   - references/F-104-lista-robocza-mapa-dzu.md   # lista robocza flagi F-104 — 16 aktów rocznika 2026
                                           # do wpisania do mapy centralnej, po kwalifikacji numer GŁÓWNY vs POBOCZNY;
@@ -86,7 +86,7 @@ scripts:
   - scripts/audit_amendment_scope.py      # T16 — pełny inwentarz dyspozycji nowelizacji i propagacja każdej zmienionej jednostki przez cały korpus; bez ścieżek hosta
   - scripts/test_router_contract.py       # T17 — lekki router, stałe identyfikatory reguł, PATH-SELFTEST, [11] i N/N
   - scripts/test_f108_trade.py            # F-108/46 — 6 półroczy, rejestr 52/52, propagacja i mutacje negatywne
-  - scripts/test_f108_consistency.py      # T19 — guard 52/52 inventory, 48/52 COV i znane korekty metryk Dz.U.
+  - scripts/test_f108_consistency.py      # T19 — guard 52/52 inventory, 52/52 COV, 0 FULL i znane korekty metryk Dz.U.
   - scripts/mock_eli_server_test.py       # mock serwera ELI do testowania sync_dzu_eli.py bez żywego dostępu do api.sejm.gov.pl — REJESTROWANE 2026-08-15
   - scripts/bootstrap_last_sync_date.py   # inicjalizacja pliku .last_sync_date przy pierwszym uruchomieniu sync_dzu_eli.py — REJESTROWANE 2026-08-15
   - scripts/dostarcz_skill.sh             # skrypt automatyzujący łańcuch dostawy (Reguła 4/6/7 HARDGATE-AUDYT: policz/zip/rozpakuj/diff) — REJESTROWANE 2026-08-15
