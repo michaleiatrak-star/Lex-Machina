@@ -1,7 +1,7 @@
 ---
 name: audyt-systemu-v4
 description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych skilli: zależności, wersje, mapy Dz.U., treść merytoryczna, propagacja zmian, deduplikacja i bramki jakości."
-version: "6.28"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
+version: "6.29"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
                   # parsuje jako float 6.1 — czyli numer NIŻSZY niż 6.9, co cicho
                   # odwraca porządek wersji. Wykryte przy walidacji 2026-08-20z.
                   # Każda kolejna wersja z dwucyfrowym minor — też w cudzysłowie.
@@ -29,8 +29,8 @@ references:
   - references/WARN-OTWARTE.md   # rejestr żywy TYLKO otwartych flag (WARN + strukturalne) — dodane 2026-07-07, ZASADA 10; ⚡ od 2026-08-15w zaczyna się TABLICĄ STERUJĄCĄ (indeks wszystkich flag + następny krok w jednym zdaniu) — czytaj ją PIERWSZĄ przy pytaniu „co jest do zrobienia"
   - references/SPROSTOWANIE-LM-2026-08-23.md   # dokument do wysłania autorowi raportów TEST1-3 — realizacja F-116 część 3/3, bez treści proceduralnej systemu — dodane 2026-08-23f
   - references/CHECKLIST-DEDUP.md   # mapa pojęć → lokalizacje (5 not, NOTA-6 ORPHAN dodana 06-14g)
-  - references/mapa_dzu_2026-08-26.md   # ⭐ AKTUALNA mapa Dz.U.; braki T11 lokalne→centralna = 0
-                                          # 2 statusy → PREV, 1 naprawiony błąd klasy F-82 z 2 znacznikami ⚠️ ALERT)
+  - references/mapa_dzu_2026-08-28.md   # ⭐ AKTUALNA mapa Dz.U.; ponowny audyt F-108, korekty tożsamości i statusów t.j.
+  - references/mapa_dzu_2026-08-26.md   # POPRZEDNIA generacja — zachowana historycznie
   - references/mapa_dzu_2026-07-15.md   # POPRZEDNIA generacja (sync 2026-08-13) — zachowana jako materiał historyczny
   - references/PLAN-TESTU-BRAMEK-F113.md   # protokół testu SKUTECZNOŚCI bramek z GRUPĄ KONTROLNĄ
                                           # (F-113, część projektowa, 2026-08-24). Odpowiada na pytanie,
@@ -46,9 +46,8 @@ references:
   - references/mapa_dzu_2026-07-04.md   # ARCHIWALNA — poprzednia wersja mapy Dz.U., zachowywana jako materiał historyczny cytowany w AUDIT-JOURNAL.md — REJESTROWANE 2026-08-15 (nigdy formalnie nie wpisana mimo aktywnego cytowania)
   - references/mapa_dzu_2026-07-02.md   # ARCHIWALNA — jw., wcześniejsza wersja — REJESTROWANE 2026-08-15
   - references/mapa_dzu_2026-06-14.md   # ARCHIWALNA — jw., najwcześniejsza zachowana wersja — REJESTROWANE 2026-08-15
-  - references/F-108-lista-MS-egzamin-2026.md   # lista robocza flagi F-108 — benchmark zewnętrzny: wykaz 52 aktów
-                                          # MS na egzamin wstępny na aplikację 2026; pomiar bazowy pokrycia
-                                          # (39 A / 9 B / 1 C / 3 D) + plan trzyetapowy — dodane 2026-08-23
+  - references/F-108-lista-MS-egzamin-2026.md   # benchmark 52 aktów MS; stan po re-audycie: 52/52 routing, 48/52 COV, 4 B/B+
+  - references/F-108-verification-2026-08-28.md  # dowód ponownej weryfikacji pokrycia i aktualności t.j./Dz.U.
   - references/F-104-lista-robocza-mapa-dzu.md   # lista robocza flagi F-104 — 16 aktów rocznika 2026
                                           # do wpisania do mapy centralnej, po kwalifikacji numer GŁÓWNY vs POBOCZNY;
                                           # zawiera opis pułapki parsowania (mapa trzyma numer w DWÓCH formatach:
@@ -87,6 +86,7 @@ scripts:
   - scripts/audit_amendment_scope.py      # T16 — pełny inwentarz dyspozycji nowelizacji i propagacja każdej zmienionej jednostki przez cały korpus; bez ścieżek hosta
   - scripts/test_router_contract.py       # T17 — lekki router, stałe identyfikatory reguł, PATH-SELFTEST, [11] i N/N
   - scripts/test_f108_trade.py            # F-108/46 — 6 półroczy, rejestr 52/52, propagacja i mutacje negatywne
+  - scripts/test_f108_consistency.py      # F-108 — guard 52/52 inventory, 48/52 COV i znane korekty metryk Dz.U.
   - scripts/mock_eli_server_test.py       # mock serwera ELI do testowania sync_dzu_eli.py bez żywego dostępu do api.sejm.gov.pl — REJESTROWANE 2026-08-15
   - scripts/bootstrap_last_sync_date.py   # inicjalizacja pliku .last_sync_date przy pierwszym uruchomieniu sync_dzu_eli.py — REJESTROWANE 2026-08-15
   - scripts/dostarcz_skill.sh             # skrypt automatyzujący łańcuch dostawy (Reguła 4/6/7 HARDGATE-AUDYT: policz/zip/rozpakuj/diff) — REJESTROWANE 2026-08-15
@@ -1146,12 +1146,12 @@ audyt-systemu-v4/                               ← 71 plików (stan 2026-08-26)
 │   └── MOD-PROPAGACJA-NOWELIZACJI.md           ← propagacja nowelizacji przez CAŁY system
 ├── widgets/
 │   └── WIDGET-MENU.md                          ← menu interaktywne (FAZA 0B)
-├── scripts/                                    ← 23 pliki: testy T1-T4, T8, T9, T11-T17,
+├── scripts/                                    ← 24 pliki: testy T1-T4, T8, T9, T11-T18 + F-108 guard,
 │   │                                             orkiestrator, ci_check_shared (T6/T7),
 │   │                                             check_rejestracja_modulow, sync ELI (3 pliki),
 │   │                                             2 skrypty .sh, README.md — pełna lista w YAML
 │   └── …                                         `scripts:`
-└── references/                                 ← 36 plików
+└── references/                                 ← 38 plików
     ├── AUDIT-JOURNAL.md                        ← dziennik audytów, ~44 tys. linii, 2,6 MB
     ├── WARN-OTWARTE.md                         ← rejestr żywy otwartych flag (ZASADA 10)
     ├── CHANGELOG.md                            ← historia wersji orkiestratora (F-78)
@@ -1162,17 +1162,19 @@ audyt-systemu-v4/                               ← 71 plików (stan 2026-08-26)
     ├── SCHEDULED-TASK-COWORK.md                ← POZYCJA 11 menu (FAZA 0C)
     ├── PAMIEC-TRWALA-ROUTER.md                 ← POZYCJA 13 menu (FAZA 0D)
     ├── SPROSTOWANIE-LM-2026-08-23.md           ← dokument dla autora raportów TEST1-3
-    ├── F-108-lista-MS-egzamin-2026.md          ← lista robocza F-108 (wykaz 52 aktów MS)
+    ├── F-108-lista-MS-egzamin-2026.md          ← benchmark F-108 (52 akty MS; 48/52 COV)
+    ├── F-108-verification-2026-08-28.md         ← raport źródłowy re-audytu F-108
     ├── F-104-lista-robocza-mapa-dzu.md         ← lista robocza F-104, rocznik 2026
     ├── F-104-lista-robocza-roczniki-starsze.md ← lista robocza F-104, roczniki 2013-2025 (F-124)
-    ├── mapa_dzu_2026-08-26.md                  ← mapa Dz.U. AKTUALNA
+    ├── mapa_dzu_2026-08-28.md                  ← mapa Dz.U. AKTUALNA
+    ├── mapa_dzu_2026-08-26.md                  ← POPRZEDNIA generacja
     ├── mapa_dzu_2026-07-15 / 07-04 / 07-02 / 06-14.md  ← POPRZEDNIE generacje, cytowane w dzienniku
     └── raporty-pokrycia-2026-08-13/            ← 12 raportów + indeks = 13 plików
 ```
 
 ---
 
-*Wersja: 6.28 | Ostatnia aktualizacja: 2026-08-28 (F-138: lokalne MAPA-AKTOW DR-01–DR-16 w modelu current-state-only z zachowaniem rejestracji modułów; F-108 zamknięta 52/52 B+/COV; prawny-router-v3 3.31; końcowy test spójności pozostaje osobnym krokiem).*
+*Wersja: 6.29 | Ostatnia aktualizacja: 2026-08-28 (ponowny audyt F-108: 52/52 routing, 48/52 B+/COV, 4 pozycje B/B+; skorygowano aktywne metryki t.j. i utworzono `mapa_dzu_2026-08-28.md`; prawny-router-v3 3.31).*
 *(Stopka podawała „5.0 | 2026-07-04" przy `version: 6.8` w YAML — rozjazd
 9 wersji, naprawiony 2026-08-20y. **Stopkę aktualizuj razem z polem `version`**;
 jeśli znów zacznie się rozjeżdżać, kandyduje do usunięcia jako pole martwe —
