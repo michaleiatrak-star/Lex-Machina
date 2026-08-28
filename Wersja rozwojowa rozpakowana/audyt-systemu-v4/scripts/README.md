@@ -56,6 +56,7 @@ i inne), nie w audycie deweloperskim. Patrz `shared/tools/README.md`.
 ## test_f108_consistency.py — T19 F-108
 
 Deterministyczny guard bieżącego benchmarku 52 aktów. Chroni rozdzielenie
-`routing != COV != FULL`, oczekiwany wynik 48/52 COV oraz zestaw krytycznych
-korekt metryk Dz.U. z audytu 2026-08-28. Jest uruchamiany przez
+`routing != COV != FULL`, końcowy wynik 52/52 COV przy 0 FULL, obecność
+current-state modułów domykających F-108 oraz zestaw krytycznych korekt metryk
+Dz.U. z audytu 2026-08-28. Jest uruchamiany przez
 `run_regression_suite.py` i jego FAIL jest blockerem strukturalnym.

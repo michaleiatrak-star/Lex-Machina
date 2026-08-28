@@ -78,9 +78,11 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 
 | Zakres | Moduł / routing | Status runtime |
 |---|---|---|
+| KW — indeks current-state całego kodeksu | `mod-KW-current-state-COV.md` | 🟢 B+/COV |
 | KW — moduł główny | `mod-KW-kodeks-wykroczen` | ✅ aktywny |
 | KW — część ogólna | `mod-KW-art1-48-czesc-ogolna` | ✅ aktywny |
 | KW art. 49–64 — porządek publiczny | `mod-KW-art49-64-porzadek-publiczny` | ✅ aktywny |
+| KW art. 65–69 — instytucje państwowe, samorządowe i społeczne | `mod-KW-art65-69-instytucje` | 🟢 B+/COV zakresu |
 | KW art. 70–118 — bezpieczeństwo / osoba / zdrowie | `mod-KW-art70-118-bezpieczenstwo-osoba-zdrowie` | ✅ aktywny |
 | KW art. 119–131 — mienie | `mod-KW-art119-131-przeciwko-mieniu` | ✅ aktywny |
 | KW art. 132–166 — pozostałe rozdziały | `mod-KW-art132-166-pozostale-rozdzialy` | ✅ aktywny |

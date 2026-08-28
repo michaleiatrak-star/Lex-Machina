@@ -14,7 +14,7 @@ F108 = AUDIT / "references" / "F-108-lista-MS-egzamin-2026.md"
 MAP = AUDIT / "references" / "mapa_dzu_2026-08-28.md"
 ROUTING = DEV / "prawo-polskie-v2" / "ROUTING-MAP.md"
 
-EXPECTED_BELOW_COV = {7, 29, 30, 40}
+EXPECTED_BELOW_COV = set()
 
 def fail(msg: str) -> None:
     print(f"FAIL: {msg}")
@@ -36,14 +36,35 @@ actual_below = {i for i, line in rows.items() if "COV" not in line}
 if actual_below != EXPECTED_BELOW_COV:
     fail(f"below-COV set changed: expected {EXPECTED_BELOW_COV}, got {actual_below}")
 
-if "48/52" not in f108 or "52/52 aktów ma realny routing/moduł" not in f108:
-    fail("F-108 summary no longer states 52/52 inventory and 48/52 COV")
+if "52/52 aktów ma realny routing/moduł i 52/52 ma potwierdzony status B+/COV" not in f108:
+    fail("F-108 summary no longer states 52/52 inventory and 52/52 COV")
+
+required_modules = [
+    DEV / "dr-03-prawo-karne-wykroczenia-egzekucja" / "modules" / "mod-KW-current-state-COV.md",
+    DEV / "dr-03-prawo-karne-wykroczenia-egzekucja" / "modules" / "mod-KW-art65-69-instytucje.md",
+    DEV / "dr-04-prawo-pracy-zus-swiadczenia" / "modules" / "mod-SUS-current-state-COV.md",
+    DEV / "dr-04-prawo-pracy-zus-swiadczenia" / "modules" / "mod-ustawa-zasilkowa-current-state-COV.md",
+    DEV / "dr-04-prawo-pracy-zus-swiadczenia" / "modules" / "mod-zwolnienia-grupowe-current-state-COV.md",
+]
+for module in required_modules:
+    if not module.exists():
+        fail(f"required F-108 COV module missing: {module.relative_to(DEV)}")
 
 routing = ROUTING.read_text(encoding="utf-8")
 if "Dz.U. 2025 poz. 1071 ze zm." in routing:
     fail("stale KC 2025/1071 remains in active ROUTING-MAP")
 if "| Ustawa Prawo o prokuraturze | Dz.U. 2024 poz. 390" in routing:
     fail("stale Prawo o prokuraturze 2024/390 remains in active ROUTING-MAP")
+
+for needle in [
+    "mod-KW-current-state-COV.md",
+    "mod-KW-art65-69-instytucje.md",
+    "mod-SUS-current-state-COV.md",
+    "mod-ustawa-zasilkowa-current-state-COV.md",
+    "mod-zwolnienia-grupowe-current-state-COV.md",
+]:
+    if needle not in routing:
+        fail(f"F-108 current-state module not registered in ROUTING-MAP: {needle}")
 
 dzu = MAP.read_text(encoding="utf-8")
 required = {
@@ -68,4 +89,4 @@ for needle in forbidden:
     if needle in dzu:
         fail(f"known false Dz.U. identity returned: {needle}")
 
-print("PASS: F-108 inventory=52/52, COV=48/52, known currentness corrections preserved.")
+print("PASS: F-108 inventory=52/52, COV=52/52, FULL=0/52, current-state modules and known currentness corrections preserved.")

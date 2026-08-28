@@ -1,5 +1,7 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.7 (2026-08-28) — domknięto F-108 do **52/52 B+/COV**: centralny routing wskazuje current-state indeksy KW, SUS, ustawy zasiłkowej i zwolnień grupowych; KW otrzymał także fizyczny moduł brakującego zakresu art. 65–69. `COV` pozostaje rozdzielone od `FULL`, a konkretna jednostka nadal podlega fresh/temporal gate.
+
 - 6.6 — F-108 P1: zarejestrowano osobne moduły UFG/PBUK, opłat w sprawach karnych i fundacji rodzinnej; rozdzielono błędnie połączone metryki KC (Dz.U. 2026 poz. 795) i ustawy UFG/PBUK (Dz.U. 2026 poz. 783). (2026-08-27)
 
 - 6.5 — F-108/46: rejestracja modułu DR-02; historycznych liczników nie przedstawia się jako pomiaru aktualnego pokrycia. (2026-08-27)

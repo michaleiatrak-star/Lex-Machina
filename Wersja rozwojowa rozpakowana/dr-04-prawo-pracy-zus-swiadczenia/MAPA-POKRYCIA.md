@@ -40,6 +40,7 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 
 | Zakres | Status bieżący | Dowód pokrycia |
 |---|---|---|
+| current-state indeks wszystkich 13 rozdziałów | 🟢 B+ / COV | `mod-SUS-current-state-COV.md` |
 | przepisy ogólne | 🟡 B | `mod-SUS-uzupelnienie-pokrycia-2026.md` |
 | podleganie ubezpieczeniom społecznym | 🟢 | `mod-SUS-dzial-2-podleganie-ubezpieczeniom.md` |
 | ustalanie składek | 🟡 B | `mod-SUS-uzupelnienie-pokrycia-2026.md` |
@@ -73,14 +74,14 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 
 | Akt / temat | Status bieżący |
 |---|---|
-| zwolnienia grupowe | 🟢/🟡 B+; dedykowany moduł i procedura art. 2–6 |
-| ustawa zasiłkowa | 🟢/🟡 B+; Dz.U. 2026 poz. 854 t.j. |
+| zwolnienia grupowe | 🟢 B+ / COV; `mod-zwolnienia-grupowe-current-state-COV.md` mapuje art. 1–12 i 28–30 |
+| ustawa zasiłkowa | 🟢 B+ / COV; `mod-ustawa-zasilkowa-current-state-COV.md` mapuje wszystkie 13 rozdziałów |
 | handel w niedziele | 🟢/🟡; bieżąca metryka w MAPA-AKTOW |
 | „Za życiem” i świadczenia szczególne | 🟢/🟡; bieżące metryki w MAPA-AKTOW |
 
 ## Aktywne luki
 
 1. Kodeks pracy ma bieżący status B+/COV dla całej struktury, ale nie status `FULL` artykuł-po-artykule.
-2. SUS i FUS są szeroko zmapowane operacyjnie, ale część działów pozostaje B/B+.
-3. Największy obszar pogłębiania DR-04 to materialne reguły składkowe, szczegółowe warianty świadczeń i wyjątki.
+2. SUS ma strukturalny B+/COV przez indeks wszystkich 13 rozdziałów; lokalna głębokość części działów pozostaje B/B+ i nie jest utożsamiana z FULL. FUS nadal ma zakresy B/B+ poza F-108.
+3. Ustawa zasiłkowa i zwolnienia grupowe mają current-state B+/COV; dalsze pogłębianie dotyczy wyjątków, kwot i wariantów, nie braków struktury.
 4. Przed użyciem kwot, progów, terminów lub konkretnego artykułu obowiązuje świeża weryfikacja ELI/ISAP i właściwego obwieszczenia.
