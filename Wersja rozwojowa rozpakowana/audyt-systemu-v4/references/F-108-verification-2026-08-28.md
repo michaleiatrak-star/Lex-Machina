@@ -31,7 +31,7 @@ Wniosek: wcześniejsza deklaracja „52/52 B+/COV” mieszała **obecność modu
 4. **Fundacje / stowarzyszenia** — centralna mapa błędnie przypisywała:
    - 2025/1338 Prawu o stowarzyszeniach; w ELI to t.j. ustawy o działalności pożytku publicznego i o wolontariacie;
    - 2023/549 ustawie o fundacjach; w ELI to rozporządzenie MKiDN o pomocy publicznej na kulturę.
-   Aktualne metryki: fundacje **2023/166 + zm. 2026/316**; stowarzyszenia **2020/2261 + zm. 2026/316 i 2026/346**.
+   Aktualne metryki: fundacje **2023/166 + obowiązująca zm. 2026/316**; stowarzyszenia **2020/2261 + obowiązująca zm. 2026/316**. Ustawa **2026/346** jest już opublikowana, ale wchodzi w życie dopiero 30.09.2028 i do tego czasu pozostaje temporalnym monitoringiem.
 5. **Prawa konsumenta** — 2024/1796 było błędnie opisane jako „KC/KPC — poprzedni t.j.”; ELI potwierdza, że jest to t.j. ustawy o prawach konsumenta.
 6. **Spółdzielnie mieszkaniowe** — 2024/1069 było błędnie przypisane tej ustawie; w ELI jest to rozporządzenie MI dotyczące rejestru polskich statków żeglugi śródlądowej. Aktualny t.j. ustawy o spółdzielniach mieszkaniowych: **2026/889**.
 7. **2026/346** — błędnie opisane jako zmiana Prawa restrukturyzacyjnego; ELI: nowelizacja Prawa o stowarzyszeniach, KRS i KSCU.
@@ -59,7 +59,7 @@ Legenda: `TJ` = najnowszy zidentyfikowany tekst jednolity; `TJ+` = najnowszy t.j
 | 13 | Prawo spółdzielcze | Dz.U. 2026 poz. 521 | TJ |
 | 14 | Fundacje | Dz.U. 2023 poz. 166 + Dz.U. 2026 poz. 316 | TJ+ |
 | 15 | RPO | Dz.U. 2024 poz. 1264 | TJ |
-| 16 | Prawo o stowarzyszeniach | Dz.U. 2020 poz. 2261 + Dz.U. 2026 poz. 316 i 346 | TJ+ |
+| 16 | Prawo o stowarzyszeniach | Dz.U. 2020 poz. 2261 + obowiązująca zm. Dz.U. 2026 poz. 316; opubl. Dz.U. 2026 poz. 346 (wejście 30.09.2028) | TJ+ |
 | 17 | Samorząd gminny | Dz.U. 2026 poz. 662 | TJ |
 | 18 | TUE | EUR-Lex, aktualne brzmienie skonsolidowane | UE |
 | 19 | Prawo autorskie | Dz.U. 2025 poz. 24 + późn. zm. | TJ+ |
