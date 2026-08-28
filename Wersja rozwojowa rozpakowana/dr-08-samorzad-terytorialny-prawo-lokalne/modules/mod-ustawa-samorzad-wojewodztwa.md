@@ -1,22 +1,22 @@
 ---
 module: ustawa-samorzad-wojewodztwa
-version: "1.0"
-verified_on: "2026-08-27"
-coverage: "B+ — pełna mapa 9 rozdziałów + rdzeń ustrojowy"
+version: "1.1"
+verified_on: "2026-08-28"
+coverage: "B+ / COV — Dz.U. 2026 poz. 720, pełna mapa 9 rozdziałów + rdzeń ustrojowy, współpraca zagraniczna, nadzór i prawo miejscowe"
 source_policy: "RZĄD 1 only"
 ---
 
-# Ustawa o samorządzie województwa — F-108/28
+# Ustawa o samorządzie województwa — current-state COV
 
 ## 1. Źródło
 
-Ustawa z 5 czerwca 1998 r. o samorządzie województwa.
-Aktualny tekst jednolity: **Dz.U. 2026 poz. 720**, stan prawny tekstu
-jednolitego 25.05.2026.
+Ustawa z 5 czerwca 1998 r. o samorządzie województwa.  
+Aktualny tekst jednolity: **Dz.U. 2026 poz. 720**, stan prawny tekstu jednolitego **25.05.2026**.
 
-RZĄD 1:
-- https://eli.gov.pl/eli/DU/2026/720/ogl
-- https://eli.gov.pl/api/acts/DU/2026/720/text/O/D20260720.pdf
+Źródło urzędowe:
+- `https://eli.gov.pl/eli/DU/2026/720/ogl`
+
+Przed zastosowaniem konkretnej jednostki sprawdź ELI pod kątem późniejszych zmian.
 
 ## 2. Mapa ustawy
 
@@ -32,49 +32,43 @@ RZĄD 1:
 | 8 | Akty prawa miejscowego stanowionego przez samorząd województwa |
 | 9 | Przepis końcowy |
 
-## 3. Status i relacja do gminy/powiatu
+## 3. Status i relacja do innych JST
 
-Art. 1: mieszkańcy tworzą regionalną wspólnotę samorządową.
-Art. 2: samorząd województwa wykonuje zadania publiczne o charakterze
-wojewódzkim niezastrzeżone dla administracji rządowej.
-Art. 4: zakres działania województwa nie narusza samodzielności powiatu
-i gminy; organy województwa nie są dla nich organami nadzoru ani organami
-wyższego stopnia.
+Mieszkańcy województwa tworzą regionalną wspólnotę samorządową. Samorząd województwa wykonuje zadania publiczne o charakterze wojewódzkim niezastrzeżone dla administracji rządowej.
+
+Zakres działania województwa nie narusza samodzielności powiatu i gminy; organy województwa nie są dla nich organami nadzoru ani organami wyższego stopnia w postępowaniu administracyjnym.
 
 ## 4. Zakres działalności
 
-Rozdział 2 obejmuje strategię rozwoju i politykę rozwoju województwa oraz
-zadania o charakterze wojewódzkim. Przy konkretnym zadaniu zawsze sprawdź
-ustawę sektorową i aktualne przepisy o polityce rozwoju.
+Rozdział 2 obejmuje strategię rozwoju, politykę rozwoju województwa i zadania regionalne. Przy konkretnej kompetencji dołącz ustawę sektorową i przepisy o polityce rozwoju.
 
 ## 5. Władze
 
-Art. 15 wskazuje organy: sejmik województwa i zarząd województwa.
-Sejmik jest organem stanowiącym i kontrolnym, a zarząd wykonuje zadania
-niezastrzeżone dla sejmiku i innych jednostek. Marszałek organizuje pracę
-zarządu i urzędu oraz reprezentuje województwo.
+Organami samorządu województwa są sejmik i zarząd. Przy każdej sprawie ustal:
+- czy kompetencja jest zastrzeżona dla sejmiku;
+- kompetencję zarządu i rolę marszałka;
+- wymaganą formę prawną działania;
+- quorum i większość z aktualnego przepisu.
 
-Przy każdej kompetencji odczytaj pełny katalog aktualnego art. 18 i art. 41.
+## 6. Mienie i finanse
 
-## 6. Nadzór i prawo miejscowe
+Rozdziały 4–5 mają charakter ustrojowy. Konkretne rozporządzenie mieniem, zobowiązanie lub operację budżetową analizuj łącznie z ustawą o finansach publicznych, ustawą o dochodach JST i przepisami szczególnymi.
 
-Rozdział 7 reguluje nadzór, w tym środki wojewody wobec niezgodnych z prawem
-działań organów województwa.
+## 7. Współpraca zagraniczna
 
-Rozdział 8: sejmik stanowi akty prawa miejscowego na podstawie i w granicach
-upoważnienia ustawowego; akty kieruje się do publikacji w wojewódzkim
-dzienniku urzędowym. Art. 89a przewiduje obywatelską inicjatywę uchwałodawczą.
+Rozdział 6 dotyczy współpracy zagranicznej województwa. Przed zawarciem porozumienia lub przystąpieniem do organizacji sprawdź ustawową kompetencję, wymagane uchwały oraz ewentualne obowiązki wobec organów państwa i prawa UE/międzynarodowego.
 
-## 7. F-108
+## 8. Nadzór i prawo miejscowe
 
-F-108/28: decyzja P3 **WYDZIELIĆ** z łącznego modułu JST. Dedykowany moduł
-osiąga poziom B+ i usuwa ryzyko mieszania kompetencji województwa z gminą
-lub powiatem.
+Rozdział 7 reguluje nadzór nad samorządem województwa. Rozdział 8 dotyczy aktów prawa miejscowego. Przy kontroli aktu użyj także modułów nadzoru wojewody/RIO, publikacji w wojewódzkim dzienniku urzędowym i PPSA.
 
-## 8. Quality gate
+## 9. Quality gate
 
-- [ ] użyto aktualnego Dz.U. 2026 poz. 720;
-- [ ] odróżniono samorząd województwa od wojewody;
+- [ ] użyto aktualnego Dz.U. 2026 poz. 720 i sprawdzono późniejsze zmiany;
+- [ ] odróżniono samorząd województwa od wojewody jako organu administracji rządowej;
 - [ ] kompetencję przypisano sejmikowi/zarządowi/marszałkowi z przepisu;
 - [ ] przy zadaniu sektorowym odczytano lex specialis;
-- [ ] akt prawa miejscowego ma delegację i publikację.
+- [ ] przy finansach i mieniu dołączono właściwe ustawy szczególne;
+- [ ] akt prawa miejscowego ma delegację i prawidłową publikację.
+
+**Status runtime:** B+/COV, bez deklaracji `FULL` artykuł-po-artykule.
