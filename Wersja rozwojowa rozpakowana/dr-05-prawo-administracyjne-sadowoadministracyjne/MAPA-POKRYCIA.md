@@ -13,14 +13,18 @@ Mapa zawiera tylko aktualny stan pokrycia wykorzystywany przez system. Historia 
 
 ## KPA
 
+**Baza operacyjna:** Dz.U. 2025 poz. 1691 t.j., stan prawny tekstu jednolitego 3.11.2025; przed użyciem konkretnej jednostki obowiązuje świeża kontrola ELI/ISAP.
+
 | Zakres | Status bieżący | Główny nośnik |
 |---|---|---|
-| zasady ogólne / właściwość / strony | 🟢/🟡 | `mod-KPA-postepowanie-administracyjne.md` |
-| terminy / doręczenia / bezczynność | 🟢/🟡 B+ | moduły KPA tematyczne |
-| postępowanie dowodowe | 🟢/🟡 B+ | moduły KPA + analizator dowodów |
-| decyzje / postanowienia / odwołania | 🟢 | moduły KPA |
-| tryby nadzwyczajne | 🟢 | `mod-KPA-tryby-nadzwyczajne-i-strategia.md` |
-| milczące załatwienie / ugoda / mediacja | 🟢/🟡 | moduły KPA |
+| current-state indeks całego KPA | 🟢 B+ / COV | `mod-KPA-current-state-COV.md` |
+| Dział I — zasady ogólne / właściwość / strony / terminy / doręczenia | 🟢 B+ / COV | indeks COV + `mod-KPA-postepowanie-administracyjne.md` |
+| Dział II — wszczęcie / akta / dowody / mediacja / decyzje / środki | 🟢 B+ / COV | indeks COV + moduły KPA tematyczne |
+| decyzje / postanowienia / odwołania | 🟢 B+ / COV | `mod-KPA-decyzja-i-odwolanie.md` |
+| zawieszenie / dowody / rozprawa / mechanizmy w toku | 🟢 B+ / COV | `mod-KPA-mechanizmy-w-toku-sprawy.md` |
+| tryby nadzwyczajne / bezczynność / kary administracyjne | 🟢 B+ / COV | `mod-KPA-tryby-nadzwyczajne-i-strategia.md` |
+| sprawy ubezpieczeń społecznych | 🟢/🟡 B+ | KPA + routing DR-04/KPC; nie każda kontrola prowadzi do WSA |
+| udział prokuratora / skargi i wnioski / koszty | 🟢/🟡 B+ | indeks COV + właściwe moduły tematyczne |
 
 ## PPSA
 
@@ -50,8 +54,8 @@ Mapa zawiera tylko aktualny stan pokrycia wykorzystywany przez system. Historia 
 
 | Akt / zakres | Status bieżący | Dowód pokrycia |
 |---|---|---|
-| Rzecznik Praw Obywatelskich — Dz.U. 2024 poz. 1264 | 🟢 B+ / COV | `mod-ustawa-RPO.md`; aktualny zakres art. 12–17 zmapowany w RZĄD 1 ELI 2026-08-28 |
-| Rzecznik Praw Dziecka — Dz.U. 2023 poz. 292 | 🟢 B+ / COV | `mod-ustawa-RPD.md`; aktualny zakres art. 10–11 zmapowany w RZĄD 1 ELI 2026-08-28 |
+| Rzecznik Praw Obywatelskich — Dz.U. 2024 poz. 1264 | 🟢 B+ / COV | `mod-ustawa-RPO.md`; aktualny zakres kompetencji zmapowany w ELI |
+| Rzecznik Praw Dziecka — Dz.U. 2023 poz. 292 | 🟢 B+ / COV | `mod-ustawa-RPD.md`; aktualny zakres kompetencji zmapowany w ELI |
 
 ## Cudzoziemcy / legalizacja
 
@@ -62,7 +66,7 @@ Mapa zawiera tylko aktualny stan pokrycia wykorzystywany przez system. Historia 
 
 ## Aktywne luki
 
-1. PPSA ma pełne pokrycie operacyjne wszystkich głównych działów, ale część pozostaje na poziomie B/B+ zamiast pełnego komentarza.
-2. KPA wymaga dalszego pogłębiania tylko tam, gdzie moduły tematyczne nie opisują całych rozdziałów.
+1. KPA ma bieżący status B+/COV dla całej struktury, ale nie status `FULL` artykuł-po-artykule.
+2. PPSA ma pełne pokrycie operacyjne wszystkich głównych działów, ale część pozostaje na poziomie B+ zamiast pełnego COV/FULL.
 3. RPO i RPD mają bieżące mapy kompetencji B+/COV; konkretny środek procesowy zawsze wymaga dodatkowej kontroli właściwego kodeksu proceduralnego.
 4. Każda jednostka prawna i termin wymagają świeżego odczytu ELI/ISAP przed użyciem.
