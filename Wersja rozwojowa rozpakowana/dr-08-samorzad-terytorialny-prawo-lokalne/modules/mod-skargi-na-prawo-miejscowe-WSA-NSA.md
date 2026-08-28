@@ -1,7 +1,7 @@
 # mod-skargi-na-prawo-miejscowe-WSA-NSA
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** USG art. 101 — Dz.U. 2025 poz. 1153 | PPSA — Dz.U. 2026 poz. 143
+**Źródło weryfikacji:** USG art. 101 — Dz.U. 2026 poz. 662 | PPSA — Dz.U. 2026 poz. 143
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
