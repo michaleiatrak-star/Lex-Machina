@@ -2,32 +2,28 @@
 
 ## Ustrój Konstytucyjny i Źródła Prawa
 
-**Weryfikacja online:** 2026-07-04 (audyt-systemu-v4, sesja katalogowania tekstów jednolitych — TRYB DZU per-dziedzina) | Źródło: isap.sejm.gov.pl, infor.pl, sip.lex.pl, orka.sejm.gov.pl, strony BIP sądów administracyjnych (WSA Białystok, WSA Warszawa)
+Mapa runtime pokazuje wyłącznie bieżący stan akt → moduł. Historia napraw, wcześniejsze numery i sesje weryfikacyjne pozostają poza tym plikiem.
 
-| Akt prawny | Dz.U. (t.j.) | Moduł | Status |
+| Akt / zakres | Dz.U. / źródło bieżące | Moduł | Status bieżący |
 |---|---|---|---|
-| Konstytucja RP z dnia 2 kwietnia 1997 r. | Dz.U. 1997 nr 78 poz. 483 (brak t.j. — Konstytucja nie ma tekstu jednolitego) | mod-Konstytucja-TK-skarga-konstytucyjna | ✅ OK |
-| Ustawa o organizacji i trybie postępowania przed TK z dnia 30 listopada 2016 r. | Dz.U. 2019 poz. 2393 t.j. ✅ VER 2026-07-04: nadal aktualne — próba zastąpienia nową "ustawą o Trybunale Konstytucyjnym" z 13.09.2024 r. (uchwaloną przez Sejm) NIE weszła w życie z powodu weta Prezydenta RP; stara ustawa z 2016 r. pozostaje w mocy | mod-Konstytucja-TK-skarga-konstytucyjna | ✅ OK |
-| Prawo o ustroju sądów powszechnych (PUSP) | Dz.U. 2024 poz. 334 t.j. ✅ VER 2026-07-04: potwierdzone niezależnie (isap WDU20240000334, obwieszczenie 9.02.2024; BIP WSA Białystok) ze zm. (2025.526, 2025.1609) | mod-USP-ustroj-sadow-powszechnych | ✅ OK |
-| Ustawa o Sądzie Najwyższym | Dz.U. 2024 poz. 622 t.j.; RZĄD 1 ELI, stan t.j. 27.03.2024, późniejsze zmiany sprawdzane temporalnie; Dz.U. 2026 poz. 1123 zawiera zmianę prospektywną od 1.01.2028 | mod-ustawa-SN-sad-najwyzszy | ✅ F-108/50 P2 — dedykowany moduł B, 2026-08-27 |
-| Prawo o ustroju sądów administracyjnych (PUSA) | Dz.U. 2024 poz. 1267 t.j. ✅ VER 2026-07-04 (audyt — było "weryfikuj w ISAP"): obwieszczenie Marszałka Sejmu z 19.08.2024, potwierdzone niezależnie przez BIP WSA Białystok i BIP WSA Warszawa (dwa niezależne źródła urzędowe) | mod-USP-ustroj-sadow-powszechnych | ✅ OK (nowo zweryfikowane) |
-| Ustawa o skardze na naruszenie prawa strony do rozpoznania sprawy w postępowaniu przygotowawczym prowadzonym lub nadzorowanym przez prokuratora i postępowaniu sądowym bez nieuzasadnionej zwłoki | Dz.U. 2023 poz. 1725 t.j. ✅ VER 2026-07-04 (audyt — było "weryfikuj w ISAP"): obwieszczenie Marszałka Sejmu z 2.08.2023, poprzedni t.j. 2018.75 | mod-USP-ustroj-sadow-powszechnych | ✅ OK (nowo zweryfikowane) |
-| Ustawa o Krajowej Radzie Sądownictwa | Dz.U. 2024 poz. 1186 t.j. ✅ VER 2026-07-04 (audyt — POPRAWKA: było błędnie "2011 poz. 714 ze zm."): obwieszczenie Marszałka Sejmu z 1.08.2024, potwierdzone niezależnie (isap WDU20240001186, eli.gov.pl); poprzedni t.j. 2021.269. UWAGA: ustawa z 12.07.2024 r. nowelizująca KRS została uznana przez TK za niezgodną z Konstytucją (wyrok Kp 2/24 z 20.11.2025) — nie weszła w życie, KRS działa na dotychczasowych zasadach | mod-ustawa-KRS-i-ustroj-wladzy | ✅ OK (poprawiony numer) |
-| Ustawa o Radzie Ministrów | Dz.U. 2025 poz. 780 t.j. ✅ VER 2026-07-04 (audyt — POPRAWKA: było błędnie "2022 poz. 2032", numer nieistniejący dla tej ustawy): obwieszczenie Marszałka Sejmu z 11.06.2025, potwierdzone niezależnie (isap WDU20250000780, gov.pl/premier/podstawy-prawne, inforlex.pl); łańcuch poprzednich t.j.: 2024.1050 (obow. 16.07.2024–16.06.2025) → 2022.1188 (obow. 3.06.2022–15.07.2024) | mod-ustawa-KRS-i-ustroj-wladzy | ✅ OK (poprawiony numer) |
-| Ustawa o wykonywaniu mandatu posła i senatora | Dz.U. 2024 poz. 907 t.j. ✅ VER 2026-07-04 (potwierdzone niezależnie — cytowane w ustawie z 13.09.2024 o TK jako aktualne brzmienie) | mod-ustawa-KRS-i-ustroj-wladzy | ✅ OK |
-| Ustawa o partiach politycznych | Dz.U. 2023 poz. 1215 t.j. ✅ VER 2026-07-04 (potwierdzone niezależnie — cytowane w ustawie z 13.09.2024 o TK jako aktualne brzmienie) | mod-ustawa-partie-polityczne-referendum | ✅ OK |
-| Ustawa o referendum ogólnokrajowym | Dz.U. 2025 poz. 300 t.j. ✅ VER: 2026-06-14 (TRYB DZU — był 2020/851; nie re-weryfikowano ponownie w tej sesji, brak sygnałów zmiany) | mod-ustawa-partie-polityczne-referendum | ✅ OK |
-| Rozporządzenie Prezesa Rady Ministrów z 20.06.2002 w sprawie „Zasad techniki prawodawczej” (ZTP) | ⛔ **SKORYGOWANE 2026-08-22 (F-106): t.j. to Dz.U. 2026 poz. 300**, nie 2016 poz. 283. ✅ VER 2026-08-22 RZĄD 1: isap.sejm.gov.pl/isap.nsf/download.xsp/WDU20260000300 (treść obwieszczenia Prezesa RM, publ. 10.03.2026 — konsoliduje zmianę z 26.01.2026, Dz.U. 2026 poz. 100); RZĄD 2B: prawo.pl (Dz.U. 2026 poz. 300 t.j.), lexlege.pl i arslege.pl (oba noszą metrykę Dz.U. 2026 poz. 300 t.j.). ⬆ Dz.U. 2016 poz. 283 = PREV (obwieszczenie 29.02.2016). ⚠️ Ostrzeżenie „sprawdź czy ukazał się kolejny t.j." z 2026-07-17 było TRAFNE — t.j. ukazał się 10.03.2026, czyli PRZED tamtą weryfikacją; wiersz nie został zaktualizowany przy naprawie F-89 z 2026-08-18, która poprawiła ROUTING-MAP, wiersz 21 tej mapy i treść obu modułów, ale ten wiersz pominęła | mod-ZTP-przepisy-przejsciowe-doktryna | ✅ OK |
-| Specustawy i reguła lex specialis — graf zależności między aktami | ✅ Moduł DOKTRYNALNY (nie przypisany do jednego aktu materialnego) — akt referencyjny to Zasady Techniki Prawodawczej (ZTP), zweryfikowane 2026-08-14 (F-77): **t.j. Dz.U. 2026 poz. 300** (konsolidacja nowelizacji 26.01.2026, poprzedni t.j. 2016.283 NIEAKTUALNY od lutego 2026). VER: portaloswiatowy.pl, rcl.gov.pl. Ten sam numer poprawiony równolegle w `mod-ZTP-przepisy-przejsciowe-doktryna.md` | mod-specustawy-lex-specialis-graf-zaleznosci | ✅ ZWERYFIKOWANE 2026-08-14 — F-77 domknięta dla tego wiersza |
-| Stany nadzwyczajne i sytuacje kryzysowe | ✅ Moduł opisuje RODZINĘ aktów, wszystkie zweryfikowane 2026-08-14 (F-77): stan klęski żywiołowej Dz.U. 2025 poz. 112 t.j.; stan wyjątkowy Dz.U. 2017 poz. 1928 t.j. (brak nowszego, potwierdzone pośrednio); stan wojenny Dz.U. 2025 poz. 504 t.j. (był NAJWIĘKSZĄ luką — moduł nie miał numeru); zarządzanie kryzysowe Dz.U. 2026 poz. 574 t.j. + nowelizacja 2026.815; ochrona ludności i obrona cywilna Dz.U. 2024 poz. 1907 (pierwotna publikacja, weszła w życie 1.01.2025, wciąż aktualna baza cytowań lipiec 2026) | mod-stany-nadzwyczajne-sytuacje-kryzysowe | ✅ ZWERYFIKOWANE 2026-08-14 — F-77 domknięta dla tego wiersza |
+| Konstytucja RP z 2 kwietnia 1997 r. | Dz.U. 1997 nr 78 poz. 483 ze zm. | `mod-Konstytucja-TK-skarga-konstytucyjna` | 🟢 B+/COV |
+| Organizacja i tryb postępowania przed Trybunałem Konstytucyjnym | Dz.U. 2019 poz. 2393 t.j. | `mod-TK-organizacja-postepowanie-current-state-COV` | 🟢 B+/COV |
+| Prawo o ustroju sądów powszechnych | Dz.U. 2024 poz. 334 t.j. ze zm. | `mod-USP-ustroj-sadow-powszechnych` | 🟢 B+/COV |
+| Ustawa o Sądzie Najwyższym | Dz.U. 2024 poz. 622 t.j. ze zm. | `mod-ustawa-SN-sad-najwyzszy` | 🟢 B+/COV; zmiany przyszłe stosować wyłącznie temporalnie |
+| Prawo o ustroju sądów administracyjnych | Dz.U. 2024 poz. 1267 t.j. | `mod-PUSA-current-state-COV` | 🟢 B+/COV |
+| Skarga na naruszenie prawa strony do rozpoznania sprawy bez nieuzasadnionej zwłoki | Dz.U. 2023 poz. 1725 t.j. | `mod-przewleklosc-current-state-COV` | 🟢 B+/COV |
+| Ustawa o Krajowej Radzie Sądownictwa | Dz.U. 2024 poz. 1186 t.j. | `mod-KRS-current-state-COV` | 🟢 B+/COV |
+| Ustawa o Radzie Ministrów | Dz.U. 2025 poz. 780 t.j. ze zm. | `mod-Rada-Ministrow-current-state-COV` | 🟢 B+/COV |
+| Wykonywanie mandatu posła i senatora | Dz.U. 2024 poz. 907 t.j. | `mod-mandat-posla-senatora-current-state-COV` | 🟢 B+/COV |
+| Partie polityczne | Dz.U. 2023 poz. 1215 t.j. | `mod-partie-polityczne-current-state-COV` | 🟢 B+/COV |
+| Referendum ogólnokrajowe | Dz.U. 2025 poz. 300 t.j. | `mod-ustawa-partie-polityczne-referendum` | 🟢 operacyjny |
+| Zasady techniki prawodawczej | Dz.U. 2026 poz. 300 t.j. | `mod-ZTP-przepisy-przejsciowe-doktryna` | 🟢 operacyjny |
+| Specustawy / lex specialis — graf zależności | zakres doktrynalny + aktualne akty szczególne | `mod-specustawy-lex-specialis-graf-zaleznosci` | 🟢 operacyjny; akt szczególny zawsze fresh gate |
+| Stany nadzwyczajne i sytuacje kryzysowe | rodzina aktualnych ustaw ustrojowych i kryzysowych | `mod-stany-nadzwyczajne-sytuacje-kryzysowe` | 🟢 operacyjny; każdy akt i temporalność fresh gate |
 
-> ⚠️ Przed każdym powołaniem: sprawdź aktualny tekst jednolity w ISAP — nowelizacje mogą zmienić numery pozycji i brzmienie przepisów. Dla Konstytucji RP nie ma tekstu jednolitego — zawsze korzystaj z pierwotnego Dz.U. 1997 nr 78 poz. 483 z uwzględnieniem zmian wprowadzonych w trybie art. 235 Konstytucji.
->
-> **Wynik sesji katalogowania 2026-07-04:** 11/11 pozycji ma teraz potwierdzony numer Dz.U. (0 pozycji ze statusem "weryfikuj w ISAP"). 3 błędne/nieaktualne numery poprawione (PUSA, KRS, Rada Ministrów — Rada Ministrów miała numer całkowicie nieistniejący dla tej ustawy). 2 pozycje uzupełnione z zera (PUSA, skarga na przewlekłość). Domena DR-01 uznana za W PEŁNI ZWERYFIKOWANĄ na dzień 2026-07-04.
->
-> **Uzupełnienie 2026-07-17:** dodano 12. pozycję — Zasady Techniki Prawodawczej
-> (rozporządzenie ZTP), na wniosek użytkownika, jako podstawa prawna nowego modułu
-> doktrynalnego o przepisach przejściowych (`mod-ZTP-przepisy-przejsciowe-doktryna`).
-> Numer t.j. zweryfikowany niezależnie w 3 źródłach (RCL, ISAP, Senat RP);
-> nowelizacja Dz.U. 2026 poz. 100 oznaczona jako świeża — wymaga re-weryfikacji
-> przy kolejnym audycie DR-01.
+## Reguła użycia
+
+- Konstytucja nie ma tekstu jednolitego; korzystaj z publikacji pierwotnej z uwzględnieniem zmian.
+- Dla ustaw ustrojowych i proceduralnych przed konkretnym powołaniem wykonaj fresh gate do ELI/ISAP.
+- Zmiana przyszła nie jest stanem obowiązującym przed jej wejściem w życie.
+- `B+/COV` nie oznacza `FULL`.
