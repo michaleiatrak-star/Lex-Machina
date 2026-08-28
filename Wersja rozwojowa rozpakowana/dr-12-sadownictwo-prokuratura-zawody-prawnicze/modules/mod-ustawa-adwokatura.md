@@ -1,225 +1,108 @@
-# mod-AW — Adwokatura (Prawo o adwokaturze)
+# Prawo o adwokaturze — moduł bieżący
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
----
-WSPÓLNE ZASADY DLA MODUŁU:
-- przed cytowaniem przepisu zastosuj `shared/ISAP-AUDIT-PROTOCOL.md`;
-- metryki aktów sprawdzaj w `shared/ISAP-METRYKI-AKTOW.md`;
-- jeżeli sprawa jest procesowa, uruchom `shared/FORMAL-CHECK.md`, `shared/WARUNKI-SKUTECZNOSCI.md`, `shared/TERM-CALC.md`, `shared/RISK-ASSESSMENT.md`;
-- zakaz cytowania stawek OC, taksy i kosztów z pamięci.
----
+**Stan weryfikacji:** 2026-08-28  
+**Tekst jednolity bazowy:** Dz.U. 2024 poz. 1564  
+**Źródła kanoniczne:** ELI/ISAP + Naczelna Rada Adwokacka dla aktów korporacyjnych.
 
-**Zakres:** wpis na listę adwokatów, aplikacja adwokacka, tajemnica adwokacka, OC,
-odpowiedzialność dyscyplinarna, zakaz reprezentowania sprzecznych interesów,
-rola obrońcy w procesie karnym, pełnomocnictwo procesowe, zakaz reklamy.
+## 1. Bramka źródłowa
 
-## KLUCZOWE AKTY PRAWNE — ZWERYFIKOWANE
+- ELI: `https://eli.gov.pl/eli/DU/2024/1564/ogl`
+- aktualny Kodeks Etyki Adwokackiej: oficjalny dział regulaminów NRA, tekst jednolity ogłoszony uchwałą nr 174/2026 Prezydium NRA z 23.06.2026.
 
-```
-Prawo o adwokaturze:
-  Dz.U. 2024 poz. 1564 t.j.
-  ✅ VER: isap.sejm.gov.pl 2026-06-05
-  Nowelizacje: m.in. Dz.U. 2025 poz. 497 — weryfikuj aktualne zm. w ISAP
-  → https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240001564
+Dz.U. 2024 poz. 1564 jest obowiązującym tekstem jednolitym, ale ELI wskazuje akty zmieniające po tym tekście. Przed cytowaniem artykułu użyj aktualnego tekstu ujednoliconego/kodyfikowanego i sprawdź datę wejścia każdej późniejszej zmiany.
 
-Powiązane akty (weryfikuj Dz.U. w ISAP przed użyciem):
-  Postępowanie dyscyplinarne adwokatów — Prawo o adwokaturze, Dział VIII
-    "Odpowiedzialność dyscyplinarna", art. 45-95m:
-    → I instancja: SĄD DYSCYPLINARNY właściwej izby adwokackiej (art. 50 —
-      zakres działania; art. 51 — skład: prezes, wiceprezes, 6-23 członków,
-      3 zastępców; orzeka w składzie 3 sędziów)
-    → II instancja (odwoławcza): WYŻSZY SĄD DYSCYPLINARNY (organ adwokatury
-      wymieniony w art. 9 ust. 1, obok Krajowego Zjazdu Adwokatury, Naczelnej
-      Rady Adwokackiej, Rzecznika Dyscyplinarnego Adwokatury i Wyższej
-      Komisji Rewizyjnej)
-    → Rzecznik Dyscyplinarny Adwokatury — prowadzi czynności w postępowaniu
-      dyscyplinarnym (art. 51a i nast.)
-    → W sprawach nieuregulowanych stosuje się odpowiednio KPK (art. 95n)
-    ✅ VER: 2026-07-02 (weryfikacja online na żądanie użytkownika, w ramach
-    TRYB DZU krok 11/16 — zadanie specjalne, dodanie podstaw dyscyplinarnych)
-  Kodeks Etyki Adwokackiej (Zbiór Zasad Etyki Adwokackiej i Godności Zawodu) —
-    tekst jednolity: Uchwała nr 174/2026 Prezydium Naczelnej Rady Adwokackiej
-    z dnia 23 czerwca 2026 r. (NIE Dz.U. — akt korporacyjny NRA, źródło:
-    adwokatura.pl/regulaminy)
-    ⚠️ NAJŚWIEŻSZA ZMIANA 2026-07-02: uchwała NRA z 12-13.06.2026 (posiedzenie
-    plenarne w Rzeszowie) wprowadziła zasady korzystania przez adwokata z
-    narzędzi AI — wyłącznie pomocniczo, zakaz przekazania samodzielnego osądu
-    narzędziu, bez obowiązku informowania klienta (chyba że prawo stanowi
-    inaczej). VER: isap nie dotyczy (akt korporacyjny) — źródło: rp.pl
-    16.06.2026 + adwokatura.pl
-    ✅ VER: 2026-07-02 (dodano w ramach TRYB DZU krok 11/16 na żądanie
-    użytkownika — dodanie KEA/KERP i odpowiedników)
-  Regulamin aplikacji adwokackiej — uchwała NRA
-  Rozp. MS w spr. wynagrodzenia adwokata z urzędu — weryfikuj aktualne w ISAP
-  KPC — zdolność postulacyjna adwokata
-  KPK art. 178 — absolutny zakaz przesłuchania obrońcy
-```
+## 2. Mapa ustawy
 
-## ZASADY ABSOLUTNE
+| Dział / zakres | Materia | Status modułu |
+|---|---|---|
+| I | zadania adwokatury, wykonywanie zawodu, tajemnica, formy wykonywania | 🟢 B+ |
+| II | organy adwokatury / samorząd | 🟢/🟡 B+ |
+| III–IV | izby adwokackie i organy samorządu | 🟡 B |
+| V | wpis na listę adwokatów / wykonywanie zawodu | 🟢/🟡 B+ |
+| VI–VII | aplikacja i egzamin adwokacki | 🟡 B |
+| VIII | odpowiedzialność dyscyplinarna | 🟢 B+ |
+| końcowe / przejściowe | przepisy techniczne i przejściowe | 🟡 B |
 
-1. Tajemnica adwokacka (art. 6 u.p.o.a.): bezwzględna — adwokat nie może być
-   zwolniony z tajemnicy przez klienta w zakresie obrony karnej (art. 178 KPK).
-2. Zakaz reprezentowania sprzecznych interesów — bezwzględny.
-3. Odpowiedzialność dyscyplinarna: 3-instancyjna
-   (Sąd Dyscyplinarny Izby → Wyższy Sąd Dyscyplinarny → SN).
-4. OC: obowiązkowe — stawki weryfikuj w aktualnym rozporządzeniu MS.
-5. Zakaz reklamy: bezpośrednia reklama zabroniona; dozwolona informacja o kancelarii.
+## 3. Wykonywanie zawodu i tajemnica
 
-## WALIDACJA INTAKE
+Art. 4 określa świadczenie pomocy prawnej jako rdzeń wykonywania zawodu. Przy każdej analizie rozdziel:
+- formę wykonywania zawodu;
+- umocowanie procesowe;
+- niezależność zawodową;
+- tajemnicę adwokacką z ustawy;
+- szczególne tajemnice procesowe z KPK/KPC;
+- reguły etyczne NRA.
 
-```text
-□ adwokat czy inny zawód prawniczy? (decyduje o właściwej ustawie)
-□ etap: wpis / aplikacja / zawieszenie / wykreślenie / sprawa dyscyplinarna?
-□ data zdarzenia i termin zaskarżenia decyzji o wpisie/wykreśleniu
-□ czy naruszono tajemnicę adwokacką?
-□ czy zachodzi sprzeczność interesów?
-□ jakiego środka szuka strona: odwołanie / zawiadomienie dyscyplinarne / odszkodowanie?
-```
+**Nie używaj skrótu „tajemnica jest zawsze absolutna”.** Zakres tajemnicy ustawowej i procesowe zakazy dowodowe są odrębnymi reżimami. Przy sprawie karnej dołącz aktualny KPK, w szczególności przepisy o zakazach przesłuchania obrońcy/adwokata.
 
-## 1. Intake szczególny
+## 4. Wpis, aplikacja, egzamin
 
-Przed odpowiedzią ustal co najmniej:
-- rola w sprawie: adwokat / klient / poszkodowany / organ dyscyplinarny;
-- etap: wpis, aplikacja, zawieszenie, wykreślenie, sprawa dyscyplinarna, spór odszkodowawczy;
-- akt lub czynność kwestionowana;
-- termin na środek (odwołanie od uchwały rady — 14 dni? — weryfikuj w ISAP);
-- czy zachodzi naruszenie tajemnicy, konfliktu interesów, zakazu reklamy;
+Przed odpowiedzią ustal:
+1. czy chodzi o wpis, odmowę wpisu, skreślenie, zawieszenie czy aplikację;
+2. który organ samorządu wydał uchwałę;
+3. aktualny termin i tryb środka zaskarżenia z ustawy;
+4. czy stan prawny zmienił się między zdarzeniem a rozstrzygnięciem;
+5. czy sprawa ma element uznania kwalifikacji zagranicznych.
 
-## 2. Mapa proceduralna
+Nie podawaj terminu „z pamięci”. Odczytaj aktualną jednostkę ustawy w tej samej turze.
 
-```text
-Zdarzenie / czynność / decyzja organu samorządowego
-  ↓
-Kwalifikacja: wpis / aplikacja / odpowiedzialność dyscyplinarna / cywilna / karna
-  ↓
-Właściwy organ: ORA / NRA / Sąd Dyscyplinarny / WSD / SN / sąd powszechny
-  ↓
-Środek zaskarżenia: odwołanie / zażalenie / skarga dyscyplinarna / pozew
-  ↓
-Walidacja formalna: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
-  ↓
-Ocena ryzyka: shared/RISK-ASSESSMENT.md + shared/QUALITY-CHECK.md
-  ↓
-Strategia: ostrożny / ofensywny / eskalacyjny
-```
+## 5. Odpowiedzialność dyscyplinarna
 
-## 3. Warunki skuteczności
+Ustawa tworzy własny reżim odpowiedzialności dyscyplinarnej adwokatów i aplikantów. W sprawie dyscyplinarnej ustal kolejno:
+- czyn i datę czynu;
+- obowiązującą w tej dacie normę ustawową i etyczną;
+- właściwego rzecznika i sąd dyscyplinarny;
+- dopuszczalny środek odwoławczy;
+- ewentualną kasację do Sądu Najwyższego na podstawie aktualnej ustawy;
+- reguły odpowiedniego stosowania przepisów proceduralnych.
 
-```text
-□ prawidłowy tryb i organ
-□ termin na środek (termin do ORA / NRA / WSD — weryfikuj w ISAP i statucie)
-□ legitymacja: klient, pokrzywdzony, rzecznik dyscyplinarny
-□ żądanie możliwe prawnie
-□ fakty powiązane z normą etyczną i ustawową
-□ dowody przypisane do każdej tezy
-□ kontrola ISAP na dzień sporządzenia pisma
-□ kontrola stanu prawnego na dzień zdarzenia oraz orzekania
-```
+Nie opisuj postępowania jako „trzech instancji”. Kasacja do SN jest nadzwyczajnym środkiem kontroli, a nie zwykłą trzecią instancją.
 
-## 4. Matryca dowodowa
+## 6. Etyka zawodowa — źródło NRA
 
-Dowody typowe dla tego modułu:
-- wpis / uchwała rady izby / postanowienie NRA;
-- korespondencja klient–adwokat;
-- umowa zlecenia / pełnomocnictwo;
-- protokoły posiedzeń sądu (naruszenie tajemnicy, konflikt);
-- orzeczenia sądów dyscyplinarnych;
-- polisy OC;
-- faktury / rachunki (wynagrodzenie);
+Aktualny rejestr NRA wskazuje **Zbiór Zasad Etyki Adwokackiej i Godności Zawodu** w tekście jednolitym ogłoszonym uchwałą nr 174/2026 Prezydium NRA z 23.06.2026.
 
-Każdy dowód oceniaj według schematu:
+Przy problemie etycznym pobierz aktualny dokument bezpośrednio z NRA i ustal konkretną normę dotyczącą m.in.:
+- niezależności;
+- tajemnicy;
+- konfliktu interesów;
+- relacji z klientem;
+- informacji o wykonywaniu zawodu;
+- stosunku do sądu, organów i innych prawników;
+- wykorzystywania narzędzi technologicznych/AI, jeżeli wynika z aktualnego tekstu lub uchwał NRA.
 
-```text
-Dowód → fakt, który ma wykazać → bezpośredni/pośredni → wiarygodność
-      → ryzyko podważenia → brakujący dowód wzmacniający
-```
+Nie odtwarzaj zakazu reklamy ani zasad AI ze źródeł prasowych.
 
-## 5. Typowe zarzuty i kontrzarzuty
+## 7. OC, opłaty i pomoc z urzędu
 
-W każdej sprawie przygotuj dwie wersje:
-1. argumentację strony skarżącej / klienta,
-2. argumentację adwokata / organu samorządowego.
+Kwoty i stawki nie są treścią stałą modułu. Korzystaj z aktualnych rozporządzeń Ministra Sprawiedliwości. ELI posiada m.in. obowiązujące teksty jednolite rozporządzeń o opłatach i kosztach pomocy z urzędu z 2026 r.
 
-Typowe ryzyka i kontrargumenty:
-- tajemnica zawodowa jako bariera dowodowa dla klienta;
-- trudność wykazania szkody z naruszenia reprezentacji;
-- uznaniowość orzekania dyscyplinarnego;
-- przedawnienie dyscyplinarne (weryfikuj aktualne w ustawie + ISAP);
+## 8. Zmiana przyszła — 1.10.2026
 
-## 6. Strategia procesowa
+Ustawa z 29.05.2026 r., Dz.U. 2026 poz. 846, zmienia m.in. Prawo o adwokaturze w obszarze relacji tajemnicy do obowiązków raportowych. Zasadnicza data wejścia tej ustawy to **1.10.2026**.
 
-### Wariant ostrożny
-Minimalizuje ryzyko formalne. Priorytet: termin, kompletność, zabezpieczenie dowodów.
+**Na dzień 2026-08-28 nie stosuj przyszłego brzmienia jako prawa obowiązującego.** Przy zdarzeniu po 1.10.2026 wykonaj nowy fresh gate i odczytaj dokładne brzmienie zmienionej jednostki.
 
-### Wariant ofensywny
-Eksponuje naruszenia etyczne, wadliwość reprezentacji, naruszenie tajemnicy lub zakazu konfliktu interesów.
+## 9. Routing
 
-### Wariant eskalacyjny
-ORA → NRA / WSD → SN → sąd powszechny (odpowiedzialność cywilna za błąd adwokacki).
+- procedura cywilna → DR-02;
+- obrona i postępowanie karne → DR-03;
+- sądownictwo / dyscyplinarne zawodu → DR-12;
+- AML / MDR → DR-06 i DR-15 według problemu;
+- prawo UE / kwalifikacje transgraniczne → DR-14.
 
-## 7. Orzecznictwo
+## 10. Quality gate
 
-Nie twórz fikcyjnych sygnatur. Orzecznictwo pobieraj z:
-- SN (sprawy dyscyplinarne, kasacje),
-- WSD (Wyższy Sąd Dyscyplinarny — sygnatury publikowane częściowo),
-- orzeczenia.ms.gov.pl,
-- LEX/Legalis pomocniczo.
+- [ ] aktualny tekst ustawy sprawdzony w ELI/ISAP;
+- [ ] późniejsze akty zmieniające po Dz.U. 2024 poz. 1564 sprawdzone;
+- [ ] data wejścia zmiany została porównana z datą zdarzenia;
+- [ ] etyka pochodzi z oficjalnego NRA;
+- [ ] zwykły środek odwoławczy odróżniono od kasacji do SN;
+- [ ] tajemnicę ustawową odróżniono od procesowych zakazów dowodowych;
+- [ ] stawki i OC pobrano ze świeżego aktu wykonawczego.
 
-Dla każdego orzeczenia wskaż:
-- sąd; datę; sygnaturę; tezę użyteczną;
-- relację do stanu faktycznego; aktualność linii orzeczniczej;
-- czy to argument główny, pomocniczy, czy ryzykowny.
+## 11. Źródła urzędowe
 
-## 8. Quality gate
-
-Przed końcową odpowiedzią sprawdź:
-
-```text
-□ Czy wskazano właściwy organ samorządowy i tryb?
-□ Czy oddzielono odpowiedzialność dyscyplinarną od cywilnej i karnej?
-□ Czy sprawdzono aktualność ustawy i KEA (Kodeks Etyki) w ISAP/NRA?
-□ Czy każda przesłanka ma dowód?
-□ Czy wskazano termin i czy nie upłynął?
-□ Czy podano ryzyka przeciwnika/organu?
-□ Czy użyto shared/MODULE-STANDARD-POLISH-LAW.md?
-```
-
-## 9. Łącz obowiązkowo z
-
-| Potrzeba | Moduł współdzielony / skill |
-|---|---|
-| aktualność prawa | `shared/ISAP-AUDIT-PROTOCOL.md` + `shared/ISAP-METRYKI-AKTOW.md` |
-| stan prawny w czasie | `shared/TEMPORAL-LAW-CHECK.md` |
-| braki formalne | `shared/BRAKI-FORMALNE.md` |
-| warunki skuteczności | `shared/WARUNKI-SKUTECZNOSCI.md` |
-| dowody | `shared/DOWODY-METODOLOGIA.md` + `analizator-dowodow-v3` |
-| ryzyka | `shared/RISK-ASSESSMENT.md` |
-| pisma | `pisma-procesowe-v3` albo `pisma-proste-v2` |
-| analiza sądowa | `analiza-sadowa-v6` |
-| postępowanie dyscyplinarne | DR-12/`mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow` |
-| obrona karna | DR-03/`mod-KK-kodeks-karny` (art. 178 KPK) |
-
-## Zmiana od 1.10.2026 — tajemnica a MDR
-
-Art. 2 ustawy z 29.05.2026 r. (Dz.U. 2026 poz. 846) nadaje art. 6 ust. 4
-Prawa o adwokaturze brzmienie, według którego tajemnica zawodowa nie
-obejmuje informacji udostępnianych na podstawie przepisów AML — w zakresie
-określonym tymi przepisami. Nowelizacja usuwa dotychczasowe równoległe
-odesłanie do rozdziału 11a Ordynacji podatkowej; zmiana wchodzi w życie
-1.10.2026 r. Nie interpretuj jej jako generalnego uchylenia tajemnicy.
-
-## Weryfikacja online
-
-```
-web_search: "prawo o adwokaturze tekst jednolity Dz.U. 2024 poz. 1564 isap"
-web_search: "tajemnica adwokacka orzecznictwo 2025 art 6 adwokatura"
-web_search: "wynagrodzenie adwokat z urzędu rozporządzenie MS 2025"
-```
-
----
-
-## STATUS KANCELARSKI
-
-**Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Data weryfikacji:** 2026-06-06
-**Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
+- ELI — Prawo o adwokaturze, Dz.U. 2024 poz. 1564: `https://eli.gov.pl/eli/DU/2024/1564/ogl`
+- NRA — regulaminy / wykonywanie zawodu, etyka i doskonalenie zawodowe: oficjalna strona `adwokatura.pl`.
+- ELI — ustawa z 29.05.2026 r., Dz.U. 2026 poz. 846: `https://eli.gov.pl/eli/DU/2026/846/ogl`.
