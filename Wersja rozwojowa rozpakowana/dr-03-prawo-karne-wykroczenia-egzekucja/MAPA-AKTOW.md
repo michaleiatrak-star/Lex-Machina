@@ -97,6 +97,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Ustawa o przeciwdziałaniu narkomanii — indeks current-state | Dz.U. 2023 poz. 1939 t.j. ze zm., w tym obowiązująca zmiana Dz.U. 2026 poz. 1004 | `mod-narkomania-current-state-COV.md` + `mod-ustawa-narkomania` | 🟢 B+/COV |
 | Przymusowe leczenie odwykowe / leczenie uzależnień | właściwe akty alkoholowe i narkotykowe | `mod-przymusowe-leczenie-odwykowe` | ✅ aktywny; fresh gate |
 | Odpowiedzialność podmiotów zbiorowych | Dz.U. 2024 poz. 1822 t.j. ze zm. | `mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych` | ✅ aktywny |
+| Nielegalny pobór mediów — kwalifikacja karna / cywilna / sektorowa | właściwe bieżące przepisy KK, Prawa energetycznego i ustaw sektorowych | `mod-nielegalny-pobor-mediow` | ✅ aktywny; fresh gate |
 | Komornicy sądowi — routing wykonawczy | aktualna ustawa o komornikach sądowych | DR-12 `mod-ustawa-komornicy-sadowi-zawod` | 🔗 routing DR-12 |
 
 ### Ruch drogowy i bezpieczeństwo ruchu
