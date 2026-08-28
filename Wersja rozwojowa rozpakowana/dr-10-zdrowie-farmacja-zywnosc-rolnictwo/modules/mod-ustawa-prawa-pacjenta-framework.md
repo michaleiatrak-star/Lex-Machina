@@ -52,7 +52,7 @@ Działa od 06.09.2023 r. | Obsługiwany przez Rzecznika Praw Pacjenta (RPP).
    - Czas postępowania: max **3 miesiące** od złożenia kompletnego wniosku
    - Odwołanie: do Komisji Odwoławczej RPP, następnie skarga do sądu administracyjnego
 
-3. **PRZEDAWNIENIE roszczeń cywilnych (art. 442¹ KC — Dz.U. 2025 poz. 1071):**
+3. **PRZEDAWNIENIE roszczeń cywilnych (art. 442¹ KC — Dz.U. 2026 poz. 795):**
    - §1: **3 lata** od dowiedzenia się o szkodzie i sprawcy; max **10 lat** od zdarzenia
    - §2: **20 lat** jeśli szkoda z przestępstwa (zbrodni lub występku)
    - §3: szkoda na osobie — przedawnienie nie może skończyć się wcześniej niż 3 lata od dowiedzenia się
