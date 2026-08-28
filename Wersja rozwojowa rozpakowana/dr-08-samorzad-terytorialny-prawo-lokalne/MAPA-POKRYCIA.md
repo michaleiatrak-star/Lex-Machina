@@ -12,10 +12,10 @@ Mapa pokazuje tylko bieżące pokrycie używane przez system. Rejestracja aktu n
 
 | Akt / zakres | Moduł wejściowy | Status bieżący |
 |---|---|---|
-| samorząd gminny — Dz.U. 2026 poz. 662 | `mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa` | 🟢 B+/COV — art. 14, nadzór art. 90–98 i skarga art. 101 zmapowane z aktualnego ELI 2026-08-28 |
-| samorząd powiatowy | `mod-ustawa-samorzad-powiatowy` | 🟢 B+ |
-| samorząd województwa | `mod-ustawa-samorzad-wojewodztwa` | 🟢 B+ |
-| wojewoda i administracja rządowa w województwie | `mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa` | 🟡 |
+| samorząd gminny — Dz.U. 2026 poz. 662 | `mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa` | 🟢 B+/COV |
+| samorząd powiatowy — Dz.U. 2025 poz. 1684 | `mod-ustawa-samorzad-powiatowy` | 🟢 B+/COV — wszystkie 10 rozdziałów, organy, prawo miejscowe, mienie/finanse i nadzór zmapowane |
+| samorząd województwa — Dz.U. 2026 poz. 720 | `mod-ustawa-samorzad-wojewodztwa` | 🟢 B+/COV — wszystkie 9 rozdziałów, organy, współpraca zagraniczna, nadzór i prawo miejscowe zmapowane |
+| wojewoda i administracja rządowa w województwie — Dz.U. 2025 poz. 428 | `mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa` | 🟡 B+ — następny current-state COV |
 | nadzór Wojewody i RIO / legalność uchwał | `mod-nadzor-wojewody-RIO-legalnosc-uchwal` | 🟡 |
 | skargi na prawo miejscowe — WSA/NSA | `mod-skargi-na-prawo-miejscowe-WSA-NSA` | 🟡 |
 | procedury JST — statuty i regulaminy | `mod-procedury-JST-statuty-regulaminy` | 🟡 |
@@ -38,6 +38,7 @@ Mapa pokazuje tylko bieżące pokrycie używane przez system. Rejestracja aktu n
 
 ## Aktywne luki
 
-1. Samorząd gminny ma bieżące B+/COV; nie oznacza to statusu FULL całej ustawy.
-2. Najwyższy priorytet pogłębiania DR-08: nadzór szczegółowy, MPZP/WZ oraz lokalne finanse i usługi komunalne.
-3. Przed użyciem konkretnego przepisu obowiązuje świeży odczyt ELI/ISAP; przepisy lokalne wymagają również sprawdzenia właściwego dziennika urzędowego/BIP.
+1. Samorząd gminny, powiatowy i województwa mają bieżące B+/COV; nie oznacza to statusu `FULL` całych ustaw.
+2. Następne P1 w DR-08: wojewoda i administracja rządowa w województwie oraz Prawo przedsiębiorców.
+3. Dalsze pogłębianie: nadzór szczegółowy, MPZP/WZ oraz lokalne finanse i usługi komunalne.
+4. Przed użyciem konkretnego przepisu obowiązuje świeży odczyt ELI/ISAP; przepisy lokalne wymagają również sprawdzenia właściwego dziennika urzędowego/BIP.
