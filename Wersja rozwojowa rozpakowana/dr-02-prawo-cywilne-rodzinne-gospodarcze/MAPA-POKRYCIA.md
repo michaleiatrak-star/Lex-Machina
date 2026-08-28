@@ -19,7 +19,7 @@ Ta mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Hist
 | KC — spadki | 🟢 | `mod-KC-spadki.md` |
 | KC — ubezpieczenia | 🟢/🟡 | `mod-KC-ubezpieczenia.md` |
 | KC — konsumenckie / klauzule abuzywne | 🟢/🟡 | `mod-KC-konsumenckie.md`; fresh gate dla aktualnego KC i ustaw konsumenckich |
-| KRO — rodzinne | 🟢/🟡 | `mod-KRO-rodzinne.md`; brak deklaracji FULL dla całego KRO |
+| KRO — Dz.U. 2026 poz. 236 | 🟢 B+ / COV | `mod-KRO-rodzinne.md` + 8 części tematycznych + `mod-KRO-opieka-i-kuratela.md`; główne obszary KRO zmapowane, bez statusu FULL |
 
 ## KPC
 
@@ -68,17 +68,20 @@ Ta mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Hist
 
 ## Inne akty istotne dla DR-02
 
-| Akt / zakres | Status bieżący |
-|---|---|
-| ubezpieczenia obowiązkowe, UFG i PBUK | 🟢/🟡 B |
-| fundacja rodzinna | 🟢/🟡 B |
-| opóźnienia w transakcjach handlowych | 🟢/🟡 B; administracja i pełna historia stawek wymagają fresh gate |
-| Prawo wekslowe | 🟢 metryka RZĄD 1; treść modułu operacyjna |
-| Prawo czekowe | 🟢 metryka RZĄD 1; treść modułu operacyjna |
-| księgi wieczyste i hipoteka | 🟢/🟡; metryka sprawdzana w RZĄD 1 |
+| Akt / zakres | Status bieżący | Główny moduł / uwaga |
+|---|---|---|
+| ubezpieczenia obowiązkowe, UFG i PBUK | 🟢/🟡 B | dedykowany moduł UFG/PBUK |
+| fundacja rodzinna | 🟢/🟡 B | dedykowany moduł fundacji rodzinnej |
+| opóźnienia w transakcjach handlowych | 🟢/🟡 B | administracja i stawki zawsze fresh gate |
+| Prawo wekslowe — Dz.U. 2022 poz. 282 | 🟢 B+ / COV | `mod-prawo-wekslowe-czekowe.md`; Tytuły I–III i 16 działów weksla trasowanego zmapowane |
+| Prawo czekowe — Dz.U. 2016 poz. 462 | 🟢 B+ / COV | `mod-prawo-wekslowe-czekowe.md`; forma, obieg, zapłata, regres, przedawnienie i utrata dokumentu zmapowane |
+| księgi wieczyste i hipoteka — Dz.U. 2026 poz. 1066 | 🟢 B+ / COV | `mod-KW-ksiega-wieczysta-zakup-nieruchomosci.md`; jawność, domniemania, rękojmia, wpisy/wzmianki i hipoteka zmapowane |
+| fundacje — Dz.U. 2023 poz. 166 + Dz.U. 2026 poz. 316 | 🟢 B+ / COV | `mod-ustawa-fundacje-stowarzyszenia.md`; tworzenie, statut, majątek, nadzór, działalność, likwidacja |
+| Prawo o stowarzyszeniach — Dz.U. 2020 poz. 2261 + Dz.U. 2026 poz. 316 | 🟢 B+ / COV | `mod-ustawa-fundacje-stowarzyszenia.md`; Rozdziały 1–7; Dz.U. 2026 poz. 346 dopiero od 30.09.2028 |
 
 ## Aktywne luki
 
-1. Brak statusu `FULL` dla całego KC, KRO, KPC i KSH.
+1. Brak statusu `FULL` dla całego KC, KRO, KPC i KSH; KRO ma już bieżące B+/COV.
 2. Żółte zakresy KPC/KSH/PrUp/PrRestr wymagają pogłębienia przed uznaniem ich za kompletne.
-3. Przy każdej konkretnej jednostce prawnej obowiązuje fresh hard gate do ELI/ISAP; przy prawie UE — EUR-Lex.
+3. Własność lokali, zastaw rejestrowy, Prawo spółdzielcze, UOKiK i ustawa o prawach konsumenta pozostają priorytetami kolejnych audytów DR-02.
+4. Przy każdej konkretnej jednostce prawnej obowiązuje fresh hard gate do ELI/ISAP; przy prawie UE — EUR-Lex.
