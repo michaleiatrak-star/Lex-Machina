@@ -58,22 +58,24 @@
 | 42 | KSCU | DR-12 | 🟢 B+ / COV |
 | 43 | Przeciwdziałanie narkomanii | DR-03 | 🟡 B+ |
 | 44 | UOKiK | DR-02/12 | 🟢 B+ / COV |
-| 45 | Wojewoda i administracja rządowa | DR-08 | 🟡 B+ |
+| 45 | Wojewoda i administracja rządowa | DR-08 | 🟢 B+ / COV — Dz.U. 2025 poz. 428; Rozdziały 1–8, kontrola, administracja zespolona/niezespolona i prawo miejscowe zmapowane |
 | 46 | Opóźnienia w transakcjach handlowych | DR-02 | 🟢 B+ / COV |
 | 47 | Prawa konsumenta | DR-02 | 🟢 B+ / COV |
 | 48 | Prawo restrukturyzacyjne | DR-02 | 🟢 B+ / COV |
 | 49 | Prawo o prokuraturze | DR-12 | 🟢 B+ / COV |
 | 50 | Sąd Najwyższy | DR-01 | 🟡 B+ |
-| 51 | Prawo przedsiębiorców | DR-08/02 | 🟡 B+ |
+| 51 | Prawo przedsiębiorców | DR-08/02 | 🟢 B+ / COV — Dz.U. 2025 poz. 1480; current-state routing działalności, reglamentacji, kontroli i MŚP |
 | 52 | Fundacja rodzinna | DR-02 | 🟢 B+ / COV |
 
 ## Wynik bieżący
 
 **52/52 aktów ma co najmniej poziom B+. W benchmarku nie pozostaje żadna pozycja `B`.**
 
+**47/52 aktów ma status B+/COV. Pozostaje 5 aktów B+ bez COV.**
+
 ## Priorytet dalszej pracy
 
-1. **P1 — akty `B+` bez COV:** KK, KPK, spółdzielnie mieszkaniowe, przeciwdziałanie narkomanii, wojewoda i administracja rządowa, Sąd Najwyższy, Prawo przedsiębiorców.
+1. **P1 — akty `B+` bez COV:** KK, KPK, spółdzielnie mieszkaniowe, przeciwdziałanie narkomanii, Sąd Najwyższy.
 2. **P2 — walidacja COV:** sprawdzać, czy mapy lokalne i moduły nadal odpowiadają aktualnym tekstom urzędowym po kolejnych nowelizacjach.
 3. `FULL` dopiero po jawnej, udokumentowanej mierze kompletności całego aktu.
 
