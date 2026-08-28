@@ -255,7 +255,7 @@ NIE SĄ małą architekturą: wolnostojące reklamy, tymczasowe obiekty
 |---|---|---|
 | **Prawo budowlane (PrBud)** | **Dz.U. 2026 poz. 524 t.j.** (obwieszczenie Marszałka Sejmu z 27.03.2026 r.) | Weryfikuj w isap.sejm.gov.pl przed każdym cytowaniem — kluczowy akt |
 | Ustawa o planowaniu i zagospodarowaniu przestrzennym | **Dz.U. 2026 poz. 538 t.j.** + zmiany (poz. 1907, 1940; Dz.U. 2025 poz. 527, 680) — zawsze weryfikuj aktualny t.j. w ISAP | MPZP, WZ, decyzje lokalizacyjne |
-| Kodeks cywilny art. 647–658 | **tekst ujednolicony KC: Dz.U. 2025 poz. 1071, 1172, 1508 oraz Dz.U. 2026 poz. 184 i 507 t.j.** | Umowa o roboty budowlane |
+| Kodeks cywilny art. 647–658 | **Dz.U. 2026 poz. 795 t.j.; późniejsze zmiany — fresh gate** | Umowa o roboty budowlane |
 | Rozporządzenie w sprawie warunków technicznych (WT) | Weryfikuj aktualną wersję w isap | Wymagania techniczne obiektów |
 | KPA | **Dz.U. 2025 poz. 1691** | Postępowanie adm. przed PINB/WINB |
 
