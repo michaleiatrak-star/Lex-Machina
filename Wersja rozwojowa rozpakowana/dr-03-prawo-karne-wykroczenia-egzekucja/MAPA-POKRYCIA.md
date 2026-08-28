@@ -77,7 +77,7 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 
 ## Aktywne luki
 
-1. Wszystkie akty F-108 przypisane do DR-03 oraz KKW mają bieżący status B+/COV; F-108 nie jest już flagą otwartą.
+1. Wszystkie akty F-108 przypisane do DR-03 mają realny routing i treść operacyjną, ale KW pozostaje na poziomie B+ bez potwierdzonego COV całego aktu; dlatego F-108/7 pozostaje otwarte jakościowo.
 2. Dalszego pogłębienia wymagają przede wszystkim niszowe rozdziały KW i szczególne warianty wykonawcze KKW — jako głębokość treści, nie brak mapy.
 3. `MAPA-AKTOW.md` DR-03 nadal wymaga osobnego technicznego cleanupu current-state w ramach F-138; nie wpływa to na status COV tej mapy.
 4. `COV` nie oznacza `FULL`; znamiona, sankcje, terminy i progi wymagają świeżego odczytu ELI/ISAP.
