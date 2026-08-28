@@ -27,10 +27,10 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 | Zakres | Status bieżący | Dowód pokrycia |
 |---|---|---|
 | current-state całość KPK | 🟢 B+ / COV | `mod-KPK-current-state-COV.md` + rodzina modułów KPK |
-| dostęp do akt | 🟢 B+ / COV | art. 156 §1–6 zweryfikowany w RZĄD 1 |
-| środki odwoławcze | 🟢 B+ / COV | art. 437 §1–2 zweryfikowany w RZĄD 1 |
-| postępowanie nakazowe | 🟢 B+ / COV | art. 498 zweryfikowany w RZĄD 1 |
-| wyrok łączny | 🟢 B+ / COV | art. 575 §1 skorygowany do aktualnego brzmienia |
+| dostęp do akt | 🟢 B+ / COV | rodzina modułów KPK; konkretny przepis zawsze fresh gate |
+| środki odwoławcze | 🟢 B+ / COV | rodzina modułów KPK; konkretny przepis zawsze fresh gate |
+| postępowania szczególne | 🟢 B+ / COV | indeks COV + moduły szczegółowe |
+| wyrok łączny | 🟢 B+ / COV | indeks COV + aktualny tekst KPK |
 
 ## Kodeks wykroczeń i KPW
 
@@ -47,8 +47,8 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 |---|---|---|
 | część ogólna — rozdz. I–VIIa | 🟢 B+ / COV | `mod-KKW-current-state-COV.md` + rodzina modułów KKW |
 | część szczególna — wykonanie kar, środków i rozstrzygnięć | 🟢 B+ / COV | `mod-KKW-current-state-COV.md` + moduły szczegółowe |
-| SDE | 🟢 B+ / COV | Rozdział VIIa + moduły SDE |
-| nadzór penitencjarny | 🟢 B+ / COV | Rozdział V + moduły KKW |
+| SDE | 🟢 B+ / COV | indeks COV + moduły SDE |
+| nadzór penitencjarny | 🟢 B+ / COV | indeks COV + moduły KKW |
 
 ## Kodeks karny skarbowy
 
@@ -73,10 +73,11 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 
 | Akt / zakres | Status bieżący |
 |---|---|
-| opłaty w sprawach karnych | 🟢 B+ / COV — art. 1–23 zmapowane |
+| opłaty w sprawach karnych | 🟢 B+ / COV |
 
 ## Aktywne luki
 
-1. Wszystkie akty F-108 przypisane do DR-03 oraz KKW mają bieżący status B+/COV.
+1. Wszystkie akty F-108 przypisane do DR-03 oraz KKW mają bieżący status B+/COV; F-108 nie jest już flagą otwartą.
 2. Dalszego pogłębienia wymagają przede wszystkim niszowe rozdziały KW i szczególne warianty wykonawcze KKW — jako głębokość treści, nie brak mapy.
-3. `COV` nie oznacza `FULL`; znamiona, sankcje, terminy i progi wymagają świeżego odczytu ELI/ISAP.
+3. `MAPA-AKTOW.md` DR-03 nadal wymaga osobnego technicznego cleanupu current-state w ramach F-138; nie wpływa to na status COV tej mapy.
+4. `COV` nie oznacza `FULL`; znamiona, sankcje, terminy i progi wymagają świeżego odczytu ELI/ISAP.
