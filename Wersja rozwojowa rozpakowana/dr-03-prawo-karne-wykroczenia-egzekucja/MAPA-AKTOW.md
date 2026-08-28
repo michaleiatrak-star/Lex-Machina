@@ -1,108 +1,115 @@
 # DR-03 — Lokalna Mapa Aktów Prawnych
 
-## Prawo Karne, Wykroczenia, Egzekucja
+## Prawo karne, wykroczenia, egzekucja
 
-| Akt prawny | Dz.U. (t.j.) | Moduł | Status |
+Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł**. Historia napraw, dawne numery, zamknięte flagi i opisy kolejnych sesji audytowych pozostają poza runtime.
+
+### Kodeks karny i framework karny
+
+**Baza KK:** Dz.U. 2025 poz. 383 t.j. ze zm.  
+**Baza KPK:** Dz.U. 2026 poz. 490 t.j. ze zm.  
+**Baza KKW:** Dz.U. 2025 poz. 911 t.j. ze zm.
+
+| Zakres | Moduł / routing | Status runtime |
+|---|---|---|
+| KK — indeks current-state całego kodeksu | `mod-KK-current-state-COV.md` | 🟢 B+/COV |
+| KK — moduł główny | `mod-KK-kodeks-karny` | ✅ aktywny |
+| KK + KPK — framework ogólny | `mod-KK-KPK-framework-karne` | ✅ aktywny |
+| KK + KPK + KKW — framework szczegółowy | `mod-KK-KPK-framework-szczegolowy` | ✅ aktywny |
+| Kwalifikacja karnomaterialna | `mod-KK-kwalifikator-karnomaterialny` | ✅ aktywny; fresh gate |
+| Czynny żal / samooskarżenie KK-KKS | `mod-czynny-zal-KK-KKS-samooskarzenie` | ✅ aktywny |
+| KK art. 10 — nieletni | `mod-KK-art10-odpowiedzialnosc-nieletnich` | ✅ aktywny |
+| KK art. 18–22 — formy popełnienia | `mod-KK-art18-22-formy-popelnienia` | ✅ aktywny |
+| KK art. 64–65 — recydywa | `mod-KK-art64-recydywa` | ✅ aktywny |
+| KK art. 69–84 — zawieszenie / zwolnienie | `mod-KK-art69-84-warunkowe-zawieszenie-zwolnienie` | ✅ aktywny |
+| KK art. 101–105 — przedawnienie | `mod-KK-art101-105-przedawnienie-karalnosci` | ✅ aktywny |
+| KK art. 127–139 — przeciwko RP | `mod-KK-art127-139-przeciwko-RP` | ✅ aktywny |
+| KK art. 148–162 — życie i zdrowie | `mod-KK-art148-162-przeciwko-zyciu-zdrowiu` | ✅ aktywny |
+| KK art. 163–172 — bezpieczeństwo powszechne | `mod-KK-art163-172-bezpieczenstwo-powszechne` | ✅ aktywny |
+| KK art. 181–188a — środowisko | `mod-KK-art181-188a-przeciwko-srodowisku` | ✅ aktywny |
+| KK art. 190a — stalking | `mod-KK-art190a-stalking` + `shared/STALKING-NEKANIE.md` | ✅ aktywny |
+| KK art. 207 — przemoc domowa | `mod-KK-art207-przemoc-domowa` + `mod-KK-przemoc-domowa-szczegolowy` | ✅ aktywny |
+| KK art. 212–216 — cześć | `mod-KK-art212-216-przeciwko-czci` | ✅ aktywny |
+| KK art. 217a / 222–226 — ochrona funkcjonariusza i osoby interweniującej | `mod-KK-art222-226-ochrona-funkcjonariusza` | ✅ aktywny |
+| KK art. 228–231 — korupcja urzędnicza | `mod-KK-art228-231-korupcja-urzednicza` | ✅ aktywny |
+| KK art. 233–244b — wymiar sprawiedliwości | `mod-KK-art233-244b-przeciwko-wymiarowi-sprawiedliwosci` | ✅ aktywny |
+| KK art. 250a — korupcja wyborcza | `mod-KK-art250a-korupcja-wyborcza` | ✅ aktywny |
+| KK art. 255b — patostreaming | `mod-KK-art255b-patostreaming` | ✅ aktywny; temporal/fresh gate |
+| KK art. 263 — broń | `mod-KK-art263-bron-nielegalna` | ✅ aktywny; fresh gate ustaw administracyjnych |
+| KK art. 267–269c — cyberprzestępstwa | `mod-KK-art267-269c-cyberprzestepstwa` + `mod-KK-cyberprzestepstwa-szczegolowy` | ✅ aktywny |
+| KK art. 270–310 — fałszerstwa dokumentów | `mod-KK-art270-310-falszerstwa-dokumentow` | ✅ aktywny |
+| KK art. 291–299 — paserstwo / pranie pieniędzy | `mod-KK-art291-pranie-pieniedzy` | ✅ aktywny |
+| KK art. 296 — nadużycie zaufania | `mod-KK-art296-naduzycie-zaufania` | ✅ aktywny |
+| KK art. 296a — korupcja prywatna | `mod-KK-art296a-korupcja-sektor-prywatny` | ✅ aktywny |
+| KK art. 305 — zmowa przetargowa | `mod-KK-art305-zmowa-przetargowa-karna` | ✅ aktywny |
+| Fikcyjna reprezentacja / „słupy” | `mod-KK-slupy-fikcyjna-reprezentacja-spolki` | ✅ aktywny; routing wieloaktowy |
+| Podmiana części przy naprawie / oszustwo | `mod-podmiana-czesci-naprawa-oszustwo` | ✅ aktywny |
+| Samosąd / lincz / ochrona świadków | `mod-lincz-ochrona-swiadkow-lowcy-pedofili` | ✅ aktywny |
+| Tajemnica zawodowa / poufność | `mod-tajemnica-zawodowa-poufnosc` | ✅ aktywny |
+| Świadek koronny / „mały świadek koronny” | `mod-swiadek-koronny-duzy-maly` | ✅ aktywny; fresh gate |
+
+### Kodeks postępowania karnego
+
+| Zakres | Moduł / routing | Status runtime |
+|---|---|---|
+| KPK — indeks current-state całego kodeksu | `mod-KPK-current-state-COV.md` | 🟢 B+/COV |
+| Tryby ścigania | `mod-KPK-tryby-scigania` | ✅ aktywny |
+| Dobrowolne poddanie się karze / konsensualne zakończenie | `mod-dobrowolne-poddanie-sie-karze-KPK` | ✅ aktywny |
+| Mediacja karna | `mod-KPK-mediacja-sprawiedliwosc-naprawcza` | ✅ aktywny |
+| Środki zapobiegawcze / tymczasowe aresztowanie | `mod-KPK-srodki-zapobiegawcze-tymczasowe-aresztowanie` | ✅ aktywny |
+| Poręczenie majątkowe | `mod-poreczenie-majatkowe-kaucja-karna` | ✅ aktywny |
+| Podstawy procesowe / dowody biegłych / odwoławcze / postępowania szczególne | `mod-KPK-podstawy-odwolawcze-przeslanki-zarzuty-biegli` | ✅ aktywny; fresh gate |
+| Współpraca międzynarodowa karna / ENA / ekstradycja / EPPO | `mod-KPK-wspolpraca-miedzynarodowa-karna` | ✅ aktywny; fresh gate |
+
+### Kodeks karny wykonawczy
+
+| Zakres | Moduł / routing | Status runtime |
+|---|---|---|
+| KKW — indeks current-state całego kodeksu | `mod-KKW-current-state-COV.md` | 🟢 B+/COV |
+| KKW — moduł główny | `mod-KKW-kodeks-karny-wykonawczy` | ✅ aktywny |
+| KKW — pokrycie pozostałych części | `mod-KKW-uzupelnienie-pokrycia-2026` | 🟡 B/B+ |
+| Fundusz Pomocy Pokrzywdzonym / Pomoc Postpenitencjarna | art. 43 KKW + właściwe rozporządzenie wykonawcze | `mod-ustawa-fundusz-pomocy-pokrzywdzonym` | ✅ aktywny; fresh gate aktu wykonawczego |
+| Opłaty w sprawach karnych | Dz.U. 2023 poz. 123 t.j. ze zm. | `mod-ustawa-oplaty-w-sprawach-karnych` | 🟢 B+/COV |
+
+### Wykroczenia i KPW
+
+**Baza KW:** Dz.U. 2025 poz. 734 t.j. ze zm.  
+**Baza KPW:** Dz.U. 2025 poz. 860 t.j. ze zm.
+
+| Zakres | Moduł / routing | Status runtime |
+|---|---|---|
+| KW — moduł główny | `mod-KW-kodeks-wykroczen` | ✅ aktywny |
+| KW — część ogólna | `mod-KW-art1-48-czesc-ogolna` | ✅ aktywny |
+| KW art. 49–64 — porządek publiczny | `mod-KW-art49-64-porzadek-publiczny` | ✅ aktywny |
+| KW art. 70–118 — bezpieczeństwo / osoba / zdrowie | `mod-KW-art70-118-bezpieczenstwo-osoba-zdrowie` | ✅ aktywny |
+| KW art. 119–131 — mienie | `mod-KW-art119-131-przeciwko-mieniu` | ✅ aktywny |
+| KW art. 132–166 — pozostałe rozdziały | `mod-KW-art132-166-pozostale-rozdzialy` | ✅ aktywny |
+| KPW — indeks wszystkich 12 działów | `mod-KPW-kodeks-postepowania-w-sprawach-o-wykroczenia.md` | 🟢 B+/COV |
+| KW + KPW — framework szczegółowy | `mod-KW-KPW-framework-szczegolowy` | ✅ aktywny |
+| Grzywny / mandaty / KPA / UPEA / KPW | `mod-grzywny-mandaty-szczegolowe` | ✅ aktywny; fresh gate kwot i terminów |
+
+### KKS, narkomania i inne akty karne
+
+| Akt / zakres | Bieżąca podstawa | Moduł / routing | Status runtime |
 |---|---|---|---|
-| Kodeks karny (KK) + KPK | Dz.U. 2025 poz. 383 t.j. — VER 2026-07-02n: nadal aktualne (obwieszczenie 6.03.2025) + Dz.U. 2026 poz. 490 | mod-KK-kodeks-karny | ✅ OK |
-| KK art. 15/17/23 (czynny żal) + KKS art. 16-16a (czynny żal skarbowy) | Dz.U. 2025 poz. 383 t.j. + Dz.U. 2025 poz. 633 t.j. (KKS) | mod-czynny-zal-KK-KKS-samooskarzenie | ✅ NOWY 2026-07-21, odpowiedź na pytanie użytkownika |
-| KPK art. 335 i 387 (dobrowolne poddanie się karze) | Dz.U. 2026 poz. 490 t.j. | mod-dobrowolne-poddanie-sie-karze-KPK | ✅ NOWY 2026-07-21, odpowiedź na pytanie użytkownika |
-| KK — 15 modułów tematycznych zbudowanych 2026-07-16/18 (art. 10, 18-22, 64-65, 69-84, 101-105, 148-162, 212-216, 222-226, 228-231, 250a, 255b, 270-310, 296, 296a, 305) | Dz.U. 2025 poz. 383 t.j. (jak wyżej) | mod-KK-kodeks-karny (wiersz zbiorczy — 14 modułów tematycznych ROZPISANYCH w osobnych wierszach niżej, rozbicie 2026-08-14e (F-77 rozszerzona)) | ✅ NADROBIONA ZALEGŁOŚĆ REJESTRACYJNA 2026-07-21 — wszystkie 15 istniały fizycznie od dawna, nigdy nie trafiły do SKILL.md; PRZY OKAZJI uzupełniono mod-KK-art148-162 o brakujące art. 158-162 (w tym nieudzielenie pomocy) |
-| Kodeks karny — art. 10 — odpowiedzialność karna nieletnich | Dz.U. 2025 poz. 383 t.j. — ten sam akt co wiersz macierzysty KK | mod-KK-art10-odpowiedzialnosc-nieletnich | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) — rozbicie wiersza zbiorczego, wzorzec F-33 |
-| Kodeks karny — art. 18-22 — formy popełnienia (sprawstwo, podżeganie, pomocnictwo) | Dz.U. 2025 poz. 383 t.j. — ten sam akt co wiersz macierzysty KK | mod-KK-art18-22-formy-popelnienia | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) — rozbicie wiersza zbiorczego, wzorzec F-33 |
-| Kodeks karny — art. 64-65 — recydywa i powrót do przestępstwa | Dz.U. 2025 poz. 383 t.j. — ten sam akt co wiersz macierzysty KK | mod-KK-art64-recydywa | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) — rozbicie wiersza zbiorczego, wzorzec F-33 |
-| Kodeks karny — art. 69-84 — warunkowe zawieszenie i warunkowe zwolnienie | Dz.U. 2025 poz. 383 t.j. — ten sam akt co wiersz macierzysty KK | mod-KK-art69-84-warunkowe-zawieszenie-zwolnienie | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) — rozbicie wiersza zbiorczego, wzorzec F-33 |
-| Kodeks karny — art. 101-105 — przedawnienie karalności | Dz.U. 2025 poz. 383 t.j. — ten sam akt co wiersz macierzysty KK | mod-KK-art101-105-przedawnienie-karalnosci | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) — rozbicie wiersza zbiorczego, wzorzec F-33 |
-| Kodeks karny — art. 148-162 — przestępstwa przeciwko życiu i zdrowiu | Dz.U. 2025 poz. 383 t.j. — ten sam akt co wiersz macierzysty KK | mod-KK-art148-162-przeciwko-zyciu-zdrowiu | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) — rozbicie wiersza zbiorczego, wzorzec F-33 |
-| Kodeks karny — art. 212-216 — przestępstwa przeciwko czci | Dz.U. 2025 poz. 383 t.j. — ten sam akt co wiersz macierzysty KK | mod-KK-art212-216-przeciwko-czci | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) — rozbicie wiersza zbiorczego, wzorzec F-33 |
-| Kodeks karny — art. 228-231 — korupcja urzędnicza | Dz.U. 2025 poz. 383 t.j. — ten sam akt co wiersz macierzysty KK | mod-KK-art228-231-korupcja-urzednicza | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) — rozbicie wiersza zbiorczego, wzorzec F-33 |
-| Kodeks karny — art. 250a — korupcja wyborcza | Dz.U. 2025 poz. 383 t.j. — ten sam akt co wiersz macierzysty KK | mod-KK-art250a-korupcja-wyborcza | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) — rozbicie wiersza zbiorczego, wzorzec F-33 |
-| Kodeks karny — art. 255b — patostreaming | KK: Dz.U. 2025 poz. 383 t.j. ze zm.; przepis dodany ustawą z Dz.U. 2026 poz. 988, obowiązuje od 23.08.2026 r. | mod-KK-art255b-patostreaming | ✅ PEŁNA WERYFIKACJA URZĘDOWA 2026-08-26 — § 1–4, sankcje, wyłączenie z § 4 i temporalność; data zgodna z metadanymi ELI |
-| Kodeks karny — art. 270-310 — fałszerstwa dokumentów | Dz.U. 2025 poz. 383 t.j. — ten sam akt co wiersz macierzysty KK | mod-KK-art270-310-falszerstwa-dokumentow | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) — rozbicie wiersza zbiorczego, wzorzec F-33 |
-| Kodeks karny — art. 296 — nadużycie zaufania | Dz.U. 2025 poz. 383 t.j. — ten sam akt co wiersz macierzysty KK | mod-KK-art296-naduzycie-zaufania | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) — rozbicie wiersza zbiorczego, wzorzec F-33 |
-| Kodeks karny — art. 296a — korupcja w sektorze prywatnym | Dz.U. 2025 poz. 383 t.j. — ten sam akt co wiersz macierzysty KK | mod-KK-art296a-korupcja-sektor-prywatny | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) — rozbicie wiersza zbiorczego, wzorzec F-33 |
-| Kodeks karny — art. 305 — zmowa przetargowa (odpowiedzialność karna) | Dz.U. 2025 poz. 383 t.j. — ten sam akt co wiersz macierzysty KK | mod-KK-art305-zmowa-przetargowa-karna | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) — rozbicie wiersza zbiorczego, wzorzec F-33 |
-| KK art. 233-244b (przeciwko wymiarowi sprawiedliwości — fałszywe zeznania, poplecznictwo, niezawiadomienie) + KPK art. 278-280 (list gończy krajowy) | Dz.U. 2025 poz. 383 t.j. + Dz.U. 2026 poz. 490 t.j. | mod-KK-art233-244b-przeciwko-wymiarowi-sprawiedliwosci | ✅ NADROBIONA ZALEGŁOŚĆ REJESTRACYJNA + ROZBUDOWANE 2026-07-21 (wymóg umyślności poplecznictwa, art. 240 KK, list gończy), odpowiedź na pytanie użytkownika |
-| KK + KPK — framework karne | Dz.U. 2025 poz. 383 + Dz.U. 2026 poz. 490 | mod-KK-KPK-framework-karne | ✅ OK |
-| KK + KPK — framework szczegółowy | Dz.U. 2025 poz. 383 t.j. (KK) + Dz.U. 2026 poz. 490 t.j. (KPK) + Dz.U. 2025 poz. 911 t.j. (KKW) — POPRAWKA 2026-07-26 (audyt pełnego systemu, T3): mapa wcześniej cytowała TYLKO KK, mimo że moduł (linia 194 stopki) od dawna poprawnie cytuje wszystkie trzy akty | mod-KK-KPK-framework-szczegolowy | ✅ OK (naprawiono niekompletność mapy, nie treści modułu) |
-| KK art. 190a — stalking | Dz.U. 2025 poz. 383 ze zm. | mod-KK-art190a-stalking | ✅ OK |
-| KK art. 190a — stalking szczegółowy | Dz.U. 2025 poz. 383 ze zm. | shared/STALKING-NEKANIE.md (przeniesiony 2026-07-12) | ✅ OK |
-| KK art. 207 + ustawa antyprzemocowa | Dz.U. 2025 poz. 383 + Dz.U. 2021 poz. 1249 | mod-KK-art207-przemoc-domowa | ✅ OK |
-| KK art. 207 — przemoc domowa szczegółowy | Dz.U. 2025 poz. 383 ze zm. | mod-KK-przemoc-domowa-szczegolowy | ✅ OK |
-| KK art. 267–269c — cyberprzestępstwa | Dz.U. 2025 poz. 383 ze zm. | mod-KK-art267-269c-cyberprzestepstwa | ✅ OK |
-| KK art. 267 §2-4 — podsłuch/nagrania (rozróżnienie uczestnik/osoba trzecia, GPS, kontrola operacyjna) | Dz.U. 2025 poz. 383 ze zm. | mod-KK-kwalifikator-karnomaterialny.md BLOK G | ✅ ROZBUDOWANE 2026-07-15, Część 5/6 naprawy — wcześniej błędnie przypisane paragrafy, brak kluczowego rozróżnienia |
-| KK art. 267–269c — cyberprzestępstwa szczegółowy | Dz.U. 2025 poz. 383 ze zm. | mod-KK-cyberprzestepstwa-szczegolowy | ✅ OK |
-| KK art. 291–299 — paserstwo, pranie pieniędzy | Dz.U. 2025 poz. 383 ze zm. | mod-KK-art291-pranie-pieniedzy | ✅ OK |
-| Kodeks karny wykonawczy (KKW) | Dz.U. 2025 poz. 911 t.j. — VER 2026-07-02o: nadal aktualne (obwieszczenie 11.06.2025) | mod-KKW-kodeks-karny-wykonawczy | ✅ F-75 ZAMKNIĘTA W CAŁOŚCI 2026-08-20 — dodano prawa i obowiązki skazanego (101-120, kontrola osobista + skarga 7-dniowa) i kary dyscyplinarne (142-149, katalog + przedawnienie 14/30 dni) — łącznie z sesją 2026-08-14 (warunkowe zwolnienie, odroczenie/przerwa, dozór elektroniczny) moduł ma teraz pełne pokrycie pierwotnego zakresu raportu zewnętrznego |\n| Ustawa o opłatach w sprawach karnych z 23.06.1973 r. | Dz.U. 2023 poz. 123 t.j. — RZĄD 1 ELI, status obowiązujący | mod-ustawa-oplaty-w-sprawach-karnych | ✅ NOWY F-108/8, poziom B+; pełna mapa art. 1–23 i aktualne stawki |
-| Kodeks karny wykonawczy — uzupełnienie pozostałych części: ogólna, nadzór penitencjarny, ograniczenie wolności, zakład karny/indywidualizacja, praca/nauczanie, nagrody, zwolnienie, środki, tymczasowe aresztowanie i część wojskowa | Dz.U. 2025 poz. 911 t.j. — ten sam akt bazowy, RZĄD 1 ELI | mod-KKW-uzupelnienie-pokrycia-2026 | 🟡 B — zamknięcie dotychczasowych modułów-widm na poziomie operacyjnym |
-| Kodeks wykroczeń (KW) + KPW | Dz.U. 2025 poz. 734 t.j. — VER 2026-07-02o: nadal aktualne (obwieszczenie 21.05.2025) ze zm. Dz.U. 2025 poz. 1872 (drift, wyścigi) + Dz.U. 2025 poz. 1814 (art. 82 — usunięcie kary nagany, mandat do 5000 zł) — ODNOTOWANE 2026-07-20 | mod-KW-kodeks-wykroczen + mod-KW-art49-64-porzadek-publiczny (art. 82 punkt startowy) | ✅ OK — treść art. 82 pozostaje PUNKTEM STARTOWYM, ale zmiana legislacyjna jest już odnotowana |
-| KW + KPW — framework szczegółowy (+ art. 86c drift) | Dz.U. 2025 poz. 734 t.j. (KW) ze zm. Dz.U. 2025 poz. 1872 + Dz.U. 2025 poz. 1814 + Dz.U. 2025 poz. 860 t.j. (KPW/KPSW) — POPRAWKA 2026-07-26 (audyt pełnego systemu, T3): mapa wcześniej nie cytowała numeru KPW wcale, mimo że moduł (linia 198 stopki) od dawna poprawnie cytuje oba akty | mod-KW-KPW-framework-szczegolowy | ✅ OK (naprawiono niekompletność mapy) |
-| Prawo o ruchu drogowym (PRD) | Dz.U. 2024 poz. 1251 t.j. ze zm. — VER 2026-07-02p: nadal aktualne (obwieszczenie 21.06.2024) (zm.: Dz.U. 2025 poz. 1676, 1734, 1843; Dz.U. 2026 poz. 180) | mod-PRD-prawo-jazdy-punkty-karne | ✅ OK |
-| Ustawa o kierujących pojazdami (u.k.p.) | Dz.U. 2025 poz. 1226 t.j. ze zm. — VER 2026-07-02p: nadal aktualne Dz.U. 2025 poz. 1676 | mod-PRD-prawo-jazdy-punkty-karne | ✅ OK |
-| Ustawa o zmianie PRD — BRD I (pj od 17 lat, cofnięcie, cyfrowe pj) | Dz.U. 2025 poz. 1676 (w życie 03.2026–06.2026) | mod-PRD-prawo-jazdy-punkty-karne (cofnięcie uprawnień art.103 u.k.p., nowy okres próbny) + mod-PRD-nowe-przestepstwa-drogowe-BRD (pj od 17 lat) | ✅ OK |
-| Ustawa o poprawie BRD — BRD II (wyścigi, drift, brawurowa jazda, przepadek) | Dz.U. 2025 poz. 1872 (w życie 29.01.2026, 30.03.2026) | mod-PRD-nowe-przestepstwa-drogowe-BRD + mod-KW-KPW-framework-szczegolowy | ✅ OK — 2026-07-20: wypełniono 2 placeholdery "weryfikuj" zweryfikowanymi danymi (dożywotni zakaz art. 42 §3, nowy obowiązkowy zakaz art. 42 §1a, podwyższone dolne granice kar) |
-| KK art. 217a — ochrona osób interweniujących cywilnie | Dz.U. 2025 poz. 383 + Dz.U. 2025 poz. 1818 (7.11.2025) | mod-KK-art222-226-ochrona-funkcjonariusza (nowa sekcja) | ✅ NOWY 2026-07-20, odpowiedź na polecenie sprawdzenia aktualizacji |
-| Rozp. MSWiA ws. ewidencji kierujących (taryfikator, kody, szkolenia — NOWE) | Dz.U. 2026 poz. 724 (w życie 03.06.2026) | mod-PRD-prawo-jazdy-punkty-karne | ✅ OK |
-| KPK — tryby ścigania | Dz.U. 2026 poz. 490 ze zm. | mod-KPK-tryby-scigania | ✅ OK |
-| KPK art. 23a — mediacja karna (część KPK, ten sam Dz.U. co wyżej) | Dz.U. 2026 poz. 490 t.j. (część KPK) — w życie 1.07.2003, rozszerzenie na wykroczenia 1.07.2015 | mod-KPK-mediacja-sprawiedliwosc-naprawcza | ✅ NOWY 2026-07-17 |
-| KKS + Ustawa AML | Dz.U. 2025 poz. 633 t.j. — VER 2026-07-02o: nadal aktualne (obwieszczenie 10.04.2025) + Dz.U. 2025 poz. 644 t.j. ✅ VER: 2026-06-14 (TRYB DZU — AML był 2023/1124, nowszy t.j. 2025/644 z 09.05.2025; uwaga: dalsza nowelizacja Dz.U. 2025 poz. 1669, sprawdzić czy konsolidowana) | mod-KKS-karny-skarbowy-i-AML | ✅ OK |
-| Kwalifikator karnomaterialny | — | mod-KK-kwalifikator-karnomaterialny | ✅ OK |
-| Ustawa o odpowiedzialności podmiotów zbiorowych | Dz.U. 2024 poz. 1822 t.j.; zmiana po t.j.: Dz.U. 2026 poz. 516, art. 4 (art. 7b i art. 16 ust. 1 pkt 18), od 30.04.2026 r. | mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych | ✅ VER ELI/PDF 2026-08-26; usunięto błędne przypisanie Dz.U. 2025 poz. 1440 i nieistniejącego art. 9a |
-| Ustawa o komornikach sądowych | Dz.U. 2026 poz. 881 t.j. | dr-12/mod-ustawa-komornicy-sadowi-zawod | 🔗 odesłanie (scalono 2026-06-14, NOTA-8) |
-| Fundusz Pomocy Pokrzywdzonym oraz Pomocy Postpenitencjarnej (Fundusz Sprawiedliwości) | ⚠️ POPRAWKA STRUKTURALNA 2026-07-04 (audyt-DR03): to NIE jest odrębna "ustawa" — podstawa ustawowa to art. 43 Kodeksu karnego wykonawczego (KKW, patrz wyżej Dz.U. 2025 poz. 911), a organizację Funduszu określa ROZPORZĄDZENIE Ministra Sprawiedliwości, obecny t.j. **Dz.U. 2025 poz. 1298** (obwieszczenie 19.09.2025), poprzedni t.j. 2024.1605 (obwieszczenie 23.10.2024). Numer "2022.2256" cytowany wcześniej nie odpowiadał żadnemu z tych dokumentów — prawdopodobnie pomylony z innym aktem o zbliżonej tematyce | mod-ustawa-fundusz-pomocy-pokrzywdzonym | ✅ OK (przekwalifikowane z ustawy na rozporządzenie + numer poprawiony) |
-| Ustawa o przeciwdziałaniu narkomanii | Dz.U. 2023 poz. 1939 t.j. ze zm. **Dz.U. 2026 poz. 1004** — ustawa z 3.07.2026, ogłoszona 27.07.2026, **obowiązuje od 27.08.2026**; RZĄD 1 ELI, VER 2026-08-28 | mod-ustawa-narkomania | ✅ AKTUALNE — usunięto przestarzały status „projekt / numer do ustalenia” |
-| KPA Dział IVa — administracyjne kary pieniężne (art. 189a–189k) | Dz.U. 2025 poz. 1691 t.j. | mod-grzywny-mandaty-szczegolowe | ✅ OK |
-| UPEA — grzywna w celu przymuszenia (art. 119–125) + zarzuty (art. 33) | Dz.U. 2026 poz. 268 t.j. (POPRAWKA 2026-07-02p — BYŁO błędnie 2023.2505, nieaktualne o DWA cykle t.j.: 2023.2505→2025.132→2026.268, obwieszczenie 4.03.2026) ze zm. **Dz.U. 2026 poz. 739** (Portal eLicytacje KAS — patrz F-16, zamknięta 2026-08-15a). ✅ **FAZA 3E 2026-08-15 (zamknięcie F-25): KWOTY art. 121 NIEZMIENIONE** — jednorazowo 10 000 zł (os. fizyczne) / 50 000 zł (os. prawne i jedn. org. bez osobowości), łącznie przy wielokrotnym nakładaniu 50 000 zł / 200 000 zł; art. 121 § 4-5 (grzywna JEDNORAZOWA przy obowiązkach z prawa budowlanego, wyjątek: utrzymanie obiektu w stanie nieoszpecającym otoczenia; przy przymusowej rozbiórce — iloczyn powierzchni zabudowy i 1/5 ceny 1 m² pow. użytkowej budynku mieszkalnego wg GUS) również bez zmian. Weryfikacja: lexlege.pl, arslege.pl (strona Rozdziału 2 wyświetla t.j. Dz.U. 2026 poz. 268), przepisy.gofin.pl — Rząd 2B, 3 niezależne domeny zgodne | mod-grzywny-mandaty-szczegolowe | ✅ TREŚĆ ZWERYFIKOWANA 2026-08-15 |
-| KPSW — mandat karny (art. 95–102) + uchylenie (art. 101) | ⛔ **KOREKTA KOREKTY 2026-08-15 (zamknięcie F-25): t.j. to Dz.U. 2025 poz. 860** (obwieszczenie Marszałka Sejmu z 13.06.2025) — poprawka z 2026-07-02q była **BŁĘDNA**: wpisała numer NOWELIZACJI zamiast tekstu jednolitego. **Dz.U. 2026 poz. 473 = ustawa o zmianie ustawy o Państwowej Inspekcji Pracy oraz niektórych innych ustaw** (zmienia m.in. PIP, Kodeks pracy, Ordynację podatkową, ustawę o powierzaniu pracy cudzoziemcom, KPSW i KSCU) — to akt zmieniający, nie t.j. Poprzedni zapis „2025.860" był POPRAWNY i został omyłkowo nadpisany. Klasyczny wzorzec ZASADY 8 (numer vs charakter aktu). Aktualny stan: **t.j. Dz.U. 2025 poz. 860 ze zm. Dz.U. 2026 poz. 473** (art. 96 § 1a — nowe brzmienie od 8.07.2026); ⚠️ [NIEWERYFIKOWANE] możliwa dalsza zmiana Dz.U. 2025 poz. 1818 (wskazana w wykazie wersji czasowych źródła Rzędu 2B, nie potwierdzona u źródła). Rząd 1: ISAP `WDU20250000860` (PDF obwieszczenia), eli.gov.pl/eli/DU/2001/1148, ISAP `WDU20260000473` | mod-grzywny-mandaty-szczegolowe | ✅ TREŚĆ ZWERYFIKOWANA 2026-08-15 |
-| KW — grzywna sądowa (art. 24–37) | Dz.U. 2025 poz. 734 ze zm. | mod-grzywny-mandaty-szczegolowe | ✅ OK |
-| KW Rozdz. XIV — przeciwko mieniu (art. 119–131) | Dz.U. 2025 poz. 734 t.j. (ta sama pozycja co wyżej, inny rozdział) | mod-KW-art119-131-przeciwko-mieniu | ✅ NOWY 2026-07-17 |
-| KW Część ogólna (art. 1–48) | Dz.U. 2025 poz. 734 t.j. (obwieszczenie 21.05.2025) ze zm. Dz.U. 2025 poz. 1676 (art. 24, 84 — ustawa o poprawie bezpieczeństwa ruchu drogowego z 4.12.2025) i Dz.U. 2025 poz. 1814 (art. 24 dalsze zmiany, powiązany KPSW art. 96) — VER 2026-08-14 (F-67): isap.sejm.gov.pl (WDU20250000734), api.sejm.gov.pl, infor.pl, prawo.pl, dziennikustaw.gov.pl | mod-KW-art1-48-czesc-ogolna | ✅ NOWY 2026-08-14 — F-67 domknięta (priorytet #2 raportu pokrycia KW: "brak systematycznego modułu wpływa na jakość kwalifikacji we wszystkich sprawach") |
-| KW Rozdz. VIII — porządek i spokój publiczny (art. 49–64) | Dz.U. 2025 poz. 734 t.j. (ta sama pozycja co wyżej, inny rozdział) — ⚠️ art. 51 §2a i przepis o niebezpiecznych przedmiotach to nowsze dodatki, zweryfikuj aktualność | mod-KW-art49-64-porzadek-publiczny | ✅ NOWY 2026-07-17 |
-| KK Rozdz. XVII — przeciwko RP: szpiegostwo, zdrada (art. 127–139) | Dz.U. 2025 poz. 383 t.j. (ta sama pozycja co KK ogólne, inny rozdział) — ⚠️ art. 130 radykalnie zmieniony reformą z 17.08.2023, re-weryfikuj przy każdym użyciu | mod-KK-art127-139-przeciwko-RP | ✅ NOWY 2026-07-17, priorytet podniesiony ze względu na wojnę na Ukrainie |
-| KK Rozdz. XX — bezpieczeństwo powszechne, w tym infrastruktura krytyczna (art. 163–172) | Dz.U. 2025 poz. 383 t.j. (ta sama pozycja, inny rozdział) | mod-KK-art163-172-bezpieczenstwo-powszechne | ✅ NOWY 2026-07-17, priorytet podniesiony — infrastruktura krytyczna |
-| KK Rozdz. XXII — przeciwko środowisku (art. 181–188a) | Dz.U. 2025 poz. 383 t.j. (ta sama pozycja, inny rozdział) ze zm. Dz.U. 2022 poz. 1726 (reforma przestępczości środowiskowej) | mod-KK-art181-188a-przeciwko-srodowisku | ✅ NOWY 2026-07-17, priorytet wskazany przez użytkownika |
-| KW Rozdz. X, XII, XIII — bezpieczeństwo osób/mienia, przeciwko osobie, przeciwko zdrowiu (art. 70-118) | Dz.U. 2025 poz. 734 t.j. (ta sama pozycja co KW ogólne, inne rozdziały) | mod-KW-art70-118-bezpieczenstwo-osoba-zdrowie | ✅ NOWY 2026-07-17 |
-| KW Rozdz. XV-XIX — konsumenci, obyczajność, urządzenia publiczne, ewidencja, szkodnictwo leśne (art. 132-166) | Dz.U. 2025 poz. 734 t.j. (ta sama pozycja, inne rozdziały) — ✅ Rozdz. XIX art. 151-166 W PEŁNI zweryfikowane 2026-08-14 (F-67 część 2): isap.sejm.gov.pl, arslege.pl, lexlege.pl, e-prawnik.pl, dlajurysty.pl, przepisy.gofin.pl, csp.edu.pl | mod-KW-art132-166-pozostale-rozdzialy | ✅ ZAKTUALIZOWANY 2026-08-14 — F-67 W CAŁOŚCI ZAMKNIĘTA (część ogólna + Rozdz. XIX), DOMYKA pokrycie części szczególnej KW |
-| Słupy (KK art. 18/286/297/296) + KSH art. 17/299/586-590 + KC art. 39/103 + ustawa o KRS art. 14/17 — fikcyjna reprezentacja spółki | Wielość aktów, każdy odrębnie skatalogowany gdzie indziej — ten wiersz łączy je tematycznie | mod-KK-slupy-fikcyjna-reprezentacja-spolki | ✅ NOWY 2026-07-17 |
-| KPK art. 266-269 — poręczenie majątkowe (kaucja karna) | Dz.U. 2026 poz. 490 t.j. | mod-poreczenie-majatkowe-kaucja-karna | ✅ NOWY 2026-07-19, odpowiedź na pytanie użytkownika |
-| KPK Dział VI Rozdz. 28, art. 249-263 — środki zapobiegawcze i tymczasowe aresztowanie | Dz.U. 2026 poz. 490 t.j. + Dz.U. 2026 poz. 421 (art. 213 §1c, tożsamość obywatela państwa trzeciego — poza zakresem tego modułu) + Dz.U. 2026 poz. 638 (art. 25 §1 pkt 2, właściwość rzeczowa SO — poza Rozdz. 28, w Dziale II; w życie 28.05.2026) — ✅ ROZSTRZYGNIĘTE 2026-08-15 (F-81 pkt 6): obie nowelizacje ZWERYFIKOWANE źródłowo (prawo.pl, sip.lex.pl), ŻADNA nie dotyka art. 249-263 opisanych w tym module — metryka uzupełniona dla kompletności rejestru, treść modułu bez zmian | mod-KPK-srodki-zapobiegawcze-tymczasowe-aresztowanie | ✅ NOWY 2026-08-13, naprawa F-23/F-66 (audyt zewnętrzny + raport pokrycia KPK, niezależne potwierdzenie tej samej luki) |
-| KK art. 263 — nielegalny wyrób/handel/posiadanie broni palnej i amunicji + ustawa o broni i amunicji (1999) + ustawa o wytwarzaniu i obrocie materiałami wybuchowymi/bronią (2019) | KK Dz.U. 2025 poz. 383 t.j. + ⚠️ zweryfikuj t.j. obu ustaw administracyjnych | mod-KK-art263-bron-nielegalna | ✅ NOWY 2026-07-18 |
-| Ustawa o świadku koronnym (25.06.1997) + KK art. 60 §3-4 (mały świadek koronny) | ⚠️ zweryfikuj t.j. ustawy na ISAP + KK Dz.U. 2025 poz. 383 t.j. | mod-swiadek-koronny-duzy-maly | ✅ NOWY 2026-07-18, odpowiedź na pytanie użytkownika |
-| KK rozdz. XXXII — Przestępstwa przeciwko porządkowi publicznemu (art. 258 — udział w zorganizowanej grupie/związku) | Dz.U. 2025 poz. 383 t.j. (część KK) | mod-KK-kwalifikator-karnomaterialny.md BLOK H | ✅ DODANE 2026-07-15 — temat wcześniej całkowicie nieobecny |
-| Kodeks karny skarbowy (KKS) — art. 54/55/56/62/76 | Dz.U. 2025 poz. 633 t.j. (obwieszczenie 10.04.2025) | mod-KKS-karny-skarbowy-i-AML.md | ✅ ROZBUDOWANE 2026-07-15 — wcześniej sam szkielet proceduralny bez konkretnych artykułów |
-| KPK Dział XIII/XIIa — ENA, ekstradycja, EPPO, Europol/Eurojust | Dz.U. 2026 poz. 490 t.j. (część KPK) | mod-KPK-wspolpraca-miedzynarodowa-karna.md | ✅ NOWY 2026-07-15 |
-| Konwencja Palermska (ONZ, przestępczość zorganizowana) | Dz.U. 2005 nr 18 poz. 158 | mod-KPK-wspolpraca-miedzynarodowa-karna.md | ✅ NOWY 2026-07-15 |
-| KK rozdz. XIX — Przestępstwa przeciwko życiu i zdrowiu (art. 148 zabójstwo, art. 158-159 bójka/pobicie) | Dz.U. 2025 poz. 383 t.j. (część KK) | mod-KK-kwalifikator-karnomaterialny.md BLOK I | ✅ DODANE 2026-07-15 — temat wcześniej tylko wzmiankowany w tabeli trybu ścigania, bez treści |
-| KK rozdz. XXXV — Przestępstwa przeciwko mieniu (art. 288 zniszczenie/uszkodzenie mienia) + KW art. 124 (próg 800 zł od 1.10.2024) | Dz.U. 2025 poz. 383 t.j. (część KK); KW Dz.U. 2025 poz. 734 ze zm. | mod-KK-kwalifikator-karnomaterialny.md BLOK L | ✅ DODANE 2026-07-15, Część 2/6 naprawy — wcześniej jeden wiersz bez treści |
-| Ustawa o wychowaniu w trzeźwości i przeciwdziałaniu alkoholizmowi (przymusowe leczenie odwykowe, art. 24-36) | Dz.U. 2023 poz. 2151 t.j. (⚠️ weryfikuj aktualność) | mod-przymusowe-leczenie-odwykowe.md | ✅ NOWY 2026-07-15, Część 3/6 naprawy — temat wcześniej całkowicie nieobecny |
-| Ustawa o przeciwdziałaniu narkomanii — leczenie uzależnionych (art. 25-30 nieletni, art. 71-73a dorośli) + marihuana lecznicza (art. 33a) + leczenie substytucyjne (art. 28-28b) + prekursory (rozp. UE 273/2004, 111/2005) | Dz.U. 2023 poz. 1939 t.j. ze zm. Dz.U. 2026 poz. 1004 — obowiązuje od 27.08.2026, VER ELI 2026-08-28 | mod-przymusowe-leczenie-odwykowe.md + mod-ustawa-narkomania.md | ✅ ROZSZERZONE 2026-07-20 (marihuana lecznicza, leczenie substytucyjne, prekursory) |
-| KK rozdz. XXXIII — Przestępstwa przeciwko ochronie informacji (art. 266 — naruszenie tajemnicy zawodowej) + art. 23 UZNK | Dz.U. 2025 poz. 383 t.j. (część KK); UZNK ✅ **SKORYGOWANE 2026-08-19 (F-89): Dz.U. 2026 poz. 85** t.j. (obwieszczenie 21.01.2026, w życie 26.01.2026, konsoliduje poprzedni t.j. 2022.1233 + nowelizację z 9.05.2025 poz. 794) — poprzedni numer "2022 poz. 1233" był PRZESTARZAŁY o jeden pełny cykl t.j.; zgodne z poprawnym numerem już obecnym w dr-02 (mod-ustawa-UZNK-nieuczciwa-konkurencja) | mod-tajemnica-zawodowa-poufnosc.md | ✅ NOWY 2026-07-15, Część 4/6 naprawy — wcześniej całkowicie nieobecne od strony karnej — ZSYNCHRONIZOWANE 2026-08-19 |
-| KK rozdz. XXV — Przestępstwa przeciwko wolności seksualnej i obyczajności (art. 197-205) | Dz.U. 2025 poz. 383 t.j. (część KK), nowelizacja definicji zgwałcenia od 13.02.2025 | mod-KK-kwalifikator-karnomaterialny.md BLOK J | ✅ DODANE 2026-07-15 — jw. |
-| Ustawa o przeciwdziałaniu zagrożeniom przestępczością na tle seksualnym i ochronie małoletnich (Rejestr Sprawców, "Ustawa Kamilka") | Dz.U. 2026 poz. 110 t.j. (obwieszczenie 21.01.2026) | mod-KK-kwalifikator-karnomaterialny.md BLOK J | ✅ NOWY 2026-07-15 |
-| KK rozdz. I-III — Część Ogólna (art. 7-9 klasyfikacja, art. 25-31 kontratypy: obrona konieczna, stan wyższej konieczności) | Dz.U. 2025 poz. 383 t.j. (część KK) | mod-KK-kwalifikator-karnomaterialny.md BLOK 0 + BLOK K | ✅ NOWY 2026-07-15, Część 1/N naprawy — wcześniej całkowicie nieobecne/wzmiankowane jednym zdaniem |
-| KK rozdz. IX/X/XII (zbieg przestępstw/kara łączna, środki zabezpieczające, zatarcie skazania) + rozdz. IV-VI (kary, ⚠️ REFORMA 2022/2023 — USUNIĘCIE "25 lat pozbawienia wolności" jako odrębnej kary z katalogu art. 32, górna granica zwykłej kary terminowej podniesiona do 30 lat) + rozdz. XXXII (art. 119/256/257 przestępstwa z nienawiści) + deepfake/słupy jako narzędzie przestępstwa | Dz.U. 2025 poz. 383 t.j. (część KK) — ⚠️ ZWERYFIKUJ art. 32/86/88 na ISAP bezpośrednio, NIE na portalach wtórnych (część z nich pokazuje NIEAKTUALNY 5-pozycyjny katalog kar sprzed reformy) | mod-KK-kwalifikator-karnomaterialny.md BLOK M/N/O/P/Q/R | ✅ NOWE 2026-07-17/18, wersja modułu v1.4 — dotąd BRAK osobnego wpisu w tej mapie mimo że inne BLOKi (G/H/I/J/K/L) go mają |
-| Modyfikacje i przeróbki pojazdów — homologacja, tachografy, motocykle | ✅ Akt referencyjny: ustawa z 20.06.1997 r. Prawo o ruchu drogowym, **t.j. Dz.U. 2024 poz. 1251** (obwieszczenie Marszałka Sejmu z 21.06.2024), ze zm. m.in. Dz.U. 2025 poz. 1676, 1734, 1812, 1843, 1863, 2026 poz. 176, 180, 426, 605, 607, 635, 875, 912, 982 — VER 2026-08-14 (F-77): isap.sejm.gov.pl, przepisy.gofin.pl, ppiop.rcl.gov.pl skorowidz. ⚠️ liczba nowelizacji po t.j. jest bardzo wysoka (temat aktywny legislacyjnie, w tym hulajnogi/UTO — patrz F-14) — weryfikuj ponownie przed każdym użyciem, nie polegaj na samym t.j. bez sprawdzenia najnowszych zmian | mod-przerobki-modyfikacje-pojazdow | ✅ ZWERYFIKOWANE 2026-08-14 — F-77 domknięta dla tego wiersza — ⚠️ patrz też F-14 |
-| Podmiana części przy naprawie jako oszustwo (286 KK) | Dz.U. 2025 poz. 383 t.j. — ten sam akt co wiersz macierzysty KK | mod-podmiana-czesci-naprawa-oszustwo | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) (F-77) |
-| Samosąd/lincz, ochrona świadków, tzw. „łowcy pedofilów” | ✅ Podstawa główna: Kodeks karny art. 158-159 (bójka/pobicie), już zweryfikowany osobno w systemie. Akt DODATKOWY dla wątku ochrony świadków: ustawa z 28.11.2014 r. o ochronie i pomocy dla pokrzywdzonego i świadka, **Dz.U. 2015 poz. 21** (pierwotna publikacja — brak odrębnego t.j., ustawa funkcjonuje w formie nowelizowanej bez konsolidacji) — VER 2026-08-14 (F-77): isap.sejm.gov.pl (WDU20150000021), lexlege.pl (cytuje wprost 2015.21 jako aktualną podstawę, stan 19.07.2026), policja.pl | mod-lincz-ochrona-swiadkow-lowcy-pedofili | ✅ ZWERYFIKOWANE 2026-08-14 — F-77 domknięta dla tego wiersza |
+| Kodeks karny skarbowy | Dz.U. 2025 poz. 633 t.j. ze zm. | `mod-KKS-karny-skarbowy-i-AML` | 🟢 B+/COV |
+| AML — routing do KKS / DR-06 | Dz.U. 2025 poz. 644 t.j. ze zm. | `mod-KKS-karny-skarbowy-i-AML` + DR-06 | ✅ aktywny |
+| Ustawa o przeciwdziałaniu narkomanii — indeks current-state | Dz.U. 2023 poz. 1939 t.j. ze zm., w tym obowiązująca zmiana Dz.U. 2026 poz. 1004 | `mod-narkomania-current-state-COV.md` + `mod-ustawa-narkomania` | 🟢 B+/COV |
+| Przymusowe leczenie odwykowe / leczenie uzależnień | właściwe akty alkoholowe i narkotykowe | `mod-przymusowe-leczenie-odwykowe` | ✅ aktywny; fresh gate |
+| Odpowiedzialność podmiotów zbiorowych | Dz.U. 2024 poz. 1822 t.j. ze zm. | `mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych` | ✅ aktywny |
+| Komornicy sądowi — routing wykonawczy | aktualna ustawa o komornikach sądowych | DR-12 `mod-ustawa-komornicy-sadowi-zawod` | 🔗 routing DR-12 |
 
-> Źródło weryfikacji: isap.sejm.gov.pl | orzeczenia.ms.gov.pl | sn.pl
-> Aktualizacja: 2026-07-02q (TRYB DZU krok 4/16 wg WARN-26, ZAMKNIĘTY: 13 z
-> ~15 aktów unikalnych zweryfikowanych [87%]. 3 błędy CRIT naprawione łącznie
-> w kroku 4 [KW — nowelizacja 2025.1814; UPEA — t.j. 2 cykle nieaktualny;
-> KPSW — t.j. nieaktualny]. 1 sygnał nierozstrzygnięty [narkomania —
-> nowelizacja 11.06.2026]. 1 pozycja niezweryfikowana [Fundusz Pomocy
-> Pokrzywdzonym — niejednoznaczne wyniki wyszukiwania]
->
-> **Sesja katalogowania 2026-07-04:** ostatnia niezweryfikowana pozycja
-> (Fundusz Pomocy Pokrzywdzonym) zamknięta — okazało się, że to nie odrębna
-> ustawa, lecz rozporządzenie MS wydane na podstawie art. 43 KKW; poprzedni
-> numer "2022.2256" był całkowicie błędny, poprawiono na aktualny t.j.
-> rozporządzenia 2025.1298. Sygnał "narkomania" zaktualizowany (bill przeszedł
-> Sejm 11.06.2026, ale wciąż brak potwierdzonej publikacji w Dz.U. na dzień
-> weryfikacji — flaga pozostaje otwarta, do sprawdzenia po ogłoszeniu). DR-03
-> ma teraz 0 pozycji "niezweryfikowanych" — pozostaje wyłącznie 1 świadomie
-> otwarta flaga oczekująca na publikację aktu (narkomania) + 2 flagi
-> "WYMAGA AKTUALIZACJI MODUŁU" (KW, UPEA/KPSW — kwestie treści modułu, nie
-> numeru Dz.U., numery już poprawne).
+### Ruch drogowy i bezpieczeństwo ruchu
 
-| KPK: art. 17, 156, 193-206, 313, 425-440, 485-499, 568a-577 | **Dz.U. 2026 poz. 490 t.j.**; po t.j. 5 nowelizacji: 421, 638, 760, 882, 901 — żadna nie zmienia wskazanych tu jednostek. **RZĄD 1 ELI VER 2026-08-28:** art. 156 §1-6, art. 437 §1-2, art. 498 i art. 575 §1-2 odczytane z tekstu urzędowego; ⛔ korekta art. 575 §1: utrata mocy poprzedniego wyroku łącznego następuje z chwilą **uprawomocnienia się** nowego wyroku łącznego, nie z chwilą wydania | mod-KPK-podstawy-odwolawcze-przeslanki-zarzuty-biegli | ✅ RZĄD 1 — rozbieżności wersji czasowych zamknięte 2026-08-28 |
+| Akt / zakres | Bieżąca podstawa | Moduł / routing | Status runtime |
+|---|---|---|---|
+| Prawo o ruchu drogowym / kierujący pojazdami / punkty karne | PRD: Dz.U. 2024 poz. 1251 t.j. ze zm.; u.k.p.: Dz.U. 2025 poz. 1226 t.j. ze zm. | `mod-PRD-prawo-jazdy-punkty-karne` | ✅ aktywny; fresh gate |
+| Nowe przestępstwa drogowe / BRD | właściwe obowiązujące nowelizacje KK/KW/PRD | `mod-PRD-nowe-przestepstwa-drogowe-BRD` | ✅ aktywny; temporal gate |
+| Modyfikacje / przeróbki pojazdów | PRD jw. + akty homologacyjne / tachografowe | `mod-przerobki-modyfikacje-pojazdow` | ✅ aktywny; fresh gate |
+
+## Reguły runtime
+
+- każdy fizyczny moduł DR-03 pozostaje jawnie rejestrowany w tej mapie zgodnie z `check_rejestracja_modulow.py`;
+- mapy nie przechowują dawnych błędów, wpisów `NAPRAWIONE/ZAMKNIĘTE/NOWY`, opisów sesji ani projektów niewchodzących jeszcze w życie;
+- znamiona, sankcje, tryb ścigania, terminy, kwoty, środki zapobiegawcze i przepisy intertemporalne zawsze wymagają fresh gate do ELI/ISAP przed użyciem;
+- `COV` oznacza aktualną strukturę/routing, nie `FULL` artykuł-po-artykule.
