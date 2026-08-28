@@ -388,6 +388,8 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Rejestracja current-state: Kodeks pracy | bieżący stan ELI/ISAP | dr-04-prawo-pracy-zus-swiadczenia/modules/mod-KP-current-state-COV.md | ✅ current-state COV |
 | UOKiK — moduł przekrojowy DR-04 | bieżący stan ELI/ISAP | dr-04-prawo-pracy-zus-swiadczenia/modules/mod-ustawa-ochrona-konkurencji-konsumentow-UOKiK.md | ✅ routing przekrojowy |
 
+| Podstawa wymiaru składek / rozporządzenie składkowe | bieżący stan SUS i aktu wykonawczego | dr-04-prawo-pracy-zus-swiadczenia/modules/mod-ROZP-SKLADKOWE-podstawa-wymiaru.md | ✅ aktywny; fresh gate |
+
 ---
 
 ## DR-05 — Prawo Administracyjne i Sądownictwo Administracyjne
