@@ -13,7 +13,7 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 
 | Akt / zakres | Moduł wejściowy | Status bieżący |
 |---|---|---|
-| TUE / TFUE | `mod-TFUE-TUE-prawo-pierwotne-UE` | 🟡 |
+| TUE / TFUE | `mod-TFUE-TUE-prawo-pierwotne-UE` | 🟢 B+ / COV — aktualne wersje skonsolidowane EUR-Lex 15.03.2025 zmapowane 2026-08-28 |
 | Karta Praw Podstawowych UE | `mod-KPP-karta-praw-podstawowych-UE` | 🟡 |
 | EKPC / ETPC | `mod-EKPC-ETPC-prawa-czlowieka` | 🟡 |
 | Bruksela Ia 1215/2012 | `mod-KPC-egzekucja-transgraniczna-UE` | 🟡 |
@@ -33,7 +33,8 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 
 ## Aktywne luki
 
-1. TUE/TFUE, KPP, EKPC i instrumenty PPM wymagają pełnego audytu strukturalnego, jeżeli mają otrzymać status `FULL`.
-2. Umowy MRG, BIT/ISDS i inne instrumenty bilateralne są zmienne — status ustala się per umowa i per data.
-3. Prawo UE pobieraj z EUR-Lex; umowy międzynarodowe i akty krajowe ratyfikacyjne z właściwych źródeł urzędowych.
-4. Przy kolizji norm zawsze ustal pierwszeństwo prawa UE / umowy międzynarodowej i właściwe przepisy przejściowe.
+1. TUE/TFUE mają bieżący audyt strukturalny B+/COV; status `FULL` nadal wymaga zdefiniowanej miary kompletności całych traktatów.
+2. KPP, EKPC i instrumenty PPM wymagają dalszego audytu strukturalnego.
+3. Umowy MRG, BIT/ISDS i inne instrumenty bilateralne są zmienne — status ustala się per umowa i per data.
+4. Prawo UE pobieraj z EUR-Lex; umowy międzynarodowe i akty krajowe ratyfikacyjne z właściwych źródeł urzędowych.
+5. Przy kolizji norm zawsze ustal pierwszeństwo prawa UE / umowy międzynarodowej i właściwe przepisy przejściowe.
