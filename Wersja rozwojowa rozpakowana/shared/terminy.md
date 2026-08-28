@@ -1,6 +1,6 @@
 # Terminy procesowe — tabela referencyjna
 
-## Terminy ZAWITE (nie podlegają przywróceniu)
+## Terminy procesowe — tabela referencyjna
 
 | Termin | Czynność | Podstawa |
 |--------|----------|----------|
@@ -76,13 +76,13 @@
 | 3 lata | Roszczenia ze stosunku pracy | art. 291 KP |
 | 3/6 lat | Roszczenia cywilne ogólne | art. 118 KC |
 | 5 lat | Zachowek | art. 1007 KC |
-| 5 lat | Wykroczenia (karalność) | art. 45 KW |
+| 1 rok / maks. 3 lata przy wszczęciu postępowania w pierwszym roku | Wykroczenia — karalność | art. 45 §1 KW; re-ver ELI Dz.U. 2025 poz. 734, 2026-08-28 |
 
 ## Reguły liczenia
 - Start: następny dzień po doręczeniu/ogłoszeniu
 - Koniec w sobotę/niedzielę/święto → przesuwa się na następny dzień roboczy
-- ZAWITY = wygasa z mocy prawa, sąd nie może przywrócić
+- Skutki uchybienia i możliwość przywrócenia ustalaj w reżimie właściwej procedury; nie wolno stosować jednej reguły do KPC/KPK/KPW/KPA. Przykład: KPC art. 168 §1 pozwala przywrócić termin, gdy strona uchybiła mu bez swojej winy.
 
 ## Ostrzeżenie automatyczne
 Gdy termin ≤5 dni: 🚨 **PILNE — zostały [n] dni!**
-Gdy termin minął: ❌ **TERMIN UPŁYNĄŁ — zawity: brak przywrócenia**
+Gdy termin minął: ❌ **TERMIN UPŁYNĄŁ — natychmiast sprawdź skutek uchybienia i przesłanki przywrócenia we właściwej procedurze**
