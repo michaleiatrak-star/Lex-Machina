@@ -1,7 +1,7 @@
 # mod-PZP-zamowienia-publiczne-KIO
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** PZP — Dz.U. 2026 poz. 793 t.j. (obwieszczenie Marszałka Sejmu z 27.05.2026, publ. 16.06.2026, zastępuje t.j. 2024.1320; uwzględnia zm.: poz. 620, 769, 794, 1165, 1173, 1235, 252/2026) | Progi UE 2026–2027: M.P. 2025 poz. 1247 | Wpisy KIO: Dz.U. 2020 poz. 2437 ✅ VER: 2026-06-09
+**Źródło weryfikacji:** PZP — Dz.U. 2026 poz. 793 t.j. (obwieszczenie Marszałka Sejmu z 27.05.2026, publ. 16.06.2026) | Progi UE 2026–2027: M.P. 2025 poz. 1247 / UZP | Wpisy KIO: Dz.U. 2020 poz. 2437, § 2; art. 517–519 PZP — re-ver 2026-08-28
 **Data weryfikacji online:** 2026-08-15 (FAZA 3E — audyt-systemu-v4, korekta numeru t.j. + treść art. 226 pkt 17/19)
 **Zasada:** Każde brzmienie przepisu i kwota wpisu → weryfikuj w ISAP / uzp.gov.pl przed powołaniem
 
@@ -30,7 +30,7 @@ Postępowanie o udzielenie zamówienia publicznego, odwołanie do KIO, skarga na
 | Akt | Dz.U. / źródło |
 |---|---|
 | Ustawa PZP | Dz.U. 2026 poz. 793 t.j. (obwieszczenie 27.05.2026; zastępuje t.j. 2024.1320) ze zm. poz. 252/2026 (odrzucenie ofert ICT, w życie 3.04.2026) |
-| Rozporządzenie Prezesa RM o wpisach KIO | Dz.U. 2020 poz. 2437 ✅ VER: 2026-06-09 | Stawki: 7 500 / 15 000 / 20 000 zł |
+| Rozporządzenie Prezesa RM o wpisach KIO | Dz.U. 2020 poz. 2437, status ELI: obowiązujący; re-ver 2026-08-28 | Stawki: dostawy/usługi 7 500 zł (< UE) / 15 000 zł (≥ UE); roboty budowlane 10 000 zł (< UE) / 20 000 zł (≥ UE) |
 | Progi unijne 2026–2027 | M.P. 2025 poz. 1247 — obwieszczenie Prezesa UZP z 08.12.2025 |
 | KC | stosowany posiłkowo do umów (art. 8 PZP) |
 
@@ -95,11 +95,13 @@ PONIŻEJ PROGÓW UE (art. 515 ust. 1 pkt 2 PZP):
 WPIS OD ODWOŁANIA (art. 519 PZP):
   → Wpłacić najpóźniej do dnia upływu terminu na wniesienie odwołania
   → Kwoty (Dz.U. 2020 poz. 2437 — VER: 2026-06-09, nadal obowiązuje):
-     • 7 500 zł  — zamówienia o wartości poniżej progów unijnych
-     • 15 000 zł — zamówienia unijne na dostawy lub usługi
-     • 20 000 zł — zamówienia unijne na roboty budowlane
+     • 7 500 zł  — dostawy/usługi lub konkurs poniżej progów unijnych
+     • 10 000 zł — roboty budowlane poniżej progów unijnych
+     • 15 000 zł — dostawy/usługi lub konkurs na poziomie progów unijnych lub powyżej
+     • 20 000 zł — roboty budowlane na poziomie progów unijnych lub powyżej
   → Konto UZP: uzp.gov.pl/kio (rachunek podany na stronie UZP)
-  ⚠️ NIEZAPŁACONY WPIS = KIO wzywa do uzupełnienia w 3 dniach
+  ⚠️ Wpis musi być UISZCZONY najpóźniej do upływu terminu wniesienia odwołania (art. 517 ust. 2 PZP).
+  ⚠️ 3-dniowe wezwanie z art. 518 PZP służy poprawieniu/uzupełnieniu braków albo złożeniu DOWODU uiszczenia wpisu w terminie; nie tworzy dodatkowego terminu na spóźnioną zapłatę.
      Brak = zwrot odwołania bez rozpoznania meritum
 
 SKARGA NA ORZECZENIE KIO (art. 580 PZP):
