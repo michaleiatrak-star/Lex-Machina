@@ -1,23 +1,22 @@
 # WARN-OTWARTE — rejestr żywy otwartych flag audytowych
 
-**Stan:** 2026-08-27. Ten plik zawiera wyłącznie zakres pozostający do
+**Stan:** 2026-08-28. Ten plik zawiera wyłącznie zakres pozostający do
 wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md`.
 
 ## Tablica sterująca
 
 | Kategoria | Liczba | Pozycje |
 |---|---:|---|
-| Wykonalne sesją audytową | 3 | F-86, F-108, F-135 |
+| Wykonalne sesją audytową | 2 | F-108, F-135 |
 | Reaktywne | 1 | F-5 |
 | Zależne od środowiska/dewelopera | 7 | F-8, F-9, F-11, F-94, F-113, F-133, F-137 |
-| **Razem** | **11** | — |
+| **Razem** | **10** | — |
 
 ## Wykonalne sesją audytową
 
 | Flaga | Priorytet | Pozostały zakres | Kryterium zamknięcia |
 |---|---|---|---|
-| F-86 | niski | Uzupełnić dalsze odrębne postępowania upadłościowe od art. 426; dotychczasowy moduł jest mapą nawigacyjną, nie pełnym opracowaniem całego zakresu flagi. | Pozostałe zakresy opisane i mapa pokrycia odświeżona; kontrola treści jednostek odrębna od kontroli metryki. |
-| F-108 | wysoki | Źródło MS/BIP: 52 akty, ponowny odczyt 2026-08-27. **Etap 3 zakończony:** wszystkie P1/P2/P3 mają dedykowane moduły ≥ B; nominalnie A=52/B=0/C=0/D=0. Pozostaje wyłącznie Etap 2: treściowy audyt 52 aktów/zakresów bez utożsamiania obecności modułu z kompletnością. | Pełne warunki i rejestr 52 pozycji w `F-108-lista-MS-egzamin-2026.md`; flaga OTWARTA do zamknięcia Etapu 2. |
+| F-108 | wysoki | Źródło MS/BIP: 52 akty. **Etap 3 zakończony:** wszystkie 52 pozycje mają dedykowane moduły; nominalnie A=52/B=0/C=0/D=0. Pozostaje Etap 2: treściowy audyt 52 aktów/zakresów bez utożsamiania obecności modułu z kompletnością. Część dawnych luk raportu 27.08 została już podniesiona do B/B+; bieżący stan opisuje `POKRYCIE-DELTA-2026-08-28.md`. | Pełne warunki i rejestr 52 pozycji w `F-108-lista-MS-egzamin-2026.md`; flaga OTWARTA do zamknięcia Etapu 2. |
 | F-135 | średni | Dokończyć cross-check wartości prawnych w pozostałych DR, elementów unikalnych oraz `shared`. Batch 2 skorygował PUSA, POŚ, PKPiR, Prawo lotnicze i timeshare oraz dodał kontrolę tytułu aktu. | Zero nieuzasadnionych rozbieżności albo jawne oznaczenie nieweryfikowalnych pozycji. |
 
 ## Reaktywne
@@ -39,6 +38,8 @@ wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md`.
 | F-137 | Procedura i pozycja 13 są wdrożone; pozostał test akceptacyjny zapisu wydzielonej sekcji w hoście z natywną pamięcią trwałą. Bieżący host nie udostępnia takiego capability. |
 
 ## Zamknięcia z bieżącej sesji
+
+**F-86 zamknięta 2026-08-28.** Zakres postępowań odrębnych Prawa upadłościowego od art. 426 do art. 491^38 ma dedykowany `mod-PrUpad-postepowania-odrebne-426-491-38.md`, poziom B+, oparty na RZĄD 1 (Dz.U. 2026 poz. 913 t.j.). Obejmuje banki/SKOK, banki hipoteczne, transgraniczne instytucje kredytowe, ubezpieczycieli/reasekuratorów, emitentów obligacji, upadłość konsumencką i układ konsumencki.
 
 F-10, F-48, F-82, F-83, F-88, F-102, F-104, F-106, F-110, F-125 i F-136 zostały
 zamknięte 2026-08-26. Szczegóły i dowody reprodukcji: `AUDIT-JOURNAL.md`.
