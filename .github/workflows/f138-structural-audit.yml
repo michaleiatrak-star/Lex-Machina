@@ -1,0 +1,35 @@
+name: F-138 structural audit
+
+on:
+  pull_request:
+  push:
+    branches:
+      - codex/f138-current-state-cleanup-2026-08-28
+
+permissions:
+  contents: read
+
+jobs:
+  structural-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run F-138 structural checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="$GITHUB_WORKSPACE/Wersja rozwojowa rozpakowana"
+
+          python3 -m py_compile             "$ROOT/audyt-systemu-v4/scripts/check_rejestracja_modulow.py"             "$ROOT/audyt-systemu-v4/scripts/check_coverage_coherence.py"             "$ROOT/audyt-systemu-v4/scripts/test_moved_to_shared.py"             "$ROOT/audyt-systemu-v4/scripts/ci_check_shared.py"
+
+          python3 "$ROOT/audyt-systemu-v4/scripts/check_rejestracja_modulow.py" "$ROOT"
+          python3 "$ROOT/audyt-systemu-v4/scripts/check_coverage_coherence.py" "$ROOT"
+          python3 "$ROOT/audyt-systemu-v4/scripts/test_moved_to_shared.py" --repo-root "$ROOT"
+          python3 "$ROOT/audyt-systemu-v4/scripts/ci_check_shared.py" --repo-root "$ROOT"
