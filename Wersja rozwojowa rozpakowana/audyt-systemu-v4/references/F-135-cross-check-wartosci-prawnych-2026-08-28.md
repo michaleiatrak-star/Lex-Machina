@@ -99,3 +99,25 @@ Na dzień 2026-08-28 ELI wskazuje Dz.U. 2026 poz. 622 jako obowiązujący tekst 
 ### Granica batcha
 
 Batch 3 potwierdza progi mienia w KW i usuwa aktywną ekspozycję historycznej wartości 250 zł. Nie oznacza pełnego audytu wszystkich sankcji i taryfikatorów wykroczeniowych ani ponownej weryfikacji wskazanego orzecznictwa SN.
+
+
+## Batch 4 — `shared` / terminy i właściwość
+
+**Pliki:**
+- `shared/terminy.md`
+- `shared/WLASCIWOSC-GATE.md`
+
+**Źródła urzędowe:**
+- ELI / API Sejmu — Kodeks wykroczeń, t.j. Dz.U. 2025 poz. 734;
+- ELI / API Sejmu — Kodeks postępowania cywilnego, t.j. Dz.U. 2026 poz. 468.
+
+| Wartość / reguła | Wynik | Stan po cross-checku |
+|---|---|---|
+| art. 45 §1 KW — karalność wykroczenia | **SKORYGOWANA** | nie „5 lat”: zasadniczo 1 rok; jeśli w tym okresie wszczęto postępowanie, karalność ustaje po 2 latach od zakończenia tego pierwszego okresu, czyli maks. po 3 latach od czynu |
+| art. 17 pkt 4 KPC — próg SO dla praw majątkowych | POTWIERDZONA | WPS przewyższa 100 000 zł |
+| art. 17 pkt 4 KPC — wyjątki pozostające w SR niezależnie od WPS | **SKORYGOWANA** | alimenty, naruszenie posiadania, ustanowienie rozdzielności majątkowej między małżonkami i EPU; usunięto błędne „uzgodnienie treści KW” |
+| globalna reguła `shared/terminy.md`: „zawity = brak przywrócenia” | **SKORYGOWANA systemowo** | usunięto jako fałszywe uogólnienie; np. KPC art. 168 §1 dopuszcza przywrócenie terminu, gdy strona uchybiła mu bez swojej winy |
+
+### Znaczenie systemowe
+
+Batch 4 dotyczy plików współdzielonych, więc korekta ma większy zasięg niż naprawa pojedynczego DR. W szczególności właściwość rzeczowa i reakcja na uchybiony termin nie mogą być wyznaczane przez historyczne skróty lub regułę wspólną dla różnych procedur.
