@@ -1,6 +1,6 @@
 ---
 name: dr-03-prawo-karne-wykroczenia-egzekucja
-version: "3.33"
+version: "3.34"
 description: "Prawo karne, wykroczenia i egzekucja: KK, KPK, KKW, KW, KPW, KKS, kwalifikacja karnomaterialna, tryby ścigania i wykonanie orzeczeń."
 ---
 
@@ -113,11 +113,12 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   obrona obligatoryjna art. 79 §1 pkt 2-4 KPK (→ mod-niewidomy-prawa-prawne.md,
   mod-niepelnosprawnosc-intelektualna-gluchota.md)
 
-## Moduły (68 łącznie — ✓ 68 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+## Moduły (70 łącznie — ✓ 70 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
 
   [✓] OK    mod-KK-current-state-COV
   [✓] OK    mod-KKW-current-state-COV
   [✓] OK    mod-KPK-current-state-COV
+  [✓] OK    mod-KW-current-state-COV
   [✓] OK    mod-KPW-kodeks-postepowania-w-sprawach-o-wykroczenia
   [✓] OK    mod-narkomania-current-state-COV
 
@@ -348,6 +349,8 @@ AUDIT-JOURNAL.md`.
                STOSOWANYCH przepisów KW), charakter chuligański i jego
                konsekwencje, art. 49/49a/50/52. Drugi priorytet z audytu
                pokrycia KW)
+  [✓] OK    mod-KW-art65-69-instytucje
+               (dodany 2026-08-28: Rozdz. IX KW — usuwa ostatnią lukę numeracyjną między art. 64 i 70; art. 65/65a, 66/66a-66c, 67-69; verified current-state ELI)
   [✓] OK    mod-KK-art127-139-przeciwko-RP
               (dodany 2026-07-17: Rozdz. XVII KK — szpiegostwo (art. 130,
                radykalnie zaostrzone reformą 17.08.2023 w reakcji na wojnę
