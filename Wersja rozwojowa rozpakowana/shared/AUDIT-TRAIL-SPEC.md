@@ -48,7 +48,7 @@ dokument nie został po fakcie zmieniony, bez przechowywania samej treści w log
   "seq": 42,
   "event": "HARDGATE_VERIFICATION",
   "session_id": "uuid",
-  "payload": { "typ": "akt", "identyfikator": "Dz.U. 2025 poz. 1071", "zrodlo": "MCP", "wynik": "VERIFIED" },
+  "payload": { "typ": "akt", "identyfikator": "Dz.U. 2026 poz. 795", "zrodlo": "MCP", "wynik": "VERIFIED" },
   "timestamp": "2026-07-13T10:15:00Z",
   "prev_hash": "a3f5...",
   "hash": "9c1e..."
