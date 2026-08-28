@@ -11,7 +11,7 @@ niezależnie od tego, w jakim natywnym formacie odpowiada dany serwer.
   "query_type": "akt_prawny | orzeczenie | podmiot",
   "source": "sejm-eli | saos | cbosa | kio | eurlex | krs",
   "result": {
-    "identyfikator": "np. Dz.U. 2025 poz. 1071 / sygnatura / KRS 0000123456",
+    "identyfikator": "np. Dz.U. 2026 poz. 795 / sygnatura / KRS 0000123456",
     "tytul_lub_nazwa": "string",
     "status_obowiazywania": "obowiazuje | uchylony | tekst_jednolity_nieaktualny | nieznany",
     "data_publikacji_lub_wyroku": "YYYY-MM-DD",
