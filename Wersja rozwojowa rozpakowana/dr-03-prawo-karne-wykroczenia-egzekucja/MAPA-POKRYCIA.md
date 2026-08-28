@@ -36,7 +36,7 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 
 | Akt / zakres | Status bieżący | Dowód pokrycia |
 |---|---|---|
-| KW — część ogólna i główne rozdziały | 🟢/🟡 B+ | rodzina modułów KW; niszowe rozdziały pozostają do pogłębienia |
+| KW — current-state całość, rozdz. I–XIX | 🟢 B+ / COV | `mod-KW-current-state-COV.md` + rodzina modułów KW; ostatnia luka art. 65–69 ma `mod-KW-art65-69-instytucje.md` |
 | KPW — Dz.U. 2025 poz. 860, wszystkie 12 działów | 🟢 B+ / COV | `mod-KPW-kodeks-postepowania-w-sprawach-o-wykroczenia.md` |
 
 ## Kodeks karny wykonawczy
@@ -77,7 +77,7 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 
 ## Aktywne luki
 
-1. Wszystkie akty F-108 przypisane do DR-03 mają realny routing i treść operacyjną, ale KW pozostaje na poziomie B+ bez potwierdzonego COV całego aktu; dlatego F-108/7 pozostaje otwarte jakościowo.
-2. Dalszego pogłębienia wymagają przede wszystkim niszowe rozdziały KW i szczególne warianty wykonawcze KKW — jako głębokość treści, nie brak mapy.
+1. Wszystkie akty F-108 przypisane do DR-03 mają B+/COV; KW ma pełny indeks rozdziałów I–XIX oraz fizyczny moduł dla wcześniej brakujących art. 65–69.
+2. Dalszego pogłębienia mogą wymagać wybrane przepisy KW i szczególne warianty wykonawcze KKW — jako głębokość treści, nie brak strukturalnego routingu.
 3. `MAPA-AKTOW.md` DR-03 nadal wymaga osobnego technicznego cleanupu current-state w ramach F-138; nie wpływa to na status COV tej mapy.
 4. `COV` nie oznacza `FULL`; znamiona, sankcje, terminy i progi wymagają świeżego odczytu ELI/ISAP.
