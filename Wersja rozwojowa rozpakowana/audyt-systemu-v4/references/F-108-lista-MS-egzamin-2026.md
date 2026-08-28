@@ -7,7 +7,7 @@
 ## Statusy
 
 - 🟢 **B+ / COV** — aktualna struktura aktu jest jawnie zmapowana, istnieje użyteczna treść i fresh gate;
-- 🟡 **B/B+** — treść operacyjna istnieje, ale pełny aktualny przegląd struktury nie jest zakończony;
+- 🟡 **B+** — treść operacyjna jest pogłębiona, ale pełny aktualny przegląd struktury nie jest jeszcze udokumentowany jako COV;
 - `FULL` — wyłącznie po udokumentowaniu kompletności całego aktu; sam moduł lub COV nie wystarcza.
 
 ## Rejestr 52 aktów
@@ -40,11 +40,11 @@
 | 24 | KPK | DR-03 | 🟡 B+ — kluczowe przepisy zweryfikowane 2026-08-28; pełny audyt otwarty |
 | 25 | KRS | DR-02 | 🟢 B+ / COV — Dz.U. 2025 poz. 869 ze zm.; jawność, rejestry i procedura zmapowane, nowelizacje po t.j. objęte gate |
 | 26 | Gospodarka nieruchomościami | DR-09/08/02 | 🟢 B+ / COV — Dz.U. 2026 poz. 399; Działy I–V zmapowane w rzeczywistym module UGN |
-| 27 | Samorząd powiatowy | DR-08 | 🟢 B+ — dedykowany moduł operacyjny |
-| 28 | Samorząd województwa | DR-08 | 🟢 B+ — dedykowany moduł operacyjny |
+| 27 | Samorząd powiatowy | DR-08 | 🟡 B+ — dedykowany moduł operacyjny |
+| 28 | Samorząd województwa | DR-08 | 🟡 B+ — dedykowany moduł operacyjny |
 | 29 | System ubezpieczeń społecznych | DR-04 | 🟢 B+ / COV — główne rozdziały mają bieżący status |
 | 30 | Zasiłki chorobowe i macierzyńskie | DR-04 | 🟢 B+ / COV — dedykowany moduł, RZĄD 1 |
-| 31 | KKS | DR-03/06 | 🟡 B — ostatni akt F-108 na poziomie B; pełny audyt kodeksu otwarty |
+| 31 | KKS | DR-03/06 | 🟢 B+ / COV — Dz.U. 2025 poz. 633 ze zmianami; Tytuły I–III, część materialna, procedura, wykonanie, intertemporalność i routing finansowy zmapowane 2026-08-28 |
 | 32 | RPD | DR-05 | 🟢 B+ / COV — Dz.U. 2023 poz. 292 |
 | 33 | KSH | DR-02 | 🟢 B+ / COV — wszystkie tytuły co najmniej operacyjnie pokryte |
 | 34 | Spółdzielnie mieszkaniowe | DR-02 | 🟡 B+ — aktualny t.j. Dz.U. 2026 poz. 889; dalszy audyt dla COV |
@@ -63,14 +63,20 @@
 | 47 | Prawa konsumenta | DR-02 | 🟢 B+ / COV — Dz.U. 2024 poz. 1796 ze zm.; Rozdziały 1–5b zmapowane |
 | 48 | Prawo restrukturyzacyjne | DR-02 | 🟢 B+ / COV — główne działy i pomoc publiczna zmapowane |
 | 49 | Prawo o prokuraturze | DR-12 | 🟢 B+ / COV — Dz.U. 2026 poz. 810 |
-| 50 | Sąd Najwyższy | DR-01 | 🟢 B+ — dedykowany moduł RZĄD 1 |
-| 51 | Prawo przedsiębiorców | DR-08/02 | 🟢 B+ — dedykowany moduł RZĄD 1 |
+| 50 | Sąd Najwyższy | DR-01 | 🟡 B+ — dedykowany moduł RZĄD 1 |
+| 51 | Prawo przedsiębiorców | DR-08/02 | 🟡 B+ — dedykowany moduł RZĄD 1 |
 | 52 | Fundacja rodzinna | DR-02 | 🟢 B+ / COV — osobny moduł i mapa 16 rozdziałów |
+
+## Wynik bieżący
+
+**52/52 aktów ma co najmniej poziom B+. W benchmarku nie pozostaje żadna pozycja `B`.**
+
+To nie oznacza `FULL`. Następna faza polega na podnoszeniu pozostałych pozycji B+ do COV przez jawne zestawienie pełnej aktualnej struktury aktu z treścią modułów.
 
 ## Priorytet dalszej pracy
 
-1. **P1 — KKS:** ostatni akt benchmarku pozostający na poziomie `B`.
-2. **P1 — akty `B+` bez COV:** KPA, KC, Kodeks pracy, KK, KPK, samorząd powiatowy, samorząd województwa, spółdzielnie mieszkaniowe, przeciwdziałanie narkomanii, wojewoda i administracja rządowa, Sąd Najwyższy, Prawo przedsiębiorców.
+1. **P1 — akty `B+` bez COV:** KPA, KC, Kodeks pracy, KK, KPK, samorząd powiatowy, samorząd województwa, spółdzielnie mieszkaniowe, przeciwdziałanie narkomanii, wojewoda i administracja rządowa, Sąd Najwyższy, Prawo przedsiębiorców.
+2. **P2 — walidacja COV:** sprawdzać, czy mapy lokalne i moduły nadal odpowiadają aktualnym tekstom urzędowym po kolejnych nowelizacjach.
 3. `FULL` dopiero po jawnej, udokumentowanej mierze kompletności całego aktu.
 
 ## Reguła źródeł
