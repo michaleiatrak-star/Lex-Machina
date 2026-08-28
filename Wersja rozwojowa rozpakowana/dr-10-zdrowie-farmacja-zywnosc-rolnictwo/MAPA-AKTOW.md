@@ -37,7 +37,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Zezwolenia hodowlane / gatunki / gatunki inwazyjne | właściwe ustawy krajowe + CITES / rozporządzenie (WE) nr 338/97 | `mod-ustawa-hodowla-zezwolenia-gatunki` | ✅ aktywny; fresh gate |
 | Ustawa o izbach aptekarskich | Dz.U. 2025 poz. 1693 t.j. ze zm. | `mod-ustawa-aptekarz-zawod` | ✅ aktywny |
 | Ustawa o zawodzie lekarza weterynarii i izbach lekarsko-weterynaryjnych | Dz.U. 2026 poz. 125 t.j. ze zm. | `mod-ustawa-lekarz-weterynarii-zawod` | ✅ aktywny |
-| Psycholog — aktualnie obowiązujący reżim zawodowy | akt obowiązujący na dzień sprawy; przyszłej ustawy nie stosować przed jej wejściem w życie | `mod-ustawa-psycholog-zawod` | ✅ aktywny; temporal gate |
+| Psycholog — aktualnie obowiązujący reżim zawodowy | akt obowiązujący na dzień sprawy | `mod-ustawa-psycholog-zawod` | ✅ aktywny; temporal gate |
 | Zawody prawnicze pokrewne występujące w sprawach DR-10 | właściwe ustawy korporacyjne | `mod-ustawa-zawody-prawnicze-pokrewne` + routing DR-12/DR-06 | ✅ routing |
 
 ## Reguły runtime
