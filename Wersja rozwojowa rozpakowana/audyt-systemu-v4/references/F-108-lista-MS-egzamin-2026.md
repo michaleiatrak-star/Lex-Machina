@@ -16,13 +16,13 @@
 |---:|---|---|---|
 | 1 | Prawo wekslowe | DR-02 | 🟢 B+ / COV — Dz.U. 2022 poz. 282; główne tytuły i procedury zmapowane |
 | 2 | TFUE | DR-14 | 🟢 B+ / COV — Części I–VII, EUR-Lex 15.03.2025 |
-| 3 | KPA | DR-05 | 🟡 B+ — szerokie pokrycie operacyjne; brak FULL |
+| 3 | KPA | DR-05 | 🟢 B+ / COV — Dz.U. 2025 poz. 1691; Działy i główne mechanizmy KPA zmapowane w current-state indeksie do rodziny modułów |
 | 4 | KRO | DR-02 | 🟢 B+ / COV — Dz.U. 2026 poz. 236; indeks + części tematyczne + opieka/kuratela |
 | 5 | KC | DR-02 | 🟡 B+ — szerokie pokrycie tematyczne; brak pełnego audytu kodeksu |
 | 6 | KPC | DR-02 | 🟢 B+ / COV — mapa głównych działów i aktywnych luk |
 | 7 | KW | DR-03 | 🟢 B+ / COV — część ogólna i główne rozdziały zmapowane |
 | 8 | Opłaty w sprawach karnych | DR-03 | 🟢 B+ / COV — art. 1–23, RZĄD 1 |
-| 9 | Kodeks pracy | DR-04 | 🟡 B+ — liczne moduły tematyczne; brak FULL |
+| 9 | Kodeks pracy | DR-04 | 🟢 B+ / COV — Dz.U. 2025 poz. 277 ze zmianami; Działy I–XV zmapowane do bieżącej rodziny modułów prawa pracy |
 | 10 | Prawo o adwokaturze | DR-12 | 🟢 B+ / COV — ustawa, dyscyplinarne i aktualny KEA NRA |
 | 11 | Księgi wieczyste i hipoteka | DR-02 | 🟢 B+ / COV — Dz.U. 2026 poz. 1066 |
 | 12 | Radcowie prawni | DR-12 | 🟢 B+ / COV — Dz.U. 2024 poz. 499 + Dz.U. 2026 poz. 731; KERP |
@@ -75,7 +75,7 @@ To nie oznacza `FULL`. Następna faza polega na podnoszeniu pozostałych pozycji
 
 ## Priorytet dalszej pracy
 
-1. **P1 — akty `B+` bez COV:** KPA, KC, Kodeks pracy, KK, KPK, samorząd powiatowy, samorząd województwa, spółdzielnie mieszkaniowe, przeciwdziałanie narkomanii, wojewoda i administracja rządowa, Sąd Najwyższy, Prawo przedsiębiorców.
+1. **P1 — akty `B+` bez COV:** KC, KK, KPK, samorząd powiatowy, samorząd województwa, spółdzielnie mieszkaniowe, przeciwdziałanie narkomanii, wojewoda i administracja rządowa, Sąd Najwyższy, Prawo przedsiębiorców.
 2. **P2 — walidacja COV:** sprawdzać, czy mapy lokalne i moduły nadal odpowiadają aktualnym tekstom urzędowym po kolejnych nowelizacjach.
 3. `FULL` dopiero po jawnej, udokumentowanej mierze kompletności całego aktu.
 
