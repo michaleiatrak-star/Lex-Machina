@@ -140,7 +140,7 @@ PRZESŁANKA UWOLNIENIA SIĘ (ciężar na zarządzie):
   □ Wierzyciel nie poniósł szkody
 
 TERMIN ZŁOŻENIA WNIOSKU O UPADŁOŚĆ:
-  30 dni od dnia zaistnienia podstawy upadłości (art. 21 PrUp — Dz.U. 2025 poz. 614)
+  30 dni od dnia zaistnienia podstawy upadłości (art. 21 PrUp — Dz.U. 2026 poz. 913)
   ⚠️ Termin — weryfikuj aktualny art. 21 PrUp w ISAP.
 
 PRZEDAWNIENIE roszczenia z art. 299 KSH: 3 lata — weryfikuj orzecznictwo SN.
@@ -186,7 +186,7 @@ Zaskarżenie uchwały (sp. z o.o.):
 ```
 Trudności finansowe
   ↓
-  [TEST NIEWYPŁACALNOŚCI — art. 11 PrUp — Dz.U. 2025 poz. 614]
+  [TEST NIEWYPŁACALNOŚCI — art. 11 PrUp — Dz.U. 2026 poz. 913]
   Dłużnik utracił zdolność do wykonywania wymagalnych zobowiązań pieniężnych
   (opóźnienie > 3 miesiące — domniemanie)
   Zobowiązania pieniężne > majątek przez > 24 miesiące (osoby prawne)
