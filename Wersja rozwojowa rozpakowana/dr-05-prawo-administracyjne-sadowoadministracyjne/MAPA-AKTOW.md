@@ -6,11 +6,11 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt → moduł**. Histo
 
 | Akt / zakres | Bieżąca podstawa | Moduł / routing | Status runtime |
 |---|---|---|---|
-| Kodeks postępowania administracyjnego (KPA) | Dz.U. 2025 poz. 1691 t.j. ze zm. | `mod-KPA-current-state-COV.md` + rodzina modułów KPA | 🟢 B+/COV |
+| Kodeks postępowania administracyjnego (KPA) | Dz.U. 2025 poz. 1691 t.j. ze zm. | `mod-KPA-current-state-COV.md` + `mod-KPA-postepowanie-administracyjne` + rodzina modułów KPA | 🟢 B+/COV |
 | KPA — decyzja administracyjna i odwołanie | jw. | `mod-KPA-decyzja-i-odwolanie` | ✅ aktywny |
 | KPA — zawieszenie, dowody i rozprawa administracyjna | jw. | `mod-KPA-mechanizmy-w-toku-sprawy` | ✅ aktywny |
 | KPA — tryby nadzwyczajne, bezczynność, przewlekłość i strategia | jw. | `mod-KPA-tryby-nadzwyczajne-i-strategia` | ✅ aktywny |
-| Prawo o postępowaniu przed sądami administracyjnymi (PPSA) | Dz.U. 2026 poz. 143 t.j. ze zm. | rodzina modułów PPSA + routing KPA/PPSA | 🟢 B+/COV |
+| Prawo o postępowaniu przed sądami administracyjnymi (PPSA) | Dz.U. 2026 poz. 143 t.j. ze zm. | `mod-KPA-postepowanie-administracyjne` + rodzina modułów PPSA | 🟢 B+/COV |
 | PPSA — pozostałe działy / pokrycie przekrojowe | jw. | `mod-PPSA-uzupelnienie-pokrycia-2026` | 🟡 B+ |
 | PPSA — terminy, kasacja, koszty i prawo pomocy | jw. | `mod-PPSA-terminy-kasacja-prawo-pomocy` | ✅ aktywny |
 | PPSA — posiedzenia sądowe | jw. | `mod-PPSA-posiedzenia-sadowe-rozdzial-7` | ✅ aktywny |
@@ -27,7 +27,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt → moduł**. Histo
 | Ustawa o Rzeczniku Praw Dziecka | Dz.U. 2023 poz. 292 t.j. | `mod-ustawa-RPD` | 🟢 B+/COV |
 | Ustawa o samorządowych kolegiach odwoławczych | Dz.U. 2018 poz. 570 t.j. ze zm. | `mod-ustawa-SKO` | ✅ aktywny |
 | Ustawa o kontroli w administracji rządowej | Dz.U. 2026 poz. 158 t.j. | `mod-ustawa-kontrola-administracji` | ✅ aktywny |
-| Ustawa o wojewodzie i administracji rządowej w województwie | Dz.U. 2025 poz. 428 t.j. | DR-08 `mod-wojewoda-administracja-rzadowa-current-state-COV.md` | 🟢 B+/COV |
+| Ustawa o wojewodzie i administracji rządowej w województwie | Dz.U. 2025 poz. 428 t.j. | `mod-ustawa-wojewoda-administracja-rzadowa` + DR-08 `mod-wojewoda-administracja-rzadowa-current-state-COV.md` | 🟢 B+/COV |
 | Ustawa o petycjach | Dz.U. 2018 poz. 870 t.j. ze zm. | `mod-ustawa-petycje` | ✅ aktywny |
 | KPA art. 156 § 2a + ustawa reprywatyzacyjna | KPA jw. + Dz.U. 2021 poz. 795 t.j. ze zm. | `mod-ustawa-zaskarzanie-decyzji-wlasnosci` | ✅ aktywny |
 | Ustawa o zapewnianiu dostępności osobom ze szczególnymi potrzebami | Dz.U. 2024 poz. 1411 t.j. | `mod-ustawa-dostepnosc-niepelnosprawni` | ✅ aktywny |
@@ -36,5 +36,6 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt → moduł**. Histo
 ## Reguły runtime
 
 - mapa nie przechowuje informacji typu `NAPRAWIONE`, `ZAMKNIĘTE`, `NOWY`, dawnych numerów ani opisów sesji audytowych;
+- każdy fizyczny moduł DR-05 pozostaje jawnie rejestrowany w tej mapie zgodnie z `check_rejestracja_modulow.py`;
 - przy cudzoziemcach, ochronie czasowej i aktach często nowelizowanych obowiązuje fresh gate do ELI/ISAP przed użyciem konkretnego przepisu, terminu lub statusu temporalnego;
 - status `COV` oznacza udokumentowaną mapę struktury i routingu, nie kompletność artykuł-po-artykule (`FULL`).

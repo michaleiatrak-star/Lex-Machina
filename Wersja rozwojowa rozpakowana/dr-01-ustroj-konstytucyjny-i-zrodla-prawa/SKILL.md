@@ -76,7 +76,15 @@ Brak dedykowanych rekordów ORKA dla tej dziedziny (pojęcia konstytucyjne mają
 ugruntowane definicje doktrynalne, kazuistyka TK). Pomocniczo:
 - BAS-W31 Właściwość sądu — zasady ogólne (gdy sprawa dotyczy podziału władz/sądów)
 
-## Moduły (8 łącznie — ✓ 8 OK, ☐ 0 STUB)
+## Moduły (15 łącznie — ✓ 15 OK, ☐ 0 STUB)
+
+  [✓] OK    mod-KRS-current-state-COV
+  [✓] OK    mod-PUSA-current-state-COV
+  [✓] OK    mod-Rada-Ministrow-current-state-COV
+  [✓] OK    mod-TK-organizacja-postepowanie-current-state-COV
+  [✓] OK    mod-mandat-posla-senatora-current-state-COV
+  [✓] OK    mod-partie-polityczne-current-state-COV
+  [✓] OK    mod-przewleklosc-current-state-COV
 
 ```
   [✓] OK    mod-Konstytucja-TK-skarga-konstytucyjna

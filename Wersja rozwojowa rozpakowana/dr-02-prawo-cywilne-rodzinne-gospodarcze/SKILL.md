@@ -99,7 +99,12 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (65 łącznie — ✓ 65 OK, ☐ 0 STUB)
+## Moduły (69 łącznie — ✓ 69 OK, ☐ 0 STUB)
+
+  [✓] OK    mod-KC-current-state-COV
+  [✓] OK    mod-KPC-current-state-COV
+  [✓] OK    mod-Prawo-przedsiebiorcow-current-state-COV
+  [✓] OK    mod-ustawa-zastaw-rejestrowy
 
 ```
   [✓] OK    mod-transakcje-handlowe-opoznienia

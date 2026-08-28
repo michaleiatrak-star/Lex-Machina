@@ -1,7 +1,7 @@
 ---
 name: audyt-systemu-v4
 description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych skilli: zależności, wersje, mapy Dz.U., treść merytoryczna, propagacja zmian, deduplikacja i bramki jakości."
-version: "6.27"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY od 6.10: niecytowane `6.10` YAML
+version: "6.28"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
                   # parsuje jako float 6.1 — czyli numer NIŻSZY niż 6.9, co cicho
                   # odwraca porządek wersji. Wykryte przy walidacji 2026-08-20z.
                   # Każda kolejna wersja z dwucyfrowym minor — też w cudzysłowie.
@@ -1172,9 +1172,7 @@ audyt-systemu-v4/                               ← 71 plików (stan 2026-08-26)
 
 ---
 
-*Wersja: 6.26 | Ostatnia aktualizacja: 2026-08-27 (F-108/46: rozdzielone wyniki testu modułu i globalne ostrzeżenia T3/T11; wcześniej moduł transakcji, rejestr 52 pozycji i T17;
-rejestr YAML i drzewo doprowadzone do stanu dysku — F-124; naprawa parserów T11/T3 — F-125). Sekcja CHANGELOG poniżej
-skrócona 2026-08-20 (F-78) — pełna historia w references/CHANGELOG.md.*
+*Wersja: 6.28 | Ostatnia aktualizacja: 2026-08-28 (F-138: lokalne MAPA-AKTOW DR-01–DR-16 w modelu current-state-only z zachowaniem rejestracji modułów; F-108 zamknięta 52/52 B+/COV; prawny-router-v3 3.31; końcowy test spójności pozostaje osobnym krokiem).*
 *(Stopka podawała „5.0 | 2026-07-04" przy `version: 6.8` w YAML — rozjazd
 9 wersji, naprawiony 2026-08-20y. **Stopkę aktualizuj razem z polem `version`**;
 jeśli znów zacznie się rozjeżdżać, kandyduje do usunięcia jako pole martwe —

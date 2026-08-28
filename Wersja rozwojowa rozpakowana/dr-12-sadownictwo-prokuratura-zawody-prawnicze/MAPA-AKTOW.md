@@ -2,7 +2,7 @@
 
 **Stan operacyjny:** 2026-08-28
 
-Mapa zawiera wyłącznie akty i źródła używane obecnie. Historia korekt należy do audytu/changelogu.
+Mapa zawiera wyłącznie akty i źródła używane obecnie. Historia korekt oraz przyszłe zmiany niewchodzące jeszcze w życie pozostają poza runtime.
 
 ## Sądownictwo, prokuratura, zawody prawnicze
 
@@ -11,6 +11,7 @@ Mapa zawiera wyłącznie akty i źródła używane obecnie. Historia korekt nale
 | Prawo o ustroju sądów powszechnych | aktualny tekst ELI/ISAP; kanonicznie DR-01 | → DR-01/`mod-USP-ustroj-sadow-powszechnych` | 🔗 |
 | Prawo o prokuraturze | Dz.U. 2024 poz. 390 t.j. + późn. zm.; fresh gate ELI | `mod-PrProkuratura-organy-ochrony-prawa` | ✅ |
 | KPC — arbitraż i mediacja | Dz.U. 2026 poz. 468 t.j. + późn. zm. | `mod-KPC-arbitraz-mediacja-ADR` | ✅ |
+| Mediacja — techniki i metodyka | bieżące standardy mediacji i wiedza fachowa; konkretne źródło wymaga fresh gate | `mod-techniki-mediacyjne-negocjacyjne` | ✅ aktywny; soft law / metodyka |
 | regulatorzy UOKiK / URE / UKE / KNF | właściwe bieżące ustawy sektorowe; nie istnieje jeden zbiorczy Dz.U. | `mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF` | ✅ / fresh gate per regulator |
 | sędziowie, referendarze, kuratorzy | właściwe bieżące ustawy ustrojowe i zawodowe | `mod-ustawa-sedziowie-referendarze-kuratorzy` | ✅ / fresh gate |
 | odpowiedzialność dyscyplinarna zawodów | właściwa ustawa korporacyjna + kodeks etyki danego zawodu | `mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow` | ✅ |
@@ -42,13 +43,9 @@ Kodeksy etyki są aktami korporacyjnymi właściwych samorządów, a nie aktami 
 | biegły rewident | PIBR/KRBR + PANA w zakresie zatwierdzeń/nadzoru | routing DR-15 |
 | architekt / inżynier budownictwa | IARP / PIIB | routing DR-09/15 |
 
-## Zmiany przyszłe
-
-Dz.U. 2026 poz. 846 zasadniczo wchodzi w życie 1.10.2026 i modyfikuje m.in. przepisy dotyczące tajemnicy zawodowej adwokatów i radców prawnych w związku z obowiązkami raportowymi. **Na dzień 2026-08-28 nie jest to bieżące brzmienie tych jednostek.**
-
 ## Reguła runtime
 
-1. Mapa wskazuje akt i moduł, nie historię jego korekt.
+1. Mapa wskazuje wyłącznie bieżący akt/źródło i moduł, nie historię korekt ani przyszłe zmiany.
 2. `MAPA-POKRYCIA.md` wskazuje bieżącą głębokość pokrycia.
 3. Każda konkretna jednostka prawa wymaga fresh gate do ELI/ISAP.
-4. Kodeks etyki wymaga fresh gate do oficjalnego samorządu.
+4. Kodeks etyki i soft law wymagają fresh gate do oficjalnego źródła właściwego organu.

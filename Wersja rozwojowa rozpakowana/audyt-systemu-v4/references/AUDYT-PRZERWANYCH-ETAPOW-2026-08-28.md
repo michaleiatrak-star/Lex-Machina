@@ -35,40 +35,37 @@ Etap jest `ZAMKNIĘTY` wyłącznie gdy łącznie:
 | TK — organizacja i tryb postępowania | ZAMKNIĘTY strukturalnie | odrębny `mod-TK-organizacja-postepowanie-current-state-COV.md`; DR-01 = B+/COV |
 | KPC — jawny indeks całego kodeksu | ZAMKNIĘTY strukturalnie | `mod-KPC-current-state-COV.md`; rozproszona rodzina modułów spięta jednym indeksem COV |
 
-## Dług ujawniony przez audyt
+## Dług ujawniony przez audyt — stan końcowy F-138
 
-### A. `MAPA-AKTOW.md` — W TOKU
+### A. `MAPA-AKTOW.md` — ZAMKNIĘTE
 
-Część lokalnych map nadal przechowywała historię sesji (`VER`, `ZAMKNIĘTE`, `NAPRAWIONE`, dawne alerty i narrację audytową) mimo decyzji, że mapy runtime mają zawierać tylko stan aktualny.
+Sweep DR-01–DR-16 został zakończony. Mapy runtime przechowują bieżące przypisania akt/zakres → moduł oraz fresh/temporal gate, bez historycznych statusów sesji i bez przyszłego stanu w wierszach runtime.
 
-Oczyszczone do current-state-only:
-- DR-01 — dodatkowo routing podpięty do nowych odrębnych modułów COV (TK, PUSA, KRS, Rada Ministrów, mandat, partie, przewlekłość);
-- DR-07;
-- DR-08;
-- DR-12;
-- DR-14.
+Deterministyczny re-run na aktualnym drzewie Git potwierdził dla wszystkich 16 DR brak fizycznych modułów `modules/mod-*.md` pominiętych w lokalnym `MAPA-AKTOW.md`. W toku cross-checku naprawiono również stale copies po migracjach/rename oraz brakujące rejestracje ujawnione dopiero przez pełny inwentarz.
 
-Pozostałe mapy są przeglądane selektywnie. Największy dług narracyjny potwierdzono obecnie w DR-03, DR-04, DR-05, DR-06 i DR-10. Nie oznacza to luki treściowej tych dziedzin — chodzi o mieszanie historii z runtime.
+### B. `SKILL.md` / `CHANGELOG.md` — ZAMKNIĘTE
 
-### B. `SKILL.md` / `CHANGELOG.md` — W TOKU
+Metadane są zsynchronizowane:
+- `prawny-router-v3`: 3.31 w `SKILL.md` i kanonicznym `references/CHANGELOG.md`;
+- `audyt-systemu-v4`: 6.28 w `SKILL.md` i kanonicznym `references/CHANGELOG.md`.
 
-Kontrola potwierdziła realny rozjazd metadanych:
-- `audyt-systemu-v4/SKILL.md`: YAML `version: 6.27`, natomiast stopka nadal wskazuje 6.26;
-- `audyt-systemu-v4/references/CHANGELOG.md`: ostatni wpis 6.27 opisuje jeszcze wcześniejszy model pokrycia;
-- `prawny-router-v3/SKILL.md`: `version: 3.30`;
-- `prawny-router-v3/references/CHANGELOG.md`: ostatni wpis 3.30, sprzed przejścia map runtime na current-state-only.
-
-Do zamknięcia pozostaje spójny bump wersji obu skilli wraz z ich changelogami, wykonany po zakończeniu batcha map, aby nie generować wielu pustych wersji pośrednich.
+Checklisty modułów i liczniki DR zostały zsynchronizowane z rzeczywistym drzewem plików w toku realnego testu czterech rejestrów.
 
 ## Korekta rejestru otwartych flag
 
-F-108 została usunięta z `WARN-OTWARTE.md`, ponieważ jej kryterium strukturalne zostało spełnione: 52/52 aktów ma B+/COV. Pozostała praca nie jest kontynuacją F-108.
+F-108 pozostaje zamknięta na 52/52 B+/COV. F-138 została zamknięta po zakończeniu migracji current-state, synchronizacji wersji i uzyskaniu rzeczywistego zielonego przebiegu CI; nie figuruje już w `WARN-OTWARTE.md`.
 
-Utworzono F-138 jako odrębną flagę techniczną końcowej migracji current-state: cleanup pozostałych `MAPA-AKTOW.md`, końcowy bump wersji audytora/routera i realny test spójności. Dzięki temu rejestr otwartych prac nie miesza zamkniętego benchmarku prawnego z długiem technicznym.
+## Testy — rzeczywisty przebieg CI
 
-## Testy
+GitHub Actions workflow `F-138 structural audit` został uruchomiony na rzeczywistym checkoutcie PR #23. Run #32 (run id `33165703241`, job `structural-audit`) zakończył się `success`.
 
-Dla sprawdzonego headu GitHub nie zwrócił uruchomionych workflowów Actions. Nie raportować CI jako `PASS`. Próba pobrania repozytorium do lokalnego środowiska wykonawczego nie powiodła się z powodu braku rozwiązywania hosta GitHub w tym środowisku; nie traktować tego jako wyniku testu repozytorium.
+Wyniki bramek:
+- `check_rejestracja_modulow.py`: **0 z 16 dziedzin z rozbieżnościami**;
+- `check_coverage_coherence.py`: **OK — 16 map bieżących, routing i moduły spójne, brak warstwy baseline/delta w runtime**;
+- `test_moved_to_shared.py` (T9): **OK — brak nierozwiązanych przeniesień i stale source copies**;
+- `ci_check_shared.py`: **0 zerwanych odwołań**, wynik końcowy OK.
+
+`ci_check_shared.py` raportuje dodatkowo 20 grup duplikatów bajtowych jako ostrzeżenia. Nie są one blockerem strukturalnym F-138 i nie są w tym audycie automatycznie klasyfikowane jako błędy; wymagają osobnej decyzji deduplikacyjnej, jeżeli mają być redukowane.
 
 ## Zasada dalszej pracy
 

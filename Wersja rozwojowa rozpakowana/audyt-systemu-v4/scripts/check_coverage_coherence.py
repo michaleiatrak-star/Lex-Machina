@@ -53,7 +53,9 @@ def main(root: Path) -> int:
     problems = []
     drs = sorted(
         p for p in root.iterdir()
-        if p.is_dir() and re.match(r"dr-(0[1-9]|1[0-6])-", p.name)
+        if p.is_dir()
+        and re.match(r"dr-(0[1-9]|1[0-6])-", p.name)
+        and not p.name.endswith("-out")
     )
 
     # 1 + 5. Coverage maps mandatory and current-state only.

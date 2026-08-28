@@ -6,17 +6,16 @@
 
 | Kategoria | Liczba | Pozycje |
 |---|---:|---|
-| Wykonalne sesją audytową | 2 | F-135, F-138 |
+| Wykonalne sesją audytową | 1 | F-135 |
 | Reaktywne | 1 | F-5 |
 | Zależne od środowiska/dewelopera | 7 | F-8, F-9, F-11, F-94, F-113, F-133, F-137 |
-| **Razem** | **10** | — |
+| **Razem** | **9** | — |
 
 ## Wykonalne sesją audytową
 
 | Flaga | Priorytet | Pozostały zakres | Kryterium zamknięcia |
 |---|---|---|---|
 | F-135 | średni | Dokończyć cross-check wartości prawnych w pozostałych DR, elementów unikalnych oraz `shared`; każdą rozbieżność rozstrzygnąć w źródle urzędowym albo jawnie oznaczyć jako nieweryfikowalną. | Zero nieuzasadnionych rozbieżności albo jawne oznaczenie nieweryfikowalnych pozycji. |
-| F-138 | wysoki | Dokończyć techniczną migrację runtime do modelu current-state-only. DR-01, DR-05, DR-06, DR-07, DR-08, DR-10, DR-12 i DR-14 są już oczyszczone. Pozostaje kontrolowany cleanup przede wszystkim DR-03 i DR-04 oraz selektywny sweep pozostałych `MAPA-AKTOW.md`; następnie zsynchronizować końcowe wersje `audyt-systemu-v4` i `prawny-router-v3` w `SKILL.md` + `references/CHANGELOG.md` i wykonać realny test spójności. | Brak historycznych statusów w mapach runtime objętych migracją, zgodne wersje/changelogi, F-108 nie figuruje jako otwarta, a końcowy cross-check nie wykazuje sprzeczności blokujących. |
 
 ## Reaktywne
 
