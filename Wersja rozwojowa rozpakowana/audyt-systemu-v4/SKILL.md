@@ -1162,7 +1162,7 @@ audyt-systemu-v4/                               ← 71 plików (stan 2026-08-26)
     ├── SCHEDULED-TASK-COWORK.md                ← POZYCJA 11 menu (FAZA 0C)
     ├── PAMIEC-TRWALA-ROUTER.md                 ← POZYCJA 13 menu (FAZA 0D)
     ├── SPROSTOWANIE-LM-2026-08-23.md           ← dokument dla autora raportów TEST1-3
-    ├── F-108-lista-MS-egzamin-2026.md          ← benchmark F-108 (52 akty MS; 48/52 COV)
+    ├── F-108-lista-MS-egzamin-2026.md          ← benchmark F-108 (52 akty MS; 52/52 B+/COV, 0 FULL)
     ├── F-108-verification-2026-08-28.md         ← raport źródłowy re-audytu F-108
     ├── F-104-lista-robocza-mapa-dzu.md         ← lista robocza F-104, rocznik 2026
     ├── F-104-lista-robocza-roczniki-starsze.md ← lista robocza F-104, roczniki 2013-2025 (F-124)
@@ -1174,7 +1174,7 @@ audyt-systemu-v4/                               ← 71 plików (stan 2026-08-26)
 
 ---
 
-*Wersja: 6.29 | Ostatnia aktualizacja: 2026-08-28 (ponowny audyt F-108: 52/52 routing, 48/52 B+/COV, 4 pozycje B/B+; skorygowano aktywne metryki t.j. i utworzono `mapa_dzu_2026-08-28.md`; prawny-router-v3 3.31).*
+*Wersja: 6.30 | Ostatnia aktualizacja: 2026-08-28 (F-108 domknięte 52/52 B+/COV, 0 FULL; current-state indeksy KW/SUS/zasiłkowej/zwolnień grupowych + moduł KW art. 65–69; prawny-router-v3 3.31).*
 *(Stopka podawała „5.0 | 2026-07-04" przy `version: 6.8` w YAML — rozjazd
 9 wersji, naprawiony 2026-08-20y. **Stopkę aktualizuj razem z polem `version`**;
 jeśli znów zacznie się rozjeżdżać, kandyduje do usunięcia jako pole martwe —
