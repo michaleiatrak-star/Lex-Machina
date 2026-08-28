@@ -11,8 +11,7 @@
   Nowe elementy: Europejski Portfel Tozsamosci Cyfrowej (EUDIW)
 
 **Ustawa z 05.09.2016 r. o uslugach zaufania oraz identyfikacji elektronicznej (UZIE)**
-- Dz.U. 2016 poz. 1579 (ze zm.) - implementacja eIDAS w Polsce
-  VER: isap.sejm.gov.pl [2026-05-31] - weryfikuj aktualny t.j.
+- **Dz.U. 2024 poz. 1725 t.j. ze zm.** — RZĄD 1 ELI, VER 2026-08-28. To aktualny tekst jednolity polskiej ustawy o usługach zaufania oraz identyfikacji elektronicznej.
 
 **Weryfikacja ISAP i eur-lex przed kazdy cytowaniem.**
 
@@ -36,27 +35,14 @@ Uslugi kwalif.:     Kwalifikowany podpis, piecze, znacznik czasu, doreczenia
 Cel:     Europejski Portfel Tozsamosci Cyfrowej - dla wszystkich obywateli UE
 Funkcja: Przechowywanie: dowod osobisty, prawo jazdy, atrybuty zdrowotne
          Uzywanie: logowanie do uslug online (nie tylko rządowe)
-Termin:  Panstwa UE musza zaoferowac EUDIW do 31.12.2026 r.
+Termin:  art. 5a ust. 1 eIDAS 2.0 wymaga, aby każde państwo zapewniło co najmniej jeden EUDI Wallet **w ciągu 24 miesięcy od wejścia w życie wskazanych aktów wykonawczych** z art. 5a ust. 23 i art. 5c ust. 6; nie używaj sztywnej daty 31.12.2026 bez sprawdzenia właściwego aktu wykonawczego.
 
-✅ STATUS W POLSCE ZWERYFIKOWANY 2026-08-21 (F-49) — 8+ zgodnych źródeł
-(gov.pl/cyfryzacja [oficjalny komunikat MC], rp.pl [10.08.2026], coi.gov.pl,
-gofin.pl, android.com.pl, eurocert.pl, identt.pl, bakertilly-tpa.pl):
-  → Polska wdraża EUDIW jako PILOTAŻ zintegrowany z aplikacją mObywatel
-    (NIE osobna, nowa aplikacja — istniejąca architektura mObywatel
-    rozszerzana o nowe komponenty zgodne z eIDAS 2.0)
-  → Pilotaż planowany na KONIEC 2026 r. (zgodny z unijnym terminem)
-  → WYMÓG DOSTĘPU: jednorazowe silne uwierzytelnienie z użyciem DOWODU
-    OSOBISTEGO Z WARSTWĄ ELEKTRONICZNĄ (e-dowód, wydawany od 4.03.2019,
-    obecnie >11 mln posiadaczy) — BEZ e-dowodu korzystanie z EUDIW
-    NIE BĘDZIE MOŻLIWE — istotne przy doradzaniu klientom bez e-dowodu
-  → Ustawa krajowa wdrażająca: w II kw. 2026 planowane przyjęcie przez
-    Radę Ministrów, dalej proces legislacyjny w Sejmie — ⚠️ status
-    dokładny na dzień użycia WYMAGA odrębnej weryfikacji (proces w toku)
-  → Rozporządzenia wykonawcze UE (podstawowe funkcje/certyfikacja
-    portfeli) weszły w życie 24.12.2024 — 24-miesięczny termin wdrożenia
-    dla państw członkowskich liczy się od tej daty
-web_search: "EUDIW eIDAS 2.0 portfel cyfrowy Polska ustawa Sejm" [dla
-  aktualnego statusu procesu legislacyjnego na dzień użycia]
+✅ **STATUS UE / POLSKA — VER 2026-08-28**
+  → Rozporządzenie (UE) 2024/1183 (eIDAS 2.0) **obowiązuje i jest bezpośrednio stosowane**; nie jest „projektem w toku”.
+  → Art. 5a ust. 1 wiąże termin zapewnienia portfela z 24 miesiącami od wejścia w życie właściwych aktów wykonawczych.
+  → Polska ustawa bazowa: Dz.U. 2024 poz. 1725 t.j. ze zm.
+  → **UC122** i **UD352** to odrębne krajowe projekty dostosowawcze/nadzorcze, nadal w toku legislacyjnym według gov.pl. Nie utożsamiaj ich statusu ze statusem obowiązywania eIDAS 2.0.
+  → Przed poradą o funkcjach mObywatela/EUDIW sprawdź aktualny harmonogram MC i właściwe akty wykonawcze UE.
 ```
 
 ## Weryfikacja online
@@ -64,3 +50,10 @@ web_search: "EUDIW eIDAS 2.0 portfel cyfrowy Polska ustawa Sejm" [dla
 web_search: "eIDAS Polska uslugi zaufania podpis kwalifikowany 2025"
 web_search: "ustawa uslugi zaufania identyfikacja elektroniczna Dz.U. isap"
 ```
+
+
+## Status źródeł 2026-08-28
+
+- RZĄD 1 Polska: ELI, Dz.U. 2024 poz. 1725 t.j.;
+- RZĄD 1 UE: EUR-Lex, rozporządzenie (UE) 2024/1183;
+- projekty krajowe: gov.pl, UC122 i UD352 — status projektowy, nie prawo obowiązujące.

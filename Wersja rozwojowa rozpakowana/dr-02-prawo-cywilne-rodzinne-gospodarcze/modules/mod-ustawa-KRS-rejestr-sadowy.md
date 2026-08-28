@@ -1,85 +1,66 @@
 # mod-ustawa-KRS-rejestr-sadowy
 
-**Źródło weryfikacji:** Ustawa o KRS — Dz.U. 2025 poz. 869 t.j.
-**Data weryfikacji online:** 2026-06-05
-**ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
+**Stan operacyjny:** 2026-08-28  
+**Źródło kanoniczne:** ELI — ustawa z 20.08.1997 r. o Krajowym Rejestrze Sądowym, Dz.U. 2025 poz. 869 t.j., status obowiązujący. ELI wskazuje cztery akty zmieniające po tym tekście jednolitym — przed użyciem konkretnej jednostki trzeba uwzględnić obowiązujące zmiany.
 
----
+## Zakres
 
-## Zakres modułu
-Rejestracja i zmiany w KRS (spółki, stowarzyszenia, fundacje), zasada jawności,
-domniemanie prawdziwości danych, e-KRS, obowiązki sprawozdawcze.
+Moduł obejmuje strukturę KRS, jawność i skutki wpisów, Centralną Informację, rejestr przedsiębiorców, rejestr stowarzyszeń/fundacji i innych organizacji, rejestr dłużników niewypłacalnych w zakresie nadal relewantnym oraz postępowanie rejestrowe w powiązaniu z KPC.
 
----
+## Bramka rejestrowa
 
-## Kluczowe przepisy — wskaźniki do ISAP
+```text
+1. Jaki podmiot i do którego rejestru ma trafić wpis?
+2. Czy wpis ma charakter konstytutywny czy deklaratoryjny według ustawy szczególnej?
+3. Jaki fakt/dokument jest podstawą wpisu?
+4. Kto ma legitymację do zgłoszenia i jak reprezentowany jest podmiot?
+5. Czy zgłoszenie jest wyłącznie elektroniczne i przez który system?
+6. Jakie są aktualne formularze/załączniki/opłaty?
+7. Czy istnieje rozbieżność między stanem rejestrowym a rzeczywistym?
+8. Jaki środek przysługuje od rozstrzygnięcia sądu rejestrowego?
+```
 
-| Zagadnienie | Odesłanie |
+## Jawność i skutki danych
+
+Nie wystarczy stwierdzenie „KRS jest jawny”. Dla konkretnej sprawy ustal oddzielnie:
+- dostępność danych i dokumentów;
+- domniemania dotyczące danych wpisanych;
+- skutki braku zgłoszenia lub niezgodności danych;
+- zasady powoływania się na dane wobec osób trzecich;
+- odpowiedzialność podmiotu za nieprawidłowe lub niezgłoszone dane.
+
+Przed zastosowaniem pobierz aktualne przepisy o jawności i domniemaniach z ELI.
+
+## Rejestry
+
+| Zakres | Status |
 |---|---|
-| Zakres podmiotów wpisywanych | art. 36 ustawy o KRS — weryfikuj w ISAP |
-| Zasada jawności / domniemanie | art. 17 ustawy o KRS — weryfikuj w ISAP |
-| Obowiązek złożenia sprawozdania finansowego | art. 69 ustawy o rachunkowości — weryfikuj w ISAP |
-| e-KRS (elektroniczne postępowanie rejestrowe) | weryfikuj aktualne przepisy |
+| przepisy ogólne i organizacja KRS | 🟢 B+ / COV |
+| jawność / Centralna Informacja / odpisy i informacje | 🟢 B+ / COV |
+| rejestr przedsiębiorców | 🟢 B+ / COV |
+| rejestr stowarzyszeń, fundacji, OPP i innych podmiotów | 🟢 B+ / COV |
+| postępowanie przymuszające / aktualizacja danych | 🟢/🟡 B+ |
+| rozwiązanie podmiotu bez likwidacji i inne tryby szczególne | 🟡 B+; fresh gate |
 
----
+## Postępowanie rejestrowe
 
-## QUICK CHECK — Rejestracja spółki z o.o.
+Ustawa o KRS działa razem z KPC o postępowaniu nieprocesowym i przepisami wykonawczymi dotyczącymi systemów rejestrowych. Nie wpisuj w runtime stałych formularzy, opłat ani terminów bez aktualnej kontroli.
 
-```
-ETAPY:
-  1. Zawarcie umowy spółki (akt notarialny lub s24 dla standardowej umowy)
-  2. Pokrycie kapitału zakładowego (min. 5 000 zł — weryfikuj KSH)
-  3. Wniosek do KRS (elektronicznie przez PRS — Portal Rejestrów Sądowych)
-  4. Wpis do rejestru przedsiębiorców KRS
-  Termin na rozpatrzenie: weryfikuj aktualne przepisy proceduralne
+Dla spółek dodatkowo stosuj KSH; dla fundacji i stowarzyszeń ich ustawy ustrojowe; dla spółdzielni Prawo spółdzielcze/ustawę o spółdzielniach mieszkaniowych.
 
-Spółka nabywa osobowość prawną z chwilą wpisu do KRS.
-Przed wpisem: spółka w organizacji (odpowiedzialność solidarna).
-```
+## Dane finansowe
 
----
+Obowiązek sporządzenia i złożenia sprawozdania finansowego wynika przede wszystkim z ustawy o rachunkowości i przepisów szczególnych, nie wyłącznie z ustawy o KRS. Przy RDF/e-sprawozdaniach sprawdź aktualny tryb, format i terminy w oficjalnym systemie i obowiązujących aktach.
 
-## Weryfikacja online
+## Routing
 
-```
-web_search: "ustawa KRS rejestr sądowy isap.sejm.gov.pl Dz.U. 2025 poz. 869"
-web_fetch: https://ekrs.ms.gov.pl
-```
+- spółki → KSH + KRS;
+- fundacje/stowarzyszenia → ich ustawy + KRS;
+- spółdzielnie → Prawo spółdzielcze + KRS;
+- postępowanie rejestrowe → KPC nieproces;
+- sprawozdawczość → ustawa o rachunkowości;
+- beneficjent rzeczywisty → AML/CRBR, nie KRS.
 
-## Łącz z
-- `mod-KSH-spolki-handlowe` — typy spółek, reprezentacja
-- `mod-ustawa-fundacje-stowarzyszenia`
-- `pisma-procesowe-v3` — wniosek do KRS
+## Fresh gate
 
-## Źródła online
-- Ustawa o KRS: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250000869
-- Portal KRS (e-KRS): https://ekrs.ms.gov.pl
-- PRS (Portal Rejestrów Sądowych): https://prs.ms.gov.pl
-
-
----
-
-## QUALITY GATE
-
-- [ ] Aktualny tekst t.j. aktu zweryfikowany w ISAP?
-- [ ] Stan prawny właściwy temporalnie (na dzień zdarzenia i na dzień orzekania)?
-- [ ] Każda przesłanka ma przypisany dowód?
-- [ ] Termin nie upłynął?
-- [ ] Właściwy organ / sąd wskazany?
-- [ ] Ryzyka formalne i dowodowe ocenione?
-- [ ] Brzmienie przepisów pobrane ze źródeł, nie z pamięci modelu?
-
-## OUTPUT
-
-Wynik pracy modułu:
-1. Stan faktyczny;
-2. Stan prawny i źródła (Dz.U. z ISAP);
-3. Kwalifikacja trybu i właściwość;
-4. Terminy (obliczone, z datami granicznymi);
-5. Przesłanki (spełnione / wątpliwe / niespełnione);
-6. Matryca dowodowa (teza → dowód → siła → luka);
-7. Zarzuty i kontrargumenty;
-8. Analiza ryzyk;
-9. Strategia (wariant podstawowy + ewentualny);
-10. Rekomendacja + kolejne kroki;
-11. Kontrola ISAP/temporalności.
+Punktem bazowym jest Dz.U. 2025 poz. 869, ale ELI wskazuje cztery nowelizacje po tekście jednolitym. Zawsze odczytaj aktualny tekst ujednolicony oraz status tych zmian przed podaniem wymogu, terminu, skutku wpisu lub środka zaskarżenia.

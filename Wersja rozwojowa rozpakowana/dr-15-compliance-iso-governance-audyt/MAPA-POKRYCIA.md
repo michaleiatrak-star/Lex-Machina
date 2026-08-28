@@ -1,24 +1,32 @@
-# DR-15-COMPLIANCE-ISO-GOVERNANCE-AUDYT — Mapa Pokrycia Treściowego
+# DR-15 — Mapa Pokrycia Treściowego
 
-**Utworzona:** 2026-08-27 | **Źródło inwentarza:** lokalna `MAPA-AKTOW.md`
+**Stan operacyjny:** 2026-08-28
 
-## Zasada statusów
+Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Historia napraw i wcześniejsze wersje norm/aktów nie są częścią mapy runtime.
 
-Ta mapa rozdziela **rejestrację aktu/modułu** od **pokrycia treściowego**. Status `✅ OK` w `MAPA-AKTOW.md` oznacza, że istnieje trasa/moduł i metryka, a **nie** że cały akt jest opracowany. Wiersz `🟡 DO AUDYTU` oznacza, że moduł jest zarejestrowany, lecz dla całego aktu nie wykonano jeszcze udokumentowanego audytu rozdział-po-rozdziale. Nie wolno automatycznie zamieniać go na 🟢 na podstawie samego istnienia pliku.
+## Legenda
 
-| Akt / zakres | Moduł wejściowy | Rejestracja w MAPA-AKTOW | Status treściowy |
-|---|---|---|---|
-| PZP — zamówienia obronne i bezpieczeństwa | mod-PZP-zamowienia-obronne-bezpieczenstwa | ✅ ZAMKNIĘTE 2026-08-13 (F-62): weryfikacja treści modułu wykazała, że NIE zawiera on ŻADNEGO twardo  | 🟡 DO AUDYTU |
-| Ustawa AML — nadzór finansowy (instytucje obowiązane) | mod-AML-nadzor-finansowy-instytucje | ✅ OK | 🟡 DO AUDYTU |
-| Ustawa — nauczyciele i uczelnie (compliance pracodawcy) | mod-ustawa-nauczyciele-uczelnie | ✅ OK (F-63 zamknięta) | 🟡 DO AUDYTU |
-| Ustawa o ochronie sygnalistów | mod-ustawa-sygnalisci | ✅ OK | 🟡 DO AUDYTU |
-| ISO 37001:2016 — Anti-bribery management | mod-ISO-37001-antykorupcja | ✅ OK | 🟡 DO AUDYTU |
-| ISO 27001:2022 — Information security management | mod-ISO-27001-bezpieczenstwo-informacji | ✅ OK | 🟡 DO AUDYTU |
-| ISO 42001:2023 — AI management system | mod-ISO-42001-AI-management | ✅ OK | 🟡 DO AUDYTU |
-| DORA — compliance sektor finansowy | mod-DORA-compliance-sektor-finansowy | ✅ OK | 🟡 DO AUDYTU |
-| ISO 37301:2021 — Compliance management systems | mod-ISO-37301-compliance-management | ✅ OK | 🟡 DO AUDYTU |
-| Ustawa antykorupcyjna 1997 (ograniczenia działalności gospodarczej osób pełniących funkcje publiczne) | mod-ustawa-antykorupcyjna-1997-ograniczenia | ✅ OK (moduł istniał od 2026-07-16, zarejestrowany w SKILL.md i tu dopiero 2026-07-26 — naprawiono CR | 🟡 DO AUDYTU |
+- 🟢 — pokrycie pogłębione / praktycznie użyteczne;
+- 🟡 — moduł operacyjny, ale bez pełnego audytu całego aktu/normy;
+- 🟡 B+ — pokrycie operacyjne pogłębione;
+- ⚠️ — wymaga aktualizacji źródła lub weryfikacji wersji normy.
 
-## Kryterium podniesienia statusu
+| Akt / zakres | Moduł wejściowy | Status bieżący |
+|---|---|---|
+| PZP — zamówienia obronne i bezpieczeństwa | `mod-PZP-zamowienia-obronne-bezpieczenstwa` | 🟡; dołącz DR-07 |
+| AML — nadzór finansowy / instytucje obowiązane | `mod-AML-nadzor-finansowy-instytucje` | 🟢/🟡 B+; dołącz DR-06 |
+| nauczyciele / uczelnie — compliance pracodawcy | `mod-ustawa-nauczyciele-uczelnie` | 🟡 |
+| ochrona sygnalistów | `mod-ustawa-sygnalisci` | 🟢/🟡 B+ |
+| ISO 37001 — anti-bribery | `mod-ISO-37001-antykorupcja` | 🟡 |
+| ISO 27001 — bezpieczeństwo informacji | `mod-ISO-27001-bezpieczenstwo-informacji` | 🟡 |
+| ISO 42001 — AI management | `mod-ISO-42001-AI-management` | 🟡 |
+| DORA — compliance sektora finansowego | `mod-DORA-compliance-sektor-finansowy` | 🟢/🟡 B+; dołącz DR-11 |
+| ISO 37301 — compliance management | `mod-ISO-37301-compliance-management` | 🟡 |
+| ograniczenia działalności osób pełniących funkcje publiczne | `mod-ustawa-antykorupcyjna-1997-ograniczenia` | 🟡 |
 
-Status 🟢 może zostać nadany dopiero po porównaniu struktury aktualnego aktu ze źródłem urzędowym RZĄD 1, wskazaniu zakresów artykułów/rozdziałów oraz jawnej liście pozostałych luk. Statusy tej mapy są wtórne wobec treści modułów i muszą być aktualizowane po każdej ich zmianie.
+## Aktywne luki
+
+1. Norm ISO nie są aktami prawa; ich aktualną wersję i zakres licencyjny należy sprawdzać w oficjalnym źródle normalizacyjnym, a wymagania prawne osobno w właściwym DR.
+2. Moduły compliance są warstwą zarządczą i nie zastępują pełnego pokrycia prawa materialnego w DR-06, DR-07, DR-11 i innych domenach.
+3. Priorytet pogłębiania: sygnaliści, antykorupcja, DORA oraz mapowanie wymagań ISO na obowiązki prawne.
+4. Każdy akt prawny wymaga świeżego źródła urzędowego; dla prawa UE — EUR-Lex.

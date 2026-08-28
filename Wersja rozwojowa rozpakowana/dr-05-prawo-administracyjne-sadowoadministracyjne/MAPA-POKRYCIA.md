@@ -1,123 +1,72 @@
 # DR-05 — Mapa Pokrycia Treściowego
 
-**Utworzona:** 2026-08-22 (F-83, zasilenie z `audyt-systemu-v4/references/
-raporty-pokrycia-2026-08-13/`) | **Format ustalony przez F-83.**
+**Stan operacyjny:** 2026-08-28
 
-## Cel i różnica względem MAPA-AKTOW.md
+Mapa zawiera tylko aktualny stan pokrycia wykorzystywany przez system. Historia audytów i dawnych braków nie jest częścią mapy runtime.
 
-`MAPA-AKTOW.md` (ten sam katalog) odpowiada na pytanie "**który moduł
-odpowiada za który akt prawny**" — rejestr akt→moduł.
+## Legenda
 
-Ten plik odpowiada na inne pytanie: "**które konkretne działy/rozdziały/
-zakresy artykułów danego aktu są rzeczywiście opracowane treściowo, a
-które są lukami**". Szczególnie istotny mechanizm dla **utrzymania po
-nowelizacji**: gdy przepis się zmienia, ten rejestr pokazuje od razu, czy
-dotknięty fragment w ogóle ma treść do zaktualizowania, czy to obszar
-dotąd nieopracowany (i nowelizacja jest okazją, by go uzupełnić od razu
-z aktualnym stanem prawnym, zamiast osobno "dogonić" starą treść i osobno
-nowelizację).
+- 🟢 — pokrycie pogłębione / praktycznie użyteczne;
+- 🟡 B/B+ — pokrycie operacyjne, ale niepełne artykuł-po-artykule;
+- 🔴 — brak realnej treści;
+- ⚪ — zakres techniczny/przejściowy.
 
-## Legenda statusu
+## KPA
 
-| Symbol | Znaczenie |
+**Baza operacyjna:** Dz.U. 2025 poz. 1691 t.j., stan prawny tekstu jednolitego 3.11.2025; przed użyciem konkretnej jednostki obowiązuje świeża kontrola ELI/ISAP.
+
+| Zakres | Status bieżący | Główny nośnik |
+|---|---|---|
+| current-state indeks całego KPA | 🟢 B+ / COV | `mod-KPA-current-state-COV.md` |
+| Dział I — zasady ogólne / właściwość / strony / terminy / doręczenia | 🟢 B+ / COV | indeks COV + `mod-KPA-postepowanie-administracyjne.md` |
+| Dział II — wszczęcie / akta / dowody / mediacja / decyzje / środki | 🟢 B+ / COV | indeks COV + moduły KPA tematyczne |
+| decyzje / postanowienia / odwołania | 🟢 B+ / COV | `mod-KPA-decyzja-i-odwolanie.md` |
+| zawieszenie / dowody / rozprawa / mechanizmy w toku | 🟢 B+ / COV | `mod-KPA-mechanizmy-w-toku-sprawy.md` |
+| tryby nadzwyczajne / bezczynność / kary administracyjne | 🟢 B+ / COV | `mod-KPA-tryby-nadzwyczajne-i-strategia.md` |
+| sprawy ubezpieczeń społecznych | 🟢/🟡 B+ | KPA + routing DR-04/KPC; nie każda kontrola prowadzi do WSA |
+| udział prokuratora / skargi i wnioski / koszty | 🟢/🟡 B+ | indeks COV + właściwe moduły tematyczne |
+
+## PPSA
+
+**Baza operacyjna:** Dz.U. 2026 poz. 143 t.j.; fresh gate przed cytowaniem konkretnej jednostki.
+
+| Zakres | Status bieżący | Dowód pokrycia |
+|---|---|---|
+| przepisy ogólne / właściwość / skład | 🟡 B+ | `mod-PPSA-uzupelnienie-pokrycia-2026.md` |
+| strony / uczestnicy / pełnomocnicy | 🟡 B+ | jw. |
+| pisma / doręczenia / terminy | 🟡 B+ | jw. + moduły szczegółowe |
+| skarga do WSA | 🟢 | moduły KPA/PPSA |
+| sprzeciw od decyzji/postanowienia | 🟢 | `mod-PPSA-terminy-kasacja-prawo-pomocy.md` |
+| przywrócenie terminu | 🟢 | jw. |
+| posiedzenia sądowe | 🟢 | `mod-PPSA-posiedzenia-sadowe-rozdzial-7.md` |
+| mediacja / tryb uproszczony / zawieszenie | 🟡 B+ | `mod-PPSA-uzupelnienie-pokrycia-2026.md` |
+| orzeczenia sądowe | 🟢 | `mod-PPSA-orzeczenia-sadowe-rozdzial-10.md` |
+| prawomocność | 🟡 B+ | `mod-PPSA-uzupelnienie-pokrycia-2026.md` |
+| skarga kasacyjna | 🟢 | `mod-PPSA-terminy-kasacja-prawo-pomocy.md` |
+| zażalenie | 🟡 B+ | `mod-PPSA-uzupelnienie-pokrycia-2026.md` |
+| koszty / wpis / prawo pomocy | 🟢 | `mod-PPSA-terminy-kasacja-prawo-pomocy.md` |
+| uchwały NSA | 🟡 B+ | `mod-PPSA-uzupelnienie-pokrycia-2026.md` |
+| wznowienie | 🟢 | `mod-PPSA-terminy-kasacja-prawo-pomocy.md` |
+| skarga o stwierdzenie niezgodności z prawem | 🟡 B+ | `mod-PPSA-uzupelnienie-pokrycia-2026.md` |
+| wykonywanie orzeczeń | 🟡 B+ | jw. |
+
+## RPO / RPD
+
+| Akt / zakres | Status bieżący | Dowód pokrycia |
+|---|---|---|
+| Rzecznik Praw Obywatelskich — Dz.U. 2024 poz. 1264 | 🟢 B+ / COV | `mod-ustawa-RPO.md`; aktualny zakres kompetencji zmapowany w ELI |
+| Rzecznik Praw Dziecka — Dz.U. 2023 poz. 292 | 🟢 B+ / COV | `mod-ustawa-RPD.md`; aktualny zakres kompetencji zmapowany w ELI |
+
+## Cudzoziemcy / legalizacja
+
+| Zakres | Status bieżący |
 |---|---|
-| 🟢 | Pełne/dobrze pokryte — rzeczywista, praktycznie użyteczna treść |
-| 🟡 | Częściowe pokrycie — część artykułów opracowana, część brakuje |
-| 🔴 | Brak — zero treści merytorycznej |
-| ⚪ | Nie dotyczy (przepis techniczny/końcowy, niski priorytet) |
+| ustawa o cudzoziemcach — tor administracyjny | 🟢/🟡; kanonicznie DR-05, `mod-ustawa-cudzoziemcy.md` |
+| perspektywa prywatno-pracownicza | routing pomocniczy do DR-02 |
 
-⚠️ Ten rejestr opisuje ILOŚĆ i ZAKRES treści, nie jej AKTUALNOŚĆ prawną.
-Każdy przepis nadal wymaga weryfikacji ISAP przed użyciem (HARD GATE).
+## Aktywne luki
 
----
-
-## Prawo o postępowaniu przed sądami administracyjnymi (PPSA)
-
-**Aktualizacja 2026-08-27:** wszystkie wcześniej czerwone rozdziały PPSA mają teraz co najmniej pokrycie operacyjne B+ w `mod-PPSA-uzupelnienie-pokrycia-2026.md`; status żółty nie oznacza pełnego komentarza artykuł-po-artykule.
-
-**Stan prawny bazowy:** Dz.U. 2026 poz. 143 t.j.
-**Data ostatniej weryfikacji treści:** 2026-08-22 (⛔ NAPRAWIONE — czwarta
-naprawa tego typu w tej sesji; PPSA otrzymała WŁASNY dedykowany moduł
-19.08, trzy dni przed budową tej mapy 21.08 na starym raporcie z 13.08)
-
-⭐ **PPSA PRZESTAŁA być "aktem cień"** — 19.08.2026 powstał dedykowany
-moduł `mod-PPSA-terminy-kasacja-prawo-pomocy.md` (538 linii), pokrywający
-dokładnie priorytet zerowy strukturalny z poprzedniej wersji tej mapy
-("utworzenie dedykowanego modułu") ORAZ cztery kolejne rekomendowane
-luki naraz. Pozostała treść (właściwość rzeczowa, skarga — art. 50-62)
-nadal jest rozproszona w modułach KPA, ale rdzeń instytucji proceduralnych
-(terminy, kasacja, prawo pomocy) ma teraz własne miejsce.
-
-| Dział | Materia | Art. | Status | Moduł |
-|---|---|---|---|---|
-| I, Rozdz. 1 | Przepisy ogólne (przedmiot regulacji, zasady) | 1–12b | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| I, Rozdz. 2 | Właściwość WSA | 13–14a | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| I, Rozdz. 3 | Właściwość NSA | 15 | 🟡 | `mod-KPA-tryby-nadzwyczajne-i-strategia` — art. 15 §1 pkt 4 (spory kompetencyjne, w zw. z art. 4 PPSA) |
-| I, Rozdz. 4 | Skład sądu | 16–17 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| I, Rozdz. 5 | Wyłączenie sędziego | 18–24 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| II, Rozdz. 1 | Zdolność sądowa i procesowa | 25–31 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| II, Rozdz. 2 | Strony i uczestnicy postępowania | 32–33 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| II, Rozdz. 3 | Pełnomocnicy | 34–44 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| III, Rozdz. 1 | Pisma w postępowaniu sądowym | 45–49b | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| III, Rozdz. 2 | **Skarga** (przedmiot, wymogi formalne, wniesienie, wpis) | 50–62 | 🟢 | `mod-KPA-tryby-nadzwyczajne-i-strategia` sekcja 7+7a — art. 3 §2 pkt 5-8, 52 §3-4, 53 §1/§2b, 54 §1 |
-| III, Rozdz. 3 | Wniosek o wszczęcie postępowania | 63–64 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| III, Rozdz. 3a | **Sprzeciw od decyzji i postanowienia** | 64a–64e | 🟢 NAPRAWIONE 2026-08-19 (F-64) | `mod-PPSA-terminy-kasacja-prawo-pomocy.md` sekcja 5 — instytucja milczącego załatwienia sprawy, pełna procedura |
-| III, Rozdz. 4 | Doręczenia | 65–81 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| III, Rozdz. 5 | Terminy (zasady ogólne liczenia) | 82–84 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| III, Rozdz. 6 | **Uchybienie i przywrócenie terminu** | 85–89 | 🟢 NAPRAWIONE 2026-08-19 | `mod-PPSA-terminy-kasacja-prawo-pomocy.md` sekcja 1 |
-| III, Rozdz. 7 | **Posiedzenia sądowe** | 90–114 | 🟢 NAPRAWIONE 2026-08-22 (F-83, prio #6) | `mod-PPSA-posiedzenia-sadowe-rozdzial-7.md` (443 l.) — cały rozdział; ⭐⭐⭐ art. 105 (utrata zarzutu w NSA przy braku zastrzeżenia), art. 106 §3 (jedyne okno dowodowe, wyłącznie dokumenty), art. 90 §2 (kierowanie na rozprawę mimo trybu niejawnego). Pozostaje do pogłębienia: pełne wyliczenia art. 93, 101, 111 |
-| III, Rozdz. 8 | Postępowanie mediacyjne i uproszczone | 115–122 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| III, Rozdz. 9 | Zawieszenie i podjęcie postępowania | 123–131 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| III, Rozdz. 10 | **Orzeczenia sądowe** (skutki uwzględnienia skargi) | 132–167a | ✅ NAPRAWIONE 2026-08-22 (poz. #8, ostatnia z ósemki) | `mod-PPSA-orzeczenia-sadowe-rozdzial-10.md` — całość rozdziału: granice orzekania (133-136), skarga na decyzję/postanowienie — trzy rodzaje rozstrzygnięć (145), interpretacje podatkowe (146), oddalenie (151), bezczynność/przewlekłość (149), związanie oceną prawną (153), umorzenie (161). Skargi na akty JST/nadzoru (art. 147-148, 152 w wąskim kontekście) nadal w `czesc-06-skarga-wsa-dowody.md` |
-| III, Rozdz. 11 | Prawomocność orzeczeń | 168–172 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| IV, Rozdz. 1 | **Skarga kasacyjna do NSA** | 173–193 | 🟢 NAPRAWIONE 2026-08-19, ⭐⭐⭐ | `mod-PPSA-terminy-kasacja-prawo-pomocy.md` sekcja 2 — najczęściej używany kolejny krok po niekorzystnym wyroku WSA |
-| IV, Rozdz. 2 | Zażalenie | 194–198 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| V, Rozdz. 1–3 | Koszty, wpis, opłata kancelaryjna, **prawo pomocy** | 199–263 | ✅ NAPRAWIONE 2026-08-22 (poz. #9) | `mod-PPSA-terminy-kasacja-prawo-pomocy.md` sekcja 4 (art. 199-242, koszty/wpis/opłata kancelaryjna/zwolnienie z mocy ustawy — NOWE 2026-08-22) + sekcja 3 (art. 243-263, prawo pomocy — moduł sam odnotowuje, że raport źródłowy dla tej sekcji wymagał uzupełnienia, patrz "POZOSTAJE DO POGŁĘBIENIA" w module dla otwartych drobnych punktów) |
-| VI | Uchwały NSA | 264–269 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| VII | **Wznowienie postępowania (sądowoadministracyjne)** | 270–285 | 🟢 NAPRAWIONE 2026-08-19 (F-64), ZAMKNIĘTE | `mod-PPSA-terminy-kasacja-prawo-pomocy.md` sekcja 6 — dawna asymetria względem dobrze opracowanego wznowienia w KPA teraz zniesiona |
-| VIIa | Skarga o stwierdzenie niezgodności z prawem prawomocnego orzeczenia | 285a–285l | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| VIII | Wykonywanie orzeczeń sądowych | 286–287 | 🟡 B+ — uzupełnione 2026-08-27 | `mod-PPSA-uzupelnienie-pokrycia-2026.md` — pokrycie operacyjne; moduły szczegółowe pierwszeństwo |
-| IX | Przepisy końcowe | 288–319 | ⚪ | Techniczne, niski priorytet |
-
-**Dodatkowy temat pokryty przez nowy moduł:** zmiana terminu skargi na
-opinię transgraniczną (F-88, sekcja 7 modułu) — powiązanie z propagacją
-nowelizacji Op 2026.846 przez cross-DR.
-
-**Zaktualizowana rekomendowana kolejność uzupełniania** (8 z 8
-oryginalnych pozycji naprawionych — pięć jednym modułem 2026-08-19,
-szósta drugim modułem 2026-08-22, siódma rozbudową tego samego
-drugiego modułu tego samego dnia, ósma trzecim modułem 2026-08-22.
-**LISTA ORYGINALNA W CAŁOŚCI ZAMKNIĘTA.**):
-1. ~~Utworzenie dedykowanego modułu PPSA~~ ✅ NAPRAWIONE 2026-08-19
-2. ~~Dział III, Rozdz. 6 — uchybienie i przywrócenie terminu~~ ✅ NAPRAWIONE
-3. ~~Dział IV, Rozdz. 1 — skarga kasacyjna do NSA~~ ✅ NAPRAWIONE
-4. ~~Dział V, Rozdz. 3, Oddz. 2 — prawo pomocy~~ 🟡 NAPRAWIONE częściowo, patrz moduł dla otwartych punktów
-5. ~~Dział III, Rozdz. 3a — sprzeciw od decyzji i postanowienia~~ ✅ NAPRAWIONE
-6. ~~Dział III, Rozdz. 7 — posiedzenia sądowe (art. 90–114)~~ ✅ NAPRAWIONE 2026-08-22
-7. ~~Dział VII — wznowienie postępowania sądowoadministracyjnego~~ ✅ NAPRAWIONE, ZAMKNIĘTE
-8. ~~Dział III, Rozdz. 10 dokończenie — orzeczenia sądowe w ogólności (art. 132–144)~~ ✅ NAPRAWIONE 2026-08-22
-~~9. Dział V, Rozdz. 1-2 — koszty, wpis, opłata kancelaryjna (art. 199-242)~~ ✅ NAPRAWIONE 2026-08-22
-
-**Do rozważenia jako NOWA lista priorytetów (poza oryginalną ósemką),
-zidentyfikowane przy tworzeniu mod-PPSA-orzeczenia-sadowe-rozdzial-10:**
-- Art. 154-160 (wykonanie wyroku uwzględniającego skargę na
-  bezczynność/przewlekłość, uzupełnienie i sprostowanie wyroku)
-- Art. 162-167a (przepisy szczególne Rozdz. 10, częściowe pokrycie
-  tematyczne z Dział V kosztów — do rozgraniczenia)
-- Pozostałe działy PPSA nadal 🔴: Rozdz. 4 (doręczenia, 65-81),
-  Rozdz. 5 (terminy, zasady ogólne, 82-84), Rozdz. 8 (mediacja i
-  uproszczone, 115-122), Rozdz. 9 (zawieszenie, 123-131), Rozdz. 11
-  (prawomocność orzeczeń, 168-172), Dział IV Rozdz. 2 (zażalenie,
-  194-198), Dział VI (uchwały NSA, 264-269), Dział VIIa (skarga o
-  stwierdzenie niezgodności z prawem, 285a-285l), Dział VIII
-  (wykonywanie orzeczeń, 286-287)
-
----
-
-## Akty NIE objęte tym rejestrem (brak materiału źródłowego)
-
-Ten skill (dr-05) obejmuje też KPA i inne akty administracyjne — audyt
-źródłowy z 2026-08-13 objął w tym skillu wyłącznie PPSA. Pozostałe akty
-(w tym sam KPA, mimo że intensywnie cytowany jako "gospodarz" większości
-treści PPSA) NIE mają dotąd odpowiadającego raportu pokrycia w tym
-rejestrze — do uzupełnienia nowym audytem, jeśli okaże się potrzebny.
+1. KPA ma bieżący status B+/COV dla całej struktury, ale nie status `FULL` artykuł-po-artykule.
+2. PPSA ma pełne pokrycie operacyjne wszystkich głównych działów, ale część pozostaje na poziomie B+ zamiast pełnego COV/FULL.
+3. RPO i RPD mają bieżące mapy kompetencji B+/COV; konkretny środek procesowy zawsze wymaga dodatkowej kontroli właściwego kodeksu proceduralnego.
+4. Każda jednostka prawna i termin wymagają świeżego odczytu ELI/ISAP przed użyciem.

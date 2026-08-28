@@ -1,29 +1,32 @@
-# DR-16-PISMA-STRATEGIA-DOWODY-ORZECZNICTWO — Mapa Pokrycia Treściowego
+# DR-16 — Mapa Pokrycia Treściowego
 
-**Utworzona:** 2026-08-27 | **Źródło inwentarza:** lokalna `MAPA-AKTOW.md`
+**Stan operacyjny:** 2026-08-28
 
-## Zasada statusów
+DR-16 jest rodziną mieszaną: zawiera narzędzia procesowe oraz akty pomocnicze. Mapa pokazuje wyłącznie bieżący stan pokrycia; historia zmian nie bierze udziału w runtime.
 
-Ta mapa rozdziela **rejestrację aktu/modułu** od **pokrycia treściowego**. Status `✅ OK` w `MAPA-AKTOW.md` oznacza, że istnieje trasa/moduł i metryka, a **nie** że cały akt jest opracowany. Wiersz `🟡 DO AUDYTU` oznacza, że moduł jest zarejestrowany, lecz dla całego aktu nie wykonano jeszcze udokumentowanego audytu rozdział-po-rozdziale. Nie wolno automatycznie zamieniać go na 🟢 na podstawie samego istnienia pliku.
+## Legenda
 
-| Akt / zakres | Moduł wejściowy | Rejestracja w MAPA-AKTOW | Status treściowy |
-|---|---|---|---|
-| Narzędzie / akt | Moduł | Status | 🟡 DO AUDYTU |
-| KPC — przesłuchanie świadków (art. 258–305) | shared/PRZESLUCHANIE-SWIADKOW-KPC.md (przeniesiony 2026-07-12) | ✅ OK | 🟡 DO AUDYTU |
-| KPC — e-doręczenia i portal sądowy | mod-KPC-e-doreczenia-portal-sadowy | ✅ OK | 🟡 DO AUDYTU |
-| KPC — procedury UE (TSUE, ETPCz) | mod-KPC-procedury-UE-TSUE-ETPC | ✅ OK | 🟡 DO AUDYTU |
-| KPC — arbitraż sportowy i dyscyplinarny | mod-KPC-arbitraz-sportowy-dyscyplinarny | ✅ OK | 🟡 DO AUDYTU |
-| Ustawa Prawo prasowe + media publiczne | mod-ustawa-prawo-prasowe-media | ✅ OK (w pełni potwierdzone) | 🟡 DO AUDYTU |
-| Konstytucja — prawa i wolności w procesie | mod-Konstytucja-prawa-i-wolnosci-procesowe | ✅ OK | 🟡 DO AUDYTU |
-| Narzędzie — kontroler kompletności prawa | mod-narzedzie-kontroler-kompletnosci | ✅ OK | 🟡 DO AUDYTU |
-| Narzędzie — kalkulatory procesowe | mod-narzedzie-kalkulatory | ✅ OK | 🟡 DO AUDYTU |
-| Ustawa o archiwach i dokumentacji | mod-ustawa-archiwa-dokumentacja | ✅ OK | 🟡 DO AUDYTU |
-| Ustawa o obywatelstwie polskim | mod-ustawa-obywatelstwo-paszporty-ewidencja | ✅ OK | 🟡 DO AUDYTU |
-| Ustawa o dokumentach paszportowych | mod-ustawa-obywatelstwo-paszporty-ewidencja | ✅ OK | 🟡 DO AUDYTU |
-| Ustawa o ewidencji ludności | mod-ustawa-obywatelstwo-paszporty-ewidencja | ✅ OK | 🟡 DO AUDYTU |
-| KPC — wzory pism procesowych | mod-KPC-wzory-pism-procesowych | ✅ OK | 🟡 DO AUDYTU |
-| KPC Księga IV — postępowanie w razie zaginięcia/zniszczenia akt (art. 716-729) | mod-KPC-odtworzenie-akt-zaginionych-zniszczonych | ✅ NOWY 2026-07-18, odpowiedź na pytanie użytkownika | 🟡 DO AUDYTU |
+- 🟢 — pokrycie pogłębione / praktycznie użyteczne;
+- 🟡 — moduł operacyjny, ale bez pełnego audytu całego aktu lub capability;
+- 🟡 B+ — pokrycie operacyjne pogłębione.
 
-## Kryterium podniesienia statusu
+| Zakres | Moduł / źródło | Status bieżący |
+|---|---|---|
+| KPC — przesłuchanie świadków | `shared/PRZESLUCHANIE-SWIADKOW-KPC.md` | 🟢/🟡 B+ |
+| KPC — e-doręczenia / portal sądowy | `mod-KPC-e-doreczenia-portal-sadowy` | 🟡 |
+| procedury UE / TSUE / ETPC | `mod-KPC-procedury-UE-TSUE-ETPC` | 🟡; dołącz DR-14 |
+| arbitraż sportowy / dyscyplinarny | `mod-KPC-arbitraz-sportowy-dyscyplinarny` | 🟡 |
+| Prawo prasowe / media publiczne | `mod-ustawa-prawo-prasowe-media` | 🟡 |
+| Konstytucja — prawa i wolności procesowe | `mod-Konstytucja-prawa-i-wolnosci-procesowe` | 🟡; dołącz DR-01 |
+| kontroler kompletności prawa | `mod-narzedzie-kontroler-kompletnosci` | 🟢/🟡 B+ |
+| kalkulatory procesowe | `mod-narzedzie-kalkulatory` | 🟢/🟡 B+ |
+| archiwa / dokumentacja | `mod-ustawa-archiwa-dokumentacja` | 🟡 |
+| obywatelstwo / paszporty / ewidencja ludności | `mod-ustawa-obywatelstwo-paszporty-ewidencja` | 🟡 |
+| wzory pism procesowych | `mod-KPC-wzory-pism-procesowych` | 🟢/🟡 B+ |
+| KPC — odtworzenie zaginionych / zniszczonych akt | `mod-KPC-odtworzenie-akt-zaginionych-zniszczonych` | 🟢/🟡 B+ |
 
-Status 🟢 może zostać nadany dopiero po porównaniu struktury aktualnego aktu ze źródłem urzędowym RZĄD 1, wskazaniu zakresów artykułów/rozdziałów oraz jawnej liście pozostałych luk. Statusy tej mapy są wtórne wobec treści modułów i muszą być aktualizowane po każdej ich zmianie.
+## Aktywne luki
+
+1. Narzędzia procesowe nie są substytutem aktualnego prawa materialnego i proceduralnego z właściwego DR.
+2. E-doręczenia, procedury transgraniczne i media wymagają dalszego audytu aktualności i głębokości.
+3. Przy każdym piśmie lub strategii najpierw pobierz aktualny przepis z właściwego DR i źródła urzędowego, a dopiero potem używaj narzędzi DR-16.

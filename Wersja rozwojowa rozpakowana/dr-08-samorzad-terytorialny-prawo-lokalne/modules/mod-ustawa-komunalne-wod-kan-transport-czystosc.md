@@ -1,10 +1,10 @@
 # mod-ustawa-komunalne-wod-kan-transport-czystosc
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:**
+**Źródło weryfikacji — RZĄD 1 / VER 2026-08-28:**
 - Wod-kan: Dz.U. 2024 poz. 757 t.j. ✅ VER: 2026-06-05
 - Transport zbiorowy: **Dz.U. 2025 poz. 285 t.j.** z 14.02.2025 ✅ VER: 2026-06-05
-- Czystość i porządek: **Dz.U. 2025 poz. 733 t.j.** ✅ VER: 2026-06-05
+- Czystość i porządek: **Dz.U. 2025 poz. 733 t.j. ze zm.**; ELI tekst ujednolicony sprawdzony w stanie 03.08.2026
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
 ---
@@ -55,7 +55,7 @@ Ulgi ustawowe: 20%, 37%, 49%, 78%, 100% — rekompensata z budżetu państwa
 
 ---
 
-## 4. CZYSTOŚĆ I PORZĄDEK (Dz.U. 2025 poz. 765)
+## 4. CZYSTOŚĆ I PORZĄDEK (Dz.U. 2025 poz. 733 t.j. ze zm.)
 
 ```
 Selektywna zbiórka odpadów: obowiązkowa we wszystkich gminach
@@ -68,15 +68,22 @@ Opłata za GOCH:
   → Uchybienie obowiązku selektywnej zbiórki → podwyższona opłata
   → Decyzja o wymiarze → KPA → SKO → WSA
 
-Nielegalne składowanie (art. 9x ustawy — weryfikuj w ISAP):
-  → Kara administracyjna od zarządcy nieruchomości
+Kary pieniężne — art. 9x i nast.:
+  → art. 9x dotyczy przede wszystkim przedsiębiorców odbierających odpady
+    komunalne (m.in. działalność bez wpisu do rejestru, naruszenia obowiązków
+    sprawozdawczych i poziomów), a **nie** ogólnej odpowiedzialności
+    „zarządcy nieruchomości za nielegalne składowanie”
+  → art. 9zb rozdziela właściwość do nakładania kar pomiędzy wójta/
+    burmistrza/prezydenta miasta i WIOŚ zależnie od rodzaju naruszenia
+  → przed kwalifikacją dzikiego wysypiska/porzucenia odpadów sprawdź także
+    ustawę o odpadach i przepisy ochrony środowiska — nie przypisuj automatycznie art. 9x
 ```
 
 ---
 
 ## 5. QUALITY GATE / OUTPUT
 
-**Quality gate:** Nowe t.j. (transport: Dz.U. 2025 poz. 285; czystość: Dz.U. 2025 poz. 765) zastosowane? Organ regulacyjny dla taryf wod-kan: Wody Polskie (nie gmina)?
+**Quality gate:** Nowe t.j. (transport: Dz.U. 2025 poz. 285; czystość: Dz.U. 2025 poz. 733) zastosowane? Organ regulacyjny dla taryf wod-kan: Wody Polskie (nie gmina)?
 
 **Output:** Kwalifikacja usługi komunalnej → organ regulacyjny → tryb → terminy → rekomendacja.
 
@@ -85,5 +92,5 @@ Nielegalne składowanie (art. 9x ustawy — weryfikuj w ISAP):
 **Źródła:**
 - Wod-kan: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000757
 - Transport: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250000285
-- Czystość: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250000765
+- Czystość: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250000733
 - Wody Polskie: https://wody.gov.pl

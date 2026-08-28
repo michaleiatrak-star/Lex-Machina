@@ -1,238 +1,124 @@
-# Moduł — Prawo pierwotne UE: TUE, TFUE, rozporządzenia kolizyjne i transgraniczne
+# TUE / TFUE — prawo pierwotne Unii Europejskiej
 
-## AKTY — WERYFIKUJ NA EUR-LEX
+**Stan weryfikacji:** 2026-08-28  
+**Źródło kanoniczne:** EUR-Lex  
+**Zakres modułu:** TUE i TFUE. Rozporządzenia kolizyjne/proceduralne (Bruksela Ia, Rzym I/II, ENZ, ESCP itd.) kieruj do modułów PPM/KPC, nie traktuj ich jako treści TUE/TFUE.
 
-| Akt | Zakres |
-|---|---|
-| Bruksela Ia 1215/2012 | jurysdykcja i uznawanie orzeczeń cywilnych |
-| Rzym I 593/2008 | prawo właściwe dla zobowiązań umownych |
-| Rzym II 864/2007 | prawo właściwe dla deliktów |
-| ENZ 1896/2006 | europejski nakaz zapłaty |
-| ESCP 861/2007 | drobne roszczenia transgraniczne |
+## 1. Metryka urzędowa
 
-## TEST TRANS-GRANICZNY
+### Traktat o Unii Europejskiej (TUE)
+- EUR-Lex / ELI: `http://data.europa.eu/eli/treaty/teu_2016/oj`
+- status: obowiązujący;
+- aktualna wersja skonsolidowana dostępna w EUR-Lex: **15.03.2025**;
+- struktura: preambuła + Tytuły I–VI.
 
-```
-1. Element zagraniczny: strona, miejsce szkody, wykonanie umowy, majątek.
-2. Jurysdykcja: który sąd może rozpoznać sprawę?
-3. Prawo właściwe: jakie prawo materialne stosować?
-4. Doręczenia i język.
-5. Wykonalność orzeczenia za granicą.
-6. Czy korzystniejsza jest procedura europejska?
-```
+### Traktat o funkcjonowaniu Unii Europejskiej (TFUE)
+- EUR-Lex / ELI: `http://data.europa.eu/eli/treaty/tfeu_2016/oj`
+- aktualna wersja skonsolidowana: `http://data.europa.eu/eli/treaty/tfeu_2016/2025-03-15`
+- status: obowiązujący;
+- aktualna wersja skonsolidowana dostępna w EUR-Lex: **15.03.2025**.
 
-## WYJŚCIE
+**HARD GATE:** przed cytowaniem konkretnego artykułu otwórz jego bieżące brzmienie w EUR-Lex. Wersja skonsolidowana jest narzędziem dokumentacyjnym; autentyczne teksty znajdują się w Dzienniku Urzędowym UE.
 
-Zawsze oddziel: jurysdykcję, prawo właściwe, procedurę, wykonalność, ryzyka dowodowe.
+## 2. TUE — mapa bieżąca
 
----
+| Tytuł | Zakres | Status modułu |
+|---|---|---|
+| I | postanowienia wspólne; wartości, cele, kompetencje, lojalna współpraca | 🟢 B+ |
+| II | zasady demokratyczne | 🟢 B+ |
+| III | instytucje | 🟢 B+ |
+| IV | wzmocniona współpraca | 🟡 B |
+| V | działania zewnętrzne / WPZiB / WPBiO | 🟡 B |
+| VI | postanowienia końcowe | 🟡 B |
 
-# STANDARDOWE UZUPEŁNIENIE MODUŁU — poziom prawa pracy / prawa karnego
+### Kluczowe bramki TUE
 
-> Ten blok jest częścią obowiązkową modułu. Ma pierwszeństwo przed opisowym użyciem modułu. Nie zastępuje kontroli ISAP; wymusza praktyczny workflow kancelaryjny.
+1. **Art. 2** — wartości Unii.
+2. **Art. 4–5** — podział kompetencji, zasada przyznania, pomocniczość i proporcjonalność.
+3. **Art. 6** — Karta Praw Podstawowych i relacja do EKPC.
+4. **Art. 19** — TSUE i obowiązek zapewnienia skutecznej ochrony sądowej w dziedzinach objętych prawem UE.
 
-## 1. Intake szczególny
+Nie przenoś mechanicznie reguł prawa krajowego na prawo UE. Najpierw ustal: kompetencję UE, rodzaj aktu, bezpośrednie stosowanie/skutek, pierwszeństwo oraz właściwy środek proceduralny.
 
-Przed odpowiedzią ustal co najmniej:
-- element transgraniczny;
-- jurysdykcja;
-- prawo właściwe;
-- akt UE;
-- wykonanie w Polsce;
-- pytanie prejudycjalne;
+## 3. TFUE — mapa bieżąca
 
-## 2. Mapa proceduralna
+| Część | Zakres | Status modułu |
+|---|---|---|
+| I | zasady i kategorie kompetencji UE | 🟢 B+ |
+| II | niedyskryminacja i obywatelstwo UE | 🟢/🟡 B+ |
+| III | polityki i działania wewnętrzne UE | 🟡 B — używaj modułów sektorowych dla szczegółów |
+| IV | stowarzyszenie krajów i terytoriów zamorskich | 🟡 B |
+| V | działania zewnętrzne UE | 🟡 B |
+| VI | postanowienia instytucjonalne i finansowe | 🟢/🟡 B+ |
+| VII | postanowienia ogólne i końcowe | 🟡 B |
 
-```text
-Identyfikacja trybu i organu/sądu
-  ↓
-Kontrola terminu, doręczenia, właściwości i legitymacji
-  ↓
-Ustalenie faktów materialnych i proceduralnych
-  ↓
-Matryca dowodowa: fakt → dowód → ciężar dowodu → luka
-  ↓
-Dobór pisma/środka: wniosek / odwołanie / zażalenie / skarga / pozew / zawiadomienie
-  ↓
-Walidacja formalna: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
-  ↓
-Ocena ryzyka: shared/RISK-ASSESSMENT.md + shared/QUALITY-CHECK.md
-  ↓
-Strategia: minimum, optimum, wariant eskalacyjny
-```
+## 4. Art. 267 TFUE — pytanie prejudycjalne
 
-## 3. Warunki skuteczności
+### Gate zastosowania
 
-```text
-□ prawidłowy tryb
-□ właściwy organ albo sąd
-□ termin liczony od prawidłowego zdarzenia
-□ legitymacja strony
-□ żądanie możliwe prawnie
-□ fakty powiązane z podstawą prawną
-□ dowody przypisane do każdej tezy
-□ kontrola opłat, odpisów, pełnomocnictw i podpisu
-□ kontrola ISAP na dzień sporządzenia pisma
-□ kontrola stanu prawnego na dzień zdarzenia oraz na dzień orzekania
-```
+Ustal kolejno:
+1. czy rozstrzygnięcie sprawy wymaga wykładni prawa UE albo oceny ważności aktu instytucji UE;
+2. czy organ kierujący spełnia kryteria „sądu” w rozumieniu prawa UE;
+3. czy odpowiedź TSUE jest potrzebna do wydania orzeczenia;
+4. czy sąd krajowy ma uprawnienie czy obowiązek skierowania pytania;
+5. czy zachodzi wyjątek uznany w prawie UE dla sądu ostatniej instancji;
+6. czy istnieje podstawa do trybu przyspieszonego albo pilnego.
 
-## 4. Matryca dowodowa
+**Nie pisz:** „każdy sąd ostatniej instancji zawsze musi skierować pytanie”. Obowiązek z art. 267 akapit trzeci podlega regułom wypracowanym w prawie UE i zawsze wymaga oceny konkretnej sytuacji.
 
-Dowody typowe dla tego modułu:
-- umowy;
-- orzeczenia zagraniczne;
-- tłumaczenia;
-- akty UE;
-- dowody doręczeń;
-- orzecznictwo TSUE;
+### Minimalny pakiet dla wniosku strony
 
-Każdy dowód oceniaj według schematu:
+- zidentyfikuj normę UE i normę krajową;
+- wyjaśnij, dlaczego odpowiedź jest konieczna dla rozstrzygnięcia;
+- zaproponuj precyzyjne pytanie dotyczące wykładni albo ważności;
+- wskaż stan faktyczny potrzebny TSUE do zrozumienia problemu;
+- oddziel wniosek strony od kompetencji sądu do podjęcia decyzji o odesłaniu.
 
-```text
-Dowód → fakt, który ma wykazać → bezpośredni/pośredni → wiarygodność → ryzyko podważenia → brakujący dowód wzmacniający
-```
+## 5. Inne kluczowe mechanizmy TFUE
 
-## 5. Typowe zarzuty i kontrzarzuty
+| Mechanizm | Podstawa | Routing |
+|---|---|---|
+| skarga Komisji przeciw państwu członkowskiemu | art. 258 TFUE | DR-14 |
+| skarga państwa przeciw państwu | art. 259 TFUE | DR-14 |
+| kontrola legalności aktów UE | art. 263 TFUE | DR-14 / procedura TSUE |
+| bezczynność instytucji UE | art. 265 TFUE | DR-14 |
+| pytanie prejudycjalne | art. 267 TFUE | DR-14 + właściwy DR krajowy |
+| odpowiedzialność pozaumowna UE | art. 340 TFUE | DR-14 |
 
-W każdej sprawie przygotuj dwie wersje:
+## 6. Pierwszeństwo i skuteczność prawa UE
 
-1. argumentację strony inicjującej sprawę,
-2. argumentację organu/przeciwnika procesowego.
+Przed zastosowaniem normy UE rozdziel cztery pytania:
 
-Typowe ryzyka i kontrargumenty:
-- złe forum;
-- brak tłumaczeń;
-- niewłaściwe prawo;
-- nierealne pytanie prejudycjalne;
+1. Czy przepis UE jest **bezpośrednio stosowany** (np. rozporządzenie) czy wymaga implementacji?
+2. Czy dana norma może wywoływać **bezpośredni skutek** w konkretnej relacji?
+3. Czy zachodzi obowiązek **wykładni zgodnej** prawa krajowego?
+4. Czy kolizja prowadzi do obowiązku pominięcia normy krajowej w granicach wynikających z prawa UE?
 
-## 6. Strategia procesowa
+Nie utożsamiaj „bezpośredniego stosowania” z „bezpośrednim skutkiem” i nie przenoś reguł dotyczących dyrektyw na rozporządzenia.
 
-Zastosuj trzy warianty:
+## 7. Routing do aktów wtórnych
 
-### Wariant ostrożny
-Minimalizuje ryzyko formalne. Priorytet: termin, kompletność, zabezpieczenie dowodów.
+- jurysdykcja cywilna / uznawanie orzeczeń → `mod-KPC-egzekucja-transgraniczna-UE.md`;
+- Rzym I / Rzym II / prawo właściwe → `mod-PMPP-prawo-prywatne-miedzynarodowe.md`;
+- RODO / DSA / DMA / AI Act / DORA / MiCA → DR-11;
+- zamówienia / fundusze UE → DR-07;
+- podatki i cło → DR-06;
+- prawa podstawowe → `mod-KPP-karta-praw-podstawowych-UE.md` + `mod-EKPC-ETPC-prawa-czlowieka.md`.
 
-### Wariant ofensywny
-Eksponuje naruszenia proceduralne, wadliwość ustaleń, niewłaściwą wykładnię, naruszenie zasady proporcjonalności albo praw strony.
+## 8. Quality gate
 
-### Wariant eskalacyjny
-Zakłada przejście do organu II instancji, WSA/NSA, sądu powszechnego, SN, TSUE, ETPC albo organu sektorowego — tylko gdy wynika to z trybu.
+- [ ] otwarto aktualną wersję TUE/TFUE w EUR-Lex;
+- [ ] zidentyfikowano konkretny artykuł i jego funkcję;
+- [ ] ustalono kompetencję UE i rodzaj instrumentu;
+- [ ] nie pomylono prawa pierwotnego z aktem wtórnym;
+- [ ] przy art. 267 rozdzielono inicjatywę strony od decyzji sądu;
+- [ ] sprawdzono właściwy moduł sektorowy dla aktu wtórnego;
+- [ ] prawo krajowe zweryfikowano osobno w ELI/ISAP.
 
-## 7. Quality gate
+## 9. Źródła urzędowe
 
-Przed końcową odpowiedzią sprawdź:
+- EUR-Lex — TUE: `http://data.europa.eu/eli/treaty/teu_2016/oj`
+- EUR-Lex — TFUE: `http://data.europa.eu/eli/treaty/tfeu_2016/oj`
+- EUR-Lex — TFUE, wersja skonsolidowana 15.03.2025: `http://data.europa.eu/eli/treaty/tfeu_2016/2025-03-15`
 
-```text
-□ Czy moduł działa praktycznie, a nie opisowo?
-□ Czy wskazano decydujący element prawny?
-□ Czy oddzielono fakty od interpretacji?
-□ Czy podano ryzyka przeciwnika/organu?
-□ Czy wskazano słabe punkty klienta?
-□ Czy każdy przepis i Dz.U. ma kontrolę ISAP albo oznaczenie braku weryfikacji?
-□ Czy użyto shared/MODULE-STANDARD-POLISH-LAW.md?
-```
-
-## 8. Łącz obowiązkowo z
-
-| Potrzeba | Moduł współdzielony / skill |
-|---|---|
-| aktualność prawa | `shared/ISAP-AUDIT-PROTOCOL.md` + `shared/ISAP-METRYKI-AKTOW.md` |
-| stan prawny w czasie | `shared/TEMPORAL-LAW-CHECK.md` |
-| braki formalne | `shared/BRAKI-FORMALNE.md` |
-| warunki skuteczności | `shared/WARUNKI-SKUTECZNOSCI.md` |
-| dowody | `shared/DOWODY-METODOLOGIA.md` + `analizator-dowodow-v3` |
-| ryzyka | `shared/RISK-ASSESSMENT.md` |
-| pisma | `pisma-procesowe-v3` albo `pisma-proste-v2` |
-| analiza sądowa | `analiza-sadowa-v6` |
-
----
-
-## KLUCZOWE AKTY — ZWERYFIKOWANE 2026-06-07
-
-```
-Prawo pierwotne UE — EUR-Lex (eur-lex.europa.eu):
-  TUE (Traktat o Unii Europejskiej): Dz.Urz. UE C 326 z 26.10.2012
-  TFUE (Traktat o funkcjonowaniu UE): Dz.Urz. UE C 326 z 26.10.2012
-  KPP (Karta Praw Podstawowych): Dz.Urz. UE C 326 z 26.10.2012, s. 391
-  ✅ VER: eur-lex.europa.eu 2026-06-07
-
-Kluczowe mechanizmy proceduralne:
-  Pytanie prejudycjalne (art. 267 TFUE):
-    → Sąd krajowy MOŻE skierować (instancje niższe) lub MUSI (sąd ostatniej instancji)
-    → Warunek: wątpliwość co do wykładni/ważności prawa UE, sprawa zawisła
-    → Tryb pilny (PPU) dostępny w sprawach dot. wolności, bezpieczeństwa, sprawiedliwości
-    → Skutek: postępowanie krajowe zawieszone do czasu wyroku TSUE
-    → Orzeczenie TSUE wiąże sąd pytający i wszystkie sądy krajowe (erga omnes w prawie UE)
-
-  Pierwszeństwo prawa UE (Simmenthal, Costa/ENEL):
-    → Sąd krajowy pomija sprzeczny przepis krajowy bez potrzeby jego uchylenia
-    → Zakres: rozporządzenia (bezpośrednio stosowalny), dyrektywy (po wdrożeniu lub
-      bezpośredni skutek wertykalny — Faccini Dori / Marshall)
-
-  Odpowiedzialność odszkodowawcza państwa (Francovich, Brasserie du Pêcheur):
-    → Warunki: naruszenie prawa UE przyznającego prawa jednostkom + bezpośredni związek
-      przyczynowy + wystarczająco poważne naruszenie
-    → Roszczenie przed sądem cywilnym RP (art. 417¹ § 1 KC — weryfikuj w ISAP)
-
-  Skarga Komisji (art. 258 TFUE) / skarga państwa (art. 259 TFUE):
-    → Nie daje uprawnień jednostce do bezpośredniego powołania
-    → Wyrok TSUE z art. 258 może stać się podstawą Francovich
-
-⚠️ Dyrektywy: brak bezpośredniego skutku horyzontalnego — jednostka vs jednostka.
-⚠️ Rozporządzenia: bezpośrednio stosowalny — nie wymagają implementacji.
-```
-
----
-
-## ANEKS: PYTANIE PREJUDYCJALNE DO TSUE (art. 267 TFUE)
-
-> Kluczowe narzędzie procesowe w każdej sprawie z elementem prawa UE.
-
-```
-PODSTAWA: Art. 267 TFUE (Traktat o funkcjonowaniu UE)
-  → Każdy sąd krajowy może (sąd ostatniej instancji: musi) skierować pytanie prejudycjalne
-    do TSUE, gdy wykładnia prawa UE jest niezbędna dla rozstrzygnięcia sprawy
-
-KTO MOŻE SKIEROWAĆ:
-  → Każdy sąd krajowy — również sądy niższej instancji
-  → Sądy ostatniej instancji (SN, NSA) — OBOWIĄZEK (z wyjątkami — doktryna acte clair)
-
-KIEDY PYTANIE PREJUDYCJALNE JEST ZASADNE:
-  □ Niejasna wykładnia dyrektywy / rozporządzenia UE
-  □ Ważność aktu prawa UE wątpliwa
-  □ Krajowe przepisy implementujące są niezgodne z dyrektywą
-  □ Klauzule abuzywne (dyrektywa 93/13/EWG) — TSUE BARDZO aktywny
-  □ Prawa konsumenta, RODO, AML, AI Act — rosnący zakres
-
-PROCEDURA:
-  → Postanowienie sądu → skierowanie do Kancelarii TSUE (Luksemburg)
-  → Czas oczekiwania: 12–24 miesięcy (pilna procedura PPU — ok. 3 miesięcy)
-  → Procedura przyspieszona (art. 105 Regulaminu TSUE): pilność wykazana
-  → PPU (prejudycjalne pilne — art. 107 Regulaminu): sprawy wolności, bezpieczeństwa
-  → Zawieszenie postępowania krajowego do odpowiedzi TSUE (art. 177 KPC)
-
-CO ZAWIERA DOBRE PYTANIE PREJUDYCJALNE:
-  □ Opis stanu faktycznego (zwięzły)
-  □ Wskazanie przepisu krajowego i przepisu UE
-  □ Dlaczego odpowiedź jest niezbędna dla rozstrzygnięcia
-  □ Proponowana wykładnia sądu krajowego (zalecane — ułatwia TSUE)
-  □ Pytanie sformułowane precyzyjnie i wąsko
-
-SKUTKI WYROKU TSUE:
-  → Wiąże sąd krajowy w danej sprawie
-  → Faktyczne precedensowe znaczenie dla wszystkich sądów UE
-  → Sąd krajowy obowiązany do wykładni zgodnej z wyrokiem
-  → W razie niezgodności prawa krajowego → zasada pierwszeństwa prawa UE
-
-WNIOSKI PROCESOWE DO ZŁOŻENIA:
-  → Wniosek o skierowanie pytania prejudycjalnego (strona inicjuje, sąd decyduje)
-  → Wniosek o zawieszenie postępowania (art. 177 KPC) do czasu odpowiedzi TSUE
-  → Wniosek o procedurę PPU (w pilnych przypadkach)
-```
-
-### Źródła online
-```
-web_search: "pytanie prejudycjalne TSUE art 267 TFUE procedura wniosek strona sąd polska 2024 2025"
-web_search: "TSUE orzeczenia Polska kredyty frankowe RODO klauzule abuzywne 2025 2026 prejudycjalne"
-curia.europa.eu — wyszukiwarka orzeczeń TSUE
-```
+Wyszukiwarki internetowe i opracowania wtórne nie są źródłem treści traktatu.

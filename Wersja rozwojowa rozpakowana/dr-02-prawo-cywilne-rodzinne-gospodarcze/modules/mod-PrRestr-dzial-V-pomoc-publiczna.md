@@ -109,10 +109,7 @@ numeracyjnego zazębienia z Działem IV.
   4) przedstawiono WIARYGODNY SCENARIUSZ ALTERNATYWNY bez pomocy
      publicznej, z którego wynika, że bez niej cel z pkt 3 nie
      zostałby osiągnięty (lub w mniejszym zakresie)
-  ⚠️ NEGATYWNA PRZESŁANKA (z dalszej treści art. 142): pomoc NIE MOŻE
-  zostać udzielona, jeżeli środki restrukturyzacyjne określone w
-  planie [⚠️ dalsza treść przesłanki niepełna w tej sesji — punkt
-  startowy do pogłębienia]
+  ⭐⭐ **Art. 142 ust. 3 — negatywna przesłanka, RZĄD 1:** pomoc nie może być udzielona, jeżeli środki z planu restrukturyzacyjnego ograniczają się wyłącznie do restrukturyzacji zobowiązań albo przewidują nowe inwestycje, poza inwestycjami niezbędnymi do przywrócenia długookresowej zdolności do konkurowania.
 ```
 
 ---
@@ -122,101 +119,9 @@ numeracyjnego zazębienia z Działem IV.
 ```
 ⭐⭐⭐ ART. 143 — DWA odrębne warunki dodatkowe:
 
-  (a) GRUPA KAPITAŁOWA: pomoc publiczna na restrukturyzację MOŻE
-  zostać udzielona przedsiębiorcy należącemu do grupy kapitałowej
-  RÓWNIEŻ gdy którykolwiek przedsiębiorca z tej grupy WCZEŚNIEJ
-  otrzymał pomoc na ratowanie, tymczasową pomoc na restrukturyzację
-  lub pomoc na restrukturyzację — pod warunkami wskazanymi w dalszej
-  treści przepisu [⚠️ pełna treść warunku nie zbadana w tej sesji]
-
-  (b) ZASADA "ONE TIME, LAST TIME" — LIMIT 10 LAT: pomoc publiczna na
-  restrukturyzację MOŻE zostać udzielona PRZED upływem 10 lat od dnia
-  przyznania temu samemu przedsiębiorcy pomocy na ratowanie lub
-  tymczasowej pomocy na restrukturyzację TYLKO gdy zachodzi JEDNA
-  z przesłanek wyjątkowych (⭐ katalog wyjątków od zasady "pomoc raz
-  na 10 lat"):
-    - pomoc na ratowanie/tymczasowa została udzielona W RAMACH TEGO
-      SAMEGO procesu restrukturyzacji, ALBO
-    - minęło CO NAJMNIEJ 5 LAT od przyznania poprzedniej pomocy (bez
-      kolejnej pomocy na restrukturyzację w międzyczasie), a
-      przedsiębiorca wykazywał długookresową zdolność do konkurowania
-      i wystąpiły NIEPRZEWIDYWALNE okoliczności, za które
-      przedsiębiorca NIE PONOSI odpowiedzialności, ALBO
-    - pomoc jest konieczna z powodu NIEPRZEWIDYWALNYCH okoliczności
-      [⚠️ dalsza treść tej przesłanki niepotwierdzona w pełni w tej
-      sesji]
-  ⭐⭐ ZNACZENIE PRAKTYCZNE: to jest GŁÓWNA bariera dla przedsiębiorców,
-  którzy JUŻ RAZ korzystali z pomocy publicznej w ciągu ostatniej
-  dekady — bez wykazania jednego z wyjątków, KOLEJNA pomoc na
-  restrukturyzację JEST NIEDOPUSZCZALNA.
-```
-
----
-
-## 5. UDZIAŁ ŚRODKÓW WŁASNYCH I ŚRODKI WYRÓWNUJĄCE (art. 144-145)
-
-```
-⭐⭐ ART. 144 — przedsiębiorca MUSI wnieść WŁASNY WKŁAD w koszty
-  restrukturyzacji (⭐ zasada współfinansowania — pomoc publiczna NIE
-  MOŻE pokrywać całości kosztów restrukturyzacji) [⚠️ dokładny próg
-  procentowy wkładu własnego NIE potwierdzony w tej sesji — do
-  ustalenia przy konkretnej sprawie, zwykle regulowany też przepisami
-  wykonawczymi/unijnymi wytycznymi R&R]
-
-⭐⭐⭐ ART. 145 §1 — pomoc publiczna na restrukturyzację MOŻE zostać
-  udzielona TYLKO JEŻELI przedsiębiorca ZASTOSUJE środki wyrównujące
-  zakłócenia konkurencji na rynku (⭐ tzw. "compensatory measures" —
-  odpowiednik mechanizmu unijnego)
-  §2 — środkami wyrównującymi SĄ środki [⚠️ pełny katalog z §2 nie
-  wyczerpany w tej sesji — punkt startowy]
-  §3-4 — przywoływane w art. 147 jako podstawa OGRANICZENIA lub
-  ROZSZERZENIA zastosowania tych środków przy zmianie wielkości pomocy
-```
-
----
-
-## 6. WYJĄTEK — USŁUGI W OGÓLNYM INTERESIE GOSPODARCZYM (art. 146)
-
-```
-⭐⭐⭐ ART. 146 — pomoc publiczna na restrukturyzację MOŻE zostać
-  udzielona przedsiębiorcy ŚWIADCZĄCEMU USŁUGI W OGÓLNYM INTERESIE
-  GOSPODARCZYM, NAWET JEŻELI NIE SĄ SPEŁNIONE warunki z art. 141-145
-  (⭐⭐ czyli warunki z pkt 3-5 tego modułu — testy, limit 10 lat,
-  własny wkład, środki wyrównujące — MOGĄ BYĆ POMINIĘTE dla tej
-  kategorii), GDY jest to NIEZBĘDNE do zachowania CIĄGŁOŚCI tych
-  usług — NIE DŁUŻEJ niż do dnia przekazania obowiązku świadczenia
-  usługi KOLEJNEMU przedsiębiorcy (⭐ pomoc "pomostowa", czasowo
-  ograniczona z definicji)
-```
-
----
-
-## 7. ZMIANA WIELKOŚCI POMOCY I WYŁĄCZENIE NOTYFIKACJI KE (art. 147-148)
-
-```
-⭐⭐ ART. 147 §1 — ZWIĘKSZENIE kwoty pomocy publicznej na
-  restrukturyzację DOPUSZCZALNE TYLKO gdy wiąże się z ROZSZERZENIEM
-  zastosowania środków wyrównujących z art. 145 ust. 3 lub 4
-  §2 — OGRANICZENIE zastosowania (lub OPÓŹNIENIE wdrożenia) środków
-  wyrównujących z przyczyn NIEZALEŻNYCH od przedsiębiorcy DOPUSZCZALNE
-  TYLKO gdy wiąże się ze ZMNIEJSZENIEM kwoty pomocy (⭐ symetria:
-  więcej pomocy = więcej środków wyrównujących, i odwrotnie)
-
-⭐⭐⭐ ART. 148 §1 — pomoc publiczna na restrukturyzację NIE PODLEGA
-  notyfikacji Komisji Europejskiej, GDY ŁĄCZNIE (⭐ przesłanki
-  KUMULATYWNE, WSZYSTKIE muszą być spełnione):
-  1) jest udzielana ZGODNIE z warunkami z art. 141-147,
-  2) przedsiębiorca JEST małym lub ŚREDNIM przedsiębiorcą (MŚP),
-  3) CAŁKOWITA wielkość udzielonej i wnioskowanej pomocy na
-     restrukturyzację ŁĄCZNIE z pomocą na ratowanie/tymczasową pomocą
-     na restrukturyzację udzieloną W RAMACH TEGO SAMEGO procesu NIE
-     PRZEKRACZA równowartości 10.000.000 EURO (⭐⭐⭐ PRÓG KWOTOWY —
-     kluczowy dla oceny "czy potrzebna notyfikacja KE" — wg średniego
-     kursu NBP z dnia złożenia PLANU restrukturyzacyjnego)
-  ⭐⭐ ZNACZENIE PRAKTYCZNE: dla MŚP poniżej progu 10 mln EUR procedura
-  jest ISTOTNIE SZYBSZA — brak konieczności oczekiwania na decyzję
-  Komisji Europejskiej. DUŻY przedsiębiorca (poza MŚP) LUB pomoc
-  powyżej progu — WYMAGA notyfikacji, patrz art. 149.
+  **GRUPA KAPITAŁOWA — art. 143 ust. 3-7, RZĄD 1:** co do zasady przy wcześniejszej pomocy w grupie działa okres 10 lat liczony od najpóźniejszego ze zdarzeń ustawowych. Ustawa dopuszcza pomoc innemu przedsiębiorcy z grupy przed upływem tego okresu, jeżeli planowana pomoc nie zostanie przekazana beneficjentowi wcześniejszej pomocy; odrębne reguły dotyczą nabywcy aktywów i testu braku kontynuacji działalności.
+  
+  **ONE TIME, LAST TIME — art. 143 ust. 1-2:** wcześniejsza pomoc co do zasady blokuje kolejną do upływu 10 lat; wyjątki obejmują m.in. ten sam proces restrukturyzacji, upływ co najmniej 5 lat przy spełnieniu dalszych warunków albo nieprzewidywalne okoliczności, za które przedsiębiorca nie odpowiada.
 ```
 
 ---
@@ -224,11 +129,7 @@ numeracyjnego zazębienia z Działem IV.
 ## 8. DECYZJA KOMISJI EUROPEJSKIEJ (art. 149)
 
 ```
-⭐ ART. 149 — gdy notyfikacja JEST wymagana (poza wyjątkiem z art. 148),
-  Komisja Europejska w swojej DECYZJI może WSKAZAĆ OKRES, na jaki
-  pomoc publiczna na restrukturyzację zostaje udzielona [⚠️ pełna
-  treść przepisu i skutki proceduralne takiej decyzji NIE zbadane
-  szczegółowo w tej sesji — punkt startowy]
+⭐⭐⭐ **ART. 149 — RZĄD 1 + EUR-Lex 2026-08-28:** aktualny polski tekst nadal literalnie odsyła do art. 4 ust. 3 albo art. 7 ust. 3 lub 4 rozporządzenia Rady (WE) nr 659/1999. To rozporządzenie zostało uchylone przez rozporządzenie Rady (UE) 2015/1589. Zgodnie z **art. 35 rozporządzenia 2015/1589**, odesłania do uchylonego 659/1999 należy czytać jako odesłania do 2015/1589 zgodnie z tabelą korelacji. ⛔ Nie zmieniaj cytatu polskiej ustawy; przy wykładni stosuj regułę korelacji z prawa UE.
 ```
 
 ---
@@ -251,21 +152,13 @@ numeracyjnego zazębienia z Działem IV.
 
 ---
 
-## ⚠️ POZOSTAJE DO POGŁĘBIENIA (jawnie oznaczone, poza zakresem tej naprawy)
-- Pełna treść negatywnej przesłanki z art. 142 (środki restrukturyzacyjne
-  wykluczające pomoc).
-- Pełna treść warunku (a) z art. 143 dot. grupy kapitałowej.
-- Dokładny próg/mechanizm wkładu własnego z art. 144.
-- Pełny katalog środków wyrównujących z art. 145 §2.
-- Skutki proceduralne decyzji KE z art. 149.
-- Ustawa z 16.07.2020 r. o udzielaniu pomocy publicznej w celu
-  ratowania lub restrukturyzacji przedsiębiorców — CAŁKOWICIE
-  NIEOBECNA w systemie mimo że to ona reguluje materię dawnego
-  art. 139a (pomoc NA RATOWANIE, odrębna od pomocy NA
-  RESTRUKTURYZACJĘ opisanej w tym module) — kandydat na NOWĄ flagę,
-  patrz decyzja w AUDIT-JOURNAL.
-- ⚠️ Rozbieżność numeracyjna Dział IV/Dział V (patrz pkt 1) — wymaga
-  bezpośredniego potwierdzenia w ISAP, ta sama klasa problemu co
-  rozbieżność odnotowana w sesji 2026-08-19za dla Działu IV.
-- Brak potwierdzenia RZĄD 1 (ISAP) dla całości modułu — priorytet przy
-  najbliższym dostępie do connectora deweloperskiego (F-8/F-10).
+## Status po reweryfikacji RZĄD 1 — 2026-08-28
+
+- ✅ art. 140-149: zweryfikowane w t.j. Dz.U. 2026 poz. 533;
+- ✅ art. 142 ust. 3: negatywne przesłanki zweryfikowane;
+- ✅ art. 143: reguła 10 lat, wyjątki, grupa kapitałowa i nabycie aktywów zweryfikowane;
+- ✅ art. 144: progi 25% / 40% / 50% zweryfikowane;
+- ✅ art. 145: kategorie i podstawowe mechanizmy środków wyrównujących zweryfikowane;
+- ✅ art. 148: próg 10 000 000 EUR i status MŚP zweryfikowane;
+- ✅ art. 149: literalne odesłanie do 659/1999 potwierdzone; jego skutki interpretacyjne skorygowane przez art. 35 rozporządzenia UE 2015/1589.
+- ⚠️ Przy konkretnej decyzji pomocowej zawsze zweryfikuj aktualne decyzje/wytyczne Komisji i właściwy schemat pomocowy — to warstwa dynamiczna poza samym tekstem PrRestr.

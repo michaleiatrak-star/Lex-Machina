@@ -10,12 +10,7 @@ sali/w systemie podczas rozpoznawania odwołania.)
 
 > ⛔ HARDGATE — zweryfikuj aktualny t.j. na ISAP przed użyciem w piśmie.
 > **RZĄD 1 / VER 2026-08-28:** Prawo zamówień publicznych, t.j. Dz.U. 2026 poz. 793 (obwieszczenie Marszałka Sejmu z 27.05.2026, stan t.j. 25.05.2026). Zakres art. 218-226 i 531-568a odczytano z urzędowego tekstu ELI. 
-> zamowienia.org.pl, legalnabudowa.pl, kzp.net.pl). ⚡ ISTOTNA
-> NOWELIZACJA: ustawa z 21.05.2025 o zmianie niektórych ustaw w celu
-> deregulacji prawa gospodarczego i administracyjnego (art. 28), ogłoszona
-> 12.06.2026 — wprowadza PREKLUZJĘ DOWODOWĄ (nowe brzmienie art. 535 §1) i
-> rozszerza podstawy odmowy dowodów (art. 541) — ZWERYFIKUJ, czy zdarzenie
-> w sprawie miało miejsce PRZED czy PO wejściu w życie tej zmiany.
+> NOWELIZACJA: art. 28 ustawy deregulacyjnej z 21.05.2025 r. zmienił m.in. art. 534, 535 i 541 PZP; zgodnie z przypisami urzędowego t.j. zmiany te obowiązują od **13.03.2026 r.**. Dla postępowań wszczętych wcześniej stosuj przepisy przejściowe nowelizacji.
 
 **Rola w systemie:** uzupełnia `mod-PZP-zamowienia-publiczne-KIO.md`
 sekcję 8 (Środki ochrony prawnej, poziom ogólny: zakres, treść
@@ -132,12 +127,16 @@ Oddział 12 — Zakaz zawarcia umowy (577 i dalej)
 ### 6. DOWODY — PREKLUZJA I ZASADY (art. 535-541)
 
 ```
-⚡ ZMIANA OD 12.06.2026 (nowelizacja deregulacyjna, art. 28 ustawy z
-  21.05.2025) — ⭐⭐⭐ PREKLUZJA DOWODOWA: nowe brzmienie art. 535 §1 —
-  dowody na poparcie własnych twierdzeń [⚠️ dokładna treść progu
-  czasowego/proceduralnego NIE potwierdzona w pełni w tej sesji —
-  punkt startowy, ale KIERUNEK zmiany jednoznaczny: ograniczenie
-  możliwości spóźnionego zgłaszania dowodów]
+⚡ ZMIANA OD **13.03.2026** — art. 535 §1-3 (RZĄD 1 ELI, Dz.U. 2026 poz. 793):
+  §1 — dowody co do zasady przedstawia się wraz z odwołaniem, odpowiedzią
+  na odwołanie, przystąpieniem albo innym pismem wniesionym najpóźniej
+  w dniu poprzedzającym wyznaczoną rozprawę/posiedzenie; spóźnienie powoduje
+  utratę prawa powołania dowodu.
+  §2 — wyjątek od prekluzji: dowód można przedstawić do zamknięcia rozprawy,
+  jeżeli wcześniejsze pozyskanie nie było możliwe albo potrzeba jego powołania
+  powstała w toku postępowania. Przy rozprawie zdalnej stosuje się odpowiednio
+  art. 508 ust. 4 zd. 2.
+  §3 — nie trzeba ponownie dołączać dokumentów już znajdujących się w aktach.
 
 ⭐⭐⭐ ART. 536 — skład orzekający MOŻE ZOBOWIĄZAĆ strony ORAZ
   uczestników postępowania odwoławczego do przedstawienia DOKUMENTÓW
@@ -166,13 +165,10 @@ Oddział 12 — Zakaz zawarcia umowy (577 i dalej)
   powoływania dowodów w toku postępowania (⭐⭐⭐ bezpośrednie powiązanie
   z prekluzją z art. 535 — mechanizm sankcyjny za jej naruszenie)
 
-⭐ ROZPRAWY ZDALNE: dopuszczalne na wniosek strony; WYJĄTKI (kiedy
-  zdalna rozprawa NIE jest dopuszczalna) uregulowane w art. 535 §2
-  [⚠️ dokładne przesłanki wyjątku NIE potwierdzone w pełni w tej
-  sesji]. Przy rozprawach zdalnych stosuje się odpowiednio przepisy o
-  FORMIE przedstawiania dowodów (odesłanie do art. 508 ust. 4). Strony
-  NIE MUSZĄ załączać dokumentów JUŻ znajdujących się w aktach sprawy —
-  zwłaszcza dokumentacji postępowania o udzielenie zamówienia
+⭐ ROZPRAWA ZDALNA — art. 535 §2 NIE ustanawia zakazu ani katalogu wyjątków
+  od rozprawy zdalnej. Reguluje wyłącznie możliwość późniejszego powołania
+  dowodów oraz sposób ich przedstawiania z odesłaniem do art. 508 ust. 4 zd. 2.
+  Dokumentów już znajdujących się w aktach nie trzeba ponownie załączać.
 ```
 
 ### 7. ROZPRAWA — PRZEBIEG I ODROCZENIE (Oddział 8, art. 548-551)
@@ -286,9 +282,7 @@ praktyczna z orzecznictwa, nie z jednego konkretnego przepisu)
 - ✅ **Art. 535 §1-3 — RZĄD 1 ELI 2026-08-28:** dowody co do zasady przedstawia się z odwołaniem, odpowiedzią, przystąpieniem albo innym pismem wniesionym najpóźniej w dniu poprzedzającym wyznaczoną rozprawę/posiedzenie, pod rygorem utraty prawa ich powołania; późniejsze dowody są dopuszczalne, gdy wcześniejsze pozyskanie nie było możliwe albo potrzeba wynikła w toku postępowania. §3 zwalnia z ponownego dołączania dokumentów już znajdujących się w aktach.
 - ✅ **Art. 568a — RZĄD 1 ELI 2026-08-28:** po obaleniu w prawomocnym postępowaniu domniemania wynikającego z certyfikatu wykonawcy Prezes KIO przekazuje właściwemu podmiotowi certyfikującemu informację w terminie do 3 dni roboczych od wydania prawomocnego orzeczenia.
 - Pozostałe art. 558-568 mają charakter uzupełniający względem rdzenia modułu; przed użyciem konkretnej jednostki stosuj fresh hard gate ELI.
-- Protokół (Oddział 10, art. 569-572), koszty postępowania odwoławczego
-  (Oddział 11, art. 573-576), zakaz zawarcia umowy (Oddział 12, art.
-  577 i dalej) — całkowicie nieopracowane.
+- Protokół, koszty i zakaz zawarcia umowy pozostają poza zakresem tego modułu; ich numery artykułów należy brać z aktualnego spisu ustawy, bez przenoszenia orientacyjnej numeracji z tej noty.
 - Rozdział 6 (Aukcja elektroniczna, art. 227-238) i Rozdział 7 (Wybór
   najkorzystniejszej oferty, art. 239-253) — sąsiadują z Częścią A, poza
   zakresem tej naprawy.

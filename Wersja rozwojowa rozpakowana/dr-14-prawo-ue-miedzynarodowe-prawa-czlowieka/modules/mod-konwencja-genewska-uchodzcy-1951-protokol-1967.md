@@ -12,18 +12,15 @@ POLSKA ustawa o ochronie cudzoziemców implementuje, ale nie zastępuje.)
 > ⛔ HARDGATE — zweryfikuj aktualny status zastrzeżeń/deklaracji Polski
 > na ISAP przed użyciem w piśmie.
 > Akty bazowe: Konwencja dotycząca statusu uchodźców, sporządzona w
-> Genewie 28.07.1951 — Dz.U. 1991 nr 119 poz. 515; Protokół dotyczący
-> statusu uchodźców, sporządzony w Nowym Jorku 31.01.1967 — Dz.U. 1991
-> nr 119 poz. 517 [⚠️ numer pozycji Protokołu NIEPOTWIERDZONY wprost w
-> tej sesji — źródła potwierdzają JEDNOZNACZNIE poz. 515 dla Konwencji
-> i poz. 516 dla aktu przystąpienia/oświadczeń, numer samego Protokołu
-> wymaga dodatkowej weryfikacji]. Polska ratyfikowała oba akty w 1991 r.
-> (przystąpienie 26.11.1991, wg źródeł wtórnych).
-> ⚠️ [NIEWERYFIKOWANE RZĄD 1] — ISAP zablokowany w tym środowisku;
-> RZĄD 2/3 (libr.sejm.gov.pl — biblioteka sejmowa z pełnym tekstem
-> historycznym ONZ, UNHCR Polska, prawo.pl, wikipedia — zweryfikowane
-> krzyżowo, eur-lex.europa.eu — cytowania TSUE, amnesty.org.pl — pełny
-> tekst PDF) wielokrotnie zgodne.
+> Genewie 28.07.1951 — **Dz.U. 1991 nr 119 poz. 515**; Protokół dotyczący
+> statusu uchodźców, Nowy Jork 31.01.1967 — **Dz.U. 1991 nr 119 poz. 517**.
+> Poz. 516 to oświadczenie rządowe dotyczące Konwencji, a poz. 518 —
+> oświadczenie rządowe dotyczące Protokołu.
+> ✅ **RZĄD 1 / VER 2026-08-28:** ELI potwierdza oba akty jako obowiązujące.
+> Depozytariusz ONZ: Polska przystąpiła do Konwencji 27.09.1991, a Konwencja
+> weszła wobec Polski w życie 26.12.1991; do Protokołu Polska przystąpiła
+> 27.09.1991. Nie używać daty 26.11.1991 jako daty przystąpienia — to data
+> oświadczenia rządowego.
 
 **Rola w systemie:** FUNDAMENT TRAKTATOWY dla całej krajowej regulacji
 ochrony międzynarodowej. Polska ustawa o udzielaniu cudzoziemcom ochrony
@@ -87,8 +84,7 @@ przy interpretacji przepisu krajowego w świetle jego traktatowego źródła.
   RASĘ, RELIGIĘ, OBYWATELSTWO, przynależność do OKREŚLONEJ GRUPY
   SPOŁECZNEJ LUB przekonania POLITYCZNE (⭐⭐⭐ zasada NON-REFOULEMENT —
   status normy prawa MIĘDZYNARODOWEGO o SZCZEGÓLNIE WYSOKIEJ randze,
-  część doktryny wskazuje na charakter zbliżony do ius cogens; Polska
-  jest stroną od 26.11.1991)
+  część doktryny wskazuje na charakter zbliżony do ius cogens; Polska jest związana Konwencją od 26.12.1991)
 
 ⭐⭐⭐ ART. 33 ust. 2 — DWA WYJĄTKI od zakazu refoulement (⭐⭐⭐ zamknięty
   katalog, KAŻDY wymaga INDYWIDUALNEJ oceny, NIE działa automatycznie):
@@ -227,12 +223,7 @@ SPRAWACH KARNYCH/WYKROCZENIOWYCH DOT. PRZEKROCZENIA GRANICY
 ---
 
 ## ⚠️ POZOSTAJE DO POGŁĘBIENIA (jawnie oznaczone, poza zakresem tej naprawy)
-- Numer pozycji Dz.U. dla samego Protokołu z 1967 r. (potwierdzona
-  wyłącznie Konwencja — poz. 515 — i akt przystąpienia/oświadczeń —
-  poz. 516; Protokół może mieć osobny numer, NIE ustalony w tej sesji).
-- Status zastrzeżenia geograficznego/czasowego złożonego przez Polskę
-  przy przystąpieniu (czy Polska ograniczyła się do "zdarzeń w
-  Europie") — NIE potwierdzony.
+- Zastrzeżenia/deklaracje Polski przy przystąpieniu należy sprawdzać w bieżącej karcie depozytariusza ONZ przed argumentacją opartą na konkretnym zastrzeżeniu; sama data akcesji i obowiązywania została zweryfikowana.
 - Pełny katalog klauzul ustania statusu (art. 1 lit. C pkt 1-6) i
   klauzul wyłączających (art. 1 lit. F pkt a-c) — struktura ogólna
   potwierdzona, dosłowne brzmienie wymaga odczytu ISAP.

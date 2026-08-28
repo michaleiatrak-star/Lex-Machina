@@ -1,83 +1,102 @@
-# mod-ustawa-RPO
+# Ustawa o Rzeczniku Praw Obywatelskich — RPO
 
-**Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o RPO — Dz.U. 2024 poz. 1264 t.j. | Konstytucja RP art. 208–212
-**Data weryfikacji online:** 2026-06-05
-**Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
+**Stan weryfikacji:** 2026-08-28  
+**Tekst jednolity:** Dz.U. 2024 poz. 1264  
+**Źródło kanoniczne:** ELI/ISAP  
+**Zakres:** ustawa z 15.07.1987 r. o Rzeczniku Praw Obywatelskich + konstytucyjny kontekst art. 208–212 Konstytucji RP.
 
----
+## 1. Bramka źródłowa
 
-## 1. CORE
+ELI: `https://eli.gov.pl/eli/DU/2024/1264/ogl`
 
-### Zakres
-Rzecznik Praw Obywatelskich — organ konstytucyjny chroniący wolności i prawa człowieka i obywatela; uprawnienia (badanie spraw, żądanie informacji, udział w postępowaniu, wniosek do TK, kasacja nadzwyczajna do SN, wniosek do NSA); wniosek do RPO; sygnaliści (RPO jako organ przyjmujący zgłoszenia zewnętrzne).
+Tekst jednolity uwzględnia m.in. zmiany wynikające z ustawy o ochronie sygnalistów ogłoszone przed 14.08.2024. Przed cytowaniem konkretnej jednostki pobierz aktualny tekst z ELI/ISAP i sprawdź późniejsze zmiany.
 
-### Akty
+## 2. Zakres ustawy
 
-| Akt | Dz.U. |
-|---|---|
-| Ustawa o Rzeczniku Praw Obywatelskich | Dz.U. 2024 poz. 1264 t.j. |
-| Konstytucja RP art. 208–212 | Dz.U. 1997 nr 78 poz. 483 |
-| Ustawa o ochronie sygnalistów (RPO jako organ zewnętrzny) | Dz.U. 2024 poz. 928 |
+RPO stoi na straży wolności i praw człowieka i obywatela określonych w Konstytucji oraz innych aktach normatywnych, w tym realizacji zasady równego traktowania.
 
----
+### Intake
 
-## 2. INTAKE
+Ustal:
+- jakie prawo lub wolność zostały naruszone;
+- przez jaki organ / podmiot wykonujący zadania publiczne;
+- czy sprawa ma charakter indywidualny czy systemowy;
+- czy istnieje równoległy środek procesowy i czy biegnie termin;
+- czy sprawa dotyczy sygnalisty / równego traktowania / praw dziecka;
+- jaki skutek praktyczny ma przynieść interwencja RPO.
 
-```
-□ Jaki problem: naruszenie prawa / wolności przez organ władzy publicznej?
-□ Czy wyczerpano zwykłe środki odwoławcze (odwołanie, skarga do WSA)?
-□ Czy naruszenie ma charakter indywidualny czy systemowy?
-□ Jaka jest pilność sprawy?
-□ Czy sprawa dotyczy zgłoszenia sygnalistycznego?
-```
+## 3. Badanie sprawy — art. 12–13
 
----
+Po podjęciu sprawy Rzecznik może prowadzić własne postępowanie wyjaśniające albo zwrócić się o zbadanie sprawy do właściwych organów. W ramach własnego postępowania art. 13 daje m.in. prawo badania sprawy na miejscu oraz dostępu do materiału potrzebnego do oceny naruszenia.
 
-## 3. PROCEDURA
+**Gate dowodowy:** nie składaj do RPO samej oceny prawnej. Zestaw: zdarzenie → naruszone prawo → dokument/dowód → wcześniejsza reakcja organu → oczekiwane działanie RPO.
 
-### Wniosek do RPO
+## 4. Środki po zbadaniu sprawy — art. 14
 
-```
-Forma: pisemna lub przez internet (bip.brpo.gov.pl)
-Opłata: BEZPŁATNA
-Termin: brak terminu prekluzyjnego
-Anonimowy: RPO może nie podjąć sprawy
-Odmowa: RPO nie musi uzasadniać odmowy wszczęcia
+Po zbadaniu sprawy RPO może w szczególności:
+- wyjaśnić wnioskodawcy, że naruszenia nie stwierdzono;
+- skierować wystąpienie do organu/instytucji, gdzie stwierdził naruszenie;
+- zwrócić się do jednostki nadrzędnej;
+- żądać wszczęcia postępowania cywilnego i uczestniczyć w nim na prawach prokuratora;
+- żądać wszczęcia postępowania przygotowawczego w sprawie ściganej z urzędu;
+- zwrócić się o wszczęcie postępowania administracyjnego, wnieść skargę do sądu administracyjnego i uczestniczyć w tych postępowaniach na prawach prokuratora;
+- działać w sprawach o wykroczenia w zakresie określonym ustawą i przepisami odrębnymi;
+- wnieść nadzwyczajny środek zaskarżenia, jeżeli przewidują go przepisy odrębne.
 
-Uprawnienia RPO po wszczęciu:
-  □ Zbadanie sprawy na miejscu (w organie)
-  □ Żądanie dokumentów i wyjaśnień od każdego organu
-  □ Przystąpienie do postępowania sądowego lub administracyjnego
-  □ Wniosek do TK o zbadanie zgodności przepisów z Konstytucją (art. 191 Konstytucji)
-  □ Kasacja nadzwyczajna do SN (w sprawach cywilnych i karnych)
-  □ Skarga do NSA (w sprawach administracyjnych)
-  □ Wniosek do SN o uchwałę rozstrzygającą rozbieżności
-```
+**Nie wpisuj do pisma ogólnego hasła „RPO może wszystko zaskarżyć”.** Każdy środek procesowy wymaga sprawdzenia ustawy proceduralnej właściwej dla danego postępowania.
 
-### RPO jako organ zewnętrzny ds. sygnalistów (od 2024)
+## 5. Wystąpienie i termin reakcji — art. 15
 
-```
-RPO przyjmuje zewnętrzne zgłoszenia sygnalistów na podstawie:
-  Ustawa o ochronie sygnalistów — Dz.U. 2024 poz. 928
-Zakres: naruszenia prawa w zakresie Dyrektywy UE 2019/1937
-Formularz: bip.brpo.gov.pl → zgłoszenia sygnalistów
-```
+Jeżeli RPO skieruje wystąpienie do organu, organ ma obowiązek poinformować o podjętych działaniach lub stanowisku **bez zbędnej zwłoki, nie później niż w terminie 30 dni**. Jeżeli stanowisko nie jest satysfakcjonujące, RPO może zwrócić się do właściwej jednostki nadrzędnej.
 
----
+## 6. Kompetencje ustrojowe — art. 16
 
-## 4. STRATEGIA, DOWODY, QUALITY GATE, OUTPUT
+RPO może m.in.:
+- przedstawiać oceny i wnioski służące skutecznej ochronie praw;
+- występować do właściwych organów z wnioskami o podjęcie inicjatywy ustawodawczej albo wydanie/zmianę aktów prawnych;
+- występować do Trybunału Konstytucyjnego w sprawach objętych art. 188 Konstytucji;
+- zgłaszać udział w postępowaniu przed TK;
+- zwracać się do Sądu Najwyższego o uchwałę wyjaśniającą przepisy wywołujące rozbieżności.
 
-**Strategia:** RPO skuteczny szczególnie przy naruszeniach systemowych lub gdy organ odmawiał bezprawnie. Wniosek do RPO + równoległa skarga do WSA — dwutorowe działanie. Nie zastępuje środków odwoławczych, ale może przyspieszyć postępowanie.
+## 7. Obowiązek współdziałania — art. 17
 
-**Kiedy NIE używać:** Spory cywilne między prywatnymi podmiotami; sprawy, gdy nie wyczerpano środków odwoławczych; proste pomyłki urzędnicze łatwe do sprostowania.
+Organy, organizacje i instytucje, do których zwraca się RPO, mają obowiązek współdziałać i udzielać pomocy, w tym zapewnić dostęp do akt i dokumentów oraz udzielać informacji i wyjaśnień.
 
-**Ryzyki:** RPO może odmówić bez uzasadnienia. RPO nie ma inicjatywy ustawodawczej. Działanie RPO nie wstrzymuje postępowania.
+## 8. Równe traktowanie / dane / sygnaliści
 
-**Quality gate:** Organ władzy publicznej jako sprawca? Wyczerpanie zwykłych środków? Wniosek przez bip.brpo.gov.pl?
+Ustawa zawiera szczególne zadania RPO w obszarze równego traktowania oraz przetwarzania danych przy wykonywaniu zadań ustawowych. Jeżeli sprawa dotyczy zgłoszenia zewnętrznego sygnalisty, dołącz aktualną ustawę o ochronie sygnalistów i nie przenoś jej mechaniki do ustawy o RPO bez odczytu obu aktów.
 
-**Output:** 1. Kwalifikacja naruszenia; 2. Uprawnienie RPO; 3. Wniosek; 4. Równoległe środki; 5. Rekomendacja.
+## 9. Strategia kancelaryjna
 
-**Powiązania:** `mod-Konstytucja-TK-skarga-konstytucyjna` (DR-01) | `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-postepowanie-administracyjne.md` | `pisma-procesowe-v3`
+RPO jest dodatkowym torem ochrony, a nie automatycznym zamiennikiem odwołania, skargi, pozwu lub zawiadomienia. W każdej sprawie najpierw zabezpiecz termin właściwego środka procesowego.
 
-**Źródła:** https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20241264 | https://bip.brpo.gov.pl
+### Minimalna struktura wniosku
+
+1. dane i sposób kontaktu;
+2. zwięzły stan faktyczny;
+3. wskazane prawo/wolność;
+4. działania organu i dotychczasowe środki;
+5. załączniki/dowody;
+6. konkretna prośba o podjęcie sprawy.
+
+## 10. Routing
+
+- Konstytucja / TK → DR-01;
+- KPA / WSA / NSA → DR-05;
+- postępowanie cywilne → DR-02;
+- postępowanie karne / wykroczeniowe → DR-03;
+- sygnaliści → DR-15;
+- prawa dziecka → `mod-ustawa-RPD.md`.
+
+## 11. Quality gate
+
+- [ ] aktualny tekst Dz.U. 2024 poz. 1264 sprawdzony w ELI/ISAP;
+- [ ] środek procesowy RPO zweryfikowany także w ustawie proceduralnej;
+- [ ] biegnące terminy klienta zabezpieczone niezależnie od wniosku do RPO;
+- [ ] fakt, dowód i naruszone prawo połączone w jedną matrycę;
+- [ ] przy sygnalistach dołączono aktualną ustawę sektorową.
+
+## 12. Źródła urzędowe
+
+- ELI — ustawa o RPO, Dz.U. 2024 poz. 1264: `https://eli.gov.pl/eli/DU/2024/1264/ogl`
+- Konstytucja RP — art. 208–212: właściwy tekst urzędowy ELI/ISAP.

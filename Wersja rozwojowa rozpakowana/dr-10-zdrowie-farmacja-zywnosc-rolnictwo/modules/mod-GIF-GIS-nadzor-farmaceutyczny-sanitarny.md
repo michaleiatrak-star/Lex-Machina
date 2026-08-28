@@ -1,6 +1,6 @@
 # mod-CT-farmaceutyczne-sanitarne-gif-gis.md — Prawo farmaceutyczne, sanitarne, GIF/GIS
 
-Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ISAP / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
+Status: moduł prawa polskiego klasy wzorcowej. **RZĄD 1 VER 2026-08-28:** Prawo farmaceutyczne — Dz.U. 2026 poz. 612 t.j.; Państwowa Inspekcja Sanitarna — **Dz.U. 2024 poz. 416 t.j. ze zm.** (ELI nadal wskazuje ten t.j.; po t.j. istnieje nowelizacja, dlatego przed cytatem używaj tekstu ujednoliconego).
 
 ## 1. Akty i źródła do weryfikacji
 - Prawo farmaceutyczne
@@ -160,6 +160,58 @@ Przed odpowiedzią lub pismem zastosuj:
 - `shared/LEGAL-QUALITY-GATE.md`,
 - `shared/RISK-ASSESSMENT.md`, jeżeli istnieje,
 - `shared/FORMAL-CHECK.md`, jeżeli powstaje pismo.
+
+---
+
+## SEKCJA GIS / PAŃSTWOWA INSPEKCJA SANITARNA — RZĄD 1
+
+**Akt:** ustawa z 14.03.1985 r. o Państwowej Inspekcji Sanitarnej,
+Dz.U. 2024 poz. 416 t.j. ze zm. — VER ELI 2026-08-28.
+
+### Zadania i właściwość
+
+- **art. 1-2:** PIS realizuje zadania zdrowia publicznego przez nadzór m.in.
+  nad higieną środowiska i pracy, higieną nauczania, warunkami żywności,
+  kosmetyków i podmiotów leczniczych; wykonuje nadzór zapobiegawczy,
+  bieżący, przeciwepidemiczny i działalność oświatowo-zdrowotną.
+- **art. 3-4:** zakres zapobiegawczego i bieżącego nadzoru obejmuje m.in.
+  planowanie przestrzenne, obiekty budowlane, wodę, żywność, zakłady pracy,
+  obiekty użyteczności publicznej, transport i warunki udzielania świadczeń.
+- **art. 12:** co do zasady organem właściwym w KPA jest państwowy
+  powiatowy albo graniczny inspektor sanitarny; organem wyższego stopnia
+  wobec nich jest państwowy wojewódzki inspektor sanitarny, a wobec
+  wojewódzkiego — **Główny Inspektor Sanitarny**. Art. 12 ust. 1a przewiduje
+  kompetencje wojewódzkiego inspektora m.in. w higienie radiacyjnej i
+  określonych sprawach inżynierii genetycznej.
+
+### Kontrola i decyzje
+
+- **art. 25:** inspektor/GIS ma w związku z kontrolą prawo wejścia m.in. do
+  zakładów pracy, obiektów użyteczności publicznej, nieruchomości, środków
+  transportu i obiektów w budowie; może żądać informacji i dokumentów,
+  przesłuchiwać osoby oraz pobierać próbki.
+- **art. 26:** wejście do mieszkania jest dopuszczalne tylko w ustawowo
+  wskazanych sytuacjach; mieszkania osób objętych immunitetem dyplomatycznym
+  wymagają porozumienia z właściwym przedstawicielem dyplomatycznym.
+- **art. 27 ust. 1:** przy naruszeniu wymagań higienicznych/zdrowotnych
+  inspektor nakazuje decyzją usunięcie uchybień w terminie.
+- **art. 27 ust. 2:** przy bezpośrednim zagrożeniu życia lub zdrowia może
+  nakazać m.in. unieruchomienie zakładu/części, zamknięcie obiektu,
+  wyłączenie środka transportu albo wycofanie produktu z obrotu; przy
+  konkretnej decyzji sprawdź aktualny pełny katalog i rygor wykonalności.
+- **art. 28:** sprzeciw wobec uruchomienia obiektu / technologii może
+  wstrzymać dalsze działania do rozstrzygnięcia przez organ wyższego stopnia.
+- **art. 29:** zabezpieczenie pomieszczeń, urządzeń, produktów i substancji;
+  w nieuregulowanym zakresie odwołanie do egzekucji administracyjnej.
+- **art. 29a:** informacje objęte prawnie chronioną tajemnicą kontrolowanego
+  podlegają ograniczeniom ujawnienia, z wyjątkami ustawowymi.
+- **art. 30-31a:** zawiadomienia o istotnych uchybieniach, książka kontroli
+  oraz kompetencje interwencyjne GIS — stosuj aktualny tekst ujednolicony.
+
+⛔ **Rozgraniczenie:** „Sanepid” nie oznacza automatycznie GIS jako organu
+I instancji. Najpierw ustal rzeczową i miejscową właściwość konkretnego
+państwowego inspektora oraz przepis szczególny (żywność, choroby zakaźne,
+chemikalia, kosmetyki, działalność lecznicza itd.).
 
 ---
 

@@ -1,117 +1,74 @@
-# Moduł [M] — Prawo Nieruchomości
+# mod-UGN-gospodarka-nieruchomosciami
 
-> ✅ FAZA 3E [F-40] — 2026-08-20: przegląd tego pliku wykazał, że MIMO
-> nazwy pliku (`mod-UGN-gospodarka-nieruchomosciami.md`) TREŚĆ nie cytuje
-> nigdzie samej ustawy o gospodarce nieruchomościami (UGN, Dz.U. 2026
-> poz. 399 t.j.) — moduł dotyczy w całości umowy deweloperskiej, MRP/DFG,
-> wspólnoty mieszkaniowej, ochrony lokatorów, KC i ksiąg wieczystych.
-> Weryfikacja treści UGN pod kątem nowelizacji (przedmiot pierwotny
-> flagi F-40) została WYKONANA w module
-> `mod-PrGeodezyjne-kartografia-wywlaszczenia.md` (sekcja źródeł), gdzie
-> UGN jest faktycznie cytowana (art. 112-113, wywłaszczenie). ⚠️ Nazwa
-> tego pliku jest MYLĄCA względem jego rzeczywistej zawartości —
-> odnotowane jako obserwacja dla przyszłego audytu (ewentualna zmiana
-> nazwy na nazwę odzwierciedlającą rzeczywisty zakres: deweloper / wspólnota / najem),
-> NIE otwarto z tego powodu nowej flagi w tej sesji.
+**Stan operacyjny:** 2026-08-28  
+**Źródło kanoniczne:** ELI — ustawa z 21.08.1997 r. o gospodarce nieruchomościami, Dz.U. 2026 poz. 399 t.j., status obowiązujący; data stanu prawnego tekstu jednolitego: 10.03.2026.
 
-**Zakres:** Zakup nieruchomości (due diligence KW, hipoteka), rękojmia przy
-nieruchomościach, umowa deweloperska (ustawa 2021 ze zm.), mieszkaniowy rachunek
-powierniczy (MRP), Deweloperski Fundusz Gwarancyjny (DFG), wspólnota mieszkaniowa
-(uchwały, zarząd, fundusz remontowy), najem (ochrona lokatorów), zasiedzenie,
-służebności.
+## Zakres
 
-**Weryfikacja:** 22.05.2026
-**Akty w wersji obowiązującej — weryfikuj przed każdym powołaniem:**
-- Ustawa deweloperska: **Dz.U. 2026 poz. 880 t.j.** (zm. Dz.U. 2025 poz. 758, Dz.U. 2026 poz. 27)
-- Ustawa o własności lokali: **Dz.U. 2021 poz. 1048** — weryfikuj aktualną wersję w isap
-- Ustawa o ochronie praw lokatorów: **Dz.U. 2023 poz. 725** (zm. Dz.U. 2025 poz. 413)
-- KC (zasiedzenie, rękojmia, służebności): **Dz.U. 2026 poz. 795 t.j.**
-- Ustawa o KW i hipotece: **Dz.U. 2026 poz. 1066 t.j.**
+Moduł obejmuje rzeczywistą materię UGN: gospodarowanie nieruchomościami publicznymi, podziały i scalania, pierwokup, wywłaszczenie i zwrot, udział w kosztach infrastruktury, wycenę nieruchomości oraz działalność zawodową w gospodarowaniu nieruchomościami.
 
----
+Nie obejmuje jako głównego zakresu umów deweloperskich, wspólnot mieszkaniowych ani najmu — te materie mają odrębne moduły.
 
-## ZASADY ABSOLUTNE
+## Mapa ustawy
 
-1. **UMOWA DEWELOPERSKA = AKT NOTARIALNY** (art. 35 ust. 1 ustawy deweloperskiej
-   Dz.U. 2024 poz. 695). Brak aktu = nieważność bezwzględna.
-   MRP (mieszkaniowy rachunek powierniczy) — obowiązek od 01.07.2022.
-   Deweloperski Fundusz Gwarancyjny (DFG) — dodatkowe zabezpieczenie nabywcy.
-
-2. **KSIĘGA WIECZYSTA — SPRAWDŹ ZAWSZE PRZED ZAKUPEM:**
-   ekw.ms.gov.pl → Dział III (obciążenia, roszczenia, ograniczenia) · Dział IV (hipoteki).
-   Rękojmia wiary publicznej KW chroni nabywcę działającego w dobrej wierze.
-
-3. **EKSMISJA LOKATORA — ZAKAZ ZIMOWY (art. 16 ustawy o ochronie lokatorów):**
-   Wyroki nakazujące opróżnienie lokalu NIE podlegają wykonaniu od 1 listopada
-   do 31 marca roku następnego **włącznie**, jeżeli eksmitowanemu nie wskazano lokalu
-   do przekwaterowania.
-   **Wyjątki — zakaz NIE dotyczy:**
-   - stosowania przemocy w rodzinie
-   - rażącego lub uporczywego naruszania porządku domowego
-   - zajęcia lokalu bez tytułu prawnego
-
-4. **WSPÓLNOTA MIESZKANIOWA — UCHWAŁY (art. 23 ust. 2 uWŁ):**
-   Zapadają większością głosów **liczoną udziałami** (nie głowami właścicieli).
-   Zaskarżenie uchwały — **art. 25 ust. 1a uWŁ:**
-   Termin **6 tygodni** od:
-   - dnia podjęcia uchwały na zebraniu ogółu właścicieli, ALBO
-   - dnia powiadomienia o treści uchwały podjętej w trybie indywidualnego zbierania głosów
-   ⚠️ Termin zawity — nieprzywracalny. Po upływie uchwała wiąże.
-
-5. **ODSTĄPIENIE OD UMOWY DEWELOPERSKIEJ — 12 PRZYPADKÓW (art. 43 ust. 1 ustawy):**
-   Nie 5 przypadków, lecz **12** — w tym m.in.:
-   - brak wymaganych elementów umowy (pkt 1)
-   - niezgodność z prospektem informacyjnym (pkt 2)
-   - brak lub niezgodny prospekt (pkt 3, 4, 5)
-   - **nieprzenie­sienie praw w terminie** → nabywca wyznacza **120 dni** (pkt 6)
-   - brak lub utrata MRP (pkt 7, 9)
-   - brak zgody wierzyciela hipotecznego (pkt 8)
-   - wada istotna nieusunięta przez dewelopera (pkt 10, 11)
-   - żądanie syndyka wykonania umowy (pkt 12)
-   Dla pkt 1–5: prawo odstąpienia w ciągu **30 dni** od zawarcia umowy.
-
----
-
-## KLUCZOWE AKTY PRAWNE — AKTUALNE SYGNATURY
-
-| Akt | Tekst jednolity | Uwagi |
+| Dział | Zakres | Status |
 |---|---|---|
-| Ustawa deweloperska (2021) | Dz.U. 2026 poz. 880 t.j. | Zm. Dz.U. 2025 poz. 758 (jawność cen), Dz.U. 2026 poz. 27 |
-| Ustawa o własności lokali | Dz.U. 2021 poz. 1048 | Weryfikuj w isap — brak nowszego t.j. potwierdzony |
-| Ustawa o ochronie lokatorów | Dz.U. 2023 poz. 725 | Zm. Dz.U. 2025 poz. 413 |
-| KC (rękojmia, zasiedzenie) | Dz.U. 2026 poz. 795 t.j. | Art. 172 (zasiedzenie), art. 568 (rękojmia) |
-| Ustawa o KW i hipotece | Dz.U. 2026 poz. 1066 t.j. | Art. 5 (rękojmia wiary publ. KW) |
+| I | przepisy ogólne | 🟢 B+ / COV |
+| II | gospodarowanie nieruchomościami Skarbu Państwa i JST | 🟢 B+ / COV |
+| III | wykonywanie, ograniczanie lub pozbawianie praw do nieruchomości | 🟢 B+ / COV |
+| IV | wycena nieruchomości | 🟢 B+ / COV |
+| V | działalność zawodowa w dziedzinie gospodarowania nieruchomościami | 🟢/🟡 B+ |
+| VI i przepisy końcowe | przepisy szczególne, przejściowe i końcowe — kontrola temporalna |
 
----
+## Dział II — nieruchomości publiczne
 
-## SZCZEGÓŁOWY FRAMEWORK
+Przy nieruchomości Skarbu Państwa lub JST ustal:
 
-Poszczególne zagadnienia obsługują istniejące moduły kanoniczne (lazy loading —
-wczytaj wg potrzeby sprawy):
+```text
+□ właściciela publicznego i organ reprezentujący
+□ czy istnieje wymóg zgody organu stanowiącego / wojewody / innego organu
+□ tryb zbycia lub oddania do korzystania
+□ czy wymagany jest przetarg i czy zachodzi ustawowy wyjątek
+□ podstawę ceny/opłaty i ewentualnej bonifikaty
+□ trwały zarząd, użytkowanie wieczyste albo inne prawo właściwe dla sprawy
+```
 
-- due diligence nieruchomości (4 działy KW, EGIB, MPZP) — `mod-PrGeodezyjne-kartografia-wywlaszczenia.md`
-  (ten skill) oraz `dr-08-samorzad-terytorialny-prawo-lokalne/modules/mod-MPZP-WZ-planowanie-przestrzenne.md`
-- umowa deweloperska (12 przypadków odstąpienia, MRP, DFG, roszczenia nabywcy) —
-  `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-deweloperska.md`
-- rękojmia (wady fizyczne i prawne — termin 5 lat od wydania/stwierdzenia wady),
-  zasiedzenie (20/30 lat + ograniczenia dla nieruchomości rolnych — PEŁNE
-  opracowanie: `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-
-  rzeczy-znalezione-zasiedzenie.md`, dodane 2026-07-18), służebności —
-  KC, sekcja powyżej w tym module + `shared/ROSZCZENIA.md`
-- wspólnota mieszkaniowa (uchwały, zarząd, windykacja zaległości) i najem
-  (umowa, wypowiedzenie, ochrona lokatora, eksmisja + wyjątki od zakazu zimowego) —
-  `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-spoldzielnie-wlasnosc-lokali.md`
-  oraz KC (najem) w module powyżej
+Nie przenoś reguł zwykłego obrotu prywatnego z KC na nieruchomości publiczne bez kontroli UGN.
 
----
+## Dział III — ingerencja w prawa do nieruchomości
 
-## ŁĄCZ Z
+Dział III obejmuje m.in. podziały, scalania i podziały, pierwokup, wywłaszczenie, ograniczenia sposobu korzystania, zwrot nieruchomości wywłaszczonych oraz opłaty związane z infrastrukturą.
 
-| Sytuacja | Skill / Moduł |
-|---|---|
-| Analiza umowy deweloperskiej / najmu / WM | `analizator-umow-v1` |
-| Pozew / wniosek o eksmisję / zasiedzenie | `pisma-procesowe-v3` |
-| Zaskarżenie uchwały WM (prosta) | `pisma-proste-v2` |
-| Orzecznictwo SN o KW / nieruchomościach | `orzeczenia-sadowe-v2` |
-| Nieruchomość w spadku | `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-spadki.md` |
-| Spółka deweloperska / upadłość dewelopera | `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KSH-spolki-handlowe.md` |
+### Wywłaszczenie
+
+Przed analizą sprawdź aktualne przesłanki celu publicznego, właściwość organu, etap rokowań, zakres dopuszczalnego pozbawienia/ograniczenia prawa, odszkodowanie oraz tryb zwrotu. Nie zakładaj, że każda inwestycja publiczna podlega klasycznemu UGN — specustawy mogą tworzyć odrębny reżim.
+
+### Podział nieruchomości
+
+Ustal relację z MPZP/WZ, dostępem do drogi publicznej, wyjątkami ustawowymi i skutkami decyzji podziałowej. Dla podziałów dokonywanych w szczególnych trybach użyj właściwej specustawy.
+
+### Opłata adiacencka
+
+Przy opłacie adiacenckiej ustal zdarzenie powodujące wzrost wartości, podstawę uchwały lokalnej, termin ustawowy, opinię rzeczoznawcy i aktualną maksymalną stawkę dla właściwego wariantu. Nie utrwalaj jednego procentu dla wszystkich przypadków.
+
+## Dział IV — wycena nieruchomości
+
+Wycena wymaga ustalenia celu, rodzaju wartości i właściwego podejścia/metody zgodnie z ustawą i przepisami wykonawczymi. Operat szacunkowy i jego aktualność oceniaj według obowiązujących przepisów, nie według stałego okresu wpisanego z pamięci.
+
+## Dział V — działalność zawodowa
+
+Przy rzeczoznawcy majątkowym ustal aktualne wymagania uprawnień, wpisu do rejestru, obowiązki zawodowe i odpowiedzialność. Przy pośrednictwie/zarządzaniu nieruchomościami sprawdź, które obowiązki ustawowe nadal wynikają z UGN, a które z innych przepisów lub umowy.
+
+## Routing
+
+- własność / umowa prywatna / zasiedzenie → DR-02 KC;
+- księgi wieczyste i hipoteka → DR-02 moduł KW/H;
+- wspólnota mieszkaniowa → ustawa o własności lokali;
+- najem / eksmisja → ustawa o ochronie praw lokatorów + KC/KPC;
+- MPZP/WZ → DR-08/09 planowanie przestrzenne;
+- specustawy inwestycyjne → DR-09;
+- odwołanie od decyzji administracyjnej → KPA/PPSA, DR-05.
+
+## Fresh gate
+
+Przed podaniem przesłanki przetargu, bonifikaty, pierwokupu, wywłaszczenia, zwrotu, opłaty adiacenckiej, terminu albo reguły wyceny pobierz aktualny tekst ELI/ISAP dla Dz.U. 2026 poz. 399 i sprawdź późniejsze zmiany oraz właściwe przepisy wykonawcze.

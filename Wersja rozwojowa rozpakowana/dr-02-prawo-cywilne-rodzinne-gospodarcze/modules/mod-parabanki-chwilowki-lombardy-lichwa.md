@@ -1,8 +1,7 @@
 # Parabanki, chwilówki, lombardy i lichwa
 v1.0.0 (dodany 2026-08-05, na żądanie użytkownika)
 
-Zweryfikowano 2026-08-05 (ZASADA 14): Rząd 2B — KNF (Rząd 1),
-gov.pl/premier (Rząd 1, projekt ustawy), liczne kancelarie
+Zweryfikowano ponownie 2026-08-28 (ZASADA 14): KNF + RZĄD 1 ELI. **Ustawa o konsumenckiej pożyczce lombardowej NIE jest projektem: obowiązuje, t.j. Dz.U. 2024 poz. 1111.** Wcześniejszy status projektowy był błędny/przestarzały. Pomocniczo użyto także źródeł branżowych:
 adwokackie, portale finansowe, isap.sejm.gov.pl.
 
 ---

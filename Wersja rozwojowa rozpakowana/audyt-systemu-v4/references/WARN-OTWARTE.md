@@ -1,24 +1,22 @@
 # WARN-OTWARTE — rejestr żywy otwartych flag audytowych
 
-**Stan:** 2026-08-27. Ten plik zawiera wyłącznie zakres pozostający do
-wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md`.
+**Stan:** 2026-08-28. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
 
 ## Tablica sterująca
 
 | Kategoria | Liczba | Pozycje |
 |---|---:|---|
-| Wykonalne sesją audytową | 3 | F-86, F-108, F-135 |
+| Wykonalne sesją audytową | 2 | F-135, F-138 |
 | Reaktywne | 1 | F-5 |
 | Zależne od środowiska/dewelopera | 7 | F-8, F-9, F-11, F-94, F-113, F-133, F-137 |
-| **Razem** | **11** | — |
+| **Razem** | **10** | — |
 
 ## Wykonalne sesją audytową
 
 | Flaga | Priorytet | Pozostały zakres | Kryterium zamknięcia |
 |---|---|---|---|
-| F-86 | niski | Uzupełnić dalsze odrębne postępowania upadłościowe od art. 426; dotychczasowy moduł jest mapą nawigacyjną, nie pełnym opracowaniem całego zakresu flagi. | Pozostałe zakresy opisane i mapa pokrycia odświeżona; kontrola treści jednostek odrębna od kontroli metryki. |
-| F-108 | wysoki | Źródło MS/BIP: 52 akty, ponowny odczyt 2026-08-27. **Etap 3 zakończony:** wszystkie P1/P2/P3 mają dedykowane moduły ≥ B; nominalnie A=52/B=0/C=0/D=0. Pozostaje wyłącznie Etap 2: treściowy audyt 52 aktów/zakresów bez utożsamiania obecności modułu z kompletnością. | Pełne warunki i rejestr 52 pozycji w `F-108-lista-MS-egzamin-2026.md`; flaga OTWARTA do zamknięcia Etapu 2. |
-| F-135 | średni | Dokończyć cross-check wartości prawnych w pozostałych DR, elementów unikalnych oraz `shared`. Batch 2 skorygował PUSA, POŚ, PKPiR, Prawo lotnicze i timeshare oraz dodał kontrolę tytułu aktu. | Zero nieuzasadnionych rozbieżności albo jawne oznaczenie nieweryfikowalnych pozycji. |
+| F-135 | średni | Dokończyć cross-check wartości prawnych w pozostałych DR, elementów unikalnych oraz `shared`; każdą rozbieżność rozstrzygnąć w źródle urzędowym albo jawnie oznaczyć jako nieweryfikowalną. | Zero nieuzasadnionych rozbieżności albo jawne oznaczenie nieweryfikowalnych pozycji. |
+| F-138 | wysoki | Domknąć techniczną migrację runtime do modelu current-state-only: selektywnie oczyścić pozostałe `MAPA-AKTOW.md` z narracji historycznej, zsynchronizować routing nowych COV, zarejestrować końcowe wersje `audyt-systemu-v4` i `prawny-router-v3` w `SKILL.md` + `references/CHANGELOG.md`, a następnie wykonać realny test spójności. | Brak historycznych statusów w mapach runtime objętych migracją, zgodne wersje/changelogi, F-108 nie figuruje jako otwarta, a końcowy cross-check nie wykazuje sprzeczności blokujących. |
 
 ## Reaktywne
 
@@ -34,11 +32,18 @@ wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md`.
 | F-9 | Wdrożyć znacznik `AUDIT_EVENT`, parser i politykę retencji w portalu. |
 | F-11 | Uruchomić `extract_api_verification_log.py` na prawdziwej odpowiedzi API zawierającej wywołania narzędzi. |
 | F-94 | Rozstrzygnąć rejestrację `KONEKTORY-REKOMENDOWANE.md`, status `shared/tools/mcp-servers/` i możliwy duplikat checklisty contradiction-intelligence. |
-| F-113 | Niezależny preflight 2026-08-26: `NIEMIERZALNE`. Potrzebne izolowane manifesty A/B, kontrola sieci T1/T2, autorytatywne logi narzędzi i identyfikator backendu. Dowód: `F-113-PREFLIGHT-2026-08-26.md`. |
-| F-133 | `NIEMIERZALNE` w tym hoście razem z F-113; brak warunków do pomiaru B5-e2 i wpływu reguł routera. |
-| F-137 | Procedura i pozycja 13 są wdrożone; pozostał test akceptacyjny zapisu wydzielonej sekcji w hoście z natywną pamięcią trwałą. Bieżący host nie udostępnia takiego capability. |
+| F-113 | Potrzebne izolowane manifesty A/B, kontrola sieci T1/T2, autorytatywne logi narzędzi i identyfikator backendu do wykonania mierzalnego testu skuteczności bramek. |
+| F-133 | Brak warunków środowiskowych do pomiaru B5-e2 i wpływu reguł routera; zależne od warunków F-113. |
+| F-137 | Pozostał test akceptacyjny zapisu wydzielonej sekcji w hoście z natywną pamięcią trwałą. |
 
-## Zamknięcia z bieżącej sesji
+## Zamknięty benchmark bieżącej sesji
 
-F-10, F-48, F-82, F-83, F-88, F-102, F-104, F-106, F-110, F-125 i F-136 zostały
-zamknięte 2026-08-26. Szczegóły i dowody reprodukcji: `AUDIT-JOURNAL.md`.
+F-108 nie jest flagą otwartą: benchmark 52 aktów ma bieżący wynik **52/52 B+/COV**. `COV` nie oznacza `FULL`; dalsza walidacja głębokości należy do zwykłej pracy jakościowej i F-135, a nie do ponownego otwierania F-108.
+
+## Zasada map runtime
+
+- `MAPA-AKTOW.md` = aktualny akt → moduł;
+- `MAPA-POKRYCIA.md` = aktualny faktyczny poziom pokrycia;
+- mapy runtime nie przechowują baseline/delta ani historii dawnych luk;
+- historia zmian trafia wyłącznie do `AUDIT-JOURNAL.md` / `CHANGELOG.md`;
+- każda konkretna jednostka prawa nadal wymaga fresh gate do źródła urzędowego.

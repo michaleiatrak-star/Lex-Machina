@@ -1,145 +1,95 @@
 ---
 module: prawo-spoldzielcze
-version: "1.0"
-verified_on: "2026-08-27"
-coverage: "B — pełna mapa struktury + rdzeń ustrojowy"
+verified_on: "2026-08-28"
+coverage: "B+ / COV — pełna mapa głównych części i procedur operacyjnych"
 source_policy: "RZĄD 1 only"
 ---
 
 # Prawo spółdzielcze — F-108/13
 
-## 1. Źródło
+## Źródło kanoniczne
 
-Ustawa z 16 września 1982 r. — Prawo spółdzielcze.
-Aktualny tekst jednolity: **Dz.U. 2026 poz. 521**.
+Ustawa z 16.09.1982 r. — Prawo spółdzielcze. Aktualny tekst jednolity: **Dz.U. 2026 poz. 521**; ELI oznacza akt jako obowiązujący, data stanu prawnego tekstu jednolitego: 23.03.2026.
 
-Źródło urzędowe RZĄD 1:
-- https://eli.gov.pl/eli/DU/2026/521/ogl
-- https://eli.gov.pl/api/acts/DU/2026/521/text/O/D20260521.pdf
+Przed zastosowaniem konkretnego przepisu odczytaj aktualny tekst ujednolicony ELI i późniejsze zmiany. Moduł jest mapą operacyjną, nie źródłem prawa.
 
-Przed zastosowaniem konkretnego przepisu ponownie odczytaj jego aktualne
-brzmienie i późniejsze zmiany. Ten moduł jest mapą operacyjną, nie źródłem prawa.
+## Mapa aktu
 
-## 2. Mapa ustawy
+### Część I — Spółdzielnie
 
-### Część I — SPÓŁDZIELNIE
-**Tytuł I — przepisy wspólne**
-1. spółdzielnia i statut;
-2. zakładanie i rejestracja;
-3. członkowie, prawa i obowiązki;
-4. organy spółdzielni;
-5–6. zakresy historycznie częściowo uchylone;
-7. gospodarka spółdzielni;
-8. lustracja;
-9. łączenie;
-10. zakres częściowo uchylony;
-11. podział;
-12. likwidacja;
-13. upadłość.
+**Tytuł I — przepisy wspólne:**
+- spółdzielnia i statut;
+- zakładanie i rejestracja;
+- członkowie, ich prawa i obowiązki;
+- organy spółdzielni i uchwały;
+- gospodarka spółdzielni;
+- lustracja;
+- łączenie i podział;
+- likwidacja;
+- upadłość;
+- zakresy uchylone/historyczne — traktowane wyłącznie temporalnie.
 
-**Tytuł II — przepisy szczególne** obejmuje m.in. spółdzielnie produkcji
-rolnej, kółek rolniczych i spółdzielnie pracy.
+**Tytuł II — przepisy szczególne:** regulacje szczególne dla wybranych typów spółdzielni, w tym rolniczych i pracy.
 
 ### Część II
 Związki spółdzielcze i Krajowa Rada Spółdzielcza.
 
 ### Część IIA
-Przepisy karne.
+Przepisy karne — routing do DR-03 przy kwalifikacji odpowiedzialności.
 
 ### Część III
 Zmiany w przepisach oraz przepisy przejściowe i końcowe.
 
-## 3. Rdzeń ustrojowy
+## Bramka ustrojowa
 
-Art. 1 §1 definiuje spółdzielnię jako dobrowolne zrzeszenie nieograniczonej
-liczby osób, o zmiennym składzie osobowym i funduszu udziałowym, prowadzące
-wspólną działalność gospodarczą w interesie członków.
+```text
+1. Ustal typ spółdzielni i ustawę szczególną, jeżeli istnieje.
+2. Pobierz statut w aktualnym brzmieniu i skonfrontuj go z art. 5.
+3. Ustal status członka i właściwy tryb wewnątrzspółdzielczy.
+4. Ustal właściwy organ: walne zgromadzenie, rada nadzorcza, zarząd albo organ statutowy.
+5. Przy uchwale sprawdź kompetencję, tryb podjęcia, legitymację do zaskarżenia i termin.
+6. Przy reorganizacji rozdziel łączenie, podział, likwidację i upadłość.
+```
 
-Art. 2 wiąże działalność spółdzielni z ustawą, innymi ustawami i
-zarejestrowanym statutem.
+## Członkostwo
 
-Art. 5 określa obowiązkowe elementy statutu. Przy sporządzaniu lub audycie
-statutu nie używaj skróconej listy z tego modułu — odczytaj pełny art. 5.
+Analiza członkostwa obejmuje przyjęcie, deklarację, prawa informacyjne i korporacyjne, obowiązki, udziały, ustanie członkostwa, wykluczenie i wykreślenie. Nie przenoś mechanicznie reguł KSH na spółdzielnię.
 
-Art. 6 reguluje założenie spółdzielni i wybór organów. Aktualny tekst
-przewiduje odmienne minima założycieli zależnie od ich rodzaju i rodzaju
-spółdzielni; zawsze odczytaj cały art. 6 dla konkretnej konfiguracji.
+## Organy i uchwały
 
-## 4. Członkostwo
+Przy każdej uchwale sprawdź:
+- kompetencję organu;
+- prawidłowość zwołania i zawiadomienia;
+- quorum i sposób głosowania według ustawy/statutu;
+- podstawę zaskarżenia;
+- właściwy sąd i termin.
 
-Przy analizie członkostwa rozdziel:
-- przyjęcie i deklarację;
-- prawa członka;
-- obowiązki i udziały;
-- ustanie członkostwa, wykluczenie i wykreślenie;
-- tryb wewnątrzspółdzielczy i sądowy.
+Terminów nie utrwalaj z pamięci — odczytaj właściwy przepis dla konkretnej uchwały.
 
-Art. 18 zawiera katalog podstawowych praw i obowiązków członka, m.in. prawa
-informacyjne. Odmowa udostępnienia określonych umów może podlegać kontroli
-sądu rejestrowego w terminie ustawowym — termin każdorazowo odczytaj z
-aktualnego przepisu.
+## Lustracja
 
-## 5. Organy i uchwały
+Dział VIII stanowi odrębny blok operacyjny. Ustal podmiot przeprowadzający lustrację, okres objęty badaniem, protokół, wnioski polustracyjne i relację ze związkiem rewizyjnym albo Krajową Radą Spółdzielczą. Częstotliwość zależy od wariantu ustawowego — fresh gate obowiązkowy.
 
-Przy każdej sprawie ustal właściwość:
-- walnego zgromadzenia;
-- rady nadzorczej;
-- zarządu;
-- ewentualnych innych organów statutowych dopuszczonych ustawą.
+## Reorganizacja i niewypłacalność
 
-Kontrola uchwały wymaga osobnego ustalenia legitymacji, terminu i podstawy
-powództwa. Nie przenoś automatycznie zasad KSH na spółdzielnię.
+Łączenie, podział, likwidacja i upadłość są odrębnymi procedurami. Przy podziale i łączeniu dołącz KRS; przy upadłości — Prawo upadłościowe. Nie traktuj uchwały reorganizacyjnej jako samowystarczalnego skutku poza rejestrem.
 
-## 6. Lustracja
+## Spółdzielnie pracy
 
-Dział VIII reguluje lustrację działalności spółdzielni. Ustal:
-- czy spółdzielnia jest zrzeszona w związku rewizyjnym;
-- podmiot przeprowadzający lustrację;
-- okres objęty badaniem;
-- protokół i wnioski polustracyjne;
-- właściwość Krajowej Rady Spółdzielczej wobec spółdzielni niezrzeszonych.
+Przy spółdzielni pracy odróżnij członkostwo od stosunku pracy. Przepisy szczególne Prawa spółdzielczego mogą modyfikować reguły ogólne prawa pracy — routing do DR-04 jest obowiązkowy przy sporach pracowniczych.
 
-Nie podawaj częstotliwości z pamięci — zależy ona od wariantu ustawowego.
+## Rozgraniczenie
 
-## 7. Łączenie, podział, likwidacja, upadłość
-
-To odrębne procedury. Przy reorganizacji nie traktuj ich jako jednego trybu.
-Dla podziału zweryfikuj m.in. uchwałę, plan podziału, rejestr i skutki dla
-majątku/członków. Dla upadłości uruchom równolegle Prawo upadłościowe DR-02.
-
-## 8. Spółdzielnie pracy
-
-Tytuł II zawiera przepisy szczególne. Art. 181 określa gospodarczy rdzeń
-spółdzielni pracy jako wspólne przedsiębiorstwo oparte na osobistej pracy
-członków. Stosunek pracy członka ma regulację szczególną i odpowiednie
-odesłania do prawa pracy — przy sporze uruchom DR-04.
-
-## 9. Związki spółdzielcze i KRS
-
-Część II reguluje związki rewizyjne oraz Krajową Radę Spółdzielczą.
-Art. 240 wskazuje funkcje związku rewizyjnego, w tym lustrację i pomoc
-zrzeszonym spółdzielniom. Krajowa Rada Spółdzielcza jest naczelnym organem
-samorządu spółdzielczego w zakresie ustawy.
-
-## 10. Rozgraniczenie
-
-- spółdzielnia mieszkaniowa → osobny `mod-ustawa-spoldzielnie-mieszkaniowe.md`;
+- spółdzielnia mieszkaniowa → `mod-ustawa-spoldzielnie-mieszkaniowe.md`;
 - własność lokalu → ustawa o własności lokali;
 - KRS/rejestr → `mod-ustawa-KRS-rejestr-sadowy.md`;
 - upadłość → moduły Prawa upadłościowego;
 - stosunki pracownicze → DR-04.
 
-## 11. F-108 i status
+## Status F-108
 
-F-108/13: historycznie kategoria B w module łączonym. Decyzja P3:
-**WYDZIELIĆ** — akt ma własną rozbudowaną strukturę, organy, procedury
-członkowskie i reorganizacyjne. Ten moduł osiąga poziom B.
+**B+ / COV** — pełna bieżąca mapa głównych części ustawy i kluczowych procedur operacyjnych. Brak statusu `FULL` artykuł-po-artykule.
 
-## 12. Quality gate
+## Fresh gate
 
-- [ ] aktualny Dz.U. i późniejsze zmiany odczytane w ELI;
-- [ ] właściwy typ spółdzielni ustalony;
-- [ ] statut skonfrontowany z pełnym art. 5;
-- [ ] członkostwo i uchwały rozdzielone od zasad spółek handlowych;
-- [ ] lustracja sprawdzona w aktualnym Dziale VIII;
-- [ ] reorganizacja połączona z rejestrem i właściwym prawem upadłościowym.
+Przed podaniem konkretnego prawa członka, terminu, quorum, przesłanki zaskarżenia, częstotliwości lustracji lub skutku reorganizacji pobierz aktualne brzmienie z ELI/ISAP dla Dz.U. 2026 poz. 521 i sprawdź późniejsze zmiany.

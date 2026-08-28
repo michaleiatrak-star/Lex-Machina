@@ -1,8 +1,22 @@
 # mod-DA-procedury-kontrolne-inspekcje.md — Procedury kontrolne inspekcji i organów administracji
 
-Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ISAP / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
+Status: moduł prawa polskiego klasy wzorcowej. **RZĄD 1 VER 2026-08-28:** ustawa z 15.07.2011 r. o kontroli w administracji rządowej — **Dz.U. 2026 poz. 158 t.j.**, stan t.j. 06.02.2026; uwzględnia m.in. cyfryzację trybu kontroli.
 
-## 1. Akty i źródła do weryfikacji
+## 1. Akt macierzysty i zakres ustawowy
+
+**Ustawa o kontroli w administracji rządowej — Dz.U. 2026 poz. 158 t.j.**
+
+- **art. 1-2:** ustawa reguluje kontrolę działalności organów administracji rządowej, urzędów i jednostek im podległych/nadzorowanych; w zakresie wykonywania zadań administracji rządowej obejmuje również organy JST oraz inne podmioty realizujące zadania finansowane z budżetu państwa;
+- **art. 3:** celem kontroli jest ustalenie stanu faktycznego i jego ocena według kryteriów; przy nieprawidłowościach ustala się ich zakres, przyczyny, skutki i osoby odpowiedzialne oraz formułuje zalecenia;
+- **art. 4:** podstawowe kryteria to legalność, gospodarność, celowość i rzetelność, z modyfikacjami wskazanymi w ustawie dla części podmiotów;
+- **art. 6:** ustawa określa organy uprawnione do kontroli w strukturze administracji rządowej;
+- **art. 11:** kontrolę prowadzi się w trybie zwykłym albo uproszczonym;
+- **art. 13:** w sprawach nieuregulowanych odpowiednio stosuje się wskazane przepisy KPA dotyczące m.in. doręczeń, terminów i protokołów;
+- **art. 16:** kontroler wykonuje czynności na podstawie imiennego upoważnienia i po okazaniu dokumentu tożsamości / właściwym uwierzytelnieniu.
+
+⛔ Ten akt **nie jest uniwersalną ustawą o wszystkich inspekcjach**. Dla PIP, KAS, Inspekcji Sanitarnej, WIOŚ, ITD, UDT, PSP itd. najpierw stosuj ich ustawy ustrojowe i proceduralne; ustawę o kontroli w administracji rządowej stosuj tylko w jej zakresie podmiotowym/przedmiotowym.
+
+## 1a. Akty branżowe do weryfikacji
 - Prawo przedsiębiorców
 - KPA
 - ustawy inspekcyjne: PIP, UDT, PSP, Sanepid, WIOŚ, ITD, UOKiK, KAS
@@ -181,4 +195,4 @@ Przed odpowiedzią lub pismem zastosuj:
 9. Strategia; 10. Rekomendacja; 11. Kontrola ISAP/temporalności.
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Data weryfikacji online:** 2026-06-05
+**Data weryfikacji online:** 2026-08-28 (RZĄD 1 ELI dla Dz.U. 2026 poz. 158)

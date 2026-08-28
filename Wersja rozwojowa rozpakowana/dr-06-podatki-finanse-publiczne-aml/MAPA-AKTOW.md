@@ -38,7 +38,7 @@
 | Ustawa o podatkach i opłatach lokalnych | Dz.U. 2025 poz. 707 t.j. (reforma od 01.01.2025) — VER 2026-07-02h: nadal aktualne (obwieszczenie 21.05.2025) | mod-ustawa-podatek-nieruchomosci-i-lokalne | ✅ OK |
 | Ustawa o ryczałcie od przychodów | Dz.U. 2025 poz. 843 t.j. — ROZBUDOWANE 2026-07-19: logika decyzyjna ryczałt vs skala/liniowy, zwolnienia PIT art. 21 | mod-ustawa-ryczalt-przychody | ✅ OK |
 | Ustawa VAT (klasyfikacja produktów, PKWiU/CN, status wyrobu medycznego) | Dz.U. 2025 poz. 775 t.j. + rozporządzenie MDR 2017/745 + ustawa o wyrobach medycznych | mod-VAT-klasyfikacja-produktow-baza-niejednoznacznosci | ✅ NOWY 2026-07-19, odpowiedź na pytanie użytkownika |
-| Ustawa o obligacjach | ⚠️ Dz.U. 2025 poz. 1667 t.j. (POPRAWKA 2026-07-02g — BYŁO błędnie 2022.2218, nieaktualne od kwietnia 2024) | mod-ustawa-rynek-kapitalowy-fundusze | ⚠️ WYMAGA AKTUALIZACJI MODUŁU |
+| Ustawa o obligacjach | **Dz.U. 2025 poz. 1667 t.j.**, RZĄD 1 ELI VER 2026-08-28. Moduł zsynchronizowany: zgromadzenie obligatariuszy = Rozdział 5 **art. 46-73**, nie 46-51; art. 74 i nast. odrębnie regulują skutki niewykonania zobowiązań / wykup | mod-ustawa-rynek-kapitalowy-fundusze | ✅ RZĄD 1 ZAKTUALIZOWANE 2026-08-28 |
 | Ustawa o usługach płatniczych | Dz.U. 2026 poz. 623 t.j. | mod-ustawa-uslugi-platnicze | ✅ OK |
 
 | Interpretacje indywidualne i ogólne (Op art. 14a–14p), MDR (art. 86a–86o), WIS, objaśnienia MF | ⚠️ Op Dz.U. 2026 poz. 622 t.j. (POPRAWKA 2026-07-02g — BYŁO błędnie 2025 poz. 111, niespójne z wierszem Ordynacji podatkowej powyżej w tej samej tabeli, już poprawnie zaktualizowanym do 2026.622 w sesji 2026-07-02c) + EUREKA (podatki.gov.pl) | mod-interpretacje-definicje-podatkowe | ✅ OK (po korekcie) |
@@ -66,9 +66,9 @@
 >
 > **Sesja katalogowania 2026-07-04:** ostatnia pozycja (akcyza) zweryfikowana
 > i potwierdzona jako poprawna (2025.126). DR-06 ma teraz 0 pozycji
-> niezweryfikowanych — pozostają 2 flagi "WYMAGA AKTUALIZACJI MODUŁU"
-> (obligacje, interpretacje podatkowe) dotyczące treści modułu, nie numeru
-> Dz.U. DR-06 W PEŁNI SKATALOGOWANA.
+> ✅ 2026-08-28: dawna flaga aktualizacji modułu obligacji została zamknięta
+> na RZĄD 1. Historyczna nota o „2 flagach” nie jest już aktualna; interpretacje
+> podatkowe były już wcześniej oznaczone jako ✅ OK.
 >
 > **Sesja 2026-07-07 (naprawa WARN-24):** dodano ustawę ESAP (Dz.U. 2026 poz. 644),
 > błędnie zakładaną wcześniej za "nowelizację KSH" — ustalono rzeczywisty,
