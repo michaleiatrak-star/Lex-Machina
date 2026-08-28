@@ -89,7 +89,7 @@ TRZY RODZAJE NIERUCHOMOŚCI:
   b) Nieruchomość budynkowa: budynek trwale z gruntem związany, odrębna własność
      (wyjątek od zasady superficies solo cedit — np. budynki na użytkowaniu wieczystym)
   c) Nieruchomość lokalowa: lokal mieszkalny / użytkowy z odrębną KW
-     (ustawa o własności lokali Dz.U. 2021 poz. 1048 t.j.)
+     (ustawa o własności lokali Dz.U. 2026 poz. 232 t.j.)
 
 RZECZ RUCHOMA: wszystko co nie jest nieruchomością (KC art. 46 a contrario)
   Pieniądze + papiery wartościowe + pojazdy = rzeczy ruchome
