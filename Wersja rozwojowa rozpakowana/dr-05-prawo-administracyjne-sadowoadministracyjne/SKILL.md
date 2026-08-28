@@ -85,7 +85,9 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W21 Informacja przetworzona (UDIP art. 3 — "szczególna istotność")
 - BAS-W29 Pełnomocnik z urzędu — prawo do sądu (art. 117 KPC)
 
-## Moduły (22 łącznie — ✓ 22 OK, ☐ 0 STUB)
+## Moduły (23 łącznie — ✓ 23 OK, ☐ 0 STUB)
+
+  [✓] OK    mod-KPA-current-state-COV
 
 **NAPRAWA 2026-08-22 (kontynuacja):** dodano `mod-PPSA-orzeczenia-
 sadowe-rozdzial-10.md` — naprawa poz. #8 mapy pokrycia PPSA (ostatnia
