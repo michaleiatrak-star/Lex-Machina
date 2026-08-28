@@ -1,6 +1,6 @@
 ---
 name: dr-04-prawo-pracy-zus-swiadczenia
-version: "3.28"
+version: "3.29"
 description: "Prawo pracy, ZUS i świadczenia: KP, zatrudnienie, rozwiązanie stosunku pracy, ubezpieczenia społeczne, emerytury, renty, KRUS, PFRON i pomoc społeczna."
 ---
 
@@ -95,9 +95,12 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   wspierające (→ mod-niepelnosprawnosc-intelektualna-gluchota.md,
   mod-niewidomy-prawa-prawne.md, mod-prawa-obywatelskie-srodki-karne.md)
 
-## Moduły (39 łącznie — ✓ 39 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
+## Moduły (42 łącznie — ✓ 42 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
 
   [✓] OK    mod-KP-current-state-COV
+  [✓] OK    mod-SUS-current-state-COV
+  [✓] OK    mod-ustawa-zasilkowa-current-state-COV
+  [✓] OK    mod-zwolnienia-grupowe-current-state-COV
 
 ```
   [✓] OK    mod-ROZP-SKLADKOWE-podstawa-wymiaru
