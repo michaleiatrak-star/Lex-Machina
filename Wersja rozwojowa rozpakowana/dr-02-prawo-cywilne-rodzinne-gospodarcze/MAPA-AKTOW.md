@@ -21,6 +21,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | KC — kredyty frankowe / abuzywność | `mod-KC-kredyty-frankowe` | ✅ aktywny; fresh gate |
 | Rzeczy znalezione / zasiedzenie | `mod-rzeczy-znalezione-zasiedzenie` | ✅ aktywny |
 | Odpowiedzialność za zwierzę / droga rowerowa | `mod-pies-droga-rowerowa-odpowiedzialnosc.md` | ✅ aktywny; fresh gate |
+| KP art. 94³ — mobbing / dyskryminacja (routing przekrojowy) | `mod-KP-art943-mobbing-dyskryminacja` | ✅ aktywny; fresh gate |
 | KPC — indeks current-state całego kodeksu | `mod-KPC-current-state-COV.md` | 🟢 B+/COV |
 | KPC — egzekucja / windykacja | `mod-KPC-egzekucja-windykacja` | ✅ aktywny |
 | KPC — prawomocność / granice apelacji | `mod-KPC-prawomocnosc-granice-apelacji` | ✅ aktywny |
