@@ -32,25 +32,34 @@ Etap jest `ZAMKNIĘTY` wyłącznie gdy łącznie:
 | F-108 jako całość | ZAMKNIĘTY na poziomie COV | 52/52 B+/COV; 0 pozycji B/B+ bez COV; `FULL` nieprzyznany automatycznie |
 | PUSA / KKW po F-108 | ZAMKNIĘTY strukturalnie | odrębne current-state COV i zaktualizowane mapy DR-01/DR-03 |
 | KRS / Rada Ministrów / mandat / partie / przewlekłość | ZAMKNIĘTY strukturalnie | odrębne current-state COV, DR-01 zsynchronizowany |
+| TK — organizacja i tryb postępowania | ZAMKNIĘTY strukturalnie | odrębny `mod-TK-organizacja-postepowanie-current-state-COV.md`; DR-01 = B+/COV |
+| KPC — jawny indeks całego kodeksu | ZAMKNIĘTY strukturalnie | `mod-KPC-current-state-COV.md`; rozproszona rodzina modułów spięta jednym indeksem COV |
 
 ## Dług ujawniony przez audyt
 
-### A. `MAPA-AKTOW.md` — NIE BYŁO W PEŁNI DOMKNIĘTE
+### A. `MAPA-AKTOW.md` — W TOKU
 
-Część lokalnych map nadal przechowywała historię sesji (`VER`, `ZAMKNIĘTE`, `NAPRAWIONE`, dawne alerty i narrację audytową) mimo wcześniejszej decyzji, że mapy runtime mają zawierać tylko stan aktualny.
+Część lokalnych map nadal przechowywała historię sesji (`VER`, `ZAMKNIĘTE`, `NAPRAWIONE`, dawne alerty i narrację audytową) mimo decyzji, że mapy runtime mają zawierać tylko stan aktualny.
 
-Status po rozpoczęciu naprawy:
-- DR-08: **oczyszczona do current-state only** w tej sesji;
-- pozostałe istniejące `MAPA-AKTOW.md`: wymagają przeglądu i selektywnego oczyszczenia, jeżeli nadal zawierają historię.
+Status bieżący:
+- DR-08: **oczyszczona do current-state only**;
+- DR-07: **oczyszczona do current-state only**;
+- DR-12: **oczyszczona do current-state only** we wcześniejszej części sesji;
+- pozostałe istniejące `MAPA-AKTOW.md`: przegląd trwa; największy dług narracyjny jest widoczny m.in. w DR-03, DR-04, DR-06 i DR-10.
 
-### B. `SKILL.md` / `CHANGELOG.md` — NIE BYŁO LITERALNIE DOMKNIĘTE
+### B. `SKILL.md` / `CHANGELOG.md` — W TOKU
 
-Treść systemu została zmieniona, ale po dużej serii prac nie wykonano końcowego bumpu/rejestracji wersji dla `audyt-systemu-v4` i `prawny-router-v3`. To jest dług metadanych, nie luka merytoryczna prawa.
+Kontrola potwierdziła realny rozjazd metadanych:
+- `audyt-systemu-v4/SKILL.md`: YAML `version: 6.27`, natomiast stopka nadal wskazuje 6.26;
+- `audyt-systemu-v4/references/CHANGELOG.md`: ostatni wpis 6.27 opisuje jeszcze wcześniejszy model pokrycia;
+- `prawny-router-v3/SKILL.md`: `version: 3.30`;
+- `prawny-router-v3/references/CHANGELOG.md`: ostatni wpis 3.30, sprzed przejścia map runtime na current-state-only.
 
-Do zamknięcia:
-- `audyt-systemu-v4/SKILL.md` + jego `references/CHANGELOG.md`;
-- `prawny-router-v3/SKILL.md` + jego changelog;
-- rejestracja modelu current-state maps, F-108 52/52 COV i usunięcia baseline/delta.
+Do zamknięcia pozostaje spójny bump wersji obu skilli wraz z ich changelogami, wykonany dopiero po zakończeniu bieżącego batcha map, aby nie generować wielu pustych wersji pośrednich.
+
+## Testy
+
+Dla aktualnego headu nie ma uruchomionych workflowów GitHub Actions. Nie raportować CI jako `PASS`. Końcowy status może być nadany dopiero po realnym wykonaniu testów lub równoważnej reprodukcji.
 
 ## Zasada dalszej pracy
 
