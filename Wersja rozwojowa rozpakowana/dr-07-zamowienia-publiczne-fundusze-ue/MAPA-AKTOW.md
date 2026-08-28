@@ -9,6 +9,7 @@ Mapa runtime pokazuje wyłącznie bieżący stan aktu → moduł. Historia korek
 | Prawo zamówień publicznych (PZP) | Dz.U. 2026 poz. 793 t.j. | `mod-PZP-zamowienia-publiczne-KIO` | 🟢 operacyjny; konkretny przepis wymaga fresh gate |
 | PZP — uzupełnienie: polityka/plan, zamówienia mieszane, komunikacja, dokumentowanie, formalności wyboru, podprogowe, organy i ADR | Dz.U. 2026 poz. 793 t.j. | `mod-PZP-uzupelnienie-pokrycia-2026` | 🟢 B+/COV |
 | PZP Dział II — kwalifikacja podmiotowa, JEDZ, kryteria oceny, unieważnienie | Dz.U. 2026 poz. 793 t.j. | `mod-PZP-dzial-II-kwalifikacja-kryteria-uniewaznienie` | 🟢 B+/COV |
+| PZP Dział IV — umowa ramowa, dynamiczny system zakupów, konkurs i usługi społeczne | Dz.U. 2026 poz. 793 t.j. | `mod-PZP-dzial-IV-szczegolne-instrumenty` | 🟢 aktywny; fresh gate |
 | PZP — otwarcie i badanie ofert oraz postępowanie odwoławcze przed KIO | Dz.U. 2026 poz. 793 t.j. | `mod-PZP-otwarcie-badanie-ofert-przebieg-KIO` | 🟢 B+/COV |
 | PZP Dział VII — umowa i jej wykonanie, podwykonawstwo, zabezpieczenie | Dz.U. 2026 poz. 793 t.j. | `mod-PZP-wykonanie-umowy-compliance` | 🟢 B+/COV |
 | PZP Dział I — podstawy, wyłączenia, szacowanie wartości | Dz.U. 2026 poz. 793 t.j. | `mod-PZP-dzial-I-podstawy-wylaczenia-szacowanie` | 🟢 B+/COV |
