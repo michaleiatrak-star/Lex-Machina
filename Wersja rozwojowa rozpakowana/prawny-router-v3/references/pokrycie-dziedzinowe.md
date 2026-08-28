@@ -7,11 +7,11 @@
 > Router nie duplikuje treści — tylko kieruje. Routing odbywa się przez:
 > KROK1-detekcja.md → prawo-polskie-v2/ROUTING-MAP.md → DR-skill → moduł aktu.
 >
-> **Synchronizacja 2026-08-28:** wszystkie DR-01..DR-16 mają `MAPA-POKRYCIA.md`.
-> Status routingu/modułu NIE jest statusem kompletności treści. Szczegółowy baseline znajduje się
-> w lokalnych `MAPA-POKRYCIA.md`, a zmiany po raporcie 27.08.2026 w
-> `audyt-systemu-v4/references/POKRYCIE-DELTA-2026-08-28.md`.
-> Spójność strukturalną wymusza `audyt-systemu-v4/scripts/check_coverage_coherence.py`.
+> **Stan operacyjny 2026-08-28:** wszystkie DR-01..DR-16 mają `MAPA-POKRYCIA.md`.
+> Każda lokalna `MAPA-POKRYCIA.md` jest jedynym bieżącym źródłem statusu pokrycia dla danego DR.
+> Mapy runtime nie przechowują historii dawnych luk ani warstwy baseline/delta.
+> Historia zmian należy do audytu/changelogu. Spójność strukturalną wymusza
+> `audyt-systemu-v4/scripts/check_coverage_coherence.py`.
 
 | Dziedzina | DR-skill (Primary) | Moduł wejściowy | Rejestr pokrycia | Łącz ze skillem |
 |---|---|---|---|---|
@@ -62,6 +62,6 @@
 
 1. Ten plik odpowiada tylko na pytanie: **gdzie routować temat**.
 2. `MAPA-AKTOW.md` odpowiada: **jaki akt i moduł odpowiadają za temat**.
-3. `MAPA-POKRYCIA.md` odpowiada: **jak głębokie jest rzeczywiste pokrycie**.
-4. `POKRYCIE-DELTA-2026-08-28.md` rozstrzyga zmiany po historycznym baseline raportu 27.08.2026.
+3. Lokalna `MAPA-POKRYCIA.md` odpowiada: **jaki jest aktualny faktyczny poziom pokrycia** i jest jedynym źródłem tego statusu w runtime.
+4. Historia zmian nie bierze udziału w routingu ani w ocenie bieżącego pokrycia.
 5. Żaden status strukturalny nie zwalnia z fresh hard gate do ELI/ISAP/EUR-Lex przed użyciem przepisu.
