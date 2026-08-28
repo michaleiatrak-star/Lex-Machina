@@ -20,7 +20,7 @@
 | 4 | KRO | DR-02 | 🟢 B+ / COV — Dz.U. 2026 poz. 236 |
 | 5 | KC | DR-02 | 🟢 B+ / COV — Dz.U. 2026 poz. 795; Księgi I–IV zmapowane |
 | 6 | KPC | DR-02 | 🟢 B+ / COV |
-| 7 | KW | DR-03 | 🟡 B+ — brak potwierdzonego COV całego aktu w `MAPA-POKRYCIA.md` |
+| 7 | KW | DR-03 | 🟡 B+ — strukturalna walidacja całego aktu pozostaje otwarta |
 | 8 | Opłaty w sprawach karnych | DR-03 | 🟢 B+ / COV |
 | 9 | Kodeks pracy | DR-04 | 🟢 B+ / COV — Dz.U. 2025 poz. 277 ze zmianami |
 | 10 | Prawo o adwokaturze | DR-12 | 🟢 B+ / COV |
@@ -43,7 +43,7 @@
 | 27 | Samorząd powiatowy | DR-08 | 🟢 B+ / COV — Dz.U. 2025 poz. 1684 |
 | 28 | Samorząd województwa | DR-08 | 🟢 B+ / COV — Dz.U. 2026 poz. 720 |
 | 29 | System ubezpieczeń społecznych | DR-04 | 🟡 B/B+ — część działów nadal B/B+ w `MAPA-POKRYCIA.md` |
-| 30 | Zasiłki chorobowe i macierzyńskie | DR-04 | 🟡 B+ — pełna mapa rozdziałów, ale moduł i mapa nie deklarują COV całego aktu |
+| 30 | Zasiłki chorobowe i macierzyńskie | DR-04 | 🟡 B+ — pełna mapa rozdziałów, walidacja strukturalna całego aktu otwarta |
 | 31 | KKS | DR-03/06 | 🟢 B+ / COV — Dz.U. 2025 poz. 633 ze zmianami |
 | 32 | RPD | DR-05 | 🟢 B+ / COV — Dz.U. 2023 poz. 292 |
 | 33 | KSH | DR-02 | 🟢 B+ / COV |
@@ -53,7 +53,7 @@
 | 37 | KPW | DR-03 | 🟢 B+ / COV — Dz.U. 2025 poz. 860 |
 | 38 | PPSA | DR-05 | 🟢 B+ / COV |
 | 39 | Prawo upadłościowe | DR-02 | 🟢 B+ / COV |
-| 40 | Zwolnienia grupowe | DR-04 | 🟡 B+ — moduł operacyjny, bez udokumentowanego COV całego aktu |
+| 40 | Zwolnienia grupowe | DR-04 | 🟡 B+ — moduł operacyjny, walidacja strukturalna całego aktu otwarta |
 | 41 | Ubezpieczenia obowiązkowe, UFG i PBUK | DR-02 | 🟢 B+ / COV |
 | 42 | KSCU | DR-12 | 🟢 B+ / COV — Dz.U. 2025 poz. 1228 |
 | 43 | Przeciwdziałanie narkomanii | DR-03 | 🟢 B+ / COV — t.j. Dz.U. 2023 poz. 1939 + obowiązująca od 27.08.2026 nowelizacja Dz.U. 2026 poz. 1004 |
