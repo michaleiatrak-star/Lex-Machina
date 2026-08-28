@@ -1,263 +1,80 @@
 # mod-ustawa-UOKIK-antymonopolowe
 
-**Wersja:** 1.0 | **Dodano:** 2026-07-18
-**Rola w systemie:** wypełnia lukę zidentyfikowaną na wyraźne pytanie
-użytkownika o "kwestie monopoli" — dotąd system miał moduł o zwalczaniu
-NIEUCZCIWEJ konkurencji (`mod-ustawa-UZNK-nieuczciwa-konkurencja.md`),
-ale NIE miał modułu o prawie ANTYMONOPOLOWYM (ochrona konkurencji jako
-takiej, nie tylko uczciwości praktyk rynkowych) — to DWIE różne gałęzie
-prawa gospodarczego, często mylone.
+**Stan operacyjny:** 2026-08-28  
+**Źródło kanoniczne:** ELI — ustawa z 16.02.2007 r. o ochronie konkurencji i konsumentów, Dz.U. 2025 poz. 1714 t.j., status obowiązujący.
 
-> ✅ **METRYKA RZĄD 1, VER 2026-08-28:** ustawa o ochronie konkurencji i konsumentów — **Dz.U. 2025 poz. 1714 t.j.**. Przy konkretnej jednostce nadal sprawdź późniejsze akty zmieniające w ELI.
+## Zakres
 
----
+Moduł obejmuje publicznoprawną ochronę konkurencji i zbiorowych interesów konsumentów: praktyki ograniczające konkurencję, koncentracje, niedozwolone postanowienia wzorców umów, praktyki naruszające zbiorowe interesy konsumentów, organizację ochrony, postępowanie przed Prezesem UOKiK oraz sankcje.
 
-## 1. ROZGRANICZENIE — UOKiK vs UZNK (NIE MYLIĆ)
+Nie zastępuje ustawy o zwalczaniu nieuczciwej konkurencji ani indywidualnych roszczeń konsumenta z KC/ustawy o prawach konsumenta.
 
-```
-Ustawa o ochronie konkurencji i konsumentów (UOKiK, 16.02.2007) —
-  TEN MODUŁ — chroni STRUKTURĘ RYNKU jako taką (konkurencję w interesie
-  publicznym) — porozumienia ograniczające konkurencję, nadużywanie
-  pozycji dominującej, kontrola koncentracji (fuzji/przejęć)
+## Mapa ustawy
 
-Ustawa o zwalczaniu nieuczciwej konkurencji (UZNK) — patrz
-  `mod-ustawa-UZNK-nieuczciwa-konkurencja.md` — chroni UCZCIWOŚĆ
-  poszczególnych PRAKTYK między konkurentami (czyny nieuczciwej
-  konkurencji, tajemnica przedsiębiorstwa) — perspektywa
-  INDYWIDUALNEGO przedsiębiorcy poszkodowanego konkretnym czynem
-```
-**Możliwy ZBIEG obu reżimów** w tej samej sprawie (np. zmowa cenowa może
-naruszać jednocześnie UOKiK jako porozumienie ograniczające konkurencję
-I stanowić czyn nieuczciwej konkurencji) — ale to ODRĘBNE podstawy
-prawne, odrębne organy (Prezes UOKiK vs sąd powszechny), odrębne sankcje.
+| Dział | Zakres | Status |
+|---|---|---|
+| I | przepisy ogólne | 🟢 B+ / COV |
+| II | praktyki ograniczające konkurencję | 🟢 B+ / COV |
+| III | koncentracje przedsiębiorców | 🟢 B+ / COV |
+| IIIa | niedozwolone postanowienia wzorców umów | 🟢 B+ / COV |
+| IV | praktyki naruszające zbiorowe interesy konsumentów | 🟢 B+ / COV |
+| V | organizacja ochrony konkurencji i konsumentów | 🟢 B+ / COV |
+| VI | postępowanie przed Prezesem UOKiK | 🟢/🟡 B+ |
+| VII | kary pieniężne | 🟢/🟡 B+; każda sankcja wymaga fresh gate |
+| VIII i przepisy końcowe | odpowiedzialność/przepisy szczególne — kontrola aktualnego tekstu i temporalności |
 
----
+## Kwalifikator sprawy
 
-## 2. STRUKTURA USTAWY (przegląd)
-
-```
-Dział I    — Przepisy ogólne
-Dział II   — Praktyki ograniczające konkurencję (porozumienia,
-             nadużywanie pozycji dominującej) (art. 6-12)
-Dział III  — Koncentracja przedsiębiorców (art. 13-23)
-Dział IIIa — Zakaz stosowania niedozwolonych postanowień wzorców umów
-Dział IV   — Zakaz praktyk naruszających zbiorowe interesy konsumentów
-             (art. 24-28)
-Dział V    — Organizacja ochrony konkurencji i konsumentów (Prezes UOKiK,
-             samorząd terytorialny, organizacje konsumenckie) (art. 29-46)
-Dział VI   — Postępowanie przed Prezesem Urzędu (art. 47-105q)
-             Rozdział 3 — Postępowanie antymonopolowe w sprawach
-                          koncentracji (94-99)
-             Rozdział 5 — Kontrola i przeszukanie (105a-105q)
-Dział VII  — Kary pieniężne (106-113k)
-Dział VIII — Przepis karny (114)
+```text
+1. Czy sprawa dotyczy interesu publicznego/struktury rynku czy indywidualnego sporu?
+2. Jeżeli konkurencja: porozumienie, pozycja dominująca czy koncentracja?
+3. Jeżeli konsumenci: zbiorowy interes konsumentów / wzorzec umowy czy indywidualne roszczenie B2C?
+4. Zdefiniuj rynek właściwy produktowo i geograficznie, jeżeli jest relewantny.
+5. Ustal właściwe postępowanie Prezesa UOKiK, środek dowodowy i etap proceduralny.
+6. Sankcje, progi obrotowe, terminy i warunki leniency/settlement pobierz z aktualnego tekstu — bez stałych wartości z pamięci.
 ```
 
----
+## Praktyki ograniczające konkurencję
 
-## 3. POJĘCIE MONOPOLU I POZYCJI DOMINUJĄCEJ
+Oddziel porozumienia ograniczające konkurencję od nadużywania pozycji dominującej. Samo posiadanie silnej pozycji rynkowej nie jest automatycznie zakazane; ocena naruszenia wymaga zastosowania ustawowych definicji i zakazów do konkretnego rynku i zachowania.
 
-**Monopol** — struktura rynkowa, w której JEDEN przedsiębiorca dostarcza
-CAŁĄ produkcję dóbr/usług na danym rynku. Sam monopol NIE JEST z
-definicji nielegalny w polskim prawie (niektóre monopole są ustanawiane
-USTAWOWO — np. monopole naturalne w infrastrukturze sieciowej) —
-problemem prawnym jest NADUŻYWANIE pozycji dominującej, nie samo jej
-posiadanie.
+Przy porozumieniu ustal co najmniej: strony, formę koordynacji, cel/skutek, rynek, udział w rynku, możliwe wyłączenie ustawowe oraz dowody kontaktu/uzgodnienia. Przy zmowie przetargowej dodatkowo sprawdź DR-03 i art. 305 KK w aktualnym brzmieniu.
 
-**Pozycja dominująca** — NIE wymaga monopolu sensu stricto. **Domniemanie
-pozycji dominującej:** przedsiębiorca ma pozycję dominującą, jeżeli jego
-udział w rynku właściwym przekracza **40%** (art. 4 pkt 10 ustawy o
-ochronie konkurencji i konsumentów — ✅ POTWIERDZONE 2026-07-27,
-FAZA 3E/ZASADA 14, dosłownym cytatem w 8 niezależnych źródłach: lexlege.pl,
-standardyprawa.pl, WIPO Lex, Wikipedia, rp.pl i inne — poprzednie
-zastrzeżenie niepewności usunięte). Samo POSIADANIE pozycji dominującej NIE jest
-naruszeniem prawa — nielegalne jest jej NADUŻYWANIE w postaci działań
-EKSPLOATACYJNYCH (np. narzucanie nadmiernie wygórowanych cen) lub
-WYKLUCZENIOWYCH (np. praktyki mające wyeliminować konkurentów z rynku).
+## Koncentracje
 
-**Rynek właściwy** — definiowany dwuwymiarowo: PRODUKTOWO (jakie
-dobra/usługi są substytucyjne z perspektywy konsumenta) i
-GEOGRAFICZNIE (na jakim obszarze) — kluczowe pojęcie determinujące, czy
-w ogóle doszło do osiągnięcia pozycji dominującej.
+Przed zgłoszeniem lub oceną koncentracji ustal:
 
----
-
-## 4. PRAKTYKI OGRANICZAJĄCE KONKURENCJĘ (Dział II)
-
-### Porozumienia ograniczające konkurencję (zmowy)
-
-```
-Formy: umowy, decyzje związków przedsiębiorców, PRAKTYKI UZGODNIONE
-  (nie wymaga formalnej umowy — wystarczy zgodne zachowanie rynkowe)
-Typowe przejawy:
-  □ Ustalanie CEN (zmowy cenowe)
-  □ PODZIAŁ RYNKU (terytorialny lub wg klientów)
-  □ Ograniczanie PRODUKCJI/zbytu
-  □ Stosowanie NIEUCZCIWYCH praktyk handlowych uzgodnionych między
-    konkurentami
-Skutek: takie porozumienia są NIEWAŻNE Z MOCY PRAWA (nie wymaga to
-  odrębnego stwierdzenia nieważności przez sąd — nieważność następuje
-  automatycznie), a uczestnicy podlegają WYSOKIM KAROM FINANSOWYM
-```
-**Powiązanie z prawem karnym:** zmowa PRZETARGOWA (dotycząca zamówień
-publicznych) ma DODATKOWO odrębną podstawę KARNĄ — art. 305 KK, patrz
-`mod-KK-art305-zmowa-przetargowa-karna.md` (DR-03) — to jest przykład
-ZBIEGU reżimu antymonopolowego (UOKiK, sankcja administracyjna) z
-reżimem karnym (KK, odpowiedzialność osobista sprawcy).
-
-### Nadużywanie pozycji dominującej
-
-Katalog OTWARTY zachowań mogących stanowić nadużycie (przykładowe, nie
-wyczerpujące): narzucanie nieuczciwych cen, ograniczanie produkcji ze
-szkodą dla konsumentów, stosowanie NIERÓWNYCH warunków wobec różnych
-kontrahentów w podobnych transakcjach (dyskryminacja handlowa),
-uzależnianie zawarcia umowy od przyjęcia świadczeń niezwiązanych z
-przedmiotem umowy (wiązanie/tying).
-
----
-
-## 5. KONTROLA KONCENTRACJI (Dział III, art. 13-23)
-
-### Zasada — koncentracje podlegają kontroli Z MOCY USTAWY
-
-**Kluczowe:** kontroli Prezesa UOKiK podlegają koncentracje **NIEZALEŻNIE
-od tego, czy powodują uzyskanie przez któregoś przedsiębiorcę pozycji
-dominującej, czy też nie** — sam fakt przekroczenia progów obrotowych
-rodzi obowiązek zgłoszenia, bez potrzeby wstępnej oceny skutków rynkowych.
-
-### Obowiązek zgłoszenia (art. 13)
-
-```
-Zamiar koncentracji podlega zgłoszeniu Prezesowi Urzędu, jeżeli:
-  1) ŁĄCZNY ŚWIATOWY OBRÓT przedsiębiorców uczestniczących w koncentracji
-     w roku poprzedzającym przekracza określony próg (⚠️ dokładna kwota
-     progowa niepotwierdzona w pełni w tej sesji — zweryfikuj na ISAP,
-     progi zmieniają się i różnią dla obrotu światowego/krajowego)
-  2) [dodatkowe kryteria alternatywne — sprawdź pełną treść art. 13]
+```text
+□ rodzaj koncentracji według ustawy
+□ przedsiębiorców uczestniczących
+□ aktualne obroty obliczone według ustawowych reguł
+□ aktualne progi zgłoszeniowe i wyłączenia
+□ moment, przed którym koncentracja nie może zostać dokonana
+□ możliwe decyzje: zgoda / zgoda warunkowa / zakaz / inne skutki ustawowe
 ```
 
-**Procedura czasowa (zmiana historyczna, 2004 r.):** zgłoszenia
-zamiaru koncentracji można dokonać W DOWOLNYM CZASIE (wcześniej
-obowiązywał sztywny termin 7 dni od zawarcia umowy — UCHYLONY), pod
-warunkiem że faktyczne dokonanie koncentracji poprzedza ZGODA wydana
-decyzją Prezesa UOKiK — czyli: koncentracja bez uprzedniej zgody, gdy
-zgoda była wymagana, jest sama w sobie naruszeniem, niezależnie od
-terminu zgłoszenia.
+Nie przechowuj w runtime kwot progów — pobieraj je z aktualnego art. 13 i przepisów powiązanych.
 
-### Decyzje Prezesa UOKiK w sprawach koncentracji (art. 18-23)
+## Zbiorowe interesy konsumentów i wzorce
 
-```
-□ ZGODA na koncentrację (bezwarunkowa)
-□ ZGODA WARUNKOWA — pod warunkiem wykonania określonych zobowiązań
-  (np. zbycie części aktywów, licencjonowanie technologii)
-□ ZAKAZ koncentracji — gdy prowadziłaby do ISTOTNEGO ograniczenia
-  konkurencji, w szczególności przez powstanie/umocnienie pozycji
-  dominującej
-```
+Nie utożsamiaj decyzji Prezesa UOKiK z rozstrzygnięciem indywidualnego sporu konsumenta. Ta sama praktyka może rodzić równolegle publicznoprawne postępowanie UOKiK oraz indywidualne roszczenia cywilne.
 
-### Elementy analizy ekonomicznej przy ocenie koncentracji
+## Postępowanie i dowody
 
-Prezes UOKiK bada m.in.: strukturę rynku PRZED i PO koncentracji, bariery
-wejścia dla nowych konkurentów, siłę nabywczą kontrahentów, potencjał
-konkurencyjny podmiotów pozostających na rynku — ocena EKONOMICZNA, nie
-tylko formalno-prawna.
+Przy postępowaniu przed Prezesem UOKiK ustal dokładnie tryb wszczęcia, stronę, dostęp do akt, zobowiązania przedsiębiorcy, kontrolę/przeszukanie, tajemnicę przedsiębiorstwa, decyzję i właściwy środek zaskarżenia. Nie przenoś automatycznie KPA, jeżeli ustawa zawiera regulację szczególną.
 
----
+## Sankcje
 
-## 6. KARY PIENIĘŻNE (Dział VII, art. 106-113k)
+Kary pieniężne zależą od rodzaju naruszenia, podmiotu, podstawy ustawowej i aktualnych reguł obliczania. Przed podaniem procentu, maksymalnej kwoty, kary dla osoby zarządzającej lub warunków obniżenia kary pobierz właściwe przepisy Działu VII.
 
-Prezes UOKiK MOŻE nałożyć karę pieniężną za: naruszenie zakazu porozumień
-ograniczających konkurencję, nadużycie pozycji dominującej, dokonanie
-koncentracji BEZ wymaganej zgody, niewykonanie decyzji Prezesa UOKiK,
-naruszenia proceduralne (np. utrudnianie kontroli). **Możliwość
-ODSTĄPIENIA od kary lub jej OBNIŻENIA** w sprawach porozumień
-ograniczających konkurencję — program "leniency" (⚠️ szczegółowe warunki
-tego programu niepotwierdzone w pełni w tej sesji, zweryfikuj na ISAP —
-typowo dotyczy przedsiębiorcy, który jako pierwszy zgłosi organowi
-udział w zmowie i dostarczy dowody).
+## Routing
 
-⚠️ Dział VIII zawiera PRZEPIS KARNY (art. 114) — ⚠️ dokładna treść
-niepotwierdzona w pełni w tej sesji, oznacza to, że NIEKTÓRE naruszenia
-UOKiK mogą rodzić odpowiedzialność KARNĄ (nie tylko administracyjną karę
-pieniężną) — zweryfikuj na ISAP przy konkretnej sprawie.
+- nieuczciwa konkurencja między przedsiębiorcami → `mod-ustawa-UZNK-nieuczciwa-konkurencja.md`;
+- indywidualny konsument → `mod-ustawa-prawa-konsumenta.md` + `mod-KC-konsumenckie.md`;
+- zmowa przetargowa / odpowiedzialność karna → DR-03;
+- prawo konkurencji UE → art. 101/102 TFUE i właściwe akty UE w DR-14;
+- skarga/odwołanie od decyzji organu → właściwa procedura szczególna + DR-05/16 według trybu.
 
----
+## Fresh gate
 
-## 7. ORGANIZACJA — PREZES UOKiK
-
-Centralny organ administracji rządowej, PODLEGŁY BEZPOŚREDNIO Prezesowi
-Rady Ministrów (nie ministrowi resortowemu — podkreśla niezależność
-instytucjonalną od poszczególnych działów administracji, które mogłyby
-mieć interes w konkretnych sprawach rynkowych).
-
----
-
-## 8. CHECKLIST PRAKTYCZNY
-
-```
-□ Czy sprawa dotyczy STRUKTURY rynku (koncentracja, pozycja dominująca,
-  zmowa) czy KONKRETNEJ nieuczciwej praktyki między dwoma podmiotami?
-  → Pierwsze: ten moduł (UOKiK). Drugie: `mod-ustawa-UZNK-nieuczciwa-
-  konkurencja.md`
-□ Czy planowana transakcja (fuzja/przejęcie) przekracza progi obrotowe
-  wymagające zgłoszenia Prezesowi UOKiK? — sprawdź AKTUALNE progi na ISAP
-□ Czy dokonano koncentracji BEZ wymaganej zgody? — to samodzielne
-  naruszenie niezależnie od faktycznego wpływu na rynek
-□ Czy istnieje ryzyko kwalifikacji jako zmowa PRZETARGOWA? → sprawdź
-  DODATKOWO odpowiedzialność karną z art. 305 KK (DR-03)
-□ Czy klient rozważa zgłoszenie się do programu leniency? — potencjalnie
-  znaczące obniżenie/zniesienie kary w zamian za współpracę i dowody
-```
-
----
-
-## 9. INTEGRACJA Z SYSTEMEM
-
-- **`mod-ustawa-UZNK-nieuczciwa-konkurencja.md`** — rozgraniczenie
-  zakresów, patrz sekcja 1 — NIE duplikuj.
-- **`mod-KK-art305-zmowa-przetargowa-karna.md`** (DR-03) — zbieg
-  odpowiedzialności administracyjnej (UOKiK) i karnej przy zmowie
-  przetargowej.
-- **`mod-PZP-dzial-I-podstawy-wylaczenia-szacowanie.md`** (DR-07) —
-  zamówienia publiczne jako szczególny kontekst, gdzie zmowy
-  przetargowe łączą oba reżimy (UOKiK + KK).
-- **`mod-KSH-wrogie-przejecie-obrona-bialy-rycerz.md`** (nowy moduł,
-  ta sama sesja) — kontrola koncentracji jako JEDNO z ograniczeń przy
-  planowaniu wrogiego przejęcia (transakcja przejęcia może wymagać
-  zgody Prezesa UOKiK niezależnie od tego, czy jest "wroga" czy przyjazna).
-- **`mod-inwestycje-transgraniczne-FDI-BIT.md`** (DR-14) — kontrola
-  koncentracji (UOKiK) jest ODRĘBNA od kontroli inwestycji zagranicznych
-  (ustawa o kontroli niektórych inwestycji) — transakcja transgraniczna
-  może wymagać ZGODY OBU organów niezależnie (Prezes UOKiK + organ
-  kontroli inwestycji).
-
----
-
-## 10. LITERATURA I ŹRÓDŁA (zweryfikowane online 2026-07-18)
-
-- Tekst jednolity ustawy o ochronie konkurencji i konsumentów —
-  ISAP/lexlege.pl (struktura Działów I-IX potwierdzona).
-- uokik.gov.pl — oficjalne materiały UOKiK, w tym "Polityka ochrony
-  konkurencji i konsumentów" (2015) i "Kontrola koncentracji
-  przedsiębiorców — kompetencje Prezesa UOKiK".
-- prawo.uwr.edu.pl — materiały akademickie definiujące monopol, pozycję
-  dominującą, rolę regulatorów sektorowych (Prezes URE, Prezes UKE).
-- prawniczapolska.pl — praktyczne omówienie praktyk monopolistycznych.
-- antitrust.pl — kontekst nowelizacji 2015 r. dot. szybszej kontroli
-  koncentracji.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-18):** Utworzenie modułu na wyraźne żądanie użytkownika
-("kwestie monopoli"). Zweryfikowano online: rozgraniczenie UOKiK/UZNK,
-strukturę ustawy (Działy I-IX), pojęcie monopolu i pozycji dominującej
-(próg 40% jako orientacyjne domniemanie), praktyki ograniczające
-konkurencję (porozumienia/zmowy, nadużycie pozycji dominującej),
-kontrolę koncentracji (obowiązek zgłoszenia niezależny od skutków
-rynkowych, zniesienie sztywnego terminu 7-dniowego w 2004 r., 3 rodzaje
-decyzji Prezesa UOKiK), kary pieniężne i program leniency. Odnotowano
-niepewności: dokładny próg 40% (domniemanie pozycji dominującej),
-dokładne progi obrotowe dla obowiązku zgłoszenia koncentracji, treść
-przepisu karnego z art. 114 — wszystkie oznaczone do weryfikacji na ISAP.
+Przed podaniem definicji, progu, terminu, kary, warunku koncentracji albo środka zaskarżenia pobierz aktualny tekst ELI/ISAP dla Dz.U. 2025 poz. 1714 i sprawdź późniejsze zmiany. Przy prawie konkurencji UE użyj EUR-Lex.
