@@ -41,11 +41,14 @@ Etap jest `ZAMKNIĘTY` wyłącznie gdy łącznie:
 
 Część lokalnych map nadal przechowywała historię sesji (`VER`, `ZAMKNIĘTE`, `NAPRAWIONE`, dawne alerty i narrację audytową) mimo decyzji, że mapy runtime mają zawierać tylko stan aktualny.
 
-Status bieżący:
-- DR-08: **oczyszczona do current-state only**;
-- DR-07: **oczyszczona do current-state only**;
-- DR-12: **oczyszczona do current-state only** we wcześniejszej części sesji;
-- pozostałe istniejące `MAPA-AKTOW.md`: przegląd trwa; największy dług narracyjny jest widoczny m.in. w DR-03, DR-04, DR-06 i DR-10.
+Oczyszczone do current-state-only:
+- DR-01 — dodatkowo routing podpięty do nowych odrębnych modułów COV (TK, PUSA, KRS, Rada Ministrów, mandat, partie, przewlekłość);
+- DR-07;
+- DR-08;
+- DR-12;
+- DR-14.
+
+Pozostałe mapy są przeglądane selektywnie. Największy dług narracyjny potwierdzono obecnie w DR-03, DR-04, DR-05, DR-06 i DR-10. Nie oznacza to luki treściowej tych dziedzin — chodzi o mieszanie historii z runtime.
 
 ### B. `SKILL.md` / `CHANGELOG.md` — W TOKU
 
@@ -55,11 +58,11 @@ Kontrola potwierdziła realny rozjazd metadanych:
 - `prawny-router-v3/SKILL.md`: `version: 3.30`;
 - `prawny-router-v3/references/CHANGELOG.md`: ostatni wpis 3.30, sprzed przejścia map runtime na current-state-only.
 
-Do zamknięcia pozostaje spójny bump wersji obu skilli wraz z ich changelogami, wykonany dopiero po zakończeniu bieżącego batcha map, aby nie generować wielu pustych wersji pośrednich.
+Do zamknięcia pozostaje spójny bump wersji obu skilli wraz z ich changelogami, wykonany po zakończeniu batcha map, aby nie generować wielu pustych wersji pośrednich.
 
 ## Testy
 
-Dla aktualnego headu nie ma uruchomionych workflowów GitHub Actions. Nie raportować CI jako `PASS`. Końcowy status może być nadany dopiero po realnym wykonaniu testów lub równoważnej reprodukcji.
+Dla sprawdzonego headu GitHub nie zwrócił uruchomionych workflowów Actions. Nie raportować CI jako `PASS`. Końcowy status może być nadany dopiero po realnym wykonaniu testów lub równoważnej reprodukcji.
 
 ## Zasada dalszej pracy
 
