@@ -73,7 +73,9 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-101 Strefa zamieszkania (skutki: pierwszeństwo pieszego, 20 km/h)
 - BAS-107 Droga wewnętrzna (definicja negatywna — mandat zasadniczo niedopuszczalny)
 
-## Moduły (19 łącznie — ✓ 19 OK, ☐ 0 STUB)
+## Moduły (20 łącznie — ✓ 20 OK, ☐ 0 STUB)
+
+  [✓] OK    mod-wojewoda-administracja-rzadowa-current-state-COV
 
 ```
 MODUŁY USTROJOWE I PROCEDURALNE:
