@@ -1,0 +1,129 @@
+name: Repack development skill ZIPs
+
+on:
+  push:
+    branches:
+      - codex/repack-development-zips-2026-08-28
+
+permissions:
+  contents: write
+
+jobs:
+  repack:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: codex/repack-development-zips-2026-08-28
+          fetch-depth: 0
+
+      - name: Rebuild skill archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          import zipfile
+
+          source = Path("Wersja rozwojowa rozpakowana")
+          target = Path("WERSJA ROZWOJOWA")
+          excluded = {
+              "dr-09-out",
+              "przesluchanie-swiadkow-v2-min90-v35",
+          }
+
+          if not source.is_dir() or not target.is_dir():
+              raise SystemExit("Brak katalogu źródłowego lub docelowego")
+
+          skills = sorted(
+              d for d in source.iterdir()
+              if d.is_dir() and (d / "SKILL.md").is_file() and d.name not in excluded
+          )
+
+          old_zips = sorted(target.glob("*.zip"))
+          layout = {}
+
+          # Zachowaj układ wnętrza starego ZIP-a dla każdego istniejącego skilla.
+          for skill in skills:
+              candidates = [z for z in old_zips if z.name.startswith(skill.name + "-")]
+              if not candidates:
+                  layout[skill.name] = True
+                  continue
+              old = candidates[0]
+              with zipfile.ZipFile(old, "r") as zf:
+                  names = [
+                      n for n in zf.namelist()
+                      if n and not n.startswith("__MACOSX/")
+                  ]
+              meaningful = [n for n in names if not n.endswith("/")]
+              layout[skill.name] = bool(meaningful) and all(
+                  n.startswith(skill.name + "/") for n in meaningful
+              )
+
+          # Usuń wszystkie stare ZIP-y — źródłem prawdy jest linia rozpakowana.
+          for z in old_zips:
+              z.unlink()
+
+          generated = []
+          for skill in skills:
+              text = (skill / "SKILL.md").read_text(encoding="utf-8")
+              m = re.search(r'^version:\s*["\']?([^"\'\s#]+)', text, re.MULTILINE)
+              if not m:
+                  raise SystemExit(f"Brak version: w {skill}/SKILL.md")
+              version = m.group(1)
+
+              out = target / f"{skill.name}-{version}.zip"
+              root_included = layout.get(skill.name, True)
+
+              with zipfile.ZipFile(
+                  out,
+                  "w",
+                  compression=zipfile.ZIP_DEFLATED,
+                  compresslevel=9,
+              ) as zf:
+                  for p in sorted(skill.rglob("*")):
+                      if not p.is_file():
+                          continue
+                      rel = p.relative_to(skill)
+                      arc = (Path(skill.name) / rel) if root_included else rel
+                      zf.write(p, arc.as_posix())
+
+              # Walidacja integralności i obecności SKILL.md.
+              with zipfile.ZipFile(out, "r") as zf:
+                  bad = zf.testzip()
+                  if bad is not None:
+                      raise SystemExit(f"Uszkodzony ZIP {out}: {bad}")
+                  expected = (
+                      f"{skill.name}/SKILL.md" if root_included else "SKILL.md"
+                  )
+                  if expected not in zf.namelist():
+                      raise SystemExit(f"Brak {expected} w {out}")
+
+              generated.append((skill.name, version, out.stat().st_size, root_included))
+
+          if len(generated) != 32:
+              raise SystemExit(f"Oczekiwano 32 ZIP-ów, wygenerowano {len(generated)}")
+
+          actual = sorted(target.glob("*.zip"))
+          if len(actual) != 32:
+              raise SystemExit(f"Katalog docelowy ma {len(actual)} ZIP-ów zamiast 32")
+
+          print("Wygenerowane archiwa:")
+          for name, version, size, root_included in generated:
+              mode = "root-folder" if root_included else "contents-only"
+              print(f"- {name}-{version}.zip | {size} B | {mode}")
+          PY
+
+      - name: Commit rebuilt archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "WERSJA ROZWOJOWA"
+          git diff --cached --stat
+          git commit -m "Repack development skills from unpacked current state"
+          git push origin HEAD:codex/repack-development-zips-2026-08-28
