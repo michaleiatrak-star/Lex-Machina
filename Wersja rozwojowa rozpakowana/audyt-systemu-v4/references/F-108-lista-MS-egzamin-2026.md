@@ -40,8 +40,8 @@
 | 24 | KPK | DR-03 | 🟡 B+ |
 | 25 | KRS | DR-02 | 🟢 B+ / COV |
 | 26 | Gospodarka nieruchomościami | DR-09/08/02 | 🟢 B+ / COV |
-| 27 | Samorząd powiatowy | DR-08 | 🟡 B+ |
-| 28 | Samorząd województwa | DR-08 | 🟡 B+ |
+| 27 | Samorząd powiatowy | DR-08 | 🟢 B+ / COV — Dz.U. 2025 poz. 1684; pełna mapa 10 rozdziałów, organy, prawo miejscowe i nadzór |
+| 28 | Samorząd województwa | DR-08 | 🟢 B+ / COV — Dz.U. 2026 poz. 720; pełna mapa 9 rozdziałów, organy, współpraca zagraniczna, nadzór i prawo miejscowe |
 | 29 | System ubezpieczeń społecznych | DR-04 | 🟢 B+ / COV |
 | 30 | Zasiłki chorobowe i macierzyńskie | DR-04 | 🟢 B+ / COV |
 | 31 | KKS | DR-03/06 | 🟢 B+ / COV — Dz.U. 2025 poz. 633 ze zmianami; Tytuły I–III i routing finansowy zmapowane |
@@ -73,7 +73,7 @@
 
 ## Priorytet dalszej pracy
 
-1. **P1 — akty `B+` bez COV:** KK, KPK, samorząd powiatowy, samorząd województwa, spółdzielnie mieszkaniowe, przeciwdziałanie narkomanii, wojewoda i administracja rządowa, Sąd Najwyższy, Prawo przedsiębiorców.
+1. **P1 — akty `B+` bez COV:** KK, KPK, spółdzielnie mieszkaniowe, przeciwdziałanie narkomanii, wojewoda i administracja rządowa, Sąd Najwyższy, Prawo przedsiębiorców.
 2. **P2 — walidacja COV:** sprawdzać, czy mapy lokalne i moduły nadal odpowiadają aktualnym tekstom urzędowym po kolejnych nowelizacjach.
 3. `FULL` dopiero po jawnej, udokumentowanej mierze kompletności całego aktu.
 
