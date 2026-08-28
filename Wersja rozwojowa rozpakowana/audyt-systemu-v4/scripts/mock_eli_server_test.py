@@ -29,8 +29,8 @@ PRZYKLADOWA_ODPOWIEDZ_ELI = {
     "items": [
         {"year": 2026, "pos": 999, "title": "Ustawa testowa Z", "announcementDate": "2026-07-11",
          "ELI": "http://mock/eli/2026/999"},
-        {"year": 2025, "pos": 1071, "title": "Kodeks cywilny (nowelizacja)", "announcementDate": "2026-07-10",
-         "ELI": "http://mock/eli/2025/1071"},
+        {"year": 2026, "pos": 795, "title": "Kodeks cywilny (tekst jednolity)", "announcementDate": "2026-06-17",
+         "ELI": "http://mock/eli/2026/795"},
     ]
 }
 
@@ -68,7 +68,7 @@ def main():
     with tempfile.TemporaryDirectory() as tmp:
         mapa_path = os.path.join(tmp, "mapa_test.md")
         with open(mapa_path, "w", encoding="utf-8") as f:
-            f.write("Kodeks cywilny — Dz.U. 2025 poz. 1071 (t.j.)\n"
+            f.write("Kodeks cywilny — Dz.U. 2026 poz. 795 (t.j.)\n"
                     "Inna ustawa — Dz.U. 2020 poz. 5\n")
 
         out_path = os.path.join(tmp, "raport.md")
@@ -85,7 +85,7 @@ def main():
 
         # asercje testowe
         oczekiwana_liczba = 2
-        zawiera_juz_w_mapie = "Kodeks cywilny (nowelizacja)" in raport and "TAK" in raport
+        zawiera_juz_w_mapie = "Kodeks cywilny (tekst jednolity)" in raport and "TAK" in raport
         zawiera_nowa = "Ustawa testowa Z" in raport and "NIE" in raport
 
         server.shutdown()
