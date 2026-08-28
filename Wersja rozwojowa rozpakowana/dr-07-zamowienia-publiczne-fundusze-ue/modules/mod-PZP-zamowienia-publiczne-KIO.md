@@ -286,7 +286,7 @@ ZAKAZ ZMIAN ISTOTNYCH (art. 454 PZP):
 DOPUSZCZALNE ZMIANY (art. 455 PZP) — katalog zamknięty:
   □ Klauzula przeglądowa przewidziana w SWZ (zakres, charakter, warunki zmian)
   □ Nowy wykonawca: sukcesja, restrukturyzacja, gwarancja (art. 455 ust. 1 pkt 2)
-  □ Wartość do 15% (dostawy/usługi) lub 15% (roboty) — łącznie
+  □ Art. 455 ust. 2: łączna wartość zmian musi być jednocześnie mniejsza niż progi unijne i niższa niż 10% wartości pierwotnej umowy (dostawy/usługi) albo 15% (roboty budowlane); bez zmiany ogólnego charakteru umowy — re-ver ELI 2026-08-28
   □ Okoliczności nieprzewidywalne (art. 455 ust. 1 pkt 4):
     → COVID, konflikt zbrojny, gwałtowny wzrost cen materiałów, klęska żywiołowa
   □ Zmiana nieistotna (test: czy zmiana wpłynęłaby na krąg oferentów lub wynik przetargu)
