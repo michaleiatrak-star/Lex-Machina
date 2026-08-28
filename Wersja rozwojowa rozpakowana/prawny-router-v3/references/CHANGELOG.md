@@ -1,5 +1,7 @@
 # CHANGELOG — prawny-router-v3
 
+- 3.32 (2026-08-28): przeniesiono poprawkę BI i fallbacku ISAP z osobistej instalacji, zachowując zmiany rozwojowe 3.30–3.31. Dodano zależność DR-16 i poprawny adres kontrolera; nieudane pobranie aktu/tekstu z ISAP uruchamia LEX/Legalis/ArsLege z kontrolą licencji, wersji i kategorii dowodu.
+
 - 3.31 (2026-08-28): zsynchronizowano router z modelem runtime current-state-only po zamknięciu F-108. Lokalne `MAPA-AKTOW.md` przechowują wyłącznie bieżący akt/zakres → moduł oraz fresh/temporal gate; historia napraw pozostaje w dziennikach i changelogach. Routing korzysta z aktualnych indeksów COV, a `COV` nie jest utożsamiane z `FULL`.
 
 - 3.30 (2026-08-27): zsynchronizowano `pokrycie-dziedzinowe.md` ze stanem faktycznym repozytorium: REACH/CLP → DR-10, akcyza/cło → istniejące moduły DR-06, cudzoziemcy → kanoniczny DR-05; dodano wejścia F-108 P1/41, P1/8 i P1/52.
