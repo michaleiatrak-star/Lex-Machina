@@ -16,7 +16,7 @@
 | Flaga | Priorytet | Pozostały zakres | Kryterium zamknięcia |
 |---|---|---|---|
 | F-135 | średni | Dokończyć cross-check wartości prawnych w pozostałych DR, elementów unikalnych oraz `shared`; każdą rozbieżność rozstrzygnąć w źródle urzędowym albo jawnie oznaczyć jako nieweryfikowalną. | Zero nieuzasadnionych rozbieżności albo jawne oznaczenie nieweryfikowalnych pozycji. |
-| F-138 | wysoki | Migracja lokalnych `MAPA-AKTOW.md` do modelu current-state-only została wykonana dla wszystkich DR objętych sweepem. `prawny-router-v3` jest zsynchronizowany na 3.31 (`SKILL.md` + `references/CHANGELOG.md`), a `audyt-systemu-v4/SKILL.md` ma 6.28. Pozostaje dopisać 6.28 do kanonicznego `audyt-systemu-v4/references/CHANGELOG.md` oraz wykonać realny test spójności / końcowy cross-check. | Zgodne wersje/changelogi, F-108 nie figuruje jako otwarta, a końcowy test rejestracji/pokrycia i cross-check nie wykazują sprzeczności blokujących. |
+| F-138 | wysoki | Migracja lokalnych `MAPA-AKTOW.md` do modelu current-state-only została wykonana dla wszystkich DR objętych sweepem. Wersje są zsynchronizowane: `prawny-router-v3` 3.31 i `audyt-systemu-v4` 6.28 w `SKILL.md` oraz kanonicznych `references/CHANGELOG.md`. Pozostaje realny test spójności / końcowy cross-check. | F-108 nie figuruje jako otwarta, a końcowy test rejestracji/pokrycia i cross-check nie wykazują sprzeczności blokujących. |
 
 ## Reaktywne
 
