@@ -12,7 +12,7 @@ Mapa pokazuje tylko bieżące pokrycie używane przez system. Rejestracja aktu n
 
 | Akt / zakres | Moduł wejściowy | Status bieżący |
 |---|---|---|
-| samorząd gminny | `mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa` | 🟡 |
+| samorząd gminny — Dz.U. 2026 poz. 662 | `mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa` | 🟢 B+/COV — art. 14, nadzór art. 90–98 i skarga art. 101 zmapowane z aktualnego ELI 2026-08-28 |
 | samorząd powiatowy | `mod-ustawa-samorzad-powiatowy` | 🟢 B+ |
 | samorząd województwa | `mod-ustawa-samorzad-wojewodztwa` | 🟢 B+ |
 | wojewoda i administracja rządowa w województwie | `mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa` | 🟡 |
@@ -38,6 +38,6 @@ Mapa pokazuje tylko bieżące pokrycie używane przez system. Rejestracja aktu n
 
 ## Aktywne luki
 
-1. Pełny audyt rozdziałowy nadal nie jest zakończony dla większości aktów DR-08.
-2. Najwyższy priorytet pogłębiania: samorząd gminny, nadzór nad uchwałami, MPZP/WZ oraz lokalne finanse i usługi komunalne.
+1. Samorząd gminny ma bieżące B+/COV; nie oznacza to statusu FULL całej ustawy.
+2. Najwyższy priorytet pogłębiania DR-08: nadzór szczegółowy, MPZP/WZ oraz lokalne finanse i usługi komunalne.
 3. Przed użyciem konkretnego przepisu obowiązuje świeży odczyt ELI/ISAP; przepisy lokalne wymagają również sprawdzenia właściwego dziennika urzędowego/BIP.
