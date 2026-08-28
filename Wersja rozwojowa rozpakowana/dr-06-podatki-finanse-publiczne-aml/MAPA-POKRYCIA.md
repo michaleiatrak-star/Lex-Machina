@@ -45,9 +45,17 @@ Mapa opisuje wyłącznie aktualne pokrycie używane przez system. Historia zmian
 | cło / UCC / CN | 🟢/🟡 | `mod-UCC-clo-taryfa-celna.md` + moduły celne |
 | finanse publiczne | 🟢/🟡; metryka aktualna w MAPA-AKTOW |
 | AML | 🟢/🟡; moduły instytucji obowiązanych i obowiązków AML |
+| KKS — warstwa karnoskarbowa | 🟢 B+ / COV — kanoniczny moduł `dr-03/.../mod-KKS-karny-skarbowy-i-AML.md`; DR-06 dostarcza właściwe prawo podatkowe/celne i wartości dynamiczne |
+
+## Routing KKS
+
+KKS jest kanonicznie analizowany w DR-03 jako prawo karne skarbowe. DR-06 należy dołączyć zawsze, gdy kwalifikacja zależy od treści obowiązku podatkowego, celnego, akcyzowego, dewizowego albo od kwoty/progu wyliczanego na podstawie prawa finansowego.
+
+**Baza KKS:** Dz.U. 2025 poz. 633 t.j., z kontrolą późniejszych zmian w ELI. Moduł DR-03 ma bieżący status B+/COV i obejmuje Tytuły I–III, intertemporalność oraz odesłania do KPK/KKW.
 
 ## Aktywne luki
 
 1. Ordynacja podatkowa ma pełne pokrycie operacyjne głównych działów, ale część zakresów pozostaje B/B+ zamiast `FULL`.
 2. MDR, GAAR, STIR oraz szczególne procedury wymagają pogłębiania przy konkretnych sprawach.
 3. Stawki, progi i wartości podatkowe wymagają świeżego źródła urzędowego na datę analizy.
+4. KKS ma B+/COV po stronie DR-03; DR-06 nie duplikuje kodeksu, lecz dostarcza warstwę finansowoprawną potrzebną do jego zastosowania.
