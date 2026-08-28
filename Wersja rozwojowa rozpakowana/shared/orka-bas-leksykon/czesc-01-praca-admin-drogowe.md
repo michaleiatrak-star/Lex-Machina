@@ -122,7 +122,7 @@ Weryfikuj: aktualne art. KPA, KPC, KPK w ISAP → różne wymagania per tryb
 
 ### BAS-008 — Mienie komunalne
 ```
-Weryfikacja: ustawa o samorządzie gminnym art. 43 (Dz.U. 2025 poz. 1153 t.j.)
+Weryfikacja: ustawa o samorządzie gminnym art. 43 (Dz.U. 2026 poz. 662 t.j.)
   ZWERYFIKOWANO — definicja bez zmian, aktualny t.j. 2025
 Definicja: Własność i inne prawa majątkowe należące do gmin, związków gmin
 oraz innych gminnych osób prawnych.
