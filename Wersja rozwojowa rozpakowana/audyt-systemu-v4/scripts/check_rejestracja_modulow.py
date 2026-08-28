@@ -123,7 +123,7 @@ def main(baza):
     if not sekcje:
         print('OSTRZEŻENIE: nie znaleziono ROUTING-MAP.md — kontrola 4 pominięta\n')
 
-    skille = sorted(d for d in os.listdir(baza) if d.startswith('dr-'))
+    skille = sorted(d for d in os.listdir(baza) if re.match(r'dr-(0[1-9]|1[0-6])-', d))
     problemy = 0
     print('%-46s %5s %5s %5s %5s  %s' % ('SKILL', 'dysk', '[✓]', 'mapa', 'rout', 'STATUS'))
     print('-' * 92)
