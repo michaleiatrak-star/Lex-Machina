@@ -19,7 +19,7 @@ Statusy bieżące:
 | ID | Akt | DR | Status bieżący / następny krok |
 |---:|---|---|---|
 | 1 | Prawo wekslowe | DR-02 | 🟡 B — metryka RZĄD 1 potwierdzona; audyt treści całego aktu do pogłębienia |
-| 2 | TFUE | DR-14 | ⏳ AUDYT — moduł istnieje; potrzebny przegląd struktury traktatu / relewantnych części |
+| 2 | TFUE | DR-14 | 🟢 B+ / COV — struktura Części I–VII i aktualna wersja skonsolidowana EUR-Lex 15.03.2025 zmapowane 2026-08-28; brak FULL |
 | 3 | KPA | DR-05 | 🟡 B+ — szerokie pokrycie operacyjne; brak statusu FULL całego kodeksu |
 | 4 | KRO | DR-02 | 🟡 B — moduł rodzinny istnieje; brak pełnego audytu całego KRO |
 | 5 | KC | DR-02 | 🟡 B+ — szerokie pokrycie tematyczne; brak pełnego audytu całego KC |
@@ -32,10 +32,10 @@ Statusy bieżące:
 | 12 | Radcowie prawni | DR-12 | 🟡 B — moduł istnieje; audyt całej ustawy do wykonania |
 | 13 | Prawo spółdzielcze | DR-02 | 🟡 B — dedykowany moduł; potrzebny pełny audyt treści |
 | 14 | Fundacje | DR-02 | 🟡 B — moduł istnieje; potrzebny audyt całej ustawy |
-| 15 | RPO | DR-01/12 | ⏳ AUDYT — routing istnieje; wymagany bieżący przegląd aktu |
+| 15 | RPO | DR-05 | 🟢 B+ / COV — Dz.U. 2024 poz. 1264, aktualne art. 12–17 zmapowane w ELI 2026-08-28; brak FULL |
 | 16 | Prawo o stowarzyszeniach | DR-02 | 🟡 B — moduł istnieje; potrzebny audyt całej ustawy |
 | 17 | Samorząd gminny | DR-08 | 🟡 B — moduł istnieje; priorytet audytu DR-08 |
-| 18 | TUE | DR-14 | ⏳ AUDYT — moduł istnieje; potrzebny przegląd struktury traktatu / relewantnych części |
+| 18 | TUE | DR-14 | 🟢 B+ / COV — Tytuły I–VI i aktualna wersja skonsolidowana EUR-Lex 15.03.2025 zmapowane 2026-08-28; brak FULL |
 | 19 | Prawo autorskie | DR-11 | 🟡 B — moduły IP istnieją; potrzebny pełny audyt aktu |
 | 20 | Własność lokali | DR-02 | 🟡 B — moduł istnieje; potrzebny audyt całej ustawy |
 | 21 | Zastaw rejestrowy | DR-02 | 🟡 B — moduł istnieje; potrzebny audyt całej ustawy |
@@ -49,7 +49,7 @@ Statusy bieżące:
 | 29 | System ubezpieczeń społecznych | DR-04 | 🟢 B+ / COV — wszystkie główne rozdziały mają bieżący status; brak FULL |
 | 30 | Zasiłki chorobowe i macierzyńskie | DR-04 | 🟢 B+ / COV — dedykowany moduł, bieżąca metryka RZĄD 1 |
 | 31 | KKS | DR-03/06 | 🟡 B — moduły istnieją; potrzebny pełny audyt kodeksu |
-| 32 | RPD | DR-01/12 | ⏳ AUDYT — moduł/routing istnieje; potrzebny bieżący przegląd aktu |
+| 32 | RPD | DR-05 | 🟢 B+ / COV — Dz.U. 2023 poz. 292, aktualne art. 10–11 zmapowane w ELI 2026-08-28; brak FULL |
 | 33 | KSH | DR-02 | 🟢 B+ / COV — mapa bieżąca pokrywa wszystkie tytuły co najmniej operacyjnie; brak FULL |
 | 34 | Spółdzielnie mieszkaniowe | DR-02 | 🟡 B+ — dedykowany moduł; dalszy audyt dla FULL |
 | 35 | Ochrona praw lokatorów | DR-02 | 🟡 B — moduł istnieje; potrzebny pełny audyt aktu |
@@ -73,9 +73,9 @@ Statusy bieżące:
 
 ## Priorytet dalszej pracy
 
-1. **P1 — akty `⏳ AUDYT`:** TFUE, TUE, RPO, RPD oraz inne akty, których obecność jest pewna, ale brak aktualnego rozdziałowego rejestru treści.
+1. **P1 — akty `🟡 B` o wysokiej użyteczności praktycznej:** Prawo o adwokaturze, radcowie prawni, samorząd gminny, Prawo autorskie, Konstytucja, PUSP, KPW, KSCU i Prawo o prokuraturze.
 2. **P1 — DR-01 / DR-08 / DR-10–DR-16:** pogłębiać żółte wpisy bez tworzenia historii w mapach runtime.
-3. **P2 — akty `🟡 B`:** podnosić do B+/COV przez porównanie aktualnej struktury z urzędowym źródłem i jawne wskazanie pozostających luk.
+3. **P2 — pozostałe akty `🟡 B`:** podnosić do B+/COV przez porównanie aktualnej struktury z urzędowym źródłem i jawne wskazanie pozostających luk.
 4. Status `FULL` nadać dopiero po wykonaniu jawnej miary kompletności dla całego aktu.
 
 ## Reguła źródeł
