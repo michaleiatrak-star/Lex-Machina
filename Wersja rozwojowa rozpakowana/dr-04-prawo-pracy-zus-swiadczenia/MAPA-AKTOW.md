@@ -24,7 +24,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Ustawa o zakładowym funduszu świadczeń socjalnych | Dz.U. 2024 poz. 288 t.j. ze zm. | `mod-ustawa-ZFSS` | ✅ aktywny |
 | Ustawa o minimalnym wynagrodzeniu za pracę | Dz.U. 2024 poz. 1773 ze zm. + aktualne rozporządzenie płacowe | `mod-ustawa-minimalne-wynagrodzenie` | ✅ aktywny; fresh gate kwot |
 | Ustawa o zatrudnianiu pracowników tymczasowych | Dz.U. 2025 poz. 236 t.j. ze zm. | `mod-ustawa-praca-tymczasowa` | ✅ aktywny |
-| Ustawa o zwolnieniach grupowych | Dz.U. 2025 poz. 570 t.j. ze zm. | `mod-ustawa-zwolnienia-grupowe` | 🟢 B+/COV |
+| Ustawa o zwolnieniach grupowych | Dz.U. 2025 poz. 570 t.j. ze zm. | `mod-ustawa-zwolnienia-grupowe` | 🟡 B+; fresh gate |
 | Ustawa o układach zbiorowych pracy i porozumieniach zbiorowych + routing związkowy | Dz.U. 2025 poz. 1661 ze zm. + właściwe ustawy związkowe | `mod-ustawa-zwiazki-zawodowe-spory-zbiorowe` | ✅ aktywny |
 | Karta Nauczyciela — aspekty pracownicze | Dz.U. 2026 poz. 515 t.j. ze zm. | `mod-ustawa-karta-nauczyciela-pracownicze` | ✅ aktywny; fresh gate |
 | Ustawa o rynku pracy i służbach zatrudnienia | Dz.U. 2025 poz. 620 ze zm. | `mod-ustawa-rynek-pracy-zatrudnienie` | ✅ aktywny |
@@ -34,7 +34,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | SUS — pozostałe rozdziały | jw. | `mod-SUS-uzupelnienie-pokrycia-2026` | 🟡 B |
 | SUS — podleganie ubezpieczeniom | jw. | `mod-SUS-dzial-2-podleganie-ubezpieczeniom` | ✅ aktywny |
 | Ubezpieczenie społeczne rolników (KRUS) | Dz.U. 2025 poz. 1770 t.j. ze zm. | `mod-KRUS-rolnicze-ubezpieczenia` | ✅ aktywny |
-| Ustawa o świadczeniach pieniężnych z ubezpieczenia społecznego w razie choroby i macierzyństwa | Dz.U. 2026 poz. 854 t.j. ze zm. | `mod-ustawa-zasilkowa-choroba-macierzynstwo` | 🟢 B+/COV |
+| Ustawa o świadczeniach pieniężnych z ubezpieczenia społecznego w razie choroby i macierzyństwa | Dz.U. 2026 poz. 854 t.j. ze zm. | `mod-ustawa-zasilkowa-choroba-macierzynstwo` | 🟡 B+; pełna mapa rozdziałów, bez deklaracji COV całego aktu |
 | Ustawa o emeryturach i rentach z FUS | Dz.U. 2025 poz. 1749 t.j. ze zm. | rodzina modułów FUS | 🟢/🟡 aktywny; fresh gate |
 | FUS — renta rodzinna / zasiłek pogrzebowy / waloryzacja | jw. | `mod-FUS-zasilek-pogrzebowy-renta-rodzinna-waloryzacja` | ✅ aktywny |
 | FUS — pozostałe działy | jw. | `mod-FUS-uzupelnienie-pokrycia-2026` | 🟡 B |
