@@ -51,3 +51,11 @@ zgodnie z tą samą logiką klasyfikacji, jaką ten skill stosuje do reszty
 systemu, mieszka w `shared/tools/` — obok modułów, z
 których faktycznie korzysta pipeline produkcyjny (`shared/HYBRID-VALIDATION.md`
 i inne), nie w audycie deweloperskim. Patrz `shared/tools/README.md`.
+
+
+## test_f108_consistency.py — T19 F-108
+
+Deterministyczny guard bieżącego benchmarku 52 aktów. Chroni rozdzielenie
+`routing != COV != FULL`, oczekiwany wynik 48/52 COV oraz zestaw krytycznych
+korekt metryk Dz.U. z audytu 2026-08-28. Jest uruchamiany przez
+`run_regression_suite.py` i jego FAIL jest blockerem strukturalnym.
