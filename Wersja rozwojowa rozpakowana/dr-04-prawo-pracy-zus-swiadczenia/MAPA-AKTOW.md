@@ -14,7 +14,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | KP — odpowiedzialność materialna / przedawnienie | jw. | `mod-KP-dzial-V-XIV-odpowiedzialnosc-materialna-przedawnienie` | ✅ aktywny |
 | KP — wynagrodzenie / świadczenia / jawność wynagrodzeń | jw. + właściwe prawo UE i przepisy implementujące obowiązujące na dzień sprawy | `mod-KP-dzial-III-wynagrodzenie-swiadczenia-jawnosc` | ✅ aktywny; temporal gate |
 | KP — nadużycie prawa / limity umów / wypowiedzenie zmieniające / kary porządkowe | jw. | `mod-KP-naduzycia-pracodawcy-limity-kary-degradacja` | ✅ aktywny |
-| Mobbing / dyskryminacja | aktualne brzmienie KP na dzień zdarzenia; przyszłe zmiany stosować dopiero po wejściu w życie | `mod-KP-mobbing-dyskryminacja` | ✅ aktywny; temporal gate |
+| Mobbing / dyskryminacja | aktualne brzmienie KP na dzień zdarzenia | `mod-KP-mobbing-dyskryminacja` | ✅ aktywny; temporal gate |
 | Konflikt interesów / nepotyzm w zatrudnieniu | KP + przepisy sektorowe właściwe dla danego pracodawcy | `mod-KP-konflikt-interesow-rodzina-nepotyzm` | ✅ aktywny; routing przekrojowy |
 | Reforma stażu pracy | przepisy KP obowiązujące na dzień ustalania stażu | `mod-reforma-stazu-pracy-2025-2026` | ✅ aktywny; temporal gate |
 | Ustawa o Państwowej Inspekcji Pracy | Dz.U. 2024 poz. 1712 t.j. ze zm. | `mod-ustawa-PIP-inspekcja-pracy` | ✅ aktywny |
@@ -50,6 +50,6 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 ## Reguły runtime
 
 - każdy fizyczny moduł DR-04 pozostaje jawnie rejestrowany w tej mapie zgodnie z `check_rejestracja_modulow.py`;
-- przyszłe nowelizacje KP i innych ustaw nie są stosowane jako stan bieżący przed datą wejścia w życie; moduły mogą je przechowywać wyłącznie za temporal gate;
+- stan temporalny KP i innych ustaw ustala się na dzień zdarzenia; nieobowiązujące brzmienie nie może być aktywowane w runtime;
 - kwoty świadczeń, płace minimalne, składki, limity, okresy i terminy wymagają fresh gate do ELI/ISAP i właściwych obwieszczeń/rozporządzeń;
 - `COV` oznacza udokumentowaną strukturę i routing, nie `FULL` artykuł-po-artykule.
