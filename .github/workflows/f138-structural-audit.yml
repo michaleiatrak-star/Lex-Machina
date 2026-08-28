@@ -34,3 +34,10 @@ jobs:
           python3 "$ROOT/audyt-systemu-v4/scripts/test_moved_to_shared.py" --repo-root "$ROOT"
           python3 "$ROOT/audyt-systemu-v4/scripts/ci_check_shared.py" --repo-root "$ROOT"
           python3 "$ROOT/audyt-systemu-v4/scripts/test_f108_consistency.py"
+
+      - name: Run full regression suite (temporary F-108 closure gate)
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="$GITHUB_WORKSPACE/Wersja rozwojowa rozpakowana"
+          python3 "$ROOT/audyt-systemu-v4/scripts/run_regression_suite.py" --repo-root "$ROOT"
