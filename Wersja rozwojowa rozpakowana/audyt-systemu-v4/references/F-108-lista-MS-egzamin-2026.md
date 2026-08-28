@@ -27,9 +27,9 @@ Statusy bieżące:
 | 7 | KW | DR-03 | 🟢 B+ / COV — część ogólna i główne rozdziały zmapowane; pozostałe żółte zakresy jawne |
 | 8 | Opłaty w sprawach karnych | DR-03 | 🟢 B+ / COV — osobny moduł, art. 1–23 zmapowane, RZĄD 1 |
 | 9 | Kodeks pracy | DR-04 | 🟡 B+ — liczne moduły tematyczne; pełny audyt kodeksu do wykonania |
-| 10 | Prawo o adwokaturze | DR-12 | 🟡 B — moduł istnieje; audyt całej ustawy do wykonania |
+| 10 | Prawo o adwokaturze | DR-12 | 🟢 B+ / COV — bieżąca mapa ustawy, dyscyplinarne i aktualny KEA NRA (uchwała 174/2026) zmapowane 2026-08-28; brak FULL |
 | 11 | Księgi wieczyste i hipoteka | DR-02 | 🟡 B — moduł istnieje; bieżąca metryka urzędowa kontrolowana; audyt całego aktu do pogłębienia |
-| 12 | Radcowie prawni | DR-12 | 🟡 B — moduł istnieje; audyt całej ustawy do wykonania |
+| 12 | Radcowie prawni | DR-12 | 🟢 B+ / COV — uwzględniono obowiązującą Dz.U. 2026 poz. 731 oraz aktualny KERP KIRP; brak FULL |
 | 13 | Prawo spółdzielcze | DR-02 | 🟡 B — dedykowany moduł; potrzebny pełny audyt treści |
 | 14 | Fundacje | DR-02 | 🟡 B — moduł istnieje; potrzebny audyt całej ustawy |
 | 15 | RPO | DR-05 | 🟢 B+ / COV — Dz.U. 2024 poz. 1264, aktualne art. 12–17 zmapowane w ELI 2026-08-28; brak FULL |
@@ -73,7 +73,7 @@ Statusy bieżące:
 
 ## Priorytet dalszej pracy
 
-1. **P1 — akty `🟡 B` o wysokiej użyteczności praktycznej:** Prawo o adwokaturze, radcowie prawni, samorząd gminny, Prawo autorskie, Konstytucja, PUSP, KPW, KSCU i Prawo o prokuraturze.
+1. **P1 — akty `🟡 B` o wysokiej użyteczności praktycznej:** samorząd gminny, Prawo autorskie, Konstytucja, PUSP, KPW, KSCU i Prawo o prokuraturze.
 2. **P1 — DR-01 / DR-08 / DR-10–DR-16:** pogłębiać żółte wpisy bez tworzenia historii w mapach runtime.
 3. **P2 — pozostałe akty `🟡 B`:** podnosić do B+/COV przez porównanie aktualnej struktury z urzędowym źródłem i jawne wskazanie pozostających luk.
 4. Status `FULL` nadać dopiero po wykonaniu jawnej miary kompletności dla całego aktu.
