@@ -46,6 +46,13 @@ Mapa zawiera tylko aktualny stan pokrycia wykorzystywany przez system. Historia 
 | skarga o stwierdzenie niezgodności z prawem | 🟡 B+ | `mod-PPSA-uzupelnienie-pokrycia-2026.md` |
 | wykonywanie orzeczeń | 🟡 B+ | jw. |
 
+## RPO / RPD
+
+| Akt / zakres | Status bieżący | Dowód pokrycia |
+|---|---|---|
+| Rzecznik Praw Obywatelskich — Dz.U. 2024 poz. 1264 | 🟢 B+ / COV | `mod-ustawa-RPO.md`; aktualny zakres art. 12–17 zmapowany w RZĄD 1 ELI 2026-08-28 |
+| Rzecznik Praw Dziecka — Dz.U. 2023 poz. 292 | 🟢 B+ / COV | `mod-ustawa-RPD.md`; aktualny zakres art. 10–11 zmapowany w RZĄD 1 ELI 2026-08-28 |
+
 ## Cudzoziemcy / legalizacja
 
 | Zakres | Status bieżący |
@@ -57,4 +64,5 @@ Mapa zawiera tylko aktualny stan pokrycia wykorzystywany przez system. Historia 
 
 1. PPSA ma pełne pokrycie operacyjne wszystkich głównych działów, ale część pozostaje na poziomie B/B+ zamiast pełnego komentarza.
 2. KPA wymaga dalszego pogłębiania tylko tam, gdzie moduły tematyczne nie opisują całych rozdziałów.
-3. Każda jednostka prawna i termin wymagają świeżego odczytu ELI/ISAP przed użyciem.
+3. RPO i RPD mają bieżące mapy kompetencji B+/COV; konkretny środek procesowy zawsze wymaga dodatkowej kontroli właściwego kodeksu proceduralnego.
+4. Każda jednostka prawna i termin wymagają świeżego odczytu ELI/ISAP przed użyciem.
