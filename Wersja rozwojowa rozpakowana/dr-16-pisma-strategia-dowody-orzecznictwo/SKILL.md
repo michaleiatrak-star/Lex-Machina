@@ -92,7 +92,7 @@ Przy redagowaniu pism rozważ doładowanie (`view`) definicji:
 - BAS-W33/W34 Kara umowna i odsetki — precyzja żądań pozwu
 - BAS-W35 Nakaz zapłaty: terminologia "sprzeciw" vs "zarzuty"
 
-## Moduły (12 łącznie — ✓ 12 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+## Moduły (11 łącznie — ✓ 11 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
 
 ```
 KPC — PROCEDURY SZCZEGÓLNE I NARZĘDZIA PROCESOWE:
