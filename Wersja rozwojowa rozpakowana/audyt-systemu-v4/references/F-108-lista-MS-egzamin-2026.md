@@ -14,65 +14,64 @@
 
 | ID | Akt | DR | Status bieżący |
 |---:|---|---|---|
-| 1 | Prawo wekslowe | DR-02 | 🟢 B+ / COV — Dz.U. 2022 poz. 282; Tytuły I–III, 16 działów weksla trasowanego, weksel własny i główne bramki procesowe zmapowane |
-| 2 | TFUE | DR-14 | 🟢 B+ / COV — Części I–VII, wersja skonsolidowana EUR-Lex 15.03.2025 |
+| 1 | Prawo wekslowe | DR-02 | 🟢 B+ / COV — Dz.U. 2022 poz. 282; główne tytuły i procedury zmapowane |
+| 2 | TFUE | DR-14 | 🟢 B+ / COV — Części I–VII, EUR-Lex 15.03.2025 |
 | 3 | KPA | DR-05 | 🟡 B+ — szerokie pokrycie operacyjne; brak FULL |
-| 4 | KRO | DR-02 | 🟢 B+ / COV — Dz.U. 2026 poz. 236; indeks bieżący + 8 części tematycznych + opieka/kuratela |
+| 4 | KRO | DR-02 | 🟢 B+ / COV — Dz.U. 2026 poz. 236; indeks + części tematyczne + opieka/kuratela |
 | 5 | KC | DR-02 | 🟡 B+ — szerokie pokrycie tematyczne; brak pełnego audytu kodeksu |
-| 6 | KPC | DR-02 | 🟢 B+ / COV — mapa bieżąca głównych działów i aktywnych luk |
+| 6 | KPC | DR-02 | 🟢 B+ / COV — mapa głównych działów i aktywnych luk |
 | 7 | KW | DR-03 | 🟢 B+ / COV — część ogólna i główne rozdziały zmapowane |
 | 8 | Opłaty w sprawach karnych | DR-03 | 🟢 B+ / COV — art. 1–23, RZĄD 1 |
 | 9 | Kodeks pracy | DR-04 | 🟡 B+ — liczne moduły tematyczne; brak FULL |
 | 10 | Prawo o adwokaturze | DR-12 | 🟢 B+ / COV — ustawa, dyscyplinarne i aktualny KEA NRA |
-| 11 | Księgi wieczyste i hipoteka | DR-02 | 🟢 B+ / COV — Dz.U. 2026 poz. 1066; jawność, domniemania, rękojmia, wzmianki i hipoteka zmapowane |
-| 12 | Radcowie prawni | DR-12 | 🟢 B+ / COV — Dz.U. 2024 poz. 499 + obowiązująca Dz.U. 2026 poz. 731; KERP KIRP |
-| 13 | Prawo spółdzielcze | DR-02 | 🟡 B — dedykowany moduł; pełny audyt treści otwarty |
-| 14 | Fundacje | DR-02 | 🟢 B+ / COV — Dz.U. 2023 poz. 166 + obowiązująca Dz.U. 2026 poz. 316; tworzenie, statut, majątek, nadzór i likwidacja zmapowane |
-| 15 | RPO | DR-05 | 🟢 B+ / COV — Dz.U. 2024 poz. 1264; aktualne kompetencje zmapowane |
-| 16 | Prawo o stowarzyszeniach | DR-02 | 🟢 B+ / COV — Dz.U. 2020 poz. 2261 + obowiązująca poz. 316; Rozdziały 1–7; poz. 346 dopiero od 30.09.2028 |
-| 17 | Samorząd gminny | DR-08 | 🟢 B+ / COV — Dz.U. 2026 poz. 662; ustrój, organy, nadzór, art. 101 i głosowania zmapowane |
+| 11 | Księgi wieczyste i hipoteka | DR-02 | 🟢 B+ / COV — Dz.U. 2026 poz. 1066 |
+| 12 | Radcowie prawni | DR-12 | 🟢 B+ / COV — Dz.U. 2024 poz. 499 + Dz.U. 2026 poz. 731; KERP |
+| 13 | Prawo spółdzielcze | DR-02 | 🟢 B+ / COV — Dz.U. 2026 poz. 521; części I–III, członkostwo, organy, lustracja i reorganizacja zmapowane |
+| 14 | Fundacje | DR-02 | 🟢 B+ / COV — Dz.U. 2023 poz. 166 + Dz.U. 2026 poz. 316 |
+| 15 | RPO | DR-05 | 🟢 B+ / COV — Dz.U. 2024 poz. 1264 |
+| 16 | Prawo o stowarzyszeniach | DR-02 | 🟢 B+ / COV — Dz.U. 2020 poz. 2261 + poz. 316/2026; poz. 346/2026 dopiero od 30.09.2028 |
+| 17 | Samorząd gminny | DR-08 | 🟢 B+ / COV — Dz.U. 2026 poz. 662 |
 | 18 | TUE | DR-14 | 🟢 B+ / COV — Tytuły I–VI, EUR-Lex 15.03.2025 |
-| 19 | Prawo autorskie | DR-11 | 🟢 B+ / COV — Dz.U. 2025 poz. 24; główne rozdziały i roszczenia zmapowane |
-| 20 | Własność lokali | DR-02 | 🟡 B — audyt całej ustawy otwarty |
-| 21 | Zastaw rejestrowy | DR-02 | 🟡 B — audyt całej ustawy otwarty |
-| 22 | Konstytucja | DR-01 | 🟢 B+ / COV — rozdziały I–XIII oraz workflow TK zmapowane |
+| 19 | Prawo autorskie | DR-11 | 🟢 B+ / COV — Dz.U. 2025 poz. 24 |
+| 20 | Własność lokali | DR-02 | 🟢 B+ / COV — Dz.U. 2026 poz. 232; Rozdziały 1–4 zmapowane |
+| 21 | Zastaw rejestrowy | DR-02 | 🟢 B+ / COV — dedykowany moduł; ustanowienie, przedmiot, zbieg, zaspokojenie i rejestr zmapowane |
+| 22 | Konstytucja | DR-01 | 🟢 B+ / COV — rozdziały I–XIII i workflow TK |
 | 23 | KK | DR-03 | 🟡 B+ — szerokie pokrycie tematyczne; brak FULL |
 | 24 | KPK | DR-03 | 🟡 B+ — kluczowe przepisy zweryfikowane 2026-08-28; pełny audyt otwarty |
-| 25 | KRS | DR-01/02 | 🟡 B — audyt aktualnej ustawy otwarty |
-| 26 | Gospodarka nieruchomościami | DR-08/02 | 🟡 B — audyt całej ustawy otwarty |
+| 25 | KRS | DR-02 | 🟢 B+ / COV — Dz.U. 2025 poz. 869 ze zm.; jawność, rejestry i procedura zmapowane, nowelizacje po t.j. objęte gate |
+| 26 | Gospodarka nieruchomościami | DR-09/08/02 | 🟢 B+ / COV — Dz.U. 2026 poz. 399; Działy I–V zmapowane w rzeczywistym module UGN |
 | 27 | Samorząd powiatowy | DR-08 | 🟢 B+ — dedykowany moduł operacyjny |
 | 28 | Samorząd województwa | DR-08 | 🟢 B+ — dedykowany moduł operacyjny |
 | 29 | System ubezpieczeń społecznych | DR-04 | 🟢 B+ / COV — główne rozdziały mają bieżący status |
-| 30 | Zasiłki chorobowe i macierzyńskie | DR-04 | 🟢 B+ / COV — dedykowany moduł, bieżąca metryka RZĄD 1 |
-| 31 | KKS | DR-03/06 | 🟡 B — pełny audyt kodeksu otwarty |
-| 32 | RPD | DR-05 | 🟢 B+ / COV — Dz.U. 2023 poz. 292, aktualne kompetencje zmapowane |
+| 30 | Zasiłki chorobowe i macierzyńskie | DR-04 | 🟢 B+ / COV — dedykowany moduł, RZĄD 1 |
+| 31 | KKS | DR-03/06 | 🟡 B — ostatni akt F-108 na poziomie B; pełny audyt kodeksu otwarty |
+| 32 | RPD | DR-05 | 🟢 B+ / COV — Dz.U. 2023 poz. 292 |
 | 33 | KSH | DR-02 | 🟢 B+ / COV — wszystkie tytuły co najmniej operacyjnie pokryte |
-| 34 | Spółdzielnie mieszkaniowe | DR-02 | 🟡 B+ — dalszy audyt dla COV/FULL |
-| 35 | Ochrona praw lokatorów | DR-02 | 🟡 B — audyt całego aktu otwarty |
-| 36 | PUSP | DR-01/12 | 🟢 B+ / COV — Dz.U. 2024 poz. 334 ze zm.; aktywne działy zmapowane, poz. 370 uwzględniona |
+| 34 | Spółdzielnie mieszkaniowe | DR-02 | 🟡 B+ — aktualny t.j. Dz.U. 2026 poz. 889; dalszy audyt dla COV |
+| 35 | Ochrona praw lokatorów | DR-02 | 🟢 B+ / COV — Dz.U. 2023 poz. 725; typy najmu, wypowiedzenie i opróżnienie zmapowane |
+| 36 | PUSP | DR-01/12 | 🟢 B+ / COV — Dz.U. 2024 poz. 334 ze zm.; poz. 370 uwzględniona |
 | 37 | KPW | DR-03 | 🟢 B+ / COV — Dz.U. 2025 poz. 860; wszystkie 12 działów zmapowane |
 | 38 | PPSA | DR-05 | 🟢 B+ / COV — wszystkie główne działy mają bieżący status |
 | 39 | Prawo upadłościowe | DR-02 | 🟢 B+ / COV — likwidacja, międzynarodowe i postępowania odrębne zmapowane |
-| 40 | Zwolnienia grupowe | DR-04 | 🟢 B+ / COV — dedykowany moduł, procedura główna RZĄD 1 |
+| 40 | Zwolnienia grupowe | DR-04 | 🟢 B+ / COV — dedykowany moduł, RZĄD 1 |
 | 41 | Ubezpieczenia obowiązkowe, UFG i PBUK | DR-02 | 🟢 B+ / COV — osobny moduł i mapa rozdziałów |
-| 42 | KSCU | DR-12 | 🟢 B+ / COV — Dz.U. 2025 poz. 1228; opłaty, wydatki, zwolnienia i routing kosztowy |
+| 42 | KSCU | DR-12 | 🟢 B+ / COV — Dz.U. 2025 poz. 1228 |
 | 43 | Przeciwdziałanie narkomanii | DR-03 | 🟡 B+ — Dz.U. 2026 poz. 1004; pełny audyt aktu otwarty |
-| 44 | UOKiK | DR-02/12 | 🟡 B — audyt całego aktu otwarty |
+| 44 | UOKiK | DR-02/12 | 🟢 B+ / COV — Dz.U. 2025 poz. 1714; konkurencja, koncentracje, konsumenci i procedura zmapowane |
 | 45 | Wojewoda i administracja rządowa | DR-08 | 🟡 B+ — dedykowane pokrycie operacyjne |
 | 46 | Opóźnienia w transakcjach handlowych | DR-02 | 🟢 B+ / COV — rdzeń cywilny i bieżący workflow |
-| 47 | Prawa konsumenta | DR-02 | 🟡 B — audyt całej ustawy otwarty |
+| 47 | Prawa konsumenta | DR-02 | 🟢 B+ / COV — Dz.U. 2024 poz. 1796 ze zm.; Rozdziały 1–5b zmapowane |
 | 48 | Prawo restrukturyzacyjne | DR-02 | 🟢 B+ / COV — główne działy i pomoc publiczna zmapowane |
-| 49 | Prawo o prokuraturze | DR-12 | 🟢 B+ / COV — Dz.U. 2026 poz. 810; ustrój, status, dyscyplinarne i EPPO routing |
+| 49 | Prawo o prokuraturze | DR-12 | 🟢 B+ / COV — Dz.U. 2026 poz. 810 |
 | 50 | Sąd Najwyższy | DR-01 | 🟢 B+ — dedykowany moduł RZĄD 1 |
 | 51 | Prawo przedsiębiorców | DR-08/02 | 🟢 B+ — dedykowany moduł RZĄD 1 |
 | 52 | Fundacja rodzinna | DR-02 | 🟢 B+ / COV — osobny moduł i mapa 16 rozdziałów |
 
 ## Priorytet dalszej pracy
 
-1. **P1 — pozostałe akty B:** Prawo spółdzielcze, własność lokali, zastaw rejestrowy, KRS, gospodarka nieruchomościami, KKS, ochrona praw lokatorów, UOKiK i prawa konsumenta.
-2. **P1 — pozostałe żółte DR-01 / DR-08 / DR-10–DR-16:** pogłębiać bez historii w mapach runtime.
-3. **P2 — B+:** podnosić do COV przez zestawienie całej aktualnej struktury z urzędowym źródłem.
-4. `FULL` dopiero po jawnej, udokumentowanej mierze kompletności.
+1. **P1 — KKS:** ostatni akt benchmarku pozostający na poziomie `B`.
+2. **P1 — akty `B+` bez COV:** KPA, KC, Kodeks pracy, KK, KPK, samorząd powiatowy, samorząd województwa, spółdzielnie mieszkaniowe, przeciwdziałanie narkomanii, wojewoda i administracja rządowa, Sąd Najwyższy, Prawo przedsiębiorców.
+3. `FULL` dopiero po jawnej, udokumentowanej mierze kompletności całego aktu.
 
 ## Reguła źródeł
 
