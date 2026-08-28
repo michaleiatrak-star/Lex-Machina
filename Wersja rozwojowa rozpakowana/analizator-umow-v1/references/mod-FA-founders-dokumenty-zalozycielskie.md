@@ -38,7 +38,7 @@
 >   https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000018
 > KC (spółka cywilna, art. 860-875; swoboda umów art. 353¹) — Dz.U. 2025
 >   poz. 1071 ze zm.
->   https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250001071
+>   https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000795
 > Prawo przedsiębiorców (JDG, CEIDG) — Dz.U. 2025 poz. 1480 t.j.
 >   https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250001480
 > ```
@@ -195,7 +195,7 @@ udziałów w SHA).
 ## J20.3 UMOWA SPÓŁKI CYWILNEJ — ANALIZA I REDAKCJA
 
 ```
-PODSTAWA: KC art. 860-875 (Dz.U. 2025 poz. 1071 ze zm.) ✅ VER 2026-06-15
+PODSTAWA: KC art. 860-875 (Dz.U. 2026 poz. 795 ze zm.) ✅ VER 2026-06-15
 FORMA: pisemna ad probationem (art. 860 §2 KC) — nieważność formy NIE
   powoduje nieważności umowy, ale utrudnia dowód jej treści
 

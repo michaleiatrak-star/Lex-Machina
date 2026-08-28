@@ -9,7 +9,7 @@ Mapa zawiera wyłącznie akty i źródła używane obecnie. Historia korekt oraz
 | Akt / zakres | Aktualna podstawa operacyjna | Moduł | Status |
 |---|---|---|---|
 | Prawo o ustroju sądów powszechnych | aktualny tekst ELI/ISAP; kanonicznie DR-01 | → DR-01/`mod-USP-ustroj-sadow-powszechnych` | 🔗 |
-| Prawo o prokuraturze | Dz.U. 2024 poz. 390 t.j. + późn. zm.; fresh gate ELI | `mod-PrProkuratura-organy-ochrony-prawa` | ✅ |
+| Prawo o prokuraturze | Dz.U. 2026 poz. 810 t.j. + późn. zm.; fresh gate ELI | `mod-PrProkuratura-organy-ochrony-prawa` | 🟢 B+/COV |
 | KPC — arbitraż i mediacja | Dz.U. 2026 poz. 468 t.j. + późn. zm. | `mod-KPC-arbitraz-mediacja-ADR` | ✅ |
 | Mediacja — techniki i metodyka | bieżące standardy mediacji i wiedza fachowa; konkretne źródło wymaga fresh gate | `mod-techniki-mediacyjne-negocjacyjne` | ✅ aktywny; soft law / metodyka |
 | regulatorzy UOKiK / URE / UKE / KNF | właściwe bieżące ustawy sektorowe; nie istnieje jeden zbiorczy Dz.U. | `mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF` | ✅ / fresh gate per regulator |

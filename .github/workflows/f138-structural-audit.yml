@@ -27,9 +27,10 @@ jobs:
           set -euo pipefail
           ROOT="$GITHUB_WORKSPACE/Wersja rozwojowa rozpakowana"
 
-          python3 -m py_compile             "$ROOT/audyt-systemu-v4/scripts/check_rejestracja_modulow.py"             "$ROOT/audyt-systemu-v4/scripts/check_coverage_coherence.py"             "$ROOT/audyt-systemu-v4/scripts/test_moved_to_shared.py"             "$ROOT/audyt-systemu-v4/scripts/ci_check_shared.py"
+          python3 -m py_compile             "$ROOT/audyt-systemu-v4/scripts/check_rejestracja_modulow.py"             "$ROOT/audyt-systemu-v4/scripts/check_coverage_coherence.py"             "$ROOT/audyt-systemu-v4/scripts/test_moved_to_shared.py"             "$ROOT/audyt-systemu-v4/scripts/ci_check_shared.py"             "$ROOT/audyt-systemu-v4/scripts/test_f108_consistency.py"             "$ROOT/audyt-systemu-v4/scripts/run_regression_suite.py"
 
           python3 "$ROOT/audyt-systemu-v4/scripts/check_rejestracja_modulow.py" "$ROOT"
           python3 "$ROOT/audyt-systemu-v4/scripts/check_coverage_coherence.py" "$ROOT"
           python3 "$ROOT/audyt-systemu-v4/scripts/test_moved_to_shared.py" --repo-root "$ROOT"
           python3 "$ROOT/audyt-systemu-v4/scripts/ci_check_shared.py" --repo-root "$ROOT"
+          python3 "$ROOT/audyt-systemu-v4/scripts/test_f108_consistency.py"

@@ -277,7 +277,7 @@ SĄDOWNICTWO I PROCEDURA:
 
 PROKURATURA I ORGANY OCHRONY PRAWA:
   [✓] OK    mod-PrProkuratura-organy-ochrony-prawa
-              (Prawo o prokuraturze Dz.U. 2024 poz. 390 ze zm.;
+              (Prawo o prokuraturze Dz.U. 2026 poz. 810 t.j. ze zm.;
                ⚡ EPPO: ustawa Dz.U. 2025 poz. 304 od 2025;
                skargi na czynności, nadzór, bezczynność)
 

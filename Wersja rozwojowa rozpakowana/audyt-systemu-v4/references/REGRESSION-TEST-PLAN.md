@@ -380,6 +380,26 @@ pozornie WIĘKSZEGO pokrycia.
 
 ---
 
+## 11. T19 — F-108: integralność benchmarku i metryk bieżących (2026-08-28)
+
+**Źródło błędu rzeczywistego:** ponowny audyt F-108 wykazał, że rejestr 52 aktów
+mieszał obecność modułu z COV oraz że aktywne indeksy mogły zachować stare lub
+błędnie przypisane metryki Dz.U. mimo poprawnej mapy dziedzinowej.
+
+**Skrypt:** `scripts/test_f108_consistency.py` — test KRYTYCZNY, bez sieci.
+
+Sprawdza mechanicznie:
+- dokładnie 52 identyfikatory F-108;
+- dokładnie cztery pozycje poniżej COV: 7, 29, 30, 40;
+- deklarację 52/52 routing i 48/52 COV;
+- brak znanych regresji KC 2025/1071 i Prawa o prokuraturze 2024/390 w aktywnym `ROUTING-MAP.md`;
+- obecność skorygowanych wierszy w aktualnej `mapa_dzu_2026-08-28.md`;
+- zakaz powrotu błędnych tożsamości 2025/1338, 2023/549, 2024/1069 i 2026/346.
+
+**Kryterium:** każdy FAIL T19 blokuje wynik strukturalny suite. Test nie zastępuje
+żywej kontroli ELI/ISAP; chroni wyłącznie ustalenia już zweryfikowane źródłowo.
+
+
 ## LITERATURA (zweryfikowana online 2026-07-21)
 
 - testrail.com/blog/regression-testing — definicja regresji, priorytetyzacja

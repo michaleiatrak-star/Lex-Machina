@@ -69,7 +69,7 @@ Obowiązkowe przed każdym powołaniem:
 ---
 
 *DEFINICJE-KLUCZOWE.md · shared/ · Analizator Prawa Polskiego*
-*Weryfikacja źródeł: KC Dz.U. 2025 poz. 1071 · KP Dz.U. 2025 poz. 277 · Prawo przedsiębiorców Dz.U. 2025 poz. 1480*
+*Weryfikacja źródeł: KC Dz.U. 2026 poz. 795 · KP Dz.U. 2025 poz. 277 · Prawo przedsiębiorców Dz.U. 2025 poz. 1480*
 *Interpelacje: pip.gov.pl · biznes.gov.pl · gov.pl · sejm.gov.pl*
 *Data weryfikacji: 2026-06-09 · Weryfikuj ZAWSZE przed powołaniem w ISAP*
 

@@ -90,7 +90,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Timeshare + zastaw rejestrowy | ustawa o timeshare: Dz.U. 2011 nr 230 poz. 1370 ze zm.; zastaw: Dz.U. 2018 poz. 2017 t.j. ze zm. | `mod-ustawa-timeshare-zastaw-rejestrowy` + `mod-ustawa-zastaw-rejestrowy` | ✅ aktywny / B+/COV |
 | Ubezpieczenia obowiązkowe / UFG / PBUK | Dz.U. 2026 poz. 783 t.j. ze zm. | `mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK` | 🟢 B+/COV |
 | Monopole państwowe | Konstytucja + właściwe ustawy sektorowe, w tym hazard/poczta | `mod-ustawa-monopole-panstwowe` | ✅ aktywny; temporal gate |
-| Transakcje handlowe / opóźnienia | Dz.U. 2023 poz. 1790 t.j. ze zm. | `mod-transakcje-handlowe-opoznienia` | 🟡 B |
+| Transakcje handlowe / opóźnienia | Dz.U. 2023 poz. 1790 t.j. ze zm. | `mod-transakcje-handlowe-opoznienia` | 🟢 B+/COV |
 | Cudzoziemcy — routing gospodarczy/cywilny | Dz.U. 2025 poz. 1079 t.j. ze zm. | `mod-ustawa-cudzoziemcy` | 🔗 routing DR-05 |
 | Ustawa frankowa 2026 — procedura | Dz.U. 2026 poz. 985 | `mod-ustawa-frankowa-2026-procedura.md` | ✅ aktywny; fresh gate |
 

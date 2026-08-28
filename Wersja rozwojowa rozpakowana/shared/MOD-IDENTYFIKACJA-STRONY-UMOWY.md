@@ -552,7 +552,7 @@ WYNIK ISU-2 per umowę:
 
 NORMY KRAJOWE:
   □ Art. 65 §1 KC — wykładnia uwzględnia okoliczności złożenia oświadczenia
-  □ Art. 65 §2 KC — cel umowy i zgodny zamiar stron (tekst: Dz.U. 2025 poz. 1071 t.j.)
+  □ Art. 65 §2 KC — cel umowy i zgodny zamiar stron (tekst: Dz.U. 2026 poz. 795 t.j.)
   □ Art. 354 §1 KC — zobowiązanie wykonuje się zgodnie z jego treścią i w sposób
     odpowiadający jego celowi społeczno-gospodarczemu
   □ Art. 8 KP — zakaz nadużycia prawa podmiotowego (w sprawach pracowniczych)

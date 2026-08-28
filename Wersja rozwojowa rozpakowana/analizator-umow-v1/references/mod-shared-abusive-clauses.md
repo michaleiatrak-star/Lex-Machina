@@ -52,7 +52,7 @@ SKALA RYZYKA:
 
 ## AB.2 PODSTAWA PL — KC ART. 385¹–385³
 
-> Weryfikuj: isap.sejm.gov.pl → KC Dz.U. 2025 poz. 1071 t.j. ze zm.
+> Weryfikuj: isap.sejm.gov.pl → KC Dz.U. 2026 poz. 795 t.j. ze zm.
 
 ### Definicja klauzuli abuzywnej (art. 385¹ §1 KC)
 ```

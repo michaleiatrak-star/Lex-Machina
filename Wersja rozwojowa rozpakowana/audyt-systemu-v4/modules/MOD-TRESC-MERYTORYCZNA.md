@@ -118,7 +118,7 @@ dotyczy tej nowelizacji).
 | Akt (zmiana) | Moduł dotknięty | Art. zmienione | Wynik | Akcja |
 |---|---|---|---|---|
 | Ordynacja podatkowa Dz.U. 2026 poz. 622 | dr-06-podatki-finanse-publiczne-aml/modules/mod-OP-ordynacja-podatkowa.md | art. 70 §1 (termin) | ❌ CRIT-TREŚĆ | naprawiono str_replace, patrz wpis journal |
-| KC Dz.U. 2025 poz. 1071 (nowy t.j.) | dr-02/mod-*.md | brak zmian normatywnych (t.j. redakcyjny) | ✅ ZGODNE | brak akcji |
+| KC Dz.U. 2026 poz. 795 (nowy t.j.) | dr-02/mod-*.md | nowy t.j. wymaga odrębnej kontroli zmian uwzględnionych i późniejszych nowelizacji | ✅ ZGODNE dopiero po fresh gate | brak akcji wyłącznie po weryfikacji |
 ```
 
 Jeśli FAZA 3E była pominięta (brak zmian w tej sesji) — sekcja zawiera

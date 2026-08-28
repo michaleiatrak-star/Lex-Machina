@@ -557,7 +557,7 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
                pominięcia w spisie])
   [✓] NOWY  mod-ustawa-doradca-restrukturyzacyjny-zawod
               (Dz.U. 2022 poz. 1007 [licencja, sprawdź nowszy t.j.] +
-               Pr. upadłościowe Dz.U. 2025 poz. 614 art. 157 + Pr.
+               Pr. upadłościowe Dz.U. 2026 poz. 913 art. 157 + Pr.
                restrukturyzacyjne Dz.U. 2022 poz. 2309 [sprawdź nowszy] +
                nowelizacja Dz.U. 2025 poz. 1085; zawód regulowany —
                licencja MS, BEZ samorządu/izby; syndyk/nadzorca/zarządca

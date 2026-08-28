@@ -1,7 +1,7 @@
 # mod-procedury-JST-statuty-regulaminy
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** USG — Dz.U. 2025 poz. 1153 | USP — Dz.U. 2025 poz. 1684 | USW — Dz.U. 2025 poz. 581
+**Źródło weryfikacji:** USG — Dz.U. 2026 poz. 662 | USP — Dz.U. 2025 poz. 1684 | USW — Dz.U. 2026 poz. 720
 **Data weryfikacji online:** 2026-06-05
 
 ---
