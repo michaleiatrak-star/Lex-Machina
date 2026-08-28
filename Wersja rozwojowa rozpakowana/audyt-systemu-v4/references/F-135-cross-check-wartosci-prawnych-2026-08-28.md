@@ -47,3 +47,28 @@ Batch 1 nie oznacza pełnej re-weryfikacji wszystkich wartości w module PZP/KIO
 1. DR-06 — wartości podatkowe i limity o najwyższej zmienności;
 2. DR-03 — progi/terminy karne i wykroczeniowe o znaczeniu kwalifikacyjnym;
 3. `shared` — wartości powielane między dziedzinami, gdzie rozjazd propaguje się globalnie.
+
+
+## Batch 2 — DR-06 / Ordynacja podatkowa
+
+**Moduły:**
+- `dr-06-podatki-finanse-publiczne-aml/modules/mod-OP-czynnosci-sprawdzajace-dzial-V.md`
+- `dr-06-podatki-finanse-publiczne-aml/modules/mod-OP-ulgi-w-splacie-dzial-III-rozdzial-7a.md`
+
+**Źródła urzędowe:**
+- ELI / API Sejmu, Ordynacja podatkowa — t.j. Dz.U. 2026 poz. 622;
+- EUR-Lex — rozporządzenie Komisji (UE) 2023/2831;
+- UOKiK — „Zasady pomocy de minimis”.
+
+| Wartość / reguła | Wynik | Stan po cross-checku |
+|---|---|---|
+| art. 274 § 1 pkt 1 Op. — limit korekty deklaracji dokonywanej przez organ | POTWIERDZONA | 5000 zł w obowiązującym t.j. Dz.U. 2026 poz. 622 |
+| art. 274 § 3 Op. — sprzeciw od korekty organu | POTWIERDZONA | 14 dni od doręczenia uwierzytelnionej kopii skorygowanej deklaracji |
+| art. 67da § 2 Op. — wygaśnięcie decyzji ratalnej | POTWIERDZONA | niedotrzymanie terminu płatności trzech rat; przepis nie ustanawia wymogu, aby były kolejne |
+| art. 57 § 2 Op. — opłata prolongacyjna | POTWIERDZONA | stawka opłaty prolongacyjnej = obniżona stawka odsetek za zwłokę |
+| de minimis — limit ogólny | POTWIERDZONA | 300 000 EUR |
+| de minimis — sposób liczenia okresu | **SKORYGOWANA** | kroczący okres poprzednich 3 lat; usunięto błędny skrót „rok bieżący + 2 poprzednie lata podatkowe” |
+
+### Temporal gate
+
+Na dzień 2026-08-28 ELI wskazuje Dz.U. 2026 poz. 622 jako obowiązujący tekst jednolity Ordynacji podatkowej. Akty Dz.U. 2026 poz. 825 i 846 są oznaczone jako oczekujące na wejście w życie, więc batch 2 nie aktywuje ich wartości przed właściwymi datami temporalnymi.

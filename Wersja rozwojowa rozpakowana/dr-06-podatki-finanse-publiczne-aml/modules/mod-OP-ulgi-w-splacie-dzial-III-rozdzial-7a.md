@@ -167,8 +167,11 @@ REŻIMY POMOCOWE
   - podstawa: **rozporządzenie Komisji (UE) 2023/2831 z 13.12.2023**
     (Dz.Urz. UE L z 15.12.2023), obowiązuje od **1.01.2024 do 31.12.2030**
     — ZASTĄPIŁO rozporządzenie 1407/2013 [RZĄD 1 — eur-lex, uokik.gov.pl]
-  - pułap: **300 000 EUR** w okresie **3 lat** (rok bieżący + 2 poprzednie
-    lata podatkowe) — jeden wspólny limit dla WSZYSTKICH sektorów;
+  - pułap: **300 000 EUR** w okresie **3 lat liczonym krocząco** — dla każdego
+    nowego przyznania uwzględnia się pomoc przyznaną w **poprzednich 3 latach**;
+    ⛔ NIE stosuj dawnego skrótu „rok bieżący + 2 poprzednie lata podatkowe”
+    (re-ver F-135: EUR-Lex 2023/2831 motyw 11 i art. 3 ust. 2 + UOKiK,
+    2026-08-28) — jeden wspólny limit dla wszystkich sektorów;
     transport drogowy towarów zrównany z pozostałymi (było 100 000 EUR)
   - usługi w ogólnym interesie gospodarczym (UOIG): odrębne rozp.
     **2023/2832** (zastąpiło 360/2012)
@@ -455,10 +458,10 @@ ROZDZIAŁU)
 
 | Twierdzenie | Rząd źródła | Źródła |
 |---|---|---|
-| Brzmienie art. 67a, 67b, 67c, 67d, 67e | RZĄD 2B | lexlege.pl, arslege.pl, przepisy.gofin.pl (metryka Dz.U. 2026 poz. 622) |
-| Istnienie i brzmienie art. 67da; przeniesienie z art. 259; „trzy raty niekoniecznie kolejne" | RZĄD 2B + 2A | lexlege.pl, arslege.pl, przepisy.gofin.pl, prawo.pl, inforfk.pl (+ RZĄD 3: podatkowyreferat.online, itbps.pl — zbieżne) |
-| Brzmienie art. 57 (opłata prolongacyjna) | RZĄD 2B | przepisy.gofin.pl (wprost przy Dz.U. 2026 poz. 622), arslege.pl, lexlege.pl |
-| Rozp. 2023/2831, limit 300 000 EUR, okres 3 lat, zastąpienie 1407/2013, dzień udzielenia pomocy | **RZĄD 1** | eur-lex.europa.eu, uokik.gov.pl („Zasady pomocy de minimis") |
+| Brzmienie art. 67a, 67b, 67c, 67d, 67e | **RZĄD 1** | ELI / API Sejmu, Dz.U. 2026 poz. 622; re-ver 2026-08-28 |
+| Istnienie i brzmienie art. 67da; skutek po niedotrzymaniu terminu płatności **trzech rat** bez warunku ich kolejności | **RZĄD 1** | ELI / API Sejmu, Dz.U. 2026 poz. 622, art. 67da § 2; re-ver 2026-08-28 |
+| Brzmienie art. 57 (opłata prolongacyjna; stawka = obniżona stawka odsetek za zwłokę) | **RZĄD 1** | ELI / API Sejmu, Dz.U. 2026 poz. 622, art. 57; re-ver 2026-08-28 |
+| Rozp. 2023/2831, limit 300 000 EUR, **kroczący okres poprzednich 3 lat** (nie „rok bieżący + 2 poprzednie lata podatkowe”), zastąpienie 1407/2013 | **RZĄD 1** | EUR-Lex 2023/2831 (motyw 11, art. 3 ust. 2) + UOKiK „Zasady pomocy de minimis”; re-ver 2026-08-28 |
 | Uznanie administracyjne — spełnienie przesłanek nie gwarantuje ulgi | **RZĄD 1** | mazowieckie.kas.gov.pl (Drugi Mazowiecki US, sekcja „Pomoc publiczna") |
 | NSA III FSK 4790/21 — podstawa materialnoprawna art. 67b § 1 pkt 2 | RZĄD 2 | inforlex.pl (treść uzasadnienia) |
 | Art. 67b § 1 pkt 2 nie zwalnia z badania przesłanek z art. 67a | RZĄD 2A | lex.pl |
