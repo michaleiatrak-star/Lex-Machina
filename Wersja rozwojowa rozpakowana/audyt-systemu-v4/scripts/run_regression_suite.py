@@ -84,7 +84,7 @@ def main():
         ("T14", "T14 KRYTYCZNY — description ≤200", "check_description.py", [str(root)]),
         ("T17", "T17 KRYTYCZNY — kontrakt routera", "test_router_contract.py", repo_args),
         ("T18", "T18 KRYTYCZNY — spójność map pokrycia i routingu", "check_coverage_coherence.py", [str(root)]),
-        ("T19", "T19 KRYTYCZNY — F-108: 52/52 inventory, 48/52 COV i metryki", "test_f108_consistency.py", []),
+        ("T19", "T19 KRYTYCZNY — F-108: 52/52 inventory, 52/52 COV, 0 FULL i metryki", "test_f108_consistency.py", []),
     ]:
         sekcja(label)
         code, out = run_script(script, sargs)
