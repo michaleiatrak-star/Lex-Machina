@@ -6,16 +6,15 @@
 
 | Kategoria | Liczba | Pozycje |
 |---|---:|---|
-| Wykonalne sesją audytową | 2 | F-108, F-135 |
+| Wykonalne sesją audytową | 1 | F-135 |
 | Reaktywne | 1 | F-5 |
 | Zależne od środowiska/dewelopera | 7 | F-8, F-9, F-11, F-94, F-113, F-133, F-137 |
-| **Razem** | **10** | — |
+| **Razem** | **9** | — |
 
 ## Wykonalne sesją audytową
 
 | Flaga | Priorytet | Pozostały zakres | Kryterium zamknięcia |
 |---|---|---|---|
-| F-108 | wysoki | Domknąć cztery pozycje benchmarku MS 2026, które mają routing i treść, ale bieżące mapy nie potwierdzają COV całego aktu: KW (7), SUS (29), ustawa zasiłkowa (30), zwolnienia grupowe (40). | 52/52 aktów ma COV potwierdzony przez kanoniczną `MAPA-POKRYCIA.md` albo równoważny audyt strukturalny; bez automatycznego podnoszenia do `FULL`. |
 | F-135 | średni | Dokończyć cross-check wartości prawnych w pozostałych DR, elementów unikalnych oraz `shared`; każdą rozbieżność rozstrzygnąć w źródle urzędowym albo jawnie oznaczyć jako nieweryfikowalną. | Zero nieuzasadnionych rozbieżności albo jawne oznaczenie nieweryfikowalnych pozycji. |
 
 ## Reaktywne
@@ -35,10 +34,6 @@
 | F-113 | Potrzebne izolowane manifesty A/B, kontrola sieci T1/T2, autorytatywne logi narzędzi i identyfikator backendu do wykonania mierzalnego testu skuteczności bramek. |
 | F-133 | Brak warunków środowiskowych do pomiaru B5-e2 i wpływu reguł routera; zależne od warunków F-113. |
 | F-137 | Pozostał test akceptacyjny zapisu wydzielonej sekcji w hoście z natywną pamięcią trwałą. |
-
-## Benchmark F-108 po ponownej weryfikacji
-
-F-108 został ponownie otwarty 2026-08-28 po porównaniu rejestru 52 aktów z kanonicznymi mapami pokrycia. Inwentarz jest kompletny **52/52**, lecz status strukturalny wynosi **48/52 B+/COV**; cztery pozycje pozostają B/B+. `COV` nie oznacza `FULL`, a `FULL` nie został nadany żadnemu z 52 aktów.
 
 ## Zasada map runtime
 
