@@ -37,15 +37,13 @@ PRZEDMIOT OCHRONY: energia ELEKTRYCZNA, CIEPLNA i JĄDROWA — rodzaj
   (kradzież rzeczy, z progami kwotowymi wpływającymi na
   wykroczenie/przestępstwo)
 
-PRÓG WYKROCZENIE/PRZESTĘPSTWO: SN (uchwała I KZP 43/00) rozstrzygnął,
-  że art. 119 § 1 KW (drobna kradzież, próg 250 zł — ⚠️ SPRAWDŹ
-  AKTUALNY próg, mógł ulec zmianie od czasu tej uchwały wraz z
-  ogólną rewaloryzacją progów majątkowych w KW) NIE MA zastosowania
-  do energii — energia NIE JEST "cudzą rzeczą ruchomą" w rozumieniu
-  KW — SKUTEK: KAŻDA kradzież energii, NIEZALEŻNIE OD WARTOŚCI, jest
-  PRZESTĘPSTWEM z art. 278 § 5 KK, NIGDY wykroczeniem — TO ISTOTNA
-  RÓŻNICA względem zwykłej kradzieży rzeczy, gdzie niska wartość
-  degraduje czyn do wykroczenia
+PRÓG WYKROCZENIE/PRZESTĘPSTWO: aktualny art. 119 § 1 KW posługuje się
+  progiem **800 zł** (Dz.U. 2025 poz. 734; re-ver ELI 2026-08-28), ale
+  próg ten nie powinien być przenoszony automatycznie na kradzież energii.
+  Teza modułu oparta na uchwale SN I KZP 43/00 jest taka, że art. 119 § 1 KW
+  nie ma zastosowania do energii, a czyn kwalifikuje się z art. 278 § 5 KK
+  niezależnie od wartości. ⚠️ Przed powołaniem tej tezy w piśmie wykonaj
+  osobny fresh gate do orzeczenia SN i aktualnego art. 278 § 5 KK.
 
 ⭐⭐ ROZSTRZYGNIĘTA KWESTIA KONSTYTUCYJNA — PODWÓJNA SANKCJA (karna +
   cywilna) NIE NARUSZA ne bis in idem: Trybunał Konstytucyjny

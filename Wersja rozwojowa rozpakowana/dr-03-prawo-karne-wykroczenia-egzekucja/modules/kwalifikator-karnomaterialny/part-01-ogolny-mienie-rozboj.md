@@ -188,7 +188,7 @@ CZY UŻYTO PRZEMOCY, GROŹBY LUB PODSTĘPU?
 
 ```
 JAKA JEST WARTOŚĆ SKRADZIONEGO MIENIA?
-⚠️ Aktualny próg od 01.10.2023 — zawsze weryfikuj w isap.sejm.gov.pl
+⚠️ Aktualny próg 800 zł obowiązuje od 01.10.2023 — re-ver F-135: ELI/API Sejmu, Dz.U. 2025 poz. 734, 2026-08-28
 ⚠️ UWAGA art. 115 §5–6 KK: mienie znacznej wartości (>200 000 zł) i wielkiej wartości (>1 000 000 zł) — kwoty zamrożone od 2010 r., niezmienione w Dz.U. 2025 poz. 383 — jednak realna siła nabywcza dramatycznie spadła (200k = 42x min. wynagrodzenie 2026 vs 152x w 2010). Przy sprawach granicznych zawsze weryfikuj w aktualnym t.j. KK.
 │
 ├─ ≤ 800 zł → ART. 119 §1 KW — WYKROCZENIE KRADZIEŻY
@@ -282,7 +282,7 @@ integralność/funkcjonalność CUDZEJ rzeczy?
 │
 └─ UMYŚLNIE — ustal WARTOŚĆ SZKODY (kluczowe dla kwalifikacji!)
    │
-   ├─ Szkoda NIE PRZEKRACZA 800 zł (próg od 1.10.2024 — WCZEŚNIEJ 500 zł
+   ├─ Szkoda NIE PRZEKRACZA 800 zł (próg od 1.10.2023 — WCZEŚNIEJ 500 zł
    │  od 2018 r., jeszcze wcześniej ułamek minimalnego wynagrodzenia —
    │  ⛔ ZAWSZE weryfikuj aktualny próg w ISAP przed sprawą, to "czyn
    │  przepołowiony" o historycznie zmiennej granicy)

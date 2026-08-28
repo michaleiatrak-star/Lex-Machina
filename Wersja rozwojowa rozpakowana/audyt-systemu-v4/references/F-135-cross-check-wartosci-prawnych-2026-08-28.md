@@ -72,3 +72,30 @@ Batch 1 nie oznacza pełnej re-weryfikacji wszystkich wartości w module PZP/KIO
 ### Temporal gate
 
 Na dzień 2026-08-28 ELI wskazuje Dz.U. 2026 poz. 622 jako obowiązujący tekst jednolity Ordynacji podatkowej. Akty Dz.U. 2026 poz. 825 i 846 są oznaczone jako oczekujące na wejście w życie, więc batch 2 nie aktywuje ich wartości przed właściwymi datami temporalnymi.
+
+
+## Batch 3 — DR-03 / KW — progi mienia
+
+**Moduły:**
+- `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KW-art119-131-przeciwko-mieniu.md`
+- `dr-03-prawo-karne-wykroczenia-egzekucja/modules/kwalifikator-karnomaterialny/part-01-ogolny-mienie-rozboj.md`
+- `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-nielegalny-pobor-mediow.md`
+
+**Źródła urzędowe:**
+- ELI / API Sejmu — Kodeks wykroczeń, t.j. Dz.U. 2025 poz. 734;
+- ELI — t.j. Dz.U. 2023 poz. 2119 z przepisem wejścia zmian w życie 1.10.2023.
+
+| Wartość / reguła | Wynik | Stan po cross-checku |
+|---|---|---|
+| art. 119 § 1 KW — kradzież/przywłaszczenie | POTWIERDZONA | wartość nie przekracza 800 zł |
+| art. 120 § 1 KW — drewno z lasu | POTWIERDZONA | wartość nie przekracza 800 zł |
+| art. 122 § 1–2 KW — paserstwo | POTWIERDZONA | wartość mienia nie przekracza 800 zł |
+| art. 124 § 1 KW — uszkodzenie mienia | POTWIERDZONA | szkoda nie przekracza 800 zł |
+| data wejścia progu 800 zł w ww. przepisach | **SKORYGOWANA** | 1.10.2023; kwalifikator błędnie wskazywał 1.10.2024 przy art. 124 |
+| art. 24 § 1 KW — ogólna grzywna | POTWIERDZONA | 20–5000 zł, chyba że ustawa stanowi inaczej |
+| art. 123 § 1 KW — owoce/warzywa/kwiaty z ogrodu | POTWIERDZONA | grzywna do 250 zł albo nagana; ta kwota nie jest progiem art. 119 |
+| moduł nielegalnego poboru mediów — historyczne „250 zł” przy art. 119 | **SKORYGOWANA redakcyjnie** | usunięto nieaktualną kwotę; bieżący art. 119 = 800 zł, a teza o niestosowaniu art. 119 do energii pozostaje za osobnym fresh gate orzeczniczym |
+
+### Granica batcha
+
+Batch 3 potwierdza progi mienia w KW i usuwa aktywną ekspozycję historycznej wartości 250 zł. Nie oznacza pełnego audytu wszystkich sankcji i taryfikatorów wykroczeniowych ani ponownej weryfikacji wskazanego orzecznictwa SN.
