@@ -23,6 +23,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Odpowiedzialność za zwierzę / droga rowerowa | `mod-pies-droga-rowerowa-odpowiedzialnosc.md` | ✅ aktywny; fresh gate |
 | KP art. 94³ — mobbing / dyskryminacja (routing przekrojowy) | `mod-KP-art943-mobbing-dyskryminacja` | ✅ aktywny; fresh gate |
 | KPC — indeks current-state całego kodeksu | `mod-KPC-current-state-COV.md` | 🟢 B+/COV |
+| KPC — art. 162, zastrzeżenie do protokołu | `mod-KPC-art162-zastrzezenie-protokol` | ✅ aktywny; fresh gate |
 | KPC — egzekucja / windykacja | `mod-KPC-egzekucja-windykacja` | ✅ aktywny |
 | KPC — prawomocność / granice apelacji | `mod-KPC-prawomocnosc-granice-apelacji` | ✅ aktywny |
 | KPC — nieproces, część ogólna | `mod-KPC-nieproces-czesc-ogolna` | ✅ aktywny |
@@ -77,6 +78,8 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Parabanki / lombardy / lichwa | KC/KK + ustawa lombardowa Dz.U. 2024 poz. 1111 t.j. ze zm. + akty szczególne | `mod-parabanki-chwilowki-lombardy-lichwa.md` | ✅ aktywny; fresh gate |
 | Reklama wobec nieletnich | UPNPR Dz.U. 2023 poz. 845 t.j. + ustawa o radiofonii i telewizji Dz.U. 2022 poz. 1722 t.j. ze zm. | `mod-reklama-wobec-nieletnich` | ✅ aktywny; fresh gate |
 | Ochrona praw lokatorów | Dz.U. 2023 poz. 725 t.j. ze zm. | `mod-ustawa-ochrona-praw-lokatorow-najem-eksmisja` | 🟢 B+/COV |
+| Kaucja przy najmie lokalu | ustawa o ochronie praw lokatorów — aktualne brzmienie na dzień sprawy | `mod-kaucja-najem-lokalu` | ✅ aktywny; fresh gate |
+| Ustawa deweloperska / ochrona nabywcy | właściwe aktualne brzmienie ustawy deweloperskiej | `mod-ustawa-deweloperska` | ✅ aktywny; fresh gate |
 | Własność lokali | Dz.U. 2026 poz. 232 t.j. ze zm. | `mod-ustawa-spoldzielnie-wlasnosc-lokali` | 🟢 B+/COV |
 | Księgi wieczyste i hipoteka | Dz.U. 2026 poz. 1066 t.j. ze zm. | `mod-KW-ksiega-wieczysta-zakup-nieruchomosci` | 🟢 B+/COV |
 | Prawo spółdzielcze | Dz.U. 2026 poz. 521 t.j. ze zm. | `mod-prawo-spoldzielcze` | 🟢 B+/COV |
