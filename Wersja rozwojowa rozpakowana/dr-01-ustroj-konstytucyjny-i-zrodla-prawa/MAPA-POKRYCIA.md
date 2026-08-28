@@ -1,28 +1,31 @@
-# DR-01-USTROJ-KONSTYTUCYJNY-I-ZRODLA-PRAWA — Mapa Pokrycia Treściowego
+# DR-01 — Mapa Pokrycia Treściowego
 
-**Utworzona:** 2026-08-27 | **Źródło inwentarza:** lokalna `MAPA-AKTOW.md`
+**Stan operacyjny:** 2026-08-28
 
-## Zasada statusów
+Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Historia korekt i wcześniejsze statusy nie są częścią mapy runtime.
 
-Ta mapa rozdziela **rejestrację aktu/modułu** od **pokrycia treściowego**. Status `✅ OK` w `MAPA-AKTOW.md` oznacza, że istnieje trasa/moduł i metryka, a **nie** że cały akt jest opracowany. Wiersz `🟡 DO AUDYTU` oznacza, że moduł jest zarejestrowany, lecz dla całego aktu nie wykonano jeszcze udokumentowanego audytu rozdział-po-rozdziale. Nie wolno automatycznie zamieniać go na 🟢 na podstawie samego istnienia pliku.
+## Legenda
 
-| Akt / zakres | Moduł wejściowy | Rejestracja w MAPA-AKTOW | Status treściowy |
-|---|---|---|---|
-| Konstytucja RP z dnia 2 kwietnia 1997 r. | mod-Konstytucja-TK-skarga-konstytucyjna | ✅ OK | 🟡 DO AUDYTU |
-| Ustawa o organizacji i trybie postępowania przed TK z dnia 30 listopada 2016 r. | mod-Konstytucja-TK-skarga-konstytucyjna | ✅ OK | 🟡 DO AUDYTU |
-| Prawo o ustroju sądów powszechnych (PUSP) | mod-USP-ustroj-sadow-powszechnych | ✅ OK | 🟡 DO AUDYTU |
-| Ustawa o Sądzie Najwyższym | mod-ustawa-SN-sad-najwyzszy | ✅ F-108/50 P2 — dedykowany moduł B, 2026-08-27 | 🟢 B — audyt F-108/50 |
-| Prawo o ustroju sądów administracyjnych (PUSA) | mod-USP-ustroj-sadow-powszechnych | ✅ OK (nowo zweryfikowane) | 🟡 DO AUDYTU |
-| Ustawa o skardze na naruszenie prawa strony do rozpoznania sprawy w postępowaniu przygotowawczym prowadzonym lub nadzorowanym przez prokuratora i postępowaniu sądowym bez nieuzasadnionej zwłoki | mod-USP-ustroj-sadow-powszechnych | ✅ OK (nowo zweryfikowane) | 🟡 DO AUDYTU |
-| Ustawa o Krajowej Radzie Sądownictwa | mod-ustawa-KRS-i-ustroj-wladzy | ✅ OK (poprawiony numer) | 🟡 DO AUDYTU |
-| Ustawa o Radzie Ministrów | mod-ustawa-KRS-i-ustroj-wladzy | ✅ OK (poprawiony numer) | 🟡 DO AUDYTU |
-| Ustawa o wykonywaniu mandatu posła i senatora | mod-ustawa-KRS-i-ustroj-wladzy | ✅ OK | 🟡 DO AUDYTU |
-| Ustawa o partiach politycznych | mod-ustawa-partie-polityczne-referendum | ✅ OK | 🟡 DO AUDYTU |
-| Ustawa o referendum ogólnokrajowym | mod-ustawa-partie-polityczne-referendum | ✅ OK | 🟡 DO AUDYTU |
-| Rozporządzenie Prezesa Rady Ministrów z 20.06.2002 w sprawie „Zasad techniki prawodawczej” (ZTP) | mod-ZTP-przepisy-przejsciowe-doktryna | ✅ OK | 🟡 DO AUDYTU |
-| Specustawy i reguła lex specialis — graf zależności między aktami | mod-specustawy-lex-specialis-graf-zaleznosci | ✅ ZWERYFIKOWANE 2026-08-14 — F-77 domknięta dla tego wiersza | 🟡 DO AUDYTU |
-| Stany nadzwyczajne i sytuacje kryzysowe | mod-stany-nadzwyczajne-sytuacje-kryzysowe | ✅ ZWERYFIKOWANE 2026-08-14 — F-77 domknięta dla tego wiersza | 🟡 DO AUDYTU |
+- 🟢 — pokrycie pogłębione / praktycznie użyteczne;
+- 🟡 — moduł istnieje i jest używany, ale brak pełnego audytu całego aktu;
+- 🟡 B+ — pokrycie operacyjne pogłębione.
 
-## Kryterium podniesienia statusu
+| Akt / zakres | Moduł wejściowy | Status bieżący |
+|---|---|---|
+| Konstytucja RP | `mod-Konstytucja-TK-skarga-konstytucyjna` | 🟡 |
+| organizacja i tryb postępowania przed TK | `mod-Konstytucja-TK-skarga-konstytucyjna` | 🟡 |
+| Prawo o ustroju sądów powszechnych | `mod-USP-ustroj-sadow-powszechnych` | 🟡 |
+| ustawa o Sądzie Najwyższym | `mod-ustawa-SN-sad-najwyzszy` | 🟢/🟡 B |
+| Prawo o ustroju sądów administracyjnych | `mod-USP-ustroj-sadow-powszechnych` | 🟡 |
+| skarga na przewlekłość postępowania | `mod-USP-ustroj-sadow-powszechnych` | 🟡 |
+| ustawa o Krajowej Radzie Sądownictwa | `mod-ustawa-KRS-i-ustroj-wladzy` | 🟡 |
+| ustawa o Radzie Ministrów | `mod-ustawa-KRS-i-ustroj-wladzy` | 🟡 |
+| wykonywanie mandatu posła i senatora | `mod-ustawa-KRS-i-ustroj-wladzy` | 🟡 |
+| partie polityczne | `mod-ustawa-partie-polityczne-referendum` | 🟡 |
 
-Status 🟢 może zostać nadany dopiero po porównaniu struktury aktualnego aktu ze źródłem urzędowym RZĄD 1, wskazaniu zakresów artykułów/rozdziałów oraz jawnej liście pozostałych luk. Statusy tej mapy są wtórne wobec treści modułów i muszą być aktualizowane po każdej ich zmianie.
+## Aktywne luki
+
+1. Konstytucja, TK, PUSP, PUSA i akty ustrojowe nie mają jeszcze statusu `FULL` całego aktu.
+2. Ustawa o Sądzie Najwyższym ma dedykowany moduł operacyjny, ale nie jest automatycznie traktowana jako pełny komentarz artykuł-po-artykule.
+3. Przy problemach proceduralnych dotyczących sądów łącz DR-01 z DR-02/03/05/12 według rodzaju postępowania.
+4. Każdy konkretny przepis wymaga świeżego odczytu ELI/ISAP przed zastosowaniem.
