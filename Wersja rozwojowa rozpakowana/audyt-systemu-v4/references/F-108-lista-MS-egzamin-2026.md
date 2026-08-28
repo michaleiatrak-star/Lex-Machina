@@ -20,7 +20,7 @@
 | 4 | KRO | DR-02 | 🟢 B+ / COV — Dz.U. 2026 poz. 236 |
 | 5 | KC | DR-02 | 🟢 B+ / COV — Dz.U. 2026 poz. 795; Księgi I–IV zmapowane |
 | 6 | KPC | DR-02 | 🟢 B+ / COV |
-| 7 | KW | DR-03 | 🟡 B+ — strukturalna walidacja całego aktu pozostaje otwarta |
+| 7 | KW | DR-03 | 🟢 B+ / COV — current-state rozdz. I–XIX; domknięto brak art. 65–69 |
 | 8 | Opłaty w sprawach karnych | DR-03 | 🟢 B+ / COV |
 | 9 | Kodeks pracy | DR-04 | 🟢 B+ / COV — Dz.U. 2025 poz. 277 ze zmianami |
 | 10 | Prawo o adwokaturze | DR-12 | 🟢 B+ / COV |
@@ -42,8 +42,8 @@
 | 26 | Gospodarka nieruchomościami | DR-09/08/02 | 🟢 B+ / COV — Dz.U. 2026 poz. 399 |
 | 27 | Samorząd powiatowy | DR-08 | 🟢 B+ / COV — Dz.U. 2025 poz. 1684 |
 | 28 | Samorząd województwa | DR-08 | 🟢 B+ / COV — Dz.U. 2026 poz. 720 |
-| 29 | System ubezpieczeń społecznych | DR-04 | 🟡 B/B+ — część działów nadal B/B+ w `MAPA-POKRYCIA.md` |
-| 30 | Zasiłki chorobowe i macierzyńskie | DR-04 | 🟡 B+ — pełna mapa rozdziałów, walidacja strukturalna całego aktu otwarta |
+| 29 | System ubezpieczeń społecznych | DR-04 | 🟢 B+ / COV — current-state indeks wszystkich 13 rozdziałów |
+| 30 | Zasiłki chorobowe i macierzyńskie | DR-04 | 🟢 B+ / COV — current-state mapa wszystkich 13 rozdziałów |
 | 31 | KKS | DR-03/06 | 🟢 B+ / COV — Dz.U. 2025 poz. 633 ze zmianami |
 | 32 | RPD | DR-05 | 🟢 B+ / COV — Dz.U. 2023 poz. 292 |
 | 33 | KSH | DR-02 | 🟢 B+ / COV |
@@ -53,7 +53,7 @@
 | 37 | KPW | DR-03 | 🟢 B+ / COV — Dz.U. 2025 poz. 860 |
 | 38 | PPSA | DR-05 | 🟢 B+ / COV |
 | 39 | Prawo upadłościowe | DR-02 | 🟢 B+ / COV |
-| 40 | Zwolnienia grupowe | DR-04 | 🟡 B+ — moduł operacyjny, walidacja strukturalna całego aktu otwarta |
+| 40 | Zwolnienia grupowe | DR-04 | 🟢 B+ / COV — current-state art. 1–12 i warstwa przejściowa/końcowa |
 | 41 | Ubezpieczenia obowiązkowe, UFG i PBUK | DR-02 | 🟢 B+ / COV |
 | 42 | KSCU | DR-12 | 🟢 B+ / COV — Dz.U. 2025 poz. 1228 |
 | 43 | Przeciwdziałanie narkomanii | DR-03 | 🟢 B+ / COV — t.j. Dz.U. 2023 poz. 1939 + obowiązująca od 27.08.2026 nowelizacja Dz.U. 2026 poz. 1004 |
@@ -69,14 +69,14 @@
 
 ## Wynik bieżący
 
-**52/52 aktów ma realny routing/moduł, ale tylko 48/52 ma obecnie potwierdzony status B+/COV. Cztery pozycje pozostają na poziomie B/B+: KW (7), SUS (29), ustawa zasiłkowa (30) i zwolnienia grupowe (40). `FULL`: 0/52.**
+**52/52 aktów ma realny routing/moduł i 52/52 ma potwierdzony status B+/COV. `FULL`: 0/52.**
 
-Audyt 2026-08-28 ponownie otwiera F-108 w ograniczonym zakresie jakościowym: nie ma luki inwentarzowej, lecz nie wolno utożsamiać samej obecności modułu z COV. Każdy COV musi nadal przechodzić walidację temporalną po nowelizacjach, a konkretna jednostka prawna — fresh gate w źródle urzędowym.
+F-108 został ponownie otwarty po wykryciu czterech braków strukturalnego COV, a następnie domknięty po utworzeniu i rejestracji current-state indeksów KW, SUS, ustawy zasiłkowej i zwolnień grupowych oraz fizycznego modułu KW art. 65–69. COV nadal nie jest FULL; każda konkretna jednostka prawna podlega fresh/temporal gate.
 
 ## Priorytet dalszej pracy
 
-1. **P1 — walidacja COV:** kontrola, czy mapy i moduły nadal odpowiadają aktualnym tekstom urzędowym po kolejnych nowelizacjach.
-2. **P1 — luki poza F-108:** akty i zakresy oznaczone żółto w lokalnych mapach DR, zwłaszcza PUSA/KRS/RM w DR-01, wybrane zakresy KKW/KW w DR-03 oraz inne akty nieobjęte benchmarkiem.
+1. **P1 — utrzymanie aktualności:** po kolejnych nowelizacjach ponawiać walidację current-state i temporal gate.
+2. **P1 — luki poza F-108:** rozwijać akty i zakresy oznaczone żółto w lokalnych mapach DR, bez mieszania ich z zamkniętym benchmarkiem F-108.
 3. **P2 — głębokość:** przechodzenie z B+/COV do wyższej kompletności tylko na podstawie udokumentowanego audytu treści, bez automatycznego nadawania `FULL`.
 
 ## Reguła źródeł
