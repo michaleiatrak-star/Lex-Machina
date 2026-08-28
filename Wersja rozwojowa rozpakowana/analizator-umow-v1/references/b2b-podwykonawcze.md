@@ -453,7 +453,7 @@ MECHANIZM (art. 647¹ KC — aktualne brzmienie po nowelizacji 2017):
   → Formularz sprzeciwu i zgłoszenia: wyłącznie forma pisemna!
 → ZAWSZE wymagaj pisemnego zgłoszenia podwykonawcy inwestorowi przed rozpoczęciem robót
 → Dokumentuj brak sprzeciwu (brak odpowiedzi w 30 dniach = odpowiedzialność inwestora)
-→ Weryfikuj: isap.sejm.gov.pl → KC art. 647¹ (t.j. Dz.U. 2025 poz. 1071)
+→ Weryfikuj: isap.sejm.gov.pl → KC art. 647¹ (t.j. Dz.U. 2026 poz. 795)
 ```
 
 **Pułapka B-2 — Wynagrodzenie podwykonawcy > wynagrodzenie GW:**
