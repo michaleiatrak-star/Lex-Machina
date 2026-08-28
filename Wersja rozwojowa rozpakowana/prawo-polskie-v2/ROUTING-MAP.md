@@ -146,6 +146,14 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa z 5.12.2024 o ochronie ludności i obronie cywilnej | Dz.U. 2024 poz. 1907 ✅ VER 2026-07-17 (isap, gofin) — w życie 1.01.2025, NIE zastępuje ustaw o stanie klęski żywiołowej/zarządzaniu kryzysowym, współistnieje (art. 5 ust. 1) | dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-stany-nadzwyczajne-sytuacje-kryzysowe.md | ✅ NOWY (2026-07-17) |
 | Ustawa z 5.12.2008 o zapobieganiu oraz zwalczaniu zakażeń i chorób zakaźnych u ludzi (art. 46/46a/46b) | ⚠️ VER częściowa 2026-07-17 — zweryfikuj aktualny t.j. na ISAP przed powołaniem (nowelizowana wielokrotnie od 2020) | dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-stany-nadzwyczajne-sytuacje-kryzysowe.md | ✅ NOWY (2026-07-17) |
 
+| Rejestracja current-state: organizacja i postępowanie przed TK | bieżący stan ELI/ISAP | dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-TK-organizacja-postepowanie-current-state-COV.md | ✅ current-state COV |
+| Rejestracja current-state: PUSA | bieżący stan ELI/ISAP | dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-PUSA-current-state-COV.md | ✅ current-state COV |
+| Rejestracja current-state: KRS | bieżący stan ELI/ISAP | dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-KRS-current-state-COV.md | ✅ current-state COV |
+| Rejestracja current-state: Rada Ministrów | bieżący stan ELI/ISAP | dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-Rada-Ministrow-current-state-COV.md | ✅ current-state COV |
+| Rejestracja current-state: mandat posła i senatora | bieżący stan ELI/ISAP | dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-mandat-posla-senatora-current-state-COV.md | ✅ current-state COV |
+| Rejestracja current-state: partie polityczne | bieżący stan ELI/ISAP | dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-partie-polityczne-current-state-COV.md | ✅ current-state COV |
+| Rejestracja current-state: przewlekłość postępowania | bieżący stan ELI/ISAP | dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-przewleklosc-current-state-COV.md | ✅ current-state COV |
+
 ---
 
 ## DR-02 — Prawo Cywilne, Rodzinne i Gospodarcze
@@ -226,6 +234,12 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | KPC — KSIĘGA II, postępowanie NIEPROCESOWE, część ogólna (506-525): wszczęcie, właściwość (⛔ MIEJSCOWA WYŁĄCZNA wg WNIOSKODAWCY, odwrotnie niż w procesie), zainteresowany vs uczestnik (510), wniosek (511), apelacja vs zażalenie (518) | Dz.U. 2026 poz. 468 t.j. | dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KPC-nieproces-czesc-ogolna.md | NOWY 2026-08-14d (F-65 cz. II) — pierwszy moduł Księgi II w systemie; SYNC REGUŁA 3 |
 | KRO — opieka i kuratela | Dz.U. — patrz wiersz macierzysty KRO | dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KRO-opieka-i-kuratela.md | SYNC REGUŁA 3, 2026-08-14e (F-77 rozszerzona) |
 | Księgi wieczyste i hipoteka — zakup nieruchomości | ✅ **SKORYGOWANE 2026-08-19 (F-89):** t.j. Dz.U. 2026 poz. 1066 (obwieszczenie 6.03.2025) ze zm. Dz.U. 2025 poz. 1669, 1792, 1793 oraz Dz.U. 2026 poz. 119 — zsynchronizowane z lokalną mapą dr-02 (F-77, 2026-08-14, 4 zgodne źródła) | dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KW-ksiega-wieczysta-zakup-nieruchomosci.md | ✅ ZSYNCHRONIZOWANE 2026-08-19 |
+
+| Rejestracja current-state: Kodeks cywilny | bieżący stan ELI/ISAP | dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-current-state-COV.md | ✅ current-state COV |
+| Rejestracja current-state: Kodeks postępowania cywilnego | bieżący stan ELI/ISAP | dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KPC-current-state-COV.md | ✅ current-state COV |
+| Rejestracja current-state: Prawo przedsiębiorców | bieżący stan ELI/ISAP | dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-Prawo-przedsiebiorcow-current-state-COV.md | ✅ current-state COV |
+| Zastaw rejestrowy — moduł dedykowany | bieżący stan ELI/ISAP | dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-zastaw-rejestrowy.md | ✅ aktywny |
+| KP art. 94³ — moduł przekrojowy zarejestrowany fizycznie w DR-02 | aktualne brzmienie na dzień sprawy | dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KP-art943-mobbing-dyskryminacja.md | ✅ routing przekrojowy |
 
 ---
 
@@ -309,6 +323,12 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | KPK art. 266-269 — poręczenie majątkowe (kaucja karna) | Dz.U. 2026 poz. 490 t.j. | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-poreczenie-majatkowe-kaucja-karna.md | ✅ NOWY 2026-07-19 — ⚠️ PRZENIESIONY 2026-08-14e z sekcji DR-08 do DR-03 (orphan-row wykryty KROKIEM D REGUŁY 3: moduł należy do dr-03, a wiersz stał pod DR-08 od 2026-07-19) |
 | KPK art. 17 + art. 156 (dostęp do akt) + art. 193-206 (biegli) + art. 313 + art. 425-440 (CAŁY Rozdz. 48 — przepisy ogólne postępowania odwoławczego, w tym pełny 437) + art. 485-499 (oskarżenie prywatne) + art. 568a-577 (wyrok łączny) | Dz.U. 2026 poz. 490 t.j. — ⚠️ metryka pomija Dz.U. 2026 poz. 421/2026.638; ⚠️ art. 575§1, 156§5, 437§1 — TRZY rozbieżności wersji czasowych nierozstrzygnięte (patrz moduł) | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KPK-podstawy-odwolawcze-przeslanki-zarzuty-biegli.md | ✅ NOWY + ROZSZERZONE 2026-08-15 (7 sesji), naprawa CZĘŚCIOWA F-66 |
 
+| Rejestracja current-state: Kodeks karny | bieżący stan ELI/ISAP | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-current-state-COV.md | ✅ current-state COV |
+| Rejestracja current-state: Kodeks postępowania karnego | bieżący stan ELI/ISAP | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KPK-current-state-COV.md | ✅ current-state COV |
+| Rejestracja current-state: Kodeks karny wykonawczy | bieżący stan ELI/ISAP | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KKW-current-state-COV.md | ✅ current-state COV |
+| KPW — indeks current-state | bieżący stan ELI/ISAP | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KPW-kodeks-postepowania-w-sprawach-o-wykroczenia.md | ✅ current-state COV |
+| Narkomania — indeks current-state | bieżący stan ELI/ISAP | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-narkomania-current-state-COV.md | ✅ current-state COV |
+
 ---
 
 ## DR-04 — Prawo Pracy, ZUS, Świadczenia Społeczne
@@ -365,6 +385,9 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | FUS — zasiłek pogrzebowy (77-81, 7000 zł od 1.01.2026), renta rodzinna (65-74, w tym "renta wdowia" od 1.07.2025), waloryzacja (88-94) | Dz.U. 2025 poz. 1749 t.j. | dr-04-prawo-pracy-zus-swiadczenia/modules/mod-FUS-zasilek-pogrzebowy-renta-rodzinna-waloryzacja.md | ✅ NOWY 2026-08-14 — DOPISANE 2026-08-14 (sync) — dokańcza naprawę F-72 |
 | Ustawa o emeryturach pomostowych (19.12.2008) — warunki kumulatywne art. 4, cezury 31.12.1948 / 1.01.1999, rozróżnienie art. 32/33 FUS vs art. 3 ust. 1 i 3 tej ustawy, rekompensata (21-23), FEP (29-40) | Dz.U. 2024 poz. 1696 t.j. | dr-04-prawo-pracy-zus-swiadczenia/modules/mod-emerytury-pomostowe.md | ✅ NOWY 2026-08-18 (F-29 pkt 4); wpis w mapie centralnej uzupełniony 2026-08-21 (REGUŁA 3 HARDGATE) |
 
+| Rejestracja current-state: Kodeks pracy | bieżący stan ELI/ISAP | dr-04-prawo-pracy-zus-swiadczenia/modules/mod-KP-current-state-COV.md | ✅ current-state COV |
+| UOKiK — moduł przekrojowy DR-04 | bieżący stan ELI/ISAP | dr-04-prawo-pracy-zus-swiadczenia/modules/mod-ustawa-ochrona-konkurencji-konsumentow-UOKiK.md | ✅ routing przekrojowy |
+
 ---
 
 ## DR-05 — Prawo Administracyjne i Sądownictwo Administracyjne
@@ -397,6 +420,9 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | KPA — decyzja administracyjna i odwołanie (elementy, procedura, postanowienia, zażalenia) | Dz.U. 2025 poz. 1691 t.j. | dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-decyzja-i-odwolanie.md | RODZINA KPA (NOTA-4); SYNC REGUŁA 3, 2026-08-14e (F-77 rozszerzona) |
 | KPA — mechanizmy w toku sprawy (zawieszenie, dowody, rozprawa) | Dz.U. 2025 poz. 1691 t.j. | dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-mechanizmy-w-toku-sprawy.md | RODZINA KPA (NOTA-4); SYNC REGUŁA 3, 2026-08-14e (F-77 rozszerzona) |
 | KPA — tryby nadzwyczajne, bezczynność, kary, skarga do WSA, strategia | Dz.U. 2025 poz. 1691 t.j. | dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-tryby-nadzwyczajne-i-strategia.md | RODZINA KPA (NOTA-4); SYNC REGUŁA 3, 2026-08-14e (F-77 rozszerzona) |
+
+| Rejestracja current-state: KPA | bieżący stan ELI/ISAP | dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-KPA-current-state-COV.md | ✅ current-state COV |
+| Wojewoda i administracja rządowa — moduł lokalny DR-05 | bieżący stan ELI/ISAP | dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-wojewoda-administracja-rzadowa.md | ✅ aktywny |
 
 ---
 
@@ -462,6 +488,8 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ordynacja podatkowa — Dział VI, kontrola podatkowa (281-292): wszczęcie, upoważnienie, protokół, zastrzeżenia — ⚠️ ODRĘBNA od kontroli celno-skarbowej | Dz.U. 2026 poz. 622 t.j. | dr-06-podatki-finanse-publiczne-aml/modules/mod-OP-kontrola-podatkowa-dzial-VI.md | ✅ NOWY 2026-08-12, SYNC 2026-08-14 (REGUŁA 3, przy F-33) |
 | Ordynacja podatkowa — Dział V, czynności sprawdzające (272-280): cztery cele (272), korekta deklaracji przez organ próg 5000 zł + sprzeciw 14 dni (274), wezwanie do wyjaśnień (274a), kontrola krzyżowa (274c, ⭐⭐⭐ pułapka — wymaga równoległej kontroli/postępowania, WSA III SA/Wa 1251/18), odesłanie proceduralne (280) | Dz.U. 2026 poz. 622 t.j. | dr-06-podatki-finanse-publiczne-aml/modules/mod-OP-czynnosci-sprawdzajace-dzial-V.md | ✅ NOWY 2026-08-22, SYNC 2026-08-22 (REGUŁA 3, przy F-83) — najczęstsza, najmniej sformalizowana forma kontaktu podatnika z organem |
 | Ordynacja podatkowa — Dział III Rozdz. 7a, ulgi w spłacie (67a-67e + ⭐ 67da) + art. 57 opłata prolongacyjna: trzy formy ulgi (⛔ umorzyć można TYLKO zaległość), dwuetapowość przesłanka-uznanie (granica kontroli WSA), reżimy pomocowe przedsiębiorcy (67b — de minimis wg rozp. **2023/2831**, 300 000 EUR, NIE 1407/2013), ulgi z urzędu (67d), ⭐⭐⭐ wygaśnięcie decyzji ex lege (67da — przeniesione z art. 259 od 25.03.2024, TRZY raty NIEKONIECZNIE KOLEJNE), właściwość (67e — ⛔ odwołanie w podatkach lokalnych do SKO) | Dz.U. 2026 poz. 622 t.j. | dr-06-podatki-finanse-publiczne-aml/modules/mod-OP-ulgi-w-splacie-dzial-III-rozdzial-7a.md | ✅ NOWY 2026-08-22, SYNC 2026-08-22 (REGUŁA 3, przy F-83 priorytet #4) |
+
+| Ordynacja podatkowa — uzupełnienie pokrycia current-state | bieżący stan ELI/ISAP | dr-06-podatki-finanse-publiczne-aml/modules/mod-OP-uzupelnienie-pokrycia-2026.md | ✅ aktywny |
 
 ---
 
@@ -533,6 +561,8 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 
 ---
 
+
+| Wojewoda i administracja rządowa — indeks current-state DR-08 | bieżący stan ELI/ISAP | dr-08-samorzad-terytorialny-prawo-lokalne/modules/mod-wojewoda-administracja-rzadowa-current-state-COV.md | ✅ current-state COV |
 
 ---
 
