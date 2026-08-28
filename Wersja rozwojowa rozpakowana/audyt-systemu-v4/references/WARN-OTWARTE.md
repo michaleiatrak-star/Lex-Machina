@@ -16,7 +16,7 @@
 | Flaga | Priorytet | Pozostały zakres | Kryterium zamknięcia |
 |---|---|---|---|
 | F-135 | średni | Dokończyć cross-check wartości prawnych w pozostałych DR, elementów unikalnych oraz `shared`; każdą rozbieżność rozstrzygnąć w źródle urzędowym albo jawnie oznaczyć jako nieweryfikowalną. | Zero nieuzasadnionych rozbieżności albo jawne oznaczenie nieweryfikowalnych pozycji. |
-| F-138 | wysoki | Główny batch migracji `MAPA-AKTOW.md` do current-state-only jest wykonany dla DR-01, DR-03, DR-04, DR-05, DR-06, DR-07, DR-08, DR-10, DR-12 i DR-14. Pozostaje selektywny sweep DR-02/09/11/13/15/16, zsynchronizowanie końcowych wersji `audyt-systemu-v4` i `prawny-router-v3` w `SKILL.md` + `references/CHANGELOG.md` oraz realny test spójności. | Brak historycznych statusów w mapach runtime objętych migracją, zgodne wersje/changelogi, F-108 nie figuruje jako otwarta, a końcowy cross-check nie wykazuje sprzeczności blokujących. |
+| F-138 | wysoki | Migracja lokalnych `MAPA-AKTOW.md` do modelu current-state-only została wykonana dla wszystkich DR objętych sweepem, z zachowaniem funkcji rejestru modułów. Pozostaje zsynchronizowanie końcowych wersji `audyt-systemu-v4` i `prawny-router-v3` w `SKILL.md` + `references/CHANGELOG.md` oraz realny test spójności / cross-check. | Zgodne wersje/changelogi, F-108 nie figuruje jako otwarta, a końcowy test rejestracji/pokrycia i cross-check nie wykazują sprzeczności blokujących. |
 
 ## Reaktywne
 
