@@ -63,13 +63,11 @@ def main():
         results[key] = code
 
     sekcja("T4 KRYTYCZNY — Integralność nagłówków")
-    print("RĘCZNY: test_header_snapshot.py --snapshot/--verify wokół edycji .md.
-")
+    print("RĘCZNY: test_header_snapshot.py --snapshot/--verify wokół edycji .md.\n")
     results["T4"] = "MANUAL"
 
     sekcja("T5 WYSOKI — Widmowe pokrycie")
-    print("RĘCZNY: wymaga osądu treści, nie tylko obecności deklaracji.
-")
+    print("RĘCZNY: wymaga osądu treści, nie tylko obecności deklaracji.\n")
     results["T5"] = "MANUAL"
 
     sekcja("T6/T7 KRYTYCZNY/ŚREDNI — Odwołania, duplikaty, portability")
@@ -112,17 +110,15 @@ def main():
                 critical_fail = True
         else:
             status = f"❌ BŁĄD (kod {code})"
-            if key in ("T1", "T6_T7", "T19"):
+            if key in ("T1", "T6_T7", "T18", "T19"):
                 critical_fail = True
         print(f"  {key}: {status}")
 
     if critical_fail:
-        print("
-WYNIK KOŃCOWY: ❌ FAIL — aktywny blocker strukturalny.")
+        print("\nWYNIK KOŃCOWY: ❌ FAIL — aktywny blocker strukturalny.")
         return 1
 
-    print("
-WYNIK KOŃCOWY: ✅ PASS STRUKTURALNY — przejrzyj WARN i testy ręczne przed wydaniem.")
+    print("\nWYNIK KOŃCOWY: ✅ PASS STRUKTURALNY — przejrzyj WARN i testy ręczne przed wydaniem.")
     return 0
 
 
