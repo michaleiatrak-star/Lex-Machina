@@ -1,6 +1,6 @@
 # ISAP-METRYKI-AKTOW — rejestr kontrolny aktów prawnych
 
-**Data audytu:** 2026-05-28  
+**Data audytu:** 2026-08-28  
 **Źródło wyłączne:** Internetowy System Aktów Prawnych — `isap.sejm.gov.pl`.  
 **Zasada:** nie cytuj treści przepisu, numeru Dz.U. ani statusu aktu z pamięci. Jeżeli metryka nie znajduje się poniżej albo użytkownik wymaga cytatu przepisu, przed odpowiedzią sprawdź aktualny tekst w ISAP.
 
@@ -11,7 +11,7 @@
 | Akt | Metryka ISAP zweryfikowana | Status roboczy systemu | Uwagi wdrożeniowe |
 |---|---:|---|---|
 | Kodeks postępowania cywilnego | Dz.U. 2026 poz. 468; tekst ujednolicony opracowany na podstawie Dz.U. 2026 poz. 468 i 473 | aktualny na dzień audytu | używać dla pism cywilnych, pracy, gospodarczych i egzekucji sądowej |
-| Kodeks cywilny | tekst ujednolicony opracowany na podstawie tekst ujednolicony KC: Dz.U. 2025 poz. 1071, 1172, 1508 oraz Dz.U. 2026 poz. 184 i 507, 1172, 1508 oraz Dz.U. 2026 poz. 184 i 507 | aktualny na dzień audytu z zastrzeżeniem przepisów oczekujących | sprawdzać datę wejścia w życie zmian przed zastosowaniem |
+| Kodeks cywilny | Dz.U. 2026 poz. 795 t.j.; późniejsze zmiany sprawdzać przed zastosowaniem | aktualny t.j. na 2026-08-28 | konkretny artykuł i temporalność zawsze fresh gate |
 | Prawo przedsiębiorców | tekst ujednolicony opracowany na podstawie Dz.U. 2025 poz. 1480, 1795, 1826 oraz Dz.U. 2026 poz. 507 | aktualny na dzień audytu | stosować przy działalności regulowanej i gospodarczej |
 
 ---
@@ -33,7 +33,7 @@
 |---|---:|---|---|
 | Ordynacja podatkowa | tekst ujednolicony ISAP `D19970926Lj.pdf`, opracowanie Kancelarii Sejmu z 25.05.2026 | aktualny na dzień audytu | postępowanie podatkowe jako moduł odrębny od KPA |
 | Ustawa o Krajowej Administracji Skarbowej | Dz.U. 2025 poz. 1131; tekst ujednolicony ISAP `D20161947Lj.pdf` | aktualny na dzień audytu z wymogiem sprawdzenia zmian po t.j. | kontrola celno-skarbowa, czynności sprawdzające, uprawnienia UCS |
-| Kodeks karny skarbowy | wymaga każdorazowego sprawdzenia ISAP przed cytowaniem | nie zamykać metryki bez sprawdzenia | używać tylko po aktualizacji metryki pod sprawę |
+| Kodeks karny skarbowy | Dz.U. 2025 poz. 633 t.j.; po t.j. opublikowano zmiany, dlatego sprawdzać ELI na dzień czynu/czynności | PO-TJ-ZMIANY | konkretny przepis zawsze fresh gate |
 
 ---
 
