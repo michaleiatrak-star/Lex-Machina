@@ -4,9 +4,10 @@
 Ordynacja podatkowa, Dz.U. 2026 poz. 622 t.j.
 
 Utworzony 2026-08-22 (F-83, priorytet #3 mapy pokrycia dr-06 — "najczęstsza,
-najmniej sformalizowana forma kontaktu z organem"). Zweryfikowane RZĄD 1:
-lexlege.pl, przepisy.gofin.pl (historia wersji do Dz.U. 2026 poz. 622), arslege.pl
-— zgodne przy każdym cytowanym artykule.
+najmniej sformalizowana forma kontaktu z organem"). Re-weryfikacja F-135:
+2026-08-28, RZĄD 1 — urzędowy tekst jednolity Ordynacji podatkowej,
+Dz.U. 2026 poz. 622 (ELI/API Sejmu). Potwierdzone m.in. art. 274 § 1 pkt 1:
+próg 5000 zł oraz art. 274 § 3: sprzeciw w terminie 14 dni.
 
 ## Akt prawny
 
@@ -233,4 +234,6 @@ KWOTOWY
 
 ## Weryfikacja online
 
-isap.sejm.gov.pl | lexlege.pl | przepisy.gofin.pl (historia wersji artykułów) | orzeczenia.nsa.gov.pl (dla wyroków cytowanych powyżej: I SA/Po 500/08, II FSK 985/15, I SA/Wr 268/15, III SA/Wa 1251/18 — WSZYSTKIE wymagają potwierdzenia sygnatury przy konkretnym wykorzystaniu, zgodnie z HARDGATE)
+**RZĄD 1:** ELI / API Sejmu — Dz.U. 2026 poz. 622, re-ver 2026-08-28 (art. 274: 5000 zł i 14 dni potwierdzone).  
+**Pomocniczo:** lexlege.pl, przepisy.gofin.pl (historia wersji artykułów).  
+**Orzecznictwo:** orzeczenia.nsa.gov.pl — sygnatury I SA/Po 500/08, II FSK 985/15, I SA/Wr 268/15, III SA/Wa 1251/18 wymagają osobnego fresh gate przed powołaniem.
