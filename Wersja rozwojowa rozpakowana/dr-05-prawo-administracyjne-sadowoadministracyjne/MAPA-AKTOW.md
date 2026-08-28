@@ -1,58 +1,40 @@
 # DR-05 — Lokalna Mapa Aktów Prawnych
 
-## Prawo Administracyjne i Sądownictwo Administracyjne
+## Prawo administracyjne i sądownictwo administracyjne
 
-**Weryfikacja online:** 2026-06-08 | Źródło: isap.sejm.gov.pl
+Mapa runtime zawiera wyłącznie bieżące przypisanie **akt → moduł**. Historia zmian, wcześniejsze błędy numerów i zamknięte flagi należą do `audyt-systemu-v4/references/AUDIT-JOURNAL.md` / `CHANGELOG.md`.
 
-| Akt prawny | Dz.U. (t.j.) | Moduł | Status |
+| Akt / zakres | Bieżąca podstawa | Moduł / routing | Status runtime |
 |---|---|---|---|
-| Ustawa o dostępie do informacji publicznej (UDIP) | Dz.U. 2022 poz. 902 t.j. — VER 2026-07-02aa: nadal aktualne (obwieszczenie 23.03.2022) | mod-UDIP-dostep-informacji-publicznej | ✅ OK |
-| Ustawa o otwartych danych i ponownym wykorzystywaniu informacji sektora publicznego | Dz.U. 2023 poz. 1524 t.j. — VER 2026-07-02bb: nadal aktualne (obwieszczenie 16.06.2023) | mod-UDIP-dostep-informacji-publicznej | ✅ OK (wspólny) |
-| Ustawa o postępowaniu egzekucyjnym w administracji (UPEA) | Dz.U. 2026 poz. 268 t.j. + Dz.U. 2026 poz. 532 t.j. | mod-UPEA-egzekucja-administracyjna | ✅ OK |
-| Ustawa o cudzoziemcach | Dz.U. 2025 poz. 1079 t.j. — VER 2026-07-02aa: nadal aktualne (obwieszczenie 25.07.2025) ze zm. (zm.: 2025.619 Niebieska Karta UE; 2025.1794; 2026.203) + **ustawa z 21.11.2025 wprowadzająca system MOS (art. 225a i n.)** — ✅ NOWA POZYCJA 2026-08-14: obowiązkowa elektronizacja wniosków o pobyt czasowy/stały/rezydenta UE, w pełni w mocy od 27.04.2026 (5+ zgodnych źródeł: gov.pl/UdSC, prawo.pl, urzędy wojewódzkie) | mod-ustawa-cudzoziemcy | ✅ OK, treść modułu UZUPEŁNIONA 2026-08-14 o sekcję MOS |
-| Ustawa o warunkach dopuszczalności powierzania pracy cudzoziemcom | Dz.U. 2025 poz. 621 (w życie 01.06.2025), ze zm. 2025.1794, 2026.203, 2026.473, 2026.734 — ⭐⭐⭐ NAPRAWIONE/ROZBUDOWANE 2026-08-22: rozporządzenie wykonawcze MRPiPS z 31.07.2026 ws. wykazu państw wyłączonych z pracy w ruchu bezwizowym — Dz.U. 2026 poz. 1072, w życie 22.08.2026 (Wenezuela, Gruzja, Kolumbia — podstawa art. 3 ust. 4 ustawy) — ✅ TREŚĆ modułu w pełni opracowana (sekcja 0), ⭐ DODATKOWO dwa POWIĄZANE rozporządzenia MSZ z 10.08.2026 (Dz.U. 2026 poz. 1085 i 1086) — obowiązek wizowy przy WJEŹDZIE dla tych samych 3 państw, w mocy od 12-16.08.2026 (odrębny akt/odrębny minister/odrębna data — nie mylić z rozp. MRPiPS) | mod-ustawa-cudzoziemcy-zatrudnianie | ✅ OK (wspólny), ROZBUDOWANY 2026-08-08 i 2026-08-22 (sekcja 0 w pełni opracowana, dwa rozporządzenia rozróżnione) |
-| Ustawa o udzielaniu ochrony cudzoziemcom na terytorium RP | Dz.U. 2026 poz. 862 t.j. ✅ VER 2026-07-04 (audyt-DR05 — było "2024.1546, możliwy nowszy t.j."): potwierdzone niezależnie (sip.lex.pl OpenLEX "Dz.U. 2026 poz. 862 t.j.", prawo.pl), ze zm. 2025.389, 2025.619, 2025.621, 2025.1794, 2026.203 (ta ostatnia — ustawa o wygaszeniu rozwiązań Ukraina, patrz wiersz niżej) | mod-ustawa-cudzoziemcy | ✅ OK (nowy t.j. potwierdzony) |
-| Ustawa o pomocy obywatelom Ukrainy (tymczasowa ochrona) | Dz.U. 2022 poz. 583 (specustawa z 12.03.2022, ostatni znany t.j. 2025.337) została w ISTOTNYM ZAKRESIE WYGASZONA z dniem **5 marca 2026 r.** ustawą z 23.01.2026 r. o wygaszeniu rozwiązań wynikających z ustawy o pomocy obywatelom Ukrainy (Dz.U. 2026 poz. 203). Skutki: (1) przepisy o legalizacji pobytu PRZENIESIONO do ustawy o udzielaniu cudzoziemcom ochrony na terytorium RP (wiersz wyżej, ✅ OK, 2025.223); (2) przepisy o powierzaniu pracy PRZENIESIONO do ustawy o warunkach dopuszczalności powierzania pracy cudzoziemcom (wiersz wyżej, ✅ OK, 2025.621); (3) ochrona czasowa dla obecnych beneficjentów trwa nadal do 4.03.2027, w NOWYM reżimie prawnym | mod-ustawa-cudzoziemcy | ✅ NAPRAWIONE 2026-08-13 (F-30) — status "⛔ PILNE" był PRZESTARZAŁY: moduł ZOSTAŁ już gruntownie zaktualizowany 2026-07-02 (WARN-27, ta sama sesja co pierwotny wpis PILNE) — sekcja "ANEKS A — Ochrona tymczasowa: obywatele Ukrainy" (115 linii) w pełni pokrywa nowy reżim prawny: tabelę aktów właściwych po 5.03.2026, zmiany statusu PESEL UKR→NUE, zachowanie ważności powiadomień PUP sprzed 5.03.2026, okres 3-letni dla Ukraińców spoza ochrony wojennej. Ten wiersz mapy po prostu NIGDY nie został odświeżony po zamknięciu WARN-27 tego samego dnia — 6. z rzędu instancja wzorca "stara notatka" w tym systemie |
-| Ustawa o skardze na naruszenie prawa strony do rozpoznania sprawy bez nieuzasadnionej zwłoki | Dz.U. 2023 poz. 1725 t.j. ✅ VER 2026-07-04 (audyt-DR01/DR02/DR05, w pełni potwierdzone niezależnie): isap/infor.pl, obwieszczenie 2.08.2023, poprzedni t.j. 2018.75 — numer 2023.1725 potwierdzony trzykrotnie w tym projekcie | mod-ustawa-skargi-przewleklosc-dostep-sadu | ✅ OK (w pełni potwierdzone) |
-| Ustawa o Rzeczniku Praw Obywatelskich (RPO) | Dz.U. 2024 poz. 1264 t.j. — VER 2026-07-02aa: nadal aktualne (obwieszczenie 19.08.2024) | mod-ustawa-RPO | ✅ OK |
-| Ustawa o Rzeczniku Praw Dziecka (RPD) | Dz.U. 2023 poz. 292 t.j. (obwieszczenie 9.02.2023) — dodane 2026-07-27, na żądanie użytkownika, odpowiedź na pytanie o pokrycie praw dziecka | mod-ustawa-RPD | ✅ NOWY 2026-07-27 |
-| Ustawa o samorządowych kolegiach odwoławczych (SKO) | Dz.U. 2018 poz. 570 t.j. ⚠️ POPRAWKA 2026-07-04 (audyt-DR05): poprzedni numer "2023.825" nie potwierdzony — aktualny t.j. 2018.570 (obwieszczenie 1.03.2018) potwierdzony NIEZALEŻNIE przez ≥6 źródeł (gov.pl/mswia, BIP SKO Warszawa/Olsztyn/inne, Wikipedia), brak nowszego t.j. w żadnym sprawdzonym źródle | mod-ustawa-SKO | ✅ OK (numer poprawiony) |
-| Ustawa o kontroli w administracji rządowej | Dz.U. 2026 poz. 158 t.j. (obwieszczenie 9.02.2026, ISAP WDU20260000158) ✅ NAPRAWIONE 2026-08-14 (F-31): treść modułu zweryfikowana — jedyna nowelizacja w tym t.j. (2025.1158) to dopuszczenie formy elektronicznej dla czynności pisemnych, techniczna, nie merytoryczna | mod-ustawa-kontrola-administracji | ✅ OK (F-31 zamknięta) |
-| Ustawa o wojewodzie i administracji rządowej w województwie | Dz.U. 2025 poz. 428 t.j. — RZĄD 1 ELI | mod-ustawa-wojewoda-administracja-rzadowa | ✅ F-108/45 P3 — wydzielony moduł B+ |
-| Ustawa o petycjach | Dz.U. 2018 poz. 870 t.j. — VER 2026-07-02z: nadal aktualne (obwieszczenie 13.04.2018) | mod-ustawa-petycje | ✅ OK |
-| KPA art. 156 §2a + Ustawa reprywatyzacyjna | Dz.U. 2025 poz. 1691 (KPA, potwierdzone w FAZA 3A) + Dz.U. 2021 poz. 795 t.j. — VER 2026-07-02ff: nadal aktualne (ustawa z 9.03.2017, t.j. ogłoszony 16.09.2021, dot. Komisji Weryfikacyjnej ds. reprywatyzacji warszawskiej) | mod-ustawa-zaskarzanie-decyzji-wlasnosci | ✅ OK |
-| Ustawa o zapewnieniu dostępności osobom ze szczególnymi potrzebami | Dz.U. 2024 poz. 1411 t.j. ✅ POTWIERDZONE 2026-08-14 (F-31) — ten sam akt i numer już zweryfikowany krzyżowo w dr-10/MAPA-AKTOW.md (F-46/F-45 tego samego dnia) | mod-ustawa-dostepnosc-niepelnosprawni | ✅ OK (F-31 zamknięta) |
-| Ustawa o ochronie sygnalistów | Dz.U. 2024 poz. 928 ze zm. — VER 2026-07-02aa: nadal aktualne (w życie 25.09.2024) | mod-ustawa-sygnalisci | ✅ OK |
-| KPA (kanoniczny, PRZENIESIONY 2026-07-19 z DR-04) | Dz.U. 2025 poz. 1691 t.j. | mod-KPA-postepowanie-administracyjne | ✅ OK — rozbudowany 2026-07-19 o ugodę/milczące załatwienie/zaświadczenia/skargi-wnioski |
-| PPSA (kanoniczny, PRZENIESIONY 2026-07-19 z DR-04) | Dz.U. 2026 poz. 143 t.j. | mod-KPA-postepowanie-administracyjne | ✅ OK |
-| PPSA — uzupełnienie pozostałych działów: właściwość/skład/wyłączenie, strony i pełnomocnicy, pisma, doręczenia, terminy ogólne, mediacja/uproszczone, zawieszenie, prawomocność, zażalenie, uchwały NSA, skarga o niezgodność z prawem, wykonanie | Dz.U. 2026 poz. 143 t.j. — RZĄD 1 ELI | mod-PPSA-uzupelnienie-pokrycia-2026 | 🟡 B+ — zamknięcie dotychczasowych luk zerowych |
-| PPSA — uchybienie/przywrócenie terminu (85-89), skarga kasacyjna do NSA (173-193), koszty postępowania/wpis/opłata kancelaryjna (199-242), prawo pomocy (245-259) | Dz.U. 2026 poz. 143 t.j. — ten sam akt co wiersz wyżej | mod-PPSA-terminy-kasacja-prawo-pomocy | ✅ NOWY 2026-08-13, naprawa F-64 — PIERWSZY dedykowany moduł PPSA w systemie (wcześniej ustawa istniała wyłącznie jako rozproszone cytaty w modułach KPA i innych). ROZSZERZONY 2026-08-22: koszty/wpis/opłata kancelaryjna (art. 199-242), naprawa poz. #9 mapy pokrycia |
-| PPSA — Dział III Rozdz. 7, posiedzenia sądowe (art. 90-114): jawność i kierowanie na rozprawę (90 §2), terminy zawiadomienia 7/3 dni (91 §2), drzwi zamknięte (96-97), przebieg rozprawy i dowód uzupełniający z dokumentów (106), odroczenie obligatoryjne (109-110), zastrzeżenie do protokołu (105), protokół i załącznik (100-104), grzywna dla organu (112), zamknięcie rozprawy (113-114) | Dz.U. 2026 poz. 143 t.j. ze zm. — ten sam akt co wiersz wyżej | mod-PPSA-posiedzenia-sadowe-rozdzial-7 | ✅ NOWY 2026-08-22 (F-83, priorytet #6 mapy pokrycia) — ⭐⭐⭐ art. 105: brak zastrzeżenia do protokołu = UTRATA zarzutu procesowego w NSA; ⭐⭐ art. 106 §3: jedyne okno dowodowe, WYŁĄCZNIE dokumenty |
-| PPSA — Dział III Rozdz. 10, orzeczenia sądowe (art. 132-167a): granice orzekania i zakaz reformationis in peius (134), uwzględnienie skargi na decyzję/postanowienie — trzy rodzaje rozstrzygnięć (145), uwzględnienie skargi na interpretacje podatkowe i pokrewne (146), oddalenie skargi (151), uwzględnienie skargi na bezczynność/przewlekłość z sankcjami (149), związanie oceną prawną sądu (153), umorzenie postępowania (161) | Dz.U. 2026 poz. 143 t.j. ze zm. — ten sam akt co wiersz wyżej | mod-PPSA-orzeczenia-sadowe-rozdzial-10 | ✅ NOWY 2026-08-22, naprawa poz. #8 mapy pokrycia (ostatnia z oryginalnej ósemki) — ⭐⭐⭐ art. 145: dotąd całkowicie nieobecne mimo najczęstszej kategorii spraw; ⭐⭐⭐ art. 153: związanie oceną prawną, duża praktyczna doniosłość; uwzględnia zmianę linii orzeczniczej po wyroku TK z 26.02.2025 (art. 149 §1 pkt 3) |
-| KPA — decyzja administracyjna i odwołanie: elementy decyzji, procedura, postanowienia, zażalenia | Dz.U. 2025 poz. 1691 t.j. — ten sam akt co wiersz macierzysty mod-KPA-postepowanie-administracyjne | mod-KPA-decyzja-i-odwolanie | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) — rodzina z podziału NOTA-4, wzorzec F-33 |
-| KPA — zawieszenie postępowania, postępowanie dowodowe, rozprawa administracyjna | Dz.U. 2025 poz. 1691 t.j. — ten sam akt co wiersz macierzysty mod-KPA-postepowanie-administracyjne | mod-KPA-mechanizmy-w-toku-sprawy | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) — rodzina z podziału NOTA-4, wzorzec F-33 |
-| KPA — tryby nadzwyczajne, bezczynność i przewlekłość, kary, skarga do WSA, warstwa strategiczna | Dz.U. 2025 poz. 1691 t.j. — ten sam akt co wiersz macierzysty mod-KPA-postepowanie-administracyjne | mod-KPA-tryby-nadzwyczajne-i-strategia | WPISANY DO MAPY 2026-08-14e (F-77 rozszerzona) — rodzina z podziału NOTA-4, wzorzec F-33 |
+| Kodeks postępowania administracyjnego (KPA) | Dz.U. 2025 poz. 1691 t.j. ze zm. | `mod-KPA-current-state-COV.md` + rodzina modułów KPA | 🟢 B+/COV |
+| KPA — decyzja administracyjna i odwołanie | jw. | `mod-KPA-decyzja-i-odwolanie` | ✅ aktywny |
+| KPA — zawieszenie, dowody i rozprawa administracyjna | jw. | `mod-KPA-mechanizmy-w-toku-sprawy` | ✅ aktywny |
+| KPA — tryby nadzwyczajne, bezczynność, przewlekłość i strategia | jw. | `mod-KPA-tryby-nadzwyczajne-i-strategia` | ✅ aktywny |
+| Prawo o postępowaniu przed sądami administracyjnymi (PPSA) | Dz.U. 2026 poz. 143 t.j. ze zm. | rodzina modułów PPSA + routing KPA/PPSA | 🟢 B+/COV |
+| PPSA — pozostałe działy / pokrycie przekrojowe | jw. | `mod-PPSA-uzupelnienie-pokrycia-2026` | 🟡 B+ |
+| PPSA — terminy, kasacja, koszty i prawo pomocy | jw. | `mod-PPSA-terminy-kasacja-prawo-pomocy` | ✅ aktywny |
+| PPSA — posiedzenia sądowe | jw. | `mod-PPSA-posiedzenia-sadowe-rozdzial-7` | ✅ aktywny |
+| PPSA — orzeczenia sądowe | jw. | `mod-PPSA-orzeczenia-sadowe-rozdzial-10` | ✅ aktywny |
+| Ustawa o postępowaniu egzekucyjnym w administracji (UPEA) | Dz.U. 2026 poz. 268 t.j. ze zm. | `mod-UPEA-egzekucja-administracyjna` | ✅ aktywny |
+| Ustawa o dostępie do informacji publicznej (UDIP) | Dz.U. 2022 poz. 902 t.j. ze zm. | `mod-UDIP-dostep-informacji-publicznej` | ✅ aktywny |
+| Ustawa o otwartych danych i ponownym wykorzystywaniu informacji sektora publicznego | Dz.U. 2023 poz. 1524 t.j. ze zm. | `mod-UDIP-dostep-informacji-publicznej` | ✅ aktywny |
+| Ustawa o cudzoziemcach | Dz.U. 2025 poz. 1079 t.j. ze zm. | `mod-ustawa-cudzoziemcy` | ✅ aktywny; fresh gate |
+| Ustawa o warunkach dopuszczalności powierzania pracy cudzoziemcom | Dz.U. 2025 poz. 621 ze zm. | `mod-ustawa-cudzoziemcy-zatrudnianie` | ✅ aktywny; fresh gate |
+| Ustawa o udzielaniu cudzoziemcom ochrony na terytorium RP | Dz.U. 2026 poz. 862 t.j. ze zm. | `mod-ustawa-cudzoziemcy` | ✅ aktywny; fresh gate |
+| Reżim ochrony czasowej obywateli Ukrainy po zmianach z 2026 r. | ustawy właściwe dla ochrony cudzoziemców i pracy cudzoziemców; temporalność sprawdzana na dzień zdarzenia | `mod-ustawa-cudzoziemcy` + `mod-ustawa-cudzoziemcy-zatrudnianie` | ✅ routing aktualny; fresh gate |
+| Ustawa o skardze na naruszenie prawa strony do rozpoznania sprawy bez nieuzasadnionej zwłoki | Dz.U. 2023 poz. 1725 t.j. | `mod-ustawa-skargi-przewleklosc-dostep-sadu` + DR-01 `mod-przewleklosc-current-state-COV.md` | 🟢 B+/COV |
+| Ustawa o Rzeczniku Praw Obywatelskich | Dz.U. 2024 poz. 1264 t.j. | `mod-ustawa-RPO` | 🟢 B+/COV |
+| Ustawa o Rzeczniku Praw Dziecka | Dz.U. 2023 poz. 292 t.j. | `mod-ustawa-RPD` | 🟢 B+/COV |
+| Ustawa o samorządowych kolegiach odwoławczych | Dz.U. 2018 poz. 570 t.j. ze zm. | `mod-ustawa-SKO` | ✅ aktywny |
+| Ustawa o kontroli w administracji rządowej | Dz.U. 2026 poz. 158 t.j. | `mod-ustawa-kontrola-administracji` | ✅ aktywny |
+| Ustawa o wojewodzie i administracji rządowej w województwie | Dz.U. 2025 poz. 428 t.j. | DR-08 `mod-wojewoda-administracja-rzadowa-current-state-COV.md` | 🟢 B+/COV |
+| Ustawa o petycjach | Dz.U. 2018 poz. 870 t.j. ze zm. | `mod-ustawa-petycje` | ✅ aktywny |
+| KPA art. 156 § 2a + ustawa reprywatyzacyjna | KPA jw. + Dz.U. 2021 poz. 795 t.j. ze zm. | `mod-ustawa-zaskarzanie-decyzji-wlasnosci` | ✅ aktywny |
+| Ustawa o zapewnianiu dostępności osobom ze szczególnymi potrzebami | Dz.U. 2024 poz. 1411 t.j. | `mod-ustawa-dostepnosc-niepelnosprawni` | ✅ aktywny |
+| Ustawa o ochronie sygnalistów | Dz.U. 2024 poz. 928 ze zm. | `mod-ustawa-sygnalisci` | ✅ aktywny |
 
-> ⚠️ Przed każdym powołaniem: sprawdź aktualny t.j. w ISAP.
-> Prawo administracyjne materialne jest często nowelizowane.
-> Cudzoziemcy i praca cudzoziemców — weryfikuj zmiany 2025/2026 w ISAP.
+## Reguły runtime
 
-> Aktualizacja: 2026-07-02ff (TRYB DZU krok 6/16 wg WARN-26, ZAMKNIĘTY: 12 z
-> 17 pozycji w pełni zweryfikowane [71%] + 2 pozycje "brak przeciwdowodu"
-> [SKO, skargi/przewlekłość] + 3 pozycje efektywnie potwierdzone przez
-> odesłania (UPEA via dr-03, KPA/PPSA via FAZA 3A). Łącznie 17/17 pozycji
-> objętych tą sesją w jakiejś formie. 2 błędy CRIT naprawione [dostępność,
-> kontrola administracji] + WARN-27 (zmiana systemowa cudzoziemcy/Ukraina)
-> znaleziony i naprawiony osobną sesją targeted. Krok 6/16 UZNAJE SIĘ ZA
-> ZAMKNIĘTY.
->
-> **Sesja katalogowania 2026-07-04:** 3 pozycje domknięte/poprawione: (1)
-> ustawa o udzielaniu ochrony cudzoziemcom — potwierdzony nowy t.j. 2025.223
-> (było 2024.1546); (2) SKO — POPRAWKA: numer "2023.825" nie potwierdzony w
-> żadnym z ≥6 sprawdzonych źródeł, prawidłowy t.j. to 2018.570; (3) skarga na
-> przewlekłość — status podniesiony z "brak przeciwdowodu" do "w pełni
-> potwierdzone" (2023.1725, zweryfikowane trzykrotnie w projekcie, w tym
-> bezpośrednio w dr-05). DR-05 ma teraz 0 pozycji ze statusem "niepełna
-> weryfikacja"; pozostaje 1 flaga PILNA (cudzoziemcy/Ukraina — wymaga sesji
-> dedykowanej merytorycznej, nie tylko numeru) i 2 flagi treści modułu
-> (dostępność, kontrola administracji).
+- mapa nie przechowuje informacji typu `NAPRAWIONE`, `ZAMKNIĘTE`, `NOWY`, dawnych numerów ani opisów sesji audytowych;
+- przy cudzoziemcach, ochronie czasowej i aktach często nowelizowanych obowiązuje fresh gate do ELI/ISAP przed użyciem konkretnego przepisu, terminu lub statusu temporalnego;
+- status `COV` oznacza udokumentowaną mapę struktury i routingu, nie kompletność artykuł-po-artykule (`FULL`).

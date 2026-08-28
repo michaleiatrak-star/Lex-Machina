@@ -16,7 +16,7 @@
 | Flaga | Priorytet | Pozostały zakres | Kryterium zamknięcia |
 |---|---|---|---|
 | F-135 | średni | Dokończyć cross-check wartości prawnych w pozostałych DR, elementów unikalnych oraz `shared`; każdą rozbieżność rozstrzygnąć w źródle urzędowym albo jawnie oznaczyć jako nieweryfikowalną. | Zero nieuzasadnionych rozbieżności albo jawne oznaczenie nieweryfikowalnych pozycji. |
-| F-138 | wysoki | Domknąć techniczną migrację runtime do modelu current-state-only: selektywnie oczyścić pozostałe `MAPA-AKTOW.md` z narracji historycznej, zsynchronizować routing nowych COV, zarejestrować końcowe wersje `audyt-systemu-v4` i `prawny-router-v3` w `SKILL.md` + `references/CHANGELOG.md`, a następnie wykonać realny test spójności. | Brak historycznych statusów w mapach runtime objętych migracją, zgodne wersje/changelogi, F-108 nie figuruje jako otwarta, a końcowy cross-check nie wykazuje sprzeczności blokujących. |
+| F-138 | wysoki | Dokończyć techniczną migrację runtime do modelu current-state-only. DR-01, DR-05, DR-06, DR-07, DR-08, DR-10, DR-12 i DR-14 są już oczyszczone. Pozostaje kontrolowany cleanup przede wszystkim DR-03 i DR-04 oraz selektywny sweep pozostałych `MAPA-AKTOW.md`; następnie zsynchronizować końcowe wersje `audyt-systemu-v4` i `prawny-router-v3` w `SKILL.md` + `references/CHANGELOG.md` i wykonać realny test spójności. | Brak historycznych statusów w mapach runtime objętych migracją, zgodne wersje/changelogi, F-108 nie figuruje jako otwarta, a końcowy cross-check nie wykazuje sprzeczności blokujących. |
 
 ## Reaktywne
 
