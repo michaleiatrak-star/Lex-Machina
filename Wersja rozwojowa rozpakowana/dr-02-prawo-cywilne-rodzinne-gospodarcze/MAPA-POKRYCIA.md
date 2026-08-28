@@ -72,11 +72,13 @@ Ta mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Hist
 
 | Akt / zakres | Status bieżący | Główny moduł / uwaga |
 |---|---|---|
-| własność lokali — Dz.U. 2026 poz. 232 | 🟢 B+ / COV | `mod-ustawa-spoldzielnie-wlasnosc-lokali.md`; Rozdz. 1–4 zmapowane, spółdzielnie kierowane do odrębnych modułów |
-| ochrona praw lokatorów — Dz.U. 2023 poz. 725 | 🟢 B+ / COV | `mod-ustawa-ochrona-praw-lokatorow-najem-eksmisja.md`; typy najmu, wypowiedzenie, opróżnienie i zasób gminny zmapowane |
+| własność lokali — Dz.U. 2026 poz. 232 | 🟢 B+ / COV | `mod-ustawa-spoldzielnie-wlasnosc-lokali.md`; Rozdz. 1–4 zmapowane |
+| ochrona praw lokatorów — Dz.U. 2023 poz. 725 | 🟢 B+ / COV | `mod-ustawa-ochrona-praw-lokatorow-najem-eksmisja.md` |
 | księgi wieczyste i hipoteka — Dz.U. 2026 poz. 1066 | 🟢 B+ / COV | `mod-KW-ksiega-wieczysta-zakup-nieruchomosci.md` |
-| zastaw rejestrowy — Dz.U. 2018 poz. 2017 ze zm. | 🟢 B+ / COV | `mod-ustawa-zastaw-rejestrowy.md`; ustanowienie, przedmiot, zbieg, wygaśnięcie, zaspokojenie i rejestr zmapowane |
-| KRS — Dz.U. 2025 poz. 869 ze zm. | 🟢 B+ / COV | `mod-ustawa-KRS-rejestr-sadowy.md`; jawność, rejestry i postępowanie zmapowane; 4 nowelizacje po t.j. objęte fresh gate |
+| gospodarka nieruchomościami — Dz.U. 2026 poz. 399 | 🟢 B+ / COV | `dr-09/.../mod-UGN-gospodarka-nieruchomosciami.md`; Działy I–V zmapowane |
+| zastaw rejestrowy — Dz.U. 2018 poz. 2017 ze zm. | 🟢 B+ / COV | `mod-ustawa-zastaw-rejestrowy.md` |
+| KRS — Dz.U. 2025 poz. 869 ze zm. | 🟢 B+ / COV | `mod-ustawa-KRS-rejestr-sadowy.md`; 4 nowelizacje po t.j. objęte fresh gate |
+| Prawo spółdzielcze — Dz.U. 2026 poz. 521 | 🟢 B+ / COV | `mod-prawo-spoldzielcze.md`; części I–III, organy, członkostwo, lustracja i reorganizacja zmapowane |
 | Prawo wekslowe — Dz.U. 2022 poz. 282 | 🟢 B+ / COV | `mod-prawo-wekslowe-czekowe.md` |
 | Prawo czekowe — Dz.U. 2016 poz. 462 | 🟢 B+ / COV | `mod-prawo-wekslowe-czekowe.md` |
 | fundacje — Dz.U. 2023 poz. 166 + poz. 316/2026 | 🟢 B+ / COV | `mod-ustawa-fundacje-stowarzyszenia.md` |
@@ -89,12 +91,10 @@ Ta mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Hist
 | ubezpieczenia obowiązkowe, UFG i PBUK | 🟢/🟡 B+ |
 | fundacja rodzinna | 🟢/🟡 B+ |
 | opóźnienia w transakcjach handlowych | 🟢/🟡 B+ |
-| Prawo spółdzielcze | 🟡 B — następny priorytet audytu |
-| gospodarka nieruchomościami | 🟡 B — następny priorytet audytu |
 
 ## Aktywne luki
 
-1. Pozostałe główne akty B w DR-02: **Prawo spółdzielcze** i **gospodarka nieruchomościami**.
+1. W DR-02 nie pozostał główny akt F-108 na poziomie `B` wyłącznie z powodu braku mapy struktury; dalsza praca dotyczy głębokości B+ i kodeksów.
 2. Żółte zakresy KPC/KSH/PrUp/PrRestr pozostają lukami głębokości, nie lukami routingu.
 3. Brak statusu `FULL` dla kodeksów i dużych ustaw; COV nie oznacza komentarza artykuł-po-artykule.
 4. Każda konkretna jednostka prawna wymaga fresh gate do ELI/ISAP; prawo UE — EUR-Lex.
