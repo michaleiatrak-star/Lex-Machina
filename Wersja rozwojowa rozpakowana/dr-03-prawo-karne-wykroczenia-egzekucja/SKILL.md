@@ -113,7 +113,13 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   obrona obligatoryjna art. 79 §1 pkt 2-4 KPK (→ mod-niewidomy-prawa-prawne.md,
   mod-niepelnosprawnosc-intelektualna-gluchota.md)
 
-## Moduły (64 łącznie — ✓ 64 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+## Moduły (68 łącznie — ✓ 68 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+
+  [✓] OK    mod-KK-current-state-COV
+  [✓] OK    mod-KKW-current-state-COV
+  [✓] OK    mod-KPK-current-state-COV
+  [✓] OK    mod-KPW-kodeks-postepowania-w-sprawach-o-wykroczenia
+  [✓] OK    mod-narkomania-current-state-COV
 
 ```
   [✓] OK    mod-nielegalny-pobor-mediow
