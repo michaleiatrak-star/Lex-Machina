@@ -8,7 +8,7 @@
 [![Wersja stabilna](https://img.shields.io/badge/stabilna-21.08.2026-2A6F50.svg)](#-wersjonowanie)
 [![Wersja rozwojowa](https://img.shields.io/badge/rozwojowa-aktywna-orange.svg)](#-wersjonowanie)
 [![Skille](https://img.shields.io/badge/skille-33-8A2BE2.svg)](#-katalog-skilli)
-[![Platforma](https://img.shields.io/badge/platforma-Claude%20%C2%B7%20ChatGPT%20%C2%B7%20Codex-D97757.svg)](#-kompatybilno%C5%9B%C4%87-llm)
+[![Platforma](https://img.shields.io/badge/platforma-Claude%20%C2%B7%20ChatGPT%20%C2%B7%20Codex%20%C2%B7%20Grok-D97757.svg)](#-kompatybilno%C5%9B%C4%87-llm)
 [![Język](https://img.shields.io/badge/j%C4%99zyk-polski-white.svg?labelColor=DC143C)](#)
 
 *System pokrywa 16 dziedzin prawa polskiego i unijnego: od routingu sprawy, przez analizę
