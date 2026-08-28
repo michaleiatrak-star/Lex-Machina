@@ -16,9 +16,9 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 | Akt / zakres | Moduł wejściowy | Status bieżący |
 |---|---|---|
 | Prawo o ustroju sądów powszechnych | DR-01 / `mod-USP-ustroj-sadow-powszechnych` | 🟡 |
-| Prawo o prokuraturze / organy ochrony prawa | `mod-PrProkuratura-organy-ochrony-prawa` | 🟡 |
+| Prawo o prokuraturze — Dz.U. 2026 poz. 810 | `mod-PrProkuratura-organy-ochrony-prawa` | 🟢 B+ / COV — ustrój, status, dyscyplinarne, routing proceduralny i EPPO zmapowane z aktualnego ELI 2026-08-28 |
 | sędziowie / referendarze / kuratorzy | `mod-ustawa-sedziowie-referendarze-kuratorzy` | 🟡 |
-| koszty sądowe i pomoc prawna (KSCU) | `mod-KSCU-koszty-sadowe-i-pomoc-prawna` | 🟡 |
+| KSCU — Dz.U. 2025 poz. 1228 | `mod-KSCU-koszty-sadowe-i-pomoc-prawna` | 🟢 B+ / COV — opłaty, wydatki, zwolnienie i routing kosztowy zmapowane; kwoty wyłącznie fresh gate |
 | KPC — biegli sądowi / opinie | `mod-KPC-biegli-sadowi-opinie` | 🟡 |
 | KPC — arbitraż / mediacja | `mod-KPC-arbitraz-mediacja-ADR` | 🟡 |
 | regulatorzy UOKiK / URE / UKE / KNF | `mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF` | 🟡 |
@@ -56,8 +56,8 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 
 ## Aktywne luki
 
-1. Prawo o adwokaturze i ustawa o radcach prawnych mają bieżące B+/COV, ale status `FULL` wymaga pełnego audytu każdej jednostki aktu.
+1. PUSP, Prawo o notariacie i pozostałe akty ustrojowe/zawodowe wymagają dalszego audytu rozdziałowego.
 2. Kodeksy etyki i uchwały zawodowe należy pobierać z oficjalnych stron właściwego samorządu, nie ze źródeł wtórnych.
-3. Prawo o prokuraturze, KSCU, Prawo o notariacie i pozostałe akty ustrojowe/zawodowe wymagają dalszego audytu rozdziałowego.
+3. Prawo o prokuraturze i KSCU mają bieżące B+/COV, ale nie status FULL całego aktu.
 4. Zmian z Dz.U. 2026 poz. 846, zasadniczo wchodzących 1.10.2026, nie stosuje się przed ich wejściem w życie.
 5. Przy kolizji zakresów DR-12 korzysta z DR-01 dla ustroju oraz DR-02/03/05 dla właściwej procedury.
