@@ -1,229 +1,121 @@
-# mod-RP — Radcowie prawni (Ustawa o radcach prawnych)
+# Ustawa o radcach prawnych — moduł bieżący
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
----
-WSPÓLNE ZASADY DLA MODUŁU:
-- przed cytowaniem przepisu zastosuj `shared/ISAP-AUDIT-PROTOCOL.md`;
-- metryki aktów sprawdzaj w `shared/ISAP-METRYKI-AKTOW.md`;
-- jeżeli sprawa jest procesowa, uruchom `shared/FORMAL-CHECK.md`, `shared/WARUNKI-SKUTECZNOSCI.md`, `shared/TERM-CALC.md`, `shared/RISK-ASSESSMENT.md`;
-- zakaz cytowania stawek OC i wynagrodzeń z pamięci.
----
+**Stan weryfikacji:** 2026-08-28  
+**Tekst jednolity bazowy:** Dz.U. 2024 poz. 499  
+**Stan obowiązujący:** tekst bazowy + późniejsze zmiany, w tym **Dz.U. 2026 poz. 731**, obowiązujący od 18.06.2026.  
+**Źródła kanoniczne:** ELI/ISAP + Krajowa Izba Radców Prawnych dla aktów korporacyjnych.
 
-**Zakres:** wpis na listę radców prawnych, aplikacja radcowska, tajemnica zawodowa,
-OC, odpowiedzialność dyscyplinarna, zatrudnienie na umowie o pracę, pełna zdolność
-postulacyjna (od 2015 — także w sprawach karnych z wyj. obligatoryjnej obrony),
-zakaz reklamy, praca zdalna radcy.
+## 1. Bramka źródłowa
 
-## KLUCZOWE AKTY PRAWNE — ZWERYFIKOWANE
+- ELI — tekst jednolity: `https://eli.gov.pl/eli/DU/2024/499/ogl`
+- ELI — nowelizacja z 15.05.2026 r.: `https://eli.gov.pl/eli/DU/2026/731/ogl`
+- KIRP — aktualny Kodeks Etyki Radcy Prawnego: oficjalna strona `kirp.pl`; tekst jednolity ogłoszony uchwałą nr 884/XI/2023 Prezydium KRRP z 7.02.2023, uwzględniający zmiany obowiązujące od 1.01.2023.
 
-```
-Ustawa o radcach prawnych:
-  Dz.U. 2024 poz. 499 t.j.
-  ✅ VER: isap.sejm.gov.pl 2026-06-05
-  Nowelizacja 2025 (uchwalona): rewizja OC, praca zdalna, tajemnica, współpraca
-  z adwokaturą — weryfikuj aktualne zm. w ISAP
-  → https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000499
+Przed cytowaniem konkretnego przepisu otwórz aktualny tekst po zmianach. Sam Dz.U. 2024 poz. 499 nie wystarcza do stanu 2026.
 
-Powiązane akty (weryfikuj Dz.U. w ISAP przed użyciem):
-  Postępowanie dyscyplinarne radców prawnych — Ustawa o radcach prawnych,
-    art. 42 (organy samorządu) i art. 64 i nast. (odpowiedzialność
-    dyscyplinarna):
-    → I instancja: OKRĘGOWY SĄD DYSCYPLINARNY właściwej okręgowej izby
-      radców prawnych
-    → II i OSTATNIA instancja (odwoławcza): WYŻSZY SĄD DYSCYPLINARNY (organ
-      samorządu wymieniony w art. 42 ust. 1, obok Krajowego Zjazdu, Krajowej
-      Rady, Wyższej Komisji Rewizyjnej, Głównego Rzecznika Dyscyplinarnego,
-      zgromadzeń i rad okręgowych izb, okręgowych komisji rewizyjnych i
-      rzeczników dyscyplinarnych)
-    → Ostrzeżenie dziekańskie (art. 66) — w wypadkach mniejszej wagi dziekan
-      rady okręgowej izby może poprzestać na ostrzeżeniu; odwołanie do
-      okręgowego sądu dyscyplinarnego (druga i ostatnia instancja dla tej
-      formy)
-    ✅ VER: 2026-07-02 (weryfikacja online na żądanie użytkownika, w ramach
-    TRYB DZU krok 11/16 — zadanie specjalne, dodanie podstaw dyscyplinarnych)
-  Kodeks Etyki Radcy Prawnego — uchwalony przez Nadzwyczajny Krajowy Zjazd
-    Radców Prawnych, obowiązuje od 1 lipca 2015 r.; tekst jednolity ogłoszony
-    Uchwałą nr 884/XI/2023 Prezydium Krajowej Rady Radców Prawnych z dnia
-    7 lutego 2023 r. (NIE Dz.U. — akt korporacyjny KRRP, źródło: kirp.pl)
-    Stosuje się odpowiednio do aplikantów radcowskich oraz — w zakresie
-    wskazanym w przepisach odrębnych — do prawników zagranicznych świadczących
-    w RP pomoc prawną odpowiadającą czynnościom radcy prawnego.
-    Radca prawny działający transgranicznie obowiązany jest dodatkowo
-    przestrzegać Kodeksu Etyki CCBE (Rady Adwokatur i Stowarzyszeń
-    Prawniczych Europy), uznanego za wiążący Uchwałą nr 8/2010 IX Krajowego
-    Zjazdu Radców Prawnych z 6.11.2010 r.
-    ✅ VER: 2026-07-02 (dodano w ramach TRYB DZU krok 11/16 na żądanie
-    użytkownika — dodanie KEA/KERP i odpowiedników)
-  Rozp. MS w spr. wynagrodzenia radcy prawnego z urzędu — weryfikuj aktualne w ISAP
-  KPC — zdolność postulacyjna radcy
-  KPK art. 82 — obrona karna przez radcę (z ograniczeniami)
-```
+## 2. Mapa ustawy
 
-## ZASADY ABSOLUTNE
+| Rozdział / zakres | Materia | Status modułu |
+|---|---|---|
+| 1 | przepisy ogólne, zawód, tajemnica | 🟢 B+ |
+| 1a | przetwarzanie danych osobowych | 🟢/🟡 B+ — istotnie zmienione w 2026 |
+| 2 | wykonywanie zawodu, formy wykonywania, OC | 🟢 B+ — istotnie zmienione w 2026 |
+| 3 | uprawnienia do wykonywania zawodu / lista | 🟢/🟡 B+ |
+| 4 | aplikacja i egzamin radcowski | 🟡 B |
+| 5 | samorząd radców prawnych | 🟢/🟡 B+ — istotnie zmienione w 2026 |
+| 6 | odpowiedzialność dyscyplinarna | 🟢 B+ — istotnie zmienione w 2026 |
+| 6a | przepis karny | 🟢 B+ — dodany Dz.U. 2026 poz. 731 |
+| 7 | szczególne, przejściowe i końcowe | 🟡 B |
 
-1. Tajemnica zawodowa radcy (art. 3 u.r.p.): obowiązkowa, zakaz zwolnienia
-   bez wyraźnego upoważnienia ustawowego.
-2. Możliwość łączenia z umową o pracę — kluczowa różnica vs adwokat.
-3. Pełna zdolność postulacyjna we wszystkich sprawach od 2015 r.
-4. Zakaz bezpośredniej reklamy; dozwolona informacja o kancelarii.
-5. OC: obowiązkowe — stawki i suma gwarancyjna: weryfikuj w aktualnym rozp. MS.
-6. Odpowiedzialność dyscyplinarna: Sąd Dyscyplinarny OIRP → Wyższy Sąd Dyscyplinarny KRRP → SN.
+## 3. Wykonywanie zawodu i tajemnica — art. 3 i nast.
 
-## WALIDACJA INTAKE
+Radca prawny świadczy pomoc prawną w formach dopuszczonych ustawą. Przy analizie rozdziel:
+- formę wykonywania zawodu, w tym zatrudnienie;
+- niezależność i obowiązki zawodowe;
+- tajemnicę zawodową;
+- konflikt interesów i normy etyczne;
+- obowiązkowe ubezpieczenie OC;
+- szczególne reguły procesowe właściwe dla rodzaju sprawy.
 
-```text
-□ radca prawny czy inny zawód? (decyduje o ustawie)
-□ czy radca jednocześnie zatrudniony na umowie o pracę?
-□ etap: wpis / aplikacja / zawieszenie / wykreślenie / sprawa dyscyplinarna?
-□ data zdarzenia i termin zaskarżenia
-□ czy naruszono tajemnicę zawodową?
-□ jakiego środka szuka strona?
-```
+**Nie wpisuj ogólnego twierdzenia o „pełnej zdolności postulacyjnej bez wyjątków”.** Uprawnienie do występowania w konkretnej sprawie i ewentualne ograniczenia wynikają także z KPC/KPK i ustaw szczególnych.
 
-## 1. Intake szczególny
+## 4. Nowelizacja obowiązująca — Dz.U. 2026 poz. 731
 
-Przed odpowiedzią ustal co najmniej:
-- rola: radca / klient / poszkodowany / organ dyscyplinarny;
-- etap: wpis, aplikacja, zawieszenie, wykreślenie, sprawa dyscyplinarna, odszkodowanie;
-- akt lub czynność kwestionowana;
-- termin na środek (weryfikuj w ISAP i statucie KRRP);
-- naruszenie tajemnicy, konflikt interesów, zakaz reklamy;
+Ustawa z 15.05.2026 r. o zmianie ustawy o radcach prawnych weszła w życie **18.06.2026** i jest częścią bieżącego stanu prawnego.
 
-## 2. Mapa proceduralna
+Nowelizacja obejmuje m.in.:
+- reguły przetwarzania i retencji danych osobowych przez organy samorządu;
+- model obowiązkowego ubezpieczenia OC i zadania Krajowej Izby Radców Prawnych;
+- zadania i kompetencje organów samorządu;
+- uprawnienia KIRP w postępowaniach cywilnych, karnych, administracyjnych i sądowoadministracyjnych przez nowy art. 60a;
+- zmianę katalogu podmiotów uprawnionych do kasacji od prawomocnego orzeczenia Wyższego Sądu Dyscyplinarnego;
+- odpowiedzialność dyscyplinarną związaną z obowiązkiem ubezpieczeniowym;
+- nowy rozdział 6a i art. 74² penalizujący nieuprawnione posługiwanie się tytułem „radca prawny” lub oznaczeniem kancelarii.
 
-```text
-Zdarzenie / czynność / decyzja organu samorządowego
-  ↓
-Kwalifikacja: wpis / aplikacja / odpowiedzialność dyscyplinarna / cywilna / karna
-  ↓
-Właściwy organ: OIRP / KRRP / Sąd Dyscyplinarny / WSD / SN / sąd powszechny
-  ↓
-Środek zaskarżenia: odwołanie / zażalenie / skarga dyscyplinarna / pozew
-  ↓
-Walidacja formalna: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
-  ↓
-Ocena ryzyka: shared/RISK-ASSESSMENT.md + shared/QUALITY-CHECK.md
-  ↓
-Strategia: ostrożny / ofensywny / eskalacyjny
-```
+**HARD GATE:** gdy sprawa dotyczy zdarzenia sprzed 18.06.2026, sprawdź przepisy przejściowe nowelizacji; w szczególności ustawa zawiera osobne reguły dla części spraw dyscyplinarnych i danych.
 
-## 3. Warunki skuteczności
+## 5. Odpowiedzialność dyscyplinarna
 
-```text
-□ prawidłowy tryb i organ
-□ termin na środek — weryfikuj w ustawie i statucie
-□ legitymacja: klient, poszkodowany, rzecznik dyscyplinarny
-□ żądanie możliwe prawnie
-□ fakty powiązane z normą etyczną i ustawową
-□ dowody przypisane do każdej tezy
-□ kontrola ISAP na dzień sporządzenia pisma
-□ kontrola stanu prawnego na dzień zdarzenia oraz orzekania
-```
+Przy sprawie dyscyplinarnej ustal:
+1. datę czynu;
+2. właściwą normę ustawową i etyczną;
+3. organ I i II instancji;
+4. dopuszczalny środek odwoławczy;
+5. możliwość kasacji do SN według aktualnego art. 62²;
+6. przepisy przejściowe Dz.U. 2026 poz. 731, jeżeli orzeczenie lub kasacja wiążą się z okresem przejściowym.
 
-## 4. Matryca dowodowa
+Kasacja do Sądu Najwyższego jest nadzwyczajnym środkiem kontroli, nie „trzecią instancją”.
 
-Dowody typowe dla tego modułu:
-- uchwała rady izby / postanowienie KRRP / decyzja o wpisie;
-- umowa zlecenia / umowa o pracę / pełnomocnictwo;
-- korespondencja klient–radca;
-- protokoły posiedzeń sądu (naruszenie tajemnicy, konflikt);
-- polisy OC;
-- faktury / rachunki (wynagrodzenie);
-- orzeczenia organów dyscyplinarnych.
+## 6. Etyka zawodowa — źródło KIRP
 
-Każdy dowód oceniaj według schematu:
+Oficjalna KIRP publikuje Kodeks Etyki Radcy Prawnego w tekście jednolitym ogłoszonym uchwałą nr 884/XI/2023 Prezydium KRRP z 7.02.2023. Tekst uwzględnia zmiany uchwalone w 2022 r. i obowiązujące od 1.01.2023.
 
-```text
-Dowód → fakt, który ma wykazać → bezpośredni/pośredni → wiarygodność
-      → ryzyko podważenia → brakujący dowód wzmacniający
-```
+Przy sprawie etycznej pobierz aktualny dokument z KIRP i ustal konkretną normę dotyczącą m.in.:
+- niezależności;
+- tajemnicy zawodowej;
+- konfliktu interesów i zajęć niedopuszczalnych;
+- relacji z klientem;
+- informowania o wykonywaniu zawodu i pozyskiwania klientów;
+- stosunków między radcami prawnymi;
+- zabezpieczenia informacji i wykonywania zawodu przy użyciu technologii.
 
-## 5. Typowe zarzuty i kontrzarzuty
+Nie zastępuj KERP stanowiskiem komisji etyki ani opracowaniem prasowym. Stanowiska KIRP mogą być materiałem pomocniczym dopiero po ustaleniu normy z KERP.
 
-W każdej sprawie przygotuj dwie wersje:
-1. argumentację strony skarżącej / klienta,
-2. argumentację radcy / organu samorządowego.
+## 7. OC i opłaty
 
-Typowe ryzyka i kontrargumenty:
-- tajemnica zawodowa jako bariera dowodowa;
-- trudność wykazania szkody z naruszenia reprezentacji;
-- uznaniowość orzekania dyscyplinarnego;
-- przedawnienie dyscyplinarne (weryfikuj aktualne w ustawie + ISAP);
-- specyfika łączenia zatrudnienia z praktyką a zakres konfliktu interesów;
+Po nowelizacji 2026 szczególnie uważnie sprawdzaj aktualny model OC w ustawie i aktach wykonawczych. Kwot, sum gwarancyjnych i stawek nie utrwalaj w module.
 
-## 6. Strategia procesowa
+Aktualne rozporządzenie o opłatach za czynności radców prawnych ma tekst jednolity ogłoszony w **Dz.U. 2026 poz. 118**. Koszty pomocy prawnej z urzędu mają odrębny obowiązujący akt — weryfikuj go osobno w ELI.
 
-### Wariant ostrożny
-Minimalizuje ryzyko formalne. Priorytet: termin, kompletność, zabezpieczenie dowodów.
+## 8. Zmiana przyszła — Dz.U. 2026 poz. 846
 
-### Wariant ofensywny
-Eksponuje naruszenia etyczne, wadliwość reprezentacji, naruszenie tajemnicy lub zakazu konfliktu interesów.
+Ustawa z 29.05.2026 r. zmienia m.in. art. 3 ustawy o radcach prawnych w obszarze relacji tajemnicy do obowiązków raportowych. Zasadnicza data wejścia w życie ustawy to **1.10.2026**.
 
-### Wariant eskalacyjny
-OIRP → KRRP / WSD → SN → sąd powszechny (odpowiedzialność cywilna za błąd).
+**Na dzień 2026-08-28 nie stosuj przyszłego brzmienia jako obowiązującego.** Po 1.10.2026 wykonaj nowy fresh gate.
 
-## 7. Orzecznictwo
+## 9. Routing
 
-Nie twórz fikcyjnych sygnatur. Orzecznictwo pobieraj z:
-- SN (sprawy dyscyplinarne, kasacje),
-- orzeczenia.ms.gov.pl,
-- LEX/Legalis pomocniczo.
+- KPC / cywilne → DR-02;
+- KPK / obrona karna → DR-03;
+- postępowanie administracyjne / PPSA → DR-05;
+- dyscyplinarne i ustrój zawodu → DR-12;
+- RODO / cyber → DR-11;
+- AML / MDR → DR-06 i DR-15;
+- prawo UE → DR-14.
 
-Dla każdego orzeczenia wskaż:
-- sąd; datę; sygnaturę; tezę użyteczną;
-- relację do stanu faktycznego; aktualność linii orzeczniczej;
-- czy to argument główny, pomocniczy, czy ryzykowny.
+## 10. Quality gate
 
-## 8. Quality gate
+- [ ] uwzględniono Dz.U. 2026 poz. 731 jako obowiązujące od 18.06.2026;
+- [ ] ustalono, czy sprawa podlega przepisom przejściowym tej nowelizacji;
+- [ ] etyka pochodzi z oficjalnego KIRP;
+- [ ] tajemnicę ustawową odróżniono od procesowych zakazów dowodowych;
+- [ ] kasację do SN odróżniono od zwykłej instancji;
+- [ ] aktualny model OC i stawki pobrano z urzędowego aktu;
+- [ ] przyszłej zmiany z 1.10.2026 nie zastosowano przed jej wejściem w życie.
 
-Przed końcową odpowiedzią sprawdź:
+## 11. Źródła urzędowe
 
-```text
-□ Czy wskazano właściwy organ samorządowy i tryb?
-□ Czy oddzielono odpowiedzialność dyscyplinarną od cywilnej i karnej?
-□ Czy sprawdzono aktualność ustawy i Kodeksu Etyki w ISAP/KRRP?
-□ Czy każda przesłanka ma dowód?
-□ Czy wskazano termin i czy nie upłynął?
-□ Czy podano ryzyki przeciwnika/organu?
-□ Czy uwzględniono specyfikę nowelizacji 2025 (OC, praca zdalna)?
-□ Czy użyto shared/MODULE-STANDARD-POLISH-LAW.md?
-```
-
-## 9. Łącz obowiązkowo z
-
-| Potrzeba | Moduł współdzielony / skill |
-|---|---|
-| aktualność prawa | `shared/ISAP-AUDIT-PROTOCOL.md` + `shared/ISAP-METRYKI-AKTOW.md` |
-| stan prawny w czasie | `shared/TEMPORAL-LAW-CHECK.md` |
-| braki formalne | `shared/BRAKI-FORMALNE.md` |
-| warunki skuteczności | `shared/WARUNKI-SKUTECZNOSCI.md` |
-| dowody | `shared/DOWODY-METODOLOGIA.md` + `analizator-dowodow-v3` |
-| ryzyka | `shared/RISK-ASSESSMENT.md` |
-| pisma | `pisma-procesowe-v3` albo `pisma-proste-v2` |
-| analiza sądowa | `analiza-sadowa-v6` |
-| postępowanie dyscyplinarne | DR-12/`mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow` |
-| porównanie z adwokaturą | DR-12/`mod-ustawa-adwokatura` |
-
-## Zmiana od 1.10.2026 — tajemnica a MDR
-
-Art. 3 ustawy z 29.05.2026 r. (Dz.U. 2026 poz. 846) nadaje art. 3 ust. 6
-ustawy o radcach prawnych brzmienie, według którego tajemnica zawodowa
-nie obejmuje informacji udostępnianych na podstawie przepisów AML — w
-zakresie określonym tymi przepisami. Usunięto równoległe odesłanie do
-rozdziału 11a Ordynacji podatkowej; wejście w życie 1.10.2026 r.
-
-## Weryfikacja online
-
-```
-web_search: "ustawa radcach prawnych tekst jednolity Dz.U. 2024 poz. 499 isap"
-web_search: "nowelizacja ustawa radcach prawnych 2025 OC praca zdalna tajemnica"
-web_search: "wynagrodzenie radca prawny z urzędu rozporządzenie MS 2025"
-```
-
----
-
-## STATUS KANCELARSKI
-
-**Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Data weryfikacji:** 2026-06-06
-**Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
+- ELI — ustawa o radcach prawnych, Dz.U. 2024 poz. 499: `https://eli.gov.pl/eli/DU/2024/499/ogl`
+- ELI — nowelizacja, Dz.U. 2026 poz. 731: `https://eli.gov.pl/eli/DU/2026/731/ogl`
+- ELI — przyszła zmiana, Dz.U. 2026 poz. 846: `https://eli.gov.pl/eli/DU/2026/846/ogl`
+- KIRP — Kodeks Etyki Radcy Prawnego i Regulamin wykonywania zawodu: oficjalna strona `kirp.pl`.
