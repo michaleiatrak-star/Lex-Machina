@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.31"
+version: "3.32"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -21,6 +21,7 @@ dependencies:
     - dr-10-zdrowie-farmacja-zywnosc-rolnictwo
     - dr-11-cyfrowe-cyber-ai-dane-ip
     - dr-12-sadownictwo-prokuratura-zawody-prawnicze
+    - dr-16-pisma-strategia-dowody-orzecznictwo
     - orzeczenia-sadowe-v2
     - pisma-procesowe-v3
     - pisma-proste-v2
@@ -39,7 +40,9 @@ confidence: verified-online
   # HARD GATE wymusza web_search/web_fetch dla każdego przepisu/sygnatury —
   # router sam nie generuje treści prawnej z pamięci, tylko orkiestruje.
 escalation:
-  - brak dostępu do isap.sejm.gov.pl / orzeczenia.ms.gov.pl / sn.pl / nsa.gov.pl
+  - brak możliwości pobrania aktu lub jego tekstu z ISAP
+    → wykonaj references/ZRODLA-AKTOW-FALLBACK.md; sam błąd ISAP nie kończy weryfikacji
+  - brak źródła dla powołania po wykorzystaniu dostępnych alternatyw
     → oznacz ⚠️ [NIEWERYFIKOWANE] i poinformuj użytkownika, nie kontynuuj cicho
   - sprawa transgraniczna / prawo obce → pomiń prawo-polskie-v2 i ISAP,
     pozostałe zasady HG aktywne (UP-5)
@@ -67,9 +70,12 @@ required_modules:
   - shared/DISCLAIMER.md
   - references/KROK0A-anonimizer.md
   - references/KROK1-detekcja.md
+  - references/ZRODLA-AKTOW-FALLBACK.md
+  - dr-16-pisma-strategia-dowody-orzecznictwo/modules/mod-narzedzie-kontroler-kompletnosci.md
   - references/AUDYT-KLUCZA-ODPOWIEDZI.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog:
+  - "3.32 (2026-08-28): poprawne odwołanie BI w DR-16; ISAP pierwszy, LEX/Legalis/ArsLege po nieudanym pobraniu tekstu; references/CHANGELOG.md."
   - "3.31 (2026-08-28): runtime mapy aktów działają w modelu current-state-only; historia pozostaje w dziennikach/changelogach, a routing korzysta z bieżących COV."
   - "3.30 (2026-08-27): synchronizacja mapy dziedzinowej z F-108 P1 oraz rzeczywistymi modułami REACH/CLP, akcyzy/cła i cudzoziemców; references/CHANGELOG.md."
 ---
@@ -83,6 +89,7 @@ W każdej sprawie prawnej, przed analizą:
 3. `view references/KROK1-detekcja.md` — ustal tryb i jurysdykcję.
 4. Wykonaj routing [1]–[11], wczytaj PRIMARY i wypisz ślad KROKU 3A.
 5. Przy pierwszym URL: `view shared/HIERARCHIA-ZRODEL.md`; każdy URL musi mieć RZĄD 1/2A/2B/3.
+   Dla aktów polskich wykonaj też `view references/ZRODLA-AKTOW-FALLBACK.md`.
 6. Przed wysłaniem: `view references/SELF-CHECK.md` i wykonaj inwentarz VER-GRAIN.
 7. Ostatnim elementem odpowiedzi prawnej musi być disclaimer z `shared/DISCLAIMER.md`.
 
@@ -116,7 +123,9 @@ w `dependencies.requires`; w przeciwnym razie zgłoś błąd ścieżki.
 
 ```
 UP-1: router→v3 ZAWSZE pierwszy (przed jakimkolwiek skillem dziedzinowym) — każda jurysdykcja
-UP-2: ISAP — weryfikacja KAŻDEGO przepisu online (web_search/web_fetch) — bez wyjątku
+UP-2: ISAP pierwszy — identyfikacja aktu i próba pobrania tekstu. Gdy pobranie
+      aktu lub tekstu niemożliwe: LEX / Legalis / ArsLege, zgodnie z
+      references/ZRODLA-AKTOW-FALLBACK.md. Weryfikuj KAŻDE powołanie online.
 UP-3: Sprawy karne → KROK1-detekcja.md kieruje do dr-03; kwalifikacja przez
          view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 UP-4: HYBRID-VALIDATION przed każdym .docx

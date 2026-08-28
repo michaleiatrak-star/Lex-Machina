@@ -105,3 +105,10 @@ JEŚLI DOMAIN-LOCK wykrył przepis spoza PRIMARY bez podstawy → usuń przed wy
 JEŚLI szereg stawek ma luki → nie podawaj kwoty łącznej
 JEŚLI brak disclaimera → dodaj przed wysłaniem odpowiedzi
 ```
+
+## Kontrola BI i źródeł zastępczych
+
+□ Dla prawa polskiego odczytano kontroler BI z DR-16, bez kopii w routerze?
+□ Próbowano pobrać akt/tekst z ISAP, a po niepowodzeniu wykonano ZRODLA-AKTOW-FALLBACK.md?
+□ Zapisano oddzielnie identyfikację aktu, źródło treści, wersję i wynik odczytu?
+□ Nie przedstawiono metryki lub ekranu logowania jako potwierdzenia brzmienia przepisu?

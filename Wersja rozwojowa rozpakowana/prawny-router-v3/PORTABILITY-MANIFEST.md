@@ -1,6 +1,6 @@
 # Portability manifest — prawny-router-v3
 
-- Pakiet bieżący: **41 plików**
+- Pakiet bieżący: **42 plików**
 - Description: **170/200**
 - Ścieżki aktywne: semantyczne, rozwiązywane przez PATH-SELFTEST
 - Zależności zewnętrzne: osobne skille wskazane w `dependencies.requires`

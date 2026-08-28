@@ -169,10 +169,15 @@ V2 — Klasyfikacja dziedzinowa i wczytanie skilla (obowiązkowe)
 V3 — Weryfikacja online każdego przepisu:
   web_search: "art. X [nazwa ustawy] isap.sejm.gov.pl tekst jednolity"
   lub web_fetch: bezpośredni URL ISAP
-  Brak dostępu → oznacz ⚠️ [NIEWERYFIKOWANE]
+  Brak możliwości pobrania aktu lub tekstu z ISAP → wykonaj
+  view references/ZRODLA-AKTOW-FALLBACK.md (LEX / Legalis / ArsLege).
+  Błąd ISAP nie kończy weryfikacji; oznacz nieweryfikowalną treść dopiero
+  po sprawdzeniu dostępnych alternatyw. Metryka nie zastępuje tekstu.
 
 V4 — Każda liczba/artykuł/termin/kwota MUSI pochodzić z V2 lub V3.
-  Niezgodność skill ↔ ISAP → podaj ISAP jako aktualniejszy + zaznacz rozbieżność.
+  Niezgodność skill ↔ odczytany tekst → sprawdź wersję i właściwą datę;
+  użyj zweryfikowanego tekstu i zaznacz rozbieżność. Sama domena ISAP
+  nie dowodzi aktualności tekstu ani jego właściwości dla daty zdarzenia.
   Oznacz znacznikiem: ✅ [VER: źródło, data] lub ⚠️ [NIEWERYFIKOWANE]
 
 V5 — Dopiero po V1+V2+V3+V4 → KROK 2
@@ -241,7 +246,7 @@ view prawo-polskie-v2/ROUTING-MAP.md
 Dla każdej sprawy z prawa polskiego stosuj:
 - `shared/MODULE-STANDARD-POLISH-LAW.md`
 - `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`
-- `references/modules/mod-BI-kontroler-kompletnosci-prawa-polskiego.md`
+- `dr-16-pisma-strategia-dowody-orzecznictwo/modules/mod-narzedzie-kontroler-kompletnosci.md`
 - `shared/ISAP-AUDIT-PROTOCOL.md`
 - `shared/TEMPORAL-LAW-CHECK.md`
 - `shared/LEGAL-QUALITY-GATE.md`
