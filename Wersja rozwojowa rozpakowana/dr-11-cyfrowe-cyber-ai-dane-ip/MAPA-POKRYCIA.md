@@ -22,7 +22,7 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 | KSC / NIS2 | `mod-KSC-NIS2-cyberbezpieczenstwo-telekom` | 🟢/🟡 B+ |
 | DORA / eIDAS 2.0 | `mod-DORA-eIDAS-cyfrowe-finanse` | 🟢/🟡 B+ |
 | Prawo komunikacji elektronicznej / UKE | `mod-PrTelekom-poczta-UKE` | 🟢/🟡 B+ |
-| prawo autorskie / IP | `mod-PrAut-wlasnosc-intelektualna-IP` | 🟡 |
+| prawo autorskie — Dz.U. 2025 poz. 24 | `mod-PrAut-wlasnosc-intelektualna-IP` | 🟢 B+ / COV — przedmiot/podmiot, prawa osobiste i majątkowe, dozwolony użytek, czas ochrony, umowy/licencje, programy komputerowe, roszczenia i odpowiedzialność karna zmapowane |
 | media / internet / dobra osobiste | `mod-PrAut-media-internet-dobra-osobiste` | 🟡 |
 | AI Act + krajowy system AI | `mod-AI-Act-framework` | 🟢/🟡 B+ |
 | DMA | `mod-DMA-digital-markets-act` | 🟡 |
@@ -38,7 +38,8 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 
 ## Aktywne luki
 
-1. RODO ma kilka pogłębionych modułów, ale brak statusu `FULL` całego rozporządzenia.
-2. Akty cyfrowe UE są liczne i zmienne; kompletność należy oceniać per akt, a nie dla DR-11 zbiorczo.
-3. AI Act, eIDAS 2.0, DORA, NIS2/KSC i akty danych wymagają kontroli temporalnej oraz świeżego EUR-Lex / ELI przed zastosowaniem.
-4. Prawo autorskie i własność przemysłowa wymagają dalszego audytu rozdziałowego.
+1. Prawo autorskie ma bieżące B+/COV dla głównych rozdziałów, ale nie status `FULL` artykuł-po-artykule.
+2. RODO ma kilka pogłębionych modułów, ale brak statusu `FULL` całego rozporządzenia.
+3. Akty cyfrowe UE są liczne i zmienne; kompletność należy oceniać per akt, a nie dla DR-11 zbiorczo.
+4. AI Act, eIDAS 2.0, DORA, NIS2/KSC i akty danych wymagają kontroli temporalnej oraz świeżego EUR-Lex / ELI przed zastosowaniem.
+5. Prawo własności przemysłowej wymaga dalszego audytu rozdziałowego.
