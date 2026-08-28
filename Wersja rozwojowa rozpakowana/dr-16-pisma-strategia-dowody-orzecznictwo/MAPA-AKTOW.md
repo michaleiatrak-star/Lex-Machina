@@ -6,7 +6,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / narzędzie → mo
 
 | Akt / narzędzie | Bieżąca podstawa | Moduł / routing | Status runtime |
 |---|---|---|---|
-| KPC — przesłuchanie świadków | Dz.U. 2026 poz. 468 t.j. ze zm. | `mod-KPC-przesluchanie-swiadkow` + `shared/PRZESLUCHANIE-SWIADKOW-KPC.md` | ✅ aktywny; fresh gate |
+| KPC — przesłuchanie świadków | Dz.U. 2026 poz. 468 t.j. ze zm. | `shared/PRZESLUCHANIE-SWIADKOW-KPC.md` | ✅ aktywny; fresh gate; kanoniczna lokalizacja |
 | KPC — e-doręczenia / portal sądowy | jw. | `mod-KPC-e-doreczenia-portal-sadowy` | ✅ aktywny; fresh gate |
 | KPC — procedury UE / TSUE / ETPC | KPC jw. + właściwe akty UE i EKPC | `mod-KPC-procedury-UE-TSUE-ETPC` | ✅ aktywny; fresh gate |
 | KPC — arbitraż sportowy i dyscyplinarny | KPC jw., część V + akty szczególne | `mod-KPC-arbitraz-sportowy-dyscyplinarny` | ✅ aktywny |
@@ -23,7 +23,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / narzędzie → mo
 
 ## Reguły runtime
 
-- każdy fizyczny moduł DR-16 pozostaje jawnie rejestrowany w tej mapie zgodnie z `check_rejestracja_modulow.py`;
+- każdy fizyczny moduł DR-16 pozostaje jawnie rejestrowany w tej mapie zgodnie z `check_rejestracja_modulow.py`; zakres przeniesiony do `shared` nie pozostawia lokalnej kopii `mod-*`;
 - mapy nie przechowują historii napraw numerów, wyników dawnych projektów katalogowania ani zamkniętych flag;
 - przy KPC, procedurach UE i danych rejestrowych obowiązuje fresh gate do właściwego publikatora przed użyciem konkretnej jednostki, terminu lub wymogu;
 - narzędzia metodyczne nie są źródłami prawa.
