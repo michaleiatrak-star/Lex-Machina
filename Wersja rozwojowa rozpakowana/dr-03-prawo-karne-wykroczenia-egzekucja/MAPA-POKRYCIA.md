@@ -18,18 +18,18 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 |---|---|---|
 | część ogólna — rozdz. I–XV | 🟢 B+ / COV | `mod-KK-current-state-COV.md` + kwalifikator karnomaterialny |
 | część szczególna — rozdz. XVI–XXXVII | 🟢 B+ / COV | `mod-KK-current-state-COV.md` + części tematyczne kwalifikatora |
-| część wojskowa — rozdz. XXXVIII–XLIV | 🟢 B+ / COV | `mod-KK-current-state-COV.md`; aktywować przy właściwym statusie sprawcy |
+| część wojskowa — rozdz. XXXVIII–XLIV | 🟢 B+ / COV | `mod-KK-current-state-COV.md` |
 
 ## Kodeks postępowania karnego
 
-**Baza:** Dz.U. 2026 poz. 490, stan t.j. 16.03.2026, z późniejszymi zmianami.
+**Baza:** Dz.U. 2026 poz. 490 ze zmianami.
 
 | Zakres | Status bieżący | Dowód pokrycia |
 |---|---|---|
 | current-state całość KPK | 🟢 B+ / COV | `mod-KPK-current-state-COV.md` + rodzina modułów KPK |
-| dostęp do akt | 🟢 B+ / COV | art. 156 §1–6 ponownie zweryfikowany w RZĄD 1 |
-| środki odwoławcze | 🟢 B+ / COV | art. 437 §1–2 ponownie zweryfikowany w RZĄD 1 |
-| postępowanie nakazowe | 🟢 B+ / COV | art. 498 ponownie zweryfikowany w RZĄD 1 |
+| dostęp do akt | 🟢 B+ / COV | art. 156 §1–6 zweryfikowany w RZĄD 1 |
+| środki odwoławcze | 🟢 B+ / COV | art. 437 §1–2 zweryfikowany w RZĄD 1 |
+| postępowanie nakazowe | 🟢 B+ / COV | art. 498 zweryfikowany w RZĄD 1 |
 | wyrok łączny | 🟢 B+ / COV | art. 575 §1 skorygowany do aktualnego brzmienia |
 
 ## Kodeks wykroczeń i KPW
@@ -41,10 +41,14 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 
 ## Kodeks karny wykonawczy
 
+**Baza:** Dz.U. 2025 poz. 911 ze zmianami po t.j.
+
 | Zakres | Status bieżący | Dowód pokrycia |
 |---|---|---|
-| postępowanie wykonawcze / SDE / odroczenie / przerwa / warunkowe zwolnienie | 🟢/🟡 B+ | rodzina modułów KKW |
-| nadzór penitencjarny i pozostałe zakresy | 🟡 | `mod-KKW-uzupelnienie-pokrycia-2026.md` |
+| część ogólna — rozdz. I–VIIa | 🟢 B+ / COV | `mod-KKW-current-state-COV.md` + rodzina modułów KKW |
+| część szczególna — wykonanie kar, środków i rozstrzygnięć | 🟢 B+ / COV | `mod-KKW-current-state-COV.md` + moduły szczegółowe |
+| SDE | 🟢 B+ / COV | Rozdział VIIa + moduły SDE |
+| nadzór penitencjarny | 🟢 B+ / COV | Rozdział V + moduły KKW |
 
 ## Kodeks karny skarbowy
 
@@ -63,7 +67,7 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 
 | Zakres | Status bieżący | Dowód pokrycia |
 |---|---|---|
-| rozdziały 1–8: definicje, zadania, profilaktyka, leczenie, substancje/prekursory, uprawy, kary pieniężne i przepisy karne | 🟢 B+ / COV | `mod-narkomania-current-state-COV.md` + `mod-ustawa-narkomania.md` |
+| rozdziały 1–8 | 🟢 B+ / COV | `mod-narkomania-current-state-COV.md` + `mod-ustawa-narkomania.md` |
 
 ## Inne akty
 
@@ -73,6 +77,6 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 
 ## Aktywne luki
 
-1. Wszystkie akty F-108 przypisane do DR-03 mają bieżący status B+/COV.
-2. Dalszego pogłębienia wymagają niszowe rozdziały KW oraz część zakresów KKW.
-3. `COV` nie oznacza `FULL`; znamiona, sankcje, terminy i progi wymagają świeżego odczytu ELI/ISAP przed użyciem.
+1. Wszystkie akty F-108 przypisane do DR-03 oraz KKW mają bieżący status B+/COV.
+2. Dalszego pogłębienia wymagają przede wszystkim niszowe rozdziały KW i szczególne warianty wykonawcze KKW — jako głębokość treści, nie brak mapy.
+3. `COV` nie oznacza `FULL`; znamiona, sankcje, terminy i progi wymagają świeżego odczytu ELI/ISAP.
