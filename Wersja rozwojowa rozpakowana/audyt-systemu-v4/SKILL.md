@@ -37,7 +37,7 @@ references:
                                           # którego `grep` nie rozstrzyga: czy bramka ZMIENIA ZACHOWANIE,
                                           # czy tylko jest obecna w pliku. Zawiera zakaz podawania kryteriów
                                           # w prompcie, trzy komórki środowiskowe, pozycje-pułapki i progi orzekania
-  - references/REGRESSION-TEST-PLAN.md   # plan testów T1-T17; T17 chroni statyczny kontrakt routera
+  - references/REGRESSION-TEST-PLAN.md   # plan testów T1-T19; T19 chroni ustalenia F-108
   - references/SYNC-DZU-AUTOMATYCZNY.md   # narzędzie WSPIERAJĄCE FAZĘ 3 — automatyzacja wykrywania nowych pozycji Dz.U./M.P. (wprowadzone 2026-07-13, skonsolidowane z osobnego skilla 2026-07-13f) — REJESTROWANE 2026-08-15 po wykryciu jako plik-sierota (użytkownik przesłał starą wersję ZIP i zapytał o funkcję scheduled task; plik istniał na dysku, ale nigdy nie trafił do tego frontmatter)
   - references/HARMONOGRAM-CRON.md   # przykłady harmonogramu (cron / GitHub Actions) do adaptacji przez developera — powiązane z SYNC-DZU-AUTOMATYCZNY.md — REJESTROWANE 2026-08-15, ten sam powód co wyżej
   - references/SCHEDULED-TASK-COWORK.md   # POZYCJA 11 menu — zadanie cykliczne w Cowork (TRYB DZU co tydzień): warunek uruchomienia, kanoniczna treść Description+promptu, blok map pokrycia za bramką F-83 — DODANE 2026-08-15o
@@ -86,7 +86,7 @@ scripts:
   - scripts/audit_amendment_scope.py      # T16 — pełny inwentarz dyspozycji nowelizacji i propagacja każdej zmienionej jednostki przez cały korpus; bez ścieżek hosta
   - scripts/test_router_contract.py       # T17 — lekki router, stałe identyfikatory reguł, PATH-SELFTEST, [11] i N/N
   - scripts/test_f108_trade.py            # F-108/46 — 6 półroczy, rejestr 52/52, propagacja i mutacje negatywne
-  - scripts/test_f108_consistency.py      # F-108 — guard 52/52 inventory, 48/52 COV i znane korekty metryk Dz.U.
+  - scripts/test_f108_consistency.py      # T19 — guard 52/52 inventory, 48/52 COV i znane korekty metryk Dz.U.
   - scripts/mock_eli_server_test.py       # mock serwera ELI do testowania sync_dzu_eli.py bez żywego dostępu do api.sejm.gov.pl — REJESTROWANE 2026-08-15
   - scripts/bootstrap_last_sync_date.py   # inicjalizacja pliku .last_sync_date przy pierwszym uruchomieniu sync_dzu_eli.py — REJESTROWANE 2026-08-15
   - scripts/dostarcz_skill.sh             # skrypt automatyzujący łańcuch dostawy (Reguła 4/6/7 HARDGATE-AUDYT: policz/zip/rozpakuj/diff) — REJESTROWANE 2026-08-15
@@ -1146,7 +1146,7 @@ audyt-systemu-v4/                               ← 71 plików (stan 2026-08-26)
 │   └── MOD-PROPAGACJA-NOWELIZACJI.md           ← propagacja nowelizacji przez CAŁY system
 ├── widgets/
 │   └── WIDGET-MENU.md                          ← menu interaktywne (FAZA 0B)
-├── scripts/                                    ← 24 pliki: testy T1-T4, T8, T9, T11-T18 + F-108 guard,
+├── scripts/                                    ← 24 pliki: testy T1-T4, T8, T9, T11-T19,
 │   │                                             orkiestrator, ci_check_shared (T6/T7),
 │   │                                             check_rejestracja_modulow, sync ELI (3 pliki),
 │   │                                             2 skrypty .sh, README.md — pełna lista w YAML
