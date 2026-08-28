@@ -15,7 +15,7 @@ Mapa pokazuje tylko bieżące pokrycie używane przez system. Rejestracja aktu n
 | samorząd gminny — Dz.U. 2026 poz. 662 | `mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa` | 🟢 B+/COV |
 | samorząd powiatowy — Dz.U. 2025 poz. 1684 | `mod-ustawa-samorzad-powiatowy` | 🟢 B+/COV — wszystkie 10 rozdziałów, organy, prawo miejscowe, mienie/finanse i nadzór zmapowane |
 | samorząd województwa — Dz.U. 2026 poz. 720 | `mod-ustawa-samorzad-wojewodztwa` | 🟢 B+/COV — wszystkie 9 rozdziałów, organy, współpraca zagraniczna, nadzór i prawo miejscowe zmapowane |
-| wojewoda i administracja rządowa w województwie — Dz.U. 2025 poz. 428 | `mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa` | 🟡 B+ — następny current-state COV |
+| wojewoda i administracja rządowa w województwie — Dz.U. 2025 poz. 428 | `mod-wojewoda-administracja-rzadowa-current-state-COV.md` | 🟢 B+/COV |
 | nadzór Wojewody i RIO / legalność uchwał | `mod-nadzor-wojewody-RIO-legalnosc-uchwal` | 🟡 |
 | skargi na prawo miejscowe — WSA/NSA | `mod-skargi-na-prawo-miejscowe-WSA-NSA` | 🟡 |
 | procedury JST — statuty i regulaminy | `mod-procedury-JST-statuty-regulaminy` | 🟡 |
@@ -39,6 +39,6 @@ Mapa pokazuje tylko bieżące pokrycie używane przez system. Rejestracja aktu n
 ## Aktywne luki
 
 1. Samorząd gminny, powiatowy i województwa mają bieżące B+/COV; nie oznacza to statusu `FULL` całych ustaw.
-2. Następne P1 w DR-08: wojewoda i administracja rządowa w województwie oraz Prawo przedsiębiorców.
+2. Następne P1 w DR-08: Prawo przedsiębiorców w lokalnym kontekście JST oraz dalsze pogłębienie nadzoru szczegółowego.
 3. Dalsze pogłębianie: nadzór szczegółowy, MPZP/WZ oraz lokalne finanse i usługi komunalne.
 4. Przed użyciem konkretnego przepisu obowiązuje świeży odczyt ELI/ISAP; przepisy lokalne wymagają również sprawdzenia właściwego dziennika urzędowego/BIP.
