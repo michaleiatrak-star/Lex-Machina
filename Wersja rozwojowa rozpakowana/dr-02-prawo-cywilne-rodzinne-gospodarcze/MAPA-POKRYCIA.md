@@ -15,13 +15,14 @@ Ta mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Hist
 
 | Zakres | Status bieżący | Główny moduł / uwaga |
 |---|---|---|
-| KC — zobowiązania i odpowiedzialność | 🟢/🟡 | `mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md` |
+| KC — current-state całość, Dz.U. 2026 poz. 795 | 🟢 B+ / COV | `mod-KC-current-state-COV.md`; Księgi I–IV zmapowane do modułów tematycznych |
+| KC — zobowiązania i odpowiedzialność | 🟢/🟡 B+ | `mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md` |
 | KC — spadki | 🟢 | `mod-KC-spadki.md` |
 | KC — ubezpieczenia | 🟢/🟡 | `mod-KC-ubezpieczenia.md` |
 | KC — klauzule abuzywne / konsumenckie | 🟢/🟡 | `mod-KC-konsumenckie.md` |
 | KRO — Dz.U. 2026 poz. 236 | 🟢 B+ / COV | `mod-KRO-rodzinne.md` + części tematyczne + opieka/kuratela |
-| ustawa o prawach konsumenta — Dz.U. 2024 poz. 1796 ze zm. | 🟢 B+ / COV | `mod-ustawa-prawa-konsumenta.md`; Rozdz. 1–5b, towar i treści/usługi cyfrowe zmapowane |
-| UOKiK — Dz.U. 2025 poz. 1714 | 🟢 B+ / COV | `mod-ustawa-UOKIK-antymonopolowe.md`; konkurencja, koncentracje, wzorce, zbiorowe interesy i procedura zmapowane |
+| ustawa o prawach konsumenta — Dz.U. 2024 poz. 1796 ze zm. | 🟢 B+ / COV | `mod-ustawa-prawa-konsumenta.md` |
+| UOKiK — Dz.U. 2025 poz. 1714 | 🟢 B+ / COV | `mod-ustawa-UOKIK-antymonopolowe.md` |
 
 ## KPC
 
@@ -72,13 +73,13 @@ Ta mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Hist
 
 | Akt / zakres | Status bieżący | Główny moduł / uwaga |
 |---|---|---|
-| własność lokali — Dz.U. 2026 poz. 232 | 🟢 B+ / COV | `mod-ustawa-spoldzielnie-wlasnosc-lokali.md`; Rozdz. 1–4 zmapowane |
+| własność lokali — Dz.U. 2026 poz. 232 | 🟢 B+ / COV | `mod-ustawa-spoldzielnie-wlasnosc-lokali.md` |
 | ochrona praw lokatorów — Dz.U. 2023 poz. 725 | 🟢 B+ / COV | `mod-ustawa-ochrona-praw-lokatorow-najem-eksmisja.md` |
 | księgi wieczyste i hipoteka — Dz.U. 2026 poz. 1066 | 🟢 B+ / COV | `mod-KW-ksiega-wieczysta-zakup-nieruchomosci.md` |
-| gospodarka nieruchomościami — Dz.U. 2026 poz. 399 | 🟢 B+ / COV | `dr-09/.../mod-UGN-gospodarka-nieruchomosciami.md`; Działy I–V zmapowane |
+| gospodarka nieruchomościami — Dz.U. 2026 poz. 399 | 🟢 B+ / COV | `dr-09/.../mod-UGN-gospodarka-nieruchomosciami.md` |
 | zastaw rejestrowy — Dz.U. 2018 poz. 2017 ze zm. | 🟢 B+ / COV | `mod-ustawa-zastaw-rejestrowy.md` |
-| KRS — Dz.U. 2025 poz. 869 ze zm. | 🟢 B+ / COV | `mod-ustawa-KRS-rejestr-sadowy.md`; 4 nowelizacje po t.j. objęte fresh gate |
-| Prawo spółdzielcze — Dz.U. 2026 poz. 521 | 🟢 B+ / COV | `mod-prawo-spoldzielcze.md`; części I–III, organy, członkostwo, lustracja i reorganizacja zmapowane |
+| KRS — Dz.U. 2025 poz. 869 ze zm. | 🟢 B+ / COV | `mod-ustawa-KRS-rejestr-sadowy.md` |
+| Prawo spółdzielcze — Dz.U. 2026 poz. 521 | 🟢 B+ / COV | `mod-prawo-spoldzielcze.md` |
 | Prawo wekslowe — Dz.U. 2022 poz. 282 | 🟢 B+ / COV | `mod-prawo-wekslowe-czekowe.md` |
 | Prawo czekowe — Dz.U. 2016 poz. 462 | 🟢 B+ / COV | `mod-prawo-wekslowe-czekowe.md` |
 | fundacje — Dz.U. 2023 poz. 166 + poz. 316/2026 | 🟢 B+ / COV | `mod-ustawa-fundacje-stowarzyszenia.md` |
@@ -94,7 +95,7 @@ Ta mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Hist
 
 ## Aktywne luki
 
-1. W DR-02 nie pozostał główny akt F-108 na poziomie `B` wyłącznie z powodu braku mapy struktury; dalsza praca dotyczy głębokości B+ i kodeksów.
+1. KC ma bieżący indeks B+/COV dla Ksiąg I–IV, ale bez statusu `FULL` artykuł-po-artykule.
 2. Żółte zakresy KPC/KSH/PrUp/PrRestr pozostają lukami głębokości, nie lukami routingu.
-3. Brak statusu `FULL` dla kodeksów i dużych ustaw; COV nie oznacza komentarza artykuł-po-artykule.
+3. COV nie zastępuje fresh gate do aktualnego przepisu i ustawy szczególnej.
 4. Każda konkretna jednostka prawna wymaga fresh gate do ELI/ISAP; prawo UE — EUR-Lex.
