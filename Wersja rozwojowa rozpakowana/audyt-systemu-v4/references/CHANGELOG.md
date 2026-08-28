@@ -1,7 +1,5 @@
 # CHANGELOG — audyt-systemu-v4
 
-- 6.28 (2026-08-28): F-138 — migrowano lokalne `MAPA-AKTOW.md` do modelu runtime current-state-only, zachowując bieżący routing, fresh/temporal gate i rejestrację modułów; F-108 pozostaje zamknięta 52/52 B+/COV. Zsynchronizowano metadane routera 3.31 oraz orkiestratora audytu 6.28. Pełny PASS testów nie jest deklarowany bez rzeczywistego przebiegu.
-
 - 6.27 (2026-08-27): wykonano rekomendacje audytu pokrycia: utworzono `MAPA-POKRYCIA.md` dla brakujących 9 DR, dodano T18 `check_coverage_coherence.py` i wpięto do suite, rozdzielono status rejestracji od kompletności treściowej oraz oznaczono raporty 2026-08-13 jako baseline historyczny. F-108 Etap 3: 52/52 dedykowanych modułów.
 
 - 6.26 (2026-08-27): errata dowodu F-108/46 — T3 ma 7 ostrzeżeń,
@@ -46,13 +44,6 @@
 - 6.17 (2026-08-24, flaga **F-130**): dodane pole `description:` do frontmattera — `audyt-systemu-v4` był JEDYNYM skillem w systemie bez niego (poprawka wskazana przez użytkownika). Naprawiona też PRZYCZYNA, dla której luka przetrwała: FAZA 2C i `MOD-DESCRIPTION.md` mierzyły wyłącznie DŁUGOŚĆ, a dla pliku bez pola wypisywały `0` i klasyfikowały wynik jako ✅ OK. Dodany test **T14** (`scripts/check_description.py`), wpięty w orkiestrator i `REGRESSION-TEST-PLAN.md` sekcja 14. Opis: `references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-24e.
 
 **6.16 (2026-08-23i) — F-115 zawężona do P3; F-126 otwarta:**
-- Wpis dotyczy `shared` i 13 skilli konsumenckich (ZASADA 11). Pełny opis: AUDIT-JOURNAL, AUDYT-2026-08-23i.
-- Self-check ANTY-FASADA: 7 KOPII → wywołania modułu `shared/SELF-CHECK-ANTY-FASADA.md`; P1 i P2 podłączone; pokrycie 7 → 14 plików.
-- Sprostowana fałszywa deklaracja „propagowana do wszystkich skilli" w PRAWO-HARDGATE.
-- **F-126 otwarta jako WŁASNY skutek uboczny sesji:** historia w dwóch miejscach w 3 skillach (sekcja `## CHANGELOG` w korpusie SKILL.md wbrew ZASADZIE 15).
-- T12 na drzewie roboczym: 11 ⛔ → 3 ⛔ (pozostałe 3 = zakres F-126).
-
-**6.15 (2026-08-23h) — F-111 zamknięta: PRAWO-HARDGATE podzielony (wariant B, decyzja użytkownika):**
 - Wpis dotyczy `shared` i 13 skilli konsumenckich (ZASADA 11). Pełny opis: AUDIT-JOURNAL, AUDYT-2026-08-23i.
 - Self-check ANTY-FASADA: 7 KOPII → wywołania modułu `shared/SELF-CHECK-ANTY-FASADA.md`; P1 i P2 podłączone; pokrycie 7 → 14 plików.
 - Sprostowana fałszywa deklaracja „propagowana do wszystkich skilli" w PRAWO-HARDGATE.
