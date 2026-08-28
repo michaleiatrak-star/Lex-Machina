@@ -1,327 +1,156 @@
-# mod-AN-karne-gospodarcze-aml
+# KKS — Kodeks karny skarbowy — moduł operacyjny
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
-description: |
-  Moduł prawa karnego gospodarczego, KKS i AML. Stosuj przy oszustwie gospodarczym,
-  działaniu na szkodę spółki, przywłaszczeniu, fałszywych fakturach, praniu pieniędzy,
-  odpowiedzialności zarządu, czynach karnoskarbowych, zawiadomieniu do prokuratury.
-compatibility:
-  tools: [web_search, web_fetch]
----
+**Stan weryfikacji:** 2026-08-28  
+**Tekst jednolity bazowy:** Dz.U. 2025 poz. 633  
+**Źródło kanoniczne:** ELI/ISAP  
+**Status pokrycia:** **B+ / COV** — aktualna struktura kodeksu, główne instytucje materialne, procesowe i wykonawcze oraz routing są zmapowane; brak deklaracji `FULL` artykuł-po-artykule.
 
-# mod-AN — Karne Gospodarcze / KKS / AML
+## 1. Bramka źródłowa
 
-## AKTY PRAWNE
+ELI — tekst jednolity: `https://eli.gov.pl/eli/DU/2025/633/ogl`
 
-| Akt | Zakres |
-|---|---|
-| Kodeks karny | oszustwo, przywłaszczenie, szkoda spółki, dokumenty, fałszywe faktury (rozdz. XXXIVa) |
-| Kodeks karny skarbowy (KKS) — Dz.U. 2025 poz. 633 t.j. (obwieszczenie 10.04.2025) ✅ VER 2026-07-15 | podatki, faktury, deklaracje, uszczuplenia — patrz sekcja niżej |
-| Ustawa AML — instytucje obowiązane, GIIF, procedury | dr-06-podatki-finanse-publiczne-aml/modules/mod-ustawa-AML-instytucje-obowiazkowe.md |
-| KSH | obowiązki organów spółek |
+Tekst jednolity ogłoszony w Dz.U. 2025 poz. 633 odzwierciedla stan prawny na 4.04.2025. ELI wskazuje późniejsze akty zmieniające. Na dzień 28.08.2026 w szczególności wymagają kontroli:
 
-## ⚠️ KOREKTA 2026-07-15 — NAPRAWA BRAKU TREŚCI KKS
+- Dz.U. 2026 poz. 347 — ustawa z 13.02.2026 r.; obowiązuje od 18.03.2026;
+- Dz.U. 2026 poz. 901 — ustawa z 11.06.2026 r. zmieniająca KPK i KKS; obowiązuje od 21.07.2026;
+- Dz.U. 2026 poz. 846 — ustawa z 29.05.2026 r.; zasadnicza data wejścia w życie 1.10.2026, z wyjątkami wskazanymi w jej przepisie końcowym.
 
-> Ten moduł do 2026-07-15 zawierał WYŁĄCZNIE ogólny szkielet proceduralny,
-> bez ŻADNYCH konkretnych artykułów KKS (potwierdzone: brak art. 54/56/62/76,
-> brak numeru Dz.U. samego kodeksu). Sekcja niżej naprawia ten brak.
+**Reguła temporalna:** nie stosuj zmian z datą przyszłą przed ich wejściem w życie. Przy stanie faktycznym rozciągniętym w czasie zawsze sprawdź art. 2 KKS i właściwe przepisy przejściowe.
 
-## ⭐⭐⭐ NOWELIZACJA DEREGULACYJNA 2026 (F-88, obszar KKS) — dodano 2026-08-19
+## 2. Mapa kodeksu
 
-✅ **ZWERYFIKOWANE — DWIE ODRĘBNE, ŁATWE DO POMYLENIA NOWELIZACJE KKS
-w 2026 r., obie w toku równolegle:**
+### Tytuł I — Przestępstwa skarbowe i wykroczenia skarbowe
 
-**A) Ustawa z 29.05.2026 o zmianie ustawy — Ordynacja podatkowa oraz
-niektórych innych ustaw (Dz.U. 2026 poz. 846, w życie 1.10.2026)** — TA
-jest przedmiotem głównego wątku F-88 (omnibus 16 obszarów). Zmiany w KKS
-(charakter DEREGULACYJNY, łagodzący):
-- **Obniżenie maksymalnej liczby stawek dziennych grzywny** za
-  przestępstwa skarbowe o charakterze FORMALNYM (tj. nie powodujące
-  bezpośrednich strat podatkowych — np. niezłożenie/opóźnienie
-  obowiązkowych oświadczeń i informacji): z **720 stawek → 480 lub 240**
-  (w zależności od konkretnego typu czynu), oraz z **240 stawek → 120**.
-  Przykład przeliczenia na złotówki (stawka dzienna max wg t.j. 2026):
-  720 stawek = 44 793 504 zł → 480 stawek = 29 862 336 zł, LUB 240
-  stawek = 14 931 168 zł.
-- **Uchylenie art. 31 Ordynacji podatkowej** (obowiązek zgłaszania przez
-  płatnika/inkasenta osób odpowiedzialnych za obliczanie/pobieranie/
-  wpłacanie podatków) — mniej dokumentów do organów, powiązana
-  dekryminalizacja odpowiadającego czynu w KKS.
-- ⭐ **Zasada intertemporalna — KLUCZOWA dla spraw w toku:** art. 2 §2
-  KKS — jeżeli w CZASIE ORZEKANIA obowiązuje ustawa INNA niż w czasie
-  POPEŁNIENIA czynu, stosuje się ustawę NOWĄ, chyba że ustawa
-  OBOWIĄZUJĄCA POPRZEDNIO jest WZGLĘDNIEJSZA dla sprawcy (LEX MITIOR) —
-  **czyny popełnione PRZED 1.10.2026, ale osądzane PO tej dacie, będą
-  korzystać z NOWYCH, ŁAGODNIEJSZYCH granic grzywny**, jeśli są dla
-  sprawcy korzystniejsze. Praktyczna implikacja: przy obronie w sprawie
-  karnoskarbowej o czyn formalny z okresu SPRZED 1.10.2026, warto
-  ROZWAŻYĆ wniosek o zastosowanie nowej, łagodniejszej granicy kary.
+**Dział I — Część ogólna** obejmuje m.in.:
+- zasady odpowiedzialności;
+- formy popełnienia czynu i współdziałania;
+- wyłączenie lub ograniczenie odpowiedzialności;
+- kary, środki karne i środki związane z poddaniem sprawcy próbie;
+- zbieg czynów i kar;
+- przedawnienie i zatarcie skazania;
+- odpowiedzialność posiłkową oraz obowiązek zwrotu korzyści.
 
-**B) ⭐⭐⭐ ODRĘBNA ustawa z 15.05.2026 o zmianie ustawy — Ordynacja
-podatkowa oraz ustawy — Kodeks karny skarbowy — ✅ ROZSTRZYGNIĘTE
-2026-08-19: PREZYDENT ODMÓWIŁ PODPISANIA, USTAWA NIGDY NIE WESZŁA W
-ŻYCIE.** **INNA ustawa, INNY temat, ŁATWA DO POMYLENIA z powyższą (A)
-przez identyczny tytuł wstępny**:
-- Zakładała zastąpienie ZASADY NIEPRZEDAWNIANIA SIĘ zobowiązań
-  podatkowych zabezpieczonych HIPOTEKĄ przymusową lub ZASTAWEM
-  skarbowym (dotychczasowy art. 70 §8 OP) — instytucją **ZAWIESZENIA**
-  biegu terminu przedawnienia. Uchwalona przez Sejm 15.05.2026, Senat
-  NIE wniósł poprawek (21.05.2026), przekazana Prezydentowi RP.
-- ⛔ **PREZYDENT RP ODMÓWIŁ PODPISANIA USTAWY** (potwierdzone:
-  podatkowyreferat.online, wpis z 12.06.2026, "Bez zmian w ustawie
-  Ordynacja podatkowa - art. 70 § 8"). **Skutek: art. 70 §8 OP
-  POZOSTAJE W DOTYCHCZASOWYM BRZMIENIU** — zobowiązania zabezpieczone
-  hipoteką/zastawem NADAL się NIE przedawniają (choć po upływie terminu
-  przedawnienia mogą być egzekwowane TYLKO z przedmiotu hipoteki/zastawu).
-  Kontrowersyjna zasada "wiecznego długu zabezpieczonego hipoteką", od
-  lat krytykowana przez RPO i środowiska biznesowe, **PRZETRWAŁA**.
-- ⚠️ Dokładny powód weta prezydenckiego — NIE ustalony w tej sesji
-  (znaleziono sam fakt weta, nie uzasadnienie). Możliwość ponownego
-  procedowania przez Sejm (odrzucenie weta większością 3/5) — status
-  NIE sprawdzony, wymaga dociągnięcia jeśli sprawa dotyczy przyszłości
-  tej reformy.
-- **Wniosek praktyczny — WAŻNE dla obszaru A wyżej:** ta ustawa (B) jest
-  CAŁKOWICIE ODRĘBNA od głównego omnibusa z 29.05.2026 (Dz.U. 2026 poz.
-  846, obszar A) — jej upadek NIE wpływa na status ustawy A, która
-  weszła w życie niezależnie. Nie mylić dwóch odrębnych losów prawnych
-  dwóch podobnie tytułowanych, ale merytorycznie odrębnych ustaw z tego
-  samego miesiąca.
+**Dział II — Część szczególna** obejmuje typy czynów dotyczących w szczególności:
+- obowiązków podatkowych i rozliczeń podatkowych;
+- dotacji, subwencji oraz rozliczeń o charakterze publicznoprawnym;
+- ceł i obrotu towarowego z zagranicą;
+- obrotu dewizowego;
+- podatku akcyzowego;
+- gier hazardowych;
+- innych obowiązków finansowych chronionych przez KKS.
 
-Źródła zbieżne: eli.gov.pl (metryka A), dziennikustaw.gov.pl (tekst A),
-portalfk.pl, ksiegowosc.infor.pl (szczegóły stawek A); dla (B):
-podatkowyreferat.online (×3, w tym kluczowy wpis o wecie z 12.06.2026),
-inforlex.pl, axelo.pl, podatki-lokalne.com.
+Przy kwalifikacji zawsze pobierz pełne aktualne brzmienie konkretnego przepisu części szczególnej. Nie ustalaj znamion ani sankcji z pamięci lub z tabeli historycznej.
 
-```
-ART. 54 KKS — UCHYLANIE SIĘ OD OPODATKOWANIA
-  Czyn: nieujawnienie właściwemu organowi przedmiotu lub podstawy
-  opodatkowania, lub niezłożenie deklaracji — przez ZANIECHANIE (podatnik
-  "milczy", nie składa niczego), różni się tym od art. 56 (podatnik "mówi",
-  ale kłamie).
-  Skutek: narażenie podatku na uszczuplenie.
-  Kara: zależna od kwoty — przestępstwo skarbowe (grzywna/PW) albo
-  wykroczenie skarbowe (kwota poniżej progu ustawowego — weryfikuj aktualny
-  próg w ISAP, indeksowany do minimalnego wynagrodzenia).
+### Tytuł II — Postępowanie w sprawach o przestępstwa skarbowe i wykroczenia skarbowe
 
-ART. 55 KKS — FIRMANCTWO
-  Czyn: prowadzenie działalności gospodarczej na cudzą tożsamość/firmę w
-  celu zatajenia przed fiskusem prowadzenia działalności przez faktycznego
-  beneficjenta.
-  Kara: grzywna lub PW do 3 lat (zależnie od kwoty uszczuplenia).
-
-ART. 56 KKS — OSZUSTWO PODATKOWE (podanie nieprawdy/zatajenie w deklaracji)
-  Czyn: złożenie deklaracji/oświadczenia organowi podatkowemu, płatnikowi
-  lub innemu uprawnionemu organowi z podaniem nieprawdy LUB zatajeniem
-  prawdy, LUB niedopełnienie obowiązku zawiadomienia o zmianie danych —
-  skutkujące narażeniem podatku na uszczuplenie. Różni się od art. 54 tym,
-  że tu podatnik AKTYWNIE składa dokument (ale kłamie), a nie milczy.
-  §1 — typ podstawowy: grzywna do 720 stawek dziennych, PW, albo obie kary
-  §2 — kwota "małej wartości": tylko grzywna do 720 stawek dziennych
-  §3 — kwota poniżej progu ustawowego: WYKROCZENIE skarbowe (niższe zagrożenie)
-  §4 — niezłożenie deklaracji w terminie/niewłaściwą formą (np. brak
-       wymaganego podpisu elektronicznego) — zwykle wykroczenie, chyba że
-       towarzyszy mu zamiar oszustwa
-  ⚠️ Wymaga UMYŚLNOŚCI (zamiar bezpośredni lub ewentualny) — wyrok TK
-  SK 13/05 (12.09.2005): "prawda" w art. 56 to pojęcie normatywne
-  (obejmuje też właściwą kwalifikację prawną, nie tylko fakty), ale
-  niedokładność podatkowa NIE JEST automatycznie oszustwem — prokuratura
-  musi wykazać świadomość i wolę sprawcy.
-  Przedawnienie: NIE biegnie od daty czynu, lecz od końca roku, w którym
-  upłynął termin płatności podatku; dodatkowo — przedawnienie odpowiedzialności
-  karnoskarbowej następuje też, gdy przedawni się sam obowiązek podatkowy
-  (nawet jeśli termin karny jeszcze nie upłynął) — ⛔ zawsze licz oba terminy.
-
-ART. 62 KKS — FAKTURY NIERZETELNE/WADLIWE
-  §1 — WYKROCZENIE: niewystawienie faktury wbrew obowiązkowi, lub
-       wystawienie jej wadliwie (błędy formalne/rachunkowe, ALE transakcja
-       była rzeczywista)
-  §2 — PRZESTĘPSTWO: wystawienie lub posłużenie się fakturą NIERZETELNĄ
-       ("pustą" — nieodzwierciedlającą rzeczywistej transakcji, lub
-       znacząco zniekształcającą jej parametry: wartość/przedmiot/strony)
-       — grzywna do 720 stawek dziennych lub PW, albo obie
-  ⚠️ Rozróżnienie kluczowe: faktura WADLIWA (§1, wykroczenie) ma pokrycie
-  w rzeczywistej transakcji — faktura NIERZETELNA/PUSTA (§2, przestępstwo)
-  nie ma. Jeśli faktura CAŁKOWICIE fikcyjna (fingowanie samego obowiązku
-  podatkowego, nie tylko jego wysokości) → NIE art. 62 KKS, lecz art. 271
-  lub 271a KK (postanowienie SN IV KK 426/13).
-  Zbieg z KK: puste faktury dużej wartości → kumulatywnie z art. 270a KK
-  (fałszowanie faktur) i/lub art. 271a KK (poświadczenie nieprawdy w
-  fakturze) — patrz niżej.
-
-ART. 76 KKS — WYŁUDZENIE ZWROTU PODATKU (NIENALEŻNY ZWROT)
-  Czyn: podanie danych niezgodnych ze stanem rzeczywistym lub zatajenie
-  stanu rzeczywistego, wprowadzające w błąd organ podatkowy, narażające
-  na NIENALEŻNY ZWROT podatku (typowo: zwrot VAT) lub zaliczenie nadpłaty.
-  ⚠️ To jest przestępstwo POWSZECHNE (może je popełnić KAŻDY, nie tylko
-  podatnik) — różni się tym od art. 56 (przestępstwo INDYWIDUALNE, tylko
-  podatnik). Odpowiedzialność powstaje przy STWORZENIU WYSOKIEGO
-  PRAWDOPODOBIEŃSTWA nienależnego zwrotu — NIE wymaga faktycznego
-  otrzymania zwrotu (przestępstwo z narażenia, nie ze skutku majątkowego).
-  Może zbiegać się kumulatywnie z art. 56 KKS, jeśli tym samym czynem
-  (czyn ciągły) sprawca i uszczuplił podatek, i naraził na nienależny zwrot.
-
-CZYNNY ŻAL (art. 16 KKS) — ⛔ ISTOTNE narzędzie obrony/samoregulacji
-  Zawiadomienie organu o popełnieniu czynu zabronionego PRZED wszczęciem
-  postępowania (lub zanim organ miał wyraźnie udokumentowaną wiadomość o
-  czynie) + uiszczenie należności publicznoprawnej w całości w wyznaczonym
-  terminie = WYŁĄCZENIE karalności. ⚠️ Warunki formalne i wyjątki (np. gdy
-  organ już wszczął czynności sprawdzające) — zawsze weryfikuj aktualne
-  brzmienie w ISAP przed poradą, nie zakładaj automatycznej skuteczności.
-```
-
-## ZBIEG Z KODEKSEM KARNYM — KARUZELE VAT I POWAŻNE OSZUSTWA FAKTUROWE
-
-```
-Wyłudzenia VAT na dużą skalę (karuzele podatkowe, puste faktury o wysokiej
-wartości) rzadko kwalifikują się z jednego przepisu — typowy zbieg:
-  KKS: art. 54/56 (uszczuplenie) + art. 62 §2 (nierzetelna faktura) +
-       art. 76 (wyłudzenie zwrotu, jeśli dotyczy)
-  KK: art. 270a (fałszowanie faktur) + art. 271a (poświadczenie nieprawdy
-      w fakturze) + art. 258 (jeśli działanie grupowe/zorganizowane —
-      patrz dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md BLOK H)
-  Zagrożenie skrajne: art. 277a §1 KK — przy fakturach o wartości powyżej
-  10-krotności mienia wielkiej wartości: KARA OD 5 DO 25 LAT — jeden z
-  najsurowszych przepisów w całym KK.
-Weryfikacja kontrahenta / należyta staranność VAT — dokumentuj procedury
-  weryfikacji (KRS, CEIDG, wykaz podatników VAT, koncesje) jako element
-  linii obrony przy zarzutach nieświadomego udziału w karuzeli.
-```
-
-## KWALIFIKATOR CZYNU
-
-```
-1. Czynność: co dokładnie zrobiono albo zaniechano?
-2. Sprawca: kto miał obowiązek działania? (przestępstwo indywidualne —
-   podatnik — czy powszechne — art. 76, każdy)
-3. Pokrzywdzony: spółka, kontrahent, Skarb Państwa, wierzyciel?
-4. Szkoda: kwota, utracone korzyści, uszczuplenie publicznoprawne — sprawdź
-   progi "małej wartości" i próg wykroczenia (indeksowane, weryfikuj ISAP).
-5. Zamiar: dowody świadomości, korespondencja, ostrzeżenia, podpisy —
-   art. 56/76 wymagają UMYŚLNOŚCI, nie wystarczy błąd rachunkowy.
-6. Dokumenty: faktury, umowy, uchwały, księgi, przelewy.
-7. Czynny żal: czy możliwe/już złożone zawiadomienie z art. 16 KKS?
-```
-
-## WYJŚCIE
-
-Nie przesądzaj winy. Wskaż najbardziej prawdopodobną kwalifikację, braki dowodowe, ryzyka zniesławienia i bezpieczny język zawiadomienia.
-
----
-
-# STANDARDOWE UZUPEŁNIENIE MODUŁU — poziom prawa pracy / prawa karnego
-
-> Ten blok jest częścią obowiązkową modułu. Ma pierwszeństwo przed opisowym użyciem modułu. Nie zastępuje kontroli ISAP; wymusza praktyczny workflow kancelaryjny.
-
-## 1. Intake szczególny
-
-Przed odpowiedzią ustal co najmniej:
-- czyn zarzucany;
-- rola osoby/podmiotu;
-- obieg środków;
-- compliance AML;
-- zawiadomienia GIIF;
-- ryzyko zabezpieczenia;
-
-## 2. Mapa proceduralna
-
-```text
-Identyfikacja trybu i organu/sądu
-  ↓
-Kontrola terminu, doręczenia, właściwości i legitymacji
-  ↓
-Ustalenie faktów materialnych i proceduralnych
-  ↓
-Matryca dowodowa: fakt → dowód → ciężar dowodu → luka
-  ↓
-Dobór pisma/środka: wniosek / odwołanie / zażalenie / skarga / pozew / zawiadomienie
-  ↓
-Walidacja formalna: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
-  ↓
-Ocena ryzyka: shared/RISK-ASSESSMENT.md + shared/QUALITY-CHECK.md
-  ↓
-Strategia: minimum, optimum, wariant eskalacyjny
-```
-
-## 3. Warunki skuteczności
-
-```text
-□ prawidłowy tryb
-□ właściwy organ albo sąd
-□ termin liczony od prawidłowego zdarzenia
-□ legitymacja strony
-□ żądanie możliwe prawnie
-□ fakty powiązane z podstawą prawną
-□ dowody przypisane do każdej tezy
-□ kontrola opłat, odpisów, pełnomocnictw i podpisu
-□ kontrola ISAP na dzień sporządzenia pisma
-□ kontrola stanu prawnego na dzień zdarzenia oraz na dzień orzekania
-```
-
-## 4. Matryca dowodowa
-
-Dowody typowe dla tego modułu:
-- dokumenty księgowe;
-- korespondencja zarządu;
-- procedury AML;
-- analizy transakcji;
-- zeznania;
-- opinie biegłych;
-
-Każdy dowód oceniaj według schematu:
-
-```text
-Dowód → fakt, który ma wykazać → bezpośredni/pośredni → wiarygodność → ryzyko podważenia → brakujący dowód wzmacniający
-```
-
-## 5. Typowe zarzuty i kontrzarzuty
-
-W każdej sprawie przygotuj dwie wersje:
-
-1. argumentację strony inicjującej sprawę,
-2. argumentację organu/przeciwnika procesowego.
-
-Typowe ryzyka i kontrargumenty:
-- samoinkryminacja;
+Kodeks zawiera własne reguły procesowe i odpowiednio odsyła do KPK, jeżeli KKS nie stanowi inaczej. Operacyjnie rozdziel:
+- przepisy wstępne;
+- strony i uczestników oraz odpowiedzialność posiłkową;
 - zabezpieczenie majątkowe;
-- brak kontroli nad dokumentami;
-- równoległe postępowania podatkowe;
+- postępowanie mandatowe;
+- zezwolenie na dobrowolne poddanie się odpowiedzialności;
+- postępowanie przygotowawcze;
+- postępowanie przed sądem pierwszej instancji;
+- postępowanie odwoławcze i nadzwyczajne środki zaskarżenia;
+- postępowanie nakazowe;
+- postępowanie w stosunku do nieobecnych.
 
-## 6. Strategia procesowa
+Art. 113 §1 ustanawia zasadę odpowiedniego stosowania KPK, jeżeli KKS nie stanowi inaczej. Dlatego każde zagadnienie proceduralne należy najpierw sprawdzić w KKS, a dopiero następnie uzupełnić KPK.
 
-Zastosuj trzy warianty:
+### Tytuł III — Postępowanie wykonawcze
 
-### Wariant ostrożny
-Minimalizuje ryzyko formalne. Priorytet: termin, kompletność, zabezpieczenie dowodów.
+Art. 178 §1 przewiduje odpowiednie stosowanie Kodeksu karnego wykonawczego, jeżeli KKS nie stanowi inaczej. Moduł obejmuje routing dotyczący:
+- wykonywania grzywien i środków karnych;
+- przepadku i ściągnięcia równowartości;
+- zabezpieczenia majątkowego;
+- właściwości organów skarbowych w postępowaniu wykonawczym.
 
-### Wariant ofensywny
-Eksponuje naruszenia proceduralne, wadliwość ustaleń, niewłaściwą wykładnię, naruszenie zasady proporcjonalności albo praw strony.
+## 3. Intake KKS
 
-### Wariant eskalacyjny
-Zakłada przejście do organu II instancji, WSA/NSA, sądu powszechnego, SN, TSUE, ETPC albo organu sektorowego — tylko gdy wynika to z trybu.
+Przed kwalifikacją ustal:
+1. datę lub okres czynu;
+2. rodzaj obowiązku publicznoprawnego: podatek, cło, akcyza, dewizy, hazard lub inny;
+3. status sprawcy i jego obowiązek ustawowy;
+4. zachowanie: zaniechanie, podanie nieprawdy, posłużenie się dokumentem, niewykonanie obowiązku ewidencyjnego itp.;
+5. czy doszło do uszczuplenia, narażenia na uszczuplenie albo czyn ma charakter formalny;
+6. wartość przedmiotu czynu / kwotę uszczuplenia, jeżeli wpływa na kwalifikację;
+7. umyślność lub nieumyślność — wyłącznie według konkretnego przepisu;
+8. czy zachodzi zbieg z KK lub inną ustawą;
+9. etap sprawy: przed ujawnieniem, postępowanie przygotowawcze, sądowe czy wykonawcze;
+10. właściwy stan prawny na datę czynu i na datę orzekania.
 
-## 7. Quality gate
+## 4. Bramka przestępstwo skarbowe / wykroczenie skarbowe
 
-Przed końcową odpowiedzią sprawdź:
+Nie kwalifikuj czynu wyłącznie według potocznej nazwy. Sprawdź kolejno:
 
 ```text
-□ Czy moduł działa praktycznie, a nie opisowo?
-□ Czy wskazano decydujący element prawny?
-□ Czy oddzielono fakty od interpretacji?
-□ Czy podano ryzyka przeciwnika/organu?
-□ Czy wskazano słabe punkty klienta?
-□ Czy każdy przepis i Dz.U. ma kontrolę ISAP albo oznaczenie braku weryfikacji?
-□ Czy użyto shared/MODULE-STANDARD-POLISH-LAW.md?
+konkretny przepis części szczególnej
+→ znamiona podmiotowe i przedmiotowe
+→ skutek / narażenie, jeżeli wymagane
+→ kwota lub wartość i aktualny próg, jeżeli przepis go używa
+→ typ podstawowy / uprzywilejowany / wykroczenie
+→ sankcja z aktualnego przepisu
 ```
 
-## 8. Łącz obowiązkowo z
+Progi zależne od minimalnego wynagrodzenia lub innych wartości dynamicznych pobieraj na datę czynu z urzędowego źródła. Nie utrwalaj ich liczbowo w module.
 
-| Potrzeba | Moduł współdzielony / skill |
-|---|---|
-| aktualność prawa | `shared/ISAP-AUDIT-PROTOCOL.md` + `shared/ISAP-METRYKI-AKTOW.md` |
-| stan prawny w czasie | `shared/TEMPORAL-LAW-CHECK.md` |
-| braki formalne | `shared/BRAKI-FORMALNE.md` |
-| warunki skuteczności | `shared/WARUNKI-SKUTECZNOSCI.md` |
-| dowody | `shared/DOWODY-METODOLOGIA.md` + `analizator-dowodow-v3` |
-| ryzyka | `shared/RISK-ASSESSMENT.md` |
-| pisma | `pisma-procesowe-v3` albo `pisma-proste-v2` |
-| analiza sądowa | `analiza-sadowa-v6` |
+## 5. Czynny żal i inne tryby konsensualne
+
+Przy czynnym żalu nie wystarcza samo złożenie pisma. Każdorazowo odczytaj aktualny art. 16 KKS i ustal m.in. moment ujawnienia czynu organowi, kompletność ujawnienia istotnych okoliczności, obowiązki finansowe oraz ustawowe wyłączenia skuteczności.
+
+Oddziel od czynnego żalu:
+- korektę deklaracji i jej skutki w KKS;
+- postępowanie mandatowe;
+- dobrowolne poddanie się odpowiedzialności;
+- zwykłe przyznanie się do czynu.
+
+Dla pisma o czynnym żalu użyj także `mod-czynny-zal-KK-KKS-samooskarzenie.md`, ale podstawę prawną pobierz ponownie z aktualnego KKS.
+
+## 6. Przedawnienie i intertemporalność
+
+Przedawnienie w KKS wymaga odrębnej analizy względem przedawnienia zobowiązania podatkowego. Dla konkretnej sprawy:
+- ustal kategorię czynu i właściwy termin z KKS;
+- sprawdź szczególne reguły dla czynów związanych z uszczupleniem należności publicznoprawnej;
+- zbadaj zdarzenia wpływające na bieg terminu;
+- osobno ustal przedawnienie zobowiązania w Ordynacji podatkowej, jeżeli ma znaczenie;
+- zastosuj art. 2 KKS do zmian prawa między czynem a orzekaniem.
+
+Nie stosuj automatycznie reguł przedawnienia z KK.
+
+## 7. Zbieg z KK i innymi reżimami
+
+Czyn karnoskarbowy może pozostawać w relacji z odpowiedzialnością z KK albo z sankcją administracyjną. W szczególności przy fakturach, dokumentach, oszustwie, praniu pieniędzy i zamówieniach publicznych wykonaj osobny test zbiegu.
+
+**Routing:**
+- KKS materialny i procesowy → DR-03;
+- podatek / Ordynacja / VAT / CIT / PIT / akcyza / cło → DR-06 jako warstwa prawa finansowego;
+- AML → DR-06 + odpowiedni moduł AML;
+- KK i zbieg przestępstw powszechnych → DR-03;
+- prawo UE celne / VAT / ochrona interesów finansowych UE → DR-14 + DR-06/03.
+
+## 8. KKS a AML
+
+KKS nie jest ustawą AML. Moduł zachowuje routing do AML wyłącznie dlatego, że fakty gospodarcze mogą rodzić równolegle ryzyka karnoskarbowe i obowiązki AML.
+
+Dla obowiązków instytucji obowiązanej, GIIF, środków bezpieczeństwa finansowego, zawiadomień i sankcji administracyjnych użyj modułów DR-06 dotyczących ustawy AML. Dla prania pieniędzy sprawdź właściwy przepis KK.
+
+## 9. Quality gate
+
+- [ ] tekst bazowy Dz.U. 2025 poz. 633 sprawdzony w ELI;
+- [ ] sprawdzono akty zmieniające po stanie 4.04.2025;
+- [ ] zmian przyszłych nie zastosowano przed datą wejścia w życie;
+- [ ] konkretne znamiona i sankcję pobrano z aktualnej jednostki KKS;
+- [ ] aktualny próg kwotowy pobrano z urzędowego źródła na właściwą datę;
+- [ ] przy procedurze rozdzielono lex specialis KKS od odpowiednio stosowanego KPK;
+- [ ] przy wykonaniu rozdzielono KKS od odpowiednio stosowanego KKW;
+- [ ] zbadano zbieg z KK i prawem podatkowym/celnym;
+- [ ] przy zmianie prawa wykonano test art. 2 KKS i przepisów przejściowych.
+
+## 10. Źródła urzędowe
+
+- ELI — KKS, Dz.U. 2025 poz. 633: `https://eli.gov.pl/eli/DU/2025/633/ogl`
+- ELI — Dz.U. 2026 poz. 347: `https://eli.gov.pl/eli/DU/2026/347/ogl`
+- ELI — Dz.U. 2026 poz. 846: `https://eli.gov.pl/eli/DU/2026/846/ogl`
+- ELI — Dz.U. 2026 poz. 901: `https://eli.gov.pl/eli/DU/2026/901/ogl`
+
+**Zasada runtime:** źródłem normy jest aktualny tekst urzędowy, nie treść tego modułu.
