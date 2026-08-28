@@ -27,8 +27,8 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 
 | Akt / zawód | Moduł | Status bieżący |
 |---|---|---|
-| Prawo o adwokaturze | `mod-ustawa-adwokatura` | 🟡 |
-| radcowie prawni | `mod-ustawa-radcowie-prawni` | 🟡 |
+| Prawo o adwokaturze — Dz.U. 2024 poz. 1564 + zmiany | `mod-ustawa-adwokatura` | 🟢 B+ / COV — struktura zawodu, samorząd, wpis/aplikacja, dyscyplinarne i etyka NRA zmapowane 2026-08-28 |
+| radcowie prawni — Dz.U. 2024 poz. 499 + Dz.U. 2026 poz. 731 | `mod-ustawa-radcowie-prawni` | 🟢 B+ / COV — nowelizacja obowiązująca od 18.06.2026 i etyka KIRP zmapowane 2026-08-28 |
 | Prawo o notariacie | `mod-ustawa-notariat` | 🟡 |
 | komornicy sądowi | `mod-ustawa-komornicy-sadowi-zawod` | 🟡 |
 | rzecznicy patentowi | `mod-ustawa-rzecznicy-patentowi-zawod` | 🟡 |
@@ -38,8 +38,8 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 
 | Zawód | Źródło kanoniczne | Status bieżący |
 |---|---|---|
-| adwokat | NRA / organy adwokatury | 🟢/🟡 B+ |
-| radca prawny | KRRP / Krajowy Zjazd Radców Prawnych | 🟢/🟡 B+ |
+| adwokat | NRA — KEA, uchwała nr 174/2026 Prezydium NRA z 23.06.2026 | 🟢 B+ / COV |
+| radca prawny | KIRP — KERP, tekst jednolity uchwała nr 884/XI/2023 | 🟢 B+ / COV |
 | notariusz | KRN | 🟢/🟡 B+ |
 | komornik sądowy | KRK + właściwa ustawa | 🟢/🟡 B+ |
 | rzecznik patentowy | samorząd rzeczników patentowych | 🟢/🟡 B+ |
@@ -56,7 +56,8 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 
 ## Aktywne luki
 
-1. Sama obecność modułu zawodu nie oznacza pełnego audytu ustawy korporacyjnej ani całego postępowania dyscyplinarnego.
+1. Prawo o adwokaturze i ustawa o radcach prawnych mają bieżące B+/COV, ale status `FULL` wymaga pełnego audytu każdej jednostki aktu.
 2. Kodeksy etyki i uchwały zawodowe należy pobierać z oficjalnych stron właściwego samorządu, nie ze źródeł wtórnych.
-3. Prawo o prokuraturze, KSCU oraz akty ustrojowe wymagają dalszego audytu rozdziałowego.
-4. Przy kolizji zakresów DR-12 korzysta z DR-01 dla ustroju oraz DR-02/03/05 dla właściwej procedury.
+3. Prawo o prokuraturze, KSCU, Prawo o notariacie i pozostałe akty ustrojowe/zawodowe wymagają dalszego audytu rozdziałowego.
+4. Zmian z Dz.U. 2026 poz. 846, zasadniczo wchodzących 1.10.2026, nie stosuje się przed ich wejściem w życie.
+5. Przy kolizji zakresów DR-12 korzysta z DR-01 dla ustroju oraz DR-02/03/05 dla właściwej procedury.
