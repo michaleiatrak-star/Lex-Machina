@@ -26,12 +26,25 @@ Mapa zawiera wyłącznie bieżący stan pokrycia używany przez system. Historia
 | samowola budowlana | 🟢 | moduł główny / moduły tematyczne |
 | zakończenie budowy / użytkowanie | 🟢/🟡 | moduł główny + `mod-PrBud-patodeweloperka-uzytkowanie-male-obiekty-ograniczenia.md` |
 | książka obiektu budowlanego | 🟡 B+ | `mod-PrBud-uzupelnienie-pokrycia-2026.md` |
-| utrzymanie obiektów / zmiana sposobu użytkowania | 🟢/🟡 | `mod-PrBud-patodeweloperka-uzytkowanie-male-obiekty-ograniczenia.md` |
-| katastrofa budowlana | 🟡 B+ | `mod-PrBud-uzupelnienie-pokrycia-2026.md` |
+| utrzymanie obiektów / zmiana sposobu użytkowania | 🟢/🟡 | moduł tematyczny |
+| katastrofa budowlana | 🟡 B+ | uzupełnienie pokrycia |
 | e-Budownictwo | 🟡 B+ | jw. |
 | organy administracji architektoniczno-budowlanej i nadzoru | 🟡 B+ | jw. |
 | przepisy karne | 🟡 | moduł główny + routing DR-03 |
-| odpowiedzialność zawodowa | 🟡 B+ | `mod-PrBud-uzupelnienie-pokrycia-2026.md` |
+| odpowiedzialność zawodowa | 🟡 B+ | uzupełnienie pokrycia |
+
+## Gospodarka nieruchomościami
+
+**Baza operacyjna:** ustawa o gospodarce nieruchomościami — Dz.U. 2026 poz. 399 t.j.; ELI, stan prawny tekstu jednolitego 10.03.2026.
+
+| Dział | Status bieżący | Dowód pokrycia |
+|---|---|---|
+| I — przepisy ogólne | 🟢 B+ / COV | `mod-UGN-gospodarka-nieruchomosciami.md` |
+| II — nieruchomości Skarbu Państwa i JST | 🟢 B+ / COV | jw. |
+| III — podziały, pierwokup, wywłaszczenie, ograniczenia, zwrot, opłaty | 🟢 B+ / COV | jw. + moduły wywłaszczeniowe |
+| IV — wycena nieruchomości | 🟢 B+ / COV | jw. |
+| V — działalność zawodowa | 🟢/🟡 B+ | jw. |
+| przepisy szczególne/przejściowe | temporalne | fresh gate |
 
 ## Środowisko / energia / transport
 
@@ -45,7 +58,7 @@ Mapa zawiera wyłącznie bieżący stan pokrycia używany przez system. Historia
 
 ## Aktywne luki
 
-1. Prawa i obowiązki uczestników, zakończenie budowy i przepisy karne wymagają dalszego pogłębienia.
-2. Zakresy B+ są operacyjne, ale nie mają statusu `FULL`.
-3. Środowisko, energia i transport mają moduły sektorowe, lecz kompletność ocenia się per akt, nie dla całego DR jednym statusem.
+1. Prawo budowlane: uczestnicy procesu, zakończenie budowy i przepisy karne wymagają dalszego pogłębienia.
+2. UGN ma bieżące B+/COV głównych działów, ale nie status `FULL` artykuł-po-artykule.
+3. Środowisko, energia i transport mają moduły sektorowe, lecz kompletność ocenia się per akt.
 4. Każdy konkretny przepis wymaga świeżego odczytu ELI/ISAP, a prawo UE — EUR-Lex.
