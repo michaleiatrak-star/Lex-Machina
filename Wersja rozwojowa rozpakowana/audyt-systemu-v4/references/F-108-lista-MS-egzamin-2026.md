@@ -18,7 +18,7 @@
 | 2 | TFUE | DR-14 | 🟢 B+ / COV |
 | 3 | KPA | DR-05 | 🟢 B+ / COV — Dz.U. 2025 poz. 1691; current-state indeks do rodziny KPA |
 | 4 | KRO | DR-02 | 🟢 B+ / COV |
-| 5 | KC | DR-02 | 🟡 B+ — szerokie pokrycie tematyczne; brak current-state COV całego kodeksu |
+| 5 | KC | DR-02 | 🟢 B+ / COV — Dz.U. 2026 poz. 795; Księgi I–IV zmapowane przez `mod-KC-current-state-COV.md` |
 | 6 | KPC | DR-02 | 🟢 B+ / COV |
 | 7 | KW | DR-03 | 🟢 B+ / COV |
 | 8 | Opłaty w sprawach karnych | DR-03 | 🟢 B+ / COV |
@@ -73,7 +73,7 @@
 
 ## Priorytet dalszej pracy
 
-1. **P1 — akty `B+` bez COV:** KC, KK, KPK, samorząd powiatowy, samorząd województwa, spółdzielnie mieszkaniowe, przeciwdziałanie narkomanii, wojewoda i administracja rządowa, Sąd Najwyższy, Prawo przedsiębiorców.
+1. **P1 — akty `B+` bez COV:** KK, KPK, samorząd powiatowy, samorząd województwa, spółdzielnie mieszkaniowe, przeciwdziałanie narkomanii, wojewoda i administracja rządowa, Sąd Najwyższy, Prawo przedsiębiorców.
 2. **P2 — walidacja COV:** sprawdzać, czy mapy lokalne i moduły nadal odpowiadają aktualnym tekstom urzędowym po kolejnych nowelizacjach.
 3. `FULL` dopiero po jawnej, udokumentowanej mierze kompletności całego aktu.
 
