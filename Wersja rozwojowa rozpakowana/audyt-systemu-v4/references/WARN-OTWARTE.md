@@ -6,17 +6,16 @@
 
 | Kategoria | Liczba | Pozycje |
 |---|---:|---|
-| Wykonalne sesją audytową | 2 | F-135, F-138 |
+| Wykonalne sesją audytową | 1 | F-135 |
 | Reaktywne | 1 | F-5 |
 | Zależne od środowiska/dewelopera | 7 | F-8, F-9, F-11, F-94, F-113, F-133, F-137 |
-| **Razem** | **10** | — |
+| **Razem** | **9** | — |
 
 ## Wykonalne sesją audytową
 
 | Flaga | Priorytet | Pozostały zakres | Kryterium zamknięcia |
 |---|---|---|---|
 | F-135 | średni | Dokończyć cross-check wartości prawnych w pozostałych DR, elementów unikalnych oraz `shared`; każdą rozbieżność rozstrzygnąć w źródle urzędowym albo jawnie oznaczyć jako nieweryfikowalną. | Zero nieuzasadnionych rozbieżności albo jawne oznaczenie nieweryfikowalnych pozycji. |
-| F-138 | wysoki | Zakończyć deterministyczny cross-check czterech rejestrów (`modules/`, `MAPA-AKTOW.md`, `SKILL.md`, centralny `ROUTING-MAP.md`) dla DR, które nie zostały jeszcze sprawdzone w pełnym inwentarzu. T9 ma bramkę na pozostawione lokalne kopie po migracji do `shared`. Pełny przebieg skryptów nadal wymaga realnego snapshotu/środowiska wykonawczego. | F-108 nie figuruje jako otwarta, pełny cross-check nie wykazuje pominięć ani stale copies, a rzeczywisty przebieg dostępnych testów nie wykazuje sprzeczności blokujących. |
 
 ## Reaktywne
 
