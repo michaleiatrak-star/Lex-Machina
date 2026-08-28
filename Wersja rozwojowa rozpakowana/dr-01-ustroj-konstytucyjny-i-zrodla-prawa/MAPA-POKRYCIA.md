@@ -17,16 +17,15 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 | Prawo o ustroju sądów powszechnych — Dz.U. 2024 poz. 334 ze zm. | `mod-USP-ustroj-sadow-powszechnych` | 🟢 B+ / COV |
 | ustawa o Sądzie Najwyższym — Dz.U. 2024 poz. 622 ze zm. | `mod-ustawa-SN-sad-najwyzszy` | 🟢 B+ / COV |
 | Prawo o ustroju sądów administracyjnych — Dz.U. 2024 poz. 1267 | `mod-PUSA-current-state-COV.md` | 🟢 B+ / COV |
-| ustawa o Krajowej Radzie Sądownictwa — Dz.U. 2024 poz. 1186 | `mod-KRS-current-state-COV.md` | 🟢 B+ / COV — rozdz. 1–5, kompetencje, ustrój i postępowanie zmapowane |
-| ustawa o Radzie Ministrów — Dz.U. 2025 poz. 780 ze zm. | `mod-Rada-Ministrow-current-state-COV.md` | 🟢 B+ / COV — rozdz. 1–7 i routing kompetencji ministrów zmapowane |
-| skarga na przewlekłość postępowania | `mod-USP-ustroj-sadow-powszechnych` | 🟡 — odrębna ustawa, fresh gate |
-| wykonywanie mandatu posła i senatora | `mod-ustawa-KRS-i-ustroj-wladzy` | 🟡 |
-| partie polityczne | `mod-ustawa-partie-polityczne-referendum` | 🟡 |
+| ustawa o Krajowej Radzie Sądownictwa — Dz.U. 2024 poz. 1186 | `mod-KRS-current-state-COV.md` | 🟢 B+ / COV |
+| ustawa o Radzie Ministrów — Dz.U. 2025 poz. 780 ze zm. | `mod-Rada-Ministrow-current-state-COV.md` | 🟢 B+ / COV |
+| wykonywanie mandatu posła i senatora — Dz.U. 2024 poz. 907 ze zm. | `mod-mandat-posla-senatora-current-state-COV.md` | 🟢 B+ / COV — rozdz. 1–6, immunitet i warunki mandatu zmapowane |
+| partie polityczne — Dz.U. 2023 poz. 1215 | `mod-partie-polityczne-current-state-COV.md` | 🟢 B+ / COV — rozdz. 1–8, ewidencja, finanse, TK, likwidacja i sankcje zmapowane |
+| skarga na przewlekłość — Dz.U. 2023 poz. 1725 | `mod-przewleklosc-current-state-COV.md` | 🟢 B+ / COV — zakres, właściwość, relacje procesowe i standard EKPC zmapowane |
 
 ## Aktywne luki
 
-1. Konstytucja, PUSP, ustawa o SN, PUSA, KRS i ustawa o Radzie Ministrów mają bieżące B+/COV.
-2. Najbliższe luki strukturalne DR-01: wykonywanie mandatu posła i senatora, partie polityczne oraz odrębna ustawa o skardze na przewlekłość.
-3. Przy problemach proceduralnych łącz DR-01 z właściwym DR procesowym; ustawy ustrojowe nie zastępują kodeksów proceduralnych.
-4. Kompetencje ministra wymagają równoległego sprawdzenia ustawy o działach administracji rządowej i aktualnego rozporządzenia zakresowego.
-5. Każdy konkretny przepis wymaga świeżego odczytu ELI/ISAP.
+1. Wszystkie główne pozycje tej mapy mają obecnie co najmniej B+/COV poza ustawą o organizacji i trybie postępowania przed TK, która pozostaje B+ bez odrębnego current-state COV.
+2. Następny etap DR-01 to walidacja głębokości i aktualności po nowelizacjach, nie uzupełnianie brakującego routingu.
+3. Ustawy ustrojowe nie zastępują kodeksów proceduralnych; kompetencje ministra wymagają również ustawy o działach administracji rządowej i aktualnego rozporządzenia zakresowego.
+4. Każdy konkretny przepis wymaga świeżego odczytu ELI/ISAP.
