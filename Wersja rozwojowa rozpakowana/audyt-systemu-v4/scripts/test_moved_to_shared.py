@@ -2,41 +2,40 @@
 """
 test_moved_to_shared.py — Test regresyjny T9: weryfikacja przeniesień do shared/.
 
-ŹRÓDŁO BŁĘDU (regresja, którą ten test chroni przed powrotem):
-  Przy przeglądzie T1 na żądanie użytkownika ("zbadaj działanie T1,
-  czy jeszcze jakieś testy są wymagane"), zbudowano PRÓBNY, SZEROKI
-  skaner odwołań "mod-XXX" w całym systemie, w poszukiwaniu
-  DANGLING REFERENCES (odwołań do plików, które NIE ISTNIEJĄ). Wynik
-  ujawnił, że WIĘKSZOŚĆ takich "podejrzanych" odwołań to w
-  rzeczywistości LEGALNE wzorce: (a) cross-referencje międzyskillowe
-  z jawnym prefiksem "dr-XX →", (b) odwołania do plików w shared/
-  (inna struktura katalogów), (c) świadome placeholdery "rozważ w
-  przyszłości", (d) notatki historyczne o PRZENIESIENIU pliku do
-  shared/ pod NOWĄ nazwą. TEN test celuje WYŁĄCZNIE w kategorię (d) —
-  najbardziej RYZYKOWNĄ, bo odwołuje się do KONKRETNEJ nowej
-  lokalizacji, którą MOŻNA automatycznie zweryfikować.
+ŹRÓDŁO BŁĘDU:
+  Test historycznie sprawdzał, czy deklarowany CEL przeniesienia do shared/
+  faktycznie istnieje. To chroni przed dangling references, ale nie wykrywało
+  lustrzanego problemu: po skutecznym przeniesieniu mogła pozostać STARA lokalna
+  kopia `modules/mod-*.md`. Taka kopia nadal wchodziła do inwentarza modułów,
+  mogła zawierać nieaktualną treść i wymuszała sztuczną rejestrację w lokalnej
+  MAPA-AKTOW mimo kanonicznego routingu do shared/.
 
-ZASADA TESTU: dla KAŻDEJ linii w SKILL.md pasującej do wzorca
-"Przeniesiony do shared/ ... `NAZWA_PLIKU`" (lub podobnego), sprawdź
-CZY plik `shared/NAZWA_PLIKU.md` (LUB NAZWA_PLIKU jest wspomniana
-GDZIEKOLWIEK w treści KTÓREGOŚ pliku .md w shared/, dla przypadków
-zmiany nazwy przy przenosinach) FAKTYCZNIE istnieje.
+  Przypadek referencyjny F-138 / DR-16: `mod-KPC-przesluchanie-swiadkow.md`
+  pozostał fizycznie po migracji do `shared/PRZESLUCHANIE-SWIADKOW-KPC.md` i
+  zawierał starszą treść niż kanoniczna kopia shared. Ręczny cross-check
+  `dysk - MAPA-AKTOW` ujawnił kopię; T9 w poprzedniej postaci jej nie zgłaszał.
 
-⚠️ OGRANICZENIE: rozpoznaje TYLKO frazę "przeniesion* do shared" (w
-różnych odmianach) w POBLIŻU nazwy pliku w formacie `mod-XXX` lub
-podobnym — NIE jest to pełny parser odwołań, WYŁĄCZNIE wąski,
-celowany wzorzec o NISKIM ryzyku fałszywych trafień (w odróżnieniu od
-próbnego, szerokiego skanera, który dawał zbyt dużo szumu do
-praktycznego użytku — patrz REGRESSION-TEST-PLAN.md sekcja 10).
+ZASADA TESTU:
+  dla KAŻDEJ deklaracji w SKILL.md pasującej do wzorca
+  "przeniesion* do shared ... `NAZWA`":
+
+  1. potwierdź, że cel w shared/ istnieje bezpośrednio LUB stara nazwa jest
+     wspomniana w którymś pliku shared/ (obsługa rename przy migracji);
+  2. jeżeli `NAZWA` zaczyna się od `mod-`, sprawdź, czy w źródłowym skillu
+     NIE pozostał `modules/NAZWA.md`.
+
+  Pozostawiona lokalna kopia jest WARN i daje exit 1 — wymaga decyzji:
+  albo usunąć stale duplicate, albo wycofać deklarację pełnego przeniesienia.
+
+⚠️ OGRANICZENIE: test rozpoznaje tylko frazę "przeniesion* do shared" w
+pobliżu nazwy pliku. Nie jest pełnym parserem wszystkich cross-referencji.
 
 Użycie:
     python3 test_moved_to_shared.py [--repo-root SKILLS_ROOT] [--quiet]
 
 Kod wyjścia:
-    0 — wszystkie odnalezione deklaracje przeniesienia mają
-        potwierdzenie istnienia pliku docelowego
-    1 — znaleziono co najmniej jedną deklarację przeniesienia BEZ
-        odnalezionego pliku docelowego (WYMAGA weryfikacji manualnej)
+    0 — cele przeniesień istnieją i brak lokalnych stale copies;
+    1 — nierozwiązany cel lub pozostawiona lokalna kopia.
 """
 
 import argparse
@@ -47,10 +46,9 @@ from pathlib import Path
 
 SKIP_SKILLS = {"shared", "audyt-systemu-v4"}
 
-# Wzorzec: "przeniesion(y/a/e) do shared" w POBLIŻU nazwy pliku mod-XXX
 MOVED_PATTERN = re.compile(
     r"przeniesion\w*\s+do\s+shared[/\s]*[^\n]{0,80}?`?(mod-[\w-]+|[A-Z][\w-]+)`?",
-    re.IGNORECASE
+    re.IGNORECASE,
 )
 
 
@@ -66,16 +64,10 @@ def find_skill_md_files(repo_root: Path):
 
 
 def shared_file_exists_by_stem_or_mention(shared_dir: Path, name: str) -> bool:
-    """Sprawdza czy plik o dokładnej nazwie istnieje w shared/, LUB czy
-    stara nazwa jest wspomniana w treści KTÓREGOŚ pliku shared/ (dla
-    przypadków zmiany nazwy przy przenosinach, np. mod-KK-stalking-
-    szczegolowy → STALKING-NEKANIE.md, gdzie NOWY plik może zawierać
-    odwołanie do STAREJ nazwy jako historyczny kontekst)."""
+    """Cel istnieje bezpośrednio albo stara nazwa występuje w shared/."""
     direct = shared_dir / f"{name}.md"
     if direct.exists():
         return True
-    # Przeszukaj TREŚĆ plików shared/ (płytko, bez podkatalogów) —
-    # niska częstotliwość operacji, akceptowalne dla testu okresowego
     for f in shared_dir.glob("*.md"):
         try:
             if name in f.read_text(encoding="utf-8", errors="ignore"):
@@ -85,9 +77,19 @@ def shared_file_exists_by_stem_or_mention(shared_dir: Path, name: str) -> bool:
     return False
 
 
+def stale_source_copy(skill_dir: Path, name: str):
+    """Zwraca lokalną kopię mod-*.md pozostawioną po deklarowanym move."""
+    if not name.lower().startswith("mod-"):
+        return None
+    candidate = skill_dir / "modules" / f"{name}.md"
+    return candidate if candidate.exists() else None
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--repo-root", default=os.environ.get("LEX_MACHINA_SKILLS_ROOT", "."))
+    ap.add_argument(
+        "--repo-root", default=os.environ.get("LEX_MACHINA_SKILLS_ROOT", ".")
+    )
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
 
@@ -96,6 +98,7 @@ def main():
     skill_files = find_skill_md_files(repo_root)
 
     unresolved = 0
+    stale = 0
     checked = 0
     report_lines = []
 
@@ -109,32 +112,47 @@ def main():
         for m in MOVED_PATTERN.finditer(text):
             name = m.group(1)
             checked += 1
+
             if not shared_file_exists_by_stem_or_mention(shared_dir, name):
                 unresolved += 1
                 report_lines.append(
                     f"  ⚠️ NIEROZWIĄZANE PRZENIESIENIE  {skill_dir.name}: "
                     f"deklaruje przeniesienie \"{name}\" do shared/, ale NIE "
                     f"znaleziono pliku \"{name}.md\" ANI wzmianki o tej nazwie "
-                    f"w ŻADNYM pliku shared/ — WYMAGA weryfikacji manualnej "
-                    f"(czy plik istnieje pod INNĄ nazwą, czy naprawdę zaginął)"
+                    f"w ŻADNYM pliku shared/ — WYMAGA weryfikacji manualnej"
+                )
+
+            stale_copy = stale_source_copy(skill_dir, name)
+            if stale_copy is not None:
+                stale += 1
+                report_lines.append(
+                    f"  ⚠️ STALE SOURCE COPY  {skill_dir.name}: deklaruje "
+                    f"przeniesienie \"{name}\" do shared/, ale lokalny plik "
+                    f"nadal istnieje: {stale_copy.relative_to(repo_root)} — "
+                    f"usuń kopię albo wycofaj deklarację pełnego przeniesienia"
                 )
 
     if not args.quiet:
-        print(f"test_moved_to_shared.py — {len(skill_files)} plików SKILL.md "
-              f"przeszukanych, {checked} deklaracji przeniesienia do shared/ znalezionych\n")
+        print(
+            f"test_moved_to_shared.py — {len(skill_files)} plików SKILL.md "
+            f"przeszukanych, {checked} deklaracji przeniesienia do shared/ znalezionych\n"
+        )
         if report_lines:
             print("\n".join(report_lines))
         else:
-            print("  Wszystkie zadeklarowane przeniesienia do shared/ mają "
-                  "potwierdzone pliki docelowe (lub wzmiankę o nazwie).")
+            print(
+                "  Wszystkie deklarowane cele shared istnieją i nie pozostawiono "
+                "lokalnych kopii mod-* po przeniesieniu."
+            )
         print()
-        if unresolved:
-            print(f"WYNIK T9: WARN — {unresolved} nierozwiązanych przeniesień "
-                  f"WYMAGA weryfikacji manualnej.")
+        if unresolved or stale:
+            print(
+                f"WYNIK T9: WARN — unresolved={unresolved}, stale_source={stale}."
+            )
         else:
-            print("WYNIK T9: OK — brak nierozwiązanych przeniesień.")
+            print("WYNIK T9: OK — brak nierozwiązanych przeniesień i stale copies.")
 
-    sys.exit(1 if unresolved else 0)
+    sys.exit(1 if (unresolved or stale) else 0)
 
 
 if __name__ == "__main__":
