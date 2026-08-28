@@ -23,7 +23,7 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 
 | Zakres | Status bieżący | Główny nośnik |
 |---|---|---|
-| KPC — główna struktura i procedury | 🟢 B+ / COV | rodzina modułów KPC + mapa głównych działów |
+| KPC — Dz.U. 2026 poz. 468, postępowanie rozpoznawcze, zabezpieczające/egzekucyjne i międzynarodowe | 🟢 B+ / COV | `mod-KPC-current-state-COV.md` + rodzina modułów KPC |
 | KSH — wszystkie tytuły co najmniej operacyjnie pokryte | 🟢 B+ / COV | rodzina KSH + `mod-KSH-uzupelnienie-pokrycia-2026.md` |
 | Prawo upadłościowe | 🟢 B+ / COV | moduły PrUp, w tym likwidacja i postępowania odrębne |
 | Prawo restrukturyzacyjne | 🟢 B+ / COV | moduły PrRestr + pomoc publiczna |
@@ -57,5 +57,6 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 ## Aktywne luki
 
 1. F-108 w DR-02 ma aktualne COV dla wszystkich przypisanych aktów.
-2. Dalsza praca dotyczy głębokości poszczególnych artykułów i niszowych wariantów, nie braku routingu.
-3. `COV` nie oznacza `FULL`; każda konkretna jednostka wymaga fresh gate do ELI/ISAP.
+2. KPC ma osobny current-state COV spinający rozproszone moduły procesowe; dalsza praca dotyczy głębokości konkretnych działów, nie braku mapy strukturalnej.
+3. Dalsza praca dotyczy głębokości poszczególnych artykułów i niszowych wariantów, nie braku routingu.
+4. `COV` nie oznacza `FULL`; każda konkretna jednostka wymaga fresh gate do ELI/ISAP.
