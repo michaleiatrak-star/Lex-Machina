@@ -390,11 +390,12 @@ błędnie przypisane metryki Dz.U. mimo poprawnej mapy dziedzinowej.
 
 Sprawdza mechanicznie:
 - dokładnie 52 identyfikatory F-108;
-- dokładnie cztery pozycje poniżej COV: 7, 29, 30, 40;
-- deklarację 52/52 routing i 48/52 COV;
+- zero pozycji poniżej COV w benchmarku F-108;
+- deklarację 52/52 routing i 52/52 B+/COV przy 0 FULL;
 - brak znanych regresji KC 2025/1071 i Prawa o prokuraturze 2024/390 w aktywnym `ROUTING-MAP.md`;
 - obecność skorygowanych wierszy w aktualnej `mapa_dzu_2026-08-28.md`;
-- zakaz powrotu błędnych tożsamości 2025/1338, 2023/549, 2024/1069 i 2026/346.
+- zakaz powrotu błędnych tożsamości 2025/1338, 2023/549, 2024/1069 i 2026/346;
+- fizyczną obecność i centralną rejestrację current-state modułów KW, SUS, ustawy zasiłkowej i zwolnień grupowych, w tym osobnego modułu KW art. 65–69.
 
 **Kryterium:** każdy FAIL T19 blokuje wynik strukturalny suite. Test nie zastępuje
 żywej kontroli ELI/ISAP; chroni wyłącznie ustalenia już zweryfikowane źródłowo.
