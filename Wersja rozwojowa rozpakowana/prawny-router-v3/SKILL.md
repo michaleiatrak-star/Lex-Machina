@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.30"
+version: "3.31"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -70,8 +70,8 @@ required_modules:
   - references/AUDYT-KLUCZA-ODPOWIEDZI.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog:
+  - "3.31 (2026-08-28): runtime mapy aktów działają w modelu current-state-only; historia pozostaje w dziennikach/changelogach, a routing korzysta z bieżących COV."
   - "3.30 (2026-08-27): synchronizacja mapy dziedzinowej z F-108 P1 oraz rzeczywistymi modułami REACH/CLP, akcyzy/cła i cudzoziemców; references/CHANGELOG.md."
-  - "3.29 (2026-08-27): stałe identyfikatory reguł i usunięcie resztek historii; references/CHANGELOG.md."
 ---
 
 ## ŁADOWANE ZAWSZE — BEZWZGLĘDNIE
