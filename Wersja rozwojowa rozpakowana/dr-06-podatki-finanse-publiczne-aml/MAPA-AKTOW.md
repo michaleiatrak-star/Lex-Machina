@@ -25,7 +25,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | VAT — miejsce świadczenia i zwolnienia | jw. | `mod-VAT-miejsce-swiadczenia-zwolnienia` | ✅ aktywny |
 | VAT — obowiązek podatkowy / podstawa / nieruchomości | jw. | `mod-VAT-obowiazek-podstawa-zwolnienia-nieruchomosci` | ✅ aktywny |
 | VAT — sankcje / bony / odliczenia | jw. | `mod-VAT-sankcje-bony-odliczenia` | ✅ aktywny |
-| VAT — ewidencja / deklaracje / zwrot | jw.; zmiany przyszłe stosować wyłącznie wg daty wejścia w życie | `mod-VAT-ewidencja-deklaracje` | ✅ aktywny; temporal gate |
+| VAT — ewidencja / deklaracje / zwrot | aktualne brzmienie VAT i właściwych aktów wykonawczych na dzień obowiązku | `mod-VAT-ewidencja-deklaracje` | ✅ aktywny; temporal gate |
 | VAT — klasyfikacja produktów / PKWiU / CN / WIS | jw. + właściwe klasyfikacje i akty UE | `mod-VAT-klasyfikacja-produktow-baza-niejednoznacznosci` | ✅ aktywny; fresh gate |
 | VAT / PIT / CIT — użytek mieszany i koszty samochodowe | właściwe bieżące przepisy VAT/PIT/CIT | `mod-odliczenia-uzytek-mieszany-firma-prywatny-KUP` | ✅ aktywny; fresh gate |
 | Ustawa o Krajowej Administracji Skarbowej | Dz.U. 2025 poz. 1131 t.j. ze zm. | `mod-KAS-kontrola-celno-skarbowa` | ✅ aktywny |
