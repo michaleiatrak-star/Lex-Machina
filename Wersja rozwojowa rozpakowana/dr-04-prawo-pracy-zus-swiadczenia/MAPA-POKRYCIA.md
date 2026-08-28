@@ -11,6 +11,29 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 - 🔴 — brak treści;
 - ⚪ — zakres techniczny/przejściowy.
 
+## Kodeks pracy
+
+**Baza operacyjna:** Dz.U. 2025 poz. 277 t.j.; ELI wskazuje późniejsze akty zmieniające, dlatego przy każdej konkretnej jednostce obowiązuje fresh gate do tekstu ujednoliconego i daty wejścia w życie.
+
+| Zakres | Status bieżący | Dowód pokrycia |
+|---|---|---|
+| current-state indeks całego Kodeksu pracy | 🟢 B+ / COV | `mod-KP-current-state-COV.md` |
+| Działy I–II — zasady / stosunek pracy / praca zdalna | 🟢 B+ / COV | indeks COV + `mod-KP-prawo-pracy.md` + `mod-KP-praca-zdalna.md` |
+| Dział III — wynagrodzenie i świadczenia | 🟢/🟡 B+ | indeks COV + moduł główny; wartości dynamiczne fresh gate |
+| Dział IV — obowiązki pracodawcy i pracownika | 🟢 B+ / COV | indeks COV + moduły tematyczne |
+| Dział V — odpowiedzialność materialna pracowników | 🟢/🟡 B+ | indeks COV + moduły prawa pracy |
+| Dział VI — czas pracy | 🟢 B+ / COV | `mod-KP-dzial-VI-czas-pracy.md` |
+| Dział VII — urlopy pracownicze | 🟢 B+ / COV | `mod-KP-dzial-VII-urlopy-pracownicze.md` |
+| Dział VIII — rodzicielstwo | 🟢/🟡 B+ | indeks COV + ustawa zasiłkowa dla świadczeń |
+| Dział IX — młodociani | 🟢/🟡 B+ | indeks COV + moduł główny |
+| Dział X — BHP | 🟢/🟡 B+ | indeks COV + akty wykonawcze fresh gate |
+| Dział XI — układy zbiorowe | 🟢/🟡 B+ | indeks COV + prawo związkowe |
+| Dział XII — spory pracownicze | 🟢 B+ / COV | indeks COV + routing KPC/sąd pracy |
+| Dział XIII — wykroczenia przeciw prawom pracownika | 🟢/🟡 B+ | indeks COV + routing DR-03/PIP |
+| Dział XIV — przedawnienie | 🟢 B+ / COV | indeks COV; termin kwalifikowany per roszczenie |
+| Dział XV — przepisy końcowe | 🟢/🟡 B+ | indeks COV + aktualne akty wykonawcze |
+| mobbing / dyskryminacja | 🟢 | `mod-KP-mobbing-dyskryminacja.md` |
+
 ## Ustawa o systemie ubezpieczeń społecznych (SUS)
 
 **Baza operacyjna:** Dz.U. 2026 poz. 199 t.j.; fresh gate przed cytowaniem jednostki.
@@ -46,12 +69,10 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 | zbieg świadczeń / powstanie i ustanie prawa / zawieszanie | 🟡 B | `mod-FUS-uzupelnienie-pokrycia-2026.md` |
 | postępowanie i wypłata | 🟢/🟡 B+ | moduł główny + KPC DR-02 |
 
-## Prawo pracy i świadczenia
+## Inne prawo pracy i świadczenia
 
 | Akt / temat | Status bieżący |
 |---|---|
-| Kodeks pracy — rdzeń stosunku pracy | 🟢/🟡; moduł `mod-KP-prawo-pracy.md` i moduły tematyczne |
-| mobbing / dyskryminacja | 🟢 | `mod-KP-mobbing-dyskryminacja.md` |
 | zwolnienia grupowe | 🟢/🟡 B+; dedykowany moduł i procedura art. 2–6 |
 | ustawa zasiłkowa | 🟢/🟡 B+; Dz.U. 2026 poz. 854 t.j. |
 | handel w niedziele | 🟢/🟡; bieżąca metryka w MAPA-AKTOW |
@@ -59,6 +80,7 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 
 ## Aktywne luki
 
-1. SUS i FUS są szeroko zmapowane operacyjnie, ale bez statusu `FULL` dla całych ustaw.
-2. Największy obszar pogłębiania to materialne reguły składkowe, szczegółowe warianty świadczeń i wyjątki.
-3. Przed użyciem kwot, progów, terminów lub konkretnego artykułu obowiązuje świeża weryfikacja ELI/ISAP i właściwego obwieszczenia.
+1. Kodeks pracy ma bieżący status B+/COV dla całej struktury, ale nie status `FULL` artykuł-po-artykule.
+2. SUS i FUS są szeroko zmapowane operacyjnie, ale część działów pozostaje B/B+.
+3. Największy obszar pogłębiania DR-04 to materialne reguły składkowe, szczegółowe warianty świadczeń i wyjątki.
+4. Przed użyciem kwot, progów, terminów lub konkretnego artykułu obowiązuje świeża weryfikacja ELI/ISAP i właściwego obwieszczenia.
