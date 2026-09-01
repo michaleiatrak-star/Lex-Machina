@@ -451,6 +451,20 @@ Prawo PL: router→v3 pierwszy, ISAP każdy przepis, HYBRID-VAL przed .docx. Kar
 | `ISAP każdy przepis` | weryfikacja każdego przepisu w isap.sejm.gov.pl |
 | `HYBRID-VAL przed .docx` | walidacja hybrydowa przed generowaniem Worda |
 | `Karne: +kwalifikator` | w sprawach karnych moduł kwalifikatora karnomaterialnego |
+
+**Allowlista domen (wymagana dla oficjalnych źródeł prawa):**
+
+Claude AI → **Settings** → **Capabilities** → **Additional allowed domains** → dodaj:
+
+```text
+api.sejm.gov.pl
+eli.gov.pl
+isap.sejm.gov.pl
+gov.pl
+```
+
+Bez tej allowlisty Claude może blokować bezpośredni dostęp do źródeł urzędowych
+używanych przez HARD GATE i weryfikację online.
 </details>
 
 <details>
