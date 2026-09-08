@@ -1,0 +1,14 @@
+interface:
+  display_name: orzeczenia sadowe v2
+  short_description: 'Research orzecznictwa: wyszukiwanie, weryfikacja sygnatur i
+    tez, hierarchia źródeł, porównanie orzeczeń oraz dobór judykatury do argumentacji
+    prawnej.'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

@@ -1,0 +1,14 @@
+interface:
+  display_name: przewodnik prawny v2
+  short_description: 'Przewodnik prawny i fallback routera: pomaga zidentyfikować
+    problem, właściwą ścieżkę postępowania, potrzebne dokumenty i kolejny specjalistyczny
+    skill.'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

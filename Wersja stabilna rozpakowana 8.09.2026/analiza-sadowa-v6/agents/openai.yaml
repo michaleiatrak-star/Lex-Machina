@@ -1,0 +1,14 @@
+interface:
+  display_name: analiza sadowa v6
+  short_description: 'Czteroprzebiegowa analiza akt, pism, wyroków i dowodów: mapa
+    faktów, kwalifikacja prawna, analiza adversarialna, dwukrotna weryfikacja, ocena
+    szans i raport końcowy.'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

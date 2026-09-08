@@ -1,0 +1,13 @@
+interface:
+  display_name: dr 11 cyfrowe cyber ai dane ip
+  short_description: 'Prawo cyfrowe, cyber, AI, dane i IP: RODO, KSC/NIS2, AI Act,
+    usługi cyfrowe, prywatność, cyberbezpieczeństwo, prawo autorskie i własność intelektualna.'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

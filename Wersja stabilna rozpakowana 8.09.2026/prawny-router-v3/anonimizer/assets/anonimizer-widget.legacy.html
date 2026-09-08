@@ -1,0 +1,526 @@
+<!--
+  Anonimizer dokumentów prawnych v2
+  Asset widgetu dla prawny-router-v3/anonimizer
+  v2: sendPrompt bezpośredni eksport · oznaczanie plików · decyzja sesyjna
+-->
+<h2 class="sr-only">Anonimizer dokumentów prawnych — wklej tekst lub wgraj plik aby usunąć dane osobowe</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:1.5rem 0}
+.header{margin-bottom:1rem}
+.header h1{font-size:20px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.header p{font-size:13px;color:var(--color-text-secondary);line-height:1.5}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 8px;border-radius:var(--border-radius-md);background:var(--color-background-info);color:var(--color-text-info)}
+.notice{background:var(--color-background-warning);border-radius:var(--border-radius-md);padding:10px 14px;font-size:13px;color:var(--color-text-warning);display:flex;gap:8px;align-items:flex-start;margin-bottom:1rem;line-height:1.5}
+.notice i{margin-top:1px;flex-shrink:0;font-size:16px}
+.notice strong{font-weight:500}
+.info-box{background:var(--color-background-info);border-radius:var(--border-radius-md);padding:10px 14px;font-size:13px;color:var(--color-text-info);display:flex;gap:8px;align-items:flex-start;margin-bottom:1rem;line-height:1.5}
+.panel{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);margin-bottom:1rem;overflow:hidden}
+.panel-head{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary)}
+.panel-head span{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.panel-body{padding:12px 16px}
+.steps{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.step{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--color-text-secondary)}
+.step-n{width:20px;height:20px;border-radius:50%;background:var(--color-background-secondary);border:0.5px solid var(--color-border-secondary);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--color-text-primary);flex-shrink:0}
+.step-arr{color:var(--color-text-tertiary);font-size:11px}
+.zone{border:1.5px dashed var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;text-align:center;cursor:pointer;transition:border-color 0.15s,background 0.15s;margin-bottom:10px}
+.zone:hover,.zone.over{border-color:var(--color-border-primary);background:var(--color-background-secondary)}
+.zone-icon{font-size:28px;color:var(--color-text-secondary);margin-bottom:6px;display:block}
+.zone p{font-size:13px;color:var(--color-text-secondary);margin-bottom:2px}
+.zone small{font-size:11px;color:var(--color-text-tertiary)}
+.or-sep{text-align:center;font-size:12px;color:var(--color-text-tertiary);margin:6px 0;position:relative}
+.or-sep::before,.or-sep::after{content:'';position:absolute;top:50%;width:42%;height:0.5px;background:var(--color-border-tertiary)}
+.or-sep::before{left:0}.or-sep::after{right:0}
+textarea{width:100%;font-size:13px;line-height:1.6;font-family:var(--font-mono,monospace);resize:vertical;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);background:var(--color-background-secondary);color:var(--color-text-primary);padding:10px 12px}
+textarea:focus{outline:none;border-color:var(--color-border-primary)}
+.char-count{font-size:11px;color:var(--color-text-tertiary);text-align:right;margin-top:3px}
+.options{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:4px}
+.opt{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--color-text-primary);cursor:pointer;padding:5px 10px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);background:var(--color-background-primary);transition:border-color 0.12s,background 0.12s;user-select:none}
+.opt input[type=checkbox]{accent-color:var(--color-text-info);width:14px;height:14px;cursor:pointer}
+.opt:has(input:checked){border-color:var(--color-border-info);background:var(--color-background-info)}
+.file-list{list-style:none;margin-top:6px}
+.file-item{display:flex;align-items:center;gap:8px;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:13px}
+.file-item:last-child{border-bottom:none}
+.file-name{font-weight:500;color:var(--color-text-primary)}
+.file-meta{color:var(--color-text-secondary);font-size:12px}
+.rm{background:none;border:none;cursor:pointer;color:var(--color-text-secondary);font-size:15px;padding:2px 4px}
+.rm:hover{color:var(--color-text-primary)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:8px;margin-bottom:1rem}
+.stat{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;text-align:center}
+.stat-n{font-size:22px;font-weight:500;color:var(--color-text-primary)}
+.stat-l{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem}
+.btn-send{background:var(--color-text-primary);color:var(--color-background-primary);border:none;border-radius:var(--border-radius-md);padding:10px 20px;font-size:14px;font-weight:600;cursor:pointer;transition:opacity 0.12s;display:flex;align-items:center;gap:7px;flex:1;justify-content:center;min-width:180px}
+.btn-send:hover{opacity:0.85}
+.btn-send-raw{background:transparent;color:var(--color-text-primary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:10px 16px;font-size:13px;cursor:pointer;transition:background 0.12s;display:flex;align-items:center;gap:6px}
+.btn-send-raw:hover{background:var(--color-background-secondary)}
+button.secondary{background:transparent;color:var(--color-text-primary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:9px 18px;font-size:14px;cursor:pointer;transition:background 0.12s;display:flex;align-items:center;gap:6px}
+button.secondary:hover{background:var(--color-background-secondary)}
+.tabs{display:flex;gap:4px;margin-bottom:1rem}
+.tab{font-size:13px;padding:6px 14px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:all 0.1s}
+.tab.active{background:var(--color-background-primary);color:var(--color-text-primary);border-color:var(--color-border-primary);font-weight:500}
+.diff-view{font-size:12px;font-family:var(--font-mono,monospace);line-height:1.8;max-height:280px;overflow-y:auto;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px;background:var(--color-background-secondary);color:var(--color-text-primary);white-space:pre-wrap;word-break:break-all}
+.del{color:#b91c1c;text-decoration:line-through}
+.ins{color:#15803d;font-weight:500}
+.detect-banner{background:var(--color-background-success,#f0fdf4);border:0.5px solid #bbf7d0;border-radius:var(--border-radius-md);padding:10px 14px;font-size:13px;color:#15803d;display:flex;gap:8px;align-items:flex-start;margin-bottom:1rem;line-height:1.5}
+.detect-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.detect-tag{font-size:11px;padding:2px 7px;border-radius:99px;background:rgba(21,128,61,0.12);color:#15803d;font-weight:500}
+.send-confirm{background:var(--color-background-success,#f0fdf4);border:0.5px solid #bbf7d0;border-radius:var(--border-radius-md);padding:12px 16px;font-size:13px;color:#15803d;display:none;gap:8px;align-items:center;margin-top:10px;font-weight:500}
+.send-confirm i{font-size:18px}
+.session-bar{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:8px 12px;font-size:12px;color:var(--color-text-secondary);display:flex;align-items:center;gap:6px;margin-bottom:1rem}
+.session-dot{width:8px;height:8px;border-radius:50%;background:#15803d;flex-shrink:0}
+.session-dot.red{background:#b91c1c}
+</style>
+
+<div class="wrap">
+  <div class="header">
+    <h1>
+      <i class="ti ti-shield-lock" style="font-size:20px" aria-hidden="true"></i>
+      Anonimizer dokumentów
+      <span class="badge"><i class="ti ti-scale" style="font-size:10px" aria-hidden="true"></i> RODO</span>
+    </h1>
+    <p>Usuwa dane osobowe przed analizą prawną. Działa lokalnie — treść nie opuszcza przeglądarki.</p>
+  </div>
+
+  <!-- pasek sesji — pokazuje zapamiętaną decyzję -->
+  <div class="session-bar" id="session-bar" style="display:none">
+    <div class="session-dot" id="session-dot"></div>
+    <span id="session-label"></span>
+    <button onclick="resetSession()" style="margin-left:auto;background:none;border:none;font-size:12px;color:var(--color-text-secondary);cursor:pointer;text-decoration:underline">zmień</button>
+  </div>
+
+  <div class="notice">
+    <i class="ti ti-alert-triangle" aria-hidden="true"></i>
+    <div><strong>Ważne:</strong> pliki wgrane w wiadomości do Clauda nie są tu widoczne — sandbox jest izolowany. <strong>Wgraj plik ponownie</strong> lub <strong>wklej tekst</strong> poniżej. Po wysłaniu tekst trafi bezpośrednio do czatu.</div>
+  </div>
+
+  <div id="detect-banner" style="display:none" class="detect-banner">
+    <i class="ti ti-scan" aria-hidden="true"></i>
+    <div>
+      <strong>Wykryto dane osobowe</strong> — zalecana anonimizacja przed analizą:
+      <div class="detect-tags" id="detect-tags"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <span><i class="ti ti-file-upload" style="font-size:14px;vertical-align:-2px;margin-right:6px" aria-hidden="true"></i>Wgraj lub wklej dokument</span>
+      <span id="file-count" style="font-size:12px;color:var(--color-text-secondary)"></span>
+    </div>
+    <div class="panel-body">
+      <div class="steps">
+        <div class="step"><div class="step-n">1</div><span>Wgraj plik lub wklej tekst</span></div>
+        <div class="step-arr">→</div>
+        <div class="step"><div class="step-n">2</div><span>Wybierz opcje</span></div>
+        <div class="step-arr">→</div>
+        <div class="step"><div class="step-n">3</div><span>Wyślij do czatu</span></div>
+      </div>
+      <div class="zone" id="drop-zone" role="button" tabindex="0" aria-label="Kliknij lub przeciągnij plik">
+        <span class="zone-icon"><i class="ti ti-upload" aria-hidden="true"></i></span>
+        <p>Przeciągnij plik lub <strong>kliknij aby wybrać</strong></p>
+        <small>.txt · .md · .rtf — pliki tekstowe &nbsp;|&nbsp; .docx/.pdf → skopiuj treść i wklej</small>
+      </div>
+      <input type="file" id="file-input" multiple accept=".txt,.md,.rtf,.csv,.xml,.json,.log" style="display:none">
+      <ul class="file-list" id="file-list"></ul>
+      <div class="or-sep">lub wklej tekst bezpośrednio</div>
+      <textarea id="paste-area" placeholder="Wklej treść dokumentu tutaj (Ctrl+V)..." style="min-height:160px" oninput="updateCharCount();scheduleDetect()" aria-label="Pole tekstowe dokumentu"></textarea>
+      <div class="char-count" id="char-count">0 znaków</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><span><i class="ti ti-adjustments-horizontal" style="font-size:14px;vertical-align:-2px;margin-right:6px" aria-hidden="true"></i>Opcje anonimizacji</span></div>
+    <div class="panel-body">
+      <div class="options">
+        <label class="opt"><input type="checkbox" id="opt-names" checked> <i class="ti ti-user" style="font-size:13px" aria-hidden="true"></i> Imiona i nazwiska → inicjały</label>
+        <label class="opt"><input type="checkbox" id="opt-addr" checked> <i class="ti ti-map-pin" style="font-size:13px" aria-hidden="true"></i> Adresy zamieszkania</label>
+        <label class="opt"><input type="checkbox" id="opt-pesel" checked> <i class="ti ti-id-badge" style="font-size:13px" aria-hidden="true"></i> PESEL / NIP / REGON</label>
+        <label class="opt"><input type="checkbox" id="opt-phone" checked> <i class="ti ti-phone" style="font-size:13px" aria-hidden="true"></i> Numery telefonów</label>
+        <label class="opt"><input type="checkbox" id="opt-email" checked> <i class="ti ti-mail" style="font-size:13px" aria-hidden="true"></i> Adresy e-mail</label>
+        <label class="opt"><input type="checkbox" id="opt-bank" checked> <i class="ti ti-credit-card" style="font-size:13px" aria-hidden="true"></i> Numery kont bankowych</label>
+        <label class="opt"><input type="checkbox" id="opt-date" checked> <i class="ti ti-calendar" style="font-size:13px" aria-hidden="true"></i> Daty urodzenia</label>
+        <label class="opt"><input type="checkbox" id="opt-company" checked> <i class="ti ti-building" style="font-size:13px" aria-hidden="true"></i> Nazwy firm stron</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-row" style="margin-bottom:0.5rem">
+    <button class="btn-send" onclick="runAnonymizeAndSend()">
+      <i class="ti ti-shield-check" aria-hidden="true"></i> Anonimizuj i wyślij do czatu
+    </button>
+  </div>
+  <div class="btn-row">
+    <button class="btn-send-raw" onclick="sendRaw()" title="Wyślij tekst bez anonimizacji — tylko za zgodą sesyjną">
+      <i class="ti ti-arrow-right" style="font-size:13px" aria-hidden="true"></i> Wyślij bez anonimizacji
+    </button>
+    <button class="secondary" onclick="clearAll()"><i class="ti ti-trash" aria-hidden="true"></i> Wyczyść</button>
+  </div>
+
+  <!-- potwierdzenie wysłania -->
+  <div class="send-confirm" id="send-confirm">
+    <i class="ti ti-circle-check" aria-hidden="true"></i>
+    <span id="send-confirm-msg"></span>
+  </div>
+
+  <div id="results" style="display:none;margin-top:1.5rem">
+    <div class="panel">
+      <div class="panel-head"><span><i class="ti ti-report" style="font-size:14px;vertical-align:-2px;margin-right:6px" aria-hidden="true"></i>Podgląd przed wysłaniem</span></div>
+      <div class="panel-body">
+        <div class="stats" id="stats-grid"></div>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab('clean',this)">Tekst anonimowy</button>
+          <button class="tab" onclick="switchTab('diff',this)">Podgląd zmian</button>
+        </div>
+        <div id="tab-clean">
+          <textarea id="result-area" style="min-height:200px" readonly aria-label="Zanonimizowany tekst"></textarea>
+          <div class="btn-row">
+            <button class="btn-send" onclick="doSendAnon()">
+              <i class="ti ti-send" aria-hidden="true"></i> Wyślij do czatu ↗
+            </button>
+            <button class="secondary" onclick="copyResult()"><i class="ti ti-copy" aria-hidden="true"></i> Kopiuj</button>
+            <button class="secondary" onclick="downloadResult()"><i class="ti ti-download" aria-hidden="true"></i> Pobierz .txt</button>
+          </div>
+        </div>
+        <div id="tab-diff" style="display:none">
+          <div class="diff-view" id="diff-view"></div>
+          <div class="btn-row">
+            <button class="btn-send" onclick="doSendAnon()">
+              <i class="ti ti-send" aria-hidden="true"></i> Wyślij do czatu ↗
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── stan sesji ── */
+var SESSION = {
+  decision: null,   // 'anon' | 'raw' | null
+  decidedAt: null
+};
+
+var files=[], origText='', anonText='', detectTimer=null;
+
+/* ── inicjalizacja sesji z czatu ──
+   Router może wstrzyknąć decyzję przez URL hash: #decision=anon lub #decision=raw
+   Albo widget odczytuje ją z window.name (persystencja w iframe) */
+(function initSession(){
+  try{
+    var stored=window.name?JSON.parse(window.name):{};
+    if(stored.decision){SESSION.decision=stored.decision;SESSION.decidedAt=stored.decidedAt;}
+  }catch(e){}
+  renderSessionBar();
+})();
+
+function saveSession(){
+  try{window.name=JSON.stringify({decision:SESSION.decision,decidedAt:SESSION.decidedAt});}catch(e){}
+}
+
+function resetSession(){
+  SESSION.decision=null;SESSION.decidedAt=null;
+  try{window.name='';}catch(e){}
+  renderSessionBar();
+}
+
+function renderSessionBar(){
+  var bar=document.getElementById('session-bar');
+  if(!SESSION.decision){bar.style.display='none';return;}
+  bar.style.display='flex';
+  var dot=document.getElementById('session-dot');
+  var lbl=document.getElementById('session-label');
+  if(SESSION.decision==='anon'){
+    dot.className='session-dot';
+    lbl.textContent='Sesja: anonimizacja włączona — pliki będą anonimizowane automatycznie';
+  } else {
+    dot.className='session-dot red';
+    lbl.textContent='Sesja: wysyłanie bez anonimizacji (dane oryginalne)';
+  }
+}
+
+/* ── upload / drag-drop ── */
+var dz=document.getElementById('drop-zone');
+var fi=document.getElementById('file-input');
+dz.addEventListener('click',function(){fi.click();});
+dz.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' ')fi.click();});
+dz.addEventListener('dragover',function(e){e.preventDefault();dz.classList.add('over');});
+dz.addEventListener('dragleave',function(){dz.classList.remove('over');});
+dz.addEventListener('drop',function(e){e.preventDefault();dz.classList.remove('over');handleFiles(e.dataTransfer.files);});
+fi.addEventListener('change',function(){handleFiles(this.files);this.value='';});
+
+function handleFiles(list){
+  for(var i=0;i<list.length;i++){
+    var f=list[i];
+    if(f.size>5*1024*1024){alert('Plik "'+f.name+'" jest za duży (max 5 MB). Skopiuj jego treść ręcznie.');continue;}
+    files.push(f);
+    (function(file){
+      var r=new FileReader();
+      r.onload=function(e){
+        var ta=document.getElementById('paste-area');
+        ta.value+=(ta.value?'\n\n--- '+file.name+' ---\n\n':'')+e.target.result;
+        updateCharCount();scheduleDetect();
+      };
+      r.onerror=function(){alert('Nie udało się odczytać pliku "'+file.name+'". Skopiuj treść ręcznie.');};
+      r.readAsText(file,'UTF-8');
+    })(f);
+  }
+  renderFileList();
+}
+
+function renderFileList(){
+  var ul=document.getElementById('file-list');
+  ul.innerHTML='';
+  files.forEach(function(f,i){
+    var li=document.createElement('li');li.className='file-item';
+    li.innerHTML='<div style="display:flex;align-items:center;gap:8px">'
+      +'<i class="ti ti-file-text" style="font-size:15px;color:var(--color-text-secondary)" aria-hidden="true"></i>'
+      +'<span class="file-name">'+esc(f.name)+'</span></div>'
+      +'<div style="display:flex;align-items:center;gap:8px">'
+      +'<span class="file-meta">'+fmtSize(f.size)+'</span>'
+      +'<button class="rm" onclick="removeFile('+i+')" aria-label="Usuń plik '+esc(f.name)+'">'
+      +'<i class="ti ti-x" aria-hidden="true"></i></button></div>';
+    ul.appendChild(li);
+  });
+  document.getElementById('file-count').textContent=files.length?files.length+' '+(files.length===1?'plik':files.length<5?'pliki':'plików'):'';
+}
+
+function removeFile(i){files.splice(i,1);renderFileList();}
+function fmtSize(b){return b<1024?b+' B':b<1048576?Math.round(b/1024)+' KB':Math.round(b/1048576)+' MB';}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function updateCharCount(){var v=document.getElementById('paste-area').value;document.getElementById('char-count').textContent=v.length.toLocaleString('pl')+' znaków';}
+
+/* ── auto-detect ── */
+function scheduleDetect(){
+  if(detectTimer)clearTimeout(detectTimer);
+  detectTimer=setTimeout(detectPersonalData,700);
+}
+
+function detectPersonalData(){
+  var t=document.getElementById('paste-area').value;
+  if(!t.trim()){document.getElementById('detect-banner').style.display='none';return;}
+  var found=[];
+  if(/\b[A-ZŁŚĆŹŻÓĄĘ][a-złśćźżóąę]{1,25}\s+[A-ZŁŚĆŹŻÓĄĘ][a-złśćźżóąę]{1,25}\b/.test(t))found.push('Imię i nazwisko');
+  if(/\b\d{11}\b/.test(t))found.push('PESEL');
+  if(/\b\d{3}-\d{3}-\d{2}-\d{2}\b|\b\d{10}\b/.test(t))found.push('NIP');
+  if(/\b(?:ul\.|al\.|pl\.|ulica|aleja)\s+[A-ZŁŚĆŹŻÓĄĘ]/i.test(t))found.push('Adres');
+  if(/\b\d{2}-\d{3}\s+[A-ZŁŚĆŹŻÓĄĘ]/.test(t))found.push('Kod pocztowy');
+  if(/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/.test(t))found.push('E-mail');
+  if(/(?:\+48[\s\-]?)?\d{3}[\s\-]\d{3}[\s\-]\d{3}/.test(t))found.push('Telefon');
+  if(/\bPL\d{2}[\s]?(?:\d{4}[\s]?){6}\b/.test(t))found.push('Konto bankowe');
+  var banner=document.getElementById('detect-banner');
+  if(found.length){
+    document.getElementById('detect-tags').innerHTML=found.map(function(f){return '<span class="detect-tag">'+esc(f)+'</span>';}).join('');
+    banner.style.display='flex';
+  } else {
+    banner.style.display='none';
+  }
+}
+
+/* ── anonimizacja ── */
+function anonymize(text){
+  var c={names:0,addr:0,pesel:0,phone:0,email:0,bank:0,date:0,company:0};
+  if(document.getElementById('opt-email').checked)
+    text=text.replace(/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g,function(){c.email++;return '[E-MAIL]';});
+  if(document.getElementById('opt-bank').checked)
+    text=text.replace(/\bPL\d{2}[\s]?(?:\d{4}[\s]?){6}\b|\b\d{2}[\s]?(?:\d{4}[\s]?){6}\b/g,function(){c.bank++;return '[KONTO]';});
+  if(document.getElementById('opt-pesel').checked){
+    text=text.replace(/\b\d{11}\b/g,function(){c.pesel++;return '[PESEL]';});
+    text=text.replace(/\b\d{3}-\d{3}-\d{2}-\d{2}\b/g,function(){c.pesel++;return '[NIP]';});
+    text=text.replace(/\bNIP[:\s]+\d[\d\s\-]{8,}\d\b/gi,function(){c.pesel++;return 'NIP: [NIP]';});
+    text=text.replace(/\bREGON[:\s]+\d{9,14}\b/gi,function(){c.pesel++;return 'REGON: [REGON]';});
+    text=text.replace(/\b\d{10}\b/g,function(){c.pesel++;return '[NIP]';});
+  }
+  if(document.getElementById('opt-phone').checked)
+    text=text.replace(/(?:\+48[\s\-]?)?\b(?:\d{3}[\s\-]\d{3}[\s\-]\d{3}|\d{2}[\s\-]\d{3}[\s\-]\d{2}[\s\-]\d{2}|\d{9})\b/g,function(){c.phone++;return '[TEL]';});
+  if(document.getElementById('opt-date').checked)
+    text=text.replace(/\b(?:ur(?:odzony|odzona|odzon[aey])?\.?\s*)?(\d{1,2}[.\/-]\d{1,2}[.\/-]\d{4}|\d{4}[.\/-]\d{1,2}[.\/-]\d{1,2})\b/gi,function(){c.date++;return '[DATA-UR]';});
+  if(document.getElementById('opt-addr').checked){
+    text=text.replace(/\b(?:ul\.|al\.|pl\.|os\.|aleja|ulica|plac)\s+[A-ZŁŚĆŹŻÓĄĘ][\wążśźćęóńłĄŻŚŹĆĘÓŃŁ\s\-\.]{1,50}\d+[a-zA-Z]?(?:\/\d+[a-zA-Z]?)?(?:[,\s]+(?:lok\.|m\.|mieszk\.)?\s*\d+[a-zA-Z]?)?(?:[,\s]+\d{2}-\d{3}[,\s]+[\wążśźćęóńłĄŻŚŹĆĘÓŃŁ\s]+)?/gi,function(){c.addr++;return '[ADRES]';});
+    text=text.replace(/\b\d{2}-\d{3}\s+[A-ZŁŚĆŹŻÓĄĘ][\wążśźćęóńłĄŻŚŹĆĘÓŃŁ\-\s]{2,30}\b/g,function(){c.addr++;return '[MIEJSCOWOŚĆ]';});
+  }
+  if(document.getElementById('opt-company').checked)
+    text=text.replace(/[A-ZŁŚĆŹŻÓĄĘ][\wążśźćęóńłĄŻŚŹĆĘÓŃŁ\s\-\"„"\(\)]{2,60}(?:sp\.\s*z\s*o\.o\.|S\.A\.|sp\.\s*j\.|sp\.\s*k\.|S\.K\.A\.|Sp\.\s*p\.|spółka\s+z\s+ograniczoną\s+odpowiedzialnością|spółka\s+akcyjna)/g,function(){c.company++;return '[FIRMA]';});
+  if(document.getElementById('opt-names').checked){
+    var SKIP=/^(?:Sąd|Sędzia|Prokuratura|Urząd|Zakład|Ministerstwo|Instytut|Gmina|Miasto|Powiat|Województwo|Rejon|Oddział|Wydział|Sekcja|Pan|Pani|Pozwany|Powód|Oskarżony|Świadek|Biegły|Pełnomocnik|Wnioskodawca|Wnioskodawczyni|Prezes|Dyrektor|Minister|Skarb|Polska|Rzeczpospolita|Komisja|Trybunał|Naczelny|Najwyższy)$/i;
+    text=text.replace(/\b([A-ZŁŚĆŹŻÓĄĘ][a-złśćźżóąę]{1,25})\s+([A-ZŁŚĆŹŻÓĄĘ][a-złśćźżóąę]{1,25})(?:\s+([A-ZŁŚĆŹŻÓĄĘ][a-złśćźżóąę]{1,25}))?\b/g,function(m,f,l,s){
+      if(SKIP.test(f)||SKIP.test(l))return m;
+      c.names++;
+      return f[0]+'.'+l[0]+'.'+(s?s[0]+'.':'');
+    });
+  }
+  return {text:text,counts:c};
+}
+
+function totalCount(c){return Object.values(c).reduce(function(a,b){return a+b;},0);}
+
+function buildStats(c){
+  return [
+    ['Łącznie',totalCount(c),'ti-shield'],
+    ['Osoby',c.names,'ti-user'],
+    ['Adresy',c.addr,'ti-map-pin'],
+    ['PESEL/NIP',c.pesel,'ti-id-badge'],
+    ['Telefony',c.phone,'ti-phone'],
+    ['E-maile',c.email,'ti-mail'],
+    ['Konta',c.bank,'ti-credit-card'],
+    ['Firmy',c.company,'ti-building']
+  ].map(function(d){
+    return '<div class="stat"><div class="stat-n">'+d[1]+'</div>'
+      +'<div class="stat-l"><i class="ti '+d[2]+'" style="font-size:12px;vertical-align:-1px;margin-right:3px" aria-hidden="true"></i>'+d[0]+'</div></div>';
+  }).join('');
+}
+
+/* ── budowanie znacznika dla routera ── */
+function buildAnonHeader(c,fileNames){
+  var fn=fileNames&&fileNames.length?fileNames.join(', '):'(wklejony tekst)';
+  var total=totalCount(c);
+  var parts=[];
+  if(c.names)parts.push(c.names+' nazw osobowych → inicjały');
+  if(c.addr)parts.push(c.addr+' adresów');
+  if(c.pesel)parts.push(c.pesel+' identyfikatorów (PESEL/NIP/REGON)');
+  if(c.phone)parts.push(c.phone+' telefonów');
+  if(c.email)parts.push(c.email+' e-maili');
+  if(c.bank)parts.push(c.bank+' numerów kont');
+  if(c.date)parts.push(c.date+' dat urodzenia');
+  if(c.company)parts.push(c.company+' nazw firm');
+  return '##ANON_START##\n'
+    +'Źródło: '+fn+'\n'
+    +'Anonimizacja: TAK | Usuniętych danych: '+total+(parts.length?' ('+parts.join('; ')+')\n':'\n')
+    +'##ANON_END##\n\n';
+}
+
+function buildRawHeader(fileNames){
+  var fn=fileNames&&fileNames.length?fileNames.join(', '):'(wklejony tekst)';
+  return '##PLIK_ORYGINALNY##\n'
+    +'Źródło: '+fn+'\n'
+    +'Anonimizacja: NIE — użytkownik wyraził zgodę na przetwarzanie danych oryginalnych w tej sesji.\n'
+    +'##PLIK_ORYGINALNY_END##\n\n';
+}
+
+/* ── główne akcje ── */
+
+// Klik "Anonimizuj i wyślij" — jeśli sesja=anon, wyślij od razu; jeśli nie, najpierw podgląd
+function runAnonymizeAndSend(){
+  origText=document.getElementById('paste-area').value.trim();
+  if(!origText){alert('Brak tekstu. Wgraj plik lub wklej tekst.');return;}
+  var result=anonymize(origText);
+  anonText=result.text;
+  var c=result.counts;
+  // pokaż podgląd
+  document.getElementById('stats-grid').innerHTML=buildStats(c);
+  document.getElementById('result-area').value=anonText;
+  buildDiff(origText,anonText);
+  document.getElementById('results').style.display='block';
+  document.getElementById('detect-banner').style.display='none';
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+  // jeśli sesja już ma decyzję anon — od razu wyślij
+  if(SESSION.decision==='anon'){doSendAnon();}
+}
+
+// Faktyczne wysłanie zanonimizowanego tekstu do czatu
+function doSendAnon(){
+  var origText2=document.getElementById('paste-area').value.trim();
+  if(!anonText&&origText2){var r=anonymize(origText2);anonText=r.text;}
+  if(!anonText){alert('Najpierw wklej lub wgraj tekst.');return;}
+  var fileNames=files.map(function(f){return f.name;});
+  var result2=anonymize(document.getElementById('paste-area').value.trim());
+  var header=buildAnonHeader(result2.counts,fileNames);
+  var msg=header+'Oto zanonimizowany dokument do analizy prawnej:\n\n'+anonText;
+  SESSION.decision='anon';SESSION.decidedAt=new Date().toISOString();saveSession();renderSessionBar();
+  doSend(msg,'Zanonimizowany tekst wysłany do czatu — Claude przystąpi do analizy.');
+}
+
+// Wyślij oryginalny tekst (bez anonimizacji) — z potwierdzeniem sesyjnym
+function sendRaw(){
+  origText=document.getElementById('paste-area').value.trim();
+  if(!origText){alert('Brak tekstu. Wgraj plik lub wklej tekst.');return;}
+  if(SESSION.decision==='raw'){
+    // sesja już pozwala — wyślij od razu
+    _doSendRaw();return;
+  }
+  // poproś o potwierdzenie
+  var ok=confirm(
+    'Wysyłasz dokument BEZ anonimizacji.\n\n'
+    +'Dane osobowe (imiona, adresy, PESEL itp.) będą widoczne w czacie.\n\n'
+    +'Czy wyrażasz zgodę na przetwarzanie danych oryginalnych w tej sesji?\n\n'
+    +'(Decyzja zostanie zapamiętana do końca tej sesji — nie będziesz pytany ponownie.)'
+  );
+  if(ok){
+    SESSION.decision='raw';SESSION.decidedAt=new Date().toISOString();saveSession();renderSessionBar();
+    _doSendRaw();
+  }
+}
+
+function _doSendRaw(){
+  var fileNames=files.map(function(f){return f.name;});
+  var header=buildRawHeader(fileNames);
+  var msg=header+'Oto dokument oryginalny (bez anonimizacji) do analizy prawnej:\n\n'+origText;
+  doSend(msg,'Dokument oryginalny wysłany do czatu — Claude przystąpi do analizy.');
+}
+
+function doSend(msg,confirmMsg){
+  if(typeof sendPrompt==='function'){
+    sendPrompt(msg);
+    showConfirm(confirmMsg);
+  } else {
+    // fallback: kopiuj do schowka
+    navigator.clipboard.writeText(msg).then(function(){
+      showConfirm('Skopiowano do schowka — wklej (Ctrl+V) w oknie czatu.');
+    }).catch(function(){
+      var ta=document.createElement('textarea');
+      ta.value=msg;document.body.appendChild(ta);ta.select();document.execCommand('copy');
+      document.body.removeChild(ta);
+      showConfirm('Skopiowano do schowka — wklej (Ctrl+V) w oknie czatu.');
+    });
+  }
+}
+
+function showConfirm(msg){
+  var el=document.getElementById('send-confirm');
+  document.getElementById('send-confirm-msg').textContent=msg;
+  el.style.display='flex';
+  setTimeout(function(){el.style.display='none';},4000);
+}
+
+function buildDiff(orig,anon){
+  var o=orig.split('\n'),a=anon.split('\n'),html='';
+  for(var i=0;i<Math.max(o.length,a.length);i++){
+    var oi=o[i]||'',ai=a[i]||'';
+    if(oi===ai){html+=esc(oi)+'\n';}
+    else{html+='<span class="del">'+esc(oi)+'</span>\n<span class="ins">'+esc(ai)+'</span>\n';}
+  }
+  document.getElementById('diff-view').innerHTML=html;
+}
+
+function switchTab(tab,el){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  el.classList.add('active');
+  document.getElementById('tab-clean').style.display=tab==='clean'?'':'none';
+  document.getElementById('tab-diff').style.display=tab==='diff'?'':'none';
+}
+
+function copyResult(){
+  var txt=document.getElementById('result-area').value;
+  navigator.clipboard.writeText(txt).then(function(){
+    var btn=event.target.closest('button'),orig=btn.innerHTML;
+    btn.innerHTML='<i class="ti ti-check" aria-hidden="true"></i> Skopiowano';
+    setTimeout(function(){btn.innerHTML=orig;},1500);
+  }).catch(function(){document.getElementById('result-area').select();document.execCommand('copy');});
+}
+
+function downloadResult(){
+  var blob=new Blob([document.getElementById('result-area').value],{type:'text/plain;charset=utf-8'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='dokument_anonimowy.txt';a.click();URL.revokeObjectURL(a.href);
+}
+
+function clearAll(){
+  files=[];origText='';anonText='';
+  document.getElementById('paste-area').value='';
+  document.getElementById('file-list').innerHTML='';
+  document.getElementById('file-count').textContent='';
+  document.getElementById('char-count').textContent='0 znaków';
+  document.getElementById('results').style.display='none';
+  document.getElementById('detect-banner').style.display='none';
+  document.getElementById('send-confirm').style.display='none';
+}
+</script>

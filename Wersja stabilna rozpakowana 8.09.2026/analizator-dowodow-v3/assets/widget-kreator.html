@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analizator Dowodów v3</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;color:#e2e8f0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.container{background:#1a1d27;border:1px solid #2d3148;border-radius:16px;padding:32px;max-width:720px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.badge{display:inline-block;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:12px}
+h1{font-size:22px;font-weight:700;color:#f1f5f9;margin-bottom:6px;text-align:center}
+.subtitle{font-size:13px;color:#64748b;text-align:center;margin-bottom:24px}
+.step{display:none}.step.active{display:block}
+.step-header{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.step-num{background:#6366f1;color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.step-title{font-size:15px;font-weight:600;color:#cbd5e1}
+.progress{display:flex;gap:6px;margin-bottom:24px}
+.progress-dot{height:3px;flex:1;border-radius:2px;background:#2d3148;transition:background .3s}
+.progress-dot.done{background:#6366f1}.progress-dot.active{background:#8b5cf6}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.grid-3{grid-template-columns:1fr 1fr 1fr}
+.btn-card{background:#252837;border:1.5px solid #2d3148;border-radius:10px;padding:14px 12px;cursor:pointer;text-align:center;transition:all .18s;font-size:13px;color:#94a3b8;font-weight:500;line-height:1.4}
+.btn-card:hover{border-color:#6366f1;background:#2a2d42;color:#e2e8f0;transform:translateY(-1px)}
+.btn-card.selected{border-color:#6366f1;background:linear-gradient(135deg,#1e1f3a,#252845);color:#a5b4fc}
+.btn-card .icon{font-size:22px;margin-bottom:6px}
+.btn-card .label{font-weight:600;color:#e2e8f0;font-size:13px}
+.btn-card .desc{font-size:11px;color:#64748b;margin-top:3px}
+.nav{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+.btn-back{background:transparent;border:1px solid #374151;color:#64748b;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;transition:all .15s}
+.btn-back:hover{border-color:#6366f1;color:#a5b4fc}
+.btn-next{background:linear-gradient(135deg,#6366f1,#8b5cf6);border:none;color:#fff;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;transition:all .15s}
+.btn-next:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(99,102,241,.4)}
+.summary{background:#0f1117;border:1px solid #2d3148;border-radius:10px;padding:18px;margin-bottom:20px}
+.summary-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #1e2030;font-size:13px}
+.summary-row:last-child{border-bottom:none}
+.summary-label{color:#64748b}.summary-val{color:#a5b4fc;font-weight:600}
+.btn-submit{width:100%;background:linear-gradient(135deg,#6366f1,#8b5cf6);border:none;color:#fff;padding:14px;border-radius:10px;cursor:pointer;font-size:15px;font-weight:700;transition:all .15s;margin-top:4px}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(99,102,241,.45)}
+.alert-info{background:#1e2030;border:1px solid #4c1d47;border-radius:8px;padding:12px 16px;font-size:12px;color:#e879f9;margin-bottom:16px}
+.input-row{margin-bottom:16px}
+.input-row label{display:block;font-size:12px;color:#64748b;margin-bottom:6px}
+.input-row textarea{width:100%;background:#0f1117;border:1px solid #2d3148;border-radius:8px;color:#e2e8f0;font-size:13px;padding:10px 12px;resize:vertical;min-height:80px;font-family:inherit}
+.input-row textarea:focus{outline:none;border-color:#6366f1}
+.header{text-align:center;margin-bottom:4px}
+.autofill-bar{display:flex;align-items:center;gap:10px;background:#1e1f3a;border:1px solid rgba(99,102,241,.3);border-radius:10px;padding:12px 16px;margin-bottom:20px}
+.autofill-bar .af-info{flex:1;font-size:12px;color:#64748b}
+.btn-autofill{background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(139,92,246,.15));border:1px solid rgba(99,102,241,.4);color:#a5b4fc;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:all .15s;white-space:nowrap}
+.btn-autofill:hover{background:linear-gradient(135deg,rgba(99,102,241,.25),rgba(139,92,246,.25));border-color:rgba(99,102,241,.7)}
+.btn-autofill:disabled{opacity:.5;cursor:not-allowed}
+.af-msg{font-size:11px;margin-top:8px;padding:6px 10px;border-radius:6px;display:none}
+.af-msg.ok{background:rgba(99,241,157,.08);border:1px solid rgba(99,241,157,.2);color:#4ade80}
+.af-msg.err{background:rgba(241,99,99,.08);border:1px solid rgba(241,99,99,.2);color:#f87171}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.2);border-top-color:#a5b4fc;border-radius:50%;animation:spin .7s linear infinite}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header"><div class="badge">v3 · modułowy</div></div>
+  <h1>Analizator Dowodów Procesowych</h1>
+  <p class="subtitle">Hierarchia A–D · Scoring 0–10 · Walidacja FORMAL/LEGAL/SPOJ · Terminy</p>
+
+  <div class="progress">
+    <div class="progress-dot active" id="pd1"></div>
+    <div class="progress-dot" id="pd2"></div>
+    <div class="progress-dot" id="pd3"></div>
+    <div class="progress-dot" id="pd4"></div>
+  </div>
+
+  <div class="step active" id="step1">
+    <div class="step-header"><div class="step-num">1</div><div class="step-title">Rodzaj postępowania</div></div>
+    <div class="grid grid-3">
+      <div class="btn-card" onclick="sel(this,'tryb','Cywilne (KPC)')"><div class="icon">⚖️</div><div class="label">Cywilne</div><div class="desc">KPC · pozwy · odszkodowania</div></div>
+      <div class="btn-card" onclick="sel(this,'tryb','Pracownicze (KP)')"><div class="icon">👷</div><div class="label">Pracownicze</div><div class="desc">KP · zwolnienie · mobbing</div></div>
+      <div class="btn-card" onclick="sel(this,'tryb','Karne (KPK)')"><div class="icon">🔒</div><div class="label">Karne</div><div class="desc">KPK · oskarżenie · obrona</div></div>
+      <div class="btn-card" onclick="sel(this,'tryb','Wykroczeniowe (KPW)')"><div class="icon">🚦</div><div class="label">Wykroczenie</div><div class="desc">KPW · mandat · sprzeciw</div></div>
+      <div class="btn-card" onclick="sel(this,'tryb','Administracyjne (KPA)')"><div class="icon">🏛️</div><div class="label">Admin./ZUS</div><div class="desc">KPA · PPSA · decyzje</div></div>
+      <div class="btn-card" onclick="sel(this,'tryb','Inne / Mieszane')"><div class="icon">📋</div><div class="label">Inne</div><div class="desc">rodzinne · spadkowe</div></div>
+    </div>
+    <div class="nav"><button class="btn-next" onclick="go(2)">Dalej →</button></div>
+  </div>
+
+  <div class="step" id="step2">
+    <div class="step-header"><div class="step-num">2</div><div class="step-title">Co chcesz zbadać?</div></div>
+    <div class="alert-info">Możesz wybrać kilka — wczytam tylko potrzebne moduły</div>
+    <div class="grid">
+      <div class="btn-card" onclick="tog(this,'mod','M1+M2 — Ocena siły dowodów')"><div class="icon">📊</div><div class="label">Siła i scoring</div><div class="desc">hierarchia A–D · scoring 0–10</div></div>
+      <div class="btn-card" onclick="tog(this,'mod','M3a — Walidacja formalna')"><div class="icon">📝</div><div class="label">Wady formalne</div><div class="desc">kopia, brak pieczęci, metadane</div></div>
+      <div class="btn-card" onclick="tog(this,'mod','M3b — Legalność (nagrania, RODO)')"><div class="icon">🎙️</div><div class="label">Legalność dowodu</div><div class="desc">nagrania · art. 267 KK · RODO</div></div>
+      <div class="btn-card" onclick="tog(this,'mod','M3c — Spójność wewnętrzna')"><div class="icon">🔍</div><div class="label">Spójność</div><div class="desc">sprzeczności · luki chronologiczne</div></div>
+      <div class="btn-card" onclick="tog(this,'mod','M4 — Pokrycie przesłanek')"><div class="icon">✅</div><div class="label">Pokrycie przesłanek</div><div class="desc">luki w materiale · co brakuje</div></div>
+      <div class="btn-card" onclick="tog(this,'mod','M5 — Terminy procesowe')"><div class="icon">⏱️</div><div class="label">Terminy</div><div class="desc">zawite · KPC/KPK/KP/KPA</div></div>
+      <div class="btn-card" onclick="tog(this,'mod','M6 — Raport + pozycja procesowa')"><div class="icon">📄</div><div class="label">Raport końcowy</div><div class="desc">predykcja · rekomendacje</div></div>
+      <div class="btn-card" onclick="tog(this,'mod','DASHBOARD — Dashboard graficzny')"><div class="icon">📈</div><div class="label">Dashboard graficzny</div><div class="desc">wykresy · radar · alerty</div></div>
+    </div>
+    <div class="nav">
+      <button class="btn-back" onclick="go(1)">← Wstecz</button>
+      <button class="btn-next" onclick="go(3)">Dalej →</button>
+    </div>
+  </div>
+
+  <div class="step" id="step3">
+    <div class="step-header"><div class="step-num">3</div><div class="step-title">Opisz dowody i okoliczności</div></div>
+
+    <div class="autofill-bar">
+      <div class="af-info">Masz już opisaną sprawę w rozmowie? Wypełnij pola automatycznie.</div>
+      <button class="btn-autofill" id="btn-af" onclick="autoFill()">✨ Auto-fill z czatu</button>
+    </div>
+    <div class="af-msg" id="af-msg"></div>
+    <div class="input-row">
+      <label>Jakie dowody posiadasz? (nazwy, typy, daty)</label>
+      <textarea id="t-dowody" placeholder="np. umowa o pracę (oryginał), nagranie rozmowy z 12.03.2024, e-maile z pracodawcą styczeń–marzec 2024, zeznania świadka J. Kowalski..."></textarea>
+    </div>
+    <div class="input-row">
+      <label>Krótki opis sprawy i czego chcesz dowieść</label>
+      <textarea id="t-sprawa" placeholder="np. Odwołanie od wypowiedzenia — chcę udowodnić że było pozorne i naruszało art. 45 KP..."></textarea>
+    </div>
+    <div class="input-row">
+      <label>Data doręczenia / ogłoszenia (jeśli istotna)</label>
+      <textarea id="t-data" style="min-height:44px" placeholder="np. wyrok ogłoszono 05.05.2026 — potrzebuję terminu na uzasadnienie i apelację"></textarea>
+    </div>
+    <div class="nav">
+      <button class="btn-back" onclick="go(2)">← Wstecz</button>
+      <button class="btn-next" onclick="go(4)">Dalej →</button>
+    </div>
+  </div>
+
+  <div class="step" id="step4">
+    <div class="step-header"><div class="step-num">4</div><div class="step-title">Potwierdź i uruchom analizę</div></div>
+    <div class="summary">
+      <div class="summary-row"><span class="summary-label">Postępowanie</span><span class="summary-val" id="s-tryb">—</span></div>
+      <div class="summary-row"><span class="summary-label">Moduły</span><span class="summary-val" id="s-mody">—</span></div>
+      <div class="summary-row"><span class="summary-label">Dowody</span><span class="summary-val" id="s-dow">—</span></div>
+      <div class="summary-row"><span class="summary-label">Sprawa</span><span class="summary-val" id="s-spr">—</span></div>
+      <div class="summary-row"><span class="summary-label">Data / termin</span><span class="summary-val" id="s-dat">—</span></div>
+    </div>
+    <button class="btn-submit" onclick="submit()">🔍 Uruchom analizę dowodów</button>
+    <div class="nav"><button class="btn-back" onclick="go(3)">← Wstecz</button></div>
+  </div>
+</div>
+<script>
+const state={tryb:'',mod:[],dowody:'',sprawa:'',data:''};
+function sel(el,key,val){document.querySelectorAll(`[onclick*="${key}"]`).forEach(e=>e.classList.remove('selected'));el.classList.add('selected');state[key]=val;}
+function tog(el,key,val){el.classList.toggle('selected');if(!state[key])state[key]=[];const i=state[key].indexOf(val);if(i>-1)state[key].splice(i,1);else state[key].push(val);}
+
+async function autoFill(){
+  const btn=document.getElementById('btn-af');
+  const msg=document.getElementById('af-msg');
+  btn.disabled=true;
+  btn.innerHTML='<span class="spin"></span> Analizuję rozmowę…';
+  msg.style.display='none';
+
+  // Zbierz tekst rozmowy z DOM
+  const selGroups=[
+    ['[data-testid^="human-turn-"]','[data-testid^="ai-turn-"]'],
+    ['[data-testid="human-turn"]','[data-testid="ai-turn"]'],
+    ['[class*="HumanTurn"]','[class*="AssistantTurn"]'],
+    ['[class*="human-turn"]','[class*="ai-turn"]'],
+    ['[class*="ConversationItem"]'],['article'],['[class*="message-content"]'],
+  ];
+  let msgs=[]; const seen=new Set();
+  for(const grp of selGroups){
+    for(const sel2 of grp){
+      document.querySelectorAll(sel2).forEach(m=>{
+        const t=(m.innerText||'').trim();const key=t.slice(0,80);
+        if(t.length>40&&!seen.has(key)){seen.add(key);msgs.push(t.slice(0,2000));}
+      });
+    }
+    if(msgs.length>=3)break;
+  }
+  if(msgs.length<2){const main=document.querySelector('main')||document.querySelector('[role="main"]')||document.body;msgs=[(main.innerText||'').slice(0,8000)];}
+  const conv=msgs.join('\n\n---\n\n');
+
+  if(!conv.trim()){
+    showMsg('err','Brak treści rozmowy do analizy — wypełnij pola ręcznie.');
+    resetBtn(); return;
+  }
+
+  const PROMPT=`Na podstawie poniższej rozmowy prawnej wyciągnij dane do analizy dowodów.\nZwróć WYŁĄCZNIE JSON bez backticks i markdown. Jeśli danych brak → null lub pusty string.\n\n{"dowody":"lista dowodów z nazwy, typu i dat — każdy dowód w nowej linii lub null","sprawa":"1-3 zdania opisu sprawy i co chce udowodnić lub null","data":"data doręczenia wyroku lub pisma jeśli wspomniana lub null"}\n\nROZMOWA:\n${conv.slice(0,7000)}`;
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',max_tokens:600,
+        system:'Odpowiadasz WYŁĄCZNIE poprawnym JSON bez żadnego tekstu przed ani po.',
+        messages:[{role:'user',content:PROMPT}]
+      })
+    });
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const data=await res.json();
+    const raw=(data.content||[]).map(b=>b.text||'').join('').trim();
+    let d;
+    try{d=JSON.parse(raw);}catch(_){
+      try{d=JSON.parse(raw.replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'').trim());}catch(_2){
+        const m=raw.match(/\{[\s\S]*\}/);if(m)d=JSON.parse(m[0]);else throw new Error('Nieprawidłowy JSON');
+      }
+    }
+    let filled=0;
+    if(d.dowody){document.getElementById('t-dowody').value=d.dowody;filled++;}
+    if(d.sprawa){document.getElementById('t-sprawa').value=d.sprawa;filled++;}
+    if(d.data){document.getElementById('t-data').value=d.data;filled++;}
+    if(filled>0)showMsg('ok',`✓ Wypełniono ${filled} ${filled===1?'pole':'pola'} automatycznie — sprawdź i uzupełnij jeśli potrzeba.`);
+    else showMsg('err','Nie znaleziono danych dowodów w rozmowie — wypełnij ręcznie.');
+  }catch(err){
+    showMsg('err','Błąd auto-fill: '+err.message+' — wypełnij pola ręcznie.');
+  }
+  resetBtn();
+}
+
+function showMsg(type,text){const msg=document.getElementById('af-msg');msg.className='af-msg '+type;msg.textContent=text;msg.style.display='block';setTimeout(()=>{msg.style.display='none';},5000);}
+function resetBtn(){const btn=document.getElementById('btn-af');btn.disabled=false;btn.innerHTML='✨ Auto-fill z czatu';}
+function go(n){
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('step'+n).classList.add('active');
+  ['pd1','pd2','pd3','pd4'].forEach((id,i)=>{const d=document.getElementById(id);d.className='progress-dot'+(i+1<n?' done':i+1===n?' active':'');});
+  if(n===4){
+    state.dowody=document.getElementById('t-dowody').value;
+    state.sprawa=document.getElementById('t-sprawa').value;
+    state.data=document.getElementById('t-data').value;
+    document.getElementById('s-tryb').textContent=state.tryb||'—';
+    document.getElementById('s-mody').textContent=state.mod&&state.mod.length?state.mod.map(m=>m.split('—')[0].trim()).join(', '):'domyślne (M1+M2+M6)';
+    document.getElementById('s-dow').textContent=state.dowody?state.dowody.substring(0,60)+'…':'—';
+    document.getElementById('s-spr').textContent=state.sprawa?state.sprawa.substring(0,60)+'…':'—';
+    document.getElementById('s-dat').textContent=state.data||'nie podano';
+  }
+}
+function submit(){
+  const mody=state.mod&&state.mod.length?state.mod.join(', '):'M1+M2+M6 (domyślne)';
+  const msg='Analizuj mój materiał dowodowy.\nPostępowanie: '+(state.tryb||'nie określono')+'\nModuły: '+mody+'\nDowody: '+(state.dowody||'—')+'\nSprawa: '+(state.sprawa||'—')+'\nData/termin: '+(state.data||'nie podano');
+  if(typeof sendPrompt==='function')sendPrompt(msg);
+  else alert('Skopiuj i wyślij:\n\n'+msg);
+}
+</script>
+</body>
+</html>
