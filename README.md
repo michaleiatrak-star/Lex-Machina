@@ -5,9 +5,10 @@
 **Modułowy system skilli prawniczych AI dla prawa polskiego — z twardymi bramkami antyhalucynacyjnymi**
 
 [![Licencja: GPL v3](https://img.shields.io/badge/Licencja-GPL%20v3-blue.svg)](LICENSE)
-[![Wersja stabilna](https://img.shields.io/badge/stabilna-21.08.2026-2A6F50.svg)](#-wersjonowanie)
+[![Wersja stabilna](https://img.shields.io/badge/stabilna-8.09.2026-2A6F50.svg)](#-wersjonowanie)
+[![Wieloplatformowość](https://img.shields.io/badge/wieloplatformowo%C5%9B%C4%87-stabilna%20%2B%20rozwojowa-2A6F50.svg)](#-kompatybilno%C5%9B%C4%87-llm)
 [![Wersja rozwojowa](https://img.shields.io/badge/rozwojowa-aktywna-orange.svg)](#-wersjonowanie)
-[![Skille](https://img.shields.io/badge/skille-33-8A2BE2.svg)](#-katalog-skilli)
+[![Skille](https://img.shields.io/badge/skille-32-8A2BE2.svg)](#-katalog-skilli)
 [![Platforma](https://img.shields.io/badge/platforma-Claude%20%C2%B7%20ChatGPT%20%C2%B7%20Codex%20%C2%B7%20Grok-D97757.svg)](#-kompatybilno%C5%9B%C4%87-llm)
 [![Język](https://img.shields.io/badge/j%C4%99zyk-polski-white.svg?labelColor=DC143C)](#)
 
@@ -31,7 +32,7 @@ każdego przepisu i każdej sygnatury.*
 
 ## 🎯 Czym jest Lex Machina
 
-Lex Machina to zestaw **33 skilli** (Claude AI Skills) tworzących kompletny warsztat pracy
+Lex Machina to zestaw **32 skilli** (host-neutralnych Agent Skills) tworzących kompletny warsztat pracy
 z polskim prawem:
 
 | | |
@@ -41,7 +42,7 @@ z polskim prawem:
 | 🛠️ **Narzędzia wykonawcze** | pisma procesowe, analiza umów i dowodów, przesłuchania świadków, chronologia, raporty |
 | 🛡️ **Antyhalucynacja** | HARD GATE: zakaz cytowania prawa z pamięci, deterministyczne API, gradient weryfikacji cytatu |
 | 📋 **Governance** | dziennik audytów, mapa Dz.U., paczka audytowa AI Act art. 12, polityka deduplikacji |
-| 🔌 **Wieloplatformowość** | host-neutralny adapter runtime: Claude, hosty zgodne z OpenAI (ChatGPT / Codex / API / Atlas) **oraz** Grok (pobiera skille wprost z repozytorium) — te same bramki, bez przepisywania metodologii |
+| 🔌 **Wieloplatformowość** | pełna host-neutralność: Claude, hosty zgodne z OpenAI (ChatGPT / Codex / API / Atlas) **oraz** Grok (pobiera skille wprost z repozytorium) — te same bramki, bez przepisywania metodologii. Zestaw przetestowany na **Claude i ChatGPT**; **od 8.09.2026 warstwa ta jest częścią wersji stabilnej**, nie tylko rozwojowej |
 
 > **Zasada naczelna:** *brak numeru artykułu jest lepszy niż błędny numer artykułu;
 > brak sygnatury jest lepszy niż sygnatura nieweryfikowana lub fałszywa.*
@@ -101,25 +102,30 @@ powołanie przepisu/orzeczenia przechodzi przez bramki `shared/` → wynik z wid
 
 ## 🔌 Kompatybilność LLM
 
-Wersja rozwojowa jest **host-neutralna**: ten sam zestaw skilli działa na Claude,
-na hostach zgodnych z OpenAI (**ChatGPT, Codex, API, Atlas**) oraz na **Grok**, bez
-przepisywania metodologii, HARD GATE ani bramek jakości. Skille to zwykły Markdown
+**Obie wersje — stabilna (8.09.2026) i rozwojowa — są w pełni wieloplatformowe.**
+Ten sam zestaw skilli działa na Claude, na hostach zgodnych z OpenAI (**ChatGPT,
+Codex, API, Atlas**) oraz na **Grok**, bez przepisywania metodologii, HARD GATE ani
+bramek jakości. Działanie na **Claude i ChatGPT zostało potwierdzone testami całego
+zestawu**. Wieloplatformowość nie jest już cechą wyłącznie kanału rozwojowego:
+warstwa portowalności została promowana do wersji stabilnej i w obu katalogach jest
+identyczna co do bajtu. Skille to zwykły Markdown
 czytany pod wspólnym adapterem, więc nazwy operacji odziedziczone z jednego runtime
 są traktowane jako semantyka, nie jako wymóg konkretnego API danego dostawcy.
 
 > **Grok — automatyczne pobranie z repozytorium.** Grokowi wystarczy **wskazać
 > repozytorium** (URL GitHub) i **którą wersję** ma wziąć — rozwojową
 > (`Wersja rozwojowa rozpakowana/`) albo stabilną
-> (`Wersja stabilna rozpakowana 21.08.2026/`). Grok pobiera i instaluje skille
+> (`Wersja stabilna rozpakowana 8.09.2026/`) — obie niosą warstwę
+> host-neutralną. Grok pobiera i instaluje skille
 > samodzielnie, bez ręcznego wgrywania folderów. Reguły sterujące (odpowiednik
 > User Preferences) wskazujesz w jego instrukcjach/personalizacji tak samo jak na
 > pozostałych hostach — patrz [Instalacja](#-instalacja).
 
-**Warstwa portowalności** (nowość wersji rozwojowej — w wersji stabilnej jej nie ma):
+**Warstwa portowalności** — obecna w **obu** kanałach (stabilnym i rozwojowym):
 
 | Element | Lokalizacja | Rola |
 |---|---|---|
-| Adapter runtime | [`shared/UNIVERSAL-RUNTIME-ADAPTER.md`](Wersja%20rozwojowa%20rozpakowana/shared/UNIVERSAL-RUNTIME-ADAPTER.md) | Jeden kontrakt wykonawczy: mapuje operacje zależne od hosta (`view`, `web_search`, `web_fetch`, `create_file`, `show_widget`) na natywne funkcje hosta lub ich odpowiedniki. |
+| Adapter runtime | [`shared/UNIVERSAL-RUNTIME-ADAPTER.md`](Wersja%20stabilna%20rozpakowana%208.09.2026/shared/UNIVERSAL-RUNTIME-ADAPTER.md) | Jeden kontrakt wykonawczy: mapuje operacje zależne od hosta (`view`, `web_search`, `web_fetch`, `create_file`, `show_widget`) na natywne funkcje hosta lub ich odpowiedniki. |
 | Manifest OpenAI | `<skill>/agents/openai.yaml` | Rejestracja skilla w ekosystemie OpenAI (`products: chatgpt, codex, api, atlas`) + `allow_implicit_invocation`. |
 | Manifest integralności | `<skill>/PORTABILITY-MANIFEST.md` | Lista plików + SHA-256 — dowód, że przeniesienie między hostami jest bezstratne. |
 | Pole `compatibility:` | frontmatter `SKILL.md` | Deklaruje wymagane operacje hosta (lub równoważne wg adaptera). |
@@ -138,11 +144,20 @@ są traktowane jako semantyka, nie jako wymóg konkretnego API danego dostawcy.
   a nie konkretny katalog systemowy; historyczne ścieżki `/mnt/...` są normalizowane do
   `skill/path`.
 
-> **Zakres rolloutu (uczciwie):** warstwę niosą biblioteka `shared/` i skille
-> instalowane przez router. Pojedyncze skille analityczne mogą jeszcze nie mieć
-> własnego `agents/openai.yaml` — działają wtedy wywołane przez router, ale nie
-> pojawiają się samodzielnie w katalogu skilli danego hosta OpenAI. Stan wdrożenia
-> jest odnotowany w dzienniku audytów.
+> **Wieloplatformowość jest pełna — i potwierdzona w praktyce.** Skille to zwykły
+> Markdown w standardzie Agent Skills; nie zawierają kodu ani wywołań API związanych
+> z konkretnym dostawcą, więc działają na każdym hoście, który potrafi wczytać skill
+> i wykonać operacje opisane w adapterze. Cały zestaw został **przetestowany z
+> powodzeniem na Claude i na ChatGPT** — te same bramki, ta sama metodologia, ten sam
+> wynik merytoryczny, bez żadnej wersji „portowanej" ani osobnej gałęzi kodu. Grok
+> instaluje ten sam zestaw, pobierając go wprost z repozytorium (Krok 6).
+>
+> Jedyna różnica między hostami jest rejestracyjna, nie funkcjonalna: 31 z 32
+> katalogów niesie `agents/openai.yaml`, dzięki czemu pojawia się samodzielnie
+> w katalogu skilli hosta OpenAI; `analizator-dowodow-v3` tego manifestu nie ma,
+> więc uruchamia się przez router zamiast z listy. Analogicznie brak pola
+> `compatibility:` w modułach `dr-01` … `dr-16` niczego nie blokuje — wymagane
+> operacje hosta rozstrzyga wtedy adapter runtime.
 
 ---
 
@@ -154,9 +169,11 @@ Lex-Machina/
 ├── LICENSE                                  ← GNU GPL v3
 ├── DOKUMENTACJA-WDROZENIOWA-2026-07-13.md   ← dokumentacja wdrożeniowa systemu
 ├── claude_desktop_config.json               ← przykładowa konfiguracja konektorów MCP
-├── WERSJA STABILNA 21.08.2026/              ← skille spakowane (.zip) — wersja stabilna
+├── benchmark/                               ← wyniki testów na bankach kazusów (per data)
+├── WERSJA STABILNA 8.09.2026/               ← skille spakowane (.zip) — wersja stabilna
 ├── WERSJA ROZWOJOWA/                        ← skille spakowane (.zip) — wersja rozwojowa
-├── Wersja stabilna rozpakowana 21.08.2026/  ← źródła skilli — wersja stabilna (Claude AI)
+├── Wersja stabilna rozpakowana 8.09.2026/   ← źródła skilli — wersja stabilna
+│                                              (host-neutralna: Claude / OpenAI / Grok)
 └── Wersja rozwojowa rozpakowana/            ← źródła skilli — tu trafiają bieżące zmiany
     ├── shared/                              ← bramki (PRAWO-HARDGATE, SYGNATURY,
     │   │                                      WERYFIKACJA-SLAD), UNIVERSAL-RUNTIME-ADAPTER,
@@ -176,7 +193,7 @@ Lex-Machina/
     ├── orzeczenia-sadowe-v2/                ├─ skille wykonawcze
     ├── pisma-procesowe-v3/                  │
     ├── pisma-proste-v2/                     │
-    ├── przesluchanie-swiadkow-v2-min90/     │  (+ wariant -v35)
+    ├── przesluchanie-swiadkow-v2-min90/     │
     ├── raport-klienta-v1/                   │
     ├── raport-sytuacyjny-v2/                ┘
     ├── *_build/                             ← katalogi robocze buildów — NIE wgrywać
@@ -184,8 +201,10 @@ Lex-Machina/
                                                (AUDIT-JOURNAL, mapy Dz.U.), scripts/, widgets/
 ```
 
-Katalog wersji stabilnej ma tę samą strukturę. Każdy skill to folder z `SKILL.md`
-w korzeniu — do Claude AI wgrywa się cały folder skilla.
+Katalog wersji stabilnej ma tę samą strukturę — łącznie z warstwą host-neutralną
+(`agents/openai.yaml`, `PORTABILITY-MANIFEST.md`, adapter runtime w `shared/`).
+Każdy skill to folder z `SKILL.md` w korzeniu — wgrywa się **cały folder** skilla,
+niezależnie od hosta.
 
 ---
 
@@ -395,10 +414,12 @@ dezaktualizacji, obowiązkowe skrzyżowanie z Rzędem 1/2A przed użyciem.
 
 ## 💾 Instalacja
 
-> **Wymagania:** konto [claude.ai](https://claude.ai) (skille wymagają planu płatnego) · przeglądarka — bez instalacji oprogramowania.
+> **Wymagania:** konto na jednym z obsługiwanych hostów — [claude.ai](https://claude.ai),
+> host zgodny z OpenAI (ChatGPT / Codex / API / Atlas) albo Grok. Skille wymagają planu,
+> w którym host udostępnia wgrywanie skilli · przeglądarka — bez instalacji oprogramowania.
 >
-> **Inne hosty:** wersja rozwojowa jest host-neutralna (wspólny
-> [adapter runtime](#-kompatybilno%C5%9B%C4%87-llm)). Kroki 1–4 opisują ścieżkę
+> **Inne hosty:** host-neutralne są **obie wersje — stabilna (8.09.2026) i rozwojowa**
+> (wspólny [adapter runtime](#-kompatybilno%C5%9B%C4%87-llm)). Kroki 1–4 opisują ścieżkę
 > Claude AI; **Krok 5** — instalację w ChatGPT (hosty zgodne z OpenAI), a **Krok 6** —
 > w Grok, który pobiera skille wprost z repozytorium po wskazaniu wersji. Na każdym
 > hoście te same reguły trafiają do jego instrukcji/personalizacji, a bramki jakości
@@ -484,8 +505,9 @@ uruchomić router, dopytać o charakter sprawy i zaproponować przewodnik.
 <details>
 <summary><b>Krok 5 — Instalacja w ChatGPT (host zgodny z OpenAI)</b></summary>
 
-Wersja rozwojowa jest host-neutralna, więc w ChatGPT wgrywa się **te same foldery
-skilli** i w **tej samej kolejności** co w Claude (patrz Krok 2). Każdy skill niesie
+Host-neutralna jest zarówno wersja stabilna (8.09.2026), jak i rozwojowa, więc
+w ChatGPT wgrywa się **te same foldery skilli** i w **tej samej kolejności** co
+w Claude (patrz Krok 2) — z dowolnego z dwóch katalogów wersji. Każdy skill niesie
 manifest `agents/openai.yaml` (`products: chatgpt, codex, api, atlas`) rozpoznawany
 przez ekosystem OpenAI oraz wspólny [adapter runtime](#-kompatybilno%C5%9B%C4%87-llm),
 który mapuje operacje systemu na natywne funkcje ChatGPT.
@@ -525,10 +547,10 @@ repozytorium**. Wystarczy:
    `https://github.com/michaleiatrak-star/Lex-Machina`.
 2. **Wskaż wersję** — którą gałąź/katalog ma wziąć:
 
-   | Wersja | Katalog w repozytorium |
-   |---|---|
-   | 🟠 rozwojowa (host-neutralna) | `Wersja rozwojowa rozpakowana/` |
-   | 🟢 stabilna (profil Claude) | `Wersja stabilna rozpakowana 21.08.2026/` |
+   | Wersja | Katalog w repozytorium | Host-neutralna |
+   |---|---|---|
+   | 🟢 stabilna (zalecana) | `Wersja stabilna rozpakowana 8.09.2026/` | tak |
+   | 🟠 rozwojowa | `Wersja rozwojowa rozpakowana/` | tak |
 
 3. Grok pobiera i instaluje skille automatycznie (zaczynając od `shared/`, potem
    router i skille DR — kolejność jak w Kroku 2).
@@ -586,8 +608,14 @@ Wskazuj wprost tryb z sekcji „TRYBY WYWOŁANIA" w `audyt-systemu-v4/SKILL.md`:
 
 | Kanał | Lokalizacja | Przeznaczenie |
 |---|---|---|
-| 🟢 **Stabilna** | `WERSJA STABILNA 21.08.2026/` + katalog rozpakowany | do codziennej pracy — profil **Claude AI** |
-| 🟠 **Rozwojowa** | `WERSJA ROZWOJOWA/` + `Wersja rozwojowa rozpakowana/` | nowe mechanizmy przed promocją; dochodzi warstwa **host-neutralna** (Claude + ChatGPT/Codex/API/Atlas + Grok) |
+| 🟢 **Stabilna** | `WERSJA STABILNA 8.09.2026/` + katalog rozpakowany | do codziennej pracy; **wieloplatformowa** — Claude + ChatGPT/Codex/API/Atlas + Grok |
+| 🟠 **Rozwojowa** | `WERSJA ROZWOJOWA/` + `Wersja rozwojowa rozpakowana/` | nowe mechanizmy przed promocją; ta sama warstwa host-neutralna |
+
+> **Zmiana wobec poprzednich wydań:** do 21.08.2026 warstwa host-neutralna była
+> wyłączną cechą kanału rozwojowego, a wersja stabilna niosła profil wyłącznie
+> Claude AI. Wraz z wydaniem **8.09.2026 warstwa została promowana do wersji
+> stabilnej** — oba katalogi mają dziś identyczną zawartość, więc wybór kanału nie
+> wpływa już na to, na jakim hoście system zadziała.
 
 Każda zmiana w systemie jest odnotowana w
 [**dzienniku audytów**](Wersja%20rozwojowa%20rozpakowana/audyt-systemu-v4/references/AUDIT-JOURNAL.md)
