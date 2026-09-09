@@ -1,9 +1,11 @@
 # MOD-WYJATEK-GATE — Bramka wyjątków i przepisów szczególnych (WYJ-GATE)
 
 > **Plik kanoniczny:** `shared/MOD-WYJATEK-GATE.md`
-> **Wersja:** 2.0 | Utworzony: 2026-08-31 jako `MOD-UNIT-SWEEP.md` 1.0 (F-144),
+> **Wersja:** 2.1 | Utworzony: 2026-08-31 jako `MOD-UNIT-SWEEP.md` 1.0 (F-144),
 > przebudowany i przemianowany 2026-08-31d — zakres rozszerzony z jednego
-> zamiatania na cztery
+> zamiatania na cztery; 2.1 (2026-09-09, F-170/F-171) — S3 rozbite na dwie
+> osie (strona chroniona / działalność regulowana), S4 uzupełnione o akt
+> o etapowym stosowaniu
 > **Wywołują:** `prawny-router-v3` (BRAMKA WYJĄTKÓW, przed KROK 4)
 > **Nie jest** bramką weryfikacyjną — nie zastępuje `shared/PRAWO-HARDGATE.md`.
 > Nie rozstrzyga sprawy; produkuje listę jednostek i aktów, których pominięcie
@@ -133,9 +135,22 @@ SZUKANE ZWROTY (lista otwarta, nie wyczerpująca):
 ODCZYTAJ dla aktu głównego, w wersji na datę zdarzenia:
   (a) listę aktów ZMIENIAJĄCYCH i ODSYŁAJĄCYCH (ELI: /references) —
       narzędzie robi to deterministycznie, patrz §6;
-  (b) odpowiedź na jedno pytanie zamknięte: czy na datę zdarzenia obowiązywał
-      akt SEKTOROWY regulujący ten sam stosunek dla tej kategorii strony?
-      (konsument · pacjent · pracownik · rolnik · najemca · inwestor)
+  (b1) OŚ STRONY CHRONIONEJ — czy na datę zdarzenia obowiązywał akt
+      SEKTOROWY regulujący ten sam stosunek dla tej kategorii strony?
+      (konsument · pacjent · pracownik · rolnik · najemca · inwestor ·
+       beneficjent · uprawniony do zachowku · sygnalista — katalog OTWARTY)
+  (b2) OŚ DZIAŁALNOŚCI REGULOWANEJ — czy któraś ze stron występuje w roli,
+      z którą osobny akt wiąże własne obowiązki NIEZALEŻNIE od jej pozycji
+      w stosunku podstawowym?
+      (sponsor · nadawca · dostawca usługi · pośrednik · platforma ·
+       instytucja obowiązana · administrator danych · zamawiający ·
+       producent wyrobu — katalog OTWARTY)
+      ⛔ b2 dodano 2026-09-09 (F-170). Luka źródłowa: akt sektorowy
+      przywiązany do ROLI REGULOWANEJ, a nie do kategorii chronionej strony,
+      pozostawał poza zasięgiem pytania (b) w brzmieniu 2.0 — zamiatanie
+      wykonane literalnie i poprawnie NIE MOGŁO go wskazać, bo katalog
+      obejmował wyłącznie role chronionej strony stosunku prywatnoprawnego.
+      Obie osie zamyka się osobnym wpisem; „brak" jest wynikiem w każdej.
   (c) gdy TAK → który akt jest lex specialis i co z aktu głównego wypiera.
 
 ⛔ Wynik „brak" jest wynikiem i musi być zapisany. Milczenie nie jest
@@ -151,7 +166,18 @@ duplikuj tablic.
 
 Dla każdej nowelizacji ujawnionej w S1–S3, która wchodzi w życie **między
 datą zdarzenia a dniem dzisiejszym**, odczytaj przepisy przejściowe ustawy
-zmieniającej. Cezura bez przepisu przejściowego jest datą, nie regułą
+zmieniającej.
+
+⛔ **S4(b) — AKT O ETAPOWYM STOSOWANIU** (dodano 2026-09-09, F-171). Gdy akt
+główny sam zawiera przepis o dacie rozpoczęcia stosowania (typowo ostatni
+artykuł: „stosuje się od…", z wyliczeniem wyjątków rozdziałami, sekcjami lub
+załącznikami), odczytaj TEN przepis w brzmieniu **AKTUALNYM**, nie
+pierwotnym, i zapisz akt zmieniający harmonogram. Akt przesuwający wyłącznie
+datę stosowania nie zmienia treści normy, więc **nie ujawnia się przy
+odczycie samej normy** — S1–S3 go nie wskażą.
+⛔ Zapis „akt X stosuje się zasadniczo od DATY" bez ustalenia, czy DATA
+pochodzi z brzmienia pierwotnego czy aktualnego, jest wykonaniem FASADOWYM
+tego zamiatania: pole wypełnione, kontrola niewykonana. Cezura bez przepisu przejściowego jest datą, nie regułą
 stosowania. Procedura i tablica cezur: `MOD-OS-CZASU-PRZESLANEK.md` OŚ-5.4
 i §5B — tu wyłącznie odesłanie, bez kopii.
 
@@ -175,7 +201,11 @@ WYJ-GATE: art. 770 k.c. (Dz.U. 1964 nr 16 poz. 93), stan na 20.02.2011
 
 Forma skrócona (zero trafień) — dwie linie:
 `WYJ-GATE: art. 222 k.c., dział V. S1 sąsiedzi 221/223 — brak. S2 krawędzie
-działu — brak wyłączeń. S3 brak aktu sektorowego. S4 nie dotyczy.`
+działu — brak wyłączeń. S3 b1 brak aktu sektorowego, b2 brak roli
+regulowanej. S4 nie dotyczy.`
+
+⛔ Pozycja S3 zamyka się dopiero po zapisaniu OBU osi (b1 i b2). Wpis „S3
+brak" bez rozróżnienia osi liczy się jako zamiatanie niewykonane (F-170).
 
 ⛔ Każda z czterech pozycji musi wystąpić. Pominięcie zamiatania = bramka
 niewykonana, nawet gdy wynik i tak byłby pusty.

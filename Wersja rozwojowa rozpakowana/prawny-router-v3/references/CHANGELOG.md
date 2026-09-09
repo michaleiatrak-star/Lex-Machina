@@ -1,83 +1,72 @@
 # CHANGELOG — prawny-router-v3
 
-- 3.42 (2026-09-09, F-169): **historia przeniesiona do lokalizacji kanonicznej.**
-  Pole `changelog:` we frontmatterze trzymało pełne wpisy 3.30–3.41, a wpisy
-  3.38–3.41 NIE istniały w tym pliku — mimo że standard systemowy
-  (2026-08-20z4) czyni `references/CHANGELOG.md` jedyną lokalizacją kanoniczną
-  historii i zakazuje trzymania pełnej listy wpisów w YAML. Skutek mierzalny:
-  T12 zgłaszał ⛔ LUKA HISTORII (version 3.41 wobec najnowszego wpisu 3.38),
-  a 13 wierszy YAML rozdymało plik ponad budżet lekkiego korpusu z T17.
-  Wpisy 3.38–3.41 przeniesione tutaj w brzmieniu z pola; pole zredukowane do
-  skrótu bieżącej wersji. ⛔ Zero zmian w treści proceduralnej, w routingu
-  [1]–[11], w regułach i w bramkach — zmiana wyłącznie w metadanych i w miejscu
-  przechowywania historii. Sumy w `CHECKSUMS.sha256` przeliczone.
-  Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-09-09.
+- 3.42 (2026-09-09, F-169/F-170/F-171): **trzy łatki po audycie czterech
+  arkuszy odpowiedzi na bank 14 kazusów wieloaspektowych.**
+  Układ pomiaru 2×2 — poziom rozumowania (średni / wysoki) × obecność skilli,
+  ten sam klucz autorski jako rdzeń odniesienia, ta sama pula kazusów.
+  Wynik: bez skilli 84,5 (śr.) i 88,4 (wys.); ze skillami 77,0 (śr.) i 92,0
+  (wys.). Skille nie mają stałego znaku — przy wysokim rozumowaniu +3,6 pkt,
+  przy średnim −7,5 pkt; premia za poziom rozumowania rośnie ze skillami
+  z +3,9 do +15,0. To INTERAKCJA, nie efekt główny.
+  Trzy jednostki obalone, wszystkie w arkuszu skillowanym o średnim
+  rozumowaniu, wszystkie noszące znacznik „✅ [VER]".
 
-- 3.41 (2026-09-05e, F-168): REGUŁY UNIWERSALNE ZAMIAST PRZYKŁADÓW WZORCOWYCH. Test
-  kontrolny 2026-09-05d wykazał, że MOD-CN-GATE.md cytował konkretny kazus
-  testowy jako przykład wzorcowy — model wykonujący bramkę na tym kazusie
-  dostawał gotowe rozwiązanie wpisane w treść narzędzia. PRZEPISANO
-  shared/MOD-CN-GATE.md (1.0→2.0), shared/MOD-REM-GATE.md (1.1→1.2) i
-  shared/MIEDZYNARODOWE-GATES.md (1.0→1.1): wszystkie pary
-  akt+artykuł+rozstrzygnięcie odpowiadające fabule kazusów testowych
-  zastąpiono klasami wzorców strukturalnych (np. „nowelizacja o ograniczonym
-  skutku podmiotowym”, „przepisy-bliźniaki o różnym reżimie”, „definicja czasu
-  teraźniejszego wykluczająca przedmiot, który już nie istnieje”) — bez
-  nazwania, który akt, artykuł i która strona sporu akurat pasuje. Doktryna
-  ogólna (KWPT art. 31–33, struktura testu atrybucji państwa) POZOSTAJE
-  nazwana, bo jest narzędziem pracy, nie odpowiedzią na pytanie egzaminacyjne.
-  Poprawiono też własny changelog routera i indeks shared/SKILL.md, które
-  również cytowały rozwiązania konkretnych kazusów. references/CHANGELOG.md.
+  **F-169 — AF-7, forma znacznika ✅ [VER]** (`shared/PRAWO-HARDGATE.md`).
+  Luka źródłowa: rygor nieważności formy istniał WYŁĄCZNIE dla 🎯 [CEL]
+  w AF-2 („brak któregokolwiek z pięciu pól = znacznik NIEWAŻNY"). Znacznik
+  najsilniejszy — ✅ [VER] — był jedynym bez sankcji za niekompletność, mimo
+  że linia 630 pliku od 2026-08-27 przewidywała formę `✅ [VER: źródło, data]`.
+  Asymetria odwrotna do ryzyka. Zmierzone: 24 wystąpienia gołego „✅ [VER]"
+  w jednym arkuszu; z pięciu sprawdzonych dwa fałszywe (data stosowania
+  obowiązków AI Act podana w brzmieniu sprzed rozporządzenia zmieniającego,
+  mimo że akt zmieniający wszedł w życie przed datą weryfikacji arkusza).
+  Wdrożono rygor trzech pól: kanał odczytu, identyfikator aktu lub orzeczenia,
+  data odczytu W TEJ turze. Brak pola = znacznik nieważny, czytany jak
+  ⚠️ [NIEWERYFIKOWANE]. Reguła jest składniowa i sprawdzalna z zewnątrz bez
+  dostępu do logów.
+  ⚠️ Skutek uboczny wdrożenia: dotychczasowe odpowiedzi z gołym „✅ [VER]"
+  stają się formalnie nieoznaczone. Wzrost liczby ⚠️ w pierwszej sesji po
+  wdrożeniu jest dowodem działania reguły, nie nową flagą.
 
-- 3.40 (2026-09-05b, F-164): REM-0 — „SPRÓBUJ POBRAĆ, ZANIM OZNACZYSZ". Test
-  kontrolny 3.39 wykazał, że REM-3 leczył objaw: regułę zbudowano na tezie, że
-  instrumenty miękkie z natury nie dają się zweryfikować u źródła, a teza była
-  FAŁSZYWA W PRZESŁANCE. Pomiar na 5 powołaniach ⚠️ z jednego z kazusów
-  testowych: trzy instrumenty niewiążące były pobieralne przez cały czas (curl
-  403, ale web_fetch ✅ RZĄD 1); realnie zablokowane tylko dwa źródła z
-  detekcją bota. Część punktów odzyskanych przy naprawie pochodziła z odczytu,
-  nie z mocniejszego argumentowania. ⛔ Trzecie wystąpienie tej samej klasy
-  błędu — orzeczenie o niedostępności bez pomiaru (F-151, F-162, F-164).
-  WDROŻONO: REM-0 jako pierwszy, blokujący krok REM-GATE (shared/MOD-REM-
-  GATE.md 1.1) — próba DWUKANAŁOWA obowiązkowa (curl ORAZ
-  web_search→web_fetch), bo kanały mają różne listy domen; znacznik ⚠️
-  dopuszczalny wyłącznie po udokumentowanej porażce w OBU kanałach, z zapisem
-  kanału i kodu HTTP. REM-3 podporządkowany REM-0. Zmierzona tabela
-  dwukanałowa w shared/HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md §2. Reguła 12c
-  rozszerzona. references/CHANGELOG.md.
+  **F-170 — S3(b2), oś działalności regulowanej**
+  (`shared/MOD-WYJATEK-GATE.md` 2.0→2.1). Luka źródłowa: pytanie zamknięte
+  S3(b) brzmiało „czy obowiązywał akt SEKTOROWY regulujący ten sam stosunek
+  dla tej kategorii strony?", a katalog kategorii obejmował wyłącznie role
+  chronionej strony stosunku prywatnoprawnego (konsument, pacjent, pracownik,
+  rolnik, najemca, inwestor). Akt sektorowy przywiązany do ROLI REGULOWANEJ —
+  sponsora, dostawcy usługi, instytucji obowiązanej, zamawiającego — był poza
+  zasięgiem tego pytania. Zamiatanie wykonane literalnie i poprawnie NIE MOGŁO
+  takiego aktu wskazać. To nie było zaniedbanie wykonawcy, tylko zły zakrój
+  warunku. Wdrożono dwie osie: b1 strona chroniona, b2 działalność regulowana;
+  oba katalogi otwarte, każda oś zamykana osobnym wpisem, „brak" jest wynikiem
+  w każdej z nich. Pozycja S3 w bloku wyjściowym zamyka się dopiero po zapisie
+  obu osi.
 
-- 3.39 (2026-09-05, F-163/F-161/F-162): DWIE NOWE BRAMKI + ODTWORZENIE BRAKUJĄCYCH
-  ZASOBÓW. (1) CN-GATE (shared/MOD-CN-GATE.md) przed OŚ-GATE i WYJ-GATE —
-  wyzwalacz mechaniczny „czy rozstrzygasz cokolwiek”, jedna jednostka
-  redakcyjna per oś sporu, trzy zakresy CN-1 czasowy / CN-2 podmiotowy / CN-3
-  przedmiotowy, wynik „NIE” blokujący, override zakazany w prawie karnym;
-  zamyka F-163 (jednostka z warunkiem wstępnym w nagłówku katalogu, nie w
-  punkcie, odczytana poprawnie przy pominięciu tego warunku). (2) REM-GATE
-  (shared/MOD-REM-GATE.md) przed HYBRID-VALIDATION — REM-1 zakaz sierocego
-  oddalenia, REM-2 zakaz non liquet, REM-3 rozdzielenie znacznika źródła od
-  siły argumentu, REM-4 budżet pokrycia; zamyka F-161 (system optymalizuje pod
-  „nie powołaj złego przepisu” i milczy o „nie zaniż środka”). (3) ODTWORZONO
-  shared/MIEDZYNARODOWE-GATES.md i shared/HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md
-  — zasoby wymagane fail-closed przez UP-5 i DR-14 NIE ISTNIAŁY na dysku
-  (F-162). (4) KOREKTA UP-5: twierdzenie „NIE bash/curl — domeny
-  międzynarodowe poza listą dozwoloną” było FAŁSZYWE; zmierzone HTTP 200 dla
-  eur-lex.europa.eu i legal.un.org, blokada dotyczy
-  unoosa/cites/icsid/uncitral. Klasa błędu identyczna z F-151. (5) Nowe UP-6,
-  Reguły 12b i 12c. references/CHANGELOG.md.
+  **F-171 — S4(b), akt o etapowym stosowaniu** (tamże). Luka źródłowa: S4
+  obejmowało nowelizacje ujawnione w S1–S3, a S1–S3 patrzą na akt główny.
+  Akt, który przesuwa wyłącznie DATĘ STOSOWANIA aktu głównego, nie zmienia
+  treści żadnej normy, więc nie ujawnia się przy odczycie normy i S1–S3 go nie
+  wskażą. Wdrożono obowiązek odczytu przepisu o rozpoczęciu stosowania
+  (typowo ostatni artykuł, „stosuje się od…", z wyjątkami rozdziałami lub
+  załącznikami) w brzmieniu AKTUALNYM, nie pierwotnym, wraz z zapisem aktu
+  zmieniającego harmonogram. Zapis „akt X stosuje się zasadniczo od DATY" bez
+  ustalenia, czy DATA pochodzi z brzmienia pierwotnego czy aktualnego, jest
+  wykonaniem FASADOWYM: pole wypełnione, kontrola niewykonana.
 
-- 3.38 (2026-09-04c, F-158/F-159): NAPRAWA BŁĘDU YAML — element listy escalation
-  zawierał "weryfikacji: view shared/..." w linii kontynuacji; YAML czytał ":
-  " jako początek mapy i CAŁY frontmatter był nieparsowalny (ScannerError,
-  linia 50). To NAWRÓT klasy błędu z 3.37/F-146 (niesparowany cudzysłów w polu
-  changelog) — ta sama przyczyna: frontmatter nie miał żadnego testu
-  parsowalności. Elementy escalation ujęte w cudzysłowy. Naprawiono też ciche
-  zniekształcenie typu w inputs/outputs: "- opcjonalnie: ..." parsowało się
-  jako MAPA, nie tekst. ARCHITEKTURA: dodano shared/DOSTEP-MASZYNOWY-API.md do
-  required_modules — instrukcje wywołań API istniały wyłącznie w audyt-
-  systemu-v4, którego router nie wczytuje. Escalation rozszerzone o bramkę
-  "sprawdź kształt żądania, zanim orzekniesz o niedostępności", status ISAP
-  jako stanu normalnego (kanał maszynowy martwy, weryfikacja przez ELI) oraz o
-  białą listę VAT jako nieosiągalną maszynowo. references/CHANGELOG.md.
+  **Zmiany w routerze:** wersja 3.41→3.42; Reguła 12a rozszerzona o obie osie
+  S3 i o zakres S4; nowa Reguła 14a (forma znacznika ✅ wg AF-7); SELF-CHECK
+  uzupełniony o bramkę blokującą „każdy znacznik ✅ [VER] niesie kanał,
+  identyfikator i datę odczytu".
+
+  **Wniosek ogólny.** Pomiar potwierdza Regułę 26 („skill nie jest źródłem")
+  i pokazuje jej warunek brzegowy: bramka wymusza POSTAWIENIE znacznika, nie
+  wymusza ODCZYTU. Model o słabszym rozumowaniu wypełnia pole bramki z pamięci
+  i wystawia sobie certyfikat; model o mocniejszym rozumowaniu idzie do źródła,
+  zanim postawi znacznik. Przy identycznym aparacie proceduralnym daje to trzy
+  jednostki obalone w jednym arkuszu i zero w drugim. Rekomendacja doboru:
+  skille uruchamiać RAZEM z najwyższym dostępnym poziomem rozumowania, nie
+  zamiast niego.
+  Zaktualizowane sumy w `shared/CHECKSUMS.sha256`.
 
 - 3.37 (2026-09-01, hotfix F-146): **naprawa CRIT — nieparsowalny frontmatter.**
   We wpisie 3.36 pola `changelog:` fragment `„≥1 powołany artykuł"` łączył

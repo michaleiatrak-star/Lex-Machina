@@ -329,6 +329,27 @@ AF-6  ZAKRES (dodano 2026-08-23f, F-117 — TEST3 CX-02 wykazał wygenerowany
       nagłówkom, wariantom strategii, planom pism. Treść własna NIE MA
       statusu weryfikacji — jeśli opiera się na przepisie, status niesie
       PRZYWOŁANY PRZEPIS, nie wygenerowana wokół niego treść.
+
+AF-7  FORMA ZNACZNIKA ✅ [VER] (dodano 2026-09-09, F-169 — audyt czterech
+      arkuszy odpowiedzi na bank kazusów wykazał 24 wystąpienia gołego
+      „✅ [VER]" bez kanału i daty; z pięciu sprawdzonych dwa okazały się
+      fałszywe. Rygor nieważności istniał dotąd WYŁĄCZNIE dla 🎯 [CEL]
+      w AF-2 — znacznik NAJSILNIEJSZY był jedynym bez sankcji za
+      niekompletność formy).
+      Minimalny zestaw pól znacznika ✅: (1) kanał odczytu
+      (api.sejm.gov.pl ELI / ISAP / EUR-Lex / saos.org.pl / web-fallback),
+      (2) identyfikator aktu lub orzeczenia, (3) data odczytu W TEJ TURZE.
+      ⛔ Brak któregokolwiek z trzech pól = znacznik NIEWAŻNY, traktuj jak
+      jego brak, czyli jak ⚠️ [NIEWERYFIKOWANE].
+      ⛔ Data odczytu ≠ data odpowiedzi. Wpisanie daty bieżącej bez
+      wykonanego w tej turze wywołania jest naruszeniem AF-1, nie brakiem
+      formy.
+      ⛔ Reguła jest SKŁADNIOWA i sprawdzalna z zewnątrz bez dostępu do
+      logów: samo „✅ [VER]" odczytane w dostarczonym tekście jest zawsze
+      naruszeniem, niezależnie od tego, co wykonano w tle.
+      ⚠️ Skutek wdrożenia: dotychczasowe odpowiedzi z gołym „✅ [VER]"
+      stają się formalnie nieoznaczone. Wzrost liczby ⚠️ w pierwszej sesji
+      po wdrożeniu jest dowodem działania reguły, nie nową flagą.
 ```
 
 **SELF-CHECK WYKONAWCZY — treść w module kanonicznym, nie tutaj:**
