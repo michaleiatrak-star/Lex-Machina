@@ -46,6 +46,18 @@ def sha256(path):
         return hashlib.sha256(fh.read()).hexdigest()
 
 
+def normalizuj(sciezka):
+    """Ścieżka wpisu w postaci porównywalnej z os.path.relpath.
+
+    Obie konwencje generowania są w systemie w użyciu i obie są poprawne:
+    `sha256sum *` daje `plik.md`, `find . -type f -exec sha256sum {} +` daje
+    `./plik.md`. Znormalizuj, zamiast wymuszać jedną — inaczej test karze
+    za konwencję, nie za stan plików.
+    """
+    sciezka = sciezka.strip().lstrip("*")
+    return os.path.normpath(sciezka)
+
+
 def skill_files(root):
     out = []
     for base, dirs, names in os.walk(root):
@@ -66,7 +78,15 @@ def check_skill(root, name):
             if "  " not in line:
                 continue
             h, f = line.split("  ", 1)
-            entries[f] = h
+            # ⚡ 2026-09-09 (F-170): `sha256sum -c` normalizuje prefiks `./`,
+            # ten test go nie normalizował. Cztery skille (audyt-systemu-v4,
+            # prawny-router-v3, shared, dr-14) generowały sumy przez
+            # `find . -type f`, czyli w formacie `./plik.md` — dla T21 ŻADEN
+            # z ich 307 plików nie miał wpisu, a jednocześnie ŻADNA realna
+            # niezgodność wewnątrz tych skilli nie była widoczna w szumie.
+            # Ta sama klasa ślepoty, którą T21 miał zamykać (F-145): wynik
+            # pozornie najzdrowszy przy niesprawdzonym stanie faktycznym.
+            entries[normalizuj(f)] = h
 
     on_disk = skill_files(root)
     brak_wpisu = [f for f in on_disk if f not in entries]

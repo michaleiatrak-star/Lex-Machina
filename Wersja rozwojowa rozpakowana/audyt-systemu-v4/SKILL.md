@@ -1,7 +1,7 @@
 ---
 name: audyt-systemu-v4
 description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych skilli: zależności, wersje, mapy Dz.U., treść merytoryczna, propagacja zmian, deduplikacja i bramki jakości."
-version: "6.51"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
+version: "6.53"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
                   # parsuje jako float 6.1 — czyli numer NIŻSZY niż 6.9, co cicho
                   # odwraca porządek wersji. Wykryte przy walidacji 2026-08-20z.
                   # Każda kolejna wersja z dwucyfrowym minor — też w cudzysłowie.
@@ -29,6 +29,11 @@ references:
   - references/PRZEGLAD-MAP-ELI-2026-09-01i.md   # wynik kontroli 16 map dziedzinowych w żywym ELI
                                           # (251 numerów, 0 nieaktualnych t.j., 3 poprawki, 139 pozycji
                                           # z nowelizacjami po t.j. → F-156); dodane 2026-09-01i, F-155
+  - references/F-171-pomiar-domen-2026-09-09.md   # surowy wynik T25 z 2026-09-09 (52 sondy):
+                                          # 4 regresje (SAOS /api/search, /api/dump,
+                                          # /api/judgments/{id} — 502; decyzje.uokik.gov.pl — 503)
+                                          # i 8 pozycji grupy `kandydaci` odpowiadających mimo
+                                          # statusu POZA_LISTA; materiał do F-157 i F-171
   - references/F-152-pomiar-domen-2026-09-04.md   # surowy wynik T25 (40 sond) — dowód zamknięcia F-152
                                           # i materiał źródłowy §2G/§6/§7 inwentarza; dodane 2026-09-04
   - references/PORTALE-ORZECZNICZE-API.md   # inwentarz dostępu maszynowego do orzecznictwa
@@ -43,7 +48,10 @@ references:
   - references/WARN-OTWARTE.md   # rejestr żywy TYLKO otwartych flag (WARN + strukturalne) — dodane 2026-07-07, ZASADA 10; ⚡ od 2026-08-15w zaczyna się TABLICĄ STERUJĄCĄ (indeks wszystkich flag + następny krok w jednym zdaniu) — czytaj ją PIERWSZĄ przy pytaniu „co jest do zrobienia"
   - references/SPROSTOWANIE-LM-2026-08-23.md   # dokument do wysłania autorowi raportów TEST1-3 — realizacja F-116 część 3/3, bez treści proceduralnej systemu — dodane 2026-08-23f
   - references/CHECKLIST-DEDUP.md   # mapa pojęć → lokalizacje (5 not, NOTA-6 ORPHAN dodana 06-14g)
-  - references/mapa_dzu_2026-08-28.md   # ⭐ AKTUALNA mapa Dz.U.; ponowny audyt F-108, korekty tożsamości i statusów t.j.
+  - references/mapa_dzu_2026-09-09.md   # ⭐ AKTUALNA mapa Dz.U.; generacja F-172 — 11 numerów z T11
+                                        # zweryfikowanych w RZĘDZIE 1 (ELI), 10 wierszy dodanych, 1 do MONITORING,
+                                        # 3 wiersze przestawione na PREV po ujawnieniu nowszych t.j.
+  - references/mapa_dzu_2026-08-28.md   # POPRZEDNIA generacja; ponowny audyt F-108, korekty tożsamości i statusów t.j.
   - references/mapa_dzu_2026-08-26.md   # POPRZEDNIA generacja — zachowana historycznie
   - references/mapa_dzu_2026-07-15.md   # POPRZEDNIA generacja (sync 2026-08-13) — zachowana jako materiał historyczny
   - references/PLAN-TESTU-BRAMEK-F113.md   # protokół testu SKUTECZNOŚCI bramek z GRUPĄ KONTROLNĄ
@@ -1236,7 +1244,7 @@ z WARN-OTWARTE.md, dodaj pełny wpis do AUDIT-JOURNAL.md.
 > to ten sam wzorzec luki, który wykrywa `check_rejestracja_modulow.py`).
 
 ```
-audyt-systemu-v4/                               ← 87 plików (stan 2026-09-04c; licznik sprawdzony
+audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b; licznik sprawdzony
 │                                                  `find . -type f`, bez __pycache__. ⚡ Drzewo podawało
 │                                                  82 przy 84 faktycznych PRZED tą turą — trzeci z rzędu
 │                                                  rozjazd tego licznika (F-147: 71 przy 81). Ta tura
@@ -1258,13 +1266,14 @@ audyt-systemu-v4/                               ← 87 plików (stan 2026-09-04c
 │   │                                             check_rejestracja_modulow, sync ELI (3 pliki),
 │   │                                             2 skrypty .sh, README.md — pełna lista w YAML
 │   └── …                                         `scripts:`
-└── references/                                 ← 42 pliki (29 w katalogu głównym + 13 w podfolderze)
+└── references/                                 ← 44 pliki (31 w katalogu głównym + 13 w podfolderze)
     ├── AUDIT-JOURNAL.md                        ← dziennik audytów, ~44 tys. linii, 2,6 MB
     ├── WARN-OTWARTE.md                         ← rejestr żywy otwartych flag (ZASADA 10)
     ├── CHANGELOG.md                            ← historia wersji orkiestratora (F-78)
     ├── CHECKLIST-DEDUP.md                      ← mapa pojęć → lokalizacje kanoniczne
     ├── REGRESSION-TEST-PLAN.md                 ← testy T1-T17
     ├── PORTALE-ORZECZNICZE-API.md              ← dostęp maszynowy do orzecznictwa/interpretacji
+    ├── F-171-pomiar-domen-2026-09-09.md        ← surowy wynik T25 (52 sondy), 4 regresje — F-171
     ├── F-152-pomiar-domen-2026-09-04.md        ← surowy wynik T25 (40 sond), dowód zamknięcia F-152
     ├── F-136-zakres-DzU-2022-2600.md           ← 116/116 dyspozycji nowelizacji KK i pomiar korpusu
     ├── SYNC-DZU-AUTOMATYCZNY.md                ← + HARMONOGRAM-CRON.md, FORMAT-RAPORTU-ROZNIC.md
@@ -1275,7 +1284,8 @@ audyt-systemu-v4/                               ← 87 plików (stan 2026-09-04c
     ├── F-108-verification-2026-08-28.md         ← raport źródłowy re-audytu F-108
     ├── F-104-lista-robocza-mapa-dzu.md         ← lista robocza F-104, rocznik 2026
     ├── F-104-lista-robocza-roczniki-starsze.md ← lista robocza F-104, roczniki 2013-2025 (F-124)
-    ├── mapa_dzu_2026-08-28.md                  ← mapa Dz.U. AKTUALNA
+    ├── mapa_dzu_2026-09-09.md                  ← mapa Dz.U. AKTUALNA (F-172)
+    ├── mapa_dzu_2026-08-28.md                  ← POPRZEDNIA generacja
     ├── mapa_dzu_2026-08-26.md                  ← POPRZEDNIA generacja
     ├── mapa_dzu_2026-07-15 / 07-04 / 07-02 / 06-14.md  ← POPRZEDNIE generacje, cytowane w dzienniku
     └── raporty-pokrycia-2026-08-13/            ← 12 raportów + indeks = 13 plików
@@ -1283,7 +1293,8 @@ audyt-systemu-v4/                               ← 87 plików (stan 2026-09-04c
 
 ---
 
-*Wersja: 6.51 | Ostatnia aktualizacja: 2026-09-04c (F-159 — T26: bramka parsowalności frontmatteru, dodana po drugim nawrocie tej samej usterki YAML w prawny-router-v3; przebieg na 32 skillach: 31 czystych. Poprzednio: 2026-09-04b (F-158 CZĘŚCIOWO ZAMKNIĘTA — API UODO potwierdzone i zmierzone end-to-end, jedyne takie po stronie polskiego organu; EUREKA rozstrzygnięta co do bazy `/api/public/v1` odczytanej z bundle, schemat POST wyszukiwarki otwarty. F-157 część (a) WYKONANA — reguła kanału kodu propagowana do `shared/`; braki listy dozwolonych nadal u dewelopera. T25: 52 sondy, 52/52, selftest 17/17)*
+*Wersja: 6.53 | Ostatnia aktualizacja: 2026-09-09b (F-172 ZAMKNIĘTA — nowa generacja mapy Dz.U. `mapa_dzu_2026-09-09.md`: 11 numerów z T11 zweryfikowanych w RZĘDZIE 1 przez API ELI, 10 wierszy w tabeli głównej, 1 w MONITORING (wejście 1.01.2028), 3 wiersze przestawione na PREV po ujawnieniu nowszych t.j.; sygnał T15 o 2023/1285 potwierdzony jako fałszywy alarm parsera. T11 zielony. Poprzednio: 2026-09-09 (F-169, F-170 ZAMKNIĘTE — router 3.42, T17 mierzy korpus osobno od frontmatteru, T21 normalizuje prefiks `./`; F-171 OTWARTA — 4 regresje dostępu z pomiaru T25))*
+
 *(Stopka podawała „5.0 | 2026-07-04" przy `version: 6.8` w YAML — rozjazd
 9 wersji, naprawiony 2026-08-20y. **Stopkę aktualizuj razem z polem `version`**;
 jeśli znów zacznie się rozjeżdżać, kandyduje do usunięcia jako pole martwe —

@@ -1,6 +1,6 @@
 # WARN-OTWARTE — rejestr żywy otwartych flag audytowych
 
-**Stan:** 2026-09-05e. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
+**Stan:** 2026-09-09b. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
 
 ## Tablica sterująca
 
@@ -8,8 +8,43 @@
 |---|---:|---|
 | Wykonalne sesją audytową | 6 | F-135, F-141, F-148, F-160, F-167, O-4 |
 | Reaktywne | 1 | F-5 |
-| Zależne od środowiska/dewelopera | 11 | F-8, F-9, F-11, F-94, F-113, F-133, F-137, F-143, F-144, F-157, F-158(c) |
-| **Razem** | **17** | — |
+| Zależne od środowiska/dewelopera | 12 | F-8, F-9, F-11, F-94, F-113, F-133, F-137, F-143, F-144, F-157, F-158(c), F-171 |
+| **Razem** | **19** | — |
+
+> **F-171 OTWARTA (2026-09-09) — cztery regresje dostępu do źródeł, kanał
+> kodu.** Pomiar T25 z 2026-09-09: 52 sondy, 40 zgodnych z odniesieniem
+> 2026-09-04. Regresje: SAOS `/api/search`, `/api/dump`, `/api/judgments/{id}`
+> — HTTP 502, 3/3 prób; `decyzje.uokik.gov.pl` — HTTP 503, 3/3.
+> **Skutek operacyjny:** SAOS jest kanałem maszynowym RZĘDU 2A dla orzecznictwa
+> sądów powszechnych i administracyjnych — do powrotu weryfikacja sygnatur idzie
+> przez portale pojedynczych sądów (`orzeczenia.warszawa.so.gov.pl`: 200, RSS).
+> `sudop.uokik.gov.pl` i `rejestr.uokik.gov.pl` działają, więc awaria UOKiK jest
+> punktowa.
+> ⚠️ **Następny krok:** POWTÓRZYĆ POMIAR w innym dniu przed jakimkolwiek
+> wnioskiem o trwałości. Trzykrotna porażka jednego dnia dowodzi niedostępności
+> tego dnia — orzekanie o wygaszeniu bez powtórzenia to klasa błędu F-151/F-162/F-164.
+> Dowód: `F-171-pomiar-domen-2026-09-09.md`. Wpis: `AUDIT-JOURNAL.md`, AUDYT-2026-09-09.
+
+> **F-172 ZAMKNIĘTA 2026-09-09b — 20 pozycji T11 zweryfikowanych w RZĘDZIE 1
+> i wprowadzonych do mapy.** 11 numerów unikalnych sprawdzonych w API ELI:
+> 10 wierszy w tabeli głównej nowej generacji `mapa_dzu_2026-09-09.md`,
+> 1 (2026/1123, wejście 1.01.2028) w MONITORING, 3 wiersze dotychczasowe
+> przestawione na `PREV` po ujawnieniu nowszych t.j. Sygnał T15 o 2023/1285
+> potwierdzony jako fałszywy alarm parsera. T11 zielony.
+> Do rejestru żywego nie wchodzi (ZASADA 10).
+> ⚠️ **Pozostawiony ślad do przyszłej sesji:** heurystyka T15 czyta akt
+> pierwotny wymieniony obok t.j. jako deklarację t.j. — kandydat na zawężenie
+> przy najbliższej edycji tego testu, nie usterka mapy.
+> Szczegóły: `AUDIT-JOURNAL.md`, wpis AUDYT-2026-09-09b.
+
+> **F-169 ZAMKNIĘTA 2026-09-09 — router 3.42: historia w lokalizacji
+> kanonicznej, T17 mierzy korpus.** Do rejestru żywego nie wchodzi (ZASADA 10).
+> Szczegóły: `AUDIT-JOURNAL.md`, wpis AUDYT-2026-09-09.
+
+> **F-170 ZAMKNIĘTA 2026-09-09 — T21 normalizuje prefiks `./`.** 307 z 308
+> zgłoszeń było artefaktem konwencji generowania sum; szum ukrywał jedyny realny
+> rozjazd (`AUDIT-JOURNAL.md` bez przeliczonej sumy). Do rejestru żywego nie
+> wchodzi (ZASADA 10). Szczegóły: `AUDIT-JOURNAL.md`, wpis AUDYT-2026-09-09.
 
 > **F-168 ZAMKNIĘTA 2026-09-05e — przykłady wzorcowe zastąpione regułami
 > uniwersalnymi.** Wyzwalacz: użytkownik zażądał wprost, po tym jak test

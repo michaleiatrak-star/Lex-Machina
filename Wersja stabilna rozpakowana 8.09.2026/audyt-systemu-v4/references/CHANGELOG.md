@@ -1,5 +1,110 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.53 (2026-09-09b, F-172 ZAMKNIĘTA): **nowa generacja mapy Dz.U. —
+  `references/mapa_dzu_2026-09-09.md`.**
+
+  T11 wskazywał 20 pozycji obecnych w rejestrach operacyjnych i nieobecnych
+  w mapie centralnej (11 numerów unikalnych). Każdy sprawdzony w RZĘDZIE 1
+  (`api.sejm.gov.pl/eli`, odczyt 2026-09-09): typ, tytuł urzędowy, data
+  ogłoszenia, status, akt bazowy. Wszystkie 11 istnieje i obowiązuje.
+  Dla ośmiu obwieszczeń sprawdzono dodatkowo listę `Inf. o tekście jednolitym`
+  aktu bazowego — każde jest NAJNOWSZYM t.j. swojego aktu, więc żadne nie
+  wchodzi jako `PREV`. ⛔ To jest ta kontrola, której ZASADA 8 wymaga wprost:
+  numer sprawdzany niezależnie od tego, czy nazwa w rejestrze wygląda dobrze.
+
+  **Dodane do tabeli głównej (10):** 2026/980 (piecza zastępcza, t.j.),
+  2026/873 (świadczenie wspierające, t.j.), 2026/731 (nowelizacja ustawy
+  o radcach prawnych), 2026/113 (pomoc na ratowanie i restrukturyzację, t.j.),
+  2024/1620 (wyroby medyczne, t.j.), 2024/1111 (pożyczka lombardowa, t.j.),
+  2023/1285 (pożyczka lombardowa, akt pierwotny, `PREV`), 2023/845 (UPNPR,
+  t.j.), 2023/123 (opłaty w sprawach karnych, t.j.), 2022/1722 (radiofonia
+  i telewizja, t.j.).
+
+  **Do MONITORING (1):** 2026/1123 — wejście w życie **1.01.2028**, więc nie
+  wolno jej trzymać w tabeli głównej. ⚠️ Rozbieżność opisu wychwycona przy
+  okazji: `ROUTING-MAP` cytuje ją jako prospektywną zmianę ustawy o SN, a tytuł
+  urzędowy brzmi „o zmianie ustawy o opiece nad dziećmi w wieku do lat 3 oraz
+  niektórych innych ustaw" — oba są zgodne (zmiana SN idzie przez „niektóre
+  inne ustawy"), ale w mapie zapisano tytuł URZĘDOWY, nie skrót z rejestru.
+
+  **Trzy wiersze przestawione na `PREV`,** bo ich akty bazowe doczekały się
+  tekstu jednolitego: 2022/974 (wyroby medyczne — wiersz twierdził „brak t.j.",
+  co było nieprawdą od 10.10.2024), 2023/1429 (świadczenie wspierające),
+  2020/1298 (pomoc na ratowanie). ⛔ Wzorzec ZASADY 8 w wariancie czasowym:
+  numer i nazwa poprawne, ale adnotacja o braku t.j. przeterminowała się po
+  cichu — mapa nie kłamała w chwili zapisu, tylko przestała być prawdziwa.
+
+  **Sygnał T15 rozstrzygnięty jako fałszywy alarm.** `Dz.U. 2023 poz. 1285`
+  w `prawo-polskie-v2/ROUTING-MAP.md:219` jest tam jawnie opisany jako akt
+  PIERWOTNY obok t.j. 2024/1111; parser T15 czytał go jako deklarację t.j.
+  Mapa i rejestr były zgodne ze stanem faktycznym. Kandydat na zawężenie
+  heurystyki T15 — do rozstrzygnięcia przy najbliższej edycji tego testu.
+
+  **Po zmianie:** T11 OK (0 rozbieżności, 632 numery w mapie), T3 OK, T18 OK.
+
+- 6.52 (2026-09-09, F-169 i F-170 ZAMKNIĘTE, F-171 OTWARTA): **naprawy po
+  przebiegu całej grupy T na 33 skillach.**
+
+  **F-169 — router 3.41 → 3.42, dwa czerwone testy z jednej przyczyny.**
+  T12 zgłaszał ⛔ LUKA HISTORII (version 3.41, najnowszy wpis changelogu 3.38),
+  a T17 — FAIL na „lekki korpus ≤500 linii". Oba pochodziły z tego samego
+  miejsca: pole `changelog:` we frontmatterze routera trzymało PEŁNE wpisy
+  3.30–3.41 (13 wierszy YAML, część o długości akapitu), a wpisy 3.38–3.41
+  nie istniały w `references/CHANGELOG.md` — wbrew standardowi 2026-08-20z4,
+  który czyni ten plik jedyną lokalizacją kanoniczną i zakazuje pełnej listy
+  w YAML. Wpisy przeniesione, pole zredukowane do skrótu bieżącej wersji.
+  ⛔ Zero zmian w treści proceduralnej routera, w routingu [1]–[11], w regułach
+  i w bramkach.
+
+  **F-169 część druga — T17 mierzył niewłaściwą wielkość.** Warunek nazywa się
+  „lekki korpus", a liczył `len(skill.splitlines())`, czyli plik RAZEM
+  z frontmatterem. Skutek: każdy nowy wpis `required_modules:` (26 pozycji),
+  `escalation:` czy `changelog:` zjadał budżet przeznaczony na treść
+  proceduralną, a router 3.41 miał 550 linii pliku przy 437 liniach korpusu.
+  Warunek liczy odtąd KORPUS (≤500), a rejestry metadanych dostały własny,
+  jawny próg (frontmatter ≤150). ⚠️ To jest ZMIANA MIARY, nie podniesienie
+  progu — korpus po naprawie ma 438 linii wobec ~400 z wersji 3.28, więc gate
+  chroniący przed rozdęciem procedury nadal ma zapas i nadal blokuje.
+  Alternatywa odrzucona: podniesienie 500→600 na całym pliku ucisza test
+  w sposób, który powtórzy się przy każdym kolejnym module w rejestrze.
+
+  **F-169 część trzecia — lista reguł w kontrakcie była snapshotem.**
+  `expected_rules` w `test_router_contract.py` nie zawierała reguł 12b (CN-GATE,
+  router 3.39), 12c (REM-GATE, 3.39/3.40) i 12d (REM-0, 3.40), więc T17 zgłaszał
+  FAIL za reguły dodane legalnie i udokumentowane w changelogu. Dopisane;
+  kolejność i znaczenie pozostałych 32 pozycji bez zmian. Dopisanie kolejnej
+  pozycji wolno wykonać wyłącznie razem z wpisem w changelogu routera
+  i w tym dzienniku.
+
+  **F-170 — T21 karał za konwencję, nie za stan plików.** Cztery skille
+  (`audyt-systemu-v4`, `prawny-router-v3`, `shared`, `dr-14`) generują sumy przez
+  `find . -type f`, czyli w formacie `./plik.md`; T21 nie normalizował prefiksu,
+  więc dla WSZYSTKICH 307 ich plików raportował „BRAK WPISU". Dwa skutki:
+  test KRYTYCZNY świecił na czerwono bez usterki, a w tym szumie ginął jedyny
+  realny rozjazd sum w całym systemie — `references/AUDIT-JOURNAL.md`, edytowany
+  bez przeliczenia sumy. ⛔ Ta sama klasa ślepoty, którą T21 miał zamykać
+  (F-145): wynik pozornie zdrowy przy niesprawdzonym stanie faktycznym, tylko
+  odwrócony — tu szum zamiast ciszy. Dodana `normalizuj()`; obie konwencje
+  przechodzą, bo obie są poprawne (`sha256sum -c` też normalizuje `./`).
+  Sumy `CHECKSUMS.sha256` przeliczone w obu zmienionych skillach.
+
+  **F-171 OTWARTA — cztery regresje dostępu, pomiar 2026-09-09.** T25:
+  52 sondy, 40 zgodnych ze stanem odniesienia z 2026-09-04, regresje:
+  SAOS `/api/search`, `/api/dump`, `/api/judgments/{id}` (HTTP 502, 3/3 prób)
+  i `decyzje.uokik.gov.pl` (HTTP 503, 3/3). SAOS to kanał maszynowy RZĘDU 2A
+  dla orzecznictwa — do powrotu obowiązuje ścieżka zastępcza przez portale
+  pojedynczych sądów. ⚠️ Trzykrotna porażka jednego dnia dowodzi
+  niedostępności TEGO DNIA, nie trwałej — przed orzeczeniem o wygaszeniu
+  powtórz pomiar. Surowy wynik i 8 pozycji grupy `kandydaci` osiągalnych mimo
+  statusu POZA_LISTA (materiał F-157): `references/F-171-pomiar-domen-2026-09-09.md`.
+
+  **Przebieg grupy T po naprawach:** T1, T2, T3, T6/T7, T8, T9, T12, T13, T14,
+  T17, T18, T19, T19b, T21, T22, T26 i MOCK — zielone. T11 (20 pozycji)
+  i T24 (139 pozycji wymagających fresh gate poza t.j.) pozostają WARN
+  z przeglądem merytorycznym; T4, T5, T16 i korpusowy przebieg T20 są ręczne
+  lub wymagają materiału wejściowego. Pełny opis: `AUDIT-JOURNAL.md`,
+  wpis AUDYT-2026-09-09.
+
 - 6.51 (2026-09-04c, F-159 ZAMKNIĘTA, F-160 CZĘŚCIOWO): **T26 —
   `check_frontmatter_yaml.py`, bramka parsowalności frontmatteru.**
   ⛔ Powód: `prawny-router-v3` **dwa razy pod rząd** nie ładował się na hoście

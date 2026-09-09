@@ -57,8 +57,14 @@ def main() -> int:
     body = skill.split("---", 2)[-1]
     always_pos = body.find("## ŁADOWANE ZAWSZE — BEZWZGLĘDNIE")
     adapter_pos = body.find("## ADAPTER RUNTIME")
+    # ⚡ 2026-09-09 (F-169): dopisane 12b (CN-GATE, router 3.39), 12c (REM-GATE,
+    # 3.39/3.40) i 12d (REM-0, 3.40). Lista była snapshotem sprzed tych wersji,
+    # więc T17 zgłaszał FAIL za reguły dodane legalnie i udokumentowane.
+    # ⛔ Ta lista jest kontraktem: dopisanie pozycji wolno wykonać TYLKO razem
+    # z wpisem w references/CHANGELOG.md routera i w AUDIT-JOURNAL.md.
     expected_rules = ["1", "1C", "2", "3", "4", "5", "6", "7", "7B", "7C",
-                      "8", "9", "10", "11", "11a", "12", "12a", "14", "15", "16",
+                      "8", "9", "10", "11", "11a", "12", "12a", "12b", "12c",
+                      "12d", "14", "15", "16",
                       "17", "18", "19", "20", "20a", "21", "22", "23", "24",
                       "25", "26", "27"]
     actual_rules = re.findall(r"^- \*\*Reguła ([0-9]+[a-zA-Z]?) —", body, re.MULTILINE)
@@ -72,7 +78,16 @@ def main() -> int:
         ("PATH-SELFTEST", "PATH-SELFTEST" in skill and "TRYB ZDEGRADOWANY" in skill),
         ("reguły bezwzględne pierwsze", always_pos >= 0 and adapter_pos > always_pos),
         ("pełny self-check przed wysłaniem", "view references/SELF-CHECK.md" in body),
-        ("lekki korpus ≤500 linii", len(skill.splitlines()) <= 500),
+        # ⚡ 2026-09-09 (F-169): budżet liczony na KORPUSIE, nie na całym pliku.
+        # Do 3.41 test mierzył `len(skill.splitlines())`, więc każdy nowy wpis
+        # `required_modules:`/`escalation:`/`changelog:` zjadał budżet
+        # przeznaczony na treść proceduralną. Router 3.41 miał 550 linii pliku
+        # przy 437 liniach korpusu — czerwone światło pochodziło z rejestrów
+        # metadanych, nie z rozdęcia procedury, którą ten warunek ma chronić
+        # (ZASADA z 3.28: korpus skrócony z 924 do ~400). Rozdzielone na dwa
+        # niezależne progi; podniesienie któregokolwiek wymaga wpisu w dzienniku.
+        ("lekki korpus ≤500 linii", len(body.splitlines()) <= 500),
+        ("frontmatter ≤150 linii", len(skill.splitlines()) - len(body.splitlines()) <= 150),
         ("bez narracji incydentów", not re.search(r"ROOT CAUSE|VII P 94/25|HP sp\. z o\.o\.|Dlaczego OSOBNA|przeniesione stąd|flaga F-126", skill, re.IGNORECASE)),
         ("bez zduplikowanej reguły 13", "13" not in actual_rules and "13. Weryfikacja:" not in skill),
         ("stałe identyfikatory i kolejność reguł", actual_rules == expected_rules),

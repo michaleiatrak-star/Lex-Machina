@@ -1,5 +1,146 @@
 # AUDIT-JOURNAL — Dziennik Audytów Systemu Prawnego AI
 
+## AUDYT-2026-09-09b — F-172: domknięcie T11, nowa generacja mapy Dz.U.
+
+**Polecenie:** kontynuacja sesji AUDYT-2026-09-09 („kontynuuj").
+
+**Zakres.** Jedyna pozycja z poprzedniej tury, którą dało się domknąć bez
+nowego materiału od użytkownika: 20 zgłoszeń T11 (11 numerów unikalnych)
+i powiązany sygnał T15. Reszta otwartych flag albo czeka na środowisko
+(F-171 — powtórzenie pomiaru w innym dniu), albo na decyzję dewelopera
+(F-157), albo na materiał wejściowy (T16 — tekst nowelizacji).
+
+**Metoda.** Dla każdego numeru osobny odczyt `api.sejm.gov.pl/eli/acts/DU/...`
+(RZĄD 1, 2026-09-09): typ, tytuł urzędowy, data ogłoszenia, data wejścia,
+status, akt bazowy. Dla ośmiu obwieszczeń dodatkowy odczyt aktu bazowego
+i jego listy `Inf. o tekście jednolitym` — bez tego kroku nie da się orzec,
+czy dane obwieszczenie jest BIEŻĄCYM t.j., czy już wyprzedzonym. Wszystkie
+osiem okazało się najnowsze. ⛔ Ten drugi odczyt jest wymogiem, nie
+ostrożnością: mapa rozróżnia `OK` i `PREV`, a różnicy nie da się odczytać
+z samego numeru obwieszczenia.
+
+**Wynik.** Nowa generacja `references/mapa_dzu_2026-09-09.md` (632 numery):
+10 wierszy dodanych do tabeli głównej, 1 do MONITORING (2026/1123, wejście
+1.01.2028 — do tabeli głównej nie wolno jej wpisać), 3 wiersze przestawione
+na `PREV` (2022/974, 2023/1429, 2020/1298). Poprzednia generacja zachowana.
+
+**Trzy `PREV` to osobne znalezisko, nie skutek uboczny.** Wiersz 2022/974
+niósł adnotację „nowa ustawa 2022 — brak t.j.", nieprawdziwą od 10.10.2024;
+2023/1429 — „nowa ustawa ze zm." przy istniejącym t.j. 2026/873; 2020/1298 —
+bez wzmianki o t.j. 2026/113. ⛔ Klasa błędu: ZASADA 8 w wariancie CZASOWYM.
+Numer i nazwa były poprawne w chwili zapisu; przeterminowała się ADNOTACJA
+O STANIE. Żaden test w pakiecie tego nie łapie — T3 sprawdza zgodność
+numerów między mapami, T11 obecność, T24 nowelizacje po t.j., ale nikt nie
+pyta, czy wiersz ze słowem „brak t.j." nadal mówi prawdę. Kandydat na nowy
+test przy najbliższej rozbudowie pakietu.
+
+**Sygnał T15 — fałszywy alarm.** `Dz.U. 2023 poz. 1285` w
+`prawo-polskie-v2/ROUTING-MAP.md:219` jest opisany jako akt PIERWOTNY obok
+t.j. 2024/1111. ELI potwierdza: status „akt posiada tekst jednolity", t.j.
+2024/1111. Rejestr był zgodny ze stanem faktycznym; parser T15 czytał numer
+sąsiadujący z t.j. jako deklarację t.j. Zapisane jako ślad do zawężenia
+heurystyki, nie jako usterka mapy — ⛔ i nie „naprawione" przez zmianę zapisu
+w rejestrze, bo rejestr był poprawny.
+
+**Przebieg po zmianie.** T11 OK (0 rozbieżności), T3 OK, T18 OK, T21 PASS,
+T22 PASS, T26 33/33, orkiestrator PASS strukturalny. Otwarte pozostają:
+F-171 (powtórzyć pomiar domen w innym dniu), F-157 (lista dozwolonych —
+deweloper), T24 (z definicji), T4/T5/T16 i korpusowy T20 (ręczne lub
+wymagające materiału wejściowego).
+
+**Wydanie (ZASADA 7).** `audyt-systemu-v4` 6.53 spakowany osobno, liczba
+plików oryginał = kopia = ZIP, `diff -rq` archiwum wobec kopii roboczej pusty,
+sumy `CHECKSUMS.sha256` przeliczone po ostatniej edycji.
+
+## AUDYT-2026-09-09 — pełna grupa T na 33 skillach i naprawy F-169 / F-170
+
+**Polecenie użytkownika:** wykonać testy z grupy T na skillach prawnych, a
+następnie „zająć się naprawami" i wydać skille zgodnie z Regułą 7.
+
+**Zakres i środowisko.** Root zbudowany z dwóch lokalizacji montowania hosta
+(33 katalogi: 32 skille systemu + `prompt-master`), testy uruchamiane z
+`--repo-root`. Skille źródłowe są na tym hoście read-only, więc edycje szły do
+kopii roboczej — zgodnie z PRE-DELIVERY-COMPLETENESS-CHECK (ZASADA 7).
+
+**Przebieg wejściowy (przed naprawami).** Orkiestrator: PASS strukturalny.
+Czerwone: T12 (⛔ luka historii w routerze), T17 (FAIL 2/17), T21 (FAIL, 308
+zgłoszeń). WARN: T11 (20 pozycji), T24 (139 pozycji), T25 (4 regresje).
+Zielone: T1, T2, T3, T6/T7, T8, T9, T13, T14, T18, T19, T19b, T22, T26, MOCK,
+`check_rejestracja_modulow` (16/16 dziedzin, 450 modułów), T15 (552/553),
+selftesty T20 27/27, T24 9/9, T25 17/17. T4, T5 — ręczne. T16 — nieuruchamialny
+bez pliku z tekstem nowelizacji. T20 korpusowo — narzędzie jest punktowe
+(`--act`/`--article`), więc nie ma przebiegu „na całości".
+
+**Diagnoza F-169 (router).** T12 i T17 miały jedną przyczynę: pole
+`changelog:` we frontmatterze routera trzymało pełne wpisy 3.30–3.41, a
+`references/CHANGELOG.md` nie miał 3.38–3.41. To jednocześnie łamało standard
+2026-08-20z4 (jedyna lokalizacja kanoniczna), dawało T12 obraz „version 3.41
+przy changelogu 3.38" i rozdymało plik do 550 linii przy budżecie 500.
+Trzeci składnik: `expected_rules` w T17 nie znała reguł 12b/12c/12d dodanych
+w 3.39/3.40 — test karał za zmianę wykonaną prawidłowo i opisaną.
+
+**Naprawa F-169.** (1) Wpisy 3.38–3.41 przeniesione do
+`prawny-router-v3/references/CHANGELOG.md` w brzmieniu z pola; pole zredukowane
+do skrótu bieżącej wersji; router 3.41 → 3.42. (2) T17 liczy odtąd KORPUS
+(≤500) osobno od frontmatteru (≤150) — zmiana MIARY, nie progu: warunek nazywa
+się „lekki korpus", a liczył plik razem z rejestrami metadanych, więc rósł
+z każdą nową pozycją `required_modules:`. Korpus po naprawie: 438 linii wobec
+~400 z 3.28, czyli gate nadal ma zapas i nadal blokuje rozdęcie procedury.
+⚠️ Alternatywę „500 → 600 na całym pliku" odrzucono: to uciszenie, które
+wróci przy następnym module. (3) Reguły 12b/12c/12d dopisane do kontraktu,
+z warunkiem, że kolejne dopisanie wymaga wpisu w changelogu i w tym dzienniku.
+⛔ Treść proceduralna routera, routing [1]–[11], reguły i bramki — bez zmian.
+
+**Diagnoza i naprawa F-170 (T21).** Cztery skille generują sumy przez
+`find . -type f`, w formacie `./plik.md`; T21 nie normalizował prefiksu, więc
+zgłaszał „BRAK WPISU" dla wszystkich 307 ich plików. Weryfikacja niezależna
+(`sha256sum -c` w każdym z tych katalogów) dała 41/41, 161/161, 19/19 zgodnych
+i JEDEN realny FAILED: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, edytowany
+bez przeliczenia sumy. ⛔ To jest ta sama klasa ślepoty, dla której T21 powstał
+(F-145), w wariancie odwróconym: nie cisza ukrywała usterkę, tylko szum.
+Dodana `normalizuj()`; obie konwencje przechodzą.
+
+**F-171 OTWARTA — regresje dostępu.** T25 z 2026-09-09: 52 sondy, 40 zgodnych
+z odniesieniem 2026-09-04, cztery regresje — SAOS `/api/search`, `/api/dump`,
+`/api/judgments/{id}` (HTTP 502, 3/3) i `decyzje.uokik.gov.pl` (HTTP 503, 3/3).
+SAOS jest kanałem maszynowym RZĘDU 2A dla orzecznictwa; do powrotu weryfikacja
+sygnatur idzie przez portale pojedynczych sądów (`orzeczenia.warszawa.so.gov.pl`
+odpowiada 200 i ma RSS). ⚠️ Trzykrotna porażka jednego dnia dowodzi
+niedostępności TEGO DNIA — nie wolno z niej orzec wygaszenia usługi (klasa
+błędu F-151/F-162/F-164: orzeczenie o niedostępności bez powtórzonego pomiaru).
+Surowy wynik: `references/F-171-pomiar-domen-2026-09-09.md`. Ten sam przebieg
+pokazał 8 hostów grupy `kandydaci` odpowiadających mimo statusu POZA_LISTA —
+materiał do F-157, decyzja po stronie dewelopera.
+
+**Czego świadomie NIE naprawiono w tej turze.**
+- **T11 (20 pozycji) i T15 (1 problem statusu).** 9 numerów z lokalnych
+  MAPA-AKTOW i 11 z ROUTING-MAP nie ma odpowiednika w mapie Dz.U.; T15 wskazuje
+  `Dz.U. 2023 poz. 1285` w `prawo-polskie-v2/ROUTING-MAP.md:219`, gdzie numer
+  jest jawnie opisany jako akt PIERWOTNY obok t.j. `Dz.U. 2024 poz. 1111` —
+  czyli prawdopodobnie parser bierze akt pierwotny za deklarację t.j., a nie
+  mapa się myli. ⛔ Dopisanie numerów do mapy wymaga TRYBU DZU na każdym akcie
+  osobno (ZASADA 3: tylko po potwierdzeniu online; ZASADA 8: numer weryfikowany
+  niezależnie od nazwy). Zgadywanie tutaj byłoby dokładnie tym, czemu obie
+  zasady zapobiegają. Pozostaje jako zakres do osobnej sesji.
+- **T24 (139 pozycji).** Z definicji nie do „naprawy" — liczba powstaje w
+  momencie uruchomienia i celowo nie jest wpisywana do map (F-156). Wynik
+  zgodny z pomiarem odniesienia F-155.
+- **T6/T7: dwie grupy duplikatów bajtowych.**
+  `analizator-dowodow-v3/modules/MOD-NAZEWNICTWO-STRON.md` = `shared/NAZEWNICTWO-STRON.md`
+  oraz `prawny-router-v3/references/legacy-material-router/stalking-nekanie.md` =
+  `shared/STALKING-NEKANIE.md`. Usunięcie kopii to decyzja redakcyjna o
+  zależnościach (CHECKLIST-DEDUP), nie naprawa mechaniczna — nie wykonano bez
+  polecenia. 596 pozycji „portability" to nadal ścieżki `/mnt/...` w treści
+  skilli; adapter runtime je pokrywa, więc zostają jako przegląd, nie usterka.
+- **Skuteczność bramek.** Wszystko powyżej to testy OBECNOŚCI i spójności.
+  Czy bramki ZMIENIAJĄ ZACHOWANIE, rozstrzyga dopiero F-113 z grupą kontrolną.
+
+**Wydanie (ZASADA 7).** Zmienione skille: `prawny-router-v3` (3.42) i
+`audyt-systemu-v4` (6.52). Każdy spakowany osobno przez `scripts/dostarcz_skill.sh`,
+z porównaniem liczby plików oryginał = kopia = ZIP i `diff -rq` archiwum po
+rozpakowaniu względem kopii roboczej. Sumy `CHECKSUMS.sha256` przeliczone
+w obu skillach po ostatniej edycji.
+
 ## AUDYT-2026-08-27-F108-46 — transakcje handlowe, pierwsza transza P1
 
 **Polecenie:** kontynuacja F-108. **Status całej flagi: OTWARTA.**
