@@ -64,7 +64,11 @@ def main() -> int:
     # z wpisem w references/CHANGELOG.md routera i w AUDIT-JOURNAL.md.
     expected_rules = ["1", "1C", "2", "3", "4", "5", "6", "7", "7B", "7C",
                       "8", "9", "10", "11", "11a", "12", "12a", "12b", "12c",
-                      "12d", "14", "15", "16",
+                      "12d", "14", "14a", "15", "16",   # 14a — forma znacznika ✅ (AF-7),
+                      # dodana w routerze 3.42 (F-169). ⛔ Wpisana tu 2026-09-10 (F-178) po
+                      # wykryciu, że 3.42 wydano z T17 na FAIL: reguła weszła do korpusu,
+                      # a lista oczekiwana nie została zaktualizowana. Test zadziałał
+                      # poprawnie — nikt nie odczytał jego wyniku przed wydaniem.
                       "17", "18", "19", "20", "20a", "21", "22", "23", "24",
                       "25", "26", "27"]
     actual_rules = re.findall(r"^- \*\*Reguła ([0-9]+[a-zA-Z]?) —", body, re.MULTILINE)

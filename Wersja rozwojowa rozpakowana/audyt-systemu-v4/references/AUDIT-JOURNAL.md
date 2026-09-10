@@ -61582,3 +61582,234 @@ nazwania), który jest testowalną właściwością TEKSTU, nie pamięci.
 |---|---:|---:|---|
 | `shared` | 162 | 162 | edycje `MOD-CN-GATE.md`, `MIEDZYNARODOWE-GATES.md` |
 | pozostałe trzy | bez zmian | | wydane dla spójności |
+
+---
+
+## AUDYT-2026-09-10 — profil LEKKI, rejestr konektorów POZIOM A, warstwa wykonawcza F-113
+
+**Wywołanie:** polecenie użytkownika po zewnętrznej ocenie systemu.
+**Kanał:** rozwojowy. **Skille zmienione:** `prawny-router-v3` (3.42→3.43),
+`shared`, `audyt-systemu-v4` (6.53→6.54), `raport-klienta-v1` (1.4→1.5).
+
+### 0. ⛔ Sprostowanie własnego ustalenia z poprzedniej tury
+
+Ocena zewnętrzna prowadzona była na **kopii zamontowanej w sesji hosta**, nie na
+repozytorium. Kopia niosła router **3.41**. Zgłoszona wtedy „luka historii
+3.39–3.41 i regresja `dysk < dziennik`" **nie istnieje w repozytorium** — repo
+ma 3.42 z 2026-09-09, wpis w lokalizacji kanonicznej i T12 zielony dla routera.
+
+⛔ To jest ta sama klasa błędu, którą system ściga u siebie od F-151: **wniosek
+wyprowadzony z jednego nośnika bez sprawdzenia drugiego.** Odnotowane jawnie,
+bo poprzednia tura zapisała to jako otwartą usterkę systemu, a usterką był stan
+kopii sesyjnej. Wersje wdrożone w tej turze liczone są od stanu repozytorium.
+
+Ustalenie uboczne o wartości trwałej: **stan hosta może być starszy niż repo
+o kilka wydań, bez żadnego sygnału.** Kandydat na kontrolę wejściową — porównanie
+`version:` routera wczytanego przez hosta z wersją w repozytorium przed
+przyjęciem jakiegokolwiek wniosku o „luce w systemie". Zgłoszone jako O-6.
+
+### 1. F-175 — profil LEKKI [ZAMKNIĘTA]
+
+Pomiar ścieżki obowiązkowej routera 3.42 na dysku repozytorium, 2026-09-10:
+
+| Warstwa | Rozmiar | ≈ tokenów |
+|---|---:|---:|
+| rdzeń R-1…R-5 (SKILL, KROK 0A, KROK 1, PRAWO-HARDGATE, SELF-CHECK) | ≈106 kB | ≈26 tys. |
+| warstwa odroczona (HIERARCHIA, CN, REM, WYJ, OŚ, ST, DISCLAIMER) | ≈113 kB | ≈28 tys. |
+| **razem, przed PRIMARY** | **≈219 kB** | **≈54 tys.** |
+
+⚡ **Zbieżność z benchmarkiem 2026-09-08 — to nie jest kwestia wygody.**
+Pomiar 2×2 wykazał, że skille mają znak zależny od poziomu rozumowania: przy
+wysokim +3,6 pkt, przy średnim **−7,5 pkt**. Ujemny znak przy średnim poziomie
+jest dokładnie tą sygnaturą, jakiej należy oczekiwać, gdy koszt kontekstu wypiera
+uwagę z merytoryki. Profil LEKKI adresuje ten mechanizm.
+
+Wdrożone: `prawny-router-v3/references/PROFIL-LEKKI.md`, pozycja
+`[PROFIL-ODROCZENIA]` w `SELF-CHECK.md`, dwie linie w bloku KROKU 3A.
+⛔ Bramek nie ubyło: UP-6 bez zmian, cztery przypadki zakazu profilu LEKKIEGO
+(karne materialne, generowanie pisma, kategoria [11], błąd odczytu rdzenia).
+
+### 2. F-175 część druga — konektory MCP POZIOM A [ZAMKNIĘTA]
+
+`PRAWO-HARDGATE.md` definiuje POZIOM A jako najsilniejszy kanał weryfikacji
+i wymieniał wyłącznie „wzorce" — bez ani jednego działającego serwera. POZIOM A
+był deklaracją, weryfikacja szła faktycznie POZIOMEM B/C.
+`shared/KONEKTORY-REKOMENDOWANE.md` uzupełniony o rejestr dziesięciu publicznych
+serwerów MCP (ISAP/ELI, SAOS, CBOSA, KRS, EUR-Lex i pochodne) z mapowaniem na
+bramki systemu. Wpisy: RZĄD 3; treść dziedziczy RZĄD źródła, nie konektora.
+
+### 3. F-176 — warstwa wykonawcza F-113 [ZAMKNIĘTA; F-113 NADAL OTWARTA]
+
+`scripts/build_ramie_kontrolne_f113.py` + `references/PROTOKOL-WYKONAWCZY-F113.md`.
+⛔ Ustalenie z pierwszego uruchomienia generatora, istotne poza F-113:
+**skasowanie trzech plików kanonicznych bramek zostawia 43 zerwane odwołania
+w 57 plikach.** Skill z zerwanym odwołaniem wchodzi fail-closed w TRYB
+ZDEGRADOWANY — przebieg mierzyłby wtedy reakcję na awarię zasobu, nie brak
+bramki, czyli powtórzyłby wadę TEST1–3. Sprzątanie odwołań jest częścią pomiaru.
+Po sprzątaniu (36 plików, 55 linii): `ci_check_shared` na ramieniu A = OK.
+
+⛔ **Pomiaru nie wykonano.** F-113 zmienia status z „brak narzędzia" na
+„narzędzie gotowe, pomiar do wykonania" (20 przebiegów, ~2 sesje robocze).
+
+### 4. F-177 — `raport-klienta-v1` [ZAMKNIĘTA]
+
+T12 na repozytorium wykrył ODWROTNY rozjazd: changelog ma 1.5, `version:`
+pozostał 1.4. Kierunek odwrotny do F-101, przyczyna ta sama — metadane wersji
+edytowane w dwóch nośnikach osobno. Podbito do 1.5.
+
+### 5. README [POPRAWIONY]
+
+| Miejsce | Było | Jest |
+|---|---|---|
+| katalog skilli | router „klasyfikacja [1]–[10]" | `[1]–[11]`, z opisem kategorii [11] |
+| Krok 2 instalacji | „kolejność ma znaczenie" + tabela etapów 1️⃣–5️⃣ | „kolejność nie ma znaczenia — liczy się **kompletność**"; tabela zestawów zamiast etapów |
+| ścieżka Grok | „zaczynając od `shared/`, kolejność jak w Kroku 2" | kolejność dowolna, kompletność przed pierwszym użyciem |
+| mechanizmy | — | nowa sekcja PROFIL LEKKI |
+| konektory | tylko implementacje przykładowe | + wiersz rejestru publicznego z zastrzeżeniem RZĘDU 3 |
+
+Uzasadnienie korekty kolejności: skille rozwiązują się po nazwie, system nie ma
+stanu zależnego od kolejności instalacji, a brak zasobu z `dependencies.requires`
+uruchamia fail-closed, nie cichy błąd. Warunkiem jest komplet w chwili pierwszego
+użycia, nie sekwencja wgrywania.
+
+⛔ Struktura czterech katalogów kanałowych **pozostaje bez zmian** — na wyraźne
+polecenie użytkownika. Poprzednia tura rekomendowała konsolidację do `skills/`
+z tagami; rekomendacja wycofana z realizacji, odnotowana wyłącznie jako opcja.
+
+### 6. Weryfikacja liczby plików (ZASADA 7)
+
+| Skill | PRZED | PO | Różnica |
+|---|---:|---:|---|
+| `prawny-router-v3` | 42 | 43 | +`references/PROFIL-LEKKI.md`; edycje `SKILL.md`, `SELF-CHECK.md`, `CHANGELOG.md` |
+| `audyt-systemu-v4` | 89 | 91 | +`PROTOKOL-WYKONAWCZY-F113.md`, +`build_ramie_kontrolne_f113.py`; edycje `SKILL.md`, `CHANGELOG.md`, `WARN-OTWARTE.md`, ten plik |
+| `shared` | 162 | 162 | edycja `KONEKTORY-REKOMENDOWANE.md` |
+| `raport-klienta-v1` | 5 | 5 | edycja `SKILL.md` (wersja) |
+
+### 6a. F-178 — router 3.42 wydany z T17 na FAIL [ZAMKNIĘTA]
+
+Wykryte przy pierwszym przebiegu zestawu na repozytorium, **przed** własnymi
+zmianami: `test_router_contract.py` (T17, kontrakt statyczny routera) zwracał
+`⛔ stałe identyfikatory i kolejność reguł`. Przyczyna: wydanie 3.42 (F-169)
+wprowadziło do korpusu **Regułę 14a** (rygor formy znacznika ✅ [VER], AF-7),
+a lista `expected_rules` w teście nie została uzupełniona.
+
+⛔ Kwalifikacja: **test zadziałał poprawnie — nikt nie odczytał jego wyniku przed
+wydaniem.** To nie jest luka w narzędziu, tylko luka w procedurze wydania. Ta sama
+klasa co F-101 i F-177 (metadane w dwóch nośnikach edytowane osobno), tyle że
+drugim nośnikiem jest tu skrypt testowy, nie plik metadanych.
+
+Naprawa: `"14a"` dopisane do `expected_rules` z komentarzem wskazującym pochodzenie
+i datę wpisu. T17: PASS.
+
+⚠️ Wniosek proceduralny: `run_regression_suite.py` istnieje, przechodzi i nie jest
+uruchamiany jako warunek wydania. Kandydat na GitHub Actions — 20 linii YAML nad
+gotowym orkiestratorem. Odnotowane jako O-7.
+
+### 7. Zestaw regresyjny po zmianach
+
+```
+T1 ✅  T2 ✅  T3 ✅  T6/T7 ✅  T8 ✅  T9 ✅  T11 ✅  T12 ✅  T13 ✅  T14 ✅
+T17 ✅  T18 ✅  T19 ✅  T19b ✅  T21 ✅  T22 ✅  MOCK ✅   T4/T5 ⏸ RĘCZNE
+WYNIK KOŃCOWY: ✅ PASS STRUKTURALNY, zero WARN
+```
+
+Przebieg pierwszy (przed naprawami) dał dwa WARN: T12 — pole `changelog:` routera
+rozrosło się do 19 linii po dopisaniu wpisu 3.43, czyli ponad próg ZASADY 15;
+T17 — F-178 powyżej. Oba zamknięte: pole `changelog:` sprowadzone do skrótu
+dwóch wydań plus odesłanie do lokalizacji kanonicznej, `expected_rules`
+uzupełnione. `CHECKSUMS.sha256` przeliczone dla czterech zmienionych skilli,
+T21 zero rozjazdów.
+
+⛔ Archiwa `.zip` kanału rozwojowego przepakowane przez
+`scripts/repack_development_archives.py` i zweryfikowane przez
+`scripts/verify_development_archives.py` — inaczej katalog `WERSJA ROZWOJOWA/`
+niósłby stan sprzed tej sesji, co jest dokładnie klasą rozjazdu `dysk < dziennik`,
+tylko między kanałami dystrybucji.
+
+---
+
+## AUDYT-2026-09-10b — F-179: profil LEKKI stał na fałszywej przesłance
+
+**Wywołanie:** użytkownik wskazał, że ocena kosztu kontekstu pominęła leniwe
+ładowanie. Wskazanie trafne; poniżej pomiar i skutki.
+
+### 1. Co było twierdzone, a co jest prawdą
+
+Wydanie 3.43 / 6.54 uzasadniało profil LEKKI pomiarem: **„≈219 kB ≈ 54 tys.
+tokenów ścieżki obowiązkowej przed wczytaniem PRIMARY"**. Liczba powstała
+z sumowania dwunastu plików, w tym `MOD-CN-GATE`, `MOD-REM-GATE`,
+`MOD-WYJATEK-GATE`, `MOD-OS-CZASU-PRZESLANEK`, `HIERARCHIA-ZRODEL`,
+`MOD-STEP-TRACKER` i `DISCLAIMER`.
+
+⛔ Wszystkie siedem ma **wyzwalacze warunkowe zapisane we własnej treści**
+i podlega leniwemu ładowaniu — host wczytuje zasób przy `view`, nie z góry.
+Warstwa warunkowa była leniwa, zanim profil powstał. Twierdzenie sumowało
+koszt hipotetyczny jako koszt ponoszony.
+
+Pomiar poprawny, 2026-09-10:
+
+| Warstwa | Kiedy w kontekście | Rozmiar |
+|---|---|---:|
+| `name` + `description` 32 skilli | zawsze, niezależnie od sprawy | ≈5,9 kB ≈ 1,5 tys. tokenów |
+| rdzeń R-1…R-5 | po wyzwoleniu routera, bezwarunkowo | ≈100 kB ≈ 25 tys. tokenów |
+| zasoby warunkowe | po padnięciu wyzwalacza | 0–113 kB |
+
+### 2. Klasa błędu i dlaczego aparat go nie złapał
+
+⛔ **Czwarte wystąpienie klasy F-164** — reguła zbudowana na tezie o świecie,
+której nikt nie zmierzył (F-151, F-162, F-164, F-179). Trzy poprzednie dotyczyły
+niedostępności źródeł; to dotyczy kosztu kontekstu. Mechanizm identyczny.
+
+Istotniejsze: **wydanie 6.54 przeszło pełny zestaw regresyjny bez jednego WARN.**
+T1–T22 pilnują rejestrów, wersji, map, sum i kontraktu routera. Żaden nie
+sprawdza — i z natury nie może sprawdzić — **przesłanek faktycznych, na których
+zbudowano regułę**. Twierdzenia o świecie leżą poza zasięgiem tego aparatu.
+
+To jest ograniczenie strukturalne, nie luka do zamknięcia kolejnym testem.
+Konsekwencja praktyczna: **zielony zestaw regresyjny nie jest dowodem, że wydanie
+jest sensowne — jest dowodem, że jest spójne.** Odnotowane jako O-8, bez
+przypisanego działania naprawczego, świadomie.
+
+### 3. Co profil LEKKI naprawdę robi
+
+Skoro nie zmniejsza rdzenia ani o bajt, uzasadnieniem pozostaje wyłącznie
+warstwa audytowa — i ona się broni bez tamtej liczby:
+
+Przed profilem odpowiedź na pytanie „czy model wczytał WYJ-GATE, skoro powołał
+artykuł?" była **nieweryfikowalna z zewnątrz**. Wyzwalacze siedziały w treści
+modułów, których nikt nie czytał, dopóki model sam nie uznał, że powinien —
+a ocena własnej potrzeby jest trybem awarii mierzonym przez F-113
+i udokumentowanym w benchmarku 2026-09-08 (przebieg 02: „reżim prawa kosmicznego
+nie wymaga weryfikacji, bo nie uległ zmianie od czasu treningu" → jedyny w całym
+benchmarku błąd reżimu odpowiedzialności).
+
+Leniwe ładowanie tworzy jeden konkretny tryb awarii: **odroczenie, które cicho
+staje się pominięciem.** Profil zamyka go deklaracją w KROKU 3A, kontrolą
+`[PROFIL-ODROCZENIA]` na wyjściu i zamkniętą listą wyzwalaczy w jednym miejscu.
+
+⚠️ Realna redukcja kosztu wymagałaby skrócenia rdzenia: `PRAWO-HARDGATE.md` to
+41 kB, czyli **41% rdzenia**, wczytywane bezwarunkowo w każdej turze. Osobna
+decyzja projektowa o innym profilu ryzyka — nieobjęta tym wydaniem, odnotowana
+jako kandydat.
+
+### 4. O-7 ZAMKNIĘTA — zestaw regresyjny jako bramka wydania
+
+`.github/workflows/regresja.yml`: T1–T22 + T21 + kontrola spójności archiwów,
+na `push` i `pull_request` dla kanałów rozpakowanych. F-178 (3.42 wydana z T17
+na FAIL) nie powstałaby przy aktywnej bramce.
+
+### 5. README — twardy próg minimalnego modelu
+
+Sekcja przed Krokiem 1 instalacji: tabela efektu per model, zakaz dla Haiku 4.5,
+drugi wymiar (poziom rozumowania: +3,6 vs −7,5 pkt), trzeci wymiar (wersja
+routera waży więcej niż jego obecność). Powód: Mechanizm 3 z `WPLYW-SKILLI.md`
+jest udokumentowaną szkodą, a nie było o nim słowa tam, gdzie użytkownik czyta
+przed instalacją.
+
+### 6. Weryfikacja liczby plików (ZASADA 7)
+
+| Skill | PRZED | PO | Różnica |
+|---|---:|---:|---|
+| `prawny-router-v3` | 43 | 43 | edycje `SKILL.md` (3.44), `references/PROFIL-LEKKI.md` (1.1), `references/CHANGELOG.md` |
+| `audyt-systemu-v4` | 91 | 91 | edycje `SKILL.md` (6.55), `references/CHANGELOG.md`, `WARN-OTWARTE.md`, ten plik |
+| poza skillami | — | +1 | `.github/workflows/regresja.yml`, `README.md` |

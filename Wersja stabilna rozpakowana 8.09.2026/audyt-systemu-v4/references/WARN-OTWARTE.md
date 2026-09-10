@@ -1,15 +1,68 @@
 # WARN-OTWARTE — rejestr żywy otwartych flag audytowych
 
-**Stan:** 2026-09-09b. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
+**Stan:** 2026-09-10b. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
 
 ## Tablica sterująca
 
 | Kategoria | Liczba | Pozycje |
 |---|---:|---|
-| Wykonalne sesją audytową | 6 | F-135, F-141, F-148, F-160, F-167, O-4 |
+| Wykonalne sesją audytową | 8 | F-135, F-141, F-148, F-160, F-167, O-4, O-5, O-6 |
 | Reaktywne | 1 | F-5 |
 | Zależne od środowiska/dewelopera | 12 | F-8, F-9, F-11, F-94, F-113, F-133, F-137, F-143, F-144, F-157, F-158(c), F-171 |
-| **Razem** | **19** | — |
+| Odnotowane bez działania | 1 | O-8 (ograniczenie strukturalne aparatu) |
+| **Razem** | **22** | — |
+
+> **O-8 ODNOTOWANA BEZ DZIAŁANIA (2026-09-10b) — zestaw regresyjny nie sprawdza
+> przesłanek faktycznych.** F-179 (profil LEKKI uzasadniony liczbą, która nie
+> opisywała świata) przeszła pełny zestaw T1–T22 bez jednego WARN. Testy pilnują
+> rejestrów, wersji, map, sum i kontraktu routera; twierdzenia o świecie leżą
+> poza ich zasięgiem i z natury nie da się ich tam wciągnąć.
+> ⛔ Konsekwencja do zapamiętania: **zielony zestaw regresyjny dowodzi spójności
+> wydania, nie jego sensowności.** Pozycja istnieje po to, żeby ten wniosek nie
+> zginął — nie ma przypisanego działania naprawczego i nie powinna go dostać.
+
+> **F-179 ZAMKNIĘTA 2026-09-10b — korekta fałszywej przesłanki profilu LEKKIEGO.**
+> Czwarte wystąpienie klasy F-164. Do rejestru żywego nie wchodzi (ZASADA 10).
+> Szczegóły: AUDYT-2026-09-10b.
+
+> **O-7 ZAMKNIĘTA 2026-09-10b — `.github/workflows/regresja.yml`.** Zestaw
+> regresyjny jest odtąd bramką wydania. Do rejestru żywego nie wchodzi.
+
+> **F-113 — ZMIANA STATUSU 2026-09-10 (nie zamknięcie).** Blokada przestała być
+> „brak narzędzia" i jest teraz „pomiar do wykonania". Ustalono, że plan
+> z 2026-08-24 nie ruszył nie z powodu wady projektu badania, tylko dlatego, że
+> zakładał istnienie ramienia kontrolnego i nie mówił, jak je zbudować.
+> Dostarczone: `scripts/build_ramie_kontrolne_f113.py`,
+> `references/PROTOKOL-WYKONAWCZY-F113.md` (plan minimum 20 przebiegów, karta
+> przebiegu, budżet ~2 sesje robocze).
+> ⚠️ **Następny krok:** 20 przebiegów (T1 i T2, po 5 na ramię), ocena ślepa,
+> Δ(B1…B5), wpis do dziennika — **także wynik negatywny**. Zamknięcie wymaga
+> pomiaru, nie potwierdzenia skuteczności. Wpis: AUDYT-2026-09-10.
+
+> **O-5 OTWARTA (2026-09-10) — zestaw regresyjny zakłada jeden korzeń.**
+> Na hoście rozdzielającym skille na dwa punkty montowania T3 i T11 (oba
+> KRYTYCZNE) dają FAIL z `KeyError: 'prawo-polskie-v2'`, nieodróżnialny
+> w wyjściu od realnego braku skilla. ⚠️ **Następny krok:** `--repo-root`
+> wielokrotny albo komunikat rozróżniający „brak skilla" od „skill poza tym
+> korzeniem".
+
+> **O-6 OTWARTA (2026-09-10) — stan hosta może być starszy niż repozytorium.**
+> Zewnętrzna ocena z 2026-09-09/10 prowadzona na kopii sesyjnej z routerem 3.41
+> zgłosiła jako usterkę systemu lukę, która w repozytorium (3.42) nie istniała.
+> Klasa błędu jak F-151: wniosek z jednego nośnika bez sprawdzenia drugiego.
+> ⚠️ **Następny krok:** kontrola wejściowa porównująca `version:` routera
+> wczytanego przez hosta z wersją w repozytorium, przed przyjęciem wniosku
+> o „luce w systemie". Kandydat na pozycję w SELF-CHECK albo na test T-nowy.
+
+> **O-7 OTWARTA (2026-09-10) — zestaw regresyjny nie jest warunkiem wydania.**
+> F-178 (router 3.42 wydany z T17 na FAIL) powstała nie dlatego, że testu
+> zabrakło, tylko dlatego, że jego wynik nie został odczytany przed wydaniem.
+> ⚠️ **Następny krok:** `run_regression_suite.py` jako GitHub Action na push
+> do kanału rozwojowego — orkiestrator jest gotowy, brakuje ~20 linii YAML.
+
+> **F-175 / F-176 / F-177 / F-178 ZAMKNIĘTE 2026-09-10** — profil LEKKI + rejestr
+> konektorów POZIOM A, warstwa wykonawcza F-113, podbicie `raport-klienta-v1`.
+> Do rejestru żywego nie wchodzą (ZASADA 10). Szczegóły: AUDYT-2026-09-10.
 
 > **F-171 OTWARTA (2026-09-09) — cztery regresje dostępu do źródeł, kanał
 > kodu.** Pomiar T25 z 2026-09-09: 52 sondy, 40 zgodnych z odniesieniem

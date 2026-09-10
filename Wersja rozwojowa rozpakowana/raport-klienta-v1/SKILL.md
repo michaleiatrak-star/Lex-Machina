@@ -1,6 +1,6 @@
 ---
 name: raport-klienta-v1
-version: "1.4"
+version: "1.5"
 type: ux-raport
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_document_and_interactive_ui"

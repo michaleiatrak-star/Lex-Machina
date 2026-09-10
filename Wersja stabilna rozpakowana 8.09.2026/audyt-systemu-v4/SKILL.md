@@ -1,7 +1,7 @@
 ---
 name: audyt-systemu-v4
 description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych skilli: zależności, wersje, mapy Dz.U., treść merytoryczna, propagacja zmian, deduplikacja i bramki jakości."
-version: "6.53"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
+version: "6.55"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
                   # parsuje jako float 6.1 — czyli numer NIŻSZY niż 6.9, co cicho
                   # odwraca porządek wersji. Wykryte przy walidacji 2026-08-20z.
                   # Każda kolejna wersja z dwucyfrowym minor — też w cudzysłowie.
@@ -54,6 +54,9 @@ references:
   - references/mapa_dzu_2026-08-28.md   # POPRZEDNIA generacja; ponowny audyt F-108, korekty tożsamości i statusów t.j.
   - references/mapa_dzu_2026-08-26.md   # POPRZEDNIA generacja — zachowana historycznie
   - references/mapa_dzu_2026-07-15.md   # POPRZEDNIA generacja (sync 2026-08-13) — zachowana jako materiał historyczny
+  - references/PROTOKOL-WYKONAWCZY-F113.md   # warstwa OPERACYJNA protokołu F-113 (F-176, 2026-09-10):
+                                          # budowa ramienia kontrolnego, plan minimum 20 przebiegów,
+                                          # karta przebiegu, łańcuch wykonania
   - references/PLAN-TESTU-BRAMEK-F113.md   # protokół testu SKUTECZNOŚCI bramek z GRUPĄ KONTROLNĄ
                                           # (F-113, część projektowa, 2026-08-24). Odpowiada na pytanie,
                                           # którego `grep` nie rozstrzyga: czy bramka ZMIENIA ZACHOWANIE,
@@ -98,6 +101,14 @@ scripts:
                                           # obserwacja O-3 — powstał po tym, jak naruszenie w mod-KC-spadki
                                           # (1036 l.) przetrwało do ręcznego skanu ad hoc, bo system miał
                                           # 12 testów na rejestry/wersje/mapy i ZERO na długość
+  - scripts/build_ramie_kontrolne_f113.py # generator RAMIENIA A (kontrolnego) dla F-113 (F-176):
+                                          # wycina bramki B1-B5, kasuje ich pliki kanoniczne, SPRZĄTA
+                                          # odwołania i weryfikuje wynik przez ci_check_shared.
+                                          # ⛔ Krok sprzątania jest krytyczny: zmierzone 2026-09-10 —
+                                          # 3 skasowane pliki zostawiają 43 zerwane odwołania w 57
+                                          # plikach, a skill z zerwanym odwołaniem wchodzi w TRYB
+                                          # ZDEGRADOWANY, więc przebieg mierzyłby reakcję na awarię
+                                          # zasobu zamiast braku bramki
   - scripts/ocena_transkryptow_f113.py    # narzędzie do protokołu F-113: anonimizacja przebiegów
                                           # (ocena Ślepa), karta ocen, liczenie Δ między ramionami.
                                           # ⛔ NIE ocenia transkryptów automatycznie — świadomie, patrz docstring
@@ -1293,7 +1304,7 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
 
 ---
 
-*Wersja: 6.53 | Ostatnia aktualizacja: 2026-09-09b (F-172 ZAMKNIĘTA — nowa generacja mapy Dz.U. `mapa_dzu_2026-09-09.md`: 11 numerów z T11 zweryfikowanych w RZĘDZIE 1 przez API ELI, 10 wierszy w tabeli głównej, 1 w MONITORING (wejście 1.01.2028), 3 wiersze przestawione na PREV po ujawnieniu nowszych t.j.; sygnał T15 o 2023/1285 potwierdzony jako fałszywy alarm parsera. T11 zielony. Poprzednio: 2026-09-09 (F-169, F-170 ZAMKNIĘTE — router 3.42, T17 mierzy korpus osobno od frontmatteru, T21 normalizuje prefiks `./`; F-171 OTWARTA — 4 regresje dostępu z pomiaru T25))*
+*Wersja: 6.55 | Ostatnia aktualizacja: 2026-09-10b (F-179 ZAMKNIĘTA — korekta FAŁSZYWEJ PRZESŁANKI profilu LEKKIEGO: pomiar „219 kB ścieżki obowiązkowej” sumował zasoby ładowane leniwie; koszt stały systemu to ≈5,9 kB, rdzeń ≈100 kB, korzyść profilu jest AUDYTOWA, nie wydajnościowa; klasa błędu jak F-164, czwarte wystąpienie. O-7 ZAMKNIĘTA — `.github/workflows/regresja.yml`, zestaw regresyjny jako bramka wydania. README: twardy próg minimalnego modelu. Poprzednio: 2026-09-10 (F-175/F-176/F-177/F-178))*
 
 *(Stopka podawała „5.0 | 2026-07-04" przy `version: 6.8` w YAML — rozjazd
 9 wersji, naprawiony 2026-08-20y. **Stopkę aktualizuj razem z polem `version`**;

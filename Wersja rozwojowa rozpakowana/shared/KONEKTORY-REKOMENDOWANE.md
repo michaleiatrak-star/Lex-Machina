@@ -27,6 +27,60 @@ nie na posiadaniu własnego kodu integracyjnego jako takiego.
 | Status podmiotu (spółka/organ) — używane przez PODMIOT-GATE routera | MCP server dla KRS | KRS (dane rejestrowe) | MIT (typowo) |
 | Weryfikacja sygnatury wyroku (czy istnieje, sąd, data) bez pełnej treści | Deterministyczny weryfikator sygnatur (no-LLM, lookup) | SAOS | zależnie od projektu |
 
+## REJESTR KONKRETNYCH SERWERÓW MCP — POZIOM A (dodany 2026-09-10, F-173)
+
+> ⛔ **Po co ten rozdział.** `shared/PRAWO-HARDGATE.md` definiuje POZIOM A
+> (konektor MCP) jako najsilniejszy kanał weryfikacji i wymienia `mcp-isap`,
+> `legal-cite-pl`, `sententim` i `prawo-pl-saos` jako **wzorce**. Do 2026-09-10
+> system nie wskazywał ani jednego konkretnego, publicznego serwera — POZIOM A
+> był deklaracją, a cała weryfikacja szła faktycznie POZIOMEM B/C. Tabela wyżej
+> podaje KATEGORIE funkcjonalne; ta podaje ADRESY.
+>
+> ⛔ **Status tych pozycji:** RZĄD 3 (repozytorium osoby trzeciej). Wpis w tym
+> rejestrze **nie jest rekomendacją jakościową ani atestem bezpieczeństwa** —
+> wskazuje kanał dostępu do źródła RZĘDU 1/2A, nie zastępuje oceny źródła.
+> Treść zwrócona przez konektor dziedziczy RZĄD **źródła**, do którego konektor
+> sięga, nigdy RZĄD samego konektora.
+>
+> ⛔ **Lista jest OTWARTA** (ZASADA OTWARTEJ LISTY, `HIERARCHIA-ZRODEL.md` §Rząd 3):
+> brak projektu w tej tabeli nie blokuje jego użycia. Stan rozpoznania:
+> 2026-09-10. Projekty rozwijają się niezależnie — przed wdrożeniem
+> produkcyjnym obowiązkowy audyt licencji, zakresu i aktualności po stronie
+> developera (patrz „Uwaga o utrzymaniu” niżej).
+
+| Projekt | Zakres | Narzędzia / uwagi | Źródło danych (RZĄD) |
+|---|---|---|---|
+| `matematicsolutions/mcp-isap` | Dz.U. + M.P., Sejm ELI | `search_acts`, `get_act`, `get_act_text`; każde cytowanie niesie identyfikator ELI | api.sejm.gov.pl (RZĄD 1) |
+| `matematicsolutions/mcp-saos` | sądy powszechne, SN, TK, KIO | `search`, `get_judgment`, `search_by_case` | SAOS (RZĄD 2A) |
+| `matematicsolutions/mcp-nsa` | NSA + 16 WSA | `search`, `get_judgment`, `search_by_case` | CBOSA (RZĄD 2A) |
+| `matematicsolutions/mcp-krs` | rejestr przedsiębiorców | `get_entity`, `get_entity_full`, `get_board` — obsługa KROK 0D / PODMIOT-GATE | KRS MS (RZĄD 2A) |
+| `matematicsolutions/mcp-eu-sparql` | prawo UE + TSUE | `search_by_celex`, `search_by_date_range`, `search_cjeu` | EUR-Lex / CELLAR (RZĄD 1/2A) |
+| `tmk12/pl-law-mcp-by-legal-geek` | akty PL (ELI) + polskie wersje aktów UE | filtrowanie sekcji, cięcie po granicy `Art.`, cache TTL, rate limiting; heurystyka deklinacji (ELI robi proste dopasowanie podciągu — forma mianownikowa bywa zeroszukowa) | ELI + EUR-Lex/CELLAR (RZĄD 1) |
+| `janisz/sejm-mcp` | API Sejmu + ELI | szerszy zakres parlamentarny (druki, głosowania, interpelacje) obok aktów | api.sejm.gov.pl (RZĄD 1) |
+| `numikel/law-scrapper-mcp` | akty Dz.U./M.P. z nawigacją wewnątrz aktu | `search_in_act`, odczyt po artykułach/rozdziałach, konwersja PDF→tekst | api.sejm.gov.pl (RZĄD 1) |
+| `apiotrowski-afk/legal-cite-pl` | weryfikacja pojedynczego przepisu | `verify_article` — dosłowne brzmienie jednostki, tekst jednolity zamiast pierwotnego | ELI / EUR-Lex (RZĄD 1) |
+| `Ansvar-Systems/polish-law-mcp` | wycinek dziedzinowy (RODO, KSC, KK-cyber, KSH, e-usługi) | warstwa ustawowa; brak warstwy orzeczniczej | ELI (RZĄD 1) |
+
+### Dopasowanie do bramek systemu
+
+| Bramka / krok | Konektor rozstrzygający | Co zastępuje |
+|---|---|---|
+| `PRAWO-HARDGATE` REGUŁA AKTUALNOŚCI (łańcuch t.j.) | `mcp-isap` / `pl-law-mcp` / `sejm-mcp` | `web_fetch` na `/eli/acts/.../references` |
+| `PRAWO-HARDGATE` brzmienie jednostki | `legal-cite-pl` / `law-scrapper-mcp` | ręczne cięcie PDF-a t.j. |
+| `SYGNATURY` V-SYG-1…4, kontrakt FOUND/NOT_FOUND/AMBIGUOUS | `mcp-saos` / `mcp-nsa` | portale pojedynczych sądów przy awarii SAOS (F-171) |
+| KROK 0D / `PRE-W2` status podmiotu ⬛ | `mcp-krs` | `api-krs.ms.gov.pl` przez kanał kodu |
+| UP-5 ścieżka międzynarodowa | `mcp-eu-sparql` | `web_fetch` na EUR-Lex |
+
+⛔ **Podłączenie konektora NIE zwalnia z niczego.** Wynik konektora jest
+powołaniem jak każde inne: podlega VER-GRAIN, CN-GATE, WYJ-GATE i wymogowi
+znacznika z zamkniętej hierarchii czterech. „Zwrócone przez MCP” nie jest
+znacznikiem źródła i nie zastępuje ✅ [VER].
+
+⛔ **Reguła 12d (REM-0) obowiązuje również tutaj.** Niedostępność konektora
+stwierdza się pomiarem dwukanałowym z zapisem kodu, nie założeniem.
+
+---
+
 ## Zasady podłączenia (dla developera portalu)
 
 1. **Każdy connector osobno, nie jeden monolit** — jeśli jeden serwer padnie

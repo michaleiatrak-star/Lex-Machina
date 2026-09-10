@@ -1,5 +1,85 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.55 (2026-09-10b, F-179 / O-7): **korekta fałszywej przesłanki, bramka
+  wydania w CI, próg minimalnego modelu w README.**
+
+  **F-179 — profil LEKKI był uzasadniony liczbą, która nie opisywała świata.**
+  Wydanie 6.54 podało „≈219 kB ≈ 54 tys. tokenów ścieżki obowiązkowej przed
+  wczytaniem PRIMARY". Liczba sumowała `MOD-CN-GATE`, `MOD-REM-GATE`,
+  `MOD-WYJATEK-GATE`, `MOD-OS-CZASU-PRZESLANEK`, `HIERARCHIA-ZRODEL`,
+  `MOD-STEP-TRACKER` i `DISCLAIMER` jako koszt bezwarunkowy — a wszystkie mają
+  wyzwalacze warunkowe u siebie i podlegają **leniwemu ładowaniu**.
+
+  ⛔ **Czwarte wystąpienie klasy F-164:** teza o świecie przyjęta bez pomiaru.
+  Poprzednie trzy dotyczyły niedostępności źródeł (F-151, F-162, F-164), to
+  dotyczy kosztu kontekstu — ale mechanizm jest ten sam i tym razem przeszedł
+  przez pełny zestaw regresyjny, bo **żaden test nie sprawdza przesłanek
+  faktycznych, na których zbudowano regułę**. Testy pilnują rejestrów, wersji
+  i map; twierdzenia o świecie są poza ich zasięgiem. Odnotowane jako
+  ograniczenie strukturalne aparatu, nie jako usterka do naprawienia testem.
+
+  Zmierzone poprawnie: koszt stały (`name` + `description` 32 skilli) ≈5,9 kB
+  ≈1,5 tys. tokenów; rdzeń R-1…R-5 ≈100 kB ≈25 tys. tokenów po wyzwoleniu
+  routera; warstwa warunkowa 0–113 kB, leniwa już wcześniej.
+  **Profil LEKKI nie zmniejsza rdzenia ani o bajt** — jego korzyść jest
+  audytowa: zamienia uznaniowe leniwe ładowanie na deklarowane i sprawdzalne,
+  zamykając tryb awarii „odroczenie cicho stające się pominięciem".
+  `PROFIL-LEKKI.md` 1.0 → 1.1, router 3.43 → 3.44.
+
+  **O-7 (zamknięta) — `.github/workflows/regresja.yml`.** Zestaw regresyjny jako
+  warunek wydania na `push` i `pull_request` dla kanałów rozpakowanych, plus
+  kontrola spójności archiwów `.zip` z rozpakowanymi źródłami. Powód wagi:
+  benchmark 2026-09-08 wykazał, że różnica między dwiema wersjami tego samego
+  routera (0,7 pkt) przewyższa różnicę między routerem a jego brakiem (−0,2).
+  Wydanie niesprawdzonej wersji bramki jest ryzykiem pierwszej klasy — F-178
+  była tego dowodem.
+
+  **README — twardy próg minimalnego modelu.** Sekcja przed Krokiem 1
+  instalacji, z tabelą efektu per model i zakazem dla Haiku 4.5. Powód:
+  Mechanizm 3 z `WPLYW-SKILLI.md` jest udokumentowaną szkodą — ceremonia
+  bramkowa odtworzona, treść bramki nie, kilkanaście zmyślonych numerów
+  artykułów pod nagłówkiem ścieżki weryfikacji. To jedyny znany tryb, w którym
+  system czyni szkodę większą niż jego nieużywanie, i dotąd nie było o nim
+  słowa w miejscu, które użytkownik czyta przed instalacją.
+
+- 6.54 (2026-09-10, F-175/F-176/F-177): **profil LEKKI, rejestr konektorów
+  POZIOM A, warstwa wykonawcza F-113 i jeden odwrotny rozjazd wersji.**
+
+  **F-175 (zamknięta) — profil LEKKI.** Zmierzona ścieżka obowiązkowa routera:
+  ≈219 kB ≈ 54 tys. tokenów PRZED wczytaniem PRIMARY. Wdrożono
+  `prawny-router-v3/references/PROFIL-LEKKI.md` (rdzeń R-1…R-5 vs warstwa
+  odroczona), pozycję `[PROFIL-ODROCZENIA]` w SELF-CHECK i dwie linie w KROKU 3A.
+  Router 3.42 → 3.43. ⛔ Profil nie znosi żadnej bramki. Zbieżność z benchmarkiem
+  2026-09-08: ujemny znak skilli przy średnim poziomie rozumowania (−7,5 pkt) to
+  właśnie sygnatura wypierania uwagi przez koszt kontekstu.
+
+  **F-175 część druga — konektory POZIOM A.** `shared/PRAWO-HARDGATE.md`
+  definiuje POZIOM A jako najsilniejszy kanał weryfikacji i wymieniał wyłącznie
+  „wzorce", nie wskazując ani jednego działającego serwera — POZIOM A był
+  deklaracją, a weryfikacja szła POZIOMEM B/C.
+  `shared/KONEKTORY-REKOMENDOWANE.md` uzupełniony o rejestr dziesięciu
+  publicznych serwerów MCP dla źródeł PL/UE z mapowaniem na bramki (HARDGATE,
+  SYGNATURY, KROK 0D/PRE-W2, UP-5). Wpisy mają status RZĄD 3; treść dziedziczy
+  RZĄD **źródła**, nie konektora. „Zwrócone przez MCP" nie jest znacznikiem.
+
+  **F-176 (zamknięta) — warstwa wykonawcza F-113.** Ustalono, dlaczego plan
+  z 2026-08-24 nie ruszył: nie ma wady projektowej, tylko zakłada istnienie
+  ramienia kontrolnego i nie mówi, jak je zbudować. Dostarczono
+  `scripts/build_ramie_kontrolne_f113.py` i `references/PROTOKOL-WYKONAWCZY-F113.md`
+  (plan minimum 20 przebiegów, karta przebiegu, budżet ~2 sesje).
+  ⛔ Ustalenie z pierwszego uruchomienia, istotne poza F-113: skasowanie trzech
+  plików kanonicznych bramek zostawia **43 zerwane odwołania w 57 plikach**,
+  a skill z zerwanym odwołaniem wchodzi fail-closed w TRYB ZDEGRADOWANY —
+  przebieg mierzyłby wtedy reakcję na awarię zasobu, nie brak bramki, czyli
+  powtórzyłby wadę TEST1–3. Krok sprzątania odwołań jest częścią pomiaru.
+  ⛔ **F-113 pozostaje OTWARTA** — status zmieniony z „brak narzędzia" na
+  „narzędzie gotowe, pomiar do wykonania".
+
+  **F-177 (zamknięta) — `raport-klienta-v1`.** T12 wykrył ODWROTNY rozjazd:
+  `references/CHANGELOG.md` ma wpis 1.5, a `version:` pozostał 1.4 — wersja nie
+  została podbita po naprawie. Kierunek odwrotny do F-101, ta sama przyczyna:
+  metadane wersji edytowane w dwóch nośnikach osobno. Podbito do 1.5.
+
 - 6.53 (2026-09-09b, F-172 ZAMKNIĘTA): **nowa generacja mapy Dz.U. —
   `references/mapa_dzu_2026-09-09.md`.**
 

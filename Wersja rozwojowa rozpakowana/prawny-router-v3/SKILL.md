@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.42"
+version: "3.44"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -92,6 +92,7 @@ required_modules:
   - shared/DISCLAIMER.md
   - references/KROK0A-anonimizer.md
   - references/KROK1-detekcja.md
+  - references/PROFIL-LEKKI.md
   - references/ZRODLA-AKTOW-FALLBACK.md
   - dr-16-pisma-strategia-dowody-orzecznictwo/modules/mod-narzedzie-kontroler-kompletnosci.md
   - references/AUDYT-KLUCZA-ODPOWIEDZI.md
@@ -99,18 +100,19 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog:
-  - '3.42 (2026-09-09, F-169/F-170/F-171): TRZY ŁATKI PO AUDYCIE CZTERECH ARKUSZY ODPOWIEDZI. Pomiar w układzie 2×2 (poziom rozumowania × obecność skilli, 14 kazusów, klucz autorski jako rdzeń odniesienia): skille dają +3,6 pkt przy rozumowaniu wysokim i −7,5 pkt przy średnim — to INTERAKCJA, nie efekt główny; premia za poziom rozumowania rośnie ze skillami z +3,9 do +15,0. Trzy jednostki obalone, wszystkie w arkuszu skillowanym o średnim rozumowaniu, wszystkie oznaczone „✅ [VER]". WDROŻONO: (1) AF-7 w shared/PRAWO-HARDGATE.md — rygor trzech pól dla ✅ [VER] (kanał, identyfikator, data odczytu w TEJ turze), brak pola = znacznik nieważny. Luka: rygor nieważności miał dotąd WYŁĄCZNIE 🎯 [CEL] w AF-2, więc znacznik najsilniejszy był jedynym bez sankcji za niekompletność formy. (2) S3(b2) w shared/MOD-WYJATEK-GATE.md 2.0→2.1 — druga oś pytania zamkniętego, dla roli REGULOWANEJ obok kategorii chronionej strony; katalog w brzmieniu 2.0 obejmował wyłącznie role chronionej strony stosunku prywatnoprawnego, więc akt sektorowy przywiązany do roli sponsora, dostawcy usługi albo instytucji obowiązanej był poza zasięgiem zamiatania — wykonanie literalne i poprawne NIE MOGŁO go wskazać. (3) S4(b) tamże — obowiązek odczytu przepisu o etapowym stosowaniu w brzmieniu AKTUALNYM; akt przesuwający wyłącznie datę stosowania nie zmienia treści normy, więc nie ujawnia się przy odczycie samej normy i S1–S3 go nie wskażą. Reguły 12a i 14a zaktualizowane. Potwierdzono empirycznie Regułę 26 („skill nie jest źródłem") wraz z warunkiem brzegowym: bramka wymusza postawienie znacznika, nie wymusza odczytu źródła. references/CHANGELOG.md.'
-  - '3.40 (2026-09-05b, F-164): REM-0 — „SPRÓBUJ POBRAĆ, ZANIM OZNACZYSZ". Test kontrolny 3.39 wykazał, że REM-3 leczył objaw: regułę zbudowano na tezie, że instrumenty miękkie z natury nie dają się zweryfikować u źródła, a teza była FAŁSZYWA W PRZESŁANCE. Pomiar na 5 powołaniach ⚠️ z jednego z kazusów testowych: trzy instrumenty niewiążące były pobieralne przez cały czas (curl 403, ale web_fetch ✅ RZĄD 1); realnie zablokowane tylko dwa źródła z detekcją bota. Część punktów odzyskanych przy naprawie pochodziła z odczytu, nie z mocniejszego argumentowania. ⛔ Trzecie wystąpienie tej samej klasy błędu — orzeczenie o niedostępności bez pomiaru (F-151, F-162, F-164). WDROŻONO: REM-0 jako pierwszy, blokujący krok REM-GATE (shared/MOD-REM-GATE.md 1.1) — próba DWUKANAŁOWA obowiązkowa (curl ORAZ web_search→web_fetch), bo kanały mają różne listy domen; znacznik ⚠️ dopuszczalny wyłącznie po udokumentowanej porażce w OBU kanałach, z zapisem kanału i kodu HTTP. REM-3 podporządkowany REM-0. Zmierzona tabela dwukanałowa w shared/HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md §2. Reguła 12c rozszerzona. references/CHANGELOG.md.'
-  - '3.39 (2026-09-05, F-163/F-161/F-162): DWIE NOWE BRAMKI + ODTWORZENIE BRAKUJĄCYCH ZASOBÓW. (1) CN-GATE (shared/MOD-CN-GATE.md) przed OŚ-GATE i WYJ-GATE — wyzwalacz mechaniczny „czy rozstrzygasz cokolwiek”, jedna jednostka redakcyjna per oś sporu, trzy zakresy CN-1 czasowy / CN-2 podmiotowy / CN-3 przedmiotowy, wynik „NIE” blokujący, override zakazany w prawie karnym; zamyka F-163 (jednostka z warunkiem wstępnym w nagłówku katalogu, nie w punkcie, odczytana poprawnie przy pominięciu tego warunku). (2) REM-GATE (shared/MOD-REM-GATE.md) przed HYBRID-VALIDATION — REM-1 zakaz sierocego oddalenia, REM-2 zakaz non liquet, REM-3 rozdzielenie znacznika źródła od siły argumentu, REM-4 budżet pokrycia; zamyka F-161 (system optymalizuje pod „nie powołaj złego przepisu” i milczy o „nie zaniż środka”). (3) ODTWORZONO shared/MIEDZYNARODOWE-GATES.md i shared/HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md — zasoby wymagane fail-closed przez UP-5 i DR-14 NIE ISTNIAŁY na dysku (F-162). (4) KOREKTA UP-5: twierdzenie „NIE bash/curl — domeny międzynarodowe poza listą dozwoloną” było FAŁSZYWE; zmierzone HTTP 200 dla eur-lex.europa.eu i legal.un.org, blokada dotyczy unoosa/cites/icsid/uncitral. Klasa błędu identyczna z F-151. (5) Nowe UP-6, Reguły 12b i 12c. references/CHANGELOG.md.'
-  - '3.41 (2026-09-05e, F-168): REGUŁY UNIWERSALNE ZAMIAST PRZYKŁADÓW WZORCOWYCH. Test kontrolny 2026-09-05d wykazał, że MOD-CN-GATE.md cytował konkretny kazus testowy jako przykład wzorcowy — model wykonujący bramkę na tym kazusie dostawał gotowe rozwiązanie wpisane w treść narzędzia. PRZEPISANO shared/MOD-CN-GATE.md (1.0→2.0), shared/MOD-REM-GATE.md (1.1→1.2) i shared/MIEDZYNARODOWE-GATES.md (1.0→1.1): wszystkie pary akt+artykuł+rozstrzygnięcie odpowiadające fabule kazusów testowych zastąpiono klasami wzorców strukturalnych (np. „nowelizacja o ograniczonym skutku podmiotowym”, „przepisy-bliźniaki o różnym reżimie”, „definicja czasu teraźniejszego wykluczająca przedmiot, który już nie istnieje”) — bez nazwania, który akt, artykuł i która strona sporu akurat pasuje. Doktryna ogólna (KWPT art. 31–33, struktura testu atrybucji państwa) POZOSTAJE nazwana, bo jest narzędziem pracy, nie odpowiedzią na pytanie egzaminacyjne. Poprawiono też własny changelog routera i indeks shared/SKILL.md, które również cytowały rozwiązania konkretnych kazusów. references/CHANGELOG.md.'
-  - '3.38 (2026-09-04c, F-158/F-159): NAPRAWA BŁĘDU YAML — element listy escalation zawierał "weryfikacji: view shared/..." w linii kontynuacji; YAML czytał ": " jako początek mapy i CAŁY frontmatter był nieparsowalny (ScannerError, linia 50). To NAWRÓT klasy błędu z 3.37/F-146 (niesparowany cudzysłów w polu changelog) — ta sama przyczyna: frontmatter nie miał żadnego testu parsowalności. Elementy escalation ujęte w cudzysłowy. Naprawiono też ciche zniekształcenie typu w inputs/outputs: "- opcjonalnie: ..." parsowało się jako MAPA, nie tekst. ARCHITEKTURA: dodano shared/DOSTEP-MASZYNOWY-API.md do required_modules — instrukcje wywołań API istniały wyłącznie w audyt-systemu-v4, którego router nie wczytuje. Escalation rozszerzone o bramkę "sprawdź kształt żądania, zanim orzekniesz o niedostępności", status ISAP jako stanu normalnego (kanał maszynowy martwy, weryfikacja przez ELI) oraz o białą listę VAT jako nieosiągalną maszynowo. references/CHANGELOG.md.'
-  - '3.37 (2026-09-01, hotfix F-146): naprawa niesparowanego cudzysłowu w polu changelog: frontmatteru — otwarcie typograficzne domknięte znakiem prostym kończyło skalar YAML w połowie zdania i czyniło CAŁY frontmatter nieparsowalnym, przez co 3.36 nie ładowała się na hoście (na dysku pozostawała 3.34). Zmiana wyłącznie w metadanych; zero zmian w treści proceduralnej, routingu i bramkach. references/CHANGELOG.md.'
-  - "3.36 (2026-08-31d): BRAMKA WYJĄTKÓW (WYJ-GATE) przed KROK 4 — wyzwalacz mechaniczny „≥1 powołany artykuł” → shared/MOD-WYJATEK-GATE.md, cztery zamiatania S1–S4 (następca US-GATE z 3.35, przemianowanego przed użyciem produkcyjnym); Reguła 12a i SELF-CHECK; flaga F-144; references/CHANGELOG.md."
-  - "3.34 (2026-08-31): BRAMKA CHRONOLOGICZNA rozdzielona na TOR A (OŚ-GATE, wyzwalacz mechaniczny ≥2 daty → shared/MOD-OS-CZASU-PRZESLANEK.md) i TOR B (pełna chronologia); Reguła 12 i SELF-CHECK zaktualizowane; flaga F-142; references/CHANGELOG.md."
-  - "3.33 (2026-08-28): przywrócono jawne domeny orzecznicze w escalation; zachowano BI i fallback ISAP z 3.32; references/CHANGELOG.md."
-  - "3.32 (2026-08-28): poprawne odwołanie BI w DR-16; ISAP pierwszy, LEX/Legalis/ArsLege po nieudanym pobraniu tekstu; references/CHANGELOG.md."
-  - "3.31 (2026-08-28): runtime mapy aktów działają w modelu current-state-only; historia pozostaje w dziennikach/changelogach, a routing korzysta z bieżących COV."
-  - "3.30 (2026-08-27): synchronizacja mapy dziedzinowej z F-108 P1 oraz rzeczywistymi modułami REACH/CLP, akcyzy/cła i cudzoziemców; references/CHANGELOG.md."
+  - '3.44 (2026-09-10, F-179): KOREKTA PRZESLANKI PROFILU LEKKIEGO. Pomiar
+    "219 kB sciezki obowiazkowej" z 3.43 byl FALSZYWY W PRZESLANCE - sumowal
+    zasoby warunkowe, ladowane leniwie (lazy loading), jakby byly bezwarunkowe.
+    Zmierzone poprawnie: koszt staly systemu to name+description 32 skilli,
+    ok. 5,9 kB; rdzen R-1..R-5 ok. 100 kB po wyzwoleniu routera; reszta byla
+    leniwa juz wczesniej. Profil LEKKI NIE zmniejsza rdzenia - jego korzysc
+    jest AUDYTOWA: zamienia uznaniowe leniwe ladowanie na deklarowane
+    i sprawdzalne. Klasa bledu jak F-164. PROFIL-LEKKI.md 1.0 -> 1.1.'
+  - '3.42 (2026-09-09, F-169/F-170/F-171): trzy latki po benchmarku 14 kazusow
+    - AF-7 (rygor formy znacznika VER, Regula 14a), T17 mierzy korpus osobno
+    od frontmatteru, T21 normalizuje prefiks. Pomiar: skille maja znak zalezny
+    od poziomu rozumowania (wysoki +3,6 pkt, sredni -7,5 pkt).'
+  - 'Pelna historia wszystkich wersji: references/CHANGELOG.md (ZASADA 15).'
 ---
 
 ## ŁADOWANE ZAWSZE — BEZWZGLĘDNIE
@@ -125,6 +127,13 @@ W każdej sprawie prawnej, przed analizą:
    Dla aktów polskich wykonaj też `view references/ZRODLA-AKTOW-FALLBACK.md`.
 6. Przed wysłaniem: `view references/SELF-CHECK.md` i wykonaj inwentarz VER-GRAIN.
 7. Ostatnim elementem odpowiedzi prawnej musi być disclaimer z `shared/DISCLAIMER.md`.
+
+⛔ **KOLEJNOŚĆ ODCZYTU — `view references/PROFIL-LEKKI.md`.** Rdzeń R-1…R-5
+(ten plik, KROK 0A, KROK 1, PRAWO-HARDGATE, SELF-CHECK) jest nieredukowalny.
+Pozostałe zasoby `required_modules` czyta się na wyzwalacz mechaniczny, najpóźniej
+przed pierwszą czynnością, którą regulują. Odroczenie odczytu NIE jest pominięciem
+bramki i NIE zwalnia z żadnej reguły — profil zmienia moment `view`, nigdy zakres
+kontroli. Profil deklaruje się w bloku KROKU 3A.
 
 Brak obowiązkowego odczytu lub źródła → `⛔ TRYB ZDEGRADOWANY` i jawne
 `⚠️ [NIEWERYFIKOWANE]`; zakaz cichego użycia pamięci modelu.
@@ -218,6 +227,8 @@ KROK 3A → [ŚLAD ROUTINGU — OBOWIĄZKOWY]
           PRIMARY: [nazwa skilla] — ROUTER-WCZYTANY: [TAK: ścieżka view / NIE]
           SECONDARY: [nazwa(-y) skilla] — ROUTER-WCZYTANY: [TAK / NIE / N-D]
           ODRZUCONE: [skille rozważone i odrzucone] — powód: [jedno zdanie]
+          PROFIL: [PEŁNY / LEKKI] — rdzeń R-1…R-5: [TAK]
+          ODROCZONE: [zasób — wyzwalacz, który jeszcze nie padł / BRAK]
           WERSJA ROUTERA: [numer z YAML frontmatter tego pliku]
           ```
           ⛔ Gdy `ROUTER-WCZYTANY: NIE` dla PRIMARY (np. z powodu braku

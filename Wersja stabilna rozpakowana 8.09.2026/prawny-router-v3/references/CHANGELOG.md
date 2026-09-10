@@ -1,5 +1,75 @@
 # CHANGELOG — prawny-router-v3
 
+- 3.44 (2026-09-10, F-179): **korekta przesłanki profilu LEKKIEGO — pomiar
+  z 3.43 był fałszywy w przesłance.**
+
+  Wpis 3.43 uzasadniał profil liczbą „≈219 kB ≈ 54 tys. tokenów ścieżki
+  obowiązkowej przed wczytaniem PRIMARY". Liczba sumowała `MOD-CN-GATE`,
+  `MOD-REM-GATE`, `MOD-WYJATEK-GATE`, `MOD-OS-CZASU-PRZESLANEK`,
+  `HIERARCHIA-ZRODEL`, `MOD-STEP-TRACKER` i `DISCLAIMER` jako koszt
+  bezwarunkowy — a wszystkie mają wyzwalacze warunkowe zapisane u siebie
+  i podlegają **leniwemu ładowaniu**. Host wczytuje treść zasobu przy `view`,
+  nie z góry, więc warstwa warunkowa była leniwa, zanim profil powstał.
+
+  ⛔ Klasa błędu identyczna z **F-164** (REM-0): reguła zbudowana na tezie
+  o świecie, której nikt nie zmierzył. Czwarte wystąpienie w tym systemie
+  (F-151, F-162, F-164, F-179).
+
+  Zmierzone poprawnie 2026-09-10:
+
+  | Warstwa | Kiedy | Rozmiar |
+  |---|---|---:|
+  | `name` + `description` 32 skilli | zawsze | ≈5,9 kB ≈ 1,5 tys. tokenów |
+  | rdzeń R-1…R-5 | po wyzwoleniu routera, bezwarunkowo | ≈100 kB ≈ 25 tys. tokenów |
+  | zasoby warunkowe | po padnięciu wyzwalacza | 0–113 kB |
+
+  Skutek dla profilu: **korzyść jest audytowa, nie wydajnościowa.** Profil nie
+  zmniejsza rdzenia ani o bajt. Zamyka natomiast tryb awarii, który leniwe
+  ładowanie tworzy: **odroczenie cicho stające się pominięciem**, dotąd
+  nieweryfikowalne z zewnątrz. Trzy mechanizmy zamknięcia bez zmian —
+  deklaracja w KROKU 3A, kontrola `[PROFIL-ODROCZENIA]`, zamknięta lista
+  wyzwalaczy w jednym miejscu.
+
+  ⚠️ Realna redukcja kosztu wymagałaby skrócenia rdzenia — `PRAWO-HARDGATE.md`
+  to 41 kB, czyli 41% rdzenia. Osobna decyzja projektowa, inny profil ryzyka,
+  nieobjęta tym wydaniem.
+
+  `references/PROFIL-LEKKI.md` 1.0 → 1.1, sekcja „PO CO ISTNIEJE" przepisana.
+
+- 3.43 (2026-09-10, F-175): **PROFIL LEKKI — kolejność odczytu zasobów
+  obowiązkowych.** `references/PROFIL-LEKKI.md`.
+
+  Zmierzona ścieżka obowiązkowa routera 3.42 (2026-09-10): **≈219 kB ≈ 54 tys.
+  tokenów PRZED** wczytaniem PRIMARY, jego modułów i materiału sprawy. Rdzeń
+  R-1…R-5 (SKILL, KROK 0A, KROK 1, PRAWO-HARDGATE, SELF-CHECK) to ≈106 kB;
+  reszta — HIERARCHIA-ZRODEL, CN, REM, WYJ, OŚ, STEP-TRACKER, DISCLAIMER —
+  ≈113 kB, i cała ta reszta ma już dziś wyzwalacze warunkowe zapisane u siebie.
+
+  ⛔ Kwalifikacja: to jest kwestia bezpieczeństwa, nie wygody. Bramka, której nie
+  da się załadować, nie chroni przed niczym, a presja kontekstowa jest
+  strukturalną przyczyną trybu fasadowego — przeciwko któremu SELF-CHECK ma trzy
+  osobne kontrole. Trzy kontrole na jeden tryb awarii są objawem, nie
+  rozwiązaniem.
+
+  ⚡ **Zbieżność z benchmarkiem 2026-09-08.** Pomiar 2×2 wykazał, że skille mają
+  znak ZALEŻNY od poziomu rozumowania: przy wysokim +3,6 pkt, przy średnim
+  −7,5 pkt. Ujemny znak przy średnim poziomie jest dokładnie tym, czego należy
+  oczekiwać, gdy koszt kontekstu wypiera uwagę z merytoryki. Profil LEKKI
+  atakuje ten mechanizm, nie objaw.
+
+  Plik rozdziela RDZEŃ NIEREDUKOWALNY od warstwy ODROCZONEJ, każdą pozycję
+  z wyzwalaczem MECHANICZNYM i najpóźniejszym momentem odczytu.
+  ⛔ Nie znosi żadnej bramki — zmienia moment `view`, nigdy zakres kontroli.
+  UP-6 (CN-GATE i REM-GATE w każdej sprawie) bez zmian. Cztery przypadki
+  zakazu profilu LEKKIEGO: karne materialne, tura generująca pismo, kategoria
+  [11], błąd odczytu zasobu rdzenia.
+
+  Egzekwowanie: nowa pozycja `[PROFIL-ODROCZENIA]` w `references/SELF-CHECK.md`
+  (kontrola na wyjściu — wyzwalacz padł, a `view` nie ma = bramka niewykonana)
+  oraz dwie linie w bloku KROKU 3A: `PROFIL` i `ODROCZONE`. Deklaracja
+  `PROFIL: LEKKI` bez wypisanej listy odroczeń jest nieweryfikowalna, czyli
+  fasadowa.
+
 - 3.42 (2026-09-09, F-169/F-170/F-171): **trzy łatki po audycie czterech
   arkuszy odpowiedzi na bank 14 kazusów wieloaspektowych.**
   Układ pomiaru 2×2 — poziom rozumowania (średni / wysoki) × obecność skilli,

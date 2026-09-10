@@ -75,7 +75,7 @@ JEŚLI BLOK 0A nie zamknięty → STOP. Żaden punkt poniżej nie jest wykonywan
 □ Sprawdziłem shared/ACTIVATION-MATRIX.md przy nakładaniu się skillów?
 □ Wczytałem PRIMARY skill PRZED analizą?
 □ [KROK 3A ŚLAD ROUTINGU] Wypisałem blok TRYB/PRIMARY/SECONDARY/ODRZUCONE/
-  WERSJA ROUTERA/ROUTER-WCZYTANY zaraz po KROK 3, przed KROK 4? Jeśli
+  PROFIL/ODROCZONE/WERSJA ROUTERA/ROUTER-WCZYTANY zaraz po KROK 3, przed KROK 4? Jeśli
   ROUTER-WCZYTANY: NIE dla PRIMARY → dodałem nagłówek ⛔ TRYB ZDEGRADOWANY?
 □ [ŚLAD ROUTINGU] ⛔ KONTROLA NA WYJŚCIU — nie polegaj wyłącznie na własnej
   deklaracji z KROKU 3A:
@@ -86,6 +86,16 @@ JEŚLI BLOK 0A nie zamknięty → STOP. Żaden punkt poniżej nie jest wykonywan
     TAK → ⛔ deklaracja ROUTER-WCZYTANY: TAK w KROK 3A jest FASADĄ — cofnij
           się, faktycznie wywołaj `view` na PRIMARY, PRZEPISZ blok KROK 3A
           zgodnie ze stanem faktycznym po wywołaniu
+□ ⛔ [PROFIL-ODROCZENIA] KONTROLA NA WYJŚCIU (dodano 2026-09-10, F-175):
+  czy w GOTOWEJ odpowiedzi padł wyzwalacz zasobu zadeklarowanego w KROKU 3A jako
+  ODROCZONY (pierwszy URL, pierwszy artykuł, ≥2 daty, rozstrzygnięcie, oddanie
+  wyniku)?
+    NIE → OK
+    TAK → czy widoczne jest odpowiadające mu wywołanie `view` W TEJ odpowiedzi?
+          NIE → ⛔ bramka NIEWYKONANA. Odroczenie odczytu nie jest pominięciem
+          bramki; wykonaj `view` i bramkę teraz albo oznacz ⛔ TRYB ZDEGRADOWANY.
+          ⛔ Rdzeń R-1…R-5 nie podlega odroczeniu w żadnym profilu.
+          Procedura pełna: view references/PROFIL-LEKKI.md
 □ ⛔ VER-GRAIN — KONTROLA NA WYJŚCIU (reguła 24, F-132; wzorzec DOMAIN-LOCK):
   przejrzyj GOTOWĄ odpowiedź i policz w niej powołania wg ziarnistości —
   artykuł + §/ust./pkt, każdą kwotę, próg, termin, liczbę lat kary, datę,
