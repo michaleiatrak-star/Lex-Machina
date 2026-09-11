@@ -28,7 +28,8 @@ WPF: Wieloletnia Prognoza Finansowa — obowiązkowa dla gmin/powiatów/wojewód
 
 ## Weryfikacja online
 ```
-web_search: "ustawa dochody JST Dz.U. 2024 poz. 356 isap tekst jednolity"
+**Dz.U. 2024 poz. 1572** ✅ [VER] RZĄD 1 2026-09-10o — ⛔ **NOWA USTAWA** z 1.10.2024 o dochodach JST (zm. Dz.U. 2025 poz. 1659), bez tekstu jednolitego.
+⛔ Stara ustawa z 2003 r. jest uchylona, a jej ostatni t.j. `2024/356` **też ma status uchylony** — nie podstawiać go jako aktualnego
 web_search: "udziały JST w PIT CIT 2025 2026 aktualne stawki"
 ```
 

@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.31"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.35"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -50,18 +50,13 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.31 (2026-09-01k, F-156): KROK 2C w PRAWO-HARDGATE.md dostał
-  sekcję „GDZIE SZUKAĆ NOWELIZACJI PO t.j." (adresy, unia dwóch źródeł, dojście
-  od t.j. do aktu bazowego) oraz ZAKAZ przepisywania wyniku do map — także
-  w formie samego znacznika bez liczby.
-  Wersja 3.30 (2026-09-01i, F-155): w
-  mod-niepelnosprawnosc-intelektualna-gluchota.md ustawa o świadczeniu
-  wspierającym cytowana była przez akt pierwotny Dz.U. 2023 poz. 1429 —
-  obowiązuje t.j. Dz.U. 2026 poz. 873; poprawione w dwóch miejscach.
-  ⛔ PEŁNA HISTORIA — WYŁĄCZNIE w references/CHANGELOG.md (standard 2026-08-20z4:
-  jedna lokalizacja; zakaz sekcji changelogu w korpusie SKILL.md i zakaz pełnej
-  listy wpisów w tym polu). Pole przycinane 2026-09-01 (F-147), 2026-09-01f
-  i 2026-09-01i — próg T12 to 15 linii.
+  Wersja bieżąca: 3.35 (2026-09-10n, F-181): 41 miejsc przestawionych z wygasłych
+  tekstów jednolitych na aktualne — 20 aktów, w tym UFP 2024/1530 → 2025/1483
+  (13 miejsc), dochody JST, PZP, VAT, KPK, PPSA, Prawo energetyczne, AML,
+  KWiH, prawo autorskie, Karta Nauczyciela i inne. ⛔ Dochody JST: stara ustawa
+  została ZASTĄPIONA NOWĄ (Dz.U. 2024 poz. 1572), więc podstawienie jej t.j.
+  2024/356 byłoby powieleniem błędu — ten numer też jest uchylony.
+  Pełna historia wszystkich wersji: references/CHANGELOG.md (ZASADA 15).
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
@@ -91,7 +86,9 @@ Nie jest samodzielnym skillem — pełni rolę biblioteki referencji.
 | Plik | Rola |
 |------|------|
 | `UNIVERSAL-RUNTIME-ADAPTER.md` | Wspólny kontrakt runtime ChatGPT/Claude/Codex: zasoby, narzędzia, prywatność, fallbacki |
-| `PRAWO-HARDGATE.md` | ⛔ Globalny zakaz cytowania prawa/orzeczeń z pamięci — RDZEŃ, wczytaj przed każdym przepisem (zasada absolutna, PERMANENT GATE, hierarchia statusów, BRAMKA ANTY-FASADOWA, KROK 2B/2C). Podzielony 2026-08-23h, F-111: 967 → 501 l. |
+| `PRAWO-HARDGATE.md` | ⛔ Globalny zakaz cytowania prawa/orzeczeń z pamięci — RDZEŃ, wczytaj przed każdym przepisem (zasada absolutna, PERMANENT GATE, hierarchia statusów, ŹRÓDŁO-0, KROK 2B/2C). Podzielony 2026-08-23h (F-111: 967 → 501 l.) i 2026-09-10b (F-180: 704 → 510 l., gałęzie warunkowe wydzielone niżej). |
+| `PRAWO-HARDGATE-BLOKADA.md` | ⛔ Gałąź niedostępnego źródła RZĘDU 1 — BRAMKA ANTY-FASADOWA + KOTWICA URZĘDOWA. **Wyzwalacz:** B-1/B-2 zwrócił blokadę i kanał kodu też zawiódł. Bez tego odczytu znacznik 🟨 i ⚠️ jest nieważny. |
+| `PRAWO-HARDGATE-AKT-MIEJSCOWY.md` | Ścieżka B-L. **Wyzwalacz:** przedmiotem sprawy jest akt prawa miejscowego. Aktów tych NIE MA w ELI Kancelarii Sejmu — weryfikacja tam zwraca fałszywy negatyw. |
 | `DOSTEP-MASZYNOWY-API.md` | ⛔ **JAK** wywołać API/serwis, żeby odpowiedział — nagłówki (neutralny UA, `Accept`), ścieżki robocze zamiast rootów, limity tempa, konkretne endpointy ELI/SAOS/KRS/UODO/HUDOC/eZamówienia i ich wymogi (token CEIDG, `pageSize`≥10, anonimizacja odpisu KRS). Wczytaj, gdy weryfikacja idzie kanałem kodu, nie `web_fetch`. ⚠️ NIE rozstrzyga mocy źródła — to `HIERARCHIA-ZRODEL.md`. Dodane 2026-09-04c, F-159: instrukcje istniały wyłącznie w `audyt-systemu-v4`, którego żaden skill produkcyjny nie wczytuje |
 | `PRAWO-HARDGATE-ORZECZENIA.md` | ⛔ ZAŁĄCZNIK orzeczniczy tej samej bramki — wczytaj ZAWSZE, gdy w tekście ma stanąć SYGNATURA (procedura przed orzeczeniem, WTÓRNE-ŹRÓDŁO-STOP, KROK 5A/5B, warstwy uzasadnienia [1]/[2]/[3], self-check orzeczniczy). NIE jest samodzielny — rdzeń obowiązuje równolegle (dodane 2026-08-23h, F-111) |
 | `DOMAIN-LOCK.md` | ⛔ Bramka izolacji dziedzinowej — kontrola na WYJŚCIU, zakaz kwalifikacji spoza PRIMARY bez podstawy faktycznej (dodane 2026-08-23) |

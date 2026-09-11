@@ -1,5 +1,42 @@
 # CHANGELOG — prawny-router-v3
 
+- 3.47 (2026-09-10o, F-181): **przemoc domowa — przeterminowana podstawa
+  i przemianowany akt.**
+
+  `references/legacy-material-router/przemoc-domowa.md` podawał ustawę
+  o przeciwdziałaniu przemocy jako `Dz.U. 2021 poz. 1249` — status
+  **wygaśnięcie aktu**. Aktualny tekst jednolity: **Dz.U. 2024 poz. 1673**
+  ✅ [VER] RZĄD 1, ⛔ KROK 2C: jedna nowelizacja po nim.
+
+  ⛔ **Akt został PRZEMIANOWANY.** Tytuł „ustawa o przeciwdziałaniu przemocy
+  **w rodzinie**" jest historyczny; obowiązujący to „ustawa o przeciwdziałaniu
+  przemocy **domowej**". Wpisane wprost, bo sama podmiana numeru zostawiłaby
+  nieaktualną nazwę — a to jest dokładnie sygnał, który w tej serii dwukrotnie
+  okazał się wierzchołkiem podmiany aktu (F-148a, 10j).
+
+  Ta sama poprawka w bliźniaczym module `dr-03`.
+
+- 3.46 (2026-09-10l, F-181): legacy-material-router/tryby-scigania: KPK 2024/37 (wygaśnięcie aktu) → 2026/490 + lista 5 nowelizacji po tekście jednolitym
+- 3.45 (2026-09-10b, O-6 / F-180): **zakaz orzekania o systemie z jednego
+  nośnika; rdzeń mniejszy po wydzieleniu gałęzi HARD GATE.**
+
+  **O-6.** Nowa pozycja `[STAN-ZAŁADOWANY]` w `references/SELF-CHECK.md`:
+  jeśli odpowiedź twierdzi, że w systemie jest luka, błąd, brak pliku lub
+  niedomknięta flaga, wolno to orzec dopiero po zestawieniu wersji **załadowanej
+  przez hosta** z wersją w repozytorium. Alternatywa dopuszczalna: oznaczyć
+  wniosek jako ⚠️ WARUNKOWY z podaniem wersji roboczej.
+
+  Podstawa: 2026-09-09/10 ocena prowadzona na kopii sesyjnej z routerem 3.41
+  zgłosiła jako usterkę systemu lukę historii, która w repozytorium (3.42) nie
+  istniała. ⛔ Klasa błędu jak F-151 — wniosek z jednego nośnika bez sprawdzenia
+  drugiego, tym razem po stronie oceniającego, nie źródła.
+
+  **F-180 (skutek dla routera).** Wydzielenie 236 linii gałęzi warunkowych
+  z `shared/PRAWO-HARDGATE.md` zmniejszyło rdzeń R-1…R-5 z ≈100 kB do ≈88 kB.
+  `references/PROFIL-LEKKI.md` 1.1 → 1.2: skorygowana tabela rdzenia, dwa nowe
+  wpisy w warstwie odroczonej (`PRAWO-HARDGATE-BLOKADA.md`,
+  `PRAWO-HARDGATE-AKT-MIEJSCOWY.md`) z wyzwalaczami mechanicznymi.
+
 - 3.44 (2026-09-10, F-179): **korekta przesłanki profilu LEKKIEGO — pomiar
   z 3.43 był fałszywy w przesłance.**
 

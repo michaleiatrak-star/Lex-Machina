@@ -1,16 +1,61 @@
 # WARN-OTWARTE — rejestr żywy otwartych flag audytowych
 
-**Stan:** 2026-09-10b. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
+**Stan:** 2026-09-10o. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
 
 ## Tablica sterująca
 
 | Kategoria | Liczba | Pozycje |
 |---|---:|---|
-| Wykonalne sesją audytową | 8 | F-135, F-141, F-148, F-160, F-167, O-4, O-5, O-6 |
+| Wykonalne sesją audytową | 4 | F-135 (część merytoryczna), F-167, O-9, **F-181** |
 | Reaktywne | 1 | F-5 |
 | Zależne od środowiska/dewelopera | 12 | F-8, F-9, F-11, F-94, F-113, F-133, F-137, F-143, F-144, F-157, F-158(c), F-171 |
 | Odnotowane bez działania | 1 | O-8 (ograniczenie strukturalne aparatu) |
-| **Razem** | **22** | — |
+| **Razem** | **18** | — |
+
+> **F-180 / O-5 / O-6 ZAMKNIĘTE 2026-09-10c** — skrócenie rdzenia HARD GATE
+> o 30% przez wydzielenie gałęzi warunkowych, preflight kompletności korzenia
+> w zestawie regresyjnym, pozycja `[STAN-ZAŁADOWANY]` w SELF-CHECK routera.
+> Do rejestru żywego nie wchodzą (ZASADA 10). Szczegóły: AUDYT-2026-09-10c.
+
+> **KANDYDAT (2026-09-10c, bez numeru) — `shared/HIERARCHIA-ZRODEL.md`, 31,6 kB.**
+> Nie należy do rdzenia R-1…R-5, ale wyzwalacz „pierwszy URL w odpowiedzi" pada
+> praktycznie zawsze, więc koszt jest bliski bezwarunkowemu. Kandydat na tę samą
+> operację co F-180. ⚠️ **Warunek podjęcia:** najpierw pomiar, które sekcje są
+> faktycznie warunkowe — bez niego byłaby to czwarta powtórka klasy F-164
+> (decyzja na podstawie niezmierzonej tezy). Nie otwierać jako flagi przed
+> pomiarem.
+
+> **F-141 / F-148 / F-160 / O-4 ZAMKNIĘTE 2026-09-10d.** Szczegóły:
+> AUDYT-2026-09-10d. ⛔ Przy F-148 wykryto **dwa realne błędy podmiany aktu**
+> (`ROUTING-MAP.md:770` i `dr-08/.../mod-ustawa-zarzadzanie-kryzysowe.md`) —
+> oba miały status ✅ OK i przechodziły każdą dotychczasową kontrolę.
+> Do rejestru żywego nie wchodzą (ZASADA 10).
+
+> **F-135 OTWARTA — zakres zmniejszony 2026-09-10d.** Osiem znaczników
+> „NIEWERYFIKOWANE RZĄD 1" w `ROUTING-MAP.md` rozstrzygniętych w ELI, ustalony
+> numer Protokołu nowojorskiego 1967 (Dz.U. 1991 nr 119 poz. 517).
+> ⛔ Zweryfikowano **numery, nie treść merytoryczną** — pozostaje cross-check
+> wartości prawnych w modułach DR i `shared`, czyli właściwy zakres tej flagi.
+> ⚠️ **Następny krok:** wybrać jedną dziedzinę i przejść ją w całości, zamiast
+> próbować wszystkich naraz — poprzednie podejścia rozmyły się na szerokości.
+
+> **KANDYDAT (2026-09-10d, bez numeru) — rejestr `scripts:` niekompletny
+> w drugą stronę.** T23 wykrył 15 skryptów wywoływanych przez orkiestrator,
+> a nieobecnych w polu `scripts:`. T22 tego nie widzi, bo pilnuje kierunku
+> rejestr → dysk. Do rozstrzygnięcia, czy rejestr ma być kompletny obustronnie;
+> dziś raportowane jako ostrzeżenie, nie FAIL.
+
+> **KANDYDAT ZAMKNIĘTY 2026-09-10j — i okazał się czymś innym.** Przemianowanie
+> wiersza „ustawa o diagnostyce laboratoryjnej" ujawniło **dwie podmiany aktu**
+> (`2022/2162` i `2023/1517`), z czego druga powielona w ośmiu generacjach mapy.
+> Alias wycofany. ⚠️ Reguła przeglądu zapisana w `ALIASY-NAZW-AKTOW.md`:
+> adnotacja „nazwa nieaktualna" jest **sygnałem, nie rozstrzygnięciem** — zwykle
+> znaczy, że dopasowano numer do nazwy, a nie nazwę do numeru.
+
+> **KANDYDAT (2026-09-10j) — nazwa pliku modułu niezgodna z podstawą prawną.**
+> `dr-10/modules/mod-ustawa-diagnostyka-laboratoryjna.md` opiera się teraz na
+> ustawie o **medycynie** laboratoryjnej. Przemianowanie pliku dotyka rejestrów
+> `modules:` w kilku miejscach — osobna operacja, nie łatka.
 
 > **O-8 ODNOTOWANA BEZ DZIAŁANIA (2026-09-10b) — zestaw regresyjny nie sprawdza
 > przesłanek faktycznych.** F-179 (profil LEKKI uzasadniony liczbą, która nie
@@ -27,6 +72,75 @@
 
 > **O-7 ZAMKNIĘTA 2026-09-10b — `.github/workflows/regresja.yml`.** Zestaw
 > regresyjny jest odtąd bramką wydania. Do rejestru żywego nie wchodzi.
+
+> **F-181 OTWARTA — ZAKRES SKORYGOWANY 2026-09-10l.** ⛔ Pierwotna liczba
+> „29 przeterminowanych, 10%" była **zawyżona** (klasa F-164 popełniona przy
+> stawianiu alarmu): realnie **13**, wszystkie naprawione w 6 skillach.
+> **ZAKRES ROZSZERZONY 2026-09-10m:** skan całego korpusu (424 numery, 1903
+> miejsca) dał **36 wygasłych podstaw w 61 miejscach**, z czego **41 miejsc
+> w `shared/orka-bas-leksykon`** — leksykon cytuje podstawy w TREŚCI definicji,
+> więc omijały go wszystkie przeglądy nagłówkowe. Najgorsza pozycja: UFP
+> `2024/1530` w 14 miejscach.
+> ✅ **`shared` NAPRAWIONY 2026-09-10n** — 41 z 61 miejsc, 20 aktów.
+> ✅ **LISTA 1.2 WYCZERPANA 2026-09-10o — 61/61 miejsc naprawionych** (41 w `shared`,
+> 20 w 12 pozostałych skillach).
+> ⛔ **Flaga NIE zamknięta.** Lista była wynikiem heurystyki, nie audytu każdej
+> linii; dwa poprzednie liczniki tego badania okazały się zawyżone, więc nie ma
+> podstaw twierdzić, że trzeci był kompletny.
+> ⚠️ **Następny krok:** test z O-9 na całym korpusie — dopiero automat
+> uruchamiany przy każdym wydaniu pozwoli tę flagę zamknąć. Poprzedni krok:
+> Każda pozycja: ponowny odczyt RZĄD 1 + porównanie tytułów + przeczytanie linii
+> w kontekście.
+> ⛔ Potwierdzone przy naprawie `shared`: kolumna „aktualny t.j." z listy jest
+> **wskazówką, nie rozstrzygnięciem**. Dochody JST — wskazany „aktualny" t.j.
+> `2024/356` sam okazał się uchylony, bo stara ustawa została zastąpiona nową
+> (`2024/1572`). Podstawienie wprost z listy przesunęłoby błąd o ogniwo dalej.
+> Poprzedni opis: Pomiar: z 290 numerów deklarowanych jako aktualne **29 jest
+> przeterminowanych** (28 „wygaśnięcie aktu" + 1 uchylony), w 35 miejscach
+> i 11 skillach. To 10% podstaw prawnych, które moduł podaje czytającemu jako
+> pierwsze. ⛔ Klasa twardsza niż O-9: starzeje się sam **numer podstawy**,
+> nie opis. Lista robocza z ustalonym aktualnym numerem dla każdej pozycji:
+> `references/PRZETERMINOWANE-TJ-2026-09-10.md`.
+> ⚠️ **Następny krok:** naprawa pozycja po pozycji, w kolejności z 2026-09-10e
+> (mapa przed modułem), z ponownym odczytem RZĄD 1 przed każdym wpisem.
+> ⛔ **Nie poprawiać hurtem** — pod przeterminowanym numerem bywa podmiana aktu.
+> ⚠️ Po naprawie: to jest naturalna baza testowa dla testu z O-9.
+
+> **O-9 OTWARTA (2026-09-10i) — nikt nie pyta, czy adnotacja o stanie nadal
+> mówi prawdę.** ZASADA 8 w wariancie czasowym: numer i nazwa poprawne w chwili
+> zapisu, przeterminowała się **adnotacja o stanie** („brak t.j.", „nowa ustawa",
+> „projekt", „w vacatio legis"). T3 pyta o zgodność numerów między mapami, T11
+> o obecność, T15 o tożsamość i nowszy t.j. dla ZADEKLAROWANYCH t.j., T24
+> o nowelizacje po t.j. — **żaden nie pyta o prawdziwość twierdzenia**.
+> Zmierzone 2026-09-10i: skan korpusu dał 10 wystąpień „brak t.j.", z tego
+> **2 nieprawdziwe** (delegowanie kierowców — 2025/797 jest t.j., nie
+> nowelizacją; Prawo o notariacie — t.j. 2026/614 istnieje, a mapa centralna
+> nawet go miała, podczas gdy dr-12 twierdził, że go nie ma).
+> ⚠️ **Następny krok:** test wg zarysu w AUDYT-2026-09-10i §3. Projekt czułości
+> jest niebanalny — rozpoznać *twierdzenie o stanie*, nie każde wystąpienie
+> słowa „brak". Objąć całą rodzinę fraz, nie jedną.
+> ⛔ Świadomie NIE napisany w sesji 2026-09-10i: to osobna robota, nie łatka.
+
+> **KANDYDAT (2026-09-10h) — nagłówki modułów starzeją się niezauważone.**
+> `mod-PrFarm-refundacja-nadzor-sankcje` podawał w nagłówku wygasły tekst
+> jednolity ustawy refundacyjnej, a we własnej treści poprawny — moduł przeczył
+> sam sobie i żaden test tego nie widział. Nagłówki („aktualne t.j.: …") są
+> cytowane rzadziej niż treść, a jako pierwsze wpadają w oko czytającemu.
+> ⚠️ **Następny krok:** kontrola porównująca numery Dz.U. z nagłówka modułu
+> z numerami w jego treści — rozjazd wewnątrz jednego pliku to trzecia odrębna
+> klasa obok podmiany aktu i niedomknięcia.
+
+> **KANDYDAT (2026-09-10f) — znacznik „weryfikuj" pełni w ROUTING-MAP dwie role.**
+> Część wystąpień to **zaległości** (numer nierozstrzygnięty), część to **stała
+> bramka fresh gate** („re-zweryfikuj przy każdym użyciu"). Bez rozdzielenia
+> każdy przegląd liczy te same ~30 wierszy jako otwarte w nieskończoność.
+> ⚠️ **Następny krok:** osobny znacznik dla stałego fresh gate, np. 🔄, żeby
+> przegląd mógł filtrować wyłącznie zaległości.
+
+> **F-20 (KSR) — potwierdzona jako NIEROZSTRZYGALNA przez ELI (2026-09-10f).**
+> Krajowe Standardy Rachunkowości leżą poza Dz.U., w Dzienniku Urzędowym
+> Ministra Finansów. Spór o liczbę standardów (14 vs 15) wymaga innego kanału
+> niż API ELI — kolejne odczyty nic tu nie wniosą.
 
 > **F-113 — ZMIANA STATUSU 2026-09-10 (nie zamknięcie).** Blokada przestała być
 > „brak narzędzia" i jest teraz „pomiar do wykonania". Ustalono, że plan

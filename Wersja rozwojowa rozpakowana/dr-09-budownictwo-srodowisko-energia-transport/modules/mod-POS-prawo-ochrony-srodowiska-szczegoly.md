@@ -1,13 +1,52 @@
 # Moduł — Prawo Ochrony Środowiska: Szczegółowy Framework
 
-**Zakres:** Szczegółowy workflow kanceryjski dla spraw środowiskowych: intake, OOŚ
-obligatoryjna/screening, Natura 2000, kary administracyjne WIOŚ, odpowiedzialność
-za szkody w środowisku, predykcja wyniku. Uzupełnia `mod-POS-prawo-ochrony-srodowiska.md`.
+## ZAKRES MODUŁU — ROZGRANICZENIE (ustalony 2026-09-10g)
 
-**Weryfikacja:** 2026-06-05
-**Akty:** UOOŚiS: Dz.U. 2026 poz. 670 t.j. | POŚ: Dz.U. 2025 poz. 647 t.j. + Dz.U. 2025 poz. 1812
-         Ochrona przyrody: **Dz.U. 2026 poz. 13 t.j. z 08.01.2026** ✅ VER: 2026-06-05
-         KK: Dz.U. 2025 poz. 383 t.j. | KPA: Dz.U. 2025 poz. 1691 t.j.
+⛔ Ten moduł **nie jest drugą wersją** `mod-POS-prawo-ochrony-srodowiska.md`.
+Do 2026-09-10g mapa zbiorcza opisywała go jako „brak konkretnego aktu do
+zweryfikowania, wymaga doprecyzowania zakresu" — poniżej rozgraniczenie
+rozstrzygające, które z dwóch modułów odpowiada za co.
+
+| Pytanie sprawy | Moduł |
+|---|---|
+| **Jaka jest podstawa prawna?** Który akt, który organ, jaka ścieżka odwoławcza, jaka kwalifikacja karna (KK 181–188a) | `mod-POS-prawo-ochrony-srodowiska.md` — **warstwa materialna i ustrojowa** |
+| **Co zrobić i w jakiej kolejności?** Terminy liczone od zdarzenia, intake, screening OOŚ, wymiar kary WIOŚ, przesłanki szkody w środowisku, prognoza wyniku | **ten moduł** — **warstwa proceduralna i decyzyjna** |
+
+⛔ **Reguła rozstrzygająca przy nakładaniu się.** Trzy zagadnienia występują
+w obu modułach — intake, Natura 2000 i odpowiedzialność za szkodę. Rozgraniczenie:
+
+- **intake** — moduł bazowy ustala, CZY sprawa jest środowiskowa i do jakiego
+  organu należy; ten moduł prowadzi FAZĘ 0 dopiero po tym ustaleniu,
+- **Natura 2000** — moduł bazowy podaje ścieżkę (RDOŚ → GDOŚ → WSA → NSA);
+  ten moduł podaje przesłanki oceny habitatowej i skutki ich niespełnienia,
+- **szkoda w środowisku** — moduł bazowy wskazuje akt i reżim; ten moduł
+  prowadzi przez przesłanki i wybór trybu.
+
+⛔ **Czego ten moduł NIE obejmuje:** gospodarki odpadami (ustawa o odpadach ma
+własną materię i własny wiersz w mapie), pozwoleń wodnoprawnych (Prawo wodne),
+planowania przestrzennego i procesu budowlanego (osobne moduły dr-09) oraz
+emisji w systemie ETS.
+
+---
+
+**Zakres skrócony:** proceduralny workflow spraw środowiskowych — terminy, intake
+FAZA 0, OOŚ obligatoryjna/screening, DŚU, pozwolenia, kary administracyjne WIOŚ,
+odpowiedzialność za szkodę w środowisku, predykcja wyniku.
+
+**Weryfikacja aktów:** 2026-09-10g, RZĄD 1 (`api.sejm.gov.pl/eli`, odczyt po adresie)
+
+| Akt | Tekst jednolity | ⛔ KROK 2C — nowelizacje PO tekście jednolitym |
+|---|---|---|
+| UOOŚiS | **Dz.U. 2026 poz. 670** ✅ [VER] RZĄD 1 — najnowszy | **1**: Dz.U. 2026 poz. 1097 |
+| POŚ | **Dz.U. 2025 poz. 647** ✅ [VER] RZĄD 1 — najnowszy | **9**: Dz.U. 2025 poz. 1080, 1812, 1863; 2026 poz. 426, 605, 607, 635, 912, 982 |
+| Ustawa o ochronie przyrody | **Dz.U. 2026 poz. 13** ✅ [VER] RZĄD 1 — najnowszy | **3**: Dz.U. 2026 poz. 426, 737, 912 |
+| KK (art. 181–188a) | **Dz.U. 2025 poz. 383** ✅ [VER] RZĄD 1 — najnowszy | **4**: Dz.U. 2025 poz. 1818, 1872; 2026 poz. 902, 988 |
+| KPA | **Dz.U. 2025 poz. 1691** ✅ [VER] RZĄD 1 — najnowszy | **0** |
+
+⛔ **POŚ ma dziewięć nowelizacji po tekście jednolitym** — to najbardziej ruchliwy
+akt w tym module. Wcześniejszy zapis wymieniał tylko jedną z nich
+(Dz.U. 2025 poz. 1812), co dawało fałszywe wrażenie domknięcia. Brzmienie każdego
+powoływanego artykułu POŚ czytać u źródła bez wyjątku.
 
 ---
 

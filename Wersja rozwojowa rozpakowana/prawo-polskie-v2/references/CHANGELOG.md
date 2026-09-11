@@ -1,5 +1,12 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.15 (2026-09-10j): ROUTING-MAP:685 — nazwa i łańcuch przepisane po wykryciu DWÓCH PODMIAN AKTU (2022/2162 opisane jako nowa ustawa o medycynie laboratoryjnej, a jest t.j. STAREJ ustawy z 2001; 2023/1517 opisane jako stara ustawa, a jest rozporządzeniem MSWiA)
+- 6.14 (2026-09-10i): ROUTING-MAP:646 — PODWÓJNY BŁĄD skorygowany: wiersz delegowania kierowców twierdził „brak t.j." i opisywał Dz.U. 2025 poz. 797 jako nowelizację; 2025/797 JEST tekstem jednolitym tej ustawy (✅ RZĄD 1)
+- 6.13 (2026-09-10h): ROUTING-MAP: wiersz ustawy refundacyjnej uzupełniony o KROK 2C (Dz.U. 2026 poz. 791) i o wskazanie kanałów wykazu leków refundowanych — wykaz NIE jest aktem Dz.U.
+- 6.12 (2026-09-10g): ROUTING-MAP — wiersz „POŚ Szczegóły" rozstrzygnięty; zakres modułu ustalony jako warstwa proceduralna, akty (UOOŚiS 2026/670, POŚ 2025/647, ochrona przyrody 2026/13, KK 2025/383, KPA 2025/1691) zweryfikowane w RZĘDZIE 1 z listami nowelizacji po tekstach jednolitych
+- 6.11 (2026-09-10f): ROUTING-MAP: domknięte 13 pozycji oznaczonych do weryfikacji po odczycie RZĄD 1. TRZECI BŁĄD PODMIANY AKTU skorygowany — „ustawa antylichwiarska Dz.U. 2023 poz. 1028" to wygasły t.j. ustawy o KREDYCIE KONSUMENCKIM; poprawnie Dz.U. 2022 poz. 2339. Zamknięty sygnał ❌ NUMER BŁĘDNY przy KPK. Antymobbingowa 2026/1046 podniesiona z RZĘDU 2B do RZĘDU 1. Dopisane listy nowelizacji po tekście jednolitym (KK 4, KPK 5, VAT 5, antykorupcyjna 2, trzeźwość 2, UDIP 1, łowieckie 1, zarządzanie kryzysowe 1)
+- 6.10 (2026-09-10e): ROUTING-MAP: +2 wiersze (przekształcenie UW 2005 i 2018) oraz nowa sekcja nagłówkowa KOLEJNOŚĆ AKTUALIZACJI REJESTRÓW — praca idzie od źródła urzędowego przez mapę zbiorczą do modułów DR, przy zachowaniu zakazu traktowania ROUTING-MAP jako źródła weryfikacji (F-141)
+- 6.9 (2026-09-10d, F-148a/F-135/F-141): ROUTING-MAP: 9 wierszy rozstrzygniętych w RZĘDZIE 1 (F-135, F-141), 1 błąd podmiany aktu skorygowany (F-148a: ustawa antyterrorystyczna 2024/1474 → 2025/194)
 - 6.8 (2026-09-01i, flaga F-155): **propagacja trzech korekt tekstów jednolitych do mapy
   centralnej.** Ustawa o świadczeniu wspierającym: Dz.U. 2023 poz. 1429 → **Dz.U. 2026 poz. 873 t.j.**;
   ustawa o wyrobach medycznych (dwa wiersze, w tym jeden z adnotacją „zweryfikuj t.j. na ISAP"):

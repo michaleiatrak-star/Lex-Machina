@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.44"
+version: "3.47"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -100,18 +100,10 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog:
-  - '3.44 (2026-09-10, F-179): KOREKTA PRZESLANKI PROFILU LEKKIEGO. Pomiar
-    "219 kB sciezki obowiazkowej" z 3.43 byl FALSZYWY W PRZESLANCE - sumowal
-    zasoby warunkowe, ladowane leniwie (lazy loading), jakby byly bezwarunkowe.
-    Zmierzone poprawnie: koszt staly systemu to name+description 32 skilli,
-    ok. 5,9 kB; rdzen R-1..R-5 ok. 100 kB po wyzwoleniu routera; reszta byla
-    leniwa juz wczesniej. Profil LEKKI NIE zmniejsza rdzenia - jego korzysc
-    jest AUDYTOWA: zamienia uznaniowe leniwe ladowanie na deklarowane
-    i sprawdzalne. Klasa bledu jak F-164. PROFIL-LEKKI.md 1.0 -> 1.1.'
-  - '3.42 (2026-09-09, F-169/F-170/F-171): trzy latki po benchmarku 14 kazusow
-    - AF-7 (rygor formy znacznika VER, Regula 14a), T17 mierzy korpus osobno
-    od frontmatteru, T21 normalizuje prefiks. Pomiar: skille maja znak zalezny
-    od poziomu rozumowania (wysoki +3,6 pkt, sredni -7,5 pkt).'
+  - '3.47 (2026-09-10o, F-181): legacy-material-router/przemoc-domowa - ustawa
+    2021/1249 (wygasniecie aktu) zastapiona aktualnym t.j. 2024/1673. AKT
+    PRZEMIANOWANY: nazwa o przeciwdzialaniu przemocy w rodzinie jest
+    historyczna, obowiazujaca to o przeciwdzialaniu przemocy domowej.'
   - 'Pelna historia wszystkich wersji: references/CHANGELOG.md (ZASADA 15).'
 ---
 

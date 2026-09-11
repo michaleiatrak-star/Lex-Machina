@@ -176,7 +176,8 @@ Dla każdego orzeczenia wskaż:
 Przed końcową odpowiedzią sprawdź:
 
 ```text
-□ Czy sprawdzono aktualną wersję p.n. w ISAP (brak t.j. — liczne nowelizacje)?
+□ Czy sprawdzono aktualną wersję p.n. u źródła? **t.j. Dz.U. 2026 poz. 614** ✅ [VER] RZĄD 1 2026-09-10i
+  (obwieszczenie z 30.04.2026, zero nowelizacji po tekście jednolitym) — ⛔ wcześniejszy zapis „brak t.j." był nieprawdziwy
 □ Czy taksy NIE podano z pamięci — tylko z aktualnego rozp. MS?
 □ Czy oddzielono nieważność aktu od nieważności czynności prawnej?
 □ Czy zidentyfikowano prawidłowy środek (zaskarżenie odmowy vs powództwo)?

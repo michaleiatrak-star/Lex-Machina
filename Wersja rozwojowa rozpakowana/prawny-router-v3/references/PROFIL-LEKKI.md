@@ -1,7 +1,8 @@
 # PROFIL-LEKKI — kolejność odczytu zasobów obowiązkowych
 
 > **Plik:** `prawny-router-v3/references/PROFIL-LEKKI.md`
-> **Wersja:** 1.1 (2026-09-10) — przesłanka kosztowa skorygowana (F-179);
+> **Wersja:** 1.2 (2026-09-10b) — rdzeń po F-180;
+>              1.1 (2026-09-10) — przesłanka kosztowa skorygowana (F-179);
 >              1.0 wprowadzona w routerze 3.43, flaga F-173.
 > **Status:** KANONICZNY dla kolejności odczytu. Nie zawiera treści merytorycznej.
 > **Wywołanie:** `view prawny-router-v3/references/PROFIL-LEKKI.md`
@@ -81,10 +82,10 @@ staje się pominięciem.** Ten plik zamyka go trzema rzeczami:
 3. **Zamknięta lista wyzwalaczy** w jednym miejscu, mechanicznych i policzalnych,
    zamiast rozproszonych po kilkunastu modułach.
 
-⛔ Korzyść jest **audytowa, nie wydajnościowa.** Kto szuka tu oszczędności
-kontekstu, szuka w złym pliku — realna redukcja wymagałaby skrócenia rdzenia
-(`PRAWO-HARDGATE.md` to 41 kB, czyli 41% rdzenia), a to jest osobna decyzja
-projektowa o innym profilu ryzyka.
+⛔ Korzyść jest **audytowa, nie wydajnościowa.** Redukcja rdzenia to osobna
+robota i wykonuje się ją w samych plikach rdzenia, nie tutaj — pierwszy krok
+wykonano w F-180 (`PRAWO-HARDGATE.md` 41 → 29 kB przez wydzielenie gałęzi
+warunkowych), i to on, a nie ten plik, zmniejszył koszt.
 
 ---
 
@@ -115,6 +116,8 @@ przez F-113.
 
 | Zasób | Wyzwalacz odczytu | Najpóźniejszy moment |
 |---|---|---|
+| `shared/PRAWO-HARDGATE-BLOKADA.md` | B-1/B-2 zwrócił blokadę **i** kanał kodu też zawiódł | ⛔ przed nadaniem znacznika 🟨 lub ⚠️ |
+| `shared/PRAWO-HARDGATE-AKT-MIEJSCOWY.md` | przedmiotem sprawy jest akt prawa miejscowego | przed pierwszą próbą weryfikacji tego aktu |
 | `shared/HIERARCHIA-ZRODEL.md` | pierwszy URL w odpowiedzi | przed nadaniem pierwszego znacznika RZĄD |
 | `references/ZRODLA-AKTOW-FALLBACK.md` | pierwszy akt polski | przed pierwszą próbą pobrania tekstu |
 | `shared/MOD-CN-GATE.md` | pierwsze rozstrzygnięcie / zarzut / roszczenie / kwalifikacja | przed sformułowaniem tego rozstrzygnięcia |

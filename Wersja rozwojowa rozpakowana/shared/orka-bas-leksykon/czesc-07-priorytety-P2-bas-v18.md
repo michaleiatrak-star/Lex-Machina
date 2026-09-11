@@ -13,13 +13,13 @@
 ### BAS-006 — Świadczenie towarzyszące (DR-10)
 ```
 Weryfikacja: ustawa o działalności leczniczej art. 5 pkt 40
-  (Dz.U. 2024 poz. 799 t.j. — weryfikuj isap.sejm.gov.pl)
+  (**Dz.U. 2026 poz. 156 t.j.** ✅ [VER] RZĄD 1 2026-09-10l — ⛔ KROK 2C: 1 nowelizacja po nim; poprzedni zapis `2024 poz. 799` — wygaśnięcie aktu)
 → Patrz BAS-005 powyżej (zintegrowano w jednym rekordzie)
 ```
 
 ### BAS-070 — Jednostka budżetowa i IGB (DR-06)
 ```
-Weryfikacja: UFP art. 11–15 (Dz.U. 2024 poz. 1530 t.j. — weryfikuj)
+Weryfikacja: UFP art. 11–15 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10l — ⛔ KROK 2C: 5 nowelizacji po nim; poprzedni zapis `2024 poz. 1530` — wygaśnięcie aktu)
 
 JEDNOSTKA BUDŻETOWA (art. 11 UFP):
   Jednostka SFP pokrywająca wydatki bezpośrednio z budżetu i odprowadzająca
@@ -89,17 +89,17 @@ WERYFIKUJ: isap.sejm.gov.pl → ustawa o obronie Ojczyzny — wielokrotnie nowel
 
 ### BAS-022 — Budżet JST
 ```
-Weryfikacja: ustawa o finansach publicznych art. 211 (Dz.U. 2024 poz. 1530 t.j.)
+Weryfikacja: ustawa o finansach publicznych art. 211 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
 Definicja: Roczny plan dochodów i wydatków jednostki samorządu terytorialnego,
   uchwalany przez organ stanowiący JST (radę gminy/powiatu/sejmik województwa).
-Podstawa: art. 211 ustawy o finansach publicznych (Dz.U. 2024 poz. 1530 t.j.)
+Podstawa: art. 211 ustawy o finansach publicznych (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
 Reguła: Budżet JST jest częścią Wieloletniej Prognozy Finansowej (WPF) —
   wydatki majątkowe wymagają pokrycia w WPF co najmniej przez okres realizacji.
 ```
 
 ### BAS-023 / BAS-096 — Dług Skarbu Państwa
 ```
-Weryfikacja: ustawa o finansach publicznych art. 72 (Dz.U. 2024 poz. 1530 t.j.)
+Weryfikacja: ustawa o finansach publicznych art. 72 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
 Definicja: Zobowiązania finansowe zaciągnięte bezpośrednio przez Skarb Państwa
   (nie tożsamy z Państwowym Długiem Publicznym — PDP obejmuje cały sektor finansów publ.)
 Podstawa: art. 72 ustawy o finansach publicznych
@@ -108,7 +108,7 @@ Reguła: Dług SP < PDP (różnica: zobowiązania innych jednostek SFP niekonsol
 
 ### BAS-045 / BAS-055 — Państwowy fundusz celowy
 ```
-Weryfikacja: ustawa o finansach publicznych art. 29 (Dz.U. 2024 poz. 1530 t.j.)
+Weryfikacja: ustawa o finansach publicznych art. 29 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
 Definicja: Fundusz ustawowo wyodrębniony z budżetu państwa, posiadający plan finansowy
   i przeznaczony na realizację określonego zadania publicznego.
 Podstawa: art. 29 ust. 1 ustawy o finansach publicznych
@@ -119,7 +119,7 @@ Reguła: Fundusz celowy ≠ fundusz rezerwowy; ma własny plan finansowy zatwier
 
 ### BAS-050 — Wieloletnia prognoza finansowa (WPF)
 ```
-Weryfikacja: ustawa o finansach publicznych art. 226–232 (Dz.U. 2024 poz. 1530 t.j.)
+Weryfikacja: ustawa o finansach publicznych art. 226–232 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
 Definicja: Instrument wieloletniego planowania finansowego JST,
   uchwalany na co najmniej 4 lata, obejmujący dochody, wydatki i zadania inwestycyjne.
 Podstawa: art. 226–232 ustawy o finansach publicznych
@@ -130,7 +130,7 @@ Reguła: WPF jest wiążąca dla budżetu JST w zakresie wydatków majątkowych 
 ### BAS-053 — Funkcja państwa (budżet zadaniowy)
 ```
 Weryfikacja: rozp. MF ws. budżetu zadaniowego + UFP art. 174–175
-  (Dz.U. 2024 poz. 1530 t.j.)
+  (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
 Definicja: Najwyższy poziom w klasyfikacji zadaniowej budżetu — grupuje zadania
   według dziedzin aktywności państwa (np. "Bezpieczeństwo wewnętrzne i porządek publiczny").
 Podstawa: rozporządzenie MF ws. szczegółowego sposobu, trybu i terminów
@@ -141,7 +141,7 @@ Reguła: 22 funkcje państwa w budżecie zadaniowym → zadania → podzadania �
 ### BAS-054 — Miernik realizacji zadania / działania
 ```
 Weryfikacja: rozp. MF ws. szczegółowego sposobu budżetu zadaniowego
-  (Dz.U. 2024 poz. 1530 t.j. art. 174)
+  (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym art. 174)
 Definicja: Wskaźnik liczbowy służący do oceny stopnia realizacji celu określonego
   w budżecie zadaniowym (output, outcome lub result indicator).
 Podstawa: rozporządzenie MF ws. budżetu zadaniowego
@@ -175,7 +175,7 @@ Reguła: EDP → Komisja Europejska wszczyna → Rada ECOFIN wydaje zalecenia �
 
 ### BAS-071 — Instytucja gospodarki budżetowej (IGB)
 ```
-Weryfikacja: ustawa o finansach publicznych art. 23–28 (Dz.U. 2024 poz. 1530 t.j.)
+Weryfikacja: ustawa o finansach publicznych art. 23–28 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
 Definicja: Jednostka sektora finansów publicznych tworzona przez ministra lub organ
   kierujący jednostką nadrzędną, prowadząca odpłatną działalność i pokrywająca
   koszty z uzyskiwanych przychodów (może być dofinansowana z budżetu).
@@ -186,7 +186,7 @@ Reguła: IGB ≠ agencja wykonawcza (agencja ma własną ustawę; IGB — zarzą
 
 ### BAS-073 — Państwowa osoba prawna
 ```
-Weryfikacja: ustawa o finansach publicznych art. 9 pkt 14 (Dz.U. 2024 poz. 1530 t.j.)
+Weryfikacja: ustawa o finansach publicznych art. 9 pkt 14 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
 Definicja: Podmiot z osobowością prawną, niebędący Skarbem Państwa,
   nieposiadający statusu spółki handlowej, który wykonuje zadania publiczne
   i w całości lub dominującej części jest finansowany ze środków publicznych.
@@ -197,11 +197,11 @@ Przykłady: Polska Agencja Rozwoju Przedsiębiorczości, Agencja Restrukturyzacj
 
 ### BAS-076 / BAS-040 — Subwencja ogólna JST
 ```
-Weryfikacja: ustawa o dochodach JST (Dz.U. 2022 poz. 2267 t.j.)
+Weryfikacja: ustawa o dochodach JST (**Dz.U. 2024 poz. 1572** ✅ [VER] RZĄD 1 2026-09-10n — ⛔ **NOWA USTAWA** z 1.10.2024 o dochodach JST (zm. Dz.U. 2025 poz. 1659); stara ustawa z 2003 r. uchylona, jej ostatni t.j. `2024/356` też ma status *uchylony* — nie podstawiać go jako aktualnego)
   web_search: "ustawa o dochodach jednostek samorządu terytorialnego 2025 t.j."
 Definicja: Świadczenie publicznoprawne z budżetu państwa przekazywane JST
   bez obowiązku rozliczania konkretnego celu — JST swobodnie decyduje o przeznaczeniu.
-Podstawa: ustawa o dochodach JST (Dz.U. 2022 poz. 2267 t.j.)
+Podstawa: ustawa o dochodach JST (**Dz.U. 2024 poz. 1572** ✅ [VER] RZĄD 1 2026-09-10n — ⛔ **NOWA USTAWA** z 1.10.2024 o dochodach JST (zm. Dz.U. 2025 poz. 1659); stara ustawa z 2003 r. uchylona, jej ostatni t.j. `2024/356` też ma status *uchylony* — nie podstawiać go jako aktualnego)
 Składowe: część oświatowa (BAS-077), część wyrównawcza (BAS-078),
   część równoważąca/regionalna (BAS-079/080)
 Reguła: Subwencja ogólna ≠ dotacja celowa (ta wymaga rozliczenia konkretnego celu
@@ -210,7 +210,7 @@ Reguła: Subwencja ogólna ≠ dotacja celowa (ta wymaga rozliczenia konkretnego
 
 ### BAS-081–BAS-084 — Dochody własne JST (gmina/powiat/województwo)
 ```
-Weryfikacja: ustawa o dochodach JST art. 4–10 (Dz.U. 2022 poz. 2267 t.j.)
+Weryfikacja: ustawa o dochodach JST art. 4–10 (**Dz.U. 2024 poz. 1572** ✅ [VER] RZĄD 1 2026-09-10n — ⛔ **NOWA USTAWA** z 1.10.2024 o dochodach JST (zm. Dz.U. 2025 poz. 1659); stara ustawa z 2003 r. uchylona, jej ostatni t.j. `2024/356` też ma status *uchylony* — nie podstawiać go jako aktualnego)
   web_search: "ustawa o dochodach JST 2025 aktualny tekst jednolity"
 Definicja: Dochody należne JST na podstawie ustaw, pozostające w ich dyspozycji.
 Podstawa: ustawa o dochodach JST art. 4–10
@@ -223,7 +223,7 @@ Reguła: Dochody własne + subwencja + dotacje celowe = trzy filary finansowania
 
 ### BAS-086 / BAS-087 — Dochody bieżące i majątkowe JST
 ```
-Weryfikacja: ustawa o finansach publicznych art. 235–236 (Dz.U. 2024 poz. 1530 t.j.)
+Weryfikacja: ustawa o finansach publicznych art. 235–236 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
 DOCHODY BIEŻĄCE: wpływy przeznaczane na finansowanie wydatków bieżących
   (wynagrodzenia, zakup usług, dotacje bieżące); muszą w pełni finansować
   wydatki bieżące → złota reguła budżetowa.
@@ -234,7 +234,7 @@ Reguła: Budżet JST nie może mieć deficytu bieżącego — zakaz art. 242 UFP
 
 ### BAS-090 — System dochodów JST
 ```
-Weryfikacja: ustawa o dochodach JST (Dz.U. 2022 poz. 2267 t.j.) — struktura trójfilarowa
+Weryfikacja: ustawa o dochodach JST (**Dz.U. 2024 poz. 1572** ✅ [VER] RZĄD 1 2026-09-10n — ⛔ **NOWA USTAWA** z 1.10.2024 o dochodach JST (zm. Dz.U. 2025 poz. 1659); stara ustawa z 2003 r. uchylona, jej ostatni t.j. `2024/356` też ma status *uchylony* — nie podstawiać go jako aktualnego) — struktura trójfilarowa
 Definicja: Trójfilarowy system finansowania JST oparty na:
   1. Dochodach własnych (podatki, udziały w PIT/CIT, opłaty)
   2. Subwencji ogólnej (bez wskazania celu)
@@ -245,7 +245,7 @@ Reguła: Proporcje między filarami decydują o samodzielności finansowej JST �
 
 ### BAS-092 — Jednostki sektora finansów publicznych (katalog)
 ```
-Weryfikacja: ustawa o finansach publicznych art. 9 (Dz.U. 2024 poz. 1530 t.j.)
+Weryfikacja: ustawa o finansach publicznych art. 9 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
   ZWERYFIKOWANO — katalog zamknięty
 Definicja: Katalog z art. 9 ustawy o finansach publicznych:
   organy władzy publicznej (Sejm, Senat, Prezydent, NSA, TK, NIK...),
@@ -279,7 +279,7 @@ Podstawa: ustawa o poręczeniach i gwarancjach udzielanych przez SP
 ### BAS-110 — Absolwent centrum integracji społecznej (CIS)
 ```
 Weryfikacja: ustawa z 13.06.2003 r. o zatrudnieniu socjalnym art. 2 pkt 1a
-  (Dz.U. 2022 poz. 2241 t.j. — weryfikuj aktualne Dz.U.)
+  (**Dz.U. 2025 poz. 1718 t.j.** ✅ [VER] RZĄD 1 2026-09-10n — weryfikuj aktualne Dz.U.)
   + nowelizacja 2024 (Sejm X kad.) — podniesienie świadczenia integracyjnego do 120%
 
 Definicja ustawowa (art. 2 pkt 1a):
@@ -318,7 +318,7 @@ Reguła: Do ostrożnego użycia wyłącznie w kontekście definicyjnym (Konwencj
 ### BAS-116 — Dzieło / utwór w regulacjach antykryzysowych (COVID-19)
 ```
 Weryfikacja: MKiDN interp. nr 4610 (Sejm IX kad.) + ustawa o prawie autorskim art. 1
-  (Dz.U. 2022 poz. 2509 t.j. — weryfikuj aktualne zmiany)
+  (**Dz.U. 2025 poz. 24 t.j.** ✅ [VER] RZĄD 1 2026-09-10n — weryfikuj aktualne zmiany)
   Historyczne (tarcze COVID) — stosować tylko do stanów faktycznych 2020–2022
 Źródło: interpelacja nr 4610 do Ministra Kultury (Sejm IX kadencja)
   dot. rekompensat dla twórców z "tarczy antykryzysowej"

@@ -1,6 +1,6 @@
 ---
 name: dr-13-sluzby-bezpieczenstwo-informacje-niejawne
-version: "3.9"
+version: "3.10"
 description: "Służby, bezpieczeństwo i informacje niejawne: Policja, ABW/AW i inne służby, obrona, ochrona informacji niejawnych oraz publicznoprawne ramy bezpieczeństwa."
 ---
 
@@ -114,7 +114,7 @@ SŁUŻBY SPECJALNE:
                zasygnalizowane punktowo jako punkt startowy)
               (ABW — Dz.U. 2024 poz. 1183 ze zm.; AW, CBA — Dz.U. 2024 poz. 1392; SOP;
                czynności operacyjno-rozpoznawcze, kontrola operacyjna z sądem,
-               skargi: Kolegium/Sejm/RPO/ETPC; ustawa antyterrorystyczna Dz.U. 2024 poz. 1474)
+               skargi: Kolegium/Sejm/RPO/ETPC; ustawa antyterrorystyczna Dz.U. 2025 poz. 194 t.j.)
   [✓] OK    mod-ustawa-sluzby-operacyjne-retencja-danych
               (czynności niejawne, poświadczenia bezpieczeństwa, retencja danych,
                odpowiedzialność za bezprawne działania, ETPC)

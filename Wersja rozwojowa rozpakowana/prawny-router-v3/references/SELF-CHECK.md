@@ -86,6 +86,23 @@ JEŚLI BLOK 0A nie zamknięty → STOP. Żaden punkt poniżej nie jest wykonywan
     TAK → ⛔ deklaracja ROUTER-WCZYTANY: TAK w KROK 3A jest FASADĄ — cofnij
           się, faktycznie wywołaj `view` na PRIMARY, PRZEPISZ blok KROK 3A
           zgodnie ze stanem faktycznym po wywołaniu
+□ ⛔ [STAN-ZAŁADOWANY] KONTROLA PRZED ORZECZENIEM O SYSTEMIE (dodano 2026-09-10b, O-6):
+  czy ta odpowiedź twierdzi, że w SYSTEMIE jest luka, błąd, brak pliku,
+  nieaktualna treść albo niedomknięta flaga?
+    NIE → OK
+    TAK → czy porównałem wersję ZAŁADOWANĄ przez hosta z wersją w repozytorium?
+          NIE → ⛔ NIE ORZEKAJ. Host bywa starszy od repozytorium o kilka wydań
+                bez żadnego sygnału — zmierzone 2026-09-09/10: ocena prowadzona
+                na kopii sesyjnej z routerem 3.41 zgłosiła jako usterkę systemu
+                lukę, która w repozytorium (3.42) nie istniała.
+          ⛔ Klasa błędu jak F-151: wniosek z jednego nośnika bez sprawdzenia
+             drugiego. Zanim orzekniesz, wykonaj JEDNO z:
+               • odczytaj `version:` z `SKILL.md` w repozytorium i zestaw
+                 z wersją, którą masz w kontekście,
+               • albo oznacz wniosek jako ⚠️ WARUNKOWY, z jawnym podaniem
+                 wersji, na której pracujesz, i zastrzeżeniem, że nie została
+                 zestawiona ze stanem repozytorium.
+          Nigdy nie zgłaszaj usterki systemu jako ustalonej, mając jeden nośnik.
 □ ⛔ [PROFIL-ODROCZENIA] KONTROLA NA WYJŚCIU (dodano 2026-09-10, F-175):
   czy w GOTOWEJ odpowiedzi padł wyzwalacz zasobu zadeklarowanego w KROKU 3A jako
   ODROCZONY (pierwszy URL, pierwszy artykuł, ≥2 daty, rozstrzygnięcie, oddanie

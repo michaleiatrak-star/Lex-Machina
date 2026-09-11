@@ -1,5 +1,6 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.34 (2026-09-10l, F-181): trzy przeterminowane podstawy: ustawa rehabilitacyjna 2024/44 → 2026/884; w orka-bas działalność lecznicza 2024/799 → 2026/156, UFP 2024/1530 → 2025/1483, Ordynacja 2025/111 → 2026/622 (2 miejsca)
 - 3.31 — **KROK 2C: gdzie szukać nowelizacji po t.j. + zakaz przepisywania wyniku**
   (2026-09-01k, flaga F-156). Nowa tabela adresów: sekcja „Nowelizacje po tekście
   jednolitym" w `/references` obwieszczenia, kontrola uzupełniająca aktami
@@ -868,3 +869,106 @@ ZRODEL.md` (oznaczone 📚) oraz DODANO przykładowe wzorce nazw domen
 typowych dla danej branży jako PUNKTY STARTOWE (oznaczone ⚠️ NIE
 testowane) — UCZCIWIE nierozróżniane od faktycznie zweryfikowanych,
 zgodnie z zasadą braku fabrykowania pewności.
+
+---
+
+## PRAWO-HARDGATE — historia wersji
+
+Przeniesiona z korpusu `shared/PRAWO-HARDGATE.md` 2026-09-10b (F-180, ZASADA 15).
+
+⛔ Historia zmian tego pliku NIE mieszka tutaj (ZASADA 15 w
+`audyt-systemu-v4/SKILL.md`). Do 2026-08-23h **88 linii changelogu stało POWYŻEJ
+pierwszej normy** — każdy z 114 plików odsyłających do tej bramki czytał opisy
+wersji 2.0–2.6, zanim dotarł do zakazu. Przeniesione do:
+
+```
+view shared/references/CHANGELOG.md
+```
+
+---
+
+## 3.32 (2026-09-10b, F-180) — PRAWO-HARDGATE: wydzielenie gałęzi warunkowych
+
+`PRAWO-HARDGATE.md` jest jedynym zasobem czytanym **bezwarunkowo w każdej turze
+prawnej** i stanowił 41 kB z ok. 100 kB rdzenia R-1…R-5. Pomiar 2026-09-10b:
+z 704 linii **236 opisywało gałęzie, które w typowej sprawie nie padają ani razu.**
+
+Wydzielone bez zmian merytorycznych:
+
+| Nowy plik | Treść | Wyzwalacz |
+|---|---|---|
+| `PRAWO-HARDGATE-BLOKADA.md` | BRAMKA ANTY-FASADOWA + KOTWICA URZĘDOWA (201 l.) | B-1/B-2 zwrócił blokadę i kanał kodu też zawiódł |
+| `PRAWO-HARDGATE-AKT-MIEJSCOWY.md` | ŚCIEŻKA B-L (35 l.) | przedmiotem sprawy jest akt prawa miejscowego |
+
+Historia wersji przeniesiona do tego pliku (ZASADA 15).
+Wynik: **40,9 kB → 28,7 kB (−30%)**, rdzeń ok. 100 kB → ok. 88 kB.
+
+⛔ **Ryzyko wydzielenia i jak zamknięte.** Wydzielenie bramki, która pilnuje
+przed obejściem procedury, tworzy oczywistą pokusę: pominąć odczyt i od razu
+oznaczyć 🟨. Dlatego w korpusie zostały **twarde zaślepki**, nie odesłania:
+- rozgałęzienie TAK/NIE z jawnym `⛔ STOP` i wywołaniem `view`,
+- zakaz nadania 🟨 oraz ⚠️ przed wykonaniem tego `view` — znacznik nadany
+  wcześniej jest nieważny,
+- przypomnienie, że Reguła 12d (REM-0) wymaga pomiaru dwukanałowego, którego
+  procedura leży w wydzielonym pliku,
+- powiązanie z kontrolą `[PROFIL-ODROCZENIA]`, która traktuje „blokada padła,
+  `view` nie ma" jako bramkę niewykonaną.
+
+⛔ Kolejność wewnątrz `PRAWO-HARDGATE-BLOKADA.md` pozostaje wiążąca: najpierw
+bramka antyfasadowa, potem kotwica. Bramka istnieje po to, żeby kotwica nie
+stała się wygodnym wyjściem awaryjnym.
+
+⚠️ Czego to wydzielenie **nie** rozstrzyga: czy w sytuacji blokady model
+faktycznie wykona `view`, zamiast go zadeklarować. To jest dokładnie pytanie
+z protokołu F-113 i pozostaje niezmierzone.
+
+---
+
+## 3.33 (2026-09-10d, F-160) — odesłania operacyjne rozdzielone od dowodowych
+
+`PRAWO-HARDGATE.md` i `HIERARCHIA-ZRODEL.md` wskazywały
+`audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md` jako źródło
+**instrukcji** dostępu maszynowego. ⛔ `audyt-systemu-v4` nie występuje
+w `dependencies.requires` żadnego skilla produkcyjnego, więc były to wskazania
+**nieosiągalne ze ścieżki produkcyjnej** — dokładnie wzorzec, dla którego
+powstała flaga F-160.
+
+Rozdzielone: instrukcja → `shared/DOSTEP-MASZYNOWY-API.md` (w `required_modules`
+routera), plik audytu → materiał dowodowy pomiaru, przywoływany jako dowód
+i opatrzony adnotacją o niedostępności z produkcji.
+
+---
+
+## 3.35 (2026-09-10n, F-181) — 41 wygasłych podstaw prawnych zastąpionych aktualnymi
+
+`shared` niósł **dwie trzecie całej zaległości F-181**: 41 z 61 miejsc, 20 aktów.
+Koncentracja w `orka-bas-leksykon`, który cytuje podstawy **w treści definicji**,
+a nie w nagłówku — przez co omijały go wszystkie dotychczasowe przeglądy.
+
+| Akt | Było | Jest | Miejsc | KROK 2C |
+|---|---|---|---:|---|
+| ustawa o finansach publicznych | 2024/1530 | **2025/1483** | 13 | ⛔ 5 nowelizacji |
+| ustawa o dochodach JST | 2022/2267 | **2024/1572** ⛔ nowa ustawa | 5 | zm. 2025/1659 |
+| ustawa o gospodarce nieruchomościami | 2023/344 | **2026/399** | 2 | ⛔ 1 |
+| Karta Nauczyciela | 2023/984 | **2026/515** | 2 | 0 |
+| ustawa o VAT | 2024/361 | **2025/775** | 2 | ⛔ 5 |
+| KPK | 2024/37 | **2026/490** | 2 | ⛔ 5 |
+| ustawa rehabilitacyjna | 2024/44 | **2026/884** | 2 | 0 |
+| PZP | 2022/1710, 2024/1320 | **2026/793** | 2 | 0 |
+| pozostałe 12 aktów | — | — | po 1 | — |
+
+Pozostałe: podatek rolny `2025/1344`, rozporządzenie MRPiPS `2026/677`,
+zatrudnienie socjalne `2025/1718`, obrona Ojczyzny `2025/825` (⛔ 5),
+prawo autorskie `2025/24`, AML `2025/644` (⛔ 1), KWiH `2026/1066`,
+Prawo energetyczne `2026/43` (⛔ 3), PPSA `2026/143` (⛔ 1),
+pomoc społeczna `2026/639` (⛔ 2), Prawo upadłościowe `2026/913`.
+
+⛔ **Dochody JST — jedyny przypadek, który nie był zwykłym starzeniem.**
+Wskazany przez pomiar „aktualny" tekst jednolity `2024/356` **też ma status
+uchylony**: stara ustawa z 2003 r. została zastąpiona **nową ustawą** z 1.10.2024
+(`Dz.U. 2024 poz. 1572`). Automatyczne podstawienie przesunęłoby błąd o jedno
+ogniwo dalej, zamiast go usunąć.
+
+⛔ Każda z 20 par sprawdzona przez **porównanie tytułów** starego i nowego
+obwieszczenia — po sześciu podmianach aktu w tej serii to element procedury,
+nie formalność.

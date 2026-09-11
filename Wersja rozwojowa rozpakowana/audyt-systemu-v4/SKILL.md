@@ -1,7 +1,7 @@
 ---
 name: audyt-systemu-v4
 description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych skilli: zależności, wersje, mapy Dz.U., treść merytoryczna, propagacja zmian, deduplikacja i bramki jakości."
-version: "6.55"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
+version: "6.68"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
                   # parsuje jako float 6.1 — czyli numer NIŻSZY niż 6.9, co cicho
                   # odwraca porządek wersji. Wykryte przy walidacji 2026-08-20z.
                   # Każda kolejna wersja z dwucyfrowym minor — też w cudzysłowie.
@@ -48,12 +48,26 @@ references:
   - references/WARN-OTWARTE.md   # rejestr żywy TYLKO otwartych flag (WARN + strukturalne) — dodane 2026-07-07, ZASADA 10; ⚡ od 2026-08-15w zaczyna się TABLICĄ STERUJĄCĄ (indeks wszystkich flag + następny krok w jednym zdaniu) — czytaj ją PIERWSZĄ przy pytaniu „co jest do zrobienia"
   - references/SPROSTOWANIE-LM-2026-08-23.md   # dokument do wysłania autorowi raportów TEST1-3 — realizacja F-116 część 3/3, bez treści proceduralnej systemu — dodane 2026-08-23f
   - references/CHECKLIST-DEDUP.md   # mapa pojęć → lokalizacje (5 not, NOTA-6 ORPHAN dodana 06-14g)
-  - references/mapa_dzu_2026-09-09.md   # ⭐ AKTUALNA mapa Dz.U.; generacja F-172 — 11 numerów z T11
+  - references/mapa_dzu_2026-09-10.md      # ⭐ GENERACJA BIEŻĄCA (F-148a) — +5 pozycji, w tym trzy
+                                          # wchodzące jako skutek DWÓCH błędów podmiany aktu
+                                          # (2024/1474 i 2024/1194); KROK 2C dla 2026/815
+  - references/mapa_dzu_2026-09-09.md   # generacja POPRZEDNIA (F-172) — 11 numerów z T11
                                         # zweryfikowanych w RZĘDZIE 1 (ELI), 10 wierszy dodanych, 1 do MONITORING,
                                         # 3 wiersze przestawione na PREV po ujawnieniu nowszych t.j.
   - references/mapa_dzu_2026-08-28.md   # POPRZEDNIA generacja; ponowny audyt F-108, korekty tożsamości i statusów t.j.
   - references/mapa_dzu_2026-08-26.md   # POPRZEDNIA generacja — zachowana historycznie
   - references/mapa_dzu_2026-07-15.md   # POPRZEDNIA generacja (sync 2026-08-13) — zachowana jako materiał historyczny
+  - references/PRZETERMINOWANE-TJ-2026-09-10.md # LISTA ROBOCZA F-181: 29 wygasłych tekstów jednolitych
+                                          # deklarowanych w nagłówkach modułów jako aktualne, w 35 miejscach
+                                          # i 11 skillach. ⛔ Żadna pozycja nie naprawiona — to wynik pomiaru,
+                                          # nie naprawa. Kolumna „aktualny t.j." wymaga ponownego odczytu
+                                          # przed wpisaniem
+  - references/ALIASY-NAZW-AKTOW.md       # rozstrzygnięcia człowieka: nazwa robocza aktu w rejestrze
+                                          # = ten sam akt co tytuł urzędowy w ELI. Kontrakt dla T15;
+                                          # NIE jest listą wyciszeń — wpis bez kolumny „Sprawdzone"
+                                          # jest nieważny (F-148a)
+  - references/SKRYPTY-RECZNE.md          # rejestr skryptów świadomie poza pełnym przebiegiem,
+                                          # z powodem i wskazaniem, kto je uruchamia. Kontrakt dla T23
   - references/PROTOKOL-WYKONAWCZY-F113.md   # warstwa OPERACYJNA protokołu F-113 (F-176, 2026-09-10):
                                           # budowa ramienia kontrolnego, plan minimum 20 przebiegów,
                                           # karta przebiegu, łańcuch wykonania
@@ -86,6 +100,9 @@ references:
                                           # prozą `poz. N` i w kolumnach tabeli) — dodane 2026-08-21
   - references/raporty-pokrycia-2026-08-13/   # 12 raportów + indeks = 13 plików; licznik potwierdzony ze stanem dysku 2026-08-26
 scripts:
+  - scripts/test_pokrycie_orkiestratora.py # T23 — każdy zarejestrowany skrypt testowy MUSI być albo
+                                          # wywoływany przez orkiestrator, albo jawnie zadeklarowany
+                                          # jako ręczny w references/SKRYPTY-RECZNE.md z powodem (O-4)
   - scripts/test_module_registration.py   # T1 — rejestracja modułów (KRYTYCZNY)
   - scripts/test_module_count.py          # T2 — zgodność liczników (WYSOKI)
   - scripts/test_cross_map_dzu.py         # T3 — spójność Dz.U. między mapami (KRYTYCZNY, heurystyka→WARN)
@@ -1295,7 +1312,8 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
     ├── F-108-verification-2026-08-28.md         ← raport źródłowy re-audytu F-108
     ├── F-104-lista-robocza-mapa-dzu.md         ← lista robocza F-104, rocznik 2026
     ├── F-104-lista-robocza-roczniki-starsze.md ← lista robocza F-104, roczniki 2013-2025 (F-124)
-    ├── mapa_dzu_2026-09-09.md                  ← mapa Dz.U. AKTUALNA (F-172)
+    ├── mapa_dzu_2026-09-10.md                  ← mapa Dz.U. AKTUALNA (F-148a)
+    ├── mapa_dzu_2026-09-09.md                  ← generacja poprzednia (F-172)
     ├── mapa_dzu_2026-08-28.md                  ← POPRZEDNIA generacja
     ├── mapa_dzu_2026-08-26.md                  ← POPRZEDNIA generacja
     ├── mapa_dzu_2026-07-15 / 07-04 / 07-02 / 06-14.md  ← POPRZEDNIE generacje, cytowane w dzienniku
@@ -1304,7 +1322,7 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
 
 ---
 
-*Wersja: 6.55 | Ostatnia aktualizacja: 2026-09-10b (F-179 ZAMKNIĘTA — korekta FAŁSZYWEJ PRZESŁANKI profilu LEKKIEGO: pomiar „219 kB ścieżki obowiązkowej” sumował zasoby ładowane leniwie; koszt stały systemu to ≈5,9 kB, rdzeń ≈100 kB, korzyść profilu jest AUDYTOWA, nie wydajnościowa; klasa błędu jak F-164, czwarte wystąpienie. O-7 ZAMKNIĘTA — `.github/workflows/regresja.yml`, zestaw regresyjny jako bramka wydania. README: twardy próg minimalnego modelu. Poprzednio: 2026-09-10 (F-175/F-176/F-177/F-178))*
+*Wersja: 6.68 | Ostatnia aktualizacja: 2026-09-10o (F-181 DOMKNIĘTA na liście 1.2 — pozostałe 20 miejsc w 12 skillach naprawione; razem 61/61. ⛔ SIÓDMA PODMIANA AKTU: `mod-ustawa-pielegniarka-polozna` kierował do `2025/450`, czyli do t.j. ustawy o DZIAŁALNOŚCI LECZNICZEJ. ⛔ `mod-ustawa-kontrola-administracji` niósł nieprawdziwą adnotację „nowszy t.j. NIE został ogłoszony". ⚠️ Flaga nadal otwarta: lista 1.2 to wynik heurystyki, nie audytu każdej linii. Poprzednio: 2026-09-10n)*
 
 *(Stopka podawała „5.0 | 2026-07-04" przy `version: 6.8` w YAML — rozjazd
 9 wersji, naprawiony 2026-08-20y. **Stopkę aktualizuj razem z polem `version`**;

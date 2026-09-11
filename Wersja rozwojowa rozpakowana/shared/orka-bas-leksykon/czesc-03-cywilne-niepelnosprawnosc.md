@@ -77,7 +77,7 @@ nieprzerwane posiadanie (rachunki, zeznania świadków, dane o płaceniu podatk�
 ### BAS-127 — Hipoteka (ustawa o ks. wieczystych i hipotece)
 ```
 Weryfikacja: ustawa z 6.07.1982 r. o ks. wieczystych i hipotece art. 65
-  (Dz.U. 2023 poz. 1984 t.j. — weryfikuj)
+  (**Dz.U. 2026 poz. 1066 t.j.** ✅ [VER] RZĄD 1 2026-09-10n — weryfikuj)
 
 DEFINICJA USTAWOWA (art. 65 ust. 1 u.k.w.h.):
   "W celu zabezpieczenia oznaczonej wierzytelności wynikającej z określonego

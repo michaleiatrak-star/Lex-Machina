@@ -37,7 +37,7 @@ BAS-116  Dzieło / utwór w regulacjach antykryzysowych (COVID-19)
   web_search: "utwór tarcza antykryzysowa definicja dofinansowanie 2020 2021"
 
 BAS-117  Godziny ponadwymiarowe nauczycieli
-  Kierunek: Karta Nauczyciela art. 35 (Dz.U. 2023 poz. 984 t.j. — weryfikuj)
+  Kierunek: Karta Nauczyciela art. 35 (**Dz.U. 2026 poz. 515 t.j.** ✅ [VER] RZĄD 1 2026-09-10n — weryfikuj)
   web_search: "godziny ponadwymiarowe nauczyciel Karta Nauczyciela art 35 2025"
 
 BAS-119  Przedsiębiorca
@@ -50,7 +50,7 @@ BAS-120  Powierzenie cudzoziemcowi nielegalnego wykonywania pracy
   web_search: "powierzenie pracy cudzoziemcowi nielegalna ustawa definicja sankcje 2025"
 
 BAS-122  Żołnierz (definicja ustawowa)
-  Kierunek: ustawa o obronie Ojczyzny art. 4 pkt 1 (Dz.U. 2022 poz. 2305 t.j. — weryfikuj)
+  Kierunek: ustawa o obronie Ojczyzny art. 4 pkt 1 (**Dz.U. 2025 poz. 825 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym — weryfikuj)
   web_search: "żołnierz definicja ustawa o obronie ojczyzny 2025"
 
 BAS-123  Choroba zawodowa

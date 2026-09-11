@@ -90,7 +90,7 @@
 | Kod | Akt | Metryka Dz.U. | Status | Ryzyko | Uwagi |
 |---|---|---|---|---|---|
 | PR | Prawo restrukturyzacyjne | Dz.U. 2026 poz. 533 | AKTUALNY | 🟠 | Nowy tekst jednolity |
-| PU | Prawo upadłościowe | Dz.U. 2025 poz. 614 | PO-TJ-ZMIANY | 🟠 | Sprawdzić zmiany po t.j. i wejście w życie |
+| PU | Prawo upadłościowe | **Dz.U. 2026 poz. 913 t.j.** ✅ [VER] RZĄD 1 2026-09-10n | PO-TJ-ZMIANY | 🟠 | Sprawdzić zmiany po t.j. i wejście w życie |
 | PPRZEDS | Prawo przedsiębiorców | Dz.U. 2025 poz. 1480 + zmiany Dz.U. 2025 poz. 1795, 1826 + Dz.U. 2026 poz. 507 | PO-TJ-ZMIANY | 🟡 | Działalność regulowana, gospodarcza |
 | UOKiK | Ustawa o ochronie konkurencji i konsumentów | Dz.U. 2026 poz. 85 | AKTUALNY | 🟡 | Klauzule abuzywne, postępowania UOKiK |
 | UPrKons | Ustawa o prawach konsumenta | t.j. ISAP — sprawdź aktualny Dz.U. | WYMAGA-KONTROLI | 🟡 | Sprawdź t.j. przed każdą sprawą konsumencką |
@@ -105,7 +105,7 @@
 | FUS | Ustawa o emeryturach i rentach z FUS | Dz.U. 2025 poz. 1749 (t.j. z 7.11.2025) + zmiany Dz.U. 2026 poz. 26, 425 | PO-TJ-ZMIANY | 🟠 | Zmiana Dz.U. 2026 poz. 425 z 13.02.2026; sprawdź przepisy przejściowe |
 | REHAB | Ustawa rehabilitacyjna (PFRON) | Dz.U. 2026 poz. 884 (t.j.) ze zm. | PO-TJ-ZMIANY | 🟠 | PFRON, świadczenie wspierające, zatrudnienie chroniące; ✅ VER 2026-09-01 RZĄD 1 (ELI DU/2026/884: obwieszczenie 19.06.2026, ogł. 1.07.2026, obowiązujący; DU/2025/913 — status wygaśnięcie aktu) |
 | KRUS | Ustawa o ubezpieczeniu społecznym rolników | t.j. ISAP — sprawdź aktualny Dz.U. | WYMAGA-KONTROLI | 🟠 | KRUS, renty rolnicze, wypadki |
-| PS | Ustawa o pomocy społecznej | Dz.U. 2025 poz. 1214 + zmiany 2025/2026 | PO-TJ-ZMIANY | 🟠 | Zasiłki, DPS, odwołania SKO/WSA |
+| PS | Ustawa o pomocy społecznej | **Dz.U. 2026 poz. 639 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 2 nowelizacji po tekście jednolitym + zmiany 2025/2026 | PO-TJ-ZMIANY | 🟠 | Zasiłki, DPS, odwołania SKO/WSA |
 | PIP | Ustawa o Państwowej Inspekcji Pracy | Dz.U. 2024 poz. 1712 (t.j.) + zmiany Dz.U. 2025 poz. 321, 368, 620, 769 + Dz.U. 2026 poz. 160 + **nowelizacja Dz.U. 2026 poz. 473** (ustawa z 11.03.2026, ogł. 7.04.2026) | PO-TJ-ZMIANY | 🟠 | ⏳ Nowelizacja Dz.U. 2026 poz. 473 wchodzi w życie **08.07.2026** (jeszcze nie obowiązuje): nowy art. 14b — interpretacje indywidualne GIP (czy stosunek prawny = stosunek pracy art. 22 §1 KP, opłata 40 zł, odwołanie wg KPC); nowy art. 10 ust. 1 pkt 7a — decyzja GIP/OIP stwierdzająca istnienie stosunku pracy (reklasyfikacja umowy cywilnoprawnej/B2B), warunek: niewykonanie wcześniejszego polecenia (art. 10 ust. 2 pkt 2), odwołanie do sądu pracy; nowy art. 37aa — zarządzenie GIP w sprawie metod/standardów kontroli; nowe art. 631–632 KPC (powództwa OIP o ustalenie stosunku pracy); zespół PIP-ZUS-KAS ds. oceny ryzyka; przepis przejściowy — 12-miesięczna abolicja zaległości |
 
 ---
@@ -170,7 +170,7 @@
 
 | Kod | Akt | Metryka Dz.U. | Status | Ryzyko | Uwagi |
 |---|---|---|---|---|---|
-| PZP | Prawo zamówień publicznych | Dz.U. 2024 poz. 1320 (ostatni t.j.) + zmiany od 1.01.2026 (poz. 1173), 13.03.2026 (poz. 769), 12.07.2026 (certyfikacja poz. 1235) | PO-TJ-ZMIANY | 🔴 | ⚠️ Brak nowego t.j. po 2024; nowe progi, KIO ze zdalną rozprawą i prekluzją dowodową od 13.03.2026; certyfikacja od 12.07.2026 |
+| PZP | Prawo zamówień publicznych | **Dz.U. 2026 poz. 793 t.j.** ✅ [VER] RZĄD 1 2026-09-10n (ostatni t.j.) + zmiany od 1.01.2026 (poz. 1173), 13.03.2026 (poz. 769), 12.07.2026 (certyfikacja poz. 1235) | PO-TJ-ZMIANY | 🔴 | ⚠️ Brak nowego t.j. po 2024; nowe progi, KIO ze zdalną rozprawą i prekluzją dowodową od 13.03.2026; certyfikacja od 12.07.2026 |
 | CERT | Ustawa o certyfikacji wykonawców zamówień | Dz.U. 2025 poz. 1235 | AKTUALNY | 🔴 | Nowa regulacja; sprawdź wdrożenie |
 | UFP | Ustawa o finansach publicznych | Dz.U. 2025 poz. 1483 + zmiany Dz.U. 2026 poz. 426, 635 | PO-TJ-ZMIANY | 🔴 | NIK, RIO, dyscyplina finansów |
 

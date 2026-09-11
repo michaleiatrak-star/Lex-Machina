@@ -1,6 +1,6 @@
 ---
 name: analizator-umow-v1
-version: "1.31"
+version: "1.32"
 type: executive-umowy
 status: production
 description: "Analiza, redakcja, negocjacje i generowanie umów oraz dokumentów korporacyjnych, HR i RODO: ryzyka klauzul, B2B/B2C, praca, najem, IT/SaaS, IP, founders, finansowanie i PZP."

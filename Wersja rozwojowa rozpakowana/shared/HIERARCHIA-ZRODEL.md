@@ -189,7 +189,13 @@ ryzyku dezaktualizacji, redakcja profesjonalna).
   orzeczenia.uzp.gov.pl (KIO), bip.uke.gov.pl, decyzje.uokik.gov.pl,
   eureka.mf.gov.pl (interpretacje i wiążące informacje KAS).
   ⛔ Stan dostępu maszynowego, ograniczenia i zastrzeżenia każdej z tych baz:
-  `audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md`. Kilka z nich samo
+  `shared/DOSTEP-MASZYNOWY-API.md` — to jest ŹRÓDŁO OPERACYJNE i leży
+  w `required_modules` routera, więc da się je wczytać z produkcji.
+  ⚠️ `audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md` niesie surowy
+  materiał dowodowy pomiaru i **nie jest osiągalny ze ścieżki produkcyjnej** —
+  `audyt-systemu-v4` nie występuje w `dependencies.requires` żadnego skilla
+  produkcyjnego (F-160). Odsyła się do niego jako do dowodu, nigdy jako do
+  instrukcji. Kilka z tych baz samo
   zastrzega, że NIE jest zbiorem urzędowym — to nie odbiera im RZĘDU 2A dla
   ustalenia istnienia rozstrzygnięcia, ale zabrania traktowania ich jak
   publikatora.
@@ -208,7 +214,8 @@ ryzyku dezaktualizacji, redakcja profesjonalna).
   pod `/api-doc/schemas/openapi.yml`; łańcuch wyszukiwanie → metadane → pełna
   treść XML zmierzony end-to-end 2026-09-04 (baza `/api`, dokument oddany
   jako 118 kB XML). Wywołania: `shared/DOSTEP-MASZYNOWY-API.md` §3;
-  dowód pomiaru: `audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md` §7.6.
+  dowód pomiaru (materiał audytowy, poza ścieżką produkcyjną — F-160):
+  `audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md` §7.6.
   ⛔ Decyzja organu nadzorczego NIE jest źródłem prawa — powołuje się ją jako
   rozstrzygnięcie organu, nie jako brzmienie przepisu.
 - **Rejestry urzędowe i publikatory ogłoszeń** (dodane 2026-09-01f) — RZĄD 2A

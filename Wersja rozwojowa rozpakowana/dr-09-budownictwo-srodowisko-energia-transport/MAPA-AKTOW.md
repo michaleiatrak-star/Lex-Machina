@@ -16,6 +16,16 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Prawo energetyczne / URE / OZE | Dz.U. 2025 poz. 459 t.j. ze zm. | `mod-PrEnergetyczne-URE-OZE` | ✅ aktywny; temporal gate |
 | Prawo geodezyjne i kartograficzne / wywłaszczenia | Dz.U. 2024 poz. 1151 t.j. ze zm. | `mod-PrGeodezyjne-kartografia-wywlaszczenia` | ✅ aktywny |
 | Ustawa o gospodarce nieruchomościami (UGN) | Dz.U. 2026 poz. 399 t.j. ze zm. | `mod-UGN-gospodarka-nieruchomosciami` | 🟢 B+/COV |
+| Ustawa o przekształceniu prawa użytkowania wieczystego w prawo własności nieruchomości (29.07.2005) — przekształcenie NA WNIOSEK | **Dz.U. 2024 poz. 900 t.j.** ✅ [VER] RZĄD 1 2026-09-10e — obwieszczenie Marszałka Sejmu z 11.06.2024, akt bazowy Dz.U. 2005 nr 175 poz. 1459, najnowszy z 3 t.j., zero nowelizacji po tekście jednolitym | brak dedykowanego modułu — obsługa przez `mod-UGN-gospodarka-nieruchomosciami` | 🔴 KATALOGOWANY, bez modułu |
+| Ustawa o przekształceniu prawa użytkowania wieczystego gruntów zabudowanych na cele mieszkaniowe w prawo własności (20.07.2018) — przekształcenie Z MOCY PRAWA od 1.01.2019 | **Dz.U. 2025 poz. 6 t.j.** ✅ [VER] RZĄD 1 2026-09-10e — obwieszczenie z 23.12.2024, akt bazowy Dz.U. 2018 poz. 1716, zero nowelizacji po tekście jednolitym | brak dedykowanego modułu — obsługa przez `mod-UGN-gospodarka-nieruchomosciami` | 🔴 KATALOGOWANY, bez modułu |
+
+> ⛔ **Dwie różne ustawy o przekształceniu użytkowania wieczystego — nie mylić.**
+> Ustawa z 2005 r. działa **na wniosek** i obejmuje szeroki krąg nieruchomości;
+> ustawa z 2018 r. przekształciła **z mocy prawa** grunty zabudowane na cele
+> mieszkaniowe z dniem 1.01.2019. Powołanie niewłaściwej z nich jest błędem
+> podstawy prawnej, nie nieścisłością nazewniczą. Obie mają odrębne t.j.
+> (2024/900 i 2025/6) i odrębne akty bazowe (2005/1459 i 2018/1716).
+
 | Prawo geologiczne i górnicze | Dz.U. 2026 poz. 69 t.j. ze zm. | `mod-prawo-geologiczne-gornicze` | ✅ aktywny |
 | Prawo wodne | Dz.U. 2025 poz. 960 t.j. ze zm. | `mod-PrWodne-gospodarka-sciekowa` | ✅ aktywny |
 | Ustawa o OOŚ / oceny środowiskowe | Dz.U. 2026 poz. 670 t.j. ze zm. | `mod-ustawa-OOS-oceny-srodowiskowe` | ✅ aktywny |

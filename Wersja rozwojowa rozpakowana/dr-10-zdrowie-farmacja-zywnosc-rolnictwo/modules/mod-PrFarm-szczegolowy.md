@@ -3,7 +3,7 @@
 > **Zasada absolutna:** Każdy artykuł weryfikować w isap.sejm.gov.pl.
 > Prawo farmaceutyczne zmieniane jest kilka razy rocznie — NIGDY nie cytuj z pamięci.
 > Aktualne t.j.: Prawo farmaceutyczne **Dz.U. 2026 poz. 612**;
-> Ustawa refundacyjna **Dz.U. 2025 poz. 907**;
+> Ustawa refundacyjna **Dz.U. 2026 poz. 253** ✅ [VER] RZĄD 1 2026-09-10h ⛔ KROK 2C: nowelizacja po tekście jednolitym — Dz.U. 2026 poz. 791 (poprzedni zapis `2025 poz. 907` miał status *wygaśnięcie aktu*);
 > Nowelizacje: PF z 24.06.2025 (Dz.U. 2025 poz. 924), refundacja z 25.07.2025 (Dz.U. 2025 poz. 1192).
 
 ---

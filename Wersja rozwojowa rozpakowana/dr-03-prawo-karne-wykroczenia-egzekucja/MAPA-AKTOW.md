@@ -6,8 +6,12 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 
 ### Kodeks karny i framework karny
 
-**Baza KK:** Dz.U. 2025 poz. 383 t.j. ze zm.  
-**Baza KPK:** Dz.U. 2026 poz. 490 t.j. ze zm.  
+**Baza KK:** Dz.U. 2025 poz. 383 t.j. ✅ [VER] RZĄD 1 2026-09-10f.
+⛔ KROK 2C: **cztery nowelizacje po tekście jednolitym** — Dz.U. 2025 poz. 1818, 2025 poz. 1872,
+2026 poz. 902, 2026 poz. 988. Brzmienie każdego powoływanego artykułu KK czytać u źródła.  
+**Baza KPK:** Dz.U. 2026 poz. 490 t.j. ✅ [VER] RZĄD 1 2026-09-10f — obwieszczenie Marszałka Sejmu z 27.03.2026.
+⛔ KROK 2C: **pięć nowelizacji po tekście jednolitym** — Dz.U. 2026 poz. 421, 638, 760, 882, 901.
+Brzmienie każdego powoływanego artykułu KPK czytać u źródła; tekst jednolity nie oddaje stanu bieżącego.  
 **Baza KKW:** Dz.U. 2025 poz. 911 t.j. ze zm.
 
 | Zakres | Moduł / routing | Status runtime |

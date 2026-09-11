@@ -399,7 +399,7 @@ Roszczenia pracownicze: jednorazowe odszkodowanie ZUS + roszczenia KC od pracoda
 
 ### BAS-W16 — Godziny ponadwymiarowe nauczycieli (BAS-117 uzupełnienie)
 ```
-Weryfikacja online: Karta Nauczyciela art. 35 (Dz.U. 2023 poz. 984 t.j. — weryfikuj)
+Weryfikacja online: Karta Nauczyciela art. 35 (**Dz.U. 2026 poz. 515 t.j.** ✅ [VER] RZĄD 1 2026-09-10n — weryfikuj)
 
 Definicja:
   Godzina ponadwymiarowa = godzina realizowana powyżej tygodniowego
@@ -469,7 +469,7 @@ WERYFIKACJA STATUSU PRZEPISU PRZED POWOŁANIEM:
 
 ### BAS-W17 — Rażąco niska cena (PZP art. 224)
 ```
-Weryfikacja: PZP (Dz.U. 2022 poz. 1710 t.j. ze zm.) + KIO orzecznictwo
+Weryfikacja: PZP (**Dz.U. 2026 poz. 793 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ze zm.) + KIO orzecznictwo
   Interpelacja: Prezes UZP na interpelację dot. PZP (IZ6.nsf/50BD9CC8, 2010)
   + aktualne stanowiska UZP VIII–X kadencja
 

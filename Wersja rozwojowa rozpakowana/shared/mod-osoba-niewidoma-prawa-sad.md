@@ -46,7 +46,7 @@ Stanowisko Biura Pełnomocnika Rządu ds. Osób Niepełnosprawnych (źródło: f
 PODSTAWA KWALIFIKACJI: § 32 rozporządzenia Ministra Gospodarki, Pracy
 i Polityki Społecznej z dnia 15.07.2003 r. w sprawie orzekania
 o niepełnosprawności i stopniu niepełnosprawności
-(t.j. Dz.U. 2021 poz. 857 — weryfikuj aktualne Dz.U. w ISAP)
+(t.j. **Dz.U. 2026 poz. 677 t.j.** ✅ [VER] RZĄD 1 2026-09-10n — weryfikuj aktualne Dz.U. w ISAP)
 ```
 
 ### I.2 Kryteria medyczne — definicja operacyjna
@@ -236,7 +236,7 @@ C. ROZUMIENIE TREŚCI:
 ### II.5 Postępowanie SĄDOWO-ADMINISTRACYJNE (WSA/NSA)
 
 ```
-PODSTAWA: PPSA (Dz.U. 2024 poz. 935 t.j. — weryfikuj)
+PODSTAWA: PPSA (**Dz.U. 2026 poz. 143 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 1 nowelizacji po tekście jednolitym — weryfikuj)
 
 → Posiedzenia mogą odbywać się poza budynkiem sądowym gdy:
   "czynności sądowe muszą być wykonane w innym miejscu albo gdy

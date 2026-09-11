@@ -15,7 +15,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Interpretacje podatkowe / MDR / objaśnienia MF | OP jw. + właściwe akty wykonawcze | `mod-interpretacje-definicje-podatkowe` | ✅ aktywny; fresh gate |
 | Ustawa o PIT | Dz.U. 2026 poz. 592 t.j. ze zm. | `mod-PIT-podatek-dochodowy-fizyczne` | ✅ aktywny |
 | Ustawa o CIT | Dz.U. 2026 poz. 554 t.j. ze zm. | `mod-CIT-podatek-dochodowy-prawne` | ✅ aktywny |
-| Ustawa o VAT | Dz.U. 2025 poz. 775 t.j. ze zm. | `mod-VAT-podatek-od-towarow-i-uslug` + rodzina modułów VAT | 🟢 aktywny; fresh gate |
+| Ustawa o VAT | **Dz.U. 2025 poz. 775 t.j.** ✅ [VER] RZĄD 1 2026-09-10g — najnowszy tekst jednolity. ⛔ KROK 2C: **5 nowelizacji po tekście jednolitym** — Dz.U. 2025 poz. 894, 896, 1203, 1541, 1811. Materia wyjątkowo ruchliwa: brzmienie każdego powoływanego artykułu czytać u źródła, tekst jednolity NIE oddaje stanu bieżącego | `mod-VAT-podatek-od-towarow-i-uslug` + rodzina modułów VAT | 🟢 aktywny; fresh gate |
 | VAT — import towarów i zwolnienia importowe | jw. + właściwe akty wykonawcze | `mod-VAT-import-towarow-i-zwolnienia-importowe` | ✅ aktywny |
 | VAT — WIS | jw. | `mod-VAT-WIS-tryb-i-ochrona` | ✅ aktywny |
 | VAT — kursy walut / rachunek VAT / TAX FREE | jw. | `mod-VAT-kursy-walut-rachunek-VAT-tax-free` | ✅ aktywny |

@@ -59,5 +59,6 @@ sprawdź przed powołaniem konkretnego przepisu w piśmie.
 
 ## Weryfikacja online
 ```
-web_search: "ustawa pielegniarki polozne Dz.U. 2025 poz. 450 isap t.j."
+**Dz.U. 2026 poz. 15 t.j.** ✅ [VER] RZĄD 1 2026-09-10o — ustawa o zawodach pielęgniarki i położnej, ⛔ KROK 2C: 3 nowelizacje po nim (Dz.U. 2026 poz. 26, 203, 986).
+⛔ **BŁĄD SKORYGOWANY:** wiersz kierował do `Dz.U. 2025 poz. 450`, a to tekst jednolity **ustawy o działalności leczniczej** — inny akt (klasa F-149/3)
 ```

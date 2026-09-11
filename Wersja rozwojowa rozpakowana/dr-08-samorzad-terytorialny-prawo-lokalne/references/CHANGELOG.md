@@ -1,5 +1,7 @@
 # CHANGELOG — dr-08-samorzad-terytorialny-prawo-lokalne
 
+- 3.12 (2026-09-10o, F-181): dochody JST: stara ustawa uchylona, jej t.j. 2024/356 tez uchylony - podstawa jest NOWA ustawa z 1.10.2024, Dz.U. 2024 poz. 1572 (zm. 2025/1659), bez tekstu jednolitego
+- 3.11 (2026-09-10d, F-148a/F-135/F-141): mod-ustawa-zarzadzanie-kryzysowe: BŁĄD PODMIANY AKTU skorygowany (2024/1194 = t.j. ustawy o dozorze technicznym → 2026/574) + KROK 2C dla Dz.U. 2026 poz. 815 (F-148a)
 - 3.10 (2026-09-01k, flaga F-156): **cofnięte oznaczanie nowelizacji po t.j. w mapie.**
   Wersja 3.9 wpisywała przy pozycjach liczbę nowelizacji — w ciągu doby trzy się
   rozjechały. Kolejna wersja zostawiła sam znacznik ⚠️ bez liczby; to też cofnięto,

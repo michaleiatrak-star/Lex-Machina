@@ -9,7 +9,7 @@
 
 > ⛔ HARD GATE — przed podaniem art. KC, stóp odsetek, progów konsumenckich weryfikuj w ISAP:
 > isap.sejm.gov.pl → KC → art. 720–724 (pożyczka), art. 359 §2¹ (odsetki maksymalne — AKTUALNA wartość)
-> isap.sejm.gov.pl → ustawa o kredycie konsumenckim (Dz.U. 2023 poz. 1028 ze zm.)
+> isap.sejm.gov.pl → ustawa o kredycie konsumenckim (**Dz.U. 2025 poz. 1362 t.j.** ✅ [VER] RZĄD 1 2026-09-10f — obwieszczenie z 26.09.2025, akt bazowy 2011/715, najnowszy t.j., zero nowelizacji po tekście jednolitym; poprzedni zapis `2023 poz. 1028` to t.j. WYGASŁY)
 > isap.sejm.gov.pl → ustawa o leasingu (w KC: art. 709¹–709¹⁸)
 > nbp.pl → stopa referencyjna NBP (do obliczenia odsetek ustawowych) — aktualna wartość online.
 ## J.7 POŻYCZKA (prywatna i konsumencka)

@@ -6,7 +6,7 @@ sądowym (KPK, KPC, Prawo o notariacie), ulgi i świadczenia, interpelacje posel
 
 > ⛔ HARD GATE: świadczenia i kwoty zmieniają się co roku (waloryzacja).
 > Weryfikuj przed powołaniem: web_search "niewidomy [temat] 2026 kwota przepisy"
-> + isap.sejm.gov.pl → ustawa rehabilitacyjna Dz.U. 2024 poz. 44 t.j. ze zm.
+> + isap.sejm.gov.pl → ustawa rehabilitacyjna **Dz.U. 2026 poz. 884 t.j.** ✅ [VER] RZĄD 1 2026-09-10l, zero nowelizacji po nim (⛔ poprzedni zapis `2024 poz. 44` — wygaśnięcie aktu)
 
 ---
 
@@ -25,7 +25,7 @@ PRAWO PROCESOWE (KPK art. 79 §1 pkt 2):
   → Pogląd 1 (mniejszościowy): każda istotna dysfunkcja wzroku uzasadniająca obronę
   → Pogląd 2 (dominujący): tylko całkowita lub prawie całkowita utrata wzroku (literalna)
 
-PRAWO REHABILITACYJNE (ustawa z 27.08.1997 r. — Dz.U. 2024 poz. 44 t.j.):
+PRAWO REHABILITACYJNE (ustawa z 27.08.1997 r. — **Dz.U. 2026 poz. 884 t.j.** ✅ [VER] RZĄD 1 2026-09-10n):
   Nie definiuje "niewidomy" wprost — posługuje się:
   → stopniami niepełnosprawności (znaczny, umiarkowany, lekki)
   → symbolem przyczyny: 04-O (choroby narządu wzroku)
@@ -70,7 +70,7 @@ Odwołanie: Wojewódzki Zespół (WZON) → WSA → NSA
 ### 2.1 Obrona obowiązkowa — art. 79 §1 pkt 2 KPK
 
 ```
-PODSTAWA: KPK Dz.U. 2024 poz. 37 t.j. art. 79 §1 pkt 2 — weryfikuj w ISAP
+PODSTAWA: KPK **Dz.U. 2026 poz. 490 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym art. 79 §1 pkt 2 — weryfikuj w ISAP
 
 PRZEPIS:
   "W postępowaniu karnym oskarżony MUSI mieć obrońcę, jeżeli:
@@ -390,8 +390,8 @@ LUKI WDROŻENIOWE W POLSCE (raport RPO — brpo.gov.pl):
 ## ŹRÓDŁA ONLINE
 
 ```
-Ustawa rehabilitacyjna: isap.sejm.gov.pl → Dz.U. 2024 poz. 44 t.j.
-KPK art. 79: isap.sejm.gov.pl → KPK Dz.U. 2024 poz. 37 t.j.
+Ustawa rehabilitacyjna: isap.sejm.gov.pl → **Dz.U. 2026 poz. 884 t.j.** ✅ [VER] RZĄD 1 2026-09-10n
+KPK art. 79: isap.sejm.gov.pl → KPK **Dz.U. 2026 poz. 490 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym
 KPC art. 117: isap.sejm.gov.pl → KPC Dz.U. 2026 poz. 468 t.j.
 Prawo o notariacie art. 87: isap.sejm.gov.pl → t.j.
 Konwencja ONZ: Dz.U. 2012 poz. 1169

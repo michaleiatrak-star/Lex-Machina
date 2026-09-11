@@ -12,22 +12,22 @@
 
 ### BAS-074 — Podatek
 ```
-Weryfikacja: Ordynacja podatkowa art. 6 (Dz.U. 2025 poz. 111 t.j.)
+Weryfikacja: Ordynacja podatkowa art. 6 (**Dz.U. 2026 poz. 622 t.j.** ✅ [VER] RZĄD 1 2026-09-10l, zero nowelizacji po nim; poprzedni zapis `2025 poz. 111` — wygaśnięcie aktu)
   ZWERYFIKOWANO — definicja bez zmian
 Definicja: Publicznoprawne, nieodpłatne, przymusowe i bezzwrotne świadczenie
 pieniężne na rzecz Skarbu Państwa, województwa, powiatu lub gminy wynikające
 z ustawy podatkowej.
-Podstawa: art. 6 Ordynacji podatkowej (Dz.U. 2025 poz. 111 t.j. — weryfikuj)
+Podstawa: art. 6 Ordynacji podatkowej (**Dz.U. 2026 poz. 622 t.j.** ✅ [VER] RZĄD 1 2026-09-10l)
 Reguła: Świadczenie spełniające wszystkie 5 cech = podatek, nawet gdy nazwany
 inaczej. "Opłata" o charakterze przymusowym i bezzwrotnym może być podatkiem.
 ```
 
 ### BAS-099 — VAT
 ```
-Weryfikacja: ustawa o VAT (Dz.U. 2024 poz. 361 t.j.) — ZWERYFIKOWANO
+Weryfikacja: ustawa o VAT (**Dz.U. 2025 poz. 775 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym) — ZWERYFIKOWANO
 Definicja: Podatek od towarów i usług — podatek obrotowy nakładany na wartość
 dodaną na każdym etapie produkcji i dystrybucji.
-Podstawa: ustawa o VAT (Dz.U. 2024 poz. 361 t.j. — weryfikuj)
+Podstawa: ustawa o VAT (**Dz.U. 2025 poz. 775 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym — weryfikuj)
 Reguła: Podatnik VAT = podmiot wykonujący samodzielnie działalność gospodarczą
 (art. 15 ust. 1 uVAT). Forma prawna i cel nie są decydujące — liczy się samodzielność
 i regularne wykonywanie czynności opodatkowanych.
@@ -60,8 +60,8 @@ i C-547/18 Dong Yang — aktualne wyroki dot. stałego miejsca działalności.
 
 ### BAS-015–BAS-095 — FINANSE PUBLICZNE (katalog pojęć budżetowych)
 ```
-Weryfikacja: ustawa o finansach publicznych (Dz.U. 2024 poz. 1530 t.j.)
-  + ustawa o dochodach JST (Dz.U. 2022 poz. 2267 t.j.) — ZWERYFIKOWANO
+Weryfikacja: ustawa o finansach publicznych (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
+  + ustawa o dochodach JST (**Dz.U. 2024 poz. 1572** ✅ [VER] RZĄD 1 2026-09-10n — ⛔ **NOWA USTAWA** z 1.10.2024 o dochodach JST (zm. Dz.U. 2025 poz. 1659); stara ustawa z 2003 r. uchylona, jej ostatni t.j. `2024/356` też ma status *uchylony* — nie podstawiać go jako aktualnego) — ZWERYFIKOWANO
 Budżet państwa (BAS-015, 065): roczny plan dochodów, wydatków, przychodów i
   rozchodów uchwalany ustawą budżetową
 Deficyt budżetowy (BAS-016, 062): nadwyżka wydatków nad dochodami w roku budżetowym
@@ -79,7 +79,7 @@ Wydatki sztywne (BAS-042): wydatki ograniczające swobodę budżetową rządu
 Sektor finansów publicznych (BAS-091): wyodrębniony krąg podmiotów SFP (art. 9 UFP)
 Stabilizująca reguła wydatkowa (BAS-095): instrument fiskalny limitujący wzrost wydatków
 
-Podstawa: ustawa o finansach publicznych (Dz.U. 2024 poz. 1530 t.j. — weryfikuj)
+Podstawa: ustawa o finansach publicznych (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym — weryfikuj)
 web_search: "ustawa o finansach publicznych 2025 art [X] definicja" dla aktualizacji
 ```
 
@@ -138,7 +138,7 @@ web_search: "instalacja fotowoltaiczna wolnostojąca pozwolenie zgłoszenie 2025
 
 ### BAS-108 — Odbiorca wrażliwy
 ```
-Weryfikacja online: Prawo energetyczne art. 3 pkt 13c (Dz.U. 2024 poz. 266 t.j. ze zm.)
+Weryfikacja online: Prawo energetyczne art. 3 pkt 13c (**Dz.U. 2026 poz. 43 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 3 nowelizacji po tekście jednolitym ze zm.)
 Definicja (art. 3 pkt 13c PE — ZWERYFIKOWANO):
   Odbiorca wrażliwy energii elektrycznej = osoba fizyczna będąca odbiorcą
   w gospodarstwie domowym, której przyznano dodatek energetyczny (art. 5d ustawy
