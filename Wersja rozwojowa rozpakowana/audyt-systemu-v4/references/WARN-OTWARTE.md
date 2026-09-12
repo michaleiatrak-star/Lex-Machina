@@ -1,16 +1,16 @@
 # WARN-OTWARTE — rejestr żywy otwartych flag audytowych
 
-**Stan:** 2026-09-10o. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
+**Stan:** 2026-09-10s. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
 
 ## Tablica sterująca
 
 | Kategoria | Liczba | Pozycje |
 |---|---:|---|
-| Wykonalne sesją audytową | 4 | F-135 (część merytoryczna), F-167, O-9, **F-181** |
+| Wykonalne sesją audytową | 3 | F-135 (część merytoryczna), F-167, O-11 |
 | Reaktywne | 1 | F-5 |
 | Zależne od środowiska/dewelopera | 12 | F-8, F-9, F-11, F-94, F-113, F-133, F-137, F-143, F-144, F-157, F-158(c), F-171 |
 | Odnotowane bez działania | 1 | O-8 (ograniczenie strukturalne aparatu) |
-| **Razem** | **18** | — |
+| **Razem** | **17** | — |
 
 > **F-180 / O-5 / O-6 ZAMKNIĘTE 2026-09-10c** — skrócenie rdzenia HARD GATE
 > o 30% przez wydzielenie gałęzi warunkowych, preflight kompletności korzenia
@@ -30,6 +30,15 @@
 > (`ROUTING-MAP.md:770` i `dr-08/.../mod-ustawa-zarzadzanie-kryzysowe.md`) —
 > oba miały status ✅ OK i przechodziły każdą dotychczasową kontrolę.
 > Do rejestru żywego nie wchodzą (ZASADA 10).
+
+> **O-10 ZAMKNIĘTA 2026-09-10r.** T27 pyta też o normy **przedwczesne** —
+> numer podany jako aktualna podstawa, którego `entryIntoForce` jest
+> w przyszłości. Dwie osobne kategorie w raporcie: „w vacatio legis jako
+> podstawa" i „w wyliczeniu zmian, bez cezury". Korpus: PASS w obu klasach.
+> ⛔ Przy okazji wykryty własny błąd testu — cezura dopasowywana do wycinka
+> 150 znaków, a w wierszach map stoi dalej. Do rejestru żywego nie wchodzi
+> (ZASADA 10). Szczegóły: AUDYT-2026-09-10r.
+
 
 > **F-135 OTWARTA — zakres zmniejszony 2026-09-10d.** Osiem znaczników
 > „NIEWERYFIKOWANE RZĄD 1" w `ROUTING-MAP.md` rozstrzygniętych w ELI, ustalony
@@ -57,6 +66,21 @@
 > ustawie o **medycynie** laboratoryjnej. Przemianowanie pliku dotyka rejestrów
 > `modules:` w kilku miejscach — osobna operacja, nie łatka.
 
+> **O-11 OTWARTA (2026-09-10s) — nikt nie pyta, czy LICZBA odpowiada przepisowi.**
+> Cały aparat (T3, T11, T15, T24, T27) pyta o **akty**: czy numer istnieje, czy
+> opisuje ten akt, czy akt żyje, czy już obowiązuje. ⛔ Żaden nie pyta, czy kwota,
+> termin albo próg podany w module odpowiada **treści przepisu**.
+> Zmierzony przypadek: `orka-bas` podawał minimalne wynagrodzenie 2026 jako
+> „~4 750 zł", a rozporządzenie mówi **4806 zł** — kwota służyła do przeliczenia
+> krotności progu, więc przybliżenie propagowało się na wynik.
+> ⚠️ **Następny krok:** to NIE jest kolejny test tej samej rodziny. Weryfikacja
+> wymaga **odczytu treści aktu** i porównania z liczbą w zdaniu — zadanie innego
+> rzędu niż odczyt metadanych. Rozważyć zawężenie do wartości powtarzalnych
+> (minimalne wynagrodzenie, odsetki ustawowe, progi opłat), które i tak
+> aktualizują się cyklicznie.
+> ⛔ Nie otwierać jako „test do napisania" bez wcześniejszego pomiaru, ile takich
+> wartości korpus w ogóle zawiera.
+
 > **O-8 ODNOTOWANA BEZ DZIAŁANIA (2026-09-10b) — zestaw regresyjny nie sprawdza
 > przesłanek faktycznych.** F-179 (profil LEKKI uzasadniony liczbą, która nie
 > opisywała świata) przeszła pełny zestaw T1–T22 bez jednego WARN. Testy pilnują
@@ -73,46 +97,16 @@
 > **O-7 ZAMKNIĘTA 2026-09-10b — `.github/workflows/regresja.yml`.** Zestaw
 > regresyjny jest odtąd bramką wydania. Do rejestru żywego nie wchodzi.
 
-> **F-181 OTWARTA — ZAKRES SKORYGOWANY 2026-09-10l.** ⛔ Pierwotna liczba
-> „29 przeterminowanych, 10%" była **zawyżona** (klasa F-164 popełniona przy
-> stawianiu alarmu): realnie **13**, wszystkie naprawione w 6 skillach.
-> **ZAKRES ROZSZERZONY 2026-09-10m:** skan całego korpusu (424 numery, 1903
-> miejsca) dał **36 wygasłych podstaw w 61 miejscach**, z czego **41 miejsc
-> w `shared/orka-bas-leksykon`** — leksykon cytuje podstawy w TREŚCI definicji,
-> więc omijały go wszystkie przeglądy nagłówkowe. Najgorsza pozycja: UFP
-> `2024/1530` w 14 miejscach.
-> ✅ **`shared` NAPRAWIONY 2026-09-10n** — 41 z 61 miejsc, 20 aktów.
-> ✅ **LISTA 1.2 WYCZERPANA 2026-09-10o — 61/61 miejsc naprawionych** (41 w `shared`,
-> 20 w 12 pozostałych skillach).
-> ⛔ **Flaga NIE zamknięta.** Lista była wynikiem heurystyki, nie audytu każdej
-> linii; dwa poprzednie liczniki tego badania okazały się zawyżone, więc nie ma
-> podstaw twierdzić, że trzeci był kompletny.
-> ⚠️ **Następny krok:** test z O-9 na całym korpusie — dopiero automat
-> uruchamiany przy każdym wydaniu pozwoli tę flagę zamknąć. Poprzedni krok:
-> Każda pozycja: ponowny odczyt RZĄD 1 + porównanie tytułów + przeczytanie linii
-> w kontekście.
-> ⛔ Potwierdzone przy naprawie `shared`: kolumna „aktualny t.j." z listy jest
-> **wskazówką, nie rozstrzygnięciem**. Dochody JST — wskazany „aktualny" t.j.
-> `2024/356` sam okazał się uchylony, bo stara ustawa została zastąpiona nową
-> (`2024/1572`). Podstawienie wprost z listy przesunęłoby błąd o ogniwo dalej.
-> Poprzedni opis: Pomiar: z 290 numerów deklarowanych jako aktualne **29 jest
-> przeterminowanych** (28 „wygaśnięcie aktu" + 1 uchylony), w 35 miejscach
-> i 11 skillach. To 10% podstaw prawnych, które moduł podaje czytającemu jako
-> pierwsze. ⛔ Klasa twardsza niż O-9: starzeje się sam **numer podstawy**,
-> nie opis. Lista robocza z ustalonym aktualnym numerem dla każdej pozycji:
-> `references/PRZETERMINOWANE-TJ-2026-09-10.md`.
-> ⚠️ **Następny krok:** naprawa pozycja po pozycji, w kolejności z 2026-09-10e
-> (mapa przed modułem), z ponownym odczytem RZĄD 1 przed każdym wpisem.
-> ⛔ **Nie poprawiać hurtem** — pod przeterminowanym numerem bywa podmiana aktu.
-> ⚠️ Po naprawie: to jest naturalna baza testowa dla testu z O-9.
 
-> **O-9 OTWARTA (2026-09-10i) — nikt nie pyta, czy adnotacja o stanie nadal
-> mówi prawdę.** ZASADA 8 w wariancie czasowym: numer i nazwa poprawne w chwili
-> zapisu, przeterminowała się **adnotacja o stanie** („brak t.j.", „nowa ustawa",
-> „projekt", „w vacatio legis"). T3 pyta o zgodność numerów między mapami, T11
-> o obecność, T15 o tożsamość i nowszy t.j. dla ZADEKLAROWANYCH t.j., T24
-> o nowelizacje po t.j. — **żaden nie pyta o prawdziwość twierdzenia**.
-> Zmierzone 2026-09-10i: skan korpusu dał 10 wystąpień „brak t.j.", z tego
+> **O-9 i F-181 ZAMKNIĘTE 2026-09-10p.** Test **T27**
+> (`check_status_podstaw.py`) pyta, czy numer Dz.U. podany w prozie jako
+> aktualna podstawa opisuje akt obowiązujący — luka, na którą T3, T11, T15 i T24
+> są ślepe z konstrukcji. F-181: 61/61 miejsc naprawionych **i** automat, który
+> pilnuje, żeby nie wróciły. ⛔ Test raportuje „DO PRZEGLĄDU", nie FAIL, bo
+> heurystyka tego badania dwukrotnie zawyżyła wynik. Do rejestru żywego nie
+> wchodzą (ZASADA 10). Szczegóły: AUDYT-2026-09-10p.
+
+
 > **2 nieprawdziwe** (delegowanie kierowców — 2025/797 jest t.j., nie
 > nowelizacją; Prawo o notariacie — t.j. 2026/614 istnieje, a mapa centralna
 > nawet go miała, podczas gdy dr-12 twierdził, że go nie ma).

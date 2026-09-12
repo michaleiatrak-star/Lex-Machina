@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.47"
+version: "3.48"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -92,6 +92,8 @@ required_modules:
   - shared/DISCLAIMER.md
   - references/KROK0A-anonimizer.md
   - references/KROK1-detekcja.md
+  - shared/TABELE-OPLAT.md   # kolejnosc siegania po kwoty; KROK 0 = czy strona
+                            # w ogole placi (art. 94-103 KSCU)
   - references/PROFIL-LEKKI.md
   - references/ZRODLA-AKTOW-FALLBACK.md
   - dr-16-pisma-strategia-dowody-orzecznictwo/modules/mod-narzedzie-kontroler-kompletnosci.md
@@ -100,10 +102,12 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog:
-  - '3.47 (2026-09-10o, F-181): legacy-material-router/przemoc-domowa - ustawa
-    2021/1249 (wygasniecie aktu) zastapiona aktualnym t.j. 2024/1673. AKT
-    PRZEMIANOWANY: nazwa o przeciwdzialaniu przemocy w rodzinie jest
-    historyczna, obowiazujaca to o przeciwdzialaniu przemocy domowej.'
+  - '3.48 (2026-09-10x, O-11): KWOTA-GATE. Nowa pozycja kontrolna w SELF-CHECK:
+    przy kazdej kwocie oplaty, taksy lub wyliczenia trzy pytania - czy strona
+    nie jest zwolniona (art. 94-103 KSCU), czy kwota pochodzi z TABELI
+    USTANAWIAJACEJ, czy sprawdzono PRZYPISY przy jednostce redakcyjnej.
+    shared/TABELE-OPLAT.md w required_modules i w warstwie odroczonej
+    PROFIL-LEKKI z wyzwalaczem: zamierzasz podac kwote.'
   - 'Pelna historia wszystkich wersji: references/CHANGELOG.md (ZASADA 15).'
 ---
 

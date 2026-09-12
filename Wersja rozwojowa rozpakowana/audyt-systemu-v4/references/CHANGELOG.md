@@ -1,5 +1,308 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.77 (2026-09-10x, O-11): **powiązanie tabeli opłat z systemem — dotąd było za wąskie.**
+
+  ⛔ Na pytanie użytkownika o powiązania: `TABELE-OPLAT` w wersjach 1.0–1.3 znały
+  **tylko dwa moduły** — `MP10-koszty` (analizator-dowodow-v3) i
+  `czesc-04-alimenty` (dr-02) — plus wpis w rejestrze `shared`. Router o pliku
+  nie wiedział, więc w sprawie spoza tych dwóch ścieżek nikt by po niego nie
+  sięgnął.
+
+  **Wpięcia wykonane:**
+
+  | Gdzie | Co |
+  |---|---|
+  | `prawny-router-v3` | `required_modules` + warstwa odroczona `PROFIL-LEKKI` z wyzwalaczem **„zamierzasz podać kwotę"** |
+  | `prawny-router-v3/SELF-CHECK` | nowa pozycja **KWOTA-GATE** — kontrola na wyjściu |
+  | `dr-12/mod-KSCU-koszty-sadowe-i-pomoc-prawna` | kanoniczny moduł KSCU — KROK 0, katalog zwolnień, pułapka art. 13 ust. 2 |
+  | `pisma-proste-v2` | „Zasada 3 — opłata sądowa zawsze" poprzedzona KROKIEM 0 |
+  | `pisma-procesowe-v3/MOD-SZABLONY` | pole „Opłata sądowa" w szablonie pisma |
+  | `analiza-sadowa-v6/koszty-terminy` | sekcja kosztowa — kwoty oznaczone jako orientacyjne |
+
+  **KWOTA-GATE — trzy pytania przy każdej podawanej kwocie**, wszystkie muszą
+  mieć odpowiedź TAK: (1) czy strona nie jest zwolniona (art. 94–103 KSCU),
+  (2) czy kwota pochodzi z tabeli ustanawiającej, (3) czy sprawdzono **przypisy**
+  przy jednostce redakcyjnej.
+
+  ⛔ Punkt 3 jest bezpośrednim skutkiem ustalenia z 10t: art. 13 ust. 2 KSCU
+  niesie dwa brzmienia obok siebie, rozróżnione wyłącznie odnośnikami.
+
+  ⚠️ **Wzorzec wart nazwania:** nowy zasób w `shared` nie jest częścią systemu,
+  dopóki nie ma wyzwalacza w routerze i kontroli w SELF-CHECK. Rejestracja
+  w tabeli zasobów `shared` **czyni go widocznym, nie używanym**. Ta sama uwaga
+  dotyczy każdego przyszłego modułu kanonicznego.
+
+- 6.76 (2026-09-10w, O-11): **pełny katalog zwolnień — luka wykryta przez pytanie.**
+
+  ⛔ Użytkownik zapytał, czy wskazane są wszystkie sytuacje zwolnienia od opłat.
+  **Nie były.** `TABELE-OPLAT` w wersjach 1.0–1.2 wymieniały wyłącznie
+  art. 96 ust. 1 **pkt 2** (alimenty) — plik **odziedziczył zakres pracy, przy
+  której powstał**, i wyglądał na kompletny.
+
+  ⚠️ To ta sama klasa co „niedomknięcie" z 10g: zapis nie był błędny, był
+  **niepełny w sposób niewidoczny**. Różnica wobec 10g jest istotna: tam
+  niedomknięcie wykrył test, tu — pytanie człowieka. ⛔ Żaden test nie sprawdza,
+  czy katalog jest kompletny, bo kompletność nie ma odniesienia w metadanych.
+
+  Dopisany katalog z odczytu treści KSCU (`Dz.U. 2025 poz. 1228`), trzy warstwy:
+
+  **A. Podmiotowe (art. 96 ust. 1) — 18 kategorii.** Poza alimentami m.in.
+  ustalenie ojcostwa i macierzyństwa, klauzule niedozwolone, **pracownik**
+  i odwołanie do sądu pracy, kurator, prokurator i pięcioro rzeczników,
+  inspektor pracy i związki zawodowe, ochrona zdrowia psychicznego,
+  ubezwłasnowolniony, szkody górnicze, kompensata dla ofiar czynów zabronionych,
+  ochrona roszczeń pracowniczych, **osoba doznająca przemocy domowej**, renta
+  z art. 444 § 2 i 446 § 2 KC.
+
+  **B. Przedmiotowe (art. 95).** ⛔ Praktycznie najważniejsze: **zażalenia
+  i skargi dotyczące samych kosztów** nie podlegają opłacie — zaskarżenie
+  decyzji o kosztach samo nie kosztuje. Ponadto zażalenie na policyjny nakaz
+  opuszczenia mieszkania w sprawach przemocy domowej, pisma nieletniego,
+  wniosek o doręczenie uzasadnienia.
+
+  **C. Na wniosek (art. 100–103).** ⛔ Art. 102 ust. 4: wniosek strony
+  z pełnomocnikiem, bez oświadczenia majątkowego, przewodniczący **zwraca BEZ
+  WEZWANIA**. Dla strony samodzielnej — art. 130 KPC. Termin rozpoznania 7 dni.
+
+  ⚠️ Wpisane wprost: **zwolnienie od kosztów sądowych ≠ zwolnienie od kosztów
+  przeciwnika.** Oraz art. 96 ust. 4 — przy oczywiście bezzasadnym powództwie
+  o ustalenie ojcostwa sąd może obciążyć powoda; zwolnienie z pkt 1 nie jest
+  bezwarunkowe.
+
+  Do reguły kolejności dopisany **KROK 0: czy strona w ogóle płaci** — przed
+  sięgnięciem po jakąkolwiek tabelę. `MP10-koszty` spięty z katalogiem.
+
+- 6.75 (2026-09-10v, O-11): **taksy z odczytu treści — stawka alimentacyjna
+  nie zależy od WPS.**
+
+  Odczyt treści obu rozporządzeń (`Dz.U. 2026 poz. 215` adwokackie,
+  `Dz.U. 2026 poz. 118` radcowskie). W zbadanym zakresie **tabele są identyczne**.
+
+  **§ 2 — stawki od WPS:** 90 / 270 / 900 / 1 800 / 3 600 / 5 400 / 10 800 /
+  15 000 / **25 000 zł**.
+
+  ⚠️ **§ 3 — postępowania upominawcze, elektroniczne upominawcze, nakazowe
+  i europejskie nakazowe mają WŁASNĄ, NIŻSZĄ tabelę** (60/180/600…). Osobny,
+  łatwy do przeoczenia przepis.
+
+  ⛔ **§ 4 — sprawy rodzinne: stawka NIE zależy od WPS.** Alimenty **240 zł**,
+  rozwód i unieważnienie 720 zł, rozdzielność majątkowa 720 zł, ojcostwo
+  i rozwiązanie przysposobienia 480 zł, istotne sprawy rodziny 480 zł, podział
+  majątku — stawka z §2 od wartości udziału (50% przy zgodnym wniosku).
+
+  **Najczęstszy błąd w tej materii:** policzenie stawki alimentacyjnej z tabeli
+  WPS. Przy rocznej sumie świadczeń 4 800 zł tabela §2 daje 900 zł, a przepis
+  szczególny — **240 zł**. Zawyżenie blisko czterokrotne, w obie strony:
+  zawyża ryzyko kosztowe powoda i zawyża to, czego może się domagać.
+
+  ⚠️ Sprawdzony celowo przypis przy pozycji alimentacyjnej: brzmienie z 23.12.2024
+  jest obowiązujące, bez wariantu przyszłego. ⛔ To ta sama konstrukcja
+  redakcyjna, która przy art. 13 ust. 2 KSCU kryła brzmienie wygasłe obok
+  obowiązującego — **sprawdzanie przypisów przestało być opcjonalne**.
+
+  `dr-02/kro-rodzinne/czesc-04-alimenty` spięty z tabelami.
+
+- 6.74 (2026-09-10u, O-11): **alimenty — od przepisu, nie od intuicji.**
+
+  Dokończenie wątku z 10t zgodnie z regułą kolejności. Zdjęty znacznik
+  `[DO WERYFIKACJI]` przy WPS: **art. 22 KPC** (t.j. `Dz.U. 2026 poz. 468`,
+  odczyt treści) — „wartość przedmiotu sporu stanowi suma świadczeń za jeden
+  rok, a jeżeli świadczenia trwają krócej niż rok – za cały czas ich trwania".
+  Dodany art. 21 KPC (zliczanie roszczeń).
+
+  **Art. 135 KRO** (t.j. `Dz.U. 2026 poz. 236`, odczyt treści) — trzy ustalenia,
+  z których każde zmienia wyliczenie:
+
+  - **§ 1 — dwie przesłanki, nie jedna.** Zakres zależy od usprawiedliwionych
+    potrzeb uprawnionego **oraz** od zarobkowych i majątkowych możliwości
+    zobowiązanego. ⚠️ „Możliwości zarobkowe" ≠ „dochód faktyczny" — przepis
+    obejmuje zdolność zarobkowania niewykorzystywaną.
+  - **§ 2 — osobiste starania są FORMĄ WYKONANIA obowiązku**, nie okolicznością
+    łagodzącą. Rodzic sprawujący bieżącą pieczę wykonuje obowiązek w naturze,
+    co przesuwa ciężar finansowy na drugiego zobowiązanego. Pominięcie § 2
+    zaniża żądanie.
+  - **§ 3 — świadczeń z pomocy społecznej i funduszu alimentacyjnego NIE
+    ODLICZA SIĘ.** Argument „dziecko dostaje świadczenia, więc alimenty mogą być
+    niższe" jest **wprost sprzeczny z przepisem**, a jest to jeden
+    z najczęstszych argumentów strony zobowiązanej.
+
+  Tabela przesłanek (art. 128, 129 §1–2, 130, 133 §1–3, 138, 140 §2) przepisana
+  z treści. ⛔ Odnotowane: **art. 133 § 1 nie zna granicy wieku** — kryterium to
+  zdolność do samodzielnego utrzymania, a uchylenie się wobec dziecka
+  pełnoletniego wymaga wykazania przesłanki z § 3, nie następuje z mocy prawa.
+
+  Moduł `dr-02/kro-rodzinne/czesc-04-alimenty` wyrównany do tego samego stanu;
+  dopisane zwolnienie z art. 96 ust. 1 pkt 2 KSCU i WPS z art. 22 KPC.
+
+  ⚠️ Ostrożność zapisana wprost: reguła „przy podwyższeniu WPS liczy się od
+  różnicy" **nie wynika wprost z art. 22** i przy sprawie granicznej wymaga
+  orzecznictwa — oznaczona jako niepewna, nie jako pewnik.
+
+- 6.73 (2026-09-10t, O-11): **TABELE-OPLAT — kolejność sięgania po kwoty; cap
+  opłaty stosunkowej jest inny, niż wszyscy powtarzają.**
+
+  Na polecenie użytkownika: przy obliczeniach (alimenty, opłaty, koszty)
+  najpierw tabele ustanawiające opłaty, dopiero potem bazy katalogujące ich
+  rodzaj. Reguła zapisana jako `shared/TABELE-OPLAT.md`, a
+  `analizator-dowodow-v3/modules/MP10-koszty.md` oznaczony jako **warstwa
+  druga**: rozpoznaje rodzaj opłaty i to, za co jest pobierana — **nie jest
+  źródłem liczby**.
+
+  ⛔ **Ustalenie z odczytu treści KSCU (`Dz.U. 2025 poz. 1228`, `/text.pdf`):**
+  tekst jednolity niesie **dwa brzmienia art. 13 ust. 2** obok siebie,
+  rozróżnione **wyłącznie odnośnikami**. Odnośnik 2) — cap 200 000 zł,
+  „obowiązuje do wejścia w życie zmiany z odnośnika 3". Odnośnik 3) — cap
+  **100 000 zł**, ustawa z 25.07.2025 (`Dz.U. 2025 poz. 1157`), **w życie
+  23.09.2025**.
+
+  Na dziś obowiązuje **100 000 zł**. Kwota 200 000 zł jest nieaktualna od
+  września 2025 — a jest to jedna z najczęściej cytowanych liczb w postępowaniu
+  cywilnym. Kto czyta tekst jednolity bez przypisów, przepisze brzmienie wygasłe.
+
+  ⚠️ Klasa lustrzana wobec O-10: tam norma jeszcze nie obowiązywała, tu
+  w jednym dokumencie stoją obok siebie brzmienie wygasłe i obowiązujące.
+  ⛔ Żaden test tego nie złapie — `status` aktu jest zdrowy, numer poprawny,
+  a różnica siedzi w przypisie do jednostki redakcyjnej.
+
+  **Alimenty:** art. 96 ust. 1 pkt 2 KSCU (odczyt treści) — zwolnienie strony
+  dochodzącej roszczeń alimentacyjnych **oraz pozwanej w sprawie o obniżenie
+  alimentów**. Wpisane jako **pierwsze pytanie**, przed liczeniem opłaty:
+  podanie kwoty stronie zwolnionej z mocy ustawy zniechęca do wniesienia pisma,
+  które nic nie kosztuje.
+
+  ⚠️ WPS w alimentach oznaczony jako **[DO WERYFIKACJI — art. 22 KPC]**, nie
+  przepisany z pamięci. Taksy `2026/215` i `2026/118` potwierdzone jako
+  najnowsze, zero nowelizacji po tekście jednolitym.
+
+  Mapa centralna: +`2025/1157` z adnotacją o obniżeniu capu.
+
+- 6.72 (2026-09-10s, F-135): **pierwszy błąd wartości liczbowej.**
+
+  `shared/orka-bas-leksykon/czesc-05` podawał minimalne wynagrodzenie 2026 jako
+  **„~4 750 zł"**. Odczyt **treści** rozporządzenia RM (`Dz.U. 2025 poz. 1242`,
+  kanał `/text.pdf`): „§ 1. Od dnia 1 stycznia 2026 r. ustala się minimalne
+  wynagrodzenie za pracę w wysokości **4806 zł**"; §2 — stawka godzinowa
+  **31,40 zł**.
+
+  ⚠️ Kwota „w przybliżeniu" jest w rejestrze prawnym tym samym co kwota błędna:
+  służyła do przeliczenia krotności progu 200 000 zł, więc przybliżenie
+  propagowało się na wynik.
+
+  ⛔ **Nowa klasa — O-11.** To pierwszy w tej serii błąd **wartości**, nie
+  numeru. Cały dotychczasowy aparat (T3, T11, T15, T24, T27) pyta o **akty**:
+  czy numer istnieje, czy opisuje ten akt, czy akt żyje, czy już obowiązuje.
+  **Żaden nie pyta, czy liczba w zdaniu odpowiada treści przepisu.**
+  Weryfikacja wymaga odczytu tekstu aktu — czynności, której żaden test nie
+  wykonuje i której zautomatyzowanie jest zadaniem innego rzędu.
+
+  Przy okazji: weryfikacja minimalnego wynagrodzenia w `dr-04` opierała się
+  dotąd na **wyszukiwaniu**; podniesiona do odczytu treści, z dopisaniem
+  podstawy prawnej przy każdej kwocie i ostrzeżeniem o cezurze rocznej.
+  Akt bazowy ustawy o minimalnym wynagrodzeniu (`Dz.U. 2024 poz. 1773`)
+  potwierdzony **w podstawie prawnej samego rozporządzenia** — najmocniejszy
+  możliwy dowód dla tego numeru.
+
+- 6.71 (2026-09-10r, O-10 ZAMKNIĘTA): **T27 pyta też o normy przedwczesne.**
+
+  Rozszerzenie o pole `entryIntoForce`: numer podany jako aktualna podstawa,
+  którego data wejścia w życie jest w przyszłości. Dane były w tym samym
+  odczycie, więc koszt zerowy — brakowało tylko pytania.
+
+  **Pierwszy przebieg: 16 trafień. Po przeczytaniu kontekstu: 4 realne.**
+  Reszta to linie, które same podawały cezurę („w życie 1.10.2026") albo
+  wymieniały numer w wyliczeniu zmian, nie jako podstawę. ⛔ Trzeci raz w tej
+  serii heurystyka zawyżyła wynik przed przeczytaniem kontekstu — dlatego
+  test dostał dwie osobne kategorie (`W VACATIO LEGIS` jako podstawa vs
+  `W WYLICZENIU ZMIAN, BEZ CEZURY`), a nie jedną listę błędów.
+
+  ⛔ **Własny błąd testu wykryty przy tej okazji.** T27 dopasowywał cezurę do
+  **wycinka 150 znaków**, a w wierszach map cezura stoi zwykle dalej — więc
+  zgłaszał jako brak coś, co w pliku było. Poprawione: dopasowanie do pełnej
+  linii, skracanie dopiero przy wyświetlaniu. To ta sama klasa co F-179:
+  narzędzie mierzyło co innego, niż deklarowało.
+
+  **Naprawione w korpusie:** 19 cezur czasowych dopisanych do aktów w vacatio
+  legis (`2026/846` w życie 1.10.2026, `2026/507` — 14.10.2026, `2026/346` —
+  30.09.2028, `2026/176` — 18.02.2027). Ponadto ostatni martwy numer wykryty
+  przez T27: ustawa o zwolnieniach grupowych `2025/570` → **`2026/1195`**
+  w 5 miejscach.
+
+  **Korpus: T27 `✅ PASS` w obu klasach** — zero martwych i zero przedwczesnych
+  numerów w pozycji aktualnej podstawy.
+
+- 6.70 (2026-09-10q, F-135): **pierwsze ustalenie z części merytorycznej —
+  przepis w vacatio legis opisany jako obowiązujący.**
+
+  `shared/definicje/DEF-PRACA.md` i `dr-04/modules/mod-KP-mobbing-dyskryminacja.md`
+  opisywały nowe brzmienie art. 94³ KP jako stan „PO REFORMIE (od 30.07.2026)".
+  ⛔ 30.07.2026 to **data podpisu Prezydenta**. Odczyt RZĄD 1
+  (`api.sejm.gov.pl/eli/acts/DU/2026/1046`): ogłoszenie **4.08.2026**, wejście
+  w życie **5.11.2026**.
+
+  ⛔ **Błąd zakresu czasowego normy w zasobie kanonicznym `shared`** — klasa,
+  której pilnuje OŚ-GATE. Sprawa o mobbing z sierpnia albo września 2026
+  dostawała przepis, który jeszcze nie obowiązuje: bez wymogu rozstroju zdrowia
+  i z minimalnym zadośćuczynieniem, których w tej dacie nie ma. To nie jest
+  nieaktualność — to zastosowanie nieobowiązującej normy.
+
+  ⚠️ **Rozróżnienie zapisane po raz pierwszy:** „status: obowiązujący" w ELI
+  znaczy tylko, że **akt nie został uchylony**. O stosowaniu rozstrzyga osobne
+  pole `entryIntoForce`. Cała ta seria czytała `status` jako wyznacznik
+  aktualności — dla aktów w vacatio legis to odczyt mylący.
+
+  ⚠️ Kwota minimalnego zadośćuczynienia sprowadzona do **mnożnika ustawowego**
+  (6 × minimalne wynagrodzenie); poprzedni zapis podawał 28 836 zł jako liczbę
+  do przepisania do pisma, bez zastrzeżenia, że zależy ona od minimalnego
+  wynagrodzenia w dacie orzekania.
+
+  ✅ Zamknięte przy okazji TODO z 2026-07-30: moduł dr-04 twierdził, że jego
+  tabela „opisuje stan sprzed reformy", podczas gdy wiersze były już
+  zaktualizowane — moduł przeczył sam sobie (klasa z 10h).
+
+  Mapy: wiersz `2026/1046` w mapie centralnej i wiersz KP art. 94³
+  w `ROUTING-MAP.md` opatrzone cezurą czasową.
+
+- 6.69 (2026-09-10p, O-9 i F-181 ZAMKNIĘTE): **test T27 — proza przestaje żyć
+  obok aparatu.**
+
+  `scripts/check_status_podstaw.py`. Pytanie: czy numer Dz.U. podany **w prozie**
+  jako aktualna podstawa prawna nadal opisuje akt obowiązujący.
+
+  ⛔ **Test zamyka lukę, którą cztery ostatnie sesje udokumentowały pomiarowo:**
+  numer w wierszu mapy pilnują cztery testy, ten sam numer w zdaniu „aktualne
+  t.j.: …" — żaden. T3 pyta o zgodność między mapami, T11 o obecność, T15
+  o tożsamość dla zadeklarowanych t.j., T24 o nowelizacje po t.j.
+
+  **Projekt czułości oparty na empirii tej serii, nie na założeniu:**
+  - odsiewa konteksty historyczne w **oknie ±2 wierszy**, nie w jednej linii —
+    bo adnotacja korygująca rozkłada się na 2–3 linie, przez co pierwsza wersja
+    testu zapalała się na **własnych naprawach** systemu;
+  - odsiewa linie, w których obok wygasłego stoi numer nowszy;
+  - pomija dziennik, changelogi, rejestry flag, generacje map i raporty
+    z pomiarów — tam wygasłe numery są treścią, nie podstawą.
+
+  ⛔ **Raportuje `⚠️ DO PRZEGLĄDU`, nie `FAIL`, i kończy kodem 0.** Powód wpisany
+  do docstringu: heurystyka tego badania **dwukrotnie zawyżyła wynik** (29→13 przy
+  nagłówkach). Traktowanie listy jako błędów powielałoby fałszywe alarmy.
+  `--strict` daje kod 1 — do użycia tylko tam, gdzie ktoś listę przejrzy.
+
+  Docstring zawiera cztery ostrzeżenia wyprowadzone z pomiarów: wygasły numer
+  nie jest sam w sobie błędem; heurystyka zawyżała; „aktualny t.j." bywa sam
+  uchylony (dochody JST); porównanie tytułów przy naprawie jest obowiązkowe
+  (siedem podmian aktu w tej serii).
+
+  Wymaga sieci → wpisany do `references/SKRYPTY-RECZNE.md`, nie do orkiestratora
+  (ta sama zasada co przy O-5). Tryb `--offline` z cache pozwala powtórzyć
+  przebieg bez API.
+
+  **Weryfikacja:** korpus po naprawach 10n/10o — `✅ PASS`, 313 numerów w 1236
+  miejscach, 791 odsianych jako historyczne. Mutacja negatywna (wstrzyknięty
+  wygasły `2024/44` jako podstawa) — wykryta.
+
+  **F-181 zamknięta**: 61/61 miejsc naprawionych **i** automat, który pilnuje,
+  żeby nie wróciły. Sama naprawa nie wystarczała do zamknięcia — to było
+  zapisane w 10o.
+
 - 6.68 (2026-09-10o, F-181): **lista 1.2 domknięta — 61/61 miejsc.**
 
   Pozostałe 20 miejsc w 12 skillach przestawionych na aktualne teksty jednolite.

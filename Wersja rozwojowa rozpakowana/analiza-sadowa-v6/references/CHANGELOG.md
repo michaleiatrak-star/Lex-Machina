@@ -1,5 +1,6 @@
 # CHANGELOG — analiza-sadowa-v6
 
+- 6.6 (2026-09-10x, O-11): references/koszty-terminy: sekcja KOSZTY SADOWE opatrzona KROKIEM 0 i odeslaniem do tabeli ustanawiajacej; kwoty w module sa orientacyjne
 - 6.5 (2026-08-24, sesja audytowa audyt-systemu-v4, flaga **F-129**): pole `changelog:` w YAML liczyło 39 linii, czyli pełną historię zamiast skrótu — T12 zgłaszał to jako ⚠️. Wyniesione 1:1 do tego pliku, w YAML został 7-linijkowy skrót z odesłaniem. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-24b.
 
 - 6.4 (2026-08-23i, sesja audytowa audyt-systemu-v4, flaga F-115): self-check ANTY-FASADA podłączony jako WYWOŁANIE modułu kanonicznego `shared/SELF-CHECK-ANTY-FASADA.md`, kopia treści zastąpiona wywołaniem. Powód modułu zamiast kopii: gdy F-117 dodała regułę AF-6 i drugą pozycję listy do `shared/PRAWO-HARDGATE.md`, żadna z 7 istniejących kopii nie została zaktualizowana — źródło miało 2 pozycje, kopie 1. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-23i.

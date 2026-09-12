@@ -199,7 +199,7 @@ Przed końcową odpowiedzią sprawdź:
   POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14): TERAZ **2 MIESIĄCE** (nie 3
   jak wcześniej) od doręczenia wyroku (art. 1208 §1 KPC, t.j.
   **Dz.U. 2026 poz. 468** — ⚠️ KOREKTA 2026-08-24 (F-125): moduł cytował
-  t.j. `Dz.U. 2024 poz. 1568`, który wg RZĘDU 1 (eli.gov.pl) ma status
+  t.j. `Dz.U. 2024 poz. 1568` (bieżący t.j. KPC: **Dz.U. 2026 poz. 468** ✅ [VER] RZĄD 1 2026-09-10o, ⛔ KROK 2C: 2 nowelizacje po nim), który wg RZĘDU 1 ma status
   „wygaśnięcie aktu” z datą 2026-04-06 i został zastąpiony obwieszczeniem
   Marszałka Sejmu z 27.03.2026 (Dz.U. 2026 poz. 468, status „obowiązujący”,
   stan prawny na 24.03.2026). Numer 2026.468 nosiły już wtedy WSZYSTKIE

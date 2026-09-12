@@ -66,7 +66,9 @@ Pozwany:  [Imię Nazwisko / Nazwa spółki]
 Wartość przedmiotu sporu: [kwota cyframi] zł
 (słownie: [kwota słownie] złotych)
 
-Opłata sądowa: [kwota] zł (art. 13 §2 lub art. 27 KSCU)
+Opłata sądowa: [kwota] zł — ⛔ najpierw sprawdź ZWOLNIENIA (art. 94–103 KSCU),
+  potem kwotę z `shared/TABELE-OPLAT.md`; cap opłaty stosunkowej z art. 13 ust. 2
+  to 100 000 zł od 23.09.2025, nie 200 000 zł
                / wniosek o zwolnienie od kosztów w odrębnym piśmie
 
                               P O Z E W

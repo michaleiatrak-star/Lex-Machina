@@ -187,7 +187,7 @@ DEFINICJE USTAWOWE (art. 115 §5–6 KK):
 ⚠️ ALERT — ZAMROŻONE OD 2010 r. — POTWIERDZONE 2026-06-12:
   Kwoty NIEZMIENIONE od nowelizacji KK w 2010 r. (Dz.U. 2010 poz. 625)
   200 000 zł w 2010 = ~152× minimalne wynagrodzenie (1 317 zł)
-  200 000 zł w 2026 = ~42× minimalne wynagrodzenie (~4 750 zł)
+  200 000 zł w 2026 ≈ 41,6× minimalne wynagrodzenie (**4 806 zł**, rozp. RM Dz.U. 2025 poz. 1242 — ⛔ poprzedni zapis „~4 750 zł" był błędny)
   → Realna wartość progów radykalnie spadła; coraz więcej spraw
     kwalifikuje jako "mienie znacznej wartości" mimo mniejszej wagi
 

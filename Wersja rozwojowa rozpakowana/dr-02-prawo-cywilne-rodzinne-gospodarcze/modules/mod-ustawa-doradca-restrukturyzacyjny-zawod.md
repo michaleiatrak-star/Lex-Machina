@@ -108,7 +108,7 @@ oraz wysokość i sposób wnoszenia opłaty za jego wydanie
      z oskarżenia publicznego lub przestępstwo skarbowe
    → brak wpisu w rejestrze dłużników niewypłacalnych KRS i braku
      ujawnienia w Krajowym Rejestrze Zadłużonych (art. 2 ust. 1 ustawy
-     o KRZ, Dz.U. 2021 poz. 1909 — weryfikuj aktualny t.j.)
+     o KRZ — **Dz.U. 2025 poz. 1584 t.j.** ✅ [VER] RZĄD 1 2026-09-10o, zero nowelizacji po nim; poprzedni zapis `2021 poz. 1909` — wygaśnięcie aktu)
 
 4. NADZÓR: Minister Sprawiedliwości nadzoruje działalność osób
    posiadających licencję — może cofnąć lub zawieszyć licencję (przesłanki

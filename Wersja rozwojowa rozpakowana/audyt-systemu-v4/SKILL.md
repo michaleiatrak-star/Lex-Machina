@@ -1,7 +1,7 @@
 ---
 name: audyt-systemu-v4
 description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych skilli: zależności, wersje, mapy Dz.U., treść merytoryczna, propagacja zmian, deduplikacja i bramki jakości."
-version: "6.68"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
+version: "6.77"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
                   # parsuje jako float 6.1 — czyli numer NIŻSZY niż 6.9, co cicho
                   # odwraca porządek wersji. Wykryte przy walidacji 2026-08-20z.
                   # Każda kolejna wersja z dwucyfrowym minor — też w cudzysłowie.
@@ -149,6 +149,11 @@ scripts:
   - scripts/sync_dzu_eli.py               # pobiera z Sejm ELI API nowe pozycje Dz.U./M.P., produkuje raport różnic — patrz SYNC-DZU-AUTOMATYCZNY.md — REJESTROWANE 2026-08-15
   - scripts/audit_tj_inventory.py         # T15 — sprawdza wszystkie operacyjne deklaracje t.j. względem rocznych indeksów Sejm ELI; tryby maps/operational/all; błąd API = exit 2, dodane 2026-08-26
   - scripts/audit_amendment_scope.py      # T16 — pełny inwentarz dyspozycji nowelizacji i propagacja każdej zmienionej jednostki przez cały korpus; bez ścieżek hosta
+  - scripts/check_status_podstaw.py       # T27 — czy numer Dz.U. podany W PROZIE jako aktualna
+                                          # podstawa prawna opisuje akt obowiązujący (O-9, F-181).
+                                          # ⛔ WYMAGA SIECI. ⛔ Raportuje „DO PRZEGLĄDU", nie FAIL:
+                                          # heurystyka tego badania dwukrotnie zawyżyła wynik,
+                                          # a wygasły numer w kontekście historycznym NIE jest błędem
   - scripts/check_wyjatek_gate_eli.py     # T20 — trzy z czterech zamiatań bramki WYJ-GATE (F-144):
                                           # S1 sąsiedztwo (art. X¹ to osobna jednostka), S2 krawędzie
                                           # jednostki (klauzule zakresowe), S3 rejestr odesłań ELI
@@ -1322,7 +1327,7 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
 
 ---
 
-*Wersja: 6.68 | Ostatnia aktualizacja: 2026-09-10o (F-181 DOMKNIĘTA na liście 1.2 — pozostałe 20 miejsc w 12 skillach naprawione; razem 61/61. ⛔ SIÓDMA PODMIANA AKTU: `mod-ustawa-pielegniarka-polozna` kierował do `2025/450`, czyli do t.j. ustawy o DZIAŁALNOŚCI LECZNICZEJ. ⛔ `mod-ustawa-kontrola-administracji` niósł nieprawdziwą adnotację „nowszy t.j. NIE został ogłoszony". ⚠️ Flaga nadal otwarta: lista 1.2 to wynik heurystyki, nie audytu każdej linii. Poprzednio: 2026-09-10n)*
+*Wersja: 6.77 | Ostatnia aktualizacja: 2026-09-10x (O-11 — POWIĄZANIE tabeli opłat z systemem. Dotąd `TABELE-OPLAT` znały tylko dwa moduły; teraz: `required_modules` routera, warstwa odroczona PROFIL-LEKKI z wyzwalaczem „zamierzasz podać kwotę", nowa pozycja **KWOTA-GATE** w SELF-CHECK (trzy pytania przy każdej kwocie) oraz cztery dalsze skille — dr-12 (kanoniczny moduł KSCU), pisma-proste-v2, pisma-procesowe-v3, analiza-sadowa-v6. Poprzednio: 2026-09-10w)*
 
 *(Stopka podawała „5.0 | 2026-07-04" przy `version: 6.8` w YAML — rozjazd
 9 wersji, naprawiony 2026-08-20y. **Stopkę aktualizuj razem z polem `version`**;

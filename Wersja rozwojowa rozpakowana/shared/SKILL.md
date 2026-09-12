@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.35"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.42"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -50,12 +50,12 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.35 (2026-09-10n, F-181): 41 miejsc przestawionych z wygasłych
-  tekstów jednolitych na aktualne — 20 aktów, w tym UFP 2024/1530 → 2025/1483
-  (13 miejsc), dochody JST, PZP, VAT, KPK, PPSA, Prawo energetyczne, AML,
-  KWiH, prawo autorskie, Karta Nauczyciela i inne. ⛔ Dochody JST: stara ustawa
-  została ZASTĄPIONA NOWĄ (Dz.U. 2024 poz. 1572), więc podstawienie jej t.j.
-  2024/356 byłoby powieleniem błędu — ten numer też jest uchylony.
+  Wersja bieżąca: 3.42 (2026-09-10w, O-11): TABELE-OPLAT 1.3 — PEŁNY KATALOG
+  ZWOLNIEŃ z odczytu treści KSCU art. 94–103. Poprzednio plik wymieniał tylko
+  zwolnienie alimentacyjne (art. 96 ust. 1 pkt 2), bo powstał przy pracy nad
+  alimentami. Teraz: 18 kategorii podmiotowych, zwolnienia przedmiotowe
+  z art. 95, Skarb Państwa i zwolnienie na wniosek. Do reguły kolejności
+  dopisany KROK 0: czy strona w ogóle płaci.
   Pełna historia wszystkich wersji: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -86,6 +86,7 @@ Nie jest samodzielnym skillem — pełni rolę biblioteki referencji.
 | Plik | Rola |
 |------|------|
 | `UNIVERSAL-RUNTIME-ADAPTER.md` | Wspólny kontrakt runtime ChatGPT/Claude/Codex: zasoby, narzędzia, prywatność, fallbacki |
+| `TABELE-OPLAT.md` | ⛔ KOLEJNOŚĆ SIĘGANIA PO KWOTY: tabela ustanawiająca → baza katalogująca → RZĄD 2A/2B. Zweryfikowane tabele KSCU (art. 13, 22, 96 ust. 1 pkt 2), taksy adwokacka i radcowska, minimalne wynagrodzenie. ⛔ Zawiera pułapkę art. 13 ust. 2: cap opłaty stosunkowej to **100 000 zł** od 23.09.2025, nie 200 000 zł. Wczytać przed pierwszą kwotą. |
 | `PRAWO-HARDGATE.md` | ⛔ Globalny zakaz cytowania prawa/orzeczeń z pamięci — RDZEŃ, wczytaj przed każdym przepisem (zasada absolutna, PERMANENT GATE, hierarchia statusów, ŹRÓDŁO-0, KROK 2B/2C). Podzielony 2026-08-23h (F-111: 967 → 501 l.) i 2026-09-10b (F-180: 704 → 510 l., gałęzie warunkowe wydzielone niżej). |
 | `PRAWO-HARDGATE-BLOKADA.md` | ⛔ Gałąź niedostępnego źródła RZĘDU 1 — BRAMKA ANTY-FASADOWA + KOTWICA URZĘDOWA. **Wyzwalacz:** B-1/B-2 zwrócił blokadę i kanał kodu też zawiódł. Bez tego odczytu znacznik 🟨 i ⚠️ jest nieważny. |
 | `PRAWO-HARDGATE-AKT-MIEJSCOWY.md` | Ścieżka B-L. **Wyzwalacz:** przedmiotem sprawy jest akt prawa miejscowego. Aktów tych NIE MA w ELI Kancelarii Sejmu — weryfikacja tam zwraca fałszywy negatyw. |

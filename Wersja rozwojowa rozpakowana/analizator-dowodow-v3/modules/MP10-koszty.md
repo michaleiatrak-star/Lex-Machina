@@ -6,9 +6,33 @@ Ocenić ekonomiczną zasadność wszczęcia lub kontynuowania postępowania.
 Koszty sądowe, ryzyko zasądzenia kosztów od użytkownika, próg opłacalności
 i warianty ugodowe muszą być wkalkulowane w każdą rekomendację procesową.
 
+⛔ **KOLEJNOŚĆ ŹRÓDEŁ — `view shared/TABELE-OPLAT.md` PRZED pierwszą kwotą.**
+Ten moduł jest **warstwą drugą**: rozpoznaje RODZAJ opłaty i to, ZA CO jest
+pobierana. ⛔ **Nie jest źródłem liczby.** Kwotę bierze się z tabeli, która ją
+ustanawia — KSCU, rozporządzenia MS o taksach, rozporządzenie RM o minimalnym
+wynagrodzeniu — z odczytu TREŚCI aktu, nie z metadanych i nie z tego pliku.
+
+⛔ **Pułapka, którą trzeba znać przed liczeniem czegokolwiek:** tekst jednolity
+KSCU zawiera **dwa brzmienia art. 13 ust. 2** rozróżnione odnośnikami. Cap
+opłaty stosunkowej wynosi **100 000 zł** (od 23.09.2025, ustawa
+`Dz.U. 2025 poz. 1157`), a nie powszechnie powtarzane 200 000 zł. Szczegóły
+i pozostałe tabele: `shared/TABELE-OPLAT.md`.
+
+⛔ **PIERWSZE PYTANIE W KAŻDEJ SPRAWIE: czy strona w ogóle płaci.**
+Katalog zwolnień jest szeroki i obejmuje trzy niezależne warstwy:
+- **podmiotowe z mocy ustawy** (art. 96 ust. 1 — 18 kategorii, m.in. alimenty,
+  ustalenie ojcostwa, **pracownik**, **osoba doznająca przemocy domowej**,
+  ubezwłasnowolniony, renta z art. 444 § 2 / 446 § 2 KC, szkody górnicze),
+- **przedmiotowe** (art. 95 — „nie pobiera się opłat od…", niezależnie od tego,
+  kto wnosi; m.in. zażalenia i skargi **dotyczące samych kosztów**),
+- **na wniosek** (art. 100–103 — w całości albo w części).
+
+⛔ Podanie kwoty opłaty stronie zwolnionej z mocy ustawy zniechęca do wniesienia
+pisma, które nic nie kosztuje. Pełny katalog z odczytu treści:
+`shared/TABELE-OPLAT.md` sekcja 2b.
+
 **Reguła:** przed podaniem kwot opłat sądowych zawsze weryfikuj aktualną
-treść ustawy z dnia 28 lipca 2005 r. o kosztach sądowych w sprawach cywilnych
-(KSCU) w ISAP — tabele opłat były wielokrotnie nowelizowane.
+treść KSCU u źródła — tabele opłat były wielokrotnie nowelizowane.
 
 ---
 

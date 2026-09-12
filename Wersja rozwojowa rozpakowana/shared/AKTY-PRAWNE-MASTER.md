@@ -79,7 +79,7 @@
 
 | Kod | Akt | Metryka Dz.U. | Status | Ryzyko | Uwagi |
 |---|---|---|---|---|---|
-| KSCU | Koszty sądowe w sprawach cywilnych | Dz.U. 2025 poz. 1228 + zmiana Dz.U. 2026 poz. 346 | PO-TJ-ZMIANY | 🟠 | Sprawdzać zmiany 2026; opłaty stosunkowe |
+| KSCU | Koszty sądowe w sprawach cywilnych | Dz.U. 2025 poz. 1228 + zmiana Dz.U. 2026 poz. 346 (⛔ w życie 30.09.2028 — do tej daty NIE stosować) | PO-TJ-ZMIANY | 🟠 | Sprawdzać zmiany 2026; opłaty stosunkowe |
 | USP | Prawo o ustroju sądów powszechnych | t.j. ISAP z 21.04.2026 + zmiana Dz.U. 2026 poz. 370 + regulamin Dz.U. 2026 poz. 278 | PO-TJ-ZMIANY | 🟡 | Wyłączenie sędziego, organizacja, przewlekłość |
 | PROK | Prawo o prokuraturze | t.j. ISAP z 17.04.2026 + zmiana Dz.U. 2026 poz. 370, 140 | PO-TJ-ZMIANY | 🟡 | Skargi na prokuraturę, czynności organów ścigania |
 
@@ -91,7 +91,7 @@
 |---|---|---|---|---|---|
 | PR | Prawo restrukturyzacyjne | Dz.U. 2026 poz. 533 | AKTUALNY | 🟠 | Nowy tekst jednolity |
 | PU | Prawo upadłościowe | **Dz.U. 2026 poz. 913 t.j.** ✅ [VER] RZĄD 1 2026-09-10n | PO-TJ-ZMIANY | 🟠 | Sprawdzić zmiany po t.j. i wejście w życie |
-| PPRZEDS | Prawo przedsiębiorców | Dz.U. 2025 poz. 1480 + zmiany Dz.U. 2025 poz. 1795, 1826 + Dz.U. 2026 poz. 507 | PO-TJ-ZMIANY | 🟡 | Działalność regulowana, gospodarcza |
+| PPRZEDS | Prawo przedsiębiorców | Dz.U. 2025 poz. 1480 + zmiany Dz.U. 2025 poz. 1795, 1826 + Dz.U. 2026 poz. 507 (⛔ w życie 14.10.2026 — do tej daty NIE stosować) | PO-TJ-ZMIANY | 🟡 | Działalność regulowana, gospodarcza |
 | UOKiK | Ustawa o ochronie konkurencji i konsumentów | Dz.U. 2026 poz. 85 | AKTUALNY | 🟡 | Klauzule abuzywne, postępowania UOKiK |
 | UPrKons | Ustawa o prawach konsumenta | t.j. ISAP — sprawdź aktualny Dz.U. | WYMAGA-KONTROLI | 🟡 | Sprawdź t.j. przed każdą sprawą konsumencką |
 

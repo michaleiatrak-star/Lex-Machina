@@ -1,5 +1,10 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.42 (2026-09-10w, O-11): TABELE-OPLAT 1.3: PELNY KATALOG ZWOLNIEN z odczytu tresci KSCU art. 94-103 - 18 kategorii podmiotowych (art. 96 ust. 1), zwolnienia przedmiotowe (art. 95, w tym zazalenia i skargi dotyczace samych kosztow), Skarb Panstwa (art. 94) i zwolnienie na wniosek (art. 100-103, z pulapka art. 102 ust. 4). Do reguly kolejnosci dopisany KROK 0
+- 3.41 (2026-09-10v, O-11): TABELE-OPLAT 1.2: tabele obu taks z ODCZYTU TRESCI - stawki od WPS (par. 2, 90-25 000 zl), odrebna nizsza tabela dla postepowan upominawczych i nakazowych (par. 3), oraz stawki rodzinne niezalezne od WPS (alimenty 240 zl, rozwod 720 zl, ojcostwo 480 zl, podzial majatku od wartosci udzialu)
+- 3.40 (2026-09-10u, O-11): TABELE-OPLAT 1.1: art. 22 KPC (WPS = suma swiadczen za rok) i art. 21 KPC (zliczanie roszczen) zweryfikowane ODCZYTEM TRESCI; nowa sekcja 2a - wysokosc alimentow wg art. 135 KRO par. 1-3 oraz tabela przeslanek art. 128-140
+- 3.39 (2026-09-10t, O-11): nowy TABELE-OPLAT.md: kolejnosc siegania po kwoty (tabela ustanawiajaca -> baza katalogujaca -> RZAD 2A/2B) + zweryfikowane odczytem TRESCI tabele KSCU art. 13/22/96, taksy 2026/215 i 2026/118, minimalne wynagrodzenie
+- 3.38 (2026-09-10s, F-135): orka-bas czesc-05: BLEDNA KWOTA minimalnego wynagrodzenia 2026 (~4 750 zl) skorygowana na 4 806 zl - potwierdzone odczytem tresci rozp. RM Dz.U. 2025 poz. 1242
 - 3.34 (2026-09-10l, F-181): trzy przeterminowane podstawy: ustawa rehabilitacyjna 2024/44 → 2026/884; w orka-bas działalność lecznicza 2024/799 → 2026/156, UFP 2024/1530 → 2025/1483, Ordynacja 2025/111 → 2026/622 (2 miejsca)
 - 3.31 — **KROK 2C: gdzie szukać nowelizacji po t.j. + zakaz przepisywania wyniku**
   (2026-09-01k, flaga F-156). Nowa tabela adresów: sekcja „Nowelizacje po tekście
@@ -972,3 +977,242 @@ ogniwo dalej, zamiast go usunąć.
 ⛔ Każda z 20 par sprawdzona przez **porównanie tytułów** starego i nowego
 obwieszczenia — po sześciu podmianach aktu w tej serii to element procedury,
 nie formalność.
+
+---
+
+## 3.36 (2026-09-10q, F-135) — reforma antymobbingowa: vacatio legis, nie stan obowiązujący
+
+`definicje/DEF-PRACA.md` opisywał nowe brzmienie art. 94³ KP jako obowiązujące
+„PO REFORMIE (od 30.07.2026)". ⛔ 30.07.2026 to **data podpisu Prezydenta**.
+Odczyt RZĄD 1 (`api.sejm.gov.pl/eli/acts/DU/2026/1046`, 2026-09-10):
+
+```
+ogłoszenie      : 2026-08-04
+WEJŚCIE W ŻYCIE : 2026-11-05
+status          : obowiązujący  (= akt nie został uchylony)
+```
+
+⛔ **To był błąd zakresu czasowego normy** — klasa, której pilnuje OŚ-GATE,
+popełniony w zasobie kanonicznym `shared`. Sprawa o mobbing z sierpnia albo
+września 2026 dostawała przepis, który jeszcze nie obowiązuje: bez wymogu
+rozstroju zdrowia i z minimalnym zadośćuczynieniem, których w tej dacie nie ma.
+
+Dodana reguła czasowa w tabeli: zdarzenia **przed 5.11.2026** → stare brzmienie
+(wymóg rozstroju zdrowia, brak minimum, brak art. 477⁶ᵃ KPC); **od 5.11.2026** →
+nowe.
+
+⚠️ Wpisane wprost: **„status: obowiązujący" w ELI nie znaczy, że przepisy
+działają.** Oznacza, że akt nie został uchylony; o stosowaniu rozstrzyga osobne
+pole `entryIntoForce`. To rozróżnienie nie było dotąd nigdzie zapisane, a jest
+źródłem tej pomyłki.
+
+⚠️ Kwota minimalnego zadośćuczynienia sprowadzona do **mnożnika ustawowego**
+(6 × minimalne wynagrodzenie). Wartość złotowa zależy od minimalnego
+wynagrodzenia w dacie orzekania i wymaga sprawdzenia w aktualnym rozporządzeniu
+Rady Ministrów — poprzedni zapis podawał 28 836 zł jako liczbę do przepisania.
+
+---
+
+## 3.37 (2026-09-10r, O-10) — cezury czasowe dla aktów w vacatio legis
+
+`AKTY-PRAWNE-MASTER.md` i `LEGAL-REGISTRY.md` wymieniały w kolumnie zmian numery
+aktów, które **jeszcze nie weszły w życie**, bez podania daty:
+`Dz.U. 2026 poz. 507` (w życie 14.10.2026), `2026/346` (30.09.2028),
+`2026/176` (18.02.2027), `2026/846` (1.10.2026).
+
+⛔ Model czytający „zmiany Dz.U. 2026 poz. 507" nie ma jak odróżnić zmiany
+**działającej** od tej w vacatio legis — a skutek jest taki sam jak przy
+powołaniu przepisu nieobowiązującego. Dopisane cezury.
+
+⚠️ Sygnał słabszy niż numer podany wprost jako podstawa (tam błąd jest
+bezpośredni), ale realny: rejestr zmian jest czytany właśnie po to, żeby
+ustalić stan na dziś.
+
+---
+
+## 3.38 (2026-09-10s, F-135) — błędna kwota minimalnego wynagrodzenia
+
+`orka-bas-leksykon/czesc-05` podawał minimalne wynagrodzenie 2026 jako
+**„~4 750 zł"**. Odczyt **treści** rozporządzenia RM (`Dz.U. 2025 poz. 1242`,
+`/text.pdf`): „§ 1. Od dnia 1 stycznia 2026 r. ustala się minimalne wynagrodzenie
+za pracę w wysokości **4806 zł**". Skorygowane.
+
+⚠️ Kwota podana „w przybliżeniu" jest w rejestrze prawnym tym samym co kwota
+błędna — służy do przeliczeń (tu: krotność progu 200 000 zł), więc jej
+przybliżenie propaguje się na wynik.
+
+⛔ To jest pierwszy w tej serii błąd **wartości liczbowej**, nie numeru aktu.
+Żaden test tej klasy nie dotyka: T27 pyta o status podstawy, nie o to, czy
+liczba w zdaniu odpowiada treści przepisu. Zweryfikować można wyłącznie
+odczytem tekstu aktu.
+
+---
+
+## 3.39 (2026-09-10t, O-11) — TABELE-OPLAT: kolejność sięgania po kwoty
+
+Nowy zasób kanoniczny. Reguła: **kwotę bierze się z tabeli, która ją ustanawia,
+a nie z bazy, która ją opisuje.**
+
+```
+1. TABELA USTANAWIAJĄCA — KSCU, rozporządzenia MS o taksach, rozporządzenie RM
+                          o minimalnym wynagrodzeniu. Odczyt TREŚCI aktu.
+2. BAZA KATALOGUJĄCA    — MP10-koszty, mapy DR, leksykon. Rozpoznaje RODZAJ
+                          opłaty i to, ZA CO jest pobierana. NIE źródło liczby.
+3. RZĄD 2A/2B           — wyłącznie do rozpoznania problemu, nigdy do kwoty.
+```
+
+⛔ **Ustalenie, dla którego ten plik powstał: art. 13 ust. 2 KSCU.**
+Tekst jednolity `Dz.U. 2025 poz. 1228` zawiera **dwa brzmienia tego przepisu**,
+stojące obok siebie i rozróżnione **wyłącznie odnośnikami**:
+
+| Odnośnik | Cap opłaty stosunkowej | Status |
+|---|---|---|
+| 2) | 200 000 zł | obowiązuje **do wejścia w życie** zmiany z odnośnika 3 |
+| 3) | **100 000 zł** | ustawa z 25.07.2025 (`Dz.U. 2025 poz. 1157`), **w życie 23.09.2025** |
+
+Na dziś obowiązuje **100 000 zł**. Powszechnie powtarzana kwota 200 000 zł jest
+nieaktualna od września 2025 — a jest to jedna z najczęściej cytowanych liczb
+w postępowaniu cywilnym. ⛔ Kto czyta tekst jednolity bez przypisów, przepisze
+brzmienie wygasłe.
+
+⚠️ Klasa błędu: lustrzana wobec O-10. Tam norma jeszcze nie obowiązywała, tu
+w jednym dokumencie stoją obok siebie brzmienie wygasłe i obowiązujące.
+
+**Zweryfikowane odczytem treści i wpisane do tabel:** art. 13 ust. 1 (progi
+opłat stałych 30–1000 zł do WPS 20 000 zł), art. 13 ust. 2 (5%, cap 100 000 zł),
+art. 22 (zażalenia — 100 zł), **art. 96 ust. 1 pkt 2 (zwolnienie strony
+dochodzącej roszczeń alimentacyjnych oraz pozwanej w sprawie o obniżenie
+alimentów)**, taksy `2026/215` i `2026/118` (obie najnowsze, zero nowelizacji
+po tekście jednolitym).
+
+⛔ **W sprawach alimentacyjnych pierwsze pytanie nie brzmi „ile wynosi opłata".**
+Podanie kwoty stronie zwolnionej z mocy ustawy zniechęca do wniesienia pisma,
+które nic nie kosztuje — błąd cięższy niż kwota nieprawidłowa.
+
+⚠️ WPS w alimentach oznaczony jako **[DO WERYFIKACJI U ŹRÓDŁA — art. 22 KPC]**.
+Reguła roszczeń powtarzających się nie została przepisana z pamięci ani z bazy
+katalogującej; wymaga odczytu bieżącego tekstu KPC.
+
+---
+
+## 3.40 (2026-09-10u, O-11) — TABELE-OPLAT 1.1: alimenty od podstaw
+
+Uzupełnienie zgodnie z regułą kolejności: **najpierw przepis, który ustanawia**.
+
+**Art. 22 KPC** (t.j. `Dz.U. 2026 poz. 468`, odczyt treści) — zastąpił
+zostawiony wcześniej znacznik `[DO WERYFIKACJI]`:
+
+> W sprawach o prawo do świadczeń powtarzających się wartość przedmiotu sporu
+> stanowi **suma świadczeń za jeden rok**, a jeżeli świadczenia trwają krócej
+> niż rok – za cały czas ich trwania.
+
+Dodano art. 21 KPC (zliczanie wartości kilku roszczeń) oraz ostrzeżenie, że przy
+żądaniu **podwyższenia** WPS liczy się od różnicy — z jawnym zastrzeżeniem, że
+to nie wynika wprost z art. 22 i przy sprawie granicznej wymaga orzecznictwa.
+
+**Art. 135 KRO** (t.j. `Dz.U. 2026 poz. 236`, odczyt treści) — nowa sekcja 2a:
+
+- **§ 1 — dwie przesłanki, nie jedna**: usprawiedliwione potrzeby uprawnionego
+  ORAZ zarobkowe i majątkowe możliwości zobowiązanego. ⚠️ „Możliwości
+  zarobkowe" ≠ „dochód faktyczny".
+- **§ 2 — osobiste starania są formą wykonania obowiązku**, nie okolicznością
+  łagodzącą. Pominięcie zaniża żądanie strony sprawującej bieżącą pieczę.
+- **§ 3 — świadczeń z pomocy społecznej i funduszu alimentacyjnego NIE ODLICZA
+  SIĘ.** Argument „dziecko dostaje świadczenia, więc alimenty mogą być niższe"
+  jest wprost sprzeczny z przepisem.
+
+Tabela przesłanek art. 128, 129 §1–2, 130, 133 §1–3, 138, 140 §2 — przepisana
+z treści, nie z pamięci. ⛔ Odnotowane, że **art. 133 § 1 nie zna granicy
+wieku**: kryterium to zdolność do samodzielnego utrzymania, a uchylenie się
+wobec dziecka pełnoletniego wymaga wykazania przesłanki z § 3, nie następuje
+z mocy prawa.
+
+---
+
+## 3.41 (2026-09-10v, O-11) — TABELE-OPLAT 1.2: taksy z odczytu treści
+
+Domknięcie warstwy kosztowej. Odczyt treści obu rozporządzeń
+(`Dz.U. 2026 poz. 215` adwokackie, `Dz.U. 2026 poz. 118` radcowskie) —
+**w zbadanym zakresie tabele są identyczne**.
+
+**§ 2 — stawki od wartości przedmiotu sprawy:** 90 zł (do 500 zł), 270, 900,
+1 800, 3 600, 5 400, 10 800, 15 000, **25 000 zł** (powyżej 5 mln).
+
+⚠️ **§ 3 — postępowania upominawcze, elektroniczne upominawcze, nakazowe
+i europejskie nakazowe mają WŁASNĄ, NIŻSZĄ tabelę** (60/180/600 zł…). Nie
+stosować tabeli z § 2 w tych trybach — to osobny, łatwy do przeoczenia przepis.
+
+⛔ **§ 4 — sprawy rodzinne: stawka NIE zależy od WPS.**
+
+| Sprawa | Stawka |
+|---|---|
+| **alimenty** | **240 zł** |
+| rozwód i unieważnienie małżeństwa | 720 zł |
+| rozdzielność majątkowa | 720 zł |
+| ojcostwo (ustalenie/zaprzeczenie), rozwiązanie przysposobienia | 480 zł |
+| istotne sprawy rodziny, zarząd majątkiem wspólnym | 480 zł |
+| podział majątku wspólnego | stawka z §2 od **wartości udziału**; zgodny wniosek — 50% |
+
+⛔ **Najczęstszy błąd w tej materii:** policzenie stawki alimentacyjnej z tabeli
+WPS. Przy rocznej sumie świadczeń 4 800 zł tabela z §2 daje 900 zł, a przepis
+szczególny — **240 zł**. Zawyżenie blisko czterokrotne.
+
+⚠️ Stawka rozwodowa obejmuje roszczenia majątkowe dochodzone łącznie,
+**z wyjątkiem** roszczeń z art. 58 § 2 i 3 KRO.
+
+⚠️ Sprawdzono celowo przypis przy pozycji alimentacyjnej: brzmienie ustalone
+rozporządzeniem MS z 23.12.2024 jest **obowiązujące**, bez wariantu przyszłego.
+⛔ To ta sama konstrukcja redakcyjna, która przy art. 13 ust. 2 KSCU kryła
+brzmienie wygasłe obok obowiązującego — sprawdzenie przypisu przestało być
+opcjonalne.
+
+---
+
+## 3.42 (2026-09-10w, O-11) — TABELE-OPLAT 1.3: pełny katalog zwolnień
+
+⛔ **Luka wykryta na pytanie użytkownika: „czy to wszystkie sytuacje".**
+Nie były. Plik w wersjach 1.0–1.2 wymieniał **wyłącznie art. 96 ust. 1 pkt 2**
+(alimenty) — bo powstał przy pracy nad alimentami i odziedziczył jej zakres.
+To jest ta sama klasa co „niedomknięcie" z AUDYT-2026-09-10g: zapis nie był
+błędny, był **niepełny w sposób niewidoczny**, bo wyglądał na kompletny.
+
+Dopisany katalog z odczytu treści KSCU (`Dz.U. 2025 poz. 1228`), **trzy
+niezależne warstwy**:
+
+**A. Podmiotowe z mocy ustawy (art. 96 ust. 1) — 18 kategorii.** Poza alimentami
+m.in.: ustalenie ojcostwa i macierzyństwa, klauzule niedozwolone, **pracownik**
+i odwołanie do sądu pracy i ubezpieczeń, kurator, prokurator i rzecznicy
+(RPO, Praw Dziecka, Praw Pacjenta, Finansowy, MŚP), inspektor pracy i związki
+zawodowe, ochrona zdrowia psychicznego, **osoba ubezwłasnowolniona**, szkody
+górnicze, kompensata dla ofiar czynów zabronionych, ochrona roszczeń
+pracowniczych, **osoba doznająca przemocy domowej**, renta z art. 444 § 2
+i 446 § 2 KC.
+
+**B. Przedmiotowe (art. 95) — „nie pobiera się opłat od…", niezależnie od tego,
+kto wnosi.** ⛔ Najważniejsze praktycznie: **zażalenia i skargi dotyczące samych
+kosztów** (odmowa lub cofnięcie zwolnienia, wysokość opłaty lub wydatków,
+orzeczenia referendarza). To domyka pętlę — zaskarżenie decyzji o kosztach samo
+nie kosztuje. Ponadto m.in. zażalenie na policyjny nakaz opuszczenia mieszkania
+w sprawach przemocy domowej, pisma nieletniego, wniosek o doręczenie
+uzasadnienia przy zwolnieniu od opłaty od środka zaskarżenia.
+
+**C. Na wniosek (art. 100–103)** — w całości lub w części, z formami
+częściowego zwolnienia. ⛔ **Art. 102 ust. 4 jest pułapką proceduralną:** wniosek
+strony reprezentowanej przez adwokata lub radcę, złożony bez oświadczenia
+majątkowego, przewodniczący **zwraca BEZ WEZWANIA** do uzupełnienia. Dla strony
+działającej samodzielnie stosuje się art. 130 KPC. Termin rozpoznania: 7 dni.
+
+⚠️ Wpisane wprost: **zwolnienie od kosztów sądowych ≠ zwolnienie od kosztów
+przeciwnika.** Strona zwolniona, która przegra, może zostać obciążona kosztami
+zastępstwa procesowego strony przeciwnej.
+
+⚠️ Art. 96 ust. 4: przy **oczywiście bezzasadnym** powództwie o ustalenie
+ojcostwa sąd może obciążyć powoda nieuiszczonymi kosztami — zwolnienie z pkt 1
+nie jest bezwarunkowe.
+
+⚠️ Art. 109 i 111 (cofnięcie zwolnienia, odpowiedzialność za nieprawdziwe
+oświadczenie) **świadomie nieprzepisane** — odczytać przy sprawie, w której
+zwolnienie ma być wnioskowane.
+
+Do reguły kolejności dopisany **KROK 0: czy strona w ogóle płaci** — przed
+sięgnięciem po jakąkolwiek tabelę.

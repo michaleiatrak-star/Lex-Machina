@@ -118,6 +118,7 @@ przez F-113.
 |---|---|---|
 | `shared/PRAWO-HARDGATE-BLOKADA.md` | B-1/B-2 zwrócił blokadę **i** kanał kodu też zawiódł | ⛔ przed nadaniem znacznika 🟨 lub ⚠️ |
 | `shared/PRAWO-HARDGATE-AKT-MIEJSCOWY.md` | przedmiotem sprawy jest akt prawa miejscowego | przed pierwszą próbą weryfikacji tego aktu |
+| `shared/TABELE-OPLAT.md` | ⛔ zamierzasz podać KWOTĘ opłaty, taksy albo wyliczenia | przed pierwszą liczbą — KROK 0 to pytanie, czy strona w ogóle płaci |
 | `shared/HIERARCHIA-ZRODEL.md` | pierwszy URL w odpowiedzi | przed nadaniem pierwszego znacznika RZĄD |
 | `references/ZRODLA-AKTOW-FALLBACK.md` | pierwszy akt polski | przed pierwszą próbą pobrania tekstu |
 | `shared/MOD-CN-GATE.md` | pierwsze rozstrzygnięcie / zarzut / roszczenie / kwalifikacja | przed sformułowaniem tego rozstrzygnięcia |

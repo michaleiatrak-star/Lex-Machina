@@ -67,6 +67,10 @@
 
 ## KOSZTY SĄDOWE — KSCU
 
+⛔ **KROK 0: czy strona w ogóle płaci.** Pełny katalog zwolnień (art. 94–103)
+i tabele zweryfikowane odczytem treści: `shared/TABELE-OPLAT.md`. Kwoty tutaj
+mają charakter orientacyjny — źródłem jest tabela ustanawiająca.
+
 ### Opłata sądowa od pozwu (sprawy cywilne ogólne)
 
 | WPS | Opłata | Podstawa |

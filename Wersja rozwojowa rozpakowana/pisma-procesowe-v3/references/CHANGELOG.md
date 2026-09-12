@@ -1,5 +1,6 @@
 # CHANGELOG — pisma-procesowe-v3
 
+- 5.21 (2026-09-10x, O-11): MOD-SZABLONY: pole "Oplata sadowa" w szablonie pisma opatrzone ostrzezeniem o zwolnieniach i o capie 100 000 zl
 - 5.20 (2026-08-26): skorygowano metrykę podstawy prawnej w module pracodawcy
   rzeczywistego.
 

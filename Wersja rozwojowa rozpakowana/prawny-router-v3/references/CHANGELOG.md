@@ -1,5 +1,27 @@
 # CHANGELOG — prawny-router-v3
 
+- 3.48 (2026-09-10x, O-11): **KWOTA-GATE — kontrola przy każdej podawanej kwocie.**
+
+  Nowa pozycja w `references/SELF-CHECK.md`. Wyzwalacz: odpowiedź podaje kwotę
+  opłaty sądowej, taksy, kosztów zastępstwa albo wyliczenia alimentacyjnego.
+  Trzy pytania, wszystkie muszą mieć odpowiedź TAK:
+
+  1. czy sprawdzono, że strona **nie jest zwolniona** (art. 94–103 KSCU — trzy
+     warstwy: podmiotowe art. 96 ust. 1, przedmiotowe art. 95, na wniosek
+     art. 100–103),
+  2. czy kwota pochodzi z **tabeli ustanawiającej**, nie z bazy katalogującej
+     ani z pamięci,
+  3. czy sprawdzono **przypisy** przy jednostce redakcyjnej.
+
+  ⛔ Punkt 3 istnieje dlatego, że art. 13 ust. 2 KSCU niesie **dwa brzmienia obok
+  siebie** rozróżnione wyłącznie odnośnikami — cap opłaty stosunkowej to
+  100 000 zł od 23.09.2025, nie powszechnie powtarzane 200 000 zł.
+
+  `shared/TABELE-OPLAT.md` dopisany do `required_modules` oraz do warstwy
+  odroczonej w `references/PROFIL-LEKKI.md`, z wyzwalaczem mechanicznym
+  „zamierzasz podać kwotę" i najpóźniejszym momentem odczytu „przed pierwszą
+  liczbą".
+
 - 3.47 (2026-09-10o, F-181): **przemoc domowa — przeterminowana podstawa
   i przemianowany akt.**
 

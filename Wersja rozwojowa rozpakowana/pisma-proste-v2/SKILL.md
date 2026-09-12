@@ -1,6 +1,6 @@
 ---
 name: pisma-proste-v2
-version: "2.11"
+version: "2.12"
 type: executive-pisma
 status: production
 description: "Proste pisma prawne i urzędowe: wezwania, wnioski, odpowiedzi i krótsze dokumenty; kompletność danych, aktualna weryfikacja prawa i walidacja przed wygenerowaniem pliku."
@@ -60,8 +60,16 @@ Każdy przywołany artykuł weryfikuj na `isap.sejm.gov.pl` lub `prawo.sejm.gov.
 Podaj pełne oznaczenie przy pierwszym użyciu.
 
 **Zasada 3 — Opłata sądowa zawsze:**
-Przy każdym piśmie wszczynającym postępowanie lub wymagającym opłaty —
-podaj wysokość opłaty i podstawę jej obliczenia.
+⛔ **KROK 0 — najpierw: CZY STRONA W OGÓLE PŁACI.** Zwolnienia mają trzy warstwy:
+podmiotowe z mocy ustawy (art. 96 ust. 1 KSCU — 18 kategorii, m.in. alimenty,
+ustalenie ojcostwa, **pracownik**, **osoba doznająca przemocy domowej**),
+przedmiotowe (art. 95 — m.in. zażalenia dotyczące **samych kosztów**) i na
+wniosek (art. 100–103). Podanie kwoty stronie zwolnionej z mocy ustawy
+zniechęca do wniesienia pisma, które nic nie kosztuje.
+
+Dopiero potem: podaj wysokość opłaty i podstawę jej obliczenia.
+⛔ Kwotę bierz z `shared/TABELE-OPLAT.md` (tabela ustanawiająca), nigdy z pamięci
+ani z bazy katalogującej.
 
 **Zasada 4 — Termin zawity najpierw:**
 Jeśli pismo dotyczy czynności z terminem zawitym (sprzeciw, zarzuty,

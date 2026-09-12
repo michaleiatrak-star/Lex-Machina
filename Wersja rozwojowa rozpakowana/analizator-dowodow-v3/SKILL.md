@@ -1,6 +1,6 @@
 ---
 name: analizator-dowodow-v3
-version: "5.16.3"
+version: "5.16.5"
 type: executive-analiza
 status: production
 description: "Ocena dowodów, dokumentów, zeznań i akt: siła dowodowa, hierarchia A-D, pokrycie przesłanek, sprzeczności, terminy procesowe i analiza śledcza."
@@ -39,7 +39,17 @@ pipeline:
     - AD-KROK3-WYKONANIE
     - AD-KROK4-DASHBOARD
 changelog: |
-  Wersja bieżąca: 5.16.3. Pełna historia (4.0.0-5.16.3) w
+  Wersja bieżąca: 5.16.5 (2026-09-10w, O-11): MP10-koszty — PIERWSZE PYTANIE
+  W KAŻDEJ SPRAWIE to czy strona w ogóle płaci. Trzy niezależne warstwy zwolnień:
+  podmiotowe z mocy ustawy (art. 96 ust. 1 KSCU — 18 kategorii), przedmiotowe
+  (art. 95) i na wniosek (art. 100–103). Dotąd moduł wskazywał wyłącznie
+  zwolnienie alimentacyjne. Pełny katalog: shared/TABELE-OPLAT.md sekcja 2b.
+  Wersja 5.16.4 (2026-09-10t, O-11): MP10-koszty oznaczony jako WARSTWA
+  DRUGA — rozpoznaje rodzaj opłaty i to, za co jest pobierana, ale NIE jest
+  źródłem liczby. Kwoty bierze się z shared/TABELE-OPLAT.md. Dopisana pułapka
+  art. 13 ust. 2 KSCU (cap 100 000 zł od 23.09.2025) oraz zwolnienie
+  alimentacyjne z art. 96 ust. 1 pkt 2 jako pierwsze pytanie w sprawie.
+  Wersja 5.16.3. Pełna historia (4.0.0-5.16.3) w
   references/CHANGELOG.md — wczytuj na żądanie, NIE trzymaj tu ponownie
   (F-78, 2026-08-20: to drugie takie porządkowanie tego pola po 2026-07-12;
   następne audyty dopisujące wpisy wersji NIECH DOPISUJĄ do

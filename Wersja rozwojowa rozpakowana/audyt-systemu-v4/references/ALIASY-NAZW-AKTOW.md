@@ -48,7 +48,7 @@ w rejestrze operacyjnym unieważnia alias i sygnał wraca — celowo.
 | Dz.U. 2025 poz. 843 | Ustawa o ryczałcie od przychodów | jw. | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2026 poz. 670 | Ustawa o OOŚ / oceny środowiskowe | ustawa o udostępnianiu informacji o środowisku i jego ochronie, udziale społeczeństwa… | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2023 poz. 1587 | Ustawa o odpadach / gospodarka komunalna | ustawa o odpadach | 2026-09-10c, RZĄD 1 |
-| Dz.U. 2025 poz. 570 | Ustawa o zwolnieniach grupowych | ustawa o szczególnych zasadach rozwiązywania z pracownikami stosunków pracy z przyczyn niedotyczących pracowników | 2026-09-10c, RZĄD 1 |
+| **Dz.U. 2026 poz. 1195 t.j.** ✅ [VER] RZĄD 1 2026-09-10r (poprzednio 2025 poz. 570 — wygaśnięcie aktu) | Ustawa o zwolnieniach grupowych | ustawa o szczególnych zasadach rozwiązywania z pracownikami stosunków pracy z przyczyn niedotyczących pracowników | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2023 poz. 1725 | Ustawa o skardze na przewlekłość postępowania | ustawa o skardze na naruszenie prawa strony do rozpoznania sprawy bez nieuzasadnionej zwłoki | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2023 poz. 1725 | Ustawa o skargach na przewlekłość | jw. | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2026 poz. 522 | ⭐⭐ Ustawa o rachunkowości z 29.09.1994 | ustawa o rachunkowości | 2026-09-10c, RZĄD 1 |

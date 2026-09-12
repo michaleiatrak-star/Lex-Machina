@@ -103,6 +103,20 @@ JEŚLI BLOK 0A nie zamknięty → STOP. Żaden punkt poniżej nie jest wykonywan
                  wersji, na której pracujesz, i zastrzeżeniem, że nie została
                  zestawiona ze stanem repozytorium.
           Nigdy nie zgłaszaj usterki systemu jako ustalonej, mając jeden nośnik.
+□ ⛔ [KWOTA-GATE] KONTROLA NA WYJŚCIU (dodano 2026-09-10x):
+  czy odpowiedź podaje KWOTĘ opłaty sądowej, taksy, kosztów zastępstwa albo
+  wyliczenia alimentacyjnego?
+    NIE → OK
+    TAK → trzy pytania, wszystkie muszą mieć odpowiedź TAK:
+          1. czy sprawdziłem, że strona NIE jest zwolniona (art. 94-103 KSCU)?
+             ⛔ Trzy warstwy: podmiotowe (art. 96 ust. 1 — 18 kategorii),
+             przedmiotowe (art. 95), na wniosek (art. 100-103).
+          2. czy kwota pochodzi z TABELI USTANAWIAJĄCEJ, nie z bazy
+             katalogującej ani z pamięci?
+          3. czy sprawdziłem PRZYPISY przy jednostce redakcyjnej?
+             ⛔ Art. 13 ust. 2 KSCU ma dwa brzmienia obok siebie; cap to
+             100 000 zł od 23.09.2025, nie 200 000 zł.
+          Którekolwiek NIE → wykonaj `view shared/TABELE-OPLAT.md` i popraw.
 □ ⛔ [PROFIL-ODROCZENIA] KONTROLA NA WYJŚCIU (dodano 2026-09-10, F-175):
   czy w GOTOWEJ odpowiedzi padł wyzwalacz zasobu zadeklarowanego w KROKU 3A jako
   ODROCZONY (pierwszy URL, pierwszy artykuł, ≥2 daty, rozstrzygnięcie, oddanie

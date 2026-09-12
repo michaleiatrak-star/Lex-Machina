@@ -8,6 +8,8 @@
 > tutaj). Wczytuj TYLKO gdy potrzebujesz historii konkretnej naprawy
 > (SKILL.md trzyma tylko krótkie podsumowanie bieżącej wersji).
 
+- 5.16.5 (2026-09-10w, O-11): MP10-koszty: PIERWSZE PYTANIE W KAZDEJ SPRAWIE to czy strona w ogole placi - trzy niezalezne warstwy zwolnien (podmiotowe art. 96 ust. 1, przedmiotowe art. 95, na wniosek art. 100-103). Dotad modul wskazywal wylacznie zwolnienie alimentacyjne
+- 5.16.4 (2026-09-10t, O-11): MP10-koszty oznaczony jako WARSTWA DRUGA: rozpoznaje rodzaj oplaty i za co, NIE jest zrodlem liczby. Podpiete shared/TABELE-OPLAT.md; dopisana pulapka art. 13 ust. 2 KSCU (cap 100 000 zl od 23.09.2025, nie 200 000) i zwolnienie alimentacyjne z art. 96 ust. 1 pkt 2
 - 5.16.3 (2026-08-31): F-140 — naprawa regresji dyskowej. Przywrócono `version` 5.16.1 → 5.16.3 i odtworzono brakujące wpisy 5.16.0–5.16.2 z `audyt-systemu-v4/references/AUDIT-JOURNAL.md`. Ponownie naprawiono `modules/MD5-terminy.md`: "art. 328¹ KPC" → **art. 328 § 1 KPC** oraz termin doprowadzony do brzmienia ustawowego ("tydzień"); zweryfikowane niezależnie w tej sesji (arslege.pl + lexlege.pl + standardyprawa.pl + przepisy.gofin.pl, t.j. Dz.U. 2026 poz. 468). Nagłówek H1 sprowadzony do samego MAJOR zgodnie z decyzją generalną F-102(C). Pole `changelog:` zsynchronizowane.
 
 - 5.16.2 (2026-08-04): FAZA 3E — naprawa CRIT w `modules/MD5-terminy.md`: błędny cytat "art. 328¹ KPC" (zbędny indeks górny) dla terminu wniosku o uzasadnienie wyroku → art. 328 KPC. Sprawdzono również MD3b-walidacja-prawna.md i MP2-katalog.md — zgodne z resztą systemu.
