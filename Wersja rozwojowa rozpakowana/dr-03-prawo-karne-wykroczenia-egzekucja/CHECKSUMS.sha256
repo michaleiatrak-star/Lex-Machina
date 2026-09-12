@@ -1,7 +1,7 @@
 84fd215a23e06fb7e8bae0ccdcec1c8cb63781bfd88cd926d87289f5a379dcc3  ./MAPA-AKTOW.md
 5775153126593f838a4043bc579540f7c032712b49af25614579a8d78cd9ea34  ./MAPA-POKRYCIA.md
 7114bc8b687168e76fb874a553183db97691e69a7864d60a31f348a6e408dc3f  ./PORTABILITY-MANIFEST.md
-0a682593de008c68903f6e91a0db0209863c826c07815d9f2bb4265064e0a197  ./SKILL.md
+a55037cefb2dadf8d761ff433dabbce91c0c2f5f3d76c3a186fe0b83bf4d143e  ./SKILL.md
 d015e63761fe4291d6a7faa309515a05d52d9d0e65242b36d2693f056fef03b1  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 6ce128a0b7cfe3beb8e2de5bcfb8489c89ef17aca6f5d7a1dbb400ab797a7108  ./modules/kwalifikator-karnomaterialny/part-01-ogolny-mienie-rozboj.md
@@ -81,5 +81,5 @@ cd92c0a01a9255db6e1fa80bf81e9e05ab3ba30b16ee0d36a4a1d1e4ba13fe6b  ./modules/mod-
 eaa563622647fbeac6d4ea494dd9d65db068eaa7bcc55d37cdd7aa62ffa47cf1  ./modules/mod-ustawa-fundusz-pomocy-pokrzywdzonym.md
 cbfb578625767f1932dea098e49459d326ad7a0895a356d087b6924ef30cba7c  ./modules/mod-ustawa-narkomania.md
 563847913f46be8c5e6a0538b26b0737029e14e3e3ee93c4d86b48eb432326fe  ./modules/mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych.md
-aedae2acc0aad51bcf70ea3ba2f46eee79113b9ed7e262ffa92b2b08531f8c39  ./modules/mod-ustawa-oplaty-w-sprawach-karnych.md
-1b68261f7f171ff92fa254f87d0db9707da98bc79cfdeee760c85f6b3941a02e  ./references/CHANGELOG.md
+a4c8468636af37f7690a5119ca43e7436b54f9d7a206d4cff8f4747e24ee180f  ./modules/mod-ustawa-oplaty-w-sprawach-karnych.md
+64b8440175bdf7c181c2b65320ab656dfc5ab3ba4295a94520f26d3831e47431  ./references/CHANGELOG.md

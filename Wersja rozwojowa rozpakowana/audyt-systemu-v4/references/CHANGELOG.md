@@ -1,5 +1,6 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.78 (2026-09-12, O-11): **pomiar rodziny wartosci "oplaty sadowe" i naprawa czterech tabel satelickich.** Wpis AUDYT-2026-09-12. Naprawione skille: shared 3.44 (TABELE-OPLAT 1.5), pisma-proste-v2 2.13, pisma-procesowe-v3 5.22, analiza-sadowa-v6 6.7, analizator-dowodow-v3 5.16.6, dr-03 3.36. Kluczowe ustalenia: podstawa falszywa "art. 27 pkt 1-6 KSCU" dla progow WPS w 3 plikach; 6 kwot blednych; 3 normy nieistniejace (cap gospodarczy 20 000 zl, oplata pracownicza 5%/max 1000 zl, wpis WSA 200/500/1000/2000); CRIT terminowy - termin zaskarzenia nakazu podawany jako 7 i 14 dni z art. 493 par. 1 KPC, ktory terminu NIE ZAWIERA (jest art. 480[2] par. 2 KPC: miesiac dla nakazowego przy doreczeniu w UE). O-11 skrocona do tego, co zostalo; zalozony rejestr tabel satelickich
 - 6.77 (2026-09-10x, O-11): **powiązanie tabeli opłat z systemem — dotąd było za wąskie.**
 
   ⛔ Na pytanie użytkownika o powiązania: `TABELE-OPLAT` w wersjach 1.0–1.3 znały

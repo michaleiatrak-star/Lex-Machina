@@ -203,7 +203,7 @@ Powód (Pracownik): [Imię Nazwisko], [Adres], PESEL: [nr]
 Pozwany (Pracodawca): [Pełna nazwa], [Adres], NIP: [nr]
 
 Wartość przedmiotu sporu: [kwota] zł
-(Sprawy pracownicze — zwolnienie z opłaty do WPS 50 000 zł, art. 96 §1 pkt 4 KSCU)
+(Sprawy pracownicze — pracownik zwolniony z kosztów sądowych **niezależnie od WPS**, art. 96 ust. 1 pkt 4 KSCU; próg 50 000 zł z art. 35 ust. 1 zd. 2 KSCU uruchamia opłatę dopiero od **apelacji**, nie od pozwu)
 
                               P O Z E W
 o [przywrócenie do pracy / odszkodowanie / zapłatę wynagrodzenia /

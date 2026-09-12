@@ -45,6 +45,24 @@ KPK (koszty procesu) ani rozporządzeniami o wydatkach.
 
 ### Art. 2 — kara pozbawienia wolności
 
+> ⛔⛔ **PUŁAPKA DWÓCH BRZMIEŃ OBOK SIEBIE — dopisana 2026-09-12.**
+> Tekst jednolity `Dz.U. 2023 poz. 123` zawiera **dwa warianty art. 2 ust. 1
+> pkt 6**, rozróżnione wyłącznie odnośnikami:
+>
+> | Odnośnik | Brzmienie | Status |
+> |---|---|---|
+> | 2) | „do 15 lat **albo 25 lat** – 600 zł" | „obowiązuje **do wejścia w życie** zmiany z odnośnika 3" |
+> | 3) | „do 15 lat – 600 zł" (+ dodany pkt 7: powyżej 15 lat – 1000 zł, odnośnik 4) | ustalone ustawą z 7.07.2022 (`Dz.U. 2022 poz. 2600`), w życie **14.03.2023** |
+>
+> **Obowiązuje wariant z odnośnika 3.** Odczyt tekstu jednolitego bez przypisów
+> daje brzmienie wygasłe, w którym **nie ma progu „powyżej 15 lat"**.
+> To ta sama klasa usterki co art. 13 ust. 2 KSCU (cap 100 000 zł obok
+> wygasłego 200 000 zł) — patrz `shared/TABELE-OPLAT.md` sekcje 1 i 5.
+> Reprodukcja: `curl -s api.sejm.gov.pl/eli/acts/DU/2023/123/text.pdf | pdftotext -layout - - | sed -n '/Art. 2. 1./,/Art. 3./p'`.
+
+✅ [VER] RZĄD 1 2026-09-12 — odczyt treści; wykaz aktów zmieniających akt bazowy
+(`DU/1973/152/references`) potwierdza **zero nowelizacji po tekście jednolitym**.
+
 Aktualne stawki po wejściu w życie zmiany z 14.03.2023:
 
 | Kara | Opłata |
@@ -54,8 +72,8 @@ Aktualne stawki po wejściu w życie zmiany z 14.03.2023:
 | do 1 roku | 180 zł |
 | do 2 lat | 300 zł |
 | do 5 lat | 400 zł |
-| do 15 lat | 600 zł |
-| powyżej 15 lat | 1000 zł |
+| do 15 lat | 600 zł (art. 2 ust. 1 pkt 6, brzmienie z odnośnika 3) |
+| powyżej 15 lat | 1000 zł (art. 2 ust. 1 pkt 7, dodany tą samą nowelizacją) |
 
 Art. 2 ust. 2 odsyła odpowiednio do progów pkt 1–4 przy karze ograniczenia
 wolności. Przed użyciem sprawdź aktualny tekst i kwalifikację kary.
@@ -163,7 +181,12 @@ do wyliczenia opłaty karnej.
 - KPK / środek odwoławczy → właściwy moduł KPK w DR-03;
 - wykonanie kary → mod-KKW-kodeks-karny-wykonawczy.md;
 - wykroczenia → mod-KW-KPW-framework-szczegolowy.md;
-- koszty cywilne → DR-12 / mod-KSCU-koszty-sadowe-i-pomoc-prawna.md.
+- koszty cywilne → DR-12 / mod-KSCU-koszty-sadowe-i-pomoc-prawna.md;
+- ⛔ **tabela kanoniczna kwot i kolejność sięgania po nie → `shared/TABELE-OPLAT.md`**
+  (sekcja 5 jest wyciągiem z tego modułu; sekcja 7 prowadzi rejestr tabel
+  satelickich). ⛔ Opłata **kancelaryjna 6 zł za stronę** z art. 19 ust. 1 tej
+  ustawy bywa mylona z cywilną opłatą kancelaryjną, która wynosi **20 zł za każde
+  rozpoczęte 10 stron** (art. 77 ust. 1 KSCU) — to dwa różne akty.
 
 ## 12. Quality gate
 

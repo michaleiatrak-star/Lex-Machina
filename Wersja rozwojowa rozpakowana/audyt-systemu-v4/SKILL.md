@@ -1,7 +1,7 @@
 ---
 name: audyt-systemu-v4
 description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych skilli: zależności, wersje, mapy Dz.U., treść merytoryczna, propagacja zmian, deduplikacja i bramki jakości."
-version: "6.77"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
+version: "6.78"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
                   # parsuje jako float 6.1 — czyli numer NIŻSZY niż 6.9, co cicho
                   # odwraca porządek wersji. Wykryte przy walidacji 2026-08-20z.
                   # Każda kolejna wersja z dwucyfrowym minor — też w cudzysłowie.
@@ -1327,7 +1327,7 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
 
 ---
 
-*Wersja: 6.77 | Ostatnia aktualizacja: 2026-09-10x (O-11 — POWIĄZANIE tabeli opłat z systemem. Dotąd `TABELE-OPLAT` znały tylko dwa moduły; teraz: `required_modules` routera, warstwa odroczona PROFIL-LEKKI z wyzwalaczem „zamierzasz podać kwotę", nowa pozycja **KWOTA-GATE** w SELF-CHECK (trzy pytania przy każdej kwocie) oraz cztery dalsze skille — dr-12 (kanoniczny moduł KSCU), pisma-proste-v2, pisma-procesowe-v3, analiza-sadowa-v6. Poprzednio: 2026-09-10w)*
+*Wersja: 6.78 | Ostatnia aktualizacja: 2026-09-12 (O-11 — pomiar rodziny „opłaty sądowe": 4 tabele satelickie naprawione, TABELE-OPLAT 1.5 z rozwodem, pracą, sprawami karnymi, wpisem WSA, zwrotem opłaty z art. 79 i wyłączeniem zwolnień z art. 104a; nowy rejestr tabel satelickich. Poprzednio: 2026-09-10x (O-11 — POWIĄZANIE tabeli opłat z systemem. Dotąd `TABELE-OPLAT` znały tylko dwa moduły; teraz: `required_modules` routera, warstwa odroczona PROFIL-LEKKI z wyzwalaczem „zamierzasz podać kwotę", nowa pozycja **KWOTA-GATE** w SELF-CHECK (trzy pytania przy każdej kwocie) oraz cztery dalsze skille — dr-12 (kanoniczny moduł KSCU), pisma-proste-v2, pisma-procesowe-v3, analiza-sadowa-v6. Poprzednio: 2026-09-10w)*
 
 *(Stopka podawała „5.0 | 2026-07-04" przy `version: 6.8` w YAML — rozjazd
 9 wersji, naprawiony 2026-08-20y. **Stopkę aktualizuj razem z polem `version`**;

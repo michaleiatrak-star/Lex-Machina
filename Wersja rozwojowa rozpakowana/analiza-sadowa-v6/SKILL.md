@@ -1,6 +1,6 @@
 ---
 name: analiza-sadowa-v6
-version: "6.6"
+version: "6.7"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_interactive_ui"

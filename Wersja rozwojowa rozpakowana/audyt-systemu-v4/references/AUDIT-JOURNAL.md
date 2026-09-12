@@ -63548,3 +63548,177 @@ jednolitego i jednocześnie nieobowiązującą.
 Wersje: `prawny-router-v3` 3.47 → 3.48, `dr-12` 4.14 → 4.15,
 `pisma-proste-v2` 2.11 → 2.12, `pisma-procesowe-v3` 5.20 → 5.21,
 `analiza-sadowa-v6` 6.5 → 6.6, `audyt-systemu-v4` 6.76 → 6.77.
+
+
+---
+
+## AUDYT-2026-09-12 — opłaty: centralizacja domknięta, cztery tabele satelickie naprawione (O-11)
+
+**Tryb:** TREŚĆ (FAZA 3E na żądanie) + FAZA 7A/7C. Zakres wskazany przez
+użytkownika: czy kwestia opłat jest scentralizowana w `shared`, czy wszystkie
+tabele mają podstawy prawne, następnie rozwód / cywilne / pracownicze / karne
+oraz zwolnienia i wyjątki. Osobno wskazane do sprawdzenia: `analiza-sadowa-v6`,
+`analizator-dowodow-v3`, `pisma-procesowe-v3`.
+
+### 1. STATUS OGÓLNY
+
+Centralizacja była **częściowa i o tym nie wiedziała**. `shared/TABELE-OPLAT.md`
+1.3 obejmował art. 13 i 22 KSCU, alimenty, katalog zwolnień art. 94–103 i § 2/§ 3
+taks. Sekcja 5 deklarowała, że nie obejmuje spraw karnych, administracyjnych,
+notarialnych i komorniczych. Równolegle w systemie żyły **cztery tabele
+satelickie** z własnymi kwotami, o których plik kanoniczny nie wiedział i których
+nigdy z nim nie porównano: `pisma-proste-v2/references/M6-oplaty.md` (21 wierszy
+kwotowych), `analiza-sadowa-v6/references/koszty-terminy.md` (20),
+`pisma-procesowe-v3/modules/MOD-OPLATY.md` (18), tabela w
+`pisma-proste-v2/SKILL.md` (13).
+
+Reprodukcja pomiaru:
+`grep -rlE '^\|.*[0-9][0-9 ]*(zł|PLN)' --include="*.md" <root>` z odfiltrowaniem
+dzienników i map.
+
+### 2. NAPRAWY WYKONANE (CRIT-TREŚĆ)
+
+**2.1 Podstawa fałszywa powtórzona w trzech plikach — „art. 27 pkt 1–6 KSCU"
+jako źródło progów WPS.** ✅ [VER] RZĄD 1 2026-09-12, odczyt treści
+`Dz.U. 2025 poz. 1228` (`api.sejm.gov.pl/eli/acts/DU/2025/1228/text.pdf`):
+art. 27 ustanawia **opłatę stałą 200 zł** od enumerowanych pozwów i **nie
+zawiera progów wartościowych**. Progi to art. 13 ust. 1 pkt 1–7. Dodatkowo dwa
+progi były przesunięte o wiersz (10–15 tys. podawano jako 500 zł zamiast 750 zł;
+15–20 tys. jako 750 zł zamiast 1000 zł). Wystąpienia: `M6-oplaty.md`,
+`pisma-proste-v2/SKILL.md`, `pisma-procesowe-v3/modules/MOD-OPLATY.md`.
+
+⚠️ **Wzorzec do zapamiętania:** odesłanie było **formalnie poprawne** — istniejący
+artykuł, istniejące punkty, prawidłowa składnia. Żadna kontrola składniowa ani
+metadanowa go nie wykrywa. Wykrywa dopiero odczyt treści. To jest dokładnie
+przedmiot flagi O-11.
+
+**2.2 Kwoty błędne** (wszystkie z odczytu treści):
+- skarga na czynności komornika: 100 zł → **50 zł** (art. 25 ust. 1 KSCU)
+- opłata kancelaryjna cywilna: 6 zł/stronę → **20 zł za każde rozpoczęte
+  10 stron** (art. 77 ust. 1 KSCU). ⚠️ Źródło pomyłki zidentyfikowane: **6 zł za
+  stronę to opłata KARNA** z art. 19 ust. 1 ustawy z 23.06.1973.
+- stawka pełnomocnika w sprawach pracowniczych: 180 zł → **360 zł**
+  (§ 9 ust. 1 pkt 1 obu taks); „apelacja 120 zł / kasacja 240 zł" to **podłogi
+  kwotowe** z § 10, nie stawki
+- apelacja karna: 420 zł → **840 zł** przed SO jako II instancją, **1200 zł**
+  przed SA (§ 11 ust. 2 pkt 4–5). ⛔ § 10 ust. 1 (procenty instancyjne) **nie ma
+  zastosowania** do spraw z § 11
+- tabela § 2 w `analiza-sadowa-v6` gubiła próg **5 000 000 zł** i stawkę
+  **25 000 zł**
+
+**2.3 Podstawa niewłaściwa:** wniosek o zabezpieczenie 100 zł opisany jako
+art. 69 → **art. 68 pkt 1 KSCU**; art. 69 ust. 1 to osobna konstrukcja ułamkowa
+(¼ opłaty od pozwu) dla roszczeń pieniężnych przed wszczęciem. Także:
+„art. 19 § 2b" (jednostka nie istnieje) → art. 19 ust. 2 pkt 2; „art. 19 § 3"
+przy zarzutach → **art. 19 ust. 4**; „apelacja karna 0 zł, art. 620 KPK" —
+art. 620 KPK dotyczy **wykładania wydatków przez Skarb Państwa**, nie opłaty.
+
+**2.4 Normy nieistniejące — sprawdzone w treści i nieznalezione:**
+- „sprawy gospodarcze: 5 % WPS, max 20 000 zł, art. 13 ust. 1a KSCU" —
+  **jednostka art. 13 ust. 1a nie istnieje**, przepisu o takim capie brak
+- „sprawy pracownicze: 5 % WPS, nie mniej niż 30 zł i nie więcej niż 1000 zł"
+- wpis WSA jako ryczałt „200 / 500 / 1000 / 2000 zł" — realnie **4 % / 3 % / 2 %
+  / 1 %** z podłogami 100/400/1500/2000 zł i capem 100 000 zł (§ 1 rozp. RM,
+  t.j. `Dz.U. 2021 poz. 535`); wpis stały zależy od **rodzaju zaskarżonego aktu**
+  (§ 2 ust. 1), nie od wartości. Wiersz nie miał w ogóle podanej podstawy prawnej.
+
+**2.5 Błąd materialny, nie cytacyjny:** „pozew pracowniczy przy WPS ponad
+50 000 zł — 5 % nadwyżki, art. 35 § 1 KSCU". Zdanie drugie art. 35 ust. 1 mówi
+o opłacie **od apelacji**. Pracownik wnoszący pozew jest zwolniony z art. 96
+ust. 1 pkt 4 **niezależnie od WPS**. Ten sam błąd w `MOD-SZABLONY.md`
+(„zwolnienie z opłaty do WPS 50 000 zł") i w `MP10-koszty.md` / `ALERT-F5`
+(zwolnienie pracownika przypisane do art. 35 zamiast art. 96 ust. 1 pkt 4).
+
+**2.6 Usterka strukturalna:** w `pisma-proste-v2/SKILL.md` wiersz „doręczenie
+przez komornika 60 zł | Rozporządzenie MS" — bez identyfikacji aktu — był
+**sklejony z następnym wierszem dosłownie zapisanym escape'em nowej linii**
+(backslash + n w treści), przez co tabela rozpadała się przy renderowaniu. Ta
+sama klasa co F-147 i F-159, tym razem w korpusie, nie we frontmatterze.
+
+**2.7 CRIT poza zakresem opłat, wykryty przy okazji — termin do zaskarżenia
+nakazu zapłaty.** `pisma-procesowe-v3` podawał **7 dni**,
+`analiza-sadowa-v6` — **14 dni**, oba z odesłaniem do **art. 493 § 1 KPC**.
+Odczyt treści KPC (`Dz.U. 2026 poz. 468`) wykazał, że **art. 493 § 1 nie zawiera
+żadnego terminu** — mówi wyłącznie o dopuszczalności zarzutów. Termin ustanawia
+**art. 480² § 2 KPC** i jest różnicowany: **2 tygodnie** (nakaz upominawczy,
+doręczenie w kraju — pkt 1), **miesiąc** (upominawczy, doręczenie poza krajem na
+terytorium UE — pkt 2), **miesiąc** (nakaz w postępowaniu **nakazowym**,
+doręczenie na terytorium UE, a więc także w Polsce — pkt 3), **3 miesiące**
+(doręczenie poza UE — pkt 4). Obie wartości były więc błędne, a jedna z nich
+zaniżała termin **czterokrotnie**. Poprawione też „art. 328¹ KPC" →
+art. 328 § 1 KPC — **ta sama usterka była naprawiana w `analizator-dowodow-v3`
+wpisem 5.16.2 (2026-08-04) i nie została wtedy spropagowana**.
+
+### 3. UZUPEŁNIENIA MERYTORYCZNE (ciąg dalszy O-11)
+
+`shared/TABELE-OPLAT.md` 1.3 → **1.5** (410 → 986 linii), wszystko z odczytu
+treści, każda pozycja z jednostką redakcyjną:
+- **1a** opłaty cywilne ogólne: art. 13a–13f (w tym **art. 13e** — obniżka o 2/3,
+  max 400 zł za udział w mediacji przed wytoczeniem powództwa, przepis
+  systematycznie pomijany), art. 14–15, 18–20 (z **konsumenckim capem 750 zł**
+  przy zarzutach, art. 19 ust. 4 zd. 2 — pomijanym w każdej tabeli satelickiej),
+  25–25b, 68–71, 77–78
+- **1b** rozwód i sprawy rodzinne: art. 26 ust. 1 pkt 1 (600 zł), **art. 26
+  ust. 2** — opłata powstająca dopiero w wyroku przy alimentach na rzecz
+  małżonka, eksmisji albo podziale majątku; art. 27, 37, 38
+- **1c** praca i ubezpieczenia: art. 35, 36, art. 96 ust. 1 pkt 4/8/14
+- **2c** **zwrot opłaty — art. 79 KSCU**: cała / ¾ / połowa; ⛔ rozwód lub
+  separacja **na zgodny wniosek bez orzekania o winie** → zwrot **połowy**
+  (ust. 1 pkt 3 lit. b, bez potrącenia opłaty minimalnej z ust. 3); cofnięcie
+  pozwu wskutek **pojednania** w I instancji → zwrot **całości** (ust. 2)
+- **2d** dalsze zwolnienia: art. 104 (organizacje), 105–107 (tryb),
+  **art. 106 — prekluzja wieczystoksięgowa** (zwolnienie wyłącznie **przed**
+  złożeniem wniosku o wpis; 3 miesiące pod rygorem upadku), art. 107 (zakaz
+  ponowienia)
+- ⛔⛔ **art. 104a — wyłączenie wyłączenia:** w **EPU** i w trybie **S24** nie
+  stosuje się art. 96 ust. 1 pkt 10, **art. 100–103**, art. 104 ust. 2 i art. 105,
+  czyli **nie ma zwolnienia od kosztów na wniosek**. Rada „proszę złożyć wniosek
+  o zwolnienie" jest tam sprzeczna z ustawą. Żaden plik w systemie tego nie miał.
+- **2e** oś ryzyka kosztowego z **KPC**: art. 98, 100, 101, **102 (zasada
+  słuszności)**, 103, 105–107, 520. ⛔ Odnotowana pułapka nazewnicza:
+  **art. 102 KPC to nie art. 102 KSCU** — zbieżność numeracji dwóch ustaw przy
+  tej samej materii kosztowej.
+- **3a** § 9, § 10, § 11 i § 17 obu taks; brzmienie **porównane między aktami,
+  nie założone** (identyczne)
+- **5** opłaty karne — ustawa z 23.06.1973, t.j. `Dz.U. 2023 poz. 123`,
+  art. 1–21, z **drugą pułapką dwóch brzmień obok siebie**: art. 2 ust. 1 pkt 6,
+  wariant wygasły („do 15 lat **albo 25 lat**", odnośnik 2) obok obowiązującego
+  od 14.03.2023 (odnośnik 3, wraz z dodanym pkt 7 „powyżej 15 lat — 1000 zł").
+  Wykaz aktów zmieniających akt bazowy `DU/1973/152` potwierdza **zero
+  nowelizacji po tekście jednolitym**.
+- **6** wpis sądowoadministracyjny — rozp. RM, t.j. `Dz.U. 2021 poz. 535`
+- **7** **REJESTR TABEL SATELICKICH** — nowa sekcja; każdy plik w systemie
+  trzymający własne kwoty, z rolą i statusem. Powstała dlatego, że dotychczasowa
+  centralizacja nie miała żadnego mechanizmu widzenia własnych kopii.
+
+### 4. WERYFIKACJA Dz.U.
+
+Bez zmian w mapie. Wszystkie akty potwierdzone jako obowiązujące w RZĘDZIE 1
+(ELI) 2026-09-12: KSCU `2025/1228`, KPC `2026/468`, ustawa o opłatach w sprawach
+karnych `2023/123`, taksa adwokacka `2026/215`, radcowska `2026/118`, wpis WSA
+`2021/535`. **FAZA 7B: mapa bez zmian.**
+
+### 5. WNIOSKI
+
+⛔ **Pomiar dla O-11 wreszcie istnieje.** Flaga mówiła „nie otwierać jako test do
+napisania bez wcześniejszego pomiaru, ile takich wartości korpus w ogóle
+zawiera". Ta sesja dała pomiar dla jednej rodziny wartości: **cztery pliki, ~72
+wiersze kwotowe, z tego 6 kwot błędnych, 4 podstawy niewłaściwe, 3 normy
+nieistniejące i 1 podstawa fałszywa powtórzona trzykrotnie.** Trafność tabel
+satelickich w tej próbce: **poniżej 80 %**.
+
+⚠️ **Drugi wniosek, mocniejszy:** wszystkie te pozycje **przechodziły** przez
+T1–T22. Zestaw regresyjny pilnuje rejestrów, wersji, map i sum — twierdzenie
+„skarga na czynności komornika kosztuje 100 zł" leży poza jego zasięgiem. To jest
+dokładnie treść obserwacji O-8, tu potwierdzona na drugim materiale.
+
+⚠️ **Trzeci wniosek — propagacja.** Naprawa „art. 328¹ KPC" z 2026-08-04 nie
+została spropagowana; ta sama usterka przeżyła w innym skillu **5 tygodni**.
+Przy każdej naprawie cytatu uruchamiać `MOD-PROPAGACJA-NOWELIZACJI.md`, również
+gdy naprawa nie wynika z nowelizacji, tylko z błędu redakcyjnego.
+
+**Wersje:** `shared` 3.42 → 3.44, `pisma-proste-v2` 2.12 → 2.13,
+`pisma-procesowe-v3` 5.21 → 5.22, `analiza-sadowa-v6` 6.6 → 6.7,
+`analizator-dowodow-v3` 5.16.5 → 5.16.6,
+`dr-03-prawo-karne-wykroczenia-egzekucja` 3.35 → 3.36,
+`audyt-systemu-v4` 6.77 → 6.78.

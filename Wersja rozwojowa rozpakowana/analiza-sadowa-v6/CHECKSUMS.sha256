@@ -1,9 +1,9 @@
 edfb5f1b223f65c1137167bcbb9a19d4097273dd9a8a90f7ff03b55d7143dcd6  ./PORTABILITY-MANIFEST.md
-cd53233287c97eb13c64775c4fbeeaec02859cc82d808b1de8aecc5cb4054f71  ./SKILL.md
+ba77272360e77d057ec441204952b68901b0eeaf1209388e65adbc08f65a5e79  ./SKILL.md
 6cd157d80e361a91cedd7ae637ff98224e7f763f8b08b244bc02e47f078a21c7  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 58899a5db1c155293520a27e129f201853c41fc66550304e580a2c3cdd392b8d  ./references/BLUEPRINT-SCHEMA.md
-c72f3f4232b04e499a806691d3258a558fe9ca06a225bb755a21f0b7fdb65f3d  ./references/CHANGELOG.md
+8d666cd5ae181ba0aed942705656600c74f623acdfd6993bad4f59019a60d59d  ./references/CHANGELOG.md
 4b7597c688d7cb0f3247e97e1fdf145bbf76cb143b175dbf6642bf0253500182  ./references/MOD-A.md
 99362af6929387646fe86c10d3461f2742b656ca053a9c2e11c827fb3101ce6e  ./references/MOD-B.md
 f62382b224b4c5bfb9b859bff8709e8427676b027ef6a31d4b9d710d36ff3af0  ./references/MOD-C.md
@@ -18,6 +18,6 @@ b8ce91ffef6f8df24dee721872ead86b0c52487d5c6441345a59f710f55b5cac  ./references/W
 decd8d01eda868c67ee327fd168c454f6d06c3933094939a28bd5ab812adab6c  ./references/engines/contradiction-case-analysis-v10.md
 68c499f2dc40c48a701d92b1cf50c1c594a6c705c663508a40dc04c0fa533ff8  ./references/engines/file-analysis-staged-engine.md
 ac4c7d659dc5ffa7d07dae6db3ff2a935c7c6b9ef7d3c124525b396579cb5660  ./references/filtry-analityczne.md
-005efc5468987a29fe4d827ea5f1965e44c1d001660a757abd09f29a357f7680  ./references/koszty-terminy.md
+d5c16416d3b26def47c1b31b2250d766fed1a9dfd922f3473369cab497cdf17f  ./references/koszty-terminy.md
 eb286889144187f2d15c3120a989d508b86453d90ab573353aad9b4b81a64db5  ./references/moduly-spec.md
 07ffe9944c4f49e90d5199e68886c506d50b062fdf5b38694ec203ba55a2d5b4  ./references/orzecznictwo.md

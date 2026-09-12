@@ -75,11 +75,16 @@
 > krotności progu, więc przybliżenie propagowało się na wynik.
 > ⚠️ **Następny krok:** to NIE jest kolejny test tej samej rodziny. Weryfikacja
 > wymaga **odczytu treści aktu** i porównania z liczbą w zdaniu — zadanie innego
-> rzędu niż odczyt metadanych. Rozważyć zawężenie do wartości powtarzalnych
-> (minimalne wynagrodzenie, odsetki ustawowe, progi opłat), które i tak
-> aktualizują się cyklicznie.
-> ⛔ Nie otwierać jako „test do napisania" bez wcześniejszego pomiaru, ile takich
-> wartości korpus w ogóle zawiera.
+> rzędu niż odczyt metadanych.
+> ✅ **Pomiar dla rodziny „opłaty sądowe" WYKONANY 2026-09-12** (AUDYT-2026-09-12):
+> 4 pliki satelickie, ~72 wiersze kwotowe, trafność poniżej 80 % — 6 kwot
+> błędnych, 4 podstawy niewłaściwe, 3 normy nieistniejące, 1 podstawa fałszywa
+> powtórzona w 3 plikach. Wszystkie naprawione; rejestr tabel satelickich
+> założony w `shared/TABELE-OPLAT.md` sekcja 7.
+> ⛔ **ZOSTAJE:** (a) ten sam pomiar dla pozostałych rodzin wartości — terminy,
+> progi, odsetki, stawki ZUS/podatkowe; (b) decyzja, czy rejestr tabel
+> satelickich da się egzekwować testem (kandydat: wiersz kwotowy w tabeli bez
+> kolumny podstawy = WARN), czy pozostaje kontrolą ręczną.
 
 > **O-8 ODNOTOWANA BEZ DZIAŁANIA (2026-09-10b) — zestaw regresyjny nie sprawdza
 > przesłanek faktycznych.** F-179 (profil LEKKI uzasadniony liczbą, która nie

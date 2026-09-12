@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.42"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.44"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -50,12 +50,19 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.42 (2026-09-10w, O-11): TABELE-OPLAT 1.3 — PEŁNY KATALOG
-  ZWOLNIEŃ z odczytu treści KSCU art. 94–103. Poprzednio plik wymieniał tylko
-  zwolnienie alimentacyjne (art. 96 ust. 1 pkt 2), bo powstał przy pracy nad
-  alimentami. Teraz: 18 kategorii podmiotowych, zwolnienia przedmiotowe
-  z art. 95, Skarb Państwa i zwolnienie na wniosek. Do reguły kolejności
-  dopisany KROK 0: czy strona w ogóle płaci.
+  Wersja bieżąca: 3.44 (2026-09-12b, O-11 c.d.): TABELE-OPLAT 1.5 — zwrot opłaty
+  (art. 79 KSCU), dalsze zwolnienia i ich wyłączenia (art. 104-107), wyłączenie
+  zwolnień na wniosek w EPU i S24 (art. 104a) oraz oś ryzyka kosztowego z KPC
+  (art. 98-107, 520; art. 102 KPC to NIE art. 102 KSCU).
+  3.43: TABELE-OPLAT 1.4 — domknięcie
+  centralizacji opłat. Dopisane z odczytu treści: rejestr opłat cywilnych
+  ogólnych (art. 14-25b, 68-78 KSCU), rozwód i sprawy rodzinne (art. 26, 27,
+  37, 38), prawo pracy i ubezpieczenia (art. 35, 36), opłaty karne (ustawa
+  z 23.06.1973, Dz.U. 2023 poz. 123) i wpis sadowoadministracyjny
+  (Dz.U. 2021 poz. 535). Nowa sekcja 7: rejestr tabel satelickich.
+  Obalone w tresci aktu: "art. 27 pkt 1-6 KSCU" jako podstawa progow WPS,
+  cap 20 000 zl w sprawach gospodarczych, oplata pracownicza "5% max 1000 zl",
+  wpis WSA 200/500/1000/2000, stawka pracownicza 180 zl, apelacja karna 420 zl.
   Pełna historia wszystkich wersji: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -86,7 +93,7 @@ Nie jest samodzielnym skillem — pełni rolę biblioteki referencji.
 | Plik | Rola |
 |------|------|
 | `UNIVERSAL-RUNTIME-ADAPTER.md` | Wspólny kontrakt runtime ChatGPT/Claude/Codex: zasoby, narzędzia, prywatność, fallbacki |
-| `TABELE-OPLAT.md` | ⛔ KOLEJNOŚĆ SIĘGANIA PO KWOTY: tabela ustanawiająca → baza katalogująca → RZĄD 2A/2B. Zweryfikowane tabele KSCU (art. 13, 22, 96 ust. 1 pkt 2), taksy adwokacka i radcowska, minimalne wynagrodzenie. ⛔ Zawiera pułapkę art. 13 ust. 2: cap opłaty stosunkowej to **100 000 zł** od 23.09.2025, nie 200 000 zł. Wczytać przed pierwszą kwotą. |
+| `TABELE-OPLAT.md` | ⛔ KOLEJNOŚĆ SIĘGANIA PO KWOTY: tabela ustanawiająca → baza katalogująca → RZĄD 2A/2B. Zweryfikowane odczytem treści: KSCU (art. 13–13f, 14–25b, 26, 27, 35, 36, 37, 38, 68–78, 94–103), ustawa o opłatach w sprawach karnych (`Dz.U. 2023 poz. 123`), wpis sądowoadministracyjny (`Dz.U. 2021 poz. 535`), taksy adwokacka i radcowska (§ 2, 3, 9, 10, 11, 17), minimalne wynagrodzenie. ⛔ Dwie pułapki dwóch brzmień obok siebie: art. 13 ust. 2 KSCU (cap **100 000 zł** od 23.09.2025, nie 200 000 zł) i art. 2 ust. 1 pkt 6 ustawy o opłatach karnych (brzmienie od 14.03.2023). ⛔ Sekcja 7 to rejestr tabel satelickich — żadna z nich nie jest źródłem kwoty. Wczytać przed pierwszą kwotą. |
 | `PRAWO-HARDGATE.md` | ⛔ Globalny zakaz cytowania prawa/orzeczeń z pamięci — RDZEŃ, wczytaj przed każdym przepisem (zasada absolutna, PERMANENT GATE, hierarchia statusów, ŹRÓDŁO-0, KROK 2B/2C). Podzielony 2026-08-23h (F-111: 967 → 501 l.) i 2026-09-10b (F-180: 704 → 510 l., gałęzie warunkowe wydzielone niżej). |
 | `PRAWO-HARDGATE-BLOKADA.md` | ⛔ Gałąź niedostępnego źródła RZĘDU 1 — BRAMKA ANTY-FASADOWA + KOTWICA URZĘDOWA. **Wyzwalacz:** B-1/B-2 zwrócił blokadę i kanał kodu też zawiódł. Bez tego odczytu znacznik 🟨 i ⚠️ jest nieważny. |
 | `PRAWO-HARDGATE-AKT-MIEJSCOWY.md` | Ścieżka B-L. **Wyzwalacz:** przedmiotem sprawy jest akt prawa miejscowego. Aktów tych NIE MA w ELI Kancelarii Sejmu — weryfikacja tam zwraca fałszywy negatyw. |
