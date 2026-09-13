@@ -1,6 +1,6 @@
 ---
 name: orzeczenia-sadowe-v2
-version: "2.11"
+version: "2.14"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_document_and_interactive_ui"
@@ -242,6 +242,12 @@ mają status Tier 1 — potwierdzenie w portalu lokalnym danego sądu jest
 równoważne potwierdzeniu w portalu centralnym. Szczegółowy wzorzec URL,
 lista portali głównych sądów apelacyjnych/okręgowych i procedura użycia:
 patrz `references/PORTALE-LOKALNE.md` oraz Faza 1-L.
+⛔ **Kanał kodu dla sieci lokalnej jest zamknięty (zmierzone T25, 2026-09-13c).**
+`orzeczenia.warszawa.so.gov.pl` i pozostałe hosty `orzeczenia.*.so/sa/sr.gov.pl`
+są POZA listą dozwolonych domen (`host_not_allowed`) — do portali lokalnych
+sięgaj przez `web_search`/`web_fetch`, nie przez `curl`. Portal centralny
+`orzeczenia.ms.gov.pl` działa w obu kanałach (Faza 1-S).
+
 ⚠️ Publikacja w sieci SA/SO/SR NIE jest wyczerpująca — sądy publikują tylko
 orzeczenia z uzasadnieniem wybrane przez zespół sędziów; brak orzeczenia
 w portalu ≠ jego nieistnienie. Nie formułuj wniosku o braku linii orzeczniczej
@@ -295,9 +301,29 @@ Tier 1 (krajowe PL): sn.pl · orzeczenia.ms.gov.pl + sieć lokalna SA/SO/SR (Zas
                         referencyjne, nie źródło prawa (art. 87 Konstytucji), ale
                         Tier 1 dla praktyki DR-07
 Tier 2 (UE/EU):      curia.europa.eu · hudoc.echr.coe.int
-Tier 3 (backup):     saos.org.pl (wyłącznie pomocniczo)
+Tier 3 (backup):     saos.org.pl (wyłącznie pomocniczo jako źródło WERYFIKACJI
+                      przy powołaniu w piśmie; jako źródło TREŚCI ma RZĄD 2A
+                      wg shared/HIERARCHIA-ZRODEL.md — to nie jest sprzeczność,
+                      patrz nota niżej)
 Tier 4 (zagraniczne): patrz sekcja „Jurysdykcje zagraniczne"
 ```
+
+⛔ **Nota o dwóch skalach (dodane 2026-09-13, F-185).** „Tier" w tym skillu mierzy
+**dopuszczalność jako źródła potwierdzenia sygnatury w piśmie procesowym**;
+„RZĄD" w `shared/HIERARCHIA-ZRODEL.md` mierzy **moc źródła co do treści**.
+SAOS = Tier 3 + RZĄD 2A jednocześnie i poprawnie. Rozbieżność była czytana jako
+sprzeczność między plikami i przez to blokowała użycie sprawnego API.
+
+⛔⛔ **STAN KANAŁÓW TIER 1 — zmierzony 2026-09-13, wymaga odtworzenia pomiarem.**
+Deklarowana hierarchia nie jest dziś w pełni realizowalna:
+- `orzeczenia.ms.gov.pl` ✅ — dodatkowo GET po sygnaturze, patrz Faza 1-S;
+- `sn.pl` ✅ — API JSON `snproxy`, ale **host bez `www.` i UA przeglądarkowy**
+  (`shared/DOSTEP-MASZYNOWY-API.md` §1, wyjątek);
+- `orzeczenia.nsa.gov.pl` (CBOSA) ⛔ — nieosiągalna w OBU kanałach; **cały pion
+  sądowoadministracyjny bez binarnej kontroli sygnatur**, status wymuszony
+  OUT_OF_SCOPE;
+- `trybunal.gov.pl` / `ipo` ⛔ oraz `orzeczenia.uzp.gov.pl` ⛔ — osiągalne, ale
+  bez działającego filtra po sygnaturze.
 Orzeczenia TSUE i ETPC mają status równoważny z Tier 1 dla materii objętej prawem UE
 lub Konwencją. Kategoria 5 (UE/TSUE) obejmuje teraz również orzeczenia ETPC.
 CBOSA jest bazą jednolitą — nie ma odrębnych portali per WSA; wystarczy jedno
@@ -476,6 +502,46 @@ Dla Tier 4:
 
 ---
 
+## Faza 1-S — Kontrola istnienia sygnatury (V-SYG-0)
+
+> Dodane 2026-09-13 (AUDYT-2026-09-13, F-182). Wykonuje się **PRZED Fazą 1-T
+> i przed każdym powołaniem sygnatury**, także tej podanej przez użytkownika.
+
+```
+view shared/SYGNATURY.md   → wykonaj V-SYG-0.1 … V-SYG-0.4 w całości
+view shared/DOSTEP-MASZYNOWY-API.md §3   → kształt wywołania danego kanału
+```
+
+Skrót operacyjny (pełna procedura i tabela ROUTING BAZ — w `shared/SYGNATURY.md`):
+
+1. **Normalizuj** — pojedyncze spacje, bez kropek w repertorium. Nie uzupełniaj
+   brakującej izby ani rocznika.
+2. **Routuj po repertorium** — sądy powszechne → `orzeczenia.ms.gov.pl` (GET po
+   sygnaturze); SN → `sn.pl` `snproxy`; **NSA/WSA → CBOSA martwa ⇒ kanał
+   zdegradowany V-SYG-0.5** (`web_search site:orzeczenia.nsa.gov.pl "{SYGNATURA}"`
+   + post-check tytułu); TK i KIO ⛔ bez filtra po sygnaturze; równolegle SAOS
+   `caseNumber=` jako kontrola krzyżowa, **o ile rocznik mieści się w oknie
+   pokrycia**.
+3. **Okno pokrycia** — SAOS: SUPREME do 2016-06-22, TK do 2015-12-09, KIO do
+   2018-09-06, ADMINISTRATIVE 0 rekordów, COMMON bieżący. Poza oknem →
+   **OUT_OF_SCOPE, nigdy NOT_FOUND**.
+4. **Post-check tożsamości** — porównaj sygnaturę zwróconą z pytaną. Zmierzone:
+   `I NSNc 10/24` → API SN zwraca `II NSNc 10/24`. Różnica → NOT_FOUND.
+   ≥2 sądy → AMBIGUOUS (zmierzone: `I C 100/15` → 9 trafień).
+
+5. **Zakres potwierdzenia** (K-SYG-6) — FOUND uzyskany kanałem zdegradowanym ma
+   zakres **ISTNIENIE**: wolno powołać sygnaturę, sąd, datę i URL, ⛔ **nie wolno
+   powołać tezy ani fragmentu uzasadnienia**. Znacznik `✅ [VER-ISTNIENIE]`.
+
+⛔ Dopiero status **FOUND** otwiera powołanie. NOT_FOUND i OUT_OF_SCOPE nigdy nie
+są raportowane jako „potwierdzone przez narzędzie" (K-SYG-4).
+
+⛔ **Dla NSA/WSA kanał zdegradowany NIGDY nie produkuje NOT_FOUND** — brak
+trafienia w indeksie to OUT_OF_SCOPE. Nie informuj użytkownika, że sygnatura
+sądowoadministracyjna „nie istnieje"; poinformuj, że nie dało się jej potwierdzić.
+
+---
+
 ## Faza 1-T — Wyszukiwanie pełnotekstowe po treści tezy (SAOS API + CBOSA)
 
 Uzupełnienie Fazy 1 — stosuj PRZED klasycznym wyszukiwaniem frazowym, gdy celem jest
@@ -489,13 +555,24 @@ i pozwalają przeszukać go wprost.
 
 Punkt wejścia: `https://www.saos.org.pl/api/search/judgments`
 
+⛔⛔ **NAJPIERW Faza 1-S (kontrola istnienia), potem 1-T (wyszukiwanie treści).**
+Te dwie operacje używają RÓŻNYCH parametrów i mylenie ich jest trybem awarii:
+`all=III CZP 999/11` na fabrykacie zwraca **67 576 trafień**, `caseNumber=III CZP 999/11`
+zwraca **0**. Faza 1-T służy do znalezienia TREŚCI, nigdy do potwierdzenia BYTU
+sygnatury.
+
 Kluczowe parametry (dowolna kombinacja, doklejane jako query string):
 ```
+caseNumber=SYGNATURA     → ⭐ DOKŁADNE dopasowanie sygnatury (kontrola istnienia,
+                            nie wyszukiwanie). Wielkość liter bez znaczenia;
+                            białe znaki — istotne. Patrz Faza 1-S.
 all=FRAZA                → pełnotekstowe przeszukanie treści/tezy/uzasadnienia.
                             Obsługuje język zapytań: "fraza w cudzysłowie" (dokładna
                             kolejność słów), -słowo (wyklucza), A OR B.
 judgmentDateFrom / judgmentDateTo   → filtr dat, format yyyy-MM-dd
-courtType                → COMMON | SUPREME | ADMINISTRATIVE
+courtType                → COMMON | SUPREME | ADMINISTRATIVE | CONSTITUTIONAL_TRIBUNAL
+                            | NATIONAL_APPEAL_CHAMBER
+                            ⛔ okno pokrycia jest NIERÓWNE — patrz Faza 1-S
 ccCourtType               → APPEAL | REGIONAL | DISTRICT (tylko sądy powszechne)
 ccCourtName                → nazwa konkretnego sądu
 judgmentTypes              → SENTENCE | RESOLUTION | DECISION | REGULATION | REASONS
@@ -534,6 +611,14 @@ Procedura:
    pozwolenia" → „organ nie wydał zgody na realizację inwestycji").
 4. ⚠️ CBOSA ogranicza automatyzację (captcha po serii zapytań) — ogranicz liczbę
    zapytań do niezbędnego minimum, nie iteruj bez potrzeby.
+   ⛔ **Stan 2026-09-13b: CBOSA nieosiągalna w obu kanałach** (503 w kanale kodu
+   na wszystkich ścieżkach łącznie z `/robots.txt`; `ROBOTS_DISALLOWED`
+   w `web_fetch`). Zanim orzekniesz o niedostępności w swojej turze — powtórz
+   pomiar (Reguła 12d); status z tego pliku nie zastępuje próby.
+   ➜ **Gdy pomiar potwierdzi niedostępność:** przejdź na kanał zdegradowany
+   (`shared/SYGNATURY.md`, V-SYG-0.5). Da metrykę orzeczenia bez treści —
+   do wyszukiwania TEZY (Faza 1-T) jest bezużyteczny, do kontroli istnienia
+   sygnatury (Faza 1-S) wystarczający.
 5. Każde trafienie → 1-T.3 przed powołaniem.
 ```
 

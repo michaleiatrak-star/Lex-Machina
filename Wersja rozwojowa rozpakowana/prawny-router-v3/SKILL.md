@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.48"
+version: "3.49"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -65,9 +65,14 @@ escalation:
     shared/DOSTEP-MASZYNOWY-API.md §4: KRS działa bez klucza przez
     api-krs.ms.gov.pl (odpis JSON jest ZANONIMIZOWANY względem PDF),
     a CEIDG zwraca 401 bez tokenu — to nie jest brak dostępu do rejestru"
-  - "weryfikacja rachunku kontrahenta (biała lista VAT) → ⛔ NIEOSIĄGALNA
-    maszynowo w tym środowisku (wl-api.mf.gov.pl poza listą, F-157).
-    Wykonaj ręcznie i oznacz ⚠️ [NIEWERYFIKOWANE MASZYNOWO] — nie pomijaj w ciszy"
+  - "weryfikacja rachunku kontrahenta (biała lista VAT) → ✅ OSIĄGALNA
+    maszynowo od 2026-09-13c (F-157b): wl-api.mf.gov.pl, bez klucza,
+    /api/search/nip/{NIP}?date=RRRR-MM-DD oraz /api/search/nip-bank-account/
+    {NIP}/{26_CYFR}?date=... ⛔ data = dzień transakcji, nie dzisiejszy;
+    requestId z odpowiedzi zapisz do śladu weryfikacji. Parametry:
+    shared/DOSTEP-MASZYNOWY-API.md §4. ⚠️ Poprzedni zapis 'NIEOSIĄGALNA,
+    brak zamiennika' był prawdziwy do 2026-09-04 i przestał być prawdziwy
+    bez zmiany w tym pliku — statusy osiągalności odtwarzaj testem T25"
 limitations:
   - nie zastępuje porady radcy prawnego/adwokata — patrz shared/DISCLAIMER.md (KROK 7, obowiązkowy)
   - jakość i czas odpowiedzi zależą od dostępności i jakości web_search/web_fetch
@@ -102,6 +107,10 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog:
+  - '3.49 (2026-09-13c, F-157b): biała lista VAT odblokowana — escalation
+    przepisane z NIEOSIĄGALNA na osiągalną, z parametrami wywołania i wymogiem
+    zapisu requestId. Zmiana wymuszona pomiarem T25 (52 sondy, 6 hostów
+    odblokowanych, 1 regresja: CBOSA).'
   - '3.48 (2026-09-10x, O-11): KWOTA-GATE. Nowa pozycja kontrolna w SELF-CHECK:
     przy kazdej kwocie oplaty, taksy lub wyliczenia trzy pytania - czy strona
     nie jest zwolniona (art. 94-103 KSCU), czy kwota pochodzi z TABELI

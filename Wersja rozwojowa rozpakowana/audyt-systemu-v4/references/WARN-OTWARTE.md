@@ -1,6 +1,6 @@
 # WARN-OTWARTE — rejestr żywy otwartych flag audytowych
 
-**Stan:** 2026-09-10s. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
+**Stan:** 2026-09-13c. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
 
 ## Tablica sterująca
 
@@ -8,9 +8,52 @@
 |---|---:|---|
 | Wykonalne sesją audytową | 3 | F-135 (część merytoryczna), F-167, O-11 |
 | Reaktywne | 1 | F-5 |
-| Zależne od środowiska/dewelopera | 12 | F-8, F-9, F-11, F-94, F-113, F-133, F-137, F-143, F-144, F-157, F-158(c), F-171 |
+| Zależne od środowiska/dewelopera | 15 | F-8, F-9, F-11, F-94, F-113, F-133, F-137, F-143, F-144, **F-157b**, F-158(c), F-171, **F-183a**, **F-184**, **F-185** |
+
+> **F-157b (2026-09-13c, ZAWĘŻONA) — braki resztkowe listy dozwolonych.**
+> Pomiar T25 (52 sondy) po zmianie konfiguracji: **odblokowane** —
+> `wl-api.mf.gov.pl` (biała lista VAT, zmierzona end-to-end, zapis
+> „nieosiągalna" usunięty z `DOSTEP-MASZYNOWY-API.md` §4 i z `escalation`
+> routera 3.49), `api.dane.gov.pl`, `op.europa.eu`, `www.gov.pl` (odblokowuje
+> BIP GIP — F-153), `www.pip.gov.pl`. **Pozostaje poza listą:**
+> `api.stat.gov.pl` (REGON/BIR — blokuje F-158c), `orzeczenia.*.so/sa/sr.gov.pl`
+> (sieć lokalna Zasady 5A w kanale kodu), `www.sn.pl`, `www.nsa.gov.pl`,
+> `www.orzeczenia-nsa.pl`, `szukio.pl`. ⚠️ `rdf-przegladarka.ms.gov.pl` jest już
+> na liście, ale oddaje 403 z warstwy ochronnej — to inny problem niż lista.
+> ⛔ Ruch NIE jest otwarty w całości: kontrola neutralna (`example.com`,
+> `www.wikipedia.org`) → `host_not_allowed`.
+>
+> **F-186a ZAMKNIĘTA 2026-09-13c** — ścieżka HUDOC `/app/query/results` zwraca
+> 404 (zapis z v1.0 nieprawdziwy); działa `/app/conversion/docx/html/body?
+> library=ECHR&id={itemid}` → pełny tekst. Wyszukiwanie po frazie w HUDOC
+> pozostaje nierozstrzygnięte, ale nie jako otwarta flaga — jako znany brak.
 | Odnotowane bez działania | 1 | O-8 (ograniczenie strukturalne aparatu) |
-| **Razem** | **17** | — |
+| **Razem** | **20** | — |
+
+> **F-183a (2026-09-13b, OTWARTA — ZAWĘŻONA, środowisko) — CBOSA nieosiągalna;
+> pion sądowoadministracyjny ma kontrolę JEDNOSTRONNĄ.** Host martwy na
+> wszystkich ścieżkach łącznie z `/robots.txt` (503, oba protokoły, oba UA, po
+> pauzie 65 s); `web_fetch` → `ROBOTS_DISALLOWED`. SAOS `ADMINISTRATIVE` = 0.
+> **Naprawa częściowa (AUDYT-2026-09-13b):** V-SYG-0.5 — kontrola przez indeks
+> wyszukiwarki z post-checkiem tytułu; potwierdza ISTNIENIE, zakres bez treści.
+> **Co zostaje luką:** (1) NOT_FOUND nieosiągalny — system nie orzeknie, że
+> sygnatura NSA/WSA nie istnieje; (2) zakaz powoływania tezy przy zakresie
+> ISTNIENIE; (3) zależność od pokrycia indeksu strony trzeciej, niemierzalnego
+> od wewnątrz. Warunek zamknięcia: powrót hosta albo inny kanał RZĘDU 1.
+>
+> **F-184 (2026-09-13, OTWARTA, środowisko) — TK bez kontroli po sygnaturze.**
+> `ipo.trybunal.gov.pl/ipo/Szukaj` → 200, ale wyszukiwarka to JSF/PrimeFaces
+> z `ViewState`: POST-only, `Sprawa?sygnatura=` nie jest kluczem. Do
+> przemierzenia: endpoint autouzupełniania `sygnaturaComplete`. Dziś dla TK
+> zostaje SAOS w oknie ≤ 2015-12-09, dalej ⚠️ [NIEWERYFIKOWANE].
+>
+> **F-185 (2026-09-13, OTWARTA, środowisko) — KIO: `Sign=` nie filtruje.**
+> `orzeczenia.uzp.gov.pl` `GET /Home/Search` przyjmuje pola `Sign, Phrase, Dt,
+> Fle, SCnt, Art, ThIdx`, ale zmierzone `Sign=KIO 827/18` i `Sign=KIO 99999/18`
+> zwracają tę samą stronę (57 635 / 57 637 B — różnica to echo wartości),
+> 0 odnośników do wyników. ⛔ Teza materiału wejściowego „znalazłem pole
+> sygnatury: Sign" była **znalezieniem pola, nie działającego filtra** —
+> nieprzetestowana i nieprawdziwa. Do przemierzenia: czy wyniki dociąga AJAX.
 
 > **F-180 / O-5 / O-6 ZAMKNIĘTE 2026-09-10c** — skrócenie rdzenia HARD GATE
 > o 30% przez wydzielenie gałęzi warunkowych, preflight kompletności korzenia

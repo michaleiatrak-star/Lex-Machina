@@ -1,5 +1,156 @@
 # AUDIT-JOURNAL — Dziennik Audytów Systemu Prawnego AI
 
+## AUDYT-2026-09-13c — ponowny pomiar listy dozwolonych domen po zmianie konfiguracji
+
+**Polecenie:** „ponownie sprawdź hosty, dopuściłem teraz cały ruch".
+
+**Metoda.** ⛔ Twierdzenie o zmianie konfiguracji potraktowane jako teza do
+zmierzenia, nie jako stan. Najpierw sondy kontrolne neutralne
+(`example.com`, `www.wikipedia.org`), potem instrument własny: T25
+`scripts/check_domeny_allowlist.py`, 52 sondy, pełny przebieg + grupa
+`kandydaci`.
+
+**⛔ Wynik nadrzędny: ruch NIE jest otwarty w całości.** `example.com` i
+`www.wikipedia.org` zwracają `403 x-deny-reason: host_not_allowed`. Lista
+pozostaje wyliczeniowa; dopisano do niej pojedyncze hosty. Nadal poza listą:
+`www.sn.pl`, `www.nsa.gov.pl`, `www.orzeczenia-nsa.pl`, `szukio.pl`,
+`api.stat.gov.pl`, `orzeczenia.*.so/sa/sr.gov.pl`.
+
+**T25 — 52 sondy: 6 hostów odblokowanych, 1 regresja, 0 innych zmian.**
+
+| Host | Stan | Znaczenie |
+|---|---|---|
+| `wl-api.mf.gov.pl` | ✅ 200 | **F-157b** — biała lista VAT, zmierzona end-to-end |
+| `api.dane.gov.pl` | ✅ 200 | katalog danych |
+| `op.europa.eu` | ✅ 200 | cel przekierowania z `publications.europa.eu` |
+| `www.gov.pl` | ✅ 200 | **odblokowuje BIP GIP (F-153)** |
+| `www.pip.gov.pl` | ✅ 200 | cel przekierowania z `pip.gov.pl` |
+| `rdf-przegladarka.ms.gov.pl` | ⚠️ 403 WAF | host na liście, odrzuca warstwa ochronna |
+| `orzeczenia.nsa.gov.pl` | ⛔ **REGRESJA** | 503, patrz niżej |
+
+**⛔ CBOSA: otwarcie ruchu jej nie naprawiło i nie mogło.** 5 prób w odstępach
+20 s — 503 bez zmiany. Rozróżnienie trybów awarii (nowe w §1
+`DOSTEP-MASZYNOWY-API.md`): CBOSA oddaje `remote connection failure`, podczas
+gdy `legislacja.rcl.gov.pl` i `trybunal.gov.pl` oddają `connection timeout`.
+Żaden z tych trybów to nie `host_not_allowed` — awaria jest poza listą
+dozwolonych. **F-183a bez zmian.**
+
+**Naprawy wydane (4 pełne paczki, ZASADA 7):**
+
+| Skill | Zmiana |
+|---|---|
+| `shared` | `DOSTEP-MASZYNOWY-API.md` → v1.3: §1 tabela trzech trybów odmowy + ostrzeżenie, że lista jest wyliczeniowa (prefiks `www.` to osobna pozycja); §3 sprostowanie ścieżki HUDOC (F-186a) i dopisek o regresji CBOSA; §4 blok białej listy VAT zamiast zapisu o nieosiągalności; §5 RCL z trybem awarii; §7 wskazanie T25 jako instrumentu po każdej zmianie sieci |
+| `prawny-router-v3` | → 3.49: blok `escalation` o białej liście VAT przepisany z „⛔ NIEOSIĄGALNA" na osiągalną, z parametrami i wymogiem zapisu `requestId` |
+| `orzeczenia-sadowe-v2` | → v2.14: Zasada 5A uzupełniona o zmierzony fakt, że sieć lokalna SA/SO/SR jest poza listą w kanale kodu — tam przez `web_search`/`web_fetch` |
+| `audyt-systemu-v4` | WARN-OTWARTE: F-157 zawężona do F-157b, F-186a zamknięta; ten wpis |
+
+**⛔ Wniosek metodologiczny.** Zapis „wl-api.mf.gov.pl NIEOSIĄGALNA, brak
+zamiennika" był prawdziwy 2026-09-04 i przestał być prawdziwy bez żadnej zmiany
+w korpusie — przez dziewięć dni router odsyłał do ręcznej weryfikacji rachunku,
+mając działające API. To dokładnie tryb awarii opisany przy F-186: **raz
+zapisany status żyje, aż ktoś go zmierzy.** Wniosek operacyjny: T25 po każdej
+zmianie konfiguracji sieci, a nie przy okazji audytu.
+
+## AUDYT-2026-09-13b — F-183: kanał zdegradowany dla pionu sądowoadministracyjnego
+
+**Polecenie:** „kontynuuj pracę i zajmij się F-183".
+
+**Punkt wyjścia.** Po AUDYT-2026-09-13 NSA i 16 WSA zostały bez jakiejkolwiek
+kontroli istnienia sygnatury: CBOSA martwa w obu kanałach, SAOS
+`courtType=ADMINISTRATIVE` = 0 rekordów.
+
+**Metoda.** Najpierw wyczerpanie kanału kodu (szeroki obrys hosta), potem
+poszukiwanie zamiennika, na końcu test rozstrzygalności kanału zastępczego
+**na fabrykatach** — bo kanał, który nie odróżnia fabrykatu, nie jest kontrolą.
+
+**Pomiar 1 — kanał kodu wyczerpany.** `orzeczenia.nsa.gov.pl`: 503
+`upstream connect error` na `/`, `/cbo/query`, `/cbo/search`, `/cbo/find`,
+`/doc/{ID}`, a także na `/robots.txt`; `http://` i `https://`; oba UA; po
+pauzie 65 s bez zmiany. To awaria warstwy sieciowej, nie kształtu żądania ani
+limitu tempa.
+
+**Pomiar 2 — zamienników brak.** `dane.gov.pl`: 20 zbiorów na zapytanie
+„orzeczenia sądów administracyjnych" — wyłącznie statystyki MS/ZUS/NID, żadnego
+korpusu. SAOS: `ADMINISTRATIVE` = 0, `caseNumber=I FSK 1/23` = 0,
+`caseNumber=II OSK 100/20` = 0 — pion nieobecny, nie zaś ukryty pod innym
+`courtType`.
+
+**⛔ Pomiar 3 — sprostowanie (F-187).** Zapis z materiału wejściowego
+„`www.nsa.gov.pl` = 200, więc to blokada hosta CBOSA, nie kształt żądania" jest
+**nieprawdziwy**: `nsa.gov.pl` i `www.nsa.gov.pl` zwracają 403
+`x-deny-reason: host_not_allowed` — są poza listą dozwolonych domen. Wniosek
+o lokalizacji awarii był trafny, ale oparty na nieistniejącym pomiarze. Trzecia
+tego rodzaju korekta w tej serii (po tezie o wielkości liter i o WAF-ie sn.pl).
+
+**⭐ Pomiar 4 — znalezisko.** Host jest martwy, ale **indeks wyszukiwarki nadal
+zawiera strony dokumentów CBOSA**, z metryką w tytule
+(`{SYGNATURA} - Wyrok NSA z {RRRR-MM-DD}`) i trwałym adresem `/doc/{DOCID}` —
+łącznie z orzeczeniem z 2026-02-13, więc indeks nie jest archiwalny.
+
+**⛔ Pomiar 5 — test rozstrzygalności na fabrykatach.** Oba fabrykaty dały
+**niepuste** wyniki: `"I FSK 999999/23"` → zwrócono `I FSK 919/23`;
+`"II SA/Wa 1234/22"` → zwrócono `V SA/Wa 1234/19`. Kanał oparty na liczniku
+trafień produkowałby fałszywe potwierdzenia. Rozstrzyga **wyłącznie porównanie
+sygnatury w TYTULE wyniku z pytaną** — ta sama reguła co K-SYG-2 i V-SYG-0.4,
+trzeci raz w trzecim kanale.
+
+**Naprawy wydane (3 pełne paczki, ZASADA 7):**
+
+| Skill | Plik | Zmiana |
+|---|---|---|
+| `shared` | `SYGNATURY.md` → v1.3 | nowa sekcja **V-SYG-0.5** (kanał zdegradowany: zapytanie → post-check tytułu → zakres ISTNIENIE → zakaz NOT_FOUND); nowa reguła kontraktu **K-SYG-6** (oś ZAKRES POTWIERDZENIA, znacznik `✅ [VER-ISTNIENIE]`); tabela stanu luki po naprawie |
+| `shared` | `DOSTEP-MASZYNOWY-API.md` → v1.2 | wiersz CBOSA przepisany na pełny obrys pomiaru, sprostowanie `nsa.gov.pl` (F-187), opis kanału zdegradowanego |
+| `orzeczenia-sadowe-v2` | `SKILL.md` → v2.13 | gałąź NSA/WSA w Fazie 1-S, punkt 5 o zakresie potwierdzenia, zakaz orzekania „nie istnieje" dla pionu sądowoadministracyjnego, przejście z 1-T.2 na kanał zdegradowany |
+| `audyt-systemu-v4` | `scripts/weryfikator_sygnatur.py` | gałąź CBOSA zwraca **zlecenie** `wymagane_dalsze_dzialanie` zamiast milczącego OUT_OF_SCOPE (skrypt nie ma `web_search`, więc nie wolno mu pozorować wykonania); pole `zakres_potwierdzenia`; 4 nowe asercje selftestu |
+
+**⛔ F-183 NIE zostaje zamknięta — zostaje ZAWĘŻONA do F-183a.** Kontrola jest
+jednostronna: potwierdza istnienie, nie zaprzecza istnieniu. Nie da się orzec
+NOT_FOUND, a zakres ISTNIENIE odcina powoływanie tezy — czyli w praktyce pisma
+procesowego połowę wartości orzeczenia. Zamknięcie bez reszty wymaga powrotu
+hosta albo innego kanału RZĘDU 1.
+
+**Flaga nowa:** F-187 (nieistniejący pomiar `www.nsa.gov.pl` w materiale
+wejściowym) — zamknięta sprostowaniem w tej samej turze.
+
+## AUDYT-2026-09-13 — V-SYG-0: binarna kontrola istnienia sygnatury + inwentarz kanałów orzeczniczych
+
+**Polecenie:** naprawa materiału z dwóch poprzednich tur („zajmij się tym
+i naprawy wydawaj zgodnie z regułą 7").
+
+**Tryb:** naprawa CRIT/WARN z dostawą wg ZASADY 7 (OUTPUT-COMPLETENESS).
+Router `prawny-router-v3` v3.48, PROFIL-LEKKI, kategoria [11].
+
+**Metoda.** ⛔ Materiał wejściowy potraktowany jako teza do zmierzenia, nie jako
+źródło (Reguła 25: cudzy materiał nie jest źródłem). Wszystkie statusy odtworzone
+własnym pomiarem 2026-09-13 w dwóch kanałach: `bash_tool` (`python3/requests`)
+oraz `web_search`/`web_fetch`. Pomiar **obalił dwie tezy materiału wejściowego** —
+patrz F-186.
+
+**Naprawy wydane (3 skille, 3 pełne paczki):**
+
+| Skill | Plik | Zmiana |
+|---|---|---|
+| `shared` | `SYGNATURY.md` → v1.2 | nowa sekcja V-SYG-0 (normalizacja → routing baz → okno pokrycia → post-check tożsamości), tabela ROUTING BAZ, zmierzone okno pokrycia SAOS, sprostowanie tezy o wielkości liter, rozstrzygnięcie Tier/RZĄD |
+| `shared` | `DOSTEP-MASZYNOWY-API.md` → v1.1 | §1: wyjątek `sn.pl` (UA przeglądarkowy) + rozróżnienie 403 proxy / 403 WAF; §3: API SN `snproxy`, GET po sygnaturze w `orzeczenia.ms.gov.pl`, okno pokrycia SAOS, `caseNumber=`, CBOSA martwa w obu kanałach, KIO bez filtra, TK POST-only; §7: nowy skrypt odtworzeniowy |
+| `orzeczenia-sadowe-v2` | `SKILL.md` → v2.12 | nowa Faza 1-S (kontrola istnienia przed 1-T), `caseNumber` w parametrach 1-T.1, nota o dwóch skalach Tier/RZĄD, zmierzony stan kanałów Tier 1 |
+| `audyt-systemu-v4` | `scripts/weryfikator_sygnatur.py` | NOWY — odtworzeniowa implementacja V-SYG-0 (`--okno`, `--kanaly`, `--sygnatura`, `--selftest`) |
+
+**Flagi otwarte:** F-183 (CBOSA — pion sądowoadministracyjny bez kontroli
+sygnatur), F-184 (TK — JSF/ViewState, POST-only), F-185 (KIO — `Sign=` nie
+filtruje). Wszystkie zależne od środowiska/dewelopera.
+
+**Flagi zamknięte:** F-182 (brak `caseNumber` w protokole → V-SYG-0),
+F-186 (dwie błędne diagnozy w materiale wejściowym → sprostowane w obu plikach).
+
+**⛔ Wniosek metodologiczny (F-186).** Obie obalone tezy powstały tak samo: jeden
+pomiar odczytany bez kontroli zmiennej zakłócającej. „SAOS rozróżnia wielkość
+liter" — bo ciąg testowy różnił się nie tylko wielkością liter. „sn.pl blokuje
+bota" — bo 403 pochodził z proxy wyjściowego (`x-deny-reason: host_not_allowed`
+na `www.sn.pl`), nie z serwisu. To czwarte i piąte wystąpienie klasy F-151/F-162/
+F-164: **decyzja podjęta na niezmierzonej lub niekontrolowanej tezie**, z tą
+różnicą, że tym razem kosztem był zapis błędu do korpusu, a nie tylko błąd
+w odpowiedzi.
+
 ## AUDYT-2026-09-09b — F-172: domknięcie T11, nowa generacja mapy Dz.U.
 
 **Polecenie:** kontynuacja sesji AUDYT-2026-09-09 („kontynuuj").
