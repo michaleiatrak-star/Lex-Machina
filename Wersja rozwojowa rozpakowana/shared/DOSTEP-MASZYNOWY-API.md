@@ -1,7 +1,13 @@
 # DOSTĘP MASZYNOWY DO ŹRÓDEŁ — jak wywołać API, żeby odpowiedziało
 
 > **Plik:** `shared/DOSTEP-MASZYNOWY-API.md`
-> **Wersja:** 1.3 (2026-09-13c) — ponowny pomiar listy dozwolonych domen
+> **Wersja:** 1.4 (2026-09-13d) — §1: trzeci reżim UA (SAOS i cała rodzina
+> `orzeczenia.*.gov.pl` odrzucają łańcuch przeglądarkowy) + odnotowany fałszywy
+> alarm „awaria MS"; §3: dosłowny 17-pozycyjny kontekst Tapestry, portale sądów
+> jako warstwa rozstrzygania AMBIGUOUS, zamienniki CBOSA odrzucone na
+> `robots.txt`, sprostowanie statusu `www.sn.pl`; §4: REGON/BIR — blokada
+> proceduralna (F-158c zamknięta). Flagi F-187…F-192, AUDYT-2026-09-13d.
+> **Wersja poprzednia:** 1.3 (2026-09-13c) — ponowny pomiar listy dozwolonych domen
 > (T25, 52 sondy): odblokowane 6 hostów, w tym `wl-api.mf.gov.pl` (F-157b);
 > sprostowana ścieżka HUDOC (F-186a); CBOSA potwierdzona jako regresja
 > niezależna od listy. AUDYT-2026-09-13c.
@@ -74,6 +80,35 @@ Pełny łańcuch przeglądarkowy nie jest wymagany.
 ⛔ **Skutek:** reguła §1 czytana jako globalna sama odcinała dostęp do jedynego
 dziś żywego kanału RZĘDU 1 dla orzecznictwa SN. Wyjątek jest wąski i dotyczy
 wyłącznie `sn.pl` — dla pozostałych hostów obowiązuje `curl/8.5.0`.
+
+#### Rozszerzenie pomiaru — 2026-09-13d, F-190 (12 hostów, oba reżimy)
+
+Wyjątek `sn.pl` potwierdzony niezależnie. Pomiar dokłada **drugi kierunek**:
+łańcuch przeglądarkowy nie jest tylko „zbędny", lecz **aktywnie odrzucany** przez
+dwa dalsze kanały RZĘDU 1/2A — i dotyczy to **całej rodziny** Portali Orzeczeń,
+nie samego agregatu.
+
+| Host | `curl` (neutralny) | pełny łańcuch Chrome |
+|---|---|---|
+| `www.saos.org.pl/api/search/judgments` | **200, JSON** | ⛔ **403** |
+| `orzeczenia.ms.gov.pl` | 200 | ⛔ 502 |
+| `orzeczenia.poznan.so.gov.pl` | 200 | ⛔ 502 |
+| `orzeczenia.szczecin.sa.gov.pl` | 200 | ⛔ 502 |
+| `orzeczenia.warszawa.so.gov.pl` | 200 | ⛔ 502 |
+| `api.stat.gov.pl`, `ipo.trybunal.gov.pl` | 200 | 200 (obojętny) |
+| `orzeczenia.nsa.gov.pl` (CBOSA) | 503 | 503 (martwy w obu) |
+
+⛔ **Reguła po tym pomiarze — trzy reżimy, nie dwa:** (a) domyślnie `curl/8.5.0`;
+(b) `sn.pl` — UA przeglądarkowy; (c) SAOS i **każdy** host `orzeczenia.*.gov.pl` —
+neutralny **obowiązkowo**, łańcuch przeglądarkowy je psuje. Nie ma ustawienia
+globalnego, które obsłuży (b) i (c) naraz — dobór jest per-host.
+
+⚠️ **Pułapka zaobserwowana w sesji 2026-09-13d (do nie powtórzenia):** po
+przełączeniu wszystkich sond na łańcuch przeglądarkowy cztery Portale Orzeczeń
+zaczęły zwracać 502, co zostało wstępnie zinterpretowane jako awaria po stronie
+MS. Po powrocie do UA neutralnego — 200 na wszystkich czterech. Objawem był kod
+502; „awaria MS" była hipotezą przyczynową i była **fałszywa** (ZASADA 14:
+zgłaszaj objaw, nie przyczynę).
 
 ### ⛔⛔ 403 PROXY ≠ 403 WAF — rozróżnienie obowiązkowe przed orzeczeniem o blokadzie
 
@@ -198,8 +233,16 @@ Zero trafień poza tym oknem to **OUT_OF_SCOPE, nigdy NOT_FOUND** (K-SYG-1).
 
 ### ⭐ SN — `sn.pl`, proxy AJAX `snproxy` (JSON, nieudokumentowane, zmierzone 2026-09-13)
 
-⛔ Host: **`sn.pl` bez `www.`** (`www.sn.pl` jest poza listą dozwolonych domen).
 ⛔ Wymaga **UA przeglądarkowego** — wyjątek od §1, patrz tam.
+
+⚠️ **Sprostowanie 2026-09-13d (F-187):** wcześniejszy zapis „`sn.pl` bez `www.` —
+`www.sn.pl` jest poza listą dozwolonych domen" **już nie obowiązuje**. Zmierzone
+równolegle: **obie** formy zwracają HTTP 200 i poprawny JSON. `/index.php`
+oddaje 301 na `/pl/` — `requests` i `curl -L` podążają za nim i same utrzymują
+ciasteczka Imperva w obrębie wywołania, więc kod działa bez zmian; `curl` **bez**
+`-L` dostanie pustą odpowiedź i 301, co łatwo wziąć za awarię API.
+Zapis w `scripts/weryfikator_sygnatur.py` (`SN = "https://sn.pl/index.php"`) jest
+funkcjonalnie poprawny — nieaktualne jest wyłącznie jego uzasadnienie w komentarzu.
 
 ```
 GET https://sn.pl/index.php?option=com_ajax&plugin=snproxy&format=json&task=…
@@ -229,20 +272,69 @@ którego nie ma (V-SYG-0.4).
 Portal Orzeczeń odpytuje się bez sesji, po zakodowaniu kontekstu Tapestry
 (spacja → `$0020`, `/` → `$002f`):
 
+Kontekst aktywacji Tapestry ma **17 pozycji**, sygnatura stoi na **pozycji 2**,
+po nich numer strony (doprecyzowane 2026-09-13d — wcześniejszy zapis „`$N…(×15)`"
+był nieodtwarzalny; poniższa postać jest dosłowna i działa po skopiowaniu):
+
 ```
-https://orzeczenia.ms.gov.pl/search/advanced/$N/{SYGNATURA}/$N…(×15)/1
+https://orzeczenia.ms.gov.pl/search/advanced/$N/{SYGNATURA}/$N/$N/$N/$N/$N/$N/$N/$N/$N/$N/$N/$N/$N/$N/$N/1
 FOUND:      <span class="big_number">N</span> + odnośniki /details/$N/{docId}
 NOT_FOUND:  „Nie znaleziono żadnego wyniku pasującego do zapytania"
 ```
 
 Zmierzone: `I C 100/15` → 9 trafień (poprawny **AMBIGUOUS** — sygnatura SR/SO
 nie jest unikalna krajowo); `I C 999999/15` → NOT_FOUND; `XI P 27/26` → NOT_FOUND.
+Odtworzone niezależnie 2026-09-13d: `I C 100/15` → `big_number=9`, 18 odnośników
+`/details/` — liczba zgadza się co do jednostki.
+
+#### ⭐ Portale sądów — ta sama ścieżka, warstwa rozstrzygania AMBIGUOUS (F-191)
+
+Ten sam kontrakt GET działa na portalu **każdego pojedynczego sądu**
+(`orzeczenia.{sad}.sr|so|sa.gov.pl`) — bez sesji, UA neutralny. To nie jest
+wyłącznie kanał zapasowy agregatu: **sygnatura nieunikalna krajowo bywa unikalna
+w obrębie sądu**, więc portal lokalny zamienia AMBIGUOUS na rozstrzygnięcie.
+
+| Zapytanie | Host | Wynik |
+|---|---|---|
+| `I C 100/15` | `orzeczenia.ms.gov.pl` (agregat) | `big_number=9` → **AMBIGUOUS** |
+| `I C 100/15` | `orzeczenia.poznan.so.gov.pl` | `big_number=1` → **FOUND** |
+| `I ACa 100/15` | `orzeczenia.szczecin.sa.gov.pl` | „Nie znaleziono…" → **NOT_FOUND** |
+
+Wykaz hostów sądów z licznikami dokumentów jest w drzewie na
+`orzeczenia.ms.gov.pl/search/advanced` (sekcja „Portale sądów wraz z liczbą
+opublikowanych orzeczeń"). ➜ realizacja: **V-SYG-0.6** w `shared/SYGNATURY.md`.
 
 ### Pozostałe
 
 | Źródło | Kanał | Uwaga |
 |---|---|---|
 | `orzeczenia.nsa.gov.pl` | HTML | ⛔⛔ **2026-09-13b: HOST NIEOSIĄGALNY W CAŁOŚCI.** `curl` → 503 `upstream connect error` na `/`, `/cbo/query`, `/cbo/search`, `/cbo/find`, `/doc/{ID}` i nawet `/robots.txt`; `http://` i `https://`; oba UA; także po pauzie 65 s. `web_fetch` → `ROBOTS_DISALLOWED`. Reguła 12d spełniona. ⚠️ **Sprostowanie:** `nsa.gov.pl` i `www.nsa.gov.pl` zwracają **403 `x-deny-reason: host_not_allowed`** — są POZA listą dozwolonych domen; wcześniejszy zapis „`www.nsa.gov.pl` = 200" był błędny (F-187). ⛔⛔ **2026-09-13c: to NIE jest problem listy.** Po dopisaniu hostów do konfiguracji sieci CBOSA nadal oddaje 503 (5 prób w odstępach 20 s, bez zmiany); T25 klasyfikuje ją jako **jedyną regresję** z 52 sond. `remote connection failure` ≠ `host_not_allowed` — otwarcie ruchu tego nie naprawi. ➜ zastępczo: **kanał zdegradowany, niżej** |
+
+### ⛔⛔ CBOSA — zamienniki SPRAWDZONE I ODRZUCONE (F-188, 2026-09-13d)
+
+> **Czytaj to, zanim zaproponujesz „alternatywną bazę NSA/WSA".** Dwaj najbardziej
+> oczywiści kandydaci zostali zmierzeni i **odpadli — nie na dostępności, lecz na
+> zakazie w `robots.txt`.** Host odpowiadający 200 nie jest jeszcze kanałem
+> dozwolonym.
+
+| Kandydat | HTTP | `robots.txt` | Werdykt |
+|---|---|---|---|
+| `www.orzeczenia-nsa.pl` | **200** (oba UA) | `Disallow: /szukaj` dla `User-agent: *` **oraz** `Disallow: /` dla naszego agenta; w kodzie serwisu zapowiedziana pułapka na automaty ignorujące reguły | ⛔ **ZAKAZ — nie odpytywać** |
+| `szukio.pl` | **429** (oba UA) | `Disallow: /` dla naszego agenta | ⛔ **ZAKAZ — nie odpytywać** |
+
+Odtworzenie: `curl -sS https://www.orzeczenia-nsa.pl/robots.txt`,
+`curl -sS https://szukio.pl/robots.txt`.
+
+⚠️ HTTP 429 na `szukio.pl` to **objaw**; przypisanie go pułapce albo zwykłemu
+rate-limitowi pozostaje hipotezą — i jest bez znaczenia, bo zakaz w `robots.txt`
+rozstrzyga sam.
+
+✅ **Co wolno:** podać adres **człowiekowi** jako odnośnik do ręcznego sprawdzenia.
+⛔ **Czego nie wolno:** odpytać w kanale kodu ani przez `web_fetch`.
+
+➜ **Skutek dla systemu:** pion sądowoadministracyjny **nadal nie ma binarnej
+kontroli sygnatur**. To najpoważniejsza otwarta luka — szersza niż `caseNumber`,
+bo obejmuje cały pion. Jedyne, co zostaje, to kanał zdegradowany poniżej.
 
 ### ⚠️ CBOSA — kanał zdegradowany przez indeks wyszukiwarki (F-183a)
 
@@ -292,6 +384,7 @@ w `refid` (`urn:ndoc:gov:pl:uodo:…`). Okno: `1M`, `1Y`.
 | **KW** | `ekw.ms.gov.pl/eukw_ogol/menu.do` | root pętli; brak API |
 | **KRZ**, **wyszukiwarka KRS** | ⛔ 403 WAF | odczyt KRS i tak przez `api-krs` |
 | **SUDOP** | ✅ `sudop.uokik.gov.pl` | pomoc publiczna, NIE decyzje |
+| **REGON / BIR** | 🟨 `api.stat.gov.pl` — **osiągalny, BLOKADA PROCEDURALNA** | zamyka **F-158c** (2026-09-13d): host 200 w obu reżimach UA, brak `robots.txt` (404), dokumentacja na `/Home/RegonApi` — ale `/gus/UslugaBIRzewnPubl/Zaloguj` oddaje 302, a **Klucz Użytkownika** wydaje GUS mailowo (`regon_bir@stat.gov.pl`, po podaniu nazwy podmiotu, REGON-u i osoby kontaktowej). ⛔ **Nie awansować do żywego kanału RZĘDU 1** — odpowiedź na F-158c brzmi „wymaga klucza", a nie „nie wiadomo". Do rejestracji podmiotu użyj KRS/CEIDG/białej listy VAT |
 
 ⚠️ **Pułapka odpisu KRS:** JSON jest **zanonimizowany** względem PDF (inicjały,
 część PESEL). Przy ustalaniu reprezentacji strony może to nie wystarczyć —

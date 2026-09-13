@@ -1,5 +1,76 @@
 # AUDIT-JOURNAL — Dziennik Audytów Systemu Prawnego AI
 
+## AUDYT-2026-09-13d — weryfikacja hipotezy o zamrożeniu listy domen; kandydaci odrzuceni na robots.txt
+
+**Polecenie:** sprawdzić hipotezę, że lista dozwolonych domen jest zamrażana przy
+starcie sesji; jeśli potwierdzona — dopisać od razu całą listę kandydatów
+(`api.stat.gov.pl`, `orzeczenia.*.so/sa/sr.gov.pl`, `szukio.pl`,
+`www.orzeczenia-nsa.pl`); naprawione skille wydać zgodnie z Regułą 7.
+
+**Metoda.** Hipoteza potraktowana jako teza do zmierzenia. Sondy kontrolne
+neutralne, potem T25 `check_domeny_allowlist.py --grupa kandydaci`, potem pomiar
+dwureżimowy UA na 12 hostach, potem odtworzenie kontraktów (SN snproxy, GET po
+sygnaturze, SAOS, `weryfikator_sygnatur.py`).
+
+**Wynik nadrzędny — hipoteza potwierdzona w warstwie obserwowalnej.** `--grupa
+kandydaci`: 8/8 sond w sekcji ODBLOKOWANE, `0 zgodnych ze stanem odniesienia
+(2026-09-04)`. Sondy kontrolne `example.com` i `www.wikipedia.org` — **200**,
+podczas gdy w AUDYT-2026-09-13c zwracały `403 host_not_allowed`. Lista przestała
+być wyliczeniowa. ⚠️ Przyczyna (zamrażanie przy starcie sesji vs zmiana globalna)
+pozostaje NIEWERYFIKOWANA — oba mechanizmy dają ten sam objaw. Skutek
+operacyjny: **sondować na starcie sesji, nie przepisywać stanu z pliku.**
+
+**⛔ Korekta do polecenia — dwóch z czterech kandydatów NIE dopisano (F-188).**
+`www.orzeczenia-nsa.pl` (HTTP 200) i `szukio.pl` (HTTP 429) są osiągalne, ale
+zakazane w `robots.txt`: pierwszy `Disallow: /szukaj` dla wszystkich automatów
+**oraz** `Disallow: /` dla naszego agenta, drugi `Disallow: /`. HTTP 200 nie czyni
+hosta kanałem dozwolonym. Zapisano jako trwałe ODRZUCENIE w
+`DOSTEP-MASZYNOWY-API.md` §3 i `SYGNATURY.md`, żeby kolejne sesje nie proponowały
+ich ponownie. ➜ **kontrola krzyżowa NSA/WSA przy martwej CBOSA pozostaje luką
+nierozwiązaną — najpoważniejszą w systemie, bo obejmuje cały pion.**
+
+**F-189 — F-158c zamknięta na „NIE".** `api.stat.gov.pl` (REGON/BIR): host 200,
+brak `robots.txt`, ale Klucz Użytkownika wydaje GUS mailowo. Status:
+`OSIĄGALNY — BLOKADA PROCEDURALNA`. Nie awansowany do RZĘDU 1.
+
+**F-190 — reżim UA ma trzy warianty, nie dwa.** Wyjątek `sn.pl` potwierdzony
+niezależnie. Nowe: SAOS oddaje **403** pod łańcuchem przeglądarkowym, a **cała
+rodzina** `orzeczenia.*.gov.pl` (4 hosty) — **502**, nie tylko agregat.
+
+**F-191 — GET po sygnaturze odtworzony, plus nowa warstwa.** Kontekst Tapestry ma
+17 pozycji, sygnatura na pozycji 2 (dotychczasowy zapis `$N…(×15)` był
+nieodtwarzalny). `I C 100/15` → 9 trafień, zgodnie z pomiarem poprzedniej sesji.
+Portale pojedynczych sądów rozstrzygają AMBIGUOUS: ta sama sygnatura → 1 trafienie
+w SO Poznań. Wdrożone jako **V-SYG-0.6** z granicą wnioskowania (zero lokalnie nie
+znosi AMBIGUOUS — publikacja na Portalu Orzeczeń jest wybiórcza).
+
+**F-192 — `weryfikator_sygnatur.py` istnieje i przechodzi.** Materiał wejściowy
+twierdził, że skryptu nie ma; plik jest i działa. Przypadek `II CSKP 100/21`
+(dwa rekordy: `III CSKP 100/21` + trafny) pokazał, że **specyfikacja V-SYG-0.4
+była nieprecyzyjna względem działającego kodu** — przeredagowana na „FILTRUJ
+ZBIÓR, nie porównuj pierwszego rekordu".
+
+**⚠️ Fałszywy alarm własny — odnotowany jawnie (ZASADA 14).** W trakcie sesji
+zgłosiłem wstępnie „cała rodzina Portali Orzeczeń padła w środku sesji (502)".
+Błędne: 502 było skutkiem mojego przełączenia na łańcuch przeglądarkowy. Po
+powrocie do UA neutralnego — 200 na wszystkich czterech hostach. Objaw = kod 502;
+„awaria MS" = hipoteza przyczynowa, fałszywa. Drugi niezgłoszony fałszywy alarm:
+komentarz przy `SN = ".../index.php"` wyglądał na usterkę, ale obie formy adresu
+zwracają 200 i poprawny JSON — poprawiono wyłącznie komentarz, kod nietknięty.
+
+**Zmienione pliki:**
+- `shared/DOSTEP-MASZYNOWY-API.md` → v1.4 (§1 trzeci reżim UA + fałszywy alarm;
+  §3 dosłowny kontekst Tapestry, portale sądów, odrzuceni kandydaci, sprostowanie
+  `www.sn.pl`; §4 REGON/BIR)
+- `shared/SYGNATURY.md` → v1.4 (V-SYG-0.4 przeredagowana, nowe V-SYG-0.6, routing)
+- `audyt-systemu-v4/references/F-187-dostep-maszynowy-pomiar-2026-09-13d.md` (nowy)
+- `audyt-systemu-v4/scripts/weryfikator_sygnatur.py` (wyłącznie komentarz)
+
+**Reguła 7 — zastosowanie:** TAK, pełny łańcuch dla dwóch skilli osobno
+(`shared`, `audyt-systemu-v4`), każdy własny ZIP, kontrola liczby plików.
+
+---
+
 ## AUDYT-2026-09-13c — ponowny pomiar listy dozwolonych domen po zmianie konfiguracji
 
 **Polecenie:** „ponownie sprawdź hosty, dopuściłem teraz cały ruch".

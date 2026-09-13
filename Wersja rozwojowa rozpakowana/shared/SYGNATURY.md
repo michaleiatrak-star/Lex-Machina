@@ -1,7 +1,12 @@
 # SYGNATURY — Moduł Walidacji Sygnatur Sądowych
 
 > **Plik:** `shared/SYGNATURY.md`
-> **Wersja:** 1.3 (2026-09-13b) — dodano V-SYG-0.5 (kanał zdegradowany dla
+> **Wersja:** 1.4 (2026-09-13d) — dodano V-SYG-0.6 (rozstrzyganie AMBIGUOUS na
+>              portalu sądu); doprecyzowano V-SYG-0.4 (post-check FILTRUJE zbiór,
+>              nie porównuje pierwszego rekordu — przypadek `II CSKP 100/21`);
+>              odnotowano odrzucenie zamienników CBOSA na `robots.txt`.
+>              Flagi F-188, F-191, F-192, AUDYT-2026-09-13d.
+> **Wersja poprzednia:** 1.3 (2026-09-13b) — dodano V-SYG-0.5 (kanał zdegradowany dla
 >              pionu sądowoadministracyjnego) oraz oś ZAKRES POTWIERDZENIA
 >              (ISTNIENIE / ISTNIENIE+TREŚĆ). Flaga F-183a, AUDYT-2026-09-13b.
 > **Wersja poprzednia:** 1.2 (2026-09-13) — dodano V-SYG-0 (binarna kontrola istnienia
@@ -231,11 +236,13 @@ V-SYG-0.3  OKNO POKRYCIA (realizacja K-SYG-1):
            → OUT_OF_SCOPE i eskalacja do bazy właściwej. ⛔ NIGDY NOT_FOUND.
 
 V-SYG-0.4  POST-CHECK TOŻSAMOŚCI (maszynowa realizacja K-SYG-2):
-           porównaj sygnaturę ZWRÓCONĄ przez bazę z PYTANĄ, po normalizacji
-           z V-SYG-0.1.
-           → różnica choćby w jednym elemencie  → NOT_FOUND
-           → ≥2 trafienia w różnych sądach      → AMBIGUOUS
-           → dokładnie 1 trafienie tożsame      → FOUND
+           ⛔ FILTRUJ ZBIÓR, nie porównuj pierwszego rekordu.
+           Dla KAŻDEGO zwróconego rekordu porównaj jego sygnaturę z PYTANĄ
+           po normalizacji z V-SYG-0.1; zachowaj tylko tożsame, resztę
+           odrzuć i zapisz w polu `odrzucone_post_checkiem`.
+           → 0 tożsamych po filtrze          → NOT_FOUND
+           → ≥2 tożsame w różnych sądach     → AMBIGUOUS → idź do V-SYG-0.6
+           → dokładnie 1 tożsame             → FOUND
 ```
 
 ⛔ **Post-check nie jest ostrożnością — jest wymogiem.** Zmierzone 2026-09-13:
@@ -243,6 +250,27 @@ API SN na zapytanie `I NSNc 10/24` zwraca rekord o sygnaturze **`II NSNc 10/24`*
 (wyrok z 2025-03-18) — inna izba, ten sam numer, `success: true`. Kontrola
 oparta na samym liczniku trafień potwierdziłaby istnienie orzeczenia, którego
 nie ma. To ta sama klasa awarii co K-SYG-2, tylko po stronie maszyny.
+
+⛔⛔ **Dlaczego „porównaj zwróconą z pytaną" to za mało — przypadek rozstrzygający
+(F-192, 2026-09-13d).** Zapytanie `II CSKP 100/21` zwraca z SN **dwa** rekordy:
+
+| Zwrócona sygnatura | Data | Ocena post-checku |
+|---|---|---|
+| `III CSKP 100/21` | 2021-06-25 | ⛔ odrzucić — inna izba |
+| `II CSKP 100/21` | 2021-05-27 | ✅ zachować — tożsama |
+
+Redakcja w liczbie pojedynczej („sygnaturę ZWRÓCONĄ") nie mówi, co zrobić z
+takim zbiorem: porównanie pierwszego rekordu dałoby **NOT_FOUND** dla orzeczenia,
+które **istnieje**. Poprawny wynik to `FOUND` z `odrzucone_post_checkiem:
+["III CSKP 100/21"]`. Odtworzenie:
+
+```
+python3 audyt-systemu-v4/scripts/weryfikator_sygnatur.py --sygnatura "II CSKP 100/21"
+```
+
+✅ Wdrożenie w `weryfikator_sygnatur.py` już filtruje zbiór i zwraca `FOUND` —
+to **specyfikacja była nieprecyzyjna względem działającego kodu**, nie odwrotnie.
+Powyższa redakcja V-SYG-0.4 wyrównuje ten rozjazd.
 
 ### ROUTING BAZ — repertorium → baza właściwa
 
@@ -254,6 +282,7 @@ nie ma. To ta sama klasa awarii co K-SYG-2, tylko po stronie maszyny.
 | K, P, SK, U, Kpt, Kp (TK) | `ipo.trybunal.gov.pl`, `otkzu.trybunal.gov.pl` | ⛔ brak kontroli po sygnaturze |
 | KIO | `orzeczenia.uzp.gov.pl` | ⛔ brak filtra po sygnaturze |
 | dowolne, gdy rocznik mieści się w oknie | `saos.org.pl` `caseNumber=` | kontrola krzyżowa |
+| dowolne repertorium sądu powszechnego, gdy **sąd jest znany** | `orzeczenia.{sad}.sr\|so\|sa.gov.pl` | ten sam GET po sygnaturze → **rozstrzyganie AMBIGUOUS (V-SYG-0.6)** |
 
 ⚠️ Repertorium `K` jest wieloznaczne (SR karne / TK wniosek). Rozstrzyga
 kontekst sprawy; przy braku rozstrzygnięcia — odpytaj OBIE bazy i zastosuj
@@ -355,6 +384,48 @@ w praktyce pisma procesowego jest połową wartości orzeczenia; (3) kanał zale
 od indeksu strony trzeciej, którego pokrycia nie da się zmierzyć od wewnątrz.
 Warunek zamknięcia bez reszty: powrót hosta `orzeczenia.nsa.gov.pl` albo inny
 kanał RZĘDU 1 dla NSA/WSA.
+
+⛔ **Zamienniki sprawdzone i ODRZUCONE (F-188, 2026-09-13d) — nie proponuj ich
+ponownie.** `www.orzeczenia-nsa.pl` (HTTP 200) i `szukio.pl` (HTTP 429) odpadają
+**na zakazie w `robots.txt`**, nie na dostępności: pierwszy ma `Disallow: /szukaj`
+dla wszystkich automatów i `Disallow: /` dla naszego agenta, drugi `Disallow: /`.
+Wolno podać je człowiekowi jako odnośnik; nie wolno odpytywać w kanale kodu.
+Szczegóły i odtworzenie: `shared/DOSTEP-MASZYNOWY-API.md` §3.
+
+---
+
+## V-SYG-0.6 — ROZSTRZYGNIJ AMBIGUOUS NA PORTALU SĄDU (F-191, 2026-09-13d)
+
+> Stosuj **wyłącznie** wtedy, gdy V-SYG-0.4 zwrócił `AMBIGUOUS` dla sądu
+> powszechnego **i sąd jest znany** z akt, pisma lub kontekstu sprawy.
+
+**Przesłanka zmierzona:** sygnatura SR/SO nie jest unikalna krajowo, ale bywa
+unikalna w obrębie jednego sądu. Agregat tego nie rozstrzyga — portal sądu tak.
+
+| Zapytanie | Host | Wynik |
+|---|---|---|
+| `I C 100/15` | `orzeczenia.ms.gov.pl` (agregat) | `big_number=9` → **AMBIGUOUS** |
+| `I C 100/15` | `orzeczenia.poznan.so.gov.pl` | `big_number=1` → **FOUND** |
+| `I ACa 100/15` | `orzeczenia.szczecin.sa.gov.pl` | „Nie znaleziono…" → **NOT_FOUND** |
+
+```
+V-SYG-0.6.1  Ustal host sądu: orzeczenia.{sad}.sr|so|sa.gov.pl
+             Wykaz hostów z licznikami dokumentów: drzewo „Portale sądów"
+             na orzeczenia.ms.gov.pl/search/advanced — ⛔ nie zgaduj slugu.
+V-SYG-0.6.2  Powtórz GET po sygnaturze (kontrakt jak w agregacie, UA neutralny).
+V-SYG-0.6.3  Zastosuj V-SYG-0.4 do wyniku lokalnego.
+             → 1 tożsame  → FOUND, zakres ISTNIENIE+TREŚĆ
+             → 0          → ⛔ NIE NOT_FOUND globalnie; to NOT_FOUND
+                            WYŁĄCZNIE dla tego sądu — utrzymaj AMBIGUOUS
+                            z agregatu i odnotuj wykluczony sąd
+             → ≥2         → AMBIGUOUS wewnątrz sądu (różne wydziały/lata)
+```
+
+⛔ **Granica wnioskowania.** Zero trafień na portalu jednego sądu **nie znosi**
+AMBIGUOUS z agregatu — znaczy tylko, że to nie ten sąd. Publikacja na Portalu
+Orzeczeń jest wybiórcza (część spraw jest wyłączona z publikacji), więc brak
+rekordu lokalnie nie dowodzi nieistnienia sprawy. Do `NOT_FOUND` globalnego
+uprawnia dopiero pusty wynik w bazie **pokrywającej**, zgodnie z V-SYG-0.3.
 
 ---
 

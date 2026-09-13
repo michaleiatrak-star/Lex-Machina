@@ -9,7 +9,7 @@ f06c3969a5625a2560967736e6ff8646e822d6af40573c4a77910816f281cf7d  ./modules/MOD-
 ecef544b5bcd67af135ea7563468b4bca6570e48d2afbd444bf67c9f22a36e7c  ./modules/MOD-TRESC-MERYTORYCZNA.md
 53f0880bdbf47510b8c7fb18a67130b1a3f2107bcb9d931a37e422aa82a92461  ./modules/MOD-WSTAWKI.md
 04dbb0c3d5b74b68249a68b80cae4f4178d93e9c80e0ce6ad4516ce9144044e6  ./references/ALIASY-NAZW-AKTOW.md
-43e726f1fd938019f0dda0a808c55b404edf2fd66d5db5c897cd5de141b342f2  ./references/AUDIT-JOURNAL.md
+d7a3852ea8a14d83e343729287e48e1de69ec7d20f583bf0411c8a2df163560a  ./references/AUDIT-JOURNAL.md
 eb8993b2690d03d0f9bd48e3523f021166d8984ae582828ed0fac035ab71dc11  ./references/AUDYT-PRZERWANYCH-ETAPOW-2026-08-28.md
 d31caf8698352a0b12640ce2e538a5ca52dbf7ebf7a75aa5536a3e4e91dbbb5c  ./references/CHANGELOG.md
 aee9df0be072509755f8ce08a6863ffec3aee26277d7239005542a42da732f67  ./references/CHECKLIST-DEDUP.md
@@ -95,5 +95,6 @@ ad8c406e100e29c550843f1c0ed16eb0bb4f0b5bfdd0486efd6a97128347e7ec  ./scripts/test
 27b78a6117408c5f490298c82dbd0098aa3b3f0b7e6769fb93e99d5b403698c7  ./scripts/test_pokrycie_orkiestratora.py
 07302abf1b9afd9a5dfc0a31fef1948a08ef51855bfd0a03c2cdb018ded7f0b8  ./scripts/test_router_contract.py
 7819f3628026a9e1334f7f3ee934b4483be33c4c3caa1fc1f37d16f167dbe934  ./scripts/test_title_scope_match.py
-715fb7640e825a4b4201c7f1264330e10f2b7218bbe437f6953562b22d44a7a5  ./scripts/weryfikator_sygnatur.py
+02c2ab937039deb0f82a80ea04d4bffc8d6efc882348e2dfdaef23ecc6e4575e  ./scripts/weryfikator_sygnatur.py
 b230092c7ed5fcaa487d6f646a88e4115b8b705a265afc014c71bf5ee6693a0b  ./widgets/WIDGET-MENU.md
+34e9fded7af96f5baf058266639e64184074d39e3a730cacd6857bb5aefc4214  ./references/F-187-dostep-maszynowy-pomiar-2026-09-13d.md

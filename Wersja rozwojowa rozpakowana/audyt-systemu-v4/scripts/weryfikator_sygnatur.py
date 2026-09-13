@@ -44,7 +44,11 @@ UA_PRZEGLADARKA = {
 TIMEOUT = 60
 
 SAOS = "https://www.saos.org.pl/api/search/judgments"
-SN = "https://sn.pl/index.php"          # ⛔ bez "www." — www.sn.pl poza listą domen
+SN = "https://sn.pl/index.php"          # 301 -> /pl/ ; requests podąża i sam
+                                        # trzyma ciasteczka Imperva. UWAGA: curl
+                                        # BEZ -L dostanie puste 301, nie awarię API.
+                                        # (2026-09-13d, F-187: "www.sn.pl poza listą
+                                        #  domen" już NIE obowiązuje — obie formy 200)
 MS = "https://orzeczenia.ms.gov.pl"
 
 # --- OKNO POKRYCIA — pomiar 2026-09-13, do odtworzenia przez --okno --------
