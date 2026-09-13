@@ -1,7 +1,7 @@
 # mod-KAS-kontrola-celno-skarbowa
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o KAS — Dz.U. 2025 poz. 1131 t.j. | Op — Dz.U. 2025 poz. 111 | PPSA — Dz.U. 2026 poz. 143
+**Źródło weryfikacji:** Ustawa o KAS — Dz.U. 2025 poz. 1131 t.j. | Op — **Dz.U. 2026 poz. 622 t.j.** ✅ [VER] RZĄD 1 2026-09-10l (⛔ poprzedni zapis `2025 poz. 111` — wygaśnięcie aktu) | PPSA — Dz.U. 2026 poz. 143
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 

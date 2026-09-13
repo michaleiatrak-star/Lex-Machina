@@ -1,7 +1,7 @@
 # mod-ustawa-rynek-kapitalowy-fundusze
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Fundusze inwestycyjne — Dz.U. 2024 poz. 1034 t.j. ze zm. | Obrót instrumentami — Dz.U. 2023 poz. 646 t.j. ze zm. | Oferta publiczna — Dz.U. 2025 poz. 592 t.j. ze zm. | Obligacje — **Dz.U. 2025 poz. 1667 t.j.** — RZĄD 1 ELI VER 2026-08-28 (zastępuje Dz.U. 2024 poz. 708 i dawny błędny wpis 2022.2218)
+**Źródło weryfikacji:** Fundusze inwestycyjne — **Dz.U. 2026 poz. 60 t.j.** ✅ [VER] RZĄD 1 2026-09-10l (⛔ KROK 2C: 2 nowelizacje po tekście jednolitym; poprzednio 2024/1034 — wygaśnięcie aktu) | Obrót instrumentami — **Dz.U. 2024 poz. 722 t.j.** ✅ [VER] RZĄD 1 2026-09-10l (⛔ KROK 2C: **11** nowelizacji po tekście jednolitym; poprzednio 2023/646 — wygaśnięcie aktu) | Oferta publiczna — Dz.U. 2025 poz. 592 t.j. ze zm. | Obligacje — **Dz.U. 2025 poz. 1667 t.j.** — RZĄD 1 ELI VER 2026-08-28 (zastępuje Dz.U. 2024 poz. 708 i dawny błędny wpis 2022.2218)
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 

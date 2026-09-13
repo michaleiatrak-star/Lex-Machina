@@ -330,8 +330,13 @@ NAKAZ ZAPŁATY W POSTĘPOWANIU UPOMINAWCZYM (art. 4971 KPC):
   Sąd wydaje bez rozprawy — tylko na podstawie pozwu
   Nakaz = tytuł egzekucyjny po uprawomocnieniu
 
-SPRZECIW OD NAKAZU (art. 503 KPC):
-  Termin: 2 TYGODNIE od doręczenia nakazu pozwanemu
+SPRZECIW OD NAKAZU UPOMINAWCZEGO (art. 505 § 1 KPC — dopuszczalność;
+art. 480[3] KPC — tryb; ⛔ art. 503 KPC UCHYLONY):
+  Termin: 2 TYGODNIE od doręczenia, gdy doręczenie w kraju
+          MIESIĄC, gdy doręczenie poza krajem na terytorium UE
+          (art. 480[2] § 2 pkt 1-2 KPC)
+  ⛔ ZARZUTY od nakazu NAKAZOWEGO: MIESIĄC przy doręczeniu na terytorium UE,
+          w tym w Polsce (art. 480[2] § 2 pkt 3 KPC)
   Charakter: TERMIN ZAWITY (wygaśnięcie prawa po upływie)
   Skutek sprzeciwu: nakaz traci moc w CAŁOŚCI (nawet gdy sprzeciw częściowy)
   → Sprawa toczy się dalej jako zwykłe postępowanie procesowe

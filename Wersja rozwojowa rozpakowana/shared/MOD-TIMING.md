@@ -130,8 +130,9 @@ stronę do podania WSZYSTKICH twierdzeń/dowodów w piśmie przygotowawczym
 POD RYGOREM utraty tego prawa (konkretne zarządzenie sądu, NIE
 automatyzm ustawowy), LUB (2) w postępowaniach SZCZEGÓLNYCH z WŁASNYM
 reżimem prekluzji: art. 344 §2 KPC (sprzeciw od wyroku zaocznego), art.
-493 §1 KPC (zarzuty od nakazu zapłaty), art. 503 §1 KPC (sprzeciw od
-nakazu w postępowaniu upominawczym) — SPRAWDŹ, KTÓRY z tych
+493 § 1 KPC (zarzuty od nakazu nakazowego) i art. 505 § 1 KPC (sprzeciw
+od nakazu upominawczego) — ⛔ art. 503 KPC jest UCHYLONY, a TERMIN obu
+środków daje art. 480[2] § 2 KPC, nie przepis o ich dopuszczalności — SPRAWDŹ, KTÓRY z tych
 mechanizmów ma zastosowanie w KONKRETNEJ sprawie, ZAMIAST zakładać
 ogólną prekluzję na wzór starego art. 207/217.
 

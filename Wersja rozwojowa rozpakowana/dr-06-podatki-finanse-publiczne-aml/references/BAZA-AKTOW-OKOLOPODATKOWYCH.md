@@ -35,7 +35,7 @@ powiązane:
 | Ustawa o podatku od czynności cywilnoprawnych (PCC) | Dz.U. 2026 poz. 191 t.j. | ✅ ZGODNE (obwieszczenie 17.02.2026, w życie 19.02.2026) | ✅ bez zmian |
 | Ustawa o podatkach i opłatach lokalnych | Dz.U. 2025 poz. 707 t.j. | ✅ ZGODNE (obwieszczenie 21.05.2025) | ✅ bez zmian |
 | Ustawa o zryczałtowanym podatku dochodowym (ryczałt) | Dz.U. 2025 poz. 843 t.j. | ✅ ZGODNE (obwieszczenie 13.06.2025) — nowelizacja poz. 779/2026 już wcześniej odnotowana (AUDYT-2026-08-11e) | ✅ bez zmian |
-| Ustawa o grach hazardowych (część "podatki sektorowe") | Wcześniej BEZ przypisanego numeru — MAPA-AKTOW miała tylko "⚠️ zweryfikuj t.j. pozostałych 4 ustaw" | ✅ USTALONE: Dz.U. 2025 poz. 595 t.j. (obwieszczenie 10.04.2025) + nowelizacja Dz.U. 2026 poz. 176 | ✅ uzupełniono (wcześniej całkowity brak) |
+| Ustawa o grach hazardowych (część "podatki sektorowe") | Wcześniej BEZ przypisanego numeru — MAPA-AKTOW miała tylko "⚠️ zweryfikuj t.j. pozostałych 4 ustaw" | ✅ USTALONE: Dz.U. 2025 poz. 595 t.j. (obwieszczenie 10.04.2025) + nowelizacja Dz.U. 2026 poz. 176 (⛔ w życie 18.02.2027 — do tej daty NIE stosować) | ✅ uzupełniono (wcześniej całkowity brak) |
 
 ⚠️ **Nadal poza zakresem tej i poprzedniej tury** (jawnie odnotowane,
 NIE zweryfikowane w tej sesji): podatek tonażowy (2006), opłata cukrowa
@@ -62,19 +62,19 @@ ryzyka nadal orientacyjnie użyteczna).
 
 | Akt | Oznaczenie w MAPA-AKTOW / ROUTING-MAP | ✅ Wynik weryfikacji (2026-08-11) | Status |
 |---|---|---|---|
-| Ustawa o VAT | Dz.U. 2025 poz. 775 t.j. | ✅ ZGODNE (obwieszczenie 21.05.2025) — ⚠️ brakowało odnotowania nowelizacji po t.j.: Dz.U. 2025 poz. 1811 (7.11.2025), Dz.U. 2026 poz. 507, **Dz.U. 2026 poz. 846** (29.05.2026, zmiana Ordynacji podatkowej i "niektórych innych ustaw" — obejmuje też VAT) | ✅ t.j. aktualny / dodano nowelizacje |
-| Ustawa o PIT | Dz.U. 2026 poz. 592 t.j. | ✅ ZGODNE (obwieszczenie 17.04.2026) — ⚠️ brakowało: Dz.U. 2026 poz. 779 (15.06.2026, ustawa zmieniająca jednocześnie PIT/CIT/ryczałt), **Dz.U. 2026 poz. 846** | ✅ t.j. aktualny / dodano nowelizacje |
-| Ustawa o CIT | Dz.U. 2026 poz. 554 t.j. | ✅ ZGODNE (obwieszczenie 27.03.2026) — ⚠️ brakowało: Dz.U. 2026 poz. 779, **Dz.U. 2026 poz. 846** | ✅ t.j. aktualny / dodano nowelizacje |
-| Ordynacja podatkowa | Dz.U. 2026 poz. 622 t.j. | ✅ ZGODNE (obwieszczenie 22.04.2026, publ. 11.05.2026) — ⚠️ brakowało: **Dz.U. 2026 poz. 846** (29.05.2026 — ustawa MACIERZYSTA tej nowelizacji, zmienia OP i "niektóre inne ustawy" — stąd pojawia się we wszystkich powyższych wierszach) | ✅ t.j. aktualny / dodano nowelizację |
-| Ustawa o KAS | Dz.U. 2025 poz. 1131 t.j. | ✅ ZGODNE (obwieszczenie 05.08.2025) — ⛔ ROZBIEŻNOŚĆ: MAPA-AKTOW/ROUTING-MAP podawały nowelizacje "Dz.U. 2026 poz. 395, 483"; dwa niezależne źródła (gofin.pl, inforlex.pl) wskazują **poz. 415**, nie 395, jako numer tej nowelizacji — poprawiono na poz. 415. Dodano też **Dz.U. 2026 poz. 846** | ⛔ POPRAWIONO numer (395→415) + dodano poz. 846 |
+| Ustawa o VAT | Dz.U. 2025 poz. 775 t.j. | ✅ ZGODNE (obwieszczenie 21.05.2025) — ⚠️ brakowało odnotowania nowelizacji po t.j.: Dz.U. 2025 poz. 1811 (7.11.2025), Dz.U. 2026 poz. 507 (⛔ w życie 14.10.2026 — do tej daty NIE stosować), **Dz.U. 2026 poz. 846 (⛔ w życie 1.10.2026 — do tej daty NIE stosować)** (29.05.2026, zmiana Ordynacji podatkowej i "niektórych innych ustaw" — obejmuje też VAT) | ✅ t.j. aktualny / dodano nowelizacje |
+| Ustawa o PIT | Dz.U. 2026 poz. 592 t.j. | ✅ ZGODNE (obwieszczenie 17.04.2026) — ⚠️ brakowało: Dz.U. 2026 poz. 779 (15.06.2026, ustawa zmieniająca jednocześnie PIT/CIT/ryczałt), **Dz.U. 2026 poz. 846 (⛔ w życie 1.10.2026 — do tej daty NIE stosować)** | ✅ t.j. aktualny / dodano nowelizacje |
+| Ustawa o CIT | Dz.U. 2026 poz. 554 t.j. | ✅ ZGODNE (obwieszczenie 27.03.2026) — ⚠️ brakowało: Dz.U. 2026 poz. 779, **Dz.U. 2026 poz. 846 (⛔ w życie 1.10.2026 — do tej daty NIE stosować)** | ✅ t.j. aktualny / dodano nowelizacje |
+| Ordynacja podatkowa | Dz.U. 2026 poz. 622 t.j. | ✅ ZGODNE (obwieszczenie 22.04.2026, publ. 11.05.2026) — ⚠️ brakowało: **Dz.U. 2026 poz. 846 (⛔ w życie 1.10.2026 — do tej daty NIE stosować)** (29.05.2026 — ustawa MACIERZYSTA tej nowelizacji, zmienia OP i "niektóre inne ustawy" — stąd pojawia się we wszystkich powyższych wierszach) | ✅ t.j. aktualny / dodano nowelizację |
+| Ustawa o KAS | Dz.U. 2025 poz. 1131 t.j. | ✅ ZGODNE (obwieszczenie 05.08.2025) — ⛔ ROZBIEŻNOŚĆ: MAPA-AKTOW/ROUTING-MAP podawały nowelizacje "Dz.U. 2026 poz. 395, 483"; dwa niezależne źródła (gofin.pl, inforlex.pl) wskazują **poz. 415**, nie 395, jako numer tej nowelizacji — poprawiono na poz. 415. Dodano też **Dz.U. 2026 poz. 846 (⛔ w życie 1.10.2026 — do tej daty NIE stosować)** | ⛔ POPRAWIONO numer (395→415) + dodano poz. 846 |
 
 ⚠️ **Wspólny mianownik:** ustawa z 29 maja 2026 r. o zmianie ustawy —
-Ordynacja podatkowa oraz niektórych innych ustaw (Dz.U. 2026 poz. 846)
+Ordynacja podatkowa oraz niektórych innych ustaw (Dz.U. 2026 poz. 846 (⛔ w życie 1.10.2026 — do tej daty NIE stosować))
 jest nowelizacją PRZEKROJOWĄ, dotykającą co najmniej VAT, PIT, CIT,
 Ordynacji podatkowej i KAS jednocześnie — nie została jeszcze
 uwzględniona w żadnym z pięciu t.j. powyżej (bo weszła w życie już po
 nich). **Przy każdej sprawie dotykającej tych pięciu aktów sprawdź, czy
-art., którego używasz, nie został zmieniony przez Dz.U. 2026 poz. 846**
+art., którego używasz, nie został zmieniony przez Dz.U. 2026 poz. 846 (⛔ w życie 1.10.2026 — do tej daty NIE stosować)**
 — zakres tej nowelizacji nie został szczegółowo zbadany w tej sesji
 (poza zakresem żądania), tylko odnotowany jako punkt do sprawdzenia
 przy najbliższej sprawie, której dotyczy.
@@ -117,7 +117,7 @@ Ryczałt          → mod-ustawa-ryczalt-przychody.md
 
 Żaden z powyższych modułów nie był w tej sesji otwierany do weryfikacji
 TREŚCI (tylko metryki Dz.U. na poziomie aktu) — jeśli któryś cytuje
-konkretny artykuł zmieniony przez Dz.U. 2026 poz. 846, wymaga to
+konkretny artykuł zmieniony przez Dz.U. 2026 poz. 846 (⛔ w życie 1.10.2026 — do tej daty NIE stosować), wymaga to
 osobnego przebiegu KROK 2C przy najbliższym użyciu.
 
 ## 3. Changelog
@@ -139,7 +139,7 @@ osobnego przebiegu KROK 2C przy najbliższym użyciu.
   bezpośrednio na ISAP/obwieszczeniach. Wynik: t.j. wszystkich pięciu
   były aktualne (w przeciwieństwie do akcyzy), ale brakowało odnotowania
   nowelizacji post-t.j., w tym jednej wspólnej dla wszystkich pięciu
-  (Dz.U. 2026 poz. 846). Znaleziono i poprawiono jedną rozbieżność
+  (Dz.U. 2026 poz. 846 (⛔ w życie 1.10.2026 — do tej daty NIE stosować)). Znaleziono i poprawiono jedną rozbieżność
   liczbową w MAPA-AKTOW/ROUTING-MAP (KAS: poz. 395 → poprawnie poz. 415).
   Pozostałe akty okołopodatkowe (PCC, spadki/darowizny, lokalne, ryczałt
   szczegółowo, sektorowe, obligacje, usługi płatnicze, zawody: biegli

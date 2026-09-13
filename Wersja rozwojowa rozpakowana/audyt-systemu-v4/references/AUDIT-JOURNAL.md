@@ -63722,3 +63722,1694 @@ gdy naprawa nie wynika z nowelizacji, tylko z błędu redakcyjnego.
 `analizator-dowodow-v3` 5.16.5 → 5.16.6,
 `dr-03-prawo-karne-wykroczenia-egzekucja` 3.35 → 3.36,
 `audyt-systemu-v4` 6.77 → 6.78.
+
+
+---
+
+## AUDYT-2026-09-12c — pozostałe rodziny opłat: komornicze, skarbowe, notarialne, karne koszty procesu (O-11)
+
+**Tryb:** TREŚĆ (FAZA 3E na żądanie) + FAZA 7A/7C. Domknięcie zakresu
+zadeklarowanego w sekcji 8 `shared/TABELE-OPLAT.md` jako nieobjęty.
+
+### 1. NOWE USTALENIE O NAJWYŻSZYM RYZYKU
+
+⛔ **Zryczałtowana równowartość wydatków w sprawach z oskarżenia prywatnego
+(art. 621 § 1 KPK) wzrosła z 300 zł na 1000 zł z dniem 1.07.2025.**
+Rozporządzenie MS z 10.06.2025 (`Dz.U. 2025 poz. 770`) w § 3 **wprost uchyliło**
+rozporządzenie z 28.05.2003 (`Dz.U. 2003 nr 104 poz. 980`). ✅ [VER] RZĄD 1
+2026-09-12c — odczyt treści. Reprodukcja:
+`curl -s api.sejm.gov.pl/eli/acts/DU/2025/770/text.pdf | pdftotext -layout - -`.
+
+W systemie kwota figurowała wyłącznie jako placeholder `[do weryfikacji]`
+w `MP10-koszty.md`, więc **nie doszło do propagacji błędnej liczby** — ale
+gdyby placeholder został wypełniony z pamięci, wartość 300 zł była jedyną
+powszechnie powtarzaną. ⚠️ § 2 nowego rozporządzenia: obowiązek powstały przed
+1.07.2025 → kwota dotychczasowa. Klasa: **norma zmieniona przez akt
+uchylający**, nie przez nowelizację — czyli poza zasięgiem KROK 2C, który szuka
+aktów zmieniających po tekście jednolitym.
+
+### 2. DOMKNIĘTE RODZINY (TABELE-OPLAT 1.5 → 1.6, 986 → 1250 linii)
+
+| Sekcja | Rodzina | Akt ustanawiający | Status ELI |
+|---|---|---|---|
+| 6a | wieczystoksięgowe (art. 42–48 KSCU) + skarga na KIO (art. 34, 34a) | `Dz.U. 2025 poz. 1228` | obowiązujący |
+| 6b | koszty komornicze | ustawa z 28.02.2018, t.j. **`Dz.U. 2024 poz. 377`** | obowiązujący; **zero nowelizacji po t.j.** (wykaz `DU/2018/770/references`) |
+| 6c | opłata skarbowa | ustawa z 16.11.2006, t.j. **`Dz.U. 2025 poz. 1154`** | obowiązujący |
+| 6d | taksa notarialna | rozp. MS, t.j. **`Dz.U. 2024 poz. 1566`** | obowiązujący |
+| 6e | koszty procesu karnego | KPK, t.j. **`Dz.U. 2026 poz. 490`**, art. 616–632a | obowiązujący |
+
+### 3. USTALENIA WARTE ODNOTOWANIA
+
+**3.1 Domknięta podstawa wiersza, który jej nigdy nie miał.** „Doręczenie przez
+komornika — 60 zł | Rozporządzenie MS" figurowało w dwóch tabelach satelickich
+z identyfikacją aktu na poziomie rodzaju, nie numeru. Kwota była trafna,
+podstawa to **art. 41 ust. 1 ustawy o kosztach komorniczych** — opłata pobierana
+za doręczenie na **jeden adres**, niezależnie od liczby adresatów i prób.
+
+**3.2 Trzy akty systematycznie mylone w materii egzekucyjnej:** ustawa
+o komornikach sądowych (ustrój), ustawa o **kosztach** komorniczych (opłaty)
+i KSCU (opłata **sądowa** 50 zł od skargi na czynności komornika, art. 25
+ust. 1). Rozdzielone jawnie w `dr-12/modules/mod-ustawa-komornicy-sadowi-zawod.md`.
+
+**3.3 Odwrotna logika taksy notarialnej.** Taksy adwokacka i radcowska podają
+stawki **minimalne** (podłoga zasądzenia kosztów); rozporządzenie o taksie
+notarialnej podaje **maksimum** (§ 3). To błąd kategorii, nie liczby — podanie
+stawki z § 3 jako „ceny należnej" jest nieprawdziwe w drugą stronę niż wszystkie
+dotychczas wykryte usterki kwotowe.
+
+**3.4 Art. 47 ustawy o kosztach komorniczych** to dokładny odpowiednik pułapki
+z sekcji 2e `TABELE-OPLAT`: zwolnienie od kosztów komorniczych **nie zwalnia
+z opłaty egzekucyjnej** za egzekucję świadczeń pieniężnych. Zwolnienie chroni
+przed kosztami wykładanymi, nie przed opłatą ściąganą z wyegzekwowanej kwoty.
+
+**3.5 Art. 30 ustawy o kosztach komorniczych** — przy oczywiście niecelowym
+wszczęciu egzekucji albo wskazaniu osoby niebędącej dłużnikiem opłatę 10 %
+ponosi **wierzyciel**. Pozycja ryzyka w bilansie kosztowym, nie koszt planowany;
+dopisana do `MP10-koszty.md`.
+
+**3.6 Opłata skarbowa od pełnomocnictwa: 17 zł od KAŻDEGO stosunku
+pełnomocnictwa**, nie od dokumentu. ⛔ Art. 2 ust. 1 wyłącza spod opłaty całe
+kategorie spraw — m.in. alimentacyjne, opieki i kurateli, zatrudnienia
+i wynagrodzeń, pomocy społecznej, ubezpieczeń. Pełnomocnictwo w sprawie
+alimentacyjnej jest wolne od opłaty skarbowej **niezależnie** od zwolnienia
+z art. 96 ust. 1 pkt 2 KSCU — dwa niezależne zwolnienia z dwóch ustaw.
+
+### 4. WERYFIKACJA Dz.U.
+
+Bez zmian w mapie centralnej. **FAZA 7B: mapa bez zmian.**
+⚠️ Do rozważenia przy najbliższej FAZIE 3: `Dz.U. 2025 poz. 770` jest aktem
+**uchylającym i ustanawiającym kwotę**, a takich pozycji mapa nie prowadzi —
+patrz wniosek 6.2.
+
+### 5. ZAKRES NADAL OTWARTY (jawnie, sekcja 8 TABELE-OPLAT)
+
+Wpis od **odwołania** do KIO (PZP + rozporządzenie wykonawcze — art. 34 ust. 1
+KSCU tylko do niego odsyła); opłaty **rejestrowe w KRS** poza art. 95 KSCU;
+pełny załącznik do ustawy o opłacie skarbowej (kilkaset pozycji — sekcja 6c
+podaje trzy najczęstsze) i art. 7 tej ustawy; rozporządzenia o **wydatkach
+w postępowaniu karnym**; opłaty w postępowaniu **upadłościowym
+i restrukturyzacyjnym**; **prawo pomocy w PPSA** (art. 243–262 — odrębny reżim
+od art. 100–103 KSCU).
+
+⛔ **Luka strukturalna:** `dr-06-podatki-finanse-publiczne-aml` **nie ma modułu
+opłaty skarbowej** — ustawa figuruje wyłącznie ubocznie w
+`mod-OP-ulgi-w-splacie-dzial-III-rozdzial-7a.md`. Utworzenie modułu wymaga
+rejestracji w SKILL.md / MAPA-AKTOW / ROUTING-MAP (Reguła 2/3 HARDGATE) —
+osobna operacja, nie łatka tej sesji. Odnotowane w `WARN-OTWARTE.md`.
+
+### 6. WNIOSKI
+
+**6.1** Pomiar O-11 dla rodziny „opłaty" jest **zamknięty co do zakresu**:
+wszystkie rodziny opłat, które system w ogóle powołuje, mają teraz akt
+ustanawiający, jednostkę redakcyjną i datę odczytu. Zostają rodziny wartości
+**inne niż opłaty** — terminy, progi, odsetki, stawki ZUS i podatkowe.
+
+**6.2** ⛔ **Nowa klasa ryzyka, której KROK 2C nie łapie.** Procedura szuka
+nowelizacji **ogłoszonych po tekście jednolitym** aktu. Kwota z art. 621 § 2 KPK
+zmieniła się nie przez nowelizację KPK, tylko przez **nowe rozporządzenie
+wykonawcze uchylające poprzednie**. Akt bazowy i jego tekst jednolity pozostały
+nietknięte, a liczba wzrosła trzykrotnie. Wniosek: przy każdej wartości
+pochodzącej z **rozporządzenia wykonawczego** sprawdzać status **tego
+rozporządzenia**, nie ustawy delegującej. Kandydat na rozszerzenie T27.
+
+**Wersje:** `shared` 3.44 → 3.45, `pisma-proste-v2` 2.13 → 2.14,
+`pisma-procesowe-v3` 5.22 → 5.23, `analizator-dowodow-v3` 5.16.6 → 5.16.7,
+`dr-03-prawo-karne-wykroczenia-egzekucja` 3.36 → 3.37,
+`dr-12-sadownictwo-prokuratura-zawody-prawnicze` 4.15 → 4.16,
+`audyt-systemu-v4` 6.78 → 6.79.
+
+
+---
+
+## AUDYT-2026-09-12d — rodzina TERMINY: uchylony przepis w pliku kanonicznym, szóste wystąpienie CRIT-a naprawianego trzykrotnie (O-11)
+
+**Tryb:** TREŚĆ (FAZA 3E) + FAZA 7A/7C. Kontynuacja pomiaru O-11 na **drugiej
+rodzinie wartości** — terminach procesowych.
+
+### 1. CRIT-1 — plik KANONICZNY powoływał przepis UCHYLONY
+
+`shared/terminy.md` podawał: „**14 dni | Sprzeciw od nakazu zapłaty | art. 503
+§1 KPC**". ✅ [VER] RZĄD 1 2026-09-12d — odczyt treści KPC `Dz.U. 2026 poz. 468`:
+**art. 500, 501, 502, 502¹, 503 i 504 mają brzmienie „(uchylony)"**.
+
+Obecny układ normatywny rozbija jedną instytucję na trzy przepisy:
+
+| Warstwa | Przepis |
+|---|---|
+| dopuszczalność środka | art. 505 § 1 (sprzeciw, upominawcze) / art. 493 § 1 (zarzuty, nakazowe) |
+| tryb wniesienia i rygor odrzucenia | art. 480³ § 1–3 |
+| ⛔ **TERMIN** | **art. 480² § 2** |
+
+Termin jest różnicowany **trybem i miejscem doręczenia**: 2 tygodnie
+(upominawczy, w kraju — pkt 1), miesiąc (upominawczy, poza krajem w UE — pkt 2),
+**miesiąc (NAKAZOWY, doręczenie na terytorium UE, a więc także w Polsce — pkt 3)**,
+3 miesiące (poza UE — pkt 4).
+
+**Skala propagacji:** art. 503 KPC figurował w **sześciu plikach** trzech skilli
+(`shared/terminy.md`, `shared/MOD-TIMING.md`, `shared/orka-bas-leksykon/…`,
+`analizator-dowodow-v3` ×3, `pisma-proste-v2` ×3, `pisma-procesowe-v3` ×2).
+Trzy pliki podawały termin **zarzutów** od nakazu nakazowego jako 7 albo 14 dni
+— przy doręczeniu krajowym jest to **miesiąc**. Żaden plik nie miał wiersza
+rozróżniającego doręczenie w UE i poza UE.
+
+⚠️ Kierunek błędu jest tu **bezpieczny** (system zaniżał termin, więc porada
+prowadziła do wcześniejszego działania), ale podstawa prawna cytowana w piśmie
+procesowym z uchylonego przepisu jest wadą samą w sobie.
+
+### 2. CRIT-2 — trzy błędy w rodzinie wykroczeniowej
+
+| Było | Jest | Podstawa |
+|---|---|---|
+| „3 dni | Wniosek o uzasadnienie (KPW) | art. 105 § 1 KPW" | **7 dni**, termin zawity, **od OGŁOSZENIA** | **art. 35 § 1 KPW** — art. 105 reguluje **apelację**, nie wniosek o uzasadnienie |
+| „7 dni | Apelacja wykroczeniowa | art. 105 § 2 KPW" | 7 dni od otrzymania wyroku **z uzasadnieniem** | art. 105 **§ 1** KPW (§ 2 dotyczy apelacji przedwczesnej) |
+| „7 dni | Sprzeciw od wyroku nakazowego | art. 94 KPSW" | 7 dni zawite od doręczenia | **art. 94 § 1 KPW w zw. z art. 506 § 1 KPK** — art. 94 § 1 sam terminu nie zawiera, tylko odsyła |
+
+✅ [VER] RZĄD 1 2026-09-12d — odczyt treści KPW `Dz.U. 2025 poz. 860`.
+
+### 3. ⛔⛔ CRIT-3 — „art. 328¹ KPC" po raz SZÓSTY
+
+Jednostka redakcyjna **art. 328¹ KPC nie istnieje** (jest art. 328 § 1).
+`REGRESSION-TEST-PLAN.md` odnotowuje, że było to już **trzecie** wystąpienie
+i że naprawiano je 2026-08-04 (`analizator-dowodow-v3` 5.16.2) oraz 2026-08-08
+(`shared/terminy.md`). Ta sesja znalazła **kolejne trzy żywe wystąpienia**:
+`analizator-dowodow-v3/modules/MP12-terminy.md`,
+`pisma-proste-v2/references/SPF-SPG.md` (w **treści wzoru pisma** — trafiłoby do
+pisma klienta),
+`pisma-procesowe-v3/modules/MOD-SZABLONY.md` (poza tym, co naprawiono
+2026-09-12 w `MOD-OPLATY.md` i teraz w `SKILL.md`).
+
+⛔ **Ten błąd był naprawiany trzykrotnie i trzykrotnie przetrwał**, bo za każdym
+razem naprawiano **plik, w którym go zauważono**, a nie **wzorzec w całym
+korpusie**. To jest empiryczny argument za tym, żeby naprawa cytatu zawsze
+kończyła się `grep`em wzorca po całym systemie — i mocny kandydat na test
+regresyjny: wystąpienie `328¹` (lub dowolnego indeksu górnego przy numerze
+artykułu, gdzie ustawa używa `§`) = **FAIL**, nie WARN.
+
+### 4. UZUPEŁNIENIA `shared/terminy.md` (88 → 132 linii)
+
+Dopisane z odczytu treści: art. 344 § 1 KPC (sprzeciw od wyroku zaocznego —
+2 tygodnie), **art. 369 § 1¹ KPC** (apelacja **3 tygodnie**, gdy przedłużono
+termin na uzasadnienie — z regułą, że przy błędnym pouczeniu apelację uważa się
+za wniesioną w terminie), art. 169 § 1 KPC (przywrócenie terminu — tydzień,
+z obowiązkiem równoczesnego dokonania czynności i granicą roku), art. 767 § 4
+KPC (skarga na czynności komornika — tydzień), art. 407 § 1 KPC (wznowienie —
+3 miesiące), art. 398⁵ § 1 KPC (skarga kasacyjna — 2 miesiące), art. 460 KPK
+(zażalenie/sprzeciw — 7 dni), art. 506 § 1 KPK (sprzeciw od wyroku nakazowego),
+art. 524 § 1 KPK (kasacja — 30 dni), art. 82 § 7 KPW (przekład uzasadnienia
+ustnego). Doprecyzowany **punkt startowy** tam, gdzie różni się od doręczenia:
+art. 422 § 1 KPK biegnie od **ogłoszenia**, art. 35 § 1 KPW również.
+
+### 5. REGUŁA WYPROWADZONA Z TEJ SESJI
+
+⛔ **Podstawa terminu rzadko stoi w tym samym przepisie, co sama czynność.**
+Trzy potwierdzone przypadki w jednej sesji: art. 493 § 1 i art. 505 § 1 KPC
+mówią o dopuszczalności środka, termin daje art. 480² § 2; art. 105 § 1 KPW
+reguluje apelację, termin wniosku o uzasadnienie — art. 35 § 1 KPW; art. 94 § 1
+KPW nie zawiera terminu, tylko odsyła do art. 506 § 1 KPK. Odesłanie „termin X —
+art. Y" trzeba sprawdzać **czytając art. Y**, a nie kojarząc go z instytucją.
+Wpisana do `shared/terminy.md`.
+
+### 6. WERYFIKACJA Dz.U.
+
+Bez zmian w mapie. Akty odczytane: KPC `Dz.U. 2026 poz. 468`, KPK
+`Dz.U. 2026 poz. 490`, KPW `Dz.U. 2025 poz. 860` — wszystkie zgodne z mapą.
+**FAZA 7B: mapa bez zmian.**
+
+### 7. WNIOSKI
+
+**7.1** Pomiar O-11 dla rodziny **terminy**: 6 plików z odesłaniem do przepisu
+uchylonego, 3 błędne wartości terminu, 3 błędne jednostki redakcyjne w rodzinie
+wykroczeniowej, 3 żywe wystąpienia nieistniejącej jednostki. **Rodzina terminów
+wypada gorzej niż rodzina opłat** — i w przeciwieństwie do opłat, plik
+**kanoniczny** też był dotknięty.
+
+**7.2** ⛔ **Klasa ryzyka: uchylenie bez zastąpienia w tym samym miejscu.**
+Art. 503 KPC nie został „zmieniony" — został uchylony, a jego materia rozeszła
+się na trzy inne przepisy w innym rozdziale. Kontrola, która sprawdza tylko
+aktualność **numeru Dz.U. aktu**, tego nie widzi: KPC jest aktualny, a przepis
+w nim nie istnieje. To bliźniacza plamka do tej z 2026-09-12c (wartość zmieniona
+przez rozporządzenie uchylające) — obie polegają na tym, że **akt bazowy wygląda
+na aktualny**.
+
+**Wersje:** `shared` 3.45 → 3.46, `analizator-dowodow-v3` 5.16.7 → 5.16.8,
+`pisma-proste-v2` 2.14 → 2.15, `pisma-procesowe-v3` 5.23 → 5.24,
+`audyt-systemu-v4` 6.79 → 6.80.
+
+
+---
+
+## AUDYT-2026-09-12e — rodzina WARTOŚCI POWTARZALNE zamknięta; doktryna „formuła zamiast procentu" (O-11)
+
+**Tryb:** TREŚĆ (FAZA 3E) + FAZA 7A/7C. Trzeci i ostatni pomiar O-11: **progi,
+odsetki, stawki ZUS i podatkowe**.
+
+### 1. WYNIK POMIARU — inny niż w dwóch poprzednich rodzinach
+
+⭐ **W korpusie nie było błędnych wartości, bo nie było ich prawie wcale.**
+Przegląd całego systemu dał **jedno** wystąpienie stawki procentowej powiązanej
+z odsetkami (`dr-06/mod-CIT`, 19 %/20 % podatku u źródła — poprawne, bo to stawka
+ustawowa, nie zakotwiczona w NBP). `dr-02/mod-transakcje-handlowe-opoznienia.md`
+opisuje terminy i przesłanki **bez utrwalania procentów** — czyli już zgodnie
+z doktryną, którą ta sesja dopiero nazwała. `shared/TABELE-OPLAT` sekcja 4
+zawierała **wyłącznie minimalne wynagrodzenie** (3 wiersze).
+
+⛔ **To nie jest dobry wynik — to luka.** System nie mylił się co do odsetek,
+bo o odsetkach milczał. Przy pytaniu „ile odsetek za opóźnienie" nie miał skąd
+wziąć odpowiedzi i sięgnąłby po pamięć — a ta rodzina jest na pamięć
+najbardziej wrażliwa ze wszystkich trzech zmierzonych.
+
+### 2. ⛔⛔ USTALENIE GŁÓWNE — DWIE KLASY WARTOŚCI
+
+| Klasa | Przykład | Zapis |
+|---|---|---|
+| stopa/kwota **ustanowiona w przepisie** | 19,52 % (art. 22 ust. 1 pkt 1 SUS), 12 %/32 % (art. 27 ust. 1 PIT) | liczba + jednostka redakcyjna |
+| ⛔ wartość **zakotwiczona w stopie NBP** | wszystkie odsetki ustawowe, odsetki za zwłokę | **tylko wzór i przepis** — nigdy procent |
+
+**Uzasadnienie ma charakter systemowy, nie redakcyjny.** Stopy NBP zmienia
+**Rada Polityki Pieniężnej**. Numer Dz.U. nie drgnie, brzmienie przepisu nie
+drgnie, a wynik liczbowy przestanie być prawdziwy. To **trzecia z rzędu ślepota
+tego samego typu**, wykryta w trzech kolejnych sesjach:
+
+| Sesja | Mechanizm dezaktualizacji | Co wygląda na aktualne |
+|---|---|---|
+| 2026-09-12c | nowe **rozporządzenie uchyla** poprzednie (300 → 1000 zł) | ustawa delegująca i jej t.j. |
+| 2026-09-12d | przepis **uchylony**, materia przeniesiona gdzie indziej (art. 503 KPC) | cały kodeks |
+| 2026-09-12e | **decyzja RPP** zmienia wynik wzoru | akt, przepis i jego brzmienie |
+
+⭐ **Wniosek zbiorczy: kontrola aktualności AKTU nie jest kontrolą aktualności
+WARTOŚCI.** MON-3 przewidywał to dla kwot waloryzowanych obwieszczeniem
+(„udokumentowana ślepa plamka"), ale opisywał rytm **roczny**. Odsetki zmieniają
+się **w rytmie posiedzeń RPP** — MON-3 w obecnym kształcie ich nie obejmuje.
+
+### 3. WERYFIKACJA ŹRÓDEŁ RZĘDU 2/3 — kontrola negatywna
+
+Jedna próbka publicystyki prawno-podatkowej dała: **cztery różne wartości stopy
+referencyjnej NBP**, **cztery różne stawki handlowe** (10,75 %, 12,00 %, 15,75 %,
+„ok. 9,25 %") i wzór **„+ 7 p.p."**, który **nie ma podstawy w ustawie** — art. 4
+pkt 3 ustawy o przeciwdziałaniu nadmiernym opóźnieniom zna wyłącznie **8 p.p.**
+(publiczny podmiot leczniczy) i **10 p.p.** (pozostali). Jedno ze źródeł
+powoływało **rozporządzenie RM `Dz.U. 2014 poz. 1858`** jako obowiązującą
+podstawę wysokości odsetek — ELI oznacza je jako **uznane za uchylone**,
+a delegacja z art. 359 § 3 KC również jest uchylona; dziś wysokość wynika
+**wprost z ustawy**, a § 4 przewiduje jedynie **obwieszczenie** Ministra
+Sprawiedliwości w Monitorze Polskim.
+
+⛔ **Dla tej rodziny RZĄD 2/3 jest niewiarygodny** i nie może być podstawą wpisu
+do modułu. Obwieszczenie w Monitorze Polskim albo nic.
+
+### 4. UZUPEŁNIENIA `shared/TABELE-OPLAT.md` (sekcja 4: 14 → ~190 linii, plik 1250 → 1455)
+
+Wszystko z odczytu treści, ✅ [VER] RZĄD 1 2026-09-12e:
+
+- **4a** odsetki cywilne — KC `Dz.U. 2026 poz. 795`: art. 359 § 2 (ref. + 3,5 p.p.),
+  art. 481 § 2 (ref. + 5,5 p.p.), maksymalne = dwukrotność (§ 2¹ obu),
+  § 2² (nadmiar → należą się maksymalne, nie nieważność), **§ 2³ — zakaz
+  wyłączenia także przy wyborze prawa obcego**, § 4 / § 2⁴ (obwieszczenie MS).
+  ⚠️ art. 481 § 2 zd. 2: odsetki ustawowe za opóźnienie to **podłoga, nie sufit**.
+- **4b** transakcje handlowe — t.j. `Dz.U. 2023 poz. 1790`: **+ 10 p.p. / + 8 p.p.**
+  (art. 4 pkt 3), ⛔ **sztywna półroczna data odczytu stopy: 1 stycznia i 1 lipca**
+  (art. 11b — inaczej niż w KC), obwieszczenie ministra gospodarki (art. 11c),
+  rekompensata **40 / 70 / 100 EUR** wg progów 5 000 i 50 000 zł (art. 10 ust. 1),
+  kurs z ostatniego dnia roboczego miesiąca **poprzedzającego wymagalność**
+  (ust. 1a), ⛔ roszczenie o rekompensatę **niezbywalne** (ust. 4).
+  ⛔ Odnotowana zmiana nazwy ustawy (dawne „o terminach zapłaty").
+- **4c** odsetki za zwłokę — OP `Dz.U. 2026 poz. 622`: art. 56 § 1 (**200 % stopy
+  LOMBARDOWEJ + 2 %, nie mniej niż 8 %** — ⛔ inna kotwica niż w KC i podłoga
+  działająca niezależnie od stóp), art. 56a (50 %, warunki łączne i wyłączenia),
+  art. 56b (150 %, wyłącznie VAT i akcyza). ⛔⛔ **art. 23 ust. 1 SUS
+  (`Dz.U. 2026 poz. 199`) odsyła do OP Z WYŁĄCZENIEM art. 56a** — obniżona stawka
+  **nie działa do składek ZUS**. Próg bagatelności: **1 % minimalnego
+  wynagrodzenia** (ust. 1a), ruchomy.
+- **4d** stopy składek — art. 22 ust. 1 SUS: 19,52 / 8,00 / 2,45 %, ⛔ wypadkowa
+  **widełkowa 0,40–8,12 %**, nie jedna liczba; podział przy OFE (ust. 3).
+  ⛔ Zdrowotna, FP i FGŚP mają **inne ustawy** — świadomie nie dopisane.
+- **4e** skala PIT — `Dz.U. 2026 poz. 592`, art. 27 ust. 1: 12 % minus **3 600 zł**
+  do 120 000 zł, wyżej **10 800 zł + 32 %**. ⚠️ **„Kwota wolna 30 000 zł" to wynik
+  działania 3 600 / 12 %, nie brzmienie przepisu** — w sporze powoływać art. 27
+  ust. 1 i kwotę zmniejszającą. ⚠️ Po t.j. ogłoszono `Dz.U. 2026 poz. 779` —
+  flaga do sprawdzenia przy sprawie, czy dotknęła art. 27.
+- **4f** minimalne wynagrodzenie opisane jako **kotwica innych progów**.
+
+### 5. WERYFIKACJA Dz.U.
+
+Akty odczytane: KC `2026/795`, ustawa o przeciwdziałaniu nadmiernym opóźnieniom
+`2023/1790`, OP `2026/622`, SUS `2026/199`, PIT `2026/592` — wszystkie
+`obowiązujący` w ELI. **FAZA 7B: mapa bez zmian.**
+
+### 6. WNIOSKI I ZAMKNIĘCIE O-11
+
+**6.1** ⛔ **Flaga O-11 zamknięta.** Trzy rodziny wartości zmierzone i naprawione:
+**opłaty** (12-09, 12-c), **terminy** (12-d), **wartości powtarzalne** (12-e).
+Łącznie w trzech sesjach: 1 podstawa fałszywa powtórzona 3×, 1 przepis uchylony
+powoływany w 6 plikach, 6 błędnych kwot, 4 niewłaściwe podstawy, 3 normy
+nieistniejące, 3 błędne terminy, 6 wystąpień nieistniejącej jednostki
+„art. 328¹ KPC", 1 kwota nieaktualna od roku (300 → 1000 zł) i 1 rodzina
+całkowicie nieobsadzona (odsetki).
+
+**6.2** ⛔ **Otwieram obserwację O-12 w miejsce zamkniętej O-11** (opis
+w `WARN-OTWARTE.md`): *kontrola aktualności aktu nie jest kontrolą aktualności
+wartości*. Trzy zmierzone mechanizmy dezaktualizacji omijają KROK 2C i T27.
+Kandydaci na test: (a) wiersz kwotowy w tabeli bez kolumny podstawy → WARN;
+(b) indeks górny przy numerze artykułu tam, gdzie ustawa używa `§` → FAIL;
+(c) procent zapisany przy pojęciu „odsetki ustawowe" gdziekolwiek w korpusie →
+FAIL, bo z definicji nie da się go utrwalić poprawnie.
+
+**6.3** MON-3 wymaga rozszerzenia: obejmuje rytm **roczny** (obwieszczenia
+waloryzacyjne), a odsetki zmieniają się w rytmie **posiedzeń RPP**. Do decyzji
+przy najbliższej rewizji monitoringu.
+
+**Wersje:** `shared` 3.46 → 3.47, `audyt-systemu-v4` 6.80 → 6.81.
+
+
+---
+
+## AUDYT-2026-09-12f — T28 wdrożony, MON-4 otwarta; test znalazł 8 usterek, których ręczny przegląd nie znalazł (O-12)
+
+**Tryb:** BUDOWA TESTU + FAZA 3E (naprawy wykryte przez test) + FAZA 7A/7C.
+Wykonanie dwóch pozycji zostawionych do decyzji w `AUDYT-2026-09-12e`:
+rozszerzenie monitoringu o rytm RPP oraz wdrożenie testów z O-12.
+
+### 1. T28 — `scripts/check_wartosci_prawne.py`
+
+Trzy bramki: **W1** rejestr znanych błędnych cytatów (FAIL, 10 pozycji
+startowych), **W2** procent utrwalony przy pojęciu odsetek (FAIL), **W3** wiersz
+kwotowy bez podstawy (WARN). Offline, deterministyczny, wchodzi do orkiestratora.
+Selftest **21/21**, w tym dwie mutacje negatywne. Pełny opis i ograniczenia:
+`REGRESSION-TEST-PLAN.md`, sekcja T28.
+
+### 2. ⭐ WYNIK PIERWSZEGO PRZEBIEGU — test wygrał z ręcznym przeglądem
+
+410 plików, **31 trafień FAIL**. Po odsianiu linii opisujących naprawy zostało
+**8 realnych, nienaprawionych usterek**:
+
+| Plik | Usterka |
+|---|---|
+| `pisma-proste-v2/references/SPF-SPG.md` ×2 | opłata od wniosku o zabezpieczenie z **art. 69 § 1 KSCU** zamiast **art. 68 pkt 1** |
+| `pisma-proste-v2/references/SPB-zarzuty.md` ×2 | opłata od zarzutów z „art. 19 § 3 KSCU" (jest **ust. 4**), bez konsumenckiego capu 750 zł |
+| `pisma-proste-v2/SKILL.md` ×1 | jw. + termin zarzutów **7 dni** (jest **miesiąc**, art. 480² § 2 pkt 3 KPC) |
+| `dr-03` ×3 (`mod-KW-KPW-framework`, `mod-KW-kodeks-wykroczen`, `mod-grzywny-mandaty`) | „art. 94 KPSW" bez odesłania do **art. 506 § 1 KPK** |
+
+⛔ **To są dokładnie te rodziny, które badały trzy poprzednie sesje.** Ręczny
+przegląd domknął pliki, na które patrzył, i ominął te same błędy w plikach
+sąsiednich — mimo że po każdej naprawie wykonywano `grep`. Wniosek: `grep` łapie
+frazę, której się szuka; test łapie **wzorzec, o którym się zapomniało**.
+Wszystkie 8 naprawionych w tej samej sesji; po naprawie **FAIL: brak**.
+
+### 3. DWA BŁĘDY W SAMYM TEŚCIE, wykryte i naprawione przed wydaniem
+
+**3.1 Fałszywy alarm na poprawnym wierszu.** Pierwsza wersja W1-105-KPW szukała
+`art. 105 KPW` + rdzenia `uzasadnien` w oknie 60 znaków — i zgłaszała
+**poprawny** wiersz „Apelacja wykroczeniowa — od otrzymania wyroku
+**z uzasadnieniem** | art. 105 § 1 KPW". Sygnaturą błędu jest **wniosek**
+o uzasadnienie albo termin **3 dni**, nie samo słowo. Regex zawężony, selftest
+dostał oba warianty.
+
+**3.2 Nazwa rodzaju aktu udawała podstawę.** Pierwsza wersja W3 uznawała słowo
+„rozporządzenie" za wskazanie podstawy — czyli przepuszczała dokładnie ten wiersz,
+dla którego bramka powstała („doręczenie przez komornika 60 zł | Rozporządzenie
+MS"). Wymóg zaostrzony do jednostki redakcyjnej albo numeru publikacyjnego.
+
+⚠️ Oba błędy wyszły **z selftestu i pierwszego przebiegu**, nie z użycia —
+potwierdza sens reguły „bramka z fałszywymi alarmami zostaje wyłączona po drugim
+przebiegu", zapisanej przy T26.
+
+### 4. ODRZUCONY KANDYDAT — jawnie
+
+`AUDYT-2026-09-12e` proponował regułę generyczną: **indeks górny przy numerze
+artykułu tam, gdzie ustawa używa `§`, → FAIL**. ⛔ **Nie wdrożono.** KPC ma
+legalne jednostki `art. 205¹`, `art. 398⁵`, `art. 477⁹`, `art. 505¹` —
+reguła generowałaby fałszywe alarmy na poprawnych cytatach, w tym na tych, które
+ta sesja właśnie wpisała do `shared/terminy.md`. Zastąpiona rejestrem pozycji
+zweryfikowanych odczytem treści.
+
+⚠️ **Cena wyboru, zapisana wprost:** rejestr wykrywa **nawrót znanego** błędu,
+nie nową usterkę tej samej klasy. Domknięcie wymagałoby porównania cytatu
+z treścią aktu przez API ELI — inny rząd trudności, dziś bez wykonalnej postaci.
+Zostaje w O-12.
+
+### 5. MON-4 — monitoring w rytmie nie-rocznym
+
+Otwarta jako **rozszerzenie, nie zastąpienie MON-3**. MON-3 zostaje bez zmian
+i obsługuje rytm roczny (obwieszczenia waloryzacyjne, okno X–XII). MON-4 obejmuje:
+**stopę referencyjną NBP** (odsetki cywilne i handlowe), **stopę lombardową**
+(odsetki za zwłokę, pośrednio ZUS) i **kwoty z rozporządzeń wykonawczych**
+(bez cyklu — akt uchylający wchodzi kiedy chce).
+
+⛔ **Dlaczego osobna pozycja:** MON-3 mówi „sprawdzać w oknie X–XII". Dla odsetek
+to okno jest bezużyteczne — stopa zmienia się w marcu, w maju, kiedykolwiek.
+Dopisanie tego do MON-3 zepsułoby jego protokół i tak samo nie dałoby pokrycia.
+
+⚠️ **MON-4 jest zabezpieczeniem DRUGIEJ linii.** Pierwszą jest doktryna sekcji 4
+`TABELE-OPLAT` (formuła zamiast procentu) pilnowana przez T28/W2: dopóki moduły
+nie trzymają wyniku, zmiana stopy NBP **ich nie dezaktualizuje**. Dlatego zmiana
+samej stopy **nie otwiera flagi F-** — otwiera ją dopiero zmiana wzoru w ustawie
+albo trafienie W2, czyli złamanie doktryny.
+
+### 6. WERYFIKACJA Dz.U.
+
+Sesja nie dotykała podstaw prawnych poza naprawami z pkt 2, opartymi na odczytach
+z sesji 12 / 12d. **FAZA 7B: mapa bez zmian.**
+
+**Wersje:** `pisma-proste-v2` 2.15 → 2.16,
+`dr-03-prawo-karne-wykroczenia-egzekucja` 3.37 → 3.38,
+`shared` 3.47 → 3.48 (markery T28-OK),
+`analiza-sadowa-v6` 6.7 → 6.8 (marker), `pisma-procesowe-v3` 5.24 → 5.25 (markery),
+`audyt-systemu-v4` 6.81 → 6.82.
+
+
+---
+
+## AUDYT-2026-09-12g — terminy administracyjne i sądowoadministracyjne: obsadzenie dwóch pustych reżimów
+
+**Tryb:** TREŚĆ (FAZA 3E) + FAZA 7A/7C. Kontynuacja rodziny TERMINY po pytaniu
+użytkownika „czy to już wszystkie terminy i opłaty".
+
+### 1. PUNKT WYJŚCIA — pomiar, nie wrażenie
+
+`shared/terminy.md` po sesji 12d miał 37 wierszy o rozkładzie: **KPC 28, KPK 7,
+KPW 7, KC 3, KP 2, PPSA 1, KPA 1**. Zero pozycji z Ordynacji podatkowej, KKW,
+KRO, prawa upadłościowego i KSH.
+
+⛔ **Jeden wiersz na kodeks nie znaczy „sprawdzone i wystarczy" — znaczy „nie
+badano".** Trzy poprzednie sesje naprawiały procedurę cywilną i karną, bo tam
+wyszedł CRIT; administracyjna została nietknięta i nikt tego nie odnotował.
+
+### 2. UZUPEŁNIENIA (terminy.md 132 → 213 linii)
+
+✅ [VER] RZĄD 1 2026-09-12g — odczyt treści KPA `Dz.U. 2025 poz. 1691`
+i PPSA `Dz.U. 2026 poz. 143` (oba `obowiązujący` w ELI).
+
+**KPA — strona:** odwołanie 14 dni z zaznaczeniem, że wnosi się je **za
+pośrednictwem organu, który wydał decyzję** (art. 129 § 1–2); zażalenie 7 dni
+(art. 141 § 2); uzupełnienie decyzji 14 dni (art. 111 § 1); przywrócenie terminu
+7 dni (art. 58 § 2); wznowienie 1 miesiąc (art. 148 § 1–2); wniosek o ponowne
+rozpatrzenie (art. 127 § 3).
+
+**KPA — organ:** osobna tabela z art. 35 § 2, § 3 i § 3a. ⛔ Dopisany **art. 35
+§ 5**: do terminu organu **nie wlicza się** terminów na czynności stron, okresów
+doręczania usługą hybrydową, zawieszenia, mediacji ani opóźnień z winy strony.
+Liczenie „od wniosku do decyzji" bez tych odliczeń zawyża bezczynność i psuje
+ponaglenie — a to jest najczęstszy błąd w skargach na bezczynność.
+
+**PPSA:** skarga 30 dni (art. 53 § 1–2); ⭐ **w każdym czasie** na inne akty
+(§ 2a) i na bezczynność **po wniesieniu ponaglenia** (§ 2b); 6 miesięcy dla
+prokuratora, RPO i RPD (§ 3); sprzeciw od decyzji 14 dni (art. 64c § 1); skarga
+kasacyjna 30 dni (art. 177 § 1); zażalenie 7 dni (art. 194 § 2); przywrócenie
+terminu 7 dni z granicą roku (art. 87); wznowienie 3 miesiące (art. 277)
+i bezwzględna granica **5 lat** (art. 278).
+
+### 3. ⛔ USTALENIE O NAJWIĘKSZYM CIĘŻARZE PRAKTYCZNYM
+
+**Uzasadnienie wyroku WSA ma dwa reżimy w jednym artykule.** Skarga
+**uwzględniona** → uzasadnienie **z urzędu** w 14 dni (art. 141 § 1). Skarga
+**oddalona** → tylko **na wniosek złożony w 7 dni** (art. 141 § 2). Przeoczenie
+tego terminu **zamyka drogę do skargi kasacyjnej**, bo jej termin biegnie od
+doręczenia orzeczenia **z uzasadnieniem** (art. 177 § 1). Asymetria występuje
+dokładnie w sytuacji, w której strona przegrała — czyli wtedy, gdy środek
+odwoławczy jest jej potrzebny.
+
+⚠️ **Art. 58 § 3 KPA:** przywrócenia terminu do złożenia prośby o przywrócenie
+terminu **nie ma**. Uchybienie siedmiodniowemu terminowi z § 2 jest ostateczne —
+inaczej niż w KPC, gdzie art. 169 § 4 dopuszcza wypadki wyjątkowe po roku.
+
+### 4. USTERKA ZNALEZIONA W dr-05
+
+`mod-UDIP-dostep-informacji-publicznej.md` opisywał art. 52 § 3 PPSA jako drogę
+„gdy podmiot bez wyższego organu". Odczyt treści: przepis pozwala wnieść skargę
+**bez uprzedniego wniosku o ponowne rozpatrzenie ZAWSZE, gdy taki wniosek
+przysługuje** — z wyjątkiem decyzji ministra właściwego do spraw zagranicznych
+w sprawach z ustawy o cudzoziemcach oraz decyzji konsula. Dopisane też, że
+**art. 52 § 4 jest uchylony**, a „wezwanie do usunięcia naruszenia prawa"
+zniknęło z procedury w 2017 r. — starsze opracowania nadal je powielają.
+
+⚠️ Pozostałe moduły dr-05 wypadły czysto: art. 129 § 2 KPA, art. 53 § 1 PPSA,
+art. 58 § 2 KPA i art. 127 § 3 KPA cytowane poprawnie w `mod-ustawa-SKO`,
+`mod-KPA-decyzja-i-odwolanie` i `mod-KPA-mechanizmy-w-toku-sprawy`.
+
+### 5. T28
+
+Przebieg po zmianach: **FAIL brak**. Do rejestru W1 **nie dopisano nic** —
+usterka z pkt 4 jest opisowa (mylny warunek zastosowania), nie jest błędnym
+cytatem jednostki, więc nie ma postaci nadającej się na wzorzec. Zapis zgodny
+z kryterium: do rejestru wchodzą wyłącznie pozycje o dającej się dopasować
+sygnaturze.
+
+### 6. ZAKRES NADAL OTWARTY
+
+Terminy z **Ordynacji podatkowej**, **KKW**, **KRO**, prawa **upadłościowego
+i restrukturyzacyjnego**, **KSH** oraz **UPEA** (egzekucja administracyjna —
+dr-05 ma własne wiersze, niezweryfikowane w tej sesji). Rozkład po tej sesji:
+KPC 28, PPSA 12, KPA 10, KPK 7, KPW 7, KC 3, KP 2.
+
+**Wersje:** `shared` 3.48 → 3.49,
+`dr-05-prawo-administracyjne-sadowoadministracyjne` 3.24 → 3.25,
+`audyt-systemu-v4` 6.82 → 6.83.
+
+
+---
+
+## AUDYT-2026-09-12h — UPEA: dwa CRIT i pierwszy udokumentowany przypadek, w którym RZĄD 2B POTWIERDZIŁ NIEPRAWDĘ
+
+**Tryb:** TREŚĆ (FAZA 3E) + FAZA 7A/7C. Cel wskazany na końcu `AUDYT-2026-09-12g`:
+`mod-UPEA-egzekucja-administracyjna.md` sam nosił adnotację „weryfikuj art. 15 § 1
+UPEA w ISAP", więc był najbliższym kandydatem.
+
+### 1. CRIT-1 — termin zarzutu, który nie istnieje
+
+Moduł podawał w sekcji oznaczonej **„Terminy — ABSOLUTNY PRIORYTET"**:
+> „Zarzuty w egzekucji (art. 33 UPEA): **7 dni od doręczenia odpisu TW lub zajęcia**"
+
+✅ [VER] RZĄD 1 2026-09-12h — odczyt treści `Dz.U. 2026 poz. 268`. **Art. 33 § 5
+nie zna terminu biegnącego od doręczenia tytułu wykonawczego.** Podaje wyłącznie
+terminy **końcowe**, po których zarzut jest spóźniony:
+
+| Termin | Od czego |
+|---|---|
+| 30 dni | od **wyegzekwowania w całości** obowiązku, kosztów upomnienia i kosztów egzekucyjnych |
+| do dnia wykonania | wykonania w całości obowiązku niepieniężnego albo zapłaty całej należności z odsetkami i kosztami |
+| 7 dni | od doręczenia **postanowienia o umorzeniu** postępowania |
+
+⛔ **Kierunek błędu jest tym razem NIEBEZPIECZNY.** Poprzednie usterki terminowe
+zaniżały termin, czyli popychały do wcześniejszego działania. Ta **zamykała
+środek, który nadal przysługiwał**: zobowiązany po dwóch tygodniach od TW
+usłyszałby „za późno", choć zarzut jest dopuszczalny dopóki egzekucja trwa
+i obowiązek nie został wykonany.
+
+### 2. ⛔⛔ USTALENIE METODOLOGICZNE — RZĄD 2B POTWIERDZIŁ NIEPRAWDĘ
+
+Przy błędnym wierszu stała adnotacja modułu:
+> „⚠️ POTWIERDZONE 2026-07-27, **Rząd 2B: lexlege.pl, arslege.pl** — reguła
+> podstawowa poprawna; UZUPEŁNIENIE: art. 33 § 5 UPEA przewiduje **dodatkowe,
+> alternatywne** terminy «nie później niż» dla sytuacji szczególnych"
+
+Dwa serwisy RZĘDU 2B potwierdziły regułę, której w ustawie nie ma, a **prawdziwa
+treść przepisu została zdegradowana do roli „uzupełnienia dla sytuacji
+szczególnych"**. Odczyt treści odwraca tę hierarchię: art. 33 § 5 **jest** regułą,
+a „7 dni od TW" nie istnieje.
+
+⭐ **To jest pierwszy w dzienniku udokumentowany przypadek, w którym weryfikacja
+RZĘDU 2B nie tyle zawiodła, co ZALEGITYMIZOWAŁA błąd i utrwaliła go adnotacją
+„POTWIERDZONE".** Wniosek dla `HIERARCHIA-ZRODEL.md`: adnotacja „potwierdzone
+Rząd 2B" przy **terminie zawitym albo kwocie** nie zamyka weryfikacji — dla tych
+dwóch rodzin wartości domyka ją wyłącznie RZĄD 1. Ten sam wzorzec wystąpił
+w `AUDYT-2026-09-12e`, gdzie próbka publicystyki dała cztery różne stopy
+referencyjne i wzór „+ 7 p.p." bez podstawy ustawowej.
+
+### 3. CRIT-2 — katalog podstaw zarzutu sprzed nowelizacji
+
+Moduł wymieniał **cztery** podstawy: wykonanie lub umorzenie obowiązku,
+niedopuszczalność egzekucji, **zastosowanie zbyt uciążliwego środka
+egzekucyjnego**, **prowadzenie egzekucji przez niewłaściwy organ**.
+
+Obecny **art. 33 § 2 UPEA** ma **sześć** podstaw i katalog jest **zamknięty**:
+nieistnienie obowiązku; określenie obowiązku niezgodnie z jego treścią; błąd co
+do zobowiązanego; brak uprzedniego doręczenia upomnienia; wygaśnięcie obowiązku;
+brak wymagalności.
+
+⛔ **„Zbyt uciążliwy środek" nie zniknął z ustawy — PRZENIÓSŁ SIĘ DO INNEGO
+INSTRUMENTU.** Jest dziś podstawą **skargi na czynność egzekucyjną**
+(art. 54 § 1 pkt 2), obok „dokonania czynności z naruszeniem ustawy"
+(pkt 1). Ten sam argument wniesiony jako **zarzut** zostanie oddalony, bo nie
+mieści się w zamkniętym katalogu art. 33 § 2; wniesiony jako **skarga** jest
+trafiony. To nie jest różnica redakcyjna — to dobór instrumentu decydujący
+o wyniku.
+
+### 4. CRIT-3 — termin skargi na czynność egzekucyjną
+
+Moduł: „Skarga na czynności egzekucyjne: **14 dni** od czynności".
+Art. 54 § 3 UPEA: **7 dni** od doręczenia zobowiązanemu **odpisu dokumentu
+stanowiącego podstawę** zaskarżonej czynności, do organu egzekucyjnego, który
+jej dokonał. Błędny był i termin, i punkt początkowy, i adresat.
+
+### 5. POTWIERDZONE BEZ ZMIAN
+
+Art. 15 § 1 zd. 2: egzekucja może być wszczęta dopiero **po upływie 7 dni od
+doręczenia upomnienia** — moduł miał to poprawnie, z własną adnotacją
+„weryfikuj". Dopisane: koszty upomnienia obciążają zobowiązanego i powstają
+**z chwilą doręczenia** (art. 15 § 2).
+
+⚠️ **Nowelizacja po tekście jednolitym sprawdzona** (KROK 2C):
+`Dz.U. 2026 poz. 739` z 15.05.2026 zmienia art. 3a, dodaje art. 67da
+i przebudowuje przepisy o sprzedaży (art. 105a–111n). **Nie dotyka art. 15, 33,
+34 ani 54** — brzmienia użyte w naprawie są aktualne.
+
+### 6. NAPRAWIONE PLACEHOLDERY
+
+„Kwoty wolne: weryfikuj UPEA w ISAP" przy zajęciu rachunku bankowego —
+⛔ **kwoty wolnej w UPEA nie ma**. Ustanawia ją **art. 54 ustawy Prawo bankowe**
+i jest **zakotwiczona w minimalnym wynagrodzeniu**, czyli zmienia się co roku;
+podłączone do `shared/TABELE-OPLAT.md` sekcja 4f. Tryb zajęcia: art. 80 § 1–2
+UPEA.
+
+### 7. T28
+
+Przebieg po zmianach: **FAIL brak**. Do rejestru W1 **rozważono i odrzucono**
+dopisanie wzorca „7 dni.*art. 33 UPEA": fraza „7 dni" występuje w art. 33 § 5
+pkt 3 legalnie, więc wzorzec dawałby fałszywe alarmy na poprawnym zapisie.
+Zgodnie z kryterium rejestru — nie dopisano.
+
+### 8. ZAKRES NADAL OTWARTY
+
+Terminy z **Ordynacji podatkowej**, **KKW**, **KRO**, prawa **upadłościowego
+i restrukturyzacyjnego**, **KSH**. Rozkład `shared/terminy.md` po tej sesji:
+KPC 35, PPSA 18, KPA 17, **UPEA 12**, KPK 10, KPW 9, KC 3, KP 2.
+
+**Wersje:** `shared` 3.49 → 3.50,
+`dr-05-prawo-administracyjne-sadowoadministracyjne` 3.25 → 3.26,
+`audyt-systemu-v4` 6.83 → 6.84.
+
+
+---
+
+## AUDYT-2026-09-12i — Ordynacja podatkowa: pięć nowelizacji w kolejce i twierdzenie, którego nie da się potwierdzić
+
+**Tryb:** TREŚĆ (FAZA 3E) + FAZA 7A/7C. Cel wskazany na końcu `AUDYT-2026-09-12h`.
+
+### 1. ⛔⛔ KROK 2C dał wynik, jakiego nie było w żadnej dotychczasowej sesji
+
+Tekst jednolity Ordynacji `Dz.U. 2026 poz. 622` pochodzi z **22.04.2026**. Po tej
+dacie ogłoszono **pięć ustaw zmieniających**, wszystkie z **odroczonym** wejściem
+w życie:
+
+| Akt | Wejście w życie | Uwaga |
+|---|---|---|
+| `Dz.U. 2026 poz. 1154` | **16.09.2026** | za 4 dni od tej sesji |
+| `Dz.U. 2026 poz. 825` | **24.09.2026** | wąska — interpretacje indywidualne (art. 14i, 14j) |
+| `Dz.U. 2026 poz. 846` | **1.10.2026** | szeroka — m.in. uchylenia w art. 86a–86m, 119m, 144 |
+| `Dz.U. 2026 poz. 875` | 1.01.2027 | |
+| `Dz.U. 2026 poz. 1098` | 1.01.2027 | ⚠️ dotyka art. 70 |
+
+⛔ **Trzy z nich wchodzą w życie w ciągu trzech tygodni od tej sesji.** Odczyt
+tekstu jednolitego jest poprawny **na dziś** i przestanie taki być bardzo szybko.
+Ostrzeżenie z datą wpisane wprost do `shared/terminy.md` i do modułu dr-06 —
+to przypadek graniczny między „aktualne" a „normy przedwczesne" (O-10).
+
+### 2. ⛔ TWIERDZENIE, KTÓREGO NIE DA SIĘ POTWIERDZIĆ
+
+`dr-06/SKILL.md` (BAS-W32) i `mod-OP-ordynacja-podatkowa.md` twierdziły:
+> „nowelizacja znosi «wieczne przedawnienie» + wprowadza **ugodę podatkową od
+> 01.10.2026** (art. 70 i n. OP)" oraz „**UCHYLENIE art. 70 § 6 pkt 1 Op**"
+
+Weryfikacja 2026-09-12i:
+1. **Art. 70 § 6 pkt 1 Op JEST W MOCY** w tekście jednolitym — odczyt treści.
+2. Przeszukano dwie ustawy o najbliższych datach wejścia w życie:
+   `poz. 825` (24.09) dotyczy wyłącznie **interpretacji indywidualnych**;
+   `poz. 846` (1.10) **nie zawiera zmiany w art. 70** ani **ani razu słowa
+   „ugoda"**.
+3. Data **1.10.2026** zgadza się z wejściem w życie `poz. 846`, ale **zakres tej
+   ustawy jest inny** — czyli data została skojarzona z właściwym aktem, a treść
+   z czymś innym.
+
+⚠️ **Nie przesądzam, że twierdzenie jest fałszywe** — mogło opisywać projekt albo
+akt, którego nie objęło wyszukiwanie. Ale **w obecnym zapisie było podane jako
+stan prawa, z datą**, i tak byłoby użyte. Oznaczone jako **opis zamiaru
+legislacyjnego, nie stanu prawa**, z żądaniem wskazania pozycji Dz.U. i daty
+przed powołaniem. Reprodukcja zapisana w module.
+
+⭐ **Klasa usterki nowa w tej serii:** poprzednie były błędnym cytatem albo
+nieaktualną wartością. Ta jest **twierdzeniem o przyszłym stanie prawa podanym
+jako obowiązujące**, z prawdziwą datą przyklejoną do nieprawdziwej treści.
+Data uwiarygodnia całość — i to ona czyni zapis niebezpiecznym.
+
+### 3. NAPRAWA CYTATU
+
+„Odwołanie 14 dni (**art. 223 § 1** Op)" — termin jest w **§ 2**; § 1 określa
+wyłącznie, że odwołanie wnosi się **za pośrednictwem organu, który wydał
+decyzję**. Ten sam wzorzec co art. 493 § 1 KPC i art. 105 § 1 KPW: **podstawa
+terminu nie stoi w przepisie o samej czynności**. Trzeci potwierdzony przypadek
+reguły zapisanej w `shared/terminy.md` po sesji 12d.
+
+### 4. UZUPEŁNIENIA
+
+`shared/terminy.md` 244 → 298 linii. Dopisane z odczytu: zażalenie 7 dni
+(art. 236 § 2), przywrócenie terminu 7 dni z zakazem z § 3 (art. 162), wznowienie
+1 miesiąc w dwóch wariantach — w tym **od orzeczenia TK i od publikacji sentencji
+TSUE** (art. 241 § 2 pkt 1–2), art. 68 § 1–2 oraz zawieszenie i przerwanie biegu
+przedawnienia (art. 70 § 2–6).
+
+⛔ Dopisane rozróżnienie **art. 68 vs art. 70**: pierwszy mówi, że zobowiązanie
+**nie powstaje**, drugi że **przedawnia się**. To dwie różne instytucje, a nie
+dwa warianty jednej — pomyłka przesuwa datę o kilka lat.
+
+### 5. T28
+
+Do rejestru W1 **dopisano jedną pozycję**: `art. 223 § 1 Op` w kontekście terminu
+odwołania — sygnatura jednoznaczna, bo § 1 nie zawiera terminu. Trafiła od razu:
+`mod-ustawa-podatek-nieruchomosci-i-lokalne.md` powielał ten sam błędny cytat.
+Naprawione.
+
+### ⭐ 5a. PIERWSZY POMIAR FAŁSZYWYCH ALARMÓW W2 — i naprawa bramki
+
+`dr-06` wszedł do zakresu skanowania po raz pierwszy. Bramka **W2 dała trzy
+fałszywe alarmy**: stawki podatku u źródła **19 %/20 % od odsetek jako KATEGORII
+PRZYCHODU** (art. 21–22 CIT, art. 30a PIT) nie mają nic wspólnego z odsetkami
+ustawowymi, ale pierwsza wersja reguły szukała samego rdzenia `odsetk` obok
+procentu.
+
+Bramka zawężona dwustopniowo: (a) łapie wyłącznie **nazwane** rodzaje odsetek
+zakotwiczonych w stopie NBP — ustawowe, maksymalne, za zwłokę, za opóźnienie,
+handlowe; (b) dodatkowo wymaga, żeby procent był im **przypisany** (`wynosi`,
+`w wysokości`, `rocznie`, `w skali roku`, `=`). Trzy przypadki dr-06 dopisane do
+selftestu jako **mutacje negatywne**; selftest 23 → **26/26**.
+
+⛔ **To trzeci błąd własny T28 wykryty przed wyrządzeniem szkody** — po fałszywym
+alarmie na art. 105 § 1 KPW i po W3 uznającym słowo „rozporządzenie" za podstawę.
+Wszystkie trzy wyszły przy **pierwszym kontakcie bramki z nowym materiałem**, nie
+przy projektowaniu. Wniosek operacyjny: **wejście nowego skilla w zakres
+skanowania traktować jako osobny przebieg kalibracyjny**, a nie jako rutynowe
+rozszerzenie — i nie ufać zielonemu wynikowi na materiale, na którym test już
+raz przeszedł.
+
+### 6. ZAKRES NADAL OTWARTY
+
+**KKW**, **KRO**, prawo **upadłościowe i restrukturyzacyjne**, **KSH**.
+Rozkład `shared/terminy.md`: KPC 35, PPSA 18, KPA 18, **Op 11**, KPK 10, KPW 9,
+UPEA 8, KC 3, KP 2.
+
+**Wersje:** `shared` 3.50 → 3.51, `dr-06-podatki-finanse-publiczne-aml`
+3.80 → 3.81, `audyt-systemu-v4` 6.84 → 6.85 (T28: nowa pozycja W1-223-Op,
+zawężona bramka W2, selftest 21 → 26).
+
+
+---
+
+## AUDYT-2026-09-12j — KKW: moduł na 772 linie bez jednego terminu; karencja jako osobna konstrukcja
+
+**Tryb:** TREŚĆ (FAZA 3E) + FAZA 7A/7C. Dwa zadania: otwarcie flagi dla
+nowelizacji Ordynacji stojących w kolejce (na polecenie użytkownika) oraz
+kontynuacja rodziny TERMINY na KKW.
+
+### 1. FLAGA F-OP-2026-09 OTWARTA
+
+Pięć nowelizacji Ordynacji ogłoszonych po tekście jednolitym, **trzy wchodzą
+w życie w ciągu trzech tygodni** (16.09, 24.09, 1.10.2026). Wpis w
+`WARN-OTWARTE.md` z tabelą aktów, ustalonym zakresem tam, gdzie go sprawdzono,
+i protokołem: po każdej z trzech dat ponowny odczyt art. 223, 236, 162, 241, 68
+i 70 OP oraz aktualizacja adnotacji [VER].
+
+⚠️ **Zakres `poz. 1154`, `poz. 875` i `poz. 1098` NIE został ustalony** —
+sprawdzono wyłącznie, czy dotykają art. 70 (`poz. 1098`: **tak**). Zapisane
+jawnie jako niedokończone, nie jako „sprawdzone".
+
+⭐ **Wzorzec wyprowadzony z tej flagi:** KROK 2C pytał dotąd „czy są nowelizacje
+po tekście jednolitym". Tu odpowiedź brzmi **„pięć, ale żadna jeszcze nie
+obowiązuje"** — czyli odczyt jest **poprawny i jednocześnie ma datę ważności**.
+Format adnotacji `✅ [VER] RZĄD 1 <data>` tego wymiaru nie ma. Kandydat na
+rozszerzenie o pole **„ważne do"**.
+
+### 2. KKW — pomiar wyjściowy
+
+`mod-KKW-kodeks-karny-wykonawczy.md` liczy **772 linie** i **nie zawierał ani
+jednego terminu**. `shared/terminy.md` — zero pozycji z KKW. Moduł opisuje
+prawa skazanego, warunki odbywania kary, kary dyscyplinarne i widzenia;
+**cała warstwa proceduralna była pusta**.
+
+⛔ To ta sama klasa luki co KPA i PPSA przed sesją 12g, ale dotyczy osób
+**pozbawionych wolności**, dla których 7-dniowy termin skargi jest często jedyną
+realną drogą kwestionowania decyzji administracji zakładu.
+
+### 3. ⭐ USTALENIE POJĘCIOWE — KARENCJA TO NIE TERMIN ZAWITY
+
+Art. 161 § 3–4 KKW: wniosku o warunkowe zwolnienie złożonego przed upływem
+**6 miesięcy** (kara lub suma kar do 5 lat) albo **roku** (ponad 5 lat) od
+postanowienia o odmowie **„nie rozpoznaje się aż do upływu tego okresu"**.
+Tak samo art. 153 § 3 — kolejna przerwa nie wcześniej niż po **roku** od
+zakończenia poprzedniej.
+
+⛔ **Skutek jest odwrotny niż przy terminie zawitym.** Pismo złożone przedwcześnie
+**nie przepada** — leży i czeka. Mylenie tych dwóch konstrukcji daje błąd w obie
+strony: albo „za późno, przepadło" tam, gdzie nic nie przepadło, albo „złóżmy od
+razu" tam, gdzie to niczego nie przyspieszy. Rozróżnienie wpisane do
+`shared/terminy.md` i do modułu.
+
+### 4. UZUPEŁNIENIA
+
+✅ [VER] RZĄD 1 2026-09-12j — `Dz.U. 2025 poz. 911`. **KROK 2C:**
+`Dz.U. 2025 poz. 1423` (w życie 1.01.2026) **nie dotyka art. 6, 7, 49, 151, 153,
+161 ani 162**.
+
+Dopisane: skarga skazanego **7 dni od dnia, w którym dowiedział się o zdarzeniu**
+(art. 6 § 4 — punkt początkowy inny niż doręczenie), skarga na decyzję organu
+7 dni **do organu, który ją wydał** (art. 7 § 3), rozpoznanie zażalenia
+w przedmiocie warunkowego zwolnienia w 14 dni (art. 162 § 2), odroczenie do roku
+i **do 3 lat po urodzeniu dziecka** wobec kobiety ciężarnej oraz osoby samotnie
+sprawującej opiekę (art. 151 § 1), odroczenie z powodu przeludnienia
+z wyłączeniami podmiotowymi (§ 2), raty grzywny do roku albo do 3 lat (art. 49).
+
+⛔ Odnotowane: **art. 152 KKW jest UCHYLONY**; art. 6 § 2–3 — pismo bez
+uzasadnienia może zostać **pozostawione bez rozpoznania**, a organ ma ku temu
+cztery samodzielne podstawy.
+
+### 5. T28
+
+**FAIL brak.** Do rejestru W1 nic nie dopisano — w KKW nie było błędnych cytatów
+do utrwalenia, bo nie było cytatów w ogóle. To jest ograniczenie rejestru zapisane
+przy jego budowie: wykrywa **nawrót**, nie **brak**.
+
+### 6. ZAKRES NADAL OTWARTY
+
+**KRO**, prawo **upadłościowe i restrukturyzacyjne**, **KSH**.
+Rozkład `shared/terminy.md`: KPC 35, PPSA 18, KPA 18, **KKW 14**, Op 11, KPK 10,
+KPW 9, UPEA 8, KC 3, KP 2.
+
+**Wersje:** `shared` 3.51 → 3.52,
+`dr-03-prawo-karne-wykroczenia-egzekucja` 3.38 → 3.39,
+`audyt-systemu-v4` 6.85 → 6.86.
+
+
+---
+
+## AUDYT-2026-09-12k — KRO: termin prekluzyjny ZAWYŻONY trzykrotnie
+
+**Tryb:** TREŚĆ (FAZA 3E) + FAZA 7A/7C. Kontynuacja rodziny TERMINY na prawie
+rodzinnym. `dr-02` nie był dotykany ani razu w całej tej serii.
+
+### 1. ⛔⛔ CRIT — dwa terminy nieprawdziwe, jeden w kierunku NIEBEZPIECZNYM
+
+`dr-02/modules/kro-rodzinne/czesc-05-pochodzenie-dziecka.md` podawał w bloku
+„ZAPRZECZENIE OJCOSTWA — TERMINY ZAWITE":
+
+| Było | Jest (odczyt `Dz.U. 2026 poz. 236`) |
+|---|---|
+| matka — **6 miesięcy** od urodzenia dziecka lub dowiedzenia się | **rok** od dowiedzenia się, że dziecko nie pochodzi od męża, nie później niż do **pełnoletności** dziecka — **art. 69 § 1** |
+| dziecko — **3 lata** od osiągnięcia pełnoletności | **rok** od dowiedzenia się; gdy dowiedziało się przed pełnoletnością — od **dnia pełnoletności** — **art. 70 § 1** |
+
+⛔ **Termin dziecka był zawyżony TRZYKROTNIE.** To jest drugi w tej serii
+przypadek błędu w kierunku niebezpiecznym — po UPEA, gdzie zapis zamykał środek
+nadal przysługujący. Tu skutek jest odwrotny, ale równie ciężki: dziecko
+poinformowane o „trzech latach od pełnoletności" **traci powództwo**, bo
+rzeczywiste okno zamyka się po roku.
+
+⚠️ Błąd matki jest w kierunku bezpiecznym (6 miesięcy zamiast roku), ale ma
+**podwójną wadę**: zła długość i zły punkt początkowy — „od urodzenia" zamiast
+„od dowiedzenia się". Reforma z 2019 r. przestawiła punkt początkowy we
+wszystkich tych przepisach, a starsze opracowania liczą nadal od urodzenia.
+
+### 2. NIEAKTUALNA ADNOTACJA O TK
+
+Moduł nosił: „⚠️ TK zakwestionował ograniczenie datą pełnoletności — weryfikuj
+status". Ograniczenie **jest w tekście jednolitym** (art. 63 i art. 69 § 1),
+więc adnotacja w tej postaci wprowadzała w błąd co do stanu prawa. Usunięta.
+
+⭐ Natomiast odczyt ujawnił rzecz, której moduł nie miał: **art. 71 KRO
+„utracił moc"**. To jest realny ślad orzeczenia TK w tej materii — i to on
+powinien być odnotowany, a nie ogólnikowe „TK zakwestionował".
+
+### 3. UZUPEŁNIENIA
+
+Dopisane z odczytu, do modułu i do `shared/terminy.md`: warianty z **art. 64–65**
+(ubezwłasnowolnienie całkowite i choroba psychiczna — rok od ustanowienia
+przedstawiciela, od uchylenia ubezwłasnowolnienia albo od ustania choroby;
+stosowane **odpowiednio** także do matki z art. 69 § 3 i dziecka z art. 70 § 3);
+bezskuteczność uznania ojcostwa — **art. 78 § 1** (mężczyzna), **art. 79**
+(matka), **art. 81 § 2** (dziecko), **art. 81¹** (medycznie wspomagana
+prokreacja — bezskuteczność dopuszczalna tylko, gdy dziecko nie urodziło się
+w następstwie procedury); **art. 70¹** (zstępni po śmierci dziecka).
+
+⛔ **Art. 86 KRO — „brak terminu zawitego" to nie to samo co brak granic.**
+Prokurator nie ma terminu liczonego od dowiedzenia się, ale: gdy dziecko zmarło
+**przed** pełnoletnością — do dnia, w którym osiągnęłoby pełnoletność; gdy zmarło
+**po** pełnoletności — powództwo **niedopuszczalne**. Moduł podawał samą pierwszą
+połowę.
+
+### 4. T28
+
+**FAIL brak.** Do rejestru W1 nie dopisano nic: błędem była **wartość terminu**,
+nie jednostka redakcyjna — „6 miesięcy" i „3 lata" nie mają sygnatury dającej się
+dopasować bez fałszywych alarmów (oba zwroty występują legalnie w dziesiątkach
+miejsc). To kolejne potwierdzenie granicy rejestru: łapie **błędny cytat**, nie
+**błędną liczbę przy poprawnym cytacie**.
+
+⚠️ Ta granica jest warta odnotowania przy O-12. Trzy sesje z rzędu (12h UPEA,
+12i Ordynacja, 12k KRO) wykryły błędy, z których **tylko jeden** dał się
+zamienić na regułę testu. Zapora regresyjna pokrywa mniejszość tej rodziny
+usterek — resztę wyłapuje wyłącznie odczyt treści.
+
+### 5. ZAKRES NADAL OTWARTY
+
+Prawo **upadłościowe i restrukturyzacyjne**, **KSH**.
+Rozkład `shared/terminy.md`: KPC 35, **KRO 24**, PPSA 18, KPA 18, KKW 14, Op 12,
+KPK 10, KPW 9, UPEA 8, KC 3, KP 2.
+
+**Wersje:** `shared` 3.52 → 3.53,
+`dr-02-prawo-cywilne-rodzinne-gospodarcze` 3.47 → 3.48,
+`audyt-systemu-v4` 6.86 → 6.87.
+
+
+---
+
+## AUDYT-2026-09-12l — upadłość: zły adresat, zły skutek spóźnienia, trzecia kotwica wartości
+
+**Tryb:** TREŚĆ (FAZA 3E) + FAZA 7A/7C. Kontynuacja rodziny TERMINY na prawie
+upadłościowym i restrukturyzacyjnym.
+
+### 1. CO BYŁO POPRAWNE
+
+`mod-PrUpad-upadlosc-restrukturyzacja.md` miał **trafne** wartości: 30 dni
+obowiązku z art. 21 ust. 1, domniemanie 3 miesięcy (art. 11 ust. 1a),
+24 miesiące dla osoby prawnej (art. 11 ust. 2). Wszystkie potwierdzone odczytem
+`Dz.U. 2026 poz. 913`. **Pierwszy moduł w tej serii, którego liczby były
+poprawne w całości.**
+
+### 2. ⛔ CO BYŁO BŁĘDNE — adresat i skutek, nie liczba
+
+**2.1 Adresat zgłoszenia wierzytelności.** Moduł podawał termin („zwykle 30
+dni"), ale **nie podawał, komu i czym się zgłasza**. Art. 236 ust. 1 PrUp:
+**syndykowi**, za pośrednictwem **systemu teleinformatycznego obsługującego
+postępowanie sądowe**. Przed reformą zgłaszało się sędziemu-komisarzowi pismem —
+i ten nawyk jest wciąż powszechny. Brak adresata w module to luka, która przy
+zachowanym terminie i tak kończy się bezskutecznym zgłoszeniem.
+
+**2.2 Skutek spóźnienia.** Moduł: „uchybienie terminu = możliwość zgłoszenia po
+terminie **za dodatkową opłatą**". Art. 235 ust. 1 PrUp: zryczałtowane koszty
+w wysokości **15 % przeciętnego miesięcznego wynagrodzenia w sektorze
+przedsiębiorstw bez wypłat nagród z zysku w III kwartale roku poprzedniego**,
+ponoszone **nawet gdy opóźnienie powstało bez winy wierzyciela**. To nie jest
+„dodatkowa opłata" — to ryczałt liczony ze wskaźnika GUS, w 2026 r. rzędu kilku
+tysięcy złotych.
+
+### 3. ⭐ TRZECIA KOTWICA WARTOŚCI — nowa sekcja 4g w TABELE-OPLAT
+
+System znał dotąd dwie kotwice: **stopy NBP** (odsetki) i **minimalne
+wynagrodzenie** (progi, kwoty wolne). Art. 235 ust. 1 PrUp wprowadza trzecią:
+**przeciętne miesięczne wynagrodzenie w sektorze przedsiębiorstw**.
+
+⛔ **Jest najłatwiejsza do pomylenia z całej trójki**, bo GUS publikuje **cztery
+różne** „przeciętne wynagrodzenia": gospodarka narodowa vs sektor
+przedsiębiorstw, z nagrodami z zysku vs bez. Przepis wskazuje **jeden konkretny
+wskaźnik z konkretnego kwartału**; podstawienie innego daje wynik błędny
+o kilkaset złotych. Obowiązuje ta sama doktryna: zapisujemy **wskaźnik
+i przepis**, nie kwotę. `TABELE-OPLAT` 1.7 → **1.8**.
+
+### 4. ⛔ USTALENIE POJĘCIOWE — okres, który wygląda jak termin
+
+Art. 11 ust. 1a (3 miesiące) i ust. 2 (24 miesiące) **nie są terminami do
+dokonania czynności**. Pierwszy to **domniemanie**, które można obalić; drugi —
+**samodzielna podstawa niewypłacalności**. Oba **otwierają** 30-dniowy obowiązek
+z art. 21 ust. 1, a nie go zastępują. Odczytanie ich jako „mam trzy miesiące"
+odwraca konstrukcję i przesuwa moment powstania odpowiedzialności z art. 21
+ust. 3.
+
+⚠️ To trzecia w tej serii konstrukcja **mylona z terminem zawitym** — po
+karencji z art. 161 § 3–4 KKW i po terminach końcowych z art. 33 § 5 UPEA.
+Wspólny mianownik: **liczba dni w przepisie nie znaczy „termin dla strony"**.
+
+### 5. PODNIESIENIE RZĘDU WERYFIKACJI
+
+`mod-PrRestr-dzial-IV-uczestnicy-wierzyciele.md` opatrywał termin sprzeciwu
+adnotacją „**potwierdzone RZĄD 2, wielokrotnie zgodne**". Termin okazał się
+trafny — dwa tygodnie, **art. 91 ust. 1 i 2 PrRestr**. Mimo to podniesiony do
+RZĘDU 1: po `AUDYT-2026-09-12h`, gdzie dwa serwisy RZĘDU 2B potwierdziły normę
+nieistniejącą, **terminy zawite domyka wyłącznie odczyt treści** — niezależnie
+od tego, ile źródeł się zgadza.
+
+⚠️ Przy okazji zakwestionowany **kanał obwieszczenia**: moduł wskazywał **MSiG**,
+podczas gdy obwieszczenia w tych postępowaniach idą do **Krajowego Rejestru
+Zadłużonych**. Oznaczone do weryfikacji przy sprawie — nie rozstrzygnięte w tej
+sesji, bo wymaga odczytu przepisów o KRZ.
+
+### 6. T28
+
+**FAIL brak.** Do rejestru W1 nic nie dopisano — usterki miały postać **braku**
+(adresat) i **błędnego opisu skutku**, nie błędnego cytatu. Czwarta sesja z rzędu
+bez nowej pozycji w rejestrze.
+
+### 7. ZAKRES NADAL OTWARTY
+
+**KSH**. Rozkład `shared/terminy.md`: KPC 35, KRO 24, PPSA 18, KPA 18, KKW 14,
+Op 12, KPK 10, KPW 9, UPEA 8, **PrUp/PrRestr 11**, KC 3, KP 2.
+
+**Wersje:** `shared` 3.53 → 3.54 (TABELE-OPLAT 1.7 → 1.8),
+`dr-02-prawo-cywilne-rodzinne-gospodarcze` 3.48 → 3.49,
+`audyt-systemu-v4` 6.87 → 6.88.
+
+
+---
+
+## AUDYT-2026-09-12m — KSH: cztery reżimy zamiast jednego; RODZINA TERMINY ZAMKNIĘTA
+
+**Tryb:** TREŚĆ (FAZA 3E) + FAZA 7A/7C. Ostatnia pozycja listy rodzin
+terminowych.
+
+### 1. USTERKA PRZEZ POMINIĘCIE, NIE PRZEZ BŁĄD
+
+`mod-KSH-spolki-handlowe.md` podawał **dwie pary terminów** — obie dla
+**sp. z o.o.** — pod nagłówkiem „Zaskarżenie uchwały", z adnotacją „weryfikuj
+aktualne brzmienie w ISAP". Odczyt `Dz.U. 2024 poz. 18` potwierdził obie liczby
+jako **poprawne** (art. 251, art. 252 § 3) i ujawnił, że to **połowa materii**.
+
+KSH zna **cztery reżimy**, różnicowane typem spółki i rodzajem powództwa:
+
+| Spółka | Powództwo | Krótszy | Graniczny | Podstawa |
+|---|---|---|---|---|
+| sp. z o.o. | uchylenie | miesiąc od wiadomości | 6 miesięcy | art. 251 |
+| sp. z o.o. | nieważność | 6 miesięcy od wiadomości | **3 lata** | art. 252 § 3 |
+| S.A. niepubliczna | uchylenie | miesiąc | 6 miesięcy | art. 424 § 1 |
+| **S.A. publiczna** | uchylenie | miesiąc | ⛔ **3 miesiące** | art. 424 § 2 |
+| S.A. niepubliczna | nieważność | 6 miesięcy | **2 lata** | art. 425 § 2 |
+| **S.A. publiczna** | nieważność | ⛔ **30 dni od OGŁOSZENIA** | ⛔ **rok** | art. 425 § 3 |
+
+⛔ **Podanie jednej pary „dla spółek" jest błędne w trzech na cztery wypadki.**
+Dwie pułapki są ostre: sp. z o.o. ma granicę **3 lata**, S.A. tylko **2** —
+przeniesienie liczby między reżimami kosztuje rok. A spółka publiczna przy
+stwierdzeniu nieważności liczy termin **od ogłoszenia uchwały**, nie od
+powzięcia o niej wiadomości — jedyny wariant w całej tabeli liczony od zdarzenia
+publicznego, a nie od wiedzy uprawnionego.
+
+⭐ **Dopisane art. 252 § 4 i art. 425 § 4:** upływ tych terminów **nie wyłącza
+możliwości podniesienia ZARZUTU nieważności**. Powództwo przepada, zarzut nie —
+bywa to jedyna droga, gdy klient zgłasza się po latach. Żaden moduł tego nie
+miał.
+
+**KROK 2C:** nowelizacja `Dz.U. 2026 poz. 176` (w życie **18.02.2027**) **nie
+dotyka** art. 251, 252, 424 ani 425.
+
+### 2. ⛔ RODZINA TERMINY — ZAMKNIĘTA CO DO REŻIMÓW
+
+Jedenaście reżimów przerobionych w siedmiu sesjach (12d, 12g–12m).
+`shared/terminy.md`: **88 → 489 linii**.
+
+| Sesja | Reżim | Najcięższe ustalenie |
+|---|---|---|
+| 12d | KPC, KPK, KPW | **art. 503 KPC UCHYLONY**, powoływany w 6 plikach; termin zarzutów to **miesiąc**, nie 7 ani 14 dni |
+| 12g | KPA, PPSA | uzasadnienie WSA: z urzędu przy uwzględnieniu, **7 dni na wniosek** przy oddaleniu |
+| 12h | UPEA | **„zarzuty 7 dni od TW" — taki termin nie istnieje**; RZĄD 2B potwierdził nieprawdę |
+| 12i | Ordynacja | **pięć nowelizacji w kolejce**, trzy w ciągu trzech tygodni |
+| 12j | KKW | **karencja ≠ termin zawity** |
+| 12k | KRO | termin dziecka **zawyżony trzykrotnie** |
+| 12l | PrUp / PrRestr | zły **adresat** i zły **skutek spóźnienia**; trzecia kotwica wartości |
+| 12m | KSH | jeden reżim zamiast czterech |
+
+### 3. ⭐ WNIOSEK ZBIORCZY — CZTERY POSTACIE USTERKI TERMINOWEJ
+
+Rodzina okazała się bogatsza w typy błędów niż rodzina opłat:
+
+1. **błędna liczba** przy poprawnym cytacie (KRO, UPEA) — ⛔ **niewykrywalna
+   testem**, bo „3 lata" i „6 miesięcy" występują legalnie wszędzie;
+2. **błędny albo uchylony cytat** (art. 503 KPC, art. 105 § 1 KPW, art. 223 § 1
+   Op) — jedyna postać, którą T28 łapie;
+3. **poprawna liczba, zła konstrukcja** — karencja (KKW), terminy końcowe
+   (UPEA), domniemanie i podstawa niewypłacalności (PrUp);
+4. **usterka przez pominięcie** — brak adresata (PrUp), brak trzech z czterech
+   reżimów (KSH), brak całego kodeksu (KKW, KPA, PPSA).
+
+⛔ **T28 pokrywa wyłącznie postać 2.** Przez cztery ostatnie sesje nie dopisano
+do rejestru W1 ani jednej pozycji, bo usterki były postaci 1, 3 i 4. To jest
+trwałe ograniczenie zapory regresyjnej w tej rodzinie i nie da się go usunąć
+zaostrzeniem reguł — usunęłoby je wyłącznie porównanie cytatu z treścią aktu
+przez API, czyli zadanie z O-12, które nadal nie ma wykonalnej postaci.
+
+### 4. ZAKRES NADAL OTWARTY
+
+Rodzina zamknięta **co do reżimów, nie co do pozycji**. W każdym z jedenastu
+kodeksów przerobiono terminy **najczęściej używane**, nie wszystkie. Otwarte
+pozostają m.in.: KC (przedawnienia szczególne poza art. 118), KP (poza art. 264),
+KKS, prawo spadkowe proceduralne, terminy z ustaw szczególnych (RODO, KSC, PZP).
+
+Rozkład `shared/terminy.md`: KPC 35, KRO 24, PPSA 18, KPA 18, **KSH 14**, KKW 14,
+Op 12, PrUp/PrRestr 11, KPK 10, KPW 9, UPEA 8, KC 3, KP 2.
+
+**Wersje:** `shared` 3.54 → 3.55,
+`dr-02-prawo-cywilne-rodzinne-gospodarcze` 3.49 → 3.50,
+`audyt-systemu-v4` 6.88 → 6.89.
+
+
+---
+
+## AUDYT-2026-09-12n — KP: dwa wiersze na cały Kodeks pracy; granice dla pracodawcy pomieszane z terminami pracownika
+
+**Tryb:** TREŚĆ (FAZA 3E) + FAZA 7A/7C. Pozycja wskazana jako najostrzejsza
+z pozostałych: `shared/terminy.md` miał **dwa wiersze** z KP, a `dr-04` nie był
+dotykany w tej serii ani razu.
+
+### 1. LICZBY POPRAWNE, KONSTRUKCJA NIEPEŁNA
+
+`mod-KP-prawo-pracy.md` podawał dwa terminy — art. 264 § 1 i § 2 — oba
+**trafne**. Odczyt `Dz.U. 2025 poz. 277` ujawnił jednak, że:
+
+**1.1 Art. 264 § 2 ma DWA punkty początkowe.** Nie tylko doręczenie
+zawiadomienia o rozwiązaniu bez wypowiedzenia, ale także **dzień wygaśnięcia
+umowy**. Moduł podawał jeden. Przy wygaśnięciu (śmierć pracodawcy, tymczasowe
+aresztowanie) nie ma żadnego „pisma do doręczenia" — pracownik szukający daty
+doręczenia nie znajdzie jej i uzna, że termin nie biegnie.
+
+**1.2 Brakowało art. 264 § 3** (żądanie nawiązania umowy — 21 dni od
+zawiadomienia o odmowie przyjęcia do pracy) i **art. 265 § 2** (przywrócenie
+uchybionego terminu — 7 dni, z obowiązkiem **uprawdopodobnienia** okoliczności).
+
+### 2. ⛔ USTALENIE GŁÓWNE — GRANICE DLA PRACODAWCY W TEJ SAMEJ TABELI
+
+Moduł trzymał art. 52 § 2 (miesiąc na dyscyplinarkę) w sekcji „kiedy obalić",
+a art. 109 § 1 nie miał wcale. Oba są **terminami dla PRACODAWCY**:
+
+| Przepis | Granica | Skutek upływu |
+|---|---|---|
+| art. 52 § 2 KP | **miesiąc** od uzyskania wiadomości o okoliczności | dyscyplinarka wadliwa **niezależnie od zasadności przyczyny** |
+| art. 109 § 1 KP | **2 tygodnie** od powzięcia wiadomości **i** 3 miesiące od naruszenia | kara porządkowa nie może być zastosowana |
+
+⛔ **Ich upływ jest zarzutem obrony, nie terminem do dochowania przez
+pracownika.** Umieszczenie ich w jednej tabeli z terminami odwoławczymi **bez
+tego oznaczenia** prowadzi do szukania ich po niewłaściwej stronie. Oznaczone
+jawnie w obu plikach.
+
+⚠️ **Art. 109 § 3** — bieg dwutygodniowego terminu **nie rozpoczyna się**, a
+rozpoczęty **ulega zawieszeniu**, gdy pracownik nie może być wysłuchany z powodu
+nieobecności. Pracodawca, który liczy dwa tygodnie od zdarzenia mimo nieobecności
+pracownika, liczy je źle **na własną niekorzyść**.
+
+### 3. ⭐ MILCZĄCA ZGODA — konstrukcja, której nie miał żaden moduł
+
+**Art. 112 § 1 zd. 3 KP:** nieodrzucenie sprzeciwu od kary porządkowej **w ciągu
+14 dni od jego wniesienia jest równoznaczne z uwzględnieniem sprzeciwu**.
+
+To rzadka konstrukcja w polskiej procedurze: **brak reakcji drugiej strony kończy
+sprawę po myśli wnoszącego**, bez postępowania sądowego. Przeciwieństwo
+domyślnego wzorca, w którym milczenie organu wymaga ponaglenia albo skargi na
+bezczynność. Cała ścieżka (sprzeciw 7 dni → milcząca zgoda po 14 dniach → sąd
+w 14 dni od odrzucenia, **pod warunkiem uprzedniego sprzeciwu**) dopisana.
+
+### 4. PRZEDAWNIENIA
+
+Dopisane art. 291 § 1 (3 lata), **§ 2** (roszczenie pracodawcy — rok od powzięcia
+wiadomości o szkodzie, nie później niż 3 lata od jej wyrządzenia), **§ 5**
+(roszczenie stwierdzone orzeczeniem albo ugodą — **10 lat**). ⚠️ § 3: przy
+szkodzie **umyślnej** stosuje się KC, nie § 2. ⚠️ § 4: terminy przedawnienia
+**nie mogą być skracane ani przedłużane czynnością prawną** — klauzula umowna
+próbująca to zrobić jest bezskuteczna.
+
+### 5. KROK 2C — kolejna nowelizacja w kolejce
+
+`Dz.U. 2026 poz. 1046` (19.06.2026, w życie **5.11.2026**) zmienia art. 11, 18,
+94 i 104 KP oraz art. 47 i 461 KPC. **Nie dotyka** art. 52, 109, 112, 264, 265
+ani 291 — brzmienia użyte w naprawie są aktualne i pozostaną takie po 5.11.2026.
+
+⚠️ To druga rodzina po Ordynacji, w której KROK 2C wykrył **akt czekający na
+wejście w życie**. Adnotacja [VER] ma tu datę ważności w innym sensie niż przy
+Ordynacji: tam przepisy objęte weryfikacją **zmienią się**, tu **nie** — ale
+moduł jako całość tak. Rozróżnienie odnotowane przy kandydacie na pole
+„ważne do".
+
+### 6. T28
+
+**FAIL brak.** Do rejestru W1 nic — usterka postaci **4 (pominięcie)** i częściowo
+**3 (zła konstrukcja: granica pracodawcy podana jak termin strony)**. Piąta sesja
+z rzędu bez nowej pozycji, zgodnie z wnioskiem z `AUDYT-2026-09-12m`.
+
+### 7. ZAKRES
+
+Rozkład `shared/terminy.md` (538 linii): KPC 35, PPSA 18, KPA 18, **KP 17**,
+KRO 15, Op 14, KKW 14, KPK 10, KSH 9, KPW 9, UPEA 8, PrUp/PrRestr 7, KC 3.
+Otwarte: **KC poza art. 118**, **KKS**, prawo spadkowe proceduralne, terminy
+z ustaw szczególnych (RODO, KSC, PZP).
+
+**Wersje:** `shared` 3.55 → 3.56,
+`dr-04-prawo-pracy-zus-swiadczenia` 3.32 → 3.33,
+`audyt-systemu-v4` 6.89 → 6.90.
+
+
+---
+
+## AUDYT-2026-09-12o — KC: trzy wiersze na cały kodeks cywilny; art. 442¹ z trzema pułapkami naraz
+
+**Tryb:** TREŚĆ (FAZA 3E) + FAZA 7A/7C. Ostatnia duża pozycja rodziny TERMINY.
+
+### 1. PUNKT WYJŚCIA
+
+`shared/terminy.md` miał **trzy wiersze** z KC: „3/6 lat — roszczenia cywilne
+ogólne", zachowek i przyjęcie spadku. Cały kodeks cywilny obsłużony jedną linią
+przedawnienia ogólnego.
+
+### 2. ⛔ PUŁAPKA, KTÓREJ NIE MIAŁ ŻADEN PLIK — art. 118 zd. 2
+
+> Jednakże koniec terminu przedawnienia przypada na **ostatni dzień roku
+> kalendarzowego**, chyba że termin przedawnienia jest **krótszy niż dwa lata**.
+
+Liczenie „dzień po dniu" od wymagalności daje datę **wcześniejszą niż
+rzeczywista**. Skutek działa w obie strony: wierzyciel rezygnuje z dochodzenia
+roszczenia, które jeszcze nie przedawniło się (czasem o kilkanaście miesięcy),
+a dłużnik podnosi zarzut przedawnienia przedwcześnie i przegrywa na kosztach.
+
+⚠️ Dopisane też **art. 120 § 1 zd. 2**: gdy wymagalność zależy od czynności
+uprawnionego, bieg rozpoczyna się od dnia, w którym roszczenie **stałoby się
+wymagalne, gdyby uprawniony podjął czynność w najwcześniej możliwym terminie** —
+nie od dnia, w którym faktycznie ją podjął. Przepis niweczy strategię odwlekania
+wezwania do zapłaty.
+
+### 3. ⛔⛔ ART. 442¹ — TRZY PUŁAPKI W JEDNYM ARTYKULE
+
+| Ustęp | Treść | Co psuje samo § 1 |
+|---|---|---|
+| § 1 | 3 lata od dowiedzenia się, **max 10 lat** od zdarzenia | — |
+| **§ 2** | **20 lat** przy szkodzie ze **zbrodni lub występku**, liczone **od popełnienia przestępstwa**, bez względu na wiedzę poszkodowanego | granica 10 lat **nie obowiązuje** |
+| **§ 3** | przy szkodzie **NA OSOBIE** przedawnienie nie może skończyć się wcześniej niż 3 lata od dowiedzenia się | ⛔ **granica 10 lat NIE OBOWIĄZUJE** |
+| **§ 4** | przy **małoletnim** — nie wcześniej niż **2 lata od pełnoletności** | bieg przesunięty |
+
+⛔ **Zastosowanie samego § 1 do sprawy o uszkodzenie ciała sprzed kilkunastu lat
+daje błędny wniosek o przedawnieniu.** To najgroźniejszy pojedynczy przepis
+z całej rodziny terminów: dotyczy spraw o najwyższej wartości przedmiotu sporu
+i o najdłuższym dystansie czasowym, a jego trzy wyjątki znoszą dokładnie tę
+granicę, którą zapamiętuje się najłatwiej.
+
+### 4. ⭐ WYGAŚNIĘCIE ≠ PRZEDAWNIENIE
+
+**Art. 344 § 2 KC:** roszczenie posesoryjne **„wygasa"**, jeżeli nie będzie
+dochodzone w ciągu roku od naruszenia. To nie przedawnienie — roszczenie
+**przestaje istnieć**, a sąd uwzględnia to **z urzędu**, bez zarzutu strony.
+
+⚠️ To czwarta w tej serii konstrukcja mylona z terminem zawitym dla strony —
+po karencji (KKW), terminach końcowych (UPEA) i domniemaniu niewypłacalności
+(PrUp). Wspólny mianownik utrwalony: **liczba lat w przepisie nie mówi, jaka to
+instytucja**.
+
+### 5. POZOSTAŁE UZUPEŁNIENIA
+
+Rękojmia: **2 lata / 5 lat dla nieruchomości** na **stwierdzenie** wady
+(art. 568 § 1), rok od stwierdzenia na roszczenie, z ochroną konsumenta (§ 2),
+zawieszenie terminów pozostałych uprawnień na czas procesu (§ 4) oraz **akt
+staranności między przedsiębiorcami** (art. 563 § 1 — nie występuje w obrocie
+konsumenckim). Błąd i groźba — rok (art. 88 § 2). Umowa przedwstępna — rok
+(art. 390 § 3). Skarga pauliańska — **5 lat od daty czynności** (art. 534).
+Zasiedzenie — 20/30 lat (art. 172) z ochroną małoletniego właściciela
+(art. 173).
+
+### 6. T28
+
+**FAIL brak.** Rejestr W1 bez zmian — usterka wyłącznie postaci **4
+(pominięcie)**. Szósta sesja z rzędu.
+
+### 7. ZAKRES
+
+`shared/terminy.md`: **607 linii** (88 na początku serii). Rozkład: KPC 35,
+**KC 24**, PPSA 18, KPA 18, KP 17, KRO 15, Op 14, KKW 14, KPK 10, KSH 9, KPW 9,
+UPEA 8, PrUp/PrRestr 7.
+
+Otwarte: **KKS**, prawo spadkowe proceduralne, terminy z ustaw szczególnych
+(RODO, KSC, PZP, prawo konsumenckie poza art. 27 u.p.k.).
+
+**Wersje:** `shared` 3.56 → 3.57, `audyt-systemu-v4` 6.90 → 6.91.
+
+
+---
+
+## AUDYT-2026-09-12p — T13 miał ślepą plamkę: 1472 linie poza zasięgiem testu
+
+**Tryb:** BUDOWA TESTU + FAZA 7A/7C. Sesja wywołana własną uwagą z zamknięcia
+`AUDYT-2026-09-12o`: „607 linii zbliża się do progu, przy którym plik staje się
+kandydatem do podziału (T13 pilnuje progu długości modułu)".
+
+### 1. ⛔ UWAGA BYŁA BŁĘDNA — I TO JEST USTALENIE
+
+Sprawdzenie zamiast założenia: **T13 nie obejmuje `shared/terminy.md` w ogóle**.
+Warunek w `zbierz()` brzmi `basename(root) == 'modules' and
+nazwa.startswith('mod-')`. Pliki leżące bezpośrednio w katalogu `shared/` są
+**poza zakresem testu**, niezależnie od długości.
+
+⭐ Gdybym poprzestał na własnej uwadze i „na wszelki wypadek" podzielił
+`terminy.md`, wykonałbym **niepotrzebny podział z powodu, który nie istniał**,
+i jednocześnie **nie zauważył rzeczywistego problemu**.
+
+### 2. RZECZYWISTY PROBLEM — `TABELE-OPLAT.md` 1472 LINIE
+
+Przebieg T13 po rozszerzeniu zakresu:
+
+| Plik | Linii | Status |
+|---|---|---|
+| `shared/TABELE-OPLAT.md` | **1472** | ⛔ **47 % ponad próg CRIT** |
+| `shared/terminy.md` | 607 | poniżej strefy WARN |
+
+Plik urósł przez siedem sesji wrześniowych z 410 do 1472 linii i **przez cały ten
+czas był niewidzialny dla testu**, który powstał właśnie po to, żeby takie
+przyrosty łapać.
+
+⚠️ **Ta sama klasa problemu co przy powstaniu T13, ale inna przyczyna.** Wtedy:
+reguła istniała, testu nie było. Teraz: reguła istniała, test istniał — a jeden
+katalog nie był w niego wpięty, bo zakres zawężono **wzorcem nazwy pliku**.
+
+### 3. ⛔ DLACZEGO NIE ZROBIŁEM Z TEGO CRIT
+
+Podział `TABELE-OPLAT.md` odtworzyłby **dokładnie tę strukturę, którą sekcja 7
+tego samego pliku nazywa tabelami satelickimi** i przed którą broni cały audyt
+O-11. Test wymuszający podział wbrew doktrynie skilla jest testem szkodliwym.
+
+Kategoria **`shared/*.md` powyżej progu WARN** dodana jako **raportowana, nie
+blokująca** — kod wyjścia bez zmian, analogicznie do `SKILL.md` wg F-78.
+Zalecenie przy przekroczeniu: **spis treści, nie cięcie**.
+
+### 4. WYKONANE ZAMIAST PODZIAŁU
+
+Spisy treści: `TABELE-OPLAT.md` — **72 pozycje**, `terminy.md` — **22 pozycje**.
+We wstępie do spisu `terminy.md` ostrzeżenie, które jest właściwym celem tego
+spisu: **ta sama czynność — zażalenie, wniosek o uzasadnienie, przywrócenie
+terminu — ma inny termin w KPC, KPA, Ordynacji i KKW**. Spis ma służyć
+weryfikacji reżimu, nie tylko nawigacji.
+
+⚠️ Poprawiony poziom nagłówka **UPEA (`###` → `##`)**: egzekucja administracyjna
+była zagnieżdżona pod KPA, choć to odrębny reżim z własną ustawą. Wyszło dopiero
+przy generowaniu spisu — **spis treści działa jak test struktury**.
+
+### 5. ⚠️ DŁUG, KTÓRY TU ZACIĄGAM — JAWNIE
+
+Spisy treści są **ręczne**. Nie ma testu pilnującego, czy spis nadąża za
+nagłówkami. To ta sama klasa długu co rejestry przed T1 i ten sam mechanizm,
+który wyprodukował F-80 („rejestr nie nadążał za dyskiem"). Zapisane jako
+kandydat na rozszerzenie T13, **nie jako zobowiązanie** — bo test porównujący
+spis z nagłówkami jest tani i sensowny, ale nie chcę go dopisywać w tej samej
+sesji, w której dopisałem kategorię; obie zmiany powinny mieć osobny przebieg
+kalibracyjny (wniosek z `AUDYT-2026-09-12i`).
+
+**Wersje:** `shared` 3.57 → 3.58, `audyt-systemu-v4` 6.91 → 6.92.
+
+
+---
+
+## AUDYT-2026-09-12q — podział TABELE-OPLAT na rdzeń i siedem satelitów
+
+**Tryb:** REFAKTOR STRUKTURALNY + BUDOWA TESTU + FAZA 7A/7C. Wykonanie decyzji
+użytkownika po `AUDYT-2026-09-12p`, gdzie plik został zmierzony (1555 linii,
+47 % ponad próg CRIT), a kategoria oznaczona jako **raportowana, nie blokująca —
+decyzja o podziale należy do użytkownika**.
+
+### 1. ⛔ NAPIĘCIE, KTÓRE TRZEBA BYŁO ROZWIĄZAĆ, NIE PRZEMILCZEĆ
+
+W `AUDYT-2026-09-12p` argumentowałem **przeciwko** podziałowi: odtworzyłby
+strukturę, którą sekcja 7 tego samego pliku nazywa „tabelami satelickimi"
+i przed którą broni cały audyt O-11.
+
+⭐ **Argument był trafny co do ryzyka, ale błędny co do wniosku.** Tamte tabele
+satelickie nie były złe **dlatego, że było ich wiele** — były złe dlatego, że
+**nie miały właściciela ani rejestru**. Każda kopiowała kwoty i żyła własnym
+życiem; pomiar z `AUDYT-2026-09-12` dał trafność poniżej 80 %. Liczba plików
+nie była przyczyną, tylko objawem.
+
+⛔ **Warunek dopuszczalności podziału:** musi istnieć **pojedyncze miejsce
+mówiące, gdzie co mieszka**, oraz test, który tego pilnuje. Bez tego podział
+byłby regresją. Dlatego T29 powstał **w tej samej sesji**, nie „przy okazji".
+
+### 2. STRUKTURA PO PODZIALE
+
+**Rdzeń `shared/TABELE-OPLAT.md` — 159 linii, zero tabel.** Trzyma: regułę
+kolejności, **mapę własności sekcji**, ścieżkę domyślną przy pytaniu o kwotę,
+sekcję 7 (rejestr tabel satelickich w innych skillach) i sekcję 8 (zakres
+nieobjęty).
+
+| Satelita | Sekcje | Linii |
+|---|---|---|
+| `01-KSCU-cywilne-rodzinne-pracownicze.md` | 1, 1a, 1b, 1c | 281 |
+| `02-zwolnienia-zwrot-alimenty.md` | 2, 2a–2e | 390 |
+| `03-koszty-zastepstwa-taksy.md` | 3, 3a | 160 |
+| `04-wartosci-powtarzalne-kotwice.md` | 4, 4a–4g | 262 |
+| `05-sprawy-karne.md` | 5, 6e | 155 |
+| `06-administracyjne-wieczystoksiegowe-KIO.md` | 6, 6a | 108 |
+| `07-komornicze-skarbowe-notarialne.md` | 6b, 6c, 6d | 196 |
+
+⚠️ **Grupowanie nie jest mechaniczne.** Sekcja **6e** (koszty procesu z KPK)
+trafiła do satelity **karnego**, a nie do „pozostałych rodzin", bo czytelnik
+pytający o koszty w sprawie karnej potrzebuje obu warstw naraz — opłaty
+z ustawy z 23.06.1973 **i** kosztów z KPK. Podział ma iść za pytaniem, nie za
+numeracją.
+
+### 3. ZABEZPIECZENIA ANTYREGRESYJNE
+
+1. **Mapa własności w rdzeniu** — jedna sekcja, jeden plik-właściciel.
+2. **Stopka w każdym satelicie:** „Plik satelicki — NIE JEST ŹRÓDŁEM
+   SAMODZIELNYM", z tabelą warstw i **zakazem duplikacji**: potrzebujesz treści
+   z innego satelity → **odeślij, nie kopiuj**.
+3. **T29** — cztery bramki (B1 mapa w dół, B2 mapa w górę, B3 unikalność
+   właściciela, B4 stopka). Selftest **5/5**, przebieg **✅ OK**.
+
+⚠️ **B2 jest bramką, o której najłatwiej zapomnieć.** B1 sama przepuszcza
+**plik-sierotę** — satelitę leżącego w katalogu, którego mapa nie zna. To
+dokładnie stary wzorzec: plik z kwotami bez właściciela.
+
+### 4. KONTROLA INTEGRALNOŚCI — ZERO UTRATY TREŚCI
+
+Porównanie linia po linii z wersją sprzed podziału (rozpakowaną z poprzedniej
+dostawy, nie z pamięci): z **1236 niepustych linii** oryginału w nowym zestawie
+brakuje **78**, z czego **72 to pozycje starego spisu treści** (zastąpionego
+mapą) i **6 linii jego ramki**. **Zero utraty treści merytorycznej.**
+
+⭐ Kontrolę wykonałem przez rozpakowanie ZIP-a z poprzedniej tury — nie przez
+porównanie z własną pamięcią o zawartości pliku. Przy refaktorze 1500 linii to
+jedyny wiarygodny sposób.
+
+### 5. SKUTKI UBOCZNE
+
+**T13 przestał raportować `TABELE-OPLAT`** — rdzeń ma 159 linii, największy
+satelita 390, wszystkie poniżej strefy WARN. Kategoria „zasoby kanoniczne
+`shared/*.md`" dodana w 12p pozostaje w teście i nadal jest potrzebna: złapie
+następny plik, który zacznie puchnąć.
+
+⚠️ **118 odesłań** do `TABELE-OPLAT` w systemie, w tym kilkanaście w formie
+„sekcja 4c". Po podziale rozwiązuje je mapa w rdzeniu — odesłanie prowadzi do
+celu, ale **przez jeden skok więcej**. Świadomie **nie przepisywałem** ich na
+ścieżki satelitów: gdyby mapa była jedynym miejscem prawdy, a odesłania
+wskazywały pliki bezpośrednio, każda zmiana grupowania wymagałaby masowej
+edycji — czyli znów rozproszenia. Numer sekcji jest **stabilniejszym adresem**
+niż nazwa pliku.
+
+⛔ **Czego T29 nie wykryje** (zapisane w planie testów): tej samej kwoty
+przepisanej do dwóch satelitów **pod różnymi nagłówkami** — B3 działa na
+numerach sekcji, bo tylko one mają jednoznacznego właściciela.
+
+### 6. `terminy.md` — ŚWIADOMIE NIEDZIELONY
+
+607 linii, **poniżej strefy WARN**. Dzielę to, co przekracza próg, nie
+wszystko, co jest duże. Gdy przekroczy 800, ten sam wzorzec: rdzeń z mapą,
+satelity per reżim, T29 **sparametryzowany**, nie skopiowany.
+
+**Wersje:** `shared` 3.58 → 3.59 (TABELE-OPLAT 1.8 → **2.0**),
+`audyt-systemu-v4` 6.92 → 6.93.
+
+
+---
+
+## AUDYT-2026-09-12r — T13: ta sama ślepa plamka drugi raz, w odstępie jednej sesji
+
+**Tryb:** BUDOWA TESTU + FAZA 7A/7C. Rozszerzenie T13 po podziale z 12q.
+
+### 1. ⛔ USTALENIE — PODZIAŁ NATYCHMIAST UTWORZYŁ NOWĄ PLAMKĘ
+
+Rozszerzenie T13 z sesji **12p** sprawdzało `basename(root) == 'shared'` —
+czyli **wyłącznie pliki leżące bezpośrednio w katalogu skilla**. Podział
+`TABELE-OPLAT` w sesji **12q** utworzył `shared/oplaty/` z siedmioma
+satelitami. Sprawdzenie: **żaden z nich nie był w zakresie testu**.
+
+⛔ **Ta sama ślepa plamka, drugi raz, w odstępie jednej sesji.**
+
+| Kiedy | Co zawężało zakres | Co wypadło |
+|---|---|---|
+| do 12p | wzorzec nazwy pliku (`modules/mod-*`) | `shared/TABELE-OPLAT.md`, 1472 linie |
+| 12q → 12r | **głębokość katalogu** (`basename == 'shared'`) | 7 satelitów `shared/oplaty/` |
+
+⭐ **Wspólna przyczyna, warta zapisania:** reguła progowa jest **globalna**,
+a warunek wpięcia pisany **pod aktualnie znany układ plików**. Każda zmiana
+struktury repozytorium jest **potencjalnym wypadnięciem z zakresu testu** —
+i nie zgłasza się sama, bo test nadal kończy się kodem 0.
+
+⚠️ **Gorzka ironia tej sesji:** plamkę wyprodukowała zmiana, którą sam
+wprowadziłem w poprzedniej turze, opisując ją jako zabezpieczoną testem T29.
+T29 pilnuje **mapy własności sekcji** i działał poprawnie — ale o **długości**
+satelitów nie wie nic. Dwa testy, każdy poprawny w swoim zakresie, i luka
+dokładnie pomiędzy nimi.
+
+### 2. POPRAWKA
+
+Warunek zmieniony na `'shared' in root.split(os.sep)` — cały podkatalog,
+rekurencyjnie. Po poprawce T13 widzi **167 zasobów kanonicznych** zamiast 138.
+
+### 3. ⭐ `--selftest` DLA T13 — czego nie miał od powstania
+
+T13 działa od 2026-08-21 i **nigdy nie miał testu własnego**, w odróżnieniu od
+T28 (21 przypadków) i T29 (5). Dodany, **5/5**. Przypadki pilnują
+**przydziału do kategorii**, nie progów liczbowych:
+
+| Przypadek | Oczekiwana kategoria |
+|---|---|
+| plik bezpośrednio w `shared/` | kanoniczne |
+| **satelita w podkatalogu `shared/oplaty/`** | kanoniczne |
+| moduł dziedzinowy `modules/mod-*.md` | moduły |
+| `SKILL.md` | skille |
+| plik w `references/` poza `shared` | pomijany |
+
+⛔ **Gdyby ten selftest istniał w 12q, plamka wyszłaby od razu** — drugi
+przypadek jest dokładnie jej opisem. Wniosek: test bez testu własnego jest
+zabezpieczeniem jednorazowym, ważnym wyłącznie na układ plików z dnia, w którym
+powstał.
+
+### 4. WYNIK
+
+T13 po poprawce: **✅ OK**, 4 moduły w strefie WARN, zero CRIT. Największy
+satelita `oplaty/02-zwolnienia-zwrot-alimenty.md` — 389 linii, **daleko poniżej
+strefy ostrzegawczej**. Podział z 12q oceniony przez właściwy test i zdany.
+
+**Wersje:** `audyt-systemu-v4` 6.93 → 6.94.
+
+
+---
+
+## AUDYT-2026-09-13 — PPWR i EUDR: dwa rozporządzenia UE, których system nie znał
+
+**Tryb:** UZUPEŁNIENIE POKRYCIA (FAZA 3E) + FAZA 7A/7C. Zakres wskazany przez
+użytkownika: zbadać PPWR i EUDR w DR środowiskowym i dodać do map.
+
+### 1. PUNKT WYJŚCIA — ZERO WYSTĄPIEŃ
+
+Ani `dr-09/MAPA-AKTOW.md`, ani `prawo-polskie-v2/ROUTING-MAP.md` nie
+zawierały żadnego z tych aktów. System miał `mod-system-kaucyjny-opakowania`
+opisujący **polski** system kaucyjny — i nie wiedział, że materię opakowaniową
+przejęło **bezpośrednio stosowane rozporządzenie UE**.
+
+### 2. ⛔ PPWR — DATA, KTÓRA JUŻ MINĘŁA
+
+Rozporządzenie **(UE) 2025/40** z 19.12.2024. ✅ [VER] RZĄD 1 2026-09-13 —
+EUR-Lex, CELEX `32025R0040`, ELI `data.europa.eu/eli/reg/2025/40/oj`, status
+**In force**. Odczyt przepisu końcowego:
+
+> Niniejsze rozporządzenie **stosuje się od dnia 12 sierpnia 2026 r.** Jednakże
+> art. 67 ust. 5 stosuje się od dnia 12 lutego 2029 r.
+
+⛔ **PPWR obowiązuje od miesiąca** (stan na dzień sesji: 13.09.2026).
+Dyrektywa 94/62/WE **traci moc od 12.08.2026**, z dwoma wyjątkami: art. 8
+ust. 2 (przez 30 miesięcy od aktu wykonawczego z art. 12 ust. 6) i art. 9
+ust. 1–2.
+
+⚠️ Wyjątek z art. 8 ust. 2 jest **ruchomy** — jego koniec zależy od daty aktu
+wykonawczego, **niesprawdzonego w tej sesji**. Zapisane jako luka jawna.
+
+### 3. ⛔⛔ EUDR — DATA PRZESUWANA DWUKROTNIE, TO KLASA O-12
+
+Rozporządzenie **(UE) 2023/1115**. Status EUR-Lex: **In force, this act has
+been changed**. Dostępne wersje skonsolidowane: `-20230609`, `-20241226`,
+**`-20251226`**. Odczyt art. 38 z wersji najnowszej:
+
+| Podmiot | Data stosowania art. 3–13, 16–24, 26, 31, 32 |
+|---|---|
+| co do zasady | **30 grudnia 2026 r.** (ust. 2) |
+| osoby fizyczne, mikro- i małe przedsiębiorstwa ustanowione do 31.12.2024 | **30 czerwca 2027 r.** (ust. 3) |
+
+⛔ **Powtarzane daty 30.12.2025 i 30.06.2026 są nieaktualne.** Pierwotny tekst
+mówił o 30.12.2024; pierwsza zmiana przesunęła o rok, druga — widoczna
+w wersji z 26.12.2025 — o kolejny.
+
+⭐ **To jest podręcznikowy przypadek obserwacji O-12** w wersji unijnej:
+numer CELEX ten sam, status „In force" ten sam, akt bazowy nietknięty —
+a **data stosowania przesunęła się o dwa lata**. Sprawdzenie **numeru aktu**
+tego nie wykrywa. Wykrywa wyłącznie odczyt **wersji skonsolidowanej** i art. 38.
+
+⚠️ Konsekwencja zapisana w module: nie wyklucza to **trzeciego** przesunięcia.
+Moduł odsyła do listy wersji skonsolidowanych, nie do własnej tabeli.
+
+### 4. DECYZJA O ZAKRESIE MODUŁU — ŚWIADOMIE WĄSKI
+
+Moduł jest **katalogowo-metrykalny**: metryka, daty stosowania, uchylenia,
+pułapki datowe, styk z prawem polskim, gate. ⛔ **Nie opisuje treści obowiązków
+materialnych** — wymogów projektowych opakowań, zawartości recyklatu, celów
+ponownego użycia, due diligence, kategorii ryzyka krajów.
+
+⛔ **Uzasadnienie zapisane w module:** opisanie tych wymogów z pamięci byłoby
+dokładnie tą klasą treści, którą audyt O-11 wycinał z systemu przez cały
+wrzesień — liczbami bez odczytu. Lepszy moduł, który mówi „odczytaj art. 7",
+niż moduł podający próg recyklatu, którego nikt nie sprawdził.
+
+### 5. ⭐ USTALENIE POJĘCIOWE — DYREKTYWA vs ROZPORZĄDZENIE
+
+Moduł otwiera się tabelą różnic, bo najczęstszy błąd w tej materii nie dotyczy
+daty, tylko **miejsca szukania obowiązku**: „skoro w polskim prawie tego nie
+ma, to nie obowiązuje". Przy rozporządzeniu obowiązek płynie **wprost z aktu
+UE**, a ustawa krajowa dodaje wyłącznie organ i sankcję. Brak ustawy krajowej
+**nie zawiesza obowiązku** — powoduje lukę w egzekwowaniu.
+
+⚠️ Podstawa: **art. 91 ust. 3 Konstytucji RP** — pierwszeństwo przed ustawami
+w razie kolizji.
+
+### 6. LUKI ZAPISANE JAWNIE
+
+Polskie przepisy wyznaczające organ i sankcje (art. 14 i 25 EUDR, art. 68
+PPWR) — **niezweryfikowane**. Nowelizacje `Dz.U. 2026 poz. 619` (system
+kaucyjny) pod kątem dostosowania do PPWR — **niesprawdzone**. Akt wykonawczy
+z art. 12 ust. 6 PPWR — **niesprawdzony**.
+
+⛔ W module zapisane jako „NIEZWERYFIKOWANE W TEJ SESJI", nie jako brak
+przepisów. Różnica jest istotna: pierwsze to stan wiedzy, drugie byłoby
+twierdzeniem o stanie prawa.
+
+### 7. REJESTRACJA (Reguła 2/3 HARDGATE)
+
+`dr-09/MAPA-AKTOW.md` (2 wiersze), `dr-09/SKILL.md` (rejestr modułów),
+`dr-09/MAPA-POKRYCIA.md` (nowa sekcja z jawnymi lukami),
+`prawo-polskie-v2/ROUTING-MAP.md` — sekcja DR-09 (2 wiersze), tabela
+**MONITORING** (EUDR jako ⏳ OCZEKUJE), licznik DR-09 (27 → 29 aktów) i słowa
+kluczowe routingu (9 → 11).
+
+**Wersje:** `dr-09-budownictwo-srodowisko-energia-transport` 3.28 → 3.29,
+`prawo-polskie-v2` 6.18 → 6.19, `audyt-systemu-v4` 6.94 → 6.95.
+
+
+---
+
+## AUDYT-2026-09-13b — weryfikacja luk z PPWR/EUDR: dwa wyniki, jedna nierozstrzygnięta próba
+
+**Tryb:** WERYFIKACJA (FAZA 3E) + FAZA 7A/7C. Domknięcie trzech luk zapisanych
+jawnie w `AUDYT-2026-09-13`.
+
+### 1. ⛔⛔ PPWR — USTAWA POLSKA NIE ZOSTAŁA DOSTOSOWANA
+
+✅ [VER] RZĄD 1 2026-09-13b — ELI, akt bazowy `DU/2013/888`:
+
+| Ustalenie | Wynik |
+|---|---|
+| tekst jednolity | `Dz.U. 2026 poz. 619`, obwieszczenie **30.04.2026** |
+| KROK 2C — nowelizacje po t.j. | **ZERO** |
+| ostatnia zmiana merytoryczna | `Dz.U. 2026 poz. 174` z **9.01.2026** |
+| czy dostosowuje do PPWR | ⛔ **NIE** — odczyt tekstu ustawy zmieniającej: dotyczy **systemu kaucyjnego** (art. 21a, poziomy selektywnego zbierania), **zero odesłań do rozporządzenia (UE) 2025/40** |
+
+⛔ **Ostatnia zmiana polskiej ustawy opakowaniowej jest o siedem miesięcy
+starsza niż data rozpoczęcia stosowania PPWR.** Rozporządzenie stosuje się od
+12.08.2026 i **wiąże przedsiębiorcę**, a krajowego organu i sankcji brak.
+
+⚠️ **Luka dotyczy EGZEKWOWANIA, nie obowiązku.** Zapisane w module wprost,
+bo to jest dokładnie ten wniosek, który najłatwiej przekręcić na „skoro nie ma
+przepisów krajowych, to nie trzeba stosować".
+
+### 2. EUDR — WYNIK NEGATYWNY, ALE TYLKO W ZAKRESIE, W JAKIM SPRAWDZONY
+
+Przeszukanie ELI po tytule: `wylesianie`, `wylesianiem`, `niepowodujących
+wylesiania` — **zero wyników** w każdym z trzech zapytań.
+
+⛔ **Wykazano, że nie istnieje akt z tym słowem w tytule. NIE wykazano, że nie
+istnieje przepis** wyznaczający organ dla EUDR — mógłby siedzieć w ustawie
+o lasach, o Inspekcji Ochrony Środowiska albo w ustawie okołobudżetowej, pod
+tytułem bez słowa „wylesianie". **Wyszukiwanie po tytule tego nie wykryje.**
+
+⭐ **Zapisanie zakresu wyniku jest tu ważniejsze niż sam wynik.** „Zero
+wyników" łatwo zapisać jako „nie ma przepisów" — i wtedy negatywna weryfikacja
+staje się fałszywym twierdzeniem o stanie prawa. Ograniczenie metody
+odnotowane w module i w ROUTING-MAP.
+
+⚠️ EUDR stosuje się od **30.12.2026** — brak ustawy we wrześniu 2026 nie jest
+jeszcze zaległością, tylko stanem do monitorowania.
+
+### 3. ⛔ AKT WYKONAWCZY Z ART. 12 UST. 6 PPWR — NIEROZSTRZYGNIĘTE
+
+Wyszukiwarka EUR-Lex renderuje wyniki po stronie przeglądarki; odczyt
+automatyczny zwrócił stronę bez listy aktów. **Nie ustalono, czy akt został
+przyjęty.**
+
+⭐ Zapisane jako **nierozstrzygnięte**, nie jako „brak aktu". Różnica jest tej
+samej klasy co w pkt 2: nieudana weryfikacja to stan wiedzy, a nie ustalenie
+o stanie prawa. W module zapisana **metoda ręczna** na następny raz (zakładka
+dokumentów powiązanych przy CELEX `32025R0040`).
+
+### 4. WNIOSEK METODOLOGICZNY
+
+Trzy luki, trzy różne wyniki: **ustalenie pozytywne** (ustawa niedostosowana —
+z odczytem treści aktu zmieniającego), **ustalenie negatywne o wąskim
+zakresie** (brak aktu *o takim tytule*) i **próba nierozstrzygnięta**
+(ograniczenie narzędzia).
+
+⛔ Wszystkie trzy zapisane **z zakresem**, nie jako trzy jednakowe „sprawdzone".
+Luka opisana jako zamknięta, gdy w istocie sprawdzono tylko jeden wymiar, jest
+gorsza niż luka otwarta — bo nikt do niej nie wróci.
+
+**Wersje:** `dr-09-budownictwo-srodowisko-energia-transport` 3.29 → 3.30,
+`prawo-polskie-v2` 6.19 → 6.20, `audyt-systemu-v4` 6.95 → 6.96.

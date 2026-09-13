@@ -59,11 +59,15 @@ Czy można przywrócić: tak / nie / zależy od okoliczności
 TERMINY PROCESOWE — do weryfikacji w aktualnym KPC (ISAP):
 
 Sprzeciw od nakazu zapłaty (postępowanie upominawcze):
-  art. 503 KPC — 2 tygodnie od doręczenia nakazu
+  ⛔ art. 503 KPC UCHYLONY. Dopuszczalność: art. 505 § 1 KPC.
+  Termin: art. 480[2] § 2 pkt 1 KPC — 2 tygodnie (doręczenie w kraju);
+          pkt 2 — miesiąc (doręczenie poza krajem na terytorium UE)
   [ALERT: brak sprzeciwu = prawomocność nakazu]
 
 Zarzuty od nakazu zapłaty (postępowanie nakazowe):
-  art. 493 KPC — 2 tygodnie od doręczenia nakazu
+  Dopuszczalność: art. 493 § 1 KPC (przepis NIE zawiera terminu).
+  ⛔ Termin: art. 480[2] § 2 pkt 3 KPC — MIESIĄC przy doręczeniu na
+     terytorium UE, a więc także w Polsce; pkt 4 — 3 miesiące poza UE
   [ALERT: po upływie nie można kwestionować nakazu co do meritum]
 
 Odpowiedź na pozew:
@@ -78,7 +82,8 @@ Apelacja:
   [ALERT: termin zawity — nie podlega przywróceniu bez wykazania winy sądu]
 
 Wniosek o uzasadnienie wyroku:
-  art. 328¹ KPC — 1 tydzień od ogłoszenia / doręczenia wyroku
+  art. 328 § 1 KPC — tydzień od ogłoszenia wyroku; gdy wyrok doręcza się
+  z urzędu — od doręczenia (§ 2). ⛔ Jednostka 328[1] NIE ISTNIEJE
   [ALERT: warunek konieczny do wniesienia apelacji]
 
 Zażalenie:

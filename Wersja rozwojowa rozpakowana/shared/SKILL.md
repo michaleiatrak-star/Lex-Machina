@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.44"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.59"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -50,7 +50,13 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.44 (2026-09-12b, O-11 c.d.): TABELE-OPLAT 1.5 — zwrot opłaty
+  Wersja bieżąca: 3.45 (2026-09-12c, O-11 c.d.): TABELE-OPLAT 1.6 — domknięcie
+  rodzin opłat poza rdzeniem KSCU: wieczystoksięgowe i KIO (art. 42-48, 34, 34a),
+  koszty komornicze (Dz.U. 2024 poz. 377), opłata skarbowa (Dz.U. 2025 poz. 1154),
+  taksa notarialna (Dz.U. 2024 poz. 1566) i koszty procesu karnego (KPK
+  Dz.U. 2026 poz. 490). ⛔ Zryczałtowana równowartość wydatków przy oskarżeniu
+  prywatnym: 1000 zł od 1.07.2025 (Dz.U. 2025 poz. 770), nie 300 zł.
+  3.44: TABELE-OPLAT 1.5 — zwrot opłaty
   (art. 79 KSCU), dalsze zwolnienia i ich wyłączenia (art. 104-107), wyłączenie
   zwolnień na wniosek w EPU i S24 (art. 104a) oraz oś ryzyka kosztowego z KPC
   (art. 98-107, 520; art. 102 KPC to NIE art. 102 KSCU).
@@ -93,7 +99,14 @@ Nie jest samodzielnym skillem — pełni rolę biblioteki referencji.
 | Plik | Rola |
 |------|------|
 | `UNIVERSAL-RUNTIME-ADAPTER.md` | Wspólny kontrakt runtime ChatGPT/Claude/Codex: zasoby, narzędzia, prywatność, fallbacki |
-| `TABELE-OPLAT.md` | ⛔ KOLEJNOŚĆ SIĘGANIA PO KWOTY: tabela ustanawiająca → baza katalogująca → RZĄD 2A/2B. Zweryfikowane odczytem treści: KSCU (art. 13–13f, 14–25b, 26, 27, 35, 36, 37, 38, 68–78, 94–103), ustawa o opłatach w sprawach karnych (`Dz.U. 2023 poz. 123`), wpis sądowoadministracyjny (`Dz.U. 2021 poz. 535`), taksy adwokacka i radcowska (§ 2, 3, 9, 10, 11, 17), minimalne wynagrodzenie. ⛔ Dwie pułapki dwóch brzmień obok siebie: art. 13 ust. 2 KSCU (cap **100 000 zł** od 23.09.2025, nie 200 000 zł) i art. 2 ust. 1 pkt 6 ustawy o opłatach karnych (brzmienie od 14.03.2023). ⛔ Sekcja 7 to rejestr tabel satelickich — żadna z nich nie jest źródłem kwoty. Wczytać przed pierwszą kwotą. |
+| `TABELE-OPLAT.md` | ⛔ **RDZEŃ NAWIGACYJNY od 2.0 (2026-09-12q) — nie zawiera tabel.** Trzyma REGUŁĘ KOLEJNOŚCI (tabela ustanawiająca → baza katalogująca → RZĄD 2A/2B), **MAPĘ WŁASNOŚCI SEKCJI** i rejestry (sekcja 7 — tabele satelickie w innych skillach; sekcja 8 — zakres nieobjęty). Materia w 7 satelitach `oplaty/`. **Wczytać JAKO PIERWSZY**, przed jakąkolwiek kwotą — mapa wskaże właściwy satelita. Integralności podziału pilnuje T29 (`check_oplaty_mapa.py`). |
+| `oplaty/01-KSCU-cywilne-rodzinne-pracownicze.md` | Sekcje 1, 1a, 1b, 1c. Progi WPS (art. 13), opłaty ogólne KSCU (art. 14–25b, 68–78), **rozwód 600 zł** (art. 26) i sprawy rodzinne (art. 27, 37, 38), prawo pracy i ubezpieczenia (art. 35, 36). ⛔ Pułapka dwóch brzmień art. 13 ust. 2: cap **100 000 zł** od 23.09.2025, nie 200 000 zł. |
+| `oplaty/02-zwolnienia-zwrot-alimenty.md` | Sekcje 2, 2a, 2b, 2c, 2d, 2e. ⛔ **KROK 0 — czy strona w ogóle płaci**: art. 95, 96, 100–107. Alimenty. **Zwrot opłaty — art. 79** (m.in. połowa przy rozwodzie bez orzekania o winie). ⛔⛔ **art. 104a: w EPU i S24 NIE MA zwolnienia na wniosek.** Ryzyko kosztowe z KPC (art. 98–103, 520) — art. 102 KPC ≠ art. 102 KSCU. |
+| `oplaty/03-koszty-zastepstwa-taksy.md` | Sekcje 3, 3a. Taksy adwokacka (`Dz.U. 2026 poz. 215`) i radcowska (`Dz.U. 2026 poz. 118`) — § 2, 3, 4, 9, 10, 11, 17; brzmienie porównane między aktami. |
+| `oplaty/04-wartosci-powtarzalne-kotwice.md` | Sekcja 4 z 4a–4g. ⛔ **DOKTRYNA „formuła zamiast procentu"** — wartości zakotwiczonych w stopach NBP NIE WOLNO utrwalać jako procentu. Odsetki cywilne, handlowe, podatkowe i ZUS; stopy składek; skala PIT; **trzy kotwice** (stopy NBP, minimalne wynagrodzenie, przeciętne wynagrodzenie w sektorze przedsiębiorstw). |
+| `oplaty/05-sprawy-karne.md` | Sekcje 5, 6e. Ustawa z 23.06.1973 (`Dz.U. 2023 poz. 123`) — ⛔ pułapka dwóch brzmień art. 2 ust. 1 pkt 6 (od 14.03.2023). Koszty procesu z KPK. ⛔ Zryczałtowana równowartość wydatków: **1000 zł od 1.07.2025** (kwota sprzed tej daty jest NIEAKTUALNA). |
+| `oplaty/06-administracyjne-wieczystoksiegowe-KIO.md` | Sekcje 6, 6a. Wpis do WSA (`Dz.U. 2021 poz. 535`) — procent z podłogą, nie ryczałt. Postępowanie wieczystoksięgowe (art. 42–48 KSCU). Skarga na KIO (art. 34 — trzykrotność wpisu z PZP). |
+| `oplaty/07-komornicze-skarbowe-notarialne.md` | Sekcje 6b, 6c, 6d. Koszty komornicze (`Dz.U. 2024 poz. 377`) — ⛔ art. 47: zwolnienie NIE zwalnia z opłaty egzekucyjnej. Opłata skarbowa (`Dz.U. 2025 poz. 1154`) — 17 zł od KAŻDEGO stosunku pełnomocnictwa. Taksa notarialna (`Dz.U. 2024 poz. 1566`) — stawki MAKSYMALNE, nie minimalne. |
 | `PRAWO-HARDGATE.md` | ⛔ Globalny zakaz cytowania prawa/orzeczeń z pamięci — RDZEŃ, wczytaj przed każdym przepisem (zasada absolutna, PERMANENT GATE, hierarchia statusów, ŹRÓDŁO-0, KROK 2B/2C). Podzielony 2026-08-23h (F-111: 967 → 501 l.) i 2026-09-10b (F-180: 704 → 510 l., gałęzie warunkowe wydzielone niżej). |
 | `PRAWO-HARDGATE-BLOKADA.md` | ⛔ Gałąź niedostępnego źródła RZĘDU 1 — BRAMKA ANTY-FASADOWA + KOTWICA URZĘDOWA. **Wyzwalacz:** B-1/B-2 zwrócił blokadę i kanał kodu też zawiódł. Bez tego odczytu znacznik 🟨 i ⚠️ jest nieważny. |
 | `PRAWO-HARDGATE-AKT-MIEJSCOWY.md` | Ścieżka B-L. **Wyzwalacz:** przedmiotem sprawy jest akt prawa miejscowego. Aktów tych NIE MA w ELI Kancelarii Sejmu — weryfikacja tam zwraca fałszywy negatyw. |

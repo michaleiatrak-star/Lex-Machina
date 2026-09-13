@@ -135,7 +135,7 @@ Przed wygenerowaniem pisma lub analizy odpowiedz na każde pytanie:
 ## STATUS KANCELARSKI
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** UFP — Dz.U. 2024 poz. 1530 t.j. | Ustawa o dyscyplinie finansów publicznych — weryfikuj aktualny t.j. w ISAP | Ustawa o NIK — weryfikuj aktualny t.j. w ISAP | Ustawa o RIO — weryfikuj aktualny t.j. w ISAP
+**Źródło weryfikacji:** UFP — **Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10o ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym (poprzednio 2024 poz. 1530 — wygaśnięcie aktu) t.j. | Ustawa o dyscyplinie finansów publicznych — weryfikuj aktualny t.j. w ISAP | Ustawa o NIK — weryfikuj aktualny t.j. w ISAP | Ustawa o RIO — weryfikuj aktualny t.j. w ISAP
 **Data weryfikacji online:** 2026-06-05
 
 ---

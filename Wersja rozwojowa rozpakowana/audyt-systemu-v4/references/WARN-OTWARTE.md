@@ -81,10 +81,52 @@
 > błędnych, 4 podstawy niewłaściwe, 3 normy nieistniejące, 1 podstawa fałszywa
 > powtórzona w 3 plikach. Wszystkie naprawione; rejestr tabel satelickich
 > założony w `shared/TABELE-OPLAT.md` sekcja 7.
-> ⛔ **ZOSTAJE:** (a) ten sam pomiar dla pozostałych rodzin wartości — terminy,
-> progi, odsetki, stawki ZUS/podatkowe; (b) decyzja, czy rejestr tabel
+> ✅ **Rodzina „opłaty" ZAMKNIĘTA CO DO ZAKRESU 2026-09-12c** (AUDYT-2026-09-12c):
+> komornicze, skarbowe, notarialne, wieczystoksięgowe, KIO i koszty procesu
+> karnego mają akt ustanawiający, jednostkę redakcyjną i datę odczytu.
+> ✅ **Rodzina „terminy procesowe" ZMIERZONA I NAPRAWIONA 2026-09-12d**
+> (AUDYT-2026-09-12d): 6 plików odsyłało do **uchylonego art. 503 KPC**, 3 podawały
+> błędny termin zarzutów od nakazu nakazowego (jest MIESIĄC, art. 480² § 2 pkt 3),
+> 3 błędne jednostki w rodzinie wykroczeniowej, 3 żywe wystąpienia nieistniejącej
+> jednostki „art. 328¹ KPC" (szósty raz w systemie).
+> ✅✅ **RODZINA „WARTOŚCI POWTARZALNE" ZAMKNIĘTA 2026-09-12e** (AUDYT-2026-09-12e):
+> odsetki cywilne i handlowe, odsetki podatkowe i ZUS, stopy składek, skala PIT —
+> wszystko z odczytu treści, z doktryną „formuła zamiast procentu". Korpus nie miał
+> tu błędów, bo **nie miał tych wartości w ogóle** — była to luka, nie usterka.
+>
+> ✅✅ **RODZINA TERMINY ZAMKNIĘTA CO DO REŻIMÓW 2026-09-12m** — jedenaście
+> kodeksów w siedmiu sesjach (12d, 12g–12m), `shared/terminy.md` 88 → 489 linii:
+> KPC, KPK, KPW, KPA, PPSA, UPEA, Ordynacja, KKW, KRO, PrUp/PrRestr, KSH.
+> ⛔ **Zamknięta co do REŻIMÓW, nie co do POZYCJI** — w każdym kodeksie
+> przerobiono terminy najczęściej używane. Otwarte: KC poza art. 118, KP poza
+> art. 264, KKS, prawo spadkowe proceduralne, terminy z ustaw szczególnych
+> (RODO, KSC, PZP).
+>
+> ⭐ **Cztery postacie usterki terminowej** (wniosek z AUDYT-2026-09-12m):
+> (1) błędna liczba przy poprawnym cytacie — ⛔ **niewykrywalna testem**, bo
+> „3 lata" i „6 miesięcy" występują legalnie wszędzie;
+> (2) błędny albo uchylony cytat — **jedyna postać, którą T28 łapie**;
+> (3) poprawna liczba, zła konstrukcja — karencja (KKW), termin końcowy (UPEA),
+> domniemanie i podstawa niewypłacalności (PrUp);
+> (4) usterka przez pominięcie — brak adresata (PrUp), brak trzech z czterech
+> reżimów (KSH), brak całego kodeksu (KKW, KPA, PPSA).
+> ⛔ Przez **cztery ostatnie sesje nie dopisano do rejestru W1 ani jednej
+> pozycji** — usterki były postaci 1, 3 i 4. To trwałe ograniczenie zapory
+> regresyjnej w tej rodzinie; usunęłoby je wyłącznie porównanie cytatu z treścią
+> aktu przez API, czyli zadanie z O-12 bez wykonalnej dziś postaci.
+>
+> ⛔⛔ **O-11 ZAMKNIĘTA 2026-09-12e.** Trzy rodziny zmierzone: opłaty, terminy,
+> wartości powtarzalne. W jej miejsce otwarta **O-12** (niżej).
+> ⛔ **ZOSTAJE z O-11 wyłącznie:** (b) decyzja, czy rejestr tabel
 > satelickich da się egzekwować testem (kandydat: wiersz kwotowy w tabeli bez
-> kolumny podstawy = WARN), czy pozostaje kontrolą ręczną.
+> kolumny podstawy = WARN), czy pozostaje kontrolą ręczną; (c) ⛔ **rozszerzenie
+> T27 o wartości z ROZPORZĄDZEŃ WYKONAWCZYCH** — KROK 2C szuka nowelizacji po
+> t.j. aktu bazowego i jest ślepy na wypadek, w którym nowe rozporządzenie
+> **uchyla** poprzednie, a ustawa pozostaje nietknięta (zmierzony przypadek:
+> zryczałtowana równowartość wydatków z art. 621 § 2 KPK, 300 zł → 1000 zł od
+> 1.07.2025, `Dz.U. 2025 poz. 770`); (d) **brak modułu opłaty skarbowej
+> w `dr-06`** — ustawa `Dz.U. 2025 poz. 1154` powoływana tylko ubocznie;
+> utworzenie modułu wymaga rejestracji w 3 rejestrach (Reguła 2/3 HARDGATE).
 
 > **O-8 ODNOTOWANA BEZ DZIAŁANIA (2026-09-10b) — zestaw regresyjny nie sprawdza
 > przesłanek faktycznych.** F-179 (profil LEKKI uzasadniony liczbą, która nie
@@ -428,3 +470,120 @@
 - mapy runtime nie przechowują baseline/delta ani historii dawnych luk;
 - historia zmian trafia wyłącznie do `AUDIT-JOURNAL.md` / `CHANGELOG.md`;
 - każda konkretna jednostka prawa nadal wymaga fresh gate do źródła urzędowego.
+
+---
+
+> ⛔ **O-12 OTWARTA (2026-09-12e) — kontrola aktualności AKTU nie jest kontrolą
+> aktualności WARTOŚCI.** Trzy kolejne sesje wykryły trzy różne mechanizmy, w których
+> akt wygląda na w pełni aktualny, a wartość w module jest nieprawdziwa:
+>
+> | Mechanizm | Przykład | Co wygląda na aktualne |
+> |---|---|---|
+> | nowe rozporządzenie **uchyla** poprzednie | zryczałtowana równowartość wydatków 300 → **1000 zł** od 1.07.2025 (`Dz.U. 2025 poz. 770`) | ustawa delegująca i jej t.j. |
+> | przepis **uchylony**, materia przeniesiona | art. 503 KPC → art. 480² § 2, 480³, 505 § 1 | cały kodeks |
+> | **decyzja RPP** zmienia wynik wzoru | wszystkie odsetki ustawowe | akt, przepis i jego brzmienie |
+>
+> ⛔ KROK 2C szuka **nowelizacji po tekście jednolitym** — żaden z tych trzech
+> mechanizmów nowelizacją nie jest.
+>
+> ✅ **WDROŻONE 2026-09-12f — test T28** (`scripts/check_wartosci_prawne.py`),
+> trzy bramki: W1 rejestr znanych błędnych cytatów (FAIL), W2 procent utrwalony
+> przy pojęciu odsetek (FAIL), W3 wiersz kwotowy bez podstawy (WARN).
+> Pierwszy przebieg: 410 plików, 31 trafień FAIL, **8 realnych nienaprawionych
+> usterek**, których trzy poprzednie sesje ręcznego przeglądu nie znalazły.
+> Po naprawie — czysto. Opis i ograniczenia: `REGRESSION-TEST-PLAN.md`, sekcja T28.
+>
+> ⚠️ **Odrzucony kandydat, jawnie:** reguła generyczna „indeks górny przy numerze
+> artykułu = FAIL" **nie została wdrożona** — dawałaby fałszywe alarmy na
+> legalnych jednostkach `art. 205¹`, `art. 398⁵`, `art. 477⁹` KPC. Zastąpiona
+> rejestrem konkretnych, zweryfikowanych pozycji.
+>
+> ⛔ **ZOSTAJE z O-12:** rejestr W1 wykrywa **nawrót znanego** błędu, nie nową
+> usterkę tej samej klasy. Domknięcie wymagałoby porównania cytatu z treścią aktu
+> przez API ELI — to zadanie innego rzędu niż test offline i nie ma dziś
+> wykonalnej postaci.
+>
+> ⚠️ **Poprzedni zapis kandydatów, zachowany dla ścieżki decyzyjnej:**
+> (a) wiersz kwotowy w tabeli **bez kolumny podstawy** → WARN;
+> (b) indeks górny przy numerze artykułu tam, gdzie ustawa używa `§`
+> (wzorzec `328¹`) → **FAIL** — ten błąd naprawiano trzykrotnie i sześciokrotnie
+> przetrwał, więc WARN mu nie wystarcza;
+> (c) **procent zapisany obok pojęcia „odsetki ustawowe"** gdziekolwiek w korpusie
+> → FAIL, bo tej wartości z definicji nie da się utrwalić poprawnie.
+>
+> ⚠️ **MON-3 do rozszerzenia:** opisuje rytm **roczny** (obwieszczenia
+> waloryzacyjne), a odsetki zmieniają się w rytmie **posiedzeń RPP**.
+
+---
+
+> ⛔ **MON-4 OTWARTA (2026-09-12f) — monitoring wartości w rytmie NIE-rocznym.**
+> Rozszerzenie zakresu monitoringu, **nie zastąpienie MON-3**. MON-3 zostaje bez
+> zmian i obsługuje rytm **roczny**: obwieszczenia waloryzacyjne, podatki
+> i opłaty lokalne, okno październik–grudzień. Nie obejmuje wartości, które
+> zmieniają się częściej i z innego powodu.
+>
+> | Zakres | Rytm | Metoda |
+> |---|---|---|
+> | **stopa referencyjna NBP** → odsetki ustawowe (art. 359 § 2, 481 § 2 KC), handlowe (art. 4 pkt 3 u.p.n.o.) | **posiedzenia RPP** (ok. 11 w roku) | obwieszczenie MS i ministra gospodarki w **Monitorze Polskim** |
+> | **stopa lombardowa NBP** → odsetki za zwłokę (art. 56 § 1 OP), pośrednio ZUS (art. 23 ust. 1 SUS) | jw. | jw.; ⛔ pamiętać o podłodze 8 % |
+> | **kwoty z rozporządzeń wykonawczych** | bez cyklu — akt uchylający może wejść w dowolnym momencie | sprawdzać status **rozporządzenia**, nie ustawy delegującej |
+>
+> ⛔ **Dlaczego to osobna pozycja, a nie akapit w MON-3.** MON-3 opisuje rytm
+> kalendarzowy i mówi „sprawdzać w oknie X–XII". Dla odsetek to okno jest
+> bezużyteczne — stopa zmienia się w marcu, w maju, kiedykolwiek. Wpisanie tego
+> do MON-3 zepsułoby jego protokół i tak samo nie dałoby pokrycia.
+>
+> ⚠️ **Częściowo zneutralizowane przez doktrynę, nie przez monitoring.**
+> `shared/TABELE-OPLAT.md` sekcja 4 zapisuje te wartości jako **formułę**, nie
+> procent, a T28/W2 tego pilnuje. Dopóki reguła jest trzymana, zmiana stopy NBP
+> **nie dezaktualizuje modułu** — dezaktualizuje odpowiedź, jeżeli ktoś podstawi
+> liczbę z pamięci. MON-4 jest więc zabezpieczeniem drugiej linii.
+>
+> **Co robić przy trafieniu:** zmiana samej stopy → **żadnej flagi F-**, bo moduły
+> nie trzymają wyniku. Flagę otwierać wyłącznie, gdy zmieni się **wzór albo liczba
+> punktów procentowych w ustawie** (to nowelizacja, więc złapie ją MON-1) albo gdy
+> T28/W2 zgłosi utrwalony procent, co oznacza złamanie doktryny sekcji 4.
+
+---
+
+> ⛔⛔ **F-OP-2026-09 OTWARTA (2026-09-12i) — PIĘĆ NOWELIZACJI ORDYNACJI
+> PODATKOWEJ W KOLEJCE, TRZY W CIĄGU TRZECH TYGODNI.**
+> Tekst jednolity `Dz.U. 2026 poz. 622` pochodzi z **22.04.2026**. Po tej dacie
+> ogłoszono pięć ustaw zmieniających, **wszystkie z odroczonym wejściem w życie**:
+>
+> | Akt | Wejście w życie | Zakres ustalony 2026-09-12i |
+> |---|---|---|
+> | `Dz.U. 2026 poz. 1154` | **16.09.2026** | ⚠️ nieustalony — ustawa o jakości handlowej artykułów rolno-spożywczych, zmiana uboczna w OP |
+> | `Dz.U. 2026 poz. 825` | **24.09.2026** | wąska — interpretacje indywidualne (art. 14i § 6–7, art. 14j § 3) |
+> | `Dz.U. 2026 poz. 846` | **1.10.2026** | szeroka — uchylenia i zmiany m.in. w art. 86a–86m, 119m, 144; ⛔ **NIE dotyka art. 70**, ⛔ **nie zawiera słowa „ugoda"** |
+> | `Dz.U. 2026 poz. 875` | 1.01.2027 | ⚠️ nieustalony; **nie dotyka art. 70** |
+> | `Dz.U. 2026 poz. 1098` | 1.01.2027 | osobiste konta inwestycyjne; ⚠️ **dotyka art. 70** — zakres zmiany nieustalony |
+>
+> ⛔ **Dlaczego to flaga, a nie notatka.** Wszystkie moduły `dr-06` opisujące
+> postępowanie podatkowe oraz sekcja Ordynacji w `shared/terminy.md` zostały
+> zweryfikowane **na stanie z 12.09.2026**. Adnotacja ✅ [VER] RZĄD 1 przestaje
+> być prawdziwa dla części przepisów **16 września**, a dla dalszych
+> **24 września** i **1 października**. To nie jest ryzyko odległe — to trzy daty
+> w kalendarzu.
+>
+> ⚠️ **Zakres poz. 1154, 875 i 1098 nie został ustalony w tej sesji** —
+> sprawdzono wyłącznie, czy dotykają art. 70 (poz. 1098: **tak**). Przed
+> najbliższym użyciem modułów podatkowych odczytać te trzy ustawy w całości.
+>
+> ⛔ **Powiązane twierdzenie do rozstrzygnięcia:** `dr-06` podawał uchylenie
+> **art. 70 § 6 pkt 1 OP** oraz **„ugodę podatkową od 01.10.2026"**. Art. 70 § 6
+> pkt 1 **jest w mocy** w tekście jednolitym, a poz. 825 i 846 go nie zmieniają
+> ani nie zawierają słowa „ugoda". Twierdzenie oznaczone w module jako **opis
+> zamiaru legislacyjnego, nie stanu prawa**. Zamknięcie flagi wymaga ustalenia,
+> **z którego aktu** pochodzi — albo stwierdzenia, że pochodzi z projektu.
+>
+> **Co robić przy trafieniu:** po każdej z trzech najbliższych dat — ponowny
+> odczyt treści art. 223, 236, 162, 241, 68 i 70 OP oraz aktualizacja adnotacji
+> [VER] w `shared/terminy.md` (sekcja Ordynacja) i w `dr-06`. Przy zmianie
+> któregokolwiek z nich — wpis do dziennika i podbicie wersji obu skilli.
+>
+> ⚠️ **Wzorzec do zapamiętania:** KROK 2C pytał dotąd „czy są nowelizacje po
+> tekście jednolitym". Tutaj odpowiedź brzmi „pięć, ale żadna jeszcze nie
+> obowiązuje" — czyli **odczyt jest poprawny i jednocześnie ma datę ważności**.
+> Dotychczasowe wpisy [VER] tego wymiaru nie miały. Kandydat na rozszerzenie
+> formatu adnotacji o pole **„ważne do"**.

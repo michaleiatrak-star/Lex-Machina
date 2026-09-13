@@ -698,6 +698,62 @@ restrukturyzacja` 906, `mod-PrFarm-prawo-farmaceutyczne` 903,
 `mod-OP-ordynacja-podatkowa` 837). Po podziałach z tej samej sesji (PrUpad
 wyprzedzająco, KC-spadki obligatoryjnie): **0 ⛔, 5 ⚠️**, kod wyjścia 0.
 
+### 13a. ROZSZERZENIE O ZASOBY KANONICZNE `shared/` (2026-09-12p)
+
+⛔ **Wykryta ślepa plamka.** Do 2026-09-12p T13 mierzył **wyłącznie**
+`modules/mod-*.md` (warunek w `zbierz()`: `basename(root) == 'modules' and
+nazwa.startswith('mod-')`). Pliki leżące bezpośrednio w katalogu `shared/` były
+**poza zasięgiem testu w ogóle** — a `shared/TABELE-OPLAT.md` urósł przez serię
+sesji wrześniowych do **1472 linii**, czyli **47 % ponad próg CRIT**, i nikt
+tego nie zmierzył.
+
+⚠️ **Ta sama klasa problemu co przy powstaniu T13:** reguła z progiem liczbowym
+istniała, test istniał, a jeden katalog po prostu nie był w niego wpięty.
+Różnica polega na tym, że tym razem ślepa plamka nie wynikła z braku testu,
+tylko z **zawężenia jego zakresu do wzorca nazwy pliku**.
+
+**Nowa kategoria: `shared/*.md` powyżej progu WARN — RAPORTOWANA, nie
+blokująca.** Kod wyjścia bez zmian, jak przy `SKILL.md` wg F-78.
+
+⛔ **Dlaczego nie CRIT.** Te pliki są **celowo scentralizowane**. Podział
+`TABELE-OPLAT.md` na kilka mniejszych odtworzyłby dokładnie tę strukturę, którą
+**sekcja 7 tego samego pliku** nazywa *tabelami satelickimi* i której cały
+audyt O-11 uczył się nie tworzyć. Test, który wymusza podział wbrew doktryny
+skilla, jest testem szkodliwym.
+
+⚠️ **Zalecane działanie przy przekroczeniu progu: SPIS TREŚCI, nie cięcie.**
+Przy tej objętości realnym problemem jest **odnalezienie sekcji**, nie sama
+długość. Wykonane w tej samej sesji: `TABELE-OPLAT.md` (72 pozycje) i
+`terminy.md` (22 pozycje) dostały spisy treści.
+
+### 13b. ⛔ TA SAMA PLAMKA DRUGI RAZ — poprawka zakresu (2026-09-12r)
+
+Rozszerzenie z 13a sprawdzało `basename(root) == 'shared'`, czyli **wyłącznie
+pliki leżące bezpośrednio w katalogu skilla**. Podział `TABELE-OPLAT` (sesja
+12q) utworzył `shared/oplaty/` z siedmioma satelitami — i **wszystkie
+natychmiast wypadły poza zakres testu**, dokładnie tak, jak wcześniej wypadł
+z niego sam `TABELE-OPLAT`.
+
+⛔ **Ta sama ślepa plamka, drugi raz, w odstępie jednej sesji.** Za pierwszym
+razem zakres zawężał **wzorzec nazwy pliku** (`mod-*`), za drugim —
+**głębokość katalogu**. Wspólna przyczyna: reguła progowa jest globalna,
+a warunek wpięcia pisany pod aktualnie znany układ plików. Każda zmiana
+struktury repozytorium jest **potencjalnym wypadnięciem z zakresu testu**.
+
+**Poprawka:** warunek zmieniony na `'shared' in root.split(os.sep)` — cały
+podkatalog `shared/`, rekurencyjnie. Po poprawce test widzi **167 zasobów
+kanonicznych** zamiast 138.
+
+⭐ **Dodany `--selftest` (5/5)**, którego T13 nie miał od powstania. Przypadki
+pilnują **przydziału do kategorii**, nie progów: plik bezpośrednio w `shared/`,
+satelita w podkatalogu, moduł dziedzinowy, `SKILL.md`, plik spoza zakresu.
+To jest bramka na tę konkretną klasę regresji — gdyby istniała w 12q, plamka
+wyszłaby od razu.
+
+⚠️ **Znane ograniczenie ograniczenia:** spisy treści są **ręczne**. Nie ma
+testu pilnującego, czy spis nadąża za nagłówkami — to ta sama klasa długu co
+rejestry przed T1. Kandydat na rozszerzenie, nie zobowiązanie.
+
 ### Ograniczenie — świadome
 
 Test mierzy WYŁĄCZNIE liczbę linii. **Nie ocenia, czy w miejscu, w którym
@@ -1031,3 +1087,148 @@ blok `|` jest legalny i wręcz odporniejszy na F-146/F-159. Bramka
 z fałszywymi alarmami zostaje wyłączona po drugim przebiegu, więc reguła
 została zawężona, a selftest dostał przypadek bloku i mutację negatywną
 (`inputs` jako blok `|` **nadal jest usterką** — to pole się iteruje).
+
+---
+
+## T28 — WARTOŚCI I CYTATY, NIE AKTY (`check_wartosci_prawne.py`)
+
+**Dodany:** 2026-09-12f, obserwacja **O-12**. **Priorytet: KRYTYCZNY.** Offline,
+wchodzi do orkiestratora.
+
+**Po co powstał.** Cały dotychczasowy aparat — T3, T11, T15, T24, T27 — pyta
+o **akty**: czy numer Dz.U. istnieje, czy jest aktualny, czy nie ma nowelizacji
+po tekście jednolitym. Trzy sesje z rzędu wykryły mechanizmy, w których **akt
+jest w pełni aktualny, a wartość w module nieprawdziwa**:
+
+| Mechanizm | Przykład | Co wygląda na aktualne |
+|---|---|---|
+| rozporządzenie **uchyla** poprzednie | zryczałtowana równowartość wydatków 300 → **1000 zł** (`Dz.U. 2025 poz. 770`) | ustawa delegująca i jej t.j. |
+| przepis **uchylony**, materia przeniesiona | art. 503 KPC → art. 480² § 2, 480³, 505 § 1 | cały kodeks |
+| **decyzja RPP** zmienia wynik wzoru | wszystkie odsetki ustawowe | akt, przepis i brzmienie |
+
+### Trzy bramki
+
+**W1 — rejestr znanych błędnych cytatów → FAIL.** Zamknięta lista pozycji
+**zweryfikowanych odczytem treści**, każda z datą sesji. To **nie jest** heurystyka
+„wykryj wszystkie błędy" — to zapora przed **nawrotem**. Powód wprost:
+`art. 328¹ KPC` naprawiano **trzykrotnie** (2026-08-04, 2026-08-08, 2026-09-12d)
+i **sześciokrotnie przetrwał**, bo za każdym razem naprawiano **plik**,
+w którym błąd zauważono, a nie **wzorzec w korpusie**.
+
+Pozycje startowe (10): `328¹ KPC`; `art. 503 KPC` (uchylony); `art. 27 pkt 1–6
+KSCU` jako progi WPS; `art. 13 ust. 1a KSCU` (jednostka nie istnieje);
+`art. 19 § 2b`; `art. 69 § 1 KSCU` przy zabezpieczeniu; `§` zamiast `ust.`
+w KSCU; `art. 105 § 1 KPW` przy wniosku o uzasadnienie; `art. 94 KPSW` bez
+odesłania; ryczałt `300 zł` przy oskarżeniu prywatnym.
+
+⛔ **Kryterium dopisania do rejestru:** wyłącznie pozycja potwierdzona odczytem
+treści aktu (RZĄD 1). Fałszywy alarm w bramce FAIL kończy się jej wyłączeniem,
+a wtedy tracimy całą zaporę — to nie jest miejsce na domysły.
+
+**W2 — procent utrwalony przy pojęciu „odsetki" → FAIL.** Wartość zakotwiczona
+w stopie NBP z definicji nie da się zapisać poprawnie: RPP zmienia stopę bez
+nowelizacji. Dozwolony jest **wzór** (punkty procentowe, dwukrotność, stopa
+referencyjna albo lombardowa, stawki 50 %/150 % z OP), zakazany **wynik**.
+
+**W3 — wiersz kwotowy bez podstawy → WARN.** Wiersz tabeli z kwotą w zł, w którym
+żadna komórka nie wskazuje jednostki redakcyjnej ani numeru publikacyjnego.
+⛔ Sama nazwa rodzaju aktu („Rozporządzenie MS") **nie liczy się** — dokładnie
+tak wyglądał wiersz „doręczenie przez komornika 60 zł", który przez wiele wersji
+nie miał identyfikacji aktu (podstawą jest art. 41 ust. 1 ustawy o kosztach
+komorniczych).
+
+### Uruchomienie
+
+```bash
+python3 scripts/check_wartosci_prawne.py --selftest        # offline, 21/21
+python3 scripts/check_wartosci_prawne.py --katalog .       # całe repo
+python3 scripts/check_wartosci_prawne.py --tylko-fail      # bez sekcji WARN
+```
+Kody: 0 = czysto (WARN dopuszczalne), 1 = FAIL, 2 = błąd wywołania.
+
+### Wynik pierwszego przebiegu (2026-09-12f)
+
+410 plików. **31 trafień FAIL**, z czego **8 to realne, nienaprawione usterki**:
+`SPF-SPG.md` ×2 (zabezpieczenie z art. 69 zamiast art. 68 pkt 1),
+`SPB-zarzuty.md` ×2 i `pisma-proste-v2/SKILL.md` ×1 (opłata od zarzutów
+z „art. 19 § 3" oraz termin 7 dni zamiast miesiąca), `dr-03` ×3
+(`art. 94 KPSW` bez odesłania do art. 506 § 1 KPK). Wszystkie naprawione
+w tej samej sesji; po naprawie **FAIL: brak**.
+
+⭐ **Test znalazł usterki, których trzy poprzednie sesje ręcznego przeglądu
+nie znalazły** — mimo że dotyczyły dokładnie tych rodzin, które te sesje badały.
+
+### ⚠️ Znane ograniczenia — jawne
+
+1. **Neutralizator opisu błędu.** Moduły muszą móc napisać „art. 503 KPC jest
+   UCHYLONY", więc linia zawierająca zwrot opisujący błąd jest pomijana.
+   **Cena:** W1 da się ominąć dopisując do linii słowo „uchylony". Uznane za
+   akceptowalne — taki zapis sam niesie ostrzeżenie dla czytelnika, inaczej niż
+   milczący błędny cytat. Selftest pilnuje, że opis w JEDNEJ linii **nie**
+   neutralizuje błędnego cytatu w innej.
+2. **W3 daje szum: 85 ostrzeżeń w pierwszym przebiegu.** Najczęstsza przyczyna
+   jest legalna — podstawa stoi w **nagłówku nad tabelą**, nie w każdym wierszu.
+   Dlatego WARN, nie FAIL. Zaostrzenie wymagałoby analizy zakresu tabeli.
+3. **Rejestr W1 jest listą, nie regułą.** Nie wykryje nowego błędu tej samej
+   klasy — wykryje **nawrót znanego**. To świadomy wybór: reguła generyczna
+   („każdy indeks górny przy numerze artykułu") dawałaby fałszywe alarmy na
+   legalnych jednostkach `art. 205¹`, `art. 398⁵`, `art. 477⁹` KPC.
+4. **Marker odstępstwa** `<!-- T28-OK: powód -->` działa w jednej linii i wymaga
+   podania powodu. Nie ma globalnego wyłącznika bramki.
+
+---
+
+## T29 — INTEGRALNOŚĆ PODZIAŁU TABELE-OPLAT (`check_oplaty_mapa.py`)
+
+**Dodany:** 2026-09-12q wraz z podziałem `shared/TABELE-OPLAT.md` (1555 linii)
+na rdzeń nawigacyjny i **siedem satelitów** w `shared/oplaty/`.
+**Priorytet: KRYTYCZNY.** Offline, do orkiestratora.
+
+### ⛔ Po co — test jest WARUNKIEM dopuszczalności podziału
+
+Sekcja 7 rdzenia opisuje, jak w tym systemie powstały „tabele satelickie":
+pliki z własnymi kwotami, **bez właściciela i bez rejestru**, które rozjechały
+się z przepisem (pomiar `AUDYT-2026-09-12`: trafność poniżej 80 %). Podział na
+satelity tworzy **dokładnie taką strukturę**. Różnica polega wyłącznie na tym,
+że tutaj istnieje pojedyncza **mapa własności sekcji** i test, który jej
+pilnuje.
+
+⛔ **Bez T29 podział jest regresją, nie porządkiem.** To nie jest test
+towarzyszący zmianie — to jej warunek.
+
+### Cztery bramki
+
+| Bramka | Co sprawdza | Czego sama nie wystarczy |
+|---|---|---|
+| **B1** | każdy plik z mapy rdzenia **istnieje** | — |
+| **B2** | każdy plik w `shared/oplaty/` jest **w mapie** | ⛔ B1 bez B2 przepuszcza **plik-sierotę** — satelitę bez właściciela, czyli dokładnie stary wzorzec |
+| **B3** | żaden nagłówek sekcji (`## 1a.`, `## 6b.`…) nie występuje w **dwóch plikach** | właściwa bramka **antyduplikacyjna** |
+| **B4** | każdy satelita niesie blok **„Plik satelicki"** | plik odczytany w oderwaniu nie może udawać źródła samodzielnego |
+
+### Uruchomienie
+
+```bash
+python3 scripts/check_oplaty_mapa.py --selftest    # offline, 5/5
+python3 scripts/check_oplaty_mapa.py --katalog .   # cały korpus
+```
+Kody: 0 = czysto, 1 = naruszenie, 2 = błąd wywołania.
+
+### Wynik pierwszego przebiegu (2026-09-12q)
+
+`plików w mapie: 7 | na dysku: 7 | sekcji z właścicielem: 22` — **✅ OK**.
+
+### ⚠️ Znane ograniczenia — jawne
+
+1. **Test pilnuje struktury, nie treści.** Nie wykryje, że ta sama kwota została
+   przepisana do dwóch satelitów **pod różnymi nagłówkami**. B3 działa na
+   numerach sekcji, bo tylko one mają jednoznacznego właściciela.
+2. **Nie sprawdza odesłań przychodzących.** W systemie jest **118 wystąpień**
+   `TABELE-OPLAT`, w tym kilkanaście w formie „`TABELE-OPLAT.md` sekcja 4c".
+   Po podziale rozwiązuje je **mapa w rdzeniu** — odesłanie nadal prowadzi do
+   celu, ale przez jeden skok więcej. Test nie weryfikuje, czy numer sekcji
+   w odesłaniu wciąż istnieje. Kandydat na rozszerzenie, **nie zobowiązanie**
+   (osobny przebieg kalibracyjny — wniosek z `AUDYT-2026-09-12i`).
+3. **Zakres zaszyty na sztywno** (`shared/TABELE-OPLAT.md`, `shared/oplaty/`).
+   Jeżeli powstanie druga rodzina satelitów — np. dla `terminy.md` — test trzeba
+   sparametryzować, a **nie kopiować**. Dwie rozjeżdżające się implementacje tej
+   samej reguły byłyby gorsze niż brak testu (ta sama zasada co przy T24).

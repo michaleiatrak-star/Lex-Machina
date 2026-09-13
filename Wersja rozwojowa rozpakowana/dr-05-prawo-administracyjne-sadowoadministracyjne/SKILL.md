@@ -1,6 +1,6 @@
 ---
 name: dr-05-prawo-administracyjne-sadowoadministracyjne
-version: "3.24"
+version: "3.25"
 description: "Prawo administracyjne i sądowoadministracyjne: KPA, PPSA, decyzje, bezczynność, WSA/NSA, egzekucja administracyjna, cudzoziemcy i postępowania urzędowe."
 ---
 

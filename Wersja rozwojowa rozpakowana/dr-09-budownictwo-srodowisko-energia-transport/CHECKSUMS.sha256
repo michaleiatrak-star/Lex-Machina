@@ -1,7 +1,7 @@
-876fd016901db408fcfefd1ad355bfceef44b2031c62ec138ff6bd7496131376  ./MAPA-AKTOW.md
-6d38032072b84bde153038628a2e04cbff284314ac1f16ef55b3b5634cca5705  ./MAPA-POKRYCIA.md
+e2bf4691f8c239e03f936e9c1e01c24823c80241042b4d7d61a9ca30ea2f2844  ./MAPA-AKTOW.md
+83afde5b91959f4ea4969efc140eba5f4e52d255c6cfee1892bb96db1c77ca89  ./MAPA-POKRYCIA.md
 b98cd207fee28b302956c1019e3235e74c558cdb35e87764a20020e630672fdb  ./PORTABILITY-MANIFEST.md
-11c4d4c7b4780d958b6a4179e679e5b62a775a4f9b856d0d9917e44ecba5ee38  ./SKILL.md
+89fcda88d794ca8a07fa1e55fc8a03e091d162610eabdcb549970841ea87ddc7  ./SKILL.md
 a26e0ecdd82d926b5fbc5fdb70950895a2b41c69d18c97724274c1394341fae4  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 5d235810ace18d3468f7130347e232d86ed0a555122093c708ff08ba035550c7  ./modules/mod-GDDKiA-specustawa-drogowa-ZRID.md
@@ -13,6 +13,7 @@ da8877c1c464df0126b5b8f491135349c8f50120088005e1dcce3d11b8b9cc60  ./modules/mod-
 3889772dc57d54be4da9f63fe3e41d75140b9dddc9991bd2e21f6b94f9d7a288  ./modules/mod-PrEnergetyczne-URE-OZE.md
 d9dbbb106248dd43f0e1207db156b5edcf4f91a6b189a860b05bd857ac8e3dbd  ./modules/mod-PrGeodezyjne-kartografia-wywlaszczenia.md
 c12a4c1792f37960fb7297fea7e541e2419d2d88f5976d74f5566cd7581af8c1  ./modules/mod-PrWodne-gospodarka-sciekowa.md
+0aa28639d010a0b13a5eed063e329a22b2216b9945329b528cfecee1e6397b2e  ./modules/mod-UE-PPWR-EUDR-rozporzadzenia-srodowiskowe.md
 8df7fd2c417c13287c311f420a9229bf564387552bd4d4c93355636f6bc18af1  ./modules/mod-UGN-gospodarka-nieruchomosciami.md
 6fa4437efa3a47666732a4c701471b9ee1f5de14a46cfa8ff515f1cb4ca5ca26  ./modules/mod-formy-ochrony-przyrody-obszary-chronione.md
 76e1632cebcd18152b170bb756c5d98bdce0185bec514a0ac9c2bf1644ec4136  ./modules/mod-inspekcja-ochrony-srodowiska-GIOS-WIOS.md
@@ -45,4 +46,4 @@ f5ed6d52ef082e05e71501604726c1f566cbec9baaf4491f5571eedd28c18162  ./modules/mod-
 73b3f563521ce316ef090929d79a34cb3840b9c91b8c4bd000dd9d0dc2553287  ./modules/ochrona-zabytkow/czesc-04-dps-linie-napowietrzne.md
 e098f49e5a613f6704dffeaa314b4bf059d1926a3e72c7c6589a95b247597eb8  ./modules/ochrona-zabytkow/czesc-05-plac-zabaw-mikrokawalerki.md
 97789c514e51797426e13f47d8853b10806d1c954c2d159777a868188a4151fc  ./modules/ochrona-zabytkow/czesc-06-parking-przeksztalcenie-cross.md
-dfa35e6907e04780a1de67f94f7f82c6789a0beda727bb4c08e6f913ad828da3  ./references/CHANGELOG.md
+3bdd6c61c327b7209b881b0327fc8463f42761a28c045d5c997fbb7f555f518e  ./references/CHANGELOG.md

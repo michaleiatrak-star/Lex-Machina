@@ -1,6 +1,6 @@
 ---
 name: pisma-proste-v2
-version: "2.13"
+version: "2.15"
 type: executive-pisma
 status: production
 description: "Proste pisma prawne i urzędowe: wezwania, wnioski, odpowiedzi i krótsze dokumenty; kompletność danych, aktualna weryfikacja prawa i walidacja przed wygenerowaniem pliku."
@@ -101,7 +101,7 @@ Nie cytuj przepisów ani orzeczeń z pamięci bez weryfikacji online.
 
 | Schemat | Plik | Typ pisma |
 |---------|------|-----------|
-| **SPA — Sprzeciw** | `references/SPA-sprzeciw.md` | Sprzeciw od nakazu zapłaty (art. 503 KPC) |
+| **SPA — Sprzeciw** | `references/SPA-sprzeciw.md` | Sprzeciw od nakazu zapłaty (art. 505 § 1 KPC; termin — art. 480² § 2 KPC) |
 | **SPB — Zarzuty** | `references/SPB-zarzuty.md` | Zarzuty od nakazu zapłaty (art. 493 KPC) |
 | **SPC — Klauzula** | `references/SPC-SPD-SPE.md` → sekcja SPC | Wniosek o nadanie klauzuli wykonalności |
 | **SPD — Egzekucja** | `references/SPC-SPD-SPE.md` → sekcja SPD | Wniosek o wszczęcie egzekucji |
@@ -267,7 +267,7 @@ przepisu.
 | Pozew — WPS ponad 15 000 do 20 000 zł | 1 000 zł | art. 13 ust. 1 pkt 7 KSCU |
 | Pozew — WPS ponad 20 000 zł | 5 % WPS, max **100 000 zł** | art. 13 ust. 2 KSCU |
 | Apelacja i inne środki z katalogu | wg tabeli od pozwu, od wartości przedmiotu **zaskarżenia** | art. 18 ust. 2 KSCU |
-| Sprzeciw od nakazu (w terminie) | brak | art. 503 KPC |
+| Sprzeciw od nakazu (w terminie) | brak | art. 19 KSCU *a contrario* (⛔ art. 503 KPC uchylony) |
 | Zarzuty od nakazu nakazowego | 3/4 opłaty; konsument — max 750 zł | art. 19 ust. 4 KSCU |
 | Pozew w EPU | 1/4 opłaty, nie mniej niż 30 zł | art. 19 ust. 2 pkt 2 i art. 20 ust. 1 KSCU |
 | Zażalenie | 1/5 opłaty, o ile przepis szczególny nie stanowi inaczej | art. 19 ust. 3 pkt 2 KSCU |

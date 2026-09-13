@@ -53,8 +53,40 @@ Nawiązanie i rozwiązanie stosunku pracy, wypowiedzenie (wymogi formalne, przyc
 ### TERMIN 21 DNI — ABSOLUTNY PRIORYTET
 
 ```
-Odwołanie od wypowiedzenia:     21 dni od doręczenia pisma (art. 264 §1 KP)
-Odwołanie od dyscyplinarki:     21 dni od doręczenia pisma (art. 264 §2 KP)
+✅ [VER] RZĄD 1 2026-09-12n — odczyt treści KP (Dz.U. 2025 poz. 277).
+KROK 2C: nowelizacja Dz.U. 2026 poz. 1046 (w życie 5.11.2026) zmienia art. 11,
+18, 94 i 104 KP oraz art. 47 i 461 KPC — NIE dotyka art. 52, 109, 112, 264,
+265 ani 291. ⚠️ Wchodzi za niespełna dwa miesiące.
+
+Odwołanie od wypowiedzenia:     21 dni od doręczenia pisma wypowiadającego
+                                (art. 264 §1 KP)
+Odwołanie od dyscyplinarki:     21 dni od doręczenia zawiadomienia o rozwiązaniu
+                                bez wypowiedzenia ALBO od dnia WYGAŚNIĘCIA umowy
+                                (art. 264 §2 KP — dwa punkty początkowe)
+Żądanie nawiązania umowy:       21 dni od doręczenia zawiadomienia o odmowie
+                                przyjęcia do pracy (art. 264 §3 KP)
+Przywrócenie uchybionego terminu: 7 dni od ustania przyczyny; we wniosku trzeba
+                                UPRAWDOPODOBNIĆ okoliczności (art. 265 §2 KP)
+
+⛔ TERMINY DLA PRACODAWCY — ich upływ to ZARZUT OBRONY, nie termin pracownika:
+Dyscyplinarka:                  1 miesiąc od UZYSKANIA WIADOMOŚCI o okoliczności
+                                uzasadniającej rozwiązanie (art. 52 §2 KP)
+Kara porządkowa:                2 tygodnie od powzięcia wiadomości o naruszeniu
+                                I 3 miesiące od dopuszczenia się naruszenia
+                                (art. 109 §1 KP); ⚠️ bieg dwutygodniowego terminu
+                                nie rozpoczyna się / ulega zawieszeniu, gdy
+                                pracownik nie może być wysłuchany z powodu
+                                nieobecności (art. 109 §3)
+
+KARA PORZĄDKOWA — ścieżka pracownika:
+Sprzeciw do pracodawcy:         7 dni od zawiadomienia o ukaraniu (art. 112 §1)
+⭐ Milcząca zgoda:              NIEODRZUCENIE sprzeciwu w 14 dni od jego
+                                wniesienia JEST RÓWNOZNACZNE Z UWZGLĘDNIENIEM
+                                (art. 112 §1 zd. 3) — brak reakcji pracodawcy
+                                kończy sprawę po myśli pracownika, bez sądu
+Wystąpienie do sądu pracy:      14 dni od zawiadomienia o ODRZUCENIU sprzeciwu
+                                (art. 112 §2) — ⛔ warunkiem jest UPRZEDNIE
+                                wniesienie sprzeciwu
 Żądanie nawiązania umowy:       21 dni od dnia, gdy miała być zawarta
 ⚠️ TERMIN ZAWITY — nawet bezprawne zwolnienie staje się skuteczne po upływie!
 ⚠️ Pracodawca często manewruje negocjacjami → pilnuj terminu niezależnie od rozmów
@@ -163,7 +195,7 @@ URLOP — ekwiwalent za niewykorzystany:
   Wynagrodzenie z 3 m-cy / liczba dni roboczych w kwartale × liczba dni urlopu
   ⚠️ Oblicz dokładnie — pracodawcy często zaniżają
 
-ODPRAWA (ustawa o zwolnieniach grupowych — weryfikuj Dz.U. 2025 poz. 570):
+ODPRAWA (ustawa o zwolnieniach grupowych — weryfikuj **Dz.U. 2026 poz. 1195 t.j.** ✅ [VER] RZĄD 1 2026-09-10r (poprzednio 2025 poz. 570 — wygaśnięcie aktu)):
   Do 2 lat stażu:   1 miesiąc
   2–8 lat stażu:    2 miesiące
   > 8 lat stażu:    3 miesiące

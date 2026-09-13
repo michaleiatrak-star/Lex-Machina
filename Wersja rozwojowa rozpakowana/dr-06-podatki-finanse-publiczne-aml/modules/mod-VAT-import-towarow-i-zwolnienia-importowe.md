@@ -1,7 +1,7 @@
 # Moduł — VAT: import towarów — wymiar i pobór (Dział VII, art. 33–40), procedura uproszczona art. 33a, miejsce świadczenia przy imporcie (art. 26a), zwolnienia z tytułu importu (Dział VIII rozdz. 3, art. 45–82a)
 
 > **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2025 poz. 775**.
-> ⚠️ NOWELIZACJE PO t.j.: Dz.U. 2025 poz. 894, 896, 1203, 1811; Dz.U. 2026 poz. 507, 846.
+> ⚠️ NOWELIZACJE PO t.j.: Dz.U. 2025 poz. 894, 896, 1203, 1811; Dz.U. 2026 poz. 507 (⛔ w życie 14.10.2026), 846.
 >
 > ⛔ **HARD GATE — `shared/PRAWO-HARDGATE.md`.** Ten moduł opisuje obszar
 > o najwyższej w całej ustawie gęstości odesłań do prawa celnego UE (UKC)

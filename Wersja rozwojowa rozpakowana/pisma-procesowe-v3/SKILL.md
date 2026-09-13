@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.22"
+version: "5.24"
 type: executive-pisma
 status: production
 description: "Zaawansowane pisma procesowe: pozwy, odpowiedzi, apelacje, zażalenia i inne pisma wymagające strategii, faktów, dowodów, weryfikacji prawa i finalnej walidacji dokumentu."
@@ -333,10 +333,10 @@ nie uruchamiaj W1 (Test C) — to są ścieżki dla pism PISANYCH OD ZERA.
 Pismo proste = spełnia WSZYSTKIE trzy warunki:
 1. Jedno żądanie procesowe
 2. Jedna podstawa prawna (nie wymaga analizy wielowątkowej)
-3. Należy do katalogu: sprzeciw od nakazu (art. 503 KPC), zarzuty od nakazu
-   (art. 493 KPC), wniosek o klauzulę (art. 781 KPC), wniosek o wszczęcie
+3. Należy do katalogu: sprzeciw od nakazu (art. 505 § 1 KPC — ⛔ art. 503 uchylony),
+   zarzuty od nakazu (art. 493 § 1 KPC; termin obu — art. 480² § 2 KPC), wniosek o klauzulę (art. 781 KPC), wniosek o wszczęcie
    egzekucji (art. 797 KPC), zabezpieczenie (art. 730 KPC), zwolnienie od kosztów
-   (art. 102 KSCU), uzasadnienie wyroku (art. 328¹ KPC), przywrócenie terminu
+   (art. 102 KSCU), uzasadnienie wyroku (art. 328 § 1 KPC), przywrócenie terminu
    (art. 168 KPC), wezwanie przedsądowe (art. 455 KC), wgląd do akt (art. 9 KPC),
    doręczenie przez komornika (art. 139¹ KPC), sprzeciw od orzeczenia referendarza
    (art. 398²² KPC).

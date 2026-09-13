@@ -220,23 +220,68 @@ stanu prawnego, zweryfikuj status legislacyjny PRZED każdym użyciem.**
 
 ## ZAPRZECZENIE OJCOSTWA — TERMINY ZAWITE
 
-> ⚠️ Weryfikuj aktualne brzmienie art. 63–70 KRO (Dz.U. 2026 poz. 236) w ISAP.
+✅ [VER] RZĄD 1 2026-09-12k — odczyt treści KRO `Dz.U. 2026 poz. 236`
+(tekst jednolity obejmuje nowelizację `Dz.U. 2025 poz. 897`).
+
+⛔⛔ **NAPRAWA 2026-09-12k — DWA TERMINY BYŁY NIEPRAWDZIWE.**
+Poprzednia wersja podawała: matka — „6 miesięcy od urodzenia dziecka lub
+dowiedzenia się", dziecko — „3 lata od osiągnięcia pełnoletności". **Oba są
+błędne co do długości, a pierwszy także co do punktu początkowego.**
+⛔ Termin dziecka był **zawyżony trzykrotnie** — to kierunek niebezpieczny:
+dziecko poinformowane o „trzech latach" traci powództwo.
 
 ```
 Domniemanie ojcostwa (art. 62 KRO):
   Mąż matki = domniemany ojciec gdy dziecko urodziło się w czasie trwania małżeństwa
   LUB przed upływem 300 dni od ustania/unieważnienia/separacji
 
-TERMINY NA ZAPRZECZENIE:
-  Mąż matki (art. 63 KRO — po nowelizacji Dz.U. 2019 poz. 2089):
-    → 1 ROK od dowiedzenia się, że dziecko od niego NIE POCHODZI
-    → NIE od daty urodzenia dziecka (zmiana od 30.11.2019!)
-    → Nie później niż do pełnoletności dziecka
-    → ⚠️ TK zakwestionował ograniczenie datą pełnoletności — weryfikuj status
+⛔ WSZYSTKIE TERMINY BIEGNĄ OD DOWIEDZENIA SIĘ, NIE OD URODZENIA DZIECKA
+   (reforma 2019 r. przestawiła punkt początkowy)
 
-  Matka (art. 69 KRO): 6 miesięcy od urodzenia dziecka lub dowiedzenia się
-  Dziecko (art. 70 KRO): 3 lata od osiągnięcia pełnoletności
-  Prokurator (art. 86 KRO): brak terminu zawitego
+TERMINY NA ZAPRZECZENIE OJCOSTWA:
+  Mąż matki (art. 63 KRO):
+    → 1 ROK od dnia, w którym dowiedział się, że dziecko od niego NIE POCHODZI
+    → nie później niż do dnia osiągnięcia przez dziecko PEŁNOLETNOŚCI
+
+  Matka (art. 69 §1 KRO):
+    → 1 ROK od dnia, w którym dowiedziała się, że dziecko nie pochodzi od męża
+    → nie później niż do dnia osiągnięcia przez dziecko PEŁNOLETNOŚCI
+    ⛔ NIE "6 miesięcy od urodzenia" — to zapis sprzed reformy
+
+  Dziecko (art. 70 §1 KRO):
+    → 1 ROK od dnia, w którym dowiedziało się, że nie pochodzi od męża matki
+    → jeżeli dowiedziało się PRZED pełnoletnością — termin biegnie
+      OD DNIA OSIĄGNIĘCIA PEŁNOLETNOŚCI
+    ⛔ NIE "3 lata od pełnoletności"
+
+  Mąż ubezwłasnowolniony / chory psychicznie (art. 64-65 KRO):
+    → 1 rok od ustanowienia przedstawiciela ustawowego albo od dowiedzenia się
+      przez niego (art. 64 §1)
+    → 1 rok od uchylenia ubezwłasnowolnienia albo od dowiedzenia się (art. 64 §2)
+    → 1 rok od ustania choroby lub zaburzeń (art. 65)
+    → stosuje się ODPOWIEDNIO także do matki (art. 69 §3) i dziecka (art. 70 §3)
+
+BEZSKUTECZNOŚĆ UZNANIA OJCOSTWA:
+  Mężczyzna, który uznał (art. 78 §1):  1 rok od dowiedzenia się; przy uznaniu
+                                        przed urodzeniem bieg nie zaczyna się
+                                        przed urodzeniem dziecka
+  Matka, która potwierdziła (art. 79):  odpowiednio jak wyżej
+  Dziecko (art. 81 §2):                 1 rok od dowiedzenia się, po osiągnięciu
+                                        pełnoletności; gdy dowiedziało się
+                                        wcześniej — od dnia pełnoletności
+
+  ⛔ art. 81[1] KRO: przy uznaniu na podstawie art. 75[1] (medycznie wspomagana
+     prokreacja) ustalenie bezskuteczności jest dopuszczalne TYLKO wtedy, gdy
+     dziecko NIE urodziło się w następstwie tej procedury
+
+  Prokurator (art. 86 KRO): brak terminu liczonego od dowiedzenia się, ALE
+    ⛔ gdy dziecko zmarło PRZED pełnoletnością — do dnia, w którym osiągnęłoby
+       pełnoletność
+    ⛔ gdy dziecko zmarło PO pełnoletności — powództwo NIEDOPUSZCZALNE
+
+  ⚠️ art. 70[1] KRO: zaprzeczenie niedopuszczalne po śmierci dziecka, chyba że
+     zmarło po wszczęciu postępowania — wtedy dochodzą go ZSTĘPNI
+  ⚠️ art. 71 KRO "UTRACIŁ MOC" — starsze opracowania mogą się na nim opierać
 ```
 
 ---

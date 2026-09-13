@@ -67,7 +67,9 @@ TERMINY PŁATNOŚCI (osoby fizyczne):
   → 4 raty: do 15 marca, 15 maja, 15 września, 15 listopada
   (weryfikuj aktualne terminy w ustawie w ISAP)
 
-TERMIN NA ODWOŁANIE OD DECYZJI: 14 dni (art. 223 §1 Op)
+TERMIN NA ODWOŁANIE OD DECYZJI: 14 dni od doręczenia — art. 223 §2 Op
+  (§1 określa wyłącznie, że odwołanie wnosi się ZA POŚREDNICTWEM organu,
+   który wydał decyzję)
 ```
 
 ---

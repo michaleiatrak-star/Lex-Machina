@@ -1,7 +1,7 @@
 d84df35654a57cb9b445db3a98a40e3d1fc9d9f066c6c7bc22a2b8cf05732c34  ./MAPA-AKTOW.md
 601a3dbac3a7233e0bfc7b70194fd08fa5380bf42b4cb614fc9b4522ee986f1b  ./MAPA-POKRYCIA.md
 eac5e4f81d8a3c6282ed293c7dec591f0c0415e02c2739425f139bb644ff1846  ./PORTABILITY-MANIFEST.md
-fa43b6919bdaa42e0bb775d84d151ebee891228755b9a3480099fea81631ba24  ./SKILL.md
+453d6ad50ef7275ae63f35911ddd3939812c658998a6a09cc03e263a2c3a7d35  ./SKILL.md
 56eed0622890a10e5faf863e13f3e2c692f13d83c5e8e0f49319936852b100c5  ./agents/openai.yaml
 9be88f8dd4c5e658961515c71389eafd45142ffa68bcae58e8dcff57d178ed91  ./assets/icon.svg
 41ecf6d89da12743636c67ab29de443bbe34596f68de7355e2aba491e60cf183  ./modules/mod-KPC-arbitraz-mediacja-ADR.md
@@ -10,11 +10,11 @@ e8b8db22cb9c125dfa96d1f2e03aac7fabfa2b03fbd628297c143b2ca2a9c6d8  ./modules/mod-
 5f994ef1e0ddeb36f09063ad41a7f89287c81a61626aef1e11a18325a9bc2bfe  ./modules/mod-PrProkuratura-organy-ochrony-prawa.md
 4bfa1d1cb9b4532bfeef7a93d84aedbc57a2fb04ed0a4c43844563df132e1c48  ./modules/mod-techniki-mediacyjne-negocjacyjne.md
 277fac08a09cc9c90086c8fef09887335f14e48464e458d355f4cbbb1b1a6450  ./modules/mod-ustawa-adwokatura.md
-2c3a789bc401471b898ce629c9cc81174baaa504dc0dff95c7abedb3020b0cae  ./modules/mod-ustawa-komornicy-sadowi-zawod.md
-dca712a65a146f4c1130a584260416d0cfbfc92e8ea4e79915893ae3993cdc0e  ./modules/mod-ustawa-notariat.md
+e519a6e2c37d133ac95259337f88f6f7495fbd55f318232580ae2f03218e16e1  ./modules/mod-ustawa-komornicy-sadowi-zawod.md
+4f5be0ac116f1640ffd133ba6d21c3b497d0ea02f5772e5bbfa3b4ef52aae757  ./modules/mod-ustawa-notariat.md
 33d80de69d930fcf569e25375ebe6a4fb87bb5c34d1523a7e8d661da26f57a13  ./modules/mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md
 5702753d43ea9ce2ac26ac5ff3dfec18d1cbf493851f9e52208337ab66c52223  ./modules/mod-ustawa-radcowie-prawni.md
 dc534dc03bb206096a9c58859bd144d5da1eb2294af8c527cc09331c398fc2a2  ./modules/mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF.md
 35ae12640e414b57e5ebe1afb80ab91a780847058b131d949ae739f28fc0040b  ./modules/mod-ustawa-rzecznicy-patentowi-zawod.md
 afa8ab53255af6dbbdcbbc346cb7afe0e66c3d3f7054b29ace68b1f5ad4e4529  ./modules/mod-ustawa-sedziowie-referendarze-kuratorzy.md
-2701bf155fa02d1b3cadd1dbe5966ed501947ff92b6602373e7f8fa5a2491314  ./references/CHANGELOG.md
+45695c9a66fc937de8409e9c441560f27f02195c166b87fd57377afdcd24497d  ./references/CHANGELOG.md

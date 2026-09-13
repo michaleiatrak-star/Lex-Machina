@@ -171,12 +171,37 @@ Forma:
   Uchwały zwykłe → protokół pisemny (sp. z o.o.) lub notarialny (S.A.)
   Brak formy = bezwzględna nieważność (art. 17 KSH)
 
-Zaskarżenie uchwały (sp. z o.o.):
-  Powództwo o stwierdzenie nieważności: 6 miesięcy od powzięcia wiadomości o uchwale,
-  max 3 lata od podjęcia (art. 252 §3 KSH)
-  Powództwo o uchylenie: 1 miesiąc od otrzymania wiadomości, max 6 miesięcy od podjęcia
-  (art. 251 KSH)
-  ⚠️ Terminy — weryfikuj aktualne brzmienie w ISAP.
+Zaskarżenie uchwały — ✅ [VER] RZĄD 1 2026-09-12m, odczyt treści KSH
+(Dz.U. 2024 poz. 18). KROK 2C: nowelizacja Dz.U. 2026 poz. 176 (w życie
+18.02.2027) NIE dotyka art. 251, 252, 424 ani 425.
+
+⛔ CZTERY RÓŻNE PARY TERMINÓW — zależnie od TYPU SPÓŁKI i RODZAJU POWÓDZTWA.
+   Podanie jednej pary "dla spółek" jest błędne w trzech na cztery wypadki.
+
+  SP. Z O.O. — uchylenie uchwały wspólników (art. 251 KSH):
+    miesiąc od otrzymania wiadomości o uchwale,
+    nie później niż 6 miesięcy od powzięcia uchwały
+  SP. Z O.O. — stwierdzenie nieważności (art. 252 §3 KSH):
+    6 miesięcy od otrzymania wiadomości,
+    nie później niż 3 LATA od powzięcia uchwały
+
+  S.A. NIEPUBLICZNA — uchylenie uchwały WZ (art. 424 §1 KSH):
+    miesiąc od otrzymania wiadomości, nie później niż 6 miesięcy od powzięcia
+  S.A. PUBLICZNA — uchylenie (art. 424 §2 KSH):
+    miesiąc od otrzymania wiadomości, ⛔ nie później niż 3 MIESIĄCE od powzięcia
+  S.A. NIEPUBLICZNA — stwierdzenie nieważności (art. 425 §2 KSH):
+    6 miesięcy od powzięcia wiadomości, nie później niż 2 LATA od powzięcia
+  S.A. PUBLICZNA — stwierdzenie nieważności (art. 425 §3 KSH):
+    ⛔ 30 DNI OD OGŁOSZENIA uchwały, nie później niż ROK od powzięcia
+
+  ⛔ Sp. z o.o. ma granicę 3 LATA, S.A. tylko 2 LATA — przeniesienie liczby
+     między reżimami kosztuje rok.
+  ⛔ Spółka publiczna przy stwierdzeniu nieważności liczy termin OD OGŁOSZENIA
+     uchwały, nie od powzięcia o niej wiadomości — jedyny wariant liczony
+     od zdarzenia publicznego, a nie od wiedzy uprawnionego.
+  ⭐ art. 252 §4 i art. 425 §4 KSH: upływ tych terminów NIE WYŁĄCZA możliwości
+     podniesienia ZARZUTU nieważności uchwały. Powództwo przepada, zarzut nie —
+     to bywa jedyna droga, gdy klient zgłasza się po latach.
 ```
 
 ---

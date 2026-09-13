@@ -21,9 +21,10 @@ Opłata: **3/4 opłaty od pozwu** (art. 19 §3 KSCU).*
 | Cecha | Sprzeciw (SPA) | Zarzuty (SPB) |
 |---|---|---|
 | Tryb | Upominawczy / EPU | **Nakazowy** |
-| Termin | 14 dni | **7 dni** |
+| Termin | **2 tygodnie** (kraj) / miesiąc (UE poza krajem) | ⛔ **MIESIĄC** przy doręczeniu na terytorium UE, w tym w Polsce / 3 miesiące poza UE |
 | Opłata | brak | **3/4 wpisu** |
-| Podstawa | art. 503 KPC | **art. 493 KPC** |
+| Podstawa terminu | **art. 480² § 2 pkt 1–2 KPC** | **art. 480² § 2 pkt 3–4 KPC** |
+| Podstawa dopuszczalności | art. 505 § 1 KPC (⛔ art. 503 UCHYLONY) | art. 493 § 1 KPC (nie zawiera terminu) |
 | Skutek | Nakaz traci moc | Nakaz **nie traci** mocy — sprawa toczy się dalej |
 | Rygor | Brak | Nakaz nakazowy = tytuł wykonawczy od razu |
 

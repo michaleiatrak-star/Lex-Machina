@@ -1,6 +1,6 @@
 ---
 name: analizator-dowodow-v3
-version: "5.16.6"
+version: "5.16.8"
 type: executive-analiza
 status: production
 description: "Ocena dowodów, dokumentów, zeznań i akt: siła dowodowa, hierarchia A-D, pokrycie przesłanek, sprzeczności, terminy procesowe i analiza śledcza."

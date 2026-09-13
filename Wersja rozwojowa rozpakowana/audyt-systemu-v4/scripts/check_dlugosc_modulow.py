@@ -58,7 +58,16 @@ def policz_linie(sciezka):
 
 
 def zbierz(katalog):
-    moduly, skille, pominiete = [], [], []
+    # ⛔ Kategoria dodana 2026-09-12p: ZASOBY KANONICZNE `shared/` (pliki .md
+    #    leżące bezpośrednio w katalogu skilla `shared`, poza SKILL.md).
+    #    Do tej pory T13 mierzył WYŁĄCZNIE `modules/mod-*.md`, więc
+    #    `shared/TABELE-OPLAT.md` urósł do 1471 linii — o 47 % ponad próg CRIT —
+    #    całkowicie poza zasięgiem testu. Nie jest to jednak naruszenie ZASADY 13
+    #    w tym samym sensie: te pliki są CELOWO scentralizowane, a podział
+    #    odtworzyłby dokładnie rozproszenie, które sekcja 7 TABELE-OPLAT nazywa
+    #    tabelami satelickimi. Dlatego kategoria RAPORTOWANA, nie blokująca —
+    #    jak SKILL.md wg F-78. Decyzja o podziale należy do użytkownika.
+    moduly, skille, kanoniczne, pominiete = [], [], [], []
     for root, dirs, files in os.walk(katalog):
         if 'archive' in root.split(os.sep):
             continue
@@ -76,18 +85,70 @@ def zbierz(katalog):
                 moduly.append((n, rel))
             elif nazwa == 'SKILL.md':
                 skille.append((n, rel))
-    return moduly, skille, pominiete
+            elif 'shared' in root.split(os.sep):
+                # ⛔ ZAKRES POPRAWIONY 2026-09-12r. Wersja z 12p sprawdzała
+                #    `basename(root) == 'shared'`, więc obejmowała wyłącznie
+                #    pliki leżące BEZPOŚREDNIO w katalogu skilla. Podział
+                #    TABELE-OPLAT (12q) utworzył `shared/oplaty/` z siedmioma
+                #    satelitami — i te NATYCHMIAST wypadły poza zakres testu,
+                #    dokładnie tak jak wcześniej wypadł z niego sam
+                #    TABELE-OPLAT. Ta sama plamka, drugi raz, w odstępie
+                #    jednej sesji. Teraz: cały podkatalog `shared/`, rekurencyjnie.
+                kanoniczne.append((n, rel))
+    return moduly, skille, kanoniczne, pominiete
+
+
+PRZYPADKI_SELFTEST = [
+    ('plik bezpośrednio w shared/ jest widziany',
+     'shared/X.md', 'kanoniczne'),
+    ('satelita w podkatalogu shared/ też jest widziany',
+     'shared/oplaty/01-a.md', 'kanoniczne'),
+    ('moduł dziedzinowy trafia do kategorii modułów',
+     'dr-99-x/modules/mod-y.md', 'moduly'),
+    ('SKILL.md ma własną kategorię',
+     'dr-99-x/SKILL.md', 'skille'),
+    ('plik poza shared i poza modules jest pomijany',
+     'dr-99-x/references/NOTATKA.md', None),
+]
+
+
+def selftest():
+    import tempfile
+    ok = 0
+    for opis, wzgledna, oczek in PRZYPADKI_SELFTEST:
+        with tempfile.TemporaryDirectory() as d:
+            pelna = os.path.join(d, wzgledna)
+            os.makedirs(os.path.dirname(pelna), exist_ok=True)
+            open(pelna, 'w', encoding='utf-8').write('x\n' * 10)
+            moduly, skille, kanoniczne, _ = zbierz(d)
+            gdzie = None
+            if any(wzgledna in r for _, r in kanoniczne):
+                gdzie = 'kanoniczne'
+            elif any(wzgledna in r for _, r in moduly):
+                gdzie = 'moduly'
+            elif any(wzgledna in r for _, r in skille):
+                gdzie = 'skille'
+            if gdzie == oczek:
+                ok += 1
+                print('  OK   %s' % opis)
+            else:
+                print('  BŁĄD %s -> %s (oczek. %s)' % (opis, gdzie, oczek))
+    print('\nSELFTEST T13: %d/%d' % (ok, len(PRZYPADKI_SELFTEST)))
+    return 0 if ok == len(PRZYPADKI_SELFTEST) else 1
 
 
 def main(katalog=None, pokaz_strefe=True):
     katalog = katalog or os.environ.get('LEX_MACHINA_SKILLS_ROOT', os.getcwd())
-    moduly, skille, pominiete = zbierz(katalog)
+    moduly, skille, kanoniczne, pominiete = zbierz(katalog)
     crit = sorted([x for x in moduly if x[0] > PROG_CRIT], reverse=True)
     warn = sorted([x for x in moduly if PROG_WARN < x[0] <= PROG_CRIT], reverse=True)
     skille_duze = sorted([x for x in skille if x[0] > PROG_CRIT], reverse=True)
+    kanon_duze = sorted([x for x in kanoniczne if x[0] > PROG_WARN], reverse=True)
 
     print('check_dlugosc_modulow.py — T13 (próg długości, ZASADA 13)')
     print(f'  przeskanowano modułów `modules/mod-*.md`: {len(moduly)}')
+    print(f'  zasobów kanonicznych `shared/**/*.md`: {len(kanoniczne)}'
+          f' (w tym satelity w podkatalogach)')
     print(f'  próg CRIT: >{PROG_CRIT} linii | strefa WARN: {PROG_WARN}-{PROG_CRIT}\n')
 
     if crit:
@@ -112,6 +173,17 @@ def main(katalog=None, pokaz_strefe=True):
             print(f'     {n:5d}  {rel}')
         print()
 
+    if kanon_duze:
+        print(f'ℹ️  Zasoby kanoniczne `shared/*.md` powyżej {PROG_WARN} linii — OSOBNA')
+        print('    KATEGORIA (ustalenie 2026-09-12p); NIE wpływa na kod wyjścia.')
+        print('    ⛔ Te pliki są CELOWO scentralizowane — podział odtworzyłby')
+        print('    rozproszenie, przed którym broni sekcja 7 TABELE-OPLAT. Przy')
+        print('    przekroczeniu progu rozważyć SPIS TREŚCI, nie cięcie:')
+        for n, rel in kanon_duze:
+            znacznik = ' ⛔ >CRIT' if n > PROG_CRIT else ''
+            print(f'     {n:5d}  {rel}{znacznik}')
+        print()
+
     if pominiete:
         print('   (wyłączone z kontroli, zgodnie z docstringiem: '
               + ', '.join(os.path.basename(r) for _, r in pominiete[:4])
@@ -131,6 +203,12 @@ def main(katalog=None, pokaz_strefe=True):
 
 
 if __name__ == '__main__':
+    if '--selftest' in sys.argv:
+        sys.exit(selftest())
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    if not args and '--katalog' in sys.argv:
+        i = sys.argv.index('--katalog')
+        if i + 1 < len(sys.argv):
+            args = [sys.argv[i + 1]]
     sys.exit(main(args[0] if args else None,
                   pokaz_strefe='--strefa' in sys.argv or True))

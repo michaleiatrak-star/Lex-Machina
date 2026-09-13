@@ -92,6 +92,7 @@ o 400 zł**. Wymaga wykazania.
 | kopia dokumentu z akt | 20 zł za każde rozpoczęte 20 stron | art. 78 KSCU |
 | opłata podstawowa (gdy brak stałej, stosunkowej i tymczasowej) | **30 zł** — i jest minimalną opłatą od pisma | art. 14 ust. 1 i 3 KSCU |
 | opłata tymczasowa (WPS nieustalalny przy wszczęciu) | 30–2000 zł; grupowe 300–20 000 zł | art. 15 ust. 2 KSCU |
+| doręczenie pism **przez komornika** (zlecenie sądu albo wniosek powoda) | **60 zł** za jeden adres | **art. 41 ust. 1 ustawy z 28.02.2018 o kosztach komorniczych** (`Dz.U. 2024 poz. 377`) — ⛔ nie KSCU i nie rozporządzenie MS |
 
 ⛔ **Trzy pozycje naprawione 2026-09-12:** skarga na czynności komornika to
 **50 zł, nie 100 zł**; wniosek o zabezpieczenie ma podstawę w **art. 68 pkt 1,
@@ -138,6 +139,20 @@ nadwyżki, art. 35 §1" był materialnie błędny: zdanie drugie art. 35 ust. 1 
 opłaty **od apelacji**, nie od pozwu. Pracownik wnoszący pozew pozostaje zwolniony
 **niezależnie od WPS**.
 
+### Opłaty komornicze — jeszcze inny akt
+
+⛔ Egzekucję obsługuje **ustawa z 28.02.2018 r. o kosztach komorniczych**
+(t.j. `Dz.U. 2024 poz. 377`), nie KSCU i nie ustawa o komornikach sądowych.
+Najczęstsze przy pismach prostych: opłata egzekucyjna **10 %**, a przy wpłacie
+dłużnika do rąk komornika **w terminie miesiąca** od zawiadomienia o wszczęciu —
+**3 %** (art. 27); poszukiwanie majątku **100 zł** (art. 44); doręczenie pism
+**60 zł** (art. 41 ust. 1); obniżenie opłaty na wniosek dłużnika w **7 dni**,
+przy czym **wniosek i zażalenie nie podlegają opłacie sądowej** (art. 48).
+⛔ **Skarga na czynności komornika to opłata SĄDOWA 50 zł** (art. 25 ust. 1
+KSCU), nie komornicza. ⛔ Zwolnienie od kosztów sądowych rozciąga się na koszty
+komornicze (art. 45 ust. 1), ale **nie zwalnia z opłaty egzekucyjnej** (art. 47).
+Tabele: `shared/TABELE-OPLAT.md` sekcja 6b.
+
 ### Sprawy karne — inny akt
 
 ⛔ KSCU **nie ma zastosowania**. Opłaty karne ustanawia ustawa z 23.06.1973 r.
@@ -151,6 +166,12 @@ Najczęstsze pozycje przy pismach prostych: wniosek o **zatarcie skazania 45 zł
 w karze 60 zł** (pkt 2), o **warunkowe przedterminowe zwolnienie 45 zł** (pkt 3),
 o **wznowienie postępowania 150 zł** (pkt 10), opłata **kancelaryjna 6 zł za
 stronę** (art. 19 ust. 1).
+
+⛔ **Oskarżenie prywatne: zryczałtowana równowartość wydatków wynosi 1000 zł**
+od 1.07.2025 (rozp. MS z 10.06.2025, `Dz.U. 2025 poz. 770` § 1, wydane na
+podstawie art. 621 § 2 KPK). Powtarzana kwota **300 zł jest nieaktualna** —
+rozporządzenie z 2003 r. zostało uchylone. Obowiązek powstały przed 1.07.2025 →
+kwota dotychczasowa (§ 2).
 
 ### Sprawy sądowoadministracyjne — wpis, nie opłata
 

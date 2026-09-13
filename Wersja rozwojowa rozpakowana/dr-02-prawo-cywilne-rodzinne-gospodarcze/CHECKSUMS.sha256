@@ -1,7 +1,7 @@
 e63088dde2ef8acbcbf696c3ce9f2f35ecbdb5342950dddbd6be87a0223f2412  ./MAPA-AKTOW.md
 211351fa3498f08fe19b2e1baf5fab00bd1063cbc83030069f822bb6d00eb494  ./MAPA-POKRYCIA.md
 8e0e5d369ae15b2cf0cbffcf2f05fd3f5d72c5032b89c3665c892a71fa9017ae  ./PORTABILITY-MANIFEST.md
-2c99e11597bf62fa861a0ccc0dadb45539d07aa99053ec4fe173dc4b9097bfcb  ./SKILL.md
+6ee09520cc7afc237b6ee285b69aa4bc34b6f875ce98ea6897ecfcd4470d9298  ./SKILL.md
 069bc49db133821e80d2750404468587e1e29b9982151c0e333c89f68c55a153  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 30ab26948e79d1c7b08b828048c750ccf6c53ccb969fb31914b4d25ea3e48c41  ./modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md
@@ -16,7 +16,7 @@ ce38169f393dfd8e5d0685046fdd5f760efd50837f7650778f306316db701020  ./modules/kro-
 a911dc5bf06e108a72b3d609c060b72a83ce86b6cbd57bdae21a45abc4a865c6  ./modules/kro-rodzinne/czesc-02-rozwod-separacja-eksmisja.md
 2291cd0a28ac86a1958dcacc5a6a4003367293892876b87830db280f17d7ea8a  ./modules/kro-rodzinne/czesc-03-podzial-majatku.md
 150801afdfc51049d95697e9e712c6c49945ef8b0f9c3a67ade95255a971b708  ./modules/kro-rodzinne/czesc-04-alimenty.md
-fff4b253bb0d9b4230fda40a9e840eae13244587252c6b9edd642e98b091b284  ./modules/kro-rodzinne/czesc-05-pochodzenie-dziecka.md
+35dff77138464ab1875da2c91ece13d8f3dfdff9ea6f46fb5c22ffe2bc63d09d  ./modules/kro-rodzinne/czesc-05-pochodzenie-dziecka.md
 f48c7fa6a192d580260d7165e3a8b12268157a17df7139e9c52a52615dffff2f  ./modules/kro-rodzinne/czesc-06-rodzice-dzieci-wladza-ozss.md
 d7940f86dc437c2e9e14d43015c9b42a638a1db3b78cb4763791d8fb91f6c8ba  ./modules/kro-rodzinne/czesc-07-procedura-dowody-zmiana-danych.md
 1305d551b880dc26e2a7965e2c0843e016fbc54a241346b00fb68a5bb0f85e5f  ./modules/kro-rodzinne/czesc-08-referencje-strategia.md
@@ -40,13 +40,13 @@ ec838fe7cacb437eb0b11c20aa6fd142d9b363d6f96d92eb2bb20072b9834e26  ./modules/mod-
 c734bb287eb30213f8153e55324c83acf6ac90547deac37da3bef4059e587ed3  ./modules/mod-KRO-rodzinne.md
 58013d9f5854cbc09ede37c8f2ebecf08438c0e8866fe16b962748d0f5958871  ./modules/mod-KRO-zawarcie-malzenstwa-bigamia-transgraniczne.md
 196b8af331747cf125c0414135d6449030b7bb1ca5f1e23fbe9e25478cf0ddab  ./modules/mod-KSH-organy-spolki-zoo.md
-4b64643725acf45b1d4ee2622dcbe9784182686ecd78cf9dbf0dbefbc98ae133  ./modules/mod-KSH-spolki-handlowe.md
+9b4712db1a19bbf5c060965a5d1a2cdb8159c12df00667ec32c3303a891b8bc5  ./modules/mod-KSH-spolki-handlowe.md
 592252cd9f56ce15c3ab0acc1f512511327169515cc3ec98ddd558dd2023826c  ./modules/mod-KSH-spolki-osobowe-rada-nadzorcza.md
 f51278c6161f1b5d73d005b45130a958ce17de6bac218e1938c8076a275ea32f  ./modules/mod-KSH-uzupelnienie-pokrycia-2026.md
 5c05299e7dd1afa0c3e8da958812f39310788b200d883942db38f9a2539da081  ./modules/mod-KSH-wrogie-przejecie-obrona-bialy-rycerz.md
 bd0768a47690a6d9ddc9f0991258263208bee017ddb8cf7cd37a66ba51aa36b3  ./modules/mod-KW-ksiega-wieczysta-zakup-nieruchomosci.md
 8f1a4fc902c7b3436c889112588cd11b5e7742184097f73b746a5be115310e19  ./modules/mod-PrRestr-dzial-III-nadzorca-zarzadca.md
-3884fdf2541b3dc29d58fc6ade5d0aed3facf860b1314304f252bcc002141ff3  ./modules/mod-PrRestr-dzial-IV-uczestnicy-wierzyciele.md
+144aed097b00a0bda3e56ed16ae47018c534e9aff61d257bc0f4c596005f4502  ./modules/mod-PrRestr-dzial-IV-uczestnicy-wierzyciele.md
 b99254ec9ed3e1aa1f732fbde739c27e4f224fbc89def4d2af221c6f24c81824  ./modules/mod-PrRestr-dzial-V-pomoc-publiczna.md
 ee27edd081f5559a70dff10a0d0445ec2a083a9dd184b895a0788058ad190c52  ./modules/mod-PrRestr-dzial-VI-uklad.md
 2eb8941cb66dbf74b2aa298f7d48e1e9d56cc32f682650a5f4610285ccc6e2bb  ./modules/mod-PrRestr-dzial-VII-uklad-czesciowy.md
@@ -54,7 +54,7 @@ ee27edd081f5559a70dff10a0d0445ec2a083a9dd184b895a0788058ad190c52  ./modules/mod-
 07a785016ef56737aafaf6212cc546adb6efa1d2fd059f9cc257640e27d499b4  ./modules/mod-PrUpad-likwidacja-miedzynarodowe-szczegolne.md
 f97c230922018d3d1748bd1ab00881848934624111293554cecac6b971e2107b  ./modules/mod-PrUpad-postepowania-odrebne-426-491-38.md
 ebe67023b679a112f11498984da050d6766cbf130a63390c352162aa9fc7b8ac  ./modules/mod-PrUpad-uklad-likwidacja-zakonczenie.md
-cab921412be96f1ec9ca61b185db36a5d0f0c39057953312376bede21f247038  ./modules/mod-PrUpad-upadlosc-restrukturyzacja.md
+f01e987e6918ef07a65362516e42763af2d6b9f346a9fe911c7776a42e2ede9a  ./modules/mod-PrUpad-upadlosc-restrukturyzacja.md
 cbdea03190bad07adfbd0c74162001a7fd76c7de7bd6d6fe8ac9c9981ac060cd  ./modules/mod-Prawo-przedsiebiorcow-current-state-COV.md
 8271ba1dcaa4c045d6757d967ec9d31c67a3d7a9153620702469ba742461bc6b  ./modules/mod-kaucja-najem-lokalu.md
 adf609f75203b6f76039f12b2e7006cb5c6e50359b4b930ab19813683b7e21af  ./modules/mod-liczba-pelnomocnikow-strona-samodzielna.md
@@ -89,4 +89,4 @@ b964da825f36e7db06a74fce20ef7f4b18e16a8245a5173c212a4a0e717d2b88  ./modules/mod-
 c6ea7ab2905c46963de42d3150e6f1e1de7197a05c2df189e10d263d56240ad6  ./modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md
 0d27f04cfedf651c1c4feedb203e2c1e456b673688952c2472f1cacf3f29a6cf  ./modules/mod-ustawa-zastaw-rejestrowy.md
 97bcd7a9e0c8dd6cafe8c7fe949eab13ea34e8c54955f0a513256289d6f23285  ./modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md
-6b7069c696bba6361635bbf0cb61ccfba08aef554fe4f955d303551a6d972906  ./references/CHANGELOG.md
+6273358d58273ae491a0c40b111c60fae560745f7c85d3de4e8bb772d501ed89  ./references/CHANGELOG.md

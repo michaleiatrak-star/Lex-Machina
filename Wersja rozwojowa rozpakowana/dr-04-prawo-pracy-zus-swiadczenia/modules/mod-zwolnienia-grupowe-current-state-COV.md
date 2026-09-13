@@ -13,8 +13,8 @@ source_policy: "RZĄD 1 ELI / tekst ujednolicony"
 Ustawa z 13 marca 2003 r. o szczególnych zasadach rozwiązywania z pracownikami
 stosunków pracy z przyczyn niedotyczących pracowników.
 
-**T.j.: Dz.U. 2025 poz. 570**, z późniejszymi zmianami. ELI publikuje tekst
-ujednolicony opracowany m.in. na podstawie Dz.U. 2025 poz. 570 i 1661.
+**T.j.: **Dz.U. 2026 poz. 1195 t.j.** ✅ [VER] RZĄD 1 2026-09-10r (poprzednio 2025 poz. 570 — wygaśnięcie aktu)**, z późniejszymi zmianami. ELI publikuje tekst
+ujednolicony opracowany m.in. na podstawie **Dz.U. 2026 poz. 1195 t.j.** ✅ [VER] RZĄD 1 2026-09-10r (poprzednio 2025 poz. 570 — wygaśnięcie aktu) i 1661.
 
 - https://eli.gov.pl/eli/DU/2025/570/ogl
 

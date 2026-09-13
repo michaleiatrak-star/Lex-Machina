@@ -91,6 +91,7 @@ konsumenckiego.
 | pierwszy wniosek strony wszczynającej o odpis orzeczenia kończącego z klauzulą | bez opłaty | art. 77a KSCU |
 | opłata podstawowa (brak stałej, stosunkowej, tymczasowej) | **30 zł**, minimalna opłata od pisma | art. 14 ust. 1 i 3 KSCU |
 | opłata tymczasowa (WPS nieustalalny) | 30–2000 zł; grupowe 300–20 000 zł | art. 15 ust. 2 KSCU |
+| doręczenie pism **przez komornika** (zlecenie sądu albo wniosek powoda) | **60 zł** za jeden adres | **art. 41 ust. 1 ustawy z 28.02.2018 o kosztach komorniczych** (`Dz.U. 2024 poz. 377`) — ⛔ nie KSCU i nie rozporządzenie MS |
 | **pozew o rozwód / separację sporną** | 600 zł | art. 26 ust. 1 pkt 1 i 2 KSCU |
 | separacja na zgodne żądanie / zniesienie separacji | 100 zł | art. 37 pkt 3 i 4 KSCU |
 | podział majątku wspólnego (ze zgodnym projektem) | 1000 zł (300 zł) | art. 38 ust. 1 i 2 KSCU |
@@ -107,6 +108,18 @@ zarzuty „art. 19 §3" → **art. 19 ust. 4** wraz z konsumenckim capem 750 zł
 „apelacja karna 0 zł, art. 620 KPK" → art. 620 KPK dotyczy **wykładania wydatków
 przez Skarb Państwa**, nie opłaty od apelacji — opłaty karne reguluje ustawa
 z 23.06.1973 i powstają one w orzeczeniu kończącym.
+
+### OP-1a — poza KSCU: komornicze, skarbowe, notarialne, karne
+
+✅ [VER] RZĄD 1 2026-09-12c. Pełne tabele: `shared/TABELE-OPLAT.md` sekcje 6b–6e.
+
+| Rodzina | Akt ustanawiający | Punkty zapalne |
+|---|---|---|
+| **komornicze** | ustawa z 28.02.2018 o kosztach komorniczych, t.j. `Dz.U. 2024 poz. 377` | 10 % / **3 %** przy wpłacie w terminie miesiąca (art. 27); widełki 150–50 000 zł (art. 25 ust. 1); eksmisja 1500/2000 zł (art. 34); doręczenie 60 zł (art. 41 ust. 1); ⛔ art. 47 — zwolnienie **nie zwalnia** z opłaty egzekucyjnej |
+| **skarbowe** | ustawa z 16.11.2006 o opłacie skarbowej, t.j. `Dz.U. 2025 poz. 1154` | pełnomocnictwo **17 zł od każdego stosunku**; ⛔ art. 2 ust. 1 wyłącza całe kategorie spraw (alimentacyjne, pracy, pomoc społeczna, ubezpieczenia) |
+| **notarialne** | rozp. MS, t.j. `Dz.U. 2024 poz. 1566` | stawki **MAKSYMALNE**, nie minimalne (§ 3); § 4 — bez odliczania obciążeń |
+| **karne — koszty procesu** | KPK `Dz.U. 2026 poz. 490` art. 616–632a | ⛔ zryczałtowana równowartość wydatków przy oskarżeniu prywatnym: **1000 zł od 1.07.2025** (`Dz.U. 2025 poz. 770`), nie 300 zł |
+| **wieczystoksięgowe** | KSCU art. 42–48 | wpis 200 zł / udział min. 100 zł / dziedziczenie 150 zł; wykreślenie — **połowa** (art. 46); ⛔ brak opłaty podstawowej (art. 14 ust. 5) |
 
 ---
 

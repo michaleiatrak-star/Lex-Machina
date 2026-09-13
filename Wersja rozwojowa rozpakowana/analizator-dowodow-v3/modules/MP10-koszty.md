@@ -268,8 +268,15 @@ Koszty sądowe w sprawie karnej (art. 616 KPK):
     postępowania karnego (KPK), NIE do art. 96-103 KSCU
   — przy skazaniu: obowiązek poniesienia kosztów przez skazanego (art. 627 KPK)
   — przy uniewinnieniu: koszty na Skarb Państwa (art. 632 KPK)
-  — zryczałtowana równowartość wydatków przy oskarżeniu prywatnym / akcie
-    subsydiarnym: [⛔ odczytaj art. 621 KPK i właściwe rozporządzenie MS]
+  — zryczałtowana równowartość wydatków przy oskarżeniu prywatnym (art. 621
+    par. 1 KPK): ⛔ 1000 zł od 1.07.2025 (rozp. MS z 10.06.2025,
+    Dz.U. 2025 poz. 770 par. 1), które UCHYLIŁO rozporządzenie z 2003 r.
+    przewidujące 300 zł. Obowiązek powstały przed 1.07.2025 — kwota
+    dotychczasowa (par. 2). Ryczałt nie obejmuje kosztów z art. 618 par. 1
+    pkt 5 i 11
+  — kto ponosi koszty: skazanie — oskarżony (art. 627 KPK); uniewinnienie
+    lub umorzenie — oskarżyciel prywatny albo Skarb Państwa (art. 632);
+    wyjątki przy umorzeniu (art. 632a)
 ```
 
 ### Postępowanie administracyjne / sądowoadministracyjne
@@ -294,10 +301,32 @@ Wynagrodzenie pełnomocnika: par. 14 rozporządzeń o taksach — [odczytaj]
 ### Postępowanie egzekucyjne
 
 ```text
-Opłaty egzekucyjne — ⛔ AKT USTANAWIAJĄCY to ustawa z 28.02.2018 o kosztach
-  komorniczych, NIE ustawa o komornikach sądowych i NIE KSCU: [odczytaj treść]
-Opłata stosunkowa od wyegzekwowanego świadczenia: [odczytaj ustawę o kosztach
-  komorniczych — art. 27 i n.]
+Opłaty egzekucyjne — akt: ustawa z 28.02.2018 o kosztach komorniczych,
+  t.j. Dz.U. 2024 poz. 377 (NIE ustawa o komornikach sądowych i NIE KSCU)
+Opłata stosunkowa od wyegzekwowanego świadczenia: 10 % (art. 27 ust. 1);
+  3 % przy wpłacie do rąk komornika w terminie MIESIĄCA od doręczenia
+  zawiadomienia o wszczęciu (art. 27 ust. 2)
+Widełki: nie niżej niż 150 zł, nie wyżej niż 50 000 zł (art. 25 ust. 1)
+Opłaty minimalne: 150 / 200 / 300 zł zależnie od sposobu zaspokojenia
+  (art. 28 ust. 1-3)
+Umorzenie na wniosek wierzyciela: 5 % pozostałego świadczenia; obciąża
+  dłużnika przy spełnieniu w terminie miesiąca, po tym terminie 10 %
+  (art. 29 ust. 1); przed doręczeniem zawiadomienia — 100 zł (ust. 2);
+  umorzenie z innych przyczyn — 150 zł od wierzyciela (ust. 4), z katalogiem
+  zwolnień z ust. 5 (m.in. roszczenia pracownicze, JST) pod warunkiem
+  wszczęcia w 2 lata od powstania tytułu
+⛔ Oczywiście niecelowe wszczęcie albo wskazanie osoby niebędącej dłużnikiem:
+  10 % OD WIERZYCIELA (art. 30) — pozycja ryzyka, nie koszt planowany
+Eksmisja: 1500 zł (lokal mieszkalny dłużnika) / 2000 zł (inny) + 1000 zł
+  od drugiej i każdej kolejnej izby przy działalności gospodarczej, max
+  30 000 zł (art. 34)
+Doręczenie pism przez komornika: 60 zł za jeden adres (art. 41 ust. 1)
+Poszukiwanie majątku dłużnika: 100 zł (art. 44)
+Obniżenie opłaty na wniosek: nie niżej niż 1/3 należnej i nie niżej niż
+  200 zł; wniosek w 7 dni; wniosek i zażalenie BEZ opłaty sądowej (art. 48)
+⛔ Zwolnienie od kosztów sądowych rozciąga się na koszty komornicze
+  (art. 45 ust. 1), ALE art. 47: nie zwalnia z opłaty egzekucyjnej za
+  egzekucję świadczeń pieniężnych ani ze zwrotu kosztów drugiej stronie
 ⛔ Skarga na czynności komornika to opłata SĄDOWA 50 zł (art. 25 ust. 1 KSCU),
   nie opłata komornicza
 Koszty czynności: doręczenia, ogłoszenia, transport: szacunek

@@ -114,7 +114,7 @@ doręczonego z uzasadnieniem dnia [data] r.
 
 **Reguły apelacji — obowiązkowo sprawdź:**
 - Termin: 14 dni od doręczenia wyroku z uzasadnieniem (art. 369 §1 KPC) — TERMIN ZAWITY
-- Wniosek o uzasadnienie: 7 dni od ogłoszenia wyroku (art. 328¹ KPC) — TERMIN ZAWITY (najpierw!)
+- Wniosek o uzasadnienie: tydzień od ogłoszenia wyroku, a gdy wyrok doręcza się z urzędu — od doręczenia (**art. 328 § 1 i § 2 KPC**; ⛔ jednostka 328[1] nie istnieje) — TERMIN ZAWITY (najpierw!)
 - Apelacja składana ZAWSZE za pośrednictwem sądu I instancji (art. 369 §3 KPC)
 - WPZ nie może przekraczać WPS z pozwu (art. 368 §2 KPC)
 
@@ -191,8 +191,11 @@ przez [Sąd] dnia [data] r., sygn. akt [sygnatura],
 doręczonego pozwanemu dnia [data] r.
 ```
 
-**Termin:** 14 dni od doręczenia nakazu (art. 503 §1 KPC) — TERMIN ZAWITY
-**Skutek:** nakaz traci moc, sprawa od początku (art. 505 KPC)
+**Termin:** **2 tygodnie** od doręczenia nakazu przy doręczeniu w kraju,
+**miesiąc** przy doręczeniu poza krajem na terytorium UE — **art. 480² § 2 pkt 1–2 KPC**.
+⛔ art. 503 KPC jest UCHYLONY; dopuszczalność sprzeciwu — art. 505 § 1 KPC,
+tryb — art. 480³ KPC.
+**Skutek:** nakaz traci moc w części zaskarżonej (art. 505 § 2 KPC)
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: dr-06-podatki-finanse-publiczne-aml
-version: "3.77"
+version: "3.81"
 description: "Podatki, finanse publiczne i AML: Ordynacja podatkowa, PIT, CIT, VAT, akcyza, cło, KAS, finanse publiczne i obowiązki przeciwdziałania praniu pieniędzy."
 ---
 
@@ -95,9 +95,13 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W08 ⚠️⚠️ Podatek katastralny — NOWY projekt poselski Lewicy w Sejmie
   (20.03.2026): ≥3 lokale, stawka 0,5%→1,5% wartości. Stan: złożony, brak
   pierwszego czytania (06.2026). MF: brak prac rządowych, ale Sejm pracuje.
-- BAS-W32 ⚠️ Przedawnienie podatkowe — Ordynacja podatkowa ma ODRĘBNY reżim
-  od KC; nowelizacja znosi "wieczne przedawnienie" + wprowadza ugodę
-  podatkową od 01.10.2026 (art. 70 i n. OP)
+- BAS-W32 ⛔ Przedawnienie podatkowe — Ordynacja podatkowa ma ODRĘBNY reżim
+  od KC. ⛔ **CZĘŚĆ TEGO WPISU NIEPOTWIERDZONA (weryfikacja 2026-09-12i):**
+  art. 70 §6 pkt 1 OP **jest w mocy** w t.j. `Dz.U. 2026 poz. 622`, a ustawy
+  `Dz.U. 2026 poz. 825` (24.09.2026) i `poz. 846` (1.10.2026) **nie zmieniają
+  art. 70** ani nie wprowadzają "ugody podatkowej". Data 01.10.2026 pochodzi
+  z wejścia w życie poz. 846, której zakres jest inny. Przed powołaniem —
+  wskaż konkretną ustawę i datę.
 
 ## Moduły (45 łącznie — ✓ 45 OK, ☐ 0 STUB)
 

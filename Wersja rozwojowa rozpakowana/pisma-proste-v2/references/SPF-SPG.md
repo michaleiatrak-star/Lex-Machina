@@ -67,7 +67,7 @@ Sygn. akt: [sygnatura sprawy]
 
             WNIOSEK O SPORZĄDZENIE I DORĘCZENIE UZASADNIENIA WYROKU
 
-Na podstawie art. 328¹ §1 KPC wnoszę o sporządzenie uzasadnienia wyroku
+Na podstawie art. 328 § 1 KPC wnoszę o sporządzenie uzasadnienia wyroku
 wydanego przez [Sąd] w dniu [data ogłoszenia] w sprawie sygn. akt [sygnatura]
 oraz o jego doręczenie na wskazany adres.
 

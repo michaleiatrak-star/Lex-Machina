@@ -1,7 +1,7 @@
 # mod-ustawa-zwolnienia-grupowe
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o zwolnieniach grupowych — Dz.U. 2025 poz. 570 t.j.
+**Źródło weryfikacji:** Ustawa o zwolnieniach grupowych — **Dz.U. 2026 poz. 1195 t.j.** ✅ [VER] RZĄD 1 2026-09-10r (poprzednio 2025 poz. 570 — wygaśnięcie aktu) t.j.
 **Data weryfikacji online:** 2026-08-27 — RZĄD 1 ELI
 **Zasada:** Każde brzmienie przepisu przed powołaniem → ELI/ISAP. Źródło RZĄD 1: https://eli.gov.pl/eli/DU/2025/570/ogl
 
@@ -16,7 +16,7 @@ Rozwiązywanie stosunków pracy z przyczyn niedotyczących pracowników (ekonomi
 
 | Akt | Dz.U. |
 |---|---|
-| Ustawa z 13.03.2003 r. o szczególnych zasadach rozwiązywania z pracownikami stosunków pracy z przyczyn niedotyczących pracowników | Dz.U. 2025 poz. 570 t.j. |
+| Ustawa z 13.03.2003 r. o szczególnych zasadach rozwiązywania z pracownikami stosunków pracy z przyczyn niedotyczących pracowników | **Dz.U. 2026 poz. 1195 t.j.** ✅ [VER] RZĄD 1 2026-09-10r (poprzednio 2025 poz. 570 — wygaśnięcie aktu) t.j. |
 
 ---
 

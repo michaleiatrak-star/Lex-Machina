@@ -554,8 +554,25 @@ Obowiązkowe elementy zgłoszenia wierzytelności (weryfikuj art. 239 PrUp w ISA
   □ Zabezpieczenia (jeśli są)
   □ Czy wierzytelność jest sporna?
 
-TERMIN: wskazany w postanowieniu o ogłoszeniu upadłości (zwykle 30 dni)
-⚠️ Uchybienie terminu = możliwość zgłoszenia po terminie za dodatkową opłatą
+ADRESAT: ⛔ SYNDYK, za pośrednictwem SYSTEMU TELEINFORMATYCZNEGO obsługującego
+        postępowanie sądowe (art. 236 ust. 1 PrUp) — NIE sędzia-komisarz i NIE
+        pismo do sądu. To zmiana reformy; zapis sprzed niej wciąż krąży.
+        Wyjątek adresowy: wierzyciele z art. 216aa ust. 1 — adres wskazany
+        w postanowieniu.
+TERMIN: 30 dni od OBWIESZCZENIA postanowienia o ogłoszeniu upadłości w Rejestrze
+        (art. 51 ust. 1 pkt 4 w zw. z art. 236 ust. 1 PrUp)
+⛔ SKUTEK SPÓŹNIENIA — nie "dodatkowa opłata", tylko RYCZAŁT ZE WSKAŹNIKA:
+   art. 235 ust. 1 PrUp — zryczałtowane koszty w wysokości 15 % PRZECIĘTNEGO
+   MIESIĘCZNEGO WYNAGRODZENIA W SEKTORZE PRZEDSIĘBIORSTW BEZ WYPŁAT NAGRÓD
+   Z ZYSKU W III KWARTALE ROKU POPRZEDNIEGO (obwieszczenie Prezesa GUS),
+   ponoszone NAWET GDY OPÓŹNIENIE POWSTAŁO BEZ WINY wierzyciela.
+   Wyjątek: spóźnienie wynikłe z korekty deklaracji dokonanej przez syndyka.
+   Syndyk wzywa do wpłaty na wskazany rachunek (ust. 2).
+   ⛔ NIE utrwalaj kwoty — wskaźnik zmienia się co roku; patrz
+      shared/TABELE-OPLAT.md sekcja 4g.
+⚠️ art. 236 ust. 2-3: wierzytelności zabezpieczone hipoteką, zastawem, zastawem
+   rejestrowym, zastawem skarbowym lub hipoteką morską trafiają na listę
+   Z URZĘDU, jeżeli wierzyciel ich nie zgłosi
 ```
 
 ---
