@@ -1,5 +1,25 @@
 # CHANGELOG — Biblioteka shared
 
+
+## 3.60 — 2026-09-14 — kanoniczny direct CBOSA / RZĄD 2A
+
+- Dodano `shared/CBOSA-ADAPTER.md` jako SSOT kontraktu HTTP dla NSA/WSA.
+- `HIERARCHIA-ZRODEL.md` 1.8: CBOSA jawnie RZĄD 2A; routing źródłowy
+  SN / Portal Orzeczeń / CBOSA / SAOS.
+- `SYGNATURY.md` 1.5: V-SYG-0.7 DIRECT-CBOSA przed V-SYG-0.5 fallback.
+- `DOSTEP-MASZYNOWY-API.md` 1.5: fresh-probe, formularz, cookies,
+  paginacja, /doc/{ID}, exact-match i fail-closed.
+- `PRAWO-HARDGATE-ORZECZENIA.md`: override NSA/WSA wymusza direct CBOSA
+  po braku MCP, przed ogólnym web_search.
+- `MCP-INTEGRACJA.md`: brak mcp-nsa nie obniża systemu do luźnego web_search;
+  stosowany jest natywny adapter HTML.
+- `KONEKTORY-REKOMENDOWANE.md`: mcp-nsa = MCP-FIRST, direct adapter = fallback
+  deterministyczny.
+- Implementacja referencyjna `orzeczenia-sadowe-v2` przeszła 22/22 testów
+  regresyjnych po hardeningu.
+- Reguła 7: shared i orzeczenia-sadowe-v2 wydawane jako kompletne paczki ZIP.
+
+
 - 3.59 (2026-09-12q, PODZIAL): **TABELE-OPLAT 2.0 — rdzen i siedem satelitow.** Plik mial 1555 linii (47 % ponad prog CRIT, wykryte w 12p po rozszerzeniu T13). Rdzen `TABELE-OPLAT.md` (159 linii) trzyma wylacznie REGULE KOLEJNOSCI, MAPE WLASNOSCI SEKCJI i rejestry (sekcja 7 - tabele satelickie w innych skillach, sekcja 8 - zakres nieobjety). Materia w `shared/oplaty/`: 01-KSCU-cywilne-rodzinne-pracownicze (sekcje 1, 1a, 1b, 1c), 02-zwolnienia-zwrot-alimenty (2, 2a-2e), 03-koszty-zastepstwa-taksy (3, 3a), 04-wartosci-powtarzalne-kotwice (4, 4a-4g), 05-sprawy-karne (5, 6e), 06-administracyjne-wieczystoksiegowe-KIO (6, 6a), 07-komornicze-skarbowe-notarialne (6b, 6c, 6d). ⛔ ZABEZPIECZENIE ANTYREGRESYJNE: kazda sekcja ma DOKLADNIE JEDNEGO wlasciciela wskazanego w mapie, kazdy satelita niesie stopke "Plik satelicki - NIE JEST ZRODLEM SAMODZIELNYM" z zakazem duplikacji, a calosci pilnuje nowy test T29 (check_oplaty_mapa.py, cztery bramki, selftest 5/5). Kontrola integralnosci podzialu: z 1236 niepustych linii oryginalu w nowym zestawie brakuje 78, z czego 72 to pozycje starego spisu tresci i 6 linii jego ramki - ZERO utraty tresci merytorycznej. Wszystkie 7 satelitow zarejestrowanych w tabeli zasobow SKILL.md
 - 3.58 (2026-09-12p, nawigacja zasobow kanonicznych): TABELE-OPLAT.md (1472 linie, 72 pozycje) i terminy.md (13 rezimow, 22 pozycje) dostaly SPIS TRESCI. Powod: oba pliki sa CELOWO niedzielone - podzial odtworzylby rozproszenie, przed ktorym broni sekcja 7 TABELE-OPLAT - ale przy tej objetosci problemem staje sie odnalezienie sekcji, nie sama dlugosc. We wstepie do spisu terminy.md ostrzezenie, ze ta sama czynnosc (zazalenie, wniosek o uzasadnienie, przywrocenie terminu) ma INNY termin w KPC, KPA, Op i KKW - spis ma sluzyc weryfikacji rezimu, nie tylko skakaniu po pliku. Poprawiony poziom naglowka UPEA (### -> ##): egzekucja administracyjna byla zagniezdzona pod KPA, choc to odrebny rezim z wlasna ustawa
 - 3.57 (2026-09-12o, rodzina TERMINY c.d.): terminy.md - dopisane PRAWO CYWILNE MATERIALNE (KC Dz.U. 2026 poz. 795, odczyt tresci); dotad KC mial w pliku TRZY wiersze. Przedawnienie ogolne art. 118 z pulapka "koniec terminu przypada na OSTATNI DZIEN ROKU KALENDARZOWEGO, chyba ze termin jest krotszy niz dwa lata" - liczenie dzien po dniu daje date wczesniejsza niz rzeczywista. Art. 119 (zakaz modyfikacji czynnoscia prawna) i art. 120 par. 1 zd. 2 (bieg od dnia, w ktorym roszczenie STALOBY SIE wymagalne przy najwczesniejszej mozliwej czynnosci). Pelny art. 442[1]: 3 lata od dowiedzenia sie, 10 lat granica, ⛔ 20 LAT przy zbrodni lub wystepku liczone OD CZYNU niezaleznie od wiedzy, ⛔ przy szkodzie NA OSOBIE granica 10 lat NIE OBOWIAZUJE (par. 3), maloletni +2 lata od pelnoletnosci (par. 4). Terminy zawite: rekojmia 2/5 lat (art. 568 par. 1) i rok od stwierdzenia wady z ochrona konsumenta (par. 2), zawieszenie z par. 4, akt starannosci miedzy przedsiebiorcami (art. 563 par. 1), blad i grozba rok (art. 88 par. 2), ⛔ roszczenie posesoryjne WYGASA po roku, nie przedawnia sie (art. 344 par. 2), umowa przedwstepna rok (art. 390 par. 3), skarga paulianska 5 lat (art. 534), zasiedzenie 20/30 lat (art. 172) z ochrona maloletniego wlasciciela (art. 173)
