@@ -76,12 +76,10 @@ def test_not_found_when_only_near_matches():
 
 def test_ambiguous_when_two_exact_documents():
     search = '<div>Znaleziono 2 orzeczenia</div><a href="/doc/8889489BE0">one</a><a href="/doc/BBBBBBBBBB">two</a>'
-
     def fetch2(doc_id: str) -> str:
         if doc_id == "BBBBBBBBBB":
             return DOC_FOUND.replace("2020-06-18", "2020-06-19")
         return DOC_FOUND
-
     r = verify_search_results(search, "II FSK 2870/18", fetch2)
     assert r.status == VerificationStatus.AMBIGUOUS
     assert len(r.matches) == 2
