@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.60"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.61"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -50,11 +50,11 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.60 (2026-09-14): kanoniczny routing orzecznictwa NSA/WSA.
-  Dodano shared/CBOSA-ADAPTER.md; HIERARCHIA-ZRODEL RZĄD 2A, SYGNATURY,
-  DOSTEP-MASZYNOWY-API, PRAWO-HARDGATE-ORZECZENIA, MCP-INTEGRACJA i
-  KONEKTORY-REKOMENDOWANE kierują direct CBOSA przed fallbackiem indeksowym.
-  Fail-closed: drift HTML/paginacja/transport → OUT_OF_SCOPE; exact-match wymagany.
+  Wersja bieżąca: 3.61 (2026-09-14): CBOSA retrieval/snapshot jako jawny kanał
+  provenance. V-SYG-0.5 ma POST-CHECK HOSTA, exact-match i content_scope;
+  `site:` jest tylko discovery. Snapshot może nieść metrykę, sentencję i
+  uzasadnienie, ale sam nie awansuje do DIRECT_LIVE / ✅ [VER].
+  WERYFIKACJA-SLAD 1.7 zapisuje access_mode bez tworzenia piątego statusu.
   Poprzednia historia: references/CHANGELOG.md.
   Wersja historyczna 3.45 (2026-09-12c, O-11 c.d.): TABELE-OPLAT 1.6 — domknięcie
   rodzin opłat poza rdzeniem KSCU: wieczystoksięgowe i KIO (art. 42-48, 34, 34a),
