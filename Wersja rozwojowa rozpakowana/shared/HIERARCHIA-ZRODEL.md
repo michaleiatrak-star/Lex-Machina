@@ -200,7 +200,7 @@ ryzyku dezaktualizacji, redakcja profesjonalna).
   |---|---|---|
   | SN | `sn.pl` | `shared/DOSTEP-MASZYNOWY-API.md` + `shared/SYGNATURY.md`; `snproxy` JSON po świeżym pomiarze runtime |
   | SR/SO/SA | `orzeczenia.ms.gov.pl` + portal konkretnego sądu | deterministyczny GET po sygnaturze; portal lokalny rozstrzyga AMBIGUOUS |
-  | **NSA/WSA** | **`orzeczenia.nsa.gov.pl` / CBOSA** | **fresh-probe → direct HTML: `POST /cbo/search` → sesyjna paginacja `/cbo/find?p=N` → `/doc/{ID}` → exact-match**; implementacja: `orzeczenia-sadowe-v2/references/CBOSA-ADAPTER.md` + `tools/cbosa_parser.py`. Gdy direct CBOSA niedostępna → `shared/SYGNATURY.md` V-SYG-0.5 |
+  | **NSA/WSA** | **`orzeczenia.nsa.gov.pl` / CBOSA** | **fresh-probe → direct HTML: `POST /cbo/search` → sesyjna paginacja `/cbo/find?p=N` → `/doc/{ID}` → exact-match**; implementacja: `shared/CBOSA-ADAPTER.md` + `tools/cbosa_parser.py`. Gdy direct CBOSA niedostępna → `shared/SYGNATURY.md` V-SYG-0.5 |
   | SAOS | `saos.org.pl` | discovery / kontrola krzyżowa wg okna pokrycia; nie zastępuje źródła rozstrzygającego |
   
   ⛔ **Adapter/konektor nie ma własnego RZĘDU.** RZĄD dziedziczy treść ze
