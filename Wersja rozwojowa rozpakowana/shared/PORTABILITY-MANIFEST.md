@@ -1,6 +1,8 @@
 # Portability manifest — shared
 
-- Source baseline: `bdebb4b0b6ba63add44501795c6e4acdc5bfd931`
+- Source baseline: `e35599cf505b47d061e0ddca608c009feb4035bc`
+- Release: **3.60 (2026-09-14)**
+- Current files in complete shared package: **173**
 - Original files: **205**
 - Expanded files after lossless MCP-example compaction, before manifest/checksums: **164**
 - Frontmatter description: **163/200**
@@ -73,3 +75,14 @@ Aktywne historyczne aliasy modułów zastąpiono kanonicznymi istniejącymi modu
 - aktywne ścieżki `/mnt/skills/user/...` normalizowane są do kanonicznego `skill/path`;
 - bezpośrednie endpointy dostawców AI w statycznych artefaktach są wyłączone;
 - wydanie podlega skanowi prywatności/secrets oraz manifestowi integralności całego release.
+
+
+## CBOSA / orzecznictwo — 3.60
+
+Dodano kanoniczny `CBOSA-ADAPTER.md`. Warstwa `shared` nie zależy wykonawczo od
+konkretnego skilla: adapter opisuje kontrakt, a `orzeczenia-sadowe-v2` jest jego
+implementacją referencyjną. Routing RZĄD 2A prowadzi MCP-FIRST → direct CBOSA →
+fallback V-SYG-0.5.
+
+Reguła 7: wydanie 3.60 należy dystrybuować jako kompletny katalog `shared`,
+nie jako zestaw zmienionych plików.
