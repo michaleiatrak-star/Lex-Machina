@@ -1,6 +1,6 @@
 ---
 name: orzeczenia-sadowe-v2
-version: "2.16"
+version: "2.17"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_code_execution, optional_document_and_interactive_ui"
@@ -326,8 +326,11 @@ stosuj aktualny pomiar z `shared/DOSTEP-MASZYNOWY-API.md` oraz poniższe reguły
   wykonaniem kodu użyj `tools/cbosa_parser.py`. Adapter filtruje CAŁY zbiór po
   exact-match i zwraca `FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE`.
   Jeżeli bezpośredni kanał CBOSA nie działa — wróć do kanonicznego
-  `shared/SYGNATURY.md`, V-SYG-0.5; ten fallback potwierdza tylko ISTNIENIE
-  i nigdy nie produkuje NOT_FOUND;
+  `shared/SYGNATURY.md`, V-SYG-0.5 RETRIEVAL/SNAPSHOT. Wymuś POST-CHECK HOSTA
+  i exact-match. Jeśli host retrieval przekazuje oficjalny `/doc/{ID}`, zachowaj
+  jego faktyczny `content_scope` (metryka+sentencja; czasem uzasadnienie) do
+  researchu i analizy. Provenance pozostaje `CRAWLED_OR_INDEXED`; brak
+  exact-hit = OUT_OF_SCOPE, nigdy NOT_FOUND;
 - `trybunal.gov.pl` / `ipo` oraz `orzeczenia.uzp.gov.pl` — stosuj ich aktualny
   kontrakt z `shared/DOSTEP-MASZYNOWY-API.md`; brak deterministycznego filtra
   po sygnaturze nie uprawnia do zgadywania.
@@ -1129,6 +1132,6 @@ Nie dubluj logiki shared w lokalnych plikach. Lokalne moduły mogą tylko doprec
 > (redukcja kosztu kontekstu, 2026-07-12 runda 2) — treść zachowana w 100%,
 > tylko przeniesiona: `view orzeczenia-sadowe-v2/references/CHANGELOG.md`
 >
-> Najnowsza pozycja: **2.16 (2026-09-14)** — routing CBOSA wpięty do RZĄD 2A/shared,
+> Najnowsza pozycja: **2.17 (2026-09-14)** — snapshot CBOSA z host post-check i jawnym provenance. — routing CBOSA wpięty do RZĄD 2A/shared,
 > exact-match sygnatur NSA/WSA, pełny odczyt sentencji/uzasadnienia oraz
 > statusy FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE z fallbackiem V-SYG-0.5.
