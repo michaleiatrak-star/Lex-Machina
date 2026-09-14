@@ -531,7 +531,7 @@ Skrót operacyjny; kanoniczny kontrakt statusów pozostaje w `shared/SYGNATURY.m
    - **NSA/WSA → wykonaj świeżą próbę bezpośredniego CBOSA**.
      Gdy `orzeczenia.nsa.gov.pl` odpowiada właściwym HTML-em:
      ```
-     view orzeczenia-sadowe-v2/references/CBOSA-ADAPTER.md
+     view shared/CBOSA-ADAPTER.md
      → POST /cbo/search
      → zachowaj cookies
      → jeśli potrzeba GET /cbo/find?p=N
@@ -630,7 +630,7 @@ CBOSA nie wymaga publicznego REST/JSON API, aby działać jako deterministyczne
 źródło Tier 1. Aktualny kontrakt integracyjny znajduje się w:
 
 ```
-view orzeczenia-sadowe-v2/references/CBOSA-ADAPTER.md
+view shared/CBOSA-ADAPTER.md
 ```
 
 Dla wyszukiwania po sygnaturze adapter ma zweryfikowany kontrakt:
