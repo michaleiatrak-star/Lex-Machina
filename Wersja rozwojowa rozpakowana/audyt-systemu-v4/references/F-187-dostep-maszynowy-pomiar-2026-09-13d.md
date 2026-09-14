@@ -1,5 +1,15 @@
 # F-187…F-192 — Pomiar kanałów maszynowych, sesja 2026-09-13d
 
+
+> **ADNOTACJA 2026-09-14 — POMIAR HISTORYCZNY, NIE REGUŁA GLOBALNA.**
+> Wyniki 503 dla CBOSA poniżej opisują dokładnie środowisko pomiarowe z
+> 2026-09-13d. Od 2026-09-14 system ma kanoniczny direct adapter:
+> `shared/CBOSA-ADAPTER.md` + V-SYG-0.7. Każdy runtime wykonuje fresh-probe;
+> przy działającym CBOSA używa formularza HTML i exact-match, a przy
+> niedostępności wraca do V-SYG-0.5. Nie zmienia to historycznych obserwacji
+> tego raportu — zmienia ich zakres zastosowania.
+
+
 > **Format zgłoszeń:** ZASADA 14 (AUDIT-CLAIM-GATE) — każde ustalenie niesie
 > STATUS, IDENTYFIKATOR ŹRÓDŁA i REPRODUKCJĘ.
 > **Wszystkie pomiary: 2026-09-13, kanał kodu** (`bash_tool` / `curl` /
