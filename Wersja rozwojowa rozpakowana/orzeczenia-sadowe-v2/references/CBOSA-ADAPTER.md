@@ -1,6 +1,6 @@
 # CBOSA-ADAPTER — dostęp do orzeczeń NSA/WSA
 
-> **Wersja:** 1.0 (2026-09-14)
+> **Wersja:** 1.1 (2026-09-14) — hardening fail-closed + routing RZĄD 2A
 > **Zakres:** `orzeczenia-sadowe-v2`
 > **Źródło pierwotne:** `https://orzeczenia.nsa.gov.pl` (CBOSA)
 > **Implementacja parsera:** `tools/cbosa_parser.py`
@@ -16,7 +16,7 @@ odczytu. Wystarczający jest kontrakt HTML:
 ```text
 POST /cbo/search          → pierwsza strona wyników + cookies sesji
 GET  /cbo/find?p=N        → kolejne strony tej samej sesji
-GET  /doc/{DOC_ID}        → metryka + sentencja + pełne uzasadnienie
+GET  /doc/{DOC_ID}        → metryka + sentencja + uzasadnienie, jeśli opublikowane
 ```
 
 ⛔ Jeżeli host nie pozwala wykonać żądania, HTML zmienił strukturę, wynik wymaga
@@ -135,7 +135,8 @@ Parser `tools/cbosa_parser.py` odczytuje:
 - sąd,
 - datę orzeczenia,
 - sentencję,
-- pełne uzasadnienie,
+- uzasadnienie, jeśli opublikowane,
+- `reasoning_available`,
 - trwały URL dokumentu.
 
 ## 6. Exact-match i status wyniku
@@ -170,15 +171,14 @@ Każdy odrzucony kandydat zapisuj jako `rejected_case_numbers`.
 
 ## 7. Zakres potwierdzenia
 
-`FOUND` po pełnym odczycie `/doc/{ID}` daje co najmniej
-`ISTNIENIE+TREŚĆ`: metryka, sentencja i uzasadnienie zostały odczytane.
+`FOUND` po pełnym odczycie `/doc/{ID}` daje `ISTNIENIE+TREŚĆ` tylko w zakresie faktycznie odczytanym. Metryka i sentencja są wymagane. Jeżeli `reasoning_available=false`, zakazane jest przypisywanie tezy z uzasadnienia.
 
 Poziom `FRAGMENT` nadaj dopiero po wskazaniu konkretnego fragmentu/pinpointu,
 zgodnie z `shared/WERYFIKACJA-SLAD.md` i Zasadą 2B tego skilla.
 
 ## 8. Testy
 
-Test lokalny parsera (`tests/test_cbosa_parser.py`) obejmuje:
+Test lokalny parsera (`tests/test_cbosa_parser.py`) — **22/22 PASS** — obejmuje:
 
 1. deduplikację linków `/doc/{ID}`,
 2. sygnaturę + sąd + datę + sentencję + pełne uzasadnienie,
