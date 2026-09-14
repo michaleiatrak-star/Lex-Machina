@@ -80,7 +80,8 @@ routuje do CBOSA, uruchom `shared/SYGNATURY.md` V-SYG-0.7 DIRECT-CBOSA
 (`POST /cbo/search` → kompletna paginacja → `/doc/{ID}` → exact-match),
 zgodnie z `shared/DOSTEP-MASZYNOWY-API.md`. Implementacja parsera:
 implementacja referencyjna opisana w `shared/CBOSA-ADAPTER.md`. Dopiero jeśli direct CBOSA
-jest niedostępna w bieżącym runtime → V-SYG-0.5 przez indeks wyszukiwarki.
+jest niedostępna w bieżącym runtime → V-SYG-0.5 RETRIEVAL/SNAPSHOT z obowiązkowym
+POST-CHECK HOSTA, exact-match i jawnym `access_mode/content_scope`.
 
 To jest ważne: brak connectora MCP **nie może obniżać systemu z deterministycznego
 HTML do luźnego wyszukiwania webowego**, jeśli źródło urzędowe ma odtwarzalny
