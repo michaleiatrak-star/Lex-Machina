@@ -1,7 +1,8 @@
 # DOSTĘP MASZYNOWY DO ŹRÓDEŁ — jak wywołać API, żeby odpowiedziało
 
 > **Plik:** `shared/DOSTEP-MASZYNOWY-API.md`
-> **Wersja:** 1.5 (2026-09-14) — CBOSA: historyczny pomiar 503 oddzielony
+> **Wersja:** 1.6 (2026-09-14) — CBOSA retrieval/snapshot: `site:` tylko discovery; obowiązkowy POST-CHECK HOSTA, exact-match i content_scope bez promocji snapshotu do DIRECT_LIVE.
+> **Wersja poprzednia:** 1.5 (2026-09-14) — CBOSA: historyczny pomiar 503 oddzielony
 > od bieżącej reguły wykonawczej; dodano fresh-probe + deterministyczny
 > formularz HTML (/cbo/search, /cbo/find, /doc/{ID}) i exact-match.
 > Fallback indeksowy pozostaje tylko po niedostępności direct CBOSA.
@@ -170,10 +171,12 @@ nie kod.**
 3. **Jedna próba nie orzeka.** `bzp.uzp.gov.pl` oddaje 404 w ~20% żądań na
    całym hoście (root 2/8, `Default.aspx` 2/10). Ponawiaj, zanim orzekniesz.
 
-⛔ **Limity tempa są realne, nie deklaratywne.** CBOSA
-(`orzeczenia.nsa.gov.pl`) po serii żądań w jednym przebiegu oddała **503 ×3**,
-a po 60 s pauzy **200/200/200**. Przy zapytaniach seryjnych limituj tempo po
-swojej stronie albo zablokujesz sobie adres.
+⛔ **Pomiar rate-limit z 2026-09-04 jest HISTORYCZNY, nie globalny.**
+W tamtym przebiegu po 503 ×3 i 60 s pauzy pojawiło się 200/200/200. Późniejsze
+pomiary 2026-09-13/14 w kolejnych runtime'ach, także po zmianie kontenera/egressu
+i po pauzach, utrzymały 503 `remote connection failure`. Wniosek operacyjny:
+zawsze fresh-probe; nie zakładaj ani trwałego rate-limit, ani globalnej awarii.
+Tempo nadal ograniczaj, ale samo odczekanie 60 s NIE jest procedurą naprawczą.
 
 ---
 
@@ -399,24 +402,48 @@ NSA/WSA ma deterministyczną kontrolę exact-match oraz odczyt sentencji/
 uzasadnienia. Luka pozostaje wyłącznie w runtime'ach, w których direct CBOSA
 jest niedostępna — wtedy obowiązuje jednostronny kanał zdegradowany poniżej.
 
-### ⚠️ CBOSA — kanał zdegradowany przez indeks wyszukiwarki (F-183a)
+### ⚠️ CBOSA — retrieval/snapshot po niedostępności direct (F-183a)
 
-Stosuj **dopiero gdy fresh-probe/direct CBOSA z sekcji wyżej zawiedzie w bieżącym
-runtime**. W takim środowisku **strony dokumentów CBOSA mogą pozostawać w indeksie
-wyszukiwarki**, z metryką w tytule i trwałym adresem:
+Stosuj dopiero po nieudanym fresh-probe/direct CBOSA. Kanał może w zależności
+od hosta dać od samego tytułu/snippetu aż po reprezentację pełnego oficjalnego
+dokumentu `/doc/{ID}`.
 
 ```
-web_search: site:orzeczenia.nsa.gov.pl "{SYGNATURA}"
-tytuł:      {SYGNATURA} - {Wyrok|Postanowienie|Uchwała} {NSA|WSA w <miasto>} z {RRRR-MM-DD}
-adres:      https://orzeczenia.nsa.gov.pl/doc/{DOCID}
+DISCOVERY:
+  preferuj natywny filtr domains=["orzeczenia.nsa.gov.pl"], jeśli host go ma;
+  inaczej web_search: site:orzeczenia.nsa.gov.pl "{SYGNATURA}"
+
+⛔ `site:` jest tylko wskazówką dla wyszukiwarki, NIE filtrem bezpieczeństwa.
+
+POST-CHECK HOSTA — obowiązkowy:
+  scheme=https
+  hostname dokładnie orzeczenia.nsa.gov.pl
+  path dokładnie /doc/{10 znaków A-Z0-9}
+  każdy inny host → ODRZUĆ i nie odpytuj automatycznie
+
+POST-CHECK SYGNATURY:
+  exact-match po normalizacji; near-match → OUT_OF_SCOPE
 ```
 
-Zmierzone 2026-09-13b: indeks zawiera orzeczenia aż po 2026-02-13.
-⛔ W tym fallbacku nie zakładaj, że `/doc/{DOCID}` jest pobieralny — kanał daje
-**metrykę, nie treść**. Zakres potwierdzenia = ISTNIENIE (K-SYG-6).
-⛔⛔ Na fabrykacie kanał zwraca **niepuste** wyniki („blisko pasujące"
-sygnatury). Rozstrzyga wyłącznie porównanie SYGNATURY W TYTULE z pytaną —
-procedura: `shared/SYGNATURY.md`, **V-SYG-0.5**. Nigdy NOT_FOUND.
+Jeżeli retrieval oddaje tylko tytuł/snippet → `EXISTENCE_ONLY`.
+Jeżeli oddaje reprezentację oficjalnego `/doc/{ID}`, odczytaj faktyczny zakres:
+- `METADATA_SENTENCE` — metryka + sentencja;
+- `METADATA_SENTENCE_REASONING_PARTIAL` — uzasadnienie widoczne, ale bez potwierdzonego końca;
+- `METADATA_SENTENCE_REASONING_FULL` — początek i koniec uzasadnienia potwierdzone.
+
+**Pomiar 2026-09-14, 10 realnych sygnatur:** 10/10 dostępnych oficjalnych
+snapshotów miało co najmniej metrykę + sentencję; w 5/10 potwierdzono pełny
+koniec uzasadnienia, w 2/10 uzasadnienie było widoczne bez pewności kompletności,
+3/10 dawały metrykę + sentencję. To próba funkcjonalna, NIE estymacja pokrycia
+całego korpusu.
+
+⛔ Treść snapshotu może być używana do researchu i analizy, ale provenance
+pozostaje `access_mode=CRAWLED_OR_INDEXED`. Nie wolno na tej podstawie
+raportować `DIRECT_LIVE` ani ✅ [VER]. Globalny status śladu pozostaje zgodny
+z `shared/WERYFIKACJA-SLAD.md`.
+
+⛔ Brak exact-hit w retrieval = `OUT_OF_SCOPE`, nigdy `NOT_FOUND`.
+Pełny kontrakt: `shared/SYGNATURY.md`, V-SYG-0.5.
 | `ipo.trybunal.gov.pl`, `otkzu.trybunal.gov.pl` | HTML | osiągalne (`/ipo/Szukaj` → 200). ⛔ Wyszukiwarka to JSF/PrimeFaces z `ViewState` — **POST-only**, `Sprawa?sygnatura=` nie jest kluczem. Brak kontroli po sygnaturze (F-184) |
 | `hudoc.echr.coe.int` | ⚠️ HTML | ⛔ **Sprostowanie (F-186a, zamknięta 2026-09-13c):** ścieżka `/app/query/results` zwraca **404** (zmierzone w dwóch wariantach zapytania) — zapis z wersji 1.0 był nieprawdziwy. ✅ Działa pobranie dokumentu po `itemid`: `GET /app/conversion/docx/html/body?library=ECHR&id=001-57619` → 200, pełny tekst HTML (zmierzone: 177 kB). Wyszukiwanie po frazie pozostaje nierozstrzygnięte maszynowo |
 | `orzeczenia.uzp.gov.pl` | HTML | ⛔ **`Sign=` NIE FILTRUJE.** Formularz `GET /Home/Search` ma pola `Sign, Phrase, Dt, Fle, SCnt, Art, ThIdx`, ale zmierzone `Sign=KIO 827/18` i `Sign=KIO 99999/18` zwracają **tę samą stronę** (57 635 vs 57 637 B — różnica to echo wpisanej wartości), 0 odnośników do wyników. Brak kontroli po sygnaturze (F-185) |
