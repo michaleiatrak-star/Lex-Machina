@@ -1,7 +1,7 @@
 # Portability manifest — shared
 
 - Source baseline: `e35599cf505b47d061e0ddca608c009feb4035bc`
-- Release: **3.60 (2026-09-14)**
+- Release: **3.61 (2026-09-14)**
 - Current files in complete shared package: **173**
 - Original files: **205**
 - Expanded files after lossless MCP-example compaction, before manifest/checksums: **164**
@@ -86,3 +86,9 @@ fallback V-SYG-0.5.
 
 Reguła 7: wydanie 3.60 należy dystrybuować jako kompletny katalog `shared`,
 nie jako zestaw zmienionych plików.
+
+## CBOSA retrieval / provenance — 3.61
+
+SSOT rozróżnia direct-live od snapshotu. `site:` nie jest bramką domenową;
+V-SYG-0.5 wymusza pełny hostname + exact-match i zachowuje faktyczny zakres
+treści snapshotu bez fałszywej promocji do ✅ [VER]. Liczba plików bez zmian.
