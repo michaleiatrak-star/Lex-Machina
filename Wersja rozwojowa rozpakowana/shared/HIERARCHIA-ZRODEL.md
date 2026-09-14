@@ -1,7 +1,8 @@
 # HIERARCHIA-ZRODEL.md — Kanoniczna Kategoryzacja Źródeł (RZĄD 1/2/3)
 
 > **Plik:** `shared/HIERARCHIA-ZRODEL.md`
-> **Wersja:** 1.8 (2026-09-14) — RZĄD 2A orzecznictwa powiązany z kanonicznym
+> **Wersja:** 1.9 (2026-09-14) — CBOSA: oddzielono provenance kanału (DIRECT_LIVE / CRAWLED_OR_INDEXED) od kanonicznego statusu weryfikacji; snapshot może nieść sentencję/uzasadnienie, ale nie tworzy piątego statusu i nie awansuje sam do ✅ [VER].
+> **Wersja poprzednia:** 1.8 (2026-09-14) — RZĄD 2A orzecznictwa powiązany z kanonicznym
 >              routingiem wykonawczym: SN / Portal Orzeczeń / CBOSA / SAOS.
 >              Dla NSA/WSA direct CBOSA (formularz HTML + /doc/{ID}) jest
 >              preferowany po fresh-probe; fallback indeksowy dopiero przy
@@ -206,36 +207,42 @@ ryzyku dezaktualizacji, redakcja profesjonalna).
   ⛔ **Adapter/konektor nie ma własnego RZĘDU.** RZĄD dziedziczy treść ze
   źródła docelowego. MCP/HTML/parser to wyłącznie kanał transportowy.
 
-  ### CBOSA — trzy stany kanału (dodane 2026-09-14, decyzja użytkownika)
+  ### CBOSA — provenance kanału ≠ status weryfikacji
 
-  Nie utożsamiaj „udało się odczytać stronę" z „CBOSA odpowiada". Rozróżniaj:
+Nie utożsamiaj „mam treść strony” z „origin odpowiedział teraz”. Pole
+`access_mode` opisuje PROVENANCE techniczne i jest niezależne od dwóch
+kanonicznych znaczników śladu (`✅ [VER]` / `⚠️ [NIEWERYFIKOWANE]`).
 
-  | Stan | Znaczenie | Znacznik |
-  |---|---|---|
-  | `DIRECT_LIVE` | bieżący request HTTP do originu faktycznie odpowiedział | `✅ [VER: CBOSA direct, data]` |
-  | `CRAWLED_OR_INDEXED` | świeża kopia z crawlera/indeksu; brak potwierdzenia bieżącego połączenia z originem | `🟨 [SNAPSHOT: CBOSA, data crawlu]` |
-  | `DIRECT_UNAVAILABLE` | 503 / timeout / connection failure w tym runtime | `⚠️ [NIEWERYFIKOWANE]` |
-  | `POLICY_BLOCKED` | odmowa regulaminowa narzędzia (robots/ToS), nie awaria | `⚠️ [NIEWERYFIKOWANE]` |
+| access_mode | Znaczenie | Status śladu bez dodatkowego dowodu |
+|---|---|---|
+| `DIRECT_LIVE` | bieżący request do originu zwrócił właściwy dokument | może uzyskać ✅ po exact-match i kontroli treści |
+| `CRAWLED_OR_INDEXED` | kopia/snapshot oficjalnego URL z retrieval/crawlera; brak dowodu bieżącego połączenia | ⚠️ + jawne provenance |
+| `DIRECT_UNAVAILABLE` | 5xx / timeout / connection failure w tym runtime | ⚠️ |
+| `POLICY_BLOCKED` | blokada narzędzia/polityki | ⚠️ |
 
-  ✅ **Kanał snapshotowy jest DOPUSZCZALNY** tam, gdzie środowisko nim
-  dysponuje (m.in. narzędzia webowe ChatGPT), do: lektury orzeczenia, ustalenia
-  stanu faktycznego sprawy, analizy argumentacji, researchu wstępnego.
+⛔ **Nie twórz piątego statusu `[SNAPSHOT]`.** Snapshot zapisuj jako pole
+provenance, np. `⚠️ [NIEWERYFIKOWANE] {access_mode=CRAWLED_OR_INDEXED, content_scope=METADATA_SENTENCE}`.
 
-  ⛔ Snapshot NIE przechodzi bramki HYBRID-VAL przed generowaniem `.docx`
-  i nie uprawnia do `✅ [VER]`. Powód nie jest techniczny, lecz dowodowy:
-  snapshot nie niesie daty stanu ani proweniencji możliwej do wykazania.
-  Sygnatura powoływana w piśmie procesowym wymaga `DIRECT_LIVE` albo
-  potwierdzenia innym kanałem (`SYGNATURY.md` V-SYG-0.5).
+✅ Kanał snapshotowy jest wartościowy badawczo. Jeżeli host retrieval przekazuje
+oficjalny dokument `orzeczenia.nsa.gov.pl/doc/{ID}` po POST-CHECK HOSTA i
+exact-match, wolno odczytać i analizować faktycznie dostępną:
+- metrykę;
+- sentencję;
+- uzasadnienie, jeśli jest obecne; kompletność oznacz osobno.
 
-  ⛔ Znacznika `🟨 [SNAPSHOT]` nie wolno podnosić do `✅ [VER]` przy przenoszeniu
-  materiału między środowiskami. Plik skilla bywa czytany w runtime innym niż
-  ten, w którym powstał odczyt.
+Pomiar funkcjonalny 2026-09-14 na 10 realnych sygnaturach: wszystkie 10
+dostępnych oficjalnych snapshotów miało co najmniej metrykę + sentencję; 5
+miało potwierdzalnie pełne uzasadnienie, 2 uzasadnienie bez dowodu kompletności,
+3 tylko metrykę + sentencję. To nie jest estymacja pokrycia całej bazy.
 
-  ⛔ HTTP 200 nie jest dowodem treści. Zmierzone kontrprzykłady (2026-09-14):
-  `eur-lex.europa.eu` → 202 przy 0 bajtów; `sn.pl` → 200 przy 1886 bajtach
-  (powłoka JS). Sonda musi sprawdzać rozmiar i obecność oczekiwanej struktury.
-  
-  ⛔ **CBOSA — granica wnioskowania:** `FOUND` wymaga exact-match po
+⛔ Snapshot nie przechodzi samodzielnie bramki finalnego materiału do pisma
+procesowego jako „zweryfikowany online”. Do ✅ [VER] potrzebny jest
+`DIRECT_LIVE` albo niezależne bieżące potwierdzenie w oficjalnym kanale.
+
+⛔ Operator `site:` nie jest kontrolą domeny. Obowiązkowy POST-CHECK pełnego
+hostname i ścieżki opisuje V-SYG-0.5. Wynik z innego hosta odpada nawet wtedy,
+gdy wyszukiwarka zwróciła go na zapytanie z `site:orzeczenia.nsa.gov.pl`.
+⛔ **CBOSA — granica wnioskowania:** `FOUND` wymaga exact-match po
   normalizacji. Niepełna paginacja, nierozpoznany licznik, zmiana krytycznej
   struktury HTML, przerwany transport albo błąd choć jednego kandydata =
   `OUT_OF_SCOPE`, nigdy `NOT_FOUND`. Gdy dokument jest kompletny, ale
