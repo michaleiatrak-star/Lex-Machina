@@ -65,7 +65,7 @@ KROK 0A — OVERRIDE NSA/WSA (obowiązkowy, gdy repertorium routuje do CBOSA):
        POST /cbo/search → kompletna /cbo/find?p=N → /doc/{ID} → exact-match.
      Kontrakt: shared/SYGNATURY.md; kształt requestu:
      shared/DOSTEP-MASZYNOWY-API.md; implementacja:
-     orzeczenia-sadowe-v2/references/CBOSA-ADAPTER.md.
+     shared/CBOSA-ADAPTER.md.
   3. Dopiero gdy direct CBOSA jest niedostępna w bieżącym runtime →
      V-SYG-0.5 (indeks wyszukiwarki, tylko ISTNIENIE, nigdy NOT_FOUND).
   4. SAOS dla NSA/WSA jest wyłącznie kontrolą pomocniczą; brak rekordu SAOS
