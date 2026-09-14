@@ -4,8 +4,8 @@
 
 - Full own skill tree preserved; no `shared` or other skill is vendored.
 - `SKILL.md` is host-neutral; named operations are mapped by a semantic runtime adapter.
-- Current package files: **71**.
-- Current scripts: **23**; current references files: **36**.
+- Current package files: **101**.
+- Current scripts: **38**; current references files: **51**.
 - Frontmatter description: **167/200** characters.
 
 ## Existing portability fixes retained
@@ -40,4 +40,4 @@ Wydanie po pełnym skanie ścieżek kanonicznych. Aktywne odwołania do nieistni
 ## Rule 7
 
 Wydanie 6.97 należy dystrybuować jako pełny katalog `audyt-systemu-v4`
-(71 plików), nie jako sam diff plików audytowych.
+(101 plików), nie jako sam diff plików audytowych.
