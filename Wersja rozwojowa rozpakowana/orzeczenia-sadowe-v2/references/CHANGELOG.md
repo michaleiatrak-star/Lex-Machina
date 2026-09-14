@@ -1,5 +1,16 @@
 # CHANGELOG — orzeczenia-sadowe-v2
 
+**2.16 (2026-09-14) — integracja adaptera CBOSA z kanonicznym routingiem źródeł:**
+- CBOSA powiązana z `shared/HIERARCHIA-ZRODEL.md` jako RZĄD 2A oraz z
+  `SYGNATURY`, `DOSTEP-MASZYNOWY-API`, `PRAWO-HARDGATE-ORZECZENIA` i MCP fallback.
+- Parser hardened fail-closed: krytyczny drift HTML, nieznany licznik, przerwany
+  transport, Content-Length mismatch i błąd kandydata → OUT_OF_SCOPE.
+- Dodano sesyjną kontrolę paginacji i wykrywanie zapętlenia/duplikatów.
+- Brak opublikowanego uzasadnienia = FOUND dla metryki/sentencji z
+  `reasoning_available=false`; nie wolno wtedy przypisywać tezy z uzasadnienia.
+- Zestaw regresyjny rozszerzony do **22/22 PASS**.
+- Reguła 7: pełny skill wydawany jako ZIP, nie sam diff.
+
 > Pełna historia napraw i zmian wersji. Wyniesiona z SKILL.md 2026-07-12
 > (runda 2 — redukcja kosztu kontekstu) — treść skopiowana 1:1, bez zmian.
 > Wczytuj TYLKO gdy potrzebujesz historii konkretnej naprawy.
