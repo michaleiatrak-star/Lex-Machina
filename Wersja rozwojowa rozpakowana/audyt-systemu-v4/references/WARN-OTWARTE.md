@@ -70,6 +70,25 @@
 > istnieje fallback snapshotowy, którym dysponują inne hosty.
 > **Do wykonania pozostaje wyłącznie przypadek pozytywny** w runtime, w którym
 > origin odpowiada; podzakres negatywny jest zamknięty i nie wymaga powtórzenia.
+> ⚡ **DOPRECYZOWANIE 2026-09-14b — RETRIEVAL/SNAPSHOT ZMIERZONY W INNYM
+> HOŚCIE.** Negatywny pomiar direct powyżej pozostaje prawdziwy dla tamtego
+> runtime. Niezależnie od niego inna warstwa retrieval udostępniała oficjalne
+> reprezentacje `orzeczenia.nsa.gov.pl/doc/{ID}`. Próba 10 realnych sygnatur
+> NSA/WSA: **10/10** snapshotów miało co najmniej metrykę + sentencję, **5/10**
+> miało potwierdzalnie pełne uzasadnienie, **2/10** uzasadnienie widoczne bez
+> dowodu kompletności, **3/10** metrykę + sentencję bez potwierdzonego końca
+> uzasadnienia. To nie jest estymacja pokrycia całego korpusu.
+>
+> Jednocześnie operator `site:orzeczenia.nsa.gov.pl` w dwóch stosach zwracał
+> również obce hosty. Naprawa systemowa: `shared` 3.61 / V-SYG-0.5 wymusza
+> POST-CHECK pełnego hostname i ścieżki PRZED exact-match. Snapshot ma jawne
+> `access_mode=CRAWLED_OR_INDEXED` oraz `content_scope`; bogactwo treści NIE
+> awansuje provenance do `DIRECT_LIVE` ani samo nie daje ✅ [VER]. Brak hitu
+> retrieval nadal = OUT_OF_SCOPE, nigdy NOT_FOUND.
+>
+> **F-183a pozostaje otwarta wyłącznie dla pozytywnego DIRECT_LIVE w runtime
+> docelowym.** Dostępność snapshotu jest zdolnością konkretnego hosta i nie
+> zastępuje tego kryterium zamknięcia.
 >
 > **F-184 (2026-09-13, OTWARTA, środowisko) — TK bez kontroli po sygnaturze.**
 > `ipo.trybunal.gov.pl/ipo/Szukaj` → 200, ale wyszukiwarka to JSF/PrimeFaces
