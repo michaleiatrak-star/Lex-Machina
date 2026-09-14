@@ -1,7 +1,8 @@
 # WERYFIKACJA-ŚLAD — Moduł Audytu Śladu Weryfikacji
 
 > **Plik:** `shared/WERYFIKACJA-SLAD.md`
-> **Wersja:** 1.6 (2026-08-27) — dodano REJESTR POKRYCIA WERYFIKACJI (RPW):
+> **Wersja:** 1.7 (2026-09-14) — dodano provenance kanału (`access_mode`) niezależne od statusu ✅/⚠️; snapshot/crawler nie tworzy piątego statusu i sam nie uprawnia do ✅ [VER].
+> **Wersja poprzednia:** 1.6 (2026-08-27) — dodano REJESTR POKRYCIA WERYFIKACJI (RPW):
 >              checkpoint obowiązkowy przy ≥8 powołaniach, zamykający lukę
 >              "cichego pominięcia" pozycji bez błędu sieciowego — zgłoszone
 >              przez użytkownika po sesji, w której odpowiedź z wieloma
@@ -46,9 +47,37 @@ artykułu, liczby i orzeczenia.
 ⚠️ [NIEWERYFIKOWANE] — weryfikacja niemożliwa (brak dostępu, timeout)
 ```
 
-> ⛔ **ZAKAZ** oznaczania `✅ [VER]` bez faktycznego wykonania web_search lub web_fetch.
-> Zasada jest programowa — model NIE może oznaczyć VER jeśli nie wywołał narzędzia.
+> ⛔ **ZAKAZ** oznaczania `✅ [VER]` bez faktycznego wykonania narzędzia.
+> Samo wywołanie narzędzia nie wystarcza, jeżeli narzędzie jawnie zwraca kopię
+> crawlera/indexu zamiast bieżącego odczytu originu. W takim przypadku zachowaj
+> `⚠️ [NIEWERYFIKOWANE]` i zapisz provenance `access_mode=CRAWLED_OR_INDEXED`,
+> chyba że istnieje niezależne bieżące potwierdzenie w oficjalnym kanale.
 
+---
+
+## PROVENANCE KANAŁU — NIE JEST NOWYM STATUSEM
+
+Do każdego elementu można dopisać techniczne pole `access_mode`:
+- `DIRECT_LIVE` — bieżący odczyt originu/API;
+- `CRAWLED_OR_INDEXED` — snapshot/crawler/index;
+- `DIRECT_UNAVAILABLE` — bieżąca próba direct zawiodła;
+- `POLICY_BLOCKED` — narzędzie odmówiło dostępu.
+
+Pole to nie zastępuje i nie rozszerza statusów ✅/⚠️.
+
+Przykład dla CBOSA:
+
+```
+Wyrok NSA II GSK 2297/25
+⚠️ [NIEWERYFIKOWANE]
+access_mode=CRAWLED_OR_INDEXED
+content_scope=METADATA_SENTENCE_REASONING_FULL
+```
+
+Znaczenie: system faktycznie przeczytał bogatą reprezentację dokumentu i może
+jej użyć do researchu/analizy, ale nie twierdzi, że origin został odczytany
+bieżąco. Po późniejszym potwierdzeniu direct można zaktualizować ślad zgodnie
+z normalnymi warunkami ✅ [VER].
 ---
 
 ## FORMAT ŚLADU WERYFIKACJI
