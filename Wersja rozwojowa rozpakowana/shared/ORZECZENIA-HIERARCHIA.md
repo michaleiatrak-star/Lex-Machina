@@ -40,8 +40,10 @@ Dla CBOSA:
   metryki/sentencji, ale zakazuje przypisywania tezy z uzasadnienia.
 
 Gdy direct CBOSA jest niedostępna w bieżącym runtime, użyj
-`shared/SYGNATURY.md` V-SYG-0.5. Fallback indeksowy nigdy nie produkuje
-`NOT_FOUND` i potwierdza wyłącznie ISTNIENIE.
+`shared/SYGNATURY.md` V-SYG-0.5 RETRIEVAL/SNAPSHOT. Kanał nigdy nie produkuje
+`NOT_FOUND`; po POST-CHECK HOSTA i exact-match zachowuje faktyczny `content_scope`
+(snapshot może zawierać metrykę, sentencję i uzasadnienie). Provenance pozostaje
+`CRAWLED_OR_INDEXED`, więc sama treść snapshotu nie daje ✅ [VER].
 
 ## 3. Test aktualności
 
