@@ -362,8 +362,8 @@ submit=Szukaj
 - 1 → FOUND; >=2 → AMBIGUOUS.
 
 Pełny kontrakt: `shared/SYGNATURY.md`, V-SYG-0.7.
-Implementacja produkcyjna: `orzeczenia-sadowe-v2/references/CBOSA-ADAPTER.md`
-i `orzeczenia-sadowe-v2/tools/cbosa_parser.py`.
+Implementacja produkcyjna: `shared/CBOSA-ADAPTER.md`
+i implementacja referencyjna opisana w `shared/CBOSA-ADAPTER.md`.
 
 **Zakres treści:** poprawnie zamknięty dokument bez opublikowanej sekcji
 uzasadnienia może nadal być FOUND dla metryki/sentencji, ale
