@@ -1,7 +1,7 @@
 # CBOSA-ADAPTER — kanoniczny kontrakt dostępu NSA/WSA
 
 > **Plik:** `shared/CBOSA-ADAPTER.md`
-> **Wersja:** 1.0 (2026-09-14)
+> **Wersja:** 1.1 (2026-09-14) — rozdzielono DIRECT_LIVE od CRAWLED_OR_INDEXED; fallback snapshot ma host post-check, exact-match i jawny content_scope.
 > **Status źródła:** CBOSA / `orzeczenia.nsa.gov.pl` = **RZĄD 2A**
 > **Rola:** transport i walidacja; adapter nie ma własnego RZĘDU.
 
@@ -86,16 +86,45 @@ Nigdy nie podstawiaj „najbliższej” sygnatury.
 Poziom FRAGMENT wymaga `shared/WERYFIKACJA-SLAD.md` i
 `shared/PRAWO-HARDGATE-ORZECZENIA.md`.
 
-## Fallback
+## Provenance kanału
 
-Jeżeli direct CBOSA jest niedostępna w bieżącym runtime:
-→ `shared/SYGNATURY.md` V-SYG-0.5 (indeks wyszukiwarki).
+Adapter rozróżnia źródło treści od sposobu dostępu:
 
-Fallback:
-- potwierdza co najwyżej ISTNIENIE,
-- nigdy nie produkuje `NOT_FOUND`,
-- nie uprawnia do przypisywania tezy.
+| access_mode | Znaczenie |
+|---|---|
+| `DIRECT_LIVE` | bieżący request do CBOSA/originu odpowiedział właściwym dokumentem |
+| `CRAWLED_OR_INDEXED` | host retrieval przekazał kopię/snapshot oficjalnego URL; brak dowodu bieżącego połączenia z originem |
+| `DIRECT_UNAVAILABLE` | 5xx / timeout / connection failure w bieżącym runtime |
+| `POLICY_BLOCKED` | odmowa narzędzia/polityki; nie jest dowodem awarii CBOSA |
 
+`access_mode` jest provenance, nie statusem weryfikacji z `WERYFIKACJA-SLAD.md`.
+
+## Fallback retrieval/snapshot
+
+Jeżeli direct CBOSA jest niedostępna → `shared/SYGNATURY.md` V-SYG-0.5.
+
+Minimalna sekwencja:
+1. discovery (natywny filtr domeny lub `site:`);
+2. POST-CHECK HOSTA — exact hostname `orzeczenia.nsa.gov.pl`, HTTPS i `/doc/{ID}`;
+3. exact-match sygnatury po normalizacji;
+4. klasyfikacja faktycznie widocznej treści.
+
+Dopuszczalne `content_scope`:
+- `EXISTENCE_ONLY`;
+- `METADATA_SENTENCE`;
+- `METADATA_SENTENCE_REASONING_PARTIAL`;
+- `METADATA_SENTENCE_REASONING_FULL`.
+
+⛔ `site:` nie jest filtrem domenowym. Wynik spoza hosta kanonicznego odrzuć
+przed odczytem; nie odpytuj automatycznie near-domain.
+
+⛔ Snapshot może być bogatszy od snippetu — w pomiarze 10/10 badanych
+oficjalnych snapshotów miało co najmniej metrykę + sentencję — ale nadal
+pozostaje `CRAWLED_OR_INDEXED`. Sam fakt posiadania pełnego uzasadnienia
+nie podnosi provenance do `DIRECT_LIVE` ani statusu do ✅ [VER].
+
+⛔ Fallback nigdy nie produkuje `NOT_FOUND`. Brak wyniku w crawlerze/indexie
+jest wyłącznie `OUT_OF_SCOPE`.
 ## Implementacja referencyjna
 
 `orzeczenia-sadowe-v2/tools/cbosa_parser.py` implementuje ten kontrakt.
