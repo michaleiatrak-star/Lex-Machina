@@ -1,7 +1,11 @@
 # SYGNATURY — Moduł Walidacji Sygnatur Sądowych
 
 > **Plik:** `shared/SYGNATURY.md`
-> **Wersja:** 1.4 (2026-09-13d) — dodano V-SYG-0.6 (rozstrzyganie AMBIGUOUS na
+> **Wersja:** 1.5 (2026-09-14) — dodano V-SYG-0.7 DIRECT-CBOSA: fresh-probe,
+>              formularz HTML + pełna paginacja + /doc/{ID} + exact-match;
+>              V-SYG-0.5 pozostaje fallbackiem wyłącznie po niedostępności
+>              direct CBOSA. Fail-closed dla driftu HTML/transportu.
+> **Wersja poprzednia:** 1.4 (2026-09-13d) — dodano V-SYG-0.6 (rozstrzyganie AMBIGUOUS na
 >              portalu sądu); doprecyzowano V-SYG-0.4 (post-check FILTRUJE zbiór,
 >              nie porównuje pierwszego rekordu — przypadek `II CSKP 100/21`);
 >              odnotowano odrzucenie zamienników CBOSA na `robots.txt`.
@@ -278,7 +282,7 @@ Powyższa redakcja V-SYG-0.4 wyrównuje ten rozjazd.
 |---|---|---|
 | C, Ns, Nc, Co, K, Ko, W, GC, GU, GRp, RC, U, P, ACa, ACz, AKa, AKz, APa, AUa, AGa | `orzeczenia.ms.gov.pl` | GET po sygnaturze |
 | CSK, CSKP, KK, NKK, UK, NSNc, NKN, CNP, CO (SN), SDI, ZK | `sn.pl` (snproxy JSON) | GET, UA przeglądarkowy |
-| SA/{siedziba}, SAB/{siedziba}, FSK, OSK, GSK, FSN, ONSA | `orzeczenia.nsa.gov.pl` (CBOSA) | ⛔ host niedostępny → **kanał zdegradowany V-SYG-0.5** |
+| SA/{siedziba}, SAB/{siedziba}, FSK, OSK, GSK, FSN, ONSA | `orzeczenia.nsa.gov.pl` (CBOSA) | **fresh-probe → V-SYG-0.7 DIRECT-CBOSA**; gdy direct zawiedzie → **V-SYG-0.5 fallback indeksowy** |
 | K, P, SK, U, Kpt, Kp (TK) | `ipo.trybunal.gov.pl`, `otkzu.trybunal.gov.pl` | ⛔ brak kontroli po sygnaturze |
 | KIO | `orzeczenia.uzp.gov.pl` | ⛔ brak filtra po sygnaturze |
 | dowolne, gdy rocznik mieści się w oknie | `saos.org.pl` `caseNumber=` | kontrola krzyżowa |
@@ -311,15 +315,76 @@ Kontrola rozstrzygająca (nie sortowanie, lecz przedział dat): SUPREME 2016 =
 `audyt-systemu-v4/scripts/weryfikator_sygnatur.py --okno`. Tabela wyżej jest
 zapisem pomiaru z datą, nie deklaracją trwałą.
 
+## V-SYG-0.7 — DIRECT-CBOSA (NSA/WSA, 2026-09-14)
+
+> Stosuj, gdy V-SYG-0.2 skierował sygnaturę do CBOSA. **Najpierw fresh-probe
+> w bieżącym runtime.** Historyczny pomiar 503 z innej sesji nie jest stanem
+> globalnym źródła.
+
+Kontrakt operacyjny:
+
+```
+V-SYG-0.7.1  FRESH-PROBE:
+             sprawdź, czy orzeczenia.nsa.gov.pl zwraca właściwy HTML CBOSA.
+             HTTP 200 z CAPTCHA/WAF/stroną zastępczą ≠ dostępność.
+
+V-SYG-0.7.2  SEARCH:
+             POST /cbo/search
+             Content-Type: application/x-www-form-urlencoded
+             sygnatura={SYGNATURA po V-SYG-0.1}
+             + pola formularza wg:
+             orzeczenia-sadowe-v2/references/CBOSA-ADAPTER.md
+
+V-SYG-0.7.3  KOMPLETNOŚĆ:
+             odczytaj licznik wyników. Jeżeli wynik ma wiele stron,
+             zachowaj cookies i pobierz /cbo/find?p=N aż liczba UNIKALNYCH
+             /doc/{ID} zrówna się z licznikiem.
+             nierozpoznany licznik / powtórzona strona / brak strony
+             / więcej ID niż licznik → OUT_OF_SCOPE.
+
+V-SYG-0.7.4  DOKUMENTY:
+             GET /doc/{ID} dla KAŻDEGO kandydata.
+             Odczytaj: sygnatura, sąd, data, sentencja oraz — jeśli
+             opublikowane — uzasadnienie.
+             przerwany transport / brak zamknięcia dokumentu / krytyczny
+             drift pól HTML / błąd choć jednego kandydata → OUT_OF_SCOPE.
+
+V-SYG-0.7.5  EXACT-MATCH:
+             filtruj CAŁY zbiór po normalizacji V-SYG-0.1.
+             0 exact-match  → NOT_FOUND
+             1 exact-match  → FOUND
+             >=2 exact-match → AMBIGUOUS
+             „najbliższa” sygnatura NIGDY nie zastępuje pytanej.
+
+V-SYG-0.7.6  ZAKRES TREŚCI:
+             FOUND + kompletna metryka/sentencja → ISTNIENIE+TREŚĆ
+             tylko w zakresie faktycznie odczytanych elementów.
+             Jeżeli reasoning_available=false → zakaz powoływania tezy
+             z uzasadnienia; sentencję wolno powołać po własnym pinpoint.
+             FRAGMENT nadal wymaga WERYFIKACJA-SLAD / Zasada 2B.
+```
+
+Implementacja wykonawcza:
+- `orzeczenia-sadowe-v2/references/CBOSA-ADAPTER.md`
+- `orzeczenia-sadowe-v2/tools/cbosa_parser.py`
+
+Testy regresyjne po hardeningu 2026-09-14: **22/22 PASS** dla driftu HTML,
+paginacji, duplikatów, near-match, urwanego transportu i zakresu uzasadnienia.
+
+Jeżeli fresh-probe albo direct pipeline zawiedzie → **nie orzekaj NOT_FOUND**;
+przejdź do V-SYG-0.5.
+
+---
+
 ## V-SYG-0.5 — KANAŁ ZDEGRADOWANY (pion sądowoadministracyjny, F-183a)
 
-> Dodano: 2026-09-13b. Stosuj **wyłącznie** wtedy, gdy V-SYG-0.2 skierował
-> sygnaturę do CBOSA, a kanał kodu zawiódł. Nie jest to zamiennik CBOSA —
-> jest to kontrola JEDNOSTRONNA.
+> Dodano: 2026-09-13b; od 2026-09-14 jest to **wyłącznie FALLBACK** po
+> nieudanym V-SYG-0.7 w bieżącym runtime. Nie jest zamiennikiem direct CBOSA —
+> jest kontrolą JEDNOSTRONNĄ.
 
-⛔ **Dlaczego w ogóle działa.** Host `orzeczenia.nsa.gov.pl` jest nieosiągalny
-(503 w kanale kodu na wszystkich ścieżkach, `ROBOTS_DISALLOWED` w `web_fetch`),
-ale **indeks wyszukiwarki nadal zawiera strony dokumentów CBOSA** — wraz
+⛔ **Dlaczego fallback działa.** W środowiskach, w których direct CBOSA zwraca
+503 / jest blokowana przez kanał hosta, **indeks wyszukiwarki może nadal zawierać
+strony dokumentów CBOSA** — wraz
 z metryką w tytule i trwałym adresem `/doc/{DOCID}`. Zmierzone 2026-09-13:
 indeks zawiera nawet orzeczenie z 2026-02-13, więc nie jest to archiwum
 historyczne.
@@ -446,7 +511,10 @@ V-SYG-2: Sprawdź format — czy repertorium pasuje do sądu?
           NIE pasuje → ⛔ BŁĄD FORMATU: poinformuj użytkownika
 
 V-SYG-3: Czy sygnatura ma być cytowana jako realne orzeczenie?
-          TAK → obowiązkowe: wykonaj V-SYG-0 w całości (0.1 → 0.2 → 0.3 → 0.4).
+          TAK → obowiązkowe: wykonaj V-SYG-0 w całości.
+                Dla NSA/WSA: 0.1 → 0.2 → 0.3 → **0.7 DIRECT-CBOSA**,
+                a dopiero po jego niedostępności → 0.5 fallback.
+                Dla pozostałych: 0.1 → 0.2 → 0.3 → 0.4.
                 ⛔ ZAKAZ wyszukiwania frazowego (SAOS `all=`, web_search po
                    sygnaturze) jako kontroli istnienia — zwraca trafienia na
                    słowach składowych także dla fabrykatu (zmierzone: 67 576).
