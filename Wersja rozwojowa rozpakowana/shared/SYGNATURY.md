@@ -333,7 +333,7 @@ V-SYG-0.7.2  SEARCH:
              Content-Type: application/x-www-form-urlencoded
              sygnatura={SYGNATURA po V-SYG-0.1}
              + pola formularza wg:
-             orzeczenia-sadowe-v2/references/CBOSA-ADAPTER.md
+             shared/CBOSA-ADAPTER.md
 
 V-SYG-0.7.3  KOMPLETNOŚĆ:
              odczytaj licznik wyników. Jeżeli wynik ma wiele stron,
@@ -365,8 +365,8 @@ V-SYG-0.7.6  ZAKRES TREŚCI:
 ```
 
 Implementacja wykonawcza:
-- `orzeczenia-sadowe-v2/references/CBOSA-ADAPTER.md`
-- `orzeczenia-sadowe-v2/tools/cbosa_parser.py`
+- `shared/CBOSA-ADAPTER.md`
+- implementacja referencyjna opisana w `shared/CBOSA-ADAPTER.md`
 
 Testy regresyjne po hardeningu 2026-09-14: **22/22 PASS** dla driftu HTML,
 paginacji, duplikatów, near-match, urwanego transportu i zakresu uzasadnienia.
