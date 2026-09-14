@@ -361,14 +361,6 @@ def collect_search_doc_ids(
             status=VerificationStatus.OUT_OF_SCOPE,
             reason="Nie rozpoznano licznika wyników CBOSA — możliwy drift HTML.",
         )
-    if total is None:
-        return CbosaVerification(
-            status=VerificationStatus.OUT_OF_SCOPE,
-            expected_case_number=expected,
-            searched_doc_ids=tuple(doc_ids),
-            reason="Nie rozpoznano licznika wyników CBOSA — możliwy drift HTML.",
-        )
-
     if total == 0:
         return CbosaSearchCollection(
             status=VerificationStatus.NOT_FOUND,
@@ -470,6 +462,14 @@ def verify_search_results(
     expected = normalize_case_number(expected_case_number)
     doc_ids = extract_doc_ids(search_html)
     total = extract_total_results(search_html)
+
+    if total is None:
+        return CbosaVerification(
+            status=VerificationStatus.OUT_OF_SCOPE,
+            expected_case_number=expected,
+            searched_doc_ids=tuple(doc_ids),
+            reason="Nie rozpoznano licznika wyników CBOSA — możliwy drift HTML.",
+        )
 
     if total == 0:
         return CbosaVerification(
