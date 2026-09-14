@@ -5,7 +5,7 @@ from enum import Enum
 from html import unescape
 from html.parser import HTMLParser
 import re
-from typing import Callable, Iterable, Optional
+from typing import Callable, Iterable, Optional, Union
 
 CBOSA_BASE_URL = "https://orzeczenia.nsa.gov.pl"
 _DOC_ID_RE = re.compile(r"^[A-Z0-9]{10}$", re.I)
@@ -21,6 +21,22 @@ class VerificationStatus(str, Enum):
 
 
 @dataclass(frozen=True)
+class FetchedHtml:
+    text: str
+    transfer_complete: bool = True
+    content_length: Optional[int] = None
+    received_bytes: Optional[int] = None
+
+
+@dataclass(frozen=True)
+class CbosaSearchCollection:
+    status: VerificationStatus
+    doc_ids: tuple[str, ...] = field(default_factory=tuple)
+    total: Optional[int] = None
+    reason: Optional[str] = None
+
+
+@dataclass(frozen=True)
 class CbosaJudgment:
     doc_id: str
     case_number: str
@@ -29,6 +45,8 @@ class CbosaJudgment:
     operative_part: Optional[str]
     reasoning: Optional[str]
     url: str
+    reasoning_available: bool = False
+    document_complete: bool = True
 
     @property
     def full_text(self) -> str:
@@ -113,6 +131,10 @@ class _DocumentParser(HTMLParser):
         self._section_depth = 0
         self._section_collector: Optional[_TextCollector] = None
         self.sections: dict[str, str] = {}
+        self.saw_html_end = False
+        self.saw_body_end = False
+        self.saw_sentencja_label = False
+        self.saw_uzasadnienie_label = False
 
     @staticmethod
     def _classes(attrs: list[tuple[str, Optional[str]]]) -> set[str]:
@@ -164,6 +186,10 @@ class _DocumentParser(HTMLParser):
 
     def handle_endtag(self, tag: str) -> None:
         low = tag.lower()
+        if low == "html":
+            self.saw_html_end = True
+        elif low == "body":
+            self.saw_body_end = True
         if low == "title":
             self._in_title = False
             return
@@ -198,6 +224,10 @@ class _DocumentParser(HTMLParser):
             classes = set(self._current_div_class.split())
             if self.TABLE_LABEL_CLASS in classes and text in {"Sentencja", "Uzasadnienie"}:
                 self._pending_section_label = text
+                if text == "Sentencja":
+                    self.saw_sentencja_label = True
+                elif text == "Uzasadnienie":
+                    self.saw_uzasadnienie_label = True
             self._current_div_class = None
             self._current_div = _TextCollector()
 
@@ -268,6 +298,26 @@ def parse_cbosa_document(document_html: str, doc_id: str) -> CbosaJudgment:
     operative_part = parser.sections.get("Sentencja")
     reasoning = parser.sections.get("Uzasadnienie")
 
+    if not parser.saw_html_end or not parser.saw_body_end:
+        raise ValueError(f"Niekompletny HTML CBOSA {safe_doc_id}: brak zamknięcia BODY/HTML")
+    missing_required = [
+        name for name, value in (
+            ("Sąd", court),
+            ("Data orzeczenia", judgment_date),
+            ("Sentencja", operative_part),
+        )
+        if not value
+    ]
+    if missing_required:
+        raise ValueError(
+            f"Zmiana/niekompletność kontraktu HTML CBOSA {safe_doc_id}: "
+            f"brak pól {', '.join(missing_required)}"
+        )
+    if parser.saw_uzasadnienie_label and not reasoning:
+        raise ValueError(
+            f"Niekompletna sekcja Uzasadnienie w dokumencie CBOSA {safe_doc_id}"
+        )
+
     return CbosaJudgment(
         doc_id=safe_doc_id,
         case_number=case_number,
@@ -276,6 +326,108 @@ def parse_cbosa_document(document_html: str, doc_id: str) -> CbosaJudgment:
         operative_part=operative_part or None,
         reasoning=reasoning or None,
         url=f"{CBOSA_BASE_URL}/doc/{safe_doc_id}",
+        reasoning_available=bool(reasoning),
+        document_complete=True,
+    )
+
+
+
+def _coerce_fetched_html(value: Union[str, FetchedHtml]) -> str:
+    if isinstance(value, str):
+        return value
+    if not value.transfer_complete:
+        raise ValueError("Niekompletny transport HTTP (transfer_complete=False)")
+    if (
+        value.content_length is not None
+        and value.received_bytes is not None
+        and value.content_length != value.received_bytes
+    ):
+        raise ValueError(
+            "Niekompletny transport HTTP: "
+            f"Content-Length={value.content_length}, received={value.received_bytes}"
+        )
+    return value.text
+
+
+def collect_search_doc_ids(
+    first_html: str,
+    fetch_page: Callable[[int], str],
+    *,
+    max_pages: int = 250,
+) -> CbosaSearchCollection:
+    total = extract_total_results(first_html)
+    if total is None:
+        return CbosaSearchCollection(
+            status=VerificationStatus.OUT_OF_SCOPE,
+            reason="Nie rozpoznano licznika wyników CBOSA — możliwy drift HTML.",
+        )
+    if total is None:
+        return CbosaVerification(
+            status=VerificationStatus.OUT_OF_SCOPE,
+            expected_case_number=expected,
+            searched_doc_ids=tuple(doc_ids),
+            reason="Nie rozpoznano licznika wyników CBOSA — możliwy drift HTML.",
+        )
+
+    if total == 0:
+        return CbosaSearchCollection(
+            status=VerificationStatus.NOT_FOUND,
+            doc_ids=tuple(),
+            total=0,
+        )
+
+    ordered: list[str] = []
+    seen: set[str] = set()
+
+    def add_page(html: str) -> int:
+        added = 0
+        for doc_id in extract_doc_ids(html):
+            if doc_id not in seen:
+                seen.add(doc_id)
+                ordered.append(doc_id)
+                added += 1
+        return added
+
+    add_page(first_html)
+    if len(ordered) > total:
+        return CbosaSearchCollection(
+            status=VerificationStatus.OUT_OF_SCOPE,
+            doc_ids=tuple(ordered),
+            total=total,
+            reason="Liczba unikalnych /doc/{ID} przekracza licznik CBOSA.",
+        )
+
+    page = 2
+    while len(ordered) < total:
+        if page > max_pages:
+            return CbosaSearchCollection(
+                status=VerificationStatus.OUT_OF_SCOPE,
+                doc_ids=tuple(ordered),
+                total=total,
+                reason=f"Przekroczono limit paginacji max_pages={max_pages}.",
+            )
+        html = fetch_page(page)
+        added = add_page(html)
+        if added == 0:
+            return CbosaSearchCollection(
+                status=VerificationStatus.OUT_OF_SCOPE,
+                doc_ids=tuple(ordered),
+                total=total,
+                reason=f"Paginacja zatrzymała się/powtórzyła na stronie p={page}.",
+            )
+        if len(ordered) > total:
+            return CbosaSearchCollection(
+                status=VerificationStatus.OUT_OF_SCOPE,
+                doc_ids=tuple(ordered),
+                total=total,
+                reason="Paginacja zwróciła więcej unikalnych dokumentów niż licznik CBOSA.",
+            )
+        page += 1
+
+    return CbosaSearchCollection(
+        status=VerificationStatus.FOUND,
+        doc_ids=tuple(ordered),
+        total=total,
     )
 
 
@@ -313,7 +465,7 @@ def classify_exact_matches(
 def verify_search_results(
     search_html: str,
     expected_case_number: str,
-    fetch_document: Callable[[str], str],
+    fetch_document: Callable[[str], Union[str, FetchedHtml]],
 ) -> CbosaVerification:
     expected = normalize_case_number(expected_case_number)
     doc_ids = extract_doc_ids(search_html)
@@ -355,7 +507,8 @@ def verify_search_results(
     documents: list[CbosaJudgment] = []
     try:
         for doc_id in doc_ids:
-            document_html = fetch_document(doc_id)
+            fetched = fetch_document(doc_id)
+            document_html = _coerce_fetched_html(fetched)
             documents.append(parse_cbosa_document(document_html, doc_id))
     except Exception as exc:
         return CbosaVerification(
