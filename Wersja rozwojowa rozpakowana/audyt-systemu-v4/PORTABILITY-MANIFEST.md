@@ -1,6 +1,6 @@
 # Portability manifest — audyt-systemu-v4
 
-- Release: **6.97 (2026-09-14)**
+- Release: **6.98 (2026-09-14)**
 
 - Full own skill tree preserved; no `shared` or other skill is vendored.
 - `SKILL.md` is host-neutral; named operations are mapped by a semantic runtime adapter.
@@ -41,3 +41,12 @@ Wydanie po pełnym skanie ścieżek kanonicznych. Aktywne odwołania do nieistni
 
 Wydanie 6.97 należy dystrybuować jako pełny katalog `audyt-systemu-v4`
 (101 plików), nie jako sam diff plików audytowych.
+
+## CBOSA snapshot / provenance — 6.98
+
+- Zapisano rozdział `DIRECT_LIVE` vs `CRAWLED_OR_INDEXED`.
+- Snapshot oficjalnego dokumentu może nieść metrykę, sentencję i uzasadnienie,
+  ale sam nie zmienia statusu na ✅ [VER].
+- `site:` nie jest filtrem domenowym; obowiązuje POST-CHECK HOSTA.
+- F-183a pozostaje otwarta tylko dla pozytywnego direct-live w środowisku docelowym.
+- Liczba plików skilla pozostaje **101**.
