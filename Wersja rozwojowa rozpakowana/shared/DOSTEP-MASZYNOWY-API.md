@@ -1,7 +1,11 @@
 # DOSTĘP MASZYNOWY DO ŹRÓDEŁ — jak wywołać API, żeby odpowiedziało
 
 > **Plik:** `shared/DOSTEP-MASZYNOWY-API.md`
-> **Wersja:** 1.4 (2026-09-13d) — §1: trzeci reżim UA (SAOS i cała rodzina
+> **Wersja:** 1.5 (2026-09-14) — CBOSA: historyczny pomiar 503 oddzielony
+> od bieżącej reguły wykonawczej; dodano fresh-probe + deterministyczny
+> formularz HTML (/cbo/search, /cbo/find, /doc/{ID}) i exact-match.
+> Fallback indeksowy pozostaje tylko po niedostępności direct CBOSA.
+> **Wersja poprzednia:** 1.4 (2026-09-13d) — §1: trzeci reżim UA (SAOS i cała rodzina
 > `orzeczenia.*.gov.pl` odrzucają łańcuch przeglądarkowy) + odnotowany fałszywy
 > alarm „awaria MS"; §3: dosłowny 17-pozycyjny kontekst Tapestry, portale sądów
 > jako warstwa rozstrzygania AMBIGUOUS, zamienniki CBOSA odrzucone na
@@ -308,7 +312,65 @@ opublikowanych orzeczeń"). ➜ realizacja: **V-SYG-0.6** w `shared/SYGNATURY.md
 
 | Źródło | Kanał | Uwaga |
 |---|---|---|
-| `orzeczenia.nsa.gov.pl` | HTML | ⛔⛔ **2026-09-13b: HOST NIEOSIĄGALNY W CAŁOŚCI.** `curl` → 503 `upstream connect error` na `/`, `/cbo/query`, `/cbo/search`, `/cbo/find`, `/doc/{ID}` i nawet `/robots.txt`; `http://` i `https://`; oba UA; także po pauzie 65 s. `web_fetch` → `ROBOTS_DISALLOWED`. Reguła 12d spełniona. ⚠️ **Sprostowanie:** `nsa.gov.pl` i `www.nsa.gov.pl` zwracają **403 `x-deny-reason: host_not_allowed`** — są POZA listą dozwolonych domen; wcześniejszy zapis „`www.nsa.gov.pl` = 200" był błędny (F-187). ⛔⛔ **2026-09-13c: to NIE jest problem listy.** Po dopisaniu hostów do konfiguracji sieci CBOSA nadal oddaje 503 (5 prób w odstępach 20 s, bez zmiany); T25 klasyfikuje ją jako **jedyną regresję** z 52 sond. `remote connection failure` ≠ `host_not_allowed` — otwarcie ruchu tego nie naprawi. ➜ zastępczo: **kanał zdegradowany, niżej** |
+| `orzeczenia.nsa.gov.pl` | HTML server-side | **FRESH-PROBE obowiązkowy.** Pomiar 2026-09-13b/c w tamtym runtime: 503 na wszystkich ścieżkach; nie jest to globalny status źródła. Gdy portal odpowiada właściwym HTML-em → użyj direct CBOSA wg sekcji niżej i `shared/SYGNATURY.md` V-SYG-0.7. Gdy direct zawiedzie → V-SYG-0.5 fallback indeksowy. |
+
+### ⭐ CBOSA — direct HTML adapter (NSA/WSA, stan operacyjny 2026-09-14)
+
+CBOSA nie ma publicznego REST/JSON API, ale ma deterministyczny kontrakt
+server-side HTML. **Nie zaczynaj od web_search**, jeśli bieżący runtime potrafi
+wykonać direct request.
+
+Kolejność:
+
+```
+0. fresh-probe /cbo/query lub kontrolowany POST /cbo/search
+1. POST /cbo/search
+2. zachowaj Set-Cookie
+3. jeśli potrzeba: GET /cbo/find?p=N w TEJ SAMEJ sesji
+4. wyciągnij wszystkie unikalne /doc/{10-znakowy-ID}
+5. GET /doc/{ID} dla każdego kandydata
+6. exact-match sygnatury po normalizacji
+```
+
+Formularz exact-case:
+
+```text
+Content-Type: application/x-www-form-urlencoded
+
+wszystkieSlowa=
+wystepowanie=gdziekolwiek
+odmiana=on
+sygnatura={SYGNATURA}
+sad=dowolny
+rodzaj=dowolny
+symbole=
+odDaty=
+doDaty=
+sedziowie=
+funkcja=
+submit=Szukaj
+```
+
+⛔ **Bramki kompletności:**
+- nierozpoznany licznik wyników → OUT_OF_SCOPE;
+- licznik > liczba odczytanych unikalnych dokumentów → dokończ paginację;
+- powtórzona/zapętlona paginacja → OUT_OF_SCOPE;
+- niekompletny transport / Content-Length mismatch → OUT_OF_SCOPE;
+- krytyczny drift HTML (brak sądu, daty, sentencji) → OUT_OF_SCOPE;
+- „blisko pasująca” sygnatura → odrzuć;
+- 0 exact-match po kompletnym wyniku → NOT_FOUND;
+- 1 → FOUND; >=2 → AMBIGUOUS.
+
+Pełny kontrakt: `shared/SYGNATURY.md`, V-SYG-0.7.
+Implementacja produkcyjna: `orzeczenia-sadowe-v2/references/CBOSA-ADAPTER.md`
+i `orzeczenia-sadowe-v2/tools/cbosa_parser.py`.
+
+**Zakres treści:** poprawnie zamknięty dokument bez opublikowanej sekcji
+uzasadnienia może nadal być FOUND dla metryki/sentencji, ale
+`reasoning_available=false` — zakaz przypisywania tezy z uzasadnienia.
+Urwane uzasadnienie / urwany HTML = OUT_OF_SCOPE.
+
+Regresje 2026-09-14 po hardeningu: **22/22 PASS**.
 
 ### ⛔⛔ CBOSA — zamienniki SPRAWDZONE I ODRZUCONE (F-188, 2026-09-13d)
 
@@ -332,13 +394,15 @@ rozstrzyga sam.
 ✅ **Co wolno:** podać adres **człowiekowi** jako odnośnik do ręcznego sprawdzenia.
 ⛔ **Czego nie wolno:** odpytać w kanale kodu ani przez `web_fetch`.
 
-➜ **Skutek dla systemu:** pion sądowoadministracyjny **nadal nie ma binarnej
-kontroli sygnatur**. To najpoważniejsza otwarta luka — szersza niż `caseNumber`,
-bo obejmuje cały pion. Jedyne, co zostaje, to kanał zdegradowany poniżej.
+➜ **Skutek dla systemu po 2026-09-14:** przy działającym direct CBOSA pion
+NSA/WSA ma deterministyczną kontrolę exact-match oraz odczyt sentencji/
+uzasadnienia. Luka pozostaje wyłącznie w runtime'ach, w których direct CBOSA
+jest niedostępna — wtedy obowiązuje jednostronny kanał zdegradowany poniżej.
 
 ### ⚠️ CBOSA — kanał zdegradowany przez indeks wyszukiwarki (F-183a)
 
-Host jest martwy, ale **strony dokumentów CBOSA pozostają w indeksie
+Stosuj **dopiero gdy fresh-probe/direct CBOSA z sekcji wyżej zawiedzie w bieżącym
+runtime**. W takim środowisku **strony dokumentów CBOSA mogą pozostawać w indeksie
 wyszukiwarki**, z metryką w tytule i trwałym adresem:
 
 ```
@@ -348,7 +412,7 @@ adres:      https://orzeczenia.nsa.gov.pl/doc/{DOCID}
 ```
 
 Zmierzone 2026-09-13b: indeks zawiera orzeczenia aż po 2026-02-13.
-⛔ Adres `/doc/{DOCID}` jest **niepobieralny** (`ROBOTS_DISALLOWED`) — kanał daje
+⛔ W tym fallbacku nie zakładaj, że `/doc/{DOCID}` jest pobieralny — kanał daje
 **metrykę, nie treść**. Zakres potwierdzenia = ISTNIENIE (K-SYG-6).
 ⛔⛔ Na fabrykacie kanał zwraca **niepuste** wyniki („blisko pasujące"
 sygnatury). Rozstrzyga wyłącznie porównanie SYGNATURY W TYTULE z pytaną —
