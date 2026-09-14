@@ -565,8 +565,10 @@ Skrót operacyjny; kanoniczny kontrakt statusów pozostaje w `shared/SYGNATURY.m
      sentencja są obowiązkowe; uzasadnienie ma osobny flag
      `reasoning_available`. Gdy `false` → zakaz przypisywania tezy z
      uzasadnienia, mimo że samo orzeczenie pozostaje FOUND;
-   - V-SYG-0.5 przez indeks wyszukiwarki → `FOUND`,
-     wyłącznie **ISTNIENIE**; zakaz przypisywania tezy lub cytatu;
+   - V-SYG-0.5 RETRIEVAL/SNAPSHOT → `FOUND` po POST-CHECK HOSTA i exact-match;
+     zachowaj faktyczny `content_scope` (metryka+sentencja / uzasadnienie częściowe
+     / pełne) do researchu. Provenance = `CRAWLED_OR_INDEXED`; bez niezależnego
+     direct potwierdzenia nie oznaczaj ✅ [VER];
    - `FRAGMENT` dopiero po wskazaniu konkretnego miejsca zgodnie z
      `shared/WERYFIKACJA-SLAD.md` i Zasadą 2B.
 
@@ -688,8 +690,9 @@ wykonaj gradient TREŚĆ/FRAGMENT na realnym uzasadnieniu.
 i nie ma własnego RZĘDU.
 
 ⚠️ Dostępność jest środowiskowa. Przed użyciem wykonaj fresh probe. Jeżeli direct
-CBOSA jest niedostępna, zastosuj V-SYG-0.5 z `shared/SYGNATURY.md`; fallback
-daje wyłącznie metrykę/ISTNIENIE i nie nadaje się do potwierdzania treści tezy.
+CBOSA jest niedostępna, zastosuj V-SYG-0.5 z `shared/SYGNATURY.md`. Retrieval może
+przekazać metrykę, sentencję, a czasem uzasadnienie; wykorzystaj faktycznie odczytaną
+treść badawczo z `access_mode=CRAWLED_OR_INDEXED`, ale nie promuj jej do ✅ [VER].
 
 Każde trafienie → 1-T.3 przed powołaniem.
 
@@ -702,7 +705,9 @@ Dla każdego kandydata:
 → wykonaj exact-match V-SYG / post-check na CAŁYM zbiorze;
 → direct CBOSA: tylko FOUND po odczycie /doc/{ID} daje ISTNIENIE+TREŚĆ;
   następnie sprawdź, czy sentencja/uzasadnienie naprawdę wspiera przypisywaną tezę;
-→ CBOSA fallback V-SYG-0.5: FOUND = tylko ISTNIENIE; nie przypisuj tezy;
+→ CBOSA fallback V-SYG-0.5: po host post-check + exact-match odczytaj faktyczny
+  `content_scope`; treść może wspierać research tezy, ale provenance pozostaje
+  `CRAWLED_OR_INDEXED` i bez niezależnego direct potwierdzenia nie daje ✅ [VER];
 → SAOS: kandydat dla sądów powszechnych/SN musi zostać potwierdzony w źródle
   właściwym (orzeczenia.ms.gov.pl / portal lokalny / sn.pl), chyba że zweryfikowany
   rekord prowadzi do oryginalnego źródła i odczytano je bezpośrednio;
