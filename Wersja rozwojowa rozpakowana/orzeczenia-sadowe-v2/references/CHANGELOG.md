@@ -1,5 +1,13 @@
 # CHANGELOG — orzeczenia-sadowe-v2
 
+**2.17 (2026-09-14) — retrieval/snapshot CBOSA jako materiał badawczy z jawnym provenance:**
+- fallback V-SYG-0.5 nie jest już redukowany do samego ISTNIENIA, gdy host
+  faktycznie zwraca oficjalny snapshot `/doc/{ID}`;
+- obowiązkowe: POST-CHECK HOSTA → exact-match → content_scope;
+- `site:` nie jest filtrem bezpieczeństwa;
+- snapshot może dostarczyć metrykę, sentencję i uzasadnienie, ale pozostaje
+  `CRAWLED_OR_INDEXED` i sam nie uzyskuje ✅ [VER];
+- direct parser i jego testy 22/22 pozostają bez zmian.
 **2.16 (2026-09-14) — integracja adaptera CBOSA z kanonicznym routingiem źródeł:**
 - CBOSA powiązana z `shared/HIERARCHIA-ZRODEL.md` jako RZĄD 2A oraz z
   `SYGNATURY`, `DOSTEP-MASZYNOWY-API`, `PRAWO-HARDGATE-ORZECZENIA` i MCP fallback.
