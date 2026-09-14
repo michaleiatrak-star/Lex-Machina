@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.59"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.60"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -44,13 +44,19 @@ limitations:
     opisane tu jawnie, żeby FAZA 2E w trybie deklarowanym go NIE zgubiła.
     Decyzja architektoniczna (uznać jako świadomy wzorzec 'plik-most' czy
     wydzielić poza shared/) pozostaje OTWARTA — do następnego audytu."
-  - rozmiar (196 plików, ~2,4 MB — stan 2026-08-23) — każda zmiana pliku kanonicznego ma
+  - rozmiar (173 pliki, ~2,0 MB — stan 2026-09-14) — każda zmiana pliku kanonicznego ma
     potencjalnie systemowy promień rażenia; edytować tylko przez
     audyt-systemu-v4 z pełną weryfikacją CHECKLIST-DEDUP.md
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.45 (2026-09-12c, O-11 c.d.): TABELE-OPLAT 1.6 — domknięcie
+  Wersja bieżąca: 3.60 (2026-09-14): kanoniczny routing orzecznictwa NSA/WSA.
+  Dodano shared/CBOSA-ADAPTER.md; HIERARCHIA-ZRODEL RZĄD 2A, SYGNATURY,
+  DOSTEP-MASZYNOWY-API, PRAWO-HARDGATE-ORZECZENIA, MCP-INTEGRACJA i
+  KONEKTORY-REKOMENDOWANE kierują direct CBOSA przed fallbackiem indeksowym.
+  Fail-closed: drift HTML/paginacja/transport → OUT_OF_SCOPE; exact-match wymagany.
+  Poprzednia historia: references/CHANGELOG.md.
+  Wersja historyczna 3.45 (2026-09-12c, O-11 c.d.): TABELE-OPLAT 1.6 — domknięcie
   rodzin opłat poza rdzeniem KSCU: wieczystoksięgowe i KIO (art. 42-48, 34, 34a),
   koszty komornicze (Dz.U. 2024 poz. 377), opłata skarbowa (Dz.U. 2025 poz. 1154),
   taksa notarialna (Dz.U. 2024 poz. 1566) i koszty procesu karnego (KPK
