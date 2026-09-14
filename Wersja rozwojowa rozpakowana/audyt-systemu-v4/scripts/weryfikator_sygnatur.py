@@ -195,20 +195,22 @@ def v_syg_0(syg: str) -> dict:
                           "rozstrzyga kontekst sprawy; przy wątpliwości odpytaj obie bazy")
 
     if baza == "CBOSA":
-        # ⛔ Kanał kodu dla CBOSA jest martwy, a V-SYG-0.5 wymaga web_search,
-        #    którego ten skrypt NIE MA. Zwraca więc zlecenie, nie wynik —
-        #    milczące OUT_OF_SCOPE byłoby pozorowanym wykonaniem.
+        # ⛔ Ten skrypt nie ma kanału retrieval ani gwarantowanego direct CBOSA.
+        #    Nie orzeka więc o globalnej niedostępności źródła; deleguje do
+        #    kanonicznego V-SYG-0.5 / V-SYG-0.7.
         wynik.update(status="OUT_OF_SCOPE",
                      zakres_potwierdzenia=None,
-                     uzasadnienie="CBOSA nieosiągalna (503 na wszystkich ścieżkach), "
-                                  "SAOS ADMINISTRATIVE = 0 rekordów — kanał kodu "
-                                  "wyczerpany (F-183a)",
+                     uzasadnienie="ten runtime skryptu nie potwierdził direct CBOSA; "
+                                  "SAOS ADMINISTRATIVE nie jest zamiennikiem — "
+                                  "wymagana procedura host-aware (F-183a)",
                      wymagane_dalsze_dzialanie={
-                         "procedura": "V-SYG-0.5 (kanał zdegradowany)",
-                         "zapytanie": f'site:orzeczenia.nsa.gov.pl "{normalizuj(syg)}"',
-                         "post_check": "sygnatura w TYTULE wyniku == sygnatura pytana",
-                         "dopuszczalne_wyniki": ["FOUND (zakres: ISTNIENIE)", "OUT_OF_SCOPE"],
-                         "zakaz": "NOT_FOUND — brak w indeksie != brak w bazie",
+                         "procedura": "fresh-probe V-SYG-0.7; przy braku direct → V-SYG-0.5 RETRIEVAL/SNAPSHOT",
+                         "zapytanie_discovery": f'site:orzeczenia.nsa.gov.pl "{normalizuj(syg)}"',
+                         "post_check_hosta": "https + hostname == orzeczenia.nsa.gov.pl + path /doc/{10x A-Z0-9}",
+                         "post_check_sygnatury": "exact-match po normalizacji; near-match odrzuć",
+                         "provenance": "CRAWLED_OR_INDEXED dla snapshotu; content_scope wg faktycznie odczytanej treści",
+                         "dopuszczalne_wyniki": ["FOUND w retrieval + content_scope", "OUT_OF_SCOPE"],
+                         "zakaz": "NOT_FOUND — brak w retrieval != brak w bazie; snapshot != DIRECT_LIVE",
                      })
         return wynik
     if baza in ("TK", "KIO", "NIEZNANE"):
