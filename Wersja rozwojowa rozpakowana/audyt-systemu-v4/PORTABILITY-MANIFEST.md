@@ -1,5 +1,7 @@
 # Portability manifest — audyt-systemu-v4
 
+- Release: **6.97 (2026-09-14)**
+
 - Full own skill tree preserved; no `shared` or other skill is vendored.
 - `SKILL.md` is host-neutral; named operations are mapped by a semantic runtime adapter.
 - Current package files: **71**.
@@ -24,3 +26,18 @@ Wydanie po pełnym skanie ścieżek kanonicznych. Aktywne odwołania do nieistni
   przez host zamiast kodowane jako ścieżka jednego środowiska;
 - bezpośrednie endpointy dostawców AI w statycznych artefaktach są wyłączone;
 - wydanie podlega skanowi prywatności/secrets oraz manifestowi integralności całego release.
+
+
+## CBOSA / źródła orzecznicze — 6.97
+
+- F-183a zawężona z globalnej luki do pomiaru środowiska docelowego.
+- Historyczny pomiar CBOSA 503 z 2026-09-13 pozostaje dowodem dla tamtego runtime,
+  ale nie jest już regułą globalną.
+- Kanoniczny direct adapter mieszka w `shared/CBOSA-ADAPTER.md`; audyt sprawdza
+  jego powiązanie z RZĄD 2A, V-SYG-0.7 i hard gate.
+- Implementacja referencyjna adaptera ma 22/22 testów regresyjnych PASS.
+
+## Rule 7
+
+Wydanie 6.97 należy dystrybuować jako pełny katalog `audyt-systemu-v4`
+(71 plików), nie jako sam diff plików audytowych.
