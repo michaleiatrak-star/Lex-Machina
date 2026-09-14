@@ -1,7 +1,8 @@
 # SYGNATURY — Moduł Walidacji Sygnatur Sądowych
 
 > **Plik:** `shared/SYGNATURY.md`
-> **Wersja:** 1.5 (2026-09-14) — dodano V-SYG-0.7 DIRECT-CBOSA: fresh-probe,
+> **Wersja:** 1.6 (2026-09-14) — V-SYG-0.5: POST-CHECK HOSTA, rozdzielenie `site:` od filtra domeny oraz jawny zakres treści snapshotu bez promocji do DIRECT_LIVE / ✅ [VER].
+> **Wersja poprzednia:** 1.5 (2026-09-14) — dodano V-SYG-0.7 DIRECT-CBOSA: fresh-probe,
 >              formularz HTML + pełna paginacja + /doc/{ID} + exact-match;
 >              V-SYG-0.5 pozostaje fallbackiem wyłącznie po niedostępności
 >              direct CBOSA. Fail-closed dla driftu HTML/transportu.
@@ -376,89 +377,104 @@ przejdź do V-SYG-0.5.
 
 ---
 
-## V-SYG-0.5 — KANAŁ ZDEGRADOWANY (pion sądowoadministracyjny, F-183a)
+## V-SYG-0.5 — KANAŁ RETRIEVAL / SNAPSHOT (pion sądowoadministracyjny, F-183a)
 
-> Dodano: 2026-09-13b; od 2026-09-14 jest to **wyłącznie FALLBACK** po
-> nieudanym V-SYG-0.7 w bieżącym runtime. Nie jest zamiennikiem direct CBOSA —
-> jest kontrolą JEDNOSTRONNĄ.
+> Od 2026-09-14 jest to FALLBACK po nieudanym V-SYG-0.7 w bieżącym runtime.
+> Kanał jest asymetryczny: trafienie exact-match może dostarczyć wartościowy
+> materiał, ale brak trafienia nigdy nie dowodzi nieistnienia sprawy.
 
-⛔ **Dlaczego fallback działa.** W środowiskach, w których direct CBOSA zwraca
-503 / jest blokowana przez kanał hosta, **indeks wyszukiwarki może nadal zawierać
-strony dokumentów CBOSA** — wraz
-z metryką w tytule i trwałym adresem `/doc/{DOCID}`. Zmierzone 2026-09-13:
-indeks zawiera nawet orzeczenie z 2026-02-13, więc nie jest to archiwum
-historyczne.
+⛔ `site:` NIE JEST BRAMKĄ DOMENOWĄ. W dwóch niezależnych stosach
+wyszukiwawczych zapytanie z `site:orzeczenia.nsa.gov.pl` zwracało także
+wyniki spoza tej domeny. Operator służy wyłącznie discovery.
 
 ```
-V-SYG-0.5.1  ZAPYTANIE:
+V-SYG-0.5.1  DISCOVERY:
+             preferuj natywny twardy filtr domeny hosta, jeśli istnieje;
+             w przeciwnym razie:
              web_search: site:orzeczenia.nsa.gov.pl "{SYGNATURA po V-SYG-0.1}"
-             Cudzysłów obowiązkowy. Bez `site:` kanał zwraca agregatory
-             RZĘDU 2B i traci rozstrzygalność.
+             ⛔ Sam operator `site:` nie nadaje wynikom statusu CBOSA.
 
-V-SYG-0.5.2  POST-CHECK TYTUŁU (jedyna warstwa rozstrzygająca):
-             wzorzec tytułu strony CBOSA:
-               {SYGNATURA} - {Wyrok|Postanowienie|Uchwała} {NSA|WSA w <miasto>} z {RRRR-MM-DD}
-             → istnieje wynik, którego TYTUŁ zawiera sygnaturę pytaną
-               (po normalizacji, porównanie dokładne)          → FOUND
-             → żaden tytuł nie zawiera sygnatury pytanej        → OUT_OF_SCOPE
-             ⛔ Sama obecność wyników NIE jest potwierdzeniem.
+V-SYG-0.5.1a POST-CHECK HOSTA — PRZED exact-match:
+             sparsuj URL każdego kandydata.
+             warunki łączne:
+               scheme == https
+               hostname == orzeczenia.nsa.gov.pl
+               path pasuje do ^/doc/[A-Z0-9]{10}/?$
+             → niespełnienie któregokolwiek warunku = ODRZUĆ wynik.
+             ⛔ Porównanie pełnego hostname, nie startswith/substring.
+             ⛔ Odrzuconego obcego hosta NIE odpytuj automatycznie.
 
-V-SYG-0.5.3  ZAKRES POTWIERDZENIA = ISTNIENIE (K-SYG-6).
-             Adres /doc/{DOCID} jest NIEPOBIERALNY (ROBOTS_DISALLOWED),
-             więc treści nie odczytano. Znacznik ✅ [VER-ISTNIENIE],
-             zakaz powoływania tezy.
+V-SYG-0.5.2  POST-CHECK EXACT-MATCH:
+             po V-SYG-0.5.1a porównaj sygnaturę pytaną z sygnaturą
+             w tytule lub reprezentacji dokumentu po normalizacji.
+             1 exact-match → FOUND w KANALE RETRIEVAL.
+             brak exact-match → OUT_OF_SCOPE.
+             „najbliższa” sygnatura NIGDY nie zastępuje pytanej.
+
+V-SYG-0.5.3  ZAKRES TREŚCI + PROVENANCE:
+             zawsze zapisz access_mode=CRAWLED_OR_INDEXED, chyba że osobny
+             bieżący request do originu potwierdzi DIRECT_LIVE.
+
+             A. tylko tytuł/snippet:
+                content_scope=EXISTENCE_ONLY
+
+             B. retrieval udostępnia stronę /doc/{ID} z metryką i sentencją:
+                content_scope=METADATA_SENTENCE
+
+             C. widoczna sekcja Uzasadnienie, ale nie potwierdzono jej końca:
+                content_scope=METADATA_SENTENCE_REASONING_PARTIAL
+
+             D. widoczny początek i koniec uzasadnienia oraz zamknięcie
+                reprezentacji dokumentu:
+                content_scope=METADATA_SENTENCE_REASONING_FULL
+
+             ⛔ content_scope opisuje CO odczytano, access_mode — JAK.
+             Żadne z nich nie jest piątym statusem weryfikacji.
+
+             Snapshot może służyć do researchu, klasyfikacji, mapowania linii,
+             analizy sentencji i — gdy obecne — argumentacji.
+             Sam snapshot NIE daje ✅ [VER] / DIRECT_LIVE i nie przechodzi
+             bramki materiału do finalnego pisma bez niezależnej weryfikacji.
 
 V-SYG-0.5.4  ⛔⛔ TEN KANAŁ NIGDY NIE PRODUKUJE NOT_FOUND.
-             Brak w indeksie wyszukiwarki nie jest brakiem w bazie —
-             indeksowanie jest niezupełne i nieopisane. Zero trafień
-             = OUT_OF_SCOPE (K-SYG-1), nigdy „sygnatura nie istnieje".
+             Zero trafień / brak exact-hit w retrieval = OUT_OF_SCOPE.
 ```
 
-⛔⛔ **Post-check tytułu nie jest formalnością — bez niego kanał kłamie.**
-Zmierzone 2026-09-13b, dwa fabrykaty, oba dały **niepuste** wyniki:
+### Pomiar znaczenia kanału — 2026-09-14
 
-| Zapytanie (fabrykat) | Co wróciło | Czy tytuł zawiera pytaną sygnaturę |
-|---|---|---|
-| `"I FSK 999999/23"` | `I FSK 919/23`, `III FSK 1158/23`, strony tematyczne | **NIE** → OUT_OF_SCOPE |
-| `"II SA/Wa 1234/22"` | `V SA/Wa 1234/19` — inna izba, inny rok | **NIE** → OUT_OF_SCOPE |
+Praktyczna próba 10 realnych sygnatur NSA/WSA w środowisku z retrieval:
+- 10/10 oficjalnych snapshotów `/doc/{ID}` udostępniało co najmniej metrykę + sentencję;
+- 5/10 miało potwierdzalny koniec pełnego uzasadnienia;
+- 2/10 pokazywało uzasadnienie bez wystarczającego dowodu kompletności;
+- 3/10 dawało metrykę + sentencję bez potwierdzonego uzasadnienia.
 
-Kontrola pozytywna: `site:orzeczenia.nsa.gov.pl "I FSK" wyrok NSA 2023` zwraca
-tytuły w pełnym wzorcu (`I FSK 229/20 - Wyrok NSA z 2023-04-21`,
-`I FSK 949/23 - Wyrok NSA z 2026-02-13`) z adresami `/doc/{DOCID}`.
+To NIE jest estymacja pokrycia całego korpusu. Dowodzi natomiast, że kanał
+retrieval nie powinien być redukowany do samego snippetu/ISTNIENIA tam, gdzie
+host rzeczywiście przekazuje reprezentację oficjalnego dokumentu.
 
-To jest **dokładnie ten sam tryb awarii co K-SYG-2 i V-SYG-0.4**, trzeci raz
-w innym kanale: wyszukiwarka oddaje „blisko pasującą" sygnaturę zamiast pustki.
-Reguła jest wspólna dla wszystkich trzech: **rozstrzyga porównanie zwróconego
-identyfikatora z pytanym, nigdy licznik trafień.**
+### Kontrole falsyfikacyjne
 
-### Luka pionu sądowoadministracyjnego — stan po naprawie (F-183a, ZAWĘŻONA)
+- fabrykowane/podobne sygnatury mogą zwrócić prawdziwe, ale INNE dokumenty;
+- `site:` może zwrócić wynik spoza hosta kanonicznego — dlatego POST-CHECK HOSTA jest obowiązkowy;
+- pełna treść w crawlerze może współistnieć z 500/502/503 przy bieżącym otwarciu originu.
 
-Przed naprawą: brak jakiejkolwiek kontroli. Po naprawie: kontrola
-**jednostronna** — kanał potwierdza istnienie, ale nie zaprzecza istnieniu.
+### Luka pionu sądowoadministracyjnego — stan po 1.6
 
 | Sytuacja | Wynik |
 |---|---|
-| sygnatura NSA/WSA istnieje i jest zaindeksowana | FOUND, zakres ISTNIENIE |
-| sygnatura fabrykowana | OUT_OF_SCOPE (nie da się powołać) |
-| sygnatura istnieje, ale nie jest zaindeksowana | OUT_OF_SCOPE (fałszywie ostrożnie) |
+| exact-hit w oficjalnym snapshotcie | FOUND w retrieval + jawny content_scope |
+| snapshot zawiera pełne uzasadnienie | research treści dozwolony; provenance nadal CRAWLED_OR_INDEXED |
+| sygnatura fabrykowana / tylko near-match | OUT_OF_SCOPE |
+| sygnatura istnieje, ale nie jest zaindeksowana | OUT_OF_SCOPE |
+| brak snapshotu | OUT_OF_SCOPE |
 
-⛔ **Co nadal jest luką i dlaczego F-183 zostaje otwarta w wersji „a":**
-(1) nie da się orzec NOT_FOUND, więc system nie powie użytkownikowi „ta
-sygnatura nie istnieje"; (2) zakres ISTNIENIE odcina powoływanie tezy, co
-w praktyce pisma procesowego jest połową wartości orzeczenia; (3) kanał zależy
-od indeksu strony trzeciej, którego pokrycia nie da się zmierzyć od wewnątrz.
-Warunek zamknięcia bez reszty: powrót hosta `orzeczenia.nsa.gov.pl` albo inny
-kanał RZĘDU 1 dla NSA/WSA.
+⛔ Kanał retrieval nie produkuje NOT_FOUND i sam nie daje statusu ✅ [VER].
+Direct CBOSA V-SYG-0.7 pozostaje kanałem silniejszym; fresh-probe nadal obowiązkowy.
 
-⛔ **Zamienniki sprawdzone i ODRZUCONE (F-188, 2026-09-13d) — nie proponuj ich
-ponownie.** `www.orzeczenia-nsa.pl` (HTTP 200) i `szukio.pl` (HTTP 429) odpadają
-**na zakazie w `robots.txt`**, nie na dostępności: pierwszy ma `Disallow: /szukaj`
-dla wszystkich automatów i `Disallow: /` dla naszego agenta, drugi `Disallow: /`.
-Wolno podać je człowiekowi jako odnośnik; nie wolno odpytywać w kanale kodu.
-Szczegóły i odtworzenie: `shared/DOSTEP-MASZYNOWY-API.md` §3.
+⛔ Obce hosty nie stają się CBOSA tylko dlatego, że wyszukiwarka zwróciła je
+na zapytanie z `site:`. Szczegóły: `shared/DOSTEP-MASZYNOWY-API.md` §3.
 
 ---
-
 ## V-SYG-0.6 — ROZSTRZYGNIJ AMBIGUOUS NA PORTALU SĄDU (F-191, 2026-09-13d)
 
 > Stosuj **wyłącznie** wtedy, gdy V-SYG-0.4 zwrócił `AMBIGUOUS` dla sądu
