@@ -5,6 +5,11 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "Wersja rozwojowa rozpakowana/shared/**"
+      - "Wersja rozwojowa rozpakowana/orzeczenia-sadowe-v2/**"
+      - "Wersja rozwojowa rozpakowana/audyt-systemu-v4/**"
+      - ".github/workflows/repack-core-development-zips.yml"
 
 permissions:
   contents: write
@@ -14,12 +19,12 @@ jobs:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout current branch
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Verify checksums and build complete ZIPs
+      - name: Verify checksums and rebuild complete archives
         shell: bash
         run: |
           set -euo pipefail
@@ -30,37 +35,49 @@ jobs:
 
           source_root = Path("Wersja rozwojowa rozpakowana")
           target_root = Path("WERSJA ROZWOJOWA")
-          skills = ("shared", "orzeczenia-sadowe-v2", "audyt-systemu-v4")
-          fixed_dt = (1980, 1, 1, 0, 0, 0)
+          skills = [
+              "shared",
+              "orzeczenia-sadowe-v2",
+              "audyt-systemu-v4",
+          ]
 
-          for name in skills:
-              skill_dir = source_root / name
+          FIXED_DT = (1980, 1, 1, 0, 0, 0)
+
+          def parse_checksums(skill_dir: Path) -> dict[str, str]:
               checksum_file = skill_dir / "CHECKSUMS.sha256"
-              expected = {}
-
+              if not checksum_file.is_file():
+                  raise SystemExit(f"Brak {checksum_file}")
+              result: dict[str, str] = {}
               for raw in checksum_file.read_text(encoding="utf-8").splitlines():
                   raw = raw.strip()
                   if not raw:
                       continue
-                  digest, rel = raw.split(None, 1)
+                  try:
+                      digest, rel = raw.split(None, 1)
+                  except ValueError as exc:
+                      raise SystemExit(f"Błędna linia checksum: {raw!r}") from exc
                   rel = rel.strip()
                   if rel.startswith("./"):
                       rel = rel[2:]
-                  expected[rel] = digest.lower()
+                  result[rel] = digest.lower()
+              return result
 
+          def verify_skill(skill_dir: Path) -> list[Path]:
               files = sorted(p for p in skill_dir.rglob("*") if p.is_file())
               payload = [
                   p for p in files
                   if p.relative_to(skill_dir).as_posix() != "CHECKSUMS.sha256"
               ]
-
+              expected = parse_checksums(skill_dir)
               actual_names = {p.relative_to(skill_dir).as_posix() for p in payload}
               expected_names = set(expected)
-              if actual_names != expected_names:
-                  missing = sorted(actual_names - expected_names)
-                  stale = sorted(expected_names - actual_names)
+
+              missing = sorted(actual_names - expected_names)
+              stale = sorted(expected_names - actual_names)
+              if missing or stale:
                   raise SystemExit(
-                      f"{name}: checksum manifest mismatch; missing={missing}; stale={stale}"
+                      f"{skill_dir.name}: niespójny manifest checksum; "
+                      f"brak wpisów={missing}, martwe wpisy={stale}"
                   )
 
               for p in payload:
@@ -68,55 +85,60 @@ jobs:
                   actual = hashlib.sha256(p.read_bytes()).hexdigest()
                   if actual != expected[rel]:
                       raise SystemExit(
-                          f"{name}: SHA-256 mismatch for {rel}: "
+                          f"{skill_dir.name}: SHA-256 mismatch {rel}: "
                           f"{actual} != {expected[rel]}"
                       )
+              return files
 
-              out = target_root / f"{name}.zip"
+          def build_zip(skill_dir: Path, files: list[Path], out: Path) -> None:
               out.parent.mkdir(parents=True, exist_ok=True)
               with zipfile.ZipFile(
-                  out, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9
+                  out,
+                  "w",
+                  compression=zipfile.ZIP_DEFLATED,
+                  compresslevel=9,
               ) as zf:
                   for p in files:
                       rel = p.relative_to(skill_dir)
-                      arcname = (Path(name) / rel).as_posix()
-                      info = zipfile.ZipInfo(arcname, date_time=fixed_dt)
+                      arcname = (Path(skill_dir.name) / rel).as_posix()
+                      info = zipfile.ZipInfo(arcname, date_time=FIXED_DT)
                       info.compress_type = zipfile.ZIP_DEFLATED
                       info.external_attr = 0o100644 << 16
                       info.flag_bits |= 0x800
-                      zf.writestr(
-                          info,
-                          p.read_bytes(),
-                          compress_type=zipfile.ZIP_DEFLATED,
-                          compresslevel=9,
-                      )
+                      zf.writestr(info, p.read_bytes(), compress_type=zipfile.ZIP_DEFLATED, compresslevel=9)
 
               with zipfile.ZipFile(out, "r") as zf:
-                  if zf.testzip() is not None:
-                      raise SystemExit(f"{name}: corrupt ZIP")
-                  archived = [n for n in zf.namelist() if not n.endswith("/")]
-                  if len(archived) != len(files):
+                  bad = zf.testzip()
+                  if bad is not None:
+                      raise SystemExit(f"Uszkodzony ZIP {out}: {bad}")
+                  expected_skill = f"{skill_dir.name}/SKILL.md"
+                  if expected_skill not in zf.namelist():
+                      raise SystemExit(f"Brak {expected_skill} w {out}")
+                  if len([n for n in zf.namelist() if not n.endswith("/")]) != len(files):
                       raise SystemExit(
-                          f"{name}: ZIP file count {len(archived)} != source {len(files)}"
+                          f"{out}: liczba plików ZIP nie zgadza się z katalogiem źródłowym"
                       )
-                  if f"{name}/SKILL.md" not in archived:
-                      raise SystemExit(f"{name}: SKILL.md missing from ZIP")
 
-              print(f"OK {name}: {len(files)} files, {out.stat().st_size} bytes")
+          for name in skills:
+              skill_dir = source_root / name
+              if not skill_dir.is_dir():
+                  raise SystemExit(f"Brak katalogu {skill_dir}")
+              files = verify_skill(skill_dir)
+              out = target_root / f"{name}.zip"
+              build_zip(skill_dir, files, out)
+              print(f"OK {name}: {len(files)} plików -> {out} ({out.stat().st_size} B)")
           PY
 
-      - name: Commit ZIPs
+      - name: Commit rebuilt archives
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "WERSJA ROZWOJOWA/shared.zip"
-          git add "WERSJA ROZWOJOWA/orzeczenia-sadowe-v2.zip"
-          git add "WERSJA ROZWOJOWA/audyt-systemu-v4.zip"
+          git add             "WERSJA ROZWOJOWA/shared.zip"             "WERSJA ROZWOJOWA/orzeczenia-sadowe-v2.zip"             "WERSJA ROZWOJOWA/audyt-systemu-v4.zip"
 
           if git diff --cached --quiet; then
-            echo "ZIPs already match verified sources."
+            echo "Archiwa już odpowiadają źródłom; brak commita."
             exit 0
           fi
 
