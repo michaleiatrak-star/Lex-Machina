@@ -558,7 +558,10 @@ Skrót operacyjny; kanoniczny kontrakt statusów pozostaje w `shared/SYGNATURY.m
    `OUT_OF_SCOPE`, nie `NOT_FOUND`.
 6. **Zakres potwierdzenia.**
    - direct CBOSA + odczyt `/doc/{ID}` → `FOUND`,
-     **ISTNIENIE+TREŚĆ**; parser odczytuje metrykę, sentencję i uzasadnienie;
+     **ISTNIENIE+TREŚĆ** tylko w zakresie faktycznie odczytanym. Metryka i
+     sentencja są obowiązkowe; uzasadnienie ma osobny flag
+     `reasoning_available`. Gdy `false` → zakaz przypisywania tezy z
+     uzasadnienia, mimo że samo orzeczenie pozostaje FOUND;
    - V-SYG-0.5 przez indeks wyszukiwarki → `FOUND`,
      wyłącznie **ISTNIENIE**; zakaz przypisywania tezy lub cytatu;
    - `FRAGMENT` dopiero po wskazaniu konkretnego miejsca zgodnie z
@@ -663,17 +666,23 @@ tools/cbosa_parser.py
 
 Parser:
 - wyciąga i deduplikuje `/doc/{ID}`,
-- odczytuje sygnaturę, sąd, datę, sentencję i pełne uzasadnienie,
+- odczytuje sygnaturę, sąd, datę, sentencję i — gdy opublikowane — uzasadnienie,
+- zwraca `reasoning_available`, aby brak uzasadnienia nie był mylony z pełną treścią,
 - normalizuje kosmetykę sygnatury,
 - filtruje **cały** zbiór kandydatów,
 - odrzuca „blisko pasujące” sygnatury,
 - zwraca `FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE`,
-- fail-closed przy niepełnej paginacji lub błędzie pobrania.
+- fail-closed przy nierozpoznanym liczniku, niepełnej/zapętlonej paginacji,
+  krytycznym driftcie HTML, błędzie pobrania i przerwanym transporcie.
 
 Dla researchu po treści można użyć pola `wszystkieSlowa` jako wejścia tekstowego
 formularza i dodatkowych filtrów, ale nie zgaduj nazw nieweryfikowanych kontrolek.
 Jeżeli potrzebujesz konkretnej tezy, odczytaj pełne `/doc/{ID}` kandydatów i
 wykonaj gradient TREŚĆ/FRAGMENT na realnym uzasadnieniu.
+
+⚠️ **RZĄD źródła:** CBOSA jest źródłem **RZĘDU 2A** zgodnie z
+`shared/HIERARCHIA-ZRODEL.md`; adapter/parser jest wyłącznie kanałem transportowym
+i nie ma własnego RZĘDU.
 
 ⚠️ Dostępność jest środowiskowa. Przed użyciem wykonaj fresh probe. Jeżeli direct
 CBOSA jest niedostępna, zastosuj V-SYG-0.5 z `shared/SYGNATURY.md`; fallback
