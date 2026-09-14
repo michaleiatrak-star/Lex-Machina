@@ -130,7 +130,7 @@ nich odwołują).
 | KRS (`ekrs.ms.gov.pl` / `prs.ms.gov.pl`) | 4 | ✅ **TAK** | Otwarte API KRS (`api-krs.ms.gov.pl`, RESTful, JSON) od 2022, na podstawie ustawy o otwartych danych — bez logowania. Osobne "Full API" (dane wrażliwe) wymaga decyzji ministra, nieistotne dla weryfikacji prawnej |
 | NBP (`nbp.pl`) | 3 | ✅ **TAK** | `api.nbp.pl` — kursy walut i złota, JSON/XML, bez autoryzacji, od 1.08.2025 wyłącznie HTTPS |
 | CEIDG / biznes.gov.pl | 3 | ✅ **TAK** (z kluczem) | Hurtownia Danych CEIDG i Biznes.gov.pl, API v2, dokumentacja publiczna, wymaga bezpłatnego wniosku o klucz API (`dane.biznes.gov.pl`) |
-| CBOSA (`orzeczenia.nsa.gov.pl`) | (poza tą listą, ale kluczowe) | ❌ brak publicznego REST/JSON API; ✅ deterministyczny HTML | Formularz server-side jest wystarczający do adaptera: POST `/cbo/search` + cookies + `/cbo/find?p=N` + `/doc/{ID}`; exact-match/fail-closed wg `shared/SYGNATURY.md` V-SYG-0.7 i `orzeczenia-sadowe-v2/references/CBOSA-ADAPTER.md` |
+| CBOSA (`orzeczenia.nsa.gov.pl`) | (poza tą listą, ale kluczowe) | ❌ brak publicznego REST/JSON API; ✅ deterministyczny HTML | Formularz server-side jest wystarczający do adaptera: POST `/cbo/search` + cookies + `/cbo/find?p=N` + `/doc/{ID}`; exact-match/fail-closed wg `shared/SYGNATURY.md` V-SYG-0.7 i `shared/CBOSA-ADAPTER.md` |
 
 **Wniosek końcowy (research zamknięty 2026-07-13k):** 5 źródeł z potwierdzonym
 publicznym API bez konektora przed tą sesją (EUR-Lex, KRS, NBP, SUDOP, CEIDG)
