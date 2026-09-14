@@ -1,9 +1,9 @@
 ---
 name: orzeczenia-sadowe-v2
-version: "2.14"
+version: "2.15"
 type: executive-analiza
 status: production
-compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_document_and_interactive_ui"
+compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_code_execution, optional_document_and_interactive_ui"
 description: "Research orzecznictwa: wyszukiwanie, weryfikacja sygnatur i tez, hierarchia źródeł, porównanie orzeczeń oraz dobór judykatury do argumentacji prawnej."
 ---
 
@@ -314,20 +314,28 @@ Tier 4 (zagraniczne): patrz sekcja „Jurysdykcje zagraniczne"
 SAOS = Tier 3 + RZĄD 2A jednocześnie i poprawnie. Rozbieżność była czytana jako
 sprzeczność między plikami i przez to blokowała użycie sprawnego API.
 
-⛔⛔ **STAN KANAŁÓW TIER 1 — zmierzony 2026-09-13, wymaga odtworzenia pomiarem.**
-Deklarowana hierarchia nie jest dziś w pełni realizowalna:
-- `orzeczenia.ms.gov.pl` ✅ — dodatkowo GET po sygnaturze, patrz Faza 1-S;
-- `sn.pl` ✅ — API JSON `snproxy`, ale **host bez `www.` i UA przeglądarkowy**
-  (`shared/DOSTEP-MASZYNOWY-API.md` §1, wyjątek);
-- `orzeczenia.nsa.gov.pl` (CBOSA) ⛔ — nieosiągalna w OBU kanałach; **cały pion
-  sądowoadministracyjny bez binarnej kontroli sygnatur**, status wymuszony
-  OUT_OF_SCOPE;
-- `trybunal.gov.pl` / `ipo` ⛔ oraz `orzeczenia.uzp.gov.pl` ⛔ — osiągalne, ale
-  bez działającego filtra po sygnaturze.
+⛔⛔ **STAN KANAŁÓW TIER 1 — dostępność jest właściwością bieżącego runtime, nie stałą.**
+Pomiar z 2026-09-13 wykazał niedostępność CBOSA w tamtym środowisku, ale nie wolno
+przenosić tego statusu na kolejną sesję bez świeżej próby. Dla każdego kanału
+stosuj aktualny pomiar z `shared/DOSTEP-MASZYNOWY-API.md` oraz poniższe reguły:
+- `orzeczenia.ms.gov.pl` — GET po sygnaturze, patrz Faza 1-S;
+- `sn.pl` — `snproxy` JSON; dobór nagłówków zgodnie ze świeżym pomiarem runtime;
+- `orzeczenia.nsa.gov.pl` (CBOSA) — **najpierw fresh probe**. Jeżeli portal zwraca
+  właściwy HTML, wczytaj `references/CBOSA-ADAPTER.md` i użyj deterministycznego
+  kontraktu `POST /cbo/search → /cbo/find?p=N → /doc/{ID}`; przy hoście z
+  wykonaniem kodu użyj `tools/cbosa_parser.py`. Adapter filtruje CAŁY zbiór po
+  exact-match i zwraca `FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE`.
+  Jeżeli bezpośredni kanał CBOSA nie działa — wróć do kanonicznego
+  `shared/SYGNATURY.md`, V-SYG-0.5; ten fallback potwierdza tylko ISTNIENIE
+  i nigdy nie produkuje NOT_FOUND;
+- `trybunal.gov.pl` / `ipo` oraz `orzeczenia.uzp.gov.pl` — stosuj ich aktualny
+  kontrakt z `shared/DOSTEP-MASZYNOWY-API.md`; brak deterministycznego filtra
+  po sygnaturze nie uprawnia do zgadywania.
+
 Orzeczenia TSUE i ETPC mają status równoważny z Tier 1 dla materii objętej prawem UE
 lub Konwencją. Kategoria 5 (UE/TSUE) obejmuje teraz również orzeczenia ETPC.
-CBOSA jest bazą jednolitą — nie ma odrębnych portali per WSA; wystarczy jedno
-zapytanie w orzeczenia.nsa.gov.pl obejmujące całość orzecznictwa administracyjnego.
+CBOSA jest bazą jednolitą — nie ma odrębnych portali per WSA; jedno wyszukiwanie
+obejmuje NSA i wszystkie 16 WSA.
 
 **Zasada 8 — Uchwały SN z mocą zasady prawnej (Kat. 6A — priorytet):**
 Uchwały pełnego składu SN, połączonych izb lub całej izby oraz uchwały
@@ -504,41 +512,61 @@ Dla Tier 4:
 
 ## Faza 1-S — Kontrola istnienia sygnatury (V-SYG-0)
 
-> Dodane 2026-09-13 (AUDYT-2026-09-13, F-182). Wykonuje się **PRZED Fazą 1-T
-> i przed każdym powołaniem sygnatury**, także tej podanej przez użytkownika.
+> Wykonuje się **PRZED Fazą 1-T i przed każdym powołaniem sygnatury**, także
+> sygnatury podanej przez użytkownika.
 
 ```
-view shared/SYGNATURY.md   → wykonaj V-SYG-0.1 … V-SYG-0.4 w całości
-view shared/DOSTEP-MASZYNOWY-API.md §3   → kształt wywołania danego kanału
+view shared/SYGNATURY.md
+view shared/DOSTEP-MASZYNOWY-API.md §3
 ```
 
-Skrót operacyjny (pełna procedura i tabela ROUTING BAZ — w `shared/SYGNATURY.md`):
+Skrót operacyjny; kanoniczny kontrakt statusów pozostaje w `shared/SYGNATURY.md`:
 
-1. **Normalizuj** — pojedyncze spacje, bez kropek w repertorium. Nie uzupełniaj
-   brakującej izby ani rocznika.
-2. **Routuj po repertorium** — sądy powszechne → `orzeczenia.ms.gov.pl` (GET po
-   sygnaturze); SN → `sn.pl` `snproxy`; **NSA/WSA → CBOSA martwa ⇒ kanał
-   zdegradowany V-SYG-0.5** (`web_search site:orzeczenia.nsa.gov.pl "{SYGNATURA}"`
-   + post-check tytułu); TK i KIO ⛔ bez filtra po sygnaturze; równolegle SAOS
-   `caseNumber=` jako kontrola krzyżowa, **o ile rocznik mieści się w oknie
-   pokrycia**.
-3. **Okno pokrycia** — SAOS: SUPREME do 2016-06-22, TK do 2015-12-09, KIO do
-   2018-09-06, ADMINISTRATIVE 0 rekordów, COMMON bieżący. Poza oknem →
-   **OUT_OF_SCOPE, nigdy NOT_FOUND**.
-4. **Post-check tożsamości** — porównaj sygnaturę zwróconą z pytaną. Zmierzone:
-   `I NSNc 10/24` → API SN zwraca `II NSNc 10/24`. Różnica → NOT_FOUND.
-   ≥2 sądy → AMBIGUOUS (zmierzone: `I C 100/15` → 9 trafień).
+1. **Normalizuj** — pojedyncze spacje, bez kropek w repertorium, spacje wokół
+   `/` nieistotne. Nie uzupełniaj brakującej izby, repertorium, numeru ani
+   rocznika.
+2. **Routuj po repertorium.**
+   - sądy powszechne → `orzeczenia.ms.gov.pl`;
+   - SN → `sn.pl` / `snproxy`;
+   - **NSA/WSA → wykonaj świeżą próbę bezpośredniego CBOSA**.
+     Gdy `orzeczenia.nsa.gov.pl` odpowiada właściwym HTML-em:
+     ```
+     view orzeczenia-sadowe-v2/references/CBOSA-ADAPTER.md
+     → POST /cbo/search
+     → zachowaj cookies
+     → jeśli potrzeba GET /cbo/find?p=N
+     → GET /doc/{ID} dla KAŻDEGO kandydata
+     → tools/cbosa_parser.py (gdy host ma wykonanie kodu)
+     ```
+     Gdy direct CBOSA jest niedostępna → zastosuj V-SYG-0.5 z
+     `shared/SYGNATURY.md`.
+3. **Okno pokrycia** — zero trafień można zamienić na `NOT_FOUND` wyłącznie
+   w źródle, którego pokrycie obejmuje badany sąd/okres i gdy wynik został
+   pobrany kompletnie. Poza pokryciem lub przy awarii → `OUT_OF_SCOPE`.
+4. **Post-check tożsamości — filtruj cały zbiór, nie pierwszy rekord.**
+   Po normalizacji zachowaj wyłącznie dokumenty o sygnaturze dokładnie tożsamej
+   z pytaną, a pozostałe zapisz jako `rejected_case_numbers` /
+   `odrzucone_post_checkiem`:
+   - 0 exact-match → `NOT_FOUND`;
+   - 1 exact-match → `FOUND`;
+   - ≥2 exact-match → `AMBIGUOUS`.
+   Przykład klasy błędu: „blisko pasująca” inna izba/repertorium/rok nie może
+   zostać automatycznie podstawiona.
+5. **CBOSA jest fail-closed.** Jeżeli licznik wyników wskazuje więcej rekordów niż
+   pobrano z bieżącej strony, pobierz pozostałą paginację w tej samej sesji.
+   Niepełna paginacja, zmiana HTML lub błąd choć jednego `/doc/{ID}` =
+   `OUT_OF_SCOPE`, nie `NOT_FOUND`.
+6. **Zakres potwierdzenia.**
+   - direct CBOSA + odczyt `/doc/{ID}` → `FOUND`,
+     **ISTNIENIE+TREŚĆ**; parser odczytuje metrykę, sentencję i uzasadnienie;
+   - V-SYG-0.5 przez indeks wyszukiwarki → `FOUND`,
+     wyłącznie **ISTNIENIE**; zakaz przypisywania tezy lub cytatu;
+   - `FRAGMENT` dopiero po wskazaniu konkretnego miejsca zgodnie z
+     `shared/WERYFIKACJA-SLAD.md` i Zasadą 2B.
 
-5. **Zakres potwierdzenia** (K-SYG-6) — FOUND uzyskany kanałem zdegradowanym ma
-   zakres **ISTNIENIE**: wolno powołać sygnaturę, sąd, datę i URL, ⛔ **nie wolno
-   powołać tezy ani fragmentu uzasadnienia**. Znacznik `✅ [VER-ISTNIENIE]`.
-
-⛔ Dopiero status **FOUND** otwiera powołanie. NOT_FOUND i OUT_OF_SCOPE nigdy nie
-są raportowane jako „potwierdzone przez narzędzie" (K-SYG-4).
-
-⛔ **Dla NSA/WSA kanał zdegradowany NIGDY nie produkuje NOT_FOUND** — brak
-trafienia w indeksie to OUT_OF_SCOPE. Nie informuj użytkownika, że sygnatura
-sądowoadministracyjna „nie istnieje"; poinformuj, że nie dało się jej potwierdzić.
+⛔ Tylko `FOUND` otwiera możliwość powołania. `NOT_FOUND` i `OUT_OF_SCOPE`
+nigdy nie są raportowane jako „potwierdzone”. `AMBIGUOUS` wymaga przedstawienia
+kandydatów lub dalszego zawężenia, bez arbitralnego wyboru.
 
 ---
 
@@ -593,49 +621,81 @@ Procedura:
 opóźniona względem najnowszych orzeczeń. Traktuj trafienie jako trop, nie jako
 potwierdzenie.
 
-### 1-T.2 — CBOSA (NSA/WSA) — wyszukiwanie pełnotekstowe „Treść wyroku"
+### 1-T.2 — CBOSA (NSA/WSA) — formularz HTML + pełny tekst
 
-CBOSA (orzeczenia.nsa.gov.pl) NIE ma publicznego REST API — dostęp wyłącznie przez
-formularz wyszukiwania na stronie. Formularz ma odrębne pole „Treść wyroku"/
-„Treść uzasadnienia", które przeszukuje pełny tekst — w odróżnieniu od pola
-„Powołane przepisy", które przeszukuje wyłącznie słownik kontrolowany, nie treść.
+CBOSA nie wymaga publicznego REST/JSON API, aby działać jako deterministyczne
+źródło Tier 1. Aktualny kontrakt integracyjny znajduje się w:
 
-Procedura:
 ```
-1. web_fetch formularza wyszukiwania orzeczenia.nsa.gov.pl z polem „Treść wyroku"
-   wypełnionym FRAZĄ TEZY, najlepiej w cudzysłowie (CBOSA dopasowuje dosłownie,
-   nie semantycznie).
-2. Opcjonalnie zawęź: konkretny sąd (NSA / dany WSA), zakres dat, hasło tematyczne.
-3. Brak wyniku ≠ brak orzecznictwa — CBOSA szuka dopasowań dosłownych. Przed uznaniem
-   braku wyniku przeformułuj frazę na prawniczy synonim (np. „odmowa wydania
-   pozwolenia" → „organ nie wydał zgody na realizację inwestycji").
-4. ⚠️ CBOSA ogranicza automatyzację (captcha po serii zapytań) — ogranicz liczbę
-   zapytań do niezbędnego minimum, nie iteruj bez potrzeby.
-   ⛔ **Stan 2026-09-13b: CBOSA nieosiągalna w obu kanałach** (503 w kanale kodu
-   na wszystkich ścieżkach łącznie z `/robots.txt`; `ROBOTS_DISALLOWED`
-   w `web_fetch`). Zanim orzekniesz o niedostępności w swojej turze — powtórz
-   pomiar (Reguła 12d); status z tego pliku nie zastępuje próby.
-   ➜ **Gdy pomiar potwierdzi niedostępność:** przejdź na kanał zdegradowany
-   (`shared/SYGNATURY.md`, V-SYG-0.5). Da metrykę orzeczenia bez treści —
-   do wyszukiwania TEZY (Faza 1-T) jest bezużyteczny, do kontroli istnienia
-   sygnatury (Faza 1-S) wystarczający.
-5. Każde trafienie → 1-T.3 przed powołaniem.
+view orzeczenia-sadowe-v2/references/CBOSA-ADAPTER.md
 ```
+
+Dla wyszukiwania po sygnaturze adapter ma zweryfikowany kontrakt:
+
+```text
+POST https://orzeczenia.nsa.gov.pl/cbo/search
+Content-Type: application/x-www-form-urlencoded
+
+wszystkieSlowa=
+wystepowanie=gdziekolwiek
+odmiana=on
+sygnatura={SYGNATURA}
+sad=dowolny
+rodzaj=dowolny
+symbole=
+odDaty=
+doDaty=
+sedziowie=
+funkcja=
+submit=Szukaj
+```
+
+Pierwszy POST zwraca stronę 1 i może ustanowić sesję. Zachowaj cookies; kolejne
+strony pobieraj przez `GET /cbo/find?p=N`. Z każdego wyniku wyciągaj wyłącznie
+`/doc/{10-znakowy-ID}`, a następnie odczytaj każdy dokument przez
+`GET /doc/{ID}`.
+
+Jeżeli host ma wykonanie kodu, użyj:
+
+```
+tools/cbosa_parser.py
+```
+
+Parser:
+- wyciąga i deduplikuje `/doc/{ID}`,
+- odczytuje sygnaturę, sąd, datę, sentencję i pełne uzasadnienie,
+- normalizuje kosmetykę sygnatury,
+- filtruje **cały** zbiór kandydatów,
+- odrzuca „blisko pasujące” sygnatury,
+- zwraca `FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE`,
+- fail-closed przy niepełnej paginacji lub błędzie pobrania.
+
+Dla researchu po treści można użyć pola `wszystkieSlowa` jako wejścia tekstowego
+formularza i dodatkowych filtrów, ale nie zgaduj nazw nieweryfikowanych kontrolek.
+Jeżeli potrzebujesz konkretnej tezy, odczytaj pełne `/doc/{ID}` kandydatów i
+wykonaj gradient TREŚĆ/FRAGMENT na realnym uzasadnieniu.
+
+⚠️ Dostępność jest środowiskowa. Przed użyciem wykonaj fresh probe. Jeżeli direct
+CBOSA jest niedostępna, zastosuj V-SYG-0.5 z `shared/SYGNATURY.md`; fallback
+daje wyłącznie metrykę/ISTNIENIE i nie nadaje się do potwierdzania treści tezy.
+
+Każde trafienie → 1-T.3 przed powołaniem.
 
 ### 1-T.3 — Krok weryfikacji (wspólny dla 1-T.1 i 1-T.2)
 
-Wyszukiwanie pełnotekstowe wskazuje KANDYDATÓW — nie zwalnia z Zasady 1 (zakaz
-cytowania bez weryfikacji) ani z procedury V-SYG.
+Wyszukiwanie wskazuje KANDYDATÓW — nie zwalnia z Zasady 1 ani z V-SYG.
+
 ```
 Dla każdego kandydata:
-→ Wykonaj V-SYG (shared/SYGNATURY.md) na sygnaturze uzyskanej z SAOS/CBOSA.
-→ CBOSA-owe trafienia są już z Tier 1 (orzeczenia.nsa.gov.pl) — potwierdź bezpośredni
-  URL wyroku i przejdź do cytowania.
-→ SAOS-owe trafienia dla sądów powszechnych/SN → potwierdź w orzeczenia.ms.gov.pl
-  (lub portalu lokalnym, Zasada 5A) / sn.pl, chyba że rekord SAOS linkuje wprost
-  do oryginalnego portalu (pole href / source.judgmentUrl) — wtedy wystarczy ten link.
-→ Dopiero po potwierdzeniu → cytuj z linkiem do ORYGINAŁU (Zasada 4), nigdy do
-  samego saos.org.pl jako źródła głównego.
+→ wykonaj exact-match V-SYG / post-check na CAŁYM zbiorze;
+→ direct CBOSA: tylko FOUND po odczycie /doc/{ID} daje ISTNIENIE+TREŚĆ;
+  następnie sprawdź, czy sentencja/uzasadnienie naprawdę wspiera przypisywaną tezę;
+→ CBOSA fallback V-SYG-0.5: FOUND = tylko ISTNIENIE; nie przypisuj tezy;
+→ SAOS: kandydat dla sądów powszechnych/SN musi zostać potwierdzony w źródle
+  właściwym (orzeczenia.ms.gov.pl / portal lokalny / sn.pl), chyba że zweryfikowany
+  rekord prowadzi do oryginalnego źródła i odczytano je bezpośrednio;
+→ dopiero po potwierdzeniu cytuj z URL ORYGINAŁU i zastosuj Zasadę 2B
+  dla konkretnego fragmentu.
 ```
 
 ### 1-T.4 — Rozszerzenie na inne bazy z wyszukiwaniem pełnotekstowym
@@ -1060,6 +1120,6 @@ Nie dubluj logiki shared w lokalnych plikach. Lokalne moduły mogą tylko doprec
 > (redukcja kosztu kontekstu, 2026-07-12 runda 2) — treść zachowana w 100%,
 > tylko przeniesiona: `view orzeczenia-sadowe-v2/references/CHANGELOG.md`
 >
-> Najnowsza pozycja: **2.6 (2026-07-06)** — Zasada 11: PLAN MINIMUM 5
-> orzeczeń wspierających + 5 linii przeciwnej, zawsze z przesłankami
-> rozstrzygnięcia.
+> Najnowsza pozycja: **2.15 (2026-09-14)** — deterministyczny adapter HTML CBOSA,
+> exact-match sygnatur NSA/WSA, pełny odczyt sentencji/uzasadnienia oraz
+> statusy FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE z fallbackiem V-SYG-0.5.
