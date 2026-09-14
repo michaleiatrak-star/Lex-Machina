@@ -1,10 +1,11 @@
 # Portability manifest — orzeczenia-sadowe-v2
 
-- Source baseline: `bdebb4b0b6ba63add44501795c6e4acdc5bfd931`
-- Source files preserved: **4**
+- Source baseline: `0b54d97889fb40328b656bb152ef765458b4b384`
+- Release: **2.15 (2026-09-14)**
+- Files in complete skill package: **11**
 - Description: **150/200**
 - Active shared refs verified: **13**
-- Active local refs verified: **2**
+- Active local refs verified: **4**
 - Active cross-skill refs verified: **0**
 
 ## Zasada shared
@@ -13,7 +14,21 @@
 
 ## Zakres zmian
 
-Dodano wyłącznie warstwę portability i zwięzłe metadane trigger/capability. Treść merytoryczna oraz komplet własnych plików skilla zostały zachowane.
+Wydanie 2.15 zachowuje dotychczasowe pliki skilla i dodaje trzy własne zasoby CBOSA:
+`references/CBOSA-ADAPTER.md`, `tools/cbosa_parser.py` oraz
+`tests/test_cbosa_parser.py`. `SKILL.md` został zaktualizowany punktowo:
+bezpośredni CBOSA jest używany po fresh probe, a przy niedostępności obowiązuje
+kanoniczny fallback V-SYG-0.5 z `shared/SYGNATURY.md`.
+
+Parser działa fail-closed i nie zastępuje kanonicznych bramek shared. Status
+`FOUND` z direct CBOSA oznacza odczyt metryki i treści; `FRAGMENT` wymaga
+oddzielnego pinpointu. Test regresyjny parsera: 6/6 PASS w środowisku lokalnym.
+
+## Rule 7 / OUTPUT-COMPLETENESS
+
+To wydanie jest przeznaczone do dystrybucji wyłącznie jako kompletny katalog
+`orzeczenia-sadowe-v2` ze wszystkimi 11 plikami. Dostarczenie samego parsera,
+samego `SKILL.md` albo diffu nie spełnia Reguły 7 audytu.
 
 ## Universal V4
 
