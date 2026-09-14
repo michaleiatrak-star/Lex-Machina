@@ -67,13 +67,22 @@ KROK 0A — OVERRIDE NSA/WSA (obowiązkowy, gdy repertorium routuje do CBOSA):
      shared/DOSTEP-MASZYNOWY-API.md; implementacja:
      shared/CBOSA-ADAPTER.md.
   3. Dopiero gdy direct CBOSA jest niedostępna w bieżącym runtime →
-     V-SYG-0.5 (indeks wyszukiwarki, tylko ISTNIENIE, nigdy NOT_FOUND).
+     V-SYG-0.5 RETRIEVAL/SNAPSHOT. Obowiązkowo:
+       POST-CHECK HOSTA → exact-match → jawny access_mode/content_scope.
+     Snapshot może zawierać metrykę + sentencję, a czasem pełne uzasadnienie;
+     wykorzystaj faktycznie dostępną treść do researchu, ale NIE oznaczaj jej
+     jako DIRECT_LIVE / ✅ [VER] bez niezależnego bieżącego potwierdzenia.
+     Brak exact-hit w snapshotach = OUT_OF_SCOPE, nigdy NOT_FOUND.
   4. SAOS dla NSA/WSA jest wyłącznie kontrolą pomocniczą; brak rekordu SAOS
      nie dowodzi nieistnienia, bo corpus ADMINISTRATIVE może być pusty.
 
   ⛔ FOUND z direct CBOSA nie daje automatycznie prawa do cytowania uzasadnienia.
      Gdy `reasoning_available=false`, wolno użyć metryki i zweryfikowanej
      sentencji, ale NIE tezy/fragmentu uzasadnienia.
+
+  ⛔ Treść z `CRAWLED_OR_INDEXED` może być bogata, lecz jej status śladu
+     pozostaje odrębny od zakresu treści. Nie twórz statusu `[SNAPSHOT]`;
+     stosuj `⚠️ [NIEWERYFIKOWANE]` + pola provenance z WERYFIKACJA-SLAD.md.
 
 KROK 1: Wyszukaj sygnaturę WYŁĄCZNIE w oficjalnej bazie:
   sn.pl           → wyroki i uchwały Sądu Najwyższego
