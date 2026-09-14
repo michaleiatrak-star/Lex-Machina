@@ -1,5 +1,20 @@
 # CHANGELOG — Biblioteka shared
 
+## 3.61 — 2026-09-14 — CBOSA retrieval/snapshot jako jawny kanał provenance
+
+- V-SYG-0.5 ma obowiązkowy POST-CHECK HOSTA przed exact-match; `site:`
+  jest tylko discovery i nie gwarantuje domeny.
+- Snapshot oficjalnego `/doc/{ID}` może mieć zakres `METADATA_SENTENCE`,
+  `...REASONING_PARTIAL` lub `...REASONING_FULL`; nie redukuj go automatycznie
+  do samego snippetu/ISTNIENIA.
+- Pomiar 10 realnych sygnatur: 10/10 metryka+sentencja, 5/10 pełne
+  uzasadnienie, 2/10 uzasadnienie bez pewności kompletności, 3/10 bez
+  potwierdzonego uzasadnienia.
+- `access_mode=CRAWLED_OR_INDEXED` jest provenance, NIE piątym statusem.
+  `WERYFIKACJA-SLAD.md` 1.7 utrzymuje zamknięte statusy ✅/⚠️.
+- Pełna treść snapshotu nie dowodzi `DIRECT_LIVE`; 500/502/503 originu może
+  współistnieć z bogatą kopią crawlera.
+
 
 ## 3.60 — 2026-09-14 — kanoniczny direct CBOSA / RZĄD 2A
 
