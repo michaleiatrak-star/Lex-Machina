@@ -5,6 +5,6 @@
 bfcab95ce981764ca66718f4bdcaaa290952fea0db1400420ab77720e724be91  ./references/CHANGELOG.md
 522e692769ddbb4218e598cc141b861c22d520f8cd751991c713254658bd0b39  ./references/PORTALE-LOKALNE.md
 fa94fd3020d9c7594f4aa805b9e86a51ba0e7906dc8044d88f4866fec2cd36b1  ./references/widget.md
-d1e46895814b189dc2f32ffb41f3b25b21342bc393c5ba9e997a83757cf12ff2  ./SKILL.md
+a0c37899630aff75969523c1b73b8d291bc0438c89b050143c5837e457097d11  ./SKILL.md
 3ae446feb2acb47cfffab2c39fa8edfb7c7cf809cce71c43977ad78ffed7ebe4  ./tests/test_cbosa_parser.py
 2daccd4d24b73bc310b85655832a27e6ace2c06808ca5449b8dee63fa95b7600  ./tools/cbosa_parser.py
