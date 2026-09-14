@@ -1,6 +1,6 @@
 ---
 name: orzeczenia-sadowe-v2
-version: "2.15"
+version: "2.16"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_code_execution, optional_document_and_interactive_ui"
@@ -1129,6 +1129,6 @@ Nie dubluj logiki shared w lokalnych plikach. Lokalne moduły mogą tylko doprec
 > (redukcja kosztu kontekstu, 2026-07-12 runda 2) — treść zachowana w 100%,
 > tylko przeniesiona: `view orzeczenia-sadowe-v2/references/CHANGELOG.md`
 >
-> Najnowsza pozycja: **2.15 (2026-09-14)** — deterministyczny adapter HTML CBOSA,
+> Najnowsza pozycja: **2.16 (2026-09-14)** — routing CBOSA wpięty do RZĄD 2A/shared,
 > exact-match sygnatur NSA/WSA, pełny odczyt sentencji/uzasadnienia oraz
 > statusy FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE z fallbackiem V-SYG-0.5.
