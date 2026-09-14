@@ -65635,3 +65635,99 @@ gorsza niż luka otwarta — bo nikt do niej nie wróci.
 
 **Wersje:** `dr-09-budownictwo-srodowisko-energia-transport` 3.29 → 3.30,
 `prawo-polskie-v2` 6.19 → 6.20, `audyt-systemu-v4` 6.95 → 6.96.
+
+---
+
+## AUDYT-2026-09-14a — audyt zależności ISAP/CBOSA na wniosek użytkownika; dwa fałszywe alarmy audytora
+
+**Polecenie:** zbadać cudzy wynik diagnostyczny (ChatGPT) dotyczący niedostępności
+CBOSA i sprawdzić, czy powtarza się w tym środowisku; następnie pełny audyt
+zależności DR-01–DR-16 od `isap.sejm.gov.pl` i CBOSA; naprawy wydać wg ZASADY 7.
+
+**Metoda.** Sondy własne przed jakąkolwiek tezą: DNS, nagłówki, oba adresy A, porty
+80/443, hosty kontrolne, warstwa `web_fetch`, warstwa indeksu. Potem inwentarz
+zależności (1102 pliki w `user` + `plugins`) i odczyt plików kanonicznych.
+
+**Ustalenia sieciowe (zmierzone 2026-09-14).** CBOSA: 503 na `/`, `/cbo/query`,
+`/cbo/search`, na `194.181.28.1` i `195.117.224.237`, na obu portach. Ciało
+odpowiedzi 121 B, `text/plain`, komunikat Envoy o nieudanym połączeniu upstream —
+czyli 503 generuje warstwa egress, nie origin. Brak nagłówka `x-deny-reason`, więc
+to nie odmowa allowlisty. DNS rozwiązuje się poprawnie (w odróżnieniu od
+środowiska, z którego pochodził badany materiał), co eliminuje DNS jako zmienną.
+`www.nsa.gov.pl` tą samą trasą → **200**, co wyklucza blokadę całej domeny i
+awarię resortową; zawęża przyczynę do originu `orzeczenia.nsa.gov.pl` albo
+urządzenia przed nim, odrzucającego tę klasę egressów.
+
+⛔ **Warstwa snapshotowa NIE powtarza się tutaj.** `web_fetch` na CBOSA zwraca
+`ROBOTS_DISALLOWED` (odmowa polityki, nie awaria), a indeks daje wyłącznie
+fragment nawigacyjny `/cbo/search` bez treści orzeczeń. Rekomendacja z badanego
+materiału („przy 503 przechodź na indeks/snapshoty CBOSA") jest w tym środowisku
+niewykonalna. Pozostałe kanały: `api.sejm.gov.pl` 200 z pełnym API, `eli.gov.pl`
+200, `dziennikiurzedowe.gov.pl` 200, `orzeczenia.ms.gov.pl` 200, `sn.pl` 200 przy
+1886 B (powłoka JS — niezweryfikowane), SAOS timeout, `isap.sejm.gov.pl` pętla
+302 w obu kanałach, `eur-lex.europa.eu` 202 przy 0 B.
+
+**Ustalenia inwentarzowe.** ISAP: 376 plików / 1019 wystąpień. ELI + api.sejm:
+301 / 73 plików. CBOSA: 71. Przemapowanie ISAP→ELI w 376 plikach byłoby błędem —
+pliki dziedziczą regułę z kanonicznych, nie definiują jej. `HIERARCHIA-ZRODEL.md`
+v1.7 i `PRAWO-HARDGATE.md` v2.5 były już zmigrowane; ich tabela kanałów
+odtworzyła się co do wyniku w niezależnym pomiarze.
+
+⛔ **DWA FAŁSZYWE ALARMY AUDYTORA — odnotowane jawnie (ZASADA 8, ZASADA 14).**
+
+1. **`text.html` opisany jako tekst ujednolicony.** Zgłosiłem
+   `api.sejm.gov.pl/eli/acts/DU/1997/553/text.html` jako pełny t.j. KK. Fałsz —
+   to tekst ogłoszony aktu bazowego; brak art. 57b i art. 148a. Przed tym błędem
+   ostrzega `PRAWO-HARDGATE.md` w. 76, którego nie doczytałem. Dokument wygląda
+   kompletnie i jest z RZĘDU 1, więc pomyłka jest niewidoczna — dokładnie klasa
+   ryzyka opisana w tej bramce.
+
+2. **Rzekomy defekt B-T1 („D3").** Zgłosiłem, że `/references` zwraca listę
+   nieposortowaną i że procedura podstawi wygasły t.j. Obie tezy fałszywe.
+   Lista jest posortowana **malejąco**; wyciągnąłem wniosek z ogona (`[-3:]`),
+   nie z całości. Procedura w w. 125–127 już nakazuje wybór po statusie
+   „obowiązujący" i **wprost zakazuje** brania ostatniego elementu. Żadnej zmiany
+   nie wprowadzono. Reguła potwierdzona na 9 aktach: KK 2025/383, KPK 2026/490,
+   KPC 2026/468, KC 2026/795, KRO 2026/236, KP 2025/277, KKW 2025/911,
+   KW 2025/734, KSH 2024/18 — za każdym razem dokładnie jeden wpis „obowiązujący".
+
+   ⛔ Wspólny mechanizm obu błędów: uogólnienie z częściowego odczytu zamiast
+   doczytania kontekstu pliku, który już był w wyniku grepa. To ten sam wzorzec,
+   przed którym ostrzega ZASADA 14.
+
+**Ustalenie uboczne o realnej wadze — pułapka `nr` vs `poz.`** Przy szukaniu ELI
+dla KRO wpisano `DU/1964/9` (numer dziennika zamiast pozycji). API **nie zgłasza
+błędu**: HTTP 200 i kompletna metryka Rozporządzenia Ministra Zdrowia i Opieki
+Społecznej z 28.12.1963. Poprawny ELI to `DU/1964/59`. Ta sama klasa co defekt 1:
+kanał RZĘDU 1, odczyt nastąpił, nic nie sygnalizuje pomyłki, cytowany jest inny
+akt. Nieudokumentowane nigdzie w systemie przed tą sesją.
+
+**Decyzja użytkownika — snapshoty CBOSA.** Kanał snapshotowy pozostaje
+DOPUSZCZALNY tam, gdzie środowisko nim dysponuje (narzędzia webowe ChatGPT), do
+lektury orzeczenia i researchu. ⛔ Nie przechodzi HYBRID-VAL i nie uprawnia do
+`✅ [VER]` — powód dowodowy, nie techniczny: brak daty stanu i proweniencji
+możliwej do wykazania przed sądem.
+
+**Naprawy wydane (2 pełne paczki, ZASADA 7):**
+
+| Skill | Plik | Zmiana |
+|---|---|---|
+| `shared` | `ISAP-AUDIT-PROTOCOL.md` → v1.1 | zniesiona wyłączność ISAP w zasadzie nadrzędnej; katalog publikatorów RZĘDU 1; zastrzeżenie „osiągalność ≠ moc"; wyłączenie źródeł komercyjnych; kroki 4–5 i sekcja „Zakaz" przestawione na „publikator RZĘDU 1"; metryka rozszerzona o pole `Kanał:` |
+| `shared` | `WERYFIKACJA-SLAD.md` | KROK W-2 bez `web_fetch: isap` — wskazanie działającego kanału; obsługa timeoutu nie degraduje do lexlege/prawo.pl (poza RZĘDEM 1, bez prawa do `✅ [VER]`); wzorzec tabeli śladu przepisany na źródła RZĘDU 1 (usunięta sprzeczność: przykład pokazywał `✅` przy arslege/lexlege, czego nowa reguła zakazuje) |
+| `shared` | `HIERARCHIA-ZRODEL.md` | czterostanowy model kanału CBOSA (`DIRECT_LIVE` / `CRAWLED_OR_INDEXED` / `DIRECT_UNAVAILABLE` / `POLICY_BLOCKED`) ze znacznikiem `🟨 [SNAPSHOT]`; zakaz podnoszenia `🟨` do `✅` przy przenoszeniu między środowiskami; reguła „HTTP 200 to nie dowód treści" z kontrprzykładami |
+| `shared` | `PRAWO-HARDGATE.md` | ostrzeżenie `{poz} TO POZYCJA, NIE NUMER DZIENNIKA` przy POZIOMIE B z kontrolą obowiązkową: konfrontacja pola `title` przed przejściem do `/references` |
+| `audyt-systemu-v4` | `references/AUDIT-JOURNAL.md` | niniejszy wpis (ZASADA 2) |
+| `audyt-systemu-v4` | `references/WARN-OTWARTE.md` | F-183a zawężona o wykonany pomiar live (ZASADA 10) |
+
+**Odstępstwo proceduralne odnotowane.** Pierwsza transza zmian w `shared` została
+wykonana w `SKILL_SOURCE`, nie w `WORK_COPY` — kopia powstała dopiero na etapie
+pakowania. Skutek dla pakietu żaden (trzy `diff` puste, sumy zgodne), ale
+zabezpieczeniem stanu wyjściowego był backup roboczy, nie procedura. Kolejne
+transze wykonano już zgodnie z PRE-DELIVERY-COMPLETENESS-CHECK.
+
+**Kontrola niezależna.** `sha256sum -c` przed przeliczeniem wskazał dokładnie trzy
+`FAILED` — te trzy pliki, które zadeklarowano jako zmienione, i żaden inny.
+Rejestr `CHECKSUMS.sha256` kompletny w obie strony (172 = 172).
+
+**Wersje:** `shared` bez zmiany numeru (zmiany w plikach składowych),
+`audyt-systemu-v4` 6.96 → 6.97.

@@ -205,6 +205,35 @@ ryzyku dezaktualizacji, redakcja profesjonalna).
   
   ⛔ **Adapter/konektor nie ma własnego RZĘDU.** RZĄD dziedziczy treść ze
   źródła docelowego. MCP/HTML/parser to wyłącznie kanał transportowy.
+
+  ### CBOSA — trzy stany kanału (dodane 2026-09-14, decyzja użytkownika)
+
+  Nie utożsamiaj „udało się odczytać stronę" z „CBOSA odpowiada". Rozróżniaj:
+
+  | Stan | Znaczenie | Znacznik |
+  |---|---|---|
+  | `DIRECT_LIVE` | bieżący request HTTP do originu faktycznie odpowiedział | `✅ [VER: CBOSA direct, data]` |
+  | `CRAWLED_OR_INDEXED` | świeża kopia z crawlera/indeksu; brak potwierdzenia bieżącego połączenia z originem | `🟨 [SNAPSHOT: CBOSA, data crawlu]` |
+  | `DIRECT_UNAVAILABLE` | 503 / timeout / connection failure w tym runtime | `⚠️ [NIEWERYFIKOWANE]` |
+  | `POLICY_BLOCKED` | odmowa regulaminowa narzędzia (robots/ToS), nie awaria | `⚠️ [NIEWERYFIKOWANE]` |
+
+  ✅ **Kanał snapshotowy jest DOPUSZCZALNY** tam, gdzie środowisko nim
+  dysponuje (m.in. narzędzia webowe ChatGPT), do: lektury orzeczenia, ustalenia
+  stanu faktycznego sprawy, analizy argumentacji, researchu wstępnego.
+
+  ⛔ Snapshot NIE przechodzi bramki HYBRID-VAL przed generowaniem `.docx`
+  i nie uprawnia do `✅ [VER]`. Powód nie jest techniczny, lecz dowodowy:
+  snapshot nie niesie daty stanu ani proweniencji możliwej do wykazania.
+  Sygnatura powoływana w piśmie procesowym wymaga `DIRECT_LIVE` albo
+  potwierdzenia innym kanałem (`SYGNATURY.md` V-SYG-0.5).
+
+  ⛔ Znacznika `🟨 [SNAPSHOT]` nie wolno podnosić do `✅ [VER]` przy przenoszeniu
+  materiału między środowiskami. Plik skilla bywa czytany w runtime innym niż
+  ten, w którym powstał odczyt.
+
+  ⛔ HTTP 200 nie jest dowodem treści. Zmierzone kontrprzykłady (2026-09-14):
+  `eur-lex.europa.eu` → 202 przy 0 bajtów; `sn.pl` → 200 przy 1886 bajtach
+  (powłoka JS). Sonda musi sprawdzać rozmiar i obecność oczekiwanej struktury.
   
   ⛔ **CBOSA — granica wnioskowania:** `FOUND` wymaga exact-match po
   normalizacji. Niepełna paginacja, nierozpoznany licznik, zmiana krytycznej

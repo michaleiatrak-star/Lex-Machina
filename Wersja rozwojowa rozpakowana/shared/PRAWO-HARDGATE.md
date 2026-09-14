@@ -81,6 +81,24 @@ POZIOM B — bezpośredni web_fetch na strukturalne API (działa bez MCP):
                        `dziennikiurzedowe.gov.pl` — portal zbiorczy RCL
                        (RZĄD 1, `shared/HIERARCHIA-ZRODEL.md` poz. 10-11)
 
+  ⛔⛔ **{poz} TO POZYCJA, NIE NUMER DZIENNIKA** (dodane 2026-09-14)
+
+  Adres „Dz.U. 1964 nr 9 poz. 59" zawiera dwie liczby. Do ELI wchodzi
+  WYŁĄCZNIE pozycja: `DU/1964/59`. Wstawienie numeru dziennika daje
+  `DU/1964/9` — i API **nie zgłasza błędu**: zwraca HTTP 200 z kompletną,
+  poprawnie wyglądającą metryką INNEGO aktu (zmierzone 2026-09-14:
+  `DU/1964/9` = Rozporządzenie Ministra Zdrowia i Opieki Społecznej
+  z 28.12.1963, zamiast Kodeksu rodzinnego i opiekuńczego).
+
+  To ta sama klasa błędu co `/text.html` niżej: kanał RZĘDU 1, odczyt
+  faktycznie nastąpił, nic nie sygnalizuje pomyłki — a cytowany jest
+  inny akt.
+
+  **Kontrola obowiązkowa, przed przejściem do `/references`:**
+  po pobraniu metryki skonfrontuj pole `title` z aktem, którego szukasz.
+  Rozbieżność tytułu = STOP, zbuduj ELI od nowa. Nie ma innego sposobu
+  wykrycia — API nie odróżni złej pozycji od dobrej.
+
 ### ŚCIEŻKA B-L — AKT PRAWA MIEJSCOWEGO
 
 > Treść wydzielona 2026-09-10b (F-180) do `shared/PRAWO-HARDGATE-AKT-MIEJSCOWY.md`.

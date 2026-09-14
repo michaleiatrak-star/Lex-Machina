@@ -319,7 +319,11 @@ PROCEDURA:
 KROK W-1: Zidentyfikuj wszystkie artykuły / liczby / terminy / orzeczenia w planowanej odpowiedzi.
 
 KROK W-2: Dla każdego elementu → wywołaj narzędzie:
-  Przepis KK/KPC/KPA/KC/KP → web_search: "[art. X §Y ustawa]" + web_fetch: isap.sejm.gov.pl
+  Przepis KK/KPC/KPA/KC/KP → publikator RZĘDU 1 wg shared/HIERARCHIA-ZRODEL.md.
+      ⛔ isap.sejm.gov.pl: pętla 302 w obu kanałach — NIE używaj jako pierwszego wyboru.
+      Kanał kodu (curl): api.sejm.gov.pl/eli/... lub eli.gov.pl — zmierzone HTTP 200.
+      Kanał web_fetch: URL konstruowany na api.sejm.gov.pl jest odrzucany
+      (PERMISSIONS_ERROR) → sekwencja dwukrokowa B-1/B-2 wg PRAWO-HARDGATE.md.
   Orzeczenie SN/SA → web_search: "[sygnatura]" + web_fetch: sn.pl lub orzeczenia.ms.gov.pl
   Rejestr UOKiK → web_fetch: rejestr.uokik.gov.pl
 
@@ -425,10 +429,10 @@ dało się odczytać wprost z tabeli:
 
 | Nr | Element | Źródło | Data | Status |
 |---|---|---|---|---|
-| 1 | art. 249 §1 KPK — przesłanka ogólna | lexlege.pl / sip.lex.pl (2B) | 2026-08-27 | ✅ |
-| 2 | art. 258 §1-2 KPK — przesłanki szczególne | lexlege.pl (2B), SN II KZ 47/23 (2A) | 2026-08-27 | ✅ |
+| 1 | art. 249 §1 KPK — przesłanka ogólna | api.sejm.gov.pl ELI DU/2026/490 (t.j., RZĄD 1) | 2026-09-14 | ✅ |
+| 2 | art. 258 §1-2 KPK — przesłanki szczególne | api.sejm.gov.pl ELI DU/2026/490 (RZĄD 1), SN II KZ 47/23 (2A) | 2026-09-14 | ✅ |
 | … | … | … | … | … |
-| 9 | art. 73 §4 KPK — wygaśnięcie zastrzeżenia | arslege.pl (2B) | 2026-08-27 | ✅ |
+| 9 | art. 73 §4 KPK — wygaśnięcie zastrzeżenia | eli.gov.pl DU/2026/490 (RZĄD 1) | 2026-09-14 | ✅ |
 
 **RPW-CHECKPOINT:** zweryfikowano 9/9 — pełne pokrycie tej tury.
 ```
@@ -447,8 +451,12 @@ checkpoint retroaktywnie, zanim doda nowe powołania.
 
 ```
 TIMEOUT (brak odpowiedzi w ~15s):
-  → Spróbuj alternatywne źródło (np. lexlege.pl / prawo.pl zamiast isap.gov.pl)
-  → Jeśli alternatywa też niedostępna → ⚠️ [NIEWERYFIKOWANE]
+  → Spróbuj INNY PUBLIKATOR RZĘDU 1 (eli.gov.pl ↔ api.sejm.gov.pl ↔
+    dziennikustaw.gov.pl) oraz drugi kanał (kod ↔ web_fetch).
+  ⛔ NIE degraduj do źródeł komercyjnych (lexlege.pl / prawo.pl / arslege.pl).
+    Są poza RZĘDEM 1; ich użycie nie uprawnia do znacznika ✅ [VER].
+    Dopuszczalne wyłącznie jako wskazówka nawigacyjna, z ⚠️ [NIEWERYFIKOWANE].
+  → Jeśli wszystkie publikatory RZĘDU 1 niedostępne → ⚠️ [NIEWERYFIKOWANE]
 
 HTTP 5xx / serwis niedostępny:
   → 1 ponowna próba po 5s

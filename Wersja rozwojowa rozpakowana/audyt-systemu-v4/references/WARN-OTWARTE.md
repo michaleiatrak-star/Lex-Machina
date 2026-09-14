@@ -57,6 +57,20 @@
 > dostępności każdego hosta; wolno twierdzić, że system ma deterministyczny
 > adapter i fail-closed fallback.
 >
+> ⚡ **ZAWĘŻENIE 2026-09-14a (ZASADA 10) — podzakres pomiarowy WYKONANY,
+> wynik negatywny.** Przeprowadzono kontrolowany probe w tym runtime:
+> 503 na `/`, `/cbo/query`, `/cbo/search`, oba adresy A, porty 80 i 443;
+> ciało 121 B to komunikat Envoy o nieudanym połączeniu upstream, więc 503
+> pochodzi z warstwy egress, nie z originu; brak `x-deny-reason` wyklucza
+> allowlistę; DNS rozwiązuje się poprawnie, co eliminuje DNS jako zmienną;
+> `www.nsa.gov.pl` tą samą trasą zwraca 200, co wyklucza blokadę domeny i
+> awarię resortową. Stan kanału: `DIRECT_UNAVAILABLE`.
+> ⛔ Dodatkowo `web_fetch` na CBOSA → `ROBOTS_DISALLOWED`, a indeks daje
+> wyłącznie fragment nawigacyjny bez treści orzeczeń — w tym środowisku NIE
+> istnieje fallback snapshotowy, którym dysponują inne hosty.
+> **Do wykonania pozostaje wyłącznie przypadek pozytywny** w runtime, w którym
+> origin odpowiada; podzakres negatywny jest zamknięty i nie wymaga powtórzenia.
+>
 > **F-184 (2026-09-13, OTWARTA, środowisko) — TK bez kontroli po sygnaturze.**
 > `ipo.trybunal.gov.pl/ipo/Szukaj` → 200, ale wyszukiwarka to JSF/PrimeFaces
 > z `ViewState`: POST-only, `Sprawa?sygnatura=` nie jest kluczem. Do
