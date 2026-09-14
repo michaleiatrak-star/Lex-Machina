@@ -1,6 +1,6 @@
 # WARN-OTWARTE — rejestr żywy otwartych flag audytowych
 
-**Stan:** 2026-09-13c. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
+**Stan:** 2026-09-14. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
 
 ## Tablica sterująca
 
@@ -30,16 +30,32 @@
 | Odnotowane bez działania | 1 | O-8 (ograniczenie strukturalne aparatu) |
 | **Razem** | **20** | — |
 
-> **F-183a (2026-09-13b, OTWARTA — ZAWĘŻONA, środowisko) — CBOSA nieosiągalna;
-> pion sądowoadministracyjny ma kontrolę JEDNOSTRONNĄ.** Host martwy na
-> wszystkich ścieżkach łącznie z `/robots.txt` (503, oba protokoły, oba UA, po
-> pauzie 65 s); `web_fetch` → `ROBOTS_DISALLOWED`. SAOS `ADMINISTRATIVE` = 0.
-> **Naprawa częściowa (AUDYT-2026-09-13b):** V-SYG-0.5 — kontrola przez indeks
-> wyszukiwarki z post-checkiem tytułu; potwierdza ISTNIENIE, zakres bez treści.
-> **Co zostaje luką:** (1) NOT_FOUND nieosiągalny — system nie orzeknie, że
-> sygnatura NSA/WSA nie istnieje; (2) zakaz powoływania tezy przy zakresie
-> ISTNIENIE; (3) zależność od pokrycia indeksu strony trzeciej, niemierzalnego
-> od wewnątrz. Warunek zamknięcia: powrót hosta albo inny kanał RZĘDU 1.
+> **F-183a (2026-09-14, OTWARTA — WYŁĄCZNIE środowisko docelowe) — direct
+> CBOSA wdrożona strukturalnie; pozostaje pomiar live w docelowym runtime.**
+> Historyczny pomiar 2026-09-13b/c (503 na wszystkich ścieżkach w tamtym
+> środowisku) pozostaje prawdziwym dowodem dla TAMTEJ sesji, ale nie jest już
+> globalnym stanem systemu.
+>
+> **Naprawa strukturalna 2026-09-14:** `shared/CBOSA-ADAPTER.md` +
+> `shared/SYGNATURY.md` V-SYG-0.7 + `shared/DOSTEP-MASZYNOWY-API.md` 1.5
+> wprowadzają: fresh-probe → `POST /cbo/search` → cookies → kompletna
+> `/cbo/find?p=N` → wszystkie `/doc/{ID}` → exact-match. Implementacja
+> referencyjna w `orzeczenia-sadowe-v2/tools/cbosa_parser.py` przeszła
+> **22/22 regresje** (drift HTML, zapętlona/niepełna paginacja, duplikaty,
+> near-match, przerwany transport, zakres uzasadnienia).
+>
+> **Skutek:** gdy direct CBOSA jest dostępna, system osiąga
+> `FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE` oraz odczyt metryki,
+> sentencji i — jeśli opublikowane — uzasadnienia. Gdy direct CBOSA w danym
+> runtime nadal nie działa, dopiero wtedy aktywuje się V-SYG-0.5, który
+> pozostaje jednostronny i nigdy nie daje NOT_FOUND.
+>
+> **Co nadal pozostaje do wykonania w F-183a:** kontrolowany live probe w
+> docelowym środowisku wdrożeniowym (nie w fixture ani cudzym repo), zapis
+> request/response i minimum jeden przypadek pozytywny + jeden bez exact-match.
+> Do tego czasu nie wolno reklamować direct CBOSA jako gwarantowanej
+> dostępności każdego hosta; wolno twierdzić, że system ma deterministyczny
+> adapter i fail-closed fallback.
 >
 > **F-184 (2026-09-13, OTWARTA, środowisko) — TK bez kontroli po sygnaturze.**
 > `ipo.trybunal.gov.pl/ipo/Szukaj` → 200, ale wyszukiwarka to JSF/PrimeFaces
