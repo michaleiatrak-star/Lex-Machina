@@ -1,5 +1,19 @@
 # AUDIT-JOURNAL — Dziennik Audytów Systemu Prawnego AI
 
+## AUDYT-2026-09-14b — CBOSA retrieval/snapshot: host post-check i zakres treści
+
+**Wyzwalacz:** użytkownik wskazał praktyczną wartość snapshotów CBOSA przy dużym korpusie orzeczeń i polecił wprowadzić korekty, o ile pomiar to potwierdza.
+
+**Pomiar.** W warstwie retrieval sprawdzono 10 realnych sygnatur NSA/WSA. Wszystkie 10 oficjalnych reprezentacji `/doc/{ID}` miało co najmniej metrykę i sentencję; 5/10 miało potwierdzalnie pełne uzasadnienie, 2/10 uzasadnienie widoczne bez dowodu kompletności, 3/10 bez potwierdzonego pełnego uzasadnienia. Próba ma charakter funkcjonalny — NIE jest estymacją pokrycia całego korpusu.
+
+**Kontrola falsyfikacyjna.** Operator `site:orzeczenia.nsa.gov.pl` nie działa jako twardy filtr domenowy: w dwóch niezależnych stosach zwracał również wyniki spoza domeny kanonicznej. Dlatego obecność `/doc/` lub wiarygodnego tytułu nie wystarcza.
+
+**Naprawa:** `shared` 3.61. V-SYG-0.5: discovery → obowiązkowy POST-CHECK `scheme=https`, dokładny `hostname=orzeczenia.nsa.gov.pl`, ścieżka `/doc/{10 znaków}` → exact-match sygnatury → `content_scope`. Dodano `access_mode=CRAWLED_OR_INDEXED` jako provenance odrębne od statusu ✅/⚠️. Nie utworzono piątego statusu `[SNAPSHOT]`. Snapshot może służyć do researchu i analizy faktycznie odczytanej sentencji/argumentacji, ale sam nie awansuje do `DIRECT_LIVE` ani ✅ [VER]. Brak hitu = OUT_OF_SCOPE, nigdy NOT_FOUND.
+
+**Propagacja:** `SYGNATURY` 1.6, `DOSTEP-MASZYNOWY-API` 1.6, `CBOSA-ADAPTER` 1.1, `HIERARCHIA-ZRODEL` 1.9, `WERYFIKACJA-SLAD` 1.7, `PRAWO-HARDGATE-ORZECZENIA`, `shared` 3.61 oraz `orzeczenia-sadowe-v2` 2.17. Parser direct CBOSA nie wymagał zmiany; jego zestaw 22/22 regresji pozostaje aktualny.
+
+**F-183a:** nie zamknięta. Negatywne 503 w konkretnych runtime'ach i bogaty snapshot w innym retrieval mogą współistnieć. Kryterium zamknięcia pozostaje pozytywny DIRECT_LIVE w środowisku docelowym.
+
 ## AUDYT-2026-09-13d — weryfikacja hipotezy o zamrożeniu listy domen; kandydaci odrzuceni na robots.txt
 
 **Polecenie:** sprawdzić hipotezę, że lista dozwolonych domen jest zamrażana przy
