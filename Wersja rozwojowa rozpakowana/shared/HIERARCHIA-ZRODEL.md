@@ -1,7 +1,12 @@
 # HIERARCHIA-ZRODEL.md — Kanoniczna Kategoryzacja Źródeł (RZĄD 1/2/3)
 
 > **Plik:** `shared/HIERARCHIA-ZRODEL.md`
-> **Wersja:** 1.7 (2026-09-04) — REALIA DOSTĘPNOŚCI uzupełnione o wymogi
+> **Wersja:** 1.8 (2026-09-14) — RZĄD 2A orzecznictwa powiązany z kanonicznym
+>              routingiem wykonawczym: SN / Portal Orzeczeń / CBOSA / SAOS.
+>              Dla NSA/WSA direct CBOSA (formularz HTML + /doc/{ID}) jest
+>              preferowany po fresh-probe; fallback indeksowy dopiero przy
+>              niedostępności. Exact-match i fail-closed są obowiązkowe.
+> **Wersja poprzednia:** 1.7 (2026-09-04) — REALIA DOSTĘPNOŚCI uzupełnione o wymogi
 >              kształtu żądania w kanale kodu (F-157); potwierdzone API UODO
 >              jako pierwszy maszynowy kanał orzeczniczy po stronie organu (F-158).
 >              ⛔ Numer skorygowany z 1.6 na 1.7 — 1.6 była już zajęta przez
@@ -181,9 +186,36 @@ uznane portale prawnicze/branżowe (komentarz i interpretacja o niskim
 ryzyku dezaktualizacji, redakcja profesjonalna).
 
 **2A — oficjalne, wykonawcze/orzecznicze (znacznik ✅ [VER: ...]):**
-- Orzecznictwo z oficjalnych baz sądowych: sn.pl, orzeczenia.ms.gov.pl,
-  orzeczenia.nsa.gov.pl, trybunal.gov.pl / ipo.trybunal.gov.pl,
-  saos.org.pl (pomocniczo) — procedura wyłącznie wg `shared/PRAWO-HARDGATE.md`.
+- **Orzecznictwo z oficjalnych baz sądowych — RZĄD 2A dla treści
+  rozstrzygnięcia**: `sn.pl`, `orzeczenia.ms.gov.pl`,
+  `orzeczenia.nsa.gov.pl` (CBOSA), `trybunal.gov.pl` /
+  `ipo.trybunal.gov.pl`; `saos.org.pl` wyłącznie pomocniczo / jako kontrola
+  krzyżowa. Orzeczenie NIE jest źródłem brzmienia przepisu, więc nie awansuje
+  do RZĘDU 1; RZĄD 2A oznacza tu autentyczne źródło rozstrzygnięcia.
+  
+  **Routing wykonawczy jest obowiązkowy i nie wolno zastępować go dowolnym
+  web_search:** 
+  
+  | Rodzina | Źródło rozstrzygające | Kanał / mechanizm |
+  |---|---|---|
+  | SN | `sn.pl` | `shared/DOSTEP-MASZYNOWY-API.md` + `shared/SYGNATURY.md`; `snproxy` JSON po świeżym pomiarze runtime |
+  | SR/SO/SA | `orzeczenia.ms.gov.pl` + portal konkretnego sądu | deterministyczny GET po sygnaturze; portal lokalny rozstrzyga AMBIGUOUS |
+  | **NSA/WSA** | **`orzeczenia.nsa.gov.pl` / CBOSA** | **fresh-probe → direct HTML: `POST /cbo/search` → sesyjna paginacja `/cbo/find?p=N` → `/doc/{ID}` → exact-match**; implementacja: `orzeczenia-sadowe-v2/references/CBOSA-ADAPTER.md` + `tools/cbosa_parser.py`. Gdy direct CBOSA niedostępna → `shared/SYGNATURY.md` V-SYG-0.5 |
+  | SAOS | `saos.org.pl` | discovery / kontrola krzyżowa wg okna pokrycia; nie zastępuje źródła rozstrzygającego |
+  
+  ⛔ **Adapter/konektor nie ma własnego RZĘDU.** RZĄD dziedziczy treść ze
+  źródła docelowego. MCP/HTML/parser to wyłącznie kanał transportowy.
+  
+  ⛔ **CBOSA — granica wnioskowania:** `FOUND` wymaga exact-match po
+  normalizacji. Niepełna paginacja, nierozpoznany licznik, zmiana krytycznej
+  struktury HTML, przerwany transport albo błąd choć jednego kandydata =
+  `OUT_OF_SCOPE`, nigdy `NOT_FOUND`. Gdy dokument jest kompletny, ale
+  portal nie publikuje sekcji uzasadnienia, wolno użyć metryki i sentencji;
+  tezy z uzasadnienia są zakazane (`reasoning_available=False`).
+  
+  Pełny kontrakt statusów: `shared/SYGNATURY.md`; kanały:
+  `shared/DOSTEP-MASZYNOWY-API.md`; hard gate:
+  `shared/PRAWO-HARDGATE-ORZECZENIA.md`.
 - Orzecznictwo i decyzje ORGANÓW (2A, ta sama moc dowodowa co bazy sądowe
   w zakresie ISTNIENIA rozstrzygnięcia): orzeczenia.uodo.gov.pl,
   orzeczenia.uzp.gov.pl (KIO), bip.uke.gov.pl, decyzje.uokik.gov.pl,
