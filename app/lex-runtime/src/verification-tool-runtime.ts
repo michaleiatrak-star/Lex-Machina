@@ -81,6 +81,7 @@ function publicToolResult(
     fetchedAt: string;
     temporalMode?: "CURRENT" | "HISTORICAL";
     asOf?: string;
+    sourceFormat?: "TEXT" | "PDF";
   },
   act: LegalActDescriptor,
   freshness?: TemporalFreshnessResult
@@ -119,6 +120,7 @@ function publicToolResult(
         }
       : null,
     sourceUrl: record.sourceUrl ?? null,
+    sourceFormat: record.sourceFormat ?? null,
     fetchedAt: record.fetchedAt,
     marker,
     instruction:
