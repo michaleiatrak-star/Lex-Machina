@@ -21,15 +21,30 @@ export type FinalizationFinding = {
   record?: VerificationRecord;
 };
 
+export type CaseQuoteFinding = {
+  evidenceHash: string;
+  line: number;
+  lineText: string;
+  status:
+    | "VERIFIED"
+    | "MISSING_CASE_QUOTE_LEDGER"
+    | "QUOTE_TEXT_MISMATCH"
+    | "CASE_SIGNATURE_MISSING";
+  record?: VerificationRecord;
+};
+
 export type FinalizationReport = {
   gate: "G8_HARD_GATE_FINALIZATION";
   result: "PASS" | "DEGRADED" | "BLOCKED";
   references: DetectedLegalReference[];
   findings: FinalizationFinding[];
+  caseQuoteFindings: CaseQuoteFinding[];
 };
 
 const VERIFIED_MARKER = /✅\s*\[VER:/iu;
 const UNVERIFIED_MARKER = /⚠️?\s*\[NIEWERYFIKOWANE\]/iu;
+const CASE_QUOTE_MARKER =
+  /✅\s*\[CASE-QUOTE:([a-f0-9]{20})\]/giu;
 
 const ARTICLE_PATTERN =
   /\bart\.?\s+\d+[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]*(?:\s*§\s*\d+[a-zA-Z]*)?(?:\s+(?:KC|KPC|KK|KPK|KPA|KP|KRO|KSH|KW|KPW|PZP))?/giu;
@@ -76,6 +91,7 @@ export class FinalizationGate {
   evaluate(text: string, ledger: VerificationLedger): FinalizationReport {
     const references = detectLegalReferences(text);
     const findings: FinalizationFinding[] = [];
+    const caseQuoteFindings: CaseQuoteFinding[] = [];
 
     for (const reference of references) {
       const record = ledger.latest(reference.claim);
@@ -119,12 +135,106 @@ export class FinalizationGate {
       }
     }
 
+    const lines = text.split(/\r?\n/u);
+
+    lines.forEach((lineText, index) => {
+      CASE_QUOTE_MARKER.lastIndex = 0;
+
+      for (
+        const match of lineText.matchAll(
+          CASE_QUOTE_MARKER
+        )
+      ) {
+        const evidenceHash =
+          match[1] ?? "";
+        if (!evidenceHash) {
+          continue;
+        }
+
+        const record =
+          ledger.all().find(
+            (candidate) =>
+              candidate.status ===
+                "VERIFIED" &&
+              candidate.kind === "case" &&
+              candidate.caseScope ===
+                "EXACT_QUOTE" &&
+              candidate.evidenceHash ===
+                evidenceHash
+          );
+
+        if (!record) {
+          caseQuoteFindings.push({
+            evidenceHash,
+            line: index + 1,
+            lineText,
+            status:
+              "MISSING_CASE_QUOTE_LEDGER"
+          });
+          continue;
+        }
+
+        if (
+          !record.claim ||
+          !lineText.includes(
+            record.claim
+          )
+        ) {
+          caseQuoteFindings.push({
+            evidenceHash,
+            line: index + 1,
+            lineText,
+            status:
+              "QUOTE_TEXT_MISMATCH",
+            record
+          });
+          continue;
+        }
+
+        const normalizedLine =
+          normalizeClaim(lineText);
+        const normalizedSignature =
+          normalizeClaim(
+            record.caseSignature ?? ""
+          );
+
+        if (
+          !normalizedSignature ||
+          !normalizedLine.includes(
+            normalizedSignature
+          )
+        ) {
+          caseQuoteFindings.push({
+            evidenceHash,
+            line: index + 1,
+            lineText,
+            status:
+              "CASE_SIGNATURE_MISSING",
+            record
+          });
+          continue;
+        }
+
+        caseQuoteFindings.push({
+          evidenceHash,
+          line: index + 1,
+          lineText,
+          status: "VERIFIED",
+          record
+        });
+      }
+    });
+
     const blocked = findings.some((finding) =>
       [
         "MISSING_LEDGER_RECORD",
         "MISSING_VERIFICATION_MARKER",
         "UNVERIFIED_NOT_MARKED"
       ].includes(finding.status)
+    ) ||
+    caseQuoteFindings.some(
+      (finding) =>
+        finding.status !== "VERIFIED"
     );
 
     const degraded =
@@ -135,7 +245,8 @@ export class FinalizationGate {
       gate: "G8_HARD_GATE_FINALIZATION",
       result: blocked ? "BLOCKED" : degraded ? "DEGRADED" : "PASS",
       references,
-      findings
+      findings,
+      caseQuoteFindings
     };
   }
 }
