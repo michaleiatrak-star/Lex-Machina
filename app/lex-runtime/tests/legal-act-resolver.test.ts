@@ -22,6 +22,11 @@ describe("DeterministicLegalActResolver", () => {
     expect(
       resolver.resolve("Kodeks postępowania karnego").id
     ).toBe("KPK");
+    expect(
+      resolver.resolve(
+        "  Kodeks   postępowania   karnego  "
+      ).id
+    ).toBe("KPK");
   });
 
   it("returns defensive copies of the registry", () => {
