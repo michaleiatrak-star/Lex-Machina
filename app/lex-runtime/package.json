@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "validate:corpus": "tsx src/validate-corpus.ts",
+    "validate:g3": "tsx src/validate-g3.ts",
     "test": "vitest run"
   },
   "dependencies": {
