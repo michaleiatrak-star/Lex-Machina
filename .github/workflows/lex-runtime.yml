@@ -20,8 +20,8 @@ permissions:
   contents: read
 
 jobs:
-  g1-g4:
-    name: G1-G4 runtime safety
+  g1-g5:
+    name: G1-G5 runtime and provider conformance
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -39,7 +39,10 @@ jobs:
       - name: Install runtime dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Unit tests — resolver, router-first and Tool Broker safety
+      - name: TypeScript strict typecheck
+        run: npm run typecheck
+
+      - name: Unit tests — runtime and provider contracts
         run: npm test
 
       - name: G1 — corpus integrity
@@ -50,3 +53,6 @@ jobs:
 
       - name: G4 — Tool Broker safety
         run: npm run validate:g4
+
+      - name: G5 — Provider conformance
+        run: npm run validate:g5
