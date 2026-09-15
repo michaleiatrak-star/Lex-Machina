@@ -14,7 +14,8 @@ const result =
 
 const parsedSafely = ![
   "NO_CURRENT_CONSOLIDATED_TEXT",
-  "SOURCE_METADATA_UNAVAILABLE"
+  "SOURCE_METADATA_UNAVAILABLE",
+  "REPEALED_CONSOLIDATED_TEXT"
 ].includes(result.status);
 
 const registryStillCurrent =
@@ -48,6 +49,9 @@ process.stdout.write(
     sourceUrl: result.sourceUrl ?? null,
     checkedAt: result.checkedAt,
     registryStillCurrent,
+    repealedConsolidatedText:
+      result.status ===
+      "REPEALED_CONSOLIDATED_TEXT",
     productionVerificationPermitted:
       result.status === "CURRENT",
     note:
