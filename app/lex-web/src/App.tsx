@@ -4,12 +4,14 @@ import {
   useState
 } from "react";
 import {
+  executeSession,
   getHealth,
   getModels,
   getRoutes,
   validateRoute,
   type ModelDescriptor,
-  type ProviderId
+  type ProviderId,
+  type SessionExecutionResponse
 } from "./api.js";
 
 const PROVIDERS: Array<{
@@ -40,6 +42,11 @@ export default function App() {
     "idle" | "valid" | "invalid"
   >("idle");
   const [routeReason, setRouteReason] = useState("");
+  const [query, setQuery] = useState("");
+  const [executing, setExecuting] = useState(false);
+  const [execution, setExecution] =
+    useState<SessionExecutionResponse | null>(null);
+  const [executionError, setExecutionError] = useState("");
 
   useEffect(() => {
     let cancelled = false;
@@ -73,6 +80,8 @@ export default function App() {
     setModels([]);
     setModel("");
     setModelError("");
+    setExecution(null);
+    setExecutionError("");
 
     getModels(provider)
       .then((response) => {
@@ -114,6 +123,45 @@ export default function App() {
       setRouteReason(
         error instanceof Error ? error.message : String(error)
       );
+    }
+  }
+
+  async function runAnalysis(): Promise<void> {
+    if (
+      !runtimeOnline ||
+      !model ||
+      !route ||
+      routeStatus !== "valid" ||
+      !query.trim()
+    ) {
+      return;
+    }
+
+    setExecuting(true);
+    setExecution(null);
+    setExecutionError("");
+
+    try {
+      const result = await executeSession({
+        query: query.trim(),
+        provider,
+        model,
+        primarySkill: route,
+        mode: "PRAWNIK"
+      });
+      setExecution(result);
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : String(error);
+      setExecutionError(
+        message === "PROVIDER_NOT_CONFIGURED"
+          ? "Brak lokalnego klucza API dla wybranego dostawcy."
+          : message === "PROVIDER_EXECUTION_FAILED"
+            ? "Provider odrzucił lub przerwał wykonanie."
+            : "Nie udało się wykonać sesji."
+      );
+    } finally {
+      setExecuting(false);
     }
   }
 
@@ -246,6 +294,7 @@ export default function App() {
                 setRoute(event.target.value);
                 setRouteStatus("idle");
                 setRouteReason("");
+                setExecution(null);
               }}
             >
               {routes.map((item) => (
@@ -278,6 +327,27 @@ export default function App() {
               )}
             </div>
           </article>
+
+          <article className="config-card config-card-wide">
+            <span className="step">04</span>
+            <label htmlFor="query">Pytanie / zadanie</label>
+            <textarea
+              id="query"
+              value={query}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                setExecution(null);
+                setExecutionError("");
+              }}
+              maxLength={30000}
+              placeholder="Opisz problem prawny, stan faktyczny albo zadanie analityczne..."
+            />
+            <p className="field-help">
+              Treść zostanie przesłana do wybranego providera dopiero po
+              uruchomieniu analizy. Wynik z niezweryfikowanym powołaniem
+              prawnym zostanie zatrzymany przez HARD GATE.
+            </p>
+          </article>
         </section>
 
         <section className="session-preview">
@@ -301,13 +371,64 @@ export default function App() {
           </dl>
           <button
             type="button"
-            className="secondary-button"
-            disabled
-            title="Wykonanie zapytania zostanie podłączone w następnym gate"
+            className="primary-button"
+            onClick={runAnalysis}
+            disabled={
+              executing ||
+              !runtimeOnline ||
+              !model ||
+              routeStatus !== "valid" ||
+              !query.trim()
+            }
           >
-            Uruchom analizę
+            {executing ? "Analizuję…" : "Uruchom analizę"}
           </button>
         </section>
+
+        {executionError && (
+          <section className="execution-result execution-error">
+            <p className="eyebrow">Błąd wykonania</p>
+            <h3>{executionError}</h3>
+          </section>
+        )}
+
+        {execution?.status === "BLOCKED" && (
+          <section className="execution-result execution-blocked">
+            <p className="eyebrow">HARD GATE</p>
+            <h3>Odpowiedź została zatrzymana przed prezentacją.</h3>
+            <p>
+              Model zwrócił powołania prawne bez wymaganego śladu
+              weryfikacji. Surowa odpowiedź nie została przekazana do
+              przeglądarki.
+            </p>
+            {execution.blockedReferences.length > 0 && (
+              <ul className="blocked-list">
+                {execution.blockedReferences.map((reference, index) => (
+                  <li key={`${reference.claim}-${index}`}>
+                    <strong>{reference.claim}</strong>
+                    <span>{reference.status}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        )}
+
+        {execution?.status === "DRAFT_PRESENTABLE" && execution.answer && (
+          <section className="execution-result execution-ok">
+            <p className="eyebrow">Szkic odpowiedzi</p>
+            <h3>Wynik przeszedł aktualną bramkę prezentacji.</h3>
+            <p className="result-note">
+              To wynik sesji roboczej, nie eksport końcowego pisma.
+              Eksport dokumentów nadal podlega G10.
+            </p>
+            <div className="answer-text">{execution.answer}</div>
+            <footer className="result-meta">
+              Sesja {execution.sessionId} · audit {execution.audit.result} ·
+              {execution.audit.eventCount} zdarzeń
+            </footer>
+          </section>
+        )}
       </main>
     </div>
   );
