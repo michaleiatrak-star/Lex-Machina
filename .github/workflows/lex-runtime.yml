@@ -20,8 +20,8 @@ permissions:
   contents: read
 
 jobs:
-  g1-g8:
-    name: G1-G8 runtime validation
+  g1-g9:
+    name: G1-G9 runtime validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -62,3 +62,6 @@ jobs:
 
       - name: G8 — HARD GATE finalization
         run: npm run validate:g8
+
+      - name: G9 — audit completeness
+        run: npm run validate:g9
