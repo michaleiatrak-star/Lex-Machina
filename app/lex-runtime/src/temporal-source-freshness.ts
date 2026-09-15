@@ -4,10 +4,16 @@ import type {
 
 export type TemporalFreshnessStatus =
   | "CURRENT"
+  | "HISTORICAL"
   | "STALE_CONSOLIDATED_TEXT"
   | "POST_TJ_AMENDMENTS"
   | "CURRENT_TEXT_REQUIRES_PDF"
+  | "HISTORICAL_TEXT_REQUIRES_PDF"
   | "REPEALED_CONSOLIDATED_TEXT"
+  | "ACT_NOT_IN_FORCE_AT_DATE"
+  | "NO_HISTORICAL_CONSOLIDATED_TEXT"
+  | "HISTORICAL_POST_TJ_AMENDMENTS"
+  | "INVALID_HISTORICAL_DATE"
   | "NO_CURRENT_CONSOLIDATED_TEXT"
   | "SOURCE_METADATA_UNAVAILABLE";
 
@@ -21,14 +27,22 @@ export type TemporalAmendment = {
 
 export type TemporalFreshnessResult = {
   status: TemporalFreshnessStatus;
+  mode: "CURRENT" | "HISTORICAL";
   checkedAt: string;
   baseEli: string;
   pinnedEli: string;
+  requestedAsOf?: string;
   currentEli?: string;
   currentPromulgation?: string;
   sourceUrl?: string;
+  actValidFrom?: string;
+  actValidTo?: string;
   amendmentsAfter: TemporalAmendment[];
   reason?: string;
+};
+
+export type TemporalFreshnessOptions = {
+  asOf?: string;
 };
 
 export type EliFetch = (
@@ -45,8 +59,21 @@ type EliAct = {
   title?: unknown;
   promulgation?: unknown;
   announcementDate?: unknown;
+  entryIntoForce?: unknown;
+  validFrom?: unknown;
+  repealDate?: unknown;
+  expirationDate?: unknown;
+  legalStatusDate?: unknown;
+  date?: unknown;
   textHTML?: unknown;
   textPDF?: unknown;
+};
+
+type HistoricalCandidate = {
+  eli: string;
+  metadata: EliAct;
+  stateDate: string;
+  sourceUrl?: string;
 };
 
 const ELI_API = "https://api.sejm.gov.pl/eli/acts";
@@ -55,17 +82,51 @@ function text(value: unknown): string {
   return typeof value === "string" ? value.trim() : "";
 }
 
+function dateOnly(value: unknown): string {
+  const raw = text(value);
+  const match = raw.match(/^(d{4}-d{2}-d{2})/u);
+  return match?.[1] ?? "";
+}
+
+function validDate(value: string): boolean {
+  if (!/^d{4}-d{2}-d{2}$/u.test(value)) {
+    return false;
+  }
+  const parsed = new Date(value + "T00:00:00.000Z");
+  return (
+    !Number.isNaN(parsed.getTime()) &&
+    parsed.toISOString().slice(0, 10) === value
+  );
+}
+
 function normalizeEli(value: unknown): string {
-  const raw = text(value).replace(/^https?:\/\/[^/]+\/eli\/acts\//u, "");
-  const match = raw.match(/(DU|MP)\/(\d{4})\/(\d+)/u);
+  const raw = text(value).replace(
+    /^https?://[^/]+/eli/acts//u,
+    ""
+  );
+  const match = raw.match(
+    /(DU|MP)/(d{4})/(d+)/u
+  );
   return match ? match[0] : "";
 }
 
 function unwrapAct(value: unknown): EliAct | null {
-  if (!value || typeof value !== "object") return null;
+  if (!value || typeof value !== "object") {
+    return null;
+  }
   const candidate = value as Record<string, unknown>;
-  if (candidate.act && typeof candidate.act === "object") {
-    return candidate.act as EliAct;
+  if (
+    candidate.act &&
+    typeof candidate.act === "object"
+  ) {
+    const act = candidate.act as EliAct;
+    return {
+      ...act,
+      ...(candidate.date !== undefined &&
+      act.date === undefined
+        ? { date: candidate.date }
+        : {})
+    };
   }
   return candidate as EliAct;
 }
@@ -74,8 +135,11 @@ function list(
   refs: unknown,
   relation: string
 ): unknown[] {
-  if (!refs || typeof refs !== "object") return [];
-  const value = (refs as Record<string, unknown>)[relation];
+  if (!refs || typeof refs !== "object") {
+    return [];
+  }
+  const value =
+    (refs as Record<string, unknown>)[relation];
   return Array.isArray(value) ? value : [];
 }
 
@@ -100,7 +164,61 @@ function repealedStatus(value: unknown): boolean {
 
 function numeric(value: unknown): number {
   const parsed = Number(value);
-  return Number.isInteger(parsed) && parsed >= 0 ? parsed : 0;
+  return Number.isInteger(parsed) &&
+    parsed >= 0
+    ? parsed
+    : 0;
+}
+
+function validityStart(
+  act: EliAct
+): string {
+  return (
+    dateOnly(act.validFrom) ||
+    dateOnly(act.entryIntoForce) ||
+    dateOnly(act.legalStatusDate) ||
+    dateOnly(act.promulgation) ||
+    dateOnly(act.announcementDate)
+  );
+}
+
+function validityEnd(
+  act: EliAct
+): string {
+  const dates = [
+    dateOnly(act.repealDate),
+    dateOnly(act.expirationDate)
+  ].filter(Boolean).sort();
+
+  return dates[0] ?? "";
+}
+
+function isInForceAt(
+  act: EliAct,
+  asOf: string
+): {
+  inForce: boolean;
+  validFrom: string;
+  validTo: string;
+} {
+  const validFrom = validityStart(act);
+  const validTo = validityEnd(act);
+
+  if (!validFrom) {
+    return {
+      inForce: false,
+      validFrom,
+      validTo
+    };
+  }
+
+  return {
+    inForce:
+      asOf >= validFrom &&
+      (!validTo || asOf < validTo),
+    validFrom,
+    validTo
+  };
 }
 
 function pickCurrentConsolidated(
@@ -116,20 +234,25 @@ function pickCurrentConsolidated(
     "Inf. o tekście jednolitym"
   )
     .map(unwrapAct)
-    .filter((act): act is EliAct => Boolean(act))
+    .filter(
+      (act): act is EliAct =>
+        Boolean(act)
+    )
     .map((act) => ({
       eli: normalizeEli(act.ELI),
       year: numeric(act.year),
       pos: numeric(act.pos),
       status: text(act.status)
     }))
-    .filter((act) =>
-      Boolean(act.eli) &&
-      activeStatus(act.status)
+    .filter(
+      (act) =>
+        Boolean(act.eli) &&
+        activeStatus(act.status)
     )
-    .sort((a, b) =>
-      a.year - b.year ||
-      a.pos - b.pos
+    .sort(
+      (a, b) =>
+        a.year - b.year ||
+        a.pos - b.pos
     );
 
   return candidates.at(-1) ?? null;
@@ -137,11 +260,15 @@ function pickCurrentConsolidated(
 
 function amendmentFromAct(
   act: EliAct
-): Omit<TemporalAmendment, "provenance"> | null {
+): Omit<
+  TemporalAmendment,
+  "provenance"
+> | null {
   const eli = normalizeEli(act.ELI);
   const promulgation =
-    text(act.promulgation) ||
-    text(act.announcementDate);
+    dateOnly(act.date) ||
+    dateOnly(act.promulgation) ||
+    dateOnly(act.announcementDate);
 
   if (!eli) return null;
 
@@ -154,27 +281,97 @@ function amendmentFromAct(
   };
 }
 
-function postTjByDate(
+function amendmentsBetween(
   refs: unknown,
-  promulgation: string
-): Map<string, Omit<TemporalAmendment, "provenance">> {
+  after: string,
+  through: string
+): Map<
+  string,
+  Omit<
+    TemporalAmendment,
+    "provenance"
+  >
+> {
   const result = new Map<
     string,
-    Omit<TemporalAmendment, "provenance">
+    Omit<
+      TemporalAmendment,
+      "provenance"
+    >
   >();
 
-  if (!promulgation) return result;
+  if (!after || !through) {
+    return result;
+  }
 
-  for (const item of list(refs, "Akty zmieniające")) {
+  for (
+    const item of list(
+      refs,
+      "Akty zmieniające"
+    )
+  ) {
     const act = unwrapAct(item);
     if (!act) continue;
-    const amendment = amendmentFromAct(act);
+    const amendment =
+      amendmentFromAct(act);
     if (
       amendment &&
       amendment.promulgation &&
-      amendment.promulgation > promulgation
+      amendment.promulgation > after &&
+      amendment.promulgation <= through
     ) {
-      result.set(amendment.eli, amendment);
+      result.set(
+        amendment.eli,
+        amendment
+      );
+    }
+  }
+
+  return result;
+}
+
+function postTjByDate(
+  refs: unknown,
+  promulgation: string
+): Map<
+  string,
+  Omit<
+    TemporalAmendment,
+    "provenance"
+  >
+> {
+  const result = new Map<
+    string,
+    Omit<
+      TemporalAmendment,
+      "provenance"
+    >
+  >();
+
+  if (!promulgation) {
+    return result;
+  }
+
+  for (
+    const item of list(
+      refs,
+      "Akty zmieniające"
+    )
+  ) {
+    const act = unwrapAct(item);
+    if (!act) continue;
+    const amendment =
+      amendmentFromAct(act);
+    if (
+      amendment &&
+      amendment.promulgation &&
+      amendment.promulgation >
+        promulgation
+    ) {
+      result.set(
+        amendment.eli,
+        amendment
+      );
     }
   }
 
@@ -183,10 +380,19 @@ function postTjByDate(
 
 function postTjByApi(
   refs: unknown
-): Map<string, Omit<TemporalAmendment, "provenance">> {
+): Map<
+  string,
+  Omit<
+    TemporalAmendment,
+    "provenance"
+  >
+> {
   const result = new Map<
     string,
-    Omit<TemporalAmendment, "provenance">
+    Omit<
+      TemporalAmendment,
+      "provenance"
+    >
   >();
 
   for (
@@ -197,9 +403,13 @@ function postTjByApi(
   ) {
     const act = unwrapAct(item);
     if (!act) continue;
-    const amendment = amendmentFromAct(act);
+    const amendment =
+      amendmentFromAct(act);
     if (amendment) {
-      result.set(amendment.eli, amendment);
+      result.set(
+        amendment.eli,
+        amendment
+      );
     }
   }
 
@@ -209,11 +419,17 @@ function postTjByApi(
 function mergeAmendments(
   dateMap: Map<
     string,
-    Omit<TemporalAmendment, "provenance">
+    Omit<
+      TemporalAmendment,
+      "provenance"
+    >
   >,
   apiMap: Map<
     string,
-    Omit<TemporalAmendment, "provenance">
+    Omit<
+      TemporalAmendment,
+      "provenance"
+    >
   >
 ): TemporalAmendment[] {
   const ids = new Set([
@@ -223,10 +439,15 @@ function mergeAmendments(
 
   return [...ids]
     .map((eli) => {
-      const date = dateMap.get(eli);
-      const api = apiMap.get(eli);
-      const value = date ?? api;
-      if (!value) return null;
+      const date =
+        dateMap.get(eli);
+      const api =
+        apiMap.get(eli);
+      const value =
+        date ?? api;
+      if (!value) {
+        return null;
+      }
 
       return {
         ...value,
@@ -239,21 +460,39 @@ function mergeAmendments(
       };
     })
     .filter(
-      (value): value is TemporalAmendment =>
+      (
+        value
+      ): value is TemporalAmendment =>
         Boolean(value)
     )
-    .sort((a, b) =>
-      a.promulgation.localeCompare(b.promulgation) ||
-      a.eli.localeCompare(b.eli)
+    .sort(
+      (a, b) =>
+        a.promulgation.localeCompare(
+          b.promulgation
+        ) ||
+        a.eli.localeCompare(
+          b.eli
+        )
     );
 }
 
-function parts(eli: string): [string, string, string] | null {
-  const match = normalizeEli(eli).match(
-    /^(DU|MP)\/(\d{4})\/(\d+)$/u
-  );
+function parts(
+  eli: string
+): [
+  string,
+  string,
+  string
+] | null {
+  const match =
+    normalizeEli(eli).match(
+      /^(DU|MP)/(d{4})/(d+)$/u
+    );
   if (!match) return null;
-  return [match[1]!, match[2]!, match[3]!];
+  return [
+    match[1]!,
+    match[2]!,
+    match[3]!
+  ];
 }
 
 function apiUrl(
@@ -262,58 +501,505 @@ function apiUrl(
 ): string | null {
   const split = parts(eli);
   if (!split) return null;
-  return `${ELI_API}/${split[0]}/${split[1]}/${split[2]}${suffix}`;
+  return (
+    ELI_API +
+    "/" +
+    split[0] +
+    "/" +
+    split[1] +
+    "/" +
+    split[2] +
+    suffix
+  );
 }
 
 async function json(
   fetcher: EliFetch,
   url: string
 ): Promise<unknown> {
-  const response = await fetcher(url, {
-    method: "GET",
-    redirect: "error",
-    headers: {
-      Accept: "application/json"
-    }
-  });
+  const response =
+    await fetcher(url, {
+      method: "GET",
+      redirect: "error",
+      headers: {
+        Accept: "application/json"
+      }
+    });
   if (!response.ok) {
     throw new Error(
-      "ELI_HTTP_" + response.status
+      "ELI_HTTP_" +
+      response.status
     );
   }
   return response.json();
 }
 
+async function historicalCandidate(
+  fetcher: EliFetch,
+  eli: string,
+  asOf: string
+): Promise<HistoricalCandidate | null> {
+  const metadataUrl =
+    apiUrl(eli);
+  if (!metadataUrl) {
+    return null;
+  }
+
+  let metadata: unknown;
+  try {
+    metadata = await json(
+      fetcher,
+      metadataUrl
+    );
+  } catch {
+    return null;
+  }
+
+  const act =
+    unwrapAct(metadata);
+  if (!act) {
+    return null;
+  }
+
+  const stateDate =
+    dateOnly(
+      act.legalStatusDate
+    ) ||
+    dateOnly(act.promulgation) ||
+    dateOnly(
+      act.announcementDate
+    );
+
+  if (
+    !stateDate ||
+    stateDate > asOf
+  ) {
+    return null;
+  }
+
+  const interval =
+    isInForceAt(act, asOf);
+
+  if (
+    (
+      repealedStatus(
+        act.status
+      ) ||
+      interval.validTo
+    ) &&
+    !interval.inForce
+  ) {
+    return null;
+  }
+
+  const sourceUrl =
+    act.textHTML === true
+      ? apiUrl(
+          eli,
+          "/text.html"
+        ) ?? undefined
+      : act.textPDF === true
+        ? apiUrl(
+            eli,
+            "/text.pdf"
+          ) ?? undefined
+        : undefined;
+
+  return {
+    eli,
+    metadata: act,
+    stateDate,
+    ...(sourceUrl
+      ? { sourceUrl }
+      : {})
+  };
+}
+
 export class TemporalSourceFreshnessChecker {
   constructor(
-    private readonly fetcher: EliFetch =
-      globalThis.fetch.bind(globalThis),
-    private readonly now: () => string =
-      () => new Date().toISOString()
+    private readonly fetcher:
+      EliFetch =
+      globalThis.fetch.bind(
+        globalThis
+      ),
+    private readonly now:
+      () => string =
+      () =>
+        new Date().toISOString()
   ) {}
 
   async check(
-    descriptor: LegalActDescriptor
-  ): Promise<TemporalFreshnessResult> {
-    const checkedAt = this.now();
+    descriptor:
+      LegalActDescriptor,
+    options:
+      TemporalFreshnessOptions = {}
+  ): Promise<
+    TemporalFreshnessResult
+  > {
+    const checkedAt =
+      this.now();
+    const requestedAsOf =
+      options.asOf?.trim();
+
+    if (requestedAsOf) {
+      return this.checkHistorical(
+        descriptor,
+        requestedAsOf,
+        checkedAt
+      );
+    }
+
+    return this.checkCurrent(
+      descriptor,
+      checkedAt
+    );
+  }
+
+  private async checkHistorical(
+    descriptor:
+      LegalActDescriptor,
+    asOf: string,
+    checkedAt: string
+  ): Promise<
+    TemporalFreshnessResult
+  > {
+    const mode = "HISTORICAL" as const;
     const failure = (
-      status: TemporalFreshnessStatus,
+      status:
+        TemporalFreshnessStatus,
       reason: string,
-      extra: Partial<TemporalFreshnessResult> = {}
+      extra:
+        Partial<
+          TemporalFreshnessResult
+        > = {}
     ): TemporalFreshnessResult => ({
       status,
+      mode,
       checkedAt,
-      baseEli: descriptor.baseEli,
-      pinnedEli: descriptor.eli,
+      baseEli:
+        descriptor.baseEli,
+      pinnedEli:
+        descriptor.eli,
+      requestedAsOf: asOf,
       amendmentsAfter: [],
       reason,
       ...extra
     });
 
-    const baseRefsUrl = apiUrl(
-      descriptor.baseEli,
-      "/references"
-    );
+    const today =
+      checkedAt.slice(0, 10);
+
+    if (
+      !validDate(asOf) ||
+      asOf >= today
+    ) {
+      return failure(
+        "INVALID_HISTORICAL_DATE",
+        "AS_OF_MUST_BE_A_PAST_ISO_DATE"
+      );
+    }
+
+    const baseMetadataUrl =
+      apiUrl(
+        descriptor.baseEli
+      );
+    const baseRefsUrl =
+      apiUrl(
+        descriptor.baseEli,
+        "/references"
+      );
+
+    if (
+      !baseMetadataUrl ||
+      !baseRefsUrl
+    ) {
+      return failure(
+        "SOURCE_METADATA_UNAVAILABLE",
+        "INVALID_BASE_ELI"
+      );
+    }
+
+    let baseMetadata:
+      unknown;
+    let baseRefs:
+      unknown;
+
+    try {
+      [
+        baseMetadata,
+        baseRefs
+      ] = await Promise.all([
+        json(
+          this.fetcher,
+          baseMetadataUrl
+        ),
+        json(
+          this.fetcher,
+          baseRefsUrl
+        )
+      ]);
+    } catch {
+      return failure(
+        "SOURCE_METADATA_UNAVAILABLE",
+        "BASE_METADATA_FETCH_FAILED"
+      );
+    }
+
+    const baseAct =
+      unwrapAct(
+        baseMetadata
+      );
+    if (!baseAct) {
+      return failure(
+        "SOURCE_METADATA_UNAVAILABLE",
+        "BASE_METADATA_INVALID"
+      );
+    }
+
+    const baseInterval =
+      isInForceAt(
+        baseAct,
+        asOf
+      );
+
+    if (
+      !baseInterval.inForce
+    ) {
+      return failure(
+        "ACT_NOT_IN_FORCE_AT_DATE",
+        "BASE_ACT_NOT_IN_FORCE_AT_AS_OF",
+        {
+          ...(baseInterval.validFrom
+            ? {
+                actValidFrom:
+                  baseInterval.validFrom
+              }
+            : {}),
+          ...(baseInterval.validTo
+            ? {
+                actValidTo:
+                  baseInterval.validTo
+              }
+            : {})
+        }
+      );
+    }
+
+    const candidateElis = [
+      ...new Set(
+        list(
+          baseRefs,
+          "Inf. o tekście jednolitym"
+        )
+          .map(unwrapAct)
+          .filter(
+            (
+              act
+            ): act is EliAct =>
+              Boolean(act)
+          )
+          .map((act) =>
+            normalizeEli(
+              act.ELI
+            )
+          )
+          .filter(Boolean)
+      )
+    ];
+
+    const candidates = (
+      await Promise.all(
+        candidateElis.map(
+          (eli) =>
+            historicalCandidate(
+              this.fetcher,
+              eli,
+              asOf
+            )
+        )
+      )
+    )
+      .filter(
+        (
+          value
+        ): value is HistoricalCandidate =>
+          Boolean(value)
+      )
+      .sort(
+        (a, b) =>
+          a.stateDate.localeCompare(
+            b.stateDate
+          ) ||
+          a.eli.localeCompare(
+            b.eli
+          )
+      );
+
+    const selected =
+      candidates.at(-1);
+
+    if (!selected) {
+      return failure(
+        "NO_HISTORICAL_CONSOLIDATED_TEXT",
+        "NO_TJ_APPLICABLE_AT_AS_OF",
+        {
+          actValidFrom:
+            baseInterval.validFrom,
+          ...(baseInterval.validTo
+            ? {
+                actValidTo:
+                  baseInterval.validTo
+              }
+            : {})
+        }
+      );
+    }
+
+    const amendmentsAfter =
+      mergeAmendments(
+        amendmentsBetween(
+          baseRefs,
+          selected.stateDate,
+          asOf
+        ),
+        new Map()
+      );
+
+    if (
+      amendmentsAfter.length > 0
+    ) {
+      return failure(
+        "HISTORICAL_POST_TJ_AMENDMENTS",
+        "AMENDMENTS_AFTER_SELECTED_TJ_BEFORE_AS_OF",
+        {
+          currentEli:
+            selected.eli,
+          currentPromulgation:
+            selected.stateDate,
+          actValidFrom:
+            baseInterval.validFrom,
+          ...(baseInterval.validTo
+            ? {
+                actValidTo:
+                  baseInterval.validTo
+              }
+            : {}),
+          amendmentsAfter
+        }
+      );
+    }
+
+    const sourceUrl =
+      selected.sourceUrl;
+    const act =
+      selected.metadata;
+
+    if (!sourceUrl) {
+      return failure(
+        "SOURCE_METADATA_UNAVAILABLE",
+        "HISTORICAL_TEXT_FORMAT_UNAVAILABLE",
+        {
+          currentEli:
+            selected.eli,
+          currentPromulgation:
+            selected.stateDate,
+          actValidFrom:
+            baseInterval.validFrom,
+          ...(baseInterval.validTo
+            ? {
+                actValidTo:
+                  baseInterval.validTo
+              }
+            : {})
+        }
+      );
+    }
+
+    if (
+      act.textHTML !== true &&
+      act.textPDF === true
+    ) {
+      return failure(
+        "HISTORICAL_TEXT_REQUIRES_PDF",
+        "HISTORICAL_TEXT_HAS_NO_HTML",
+        {
+          currentEli:
+            selected.eli,
+          currentPromulgation:
+            selected.stateDate,
+          sourceUrl,
+          actValidFrom:
+            baseInterval.validFrom,
+          ...(baseInterval.validTo
+            ? {
+                actValidTo:
+                  baseInterval.validTo
+              }
+            : {})
+        }
+      );
+    }
+
+    return {
+      status: "HISTORICAL",
+      mode,
+      checkedAt,
+      baseEli:
+        descriptor.baseEli,
+      pinnedEli:
+        descriptor.eli,
+      requestedAsOf: asOf,
+      currentEli:
+        selected.eli,
+      currentPromulgation:
+        selected.stateDate,
+      sourceUrl,
+      actValidFrom:
+        baseInterval.validFrom,
+      ...(baseInterval.validTo
+        ? {
+            actValidTo:
+              baseInterval.validTo
+          }
+        : {}),
+      amendmentsAfter: []
+    };
+  }
+
+  private async checkCurrent(
+    descriptor:
+      LegalActDescriptor,
+    checkedAt: string
+  ): Promise<
+    TemporalFreshnessResult
+  > {
+    const mode = "CURRENT" as const;
+    const failure = (
+      status:
+        TemporalFreshnessStatus,
+      reason: string,
+      extra:
+        Partial<
+          TemporalFreshnessResult
+        > = {}
+    ): TemporalFreshnessResult => ({
+      status,
+      mode,
+      checkedAt,
+      baseEli:
+        descriptor.baseEli,
+      pinnedEli:
+        descriptor.eli,
+      amendmentsAfter: [],
+      reason,
+      ...extra
+    });
+
+    const baseRefsUrl =
+      apiUrl(
+        descriptor.baseEli,
+        "/references"
+      );
     if (!baseRefsUrl) {
       return failure(
         "SOURCE_METADATA_UNAVAILABLE",
@@ -321,12 +1007,14 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    let baseRefs: unknown;
+    let baseRefs:
+      unknown;
     try {
-      baseRefs = await json(
-        this.fetcher,
-        baseRefsUrl
-      );
+      baseRefs =
+        await json(
+          this.fetcher,
+          baseRefsUrl
+        );
     } catch {
       return failure(
         "SOURCE_METADATA_UNAVAILABLE",
@@ -334,21 +1022,33 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    const pinnedRelation = list(
-      baseRefs,
-      "Inf. o tekście jednolitym"
-    )
-      .map(unwrapAct)
-      .filter((act): act is EliAct => Boolean(act))
-      .find(
-        (act) =>
-          normalizeEli(act.ELI) ===
-          normalizeEli(descriptor.eli)
-      );
+    const pinnedRelation =
+      list(
+        baseRefs,
+        "Inf. o tekście jednolitym"
+      )
+        .map(unwrapAct)
+        .filter(
+          (
+            act
+          ): act is EliAct =>
+            Boolean(act)
+        )
+        .find(
+          (act) =>
+            normalizeEli(
+              act.ELI
+            ) ===
+            normalizeEli(
+              descriptor.eli
+            )
+        );
 
     if (
       pinnedRelation &&
-      repealedStatus(pinnedRelation.status)
+      repealedStatus(
+        pinnedRelation.status
+      )
     ) {
       return failure(
         "REPEALED_CONSOLIDATED_TEXT",
@@ -356,9 +1056,10 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    const current = pickCurrentConsolidated(
-      baseRefs
-    );
+    const current =
+      pickCurrentConsolidated(
+        baseRefs
+      );
     if (!current) {
       return failure(
         "NO_CURRENT_CONSOLIDATED_TEXT",
@@ -366,73 +1067,118 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    const metadataUrl = apiUrl(current.eli);
-    const currentRefsUrl = apiUrl(
-      current.eli,
-      "/references"
-    );
-    if (!metadataUrl || !currentRefsUrl) {
+    const metadataUrl =
+      apiUrl(current.eli);
+    const currentRefsUrl =
+      apiUrl(
+        current.eli,
+        "/references"
+      );
+
+    if (
+      !metadataUrl ||
+      !currentRefsUrl
+    ) {
       return failure(
         "SOURCE_METADATA_UNAVAILABLE",
         "INVALID_CURRENT_ELI",
-        { currentEli: current.eli }
+        {
+          currentEli:
+            current.eli
+        }
       );
     }
 
-    let metadata: unknown;
-    let currentRefs: unknown;
+    let metadata:
+      unknown;
+    let currentRefs:
+      unknown;
+
     try {
-      [metadata, currentRefs] = await Promise.all([
-        json(this.fetcher, metadataUrl),
-        json(this.fetcher, currentRefsUrl)
+      [
+        metadata,
+        currentRefs
+      ] = await Promise.all([
+        json(
+          this.fetcher,
+          metadataUrl
+        ),
+        json(
+          this.fetcher,
+          currentRefsUrl
+        )
       ]);
     } catch {
       return failure(
         "SOURCE_METADATA_UNAVAILABLE",
         "CURRENT_METADATA_FETCH_FAILED",
-        { currentEli: current.eli }
+        {
+          currentEli:
+            current.eli
+        }
       );
     }
 
-    const act = unwrapAct(metadata) ?? {};
+    const act =
+      unwrapAct(metadata) ?? {};
 
-    if (repealedStatus(act.status)) {
+    if (
+      repealedStatus(
+        act.status
+      )
+    ) {
       return failure(
         "REPEALED_CONSOLIDATED_TEXT",
         "CURRENT_CONSOLIDATED_TEXT_REPEALED",
-        { currentEli: current.eli }
+        {
+          currentEli:
+            current.eli
+        }
       );
     }
 
     const promulgation =
-      text(act.promulgation) ||
-      text(act.announcementDate);
+      dateOnly(
+        act.promulgation
+      ) ||
+      dateOnly(
+        act.announcementDate
+      );
 
     if (!promulgation) {
       return failure(
         "SOURCE_METADATA_UNAVAILABLE",
         "CURRENT_PROMULGATION_MISSING",
-        { currentEli: current.eli }
+        {
+          currentEli:
+            current.eli
+        }
       );
     }
 
-    const amendmentsAfter = mergeAmendments(
-      postTjByDate(
-        baseRefs,
-        promulgation
-      ),
-      postTjByApi(currentRefs)
-    );
+    const amendmentsAfter =
+      mergeAmendments(
+        postTjByDate(
+          baseRefs,
+          promulgation
+        ),
+        postTjByApi(
+          currentRefs
+        )
+      );
 
     const common = {
-      currentEli: current.eli,
-      currentPromulgation: promulgation,
+      currentEli:
+        current.eli,
+      currentPromulgation:
+        promulgation,
       amendmentsAfter
     };
 
     if (
-      normalizeEli(descriptor.eli) !==
-      current.eli
+      normalizeEli(
+        descriptor.eli
+      ) !== current.eli
     ) {
       return failure(
         "STALE_CONSOLIDATED_TEXT",
@@ -441,7 +1187,9 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    if (amendmentsAfter.length > 0) {
+    if (
+      amendmentsAfter.length > 0
+    ) {
       return failure(
         "POST_TJ_AMENDMENTS",
         "OFFICIAL_AMENDMENTS_AFTER_CONSOLIDATED_TEXT",
@@ -449,19 +1197,28 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    if (act.textHTML !== true) {
-      if (act.textPDF === true) {
-        const pdfUrl = apiUrl(
-          current.eli,
-          "/text.pdf"
-        );
+    if (
+      act.textHTML !== true
+    ) {
+      if (
+        act.textPDF === true
+      ) {
+        const pdfUrl =
+          apiUrl(
+            current.eli,
+            "/text.pdf"
+          );
+
         return failure(
           "CURRENT_TEXT_REQUIRES_PDF",
           "CURRENT_TEXT_HAS_NO_HTML",
           {
             ...common,
             ...(pdfUrl
-              ? { sourceUrl: pdfUrl }
+              ? {
+                  sourceUrl:
+                    pdfUrl
+                }
               : {})
           }
         );
@@ -474,10 +1231,12 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    const sourceUrl = apiUrl(
-      current.eli,
-      "/text.html"
-    );
+    const sourceUrl =
+      apiUrl(
+        current.eli,
+        "/text.html"
+      );
+
     if (!sourceUrl) {
       return failure(
         "SOURCE_METADATA_UNAVAILABLE",
@@ -488,11 +1247,16 @@ export class TemporalSourceFreshnessChecker {
 
     return {
       status: "CURRENT",
+      mode,
       checkedAt,
-      baseEli: descriptor.baseEli,
-      pinnedEli: descriptor.eli,
-      currentEli: current.eli,
-      currentPromulgation: promulgation,
+      baseEli:
+        descriptor.baseEli,
+      pinnedEli:
+        descriptor.eli,
+      currentEli:
+        current.eli,
+      currentPromulgation:
+        promulgation,
       sourceUrl,
       amendmentsAfter: []
     };
