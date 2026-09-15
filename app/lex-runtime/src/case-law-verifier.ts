@@ -366,14 +366,32 @@ function rawFullText(
   const root = object(payload);
   const first =
     object(array(root?.data)[0]);
-  const raw = first?.raw;
 
-  return (
-    typeof raw === "string" &&
-    raw.length > 0
-  )
-    ? raw
-    : null;
+  const directRaw =
+    first?.raw;
+  if (
+    typeof directRaw === "string" &&
+    directRaw.length > 0
+  ) {
+    return directRaw;
+  }
+
+  // Current sn.pl com_ajax wraps the plugin
+  // JsonResponse once more:
+  // root.data[0].data.raw.
+  const nested =
+    object(first?.data);
+  const nestedRaw =
+    nested?.raw;
+
+  if (
+    typeof nestedRaw === "string" &&
+    nestedRaw.length > 0
+  ) {
+    return nestedRaw;
+  }
+
+  return null;
 }
 
 function decodeBase64Html(
