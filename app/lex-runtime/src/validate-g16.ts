@@ -26,9 +26,6 @@ const lexRoot = path.resolve(
     path.join(repositoryRoot, "Wersja rozwojowa rozpakowana")
 );
 const DR02 = "dr-02-prawo-cywilne-rodzinne-gospodarcze";
-const SOURCE_URL =
-  "https://eli.gov.pl/acts/DU/1964/93/text.html";
-const EXPECTED_TITLE = "Kodeks cywilny";
 
 type ToolMode =
   | "verified"
@@ -71,8 +68,7 @@ class VerificationProvider implements ProviderAdapter {
         input: {
           claim: "art. 5 KC",
           kind: "statute",
-          url: SOURCE_URL,
-          expectedTitle: EXPECTED_TITLE
+          act: "KC"
         }
       }]);
 
