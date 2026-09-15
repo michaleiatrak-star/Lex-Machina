@@ -1,5 +1,6 @@
 import {
   SupremeCourtCaseVerifier,
+  propositionEvidenceHash,
   supremeCourtSearchUrl
 } from "./case-law-verifier.js";
 import {
@@ -35,6 +36,8 @@ const TOOL_NAME = "verify_legal_reference";
 const CASE_TOOL_NAME = "verify_case_reference";
 const CASE_QUOTE_TOOL_NAME =
   "verify_case_quote";
+const CASE_PROPOSITION_TOOL_NAME =
+  "verify_case_proposition";
 
 const TOOL_SCHEMA: NormalizedToolSchema = {
   type: "function",
@@ -153,6 +156,121 @@ const CASE_QUOTE_TOOL_SCHEMA: NormalizedToolSchema = {
     }
   }
 };
+
+const CASE_PROPOSITION_TOOL_SCHEMA: NormalizedToolSchema = {
+  type: "function",
+  function: {
+    name: CASE_PROPOSITION_TOOL_NAME,
+    description:
+      "Link one paraphrased proposition to one exact quotation from the official full text of a Sąd Najwyższy judgment. " +
+      "This returns status SUPPORTED, not VERIFIED: the runtime verifies the case and support quote, but does not independently decide semantic entailment. " +
+      "Provide the exact output proposition, exact supportQuote, case citation, signature and courtFamily=SN. Never supply a source URL.",
+    parameters: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "caseClaim",
+        "signature",
+        "proposition",
+        "supportQuote",
+        "courtFamily"
+      ],
+      properties: {
+        caseClaim: {
+          type: "string",
+          description:
+            "Exact case citation as it will appear in the answer."
+        },
+        signature: {
+          type: "string",
+          description:
+            "Raw Sąd Najwyższy signature."
+        },
+        proposition: {
+          type: "string",
+          description:
+            "Exact paraphrased proposition that will appear in the answer. It will be evidence-linked, not semantically VERIFIED."
+        },
+        supportQuote: {
+          type: "string",
+          description:
+            "Exact verbatim passage from the judgment that will be shown with the proposition."
+        },
+        courtFamily: {
+          type: "string",
+          enum: ["SN"]
+        }
+      }
+    }
+  }
+};
+
+
+function publicCasePropositionToolResult(
+  caseRecord: VerificationRecord,
+  quoteRecord: VerificationRecord,
+  supportRecord: VerificationRecord
+): string {
+  if (
+    caseRecord.status !== "VERIFIED" ||
+    quoteRecord.status !== "VERIFIED" ||
+    quoteRecord.caseScope !== "EXACT_QUOTE" ||
+    supportRecord.status !== "SUPPORTED" ||
+    supportRecord.caseScope !== "PROPOSITION_SUPPORT" ||
+    !supportRecord.evidenceHash ||
+    !supportRecord.supportQuoteHash
+  ) {
+    throw new Error(
+      "CASE_PROPOSITION_SUPPORT_INVALID"
+    );
+  }
+
+  const source =
+    supportRecord.sourceUrl ??
+    quoteRecord.sourceUrl ??
+    caseRecord.sourceUrl ??
+    "sn.pl";
+  const date =
+    supportRecord.fetchedAt.slice(0, 10);
+
+  return JSON.stringify({
+    status: "SUPPORTED",
+    semanticVerification: false,
+    courtFamily: "SN",
+    caseClaim: caseRecord.claim,
+    signature:
+      supportRecord.caseSignature ?? null,
+    proposition:
+      supportRecord.claim,
+    supportQuote:
+      supportRecord.supportQuote ?? null,
+    sourceUrl: source,
+    fetchedAt:
+      supportRecord.fetchedAt,
+    caseMarker:
+      "✅ [VER: " +
+      source +
+      ", " +
+      date +
+      "]",
+    quoteMarker:
+      "✅ [CASE-QUOTE:" +
+      supportRecord.supportQuoteHash +
+      "]",
+    supportMarker:
+      "🔗 [CASE-SUPPORT:" +
+      supportRecord.evidenceHash +
+      "]",
+    evidenceHash:
+      supportRecord.evidenceHash,
+    supportQuoteHash:
+      supportRecord.supportQuoteHash,
+    instruction:
+      "This proposition is evidence-linked, not semantically VERIFIED. Keep the proposition text unchanged. " +
+      "Show the exact supportQuote, exact case citation, caseMarker, quoteMarker and supportMarker on the SAME LINE. " +
+      "Do not replace SUPPORTED with VERIFIED and do not omit the supporting quotation."
+  });
+}
 
 function publicCaseQuoteToolResult(
   caseRecord: VerificationRecord,
@@ -336,7 +454,9 @@ export const LEGAL_VERIFICATION_SYSTEM_APPENDIX = [
   "- The first supported courtFamily is SN. Pass only claim + signature + courtFamily; never invent or supply the sn.pl URL.",
   "- VERIFIED case output confirms exact official signature/metadata and full-text identity. It does not authorize an invented thesis or quote.",
   "- For a verbatim quotation attributed to SN, call verify_case_quote. Copy the exact quote plus both returned markers onto the SAME LINE as the exact case citation.",
-  "- Do not paraphrase a judgment as 'SN wskazał/stwierdził/uznał...' unless a dedicated proposition-verification gate exists. G23 verifies exact quotations only."
+  "- For a paraphrased proposition attributed to SN, call verify_case_proposition with the exact proposition plus an exact supporting quotation.",
+  "- verify_case_proposition returns SUPPORTED, never VERIFIED. SUPPORTED means the proposition is transparently linked to official evidence; semantic entailment is not independently decided by the runtime.",
+  "- For SUPPORTED propositions, keep the exact proposition and supportQuote unchanged and put them with the case citation, case marker, CASE-QUOTE marker and CASE-SUPPORT marker on the SAME LINE."
 ].join("\n");
 
 export class LegalVerificationToolRuntime {
@@ -362,6 +482,131 @@ export class LegalVerificationToolRuntime {
         ]
       })
     );
+
+    this.broker.register({
+      name: CASE_PROPOSITION_TOOL_NAME,
+      capability: "network",
+      execute: async (input) => {
+        const caseClaim =
+          typeof input.caseClaim === "string"
+            ? input.caseClaim.trim()
+            : "";
+        const signature =
+          typeof input.signature === "string"
+            ? input.signature.trim()
+            : "";
+        const proposition =
+          typeof input.proposition === "string"
+            ? input.proposition.trim()
+            : "";
+        const supportQuote =
+          typeof input.supportQuote === "string"
+            ? input.supportQuote.trim()
+            : "";
+        const toolCallId =
+          typeof input.toolCallId === "string"
+            ? input.toolCallId
+            : "";
+
+        if (
+          !caseClaim ||
+          !signature ||
+          !proposition ||
+          !supportQuote ||
+          !toolCallId
+        ) {
+          throw new Error(
+            "INVALID_CASE_PROPOSITION_INPUT"
+          );
+        }
+
+        const quoteResult =
+          await this.caseVerifier
+            .verifyExactQuote({
+              caseClaim,
+              signature,
+              quote:
+                supportQuote,
+              toolCallId
+            });
+
+        const caseRecord =
+          quoteResult.caseResult.record;
+        const quoteRecord =
+          quoteResult.quoteRecord;
+
+        if (
+          quoteResult.status !== "VERIFIED" ||
+          !quoteResult.evidenceHash ||
+          !isVerifiedRecord(caseRecord) ||
+          !isVerifiedRecord(quoteRecord)
+        ) {
+          return JSON.stringify({
+            status:
+              "UNVERIFIED",
+            error:
+              quoteResult.reason ?? null,
+            normalizedSignature:
+              quoteResult.normalizedSignature
+          });
+        }
+
+        const evidenceHash =
+          propositionEvidenceHash(
+            quoteResult.normalizedSignature,
+            proposition,
+            supportQuote
+          );
+
+        const supportRecord:
+          VerificationRecord = {
+            claim: proposition,
+            kind: "case",
+            status: "SUPPORTED",
+            sourceUrl:
+              quoteRecord.sourceUrl ??
+              caseRecord.sourceUrl,
+            ...(quoteRecord.sourceTier
+              ? {
+                  sourceTier:
+                    quoteRecord.sourceTier
+                }
+              : {}),
+            fetchedAt:
+              quoteRecord.fetchedAt,
+            toolCallId,
+            verificationMethod:
+              "web_fetch",
+            sourceFormat: "TEXT",
+            caseScope:
+              "PROPOSITION_SUPPORT",
+            caseSignature:
+              quoteResult.normalizedSignature,
+            evidenceHash,
+            supportQuoteHash:
+              quoteResult.evidenceHash,
+            supportQuote,
+            evidence:
+              "Evidence-linked proposition; semantic entailment not independently verified."
+          };
+
+        this.ledger.add(
+          caseRecord
+        );
+        this.ledger.add(
+          quoteRecord
+        );
+        this.ledger.add(
+          supportRecord
+        );
+
+        return publicCasePropositionToolResult(
+          caseRecord,
+          quoteRecord,
+          supportRecord
+        );
+      }
+    });
 
     this.broker.register({
       name: CASE_QUOTE_TOOL_NAME,
@@ -572,7 +817,8 @@ export class LegalVerificationToolRuntime {
     return [
       TOOL_SCHEMA,
       CASE_TOOL_SCHEMA,
-      CASE_QUOTE_TOOL_SCHEMA
+      CASE_QUOTE_TOOL_SCHEMA,
+      CASE_PROPOSITION_TOOL_SCHEMA
     ];
   }
 
@@ -596,6 +842,80 @@ export class LegalVerificationToolRuntime {
     const results: NormalizedToolResult[] = [];
 
     for (const call of calls) {
+      if (
+        call.name ===
+        CASE_PROPOSITION_TOOL_NAME
+      ) {
+        const signature =
+          typeof call.input.signature === "string"
+            ? call.input.signature.trim()
+            : "";
+        const courtFamily =
+          typeof call.input.courtFamily === "string"
+            ? call.input.courtFamily.trim()
+            : "";
+
+        if (courtFamily !== "SN") {
+          this.resolverAudit.push({
+            sequence:
+              this.resolverAudit.length + 1,
+            tool:
+              CASE_PROPOSITION_TOOL_NAME,
+            capability: "network",
+            decision: "DENY",
+            reason:
+              "UNSUPPORTED_COURT_FAMILY"
+          });
+          results.push({
+            tool_use_id: call.id,
+            content:
+              JSON.stringify({
+                status: "OUT_OF_SCOPE",
+                error:
+                  "UNSUPPORTED_COURT_FAMILY"
+              })
+          });
+          continue;
+        }
+
+        const result =
+          await this.broker.execute({
+            name:
+              CASE_PROPOSITION_TOOL_NAME,
+            input: {
+              caseClaim:
+                call.input.caseClaim,
+              signature,
+              proposition:
+                call.input.proposition,
+              supportQuote:
+                call.input.supportQuote,
+              toolCallId:
+                call.id,
+              url:
+                supremeCourtSearchUrl(
+                  signature
+                )
+            }
+          });
+
+        results.push({
+          tool_use_id: call.id,
+          content: result.ok
+            ? String(
+                result.output ?? ""
+              )
+            : JSON.stringify({
+                status:
+                  "OUT_OF_SCOPE",
+                error:
+                  result.error ??
+                  "CASE_PROPOSITION_TOOL_FAILED"
+              })
+        });
+        continue;
+      }
+
       if (
         call.name ===
         CASE_QUOTE_TOOL_NAME
