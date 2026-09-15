@@ -21,7 +21,7 @@ export type LegalSourceVerificationResult = {
   host: string;
 };
 
-const OFFICIAL_SOURCE_HOSTS = new Set([
+export const OFFICIAL_LEGAL_SOURCE_HOSTS = [
   "eli.gov.pl",
   "isap.sejm.gov.pl",
   "api.sejm.gov.pl",
@@ -31,6 +31,11 @@ const OFFICIAL_SOURCE_HOSTS = new Set([
   "orzeczenia.nsa.gov.pl",
   "sn.pl",
   "www.sn.pl"
+] as const;
+
+const OFFICIAL_SOURCE_HOSTS = new Set<string>([
+
+  ...OFFICIAL_LEGAL_SOURCE_HOSTS
 ]);
 
 const MAX_SOURCE_CHARS = 2_000_000;
