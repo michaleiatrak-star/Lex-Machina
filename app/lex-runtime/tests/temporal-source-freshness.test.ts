@@ -22,6 +22,8 @@ function fixtureFetcher(options?: {
   currentEli?: string;
   textHTML?: boolean;
   textPDF?: boolean;
+  relationStatus?: string;
+  metadataStatus?: string;
   amendments?: Array<{
     eli: string;
     promulgation: string;
@@ -41,7 +43,9 @@ function fixtureFetcher(options?: {
             ELI: currentEli,
             year: Number(currentEli.split("/")[1]),
             pos: Number(currentEli.split("/")[2]),
-            status: "obowiązujący"
+            status:
+              options?.relationStatus ??
+              "obowiązujący"
           }
         }],
         "Akty zmieniające": amendments.map(
@@ -73,6 +77,9 @@ function fixtureFetcher(options?: {
 
     return jsonResponse({
       ELI: currentEli,
+      status:
+        options?.metadataStatus ??
+        "obowiązujący",
       promulgation: "2026-06-17",
       textHTML: options?.textHTML ?? true,
       textPDF: options?.textPDF ?? true
@@ -127,6 +134,33 @@ describe("TemporalSourceFreshnessChecker", () => {
         provenance: "DATE+API"
       })
     ]);
+  });
+
+  it("blocks when the pinned consolidated text is repealed in ELI references", async () => {
+    const result = await new TemporalSourceFreshnessChecker(
+      fixtureFetcher({
+        relationStatus: "wygaśnięcie aktu"
+      })
+    ).check(kc);
+
+    expect(result).toMatchObject({
+      status: "REPEALED_CONSOLIDATED_TEXT",
+      reason: "PINNED_CONSOLIDATED_TEXT_REPEALED"
+    });
+  });
+
+  it("blocks when current act metadata reports repeal", async () => {
+    const result = await new TemporalSourceFreshnessChecker(
+      fixtureFetcher({
+        metadataStatus: "uchylony"
+      })
+    ).check(kc);
+
+    expect(result).toMatchObject({
+      status: "REPEALED_CONSOLIDATED_TEXT",
+      currentEli: "DU/2026/795",
+      reason: "CURRENT_CONSOLIDATED_TEXT_REPEALED"
+    });
   });
 
   it("reports PDF-only current text instead of pretending it is verifiable HTML", async () => {
