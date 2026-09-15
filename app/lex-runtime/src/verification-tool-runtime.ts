@@ -1,4 +1,8 @@
 import {
+  SupremeCourtCaseVerifier,
+  supremeCourtSearchUrl
+} from "./case-law-verifier.js";
+import {
   DeterministicLegalActResolver,
   LegalActResolutionError,
   type LegalActDescriptor
@@ -27,6 +31,7 @@ import {
 } from "./verification-ledger.js";
 
 const TOOL_NAME = "verify_legal_reference";
+const CASE_TOOL_NAME = "verify_case_reference";
 
 const TOOL_SCHEMA: NormalizedToolSchema = {
   type: "function",
@@ -66,6 +71,86 @@ const TOOL_SCHEMA: NormalizedToolSchema = {
     }
   }
 };
+
+
+const CASE_TOOL_SCHEMA: NormalizedToolSchema = {
+  type: "function",
+  function: {
+    name: CASE_TOOL_NAME,
+    description:
+      "Verify a Sąd Najwyższy case signature against the official sn.pl database. " +
+      "Provide the exact output claim, raw signature and courtFamily=SN. " +
+      "Never supply a source URL. VERIFIED confirms official existence and full-text identity, not an arbitrary paraphrased thesis.",
+    parameters: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "claim",
+        "signature",
+        "courtFamily"
+      ],
+      properties: {
+        claim: {
+          type: "string",
+          description:
+            "Exact case citation as it will appear in the answer, e.g. sygn. III CZP 25/11."
+        },
+        signature: {
+          type: "string",
+          description:
+            "Raw Sąd Najwyższy signature, e.g. III CZP 25/11."
+        },
+        courtFamily: {
+          type: "string",
+          enum: ["SN"]
+        }
+      }
+    }
+  }
+};
+
+function publicCaseToolResult(
+  record: {
+    claim: string;
+    status: "VERIFIED";
+    sourceUrl?: string;
+    fetchedAt: string;
+    evidence?: string;
+    caseScope?: "FULL_TEXT";
+  },
+  judgment: {
+    signature: string;
+    date?: string;
+    form?: string;
+    contentScope: "FULL_TEXT";
+  }
+): string {
+  const marker =
+    "✅ [VER: " +
+    (record.sourceUrl ?? "sn.pl") +
+    ", " +
+    record.fetchedAt.slice(0, 10) +
+    "]";
+
+  return JSON.stringify({
+    claim: record.claim,
+    status: record.status,
+    courtFamily: "SN",
+    signature: judgment.signature,
+    date: judgment.date ?? null,
+    form: judgment.form ?? null,
+    contentScope:
+      judgment.contentScope,
+    sourceUrl:
+      record.sourceUrl ?? null,
+    fetchedAt: record.fetchedAt,
+    marker,
+    instruction:
+      "The signature/metadata and official full-text identity are verified. " +
+      "Copy the marker onto the same line as the exact signature. " +
+      "Do not attribute a legal thesis or quote unless that proposition is separately verified against the fetched judgment text."
+  });
+}
 
 function kind(value: unknown): VerificationKind | null {
   return value === "statute" || value === "journal"
@@ -140,7 +225,9 @@ export const LEGAL_VERIFICATION_SYSTEM_APPENDIX = [
   "- For VERIFIED results, copy the returned marker verbatim onto the SAME LINE as the exact citation.",
   "- Never invent a verification marker, source URL, or tool result.",
   "- For UNVERIFIED/DENIED results, do not represent the citation as verified.",
-  "- Case-law signatures are outside this tool and remain unverified unless a separate runtime tool verifies them."
+  "- Before emitting a case signature (sygn.), call verify_case_reference.",
+  "- The first supported courtFamily is SN. Pass only claim + signature + courtFamily; never invent or supply the sn.pl URL.",
+  "- VERIFIED case output confirms exact official signature/metadata and full-text identity. It does not authorize an invented thesis or quote; proposition/quote verification remains separate."
 ].join("\n");
 
 export class LegalVerificationToolRuntime {
@@ -154,7 +241,9 @@ export class LegalVerificationToolRuntime {
     private readonly resolver =
       new DeterministicLegalActResolver(),
     private readonly freshnessChecker:
-      TemporalSourceFreshnessChecker | null = null
+      TemporalSourceFreshnessChecker | null = null,
+    private readonly caseVerifier =
+      new SupremeCourtCaseVerifier()
   ) {
     this.broker = new ToolBroker(
       new ToolPolicy({
@@ -164,6 +253,63 @@ export class LegalVerificationToolRuntime {
         ]
       })
     );
+
+    this.broker.register({
+      name: CASE_TOOL_NAME,
+      capability: "network",
+      execute: async (input) => {
+        const claim =
+          typeof input.claim === "string"
+            ? input.claim.trim()
+            : "";
+        const signature =
+          typeof input.signature === "string"
+            ? input.signature.trim()
+            : "";
+        const toolCallId =
+          typeof input.toolCallId === "string"
+            ? input.toolCallId
+            : "";
+
+        if (!claim || !signature || !toolCallId) {
+          throw new Error(
+            "INVALID_CASE_VERIFICATION_INPUT"
+          );
+        }
+
+        const result =
+          await this.caseVerifier.verify({
+            claim,
+            signature,
+            toolCallId
+          });
+
+        if (
+          result.status !== "FOUND" ||
+          !result.record ||
+          !result.judgment
+        ) {
+          return JSON.stringify({
+            status: result.status,
+            error:
+              result.reason ?? null,
+            normalizedSignature:
+              result.normalizedSignature,
+            rejectedNearMatches:
+              result.rejectedNearMatches
+          });
+        }
+
+        this.ledger.add(
+          result.record
+        );
+
+        return publicCaseToolResult(
+          result.record,
+          result.judgment
+        );
+      }
+    });
 
     this.broker.register({
       name: TOOL_NAME,
@@ -238,7 +384,10 @@ export class LegalVerificationToolRuntime {
   }
 
   schemas(): NormalizedToolSchema[] {
-    return [TOOL_SCHEMA];
+    return [
+      TOOL_SCHEMA,
+      CASE_TOOL_SCHEMA
+    ];
   }
 
   systemPromptAppendix(): string {
@@ -261,6 +410,67 @@ export class LegalVerificationToolRuntime {
     const results: NormalizedToolResult[] = [];
 
     for (const call of calls) {
+      if (call.name === CASE_TOOL_NAME) {
+        const signature =
+          typeof call.input.signature === "string"
+            ? call.input.signature.trim()
+            : "";
+        const courtFamily =
+          typeof call.input.courtFamily === "string"
+            ? call.input.courtFamily.trim()
+            : "";
+
+        if (courtFamily !== "SN") {
+          this.resolverAudit.push({
+            sequence:
+              this.resolverAudit.length + 1,
+            tool: CASE_TOOL_NAME,
+            capability: "network",
+            decision: "DENY",
+            reason:
+              "UNSUPPORTED_COURT_FAMILY"
+          });
+          results.push({
+            tool_use_id: call.id,
+            content: JSON.stringify({
+              status: "OUT_OF_SCOPE",
+              error:
+                "UNSUPPORTED_COURT_FAMILY"
+            })
+          });
+          continue;
+        }
+
+        const result =
+          await this.broker.execute({
+            name: CASE_TOOL_NAME,
+            input: {
+              claim: call.input.claim,
+              signature,
+              toolCallId: call.id,
+              url:
+                supremeCourtSearchUrl(
+                  signature
+                )
+            }
+          });
+
+        results.push({
+          tool_use_id: call.id,
+          content: result.ok
+            ? String(
+                result.output ?? ""
+              )
+            : JSON.stringify({
+                status: "OUT_OF_SCOPE",
+                error:
+                  result.error ??
+                  "CASE_TOOL_FAILED"
+              })
+        });
+        continue;
+      }
+
       const actInput =
         typeof call.input.act === "string"
           ? call.input.act.trim()
