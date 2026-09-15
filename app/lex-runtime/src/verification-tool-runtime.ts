@@ -79,6 +79,8 @@ function publicToolResult(
     status: "VERIFIED" | "UNVERIFIED";
     sourceUrl?: string;
     fetchedAt: string;
+    temporalMode?: "CURRENT" | "HISTORICAL";
+    asOf?: string;
   },
   act: LegalActDescriptor,
   freshness?: TemporalFreshnessResult
@@ -299,9 +301,7 @@ export class LegalVerificationToolRuntime {
         freshness =
           await this.freshnessChecker.check(
             resolvedAct,
-            ...(asOf
-              ? [{ asOf }]
-              : [])
+            asOf ? { asOf } : {}
           );
 
         if (
