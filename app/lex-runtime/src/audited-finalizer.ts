@@ -12,6 +12,7 @@ export class AuditedFinalizer {
     text: string;
     ledger: VerificationLedger;
     audit: AuditTrail;
+    closeSession?: boolean;
   }): FinalizationReport {
     for (const record of args.ledger.all()) {
       args.audit.record(
@@ -24,7 +25,8 @@ export class AuditedFinalizer {
           sourceUrl: record.sourceUrl ?? null,
           sourceTier: record.sourceTier ?? null,
           fetchedAt: record.fetchedAt,
-          toolCallId: record.toolCallId ?? null
+          toolCallId: record.toolCallId ?? null,
+          verificationMethod: record.verificationMethod ?? null
         }
       );
     }
@@ -45,7 +47,10 @@ export class AuditedFinalizer {
       }
     );
 
-    if (report.result !== "BLOCKED") {
+    if (
+      args.closeSession !== false &&
+      report.result !== "BLOCKED"
+    ) {
       args.audit.close(report.result === "DEGRADED" ? "DEGRADED" : "OK", {
         finalization: report.result
       });
