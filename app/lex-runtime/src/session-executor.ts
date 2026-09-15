@@ -115,6 +115,8 @@ export class SafeSessionExecutor implements SessionExecutor {
       ...(verificationTools
         ? {
             tools: verificationTools.schemas(),
+            toolSystemPromptAppendix:
+              verificationTools.systemPromptAppendix(),
             runTools: (calls) =>
               verificationTools.runTools(calls)
           }
