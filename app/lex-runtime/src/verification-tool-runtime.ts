@@ -33,6 +33,8 @@ import {
 
 const TOOL_NAME = "verify_legal_reference";
 const CASE_TOOL_NAME = "verify_case_reference";
+const CASE_QUOTE_TOOL_NAME =
+  "verify_case_quote";
 
 const TOOL_SCHEMA: NormalizedToolSchema = {
   type: "function",
@@ -109,6 +111,104 @@ const CASE_TOOL_SCHEMA: NormalizedToolSchema = {
     }
   }
 };
+
+const CASE_QUOTE_TOOL_SCHEMA: NormalizedToolSchema = {
+  type: "function",
+  function: {
+    name: CASE_QUOTE_TOOL_NAME,
+    description:
+      "Verify an exact quotation against the official full text of a Sąd Najwyższy judgment. " +
+      "Use only for verbatim quotations. Provide the exact case citation, signature, quote and courtFamily=SN. " +
+      "Never supply a source URL. Paraphrases are not VERIFIED by this tool.",
+    parameters: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "caseClaim",
+        "signature",
+        "quote",
+        "courtFamily"
+      ],
+      properties: {
+        caseClaim: {
+          type: "string",
+          description:
+            "Exact case citation as it will appear in the answer, e.g. sygn. II CSK 101/20."
+        },
+        signature: {
+          type: "string",
+          description:
+            "Raw Sąd Najwyższy signature."
+        },
+        quote: {
+          type: "string",
+          description:
+            "Exact verbatim quotation that will appear in the answer. Do not paraphrase."
+        },
+        courtFamily: {
+          type: "string",
+          enum: ["SN"]
+        }
+      }
+    }
+  }
+};
+
+function publicCaseQuoteToolResult(
+  caseRecord: VerificationRecord,
+  quoteRecord: VerificationRecord,
+  evidenceHash: string
+): string {
+  if (
+    caseRecord.status !== "VERIFIED" ||
+    quoteRecord.status !== "VERIFIED" ||
+    quoteRecord.caseScope !== "EXACT_QUOTE"
+  ) {
+    throw new Error(
+      "CASE_QUOTE_RECORD_NOT_VERIFIED"
+    );
+  }
+
+  const source =
+    quoteRecord.sourceUrl ??
+    caseRecord.sourceUrl ??
+    "sn.pl";
+  const date =
+    quoteRecord.fetchedAt
+      .slice(0, 10);
+  const caseMarker =
+    "✅ [VER: " +
+    source +
+    ", " +
+    date +
+    "]";
+  const quoteMarker =
+    "✅ [CASE-QUOTE:" +
+    evidenceHash +
+    "]";
+
+  return JSON.stringify({
+    status: "VERIFIED",
+    courtFamily: "SN",
+    caseClaim:
+      caseRecord.claim,
+    signature:
+      quoteRecord.caseSignature ??
+      null,
+    quote:
+      quoteRecord.claim,
+    sourceUrl:
+      source,
+    fetchedAt:
+      quoteRecord.fetchedAt,
+    caseMarker,
+    quoteMarker,
+    evidenceHash,
+    instruction:
+      "Use the quotation verbatim. Put the exact quotation, exact case citation, caseMarker and quoteMarker on the SAME LINE. " +
+      "Do not edit the quotation and do not use this result to verify a paraphrase."
+  });
+}
 
 function publicCaseToolResult(
   record: VerificationRecord,
@@ -234,7 +334,9 @@ export const LEGAL_VERIFICATION_SYSTEM_APPENDIX = [
   "- For UNVERIFIED/DENIED results, do not represent the citation as verified.",
   "- Before emitting a case signature (sygn.), call verify_case_reference.",
   "- The first supported courtFamily is SN. Pass only claim + signature + courtFamily; never invent or supply the sn.pl URL.",
-  "- VERIFIED case output confirms exact official signature/metadata and full-text identity. It does not authorize an invented thesis or quote; proposition/quote verification remains separate."
+  "- VERIFIED case output confirms exact official signature/metadata and full-text identity. It does not authorize an invented thesis or quote.",
+  "- For a verbatim quotation attributed to SN, call verify_case_quote. Copy the exact quote plus both returned markers onto the SAME LINE as the exact case citation.",
+  "- Do not paraphrase a judgment as 'SN wskazał/stwierdził/uznał...' unless a dedicated proposition-verification gate exists. G23 verifies exact quotations only."
 ].join("\n");
 
 export class LegalVerificationToolRuntime {
@@ -260,6 +362,82 @@ export class LegalVerificationToolRuntime {
         ]
       })
     );
+
+    this.broker.register({
+      name: CASE_QUOTE_TOOL_NAME,
+      capability: "network",
+      execute: async (input) => {
+        const caseClaim =
+          typeof input.caseClaim === "string"
+            ? input.caseClaim.trim()
+            : "";
+        const signature =
+          typeof input.signature === "string"
+            ? input.signature.trim()
+            : "";
+        const quote =
+          typeof input.quote === "string"
+            ? input.quote.trim()
+            : "";
+        const toolCallId =
+          typeof input.toolCallId === "string"
+            ? input.toolCallId
+            : "";
+
+        if (
+          !caseClaim ||
+          !signature ||
+          !quote ||
+          !toolCallId
+        ) {
+          throw new Error(
+            "INVALID_CASE_QUOTE_INPUT"
+          );
+        }
+
+        const result =
+          await this.caseVerifier
+            .verifyExactQuote({
+              caseClaim,
+              signature,
+              quote,
+              toolCallId
+            });
+
+        const caseRecord =
+          result.caseResult.record;
+        const quoteRecord =
+          result.quoteRecord;
+
+        if (
+          result.status !== "VERIFIED" ||
+          !result.evidenceHash ||
+          !isVerifiedRecord(caseRecord) ||
+          !isVerifiedRecord(quoteRecord)
+        ) {
+          return JSON.stringify({
+            status: result.status,
+            error:
+              result.reason ?? null,
+            normalizedSignature:
+              result.normalizedSignature
+          });
+        }
+
+        this.ledger.add(
+          caseRecord
+        );
+        this.ledger.add(
+          quoteRecord
+        );
+
+        return publicCaseQuoteToolResult(
+          caseRecord,
+          quoteRecord,
+          result.evidenceHash
+        );
+      }
+    });
 
     this.broker.register({
       name: CASE_TOOL_NAME,
@@ -393,7 +571,8 @@ export class LegalVerificationToolRuntime {
   schemas(): NormalizedToolSchema[] {
     return [
       TOOL_SCHEMA,
-      CASE_TOOL_SCHEMA
+      CASE_TOOL_SCHEMA,
+      CASE_QUOTE_TOOL_SCHEMA
     ];
   }
 
@@ -417,6 +596,75 @@ export class LegalVerificationToolRuntime {
     const results: NormalizedToolResult[] = [];
 
     for (const call of calls) {
+      if (
+        call.name ===
+        CASE_QUOTE_TOOL_NAME
+      ) {
+        const signature =
+          typeof call.input.signature === "string"
+            ? call.input.signature.trim()
+            : "";
+        const courtFamily =
+          typeof call.input.courtFamily === "string"
+            ? call.input.courtFamily.trim()
+            : "";
+
+        if (courtFamily !== "SN") {
+          this.resolverAudit.push({
+            sequence:
+              this.resolverAudit.length + 1,
+            tool: CASE_QUOTE_TOOL_NAME,
+            capability: "network",
+            decision: "DENY",
+            reason:
+              "UNSUPPORTED_COURT_FAMILY"
+          });
+          results.push({
+            tool_use_id: call.id,
+            content: JSON.stringify({
+              status: "OUT_OF_SCOPE",
+              error:
+                "UNSUPPORTED_COURT_FAMILY"
+            })
+          });
+          continue;
+        }
+
+        const result =
+          await this.broker.execute({
+            name:
+              CASE_QUOTE_TOOL_NAME,
+            input: {
+              caseClaim:
+                call.input.caseClaim,
+              signature,
+              quote:
+                call.input.quote,
+              toolCallId:
+                call.id,
+              url:
+                supremeCourtSearchUrl(
+                  signature
+                )
+            }
+          });
+
+        results.push({
+          tool_use_id: call.id,
+          content: result.ok
+            ? String(
+                result.output ?? ""
+              )
+            : JSON.stringify({
+                status: "OUT_OF_SCOPE",
+                error:
+                  result.error ??
+                  "CASE_QUOTE_TOOL_FAILED"
+              })
+        });
+        continue;
+      }
+
       if (call.name === CASE_TOOL_NAME) {
         const signature =
           typeof call.input.signature === "string"
