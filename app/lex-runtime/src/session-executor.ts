@@ -7,7 +7,10 @@ import {
 import { ProviderGateway } from "./providers/gateway.js";
 import type { ProviderId } from "./providers/types.js";
 import { LexSkillRegistry } from "./registry.js";
-import { VerificationLedger } from "./verification-ledger.js";
+import {
+  VerificationLedger,
+  type VerificationRecord
+} from "./verification-ledger.js";
 import type {
   LegalVerificationToolFactory
 } from "./verification-tool-runtime.js";
@@ -27,6 +30,85 @@ export type PublicBlockedReference = {
   status: string;
 };
 
+export type PublicEvidenceItem = {
+  claim: string;
+  kind: VerificationRecord["kind"];
+  status: VerificationRecord["status"];
+  sourceUrl?: string;
+  sourceTier?: VerificationRecord["sourceTier"];
+  fetchedAt: string;
+  verificationMethod?: VerificationRecord["verificationMethod"];
+  temporalMode?: VerificationRecord["temporalMode"];
+  asOf?: string;
+  sourceFormat?: VerificationRecord["sourceFormat"];
+  caseScope?: VerificationRecord["caseScope"];
+  caseSignature?: string;
+  evidenceHash?: string;
+  supportQuoteHash?: string;
+};
+
+export function publicEvidenceBundle(
+  records: VerificationRecord[]
+): PublicEvidenceItem[] {
+  return records.map((record) => ({
+    claim: record.claim,
+    kind: record.kind,
+    status: record.status,
+    ...(record.sourceUrl
+      ? { sourceUrl: record.sourceUrl }
+      : {}),
+    ...(record.sourceTier
+      ? { sourceTier: record.sourceTier }
+      : {}),
+    fetchedAt: record.fetchedAt,
+    ...(record.verificationMethod
+      ? {
+          verificationMethod:
+            record.verificationMethod
+        }
+      : {}),
+    ...(record.temporalMode
+      ? {
+          temporalMode:
+            record.temporalMode
+        }
+      : {}),
+    ...(record.asOf
+      ? { asOf: record.asOf }
+      : {}),
+    ...(record.sourceFormat
+      ? {
+          sourceFormat:
+            record.sourceFormat
+        }
+      : {}),
+    ...(record.caseScope
+      ? {
+          caseScope:
+            record.caseScope
+        }
+      : {}),
+    ...(record.caseSignature
+      ? {
+          caseSignature:
+            record.caseSignature
+        }
+      : {}),
+    ...(record.evidenceHash
+      ? {
+          evidenceHash:
+            record.evidenceHash
+        }
+      : {}),
+    ...(record.supportQuoteHash
+      ? {
+          supportQuoteHash:
+            record.supportQuoteHash
+        }
+      : {})
+  }));
+}
+
 export type SessionExecutionResponse = {
   sessionId: string;
   status: "DRAFT_PRESENTABLE" | "BLOCKED";
@@ -42,6 +124,7 @@ export type SessionExecutionResponse = {
     supported: number;
     unverified: number;
   };
+  evidence: PublicEvidenceItem[];
   audit: {
     result: "PASS" | "BLOCKED";
     eventCount: number;
@@ -204,6 +287,10 @@ export class SafeSessionExecutor implements SessionExecutor {
           (record) => record.status === "UNVERIFIED"
         ).length
       },
+      evidence:
+        publicEvidenceBundle(
+          verificationRecords
+        ),
       audit: {
         result: completeness.result,
         eventCount: completeness.eventCount,
