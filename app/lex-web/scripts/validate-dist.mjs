@@ -28,16 +28,26 @@ const forbidden = [
   "BEGIN PRIVATE KEY"
 ];
 
+const required = [
+  "127.0.0.1:4317",
+  "/api/sessions/execute",
+  "DRAFT_PRESENTABLE",
+  "BLOCKED",
+  "Uruchom analizę"
+];
+
 const exposed = forbidden.filter((token) => content.includes(token));
-const hasLocalApi = content.includes("127.0.0.1:4317");
-const pass = exposed.length === 0 && hasLocalApi;
+const missing = required.filter((token) => !content.includes(token));
+const pass = exposed.length === 0 && missing.length === 0;
 
 process.stdout.write(JSON.stringify({
-  gate: "G14_LOCAL_WEB_UI",
+  gate: "G14_G15_LOCAL_WEB_UI",
   result: pass ? "PASS" : "BLOCKED",
   bundleFiles: files.length,
   forbiddenTokensFound: exposed,
-  localApiReferencePresent: hasLocalApi
+  requiredExecutionMarkersMissing: missing,
+  localApiReferencePresent: content.includes("127.0.0.1:4317"),
+  sessionExecutionEndpointPresent: content.includes("/api/sessions/execute")
 }, null, 2) + "\n");
 
 if (!pass) process.exitCode = 1;
