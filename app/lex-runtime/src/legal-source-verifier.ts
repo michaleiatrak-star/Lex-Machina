@@ -1,5 +1,6 @@
 import {
   DEFAULT_PDF_MAX_BYTES,
+  LocalPdfTextExtractor,
   PdfTextExtractionError,
   type PdfTextExtractor
 } from "./pdf-text-extractor.js";
@@ -195,8 +196,9 @@ export class OfficialLegalSourceVerifier {
       globalThis.fetch.bind(globalThis),
     private readonly now: () => string =
       () => new Date().toISOString(),
-    private readonly pdfTextExtractor?:
-      PdfTextExtractor
+    private readonly pdfTextExtractor:
+      PdfTextExtractor =
+      new LocalPdfTextExtractor()
   ) {}
 
   supportsPdf(): boolean {
