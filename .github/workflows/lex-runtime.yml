@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "app/lex-runtime/**"
+      - "app/lex-web/**"
       - "app/lex-version.yaml"
       - "Wersja rozwojowa rozpakowana/**"
       - ".github/workflows/lex-runtime.yml"
@@ -12,6 +13,7 @@ on:
       - feature/local-runtime
     paths:
       - "app/lex-runtime/**"
+      - "app/lex-web/**"
       - "app/lex-version.yaml"
       - "Wersja rozwojowa rozpakowana/**"
       - ".github/workflows/lex-runtime.yml"
@@ -77,3 +79,32 @@ jobs:
 
       - name: G13 — localhost HTTP API
         run: npm run validate:g13
+
+  g14-web:
+    name: G14 local web UI
+    needs: g1-g13
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-web
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install web dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Web unit tests
+        run: npm test
+
+      - name: Production build
+        run: npm run build
+
+      - name: G14 — browser bundle safety
+        run: npm run validate:g14
