@@ -16,8 +16,11 @@ export interface PdfTextExtractor {
   ): Promise<PdfTextExtractionResult>;
 }
 
+export const DEFAULT_PDF_MAX_BYTES =
+  25 * 1024 * 1024;
+
 const DEFAULT_LIMITS: PdfTextLimits = {
-  maxBytes: 25 * 1024 * 1024,
+  maxBytes: DEFAULT_PDF_MAX_BYTES,
   maxPages: 2500,
   maxTextChars: 15_000_000
 };
