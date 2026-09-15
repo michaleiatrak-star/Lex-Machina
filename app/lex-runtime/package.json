@@ -14,6 +14,7 @@
     "validate:g9": "tsx src/validate-g9.ts",
     "validate:g10": "tsx src/validate-g10.ts",
     "validate:g11": "tsx src/validate-g11.ts",
+    "validate:g12": "tsx src/validate-g12.ts",
     "test": "vitest run"
   },
   "dependencies": {
