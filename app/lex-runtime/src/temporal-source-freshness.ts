@@ -7,6 +7,7 @@ export type TemporalFreshnessStatus =
   | "STALE_CONSOLIDATED_TEXT"
   | "POST_TJ_AMENDMENTS"
   | "CURRENT_TEXT_REQUIRES_PDF"
+  | "REPEALED_CONSOLIDATED_TEXT"
   | "NO_CURRENT_CONSOLIDATED_TEXT"
   | "SOURCE_METADATA_UNAVAILABLE";
 
@@ -82,6 +83,19 @@ function activeStatus(value: unknown): boolean {
   return text(value)
     .toLocaleLowerCase("pl")
     .includes("obowiązując");
+}
+
+function repealedStatus(value: unknown): boolean {
+  const status = text(value)
+    .toLocaleLowerCase("pl");
+
+  return (
+    status.includes("uchyl") ||
+    status.includes("wygaś") ||
+    status.includes("utracił moc") ||
+    status.includes("utrata mocy") ||
+    status.includes("nieobowiąz")
+  );
 }
 
 function numeric(value: unknown): number {
@@ -320,6 +334,28 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
+    const pinnedRelation = list(
+      baseRefs,
+      "Inf. o tekście jednolitym"
+    )
+      .map(unwrapAct)
+      .filter((act): act is EliAct => Boolean(act))
+      .find(
+        (act) =>
+          normalizeEli(act.ELI) ===
+          normalizeEli(descriptor.eli)
+      );
+
+    if (
+      pinnedRelation &&
+      repealedStatus(pinnedRelation.status)
+    ) {
+      return failure(
+        "REPEALED_CONSOLIDATED_TEXT",
+        "PINNED_CONSOLIDATED_TEXT_REPEALED"
+      );
+    }
+
     const current = pickCurrentConsolidated(
       baseRefs
     );
@@ -359,6 +395,15 @@ export class TemporalSourceFreshnessChecker {
     }
 
     const act = unwrapAct(metadata) ?? {};
+
+    if (repealedStatus(act.status)) {
+      return failure(
+        "REPEALED_CONSOLIDATED_TEXT",
+        "CURRENT_CONSOLIDATED_TEXT_REPEALED",
+        { currentEli: current.eli }
+      );
+    }
+
     const promulgation =
       text(act.promulgation) ||
       text(act.announcementDate);
