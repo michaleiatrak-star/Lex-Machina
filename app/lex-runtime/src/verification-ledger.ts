@@ -7,6 +7,13 @@ export type VerificationKind =
 
 export type VerificationStatus = "VERIFIED" | "UNVERIFIED";
 
+export type VerificationMethod =
+  | "web_fetch"
+  | "web_search"
+  | "mcp_call"
+  | "provider_tool"
+  | "file_read";
+
 export type VerificationRecord = {
   claim: string;
   kind: VerificationKind;
@@ -15,6 +22,7 @@ export type VerificationRecord = {
   sourceTier?: "R1" | "R2A" | "R2B" | "R3";
   fetchedAt: string;
   toolCallId?: string;
+  verificationMethod?: VerificationMethod;
   evidence?: string;
 };
 
