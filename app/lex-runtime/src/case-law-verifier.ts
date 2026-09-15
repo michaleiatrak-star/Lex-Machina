@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import type {
   VerificationRecord
 } from "./verification-ledger.js";
@@ -19,6 +20,19 @@ export type SupremeCourtCaseVerificationRequest = {
   toolCallId: string;
 };
 
+export type SupremeCourtQuoteVerificationRequest = {
+  caseClaim: string;
+  signature: string;
+  quote: string;
+  toolCallId: string;
+};
+
+export type CaseQuoteVerificationStatus =
+  | "VERIFIED"
+  | "QUOTE_NOT_FOUND"
+  | "INVALID_QUOTE"
+  | "CASE_NOT_VERIFIED";
+
 export type SupremeCourtCaseVerificationResult = {
   status: CaseVerificationStatus;
   normalizedSignature: string;
@@ -31,7 +45,17 @@ export type SupremeCourtCaseVerificationResult = {
     form?: string;
     sourceUrl: string;
     contentScope: "FULL_TEXT";
+    normalizedFullText: string;
   };
+  reason?: string;
+};
+
+export type SupremeCourtQuoteVerificationResult = {
+  status: CaseQuoteVerificationStatus;
+  normalizedSignature: string;
+  caseResult: SupremeCourtCaseVerificationResult;
+  quoteRecord?: VerificationRecord;
+  evidenceHash?: string;
   reason?: string;
 };
 
@@ -416,6 +440,34 @@ function decodeBase64Html(
   }
 }
 
+function normalizeQuoteText(
+  value: string
+): string {
+  return value
+    .normalize("NFKC")
+    .replace(/&nbsp;|&#160;/giu, " ")
+    .replace(/&amp;/giu, "&")
+    .replace(/\./g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLocaleUpperCase("pl");
+}
+
+function quoteEvidenceHash(
+  signature: string,
+  quote: string
+): string {
+  return createHash("sha256")
+    .update(
+      normalizeCaseSignature(signature) +
+      "\n" +
+      normalizeQuoteText(quote),
+      "utf8"
+    )
+    .digest("hex")
+    .slice(0, 20);
+}
+
 function normalizeOfficialText(
   html: string
 ): string {
@@ -749,8 +801,122 @@ export class SupremeCourtCaseVerifier {
           : {}),
         sourceUrl,
         contentScope:
-          "FULL_TEXT"
+          "FULL_TEXT",
+        normalizedFullText:
+          officialText
       }
+    };
+  }
+
+  async verifyExactQuote(
+    request:
+      SupremeCourtQuoteVerificationRequest
+  ): Promise<
+    SupremeCourtQuoteVerificationResult
+  > {
+    const quote =
+      request.quote.trim();
+    const normalizedQuote =
+      normalizeQuoteText(quote);
+
+    const caseResult =
+      await this.verify({
+        claim:
+          request.caseClaim,
+        signature:
+          request.signature,
+        toolCallId:
+          request.toolCallId
+      });
+
+    if (
+      caseResult.status !== "FOUND" ||
+      !caseResult.record ||
+      caseResult.record.status !== "VERIFIED" ||
+      !caseResult.judgment
+    ) {
+      return {
+        status:
+          "CASE_NOT_VERIFIED",
+        normalizedSignature:
+          caseResult.normalizedSignature,
+        caseResult,
+        reason:
+          caseResult.reason ??
+          caseResult.status
+      };
+    }
+
+    if (
+      normalizedQuote.length < 24 ||
+      normalizedQuote.length > 1200
+    ) {
+      return {
+        status: "INVALID_QUOTE",
+        normalizedSignature:
+          caseResult.normalizedSignature,
+        caseResult,
+        reason:
+          "QUOTE_LENGTH_OUT_OF_RANGE"
+      };
+    }
+
+    if (
+      !caseResult.judgment
+        .normalizedFullText
+        .includes(
+          normalizedQuote
+        )
+    ) {
+      return {
+        status:
+          "QUOTE_NOT_FOUND",
+        normalizedSignature:
+          caseResult.normalizedSignature,
+        caseResult,
+        reason:
+          "EXACT_QUOTE_NOT_FOUND_IN_OFFICIAL_TEXT"
+      };
+    }
+
+    const evidenceHash =
+      quoteEvidenceHash(
+        caseResult.normalizedSignature,
+        quote
+      );
+
+    const quoteRecord:
+      VerificationRecord = {
+        claim: quote,
+        kind: "case",
+        status: "VERIFIED",
+        sourceUrl:
+          caseResult.record.sourceUrl,
+        sourceTier:
+          caseResult.record.sourceTier,
+        fetchedAt:
+          caseResult.record.fetchedAt,
+        toolCallId:
+          request.toolCallId,
+        verificationMethod:
+          "web_fetch",
+        sourceFormat: "TEXT",
+        caseScope:
+          "EXACT_QUOTE",
+        caseSignature:
+          caseResult.normalizedSignature,
+        evidenceHash,
+        evidence:
+          quote.slice(0, 500)
+      };
+
+    return {
+      status: "VERIFIED",
+      normalizedSignature:
+        caseResult.normalizedSignature,
+      caseResult,
+      quoteRecord,
+      evidenceHash
     };
   }
 }
