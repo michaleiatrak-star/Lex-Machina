@@ -7,6 +7,7 @@ import { EnvironmentCredentialResolver } from "../providers/credentials.js";
 import { createLiveProviderRegistry } from "../providers/ai-sdk-adapter.js";
 import { ProviderGateway } from "../providers/gateway.js";
 import { SafeSessionExecutor } from "../session-executor.js";
+import { LegalVerificationToolRuntime } from "../verification-tool-runtime.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -61,7 +62,9 @@ export async function startLocalServer(options?: {
     modelCatalog: new DynamicModelCatalog(credentials),
     sessionExecutor: new SafeSessionExecutor(
       registry,
-      providerGateway
+      providerGateway,
+      undefined,
+      (ledger) => new LegalVerificationToolRuntime(ledger)
     )
   });
 
