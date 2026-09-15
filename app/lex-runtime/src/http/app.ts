@@ -23,6 +23,9 @@ import type {
   SessionExecutor,
   SessionExecutionRequest
 } from "../session-executor.js";
+import type {
+  DocumentService
+} from "../document-service.js";
 import { RoutingCatalog } from "./routing-catalog.js";
 
 const PROVIDERS = new Set<ProviderId>([
@@ -73,6 +76,7 @@ export type LexHttpAppOptions = {
   modelCatalog: Pick<DynamicModelCatalog, "list">;
   credentialResolver?: ProviderCredentialResolver;
   sessionExecutor?: SessionExecutor;
+  documentService?: DocumentService;
 };
 
 function publicSkill(skill: {
@@ -256,6 +260,44 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       });
     }
   });
+
+  app.post(
+    "/api/documents/ingest",
+    express.raw({
+      type: ["application/pdf", "application/octet-stream"],
+      limit: "512mb"
+    }),
+    async (req, res) => {
+      if (!options.documentService) {
+        res.status(503).json({
+          error: "DOCUMENT_INGESTION_UNAVAILABLE"
+        });
+        return;
+      }
+
+      if (
+        !Buffer.isBuffer(req.body) ||
+        req.body.byteLength === 0
+      ) {
+        res.status(400).json({
+          error: "PDF_BODY_REQUIRED"
+        });
+        return;
+      }
+
+      try {
+        const result =
+          await options.documentService.ingestPdf(
+            new Uint8Array(req.body)
+          );
+        res.status(201).json(result);
+      } catch {
+        res.status(422).json({
+          error: "DOCUMENT_INGESTION_FAILED"
+        });
+      }
+    }
+  );
 
   app.post("/api/sessions/execute", async (req, res) => {
     if (!options.sessionExecutor) {
