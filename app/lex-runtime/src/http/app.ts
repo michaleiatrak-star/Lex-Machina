@@ -13,7 +13,14 @@ import {
 import {
   MissingProviderCredentialError
 } from "../providers/credentials.js";
+import {
+  ProviderGatewayError
+} from "../providers/gateway.js";
 import type { ProviderId } from "../providers/types.js";
+import type {
+  SessionExecutor,
+  SessionExecutionRequest
+} from "../session-executor.js";
 import { RoutingCatalog } from "./routing-catalog.js";
 
 const PROVIDERS = new Set<ProviderId>([
@@ -62,6 +69,7 @@ function loopbackOriginGuard(
 export type LexHttpAppOptions = {
   registry: LexSkillRegistry;
   modelCatalog: Pick<DynamicModelCatalog, "list">;
+  sessionExecutor?: SessionExecutor;
 };
 
 function publicSkill(skill: {
@@ -85,6 +93,56 @@ function publicSkill(skill: {
 
 function sanitizeModels(models: ModelDescriptor[]): ModelDescriptor[] {
   return models.map((model) => ({ ...model }));
+}
+
+function parseSessionRequest(
+  body: unknown
+): SessionExecutionRequest | null {
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return null;
+  }
+
+  const value = body as Record<string, unknown>;
+  const query =
+    typeof value.query === "string"
+      ? value.query.trim()
+      : "";
+  const provider =
+    typeof value.provider === "string"
+      ? value.provider
+      : "";
+  const model =
+    typeof value.model === "string"
+      ? value.model.trim()
+      : "";
+  const primarySkill =
+    typeof value.primarySkill === "string"
+      ? value.primarySkill.trim()
+      : "";
+  const mode =
+    value.mode === "LAIK" || value.mode === "PRAWNIK"
+      ? value.mode
+      : "PRAWNIK";
+
+  if (
+    query.length < 1 ||
+    query.length > 30_000 ||
+    !isProviderId(provider) ||
+    model.length < 1 ||
+    model.length > 256 ||
+    primarySkill.length < 1 ||
+    primarySkill.length > 160
+  ) {
+    return null;
+  }
+
+  return {
+    query,
+    provider,
+    model,
+    primarySkill,
+    mode
+  };
 }
 
 export function createLexHttpApp(options: LexHttpAppOptions): Express {
@@ -173,6 +231,57 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       res.status(502).json({
         error: "PROVIDER_MODEL_DISCOVERY_FAILED",
         provider
+      });
+    }
+  });
+
+  app.post("/api/sessions/execute", async (req, res) => {
+    if (!options.sessionExecutor) {
+      res.status(503).json({
+        error: "SESSION_EXECUTION_UNAVAILABLE"
+      });
+      return;
+    }
+
+    const request = parseSessionRequest(req.body);
+    if (!request) {
+      res.status(400).json({
+        error: "INVALID_SESSION_REQUEST"
+      });
+      return;
+    }
+
+    const route = routing.validate(request.primarySkill);
+    if (!route.valid) {
+      res.status(422).json({
+        error: "INVALID_ROUTE",
+        reason: route.reason
+      });
+      return;
+    }
+
+    try {
+      const result = await options.sessionExecutor.execute(request);
+      res.json(result);
+    } catch (error) {
+      if (error instanceof MissingProviderCredentialError) {
+        res.status(503).json({
+          error: "PROVIDER_NOT_CONFIGURED",
+          provider: error.provider
+        });
+        return;
+      }
+
+      if (error instanceof ProviderGatewayError) {
+        res.status(502).json({
+          error: "PROVIDER_EXECUTION_FAILED",
+          provider: error.provider
+        });
+        return;
+      }
+
+      res.status(500).json({
+        error: "SESSION_EXECUTION_FAILED"
       });
     }
   });
