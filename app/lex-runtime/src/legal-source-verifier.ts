@@ -262,8 +262,11 @@ export class OfficialLegalSourceVerifier {
     const contentType =
       response.headers.get("content-type")?.toLowerCase() ?? "";
 
+    const pdfSource =
+      isPdfResponse(url, contentType);
+
     let body: string;
-    if (isPdfResponse(url, contentType)) {
+    if (pdfSource) {
       if (!this.pdfTextExtractor) {
         throw new LegalSourceVerificationError(
           "Official PDF requires a configured local PDF text extractor.",
@@ -365,7 +368,12 @@ export class OfficialLegalSourceVerifier {
           sourceTier: sourceTier(host),
           fetchedAt,
           toolCallId: request.toolCallId,
-          verificationMethod: "web_fetch",
+          verificationMethod:
+            pdfSource
+              ? "web_fetch_pdf"
+              : "web_fetch",
+          sourceFormat:
+            pdfSource ? "PDF" : "TEXT",
           ...(evidence ? { evidence } : {})
         }
       : {
@@ -376,7 +384,12 @@ export class OfficialLegalSourceVerifier {
           sourceTier: sourceTier(host),
           fetchedAt,
           toolCallId: request.toolCallId,
-          verificationMethod: "web_fetch",
+          verificationMethod:
+            pdfSource
+              ? "web_fetch_pdf"
+              : "web_fetch",
+          sourceFormat:
+            pdfSource ? "PDF" : "TEXT",
           evidence: !titleMatched
             ? "Official source was fetched, but the expected act title was not found."
             : "Official source was fetched, but the requested reference was not found in the fetched text."
