@@ -1,92 +1,3 @@
-import fs from "node:fs";
-import { LegalSession } from "./legal-session.js";
-import { LexSkillRegistry } from "./registry.js";
-import { ProviderGateway } from "./providers/gateway.js";
-import type {
-  NormalizedToolResult,
-  NormalizedToolSchema,
-  ProviderId
-} from "./providers/types.js";
-
-export type RouteDecision = {
-  jurisdiction: "PL";
-  primarySkill: string;
-  mode: "LAIK" | "PRAWNIK";
-};
-
-export type ExecutionEvent = {
-  sequence: number;
-  type:
-    | "session"
-    | "skill_read"
-    | "resource_read"
-    | "route"
-    | "provider_start"
-    | "provider_end"
-    | "gate";
-  target: string;
-  status: "OK" | "BLOCKED";
-  detail?: string;
-};
-
-export type VerticalSliceResult = {
-  provider: ProviderId;
-  primarySkill: string;
-  output: string;
-  events: ExecutionEvent[];
-};
-
-export class LexExecutionError extends Error {
-  constructor(
-    message: string,
-    readonly target: string,
-    readonly events: ExecutionEvent[]
-  ) {
-    super(message);
-    this.name = "LexExecutionError";
-  }
-}
-
-function combineSkillPrompt(
-  registry: LexSkillRegistry,
-  skillNames: string[]
-): string {
-  return skillNames
-    .map((name) => {
-      const skill = registry.get(name);
-      if (!skill) {
-        throw new Error(`Missing skill while building prompt: ${name}`);
-      }
-      return `# SKILL: ${name}\n\n${skill.body}`;
-    })
-    .join("\n\n---\n\n");
-}
-
-export class LexExecutionEngine {
-  constructor(
-    private readonly registry: LexSkillRegistry,
-    private readonly providers: ProviderGateway
-  ) {}
-
-  async executePolishLegalQuery(args: {
-    query: string;
-    provider: ProviderId;
-    model: string;
-    route: RouteDecision;
-    tools?: NormalizedToolSchema[];
-    runTools?: (
-      calls: import("./providers/types.js").NormalizedToolCall[]
-    ) => Promise<NormalizedToolResult[]>;
-  }): Promise<VerticalSliceResult> {
-    const events: ExecutionEvent[] = [];
-    const emit = (
-      type: ExecutionEvent["type"],
-      target: string,
-      status: ExecutionEvent["status"],
-      detail?: string
-    ) => {
-      events.push({
-        sequence: events.length + 1,
         type,
         target,
         status,
@@ -176,11 +87,21 @@ export class LexExecutionEngine {
     );
     emit("skill_read", args.route.primarySkill, "OK");
 
-    const systemPrompt = combineSkillPrompt(this.registry, [
+    const baseSystemPrompt = combineSkillPrompt(this.registry, [
       "prawny-router-v3",
       "prawo-polskie-v2",
       args.route.primarySkill
     ]);
+    const systemPrompt = args.tools?.length
+      ? [
+          baseSystemPrompt,
+          "# RUNTIME VERIFICATION CONTRACT",
+          "Before stating an article, Dz.U. reference, statutory deadline/amount, or case signature, call verify_legal_reference with the exact claim and a fresh official HTTPS source URL.",
+          "A VERIFIED tool result returns a marker. Copy that marker verbatim onto the same output line as the exact verified reference.",
+          "If verification returns UNVERIFIED or DENIED, do not present the reference as verified. Use the required unverified marker when mentioning it is necessary.",
+          "Never fabricate a verification marker."
+        ].join("\n\n")
+      : baseSystemPrompt;
 
     emit("provider_start", args.provider, "OK", args.model);
     const response = await this.providers.stream(args.provider, {
