@@ -43,9 +43,10 @@ implements OcrEngine {
       defaultWorkerPath();
     this.dpi = options.dpi ?? 220;
     this.device =
-      options.device ??
-      process.env.LEX_OCR_DEVICE?.trim() ||
-      undefined;
+      (
+        options.device ??
+        process.env.LEX_OCR_DEVICE?.trim()
+      ) || undefined;
     this.timeoutMs =
       options.timeoutMs ?? 30 * 60 * 1000;
   }
