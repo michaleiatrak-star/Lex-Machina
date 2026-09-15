@@ -328,13 +328,14 @@ Validation evidence:
 
 - strict TypeScript: PASS;
 - runtime/app unit tests: PASS;
-- deterministic safe path: PASS;
-- deterministic unsupported-citation path: PASS and raw answer withheld;
+- deterministic safe path through `POST /api/sessions/execute`: PASS;
+- deterministic unsupported-citation path through HTTP: PASS and raw answer withheld;
+- invalid non-DR route through HTTP: PASS (422 `INVALID_ROUTE`);
 - runtime G1-G15: PASS;
 - web unit tests: PASS;
 - production web build: PASS;
 - browser bundle safety: PASS;
-- GitHub Actions run: `35002606541`, conclusion: `success`.
+- GitHub Actions run: `35002611413`, conclusion: `success`.
 - Validated head SHA: `b33c3d790ae9ddb24a910d9e806cca96ac2fe5e2`.
 
 Live-provider status:
