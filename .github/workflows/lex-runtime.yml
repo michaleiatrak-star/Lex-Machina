@@ -22,8 +22,8 @@ permissions:
   contents: read
 
 jobs:
-  g1-g20:
-    name: G1-G20 deterministic validation
+  g1-g21:
+    name: G1-G21 deterministic validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -95,9 +95,12 @@ jobs:
       - name: G20 — official PDF verification
         run: npm run validate:g20
 
+      - name: G21 — amendment-aware legal state
+        run: npm run validate:g21
+
   g19-live-freshness:
     name: G19 live temporal freshness probe
-    needs: g1-g20
+    needs: g1-g21
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -120,7 +123,7 @@ jobs:
 
   g20-live-pdf:
     name: G20 live official PDF probe
-    needs: g1-g20
+    needs: g1-g21
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -143,7 +146,7 @@ jobs:
 
   g17-live-source:
     name: G17 live official-source probe
-    needs: g1-g20
+    needs: g1-g21
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -164,9 +167,9 @@ jobs:
       - name: G17 — real API Sejm/ELI verification
         run: npm run validate:g17
 
-  g14-g20-web:
-    name: G14-G20 local web UI
-    needs: g1-g20
+  g14-g21-web:
+    name: G14-G21 local web UI
+    needs: g1-g21
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -190,5 +193,5 @@ jobs:
       - name: Production build
         run: npm run build
 
-      - name: G14-G20 — browser bundle safety
+      - name: G14-G21 — browser bundle safety
         run: npm run validate:g14
