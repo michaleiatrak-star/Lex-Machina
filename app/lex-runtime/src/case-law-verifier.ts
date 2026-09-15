@@ -46,6 +46,11 @@ const SN_BROWSER_UA =
   "Chrome/128.0.0.0 Safari/537.36";
 
 const MAX_REDIRECTS = 3;
+const REQUEST_TIMEOUT_MS = 60_000;
+const SN_HOSTS = new Set([
+  "sn.pl",
+  "www.sn.pl"
+]);
 const MAX_SEARCH_RECORDS = 25;
 const MAX_BASE64_CHARS = 8_000_000;
 const SN_REPERTORIES = new Set([
@@ -242,6 +247,10 @@ async function fetchSn(
       await fetcher(url, {
         method: "GET",
         redirect: "manual",
+        signal:
+          AbortSignal.timeout(
+            REQUEST_TIMEOUT_MS
+          ),
         headers: {
           "User-Agent":
             SN_BROWSER_UA,
@@ -273,10 +282,21 @@ async function fetchSn(
           "SN_REDIRECT_WITHOUT_LOCATION"
         );
       }
-      url = new URL(
+      const next = new URL(
         location,
         url
-      ).toString();
+      );
+      if (
+        next.protocol !== "https:" ||
+        !SN_HOSTS.has(
+          next.hostname.toLowerCase()
+        )
+      ) {
+        throw new Error(
+          "SN_REDIRECT_HOST_DENIED"
+        );
+      }
+      url = next.toString();
       continue;
     }
 
@@ -618,69 +638,3 @@ export class SupremeCourtCaseVerifier {
         "SĄD NAJWYŻSZY"
       )
     ) {
-      return {
-        status: "OUT_OF_SCOPE",
-        normalizedSignature,
-        rejectedNearMatches,
-        reason:
-          "SN_FULL_TEXT_IDENTITY_MISMATCH"
-      };
-    }
-
-    const sourceUrl = humanUrl(id);
-    const date =
-      typeof record.data_wydania ===
-        "string"
-        ? record.data_wydania
-        : undefined;
-    const form =
-      typeof record.forma_orzeczenia ===
-        "string"
-        ? record.forma_orzeczenia
-        : undefined;
-    const fetchedAt = this.now();
-
-    const verificationRecord:
-      VerificationRecord = {
-        claim: request.claim,
-        kind: "case",
-        status: "VERIFIED",
-        sourceUrl,
-        sourceTier: "R1",
-        fetchedAt,
-        toolCallId:
-          request.toolCallId,
-        verificationMethod:
-          "web_fetch",
-        sourceFormat: "TEXT",
-        caseScope: "FULL_TEXT",
-        evidence:
-          [
-            "Sąd Najwyższy",
-            normalizedSignature,
-            date,
-            form
-          ]
-            .filter(Boolean)
-            .join(" · ")
-      };
-
-    return {
-      status: "FOUND",
-      normalizedSignature,
-      rejectedNearMatches,
-      record:
-        verificationRecord,
-      judgment: {
-        id,
-        signature:
-          normalizedSignature,
-        ...(date ? { date } : {}),
-        ...(form ? { form } : {}),
-        sourceUrl,
-        contentScope:
-          "FULL_TEXT"
-      }
-    };
-  }
-}
