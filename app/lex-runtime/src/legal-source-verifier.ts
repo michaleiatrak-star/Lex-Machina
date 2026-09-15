@@ -266,6 +266,12 @@ export class OfficialLegalSourceVerifier {
     const fetchedAt = this.now();
     const sourceUrl = url.toString();
 
+    const evidence = evidenceSnippet(
+      request.claim,
+      request.kind,
+      body
+    );
+
     const record: VerificationRecord = matched
       ? {
           claim: request.claim,
@@ -276,15 +282,7 @@ export class OfficialLegalSourceVerifier {
           fetchedAt,
           toolCallId: request.toolCallId,
           verificationMethod: "web_fetch",
-          ...(evidenceSnippet(request.claim, request.kind, body)
-            ? {
-                evidence: evidenceSnippet(
-                  request.claim,
-                  request.kind,
-                  body
-                )
-              }
-            : {})
+          ...(evidence ? { evidence } : {})
         }
       : {
           claim: request.claim,
