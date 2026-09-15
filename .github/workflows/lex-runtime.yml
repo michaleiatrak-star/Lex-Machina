@@ -1,0 +1,250 @@
+name: Lex Runtime Validation
+
+on:
+  pull_request:
+    paths:
+      - "app/lex-runtime/**"
+      - "app/lex-web/**"
+      - "app/lex-version.yaml"
+      - "Wersja rozwojowa rozpakowana/**"
+      - ".github/workflows/lex-runtime.yml"
+  push:
+    branches:
+      - feature/local-runtime
+    paths:
+      - "app/lex-runtime/**"
+      - "app/lex-web/**"
+      - "app/lex-version.yaml"
+      - "Wersja rozwojowa rozpakowana/**"
+      - ".github/workflows/lex-runtime.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  g1-g29:
+    name: G1-G29 deterministic validation
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: TypeScript strict typecheck
+        run: npm run typecheck
+
+      - name: Unit tests — runtime and app contracts
+        run: npm test
+
+      - name: Python worker syntax
+        run: python -m py_compile ../ocr/paddle_worker.py ../privacy/stanza_ner_worker.py
+
+      - name: G1 — corpus integrity
+        run: npm run validate:corpus
+
+      - name: G3 — router-first bootstrap on full corpus
+        run: npm run validate:g3
+
+      - name: G4 — Tool Broker safety
+        run: npm run validate:g4
+
+      - name: G5 — Provider conformance
+        run: npm run validate:g5
+
+      - name: G6 — Provider credential boundary
+        run: npm run validate:g6
+
+      - name: G7 — deterministic vertical slice
+        run: npm run validate:g7
+
+      - name: G8 — HARD GATE finalization
+        run: npm run validate:g8
+
+      - name: G9 — audit completeness
+        run: npm run validate:g9
+
+      - name: G10 — export gate
+        run: npm run validate:g10
+
+      - name: G11 — skill contract matrix
+        run: npm run validate:g11
+
+      - name: G12 — dynamic model catalog
+        run: npm run validate:g12
+
+      - name: G13 — localhost HTTP API
+        run: npm run validate:g13
+
+      - name: G15 — safe session execution
+        run: npm run validate:g15
+
+      - name: G16 — verified legal source tool loop
+        run: npm run validate:g16
+
+      - name: G18 — deterministic legal source resolver
+        run: npm run validate:g18
+
+      - name: G19 — temporal source freshness
+        run: npm run validate:g19
+
+      - name: G20 — official PDF verification
+        run: npm run validate:g20
+
+      - name: G21 — amendment-aware legal state
+        run: npm run validate:g21
+
+      - name: G22 — official SN case-law verification
+        run: npm run validate:g22
+
+      - name: G23 — exact SN quote evidence
+        run: npm run validate:g23
+
+      - name: G24 — SN proposition evidence link
+        run: npm run validate:g24
+
+      - name: G25 — structured evidence bundle
+        run: npm run validate:g25
+
+      - name: G26 — provider configuration status
+        run: npm run validate:g26
+
+      - name: G27 — complete document OCR and chunking
+        run: npm run validate:g27
+
+      - name: G28 — local pseudonymization and deanonymization
+        run: npm run validate:g28
+
+      - name: G29 — private complete-document pipeline
+        run: npm run validate:g29
+
+  g19-live-freshness:
+    name: G19 live temporal freshness probe
+    needs: g1-g29
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: G19 — real ELI temporal freshness
+        run: npm run validate:g19-live
+
+  g20-live-pdf:
+    name: G20 live official PDF probe
+    needs: g1-g29
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: G20 — real ELI PDF verification
+        run: npm run validate:g20-live
+
+  g22-live-sn:
+    name: G22 live SN case-law probe
+    needs: g1-g29
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: G22 — real sn.pl case verification
+        run: npm run validate:g22-live
+
+  g17-live-source:
+    name: G17 live official-source probe
+    needs: g1-g29
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: G17 — real API Sejm/ELI verification
+        run: npm run validate:g17
+
+  g14-g26-web:
+    name: G14-G26 local web UI
+    needs: g1-g29
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-web
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install web dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Web unit tests
+        run: npm test
+
+      - name: Production build
+        run: npm run build
+
+      - name: G14-G26 — browser bundle safety
+        run: npm run validate:g14

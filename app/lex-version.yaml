@@ -1,0 +1,10 @@
+schema_version: 1
+repository: michaleiatrak-star/Lex-Machina
+source_root: "Wersja rozwojowa rozpakowana"
+baseline_commit: "add8f5ed95d477b37d2ff910ce38ac7526cb3d24"
+work_branch: "feature/local-runtime"
+runtime_api_version: "0.1"
+policy:
+  corpus_is_read_only: true
+  router_first_for_legal_queries: true
+  fail_closed_on_missing_mandatory_resource: true
