@@ -59,6 +59,7 @@ describe("session execution HTTP API", () => {
           supported: 0,
           unverified: 0
         },
+        evidence: [],
         audit: {
           result: "PASS" as const,
           eventCount: 12,
