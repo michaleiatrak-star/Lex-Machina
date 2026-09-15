@@ -20,8 +20,8 @@ permissions:
   contents: read
 
 jobs:
-  g1-g7:
-    name: G1-G7 runtime validation
+  g1-g8:
+    name: G1-G8 runtime validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -59,3 +59,6 @@ jobs:
 
       - name: G7 — deterministic vertical slice
         run: npm run validate:g7
+
+      - name: G8 — HARD GATE finalization
+        run: npm run validate:g8
