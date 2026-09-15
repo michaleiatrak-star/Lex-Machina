@@ -9,7 +9,10 @@ import {
 import { ScriptedProviderAdapter } from "../src/providers/scripted-provider.js";
 import type { ProviderAdapter } from "../src/providers/types.js";
 import { LexSkillRegistry } from "../src/registry.js";
-import { SafeSessionExecutor } from "../src/session-executor.js";
+import {
+  SafeSessionExecutor,
+  publicEvidenceBundle
+} from "../src/session-executor.js";
 
 const roots: string[] = [];
 const DR = "dr-02-prawo-cywilne-rodzinne-gospodarcze";
@@ -140,4 +143,58 @@ describe("SafeSessionExecutor", () => {
       closed: true
     });
   });
+
+  it("sanitizes public evidence metadata without backend evidence bodies", () => {
+    const bundle = publicEvidenceBundle([
+      {
+        claim: "art. 5 KC",
+        kind: "statute",
+        status: "VERIFIED",
+        sourceUrl: "https://api.sejm.gov.pl/eli/acts/DU/2019/1145/text.html",
+        sourceTier: "R1",
+        fetchedAt: "2026-09-15T10:00:00Z",
+        verificationMethod: "web_fetch",
+        temporalMode: "HISTORICAL",
+        asOf: "2020-06-01",
+        sourceFormat: "TEXT",
+        evidence: "backend-only snippet"
+      },
+      {
+        claim: "SN wskazał na znaczenie tej zasady.",
+        kind: "case",
+        status: "SUPPORTED",
+        sourceUrl: "https://sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=1",
+        sourceTier: "R1",
+        fetchedAt: "2026-09-15T10:00:00Z",
+        verificationMethod: "web_fetch",
+        sourceFormat: "TEXT",
+        caseScope: "PROPOSITION_SUPPORT",
+        caseSignature: "III CZP 25/11",
+        evidenceHash: "22222222222222222222",
+        supportQuoteHash: "11111111111111111111",
+        supportQuote: "backend-only exact support text",
+        evidence: "backend-only relation note"
+      }
+    ]);
+
+    expect(bundle).toEqual([
+      expect.objectContaining({
+        status: "VERIFIED",
+        temporalMode: "HISTORICAL",
+        asOf: "2020-06-01",
+        sourceFormat: "TEXT"
+      }),
+      expect.objectContaining({
+        status: "SUPPORTED",
+        caseScope: "PROPOSITION_SUPPORT",
+        caseSignature: "III CZP 25/11",
+        evidenceHash: "22222222222222222222",
+        supportQuoteHash: "11111111111111111111"
+      })
+    ]);
+
+    expect(JSON.stringify(bundle))
+      .not.toContain("backend-only");
+  });
+
 });
