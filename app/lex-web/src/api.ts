@@ -36,9 +36,41 @@ export type ModelsResponse = {
   models: ModelDescriptor[];
 };
 
+export type SessionExecutionRequest = {
+  query: string;
+  provider: ProviderId;
+  model: string;
+  primarySkill: string;
+  mode: "LAIK" | "PRAWNIK";
+};
+
+export type BlockedReference = {
+  claim: string;
+  kind: "statute" | "journal" | "case";
+  line: number;
+  status: string;
+};
+
+export type SessionExecutionResponse = {
+  sessionId: string;
+  status: "DRAFT_PRESENTABLE" | "BLOCKED";
+  provider: ProviderId;
+  model: string;
+  primarySkill: string;
+  answer?: string;
+  finalization: "PASS" | "DEGRADED" | "BLOCKED";
+  blockedReferences: BlockedReference[];
+  audit: {
+    result: "PASS" | "BLOCKED";
+    eventCount: number;
+    closed: boolean;
+  };
+};
+
 export type ApiFailure = {
   error: string;
   provider?: ProviderId;
+  reason?: string;
 };
 
 const DEFAULT_API_BASE = "http://127.0.0.1:4317";
@@ -92,4 +124,13 @@ export function getModels(
   provider: ProviderId
 ): Promise<ModelsResponse> {
   return json<ModelsResponse>(`/api/models/${provider}`);
+}
+
+export function executeSession(
+  request: SessionExecutionRequest
+): Promise<SessionExecutionResponse> {
+  return json<SessionExecutionResponse>("/api/sessions/execute", {
+    method: "POST",
+    body: JSON.stringify(request)
+  });
 }
