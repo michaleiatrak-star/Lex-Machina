@@ -25,9 +25,12 @@ function fullText(
 
   return json({
     data: [{
-      raw: Buffer
-        .from(html, "utf8")
-        .toString("base64")
+      success: true,
+      data: {
+        raw: Buffer
+          .from(html, "utf8")
+          .toString("base64")
+      }
     }]
   });
 }
