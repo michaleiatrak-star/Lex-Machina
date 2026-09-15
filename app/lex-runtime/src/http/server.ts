@@ -70,6 +70,7 @@ export async function startLocalServer(options?: {
   const app = createLexHttpApp({
     registry,
     modelCatalog: new DynamicModelCatalog(credentials),
+    credentialResolver: credentials,
     sessionExecutor: new SafeSessionExecutor(
       registry,
       providerGateway,
