@@ -39,6 +39,7 @@ export type SessionExecutionResponse = {
   verification: {
     records: number;
     verified: number;
+    supported: number;
     unverified: number;
   };
   audit: {
@@ -195,6 +196,9 @@ export class SafeSessionExecutor implements SessionExecutor {
         records: verificationRecords.length,
         verified: verificationRecords.filter(
           (record) => record.status === "VERIFIED"
+        ).length,
+        supported: verificationRecords.filter(
+          (record) => record.status === "SUPPORTED"
         ).length,
         unverified: verificationRecords.filter(
           (record) => record.status === "UNVERIFIED"
