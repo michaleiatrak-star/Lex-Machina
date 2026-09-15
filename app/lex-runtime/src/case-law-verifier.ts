@@ -1,0 +1,686 @@
+import type {
+  VerificationRecord
+} from "./verification-ledger.js";
+
+export type CaseLawFetch = (
+  input: string | URL,
+  init?: RequestInit
+) => Promise<Response>;
+
+export type CaseVerificationStatus =
+  | "FOUND"
+  | "NOT_FOUND"
+  | "AMBIGUOUS"
+  | "OUT_OF_SCOPE";
+
+export type SupremeCourtCaseVerificationRequest = {
+  claim: string;
+  signature: string;
+  toolCallId: string;
+};
+
+export type SupremeCourtCaseVerificationResult = {
+  status: CaseVerificationStatus;
+  normalizedSignature: string;
+  rejectedNearMatches: string[];
+  record?: VerificationRecord;
+  judgment?: {
+    id: string;
+    signature: string;
+    date?: string;
+    form?: string;
+    sourceUrl: string;
+    contentScope: "FULL_TEXT";
+  };
+  reason?: string;
+};
+
+const SN_PROXY =
+  "https://sn.pl/index.php";
+const SN_HUMAN =
+  "https://sn.pl/pl/wyszukiwarka-orzeczen";
+
+const SN_BROWSER_UA =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+  "AppleWebKit/537.36 (KHTML, like Gecko) " +
+  "Chrome/128.0.0.0 Safari/537.36";
+
+const MAX_REDIRECTS = 3;
+const MAX_SEARCH_RECORDS = 25;
+const MAX_BASE64_CHARS = 8_000_000;
+const SN_REPERTORIES = new Set([
+  "CSK",
+  "CSKP",
+  "KK",
+  "NKK",
+  "UK",
+  "NSNC",
+  "NSNU",
+  "NKN",
+  "CNP",
+  "CNPP",
+  "SDI",
+  "ZK",
+  "CZP",
+  "KZP",
+  "UZP",
+  "PZP",
+  "NSNZP",
+  "SNO",
+  "DSI",
+  "DSP",
+  "CZ",
+  "KO",
+  "KSP",
+  "NSW"
+]);
+
+function stripDotsAndSpace(
+  value: string
+): string {
+  return value
+    .replace(/\./g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+export function normalizeCaseSignature(
+  value: string
+): string {
+  return stripDotsAndSpace(value)
+    .toLocaleUpperCase("pl");
+}
+
+function signatureParts(
+  value: string
+): {
+  chamber?: string;
+  repertory: string;
+  number: number;
+  year: number;
+} | null {
+  const normalized =
+    stripDotsAndSpace(value);
+  const match = normalized.match(
+    /^(?:([IVXL]+)\s+)?([A-Za-z][A-Za-z-]*)\s+(\d+)\/(\d{2,4})$/u
+  );
+  if (!match) return null;
+
+  let year = Number(match[4]);
+  if (year < 100) {
+    year += year > 50 ? 1900 : 2000;
+  }
+
+  return {
+    ...(match[1]
+      ? { chamber: match[1] }
+      : {}),
+    repertory:
+      match[2]!.toLocaleUpperCase("pl"),
+    number: Number(match[3]),
+    year
+  };
+}
+
+export function isSupremeCourtSignature(
+  value: string
+): boolean {
+  const parts = signatureParts(value);
+  return Boolean(
+    parts &&
+    SN_REPERTORIES.has(parts.repertory)
+  );
+}
+
+export function supremeCourtSearchUrl(
+  signature: string
+): string {
+  const url = new URL(SN_PROXY);
+  url.searchParams.set("option", "com_ajax");
+  url.searchParams.set("plugin", "snproxy");
+  url.searchParams.set("format", "json");
+  url.searchParams.set(
+    "task",
+    "searchOrzeczenia"
+  );
+  url.searchParams.set(
+    "sygnatura",
+    stripDotsAndSpace(signature)
+  );
+  url.searchParams.set("strona", "1");
+  url.searchParams.set(
+    "rozmiar_strony",
+    String(MAX_SEARCH_RECORDS)
+  );
+  return url.toString();
+}
+
+function supremeCourtTextUrl(
+  id: string
+): string {
+  const url = new URL(SN_PROXY);
+  url.searchParams.set("option", "com_ajax");
+  url.searchParams.set("plugin", "snproxy");
+  url.searchParams.set("format", "json");
+  url.searchParams.set(
+    "task",
+    "OrzeczeniePlikHtml"
+  );
+  url.searchParams.set("id", id);
+  return url.toString();
+}
+
+function humanUrl(id: string): string {
+  const url = new URL(SN_HUMAN);
+  url.searchParams.set(
+    "orzeczenie",
+    id
+  );
+  return url.toString();
+}
+
+function cookiesFrom(
+  response: Response
+): string[] {
+  const headers = response.headers as Headers & {
+    getSetCookie?: () => string[];
+  };
+  const values =
+    headers.getSetCookie?.() ??
+    (
+      response.headers.get("set-cookie")
+        ? [
+            response.headers.get(
+              "set-cookie"
+            )!
+          ]
+        : []
+    );
+
+  return values
+    .map((value) =>
+      value.split(";", 1)[0]?.trim()
+    )
+    .filter(
+      (value): value is string =>
+        Boolean(value)
+    );
+}
+
+function mergeCookies(
+  existing: string[],
+  incoming: string[]
+): string[] {
+  const byName =
+    new Map<string, string>();
+
+  for (const cookie of [
+    ...existing,
+    ...incoming
+  ]) {
+    const name =
+      cookie.split("=", 1)[0]?.trim();
+    if (name) byName.set(name, cookie);
+  }
+
+  return [...byName.values()];
+}
+
+async function fetchSn(
+  fetcher: CaseLawFetch,
+  input: string
+): Promise<Response> {
+  let url = input;
+  let cookies: string[] = [];
+
+  for (
+    let redirect = 0;
+    redirect <= MAX_REDIRECTS;
+    redirect += 1
+  ) {
+    const response =
+      await fetcher(url, {
+        method: "GET",
+        redirect: "manual",
+        headers: {
+          "User-Agent":
+            SN_BROWSER_UA,
+          Accept: "*/*",
+          ...(cookies.length
+            ? {
+                Cookie:
+                  cookies.join("; ")
+              }
+            : {})
+        }
+      });
+
+    cookies = mergeCookies(
+      cookies,
+      cookiesFrom(response)
+    );
+
+    if (
+      response.status >= 300 &&
+      response.status < 400
+    ) {
+      const location =
+        response.headers.get(
+          "location"
+        );
+      if (!location) {
+        throw new Error(
+          "SN_REDIRECT_WITHOUT_LOCATION"
+        );
+      }
+      url = new URL(
+        location,
+        url
+      ).toString();
+      continue;
+    }
+
+    return response;
+  }
+
+  throw new Error(
+    "SN_REDIRECT_LIMIT_EXCEEDED"
+  );
+}
+
+function object(
+  value: unknown
+): Record<string, unknown> | null {
+  return (
+    value &&
+    typeof value === "object" &&
+    !Array.isArray(value)
+  )
+    ? value as Record<string, unknown>
+    : null;
+}
+
+function array(
+  value: unknown
+): unknown[] {
+  return Array.isArray(value)
+    ? value
+    : [];
+}
+
+function searchRecords(
+  payload: unknown
+): Record<string, unknown>[] | null {
+  const root = object(payload);
+  const first =
+    array(root?.data)[0];
+  const wrapper = object(first);
+  const records = wrapper?.data;
+
+  if (!Array.isArray(records)) {
+    return null;
+  }
+
+  return records
+    .map(object)
+    .filter(
+      (
+        item
+      ): item is Record<string, unknown> =>
+        Boolean(item)
+    );
+}
+
+function rawFullText(
+  payload: unknown
+): string | null {
+  const root = object(payload);
+  const first =
+    object(array(root?.data)[0]);
+  const raw = first?.raw;
+
+  return typeof raw === "string" &&
+    raw.length > 0
+    ? raw
+    : null;
+}
+
+function normalizeOfficialText(
+  html: string
+): string {
+  return html
+    .replace(
+      /<script\b[^>]*>[\s\S]*?<\/script>/giu,
+      " "
+    )
+    .replace(
+      /<style\b[^>]*>[\s\S]*?<\/style>/giu,
+      " "
+    )
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;|&#160;/giu, " ")
+    .replace(/&amp;/giu, "&")
+    .normalize("NFKC")
+    .replace(/\./g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLocaleUpperCase("pl");
+}
+
+function decodeBase64Html(
+  raw: string
+): string | null {
+  if (
+    raw.length > MAX_BASE64_CHARS ||
+    !/^[A-Za-z0-9+/=\s]+$/u.test(raw)
+  ) {
+    return null;
+  }
+
+  try {
+    return Buffer
+      .from(
+        raw.replace(/\s+/g, ""),
+        "base64"
+      )
+      .toString("utf8");
+  } catch {
+    return null;
+  }
+}
+
+export class SupremeCourtCaseVerifier {
+  constructor(
+    private readonly fetcher:
+      CaseLawFetch =
+        globalThis.fetch.bind(
+          globalThis
+        ),
+    private readonly now:
+      () => string =
+        () => new Date().toISOString()
+  ) {}
+
+  async verify(
+    request:
+      SupremeCourtCaseVerificationRequest
+  ): Promise<SupremeCourtCaseVerificationResult> {
+    const normalizedSignature =
+      normalizeCaseSignature(
+        request.signature
+      );
+
+    if (
+      !request.claim.trim() ||
+      !isSupremeCourtSignature(
+        normalizedSignature
+      )
+    ) {
+      return {
+        status: "OUT_OF_SCOPE",
+        normalizedSignature,
+        rejectedNearMatches: [],
+        reason:
+          "INVALID_OR_NON_SN_SIGNATURE"
+      };
+    }
+
+    let searchResponse: Response;
+    try {
+      searchResponse = await fetchSn(
+        this.fetcher,
+        supremeCourtSearchUrl(
+          normalizedSignature
+        )
+      );
+    } catch {
+      return {
+        status: "OUT_OF_SCOPE",
+        normalizedSignature,
+        rejectedNearMatches: [],
+        reason:
+          "SN_SEARCH_TRANSPORT_FAILED"
+      };
+    }
+
+    if (!searchResponse.ok) {
+      return {
+        status: "OUT_OF_SCOPE",
+        normalizedSignature,
+        rejectedNearMatches: [],
+        reason:
+          "SN_SEARCH_HTTP_" +
+          searchResponse.status
+      };
+    }
+
+    let searchPayload: unknown;
+    try {
+      searchPayload =
+        await searchResponse.json();
+    } catch {
+      return {
+        status: "OUT_OF_SCOPE",
+        normalizedSignature,
+        rejectedNearMatches: [],
+        reason:
+          "SN_SEARCH_JSON_DRIFT"
+      };
+    }
+
+    const records =
+      searchRecords(searchPayload);
+    if (!records) {
+      return {
+        status: "OUT_OF_SCOPE",
+        normalizedSignature,
+        rejectedNearMatches: [],
+        reason:
+          "SN_SEARCH_SCHEMA_DRIFT"
+      };
+    }
+
+    if (
+      records.length >=
+      MAX_SEARCH_RECORDS
+    ) {
+      return {
+        status: "OUT_OF_SCOPE",
+        normalizedSignature,
+        rejectedNearMatches: [],
+        reason:
+          "SN_SEARCH_MAY_BE_TRUNCATED"
+      };
+    }
+
+    const exact =
+      records.filter((record) =>
+        normalizeCaseSignature(
+          String(
+            record.sygnatura_sprawy ??
+            ""
+          )
+        ) === normalizedSignature
+      );
+    const rejectedNearMatches =
+      records
+        .filter(
+          (record) =>
+            !exact.includes(record)
+        )
+        .map((record) =>
+          String(
+            record.sygnatura_sprawy ??
+            ""
+          ).trim()
+        )
+        .filter(Boolean);
+
+    if (exact.length === 0) {
+      return {
+        status: "NOT_FOUND",
+        normalizedSignature,
+        rejectedNearMatches
+      };
+    }
+
+    if (exact.length > 1) {
+      return {
+        status: "AMBIGUOUS",
+        normalizedSignature,
+        rejectedNearMatches,
+        reason:
+          "MULTIPLE_EXACT_SN_RECORDS"
+      };
+    }
+
+    const record = exact[0]!;
+    const id =
+      String(
+        record.id ?? ""
+      ).trim();
+    if (!id) {
+      return {
+        status: "OUT_OF_SCOPE",
+        normalizedSignature,
+        rejectedNearMatches,
+        reason:
+          "SN_RECORD_ID_MISSING"
+      };
+    }
+
+    let textResponse: Response;
+    try {
+      textResponse = await fetchSn(
+        this.fetcher,
+        supremeCourtTextUrl(id)
+      );
+    } catch {
+      return {
+        status: "OUT_OF_SCOPE",
+        normalizedSignature,
+        rejectedNearMatches,
+        reason:
+          "SN_FULL_TEXT_TRANSPORT_FAILED"
+      };
+    }
+
+    if (!textResponse.ok) {
+      return {
+        status: "OUT_OF_SCOPE",
+        normalizedSignature,
+        rejectedNearMatches,
+        reason:
+          "SN_FULL_TEXT_HTTP_" +
+          textResponse.status
+      };
+    }
+
+    let textPayload: unknown;
+    try {
+      textPayload =
+        await textResponse.json();
+    } catch {
+      return {
+        status: "OUT_OF_SCOPE",
+        normalizedSignature,
+        rejectedNearMatches,
+        reason:
+          "SN_FULL_TEXT_JSON_DRIFT"
+      };
+    }
+
+    const raw =
+      rawFullText(textPayload);
+    const html =
+      raw
+        ? decodeBase64Html(raw)
+        : null;
+
+    if (!html) {
+      return {
+        status: "OUT_OF_SCOPE",
+        normalizedSignature,
+        rejectedNearMatches,
+        reason:
+          "SN_FULL_TEXT_UNAVAILABLE"
+      };
+    }
+
+    const officialText =
+      normalizeOfficialText(html);
+
+    if (
+      !officialText.includes(
+        normalizedSignature
+      ) ||
+      !officialText.includes(
+        "SĄD NAJWYŻSZY"
+      )
+    ) {
+      return {
+        status: "OUT_OF_SCOPE",
+        normalizedSignature,
+        rejectedNearMatches,
+        reason:
+          "SN_FULL_TEXT_IDENTITY_MISMATCH"
+      };
+    }
+
+    const sourceUrl = humanUrl(id);
+    const date =
+      typeof record.data_wydania ===
+        "string"
+        ? record.data_wydania
+        : undefined;
+    const form =
+      typeof record.forma_orzeczenia ===
+        "string"
+        ? record.forma_orzeczenia
+        : undefined;
+    const fetchedAt = this.now();
+
+    const verificationRecord:
+      VerificationRecord = {
+        claim: request.claim,
+        kind: "case",
+        status: "VERIFIED",
+        sourceUrl,
+        sourceTier: "R1",
+        fetchedAt,
+        toolCallId:
+          request.toolCallId,
+        verificationMethod:
+          "web_fetch",
+        sourceFormat: "TEXT",
+        caseScope: "FULL_TEXT",
+        evidence:
+          [
+            "Sąd Najwyższy",
+            normalizedSignature,
+            date,
+            form
+          ]
+            .filter(Boolean)
+            .join(" · ")
+      };
+
+    return {
+      status: "FOUND",
+      normalizedSignature,
+      rejectedNearMatches,
+      record:
+        verificationRecord,
+      judgment: {
+        id,
+        signature:
+          normalizedSignature,
+        ...(date ? { date } : {}),
+        ...(form ? { form } : {}),
+        sourceUrl,
+        contentScope:
+          "FULL_TEXT"
+      }
+    };
+  }
+}
