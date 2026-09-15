@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "tsx src/http/server.ts",
+    "start": "tsx src/http/server.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "validate:corpus": "tsx src/validate-corpus.ts",
     "validate:g3": "tsx src/validate-g3.ts",
@@ -15,6 +17,7 @@
     "validate:g10": "tsx src/validate-g10.ts",
     "validate:g11": "tsx src/validate-g11.ts",
     "validate:g12": "tsx src/validate-g12.ts",
+    "validate:g13": "tsx src/validate-g13.ts",
     "test": "vitest run"
   },
   "dependencies": {
@@ -22,10 +25,15 @@
     "@ai-sdk/openai": "^4.0.59",
     "@ai-sdk/xai": "^4.0.58",
     "ai": "^7.0.93",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
     "yaml": "^2.8.1"
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
     "@types/node": "^24.3.0",
+    "@types/supertest": "^6.0.3",
+    "supertest": "^7.2.2",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
