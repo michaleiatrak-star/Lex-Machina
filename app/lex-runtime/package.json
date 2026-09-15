@@ -34,6 +34,7 @@
     "ai": "^7.0.93",
     "express": "^5.2.1",
     "helmet": "^8.1.0",
+    "pdfjs-dist": "^6.3.289",
     "yaml": "^2.8.1"
   },
   "devDependencies": {
