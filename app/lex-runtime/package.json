@@ -20,6 +20,7 @@
     "validate:g13": "tsx src/validate-g13.ts",
     "validate:g15": "tsx src/validate-g15.ts",
     "validate:g16": "tsx src/validate-g16.ts",
+    "validate:g17": "tsx src/validate-g17.ts",
     "test": "vitest run"
   },
   "dependencies": {
