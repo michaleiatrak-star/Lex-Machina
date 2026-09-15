@@ -7,6 +7,7 @@ import {
   executeSession,
   getHealth,
   getModels,
+  getProviderStatus,
   getRoutes,
   validateRoute,
   type EvidenceItem,
@@ -152,6 +153,13 @@ export default function App() {
   const [runtimeOnline, setRuntimeOnline] = useState(false);
   const [runtimeError, setRuntimeError] = useState("");
   const [provider, setProvider] = useState<ProviderId>("openai");
+  const [providerConfiguration, setProviderConfiguration] = useState<
+    Record<ProviderId, boolean | undefined>
+  >({
+    openai: undefined,
+    anthropic: undefined,
+    xai: undefined
+  });
   const [models, setModels] = useState<ModelDescriptor[]>([]);
   const [model, setModel] = useState("");
   const [modelError, setModelError] = useState("");
@@ -170,13 +178,21 @@ export default function App() {
   useEffect(() => {
     let cancelled = false;
 
-    Promise.all([getHealth(), getRoutes()])
-      .then(([health, routeList]) => {
+    Promise.all([getHealth(), getRoutes(), getProviderStatus()])
+      .then(([health, routeList, providerStatus]) => {
         if (cancelled) return;
         setRuntimeOnline(
           health.status === "ok" && health.localOnly === true
         );
         setRoutes(routeList.primarySkills);
+        setProviderConfiguration(
+          Object.fromEntries(
+            providerStatus.providers.map((item) => [
+              item.provider,
+              item.configured
+            ])
+          ) as Record<ProviderId, boolean>
+        );
         if (routeList.primarySkills[0]) {
           setRoute(routeList.primarySkills[0]);
         }
@@ -194,6 +210,8 @@ export default function App() {
     };
   }, []);
 
+  const providerConfigured = providerConfiguration[provider];
+
   useEffect(() => {
     let cancelled = false;
     setModels([]);
@@ -201,6 +219,15 @@ export default function App() {
     setModelError("");
     setExecution(null);
     setExecutionError("");
+
+    if (providerConfigured !== true) {
+      if (providerConfigured === false) {
+        setModelError("PROVIDER_NOT_CONFIGURED");
+      }
+      return () => {
+        cancelled = true;
+      };
+    }
 
     getModels(provider)
       .then((response) => {
@@ -221,7 +248,7 @@ export default function App() {
     return () => {
       cancelled = true;
     };
-  }, [provider]);
+  }, [provider, providerConfigured]);
 
   const selectedModel = useMemo(
     () => models.find((item) => item.id === model),
@@ -352,12 +379,20 @@ export default function App() {
               {PROVIDERS.map((item) => (
                 <option key={item.id} value={item.id}>
                   {item.label}
+                  {providerConfiguration[item.id] === true
+                    ? " — API gotowe"
+                    : providerConfiguration[item.id] === false
+                      ? " — brak klucza"
+                      : " — sprawdzanie"}
                 </option>
               ))}
             </select>
             <p className="field-help">
-              Lista modeli jest pobierana z API providera przez lokalny
-              backend.
+              Konfiguracja API: {providerConfigured === true
+                ? "skonfigurowana lokalnie"
+                : providerConfigured === false
+                  ? "brak lokalnego klucza"
+                  : "sprawdzanie"}. Wartość klucza nigdy nie trafia do przeglądarki.
             </p>
           </article>
 
@@ -495,6 +530,7 @@ export default function App() {
             disabled={
               executing ||
               !runtimeOnline ||
+              providerConfigured !== true ||
               !model ||
               routeStatus !== "valid" ||
               !query.trim()
