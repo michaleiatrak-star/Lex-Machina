@@ -382,18 +382,13 @@ async function historicalCandidate(
   if (!stateDate || stateDate > asOf) return null;
 
   const interval = isInForceAt(act, asOf);
-  const hasExplicitEnd = Boolean(interval.validTo);
-
-  if (
-    hasExplicitEnd &&
-    !interval.inForce
-  ) {
+  if (interval.validTo && !interval.inForce) {
     return null;
   }
 
   if (
     repealedStatus(act.status) &&
-    !hasExplicitEnd
+    !interval.validTo
   ) {
     return null;
   }
@@ -429,8 +424,15 @@ export class TemporalSourceFreshnessChecker {
     const asOf = options.asOf?.trim();
 
     return asOf
-      ? this.checkHistorical(descriptor, asOf, checkedAt)
-      : this.checkCurrent(descriptor, checkedAt);
+      ? this.checkHistorical(
+          descriptor,
+          asOf,
+          checkedAt
+        )
+      : this.checkCurrent(
+          descriptor,
+          checkedAt
+        );
   }
 
   private failure(
@@ -483,7 +485,9 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    const baseMetadataUrl = apiUrl(descriptor.baseEli);
+    const baseMetadataUrl = apiUrl(
+      descriptor.baseEli
+    );
     const baseRefsUrl = apiUrl(
       descriptor.baseEli,
       "/references"
@@ -517,17 +521,26 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    const baseInterval = isInForceAt(baseAct, asOf);
+    const baseInterval = isInForceAt(
+      baseAct,
+      asOf
+    );
     if (!baseInterval.inForce) {
       return fail(
         "ACT_NOT_IN_FORCE_AT_DATE",
         "BASE_ACT_NOT_IN_FORCE_AT_AS_OF",
         {
           ...(baseInterval.validFrom
-            ? { actValidFrom: baseInterval.validFrom }
+            ? {
+                actValidFrom:
+                  baseInterval.validFrom
+              }
             : {}),
           ...(baseInterval.validTo
-            ? { actValidTo: baseInterval.validTo }
+            ? {
+                actValidTo:
+                  baseInterval.validTo
+              }
             : {})
         }
       );
@@ -535,10 +548,18 @@ export class TemporalSourceFreshnessChecker {
 
     const candidateElis = [
       ...new Set(
-        list(baseRefs, "Inf. o tekście jednolitym")
+        list(
+          baseRefs,
+          "Inf. o tekście jednolitym"
+        )
           .map(unwrapAct)
-          .filter((act): act is EliAct => Boolean(act))
-          .map((act) => normalizeEli(act.ELI))
+          .filter(
+            (act): act is EliAct =>
+              Boolean(act)
+          )
+          .map((act) =>
+            normalizeEli(act.ELI)
+          )
           .filter(Boolean)
       )
     ];
@@ -546,17 +567,25 @@ export class TemporalSourceFreshnessChecker {
     const candidates = (
       await Promise.all(
         candidateElis.map((eli) =>
-          historicalCandidate(this.fetcher, eli, asOf)
+          historicalCandidate(
+            this.fetcher,
+            eli,
+            asOf
+          )
         )
       )
     )
       .filter(
-        (candidate): candidate is HistoricalCandidate =>
+        (
+          candidate
+        ): candidate is HistoricalCandidate =>
           Boolean(candidate)
       )
       .sort(
         (a, b) =>
-          a.stateDate.localeCompare(b.stateDate) ||
+          a.stateDate.localeCompare(
+            b.stateDate
+          ) ||
           a.eli.localeCompare(b.eli)
       );
 
@@ -568,23 +597,39 @@ export class TemporalSourceFreshnessChecker {
         dateOnly(baseAct.validFrom) ||
         dateOnly(baseAct.entryIntoForce) ||
         dateOnly(baseAct.promulgation) ||
-        dateOnly(baseAct.announcementDate);
+        dateOnly(
+          baseAct.announcementDate
+        );
       const baseEli =
         normalizeEli(baseAct.ELI) ||
-        normalizeEli(descriptor.baseEli);
+        normalizeEli(
+          descriptor.baseEli
+        );
       const baseSourceUrl =
         baseAct.textHTML === true
-          ? apiUrl(baseEli, "/text.html") ?? undefined
+          ? apiUrl(
+              baseEli,
+              "/text.html"
+            ) ?? undefined
           : baseAct.textPDF === true
-            ? apiUrl(baseEli, "/text.pdf") ?? undefined
+            ? apiUrl(
+                baseEli,
+                "/text.pdf"
+              ) ?? undefined
             : undefined;
 
-      if (baseStateDate && baseStateDate <= asOf && baseEli) {
+      if (
+        baseStateDate &&
+        baseStateDate <= asOf &&
+        baseEli
+      ) {
         selected = {
           eli: baseEli,
           metadata: baseAct,
           stateDate: baseStateDate,
-          ...(baseSourceUrl ? { sourceUrl: baseSourceUrl } : {})
+          ...(baseSourceUrl
+            ? { sourceUrl: baseSourceUrl }
+            : {})
         };
       }
     }
@@ -594,18 +639,31 @@ export class TemporalSourceFreshnessChecker {
         "NO_HISTORICAL_CONSOLIDATED_TEXT",
         "NO_OFFICIAL_TEXT_APPLICABLE_AT_AS_OF",
         {
-          actValidFrom: baseInterval.validFrom,
+          ...(baseInterval.validFrom
+            ? {
+                actValidFrom:
+                  baseInterval.validFrom
+              }
+            : {}),
           ...(baseInterval.validTo
-            ? { actValidTo: baseInterval.validTo }
+            ? {
+                actValidTo:
+                  baseInterval.validTo
+              }
             : {})
         }
       );
     }
 
-    const amendmentsAfter = mergeAmendments(
-      amendmentsBetween(baseRefs, selected.stateDate, asOf),
-      new Map()
-    );
+    const amendmentsAfter =
+      mergeAmendments(
+        amendmentsBetween(
+          baseRefs,
+          selected.stateDate,
+          asOf
+        ),
+        new Map()
+      );
 
     if (amendmentsAfter.length > 0) {
       return fail(
@@ -613,10 +671,19 @@ export class TemporalSourceFreshnessChecker {
         "AMENDMENTS_AFTER_SELECTED_TJ_BEFORE_AS_OF",
         {
           currentEli: selected.eli,
-          currentPromulgation: selected.stateDate,
-          actValidFrom: baseInterval.validFrom,
+          currentPromulgation:
+            selected.stateDate,
+          ...(baseInterval.validFrom
+            ? {
+                actValidFrom:
+                  baseInterval.validFrom
+              }
+            : {}),
           ...(baseInterval.validTo
-            ? { actValidTo: baseInterval.validTo }
+            ? {
+                actValidTo:
+                  baseInterval.validTo
+              }
             : {}),
           amendmentsAfter
         }
@@ -630,11 +697,8 @@ export class TemporalSourceFreshnessChecker {
         "HISTORICAL_TEXT_FORMAT_UNAVAILABLE",
         {
           currentEli: selected.eli,
-          currentPromulgation: selected.stateDate,
-          actValidFrom: baseInterval.validFrom,
-          ...(baseInterval.validTo
-            ? { actValidTo: baseInterval.validTo }
-            : {})
+          currentPromulgation:
+            selected.stateDate
         }
       );
     }
@@ -648,11 +712,20 @@ export class TemporalSourceFreshnessChecker {
         "HISTORICAL_TEXT_HAS_NO_HTML",
         {
           currentEli: selected.eli,
-          currentPromulgation: selected.stateDate,
+          currentPromulgation:
+            selected.stateDate,
           sourceUrl,
-          actValidFrom: baseInterval.validFrom,
+          ...(baseInterval.validFrom
+            ? {
+                actValidFrom:
+                  baseInterval.validFrom
+              }
+            : {}),
           ...(baseInterval.validTo
-            ? { actValidTo: baseInterval.validTo }
+            ? {
+                actValidTo:
+                  baseInterval.validTo
+              }
             : {})
         }
       );
@@ -666,11 +739,20 @@ export class TemporalSourceFreshnessChecker {
       pinnedEli: descriptor.eli,
       requestedAsOf: asOf,
       currentEli: selected.eli,
-      currentPromulgation: selected.stateDate,
+      currentPromulgation:
+        selected.stateDate,
       sourceUrl,
-      actValidFrom: baseInterval.validFrom,
+      ...(baseInterval.validFrom
+        ? {
+            actValidFrom:
+              baseInterval.validFrom
+          }
+        : {}),
       ...(baseInterval.validTo
-        ? { actValidTo: baseInterval.validTo }
+        ? {
+            actValidTo:
+              baseInterval.validTo
+          }
         : {}),
       amendmentsAfter: []
     };
@@ -707,7 +789,10 @@ export class TemporalSourceFreshnessChecker {
 
     let baseRefs: unknown;
     try {
-      baseRefs = await json(this.fetcher, baseRefsUrl);
+      baseRefs = await json(
+        this.fetcher,
+        baseRefsUrl
+      );
     } catch {
       return fail(
         "SOURCE_METADATA_UNAVAILABLE",
@@ -720,7 +805,10 @@ export class TemporalSourceFreshnessChecker {
       "Inf. o tekście jednolitym"
     )
       .map(unwrapAct)
-      .filter((act): act is EliAct => Boolean(act))
+      .filter(
+        (act): act is EliAct =>
+          Boolean(act)
+      )
       .find(
         (act) =>
           normalizeEli(act.ELI) ===
@@ -729,7 +817,9 @@ export class TemporalSourceFreshnessChecker {
 
     if (
       pinnedRelation &&
-      repealedStatus(pinnedRelation.status)
+      repealedStatus(
+        pinnedRelation.status
+      )
     ) {
       return fail(
         "REPEALED_CONSOLIDATED_TEXT",
@@ -737,7 +827,8 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    const current = pickCurrentConsolidated(baseRefs);
+    const current =
+      pickCurrentConsolidated(baseRefs);
     if (!current) {
       return fail(
         "NO_CURRENT_CONSOLIDATED_TEXT",
@@ -745,12 +836,17 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    const metadataUrl = apiUrl(current.eli);
+    const metadataUrl = apiUrl(
+      current.eli
+    );
     const currentRefsUrl = apiUrl(
       current.eli,
       "/references"
     );
-    if (!metadataUrl || !currentRefsUrl) {
+    if (
+      !metadataUrl ||
+      !currentRefsUrl
+    ) {
       return fail(
         "SOURCE_METADATA_UNAVAILABLE",
         "INVALID_CURRENT_ELI",
@@ -761,10 +857,17 @@ export class TemporalSourceFreshnessChecker {
     let metadata: unknown;
     let currentRefs: unknown;
     try {
-      [metadata, currentRefs] = await Promise.all([
-        json(this.fetcher, metadataUrl),
-        json(this.fetcher, currentRefsUrl)
-      ]);
+      [metadata, currentRefs] =
+        await Promise.all([
+          json(
+            this.fetcher,
+            metadataUrl
+          ),
+          json(
+            this.fetcher,
+            currentRefsUrl
+          )
+        ]);
     } catch {
       return fail(
         "SOURCE_METADATA_UNAVAILABLE",
@@ -773,7 +876,9 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    const act = unwrapAct(metadata) ?? {};
+    const act =
+      unwrapAct(metadata) ?? {};
+
     if (repealedStatus(act.status)) {
       return fail(
         "REPEALED_CONSOLIDATED_TEXT",
@@ -784,7 +889,9 @@ export class TemporalSourceFreshnessChecker {
 
     const promulgation =
       dateOnly(act.promulgation) ||
-      dateOnly(act.announcementDate);
+      dateOnly(
+        act.announcementDate
+      );
 
     if (!promulgation) {
       return fail(
@@ -794,22 +901,28 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    const amendmentsAfter = mergeAmendments(
-      amendmentsBetween(
-        baseRefs,
-        promulgation,
-        "9999-12-31"
-      ),
-      postTjByApi(currentRefs)
-    );
+    const amendmentsAfter =
+      mergeAmendments(
+        amendmentsBetween(
+          baseRefs,
+          promulgation,
+          checkedAt.slice(0, 10)
+        ),
+        postTjByApi(currentRefs)
+      );
 
     const common = {
       currentEli: current.eli,
-      currentPromulgation: promulgation,
+      currentPromulgation:
+        promulgation,
       amendmentsAfter
     };
 
-    if (normalizeEli(descriptor.eli) !== current.eli) {
+    if (
+      normalizeEli(
+        descriptor.eli
+      ) !== current.eli
+    ) {
       return fail(
         "STALE_CONSOLIDATED_TEXT",
         "PINNED_ELI_DIFFERS_FROM_CURRENT",
@@ -817,7 +930,9 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    if (amendmentsAfter.length > 0) {
+    if (
+      amendmentsAfter.length > 0
+    ) {
       return fail(
         "POST_TJ_AMENDMENTS",
         "OFFICIAL_AMENDMENTS_AFTER_CONSOLIDATED_TEXT",
@@ -836,7 +951,9 @@ export class TemporalSourceFreshnessChecker {
           "CURRENT_TEXT_HAS_NO_HTML",
           {
             ...common,
-            ...(pdfUrl ? { sourceUrl: pdfUrl } : {})
+            ...(pdfUrl
+              ? { sourceUrl: pdfUrl }
+              : {})
           }
         );
       }
@@ -867,7 +984,8 @@ export class TemporalSourceFreshnessChecker {
       baseEli: descriptor.baseEli,
       pinnedEli: descriptor.eli,
       currentEli: current.eli,
-      currentPromulgation: promulgation,
+      currentPromulgation:
+        promulgation,
       sourceUrl,
       amendmentsAfter: []
     };
