@@ -1,3 +1,8 @@
+import {
+  LocalPdfTextExtractor,
+  PdfTextExtractionError,
+  type PdfTextExtractor
+} from "./pdf-text-extractor.js";
 import type {
   VerificationKind,
   VerificationRecord
@@ -166,6 +171,7 @@ export class LegalSourceVerificationError extends Error {
       | "SOURCE_NOT_OFFICIAL"
       | "SOURCE_FETCH_FAILED"
       | "UNSUPPORTED_SOURCE_CONTENT"
+      | "PDF_EXTRACTION_FAILED"
   ) {
     super(message);
     this.name = "LegalSourceVerificationError";
@@ -177,7 +183,9 @@ export class OfficialLegalSourceVerifier {
     private readonly fetcher: LegalSourceFetch =
       globalThis.fetch.bind(globalThis),
     private readonly now: () => string =
-      () => new Date().toISOString()
+      () => new Date().toISOString(),
+    private readonly pdfExtractor: PdfTextExtractor =
+      new LocalPdfTextExtractor()
   ) {}
 
   async verify(
@@ -219,7 +227,7 @@ export class OfficialLegalSourceVerifier {
         redirect: "error",
         headers: {
           Accept:
-            "text/html,application/xhtml+xml,application/json,text/plain;q=0.9,*/*;q=0.1"
+            "text/html,application/xhtml+xml,application/json,application/pdf,text/plain;q=0.9,*/*;q=0.1"
         }
       });
     } catch {
@@ -238,20 +246,64 @@ export class OfficialLegalSourceVerifier {
 
     const contentType =
       response.headers.get("content-type")?.toLowerCase() ?? "";
-    if (
-      contentType &&
-      !contentType.includes("text/") &&
-      !contentType.includes("html") &&
-      !contentType.includes("json") &&
-      !contentType.includes("xml")
-    ) {
-      throw new LegalSourceVerificationError(
-        "Official source content is not directly verifiable text.",
-        "UNSUPPORTED_SOURCE_CONTENT"
-      );
-    }
+    const isPdf =
+      contentType.includes("application/pdf") ||
+      url.pathname.toLowerCase().endsWith(".pdf");
 
-    const body = (await response.text()).slice(0, MAX_SOURCE_CHARS);
+    let body: string;
+    let sourceFormat: "TEXT" | "PDF";
+    let verificationMethod:
+      | "web_fetch"
+      | "web_fetch_pdf";
+
+    if (isPdf) {
+      let extracted;
+      try {
+        const bytes = new Uint8Array(
+          await response.arrayBuffer()
+        );
+        extracted =
+          await this.pdfExtractor.extract(bytes);
+      } catch (error) {
+        if (
+          error instanceof PdfTextExtractionError
+        ) {
+          throw new LegalSourceVerificationError(
+            "Official PDF could not be converted to verifiable text: " +
+              error.code,
+            "PDF_EXTRACTION_FAILED"
+          );
+        }
+        throw new LegalSourceVerificationError(
+          "Official PDF could not be converted to verifiable text.",
+          "PDF_EXTRACTION_FAILED"
+        );
+      }
+
+      body = extracted.text;
+      sourceFormat = "PDF";
+      verificationMethod = "web_fetch_pdf";
+    } else {
+      if (
+        contentType &&
+        !contentType.includes("text/") &&
+        !contentType.includes("html") &&
+        !contentType.includes("json") &&
+        !contentType.includes("xml")
+      ) {
+        throw new LegalSourceVerificationError(
+          "Official source content is not directly verifiable text or PDF.",
+          "UNSUPPORTED_SOURCE_CONTENT"
+        );
+      }
+
+      body = (await response.text()).slice(
+        0,
+        MAX_SOURCE_CHARS
+      );
+      sourceFormat = "TEXT";
+      verificationMethod = "web_fetch";
+    }
     const titleMatched = titleMatches(
       request.expectedTitle,
       body,
@@ -281,7 +333,8 @@ export class OfficialLegalSourceVerifier {
           sourceTier: sourceTier(host),
           fetchedAt,
           toolCallId: request.toolCallId,
-          verificationMethod: "web_fetch",
+          verificationMethod,
+          sourceFormat,
           ...(evidence ? { evidence } : {})
         }
       : {
@@ -292,7 +345,8 @@ export class OfficialLegalSourceVerifier {
           sourceTier: sourceTier(host),
           fetchedAt,
           toolCallId: request.toolCallId,
-          verificationMethod: "web_fetch",
+          verificationMethod,
+          sourceFormat,
           evidence: !titleMatched
             ? "Official source was fetched, but the expected act title was not found."
             : "Official source was fetched, but the requested reference was not found in the fetched text."
