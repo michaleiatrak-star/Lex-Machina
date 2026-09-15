@@ -747,3 +747,100 @@ Validation evidence:
 Next gate:
 
 - **G26 Provider Configuration Status:** let the local UI see which provider credentials are configured without returning, logging or fingerprinting the secrets themselves.
+
+
+### 2026-09-15 — Build 0003A
+
+Status: **PASS — G6 PROVIDER CREDENTIAL BOUNDARY**
+
+The original numbering skipped G6. It is now explicitly defined and validated:
+- server-side environment credential resolution only;
+- resolver keeps no serializable credential fields;
+- no secret value crosses the runtime/browser boundary;
+- later G26 exposes boolean configuration status only.
+
+Validation evidence:
+- G6 deterministic gate: PASS;
+- Lex Runtime Validation run: `35024309354`, conclusion: `success`;
+- F-138 structural audit: `35024309358`, conclusion: `success`.
+
+### 2026-09-15 — Build 0024
+
+Status: **PASS — G26 PROVIDER CONFIGURATION STATUS**
+
+Implemented:
+- `GET /api/providers` returning only provider + configured boolean;
+- UI status for OpenAI / Anthropic / xAI;
+- no credential values, environment-variable names or fingerprints in browser output;
+- unconfigured provider cannot start analysis.
+
+Validation evidence:
+- G26 deterministic gate: PASS;
+- G14-G26 local web UI: PASS;
+- run `35024309354`: success.
+
+### 2026-09-15 — Build 0025
+
+Status: **PASS — G27 COMPLETE DOCUMENT OCR AND CHUNKING**
+
+Implemented:
+- full page-by-page PDF inspection;
+- local PaddleOCR PP-OCRv6 Polish adapter for pages with insufficient text;
+- OCR result required for every page routed to OCR;
+- explicit DIGITAL / OCR / BLANK page provenance;
+- lossless large-document chunking with page markers and page-part markers;
+- character-count and page-accounting completeness assertions;
+- high finite safety envelope instead of model-context truncation.
+
+Validation evidence:
+- TypeScript: PASS;
+- document ingestion tests: PASS;
+- Python worker syntax: PASS;
+- G27 deterministic gate: PASS;
+- run `35024309354`: success.
+
+### 2026-09-15 — Build 0026
+
+Status: **PASS — G28 LOCAL PSEUDONYMIZATION / DEANONYMIZATION**
+
+Implemented:
+- backend-only reversible pseudonymization vault;
+- PESEL, NIP, REGON, Polish IBAN, email and formatted phone detection;
+- local Polish PERSON NER worker using Stanza;
+- stable `[PII:TYPE:NNNN]` tokens;
+- deanonymization only through the same local vault;
+- re-identification values absent from serialized vault output.
+
+Validation evidence:
+- privacy tests: PASS;
+- Python NER worker syntax: PASS;
+- G28 deterministic gate: PASS;
+- run `35024309354`: success.
+
+### 2026-09-15 — Build 0027
+
+Status: **PASS — G29 PRIVATE COMPLETE-DOCUMENT PIPELINE**
+
+Implemented production order:
+`PDF → all pages → OCR fallback → page-level pseudonymization → chunking → localhost API`.
+
+- pseudonymization is applied before chunking so chunk boundaries cannot hide PII from recognition;
+- production server wires PaddleOCR + Stanza workers;
+- `POST /api/documents/ingest` returns pseudonymized chunks only;
+- missing OCR/privacy capability fails closed instead of returning a partial document.
+
+Validation evidence:
+- G1-G29 deterministic validation: PASS;
+- G17 live ELI: PASS;
+- G19 live temporal: PASS;
+- G20 live official PDF: PASS;
+- G22 live SN: PASS;
+- G14-G26 web UI: PASS;
+- F-138 structural audit: PASS;
+- GitHub Actions run `35024309354`: success;
+- F-138 run `35024309358`: success.
+
+Next planned gates:
+- **G30 — Open Web Discovery:** local SearXNG-backed discovery across unrestricted public domains, with source-tier classification after discovery.
+- **G31 — Local DOCX Generation:** backend document generation with template support and G10 export validation.
+- **G32 — Document Attachment Session Flow:** select ingested chunks for provider context without sending the re-identification vault.
