@@ -65,8 +65,19 @@ function isBlockedHostname(hostname: string): boolean {
   if (host === "::1" || host === "0:0:0:0:0:0:0:1") return true;
 
   const parts = host.split(".").map(Number);
-  if (parts.length === 4 && parts.every((part) => Number.isInteger(part) && part >= 0 && part <= 255)) {
-    const [a, b] = parts;
+  if (
+    parts.length === 4 &&
+    parts.every(
+      (part) =>
+        Number.isInteger(part) &&
+        part >= 0 &&
+        part <= 255
+    )
+  ) {
+    const a = parts[0];
+    const b = parts[1];
+    if (a === undefined || b === undefined) return true;
+
     if (a === 10 || a === 127 || a === 0) return true;
     if (a === 169 && b === 254) return true;
     if (a === 172 && b >= 16 && b <= 31) return true;
