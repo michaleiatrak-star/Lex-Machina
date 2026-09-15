@@ -29,7 +29,8 @@ export class AuditedFinalizer {
           verificationMethod: record.verificationMethod ?? null,
           temporalMode: record.temporalMode ?? "CURRENT",
           asOf: record.asOf ?? null,
-          sourceFormat: record.sourceFormat ?? null
+          sourceFormat: record.sourceFormat ?? null,
+          caseScope: record.caseScope ?? null
         }
       );
     }
