@@ -8,6 +8,7 @@ import { ProviderGateway, ProviderRegistry } from "../src/providers/gateway.js";
 import { ScriptedProviderAdapter } from "../src/providers/scripted-provider.js";
 
 const roots: string[] = [];
+const DR02 = "dr-02-prawo-cywilne-rodzinne-gospodarcze";
 
 function createSkill(
   root: string,
@@ -22,14 +23,17 @@ function createSkill(
   );
 }
 
-function fixture(options?: { omitRoutingMap?: boolean }): LexSkillRegistry {
+function fixture(options?: {
+  omitRoutingMap?: boolean;
+  omitDrFromRoutingMap?: boolean;
+}): LexSkillRegistry {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "lex-engine-"));
   roots.push(root);
 
   createSkill(root, "shared");
   createSkill(root, "prawny-router-v3");
   createSkill(root, "prawo-polskie-v2");
-  createSkill(root, "dr-02-prawo-cywilne-rodzinne-gospodarcze");
+  createSkill(root, DR02);
 
   fs.mkdirSync(path.join(root, "shared"), { recursive: true });
   fs.writeFileSync(path.join(root, "shared", "PRAWO-HARDGATE.md"), "# hard gate\n");
@@ -48,7 +52,9 @@ function fixture(options?: { omitRoutingMap?: boolean }): LexSkillRegistry {
   if (!options?.omitRoutingMap) {
     fs.writeFileSync(
       path.join(root, "prawo-polskie-v2", "ROUTING-MAP.md"),
-      "# routing\n"
+      options?.omitDrFromRoutingMap
+        ? "# routing without selected DR\n"
+        : `# routing\n- ${DR02}\n`
     );
   }
 
@@ -80,7 +86,7 @@ describe("LexExecutionEngine", () => {
       model: "test-model",
       route: {
         jurisdiction: "PL",
-        primarySkill: "dr-02-prawo-cywilne-rodzinne-gospodarcze",
+        primarySkill: DR02,
         mode: "PRAWNIK"
       }
     });
@@ -100,13 +106,11 @@ describe("LexExecutionEngine", () => {
     expect(
       orderedTargets.indexOf("prawo-polskie-v2/ROUTING-MAP.md")
     ).toBeGreaterThan(orderedTargets.indexOf("prawo-polskie-v2"));
-    expect(
-      orderedTargets.indexOf("dr-02-prawo-cywilne-rodzinne-gospodarcze")
-    ).toBeGreaterThan(
+    expect(orderedTargets.indexOf(DR02)).toBeGreaterThan(
       orderedTargets.indexOf("prawo-polskie-v2/ROUTING-MAP.md")
     );
     expect(orderedTargets.indexOf("openai")).toBeGreaterThan(
-      orderedTargets.indexOf("dr-02-prawo-cywilne-rodzinne-gospodarcze")
+      orderedTargets.indexOf(DR02)
     );
 
     expect(result.events.at(-1)).toMatchObject({
@@ -124,7 +128,7 @@ describe("LexExecutionEngine", () => {
       model: "grok-test",
       route: {
         jurisdiction: "PL",
-        primarySkill: "dr-02-prawo-cywilne-rodzinne-gospodarcze",
+        primarySkill: DR02,
         mode: "LAIK"
       }
     });
@@ -143,12 +147,31 @@ describe("LexExecutionEngine", () => {
         model: "claude-test",
         route: {
           jurisdiction: "PL",
-          primarySkill: "dr-02-prawo-cywilne-rodzinne-gospodarcze",
+          primarySkill: DR02,
           mode: "PRAWNIK"
         }
       })
     ).rejects.toMatchObject({
       target: "prawo-polskie-v2/ROUTING-MAP.md"
+    });
+  });
+
+  it("fails closed when the selected DR is absent from ROUTING-MAP", async () => {
+    const registry = fixture({ omitDrFromRoutingMap: true });
+
+    await expect(
+      engine(registry).executePolishLegalQuery({
+        query: "Umowa.",
+        provider: "openai",
+        model: "test",
+        route: {
+          jurisdiction: "PL",
+          primarySkill: DR02,
+          mode: "PRAWNIK"
+        }
+      })
+    ).rejects.toMatchObject({
+      target: DR02
     });
   });
 
