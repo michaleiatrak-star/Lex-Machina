@@ -9,6 +9,7 @@ import {
   getModels,
   getRoutes,
   validateRoute,
+  type EvidenceItem,
   type ModelDescriptor,
   type ProviderId,
   type SessionExecutionResponse
@@ -27,6 +28,124 @@ function labelForDr(value: string): string {
   return value
     .replace(/^dr-(\d{2})-/, "DR-$1 · ")
     .replaceAll("-", " ");
+}
+
+function evidenceStatusLabel(
+  status: EvidenceItem["status"]
+): string {
+  return status === "VERIFIED"
+    ? "VERIFIED"
+    : status === "SUPPORTED"
+      ? "SUPPORTED · evidence-linked"
+      : "UNVERIFIED";
+}
+
+function EvidencePanel({
+  evidence
+}: {
+  evidence: EvidenceItem[];
+}) {
+  if (evidence.length === 0) {
+    return null;
+  }
+
+  return (
+    <section
+      className="evidence-panel"
+      aria-label="Dowody weryfikacji"
+    >
+      <div className="evidence-heading">
+        <div>
+          <p className="eyebrow">Evidence bundle</p>
+          <h4>Ślad źródłowy runtime</h4>
+        </div>
+        <span className="evidence-count">
+          {evidence.length} rekordów
+        </span>
+      </div>
+
+      <div className="evidence-grid">
+        {evidence.map((item, index) => (
+          <article
+            className={"evidence-card evidence-" + item.status.toLowerCase()}
+            key={
+              item.evidenceHash ??
+              item.claim + "-" + index
+            }
+          >
+            <div className="evidence-card-head">
+              <span className="evidence-status">
+                {evidenceStatusLabel(item.status)}
+              </span>
+              <span className="evidence-kind">
+                {item.kind}
+              </span>
+            </div>
+
+            <strong className="evidence-claim">
+              {item.claim}
+            </strong>
+
+            <dl className="evidence-meta">
+              {item.temporalMode === "HISTORICAL" && item.asOf && (
+                <div>
+                  <dt>Stan prawny</dt>
+                  <dd>{item.asOf}</dd>
+                </div>
+              )}
+              {item.sourceFormat && (
+                <div>
+                  <dt>Format</dt>
+                  <dd>{item.sourceFormat}</dd>
+                </div>
+              )}
+              {item.caseScope && (
+                <div>
+                  <dt>Zakres</dt>
+                  <dd>{item.caseScope}</dd>
+                </div>
+              )}
+              {item.caseSignature && (
+                <div>
+                  <dt>Sygnatura</dt>
+                  <dd>{item.caseSignature}</dd>
+                </div>
+              )}
+              {item.sourceTier && (
+                <div>
+                  <dt>Źródło</dt>
+                  <dd>{item.sourceTier}</dd>
+                </div>
+              )}
+              <div>
+                <dt>Pobrano</dt>
+                <dd>
+                  {item.fetchedAt.slice(0, 10)}
+                </dd>
+              </div>
+            </dl>
+
+            {item.status === "SUPPORTED" && (
+              <p className="evidence-caution">
+                Powiązano z dokładnym dowodem. Runtime nie oznacza tej parafrazy jako semantycznie VERIFIED.
+              </p>
+            )}
+
+            {item.sourceUrl && (
+              <a
+                className="evidence-link"
+                href={item.sourceUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                Otwórz urzędowe źródło ↗
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 export default function App() {
@@ -403,8 +522,10 @@ export default function App() {
             </p>
             <p className="result-note">
               Rekordy weryfikacji: {execution.verification.verified} VERIFIED ·
+              {" "}{execution.verification.supported} SUPPORTED ·
               {" "}{execution.verification.unverified} UNVERIFIED.
             </p>
+            <EvidencePanel evidence={execution.evidence} />
             {execution.blockedReferences.length > 0 && (
               <ul className="blocked-list">
                 {execution.blockedReferences.map((reference, index) => (
@@ -427,11 +548,13 @@ export default function App() {
               Eksport dokumentów nadal podlega G10.
             </p>
             <div className="answer-text">{execution.answer}</div>
+            <EvidencePanel evidence={execution.evidence} />
             <footer className="result-meta">
               Sesja {execution.sessionId} · audit {execution.audit.result} ·
-              {execution.audit.eventCount} zdarzeń · weryfikacje:
-              {execution.verification.verified}/
-              {execution.verification.records}
+              {execution.audit.eventCount} zdarzeń · VERIFIED:
+              {" "}{execution.verification.verified} · SUPPORTED:
+              {" "}{execution.verification.supported} · wszystkie:
+              {" "}{execution.verification.records}
             </footer>
           </section>
         )}
