@@ -75,15 +75,19 @@ function normalizeAlias(value: string): string {
 
 const BY_ALIAS = new Map<string, LegalActEntry>();
 for (const entry of ACTS) {
-  for (const alias of [
-    entry.id,
-    entry.title,
-    ...entry.aliases
-  ]) {
-    const key = normalizeAlias(alias);
-    if (BY_ALIAS.has(key)) {
+  const aliases = new Set(
+    [
+      entry.id,
+      entry.title,
+      ...entry.aliases
+    ].map(normalizeAlias)
+  );
+
+  for (const key of aliases) {
+    const existing = BY_ALIAS.get(key);
+    if (existing && existing.id !== entry.id) {
       throw new Error(
-        "Duplicate legal act alias in runtime registry: " + alias
+        "Legal act alias collision in runtime registry: " + key
       );
     }
     BY_ALIAS.set(key, entry);
