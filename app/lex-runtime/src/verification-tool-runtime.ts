@@ -18,6 +18,10 @@ import type {
   NormalizedToolSchema
 } from "./providers/types.js";
 import {
+  TemporalSourceFreshnessChecker,
+  type TemporalFreshnessResult
+} from "./temporal-source-freshness.js";
+import {
   VerificationLedger,
   type VerificationKind
 } from "./verification-ledger.js";
@@ -31,7 +35,7 @@ const TOOL_SCHEMA: NormalizedToolSchema = {
     description:
       "Verify one Polish statutory or Journal of Laws reference. " +
       "Provide the exact citation and the legal act identity/alias only. " +
-      "The runtime resolves the official source URL and expected title; never supply or invent transport URLs. " +
+      "The runtime resolves and freshness-checks the official source; never supply or invent transport URLs. " +
       "Only status VERIFIED permits copying the returned marker onto the same line as the exact citation. " +
       "Case-law signatures are not verified by this tool.",
     parameters: {
@@ -71,7 +75,8 @@ function publicToolResult(
     sourceUrl?: string;
     fetchedAt: string;
   },
-  act: LegalActDescriptor
+  act: LegalActDescriptor,
+  freshness?: TemporalFreshnessResult
 ): string {
   const marker =
     record.status === "VERIFIED"
@@ -93,6 +98,14 @@ function publicToolResult(
       sourceKind: act.sourceKind,
       registryAsOf: act.registryAsOf
     },
+    freshness: freshness
+      ? {
+          status: freshness.status,
+          checkedAt: freshness.checkedAt,
+          currentEli: freshness.currentEli ?? null,
+          amendmentsAfter: freshness.amendmentsAfter.length
+        }
+      : null,
     sourceUrl: record.sourceUrl ?? null,
     fetchedAt: record.fetchedAt,
     marker,
@@ -107,8 +120,8 @@ export const LEGAL_VERIFICATION_SYSTEM_APPENDIX = [
   "RUNTIME LEGAL-SOURCE VERIFICATION:",
   "- Before emitting any statutory citation (art. or Dz.U.), call verify_legal_reference.",
   "- Pass only claim + kind + legal act identity/alias. Never invent or supply an official-source URL.",
-  "- The runtime resolves the canonical official source and expected act title.",
-  "- A citation is verified only when the tool returns status=VERIFIED.",
+  "- The runtime resolves the canonical official source and checks temporal freshness before reading the citation.",
+  "- A citation is verified only when the freshness check is CURRENT and the verification tool returns status=VERIFIED.",
   "- For VERIFIED results, copy the returned marker verbatim onto the SAME LINE as the exact citation.",
   "- Never invent a verification marker, source URL, or tool result.",
   "- For UNVERIFIED/DENIED results, do not represent the citation as verified.",
@@ -123,7 +136,9 @@ export class LegalVerificationToolRuntime {
     private readonly ledger: VerificationLedger,
     verifier = new OfficialLegalSourceVerifier(),
     private readonly resolver =
-      new DeterministicLegalActResolver()
+      new DeterministicLegalActResolver(),
+    private readonly freshnessChecker:
+      TemporalSourceFreshnessChecker | null = null
   ) {
     this.broker = new ToolBroker(
       new ToolPolicy({
@@ -158,6 +173,9 @@ export class LegalVerificationToolRuntime {
         const act = input.resolvedAct as
           | LegalActDescriptor
           | undefined;
+        const freshness = input.freshness as
+          | TemporalFreshnessResult
+          | undefined;
 
         if (
           !claim ||
@@ -178,7 +196,11 @@ export class LegalVerificationToolRuntime {
           toolCallId
         });
         this.ledger.add(result.record);
-        return publicToolResult(result.record, act);
+        return publicToolResult(
+          result.record,
+          act,
+          freshness
+        );
       }
     });
   }
@@ -238,15 +260,68 @@ export class LegalVerificationToolRuntime {
         continue;
       }
 
+      let freshness:
+        | TemporalFreshnessResult
+        | undefined;
+
+      if (this.freshnessChecker) {
+        freshness =
+          await this.freshnessChecker.check(
+            resolvedAct
+          );
+
+        if (freshness.status !== "CURRENT") {
+          const reason =
+            "TEMPORAL_" + freshness.status;
+
+          this.resolverAudit.push({
+            sequence:
+              this.resolverAudit.length + 1,
+            tool: TOOL_NAME,
+            capability: "network",
+            decision: "DENY",
+            reason
+          });
+          results.push({
+            tool_use_id: call.id,
+            content: JSON.stringify({
+              status: "DENIED",
+              error: reason,
+              freshness: {
+                status: freshness.status,
+                checkedAt:
+                  freshness.checkedAt,
+                currentEli:
+                  freshness.currentEli ??
+                  null,
+                amendmentsAfter:
+                  freshness.amendmentsAfter
+                    .length,
+                reason:
+                  freshness.reason ?? null
+              }
+            })
+          });
+          continue;
+        }
+      }
+
+      const sourceUrl =
+        freshness?.sourceUrl ??
+        resolvedAct.sourceUrl;
+
       const result = await this.broker.execute({
         name: call.name,
         input: {
           claim: call.input.claim,
           kind: call.input.kind,
           toolCallId: call.id,
-          url: resolvedAct.sourceUrl,
+          url: sourceUrl,
           expectedTitle: resolvedAct.title,
-          resolvedAct
+          resolvedAct,
+          ...(freshness
+            ? { freshness }
+            : {})
         }
       });
 
