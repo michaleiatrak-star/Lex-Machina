@@ -4,12 +4,18 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
     "validate:corpus": "tsx src/validate-corpus.ts",
     "validate:g3": "tsx src/validate-g3.ts",
     "validate:g4": "tsx src/validate-g4.ts",
+    "validate:g5": "tsx src/validate-g5.ts",
     "test": "vitest run"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^4.0.49",
+    "@ai-sdk/openai": "^4.0.59",
+    "@ai-sdk/xai": "^4.0.58",
+    "ai": "^7.0.93",
     "yaml": "^2.8.1"
   },
   "devDependencies": {
