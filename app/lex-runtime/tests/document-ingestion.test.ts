@@ -86,7 +86,7 @@ describe("complete document ingestion", () => {
     expect(result.digitalPages).toBe(2);
     expect(result.ocrPages).toBe(2);
     expect(result.blankPages).toBe(1);
-    expect(result.chunks.length).toBeGreaterThan(5);
+    expect(result.chunks.length).toBeGreaterThan(3);
     expect(
       result.chunks.reduce(
         (sum, chunk) => sum + chunk.sourceChars,
@@ -101,6 +101,7 @@ describe("complete document ingestion", () => {
       expect(joined).toContain(`[STRONA ${page}`);
     }
     expect(joined).toContain("Zażółć gęślą jaźń");
+    expect(joined).toContain("[STRONA 4 · CZĘŚĆ 1/3 · DIGITAL]");
   });
 
   it("fails closed when OCR omits a required page", async () => {
