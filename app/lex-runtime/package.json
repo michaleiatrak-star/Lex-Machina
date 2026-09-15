@@ -24,7 +24,8 @@
     "validate:g18": "tsx src/validate-g18.ts",
     "validate:g19": "tsx src/validate-g19.ts",
     "validate:g19-live": "tsx src/validate-g19-live.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "postvalidate:g17": "tsx src/validate-g19-live.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.49",
