@@ -66,6 +66,40 @@ describe("ToolBroker", () => {
     expect(execute).toHaveBeenCalledTimes(1);
   });
 
+  it("enforces a network host allowlist before tool execution", async () => {
+    const execute = vi.fn(async () => "official");
+    const broker = new ToolBroker(
+      new ToolPolicy({
+        allowNetwork: true,
+        allowedNetworkHosts: ["eli.gov.pl"]
+      })
+    );
+    broker.register({
+      name: "verify_source",
+      capability: "network",
+      execute
+    });
+
+    await expect(
+      broker.execute({
+        name: "verify_source",
+        input: { url: "https://eli.gov.pl/acts/test" }
+      })
+    ).resolves.toEqual({ ok: true, output: "official" });
+
+    await expect(
+      broker.execute({
+        name: "verify_source",
+        input: { url: "https://example.com/not-official" }
+      })
+    ).resolves.toEqual({
+      ok: false,
+      error: "NETWORK_HOST_DENIED"
+    });
+
+    expect(execute).toHaveBeenCalledTimes(1);
+  });
+
   it("keeps write/code/MCP disabled until explicitly enabled", async () => {
     const broker = new ToolBroker(
       new ToolPolicy({
