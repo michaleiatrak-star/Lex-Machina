@@ -287,6 +287,7 @@ export class LegalVerificationToolRuntime {
         if (
           result.status !== "FOUND" ||
           !result.record ||
+          result.record.status !== "VERIFIED" ||
           !result.judgment
         ) {
           return JSON.stringify({
