@@ -668,3 +668,49 @@ Scope boundary:
 Next gate:
 
 - **G24 Case-Law Proposition Evidence:** design a deterministic evidence contract for paraphrased propositions without allowing model-only semantic claims to inherit G22/G23 verification.
+
+
+### 2026-09-15 — Build 0022
+
+Status: **PASS — G24 SN PROPOSITION EVIDENCE LINK**
+
+Implemented:
+
+- third evidence status `SUPPORTED`, explicitly distinct from VERIFIED and UNVERIFIED;
+- runtime-owned `verify_case_proposition`;
+- proposition linked to an exact already verified SN quotation;
+- deterministic proposition evidence hash binds:
+  - exact case signature;
+  - exact proposition;
+  - exact support quote;
+- `caseScope=PROPOSITION_SUPPORT`;
+- proposition record retains `supportQuote` and `supportQuoteHash`;
+- marker `🔗 [CASE-SUPPORT:<hash>]`;
+- finalization requires unchanged proposition, exact support quote and case signature on the same line;
+- fabricated support markers fail closed;
+- altered proposition after tool use fails closed;
+- omitted support quote fails closed;
+- public verification summary separates `supported` from `verified`;
+- tool result explicitly reports `semanticVerification=false`.
+
+Validation evidence:
+
+- strict TypeScript: PASS;
+- unit tests: PASS;
+- G1-G24 deterministic validation: PASS;
+- G22 live SN probe: PASS;
+- G17 live ELI probe: PASS;
+- G19 live temporal probe: PASS;
+- G20 live PDF probe: PASS;
+- G14-G24 local web UI: PASS;
+- GitHub Actions run: `35020443752`, conclusion: `success`;
+- validated code SHA: `3f55b92eed6d8b94884b6fc9798e10c59bf45f15`.
+
+Scope boundary:
+
+- SUPPORTED proves evidence linkage, not semantic entailment;
+- SUPPORTED never increments the VERIFIED count.
+
+Next gate:
+
+- **G25 Structured Evidence Bundle / UI Contract:** return typed evidence metadata to the local UI so VERIFIED, SUPPORTED, historical, PDF and case-law evidence can be rendered without scraping markers from answer text.
