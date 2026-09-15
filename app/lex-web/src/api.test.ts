@@ -8,6 +8,47 @@ import {
 
 afterEach(() => {
   vi.restoreAllMocks();
+
+  it("posts a safe session execution request", async () => {
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({
+        sessionId: "session-1",
+        status: "DRAFT_PRESENTABLE",
+        provider: "openai",
+        model: "gpt-test",
+        primarySkill: "dr-02-test",
+        answer: "draft",
+        finalization: "PASS",
+        blockedReferences: [],
+        audit: {
+          result: "PASS",
+          eventCount: 10,
+          closed: true
+        }
+      }), { status: 200 })
+    );
+
+    await executeSession({
+      query: "Pytanie",
+      provider: "openai",
+      model: "gpt-test",
+      primarySkill: "dr-02-test"
+    });
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      "http://127.0.0.1:4317/api/sessions/execute",
+      expect.objectContaining({
+        method: "POST",
+        body: JSON.stringify({
+          query: "Pytanie",
+          provider: "openai",
+          model: "gpt-test",
+          primarySkill: "dr-02-test",
+          mode: "PRAWNIK"
+        })
+      })
+    );
+  });
 });
 
 describe("local API client", () => {
