@@ -248,3 +248,57 @@ Live-provider status:
 Next gate:
 
 - **G14 Local Web UI:** React/Vite application shell consuming the local HTTP API with provider/model selector, DR selector and runtime status, while keeping all credentials and Lex prompt content outside the browser bundle.
+
+### 2026-09-15 — Build 0011
+
+Status: **PASS — G14 LOCAL WEB UI**
+
+Implemented:
+
+- React 19 + Vite 8 local browser application;
+- runtime health indicator;
+- provider selector for OpenAI / Anthropic / xAI;
+- dynamic model selector consuming the local backend only;
+- 16-DR selector and explicit route validation;
+- browser never receives provider API keys;
+- browser never receives Lex `SKILL.md` prompt bodies;
+- localhost runtime is the default API target;
+- non-local browser origins remain blocked by the backend;
+- production bundle security scan for API-key names, private-key markers and prompt-content markers;
+- responsive desktop/mobile application shell.
+
+Validation evidence:
+
+- web unit tests: PASS;
+- production TypeScript/Vite build: PASS;
+- browser bundle safety scan: PASS;
+- runtime G1-G13: PASS;
+- G14: PASS;
+- GitHub Actions run: `35001668494`, conclusion: `success`.
+- Validated head SHA: `dfe6248bf856ee97af950aeeba8d9bb6ee7390a9`.
+
+Local startup:
+
+Terminal 1:
+
+```bash
+cd app/lex-runtime
+npm install
+npm start
+```
+
+Terminal 2:
+
+```bash
+cd app/lex-web
+npm install
+npm run dev
+```
+
+UI: `http://127.0.0.1:5173`
+
+The analysis button is intentionally not enabled yet. The next gate adds an execution endpoint with server-side provider invocation and HARD-GATE-safe response handling.
+
+Next gate:
+
+- **G15 Safe Session Execution:** provider-backed draft execution through the local API with route validation, server-only credentials, deterministic CI adapters and mandatory finalization status before UI presentation.
