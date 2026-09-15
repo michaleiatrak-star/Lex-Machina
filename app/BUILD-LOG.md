@@ -485,3 +485,56 @@ Live KC result:
 Next gate:
 
 - **G20 Official PDF Text Verification:** bounded backend-only PDF parsing without OCR/external processes, followed by the same title/reference verification and HARD GATE.
+
+### 2026-09-15 — Build 0017
+
+Status: **PASS — G19 HISTORICAL LEGAL-STATE EXCEPTION**
+
+Implemented:
+
+- optional `asOf=YYYY-MM-DD` for explicit historical legal-state requests;
+- validity-window checks using ELI entry/valid-from/repeal/expiration metadata;
+- historical official-text selection without treating a repealed t.j. as current law;
+- current/future `asOf` rejected;
+- amendments between the selected historical t.j. and `asOf` remain blocking;
+- historical marker includes `STAN NA YYYY-MM-DD`;
+- `temporalMode/asOf` propagated to ledger, audit and export verification log;
+- current-law repeal remains red/BLOCKED.
+
+Validation evidence:
+
+- full G1-G20 pipeline: PASS;
+- GitHub Actions run: `35014644845`, conclusion: `success`;
+- F-138 structural audit: `35014644693`, conclusion: `success`;
+- validated SHA: `360aeb3854810022222a85ea624182becdd0eb86`.
+
+### 2026-09-15 — Build 0018
+
+Status: **PASS — G20 OFFICIAL PDF VERIFICATION**
+
+Implemented:
+
+- backend-local PDF extraction with `pdfjs-dist`;
+- no OCR and no external process execution;
+- bounded PDF bytes/pages/extracted-text size;
+- malformed/no-text PDFs fail closed;
+- PDF temporal states proceed only with explicit PDF verifier capability;
+- official PDF title/reference matching;
+- verification provenance `web_fetch_pdf` + `sourceFormat=PDF`;
+- source format propagated to G9 audit and G10 neutral export log;
+- production localhost server enables the bounded PDF verifier.
+
+Validation evidence:
+
+- G1-G20 deterministic validation: PASS;
+- G17 live official-source probe: PASS;
+- G19 live temporal freshness probe: PASS;
+- G20 live official PDF probe: PASS;
+- G14-G20 local web UI: PASS;
+- GitHub Actions run: `35014644845`, conclusion: `success`;
+- F-138 structural audit: `35014644693`, conclusion: `success`;
+- validated SHA: `360aeb3854810022222a85ea624182becdd0eb86`.
+
+Next gate:
+
+- **G21 Official Case-Law Verification:** court-family-specific runtime resolver and exact signature verification, beginning with Sąd Najwyższy.
