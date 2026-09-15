@@ -36,14 +36,6 @@ export type ModelsResponse = {
   models: ModelDescriptor[];
 };
 
-export type SessionExecutionRequest = {
-  query: string;
-  provider: ProviderId;
-  model: string;
-  primarySkill: string;
-  mode: "LAIK" | "PRAWNIK";
-};
-
 export type BlockedReference = {
   claim: string;
   kind: "statute" | "journal" | "case";
@@ -126,11 +118,18 @@ export function getModels(
   return json<ModelsResponse>(`/api/models/${provider}`);
 }
 
-export function executeSession(
-  request: SessionExecutionRequest
-): Promise<SessionExecutionResponse> {
+export function executeSession(input: {
+  query: string;
+  provider: ProviderId;
+  model: string;
+  primarySkill: string;
+  mode?: "LAIK" | "PRAWNIK";
+}): Promise<SessionExecutionResponse> {
   return json<SessionExecutionResponse>("/api/sessions/execute", {
     method: "POST",
-    body: JSON.stringify(request)
+    body: JSON.stringify({
+      ...input,
+      mode: input.mode ?? "PRAWNIK"
+    })
   });
 }
