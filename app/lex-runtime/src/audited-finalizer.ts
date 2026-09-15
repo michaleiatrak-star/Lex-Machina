@@ -18,7 +18,10 @@ export class AuditedFinalizer {
       args.audit.record(
         "verification",
         record.claim,
-        record.status === "VERIFIED" ? "OK" : "DEGRADED",
+        record.status === "VERIFIED" ||
+        record.status === "SUPPORTED"
+          ? "OK"
+          : "DEGRADED",
         {
           kind: record.kind,
           status: record.status,
@@ -32,7 +35,9 @@ export class AuditedFinalizer {
           sourceFormat: record.sourceFormat ?? null,
           caseScope: record.caseScope ?? null,
           caseSignature: record.caseSignature ?? null,
-          evidenceHash: record.evidenceHash ?? null
+          evidenceHash: record.evidenceHash ?? null,
+          supportQuoteHash:
+            record.supportQuoteHash ?? null
         }
       );
     }
@@ -51,7 +56,9 @@ export class AuditedFinalizer {
         references: report.references.length,
         findings: report.findings.length,
         caseQuoteFindings:
-          report.caseQuoteFindings.length
+          report.caseQuoteFindings.length,
+        caseSupportFindings:
+          report.caseSupportFindings.length
       }
     );
 
