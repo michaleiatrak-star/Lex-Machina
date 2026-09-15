@@ -1,5 +1,5 @@
 import {
-  LocalPdfTextExtractor,
+  DEFAULT_PDF_MAX_BYTES,
   PdfTextExtractionError,
   type PdfTextExtractor
 } from "./pdf-text-extractor.js";
@@ -163,6 +163,16 @@ function sourceTier(host: string): "R1" | "R2A" {
     : "R2A";
 }
 
+function isPdfResponse(
+  url: URL,
+  contentType: string
+): boolean {
+  return (
+    contentType.includes("application/pdf") ||
+    url.pathname.toLowerCase().endsWith(".pdf")
+  );
+}
+
 export class LegalSourceVerificationError extends Error {
   constructor(
     message: string,
@@ -170,6 +180,7 @@ export class LegalSourceVerificationError extends Error {
       | "INVALID_SOURCE_URL"
       | "SOURCE_NOT_OFFICIAL"
       | "SOURCE_FETCH_FAILED"
+      | "SOURCE_TOO_LARGE"
       | "UNSUPPORTED_SOURCE_CONTENT"
       | "PDF_EXTRACTION_FAILED"
   ) {
@@ -184,9 +195,13 @@ export class OfficialLegalSourceVerifier {
       globalThis.fetch.bind(globalThis),
     private readonly now: () => string =
       () => new Date().toISOString(),
-    private readonly pdfExtractor: PdfTextExtractor =
-      new LocalPdfTextExtractor()
+    private readonly pdfTextExtractor?:
+      PdfTextExtractor
   ) {}
+
+  supportsPdf(): boolean {
+    return Boolean(this.pdfTextExtractor);
+  }
 
   async verify(
     request: LegalSourceVerificationRequest
@@ -227,7 +242,7 @@ export class OfficialLegalSourceVerifier {
         redirect: "error",
         headers: {
           Accept:
-            "text/html,application/xhtml+xml,application/json,application/pdf,text/plain;q=0.9,*/*;q=0.1"
+            "text/html,application/xhtml+xml,application/json,text/plain,application/pdf;q=0.9,*/*;q=0.1"
         }
       });
     } catch {
@@ -246,43 +261,59 @@ export class OfficialLegalSourceVerifier {
 
     const contentType =
       response.headers.get("content-type")?.toLowerCase() ?? "";
-    const isPdf =
-      contentType.includes("application/pdf") ||
-      url.pathname.toLowerCase().endsWith(".pdf");
 
     let body: string;
-    let sourceFormat: "TEXT" | "PDF";
-    let verificationMethod:
-      | "web_fetch"
-      | "web_fetch_pdf";
-
-    if (isPdf) {
-      let extracted;
-      try {
-        const bytes = new Uint8Array(
-          await response.arrayBuffer()
-        );
-        extracted =
-          await this.pdfExtractor.extract(bytes);
-      } catch (error) {
-        if (
-          error instanceof PdfTextExtractionError
-        ) {
-          throw new LegalSourceVerificationError(
-            "Official PDF could not be converted to verifiable text: " +
-              error.code,
-            "PDF_EXTRACTION_FAILED"
-          );
-        }
+    if (isPdfResponse(url, contentType)) {
+      if (!this.pdfTextExtractor) {
         throw new LegalSourceVerificationError(
-          "Official PDF could not be converted to verifiable text.",
-          "PDF_EXTRACTION_FAILED"
+          "Official PDF requires a configured local PDF text extractor.",
+          "UNSUPPORTED_SOURCE_CONTENT"
         );
       }
 
-      body = extracted.text;
-      sourceFormat = "PDF";
-      verificationMethod = "web_fetch_pdf";
+      const contentLength = Number(
+        response.headers.get("content-length") ?? "0"
+      );
+      if (
+        Number.isFinite(contentLength) &&
+        contentLength >
+          DEFAULT_PDF_MAX_BYTES
+      ) {
+        throw new LegalSourceVerificationError(
+          "Official PDF exceeds the configured byte limit.",
+          "SOURCE_TOO_LARGE"
+        );
+      }
+
+      const bytes = new Uint8Array(
+        await response.arrayBuffer()
+      );
+      try {
+        const extracted =
+          await this.pdfTextExtractor.extract(
+            bytes
+          );
+        body = extracted.text.slice(
+          0,
+          MAX_SOURCE_CHARS
+        );
+      } catch (error) {
+        if (
+          error instanceof
+          PdfTextExtractionError &&
+          error.code === "PDF_TOO_LARGE"
+        ) {
+          throw new LegalSourceVerificationError(
+            "Official PDF exceeds the configured byte limit.",
+            "SOURCE_TOO_LARGE"
+          );
+        }
+
+        throw new LegalSourceVerificationError(
+          "Official PDF could not be converted into verifiable text.",
+          "PDF_EXTRACTION_FAILED"
+        );
+      }
     } else {
       if (
         contentType &&
@@ -292,7 +323,7 @@ export class OfficialLegalSourceVerifier {
         !contentType.includes("xml")
       ) {
         throw new LegalSourceVerificationError(
-          "Official source content is not directly verifiable text or PDF.",
+          "Official source content is not directly verifiable text.",
           "UNSUPPORTED_SOURCE_CONTENT"
         );
       }
@@ -301,9 +332,8 @@ export class OfficialLegalSourceVerifier {
         0,
         MAX_SOURCE_CHARS
       );
-      sourceFormat = "TEXT";
-      verificationMethod = "web_fetch";
     }
+
     const titleMatched = titleMatches(
       request.expectedTitle,
       body,
@@ -314,7 +344,9 @@ export class OfficialLegalSourceVerifier {
       request.kind,
       body
     );
-    const matched = titleMatched && referenceMatched;
+    const matched =
+      titleMatched &&
+      referenceMatched;
     const fetchedAt = this.now();
     const sourceUrl = url.toString();
 
@@ -333,8 +365,7 @@ export class OfficialLegalSourceVerifier {
           sourceTier: sourceTier(host),
           fetchedAt,
           toolCallId: request.toolCallId,
-          verificationMethod,
-          sourceFormat,
+          verificationMethod: "web_fetch",
           ...(evidence ? { evidence } : {})
         }
       : {
@@ -345,8 +376,7 @@ export class OfficialLegalSourceVerifier {
           sourceTier: sourceTier(host),
           fetchedAt,
           toolCallId: request.toolCallId,
-          verificationMethod,
-          sourceFormat,
+          verificationMethod: "web_fetch",
           evidence: !titleMatched
             ? "Official source was fetched, but the expected act title was not found."
             : "Official source was fetched, but the requested reference was not found in the fetched text."
