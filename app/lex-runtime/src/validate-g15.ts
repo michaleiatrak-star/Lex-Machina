@@ -1,5 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import request from "supertest";
+import { createLexHttpApp } from "./http/app.js";
 import {
   ProviderGateway,
   ProviderRegistry
@@ -15,9 +17,25 @@ const lexRoot = path.resolve(
   process.env.LEX_SKILLS_PATH ??
     path.join(repositoryRoot, "Wersja rozwojowa rozpakowana")
 );
+const DR02 = "dr-02-prawo-cywilne-rodzinne-gospodarcze";
 
 const registry = new LexSkillRegistry(lexRoot);
 const issues = [...registry.scan(), ...registry.validateDeclarations()];
+
+function appWithExecutor(executor: SafeSessionExecutor) {
+  return createLexHttpApp({
+    registry,
+    modelCatalog: {
+      list: async () => [{
+        provider: "openai" as const,
+        id: "g15-safe",
+        displayName: "g15-safe",
+        selectable: true
+      }]
+    },
+    sessionExecutor: executor
+  });
+}
 
 if (issues.length > 0) {
   process.stdout.write(
@@ -38,13 +56,15 @@ if (issues.length > 0) {
     new ProviderGateway(safeProviders)
   );
 
-  const safe = await safeExecutor.execute({
-    query: "Techniczny test G15 bez analizy prawnej.",
-    provider: "openai",
-    model: "g15-safe",
-    primarySkill: "dr-02-prawo-cywilne-rodzinne-gospodarcze",
-    mode: "PRAWNIK"
-  });
+  const safeHttp = await request(appWithExecutor(safeExecutor))
+    .post("/api/sessions/execute")
+    .send({
+      query: "Techniczny test G15 bez analizy prawnej.",
+      provider: "openai",
+      model: "g15-safe",
+      primarySkill: DR02,
+      mode: "PRAWNIK"
+    });
 
   const unsafeAdapter: ProviderAdapter = {
     id: "anthropic",
@@ -69,44 +89,82 @@ if (issues.length > 0) {
     new ProviderGateway(unsafeProviders)
   );
 
-  const unsafe = await unsafeExecutor.execute({
-    query: "Techniczny test blokady G15.",
-    provider: "anthropic",
-    model: "g15-unsafe",
-    primarySkill: "dr-02-prawo-cywilne-rodzinne-gospodarcze",
-    mode: "PRAWNIK"
-  });
+  const unsafeHttp = await request(appWithExecutor(unsafeExecutor))
+    .post("/api/sessions/execute")
+    .send({
+      query: "Techniczny test blokady G15.",
+      provider: "anthropic",
+      model: "g15-unsafe",
+      primarySkill: DR02,
+      mode: "PRAWNIK"
+    });
+
+  const invalidRouteHttp = await request(appWithExecutor(safeExecutor))
+    .post("/api/sessions/execute")
+    .send({
+      query: "Test niedozwolonego routingu.",
+      provider: "openai",
+      model: "g15-safe",
+      primarySkill: "pisma-procesowe-v3",
+      mode: "PRAWNIK"
+    });
+
+  const safe = safeHttp.body as Record<string, unknown>;
+  const unsafe = unsafeHttp.body as Record<string, unknown>;
+  const safeAudit =
+    typeof safe.audit === "object" && safe.audit !== null
+      ? safe.audit as Record<string, unknown>
+      : {};
+  const unsafeAudit =
+    typeof unsafe.audit === "object" && unsafe.audit !== null
+      ? unsafe.audit as Record<string, unknown>
+      : {};
+  const unsafeReferences = Array.isArray(unsafe.blockedReferences)
+    ? unsafe.blockedReferences as Array<Record<string, unknown>>
+    : [];
 
   const pass =
+    safeHttp.status === 200 &&
     safe.status === "DRAFT_PRESENTABLE" &&
     safe.finalization === "PASS" &&
     typeof safe.answer === "string" &&
-    safe.audit.result === "PASS" &&
-    safe.audit.closed === true &&
+    safeAudit.result === "PASS" &&
+    safeAudit.closed === true &&
+    unsafeHttp.status === 200 &&
     unsafe.status === "BLOCKED" &&
     unsafe.finalization === "BLOCKED" &&
-    unsafe.answer === undefined &&
-    unsafe.audit.closed === true &&
-    unsafe.blockedReferences.some(
+    !("answer" in unsafe) &&
+    unsafeAudit.closed === true &&
+    unsafeReferences.some(
       (reference) =>
         reference.claim === "art. 1234 KC" &&
         reference.status === "MISSING_LEDGER_RECORD"
-    );
+    ) &&
+    invalidRouteHttp.status === 422 &&
+    invalidRouteHttp.body?.error === "INVALID_ROUTE";
 
   process.stdout.write(
     JSON.stringify({
       gate: "G15_SAFE_SESSION_EXECUTION",
       result: pass ? "PASS" : "BLOCKED",
       safePath: {
+        http: safeHttp.status,
         status: safe.status,
         finalization: safe.finalization,
-        audit: safe.audit.result
+        audit: safeAudit.result,
+        answerReleased: typeof safe.answer === "string"
       },
       blockedPath: {
+        http: unsafeHttp.status,
         status: unsafe.status,
         finalization: unsafe.finalization,
-        answerExposed: unsafe.answer !== undefined,
-        references: unsafe.blockedReferences
+        audit: unsafeAudit.result,
+        answerReleased: "answer" in unsafe,
+        references: unsafeReferences
+      },
+      invalidRoute: {
+        http: invalidRouteHttp.status,
+        error: invalidRouteHttp.body?.error
       },
       liveApiCallsExecuted: false,
       liveValidationStatus: "PENDING_CREDENTIALLED_TESTS"
