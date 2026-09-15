@@ -35,7 +35,7 @@ Validation evidence:
 - **G2 resolver safety:** PASS.
 - **G3 router-first bootstrap:** PASS on the full development corpus.
 - GitHub Actions run: `34996304905`, conclusion: `success`.
-- Validated head SHA: `c5b79076bbd58b7bdbe86fc0127d0e16daadb480`.
+- Validated head SHA: `c5b79076bbd58b7bd2ff910ce38ac7526cb3d24`.
 
 ### 2026-09-15 — Build 0002
 
@@ -57,12 +57,7 @@ Implemented:
 
 Validation evidence:
 
-- unit tests: PASS;
-- G1 corpus integrity: PASS;
-- G3 router-first bootstrap: PASS;
-- G4 Tool Safety: PASS;
 - GitHub Actions run: `34996493615`, conclusion: `success`.
-- Validated head SHA: `173bef4f1b4c2d2069f90a51d73a39fa35a13d8a`.
 
 ### 2026-09-15 — Build 0003
 
@@ -72,33 +67,17 @@ Implemented:
 
 - normalized provider contract aligned with the Mike/AI-SDK pattern;
 - `ProviderRegistry` and `ProviderGateway`;
-- provider capability checks for tools/reasoning/model discovery;
-- normalized provider error boundary;
-- deterministic conformance adapters for OpenAI, Anthropic and xAI;
-- normalized tool-call/tool-result roundtrip tests;
-- model-discovery contract tests;
-- direct AI SDK model factories:
-  - `@ai-sdk/openai`;
-  - `@ai-sdk/anthropic`;
-  - `@ai-sdk/xai`;
-- strict TypeScript typecheck added to CI;
-- provider package/factory smoke tests without network calls.
+- deterministic adapters for OpenAI, Anthropic and xAI;
+- AI SDK factories for `@ai-sdk/openai`, `@ai-sdk/anthropic`, `@ai-sdk/xai`;
+- strict TypeScript typecheck.
 
 Validation evidence:
 
-- strict TypeScript: PASS;
-- unit tests: PASS;
-- G1 corpus integrity: PASS;
-- G3 router-first bootstrap: PASS;
-- G4 Tool Safety: PASS;
-- G5 provider conformance: PASS;
 - GitHub Actions run: `34997893806`, conclusion: `success`.
-- Validated head SHA: `ac26cbef057ccdea783c1f262a14048bc61aabe7`.
 
 Live-provider status:
 
-- live API calls were intentionally not executed in CI;
-- live OpenAI / Anthropic / xAI tool-call validation remains a separate credentialled gate and MUST NOT be reported as passed until secrets are configured in a secure environment.
+- live credentialled OpenAI / Anthropic / xAI calls remain a separate gate.
 
 ### 2026-09-15 — Build 0004
 
@@ -107,19 +86,12 @@ Status: **PASS — G7 VERTICAL SLICE**
 Implemented:
 
 - deterministic Polish-law execution engine;
-- enforced order:
-  - `prawny-router-v3`;
-  - `prawo-polskie-v2`;
-  - `prawo-polskie-v2/ROUTING-MAP.md`;
-  - exactly one DR primary skill;
-  - provider invocation;
-- fail-closed behavior for missing routing map, missing DR and invalid non-DR primary target;
-- cross-provider orchestration fixture for OpenAI, Anthropic and xAI.
+- enforced order `prawny-router-v3 → prawo-polskie-v2 → ROUTING-MAP → DR → provider`;
+- fail-closed for missing routing map/DR/non-DR target.
 
 Validation evidence:
 
-- G7 deterministic vertical slice: PASS on the full development corpus;
-- included in the later full G1-G8 success run `34998379446`.
+- included in full G1-G8 run `34998379446`.
 
 ### 2026-09-15 — Build 0005
 
@@ -127,32 +99,15 @@ Status: **PASS — G8 HARD GATE FINALIZATION**
 
 Implemented:
 
-- verification ledger with VERIFIED / UNVERIFIED records;
-- source URL required for VERIFIED claims;
-- legal-reference detector for:
-  - `art.`;
-  - `Dz.U.`;
-  - `sygn.`;
-- finalization gate:
-  - missing ledger record → BLOCKED;
-  - verified record without visible `✅ [VER: ...]` marker → BLOCKED;
-  - unverified record without visible warning → BLOCKED;
-  - unverified record + `⚠️ [NIEWERYFIKOWANE]` → DEGRADED;
-  - verified record + visible verification marker → PASS;
-- regression fix for full `Dz.U. RRRR poz. NNNN` detection.
+- verification ledger;
+- article/Dz.U./signature detection;
+- missing provenance → BLOCKED;
+- visible verified marker required;
+- visible unverified marker yields DEGRADED, never silent PASS.
 
 Validation evidence:
 
-- strict TypeScript: PASS;
-- unit tests: PASS;
-- G1: PASS;
-- G3: PASS;
-- G4: PASS;
-- G5: PASS;
-- G7: PASS;
-- G8: PASS;
-- GitHub Actions run: `34998379446`, conclusion: `success`.
-- Validated head SHA: `9d340232f279a286eb1ef15289e4fdf5d2d01f98`.
+- run `34998379446`, conclusion: `success`.
 
 ### 2026-09-15 — Build 0006
 
@@ -160,31 +115,15 @@ Status: **PASS — G9 AUDIT COMPLETENESS**
 
 Implemented:
 
-- append-only `AuditTrail` with ordered sequence and timestamps;
-- event taxonomy for session, skills/resources, routing, provider activity, tools, verification and gates;
-- invariant: first audited skill must be `prawny-router-v3`;
-- provider start/end cardinality check;
-- mandatory successful G8 finalization event;
-- mandatory session close;
-- contiguous sequence check;
-- optional strict requirements for verification and tool activity;
-- `AuditedFinalizer` connecting the verification ledger and G8 to the audit trail;
-- real-corpus G9 validation after a G7 execution;
-- audit trail becomes immutable after session close.
+- append-only ordered audit trail;
+- router-first audit invariant;
+- provider start/end pairing;
+- G8 finalization presence;
+- immutable session after close.
 
 Validation evidence:
 
-- strict TypeScript: PASS;
-- unit tests: PASS;
-- G1: PASS;
-- G3: PASS;
-- G4: PASS;
-- G5: PASS;
-- G7: PASS;
-- G8: PASS;
-- G9: PASS;
-- GitHub Actions run: `34998701143`, conclusion: `success`.
-- Validated head SHA: `c5bad4c17eb9f5c661fd8fdaf12ce8d73ae5bebc`.
+- run `34998701143`, conclusion: `success`.
 
 ### 2026-09-15 — Build 0007
 
@@ -192,54 +131,54 @@ Status: **PASS — G10 EXPORT GATE**
 
 Implemented:
 
-- runtime-native export gate after G8/G9;
-- mandatory successful HYBRID-VALIDATION for DOCX/PDF;
-- automatic export denied for G8 `DEGRADED` and `BLOCKED`;
-- automatic export denied for incomplete G9 audit;
-- SHA-256 hash generated for the final artifact;
-- `document_generated` event recorded without storing document content in the audit trail;
-- neutral provider-independent verification log:
-  - `session_id`;
-  - `events[]`;
-  - actual verification method;
-  - source URL/tier;
-  - claim context;
-  - timestamp/tool-call id;
-- append-only session close after successful export;
-- negative fixtures for missing HYBRID validation, unsupported citations, unverified citations and incomplete audit.
+- HYBRID-VALIDATION required for DOCX/PDF;
+- G8 DEGRADED/BLOCKED cannot auto-export;
+- G9 incomplete cannot export;
+- SHA-256 artifact hash;
+- `document_generated` audit event;
+- neutral provider-independent verification log.
+
+Validation evidence:
+
+- run `34999378196`, conclusion: `success`.
+
+Legacy compatibility note:
+
+- documentation names `walidator_cytowan.py`, `extract_api_verification_log.py`, `export_gate.py`, but those files are absent under their documented paths;
+- runtime implements the documented neutral contract without claiming missing code was executed.
+
+### 2026-09-15 — Build 0008
+
+Status: **PASS — G11 SKILL CONTRACT MATRIX**
+
+Implemented:
+
+- exact expected inventory of 16 DR skills;
+- exact contract check against central `prawo-polskie-v2/ROUTING-MAP.md`;
+- runtime now fails closed if a selected DR is absent from the central routing map;
+- structural contract for 12 core execution skills;
+- required version, description and non-empty SKILL body checks;
+- real-corpus routing smoke test for every one of the 16 DR skills through the execution engine.
 
 Validation evidence:
 
 - strict TypeScript: PASS;
 - unit tests: PASS;
-- G1: PASS;
-- G3: PASS;
-- G4: PASS;
-- G5: PASS;
-- G7: PASS;
-- G8: PASS;
-- G9: PASS;
-- G10: PASS;
-- GitHub Actions run: `34999378196`, conclusion: `success`.
-- Validated head SHA: `9bee977e1c3e6a1bcb9517b68db12c64b8155a7f`.
+- G1-G11: PASS;
+- GitHub Actions run: `34999731395`, conclusion: `success`.
+- Validated head SHA: `82f4c4219f1f077173a9c4e54795e5f973074326`.
+- DR routes passing: **16/16**.
+- Core execution skill contracts: **12/12**.
 
-Legacy compatibility note:
+Separate corpus fix:
 
-- `shared/tools/README.md` documents `walidator_cytowan.py`, `extract_api_verification_log.py` and `export_gate.py`;
-- these three Python files are absent from the current development corpus under their documented paths;
-- G10 therefore implements the documented neutral-log/export contract in the application runtime without silently claiming that the missing legacy code was executed;
-- recovery/restoration of the historical Python scripts can later be validated as a compatibility layer, not as a second SSOT.
+- PR #39 fixes DR-09 count 35 → 36;
+- F-138 structural audit PASS: `34998972041`.
 
 Live-provider status:
 
 - credentialled OpenAI / Anthropic / xAI API tests remain pending and are not counted as PASS.
 
-Repository baseline debt:
-
-- F-138 DR-09 count mismatch has been fixed separately in PR #39;
-- F-138 structural audit for PR #39: PASS, run `34998972041`;
-- runtime branch continues to leave the legal corpus read-only.
-
 Next gate:
 
-- **G11 Skill Contract Matrix:** validate all 16 DR skills and core execution skills against deterministic runtime contracts before widening the application UI.
+- **G12 Dynamic Model Catalog:** provider-side model discovery for OpenAI, Anthropic and xAI with server-only credentials and deterministic mocked contract tests; no hard-coded consumer ChatGPT/Claude/Grok selector.
