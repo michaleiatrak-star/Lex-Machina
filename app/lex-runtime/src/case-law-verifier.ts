@@ -468,6 +468,24 @@ function quoteEvidenceHash(
     .slice(0, 20);
 }
 
+export function propositionEvidenceHash(
+  signature: string,
+  proposition: string,
+  supportQuote: string
+): string {
+  return createHash("sha256")
+    .update(
+      normalizeCaseSignature(signature) +
+      "\n" +
+      normalizeQuoteText(proposition) +
+      "\n" +
+      normalizeQuoteText(supportQuote),
+      "utf8"
+    )
+    .digest("hex")
+    .slice(0, 20);
+}
+
 function normalizeOfficialText(
   html: string
 ): string {
