@@ -20,8 +20,8 @@ permissions:
   contents: read
 
 jobs:
-  g1-g12:
-    name: G1-G12 runtime validation
+  g1-g13:
+    name: G1-G13 runtime validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -42,7 +42,7 @@ jobs:
       - name: TypeScript strict typecheck
         run: npm run typecheck
 
-      - name: Unit tests — runtime and provider contracts
+      - name: Unit tests — runtime and app contracts
         run: npm test
 
       - name: G1 — corpus integrity
@@ -74,3 +74,6 @@ jobs:
 
       - name: G12 — dynamic model catalog
         run: npm run validate:g12
+
+      - name: G13 — localhost HTTP API
+        run: npm run validate:g13
