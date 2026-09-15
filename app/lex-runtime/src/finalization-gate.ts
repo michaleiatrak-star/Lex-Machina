@@ -33,18 +33,34 @@ export type CaseQuoteFinding = {
   record?: VerificationRecord;
 };
 
+export type CaseSupportFinding = {
+  evidenceHash: string;
+  line: number;
+  lineText: string;
+  status:
+    | "SUPPORTED"
+    | "MISSING_CASE_SUPPORT_LEDGER"
+    | "PROPOSITION_TEXT_MISMATCH"
+    | "SUPPORT_QUOTE_MISSING"
+    | "CASE_SIGNATURE_MISSING";
+  record?: VerificationRecord;
+};
+
 export type FinalizationReport = {
   gate: "G8_HARD_GATE_FINALIZATION";
   result: "PASS" | "DEGRADED" | "BLOCKED";
   references: DetectedLegalReference[];
   findings: FinalizationFinding[];
   caseQuoteFindings: CaseQuoteFinding[];
+  caseSupportFindings: CaseSupportFinding[];
 };
 
 const VERIFIED_MARKER = /✅\s*\[VER:/iu;
 const UNVERIFIED_MARKER = /⚠️?\s*\[NIEWERYFIKOWANE\]/iu;
 const CASE_QUOTE_MARKER =
   /✅\s*\[CASE-QUOTE:([a-f0-9]{20})\]/giu;
+const CASE_SUPPORT_MARKER =
+  /🔗\s*\[CASE-SUPPORT:([a-f0-9]{20})\]/giu;
 
 const ARTICLE_PATTERN =
   /\bart\.?\s+\d+[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]*(?:\s*§\s*\d+[a-zA-Z]*)?(?:\s+(?:KC|KPC|KK|KPK|KPA|KP|KRO|KSH|KW|KPW|PZP))?/giu;
@@ -103,6 +119,7 @@ export class FinalizationGate {
     const references = detectLegalReferences(text);
     const findings: FinalizationFinding[] = [];
     const caseQuoteFindings: CaseQuoteFinding[] = [];
+    const caseSupportFindings: CaseSupportFinding[] = [];
 
     for (const reference of references) {
       const record = ledger.latest(reference.claim);
@@ -234,6 +251,109 @@ export class FinalizationGate {
           record
         });
       }
+
+      CASE_SUPPORT_MARKER.lastIndex = 0;
+
+      for (
+        const match of lineText.matchAll(
+          CASE_SUPPORT_MARKER
+        )
+      ) {
+        const evidenceHash =
+          match[1] ?? "";
+        if (!evidenceHash) {
+          continue;
+        }
+
+        const record =
+          ledger.all().find(
+            (candidate) =>
+              candidate.status ===
+                "SUPPORTED" &&
+              candidate.kind === "case" &&
+              candidate.caseScope ===
+                "PROPOSITION_SUPPORT" &&
+              candidate.evidenceHash ===
+                evidenceHash
+          );
+
+        if (!record) {
+          caseSupportFindings.push({
+            evidenceHash,
+            line: index + 1,
+            lineText,
+            status:
+              "MISSING_CASE_SUPPORT_LEDGER"
+          });
+          continue;
+        }
+
+        if (
+          !record.claim ||
+          !lineText.includes(
+            record.claim
+          )
+        ) {
+          caseSupportFindings.push({
+            evidenceHash,
+            line: index + 1,
+            lineText,
+            status:
+              "PROPOSITION_TEXT_MISMATCH",
+            record
+          });
+          continue;
+        }
+
+        if (
+          !record.supportQuote ||
+          !lineText.includes(
+            record.supportQuote
+          )
+        ) {
+          caseSupportFindings.push({
+            evidenceHash,
+            line: index + 1,
+            lineText,
+            status:
+              "SUPPORT_QUOTE_MISSING",
+            record
+          });
+          continue;
+        }
+
+        const normalizedLine =
+          normalizeEvidenceText(lineText);
+        const normalizedSignature =
+          normalizeEvidenceText(
+            record.caseSignature ?? ""
+          );
+
+        if (
+          !normalizedSignature ||
+          !normalizedLine.includes(
+            normalizedSignature
+          )
+        ) {
+          caseSupportFindings.push({
+            evidenceHash,
+            line: index + 1,
+            lineText,
+            status:
+              "CASE_SIGNATURE_MISSING",
+            record
+          });
+          continue;
+        }
+
+        caseSupportFindings.push({
+          evidenceHash,
+          line: index + 1,
+          lineText,
+          status: "SUPPORTED",
+          record
+        });
+      }
     });
 
     const blocked = findings.some((finding) =>
@@ -246,6 +366,10 @@ export class FinalizationGate {
     caseQuoteFindings.some(
       (finding) =>
         finding.status !== "VERIFIED"
+    ) ||
+    caseSupportFindings.some(
+      (finding) =>
+        finding.status !== "SUPPORTED"
     );
 
     const degraded =
@@ -257,7 +381,8 @@ export class FinalizationGate {
       result: blocked ? "BLOCKED" : degraded ? "DEGRADED" : "PASS",
       references,
       findings,
-      caseQuoteFindings
+      caseQuoteFindings,
+      caseSupportFindings
     };
   }
 }
