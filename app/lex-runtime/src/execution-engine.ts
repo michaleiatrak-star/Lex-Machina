@@ -2,7 +2,11 @@ import fs from "node:fs";
 import { LegalSession } from "./legal-session.js";
 import { LexSkillRegistry } from "./registry.js";
 import { ProviderGateway } from "./providers/gateway.js";
-import type { ProviderId } from "./providers/types.js";
+import type {
+  NormalizedToolResult,
+  NormalizedToolSchema,
+  ProviderId
+} from "./providers/types.js";
 
 export type RouteDecision = {
   jurisdiction: "PL";
@@ -69,6 +73,10 @@ export class LexExecutionEngine {
     provider: ProviderId;
     model: string;
     route: RouteDecision;
+    tools?: NormalizedToolSchema[];
+    runTools?: (
+      calls: import("./providers/types.js").NormalizedToolCall[]
+    ) => Promise<NormalizedToolResult[]>;
   }): Promise<VerticalSliceResult> {
     const events: ExecutionEvent[] = [];
     const emit = (
@@ -179,6 +187,8 @@ export class LexExecutionEngine {
       model: args.model,
       systemPrompt,
       messages: [{ role: "user", content: args.query }],
+      ...(args.tools?.length ? { tools: args.tools } : {}),
+      ...(args.runTools ? { runTools: args.runTools } : {}),
       reasoning: "none"
     });
     emit("provider_end", args.provider, "OK", args.model);
