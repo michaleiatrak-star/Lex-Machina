@@ -1,4 +1,9 @@
 import {
+  DeterministicLegalActResolver,
+  LegalActResolutionError,
+  type LegalActDescriptor
+} from "./legal-act-resolver.js";
+import {
   ToolBroker,
   ToolPolicy,
   type ToolAuditEvent
@@ -24,34 +29,29 @@ const TOOL_SCHEMA: NormalizedToolSchema = {
   function: {
     name: TOOL_NAME,
     description:
-      "Verify one Polish statutory or Journal of Laws reference against a fresh official ELI/ISAP/Sejm source. " +
-      "Call this before emitting every art. or Dz.U. citation. " +
-      "The tool checks the official host, the expected act title and the requested reference. " +
+      "Verify one Polish statutory or Journal of Laws reference. " +
+      "Provide the exact citation and the legal act identity/alias only. " +
+      "The runtime resolves the official source URL and expected title; never supply or invent transport URLs. " +
       "Only status VERIFIED permits copying the returned marker onto the same line as the exact citation. " +
       "Case-law signatures are not verified by this tool.",
     parameters: {
       type: "object",
       additionalProperties: false,
-      required: ["claim", "kind", "url", "expectedTitle"],
+      required: ["claim", "kind", "act"],
       properties: {
         claim: {
           type: "string",
           description:
-            "Exact legal reference that will appear in the answer, e.g. art. 5 KC or Dz.U. 2024 poz. 1061."
+            "Exact legal reference that will appear in the answer, e.g. art. 5 KC."
         },
         kind: {
           type: "string",
           enum: ["statute", "journal"]
         },
-        url: {
+        act: {
           type: "string",
           description:
-            "Fresh credential-free HTTPS source URL on official ELI/ISAP/Sejm."
-        },
-        expectedTitle: {
-          type: "string",
-          description:
-            "Official title of the act expected at the supplied source URL. Used to reject a wrong act that happens to contain the same article number."
+            "Legal act identity or alias known to the runtime, e.g. KC, KPC, KPK or the full act title."
         }
       }
     }
@@ -64,12 +64,15 @@ function kind(value: unknown): VerificationKind | null {
     : null;
 }
 
-function publicToolResult(record: {
-  claim: string;
-  status: "VERIFIED" | "UNVERIFIED";
-  sourceUrl?: string;
-  fetchedAt: string;
-}): string {
+function publicToolResult(
+  record: {
+    claim: string;
+    status: "VERIFIED" | "UNVERIFIED";
+    sourceUrl?: string;
+    fetchedAt: string;
+  },
+  act: LegalActDescriptor
+): string {
   const marker =
     record.status === "VERIFIED"
       ? "✅ [VER: " +
@@ -82,6 +85,14 @@ function publicToolResult(record: {
   return JSON.stringify({
     claim: record.claim,
     status: record.status,
+    act: {
+      id: act.id,
+      title: act.title,
+      eli: act.eli,
+      baseEli: act.baseEli,
+      sourceKind: act.sourceKind,
+      registryAsOf: act.registryAsOf
+    },
     sourceUrl: record.sourceUrl ?? null,
     fetchedAt: record.fetchedAt,
     marker,
@@ -95,24 +106,31 @@ function publicToolResult(record: {
 export const LEGAL_VERIFICATION_SYSTEM_APPENDIX = [
   "RUNTIME LEGAL-SOURCE VERIFICATION:",
   "- Before emitting any statutory citation (art. or Dz.U.), call verify_legal_reference.",
+  "- Pass only claim + kind + legal act identity/alias. Never invent or supply an official-source URL.",
+  "- The runtime resolves the canonical official source and expected act title.",
   "- A citation is verified only when the tool returns status=VERIFIED.",
   "- For VERIFIED results, copy the returned marker verbatim onto the SAME LINE as the exact citation.",
   "- Never invent a verification marker, source URL, or tool result.",
   "- For UNVERIFIED/DENIED results, do not represent the citation as verified.",
-  "- Case-law signatures are outside this G16 tool and remain unverified unless a separate runtime tool verifies them."
+  "- Case-law signatures are outside this tool and remain unverified unless a separate runtime tool verifies them."
 ].join("\n");
 
 export class LegalVerificationToolRuntime {
   private readonly broker: ToolBroker;
+  private readonly resolverAudit: ToolAuditEvent[] = [];
 
   constructor(
     private readonly ledger: VerificationLedger,
-    verifier = new OfficialLegalSourceVerifier()
+    verifier = new OfficialLegalSourceVerifier(),
+    private readonly resolver =
+      new DeterministicLegalActResolver()
   ) {
     this.broker = new ToolBroker(
       new ToolPolicy({
         allowNetwork: true,
-        allowedNetworkHosts: [...OFFICIAL_LEGAL_SOURCE_HOSTS]
+        allowedNetworkHosts: [
+          ...OFFICIAL_LEGAL_SOURCE_HOSTS
+        ]
       })
     );
 
@@ -137,13 +155,17 @@ export class LegalVerificationToolRuntime {
           typeof input.toolCallId === "string"
             ? input.toolCallId
             : "";
+        const act = input.resolvedAct as
+          | LegalActDescriptor
+          | undefined;
 
         if (
           !claim ||
           !verificationKind ||
           !url ||
           !expectedTitle ||
-          !toolCallId
+          !toolCallId ||
+          !act
         ) {
           throw new Error("INVALID_VERIFICATION_INPUT");
         }
@@ -156,7 +178,7 @@ export class LegalVerificationToolRuntime {
           toolCallId
         });
         this.ledger.add(result.record);
-        return publicToolResult(result.record);
+        return publicToolResult(result.record, act);
       }
     });
   }
@@ -170,7 +192,13 @@ export class LegalVerificationToolRuntime {
   }
 
   auditEvents(): readonly ToolAuditEvent[] {
-    return this.broker.audit.map((event) => ({ ...event }));
+    return [
+      ...this.resolverAudit.map((event) => ({ ...event })),
+      ...this.broker.audit.map((event) => ({ ...event }))
+    ].map((event, index) => ({
+      ...event,
+      sequence: index + 1
+    }));
   }
 
   async runTools(
@@ -179,11 +207,46 @@ export class LegalVerificationToolRuntime {
     const results: NormalizedToolResult[] = [];
 
     for (const call of calls) {
+      const actInput =
+        typeof call.input.act === "string"
+          ? call.input.act.trim()
+          : "";
+
+      let resolvedAct: LegalActDescriptor;
+      try {
+        resolvedAct = this.resolver.resolve(actInput);
+      } catch (error) {
+        const reason =
+          error instanceof LegalActResolutionError
+            ? error.code
+            : "LEGAL_ACT_RESOLUTION_FAILED";
+
+        this.resolverAudit.push({
+          sequence: this.resolverAudit.length + 1,
+          tool: TOOL_NAME,
+          capability: "network",
+          decision: "DENY",
+          reason
+        });
+        results.push({
+          tool_use_id: call.id,
+          content: JSON.stringify({
+            status: "DENIED",
+            error: reason
+          })
+        });
+        continue;
+      }
+
       const result = await this.broker.execute({
         name: call.name,
         input: {
-          ...call.input,
-          toolCallId: call.id
+          claim: call.input.claim,
+          kind: call.input.kind,
+          toolCallId: call.id,
+          url: resolvedAct.sourceUrl,
+          expectedTitle: resolvedAct.title,
+          resolvedAct
         }
       });
 
