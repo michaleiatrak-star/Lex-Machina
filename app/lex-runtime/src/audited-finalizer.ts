@@ -28,7 +28,8 @@ export class AuditedFinalizer {
           toolCallId: record.toolCallId ?? null,
           verificationMethod: record.verificationMethod ?? null,
           temporalMode: record.temporalMode ?? "CURRENT",
-          asOf: record.asOf ?? null
+          asOf: record.asOf ?? null,
+          sourceFormat: record.sourceFormat ?? null
         }
       );
     }
