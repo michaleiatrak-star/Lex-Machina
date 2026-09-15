@@ -130,7 +130,7 @@ export class AmendmentApplicabilityResolver {
   > {
     const relationDate =
       dateOnly(
-        amendment.promulgation
+        amendment.relationDate
       );
     const url = apiUrl(
       amendment.eli
