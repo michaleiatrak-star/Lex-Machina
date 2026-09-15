@@ -56,6 +56,7 @@ describe("session execution HTTP API", () => {
         verification: {
           records: 0,
           verified: 0,
+          supported: 0,
           unverified: 0
         },
         audit: {
