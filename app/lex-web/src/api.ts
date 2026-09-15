@@ -43,6 +43,32 @@ export type BlockedReference = {
   status: string;
 };
 
+export type EvidenceItem = {
+  claim: string;
+  kind: "statute" | "journal" | "case" | "deadline" | "amount";
+  status: "VERIFIED" | "SUPPORTED" | "UNVERIFIED";
+  sourceUrl?: string;
+  sourceTier?: "R1" | "R2A" | "R2B" | "R3";
+  fetchedAt: string;
+  verificationMethod?:
+    | "web_fetch"
+    | "web_fetch_pdf"
+    | "web_search"
+    | "mcp_call"
+    | "provider_tool"
+    | "file_read";
+  temporalMode?: "CURRENT" | "HISTORICAL";
+  asOf?: string;
+  sourceFormat?: "TEXT" | "PDF";
+  caseScope?:
+    | "FULL_TEXT"
+    | "EXACT_QUOTE"
+    | "PROPOSITION_SUPPORT";
+  caseSignature?: string;
+  evidenceHash?: string;
+  supportQuoteHash?: string;
+};
+
 export type SessionExecutionResponse = {
   sessionId: string;
   status: "DRAFT_PRESENTABLE" | "BLOCKED";
@@ -55,8 +81,10 @@ export type SessionExecutionResponse = {
   verification: {
     records: number;
     verified: number;
+    supported: number;
     unverified: number;
   };
+  evidence: EvidenceItem[];
   audit: {
     result: "PASS" | "BLOCKED";
     eventCount: number;
