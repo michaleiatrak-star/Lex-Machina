@@ -9,6 +9,7 @@ export type VerificationStatus = "VERIFIED" | "UNVERIFIED";
 
 export type VerificationMethod =
   | "web_fetch"
+  | "web_fetch_pdf"
   | "web_search"
   | "mcp_call"
   | "provider_tool"
@@ -25,6 +26,7 @@ export type VerificationRecord = {
   verificationMethod?: VerificationMethod;
   temporalMode?: "CURRENT" | "HISTORICAL";
   asOf?: string;
+  sourceFormat?: "TEXT" | "PDF";
   evidence?: string;
 };
 
