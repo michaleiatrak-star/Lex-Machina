@@ -154,12 +154,47 @@ Validation evidence:
 - GitHub Actions run: `34998379446`, conclusion: `success`.
 - Validated head SHA: `9d340232f279a286eb1ef15289e4fdf5d2d01f98`.
 
-Repository baseline debt observed by an existing workflow:
+### 2026-09-15 — Build 0006
+
+Status: **PASS — G9 AUDIT COMPLETENESS**
+
+Implemented:
+
+- append-only `AuditTrail` with ordered sequence and timestamps;
+- event taxonomy for session, skills/resources, routing, provider activity, tools, verification and gates;
+- invariant: first audited skill must be `prawny-router-v3`;
+- provider start/end cardinality check;
+- mandatory successful G8 finalization event;
+- mandatory session close;
+- contiguous sequence check;
+- optional strict requirements for verification and tool activity;
+- `AuditedFinalizer` connecting the verification ledger and G8 to the audit trail;
+- real-corpus G9 validation after a G7 execution;
+- audit trail becomes immutable after session close.
+
+Validation evidence:
+
+- strict TypeScript: PASS;
+- unit tests: PASS;
+- G1: PASS;
+- G3: PASS;
+- G4: PASS;
+- G5: PASS;
+- G7: PASS;
+- G8: PASS;
+- G9: PASS;
+- GitHub Actions run: `34998701143`, conclusion: `success`.
+- Validated head SHA: `c5bad4c17eb9f5c661fd8fdaf12ce8d73ae5bebc`.
+
+Live-provider status:
+
+- credentialled OpenAI / Anthropic / xAI API tests remain pending and are not counted as PASS.
+
+Repository baseline debt:
 
 - Existing `F-138 structural audit` reports `dr-09` module counter `35 != 36`.
-- The runtime branch does not modify `dr-09`; this remains separate corpus/audit debt.
-- It must be resolved before declaring the whole repository release-clean.
+- Runtime code does not modify the legal corpus; this issue is being corrected in a separate branch/PR.
 
 Next gate:
 
-- **G9 Audit Completeness:** one append-only audit trail spanning session start, router/resources, route, provider activity, verification outcome, finalization gate and session close.
+- **G10 Export Gate:** inspect and integrate existing Lex export/citation verification scripts behind a controlled runtime adapter; invalid or unsupported citations must block artifact export.
