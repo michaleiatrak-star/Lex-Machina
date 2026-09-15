@@ -22,8 +22,8 @@ permissions:
   contents: read
 
 jobs:
-  g1-g13:
-    name: G1-G13 runtime validation
+  g1-g15:
+    name: G1-G15 runtime validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -80,9 +80,12 @@ jobs:
       - name: G13 — localhost HTTP API
         run: npm run validate:g13
 
-  g14-web:
-    name: G14 local web UI
-    needs: g1-g13
+      - name: G15 — safe session execution
+        run: npm run validate:g15
+
+  g14-g15-web:
+    name: G14-G15 local web UI
+    needs: g1-g15
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -106,5 +109,5 @@ jobs:
       - name: Production build
         run: npm run build
 
-      - name: G14 — browser bundle safety
+      - name: G14/G15 — browser bundle safety
         run: npm run validate:g14
