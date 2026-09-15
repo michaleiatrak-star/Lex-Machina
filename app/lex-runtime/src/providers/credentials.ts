@@ -4,6 +4,33 @@ export interface ProviderCredentialResolver {
   getApiKey(provider: ProviderId): Promise<string | null>;
 }
 
+export type ProviderConfigurationStatus = {
+  provider: ProviderId;
+  configured: boolean;
+};
+
+const PROVIDERS: ProviderId[] = [
+  "openai",
+  "anthropic",
+  "xai"
+];
+
+export async function providerConfigurationStatus(
+  resolver: ProviderCredentialResolver
+): Promise<ProviderConfigurationStatus[]> {
+  return Promise.all(
+    PROVIDERS.map(async (provider) => ({
+      provider,
+      configured:
+        Boolean(
+          await resolver.getApiKey(
+            provider
+          )
+        )
+    }))
+  );
+}
+
 const PROVIDER_ENV: Record<ProviderId, string> = {
   openai: "OPENAI_API_KEY",
   anthropic: "ANTHROPIC_API_KEY",
