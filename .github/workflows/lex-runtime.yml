@@ -20,8 +20,8 @@ permissions:
   contents: read
 
 jobs:
-  g1-g9:
-    name: G1-G9 runtime validation
+  g1-g10:
+    name: G1-G10 runtime validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -65,3 +65,6 @@ jobs:
 
       - name: G9 — audit completeness
         run: npm run validate:g9
+
+      - name: G10 — export gate
+        run: npm run validate:g10
