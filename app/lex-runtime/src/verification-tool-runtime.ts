@@ -558,14 +558,23 @@ export class LegalVerificationToolRuntime {
             supportQuote
           );
 
+        const supportSource =
+          quoteRecord.sourceUrl ??
+          caseRecord.sourceUrl;
+
+        if (!supportSource) {
+          throw new Error(
+            "CASE_PROPOSITION_SOURCE_MISSING"
+          );
+        }
+
         const supportRecord:
           VerificationRecord = {
             claim: proposition,
             kind: "case",
             status: "SUPPORTED",
             sourceUrl:
-              quoteRecord.sourceUrl ??
-              caseRecord.sourceUrl,
+              supportSource,
             ...(quoteRecord.sourceTier
               ? {
                   sourceTier:
