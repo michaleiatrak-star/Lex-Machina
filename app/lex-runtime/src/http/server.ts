@@ -9,6 +9,8 @@ import { ProviderGateway } from "../providers/gateway.js";
 import { SafeSessionExecutor } from "../session-executor.js";
 import { LegalVerificationToolRuntime } from "../verification-tool-runtime.js";
 import { TemporalSourceFreshnessChecker } from "../temporal-source-freshness.js";
+import { OfficialLegalSourceVerifier } from "../legal-source-verifier.js";
+import { LocalPdfTextExtractor } from "../pdf-text-extractor.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -58,6 +60,13 @@ export async function startLocalServer(options?: {
   const providerRegistry = createLiveProviderRegistry(credentials);
   const providerGateway = new ProviderGateway(providerRegistry);
 
+  const legalSourceVerifier =
+    new OfficialLegalSourceVerifier(
+      undefined,
+      undefined,
+      new LocalPdfTextExtractor()
+    );
+
   const app = createLexHttpApp({
     registry,
     modelCatalog: new DynamicModelCatalog(credentials),
@@ -68,7 +77,7 @@ export async function startLocalServer(options?: {
       (ledger) =>
         new LegalVerificationToolRuntime(
           ledger,
-          undefined,
+          legalSourceVerifier,
           undefined,
           new TemporalSourceFreshnessChecker()
         )
