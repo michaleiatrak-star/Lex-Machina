@@ -444,3 +444,44 @@ Current limitation:
 Next gate:
 
 - **G19 Temporal Source Freshness:** use official ELI metadata/references to detect whether the runtime descriptor is still current before verification.
+
+### 2026-09-15 — Build 0016
+
+Status: **PASS — G19 TEMPORAL SOURCE FRESHNESS**
+
+Implemented:
+
+- official ELI temporal freshness checker;
+- current t.j. selection from `Inf. o tekście jednolitym` using in-force status;
+- base-act and t.j.-side amendment detection;
+- union of date-based `Akty zmieniające` with `Nowelizacje po tekście jednolitym`;
+- stale pinned descriptor detection;
+- PDF-only current-source detection;
+- production integration before legal-reference text verification;
+- fail-closed `TEMPORAL_*` tool denials;
+- live G19 probe chained after G17;
+- G18 alias whitespace normalization fix + regression coverage.
+
+Validation evidence:
+
+- G1-G19 deterministic validation: PASS;
+- G17 live official-source verification: PASS;
+- live G19 freshness probe: PASS;
+- G14-G19 local web UI: PASS;
+- GitHub Actions run: `35012459142`, conclusion: `success`;
+- F-138 structural audit: `35012459149`, conclusion: `success`;
+- Validated head SHA: `4f95f5814ef2601e4d9e7ebf88edeb8caa8c0017`.
+
+Live KC result:
+
+- base ELI: `DU/1964/93`;
+- current/pinned t.j.: `DU/2026/795`;
+- promulgation: `2026-06-17`;
+- amendments after t.j.: `0`;
+- current format: PDF-only;
+- temporal status: `CURRENT_TEXT_REQUIRES_PDF`;
+- production verification: fail-closed.
+
+Next gate:
+
+- **G20 Official PDF Text Verification:** bounded backend-only PDF parsing without OCR/external processes, followed by the same title/reference verification and HARD GATE.
