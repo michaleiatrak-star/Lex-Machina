@@ -146,23 +146,25 @@ async function streamModel(
 ): Promise<ProviderStreamResult> {
   const sdk = await import("ai");
   const tools = await toAiSdkTools(params);
+  const reasoning = (params.reasoning ?? "none") as
+    | "provider-default"
+    | "none"
+    | "low"
+    | "medium"
+    | "high"
+    | "xhigh";
+
   const result = sdk.streamText({
     model,
     system: params.systemPrompt,
     messages: params.messages,
-    tools,
+    ...(tools ? { tools } : {}),
     maxOutputTokens: MAX_OUTPUT_TOKENS,
     stopWhen: sdk.stepCountIs(params.maxIterations ?? 10),
-    abortSignal: params.abortSignal,
-    reasoning:
-      (params.reasoning ?? "none") as
-        | "provider-default"
-        | "none"
-        | "low"
-        | "medium"
-        | "high"
-        | "xhigh"
-        | undefined
+    ...(params.abortSignal
+      ? { abortSignal: params.abortSignal }
+      : {}),
+    reasoning
   });
 
   let fullText = "";
