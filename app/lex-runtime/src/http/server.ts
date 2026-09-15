@@ -11,6 +11,11 @@ import { LegalVerificationToolRuntime } from "../verification-tool-runtime.js";
 import { TemporalSourceFreshnessChecker } from "../temporal-source-freshness.js";
 import { OfficialLegalSourceVerifier } from "../legal-source-verifier.js";
 import { LocalPdfTextExtractor } from "../pdf-text-extractor.js";
+import { CompleteDocumentIngestor } from "../document-ingestion.js";
+import { PdfJsDocumentPageSource } from "../pdf-document-page-source.js";
+import { LocalPaddleOcrEngine } from "../ocr/paddle-ocr-engine.js";
+import { LocalStanzaNamedEntityRecognizer } from "../privacy/stanza-ner.js";
+import { LocalPrivateDocumentService } from "../document-service.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -71,6 +76,13 @@ export async function startLocalServer(options?: {
     registry,
     modelCatalog: new DynamicModelCatalog(credentials),
     credentialResolver: credentials,
+    documentService: new LocalPrivateDocumentService(
+      new CompleteDocumentIngestor(
+        new PdfJsDocumentPageSource(),
+        new LocalPaddleOcrEngine()
+      ),
+      new LocalStanzaNamedEntityRecognizer()
+    ),
     sessionExecutor: new SafeSessionExecutor(
       registry,
       providerGateway,
