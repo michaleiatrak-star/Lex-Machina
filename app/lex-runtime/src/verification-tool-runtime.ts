@@ -56,6 +56,11 @@ const TOOL_SCHEMA: NormalizedToolSchema = {
           type: "string",
           description:
             "Legal act identity or alias known to the runtime, e.g. KC, KPC, KPK or the full act title."
+        },
+        asOf: {
+          type: "string",
+          description:
+            "Optional historical legal-state date in YYYY-MM-DD. Use only when the user asks for a past legal state. Omit for current law."
         }
       }
     }
@@ -84,6 +89,9 @@ function publicToolResult(
         (record.sourceUrl ?? "official-source") +
         ", " +
         record.fetchedAt.slice(0, 10) +
+        (record.asOf
+          ? ", STAN NA " + record.asOf
+          : "") +
         "]"
       : "⚠️ [NIEWERYFIKOWANE]";
 
@@ -101,7 +109,9 @@ function publicToolResult(
     freshness: freshness
       ? {
           status: freshness.status,
+          mode: freshness.mode,
           checkedAt: freshness.checkedAt,
+          requestedAsOf: freshness.requestedAsOf ?? null,
           currentEli: freshness.currentEli ?? null,
           amendmentsAfter: freshness.amendmentsAfter.length
         }
@@ -121,7 +131,8 @@ export const LEGAL_VERIFICATION_SYSTEM_APPENDIX = [
   "- Before emitting any statutory citation (art. or Dz.U.), call verify_legal_reference.",
   "- Pass only claim + kind + legal act identity/alias. Never invent or supply an official-source URL.",
   "- The runtime resolves the canonical official source and checks temporal freshness before reading the citation.",
-  "- A citation is verified only when the freshness check is CURRENT and the verification tool returns status=VERIFIED.",
+  "- For current law omit asOf. A citation is verified only when the freshness check is CURRENT and the verification tool returns status=VERIFIED.",
+  "- If the user explicitly asks for a past legal state, pass asOf=YYYY-MM-DD. Historical verification is allowed only when ELI proves the act was in force on that date and the selected historical consolidated text covers that date without intervening amendments.",
   "- For VERIFIED results, copy the returned marker verbatim onto the SAME LINE as the exact citation.",
   "- Never invent a verification marker, source URL, or tool result.",
   "- For UNVERIFIED/DENIED results, do not represent the citation as verified.",
@@ -176,6 +187,14 @@ export class LegalVerificationToolRuntime {
         const freshness = input.freshness as
           | TemporalFreshnessResult
           | undefined;
+        const temporalMode =
+          input.temporalMode === "HISTORICAL"
+            ? "HISTORICAL"
+            : "CURRENT";
+        const asOf =
+          typeof input.asOf === "string"
+            ? input.asOf
+            : undefined;
 
         if (
           !claim ||
@@ -195,9 +214,17 @@ export class LegalVerificationToolRuntime {
           expectedTitle,
           toolCallId
         });
-        this.ledger.add(result.record);
+        this.ledger.add({
+          ...result.record,
+          temporalMode,
+          ...(asOf ? { asOf } : {})
+        });
         return publicToolResult(
-          result.record,
+          {
+            ...result.record,
+            temporalMode,
+            ...(asOf ? { asOf } : {})
+          },
           act,
           freshness
         );
@@ -233,6 +260,10 @@ export class LegalVerificationToolRuntime {
         typeof call.input.act === "string"
           ? call.input.act.trim()
           : "";
+      const asOf =
+        typeof call.input.asOf === "string"
+          ? call.input.asOf.trim()
+          : "";
 
       let resolvedAct: LegalActDescriptor;
       try {
@@ -267,10 +298,16 @@ export class LegalVerificationToolRuntime {
       if (this.freshnessChecker) {
         freshness =
           await this.freshnessChecker.check(
-            resolvedAct
+            resolvedAct,
+            ...(asOf
+              ? [{ asOf }]
+              : [])
           );
 
-        if (freshness.status !== "CURRENT") {
+        if (
+          freshness.status !== "CURRENT" &&
+          freshness.status !== "HISTORICAL"
+        ) {
           const reason =
             "TEMPORAL_" + freshness.status;
 
@@ -321,7 +358,15 @@ export class LegalVerificationToolRuntime {
           resolvedAct,
           ...(freshness
             ? { freshness }
-            : {})
+            : {}),
+          ...(freshness?.status === "HISTORICAL"
+            ? {
+                temporalMode: "HISTORICAL",
+                asOf: freshness.requestedAsOf
+              }
+            : {
+                temporalMode: "CURRENT"
+              })
         }
       });
 
