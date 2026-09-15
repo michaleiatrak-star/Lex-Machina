@@ -625,3 +625,46 @@ Scope boundary:
 Next gate:
 
 - **G23 Case-Law Proposition / Quote Verification:** require evidence from the already verified official judgment text before the model may attribute a proposition or quotation to a case.
+
+
+### 2026-09-15 — Build 0021
+
+Status: **PASS — G23 EXACT SN QUOTE EVIDENCE**
+
+Implemented:
+
+- runtime-owned `verify_case_quote`;
+- exact quote verification against already verified official SN full text;
+- dual evidence records:
+  - `caseScope=FULL_TEXT`;
+  - `caseScope=EXACT_QUOTE`;
+- `caseSignature` and deterministic `evidenceHash` on exact-quote records;
+- output marker `✅ [CASE-QUOTE:<hash>]`;
+- finalization binding between marker and ledger evidence;
+- exact verified quote text required on the same line as marker;
+- matching case signature required on the same line;
+- fabricated quote marker fails closed;
+- quote changed after verification fails closed;
+- audit records `caseScope`, `caseSignature` and `evidenceHash`.
+
+Validation evidence:
+
+- strict TypeScript: PASS;
+- unit tests: PASS;
+- G1-G23 deterministic validation: PASS;
+- G22 live SN case-law probe: PASS;
+- G17 live official-source probe: PASS;
+- G19 live temporal freshness probe: PASS;
+- G20 live official PDF probe: PASS;
+- G14-G23 local web UI: PASS;
+- GitHub Actions run: `35019534514`, conclusion: `success`;
+- validated code SHA: `40a358cd1275e7942efa157bc98435e2c03bf92b`.
+
+Scope boundary:
+
+- G23 verifies verbatim quotations only;
+- arbitrary paraphrases or legal theses attributed to a judgment remain outside the verified evidence model.
+
+Next gate:
+
+- **G24 Case-Law Proposition Evidence:** design a deterministic evidence contract for paraphrased propositions without allowing model-only semantic claims to inherit G22/G23 verification.
