@@ -27,7 +27,8 @@ import {
 } from "./temporal-source-freshness.js";
 import {
   VerificationLedger,
-  type VerificationKind
+  type VerificationKind,
+  type VerificationRecord
 } from "./verification-ledger.js";
 
 const TOOL_NAME = "verify_legal_reference";
@@ -150,6 +151,14 @@ function publicCaseToolResult(
       "Copy the marker onto the same line as the exact signature. " +
       "Do not attribute a legal thesis or quote unless that proposition is separately verified against the fetched judgment text."
   });
+}
+
+function isVerifiedRecord(
+  record: VerificationRecord | undefined
+): record is VerificationRecord & {
+  status: "VERIFIED";
+} {
+  return record?.status === "VERIFIED";
 }
 
 function kind(value: unknown): VerificationKind | null {
@@ -286,8 +295,7 @@ export class LegalVerificationToolRuntime {
 
         if (
           result.status !== "FOUND" ||
-          !result.record ||
-          result.record.status !== "VERIFIED" ||
+          !isVerifiedRecord(result.record) ||
           !result.judgment
         ) {
           return JSON.stringify({
