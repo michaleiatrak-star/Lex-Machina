@@ -264,4 +264,181 @@ describe("FinalizationGate", () => {
     );
   });
 
+
+  it("passes evidence-linked proposition only when proposition, support quote and signature stay on one line", () => {
+    const ledger = new VerificationLedger();
+
+    ledger.add({
+      claim: "sygn. III CZP 25/11",
+      kind: "case",
+      status: "VERIFIED",
+      sourceUrl:
+        "https://sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=1",
+      sourceTier: "R1",
+      fetchedAt:
+        "2026-09-15T00:00:00Z",
+      caseScope: "FULL_TEXT"
+    });
+
+    ledger.add({
+      claim:
+        "pełny tekst orzeczenia zawiera tę dokładną wypowiedź",
+      kind: "case",
+      status: "VERIFIED",
+      sourceUrl:
+        "https://sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=1",
+      sourceTier: "R1",
+      fetchedAt:
+        "2026-09-15T00:00:00Z",
+      caseScope: "EXACT_QUOTE",
+      caseSignature:
+        "III CZP 25/11",
+      evidenceHash:
+        "11111111111111111111"
+    });
+
+    ledger.add({
+      claim:
+        "SN wskazał na znaczenie tej zasady.",
+      kind: "case",
+      status: "SUPPORTED",
+      sourceUrl:
+        "https://sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=1",
+      sourceTier: "R1",
+      fetchedAt:
+        "2026-09-15T00:00:00Z",
+      caseScope:
+        "PROPOSITION_SUPPORT",
+      caseSignature:
+        "III CZP 25/11",
+      evidenceHash:
+        "22222222222222222222",
+      supportQuoteHash:
+        "11111111111111111111",
+      supportQuote:
+        "pełny tekst orzeczenia zawiera tę dokładną wypowiedź"
+    });
+
+    const report =
+      new FinalizationGate().evaluate(
+        "SN wskazał na znaczenie tej zasady. „pełny tekst orzeczenia zawiera tę dokładną wypowiedź” sygn. III CZP 25/11 ✅ [VER: https://sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=1, 2026-09-15] ✅ [CASE-QUOTE:11111111111111111111] 🔗 [CASE-SUPPORT:22222222222222222222]",
+        ledger
+      );
+
+    expect(report.result).toBe("PASS");
+    expect(
+      report.caseSupportFindings
+    ).toEqual([
+      expect.objectContaining({
+        status: "SUPPORTED",
+        evidenceHash:
+          "22222222222222222222"
+      })
+    ]);
+  });
+
+  it("blocks a fabricated CASE-SUPPORT marker", () => {
+    const ledger = new VerificationLedger();
+
+    const report =
+      new FinalizationGate().evaluate(
+        "SN wskazał na znaczenie tej zasady. „pełny tekst orzeczenia zawiera tę dokładną wypowiedź” sygn. III CZP 25/11 ✅ [VER: https://sn.pl/fake, 2026-09-15] ✅ [CASE-QUOTE:11111111111111111111] 🔗 [CASE-SUPPORT:33333333333333333333]",
+        ledger
+      );
+
+    expect(report.result).toBe(
+      "BLOCKED"
+    );
+    expect(
+      report.caseSupportFindings[0]
+        ?.status
+    ).toBe(
+      "MISSING_CASE_SUPPORT_LEDGER"
+    );
+  });
+
+  it("blocks when supported proposition wording changes after evidence linking", () => {
+    const ledger = new VerificationLedger();
+
+    ledger.add({
+      claim:
+        "SN wskazał na znaczenie tej zasady.",
+      kind: "case",
+      status: "SUPPORTED",
+      sourceUrl:
+        "https://sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=1",
+      sourceTier: "R1",
+      fetchedAt:
+        "2026-09-15T00:00:00Z",
+      caseScope:
+        "PROPOSITION_SUPPORT",
+      caseSignature:
+        "III CZP 25/11",
+      evidenceHash:
+        "44444444444444444444",
+      supportQuoteHash:
+        "11111111111111111111",
+      supportQuote:
+        "pełny tekst orzeczenia zawiera tę dokładną wypowiedź"
+    });
+
+    const report =
+      new FinalizationGate().evaluate(
+        "SN przesądził tę zasadę. „pełny tekst orzeczenia zawiera tę dokładną wypowiedź” sygn. III CZP 25/11 🔗 [CASE-SUPPORT:44444444444444444444]",
+        ledger
+      );
+
+    expect(report.result).toBe(
+      "BLOCKED"
+    );
+    expect(
+      report.caseSupportFindings[0]
+        ?.status
+    ).toBe(
+      "PROPOSITION_TEXT_MISMATCH"
+    );
+  });
+
+  it("blocks when the exact support quote is omitted from a supported proposition", () => {
+    const ledger = new VerificationLedger();
+
+    ledger.add({
+      claim:
+        "SN wskazał na znaczenie tej zasady.",
+      kind: "case",
+      status: "SUPPORTED",
+      sourceUrl:
+        "https://sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=1",
+      sourceTier: "R1",
+      fetchedAt:
+        "2026-09-15T00:00:00Z",
+      caseScope:
+        "PROPOSITION_SUPPORT",
+      caseSignature:
+        "III CZP 25/11",
+      evidenceHash:
+        "55555555555555555555",
+      supportQuoteHash:
+        "11111111111111111111",
+      supportQuote:
+        "pełny tekst orzeczenia zawiera tę dokładną wypowiedź"
+    });
+
+    const report =
+      new FinalizationGate().evaluate(
+        "SN wskazał na znaczenie tej zasady. sygn. III CZP 25/11 🔗 [CASE-SUPPORT:55555555555555555555]",
+        ledger
+      );
+
+    expect(report.result).toBe(
+      "BLOCKED"
+    );
+    expect(
+      report.caseSupportFindings[0]
+        ?.status
+    ).toBe(
+      "SUPPORT_QUOTE_MISSING"
+    );
+  });
+
 });
