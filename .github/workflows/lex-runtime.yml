@@ -22,8 +22,8 @@ permissions:
   contents: read
 
 jobs:
-  g1-g16:
-    name: G1-G16 deterministic validation
+  g1-g18:
+    name: G1-G18 deterministic validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -86,9 +86,12 @@ jobs:
       - name: G16 — verified legal source tool loop
         run: npm run validate:g16
 
+      - name: G18 — deterministic legal source resolver
+        run: npm run validate:g18
+
   g17-live-source:
     name: G17 live official-source probe
-    needs: g1-g16
+    needs: g1-g18
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -109,9 +112,9 @@ jobs:
       - name: G17 — real API Sejm/ELI verification
         run: npm run validate:g17
 
-  g14-g16-web:
-    name: G14-G16 local web UI
-    needs: g1-g16
+  g14-g18-web:
+    name: G14-G18 local web UI
+    needs: g1-g18
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -135,5 +138,5 @@ jobs:
       - name: Production build
         run: npm run build
 
-      - name: G14-G16 — browser bundle safety
+      - name: G14-G18 — browser bundle safety
         run: npm run validate:g14
