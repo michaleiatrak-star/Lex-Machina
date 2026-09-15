@@ -26,7 +26,9 @@ export class AuditedFinalizer {
           sourceTier: record.sourceTier ?? null,
           fetchedAt: record.fetchedAt,
           toolCallId: record.toolCallId ?? null,
-          verificationMethod: record.verificationMethod ?? null
+          verificationMethod: record.verificationMethod ?? null,
+          temporalMode: record.temporalMode ?? "CURRENT",
+          asOf: record.asOf ?? null
         }
       );
     }
