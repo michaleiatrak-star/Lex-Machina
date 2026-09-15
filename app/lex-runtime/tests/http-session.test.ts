@@ -5,7 +5,8 @@ import request from "supertest";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { createLexHttpApp } from "../src/http/app.js";
 import {
-  MissingProviderCredentialError
+  MissingProviderCredentialError,
+  StaticCredentialResolver
 } from "../src/providers/credentials.js";
 import { LexSkillRegistry } from "../src/registry.js";
 import type { SessionExecutor } from "../src/session-executor.js";
@@ -42,6 +43,57 @@ afterEach(() => {
 });
 
 describe("session execution HTTP API", () => {
+  it("returns only boolean provider configuration status", async () => {
+    const secretOpenAi =
+      "test-openai-secret-value";
+    const secretXai =
+      "test-xai-secret-value";
+
+    const app = createLexHttpApp({
+      registry: registry(),
+      modelCatalog: {
+        list: vi.fn(async () => [])
+      },
+      credentialResolver:
+        new StaticCredentialResolver({
+          openai: secretOpenAi,
+          xai: secretXai
+        })
+    });
+
+    const response =
+      await request(app)
+        .get("/api/providers")
+        .expect(200);
+
+    expect(response.body).toEqual({
+      providers: [
+        {
+          provider: "openai",
+          configured: true
+        },
+        {
+          provider: "anthropic",
+          configured: false
+        },
+        {
+          provider: "xai",
+          configured: true
+        }
+      ]
+    });
+
+    const serialized =
+      JSON.stringify(response.body);
+
+    expect(serialized)
+      .not.toContain(secretOpenAi);
+    expect(serialized)
+      .not.toContain(secretXai);
+    expect(serialized)
+      .not.toContain("API_KEY");
+  });
+
   it("returns the executor's sanitized result", async () => {
     const executor: SessionExecutor = {
       execute: vi.fn(async (input) => ({
