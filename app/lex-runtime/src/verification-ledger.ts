@@ -5,7 +5,10 @@ export type VerificationKind =
   | "deadline"
   | "amount";
 
-export type VerificationStatus = "VERIFIED" | "UNVERIFIED";
+export type VerificationStatus =
+  | "VERIFIED"
+  | "SUPPORTED"
+  | "UNVERIFIED";
 
 export type VerificationMethod =
   | "web_fetch"
@@ -27,9 +30,14 @@ export type VerificationRecord = {
   temporalMode?: "CURRENT" | "HISTORICAL";
   asOf?: string;
   sourceFormat?: "TEXT" | "PDF";
-  caseScope?: "FULL_TEXT" | "EXACT_QUOTE";
+  caseScope?:
+    | "FULL_TEXT"
+    | "EXACT_QUOTE"
+    | "PROPOSITION_SUPPORT";
   caseSignature?: string;
   evidenceHash?: string;
+  supportQuoteHash?: string;
+  supportQuote?: string;
   evidence?: string;
 };
 
@@ -49,8 +57,30 @@ export class VerificationLedger {
     if (!record.claim.trim()) {
       throw new Error("Verification claim cannot be empty.");
     }
-    if (record.status === "VERIFIED" && !record.sourceUrl?.trim()) {
-      throw new Error("Verified claims require a source URL.");
+    if (
+      (record.status === "VERIFIED" ||
+        record.status === "SUPPORTED") &&
+      !record.sourceUrl?.trim()
+    ) {
+      throw new Error(
+        "Verified/supported claims require a source URL."
+      );
+    }
+
+    if (
+      record.status === "SUPPORTED" &&
+      (
+        record.caseScope !==
+          "PROPOSITION_SUPPORT" ||
+        !record.caseSignature?.trim() ||
+        !record.evidenceHash?.trim() ||
+        !record.supportQuoteHash?.trim() ||
+        !record.supportQuote?.trim()
+      )
+    ) {
+      throw new Error(
+        "Supported propositions require case signature, support quote and evidence hashes."
+      );
     }
 
     const key = normalizeClaim(record.claim);
