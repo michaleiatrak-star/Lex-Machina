@@ -100,12 +100,66 @@ Live-provider status:
 - live API calls were intentionally not executed in CI;
 - live OpenAI / Anthropic / xAI tool-call validation remains a separate credentialled gate and MUST NOT be reported as passed until secrets are configured in a secure environment.
 
+### 2026-09-15 — Build 0004
+
+Status: **PASS — G7 VERTICAL SLICE**
+
+Implemented:
+
+- deterministic Polish-law execution engine;
+- enforced order:
+  - `prawny-router-v3`;
+  - `prawo-polskie-v2`;
+  - `prawo-polskie-v2/ROUTING-MAP.md`;
+  - exactly one DR primary skill;
+  - provider invocation;
+- fail-closed behavior for missing routing map, missing DR and invalid non-DR primary target;
+- cross-provider orchestration fixture for OpenAI, Anthropic and xAI.
+
+Validation evidence:
+
+- G7 deterministic vertical slice: PASS on the full development corpus;
+- included in the later full G1-G8 success run `34998379446`.
+
+### 2026-09-15 — Build 0005
+
+Status: **PASS — G8 HARD GATE FINALIZATION**
+
+Implemented:
+
+- verification ledger with VERIFIED / UNVERIFIED records;
+- source URL required for VERIFIED claims;
+- legal-reference detector for:
+  - `art.`;
+  - `Dz.U.`;
+  - `sygn.`;
+- finalization gate:
+  - missing ledger record → BLOCKED;
+  - verified record without visible `✅ [VER: ...]` marker → BLOCKED;
+  - unverified record without visible warning → BLOCKED;
+  - unverified record + `⚠️ [NIEWERYFIKOWANE]` → DEGRADED;
+  - verified record + visible verification marker → PASS;
+- regression fix for full `Dz.U. RRRR poz. NNNN` detection.
+
+Validation evidence:
+
+- strict TypeScript: PASS;
+- unit tests: PASS;
+- G1: PASS;
+- G3: PASS;
+- G4: PASS;
+- G5: PASS;
+- G7: PASS;
+- G8: PASS;
+- GitHub Actions run: `34998379446`, conclusion: `success`.
+- Validated head SHA: `9d340232f279a286eb1ef15289e4fdf5d2d01f98`.
+
 Repository baseline debt observed by an existing workflow:
 
 - Existing `F-138 structural audit` reports `dr-09` module counter `35 != 36`.
-- The runtime branch did not modify `dr-09`; this is tracked as pre-existing corpus/audit debt and is not treated as a G1-G5 runtime failure.
-- It must nevertheless be resolved before declaring the whole repository release-clean.
+- The runtime branch does not modify `dr-09`; this remains separate corpus/audit debt.
+- It must be resolved before declaring the whole repository release-clean.
 
 Next gate:
 
-- **G7 Vertical Slice:** deterministic end-to-end orchestration `prawny-router-v3 → prawo-polskie-v2 → DR-02 → provider → audit trace`, followed by source/HARD-GATE enforcement in G8.
+- **G9 Audit Completeness:** one append-only audit trail spanning session start, router/resources, route, provider activity, verification outcome, finalization gate and session close.
