@@ -13,6 +13,7 @@ export type LegalSourceVerificationRequest = {
   kind: VerificationKind;
   url: string;
   toolCallId: string;
+  expectedTitle?: string;
 };
 
 export type LegalSourceVerificationResult = {
@@ -34,7 +35,6 @@ export const OFFICIAL_LEGAL_SOURCE_HOSTS = [
 ] as const;
 
 const OFFICIAL_SOURCE_HOSTS = new Set<string>([
-
   ...OFFICIAL_LEGAL_SOURCE_HOSTS
 ]);
 
@@ -43,6 +43,12 @@ const MAX_EVIDENCE_CHARS = 500;
 
 function normalize(value: string): string {
   return value
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/giu, " ")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/giu, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;|&#160;/giu, " ")
+    .replace(/&sect;/giu, "§")
+    .replace(/&amp;/giu, "&")
     .normalize("NFKC")
     .toLocaleLowerCase("pl")
     .replace(/[.,;:()[\]{}§]/g, " ")
@@ -73,6 +79,20 @@ function caseSignature(claim: string): string | null {
   return normalized || null;
 }
 
+function titleMatches(
+  expectedTitle: string | undefined,
+  body: string,
+  kind: VerificationKind
+): boolean {
+  if (kind !== "statute" && kind !== "journal") {
+    return true;
+  }
+
+  const expected = normalize(expectedTitle ?? "");
+  if (expected.length < 4) return false;
+  return normalize(body).includes(expected);
+}
+
 function matchesClaim(
   claim: string,
   kind: VerificationKind,
@@ -85,8 +105,8 @@ function matchesClaim(
     const article = articleToken(claim);
     if (!article) return false;
     return (
-      haystack.includes(`art ${article}`) ||
-      haystack.includes(`artykuł ${article}`)
+      haystack.includes("art " + article) ||
+      haystack.includes("artykuł " + article)
     );
   }
 
@@ -111,10 +131,11 @@ function evidenceSnippet(
   body: string
 ): string | undefined {
   const normalizedBody = normalize(body);
+  const article = articleToken(claim);
   const needle =
     kind === "statute"
-      ? articleToken(claim)
-        ? `art ${articleToken(claim)}`
+      ? article
+        ? "art " + article
         : normalize(claim)
       : kind === "case"
         ? caseSignature(claim) ?? normalize(claim)
@@ -191,17 +212,26 @@ export class OfficialLegalSourceVerifier {
       );
     }
 
-    const response = await this.fetcher(url, {
-      method: "GET",
-      headers: {
-        Accept:
-          "text/html,application/xhtml+xml,application/json,text/plain;q=0.9,*/*;q=0.1"
-      }
-    });
+    let response: Response;
+    try {
+      response = await this.fetcher(url, {
+        method: "GET",
+        redirect: "error",
+        headers: {
+          Accept:
+            "text/html,application/xhtml+xml,application/json,text/plain;q=0.9,*/*;q=0.1"
+        }
+      });
+    } catch {
+      throw new LegalSourceVerificationError(
+        "Official legal source could not be fetched without redirects.",
+        "SOURCE_FETCH_FAILED"
+      );
+    }
 
     if (!response.ok) {
       throw new LegalSourceVerificationError(
-        `Official legal source returned HTTP ${response.status}.`,
+        "Official legal source returned HTTP " + response.status + ".",
         "SOURCE_FETCH_FAILED"
       );
     }
@@ -222,7 +252,17 @@ export class OfficialLegalSourceVerifier {
     }
 
     const body = (await response.text()).slice(0, MAX_SOURCE_CHARS);
-    const matched = matchesClaim(request.claim, request.kind, body);
+    const titleMatched = titleMatches(
+      request.expectedTitle,
+      body,
+      request.kind
+    );
+    const referenceMatched = matchesClaim(
+      request.claim,
+      request.kind,
+      body
+    );
+    const matched = titleMatched && referenceMatched;
     const fetchedAt = this.now();
     const sourceUrl = url.toString();
 
@@ -255,8 +295,9 @@ export class OfficialLegalSourceVerifier {
           fetchedAt,
           toolCallId: request.toolCallId,
           verificationMethod: "web_fetch",
-          evidence:
-            "Official source was fetched, but the requested reference was not found in the fetched text."
+          evidence: !titleMatched
+            ? "Official source was fetched, but the expected act title was not found."
+            : "Official source was fetched, but the requested reference was not found in the fetched text."
         };
 
     return {
