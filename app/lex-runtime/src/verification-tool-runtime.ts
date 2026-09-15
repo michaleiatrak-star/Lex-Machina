@@ -814,18 +814,46 @@ export class LegalVerificationToolRuntime {
           );
         }
 
-        const statutoryRecord = {
-          ...result.record,
-          temporalMode,
-          ...(asOf ? { asOf } : {})
-        };
+        const statutoryStatus:
+          "VERIFIED" | "UNVERIFIED" =
+          result.record.status;
+
+        const statutoryRecord:
+          VerificationRecord = {
+            ...result.record,
+            status:
+              statutoryStatus,
+            temporalMode,
+            ...(asOf ? { asOf } : {})
+          };
 
         this.ledger.add(
           statutoryRecord
         );
 
         return publicToolResult(
-          statutoryRecord,
+          {
+            claim:
+              statutoryRecord.claim,
+            status:
+              statutoryStatus,
+            ...(statutoryRecord.sourceUrl
+              ? {
+                  sourceUrl:
+                    statutoryRecord.sourceUrl
+                }
+              : {}),
+            fetchedAt:
+              statutoryRecord.fetchedAt,
+            temporalMode,
+            ...(asOf ? { asOf } : {}),
+            ...(statutoryRecord.sourceFormat
+              ? {
+                  sourceFormat:
+                    statutoryRecord.sourceFormat
+                }
+              : {})
+          },
           act,
           freshness
         );
