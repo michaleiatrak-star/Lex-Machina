@@ -34,7 +34,9 @@
     "validate:g23": "tsx src/validate-g23.ts",
     "validate:g24": "tsx src/validate-g24.ts",
     "validate:g25": "tsx src/validate-g25.ts",
-    "validate:g26": "tsx src/validate-g26.ts"
+    "validate:g26": "tsx src/validate-g26.ts",
+    "validate:g27": "tsx src/validate-g27.ts",
+    "validate:g28": "tsx src/validate-g28.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.49",
