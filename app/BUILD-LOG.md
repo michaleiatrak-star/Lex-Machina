@@ -714,3 +714,36 @@ Scope boundary:
 Next gate:
 
 - **G25 Structured Evidence Bundle / UI Contract:** return typed evidence metadata to the local UI so VERIFIED, SUPPORTED, historical, PDF and case-law evidence can be rendered without scraping markers from answer text.
+
+
+### 2026-09-15 — Build 0023
+
+Status: **PASS — G25 STRUCTURED EVIDENCE BUNDLE / UI CONTRACT**
+
+Implemented:
+
+- typed sanitized `PublicEvidenceItem[]` returned from session execution;
+- separate VERIFIED / SUPPORTED / UNVERIFIED counts and records;
+- historical `asOf`, PDF/TEXT, case scope/signature and evidence hashes exposed as metadata;
+- backend evidence snippets and supportQuote remain backend-only;
+- local UI Evidence Bundle cards;
+- explicit SUPPORTED evidence warning in UI;
+- official source links;
+- evidence cards available on PASS and BLOCKED session responses;
+- production web bundle gate requires evidence rendering while preserving secret/corpus-content exclusions.
+
+Validation evidence:
+
+- G1-G25 deterministic validation: PASS;
+- G14-G25 web unit tests/build/bundle safety: PASS;
+- G22 live SN: PASS;
+- G17 live ELI: PASS;
+- G19 live temporal: PASS;
+- G20 live PDF: PASS;
+- GitHub Actions run: `35021203950`, conclusion: `success`;
+- F-138 structural audit for the same head: PASS;
+- validated code SHA: `9e3ab1fd95aedb68caa8591efe2f81bc780a1232`.
+
+Next gate:
+
+- **G26 Provider Configuration Status:** let the local UI see which provider credentials are configured without returning, logging or fingerprinting the secrets themselves.
