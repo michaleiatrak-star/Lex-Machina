@@ -406,16 +406,18 @@ export class TemporalSourceFreshnessChecker {
 
     if (act.textHTML !== true) {
       if (act.textPDF === true) {
+        const pdfUrl = apiUrl(
+          current.eli,
+          "/text.pdf"
+        );
         return failure(
           "CURRENT_TEXT_REQUIRES_PDF",
           "CURRENT_TEXT_HAS_NO_HTML",
           {
             ...common,
-            sourceUrl:
-              apiUrl(
-                current.eli,
-                "/text.pdf"
-              ) ?? undefined
+            ...(pdfUrl
+              ? { sourceUrl: pdfUrl }
+              : {})
           }
         );
       }
