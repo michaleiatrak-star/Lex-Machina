@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
+  executeSession,
   getHealth,
   getModels,
   validateRoute
@@ -48,6 +49,49 @@ describe("local API client", () => {
     );
   });
 
+  it("posts the selected runtime configuration and user query for execution", async () => {
+    const payload = {
+      sessionId: "session-1",
+      status: "DRAFT_PRESENTABLE",
+      provider: "openai",
+      model: "gpt-test",
+      primarySkill: "dr-02-test",
+      answer: "Wynik.",
+      finalization: "PASS",
+      blockedReferences: [],
+      audit: {
+        result: "PASS",
+        eventCount: 9,
+        closed: true
+      }
+    };
+
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify(payload), { status: 200 })
+    );
+
+    const request = {
+      query: "Przeanalizuj umowę.",
+      provider: "openai" as const,
+      model: "gpt-test",
+      primarySkill: "dr-02-test",
+      mode: "PRAWNIK" as const
+    };
+
+    await expect(executeSession(request)).resolves.toEqual(payload);
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      "http://127.0.0.1:4317/api/sessions/execute",
+      expect.objectContaining({
+        method: "POST",
+        body: JSON.stringify(request),
+        headers: expect.objectContaining({
+          "Content-Type": "application/json"
+        })
+      })
+    );
+  });
+
   it("surfaces sanitized model discovery failures", async () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValue(
       new Response(JSON.stringify({
@@ -59,5 +103,22 @@ describe("local API client", () => {
     await expect(getModels("openai")).rejects.toThrow(
       "PROVIDER_NOT_CONFIGURED"
     );
+  });
+
+  it("surfaces sanitized execution failures without provider secrets", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({
+        error: "PROVIDER_EXECUTION_FAILED",
+        provider: "anthropic"
+      }), { status: 502 })
+    );
+
+    await expect(executeSession({
+      query: "Test",
+      provider: "anthropic",
+      model: "claude-test",
+      primarySkill: "dr-02-test",
+      mode: "LAIK"
+    })).rejects.toThrow("PROVIDER_EXECUTION_FAILED");
   });
 });
