@@ -111,14 +111,7 @@ const CASE_TOOL_SCHEMA: NormalizedToolSchema = {
 };
 
 function publicCaseToolResult(
-  record: {
-    claim: string;
-    status: "VERIFIED";
-    sourceUrl?: string;
-    fetchedAt: string;
-    evidence?: string;
-    caseScope?: "FULL_TEXT";
-  },
+  record: VerificationRecord,
   judgment: {
     signature: string;
     date?: string;
@@ -126,6 +119,12 @@ function publicCaseToolResult(
     contentScope: "FULL_TEXT";
   }
 ): string {
+  if (record.status !== "VERIFIED") {
+    throw new Error(
+      "CASE_VERIFICATION_RECORD_NOT_VERIFIED"
+    );
+  }
+
   const marker =
     "✅ [VER: " +
     (record.sourceUrl ?? "sn.pl") +
@@ -227,8 +226,7 @@ function publicToolResult(
 export const LEGAL_VERIFICATION_SYSTEM_APPENDIX = [
   "RUNTIME LEGAL-SOURCE VERIFICATION:",
   "- Before emitting any statutory citation (art. or Dz.U.), call verify_legal_reference.",
-  "- Pass only claim + kind + legal act identity/alias. Never invent or supply an official-source URL.",
-  "- The runtime resolves the canonical official source and checks temporal freshness before reading the citation.",
+  "- Pass only claim + kind + legal act identity/alias. Never invent or supply an official-source URL.",  "- The runtime resolves the canonical official source and checks temporal freshness before reading the citation.",
   "- For current law omit asOf. A citation is verified only when the freshness check is CURRENT and the verification tool returns status=VERIFIED.",
   "- If the user explicitly asks for a past legal state, pass asOf=YYYY-MM-DD. Historical verification is allowed only when ELI proves the act was in force on that date and the selected historical consolidated text covers that date without intervening amendments.",
   "- For VERIFIED results, copy the returned marker verbatim onto the SAME LINE as the exact citation.",
