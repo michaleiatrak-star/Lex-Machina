@@ -24,25 +24,34 @@ const TOOL_SCHEMA: NormalizedToolSchema = {
   function: {
     name: TOOL_NAME,
     description:
-      "Verify one legal reference against a fresh official Polish legal source. Use only official source URLs. The returned marker must be copied onto the same output line as the verified reference.",
+      "Verify one Polish statutory or Journal of Laws reference against a fresh official ELI/ISAP/Sejm source. " +
+      "Call this before emitting every art. or Dz.U. citation. " +
+      "The tool checks the official host, the expected act title and the requested reference. " +
+      "Only status VERIFIED permits copying the returned marker onto the same line as the exact citation. " +
+      "Case-law signatures are not verified by this tool.",
     parameters: {
       type: "object",
       additionalProperties: false,
-      required: ["claim", "kind", "url"],
+      required: ["claim", "kind", "url", "expectedTitle"],
       properties: {
         claim: {
           type: "string",
           description:
-            "Exact legal reference that will appear in the answer, e.g. art. 5 KC, Dz.U. 2024 poz. 1061, or sygn. III CZP 1/26."
+            "Exact legal reference that will appear in the answer, e.g. art. 5 KC or Dz.U. 2024 poz. 1061."
         },
         kind: {
           type: "string",
-          enum: ["statute", "journal", "case", "deadline", "amount"]
+          enum: ["statute", "journal"]
         },
         url: {
           type: "string",
           description:
-            "Fresh official HTTPS source URL from ELI/ISAP/Sejm or an official Polish court source."
+            "Fresh credential-free HTTPS source URL on official ELI/ISAP/Sejm."
+        },
+        expectedTitle: {
+          type: "string",
+          description:
+            "Official title of the act expected at the supplied source URL. Used to reject a wrong act that happens to contain the same article number."
         }
       }
     }
@@ -50,14 +59,8 @@ const TOOL_SCHEMA: NormalizedToolSchema = {
 };
 
 function kind(value: unknown): VerificationKind | null {
-  return [
-    "statute",
-    "journal",
-    "case",
-    "deadline",
-    "amount"
-  ].includes(String(value))
-    ? value as VerificationKind
+  return value === "statute" || value === "journal"
+    ? value
     : null;
 }
 
@@ -69,7 +72,11 @@ function publicToolResult(record: {
 }): string {
   const marker =
     record.status === "VERIFIED"
-      ? `✅ [VER: ${record.sourceUrl ?? "official-source"}, ${record.fetchedAt}]`
+      ? "✅ [VER: " +
+        (record.sourceUrl ?? "official-source") +
+        ", " +
+        record.fetchedAt.slice(0, 10) +
+        "]"
       : "⚠️ [NIEWERYFIKOWANE]";
 
   return JSON.stringify({
@@ -84,6 +91,16 @@ function publicToolResult(record: {
         : "Do not present this reference as verified; if it must be mentioned, use the unverified marker."
   });
 }
+
+export const LEGAL_VERIFICATION_SYSTEM_APPENDIX = [
+  "RUNTIME LEGAL-SOURCE VERIFICATION:",
+  "- Before emitting any statutory citation (art. or Dz.U.), call verify_legal_reference.",
+  "- A citation is verified only when the tool returns status=VERIFIED.",
+  "- For VERIFIED results, copy the returned marker verbatim onto the SAME LINE as the exact citation.",
+  "- Never invent a verification marker, source URL, or tool result.",
+  "- For UNVERIFIED/DENIED results, do not represent the citation as verified.",
+  "- Case-law signatures are outside this G16 tool and remain unverified unless a separate runtime tool verifies them."
+].join("\n");
 
 export class LegalVerificationToolRuntime {
   private readonly broker: ToolBroker;
@@ -112,6 +129,10 @@ export class LegalVerificationToolRuntime {
           typeof input.url === "string"
             ? input.url.trim()
             : "";
+        const expectedTitle =
+          typeof input.expectedTitle === "string"
+            ? input.expectedTitle.trim()
+            : "";
         const toolCallId =
           typeof input.toolCallId === "string"
             ? input.toolCallId
@@ -121,6 +142,7 @@ export class LegalVerificationToolRuntime {
           !claim ||
           !verificationKind ||
           !url ||
+          !expectedTitle ||
           !toolCallId
         ) {
           throw new Error("INVALID_VERIFICATION_INPUT");
@@ -130,6 +152,7 @@ export class LegalVerificationToolRuntime {
           claim,
           kind: verificationKind,
           url,
+          expectedTitle,
           toolCallId
         });
         this.ledger.add(result.record);
@@ -140,6 +163,10 @@ export class LegalVerificationToolRuntime {
 
   schemas(): NormalizedToolSchema[] {
     return [TOOL_SCHEMA];
+  }
+
+  systemPromptAppendix(): string {
+    return LEGAL_VERIFICATION_SYSTEM_APPENDIX;
   }
 
   auditEvents(): readonly ToolAuditEvent[] {
