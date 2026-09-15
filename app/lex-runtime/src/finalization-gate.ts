@@ -55,6 +55,17 @@ const DZU_PATTERN =
 const CASE_PATTERN =
   /\bsygn\.?\s*(?:akt\s*)?[A-ZĄĆĘŁŃÓŚŹŻ0-9]{1,8}(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ0-9]{1,12}){0,3}\s+\d+\/\d{2,4}\b/gu;
 
+function normalizeEvidenceText(
+  value: string
+): string {
+  return value
+    .normalize("NFKC")
+    .toLocaleUpperCase("pl")
+    .replace(/\./g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function collectMatches(
   lineText: string,
   line: number,
@@ -192,9 +203,9 @@ export class FinalizationGate {
         }
 
         const normalizedLine =
-          normalizeClaim(lineText);
+          normalizeEvidenceText(lineText);
         const normalizedSignature =
-          normalizeClaim(
+          normalizeEvidenceText(
             record.caseSignature ?? ""
           );
 
