@@ -26,7 +26,9 @@ function fixtureFetcher(options?: {
   metadataStatus?: string;
   amendments?: Array<{
     eli: string;
-    promulgation: string;
+    relationDate: string;
+    promulgation?: string;
+    entryIntoForce?: string;
   }>;
 }) {
   const currentEli =
@@ -52,8 +54,10 @@ function fixtureFetcher(options?: {
           (item) => ({
             act: {
               ELI: item.eli,
-              date: item.promulgation,
-              promulgation: item.promulgation,
+              date: item.relationDate,
+              promulgation:
+                item.promulgation ??
+                item.relationDate,
               displayAddress: item.eli,
               title: "Ustawa zmieniająca"
             }
@@ -68,12 +72,34 @@ function fixtureFetcher(options?: {
           amendments.map((item) => ({
             act: {
               ELI: item.eli,
-              date: item.promulgation,
-              promulgation: item.promulgation,
+              date: item.relationDate,
+              promulgation:
+                item.promulgation ??
+                item.relationDate,
               displayAddress: item.eli,
               title: "Ustawa zmieniająca"
             }
           }))
+      });
+    }
+
+    const amendment =
+      amendments.find((item) =>
+        url.endsWith("/" + item.eli)
+      );
+
+    if (amendment) {
+      return jsonResponse({
+        ELI: amendment.eli,
+        promulgation:
+          amendment.promulgation ??
+          amendment.relationDate,
+        ...(amendment.entryIntoForce
+          ? {
+              entryIntoForce:
+                amendment.entryIntoForce
+            }
+          : {})
       });
     }
 
@@ -161,6 +187,18 @@ function historicalFetcher(options?: {
       });
     }
 
+    if (
+      options?.amendmentDate &&
+      url.endsWith("/DU/2020/1000")
+    ) {
+      return jsonResponse({
+        ELI: "DU/2020/1000",
+        promulgation: "2020-01-10",
+        entryIntoForce:
+          options.amendmentDate
+      });
+    }
+
     if (url.endsWith("/references")) {
       return jsonResponse({});
     }
@@ -206,16 +244,72 @@ describe("TemporalSourceFreshnessChecker", () => {
       fixtureFetcher({
         amendments: [{
           eli: "DU/2026/999",
-          promulgation: "2026-07-01"
+          relationDate: "2026-07-01",
+          promulgation: "2026-06-20",
+          entryIntoForce: "2026-07-01"
         }]
       })
     ).check(kc);
 
     expect(result.status).toBe("POST_TJ_AMENDMENTS");
+    expect(result.amendmentApplicability).toEqual([
+      expect.objectContaining({
+        eli: "DU/2026/999",
+        status: "EFFECTIVE",
+        effectiveFrom: "2026-07-01"
+      })
+    ]);
     expect(result.amendmentsAfter).toEqual([
       expect.objectContaining({
         eli: "DU/2026/999",
         provenance: "DATE+API"
+      })
+    ]);
+  });
+
+  it("does not block current law solely for a future amendment", async () => {
+    const result = await new TemporalSourceFreshnessChecker(
+      fixtureFetcher({
+        amendments: [{
+          eli: "DU/2026/1001",
+          relationDate: "2026-10-01",
+          promulgation: "2026-07-15",
+          entryIntoForce: "2026-10-01"
+        }]
+      }),
+      () => "2026-09-15T20:00:00.000Z"
+    ).check(kc);
+
+    expect(result.status).toBe("CURRENT");
+    expect(result.amendmentApplicability).toEqual([
+      expect.objectContaining({
+        eli: "DU/2026/1001",
+        status: "FUTURE",
+        effectiveFrom: "2026-10-01"
+      })
+    ]);
+  });
+
+  it("blocks when an amendment effect date cannot be established", async () => {
+    const result = await new TemporalSourceFreshnessChecker(
+      fixtureFetcher({
+        amendments: [{
+          eli: "DU/2026/1002",
+          relationDate: "",
+          promulgation: "2026-07-15"
+        }]
+      }),
+      () => "2026-09-15T20:00:00.000Z"
+    ).check(kc);
+
+    expect(result).toMatchObject({
+      status: "AMENDMENT_EFFECT_DATE_UNKNOWN",
+      reason: "OFFICIAL_AMENDMENT_EFFECT_DATE_UNKNOWN"
+    });
+    expect(result.amendmentApplicability).toEqual([
+      expect.objectContaining({
+        eli: "DU/2026/1002",
+        status: "UNKNOWN"
       })
     ]);
   });
