@@ -26,6 +26,7 @@ export type TemporalAmendment = {
   eli: string;
   displayAddress: string;
   promulgation: string;
+  relationDate?: string;
   title: string;
   provenance: "DATE" | "API" | "DATE+API";
 };
@@ -261,13 +262,20 @@ function amendmentFromAct(
   const eli = normalizeEli(act.ELI);
   if (!eli) return null;
 
+  const relationDate =
+    dateOnly(act.date);
+  const promulgation =
+    dateOnly(act.promulgation) ||
+    dateOnly(act.announcementDate);
+
   return {
     eli,
-    displayAddress: text(act.displayAddress) || eli,
-    promulgation:
-      dateOnly(act.date) ||
-      dateOnly(act.promulgation) ||
-      dateOnly(act.announcementDate),
+    displayAddress:
+      text(act.displayAddress) || eli,
+    promulgation,
+    ...(relationDate
+      ? { relationDate }
+      : {}),
     title: text(act.title)
   };
 }
@@ -288,12 +296,21 @@ function amendmentsBetween(
     const act = unwrapAct(item);
     if (!act) continue;
     const amendment = amendmentFromAct(act);
+    const relationMoment =
+      amendment?.relationDate ||
+      amendment?.promulgation ||
+      "";
+
     if (
-      amendment?.promulgation &&
-      amendment.promulgation > after &&
-      amendment.promulgation <= through
+      amendment &&
+      relationMoment &&
+      relationMoment > after &&
+      relationMoment <= through
     ) {
-      result.set(amendment.eli, amendment);
+      result.set(
+        amendment.eli,
+        amendment
+      );
     }
   }
 
