@@ -3,7 +3,7 @@ import {
 } from "./case-law-verifier.js";
 
 const signature =
-  "III CZP 25/11";
+  "II CSK 101/20";
 
 let result:
   | Awaited<
@@ -27,7 +27,7 @@ for (
     await new SupremeCourtCaseVerifier()
       .verify({
         claim:
-          "sygn. III CZP 25/11",
+          "sygn. II CSK 101/20",
         signature,
         toolCallId:
           "g22-live-sn"
