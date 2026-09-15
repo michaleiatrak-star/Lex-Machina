@@ -17,7 +17,8 @@ import type {
 import { LexSkillRegistry } from "./registry.js";
 import { SafeSessionExecutor } from "./session-executor.js";
 import {
-  TemporalSourceFreshnessChecker
+  TemporalSourceFreshnessChecker,
+  type EliFetch
 } from "./temporal-source-freshness.js";
 import { LegalVerificationToolRuntime } from "./verification-tool-runtime.js";
 
@@ -29,8 +30,6 @@ const lexRoot = path.resolve(
 );
 const DR02 = "dr-02-prawo-cywilne-rodzinne-gospodarcze";
 
-type Mode = "current" | "stale";
-
 function jsonResponse(value: unknown): Response {
   return new Response(JSON.stringify(value), {
     status: 200,
@@ -40,11 +39,13 @@ function jsonResponse(value: unknown): Response {
   });
 }
 
-function freshnessFetcher(mode: Mode) {
+function currentFreshnessFetcher(
+  stale = false
+): EliFetch {
   const currentEli =
-    mode === "current"
-      ? "DU/2026/795"
-      : "DU/2027/10";
+    stale
+      ? "DU/2027/10"
+      : "DU/2026/795";
 
   return async (
     input: string | URL
@@ -61,13 +62,9 @@ function freshnessFetcher(mode: Mode) {
           act: {
             ELI: currentEli,
             year:
-              mode === "current"
-                ? 2026
-                : 2027,
+              stale ? 2027 : 2026,
             pos:
-              mode === "current"
-                ? 795
-                : 10,
+              stale ? 10 : 795,
             status: "obowiązujący"
           }
         }],
@@ -83,13 +80,114 @@ function freshnessFetcher(mode: Mode) {
 
     return jsonResponse({
       ELI: currentEli,
+      status: "obowiązujący",
       promulgation:
-        mode === "current"
-          ? "2026-06-17"
-          : "2027-01-10",
+        stale
+          ? "2027-01-10"
+          : "2026-06-17",
       textHTML: true,
       textPDF: true
     });
+  };
+}
+
+function historicalFreshnessFetcher(): EliFetch {
+  return async (
+    input: string | URL
+  ): Promise<Response> => {
+    const url = String(input);
+
+    if (
+      url.endsWith(
+        "/DU/1964/93/references"
+      )
+    ) {
+      return jsonResponse({
+        "Inf. o tekście jednolitym": [
+          {
+            act: {
+              ELI: "DU/2019/1145",
+              year: 2019,
+              pos: 1145,
+              status:
+                "uznany za uchylony"
+            }
+          },
+          {
+            act: {
+              ELI: "DU/2026/795",
+              year: 2026,
+              pos: 795,
+              status: "obowiązujący"
+            }
+          }
+        ],
+        "Akty zmieniające": []
+      });
+    }
+
+    if (
+      url.endsWith(
+        "/DU/1964/93"
+      )
+    ) {
+      return jsonResponse({
+        ELI: "DU/1964/93",
+        status: "obowiązujący",
+        entryIntoForce:
+          "1965-01-01",
+        repealDate:
+          "2021-01-01",
+        promulgation:
+          "1964-05-18"
+      });
+    }
+
+    if (
+      url.endsWith(
+        "/DU/2019/1145"
+      )
+    ) {
+      return jsonResponse({
+        ELI: "DU/2019/1145",
+        status:
+          "uznany za uchylony",
+        legalStatusDate:
+          "2019-06-01",
+        repealDate:
+          "2021-01-01",
+        promulgation:
+          "2019-06-19",
+        textHTML: true,
+        textPDF: true
+      });
+    }
+
+    if (
+      url.endsWith(
+        "/DU/2026/795"
+      )
+    ) {
+      return jsonResponse({
+        ELI: "DU/2026/795",
+        status: "obowiązujący",
+        legalStatusDate:
+          "2026-05-20",
+        promulgation:
+          "2026-06-17",
+        textHTML: true,
+        textPDF: true
+      });
+    }
+
+    if (url.endsWith("/references")) {
+      return jsonResponse({});
+    }
+
+    throw new Error(
+      "Unexpected G19 historical URL: " +
+      url
+    );
   };
 }
 
@@ -103,6 +201,10 @@ class TemporalProvider implements ProviderAdapter {
     reasoning: true,
     modelDiscovery: false
   };
+
+  constructor(
+    private readonly asOf?: string
+  ) {}
 
   async stream(
     params: ProviderStreamParams
@@ -125,7 +227,10 @@ class TemporalProvider implements ProviderAdapter {
         input: {
           claim: "art. 5 KC",
           kind: "statute",
-          act: "KC"
+          act: "KC",
+          ...(this.asOf
+            ? { asOf: this.asOf }
+            : {})
         }
       }]);
 
@@ -158,11 +263,16 @@ class TemporalProvider implements ProviderAdapter {
 
 function appFor(
   registry: LexSkillRegistry,
-  mode: Mode,
-  verificationFetches: string[]
+  freshnessFetch:
+    EliFetch,
+  verificationFetches: string[],
+  asOf?: string
 ) {
-  const providers = new ProviderRegistry();
-  providers.register(new TemporalProvider());
+  const providers =
+    new ProviderRegistry();
+  providers.register(
+    new TemporalProvider(asOf)
+  );
 
   const verifier =
     new OfficialLegalSourceVerifier(
@@ -182,13 +292,15 @@ function appFor(
           }
         );
       },
-      () => "2026-09-15T21:00:00.000Z"
+      () =>
+        "2026-09-15T21:00:00.000Z"
     );
 
   const freshness =
     new TemporalSourceFreshnessChecker(
-      freshnessFetcher(mode),
-      () => "2026-09-15T21:00:00.000Z"
+      freshnessFetch,
+      () =>
+        "2026-09-15T21:00:00.000Z"
     );
 
   return createLexHttpApp({
@@ -204,7 +316,9 @@ function appFor(
     sessionExecutor:
       new SafeSessionExecutor(
         registry,
-        new ProviderGateway(providers),
+        new ProviderGateway(
+          providers
+        ),
         undefined,
         (ledger) =>
           new LegalVerificationToolRuntime(
@@ -228,6 +342,18 @@ function requestBody() {
   };
 }
 
+function verificationSummary(
+  body: Record<string, unknown>
+): Record<string, unknown> {
+  return (
+    body.verification &&
+    typeof body.verification === "object"
+  )
+    ? body.verification as
+      Record<string, unknown>
+    : {};
+}
+
 const registry =
   new LexSkillRegistry(lexRoot);
 const issues = [
@@ -239,7 +365,7 @@ const currentFetches: string[] = [];
 const currentHttp = await request(
   appFor(
     registry,
-    "current",
+    currentFreshnessFetcher(false),
     currentFetches
   )
 )
@@ -250,70 +376,166 @@ const staleFetches: string[] = [];
 const staleHttp = await request(
   appFor(
     registry,
-    "stale",
+    currentFreshnessFetcher(true),
     staleFetches
   )
 )
   .post("/api/sessions/execute")
   .send(requestBody());
 
+const historicalFetches: string[] = [];
+const historicalHttp = await request(
+  appFor(
+    registry,
+    historicalFreshnessFetcher(),
+    historicalFetches,
+    "2020-06-01"
+  )
+)
+  .post("/api/sessions/execute")
+  .send(requestBody());
+
+const afterRepealFetches: string[] = [];
+const afterRepealHttp = await request(
+  appFor(
+    registry,
+    historicalFreshnessFetcher(),
+    afterRepealFetches,
+    "2021-01-01"
+  )
+)
+  .post("/api/sessions/execute")
+  .send(requestBody());
+
 const current =
-  currentHttp.body as Record<string, unknown>;
+  currentHttp.body as
+    Record<string, unknown>;
 const stale =
-  staleHttp.body as Record<string, unknown>;
+  staleHttp.body as
+    Record<string, unknown>;
+const historical =
+  historicalHttp.body as
+    Record<string, unknown>;
+const afterRepeal =
+  afterRepealHttp.body as
+    Record<string, unknown>;
 
 const currentVerification =
-  current.verification &&
-  typeof current.verification === "object"
-    ? current.verification as
-      Record<string, unknown>
-    : {};
+  verificationSummary(current);
 const staleVerification =
-  stale.verification &&
-  typeof stale.verification === "object"
-    ? stale.verification as
-      Record<string, unknown>
-    : {};
+  verificationSummary(stale);
+const historicalVerification =
+  verificationSummary(historical);
+const afterRepealVerification =
+  verificationSummary(
+    afterRepeal
+  );
 
 const pass =
   issues.length === 0 &&
+
   currentHttp.status === 200 &&
-  current.status === "DRAFT_PRESENTABLE" &&
+  current.status ===
+    "DRAFT_PRESENTABLE" &&
   current.finalization === "PASS" &&
-  typeof current.answer === "string" &&
+  typeof current.answer ===
+    "string" &&
   currentVerification.verified === 1 &&
   currentFetches.length === 1 &&
   currentFetches[0] ===
     "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.html" &&
+
   staleHttp.status === 200 &&
   stale.status === "BLOCKED" &&
   stale.finalization === "BLOCKED" &&
   !("answer" in stale) &&
   staleVerification.records === 0 &&
-  staleFetches.length === 0;
+  staleFetches.length === 0 &&
+
+  historicalHttp.status === 200 &&
+  historical.status ===
+    "DRAFT_PRESENTABLE" &&
+  historical.finalization === "PASS" &&
+  typeof historical.answer ===
+    "string" &&
+  String(historical.answer).includes(
+    "STAN NA 2020-06-01"
+  ) &&
+  historicalVerification.verified === 1 &&
+  historicalFetches.length === 1 &&
+  historicalFetches[0] ===
+    "https://api.sejm.gov.pl/eli/acts/DU/2019/1145/text.html" &&
+
+  afterRepealHttp.status === 200 &&
+  afterRepeal.status === "BLOCKED" &&
+  !("answer" in afterRepeal) &&
+  afterRepealVerification.records === 0 &&
+  afterRepealFetches.length === 0;
 
 process.stdout.write(
   JSON.stringify({
-    gate: "G19_TEMPORAL_SOURCE_FRESHNESS",
-    result: pass ? "PASS" : "BLOCKED",
+    gate:
+      "G19_TEMPORAL_SOURCE_FRESHNESS",
+    result:
+      pass ? "PASS" : "BLOCKED",
     currentPath: {
       http: currentHttp.status,
       status: current.status,
-      finalization: current.finalization,
-      verification: currentVerification,
-      contentFetches: currentFetches
+      finalization:
+        current.finalization,
+      verification:
+        currentVerification,
+      contentFetches:
+        currentFetches
     },
     staleDescriptorPath: {
       http: staleHttp.status,
       status: stale.status,
-      finalization: stale.finalization,
-      answerReleased: "answer" in stale,
-      verification: staleVerification,
-      contentFetches: staleFetches
+      finalization:
+        stale.finalization,
+      answerReleased:
+        "answer" in stale,
+      verification:
+        staleVerification,
+      contentFetches:
+        staleFetches
+    },
+    historicalRepealedTextException: {
+      asOf: "2020-06-01",
+      http: historicalHttp.status,
+      status:
+        historical.status,
+      finalization:
+        historical.finalization,
+      markerContainsAsOf:
+        typeof historical.answer === "string" &&
+        String(historical.answer).includes(
+          "STAN NA 2020-06-01"
+        ),
+      verification:
+        historicalVerification,
+      contentFetches:
+        historicalFetches
+    },
+    historicalAfterRepeal: {
+      asOf: "2021-01-01",
+      http:
+        afterRepealHttp.status,
+      status:
+        afterRepeal.status,
+      answerReleased:
+        "answer" in afterRepeal,
+      verification:
+        afterRepealVerification,
+      contentFetches:
+        afterRepealFetches
     },
     modelProviderCallExecuted: false,
-    liveOfficialNetworkCallExecuted: false
+    liveOfficialNetworkCallExecuted:
+      false
   }, null, 2) + "\n"
 );
 
-if (!pass) process.exitCode = 1;
+if (!pass) {
+  process.exitCode = 1;
+}
