@@ -83,12 +83,12 @@ function text(value: unknown): string {
 }
 
 function dateOnly(value: unknown): string {
-  const match = text(value).match(/^(d{4}-d{2}-d{2})/u);
+  const match = text(value).match(/^(\d{4}-\d{2}-\d{2})/u);
   return match?.[1] ?? "";
 }
 
 function validIsoDate(value: string): boolean {
-  if (!/^d{4}-d{2}-d{2}$/u.test(value)) return false;
+  if (!/^\d{4}-\d{2}-\d{2}$/u.test(value)) return false;
   const parsed = new Date(value + "T00:00:00.000Z");
   return (
     !Number.isNaN(parsed.getTime()) &&
@@ -98,10 +98,10 @@ function validIsoDate(value: string): boolean {
 
 function normalizeEli(value: unknown): string {
   const raw = text(value).replace(
-    /^https?://[^/]+/eli/acts//u,
+    /^https?:\/\/[^/]+\/eli\/acts\//u,
     ""
   );
-  const match = raw.match(/(DU|MP)/(d{4})/(d+)/u);
+  const match = raw.match(/(DU|MP)\/(\d{4})\/(\d+)/u);
   return match?.[0] ?? "";
 }
 
@@ -189,7 +189,7 @@ function parts(
   eli: string
 ): [string, string, string] | null {
   const match = normalizeEli(eli).match(
-    /^(DU|MP)/(d{4})/(d+)$/u
+    /^(DU|MP)\/(\d{4})\/(\d+)$/u
   );
   return match
     ? [match[1]!, match[2]!, match[3]!]
