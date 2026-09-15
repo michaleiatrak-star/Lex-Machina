@@ -11,7 +11,9 @@ import {
   type ModelDescriptor
 } from "../providers/model-catalog.js";
 import {
-  MissingProviderCredentialError
+  MissingProviderCredentialError,
+  providerConfigurationStatus,
+  type ProviderCredentialResolver
 } from "../providers/credentials.js";
 import {
   ProviderGatewayError
@@ -69,6 +71,7 @@ function loopbackOriginGuard(
 export type LexHttpAppOptions = {
   registry: LexSkillRegistry;
   modelCatalog: Pick<DynamicModelCatalog, "list">;
+  credentialResolver?: ProviderCredentialResolver;
   sessionExecutor?: SessionExecutor;
 };
 
@@ -202,6 +205,25 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
 
     const result = routing.validate(primarySkill);
     res.status(result.valid ? 200 : 422).json(result);
+  });
+
+  app.get("/api/providers", async (_req, res) => {
+    if (!options.credentialResolver) {
+      res.status(503).json({
+        error:
+          "PROVIDER_CONFIGURATION_STATUS_UNAVAILABLE"
+      });
+      return;
+    }
+
+    const providers =
+      await providerConfigurationStatus(
+        options.credentialResolver
+      );
+
+    res.json({
+      providers
+    });
   });
 
   app.get("/api/models/:provider", async (req, res) => {
