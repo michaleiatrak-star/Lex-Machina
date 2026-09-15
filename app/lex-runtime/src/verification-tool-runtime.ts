@@ -4,6 +4,7 @@ import {
   type ToolAuditEvent
 } from "./tool-broker.js";
 import {
+  OFFICIAL_LEGAL_SOURCE_HOSTS,
   OfficialLegalSourceVerifier
 } from "./legal-source-verifier.js";
 import type {
@@ -92,7 +93,10 @@ export class LegalVerificationToolRuntime {
     verifier = new OfficialLegalSourceVerifier()
   ) {
     this.broker = new ToolBroker(
-      new ToolPolicy({ allowNetwork: true })
+      new ToolPolicy({
+        allowNetwork: true,
+        allowedNetworkHosts: [...OFFICIAL_LEGAL_SOURCE_HOSTS]
+      })
     );
 
     this.broker.register({
