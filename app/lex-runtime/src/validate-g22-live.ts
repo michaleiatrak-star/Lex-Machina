@@ -1,9 +1,178 @@
 import {
-  SupremeCourtCaseVerifier
+  SupremeCourtCaseVerifier,
+  type CaseLawFetch
 } from "./case-law-verifier.js";
 
 const signature =
   "II CSK 101/20";
+
+type Shape =
+  | {
+      type: "null";
+    }
+  | {
+      type: "array";
+      length: number;
+      first?: Shape;
+    }
+  | {
+      type: "object";
+      keys: string[];
+      data?: Shape;
+      raw?: Shape;
+    }
+  | {
+      type: "string";
+      length: number;
+    }
+  | {
+      type: string;
+    };
+
+function shape(
+  value: unknown,
+  depth = 0
+): Shape {
+  if (value === null) {
+    return { type: "null" };
+  }
+
+  if (
+    depth >= 3
+  ) {
+    return {
+      type:
+        Array.isArray(value)
+          ? "array"
+          : typeof value
+    };
+  }
+
+  if (Array.isArray(value)) {
+    return {
+      type: "array",
+      length: value.length,
+      ...(value.length > 0
+        ? {
+            first:
+              shape(
+                value[0],
+                depth + 1
+              )
+          }
+        : {})
+    };
+  }
+
+  if (
+    typeof value === "object"
+  ) {
+    const objectValue =
+      value as
+        Record<string, unknown>;
+    return {
+      type: "object",
+      keys:
+        Object.keys(objectValue)
+          .slice(0, 20),
+      ...("data" in objectValue
+        ? {
+            data:
+              shape(
+                objectValue.data,
+                depth + 1
+              )
+          }
+        : {}),
+      ...("raw" in objectValue
+        ? {
+            raw:
+              shape(
+                objectValue.raw,
+                depth + 1
+              )
+          }
+        : {})
+    };
+  }
+
+  if (
+    typeof value === "string"
+  ) {
+    return {
+      type: "string",
+      length: value.length
+    };
+  }
+
+  return {
+    type: typeof value
+  };
+}
+
+const transportTrace:
+  Array<
+    Record<string, unknown>
+  > = [];
+
+const tracedFetch:
+  CaseLawFetch =
+  async (input, init) => {
+    const response =
+      await globalThis.fetch(
+        input,
+        init
+      );
+
+    const contentType =
+      response.headers
+        .get("content-type") ??
+      "";
+
+    let payloadShape:
+      Shape | null = null;
+
+    if (
+      contentType
+        .toLowerCase()
+        .includes("json")
+    ) {
+      try {
+        payloadShape =
+          shape(
+            await response
+              .clone()
+              .json()
+          );
+      } catch {
+        payloadShape = null;
+      }
+    }
+
+    transportTrace.push({
+      url:
+        String(input)
+          .replace(
+            /([?&]id=)[^&]+/u,
+            "$1<redacted-id>"
+          ),
+      status:
+        response.status,
+      contentType,
+      locationHost:
+        response.headers
+          .get("location")
+          ? new URL(
+              response.headers
+                .get("location")!,
+              String(input)
+            ).hostname
+          : null,
+      payloadShape
+    });
+
+    return response;
+  };
 
 let result:
   | Awaited<
@@ -24,14 +193,15 @@ for (
   attempts = attempt;
 
   const candidate =
-    await new SupremeCourtCaseVerifier()
-      .verify({
-        claim:
-          "sygn. II CSK 101/20",
-        signature,
-        toolCallId:
-          "g22-live-sn"
-      });
+    await new SupremeCourtCaseVerifier(
+      tracedFetch
+    ).verify({
+      claim:
+        "sygn. " + signature,
+      signature,
+      toolCallId:
+        "g22-live-sn"
+    });
 
   result = candidate;
 
@@ -101,6 +271,7 @@ process.stdout.write(
       result?.rejectedNearMatches ??
       [],
     lastReason,
+    transportTrace,
     modelProviderCallExecuted:
       false
   }, null, 2) + "\n"
