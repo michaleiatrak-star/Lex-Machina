@@ -22,8 +22,8 @@ permissions:
   contents: read
 
 jobs:
-  g1-g21:
-    name: G1-G21 deterministic validation
+  g1-g22:
+    name: G1-G22 deterministic validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -98,9 +98,12 @@ jobs:
       - name: G21 — amendment-aware legal state
         run: npm run validate:g21
 
+      - name: G22 — official SN case-law verification
+        run: npm run validate:g22
+
   g19-live-freshness:
     name: G19 live temporal freshness probe
-    needs: g1-g21
+    needs: g1-g22
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -123,7 +126,7 @@ jobs:
 
   g20-live-pdf:
     name: G20 live official PDF probe
-    needs: g1-g21
+    needs: g1-g22
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -144,9 +147,32 @@ jobs:
       - name: G20 — real ELI PDF verification
         run: npm run validate:g20-live
 
+  g22-live-sn:
+    name: G22 live SN case-law probe
+    needs: g1-g22
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: G22 — real sn.pl case verification
+        run: npm run validate:g22-live
+
   g17-live-source:
     name: G17 live official-source probe
-    needs: g1-g21
+    needs: g1-g22
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -167,9 +193,9 @@ jobs:
       - name: G17 — real API Sejm/ELI verification
         run: npm run validate:g17
 
-  g14-g21-web:
-    name: G14-G21 local web UI
-    needs: g1-g21
+  g14-g22-web:
+    name: G14-G22 local web UI
+    needs: g1-g22
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -193,5 +219,5 @@ jobs:
       - name: Production build
         run: npm run build
 
-      - name: G14-G21 — browser bundle safety
+      - name: G14-G22 — browser bundle safety
         run: npm run validate:g14
