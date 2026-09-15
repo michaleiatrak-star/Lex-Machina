@@ -1,3 +1,7 @@
+import {
+  AmendmentApplicabilityResolver,
+  type AmendmentApplicabilityDecision
+} from "./amendment-applicability.js";
 import type {
   LegalActDescriptor
 } from "./legal-act-resolver.js";
@@ -7,6 +11,7 @@ export type TemporalFreshnessStatus =
   | "HISTORICAL"
   | "STALE_CONSOLIDATED_TEXT"
   | "POST_TJ_AMENDMENTS"
+  | "AMENDMENT_EFFECT_DATE_UNKNOWN"
   | "CURRENT_TEXT_REQUIRES_PDF"
   | "HISTORICAL_TEXT_REQUIRES_PDF"
   | "REPEALED_CONSOLIDATED_TEXT"
@@ -38,6 +43,7 @@ export type TemporalFreshnessResult = {
   actValidFrom?: string;
   actValidTo?: string;
   amendmentsAfter: TemporalAmendment[];
+  amendmentApplicability?: AmendmentApplicabilityDecision[];
   reason?: string;
 };
 
@@ -409,12 +415,23 @@ async function historicalCandidate(
 }
 
 export class TemporalSourceFreshnessChecker {
+  private readonly amendmentResolver:
+    AmendmentApplicabilityResolver;
+
   constructor(
     private readonly fetcher: EliFetch =
       globalThis.fetch.bind(globalThis),
     private readonly now: () => string =
-      () => new Date().toISOString()
-  ) {}
+      () => new Date().toISOString(),
+    amendmentResolver?:
+      AmendmentApplicabilityResolver
+  ) {
+    this.amendmentResolver =
+      amendmentResolver ??
+      new AmendmentApplicabilityResolver(
+        fetcher
+      );
+  }
 
   async check(
     descriptor: LegalActDescriptor,
@@ -665,10 +682,44 @@ export class TemporalSourceFreshnessChecker {
         new Map()
       );
 
-    if (amendmentsAfter.length > 0) {
+    const amendmentApplicability =
+      amendmentsAfter.length > 0
+        ? await this.amendmentResolver.classify(
+            amendmentsAfter,
+            asOf
+          )
+        : [];
+
+    const unknownAmendments =
+      amendmentApplicability.filter(
+        (decision) =>
+          decision.status === "UNKNOWN"
+      );
+
+    if (unknownAmendments.length > 0) {
+      return fail(
+        "AMENDMENT_EFFECT_DATE_UNKNOWN",
+        "HISTORICAL_AMENDMENT_EFFECT_DATE_UNKNOWN",
+        {
+          currentEli: selected.eli,
+          currentPromulgation:
+            selected.stateDate,
+          amendmentsAfter,
+          amendmentApplicability
+        }
+      );
+    }
+
+    const effectiveAmendments =
+      amendmentApplicability.filter(
+        (decision) =>
+          decision.status === "EFFECTIVE"
+      );
+
+    if (effectiveAmendments.length > 0) {
       return fail(
         "HISTORICAL_POST_TJ_AMENDMENTS",
-        "AMENDMENTS_AFTER_SELECTED_TJ_BEFORE_AS_OF",
+        "EFFECTIVE_AMENDMENTS_AFTER_SELECTED_TJ_BEFORE_AS_OF",
         {
           currentEli: selected.eli,
           currentPromulgation:
@@ -685,7 +736,8 @@ export class TemporalSourceFreshnessChecker {
                   baseInterval.validTo
               }
             : {}),
-          amendmentsAfter
+          amendmentsAfter,
+          amendmentApplicability
         }
       );
     }
@@ -754,7 +806,10 @@ export class TemporalSourceFreshnessChecker {
               baseInterval.validTo
           }
         : {}),
-      amendmentsAfter: []
+      amendmentsAfter,
+      ...(amendmentApplicability.length > 0
+        ? { amendmentApplicability }
+        : {})
     };
   }
 
@@ -911,11 +966,22 @@ export class TemporalSourceFreshnessChecker {
         postTjByApi(currentRefs)
       );
 
+    const amendmentApplicability =
+      amendmentsAfter.length > 0
+        ? await this.amendmentResolver.classify(
+            amendmentsAfter,
+            checkedAt.slice(0, 10)
+          )
+        : [];
+
     const common = {
       currentEli: current.eli,
       currentPromulgation:
         promulgation,
-      amendmentsAfter
+      amendmentsAfter,
+      ...(amendmentApplicability.length > 0
+        ? { amendmentApplicability }
+        : {})
     };
 
     if (
@@ -930,12 +996,30 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    if (
-      amendmentsAfter.length > 0
-    ) {
+    const unknownAmendments =
+      amendmentApplicability.filter(
+        (decision) =>
+          decision.status === "UNKNOWN"
+      );
+
+    if (unknownAmendments.length > 0) {
+      return fail(
+        "AMENDMENT_EFFECT_DATE_UNKNOWN",
+        "OFFICIAL_AMENDMENT_EFFECT_DATE_UNKNOWN",
+        common
+      );
+    }
+
+    const effectiveAmendments =
+      amendmentApplicability.filter(
+        (decision) =>
+          decision.status === "EFFECTIVE"
+      );
+
+    if (effectiveAmendments.length > 0) {
       return fail(
         "POST_TJ_AMENDMENTS",
-        "OFFICIAL_AMENDMENTS_AFTER_CONSOLIDATED_TEXT",
+        "EFFECTIVE_AMENDMENTS_AFTER_CONSOLIDATED_TEXT",
         common
       );
     }
@@ -987,7 +1071,10 @@ export class TemporalSourceFreshnessChecker {
       currentPromulgation:
         promulgation,
       sourceUrl,
-      amendmentsAfter: []
+      amendmentsAfter,
+      ...(amendmentApplicability.length > 0
+        ? { amendmentApplicability }
+        : {})
     };
   }
 }
