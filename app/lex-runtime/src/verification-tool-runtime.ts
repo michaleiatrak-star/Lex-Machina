@@ -804,17 +804,28 @@ export class LegalVerificationToolRuntime {
           expectedTitle,
           toolCallId
         });
-        this.ledger.add({
+
+        if (
+          result.record.status ===
+          "SUPPORTED"
+        ) {
+          throw new Error(
+            "STATUTE_VERIFIER_RETURNED_SUPPORTED"
+          );
+        }
+
+        const statutoryRecord = {
           ...result.record,
           temporalMode,
           ...(asOf ? { asOf } : {})
-        });
+        };
+
+        this.ledger.add(
+          statutoryRecord
+        );
+
         return publicToolResult(
-          {
-            ...result.record,
-            temporalMode,
-            ...(asOf ? { asOf } : {})
-          },
+          statutoryRecord,
           act,
           freshness
         );
