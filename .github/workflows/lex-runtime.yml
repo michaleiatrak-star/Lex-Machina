@@ -1,0 +1,46 @@
+name: Lex Runtime Validation
+
+on:
+  pull_request:
+    paths:
+      - "app/lex-runtime/**"
+      - "app/lex-version.yaml"
+      - "Wersja rozwojowa rozpakowana/**"
+      - ".github/workflows/lex-runtime.yml"
+  push:
+    branches:
+      - feature/local-runtime
+    paths:
+      - "app/lex-runtime/**"
+      - "app/lex-version.yaml"
+      - "Wersja rozwojowa rozpakowana/**"
+      - ".github/workflows/lex-runtime.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  g1-g2:
+    name: G1-G2 corpus and resolver
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Unit tests — resolver safety
+        run: npm test
+
+      - name: G1 — corpus integrity
+        run: npm run validate:corpus
