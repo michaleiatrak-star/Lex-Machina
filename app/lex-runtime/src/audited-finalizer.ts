@@ -30,7 +30,9 @@ export class AuditedFinalizer {
           temporalMode: record.temporalMode ?? "CURRENT",
           asOf: record.asOf ?? null,
           sourceFormat: record.sourceFormat ?? null,
-          caseScope: record.caseScope ?? null
+          caseScope: record.caseScope ?? null,
+          caseSignature: record.caseSignature ?? null,
+          evidenceHash: record.evidenceHash ?? null
         }
       );
     }
@@ -47,7 +49,9 @@ export class AuditedFinalizer {
       {
         result: report.result,
         references: report.references.length,
-        findings: report.findings.length
+        findings: report.findings.length,
+        caseQuoteFindings:
+          report.caseQuoteFindings.length
       }
     );
 
