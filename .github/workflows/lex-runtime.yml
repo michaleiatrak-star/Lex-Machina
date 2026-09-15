@@ -22,8 +22,8 @@ permissions:
   contents: read
 
 jobs:
-  g1-g26:
-    name: G1-G26 deterministic validation
+  g1-g28:
+    name: G1-G28 deterministic validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -116,9 +116,15 @@ jobs:
       - name: G26 — provider configuration status
         run: npm run validate:g26
 
+      - name: G27 — complete document OCR and chunking
+        run: npm run validate:g27
+
+      - name: G28 — local pseudonymization and deanonymization
+        run: npm run validate:g28
+
   g19-live-freshness:
     name: G19 live temporal freshness probe
-    needs: g1-g26
+    needs: g1-g28
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -141,7 +147,7 @@ jobs:
 
   g20-live-pdf:
     name: G20 live official PDF probe
-    needs: g1-g26
+    needs: g1-g28
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -164,7 +170,7 @@ jobs:
 
   g22-live-sn:
     name: G22 live SN case-law probe
-    needs: g1-g26
+    needs: g1-g28
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -187,7 +193,7 @@ jobs:
 
   g17-live-source:
     name: G17 live official-source probe
-    needs: g1-g26
+    needs: g1-g28
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -210,7 +216,7 @@ jobs:
 
   g14-g26-web:
     name: G14-G26 local web UI
-    needs: g1-g26
+    needs: g1-g28
     runs-on: ubuntu-latest
     defaults:
       run:
