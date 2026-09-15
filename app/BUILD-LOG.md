@@ -186,15 +186,60 @@ Validation evidence:
 - GitHub Actions run: `34998701143`, conclusion: `success`.
 - Validated head SHA: `c5bad4c17eb9f5c661fd8fdaf12ce8d73ae5bebc`.
 
+### 2026-09-15 — Build 0007
+
+Status: **PASS — G10 EXPORT GATE**
+
+Implemented:
+
+- runtime-native export gate after G8/G9;
+- mandatory successful HYBRID-VALIDATION for DOCX/PDF;
+- automatic export denied for G8 `DEGRADED` and `BLOCKED`;
+- automatic export denied for incomplete G9 audit;
+- SHA-256 hash generated for the final artifact;
+- `document_generated` event recorded without storing document content in the audit trail;
+- neutral provider-independent verification log:
+  - `session_id`;
+  - `events[]`;
+  - actual verification method;
+  - source URL/tier;
+  - claim context;
+  - timestamp/tool-call id;
+- append-only session close after successful export;
+- negative fixtures for missing HYBRID validation, unsupported citations, unverified citations and incomplete audit.
+
+Validation evidence:
+
+- strict TypeScript: PASS;
+- unit tests: PASS;
+- G1: PASS;
+- G3: PASS;
+- G4: PASS;
+- G5: PASS;
+- G7: PASS;
+- G8: PASS;
+- G9: PASS;
+- G10: PASS;
+- GitHub Actions run: `34999378196`, conclusion: `success`.
+- Validated head SHA: `9bee977e1c3e6a1bcb9517b68db12c64b8155a7f`.
+
+Legacy compatibility note:
+
+- `shared/tools/README.md` documents `walidator_cytowan.py`, `extract_api_verification_log.py` and `export_gate.py`;
+- these three Python files are absent from the current development corpus under their documented paths;
+- G10 therefore implements the documented neutral-log/export contract in the application runtime without silently claiming that the missing legacy code was executed;
+- recovery/restoration of the historical Python scripts can later be validated as a compatibility layer, not as a second SSOT.
+
 Live-provider status:
 
 - credentialled OpenAI / Anthropic / xAI API tests remain pending and are not counted as PASS.
 
 Repository baseline debt:
 
-- Existing `F-138 structural audit` reports `dr-09` module counter `35 != 36`.
-- Runtime code does not modify the legal corpus; this issue is being corrected in a separate branch/PR.
+- F-138 DR-09 count mismatch has been fixed separately in PR #39;
+- F-138 structural audit for PR #39: PASS, run `34998972041`;
+- runtime branch continues to leave the legal corpus read-only.
 
 Next gate:
 
-- **G10 Export Gate:** inspect and integrate existing Lex export/citation verification scripts behind a controlled runtime adapter; invalid or unsupported citations must block artifact export.
+- **G11 Skill Contract Matrix:** validate all 16 DR skills and core execution skills against deterministic runtime contracts before widening the application UI.
