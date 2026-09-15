@@ -50,7 +50,10 @@ implements PdfTextExtractor {
   async extract(
     data: Uint8Array
   ): Promise<PdfTextExtractionResult> {
-    if (data.byteLength > this.limits.maxBytes) {
+    if (
+      data.byteLength >
+      this.limits.maxBytes
+    ) {
       throw new PdfTextExtractionError(
         "PDF exceeds the configured byte limit.",
         "PDF_TOO_LARGE"
@@ -74,38 +77,39 @@ implements PdfTextExtractor {
         data,
         useSystemFonts: false,
         disableFontFace: true,
-        isEvalSupported: false,
         verbosity: 0
       });
 
       const document =
         await loadingTask.promise;
 
-      try {
-        if (
-          document.numPages >
-          this.limits.maxPages
-        ) {
-          throw new PdfTextExtractionError(
-            "PDF exceeds the configured page limit.",
-            "PDF_TOO_MANY_PAGES"
+      if (
+        document.numPages >
+        this.limits.maxPages
+      ) {
+        throw new PdfTextExtractionError(
+          "PDF exceeds the configured page limit.",
+          "PDF_TOO_MANY_PAGES"
+        );
+      }
+
+      const chunks: string[] = [];
+      let textChars = 0;
+
+      for (
+        let pageNumber = 1;
+        pageNumber <= document.numPages;
+        pageNumber += 1
+      ) {
+        const page =
+          await document.getPage(
+            pageNumber
           );
-        }
+        const content =
+          await page.getTextContent();
 
-        const chunks: string[] = [];
-        let textChars = 0;
-
-        for (
-          let pageNumber = 1;
-          pageNumber <= document.numPages;
-          pageNumber += 1
-        ) {
-          const page =
-            await document.getPage(pageNumber);
-          const content =
-            await page.getTextContent();
-
-          const pageText = content.items
+        const pageText =
+          content.items
             .map((item) =>
               "str" in item &&
               typeof item.str === "string"
@@ -115,38 +119,38 @@ implements PdfTextExtractor {
             .filter(Boolean)
             .join(" ");
 
-          textChars += pageText.length + 1;
-          if (
-            textChars >
-            this.limits.maxTextChars
-          ) {
-            throw new PdfTextExtractionError(
-              "Extracted PDF text exceeds the configured character limit.",
-              "PDF_TEXT_TOO_LARGE"
-            );
-          }
+        textChars +=
+          pageText.length + 1;
 
-          chunks.push(pageText);
-          page.cleanup();
-        }
-
-        const text =
-          chunks.join("\n").trim();
-        if (!text) {
+        if (
+          textChars >
+          this.limits.maxTextChars
+        ) {
           throw new PdfTextExtractionError(
-            "PDF contains no extractable text; OCR is intentionally disabled.",
-            "PDF_NO_TEXT"
+            "Extracted PDF text exceeds the configured character limit.",
+            "PDF_TEXT_TOO_LARGE"
           );
         }
 
-        return {
-          text,
-          pages: document.numPages,
-          bytes: data.byteLength
-        };
-      } finally {
-        await document.destroy();
+        chunks.push(pageText);
+        page.cleanup();
       }
+
+      const text =
+        chunks.join("\n").trim();
+
+      if (!text) {
+        throw new PdfTextExtractionError(
+          "PDF contains no extractable text; OCR is intentionally disabled.",
+          "PDF_NO_TEXT"
+        );
+      }
+
+      return {
+        text,
+        pages: document.numPages,
+        bytes: data.byteLength
+      };
     } catch (error) {
       if (
         error instanceof
