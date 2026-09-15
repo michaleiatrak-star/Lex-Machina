@@ -890,10 +890,18 @@ export class SupremeCourtCaseVerifier {
         claim: quote,
         kind: "case",
         status: "VERIFIED",
-        sourceUrl:
-          caseResult.record.sourceUrl,
-        sourceTier:
-          caseResult.record.sourceTier,
+        ...(caseResult.record.sourceUrl
+          ? {
+              sourceUrl:
+                caseResult.record.sourceUrl
+            }
+          : {}),
+        ...(caseResult.record.sourceTier
+          ? {
+              sourceTier:
+                caseResult.record.sourceTier
+            }
+          : {}),
         fetchedAt:
           caseResult.record.fetchedAt,
         toolCallId:
