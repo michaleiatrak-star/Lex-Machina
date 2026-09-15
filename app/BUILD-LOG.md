@@ -179,6 +179,72 @@ Live-provider status:
 
 - credentialled OpenAI / Anthropic / xAI API tests remain pending and are not counted as PASS.
 
+### 2026-09-15 — Build 0009
+
+Status: **PASS — G12 DYNAMIC MODEL CATALOG**
+
+Implemented:
+
+- provider-side dynamic model discovery;
+- OpenAI discovery via `/v1/models`;
+- Anthropic paginated discovery via `/v1/models`;
+- xAI language-model discovery via `/v1/language-models`;
+- server-side credential resolver;
+- provider credentials excluded from model descriptors and sanitized errors;
+- mocked HTTP contract tests for all three providers;
+- live provider access deliberately not claimed.
+
+Validation evidence:
+
+- strict TypeScript: PASS;
+- unit tests: PASS;
+- G1-G12: PASS;
+- GitHub Actions run: `35000069786`, conclusion: `success`.
+- Validated head SHA: `dc8a987f5d95651be7524318668c6aa8e99ac6c1`.
+
+### 2026-09-15 — Build 0010
+
+Status: **PASS — G13 LOCAL HTTP API**
+
+Implemented:
+
+- Express 5 local backend aligned with the Mike ecosystem;
+- default and enforced loopback-only bind;
+- `GET /health`;
+- `GET /api/skills` exposing metadata only;
+- `GET /api/routes`;
+- `POST /api/routes/validate`;
+- `GET /api/models/:provider`;
+- foreign web origins blocked;
+- provider/model errors sanitized;
+- SKILL.md bodies never exposed through public API;
+- full-corpus startup smoke test on an ephemeral localhost port.
+
+Validation evidence:
+
+- strict TypeScript: PASS;
+- HTTP/API unit and integration tests: PASS;
+- G1-G13: PASS;
+- GitHub Actions run: `35001067932`, conclusion: `success`.
+- Validated head SHA: `1f586ab061a858d1b51b109ca1192109772cc836`.
+
+Current runnable backend:
+
+```bash
+cd app/lex-runtime
+npm install
+npm start
+```
+
+Default address:
+
+`http://127.0.0.1:4317`
+
+Live-provider status:
+
+- model discovery and provider invocation against real credentials remain a separate live gate;
+- no API secret is committed to the repository.
+
 Next gate:
 
-- **G12 Dynamic Model Catalog:** provider-side model discovery for OpenAI, Anthropic and xAI with server-only credentials and deterministic mocked contract tests; no hard-coded consumer ChatGPT/Claude/Grok selector.
+- **G14 Local Web UI:** React/Vite application shell consuming the local HTTP API with provider/model selector, DR selector and runtime status, while keeping all credentials and Lex prompt content outside the browser bundle.
