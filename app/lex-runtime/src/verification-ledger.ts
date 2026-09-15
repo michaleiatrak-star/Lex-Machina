@@ -23,6 +23,8 @@ export type VerificationRecord = {
   fetchedAt: string;
   toolCallId?: string;
   verificationMethod?: VerificationMethod;
+  temporalMode?: "CURRENT" | "HISTORICAL";
+  asOf?: string;
   evidence?: string;
 };
 
