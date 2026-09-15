@@ -1,0 +1,111 @@
+import { describe, expect, it, vi } from "vitest";
+import {
+  LegalSourceVerificationError,
+  OfficialLegalSourceVerifier
+} from "../src/legal-source-verifier.js";
+
+describe("OfficialLegalSourceVerifier", () => {
+  it("verifies an article only when the official response contains that article", async () => {
+    const fetcher = vi.fn(async () =>
+      new Response(
+        "<html><body><h2>Art. 5.</h2><p>Nie można czynić ze swego prawa użytku...</p></body></html>",
+        {
+          status: 200,
+          headers: { "content-type": "text/html; charset=utf-8" }
+        }
+      )
+    );
+
+    const verifier = new OfficialLegalSourceVerifier(
+      fetcher,
+      () => "2026-09-15T18:00:00.000Z"
+    );
+
+    const result = await verifier.verify({
+      claim: "art. 5 KC",
+      kind: "statute",
+      url: "https://eli.gov.pl/acts/DU/1964/93/text.html",
+      toolCallId: "tool-1"
+    });
+
+    expect(result.matched).toBe(true);
+    expect(result.record).toMatchObject({
+      claim: "art. 5 KC",
+      status: "VERIFIED",
+      sourceTier: "R1",
+      sourceUrl: "https://eli.gov.pl/acts/DU/1964/93/text.html",
+      toolCallId: "tool-1",
+      verificationMethod: "web_fetch"
+    });
+  });
+
+  it("records UNVERIFIED when the official response does not contain the requested article", async () => {
+    const verifier = new OfficialLegalSourceVerifier(
+      async () =>
+        new Response("<html><body>Art. 6. Inna treść.</body></html>", {
+          status: 200,
+          headers: { "content-type": "text/html" }
+        }),
+      () => "2026-09-15T18:00:00.000Z"
+    );
+
+    const result = await verifier.verify({
+      claim: "art. 5 KC",
+      kind: "statute",
+      url: "https://eli.gov.pl/acts/DU/1964/93/text.html",
+      toolCallId: "tool-2"
+    });
+
+    expect(result.matched).toBe(false);
+    expect(result.record.status).toBe("UNVERIFIED");
+  });
+
+  it("rejects non-official and non-HTTPS sources", async () => {
+    const verifier = new OfficialLegalSourceVerifier(
+      async () => new Response("Art. 5.", { status: 200 })
+    );
+
+    await expect(
+      verifier.verify({
+        claim: "art. 5 KC",
+        kind: "statute",
+        url: "https://example.com/kodeks",
+        toolCallId: "tool-3"
+      })
+    ).rejects.toMatchObject<Partial<LegalSourceVerificationError>>({
+      code: "SOURCE_NOT_OFFICIAL"
+    });
+
+    await expect(
+      verifier.verify({
+        claim: "art. 5 KC",
+        kind: "statute",
+        url: "http://eli.gov.pl/acts/DU/1964/93/text.html",
+        toolCallId: "tool-4"
+      })
+    ).rejects.toMatchObject<Partial<LegalSourceVerificationError>>({
+      code: "INVALID_SOURCE_URL"
+    });
+  });
+
+  it("does not verify binary-only source content", async () => {
+    const verifier = new OfficialLegalSourceVerifier(
+      async () =>
+        new Response("binary", {
+          status: 200,
+          headers: { "content-type": "application/pdf" }
+        })
+    );
+
+    await expect(
+      verifier.verify({
+        claim: "art. 5 KC",
+        kind: "statute",
+        url: "https://eli.gov.pl/acts/DU/1964/93/text.pdf",
+        toolCallId: "tool-5"
+      })
+    ).rejects.toMatchObject<Partial<LegalSourceVerificationError>>({
+      code: "UNSUPPORTED_SOURCE_CONTENT"
+    });
+  });
+});
