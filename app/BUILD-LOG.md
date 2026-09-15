@@ -64,12 +64,48 @@ Validation evidence:
 - GitHub Actions run: `34996493615`, conclusion: `success`.
 - Validated head SHA: `173bef4f1b4c2d2069f90a51d73a39fa35a13d8a`.
 
+### 2026-09-15 — Build 0003
+
+Status: **PASS — G5 PROVIDER CONFORMANCE (NON-LIVE)**
+
+Implemented:
+
+- normalized provider contract aligned with the Mike/AI-SDK pattern;
+- `ProviderRegistry` and `ProviderGateway`;
+- provider capability checks for tools/reasoning/model discovery;
+- normalized provider error boundary;
+- deterministic conformance adapters for OpenAI, Anthropic and xAI;
+- normalized tool-call/tool-result roundtrip tests;
+- model-discovery contract tests;
+- direct AI SDK model factories:
+  - `@ai-sdk/openai`;
+  - `@ai-sdk/anthropic`;
+  - `@ai-sdk/xai`;
+- strict TypeScript typecheck added to CI;
+- provider package/factory smoke tests without network calls.
+
+Validation evidence:
+
+- strict TypeScript: PASS;
+- unit tests: PASS;
+- G1 corpus integrity: PASS;
+- G3 router-first bootstrap: PASS;
+- G4 Tool Safety: PASS;
+- G5 provider conformance: PASS;
+- GitHub Actions run: `34997893806`, conclusion: `success`.
+- Validated head SHA: `ac26cbef057ccdea783c1f262a14048bc61aabe7`.
+
+Live-provider status:
+
+- live API calls were intentionally not executed in CI;
+- live OpenAI / Anthropic / xAI tool-call validation remains a separate credentialled gate and MUST NOT be reported as passed until secrets are configured in a secure environment.
+
 Repository baseline debt observed by an existing workflow:
 
 - Existing `F-138 structural audit` reports `dr-09` module counter `35 != 36`.
-- The runtime branch did not modify `dr-09`; this is tracked as pre-existing corpus/audit debt and is not treated as a G1-G4 runtime failure.
+- The runtime branch did not modify `dr-09`; this is tracked as pre-existing corpus/audit debt and is not treated as a G1-G5 runtime failure.
 - It must nevertheless be resolved before declaring the whole repository release-clean.
 
 Next gate:
 
-- **G5 Provider Conformance / Mike integration:** map the Lex runtime to the Mike/AI-SDK provider layer, define a normalized provider contract, then validate OpenAI/Anthropic/xAI tool-call + streaming behavior with deterministic stubs before live-provider tests.
+- **G7 Vertical Slice:** deterministic end-to-end orchestration `prawny-router-v3 → prawo-polskie-v2 → DR-02 → provider → audit trace`, followed by source/HARD-GATE enforcement in G8.
