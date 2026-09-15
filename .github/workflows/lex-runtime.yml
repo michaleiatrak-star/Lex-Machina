@@ -23,7 +23,7 @@ permissions:
 
 jobs:
   g1-g16:
-    name: G1-G16 runtime validation
+    name: G1-G16 deterministic validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -85,6 +85,29 @@ jobs:
 
       - name: G16 — verified legal source tool loop
         run: npm run validate:g16
+
+  g17-live-source:
+    name: G17 live official-source probe
+    needs: g1-g16
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: G17 — real API Sejm/ELI verification
+        run: npm run validate:g17
 
   g14-g16-web:
     name: G14-G16 local web UI
