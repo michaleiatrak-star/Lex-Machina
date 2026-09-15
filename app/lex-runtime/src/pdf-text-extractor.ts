@@ -86,9 +86,7 @@ implements PdfTextExtractor {
 
       loadingTask = pdfjs.getDocument({
         data,
-        isEvalSupported: false,
-        useSystemFonts: true,
-        useWorkerFetch: false
+        useSystemFonts: true
       });
 
       document = await loadingTask.promise;
@@ -166,9 +164,7 @@ implements PdfTextExtractor {
         "PDF_PARSE_FAILED"
       );
     } finally {
-      if (document) {
-        await document.destroy();
-      } else if (loadingTask) {
+      if (loadingTask) {
         await loadingTask.destroy();
       }
     }
