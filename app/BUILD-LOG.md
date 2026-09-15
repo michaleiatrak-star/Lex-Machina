@@ -302,3 +302,52 @@ The analysis button is intentionally not enabled yet. The next gate adds an exec
 Next gate:
 
 - **G15 Safe Session Execution:** provider-backed draft execution through the local API with route validation, server-only credentials, deterministic CI adapters and mandatory finalization status before UI presentation.
+
+
+### 2026-09-15 — Build 0012
+
+Status: **PASS — G15 SAFE SESSION EXECUTION**
+
+Implemented:
+
+- live AI SDK provider adapters for OpenAI, Anthropic and xAI;
+- provider credentials resolved only in the local backend process;
+- `POST /api/sessions/execute` with input/routing validation;
+- server-side `SafeSessionExecutor`;
+- selected provider/model executed only after a valid Lex DR route;
+- model output is evaluated by G8 before browser presentation;
+- G8 PASS → response may expose a working draft;
+- G8 DEGRADED/BLOCKED → raw provider output is withheld from the browser;
+- blocked responses expose only sanitized reference metadata;
+- blocked sessions are explicitly closed in the append-only audit;
+- React UI now accepts the user query and executes the local session;
+- UI has separate presentable, blocked and provider-error states;
+- browser bundle remains free of provider credentials and Lex prompt bodies.
+
+Validation evidence:
+
+- strict TypeScript: PASS;
+- runtime/app unit tests: PASS;
+- deterministic safe path: PASS;
+- deterministic unsupported-citation path: PASS and raw answer withheld;
+- runtime G1-G15: PASS;
+- web unit tests: PASS;
+- production web build: PASS;
+- browser bundle safety: PASS;
+- GitHub Actions run: `35002606541`, conclusion: `success`.
+- Validated head SHA: `b33c3d790ae9ddb24a910d9e806cca96ac2fe5e2`.
+
+Live-provider status:
+
+- the live OpenAI/Anthropic/xAI adapters compile and are wired to the application;
+- CI does not contain provider secrets and therefore does not claim a credentialled external API call as PASS.
+
+Current behavior:
+
+- a legal answer with no detected legal citation can be presented as a working draft;
+- an answer containing an article, Dz.U. reference or case signature without a verification-ledger entry is blocked before presentation;
+- this is intentionally conservative until G16 supplies verified legal-source tool results.
+
+Next gate:
+
+- **G16 Legal Source Verification:** expose provider-neutral verification tools through Tool Broker/MCP/direct official-source adapters and populate the VerificationLedger so verified legal references can pass G8.
