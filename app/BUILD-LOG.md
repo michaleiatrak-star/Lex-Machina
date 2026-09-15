@@ -538,3 +538,90 @@ Validation evidence:
 Next gate:
 
 - **G21 Official Case-Law Verification:** court-family-specific runtime resolver and exact signature verification, beginning with Sąd Najwyższy.
+
+
+### 2026-09-15 — Build 0019
+
+Status: **PASS — G21 AMENDMENT-AWARE LEGAL STATE**
+
+Implemented:
+
+- amendment applicability classifier:
+  - `FUTURE`;
+  - `EFFECTIVE`;
+  - `UNKNOWN`;
+- promulgation separated from ELI relation/effect dates;
+- official `entryIntoForce` / `validFrom` support;
+- conservative earliest-effect classification;
+- FUTURE amendment does not block an earlier legal-state date;
+- EFFECTIVE amendment remains fail-closed until deterministic overlay exists;
+- UNKNOWN effect date remains fail-closed;
+- same rules apply to explicit historical `asOf`.
+
+Acceptance:
+
+- FUTURE → source verification continues → VERIFIED → PASS;
+- EFFECTIVE → no content fetch → no ledger record → BLOCKED;
+- UNKNOWN → no content fetch → no ledger record → BLOCKED.
+
+Validation evidence:
+
+- G1-G22 deterministic validation: PASS;
+- GitHub Actions run: `35016482959`, conclusion: `success`;
+- F-138 structural audit: `35016488526`, conclusion: `success`;
+- validated code SHA: `31efd8cd6e932a5dcefba00733c817e6c1468182`.
+
+### 2026-09-15 — Build 0020
+
+Status: **PASS — G22 OFFICIAL SN CASE-LAW VERIFICATION**
+
+Implemented:
+
+- runtime-owned `verify_case_reference`;
+- first supported court family: Sąd Najwyższy;
+- provider supplies claim + signature + court family, never source URL;
+- exact signature normalization and matching;
+- near-match rejection;
+- ambiguous exact matches fail closed;
+- official full-text identity verification;
+- SN redirect host allowlist and timeout;
+- support for current nested Joomla `data[0].data.raw` payload;
+- case provenance in VerificationLedger/Audit:
+  - `kind=case`;
+  - `sourceTier=R1`;
+  - `sourceFormat=TEXT`;
+  - `caseScope=FULL_TEXT`;
+- fabricated case verification marker remains blocked by G8.
+
+Live SN proof:
+
+- signature: `II CSK 101/20`;
+- exact result: FOUND;
+- judgment date: `2020-07-23`;
+- form: `postanowienie SN`;
+- source tier: R1;
+- scope: FULL_TEXT;
+- near match `III CSK 101/20` rejected;
+- one live attempt.
+
+Validation evidence:
+
+- G1-G22 deterministic validation: PASS;
+- G22 live SN case-law probe: PASS;
+- G17 live ELI probe: PASS;
+- G19 live temporal probe: PASS;
+- G20 live PDF probe: PASS;
+- G14-G22 local web UI: PASS;
+- GitHub Actions run: `35016482959`, conclusion: `success`;
+- PR validation run: `35016488599`, conclusion: `success`;
+- F-138 structural audit: `35016488526`, conclusion: `success`;
+- validated code SHA: `31efd8cd6e932a5dcefba00733c817e6c1468182`.
+
+Scope boundary:
+
+- G22 proves case identity/metadata/full-text provenance;
+- it does not prove an arbitrary thesis, paraphrase or quotation attributed to that judgment.
+
+Next gate:
+
+- **G23 Case-Law Proposition / Quote Verification:** require evidence from the already verified official judgment text before the model may attribute a proposition or quotation to a case.
