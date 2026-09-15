@@ -97,4 +97,171 @@ describe("FinalizationGate", () => {
     expect(report.result).toBe("BLOCKED");
     expect(report.findings[0]?.status).toBe("UNVERIFIED_NOT_MARKED");
   });
+
+  it("passes a verified SN exact quote only when hash, quote and signature share the line", () => {
+    const ledger = new VerificationLedger();
+
+    ledger.add({
+      claim: "sygn. III CZP 25/11",
+      kind: "case",
+      status: "VERIFIED",
+      sourceUrl:
+        "https://sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=1",
+      sourceTier: "R1",
+      fetchedAt:
+        "2026-09-15T00:00:00Z",
+      toolCallId: "case-1",
+      caseScope: "FULL_TEXT"
+    });
+
+    ledger.add({
+      claim:
+        "pełny tekst orzeczenia zawiera tę dokładną wypowiedź",
+      kind: "case",
+      status: "VERIFIED",
+      sourceUrl:
+        "https://sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=1",
+      sourceTier: "R1",
+      fetchedAt:
+        "2026-09-15T00:00:00Z",
+      toolCallId: "quote-1",
+      caseScope: "EXACT_QUOTE",
+      caseSignature:
+        "III CZP 25/11",
+      evidenceHash:
+        "0123456789abcdefabcd"
+    });
+
+    const report =
+      new FinalizationGate().evaluate(
+        "„pełny tekst orzeczenia zawiera tę dokładną wypowiedź” sygn. III CZP 25/11 ✅ [VER: https://sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=1, 2026-09-15] ✅ [CASE-QUOTE:0123456789abcdefabcd]",
+        ledger
+      );
+
+    expect(report.result).toBe("PASS");
+    expect(
+      report.caseQuoteFindings
+    ).toEqual([
+      expect.objectContaining({
+        status: "VERIFIED",
+        evidenceHash:
+          "0123456789abcdefabcd"
+      })
+    ]);
+  });
+
+  it("blocks a fabricated CASE-QUOTE marker with no ledger evidence", () => {
+    const ledger = new VerificationLedger();
+
+    ledger.add({
+      claim: "sygn. III CZP 25/11",
+      kind: "case",
+      status: "VERIFIED",
+      sourceUrl:
+        "https://sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=1",
+      sourceTier: "R1",
+      fetchedAt:
+        "2026-09-15T00:00:00Z"
+    });
+
+    const report =
+      new FinalizationGate().evaluate(
+        "„zmyślony cytat” sygn. III CZP 25/11 ✅ [VER: https://sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=1, 2026-09-15] ✅ [CASE-QUOTE:aaaaaaaaaaaaaaaaaaaa]",
+        ledger
+      );
+
+    expect(report.result).toBe(
+      "BLOCKED"
+    );
+    expect(
+      report.caseQuoteFindings[0]
+        ?.status
+    ).toBe(
+      "MISSING_CASE_QUOTE_LEDGER"
+    );
+  });
+
+  it("blocks when the output edits a quote after verification", () => {
+    const ledger = new VerificationLedger();
+
+    ledger.add({
+      claim: "sygn. III CZP 25/11",
+      kind: "case",
+      status: "VERIFIED",
+      sourceUrl:
+        "https://sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=1",
+      sourceTier: "R1",
+      fetchedAt:
+        "2026-09-15T00:00:00Z"
+    });
+
+    ledger.add({
+      claim:
+        "dokładnie zweryfikowany cytat z orzeczenia",
+      kind: "case",
+      status: "VERIFIED",
+      sourceUrl:
+        "https://sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=1",
+      sourceTier: "R1",
+      fetchedAt:
+        "2026-09-15T00:00:00Z",
+      caseScope: "EXACT_QUOTE",
+      caseSignature:
+        "III CZP 25/11",
+      evidenceHash:
+        "bbbbbbbbbbbbbbbbbbbb"
+    });
+
+    const report =
+      new FinalizationGate().evaluate(
+        "„zmieniony cytat z orzeczenia” sygn. III CZP 25/11 ✅ [VER: https://sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=1, 2026-09-15] ✅ [CASE-QUOTE:bbbbbbbbbbbbbbbbbbbb]",
+        ledger
+      );
+
+    expect(report.result).toBe(
+      "BLOCKED"
+    );
+    expect(
+      report.caseQuoteFindings[0]
+        ?.status
+    ).toBe("QUOTE_TEXT_MISMATCH");
+  });
+
+  it("blocks when a verified quote marker is detached from its case signature", () => {
+    const ledger = new VerificationLedger();
+
+    ledger.add({
+      claim:
+        "dokładnie zweryfikowany cytat z orzeczenia",
+      kind: "case",
+      status: "VERIFIED",
+      sourceUrl:
+        "https://sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=1",
+      sourceTier: "R1",
+      fetchedAt:
+        "2026-09-15T00:00:00Z",
+      caseScope: "EXACT_QUOTE",
+      caseSignature:
+        "III CZP 25/11",
+      evidenceHash:
+        "cccccccccccccccccccc"
+    });
+
+    const report =
+      new FinalizationGate().evaluate(
+        "„dokładnie zweryfikowany cytat z orzeczenia” ✅ [CASE-QUOTE:cccccccccccccccccccc]",
+        ledger
+      );
+
+    expect(report.result).toBe(
+      "BLOCKED"
+    );
+    expect(
+      report.caseQuoteFindings[0]
+        ?.status
+    ).toBe(
+      "CASE_SIGNATURE_MISSING"
+    );
+  });
+
 });
