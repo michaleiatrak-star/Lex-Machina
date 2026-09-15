@@ -59,6 +59,23 @@ describe("local API client", () => {
       answer: "Wynik.",
       finalization: "PASS",
       blockedReferences: [],
+      verification: {
+        records: 1,
+        verified: 1,
+        supported: 0,
+        unverified: 0
+      },
+      evidence: [{
+        claim: "art. 5 KC",
+        kind: "statute",
+        status: "VERIFIED",
+        sourceUrl:
+          "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.pdf",
+        sourceTier: "R1",
+        fetchedAt:
+          "2026-09-15T20:00:00Z",
+        sourceFormat: "PDF"
+      }],
       audit: {
         result: "PASS",
         eventCount: 9,
