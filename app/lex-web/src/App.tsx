@@ -401,6 +401,10 @@ export default function App() {
               weryfikacji. Surowa odpowiedź nie została przekazana do
               przeglądarki.
             </p>
+            <p className="result-note">
+              Rekordy weryfikacji: {execution.verification.verified} VERIFIED ·
+              {" "}{execution.verification.unverified} UNVERIFIED.
+            </p>
             {execution.blockedReferences.length > 0 && (
               <ul className="blocked-list">
                 {execution.blockedReferences.map((reference, index) => (
@@ -425,7 +429,9 @@ export default function App() {
             <div className="answer-text">{execution.answer}</div>
             <footer className="result-meta">
               Sesja {execution.sessionId} · audit {execution.audit.result} ·
-              {execution.audit.eventCount} zdarzeń
+              {execution.audit.eventCount} zdarzeń · weryfikacje:
+              {execution.verification.verified}/
+              {execution.verification.records}
             </footer>
           </section>
         )}
