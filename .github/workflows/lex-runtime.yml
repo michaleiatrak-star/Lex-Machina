@@ -20,8 +20,8 @@ permissions:
   contents: read
 
 jobs:
-  g1-g10:
-    name: G1-G10 runtime validation
+  g1-g11:
+    name: G1-G11 runtime validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -68,3 +68,6 @@ jobs:
 
       - name: G10 — export gate
         run: npm run validate:g10
+
+      - name: G11 — skill contract matrix
+        run: npm run validate:g11
