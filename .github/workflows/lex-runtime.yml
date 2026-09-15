@@ -20,8 +20,8 @@ permissions:
   contents: read
 
 jobs:
-  g1-g5:
-    name: G1-G5 runtime and provider conformance
+  g1-g7:
+    name: G1-G7 runtime validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -56,3 +56,6 @@ jobs:
 
       - name: G5 — Provider conformance
         run: npm run validate:g5
+
+      - name: G7 — deterministic vertical slice
+        run: npm run validate:g7
