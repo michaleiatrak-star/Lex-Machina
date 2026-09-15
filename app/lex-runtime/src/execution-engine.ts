@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import { LegalSession } from "./legal-session.js";
 import { LexSkillRegistry } from "./registry.js";
 import { ProviderGateway } from "./providers/gateway.js";
@@ -139,6 +140,21 @@ export class LexExecutionEngine {
       emit("skill_read", args.route.primarySkill, "BLOCKED");
       throw new LexExecutionError(
         "Selected primary DR skill does not exist.",
+        args.route.primarySkill,
+        [...events]
+      );
+    }
+
+    const routingMapText = fs.readFileSync(routingMap, "utf8");
+    if (!routingMapText.includes(args.route.primarySkill)) {
+      emit(
+        "route",
+        args.route.primarySkill,
+        "BLOCKED",
+        "PRIMARY_SKILL_NOT_IN_ROUTING_MAP"
+      );
+      throw new LexExecutionError(
+        "Selected primary DR skill is not present in ROUTING-MAP.md.",
         args.route.primarySkill,
         [...events]
       );
