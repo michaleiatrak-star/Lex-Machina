@@ -399,3 +399,48 @@ Live-source status:
 Next gate:
 
 - **G17 Live Official Source Probe:** exercise `OfficialLegalSourceVerifier` against a stable real ELI/Sejm endpoint without model-provider credentials, with fail-closed behavior if transport or official-source formatting changes.
+
+### 2026-09-15 — Build 0015
+
+Status: **PASS — G18 DETERMINISTIC LEGAL SOURCE RESOLVER**
+
+Implemented:
+
+- runtime-owned `DeterministicLegalActResolver`;
+- initial canonical registry for KC / KPC / KPK;
+- normalized legal-act aliases;
+- fail-closed unknown-act handling before network access;
+- provider tool schema reduced to `claim + kind + act`;
+- provider can no longer choose verification URL or expected act title;
+- runtime resolves source descriptor before ToolBroker policy evaluation;
+- verified official-source flow remains compatible with G16/G8/G9;
+- unknown act produces `UNKNOWN_LEGAL_ACT` and zero source fetches;
+- resolver aliases and transport ownership covered by unit tests;
+- full HTTP G18 acceptance flow added.
+
+Validation evidence:
+
+- strict TypeScript: PASS;
+- runtime/app unit tests: PASS;
+- G1-G18 deterministic validation: PASS;
+- G17 live official-source probe: PASS;
+- G14-G18 local web UI: PASS;
+- GitHub Actions run: `35011340454`, conclusion: `success`;
+- F-138 structural audit: `35011340485`, conclusion: `success`;
+- Validated head SHA: `d3e477cf70e5c2e0ee820003a9fd3bbba6cfbc69`.
+
+Initial pinned descriptors:
+
+- KC → `DU/2026/795`;
+- KPC → `DU/2026/468`;
+- KPK → `DU/2026/490`;
+- registry as-of: `2026-09-15`.
+
+Current limitation:
+
+- G18 removes model-owned source URLs but descriptors remain pinned as-of the registry date;
+- current-text freshness must therefore be checked by the next temporal gate.
+
+Next gate:
+
+- **G19 Temporal Source Freshness:** use official ELI metadata/references to detect whether the runtime descriptor is still current before verification.
