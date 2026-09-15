@@ -53,6 +53,11 @@ describe("session execution HTTP API", () => {
         answer: "safe draft",
         finalization: "PASS" as const,
         blockedReferences: [],
+        verification: {
+          records: 0,
+          verified: 0,
+          unverified: 0
+        },
         audit: {
           result: "PASS" as const,
           eventCount: 12,
