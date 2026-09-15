@@ -27,6 +27,7 @@ export type VerificationRecord = {
   temporalMode?: "CURRENT" | "HISTORICAL";
   asOf?: string;
   sourceFormat?: "TEXT" | "PDF";
+  caseScope?: "FULL_TEXT";
   evidence?: string;
 };
 
