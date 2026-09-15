@@ -20,8 +20,8 @@ permissions:
   contents: read
 
 jobs:
-  g1-g11:
-    name: G1-G11 runtime validation
+  g1-g12:
+    name: G1-G12 runtime validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -71,3 +71,6 @@ jobs:
 
       - name: G11 — skill contract matrix
         run: npm run validate:g11
+
+      - name: G12 — dynamic model catalog
+        run: npm run validate:g12
