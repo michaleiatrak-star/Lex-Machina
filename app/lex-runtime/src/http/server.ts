@@ -4,6 +4,9 @@ import { createLexHttpApp } from "./app.js";
 import { LexSkillRegistry } from "../registry.js";
 import { DynamicModelCatalog } from "../providers/model-catalog.js";
 import { EnvironmentCredentialResolver } from "../providers/credentials.js";
+import { createLiveProviderRegistry } from "../providers/ai-sdk-adapter.js";
+import { ProviderGateway } from "../providers/gateway.js";
+import { SafeSessionExecutor } from "../session-executor.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -49,10 +52,16 @@ export async function startLocalServer(options?: {
     );
   }
 
+  const credentials = new EnvironmentCredentialResolver();
+  const providerRegistry = createLiveProviderRegistry(credentials);
+  const providerGateway = new ProviderGateway(providerRegistry);
+
   const app = createLexHttpApp({
     registry,
-    modelCatalog: new DynamicModelCatalog(
-      new EnvironmentCredentialResolver()
+    modelCatalog: new DynamicModelCatalog(credentials),
+    sessionExecutor: new SafeSessionExecutor(
+      registry,
+      providerGateway
     )
   });
 
