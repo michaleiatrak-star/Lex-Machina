@@ -37,12 +37,39 @@ Validation evidence:
 - GitHub Actions run: `34996304905`, conclusion: `success`.
 - Validated head SHA: `c5b79076bbd58b7bdbe86fc0127d0e16daadb480`.
 
+### 2026-09-15 — Build 0002
+
+Status: **PASS — G4 TOOL SAFETY**
+
+Implemented:
+
+- provider-neutral `ToolBroker`;
+- default-deny for unknown tools;
+- capability classes: read / network / write / code / MCP;
+- read confinement to configured roots;
+- write confinement plus explicit write enablement;
+- HTTP(S)-only network policy;
+- denial of localhost, private/link-local network targets and URL credentials;
+- code execution disabled by default;
+- MCP execution disabled by default;
+- auditable ALLOW/DENY events;
+- executable G4 validation suite.
+
+Validation evidence:
+
+- unit tests: PASS;
+- G1 corpus integrity: PASS;
+- G3 router-first bootstrap: PASS;
+- G4 Tool Safety: PASS;
+- GitHub Actions run: `34996493615`, conclusion: `success`.
+- Validated head SHA: `173bef4f1b4c2d2069f90a51d73a39fa35a13d8a`.
+
 Repository baseline debt observed by an existing workflow:
 
 - Existing `F-138 structural audit` reports `dr-09` module counter `35 != 36`.
-- The runtime branch did not modify `dr-09`; this is tracked as pre-existing corpus/audit debt and is not treated as a G1/G2/G3 runtime failure.
+- The runtime branch did not modify `dr-09`; this is tracked as pre-existing corpus/audit debt and is not treated as a G1-G4 runtime failure.
 - It must nevertheless be resolved before declaring the whole repository release-clean.
 
 Next gate:
 
-- **G4 Tool Safety:** provider-neutral Tool Broker, default-deny unknown tools, filesystem confinement, network target policy, explicit write/code capability controls.
+- **G5 Provider Conformance / Mike integration:** map the Lex runtime to the Mike/AI-SDK provider layer, define a normalized provider contract, then validate OpenAI/Anthropic/xAI tool-call + streaming behavior with deterministic stubs before live-provider tests.
