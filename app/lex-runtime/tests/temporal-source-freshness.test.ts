@@ -52,6 +52,7 @@ function fixtureFetcher(options?: {
           (item) => ({
             act: {
               ELI: item.eli,
+              date: item.promulgation,
               promulgation: item.promulgation,
               displayAddress: item.eli,
               title: "Ustawa zmieniająca"
@@ -67,6 +68,7 @@ function fixtureFetcher(options?: {
           amendments.map((item) => ({
             act: {
               ELI: item.eli,
+              date: item.promulgation,
               promulgation: item.promulgation,
               displayAddress: item.eli,
               title: "Ustawa zmieniająca"
@@ -87,6 +89,86 @@ function fixtureFetcher(options?: {
   };
 }
 
+function historicalFetcher(options?: {
+  amendmentDate?: string;
+}) {
+  return async (input: string | URL): Promise<Response> => {
+    const url = String(input);
+
+    if (url.endsWith("/DU/1964/93/references")) {
+      return jsonResponse({
+        "Inf. o tekście jednolitym": [
+          {
+            act: {
+              ELI: "DU/2019/1145",
+              year: 2019,
+              pos: 1145,
+              status: "uznany za uchylony"
+            }
+          },
+          {
+            act: {
+              ELI: "DU/2026/795",
+              year: 2026,
+              pos: 795,
+              status: "obowiązujący"
+            }
+          }
+        ],
+        "Akty zmieniające": options?.amendmentDate
+          ? [{
+              act: {
+                ELI: "DU/2020/1000",
+                date: options.amendmentDate,
+                displayAddress: "Dz.U. 2020 poz. 1000",
+                title: "Ustawa zmieniająca"
+              }
+            }]
+          : []
+      });
+    }
+
+    if (url.endsWith("/DU/1964/93")) {
+      return jsonResponse({
+        ELI: "DU/1964/93",
+        status: "obowiązujący",
+        entryIntoForce: "1965-01-01",
+        repealDate: "2021-01-01",
+        promulgation: "1964-05-18"
+      });
+    }
+
+    if (url.endsWith("/DU/2019/1145")) {
+      return jsonResponse({
+        ELI: "DU/2019/1145",
+        status: "uznany za uchylony",
+        legalStatusDate: "2019-06-01",
+        repealDate: "2021-01-01",
+        promulgation: "2019-06-19",
+        textHTML: true,
+        textPDF: true
+      });
+    }
+
+    if (url.endsWith("/DU/2026/795")) {
+      return jsonResponse({
+        ELI: "DU/2026/795",
+        status: "obowiązujący",
+        legalStatusDate: "2026-05-20",
+        promulgation: "2026-06-17",
+        textHTML: true,
+        textPDF: true
+      });
+    }
+
+    if (url.endsWith("/references")) {
+      return jsonResponse({});
+    }
+
+    throw new Error("Unexpected historical fixture URL: " + url);
+  };
+}
+
 describe("TemporalSourceFreshnessChecker", () => {
   it("returns CURRENT only for the pinned in-force t.j. with no later amendments", async () => {
     const result = await new TemporalSourceFreshnessChecker(
@@ -96,6 +178,7 @@ describe("TemporalSourceFreshnessChecker", () => {
 
     expect(result).toMatchObject({
       status: "CURRENT",
+      mode: "CURRENT",
       currentEli: "DU/2026/795",
       sourceUrl:
         "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.html",
@@ -112,6 +195,7 @@ describe("TemporalSourceFreshnessChecker", () => {
 
     expect(result).toMatchObject({
       status: "STALE_CONSOLIDATED_TEXT",
+      mode: "CURRENT",
       currentEli: "DU/2027/10",
       reason: "PINNED_ELI_DIFFERS_FROM_CURRENT"
     });
@@ -145,6 +229,7 @@ describe("TemporalSourceFreshnessChecker", () => {
 
     expect(result).toMatchObject({
       status: "REPEALED_CONSOLIDATED_TEXT",
+      mode: "CURRENT",
       reason: "PINNED_CONSOLIDATED_TEXT_REPEALED"
     });
   });
@@ -158,8 +243,76 @@ describe("TemporalSourceFreshnessChecker", () => {
 
     expect(result).toMatchObject({
       status: "REPEALED_CONSOLIDATED_TEXT",
+      mode: "CURRENT",
       currentEli: "DU/2026/795",
       reason: "CURRENT_CONSOLIDATED_TEXT_REPEALED"
+    });
+  });
+
+  it("allows a repealed historical t.j. only for a date when the base act and that t.j. were in force", async () => {
+    const result = await new TemporalSourceFreshnessChecker(
+      historicalFetcher(),
+      () => "2026-09-15T20:00:00.000Z"
+    ).check(kc, {
+      asOf: "2020-06-01"
+    });
+
+    expect(result).toMatchObject({
+      status: "HISTORICAL",
+      mode: "HISTORICAL",
+      requestedAsOf: "2020-06-01",
+      currentEli: "DU/2019/1145",
+      sourceUrl:
+        "https://api.sejm.gov.pl/eli/acts/DU/2019/1145/text.html",
+      actValidFrom: "1965-01-01",
+      actValidTo: "2021-01-01"
+    });
+  });
+
+  it("keeps repeal red when the requested historical date is after the act ceased to be in force", async () => {
+    const result = await new TemporalSourceFreshnessChecker(
+      historicalFetcher(),
+      () => "2026-09-15T20:00:00.000Z"
+    ).check(kc, {
+      asOf: "2021-01-01"
+    });
+
+    expect(result).toMatchObject({
+      status: "ACT_NOT_IN_FORCE_AT_DATE",
+      mode: "HISTORICAL",
+      requestedAsOf: "2021-01-01",
+      reason: "BASE_ACT_NOT_IN_FORCE_AT_AS_OF"
+    });
+  });
+
+  it("blocks a historical t.j. when a later amendment was already effective by asOf", async () => {
+    const result = await new TemporalSourceFreshnessChecker(
+      historicalFetcher({
+        amendmentDate: "2020-01-15"
+      }),
+      () => "2026-09-15T20:00:00.000Z"
+    ).check(kc, {
+      asOf: "2020-06-01"
+    });
+
+    expect(result).toMatchObject({
+      status: "HISTORICAL_POST_TJ_AMENDMENTS",
+      mode: "HISTORICAL",
+      currentEli: "DU/2019/1145"
+    });
+  });
+
+  it("rejects current/future dates from the historical exception", async () => {
+    const result = await new TemporalSourceFreshnessChecker(
+      historicalFetcher(),
+      () => "2026-09-15T20:00:00.000Z"
+    ).check(kc, {
+      asOf: "2026-09-15"
+    });
+
+    expect(result).toMatchObject({
+      status: "INVALID_HISTORICAL_DATE",
+      mode: "HISTORICAL"
     });
   });
 
@@ -173,6 +326,7 @@ describe("TemporalSourceFreshnessChecker", () => {
 
     expect(result).toMatchObject({
       status: "CURRENT_TEXT_REQUIRES_PDF",
+      mode: "CURRENT",
       currentEli: "DU/2026/795",
       sourceUrl:
         "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.pdf"
