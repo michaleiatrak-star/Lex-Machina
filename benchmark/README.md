@@ -5,9 +5,31 @@ w katalogu nazwanym datą jego przeprowadzenia.
 
 ## Przeprowadzone benchmarki
 
-| Data | Bank | Kazusów | Przebiegów | Najlepszy wynik | Katalog |
-|---|---|---|---|---|---|
-| 2026-09-08 | Kazusy wieloaspektowe (7 międzynarodowych + 7 polskich) | 14 | 7 | 9,5 / 10 — Opus 5 ze skillami v3.41 | [`2026-09-08/`](2026-09-08/) |
+| Data | Środowisko | Bank | Kazusów | Przebiegów | Najlepszy wynik | Katalog |
+|---|---|---|---|---|---|---|
+| 2026-09-15 | **ChatGPT — GPT-5.6 Sol** | Kazusy wieloaspektowe (7 międzynarodowych + 7 polskich) | 14 | 4 | **9,34 / 10 — Medium ze skillami** | [`2026-09-15/`](2026-09-15/) |
+| 2026-09-08 | Claude | Kazusy wieloaspektowe (7 międzynarodowych + 7 polskich) | 14 | 7 | 9,5 / 10 — Opus 5 ze skillami v3.41 | [`2026-09-08/`](2026-09-08/) |
+
+## Benchmark 2026-09-15 — ChatGPT
+
+**To są wyniki testów przeprowadzonych w ChatGPT.**
+Model: **GPT-5.6 Sol**. Porównano cztery konfiguracje: Medium bez skilli,
+High bez skilli, Medium ze skillami i High ze skillami.
+
+| Przebieg ChatGPT | Wynik | Pokrycie |
+|---|---:|---:|
+| GPT-5.6 Sol Medium ze skillami | **9,34** | 14/14 |
+| GPT-5.6 Sol High ze skillami | **9,31** | 14/14 |
+| GPT-5.6 Sol High bez skilli | 9,16 | 14/14 |
+| GPT-5.6 Sol Medium bez skilli | 8,76 | 14/14 |
+
+Wpływ skilli w testach ChatGPT: **+0,58** dla Medium i **+0,15** dla High.
+Największy efekt wystąpił w polskich kazusach na Medium: **8,79 → 9,49 (+0,70)**.
+
+Dokumenty:
+- [`2026-09-15/METODOLOGIA.md`](2026-09-15/METODOLOGIA.md) — środowisko testowe ChatGPT i zasada oceny;
+- [`2026-09-15/WYNIKI.md`](2026-09-15/WYNIKI.md) — macierz 14 × 4 i średnie;
+- [`2026-09-15/WPLYW-SKILLI.md`](2026-09-15/WPLYW-SKILLI.md) — analiza wpływu skilli na odpowiedzi ChatGPT.
 
 ## Benchmark 2026-09-08 — skrót
 
@@ -29,7 +51,7 @@ Haiku 4.5. Efekt jest odwrotnie proporcjonalny do siły modelu bazowego, a wersj
 waży więcej niż sama obecność skilli — router v3.37 obniżył wynik Opusa o 0,2 punktu wobec
 próby bez skilli.
 
-## Dokumenty
+## Dokumenty 2026-09-08
 
 | Plik | Zawartość |
 |---|---|
