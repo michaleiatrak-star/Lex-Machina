@@ -95,7 +95,7 @@ export class AuditTrail {
   }
 
   close(
-    status: Exclude<AuditStatus, "BLOCKED"> = "OK",
+    status: AuditStatus = "OK",
     detail?: Record<string, unknown>
   ): void {
     if (this.closed) {
