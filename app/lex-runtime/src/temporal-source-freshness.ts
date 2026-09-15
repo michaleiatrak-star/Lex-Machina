@@ -84,12 +84,12 @@ function text(value: unknown): string {
 
 function dateOnly(value: unknown): string {
   const raw = text(value);
-  const match = raw.match(/^(d{4}-d{2}-d{2})/u);
+  const match = raw.match(/^(\\d{4}-\\d{2}-\\d{2})/u);
   return match?.[1] ?? "";
 }
 
 function validDate(value: string): boolean {
-  if (!/^d{4}-d{2}-d{2}$/u.test(value)) {
+  if (!/^\\d{4}-\\d{2}-\\d{2}$/u.test(value)) {
     return false;
   }
   const parsed = new Date(value + "T00:00:00.000Z");
@@ -101,11 +101,11 @@ function validDate(value: string): boolean {
 
 function normalizeEli(value: unknown): string {
   const raw = text(value).replace(
-    /^https?://[^/]+/eli/acts//u,
+    /^https?:\\/\\/[^/]+\\/eli\\/acts\\//u,
     ""
   );
   const match = raw.match(
-    /(DU|MP)/(d{4})/(d+)/u
+    /(DU|MP)\\/(\\d{4})\\/(\\d+)/u
   );
   return match ? match[0] : "";
 }
@@ -485,7 +485,7 @@ function parts(
 ] | null {
   const match =
     normalizeEli(eli).match(
-      /^(DU|MP)/(d{4})/(d+)$/u
+      /^(DU|MP)\\/(\\d{4})\\/(\\d+)$/u
     );
   if (!match) return null;
   return [
@@ -835,13 +835,54 @@ export class TemporalSourceFreshnessChecker {
           )
       );
 
-    const selected =
+    let selected =
       candidates.at(-1);
+
+    if (!selected) {
+      const baseStateDate =
+        dateOnly(baseAct.legalStatusDate) ||
+        dateOnly(baseAct.validFrom) ||
+        dateOnly(baseAct.entryIntoForce) ||
+        dateOnly(baseAct.promulgation) ||
+        dateOnly(baseAct.announcementDate);
+
+      const baseEli =
+        normalizeEli(baseAct.ELI) ||
+        normalizeEli(descriptor.baseEli);
+
+      const baseSourceUrl =
+        baseAct.textHTML === true
+          ? apiUrl(
+              baseEli,
+              "/text.html"
+            ) ?? undefined
+          : baseAct.textPDF === true
+            ? apiUrl(
+                baseEli,
+                "/text.pdf"
+              ) ?? undefined
+            : undefined;
+
+      if (
+        baseStateDate &&
+        baseStateDate <= asOf &&
+        baseEli
+      ) {
+        selected = {
+          eli: baseEli,
+          metadata: baseAct,
+          stateDate: baseStateDate,
+          ...(baseSourceUrl
+            ? { sourceUrl: baseSourceUrl }
+            : {})
+        };
+      }
+    }
 
     if (!selected) {
       return failure(
         "NO_HISTORICAL_CONSOLIDATED_TEXT",
-        "NO_TJ_APPLICABLE_AT_AS_OF",
+        "NO_OFFICIAL_TEXT_APPLICABLE_AT_AS_OF",
         {
           actValidFrom:
             baseInterval.validFrom,
