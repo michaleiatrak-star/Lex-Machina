@@ -52,6 +52,11 @@ export type SessionExecutionResponse = {
   answer?: string;
   finalization: "PASS" | "DEGRADED" | "BLOCKED";
   blockedReferences: BlockedReference[];
+  verification: {
+    records: number;
+    verified: number;
+    unverified: number;
+  };
   audit: {
     result: "PASS" | "BLOCKED";
     eventCount: number;
