@@ -22,8 +22,8 @@ permissions:
   contents: read
 
 jobs:
-  g1-g28:
-    name: G1-G28 deterministic validation
+  g1-g29:
+    name: G1-G29 deterministic validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -46,6 +46,9 @@ jobs:
 
       - name: Unit tests — runtime and app contracts
         run: npm test
+
+      - name: Python worker syntax
+        run: python -m py_compile ../ocr/paddle_worker.py ../privacy/stanza_ner_worker.py
 
       - name: G1 — corpus integrity
         run: npm run validate:corpus
@@ -122,9 +125,12 @@ jobs:
       - name: G28 — local pseudonymization and deanonymization
         run: npm run validate:g28
 
+      - name: G29 — private complete-document pipeline
+        run: npm run validate:g29
+
   g19-live-freshness:
     name: G19 live temporal freshness probe
-    needs: g1-g28
+    needs: g1-g29
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -147,7 +153,7 @@ jobs:
 
   g20-live-pdf:
     name: G20 live official PDF probe
-    needs: g1-g28
+    needs: g1-g29
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -170,7 +176,7 @@ jobs:
 
   g22-live-sn:
     name: G22 live SN case-law probe
-    needs: g1-g28
+    needs: g1-g29
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -193,7 +199,7 @@ jobs:
 
   g17-live-source:
     name: G17 live official-source probe
-    needs: g1-g28
+    needs: g1-g29
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -216,7 +222,7 @@ jobs:
 
   g14-g26-web:
     name: G14-G26 local web UI
-    needs: g1-g28
+    needs: g1-g29
     runs-on: ubuntu-latest
     defaults:
       run:
