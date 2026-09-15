@@ -27,7 +27,9 @@
     "test": "vitest run",
     "validate:g20": "tsx src/validate-g20.ts",
     "validate:g20-live": "tsx src/validate-g20-live.ts",
-    "validate:g21": "tsx src/validate-g21.ts"
+    "validate:g21": "tsx src/validate-g21.ts",
+    "validate:g22": "tsx src/validate-g22.ts",
+    "validate:g22-live": "tsx src/validate-g22-live.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.49",
