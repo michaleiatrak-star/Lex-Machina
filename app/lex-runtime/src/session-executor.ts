@@ -8,6 +8,9 @@ import { ProviderGateway } from "./providers/gateway.js";
 import type { ProviderId } from "./providers/types.js";
 import { LexSkillRegistry } from "./registry.js";
 import { VerificationLedger } from "./verification-ledger.js";
+import type {
+  LegalVerificationToolFactory
+} from "./verification-tool-runtime.js";
 
 export type SessionExecutionRequest = {
   query: string;
@@ -33,6 +36,11 @@ export type SessionExecutionResponse = {
   answer?: string;
   finalization: "PASS" | "DEGRADED" | "BLOCKED";
   blockedReferences: PublicBlockedReference[];
+  verification: {
+    records: number;
+    verified: number;
+    unverified: number;
+  };
   audit: {
     result: "PASS" | "BLOCKED";
     eventCount: number;
@@ -75,7 +83,8 @@ export class SafeSessionExecutor implements SessionExecutor {
   constructor(
     registry: LexSkillRegistry,
     providers: ProviderGateway,
-    private readonly finalizer = new AuditedFinalizer()
+    private readonly finalizer = new AuditedFinalizer(),
+    private readonly verificationToolFactory?: LegalVerificationToolFactory
   ) {
     this.engine = new LexExecutionEngine(registry, providers);
   }
@@ -90,6 +99,10 @@ export class SafeSessionExecutor implements SessionExecutor {
       mode: request.mode
     });
 
+    const ledger = new VerificationLedger();
+    const verificationTools =
+      this.verificationToolFactory?.(ledger);
+
     const execution = await this.engine.executePolishLegalQuery({
       query: request.query,
       provider: request.provider,
@@ -98,12 +111,32 @@ export class SafeSessionExecutor implements SessionExecutor {
         jurisdiction: "PL",
         primarySkill: request.primarySkill,
         mode: request.mode
-      }
+      },
+      ...(verificationTools
+        ? {
+            tools: verificationTools.schemas(),
+            runTools: (calls) =>
+              verificationTools.runTools(calls)
+          }
+        : {})
     });
 
     transferExecutionEvents(execution.events, audit);
 
-    const ledger = new VerificationLedger();
+    if (verificationTools) {
+      for (const toolEvent of verificationTools.auditEvents()) {
+        audit.record(
+          "tool_decision",
+          toolEvent.tool,
+          toolEvent.decision === "ALLOW" ? "OK" : "BLOCKED",
+          {
+            decision: toolEvent.decision,
+            capability: toolEvent.capability ?? null,
+            reason: toolEvent.reason ?? null
+          }
+        );
+      }
+    }
     const finalization = this.finalizer.finalize({
       text: execution.output,
       ledger,
@@ -127,7 +160,13 @@ export class SafeSessionExecutor implements SessionExecutor {
       }
     );
 
-    const completeness = audit.validateCompletion();
+    const verificationRecords = ledger.all();
+    const completeness = audit.validateCompletion({
+      requireVerification: finalization.references.length > 0,
+      requireToolActivity:
+        finalization.references.length > 0 &&
+        Boolean(verificationTools)
+    });
     const blockedReferences = finalization.findings
       .filter((finding) => finding.status !== "VERIFIED")
       .map((finding) => ({
@@ -150,6 +189,15 @@ export class SafeSessionExecutor implements SessionExecutor {
         : {}),
       finalization: finalization.result,
       blockedReferences,
+      verification: {
+        records: verificationRecords.length,
+        verified: verificationRecords.filter(
+          (record) => record.status === "VERIFIED"
+        ).length,
+        unverified: verificationRecords.filter(
+          (record) => record.status === "UNVERIFIED"
+        ).length
+      },
       audit: {
         result: completeness.result,
         eventCount: completeness.eventCount,
