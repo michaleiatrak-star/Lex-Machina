@@ -122,6 +122,140 @@ describe("SupremeCourtCaseVerifier", () => {
     expect(calls).toHaveLength(2);
   });
 
+  it("verifies an exact quote against the already verified official SN full text", async () => {
+    const quote =
+      "pełny tekst orzeczenia zawiera tę dokładną wypowiedź";
+
+    const fetcher = vi.fn(
+      async (input: string | URL) => {
+        const url = String(input);
+
+        if (
+          url.includes(
+            "task=searchOrzeczenia"
+          )
+        ) {
+          return json({
+            data: [{
+              data: [{
+                id: "quote-1",
+                sygnatura_sprawy:
+                  "III CZP 25/11",
+                data_wydania:
+                  "2011-10-18"
+              }]
+            }]
+          });
+        }
+
+        const html =
+          "<html><body>Sąd Najwyższy " +
+          "III CZP 25/11 " +
+          quote +
+          "</body></html>";
+
+        return json({
+          data: [{
+            data: {
+              raw: Buffer
+                .from(
+                  html,
+                  "utf8"
+                )
+                .toString(
+                  "base64"
+                )
+            }
+          }]
+        });
+      }
+    );
+
+    const result =
+      await new SupremeCourtCaseVerifier(
+        fetcher,
+        () =>
+          "2026-09-15T22:30:00.000Z"
+      ).verifyExactQuote({
+        caseClaim:
+          "sygn. III CZP 25/11",
+        signature:
+          "III CZP 25/11",
+        quote,
+        toolCallId:
+          "case-quote-1"
+      });
+
+    expect(result.status).toBe(
+      "VERIFIED"
+    );
+    expect(result.evidenceHash)
+      .toMatch(
+        /^[a-f0-9]{20}$/u
+      );
+    expect(result.quoteRecord)
+      .toMatchObject({
+        claim: quote,
+        kind: "case",
+        status: "VERIFIED",
+        caseScope:
+          "EXACT_QUOTE",
+        caseSignature:
+          "III CZP 25/11"
+      });
+  });
+
+  it("does not verify a quote absent from the official judgment text", async () => {
+    const fetcher = vi.fn(
+      async (input: string | URL) => {
+        const url = String(input);
+
+        if (
+          url.includes(
+            "task=searchOrzeczenia"
+          )
+        ) {
+          return json({
+            data: [{
+              data: [{
+                id: "quote-2",
+                sygnatura_sprawy:
+                  "III CZP 25/11"
+              }]
+            }]
+          });
+        }
+
+        return fullText(
+          "III CZP 25/11"
+        );
+      }
+    );
+
+    const result =
+      await new SupremeCourtCaseVerifier(
+        fetcher
+      ).verifyExactQuote({
+        caseClaim:
+          "sygn. III CZP 25/11",
+        signature:
+          "III CZP 25/11",
+        quote:
+          "To zdanie nie występuje w oficjalnym tekście orzeczenia.",
+        toolCallId:
+          "case-quote-2"
+      });
+
+    expect(result).toMatchObject({
+      status:
+        "QUOTE_NOT_FOUND",
+      reason:
+        "EXACT_QUOTE_NOT_FOUND_IN_OFFICIAL_TEXT"
+    });
+    expect(result.quoteRecord)
+      .toBeUndefined();
+  });
+
   it("returns NOT_FOUND when only a near-match is returned", async () => {
     const fetcher = vi.fn(
       async () =>
