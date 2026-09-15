@@ -147,7 +147,8 @@ export class LegalVerificationToolRuntime {
 
   constructor(
     private readonly ledger: VerificationLedger,
-    verifier = new OfficialLegalSourceVerifier(),
+    private readonly verifier =
+      new OfficialLegalSourceVerifier(),
     private readonly resolver =
       new DeterministicLegalActResolver(),
     private readonly freshnessChecker:
@@ -209,7 +210,7 @@ export class LegalVerificationToolRuntime {
           throw new Error("INVALID_VERIFICATION_INPUT");
         }
 
-        const result = await verifier.verify({
+        const result = await this.verifier.verify({
           claim,
           kind: verificationKind,
           url,
@@ -304,12 +305,22 @@ export class LegalVerificationToolRuntime {
             asOf ? { asOf } : {}
           );
 
-        if (
-          freshness.status !== "CURRENT" &&
-          freshness.status !== "HISTORICAL" &&
-          freshness.status !== "CURRENT_TEXT_REQUIRES_PDF" &&
-          freshness.status !== "HISTORICAL_TEXT_REQUIRES_PDF"
-        ) {
+        const directTextStatus =
+          freshness.status === "CURRENT" ||
+          freshness.status === "HISTORICAL";
+        const pdfTextStatus =
+          freshness.status ===
+            "CURRENT_TEXT_REQUIRES_PDF" ||
+          freshness.status ===
+            "HISTORICAL_TEXT_REQUIRES_PDF";
+        const temporalStatusPermitsVerification =
+          directTextStatus ||
+          (
+            pdfTextStatus &&
+            this.verifier.supportsPdf()
+          );
+
+        if (!temporalStatusPermitsVerification) {
           const reason =
             "TEMPORAL_" + freshness.status;
 
@@ -364,7 +375,12 @@ export class LegalVerificationToolRuntime {
           ...(freshness?.mode === "HISTORICAL"
             ? {
                 temporalMode: "HISTORICAL",
-                asOf: freshness.requestedAsOf
+                ...(freshness.requestedAsOf
+                  ? {
+                      asOf:
+                        freshness.requestedAsOf
+                    }
+                  : {})
               }
             : {
                 temporalMode: "CURRENT"
