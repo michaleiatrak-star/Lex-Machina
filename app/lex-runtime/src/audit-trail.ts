@@ -9,6 +9,7 @@ export type AuditEventType =
   | "provider_end"
   | "tool_decision"
   | "verification"
+  | "document_generated"
   | "gate"
   | "session_closed";
 
@@ -49,6 +50,10 @@ export class AuditTrail {
       ...event,
       ...(event.detail ? { detail: { ...event.detail } } : {})
     }));
+  }
+
+  get isClosed(): boolean {
+    return this.closed;
   }
 
   private append(
