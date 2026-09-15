@@ -20,8 +20,8 @@ permissions:
   contents: read
 
 jobs:
-  g1-g3:
-    name: G1-G3 corpus, resolver and router bootstrap
+  g1-g4:
+    name: G1-G4 runtime safety
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -39,7 +39,7 @@ jobs:
       - name: Install runtime dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Unit tests — resolver and router-first safety
+      - name: Unit tests — resolver, router-first and Tool Broker safety
         run: npm test
 
       - name: G1 — corpus integrity
@@ -47,3 +47,6 @@ jobs:
 
       - name: G3 — router-first bootstrap on full corpus
         run: npm run validate:g3
+
+      - name: G4 — Tool Broker safety
+        run: npm run validate:g4
