@@ -31,6 +31,7 @@ export type ToolPolicyOptions = {
   readableRoots?: string[];
   writableRoots?: string[];
   allowNetwork?: boolean;
+  allowedNetworkHosts?: string[];
   allowWrite?: boolean;
   allowCode?: boolean;
   allowMcp?: boolean;
@@ -102,6 +103,7 @@ export class ToolPolicy {
   readonly readableRoots: string[];
   readonly writableRoots: string[];
   readonly allowNetwork: boolean;
+  readonly allowedNetworkHosts: Set<string>;
   readonly allowWrite: boolean;
   readonly allowCode: boolean;
   readonly allowMcp: boolean;
@@ -110,6 +112,11 @@ export class ToolPolicy {
     this.readableRoots = (options.readableRoots ?? []).map((root) => path.resolve(root));
     this.writableRoots = (options.writableRoots ?? []).map((root) => path.resolve(root));
     this.allowNetwork = options.allowNetwork ?? false;
+    this.allowedNetworkHosts = new Set(
+      (options.allowedNetworkHosts ?? []).map((host) =>
+        host.toLowerCase()
+      )
+    );
     this.allowWrite = options.allowWrite ?? false;
     this.allowCode = options.allowCode ?? false;
     this.allowMcp = options.allowMcp ?? false;
@@ -177,6 +184,16 @@ export class ToolPolicy {
             "Local/private network targets are blocked.",
             definition.name,
             "PRIVATE_NETWORK_DENIED"
+          );
+        }
+        if (
+          this.allowedNetworkHosts.size > 0 &&
+          !this.allowedNetworkHosts.has(url.hostname.toLowerCase())
+        ) {
+          throw new ToolPolicyError(
+            "Network target is outside the configured host allowlist.",
+            definition.name,
+            "NETWORK_HOST_DENIED"
           );
         }
         return;
