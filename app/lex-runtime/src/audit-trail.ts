@@ -38,7 +38,7 @@ export class AuditTrail {
   private closed = false;
 
   constructor(
-    sessionId = randomUUID(),
+    sessionId: string = randomUUID(),
     private readonly now: () => string = () => new Date().toISOString()
   ) {
     this.sessionId = sessionId;
@@ -51,11 +51,27 @@ export class AuditTrail {
     }));
   }
 
+  private append(
+    type: AuditEventType,
+    target: string,
+    status: AuditStatus,
+    detail?: Record<string, unknown>
+  ): void {
+    this.records.push({
+      sequence: this.records.length + 1,
+      timestamp: this.now(),
+      type,
+      target,
+      status,
+      ...(detail ? { detail: { ...detail } } : {})
+    });
+  }
+
   start(detail?: Record<string, unknown>): void {
     if (this.records.length > 0) {
       throw new Error("Audit session has already started.");
     }
-    this.record("session_started", this.sessionId, "OK", detail);
+    this.append("session_started", this.sessionId, "OK", detail);
   }
 
   record(
@@ -67,17 +83,10 @@ export class AuditTrail {
     if (this.closed) {
       throw new Error("Audit trail is closed and append-only.");
     }
-    if (this.records.length === 0 && type !== "gate") {
+    if (this.records.length === 0) {
       throw new Error("Audit session must be started before recording events.");
     }
-    this.records.push({
-      sequence: this.records.length + 1,
-      timestamp: this.now(),
-      type,
-      target,
-      status,
-      ...(detail ? { detail: { ...detail } } : {})
-    });
+    this.append(type, target, status, detail);
   }
 
   close(
@@ -90,14 +99,7 @@ export class AuditTrail {
     if (this.records.length === 0) {
       throw new Error("Cannot close an audit session that never started.");
     }
-    this.records.push({
-      sequence: this.records.length + 1,
-      timestamp: this.now(),
-      type: "session_closed",
-      target: this.sessionId,
-      status,
-      ...(detail ? { detail: { ...detail } } : {})
-    });
+    this.append("session_closed", this.sessionId, status, detail);
     this.closed = true;
   }
 
