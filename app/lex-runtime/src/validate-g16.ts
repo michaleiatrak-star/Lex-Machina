@@ -28,6 +28,7 @@ const lexRoot = path.resolve(
 const DR02 = "dr-02-prawo-cywilne-rodzinne-gospodarcze";
 const SOURCE_URL =
   "https://eli.gov.pl/acts/DU/1964/93/text.html";
+const EXPECTED_TITLE = "Kodeks cywilny";
 
 type ToolMode =
   | "verified"
@@ -70,7 +71,8 @@ class VerificationProvider implements ProviderAdapter {
         input: {
           claim: "art. 5 KC",
           kind: "statute",
-          url: SOURCE_URL
+          url: SOURCE_URL,
+          expectedTitle: EXPECTED_TITLE
         }
       }]);
 
@@ -102,8 +104,8 @@ function executor(
     async () =>
       new Response(
         mode === "verified"
-          ? "<html><body><h2>Art. 5.</h2><p>Treść przepisu ze źródła urzędowego.</p></body></html>"
-          : "<html><body><h2>Art. 6.</h2><p>Inny przepis.</p></body></html>",
+          ? "<html><body><h1>Kodeks cywilny</h1><h2>Art. 5.</h2><p>Treść przepisu ze źródła urzędowego.</p></body></html>"
+          : "<html><body><h1>Kodeks cywilny</h1><h2>Art. 6.</h2><p>Inny przepis.</p></body></html>",
         {
           status: 200,
           headers: {
