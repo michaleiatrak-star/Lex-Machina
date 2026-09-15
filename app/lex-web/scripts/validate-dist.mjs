@@ -34,7 +34,11 @@ const required = [
   "DRAFT_PRESENTABLE",
   "BLOCKED",
   "Uruchom analizę",
-  "weryfikacje:"
+  "Evidence bundle",
+  "VERIFIED",
+  "SUPPORTED",
+  "Stan prawny",
+  "Otwórz urzędowe źródło"
 ];
 
 const exposed = forbidden.filter((token) => content.includes(token));
@@ -42,14 +46,17 @@ const missing = required.filter((token) => !content.includes(token));
 const pass = exposed.length === 0 && missing.length === 0;
 
 process.stdout.write(JSON.stringify({
-  gate: "G14_G16_LOCAL_WEB_UI",
+  gate: "G14_G25_LOCAL_WEB_UI",
   result: pass ? "PASS" : "BLOCKED",
   bundleFiles: files.length,
   forbiddenTokensFound: exposed,
   requiredExecutionMarkersMissing: missing,
   localApiReferencePresent: content.includes("127.0.0.1:4317"),
   sessionExecutionEndpointPresent: content.includes("/api/sessions/execute"),
-  verificationStatusPresent: content.includes("weryfikacje:")
+  evidenceBundlePresent: content.includes("Evidence bundle"),
+  verifiedStatusPresent: content.includes("VERIFIED"),
+  supportedStatusPresent: content.includes("SUPPORTED"),
+  historicalStatePresent: content.includes("Stan prawny")
 }, null, 2) + "\n");
 
 if (!pass) process.exitCode = 1;
