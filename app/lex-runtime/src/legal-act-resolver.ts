@@ -69,7 +69,7 @@ function normalizeAlias(value: string): string {
     .normalize("NFKC")
     .toLocaleLowerCase("pl")
     .replace(/[._-]+/g, "")
-    .replace(/s+/g, " ")
+    .replace(/\s+/g, " ")
     .trim();
 }
 
