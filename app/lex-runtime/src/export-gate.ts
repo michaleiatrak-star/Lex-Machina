@@ -18,6 +18,7 @@ export type NeutralVerificationEvent = {
   source_tier?: VerificationRecord["sourceTier"];
   temporal_mode?: VerificationRecord["temporalMode"];
   as_of?: string;
+  source_format?: VerificationRecord["sourceFormat"];
   fetched_at: string;
   tool_call_id?: string;
 };
@@ -61,6 +62,9 @@ export function buildNeutralVerificationLog(
       ...(record.sourceTier ? { source_tier: record.sourceTier } : {}),
       ...(record.temporalMode ? { temporal_mode: record.temporalMode } : {}),
       ...(record.asOf ? { as_of: record.asOf } : {}),
+      ...(record.sourceFormat
+        ? { source_format: record.sourceFormat }
+        : {}),
       fetched_at: record.fetchedAt,
       ...(record.toolCallId ? { tool_call_id: record.toolCallId } : {})
     }))
