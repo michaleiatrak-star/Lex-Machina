@@ -1,5 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 import {
+  PdfTextExtractionError,
+  type PdfTextExtractor
+} from "../src/pdf-text-extractor.js";
+import {
   LegalSourceVerificationError,
   OfficialLegalSourceVerifier
 } from "../src/legal-source-verifier.js";
@@ -128,12 +132,101 @@ describe("OfficialLegalSourceVerifier", () => {
     } satisfies Partial<LegalSourceVerificationError>);
   });
 
-  it("does not verify binary-only source content", async () => {
+  it("verifies an official PDF only after local text extraction", async () => {
+    const extractor: PdfTextExtractor = {
+      async extract(data) {
+        expect(data.byteLength).toBeGreaterThan(0);
+        return {
+          text:
+            "Kodeks cywilny\nArt. 5. Treść przepisu.",
+          pages: 2,
+          bytes: data.byteLength
+        };
+      }
+    };
+
+    const verifier = new OfficialLegalSourceVerifier(
+      async () =>
+        new Response(
+          new Uint8Array([37, 80, 68, 70]),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/pdf"
+            }
+          }
+        ),
+      () => "2026-09-15T18:00:00.000Z",
+      extractor
+    );
+
+    const result = await verifier.verify({
+      claim: "art. 5 KC",
+      kind: "statute",
+      url:
+        "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.pdf",
+      expectedTitle: "Kodeks cywilny",
+      toolCallId: "tool-pdf-1"
+    });
+
+    expect(result.matched).toBe(true);
+    expect(result.record).toMatchObject({
+      status: "VERIFIED",
+      verificationMethod: "web_fetch_pdf",
+      sourceFormat: "PDF",
+      sourceUrl:
+        "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.pdf"
+    });
+  });
+
+  it("fails closed when official PDF text extraction fails", async () => {
+    const extractor: PdfTextExtractor = {
+      async extract() {
+        throw new PdfTextExtractionError(
+          "No text.",
+          "PDF_NO_TEXT"
+        );
+      }
+    };
+
+    const verifier = new OfficialLegalSourceVerifier(
+      async () =>
+        new Response(
+          new Uint8Array([37, 80, 68, 70]),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/pdf"
+            }
+          }
+        ),
+      () => "2026-09-15T18:00:00.000Z",
+      extractor
+    );
+
+    await expect(
+      verifier.verify({
+        claim: "art. 5 KC",
+        kind: "statute",
+        url:
+          "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.pdf",
+        expectedTitle: "Kodeks cywilny",
+        toolCallId: "tool-pdf-2"
+      })
+    ).rejects.toMatchObject({
+      code: "PDF_EXTRACTION_FAILED"
+    } satisfies Partial<LegalSourceVerificationError>);
+  });
+
+  it("still rejects unsupported non-text non-PDF content", async () => {
     const verifier = new OfficialLegalSourceVerifier(
       async () =>
         new Response("binary", {
           status: 200,
-          headers: { "content-type": "application/pdf" }
+          headers: {
+            "content-type":
+              "application/octet-stream"
+          }
         })
     );
 
@@ -141,9 +234,10 @@ describe("OfficialLegalSourceVerifier", () => {
       verifier.verify({
         claim: "art. 5 KC",
         kind: "statute",
-        url: "https://api.sejm.gov.pl/eli/acts/DU/1964/93/text.pdf",
+        url:
+          "https://api.sejm.gov.pl/eli/acts/DU/1964/93/content.bin",
         expectedTitle: "Kodeks cywilny",
-        toolCallId: "tool-5"
+        toolCallId: "tool-binary"
       })
     ).rejects.toMatchObject({
       code: "UNSUPPORTED_SOURCE_CONTENT"
