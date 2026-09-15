@@ -1,0 +1,6 @@
+# Local OCR runtime for Lex Machina.
+# PaddleOCR 3.7 defaults to PP-OCRv6_medium; Polish is selected with lang=pl.
+paddleocr>=3.7,<4
+paddlepaddle>=3.2,<4
+pymupdf>=1.26,<2
+numpy>=1.26,<3
