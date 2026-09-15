@@ -47,7 +47,7 @@ export function parseSkillFile(filePath: string): {
 } {
   const raw = fs.readFileSync(filePath, "utf8");
   const match = raw.match(FRONTMATTER);
-  if (!match) {
+  if (!match || match[1] === undefined) {
     throw new Error(`Missing YAML frontmatter: ${filePath}`);
   }
   const parsed = YAML.parse(match[1]) as SkillFrontmatter | null;
@@ -177,7 +177,8 @@ export class LexSkillRegistry {
         candidate = path.join(skill.directory, normalized);
       }
     } else {
-      const first = normalized.split("/", 1)[0];
+      const first = normalized.split("/", 1).at(0);
+      if (!first) return null;
       if (this.skills.has(first)) {
         candidate = path.join(this.root, normalized);
       } else {
@@ -209,7 +210,7 @@ export class LexSkillRegistry {
 
       const resources = skill.frontmatter.required_modules ?? [];
       for (const resource of resources) {
-        const semantic = String(resource).split("#", 1)[0].trim();
+        const semantic = String(resource).split("#", 1).at(0)?.trim() ?? "";
         if (!semantic) continue;
         try {
           if (!this.resolveResource(skill.name, semantic)) {
