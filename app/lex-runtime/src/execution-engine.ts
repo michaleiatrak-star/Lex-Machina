@@ -77,6 +77,7 @@ export class LexExecutionEngine {
     model: string;
     route: RouteDecision;
     tools?: NormalizedToolSchema[];
+    toolSystemPromptAppendix?: string;
     runTools?: (
       calls: NormalizedToolCall[]
     ) => Promise<NormalizedToolResult[]>;
@@ -217,16 +218,13 @@ export class LexExecutionEngine {
       ]
     );
 
-    const systemPrompt = args.tools?.length
-      ? [
-          baseSystemPrompt,
-          "# RUNTIME VERIFICATION CONTRACT",
-          "Before stating an article, Dz.U. reference, statutory deadline/amount, or case signature, call verify_legal_reference with the exact claim and a fresh official HTTPS source URL.",
-          "A VERIFIED tool result returns a marker. Copy that marker verbatim onto the same output line as the exact verified reference.",
-          "If verification returns UNVERIFIED or DENIED, do not present the reference as verified. Use the required unverified marker when mentioning it is necessary.",
-          "Never fabricate a verification marker."
-        ].join("\n\n")
-      : baseSystemPrompt;
+    const systemPrompt =
+      args.tools?.length && args.toolSystemPromptAppendix
+        ? [
+            baseSystemPrompt,
+            args.toolSystemPromptAppendix
+          ].join("\n\n")
+        : baseSystemPrompt;
 
     emit(
       "provider_start",
