@@ -29,7 +29,7 @@ implements OcrEngine {
   private readonly python: string;
   private readonly workerPath: string;
   private readonly dpi: number;
-  private readonly device?: string;
+  private readonly device: string | undefined;
   private readonly timeoutMs: number;
 
   constructor(options: LocalPaddleOcrOptions = {}) {
