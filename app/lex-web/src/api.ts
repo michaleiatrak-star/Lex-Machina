@@ -36,6 +36,15 @@ export type ModelsResponse = {
   models: ModelDescriptor[];
 };
 
+export type ProviderConfigurationStatus = {
+  provider: ProviderId;
+  configured: boolean;
+};
+
+export type ProviderStatusResponse = {
+  providers: ProviderConfigurationStatus[];
+};
+
 export type BlockedReference = {
   claim: string;
   kind: "statute" | "journal" | "case";
@@ -134,6 +143,10 @@ export function getHealth(): Promise<HealthResponse> {
 
 export function getRoutes(): Promise<RouteListResponse> {
   return json<RouteListResponse>("/api/routes");
+}
+
+export function getProviderStatus(): Promise<ProviderStatusResponse> {
+  return json<ProviderStatusResponse>("/api/providers");
 }
 
 export function validateRoute(
