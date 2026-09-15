@@ -352,3 +352,50 @@ Current behavior:
 Next gate:
 
 - **G16 Legal Source Verification:** expose provider-neutral verification tools through Tool Broker/MCP/direct official-source adapters and populate the VerificationLedger so verified legal references can pass G8.
+
+### 2026-09-15 — Build 0013
+
+Status: **PASS — G16 VERIFIED LEGAL SOURCE TOOL LOOP**
+
+Implemented:
+
+- provider-neutral `verify_legal_reference` tool;
+- ToolBroker host allowlist for official legal-source network calls;
+- credential-free HTTPS-only verification;
+- fail-closed redirect and unsupported-content handling;
+- expected-act-title validation to prevent verifying the correct article number against the wrong act;
+- article/Dz.U. matching against freshly fetched official text;
+- VERIFIED/UNVERIFIED records written into `VerificationLedger`;
+- verification tool decisions included in G9 audit completeness;
+- verified marker supplied by the tool and required by G8 on the same citation line;
+- fabricated verification markers without a ledger record remain blocked;
+- official-source fetch without the requested reference yields UNVERIFIED and is not presented as verified;
+- public API/UI exposes verification counts without exposing source bodies;
+- browser production bundle gate includes G16 verification-status output.
+
+Validation evidence:
+
+- strict TypeScript: PASS;
+- runtime/app unit tests: PASS;
+- ToolBroker network allowlist tests: PASS;
+- official-source verifier tests: PASS;
+- G1-G16 runtime validation: PASS;
+- G14-G16 local web UI: PASS;
+- GitHub Actions run: `35003728431`, conclusion: `success`;
+- F-138 structural audit: `35003728434`, conclusion: `success`;
+- Validated head SHA: `4e7b824aac965f8a1bae83b9c75e35fe5e814f05`.
+
+G16 acceptance paths:
+
+- matching official source + expected act title + article → VERIFIED → G8 PASS → answer released;
+- fake `✅ [VER: ...]` marker without tool/ledger evidence → G8 BLOCKED → answer withheld;
+- official source with correct act title but missing requested article → UNVERIFIED → finalization DEGRADED → public session remains BLOCKED.
+
+Live-source status:
+
+- G16 CI uses a deterministic fetcher and does not claim a real external ELI/Sejm request;
+- credentialled OpenAI/Anthropic/xAI calls remain a separate live gate.
+
+Next gate:
+
+- **G17 Live Official Source Probe:** exercise `OfficialLegalSourceVerifier` against a stable real ELI/Sejm endpoint without model-provider credentials, with fail-closed behavior if transport or official-source formatting changes.
