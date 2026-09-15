@@ -306,7 +306,9 @@ export class LegalVerificationToolRuntime {
 
         if (
           freshness.status !== "CURRENT" &&
-          freshness.status !== "HISTORICAL"
+          freshness.status !== "HISTORICAL" &&
+          freshness.status !== "CURRENT_TEXT_REQUIRES_PDF" &&
+          freshness.status !== "HISTORICAL_TEXT_REQUIRES_PDF"
         ) {
           const reason =
             "TEMPORAL_" + freshness.status;
@@ -359,7 +361,7 @@ export class LegalVerificationToolRuntime {
           ...(freshness
             ? { freshness }
             : {}),
-          ...(freshness?.status === "HISTORICAL"
+          ...(freshness?.mode === "HISTORICAL"
             ? {
                 temporalMode: "HISTORICAL",
                 asOf: freshness.requestedAsOf
