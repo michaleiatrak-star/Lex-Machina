@@ -8,7 +8,10 @@ describe("provider conformance", () => {
   for (const id of ["openai", "anthropic", "xai"] as const) {
     it(`${id} satisfies the normalized provider contract`, async () => {
       const report = await runProviderConformance(
-        new ScriptedProviderAdapter({ id })
+        new ScriptedProviderAdapter({
+          id,
+          autoToolCall: true
+        })
       );
       expect(report.pass, JSON.stringify(report, null, 2)).toBe(true);
     });
