@@ -3,6 +3,7 @@ import {
   useMemo,
   useState
 } from "react";
+import { DocumentPrivacyPanel } from "./DocumentPrivacyPanel.js";
 import {
   executeSession,
   getHealth,
@@ -364,6 +365,8 @@ export default function App() {
             Backend lokalny jest niedostępny: {runtimeError}
           </div>
         )}
+
+        <DocumentPrivacyPanel />
 
         <section className="config-grid">
           <article className="config-card">
