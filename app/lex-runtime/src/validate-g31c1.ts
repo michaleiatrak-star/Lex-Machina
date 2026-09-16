@@ -141,6 +141,60 @@ try {
 
   const validCopy =
     await readFile(vaultPath);
+  const metaPath =
+    path.join(
+      root,
+      "cases",
+      caseId,
+      "private",
+      "privacy",
+      "vault-meta.json"
+    );
+  const validMeta =
+    await readFile(
+      metaPath,
+      "utf8"
+    );
+  const staleMeta =
+    JSON.parse(
+      validMeta
+    ) as Record<
+      string,
+      unknown
+    >;
+  staleMeta.generation =
+    Number(
+      staleMeta.generation
+    ) + 1;
+  await writeFile(
+    metaPath,
+    JSON.stringify(
+      staleMeta,
+      null,
+      2
+    )
+  );
+
+  let staleGenerationBlocked =
+    false;
+  try {
+    await restarted
+      .loadDocumentVault({
+        caseId,
+        documentId,
+        caseDataKey:
+          nextKey,
+        keyVersion: 2
+      });
+  } catch {
+    staleGenerationBlocked =
+      true;
+  }
+  await writeFile(
+    metaPath,
+    validMeta
+  );
+
   const corrupt =
     Buffer.from(validCopy);
   corrupt[
@@ -171,7 +225,8 @@ try {
     restartRoundTrip &&
     wrongKeyBlocked &&
     rekeyRoundTrip &&
-    corruptionBlocked;
+    corruptionBlocked &&
+    staleGenerationBlocked;
 
   process.stdout.write(
     JSON.stringify({
@@ -186,6 +241,7 @@ try {
       restartRoundTrip,
       wrongKeyBlocked,
       corruptionBlocked,
+      staleGenerationBlocked,
       caseKeyRotationCompatible:
         rekeyRoundTrip,
       providerBoundaryChanged:
