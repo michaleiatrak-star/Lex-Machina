@@ -195,12 +195,10 @@ describe("local API client", () => {
           previousWindow
         );
       } else {
-        delete (
-          globalThis as
-            typeof globalThis & {
-              window?: unknown;
-            }
-        ).window;
+        Reflect.deleteProperty(
+          globalThis,
+          "window"
+        );
       }
     }
   });
