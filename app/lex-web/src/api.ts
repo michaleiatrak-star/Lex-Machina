@@ -1,5 +1,86 @@
 export type ProviderId = "openai" | "anthropic" | "xai";
 
+export type PiiKind =
+  | "PESEL"
+  | "NIP"
+  | "REGON"
+  | "IBAN"
+  | "EMAIL"
+  | "PHONE"
+  | "PERSON"
+  | "ADDRESS"
+  | "CUSTOM";
+
+export type PrivacyAction =
+  | "PSEUDONYMIZE"
+  | "KEEP"
+  | "LABEL";
+
+export type PagePrivacyDirective = {
+  page: number;
+  start: number;
+  end: number;
+  action: PrivacyAction;
+  kind?: PiiKind;
+  label?: string;
+};
+
+export type DocumentReviewResponse = {
+  documentId: string;
+  mediaType:
+    | "application/pdf"
+    | "image/jpeg"
+    | "image/png"
+    | "image/webp"
+    | "image/tiff";
+  complete: true;
+  totalPages: number;
+  pages: Array<{
+    page: number;
+    text: string;
+    source: "DIGITAL" | "OCR" | "BLANK";
+    confidence?: number;
+    engine?: string;
+  }>;
+  suggestions: Array<{
+    page: number;
+    start: number;
+    end: number;
+    kind: PiiKind;
+  }>;
+};
+
+export type DocumentIngestionResponse = {
+  documentId: string;
+  mediaType: DocumentReviewResponse["mediaType"];
+  complete: true;
+  totalPages: number;
+  digitalPages: number;
+  ocrPages: number;
+  blankPages: number;
+  sourceChars: number;
+  pseudonymizedChars: number;
+  chunks: Array<{
+    index: number;
+    pageStart: number;
+    pageEnd: number;
+    text: string;
+  }>;
+  privacy: {
+    findings: number;
+    counts: Partial<Record<PiiKind, number>>;
+    manualPseudonymizations: number;
+    keptRanges: number;
+    annotations: Array<{
+      page: number;
+      start: number;
+      end: number;
+      label: string;
+    }>;
+    reversibleLocally: true;
+  };
+};
+
 export type HealthResponse = {
   status: "ok";
   service: string;
@@ -178,4 +259,46 @@ export function executeSession(input: {
       mode: input.mode ?? "PRAWNIK"
     })
   });
+}
+
+export async function reviewDocument(
+  file: File
+): Promise<DocumentReviewResponse> {
+  const response = await fetch(
+    `${apiBase()}/api/documents/review`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": file.type
+      },
+      body: file
+    }
+  );
+  const payload =
+    await response.json() as
+      | DocumentReviewResponse
+      | ApiFailure;
+  if (!response.ok) {
+    throw new Error(
+      (payload as ApiFailure).error ||
+      `HTTP_${response.status}`
+    );
+  }
+  return payload as DocumentReviewResponse;
+}
+
+export function finalizeDocument(
+  documentId: string,
+  directives: PagePrivacyDirective[]
+): Promise<DocumentIngestionResponse> {
+  return json<DocumentIngestionResponse>(
+    `/api/documents/${documentId}/finalize`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        directives
+      })
+    }
+  );
 }
