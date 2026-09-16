@@ -676,11 +676,13 @@ export class EncryptedPrivacyVaultStore {
           release = resolve;
         }
       );
-    this.queues.set(
-      caseId,
+    const chain =
       previous.then(
         () => current
-      )
+      );
+    this.queues.set(
+      caseId,
+      chain
     );
 
     await previous;
@@ -691,7 +693,7 @@ export class EncryptedPrivacyVaultStore {
       if (
         this.queues.get(
           caseId
-        ) === current
+        ) === chain
       ) {
         this.queues.delete(
           caseId
