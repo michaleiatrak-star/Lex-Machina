@@ -1224,78 +1224,193 @@ export class SecureCaseUploadStore {
             uploadId
           );
 
-        await rekeyCaseBlob({
-          targetFile:
-            path.join(
-              dir,
-              "payload.lme"
-            ),
-          oldIdentity:
-            payloadIdentity(
-              args.caseId,
-              uploadId,
-              fromVersion
-            ),
-          newIdentity:
-            payloadIdentity(
-              args.caseId,
-              uploadId,
-              toVersion
-            ),
-          oldCaseDataKey:
-            fromKey,
-          newCaseDataKey:
-            toKey
-        });
+        const descriptors:
+          Array<{
+            targetFile:
+              string;
+            fromIdentity:
+              CaseBlobIdentity;
+            toIdentity:
+              CaseBlobIdentity;
+          }> = [
+            {
+              targetFile:
+                path.join(
+                  dir,
+                  "payload.lme"
+                ),
+              fromIdentity:
+                payloadIdentity(
+                  args.caseId,
+                  uploadId,
+                  fromVersion
+                ),
+              toIdentity:
+                payloadIdentity(
+                  args.caseId,
+                  uploadId,
+                  toVersion
+                )
+            },
+            {
+              targetFile:
+                path.join(
+                  dir,
+                  "manifest.lme"
+                ),
+              fromIdentity:
+                manifestIdentity(
+                  args.caseId,
+                  uploadId,
+                  fromVersion
+                ),
+              toIdentity:
+                manifestIdentity(
+                  args.caseId,
+                  uploadId,
+                  toVersion
+                )
+            }
+          ];
 
+        const extractedRoot =
+          path.join(
+            dir,
+            "extracted"
+          );
         try {
-          await rekeyCaseBlob({
-            targetFile:
-              path.join(
-                dir,
-                "manifest.lme"
-              ),
-            oldIdentity:
-              manifestIdentity(
-                args.caseId,
-                uploadId,
-                fromVersion
-              ),
-            newIdentity:
-              manifestIdentity(
-                args.caseId,
-                uploadId,
-                toVersion
-              ),
-            oldCaseDataKey:
-              fromKey,
-            newCaseDataKey:
-              toKey
-          });
+          const extractedEntries =
+            await readdir(
+              extractedRoot,
+              {
+                withFileTypes:
+                  true
+              }
+            );
+          for (
+            const entry
+            of extractedEntries
+          ) {
+            if (
+              !entry
+                .isDirectory() ||
+              !validFileId(
+                entry.name
+              )
+            ) {
+              continue;
+            }
+            descriptors.push(
+              {
+                targetFile:
+                  path.join(
+                    extractedRoot,
+                    entry.name,
+                    "payload.lme"
+                  ),
+                fromIdentity:
+                  extractedPayloadIdentity(
+                    args.caseId,
+                    entry.name,
+                    fromVersion
+                  ),
+                toIdentity:
+                  extractedPayloadIdentity(
+                    args.caseId,
+                    entry.name,
+                    toVersion
+                  )
+              },
+              {
+                targetFile:
+                  path.join(
+                    extractedRoot,
+                    entry.name,
+                    "manifest.lme"
+                  ),
+                fromIdentity:
+                  extractedManifestIdentity(
+                    args.caseId,
+                    entry.name,
+                    fromVersion
+                  ),
+                toIdentity:
+                  extractedManifestIdentity(
+                    args.caseId,
+                    entry.name,
+                    toVersion
+                  )
+              }
+            );
+          }
         } catch (error) {
-          await rekeyCaseBlob({
-            targetFile:
-              path.join(
-                dir,
-                "payload.lme"
-              ),
-            oldIdentity:
-              payloadIdentity(
-                args.caseId,
-                uploadId,
-                toVersion
-              ),
-            newIdentity:
-              payloadIdentity(
-                args.caseId,
-                uploadId,
-                fromVersion
-              ),
-            oldCaseDataKey:
-              toKey,
-            newCaseDataKey:
-              fromKey
-          });
+          if (
+            !(
+              error instanceof
+                Error &&
+              "code" in error &&
+              error.code ===
+                "ENOENT"
+            )
+          ) {
+            throw error;
+          }
+        }
+
+        const changed:
+          typeof descriptors = [];
+        try {
+          for (
+            const descriptor
+            of descriptors
+          ) {
+            await rekeyCaseBlob({
+              targetFile:
+                descriptor
+                  .targetFile,
+              oldIdentity:
+                descriptor
+                  .fromIdentity,
+              newIdentity:
+                descriptor
+                  .toIdentity,
+              oldCaseDataKey:
+                fromKey,
+              newCaseDataKey:
+                toKey
+            });
+            changed.push(
+              descriptor
+            );
+          }
+        } catch (error) {
+          try {
+            for (
+              const descriptor
+              of [...changed]
+                .reverse()
+            ) {
+              await rekeyCaseBlob({
+                targetFile:
+                  descriptor
+                    .targetFile,
+                oldIdentity:
+                  descriptor
+                    .toIdentity,
+                newIdentity:
+                  descriptor
+                    .fromIdentity,
+                oldCaseDataKey:
+                  toKey,
+                newCaseDataKey:
+                  fromKey
+              });
+            }
+          } catch {
+            throw new Error(
+              "SECURE_UPLOAD_REKEY_ROLLBACK_FAILED"
+            );
+          }
           throw error;
         }
       };
