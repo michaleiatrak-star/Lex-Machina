@@ -43,10 +43,12 @@ The application MUST NOT duplicate or silently rewrite legal skill instructions.
 - **G32 — Protected Document Attachment Session:** the user explicitly selects finalized protected chunks; only those chunks can enter provider context, while raw pages and the re-identification vault remain local.
 - **G34A — Local Account Bootstrap:** zero-user first ADMIN, Argon2id password-derived UMK envelope and persistent local auth metadata.
 - **G34B — Login / Session Boundary:** authenticated private API, persistent failed-attempt backoff, idle/overall expiry, lock/logout and in-memory browser session handling.
+- **G34C — Case ACL:** explicit case ownership, OWNER/EDITOR/ANALYST/VIEWER roles, separate canReidentify capability and ACL enforcement on case/document operations.
+- **G34D — Case Key Envelopes:** independent 256-bit CDK per case, UMK/X25519 per-user envelopes and revoke-with-rotation path.
 
 ## Current scope
 
-G0-G29 plus G27A/G28A, G31A/G31B, G32 and **G34A/G34B** are implemented on `feature/local-runtime`. G31A/G31B provide the storage/archive foundation: after authentication the current workbench creates a local case, PDF/image uploads are persisted under that case before OCR, and ZIP archives are safely extracted into the case directory. G34A/G34B add the first local ADMIN bootstrap, Argon2id-encrypted UMK envelope, authenticated private API, persistent login backoff and expiring in-memory sessions. Heavy OCR/NER model weights are intentionally installed locally rather than downloaded in every CI run; CI verifies adapters, worker syntax, completeness contracts and fail-closed behavior.
+G0-G29 plus G27A/G28A, G31A/G31B, G32 and **G34A-G34D** are implemented on `feature/local-runtime`. G31A/G31B provide the storage/archive foundation. G34A/G34B add local identity/login/session controls. G34C/G34D add explicit case ownership, ACL-filtered case access, independent per-case CDKs, per-user envelopes and revoke-with-key-rotation. The workbench now lists ACL-visible cases and requires explicit selection/creation rather than creating a case on every mount. Heavy OCR/NER model weights are intentionally installed locally rather than downloaded in every CI run; CI verifies adapters, worker syntax, completeness contracts and fail-closed behavior.
 
 Full G31 is **not** claimed PASS: G31C now includes an encrypted file-backed reversible privacy vault plus typed authoring AST/token aliases; G31D deterministic DOCX/deanonymization/download and G31E deterministic ODT/deanonymization/download remain open. G30 open-web discovery also remains open.
 
@@ -55,7 +57,7 @@ Full G31 is **not** claimed PASS: G31C now includes an encrypted file-backed rev
 
 ## Security architecture before installer
 
-**G34A/G34B are implemented and validated; G34C-G34H remain open.**
+**G34A-G34D are implemented and validated; G34E-G34H remain open.**
 
 Implemented now:
 - zero-user first ADMIN bootstrap;
@@ -65,15 +67,18 @@ Implemented now:
 - 15-minute idle / 8-hour overall session enforcement;
 - lock/logout/authEpoch revocation;
 - private API authentication;
-- React authentication shell with bearer held only in memory.
+- React authentication shell with bearer held only in memory;
+- ADMIN-created local USER identities;
+- explicit case ownership and ACL roles;
+- independent 256-bit Case Data Keys;
+- UMK-derived owner envelopes;
+- X25519 offline per-user case grants;
+- separate canReidentify capability;
+- revoke path with CDK rotation;
+- explicit legacy-case import;
+- ACL-filtered case list/open UI.
 
 Remaining G34 design includes:
-- local ADMIN/USER accounts;
-- Argon2id password-derived account unlocking;
-- random per-user master keys;
-- independent per-case data keys;
-- per-user case-key envelopes and case ACLs;
-- explicit re-identification permission;
 - encrypted persistent privacy vault;
 - idle lock / step-up reauthentication;
 - recovery-code flow without security questions;
@@ -93,7 +98,7 @@ The consolidated implementation order from the current validated baseline throug
 
 - `app/reports/MASTER-ROADMAP-SECURE-DESKTOP-RELEASE.md`
 
-**Batch A / G34A-G34B is complete and validated.** The next implementation batch is **Batch B / G34C-G34D**: case ownership/ACL, independent case data keys, per-user key envelopes and authenticated case list/open access.
+**Batch A / G34A-G34B and Batch B / G34C-G34D are complete and validated.** The next dependency is **G31C1**: the encrypted persistent privacy vault, followed by G34E/G34F recovery and transaction-bound reauthorization.
 
 G30 remains a parallel capability and does not block the secure local-document/installer critical path unless explicitly included in the first desktop release scope.
 
@@ -108,3 +113,17 @@ G30 remains a parallel capability and does not block the secure local-document/i
 - G17/G19/G20/G22 live probes: PASS.
 
 See `app/reports/BUILD-0030-G34AB.md`.
+
+
+### Build 0031 validation
+
+- validated code SHA: `a41fd86dd550dc41c93705edc423516d05199d8c`;
+- Lex Runtime Validation `35072926001`: success;
+- F-138 `35072925987`: success;
+- G34C/G34D deterministic validation: PASS;
+- web tests/build/bundle safety: PASS;
+- G17/G19/G20/G22 live probes: PASS.
+
+See `app/reports/BUILD-0031-G34CD.md`.
+
+Important: G34H remains open. Current original uploads and extracted ZIP members are still plaintext local files even though case ownership and CDK envelopes now exist.
