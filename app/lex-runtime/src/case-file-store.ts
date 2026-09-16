@@ -48,6 +48,12 @@ export type StoredUpload = {
   storedAt: string;
   archive: boolean;
   extracted: StoredArchiveEntry[];
+  storage?:
+    | "LEGACY_PLAINTEXT"
+    | "ENCRYPTED_LME1";
+  archiveExtractionStatus?:
+    | "COMPLETE"
+    | "DEFERRED_G34H2";
 };
 
 function defaultRootDir(): string {
