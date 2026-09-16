@@ -159,6 +159,86 @@ describe("SafeSessionExecutor", () => {
       .not.toContain("[PII:PERSON:0001]");
   });
 
+  it("injects real core legal resources and exposes corpus read tools", async () => {
+    let captured:
+      ProviderStreamParams | undefined;
+
+    const adapter: ProviderAdapter = {
+      id: "openai",
+      label: "capture-g36",
+      capabilities: {
+        streaming: true,
+        tools: true,
+        reasoning: true,
+        modelDiscovery: false
+      },
+      async stream(params) {
+        captured = params;
+        return {
+          fullText:
+            "Odpowiedź bez cytatów."
+        };
+      }
+    };
+
+    const providers =
+      new ProviderRegistry();
+    providers.register(
+      adapter
+    );
+
+    const executor =
+      new SafeSessionExecutor(
+        fixture(),
+        new ProviderGateway(
+          providers
+        )
+      );
+
+    const result =
+      await executor.execute({
+        query:
+          "Test dostępu do korpusu.",
+        provider: "openai",
+        model: "test",
+        primarySkill: DR,
+        mode: "PRAWNIK"
+      });
+
+    expect(result.status)
+      .toBe(
+        "DRAFT_PRESENTABLE"
+      );
+    expect(
+      captured?.systemPrompt
+    ).toContain(
+      "# CORE LEGAL RESOURCE: shared/PRAWO-HARDGATE.md"
+    );
+    expect(
+      captured?.systemPrompt
+    ).toContain("# hard gate");
+    expect(
+      captured?.systemPrompt
+    ).toContain(
+      "LOCAL LEGAL CORPUS ACCESS"
+    );
+
+    const toolNames =
+      captured?.tools?.map(
+        (tool) =>
+          tool.function.name
+      ) ?? [];
+    expect(toolNames).toContain(
+      "list_legal_skills"
+    );
+    expect(toolNames).toContain(
+      "list_legal_resources"
+    );
+    expect(toolNames).toContain(
+      "read_legal_resource"
+    );
+  });
+
   it("withholds provider output when a legal reference lacks verification", async () => {
     const unsafe: ProviderAdapter = {
       id: "anthropic",
