@@ -199,6 +199,15 @@ jobs:
       - name: G34G — Tauri production trust boundary
         run: npm run validate:g34g
 
+      - name: G33A — installer component manifest
+        run: npm run validate:g33a
+
+      - name: G33B — offline bundled installation
+        run: npm run validate:g33b
+
+      - name: G33C — zero-touch first run
+        run: npm run validate:g33c
+
       - name: G36 — legal skill runtime completeness
         run: npm run validate:g36
 
