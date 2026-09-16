@@ -1141,3 +1141,63 @@ textarea:focus {
     flex-direction: column;
   }
 }
+
+
+/* G35 case workspace + shared templates */
+.case-workspace-browser {
+  max-width: 1100px;
+  margin: 0 auto 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.case-workspace-column {
+  padding: 22px;
+  border: 1px solid #d6dbd3;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.case-workspace-column h3 {
+  margin: 4px 0 8px;
+}
+
+.workspace-file-list {
+  display: grid;
+  gap: 9px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.workspace-file-list li {
+  display: grid;
+  gap: 4px;
+  padding: 11px 12px;
+  border: 1px solid #e0e4dd;
+  border-radius: 10px;
+  background: #fafbf8;
+}
+
+.workspace-file-list span,
+.workspace-file-list small,
+.workspace-empty {
+  color: #68736a;
+  font-size: 12px;
+}
+
+.workspace-template-upload {
+  display: inline-flex;
+  margin-top: 10px;
+}
+
+.case-workspace-error {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 800px) {
+  .case-workspace-browser {
+    grid-template-columns: 1fr;
+  }
+}
