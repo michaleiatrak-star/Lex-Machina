@@ -1021,3 +1021,50 @@ Open security gates:
 - **G34H — sensitive case encryption at rest:** NOT IMPLEMENTED / NOT PASS.
 
 Important: current raw case uploads/ZIP members remain plaintext local files and the reversible privacy vault remains process-memory-only. Build 0030 does not claim secure shared-workstation case separation.
+
+
+### 2026-09-16 — Build 0031
+
+Status: **PASS — G34C CASE ACL + G34D CASE KEY ENVELOPES**
+
+Implemented:
+- explicit case ownership separate from global ADMIN role;
+- OWNER / EDITOR / ANALYST / VIEWER case roles;
+- independent `canReidentify` capability;
+- no silent ownership assignment for legacy G31A cases;
+- explicit ADMIN legacy-case import;
+- ADMIN-only local USER creation/listing API foundation;
+- independent random 256-bit CDK per secured case;
+- owner CDK envelope derived from UMK with HKDF-SHA256 + AES-256-GCM;
+- per-user X25519 sharing key pair with private key encrypted under UMK;
+- offline target-user CDK envelopes using ephemeral X25519 + HKDF + AES-256-GCM;
+- ACL-filtered case list/open;
+- WRITE enforcement for case uploads and document ingest/review/finalization;
+- ANALYZE enforcement before protected document chunks enter a provider session;
+- runtime documentId -> caseId binding;
+- grant/revoke access API;
+- revoke path performs fresh CDK rotation and keyVersion increment;
+- explicit case selector in React; no automatic case creation on login/workbench mount;
+- production bundle gate requires the explicit ACL case-selection workflow.
+
+Validation evidence:
+- validated code SHA `a41fd86dd550dc41c93705edc423516d05199d8c`;
+- Lex Runtime Validation `35072926001`: success;
+- F-138 structural audit `35072925987`: success;
+- strict TypeScript: PASS;
+- unit/integration tests: PASS;
+- G34C_CASE_ACL: PASS;
+- G34D_CASE_KEY_ENVELOPES: PASS;
+- web tests/build/bundle safety: PASS;
+- G17/G19/G20/G22 live probes: PASS.
+
+Security limitations remain explicit:
+- raw uploads and extracted ZIP members remain plaintext at rest until G34H;
+- reversible privacy mappings remain process-memory-only until G31C1;
+- CDK rotation currently protects future CDK-backed encrypted layers and does not retroactively revoke filesystem copies of current plaintext data;
+- `canReidentify` alone does not authorize deanonymization; G34F step-up remains open;
+- browser session bearer remains in React module memory until G34G;
+- ownership transfer/deletion lifecycle and full account-management UI remain future work.
+
+Next dependency:
+- **G31C1 encrypted persistent privacy vault**, then **G34E/G34F recovery and transaction-bound reauthorization**.
