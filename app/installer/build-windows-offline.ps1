@@ -101,6 +101,15 @@ Invoke-WebRequest -UseBasicParsing -Uri $vcSource.url -OutFile $vcRedist
 Assert-Sha256 $vcRedist $vcSource.sha256 "visual-cpp-runtime-source"
 Copy-Item $vcRedist (Join-Path $prerequisites "vc_redist.x64.exe")
 
+Write-Host "Install bundled Visual C++ runtime prerequisite for payload self-test"
+$vcInstall = Start-Process -FilePath $vcRedist -ArgumentList @(
+  "/install", "/quiet", "/norestart"
+) -Wait -PassThru
+if ($vcInstall.ExitCode -notin @(0, 1638, 3010)) {
+  throw "Visual C++ runtime prerequisite install failed: $($vcInstall.ExitCode)"
+}
+Write-Host "Visual C++ runtime prerequisite exit code: $($vcInstall.ExitCode)"
+
 Write-Host "[8/10] Build native runtime sidecar"
 Push-Location $desktop
 try {
