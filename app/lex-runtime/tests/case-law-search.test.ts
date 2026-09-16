@@ -144,6 +144,26 @@ describe(
 
               if (
                 url.endsWith(
+                  "/cbo/query"
+                )
+              ) {
+                expect(
+                  init?.method
+                ).toBe("GET");
+                return new Response(
+                  "<html><body>Formularz wyszukiwania</body></html>",
+                  {
+                    status: 200,
+                    headers: {
+                      "set-cookie":
+                        "CBOSA_TEST_SESSION=abc123; Path=/; Secure; HttpOnly"
+                    }
+                  }
+                );
+              }
+
+              if (
+                url.endsWith(
                   "/cbo/search"
                 )
               ) {
@@ -154,6 +174,20 @@ describe(
                   String(init?.body)
                 ).toContain(
                   "wszystkieSlowa=bezczynno"
+                );
+                expect(
+                  new Headers(
+                    init?.headers
+                  ).get("cookie")
+                ).toContain(
+                  "CBOSA_TEST_SESSION=abc123"
+                );
+                expect(
+                  new Headers(
+                    init?.headers
+                  ).get("referer")
+                ).toBe(
+                  "https://orzeczenia.nsa.gov.pl/cbo/query"
                 );
                 return new Response(
                   [
@@ -241,7 +275,7 @@ describe(
         ]);
         expect(fetcher)
           .toHaveBeenCalledTimes(
-            2
+            3
           );
       }
     );
