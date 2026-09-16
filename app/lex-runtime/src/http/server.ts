@@ -16,6 +16,9 @@ import {
 } from "../providers/credentials.js";
 import { createLiveProviderRegistry } from "../providers/ai-sdk-adapter.js";
 import { ProviderGateway } from "../providers/gateway.js";
+import {
+  GitHubReleaseUpdateDiscovery
+} from "../update-discovery.js";
 import { SafeSessionExecutor } from "../session-executor.js";
 import { LegalVerificationToolRuntime } from "../verification-tool-runtime.js";
 import { TemporalSourceFreshnessChecker } from "../temporal-source-freshness.js";
@@ -219,6 +222,8 @@ export async function startLocalServer(options?: {
     modelCatalog: new DynamicModelCatalog(credentials),
     credentialResolver: credentials,
     credentialManager: credentials,
+    updateDiscovery:
+      new GitHubReleaseUpdateDiscovery(),
     caseFileStore,
     secureCaseUploadStore,
     sharedTemplateStore,
