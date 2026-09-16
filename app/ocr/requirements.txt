@@ -4,3 +4,5 @@ paddleocr>=3.7,<4
 paddlepaddle>=3.2,<4
 pymupdf>=1.26,<2
 numpy>=1.26,<3
+
+Pillow>=10,<13
