@@ -1,7 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "target": "windows-x86_64",
   "applicationVersion": "0.1.0",
+  "installerMode": "ONLINE_BOOTSTRAP_DEFAULT",
   "runtime": {
     "node": {
       "version": "24.21.0",
@@ -38,18 +39,19 @@
   },
   "systemPrerequisites": {
     "webview2": {
-      "delivery": "TAURI_OFFLINE_INSTALLER"
+      "delivery": "TAURI_DOWNLOAD_BOOTSTRAPPER_IF_MISSING"
     },
     "visualCppRuntime": {
       "version": "14.51.36247",
       "url": "https://download.visualstudio.microsoft.com/download/pr/ebdab8e5-1d7b-4d9f-a11b-cbb1720c3b12/843068991DAAA1F73AD9F6239BCE4D0F6A07A51F18C37EA2A867E9BECA71295C/VC_redist.x64.exe",
       "sha256": "843068991daaa1f73ad9f6239bce4d0f6a07a51f18c37ea2a867e9beca71295c",
-      "delivery": "BUNDLED_OFFLINE_PREREQUISITE"
+      "delivery": "DOWNLOAD_IF_MISSING"
     }
   },
   "notes": {
     "libreOffice": "Not a runtime prerequisite. DOCX/ODT generation and validation are implemented by the deterministic Lex renderer; LibreOffice remains optional release QA only.",
-    "networkAtInstall": "FORBIDDEN",
-    "networkAtFirstRunBeforeProviderUse": "FORBIDDEN"
+    "networkAtInstall": "REQUIRED_FOR_MISSING_COMPONENTS",
+    "networkAfterBootstrapBeforeProviderUse": "FORBIDDEN",
+    "cachePolicy": "REUSE_ONLY_AFTER_SHA256_VERIFICATION"
   }
 }
