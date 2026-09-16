@@ -46,4 +46,6 @@ The application MUST NOT duplicate or silently rewrite legal skill instructions.
 
 G0-G29 plus G27A/G28A and G32 are implemented on `feature/local-runtime`. G31A/G31B provide the storage/archive foundation: the UI creates a local case, PDF/image uploads are persisted under that case before OCR, and ZIP archives are safely extracted into the case directory. Heavy OCR/NER model weights are intentionally installed locally rather than downloaded in every CI run; CI verifies adapters, worker syntax, completeness contracts and fail-closed behavior.
 
-Full G31 is **not** claimed PASS: G31C typed authoring AST/token aliases, G31D deterministic DOCX/deanonymization/download and G31E deterministic ODT/deanonymization/download remain open. G30 open-web discovery also remains open.
+Full G31 is **not** claimed PASS: G31C now includes an encrypted file-backed reversible privacy vault plus typed authoring AST/token aliases; G31D deterministic DOCX/deanonymization/download and G31E deterministic ODT/deanonymization/download remain open. G30 open-web discovery also remains open.
+
+**G33 installer/bootstrap is designed but not implemented:** offline-first Tauri desktop packaging, bundled private runtimes/models/LibreOffice, prerequisite probing, guided animated first-run setup, repair/rollback and local self-tests. See `app/reports/G33-INSTALLER-BOOTSTRAP-ARCHITECTURE.md`.
