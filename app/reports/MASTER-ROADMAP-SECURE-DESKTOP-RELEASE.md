@@ -1232,10 +1232,14 @@ G30 can remain a separately scoped release capability if explicitly excluded fro
 
 To keep reviews manageable:
 
-### Batch A — Identity foundation
+### Batch A — Identity foundation — COMPLETE / PASS
 P0 + P1
 
-### Batch B — Case authorization/key ownership
+Validated code SHA: `b3783309189a6d043fc077e52c736e16b64c10d5`  
+Validation run: `35069444351`  
+F-138: `35069444331`
+
+### Batch B — Case authorization/key ownership — NEXT
 P2
 
 ### Batch C — Vault + recovery + reauthorization
@@ -1275,17 +1279,25 @@ At the end of every batch:
 
 # 9. Immediate next implementation batch
 
-When execution begins, start with **Batch A** only:
+**Batch A / G34A-G34B is complete and validated.**
 
-1. introduce auth persistence/migrations;
-2. implement Argon2id service and test calibration harness;
-3. implement zero-user ADMIN bootstrap;
-4. implement session manager;
-5. implement persistent login backoff;
-6. protect existing localhost endpoints with auth middleware;
-7. implement login/lock/logout UI;
-8. add G34A/G34B validators;
-9. run the full existing regression suite;
-10. do not begin ACL/vault implementation until G34A/G34B are green.
+Next: **Batch B / G34C-G34D — Case Authorization + Key Ownership**.
 
-This gives the next work session a small, testable boundary instead of attempting G31/G33/G34 simultaneously.
+Execution order:
+
+1. define transactional case/ACL persistence migration;
+2. add explicit case ownership for newly-created cases;
+3. design explicit legacy-case ownership import rather than silently assigning old G31A cases;
+4. implement OWNER / EDITOR / ANALYST / VIEWER authorization;
+5. implement independent `canReidentify` capability;
+6. generate an independent random 256-bit Case Data Key (CDK) for each new case;
+7. derive authenticated per-user case-wrap keys from the user's UMK;
+8. persist only encrypted CDK envelopes, never plaintext CDK;
+9. add the user asymmetric-key foundation for granting a case to an offline/logged-out local user;
+10. enforce case ACL on every case/upload/document/attachment route;
+11. add authenticated case list/open APIs;
+12. stop auto-creating a new case merely because the workbench mounts once the explicit case selector is available;
+13. add deterministic G34C/G34D validators and adversarial authorization tests;
+14. run the full existing regression suite before beginning G31C1 vault implementation.
+
+Do not begin persistent vault encryption until case identity, authorization and CDK ownership are green.
