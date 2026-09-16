@@ -59,6 +59,13 @@ const required = [
   "Aplikacja nie tworzy już spraw automatycznie",
   "reidentyfikacja:",
   "Utwórz sprawę",
+  "Zmień nazwę",
+  "Archiwizuj sprawę",
+  "Przywróć z archiwum",
+  "Trwałe usunięcie sprawy",
+  "Wpisz USUŃ",
+  "Usuń sprawę trwale",
+  "ARCHIWALNA (tylko odczyt)",
   "Akta wybranej sprawy",
   "Dokumenty sprawy",
   "Katalog wspólny",
@@ -88,7 +95,7 @@ const missing = required.filter((token) => !content.includes(token));
 const pass = exposed.length === 0 && missing.length === 0;
 
 process.stdout.write(JSON.stringify({
-  gate: "G14_G31AB_G32_G34AE_G35AB_LOCAL_WEB_UI",
+  gate: "G14_G31AB_G32_G34AE_G35AB_P4B_LOCAL_WEB_UI",
   result: pass ? "PASS" : "BLOCKED",
   bundleFiles: files.length,
   forbiddenTokensFound: exposed,
