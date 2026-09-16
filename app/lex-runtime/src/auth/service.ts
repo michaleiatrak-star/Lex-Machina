@@ -11,6 +11,7 @@ import type {
   AuthRecoverySuccess,
   PublicLocalUser,
   RecoveryCodeResult,
+  LocalUserStatus,
   StoredLocalUser
 } from "./types.js";
 import {
@@ -54,6 +55,11 @@ export type AuthErrorCode =
   | "AUTHORIZATION_DENIED"
   | "INVALID_USER_REQUEST"
   | "ACCOUNT_LOGIN_EXISTS"
+  | "USER_NOT_FOUND"
+  | "USER_STATUS_CONFLICT"
+  | "SELF_ADMIN_MUTATION_DENIED"
+  | "USER_DELETE_REQUIRES_DISABLE"
+  | "USER_DELETE_REQUIRES_CASE_CLEANUP"
   | "SESSION_IDLE_EXPIRED"
   | "SESSION_OVERALL_EXPIRED"
   | "SESSION_REVOKED"
@@ -106,6 +112,18 @@ export interface AuthService {
   listUsers(
     actor: AuthenticatedContext
   ): PublicLocalUser[];
+  setUserStatus(
+    actor: AuthenticatedContext,
+    userId: string,
+    status: LocalUserStatus
+  ): PublicLocalUser;
+  deleteUser(
+    actor: AuthenticatedContext,
+    userId: string
+  ): {
+    userId: string;
+    deletedAt: string;
+  };
   createRecoveryCode(
     actor: AuthenticatedContext,
     input: {
@@ -869,6 +887,229 @@ implements AuthService {
     return this.store
       .listUsers()
       .map(publicUser);
+  }
+
+  setUserStatus(
+    actor: AuthenticatedContext,
+    userId: string,
+    status: LocalUserStatus
+  ): PublicLocalUser {
+    if (
+      actor.user.appRole !==
+        "ADMIN"
+    ) {
+      throw new AuthError(
+        "AUTHORIZATION_DENIED",
+        403
+      );
+    }
+    if (
+      !/^user_[a-f0-9]{32}$/
+        .test(userId) ||
+      ![
+        "ACTIVE",
+        "DISABLED"
+      ].includes(status)
+    ) {
+      throw new AuthError(
+        "INVALID_USER_REQUEST",
+        400
+      );
+    }
+    if (
+      userId === actor.user.userId
+    ) {
+      throw new AuthError(
+        "SELF_ADMIN_MUTATION_DENIED",
+        409
+      );
+    }
+
+    const target =
+      this.store.getUserById(
+        userId
+      );
+    if (!target) {
+      throw new AuthError(
+        "USER_NOT_FOUND",
+        404
+      );
+    }
+    if (
+      target.appRole !== "USER"
+    ) {
+      throw new AuthError(
+        "USER_STATUS_CONFLICT",
+        409
+      );
+    }
+    if (
+      target.status === status
+    ) {
+      return publicUser(target);
+    }
+
+    const now =
+      new Date(
+        this.clock.now()
+      ).toISOString();
+    this.store
+      .setUserStatusAndIncrementEpoch(
+        userId,
+        status,
+        now
+      );
+    this.sessions.revokeUser(
+      userId,
+      "USER_REVOKED"
+    );
+    this.store.recordSecurityEvent({
+      eventId:
+        "event_" +
+        randomBytes(16)
+          .toString("hex"),
+      userId:
+        actor.user.userId,
+      eventType:
+        status === "DISABLED"
+          ? "account_disabled"
+          : "account_reactivated",
+      occurredAt: now,
+      result: "PASS",
+      metadata: {
+        targetUserId: userId
+      }
+    });
+
+    const updated =
+      this.store.getUserById(
+        userId
+      );
+    if (!updated) {
+      throw new AuthError(
+        "USER_NOT_FOUND",
+        404
+      );
+    }
+    return publicUser(updated);
+  }
+
+  deleteUser(
+    actor: AuthenticatedContext,
+    userId: string
+  ): {
+    userId: string;
+    deletedAt: string;
+  } {
+    if (
+      actor.user.appRole !==
+        "ADMIN"
+    ) {
+      throw new AuthError(
+        "AUTHORIZATION_DENIED",
+        403
+      );
+    }
+    if (
+      !/^user_[a-f0-9]{32}$/
+        .test(userId)
+    ) {
+      throw new AuthError(
+        "INVALID_USER_REQUEST",
+        400
+      );
+    }
+    if (
+      userId === actor.user.userId
+    ) {
+      throw new AuthError(
+        "SELF_ADMIN_MUTATION_DENIED",
+        409
+      );
+    }
+
+    const target =
+      this.store.getUserById(
+        userId
+      );
+    if (!target) {
+      throw new AuthError(
+        "USER_NOT_FOUND",
+        404
+      );
+    }
+    if (
+      target.appRole !== "USER"
+    ) {
+      throw new AuthError(
+        "USER_STATUS_CONFLICT",
+        409
+      );
+    }
+    if (
+      target.status !==
+        "DISABLED"
+    ) {
+      throw new AuthError(
+        "USER_DELETE_REQUIRES_DISABLE",
+        409
+      );
+    }
+
+    const relations =
+      this.store
+        .getUserCaseRelationCounts(
+          userId
+        );
+    if (
+      relations.createdCases > 0 ||
+      relations.accessRows > 0 ||
+      relations.grantedRows > 0
+    ) {
+      throw new AuthError(
+        "USER_DELETE_REQUIRES_CASE_CLEANUP",
+        409
+      );
+    }
+
+    const deletedAt =
+      new Date(
+        this.clock.now()
+      ).toISOString();
+    this.sessions.revokeUser(
+      userId,
+      "USER_REVOKED"
+    );
+    if (
+      !this.store.deleteUser(
+        userId
+      )
+    ) {
+      throw new AuthError(
+        "USER_NOT_FOUND",
+        404
+      );
+    }
+    this.store.recordSecurityEvent({
+      eventId:
+        "event_" +
+        randomBytes(16)
+          .toString("hex"),
+      userId:
+        actor.user.userId,
+      eventType:
+        "account_deleted",
+      occurredAt: deletedAt,
+      result: "PASS",
+      metadata: {
+        targetUserId: userId
+      }
+    });
+
+    return {
+      userId,
+      deletedAt
+    };
   }
 
   async createRecoveryCode(
