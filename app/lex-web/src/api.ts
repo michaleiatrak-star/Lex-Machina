@@ -208,6 +208,7 @@ export type DocumentReviewResponse = {
 };
 
 export type DocumentAttachmentSelection = {
+  caseId: string;
   documentId: string;
   chunkIndices: number[];
 };
@@ -1066,6 +1067,7 @@ export async function reviewDocument(
 }
 
 export function finalizeDocument(
+  caseId: string,
   documentId: string,
   directives: PagePrivacyDirective[]
 ): Promise<DocumentIngestionResponse> {
@@ -1074,6 +1076,7 @@ export function finalizeDocument(
     {
       method: "POST",
       body: JSON.stringify({
+        caseId,
         directives
       })
     }
