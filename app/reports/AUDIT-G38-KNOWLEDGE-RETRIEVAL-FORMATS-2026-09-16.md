@@ -187,17 +187,22 @@ For all supported knowledge/case documents:
 
 ## 11. Validation status
 
-At the time of this document update the implementation is **NOT YET DECLARED PASS**.
+G38 is **PASS** on validated code SHA `2e42a4e29ad48e8c5004866e7535746fdd0ac44a`.
 
-The previous CI failure was a TypeScript inconsistency introduced with `caseKind` mapping:
+Validation evidence:
 
-- `caseKind` was accidentally mapped into recovery envelope;
-- `StoredCaseRecord` mapper missed `caseKind`;
-- `CaseKind` import was missing in `case-access.ts`.
+- F-138 structural audit run `35102533273` — SUCCESS;
+- Lex Runtime Validation run `35102533235` — SUCCESS;
+- runtime tests — 55/55 files, 207/207 tests PASS;
+- strict TypeScript typecheck — PASS;
+- Python worker syntax — PASS;
+- web tests — 1/1 file, 15/15 tests PASS;
+- production web build — PASS;
+- G14 browser-bundle safety — PASS;
+- deterministic G1-G36/P4B/G34H gate set — PASS;
+- live G17/G19/G20/G22 probes — PASS.
 
-These defects have been corrected.
-
-Fresh CI on the latest G38 document-format HEAD is required before status changes to PASS.
+The earlier `caseKind` mapper/import defects and G32/document-format test regressions were corrected before this validation. Web dependency resolution was made deterministic for the validated build by pinning Vite 8.2.2 and overriding Rolldown to the published 1.2.8 release.
 
 ## 12. Release impact
 
