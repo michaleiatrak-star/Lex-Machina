@@ -414,7 +414,13 @@ impl RuntimeBridge {
                 &path,
                 request.body(),
             )?;
-        let (address, bootstrap_token, session_token, managed_password) = {
+        let (
+            address,
+            bootstrap_token,
+            session_token,
+            service_token,
+            managed_password,
+        ) = {
             let state = self
                 .state
                 .lock()
@@ -425,6 +431,7 @@ impl RuntimeBridge {
                     .ok_or_else(|| "DESKTOP_RUNTIME_NOT_READY".to_string())?,
                 state.bootstrap_token.clone(),
                 state.session_token.clone(),
+                state.service_token.clone(),
                 state.managed_password.clone(),
             )
         };
@@ -443,23 +450,64 @@ impl RuntimeBridge {
         } else {
             None
         };
+        let service_bearer =
+            if path.starts_with("/api/support/") {
+                service_token.as_deref()
+            } else {
+                None
+            };
 
         let mut proxied = raw_http_request(
             address,
             &bootstrap_token,
             bearer,
+            service_bearer,
             &request,
         )?;
 
         let status = proxied.status;
         if status == StatusCode::UNAUTHORIZED {
-            self.clear_session();
+            if path.starts_with("/api/support/") {
+                self.clear_service_session();
+            } else {
+                self.clear_session();
+            }
         }
         if (
             completes_managed_password_setup
                 && status.is_success()
         ) {
             self.clear_managed_identity_secret()?;
+        }
+
+        if (
+            path == "/api/admin/support/challenge"
+                && status.is_success()
+        ) {
+            proxied.body =
+                sign_support_challenge_response(
+                    &proxied.body
+                )?;
+        }
+
+        if (
+            path == "/api/admin/support/activate"
+                && status.is_success()
+        ) {
+            if let Some((token, sanitized)) =
+                extract_and_strip_service_token(
+                    &proxied.body
+                )?
+            {
+                self.replace_service_session(token);
+                proxied.body = sanitized;
+            } else {
+                self.clear_service_session();
+                return Err(
+                    "DESKTOP_SERVICE_TOKEN_MISSING"
+                        .to_string()
+                );
+            }
         }
 
         if session_producing_route(&path) && status.is_success() {
@@ -474,6 +522,9 @@ impl RuntimeBridge {
 
         if path == "/api/auth/logout" || path == "/api/auth/lock" {
             self.clear_session();
+        }
+        if path == "/api/support/logout" {
+            self.clear_service_session();
         }
 
         if status.is_success() {
@@ -523,6 +574,27 @@ impl RuntimeBridge {
     fn clear_session(&self) {
         if let Ok(mut state) = self.state.lock() {
             if let Some(mut token) = state.session_token.take() {
+                unsafe_zero_string(&mut token);
+            }
+        }
+    }
+
+    fn replace_service_session(&self, token: String) {
+        if let Ok(mut state) = self.state.lock() {
+            if let Some(mut previous) =
+                state.service_token.take()
+            {
+                unsafe_zero_string(&mut previous);
+            }
+            state.service_token = Some(token);
+        }
+    }
+
+    fn clear_service_session(&self) {
+        if let Ok(mut state) = self.state.lock() {
+            if let Some(mut token) =
+                state.service_token.take()
+            {
                 unsafe_zero_string(&mut token);
             }
         }
