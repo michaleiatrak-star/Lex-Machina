@@ -781,3 +781,25 @@ A clean Windows VM with no Node, Python, LibreOffice and no provider API key mus
 12. uninstall the application while leaving case data intact unless explicit data deletion was selected.
 
 No Internet is required until the user deliberately invokes an external AI provider or legal web verification feature.
+
+
+---
+
+## 22. Identity prerequisite before installer execution
+
+Installer implementation depends on G34:
+
+`app/reports/G34-IDENTITY-LOGIN-VAULT-ARCHITECTURE.md`
+
+First-run setup must not invent a separate identity model. It must call the same G34 bootstrap flow that creates the first local ADMIN account and encrypted User Master Key envelope.
+
+Installer self-test must eventually verify:
+- auth database opens;
+- zero-user bootstrap lock is correct;
+- synthetic login succeeds/fails correctly;
+- idle lock clears session key material;
+- encrypted case vault survives restart;
+- account password rewrap does not reencrypt cases;
+- case ACL prevents access by another synthetic user.
+
+Secure SHARED_WORKSTATION support additionally depends on G34H case-at-rest encryption because G31A currently stores raw originals and ZIP extraction members as ordinary files.
