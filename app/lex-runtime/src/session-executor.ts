@@ -14,6 +14,9 @@ import {
 import type {
   LegalVerificationToolFactory
 } from "./verification-tool-runtime.js";
+import {
+  LegalCorpusToolRuntime
+} from "./legal-corpus-tool-runtime.js";
 
 export type SessionDocumentAttachment = {
   documentId: string;
@@ -202,7 +205,7 @@ export class SafeSessionExecutor implements SessionExecutor {
   private readonly engine: LexExecutionEngine;
 
   constructor(
-    registry: LexSkillRegistry,
+    private readonly registry: LexSkillRegistry,
     providers: ProviderGateway,
     private readonly finalizer = new AuditedFinalizer(),
     private readonly verificationToolFactory?: LegalVerificationToolFactory
@@ -223,6 +226,10 @@ export class SafeSessionExecutor implements SessionExecutor {
     const ledger = new VerificationLedger();
     const verificationTools =
       this.verificationToolFactory?.(ledger);
+    const corpusTools =
+      new LegalCorpusToolRuntime(
+        this.registry
+      );
 
     const attachments =
       request.documentAttachments ?? [];
@@ -245,30 +252,140 @@ export class SafeSessionExecutor implements SessionExecutor {
       );
     }
 
-    const execution = await this.engine.executePolishLegalQuery({
-      query: request.query,
-      ...(documentContext
-        ? { documentContext }
-        : {}),
-      provider: request.provider,
-      model: request.model,
-      route: {
-        jurisdiction: "PL",
-        primarySkill: request.primarySkill,
-        mode: request.mode
-      },
+    const toolSchemas = [
+      ...corpusTools.schemas(),
       ...(verificationTools
-        ? {
-            tools: verificationTools.schemas(),
-            toolSystemPromptAppendix:
-              verificationTools.systemPromptAppendix(),
-            runTools: (calls) =>
-              verificationTools.runTools(calls)
-          }
-        : {})
-    });
+        ? verificationTools.schemas()
+        : [])
+    ];
+    const toolPrompt = [
+      corpusTools.systemPromptAppendix(),
+      ...(verificationTools
+        ? [
+            verificationTools
+              .systemPromptAppendix()
+          ]
+        : [])
+    ].join("\n\n");
+
+    const execution =
+      await this.engine.executePolishLegalQuery({
+        query: request.query,
+        ...(documentContext
+          ? { documentContext }
+          : {}),
+        provider: request.provider,
+        model: request.model,
+        route: {
+          jurisdiction: "PL",
+          primarySkill:
+            request.primarySkill,
+          mode: request.mode
+        },
+        tools: toolSchemas,
+        toolSystemPromptAppendix:
+          toolPrompt,
+        runTools: async (calls) => {
+          const corpusCalls =
+            calls.filter((call) =>
+              corpusTools.handles(
+                call.name
+              )
+            );
+          const verificationCalls =
+            calls.filter((call) =>
+              !corpusTools.handles(
+                call.name
+              )
+            );
+
+          const corpusResults =
+            corpusCalls.length > 0
+              ? await corpusTools
+                  .runTools(
+                    corpusCalls
+                  )
+              : [];
+          const verificationResults =
+            verificationCalls.length > 0 &&
+            verificationTools
+              ? await verificationTools
+                  .runTools(
+                    verificationCalls
+                  )
+              : [];
+
+          const byId = new Map(
+            [
+              ...corpusResults,
+              ...verificationResults
+            ].map((result) => [
+              result.tool_use_id,
+              result
+            ])
+          );
+
+          return calls.map(
+            (call) =>
+              byId.get(call.id) ?? {
+                tool_use_id:
+                  call.id,
+                content:
+                  JSON.stringify({
+                    status:
+                      "BLOCKED",
+                    error:
+                      "UNKNOWN_RUNTIME_TOOL"
+                  })
+              }
+          );
+        }
+      });
 
     transferExecutionEvents(execution.events, audit);
+
+    const corpusAudit =
+      corpusTools.auditEvents();
+    for (
+      const event
+      of corpusAudit
+    ) {
+      audit.record(
+        event.tool ===
+          "read_legal_resource"
+          ? "resource_read"
+          : "tool_decision",
+        event.target,
+        event.decision ===
+          "ALLOW"
+          ? "OK"
+          : "BLOCKED",
+        {
+          tool: event.tool,
+          ...(event.detail
+            ? event.detail
+            : {})
+        }
+      );
+    }
+
+    const corpusBlocked =
+      corpusAudit.some(
+        (event) =>
+          event.decision ===
+            "BLOCK"
+      );
+    audit.record(
+      "gate",
+      "G36_LEGAL_CORPUS_RUNTIME",
+      corpusBlocked
+        ? "BLOCKED"
+        : "OK",
+      {
+        toolEvents:
+          corpusAudit.length
+      }
+    );
 
     if (verificationTools) {
       for (const toolEvent of verificationTools.auditEvents()) {
@@ -291,7 +408,9 @@ export class SafeSessionExecutor implements SessionExecutor {
       closeSession: false
     });
 
-    const safeToPresent = finalization.result === "PASS";
+    const safeToPresent =
+      finalization.result === "PASS" &&
+      !corpusBlocked;
     audit.record(
       "gate",
       "G15_SAFE_SESSION_EXECUTION",
@@ -334,7 +453,9 @@ export class SafeSessionExecutor implements SessionExecutor {
       ...(safeToPresent
         ? { answer: execution.output }
         : {}),
-      finalization: finalization.result,
+      finalization: safeToPresent
+        ? finalization.result
+        : "BLOCKED",
       blockedReferences,
       verification: {
         records: verificationRecords.length,
