@@ -43,13 +43,11 @@ const ROLE_HELP:
   };
 
 function ParticipantRow({
-  caseId,
   entry,
   busy,
   onSave,
   onRevoke
 }: {
-  caseId: string;
   entry: CaseAccessEntry;
   busy: boolean;
   onSave: (
@@ -507,7 +505,6 @@ export function CaseCollaborationPanel({
               key={
                 entry.user.userId
               }
-              caseId={caseId}
               entry={entry}
               busy={busy}
               onSave={async (
