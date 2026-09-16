@@ -90,14 +90,9 @@ export type CaseKind =
   | "MATTER"
   | "FIRM_KNOWLEDGE";
 
-export type CaseKind =
-  | "MATTER"
-  | "FIRM_KNOWLEDGE";
-
 export type CaseResponse = {
   caseId: string;
   caseKind: CaseKind;
-  caseKind?: CaseKind;
   displayName?: string;
   createdAt: string;
   updatedAt?: string;
@@ -110,7 +105,6 @@ export type CaseResponse = {
 
 export type CaseListItem = {
   caseId: string;
-  caseKind: CaseKind;
   caseKind: CaseKind;
   displayName?: string;
   createdByUserId: string;
@@ -143,28 +137,6 @@ export type CaseAccessCandidatesResponse = {
   users: AuthenticatedUser[];
 };
 
-export type FirmKnowledgeResponse = {
-  workspace:
-    | CaseResponse
-    | null;
-};
-
-export type KnowledgeSearchHit = {
-  documentId: string;
-  chunkIndex: number;
-  pageStart: number;
-  pageEnd: number;
-  score: number;
-  text: string;
-};
-
-export type KnowledgeSearchResponse = {
-  caseId: string;
-  caseKind: CaseKind;
-  hits: KnowledgeSearchHit[];
-};
-
-
 export type FirmKnowledgeWorkspaceResponse = {
   workspace: CaseListItem | null;
 };
@@ -183,8 +155,6 @@ export type CaseKnowledgeSearchResponse = {
   caseKind: CaseKind;
   hits: CaseKnowledgeHit[];
 };
-
-
 
 export type StoredArchiveEntry = {
   relativePath: string;
@@ -894,51 +864,11 @@ export function searchCaseKnowledge(
   );
 }
 
-export function getFirmKnowledgeWorkspace():
-  Promise<{
-    workspace:
-      | CaseListItem
-      | null;
-  }> {
-  return json(
-    "/api/firm-knowledge"
-  );
-}
-
-export function createFirmKnowledgeWorkspace():
-  Promise<{
-    workspace: CaseListItem;
-  }> {
-  return json(
-    "/api/firm-knowledge",
-    {
-      method: "POST"
-    }
-  );
-}
-
 export const getFirmKnowledge =
   getFirmKnowledgeWorkspace;
 
 export const createFirmKnowledge =
   createFirmKnowledgeWorkspace;
-
-export function searchCaseKnowledge(
-  caseId: string,
-  query: string,
-  limit = 8
-): Promise<KnowledgeSearchResponse> {
-  return json<KnowledgeSearchResponse>(
-    `/api/cases/${caseId}/knowledge/search`,
-    {
-      method: "POST",
-      body: JSON.stringify({
-        query,
-        limit
-      })
-    }
-  );
-}
 
 export function listCaseAccess(
   caseId: string
