@@ -145,6 +145,9 @@ jobs:
       - name: G29 — private complete-document pipeline
         run: npm run validate:g29
 
+      - name: G30A — SAOS + CBOSA case-law discovery
+        run: npm run validate:g30a
+
       - name: G31A — local case storage foundation
         run: npm run validate:g31a
 
