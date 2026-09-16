@@ -1277,15 +1277,6 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         models: sanitizeModels(models)
       });
     } catch (error) {
-      if (
-        sendCaseAccessError(
-          res,
-          error
-        )
-      ) {
-        return;
-      }
-
       if (error instanceof MissingProviderCredentialError) {
         res.status(503).json({
           error: "PROVIDER_NOT_CONFIGURED",
@@ -1690,6 +1681,15 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       const result = await options.sessionExecutor.execute(request);
       res.json(result);
     } catch (error) {
+      if (
+        sendCaseAccessError(
+          res,
+          error
+        )
+      ) {
+        return;
+      }
+
       if (error instanceof MissingProviderCredentialError) {
         res.status(503).json({
           error: "PROVIDER_NOT_CONFIGURED",
