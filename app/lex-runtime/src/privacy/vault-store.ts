@@ -732,13 +732,58 @@ export class EncryptedPrivacyVaultStore {
       throw error;
     }
 
-    return decodeEnvelope({
-      data,
-      caseId,
-      caseDataKey,
-      expectedKeyVersion:
-        keyVersion
-    });
+    const payload =
+      decodeEnvelope({
+        data,
+        caseId,
+        caseDataKey,
+        expectedKeyVersion:
+          keyVersion
+      });
+
+    let meta:
+      PrivacyVaultMeta;
+    try {
+      meta = JSON.parse(
+        await readFile(
+          path.join(
+            this.privacyDir(
+              caseId
+            ),
+            "vault-meta.json"
+          ),
+          "utf8"
+        )
+      ) as PrivacyVaultMeta;
+    } catch {
+      throw new Error(
+        "PRIVACY_VAULT_META_MISSING_OR_INVALID"
+      );
+    }
+
+    const hash =
+      createHash("sha256")
+        .update(data)
+        .digest("hex");
+    if (
+      meta.schemaVersion !== 1 ||
+      meta.cipherSuite !==
+        "AES-256-GCM" ||
+      meta.generation !==
+        payload.generation ||
+      meta.keyVersion !==
+        keyVersion ||
+      meta.encryptedBytes !==
+        data.byteLength ||
+      meta.ciphertextSha256 !==
+        hash
+    ) {
+      throw new Error(
+        "PRIVACY_VAULT_META_MISMATCH"
+      );
+    }
+
+    return payload;
   }
 
   private async writePayload(
