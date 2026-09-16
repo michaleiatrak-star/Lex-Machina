@@ -254,9 +254,11 @@ export class LocalPolishPseudonymizer {
     const keep = manual.filter(
       (item) => item.action === "KEEP"
     );
-    const annotations: PrivacyAnnotation[] = manual
-      .filter((item) => item.action === "LABEL")
-      .map((item) => ({
+    const labelDirectives = manual.filter(
+      (item) => item.action === "LABEL"
+    );
+    const annotations: PrivacyAnnotation[] =
+      labelDirectives.map((item) => ({
         start: item.start,
         end: item.end,
         label: item.label!
@@ -329,6 +331,9 @@ export class LocalPolishPseudonymizer {
     const autoAllowed = autoSpans.filter(
       (span) =>
         !keep.some((item) => overlaps(span, item)) &&
+        !labelDirectives.some(
+          (item) => overlaps(span, item)
+        ) &&
         !manualPseudonyms.some(
           (item) => overlaps(span, item)
         )
