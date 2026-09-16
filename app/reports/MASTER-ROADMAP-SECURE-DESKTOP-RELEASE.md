@@ -1,6 +1,6 @@
 # Lex Machina — Master Roadmap to Secure Desktop Release
 
-Status: **IN EXECUTION — BATCH A/B COMPLETE; G35A/G35B ADDED; NEXT G31C1**  
+Status: **IN EXECUTION — G34A-G34D + G35A/G35B PASS; NEXT G31C1**  
 Date: 2026-09-16  
 Branch baseline: `feature/local-runtime`
 
@@ -24,6 +24,8 @@ Validated implementation baseline:
 - G34B — PASS
 - G34C — PASS
 - G34D — PASS
+- G35A — PASS
+- G35B — PASS
 
 Validated code SHA:
 - `a41fd86dd550dc41c93705edc423516d05199d8c`
@@ -456,11 +458,15 @@ Show common office templates beside the selected case.
 ADMIN may add a template.
 Changing cases does not duplicate or move the shared template.
 
-## G35A PASS
+## G35A PASS — IMPLEMENTED / VALIDATED
 Authorized user can browse the persisted file inventory of one selected case without seeing another case's files.
 
-## G35B PASS
+Validated code SHA: `181e439232dac1c3e00f9cb45fd1596329d986a8`.
+
+## G35B PASS — IMPLEMENTED / VALIDATED
 A single stored firm template can be listed from multiple independently authorized cases without weakening case ACL or copying the template.
+
+Validated code SHA: `181e439232dac1c3e00f9cb45fd1596329d986a8`.
 
 ## G35C — later generation integration
 After G31C2/G31D/G31E, selected `templateId` may supply a locally validated style/structure profile to deterministic generation. Raw template package bytes must not be sent automatically to AI.
@@ -1354,7 +1360,7 @@ At the end of every batch:
 
 # 9. Immediate next implementation batch
 
-**Batch A / G34A-G34B and Batch B / G34C-G34D are complete and validated.**
+**Batch A / G34A-G34B, Batch B / G34C-G34D and G35A/G35B are complete and validated.**
 
 Next: **Batch C — start with G31C1 Encrypted Persistent Privacy Vault**, then continue into **G34E/G34F Recovery + Transaction Reauthorization**.
 
