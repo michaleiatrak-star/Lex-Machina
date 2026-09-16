@@ -28,7 +28,10 @@ describe("SensitiveDownloadTicketManager", () => {
   it("is same-session and one-use", () => {
     let revoke: ((event: { sessionId: string }) => void) | undefined;
     const manager = new SensitiveDownloadTicketManager({
-      onSessionRevoked: (listener) => { revoke = listener; return () => {}; }
+      onSessionRevoked: (listener: (event: { sessionId: string }) => void) => {
+        revoke = listener;
+        return () => {};
+      }
     } as any);
     const current = actor();
     const ticket = manager.issue(current as any, {
@@ -47,7 +50,10 @@ describe("SensitiveDownloadTicketManager", () => {
   it("revokes outstanding tickets with the session", () => {
     let revoke: ((event: { sessionId: string }) => void) | undefined;
     const manager = new SensitiveDownloadTicketManager({
-      onSessionRevoked: (listener) => { revoke = listener; return () => {}; }
+      onSessionRevoked: (listener: (event: { sessionId: string }) => void) => {
+        revoke = listener;
+        return () => {};
+      }
     } as any);
     const current = actor();
     const ticket = manager.issue(current as any, {
