@@ -6,6 +6,7 @@ import {
   finalizeDocument,
   getHealth,
   getModels,
+  getUpdateStatus,
   login,
   logoutAuth,
   reviewDocument,
@@ -420,6 +421,47 @@ describe("local API client", () => {
       fetchMock.mock.calls[2]
         ?.[1]?.method
     ).toBe("DELETE");
+  });
+
+  it("checks update status through a read-only authenticated request", async () => {
+    const payload = {
+      currentVersion:
+        "0.1.0",
+      status:
+        "UP_TO_DATE",
+      checkedAt:
+        "2026-09-16T12:00:00.000Z",
+      latestVersion:
+        "0.1.0",
+      releaseUrl:
+        "https://github.com/michaleiatrak-star/Lex-Machina/releases/tag/v0.1.0"
+    };
+    const fetchMock =
+      vi.spyOn(
+        globalThis,
+        "fetch"
+      ).mockResolvedValue(
+        new Response(
+          JSON.stringify(
+            payload
+          ),
+          { status: 200 }
+        )
+      );
+
+    await expect(
+      getUpdateStatus()
+    ).resolves.toEqual(
+      payload
+    );
+    expect(
+      fetchMock.mock.calls[0]
+        ?.[1]?.method
+    ).toBeUndefined();
+    expect(
+      fetchMock.mock.calls[0]
+        ?.[1]?.body
+    ).toBeUndefined();
   });
 
   it("surfaces sanitized model discovery failures", async () => {
