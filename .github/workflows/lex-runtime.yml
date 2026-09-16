@@ -29,7 +29,7 @@ permissions:
 
 jobs:
   g1-g29-g32:
-    name: G1-G29 + G31A/G31B/G31C1 + G32 + G34A-G34E + G34F1 + G34H1/H2/H3/H4/H5 + G35A/G35B deterministic validation
+    name: G1-G29 + G31A/G31B/G31C1 + G32 + G34A-G34E + G34F1 + G34H1/H2/H3/H4/H5 + G35A/G35B + P4B deterministic validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -178,6 +178,9 @@ jobs:
 
       - name: G36 — legal skill runtime completeness
         run: npm run validate:g36
+
+      - name: P4B — case lifecycle
+        run: npm run validate:p4b
 
       - name: G34H1/H2 — encrypted incoming and ZIP members
         run: npm run validate:g34h12
