@@ -252,6 +252,7 @@ export async function startLocalServer(options?: {
     app,
     {
       authService,
+      securityEvents: authStore,
       caseAccessService,
       migrator:
         legacyCaseStorageMigrator
