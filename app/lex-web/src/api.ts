@@ -886,16 +886,20 @@ export function searchCaseKnowledge(
   );
 }
 
-export function getFirmKnowledge():
-  Promise<FirmKnowledgeResponse> {
-  return json<FirmKnowledgeResponse>(
+export function getFirmKnowledgeWorkspace():
+  Promise<{
+    workspace:
+      | CaseListItem
+      | null;
+  }> {
+  return json(
     "/api/firm-knowledge"
   );
 }
 
-export function createFirmKnowledge():
+export function createFirmKnowledgeWorkspace():
   Promise<{
-    workspace: CaseResponse;
+    workspace: CaseListItem;
   }> {
   return json(
     "/api/firm-knowledge",
@@ -904,6 +908,12 @@ export function createFirmKnowledge():
     }
   );
 }
+
+export const getFirmKnowledge =
+  getFirmKnowledgeWorkspace;
+
+export const createFirmKnowledge =
+  createFirmKnowledgeWorkspace;
 
 export function searchCaseKnowledge(
   caseId: string,
