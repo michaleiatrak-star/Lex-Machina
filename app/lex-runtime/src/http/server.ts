@@ -21,6 +21,9 @@ import { LocalPrivateDocumentService } from "../document-service.js";
 import { LocalCaseFileStore } from "../case-file-store.js";
 import { LocalAuthStore } from "../auth/store.js";
 import { LocalAuthService } from "../auth/service.js";
+import {
+  LocalCaseAccessService
+} from "../case-access.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -77,6 +80,12 @@ export async function startLocalServer(options?: {
     new LocalAuthService(
       authStore
     );
+  const caseAccessService =
+    new LocalCaseAccessService(
+      authStore,
+      authService,
+      caseFileStore
+    );
 
   const credentials = new EnvironmentCredentialResolver();
   const providerRegistry = createLiveProviderRegistry(credentials);
@@ -95,6 +104,7 @@ export async function startLocalServer(options?: {
     credentialResolver: credentials,
     caseFileStore,
     authService,
+    caseAccessService,
     documentService: new LocalPrivateDocumentService(
       new CompleteDocumentIngestor(
         new PdfJsDocumentPageSource(),
