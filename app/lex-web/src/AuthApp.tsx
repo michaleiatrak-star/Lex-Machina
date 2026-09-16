@@ -423,18 +423,25 @@ export default function AuthenticatedApp() {
     phase !== "authenticated" ||
     !auth
   ) {
+    const panelPhase:
+      "bootstrap" | "login" | "locked" =
+        phase === "authenticated"
+          ? "login"
+          : phase;
     return (
       <AuthPanel
         key={
-          phase +
+          panelPhase +
           ":" +
           (
             lastUser?.userId ??
             "none"
           )
         }
-        phase={phase}
-        lastUser={lastUser}
+        phase={panelPhase}
+        {...(lastUser
+          ? { lastUser }
+          : {})}
         onChangeUser={() => {
           clearAuthSession();
           setLastUser(undefined);
