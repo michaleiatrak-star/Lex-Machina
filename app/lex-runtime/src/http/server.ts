@@ -1,3 +1,4 @@
+import { timingSafeEqual } from "node:crypto";
 import express, {
   type NextFunction,
   type Request,
@@ -115,6 +116,56 @@ function isLoopbackOrigin(
   } catch {
     return false;
   }
+}
+
+function desktopBootstrapGuard(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void {
+  const expected =
+    process.env
+      .LEX_DESKTOP_BOOTSTRAP_TOKEN
+      ?.trim();
+  if (!expected) {
+    next();
+    return;
+  }
+
+  const provided =
+    req.get(
+      "x-lex-desktop-bootstrap"
+    )?.trim() ?? "";
+  const expectedBytes =
+    Buffer.from(
+      expected,
+      "utf8"
+    );
+  const providedBytes =
+    Buffer.from(
+      provided,
+      "utf8"
+    );
+  const accepted =
+    expectedBytes.length ===
+      providedBytes.length &&
+    expectedBytes.length >
+      0 &&
+    timingSafeEqual(
+      expectedBytes,
+      providedBytes
+    );
+  expectedBytes.fill(0);
+  providedBytes.fill(0);
+
+  if (!accepted) {
+    res.status(401).json({
+      error:
+        "DESKTOP_BOOTSTRAP_REQUIRED"
+    });
+    return;
+  }
+  next();
 }
 
 function loopbackOriginGuard(
@@ -332,6 +383,7 @@ export async function startLocalServer(options?: {
   const app = express();
   app.disable("x-powered-by");
   app.use(helmet());
+  app.use(desktopBootstrapGuard);
   app.use(loopbackOriginGuard);
   registerLegacyMigrationRoutes(
     app,
