@@ -18,6 +18,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: lex-installer-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   g33d-windows-offline-installer:
     name: G33D Windows offline installer build and acceptance
