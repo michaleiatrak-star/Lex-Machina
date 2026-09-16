@@ -17,7 +17,7 @@ G38 does not treat templates as a substitute for retrieval knowledge.
 
 ## G38A — encrypted firm-knowledge workspace
 
-Status: **IMPLEMENTED — VALIDATION PENDING**
+Status: **PASS**
 
 Model:
 
@@ -45,7 +45,7 @@ UI:
 
 ## G38B — local protected retrieval
 
-Status: **IMPLEMENTED — VALIDATION PENDING**
+Status: **PASS**
 
 `LocalCaseKnowledgeSearch` searches only protected/pseudonymized chunks stored in `SecureCaseDocumentStore`.
 
@@ -64,7 +64,7 @@ Search is performed only after case ACL has been verified and the caller's case 
 
 ## G38C — use retrieval in legal analysis
 
-Status: **IMPLEMENTED — VALIDATION PENDING**
+Status: **PASS**
 
 `POST /api/sessions/execute` accepts an explicit `knowledge` request:
 
@@ -92,7 +92,7 @@ UI:
 
 ## G38D — extended local document intake
 
-Status: **IMPLEMENTED — VALIDATION PENDING**
+Status: **PASS**
 
 ### Digital PDF
 
@@ -175,7 +175,7 @@ For the first secure implementation, legacy `.xls` must be converted to XLSX/CSV
 
 ## G38E — restart and case identity correctness
 
-Status: **IMPLEMENTED — VALIDATION PENDING**
+Status: **PASS**
 
 Document attachment selections carry explicit `caseId`.
 
@@ -191,7 +191,7 @@ This removes reliance on an ephemeral `documentId → caseId` process-memory map
 
 ## Required validation
 
-Before any G38 sub-gate is marked PASS:
+G38 closure evidence is satisfied by validated HEAD `2e42a4e29ad48e8c5004866e7535746fdd0ac44a`. The validation set included:
 
 - TypeScript strict typecheck;
 - Python worker syntax;
