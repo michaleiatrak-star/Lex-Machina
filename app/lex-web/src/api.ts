@@ -50,6 +50,11 @@ export type DocumentReviewResponse = {
   }>;
 };
 
+export type DocumentAttachmentSelection = {
+  documentId: string;
+  chunkIndices: number[];
+};
+
 export type DocumentIngestionResponse = {
   documentId: string;
   mediaType: DocumentReviewResponse["mediaType"];
@@ -251,6 +256,7 @@ export function executeSession(input: {
   model: string;
   primarySkill: string;
   mode?: "LAIK" | "PRAWNIK";
+  attachments?: DocumentAttachmentSelection[];
 }): Promise<SessionExecutionResponse> {
   return json<SessionExecutionResponse>("/api/sessions/execute", {
     method: "POST",
