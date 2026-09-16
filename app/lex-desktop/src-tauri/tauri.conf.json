@@ -48,7 +48,7 @@
       }
     },
     "resources": [
-      "runtime/**"
+      "runtime/**/*"
     ]
   }
 }
