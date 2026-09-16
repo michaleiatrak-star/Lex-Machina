@@ -653,6 +653,9 @@ impl Drop for RuntimeBridge {
             if let Some(mut token) = state.session_token.take() {
                 unsafe_zero_string(&mut token);
             }
+            if let Some(mut token) = state.service_token.take() {
+                unsafe_zero_string(&mut token);
+            }
             if let Some(mut password) = state.managed_password.take() {
                 unsafe_zero_string(&mut password);
             }
@@ -748,6 +751,251 @@ fn provider_credential_from_request(
             persist,
         },
     )))
+}
+
+struct SupportIdentity {
+    installation_id: String,
+    public_key: String,
+}
+
+fn load_or_create_support_identity(
+) -> Result<SupportIdentity, String> {
+    let installation_entry = Entry::new(
+        SUPPORT_KEYRING_SERVICE,
+        SUPPORT_INSTALLATION_ACCOUNT,
+    )
+    .map_err(|error| format!(
+        "DESKTOP_SUPPORT_KEYRING_OPEN_FAILED:{error}"
+    ))?;
+    let signing_entry = Entry::new(
+        SUPPORT_KEYRING_SERVICE,
+        SUPPORT_SIGNING_KEY_ACCOUNT,
+    )
+    .map_err(|error| format!(
+        "DESKTOP_SUPPORT_KEYRING_OPEN_FAILED:{error}"
+    ))?;
+
+    let installation_id =
+        match installation_entry.get_password() {
+            Ok(value)
+                if value.starts_with("install_")
+                    && value.len() == 40 =>
+            {
+                value
+            }
+            Ok(_) => {
+                return Err(
+                    "DESKTOP_SUPPORT_INSTALLATION_ID_INVALID"
+                        .to_string()
+                );
+            }
+            Err(KeyringError::NoEntry) => {
+                let mut bytes = [0_u8; 16];
+                random_fill(&mut bytes)
+                    .map_err(|error| format!(
+                        "DESKTOP_RANDOM_FAILED:{error}"
+                    ))?;
+                let value = format!(
+                    "install_{}",
+                    bytes
+                        .iter()
+                        .map(|byte| format!("{byte:02x}"))
+                        .collect::<String>()
+                );
+                bytes.fill(0);
+                installation_entry
+                    .set_password(&value)
+                    .map_err(|error| format!(
+                        "DESKTOP_SUPPORT_KEYRING_WRITE_FAILED:{error}"
+                    ))?;
+                value
+            }
+            Err(error) => {
+                return Err(format!(
+                    "DESKTOP_SUPPORT_KEYRING_READ_FAILED:{error}"
+                ));
+            }
+        };
+
+    let signing_key =
+        match signing_entry.get_password() {
+            Ok(mut encoded) => {
+                let decoded =
+                    URL_SAFE_NO_PAD
+                        .decode(encoded.as_bytes())
+                        .map_err(|_|
+                            "DESKTOP_SUPPORT_SIGNING_KEY_INVALID"
+                                .to_string()
+                        )?;
+                unsafe_zero_string(&mut encoded);
+                if decoded.len() != 32 {
+                    return Err(
+                        "DESKTOP_SUPPORT_SIGNING_KEY_INVALID"
+                            .to_string()
+                    );
+                }
+                let mut seed = [0_u8; 32];
+                seed.copy_from_slice(&decoded);
+                let key =
+                    SigningKey::from_bytes(&seed);
+                seed.fill(0);
+                key
+            }
+            Err(KeyringError::NoEntry) => {
+                let mut seed = [0_u8; 32];
+                random_fill(&mut seed)
+                    .map_err(|error| format!(
+                        "DESKTOP_RANDOM_FAILED:{error}"
+                    ))?;
+                let encoded =
+                    URL_SAFE_NO_PAD.encode(seed);
+                signing_entry
+                    .set_password(&encoded)
+                    .map_err(|error| format!(
+                        "DESKTOP_SUPPORT_KEYRING_WRITE_FAILED:{error}"
+                    ))?;
+                let key =
+                    SigningKey::from_bytes(&seed);
+                seed.fill(0);
+                key
+            }
+            Err(error) => {
+                return Err(format!(
+                    "DESKTOP_SUPPORT_KEYRING_READ_FAILED:{error}"
+                ));
+            }
+        };
+
+    let public_key = format!(
+        "ed25519:{}",
+        URL_SAFE_NO_PAD.encode(
+            signing_key
+                .verifying_key()
+                .to_bytes()
+        )
+    );
+    Ok(SupportIdentity {
+        installation_id,
+        public_key,
+    })
+}
+
+fn load_support_signing_key(
+) -> Result<SigningKey, String> {
+    let entry = Entry::new(
+        SUPPORT_KEYRING_SERVICE,
+        SUPPORT_SIGNING_KEY_ACCOUNT,
+    )
+    .map_err(|error| format!(
+        "DESKTOP_SUPPORT_KEYRING_OPEN_FAILED:{error}"
+    ))?;
+    let mut encoded = entry
+        .get_password()
+        .map_err(|error| format!(
+            "DESKTOP_SUPPORT_KEYRING_READ_FAILED:{error}"
+        ))?;
+    let decoded =
+        URL_SAFE_NO_PAD
+            .decode(encoded.as_bytes())
+            .map_err(|_|
+                "DESKTOP_SUPPORT_SIGNING_KEY_INVALID"
+                    .to_string()
+            )?;
+    unsafe_zero_string(&mut encoded);
+    if decoded.len() != 32 {
+        return Err(
+            "DESKTOP_SUPPORT_SIGNING_KEY_INVALID"
+                .to_string()
+        );
+    }
+    let mut seed = [0_u8; 32];
+    seed.copy_from_slice(&decoded);
+    let key =
+        SigningKey::from_bytes(&seed);
+    seed.fill(0);
+    Ok(key)
+}
+
+fn sign_support_challenge_response(
+    body: &[u8],
+) -> Result<Vec<u8>, String> {
+    let mut value: Value =
+        serde_json::from_slice(body)
+            .map_err(|_|
+                "DESKTOP_SUPPORT_CHALLENGE_INVALID"
+                    .to_string()
+            )?;
+    let object = value
+        .as_object_mut()
+        .ok_or_else(||
+            "DESKTOP_SUPPORT_CHALLENGE_INVALID"
+                .to_string()
+        )?;
+
+    let installation_id = object
+        .get("installationId")
+        .and_then(Value::as_str)
+        .ok_or_else(||
+            "DESKTOP_SUPPORT_CHALLENGE_INVALID"
+                .to_string()
+        )?;
+    let challenge_public_key = object
+        .get("challengePublicKey")
+        .and_then(Value::as_str)
+        .ok_or_else(||
+            "DESKTOP_SUPPORT_CHALLENGE_INVALID"
+                .to_string()
+        )?;
+    let nonce = object
+        .get("nonce")
+        .and_then(Value::as_str)
+        .ok_or_else(||
+            "DESKTOP_SUPPORT_CHALLENGE_INVALID"
+                .to_string()
+        )?;
+    let issued_at = object
+        .get("issuedAt")
+        .and_then(Value::as_str)
+        .ok_or_else(||
+            "DESKTOP_SUPPORT_CHALLENGE_INVALID"
+                .to_string()
+        )?;
+    let expires_at = object
+        .get("expiresAt")
+        .and_then(Value::as_str)
+        .ok_or_else(||
+            "DESKTOP_SUPPORT_CHALLENGE_INVALID"
+                .to_string()
+        )?;
+
+    let canonical = format!(
+        "{installation_id}\n{challenge_public_key}\n{nonce}\n{issued_at}\n{expires_at}"
+    );
+    let signing_key =
+        load_support_signing_key()?;
+    let signature =
+        signing_key.sign(
+            canonical.as_bytes()
+        );
+    object.insert(
+        "challengeSignature".to_string(),
+        Value::String(
+            URL_SAFE_NO_PAD.encode(
+                signature.to_bytes()
+            )
+        ),
+    );
+    object.insert(
+        "challengeProofAlgorithm".to_string(),
+        Value::String(
+            "Ed25519".to_string()
+        ),
+    );
+    serde_json::to_vec(&value)
+        .map_err(|_|
+            "DESKTOP_SUPPORT_CHALLENGE_INVALID"
+                .to_string()
+        )
 }
 
 fn random_secret() -> Result<String, String> {
@@ -863,6 +1111,9 @@ fn runtime_address_from_line(line: &str) -> Option<SocketAddr> {
 }
 
 fn requires_session(path: &str) -> bool {
+    if path.starts_with("/api/support/") {
+        return false;
+    }
     !matches!(
         path,
         "/health"
@@ -913,6 +1164,12 @@ fn route_allowed(method: &str, path: &str) -> bool {
         _ if path.starts_with("/api/admin/providers/") => {
             matches!(method, "GET" | "PUT" | "DELETE")
         }
+        _ if path.starts_with("/api/admin/support") => {
+            matches!(method, "GET" | "POST")
+        }
+        _ if path.starts_with("/api/support/") => {
+            matches!(method, "GET" | "POST")
+        }
         _ if path.starts_with("/api/cases/") => {
             matches!(method, "GET" | "POST" | "PATCH" | "DELETE")
         }
@@ -935,6 +1192,7 @@ fn raw_http_request(
     address: SocketAddr,
     bootstrap_token: &str,
     bearer: Option<&str>,
+    service_bearer: Option<&str>,
     request: &Request<Vec<u8>>,
 ) -> Result<ProxiedResponse, String> {
     let mut stream = TcpStream::connect_timeout(&address, Duration::from_secs(5))
@@ -970,6 +1228,13 @@ fn raw_http_request(
         head.push_str(token);
         head.push_str("\r\n");
     }
+    if let Some(token) = service_bearer {
+        head.push_str(
+            "X-Lex-Service-Authorization: Bearer "
+        );
+        head.push_str(token);
+        head.push_str("\r\n");
+    }
 
     for (name, value) in request.headers() {
         let lower = name.as_str().to_ascii_lowercase();
@@ -977,7 +1242,8 @@ fn raw_http_request(
             lower.as_str(),
             "accept" | "content-type" | "cache-control"
         ) || (lower.starts_with("x-lex-")
-            && lower != "x-lex-desktop-bootstrap");
+            && lower != "x-lex-desktop-bootstrap"
+            && lower != "x-lex-service-authorization");
         if !allowed {
             continue;
         }
@@ -1121,6 +1387,44 @@ fn extract_and_strip_session_token(
     }
     let sanitized = serde_json::to_vec(&value)
         .map_err(|_| "DESKTOP_AUTH_RESPONSE_INVALID".to_string())?;
+    Ok(Some((token, sanitized)))
+}
+
+fn extract_and_strip_service_token(
+    body: &[u8],
+) -> Result<Option<(String, Vec<u8>)>, String> {
+    let mut value: Value =
+        serde_json::from_slice(body)
+            .map_err(|_|
+                "DESKTOP_SUPPORT_RESPONSE_INVALID"
+                    .to_string()
+            )?;
+    let object = value
+        .as_object_mut()
+        .ok_or_else(||
+            "DESKTOP_SUPPORT_RESPONSE_INVALID"
+                .to_string()
+        )?;
+    let Some(token) = object
+        .remove("serviceToken")
+        .and_then(|value|
+            value.as_str().map(ToOwned::to_owned)
+        )
+    else {
+        return Ok(None);
+    };
+    if token.len() < 32 || token.len() > 4096 {
+        return Err(
+            "DESKTOP_SERVICE_TOKEN_INVALID"
+                .to_string()
+        );
+    }
+    let sanitized =
+        serde_json::to_vec(&value)
+            .map_err(|_|
+                "DESKTOP_SUPPORT_RESPONSE_INVALID"
+                    .to_string()
+            )?;
     Ok(Some((token, sanitized)))
 }
 
