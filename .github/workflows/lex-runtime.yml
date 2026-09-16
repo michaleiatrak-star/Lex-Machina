@@ -226,8 +226,8 @@ jobs:
       - name: G17 — real API Sejm/ELI verification
         run: npm run validate:g17
 
-  g14-g26-web:
-    name: G14-G26 local web UI
+  g14-g28a-web:
+    name: G14-G28A local web UI
     needs: g1-g29
     runs-on: ubuntu-latest
     defaults:
@@ -252,5 +252,5 @@ jobs:
       - name: Production build
         run: npm run build
 
-      - name: G14-G26 — browser bundle safety
+      - name: G14-G28A — browser bundle safety
         run: npm run validate:g14
