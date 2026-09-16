@@ -22,6 +22,9 @@ import {
 } from "../providers/gateway.js";
 import type { ProviderId } from "../providers/types.js";
 import type {
+  UpdateDiscovery
+} from "../update-discovery.js";
+import type {
   SessionExecutor,
   SessionExecutionRequest
 } from "../session-executor.js";
