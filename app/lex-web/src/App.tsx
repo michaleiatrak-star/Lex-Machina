@@ -16,6 +16,7 @@ import {
   renameCase,
   unarchiveCase,
   getProviderStatus,
+  getUpdateStatus,
   setProviderApiKey,
   clearProviderApiKey,
   getRoutes,
@@ -26,7 +27,8 @@ import {
   type EvidenceItem,
   type ModelDescriptor,
   type ProviderId,
-  type SessionExecutionResponse
+  type SessionExecutionResponse,
+  type UpdateStatusResponse
 } from "./api.js";
 
 const PROVIDERS: Array<{
@@ -233,12 +235,41 @@ export default function App({
   const [executionError, setExecutionError] = useState("");
   const [documentAttachments, setDocumentAttachments] =
     useState<DocumentAttachmentSelection[]>([]);
+  const [updateStatus, setUpdateStatus] =
+    useState<UpdateStatusResponse | null>(
+      null
+    );
+  const [updateBusy, setUpdateBusy] =
+    useState(false);
+
   const [workspaceRefresh, setWorkspaceRefresh] =
     useState(0);
   const [droppedDocumentFile, setDroppedDocumentFile] =
     useState<File | null>(null);
   const [queryDropActive, setQueryDropActive] =
     useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    void getUpdateStatus()
+      .then((result) => {
+        if (!cancelled) {
+          setUpdateStatus(
+            result
+          );
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setUpdateStatus(
+            null
+          );
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -521,6 +552,22 @@ export default function App({
     };
   }, [provider, providerConfigured]);
 
+  async function refreshUpdateStatus():
+    Promise<void> {
+    setUpdateBusy(true);
+    try {
+      setUpdateStatus(
+        await getUpdateStatus()
+      );
+    } catch {
+      setUpdateStatus(
+        null
+      );
+    } finally {
+      setUpdateBusy(false);
+    }
+  }
+
   async function refreshProviderStatus():
     Promise<void> {
     const result =
@@ -705,6 +752,57 @@ export default function App({
             Przeglądarka nie otrzymuje sekretów ani treści SKILL.md.
           </span>
         </div>
+
+        <div className="privacy-note update-note">
+          <strong>
+            Wersja {updateStatus?.currentVersion ?? "0.1.0"}
+          </strong>
+          <span>
+            {updateStatus?.status ===
+            "AVAILABLE"
+              ? `Dostępna nowsza wersja ${updateStatus.latestVersion ?? ""}.`
+              : updateStatus?.status ===
+                  "UP_TO_DATE"
+                ? "Masz najnowsze opublikowane wydanie."
+                : updateStatus?.status ===
+                    "NO_RELEASE"
+                  ? "Brak opublikowanego wydania aktualizacyjnego."
+                  : updateStatus?.status ===
+                      "UNAVAILABLE"
+                    ? "Nie udało się sprawdzić wydań."
+                    : "Sprawdzanie wydań GitHub…"}
+          </span>
+          {updateStatus?.status ===
+            "AVAILABLE" &&
+            updateStatus.releaseUrl && (
+            <a
+              className="provider-key-link"
+              href={
+                updateStatus.releaseUrl
+              }
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Otwórz nowe wydanie
+            </a>
+          )}
+          <button
+            type="button"
+            disabled={updateBusy}
+            onClick={() => {
+              void refreshUpdateStatus();
+            }}
+          >
+            {updateBusy
+              ? "Sprawdzanie…"
+              : "Sprawdź aktualizacje"}
+          </button>
+          <small>
+            Ten etap wykrywa wydania. Automatyczna instalacja po akceptacji zostanie włączona dopiero z podpisanym updaterem desktopowym.
+          </small>
+        </div>
+
+
       </aside>
 
       <main className="main-panel">
