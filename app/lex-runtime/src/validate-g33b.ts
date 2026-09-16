@@ -22,11 +22,7 @@ const checks = {
     config.bundle?.windows?.webviewInstallMode?.type === "offlineInstaller",
   bundledRuntime:
     Array.isArray(config.bundle?.resources) &&
-    config.bundle.resources.some(
-      (resource: unknown) =>
-        resource === "runtime/**" ||
-        resource === "runtime/**/*"
-    ),
+    config.bundle.resources.includes("runtime/**/*"),
   privateNode:
     build.includes("Private Node") &&
     sidecar.includes('join("node")') &&
