@@ -208,6 +208,7 @@ export type LexHttpAppOptions = {
   modelCatalog: Pick<DynamicModelCatalog, "list">;
   credentialResolver?: ProviderCredentialResolver;
   credentialManager?: ProviderCredentialManager;
+  updateDiscovery?: UpdateDiscovery;
   sessionExecutor?: SessionExecutor;
   documentService?: DocumentService;
   caseFileStore?:
@@ -2433,6 +2434,31 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         storage:
           "PROCESS_MEMORY"
       });
+    }
+  );
+
+  app.get(
+    "/api/update/status",
+    async (_req, res) => {
+      if (!options.updateDiscovery) {
+        res.status(503).json({
+          error:
+            "UPDATE_DISCOVERY_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.json(
+          await options
+            .updateDiscovery
+            .check()
+        );
+      } catch {
+        res.status(503).json({
+          error:
+            "UPDATE_DISCOVERY_UNAVAILABLE"
+        });
+      }
     }
   );
 
