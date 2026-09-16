@@ -115,8 +115,7 @@ def extract_archive(input_path: Path, output_dir: Path) -> list[dict]:
             ext = Path(relative).suffix.lower()
             processable = ext in {
                 ".pdf", ".jpg", ".jpeg", ".png",
-                ".webp", ".tif", ".tiff",
-                ".docx", ".odt", ".txt", ".md"
+                ".webp", ".tif", ".tiff"
             }
             entries.append({
                 "relativePath": relative,
