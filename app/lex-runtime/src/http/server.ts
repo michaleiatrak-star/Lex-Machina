@@ -283,6 +283,7 @@ export async function startLocalServer(options?: {
         close: () =>
           new Promise<void>((closeResolve, closeReject) => {
             server.close((error) => {
+              credentials.close();
               authService.close();
               if (error) closeReject(error);
               else closeResolve();
