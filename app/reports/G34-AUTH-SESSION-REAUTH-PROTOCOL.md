@@ -1,9 +1,9 @@
 # G34B/G34F — Authentication, Session, Lockout and Deanonymization Reauthorization Protocol
 
-Status: **PARTIALLY IMPLEMENTED — G34B + G34E + G34F1 PASS; FULL G34F/G34G OPEN**  
+Status: **G34B + G34E + G34F PASS; G34G OPEN**  
 Date: 2026-09-16
 
-This document is normative for the local multi-user Lex Machina runtime. G34B login/session and G34E recovery/password lifecycle are implemented and validated; G34F1 transaction-bound reauthorization foundation is implemented and validated. Full G34F remains open until real DOCX/ODT deanonymization/export consumes the grant with no bypass path, and G34G remains open until the Tauri production boundary exists.
+This document is normative for the local multi-user Lex Machina runtime. G34B login/session, G34E recovery/password lifecycle and full G34F transaction-bound DOCX/ODT deanonymization/export are implemented and validated. G34G remains open until the Tauri production boundary removes reusable backend bearer secrets from React JavaScript.
 
 The policy is intentionally stricter than generic low-risk web defaults because Lex Machina processes sensitive legal files.
 
@@ -891,3 +891,21 @@ Design basis:
 - OWASP Authentication: sensitive/high-risk actions should require reauthentication; login throttling should be associated with identity rather than relying solely on source IP; lockout design must account for denial-of-service risk.
 
 Lex-specific timeout/backoff/grant constants above are application policy choices and require implementation tests.
+
+
+## 46. Full G34F validation closure — 2026-09-16
+
+Validated SHA: `e0035c68a2034bc4e4132adc28614fb752e10c4f`.
+
+Gate `G34F_FULL_DEANONYMIZATION_EXPORT` proves:
+- wrong password blocks step-up;
+- one-use grant is bound to exact artifact hash/vault generation/case key version;
+- grant is consumed before CDK unwrap and vault access;
+- DOCX/ODT deanonymization is local;
+- residual LMPII/PII tokens block finalization;
+- local HYBRID and final G8/G10 execute on the re-read final file text/bytes;
+- final CLEAR_PII artifact remains encrypted at rest;
+- immediate download uses a same-session one-use ticket;
+- tokenized generation state is closed after final commit.
+
+CI run: `35108047936`. G34G remains the next trust-boundary gate.
