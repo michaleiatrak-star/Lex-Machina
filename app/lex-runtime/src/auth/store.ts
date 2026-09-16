@@ -17,7 +17,8 @@ import type {
   AuthKdfPolicy,
   CaseRole,
   LocalUserStatus,
-  StoredLocalUser
+  StoredLocalUser,
+  StoredRecoveryEnvelope
 } from "./types.js";
 import type {
   CaseListItem,
@@ -259,6 +260,21 @@ export class LocalAuthStore {
         updated_at TEXT NOT NULL
       ) STRICT;
 
+      CREATE TABLE IF NOT EXISTS user_recovery (
+        user_id TEXT PRIMARY KEY
+          REFERENCES users(user_id)
+          ON DELETE CASCADE,
+        algorithm TEXT NOT NULL
+          CHECK (algorithm = 'HKDF-SHA256-AES-256-GCM'),
+        salt BLOB NOT NULL,
+        nonce BLOB NOT NULL,
+        ciphertext BLOB NOT NULL,
+        tag BLOB NOT NULL,
+        key_version INTEGER NOT NULL,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      ) STRICT;
+
       CREATE TABLE IF NOT EXISTS cases (
         case_id TEXT PRIMARY KEY,
         created_by_user_id TEXT NOT NULL
@@ -307,6 +323,9 @@ export class LocalAuthStore {
 
       INSERT OR IGNORE INTO auth_schema(version)
       VALUES (2);
+
+      INSERT OR IGNORE INTO auth_schema(version)
+      VALUES (3);
     `);
   }
 
@@ -612,6 +631,233 @@ export class LocalAuthStore {
       args.keyVersion,
       args.userId
     );
+  }
+
+  getRecoveryEnvelope(
+    userId: string
+  ): StoredRecoveryEnvelope | null {
+    const row = this.db.prepare(`
+      SELECT *
+      FROM user_recovery
+      WHERE user_id = ?
+      LIMIT 1
+    `).get(userId) as
+      | Record<string, unknown>
+      | undefined;
+    if (!row) {
+      return null;
+    }
+    return {
+      userId:
+        textValue(
+          row.user_id,
+          "user_id"
+        ),
+      algorithm:
+        "HKDF-SHA256-AES-256-GCM",
+      salt:
+        bufferValue(
+          row.salt,
+          "salt"
+        ),
+      nonce:
+        bufferValue(
+          row.nonce,
+          "nonce"
+        ),
+      ciphertext:
+        bufferValue(
+          row.ciphertext,
+          "ciphertext"
+        ),
+      tag:
+        bufferValue(
+          row.tag,
+          "tag"
+        ),
+      keyVersion:
+        numberValue(
+          row.key_version,
+          "key_version"
+        ),
+      createdAt:
+        textValue(
+          row.created_at,
+          "created_at"
+        ),
+      updatedAt:
+        textValue(
+          row.updated_at,
+          "updated_at"
+        )
+    };
+  }
+
+  putRecoveryEnvelope(
+    value: StoredRecoveryEnvelope
+  ): void {
+    this.db.prepare(`
+      INSERT INTO user_recovery (
+        user_id,
+        algorithm,
+        salt,
+        nonce,
+        ciphertext,
+        tag,
+        key_version,
+        created_at,
+        updated_at
+      ) VALUES (
+        ?,
+        'HKDF-SHA256-AES-256-GCM',
+        ?, ?, ?, ?, ?, ?, ?
+      )
+      ON CONFLICT(user_id)
+      DO UPDATE SET
+        algorithm = excluded.algorithm,
+        salt = excluded.salt,
+        nonce = excluded.nonce,
+        ciphertext = excluded.ciphertext,
+        tag = excluded.tag,
+        key_version = excluded.key_version,
+        updated_at = excluded.updated_at
+    `).run(
+      value.userId,
+      value.salt,
+      value.nonce,
+      value.ciphertext,
+      value.tag,
+      value.keyVersion,
+      value.createdAt,
+      value.updatedAt
+    );
+  }
+
+  updatePasswordEnvelopeAndIncrementEpoch(
+    args: {
+      userId: string;
+      updatedAt: string;
+      kdf: AuthKdfPolicy;
+      kdfSalt: Buffer;
+      nonce: Buffer;
+      ciphertext: Buffer;
+      tag: Buffer;
+      keyVersion: number;
+    }
+  ): number {
+    this.db.exec(
+      "BEGIN IMMEDIATE"
+    );
+    try {
+      this.updatePasswordEnvelope(
+        args
+      );
+      this.db.prepare(`
+        UPDATE users
+        SET auth_epoch =
+              auth_epoch + 1,
+            updated_at = ?
+        WHERE user_id = ?
+      `).run(
+        args.updatedAt,
+        args.userId
+      );
+      const row = this.db
+        .prepare(`
+          SELECT auth_epoch
+          FROM users
+          WHERE user_id = ?
+        `)
+        .get(
+          args.userId
+        ) as
+          | {
+              auth_epoch?:
+                number | bigint;
+            }
+          | undefined;
+      const epoch =
+        numberValue(
+          row?.auth_epoch,
+          "auth_epoch"
+        );
+      this.db.exec("COMMIT");
+      return epoch;
+    } catch (error) {
+      if (this.db.isTransaction) {
+        this.db.exec(
+          "ROLLBACK"
+        );
+      }
+      throw error;
+    }
+  }
+
+  recoverPasswordAndRotateRecovery(
+    args: {
+      password: {
+        userId: string;
+        updatedAt: string;
+        kdf: AuthKdfPolicy;
+        kdfSalt: Buffer;
+        nonce: Buffer;
+        ciphertext: Buffer;
+        tag: Buffer;
+        keyVersion: number;
+      };
+      recovery:
+        StoredRecoveryEnvelope;
+    }
+  ): number {
+    this.db.exec(
+      "BEGIN IMMEDIATE"
+    );
+    try {
+      this.updatePasswordEnvelope(
+        args.password
+      );
+      this.putRecoveryEnvelope(
+        args.recovery
+      );
+      this.db.prepare(`
+        UPDATE users
+        SET auth_epoch =
+              auth_epoch + 1,
+            updated_at = ?
+        WHERE user_id = ?
+      `).run(
+        args.password.updatedAt,
+        args.password.userId
+      );
+      const row = this.db
+        .prepare(`
+          SELECT auth_epoch
+          FROM users
+          WHERE user_id = ?
+        `)
+        .get(
+          args.password.userId
+        ) as
+          | {
+              auth_epoch?:
+                number | bigint;
+            }
+          | undefined;
+      const epoch =
+        numberValue(
+          row?.auth_epoch,
+          "auth_epoch"
+        );
+      this.db.exec("COMMIT");
+      return epoch;
+    } catch (error) {
+      if (this.db.isTransaction) {
+        this.db.exec(
+          "ROLLBACK"
+        );
+      }
+      throw error;
+    }
   }
 
   setUserStatusAndIncrementEpoch(
