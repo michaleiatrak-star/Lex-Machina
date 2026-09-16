@@ -29,7 +29,7 @@ permissions:
 
 jobs:
   g1-g29-g32:
-    name: G1-G29 + G31A/G31B + G32 deterministic validation
+    name: G1-G29 + G31A/G31B + G32 + G34A/G34B deterministic validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -42,7 +42,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
 
       - name: Install runtime dependencies
         run: npm install --no-audit --no-fund
@@ -149,6 +149,12 @@ jobs:
       - name: G32 — protected document attachment session
         run: npm run validate:g32
 
+      - name: G34A — local account bootstrap
+        run: npm run validate:g34a
+
+      - name: G34B — login/session boundary
+        run: npm run validate:g34b
+
   g19-live-freshness:
     name: G19 live temporal freshness probe
     needs: g1-g29-g32
@@ -164,7 +170,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
 
       - name: Install runtime dependencies
         run: npm install --no-audit --no-fund
@@ -187,7 +193,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
 
       - name: Install runtime dependencies
         run: npm install --no-audit --no-fund
@@ -210,7 +216,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
 
       - name: Install runtime dependencies
         run: npm install --no-audit --no-fund
@@ -233,7 +239,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
 
       - name: Install runtime dependencies
         run: npm install --no-audit --no-fund
@@ -256,7 +262,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
 
       - name: Install web dependencies
         run: npm install --no-audit --no-fund
