@@ -15,9 +15,16 @@ import { DatabaseSync } from "node:sqlite";
 import type {
   AppRole,
   AuthKdfPolicy,
+  CaseRole,
   LocalUserStatus,
   StoredLocalUser
 } from "./types.js";
+import type {
+  CaseListItem,
+  StoredCaseAccess,
+  StoredCaseRecord,
+  StoredUserSharingKeys
+} from "../case-access-types.js";
 
 export type AuthRateLimitRecord = {
   consecutiveFailures: number;
@@ -236,6 +243,70 @@ export class LocalAuthStore {
         result TEXT NOT NULL,
         metadata_json TEXT NOT NULL
       ) STRICT;
+
+      CREATE TABLE IF NOT EXISTS user_crypto (
+        user_id TEXT PRIMARY KEY
+          REFERENCES users(user_id)
+          ON DELETE CASCADE,
+        algorithm TEXT NOT NULL
+          CHECK (algorithm = 'X25519'),
+        public_key_der BLOB NOT NULL,
+        private_wrap_nonce BLOB NOT NULL,
+        private_wrap_ciphertext BLOB NOT NULL,
+        private_wrap_tag BLOB NOT NULL,
+        key_version INTEGER NOT NULL,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      ) STRICT;
+
+      CREATE TABLE IF NOT EXISTS cases (
+        case_id TEXT PRIMARY KEY,
+        created_by_user_id TEXT NOT NULL
+          REFERENCES users(user_id),
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        key_version INTEGER NOT NULL,
+        display_name TEXT
+      ) STRICT;
+
+      CREATE TABLE IF NOT EXISTS case_access (
+        case_id TEXT NOT NULL
+          REFERENCES cases(case_id)
+          ON DELETE CASCADE,
+        user_id TEXT NOT NULL
+          REFERENCES users(user_id)
+          ON DELETE CASCADE,
+        role TEXT NOT NULL
+          CHECK (role IN (
+            'OWNER',
+            'EDITOR',
+            'ANALYST',
+            'VIEWER'
+          )),
+        can_reidentify INTEGER NOT NULL
+          CHECK (can_reidentify IN (0,1)),
+        envelope_algorithm TEXT NOT NULL
+          CHECK (envelope_algorithm IN (
+            'UMK-HKDF-SHA256-AES-256-GCM',
+            'X25519-HKDF-SHA256-AES-256-GCM'
+          )),
+        envelope_ephemeral_public BLOB,
+        envelope_nonce BLOB NOT NULL,
+        envelope_ciphertext BLOB NOT NULL,
+        envelope_tag BLOB NOT NULL,
+        envelope_key_version INTEGER NOT NULL,
+        granted_by_user_id TEXT NOT NULL
+          REFERENCES users(user_id),
+        granted_at TEXT NOT NULL,
+        PRIMARY KEY(case_id, user_id)
+      ) STRICT;
+
+      CREATE INDEX IF NOT EXISTS
+        idx_case_access_user
+      ON case_access(user_id, case_id);
+
+      INSERT OR IGNORE INTO auth_schema(version)
+      VALUES (2);
     `);
   }
 
@@ -278,6 +349,25 @@ export class LocalAuthStore {
       }
       throw error;
     }
+  }
+
+  createUser(
+    user: StoredLocalUser
+  ): void {
+    this.insertUser(user);
+  }
+
+  listUsers():
+    StoredLocalUser[] {
+    const rows = this.db
+      .prepare(
+        "SELECT * FROM users ORDER BY created_at, user_id"
+      )
+      .all() as
+      Record<string, unknown>[];
+    return rows.map((row) =>
+      this.mapUser(row)
+    );
   }
 
   private insertUser(
@@ -540,6 +630,465 @@ export class LocalAuthStore {
       updatedAt,
       userId
     );
+  }
+
+  getUserSharingKeys(
+    userId: string
+  ): StoredUserSharingKeys | null {
+    const row = this.db.prepare(`
+      SELECT *
+      FROM user_crypto
+      WHERE user_id = ?
+      LIMIT 1
+    `).get(userId) as
+      | Record<string, unknown>
+      | undefined;
+    if (!row) return null;
+    return {
+      userId,
+      algorithm: "X25519",
+      publicKeyDer:
+        bufferValue(
+          row.public_key_der,
+          "public_key_der"
+        ),
+      privateKeyWrapNonce:
+        bufferValue(
+          row.private_wrap_nonce,
+          "private_wrap_nonce"
+        ),
+      privateKeyWrapCiphertext:
+        bufferValue(
+          row.private_wrap_ciphertext,
+          "private_wrap_ciphertext"
+        ),
+      privateKeyWrapTag:
+        bufferValue(
+          row.private_wrap_tag,
+          "private_wrap_tag"
+        ),
+      keyVersion:
+        numberValue(
+          row.key_version,
+          "key_version"
+        ),
+      createdAt:
+        textValue(
+          row.created_at,
+          "created_at"
+        ),
+      updatedAt:
+        textValue(
+          row.updated_at,
+          "updated_at"
+        )
+    };
+  }
+
+  putUserSharingKeys(
+    value: StoredUserSharingKeys
+  ): void {
+    this.db.prepare(`
+      INSERT INTO user_crypto (
+        user_id,
+        algorithm,
+        public_key_der,
+        private_wrap_nonce,
+        private_wrap_ciphertext,
+        private_wrap_tag,
+        key_version,
+        created_at,
+        updated_at
+      ) VALUES (
+        ?, 'X25519', ?, ?, ?, ?, ?, ?, ?
+      )
+      ON CONFLICT(user_id)
+      DO UPDATE SET
+        algorithm = excluded.algorithm,
+        public_key_der =
+          excluded.public_key_der,
+        private_wrap_nonce =
+          excluded.private_wrap_nonce,
+        private_wrap_ciphertext =
+          excluded.private_wrap_ciphertext,
+        private_wrap_tag =
+          excluded.private_wrap_tag,
+        key_version =
+          excluded.key_version,
+        updated_at =
+          excluded.updated_at
+    `).run(
+      value.userId,
+      value.publicKeyDer,
+      value.privateKeyWrapNonce,
+      value.privateKeyWrapCiphertext,
+      value.privateKeyWrapTag,
+      value.keyVersion,
+      value.createdAt,
+      value.updatedAt
+    );
+  }
+
+  createCaseWithOwner(args: {
+    caseRecord: StoredCaseRecord;
+    ownerAccess: StoredCaseAccess;
+  }): void {
+    this.db.exec("BEGIN IMMEDIATE");
+    try {
+      this.db.prepare(`
+        INSERT INTO cases (
+          case_id,
+          created_by_user_id,
+          created_at,
+          updated_at,
+          key_version,
+          display_name
+        ) VALUES (?, ?, ?, ?, ?, ?)
+      `).run(
+        args.caseRecord.caseId,
+        args.caseRecord.createdByUserId,
+        args.caseRecord.createdAt,
+        args.caseRecord.updatedAt,
+        args.caseRecord.keyVersion,
+        args.caseRecord.displayName ?? null
+      );
+      this.insertCaseAccess(
+        args.ownerAccess
+      );
+      this.db.exec("COMMIT");
+    } catch (error) {
+      if (this.db.isTransaction) {
+        this.db.exec("ROLLBACK");
+      }
+      throw error;
+    }
+  }
+
+  deleteCaseRegistration(
+    caseId: string
+  ): void {
+    this.db.prepare(
+      "DELETE FROM cases WHERE case_id = ?"
+    ).run(caseId);
+  }
+
+  getCase(
+    caseId: string
+  ): StoredCaseRecord | null {
+    const row = this.db.prepare(`
+      SELECT *
+      FROM cases
+      WHERE case_id = ?
+      LIMIT 1
+    `).get(caseId) as
+      | Record<string, unknown>
+      | undefined;
+    return row
+      ? this.mapCase(row)
+      : null;
+  }
+
+  listCasesForUser(
+    userId: string
+  ): CaseListItem[] {
+    const rows = this.db.prepare(`
+      SELECT
+        c.*,
+        a.role,
+        a.can_reidentify
+      FROM cases c
+      JOIN case_access a
+        ON a.case_id = c.case_id
+      WHERE a.user_id = ?
+      ORDER BY c.updated_at DESC,
+               c.case_id
+    `).all(userId) as
+      Record<string, unknown>[];
+    return rows.map((row) => ({
+      ...this.mapCase(row),
+      role:
+        textValue(
+          row.role,
+          "role"
+        ) as CaseRole,
+      canReidentify:
+        numberValue(
+          row.can_reidentify,
+          "can_reidentify"
+        ) === 1
+    }));
+  }
+
+  getCaseAccess(
+    caseId: string,
+    userId: string
+  ): StoredCaseAccess | null {
+    const row = this.db.prepare(`
+      SELECT *
+      FROM case_access
+      WHERE case_id = ?
+        AND user_id = ?
+      LIMIT 1
+    `).get(
+      caseId,
+      userId
+    ) as
+      | Record<string, unknown>
+      | undefined;
+    return row
+      ? this.mapCaseAccess(row)
+      : null;
+  }
+
+  listCaseAccess(
+    caseId: string
+  ): StoredCaseAccess[] {
+    const rows = this.db.prepare(`
+      SELECT *
+      FROM case_access
+      WHERE case_id = ?
+      ORDER BY granted_at, user_id
+    `).all(caseId) as
+      Record<string, unknown>[];
+    return rows.map((row) =>
+      this.mapCaseAccess(row)
+    );
+  }
+
+  upsertCaseAccess(
+    access: StoredCaseAccess
+  ): void {
+    this.db.exec("BEGIN IMMEDIATE");
+    try {
+      this.db.prepare(`
+        DELETE FROM case_access
+        WHERE case_id = ?
+          AND user_id = ?
+      `).run(
+        access.caseId,
+        access.userId
+      );
+      this.insertCaseAccess(access);
+      this.db.prepare(`
+        UPDATE cases
+        SET updated_at = ?
+        WHERE case_id = ?
+      `).run(
+        access.grantedAt,
+        access.caseId
+      );
+      this.db.exec("COMMIT");
+    } catch (error) {
+      if (this.db.isTransaction) {
+        this.db.exec("ROLLBACK");
+      }
+      throw error;
+    }
+  }
+
+  revokeAccessAndRotate(args: {
+    caseId: string;
+    revokedUserId: string;
+    newKeyVersion: number;
+    updatedAt: string;
+    remaining:
+      StoredCaseAccess[];
+  }): void {
+    this.db.exec("BEGIN IMMEDIATE");
+    try {
+      this.db.prepare(`
+        DELETE FROM case_access
+        WHERE case_id = ?
+          AND user_id = ?
+      `).run(
+        args.caseId,
+        args.revokedUserId
+      );
+      this.db.prepare(`
+        DELETE FROM case_access
+        WHERE case_id = ?
+      `).run(args.caseId);
+      for (
+        const access
+        of args.remaining
+      ) {
+        this.insertCaseAccess(
+          access
+        );
+      }
+      this.db.prepare(`
+        UPDATE cases
+        SET key_version = ?,
+            updated_at = ?
+        WHERE case_id = ?
+      `).run(
+        args.newKeyVersion,
+        args.updatedAt,
+        args.caseId
+      );
+      this.db.exec("COMMIT");
+    } catch (error) {
+      if (this.db.isTransaction) {
+        this.db.exec("ROLLBACK");
+      }
+      throw error;
+    }
+  }
+
+  private insertCaseAccess(
+    access: StoredCaseAccess
+  ): void {
+    this.db.prepare(`
+      INSERT INTO case_access (
+        case_id,
+        user_id,
+        role,
+        can_reidentify,
+        envelope_algorithm,
+        envelope_ephemeral_public,
+        envelope_nonce,
+        envelope_ciphertext,
+        envelope_tag,
+        envelope_key_version,
+        granted_by_user_id,
+        granted_at
+      ) VALUES (
+        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+      )
+    `).run(
+      access.caseId,
+      access.userId,
+      access.role,
+      access.canReidentify ? 1 : 0,
+      access.envelope.algorithm,
+      access.envelope
+        .ephemeralPublicKeyDer ?? null,
+      access.envelope.nonce,
+      access.envelope.ciphertext,
+      access.envelope.tag,
+      access.envelope.keyVersion,
+      access.grantedByUserId,
+      access.grantedAt
+    );
+  }
+
+  private mapCase(
+    row: Record<string, unknown>
+  ): StoredCaseRecord {
+    const displayName =
+      optionalText(
+        row.display_name
+      );
+    return {
+      caseId:
+        textValue(
+          row.case_id,
+          "case_id"
+        ),
+      createdByUserId:
+        textValue(
+          row.created_by_user_id,
+          "created_by_user_id"
+        ),
+      createdAt:
+        textValue(
+          row.created_at,
+          "created_at"
+        ),
+      updatedAt:
+        textValue(
+          row.updated_at,
+          "updated_at"
+        ),
+      keyVersion:
+        numberValue(
+          row.key_version,
+          "key_version"
+        ),
+      ...(displayName
+        ? { displayName }
+        : {})
+    };
+  }
+
+  private mapCaseAccess(
+    row: Record<string, unknown>
+  ): StoredCaseAccess {
+    const ephemeral =
+      row.envelope_ephemeral_public ==
+        null
+        ? undefined
+        : bufferValue(
+            row.envelope_ephemeral_public,
+            "envelope_ephemeral_public"
+          );
+    return {
+      caseId:
+        textValue(
+          row.case_id,
+          "case_id"
+        ),
+      userId:
+        textValue(
+          row.user_id,
+          "user_id"
+        ),
+      role:
+        textValue(
+          row.role,
+          "role"
+        ) as CaseRole,
+      canReidentify:
+        numberValue(
+          row.can_reidentify,
+          "can_reidentify"
+        ) === 1,
+      envelope: {
+        algorithm:
+          textValue(
+            row.envelope_algorithm,
+            "envelope_algorithm"
+          ) as StoredCaseAccess[
+            "envelope"
+          ]["algorithm"],
+        ...(ephemeral
+          ? {
+              ephemeralPublicKeyDer:
+                ephemeral
+            }
+          : {}),
+        nonce:
+          bufferValue(
+            row.envelope_nonce,
+            "envelope_nonce"
+          ),
+        ciphertext:
+          bufferValue(
+            row.envelope_ciphertext,
+            "envelope_ciphertext"
+          ),
+        tag:
+          bufferValue(
+            row.envelope_tag,
+            "envelope_tag"
+          ),
+        keyVersion:
+          numberValue(
+            row.envelope_key_version,
+            "envelope_key_version"
+          )
+      },
+      grantedByUserId:
+        textValue(
+          row.granted_by_user_id,
+          "granted_by_user_id"
+        ),
+      grantedAt:
+        textValue(
+          row.granted_at,
+          "granted_at"
+        )
+    };
   }
 
   loginTag(
