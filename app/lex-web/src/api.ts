@@ -114,6 +114,35 @@ export type StoredUploadResponse = {
   extracted: StoredArchiveEntry[];
 };
 
+export type CaseFilesResponse = {
+  caseId: string;
+  uploads: StoredUploadResponse[];
+};
+
+export type SharedTemplateManifest = {
+  templateId: string;
+  scope: "FIRM_SHARED";
+  filename: string;
+  mediaType:
+    | "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    | "application/vnd.oasis.opendocument.text";
+  sha256: string;
+  bytes: number;
+  createdAt: string;
+  createdByUserId: string;
+  generationReady: false;
+};
+
+export type SharedTemplateListResponse = {
+  templates: SharedTemplateManifest[];
+};
+
+export type CaseTemplateListResponse = {
+  caseId: string;
+  scope: "FIRM_SHARED";
+  templates: SharedTemplateManifest[];
+};
+
 export type DocumentReviewResponse = {
   documentId: string;
   mediaType:
@@ -542,6 +571,76 @@ export function createCase(
         : {})
     })
   });
+}
+
+export function listCaseFiles(
+  caseId: string
+): Promise<CaseFilesResponse> {
+  return json<CaseFilesResponse>(
+    `/api/cases/${caseId}/files`
+  );
+}
+
+export function listCaseTemplates(
+  caseId: string
+): Promise<CaseTemplateListResponse> {
+  return json<CaseTemplateListResponse>(
+    `/api/cases/${caseId}/templates`
+  );
+}
+
+export function listSharedTemplates():
+  Promise<SharedTemplateListResponse> {
+  return json<SharedTemplateListResponse>(
+    "/api/shared/templates"
+  );
+}
+
+export async function uploadSharedTemplate(
+  file: File
+): Promise<SharedTemplateManifest> {
+  const lower =
+    file.name.toLowerCase();
+  const mediaType =
+    file.type ||
+    (
+      lower.endsWith(".docx")
+        ? "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        : lower.endsWith(".odt")
+          ? "application/vnd.oasis.opendocument.text"
+          : "application/octet-stream"
+    );
+
+  const response = await fetch(
+    `${apiBase()}/api/shared/templates`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": mediaType,
+        ...authorizationHeaders(),
+        "X-Lex-Filename":
+          encodeURIComponent(
+            file.name
+          )
+      },
+      body: file
+    }
+  );
+  const payload =
+    await response.json() as
+      | SharedTemplateManifest
+      | ApiFailure;
+  if (!response.ok) {
+    throw new ApiError(
+      (payload as ApiFailure)
+        .error ||
+        `HTTP_${response.status}`,
+      response.status
+    );
+  }
+  return payload as
+    SharedTemplateManifest;
 }
 
 export function getRoutes(): Promise<RouteListResponse> {
