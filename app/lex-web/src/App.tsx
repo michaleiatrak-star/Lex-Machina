@@ -6,6 +6,7 @@ import {
 import { DocumentPrivacyPanel } from "./DocumentPrivacyPanel.js";
 import { CaseWorkspacePanel } from "./CaseWorkspacePanel.js";
 import { CaseCollaborationPanel } from "./CaseCollaborationPanel.js";
+import { FirmKnowledgePanel } from "./FirmKnowledgePanel.js";
 import {
   archiveCase,
   createCase,
@@ -192,6 +193,16 @@ export default function App({
     useState<CaseListItem[]>([]);
   const [newCaseName, setNewCaseName] =
     useState("");
+  const matterCases =
+    useMemo(
+      () =>
+        cases.filter(
+          (item) =>
+            item.caseKind !==
+              "FIRM_KNOWLEDGE"
+        ),
+      [cases]
+    );
   const [caseBusy, setCaseBusy] =
     useState(false);
   const [caseError, setCaseError] =
@@ -288,11 +299,17 @@ export default function App({
         );
         setRoutes(routeList.primarySkills);
         setCases(caseList.cases);
+        const matters =
+          caseList.cases.filter(
+            (item) =>
+              item.caseKind !==
+                "FIRM_KNOWLEDGE"
+          );
         setCaseId(
-          caseList.cases.find(
+          matters.find(
             (item) => !item.archivedAt
           )?.caseId ??
-          caseList.cases[0]?.caseId ??
+          matters[0]?.caseId ??
           ""
         );
         setProviderConfiguration(
@@ -382,9 +399,15 @@ export default function App({
     const refreshed =
       await listCases();
     setCases(refreshed.cases);
+    const matters =
+      refreshed.cases.filter(
+        (item) =>
+          item.caseKind !==
+            "FIRM_KNOWLEDGE"
+      );
     const preferred =
       preferredCaseId
-        ? refreshed.cases.find(
+        ? matters.find(
             (item) =>
               item.caseId ===
                 preferredCaseId
@@ -392,11 +415,11 @@ export default function App({
         : undefined;
     const next =
       preferred ??
-      refreshed.cases.find(
+      matters.find(
         (item) =>
           !item.archivedAt
       ) ??
-      refreshed.cases[0];
+      matters[0];
     setCaseId(
       next?.caseId ?? ""
     );
@@ -505,6 +528,69 @@ export default function App({
     } finally {
       setCaseBusy(false);
     }
+  }
+
+  function addKnowledgeAttachment(
+    selection:
+      DocumentAttachmentSelection
+  ): void {
+    setDocumentAttachments(
+      (current) => {
+        const existingIndex =
+          current.findIndex(
+            (item) =>
+              item.caseId ===
+                selection.caseId &&
+              item.documentId ===
+                selection.documentId
+          );
+        if (
+          existingIndex >= 0
+        ) {
+          const existing =
+            current[
+              existingIndex
+            ]!;
+          const chunkIndices =
+            [
+              ...new Set([
+                ...existing
+                  .chunkIndices,
+                ...selection
+                  .chunkIndices
+              ])
+            ]
+              .sort(
+                (a, b) =>
+                  a - b
+              )
+              .slice(0, 32);
+          return current.map(
+            (item, index) =>
+              index ===
+                existingIndex
+                ? {
+                    ...item,
+                    chunkIndices
+                  }
+                : item
+          );
+        }
+        if (
+          current.length >= 4
+        ) {
+          setExecutionError(
+            "Do jednej analizy można dołączyć maksymalnie 4 dokumenty. Usuń jedno z bieżących źródeł przed dodaniem kolejnego."
+          );
+          return current;
+        }
+        setExecutionError("");
+        return [
+          ...current,
+          selection
+        ];
+      }
+    );
   }
 
   const providerDefinition =
@@ -859,7 +945,7 @@ export default function App({
                 <option value="">
                   — wybierz sprawę —
                 </option>
-                {cases.map((item) => (
+                {matterCases.map((item) => (
                   <option key={item.caseId} value={item.caseId}>
                     {item.displayName || item.caseId.slice(0, 18)}
                     {" · "}
@@ -1023,6 +1109,16 @@ export default function App({
           caseId={caseId}
           caseRole={
             selectedCase?.role
+          }
+        />
+
+        <FirmKnowledgePanel
+          user={user}
+          currentCase={
+            selectedCase
+          }
+          onUseHit={
+            addKnowledgeAttachment
           }
         />
 
