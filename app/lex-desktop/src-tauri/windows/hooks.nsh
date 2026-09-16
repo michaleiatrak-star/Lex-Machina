@@ -1,6 +1,6 @@
 !macro NSIS_HOOK_POSTINSTALL
   DetailPrint "Instalacja wymaganego Microsoft Visual C++ Runtime..."
-  nsExec::ExecToStack '"$INSTDIR\resources\runtime\prerequisites\vc_redist.x64.exe" /install /quiet /norestart'
+  nsExec::ExecToStack '"$INSTDIR\runtime\prerequisites\vc_redist.x64.exe" /install /quiet /norestart'
   Pop $0
   Pop $1
   ${If} $0 != 0
@@ -11,7 +11,7 @@
   ${EndIf}
 
   DetailPrint "Weryfikacja prywatnego runtime Lex Machina..."
-  nsExec::ExecToStack '"$INSTDIR\resources\runtime\lex-runtime-sidecar.exe" --self-test'
+  nsExec::ExecToStack '"$INSTDIR\runtime\lex-runtime-sidecar.exe" --self-test'
   Pop $0
   Pop $1
   ${If} $0 != 0
