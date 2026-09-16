@@ -312,6 +312,41 @@ describe("G34C/G34D case access", () => {
     current.auth.close();
   });
 
+  it("preserves callback errors after a valid case key is unwrapped", async () => {
+    const current = fixture();
+    const owner =
+      await current.auth.bootstrap({
+        loginName: "owner-callback",
+        displayName: "Owner callback",
+        password:
+          "Owner callback haslo bezpieczne 2026"
+      });
+    const ownerContext =
+      context(owner);
+    const localCase =
+      await current.cases.createCase(
+        ownerContext,
+        "Callback propagation"
+      );
+
+    await expect(
+      current.cases.withCaseDataKey(
+        ownerContext,
+        localCase.caseId,
+        "WRITE",
+        async () => {
+          throw new Error(
+            "STORED_DOCUMENT_SIGNATURE_MISMATCH"
+          );
+        }
+      )
+    ).rejects.toThrow(
+      "STORED_DOCUMENT_SIGNATURE_MISMATCH"
+    );
+
+    current.auth.close();
+  });
+
   it("keeps legacy G31A cases unassigned until explicit ADMIN import", async () => {
     const current = fixture();
 
