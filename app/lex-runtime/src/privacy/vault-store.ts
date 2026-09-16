@@ -918,6 +918,20 @@ export class EncryptedPrivacyVaultStore {
     );
   }
 
+  async getGeneration(args: {
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }): Promise<number> {
+    const payload =
+      await this.readPayload(
+        args.caseId,
+        args.caseDataKey,
+        args.keyVersion
+      );
+    return payload.generation;
+  }
+
   async loadDocumentVault(args: {
     caseId: string;
     documentId: string;
