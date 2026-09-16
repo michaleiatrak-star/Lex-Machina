@@ -5,6 +5,7 @@ import {
 } from "react";
 import { DocumentPrivacyPanel } from "./DocumentPrivacyPanel.js";
 import { CaseWorkspacePanel } from "./CaseWorkspacePanel.js";
+import { CaseCollaborationPanel } from "./CaseCollaborationPanel.js";
 import {
   archiveCase,
   createCase,
@@ -1016,6 +1017,13 @@ export default function App({
           caseId={caseId}
           isAdmin={user.appRole === "ADMIN"}
           refreshToken={workspaceRefresh}
+        />
+
+        <CaseCollaborationPanel
+          caseId={caseId}
+          caseRole={
+            selectedCase?.role
+          }
         />
 
         {selectedCase?.archivedAt ? (
