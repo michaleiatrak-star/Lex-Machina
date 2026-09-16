@@ -127,6 +127,19 @@ const searchSchema =
       "search_case_law"
   );
 
+const searchParameters =
+  searchSchema
+    ?.function
+    .parameters as
+      | {
+          properties?: {
+            source?: {
+              enum?: unknown;
+            };
+          };
+        }
+      | undefined;
+
 const saosTool =
   await runtime.runTools([
     {
@@ -175,9 +188,7 @@ const checks = {
     Boolean(searchSchema),
   sourceEnum:
     JSON.stringify(
-      searchSchema
-        ?.function
-        .parameters
+      searchParameters
         ?.properties
         ?.source
         ?.enum ?? []
