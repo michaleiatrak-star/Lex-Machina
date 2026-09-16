@@ -80,11 +80,9 @@ try {
     );
   }
 
-  const bootstrap =
-    (await bootstrapResponse.json())
-      as {
-        sessionToken?: string;
-      };
+  const bootstrap = (await bootstrapResponse.json()) as {
+    sessionToken?: string;
+  };
   if (!bootstrap.sessionToken) {
     throw new Error(
       "G13 auth bootstrap returned no session."
