@@ -14,6 +14,8 @@ import { LocalPdfTextExtractor } from "../pdf-text-extractor.js";
 import { CompleteDocumentIngestor } from "../document-ingestion.js";
 import { PdfJsDocumentPageSource } from "../pdf-document-page-source.js";
 import { LocalPaddleOcrEngine } from "../ocr/paddle-ocr-engine.js";
+import { LocalPaddleImageOcrEngine } from "../ocr/paddle-image-ocr-engine.js";
+import { CompleteImageIngestor } from "../image-ingestion.js";
 import { LocalStanzaNamedEntityRecognizer } from "../privacy/stanza-ner.js";
 import { LocalPrivateDocumentService } from "../document-service.js";
 
@@ -81,7 +83,11 @@ export async function startLocalServer(options?: {
         new PdfJsDocumentPageSource(),
         new LocalPaddleOcrEngine()
       ),
-      new LocalStanzaNamedEntityRecognizer()
+      new LocalStanzaNamedEntityRecognizer(),
+      24_000,
+      new CompleteImageIngestor(
+        new LocalPaddleImageOcrEngine()
+      )
     ),
     sessionExecutor: new SafeSessionExecutor(
       registry,
