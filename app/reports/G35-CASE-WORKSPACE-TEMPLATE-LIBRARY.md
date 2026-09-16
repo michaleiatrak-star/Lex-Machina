@@ -1,6 +1,6 @@
 # G35 — Case Workspace and Firm Template Library
 
-Status: **G35A/G35B IMPLEMENTATION IN PROGRESS — G35C PLANNED**  
+Status: **PASS — G35A/G35B/G35C IMPLEMENTED AND VALIDATED**  
 Date: 2026-09-16
 
 ## 1. User model
@@ -155,3 +155,12 @@ G35A/G35B do not yet:
 - synchronize templates between computers.
 
 Those are separate gates and must not be reported as implemented.
+
+
+## 7. G35C validated closure — 2026-09-16
+
+G35C is PASS on SHA `e0035c68a2034bc4e4132adc28614fb752e10c4f`.
+
+The selected shared DOCX/ODT template is re-read locally with manifest size + SHA-256 verification and package validation. Only an approved Lex style profile plus source format/hash reaches the generation contract; raw template bytes, XML and template text are not sent to the provider. Tampered template payloads fail closed.
+
+Gate: `G35C_TEMPLATE_ASSISTED_GENERATION` — PASS in run `35108047936`.
