@@ -1,8 +1,10 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   executeSession,
+  finalizeDocument,
   getHealth,
   getModels,
+  reviewDocument,
   validateRoute
 } from "./api.js";
 
@@ -105,6 +107,92 @@ describe("local API client", () => {
         headers: expect.objectContaining({
           "Content-Type": "application/json"
         })
+      })
+    );
+  });
+
+  it("uploads PDF/image bytes for local privacy review without wrapping them in JSON", async () => {
+    const payload = {
+      documentId: "doc_0123456789abcdef01234567",
+      mediaType: "image/png",
+      complete: true,
+      totalPages: 1,
+      pages: [{
+        page: 1,
+        text: "Jan Kowalski",
+        source: "OCR"
+      }],
+      suggestions: []
+    };
+
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify(payload), { status: 201 })
+    );
+
+    const file = new File(
+      [new Uint8Array([137, 80, 78, 71])],
+      "scan.png",
+      { type: "image/png" }
+    );
+
+    await expect(reviewDocument(file)).resolves.toEqual(payload);
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      "http://127.0.0.1:4317/api/documents/review",
+      expect.objectContaining({
+        method: "POST",
+        body: file,
+        headers: expect.objectContaining({
+          "Content-Type": "image/png"
+        })
+      })
+    );
+  });
+
+  it("posts user privacy directives to local finalization", async () => {
+    const payload = {
+      documentId: "doc_0123456789abcdef01234567",
+      mediaType: "image/png",
+      complete: true,
+      totalPages: 1,
+      digitalPages: 0,
+      ocrPages: 1,
+      blankPages: 0,
+      sourceChars: 12,
+      pseudonymizedChars: 17,
+      chunks: [],
+      privacy: {
+        findings: 1,
+        counts: { PERSON: 1 },
+        manualPseudonymizations: 1,
+        keptRanges: 0,
+        annotations: [],
+        reversibleLocally: true
+      }
+    };
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify(payload), { status: 200 })
+    );
+
+    const directives = [{
+      page: 1,
+      start: 0,
+      end: 12,
+      action: "PSEUDONYMIZE" as const,
+      kind: "PERSON" as const,
+      label: "świadek"
+    }];
+
+    await finalizeDocument(
+      "doc_0123456789abcdef01234567",
+      directives
+    );
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      "http://127.0.0.1:4317/api/documents/doc_0123456789abcdef01234567/finalize",
+      expect.objectContaining({
+        method: "POST",
+        body: JSON.stringify({ directives })
       })
     );
   });
