@@ -883,13 +883,7 @@ export class SecureCaseUploadStore {
           isZip,
         extracted: [],
         storage:
-          "ENCRYPTED_LME1",
-        ...(isZip
-          ? {
-              archiveExtractionStatus:
-                "DEFERRED_G34H2"
-            }
-          : {})
+          "ENCRYPTED_LME1"
       };
 
     try {
@@ -912,6 +906,24 @@ export class SecureCaseUploadStore {
         expectedSha256:
           manifest.sha256
       });
+
+      if (isZip) {
+        manifest.extracted =
+          await this
+            .extractZipEncrypted({
+              caseId:
+                args.caseId,
+              uploadId,
+              data:
+                args.data,
+              caseDataKey:
+                args.caseDataKey,
+              keyVersion:
+                args.keyVersion
+            });
+        manifest.archiveExtractionStatus =
+          "COMPLETE";
+      }
 
       const manifestBytes =
         Buffer.from(
