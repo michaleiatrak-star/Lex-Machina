@@ -30,6 +30,12 @@ import {
 import {
   EncryptedPrivacyVaultStore
 } from "../privacy/vault-store.js";
+import {
+  SecureCaseUploadStore
+} from "../case-secure-store.js";
+import {
+  CaseSecurityRotationCoordinator
+} from "../case-security-rotation.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -92,6 +98,16 @@ export async function startLocalServer(options?: {
       rootDir:
         caseFileStore.rootDir
     });
+  const secureCaseUploadStore =
+    new SecureCaseUploadStore({
+      rootDir:
+        caseFileStore.rootDir
+    });
+  const caseSecurityRotation =
+    new CaseSecurityRotationCoordinator(
+      privacyVaultStore,
+      secureCaseUploadStore
+    );
   const authService =
     new LocalAuthService(
       authStore
@@ -101,7 +117,7 @@ export async function startLocalServer(options?: {
       authStore,
       authService,
       caseFileStore,
-      privacyVaultStore
+      caseSecurityRotation
     );
 
   const credentials = new EnvironmentCredentialResolver();
