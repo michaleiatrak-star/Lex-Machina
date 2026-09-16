@@ -214,6 +214,9 @@ jobs:
       - name: G37B — passwordless bootstrap and later password setup
         run: npm run validate:g37b
 
+      - name: G37D — signed temporary SERVICE support entitlement
+        run: npm run validate:g37d
+
       - name: G37C2 — persistent provider credentials in OS keyring
         run: npm run validate:g37c2
 
