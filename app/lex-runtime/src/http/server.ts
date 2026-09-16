@@ -424,7 +424,7 @@ export async function startLocalServer(options?: {
   });
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (\n  process.argv[1] &&\n  path.resolve(fileURLToPath(import.meta.url)) ===\n    path.resolve(process.argv[1])\n) {
   const server = await startLocalServer();
   process.stdout.write(
     `Lex Machina runtime listening on http://${server.host}:${server.port}\n`
