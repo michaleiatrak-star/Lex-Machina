@@ -107,6 +107,9 @@ export function FirmKnowledgePanel({
     onWorkspaceChange?.(
       result.workspace
     );
+    onWorkspaceChange?.(
+      result.workspace
+    );
   }
 
   useEffect(() => {
@@ -117,6 +120,9 @@ export function FirmKnowledgePanel({
       .then((result) => {
         if (!cancelled) {
           setWorkspace(
+            result.workspace
+          );
+          onWorkspaceChange?.(
             result.workspace
           );
           onWorkspaceChange?.(
@@ -195,6 +201,9 @@ export function FirmKnowledgePanel({
       const result =
         await createFirmKnowledgeWorkspace();
       setWorkspace(
+        result.workspace
+      );
+      onWorkspaceChange?.(
         result.workspace
       );
       onWorkspaceChange?.(
