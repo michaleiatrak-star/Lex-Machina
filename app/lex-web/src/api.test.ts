@@ -591,6 +591,86 @@ describe("local API client", () => {
     );
   });
 
+  it("infers spreadsheet media types from file extensions when the browser omits File.type", async () => {
+    const payload = {
+      documentId:
+        "doc_0123456789abcdef01234567",
+      mediaType:
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      complete: true,
+      totalPages: 1,
+      pages: [{
+        page: 1,
+        text:
+          "[ARKUSZ: Dane]\nA1=Klient",
+        source:
+          "DIGITAL"
+      }],
+      suggestions: []
+    };
+    const fetchMock =
+      vi.spyOn(
+        globalThis,
+        "fetch"
+      )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify(
+              payload
+            ),
+            { status: 201 }
+          )
+        )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify({
+              ...payload,
+              mediaType:
+                "application/vnd.ms-excel.sheet.macroenabled.12"
+            }),
+            { status: 201 }
+          )
+        );
+
+    const caseId =
+      "case_0123456789abcdef0123456789abcdef";
+    await reviewDocument(
+      new File(
+        [new Uint8Array([1])],
+        "dane.xlsx",
+        { type: "" }
+      ),
+      caseId
+    );
+    await reviewDocument(
+      new File(
+        [new Uint8Array([1])],
+        "makra.xlsm",
+        { type: "" }
+      ),
+      caseId
+    );
+
+    expect(
+      fetchMock.mock.calls[0]
+        ?.[1]?.headers
+    ).toEqual(
+      expect.objectContaining({
+        "Content-Type":
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      })
+    );
+    expect(
+      fetchMock.mock.calls[1]
+        ?.[1]?.headers
+    ).toEqual(
+      expect.objectContaining({
+        "Content-Type":
+          "application/vnd.ms-excel.sheet.macroenabled.12"
+      })
+    );
+  });
+
   it("uploads ZIP directly to the local case store", async () => {
     const payload = {
       caseId: "case_0123456789abcdef0123456789abcdef",
