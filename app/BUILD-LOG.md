@@ -1259,3 +1259,33 @@ Remaining before production installer:
 - full G34F;
 - G34G;
 - G33A-D.
+
+
+### 2026-09-16 — Build 0044
+
+Status: **PASS — G31C2/G31D/G31E + G35C + FULL G34F**
+
+Implemented:
+- typed LegalDocumentAst and generation-scoped PII aliases;
+- provider-safe AST generation contract;
+- deterministic local DOCX/ODT renderer;
+- local package validation and deanonymization;
+- encrypted restart-safe generation alias/validation state;
+- safe shared-template profile extraction with tamper detection;
+- full password step-up / one-use grant consumption before privacy-vault access;
+- final HYBRID + G8/G10 validation before encrypted CLEAR_PII artifact commit;
+- same-session one-use sensitive download ticket;
+- secure web authoring workflow.
+
+Validation evidence:
+- validated SHA `e0035c68a2034bc4e4132adc28614fb752e10c4f`;
+- Lex Runtime Validation `35108047936`: success;
+- F-138 `35108047959`: success;
+- runtime 61/61 files, 220/220 tests PASS;
+- web 16/16 tests + production build/G14 PASS;
+- G17/G19/G20/G22 live probes PASS;
+- dedicated G31C2/G31D/G31E/G35C/G34F gates PASS.
+
+Next:
+- G34G Tauri production trust boundary;
+- G33A-G33D installer.
