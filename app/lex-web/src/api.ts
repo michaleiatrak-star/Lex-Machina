@@ -1166,8 +1166,25 @@ export function executeSession(input: {
 
 function uploadMediaType(file: File): string {
   if (file.type) return file.type;
-  if (file.name.toLowerCase().endsWith(".zip")) {
+  const lower =
+    file.name.toLowerCase();
+  if (lower.endsWith(".zip")) {
     return "application/zip";
+  }
+  if (lower.endsWith(".pdf")) {
+    return "application/pdf";
+  }
+  if (lower.endsWith(".docx")) {
+    return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+  }
+  if (lower.endsWith(".odt")) {
+    return "application/vnd.oasis.opendocument.text";
+  }
+  if (lower.endsWith(".md")) {
+    return "text/markdown";
+  }
+  if (lower.endsWith(".txt")) {
+    return "text/plain";
   }
   return "application/octet-stream";
 }
