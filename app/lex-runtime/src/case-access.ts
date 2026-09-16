@@ -1105,6 +1105,211 @@ export class LocalCaseAccessService {
     };
   }
 
+  async transferOwnership(
+    context:
+      AuthenticatedContext,
+    caseId: string,
+    input: {
+      userId: string;
+      password: string;
+    }
+  ): Promise<{
+    caseId: string;
+    previousOwnerUserId: string;
+    newOwnerUserId: string;
+    previousOwnerRole:
+      "EDITOR";
+    keyVersion: number;
+    transferredAt: string;
+  }> {
+    if (
+      !validUserId(
+        input.userId
+      ) ||
+      input.userId ===
+        context.user.userId ||
+      typeof input.password !==
+        "string" ||
+      input.password.length < 1
+    ) {
+      throw new CaseAccessError(
+        "INVALID_CASE_ACCESS_REQUEST",
+        400
+      );
+    }
+
+    const access =
+      this.assertAccess(
+        context,
+        caseId,
+        "MANAGE"
+      );
+    if (
+      access.role !==
+        "OWNER"
+    ) {
+      throw new CaseAccessError(
+        "CASE_ACCESS_DENIED",
+        403
+      );
+    }
+
+    const target =
+      this.store.getUserById(
+        input.userId
+      );
+    if (
+      !target ||
+      target.status !==
+        "ACTIVE"
+    ) {
+      throw new CaseAccessError(
+        "TARGET_USER_NOT_FOUND",
+        404
+      );
+    }
+    const targetKeys =
+      this.store
+        .getUserSharingKeys(
+          target.userId
+        );
+    if (!targetKeys) {
+      throw new CaseAccessError(
+        "TARGET_CRYPTO_NOT_READY",
+        409
+      );
+    }
+
+    await this.auth
+      .reauthenticate(
+        context,
+        input.password,
+        "TRANSFER_CASE_OWNERSHIP"
+      );
+
+    const record =
+      this.store.getCase(
+        caseId
+      );
+    if (!record) {
+      throw new CaseAccessError(
+        "CASE_NOT_FOUND",
+        404
+      );
+    }
+
+    const transferredAt =
+      new Date().toISOString();
+
+    await this.withCaseDataKey(
+      context,
+      caseId,
+      "MANAGE",
+      async (caseDataKey) => {
+        const existing =
+          this.store
+            .getCaseAccess(
+              caseId,
+              target.userId
+            );
+        const envelope =
+          existing &&
+          existing.envelope
+            .keyVersion ===
+            record.keyVersion
+            ? existing.envelope
+            : wrapCaseKeyForOfflineUser(
+                targetKeys.publicKeyDer,
+                {
+                  targetUserId:
+                    target.userId,
+                  caseId,
+                  caseDataKey,
+                  keyVersion:
+                    record.keyVersion
+                }
+              );
+
+        await this.files
+          .updateCaseLifecycleMetadata(
+            caseId,
+            {
+              updatedAt:
+                transferredAt
+            }
+          );
+        try {
+          this.store
+            .transferCaseOwnership({
+              caseId,
+              previousOwnerUserId:
+                context.user.userId,
+              newOwnerAccess: {
+                caseId,
+                userId:
+                  target.userId,
+                role: "OWNER",
+                canReidentify: true,
+                envelope,
+                grantedByUserId:
+                  context.user.userId,
+                grantedAt:
+                  transferredAt
+              },
+              updatedAt:
+                transferredAt
+            });
+        } catch (error) {
+          try {
+            await this.files
+              .updateCaseLifecycleMetadata(
+                caseId,
+                {
+                  updatedAt:
+                    record.updatedAt
+                }
+              );
+          } catch {
+            throw new Error(
+              "CASE_LIFECYCLE_ROLLBACK_FAILED"
+            );
+          }
+          throw error;
+        }
+      }
+    );
+
+    this.audit(
+      context.user.userId,
+      "case_ownership_transferred",
+      transferredAt,
+      {
+        caseId,
+        previousOwnerUserId:
+          context.user.userId,
+        newOwnerUserId:
+          target.userId,
+        previousOwnerRole:
+          "EDITOR",
+        keyVersion:
+          record.keyVersion
+      }
+    );
+
+    return {
+      caseId,
+      previousOwnerUserId:
+        context.user.userId,
+      newOwnerUserId:
+        target.userId,
+      previousOwnerRole:
+        "EDITOR",
+      keyVersion:
+        record.keyVersion,
+      transferredAt
+    };
+  }
+
   async revokeAccess(
     context:
       AuthenticatedContext,
