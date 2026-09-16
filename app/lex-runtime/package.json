@@ -46,7 +46,9 @@
     "validate:g34a": "tsx src/validate-g34a.ts",
     "validate:g34b": "tsx src/validate-g34b.ts",
     "validate:g34c": "tsx src/validate-g34c.ts",
-    "validate:g34d": "tsx src/validate-g34d.ts"
+    "validate:g34d": "tsx src/validate-g34d.ts",
+    "validate:g35a": "tsx src/validate-g35a.ts",
+    "validate:g35b": "tsx src/validate-g35b.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.49",
