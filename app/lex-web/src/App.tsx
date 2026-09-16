@@ -5,6 +5,7 @@ import {
 } from "react";
 import { DocumentPrivacyPanel } from "./DocumentPrivacyPanel.js";
 import {
+  createCase,
   executeSession,
   getHealth,
   getModels,
@@ -153,6 +154,7 @@ function EvidencePanel({
 
 export default function App() {
   const [runtimeOnline, setRuntimeOnline] = useState(false);
+  const [caseId, setCaseId] = useState("");
   const [runtimeError, setRuntimeError] = useState("");
   const [provider, setProvider] = useState<ProviderId>("openai");
   const [providerConfiguration, setProviderConfiguration] = useState<
@@ -182,13 +184,19 @@ export default function App() {
   useEffect(() => {
     let cancelled = false;
 
-    Promise.all([getHealth(), getRoutes(), getProviderStatus()])
-      .then(([health, routeList, providerStatus]) => {
+    Promise.all([
+      getHealth(),
+      getRoutes(),
+      getProviderStatus(),
+      createCase()
+    ])
+      .then(([health, routeList, providerStatus, localCase]) => {
         if (cancelled) return;
         setRuntimeOnline(
           health.status === "ok" && health.localOnly === true
         );
         setRoutes(routeList.primarySkills);
+        setCaseId(localCase.caseId);
         setProviderConfiguration(
           Object.fromEntries(
             providerStatus.providers.map((item) => [
@@ -344,7 +352,10 @@ export default function App() {
             <strong>
               {runtimeOnline ? "Runtime aktywny" : "Runtime offline"}
             </strong>
-            <small>127.0.0.1:4317</small>
+            <small>
+              127.0.0.1:4317
+              {caseId ? ` · ${caseId.slice(0, 13)}…` : ""}
+            </small>
           </div>
         </div>
 
@@ -376,6 +387,7 @@ export default function App() {
         )}
 
         <DocumentPrivacyPanel
+          caseId={caseId}
           onAttachmentSelectionChange={(selection) => {
             setDocumentAttachments(
               selection ? [selection] : []
