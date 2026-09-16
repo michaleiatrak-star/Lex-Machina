@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import { LexSkillRegistry } from "./registry.js";
 
 export type LegalSessionState =
@@ -34,6 +35,8 @@ export const CORE_LEGAL_RESOURCES = [
 export class LegalSession {
   state: LegalSessionState = "SESSION_CREATED";
   readonly events: LegalSessionEvent[] = [];
+  readonly loadedResources =
+    new Map<string, string>();
 
   constructor(
     private readonly registry: LexSkillRegistry,
@@ -84,6 +87,35 @@ export class LegalSession {
         this.emit("resource_read", resource, "BLOCKED");
         throw new LegalSessionBootstrapError(
           "Mandatory core legal resource is unavailable; fail-closed.",
+          resource,
+          [...this.events]
+        );
+      }
+
+      try {
+        const content =
+          fs.readFileSync(
+            resolved,
+            "utf8"
+          );
+        if (!content.trim()) {
+          throw new Error(
+            "EMPTY_CORE_LEGAL_RESOURCE"
+          );
+        }
+        this.loadedResources.set(
+          resource,
+          content
+        );
+      } catch {
+        this.state = "BLOCKED";
+        this.emit(
+          "resource_read",
+          resource,
+          "BLOCKED"
+        );
+        throw new LegalSessionBootstrapError(
+          "Mandatory core legal resource cannot be read; fail-closed.",
           resource,
           [...this.events]
         );
