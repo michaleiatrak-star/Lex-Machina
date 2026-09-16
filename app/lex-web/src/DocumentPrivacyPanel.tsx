@@ -6,6 +6,7 @@ import {
 import {
   finalizeDocument,
   reviewDocument,
+  type DocumentAttachmentSelection,
   type DocumentIngestionResponse,
   type DocumentReviewResponse,
   type PagePrivacyDirective,
@@ -35,7 +36,13 @@ function rangesOverlap(
   return a.start < b.end && a.end > b.start;
 }
 
-export function DocumentPrivacyPanel() {
+export function DocumentPrivacyPanel({
+  onAttachmentSelectionChange
+}: {
+  onAttachmentSelectionChange?: (
+    selection: DocumentAttachmentSelection | null
+  ) => void;
+}) {
   const textRef =
     useRef<HTMLTextAreaElement>(null);
   const [review, setReview] =
@@ -61,6 +68,8 @@ export function DocumentPrivacyPanel() {
   const [loading, setLoading] =
     useState(false);
   const [error, setError] = useState("");
+  const [selectedChunkIndices, setSelectedChunkIndices] =
+    useState<number[]>([]);
 
   const currentPage = useMemo(
     () =>
@@ -96,6 +105,8 @@ export function DocumentPrivacyPanel() {
     setFinalized(null);
     setDirectives([]);
     setSelection(null);
+    setSelectedChunkIndices([]);
+    onAttachmentSelectionChange?.(null);
 
     try {
       const result =
@@ -199,6 +210,8 @@ export function DocumentPrivacyPanel() {
           directives
         );
       setFinalized(result);
+      setSelectedChunkIndices([]);
+      onAttachmentSelectionChange?.(null);
     } catch (cause) {
       setError(
         cause instanceof Error
@@ -208,6 +221,42 @@ export function DocumentPrivacyPanel() {
     } finally {
       setLoading(false);
     }
+  }
+
+  function setChunkSelected(
+    index: number,
+    selected: boolean
+  ): void {
+    setSelectedChunkIndices((current) => {
+      const next = selected
+        ? [...new Set([...current, index])].sort(
+            (a, b) => a - b
+          )
+        : current.filter(
+            (item) => item !== index
+          );
+
+      if (next.length > 32) {
+        setError(
+          "Do jednej sesji można dołączyć maksymalnie 32 chunki. Wybierz mniejszy zakres."
+        );
+        return current;
+      }
+
+      setError("");
+      if (finalized) {
+        onAttachmentSelectionChange?.(
+          next.length > 0
+            ? {
+                documentId:
+                  finalized.documentId,
+                chunkIndices: next
+              }
+            : null
+        );
+      }
+      return next;
+    });
   }
 
   return (
@@ -513,19 +562,114 @@ export function DocumentPrivacyPanel() {
       )}
 
       {finalized && (
-        <div className="document-finalized">
-          <strong>
-            Dokument przygotowany lokalnie
-          </strong>
-          <span>
-            {finalized.totalPages} stron ·{" "}
-            {finalized.ocrPages} OCR ·{" "}
-            {finalized.chunks.length} chunków ·{" "}
-            {finalized.privacy.findings} anonimizacji
-            ·{" "}
-            {finalized.privacy.annotations.length} oznaczeń
-          </span>
-        </div>
+        <>
+          <div className="document-finalized">
+            <strong>
+              Dokument przygotowany lokalnie
+            </strong>
+            <span>
+              {finalized.totalPages} stron ·{" "}
+              {finalized.ocrPages} OCR ·{" "}
+              {finalized.chunks.length} chunków ·{" "}
+              {finalized.privacy.findings} anonimizacji
+              ·{" "}
+              {finalized.privacy.annotations.length} oznaczeń
+            </span>
+          </div>
+
+          <div className="attachment-selector">
+            <div className="attachment-selector-head">
+              <div>
+                <strong>
+                  Chunki do analizy AI
+                </strong>
+                <p>
+                  Domyślnie nic nie jest wysyłane do providera. Zaznacz tylko te
+                  chronione chunki, które mają wejść do kontekstu sesji.
+                  Backend nie przekazuje mapy reidentyfikacji.
+                </p>
+              </div>
+              <span>
+                {selectedChunkIndices.length}/32 wybranych
+              </span>
+            </div>
+
+            {finalized.chunks.length <= 32 && (
+              <div className="attachment-actions">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const all =
+                      finalized.chunks.map(
+                        (chunk) => chunk.index
+                      );
+                    setSelectedChunkIndices(all);
+                    onAttachmentSelectionChange?.({
+                      documentId:
+                        finalized.documentId,
+                      chunkIndices: all
+                    });
+                  }}
+                >
+                  Zaznacz wszystkie
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedChunkIndices([]);
+                    onAttachmentSelectionChange?.(null);
+                  }}
+                >
+                  Wyczyść wybór
+                </button>
+              </div>
+            )}
+
+            <div className="attachment-chunk-list">
+              {finalized.chunks.map((chunk) => (
+                <label
+                  key={chunk.index}
+                  className="attachment-chunk"
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedChunkIndices.includes(
+                      chunk.index
+                    )}
+                    onChange={(event) =>
+                      setChunkSelected(
+                        chunk.index,
+                        event.target.checked
+                      )
+                    }
+                  />
+                  <span>
+                    Chunk {chunk.index} · strony{" "}
+                    {chunk.pageStart}-{chunk.pageEnd}
+                  </span>
+                  <small>
+                    {chunk.text.length.toLocaleString(
+                      "pl-PL"
+                    )} znaków
+                  </small>
+                </label>
+              ))}
+            </div>
+
+            {finalized.chunks.length > 32 && (
+              <p className="field-help">
+                Dokument ma więcej niż 32 chunki. Do jednej sesji wybierz
+                maksymalnie 32; kolejne partie możesz analizować osobno.
+              </p>
+            )}
+
+            <p className="field-help">
+              Uwaga: fragmenty oznaczone wcześniej jako KEEP pozostają jawne
+              zgodnie z decyzją użytkownika i mogą trafić do providera, jeśli
+              wybierzesz zawierający je chunk.
+            </p>
+          </div>
+        </>
       )}
     </section>
   );
