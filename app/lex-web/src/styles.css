@@ -1066,3 +1066,78 @@ textarea:focus {
     border-radius: 0;
   }
 }
+
+
+/* G34C explicit case selection */
+.case-selector {
+  max-width: 1100px;
+  margin: 0 auto 22px;
+  padding: 24px;
+  border: 1px solid #d6dbd3;
+  border-radius: 20px;
+  background: #f9faf6;
+  box-shadow: 0 14px 40px rgba(43, 59, 47, 0.045);
+}
+
+.case-selector-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.case-selector-head h3 {
+  margin: 4px 0 8px;
+}
+
+.case-selector-head p {
+  max-width: 720px;
+  margin: 0;
+  color: #667168;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.case-selector-controls {
+  display: grid;
+  grid-template-columns: minmax(240px, 1.2fr) minmax(220px, 1fr) auto;
+  align-items: end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.case-selector-controls label {
+  display: grid;
+  gap: 7px;
+  color: #36483b;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.case-selector-controls select,
+.case-selector-controls input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid #c7cec5;
+  border-radius: 10px;
+  background: #fff;
+  color: #172018;
+  font: inherit;
+}
+
+.case-selector-meta {
+  margin: 14px 0 0;
+  color: #67736a;
+  font-size: 12px;
+}
+
+@media (max-width: 800px) {
+  .case-selector-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .case-selector-head {
+    flex-direction: column;
+  }
+}
