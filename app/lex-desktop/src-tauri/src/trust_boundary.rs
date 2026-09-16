@@ -418,12 +418,21 @@ impl RuntimeBridge {
                 provider_credential_input
             {
                 match operation {
-                    ProviderCredentialOperation::Set(mut api_key) => {
+                    ProviderCredentialOperation::Set {
+                        mut api_key,
+                        persist,
+                    } => {
                         let result =
-                            self.persist_provider_credential(
-                                &provider,
-                                &api_key,
-                            );
+                            if persist {
+                                self.persist_provider_credential(
+                                    &provider,
+                                    &api_key,
+                                )
+                            } else {
+                                self.delete_provider_credential(
+                                    &provider
+                                )
+                            };
                         unsafe_zero_string(&mut api_key);
                         result?;
                     }
@@ -493,7 +502,10 @@ impl Drop for RuntimeBridge {
 }
 
 enum ProviderCredentialOperation {
-    Set(String),
+    Set {
+        api_key: String,
+        persist: bool,
+    },
     Delete,
 }
 
@@ -550,9 +562,27 @@ fn provider_credential_from_request(
         )?
         .to_string();
 
+    let persist = match value
+        .get("persistence")
+        .and_then(Value::as_str)
+    {
+        Some("OS_KEYRING") => true,
+        Some("PROCESS_MEMORY") | None => false,
+        _ => {
+            unsafe_zero_string(&mut api_key);
+            return Err(
+                "DESKTOP_PROVIDER_CREDENTIAL_PERSISTENCE_INVALID"
+                    .to_string()
+            );
+        }
+    };
+
     Ok(Some((
         provider.to_string(),
-        ProviderCredentialOperation::Set(api_key),
+        ProviderCredentialOperation::Set {
+            api_key,
+            persist,
+        },
     )))
 }
 
@@ -997,6 +1027,60 @@ mod tests {
         assert!(!route_allowed("POST", "/api/update/status"));
         assert!(!route_allowed("GET", "/api/arbitrary"));
         assert!(!route_allowed("GET", "https://example.com/"));
+    }
+
+    #[test]
+    fn provider_credentials_require_explicit_keyring_opt_in() {
+        let memory = provider_credential_from_request(
+            "PUT",
+            "/api/admin/providers/openai/credential",
+            br#"{"apiKey":"memory-key-123456","persistence":"PROCESS_MEMORY"}"#,
+        )
+        .expect("memory request")
+        .expect("provider operation");
+        match memory.1 {
+            ProviderCredentialOperation::Set {
+                mut api_key,
+                persist,
+            } => {
+                assert!(!persist);
+                assert_eq!(api_key, "memory-key-123456");
+                unsafe_zero_string(&mut api_key);
+            }
+            ProviderCredentialOperation::Delete => {
+                panic!("unexpected delete");
+            }
+        }
+
+        let persistent = provider_credential_from_request(
+            "PUT",
+            "/api/admin/providers/openai/credential",
+            br#"{"apiKey":"stored-key-123456","persistence":"OS_KEYRING"}"#,
+        )
+        .expect("persistent request")
+        .expect("provider operation");
+        match persistent.1 {
+            ProviderCredentialOperation::Set {
+                mut api_key,
+                persist,
+            } => {
+                assert!(persist);
+                assert_eq!(api_key, "stored-key-123456");
+                unsafe_zero_string(&mut api_key);
+            }
+            ProviderCredentialOperation::Delete => {
+                panic!("unexpected delete");
+            }
+        }
+
+        assert!(
+            provider_credential_from_request(
+                "PUT",
+                "/api/admin/providers/openai/credential",
+                br#"{"apiKey":"bad-key-123456","persistence":"UNKNOWN"}"#,
+            )
+            .is_err()
+        );
     }
 
     #[test]
