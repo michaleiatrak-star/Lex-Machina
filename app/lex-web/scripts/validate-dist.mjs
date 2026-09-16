@@ -34,6 +34,9 @@ const required = [
   "/api/providers",
   "/api/documents/review",
   "/api/documents/",
+  "/api/cases",
+  "Archiwum zapisane i rozpakowane lokalnie",
+  "Akta sprawy, OCR i ręczna anonimizacja",
   "Konfiguracja API",
   "OCR zdjęć i ręczna anonimizacja",
   "Anonimizuj / pseudonimizuj",
@@ -56,7 +59,7 @@ const missing = required.filter((token) => !content.includes(token));
 const pass = exposed.length === 0 && missing.length === 0;
 
 process.stdout.write(JSON.stringify({
-  gate: "G14_G32_LOCAL_WEB_UI",
+  gate: "G14_G31AB_G32_LOCAL_WEB_UI",
   result: pass ? "PASS" : "BLOCKED",
   bundleFiles: files.length,
   forbiddenTokensFound: exposed,
