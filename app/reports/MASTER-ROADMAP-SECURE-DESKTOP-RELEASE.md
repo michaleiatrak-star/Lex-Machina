@@ -1,6 +1,6 @@
 # Lex Machina — Master Roadmap to Secure Desktop Release
 
-Status: **IN EXECUTION — G36 + G34H1-H5 PASS; NEXT LIFECYCLE CLOSURE + G31B2**  
+Status: **IN EXECUTION — P4B + G36 + G34H1-H5 PASS; NEXT G31B2**  
 Date: 2026-09-16  
 Branch baseline: `feature/local-runtime`
 
@@ -35,13 +35,14 @@ Validated implementation baseline:
 - G34H4 — PASS
 - G34H5 — PASS
 - G36 — PASS
+- P4B — PASS
 
 Validated code SHA:
-- `4599d4827eb724c480bb3c563a7b58134b844bdf`
+- `4a32f21f49de6d484bfdae3686c16437ebe3fb40`
 
 Validated CI:
-- Lex Runtime Validation `35091284197` — success
-- F-138 `35091284195` — success
+- Lex Runtime Validation `35092482078` — success
+- F-138 `35092482105` — success
 
 Designs completed but not yet fully implemented:
 - G31C2
@@ -49,7 +50,6 @@ Designs completed but not yet fully implemented:
 - G33A-G33D
 - full G34F integration with actual deanonymization/export
 - G34G
-- Phase 4B lifecycle completion: rename/archive/delete
 - G31B2 stored-file/member processing
 
 Open independent capability:
@@ -737,8 +737,22 @@ Detect legacy G31A cases and require explicit owner import/migration.
 
 No silent deletion/move.
 
-## P4B PASS
+## P4B PASS — IMPLEMENTED / VALIDATED
 Restart allows the same authorized user to log in and reopen an existing case without re-uploading files.
+
+Validated code SHA: `4a32f21f49de6d484bfdae3686c16437ebe3fb40`.
+
+Validation:
+- rename persists in SQLite and `case.json`;
+- archive/unarchive persists across restart;
+- archived cases remain readable/manageable but reject WRITE / ANALYZE / REIDENTIFY;
+- permanent delete requires OWNER + fresh current-password reauthentication;
+- wrong password preserves the case;
+- delete removes the case directory, registry row and ACL cascade;
+- schema v3 upgrades safely to v4 `archived_at`;
+- web lifecycle controls and G14 bundle safety pass.
+
+See `BUILD-0040-P4B-CASE-LIFECYCLE.md`.
 
 ---
 
@@ -1441,8 +1455,8 @@ P3 + P4A
 ### Parallel Core Batch — Legal skill runtime completeness
 P2C / G36
 
-### Batch D — Case lifecycle + encrypted file store
-P4B + P5
+### Batch D — Case lifecycle + encrypted file store — GATE SETS COMPLETE
+P4B + G34H1-H5 are PASS. Direct HTTP stream-to-encrypted-store intake remains a Phase 5 hardening item.
 
 ### Batch E — Stored-file processing + authoring AST
 P6 + P7
@@ -1481,53 +1495,54 @@ Completed/validated on the current critical path:
 - G31C1 encrypted persistent privacy vault;
 - G35A/G35B case workspace + shared template foundation;
 - G34H1/G34H2/G34H3/G34H4/G34H5;
-- G36 legal skill runtime completeness.
+- G36 legal skill runtime completeness;
+- P4B case lifecycle.
 
 Validated implementation SHA:
-- `4599d4827eb724c480bb3c563a7b58134b844bdf`
+- `4a32f21f49de6d484bfdae3686c16437ebe3fb40`
 
 Validation:
-- Lex Runtime Validation `35091284197` — success;
-- F-138 `35091284195` — success;
-- G34H5 — PASS;
-- web build/bundle and G17/G19/G20/G22 live probes — success.
+- Lex Runtime Validation `35092482078` — success;
+- F-138 `35092482105` — success;
+- P4B_CASE_LIFECYCLE — PASS;
+- G34H1-H5 — PASS;
+- G36 — PASS;
+- web build/G14 and G17/G19/G20/G22 live probes — success.
 
 ## Closure audit before moving forward
 
 The following earlier phases are fully closed for their current gate scope:
+- Phase 0 — current baseline regression coverage;
 - Phase 1 — G34A/G34B identity/login/session;
 - Phase 2 — G34C/G34D ACL + case-key envelopes;
 - Phase 2B — G35A/G35B workspace/template foundation;
+- Phase 2C — G36 legal-skill runtime completeness;
 - Phase 3 — G31C1 encrypted persistent vault;
-- parallel G36 legal-skill runtime completeness.
+- Phase 4B — P4B case lifecycle: list/create/reopen/select/import/rename/archive/unarchive/delete;
+- Phase 5 — G34H1-H5 encrypted-at-rest gate set for supported storage formats.
 
-The following earlier phases are **not** fully closed:
+The following earlier work is still **not fully closed**:
 - Phase 4A — G34E is PASS and G34F1 is PASS, but full G34F remains open until real G31D/G31E deanonymization/export consumes the one-use grant;
-- Phase 4B — list/create/reopen/select and explicit legacy import exist, but rename/archive/delete are not implemented;
-- Phase 5 — the G34H1-H5 encrypted-at-rest gate set is PASS, but the roadmap engineering checklist still contains direct HTTP streaming work: production upload intake is still whole-body memory buffered before encrypted persistence.
+- Phase 5 engineering hardening — production direct HTTP upload intake is still bounded whole-body memory buffering before encrypted persistence; true stream-to-encrypted-store intake remains open.
 
-G34H5 migration is deliberately fail-closed:
+G34H5 migration remains deliberately fail-closed:
 - known legacy uploads are encrypted and verified before plaintext removal;
 - unknown/non-empty legacy documents/artifacts/audit content is preserved and blocks migration;
 - no secure-erase guarantee is claimed for SSD/flash storage.
 
 ## Next execution order
 
-1. close Phase 4B case lifecycle:
-   - rename;
-   - archive/unarchive;
-   - OWNER + fresh reauth delete flow;
-   - migration status/recovery UX;
-2. implement G31B2 stored-file/member processing:
-   - opaque stored file/member ids;
-   - parser/signature validation;
+1. implement G31B2 stored-file/member processing:
+   - opaque stored upload/member ids;
+   - safe member metadata resolution;
+   - magic-signature/media validation;
    - processing without browser re-upload;
-3. implement G31C2 typed LegalDocumentAst + generation aliases;
-4. implement G35C safe template-profile integration;
-5. implement G31D DOCX and G31E ODT;
-6. integrate full G34F grant consumption and one-use sensitive download into actual export;
-7. implement G34G Tauri production trust boundary;
-8. implement G33A-G33D installer and clean-machine release acceptance.
+2. implement G31C2 typed LegalDocumentAst + generation aliases;
+3. implement G35C safe template-profile integration;
+4. implement G31D DOCX and G31E ODT;
+5. integrate full G34F grant consumption and one-use sensitive download into actual export;
+6. implement G34G Tauri production trust boundary;
+7. implement G33A-G33D installer and clean-machine release acceptance.
 
 Parallel/open:
 - G30 Open Web Discovery remains independently open and does not block the secure local-document path unless included in release scope.
