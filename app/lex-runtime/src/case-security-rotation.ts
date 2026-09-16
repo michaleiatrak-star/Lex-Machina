@@ -7,6 +7,9 @@ import type {
 import type {
   EncryptedPrivacyVaultStore
 } from "./privacy/vault-store.js";
+import type {
+  SecureCaseDocumentStore
+} from "./case-document-store.js";
 
 type RotationArgs =
   Parameters<
@@ -27,53 +30,90 @@ implements CaseKeyRotationParticipant {
       Pick<
         SecureCaseUploadStore,
         "rekeyCaseIncoming"
+      >,
+    private readonly documents?:
+      Pick<
+        SecureCaseDocumentStore,
+        "rekeyCaseDocuments"
       >
   ) {}
 
   async rekeyCaseVault(
     args: RotationArgs
   ): Promise<boolean> {
-    const vaultChanged =
-      await this.vault
-        .rekeyCaseVault(
-          args
-        );
+    let vaultChanged = false;
+    let uploadsChanged = false;
+    let documentsChanged = false;
+
+    const reverse = {
+      caseId:
+        args.caseId,
+      oldCaseDataKey:
+        args.newCaseDataKey,
+      oldKeyVersion:
+        args.newKeyVersion,
+      newCaseDataKey:
+        args.oldCaseDataKey,
+      newKeyVersion:
+        args.oldKeyVersion
+    };
 
     try {
-      const uploadsChanged =
+      vaultChanged =
+        await this.vault
+          .rekeyCaseVault(
+            args
+          );
+      uploadsChanged =
         await this.uploads
           .rekeyCaseIncoming(
             args
           );
+      if (
+        this.documents
+      ) {
+        documentsChanged =
+          await this.documents
+            .rekeyCaseDocuments(
+              args
+            );
+      }
       return (
         vaultChanged ||
-        uploadsChanged
+        uploadsChanged ||
+        documentsChanged
       );
     } catch (error) {
-      if (vaultChanged) {
-        try {
-          await this.vault
-            .rekeyCaseVault({
-              caseId:
-                args.caseId,
-              oldCaseDataKey:
-                args
-                  .newCaseDataKey,
-              oldKeyVersion:
-                args
-                  .newKeyVersion,
-              newCaseDataKey:
-                args
-                  .oldCaseDataKey,
-              newKeyVersion:
-                args
-                  .oldKeyVersion
-            });
-        } catch {
-          throw new Error(
-            "CASE_SECURITY_REKEY_ROLLBACK_FAILED"
-          );
+      try {
+        if (
+          documentsChanged &&
+          this.documents
+        ) {
+          await this.documents
+            .rekeyCaseDocuments(
+              reverse
+            );
         }
+        if (
+          uploadsChanged
+        ) {
+          await this.uploads
+            .rekeyCaseIncoming(
+              reverse
+            );
+        }
+        if (
+          vaultChanged
+        ) {
+          await this.vault
+            .rekeyCaseVault(
+              reverse
+            );
+        }
+      } catch {
+        throw new Error(
+          "CASE_SECURITY_REKEY_ROLLBACK_FAILED"
+        );
       }
       throw error;
     }
