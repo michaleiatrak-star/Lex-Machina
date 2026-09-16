@@ -61,10 +61,36 @@ export type PagePrivacyDirective = {
   label?: string;
 };
 
+export type CaseRole =
+  | "OWNER"
+  | "EDITOR"
+  | "ANALYST"
+  | "VIEWER";
+
 export type CaseResponse = {
   caseId: string;
   displayName?: string;
   createdAt: string;
+  updatedAt?: string;
+  createdByUserId?: string;
+  keyVersion?: number;
+  role?: CaseRole;
+  canReidentify?: boolean;
+};
+
+export type CaseListItem = {
+  caseId: string;
+  displayName?: string;
+  createdByUserId: string;
+  createdAt: string;
+  updatedAt: string;
+  keyVersion: number;
+  role: CaseRole;
+  canReidentify: boolean;
+};
+
+export type CaseListResponse = {
+  cases: CaseListItem[];
 };
 
 export type StoredArchiveEntry = {
@@ -488,6 +514,21 @@ export async function logoutAuth():
   } finally {
     clearAuthSession();
   }
+}
+
+export function listCases():
+  Promise<CaseListResponse> {
+  return json<CaseListResponse>(
+    "/api/cases"
+  );
+}
+
+export function openCase(
+  caseId: string
+): Promise<CaseListItem> {
+  return json<CaseListItem>(
+    `/api/cases/${caseId}`
+  );
 }
 
 export function createCase(
