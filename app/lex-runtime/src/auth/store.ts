@@ -329,6 +329,25 @@ export class LocalAuthStore {
       VALUES (3);
     `);
 
+    const userColumns =
+      this.db.prepare(
+        "PRAGMA table_info(users)"
+      ).all() as
+        Record<string, unknown>[];
+    if (
+      !userColumns.some(
+        (column) =>
+          column.name ===
+            "password_setup_pending"
+      )
+    ) {
+      this.db.exec(
+        "ALTER TABLE users " +
+        "ADD COLUMN password_setup_pending INTEGER NOT NULL DEFAULT 0 " +
+        "CHECK (password_setup_pending IN (0,1))"
+      );
+    }
+
     const caseColumns =
       this.db.prepare(
         "PRAGMA table_info(cases)"
@@ -371,6 +390,9 @@ export class LocalAuthStore {
     `);
     this.db.prepare(
       "INSERT OR IGNORE INTO auth_schema(version) VALUES (5)"
+    ).run();
+    this.db.prepare(
+      "INSERT OR IGNORE INTO auth_schema(version) VALUES (6)"
     ).run();
 
 
@@ -508,6 +530,7 @@ export class LocalAuthStore {
         display_name,
         app_role,
         status,
+        password_setup_pending,
         created_at,
         updated_at,
         last_login_at,
@@ -525,7 +548,7 @@ export class LocalAuthStore {
         umk_wrap_tag,
         umk_key_version
       ) VALUES (
-        ?,?,?,?,?,?,?,?,?,?,
+        ?,?,?,?,?,?,?,?,?,?,?,
         ?,?,?,?,?,?,?,
         ?,?,?,?,?
       )
@@ -536,6 +559,9 @@ export class LocalAuthStore {
       user.displayName,
       user.appRole,
       user.status,
+      user.passwordSetupPending
+        ? 1
+        : 0,
       user.createdAt,
       user.updatedAt,
       user.lastLoginAt ?? null,
@@ -643,6 +669,11 @@ export class LocalAuthStore {
       ),
       appRole: role,
       status,
+      passwordSetupPending:
+        numberValue(
+          row.password_setup_pending,
+          "password_setup_pending"
+        ) === 1,
       createdAt: textValue(
         row.created_at,
         "created_at"
@@ -932,6 +963,74 @@ export class LocalAuthStore {
         UPDATE users
         SET auth_epoch =
               auth_epoch + 1,
+            updated_at = ?
+        WHERE user_id = ?
+      `).run(
+        args.password.updatedAt,
+        args.password.userId
+      );
+      const row = this.db
+        .prepare(`
+          SELECT auth_epoch
+          FROM users
+          WHERE user_id = ?
+        `)
+        .get(
+          args.password.userId
+        ) as
+          | {
+              auth_epoch?:
+                number | bigint;
+            }
+          | undefined;
+      const epoch =
+        numberValue(
+          row?.auth_epoch,
+          "auth_epoch"
+        );
+      this.db.exec("COMMIT");
+      return epoch;
+    } catch (error) {
+      if (this.db.isTransaction) {
+        this.db.exec(
+          "ROLLBACK"
+        );
+      }
+      throw error;
+    }
+  }
+
+  completePasswordSetupAndRotateRecovery(
+    args: {
+      password: {
+        userId: string;
+        updatedAt: string;
+        kdf: AuthKdfPolicy;
+        kdfSalt: Buffer;
+        nonce: Buffer;
+        ciphertext: Buffer;
+        tag: Buffer;
+        keyVersion: number;
+      };
+      recovery:
+        StoredRecoveryEnvelope;
+    }
+  ): number {
+    this.db.exec(
+      "BEGIN IMMEDIATE"
+    );
+    try {
+      this.updatePasswordEnvelope(
+        args.password
+      );
+      this.putRecoveryEnvelope(
+        args.recovery
+      );
+      this.db.prepare(`
+        UPDATE users
+        SET auth_epoch =
+              auth_epoch + 1,
+            password_setup_pending = 0,
             updated_at = ?
         WHERE user_id = ?
       `).run(
