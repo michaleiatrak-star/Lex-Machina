@@ -114,6 +114,24 @@ export type CaseListResponse = {
   cases: CaseListItem[];
 };
 
+export type CaseAccessEntry = {
+  user: AuthenticatedUser;
+  role: CaseRole;
+  canReidentify: boolean;
+  grantedByUserId: string;
+  grantedAt: string;
+  keyVersion: number;
+};
+
+export type CaseAccessResponse = {
+  access: CaseAccessEntry[];
+};
+
+export type CaseAccessCandidatesResponse = {
+  users: AuthenticatedUser[];
+};
+
+
 export type StoredArchiveEntry = {
   relativePath: string;
   compressedBytes: number;
@@ -775,6 +793,60 @@ export function deleteCase(
       body: JSON.stringify({
         password
       })
+    }
+  );
+}
+
+export function listCaseAccess(
+  caseId: string
+): Promise<CaseAccessResponse> {
+  return json<CaseAccessResponse>(
+    `/api/cases/${caseId}/access`
+  );
+}
+
+export function listCaseAccessCandidates(
+  caseId: string
+): Promise<CaseAccessCandidatesResponse> {
+  return json<CaseAccessCandidatesResponse>(
+    `/api/cases/${caseId}/access-candidates`
+  );
+}
+
+export function grantCaseAccess(
+  caseId: string,
+  input: {
+    userId: string;
+    role: Exclude<
+      CaseRole,
+      "OWNER"
+    >;
+    canReidentify: boolean;
+  }
+): Promise<CaseAccessEntry> {
+  return json<CaseAccessEntry>(
+    `/api/cases/${caseId}/access`,
+    {
+      method: "POST",
+      body: JSON.stringify(
+        input
+      )
+    }
+  );
+}
+
+export function revokeCaseAccess(
+  caseId: string,
+  userId: string
+): Promise<{
+  caseId: string;
+  revokedUserId: string;
+  keyVersion: number;
+}> {
+  return json(
+    `/api/cases/${caseId}/access/${userId}`,
+    {
+      method: "DELETE"
     }
   );
 }
