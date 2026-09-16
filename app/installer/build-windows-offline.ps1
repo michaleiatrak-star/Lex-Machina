@@ -10,6 +10,20 @@ $tauri = Join-Path $desktop "src-tauri"
 $payload = Join-Path $tauri "runtime"
 $sourceLock = Get-Content -Raw (Join-Path $installer "windows-release-source.json") | ConvertFrom-Json
 
+function Assert-Sha256([string]$Path, [string]$Expected, [string]$Label) {
+  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+    throw "SOURCE_FILE_MISSING:$Label:$Path"
+  }
+  if ($Expected -notmatch '^[a-fA-F0-9]{64}$') {
+    throw "SOURCE_HASH_INVALID:$Label"
+  }
+  $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $Path).Hash.ToLowerInvariant()
+  if ($actual -ne $Expected.ToLowerInvariant()) {
+    throw "SOURCE_HASH_MISMATCH:$Label expected=$Expected actual=$actual"
+  }
+  Write-Host "Verified $Label SHA-256: $actual"
+}
+
 if ($env:OS -ne "Windows_NT") {
   throw "Windows offline payload must be built on Windows."
 }
@@ -49,17 +63,20 @@ Copy-Item (Join-Path $repo "Wersja rozwojowa rozpakowana") (Join-Path $payload "
 Write-Host "[3/9] Private Node"
 $cache = Join-Path $installer ".cache"
 New-Item $cache -ItemType Directory -Force | Out-Null
-$nodeZip = Join-Path $cache "node.zip"
+$nodeZip = Join-Path $cache "node-$($sourceLock.runtime.node.version)-win-x64.zip"
 Invoke-WebRequest -UseBasicParsing -Uri $sourceLock.runtime.node.url -OutFile $nodeZip
+Assert-Sha256 $nodeZip $sourceLock.runtime.node.sha256 "node-runtime-source"
 $nodeExtract = Join-Path $cache "node-extract"
 Remove-Item $nodeExtract -Recurse -Force -ErrorAction SilentlyContinue
 Expand-Archive -Path $nodeZip -DestinationPath $nodeExtract -Force
 $nodeDir = Get-ChildItem $nodeExtract -Directory | Select-Object -First 1
+if (-not $nodeDir) { throw "NODE_ARCHIVE_LAYOUT_INVALID" }
 Copy-Item $nodeDir.FullName (Join-Path $payload "node") -Recurse
 
 Write-Host "[4/9] Private Python"
-$pythonInstaller = Join-Path $cache "python.exe"
+$pythonInstaller = Join-Path $cache "python-$($sourceLock.runtime.python.version)-amd64.exe"
 Invoke-WebRequest -UseBasicParsing -Uri $sourceLock.runtime.python.url -OutFile $pythonInstaller
+Assert-Sha256 $pythonInstaller $sourceLock.runtime.python.sha256 "python-runtime-source"
 $pythonDir = Join-Path $payload "python"
 $args = @(
   "/quiet",
@@ -77,10 +94,13 @@ $args = @(
 $install = Start-Process -FilePath $pythonInstaller -ArgumentList $args -Wait -PassThru
 if ($install.ExitCode -ne 0) { throw "Private Python install failed: $($install.ExitCode)" }
 $python = Join-Path $pythonDir "python.exe"
+if (-not (Test-Path -LiteralPath $python -PathType Leaf)) { throw "PRIVATE_PYTHON_MISSING" }
 
 Write-Host "[5/9] Pinned Python/ML packages"
 & $python -m pip install --disable-pip-version-check --no-warn-script-location -r (Join-Path $installer "windows-release-requirements.txt")
 if ($LASTEXITCODE -ne 0) { throw "Pinned Python package install failed" }
+& $python -m pip freeze --all | Sort-Object | Out-File -FilePath (Join-Path $payload "python-dependency-tree.txt") -Encoding utf8
+if ($LASTEXITCODE -ne 0) { throw "Python dependency provenance failed" }
 
 Write-Host "[6/9] Prefetch OCR/NER models"
 $modelRoot = Join-Path $payload "models"
