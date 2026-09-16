@@ -51,6 +51,20 @@ export type PrivacyAnnotation = {
   label: string;
 };
 
+export type PseudonymizationVaultToken = {
+  token: string;
+  kind: PiiKind;
+  value: string;
+  createdAt: string;
+};
+
+export type PseudonymizationVaultSnapshot = {
+  counters:
+    Partial<Record<PiiKind, number>>;
+  tokens:
+    PseudonymizationVaultToken[];
+};
+
 export type PseudonymizationResult = {
   text: string;
   findings: PseudonymizationFinding[];
@@ -202,41 +216,264 @@ function normalizeDirectives(
 }
 
 export class PseudonymizationVault {
-  private readonly tokenToValue = new Map<string, string>();
-  private readonly keyToToken = new Map<string, string>();
-  private readonly counters = new Map<PiiKind, number>();
+  private readonly tokenToValue =
+    new Map<string, string>();
+  private readonly keyToToken =
+    new Map<string, string>();
+  private readonly counters =
+    new Map<PiiKind, number>();
+  private readonly tokenMetadata =
+    new Map<
+      string,
+      {
+        kind: PiiKind;
+        createdAt: string;
+      }
+    >();
 
-  getOrCreate(kind: PiiKind, value: string): string {
-    const key = `${kind}\u0000${value}`;
-    const existing = this.keyToToken.get(key);
-    if (existing) return existing;
+  constructor(
+    snapshot?:
+      PseudonymizationVaultSnapshot
+  ) {
+    if (snapshot) {
+      this.hydrate(snapshot);
+    }
+  }
 
-    const next = (this.counters.get(kind) ?? 0) + 1;
-    this.counters.set(kind, next);
+  private hydrate(
+    snapshot:
+      PseudonymizationVaultSnapshot
+  ): void {
+    for (
+      const [
+        kind,
+        rawCount
+      ] of Object.entries(
+        snapshot.counters
+      ) as Array<
+        [PiiKind, number]
+      >
+    ) {
+      if (
+        !Number.isInteger(
+          rawCount
+        ) ||
+        rawCount < 0
+      ) {
+        throw new Error(
+          "INVALID_PRIVACY_VAULT_COUNTER"
+        );
+      }
+      this.counters.set(
+        kind,
+        rawCount
+      );
+    }
+
+    for (
+      const item
+      of snapshot.tokens
+    ) {
+      const match =
+        /^\[PII:([A-Z_]+):(\d{4})\]$/
+          .exec(item.token);
+      if (
+        !match ||
+        match[1] !== item.kind ||
+        typeof item.value !==
+          "string" ||
+        typeof item.createdAt !==
+          "string" ||
+        !Number.isFinite(
+          Date.parse(
+            item.createdAt
+          )
+        ) ||
+        this.tokenToValue.has(
+          item.token
+        )
+      ) {
+        throw new Error(
+          "INVALID_PRIVACY_VAULT_TOKEN"
+        );
+      }
+
+      const key =
+        `${item.kind}\u0000${item.value}`;
+      if (
+        this.keyToToken.has(key)
+      ) {
+        throw new Error(
+          "DUPLICATE_PRIVACY_VAULT_VALUE"
+        );
+      }
+
+      const sequence =
+        Number(match[2]);
+      const counter =
+        this.counters.get(
+          item.kind
+        ) ?? 0;
+      if (
+        sequence > counter
+      ) {
+        this.counters.set(
+          item.kind,
+          sequence
+        );
+      }
+
+      this.keyToToken.set(
+        key,
+        item.token
+      );
+      this.tokenToValue.set(
+        item.token,
+        item.value
+      );
+      this.tokenMetadata.set(
+        item.token,
+        {
+          kind: item.kind,
+          createdAt:
+            item.createdAt
+        }
+      );
+    }
+  }
+
+  getOrCreate(
+    kind: PiiKind,
+    value: string
+  ): string {
+    const key =
+      `${kind}\u0000${value}`;
+    const existing =
+      this.keyToToken.get(key);
+    if (existing) {
+      return existing;
+    }
+
+    const next =
+      (
+        this.counters.get(
+          kind
+        ) ?? 0
+      ) + 1;
+    this.counters.set(
+      kind,
+      next
+    );
     const token =
-      `[PII:${kind}:${String(next).padStart(4, "0")}]`;
-    this.keyToToken.set(key, token);
-    this.tokenToValue.set(token, value);
+      `[PII:${kind}:${String(
+        next
+      ).padStart(4, "0")}]`;
+    this.keyToToken.set(
+      key,
+      token
+    );
+    this.tokenToValue.set(
+      token,
+      value
+    );
+    this.tokenMetadata.set(
+      token,
+      {
+        kind,
+        createdAt:
+          new Date()
+            .toISOString()
+      }
+    );
     return token;
   }
 
-  deanonymize(text: string): string {
+  hasToken(
+    token: string
+  ): boolean {
+    return this.tokenToValue
+      .has(token);
+  }
+
+  resolveToken(
+    token: string
+  ): string {
+    const value =
+      this.tokenToValue.get(
+        token
+      );
+    if (value === undefined) {
+      throw new Error(
+        `Unknown pseudonymization token: ${token}`
+      );
+    }
+    return value;
+  }
+
+  snapshot():
+    PseudonymizationVaultSnapshot {
+    const counters:
+      Partial<
+        Record<PiiKind, number>
+      > = {};
+    for (
+      const [kind, count]
+      of this.counters
+    ) {
+      counters[kind] = count;
+    }
+
+    const tokens =
+      [...this.tokenToValue
+        .entries()]
+        .map(
+          ([token, value]) => {
+            const metadata =
+              this.tokenMetadata
+                .get(token);
+            if (!metadata) {
+              throw new Error(
+                "PRIVACY_VAULT_METADATA_MISSING"
+              );
+            }
+            return {
+              token,
+              kind:
+                metadata.kind,
+              value,
+              createdAt:
+                metadata.createdAt
+            };
+          }
+        )
+        .sort((a, b) =>
+          a.token.localeCompare(
+            b.token,
+            "en"
+          )
+        );
+
+    return {
+      counters,
+      tokens
+    };
+  }
+
+  deanonymize(
+    text: string
+  ): string {
     return text.replace(
       /\[PII:[A-Z_]+:\d{4}\]/g,
-      (token) => {
-        const value = this.tokenToValue.get(token);
-        if (value === undefined) {
-          throw new Error(
-            `Unknown pseudonymization token: ${token}`
-          );
-        }
-        return value;
-      }
+      (token) =>
+        this.resolveToken(
+          token
+        )
     );
   }
 
   get size(): number {
-    return this.tokenToValue.size;
+    return this.tokenToValue
+      .size;
   }
 }
 
