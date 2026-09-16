@@ -956,7 +956,9 @@ describe("local API client", () => {
         ?.[1]?.body
     ).toBe(
       JSON.stringify({
-        apiKey: key
+        apiKey: key,
+        persistence:
+          "PROCESS_MEMORY"
       })
     );
     expect(
