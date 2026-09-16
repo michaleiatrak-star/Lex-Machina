@@ -720,6 +720,7 @@ export class LocalAuthStore {
         ciphertext = excluded.ciphertext,
         tag = excluded.tag,
         key_version = excluded.key_version,
+        created_at = excluded.created_at,
         updated_at = excluded.updated_at
     `).run(
       value.userId,
