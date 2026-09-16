@@ -11,6 +11,7 @@ export type ScriptedProviderOptions = {
   id: ProviderId;
   label?: string;
   capabilities?: Partial<ProviderCapabilities>;
+  autoToolCall?: boolean;
 };
 
 const DEFAULT_CAPABILITIES: ProviderCapabilities = {
@@ -24,6 +25,7 @@ export class ScriptedProviderAdapter implements ProviderAdapter {
   readonly id: ProviderId;
   readonly label: string;
   readonly capabilities: ProviderCapabilities;
+  private readonly autoToolCall: boolean;
 
   constructor(options: ScriptedProviderOptions) {
     this.id = options.id;
@@ -32,6 +34,9 @@ export class ScriptedProviderAdapter implements ProviderAdapter {
       ...DEFAULT_CAPABILITIES,
       ...options.capabilities
     };
+    this.autoToolCall =
+      options.autoToolCall ??
+      false;
   }
 
   async listModels(): Promise<string[]> {
@@ -44,7 +49,10 @@ export class ScriptedProviderAdapter implements ProviderAdapter {
     params.callbacks?.onReasoningDelta?.("reasoning");
     params.callbacks?.onReasoningBlockEnd?.();
 
-    const requestedTool = params.tools?.[0];
+    const requestedTool =
+      this.autoToolCall
+        ? params.tools?.[0]
+        : undefined;
     if (requestedTool) {
       if (!params.runTools) {
         throw new Error("TOOLS_REQUESTED_WITHOUT_RUNNER");
