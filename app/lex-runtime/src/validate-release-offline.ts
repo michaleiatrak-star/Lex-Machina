@@ -41,6 +41,10 @@ const build =
   read(
     "app/installer/build-windows-offline.ps1"
   );
+const onlineBuild =
+  read(
+    "app/installer/build-windows-online.ps1"
+  );
 const acceptance =
   read(
     "app/installer/windows-installer-acceptance.ps1"
@@ -48,6 +52,14 @@ const acceptance =
 const bootstrap =
   read(
     "app/installer/windows-online-bootstrap.ps1"
+  );
+const offlineBundleInstall =
+  read(
+    "app/installer/windows-offline-bundle-install.ps1"
+  );
+const hooks =
+  read(
+    "app/lex-desktop/src-tauri/windows/hooks.nsh"
   );
 const componentLock =
   read(
@@ -58,7 +70,7 @@ const checks = {
   pullRequestGate:
     workflow.includes("pull_request:") &&
     workflow.includes(
-      "Build and accept self-contained Windows NSIS installer"
+      "Build and accept offline Windows distribution bundle"
     ),
   offlineWebView2:
     offlineConfig.bundle?.windows
@@ -84,12 +96,41 @@ const checks = {
     build.includes(
       "Prefetch OCR/NER models"
     ),
+  externalizedRuntimeAvoidsNsisLimit:
+    workflow.includes(
+      "Stage external offline runtime bundle"
+    ) &&
+    workflow.includes(
+      "Rebuild thin installer payload"
+    ) &&
+    workflow.includes(
+      "LexMachina-Offline-Runtime.zip"
+    ) &&
+    workflow.includes(
+      "tar.exe -a -c -f"
+    ),
   offlineComponentPolicy:
     componentLock.includes(
       "[bool]$NetworkRequiredAtInstall = $false"
     ) &&
     componentLock.includes(
       "runtimeNetworkRequiredAfterBootstrap = $false"
+    ),
+  offlineBundleIntegrity:
+    workflow.includes(
+      "offline-runtime.json"
+    ) &&
+    offlineBundleInstall.includes(
+      "OFFLINE_BUNDLE_HASH_MISMATCH"
+    ) &&
+    offlineBundleInstall.includes(
+      "OFFLINE_BUNDLE_LOCK_HASH_MISMATCH"
+    ) &&
+    hooks.includes(
+      "windows-offline-bundle-install.ps1"
+    ) &&
+    onlineBuild.includes(
+      "windows-offline-bundle-install.ps1"
     ),
   bundledVisualCppFallback:
     build.includes(
@@ -98,11 +139,8 @@ const checks = {
     bootstrap.includes(
       'Join-Path $runtime "prerequisites\\vc_redist.x64.exe"'
     ) &&
-    bootstrap.includes(
-      "Using verified bundled visual-cpp-runtime"
-    ) &&
-    bootstrap.includes(
-      "BOOTSTRAP_HASH_MISMATCH:visual-cpp-runtime-bundled"
+    offlineBundleInstall.includes(
+      'Join-Path $runtime "prerequisites\\vc_redist.x64.exe"'
     ),
   installedCopyAcceptance:
     workflow.includes(
@@ -116,6 +154,9 @@ const checks = {
     ) &&
     acceptance.includes(
       "BlockNetworkDuringInstall"
+    ) &&
+    acceptance.includes(
+      "INSTALLER_ACCEPTANCE_INSTALL_TIMEOUT"
     ),
   installedRuntimeIsPrivate:
     acceptance.includes(
@@ -142,7 +183,7 @@ const checks = {
       "SHA256-OFFLINE.txt"
     ) &&
     workflow.includes(
-      "Get-FileHash -Algorithm SHA256"
+      "runtime_bundle_sha256"
     ) &&
     workflow.includes(
       "LexMachina-Windows-Offline-Setup"

@@ -2,7 +2,8 @@ param(
   [Parameter(Mandatory=$true)][string]$InstallerPath,
   [string]$InstallRoot,
   [bool]$ExpectedNetworkRequiredAtInstall = $true,
-  [switch]$BlockNetworkDuringInstall
+  [switch]$BlockNetworkDuringInstall,
+  [int]$InstallTimeoutSeconds = 3600
 )
 
 $ErrorActionPreference = "Stop"
@@ -16,6 +17,13 @@ if (-not $InstallRoot) {
 }
 $InstallRoot = [IO.Path]::GetFullPath($InstallRoot)
 Remove-Item $InstallRoot -Recurse -Force -ErrorAction SilentlyContinue
+
+if (-not $ExpectedNetworkRequiredAtInstall) {
+  $offlineBundle = Join-Path $installerInfo.Directory.FullName "LexMachina-Offline-Runtime.zip"
+  if (-not (Test-Path -LiteralPath $offlineBundle -PathType Leaf)) {
+    throw "INSTALLER_ACCEPTANCE_OFFLINE_BUNDLE_MISSING"
+  }
+}
 
 $oldPath = $env:PATH
 $oldHttpProxy = $env:HTTP_PROXY
@@ -33,7 +41,12 @@ try {
 
   Write-Host "G33D: silent install to $InstallRoot"
   $arguments = @("/S", "/D=$InstallRoot")
-  $process = Start-Process -FilePath $installer -ArgumentList $arguments -Wait -PassThru
+  $process = Start-Process -FilePath $installer -ArgumentList $arguments -PassThru
+  if (-not $process.WaitForExit($InstallTimeoutSeconds * 1000)) {
+    Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
+    throw "INSTALLER_ACCEPTANCE_INSTALL_TIMEOUT:$InstallTimeoutSeconds"
+  }
+  $process.Refresh()
   if ($process.ExitCode -ne 0) {
     throw "INSTALLER_ACCEPTANCE_INSTALL_FAILED:$($process.ExitCode)"
   }

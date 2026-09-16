@@ -48,6 +48,7 @@ $bootstrap = Join-Path $payload "bootstrap"
 New-Item $bootstrap -ItemType Directory | Out-Null
 foreach ($file in @(
   "windows-online-bootstrap.ps1",
+  "windows-offline-bundle-install.ps1",
   "prefetch-release-models.py",
   "generate-component-lock.ps1",
   "windows-payload-selftest.ps1"
@@ -72,6 +73,7 @@ foreach ($required in @(
   "release-source.json",
   "release-requirements.txt",
   "bootstrap\windows-online-bootstrap.ps1",
+  "bootstrap\windows-offline-bundle-install.ps1",
   "bootstrap\windows-payload-selftest.ps1"
 )) {
   if (-not (Test-Path -LiteralPath (Join-Path $payload $required) -PathType Leaf)) {
