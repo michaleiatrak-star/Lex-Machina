@@ -171,7 +171,7 @@ ODMÓW NA MIEJSCU gdy:
 
 SKUTEK ODMOWY:
   → Organ sporządza wniosek o ukaranie → SR → tryb nakazowy LUB rozprawa
-  → Wyrok nakazowy: SPRZECIW w 7 dni od doręczenia (ZAWITY — art. 94 KPSW)
+  → Wyrok nakazowy: SPRZECIW w 7 dni od doręczenia (ZAWITY — art. 94 § 1 KPW w zw. z art. 506 § 1 KPK)
   → Po sprzeciwie: rozprawa + obecność, możliwość obrony
 ```
 

@@ -1,5 +1,6 @@
 # CHANGELOG — analizator-dowodow-v3
 
+- 5.16.9 (2026-09-16, F-189): T12: pole YAML `changelog:` (20 linii, numer 5.16.5 przy version 5.16.8) skrócone do odesłania — historia wyłącznie w references/CHANGELOG.md (ZASADA 15). Treść bez zmian.
 - 5.16.8 (2026-09-12d, O-11 rodzina TERMINY): MD5-terminy, MP12-terminy i MX-dziedziny — usunięte odesłania do UCHYLONEGO art. 503 KPC; termin sprzeciwu i zarzutów przeniesiony na art. 480[2] § 2 KPC (2 tygodnie / miesiąc / MIESIĄC dla nakazowego / 3 miesiące). MD5: naprawiony wniosek o uzasadnienie w KPW (3 dni, art. 105 § 1 -> 7 dni, art. 35 § 1 KPW) i apelacja wykroczeniowa (§ 2 -> § 1); dodany sprzeciw od wyroku zaocznego (art. 344 § 1) i wariant 3 tygodni z art. 369 § 1[1]. MP12: ⛔ CZWARTE wystąpienie "art. 328[1] KPC" w systemie — jednostka NIE ISTNIEJE, poprawione na art. 328 § 1 i § 2
 > Pełna historia napraw i zmian wersji (wpisy 4.0.0...5.16.3; 5.16.0-5.16.2 odtworzone wtórnie 2026-08-31, F-140).
 > Wyniesiona z SKILL.md 2026-07-12 (runda 2 — redukcja kosztu kontekstu),

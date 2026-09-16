@@ -1,5 +1,8 @@
 # CHANGELOG — Biblioteka shared
 
+## 3.62 — 2026-09-16 — F-189
+
+- terminy.md — (1) KRO: dopisane terminy macierzyństwa art. 61¹¹, 61¹³ § 1–2, 61¹⁴ § 1 (ROK; ✅ RZĄD 1 Dz.U. 2026 poz. 236) i ostrzeżenie o błędzie „6 miesięcy/3 lata”; (2) KP: zakres nowelizacji poz. 1046 poprawiony z odczytu treści (art. 11 nie jest zmieniany). Pole YAML `changelog:` skrócone do odesłania (T12).
 ## 3.61 — 2026-09-14 — CBOSA retrieval/snapshot jako jawny kanał provenance
 
 - V-SYG-0.5 ma obowiązkowy POST-CHECK HOSTA przed exact-match; `site:`

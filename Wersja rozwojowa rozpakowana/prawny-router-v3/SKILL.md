@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.49"
+version: "3.50"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -106,18 +106,9 @@ required_modules:
   - shared/MOD-CN-GATE.md
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
-changelog:
-  - '3.49 (2026-09-13c, F-157b): biała lista VAT odblokowana — escalation
-    przepisane z NIEOSIĄGALNA na osiągalną, z parametrami wywołania i wymogiem
-    zapisu requestId. Zmiana wymuszona pomiarem T25 (52 sondy, 6 hostów
-    odblokowanych, 1 regresja: CBOSA).'
-  - '3.48 (2026-09-10x, O-11): KWOTA-GATE. Nowa pozycja kontrolna w SELF-CHECK:
-    przy kazdej kwocie oplaty, taksy lub wyliczenia trzy pytania - czy strona
-    nie jest zwolniona (art. 94-103 KSCU), czy kwota pochodzi z TABELI
-    USTANAWIAJACEJ, czy sprawdzono PRZYPISY przy jednostce redakcyjnej.
-    shared/TABELE-OPLAT.md w required_modules i w warstwie odroczonej
-    PROFIL-LEKKI z wyzwalaczem: zamierzasz podac kwote.'
-  - 'Pelna historia wszystkich wersji: references/CHANGELOG.md (ZASADA 15).'
+changelog: |
+  Wersja bieżąca: 3.50 (2026-09-16, F-189): T12: pole YAML `changelog:` skrócone do odesłania; wersja 3.49 bez opisu oznaczona jako LUKA JAWNA. Treść bez zmian.…
+  Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
 ## ŁADOWANE ZAWSZE — BEZWZGLĘDNIE

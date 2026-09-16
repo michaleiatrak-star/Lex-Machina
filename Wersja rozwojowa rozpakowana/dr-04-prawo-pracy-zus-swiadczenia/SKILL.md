@@ -1,6 +1,6 @@
 ---
 name: dr-04-prawo-pracy-zus-swiadczenia
-version: "3.33"
+version: "3.34"
 description: "Prawo pracy, ZUS i świadczenia: KP, zatrudnienie, rozwiązanie stosunku pracy, ubezpieczenia społeczne, emerytury, renty, KRUS, PFRON i pomoc społeczna."
 ---
 

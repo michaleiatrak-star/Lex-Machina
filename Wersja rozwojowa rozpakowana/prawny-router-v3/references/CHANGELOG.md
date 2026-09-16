@@ -1,5 +1,7 @@
 # CHANGELOG — prawny-router-v3
 
+- 3.50 (2026-09-16, F-189): T12: pole YAML `changelog:` skrócone do odesłania; wersja 3.49 bez opisu oznaczona jako LUKA JAWNA. Treść bez zmian.
+- 3.49 — LUKA JAWNA: numer obecny na dysku 2026-09-16, brak wpisu w changelogu i w AUDIT-JOURNAL; zakresu zmian nie da się odtworzyć — wpis celowo niezmyślony
 - 3.48 (2026-09-10x, O-11): **KWOTA-GATE — kontrola przy każdej podawanej kwocie.**
 
   Nowa pozycja w `references/SELF-CHECK.md`. Wyzwalacz: odpowiedź podaje kwotę

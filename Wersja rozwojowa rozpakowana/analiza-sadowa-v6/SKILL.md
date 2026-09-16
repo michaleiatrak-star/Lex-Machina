@@ -1,18 +1,13 @@
 ---
 name: analiza-sadowa-v6
-version: "6.7"
+version: "6.9"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_interactive_ui"
 description: "Czteroprzebiegowa analiza akt, pism, wyroków i dowodów: mapa faktów, kwalifikacja prawna, analiza adversarialna, dwukrotna weryfikacja, ocena szans i raport końcowy."
-changelog:
-  # ⛔ ZASADA 15: skrót bieżącej wersji, nie historia.
-  # Pełna historia (w tym 39 linii przeniesionych stąd 2026-08-24, F-129):
-  #   view analiza-sadowa-v6/references/CHANGELOG.md
-  - "6.5 (2026-08-24, flaga F-129): historia wersji wyniesiona z pola YAML
-    do references/CHANGELOG.md — jedna lokalizacja kanoniczna. Treść
-    przeniesiona 1:1, bez rekonstrukcji. Opis: audyt-systemu-v4/references/
-    AUDIT-JOURNAL.md, wpis AUDYT-2026-08-24b."
+changelog: |
+  Wersja bieżąca: 6.9 (2026-09-16, F-189): ODTWORZENIE utraconego wydania 6.8 (F-189): marker T28-OK na linii opisującej usuniętą jednostkę „art. 13 ust. 1a KSCU” w references/koszty-terminy.md. Treść me…
+  Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.

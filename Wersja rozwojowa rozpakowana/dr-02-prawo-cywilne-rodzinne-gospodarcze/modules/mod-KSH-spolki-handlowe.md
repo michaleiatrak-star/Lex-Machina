@@ -171,37 +171,23 @@ Forma:
   Uchwały zwykłe → protokół pisemny (sp. z o.o.) lub notarialny (S.A.)
   Brak formy = bezwzględna nieważność (art. 17 KSH)
 
-Zaskarżenie uchwały — ✅ [VER] RZĄD 1 2026-09-12m, odczyt treści KSH
-(Dz.U. 2024 poz. 18). KROK 2C: nowelizacja Dz.U. 2026 poz. 176 (w życie
-18.02.2027) NIE dotyka art. 251, 252, 424 ani 425.
+Zaskarżenie uchwały — CZTERY REŻIMY (nie jeden)
+✅ [VER] RZĄD 1 2026-09-12m, ponownie 2026-09-16 (F-189) — `Dz.U. 2024 poz. 18`.
+KROK 2C: `Dz.U. 2026 poz. 176` (w życie 18.02.2027) nie dotyka art. 251, 252, 424, 425.
 
-⛔ CZTERY RÓŻNE PARY TERMINÓW — zależnie od TYPU SPÓŁKI i RODZAJU POWÓDZTWA.
-   Podanie jednej pary "dla spółek" jest błędne w trzech na cztery wypadki.
+  Spółka            | Powództwo   | Krótszy termin             | Granica      | Podstawa
+  sp. z o.o.        | uchylenie   | miesiąc od wiadomości      | 6 miesięcy   | art. 251
+  sp. z o.o.        | nieważność  | 6 miesięcy od wiadomości   | ⛔ 3 LATA    | art. 252 § 3
+  S.A. niepubliczna | uchylenie   | miesiąc od wiadomości      | 6 miesięcy   | art. 424 § 1
+  S.A. publiczna    | uchylenie   | miesiąc od wiadomości      | ⛔ 3 MIESIĄCE| art. 424 § 2
+  S.A. niepubliczna | nieważność  | 6 miesięcy od wiadomości   | ⛔ 2 LATA    | art. 425 § 2
+  S.A. publiczna    | nieważność  | ⛔ 30 dni od OGŁOSZENIA    | ⛔ ROK       | art. 425 § 3
+  (granice liczone od dnia powzięcia uchwały)
 
-  SP. Z O.O. — uchylenie uchwały wspólników (art. 251 KSH):
-    miesiąc od otrzymania wiadomości o uchwale,
-    nie później niż 6 miesięcy od powzięcia uchwały
-  SP. Z O.O. — stwierdzenie nieważności (art. 252 §3 KSH):
-    6 miesięcy od otrzymania wiadomości,
-    nie później niż 3 LATA od powzięcia uchwały
-
-  S.A. NIEPUBLICZNA — uchylenie uchwały WZ (art. 424 §1 KSH):
-    miesiąc od otrzymania wiadomości, nie później niż 6 miesięcy od powzięcia
-  S.A. PUBLICZNA — uchylenie (art. 424 §2 KSH):
-    miesiąc od otrzymania wiadomości, ⛔ nie później niż 3 MIESIĄCE od powzięcia
-  S.A. NIEPUBLICZNA — stwierdzenie nieważności (art. 425 §2 KSH):
-    6 miesięcy od powzięcia wiadomości, nie później niż 2 LATA od powzięcia
-  S.A. PUBLICZNA — stwierdzenie nieważności (art. 425 §3 KSH):
-    ⛔ 30 DNI OD OGŁOSZENIA uchwały, nie później niż ROK od powzięcia
-
-  ⛔ Sp. z o.o. ma granicę 3 LATA, S.A. tylko 2 LATA — przeniesienie liczby
-     między reżimami kosztuje rok.
-  ⛔ Spółka publiczna przy stwierdzeniu nieważności liczy termin OD OGŁOSZENIA
-     uchwały, nie od powzięcia o niej wiadomości — jedyny wariant liczony
-     od zdarzenia publicznego, a nie od wiedzy uprawnionego.
-  ⭐ art. 252 §4 i art. 425 §4 KSH: upływ tych terminów NIE WYŁĄCZA możliwości
-     podniesienia ZARZUTU nieważności uchwały. Powództwo przepada, zarzut nie —
-     to bywa jedyna droga, gdy klient zgłasza się po latach.
+  ⛔ Przeniesienie liczby między reżimami kosztuje rok (3 lata sp. z o.o. vs 2 lata S.A.).
+  ⛔ Spółka publiczna, nieważność — termin od OGŁOSZENIA uchwały, nie od wiedzy.
+  ⭐ Art. 252 § 4 i art. 425 § 4: upływ terminów NIE wyłącza podniesienia
+     ZARZUTU nieważności uchwały — powództwo przepada, zarzut nie.
 ```
 
 ---
@@ -871,5 +857,5 @@ Wynik pracy modułu:
 |---|---|---|
 | Termin 30 dni na wniosek o upadłość | Przekroczenie = odpow. osobista zarządu | Monitoring kondycji finansowej spółki |
 | Nieważna uchwała (brak formy) | Art. 17 KSH — nieważność bezwzgl. | Akt notarialny przy zmianach umowy/statutu |
-| Zaskarżenie uchwały | Termin 1/6 m-cy od powzięcia / doręczenia | Prawidłowe doręczenie uchwał wszystkim wspólnikom |
+| Zaskarżenie uchwały | Terminy wg reżimu (art. 251, 252 § 3, 424, 425 KSH — tabela wyżej); biegną od WIADOMOŚCI o uchwale (S.A. publiczna, nieważność — od ogłoszenia) | Prawidłowe doręczenie uchwał wszystkim wspólnikom; zarzut nieważności po terminie (art. 252 § 4, 425 § 4) |
 | Prokurent przekracza umocowanie | Brak skutku wobec spółki | Sprawdzaj wpisy prokury w KRS |

@@ -1,5 +1,7 @@
 # CHANGELOG — Analizator Umów v1
 
+- 1.34 (2026-09-16, F-189): ODTWORZENIE utraconego wydania 1.33 (F-189), RZĄD 1: Zasady techniki prawodawczej 2016/283 → Dz.U. 2026 poz. 300; UUDE 2024/695 → Dz.U. 2026 poz. 880 (3 miejsca).
+- 1.33 — LUKA JAWNA: wydanie AUDYT-2026-09-10l nieobecne na dysku — odtworzone w 1.34
 - 1.32 (2026-09-10f): mod-J4-finansowanie: wygasły t.j. ustawy o kredycie konsumenckim Dz.U. 2023 poz. 1028 zastąpiony aktualnym Dz.U. 2025 poz. 1362 (✅ RZĄD 1)
 - 1.31 (2026-08-23i, sesja audytowa audyt-systemu-v4, flaga F-115): self-check ANTY-FASADA podłączony jako WYWOŁANIE modułu kanonicznego `shared/SELF-CHECK-ANTY-FASADA.md`, kopia treści zastąpiona wywołaniem. Powód modułu zamiast kopii: gdy F-117 dodała regułę AF-6 i drugą pozycję listy do `shared/PRAWO-HARDGATE.md`, żadna z 7 istniejących kopii nie została zaktualizowana — źródło miało 2 pozycje, kopie 1. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-23i.
 

@@ -1,22 +1,13 @@
 ---
 name: przewodnik-prawny-v2
-version: "2.6"
+version: "2.7"
 type: ux-guide
 status: production
 description: "Przewodnik prawny i fallback routera: pomaga zidentyfikować problem, właściwą ścieżkę postępowania, potrzebne dokumenty i kolejny specjalistyczny skill."
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_document_and_interactive_ui"
-changelog:
-  - "2.5: Zasada 8 — TRYB SUROWEJ ANALIZY (references/TRYB-SUROWA-ANALIZA.md).
-    Orthogonalny do LAIK/PRAWNIK: wyłącza kwalifikację/ocenę/rekomendację,
-    zwraca wyłącznie źródła+cytaty+lokalizację (PRAWO-HARDGATE KROK 5A-5B).
-    Dodane na podstawie opinii użytkownika-prawnika (nadmierne przetwarzanie
-    wyników przez AI). Zmiany w: rozpoznanie trybu wejścia, KROK H, KROK I,
-    KROK M (menu LAIK i PRAWNIK)."
-  - "2.3: KROK F rozbity na 4 niezależne tryby przez F.0 selektor —
-    formalny (F.4), merytoryczny (F.2+F.3+nowe F.5 ocena argumentacji),
-    procesowy (nowe F.6 terminy/skutki/dalsze kroki), wszystkie (domyślnie).
-    Integracja z MOD-REDAKCJA (pisma-procesowe-v3) gdy użytkownik prosi
-    o poprawki po raporcie. Nowe pozycje menu LAIK/PRAWNIK."
+changelog: |
+  Wersja bieżąca: 2.7 (2026-09-16, F-189): KROK-F: przykład wyniku powoływał uchylony art. 503 KPC jako „POPRAWNY” — zastąpiony art. 505 § 1 KPC z odesłaniem do terminu z art. 480² § 2 (RZĄD 1, Dz.U. 202…
+  Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.

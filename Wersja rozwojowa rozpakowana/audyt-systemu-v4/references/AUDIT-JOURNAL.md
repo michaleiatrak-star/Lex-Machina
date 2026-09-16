@@ -65745,3 +65745,105 @@ Rejestr `CHECKSUMS.sha256` kompletny w obie strony (172 = 172).
 
 **Wersje:** `shared` bez zmiany numeru (zmiany w plikach składowych),
 `audyt-systemu-v4` 6.96 → 6.97.
+
+
+---
+
+## AUDYT-2026-09-16 — F-189: regresje dyskowe w 10 skillach, ślepa plamka T12, odtworzenie treści z odczytu RZĘDU 1
+
+**Tryb:** REGRESJA (pełny zestaw + testy spoza orkiestratora) → NAPRAWA → WYDANIE (ZASADA 7).
+Korzeń scalony z dwóch punktów montowania (`user/` + `plugins/`) zgodnie z komunikatem
+preflightu; 33 skille, w tym `prompt-master` spoza systemu (dlatego `SKILLE_OCZEKIWANE = 32`
+jest poprawne — zgłoszenie „stała nieaktualna" z pierwszego raportu tej sesji było fałszywe).
+
+### 1. Pierwszy przebieg
+
+Wynik orkiestratora: ❌ FAIL (blocker T22). T2 FAIL (dr-09), T11 WARN (Dz.U. 2026 poz. 174),
+T12: 2 ⛔ + 4 ⚠️. Poza orkiestratorem: **T28 — 20 FAIL (W1)**, T21/T26/T29 PASS.
+
+### 2. ⛔⛔ USTALENIE GŁÓWNE — T12 widział 1 regresję dyskową z 10
+
+Parser `wersje_z_dziennika` szukał zapisu `X → Y` bez prefiksu `v` wyłącznie w linii
+zawierającej słowo „wersj". Bloki `**Wersje:**` są wielowierszowe — skille z 2. i 3. linii
+bloku były niewidoczne, a zapis „nazwa na końcu linii, numery na początku następnej" nie
+dawał się dopasować w ogóle. Po naprawie parsera:
+
+| Skill | Dysk | Dziennik | Utracone sesje |
+|---|---|---|---|
+| `pisma-proste-v2` | 2.15 | 2.16 | 12f |
+| `dr-03` | 3.37 | 3.39 | 12f, 12j |
+| `analiza-sadowa-v6` | 6.7 | 6.8 | 12f |
+| `pisma-procesowe-v3` | 5.24 | 5.25 | 12f |
+| `dr-05` | 3.25 | 3.26 | 12h |
+| `dr-06` | 3.80 | 3.81 | 12i |
+| `dr-02` | 3.47 | 3.50 | 12k, 12l, 12m |
+| `dr-04` | 3.32 | 3.33 | 12n |
+| `analizator-umow-v1` | 1.32 | 1.33 | 10l |
+| `dr-11` | 3.12 | 3.13 | 10l |
+
+`shared` i `audyt-systemu-v4` z tych samych sesji przetrwały — sygnatura nadpisania skilli
+dziedzinowych starszym stanem. Utrata potwierdzona **treścią**, nie numerem: T28 zgłaszał
+dokładnie te cytaty, które wpis 12f opisuje jako naprawione.
+
+Poprawka parsera w trzech krokach, każdy wymuszony pomiarem: (a) sklejanie bloku do pustej
+linii; (b) wiersze tabel jako osobne jednostki — sklejona tabela przypisała `pisma-proste-v2`
+numer 5.15 z cudzego wiersza; (c) reguła pozycyjna — numer liczy się tylko ZA samodzielną
+nazwą skilla; nazwa z `/` to ścieżka pliku (`shared/MOD-STEP-TRACKER.md` dawało `shared`
+5.13.0). ⚠️ Dwie z tych poprawek usuwały fałszywe alarmy wprowadzone przez pierwszą — zapis
+wprost, bo T12 był już raz naprawiany w ten sposób (AUDYT-2026-08-20z3).
+
+⚠️ Błąd własny tej sesji: dwukrotna duplikacja funkcji w `check_wersje_changelog.py` przez
+wyszukanie frazy końcowej, która występowała wcześniej w innej funkcji. Wykryte po liczbie
+definicji; skrypt odtworzony z oryginału przed każdą kolejną próbą.
+
+### 3. ODTWORZENIE TREŚCI — każda pozycja ponownie z odczytu RZĘDU 1 (API ELI, 2026-09-16)
+
+Opis w dzienniku nie był traktowany jako źródło prawa — służył jako lista kontrolna.
+Odczytane: KPC 2026/468, KSCU 2025/1228, KPW 2025/860, KPK 2026/490, KKW 2025/911,
+UPEA 2026/268 (+ nowelizacje 516, 739), Prawo bankowe 2026/38, Op 2026/622 (+ 846, 1154),
+KRO 2026/236, PrUp 2026/913, PrRestr 2026/533, KSH 2024/18 (+ 176), KP 2025/277 (+ 1046);
+statusy t.j. 2026/300, 2026/880, 2024/1513 (obowiązujące) i 2016/283, 2024/695, 2020/344
+(wygasłe). Szczegóły napraw — `CHANGELOG.md` każdego skilla.
+
+### 4. ⛔ NOWE USTALENIA (poza zakresem utraconych sesji)
+
+1. **dr-02, KRO art. 61¹³–61¹⁵ (macierzyństwo)** — moduł podawał „6 miesięcy od aktu
+   urodzenia" i „dziecko — 3 lata od pełnoletności"; ustawa: **rok** w obu wypadkach, dla
+   dziecka od dowiedzenia się. Adnotacja przy bloku: „zweryfikowane — arslege.pl, lexlege.pl,
+   pełna zgodna treść". ⛔ **Drugi udokumentowany przypadek (po 12h), w którym zgodność
+   źródeł RZĘDU 2B zalegitymizowała błędny termin zawity.** Sesja 12k naprawiła ojcostwo
+   w tym samym pliku i nie objęła macierzyństwa — ten sam wzorzec „naprawiony plik, pominięty
+   sąsiedni akapit" co w 12f. `shared/terminy.md` uzupełniony.
+2. **dr-04, art. 264 § 3 KP** — „21 dni od dnia, gdy umowa miała być zawarta"; ustawa: od
+   doręczenia zawiadomienia o odmowie przyjęcia do pracy.
+3. **KROK 2C dla poz. 1046 w dzienniku (12n) był nieprecyzyjny** — „zmienia art. 11, 18, 94,
+   104 KP"; odczyt treści: 18³ᵃ, 18³ᵈ–18³ᵍ, 94, 94³–94³ᵃ, 104¹ — art. 11 nie jest zmieniany.
+   Wniosek dla sesji 12n nie zmienia się (art. 52, 109, 112, 264, 265, 291 nietknięte).
+4. **dr-16** — 4 trafienia T28 (art. 503 KPC, „art. 94 KPSW"), których pierwszy raport tej
+   sesji nie pokazał (ucięty wydruk; liczba 20 była podana poprawnie).
+5. **dr-06** — pozostałe nowelizacje Op: poz. 1154 (w życie 16.09.2026, dziś) zmienia
+   wyłącznie art. 299 § 3 pkt 17 — zakres ustalony (F-OP-2026-09 częściowo).
+
+### 5. NAPRAWY STRUKTURALNE
+
+T22 — 4 pliki zarejestrowane; T2 — dr-09 licznik 35 → 36; orkiestrator — T28 i T29 wpięte
+jako blokery (T28 był deklarowany w SKRYPTY-RECZNE jako „wchodzi do orkiestratora", ale nie
+był wołany; T23 tego nie wykrył, bo wpis w SKRYPTY-RECZNE traktuje jako status);
+SKRYPTY-RECZNE — `weryfikator_sygnatur.py`; T12 ⚠️ — pola YAML `changelog:` skrócone
+w `analizator-dowodow-v3`, `prawo-polskie-v2`, `prawny-router-v3`, `shared`, `analiza-sadowa-v6`,
+`przewodnik-prawny-v2`; `prawny-router-v3` 3.49 — **LUKA JAWNA** (brak opisu gdziekolwiek;
+wpis celowo niezmyślony).
+
+### 6. POZOSTAJE
+
+T4, T5 — ręczne, niewykonane. T11 WARN (2026/174) — do przeglądu. F-189 otwarta w zakresie
+przyczyny (mechanizm nadpisania nieustalony) — patrz WARN-OTWARTE.
+
+**Wersje:** `pisma-proste-v2` 2.15 → 2.17, `dr-03-prawo-karne-wykroczenia-egzekucja` 3.37 → 3.40,
+`analiza-sadowa-v6` 6.7 → 6.9, `pisma-procesowe-v3` 5.24 → 5.26, `przewodnik-prawny-v2` 2.6 → 2.7,
+`dr-02-prawo-cywilne-rodzinne-gospodarcze` 3.47 → 3.51, `dr-04-prawo-pracy-zus-swiadczenia` 3.32 → 3.34,
+`dr-05-prawo-administracyjne-sadowoadministracyjne` 3.25 → 3.27, `dr-06-podatki-finanse-publiczne-aml` 3.80 → 3.82,
+`dr-09-budownictwo-srodowisko-energia-transport` 3.30 → 3.31, `dr-11-cyfrowe-cyber-ai-dane-ip` 3.12 → 3.14,
+`dr-16-pisma-strategia-dowody-orzecznictwo` 3.5 → 3.6, `analizator-umow-v1` 1.32 → 1.34,
+`analizator-dowodow-v3` 5.16.8 → 5.16.9, `prawo-polskie-v2` 6.20 → 6.21, `prawny-router-v3` 3.49 → 3.50,
+`shared` 3.61 → 3.62, `audyt-systemu-v4` 6.98 → 6.99.

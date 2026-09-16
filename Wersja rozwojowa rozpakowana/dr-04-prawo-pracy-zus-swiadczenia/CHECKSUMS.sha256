@@ -1,7 +1,7 @@
 9b1cc2cb28497fbf10056b2ea35e6743c651560badc7e6bb938ddbef90d881e9  ./MAPA-AKTOW.md
 13010fba8fe5772fe76abbd1275bb232d9d1303bc06deec10257e3079292145f  ./MAPA-POKRYCIA.md
 a986dcd31efdd096cf4b443546167244d8a775903ead547b5efd34c80f594660  ./PORTABILITY-MANIFEST.md
-aad5dc887eb9f9e356cd8852b8ef3837f921ef81174cc41554de70d464125993  ./SKILL.md
+04bba5a0d0b6eba7d4dfe4a77991676a0be41f9120c6872bdf0f2f03b92ead17  ./SKILL.md
 47051ab8dbef53d8b88099b73b2ef0aa23b5d25890379654938526598bbafd37  ./agents/openai.yaml
 9be88f8dd4c5e658961515c71389eafd45142ffa68bcae58e8dcff57d178ed91  ./assets/icon.svg
 f15d0a304001f9eae8cbe1a398bbd535cfacbca9ed264ff11b65137dbb738860  ./modules/mod-FUS-uzupelnienie-pokrycia-2026.md
@@ -16,7 +16,7 @@ ff18034c470dac51fbd2ba41bb3a63cf4d710d54d988462ce434706ed7645314  ./modules/mod-
 ab07241830b95df0fed59258361a4e23f94383ac19ab849b777ab04895849af5  ./modules/mod-KP-mobbing-dyskryminacja.md
 258c2727f948f2219820cad19ecb1f2f3b9b18699887c281fb80b89f0d9cbdbe  ./modules/mod-KP-naduzycia-pracodawcy-limity-kary-degradacja.md
 50ca1fe5df4213c4bd9ac08eec0350e7d2baa2e177fb2d19c8a3b072bbfb248b  ./modules/mod-KP-praca-zdalna.md
-7b4a11fa01e0616b7767408893978e6a78e42089bc1d23e798c9b6d356f47896  ./modules/mod-KP-prawo-pracy.md
+2caaa4072bdd963da267224e6b25c84719ea65f4874cd768fc907599d1f59459  ./modules/mod-KP-prawo-pracy.md
 6a39d3cdeefc2ac5c8ab625cfa1f4010fa7ebb3b78f7a8bb1b46b45d2d469470  ./modules/mod-KRUS-rolnicze-ubezpieczenia.md
 2bb361e234934601464ee7ffc8e238cbe37f6b4a4a8b961f7440b75d93229635  ./modules/mod-ROZP-SKLADKOWE-podstawa-wymiaru.md
 adc31c2b9947cb5cc10e831530329e36c625ba8513a44876a26b264f9d484ebc  ./modules/mod-SUS-ZUS-ubezpieczenia-spoleczne.md
@@ -46,4 +46,4 @@ adc53006e5f262e829965ef987df69b970fd1eb656108d223acb5a9842f3260f  ./modules/mod-
 be7df071772ea76c620b9c0667a902a5a3c3e810482cf32c7929db9b5a7768bf  ./modules/mod-ustawa-zwolnienia-grupowe.md
 08305bd5442cc91dbffd7346beeaecb01177e1efddbf50f83bf1a1ff4438d051  ./modules/mod-wypadek-przy-pracy-choroba-zawodowa.md
 00a9823645fab9dd42ea700d96e101a7b581e35d78423142d8c3a68dfa914ec0  ./modules/mod-zwolnienia-grupowe-current-state-COV.md
-9366da5347c813bd671ffd778d0e1198d095d21daf39122a77c77a142e521ef8  ./references/CHANGELOG.md
+0e65088ac23f203d79a995164a46c90ebb7a2abb9bfa7b0ce41198a87897db7b  ./references/CHANGELOG.md

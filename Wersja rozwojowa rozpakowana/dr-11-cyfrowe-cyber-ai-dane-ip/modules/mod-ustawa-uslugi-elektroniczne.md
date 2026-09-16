@@ -2,7 +2,7 @@
 
 ## Akt prawny
 **Ustawa z 18.07.2002 r. o swiadczeniu uslug droga elektroniczna**
-- Tekst jednolity: **Dz.U. 2020 poz. 344** (ze zm.)
+- Tekst jednolity: **Dz.U. 2024 poz. 1513** (ze zm.) — ✅ [VER] RZĄD 1 2026-09-16; poprzedni t.j. 2020 poz. 344 wygasły
   VER: isap.sejm.gov.pl [2026-05-31]
 - UWAGA: Ustawa czesciowo deaktywowana przez DSA (Rozp. UE 2022/2065) - weryfikuj zakres!
   web_search: "DSA Digital Services Act Polska UUDE zakres stosowania 2024 2025"
@@ -39,6 +39,6 @@ UUDE: Polska ustawa uzupelniajaca DSA - weryfikuj aktualny stan
 
 ## Weryfikacja online
 ```
-web_search: "ustawa swiadczenie uslug droga elektroniczna Dz.U. 2020 poz. 344 isap"
+web_search: "ustawa swiadczenie uslug droga elektroniczna Dz.U. 2024 poz. 1513 isap"
 web_search: "DSA Digital Services Act Polska koordynator 2025 2026"
 ```

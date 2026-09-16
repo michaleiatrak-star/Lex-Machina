@@ -1,12 +1,12 @@
 # WARN-OTWARTE — rejestr żywy otwartych flag audytowych
 
-**Stan:** 2026-09-14. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
+**Stan:** 2026-09-16. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
 
 ## Tablica sterująca
 
 | Kategoria | Liczba | Pozycje |
 |---|---:|---|
-| Wykonalne sesją audytową | 3 | F-135 (część merytoryczna), F-167, O-11 |
+| Wykonalne sesją audytową | 4 | F-135 (część merytoryczna), F-167, O-11, **F-189** |
 | Reaktywne | 1 | F-5 |
 | Zależne od środowiska/dewelopera | 15 | F-8, F-9, F-11, F-94, F-113, F-133, F-137, F-143, F-144, **F-157b**, F-158(c), F-171, **F-183a**, **F-184**, **F-185** |
 
@@ -28,7 +28,14 @@
 > library=ECHR&id={itemid}` → pełny tekst. Wyszukiwanie po frazie w HUDOC
 > pozostaje nierozstrzygnięte, ale nie jako otwarta flaga — jako znany brak.
 | Odnotowane bez działania | 1 | O-8 (ograniczenie strukturalne aparatu) |
-| **Razem** | **20** | — |
+| **Razem** | **21** | — |
+
+> **F-189 (2026-09-16, OTWARTA — przyczyna) — nadpisanie skilli dziedzinowych starszym stanem.**
+> Treść 10 skilli odtworzona i wydana (AUDYT-2026-09-16). Pozostaje: (1) ustalić mechanizm
+> nadpisania — `shared` i `audyt-systemu-v4` z tych samych sesji przetrwały, więc wydanie
+> skilli dziedzinowych szło inną ścieżką; (2) przed każdym kolejnym wydaniem uruchomić T12
+> na drzewie docelowym — po naprawie parsera jest to jedyna kontrola wykrywająca tę klasę;
+> (3) T11 WARN: `Dz.U. 2026 poz. 174` w ROUTING-MAP bez wiersza w mapie Dz.U. — przegląd.
 
 > **F-183a (2026-09-14, OTWARTA — WYŁĄCZNIE środowisko docelowe) — direct
 > CBOSA wdrożona strukturalnie; pozostaje pomiar live w docelowym runtime.**

@@ -13,7 +13,7 @@ Po otrzymaniu daty doręczenia oblicz automatycznie wszystkie krytyczne terminy:
 DATA DORĘCZENIA: [DD.MM.RRRR]
 ↓
 Oblicz:
-  + 7 dni      → sprzeciw od wyroku nakazowego (wykroczenia, art. 94 KPSW) ZAWITY
+  + 7 dni      → sprzeciw od wyroku nakazowego (wykroczenia, art. 94 § 1 KPW w zw. z art. 506 § 1 KPK) ZAWITY
   + 14 dni     → odwołanie od decyzji administracyjnej (art. 129 §2 KPA) ZAWITY
   + 14 dni     → sprzeciw od orzeczenia lekarza orzecznika ZUS ZAWITY
   + 14 dni     → odstąpienie od umowy (internet / poza lokalem, art. 27 uPK)
@@ -32,7 +32,7 @@ OSTRZEŻENIA:
 
 | Termin | Czynność | Podstawa | Typ |
 |---|---|---|---|
-| **7 dni** | Sprzeciw od wyroku nakazowego | art. 94 KPSW | ZAWITY |
+| **7 dni** | Sprzeciw od wyroku nakazowego | art. 94 § 1 KPW w zw. z art. 506 § 1 KPK | ZAWITY |
 | **14 dni** | Odwołanie od decyzji adm. | art. 129 §2 KPA | ZAWITY |
 | **14 dni** | Sprzeciw od orzeczenia ZUS | art. 14 ustawy FUS | ZAWITY |
 | **14 dni** | Odstąpienie od umowy (internet) | art. 27 uPK | PREKLUZYJNY |

@@ -227,32 +227,80 @@ def wersje_z_dziennika(baza, nazwa_skilla):
     if linie is None:
         return None
     znalezione = []
+    # ⛔ F-189 (2026-09-16): blok „**Wersje:**" bywa wielowierszowy. Dwie
+    # postacie były niewidoczne: (a) linia kontynuacji bez słowa „wersj"
+    # (zapis „X → Y" bez prefiksu `v` nie był w niej szukany) oraz (b) nazwa
+    # skilla na końcu jednej linii, a numery na początku następnej. Skutek
+    # zmierzony 2026-09-16: 9 regresji dyskowych, T12 zgłaszał jedną.
+    # Blok od linii zawierającej „wersj" do pierwszej pustej linii jest
+    # SKLEJANY w jeden ciąg i dopiero wtedy dzielony na segmenty.
+    jednostki = []          # (tekst, czy_blok_wersji)
+    blok = None
     for linia in linie:
-        if nazwa_skilla not in linia:
+        if not linia.strip():
+            if blok is not None:
+                jednostki.append((" ".join(blok), True))
+                blok = None
+            continue
+        if linia.lstrip().startswith("|"):
+            # Wiersz tabeli jest samodzielną jednostką (jeden skill na wiersz);
+            # sklejenie tabeli w ciąg przypisywało numer z sąsiedniego wiersza.
+            jednostki.append((linia, True))
+            continue
+        if blok is not None:
+            blok.append(linia.strip())
+        elif "wersj" in linia.lower():
+            blok = [linia.strip()]
+        else:
+            jednostki.append((linia, False))
+    if blok is not None:
+        jednostki.append((" ".join(blok), True))
+
+    for tekst, w_bloku_wersji in jednostki:
+        if nazwa_skilla not in tekst:
             continue
         # ⚠️ Dziennik często wylicza kilka skilli w JEDNEJ linii
         # („`pisma-proste-v2` v2.5→2.6, `pisma-procesowe-v3` v5.14→5.15").
         # Bez podziału na segmenty parser przypisywał cudze podbicie — pierwszy
         # przebieg na drzewie dał tak cztery fałszywe trafienia (F-140).
         # Dlatego dopasowanie liczy się wyłącznie w segmencie zawierającym nazwę.
-        for segment in re.split(r"[,;]", linia):
+        # Podział na segmenty: po „," i „;" oraz na granicy każdej nazwy
+        # w backtickach (po sklejeniu bloku kilka skilli może dzielić segment).
+        # Wiersz tabeli NIE jest dzielony po „|" — nazwa i numer leżą
+        # w sąsiednich komórkach.
+        segmenty = [c for s_ in re.split(r"[,;]", tekst)
+                    for c in re.split(r"(?=`[^`]+`)", s_)]
+        for segment in segmenty:
             if nazwa_skilla not in segment:
                 continue
-            _dopasuj_segment(segment, znalezione)
-        continue
+            _dopasuj_segment(segment, znalezione, w_bloku_wersji, nazwa_skilla)
 
     if not znalezione:
         return None
     return max(znalezione, key=klucz)
 
 
-def _dopasuj_segment(segment, znalezione):
-    """Wyciąga numer docelowy podbicia z pojedynczego segmentu linii dziennika."""
+def _dopasuj_segment(segment, znalezione, w_bloku_wersji=False, nazwa_skilla=None):
+    """Wyciąga numer docelowy podbicia z pojedynczego segmentu linii dziennika.
+
+    F-189: numer liczy się tylko, gdy stoi ZA samodzielnym wystąpieniem nazwy
+    skilla. Nazwa, po której następuje „/", to ścieżka pliku (np.
+    `shared/MOD-STEP-TRACKER.md`), nie skill. Nazwa stojąca dopiero po numerze
+    należy do prozy albo cudzego wpisu — dwa takie trafienia dawały wcześniej
+    fałszywe „MAJOR SIĘ RÓŻNI".
+    """
     linia = segment
+    poz = -1
+    if nazwa_skilla:
+        m_n = re.search(r"(?<![\w-])" + re.escape(nazwa_skilla) + r"(?![\w/-])", linia)
+        if not m_n:
+            return
+        poz = m_n.start()
     if True:
         trafienia = list(WZORZEC_PODBICIA_V.finditer(linia))
-        if not trafienia and "wersj" in linia.lower():
+        if not trafienia and (w_bloku_wersji or "wersj" in linia.lower()):
             trafienia = list(WZORZEC_PODBICIA_WERSJA.finditer(linia))
+        trafienia = [m for m in trafienia if m.start() > poz]
         for m in trafienia:
             kandydat = m.group(2)
             if int(kandydat.split(".")[0]) >= MAX_MAJOR_WERSJI:

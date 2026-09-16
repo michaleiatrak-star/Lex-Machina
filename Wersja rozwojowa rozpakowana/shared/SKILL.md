@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.61"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.62"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -50,32 +50,8 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.61 (2026-09-14): CBOSA retrieval/snapshot jako jawny kanał
-  provenance. V-SYG-0.5 ma POST-CHECK HOSTA, exact-match i content_scope;
-  `site:` jest tylko discovery. Snapshot może nieść metrykę, sentencję i
-  uzasadnienie, ale sam nie awansuje do DIRECT_LIVE / ✅ [VER].
-  WERYFIKACJA-SLAD 1.7 zapisuje access_mode bez tworzenia piątego statusu.
-  Poprzednia historia: references/CHANGELOG.md.
-  Wersja historyczna 3.45 (2026-09-12c, O-11 c.d.): TABELE-OPLAT 1.6 — domknięcie
-  rodzin opłat poza rdzeniem KSCU: wieczystoksięgowe i KIO (art. 42-48, 34, 34a),
-  koszty komornicze (Dz.U. 2024 poz. 377), opłata skarbowa (Dz.U. 2025 poz. 1154),
-  taksa notarialna (Dz.U. 2024 poz. 1566) i koszty procesu karnego (KPK
-  Dz.U. 2026 poz. 490). ⛔ Zryczałtowana równowartość wydatków przy oskarżeniu
-  prywatnym: 1000 zł od 1.07.2025 (Dz.U. 2025 poz. 770), nie 300 zł.
-  3.44: TABELE-OPLAT 1.5 — zwrot opłaty
-  (art. 79 KSCU), dalsze zwolnienia i ich wyłączenia (art. 104-107), wyłączenie
-  zwolnień na wniosek w EPU i S24 (art. 104a) oraz oś ryzyka kosztowego z KPC
-  (art. 98-107, 520; art. 102 KPC to NIE art. 102 KSCU).
-  3.43: TABELE-OPLAT 1.4 — domknięcie
-  centralizacji opłat. Dopisane z odczytu treści: rejestr opłat cywilnych
-  ogólnych (art. 14-25b, 68-78 KSCU), rozwód i sprawy rodzinne (art. 26, 27,
-  37, 38), prawo pracy i ubezpieczenia (art. 35, 36), opłaty karne (ustawa
-  z 23.06.1973, Dz.U. 2023 poz. 123) i wpis sadowoadministracyjny
-  (Dz.U. 2021 poz. 535). Nowa sekcja 7: rejestr tabel satelickich.
-  Obalone w tresci aktu: "art. 27 pkt 1-6 KSCU" jako podstawa progow WPS,
-  cap 20 000 zl w sprawach gospodarczych, oplata pracownicza "5% max 1000 zl",
-  wpis WSA 200/500/1000/2000, stawka pracownicza 180 zl, apelacja karna 420 zl.
-  Pełna historia wszystkich wersji: references/CHANGELOG.md (ZASADA 15).
+  Wersja bieżąca: 3.62 (2026-09-16, F-189): terminy.md — (1) KRO: dopisane terminy macierzyństwa art. 61¹¹, 61¹³ § 1–2, 61¹⁴ § 1 (ROK; ✅ RZĄD 1 Dz.U. 2026 poz. 236) i ostrzeżenie o błędzie „6 miesięcy/3 l…
+  Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.

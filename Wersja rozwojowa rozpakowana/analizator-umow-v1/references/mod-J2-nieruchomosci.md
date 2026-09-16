@@ -6,7 +6,7 @@
 > o roboty budowlane (od strony nabywcy), umowa z deweloperem remontu.
 
 > ⛔ HARD GATE — wszystkie przepisy UUDE, KC art. 389–396 weryfikuj w ISAP.
-> Weryfikacja: isap.sejm.gov.pl → Dz.U. 2024 poz. 695 (UUDE t.j.)
+> Weryfikacja: isap.sejm.gov.pl → Dz.U. 2026 poz. 880 (UUDE t.j.; poprzedni t.j. 2024 poz. 695 — wygasły, ✅ [VER] RZĄD 1 2026-09-16)
 > Rejestr deweloperów: oficjalny rejestr/wykaz inwestycji deweloperskich prowadzony przez właściwy organ — wyszukaj przez gov.pl; odpis KW: ekw.ms.gov.pl (zweryfikuj aktualny adres rejestru)
 
 ---
@@ -19,7 +19,7 @@ KLUCZOWE AKTY PRAWNE (weryfikuj aktualne teksty):
 1. Ustawa z 20.05.2021 o ochronie praw nabywcy lokalu mieszkalnego lub domu
    jednorodzinnego oraz Deweloperskim Funduszu Gwarancyjnym (UUDE)
    Obowiązuje: od 01.07.2022 r. dla nowych inwestycji
-   isap.sejm.gov.pl → Dz.U. 2024 poz. 695 t.j.
+   isap.sejm.gov.pl → Dz.U. 2026 poz. 880 t.j.
    
 2. Kodeks cywilny:
    Art. 389–390: umowa przedwstępna (słaby/silny skutek)
@@ -267,6 +267,6 @@ PO ODBIORZE:
 ---
 
 *← Powrót do routingu: `view references/mod-J0-routing.md`*
-*Podstawa prawna: UUDE Dz.U. 2024 poz. 695 t.j. · KC art. 158, 389–396, 556–576*
+*Podstawa prawna: UUDE Dz.U. 2026 poz. 880 t.j. · KC art. 158, 389–396, 556–576*
 *Weryfikacja: isap.sejm.gov.pl · ekw.ms.gov.pl · oficjalny rejestr inwestycji deweloperskich (gov.pl — zweryfikuj adres)*
 *Rejestr decyzji UOKiK ws. deweloperów: uokik.gov.pl/decyzje*

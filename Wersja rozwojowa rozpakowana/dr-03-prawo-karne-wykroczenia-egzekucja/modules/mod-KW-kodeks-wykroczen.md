@@ -8,7 +8,7 @@ granica wykroczenie/przestępstwo (800 zł / 0,5‰).
 
 ## ZASADA ABSOLUTNA — TERMIN 7 DNI NA SPRZECIW
 
-Sprzeciw od wyroku nakazowego → **7 dni od doręczenia** (art. 94 KPSW). ZAWITY.
+Sprzeciw od wyroku nakazowego → **7 dni od doręczenia** (art. 94 § 1 KPW w zw. z art. 506 § 1 KPK). ZAWITY. ✅ [VER] RZĄD 1 2026-09-16 — KPW `Dz.U. 2025 poz. 860`, KPK `Dz.U. 2026 poz. 490`.
 **Po upływie wyrok nakazowy staje się prawomocny — brak możliwości cofnięcia.**
 
 ---

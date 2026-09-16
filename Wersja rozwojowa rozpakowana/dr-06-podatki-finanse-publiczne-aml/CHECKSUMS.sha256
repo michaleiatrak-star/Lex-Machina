@@ -1,7 +1,7 @@
 e06aed25d1277fdab7ad937429d97875ee1128852c8159665c3069f45817c4d0  ./MAPA-AKTOW.md
 09b5b612b258f9798b1777158d3f8cd814a77081741ac9f99e80a9786b10ae4f  ./MAPA-POKRYCIA.md
 7c457e1307ad99afea550a549ede21895435a27f83e9063245575b7342edcca4  ./PORTABILITY-MANIFEST.md
-59e2f5ee2168e7640f3c2c017e1cc4dcf5cb2c7cba08a682568a2e13d189fb87  ./SKILL.md
+26514868f2aa7fdab65f8a48523bfd658b3b599bb9f7a160a9343bd8dcd855de  ./SKILL.md
 0723118e130945c731bd069a055c853011fcada42c7815680bd87b474239c8c5  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 efa42fab8d68971d910177ae2f44586577a709e468223218e5b1b63d44793534  ./modules/mod-CIT-podatek-dochodowy-prawne.md
@@ -10,7 +10,7 @@ f13c52a1ce1580ad256e1a52d22d4ad9aab31855fe32fe42feec0e132ff0d491  ./modules/mod-
 2cd6165d6754bb874fbdb2869e1b5cc130c572f22f014300bf2c74da9d8b0401  ./modules/mod-OP-czynnosci-sprawdzajace-dzial-V.md
 aaaaeb22acb2ae070f3ed720534bcc62dc2936c58e41f876a411f669cd7b2b31  ./modules/mod-OP-dzial-IV-rozdzial-11-dowody.md
 73dfb4695b8bf5ae90fb10327db0844bed796ae9eeb0ef900b807050b4ebe085  ./modules/mod-OP-kontrola-podatkowa-dzial-VI.md
-04d7a25a5d526b22191da405cfb24c3f25dcacc41e6d7ce3c862a25f761ffb98  ./modules/mod-OP-ordynacja-podatkowa.md
+e3e5cfe40ecb3930c06d6bacb7f3418856a31047736420ab6aed992213217a18  ./modules/mod-OP-ordynacja-podatkowa.md
 d91f20260802ee9fc0570015cec5ef9d1c52e8f151f0608ca101e3a4db7f5ac1  ./modules/mod-OP-ulgi-w-splacie-dzial-III-rozdzial-7a.md
 b2b3d8a42cd730bd3e87962c8eb868fda81b3b7f9c84383e9d59f1a25f6cd944  ./modules/mod-OP-uzupelnienie-pokrycia-2026.md
 a0b1d9dd600318e946460b27456b3e06e21750515a8d7c9c3b54ca27228976ba  ./modules/mod-PIT-podatek-dochodowy-fizyczne.md
@@ -44,7 +44,7 @@ a91d1ff4b301ecbf88591c97ffda1a98e641ff2f39f48a2d14a33e30a7c442dd  ./modules/mod-
 5efb4eac8b7fddb7ff10450b09003374bd4a2cc7900b2e891b86da910234a6d0  ./modules/mod-ustawa-akcyzowa-i-clo-UCC.md
 77eaa906ea2723d2c0f418f0fab67a720ef25c29910107e19c3d2d09e2bd26c8  ./modules/mod-ustawa-biegli-rewidenci-zawod.md
 ae21c3a4919805a40955f9e0ba811e01a640b6e239e3885d8253f82538d4c6f4  ./modules/mod-ustawa-doradcy-podatkowi-zawod.md
-5abd0b928c9b42e3ad94b7b6b18d8e8d853cc1509fbac15d1fba655b9d7510a5  ./modules/mod-ustawa-podatek-nieruchomosci-i-lokalne.md
+81a9a0c43d460f87777770d78ee16f8570fd3351035fadf8ccfb912f22f4a3a5  ./modules/mod-ustawa-podatek-nieruchomosci-i-lokalne.md
 9608fc9425a44330ca49ff013748fce6f4186e123294acf2dfd27cba861399bb  ./modules/mod-ustawa-rachunkowosci.md
 2596e380d97e25f2a37e3df0d3e0a011a0beabf2d6d9ea4bd7f5d303ebaf9f9d  ./modules/mod-ustawa-ryczalt-przychody.md
 61b9582e227335c110d1910012c36ebc6153b8f74dc3537e07e998cc99610762  ./modules/mod-ustawa-rynek-kapitalowy-fundusze.md
@@ -72,4 +72,4 @@ f7b1b6e938fd2f581807c44123ed9c86b5809cbba8691e96016fad4b365380f5  ./modules/vat-
 3e68b7cef36e384a60b951bc96ef2e0f2d8945e113af875b7c0b1c7d3ad8ce7c  ./modules/vat-podatek-od-towarow-i-uslug/part-06-grupa-zlozona.md
 603de20151ed15e91aebfdec8146e4ee0e834d8ead7785c982ed335f72ed99dd  ./references/BAZA-AKTOW-OKOLOAKCYZOWYCH.md
 e42c9179292bdde9fc898dd730b4e29340063e269108416d590272a85cb7ee92  ./references/BAZA-AKTOW-OKOLOPODATKOWYCH.md
-0ba595a30570f88dd6dedba71b3a09fb3c880073a8b15f650a81feb1b5daa842  ./references/CHANGELOG.md
+8e11d84c22a626e55ed59c034d211b24de8157b6f28bfe887aef66ecc2614a19  ./references/CHANGELOG.md

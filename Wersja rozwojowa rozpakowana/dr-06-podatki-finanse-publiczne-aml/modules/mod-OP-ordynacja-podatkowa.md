@@ -56,36 +56,14 @@ Postępowanie podatkowe (Op), terminy zawite i przedawnienie, korekta deklaracji
 ### TERMINY ZAWITE — ABSOLUTNY PRIORYTET
 
 ```
-Odwołanie od decyzji US/UCS:       14 dni od doręczenia decyzji albo zawiadomienia
-                                   z art. 103 §1 — TERMIN jest w art. 223 §2 Op
-                                   (§1 określa tylko, że wnosi się je ZA POŚREDNICTWEM
-                                   organu, który wydał decyzję)
+Odwołanie od decyzji US/UCS:       14 dni od doręczenia (art. 223 § 2 Op; § 1 — tylko tryb: za pośrednictwem organu, który wydał decyzję)
 Skarga do WSA:                     30 dni od doręczenia decyzji org. odwoł. (art. 53 §1 PPSA)
 Skarga kasacyjna NSA:              30 dni od doręczenia wyroku WSA
 Korekta deklaracji:                zawieszona po wszczęciu postępowania/kontroli (art. 81b Op)
 Wniosek o interpretację indyw.:    3 miesiące na wydanie (art. 14d Op)
 Czynny żal (KKS):                  PRZED wszczęciem postępowania przez organ
-Zażalenie na postanowienie:        7 dni od doręczenia (art. 236 §2 Op)
-Przywrócenie terminu:              7 dni od ustania przyczyny, RÓWNOCZEŚNIE
-                                   dopełnić czynności (art. 162 §2); ⛔ przywrócenia
-                                   terminu do samego podania NIE MA (art. 162 §3)
-Wznowienie — art. 240 §1 pkt 4:    1 miesiąc od powzięcia wiadomości o decyzji
-                                   (art. 241 §2 pkt 1 Op)
-Wznowienie — TK lub TSUE:          1 miesiąc od wejścia w życie orzeczenia TK albo
-                                   publikacji sentencji TSUE (art. 241 §2 pkt 2 Op)
-Niepowstanie zobowiązania z decyzji ustalającej: 3 lata (art. 68 §1), a przy braku
-                                   deklaracji lub nieujawnieniu danych — 5 lat (art. 68 §2)
-Przedawnienie zobowiązania:        5 lat od końca roku, w którym upłynął TERMIN
-                                   PŁATNOŚCI (art. 70 §1 Op)
-⛔ art. 68 ≠ art. 70: pierwszy mówi, że zobowiązanie NIE POWSTAJE, drugi że
-   PRZEDAWNIA SIĘ. Mylenie ich przesuwa datę o kilka lat.
-✅ [VER] RZĄD 1 2026-09-12i — odczyt treści `Dz.U. 2026 poz. 622`.
-⛔⛔ KROK 2C: po tekście jednolitym (22.04.2026) ogłoszono PIĘĆ ustaw
-   zmieniających, wszystkie z ODROCZONYM wejściem w życie —
-   Dz.U. 2026 poz. 1154 (16.09.2026), poz. 825 (24.09.2026),
-   poz. 846 (1.10.2026), poz. 875 i poz. 1098 (1.01.2027).
-   Brzmienia wyżej są aktualne NA 12.09.2026. Przy sprawie po 16.09.2026
-   odczytać ponownie — trzy z nich wchodzą w ciągu trzech tygodni.
+Przedawnienie zobowiązania:        5 lat od końca roku cal. (art. 70 §1 Op)
+⚠️ Weryfikuj aktualne brzmienie każdego przepisu w ISAP.
 ```
 
 ### Ścieżki odwoławcze
@@ -122,7 +100,11 @@ ZASADA: 5 lat od końca roku kalendarzowego, w którym upłynął termin płatno
 ZAWIESZENIE (termin nie biegnie) — art. 70 §6:
   → Wniesienie skargi do WSA
   → Wniesienie skargi kasacyjnej do NSA
-  → Inne przesłanki — weryfikuj aktualny art. 70 §6 w ISAP
+  → Wszczęcie postępowania w sprawie o przestępstwo/wykroczenie skarbowe,
+    o którym podatnik został zawiadomiony (art. 70 § 6 pkt 1 — ⛔ W MOCY,
+    ✅ [VER] RZĄD 1 2026-09-16, `Dz.U. 2026 poz. 622`; twierdzenie o jego
+    uchyleniu — patrz zastrzeżenie w sekcji 6)
+  → Inne przesłanki — art. 70 § 6 pkt 2–4 (odczyt treści przed użyciem)
 
 PRZERWANIE (termin biegnie od nowa) — art. 70 §4:
   → Zastosowanie środka egzekucyjnego o którym podatnik był zawiadomiony
@@ -461,6 +443,19 @@ dziś objąć transakcje o WIELE niższej wartości niż dawniej. Dokładna
 data zniesienia limitu NIE ZWERYFIKOWANA w tej sesji — sprawdź na
 ISAP przed cytowaniem konkretnej daty.
 
+⛔⛔ ZASTRZEŻENIE 2026-09-12i / odtworzone 2026-09-16 (F-189) — CZYTAJ PRZED
+PONIŻSZYM BLOKIEM. ✅ [VER] RZĄD 1 2026-09-16: odczyt treści `Dz.U. 2026 poz. 846`
+(ustawa z 29.05.2026, w życie 1.10.2026) — ustawa NIE zawiera żadnej zmiany
+w art. 70 Op, NIE zawiera słowa „ugoda" i NIE przewiduje terminu 7 lat.
+Art. 70 § 6 pkt 1 Op JEST W MOCY w t.j. `Dz.U. 2026 poz. 622`.
+Twierdzenia poniżej o „wydłużeniu przedawnienia do 7 lat", o „uchyleniu
+art. 70 § 6 pkt 1" i o „ugodzie podatkowej" traktuj jako OPIS ZAMIARU
+LEGISLACYJNEGO (projekt / druk), NIE jako stan prawa. Przed powołaniem —
+wskaż pozycję Dz.U. i datę wejścia w życie z odczytu treści; bez tego
+NIE używaj. Pozostałe nowelizacje Op po t.j.: poz. 825 (24.09.2026, art. 14i–14j),
+poz. 1154 (16.09.2026, wyłącznie art. 299 § 3 pkt 17), poz. 875 i 1098
+(1.01.2027) — zakres dwóch ostatnich nieustalony (flaga F-OP-2026-09).
+
 ⭐⭐ DODANE 2026-08-08 (na żądanie użytkownika, zamknięcie flagi F-17)
 — ⚡ NOWELIZACJA z 15.05.2026 (druk 2287, uchwalona jednogłośnie
 przez Sejm, PODPISANA przez Prezydenta 19.06.2026) — WCHODZI W
@@ -479,16 +474,7 @@ przez Sejm, PODPISANA przez Prezydenta 19.06.2026) — WCHODZI W
     WYDŁUŻENIA go maksymalnie do **7 LAT** KONKRETNIE w przypadkach
     unikania opodatkowania objętych klauzulą GAAR — TO NOWE,
     DODATKOWE uprawnienie, nieistniejące PRZED tą nowelizacją
-  → ⛔⛔ WERYFIKACJA 2026-09-12i — TWIERDZENIE NIEPOTWIERDZONE.
-    art. 70 §6 pkt 1 Op JEST W MOCY w tekście jednolitym Dz.U. 2026 poz. 622
-    (odczyt treści 2026-09-12i). Przeszukano dwie ustawy zmieniające
-    o najbliższych datach wejścia w życie — Dz.U. 2026 poz. 825 (24.09.2026)
-    i poz. 846 (1.10.2026): ŻADNA nie zawiera zmiany w art. 70, a poz. 846
-    nie zawiera też słowa "ugoda". Przed powołaniem się na uchylenie
-    WSKAŻ KONKRETNĄ USTAWĘ, pozycję Dz.U. i datę wejścia w życie.
-    Reprodukcja: api.sejm.gov.pl/eli/acts/DU/1997/926/references →
-    filtr po announcementDate > 2026-04-22.
-  → poniższy opis pozostaje jako OPIS ZAMIARU LEGISLACYJNEGO, nie stanu prawa:
+  → ⭐ RÓWNOWAŻĄCA ZMIANA NA KORZYŚĆ PODATNIKA (ta sama nowelizacja):
     UCHYLENIE art. 70 §6 pkt 1 Op — dotychczasowy, KONTROWERSYJNY
     mechanizm, który pozwalał zawiesić przedawnienie PRZEZ SAMO
     wszczęcie postępowania W SPRAWIE O PRZESTĘPSTWO/wykroczenie

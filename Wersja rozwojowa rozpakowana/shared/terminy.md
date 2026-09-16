@@ -381,6 +381,10 @@ opracowania nadal liczą od daty urodzenia.
 | **1 rok** od ustanowienia przedstawiciela ustawowego albo od dowiedzenia się przez niego | mąż **całkowicie ubezwłasnowolniony** — przez przedstawiciela | art. 64 § 1 KRO |
 | **1 rok** od uchylenia ubezwłasnowolnienia albo od dowiedzenia się | mąż po uchyleniu ubezwłasnowolnienia | art. 64 § 2 KRO |
 | **1 rok** od ustania choroby lub zaburzeń | mąż, który zapadł na chorobę psychiczną i nie został ubezwłasnowolniony | art. 65 KRO |
+| **1 rok** od sporządzenia aktu urodzenia | **matka** albo kobieta wpisana w akcie jako matka — zaprzeczenie **macierzyństwa** | **art. 61¹³ § 1 KRO** ✅ [VER] RZĄD 1 2026-09-16 |
+| **1 rok** od dowiedzenia się, nie później niż do pełnoletności dziecka | mężczyzna, którego ojcostwo ustalono z uwzględnieniem macierzyństwa kobiety wpisanej w akcie — zaprzeczenie macierzyństwa | art. 61¹³ § 2 KRO |
+| **1 rok** od dowiedzenia się, po pełnoletności; gdy wcześniej — od dnia pełnoletności | **dziecko** — zaprzeczenie macierzyństwa | **art. 61¹⁴ § 1 KRO** |
+| do pełnoletności dziecka (gdy zmarło wcześniej — do dnia, w którym osiągnęłoby pełnoletność) | matka — **ustalenie** macierzyństwa | art. 61¹¹ KRO |
 
 ⛔ **Dwa terminy krążące w obiegu są NIEPRAWDZIWE:**
 1. „matka — **6 miesięcy** od urodzenia dziecka" → jest **rok od dowiedzenia
@@ -388,6 +392,10 @@ opracowania nadal liczą od daty urodzenia.
 2. „dziecko — **3 lata** od osiągnięcia pełnoletności" → jest **rok** (art. 70
    § 1). ⛔ Ten drugi **zawyża** termin trzykrotnie — dziecko poinformowane
    o „trzech latach" traci powództwo.
+3. (dopisane 2026-09-16, F-189) **macierzyństwo** — „6 miesięcy od aktu
+   urodzenia" i „dziecko — 3 lata od pełnoletności" → w obu wypadkach jest
+   **rok** (art. 61¹³ § 1, art. 61¹⁴ § 1). Ten sam wzorzec błędu co przy
+   ojcostwie; `dr-02` powielał go z adnotacją „zgodne źródła RZĘDU 2B".
 
 ⚠️ **Prokurator (art. 86 KRO)** — może wytoczyć powództwo o ustalenie lub
 zaprzeczenie ojcostwa oraz o bezskuteczność uznania, jeżeli wymaga tego dobro
@@ -511,7 +519,7 @@ przy sprawie; to inna kategoria niż spółdzielnie.
 ## Prawo pracy (KP) — z odczytu treści
 
 ✅ [VER] RZĄD 1 2026-09-12n — `Dz.U. 2025 poz. 277`. **KROK 2C:** nowelizacja
-`Dz.U. 2026 poz. 1046` (w życie **5.11.2026**) zmienia art. 11, 18, 94, 104
+`Dz.U. 2026 poz. 1046` (w życie **5.11.2026**) zmienia art. 18³ᵃ, 18³ᵈ–18³ᵍ, 94, 94³–94³ᵃ, 104¹ <!-- korekta 2026-09-16 F-189: wcześniej „11, 18, 94, 104" — art. 11 nie jest zmieniany -->
 KP oraz art. 47 i 461 KPC — **nie dotyka** art. 52, 109, 112, 264, 265 ani 291.
 ⚠️ Wchodzi za niespełna dwa miesiące; przy sprawie po tej dacie odczytać ponownie.
 

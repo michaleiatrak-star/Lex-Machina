@@ -1,22 +1,13 @@
 ---
 name: prawo-polskie-v2
-version: "6.20"
+version: "6.21"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
 description: "Fasada routingu prawa polskiego: wybiera jeden z DR-01–DR-16 i przekazuje sprawę do właściwego skilla dziedzinowego; nie zawiera treści prawa materialnego."
 changelog: |
-  Wersja bieżąca: 6.18 (2026-09-10r, O-10): cezury czasowe aktów w vacatio legis
-  i zwolnienia grupowe 2025/570 → 2026/1195.
-  Poprzednio 6.17 (2026-09-10q, F-135): ROUTING-MAP — cezura czasowa reformy
-  antymobbingowej (vacatio legis do 4.11.2026).
-  Poprzednio 6.16 (2026-09-10o, F-181): ROUTING-MAP — ARiMR 2025/1363 → 2026/942.
-  Poprzednio 6.15 (2026-09-10j): ROUTING-MAP — łańcuch laboratoryjny
-  przepisany po wykryciu DWÓCH PODMIAN AKTU: 2022/2162 opisane jako nowa ustawa
-  o medycynie laboratoryjnej, a jest tekstem jednolitym STAREJ ustawy z 2001 r.;
-  2023/1517 opisane jako stara ustawa, a jest rozporządzeniem MSWiA. Podstawą
-  jest ustawa o medycynie laboratoryjnej, t.j. Dz.U. 2025 poz. 1295.
-  Pełna historia wszystkich wersji: references/CHANGELOG.md (ZASADA 15).
+  Wersja bieżąca: 6.21 (2026-09-16, F-189): T12: pole YAML `changelog:` (numer 6.18 przy version 6.20) skrócone do odesłania (ZASADA 15). Treść bez zmian.…
+  Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
