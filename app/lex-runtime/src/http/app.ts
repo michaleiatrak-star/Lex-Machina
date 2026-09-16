@@ -867,6 +867,101 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     }
   );
 
+  app.patch(
+    "/api/admin/users/:userId/status",
+    (req, res) => {
+      if (!options.authService) {
+        res.status(503).json({
+          error:
+            "AUTH_SERVICE_UNAVAILABLE"
+        });
+        return;
+      }
+      const userId =
+        String(
+          req.params.userId ?? ""
+        ).trim();
+      const status =
+        req.body?.status ===
+          "ACTIVE" ||
+        req.body?.status ===
+          "DISABLED"
+          ? req.body.status
+          : null;
+      if (!status) {
+        res.status(400).json({
+          error:
+            "INVALID_USER_REQUEST"
+        });
+        return;
+      }
+      try {
+        const user =
+          options.authService
+            .setUserStatus(
+              responseAuthContext(
+                res
+              ),
+              userId,
+              status
+            );
+        res.json({ user });
+      } catch (error) {
+        if (
+          !sendAuthError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "USER_STATUS_UPDATE_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.delete(
+    "/api/admin/users/:userId",
+    (req, res) => {
+      if (!options.authService) {
+        res.status(503).json({
+          error:
+            "AUTH_SERVICE_UNAVAILABLE"
+        });
+        return;
+      }
+      const userId =
+        String(
+          req.params.userId ?? ""
+        ).trim();
+      try {
+        res.json(
+          options.authService
+            .deleteUser(
+              responseAuthContext(
+                res
+              ),
+              userId
+            )
+        );
+      } catch (error) {
+        if (
+          !sendAuthError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "USER_DELETE_FAILED"
+          });
+        }
+      }
+    }
+  );
+
   app.get(
     "/api/shared/templates",
     async (_req, res) => {
