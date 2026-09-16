@@ -49,3 +49,27 @@ G0-G29 plus G27A/G28A and G32 are implemented on `feature/local-runtime`. G31A/G
 Full G31 is **not** claimed PASS: G31C now includes an encrypted file-backed reversible privacy vault plus typed authoring AST/token aliases; G31D deterministic DOCX/deanonymization/download and G31E deterministic ODT/deanonymization/download remain open. G30 open-web discovery also remains open.
 
 **G33 installer/bootstrap is designed but not implemented:** offline-first Tauri desktop packaging, bundled private runtimes/models/LibreOffice, prerequisite probing, guided animated first-run setup, repair/rollback and local self-tests. See `app/reports/G33-INSTALLER-BOOTSTRAP-ARCHITECTURE.md`.
+
+
+## Security architecture before installer
+
+**G34 — Local Identity / Login / ACL / Vault is designed, not implemented.**
+
+The design adds:
+- local ADMIN/USER accounts;
+- Argon2id password-derived account unlocking;
+- random per-user master keys;
+- independent per-case data keys;
+- per-user case-key envelopes and case ACLs;
+- explicit re-identification permission;
+- encrypted persistent privacy vault;
+- idle lock / step-up reauthentication;
+- recovery-code flow without security questions;
+- production Tauri session boundary;
+- required encryption-at-rest hardening for raw case files before claiming secure shared-workstation mode.
+
+See:
+- `app/reports/G34-IDENTITY-LOGIN-VAULT-ARCHITECTURE.md`
+- `app/auth/schema.example.sql`
+
+Installer implementation should follow G34/G31C-D-E rather than freezing the current unauthenticated localhost prototype into a distributable package.
