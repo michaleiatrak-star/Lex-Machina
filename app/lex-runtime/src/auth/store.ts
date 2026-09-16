@@ -788,13 +788,6 @@ export class LocalAuthStore {
           row.key_version,
           "key_version"
         ),
-      caseKind:
-        (
-          optionalText(
-            row.case_kind
-          ) ??
-          "MATTER"
-        ) as CaseKind,
       createdAt:
         textValue(
           row.created_at,
@@ -1543,6 +1536,13 @@ export class LocalAuthStore {
           row.key_version,
           "key_version"
         ),
+      caseKind:
+        (
+          optionalText(
+            row.case_kind
+          ) ??
+          "MATTER"
+        ) as CaseKind,
       ...(displayName
         ? { displayName }
         : {}),
