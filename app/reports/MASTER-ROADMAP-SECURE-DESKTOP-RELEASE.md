@@ -1,6 +1,6 @@
 # Lex Machina — Master Roadmap to Secure Desktop Release
 
-Status: **IN EXECUTION — P4B + G36 + G34H1-H5 + G37A/G37C1/G37E1 PASS; G38 IMPLEMENTED / VALIDATION PENDING; NEXT G31C2/G35C**  
+Status: **IN EXECUTION — G31C2/G31D/G31E + G35C + FULL G34F + G38 PASS; NEXT G34G → G33A-D**  
 Date: 2026-09-16  
 Branch baseline: `feature/local-runtime`
 
@@ -702,8 +702,11 @@ Transaction reauthorization foundation requires exact target binding, fresh pass
 
 Validated code SHA: `f057a0bb22ba89c8a4eb9cb5f9dc774c8cde6524`.
 
-## Full G34F — OPEN
-Do not mark full G34F PASS until G31D/G31E deanonymization/export requires and consumes the G34F grant with no bypass path.
+## Full G34F — PASS
+
+Validated on SHA `e0035c68a2034bc4e4132adc28614fb752e10c4f` by gate `G34F_FULL_DEANONYMIZATION_EXPORT`.
+
+The production path now requires exact-artifact intent → fresh password reauthorization → one-use grant consumption before CDK/vault access → local DOCX/ODT deanonymization → zero-token package validation → local HYBRID → G8/G10 on the final extracted text/bytes → encrypted CLEAR_PII artifact commit → same-session one-use 60-second download ticket. The raw-AST HTTP bypass was removed.
 
 ---
 
@@ -1538,10 +1541,10 @@ G34H5 migration remains deliberately fail-closed:
    - safe member metadata resolution;
    - magic-signature/media validation;
    - processing without browser re-upload;
-2. implement G31C2 typed LegalDocumentAst + generation aliases;
-3. implement G35C safe template-profile integration;
-4. implement G31D DOCX and G31E ODT;
-5. integrate full G34F grant consumption and one-use sensitive download into actual export;
+2. **PASS** — G31C2 typed LegalDocumentAst + generation aliases;
+3. **PASS** — G35C safe template-profile integration;
+4. **PASS** — G31D DOCX and G31E ODT;
+5. **PASS** — full G34F grant consumption, final G8/G10 and one-use sensitive download;
 6. implement G34G Tauri production trust boundary;
 7. implement G33A-G33D installer and clean-machine release acceptance.
 
@@ -1642,8 +1645,8 @@ Repository closure:
 
 1. preserve green `feature/local-runtime` + G37 work;
 2. keep G38 green: encrypted firm know-how, case/firm retrieval and extended digital document intake;
-3. G31C2 + G35C;
-4. G31D/G31E + full G34F;
+3. **PASS** — G31C2 + G35C;
+4. **PASS** — G31D/G31E + full G34F;
 5. G34G production Tauri trust boundary;
 6. G33A-G33D installer/update transaction;
 7. G37B/G37C2/G37D/G37E2 desktop integration;
@@ -1752,3 +1755,27 @@ Installer acceptance must later include at least:
 - XLSX;
 - firm/case retrieval;
 - multi-user revoke/rekey.
+
+
+## G39 validated authoring closure — 2026-09-16
+
+Validated code SHA:
+- `e0035c68a2034bc4e4132adc28614fb752e10c4f`
+
+CI evidence:
+- F-138 structural audit `35108047959` — SUCCESS;
+- Lex Runtime Validation `35108047936` — SUCCESS;
+- runtime tests — 61/61 files, 220/220 tests PASS;
+- web tests — 1/1 file, 16/16 tests PASS;
+- production web build and G14 bundle safety — PASS;
+- live G17/G19/G20/G22 — PASS;
+- `G31C2_TYPED_AUTHORING_AST` — PASS;
+- `G31D_DETERMINISTIC_DOCX` — PASS;
+- `G31E_DETERMINISTIC_ODT` — PASS;
+- `G35C_TEMPLATE_ASSISTED_GENERATION` — PASS;
+- `G34F_FULL_DEANONYMIZATION_EXPORT` — PASS.
+
+Remaining critical installer path:
+1. G34G Tauri production trust boundary;
+2. G33A-G33D offline installer / repair / rollback / signed update;
+3. remaining G37 desktop-only integrations and clean-machine release acceptance.
