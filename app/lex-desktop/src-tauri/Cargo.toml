@@ -26,3 +26,4 @@ getrandom = "0.4"
 serde_json = "1.0"
 tauri = "=2.11.5"
 keyring = { version = "=3.6.3", default-features = false, features = ["windows-native"] }
+sha2 = "=0.10.9"
