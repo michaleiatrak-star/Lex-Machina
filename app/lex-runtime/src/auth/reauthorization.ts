@@ -255,6 +255,13 @@ export class DeanonymizationReauthorizationManager {
       );
     if (
       !target ||
+      target.caseId !==
+        caseId ||
+      target.artifactId !==
+        artifactId ||
+      !["docx", "odt"].includes(
+        target.artifactFormat
+      ) ||
       target.state !==
         "TOKENIZED_VALIDATED" ||
       !validSha256(
