@@ -287,6 +287,87 @@ export class LocalSharedTemplateStore {
     return manifest;
   }
 
+  async readTemplate(
+    templateId: string
+  ): Promise<{
+    manifest:
+      SharedTemplateManifest;
+    data: Buffer;
+  }> {
+    const dir =
+      this.templateDir(
+        templateId
+      );
+    const manifest =
+      JSON.parse(
+        await readFile(
+          path.join(
+            dir,
+            "manifest.json"
+          ),
+          "utf8"
+        )
+      ) as
+        SharedTemplateManifest;
+    if (
+      manifest.templateId !==
+        templateId ||
+      manifest.scope !==
+        "FIRM_SHARED" ||
+      typeof manifest.filename !==
+        "string" ||
+      ![
+        DOCX_MEDIA_TYPE,
+        ODT_MEDIA_TYPE
+      ].includes(
+        manifest.mediaType
+      ) ||
+      !/^[a-f0-9]{64}$/
+        .test(
+          manifest.sha256
+        ) ||
+      !Number.isInteger(
+        manifest.bytes
+      ) ||
+      manifest.bytes < 1 ||
+      manifest.bytes >
+        this.maxBytes ||
+      manifest.generationReady !==
+        false
+    ) {
+      throw new Error(
+        "TEMPLATE_MANIFEST_INVALID"
+      );
+    }
+    const data =
+      await readFile(
+        path.join(
+          dir,
+          "original",
+          manifest.filename
+        )
+      );
+    const sha256 =
+      createHash("sha256")
+        .update(data)
+        .digest("hex");
+    if (
+      data.byteLength !==
+        manifest.bytes ||
+      sha256 !==
+        manifest.sha256
+    ) {
+      data.fill(0);
+      throw new Error(
+        "TEMPLATE_PAYLOAD_MISMATCH"
+      );
+    }
+    return {
+      manifest,
+      data
+    };
+  }
+
   async listTemplates():
     Promise<
       SharedTemplateManifest[]
