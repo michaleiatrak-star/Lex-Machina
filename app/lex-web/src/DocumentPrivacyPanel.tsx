@@ -324,8 +324,8 @@ export function DocumentPrivacyPanel({
             Akta sprawy, OCR i ręczna anonimizacja
           </h3>
           <p>
-            PDF, obrazy, TXT/Markdown oraz DOCX/ODT są przetwarzane lokalnie i zapisywane
-            w szyfrowanym kontekście sprawy. ZIP jest bezpiecznie rozpakowywany do katalogu
+            PDF, obrazy, TXT/Markdown, DOCX/ODT oraz XLSX/XLSM/CSV/TSV są przetwarzane lokalnie i zapisywane
+            w szyfrowanym kontekście sprawy. Cyfrowy PDF korzysta z warstwy tekstowej bez OCR, jeśli tekst jest wystarczający. ZIP jest bezpiecznie rozpakowywany do katalogu
             sprawy; żaden plik z archiwum nie trafia automatycznie do providera.
           </p>
         </div>
@@ -333,10 +333,10 @@ export function DocumentPrivacyPanel({
         <label className="file-button">
           {loading
             ? "Przetwarzanie…"
-            : "Wybierz PDF, DOCX, ODT, tekst, zdjęcie lub ZIP"}
+            : "Wybierz PDF, dokument, arkusz, zdjęcie lub ZIP"}
           <input
             type="file"
-            accept=".pdf,.docx,.odt,.txt,.md,.zip,application/pdf,application/zip,text/plain,text/markdown,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.oasis.opendocument.text,image/jpeg,image/png,image/webp,image/tiff"
+            accept=".pdf,.docx,.odt,.xlsx,.xlsm,.csv,.tsv,.txt,.md,.zip,application/pdf,application/zip,text/plain,text/markdown,text/csv,text/tab-separated-values,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.oasis.opendocument.text,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel.sheet.macroEnabled.12,image/jpeg,image/png,image/webp,image/tiff"
             disabled={loading || !caseId}
             onChange={(event) => {
               void openFile(
