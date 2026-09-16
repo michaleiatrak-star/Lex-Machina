@@ -7,6 +7,7 @@ import {
   listCaseAccess,
   listCaseAccessCandidates,
   revokeCaseAccess,
+  transferCaseOwnership,
   type AuthenticatedUser,
   type CaseAccessEntry,
   type CaseRole
@@ -212,12 +213,15 @@ function ParticipantRow({
 
 export function CaseCollaborationPanel({
   caseId,
-  caseRole
+  caseRole,
+  onOwnershipTransferred
 }: {
   caseId: string;
   caseRole:
     | CaseRole
     | undefined;
+  onOwnershipTransferred?:
+    () => Promise<void> | void;
 }) {
   const [access, setAccess] =
     useState<CaseAccessEntry[]>(
@@ -247,6 +251,16 @@ export function CaseCollaborationPanel({
     useState("");
   const [message, setMessage] =
     useState("");
+  const [
+    transferUserId,
+    setTransferUserId
+  ] = useState("");
+  const [
+    transferPassword,
+    setTransferPassword
+  ] = useState("");
+
+
 
   const canManage =
     caseRole === "OWNER";
@@ -289,6 +303,34 @@ export function CaseCollaborationPanel({
                 ?.userId ?? ""
             )
     );
+    const transferTargets = [
+      ...currentAccess.access
+        .filter(
+          (entry) =>
+            entry.role !==
+              "OWNER" &&
+            entry.user.status ===
+              "ACTIVE"
+        )
+        .map(
+          (entry) =>
+            entry.user
+        ),
+      ...available.users
+    ];
+    setTransferUserId(
+      (current) =>
+        transferTargets.some(
+          (user) =>
+            user.userId ===
+              current
+        )
+          ? current
+          : (
+              transferTargets[0]
+                ?.userId ?? ""
+            )
+    );
   }
 
   useEffect(() => {
@@ -326,6 +368,33 @@ export function CaseCollaborationPanel({
     } finally {
       setBusy(false);
     }
+  }
+
+  async function transferOwner():
+    Promise<void> {
+    if (
+      !transferUserId ||
+      !transferPassword
+    ) {
+      return;
+    }
+    if (
+      !window.confirm(
+        "Przekazać własność tej sprawy? Twoja rola zostanie zmieniona na EDITOR."
+      )
+    ) {
+      return;
+    }
+    await transferCaseOwnership(
+      caseId,
+      transferUserId,
+      transferPassword
+    );
+    setTransferPassword("");
+    setMessage(
+      "Własność sprawy została przekazana. Dotychczasowy właściciel pozostaje jako EDITOR."
+    );
+    await onOwnershipTransferred?.();
   }
 
   async function add():
@@ -497,6 +566,90 @@ export function CaseCollaborationPanel({
           {message}
         </div>
       )}
+
+      <details className="case-owner-transfer">
+        <summary>
+          Przekaż własność sprawy
+        </summary>
+        <p className="field-help">
+          Transfer wymaga ponownego podania hasła. Nowy właściciel przejmuje zarządzanie uczestnikami, a obecny właściciel pozostaje jako EDITOR.
+        </p>
+        <div className="case-owner-transfer-grid">
+          <label>
+            Nowy właściciel
+            <select
+              value={
+                transferUserId
+              }
+              disabled={busy}
+              onChange={(event) =>
+                setTransferUserId(
+                  event.target
+                    .value
+                )
+              }
+            >
+              {[...access
+                .filter(
+                  (entry) =>
+                    entry.role !==
+                      "OWNER" &&
+                    entry.user.status ===
+                      "ACTIVE"
+                )
+                .map(
+                  (entry) =>
+                    entry.user
+                ),
+                ...candidates
+              ].map((user) => (
+                <option
+                  key={
+                    user.userId
+                  }
+                  value={
+                    user.userId
+                  }
+                >
+                  {user.displayName} · @{user.loginName}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Hasło właściciela
+            <input
+              type="password"
+              autoComplete="current-password"
+              value={
+                transferPassword
+              }
+              disabled={busy}
+              onChange={(event) =>
+                setTransferPassword(
+                  event.target
+                    .value
+                )
+              }
+            />
+          </label>
+          <button
+            type="button"
+            disabled={
+              busy ||
+              !transferUserId ||
+              !transferPassword
+            }
+            onClick={() => {
+              void runChange(
+                transferOwner
+              );
+            }}
+          >
+            Przekaż własność
+          </button>
+        </div>
+      </details>
 
       <div className="case-collaborator-list">
         {access.map(
