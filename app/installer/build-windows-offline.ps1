@@ -36,8 +36,8 @@ Push-Location $appStage
 try {
   npm install --omit=dev --ignore-scripts --no-audit --no-fund
   if ($LASTEXITCODE -ne 0) { throw "production runtime dependencies failed" }
-  npm ls --all --json | Out-File -FilePath (Join-Path $payload "npm-dependency-tree.json") -Encoding utf8
-  if ($LASTEXITCODE -ne 0) { throw "runtime dependency provenance failed" }
+  npm ls --omit=dev --all --json | Out-File -FilePath (Join-Path $payload "npm-dependency-tree.json") -Encoding utf8
+  if ($LASTEXITCODE -ne 0) { throw "runtime production dependency provenance failed" }
 } finally { Pop-Location }
 
 Write-Host "[2/9] Copy workers and corpus"
