@@ -29,7 +29,7 @@ permissions:
 
 jobs:
   g1-g29-g32:
-    name: G1-G29 + G31A/G31B/G31C1 + G32 + G34A-G34E + G34F1 + G34H1/H2 + G35A/G35B deterministic validation
+    name: G1-G29 + G31A/G31B/G31C1 + G32 + G34A-G34E + G34F1 + G34H1/H2/H3 + G35A/G35B deterministic validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -178,6 +178,9 @@ jobs:
 
       - name: G34H1/H2 — encrypted incoming and ZIP members
         run: npm run validate:g34h12
+
+      - name: G34H3 — encrypted document persistence
+        run: npm run validate:g34h3
 
   g19-live-freshness:
     name: G19 live temporal freshness probe
