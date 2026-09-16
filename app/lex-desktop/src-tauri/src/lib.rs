@@ -33,6 +33,9 @@ pub fn run() {
             setup_bridge
                 .start(&resource_dir)
                 .map_err(io::Error::other)?;
+            setup_bridge
+                .ensure_managed_identity()
+                .map_err(io::Error::other)?;
             Ok(())
         })
         .run(tauri::generate_context!())
