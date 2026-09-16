@@ -256,8 +256,8 @@ describe("private document HTTP API", () => {
 
     await request(app)
       .post("/api/documents/ingest")
-      .set("Content-Type", "text/plain")
-      .send("text")
+      .set("Content-Type", "application/xml")
+      .send("<text />")
       .expect(415, {
         error: "UNSUPPORTED_DOCUMENT_MEDIA_TYPE"
       });
