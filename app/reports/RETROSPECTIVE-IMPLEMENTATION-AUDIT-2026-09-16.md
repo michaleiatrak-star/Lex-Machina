@@ -4,11 +4,11 @@ Status: **COMPLETED — CURRENT VALIDATED GATES CONSISTENT; OPEN GATES REMAIN EX
 
 Validated implementation SHA used for the final regression:
 
-`5c19ec48f2c25b5bee7c39a63717e7c808cb3a3e`
+`4599d4827eb724c480bb3c563a7b58134b844bdf`
 
 Evidence:
-- Lex Runtime Validation `35084662270` — success
-- F-138 structural audit `35084662355` — success
+- Lex Runtime Validation `35091284197` — success
+- F-138 structural audit `35091284195` — success
 - G17/G19/G20/G22 live probes — success
 - G14-G35 web tests/build/bundle — success
 
@@ -66,6 +66,7 @@ The following representative validated SHAs were independently confirmed to have
 | G34H3 | `0db39cee7af26d1304f40fb6987af0cb0d320235` | PASS |
 | G34H4 baseline | `bfa79b656e302dda37ab000bda08c55f2f889525` | PASS |
 | G36 + regression fixes | `5c19ec48f2c25b5bee7c39a63717e7c808cb3a3e` | PASS |
+| G34H5 + migration HTTP boundary | `4599d4827eb724c480bb3c563a7b58134b844bdf` | PASS |
 
 Older build notes sometimes cite a push run while commit-oriented tooling returns a pull-request run for the same SHA. Direct run inspection confirmed those are separate successful runs of the same commit, not mismatched evidence.
 
@@ -151,14 +152,20 @@ PASS remains correctly scoped as a foundation only.
 - lock/logout/expiry revokes it.
 - **Full G34F is still OPEN** because no real G31D/G31E deanonymization/export route consumes the grant yet.
 
-### G34H1/H2/H3/H4
+### G34H1/H2/H3/H4/H5
 PASS remains supported after current regression.
 - incoming uploads and ZIP members: LME1;
 - document source/protected state: LME1;
 - artifacts: LME1;
-- production key rotation is wired to vault + upload + document + artifact stores.
-- audit found and fixed a robustness regression where the secure incoming parent directory could be absent after later refactoring.
-- **Full G34H remains OPEN on G34H5 legacy plaintext migration/removal.**
+- production key rotation is wired to vault + upload + document + artifact stores;
+- G34H5 migrates the known legacy plaintext upload layout only after hash/size validation and encrypted round-trip verification;
+- unknown/non-empty legacy documents/artifacts/audit content is preserved and blocks migration;
+- migration is idempotent and records security events;
+- no secure-erase guarantee is claimed for SSD/flash media.
+- **The G34H1-H5 encrypted-at-rest gate set is now complete.**
+
+Engineering qualification:
+- direct production HTTP uploads are still accepted through bounded whole-body buffering before encrypted persistence; true stream-to-encrypted-store intake remains a roadmap hardening item.
 
 ### G35A/G35B
 PASS remains correctly scoped.
@@ -221,7 +228,25 @@ Resolution:
 
 ---
 
-## 5. No false full-phase claims
+## 5. Phase closure audit
+
+| Roadmap phase | Status | Evidence / remaining work |
+|---|---|---|
+| Phase 0 — baseline/test harness | CLOSED FOR CURRENT BASELINE | CI/browser/auth/vault/privacy regression coverage exists across G14, auth tests, G31C1/G32 and the main gate suite; it is distributed rather than one dedicated secret-scanner gate. |
+| Phase 1 — identity/login/session | CLOSED | G34A/G34B PASS. |
+| Phase 2 — ACL/key ownership | CLOSED | G34C/G34D PASS. |
+| Phase 2B — workspace/templates foundation | CLOSED FOR G35A/G35B | G35A/G35B PASS; G35C is a later generation gate. |
+| Phase 3 — encrypted privacy vault | CLOSED | G31C1 PASS. |
+| Phase 4A — recovery/reauthorization | PARTIAL | G34E and G34F1 PASS; full G34F awaits real G31D/G31E deanonymization/export grant consumption. |
+| Phase 4B — case lifecycle | PARTIAL | list/create/reopen/select and explicit legacy import exist; rename/archive/delete are not implemented. |
+| Phase 5 — encrypted case storage | G34H GATES CLOSED / CHECKLIST PARTIAL | G34H1-H5 PASS; true streaming direct upload remains open and unknown legacy formats intentionally block rather than auto-delete. |
+| Parallel G36 — legal skill runtime | CLOSED | 32 skills / 16 DR / 1,187 supported text resources readable; G36 PASS. |
+
+Therefore the answer to “are all earlier stages closed?” is **no**: the validated security foundations are strong, but Phase 4A, Phase 4B and parts of the Phase 5 engineering checklist remain open.
+
+---
+
+## 6. No false full-phase claims
 
 The audit confirms the following must remain OPEN:
 
@@ -231,7 +256,6 @@ The audit confirms the following must remain OPEN:
 - G31E deterministic ODT;
 - full G34F integration with real deanonymization/export;
 - G34G Tauri production session boundary;
-- G34H5 legacy plaintext migration/removal;
 - G35C template-assisted generation;
 - G33A-G33D installer execution;
 - final release/clean-machine acceptance.
@@ -240,7 +264,7 @@ The installer must not be called release-ready until those required release gate
 
 ---
 
-## 6. Current conclusion
+## 7. Current conclusion
 
 After fixing the issues found during this audit, there is **no current evidence that a previously recorded implemented PASS gate is falsely marked PASS**.
 
@@ -250,8 +274,8 @@ Important qualification:
 - latest full regression validates the present integrated code, not only historical snapshots.
 
 Next critical path:
-1. G34H5 explicit legacy plaintext migration/removal;
-2. case lifecycle/stored-file processing where still open;
+1. close case lifecycle gaps: rename/archive/delete + migration UX;
+2. G31B2 stored-file/member processing;
 3. G31C2 typed authoring AST;
 4. G35C template profile integration;
 5. G31D/G31E;
