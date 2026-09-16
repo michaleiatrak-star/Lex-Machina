@@ -46,13 +46,19 @@ function ParticipantRow({
   caseId,
   entry,
   busy,
-  onChanged
+  onSave,
+  onRevoke
 }: {
   caseId: string;
   entry: CaseAccessEntry;
   busy: boolean;
-  onChanged: (
-    message: string
+  onSave: (
+    entry: CaseAccessEntry,
+    role: SharedRole,
+    canReidentify: boolean
+  ) => Promise<void>;
+  onRevoke: (
+    entry: CaseAccessEntry
   ) => Promise<void>;
 }) {
   const editable =
@@ -89,17 +95,10 @@ function ParticipantRow({
   async function save():
     Promise<void> {
     if (!editable) return;
-    await grantCaseAccess(
-      caseId,
-      {
-        userId:
-          entry.user.userId,
-        role,
-        canReidentify
-      }
-    );
-    await onChanged(
-      `Zaktualizowano dostęp @${entry.user.loginName}.`
+    await onSave(
+      entry,
+      role,
+      canReidentify
     );
   }
 
@@ -113,12 +112,8 @@ function ParticipantRow({
     ) {
       return;
     }
-    await revokeCaseAccess(
-      caseId,
-      entry.user.userId
-    );
-    await onChanged(
-      `Odebrano dostęp @${entry.user.loginName} i obrócono klucz sprawy.`
+    await onRevoke(
+      entry
     );
   }
 
@@ -515,14 +510,45 @@ export function CaseCollaborationPanel({
               caseId={caseId}
               entry={entry}
               busy={busy}
-              onChanged={async (
-                nextMessage
+              onSave={async (
+                current,
+                nextRole,
+                nextCanReidentify
               ) => {
                 await runChange(
                   async () => {
+                    await grantCaseAccess(
+                      caseId,
+                      {
+                        userId:
+                          current.user
+                            .userId,
+                        role:
+                          nextRole,
+                        canReidentify:
+                          nextCanReidentify
+                      }
+                    );
                     await refresh();
                     setMessage(
-                      nextMessage
+                      `Zaktualizowano dostęp @${current.user.loginName}.`
+                    );
+                  }
+                );
+              }}
+              onRevoke={async (
+                current
+              ) => {
+                await runChange(
+                  async () => {
+                    await revokeCaseAccess(
+                      caseId,
+                      current.user
+                        .userId
+                    );
+                    await refresh();
+                    setMessage(
+                      `Odebrano dostęp @${current.user.loginName} i obrócono klucz sprawy.`
                     );
                   }
                 );
