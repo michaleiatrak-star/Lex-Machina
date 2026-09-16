@@ -165,6 +165,21 @@ def docx_block(block):
         return '<w:tbl><w:tblPr><w:tblW w:w="0" w:type="auto"/><w:tblBorders><w:top w:val="single" w:sz="4"/><w:left w:val="single" w:sz="4"/><w:bottom w:val="single" w:sz="4"/><w:right w:val="single" w:sz="4"/><w:insideH w:val="single" w:sz="4"/><w:insideV w:val="single" w:sz="4"/></w:tblBorders></w:tblPr>%s</w:tbl>' % "".join(rows)
     raise ValueError("AST_BLOCK_TYPE_UNSUPPORTED")
 
+def docx_styles_for(profile):
+    if profile == "lex-classic-tnr-v1":
+        return DOCX_STYLES.replace("Arial", "Times New Roman").replace('w:sz w:val="23"', 'w:sz w:val="24"')
+    if profile == "lex-light-legal-design-v1":
+        return DOCX_STYLES.replace(
+            '<w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/><w:rPr><w:b/><w:sz w:val="28"/></w:rPr></w:style>',
+            '<w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/><w:rPr><w:b/><w:sz w:val="28"/></w:rPr><w:pPr><w:spacing w:before="240" w:after="120"/><w:pBdr><w:bottom w:val="single" w:sz="4"/></w:pBdr></w:pPr></w:style>'
+        )
+    return DOCX_STYLES
+
+def odt_styles_for(profile):
+    if profile == "lex-classic-tnr-v1":
+        return ODT_STYLES.replace("Arial", "Times New Roman").replace('fo:font-size="11.5pt"', 'fo:font-size="12pt"')
+    return ODT_STYLES
+
 def render_docx(ast):
     body = []
     if ast.get("title"):
@@ -179,7 +194,7 @@ def render_docx(ast):
         ("docProps/core.xml", DOCX_CORE),
         ("docProps/app.xml", DOCX_APP),
         ("word/document.xml", document),
-        ("word/styles.xml", DOCX_STYLES),
+        ("word/styles.xml", docx_styles_for(ast.get("styleProfile"))),
         ("word/settings.xml", DOCX_SETTINGS),
         ("word/fontTable.xml", DOCX_FONT),
         ("word/numbering.xml", DOCX_NUMBERING),
@@ -225,7 +240,7 @@ def render_odt(ast):
     entries = [
         ("mimetype", ODT_MIMETYPE),
         ("content.xml", content.encode("utf-8")),
-        ("styles.xml", ODT_STYLES.encode("utf-8")),
+        ("styles.xml", odt_styles_for(ast.get("styleProfile")).encode("utf-8")),
         ("meta.xml", ODT_META.encode("utf-8")),
         ("settings.xml", ODT_SETTINGS.encode("utf-8")),
         ("META-INF/manifest.xml", ODT_MANIFEST.encode("utf-8")),
@@ -312,6 +327,29 @@ def replace_text_nodes(root, tags, replacements):
         node.text = ALIAS_RE.sub(repl, original)
     return replaced
 
+def extract_style_profile(fmt, data):
+    if fmt == "docx":
+        _, entries, _ = validate_docx(data)
+        styles = entries["word/styles.xml"].decode("utf-8", errors="ignore").lower()
+    elif fmt == "odt":
+        _, entries, _ = validate_odt(data)
+        styles = entries["styles.xml"].decode("utf-8", errors="ignore").lower()
+    else:
+        raise ValueError("DOCUMENT_FORMAT_UNSUPPORTED")
+
+    if "times new roman" in styles:
+        profile = "lex-classic-tnr-v1"
+    elif "arial" in styles:
+        profile = "lex-classic-clean-v1"
+    else:
+        profile = "lex-classic-clean-v1"
+
+    return {
+        "styleProfile": profile,
+        "sourceFormat": fmt,
+        "safe": True
+    }
+
 def deanonymize_docx(data, replacements):
     names, entries, _ = validate_docx(data)
     doc_name = "word/document.xml"
@@ -380,6 +418,10 @@ def main():
         else:
             raise ValueError("DOCUMENT_FORMAT_UNSUPPORTED")
         response = {"text": text, "bytes": len(package), "aliases": len(ALIAS_RE.findall(text))}
+    elif operation == "profile":
+        fmt = request.get("format")
+        package = base64.b64decode(request.get("packageBase64", ""), validate=True)
+        response = extract_style_profile(fmt, package)
     else:
         raise ValueError("DOCUMENT_RENDER_OPERATION_INVALID")
     sys.stdout.write(json.dumps(response, ensure_ascii=False))
