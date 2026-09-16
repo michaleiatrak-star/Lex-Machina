@@ -6,11 +6,15 @@ import {
 import { DocumentPrivacyPanel } from "./DocumentPrivacyPanel.js";
 import { CaseWorkspacePanel } from "./CaseWorkspacePanel.js";
 import {
+  archiveCase,
   createCase,
+  deleteCase,
   executeSession,
   getHealth,
   getModels,
   listCases,
+  renameCase,
+  unarchiveCase,
   getProviderStatus,
   getRoutes,
   validateRoute,
@@ -171,6 +175,12 @@ export default function App({
     useState(false);
   const [caseError, setCaseError] =
     useState("");
+  const [caseRenameName, setCaseRenameName] =
+    useState("");
+  const [caseDeletePassword, setCaseDeletePassword] =
+    useState("");
+  const [caseDeleteConfirmation, setCaseDeleteConfirmation] =
+    useState("");
   const [runtimeError, setRuntimeError] = useState("");
   const [provider, setProvider] = useState<ProviderId>("openai");
   const [providerConfiguration, setProviderConfiguration] = useState<
@@ -216,6 +226,9 @@ export default function App({
         setRoutes(routeList.primarySkills);
         setCases(caseList.cases);
         setCaseId(
+          caseList.cases.find(
+            (item) => !item.archivedAt
+          )?.caseId ??
           caseList.cases[0]?.caseId ??
           ""
         );
@@ -267,6 +280,159 @@ export default function App({
       setDocumentAttachments([]);
       setExecution(null);
       setExecutionError("");
+    } catch (error) {
+      setCaseError(
+        error instanceof Error
+          ? error.message
+          : String(error)
+      );
+    } finally {
+      setCaseBusy(false);
+    }
+  }
+
+  const selectedCase = useMemo(
+    () =>
+      cases.find(
+        (item) =>
+          item.caseId ===
+            caseId
+      ),
+    [cases, caseId]
+  );
+
+  useEffect(() => {
+    setCaseRenameName(
+      selectedCase?.displayName ??
+        ""
+    );
+    setCaseDeletePassword("");
+    setCaseDeleteConfirmation("");
+  }, [
+    caseId,
+    selectedCase?.displayName
+  ]);
+
+  async function refreshCaseList(
+    preferredCaseId?: string
+  ): Promise<void> {
+    const refreshed =
+      await listCases();
+    setCases(refreshed.cases);
+    const preferred =
+      preferredCaseId
+        ? refreshed.cases.find(
+            (item) =>
+              item.caseId ===
+                preferredCaseId
+          )
+        : undefined;
+    const next =
+      preferred ??
+      refreshed.cases.find(
+        (item) =>
+          !item.archivedAt
+      ) ??
+      refreshed.cases[0];
+    setCaseId(
+      next?.caseId ?? ""
+    );
+  }
+
+  async function renameSelectedCase():
+    Promise<void> {
+    if (
+      caseBusy ||
+      !selectedCase ||
+      selectedCase.role !== "OWNER" ||
+      !caseRenameName.trim()
+    ) {
+      return;
+    }
+    setCaseBusy(true);
+    setCaseError("");
+    try {
+      await renameCase(
+        selectedCase.caseId,
+        caseRenameName.trim()
+      );
+      await refreshCaseList(
+        selectedCase.caseId
+      );
+    } catch (error) {
+      setCaseError(
+        error instanceof Error
+          ? error.message
+          : String(error)
+      );
+    } finally {
+      setCaseBusy(false);
+    }
+  }
+
+  async function toggleSelectedCaseArchive():
+    Promise<void> {
+    if (
+      caseBusy ||
+      !selectedCase ||
+      selectedCase.role !== "OWNER"
+    ) {
+      return;
+    }
+    setCaseBusy(true);
+    setCaseError("");
+    try {
+      if (selectedCase.archivedAt) {
+        await unarchiveCase(
+          selectedCase.caseId
+        );
+      } else {
+        await archiveCase(
+          selectedCase.caseId
+        );
+        setDocumentAttachments([]);
+        setExecution(null);
+        setExecutionError("");
+      }
+      await refreshCaseList(
+        selectedCase.caseId
+      );
+    } catch (error) {
+      setCaseError(
+        error instanceof Error
+          ? error.message
+          : String(error)
+      );
+    } finally {
+      setCaseBusy(false);
+    }
+  }
+
+  async function deleteSelectedCase():
+    Promise<void> {
+    if (
+      caseBusy ||
+      !selectedCase ||
+      selectedCase.role !== "OWNER" ||
+      caseDeleteConfirmation !==
+        "USUŃ" ||
+      !caseDeletePassword
+    ) {
+      return;
+    }
+    setCaseBusy(true);
+    setCaseError("");
+    try {
+      await deleteCase(
+        selectedCase.caseId,
+        caseDeletePassword
+      );
+      setDocumentAttachments([]);
+      setExecution(null);
+      setExecutionError("");
+      setCaseDeletePassword("");
+      setCaseDeleteConfirmation("");
+      await refreshCaseList();
     } catch (error) {
       setCaseError(
         error instanceof Error
@@ -469,6 +635,8 @@ export default function App({
                   setExecution(null);
                   setExecutionError("");
                   setCaseError("");
+                  setCaseDeletePassword("");
+                  setCaseDeleteConfirmation("");
                 }}
               >
                 <option value="">
@@ -479,6 +647,9 @@ export default function App({
                     {item.displayName || item.caseId.slice(0, 18)}
                     {" · "}
                     {item.role}
+                    {item.archivedAt
+                      ? " · ARCHIWALNA"
+                      : ""}
                   </option>
                 ))}
               </select>
@@ -512,7 +683,7 @@ export default function App({
                 const selected =
                   cases.find((item) => item.caseId === caseId);
                 return selected
-                  ? `Rola: ${selected.role} · reidentyfikacja: ${selected.canReidentify ? "dozwolona przez ACL" : "niedozwolona"} · klucz v${selected.keyVersion}`
+                  ? `Rola: ${selected.role} · reidentyfikacja: ${selected.canReidentify ? "dozwolona przez ACL" : "niedozwolona"} · klucz v${selected.keyVersion}${selected.archivedAt ? " · ARCHIWALNA (tylko odczyt)" : ""}`
                   : "";
               })()}
             </p>
@@ -520,6 +691,102 @@ export default function App({
             <p className="case-selector-meta">
               Wybierz istniejącą sprawę albo utwórz nową przed pracą z dokumentami.
             </p>
+          )}
+
+          {selectedCase?.role === "OWNER" && (
+            <div className="case-lifecycle-panel">
+              <div className="case-lifecycle-row">
+                <label>
+                  Nazwa sprawy
+                  <input
+                    value={caseRenameName}
+                    maxLength={160}
+                    disabled={caseBusy}
+                    onChange={(event) =>
+                      setCaseRenameName(
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+                <button
+                  type="button"
+                  className="primary-button"
+                  disabled={
+                    caseBusy ||
+                    !caseRenameName.trim()
+                  }
+                  onClick={() =>
+                    void renameSelectedCase()
+                  }
+                >
+                  Zmień nazwę
+                </button>
+                <button
+                  type="button"
+                  disabled={caseBusy}
+                  onClick={() =>
+                    void toggleSelectedCaseArchive()
+                  }
+                >
+                  {selectedCase.archivedAt
+                    ? "Przywróć z archiwum"
+                    : "Archiwizuj sprawę"}
+                </button>
+              </div>
+
+              <details className="case-delete-panel">
+                <summary>Trwałe usunięcie sprawy</summary>
+                <p className="field-help">
+                  Operacja wymaga ponownego podania hasła. Usunięcie plików nie jest przedstawiane jako gwarantowane secure erase nośnika SSD/flash.
+                </p>
+                <div className="case-lifecycle-row">
+                  <label>
+                    Potwierdzenie
+                    <input
+                      value={caseDeleteConfirmation}
+                      placeholder="Wpisz USUŃ"
+                      autoComplete="off"
+                      disabled={caseBusy}
+                      onChange={(event) =>
+                        setCaseDeleteConfirmation(
+                          event.target.value
+                        )
+                      }
+                    />
+                  </label>
+                  <label>
+                    Bieżące hasło
+                    <input
+                      type="password"
+                      value={caseDeletePassword}
+                      autoComplete="current-password"
+                      disabled={caseBusy}
+                      onChange={(event) =>
+                        setCaseDeletePassword(
+                          event.target.value
+                        )
+                      }
+                    />
+                  </label>
+                  <button
+                    type="button"
+                    className="danger-button"
+                    disabled={
+                      caseBusy ||
+                      caseDeleteConfirmation !==
+                        "USUŃ" ||
+                      !caseDeletePassword
+                    }
+                    onClick={() =>
+                      void deleteSelectedCase()
+                    }
+                  >
+                    Usuń sprawę trwale
+                  </button>
+                </div>
+              </details>
+            </div>
           )}
 
           {caseError && (
@@ -535,21 +802,27 @@ export default function App({
           refreshToken={workspaceRefresh}
         />
 
-        <DocumentPrivacyPanel
-          caseId={caseId}
-          onCaseFilesChange={() =>
-            setWorkspaceRefresh(
-              (value) => value + 1
-            )
-          }
-          onAttachmentSelectionChange={(selection) => {
-            setDocumentAttachments(
-              selection ? [selection] : []
-            );
-            setExecution(null);
-            setExecutionError("");
-          }}
-        />
+        {selectedCase?.archivedAt ? (
+          <section className="alert">
+            Sprawa jest zarchiwizowana. Akta pozostają dostępne do odczytu, ale upload, analiza dokumentów i reidentyfikacja są zablokowane do czasu przywrócenia sprawy.
+          </section>
+        ) : (
+          <DocumentPrivacyPanel
+            caseId={caseId}
+            onCaseFilesChange={() =>
+              setWorkspaceRefresh(
+                (value) => value + 1
+              )
+            }
+            onAttachmentSelectionChange={(selection) => {
+              setDocumentAttachments(
+                selection ? [selection] : []
+              );
+              setExecution(null);
+              setExecutionError("");
+            }}
+          />
+        )}
 
         <section className="config-grid">
           <article className="config-card">
