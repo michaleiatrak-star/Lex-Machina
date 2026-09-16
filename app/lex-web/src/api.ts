@@ -277,6 +277,22 @@ export type ProviderStatusResponse = {
   providers: ProviderConfigurationStatus[];
 };
 
+export type UpdateStatusResponse = {
+  currentVersion: string;
+  status:
+    | "NO_RELEASE"
+    | "UP_TO_DATE"
+    | "AVAILABLE"
+    | "UNAVAILABLE";
+  checkedAt: string;
+  latestVersion?: string;
+  releaseUrl?: string;
+  releaseName?: string;
+  publishedAt?: string;
+};
+
+
+
 export type BlockedReference = {
   claim: string;
   kind: "statute" | "journal" | "case";
@@ -860,6 +876,13 @@ export function clearProviderApiKey(
     {
       method: "DELETE"
     }
+  );
+}
+
+export function getUpdateStatus():
+  Promise<UpdateStatusResponse> {
+  return json<UpdateStatusResponse>(
+    "/api/update/status"
   );
 }
 
