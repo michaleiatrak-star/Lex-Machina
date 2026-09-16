@@ -51,6 +51,12 @@ const required = [
   "Aplikacja nie tworzy już spraw automatycznie",
   "reidentyfikacja:",
   "Utwórz sprawę",
+  "Akta wybranej sprawy",
+  "Dokumenty sprawy",
+  "Katalog wspólny",
+  "Wzory kancelarii",
+  "Jeden wzór jest przechowywany raz",
+  "integracja z generatorem w G35C",
   "Archiwum zapisane i rozpakowane lokalnie",
   "Akta sprawy, OCR i ręczna anonimizacja",
   "Konfiguracja API",
@@ -74,7 +80,7 @@ const missing = required.filter((token) => !content.includes(token));
 const pass = exposed.length === 0 && missing.length === 0;
 
 process.stdout.write(JSON.stringify({
-  gate: "G14_G31AB_G32_G34AD_LOCAL_WEB_UI",
+  gate: "G14_G31AB_G32_G34AD_G35AB_LOCAL_WEB_UI",
   result: pass ? "PASS" : "BLOCKED",
   bundleFiles: files.length,
   forbiddenTokensFound: exposed,
