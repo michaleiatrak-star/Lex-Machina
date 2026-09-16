@@ -631,5 +631,4 @@ describe("G34H1 secure incoming upload store", () => {
     secretPdf.fill(0);
     secretNote.fill(0);
   });
-  });
 });
