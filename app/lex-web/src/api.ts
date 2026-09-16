@@ -246,8 +246,12 @@ export type DocumentReviewResponse = {
     | "image/tiff"
     | "text/plain"
     | "text/markdown"
+    | "text/csv"
+    | "text/tab-separated-values"
     | "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    | "application/vnd.oasis.opendocument.text";
+    | "application/vnd.oasis.opendocument.text"
+    | "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    | "application/vnd.ms-excel.sheet.macroEnabled.12";
   complete: true;
   totalPages: number;
   pages: Array<{
@@ -1180,6 +1184,19 @@ function uploadMediaType(file: File): string {
   if (lower.endsWith(".odt")) {
     return "application/vnd.oasis.opendocument.text";
   }
+  if (lower.endsWith(".xlsx")) {
+    return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+  }
+  if (lower.endsWith(".xlsm")) {
+    return "application/vnd.ms-excel.sheet.macroEnabled.12";
+  }
+  if (lower.endsWith(".csv")) {
+    return "text/csv";
+  }
+  if (lower.endsWith(".tsv")) {
+    return "text/tab-separated-values";
+  }
+
   if (lower.endsWith(".md")) {
     return "text/markdown";
   }
