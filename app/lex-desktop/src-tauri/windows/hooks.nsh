@@ -1,4 +1,13 @@
 !macro NSIS_HOOK_POSTINSTALL
+  SetRegView 64
+  ClearErrors
+  ReadRegDWord $0 HKLM "SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64" "Installed"
+  ${IfNot} ${Errors}
+  ${AndIf} $0 == 1
+    DetailPrint "Microsoft Visual C++ Runtime jest już zainstalowany."
+    Goto lex_vcredist_ready
+  ${EndIf}
+
   DetailPrint "Instalacja wymaganego Microsoft Visual C++ Runtime..."
   ClearErrors
   ExecShellWait "runas" "$INSTDIR\runtime\prerequisites\vc_redist.x64.exe" "/install /quiet /norestart" SW_HIDE
@@ -19,6 +28,7 @@
     Abort
   ${EndIf}
 
+lex_vcredist_ready:
   DetailPrint "Weryfikacja prywatnego runtime Lex Machina..."
   nsExec::ExecToStack '"$INSTDIR\runtime\lex-runtime-sidecar.exe" --self-test'
   Pop $0
