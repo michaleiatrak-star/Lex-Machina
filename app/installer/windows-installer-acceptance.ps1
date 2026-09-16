@@ -5,6 +5,10 @@ param(
 
 $ErrorActionPreference = "Stop"
 $installer = (Resolve-Path -LiteralPath $InstallerPath).Path
+$installerInfo = Get-Item -LiteralPath $installer
+if ($installerInfo.Length -gt 1GB) {
+  throw "INSTALLER_ACCEPTANCE_MONOLITHIC_BUNDLE_TOO_LARGE:$($installerInfo.Length)"
+}
 if (-not $InstallRoot) {
   $InstallRoot = Join-Path $env:RUNNER_TEMP ("LexMachinaInstalled-" + [Guid]::NewGuid().ToString("N"))
 }
@@ -34,8 +38,11 @@ foreach ($required in @($componentLock, $privateNode, $privatePython)) {
 }
 
 $lock = Get-Content -Raw -LiteralPath $componentLock | ConvertFrom-Json
-if ($lock.networkRequiredAtInstall -ne $false) {
-  throw "INSTALLER_ACCEPTANCE_NETWORK_POLICY_INVALID"
+if ($lock.networkRequiredAtInstall -ne $true) {
+  throw "INSTALLER_ACCEPTANCE_INSTALL_NETWORK_POLICY_INVALID"
+}
+if ($lock.runtimeNetworkRequiredAfterBootstrap -ne $false) {
+  throw "INSTALLER_ACCEPTANCE_RUNTIME_NETWORK_POLICY_INVALID"
 }
 if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_ONLY") {
   throw "INSTALLER_ACCEPTANCE_USER_ACTION_POLICY_INVALID"
