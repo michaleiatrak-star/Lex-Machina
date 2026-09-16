@@ -1,6 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createLexHttpApp } from "./app.js";
+import { registerLegacyMigrationRoutes } from "./legacy-migration-routes.js";
 import { LexSkillRegistry } from "../registry.js";
 import { DynamicModelCatalog } from "../providers/model-catalog.js";
 import { EnvironmentCredentialResolver } from "../providers/credentials.js";
@@ -42,6 +43,9 @@ import {
 import {
   SecureCaseArtifactStore
 } from "../case-artifact-store.js";
+import {
+  LegacyCaseStorageMigrator
+} from "../legacy-case-migration.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -119,6 +123,14 @@ export async function startLocalServer(options?: {
       rootDir:
         caseFileStore.rootDir
     });
+  const legacyCaseStorageMigrator =
+    new LegacyCaseStorageMigrator(
+      secureCaseUploadStore,
+      {
+        rootDir:
+          caseFileStore.rootDir
+      }
+    );
   const caseSecurityRotation =
     new CaseSecurityRotationCoordinator(
       privacyVaultStore,
@@ -187,6 +199,16 @@ export async function startLocalServer(options?: {
         )
     )
   });
+
+  registerLegacyMigrationRoutes(
+    app,
+    {
+      authService,
+      caseAccessService,
+      migrator:
+        legacyCaseStorageMigrator
+    }
+  );
 
   return new Promise((resolve, reject) => {
     const server = app.listen(port, host);
