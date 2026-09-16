@@ -6,12 +6,14 @@ import {
 import {
   finalizeDocument,
   reviewDocument,
+  uploadCaseFile,
   type DocumentAttachmentSelection,
   type DocumentIngestionResponse,
   type DocumentReviewResponse,
   type PagePrivacyDirective,
   type PiiKind,
-  type PrivacyAction
+  type PrivacyAction,
+  type StoredUploadResponse
 } from "./api.js";
 
 const PII_KINDS: Array<{
@@ -37,8 +39,10 @@ function rangesOverlap(
 }
 
 export function DocumentPrivacyPanel({
+  caseId,
   onAttachmentSelectionChange
 }: {
+  caseId: string;
   onAttachmentSelectionChange?: (
     selection: DocumentAttachmentSelection | null
   ) => void;
@@ -70,6 +74,8 @@ export function DocumentPrivacyPanel({
   const [error, setError] = useState("");
   const [selectedChunkIndices, setSelectedChunkIndices] =
     useState<number[]>([]);
+  const [archiveUpload, setArchiveUpload] =
+    useState<StoredUploadResponse | null>(null);
 
   const currentPage = useMemo(
     () =>
@@ -103,14 +109,36 @@ export function DocumentPrivacyPanel({
     setError("");
     setReview(null);
     setFinalized(null);
+    setArchiveUpload(null);
     setDirectives([]);
     setSelection(null);
     setSelectedChunkIndices([]);
     onAttachmentSelectionChange?.(null);
 
     try {
+      if (!caseId) {
+        throw new Error("CASE_STORAGE_NOT_READY");
+      }
+
+      const isZip =
+        file.type === "application/zip" ||
+        file.name.toLowerCase().endsWith(".zip");
+
+      if (isZip) {
+        const stored =
+          await uploadCaseFile(
+            caseId,
+            file
+          );
+        setArchiveUpload(stored);
+        return;
+      }
+
       const result =
-        await reviewDocument(file);
+        await reviewDocument(
+          file,
+          caseId
+        );
       setReview(result);
       setPage(
         result.pages[0]?.page ?? 1
@@ -267,23 +295,23 @@ export function DocumentPrivacyPanel({
             Dokumenty lokalne
           </p>
           <h3>
-            OCR zdjęć i ręczna anonimizacja
+            Akta sprawy, OCR i ręczna anonimizacja
           </h3>
           <p>
-            PDF oraz JPEG/PNG/WebP/TIFF są
-            odczytywane lokalnie. Tekst z
-            podglądu nie trafia do providera.
+            PDF oraz JPEG/PNG/WebP/TIFF są zapisywane lokalnie w katalogu
+            sprawy przed OCR. ZIP jest bezpiecznie rozpakowywany do katalogu
+            sprawy; żaden plik z archiwum nie trafia automatycznie do providera.
           </p>
         </div>
 
         <label className="file-button">
           {loading
             ? "Przetwarzanie…"
-            : "Wybierz dokument lub zdjęcie"}
+            : "Wybierz dokument, zdjęcie lub ZIP"}
           <input
             type="file"
-            accept=".pdf,image/jpeg,image/png,image/webp,image/tiff"
-            disabled={loading}
+            accept=".pdf,.zip,application/zip,image/jpeg,image/png,image/webp,image/tiff"
+            disabled={loading || !caseId}
             onChange={(event) => {
               void openFile(
                 event.target.files?.[0]
@@ -297,6 +325,28 @@ export function DocumentPrivacyPanel({
       {error && (
         <div className="alert alert-error">
           {error}
+        </div>
+      )}
+
+      {archiveUpload && (
+        <div className="document-finalized">
+          <strong>
+            Archiwum zapisane i rozpakowane lokalnie
+          </strong>
+          <span>
+            {archiveUpload.filename} · {archiveUpload.extracted.length} plików ·
+            {" "}{archiveUpload.extracted.filter((item) => item.processable).length} możliwych do dalszego przetwarzania
+          </span>
+          {archiveUpload.extracted.length > 0 && (
+            <ul>
+              {archiveUpload.extracted.slice(0, 20).map((entry) => (
+                <li key={entry.relativePath}>
+                  {entry.relativePath}
+                  {entry.processable ? " · obsługiwalny" : " · zapisany tylko lokalnie"}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       )}
 
