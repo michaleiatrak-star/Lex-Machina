@@ -34,11 +34,13 @@ The application MUST NOT duplicate or silently rewrite legal skill instructions.
 - **G11-G25:** routing contracts, dynamic providers, localhost API/UI, source verification, temporal law, PDF/case-law evidence and structured evidence bundle.
 - **G26 — Provider Status:** UI sees configured/not-configured only.
 - **G27 — Complete Document OCR:** all PDF pages are accounted for; scanned pages use local Polish PP-OCRv6; large documents are chunked without truncation.
+- **G27A — Image OCR:** JPEG/PNG/WebP/TIFF are OCRed locally as fully accounted single-page documents.
 - **G28 — Local Privacy:** reversible pseudonymization/deanonymization with backend-only vault and local Polish PERSON NER.
+- **G28A — User Privacy Review:** exact user selections can PSEUDONYMIZE, KEEP or LABEL text before protected chunks are generated.
 - **G29 — Private Document Pipeline:** OCR + privacy + chunking exposed through the localhost document-ingestion API.
 
 ## Current scope
 
-G0-G29 are implemented and validated on `feature/local-runtime`. Heavy OCR/NER model weights are intentionally installed locally rather than downloaded in every CI run; CI verifies adapters, worker syntax, completeness contracts and fail-closed behavior.
+G0-G29 plus G27A/G28A are implemented and validated on `feature/local-runtime`. Heavy OCR/NER model weights are intentionally installed locally rather than downloaded in every CI run; CI verifies adapters, worker syntax, completeness contracts and fail-closed behavior. The local UI supports PDF/image review and manual privacy decisions before finalization.
 
 Next planned gates are G30 open-web discovery, G31 local DOCX generation and G32 document attachment/session flow.
