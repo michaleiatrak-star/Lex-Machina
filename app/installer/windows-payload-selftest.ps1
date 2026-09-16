@@ -25,6 +25,11 @@ $python = Require-File "python\python.exe"
 $server = Require-File "app\dist\http\server.js"
 $sidecar = Require-File "lex-runtime-sidecar.exe"
 $lockPath = Require-File "component-lock.json"
+
+& $sidecar --self-test | Out-Host
+if ($LASTEXITCODE -ne 0) {
+  throw "SELFTEST_NATIVE_COMPONENT_LOCK_FAILED"
+}
 $corpus = Require-Dir "corpus"
 $paddle = Require-Dir "models\paddle\official_models"
 $stanza = Require-Dir "models\stanza"
