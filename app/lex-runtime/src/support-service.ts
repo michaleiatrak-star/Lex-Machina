@@ -222,8 +222,8 @@ export class LocalSupportService {
   private readonly vendorKeyId:
     string | undefined;
   private readonly clock: Clock;
-  private readonly events?:
-    SupportSecurityEvents;
+  private readonly events:
+    SupportSecurityEvents | undefined;
   private readonly challenges =
     new Map<string, StoredChallenge>();
   private readonly sessions =
@@ -233,13 +233,13 @@ export class LocalSupportService {
     >();
 
   constructor(options: {
-    installationId?: string;
-    challengePublicKey?: string;
-    vendorPublicKeyPem?: string;
-    vendorKeyId?: string;
-    clock?: Clock;
+    installationId?: string | undefined;
+    challengePublicKey?: string | undefined;
+    vendorPublicKeyPem?: string | undefined;
+    vendorKeyId?: string | undefined;
+    clock?: Clock | undefined;
     securityEvents?:
-      SupportSecurityEvents;
+      SupportSecurityEvents | undefined;
   }) {
     const installationId =
       options.installationId?.trim() ??
@@ -612,8 +612,15 @@ export class LocalSupportService {
         401
       );
     }
+    const token = match[1];
+    if (!token) {
+      throw new SupportError(
+        "SUPPORT_SESSION_REQUIRED",
+        401
+      );
+    }
     const digest =
-      tokenDigest(match[1]);
+      tokenDigest(token);
     const stored =
       this.sessions.get(digest);
     if (!stored) {
@@ -715,8 +722,12 @@ export class LocalSupportService {
     if (!match) {
       return;
     }
+    const token = match[1];
+    if (!token) {
+      return;
+    }
     const digest =
-      tokenDigest(match[1]);
+      tokenDigest(token);
     const stored =
       this.sessions.get(digest);
     if (!stored) {
