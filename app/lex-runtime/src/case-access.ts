@@ -924,6 +924,8 @@ export class LocalCaseAccessService {
 
           let vaultRekeyed =
             false;
+          let keyCommitCompleted =
+            false;
           try {
             if (
               this
@@ -975,6 +977,9 @@ export class LocalCaseAccessService {
               throw error;
             }
 
+            keyCommitCompleted =
+              true;
+
             this.audit(
               context.user.userId,
               "case_key_rotated",
@@ -999,6 +1004,7 @@ export class LocalCaseAccessService {
             };
           } catch (error) {
             if (
+              !keyCommitCompleted &&
               vaultRekeyed &&
               this
                 .keyRotationParticipant
