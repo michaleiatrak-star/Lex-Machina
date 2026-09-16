@@ -1108,3 +1108,41 @@ Security note:
 - listing does not expose raw file bytes;
 - raw case files and shared template originals are not yet encrypted at rest;
 - templates must not be used as a shared location for client/case PII.
+
+
+### 2026-09-16 — Build 0033
+
+Status: **PASS — G31C1 ENCRYPTED PERSISTENT PRIVACY VAULT**
+
+Implemented:
+- LMV1 binary AES-256-GCM privacy-vault envelope;
+- PVK derived from per-case CDK with HKDF-SHA256;
+- caseId/generation/keyVersion-bound AAD;
+- canonical per-document reversible token payload;
+- atomic partial + fsync + decrypt verification + replace;
+- non-secret vault metadata with generation/keyVersion/size/SHA-256 consistency checks;
+- restart-safe token mapping hydration;
+- production document finalization integration without persisting CDK;
+- case CDK rotation rekeys the privacy vault;
+- rollback before key cutover;
+- fail-closed corruption/truncation/wrong-key/wrong-case/wrong-version/stale-meta behavior;
+- deterministic G31C1 CI gate.
+
+Validation evidence:
+- validated code SHA `8c1a4c3c61b3e3b28c5c648adcfbf932c7dd7394`;
+- Lex Runtime Validation `35076077413`: success;
+- F-138 `35076077538`: success;
+- G31C1_ENCRYPTED_PRIVACY_VAULT: PASS;
+- G14-G35 web UI: PASS;
+- G17/G19/G20/G22 live probes: PASS.
+
+Open:
+- G34E recovery/password lifecycle;
+- G34F transaction-bound reauthorization;
+- G34H raw case-file encryption;
+- G31C2/G31D/G31E;
+- G35C and installer work.
+
+Scope note:
+- G31C1 protects the reversible PII map;
+- it does not encrypt raw case uploads, extracted ZIP members or shared template originals.
