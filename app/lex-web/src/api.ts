@@ -15,6 +15,15 @@ export type AuthenticatedUser = {
   lastLoginAt?: string;
 };
 
+export type AdminUsersResponse = {
+  users: AuthenticatedUser[];
+};
+
+export type DeletedUserResponse = {
+  userId: string;
+  deletedAt: string;
+};
+
 export type AuthSessionInfo = {
   sessionId: string;
   userId: string;
@@ -479,6 +488,63 @@ export async function login(input: {
     result.sessionToken
   );
   return result;
+}
+
+export function listAdminUsers():
+  Promise<AdminUsersResponse> {
+  return json<AdminUsersResponse>(
+    "/api/admin/users"
+  );
+}
+
+export function createAdminUser(input: {
+  loginName: string;
+  displayName: string;
+  password: string;
+}): Promise<{
+  user: AuthenticatedUser;
+}> {
+  return json<{
+    user: AuthenticatedUser;
+  }>(
+    "/api/admin/users",
+    {
+      method: "POST",
+      body: JSON.stringify(input)
+    }
+  );
+}
+
+export function setAdminUserStatus(
+  userId: string,
+  status:
+    | "ACTIVE"
+    | "DISABLED"
+): Promise<{
+  user: AuthenticatedUser;
+}> {
+  return json<{
+    user: AuthenticatedUser;
+  }>(
+    `/api/admin/users/${userId}/status`,
+    {
+      method: "PATCH",
+      body: JSON.stringify({
+        status
+      })
+    }
+  );
+}
+
+export function deleteAdminUser(
+  userId: string
+): Promise<DeletedUserResponse> {
+  return json<DeletedUserResponse>(
+    `/api/admin/users/${userId}`,
+    {
+      method: "DELETE"
+    }
+  );
 }
 
 export async function createRecoveryCode(
