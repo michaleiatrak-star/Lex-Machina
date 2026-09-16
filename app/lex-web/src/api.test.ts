@@ -89,6 +89,121 @@ describe("local API client", () => {
       }));
   });
 
+  it("uses the native Tauri protocol without exposing a bearer to React", async () => {
+    const previousWindow =
+      Object.getOwnPropertyDescriptor(
+        globalThis,
+        "window"
+      );
+    Object.defineProperty(
+      globalThis,
+      "window",
+      {
+        value: {
+          __TAURI_INTERNALS__: {}
+        },
+        configurable: true
+      }
+    );
+
+    const authPayload = {
+      user: {
+        userId:
+          "user_0123456789abcdef0123456789abcdef",
+        loginName: "desktop",
+        displayName:
+          "Desktop User",
+        appRole: "ADMIN",
+        status: "ACTIVE",
+        createdAt:
+          "2026-09-16T08:00:00.000Z"
+      },
+      session: {
+        sessionId:
+          "authsess_0123456789abcdef0123456789abcdef",
+        userId:
+          "user_0123456789abcdef0123456789abcdef",
+        createdAt:
+          "2026-09-16T08:00:00.000Z",
+        lastActivityAt:
+          "2026-09-16T08:00:00.000Z",
+        lastFullAuthenticationAt:
+          "2026-09-16T08:00:00.000Z",
+        idleExpiresAt:
+          "2026-09-16T08:15:00.000Z",
+        overallExpiresAt:
+          "2026-09-16T16:00:00.000Z"
+      }
+    };
+    const fetchMock =
+      vi.spyOn(
+        globalThis,
+        "fetch"
+      )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify(
+              authPayload
+            ),
+            { status: 200 }
+          )
+        )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify({
+              cases: []
+            }),
+            { status: 200 }
+          )
+        );
+
+    try {
+      await login({
+        loginName: "desktop",
+        password:
+          "Desktop test password 2026"
+      });
+      await listCases();
+
+      expect(
+        fetchMock.mock.calls[0]
+          ?.[0]
+      ).toBe(
+        "http://lex-api.localhost/api/auth/login"
+      );
+      expect(
+        fetchMock.mock.calls[1]
+          ?.[0]
+      ).toBe(
+        "http://lex-api.localhost/api/cases"
+      );
+      expect(
+        fetchMock.mock.calls[1]
+          ?.[1]?.headers
+      ).not.toEqual(
+        expect.objectContaining({
+          Authorization:
+            expect.any(String)
+        })
+      );
+    } finally {
+      if (previousWindow) {
+        Object.defineProperty(
+          globalThis,
+          "window",
+          previousWindow
+        );
+      } else {
+        delete (
+          globalThis as
+            typeof globalThis & {
+              window?: unknown;
+            }
+        ).window;
+      }
+    }
+  });
+
   it("uses the localhost runtime by default", async () => {
     const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(
       new Response(JSON.stringify({
