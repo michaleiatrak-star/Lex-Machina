@@ -129,6 +129,11 @@ export interface AuthService {
     password: string,
     purpose: string
   ): Promise<AuthSessionView>;
+  onSessionRevoked(
+    listener: (
+      event: SessionRevocationEvent
+    ) => void
+  ): () => void;
   withSessionUserMasterKey<T>(
     sessionId: string,
     callback: (
@@ -229,6 +234,13 @@ implements AuthService {
     PasswordKdfExecutor;
   private readonly dummy:
     DummyUser;
+  private readonly revocationSubscribers =
+    new Set<
+      (
+        event:
+          SessionRevocationEvent
+      ) => void
+    >();
 
   constructor(
     store: LocalAuthStore,
@@ -1579,6 +1591,20 @@ implements AuthService {
       );
   }
 
+  onSessionRevoked(
+    listener: (
+      event:
+        SessionRevocationEvent
+    ) => void
+  ): () => void {
+    this.revocationSubscribers
+      .add(listener);
+    return () => {
+      this.revocationSubscribers
+        .delete(listener);
+    };
+  }
+
   revokeUserSessions(
     userId: string
   ): void {
@@ -1755,6 +1781,16 @@ implements AuthService {
   private recordSessionRevocation(
     event: SessionRevocationEvent
   ): void {
+    for (
+      const listener
+      of this.revocationSubscribers
+    ) {
+      try {
+        listener(event);
+      } catch {
+        // Session revocation must not be blocked by a subscriber.
+      }
+    }
     if (
       event.reason ===
         "SERVICE_CLOSE"
