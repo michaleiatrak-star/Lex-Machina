@@ -863,7 +863,7 @@ Validation evidence:
 - image-ingestion unit test: PASS;
 - Python OCR worker syntax: PASS;
 - G27A deterministic gate: PASS;
-- GitHub Actions run `35058485740`: success.
+- GitHub Actions run `35058610946`: success.
 
 ### 2026-09-16 — Build 0026A
 
@@ -891,5 +891,5 @@ Validation evidence:
 - production web build: PASS;
 - browser bundle safety: PASS;
 - G17/G19/G20/G22 live probes: PASS;
-- GitHub Actions run `35058485740`: success;
-- F-138 structural audit `35058485712`: success.
+- GitHub Actions run `35058610946`: success;
+- F-138 structural audit `35058610889`: success.
