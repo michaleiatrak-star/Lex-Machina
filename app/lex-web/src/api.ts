@@ -86,8 +86,13 @@ export type CaseRole =
   | "ANALYST"
   | "VIEWER";
 
+export type CaseKind =
+  | "MATTER"
+  | "FIRM_KNOWLEDGE";
+
 export type CaseResponse = {
   caseId: string;
+  caseKind?: CaseKind;
   displayName?: string;
   createdAt: string;
   updatedAt?: string;
@@ -100,6 +105,7 @@ export type CaseResponse = {
 
 export type CaseListItem = {
   caseId: string;
+  caseKind: CaseKind;
   displayName?: string;
   createdByUserId: string;
   createdAt: string;
@@ -130,6 +136,26 @@ export type CaseAccessResponse = {
 export type CaseAccessCandidatesResponse = {
   users: AuthenticatedUser[];
 };
+
+export type FirmKnowledgeWorkspaceResponse = {
+  workspace: CaseListItem | null;
+};
+
+export type CaseKnowledgeHit = {
+  documentId: string;
+  chunkIndex: number;
+  pageStart: number;
+  pageEnd: number;
+  score: number;
+  text: string;
+};
+
+export type CaseKnowledgeSearchResponse = {
+  caseId: string;
+  caseKind: CaseKind;
+  hits: CaseKnowledgeHit[];
+};
+
 
 
 export type StoredArchiveEntry = {
@@ -793,6 +819,40 @@ export function deleteCase(
       method: "DELETE",
       body: JSON.stringify({
         password
+      })
+    }
+  );
+}
+
+export function getFirmKnowledgeWorkspace():
+  Promise<FirmKnowledgeWorkspaceResponse> {
+  return json<FirmKnowledgeWorkspaceResponse>(
+    "/api/firm-knowledge"
+  );
+}
+
+export function createFirmKnowledgeWorkspace():
+  Promise<FirmKnowledgeWorkspaceResponse> {
+  return json<FirmKnowledgeWorkspaceResponse>(
+    "/api/firm-knowledge",
+    {
+      method: "POST"
+    }
+  );
+}
+
+export function searchCaseKnowledge(
+  caseId: string,
+  query: string,
+  limit = 8
+): Promise<CaseKnowledgeSearchResponse> {
+  return json<CaseKnowledgeSearchResponse>(
+    `/api/cases/${caseId}/knowledge/search`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        query,
+        limit
       })
     }
   );
