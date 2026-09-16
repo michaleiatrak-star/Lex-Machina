@@ -7,7 +7,12 @@ import {
   type VerificationRecord
 } from "./verification-ledger.js";
 
-export type ExportDocumentKind = "docx" | "pdf" | "md" | "txt";
+export type ExportDocumentKind =
+  | "docx"
+  | "odt"
+  | "pdf"
+  | "md"
+  | "txt";
 export type HybridValidationStatus = "PASS" | "BLOCKED" | "NOT_REQUIRED";
 
 export type NeutralVerificationEvent = {
@@ -76,7 +81,11 @@ export function buildNeutralVerificationLog(
 }
 
 function hybridRequired(kind: ExportDocumentKind): boolean {
-  return kind === "docx" || kind === "pdf";
+  return (
+    kind === "docx" ||
+    kind === "odt" ||
+    kind === "pdf"
+  );
 }
 
 function preCloseAuditIsComplete(report: AuditCompletenessReport): boolean {
