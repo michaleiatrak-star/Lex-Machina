@@ -682,12 +682,25 @@ export async function login(input: {
   loginName: string;
   password: string;
 }): Promise<AuthSuccessResponse> {
+  const payload =
+    isDesktopShell() &&
+    input.loginName ===
+      "local-admin" &&
+    input.password ===
+      "__LEX_NATIVE_LOGIN__"
+      ? {
+          loginName:
+            input.loginName,
+          password:
+            "__LEX_NATIVE_LOGIN__"
+        }
+      : input;
   const result =
     await json<AuthSuccessResponse>(
       "/api/auth/login",
       {
         method: "POST",
-        body: JSON.stringify(input)
+        body: JSON.stringify(payload)
       },
       { authenticated: false }
     );
@@ -1221,7 +1234,10 @@ export function reauthorizeDeanonymization(
       body:
         JSON.stringify({
           intentId,
-          password
+          password:
+            isDesktopShell()
+              ? "__LEX_NATIVE_REAUTH__"
+              : password
         })
     }
   );
