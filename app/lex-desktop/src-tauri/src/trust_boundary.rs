@@ -1525,6 +1525,11 @@ mod tests {
         assert!(route_allowed("GET", "/api/sensitive-download/download_abc"));
         assert!(!route_allowed("POST", "/api/update/status"));
         assert!(!route_allowed("POST", "/api/auth/bootstrap-managed"));
+        assert!(route_allowed("POST", "/api/admin/support/challenge"));
+        assert!(route_allowed("POST", "/api/admin/support/activate"));
+        assert!(route_allowed("GET", "/api/support/diagnostics"));
+        assert!(route_allowed("POST", "/api/support/logout"));
+        assert!(!route_allowed("DELETE", "/api/support/diagnostics"));
         assert!(!route_allowed("GET", "/api/arbitrary"));
         assert!(!route_allowed("GET", "https://example.com/"));
     }
@@ -1621,6 +1626,47 @@ mod tests {
                 .and_then(Value::as_str),
             Some("user-password-123456789")
         );
+    }
+
+    #[test]
+    fn support_response_token_is_removed_before_webview() {
+        let raw = br#"{"serviceToken":"abcdefghijklmnopqrstuvwxyz0123456789SERVICE","session":{"sessionId":"support_abc","role":"SERVICE"}}"#;
+        let (token, sanitized) =
+            extract_and_strip_service_token(raw)
+                .expect("support response")
+                .expect("service token");
+        assert_eq!(
+            token,
+            "abcdefghijklmnopqrstuvwxyz0123456789SERVICE"
+        );
+        let value: Value =
+            serde_json::from_slice(&sanitized)
+                .expect("sanitized json");
+        assert!(
+            value.get("serviceToken").is_none()
+        );
+        assert_eq!(
+            value
+                .get("session")
+                .and_then(|session|
+                    session.get("role")
+                )
+                .and_then(Value::as_str),
+            Some("SERVICE")
+        );
+    }
+
+    #[test]
+    fn service_routes_do_not_require_user_session() {
+        assert!(!requires_session(
+            "/api/support/me"
+        ));
+        assert!(!requires_session(
+            "/api/support/diagnostics"
+        ));
+        assert!(requires_session(
+            "/api/admin/support/activate"
+        ));
     }
 
     #[test]
