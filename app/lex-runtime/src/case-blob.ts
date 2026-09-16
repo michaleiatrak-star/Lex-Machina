@@ -35,6 +35,7 @@ export type CaseBlobPurpose =
   | "artifact"
   | "artifact-manifest"
   | "artifact-payload"
+  | "generation-aliases"
   | "migration-manifest";
 
 export type CaseBlobIdentity = {
