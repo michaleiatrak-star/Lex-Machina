@@ -33,7 +33,7 @@ No image is silently treated as textless input. An OCR adapter failure blocks in
 - Python OCR worker syntax — PASS
 - G27A deterministic gate — PASS
 - web/API image media-type path — PASS
-- GitHub Actions `35058485740` — success
-- F-138 `35058485712` — success
+- GitHub Actions `35058610946` — success
+- F-138 `35058610889` — success
 
 The heavy Paddle model itself remains a local installation and is not downloaded during every CI build.
