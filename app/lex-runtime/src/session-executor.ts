@@ -20,6 +20,11 @@ import {
 
 export type SessionDocumentAttachment = {
   documentId: string;
+  caseId?: string;
+  sourceScope?:
+    | "MANUAL"
+    | "CASE_KNOWLEDGE"
+    | "FIRM_KNOWLEDGE";
   chunks: Array<{
     index: number;
     pageStart: number;
@@ -157,8 +162,16 @@ function buildDocumentContext(
   const sections = attachments.map((attachment) => {
     const chunks = attachment.chunks.map((chunk) => {
       totalChars += chunk.text.length;
+      const sourceLabel =
+        attachment.sourceScope ===
+          "FIRM_KNOWLEDGE"
+          ? "FIRM KNOWLEDGE"
+          : attachment.sourceScope ===
+              "CASE_KNOWLEDGE"
+            ? "CASE KNOWLEDGE"
+            : "DOCUMENT";
       return [
-        `[DOCUMENT ${attachment.documentId} · CHUNK ${chunk.index} · PAGES ${chunk.pageStart}-${chunk.pageEnd}]`,
+        `[${sourceLabel} ${attachment.documentId} · CHUNK ${chunk.index} · PAGES ${chunk.pageStart}-${chunk.pageEnd}]`,
         chunk.text
       ].join("\n");
     });
@@ -247,7 +260,19 @@ export class SafeSessionExecutor implements SessionExecutor {
           chunks: attachment.chunks.map(
             (chunk) => chunk.index
           ),
-          protectedOnly: true
+          protectedOnly: true,
+          ...(attachment.caseId
+            ? {
+                caseId:
+                  attachment.caseId
+              }
+            : {}),
+          ...(attachment.sourceScope
+            ? {
+                sourceScope:
+                  attachment.sourceScope
+              }
+            : {})
         }
       );
     }
