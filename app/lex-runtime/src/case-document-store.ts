@@ -417,6 +417,49 @@ export class SecureCaseDocumentStore {
     }
   }
 
+  async listDocumentIds(
+    caseId: string
+  ): Promise<string[]> {
+    let entries:
+      Dirent[];
+    try {
+      entries =
+        await readdir(
+          this.documentsDir(
+            caseId
+          ),
+          {
+            withFileTypes:
+              true
+          }
+        );
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        "code" in error &&
+        error.code ===
+          "ENOENT"
+      ) {
+        return [];
+      }
+      throw error;
+    }
+
+    return entries
+      .filter(
+        (entry) =>
+          entry.isDirectory() &&
+          validDocumentId(
+            entry.name
+          )
+      )
+      .map(
+        (entry) =>
+          entry.name
+      )
+      .sort();
+  }
+
   async loadSource(args: {
     caseId: string;
     documentId: string;
