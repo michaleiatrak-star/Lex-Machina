@@ -1,6 +1,6 @@
 # Lex Machina — Master Roadmap to Secure Desktop Release
 
-Status: **IN EXECUTION — G34E + G34F1 PASS; NEXT G34H**  
+Status: **IN EXECUTION — G34H1/H2 PASS; NEXT G34H3**  
 Date: 2026-09-16  
 Branch baseline: `feature/local-runtime`
 
@@ -29,13 +29,15 @@ Validated implementation baseline:
 - G31C1 — PASS
 - G34E — PASS
 - G34F1 — PASS (foundation only; full G34F still open)
+- G34H1 — PASS
+- G34H2 — PASS
 
 Validated code SHA:
-- `8c1a4c3c61b3e3b28c5c648adcfbf932c7dd7394`
+- `32bb2106c1293448e5ae8fbca1b3d416d27d0d7d`
 
 Validated CI:
-- Lex Runtime Validation `35076077413` — success
-- F-138 `35076077538` — success
+- Lex Runtime Validation `35082276687` — success
+- F-138 `35082276492` — success
 
 Designs completed but not yet fully implemented:
 - G31C2
@@ -1392,9 +1394,14 @@ At the end of every batch:
 
 # 9. Immediate next implementation batch
 
-**Batch A / G34A-G34B, Batch B / G34C-G34D and G35A/G35B are complete and validated.**
+Completed/validated on the current critical path:
+- G34A-G34E;
+- G34F1 foundation;
+- G31C1;
+- G35A/G35B;
+- G34H1/G34H2.
 
-Next: **Batch C — start with G31C1 Encrypted Persistent Privacy Vault**, then continue into **G34E/G34F Recovery + Transaction Reauthorization**.
+Next: **G34H3 — encrypted OCR/source and protected-document persistence**, then G34H4 artifacts and G34H5 legacy migration.
 
 Execution order:
 
