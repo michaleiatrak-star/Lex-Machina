@@ -1,3 +1,6 @@
+import {
+  randomBytes
+} from "node:crypto";
 import type {
   Express,
   Request,
@@ -6,6 +9,9 @@ import type {
 import type {
   AuthService
 } from "../auth/service.js";
+import type {
+  LocalAuthStore
+} from "../auth/store.js";
 import type {
   LocalCaseAccessService
 } from "../case-access.js";
@@ -27,6 +33,10 @@ export function registerLegacyMigrationRoutes(
     authService: Pick<
       AuthService,
       "authenticateAuthorization"
+    >;
+    securityEvents: Pick<
+      LocalAuthStore,
+      "recordSecurityEvent"
     >;
     caseAccessService: Pick<
       LocalCaseAccessService,
@@ -87,6 +97,45 @@ export function registerLegacyMigrationRoutes(
                         .keyVersion
                   })
             );
+
+        dependencies
+          .securityEvents
+          .recordSecurityEvent({
+            eventId:
+              "event_" +
+              randomBytes(16)
+                .toString("hex"),
+            userId:
+              actor.user.userId,
+            eventType:
+              report
+                .remainingLegacyPlaintext
+                ? "legacy_storage_migration_blocked"
+                : "legacy_storage_migration_completed",
+            occurredAt:
+              new Date()
+                .toISOString(),
+            result:
+              report
+                .remainingLegacyPlaintext
+                ? "BLOCKED"
+                : "PASS",
+            metadata: {
+              caseId,
+              migratedUploadCount:
+                report
+                  .migratedUploads
+                  .length,
+              alreadySecureUploadCount:
+                report
+                  .alreadySecureUploads
+                  .length,
+              blockedEntryCount:
+                report
+                  .blockedEntries
+                  .length
+            }
+          });
 
         if (
           report
