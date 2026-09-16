@@ -11,6 +11,7 @@ export type AuthenticatedUser = {
   displayName: string;
   appRole: "ADMIN" | "USER";
   status: "ACTIVE" | "DISABLED";
+  passwordSetupPending?: boolean;
   createdAt: string;
   lastLoginAt?: string;
 };
@@ -38,6 +39,7 @@ export type AuthSuccessResponse = {
   user: AuthenticatedUser;
   session: AuthSessionInfo;
   sessionToken?: string;
+  recoveryCode?: string;
 };
 
 export type AuthMeResponse = {
