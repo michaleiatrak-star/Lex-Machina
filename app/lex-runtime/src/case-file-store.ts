@@ -3,6 +3,7 @@ import {
   access,
   mkdir,
   readFile,
+  readdir,
   rename,
   rm,
   writeFile
@@ -26,6 +27,14 @@ export type StoredArchiveEntry = {
   sha256: string;
   mediaType: string | null;
   processable: boolean;
+};
+
+export type StoredCaseMetadata = {
+  caseId: string;
+  createdAt: string;
+  displayName?: string;
+  createdByUserId?: string;
+  keyVersion?: number;
 };
 
 export type StoredUpload = {
@@ -135,15 +144,71 @@ export class LocalCaseFileStore {
   }
 
   async createCase(
-    displayName?: string
-  ): Promise<{
-    caseId: string;
-    displayName?: string;
-    createdAt: string;
-  }> {
+    input?:
+      | string
+      | {
+          caseId?: string;
+          displayName?: string;
+          createdByUserId?: string;
+          keyVersion?: number;
+        }
+  ): Promise<StoredCaseMetadata> {
+    const requestedCaseId =
+      typeof input === "object" &&
+      input
+        ? input.caseId
+        : undefined;
     const caseId =
-      "case_" +
-      randomBytes(16).toString("hex");
+      requestedCaseId ??
+      (
+        "case_" +
+        randomBytes(16)
+          .toString("hex")
+      );
+    if (!validCaseId(caseId)) {
+      throw new Error(
+        "INVALID_CASE_ID"
+      );
+    }
+
+    const displayName =
+      typeof input === "string"
+        ? input
+        : input?.displayName;
+    const createdByUserId =
+      typeof input === "object" &&
+      input
+        ? input.createdByUserId
+        : undefined;
+    const keyVersion =
+      typeof input === "object" &&
+      input
+        ? input.keyVersion
+        : undefined;
+
+    if (
+      createdByUserId !== undefined &&
+      !/^user_[a-f0-9]{32}$/
+        .test(createdByUserId)
+    ) {
+      throw new Error(
+        "INVALID_CASE_OWNER_ID"
+      );
+    }
+    if (
+      keyVersion !== undefined &&
+      (
+        !Number.isInteger(
+          keyVersion
+        ) ||
+        keyVersion < 1
+      )
+    ) {
+      throw new Error(
+        "INVALID_CASE_KEY_VERSION"
+      );
+    }
+
     const createdAt =
       new Date().toISOString();
     const dir = this.caseDir(caseId);
@@ -166,20 +231,225 @@ export class LocalCaseFileStore {
     );
 
     const trimmed =
-      displayName?.trim().slice(0, 160);
-    const metadata = {
-      caseId,
-      createdAt,
-      ...(trimmed
-        ? { displayName: trimmed }
-        : {})
-    };
+      displayName
+        ?.trim()
+        .slice(0, 160);
+    const metadata:
+      StoredCaseMetadata = {
+        caseId,
+        createdAt,
+        ...(trimmed
+          ? {
+              displayName:
+                trimmed
+            }
+          : {}),
+        ...(createdByUserId
+          ? { createdByUserId }
+          : {}),
+        ...(keyVersion !== undefined
+          ? { keyVersion }
+          : {})
+      };
     await writeFile(
       path.join(dir, "case.json"),
-      JSON.stringify(metadata, null, 2),
-      { encoding: "utf8", flag: "wx" }
+      JSON.stringify(
+        metadata,
+        null,
+        2
+      ),
+      {
+        encoding: "utf8",
+        flag: "wx"
+      }
     );
     return metadata;
+  }
+
+  async readCaseMetadata(
+    caseId: string
+  ): Promise<StoredCaseMetadata> {
+    const raw = JSON.parse(
+      await readFile(
+        path.join(
+          this.caseDir(caseId),
+          "case.json"
+        ),
+        "utf8"
+      )
+    ) as Record<string, unknown>;
+
+    if (
+      raw.caseId !== caseId ||
+      typeof raw.createdAt !==
+        "string"
+    ) {
+      throw new Error(
+        "CASE_METADATA_INVALID"
+      );
+    }
+    return {
+      caseId,
+      createdAt: raw.createdAt,
+      ...(typeof raw.displayName ===
+        "string"
+        ? {
+            displayName:
+              raw.displayName
+          }
+        : {}),
+      ...(typeof raw.createdByUserId ===
+        "string"
+        ? {
+            createdByUserId:
+              raw.createdByUserId
+          }
+        : {}),
+      ...(typeof raw.keyVersion ===
+          "number" &&
+        Number.isInteger(
+          raw.keyVersion
+        )
+        ? {
+            keyVersion:
+              raw.keyVersion
+          }
+        : {})
+    };
+  }
+
+  async listLegacyCases():
+    Promise<StoredCaseMetadata[]> {
+    const base = path.join(
+      this.rootDir,
+      "cases"
+    );
+    let entries:
+      Awaited<ReturnType<typeof readdir>>;
+    try {
+      entries = await readdir(
+        base,
+        {
+          withFileTypes: true
+        }
+      );
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        "code" in error &&
+        error.code === "ENOENT"
+      ) {
+        return [];
+      }
+      throw error;
+    }
+
+    const result:
+      StoredCaseMetadata[] = [];
+    for (const entry of entries) {
+      if (
+        !entry.isDirectory() ||
+        !validCaseId(entry.name)
+      ) {
+        continue;
+      }
+      try {
+        const metadata =
+          await this
+            .readCaseMetadata(
+              entry.name
+            );
+        if (
+          !metadata.createdByUserId ||
+          !metadata.keyVersion
+        ) {
+          result.push(metadata);
+        }
+      } catch {
+        // Invalid directories are not import candidates.
+      }
+    }
+    return result.sort((a, b) =>
+      a.createdAt.localeCompare(
+        b.createdAt
+      )
+    );
+  }
+
+  async updateCaseSecurityMetadata(
+    caseId: string,
+    args: {
+      createdByUserId: string;
+      keyVersion: number;
+    }
+  ): Promise<void> {
+    if (
+      !/^user_[a-f0-9]{32}$/
+        .test(
+          args.createdByUserId
+        ) ||
+      !Number.isInteger(
+        args.keyVersion
+      ) ||
+      args.keyVersion < 1
+    ) {
+      throw new Error(
+        "INVALID_CASE_SECURITY_METADATA"
+      );
+    }
+    const metadata =
+      await this.readCaseMetadata(
+        caseId
+      );
+    if (
+      metadata.createdByUserId ||
+      metadata.keyVersion
+    ) {
+      throw new Error(
+        "CASE_ALREADY_SECURITY_BOUND"
+      );
+    }
+
+    const target = path.join(
+      this.caseDir(caseId),
+      "case.json"
+    );
+    const temp =
+      target + ".partial";
+    await writeFile(
+      temp,
+      JSON.stringify(
+        {
+          ...metadata,
+          createdByUserId:
+            args.createdByUserId,
+          keyVersion:
+            args.keyVersion
+        },
+        null,
+        2
+      ),
+      {
+        encoding: "utf8",
+        flag: "wx"
+      }
+    );
+    await rename(
+      temp,
+      target
+    );
+  }
+
+  async removeCase(
+    caseId: string
+  ): Promise<void> {
+    await rm(
+      this.caseDir(caseId),
+      {
+        recursive: true,
+        force: true
+      }
+    );
   }
 
   async assertCase(
