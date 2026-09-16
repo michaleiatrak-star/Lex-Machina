@@ -549,7 +549,7 @@ fn provider_credential_from_request(
             "DESKTOP_PROVIDER_CREDENTIAL_REQUEST_INVALID"
                 .to_string()
         )?;
-    let api_key = value
+    let mut api_key = value
         .get("apiKey")
         .and_then(Value::as_str)
         .filter(|value| {
