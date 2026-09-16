@@ -1068,3 +1068,43 @@ Security limitations remain explicit:
 
 Next dependency:
 - **G31C1 encrypted persistent privacy vault**, then **G34E/G34F recovery and transaction-bound reauthorization**.
+
+
+### 2026-09-16 — Build 0032
+
+Status: **PASS — G35A CASE WORKSPACE + G35B SHARED FIRM TEMPLATE LIBRARY**
+
+Implemented:
+- one browsable persisted upload inventory per selected legal case;
+- case READ required for file inventory;
+- no arbitrary browser-supplied filesystem path;
+- ZIP member metadata shown only from safe persisted manifest;
+- separate `shared/templates/template_<id>` application scope;
+- DOCX/ODT shared template manifests with SHA-256 and opaque template id;
+- authenticated shared-template listing;
+- ADMIN-only shared-template upload;
+- same shared template reference visible from multiple independently authorized cases;
+- no physical template copy into case directories;
+- React case-workspace browser;
+- shared firm-template panel;
+- case inventory refresh after persisted upload;
+- bundle gate for case/workspace/template UI.
+
+Validation evidence:
+- validated code SHA `181e439232dac1c3e00f9cb45fd1596329d986a8`;
+- Lex Runtime Validation `35074544206`: success;
+- F-138 `35074544281`: success;
+- G35A_CASE_WORKSPACE_BROWSER: PASS;
+- G35B_SHARED_FIRM_TEMPLATES: PASS;
+- web build/bundle validation: PASS;
+- G17/G19/G20/G22 live probes: PASS.
+
+Open:
+- G35C template-assisted generated-document integration;
+- G31C1 encrypted persistent privacy vault;
+- G34E-G34H and remaining G31/G33 work.
+
+Security note:
+- listing does not expose raw file bytes;
+- raw case files and shared template originals are not yet encrypted at rest;
+- templates must not be used as a shared location for client/case PII.
