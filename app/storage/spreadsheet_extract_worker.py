@@ -18,6 +18,7 @@ MAX_ROWS_PER_SHEET = 1_000_000
 MAX_CELLS = 5_000_000
 
 XLSX = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+XLSM = "application/vnd.ms-excel.sheet.macroEnabled.12"
 CSV = "text/csv"
 TSV = "text/tab-separated-values"
 
@@ -67,16 +68,9 @@ def parse_xml(data: bytes):
         fail("SPREADSHEET_XML_INVALID")
 
 def shared_strings(zf: zipfile.ZipFile):
-    try:
-        data = read_member(zf, "xl/sharedStrings.xml")
-    except SystemExit as exc:
-        # sharedStrings.xml is optional. Re-raise only for non-missing failures.
-        if str(exc.code) == "2":
-            try:
-                zf.getinfo("xl/sharedStrings.xml")
-            except KeyError:
-                return []
-        raise
+    if "xl/sharedStrings.xml" not in zf.namelist():
+        return []
+    data = read_member(zf, "xl/sharedStrings.xml")
     root = parse_xml(data)
     values = []
     si_tag = "{" + NS_MAIN + "}si"
@@ -226,7 +220,7 @@ def main() -> None:
     if not data or len(data) > MAX_INPUT_BYTES:
         fail("SPREADSHEET_SIZE_INVALID")
 
-    if args.media_type == XLSX:
+    if args.media_type in (XLSX, XLSM):
         text = xlsx_text(data)
     elif args.media_type == CSV:
         text = delimited_text(data, ",")
