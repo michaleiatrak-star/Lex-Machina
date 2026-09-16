@@ -53,6 +53,9 @@ import {
   SecureCaseDocumentStore
 } from "../case-document-store.js";
 import {
+  LocalCaseKnowledgeSearch
+} from "../case-knowledge-search.js";
+import {
   SecureCaseArtifactStore
 } from "../case-artifact-store.js";
 import {
@@ -173,6 +176,10 @@ export async function startLocalServer(options?: {
       rootDir:
         caseFileStore.rootDir
     });
+  const caseKnowledgeSearch =
+    new LocalCaseKnowledgeSearch(
+      secureCaseDocumentStore
+    );
   const legacyCaseStorageMigrator =
     new LegacyCaseStorageMigrator(
       secureCaseUploadStore,
@@ -229,6 +236,7 @@ export async function startLocalServer(options?: {
     sharedTemplateStore,
     authService,
     caseAccessService,
+    caseKnowledgeSearch,
     documentService: new LocalPrivateDocumentService(
       new CompleteDocumentIngestor(
         new PdfJsDocumentPageSource(),
