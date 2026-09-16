@@ -29,7 +29,9 @@
   },
   "bundle": {
     "active": true,
-    "targets": ["nsis"],
+    "targets": [
+      "nsis"
+    ],
     "windows": {
       "webviewInstallMode": {
         "type": "offlineInstaller",
@@ -37,8 +39,14 @@
       },
       "nsis": {
         "installMode": "currentUser",
-        "languages": ["Polish", "English"]
+        "languages": [
+          "Polish",
+          "English"
+        ]
       }
-    }
+    },
+    "resources": [
+      "runtime/**/*"
+    ]
   }
 }
