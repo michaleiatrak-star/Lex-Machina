@@ -7,6 +7,7 @@ import { DocumentPrivacyPanel } from "./DocumentPrivacyPanel.js";
 import { CaseWorkspacePanel } from "./CaseWorkspacePanel.js";
 import { CaseCollaborationPanel } from "./CaseCollaborationPanel.js";
 import { FirmKnowledgePanel } from "./FirmKnowledgePanel.js";
+import { DocumentAuthoringPanel } from "./DocumentAuthoringPanel.js";
 import {
   archiveCase,
   createCase,
@@ -1562,6 +1563,35 @@ export default function App({
             {executing ? "Analizuję…" : "Uruchom analizę"}
           </button>
         </section>
+
+        <DocumentAuthoringPanel
+          currentCase={
+            selectedCase
+          }
+          provider={
+            provider
+          }
+          providerConfigured={
+            providerConfigured ===
+              true
+          }
+          model={
+            model
+          }
+          primarySkill={
+            route
+          }
+          routeValid={
+            routeStatus ===
+              "valid"
+          }
+          query={
+            query
+          }
+          attachments={
+            documentAttachments
+          }
+        />
 
         {executionError && (
           <section className="execution-result execution-error">
