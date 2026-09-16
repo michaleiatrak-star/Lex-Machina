@@ -973,3 +973,51 @@ G31 remaining:
 
 Architecture:
 - `app/reports/G31-DOCX-ODT-CASE-STORAGE-ARCHITECTURE.md`
+
+
+### 2026-09-16 — Build 0030
+
+Status: **PASS — G34A LOCAL ACCOUNT BOOTSTRAP + G34B LOGIN/SESSION BOUNDARY**
+
+Implemented:
+- local SQLite auth store under the Lex data root;
+- zero-user-only first ADMIN bootstrap;
+- opaque random local user id;
+- Argon2id password-derived KEK;
+- random 256-bit User Master Key protected by AES-256-GCM envelope;
+- production Node runtime requirement >=24.7.0;
+- persistent HMAC-indexed failed-login throttling;
+- dummy Argon2 path for nonexistent users;
+- bounded Argon2 concurrency/queue;
+- 15-minute idle and 8-hour overall session deadlines;
+- opaque 256-bit in-memory sessions with digest-only server lookup;
+- authEpoch session invalidation;
+- authenticated production /api boundary;
+- explicit lock/logout;
+- sanitized lock/logout/expiry/revocation audit events;
+- first-run/login/locked React shell;
+- bearer token held only in module memory, never browser persistent storage;
+- workbench unmounted on lock/expiry;
+- browser bundle checks for auth endpoints and persistent-storage markers;
+- G13 updated to validate the authenticated localhost contract.
+
+Validation evidence:
+- validated code SHA `b3783309189a6d043fc077e52c736e16b64c10d5`;
+- Lex Runtime Validation `35069444351`: success;
+- F-138 structural audit `35069444331`: success;
+- G1-G29 + G31A/G31B + G32 + G34A/G34B deterministic job: success;
+- web unit tests: PASS;
+- production web build: PASS;
+- browser bundle safety: PASS;
+- G17/G19/G20/G22 live probes: PASS.
+
+Open security gates:
+- **G34C — case ACL:** NOT IMPLEMENTED / NOT PASS;
+- **G34D — case keys/per-user key envelopes:** NOT IMPLEMENTED / NOT PASS;
+- **G31C1 — persistent encrypted privacy vault:** NOT IMPLEMENTED / NOT PASS;
+- **G34E — recovery/password lifecycle:** NOT IMPLEMENTED / NOT PASS;
+- **G34F — deanonymization reauthorization:** NOT IMPLEMENTED / NOT PASS;
+- **G34G — Tauri production trust boundary:** NOT IMPLEMENTED / NOT PASS;
+- **G34H — sensitive case encryption at rest:** NOT IMPLEMENTED / NOT PASS.
+
+Important: current raw case uploads/ZIP members remain plaintext local files and the reversible privacy vault remains process-memory-only. Build 0030 does not claim secure shared-workstation case separation.
