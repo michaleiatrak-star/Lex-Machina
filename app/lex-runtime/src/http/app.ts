@@ -53,6 +53,13 @@ import {
   CaseAccessError,
   type LocalCaseAccessService
 } from "../case-access.js";
+import {
+  ReauthorizationError,
+  type DeanonymizationReauthorizationManager
+} from "../auth/reauthorization.js";
+import type {
+  LocalDocumentAuthoringService
+} from "../document-authoring-service.js";
 import type {
   LocalCaseKnowledgeSearch
 } from "../case-knowledge-search.js";
@@ -327,6 +334,18 @@ export type LexHttpAppOptions = {
     LocalCaseKnowledgeSearch,
     "search"
   >;
+  documentAuthoringService?: Pick<
+    LocalDocumentAuthoringService,
+    | "aliasManifest"
+    | "createTokenized"
+    | "deanonymizeConsumed"
+  >;
+  reauthorizationManager?: Pick<
+    DeanonymizationReauthorizationManager,
+    | "createIntent"
+    | "authorizeIntent"
+    | "consumeGrant"
+  >;
   caseAccessService?: Pick<
     LocalCaseAccessService,
     | "createCase"
@@ -350,6 +369,32 @@ export type LexHttpAppOptions = {
   >;
 };
 
+
+function sendReauthorizationError(
+  res: Response,
+  error: unknown
+): boolean {
+  if (
+    !(error instanceof
+      ReauthorizationError)
+  ) {
+    return false;
+  }
+  const status =
+    error.code ===
+      "REAUTH_INTENT_NOT_FOUND" ||
+    error.code ===
+      "REAUTH_GRANT_NOT_FOUND"
+      ? 404
+      : error.code ===
+          "REAUTH_SESSION_MISMATCH"
+        ? 403
+        : 409;
+  res.status(status).json({
+    error: error.code
+  });
+  return true;
+}
 
 function sendAuthError(
   res: Response,
@@ -3572,6 +3617,455 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         ) {
           res.status(422).json({
             error: "DOCUMENT_PRIVACY_FINALIZATION_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/authoring/aliases",
+    async (req, res) => {
+      if (
+        !options.caseAccessService ||
+        !options.documentAuthoringService
+      ) {
+        res.status(503).json({
+          error:
+            "DOCUMENT_AUTHORING_UNAVAILABLE"
+        });
+        return;
+      }
+      const caseId =
+        String(
+          req.params.caseId ??
+            ""
+        );
+      const sourceDocumentIds =
+        Array.isArray(
+          req.body?.sourceDocumentIds
+        )
+          ? req.body.sourceDocumentIds
+              .filter(
+                (
+                  value:
+                    unknown
+                ) =>
+                  typeof value ===
+                    "string"
+              )
+          : null;
+      if (
+        !sourceDocumentIds ||
+        sourceDocumentIds.length <
+          1 ||
+        sourceDocumentIds.length >
+          99
+      ) {
+        res.status(400).json({
+          error:
+            "INVALID_AUTHORING_REQUEST"
+        });
+        return;
+      }
+
+      try {
+        const context =
+          responseAuthContext(res);
+        const view =
+          options.caseAccessService
+            .openCase(
+              context,
+              caseId
+            );
+        const aliases =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              context,
+              caseId,
+              "ANALYZE",
+              async (
+                caseDataKey
+              ) =>
+                await options
+                  .documentAuthoringService!
+                  .aliasManifest({
+                    caseId,
+                    sourceDocumentIds,
+                    caseDataKey,
+                    keyVersion:
+                      view.keyVersion
+                  })
+            );
+        res.json(aliases);
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(422).json({
+            error:
+              error instanceof
+                Error
+                ? error.message
+                : "DOCUMENT_AUTHORING_ALIAS_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/artifacts/tokenized",
+    async (req, res) => {
+      if (
+        !options.caseAccessService ||
+        !options.documentAuthoringService
+      ) {
+        res.status(503).json({
+          error:
+            "DOCUMENT_AUTHORING_UNAVAILABLE"
+        });
+        return;
+      }
+      const caseId =
+        String(
+          req.params.caseId ??
+            ""
+        );
+      const format =
+        req.body?.format;
+      const sourceDocumentIds =
+        Array.isArray(
+          req.body?.sourceDocumentIds
+        )
+          ? req.body.sourceDocumentIds
+              .filter(
+                (
+                  value:
+                    unknown
+                ) =>
+                  typeof value ===
+                    "string"
+              )
+          : null;
+      if (
+        (
+          format !== "docx" &&
+          format !== "odt"
+        ) ||
+        !sourceDocumentIds ||
+        sourceDocumentIds.length <
+          1 ||
+        sourceDocumentIds.length >
+          99 ||
+        !req.body?.ast
+      ) {
+        res.status(400).json({
+          error:
+            "INVALID_AUTHORING_REQUEST"
+        });
+        return;
+      }
+
+      try {
+        const context =
+          responseAuthContext(res);
+        const view =
+          options.caseAccessService
+            .openCase(
+              context,
+              caseId
+            );
+        const result =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              context,
+              caseId,
+              "WRITE",
+              async (
+                caseDataKey
+              ) =>
+                await options
+                  .documentAuthoringService!
+                  .createTokenized({
+                    caseId,
+                    createdByUserId:
+                      context.user
+                        .userId,
+                    format,
+                    ast:
+                      req.body.ast,
+                    sourceDocumentIds,
+                    caseDataKey,
+                    keyVersion:
+                      view.keyVersion,
+                    ...(typeof req
+                      .body
+                      ?.filename ===
+                    "string"
+                      ? {
+                          filename:
+                            req.body
+                              .filename
+                        }
+                      : {})
+                  })
+            );
+        res.status(201).json({
+          artifact:
+            result.artifact,
+          format:
+            result.format,
+          tokenizedSha256:
+            result
+              .tokenizedSha256,
+          vaultGeneration:
+            result
+              .vaultGeneration,
+          aliasesUsed:
+            result.aliasesUsed
+        });
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(422).json({
+            error:
+              error instanceof
+                Error
+                ? error.message
+                : "DOCUMENT_AUTHORING_RENDER_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/artifacts/:artifactId/deanonymization-intent",
+    async (req, res) => {
+      if (
+        !options.reauthorizationManager
+      ) {
+        res.status(503).json({
+          error:
+            "DEANONYMIZATION_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        const intent =
+          await options
+            .reauthorizationManager
+            .createIntent(
+              responseAuthContext(
+                res
+              ),
+              String(
+                req.params.caseId ??
+                  ""
+              ),
+              String(
+                req.params
+                  .artifactId ??
+                  ""
+              )
+            );
+        res.status(201).json({
+          intent
+        });
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          ) &&
+          !sendReauthorizationError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "DEANONYMIZATION_INTENT_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/deanonymization/reauthorize",
+    async (req, res) => {
+      if (
+        !options.reauthorizationManager
+      ) {
+        res.status(503).json({
+          error:
+            "DEANONYMIZATION_UNAVAILABLE"
+        });
+        return;
+      }
+      if (
+        typeof req.body
+          ?.intentId !==
+          "string" ||
+        typeof req.body
+          ?.password !==
+          "string"
+      ) {
+        res.status(400).json({
+          error:
+            "INVALID_REAUTHORIZATION_REQUEST"
+        });
+        return;
+      }
+      try {
+        const result =
+          await options
+            .reauthorizationManager
+            .authorizeIntent(
+              responseAuthContext(
+                res
+              ),
+              req.body.intentId,
+              req.body.password
+            );
+        res.json({
+          grant:
+            result.grant,
+          session:
+            result.session
+        });
+      } catch (error) {
+        if (
+          !sendAuthError(
+            res,
+            error
+          ) &&
+          !sendCaseAccessError(
+            res,
+            error
+          ) &&
+          !sendReauthorizationError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "DEANONYMIZATION_REAUTH_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/deanonymization/finalize",
+    async (req, res) => {
+      if (
+        !options.reauthorizationManager ||
+        !options.documentAuthoringService ||
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "DEANONYMIZATION_UNAVAILABLE"
+        });
+        return;
+      }
+      if (
+        typeof req.body
+          ?.grantId !==
+          "string"
+      ) {
+        res.status(400).json({
+          error:
+            "INVALID_DEANONYMIZATION_REQUEST"
+        });
+        return;
+      }
+
+      try {
+        const context =
+          responseAuthContext(res);
+        // Consume before CDK unwrap / vault access.
+        const target =
+          await options
+            .reauthorizationManager
+            .consumeGrant(
+              context,
+              req.body.grantId
+            );
+        const final =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              context,
+              target.caseId,
+              "REIDENTIFY",
+              async (
+                caseDataKey
+              ) =>
+                await options
+                  .documentAuthoringService!
+                  .deanonymizeConsumed({
+                    target,
+                    createdByUserId:
+                      context.user
+                        .userId,
+                    caseDataKey,
+                    keyVersion:
+                      target
+                        .caseKeyVersion,
+                    ...(typeof req
+                      .body
+                      ?.filename ===
+                    "string"
+                      ? {
+                          filename:
+                            req.body
+                              .filename
+                        }
+                      : {})
+                  })
+            );
+        res.status(201).json({
+          artifact:
+            final.artifact,
+          format:
+            final.format,
+          sha256:
+            final.sha256,
+          replacements:
+            final.replacements
+        });
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          ) &&
+          !sendReauthorizationError(
+            res,
+            error
+          )
+        ) {
+          res.status(422).json({
+            error:
+              error instanceof
+                Error
+                ? error.message
+                : "DEANONYMIZATION_FINALIZE_FAILED"
           });
         }
       }
