@@ -929,3 +929,47 @@ Validation evidence:
 Open gates:
 - **G30 Open Web Discovery:** NOT IMPLEMENTED / NOT PASS.
 - **G31 Local DOCX Generation:** NOT IMPLEMENTED / NOT PASS.
+
+
+### 2026-09-16 — Build 0029
+
+Status: **PASS — G31A CASE STORAGE FOUNDATION + G31B SAFE ZIP INTAKE FOUNDATION**
+
+Implemented:
+- production UI creates an opaque local case before accepting file uploads;
+- production PDF/image uploads are persisted under the case before OCR/review;
+- default data root is outside the Git checkout (`LEX_DATA_DIR` or `~/.lex-machina/data`);
+- upload ids are opaque/random;
+- original upload uses `.partial` then atomic rename;
+- upload manifest contains SHA-256 and non-secret metadata;
+- `POST /api/cases/:caseId/files` accepts ZIP archives;
+- safe ZIP extraction into the same case directory;
+- ZIP-slip/path traversal, absolute/drive/UNC paths, symlinks, special files, encrypted entries, duplicate paths and suspicious expansion are rejected;
+- limits cover entry count, one-file bytes, total expanded bytes, path depth and path length;
+- rejected archive upload directories are removed;
+- nested archives are never recursively auto-extracted;
+- ZIP members are never sent to a provider automatically;
+- UI shows extracted-file manifest;
+- currently processable extracted formats are PDF/JPEG/PNG/WebP/TIFF;
+- DOCX/ODT and other files may be stored safely but are not yet input-parsed.
+
+Current-upload audit:
+- before Build 0029: uploads were not persisted to a case directory;
+- after Build 0029 production path: PDF/image originals are stored in the local case before OCR, and ZIP originals + safe extracted members are stored in the case.
+
+Validation evidence:
+- validated code SHA `56134cfa983e8ea88957e08ed46c6d8d3c5565c7`;
+- Lex Runtime Validation `35061645463`: success;
+- F-138 structural audit `35061645590`: success;
+- G31A deterministic gate: PASS;
+- G31B deterministic gate: PASS;
+- G14-G32 web build/bundle safety: PASS;
+- G17/G19/G20/G22 live probes: PASS.
+
+G31 remaining:
+- **G31C — Typed Authoring AST + generation-scoped PII aliases:** NOT IMPLEMENTED / NOT PASS.
+- **G31D — Deterministic DOCX + local deanonymization + immediate download:** NOT IMPLEMENTED / NOT PASS.
+- **G31E — Deterministic ODT + local deanonymization + immediate download:** NOT IMPLEMENTED / NOT PASS.
+
+Architecture:
+- `app/reports/G31-DOCX-ODT-CASE-STORAGE-ARCHITECTURE.md`
