@@ -1277,6 +1277,15 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         models: sanitizeModels(models)
       });
     } catch (error) {
+      if (
+        sendCaseAccessError(
+          res,
+          error
+        )
+      ) {
+        return;
+      }
+
       if (error instanceof MissingProviderCredentialError) {
         res.status(503).json({
           error: "PROVIDER_NOT_CONFIGURED",
@@ -1341,9 +1350,11 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               LexHttpAppOptions["caseFileStore"]
             >["saveUpload"]
           >> | undefined;
+        let caseId:
+          string | undefined;
 
         if (options.caseFileStore) {
-          const caseId =
+          caseId =
             req.get("x-lex-case-id")
               ?.trim();
           if (!caseId) {
@@ -1352,6 +1363,14 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             });
             return;
           }
+          options.caseAccessService
+            ?.assertAccess(
+              responseAuthContext(
+                res
+              ),
+              caseId,
+              "WRITE"
+            );
           stored =
             await options.caseFileStore.saveUpload({
               caseId,
@@ -1374,6 +1393,12 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                 data,
                 mediaType
               );
+        if (stored) {
+          documentCaseIds.set(
+            result.documentId,
+            stored.caseId
+          );
+        }
         res.status(201).json({
           ...result,
           ...(stored
@@ -1383,10 +1408,17 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               }
             : {})
         });
-      } catch {
-        res.status(422).json({
-          error: "DOCUMENT_INGESTION_FAILED"
-        });
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(422).json({
+            error: "DOCUMENT_INGESTION_FAILED"
+          });
+        }
       }
     }
   );
@@ -1429,9 +1461,11 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               LexHttpAppOptions["caseFileStore"]
             >["saveUpload"]
           >> | undefined;
+        let caseId:
+          string | undefined;
 
         if (options.caseFileStore) {
-          const caseId =
+          caseId =
             req.get("x-lex-case-id")
               ?.trim();
           if (!caseId) {
@@ -1440,6 +1474,14 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             });
             return;
           }
+          options.caseAccessService
+            ?.assertAccess(
+              responseAuthContext(
+                res
+              ),
+              caseId,
+              "WRITE"
+            );
           stored =
             await options.caseFileStore.saveUpload({
               caseId,
@@ -1458,6 +1500,12 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             data,
             mediaType
           );
+        if (stored) {
+          documentCaseIds.set(
+            result.documentId,
+            stored.caseId
+          );
+        }
         res.status(201).json({
           ...result,
           ...(stored
@@ -1467,10 +1515,17 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               }
             : {})
         });
-      } catch {
-        res.status(422).json({
-          error: "DOCUMENT_REVIEW_FAILED"
-        });
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(422).json({
+            error: "DOCUMENT_REVIEW_FAILED"
+          });
+        }
       }
     }
   );
@@ -1505,16 +1560,45 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       }
 
       try {
+        if (
+          options.caseAccessService
+        ) {
+          const caseId =
+            documentCaseIds.get(
+              documentId
+            );
+          if (!caseId) {
+            throw new CaseAccessError(
+              "CASE_ACCESS_DENIED",
+              403
+            );
+          }
+          options.caseAccessService
+            .assertAccess(
+              responseAuthContext(
+                res
+              ),
+              caseId,
+              "WRITE"
+            );
+        }
         const result =
           await options.documentService.finalizeReview(
             documentId,
             directives
           );
         res.json(result);
-      } catch {
-        res.status(422).json({
-          error: "DOCUMENT_PRIVACY_FINALIZATION_FAILED"
-        });
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(422).json({
+            error: "DOCUMENT_PRIVACY_FINALIZATION_FAILED"
+          });
+        }
       }
     }
   );
@@ -1556,6 +1640,34 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               "DOCUMENT_ATTACHMENT_SERVICE_UNAVAILABLE"
           });
           return;
+        }
+
+        if (
+          options.caseAccessService
+        ) {
+          const context =
+            responseAuthContext(res);
+          for (
+            const selection
+            of attachments
+          ) {
+            const caseId =
+              documentCaseIds.get(
+                selection.documentId
+              );
+            if (!caseId) {
+              throw new CaseAccessError(
+                "CASE_ACCESS_DENIED",
+                403
+              );
+            }
+            options.caseAccessService
+              .assertAccess(
+                context,
+                caseId,
+                "ANALYZE"
+              );
+          }
         }
 
         const resolved = await Promise.all(
