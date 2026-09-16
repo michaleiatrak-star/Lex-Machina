@@ -350,6 +350,11 @@ export default function AuthenticatedApp() {
                 current.user
               );
               setNow(Date.now());
+              setShowSecurity(
+                current.user
+                  .passwordSetupPending ===
+                  true
+              );
               setPhase(
                 "authenticated"
               );
@@ -553,6 +558,11 @@ export default function AuthenticatedApp() {
           setAuth(value);
           setLastUser(value.user);
           setNow(Date.now());
+          setShowSecurity(
+            value.user
+              .passwordSetupPending ===
+              true
+          );
           setPhase(
             "authenticated"
           );
@@ -629,6 +639,7 @@ export default function AuthenticatedApp() {
 
       {showSecurity && (
         <AccountSecurityPanel
+          user={auth.user}
           onAuthUpdated={(value) => {
             setAuth(value);
             setLastUser(
