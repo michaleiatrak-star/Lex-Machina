@@ -5,7 +5,12 @@ import { smokeTestAiSdkFactories } from "./providers/ai-sdk-factories.js";
 const reports = [];
 for (const id of ["openai", "anthropic", "xai"] as const) {
   reports.push(
-    await runProviderConformance(new ScriptedProviderAdapter({ id }))
+    await runProviderConformance(
+      new ScriptedProviderAdapter({
+        id,
+        autoToolCall: true
+      })
+    )
   );
 }
 
