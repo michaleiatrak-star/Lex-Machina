@@ -81,7 +81,7 @@ describe("G37B managed first-admin password setup", () => {
           ? changed.recoveryCode
           : undefined
       ).toMatch(
-        /^[A-Z0-9-]{20,}$/
+        /^LMR1_[A-Za-z0-9_-]{43}$/
       );
 
       await expect(
