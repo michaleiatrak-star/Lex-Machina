@@ -1,4 +1,7 @@
-import { AuditTrail } from "./audit-trail.js";
+import {
+  AuditTrail,
+  type AuditEvent
+} from "./audit-trail.js";
 import { AuditedFinalizer } from "./audited-finalizer.js";
 import {
   LexExecutionEngine,
@@ -128,6 +131,18 @@ export function publicEvidenceBundle(
   }));
 }
 
+export type SessionExecutionInternalState = {
+  verificationRecords:
+    VerificationRecord[];
+  auditEvents:
+    AuditEvent[];
+};
+
+export const SESSION_EXECUTION_INTERNAL =
+  Symbol(
+    "LEX_SESSION_EXECUTION_INTERNAL"
+  );
+
 export type SessionExecutionResponse = {
   sessionId: string;
   status: "DRAFT_PRESENTABLE" | "BLOCKED";
@@ -149,6 +164,8 @@ export type SessionExecutionResponse = {
     eventCount: number;
     closed: boolean;
   };
+  [SESSION_EXECUTION_INTERNAL]?:
+    SessionExecutionInternalState;
 };
 
 function buildDocumentContext(
@@ -467,7 +484,8 @@ export class SafeSessionExecutor implements SessionExecutor {
         status: finding.status
       }));
 
-    return {
+    const response:
+      SessionExecutionResponse = {
       sessionId: audit.sessionId,
       status: safeToPresent
         ? "DRAFT_PRESENTABLE"
@@ -502,5 +520,41 @@ export class SafeSessionExecutor implements SessionExecutor {
         closed: audit.isClosed
       }
     };
+
+    Object.defineProperty(
+      response,
+      SESSION_EXECUTION_INTERNAL,
+      {
+        value: {
+          verificationRecords:
+            verificationRecords
+              .map(
+                (record) => ({
+                  ...record
+                })
+              ),
+          auditEvents:
+            audit.events
+              .map(
+                (event) => ({
+                  ...event,
+                  ...(event.detail
+                    ? {
+                        detail: {
+                          ...event.detail
+                        }
+                      }
+                    : {})
+                })
+              )
+        } satisfies
+          SessionExecutionInternalState,
+        enumerable: false,
+        configurable: false,
+        writable: false
+      }
+    );
+
+    return response;
   }
 }
