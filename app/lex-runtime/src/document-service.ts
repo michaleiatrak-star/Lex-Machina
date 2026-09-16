@@ -1,3 +1,6 @@
+import {
+  createHash
+} from "node:crypto";
 import type {
   CompleteDocumentIngestor,
   DocumentIngestionResult,
@@ -23,6 +26,12 @@ import type {
 import type {
   SecureCaseDocumentStore
 } from "./case-document-store.js";
+import {
+  DOCX_MEDIA_TYPE,
+  ODT_MEDIA_TYPE,
+  type OfficeDocumentTextExtractor,
+  type OfficeDocumentMediaType
+} from "./office-document-extractor.js";
 
 export type DocumentSecurityContext = {
   caseId: string;
@@ -32,7 +41,11 @@ export type DocumentSecurityContext = {
 
 export type SupportedDocumentMediaType =
   | "application/pdf"
-  | SupportedImageMediaType;
+  | SupportedImageMediaType
+  | "text/plain"
+  | "text/markdown"
+  | typeof DOCX_MEDIA_TYPE
+  | typeof ODT_MEDIA_TYPE;
 
 export type PublicDocumentChunk = {
   index: number;
@@ -167,8 +180,67 @@ implements DocumentService {
       | "saveProtected"
       | "loadSource"
       | "loadProtected"
-    >
+    >,
+    private readonly officeExtractor?:
+      OfficeDocumentTextExtractor
   ) {}
+
+  private digitalTextResult(
+    data: Uint8Array,
+    text: string
+  ): DocumentIngestionResult {
+    if (
+      data.byteLength >
+        64 * 1024 * 1024 ||
+      text.length >
+        100_000_000
+    ) {
+      throw new Error(
+        "DOCUMENT_TEXT_LIMIT_EXCEEDED"
+      );
+    }
+    const page = {
+      page: 1,
+      text,
+      source:
+        text.trim()
+          ? "DIGITAL" as const
+          : "BLANK" as const
+    };
+    const pages:
+      IngestedPage[] = [
+        page
+      ];
+    return {
+      complete: true,
+      sha256:
+        createHash("sha256")
+          .update(data)
+          .digest("hex"),
+      bytes:
+        data.byteLength,
+      totalPages: 1,
+      digitalPages:
+        page.source ===
+          "DIGITAL"
+          ? 1
+          : 0,
+      ocrPages: 0,
+      blankPages:
+        page.source ===
+          "BLANK"
+          ? 1
+          : 0,
+      sourceChars:
+        text.length,
+      pages,
+      chunks:
+        chunkDocumentPages(
+          pages,
+          this.maxChunkChars
+        )
+    };
+  }
 
   private async extract(
     data: Uint8Array,
@@ -176,6 +248,43 @@ implements DocumentService {
   ): Promise<DocumentIngestionResult> {
     if (mediaType === "application/pdf") {
       return this.pdfIngestor.ingest(data);
+    }
+    if (
+      mediaType ===
+        "text/plain" ||
+      mediaType ===
+        "text/markdown"
+    ) {
+      return this.digitalTextResult(
+        data,
+        new TextDecoder(
+          "utf-8",
+          {
+            fatal: false
+          }
+        ).decode(data)
+      );
+    }
+    if (
+      mediaType ===
+        DOCX_MEDIA_TYPE ||
+      mediaType ===
+        ODT_MEDIA_TYPE
+    ) {
+      if (!this.officeExtractor) {
+        throw new Error(
+          "OFFICE_DOCUMENT_EXTRACTOR_UNAVAILABLE"
+        );
+      }
+      return this.digitalTextResult(
+        data,
+        await this.officeExtractor
+          .extract(
+            data,
+            mediaType as
+              OfficeDocumentMediaType
+          )
+      );
     }
     if (!this.imageIngestor) {
       throw new Error("IMAGE_OCR_UNAVAILABLE");
