@@ -423,35 +423,40 @@ export function getAuthMe():
 
 export async function lockAuth():
   Promise<void> {
-  const response = await fetch(
-    `${apiBase()}/api/auth/lock`,
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        ...authorizationHeaders()
+  const headers =
+    authorizationHeaders();
+  try {
+    const response = await fetch(
+      `${apiBase()}/api/auth/lock`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          ...headers
+        }
       }
-    }
-  );
-  clearAuthSession();
-  if (
-    !response.ok &&
-    response.status !== 401
-  ) {
-    let code =
-      `HTTP_${response.status}`;
-    try {
-      const body =
-        await response.json() as
-          ApiFailure;
-      code = body.error || code;
-    } catch {
-      // no body
-    }
-    throw new ApiError(
-      code,
-      response.status
     );
+    if (
+      !response.ok &&
+      response.status !== 401
+    ) {
+      let code =
+        `HTTP_${response.status}`;
+      try {
+        const body =
+          await response.json() as
+            ApiFailure;
+        code = body.error || code;
+      } catch {
+        // no body
+      }
+      throw new ApiError(
+        code,
+        response.status
+      );
+    }
+  } finally {
+    clearAuthSession();
   }
 }
 
