@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "tsx src/http/server.ts",
     "start": "tsx src/http/server.ts",
+    "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "validate:corpus": "tsx src/validate-corpus.ts",
     "validate:g3": "tsx src/validate-g3.ts",
