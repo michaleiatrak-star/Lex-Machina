@@ -8,6 +8,8 @@ import {
   VerificationLedger
 } from "./verification-ledger.js";
 
+let cbosaWarmupAttempts = 0;
+
 const fetcher =
   async (
     input: string | URL,
@@ -60,9 +62,47 @@ const fetcher =
 
     if (
       url ===
+        "https://orzeczenia.nsa.gov.pl/cbo/query" &&
+      init?.method === "GET"
+    ) {
+      cbosaWarmupAttempts += 1;
+      if (cbosaWarmupAttempts === 1) {
+        throw new Error(
+          "SIMULATED_TRANSIENT_CBOSA_RESET"
+        );
+      }
+      return new Response(
+        "<html><body>Formularz wyszukiwania</body></html>",
+        {
+          status: 200,
+          headers: {
+            "set-cookie":
+              "CBOSA_TEST_SESSION=abc123; Path=/; Secure; HttpOnly"
+          }
+        }
+      );
+    }
+
+    if (
+      url ===
         "https://orzeczenia.nsa.gov.pl/cbo/search" &&
       init?.method === "POST"
     ) {
+      const headers =
+        new Headers(init.headers);
+      if (
+        !headers
+          .get("cookie")
+          ?.includes(
+            "CBOSA_TEST_SESSION=abc123"
+          ) ||
+        headers.get("referer") !==
+          "https://orzeczenia.nsa.gov.pl/cbo/query"
+      ) {
+        throw new Error(
+          "CBOSA_SESSION_OR_REFERER_MISSING"
+        );
+      }
       return new Response(
         [
           "<html><body>",
@@ -235,6 +275,8 @@ const checks = {
       .includes(
         "never creates a VERIFIED ledger record"
       ),
+  cbosaTransientRetry:
+    cbosaWarmupAttempts === 2,
   networkPolicyAudited:
     runtime
       .auditEvents()
