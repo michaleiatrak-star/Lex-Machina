@@ -559,6 +559,52 @@ describe("G34H1 secure incoming upload store", () => {
       "dowody/Jan-Kowalski.pdf",
       "notatka.txt"
     ]);
+    expect(
+      stored.extracted.every(
+        (entry) =>
+          typeof entry.fileId ===
+            "string" &&
+          /^file_[a-f0-9]{32}$/
+            .test(entry.fileId)
+      )
+    ).toBe(true);
+
+    const pdfMember =
+      stored.extracted.find(
+        (entry) =>
+          entry.relativePath ===
+            "dowody/Jan-Kowalski.pdf"
+      );
+    expect(
+      pdfMember?.fileId
+    ).toMatch(
+      /^file_[a-f0-9]{32}$/
+    );
+    const restoredMember =
+      await secure
+        .readExtractedPayload({
+          caseId:
+            metadata.caseId,
+          uploadId:
+            stored.uploadId,
+          fileId:
+            pdfMember!.fileId!,
+          caseDataKey: key,
+          keyVersion: 1,
+          maxBytes: 1024
+        });
+    expect(
+      restoredMember
+        .manifest
+        .relativePath
+    ).toBe(
+      "dowody/Jan-Kowalski.pdf"
+    );
+    expect(
+      restoredMember.data
+        .equals(secretPdf)
+    ).toBe(true);
+    restoredMember.data.fill(0);
 
     const secureBytes =
       allFileBytes(
