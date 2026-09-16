@@ -1,10 +1,17 @@
 import {
   access,
+  chmod,
   mkdir,
+  mkdtemp,
   readFile,
   readdir,
-  rm
+  rm,
+  stat,
+  writeFile
 } from "node:fs/promises";
+import {
+  spawn
+} from "node:child_process";
 import type {
   Dirent
 } from "node:fs";
@@ -15,19 +22,41 @@ import {
 import os from "node:os";
 import path from "node:path";
 import {
+  fileURLToPath
+} from "node:url";
+import {
   readCaseBlob,
   rekeyCaseBlob,
   writeCaseBlob,
+  writeCaseBlobFromFile,
   type CaseBlobIdentity
 } from "./case-blob.js";
 import type {
+  StoredArchiveEntry,
   StoredUpload
 } from "./case-file-store.js";
 
 export type SecureCaseUploadStoreOptions = {
   rootDir?: string;
   manifestMaxBytes?: number;
+  python?: string;
+  zipWorkerPath?: string;
+  zipTimeoutMs?: number;
+  workRoot?: string;
 };
+
+function defaultZipWorkerPath(): string {
+  const here =
+    path.dirname(
+      fileURLToPath(
+        import.meta.url
+      )
+    );
+  return path.resolve(
+    here,
+    "../../storage/zip_extract_worker.py"
+  );
+}
 
 function defaultRootDir(): string {
   return path.resolve(
@@ -51,6 +80,13 @@ function validUploadId(
   value: string
 ): boolean {
   return /^upload_[a-f0-9]{32}$/
+    .test(value);
+}
+
+function validFileId(
+  value: string
+): boolean {
+  return /^file_[a-f0-9]{32}$/
     .test(value);
 }
 
@@ -120,10 +156,54 @@ function payloadIdentity(
   };
 }
 
+function extractedManifestIdentity(
+  caseId: string,
+  fileId: string,
+  keyVersion: number
+): CaseBlobIdentity {
+  return {
+    caseId,
+    objectId: fileId,
+    purpose:
+      "extracted-manifest",
+    keyVersion
+  };
+}
+
+function extractedPayloadIdentity(
+  caseId: string,
+  fileId: string,
+  keyVersion: number
+): CaseBlobIdentity {
+  return {
+    caseId,
+    objectId: fileId,
+    purpose:
+      "extracted-payload",
+    keyVersion
+  };
+}
+
+type EncryptedExtractedManifest =
+  StoredArchiveEntry & {
+    fileId: string;
+    uploadId: string;
+    storage:
+      "ENCRYPTED_LME1";
+  };
+
+
 export class SecureCaseUploadStore {
   readonly rootDir: string;
   private readonly manifestMaxBytes:
     number;
+  private readonly python: string;
+  private readonly zipWorkerPath:
+    string;
+  private readonly zipTimeoutMs:
+    number;
+  private readonly workRoot:
+    string;
 
   constructor(
     options:
@@ -137,6 +217,28 @@ export class SecureCaseUploadStore {
     this.manifestMaxBytes =
       options.manifestMaxBytes ??
       512 * 1024;
+    this.python =
+      options.python ??
+      process.env
+        .LEX_STORAGE_PYTHON ??
+      "python3";
+    this.zipWorkerPath =
+      options.zipWorkerPath ??
+      process.env
+        .LEX_ZIP_WORKER ??
+      defaultZipWorkerPath();
+    this.zipTimeoutMs =
+      options.zipTimeoutMs ??
+      10 * 60 * 1000;
+    this.workRoot =
+      path.resolve(
+        options.workRoot ??
+        path.join(
+          this.rootDir,
+          "work",
+          "zip"
+        )
+      );
   }
 
   private caseDir(
