@@ -1224,3 +1224,38 @@ Retrospective audit:
 - `app/reports/RETROSPECTIVE-IMPLEMENTATION-AUDIT-2026-09-16.md`;
 - no current evidence of a falsely marked implemented PASS gate after the fixes above;
 - full G34F, G34H5, G31C2/G31D/G31E, G35C, G34G, G33A-D and G30 remain open.
+
+
+### 2026-09-16 — Build 0043
+
+Status: **PASS — G38 FIRM KNOWLEDGE + CASE RETRIEVAL + EXTENDED DOCUMENT INTAKE**
+
+Implemented:
+- encrypted `FIRM_KNOWLEDGE` workspace with case-style ACL/key envelopes/rekey;
+- multi-user collaboration panel for cases and firm know-how;
+- local protected retrieval from matter documents and firm know-how;
+- explicit/manual and automatic knowledge use in session execution;
+- restart-safe case-bound document restoration;
+- digital-PDF text-layer-first processing with OCR only when required;
+- local TXT/Markdown/DOCX/ODT/XLSX/XLSM/CSV/TSV extraction;
+- spreadsheet macro/formula non-execution and parser safety limits;
+- deterministic Vite/Rolldown web dependency repair.
+
+Validation evidence:
+- validated code SHA `2e42a4e29ad48e8c5004866e7535746fdd0ac44a`;
+- Lex Runtime Validation `35102533235`: success;
+- F-138 `35102533273`: success;
+- runtime tests: 55/55 files, 207/207 tests PASS;
+- web tests: 1/1 file, 15/15 tests PASS;
+- production build/G14: PASS;
+- G17/G19/G20/G22 live probes: PASS.
+
+Build report:
+- `app/reports/BUILD-0043-G38-KNOWLEDGE-RETRIEVAL-FORMATS.md`.
+
+Remaining before production installer:
+- G31C2/G35C;
+- G31D/G31E;
+- full G34F;
+- G34G;
+- G33A-D.
