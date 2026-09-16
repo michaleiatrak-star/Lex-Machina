@@ -15,6 +15,7 @@ import {
   createFirmKnowledgeWorkspace,
   searchCaseKnowledge,
   login,
+  listCases,
   logoutAuth,
   reauthorizeDeanonymization,
   listCaseAccess,
