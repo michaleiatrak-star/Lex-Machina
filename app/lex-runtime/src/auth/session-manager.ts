@@ -15,6 +15,22 @@ type SessionExpiryReason =
   | "IDLE"
   | "OVERALL";
 
+export type SessionRevocationReason =
+  | "IDLE_TIMEOUT"
+  | "OVERALL_TIMEOUT"
+  | "USER_LOCK"
+  | "LOGOUT"
+  | "AUTH_EPOCH"
+  | "USER_REVOKED"
+  | "SERVICE_CLOSE";
+
+export type SessionRevocationEvent = {
+  sessionId: string;
+  userId: string;
+  reason: SessionRevocationReason;
+  occurredAt: string;
+};
+
 export type SessionLookup =
   | {
       status: "OK";
@@ -72,6 +88,8 @@ export class AuthSessionManager {
   private readonly clock: AuthClock;
   private readonly scheduleExpiryTimers:
     boolean;
+  private revocationListener?:
+    (event: SessionRevocationEvent) => void;
 
   constructor(options?: {
     policy?: Partial<AuthSessionPolicy>;
@@ -87,6 +105,15 @@ export class AuthSessionManager {
     this.scheduleExpiryTimers =
       options?.scheduleExpiryTimers ??
       true;
+  }
+
+  setRevocationListener(
+    listener:
+      | ((event: SessionRevocationEvent) => void)
+      | undefined
+  ): void {
+    this.revocationListener =
+      listener;
   }
 
   create(args: {
@@ -150,7 +177,10 @@ export class AuthSessionManager {
     if (
       now >= session.overallExpiresAtMs
     ) {
-      this.revokeDigest(digest);
+      this.revokeDigest(
+        digest,
+        "OVERALL_TIMEOUT"
+      );
       return {
         status: "OVERALL_EXPIRED"
       };
@@ -158,7 +188,10 @@ export class AuthSessionManager {
     if (
       now >= session.idleExpiresAtMs
     ) {
-      this.revokeDigest(digest);
+      this.revokeDigest(
+        digest,
+        "IDLE_TIMEOUT"
+      );
       return {
         status: "IDLE_EXPIRED"
       };
@@ -205,10 +238,21 @@ export class AuthSessionManager {
 
     const now = this.clock.now();
     if (
-      now >= session.overallExpiresAtMs ||
+      now >= session.overallExpiresAtMs
+    ) {
+      this.revokeDigest(
+        digest,
+        "OVERALL_TIMEOUT"
+      );
+      return null;
+    }
+    if (
       now >= session.idleExpiresAtMs
     ) {
-      this.revokeDigest(digest);
+      this.revokeDigest(
+        digest,
+        "IDLE_TIMEOUT"
+      );
       return null;
     }
 
@@ -223,27 +267,40 @@ export class AuthSessionManager {
   }
 
   revokeToken(
-    token: string
+    token: string,
+    reason:
+      SessionRevocationReason =
+        "LOGOUT"
   ): void {
     this.revokeDigest(
-      tokenDigest(token)
+      tokenDigest(token),
+      reason
     );
   }
 
   revokeSessionId(
-    sessionId: string
+    sessionId: string,
+    reason:
+      SessionRevocationReason =
+        "USER_LOCK"
   ): void {
     const digest =
       this.digestBySessionId.get(
         sessionId
       );
     if (digest) {
-      this.revokeDigest(digest);
+      this.revokeDigest(
+        digest,
+        reason
+      );
     }
   }
 
   revokeUser(
-    userId: string
+    userId: string,
+    reason:
+      SessionRevocationReason =
+        "USER_REVOKED"
   ): void {
     for (
       const [digest, session]
@@ -252,17 +309,27 @@ export class AuthSessionManager {
       if (
         session.userId === userId
       ) {
-        this.revokeDigest(digest);
+        this.revokeDigest(
+          digest,
+          reason
+        );
       }
     }
   }
 
-  clear(): void {
+  clear(
+    reason:
+      SessionRevocationReason =
+        "SERVICE_CLOSE"
+  ): void {
     for (
       const digest
       of [...this.byDigest.keys()]
     ) {
-      this.revokeDigest(digest);
+      this.revokeDigest(
+        digest,
+        reason
+      );
     }
   }
 
@@ -340,7 +407,12 @@ export class AuthSessionManager {
         : now >=
           session.overallExpiresAtMs;
     if (expired) {
-      this.revokeDigest(digest);
+      this.revokeDigest(
+        digest,
+        reason === "IDLE"
+          ? "IDLE_TIMEOUT"
+          : "OVERALL_TIMEOUT"
+      );
     } else if (reason === "IDLE") {
       this.scheduleIdleTimer(
         digest,
@@ -350,7 +422,8 @@ export class AuthSessionManager {
   }
 
   private revokeDigest(
-    digest: string
+    digest: string,
+    reason: SessionRevocationReason
   ): void {
     const session =
       this.byDigest.get(digest);
@@ -369,6 +442,14 @@ export class AuthSessionManager {
     this.digestBySessionId.delete(
       session.sessionId
     );
+    this.revocationListener?.({
+      sessionId:
+        session.sessionId,
+      userId: session.userId,
+      reason,
+      occurredAt:
+        iso(this.clock.now())
+    });
   }
 
   private view(
