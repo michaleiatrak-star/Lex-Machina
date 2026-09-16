@@ -10,6 +10,7 @@ import {
   generateLegalDocument,
   listCaseTemplates,
   reauthorizeDeanonymization,
+  isDesktopShell,
   type CaseListItem,
   type DocumentAttachmentSelection,
   type GeneratedDocumentResponse,
@@ -149,7 +150,10 @@ export function DocumentAuthoringPanel({
       generated &&
       currentCase
         ?.canReidentify &&
-      password
+      (
+        isDesktopShell() ||
+        password
+      )
     );
 
   const selectedTemplate =
@@ -528,25 +532,31 @@ export function DocumentAuthoringPanel({
           {currentCase
             ?.canReidentify ? (
             <>
-              <label>
-                Bieżące hasło — jednorazowa reautoryzacja
-                <input
-                  type="password"
-                  autoComplete="current-password"
-                  value={
-                    password
-                  }
-                  disabled={
-                    busy
-                  }
-                  onChange={(event) =>
-                    setPassword(
-                      event.target
-                        .value
-                    )
-                  }
-                />
-              </label>
+              {isDesktopShell() ? (
+                <p className="auth-copy">
+                  Jednorazowa reautoryzacja zostanie wykonana natywnie przez magazyn poświadczeń Windows. Hasło nie trafia do Reacta.
+                </p>
+              ) : (
+                <label>
+                  Bieżące hasło — jednorazowa reautoryzacja
+                  <input
+                    type="password"
+                    autoComplete="current-password"
+                    value={
+                      password
+                    }
+                    disabled={
+                      busy
+                    }
+                    onChange={(event) =>
+                      setPassword(
+                        event.target
+                          .value
+                      )
+                    }
+                  />
+                </label>
+              )}
               <button
                 type="button"
                 className="primary-button"
