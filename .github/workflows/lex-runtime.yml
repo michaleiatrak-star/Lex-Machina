@@ -29,7 +29,7 @@ permissions:
 
 jobs:
   g1-g29-g32:
-    name: G1-G29 + G31A/G31B + G32 + G34A-G34D + G35A/G35B deterministic validation
+    name: G1-G29 + G31A/G31B/G31C1 + G32 + G34A-G34D + G35A/G35B deterministic validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -166,6 +166,9 @@ jobs:
 
       - name: G35B — shared firm template library
         run: npm run validate:g35b
+
+      - name: G31C1 — encrypted persistent privacy vault
+        run: npm run validate:g31c1
 
   g19-live-freshness:
     name: G19 live temporal freshness probe
