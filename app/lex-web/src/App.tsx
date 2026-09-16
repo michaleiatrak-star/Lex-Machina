@@ -1,6 +1,7 @@
 import {
   useEffect,
   useMemo,
+  useRef,
   useState
 } from "react";
 import { DocumentPrivacyPanel } from "./DocumentPrivacyPanel.js";
@@ -8,6 +9,14 @@ import { CaseWorkspacePanel } from "./CaseWorkspacePanel.js";
 import { CaseCollaborationPanel } from "./CaseCollaborationPanel.js";
 import { FirmKnowledgePanel } from "./FirmKnowledgePanel.js";
 import { DocumentAuthoringPanel } from "./DocumentAuthoringPanel.js";
+import {
+  DOCUMENT_FILE_ACCEPT,
+  MAX_DOCUMENT_DROP_QUEUE,
+  consumeDocumentDropFile,
+  createDocumentDropQueueState,
+  describeDocumentFile,
+  enqueueDocumentDropFiles
+} from "./document-drop-queue.js";
 import {
   archiveCase,
   createCase,
@@ -272,10 +281,23 @@ export default function App({
 
   const [workspaceRefresh, setWorkspaceRefresh] =
     useState(0);
-  const [droppedDocumentFile, setDroppedDocumentFile] =
-    useState<File | null>(null);
+  const [
+    documentDropQueue,
+    setDocumentDropQueue
+  ] = useState(
+    createDocumentDropQueueState
+  );
   const [queryDropActive, setQueryDropActive] =
     useState(false);
+  const queryDragDepth = useRef(0);
+
+  useEffect(() => {
+    setDocumentDropQueue(
+      createDocumentDropQueueState()
+    );
+    queryDragDepth.current = 0;
+    setQueryDropActive(false);
+  }, [caseId]);
 
   useEffect(() => {
     let cancelled = false;
@@ -606,6 +628,39 @@ export default function App({
           selection
         ];
       }
+    );
+  }
+
+  function enqueueDocumentFiles(
+    files: FileList | readonly File[]
+  ): void {
+    if (
+      !caseId ||
+      selectedCase?.archivedAt
+    ) {
+      return;
+    }
+    const incoming =
+      Array.from(files);
+    if (incoming.length === 0) {
+      return;
+    }
+    setDocumentDropQueue(
+      (current) =>
+        enqueueDocumentDropFiles(
+          current,
+          incoming
+        )
+    );
+  }
+
+  function consumeQueuedDocumentFile():
+    void {
+    setDocumentDropQueue(
+      (current) =>
+        consumeDocumentDropFile(
+          current
+        )
     );
   }
 
@@ -1177,15 +1232,62 @@ export default function App({
             Sprawa jest zarchiwizowana. Akta pozostają dostępne do odczytu, ale upload, analiza dokumentów i reidentyfikacja są zablokowane do czasu przywrócenia sprawy.
           </section>
         ) : (
-          <DocumentPrivacyPanel
+          <>
+            {documentDropQueue.total > 0 && (
+              <section
+                className="document-drop-queue"
+                aria-live="polite"
+                aria-label="Kolejka dokumentów"
+              >
+                <div className="document-drop-queue-head">
+                  <strong>
+                    {documentDropQueue.files.length > 0
+                      ? `Przetwarzanie ${Math.min(
+                          documentDropQueue.completed + 1,
+                          documentDropQueue.total
+                        )}/${documentDropQueue.total}`
+                      : `Kolejka zakończona ${documentDropQueue.completed}/${documentDropQueue.total}`}
+                  </strong>
+                  <span>
+                    Maksymalnie {MAX_DOCUMENT_DROP_QUEUE} plików w kolejce
+                  </span>
+                </div>
+                {documentDropQueue.rejected > 0 && (
+                  <p className="document-drop-rejected">
+                    Pominięto {documentDropQueue.rejected} plików: pustych albo ponad limit kolejki.
+                  </p>
+                )}
+                {documentDropQueue.files.length > 0 && (
+                  <ul className="document-drop-file-list">
+                    {documentDropQueue.files
+                      .slice(0, 8)
+                      .map((file, index) => (
+                        <li
+                          key={`${file.name}-${file.size}-${file.lastModified}-${index}`}
+                        >
+                          <span>
+                            {index === 0
+                              ? "Przetwarzanie"
+                              : "Oczekuje"}
+                          </span>
+                          <strong>{file.name}</strong>
+                          <small>
+                            {describeDocumentFile(file)}
+                          </small>
+                        </li>
+                      ))}
+                  </ul>
+                )}
+              </section>
+            )}
+            <DocumentPrivacyPanel
             caseId={caseId}
             incomingFile={
-              droppedDocumentFile
+              documentDropQueue.files[0] ??
+              null
             }
-            onIncomingFileConsumed={() =>
-              setDroppedDocumentFile(
-                null
-              )
+            onIncomingFileConsumed={
+              consumeQueuedDocumentFile
             }
             onCaseFilesChange={() =>
               setWorkspaceRefresh(
@@ -1200,6 +1302,7 @@ export default function App({
               setExecutionError("");
             }}
           />
+          </>
         )}
 
         <section className="config-grid">
@@ -1436,6 +1539,7 @@ export default function App({
                   .includes("Files")
               ) {
                 event.preventDefault();
+                queryDragDepth.current += 1;
                 setQueryDropActive(
                   true
                 );
@@ -1454,29 +1558,29 @@ export default function App({
                 );
               }
             }}
-            onDragLeave={() =>
-              setQueryDropActive(
-                false
-              )
-            }
+            onDragLeave={() => {
+              queryDragDepth.current =
+                Math.max(
+                  0,
+                  queryDragDepth.current - 1
+                );
+              if (
+                queryDragDepth.current === 0
+              ) {
+                setQueryDropActive(
+                  false
+                );
+              }
+            }}
             onDrop={(event) => {
               event.preventDefault();
+              queryDragDepth.current = 0;
               setQueryDropActive(
                 false
               );
-              const file =
-                event.dataTransfer
-                  .files?.[0];
-              if (
-                file &&
-                caseId &&
-                !selectedCase
-                  ?.archivedAt
-              ) {
-                setDroppedDocumentFile(
-                  file
-                );
-              }
+              enqueueDocumentFiles(
+                event.dataTransfer.files
+              );
             }}
           >
             <span className="step">04</span>
@@ -1492,10 +1596,40 @@ export default function App({
               maxLength={30000}
               placeholder="Opisz problem prawny, stan faktyczny albo zadanie analityczne..."
             />
+            <div className="document-drop-actions">
+              <label className="queue-file-button">
+                Dodaj wiele plików
+                <input
+                  type="file"
+                  multiple
+                  accept={DOCUMENT_FILE_ACCEPT}
+                  disabled={
+                    !caseId ||
+                    Boolean(
+                      selectedCase?.archivedAt
+                    )
+                  }
+                  onChange={(event) => {
+                    if (
+                      event.target.files
+                    ) {
+                      enqueueDocumentFiles(
+                        event.target.files
+                      );
+                    }
+                    event.currentTarget.value =
+                      "";
+                  }}
+                />
+              </label>
+              <small>
+                Przeciągnij pliki albo użyj przycisku. Każdy plik przechodzi przez ten sam lokalny pipeline prywatności; kolejka jest przetwarzana sekwencyjnie.
+              </small>
+            </div>
             <p className="field-help">
               Treść zostanie przesłana do wybranego providera dopiero po
               uruchomieniu analizy. Wynik z niezweryfikowanym powołaniem
-              prawnym zostanie zatrzymany przez HARD GATE. Możesz też przeciągnąć PDF, obraz lub ZIP bezpośrednio na to pole — plik przejdzie przez lokalną ścieżkę prywatności przed użyciem w analizie.
+              prawnym zostanie zatrzymany przez HARD GATE. Możesz też przeciągnąć wiele obsługiwanych plików bezpośrednio na to pole — każdy przejdzie sekwencyjnie przez lokalną ścieżkę prywatności przed użyciem w analizie.
             </p>
             <div className="knowledge-execution-controls">
               <label>

@@ -214,6 +214,9 @@ jobs:
       - name: G37C2 — persistent provider credentials in OS keyring
         run: npm run validate:g37c2
 
+      - name: G37F — multi-file drag/drop queue and accessibility
+        run: npm run validate:g37f
+
       - name: G36 — legal skill runtime completeness
         run: npm run validate:g36
 
