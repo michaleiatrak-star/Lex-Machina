@@ -892,19 +892,27 @@ export class EncryptedPrivacyVaultStore {
       metaPartial,
       { force: true }
     );
-    await writeFile(
-      metaPartial,
-      JSON.stringify(
-        meta,
-        null,
-        2
-      ),
-      {
-        encoding: "utf8",
-        flag: "wx",
-        mode: 0o600
-      }
-    );
+    const metaHandle =
+      await open(
+        metaPartial,
+        "wx",
+        0o600
+      );
+    try {
+      await metaHandle.writeFile(
+        JSON.stringify(
+          meta,
+          null,
+          2
+        ),
+        {
+          encoding: "utf8"
+        }
+      );
+      await metaHandle.sync();
+    } finally {
+      await metaHandle.close();
+    }
     await rename(
       metaPartial,
       metaPath
