@@ -1,6 +1,6 @@
 # G31 — Local DOCX/ODT Authoring + Case Storage Architecture
 
-Status: **G31A/G31B FOUNDATION IMPLEMENTED; G31C-G31E DESIGN COMPLETE, NOT YET PASS**  
+Status: **PASS — G31A/G31B/G31C1/G31C2/G31D/G31E IMPLEMENTED AND VALIDATED**  
 Date: 2026-09-16
 
 ## 1. Target pipeline
@@ -723,3 +723,18 @@ DOCX/ODT deanonymization is a file-to-file local transform:
 The tokenized package is never modified in place. Clear-text OOXML/ODF directory trees are not persisted; whitelisted XML parts are transformed locally in memory while a new final package is written.
 
 No provider call is permitted after the local vault is unlocked for final deanonymization.
+
+
+## 23. G31 validated implementation closure — 2026-09-16
+
+Validated SHA: `e0035c68a2034bc4e4132adc28614fb752e10c4f`.
+
+- G31C2 typed AST / generation-scoped aliases: PASS;
+- G31D deterministic local DOCX: PASS;
+- G31E deterministic local ODT: PASS;
+- DOCX/ODT finalization consumes full G34F one-use grant;
+- final clear package is re-read locally, checked for residual tokens, checked by local HYBRID and final G8/G10 before encrypted artifact commit;
+- ODT is explicitly covered by the same HYBRID/export requirement as DOCX/PDF;
+- provider never emits package XML and never receives the clear PII mapping.
+
+CI: Lex Runtime Validation `35108047936`, F-138 `35108047959`.
