@@ -1,20 +1,79 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
+  clearAuthSession,
   createCase,
   executeSession,
   finalizeDocument,
   getHealth,
   getModels,
+  login,
+  logoutAuth,
   reviewDocument,
   uploadCaseFile,
   validateRoute
 } from "./api.js";
 
 afterEach(() => {
+  clearAuthSession();
   vi.restoreAllMocks();
 });
 
 describe("local API client", () => {
+
+  it("keeps the login bearer in memory and attaches it to private requests", async () => {
+    const authPayload = {
+      user: {
+        userId: "user_0123456789abcdef0123456789abcdef",
+        loginName: "owner",
+        displayName: "Owner",
+        appRole: "ADMIN",
+        status: "ACTIVE",
+        createdAt: "2026-09-16T08:00:00.000Z"
+      },
+      session: {
+        sessionId: "authsess_0123456789abcdef0123456789abcdef",
+        userId: "user_0123456789abcdef0123456789abcdef",
+        createdAt: "2026-09-16T08:00:00.000Z",
+        lastActivityAt: "2026-09-16T08:00:00.000Z",
+        lastFullAuthenticationAt: "2026-09-16T08:00:00.000Z",
+        idleExpiresAt: "2026-09-16T08:15:00.000Z",
+        overallExpiresAt: "2026-09-16T16:00:00.000Z"
+      },
+      sessionToken: "A".repeat(43)
+    };
+    const casePayload = {
+      caseId: "case_0123456789abcdef0123456789abcdef",
+      createdAt: "2026-09-16T08:01:00.000Z"
+    };
+    const fetchMock = vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify(authPayload), { status: 200 })
+      )
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify(casePayload), { status: 201 })
+      )
+      .mockResolvedValueOnce(
+        new Response(null, { status: 204 })
+      );
+
+    await login({
+      loginName: "owner",
+      password: "Bardzo dlugie haslo testowe 2026"
+    });
+    await createCase();
+
+    expect(fetchMock.mock.calls[1]?.[1]?.headers)
+      .toEqual(expect.objectContaining({
+        Authorization: `Bearer ${authPayload.sessionToken}`
+      }));
+
+    await logoutAuth();
+    expect(fetchMock.mock.calls[2]?.[1]?.headers)
+      .toEqual(expect.objectContaining({
+        Authorization: `Bearer ${authPayload.sessionToken}`
+      }));
+  });
+
   it("uses the localhost runtime by default", async () => {
     const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(
       new Response(JSON.stringify({
