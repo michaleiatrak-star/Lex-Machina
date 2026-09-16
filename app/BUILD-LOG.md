@@ -1179,3 +1179,48 @@ Validation evidence:
 Important:
 - full G34F remains open because no real DOCX/ODT deanonymization/export path exists yet;
 - next critical path is G34H encryption of sensitive case files at rest.
+
+
+### 2026-09-16 — Build 0038
+
+Status: **PASS — G36 LEGAL SKILL RUNTIME COMPLETENESS**
+
+Implemented:
+- actual UTF-8 reads for mandatory core legal resources;
+- exact core resource content injected into execution context;
+- local `list_legal_skills`, `list_legal_resources`, `read_legal_resource` provider tools;
+- path-confined semantic reads for modules/references/shared/cross-skill resources;
+- paginated large-resource reads;
+- corpus read/tool audit;
+- full production-corpus readability validation.
+
+Production corpus validated:
+- 32 registered skills;
+- 16 DR skills;
+- 1,252 listed resources;
+- 1,187 supported text resources;
+- 16,210,656 text characters read;
+- 0 structural issues;
+- 0 unreadable supported text resources.
+
+Regression fixes found during integration:
+- scripted provider auto-tool behavior made explicit;
+- finalizer result preserved independently from release blocking;
+- secure incoming parent directory robustness fixed.
+
+Validation evidence:
+- validated code SHA `5c19ec48f2c25b5bee7c39a63717e7c808cb3a3e`;
+- Lex Runtime Validation `35084662270`: success;
+- F-138 `35084662355`: success;
+- G17/G19/G20/G22 live probes: success;
+- G14-G35 web UI: success.
+
+Semantic boundary:
+- G36 proves complete on-demand access to the supported textual corpus;
+- it does not preload all resources into every prompt;
+- local corpus text does not replace fresh legal-source verification.
+
+Retrospective audit:
+- `app/reports/RETROSPECTIVE-IMPLEMENTATION-AUDIT-2026-09-16.md`;
+- no current evidence of a falsely marked implemented PASS gate after the fixes above;
+- full G34F, G34H5, G31C2/G31D/G31E, G35C, G34G, G33A-D and G30 remain open.
