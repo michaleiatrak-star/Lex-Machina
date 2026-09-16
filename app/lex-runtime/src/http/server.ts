@@ -19,6 +19,8 @@ import { CompleteImageIngestor } from "../image-ingestion.js";
 import { LocalStanzaNamedEntityRecognizer } from "../privacy/stanza-ner.js";
 import { LocalPrivateDocumentService } from "../document-service.js";
 import { LocalCaseFileStore } from "../case-file-store.js";
+import { LocalAuthStore } from "../auth/store.js";
+import { LocalAuthService } from "../auth/service.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -64,6 +66,18 @@ export async function startLocalServer(options?: {
     );
   }
 
+  const caseFileStore =
+    new LocalCaseFileStore();
+  const authStore =
+    new LocalAuthStore({
+      rootDir:
+        caseFileStore.rootDir
+    });
+  const authService =
+    new LocalAuthService(
+      authStore
+    );
+
   const credentials = new EnvironmentCredentialResolver();
   const providerRegistry = createLiveProviderRegistry(credentials);
   const providerGateway = new ProviderGateway(providerRegistry);
@@ -79,7 +93,8 @@ export async function startLocalServer(options?: {
     registry,
     modelCatalog: new DynamicModelCatalog(credentials),
     credentialResolver: credentials,
-    caseFileStore: new LocalCaseFileStore(),
+    caseFileStore,
+    authService,
     documentService: new LocalPrivateDocumentService(
       new CompleteDocumentIngestor(
         new PdfJsDocumentPageSource(),
@@ -121,6 +136,7 @@ export async function startLocalServer(options?: {
         close: () =>
           new Promise<void>((closeResolve, closeReject) => {
             server.close((error) => {
+              authService.close();
               if (error) closeReject(error);
               else closeResolve();
             });
