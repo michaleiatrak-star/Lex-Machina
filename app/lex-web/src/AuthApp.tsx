@@ -501,6 +501,7 @@ export default function AuthenticatedApp() {
         key={
           auth.session.sessionId
         }
+        user={auth.user}
       />
     </>
   );
