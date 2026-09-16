@@ -19,6 +19,182 @@ import {
 
 const roots: string[] = [];
 
+function crc32(
+  data: Buffer
+): number {
+  let crc = 0xffffffff;
+  for (
+    const byte of data
+  ) {
+    crc ^= byte;
+    for (
+      let bit = 0;
+      bit < 8;
+      bit += 1
+    ) {
+      crc =
+        (crc >>> 1) ^
+        (
+          (crc & 1)
+            ? 0xedb88320
+            : 0
+        );
+    }
+  }
+  return (
+    crc ^ 0xffffffff
+  ) >>> 0;
+}
+
+function createStoredZip(
+  entries: Array<{
+    name: string;
+    data: Buffer;
+  }>
+): Buffer {
+  const locals: Buffer[] = [];
+  const centrals: Buffer[] = [];
+  let offset = 0;
+
+  for (
+    const entry of entries
+  ) {
+    const name =
+      Buffer.from(
+        entry.name,
+        "utf8"
+      );
+    const checksum =
+      crc32(entry.data);
+    const local =
+      Buffer.alloc(30);
+    local.writeUInt32LE(
+      0x04034b50,
+      0
+    );
+    local.writeUInt16LE(
+      20,
+      4
+    );
+    local.writeUInt16LE(
+      0,
+      6
+    );
+    local.writeUInt16LE(
+      0,
+      8
+    );
+    local.writeUInt32LE(
+      checksum,
+      14
+    );
+    local.writeUInt32LE(
+      entry.data.length,
+      18
+    );
+    local.writeUInt32LE(
+      entry.data.length,
+      22
+    );
+    local.writeUInt16LE(
+      name.length,
+      26
+    );
+
+    const central =
+      Buffer.alloc(46);
+    central.writeUInt32LE(
+      0x02014b50,
+      0
+    );
+    central.writeUInt16LE(
+      20,
+      4
+    );
+    central.writeUInt16LE(
+      20,
+      6
+    );
+    central.writeUInt16LE(
+      0,
+      8
+    );
+    central.writeUInt16LE(
+      0,
+      10
+    );
+    central.writeUInt32LE(
+      checksum,
+      16
+    );
+    central.writeUInt32LE(
+      entry.data.length,
+      20
+    );
+    central.writeUInt32LE(
+      entry.data.length,
+      24
+    );
+    central.writeUInt16LE(
+      name.length,
+      28
+    );
+    central.writeUInt32LE(
+      offset,
+      42
+    );
+
+    locals.push(
+      local,
+      name,
+      entry.data
+    );
+    centrals.push(
+      central,
+      name
+    );
+    offset +=
+      local.length +
+      name.length +
+      entry.data.length;
+  }
+
+  const centralOffset =
+    offset;
+  const centralBytes =
+    Buffer.concat(
+      centrals
+    );
+  const end =
+    Buffer.alloc(22);
+  end.writeUInt32LE(
+    0x06054b50,
+    0
+  );
+  end.writeUInt16LE(
+    entries.length,
+    8
+  );
+  end.writeUInt16LE(
+    entries.length,
+    10
+  );
+  end.writeUInt32LE(
+    centralBytes.length,
+    12
+  );
+  end.writeUInt32LE(
+    centralOffset,
+    16
+  );
+
+  return Buffer.concat([
+    ...locals,
+    centralBytes,
+    end
+  ]);
+}
+
 function tempRoot(): string {
   const value =
     fs.mkdtempSync(
@@ -311,7 +487,7 @@ describe("G34H1 secure incoming upload store", () => {
     newKey.fill(0);
   });
 
-  it("marks ZIP extraction deferred until G34H2 instead of writing plaintext members", async () => {
+  it("extracts ZIP in private workdir and persists members only as encrypted opaque LME1 objects", async () => {
     const root =
       tempRoot();
     const files =
@@ -330,6 +506,29 @@ describe("G34H1 secure incoming upload store", () => {
       });
     const key =
       randomBytes(32);
+    const secretPdf =
+      Buffer.from(
+        "%PDF tajny dowod Jan Kowalski"
+      );
+    const secretNote =
+      Buffer.from(
+        "sekretna notatka klienta"
+      );
+    const zip =
+      createStoredZip([
+        {
+          name:
+            "dowody/Jan-Kowalski.pdf",
+          data:
+            secretPdf
+        },
+        {
+          name:
+            "notatka.txt",
+          data:
+            secretNote
+        }
+      ]);
 
     const stored =
       await secure.saveUpload({
@@ -339,34 +538,98 @@ describe("G34H1 secure incoming upload store", () => {
           "akta.zip",
         mediaType:
           "application/zip",
-        data:
-          Buffer.from(
-            "PK\u0003\u0004fixture"
-          ),
+        data: zip,
         caseDataKey: key,
         keyVersion: 1
       });
 
     expect(stored).toMatchObject({
       archive: true,
-      extracted: [],
       archiveExtractionStatus:
-        "DEFERRED_G34H2",
+        "COMPLETE",
       storage:
         "ENCRYPTED_LME1"
     });
     expect(
-      fs.existsSync(
+      stored.extracted.map(
+        (entry) =>
+          entry.relativePath
+      )
+    ).toEqual([
+      "dowody/Jan-Kowalski.pdf",
+      "notatka.txt"
+    ]);
+
+    const secureBytes =
+      allFileBytes(
         path.join(
           root,
           "cases",
           metadata.caseId,
-          "secure",
-          "extracted"
+          "secure"
         )
+      );
+    for (
+      const clear of [
+        "Jan-Kowalski.pdf",
+        "tajny dowod Jan Kowalski",
+        "notatka.txt",
+        "sekretna notatka klienta"
+      ]
+    ) {
+      expect(
+        secureBytes.includes(
+          Buffer.from(
+            clear,
+            "utf8"
+          )
+        )
+      ).toBe(false);
+    }
+
+    const extractedRoot =
+      path.join(
+        root,
+        "cases",
+        metadata.caseId,
+        "secure",
+        "incoming",
+        stored.uploadId,
+        "extracted"
+      );
+    const opaqueEntries =
+      fs.readdirSync(
+        extractedRoot
+      );
+    expect(
+      opaqueEntries
+    ).toHaveLength(2);
+    expect(
+      opaqueEntries.every(
+        (value) =>
+          /^file_[a-f0-9]{32}$/
+            .test(value)
       )
-    ).toBe(false);
+    ).toBe(true);
+
+    const workRoot =
+      path.join(
+        root,
+        "work",
+        "zip"
+      );
+    expect(
+      fs.existsSync(workRoot)
+        ? fs.readdirSync(
+            workRoot
+          ).length
+        : 0
+    ).toBe(0);
 
     key.fill(0);
+    zip.fill(0);
+    secretPdf.fill(0);
+    secretNote.fill(0);
+  });
   });
 });
