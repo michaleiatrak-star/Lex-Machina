@@ -32,6 +32,14 @@ import {
   type OfficeDocumentTextExtractor,
   type OfficeDocumentMediaType
 } from "./office-document-extractor.js";
+import {
+  XLSX_MEDIA_TYPE,
+  XLSM_MEDIA_TYPE,
+  CSV_MEDIA_TYPE,
+  TSV_MEDIA_TYPE,
+  type SpreadsheetTextExtractor,
+  type SpreadsheetMediaType
+} from "./spreadsheet-extractor.js";
 
 export type DocumentSecurityContext = {
   caseId: string;
@@ -45,7 +53,11 @@ export type SupportedDocumentMediaType =
   | "text/plain"
   | "text/markdown"
   | typeof DOCX_MEDIA_TYPE
-  | typeof ODT_MEDIA_TYPE;
+  | typeof ODT_MEDIA_TYPE
+  | typeof XLSX_MEDIA_TYPE
+  | typeof XLSM_MEDIA_TYPE
+  | typeof CSV_MEDIA_TYPE
+  | typeof TSV_MEDIA_TYPE;
 
 export type PublicDocumentChunk = {
   index: number;
@@ -182,7 +194,9 @@ implements DocumentService {
       | "loadProtected"
     >,
     private readonly officeExtractor?:
-      OfficeDocumentTextExtractor
+      OfficeDocumentTextExtractor,
+    private readonly spreadsheetExtractor?:
+      SpreadsheetTextExtractor
   ) {}
 
   private digitalTextResult(
@@ -263,6 +277,31 @@ implements DocumentService {
             fatal: false
           }
         ).decode(data)
+      );
+    }
+    if (
+      mediaType ===
+        XLSX_MEDIA_TYPE ||
+      mediaType ===
+        XLSM_MEDIA_TYPE ||
+      mediaType ===
+        CSV_MEDIA_TYPE ||
+      mediaType ===
+        TSV_MEDIA_TYPE
+    ) {
+      if (!this.spreadsheetExtractor) {
+        throw new Error(
+          "SPREADSHEET_EXTRACTOR_UNAVAILABLE"
+        );
+      }
+      return this.digitalTextResult(
+        data,
+        await this.spreadsheetExtractor
+          .extract(
+            data,
+            mediaType as
+              SpreadsheetMediaType
+          )
       );
     }
     if (
