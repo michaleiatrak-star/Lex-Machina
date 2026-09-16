@@ -5,7 +5,7 @@ Branch: `feature/local-runtime`
 
 ## Status
 
-**IMPLEMENTED — validation pending final CI for this documentation head**
+**PASS — G31A CASE STORAGE FOUNDATION + G31B SAFE ZIP INTAKE FOUNDATION**
 
 This build closes the previously identified persistence gap for production uploads and adds a safe local ZIP intake foundation. It does **not** claim full G31 DOCX/ODT authoring PASS.
 
@@ -104,3 +104,19 @@ Still open:
 Architecture:
 
 `app/reports/G31-DOCX-ODT-CASE-STORAGE-ARCHITECTURE.md`
+
+
+## Final validation
+
+- validated code SHA: `56134cfa983e8ea88957e08ed46c6d8d3c5565c7`;
+- Lex Runtime Validation `35061645463` — success;
+- F-138 structural audit `35061645590` — success;
+- strict TypeScript — PASS;
+- runtime unit tests — PASS;
+- Python ZIP worker syntax — PASS;
+- G31A deterministic gate — PASS;
+- G31B deterministic gate — PASS;
+- G14-G32 web tests/build/bundle safety — PASS;
+- G17/G19/G20/G22 live regression probes — PASS.
+
+Subsequent commits after the validated code SHA are documentation-only.
