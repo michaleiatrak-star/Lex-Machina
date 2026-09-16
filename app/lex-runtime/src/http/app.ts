@@ -14,7 +14,8 @@ import {
 import {
   MissingProviderCredentialError,
   providerConfigurationStatus,
-  type ProviderCredentialResolver
+  type ProviderCredentialResolver,
+  type ProviderCredentialManager
 } from "../providers/credentials.js";
 import {
   ProviderGatewayError
@@ -206,6 +207,7 @@ export type LexHttpAppOptions = {
   registry: LexSkillRegistry;
   modelCatalog: Pick<DynamicModelCatalog, "list">;
   credentialResolver?: ProviderCredentialResolver;
+  credentialManager?: ProviderCredentialManager;
   sessionExecutor?: SessionExecutor;
   documentService?: DocumentService;
   caseFileStore?:
@@ -2330,6 +2332,109 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     const result = routing.validate(primarySkill);
     res.status(result.valid ? 200 : 422).json(result);
   });
+
+  app.put(
+    "/api/admin/providers/:provider/credential",
+    (req, res) => {
+      const context =
+        responseAuthContext(res);
+      if (
+        context.user.appRole !==
+          "ADMIN"
+      ) {
+        res.status(403).json({
+          error:
+            "AUTHORIZATION_DENIED"
+        });
+        return;
+      }
+      if (!options.credentialManager) {
+        res.status(503).json({
+          error:
+            "PROVIDER_CREDENTIAL_MANAGER_UNAVAILABLE"
+        });
+        return;
+      }
+      const provider =
+        String(
+          req.params.provider ?? ""
+        ).trim();
+      if (!isProviderId(provider)) {
+        res.status(404).json({
+          error:
+            "UNKNOWN_PROVIDER"
+        });
+        return;
+      }
+      const apiKey =
+        typeof req.body?.apiKey ===
+          "string"
+          ? req.body.apiKey
+          : "";
+      try {
+        options.credentialManager
+          .setApiKey(
+            provider,
+            apiKey
+          );
+        res.json({
+          provider,
+          configured: true,
+          storage:
+            "PROCESS_MEMORY"
+        });
+      } catch {
+        res.status(400).json({
+          error:
+            "INVALID_PROVIDER_API_KEY"
+        });
+      }
+    }
+  );
+
+  app.delete(
+    "/api/admin/providers/:provider/credential",
+    (req, res) => {
+      const context =
+        responseAuthContext(res);
+      if (
+        context.user.appRole !==
+          "ADMIN"
+      ) {
+        res.status(403).json({
+          error:
+            "AUTHORIZATION_DENIED"
+        });
+        return;
+      }
+      if (!options.credentialManager) {
+        res.status(503).json({
+          error:
+            "PROVIDER_CREDENTIAL_MANAGER_UNAVAILABLE"
+        });
+        return;
+      }
+      const provider =
+        String(
+          req.params.provider ?? ""
+        ).trim();
+      if (!isProviderId(provider)) {
+        res.status(404).json({
+          error:
+            "UNKNOWN_PROVIDER"
+        });
+        return;
+      }
+      options.credentialManager
+        .clearApiKey(provider);
+      res.json({
+        provider,
+        cleared: true,
+        storage:
+          "PROCESS_MEMORY"
+      });
+    }
+  );
 
   app.get("/api/providers", async (_req, res) => {
     if (!options.credentialResolver) {
