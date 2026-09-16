@@ -42,7 +42,8 @@
         "languages": [
           "Polish",
           "English"
-        ]
+        ],
+        "installerHooks": "./windows/hooks.nsh"
       }
     },
     "resources": [
