@@ -206,3 +206,184 @@ describe("authenticated localhost HTTP API", () => {
     authService.close();
   });
 });
+
+
+describe("admin user lifecycle HTTP API", () => {
+  it("creates, disables, reactivates and safely deletes an unrelated USER", async () => {
+    const authService = auth();
+    const app =
+      createLexHttpApp({
+        registry: registry(),
+        modelCatalog: {
+          list: vi.fn(
+            async () => []
+          )
+        },
+        authService
+      });
+
+    const bootstrap =
+      await request(app)
+        .post(
+          "/api/auth/bootstrap"
+        )
+        .send({
+          loginName: "owner-admin",
+          displayName:
+            "Owner Admin",
+          password:
+            "Owner admin bardzo dlugie haslo 2026"
+        })
+        .expect(201);
+    const adminToken =
+      String(
+        bootstrap.body
+          .sessionToken
+      );
+
+    const created =
+      await request(app)
+        .post(
+          "/api/admin/users"
+        )
+        .set(
+          "Authorization",
+          `Bearer ${adminToken}`
+        )
+        .send({
+          loginName: "worker",
+          displayName:
+            "Worker",
+          password:
+            "Worker bardzo dlugie haslo 2026"
+        })
+        .expect(201);
+    const userId =
+      String(
+        created.body.user
+          .userId
+      );
+
+    const workerLogin =
+      await request(app)
+        .post(
+          "/api/auth/login"
+        )
+        .send({
+          loginName: "worker",
+          password:
+            "Worker bardzo dlugie haslo 2026"
+        })
+        .expect(200);
+    const workerToken =
+      String(
+        workerLogin.body
+          .sessionToken
+      );
+
+    await request(app)
+      .patch(
+        `/api/admin/users/${userId}/status`
+      )
+      .set(
+        "Authorization",
+        `Bearer ${adminToken}`
+      )
+      .send({
+        status: "DISABLED"
+      })
+      .expect(200);
+
+    await request(app)
+      .get("/api/auth/me")
+      .set(
+        "Authorization",
+        `Bearer ${workerToken}`
+      )
+      .expect(401);
+
+    await request(app)
+      .post("/api/auth/login")
+      .send({
+        loginName: "worker",
+        password:
+          "Worker bardzo dlugie haslo 2026"
+      })
+      .expect(401);
+
+    await request(app)
+      .patch(
+        `/api/admin/users/${userId}/status`
+      )
+      .set(
+        "Authorization",
+        `Bearer ${adminToken}`
+      )
+      .send({
+        status: "ACTIVE"
+      })
+      .expect(200);
+
+    await request(app)
+      .post("/api/auth/login")
+      .send({
+        loginName: "worker",
+        password:
+          "Worker bardzo dlugie haslo 2026"
+      })
+      .expect(200);
+
+    await request(app)
+      .delete(
+        `/api/admin/users/${userId}`
+      )
+      .set(
+        "Authorization",
+        `Bearer ${adminToken}`
+      )
+      .expect(409, {
+        error:
+          "USER_DELETE_REQUIRES_DISABLE"
+      });
+
+    await request(app)
+      .patch(
+        `/api/admin/users/${userId}/status`
+      )
+      .set(
+        "Authorization",
+        `Bearer ${adminToken}`
+      )
+      .send({
+        status: "DISABLED"
+      })
+      .expect(200);
+
+    await request(app)
+      .delete(
+        `/api/admin/users/${userId}`
+      )
+      .set(
+        "Authorization",
+        `Bearer ${adminToken}`
+      )
+      .expect(200);
+
+    const users =
+      await request(app)
+        .get("/api/admin/users")
+        .set(
+          "Authorization",
+          `Bearer ${adminToken}`
+        )
+        .expect(200);
+    expect(
+      users.body.users.some(
+        (item: { userId: string }) =>
+          item.userId === userId
+      )
+    ).toBe(false);
+
+    authService.close();
+  });
+});
