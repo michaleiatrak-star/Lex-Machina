@@ -25,7 +25,8 @@ import {
   validateNewPassword
 } from "./crypto.js";
 import {
-  AuthSessionManager
+  AuthSessionManager,
+  type SessionRevocationEvent
 } from "./session-manager.js";
 import {
   LocalAuthStore,
@@ -204,6 +205,13 @@ implements AuthService {
     this.kdfExecutor =
       options?.kdfExecutor ??
       new PasswordKdfExecutor();
+    this.sessions
+      .setRevocationListener(
+        (event) =>
+          this.recordSessionRevocation(
+            event
+          )
+      );
 
     const dummyKey =
       randomBytes(32);
@@ -663,7 +671,8 @@ implements AuthService {
       this.sessions
         .revokeSessionId(
           lookup.session
-            .sessionId
+            .sessionId,
+          "AUTH_EPOCH"
         );
       throw new AuthError(
         "SESSION_REVOKED",
@@ -694,7 +703,10 @@ implements AuthService {
       parseBearer(authorization);
     if (token) {
       this.sessions
-        .revokeToken(token);
+        .revokeToken(
+          token,
+          "LOGOUT"
+        );
     }
   }
 
@@ -703,7 +715,8 @@ implements AuthService {
   ): void {
     this.sessions
       .revokeSessionId(
-        sessionId
+        sessionId,
+        "USER_LOCK"
       );
   }
 
@@ -711,7 +724,51 @@ implements AuthService {
     userId: string
   ): void {
     this.sessions
-      .revokeUser(userId);
+      .revokeUser(
+        userId,
+        "USER_REVOKED"
+      );
+  }
+
+  private recordSessionRevocation(
+    event: SessionRevocationEvent
+  ): void {
+    if (
+      event.reason ===
+        "SERVICE_CLOSE"
+    ) {
+      return;
+    }
+    const eventType =
+      event.reason ===
+        "USER_LOCK"
+        ? "session_locked"
+        : event.reason ===
+              "LOGOUT"
+          ? "logout"
+          : event.reason ===
+                "IDLE_TIMEOUT" ||
+              event.reason ===
+                "OVERALL_TIMEOUT"
+            ? "session_expired"
+            : "session_revoked";
+    this.store
+      .recordSecurityEvent({
+        eventId:
+          "event_" +
+          randomBytes(16)
+            .toString("hex"),
+        userId: event.userId,
+        eventType,
+        occurredAt:
+          event.occurredAt,
+        result: "PASS",
+        metadata: {
+          reason: event.reason,
+          sessionId:
+            event.sessionId
+        }
+      });
   }
 
   private createSuccess(
