@@ -51,5 +51,5 @@ Raw review text remains inside the local browser/runtime boundary and is not sen
 - production web build — PASS
 - browser bundle safety — PASS
 - G17/G19/G20/G22 live regressions — PASS
-- GitHub Actions `35058485740` — success
-- F-138 `35058485712` — success
+- GitHub Actions `35058610946` — success
+- F-138 `35058610889` — success
