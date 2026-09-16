@@ -90,8 +90,13 @@ export type CaseKind =
   | "MATTER"
   | "FIRM_KNOWLEDGE";
 
+export type CaseKind =
+  | "MATTER"
+  | "FIRM_KNOWLEDGE";
+
 export type CaseResponse = {
   caseId: string;
+  caseKind: CaseKind;
   caseKind?: CaseKind;
   displayName?: string;
   createdAt: string;
@@ -105,6 +110,7 @@ export type CaseResponse = {
 
 export type CaseListItem = {
   caseId: string;
+  caseKind: CaseKind;
   caseKind: CaseKind;
   displayName?: string;
   createdByUserId: string;
@@ -136,6 +142,28 @@ export type CaseAccessResponse = {
 export type CaseAccessCandidatesResponse = {
   users: AuthenticatedUser[];
 };
+
+export type FirmKnowledgeResponse = {
+  workspace:
+    | CaseResponse
+    | null;
+};
+
+export type KnowledgeSearchHit = {
+  documentId: string;
+  chunkIndex: number;
+  pageStart: number;
+  pageEnd: number;
+  score: number;
+  text: string;
+};
+
+export type KnowledgeSearchResponse = {
+  caseId: string;
+  caseKind: CaseKind;
+  hits: KnowledgeSearchHit[];
+};
+
 
 export type FirmKnowledgeWorkspaceResponse = {
   workspace: CaseListItem | null;
@@ -858,6 +886,42 @@ export function searchCaseKnowledge(
   );
 }
 
+export function getFirmKnowledge():
+  Promise<FirmKnowledgeResponse> {
+  return json<FirmKnowledgeResponse>(
+    "/api/firm-knowledge"
+  );
+}
+
+export function createFirmKnowledge():
+  Promise<{
+    workspace: CaseResponse;
+  }> {
+  return json(
+    "/api/firm-knowledge",
+    {
+      method: "POST"
+    }
+  );
+}
+
+export function searchCaseKnowledge(
+  caseId: string,
+  query: string,
+  limit = 8
+): Promise<KnowledgeSearchResponse> {
+  return json<KnowledgeSearchResponse>(
+    `/api/cases/${caseId}/knowledge/search`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        query,
+        limit
+      })
+    }
+  );
+}
+
 export function listCaseAccess(
   caseId: string
 ): Promise<CaseAccessResponse> {
@@ -1070,6 +1134,12 @@ export function executeSession(input: {
   primarySkill: string;
   mode?: "LAIK" | "PRAWNIK";
   attachments?: DocumentAttachmentSelection[];
+  knowledge?: {
+    caseId?: string;
+    includeCase?: boolean;
+    includeFirm?: boolean;
+    limit?: number;
+  };
 }): Promise<SessionExecutionResponse> {
   return json<SessionExecutionResponse>("/api/sessions/execute", {
     method: "POST",
