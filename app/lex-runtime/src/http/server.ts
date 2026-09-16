@@ -1,3 +1,9 @@
+import express, {
+  type NextFunction,
+  type Request,
+  type Response
+} from "express";
+import helmet from "helmet";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createLexHttpApp } from "./app.js";
@@ -56,6 +62,44 @@ export function assertLoopbackHost(host: string): void {
       "Lex Machina local server refuses non-loopback bind addresses."
     );
   }
+}
+
+function isLoopbackOrigin(
+  origin: string
+): boolean {
+  try {
+    const url = new URL(origin);
+    return (
+      (url.protocol === "http:" ||
+        url.protocol === "https:") &&
+      [
+        "localhost",
+        "127.0.0.1",
+        "::1",
+        "[::1]"
+      ].includes(url.hostname)
+    );
+  } catch {
+    return false;
+  }
+}
+
+function loopbackOriginGuard(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void {
+  const origin = req.get("origin");
+  if (
+    !origin ||
+    isLoopbackOrigin(origin)
+  ) {
+    next();
+    return;
+  }
+  res.status(403).json({
+    error: "ORIGIN_NOT_ALLOWED"
+  });
 }
 
 export function resolveRuntimeRoot(): string {
@@ -164,7 +208,7 @@ export async function startLocalServer(options?: {
       new LocalPdfTextExtractor()
     );
 
-  const app = createLexHttpApp({
+  const coreApp = createLexHttpApp({
     registry,
     modelCatalog: new DynamicModelCatalog(credentials),
     credentialResolver: credentials,
@@ -200,6 +244,10 @@ export async function startLocalServer(options?: {
     )
   });
 
+  const app = express();
+  app.disable("x-powered-by");
+  app.use(helmet());
+  app.use(loopbackOriginGuard);
   registerLegacyMigrationRoutes(
     app,
     {
@@ -209,6 +257,7 @@ export async function startLocalServer(options?: {
         legacyCaseStorageMigrator
     }
   );
+  app.use(coreApp);
 
   return new Promise((resolve, reject) => {
     const server = app.listen(port, host);
