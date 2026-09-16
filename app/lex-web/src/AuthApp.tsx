@@ -4,6 +4,8 @@ import {
   useState
 } from "react";
 import App from "./App.js";
+import { AccountSecurityPanel } from "./AccountSecurityPanel.js";
+import { RecoveryAuthPanel } from "./RecoveryAuthPanel.js";
 import {
   ApiError,
   bootstrapAdmin,
@@ -22,6 +24,7 @@ type AuthPhase =
   | "checking"
   | "bootstrap"
   | "login"
+  | "recover"
   | "authenticated"
   | "locked";
 
@@ -29,7 +32,8 @@ function AuthPanel({
   phase,
   lastUser,
   onAuthenticated,
-  onChangeUser
+  onChangeUser,
+  onRecover
 }: {
   phase: "bootstrap" | "login" | "locked";
   lastUser?: AuthMeResponse["user"];
@@ -37,6 +41,7 @@ function AuthPanel({
     value: AuthMeResponse
   ) => void;
   onChangeUser: () => void;
+  onRecover: () => void;
 }) {
   const [loginName, setLoginName] =
     useState(
@@ -248,6 +253,16 @@ function AuthPanel({
               : "Zaloguj"}
         </button>
 
+        {phase !== "bootstrap" && (
+          <button
+            type="button"
+            className="secondary-button auth-change-user"
+            onClick={onRecover}
+          >
+            Odzyskaj konto kodem recovery
+          </button>
+        )}
+
         {phase === "locked" && (
           <button
             type="button"
@@ -281,6 +296,8 @@ export default function AuthenticatedApp() {
     >();
   const [now, setNow] =
     useState(() => Date.now());
+  const [showSecurity, setShowSecurity] =
+    useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -419,6 +436,34 @@ export default function AuthenticatedApp() {
     );
   }
 
+  if (phase === "recover") {
+    return (
+      <RecoveryAuthPanel
+        {...(lastUser
+          ? {
+              initialLoginName:
+                lastUser.loginName
+            }
+          : {})}
+        onCancel={() => {
+          clearAuthSession();
+          setPhase("login");
+        }}
+        onAuthenticated={(value) => {
+          setAuth(value);
+          setLastUser(
+            value.user
+          );
+          setNow(Date.now());
+          setShowSecurity(false);
+          setPhase(
+            "authenticated"
+          );
+        }}
+      />
+    );
+  }
+
   if (
     phase !== "authenticated" ||
     !auth
@@ -447,6 +492,10 @@ export default function AuthenticatedApp() {
           setLastUser(undefined);
           setPhase("login");
         }}
+        onRecover={() => {
+          clearAuthSession();
+          setPhase("recover");
+        }}
         onAuthenticated={(value) => {
           setAuth(value);
           setLastUser(value.user);
@@ -472,6 +521,18 @@ export default function AuthenticatedApp() {
         </div>
         <button
           type="button"
+          onClick={() =>
+            setShowSecurity(
+              (value) => !value
+            )
+          }
+        >
+          {showSecurity
+            ? "Ukryj bezpieczeństwo"
+            : "Hasło i recovery"}
+        </button>
+        <button
+          type="button"
           onClick={() => {
             void lock();
           }}
@@ -487,6 +548,18 @@ export default function AuthenticatedApp() {
           Wyloguj
         </button>
       </div>
+
+      {showSecurity && (
+        <AccountSecurityPanel
+          onAuthUpdated={(value) => {
+            setAuth(value);
+            setLastUser(
+              value.user
+            );
+            setNow(Date.now());
+          }}
+        />
+      )}
 
       {idleRemaining <= 120_000 && (
         <div
