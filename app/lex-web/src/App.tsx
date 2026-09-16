@@ -30,10 +30,26 @@ import {
 const PROVIDERS: Array<{
   id: ProviderId;
   label: string;
+  apiKeyUrl: string;
 }> = [
-  { id: "openai", label: "OpenAI" },
-  { id: "anthropic", label: "Anthropic / Claude" },
-  { id: "xai", label: "xAI / Grok" }
+  {
+    id: "openai",
+    label: "OpenAI",
+    apiKeyUrl:
+      "https://platform.openai.com/api-keys"
+  },
+  {
+    id: "anthropic",
+    label: "Anthropic / Claude",
+    apiKeyUrl:
+      "https://platform.claude.com/settings/keys"
+  },
+  {
+    id: "xai",
+    label: "xAI / Grok",
+    apiKeyUrl:
+      "https://console.x.ai/"
+  }
 ];
 
 function labelForDr(value: string): string {
@@ -447,6 +463,12 @@ export default function App({
       setCaseBusy(false);
     }
   }
+
+  const providerDefinition =
+    PROVIDERS.find(
+      (item) =>
+        item.id === provider
+    );
 
   const providerConfigured = providerConfiguration[provider];
 
@@ -865,6 +887,22 @@ export default function App({
                   ? "brak lokalnego klucza"
                   : "sprawdzanie"}. Wartość klucza nigdy nie trafia do przeglądarki.
             </p>
+            {providerDefinition && (
+              <a
+                className="provider-key-link"
+                href={
+                  providerDefinition
+                    .apiKeyUrl
+                }
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                {providerConfigured ===
+                true
+                  ? "Zarządzaj kluczem API"
+                  : "Utwórz / pobierz klucz API"}
+              </a>
+            )}
           </article>
 
           <article className="config-card">
