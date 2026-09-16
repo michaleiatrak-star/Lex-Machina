@@ -31,6 +31,7 @@ import type {
 import type {
   DocumentChunkSelection,
   DocumentService,
+  ResolvedDocumentAttachment,
   PagePrivacyDirective,
   SupportedDocumentMediaType
 } from "../document-service.js";
@@ -3185,7 +3186,8 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           return;
         }
 
-        const resolved = [];
+        const resolved:
+          ResolvedDocumentAttachment[] = [];
         if (
           options.caseAccessService
         ) {
