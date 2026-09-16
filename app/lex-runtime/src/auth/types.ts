@@ -25,6 +25,7 @@ export type PublicLocalUser = {
   displayName: string;
   appRole: AppRole;
   status: LocalUserStatus;
+  passwordSetupPending?: boolean;
   createdAt: string;
   lastLoginAt?: string;
 };
