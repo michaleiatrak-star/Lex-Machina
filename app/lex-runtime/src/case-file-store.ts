@@ -22,6 +22,7 @@ export type CaseFileStoreOptions = {
 };
 
 export type StoredArchiveEntry = {
+  fileId?: string;
   relativePath: string;
   compressedBytes: number;
   uncompressedBytes: number;
