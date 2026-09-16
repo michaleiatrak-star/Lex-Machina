@@ -176,6 +176,9 @@ jobs:
       - name: G34F1 — transaction reauthorization foundation
         run: npm run validate:g34f1
 
+      - name: G36 — legal skill runtime completeness
+        run: npm run validate:g36
+
       - name: G34H1/H2 — encrypted incoming and ZIP members
         run: npm run validate:g34h12
 
