@@ -3185,6 +3185,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           return;
         }
 
+        const resolved = [];
         if (
           options.caseAccessService
         ) {
@@ -3246,20 +3247,39 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                       })
                 );
             }
-          }
-        }
 
-        const resolved = await Promise.all(
-          attachments.map((selection) =>
-            options.documentService!
-              .resolveProtectedChunks({
-                documentId:
-                  selection.documentId,
-                chunkIndices:
-                  selection.chunkIndices
-              })
-          )
-        );
+            resolved.push(
+              await options
+                .documentService!
+                .resolveProtectedChunks({
+                  documentId:
+                    selection
+                      .documentId,
+                  chunkIndices:
+                    selection
+                      .chunkIndices
+                })
+            );
+          }
+        } else {
+          resolved.push(
+            ...await Promise.all(
+              attachments.map(
+                (selection) =>
+                  options
+                    .documentService!
+                    .resolveProtectedChunks({
+                      documentId:
+                        selection
+                          .documentId,
+                      chunkIndices:
+                        selection
+                          .chunkIndices
+                    })
+              )
+            )
+          );
+        }
         request.documentAttachments =
           resolved.map((attachment) => ({
             documentId:
