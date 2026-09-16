@@ -1,6 +1,7 @@
-import type {
-  SessionDocumentAttachment,
-  SessionExecutor
+import {
+  SESSION_EXECUTION_INTERNAL,
+  type SessionDocumentAttachment,
+  type SessionExecutor
 } from "./session-executor.js";
 import type { ProviderId } from "./providers/types.js";
 import {
@@ -10,6 +11,9 @@ import {
   type LegalStyleProfile
 } from "./legal-document-ast.js";
 import type { GenerationAliasManifest } from "./generation-aliases.js";
+import type {
+  DocumentGenerationValidationContext
+} from "./document-generation-validation.js";
 
 export type LegalDocumentAstGenerationRequest = {
   query: string;
@@ -80,6 +84,8 @@ export class LegalDocumentAstGenerator {
     ast: LegalDocumentAst;
     aliasesUsed: string[];
     sessionId: string;
+    validationContext:
+      DocumentGenerationValidationContext;
   }> {
     const result = await this.sessions.execute({
       query: generationInstruction(request),
@@ -95,6 +101,7 @@ export class LegalDocumentAstGenerator {
     if (
       result.status !== "DRAFT_PRESENTABLE" ||
       result.finalization !== "PASS" ||
+      result.audit.result !== "PASS" ||
       !result.answer
     ) {
       throw new Error("DOCUMENT_AST_SESSION_BLOCKED");
@@ -113,10 +120,60 @@ export class LegalDocumentAstGenerator {
       throw new Error("DOCUMENT_AST_CONTRACT_MISMATCH");
     }
 
+    const internal =
+      result[
+        SESSION_EXECUTION_INTERNAL
+      ];
+    if (!internal) {
+      throw new Error(
+        "DOCUMENT_AST_INTERNAL_VALIDATION_MISSING"
+      );
+    }
+
     return {
       ast: validated.ast,
-      aliasesUsed: validated.aliasesUsed,
-      sessionId: result.sessionId
+      aliasesUsed:
+        validated.aliasesUsed,
+      sessionId:
+        result.sessionId,
+      validationContext: {
+        schemaVersion: 1,
+        sourceSessionId:
+          result.sessionId,
+        primarySkill:
+          request.primarySkill,
+        provider:
+          request.provider,
+        model:
+          request.model,
+        usedDocumentContext:
+          Boolean(
+            request.attachments
+              ?.length
+          ),
+        verificationRecords:
+          internal
+            .verificationRecords
+            .map(
+              (record) => ({
+                ...record
+              })
+            ),
+        auditEvents:
+          internal.auditEvents
+            .map(
+              (event) => ({
+                ...event,
+                ...(event.detail
+                  ? {
+                      detail: {
+                        ...event.detail
+                      }
+                    }
+                  : {})
+              })
+            )
+      }
     };
   }
 }
