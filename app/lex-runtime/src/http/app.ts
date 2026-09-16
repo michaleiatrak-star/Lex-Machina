@@ -1835,18 +1835,20 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               .secureCaseUploadStore &&
             options.caseAccessService
           ) {
+            const securedCaseId =
+              caseId;
             const caseView =
               options.caseAccessService
                 .openCase(
                   context,
-                  caseId
+                  securedCaseId
                 );
             stored =
               await options
                 .caseAccessService
                 .withCaseDataKey(
                   context,
-                  caseId,
+                  securedCaseId,
                   "WRITE",
                   async (
                     caseDataKey
@@ -1854,7 +1856,8 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                     await options
                       .secureCaseUploadStore!
                       .saveUpload({
-                        caseId,
+                        caseId:
+                          securedCaseId,
                         filename,
                         mediaType,
                         data,
@@ -2043,18 +2046,20 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               .secureCaseUploadStore &&
             options.caseAccessService
           ) {
+            const securedCaseId =
+              caseId;
             const caseView =
               options.caseAccessService
                 .openCase(
                   context,
-                  caseId
+                  securedCaseId
                 );
             stored =
               await options
                 .caseAccessService
                 .withCaseDataKey(
                   context,
-                  caseId,
+                  securedCaseId,
                   "WRITE",
                   async (
                     caseDataKey
@@ -2062,7 +2067,8 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                     await options
                       .secureCaseUploadStore!
                       .saveUpload({
-                        caseId,
+                        caseId:
+                          securedCaseId,
                         filename,
                         mediaType,
                         data,
