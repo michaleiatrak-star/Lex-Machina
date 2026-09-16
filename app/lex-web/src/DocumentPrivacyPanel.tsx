@@ -258,6 +258,7 @@ export function DocumentPrivacyPanel({
     try {
       const result =
         await finalizeDocument(
+          caseId,
           review.documentId,
           directives
         );
@@ -300,6 +301,7 @@ export function DocumentPrivacyPanel({
         onAttachmentSelectionChange?.(
           next.length > 0
             ? {
+                caseId,
                 documentId:
                   finalized.documentId,
                 chunkIndices: next
@@ -679,6 +681,7 @@ export function DocumentPrivacyPanel({
                       );
                     setSelectedChunkIndices(all);
                     onAttachmentSelectionChange?.({
+                      caseId,
                       documentId:
                         finalized.documentId,
                       chunkIndices: all
