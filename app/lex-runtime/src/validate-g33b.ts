@@ -11,6 +11,7 @@ const source = JSON.parse(read("app/installer/windows-release-source.json"));
 const build = read("app/installer/build-windows-offline.ps1");
 const hooks = read("app/lex-desktop/src-tauri/windows/hooks.nsh");
 const sidecar = read("app/lex-desktop/src-tauri/src/runtime_sidecar.rs");
+const selftest = read("app/installer/windows-payload-selftest.ps1");
 const paddle = read("app/ocr/paddle_worker.py");
 const stanza = read("app/privacy/stanza_ner_worker.py");
 
@@ -21,7 +22,11 @@ const checks = {
     config.bundle?.windows?.webviewInstallMode?.type === "offlineInstaller",
   bundledRuntime:
     Array.isArray(config.bundle?.resources) &&
-    config.bundle.resources.includes("runtime/**/*"),
+    config.bundle.resources.some(
+      (resource: unknown) =>
+        typeof resource === "string" &&
+        /^runtime\\/\\*{1,2}(?:\\/\\*)?$/.test(resource)
+    ),
   privateNode:
     build.includes("Private Node") &&
     sidecar.includes('join("node")') &&
@@ -32,9 +37,11 @@ const checks = {
     sidecar.includes('join("python.exe")'),
   bundledModels:
     build.includes("prefetch-release-models.py") &&
-    sidecar.includes("PP-OCRv6_medium_det") &&
-    sidecar.includes("PP-OCRv6_medium_rec") &&
-    sidecar.includes('join("stanza")'),
+    selftest.includes("PP-OCRv6_medium_det") &&
+    selftest.includes("PP-OCRv6_medium_rec") &&
+    selftest.includes('models\\\\stanza') &&
+    sidecar.includes('join("models").join("paddle")') &&
+    sidecar.includes('join("models").join("stanza")'),
   bundledVisualCppRuntime:
     source.systemPrerequisites?.visualCppRuntime?.delivery ===
       "BUNDLED_OFFLINE_PREREQUISITE" &&
