@@ -7,6 +7,7 @@ import type {
   AuthKdfPolicy,
   AuthStatus,
   AuthSuccess,
+  AuthSessionView,
   AuthRecoverySuccess,
   PublicLocalUser,
   RecoveryCodeResult,
@@ -123,6 +124,11 @@ export interface AuthService {
     recoveryCode: string;
     newPassword: string;
   }): Promise<AuthRecoverySuccess>;
+  reauthenticate(
+    actor: AuthenticatedContext,
+    password: string,
+    purpose: string
+  ): Promise<AuthSessionView>;
   withSessionUserMasterKey<T>(
     sessionId: string,
     callback: (
@@ -1363,6 +1369,70 @@ implements AuthService {
       passwordSalt.fill(0);
       nextRecoveryKey.fill(0);
       nextRecoverySalt.fill(0);
+    }
+  }
+
+  async reauthenticate(
+    actor: AuthenticatedContext,
+    password: string,
+    purpose: string
+  ): Promise<AuthSessionView> {
+    const user =
+      this.store.getUserById(
+        actor.user.userId
+      );
+    if (
+      !user ||
+      user.status !== "ACTIVE"
+    ) {
+      throw new AuthError(
+        "SESSION_REVOKED",
+        401
+      );
+    }
+    const umk =
+      await this
+        .verifyPasswordForUser(
+          user,
+          password,
+          purpose
+        );
+    try {
+      const refreshed =
+        this.sessions
+          .markFullAuthentication(
+            actor.session
+              .sessionId
+          );
+      if (!refreshed) {
+        throw new AuthError(
+          "SESSION_REVOKED",
+          401
+        );
+      }
+      this.store
+        .recordSecurityEvent({
+          eventId:
+            "event_" +
+            randomBytes(16)
+              .toString("hex"),
+          userId:
+            user.userId,
+          eventType:
+            "reauth_success",
+          occurredAt:
+            refreshed
+              .lastFullAuthenticationAt,
+          result: "PASS",
+          metadata: {
+            purpose,
+            sessionId:
+              refreshed.sessionId
+          }
+        });
+      return refreshed;
+    } finally {
+      umk.fill(0);
     }
   }
 
