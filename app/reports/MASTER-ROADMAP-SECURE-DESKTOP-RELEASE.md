@@ -1,6 +1,6 @@
 # Lex Machina — Master Roadmap to Secure Desktop Release
 
-Status: **IN EXECUTION — G31C1 PASS; NEXT G34E/G34F**  
+Status: **IN EXECUTION — G34E + G34F1 PASS; NEXT G34H**  
 Date: 2026-09-16  
 Branch baseline: `feature/local-runtime`
 
@@ -27,6 +27,8 @@ Validated implementation baseline:
 - G35A — PASS
 - G35B — PASS
 - G31C1 — PASS
+- G34E — PASS
+- G34F1 — PASS (foundation only; full G34F still open)
 
 Validated code SHA:
 - `8c1a4c3c61b3e3b28c5c648adcfbf932c7dd7394`
@@ -35,12 +37,12 @@ Validated CI:
 - Lex Runtime Validation `35076077413` — success
 - F-138 `35076077538` — success
 
-Designs completed but not yet implemented:
+Designs completed but not yet fully implemented:
 - G31C2
 - G31D/G31E
 - G33A-G33D
-- G34E-G34H
-- detailed G34F transaction reauthorization protocol
+- full G34F integration with actual deanonymization/export
+- G34G/G34H
 
 Open independent capability:
 - G30 — Open Web Discovery
@@ -611,11 +613,18 @@ Session revoke during deanonymization:
 - remove/quarantine partial;
 - never mark downloadable.
 
-## G34E PASS
-Recovery/password lifecycle preserves UMK correctly.
+## G34E PASS — IMPLEMENTED / VALIDATED
+Recovery/password lifecycle preserves the same UMK and existing case CDKs.
 
-## G34F PASS
-No deanonymization can happen from merely being logged in.
+Validated code SHA: `f057a0bb22ba89c8a4eb9cb5f9dc774c8cde6524`.
+
+## G34F1 PASS — IMPLEMENTED / VALIDATED
+Transaction reauthorization foundation requires exact target binding, fresh password, one-use grant, expiry and automatic session revocation.
+
+Validated code SHA: `f057a0bb22ba89c8a4eb9cb5f9dc774c8cde6524`.
+
+## Full G34F — OPEN
+Do not mark full G34F PASS until G31D/G31E deanonymization/export requires and consumes the G34F grant with no bypass path.
 
 ---
 
@@ -655,6 +664,16 @@ Restart allows the same authorized user to log in and reopen an existing case wi
 ---
 
 # PHASE 5 — G34H FULL SENSITIVE CASE ENCRYPTION AT REST
+
+Execution split:
+
+- G34H1 — encrypted incoming/raw upload container;
+- G34H2 — encrypted ZIP extracted members + working-file hygiene;
+- G34H3 — encrypted protected/document persistence;
+- G34H4 — encrypted artifacts/audit-sensitive payloads;
+- G34H5 — explicit legacy plaintext migration and verification.
+
+
 
 Goal: Lex login cannot be bypassed by directly browsing the case directory.
 
