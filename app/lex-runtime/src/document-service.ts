@@ -29,6 +29,17 @@ export type PublicDocumentChunk = {
   text: string;
 };
 
+export type DocumentChunkSelection = {
+  documentId: string;
+  chunkIndices: number[];
+};
+
+export type ResolvedDocumentAttachment = {
+  documentId: string;
+  chunks: PublicDocumentChunk[];
+  totalChars: number;
+};
+
 export type PagePrivacyDirective =
   ManualPrivacyDirective & {
     page: number;
@@ -100,12 +111,16 @@ export interface DocumentService {
     documentId: string,
     directives: PagePrivacyDirective[]
   ): Promise<PublicDocumentIngestion>;
+  resolveProtectedChunks(
+    selection: DocumentChunkSelection
+  ): Promise<ResolvedDocumentAttachment>;
 }
 
 type PrivateDocumentRecord = {
   mediaType: SupportedDocumentMediaType;
   vault: PseudonymizationVault;
   source: DocumentIngestionResult;
+  protectedChunks?: PublicDocumentChunk[];
 };
 
 export class LocalPrivateDocumentService
@@ -283,6 +298,13 @@ implements DocumentService {
       (sum, page) => sum + page.text.length,
       0
     );
+    const publicChunks = chunks.map((chunk) => ({
+      index: chunk.index,
+      pageStart: chunk.pageStart,
+      pageEnd: chunk.pageEnd,
+      text: chunk.text
+    }));
+    record.protectedChunks = publicChunks;
 
     return {
       documentId,
@@ -294,11 +316,8 @@ implements DocumentService {
       blankPages: record.source.blankPages,
       sourceChars: record.source.sourceChars,
       pseudonymizedChars,
-      chunks: chunks.map((chunk) => ({
-        index: chunk.index,
-        pageStart: chunk.pageStart,
-        pageEnd: chunk.pageEnd,
-        text: chunk.text
+      chunks: publicChunks.map((chunk) => ({
+        ...chunk
       })),
       privacy: {
         findings,
@@ -336,6 +355,68 @@ implements DocumentService {
       review.documentId,
       []
     );
+  }
+
+  async resolveProtectedChunks(
+    selection: DocumentChunkSelection
+  ): Promise<ResolvedDocumentAttachment> {
+    const record =
+      this.documents.get(selection.documentId);
+    if (!record) {
+      throw new Error("UNKNOWN_LOCAL_DOCUMENT");
+    }
+    if (!record.protectedChunks) {
+      throw new Error("DOCUMENT_NOT_FINALIZED");
+    }
+
+    const unique = [
+      ...new Set(selection.chunkIndices)
+    ].sort((a, b) => a - b);
+
+    if (
+      unique.length === 0 ||
+      unique.length > 32 ||
+      unique.some(
+        (index) =>
+          !Number.isInteger(index) ||
+          index < 1
+      )
+    ) {
+      throw new Error(
+        "INVALID_DOCUMENT_CHUNK_SELECTION"
+      );
+    }
+
+    const byIndex = new Map(
+      record.protectedChunks.map(
+        (chunk) => [chunk.index, chunk]
+      )
+    );
+    const chunks = unique.map((index) => {
+      const chunk = byIndex.get(index);
+      if (!chunk) {
+        throw new Error(
+          "UNKNOWN_DOCUMENT_CHUNK"
+        );
+      }
+      return { ...chunk };
+    });
+
+    const totalChars = chunks.reduce(
+      (sum, chunk) => sum + chunk.text.length,
+      0
+    );
+    if (totalChars > 160_000) {
+      throw new Error(
+        "DOCUMENT_ATTACHMENT_CONTEXT_TOO_LARGE"
+      );
+    }
+
+    return {
+      documentId: selection.documentId,
+      chunks,
+      totalChars
+    };
   }
 
   deanonymize(
