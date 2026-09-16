@@ -41,10 +41,12 @@ The application MUST NOT duplicate or silently rewrite legal skill instructions.
 - **G31A — Case Storage Foundation:** production uploads are persisted locally under an opaque case id before OCR/review.
 - **G31B — Safe ZIP Intake Foundation:** ZIP archives are stored and extracted locally with traversal/symlink/bomb limits; archive members are never sent to a provider automatically.
 - **G32 — Protected Document Attachment Session:** the user explicitly selects finalized protected chunks; only those chunks can enter provider context, while raw pages and the re-identification vault remain local.
+- **G34A — Local Account Bootstrap:** zero-user first ADMIN, Argon2id password-derived UMK envelope and persistent local auth metadata.
+- **G34B — Login / Session Boundary:** authenticated private API, persistent failed-attempt backoff, idle/overall expiry, lock/logout and in-memory browser session handling.
 
 ## Current scope
 
-G0-G29 plus G27A/G28A and G32 are implemented on `feature/local-runtime`. G31A/G31B provide the storage/archive foundation: the UI creates a local case, PDF/image uploads are persisted under that case before OCR, and ZIP archives are safely extracted into the case directory. Heavy OCR/NER model weights are intentionally installed locally rather than downloaded in every CI run; CI verifies adapters, worker syntax, completeness contracts and fail-closed behavior.
+G0-G29 plus G27A/G28A, G31A/G31B, G32 and **G34A/G34B** are implemented on `feature/local-runtime`. G31A/G31B provide the storage/archive foundation: after authentication the current workbench creates a local case, PDF/image uploads are persisted under that case before OCR, and ZIP archives are safely extracted into the case directory. G34A/G34B add the first local ADMIN bootstrap, Argon2id-encrypted UMK envelope, authenticated private API, persistent login backoff and expiring in-memory sessions. Heavy OCR/NER model weights are intentionally installed locally rather than downloaded in every CI run; CI verifies adapters, worker syntax, completeness contracts and fail-closed behavior.
 
 Full G31 is **not** claimed PASS: G31C now includes an encrypted file-backed reversible privacy vault plus typed authoring AST/token aliases; G31D deterministic DOCX/deanonymization/download and G31E deterministic ODT/deanonymization/download remain open. G30 open-web discovery also remains open.
 
@@ -53,9 +55,19 @@ Full G31 is **not** claimed PASS: G31C now includes an encrypted file-backed rev
 
 ## Security architecture before installer
 
-**G34 — Local Identity / Login / ACL / Vault is designed, not implemented.**
+**G34A/G34B are implemented and validated; G34C-G34H remain open.**
 
-The design adds:
+Implemented now:
+- zero-user first ADMIN bootstrap;
+- Argon2id + encrypted User Master Key envelope;
+- local SQLite auth metadata;
+- persistent failed-login backoff;
+- 15-minute idle / 8-hour overall session enforcement;
+- lock/logout/authEpoch revocation;
+- private API authentication;
+- React authentication shell with bearer held only in memory.
+
+Remaining G34 design includes:
 - local ADMIN/USER accounts;
 - Argon2id password-derived account unlocking;
 - random per-user master keys;
@@ -81,6 +93,18 @@ The consolidated implementation order from the current validated baseline throug
 
 - `app/reports/MASTER-ROADMAP-SECURE-DESKTOP-RELEASE.md`
 
-The immediate next implementation batch is **Batch A / G34A-G34B**: local auth persistence, Argon2id, first ADMIN bootstrap, session manager, persistent throttling, authentication middleware and login/lock/logout UI.
+**Batch A / G34A-G34B is complete and validated.** The next implementation batch is **Batch B / G34C-G34D**: case ownership/ACL, independent case data keys, per-user key envelopes and authenticated case list/open access.
 
 G30 remains a parallel capability and does not block the secure local-document/installer critical path unless explicitly included in the first desktop release scope.
+
+
+### Build 0030 validation
+
+- validated code SHA: `b3783309189a6d043fc077e52c736e16b64c10d5`;
+- Lex Runtime Validation `35069444351`: success;
+- F-138 `35069444331`: success;
+- G34A/G34B deterministic validation: PASS;
+- web tests/build/bundle safety: PASS;
+- G17/G19/G20/G22 live probes: PASS.
+
+See `app/reports/BUILD-0030-G34AB.md`.
