@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import os
 from pathlib import Path
 
 import stanza
@@ -26,10 +27,27 @@ def main() -> None:
     args = parser.parse_args()
 
     text = Path(args.input).read_text(encoding="utf-8")
+    resources_raw = os.environ.get("STANZA_RESOURCES_DIR", "").strip()
+    if not resources_raw:
+        raise RuntimeError(
+            "STANZA_RESOURCES_DIR is required; network model downloads are disabled"
+        )
+    resources = Path(resources_raw).resolve()
+    if not (resources / "resources.json").is_file():
+        raise RuntimeError(
+            f"Stanza resources.json missing: {resources / 'resources.json'}"
+        )
+    if not (resources / "pl").is_dir():
+        raise RuntimeError(
+            f"Polish Stanza models missing: {resources / 'pl'}"
+        )
+
     pipeline = stanza.Pipeline(
         lang="pl",
+        dir=str(resources),
         processors="tokenize,ner",
-        download_method=stanza.DownloadMethod.REUSE_RESOURCES,
+        download_method=None,
+        use_gpu=False,
         verbose=False,
     )
     doc = pipeline(text)
