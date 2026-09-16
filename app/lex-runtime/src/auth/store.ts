@@ -410,6 +410,67 @@ export class LocalAuthStore {
     );
   }
 
+  getUserCaseRelationCounts(
+    userId: string
+  ): {
+    createdCases: number;
+    accessRows: number;
+    grantedRows: number;
+  } {
+    const row = this.db.prepare(`
+      SELECT
+        (
+          SELECT COUNT(*)
+          FROM cases
+          WHERE created_by_user_id = ?
+        ) AS created_cases,
+        (
+          SELECT COUNT(*)
+          FROM case_access
+          WHERE user_id = ?
+        ) AS access_rows,
+        (
+          SELECT COUNT(*)
+          FROM case_access
+          WHERE granted_by_user_id = ?
+        ) AS granted_rows
+    `).get(
+      userId,
+      userId,
+      userId
+    ) as
+      | Record<string, unknown>
+      | undefined;
+
+    return {
+      createdCases: numberValue(
+        row?.created_cases,
+        "created_cases"
+      ),
+      accessRows: numberValue(
+        row?.access_rows,
+        "access_rows"
+      ),
+      grantedRows: numberValue(
+        row?.granted_rows,
+        "granted_rows"
+      )
+    };
+  }
+
+  deleteUser(
+    userId: string
+  ): boolean {
+    const result =
+      this.db.prepare(`
+        DELETE FROM users
+        WHERE user_id = ?
+      `).run(userId);
+    return Number(
+      result.changes
+    ) === 1;
+  }
+
   private insertUser(
     user: StoredLocalUser
   ): void {
