@@ -135,20 +135,18 @@ impl RuntimeBridge {
     }
 
     pub fn ensure_managed_identity(&self) -> Result<bool, String> {
-        let entry = Entry::new(
+        let entry = match Entry::new(
             MANAGED_KEYRING_SERVICE,
             MANAGED_LOGIN,
-        )
-        .map_err(|error| format!("DESKTOP_KEYRING_OPEN_FAILED:{error}"))?;
+        ) {
+            Ok(entry) => entry,
+            Err(_) => return Ok(false),
+        };
 
         let stored_password = match entry.get_password() {
             Ok(password) => Some(password),
             Err(KeyringError::NoEntry) => None,
-            Err(error) => {
-                return Err(format!(
-                    "DESKTOP_KEYRING_READ_FAILED:{error}"
-                ));
-            }
+            Err(_) => return Ok(false),
         };
 
         let status_response = self.internal_json_request(
@@ -174,12 +172,14 @@ impl RuntimeBridge {
         let mut password = stored_password;
         if requires_bootstrap {
             if password.is_none() {
-                let generated = random_secret()?;
-                entry
+                let mut generated = random_secret()?;
+                if entry
                     .set_password(&generated)
-                    .map_err(|error| format!(
-                        "DESKTOP_KEYRING_WRITE_FAILED:{error}"
-                    ))?;
+                    .is_err()
+                {
+                    unsafe_zero_string(&mut generated);
+                    return Ok(false);
+                }
                 password = Some(generated);
             }
 
@@ -188,10 +188,8 @@ impl RuntimeBridge {
                 .ok_or_else(|| "DESKTOP_MANAGED_PASSWORD_MISSING".to_string())?;
             let response = self.internal_json_request(
                 "POST",
-                "/api/auth/bootstrap",
+                "/api/auth/bootstrap-managed",
                 Some(json!({
-                    "loginName": MANAGED_LOGIN,
-                    "displayName": "Administrator lokalny",
                     "password": secret
                 })),
             )?;
@@ -357,6 +355,12 @@ impl RuntimeBridge {
                 &path,
                 request.body(),
             )?;
+        let completes_managed_password_setup =
+            managed_password_setup_from_request(
+                &method,
+                &path,
+                request.body(),
+            )?;
         let (address, bootstrap_token, session_token, managed_password) = {
             let state = self
                 .state
@@ -397,6 +401,12 @@ impl RuntimeBridge {
         let status = proxied.status;
         if status == StatusCode::UNAUTHORIZED {
             self.clear_session();
+        }
+        if (
+            completes_managed_password_setup
+                && status.is_success()
+        ) {
+            self.clear_managed_identity_secret()?;
         }
 
         if session_producing_route(&path) && status.is_success() {
@@ -463,6 +473,35 @@ impl RuntimeBridge {
                 unsafe_zero_string(&mut token);
             }
         }
+    }
+
+    fn clear_managed_identity_secret(&self) -> Result<(), String> {
+        let entry = Entry::new(
+            MANAGED_KEYRING_SERVICE,
+            MANAGED_LOGIN,
+        )
+        .map_err(|error| format!(
+            "DESKTOP_KEYRING_OPEN_FAILED:{error}"
+        ))?;
+        match entry.delete_credential() {
+            Ok(()) | Err(KeyringError::NoEntry) => {}
+            Err(error) => {
+                return Err(format!(
+                    "DESKTOP_KEYRING_DELETE_FAILED:{error}"
+                ));
+            }
+        }
+
+        let mut state = self
+            .state
+            .lock()
+            .map_err(|_| "DESKTOP_STATE_POISONED".to_string())?;
+        if let Some(mut password) =
+            state.managed_password.take()
+        {
+            unsafe_zero_string(&mut password);
+        }
+        Ok(())
     }
 
     fn replace_managed_password(&self, password: String) {
@@ -598,6 +637,29 @@ fn random_secret() -> Result<String, String> {
     Ok(secret)
 }
 
+fn managed_password_setup_from_request(
+    method: &str,
+    path: &str,
+    body: &[u8],
+) -> Result<bool, String> {
+    if method != "POST"
+        || path != "/api/auth/password"
+    {
+        return Ok(false);
+    }
+    let value: Value = serde_json::from_slice(body)
+        .map_err(|_| "DESKTOP_MANAGED_REQUEST_INVALID".to_string())?;
+    let object = value
+        .as_object()
+        .ok_or_else(|| "DESKTOP_MANAGED_REQUEST_INVALID".to_string())?;
+    Ok(
+        object
+            .get("currentPassword")
+            .and_then(Value::as_str)
+            == Some(NATIVE_REAUTH_SENTINEL)
+    )
+}
+
 fn inject_managed_password(
     path: &str,
     request: &mut Request<Vec<u8>>,
@@ -605,6 +667,7 @@ fn inject_managed_password(
 ) -> Result<(), String> {
     if path != "/api/auth/login"
         && path != "/api/deanonymization/reauthorize"
+        && path != "/api/auth/password"
     {
         return Ok(());
     }
@@ -613,8 +676,13 @@ fn inject_managed_password(
     let object = value
         .as_object_mut()
         .ok_or_else(|| "DESKTOP_MANAGED_REQUEST_INVALID".to_string())?;
+    let field = if path == "/api/auth/password" {
+        "currentPassword"
+    } else {
+        "password"
+    };
     let password = object
-        .get("password")
+        .get(field)
         .and_then(Value::as_str)
         .unwrap_or("");
 
@@ -633,7 +701,7 @@ fn inject_managed_password(
     }
 
     object.insert(
-        "password".to_string(),
+        field.to_string(),
         Value::String(managed_password.to_string()),
     );
     *request.body_mut() = serde_json::to_vec(&value)
@@ -675,6 +743,7 @@ fn requires_session(path: &str) -> bool {
         "/health"
             | "/api/auth/status"
             | "/api/auth/bootstrap"
+            | "/api/auth/bootstrap-managed"
             | "/api/auth/login"
             | "/api/auth/recover"
     )
@@ -684,6 +753,7 @@ fn session_producing_route(path: &str) -> bool {
     matches!(
         path,
         "/api/auth/bootstrap"
+            | "/api/auth/bootstrap-managed"
             | "/api/auth/login"
             | "/api/auth/recover"
             | "/api/auth/password"
