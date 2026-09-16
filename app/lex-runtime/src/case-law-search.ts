@@ -284,15 +284,14 @@ async function fetchCbosa(
     redirect <= MAX_CBOSA_REDIRECTS;
     redirect += 1
   ) {
-    const response =
-      await fetcher(url, {
-        ...init,
+    const {
+      body: _initBody,
+      ...initWithoutBody
+    } = init;
+    const requestInit:
+      RequestInit = {
+        ...initWithoutBody,
         method,
-        body:
-          method === "GET" ||
-          method === "HEAD"
-            ? undefined
-            : body,
         redirect: "manual",
         signal:
           AbortSignal.timeout(
@@ -311,7 +310,22 @@ async function fetchCbosa(
               }
             : {})
         }
-      });
+      };
+
+    if (
+      method !== "GET" &&
+      method !== "HEAD" &&
+      body !== undefined &&
+      body !== null
+    ) {
+      requestInit.body = body;
+    }
+
+    const response =
+      await fetcher(
+        url,
+        requestInit
+      );
 
     jar = mergeCookies(
       jar,
