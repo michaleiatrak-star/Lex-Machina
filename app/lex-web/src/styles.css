@@ -1482,3 +1482,94 @@ textarea:focus {
   gap: 8px;
   flex-wrap: wrap;
 }
+
+
+.case-collaboration-panel {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid rgba(198, 208, 197, 0.82);
+  border-radius: 18px;
+  background: #fbfcf9;
+}
+
+.case-collaboration-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.case-collaboration-add {
+  display: grid;
+  grid-template-columns: minmax(220px, 2fr) minmax(150px, 1fr) auto auto;
+  gap: 10px;
+  align-items: end;
+  margin-top: 14px;
+}
+
+.case-collaboration-add label {
+  display: grid;
+  gap: 6px;
+}
+
+.case-reidentify-toggle {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+}
+
+.case-role-legend {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  color: #68736a;
+  font-size: 12px;
+}
+
+.case-collaborator-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.case-collaborator-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid rgba(198, 208, 197, 0.74);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.case-collaborator-person {
+  display: grid;
+  gap: 2px;
+}
+
+.case-collaborator-person span,
+.case-collaborator-person small {
+  color: #68736a;
+}
+
+.case-collaborator-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .case-collaboration-add {
+    grid-template-columns: 1fr;
+  }
+
+  .case-collaboration-head,
+  .case-collaborator-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
