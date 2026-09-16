@@ -45,6 +45,11 @@ import {
   AuthError,
   type AuthService
 } from "../auth/service.js";
+import {
+  SupportError,
+  type LocalSupportService,
+  type SupportSessionView
+} from "../support-service.js";
 import type {
   AuthenticatedContext,
   CaseRole
@@ -337,6 +342,16 @@ export type LexHttpAppOptions = {
     | "readExtractedPayload"
   >;
   authService?: AuthService;
+  supportService?: Pick<
+    LocalSupportService,
+    | "status"
+    | "issueChallenge"
+    | "activate"
+    | "authenticateAuthorization"
+    | "assertCapability"
+    | "recordOperation"
+    | "deactivateAuthorization"
+  >;
   sharedTemplateStore?: Pick<
     LocalSharedTemplateStore,
     | "saveTemplate"
@@ -426,6 +441,19 @@ function sendReauthorizationError(
   return true;
 }
 
+function sendSupportError(
+  res: Response,
+  error: unknown
+): boolean {
+  if (!(error instanceof SupportError)) {
+    return false;
+  }
+  res.status(error.httpStatus).json({
+    error: error.code
+  });
+  return true;
+}
+
 function sendAuthError(
   res: Response,
   error: unknown
@@ -470,6 +498,21 @@ function responseAuthContext(
   if (!context) {
     throw new Error(
       "AUTH_CONTEXT_MISSING"
+    );
+  }
+  return context;
+}
+
+function responseSupportContext(
+  res: Response
+): SupportSessionView {
+  const context =
+    res.locals.lexSupport as
+      | SupportSessionView
+      | undefined;
+  if (!context) {
+    throw new Error(
+      "SUPPORT_CONTEXT_MISSING"
     );
   }
   return context;
@@ -951,6 +994,101 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     }
   );
 
+  if (options.supportService) {
+    app.use(
+      "/api/support",
+      (req, res, next) => {
+        try {
+          res.locals.lexSupport =
+            options.supportService!
+              .authenticateAuthorization(
+                req.get(
+                  "x-lex-service-authorization"
+                )
+              );
+          next();
+        } catch (error) {
+          if (
+            !sendSupportError(
+              res,
+              error
+            )
+          ) {
+            res.status(401).json({
+              error:
+                "SUPPORT_SESSION_REQUIRED"
+            });
+          }
+        }
+      }
+    );
+
+    app.get(
+      "/api/support/me",
+      (_req, res) => {
+        res.json({
+          session:
+            responseSupportContext(res)
+        });
+      }
+    );
+
+    app.get(
+      "/api/support/diagnostics",
+      (_req, res) => {
+        const session =
+          responseSupportContext(res);
+        try {
+          options.supportService!
+            .assertCapability(
+              session,
+              "DIAGNOSTICS"
+            );
+          options.supportService!
+            .recordOperation(
+              session,
+              "diagnostics_read"
+            );
+          res.json({
+            service:
+              "lex-machina-runtime",
+            localOnly: true,
+            role: "SERVICE",
+            installationId:
+              session.installationId,
+            expiresAt:
+              session.expiresAt
+          });
+        } catch (error) {
+          if (
+            !sendSupportError(
+              res,
+              error
+            )
+          ) {
+            res.status(500).json({
+              error:
+                "SUPPORT_DIAGNOSTICS_FAILED"
+            });
+          }
+        }
+      }
+    );
+
+    app.post(
+      "/api/support/logout",
+      (req, res) => {
+        options.supportService!
+          .deactivateAuthorization(
+            req.get(
+              "x-lex-service-authorization"
+            )
+          );
+        res.status(204).end();
+      }
+    );
+  }
+
   if (options.authService) {
     app.use(
       "/api",
@@ -1097,6 +1235,106 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       }
     );
   }
+
+  app.get(
+    "/api/admin/support/status",
+    (_req, res) => {
+      if (!options.supportService) {
+        res.status(503).json({
+          error:
+            "SUPPORT_SERVICE_UNAVAILABLE"
+        });
+        return;
+      }
+      const actor =
+        responseAuthContext(res);
+      if (
+        actor.user.appRole !==
+          "ADMIN"
+      ) {
+        res.status(403).json({
+          error:
+            "SUPPORT_ADMIN_REQUIRED"
+        });
+        return;
+      }
+      res.json(
+        options.supportService
+          .status()
+      );
+    }
+  );
+
+  app.post(
+    "/api/admin/support/challenge",
+    (_req, res) => {
+      if (!options.supportService) {
+        res.status(503).json({
+          error:
+            "SUPPORT_SERVICE_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.status(201).json(
+          options.supportService
+            .issueChallenge(
+              responseAuthContext(
+                res
+              )
+            )
+        );
+      } catch (error) {
+        if (
+          !sendSupportError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "SUPPORT_CHALLENGE_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/admin/support/activate",
+    (req, res) => {
+      if (!options.supportService) {
+        res.status(503).json({
+          error:
+            "SUPPORT_SERVICE_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.status(201).json(
+          options.supportService
+            .activate(
+              responseAuthContext(
+                res
+              ),
+              req.body
+            )
+        );
+      } catch (error) {
+        if (
+          !sendSupportError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "SUPPORT_ACTIVATION_FAILED"
+          });
+        }
+      }
+    }
+  );
 
   app.get(
     "/api/admin/users",
