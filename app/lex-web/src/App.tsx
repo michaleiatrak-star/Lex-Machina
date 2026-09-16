@@ -11,6 +11,7 @@ import {
   getProviderStatus,
   getRoutes,
   validateRoute,
+  type DocumentAttachmentSelection,
   type EvidenceItem,
   type ModelDescriptor,
   type ProviderId,
@@ -175,6 +176,8 @@ export default function App() {
   const [execution, setExecution] =
     useState<SessionExecutionResponse | null>(null);
   const [executionError, setExecutionError] = useState("");
+  const [documentAttachments, setDocumentAttachments] =
+    useState<DocumentAttachmentSelection[]>([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -294,7 +297,10 @@ export default function App() {
         provider,
         model,
         primarySkill: route,
-        mode: "PRAWNIK"
+        mode: "PRAWNIK",
+        ...(documentAttachments.length > 0
+          ? { attachments: documentAttachments }
+          : {})
       });
       setExecution(result);
     } catch (error) {
@@ -305,7 +311,10 @@ export default function App() {
           ? "Brak lokalnego klucza API dla wybranego dostawcy."
           : message === "PROVIDER_EXECUTION_FAILED"
             ? "Provider odrzucił lub przerwał wykonanie."
-            : "Nie udało się wykonać sesji."
+            : message ===
+                "DOCUMENT_ATTACHMENT_RESOLUTION_FAILED"
+              ? "Nie udało się bezpiecznie dołączyć wybranych chunków dokumentu."
+              : "Nie udało się wykonać sesji."
       );
     } finally {
       setExecuting(false);
@@ -366,7 +375,15 @@ export default function App() {
           </div>
         )}
 
-        <DocumentPrivacyPanel />
+        <DocumentPrivacyPanel
+          onAttachmentSelectionChange={(selection) => {
+            setDocumentAttachments(
+              selection ? [selection] : []
+            );
+            setExecution(null);
+            setExecutionError("");
+          }}
+        />
 
         <section className="config-grid">
           <article className="config-card">
