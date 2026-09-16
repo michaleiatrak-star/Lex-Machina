@@ -5,7 +5,9 @@ export type PiiKind =
   | "IBAN"
   | "EMAIL"
   | "PHONE"
-  | "PERSON";
+  | "PERSON"
+  | "ADDRESS"
+  | "CUSTOM";
 
 export type PiiSpan = {
   start: number;
@@ -13,6 +15,21 @@ export type PiiSpan = {
   kind: PiiKind;
   value: string;
   confidence?: number;
+  source?: "AUTO" | "USER";
+  label?: string;
+};
+
+export type PrivacyDirectiveAction =
+  | "PSEUDONYMIZE"
+  | "KEEP"
+  | "LABEL";
+
+export type ManualPrivacyDirective = {
+  start: number;
+  end: number;
+  action: PrivacyDirectiveAction;
+  kind?: PiiKind;
+  label?: string;
 };
 
 export interface NamedEntityRecognizer {
@@ -24,11 +41,24 @@ export type PseudonymizationFinding = {
   kind: PiiKind;
   start: number;
   end: number;
+  source: "AUTO" | "USER";
+  label?: string;
+};
+
+export type PrivacyAnnotation = {
+  start: number;
+  end: number;
+  label: string;
 };
 
 export type PseudonymizationResult = {
   text: string;
   findings: PseudonymizationFinding[];
+  annotations: PrivacyAnnotation[];
+  keptRanges: Array<{
+    start: number;
+    end: number;
+  }>;
   counts: Partial<Record<PiiKind, number>>;
 };
 
@@ -82,7 +112,8 @@ function collectRegex(
       end: start + value.length,
       kind,
       value,
-      confidence: 1
+      confidence: 1,
+      source: "AUTO"
     });
   }
   return spans;
@@ -95,12 +126,23 @@ const PRIORITY: Record<PiiKind, number> = {
   IBAN: 85,
   EMAIL: 80,
   PHONE: 70,
-  PERSON: 60
+  PERSON: 60,
+  ADDRESS: 55,
+  CUSTOM: 50
 };
+
+function overlaps(
+  a: { start: number; end: number },
+  b: { start: number; end: number }
+): boolean {
+  return a.start < b.end && a.end > b.start;
+}
 
 function nonOverlapping(spans: PiiSpan[]): PiiSpan[] {
   const sorted = [...spans].sort((a, b) =>
     a.start - b.start ||
+    (a.source === "USER" ? -1 : 1) -
+      (b.source === "USER" ? -1 : 1) ||
     PRIORITY[b.kind] - PRIORITY[a.kind] ||
     (b.end - b.start) - (a.end - a.start)
   );
@@ -113,15 +155,50 @@ function nonOverlapping(spans: PiiSpan[]): PiiSpan[] {
     ) {
       continue;
     }
-    const overlaps = accepted.some(
-      (current) =>
-        candidate.start < current.end &&
-        candidate.end > current.start
-    );
-    if (!overlaps) accepted.push(candidate);
+    if (!accepted.some((current) => overlaps(candidate, current))) {
+      accepted.push(candidate);
+    }
   }
 
   return accepted.sort((a, b) => a.start - b.start);
+}
+
+function normalizeDirectives(
+  text: string,
+  directives: ManualPrivacyDirective[]
+): ManualPrivacyDirective[] {
+  const normalized = directives.map((directive) => {
+    if (
+      !Number.isInteger(directive.start) ||
+      !Number.isInteger(directive.end) ||
+      directive.start < 0 ||
+      directive.end <= directive.start ||
+      directive.end > text.length
+    ) {
+      throw new Error("INVALID_PRIVACY_DIRECTIVE_RANGE");
+    }
+
+    const label = directive.label?.trim();
+    if (
+      directive.action === "LABEL" &&
+      (!label || label.length > 120)
+    ) {
+      throw new Error("INVALID_PRIVACY_DIRECTIVE_LABEL");
+    }
+
+    return {
+      ...directive,
+      ...(label ? { label } : {})
+    };
+  }).sort((a, b) => a.start - b.start || a.end - b.end);
+
+  for (let index = 1; index < normalized.length; index += 1) {
+    if (overlaps(normalized[index - 1]!, normalized[index]!)) {
+      throw new Error("OVERLAPPING_PRIVACY_DIRECTIVES");
+    }
+  }
+
+  return normalized;
 }
 
 export class PseudonymizationVault {
@@ -170,9 +247,35 @@ export class LocalPolishPseudonymizer {
   ) {}
 
   async pseudonymize(
-    text: string
+    text: string,
+    directives: ManualPrivacyDirective[] = []
   ): Promise<PseudonymizationResult> {
-    const spans: PiiSpan[] = [
+    const manual = normalizeDirectives(text, directives);
+    const keep = manual.filter(
+      (item) => item.action === "KEEP"
+    );
+    const annotations: PrivacyAnnotation[] = manual
+      .filter((item) => item.action === "LABEL")
+      .map((item) => ({
+        start: item.start,
+        end: item.end,
+        label: item.label!
+      }));
+
+    const manualPseudonyms: PiiSpan[] = manual
+      .filter(
+        (item) => item.action === "PSEUDONYMIZE"
+      )
+      .map((item) => ({
+        start: item.start,
+        end: item.end,
+        kind: item.kind ?? "CUSTOM",
+        value: text.slice(item.start, item.end),
+        source: "USER" as const,
+        ...(item.label ? { label: item.label } : {})
+      }));
+
+    const autoSpans: PiiSpan[] = [
       ...collectRegex(
         text,
         /\b\d{11}\b/g,
@@ -215,12 +318,26 @@ export class LocalPolishPseudonymizer {
           span.kind === "PERSON" &&
           text.slice(span.start, span.end) === span.value
         ) {
-          spans.push(span);
+          autoSpans.push({
+            ...span,
+            source: "AUTO"
+          });
         }
       }
     }
 
-    const findings = nonOverlapping(spans);
+    const autoAllowed = autoSpans.filter(
+      (span) =>
+        !keep.some((item) => overlaps(span, item)) &&
+        !manualPseudonyms.some(
+          (item) => overlaps(span, item)
+        )
+    );
+
+    const findings = nonOverlapping([
+      ...manualPseudonyms,
+      ...autoAllowed
+    ]);
     let output = text;
     const publicFindings: PseudonymizationFinding[] = [];
 
@@ -242,7 +359,11 @@ export class LocalPolishPseudonymizer {
         token,
         kind: finding.kind,
         start: finding.start,
-        end: finding.end
+        end: finding.end,
+        source: finding.source ?? "AUTO",
+        ...(finding.label
+          ? { label: finding.label }
+          : {})
       });
     }
 
@@ -256,6 +377,11 @@ export class LocalPolishPseudonymizer {
     return {
       text: output,
       findings: publicFindings,
+      annotations,
+      keptRanges: keep.map((item) => ({
+        start: item.start,
+        end: item.end
+      })),
       counts
     };
   }
