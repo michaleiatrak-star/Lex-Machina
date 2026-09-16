@@ -26,6 +26,15 @@ import {
   CaseAccessError,
   LocalCaseAccessService
 } from "../src/case-access.js";
+import {
+  SecureCaseUploadStore
+} from "../src/case-secure-store.js";
+import {
+  EncryptedPrivacyVaultStore
+} from "../src/privacy/vault-store.js";
+import {
+  CaseSecurityRotationCoordinator
+} from "../src/case-security-rotation.js";
 
 const roots: string[] = [];
 
@@ -74,6 +83,70 @@ function fixture() {
     store,
     auth,
     files,
+    cases
+  };
+}
+
+function secureFixture() {
+  const root = fs.mkdtempSync(
+    path.join(
+      os.tmpdir(),
+      "lex-case-collab-"
+    )
+  );
+  roots.push(root);
+  const store =
+    new LocalAuthStore({
+      rootDir: root
+    });
+  const auth =
+    new LocalAuthService(
+      store,
+      {
+        sessionManager:
+          new AuthSessionManager({
+            scheduleExpiryTimers:
+              false
+          }),
+        kdf: {
+          memoryKiB: 1024,
+          iterations: 1,
+          parallelism: 1,
+          keyLength: 32,
+          version: 1
+        }
+      }
+    );
+  const files =
+    new LocalCaseFileStore({
+      rootDir: root
+    });
+  const secureUploads =
+    new SecureCaseUploadStore({
+      rootDir: root
+    });
+  const vault =
+    new EncryptedPrivacyVaultStore({
+      rootDir: root
+    });
+  const rotation =
+    new CaseSecurityRotationCoordinator(
+      vault,
+      secureUploads
+    );
+  const cases =
+    new LocalCaseAccessService(
+      store,
+      auth,
+      files,
+      rotation
+    );
+  return {
+    root,
+    store,
+    auth,
+    files,
+    secureUploads,
     cases
   };
 }
@@ -212,6 +285,285 @@ describe("G34C/G34D case access", () => {
     ).toThrow(
       "CASE_ACCESS_DENIED"
     );
+
+    current.auth.close();
+  });
+
+  it("shares encrypted case documents across users and removes access after rekey", async () => {
+    const current =
+      secureFixture();
+    const owner =
+      await current.auth.bootstrap({
+        loginName:
+          "collab-owner",
+        displayName:
+          "Collab Owner",
+        password:
+          "Collab owner bezpieczne haslo 2026"
+      });
+    const ownerContext =
+      context(owner);
+    const colleague =
+      await current.auth.createUser(
+        ownerContext,
+        {
+          loginName:
+            "collab-editor",
+          displayName:
+            "Collab Editor",
+          password:
+            "Collab editor bezpieczne haslo 2026"
+        }
+      );
+    const localCase =
+      await current.cases.createCase(
+        ownerContext,
+        "Sprawa zespolowa"
+      );
+
+    expect(
+      current.cases
+        .listAccessCandidates(
+          ownerContext,
+          localCase.caseId
+        )
+        .map(
+          (user) =>
+            user.userId
+        )
+    ).toContain(
+      colleague.userId
+    );
+
+    await current.cases
+      .withCaseDataKey(
+        ownerContext,
+        localCase.caseId,
+        "WRITE",
+        async (
+          caseDataKey
+        ) =>
+          await current
+            .secureUploads
+            .saveUpload({
+              caseId:
+                localCase.caseId,
+              filename:
+                "owner-note.txt",
+              mediaType:
+                "text/plain",
+              data:
+                Buffer.from(
+                  "owner document",
+                  "utf8"
+                ),
+              caseDataKey,
+              keyVersion:
+                localCase.keyVersion
+            })
+      );
+
+    await current.cases
+      .grantAccess(
+        ownerContext,
+        localCase.caseId,
+        {
+          userId:
+            colleague.userId,
+          role: "VIEWER",
+          canReidentify:
+            false
+        }
+      );
+
+    expect(
+      current.cases
+        .listAccessCandidates(
+          ownerContext,
+          localCase.caseId
+        )
+        .map(
+          (user) =>
+            user.userId
+        )
+    ).not.toContain(
+      colleague.userId
+    );
+
+    const colleagueLogin =
+      await current.auth.login({
+        loginName:
+          "collab-editor",
+        password:
+          "Collab editor bezpieczne haslo 2026"
+      });
+    const colleagueContext =
+      context(
+        colleagueLogin
+      );
+    const viewerCase =
+      current.cases.openCase(
+        colleagueContext,
+        localCase.caseId
+      );
+    expect(
+      viewerCase.role
+    ).toBe("VIEWER");
+
+    const viewerUploads =
+      await current.cases
+        .withCaseDataKey(
+          colleagueContext,
+          localCase.caseId,
+          "READ",
+          async (
+            caseDataKey
+          ) =>
+            await current
+              .secureUploads
+              .listUploads({
+                caseId:
+                  localCase.caseId,
+                caseDataKey,
+                keyVersion:
+                  viewerCase
+                    .keyVersion
+              })
+        );
+    expect(
+      viewerUploads.map(
+        (item) =>
+          item.filename
+      )
+    ).toEqual([
+      "owner-note.txt"
+    ]);
+
+    await expect(
+      current.cases
+        .withCaseDataKey(
+          colleagueContext,
+          localCase.caseId,
+          "WRITE",
+          async () =>
+            undefined
+        )
+    ).rejects.toThrow(
+      "CASE_ACCESS_DENIED"
+    );
+
+    await current.cases
+      .grantAccess(
+        ownerContext,
+        localCase.caseId,
+        {
+          userId:
+            colleague.userId,
+          role: "EDITOR",
+          canReidentify:
+            false
+        }
+      );
+    const editorCase =
+      current.cases.openCase(
+        colleagueContext,
+        localCase.caseId
+      );
+    expect(
+      editorCase.role
+    ).toBe("EDITOR");
+
+    await current.cases
+      .withCaseDataKey(
+        colleagueContext,
+        localCase.caseId,
+        "WRITE",
+        async (
+          caseDataKey
+        ) =>
+          await current
+            .secureUploads
+            .saveUpload({
+              caseId:
+                localCase.caseId,
+              filename:
+                "editor-note.txt",
+              mediaType:
+                "text/plain",
+              data:
+                Buffer.from(
+                  "editor document",
+                  "utf8"
+                ),
+              caseDataKey,
+              keyVersion:
+                editorCase
+                  .keyVersion
+            })
+      );
+
+    const revoked =
+      await current.cases
+        .revokeAccess(
+          ownerContext,
+          localCase.caseId,
+          colleague.userId
+        );
+    expect(
+      revoked.keyVersion
+    ).toBe(2);
+
+    await expect(
+      current.cases
+        .withCaseDataKey(
+          colleagueContext,
+          localCase.caseId,
+          "READ",
+          async () =>
+            undefined
+        )
+    ).rejects.toThrow(
+      "CASE_ACCESS_DENIED"
+    );
+
+    const ownerAfter =
+      current.cases.openCase(
+        ownerContext,
+        localCase.caseId
+      );
+    expect(
+      ownerAfter.keyVersion
+    ).toBe(2);
+
+    const ownerUploads =
+      await current.cases
+        .withCaseDataKey(
+          ownerContext,
+          localCase.caseId,
+          "READ",
+          async (
+            caseDataKey
+          ) =>
+            await current
+              .secureUploads
+              .listUploads({
+                caseId:
+                  localCase.caseId,
+                caseDataKey,
+                keyVersion:
+                  ownerAfter
+                    .keyVersion
+              })
+        );
+    expect(
+      ownerUploads.map(
+        (item) =>
+          item.filename
+      ).sort()
+    ).toEqual([
+      "editor-note.txt",
+      "owner-note.txt"
+    ]);
 
     current.auth.close();
   });
