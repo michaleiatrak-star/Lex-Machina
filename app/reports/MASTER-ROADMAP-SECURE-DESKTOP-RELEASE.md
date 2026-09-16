@@ -479,6 +479,65 @@ After G31C2/G31D/G31E, selected `templateId` may supply a locally validated styl
 
 ---
 
+# PHASE 2C — G36 LEGAL SKILL RUNTIME COMPLETENESS
+
+Goal: the desktop runtime must not merely detect legal SKILL.md files; it must actually be able to read the canonical local skill tree on demand and prove that mandatory core resources were read.
+
+Current pre-G36 gap identified on 2026-09-16:
+- registry safely resolves `modules/`, `references/`, `shared/` and cross-skill paths;
+- execution loaded only `prawny-router-v3`, `prawo-polskie-v2` and the selected DR SKILL.md body;
+- `LegalSession` previously emitted `resource_read=OK` for three core resources after existence checks only, without injecting their content;
+- arbitrary `view ...` references inside the corpus were not executable by the provider runtime.
+
+## P2C-T01 — Real core-resource reads
+The always-required router resources are opened as UTF-8 and their exact content is inserted into the execution system prompt.
+
+Fail closed on missing, unreadable or empty core resources.
+
+## P2C-T02 — Safe legal corpus tools
+Every legal provider session exposes local-only tools:
+- `list_legal_skills`;
+- `list_legal_resources`;
+- `read_legal_resource`.
+
+No arbitrary operating-system path is accepted.
+
+## P2C-T03 — Full-resource pagination
+Large text modules can be read in deterministic chunks using offset/nextOffset until EOF.
+
+This makes the complete textual resource readable without placing the whole corpus in one prompt.
+
+## P2C-T04 — Cross-skill and shared reads
+Support canonical semantic paths:
+- `modules/...`;
+- `references/...`;
+- `shared/...`;
+- `<other-skill>/SKILL.md`;
+- other text resources under a registered skill.
+
+## P2C-T05 — Corpus/tool audit
+Record legal corpus list/read decisions and close the G36 gate as BLOCKED after an invalid/path-escape resource attempt.
+
+## P2C-T06 — Current-law separation
+Local skill content is workflow/domain context, not fresh proof of statutory or case-law validity.
+
+Legal citations still require the existing official-source verification tools and temporal gates.
+
+## G36 PASS
+PASS requires:
+- actual core resource content present in execution prompt;
+- full paginated module read;
+- shared/cross-skill access;
+- path traversal blocked;
+- deterministic validator and full regression green.
+
+Important semantic limit:
+- G36 means the runtime can access the full canonical textual skill corpus on demand;
+- it does not mean every file is preloaded into every prompt;
+- it does not convert COV/B+ corpus coverage into a claim that every provision of Polish law is stored locally or current without live verification.
+
+---
+
 # PHASE 3 — G31C1 ENCRYPTED PERSISTENT PRIVACY VAULT
 
 Goal: reversible privacy mapping survives restart without plaintext persistence.
@@ -1330,6 +1389,7 @@ The first installer may be called release-ready only when all are PASS:
 - G35A;
 - G35B;
 - G35C template-generation integration;
+- G36 legal skill runtime completeness;
 - G33A;
 - G33B;
 - G33C;
@@ -1360,6 +1420,9 @@ F-138: `35072925987`
 
 ### Batch C — Vault + recovery + reauthorization
 P3 + P4A
+
+### Parallel Core Batch — Legal skill runtime completeness
+P2C / G36
 
 ### Batch D — Case lifecycle + encrypted file store
 P4B + P5
@@ -1401,6 +1464,9 @@ Completed/validated on the current critical path:
 - G31C1;
 - G35A/G35B;
 - G34H1/G34H2.
+
+Parallel work in progress:
+- G36 legal skill runtime completeness.
 
 Next: **G34H4 — encrypted artifact persistence**, then G34H5 explicit legacy plaintext migration/removal.
 
