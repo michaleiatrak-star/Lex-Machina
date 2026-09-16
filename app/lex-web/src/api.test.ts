@@ -1,10 +1,12 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
+  createCase,
   executeSession,
   finalizeDocument,
   getHealth,
   getModels,
   reviewDocument,
+  uploadCaseFile,
   validateRoute
 } from "./api.js";
 
@@ -30,6 +32,24 @@ describe("local API client", () => {
         headers: expect.objectContaining({
           Accept: "application/json"
         })
+      })
+    );
+  });
+
+  it("creates a local case before file work", async () => {
+    const payload = {
+      caseId: "case_0123456789abcdef0123456789abcdef",
+      createdAt: "2026-09-16T12:00:00.000Z"
+    };
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify(payload), { status: 201 })
+    );
+
+    await expect(createCase()).resolves.toEqual(payload);
+    expect(fetchMock).toHaveBeenCalledWith(
+      "http://127.0.0.1:4317/api/cases",
+      expect.objectContaining({
+        method: "POST"
       })
     );
   });
@@ -135,7 +155,12 @@ describe("local API client", () => {
       { type: "image/png" }
     );
 
-    await expect(reviewDocument(file)).resolves.toEqual(payload);
+    await expect(
+      reviewDocument(
+        file,
+        "case_0123456789abcdef0123456789abcdef"
+      )
+    ).resolves.toEqual(payload);
 
     expect(fetchMock).toHaveBeenCalledWith(
       "http://127.0.0.1:4317/api/documents/review",
@@ -143,7 +168,54 @@ describe("local API client", () => {
         method: "POST",
         body: file,
         headers: expect.objectContaining({
-          "Content-Type": "image/png"
+          "Content-Type": "image/png",
+          "X-Lex-Case-Id":
+            "case_0123456789abcdef0123456789abcdef",
+          "X-Lex-Filename":
+            encodeURIComponent("scan.png")
+        })
+      })
+    );
+  });
+
+  it("uploads ZIP directly to the local case store", async () => {
+    const payload = {
+      caseId: "case_0123456789abcdef0123456789abcdef",
+      uploadId: "upload_0123456789abcdef0123456789abcdef",
+      filename: "akta.zip",
+      mediaType: "application/zip",
+      sha256: "a".repeat(64),
+      bytes: 4,
+      storedAt: "2026-09-16T12:00:00.000Z",
+      archive: true,
+      extracted: []
+    };
+
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify(payload), { status: 201 })
+    );
+    const file = new File(
+      [new Uint8Array([80, 75, 3, 4])],
+      "akta.zip",
+      { type: "application/zip" }
+    );
+
+    await expect(
+      uploadCaseFile(
+        payload.caseId,
+        file
+      )
+    ).resolves.toEqual(payload);
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      `http://127.0.0.1:4317/api/cases/${payload.caseId}/files`,
+      expect.objectContaining({
+        method: "POST",
+        body: file,
+        headers: expect.objectContaining({
+          "Content-Type": "application/zip",
+          "X-Lex-Filename":
+            encodeURIComponent("akta.zip")
         })
       })
     );
