@@ -2,7 +2,11 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   clearAuthSession,
   createCase,
+  createDeanonymizationIntent,
+  downloadSensitiveArtifact,
   executeSession,
+  finalizeDeanonymization,
+  generateLegalDocument,
   finalizeDocument,
   getHealth,
   getModels,
@@ -12,6 +16,7 @@ import {
   searchCaseKnowledge,
   login,
   logoutAuth,
+  reauthorizeDeanonymization,
   listCaseAccess,
   listCaseAccessCandidates,
   grantCaseAccess,
@@ -857,6 +862,293 @@ describe("local API client", () => {
       fetchMock.mock.calls[2]
         ?.[1]?.method
     ).toBe("DELETE");
+  });
+
+  it("uses the secure authoring reauth and one-use download client contract", async () => {
+    const caseId =
+      "case_0123456789abcdef0123456789abcdef";
+    const tokenizedArtifactId =
+      "artifact_11111111111111111111111111111111";
+    const finalArtifactId =
+      "artifact_22222222222222222222222222222222";
+    const authPayload = {
+      user: {
+        userId:
+          "user_0123456789abcdef0123456789abcdef",
+        loginName: "author",
+        displayName: "Author",
+        appRole: "USER",
+        status: "ACTIVE",
+        createdAt:
+          "2026-09-16T08:00:00.000Z"
+      },
+      session: {
+        sessionId:
+          "authsess_0123456789abcdef0123456789abcdef",
+        userId:
+          "user_0123456789abcdef0123456789abcdef",
+        createdAt:
+          "2026-09-16T08:00:00.000Z",
+        lastActivityAt:
+          "2026-09-16T08:00:00.000Z",
+        lastFullAuthenticationAt:
+          "2026-09-16T08:00:00.000Z",
+        idleExpiresAt:
+          "2026-09-16T08:15:00.000Z",
+        overallExpiresAt:
+          "2026-09-16T16:00:00.000Z"
+      },
+      sessionToken:
+        "E".repeat(43)
+    };
+    const fetchMock =
+      vi.spyOn(
+        globalThis,
+        "fetch"
+      )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify(
+              authPayload
+            ),
+            { status: 200 }
+          )
+        )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify({
+              sessionId:
+                "session_generation",
+              artifact: {
+                schemaVersion: 1,
+                caseId,
+                artifactId:
+                  tokenizedArtifactId,
+                filename:
+                  "tokenized.docx",
+                mediaType:
+                  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                sha256:
+                  "a".repeat(64),
+                bytes: 100,
+                createdAt:
+                  "2026-09-16T12:00:00.000Z",
+                sensitivity:
+                  "PROTECTED",
+                storage:
+                  "ENCRYPTED_LME1"
+              },
+              format: "docx",
+              tokenizedSha256:
+                "a".repeat(64),
+              vaultGeneration: 1,
+              aliasesUsed: [
+                "[LMPII:D01:PERSON:0001]"
+              ]
+            }),
+            { status: 201 }
+          )
+        )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify({
+              intent: {
+                intentId:
+                  "intent_" +
+                  "1".repeat(32),
+                caseId,
+                artifactId:
+                  tokenizedArtifactId,
+                artifactFormat:
+                  "docx",
+                expiresAt:
+                  "2026-09-16T12:05:00.000Z",
+                status:
+                  "PENDING"
+              }
+            }),
+            { status: 201 }
+          )
+        )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify({
+              grant: {
+                grantId:
+                  "grant_" +
+                  "2".repeat(32),
+                intentId:
+                  "intent_" +
+                  "1".repeat(32),
+                caseId,
+                artifactId:
+                  tokenizedArtifactId,
+                artifactFormat:
+                  "docx",
+                expiresAt:
+                  "2026-09-16T12:01:30.000Z"
+              },
+              session:
+                authPayload.session
+            }),
+            { status: 200 }
+          )
+        )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify({
+              artifact: {
+                schemaVersion: 1,
+                caseId,
+                artifactId:
+                  finalArtifactId,
+                filename:
+                  "LexMachina-final.docx",
+                mediaType:
+                  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                sha256:
+                  "b".repeat(64),
+                bytes: 120,
+                createdAt:
+                  "2026-09-16T12:00:05.000Z",
+                sensitivity:
+                  "CLEAR_PII",
+                storage:
+                  "ENCRYPTED_LME1"
+              },
+              format: "docx",
+              sha256:
+                "b".repeat(64),
+              replacements: 1,
+              downloadTicket: {
+                ticketId:
+                  "download_" +
+                  "3".repeat(32),
+                caseId,
+                artifactId:
+                  finalArtifactId,
+                finalSha256:
+                  "b".repeat(64),
+                expiresAt:
+                  "2026-09-16T12:01:05.000Z",
+                remainingUses: 1
+              }
+            }),
+            { status: 201 }
+          )
+        )
+        .mockResolvedValueOnce(
+          new Response(
+            "DOCX-BYTES",
+            {
+              status: 200,
+              headers: {
+                "Content-Type":
+                  "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              }
+            }
+          )
+        );
+
+    await login({
+      loginName: "author",
+      password:
+        "Bardzo dlugie haslo autora 2026"
+    });
+
+    const generated =
+      await generateLegalDocument(
+        caseId,
+        {
+          query:
+            "Przygotuj pismo.",
+          provider:
+            "openai",
+          model:
+            "gpt-test",
+          primarySkill:
+            "dr-02-test",
+          mode:
+            "PRAWNIK",
+          format:
+            "docx",
+          documentType:
+            "letter",
+          styleProfile:
+            "lex-classic-clean-v1",
+          attachments: [{
+            caseId,
+            documentId:
+              "doc_0123456789abcdef01234567",
+            chunkIndices: [1]
+          }]
+        }
+      );
+    const intent =
+      await createDeanonymizationIntent(
+        caseId,
+        generated
+          .artifact
+          .artifactId
+      );
+    const authorized =
+      await reauthorizeDeanonymization(
+        intent.intent
+          .intentId,
+        "Bardzo dlugie haslo autora 2026"
+      );
+    const final =
+      await finalizeDeanonymization(
+        authorized.grant
+          .grantId
+      );
+    const blob =
+      await downloadSensitiveArtifact(
+        final.downloadTicket!
+          .ticketId
+      );
+
+    expect(blob.size)
+      .toBeGreaterThan(0);
+    expect(
+      fetchMock.mock.calls[1]
+        ?.[0]
+    ).toBe(
+      `http://127.0.0.1:4317/api/cases/${caseId}/artifacts/generate`
+    );
+    expect(
+      fetchMock.mock.calls[2]
+        ?.[0]
+    ).toContain(
+      "/deanonymization-intent"
+    );
+    expect(
+      fetchMock.mock.calls[3]
+        ?.[1]?.body
+    ).toBe(
+      JSON.stringify({
+        intentId:
+          "intent_" +
+          "1".repeat(32),
+        password:
+          "Bardzo dlugie haslo autora 2026"
+      })
+    );
+    expect(
+      fetchMock.mock.calls[5]
+        ?.[0]
+    ).toContain(
+      "/api/sensitive-download/download_"
+    );
+    expect(
+      fetchMock.mock.calls[5]
+        ?.[1]?.headers
+    ).toEqual(
+      expect.objectContaining({
+        Authorization:
+          `Bearer ${authPayload.sessionToken}`
+      })
+    );
   });
 
   it("checks update status through a read-only authenticated request", async () => {
