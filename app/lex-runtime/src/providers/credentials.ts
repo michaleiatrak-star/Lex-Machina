@@ -45,6 +45,111 @@ export class EnvironmentCredentialResolver
   }
 }
 
+export interface ProviderCredentialManager
+  extends ProviderCredentialResolver
+{
+  setApiKey(
+    provider: ProviderId,
+    apiKey: string
+  ): void;
+  clearApiKey(
+    provider: ProviderId
+  ): void;
+  hasMemoryKey(
+    provider: ProviderId
+  ): boolean;
+  close(): void;
+}
+
+export class MemoryOverlayCredentialResolver
+  implements ProviderCredentialManager
+{
+  private readonly memory =
+    new Map<
+      ProviderId,
+      Buffer
+    >();
+
+  constructor(
+    private readonly fallback:
+      ProviderCredentialResolver =
+        new EnvironmentCredentialResolver()
+  ) {}
+
+  async getApiKey(
+    provider: ProviderId
+  ): Promise<string | null> {
+    const value =
+      this.memory.get(provider);
+    if (value) {
+      return value.toString(
+        "utf8"
+      );
+    }
+    return await this.fallback
+      .getApiKey(provider);
+  }
+
+  setApiKey(
+    provider: ProviderId,
+    apiKey: string
+  ): void {
+    const normalized =
+      apiKey.trim();
+    if (
+      normalized.length < 10 ||
+      normalized.length > 8192 ||
+      /[\r\n]/.test(
+        normalized
+      )
+    ) {
+      throw new Error(
+        "INVALID_PROVIDER_API_KEY"
+      );
+    }
+
+    const previous =
+      this.memory.get(provider);
+    previous?.fill(0);
+    this.memory.set(
+      provider,
+      Buffer.from(
+        normalized,
+        "utf8"
+      )
+    );
+  }
+
+  clearApiKey(
+    provider: ProviderId
+  ): void {
+    const previous =
+      this.memory.get(provider);
+    previous?.fill(0);
+    this.memory.delete(
+      provider
+    );
+  }
+
+  hasMemoryKey(
+    provider: ProviderId
+  ): boolean {
+    return this.memory.has(
+      provider
+    );
+  }
+
+  close(): void {
+    for (
+      const value
+      of this.memory.values()
+    ) {
+      value.fill(0);
+    }
+    this.memory.clear();
+  }
+}
+
 export class StaticCredentialResolver
   implements ProviderCredentialResolver
 {
