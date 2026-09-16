@@ -9,6 +9,8 @@ import {
   login,
   logoutAuth,
   reviewDocument,
+  setProviderApiKey,
+  clearProviderApiKey,
   uploadCaseFile,
   validateRoute
 } from "./api.js";
@@ -326,6 +328,98 @@ describe("local API client", () => {
         body: JSON.stringify({ directives })
       })
     );
+  });
+
+  it("sends a provider credential through the authenticated API client without expecting the value back", async () => {
+    const authPayload = {
+      user: {
+        userId: "user_0123456789abcdef0123456789abcdef",
+        loginName: "provider-admin",
+        displayName: "Provider Admin",
+        appRole: "ADMIN",
+        status: "ACTIVE",
+        createdAt: "2026-09-16T08:00:00.000Z"
+      },
+      session: {
+        sessionId: "authsess_0123456789abcdef0123456789abcdef",
+        userId: "user_0123456789abcdef0123456789abcdef",
+        createdAt: "2026-09-16T08:00:00.000Z",
+        lastActivityAt: "2026-09-16T08:00:00.000Z",
+        lastFullAuthenticationAt: "2026-09-16T08:00:00.000Z",
+        idleExpiresAt: "2026-09-16T08:15:00.000Z",
+        overallExpiresAt: "2026-09-16T16:00:00.000Z"
+      },
+      sessionToken: "B".repeat(43)
+    };
+    const key =
+      "memory-provider-key-example-123456";
+    const fetchMock =
+      vi.spyOn(globalThis, "fetch")
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify(authPayload),
+            { status: 200 }
+          )
+        )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify({
+              provider: "openai",
+              configured: true,
+              storage: "PROCESS_MEMORY"
+            }),
+            { status: 200 }
+          )
+        )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify({
+              provider: "openai",
+              cleared: true,
+              storage: "PROCESS_MEMORY"
+            }),
+            { status: 200 }
+          )
+        );
+
+    await login({
+      loginName: "provider-admin",
+      password:
+        "Provider admin bardzo dlugie haslo 2026"
+    });
+    const saved =
+      await setProviderApiKey(
+        "openai",
+        key
+      );
+    expect(
+      JSON.stringify(saved)
+    ).not.toContain(key);
+    expect(
+      fetchMock.mock.calls[1]
+        ?.[1]?.body
+    ).toBe(
+      JSON.stringify({
+        apiKey: key
+      })
+    );
+    expect(
+      fetchMock.mock.calls[1]
+        ?.[1]?.headers
+    ).toEqual(
+      expect.objectContaining({
+        Authorization:
+          `Bearer ${authPayload.sessionToken}`
+      })
+    );
+
+    await clearProviderApiKey(
+      "openai"
+    );
+    expect(
+      fetchMock.mock.calls[2]
+        ?.[1]?.method
+    ).toBe("DELETE");
   });
 
   it("surfaces sanitized model discovery failures", async () => {
