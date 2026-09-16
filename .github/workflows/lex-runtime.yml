@@ -122,8 +122,14 @@ jobs:
       - name: G27 — complete document OCR and chunking
         run: npm run validate:g27
 
+      - name: G27A — direct image OCR
+        run: npm run validate:g27a
+
       - name: G28 — local pseudonymization and deanonymization
         run: npm run validate:g28
+
+      - name: G28A — user-directed privacy review
+        run: npm run validate:g28a
 
       - name: G29 — private complete-document pipeline
         run: npm run validate:g29
