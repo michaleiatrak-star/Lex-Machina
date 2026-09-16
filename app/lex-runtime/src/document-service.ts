@@ -20,6 +20,9 @@ import {
 import type {
   EncryptedPrivacyVaultStore
 } from "./privacy/vault-store.js";
+import type {
+  SecureCaseDocumentStore
+} from "./case-document-store.js";
 
 export type DocumentSecurityContext = {
   caseId: string;
@@ -151,6 +154,13 @@ implements DocumentService {
       EncryptedPrivacyVaultStore,
       "loadDocumentVault" |
       "saveDocumentVault"
+    >,
+    private readonly secureDocumentStore?: Pick<
+      SecureCaseDocumentStore,
+      | "saveSource"
+      | "saveProtected"
+      | "loadSource"
+      | "loadProtected"
     >
   ) {}
 
@@ -181,6 +191,39 @@ implements DocumentService {
     );
     const documentId =
       `doc_${source.sha256.slice(0, 24)}`;
+
+    const persistentDocument =
+      Boolean(
+        this.secureDocumentStore &&
+        security?.caseId
+      );
+    if (persistentDocument) {
+      if (
+        !security?.caseDataKey ||
+        !Number.isInteger(
+          security.keyVersion
+        ) ||
+        (security.keyVersion ?? 0) <
+          1
+      ) {
+        throw new Error(
+          "DOCUMENT_STORAGE_CONTEXT_REQUIRED"
+        );
+      }
+      await this
+        .secureDocumentStore!
+        .saveSource({
+          caseId:
+            security.caseId,
+          documentId,
+          mediaType,
+          source,
+          caseDataKey:
+            security.caseDataKey,
+          keyVersion:
+            security.keyVersion!
+        });
+    }
 
     const vault = new PseudonymizationVault();
     this.documents.set(documentId, {
@@ -390,28 +433,74 @@ implements DocumentService {
         });
     }
 
-    return {
-      documentId,
-      mediaType: record.mediaType,
-      complete: true,
-      totalPages: record.source.totalPages,
-      digitalPages: record.source.digitalPages,
-      ocrPages: record.source.ocrPages,
-      blankPages: record.source.blankPages,
-      sourceChars: record.source.sourceChars,
-      pseudonymizedChars,
-      chunks: publicChunks.map((chunk) => ({
-        ...chunk
-      })),
-      privacy: {
-        findings,
-        counts,
-        manualPseudonymizations,
-        keptRanges,
-        annotations,
-        reversibleLocally: true
+    const result:
+      PublicDocumentIngestion = {
+        documentId,
+        mediaType:
+          record.mediaType,
+        complete: true,
+        totalPages:
+          record.source.totalPages,
+        digitalPages:
+          record.source.digitalPages,
+        ocrPages:
+          record.source.ocrPages,
+        blankPages:
+          record.source.blankPages,
+        sourceChars:
+          record.source.sourceChars,
+        pseudonymizedChars,
+        chunks:
+          publicChunks.map(
+            (chunk) => ({
+              ...chunk
+            })
+          ),
+        privacy: {
+          findings,
+          counts,
+          manualPseudonymizations,
+          keptRanges,
+          annotations,
+          reversibleLocally: true
+        }
+      };
+
+    if (
+      this.secureDocumentStore &&
+      record.caseId
+    ) {
+      if (
+        !security ||
+        security.caseId !==
+          record.caseId ||
+        !security.caseDataKey ||
+        !Number.isInteger(
+          security.keyVersion
+        ) ||
+        (security.keyVersion ?? 0) <
+          1
+      ) {
+        throw new Error(
+          "DOCUMENT_STORAGE_CONTEXT_REQUIRED"
+        );
       }
-    };
+      await this
+        .secureDocumentStore
+        .saveProtected({
+          caseId:
+            record.caseId,
+          documentId,
+          ingestion:
+            result,
+          caseDataKey:
+            security.caseDataKey,
+          keyVersion:
+            security.keyVersion!
+        });
+    }
+
+    return result;
   }
 
   async ingestPdf(
@@ -507,6 +596,83 @@ implements DocumentService {
       chunks,
       totalChars
     };
+  }
+
+  async restoreDocument(args: {
+    caseId: string;
+    documentId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }): Promise<
+    PublicDocumentIngestion
+  > {
+    if (
+      !this.secureDocumentStore
+    ) {
+      throw new Error(
+        "DOCUMENT_STORAGE_UNAVAILABLE"
+      );
+    }
+
+    const source =
+      await this
+        .secureDocumentStore
+        .loadSource(args);
+    const protectedResult =
+      await this
+        .secureDocumentStore
+        .loadProtected(args);
+
+    if (
+      protectedResult.mediaType !==
+        source.mediaType
+    ) {
+      throw new Error(
+        "DOCUMENT_STORAGE_MEDIA_TYPE_MISMATCH"
+      );
+    }
+
+    let vault =
+      new PseudonymizationVault();
+    if (
+      this.privacyVaultStore
+    ) {
+      vault =
+        await this
+          .privacyVaultStore
+          .loadDocumentVault({
+            caseId:
+              args.caseId,
+            documentId:
+              args.documentId,
+            caseDataKey:
+              args.caseDataKey,
+            keyVersion:
+              args.keyVersion
+          });
+    }
+
+    this.documents.set(
+      args.documentId,
+      {
+        mediaType:
+          source.mediaType,
+        caseId:
+          args.caseId,
+        vault,
+        source:
+          source.source,
+        protectedChunks:
+          protectedResult
+            .chunks
+            .map(
+              (chunk) => ({
+                ...chunk
+              })
+            )
+      }
+    );
+    return protectedResult;
   }
 
   deanonymize(
