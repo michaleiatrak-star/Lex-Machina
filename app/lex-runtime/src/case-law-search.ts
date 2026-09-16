@@ -312,10 +312,6 @@ async function fetchCbosa(
         ...initWithoutBody,
         method,
         redirect: "manual",
-        signal:
-          AbortSignal.timeout(
-            REQUEST_TIMEOUT_MS
-          ),
         headers: {
           "User-Agent":
             CBOSA_USER_AGENT,
@@ -361,7 +357,13 @@ async function fetchCbosa(
         response =
           await fetcher(
             url,
-            requestInit
+            {
+              ...requestInit,
+              signal:
+                AbortSignal.timeout(
+                  REQUEST_TIMEOUT_MS
+                )
+            }
           );
         break;
       } catch (error) {
