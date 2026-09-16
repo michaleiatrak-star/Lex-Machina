@@ -34,6 +34,13 @@ import {
   decodeUploadFilename,
   type LocalCaseFileStore
 } from "../case-file-store.js";
+import {
+  AuthError,
+  type AuthService
+} from "../auth/service.js";
+import type {
+  AuthenticatedContext
+} from "../auth/types.js";
 
 const PROVIDERS = new Set<ProviderId>([
   "openai",
@@ -186,7 +193,40 @@ export type LexHttpAppOptions = {
     LocalCaseFileStore,
     "createCase" | "saveUpload" | "assertCase"
   >;
+  authService?: AuthService;
 };
+
+
+function sendAuthError(
+  res: Response,
+  error: unknown
+): boolean {
+  if (!(error instanceof AuthError)) {
+    return false;
+  }
+  res.status(error.httpStatus).json({
+    error: error.code,
+    ...(error.retryAfter
+      ? { retryAfter: error.retryAfter }
+      : {})
+  });
+  return true;
+}
+
+function responseAuthContext(
+  res: Response
+): AuthenticatedContext {
+  const context =
+    res.locals.lexAuth as
+      | AuthenticatedContext
+      | undefined;
+  if (!context) {
+    throw new Error(
+      "AUTH_CONTEXT_MISSING"
+    );
+  }
+  return context;
+}
 
 function publicSkill(skill: {
   name: string;
@@ -330,6 +370,203 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       localOnly: true
     });
   });
+
+  app.get(
+    "/api/auth/status",
+    (_req, res) => {
+      if (!options.authService) {
+        res.status(503).json({
+          error:
+            "AUTH_SERVICE_UNAVAILABLE"
+        });
+        return;
+      }
+      res.json(
+        options.authService.status()
+      );
+    }
+  );
+
+  app.post(
+    "/api/auth/bootstrap",
+    async (req, res) => {
+      if (!options.authService) {
+        res.status(503).json({
+          error:
+            "AUTH_SERVICE_UNAVAILABLE"
+        });
+        return;
+      }
+      const loginName =
+        typeof req.body?.loginName ===
+          "string"
+          ? req.body.loginName
+          : "";
+      const displayName =
+        typeof req.body?.displayName ===
+          "string"
+          ? req.body.displayName
+          : "";
+      const password =
+        typeof req.body?.password ===
+          "string"
+          ? req.body.password
+          : "";
+
+      try {
+        const result =
+          await options.authService
+            .bootstrap({
+              loginName,
+              displayName,
+              password
+            });
+        res.status(201).json(result);
+      } catch (error) {
+        if (
+          !sendAuthError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "AUTH_BOOTSTRAP_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/auth/login",
+    async (req, res) => {
+      if (!options.authService) {
+        res.status(503).json({
+          error:
+            "AUTH_SERVICE_UNAVAILABLE"
+        });
+        return;
+      }
+      const loginName =
+        typeof req.body?.loginName ===
+          "string"
+          ? req.body.loginName
+          : "";
+      const password =
+        typeof req.body?.password ===
+          "string"
+          ? req.body.password
+          : "";
+
+      try {
+        res.json(
+          await options.authService
+            .login({
+              loginName,
+              password
+            })
+        );
+      } catch (error) {
+        if (
+          !sendAuthError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "AUTH_LOGIN_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/auth/logout",
+    (req, res) => {
+      if (!options.authService) {
+        res.status(503).json({
+          error:
+            "AUTH_SERVICE_UNAVAILABLE"
+        });
+        return;
+      }
+      options.authService
+        .logoutAuthorization(
+          req.get("authorization")
+        );
+      res.status(204).end();
+    }
+  );
+
+  if (options.authService) {
+    app.use(
+      "/api",
+      (req, res, next) => {
+        try {
+          const context =
+            options.authService!
+              .authenticateAuthorization(
+                req.get(
+                  "authorization"
+                )
+              );
+          res.locals.lexAuth =
+            context;
+
+          if (
+            req.method !== "GET" &&
+            req.path !==
+              "/auth/lock"
+          ) {
+            options.authService!
+              .touchSession(
+                context.session
+                  .sessionId
+              );
+          }
+          next();
+        } catch (error) {
+          if (
+            !sendAuthError(
+              res,
+              error
+            )
+          ) {
+            res.status(401).json({
+              error:
+                "AUTHENTICATION_REQUIRED"
+            });
+          }
+        }
+      }
+    );
+
+    app.get(
+      "/api/auth/me",
+      (_req, res) => {
+        res.json(
+          responseAuthContext(res)
+        );
+      }
+    );
+
+    app.post(
+      "/api/auth/lock",
+      (_req, res) => {
+        const context =
+          responseAuthContext(res);
+        options.authService!
+          .lockSession(
+            context.session
+              .sessionId
+          );
+        res.status(204).end();
+      }
+    );
+  }
 
   app.post("/api/cases", async (req, res) => {
     if (!options.caseFileStore) {
