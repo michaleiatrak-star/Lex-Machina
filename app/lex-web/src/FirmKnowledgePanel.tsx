@@ -49,7 +49,8 @@ function canAnalyze(
 export function FirmKnowledgePanel({
   user,
   currentCase,
-  onUseHit
+  onUseHit,
+  onWorkspaceChange
 }: {
   user: AuthenticatedUser;
   currentCase:
@@ -58,6 +59,11 @@ export function FirmKnowledgePanel({
   onUseHit: (
     selection:
       DocumentAttachmentSelection
+  ) => void;
+  onWorkspaceChange?: (
+    workspace:
+      | CaseListItem
+      | null
   ) => void;
 }) {
   const [
@@ -98,6 +104,9 @@ export function FirmKnowledgePanel({
     setWorkspace(
       result.workspace
     );
+    onWorkspaceChange?.(
+      result.workspace
+    );
   }
 
   useEffect(() => {
@@ -108,6 +117,9 @@ export function FirmKnowledgePanel({
       .then((result) => {
         if (!cancelled) {
           setWorkspace(
+            result.workspace
+          );
+          onWorkspaceChange?.(
             result.workspace
           );
         }
@@ -183,6 +195,9 @@ export function FirmKnowledgePanel({
       const result =
         await createFirmKnowledgeWorkspace();
       setWorkspace(
+        result.workspace
+      );
+      onWorkspaceChange?.(
         result.workspace
       );
     } catch (failure) {
@@ -368,6 +383,11 @@ export function FirmKnowledgePanel({
             }
             caseRole={
               workspace.role
+            }
+            onOwnershipTransferred={
+              async () => {
+                await refreshWorkspace();
+              }
             }
           />
         </>
