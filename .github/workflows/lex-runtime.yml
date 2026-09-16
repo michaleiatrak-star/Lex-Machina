@@ -232,11 +232,10 @@ jobs:
   g30a-live-case-law:
     name: G30A live SAOS and CBOSA discovery probe
     needs: g1-g29-g32
-    # CBOSA is documented in this repository as intermittently rejecting
-    # datacenter egress pools. Use the independent macOS hosted-runner pool
-    # for the live network probe; deterministic transport semantics remain
-    # covered on the main Ubuntu validation job.
-    runs-on: macos-latest
+    # Probe from the actual Windows release class. Ubuntu has independently
+    # confirmed live SAOS, while CBOSA is documented as egress-sensitive.
+    # Deterministic transport semantics remain covered on the main job.
+    runs-on: windows-latest
     defaults:
       run:
         working-directory: app/lex-runtime
