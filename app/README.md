@@ -38,9 +38,10 @@ The application MUST NOT duplicate or silently rewrite legal skill instructions.
 - **G28 — Local Privacy:** reversible pseudonymization/deanonymization with backend-only vault and local Polish PERSON NER.
 - **G28A — User Privacy Review:** exact user selections can PSEUDONYMIZE, KEEP or LABEL text before protected chunks are generated.
 - **G29 — Private Document Pipeline:** OCR + privacy + chunking exposed through the localhost document-ingestion API.
+- **G32 — Protected Document Attachment Session:** the user explicitly selects finalized protected chunks; only those chunks can enter provider context, while raw pages and the re-identification vault remain local.
 
 ## Current scope
 
-G0-G29 plus G27A/G28A are implemented and validated on `feature/local-runtime`. Heavy OCR/NER model weights are intentionally installed locally rather than downloaded in every CI run; CI verifies adapters, worker syntax, completeness contracts and fail-closed behavior. The local UI supports PDF/image review and manual privacy decisions before finalization.
+G0-G29 plus G27A/G28A and G32 are implemented and validated on `feature/local-runtime`. Heavy OCR/NER model weights are intentionally installed locally rather than downloaded in every CI run; CI verifies adapters, worker syntax, completeness contracts and fail-closed behavior. The local UI supports PDF/image review, manual privacy decisions and explicit protected-chunk selection before provider execution.
 
-Next planned gates are G30 open-web discovery, G31 local DOCX generation and G32 document attachment/session flow.
+G30 open-web discovery and G31 local DOCX generation remain planned and are **not** claimed PASS.
