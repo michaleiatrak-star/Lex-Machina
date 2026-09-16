@@ -49,6 +49,12 @@ import {
 import type {
   LocalSharedTemplateStore
 } from "../shared-template-store.js";
+import type {
+  SecureCaseUploadStore
+} from "../case-secure-store.js";
+import type {
+  StoredUpload
+} from "../case-file-store.js";
 
 const PROVIDERS = new Set<ProviderId>([
   "openai",
@@ -210,6 +216,11 @@ export type LexHttpAppOptions = {
         "listUploads"
       >
     >;
+  secureCaseUploadStore?: Pick<
+    SecureCaseUploadStore,
+    | "saveUpload"
+    | "listUploads"
+  >;
   authService?: AuthService;
   sharedTemplateStore?: Pick<
     LocalSharedTemplateStore,
@@ -1419,14 +1430,53 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             caseId,
             "READ"
           );
-        res.json({
-          caseId,
-          uploads:
+        let uploads:
+          StoredUpload[];
+        if (
+          options
+            .secureCaseUploadStore &&
+          options.caseAccessService
+        ) {
+          const context =
+            responseAuthContext(
+              res
+            );
+          const caseView =
+            options.caseAccessService
+              .openCase(
+                context,
+                caseId
+              );
+          uploads =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                context,
+                caseId,
+                "READ",
+                async (
+                  caseDataKey
+                ) =>
+                  await options
+                    .secureCaseUploadStore!
+                    .listUploads({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    })
+              );
+        } else {
+          uploads =
             await options
               .caseFileStore
-              .listUploads(
+              .listUploads!(
                 caseId
-              )
+              );
+        }
+        res.json({
+          caseId,
+          uploads
         });
       } catch (error) {
         if (
@@ -1532,26 +1582,69 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         );
 
       try {
+        const context =
+          responseAuthContext(
+            res
+          );
         options.caseAccessService
           ?.assertAccess(
-            responseAuthContext(
-              res
-            ),
+            context,
             caseId,
             "WRITE"
           );
-        const stored =
-          await options.caseFileStore
-            .saveUpload({
-              caseId,
-              filename,
-              mediaType,
-              data:
-                new Uint8Array(
-                  req.body
-                ),
-              extractArchive: true
-            });
+        let stored:
+          StoredUpload;
+        if (
+          options
+            .secureCaseUploadStore &&
+          options.caseAccessService
+        ) {
+          const caseView =
+            options.caseAccessService
+              .openCase(
+                context,
+                caseId
+              );
+          stored =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                context,
+                caseId,
+                "WRITE",
+                async (
+                  caseDataKey
+                ) =>
+                  await options
+                    .secureCaseUploadStore!
+                    .saveUpload({
+                      caseId,
+                      filename,
+                      mediaType,
+                      data:
+                        new Uint8Array(
+                          req.body
+                        ),
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    })
+              );
+        } else {
+          stored =
+            await options
+              .caseFileStore
+              .saveUpload({
+                caseId,
+                filename,
+                mediaType,
+                data:
+                  new Uint8Array(
+                    req.body
+                  ),
+                extractArchive: true
+              });
+        }
         res.status(201).json(
           stored
         );
@@ -1707,11 +1800,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       try {
         const data = new Uint8Array(req.body);
         let stored:
-          Awaited<ReturnType<
-            NonNullable<
-              LexHttpAppOptions["caseFileStore"]
-            >["saveUpload"]
-          >> | undefined;
+          StoredUpload | undefined;
         let caseId:
           string | undefined;
 
@@ -1725,25 +1814,68 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             });
             return;
           }
+          const context =
+            responseAuthContext(
+              res
+            );
           options.caseAccessService
             ?.assertAccess(
-              responseAuthContext(
-                res
-              ),
+              context,
               caseId,
               "WRITE"
             );
-          stored =
-            await options.caseFileStore.saveUpload({
-              caseId,
-              filename:
-                decodeUploadFilename(
-                  req.get("x-lex-filename")
-                ),
-              mediaType,
-              data,
-              extractArchive: false
-            });
+          const filename =
+            decodeUploadFilename(
+              req.get(
+                "x-lex-filename"
+              )
+            );
+          if (
+            options
+              .secureCaseUploadStore &&
+            options.caseAccessService
+          ) {
+            const caseView =
+              options.caseAccessService
+                .openCase(
+                  context,
+                  caseId
+                );
+            stored =
+              await options
+                .caseAccessService
+                .withCaseDataKey(
+                  context,
+                  caseId,
+                  "WRITE",
+                  async (
+                    caseDataKey
+                  ) =>
+                    await options
+                      .secureCaseUploadStore!
+                      .saveUpload({
+                        caseId,
+                        filename,
+                        mediaType,
+                        data,
+                        caseDataKey,
+                        keyVersion:
+                          caseView.keyVersion
+                      })
+                );
+          } else {
+            stored =
+              await options
+                .caseFileStore
+                .saveUpload({
+                  caseId,
+                  filename,
+                  mediaType,
+                  data,
+                  extractArchive:
+                    false
+                });
+          }
         }
 
         let result;
@@ -1876,11 +2008,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         const data =
           new Uint8Array(req.body);
         let stored:
-          Awaited<ReturnType<
-            NonNullable<
-              LexHttpAppOptions["caseFileStore"]
-            >["saveUpload"]
-          >> | undefined;
+          StoredUpload | undefined;
         let caseId:
           string | undefined;
 
@@ -1894,25 +2022,68 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             });
             return;
           }
+          const context =
+            responseAuthContext(
+              res
+            );
           options.caseAccessService
             ?.assertAccess(
-              responseAuthContext(
-                res
-              ),
+              context,
               caseId,
               "WRITE"
             );
-          stored =
-            await options.caseFileStore.saveUpload({
-              caseId,
-              filename:
-                decodeUploadFilename(
-                  req.get("x-lex-filename")
-                ),
-              mediaType,
-              data,
-              extractArchive: false
-            });
+          const filename =
+            decodeUploadFilename(
+              req.get(
+                "x-lex-filename"
+              )
+            );
+          if (
+            options
+              .secureCaseUploadStore &&
+            options.caseAccessService
+          ) {
+            const caseView =
+              options.caseAccessService
+                .openCase(
+                  context,
+                  caseId
+                );
+            stored =
+              await options
+                .caseAccessService
+                .withCaseDataKey(
+                  context,
+                  caseId,
+                  "WRITE",
+                  async (
+                    caseDataKey
+                  ) =>
+                    await options
+                      .secureCaseUploadStore!
+                      .saveUpload({
+                        caseId,
+                        filename,
+                        mediaType,
+                        data,
+                        caseDataKey,
+                        keyVersion:
+                          caseView.keyVersion
+                      })
+                );
+          } else {
+            stored =
+              await options
+                .caseFileStore
+                .saveUpload({
+                  caseId,
+                  filename,
+                  mediaType,
+                  data,
+                  extractArchive:
+                    false
+                });
+          }
         }
 
         const result =
