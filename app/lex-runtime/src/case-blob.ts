@@ -34,7 +34,8 @@ export type CaseBlobPurpose =
   | "protected-document"
   | "artifact"
   | "artifact-manifest"
-  | "artifact-payload";
+  | "artifact-payload"
+  | "migration-manifest";
 
 export type CaseBlobIdentity = {
   caseId: string;
