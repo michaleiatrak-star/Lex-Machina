@@ -1582,23 +1582,25 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         );
 
       try {
-        const context =
-          responseAuthContext(
-            res
-          );
-        options.caseAccessService
-          ?.assertAccess(
-            context,
-            caseId,
-            "WRITE"
-          );
         let stored:
           StoredUpload;
         if (
-          options
-            .secureCaseUploadStore &&
           options.caseAccessService
         ) {
+          const context =
+            responseAuthContext(
+              res
+            );
+          options.caseAccessService
+            .assertAccess(
+              context,
+              caseId,
+              "WRITE"
+            );
+          if (
+            options
+              .secureCaseUploadStore
+          ) {
           const caseView =
             options.caseAccessService
               .openCase(
@@ -1630,6 +1632,21 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                         caseView.keyVersion
                     })
               );
+          } else {
+            stored =
+              await options
+                .caseFileStore
+                .saveUpload({
+                  caseId,
+                  filename,
+                  mediaType,
+                  data:
+                    new Uint8Array(
+                      req.body
+                    ),
+                  extractArchive: true
+                });
+          }
         } else {
           stored =
             await options
@@ -1814,16 +1831,6 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             });
             return;
           }
-          const context =
-            responseAuthContext(
-              res
-            );
-          options.caseAccessService
-            ?.assertAccess(
-              context,
-              caseId,
-              "WRITE"
-            );
           const filename =
             decodeUploadFilename(
               req.get(
@@ -1831,10 +1838,22 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               )
             );
           if (
-            options
-              .secureCaseUploadStore &&
             options.caseAccessService
           ) {
+            const context =
+              responseAuthContext(
+                res
+              );
+            options.caseAccessService
+              .assertAccess(
+                context,
+                caseId,
+                "WRITE"
+              );
+            if (
+              options
+                .secureCaseUploadStore
+            ) {
             const securedCaseId =
               caseId;
             const caseView =
@@ -1866,6 +1885,19 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                           caseView.keyVersion
                       })
                 );
+            } else {
+              stored =
+                await options
+                  .caseFileStore
+                  .saveUpload({
+                    caseId,
+                    filename,
+                    mediaType,
+                    data,
+                    extractArchive:
+                      false
+                  });
+            }
           } else {
             stored =
               await options
@@ -2025,16 +2057,6 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             });
             return;
           }
-          const context =
-            responseAuthContext(
-              res
-            );
-          options.caseAccessService
-            ?.assertAccess(
-              context,
-              caseId,
-              "WRITE"
-            );
           const filename =
             decodeUploadFilename(
               req.get(
@@ -2042,10 +2064,22 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               )
             );
           if (
-            options
-              .secureCaseUploadStore &&
             options.caseAccessService
           ) {
+            const context =
+              responseAuthContext(
+                res
+              );
+            options.caseAccessService
+              .assertAccess(
+                context,
+                caseId,
+                "WRITE"
+              );
+            if (
+              options
+                .secureCaseUploadStore
+            ) {
             const securedCaseId =
               caseId;
             const caseView =
@@ -2077,6 +2111,19 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                           caseView.keyVersion
                       })
                 );
+            } else {
+              stored =
+                await options
+                  .caseFileStore
+                  .saveUpload({
+                    caseId,
+                    filename,
+                    mediaType,
+                    data,
+                    extractArchive:
+                      false
+                  });
+            }
           } else {
             stored =
               await options
