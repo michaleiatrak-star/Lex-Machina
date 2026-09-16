@@ -64,6 +64,9 @@ import type {
   LegalDocumentAstGenerator
 } from "../legal-document-ast-generator.js";
 import type {
+  LocalTemplateProfileService
+} from "../template-profile-service.js";
+import type {
   LocalCaseKnowledgeSearch
 } from "../case-knowledge-search.js";
 import type {
@@ -352,6 +355,10 @@ export type LexHttpAppOptions = {
   documentAstGenerator?: Pick<
     LegalDocumentAstGenerator,
     "generate"
+  >;
+  templateProfileService?: Pick<
+    LocalTemplateProfileService,
+    "resolve"
   >;
   reauthorizationManager?: Pick<
     DeanonymizationReauthorizationManager,
@@ -3776,6 +3783,24 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         req.body?.documentType;
       const styleProfile =
         req.body?.styleProfile;
+      const templateId =
+        typeof req.body
+          ?.templateId ===
+          "string"
+          ? req.body
+              .templateId
+              .trim()
+          : undefined;
+      const requestedStyleValid =
+        [
+          "lex-classic-clean-v1",
+          "lex-light-legal-design-v1",
+          "lex-classic-tnr-v1"
+        ].includes(
+          String(
+            styleProfile
+          )
+        );
 
       if (
         !sessionRequest ||
@@ -3797,14 +3822,17 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             documentType
           )
         ) ||
-        ![
-          "lex-classic-clean-v1",
-          "lex-light-legal-design-v1",
-          "lex-classic-tnr-v1"
-        ].includes(
-          String(
-            styleProfile
-          )
+        (
+          !templateId &&
+          !requestedStyleValid
+        ) ||
+        (
+          templateId !==
+            undefined &&
+          !/^template_[a-f0-9]{32}$/
+            .test(
+              templateId
+            )
         ) ||
         attachments.some(
           (selection) =>
@@ -3954,6 +3982,43 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                   })
             );
 
+        let effectiveStyleProfile =
+          styleProfile as
+            | "lex-classic-clean-v1"
+            | "lex-light-legal-design-v1"
+            | "lex-classic-tnr-v1";
+        let templateProfile:
+          | Awaited<
+              ReturnType<
+                NonNullable<
+                  typeof options.templateProfileService
+                >["resolve"]
+              >
+            >
+          | undefined;
+
+        if (templateId) {
+          if (
+            !options
+              .templateProfileService
+          ) {
+            res.status(503).json({
+              error:
+                "TEMPLATE_PROFILE_SERVICE_UNAVAILABLE"
+            });
+            return;
+          }
+          templateProfile =
+            await options
+              .templateProfileService
+              .resolve(
+                templateId
+              );
+          effectiveStyleProfile =
+            templateProfile
+              .styleProfile;
+        }
+
         const generated =
           await options
             .documentAstGenerator
@@ -3982,10 +4047,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                   | "report"
                   | "other",
               styleProfile:
-                styleProfile as
-                  | "lex-classic-clean-v1"
-                  | "lex-light-legal-design-v1"
-                  | "lex-classic-tnr-v1",
+                effectiveStyleProfile,
               attachments:
                 resolvedAttachments,
               aliases
@@ -4047,7 +4109,12 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               .vaultGeneration,
           aliasesUsed:
             tokenized
-              .aliasesUsed
+              .aliasesUsed,
+          ...(templateProfile
+            ? {
+                templateProfile
+              }
+            : {})
         });
       } catch (error) {
         if (
