@@ -39,6 +39,9 @@ import {
 import {
   SecureCaseDocumentStore
 } from "../case-document-store.js";
+import {
+  SecureCaseArtifactStore
+} from "../case-artifact-store.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -111,11 +114,17 @@ export async function startLocalServer(options?: {
       rootDir:
         caseFileStore.rootDir
     });
+  const secureCaseArtifactStore =
+    new SecureCaseArtifactStore({
+      rootDir:
+        caseFileStore.rootDir
+    });
   const caseSecurityRotation =
     new CaseSecurityRotationCoordinator(
       privacyVaultStore,
       secureCaseUploadStore,
-      secureCaseDocumentStore
+      secureCaseDocumentStore,
+      secureCaseArtifactStore
     );
   await secureCaseUploadStore
     .cleanupOrphanedWorkdirs();
