@@ -219,7 +219,18 @@ export class LexExecutionEngine {
       ]
     );
 
-    const promptParts = [baseSystemPrompt];
+    const coreResourcePrompt =
+      [...session.loadedResources.entries()]
+        .map(
+          ([resource, content]) =>
+            `# CORE LEGAL RESOURCE: ${resource}\n\n${content}`
+        )
+        .join("\n\n---\n\n");
+
+    const promptParts = [
+      baseSystemPrompt,
+      coreResourcePrompt
+    ];
     if (args.documentContext) {
       promptParts.push(
         [
