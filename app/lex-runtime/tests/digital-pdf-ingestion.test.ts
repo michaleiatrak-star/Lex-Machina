@@ -33,9 +33,11 @@ describe("digital PDF ingestion", () => {
 
     const result =
       await ingestor.ingest(
-        Buffer.from(
-          DIGITAL_PDF,
-          "base64"
+        Uint8Array.from(
+          Buffer.from(
+            DIGITAL_PDF,
+            "base64"
+          )
         )
       );
 
