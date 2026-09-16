@@ -34,6 +34,7 @@ export type StoredArchiveEntry = {
 export type StoredCaseMetadata = {
   caseId: string;
   createdAt: string;
+  caseKind?: "MATTER" | "FIRM_KNOWLEDGE";
   updatedAt?: string;
   displayName?: string;
   archivedAt?: string;
@@ -161,6 +162,9 @@ export class LocalCaseFileStore {
           displayName?: string;
           createdByUserId?: string;
           keyVersion?: number;
+          caseKind?:
+            | "MATTER"
+            | "FIRM_KNOWLEDGE";
         }
   ): Promise<StoredCaseMetadata> {
     const requestedCaseId =
@@ -195,7 +199,23 @@ export class LocalCaseFileStore {
       input
         ? input.keyVersion
         : undefined;
+    const caseKind =
+      typeof input === "object" &&
+      input
+        ? input.caseKind ??
+          "MATTER"
+        : "MATTER";
 
+    if (
+      ![
+        "MATTER",
+        "FIRM_KNOWLEDGE"
+      ].includes(caseKind)
+    ) {
+      throw new Error(
+        "INVALID_CASE_KIND"
+      );
+    }
     if (
       createdByUserId !== undefined &&
       !/^user_[a-f0-9]{32}$/
@@ -249,6 +269,7 @@ export class LocalCaseFileStore {
         caseId,
         createdAt,
         updatedAt: createdAt,
+        caseKind,
         ...(trimmed
           ? {
               displayName:
@@ -302,6 +323,11 @@ export class LocalCaseFileStore {
     return {
       caseId,
       createdAt: raw.createdAt,
+      caseKind:
+        raw.caseKind ===
+          "FIRM_KNOWLEDGE"
+          ? "FIRM_KNOWLEDGE"
+          : "MATTER",
       ...(typeof raw.updatedAt ===
         "string"
         ? {
