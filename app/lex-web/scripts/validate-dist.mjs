@@ -25,7 +25,10 @@ const forbidden = [
   "XAI_API_KEY",
   "PRAWO-HARDGATE.md",
   "# SKILL:",
-  "BEGIN PRIVATE KEY"
+  "BEGIN PRIVATE KEY",
+  "localStorage",
+  "sessionStorage",
+  "indexedDB"
 ];
 
 const required = [
@@ -35,6 +38,15 @@ const required = [
   "/api/documents/review",
   "/api/documents/",
   "/api/cases",
+  "/api/auth/status",
+  "/api/auth/login",
+  "/api/auth/bootstrap",
+  "/api/auth/lock",
+  "/api/auth/logout",
+  "Utwórz konto właściciela",
+  "Zaloguj się",
+  "Zablokuj",
+  "Wyloguj",
   "Archiwum zapisane i rozpakowane lokalnie",
   "Akta sprawy, OCR i ręczna anonimizacja",
   "Konfiguracja API",
@@ -58,7 +70,7 @@ const missing = required.filter((token) => !content.includes(token));
 const pass = exposed.length === 0 && missing.length === 0;
 
 process.stdout.write(JSON.stringify({
-  gate: "G14_G31AB_G32_LOCAL_WEB_UI",
+  gate: "G14_G31AB_G32_G34AB_LOCAL_WEB_UI",
   result: pass ? "PASS" : "BLOCKED",
   bundleFiles: files.length,
   forbiddenTokensFound: exposed,
