@@ -34,6 +34,10 @@ const checks = {
   nativeDeanonymizationReauth:
     authoring.includes("isDesktopShell()") &&
     trust.includes("__LEX_NATIVE_REAUTH__"),
+  providerCredentialPersistence:
+    trust.includes("PROVIDER_KEYRING_SERVICE") &&
+    trust.includes("restore_provider_credentials") &&
+    trust.includes("persist_provider_credential"),
   providerKeyOnlyPolicy:
     read("app/installer/generate-component-lock.ps1")
       .includes('expectedUserActionAfterInstall = "PROVIDER_API_KEY_ONLY"')
