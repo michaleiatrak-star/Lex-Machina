@@ -5,6 +5,9 @@ on:
     paths:
       - "app/lex-runtime/**"
       - "app/lex-web/**"
+      - "app/ocr/**"
+      - "app/privacy/**"
+      - "app/storage/**"
       - "app/lex-version.yaml"
       - "Wersja rozwojowa rozpakowana/**"
       - ".github/workflows/lex-runtime.yml"
@@ -14,6 +17,9 @@ on:
     paths:
       - "app/lex-runtime/**"
       - "app/lex-web/**"
+      - "app/ocr/**"
+      - "app/privacy/**"
+      - "app/storage/**"
       - "app/lex-version.yaml"
       - "Wersja rozwojowa rozpakowana/**"
       - ".github/workflows/lex-runtime.yml"
@@ -23,7 +29,7 @@ permissions:
 
 jobs:
   g1-g29-g32:
-    name: G1-G29 + G32 deterministic validation
+    name: G1-G29 + G31A/G31B + G32 deterministic validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -48,7 +54,7 @@ jobs:
         run: npm test
 
       - name: Python worker syntax
-        run: python -m py_compile ../ocr/paddle_worker.py ../privacy/stanza_ner_worker.py
+        run: python -m py_compile ../ocr/paddle_worker.py ../privacy/stanza_ner_worker.py ../storage/zip_extract_worker.py
 
       - name: G1 — corpus integrity
         run: npm run validate:corpus
@@ -133,6 +139,12 @@ jobs:
 
       - name: G29 — private complete-document pipeline
         run: npm run validate:g29
+
+      - name: G31A — local case storage foundation
+        run: npm run validate:g31a
+
+      - name: G31B — safe ZIP intake foundation
+        run: npm run validate:g31b
 
       - name: G32 — protected document attachment session
         run: npm run validate:g32
