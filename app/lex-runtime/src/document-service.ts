@@ -130,6 +130,12 @@ export interface DocumentService {
   resolveProtectedChunks(
     selection: DocumentChunkSelection
   ): Promise<ResolvedDocumentAttachment>;
+  restoreDocument?(args: {
+    caseId: string;
+    documentId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }): Promise<PublicDocumentIngestion>;
 }
 
 type PrivateDocumentRecord = {
