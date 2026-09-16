@@ -238,49 +238,60 @@ export class LocalCaseFileStore {
       filename.toLowerCase()
         .endsWith(".zip");
 
-    let extracted:
-      StoredArchiveEntry[] = [];
+    try {
+      let extracted:
+        StoredArchiveEntry[] = [];
 
-    if (
-      isZip &&
-      args.extractArchive !== false
-    ) {
-      extracted =
-        await this.extractZip(
-          finalPath,
-          uploadDir
-        );
-    }
-
-    const manifest: StoredUpload = {
-      caseId: args.caseId,
-      uploadId,
-      filename,
-      mediaType: args.mediaType,
-      sha256: sha256(args.data),
-      bytes: args.data.byteLength,
-      storedAt,
-      archive: isZip,
-      extracted
-    };
-
-    await writeFile(
-      path.join(
-        uploadDir,
-        "manifest.json"
-      ),
-      JSON.stringify(
-        manifest,
-        null,
-        2
-      ),
-      {
-        encoding: "utf8",
-        flag: "wx"
+      if (
+        isZip &&
+        args.extractArchive !== false
+      ) {
+        extracted =
+          await this.extractZip(
+            finalPath,
+            uploadDir
+          );
       }
-    );
 
-    return manifest;
+      const manifest: StoredUpload = {
+        caseId: args.caseId,
+        uploadId,
+        filename,
+        mediaType: args.mediaType,
+        sha256: sha256(args.data),
+        bytes: args.data.byteLength,
+        storedAt,
+        archive: isZip,
+        extracted
+      };
+
+      await writeFile(
+        path.join(
+          uploadDir,
+          "manifest.json"
+        ),
+        JSON.stringify(
+          manifest,
+          null,
+          2
+        ),
+        {
+          encoding: "utf8",
+          flag: "wx"
+        }
+      );
+
+      return manifest;
+    } catch (error) {
+      await rm(
+        uploadDir,
+        {
+          recursive: true,
+          force: true
+        }
+      );
+      throw error;
+    }
   }
 
   private async extractZip(
