@@ -5,12 +5,15 @@ import {
   ApiError,
   changePassword,
   createRecoveryCode,
-  type AuthMeResponse
+  type AuthMeResponse,
+  type AuthenticatedUser
 } from "./api.js";
 
 export function AccountSecurityPanel({
+  user,
   onAuthUpdated
 }: {
+  user: AuthenticatedUser;
   onAuthUpdated: (
     value: AuthMeResponse
   ) => void;
@@ -67,7 +70,10 @@ export function AccountSecurityPanel({
   async function updatePassword():
     Promise<void> {
     if (
-      !currentPassword ||
+      (
+        !user.passwordSetupPending &&
+        !currentPassword
+      ) ||
       !newPassword ||
       busy
     ) {
@@ -79,7 +85,10 @@ export function AccountSecurityPanel({
     try {
       const result =
         await changePassword({
-          currentPassword,
+          currentPassword:
+            user.passwordSetupPending
+              ? "__LEX_NATIVE_REAUTH__"
+              : currentPassword,
           newPassword
         });
       setCurrentPassword("");
@@ -89,8 +98,15 @@ export function AccountSecurityPanel({
         session:
           result.session
       });
+      if (result.recoveryCode) {
+        setRecoveryCode(
+          result.recoveryCode
+        );
+      }
       setMessage(
-        "Hasło zostało zmienione. Pozostałe sesje zostały unieważnione; sprawy zachowały te same klucze danych."
+        user.passwordSetupPending
+          ? "Hasło zostało ustawione. Sekret bootstrap został wycofany z magazynu systemowego, a nowy kod recovery został wygenerowany."
+          : "Hasło zostało zmienione. Pozostałe sesje zostały unieważnione; sprawy zachowały te same klucze danych."
       );
     } catch (failure) {
       setCurrentPassword("");
@@ -128,14 +144,22 @@ export function AccountSecurityPanel({
           Bezpieczeństwo konta
         </p>
         <h3>
-          Hasło i odzyskiwanie
+          {user.passwordSetupPending
+            ? "Ustaw hasło właściciela"
+            : "Hasło i odzyskiwanie"}
         </h3>
+        {user.passwordSetupPending && (
+          <div className="alert">
+            Pierwsze uruchomienie zostało odblokowane przez chroniony magazyn systemowy. Ustaw własne hasło, aby wycofać sekret bootstrap.
+          </div>
+        )}
         <p className="field-help">
           Kod recovery odblokowuje ten sam lokalny klucz użytkownika. Nie przechowuj go razem z komputerem.
         </p>
       </div>
 
       <div className="account-security-grid">
+        {!user.passwordSetupPending && (
         <div>
           <h4>Kod recovery</h4>
           <label>
@@ -191,25 +215,32 @@ export function AccountSecurityPanel({
             </div>
           )}
         </div>
+        )}
 
         <div>
-          <h4>Zmiana hasła</h4>
-          <label>
-            Bieżące hasło
-            <input
-              type="password"
-              autoComplete="current-password"
-              value={
-                currentPassword
-              }
-              maxLength={128}
-              onChange={(event) =>
-                setCurrentPassword(
-                  event.target.value
-                )
-              }
-            />
-          </label>
+          <h4>
+            {user.passwordSetupPending
+              ? "Ustaw hasło"
+              : "Zmiana hasła"}
+          </h4>
+          {!user.passwordSetupPending && (
+            <label>
+              Bieżące hasło
+              <input
+                type="password"
+                autoComplete="current-password"
+                value={
+                  currentPassword
+                }
+                maxLength={128}
+                onChange={(event) =>
+                  setCurrentPassword(
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+          )}
           <label>
             Nowe hasło
             <input
@@ -229,7 +260,10 @@ export function AccountSecurityPanel({
             className="primary-button"
             disabled={
               busy ||
-              !currentPassword ||
+              (
+                !user.passwordSetupPending &&
+                !currentPassword
+              ) ||
               !newPassword
             }
             onClick={() => {
