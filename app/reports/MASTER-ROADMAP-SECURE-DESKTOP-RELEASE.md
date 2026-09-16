@@ -1,6 +1,6 @@
 # Lex Machina — Master Roadmap to Secure Desktop Release
 
-Status: **IN EXECUTION — P4B + G36 + G34H1-H5 PASS; NEXT G31B2**  
+Status: **IN EXECUTION — P4B + G36 + G34H1-H5 + G37A/G37C1/G37E1 PASS; NEXT G31B2/G31C2**  
 Date: 2026-09-16  
 Branch baseline: `feature/local-runtime`
 
@@ -1548,3 +1548,104 @@ Parallel/open:
 - G30 Open Web Discovery remains independently open and does not block the secure local-document path unless included in release scope.
 
 Do not claim full G31/G33/G34 release completion until their remaining gates are green.
+
+
+---
+
+# G37 CROSS-CUTTING TRACK — ACCOUNT UX, PROVIDER CREDENTIALS, SUPPORT ACCESS AND UPDATE DISCOVERY
+
+Primary spec:
+- `G37-ACCOUNT-ONBOARDING-SUPPORT-UPDATE-ROADMAP.md`
+
+Audit:
+- `AUDIT-G37-ACCOUNT-UPDATE-UX-2026-09-16.md`
+
+Validated build reports:
+- `BUILD-0041-G37A-ACCOUNT-ONBOARDING-DND.md`;
+- `BUILD-0042-G37C1-E1-CREDENTIALS-UPDATE-DISCOVERY.md`.
+
+## G37A — PASS
+
+Validated code SHA: `f4cb530e47b8af15d5a7320330939fcfc0054176`.
+
+Closed:
+- ADMIN user-management UI;
+- create ordinary users;
+- activate/deactivate users;
+- immediate target-session revocation;
+- guarded hard delete;
+- provider key-console links;
+- single-file drag-and-drop on conversation composer;
+- G31B2 callback error-boundary regression.
+
+## G37C1 — PASS
+
+Validated code SHA: `b8cdbeeb83a1b7a733dd47180e44deb3f95faadd`.
+
+Closed:
+- memory-only provider key override;
+- ADMIN set/delete endpoint;
+- environment fallback;
+- zeroization on replace/clear/shutdown;
+- no browser persistence and no secret echo.
+
+Still open:
+- G37C2 persistent credentials through OS credential vault/keychain.
+
+## G37E1 — PASS
+
+Validated code SHA: `b8cdbeeb83a1b7a733dd47180e44deb3f95faadd`.
+
+Closed:
+- GitHub Release discovery;
+- strict semver;
+- draft/prerelease filtering;
+- trusted repository-bound release URLs;
+- non-blocking update status UI;
+- no download/install side effect.
+
+Still open:
+- G37E2 signed release metadata/artifacts;
+- user-approved download/install;
+- staging;
+- self-test;
+- atomic switch;
+- rollback;
+- schema migration backup/recovery.
+
+G37E2 remains sequenced after G34G and G33A-G33D because the updater must live inside the production desktop trust boundary.
+
+## G37B — OPEN / DESKTOP DEPENDENCY
+
+Passwordless first ADMIN may only be implemented with an OS-protected bootstrap secret and `PASSWORD_SETUP_PENDING`. Empty passwords and plaintext fallback files are prohibited.
+
+## G37D — OPEN / DESKTOP DEPENDENCY
+
+SERVICE support identity must be temporary, signed, installation-bound, time-limited, locally approved and fully audited. No universal embedded support password.
+
+## G37F — OPEN
+
+Multi-file drag-and-drop, queue/progress and multi-document privacy UX.
+
+## G37G — IN PROGRESS
+
+Repository closure:
+- PR #39 merged to `main` during G37;
+- PR #17 remains under supersession audit;
+- stale branches with `ahead=0` may be cleanup candidates;
+- diverged historical branches require explicit inspection before deletion;
+- PR #38 remains the parent application line;
+- PR #40 contains G37 execution.
+
+## Updated critical path
+
+1. preserve green `feature/local-runtime` + G37 work;
+2. close G31B2 end-user stored-file/member workflow;
+3. G31C2 + G35C;
+4. G31D/G31E + full G34F;
+5. G34G production Tauri trust boundary;
+6. G33A-G33D installer/update transaction;
+7. G37B/G37C2/G37D/G37E2 desktop integration;
+8. G37F multi-file UX;
+9. clean-machine acceptance;
+10. G37G repository cleanup and signed release.
