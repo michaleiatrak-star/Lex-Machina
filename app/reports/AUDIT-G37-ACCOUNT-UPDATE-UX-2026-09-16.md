@@ -237,7 +237,7 @@ During G37:
 - PR #39 was verified as byte-identical to the DR-09 file already carried by `feature/local-runtime`;
 - its F-138 workflow was green;
 - PR #39 was squash-merged into `main` as `54a696638fb58789e66c417f79219237004f75c1`;
-- PR #17 remains open because its historical branch still contains unique commits; later `main` contains its key F-86/F-108 module artifacts but not an exact preservation of the old T18 workflow, so it is not deleted automatically.
+- PR #17 was subsequently closed as superseded after verifying that its substantive F-86/F-108 line had been replaced by later merged work; its historical branch was deliberately retained because it still contains unique commits.
 
 Branch comparison found:
 
@@ -245,7 +245,7 @@ Branch comparison found:
 - several historical branches are diverged and must be inspected before deletion;
 - `feature/local-runtime` is the active application line and remains far ahead of `main`.
 
-Status: **REPOSITORY NOT YET CLOSED**.
+Status: **REPOSITORY PARTIALLY CLEANED** — current open PRs are #38 and #40; final branch retention/release cleanup remains open.
 
 ## 10. Release blockers after G37A
 
@@ -297,3 +297,27 @@ Validated code SHA: `b8cdbeeb83a1b7a733dd47180e44deb3f95faadd`.
 - G17/G19/G20/G22 live probes — PASS.
 
 Diff audit against `feature/local-runtime` confirms G37 changes are limited to `app/` runtime/web/version/reports. The legal corpus under `Wersja rozwojowa rozpakowana` is unchanged by G37.
+
+
+## 13. Knowledge/retrieval follow-on audit
+
+The user requirement for reusable firm know-how and searchable case documents is no longer treated as part of the template-only G35B scope.
+
+It is tracked separately under G38:
+
+- `G38-FIRM-KNOWLEDGE-RETRIEVAL-ROADMAP.md`;
+- `AUDIT-G38-KNOWLEDGE-RETRIEVAL-FORMATS-2026-09-16.md`.
+
+G38 covers:
+
+- encrypted `FIRM_KNOWLEDGE` workspace;
+- multi-user ACL for firm know-how;
+- local protected retrieval from matter documents and firm know-how;
+- explicit use of protected search hits in provider context;
+- restart-safe case/document identity;
+- digital PDF text-layer-first processing;
+- DOCX/ODT/TXT/Markdown;
+- XLSX/XLSM/CSV/TSV local extraction;
+- no macro or formula execution.
+
+G38 remains separate from shared DOCX/ODT templates, which are authoring assets rather than a knowledge index.
