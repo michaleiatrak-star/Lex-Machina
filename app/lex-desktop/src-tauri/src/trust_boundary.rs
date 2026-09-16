@@ -820,7 +820,7 @@ fn load_or_create_support_identity(
     let signing_key =
         match signing_entry.get_password() {
             Ok(mut encoded) => {
-                let decoded =
+                let mut decoded =
                     URL_SAFE_NO_PAD
                         .decode(encoded.as_bytes())
                         .map_err(|_|
@@ -829,6 +829,7 @@ fn load_or_create_support_identity(
                         )?;
                 unsafe_zero_string(&mut encoded);
                 if decoded.len() != 32 {
+                    decoded.fill(0);
                     return Err(
                         "DESKTOP_SUPPORT_SIGNING_KEY_INVALID"
                             .to_string()
@@ -836,6 +837,7 @@ fn load_or_create_support_identity(
                 }
                 let mut seed = [0_u8; 32];
                 seed.copy_from_slice(&decoded);
+                decoded.fill(0);
                 let key =
                     SigningKey::from_bytes(&seed);
                 seed.fill(0);
@@ -847,13 +849,16 @@ fn load_or_create_support_identity(
                     .map_err(|error| format!(
                         "DESKTOP_RANDOM_FAILED:{error}"
                     ))?;
-                let encoded =
+                let mut encoded =
                     URL_SAFE_NO_PAD.encode(seed);
                 signing_entry
                     .set_password(&encoded)
                     .map_err(|error| format!(
                         "DESKTOP_SUPPORT_KEYRING_WRITE_FAILED:{error}"
                     ))?;
+                unsafe_zero_string(
+                    &mut encoded
+                );
                 let key =
                     SigningKey::from_bytes(&seed);
                 seed.fill(0);
@@ -894,7 +899,7 @@ fn load_support_signing_key(
         .map_err(|error| format!(
             "DESKTOP_SUPPORT_KEYRING_READ_FAILED:{error}"
         ))?;
-    let decoded =
+    let mut decoded =
         URL_SAFE_NO_PAD
             .decode(encoded.as_bytes())
             .map_err(|_|
@@ -903,6 +908,7 @@ fn load_support_signing_key(
             )?;
     unsafe_zero_string(&mut encoded);
     if decoded.len() != 32 {
+        decoded.fill(0);
         return Err(
             "DESKTOP_SUPPORT_SIGNING_KEY_INVALID"
                 .to_string()
@@ -910,6 +916,7 @@ fn load_support_signing_key(
     }
     let mut seed = [0_u8; 32];
     seed.copy_from_slice(&decoded);
+    decoded.fill(0);
     let key =
         SigningKey::from_bytes(&seed);
     seed.fill(0);
