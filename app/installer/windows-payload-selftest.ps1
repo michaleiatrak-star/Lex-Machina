@@ -40,13 +40,30 @@ if ($LASTEXITCODE -ne 0) {
 & $node --version | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_NODE_FAILED" }
 
-$pythonCode = @'
+$pythonCoreCode = @'
 import sys
-import fitz, numpy, PIL, paddle, paddleocr, stanza, torch
-print("PYTHON_IMPORTS_PASS", sys.version)
+import fitz, numpy, PIL
+print("PYTHON_CORE_IMPORTS_PASS", sys.version)
 '@
-& $python -c $pythonCode | Out-Host
-if ($LASTEXITCODE -ne 0) { throw "SELFTEST_PYTHON_IMPORT_FAILED" }
+& $python -c $pythonCoreCode | Out-Host
+if ($LASTEXITCODE -ne 0) { throw "SELFTEST_PYTHON_CORE_IMPORT_FAILED" }
+
+# Keep native ML stacks in separate interpreter processes. Paddle/PaddleX and
+# Torch load independent native DLL graphs on Windows; production OCR and NER
+# workers are separate processes as well.
+$pythonOcrCode = @'
+from paddleocr import PaddleOCR
+print("PYTHON_OCR_IMPORT_PASS")
+'@
+& $python -c $pythonOcrCode | Out-Host
+if ($LASTEXITCODE -ne 0) { throw "SELFTEST_PYTHON_OCR_IMPORT_FAILED" }
+
+$pythonNerCode = @'
+import stanza, torch
+print("PYTHON_NER_IMPORT_PASS", torch.__version__)
+'@
+& $python -c $pythonNerCode | Out-Host
+if ($LASTEXITCODE -ne 0) { throw "SELFTEST_PYTHON_NER_IMPORT_FAILED" }
 
 $requiredPaddle = @(
  "PP-LCNet_x1_0_doc_ori",
