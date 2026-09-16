@@ -15,7 +15,6 @@ import {
 } from "./types.js";
 import {
   decryptUserMasterKey,
-  derivePasswordKey,
   encryptUserMasterKey,
   isValidLoginName,
   normalizeLoginName,
@@ -462,7 +461,6 @@ implements AuthService {
         : "invalid-overlong-password";
     const passwordLengthAccepted =
       passwordLength <= 128;
-    normalizedPassword.length;
 
     let keyEncryptionKey:
       Buffer | undefined;
