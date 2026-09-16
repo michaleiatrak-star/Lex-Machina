@@ -6,7 +6,8 @@ import {
   fileURLToPath
 } from "node:url";
 import type {
-  LegalDocumentAst
+  LegalDocumentAst,
+  LegalStyleProfile
 } from "./legal-document-ast.js";
 
 export type LegalDocumentFormat =
@@ -120,6 +121,57 @@ export class LocalLegalDocumentRenderer {
       bytes: result.bytes,
       aliases:
         result.aliases
+    };
+  }
+
+  async extractStyleProfile(
+    format:
+      LegalDocumentFormat,
+    data:
+      Uint8Array
+  ): Promise<{
+    styleProfile:
+      LegalStyleProfile;
+    sourceFormat:
+      LegalDocumentFormat;
+    safe: true;
+  }> {
+    const result =
+      await this.callRaw({
+        operation:
+          "profile",
+        format,
+        packageBase64:
+          Buffer.from(data)
+            .toString(
+              "base64"
+            )
+      });
+    if (
+      ![
+        "lex-classic-clean-v1",
+        "lex-light-legal-design-v1",
+        "lex-classic-tnr-v1"
+      ].includes(
+        String(
+          result.styleProfile
+        )
+      ) ||
+      result.sourceFormat !==
+        format ||
+      result.safe !== true
+    ) {
+      throw new Error(
+        "LEGAL_DOCUMENT_PROFILE_INVALID"
+      );
+    }
+    return {
+      styleProfile:
+        result.styleProfile as
+          LegalStyleProfile,
+      sourceFormat:
+        format,
+      safe: true
     };
   }
 
