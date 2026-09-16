@@ -1298,3 +1298,74 @@ textarea:focus {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* P4B case lifecycle */
+.case-lifecycle-panel {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid #dde2da;
+}
+
+.case-lifecycle-row {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto auto;
+  align-items: end;
+  gap: 10px;
+}
+
+.case-lifecycle-row label {
+  display: grid;
+  gap: 7px;
+  color: #36483b;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.case-lifecycle-row input {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid #c7cec5;
+  border-radius: 10px;
+  background: #fff;
+  color: #172018;
+  font: inherit;
+}
+
+.case-delete-panel {
+  padding: 12px 14px;
+  border: 1px solid #dfc8c4;
+  border-radius: 12px;
+  background: #fff9f7;
+}
+
+.case-delete-panel summary {
+  cursor: pointer;
+  color: #7a3128;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.danger-button {
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid #9b4035;
+  border-radius: 10px;
+  background: #8a352c;
+  color: #fff;
+  font-weight: 800;
+}
+
+.danger-button:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+}
+
+@media (max-width: 800px) {
+  .case-lifecycle-row {
+    grid-template-columns: 1fr;
+  }
+}
