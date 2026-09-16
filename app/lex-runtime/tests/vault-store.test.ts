@@ -197,6 +197,194 @@ describe("encrypted privacy vault store", () => {
     key.fill(0);
   });
 
+  it("fails closed for truncated vault, wrong key version and stale metadata generation", async () => {
+    const dir = root();
+    const key =
+      randomBytes(32);
+    const store =
+      new EncryptedPrivacyVaultStore({
+        rootDir: dir
+      });
+    const vault =
+      new PseudonymizationVault();
+    vault.getOrCreate(
+      "PERSON",
+      "Zofia Kaczmarek"
+    );
+    await store.saveDocumentVault({
+      caseId: CASE_ID,
+      documentId: DOC_ID,
+      vault,
+      caseDataKey: key,
+      keyVersion: 1
+    });
+
+    await expect(
+      store.loadDocumentVault({
+        caseId: CASE_ID,
+        documentId: DOC_ID,
+        caseDataKey: key,
+        keyVersion: 2
+      })
+    ).rejects.toThrow(
+      "PRIVACY_VAULT_HEADER_INVALID"
+    );
+
+    const privacyDir =
+      path.join(
+        dir,
+        "cases",
+        CASE_ID,
+        "private",
+        "privacy"
+      );
+    const vaultPath =
+      path.join(
+        privacyDir,
+        "vault.lmv"
+      );
+    const metaPath =
+      path.join(
+        privacyDir,
+        "vault-meta.json"
+      );
+    const originalVault =
+      fs.readFileSync(
+        vaultPath
+      );
+    const originalMeta =
+      fs.readFileSync(
+        metaPath,
+        "utf8"
+      );
+
+    fs.writeFileSync(
+      vaultPath,
+      originalVault.subarray(
+        0,
+        originalVault.length - 8
+      )
+    );
+    await expect(
+      store.loadDocumentVault({
+        caseId: CASE_ID,
+        documentId: DOC_ID,
+        caseDataKey: key,
+        keyVersion: 1
+      })
+    ).rejects.toThrow();
+
+    fs.writeFileSync(
+      vaultPath,
+      originalVault
+    );
+    const staleMeta =
+      JSON.parse(
+        originalMeta
+      ) as {
+        generation: number;
+      };
+    staleMeta.generation += 1;
+    fs.writeFileSync(
+      metaPath,
+      JSON.stringify(
+        staleMeta
+      )
+    );
+
+    await expect(
+      store.loadDocumentVault({
+        caseId: CASE_ID,
+        documentId: DOC_ID,
+        caseDataKey: key,
+        keyVersion: 1
+      })
+    ).rejects.toThrow(
+      "PRIVACY_VAULT_META_MISMATCH"
+    );
+
+    key.fill(0);
+  });
+
+  it("binds LMV1 AAD to the exact case id", async () => {
+    const dir = root();
+    const key =
+      randomBytes(32);
+    const store =
+      new EncryptedPrivacyVaultStore({
+        rootDir: dir
+      });
+    const vault =
+      new PseudonymizationVault();
+    vault.getOrCreate(
+      "PERSON",
+      "Tomasz Lewandowski"
+    );
+    await store.saveDocumentVault({
+      caseId: CASE_ID,
+      documentId: DOC_ID,
+      vault,
+      caseDataKey: key,
+      keyVersion: 1
+    });
+
+    const otherCase =
+      "case_fedcba9876543210fedcba9876543210";
+    const sourceDir =
+      path.join(
+        dir,
+        "cases",
+        CASE_ID,
+        "private",
+        "privacy"
+      );
+    const targetDir =
+      path.join(
+        dir,
+        "cases",
+        otherCase,
+        "private",
+        "privacy"
+      );
+    fs.mkdirSync(
+      targetDir,
+      {
+        recursive: true
+      }
+    );
+    for (
+      const name
+      of [
+        "vault.lmv",
+        "vault-meta.json"
+      ]
+    ) {
+      fs.copyFileSync(
+        path.join(
+          sourceDir,
+          name
+        ),
+        path.join(
+          targetDir,
+          name
+        )
+      );
+    }
+
+    await expect(
+      store.loadDocumentVault({
+        caseId: otherCase,
+        documentId: DOC_ID,
+        caseDataKey: key,
+        keyVersion: 1
+      })
+    ).rejects.toThrow(
+      "PRIVACY_VAULT_AAD_INVALID"
+    );
+
+    key.fill(0);
+  });
+
   it("re-encrypts the same mapping under a rotated case key", async () => {
     const dir = root();
     const oldKey =
