@@ -39,6 +39,8 @@ const required = [
   "Anonimizuj / pseudonimizuj",
   "Pozostaw bez anonimizacji",
   "Oznacz, co ten fragment znaczy",
+  "Chunki do analizy AI",
+  "Domyślnie nic nie jest wysyłane do providera",
   "DRAFT_PRESENTABLE",
   "BLOCKED",
   "Uruchom analizę",
@@ -54,7 +56,7 @@ const missing = required.filter((token) => !content.includes(token));
 const pass = exposed.length === 0 && missing.length === 0;
 
 process.stdout.write(JSON.stringify({
-  gate: "G14_G28A_LOCAL_WEB_UI",
+  gate: "G14_G32_LOCAL_WEB_UI",
   result: pass ? "PASS" : "BLOCKED",
   bundleFiles: files.length,
   forbiddenTokensFound: exposed,
