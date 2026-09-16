@@ -19,6 +19,7 @@ import {
   encryptUserMasterKey,
   isValidLoginName,
   normalizeLoginName,
+  PasswordKdfExecutor,
   randomKdfSalt,
   randomUserMasterKey,
   validateDisplayName,
@@ -37,6 +38,7 @@ export type AuthErrorCode =
   | "BOOTSTRAP_ALREADY_COMPLETED"
   | "INVALID_CREDENTIALS"
   | "AUTH_BACKOFF_ACTIVE"
+  | "AUTH_BUSY"
   | "AUTHENTICATION_REQUIRED"
   | "SESSION_IDLE_EXPIRED"
   | "SESSION_OVERALL_EXPIRED"
@@ -166,6 +168,8 @@ implements AuthService {
     AuthKdfPolicy;
   private readonly clock:
     AuthClock;
+  private readonly kdfExecutor:
+    PasswordKdfExecutor;
   private readonly dummy:
     DummyUser;
 
@@ -181,6 +185,8 @@ implements AuthService {
       clock?: AuthClock;
       sessionManager?:
         AuthSessionManager;
+      kdfExecutor?:
+        PasswordKdfExecutor;
     }
   ) {
     this.store = store;
@@ -196,6 +202,9 @@ implements AuthService {
       new AuthSessionManager({
         clock: this.clock
       });
+    this.kdfExecutor =
+      options?.kdfExecutor ??
+      new PasswordKdfExecutor();
 
     const dummyKey =
       randomBytes(32);
@@ -312,7 +321,7 @@ implements AuthService {
     const userMasterKey =
       randomUserMasterKey();
     const keyEncryptionKey =
-      await derivePasswordKey(
+      await this.deriveKey(
         password,
         salt,
         this.kdf
@@ -441,6 +450,19 @@ implements AuthService {
         : null;
     const verifier =
       realUser ?? this.dummy;
+    const normalizedPassword =
+      input.password.normalize("NFKC");
+    const passwordLength =
+      Array.from(
+        normalizedPassword
+      ).length;
+    const passwordForKdf =
+      passwordLength <= 128
+        ? input.password
+        : "invalid-overlong-password";
+    const passwordLengthAccepted =
+      passwordLength <= 128;
+    normalizedPassword.length;
 
     let keyEncryptionKey:
       Buffer | undefined;
@@ -449,8 +471,8 @@ implements AuthService {
     let verified = false;
     try {
       keyEncryptionKey =
-        await derivePasswordKey(
-          input.password,
+        await this.deriveKey(
+          passwordForKdf,
           verifier.kdfSalt,
           verifier.kdf
         );
@@ -461,6 +483,7 @@ implements AuthService {
             verifier as StoredLocalUser
           );
         verified =
+          passwordLengthAccepted &&
           realUser !== null &&
           realUser.status ===
             "ACTIVE";
@@ -774,6 +797,33 @@ implements AuthService {
     return retryAfter;
   }
 
+  private async deriveKey(
+    password: string,
+    salt: Buffer,
+    policy: AuthKdfPolicy
+  ): Promise<Buffer> {
+    try {
+      return await this.kdfExecutor
+        .derive(
+          password,
+          salt,
+          policy
+        );
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        error.message ===
+          "AUTH_KDF_BUSY"
+      ) {
+        throw new AuthError(
+          "AUTH_BUSY",
+          503
+        );
+      }
+      throw error;
+    }
+  }
+
   private async upgradeEnvelope(
     user: StoredLocalUser,
     password: string,
@@ -783,7 +833,7 @@ implements AuthService {
     const salt =
       randomKdfSalt();
     const key =
-      await derivePasswordKey(
+      await this.deriveKey(
         password,
         salt,
         this.kdf
