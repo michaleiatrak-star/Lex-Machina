@@ -9,6 +9,10 @@ import {
   getUpdateStatus,
   login,
   logoutAuth,
+  listCaseAccess,
+  listCaseAccessCandidates,
+  grantCaseAccess,
+  revokeCaseAccess,
   reviewDocument,
   setProviderApiKey,
   clearProviderApiKey,
@@ -96,6 +100,193 @@ describe("local API client", () => {
         })
       })
     );
+  });
+
+  it("supports the case collaboration client contract", async () => {
+    const authPayload = {
+      user: {
+        userId:
+          "user_0123456789abcdef0123456789abcdef",
+        loginName:
+          "owner",
+        displayName:
+          "Owner",
+        appRole:
+          "ADMIN",
+        status:
+          "ACTIVE",
+        createdAt:
+          "2026-09-16T08:00:00.000Z"
+      },
+      session: {
+        sessionId:
+          "authsess_0123456789abcdef0123456789abcdef",
+        userId:
+          "user_0123456789abcdef0123456789abcdef",
+        createdAt:
+          "2026-09-16T08:00:00.000Z",
+        lastActivityAt:
+          "2026-09-16T08:00:00.000Z",
+        lastFullAuthenticationAt:
+          "2026-09-16T08:00:00.000Z",
+        idleExpiresAt:
+          "2026-09-16T08:15:00.000Z",
+        overallExpiresAt:
+          "2026-09-16T16:00:00.000Z"
+      },
+      sessionToken:
+        "C".repeat(43)
+    };
+    const caseId =
+      "case_0123456789abcdef0123456789abcdef";
+    const colleagueId =
+      "user_11111111111111111111111111111111";
+    const colleague = {
+      userId:
+        colleagueId,
+      loginName:
+        "anna",
+      displayName:
+        "Anna",
+      appRole:
+        "USER",
+      status:
+        "ACTIVE",
+      createdAt:
+        "2026-09-16T08:00:00.000Z"
+    };
+
+    const fetchMock =
+      vi.spyOn(
+        globalThis,
+        "fetch"
+      )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify(
+              authPayload
+            ),
+            { status: 200 }
+          )
+        )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify({
+              access: []
+            }),
+            { status: 200 }
+          )
+        )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify({
+              users: [
+                colleague
+              ]
+            }),
+            { status: 200 }
+          )
+        )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify({
+              user: colleague,
+              role: "EDITOR",
+              canReidentify:
+                false,
+              grantedByUserId:
+                authPayload.user
+                  .userId,
+              grantedAt:
+                "2026-09-16T08:02:00.000Z",
+              keyVersion: 1
+            }),
+            { status: 201 }
+          )
+        )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify({
+              caseId,
+              revokedUserId:
+                colleagueId,
+              keyVersion: 2
+            }),
+            { status: 200 }
+          )
+        );
+
+    await login({
+      loginName:
+        "owner",
+      password:
+        "Owner bezpieczne haslo testowe 2026"
+    });
+    await listCaseAccess(
+      caseId
+    );
+    await listCaseAccessCandidates(
+      caseId
+    );
+    await grantCaseAccess(
+      caseId,
+      {
+        userId:
+          colleagueId,
+        role:
+          "EDITOR",
+        canReidentify:
+          false
+      }
+    );
+    await revokeCaseAccess(
+      caseId,
+      colleagueId
+    );
+
+    expect(
+      fetchMock.mock.calls[1]
+        ?.[0]
+    ).toBe(
+      `http://127.0.0.1:4317/api/cases/${caseId}/access`
+    );
+    expect(
+      fetchMock.mock.calls[2]
+        ?.[0]
+    ).toBe(
+      `http://127.0.0.1:4317/api/cases/${caseId}/access-candidates`
+    );
+    expect(
+      fetchMock.mock.calls[3]
+        ?.[1]?.body
+    ).toBe(
+      JSON.stringify({
+        userId:
+          colleagueId,
+        role:
+          "EDITOR",
+        canReidentify:
+          false
+      })
+    );
+    expect(
+      fetchMock.mock.calls[4]
+        ?.[1]?.method
+    ).toBe("DELETE");
+    for (
+      const call
+      of fetchMock.mock.calls
+        .slice(1)
+    ) {
+      expect(
+        call[1]?.headers
+      ).toEqual(
+        expect.objectContaining({
+          Authorization:
+            `Bearer ${authPayload.sessionToken}`
+        })
+      );
+    }
   });
 
   it("creates a local case before file work", async () => {
