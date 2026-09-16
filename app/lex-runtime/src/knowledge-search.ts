@@ -1,5 +1,6 @@
 import type {
-  AuthenticatedContext
+  AuthenticatedContext,
+  CaseRole
 } from "./auth/types.js";
 import type {
   CaseKind
@@ -19,6 +20,7 @@ export type KnowledgeSearchScope =
 export type KnowledgeSearchHit = {
   caseId: string;
   caseKind: CaseKind;
+  caseRole: CaseRole;
   caseDisplayName?: string;
   documentId: string;
   chunkIndex: number;
@@ -398,6 +400,8 @@ export class LocalKnowledgeSearchService {
               item.caseId,
             caseKind:
               item.caseKind,
+            caseRole:
+              item.role,
             ...(item.displayName
               ? {
                   caseDisplayName:
