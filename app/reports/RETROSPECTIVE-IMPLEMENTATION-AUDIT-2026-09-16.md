@@ -4,11 +4,11 @@ Status: **COMPLETED — CURRENT VALIDATED GATES CONSISTENT; OPEN GATES REMAIN EX
 
 Validated implementation SHA used for the final regression:
 
-`4599d4827eb724c480bb3c563a7b58134b844bdf`
+`4a32f21f49de6d484bfdae3686c16437ebe3fb40`
 
 Evidence:
-- Lex Runtime Validation `35091284197` — success
-- F-138 structural audit `35091284195` — success
+- Lex Runtime Validation `35092482078` — success
+- F-138 structural audit `35092482105` — success
 - G17/G19/G20/G22 live probes — success
 - G14-G35 web tests/build/bundle — success
 
@@ -67,6 +67,7 @@ The following representative validated SHAs were independently confirmed to have
 | G34H4 baseline | `bfa79b656e302dda37ab000bda08c55f2f889525` | PASS |
 | G36 + regression fixes | `5c19ec48f2c25b5bee7c39a63717e7c808cb3a3e` | PASS |
 | G34H5 + migration HTTP boundary | `4599d4827eb724c480bb3c563a7b58134b844bdf` | PASS |
+| P4B case lifecycle | `4a32f21f49de6d484bfdae3686c16437ebe3fb40` | PASS |
 
 Older build notes sometimes cite a push run while commit-oriented tooling returns a pull-request run for the same SHA. Direct run inspection confirmed those are separate successful runs of the same commit, not mismatched evidence.
 
@@ -174,6 +175,17 @@ PASS remains correctly scoped.
 - one template can be referenced from multiple cases without copying it.
 - shared template originals remain plaintext application-scope files; this is a known release concern and G35C generation integration remains open.
 
+### P4B case lifecycle
+PASS is now supported by the exact current regression.
+- rename persists in SQLite and `case.json`;
+- archive/unarchive persists across restart;
+- archived cases are read-only for WRITE / ANALYZE / REIDENTIFY;
+- delete requires OWNER plus fresh current-password reauthentication;
+- wrong password preserves the case;
+- delete removes case directory, registry row and ACL;
+- schema v3 upgrades to v4 `archived_at` without losing the existing case;
+- web lifecycle controls and bundle gate are green.
+
 ### G36
 Newly implemented and validated.
 - actual core resource content is read and injected;
@@ -238,11 +250,11 @@ Resolution:
 | Phase 2B — workspace/templates foundation | CLOSED FOR G35A/G35B | G35A/G35B PASS; G35C is a later generation gate. |
 | Phase 3 — encrypted privacy vault | CLOSED | G31C1 PASS. |
 | Phase 4A — recovery/reauthorization | PARTIAL | G34E and G34F1 PASS; full G34F awaits real G31D/G31E deanonymization/export grant consumption. |
-| Phase 4B — case lifecycle | PARTIAL | list/create/reopen/select and explicit legacy import exist; rename/archive/delete are not implemented. |
+| Phase 4B — case lifecycle | CLOSED | P4B PASS: list/create/reopen/select/import plus rename/archive/unarchive and OWNER + fresh-password delete; restart/schema-upgrade/UI coverage is green. |
 | Phase 5 — encrypted case storage | G34H GATES CLOSED / CHECKLIST PARTIAL | G34H1-H5 PASS; true streaming direct upload remains open and unknown legacy formats intentionally block rather than auto-delete. |
 | Parallel G36 — legal skill runtime | CLOSED | 32 skills / 16 DR / 1,187 supported text resources readable; G36 PASS. |
 
-Therefore the answer to “are all earlier stages closed?” is **no**: the validated security foundations are strong, but Phase 4A, Phase 4B and parts of the Phase 5 engineering checklist remain open.
+Therefore the answer to “are all earlier stages closed?” is **no**: Phase 4B is now closed, but Phase 4A/full G34F and parts of the Phase 5 engineering hardening checklist remain open, while later G31/G34G/G33 phases have not yet been implemented.
 
 ---
 
@@ -274,11 +286,10 @@ Important qualification:
 - latest full regression validates the present integrated code, not only historical snapshots.
 
 Next critical path:
-1. close case lifecycle gaps: rename/archive/delete + migration UX;
-2. G31B2 stored-file/member processing;
-3. G31C2 typed authoring AST;
-4. G35C template profile integration;
-5. G31D/G31E;
-6. full G34F consumption/download integration;
-7. G34G;
-8. G33 installer execution.
+1. G31B2 stored-file/member processing;
+2. G31C2 typed authoring AST;
+3. G35C template profile integration;
+4. G31D/G31E;
+5. full G34F consumption/download integration;
+6. G34G;
+7. G33 installer execution.
