@@ -57,7 +57,12 @@
     "validate:g34h4": "tsx src/validate-g34h4.ts",
     "validate:g34h5": "tsx src/validate-g34h5.ts",
     "validate:g36": "tsx src/validate-g36.ts",
-    "validate:p4b": "tsx src/validate-p4b.ts"
+    "validate:p4b": "tsx src/validate-p4b.ts",
+    "validate:g31c2": "tsx src/validate-g31c2.ts",
+    "validate:g31d": "tsx src/validate-g31d.ts",
+    "validate:g31e": "tsx src/validate-g31e.ts",
+    "validate:g35c": "tsx src/validate-g35c.ts",
+    "validate:g34f": "tsx src/validate-g34f.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.49",
