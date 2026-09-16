@@ -1,6 +1,6 @@
 # G31 — Local DOCX/ODT Authoring + Case Storage Architecture
 
-Status: **DESIGN COMPLETE — IMPLEMENTATION NOT YET PASS**  
+Status: **G31A/G31B FOUNDATION IMPLEMENTED; G31C-G31E DESIGN COMPLETE, NOT YET PASS**  
 Date: 2026-09-16
 
 ## 1. Target pipeline
@@ -54,19 +54,20 @@ The browser never receives the re-identification vault.
 
 ---
 
-## 3. Current-state audit
+## 3. Current-state audit and resolved storage gap
 
-Current uploads are **not persisted to a case directory**.
+Before G31A, uploads were **not persisted to a case directory**: HTTP passed request bytes directly to document review/ingestion and `LocalPrivateDocumentService` retained only source/vault state in memory.
 
-As of this design:
-- `POST /api/documents/review` passes request bytes directly to `DocumentService.review`;
-- `LocalPrivateDocumentService` stores source pages and the vault in an in-memory `Map`;
-- no `caseId` exists in the document contract;
-- no application file store is wired;
-- no `mkdir`/`writeFile`-based case storage exists in `app/lex-runtime`;
-- process restart loses those in-memory document records.
+That gap is now closed for production uploads:
 
-Therefore durable local case storage is a prerequisite for ZIP intake and for reliable document authoring.
+- the web app creates an opaque local `caseId` before accepting files;
+- production `POST /api/documents/review` and `/ingest` require that case id when the case store is wired;
+- PDF/image bytes are persisted under the case before OCR/review;
+- the stored original has an upload manifest and SHA-256;
+- `POST /api/cases/:caseId/files` persists ZIP archives and extracts safe members under the same case;
+- rejected archives are removed rather than leaving a partial upload directory.
+
+The OCR/privacy source pages and reversible vault are still runtime-private objects. G31C-G31E must define any additional durable private-state policy rather than serializing clear-value vault contents by default.
 
 ---
 
@@ -76,15 +77,11 @@ Introduce:
 
 `LEX_DATA_DIR`
 
-Default should resolve outside the source repository, for example:
+The implemented foundation resolves outside the source repository:
 
-- Windows: user application-data directory;
-- macOS: user Application Support directory;
-- Linux: XDG data directory.
+`LEX_DATA_DIR` when explicitly configured, otherwise `~/.lex-machina/data`.
 
-Development override may point to a dedicated local folder.
-
-Never default case data into the Git checkout.
+A future desktop packaging layer may map this to the operating system's standard application-data directory. Never default case data into the Git checkout.
 
 ### Directory model
 
@@ -145,21 +142,18 @@ Suggested API:
 
 ## 6. Upload persistence contract
 
-Every uploaded file should be persisted first, then processed from the stored bytes.
+Every uploaded file must be persisted before it is processed.
 
-Order:
+The current foundation:
+1. accepts a bounded localhost request body;
+2. writes a `.partial` file inside the target case;
+3. atomically renames it into `incoming/<uploadId>/original/`;
+4. computes SHA-256 and writes the upload manifest;
+5. only then invokes document review/OCR, or ZIP extraction.
 
-1. stream request to a temporary file inside the target case;
-2. enforce compressed/input byte limit while streaming;
-3. fsync/close;
-4. SHA-256 the stored bytes;
-5. atomically rename into `incoming/<uploadId>/original/`;
-6. write manifest atomically;
-7. only then start extraction/OCR/parsing.
+For very large production case files, a later hardening step should replace the current Express in-memory raw-body stage with streaming-to-disk + fsync while preserving the same store contract.
 
-This guarantees that OCR/privacy processing refers to an immutable local source artifact.
-
-The current document review endpoint should eventually accept a stored-file reference rather than arbitrary browser-supplied bytes for repeat operations.
+Repeat operations should eventually consume the immutable stored-file reference rather than requiring the browser to re-upload the same bytes.
 
 ---
 
@@ -664,17 +658,23 @@ The UI should expose **Pobierz DOCX** / **Pobierz ODT** immediately after succes
 
 ## 21. Implementation gates
 
-### G31A — Case storage
-- durable local case ids/directories;
-- atomic upload persistence;
-- manifests/hashes;
-- existing document review consumes stored files.
+### G31A — Case storage foundation — IMPLEMENTED
+- opaque local case ids/directories;
+- document upload persistence before review/OCR;
+- atomic `.partial` → final rename;
+- upload manifests and SHA-256;
+- case storage outside the source repository by default.
 
-### G31B — Safe ZIP intake
-- secure extraction;
-- ZIP-slip/bomb/symlink defenses;
-- extracted-file manifest;
-- files retained under case directory.
+### G31B — Safe ZIP intake foundation — IMPLEMENTED
+- ZIP upload retained in the case;
+- ZIP-slip/path traversal defense;
+- absolute/drive/UNC path rejection;
+- symlink/special-file rejection;
+- entry/single-file/total-size/depth/path/ratio limits;
+- duplicate-path rejection;
+- safe extracted-file manifest;
+- rejected archive cleanup;
+- nested archives are not recursively auto-extracted.
 
 ### G31C — Typed authoring AST
 - schema;
