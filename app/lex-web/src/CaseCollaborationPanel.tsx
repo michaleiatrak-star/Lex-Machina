@@ -1,0 +1,536 @@
+import {
+  useEffect,
+  useState
+} from "react";
+import {
+  grantCaseAccess,
+  listCaseAccess,
+  listCaseAccessCandidates,
+  revokeCaseAccess,
+  type AuthenticatedUser,
+  type CaseAccessEntry,
+  type CaseRole
+} from "./api.js";
+
+type SharedRole =
+  Exclude<
+    CaseRole,
+    "OWNER"
+  >;
+
+const ROLE_LABELS:
+  Record<
+    CaseRole,
+    string
+  > = {
+    OWNER: "Właściciel",
+    EDITOR: "Edytor",
+    ANALYST: "Analityk",
+    VIEWER: "Odczyt"
+  };
+
+const ROLE_HELP:
+  Record<
+    SharedRole,
+    string
+  > = {
+    EDITOR:
+      "odczyt, dodawanie dokumentów i analiza",
+    ANALYST:
+      "odczyt i analiza bez modyfikacji akt",
+    VIEWER:
+      "wyłącznie odczyt akt"
+  };
+
+function ParticipantRow({
+  caseId,
+  entry,
+  busy,
+  onChanged
+}: {
+  caseId: string;
+  entry: CaseAccessEntry;
+  busy: boolean;
+  onChanged: (
+    message: string
+  ) => Promise<void>;
+}) {
+  const editable =
+    entry.role !== "OWNER";
+  const [role, setRole] =
+    useState<SharedRole>(
+      entry.role === "OWNER"
+        ? "VIEWER"
+        : entry.role
+    );
+  const [
+    canReidentify,
+    setCanReidentify
+  ] = useState(
+    entry.canReidentify
+  );
+
+  useEffect(() => {
+    if (
+      entry.role !== "OWNER"
+    ) {
+      setRole(
+        entry.role
+      );
+    }
+    setCanReidentify(
+      entry.canReidentify
+    );
+  }, [
+    entry.role,
+    entry.canReidentify
+  ]);
+
+  async function save():
+    Promise<void> {
+    if (!editable) return;
+    await grantCaseAccess(
+      caseId,
+      {
+        userId:
+          entry.user.userId,
+        role,
+        canReidentify
+      }
+    );
+    await onChanged(
+      `Zaktualizowano dostęp @${entry.user.loginName}.`
+    );
+  }
+
+  async function revoke():
+    Promise<void> {
+    if (!editable) return;
+    if (
+      !window.confirm(
+        `Odebrać @${entry.user.loginName} dostęp do tej sprawy? Klucz sprawy zostanie obrócony dla pozostałych uczestników.`
+      )
+    ) {
+      return;
+    }
+    await revokeCaseAccess(
+      caseId,
+      entry.user.userId
+    );
+    await onChanged(
+      `Odebrano dostęp @${entry.user.loginName} i obrócono klucz sprawy.`
+    );
+  }
+
+  return (
+    <article className="case-collaborator-row">
+      <div className="case-collaborator-person">
+        <strong>
+          {entry.user.displayName}
+        </strong>
+        <span>
+          @{entry.user.loginName}
+          {" · "}
+          {ROLE_LABELS[
+            entry.role
+          ]}
+        </span>
+        <small>
+          {entry.role ===
+          "OWNER"
+            ? "pełna kontrola sprawy"
+            : ROLE_HELP[
+                entry.role
+              ]}
+          {entry.canReidentify
+            ? " · reidentyfikacja dozwolona"
+            : " · bez reidentyfikacji"}
+        </small>
+      </div>
+
+      {editable && (
+        <div className="case-collaborator-controls">
+          <select
+            aria-label={
+              `Rola ${entry.user.loginName}`
+            }
+            value={role}
+            disabled={busy}
+            onChange={(event) =>
+              setRole(
+                event.target
+                  .value as
+                  SharedRole
+              )
+            }
+          >
+            <option value="EDITOR">
+              Edytor
+            </option>
+            <option value="ANALYST">
+              Analityk
+            </option>
+            <option value="VIEWER">
+              Odczyt
+            </option>
+          </select>
+
+          <label className="case-reidentify-toggle">
+            <input
+              type="checkbox"
+              checked={
+                canReidentify
+              }
+              disabled={busy}
+              onChange={(event) =>
+                setCanReidentify(
+                  event.target
+                    .checked
+                )
+              }
+            />
+            Reidentyfikacja
+          </label>
+
+          <button
+            type="button"
+            disabled={busy}
+            onClick={() => {
+              void save();
+            }}
+          >
+            Zapisz
+          </button>
+          <button
+            type="button"
+            className="danger-button"
+            disabled={busy}
+            onClick={() => {
+              void revoke();
+            }}
+          >
+            Odbierz
+          </button>
+        </div>
+      )}
+    </article>
+  );
+}
+
+export function CaseCollaborationPanel({
+  caseId,
+  caseRole
+}: {
+  caseId: string;
+  caseRole:
+    | CaseRole
+    | undefined;
+}) {
+  const [access, setAccess] =
+    useState<CaseAccessEntry[]>(
+      []
+    );
+  const [
+    candidates,
+    setCandidates
+  ] = useState<
+    AuthenticatedUser[]
+  >([]);
+  const [
+    selectedUserId,
+    setSelectedUserId
+  ] = useState("");
+  const [role, setRole] =
+    useState<SharedRole>(
+      "EDITOR"
+    );
+  const [
+    canReidentify,
+    setCanReidentify
+  ] = useState(false);
+  const [busy, setBusy] =
+    useState(false);
+  const [error, setError] =
+    useState("");
+  const [message, setMessage] =
+    useState("");
+
+  const canManage =
+    caseRole === "OWNER";
+
+  async function refresh():
+    Promise<void> {
+    if (
+      !caseId ||
+      !canManage
+    ) {
+      setAccess([]);
+      setCandidates([]);
+      return;
+    }
+    const [
+      currentAccess,
+      available
+    ] = await Promise.all([
+      listCaseAccess(caseId),
+      listCaseAccessCandidates(
+        caseId
+      )
+    ]);
+    setAccess(
+      currentAccess.access
+    );
+    setCandidates(
+      available.users
+    );
+    setSelectedUserId(
+      (current) =>
+        available.users.some(
+          (user) =>
+            user.userId ===
+              current
+        )
+          ? current
+          : (
+              available.users[0]
+                ?.userId ?? ""
+            )
+    );
+  }
+
+  useEffect(() => {
+    setError("");
+    setMessage("");
+    void refresh().catch(
+      (failure) => {
+        setError(
+          failure instanceof Error
+            ? failure.message
+            : String(failure)
+        );
+      }
+    );
+  }, [
+    caseId,
+    canManage
+  ]);
+
+  async function runChange(
+    action:
+      () => Promise<void>
+  ): Promise<void> {
+    setBusy(true);
+    setError("");
+    setMessage("");
+    try {
+      await action();
+    } catch (failure) {
+      setError(
+        failure instanceof Error
+          ? failure.message
+          : String(failure)
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function add():
+    Promise<void> {
+    if (!selectedUserId) {
+      return;
+    }
+    await grantCaseAccess(
+      caseId,
+      {
+        userId:
+          selectedUserId,
+        role,
+        canReidentify
+      }
+    );
+    setCanReidentify(false);
+    await refresh();
+    setMessage(
+      "Użytkownik otrzymał szyfrowany dostęp do sprawy."
+    );
+  }
+
+  if (
+    !caseId ||
+    !canManage
+  ) {
+    return null;
+  }
+
+  return (
+    <section className="case-collaboration-panel">
+      <div className="case-collaboration-head">
+        <div>
+          <p className="eyebrow">
+            Zespół sprawy
+          </p>
+          <h3>
+            Uczestnicy i dostęp do akt
+          </h3>
+          <p className="field-help">
+            Każdy uczestnik otrzymuje własną kopertę klucza sprawy. Odebranie dostępu obraca klucz i odcina użytkownika od zaszyfrowanych dokumentów.
+          </p>
+        </div>
+        <span className="security-pill">
+          OWNER MANAGES ACL
+        </span>
+      </div>
+
+      <div className="case-collaboration-add">
+        <label>
+          Użytkownik
+          <select
+            value={
+              selectedUserId
+            }
+            disabled={
+              busy ||
+              candidates.length ===
+                0
+            }
+            onChange={(event) =>
+              setSelectedUserId(
+                event.target.value
+              )
+            }
+          >
+            {candidates.length ===
+              0 && (
+              <option value="">
+                Brak kolejnych aktywnych użytkowników
+              </option>
+            )}
+            {candidates.map(
+              (user) => (
+                <option
+                  key={
+                    user.userId
+                  }
+                  value={
+                    user.userId
+                  }
+                >
+                  {user.displayName} · @{user.loginName}
+                </option>
+              )
+            )}
+          </select>
+        </label>
+
+        <label>
+          Rola
+          <select
+            value={role}
+            disabled={busy}
+            onChange={(event) =>
+              setRole(
+                event.target
+                  .value as
+                  SharedRole
+              )
+            }
+          >
+            <option value="EDITOR">
+              Edytor
+            </option>
+            <option value="ANALYST">
+              Analityk
+            </option>
+            <option value="VIEWER">
+              Odczyt
+            </option>
+          </select>
+        </label>
+
+        <label className="case-reidentify-toggle">
+          <input
+            type="checkbox"
+            checked={
+              canReidentify
+            }
+            disabled={busy}
+            onChange={(event) =>
+              setCanReidentify(
+                event.target
+                  .checked
+              )
+            }
+          />
+          Może reidentyfikować
+        </label>
+
+        <button
+          type="button"
+          className="primary-button"
+          disabled={
+            busy ||
+            !selectedUserId
+          }
+          onClick={() => {
+            void runChange(
+              add
+            );
+          }}
+        >
+          Dodaj do sprawy
+        </button>
+      </div>
+
+      <div className="case-role-legend">
+        <span>
+          <strong>EDITOR</strong> — dokumenty + analiza
+        </span>
+        <span>
+          <strong>ANALYST</strong> — odczyt + analiza
+        </span>
+        <span>
+          <strong>VIEWER</strong> — odczyt
+        </span>
+      </div>
+
+      {error && (
+        <div className="alert alert-error">
+          {error}
+        </div>
+      )}
+      {message && (
+        <div className="alert">
+          {message}
+        </div>
+      )}
+
+      <div className="case-collaborator-list">
+        {access.map(
+          (entry) => (
+            <ParticipantRow
+              key={
+                entry.user.userId
+              }
+              caseId={caseId}
+              entry={entry}
+              busy={busy}
+              onChanged={async (
+                nextMessage
+              ) => {
+                await runChange(
+                  async () => {
+                    await refresh();
+                    setMessage(
+                      nextMessage
+                    );
+                  }
+                );
+              }}
+            />
+          )
+        )}
+      </div>
+    </section>
+  );
+}
