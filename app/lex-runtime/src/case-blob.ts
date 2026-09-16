@@ -681,6 +681,221 @@ export async function writeCaseBlob(
   }
 }
 
+export async function writeCaseBlobFromFile(
+  args: {
+    targetFile: string;
+    sourceFile: string;
+    identity:
+      CaseBlobIdentity;
+    caseDataKey: Buffer;
+    expectedSha256: string;
+  }
+): Promise<void> {
+  validateIdentity(
+    args.identity
+  );
+  if (
+    !/^[a-f0-9]{64}$/.test(
+      args.expectedSha256
+    )
+  ) {
+    throw new Error(
+      "CASE_BLOB_PLAINTEXT_HASH_INVALID"
+    );
+  }
+
+  const source =
+    await open(
+      args.sourceFile,
+      "r"
+    );
+  const sourceStat =
+    await source.stat();
+  if (
+    !sourceStat.isFile() ||
+    !Number.isSafeInteger(
+      sourceStat.size
+    )
+  ) {
+    await source.close();
+    throw new Error(
+      "CASE_BLOB_SOURCE_INVALID"
+    );
+  }
+
+  const plaintextLength =
+    sourceStat.size;
+  const aad =
+    aadFor(
+      args.identity
+    );
+  const nonce =
+    randomBytes(
+      NONCE_BYTES
+    );
+  const header =
+    headerFor({
+      keyVersion:
+        args.identity
+          .keyVersion,
+      aadLength:
+        aad.byteLength,
+      plaintextLength
+    });
+  const key =
+    deriveBlobKey(
+      args.caseDataKey,
+      args.identity
+    );
+  const cipher =
+    createCipheriv(
+      "aes-256-gcm",
+      key,
+      nonce
+    );
+  cipher.setAAD(
+    aad,
+    {
+      plaintextLength
+    }
+  );
+
+  const targetFile =
+    path.resolve(
+      args.targetFile
+    );
+  await mkdir(
+    path.dirname(
+      targetFile
+    ),
+    {
+      recursive: true,
+      mode: 0o700
+    }
+  );
+  const partial =
+    targetFile +
+    ".partial";
+  await rm(
+    partial,
+    { force: true }
+  );
+  const output =
+    await open(
+      partial,
+      "wx",
+      0o600
+    );
+  const hash =
+    createHash("sha256");
+
+  try {
+    await writeAll(
+      output,
+      header
+    );
+    await writeAll(
+      output,
+      nonce
+    );
+    await writeAll(
+      output,
+      aad
+    );
+
+    let position = 0;
+    let remaining =
+      plaintextLength;
+    while (remaining > 0) {
+      const length =
+        Math.min(
+          CHUNK_BYTES,
+          remaining
+        );
+      const plain =
+        await readExact(
+          source,
+          length,
+          position
+        );
+      hash.update(plain);
+      const encrypted =
+        cipher.update(
+          plain
+        );
+      plain.fill(0);
+      await writeAll(
+        output,
+        encrypted
+      );
+      position += length;
+      remaining -= length;
+    }
+
+    const digest =
+      hash.digest("hex");
+    if (
+      digest !==
+        args.expectedSha256
+    ) {
+      throw new Error(
+        "CASE_BLOB_PLAINTEXT_HASH_MISMATCH"
+      );
+    }
+
+    const final =
+      cipher.final();
+    if (
+      final.byteLength > 0
+    ) {
+      await writeAll(
+        output,
+        final
+      );
+    }
+    await writeAll(
+      output,
+      cipher.getAuthTag()
+    );
+    await output.sync();
+    await output.close();
+    await source.close();
+    key.fill(0);
+
+    await verifyCaseBlob({
+      targetFile:
+        partial,
+      identity:
+        args.identity,
+      caseDataKey:
+        args.caseDataKey,
+      expectedSha256:
+        args.expectedSha256
+    });
+    await rename(
+      partial,
+      targetFile
+    );
+  } catch (error) {
+    try {
+      await output.close();
+    } catch {
+      // already closed
+    }
+    try {
+      await source.close();
+    } catch {
+      // already closed
+    }
+    key.fill(0);
+    await rm(
+      partial,
+      { force: true }
+    );
+    throw error;
+  }
+}
+
 export async function readCaseBlob(
   args: {
     targetFile: string;
