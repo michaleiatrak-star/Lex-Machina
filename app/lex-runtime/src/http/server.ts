@@ -86,6 +86,9 @@ import {
 import {
   LegalDocumentAstGenerator
 } from "../legal-document-ast-generator.js";
+import {
+  LocalSupportService
+} from "../support-service.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -286,6 +289,23 @@ export async function startLocalServer(options?: {
     new LocalAuthService(
       authStore
     );
+  const supportService =
+    new LocalSupportService({
+      installationId:
+        process.env
+          .LEX_SUPPORT_INSTALLATION_ID,
+      challengePublicKey:
+        process.env
+          .LEX_SUPPORT_CHALLENGE_PUBLIC_KEY,
+      vendorPublicKeyPem:
+        process.env
+          .LEX_SUPPORT_VENDOR_PUBLIC_KEY_PEM,
+      vendorKeyId:
+        process.env
+          .LEX_SUPPORT_VENDOR_KEY_ID,
+      securityEvents:
+        authStore
+    });
   const caseAccessService =
     new LocalCaseAccessService(
       authStore,
@@ -355,6 +375,7 @@ export async function startLocalServer(options?: {
     sharedTemplateStore,
     templateProfileService,
     authService,
+    supportService,
     caseAccessService,
     caseKnowledgeSearch,
     documentAuthoringService,
@@ -414,6 +435,7 @@ export async function startLocalServer(options?: {
           new Promise<void>((closeResolve, closeReject) => {
             server.close((error) => {
               credentials.close();
+              supportService.close();
               authService.close();
               if (error) closeReject(error);
               else closeResolve();
