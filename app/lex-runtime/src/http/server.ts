@@ -64,6 +64,9 @@ import {
 import {
   LocalOfficeDocumentTextExtractor
 } from "../office-document-extractor.js";
+import {
+  LocalSpreadsheetTextExtractor
+} from "../spreadsheet-extractor.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -252,7 +255,8 @@ export async function startLocalServer(options?: {
       ),
       privacyVaultStore,
       secureCaseDocumentStore,
-      new LocalOfficeDocumentTextExtractor()
+      new LocalOfficeDocumentTextExtractor(),
+      new LocalSpreadsheetTextExtractor()
     ),
     sessionExecutor: new SafeSessionExecutor(
       registry,
