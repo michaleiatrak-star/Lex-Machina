@@ -38,10 +38,12 @@ The application MUST NOT duplicate or silently rewrite legal skill instructions.
 - **G28 — Local Privacy:** reversible pseudonymization/deanonymization with backend-only vault and local Polish PERSON NER.
 - **G28A — User Privacy Review:** exact user selections can PSEUDONYMIZE, KEEP or LABEL text before protected chunks are generated.
 - **G29 — Private Document Pipeline:** OCR + privacy + chunking exposed through the localhost document-ingestion API.
+- **G31A — Case Storage Foundation:** production uploads are persisted locally under an opaque case id before OCR/review.
+- **G31B — Safe ZIP Intake Foundation:** ZIP archives are stored and extracted locally with traversal/symlink/bomb limits; archive members are never sent to a provider automatically.
 - **G32 — Protected Document Attachment Session:** the user explicitly selects finalized protected chunks; only those chunks can enter provider context, while raw pages and the re-identification vault remain local.
 
 ## Current scope
 
-G0-G29 plus G27A/G28A and G32 are implemented and validated on `feature/local-runtime`. Heavy OCR/NER model weights are intentionally installed locally rather than downloaded in every CI run; CI verifies adapters, worker syntax, completeness contracts and fail-closed behavior. The local UI supports PDF/image review, manual privacy decisions and explicit protected-chunk selection before provider execution.
+G0-G29 plus G27A/G28A and G32 are implemented on `feature/local-runtime`. G31A/G31B provide the storage/archive foundation: the UI creates a local case, PDF/image uploads are persisted under that case before OCR, and ZIP archives are safely extracted into the case directory. Heavy OCR/NER model weights are intentionally installed locally rather than downloaded in every CI run; CI verifies adapters, worker syntax, completeness contracts and fail-closed behavior.
 
-G30 open-web discovery and G31 local DOCX generation remain planned and are **not** claimed PASS.
+Full G31 is **not** claimed PASS: G31C typed authoring AST/token aliases, G31D deterministic DOCX/deanonymization/download and G31E deterministic ODT/deanonymization/download remain open. G30 open-web discovery also remains open.
