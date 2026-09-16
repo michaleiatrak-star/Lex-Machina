@@ -7,6 +7,18 @@
     Abort
   ${EndIf}
 
+  SetRegView 64
+  ClearErrors
+  ReadRegDWord $0 HKLM "SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64" "Installed"
+  ${If} ${Errors}
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: nie udało się potwierdzić instalacji Microsoft Visual C++ Runtime."
+    Abort
+  ${EndIf}
+  ${If} $0 != 1
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: Microsoft Visual C++ Runtime nie jest zainstalowany poprawnie."
+    Abort
+  ${EndIf}
+
   DetailPrint "Weryfikacja prywatnego runtime Lex Machina..."
   nsExec::ExecToStack '"$INSTDIR\runtime\lex-runtime-sidecar.exe" --self-test'
   Pop $0
