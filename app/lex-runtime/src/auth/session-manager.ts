@@ -320,6 +320,60 @@ export class AuthSessionManager {
     return this.view(session);
   }
 
+  markFullAuthentication(
+    sessionId: string
+  ): AuthSessionView | null {
+    const digest =
+      this.digestBySessionId.get(
+        sessionId
+      );
+    if (!digest) {
+      return null;
+    }
+    const session =
+      this.byDigest.get(
+        digest
+      );
+    if (!session) {
+      return null;
+    }
+    const now =
+      this.clock.now();
+    if (
+      now >=
+        session.overallExpiresAtMs ||
+      now >=
+        session.idleExpiresAtMs
+    ) {
+      this.revokeDigest(
+        digest,
+        now >=
+          session.overallExpiresAtMs
+          ? "OVERALL_TIMEOUT"
+          : "IDLE_TIMEOUT"
+      );
+      return null;
+    }
+
+    session.lastFullAuthenticationAtMs =
+      now;
+    session.lastActivityAtMs =
+      now;
+    session.idleExpiresAtMs =
+      now +
+      this.policy.idleTimeoutMs;
+    session.overallExpiresAtMs =
+      now +
+      this.policy.overallTimeoutMs;
+    this.scheduleTimers(
+      digest,
+      session
+    );
+    return this.view(
+      session
+    );
+  }
+
   revokeToken(
     token: string,
     reason:
