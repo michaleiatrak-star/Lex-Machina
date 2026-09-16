@@ -852,6 +852,16 @@ export class SecureCaseUploadStore {
         "INVALID_UPLOAD_ID"
       );
     }
+    await mkdir(
+      this.incomingDir(
+        args.caseId
+      ),
+      {
+        recursive: true,
+        mode: 0o700
+      }
+    );
+
     const dir =
       this.uploadDir(
         args.caseId,
