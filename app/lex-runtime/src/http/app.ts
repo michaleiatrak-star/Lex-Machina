@@ -24,6 +24,7 @@ import type {
   SessionExecutionRequest
 } from "../session-executor.js";
 import type {
+  DocumentChunkSelection,
   DocumentService,
   PagePrivacyDirective,
   SupportedDocumentMediaType
@@ -200,6 +201,59 @@ function publicSkill(skill: {
 
 function sanitizeModels(models: ModelDescriptor[]): ModelDescriptor[] {
   return models.map((model) => ({ ...model }));
+}
+
+function parseDocumentAttachments(
+  value: unknown
+): DocumentChunkSelection[] | null {
+  if (value === undefined) return [];
+  if (!Array.isArray(value) || value.length > 4) {
+    return null;
+  }
+
+  const selections: DocumentChunkSelection[] = [];
+  for (const item of value) {
+    if (
+      !item ||
+      typeof item !== "object" ||
+      Array.isArray(item)
+    ) {
+      return null;
+    }
+    const record = item as Record<string, unknown>;
+    const documentId =
+      typeof record.documentId === "string"
+        ? record.documentId.trim()
+        : "";
+    const chunkIndices =
+      Array.isArray(record.chunkIndices)
+        ? record.chunkIndices
+        : null;
+
+    if (
+      !/^doc_[a-f0-9]{24}$/.test(documentId) ||
+      !chunkIndices ||
+      chunkIndices.length < 1 ||
+      chunkIndices.length > 32 ||
+      chunkIndices.some(
+        (index) =>
+          !Number.isInteger(index) ||
+          Number(index) < 1
+      )
+    ) {
+      return null;
+    }
+
+    selections.push({
+      documentId,
+      chunkIndices:
+        [...new Set(
+          chunkIndices.map(Number)
+        )]
+    });
+  }
+
+  return selections;
 }
 
 function parseSessionRequest(
@@ -519,7 +573,11 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     }
 
     const request = parseSessionRequest(req.body);
-    if (!request) {
+    const attachments =
+      parseDocumentAttachments(
+        req.body?.attachments
+      );
+    if (!request || attachments === null) {
       res.status(400).json({
         error: "INVALID_SESSION_REQUEST"
       });
@@ -536,6 +594,32 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     }
 
     try {
+      if (attachments.length > 0) {
+        if (!options.documentService) {
+          res.status(503).json({
+            error:
+              "DOCUMENT_ATTACHMENT_SERVICE_UNAVAILABLE"
+          });
+          return;
+        }
+
+        const resolved = await Promise.all(
+          attachments.map((selection) =>
+            options.documentService!
+              .resolveProtectedChunks(selection)
+          )
+        );
+        request.documentAttachments =
+          resolved.map((attachment) => ({
+            documentId:
+              attachment.documentId,
+            chunks:
+              attachment.chunks.map(
+                (chunk) => ({ ...chunk })
+              )
+          }));
+      }
+
       const result = await options.sessionExecutor.execute(request);
       res.json(result);
     } catch (error) {
@@ -543,6 +627,24 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         res.status(503).json({
           error: "PROVIDER_NOT_CONFIGURED",
           provider: error.provider
+        });
+        return;
+      }
+
+      if (
+        error instanceof Error &&
+        [
+          "UNKNOWN_LOCAL_DOCUMENT",
+          "DOCUMENT_NOT_FINALIZED",
+          "INVALID_DOCUMENT_CHUNK_SELECTION",
+          "UNKNOWN_DOCUMENT_CHUNK",
+          "DOCUMENT_ATTACHMENT_CONTEXT_TOO_LARGE",
+          "TOO_MANY_DOCUMENT_ATTACHMENTS"
+        ].includes(error.message)
+      ) {
+        res.status(422).json({
+          error:
+            "DOCUMENT_ATTACHMENT_RESOLUTION_FAILED"
         });
         return;
       }
