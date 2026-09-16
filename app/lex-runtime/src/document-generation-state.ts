@@ -18,6 +18,9 @@ import {
 import type {
   GenerationAliasManifest
 } from "./generation-aliases.js";
+import type {
+  DocumentGenerationValidationContext
+} from "./document-generation-validation.js";
 
 export type StoredDocumentGenerationState = {
   schemaVersion: 1;
@@ -154,6 +157,19 @@ implements DeanonymizationTargetResolver {
     );
   }
 
+  private validationPath(
+    caseId: string,
+    artifactId: string
+  ): string {
+    return path.join(
+      this.generationDir(
+        caseId,
+        artifactId
+      ),
+      "validation.lme"
+    );
+  }
+
   private validateState(
     raw: unknown
   ): StoredDocumentGenerationState {
@@ -231,6 +247,8 @@ implements DeanonymizationTargetResolver {
       StoredDocumentGenerationState;
     aliases:
       GenerationAliasManifest;
+    validation:
+      DocumentGenerationValidationContext;
     caseDataKey:
       Buffer;
   }): Promise<void> {
@@ -238,6 +256,8 @@ implements DeanonymizationTargetResolver {
       args.state.state !==
         "TOKENIZED_VALIDATED" ||
       args.aliases.schemaVersion !==
+        1 ||
+      args.validation.schemaVersion !==
         1
     ) {
       throw new Error(
@@ -295,6 +315,42 @@ implements DeanonymizationTargetResolver {
       });
     } finally {
       aliasBytes.fill(0);
+    }
+
+    const validationBytes =
+      Buffer.from(
+        JSON.stringify(
+          args.validation
+        ),
+        "utf8"
+      );
+    try {
+      await writeCaseBlob({
+        targetFile:
+          this.validationPath(
+            args.state.caseId,
+            args.state
+              .artifactId
+          ),
+        identity: {
+          caseId:
+            args.state.caseId,
+          objectId:
+            args.state
+              .artifactId,
+          purpose:
+            "generation-validation",
+          keyVersion:
+            args.state
+              .caseKeyVersion
+        },
+        caseDataKey:
+          args.caseDataKey,
+        data:
+          validationBytes
+      });
+    } finally {
+      validationBytes.fill(0);
     }
 
     const statePath =
@@ -470,6 +526,90 @@ implements DeanonymizationTargetResolver {
       ) {
         throw new Error(
           "GENERATION_ALIAS_STATE_INVALID"
+        );
+      }
+      return parsed;
+    } finally {
+      bytes.fill(0);
+    }
+  }
+
+  async loadValidationContext(args: {
+    caseId: string;
+    artifactId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }): Promise<
+    DocumentGenerationValidationContext
+  > {
+    const state =
+      await this.readState(
+        args.caseId,
+        args.artifactId
+      );
+    if (
+      !state ||
+      state.caseKeyVersion !==
+        args.keyVersion
+    ) {
+      throw new Error(
+        "GENERATION_STATE_KEY_VERSION_MISMATCH"
+      );
+    }
+
+    const bytes =
+      await readCaseBlob({
+        targetFile:
+          this.validationPath(
+            args.caseId,
+            args.artifactId
+          ),
+        identity: {
+          caseId:
+            args.caseId,
+          objectId:
+            args.artifactId,
+          purpose:
+            "generation-validation",
+          keyVersion:
+            args.keyVersion
+        },
+        caseDataKey:
+          args.caseDataKey,
+        maxBytes:
+          16 * 1024 * 1024
+      });
+    try {
+      const parsed =
+        JSON.parse(
+          bytes.toString(
+            "utf8"
+          )
+        ) as
+          DocumentGenerationValidationContext;
+      if (
+        parsed.schemaVersion !==
+          1 ||
+        typeof parsed
+          .sourceSessionId !==
+          "string" ||
+        typeof parsed
+          .primarySkill !==
+          "string" ||
+        typeof parsed.model !==
+          "string" ||
+        typeof parsed
+          .usedDocumentContext !==
+          "boolean" ||
+        !Array.isArray(
+          parsed.verificationRecords
+        ) ||
+        !Array.isArray(
+          parsed.auditEvents
+        )
+      ) {
+        throw new Error(
+          "GENERATION_VALIDATION_STATE_INVALID"
         );
       }
       return parsed;
