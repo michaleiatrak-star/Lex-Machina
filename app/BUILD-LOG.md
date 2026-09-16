@@ -1146,3 +1146,36 @@ Open:
 Scope note:
 - G31C1 protects the reversible PII map;
 - it does not encrypt raw case uploads, extracted ZIP members or shared template originals.
+
+
+### 2026-09-16 — Build 0034
+
+Status: **PASS — G34E RECOVERY/PASSWORD + G34F1 TRANSACTION REAUTH FOUNDATION**
+
+Implemented:
+- high-entropy recovery code shown only to the user;
+- recovery KEK derived with HKDF-SHA256;
+- second AES-256-GCM envelope of the same UMK;
+- password change rewraps UMK only;
+- recovery restores the same UMK and rotates recovery material;
+- authEpoch increments and old sessions are revoked;
+- existing case CDKs remain unchanged;
+- recovery/password UI without browser secret persistence;
+- exact deanonymization intent binding;
+- fresh password reauthentication;
+- 90-second one-use grant;
+- target hash/vault generation/case key version revalidation;
+- automatic revocation on lock/logout/expiry/authEpoch.
+
+Validation evidence:
+- validated code SHA `f057a0bb22ba89c8a4eb9cb5f9dc774c8cde6524`;
+- Lex Runtime Validation `35079648346`: success;
+- F-138 `35079648384`: success;
+- G34E_RECOVERY_PASSWORD_LIFECYCLE: PASS;
+- G34F1_TRANSACTION_REAUTH_FOUNDATION: PASS;
+- web build/bundle: PASS;
+- G17/G19/G20/G22 live probes: PASS.
+
+Important:
+- full G34F remains open because no real DOCX/ODT deanonymization/export path exists yet;
+- next critical path is G34H encryption of sensitive case files at rest.
