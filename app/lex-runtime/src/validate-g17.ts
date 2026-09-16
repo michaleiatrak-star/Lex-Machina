@@ -48,9 +48,33 @@ for (let attempt = 1; attempt <= 2; attempt += 1) {
   attempts = attempt;
   try {
     result = await runAttempt();
-    break;
+    if (
+      result.matched === true &&
+      result.record.status ===
+        "VERIFIED"
+    ) {
+      break;
+    }
+    if (attempt < 2) {
+      await new Promise<void>(
+        (resolve) =>
+          setTimeout(
+            resolve,
+            500
+          )
+      );
+    }
   } catch (error) {
     lastError = error;
+    if (attempt < 2) {
+      await new Promise<void>(
+        (resolve) =>
+          setTimeout(
+            resolve,
+            500
+          )
+      );
+    }
   }
 }
 
@@ -73,6 +97,12 @@ process.stdout.write(
     verificationStatus: result?.record.status ?? null,
     sourceTier: result?.record.sourceTier ?? null,
     evidencePresent: Boolean(result?.record.evidence),
+    ...(result?.record.status === "UNVERIFIED"
+      ? {
+          verificationEvidence:
+            result.record.evidence
+        }
+      : {}),
     providerCredentialsRequired: false,
     modelProviderCallExecuted: false,
     ...(lastError && !result
