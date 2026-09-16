@@ -1,6 +1,6 @@
 # G37 — Account Administration, Provider Onboarding, Support Access and Update UX
 
-Status: **IN EXECUTION — G37A implementation in PR #40**  
+Status: **IN EXECUTION — G37A PASS; G37B-G37E remain staged behind desktop trust dependencies**  
 Date: 2026-09-16  
 Base: `feature/local-runtime`  
 Work branch: `codex/g37-admin-settings-dnd-updater-audit-2026-09-16`
@@ -34,7 +34,7 @@ G37 closes the usability and operational gaps found after the P4B/G34H/G36 basel
 
 ## 3. G37A — ADMIN user lifecycle and onboarding UX
 
-Status: **IMPLEMENTED ON WORK BRANCH — VALIDATION PENDING**
+Status: **PASS — validated code SHA `f4cb530e47b8af15d5a7320330939fcfc0054176`**
 
 ### Implemented
 
@@ -65,6 +65,16 @@ Status: **IMPLEMENTED ON WORK BRANCH — VALIDATION PENDING**
   - file may be dropped on the query/composer card;
   - the dropped file is handed to `DocumentPrivacyPanel`;
   - the existing local review/upload pipeline remains authoritative.
+
+### Validation evidence
+
+GitHub Actions:
+- Lex Runtime Validation `35095122173` — SUCCESS;
+- F-138 structural audit `35095122216` — SUCCESS;
+- runtime tests: 49/49 files, 185/185 tests PASS;
+- web tests: 1/1 file, 10/10 tests PASS;
+- production web build and G14 PASS;
+- G17/G19/G20/G22 live probes PASS.
 
 ### PASS criteria
 
