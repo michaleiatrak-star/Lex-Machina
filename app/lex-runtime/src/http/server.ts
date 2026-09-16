@@ -79,6 +79,9 @@ import {
 import {
   SensitiveDownloadTicketManager
 } from "../sensitive-download-ticket.js";
+import {
+  LegalDocumentAstGenerator
+} from "../legal-document-ast-generator.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -264,6 +267,24 @@ export async function startLocalServer(options?: {
       new LocalPdfTextExtractor()
     );
 
+  const sessionExecutor =
+    new SafeSessionExecutor(
+      registry,
+      providerGateway,
+      undefined,
+      (ledger) =>
+        new LegalVerificationToolRuntime(
+          ledger,
+          legalSourceVerifier,
+          undefined,
+          new TemporalSourceFreshnessChecker()
+        )
+    );
+  const documentAstGenerator =
+    new LegalDocumentAstGenerator(
+      sessionExecutor
+    );
+
   const coreApp = createLexHttpApp({
     registry,
     modelCatalog: new DynamicModelCatalog(credentials),
@@ -278,6 +299,7 @@ export async function startLocalServer(options?: {
     caseAccessService,
     caseKnowledgeSearch,
     documentAuthoringService,
+    documentAstGenerator,
     reauthorizationManager,
     sensitiveDownloadTickets,
     secureCaseArtifactStore,
@@ -296,18 +318,7 @@ export async function startLocalServer(options?: {
       new LocalOfficeDocumentTextExtractor(),
       new LocalSpreadsheetTextExtractor()
     ),
-    sessionExecutor: new SafeSessionExecutor(
-      registry,
-      providerGateway,
-      undefined,
-      (ledger) =>
-        new LegalVerificationToolRuntime(
-          ledger,
-          legalSourceVerifier,
-          undefined,
-          new TemporalSourceFreshnessChecker()
-        )
-    )
+    sessionExecutor
   });
 
   const app = express();
