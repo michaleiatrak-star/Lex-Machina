@@ -796,7 +796,31 @@ export default function App({
         mode: "PRAWNIK",
         ...(documentAttachments.length > 0
           ? { attachments: documentAttachments }
-          : {})
+          : {}),
+        ...(
+          includeCaseKnowledge ||
+          includeFirmKnowledge
+            ? {
+                knowledge: {
+                  ...(includeCaseKnowledge &&
+                  selectedCase
+                    ? {
+                        caseId:
+                          selectedCase.caseId,
+                        includeCase:
+                          true
+                      }
+                    : {
+                        includeCase:
+                          false
+                      }),
+                  includeFirm:
+                    includeFirmKnowledge,
+                  limit: 8
+                }
+              }
+            : {}
+        )
       });
       setExecution(result);
     } catch (error) {
