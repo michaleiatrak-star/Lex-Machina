@@ -84,6 +84,13 @@ fn run() -> Result<i32, String> {
                 .join("stanza"),
             "SIDECAR_STANZA_MODELS_MISSING",
         )?;
+    let paddle =
+        required_dir(
+            root
+                .join("models")
+                .join("paddle"),
+            "SIDECAR_PADDLE_MODELS_MISSING",
+        )?;
 
     let status =
         Command::new(node)
@@ -110,6 +117,14 @@ fn run() -> Result<i32, String> {
             .env(
                 "STANZA_RESOURCES_DIR",
                 stanza
+            )
+            .env(
+                "LEX_PADDLE_MODEL_DIR",
+                paddle
+            )
+            .env(
+                "PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK",
+                "True"
             )
             .env(
                 "PYTHONNOUSERSITE",
