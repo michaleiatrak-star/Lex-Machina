@@ -604,6 +604,94 @@ export class SecureCaseDocumentStore {
     }
   }
 
+  async listProtectedDocuments(args: {
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }): Promise<
+    PublicDocumentIngestion[]
+  > {
+    await this
+      .assertCaseKeyVersion(
+        args.caseId,
+        args.keyVersion
+      );
+    let entries:
+      Dirent[];
+    try {
+      entries =
+        await readdir(
+          this.documentsDir(
+            args.caseId
+          ),
+          {
+            withFileTypes:
+              true
+          }
+        );
+    } catch (error) {
+      if (
+        error instanceof
+          Error &&
+        "code" in error &&
+        error.code ===
+          "ENOENT"
+      ) {
+        return [];
+      }
+      throw error;
+    }
+
+    const result:
+      PublicDocumentIngestion[] =
+        [];
+    for (
+      const entry
+      of entries
+    ) {
+      if (
+        !entry.isDirectory() ||
+        !validDocumentId(
+          entry.name
+        )
+      ) {
+        continue;
+      }
+      try {
+        result.push(
+          await this
+            .loadProtected({
+              caseId:
+                args.caseId,
+              documentId:
+                entry.name,
+              caseDataKey:
+                args.caseDataKey,
+              keyVersion:
+                args.keyVersion
+            })
+        );
+      } catch (error) {
+        if (
+          error instanceof
+            Error &&
+          error.message ===
+            "ENOENT"
+        ) {
+          continue;
+        }
+        throw error;
+      }
+    }
+    return result.sort(
+      (a, b) =>
+        a.documentId
+          .localeCompare(
+            b.documentId
+          )
+    );
+  }
+
   async rekeyCaseDocuments(args: {
     caseId: string;
     oldCaseDataKey: Buffer;
