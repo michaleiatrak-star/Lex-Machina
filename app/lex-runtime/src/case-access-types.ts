@@ -24,6 +24,7 @@ export type StoredCaseRecord = {
   updatedAt: string;
   keyVersion: number;
   displayName?: string;
+  archivedAt?: string;
 };
 
 export type StoredCaseAccess = {
