@@ -362,6 +362,465 @@ export class SecureCaseUploadStore {
     }
   }
 
+  async cleanupOrphanedWorkdirs():
+    Promise<void> {
+    await rm(
+      this.workRoot,
+      {
+        recursive: true,
+        force: true
+      }
+    );
+    await mkdir(
+      this.workRoot,
+      {
+        recursive: true,
+        mode: 0o700
+      }
+    );
+  }
+
+  private async runZipWorker(
+    inputPath: string,
+    outputDir: string,
+    workerManifest: string
+  ): Promise<void> {
+    await new Promise<void>(
+      (resolve, reject) => {
+        const child =
+          spawn(
+            this.python,
+            [
+              this.zipWorkerPath,
+              "--input",
+              inputPath,
+              "--output-dir",
+              outputDir,
+              "--manifest",
+              workerManifest
+            ],
+            {
+              stdio: [
+                "ignore",
+                "ignore",
+                "pipe"
+              ],
+              env: {
+                ...process.env,
+                PYTHONUNBUFFERED:
+                  "1"
+              }
+            }
+          );
+
+        let stderr = "";
+        const timer =
+          setTimeout(
+            () => {
+              child.kill(
+                "SIGKILL"
+              );
+              reject(
+                new Error(
+                  "ZIP_EXTRACTION_TIMEOUT"
+                )
+              );
+            },
+            this.zipTimeoutMs
+          );
+
+        child.stderr.on(
+          "data",
+          (
+            chunk: Buffer
+          ) => {
+            stderr +=
+              chunk.toString(
+                "utf8"
+              );
+            if (
+              stderr.length >
+                32_000
+            ) {
+              stderr =
+                stderr.slice(
+                  -32_000
+                );
+            }
+          }
+        );
+        child.once(
+          "error",
+          (error) => {
+            clearTimeout(
+              timer
+            );
+            reject(error);
+          }
+        );
+        child.once(
+          "exit",
+          (code) => {
+            clearTimeout(
+              timer
+            );
+            if (code === 0) {
+              resolve();
+            } else {
+              reject(
+                new Error(
+                  "ZIP_EXTRACTION_FAILED:" +
+                    stderr.trim()
+                )
+              );
+            }
+          }
+        );
+      }
+    );
+  }
+
+  private async extractZipEncrypted(
+    args: {
+      caseId: string;
+      uploadId: string;
+      data: Uint8Array;
+      caseDataKey: Buffer;
+      keyVersion: number;
+    }
+  ): Promise<
+    StoredArchiveEntry[]
+  > {
+    await mkdir(
+      this.workRoot,
+      {
+        recursive: true,
+        mode: 0o700
+      }
+    );
+    const jobDir =
+      await mkdtemp(
+        path.join(
+          this.workRoot,
+          "job_"
+        )
+      );
+    await chmod(
+      jobDir,
+      0o700
+    );
+
+    const inputPath =
+      path.join(
+        jobDir,
+        "archive.bin"
+      );
+    const outputDir =
+      path.join(
+        jobDir,
+        "output"
+      );
+    const workerManifest =
+      path.join(
+        jobDir,
+        "manifest.json"
+      );
+    const persistentExtracted =
+      path.join(
+        this.uploadDir(
+          args.caseId,
+          args.uploadId
+        ),
+        "extracted"
+      );
+
+    try {
+      await writeFile(
+        inputPath,
+        args.data,
+        {
+          flag: "wx",
+          mode: 0o600
+        }
+      );
+      await this.runZipWorker(
+        inputPath,
+        outputDir,
+        workerManifest
+      );
+
+      const raw =
+        JSON.parse(
+          await readFile(
+            workerManifest,
+            "utf8"
+          )
+        ) as {
+          entries?: unknown;
+        };
+      if (
+        !Array.isArray(
+          raw.entries
+        ) ||
+        raw.entries.length >
+          10_000
+      ) {
+        throw new Error(
+          "ZIP_MANIFEST_INVALID"
+        );
+      }
+
+      await mkdir(
+        persistentExtracted,
+        {
+          recursive: true,
+          mode: 0o700
+        }
+      );
+
+      const result:
+        StoredArchiveEntry[] =
+          [];
+      const outputBase =
+        path.resolve(
+          outputDir
+        ) + path.sep;
+
+      for (
+        const unknownEntry
+        of raw.entries
+      ) {
+        if (
+          !unknownEntry ||
+          typeof unknownEntry !==
+            "object" ||
+          Array.isArray(
+            unknownEntry
+          )
+        ) {
+          throw new Error(
+            "ZIP_MANIFEST_INVALID"
+          );
+        }
+        const entry =
+          unknownEntry as
+            Record<
+              string,
+              unknown
+            >;
+        const relativePath =
+          typeof entry
+            .relativePath ===
+            "string"
+            ? entry
+                .relativePath
+            : "";
+        const compressedBytes =
+          entry
+            .compressedBytes;
+        const uncompressedBytes =
+          entry
+            .uncompressedBytes;
+        const digest =
+          typeof entry.sha256 ===
+            "string"
+            ? entry.sha256
+            : "";
+        const mediaType =
+          entry.mediaType ===
+            null ||
+          typeof entry.mediaType ===
+            "string"
+            ? entry.mediaType as
+                string | null
+            : undefined;
+        const processable =
+          entry.processable;
+
+        if (
+          !relativePath ||
+          relativePath.length >
+            512 ||
+          relativePath.includes(
+            "\\"
+          ) ||
+          path.posix.isAbsolute(
+            relativePath
+          ) ||
+          relativePath
+            .split("/")
+            .some(
+              (part) =>
+                !part ||
+                part === "." ||
+                part === ".."
+            ) ||
+          typeof compressedBytes !==
+            "number" ||
+          !Number.isSafeInteger(
+            compressedBytes
+          ) ||
+          compressedBytes < 0 ||
+          typeof uncompressedBytes !==
+            "number" ||
+          !Number.isSafeInteger(
+            uncompressedBytes
+          ) ||
+          uncompressedBytes < 0 ||
+          uncompressedBytes >
+            512 *
+              1024 *
+              1024 ||
+          !/^[a-f0-9]{64}$/
+            .test(digest) ||
+          mediaType === undefined ||
+          typeof processable !==
+            "boolean"
+        ) {
+          throw new Error(
+            "ZIP_MANIFEST_INVALID"
+          );
+        }
+
+        const plaintextPath =
+          path.resolve(
+            outputDir,
+            relativePath
+          );
+        if (
+          !plaintextPath
+            .startsWith(
+              outputBase
+            )
+        ) {
+          throw new Error(
+            "ZIP_OUTPUT_PATH_ESCAPE"
+          );
+        }
+        const plaintextStat =
+          await stat(
+            plaintextPath
+          );
+        if (
+          !plaintextStat
+            .isFile() ||
+          plaintextStat.size !==
+            uncompressedBytes
+        ) {
+          throw new Error(
+            "ZIP_OUTPUT_SIZE_MISMATCH"
+          );
+        }
+
+        const fileId =
+          "file_" +
+          randomBytes(16)
+            .toString("hex");
+        const encryptedDir =
+          path.join(
+            persistentExtracted,
+            fileId
+          );
+        await mkdir(
+          encryptedDir,
+          {
+            recursive: true,
+            mode: 0o700
+          }
+        );
+
+        await writeCaseBlobFromFile({
+          targetFile:
+            path.join(
+              encryptedDir,
+              "payload.lme"
+            ),
+          sourceFile:
+            plaintextPath,
+          identity:
+            extractedPayloadIdentity(
+              args.caseId,
+              fileId,
+              args.keyVersion
+            ),
+          caseDataKey:
+            args.caseDataKey,
+          expectedSha256:
+            digest
+        });
+
+        const stored:
+          StoredArchiveEntry = {
+            relativePath,
+            compressedBytes,
+            uncompressedBytes,
+            sha256:
+              digest,
+            mediaType,
+            processable
+          };
+        const encryptedManifest:
+          EncryptedExtractedManifest = {
+            ...stored,
+            fileId,
+            uploadId:
+              args.uploadId,
+            storage:
+              "ENCRYPTED_LME1"
+          };
+        const manifestBytes =
+          Buffer.from(
+            JSON.stringify(
+              encryptedManifest
+            ),
+            "utf8"
+          );
+        try {
+          await writeCaseBlob({
+            targetFile:
+              path.join(
+                encryptedDir,
+                "manifest.lme"
+              ),
+            identity:
+              extractedManifestIdentity(
+                args.caseId,
+                fileId,
+                args.keyVersion
+              ),
+            caseDataKey:
+              args.caseDataKey,
+            data:
+              manifestBytes
+          });
+        } finally {
+          manifestBytes.fill(0);
+        }
+
+        result.push(stored);
+      }
+
+      return result;
+    } catch (error) {
+      await rm(
+        persistentExtracted,
+        {
+          recursive: true,
+          force: true
+        }
+      );
+      throw error;
+    } finally {
+      await rm(
+        jobDir,
+        {
+          recursive: true,
+          force: true
+        }
+      );
+    }
+  }
+
   async saveUpload(args: {
     caseId: string;
     filename: string;
