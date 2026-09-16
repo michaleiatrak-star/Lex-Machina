@@ -4,6 +4,7 @@ import {
   useState
 } from "react";
 import { DocumentPrivacyPanel } from "./DocumentPrivacyPanel.js";
+import { CaseWorkspacePanel } from "./CaseWorkspacePanel.js";
 import {
   createCase,
   executeSession,
@@ -13,6 +14,7 @@ import {
   getProviderStatus,
   getRoutes,
   validateRoute,
+  type AuthenticatedUser,
   type CaseListItem,
   type DocumentAttachmentSelection,
   type EvidenceItem,
@@ -154,7 +156,11 @@ function EvidencePanel({
   );
 }
 
-export default function App() {
+export default function App({
+  user
+}: {
+  user: AuthenticatedUser;
+}) {
   const [runtimeOnline, setRuntimeOnline] = useState(false);
   const [caseId, setCaseId] = useState("");
   const [cases, setCases] =
@@ -190,6 +196,8 @@ export default function App() {
   const [executionError, setExecutionError] = useState("");
   const [documentAttachments, setDocumentAttachments] =
     useState<DocumentAttachmentSelection[]>([]);
+  const [workspaceRefresh, setWorkspaceRefresh] =
+    useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -521,8 +529,19 @@ export default function App() {
           )}
         </section>
 
+        <CaseWorkspacePanel
+          caseId={caseId}
+          isAdmin={user.appRole === "ADMIN"}
+          refreshToken={workspaceRefresh}
+        />
+
         <DocumentPrivacyPanel
           caseId={caseId}
+          onCaseFilesChange={() =>
+            setWorkspaceRefresh(
+              (value) => value + 1
+            )
+          }
           onAttachmentSelectionChange={(selection) => {
             setDocumentAttachments(
               selection ? [selection] : []
