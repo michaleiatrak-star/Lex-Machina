@@ -1,6 +1,8 @@
 param(
   [Parameter(Mandatory=$true)][string]$InstallerPath,
-  [string]$InstallRoot
+  [string]$InstallRoot,
+  [bool]$ExpectedNetworkRequiredAtInstall = $true,
+  [switch]$BlockNetworkDuringInstall
 )
 
 $ErrorActionPreference = "Stop"
@@ -15,12 +17,26 @@ if (-not $InstallRoot) {
 $InstallRoot = [IO.Path]::GetFullPath($InstallRoot)
 Remove-Item $InstallRoot -Recurse -Force -ErrorAction SilentlyContinue
 
-Write-Host "G33D: silent install to $InstallRoot"
-$arguments = @("/S", "/D=$InstallRoot")
-$process = Start-Process -FilePath $installer -ArgumentList $arguments -Wait -PassThru
-if ($process.ExitCode -ne 0) {
-  throw "INSTALLER_ACCEPTANCE_INSTALL_FAILED:$($process.ExitCode)"
-}
+$oldPath = $env:PATH
+$oldHttpProxy = $env:HTTP_PROXY
+$oldHttpsProxy = $env:HTTPS_PROXY
+$oldAllProxy = $env:ALL_PROXY
+$oldNoProxy = $env:NO_PROXY
+
+try {
+  if ($BlockNetworkDuringInstall) {
+    $env:HTTP_PROXY = "http://127.0.0.1:9"
+    $env:HTTPS_PROXY = "http://127.0.0.1:9"
+    $env:ALL_PROXY = "http://127.0.0.1:9"
+    $env:NO_PROXY = "127.0.0.1,localhost"
+  }
+
+  Write-Host "G33D: silent install to $InstallRoot"
+  $arguments = @("/S", "/D=$InstallRoot")
+  $process = Start-Process -FilePath $installer -ArgumentList $arguments -Wait -PassThru
+  if ($process.ExitCode -ne 0) {
+    throw "INSTALLER_ACCEPTANCE_INSTALL_FAILED:$($process.ExitCode)"
+  }
 
 $sidecar = Get-ChildItem -Path $InstallRoot -File -Recurse -Filter "lex-runtime-sidecar.exe" |
   Select-Object -First 1
@@ -38,7 +54,7 @@ foreach ($required in @($componentLock, $privateNode, $privatePython)) {
 }
 
 $lock = Get-Content -Raw -LiteralPath $componentLock | ConvertFrom-Json
-if ($lock.networkRequiredAtInstall -ne $true) {
+if ($lock.networkRequiredAtInstall -ne $ExpectedNetworkRequiredAtInstall) {
   throw "INSTALLER_ACCEPTANCE_INSTALL_NETWORK_POLICY_INVALID"
 }
 if ($lock.runtimeNetworkRequiredAfterBootstrap -ne $false) {
@@ -48,12 +64,6 @@ if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_ONLY") {
   throw "INSTALLER_ACCEPTANCE_USER_ACTION_POLICY_INVALID"
 }
 
-$oldPath = $env:PATH
-$oldHttpProxy = $env:HTTP_PROXY
-$oldHttpsProxy = $env:HTTPS_PROXY
-$oldAllProxy = $env:ALL_PROXY
-$oldNoProxy = $env:NO_PROXY
-try {
   # Do not let the acceptance test accidentally use runner Node/Python.
   $env:PATH = "$env:SystemRoot\System32;$env:SystemRoot"
   $env:HTTP_PROXY = "http://127.0.0.1:9"
