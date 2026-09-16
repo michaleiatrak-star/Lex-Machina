@@ -47,7 +47,8 @@ export type CaseAccessErrorCode =
   | "LEGACY_CASE_REQUIRES_IMPORT"
   | "LEGACY_CASE_ALREADY_IMPORTED"
   | "CASE_KEY_UNAVAILABLE"
-  | "CASE_ARCHIVED";
+  | "CASE_ARCHIVED"
+  | "FIRM_KNOWLEDGE_ALREADY_EXISTS";
 
 export class CaseAccessError extends Error {
   constructor(
