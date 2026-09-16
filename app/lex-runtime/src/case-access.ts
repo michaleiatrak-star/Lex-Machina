@@ -155,12 +155,46 @@ export class LocalCaseAccessService {
   async createCase(
     context:
       AuthenticatedContext,
-    displayName?: string
+    displayName?: string,
+    caseKind:
+      CaseKind =
+        "MATTER"
   ): Promise<CaseView> {
     const caseId =
       "case_" +
       randomBytes(16)
         .toString("hex");
+    if (
+      ![
+        "MATTER",
+        "FIRM_KNOWLEDGE"
+      ].includes(caseKind)
+    ) {
+      throw new CaseAccessError(
+        "INVALID_CASE_ACCESS_REQUEST",
+        400
+      );
+    }
+    if (
+      caseKind ===
+        "FIRM_KNOWLEDGE"
+    ) {
+      this.assertAdmin(
+        context
+      );
+      const existing =
+        this.store
+          .getCaseByKind(
+            "FIRM_KNOWLEDGE"
+          );
+      if (existing) {
+        throw new CaseAccessError(
+          "FIRM_KNOWLEDGE_ALREADY_EXISTS",
+          409
+        );
+      }
+    }
+
     const keyVersion = 1;
     const caseDataKey =
       randomCaseDataKey();
@@ -206,7 +240,8 @@ export class LocalCaseAccessService {
                 : {}),
               createdByUserId:
                 context.user.userId,
-              keyVersion
+              keyVersion,
+              caseKind
             });
       } catch (error) {
         throw error;
@@ -222,6 +257,7 @@ export class LocalCaseAccessService {
           updatedAt:
             metadata.createdAt,
           keyVersion,
+          caseKind,
           ...(metadata.displayName
             ? {
                 displayName:
@@ -262,7 +298,8 @@ export class LocalCaseAccessService {
         now,
         {
           caseId,
-          keyVersion
+          keyVersion,
+          caseKind
         }
       );
 
@@ -274,6 +311,45 @@ export class LocalCaseAccessService {
     } finally {
       caseDataKey.fill(0);
     }
+  }
+
+  getFirmKnowledgeWorkspace(
+    context:
+      AuthenticatedContext
+  ): CaseView | null {
+    const record =
+      this.store.getCaseByKind(
+        "FIRM_KNOWLEDGE"
+      );
+    if (!record) {
+      return null;
+    }
+    const access =
+      this.store
+        .getCaseAccess(
+          record.caseId,
+          context.user.userId
+        );
+    if (!access) {
+      return null;
+    }
+    return {
+      ...record,
+      role: access.role,
+      canReidentify:
+        access.canReidentify
+    };
+  }
+
+  async createFirmKnowledgeWorkspace(
+    context:
+      AuthenticatedContext
+  ): Promise<CaseView> {
+    return await this.createCase(
+      context,
+      "Wiedza kancelarii",
+      "FIRM_KNOWLEDGE"
+    );
   }
 
   listCases(
@@ -404,6 +480,7 @@ export class LocalCaseAccessService {
             metadata.createdAt,
           updatedAt: now,
           keyVersion,
+          caseKind: "MATTER",
           ...(metadata.displayName
             ? {
                 displayName:
