@@ -126,6 +126,8 @@ describe("G32 HTTP document attachments", () => {
           documentAttachments: [{
             documentId:
               "doc_0123456789abcdef01234567",
+            sourceScope:
+              "MANUAL",
             chunks: [{
               index: 2,
               pageStart: 3,
