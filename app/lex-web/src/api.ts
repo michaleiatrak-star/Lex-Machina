@@ -836,6 +836,31 @@ export function grantCaseAccess(
   );
 }
 
+export function transferCaseOwnership(
+  caseId: string,
+  userId: string,
+  password: string
+): Promise<{
+  caseId: string;
+  previousOwnerUserId: string;
+  newOwnerUserId: string;
+  previousOwnerRole:
+    "EDITOR";
+  keyVersion: number;
+  transferredAt: string;
+}> {
+  return json(
+    `/api/cases/${caseId}/transfer-owner`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        userId,
+        password
+      })
+    }
+  );
+}
+
 export function revokeCaseAccess(
   caseId: string,
   userId: string
