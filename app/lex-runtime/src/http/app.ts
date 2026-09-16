@@ -70,6 +70,12 @@ import type {
   SecureCaseUploadStore
 } from "../case-secure-store.js";
 import type {
+  SecureCaseArtifactStore
+} from "../case-artifact-store.js";
+import type {
+  SensitiveDownloadTicketManager
+} from "../sensitive-download-ticket.js";
+import type {
   StoredUpload
 } from "../case-file-store.js";
 import {
@@ -345,6 +351,16 @@ export type LexHttpAppOptions = {
     | "createIntent"
     | "authorizeIntent"
     | "consumeGrant"
+  >;
+  sensitiveDownloadTickets?: Pick<
+    SensitiveDownloadTicketManager,
+    | "issue"
+    | "consume"
+  >;
+  secureCaseArtifactStore?: Pick<
+    SecureCaseArtifactStore,
+    | "listArtifacts"
+    | "readArtifact"
   >;
   caseAccessService?: Pick<
     LocalCaseAccessService,
@@ -4039,6 +4055,21 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                       : {})
                   })
             );
+        const downloadTicket =
+          options
+            .sensitiveDownloadTickets
+            ?.issue(
+              context,
+              {
+                caseId:
+                  target.caseId,
+                artifactId:
+                  final.artifact
+                    .artifactId,
+                finalSha256:
+                  final.sha256
+              }
+            );
         res.status(201).json({
           artifact:
             final.artifact,
@@ -4047,7 +4078,12 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           sha256:
             final.sha256,
           replacements:
-            final.replacements
+            final.replacements,
+          ...(downloadTicket
+            ? {
+                downloadTicket
+              }
+            : {})
         });
       } catch (error) {
         if (
@@ -4067,6 +4103,179 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                 ? error.message
                 : "DEANONYMIZATION_FINALIZE_FAILED"
           });
+        }
+      }
+    }
+  );
+
+  app.get(
+    "/api/sensitive-download/:ticketId",
+    async (req, res) => {
+      if (
+        !options.sensitiveDownloadTickets ||
+        !options.secureCaseArtifactStore ||
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "SENSITIVE_DOWNLOAD_UNAVAILABLE"
+        });
+        return;
+      }
+
+      try {
+        const context =
+          responseAuthContext(res);
+        // Consume before CDK unwrap / artifact decryption.
+        const ticket =
+          options
+            .sensitiveDownloadTickets
+            .consume(
+              context,
+              String(
+                req.params
+                  .ticketId ??
+                  ""
+              )
+            );
+        const payload =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              context,
+              ticket.caseId,
+              "REIDENTIFY",
+              async (
+                caseDataKey
+              ) => {
+                const view =
+                  options
+                    .caseAccessService!
+                    .openCase(
+                      context,
+                      ticket
+                        .caseId
+                    );
+                const artifacts =
+                  await options
+                    .secureCaseArtifactStore!
+                    .listArtifacts({
+                      caseId:
+                        ticket.caseId,
+                      caseDataKey,
+                      keyVersion:
+                        view
+                          .keyVersion
+                    });
+                const artifact =
+                  artifacts.find(
+                    (item) =>
+                      item.artifactId ===
+                        ticket
+                          .artifactId
+                  );
+                if (
+                  !artifact ||
+                  artifact.sensitivity !==
+                    "CLEAR_PII" ||
+                  artifact.sha256 !==
+                    ticket.finalSha256
+                ) {
+                  throw new Error(
+                    "FINAL_ARTIFACT_NOT_DOWNLOADABLE"
+                  );
+                }
+                const data =
+                  await options
+                    .secureCaseArtifactStore!
+                    .readArtifact({
+                      caseId:
+                        ticket.caseId,
+                      artifactId:
+                        ticket
+                          .artifactId,
+                      caseDataKey,
+                      keyVersion:
+                        view
+                          .keyVersion,
+                      maxBytes:
+                        64 *
+                        1024 *
+                        1024
+                    });
+                const sha =
+                  createHash(
+                    "sha256"
+                  )
+                    .update(data)
+                    .digest("hex");
+                if (
+                  sha !==
+                    ticket
+                      .finalSha256
+                ) {
+                  data.fill(0);
+                  throw new Error(
+                    "FINAL_ARTIFACT_HASH_MISMATCH"
+                  );
+                }
+                return {
+                  artifact,
+                  data
+                };
+              }
+            );
+
+        res.setHeader(
+          "Content-Type",
+          payload.artifact
+            .mediaType
+        );
+        res.setHeader(
+          "Content-Disposition",
+          `attachment; filename*=UTF-8''${encodeURIComponent(
+            payload.artifact
+              .filename
+          )}`
+        );
+        res.setHeader(
+          "Cache-Control",
+          "no-store"
+        );
+        res.setHeader(
+          "X-Content-Type-Options",
+          "nosniff"
+        );
+        try {
+          res.send(
+            payload.data
+          );
+        } finally {
+          payload.data.fill(0);
+        }
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          const message =
+            error instanceof
+              Error
+              ? error.message
+              : "SENSITIVE_DOWNLOAD_FAILED";
+          const status =
+            message.includes(
+              "TICKET"
+            )
+              ? 409
+              : 422;
+          res.status(status)
+            .json({
+              error:
+                message
+            });
         }
       }
     }
