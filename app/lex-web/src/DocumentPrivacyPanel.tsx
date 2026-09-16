@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useMemo,
   useRef,
   useState
@@ -40,10 +41,14 @@ function rangesOverlap(
 
 export function DocumentPrivacyPanel({
   caseId,
+  incomingFile,
+  onIncomingFileConsumed,
   onAttachmentSelectionChange,
   onCaseFilesChange
 }: {
   caseId: string;
+  incomingFile?: File | null;
+  onIncomingFileConsumed?: () => void;
   onAttachmentSelectionChange?: (
     selection: DocumentAttachmentSelection | null
   ) => void;
@@ -78,6 +83,21 @@ export function DocumentPrivacyPanel({
     useState<number[]>([]);
   const [archiveUpload, setArchiveUpload] =
     useState<StoredUploadResponse | null>(null);
+
+  useEffect(() => {
+    if (!incomingFile) return;
+    let cancelled = false;
+    void openFile(
+      incomingFile
+    ).finally(() => {
+      if (!cancelled) {
+        onIncomingFileConsumed?.();
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [incomingFile]);
 
   const currentPage = useMemo(
     () =>
