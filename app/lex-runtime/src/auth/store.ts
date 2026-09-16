@@ -1261,6 +1261,114 @@ export class LocalAuthStore {
     }
   }
 
+  transferCaseOwnership(args: {
+    caseId: string;
+    previousOwnerUserId: string;
+    newOwnerAccess:
+      StoredCaseAccess;
+    updatedAt: string;
+  }): void {
+    this.db.exec(
+      "BEGIN IMMEDIATE"
+    );
+    try {
+      const previous =
+        this.db.prepare(`
+          SELECT role
+          FROM case_access
+          WHERE case_id = ?
+            AND user_id = ?
+          LIMIT 1
+        `).get(
+          args.caseId,
+          args.previousOwnerUserId
+        ) as
+          | {
+              role?: string;
+            }
+          | undefined;
+      if (
+        previous?.role !==
+          "OWNER" ||
+        args.newOwnerAccess
+          .userId ===
+          args.previousOwnerUserId ||
+        args.newOwnerAccess
+          .role !== "OWNER"
+      ) {
+        throw new Error(
+          "CASE_OWNER_TRANSFER_CONFLICT"
+        );
+      }
+
+      this.db.prepare(`
+        UPDATE case_access
+        SET role = 'EDITOR'
+        WHERE case_id = ?
+          AND user_id = ?
+      `).run(
+        args.caseId,
+        args.previousOwnerUserId
+      );
+
+      this.db.prepare(`
+        DELETE FROM case_access
+        WHERE case_id = ?
+          AND user_id = ?
+      `).run(
+        args.caseId,
+        args.newOwnerAccess
+          .userId
+      );
+      this.insertCaseAccess(
+        args.newOwnerAccess
+      );
+
+      const ownerCount =
+        this.db.prepare(`
+          SELECT COUNT(*) AS count
+          FROM case_access
+          WHERE case_id = ?
+            AND role = 'OWNER'
+        `).get(
+          args.caseId
+        ) as
+          | {
+              count?:
+                number | bigint;
+            }
+          | undefined;
+      if (
+        numberValue(
+          ownerCount?.count,
+          "owner_count"
+        ) !== 1
+      ) {
+        throw new Error(
+          "CASE_OWNER_TRANSFER_CONFLICT"
+        );
+      }
+
+      this.db.prepare(`
+        UPDATE cases
+        SET updated_at = ?
+        WHERE case_id = ?
+      `).run(
+        args.updatedAt,
+        args.caseId
+      );
+
+      this.db.exec("COMMIT");
+    } catch (error) {
+      if (this.db.isTransaction) {
+        this.db.exec(
+          "ROLLBACK"
+        );
+      }
+      throw error;
+    }
+  }
+
   revokeAccessAndRotate(args: {
     caseId: string;
     revokedUserId: string;
