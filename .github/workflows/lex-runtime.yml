@@ -29,7 +29,7 @@ permissions:
 
 jobs:
   g1-g29-g32:
-    name: G1-G29 + G31A/G31B + G32 + G34A-G34D deterministic validation
+    name: G1-G29 + G31A/G31B + G32 + G34A-G34D + G35A/G35B deterministic validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -161,6 +161,12 @@ jobs:
       - name: G34D — case key envelopes
         run: npm run validate:g34d
 
+      - name: G35A — case workspace browser
+        run: npm run validate:g35a
+
+      - name: G35B — shared firm template library
+        run: npm run validate:g35b
+
   g19-live-freshness:
     name: G19 live temporal freshness probe
     needs: g1-g29-g32
@@ -254,7 +260,7 @@ jobs:
         run: npm run validate:g17
 
   g14-g32-web:
-    name: G14-G32 local web UI
+    name: G14-G35 local web UI
     needs: g1-g29-g32
     runs-on: ubuntu-latest
     defaults:
