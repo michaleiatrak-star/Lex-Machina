@@ -1,0 +1,86 @@
+name: Lex Machina Offline Windows Installer
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - codex/g39-authoring-installer-prereqs-2026-09-16
+    paths:
+      - "app/installer/**"
+      - "app/lex-desktop/**"
+      - "app/lex-runtime/**"
+      - "app/lex-web/**"
+      - "app/ocr/**"
+      - "app/privacy/**"
+      - "app/storage/**"
+      - "Wersja rozwojowa rozpakowana/**"
+      - ".github/workflows/offline-windows-installer.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build-offline-installer:
+    name: Build self-contained Windows NSIS installer
+    runs-on: windows-latest
+    timeout-minutes: 180
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24.21.0"
+
+      - name: Setup Rust
+        shell: pwsh
+        run: |
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+          rustc --version
+          cargo --version
+
+      - name: Install web dependencies
+        working-directory: app/lex-web
+        run: npm install --no-audit --no-fund
+
+      - name: Install desktop dependencies
+        working-directory: app/lex-desktop
+        run: npm install --no-audit --no-fund
+
+      - name: Build complete offline private runtime payload
+        shell: pwsh
+        run: |
+          ./app/installer/build-windows-offline.ps1
+
+      - name: Verify native G34G tests
+        working-directory: app/lex-desktop
+        run: cargo test --manifest-path src-tauri/Cargo.toml
+
+      - name: Build NSIS offline installer
+        working-directory: app/lex-desktop
+        env:
+          CI: "true"
+        run: npx tauri build
+
+      - name: Locate installer
+        id: locate
+        shell: pwsh
+        run: |
+          $installer = Get-ChildItem "app/lex-desktop/src-tauri/target/release/bundle/nsis" -Filter "*-setup.exe" -File | Select-Object -First 1
+          if (-not $installer) { throw "NSIS installer not found" }
+          "installer=$($installer.FullName)" >> $env:GITHUB_OUTPUT
+          Write-Host "Installer: $($installer.FullName)"
+          Get-FileHash -Algorithm SHA256 $installer.FullName | Format-List
+
+      - name: Upload offline installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: LexMachina-Windows-Offline-Setup
+          path: |
+            ${{ steps.locate.outputs.installer }}
+            app/lex-desktop/src-tauri/runtime/component-lock.json
+          if-no-files-found: error
+          retention-days: 14
