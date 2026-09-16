@@ -104,6 +104,10 @@ def main() -> None:
         use_doc_orientation_classify=True,
         use_doc_unwarping=True,
         use_textline_orientation=True,
+        # PaddlePaddle 3.3.x CPU oneDNN has a released PIR attribute-conversion
+        # regression on Windows. Keep deterministic CPU inference on the
+        # non-oneDNN path until the upstream fix is in a pinned release.
+        enable_mkldnn=False,
         **{
             key: str(value)
             for key, value in required_models.items()
