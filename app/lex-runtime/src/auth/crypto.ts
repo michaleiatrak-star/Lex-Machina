@@ -229,3 +229,80 @@ export function randomUserMasterKey(): Buffer {
 export function randomKdfSalt(): Buffer {
   return randomBytes(16);
 }
+
+
+export class PasswordKdfExecutor {
+  private active = 0;
+  private readonly queue:
+    Array<{
+      resolve: () => void;
+      reject: (error: Error) => void;
+    }> = [];
+
+  constructor(
+    private readonly maxConcurrent = 2,
+    private readonly maxQueued = 16
+  ) {
+    if (
+      maxConcurrent < 1 ||
+      maxQueued < 0
+    ) {
+      throw new Error(
+        "INVALID_KDF_EXECUTOR_LIMITS"
+      );
+    }
+  }
+
+  async derive(
+    password: string,
+    salt: Buffer,
+    policy: AuthKdfPolicy
+  ): Promise<Buffer> {
+    await this.acquire();
+    try {
+      return await derivePasswordKey(
+        password,
+        salt,
+        policy
+      );
+    } finally {
+      this.release();
+    }
+  }
+
+  private acquire(): Promise<void> {
+    if (
+      this.active <
+      this.maxConcurrent
+    ) {
+      this.active += 1;
+      return Promise.resolve();
+    }
+    if (
+      this.queue.length >=
+      this.maxQueued
+    ) {
+      return Promise.reject(
+        new Error("AUTH_KDF_BUSY")
+      );
+    }
+    return new Promise<void>(
+      (resolve, reject) => {
+        this.queue.push({
+          resolve,
+          reject
+        });
+      }
+    );
+  }
+
+  private release(): void {
+    this.active -= 1;
+    const next =
+      this.queue.shift();
+    if (next) {
+      this.active += 1;
+      next.resolve();
+    }
+  }
+}
