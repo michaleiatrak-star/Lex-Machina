@@ -84,6 +84,7 @@ export interface AuthService {
     loginName: string;
     displayName: string;
     password: string;
+    passwordSetupPending?: boolean;
   }): Promise<AuthSuccess>;
   login(input: {
     loginName: string;
@@ -136,7 +137,9 @@ export interface AuthService {
       currentPassword: string;
       newPassword: string;
     }
-  ): Promise<AuthSuccess>;
+  ): Promise<
+    AuthSuccess | AuthRecoverySuccess
+  >;
   recoverAccount(input: {
     loginName: string;
     recoveryCode: string;
@@ -200,6 +203,8 @@ function publicUser(
     displayName: user.displayName,
     appRole: user.appRole,
     status: user.status,
+    passwordSetupPending:
+      user.passwordSetupPending === true,
     createdAt: user.createdAt,
     ...(user.lastLoginAt
       ? {
@@ -361,6 +366,7 @@ implements AuthService {
     loginName: string;
     displayName: string;
     password: string;
+    passwordSetupPending?: boolean;
   }): Promise<AuthSuccess> {
     if (this.store.countUsers() > 0) {
       throw new AuthError(
@@ -444,6 +450,9 @@ implements AuthService {
           displayName,
           appRole: "ADMIN",
           status: "ACTIVE",
+          passwordSetupPending:
+            input.passwordSetupPending ===
+            true,
           createdAt: now,
           updatedAt: now,
           authEpoch: 1,
@@ -1227,7 +1236,9 @@ implements AuthService {
       currentPassword: string;
       newPassword: string;
     }
-  ): Promise<AuthSuccess> {
+  ): Promise<
+    AuthSuccess | AuthRecoverySuccess
+  > {
     const user =
       this.store.getUserById(
         actor.user.userId
@@ -1260,7 +1271,9 @@ implements AuthService {
         .verifyPasswordForUser(
           user,
           input.currentPassword,
-          "password_change"
+          user.passwordSetupPending
+            ? "password_setup"
+            : "password_change"
         );
     const salt =
       randomKdfSalt();
@@ -1276,6 +1289,41 @@ implements AuthService {
       ).toISOString();
     const keyVersion =
       user.umkKeyVersion + 1;
+    const completingSetup =
+      user.passwordSetupPending ===
+      true;
+    const recoveryCode =
+      completingSetup
+        ? generateRecoveryCode()
+        : undefined;
+    const recoverySalt =
+      completingSetup
+        ? randomRecoverySalt()
+        : undefined;
+    const previousRecovery =
+      completingSetup
+        ? this.store
+            .getRecoveryEnvelope(
+              user.userId
+            )
+        : null;
+    const recoveryKeyVersion =
+      (previousRecovery?.keyVersion ??
+        0) + 1;
+    const recoveryKey =
+      recoveryCode &&
+      recoverySalt
+        ? deriveRecoveryKey(
+            recoveryCode,
+            recoverySalt,
+            {
+              userId:
+                user.userId,
+              keyVersion:
+                recoveryKeyVersion
+            }
+          )
+        : undefined;
 
     try {
       const envelope =
@@ -1292,20 +1340,75 @@ implements AuthService {
           }
         );
 
-      this.store
-        .updatePasswordEnvelopeAndIncrementEpoch({
-          userId:
-            user.userId,
-          updatedAt: now,
-          kdf: this.kdf,
-          kdfSalt: salt,
-          nonce:
-            envelope.nonce,
-          ciphertext:
-            envelope.ciphertext,
-          tag: envelope.tag,
-          keyVersion
-        });
+      if (
+        completingSetup &&
+        recoveryCode &&
+        recoverySalt &&
+        recoveryKey
+      ) {
+        const recoveryEnvelope =
+          encryptRecoveryUserMasterKey(
+            recoveryKey,
+            userMasterKey,
+            {
+              userId:
+                user.userId,
+              keyVersion:
+                recoveryKeyVersion
+            }
+          );
+        this.store
+          .completePasswordSetupAndRotateRecovery({
+            password: {
+              userId:
+                user.userId,
+              updatedAt: now,
+              kdf: this.kdf,
+              kdfSalt: salt,
+              nonce:
+                envelope.nonce,
+              ciphertext:
+                envelope.ciphertext,
+              tag:
+                envelope.tag,
+              keyVersion
+            },
+            recovery: {
+              userId:
+                user.userId,
+              algorithm:
+                "HKDF-SHA256-AES-256-GCM",
+              salt:
+                recoverySalt,
+              nonce:
+                recoveryEnvelope.nonce,
+              ciphertext:
+                recoveryEnvelope
+                  .ciphertext,
+              tag:
+                recoveryEnvelope.tag,
+              keyVersion:
+                recoveryKeyVersion,
+              createdAt: now,
+              updatedAt: now
+            }
+          });
+      } else {
+        this.store
+          .updatePasswordEnvelopeAndIncrementEpoch({
+            userId:
+              user.userId,
+            updatedAt: now,
+            kdf: this.kdf,
+            kdfSalt: salt,
+            nonce:
+              envelope.nonce,
+            ciphertext:
+              envelope.ciphertext,
+            tag: envelope.tag,
+            keyVersion
+          });
+      }
 
       this.sessions
         .revokeUser(
@@ -1330,25 +1433,42 @@ implements AuthService {
           userId:
             user.userId,
           eventType:
-            "password_changed",
+            completingSetup
+              ? "password_setup_completed"
+              : "password_changed",
           occurredAt: now,
           result: "PASS",
           metadata: {
             authEpoch:
               refreshed.authEpoch,
             umkKeyVersion:
-              keyVersion
+              keyVersion,
+            ...(completingSetup
+              ? {
+                  recoveryKeyVersion
+                }
+              : {})
           }
         });
 
-      return this.createSuccess(
-        refreshed,
-        userMasterKey
-      );
+      const success =
+        this.createSuccess(
+          refreshed,
+          userMasterKey
+        );
+      return completingSetup &&
+        recoveryCode
+        ? {
+            ...success,
+            recoveryCode
+          }
+        : success;
     } finally {
       userMasterKey.fill(0);
       newKey.fill(0);
       salt.fill(0);
+      recoveryKey?.fill(0);
+      recoverySalt?.fill(0);
     }
   }
 
