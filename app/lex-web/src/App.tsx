@@ -1467,6 +1467,55 @@ export default function App({
               uruchomieniu analizy. Wynik z niezweryfikowanym powołaniem
               prawnym zostanie zatrzymany przez HARD GATE. Możesz też przeciągnąć PDF, obraz lub ZIP bezpośrednio na to pole — plik przejdzie przez lokalną ścieżkę prywatności przed użyciem w analizie.
             </p>
+            <div className="knowledge-execution-controls">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={
+                    includeCaseKnowledge
+                  }
+                  disabled={
+                    !selectedCase ||
+                    Boolean(
+                      selectedCase
+                        .archivedAt
+                    ) ||
+                    selectedCase.role ===
+                      "VIEWER"
+                  }
+                  onChange={(event) =>
+                    setIncludeCaseKnowledge(
+                      event.target
+                        .checked
+                    )
+                  }
+                />
+                Przeszukaj chronione dokumenty bieżącej sprawy
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={
+                    includeFirmKnowledge
+                  }
+                  disabled={
+                    !firmKnowledgeWorkspace ||
+                    firmKnowledgeWorkspace.role ===
+                      "VIEWER"
+                  }
+                  onChange={(event) =>
+                    setIncludeFirmKnowledge(
+                      event.target
+                        .checked
+                    )
+                  }
+                />
+                Przeszukaj know-how kancelarii
+              </label>
+              <small>
+                Retrieval odbywa się lokalnie. Do providera trafiają wyłącznie najwyżej ocenione, pseudonimizowane chunki wybranych zasobów.
+              </small>
+            </div>
           </article>
         </section>
 
