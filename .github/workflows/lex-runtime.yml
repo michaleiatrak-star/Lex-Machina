@@ -9,9 +9,11 @@ on:
       - "app/ocr/**"
       - "app/privacy/**"
       - "app/storage/**"
+      - "app/installer/**"
       - "app/lex-version.yaml"
       - "Wersja rozwojowa rozpakowana/**"
       - ".github/workflows/lex-runtime.yml"
+      - ".github/workflows/offline-windows-installer.yml"
   push:
     branches:
       - feature/local-runtime
@@ -22,6 +24,7 @@ on:
       - "app/ocr/**"
       - "app/privacy/**"
       - "app/storage/**"
+      - "app/installer/**"
       - "app/lex-version.yaml"
       - "Wersja rozwojowa rozpakowana/**"
       - ".github/workflows/lex-runtime.yml"
@@ -222,6 +225,9 @@ jobs:
 
       - name: G37F — multi-file drag/drop queue and accessibility
         run: npm run validate:g37f
+
+      - name: Phase 13 — self-contained Windows offline installer contract
+        run: npm run validate:release-offline
 
       - name: G36 — legal skill runtime completeness
         run: npm run validate:g36
