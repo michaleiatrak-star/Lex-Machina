@@ -25,6 +25,9 @@ import {
   validateNewPassword
 } from "./crypto.js";
 import {
+  generateUserSharingKeys
+} from "../case-crypto.js";
+import {
   AuthSessionManager,
   type SessionRevocationEvent
 } from "./session-manager.js";
@@ -40,6 +43,9 @@ export type AuthErrorCode =
   | "AUTH_BACKOFF_ACTIVE"
   | "AUTH_BUSY"
   | "AUTHENTICATION_REQUIRED"
+  | "AUTHORIZATION_DENIED"
+  | "INVALID_USER_REQUEST"
+  | "ACCOUNT_LOGIN_EXISTS"
   | "SESSION_IDLE_EXPIRED"
   | "SESSION_OVERALL_EXPIRED"
   | "SESSION_REVOKED";
@@ -78,6 +84,23 @@ export interface AuthService {
   lockSession(
     sessionId: string
   ): void;
+  createUser(
+    actor: AuthenticatedContext,
+    input: {
+      loginName: string;
+      displayName: string;
+      password: string;
+    }
+  ): Promise<PublicLocalUser>;
+  listUsers(
+    actor: AuthenticatedContext
+  ): PublicLocalUser[];
+  withSessionUserMasterKey<T>(
+    sessionId: string,
+    callback: (
+      userMasterKey: Buffer
+    ) => T | Promise<T>
+  ): Promise<T>;
 }
 
 type DummyUser = Pick<
@@ -381,6 +404,12 @@ implements AuthService {
         );
       }
 
+      this.ensureUserSharingKeys(
+        userId,
+        userMasterKey,
+        now
+      );
+
       this.store.recordSecurityEvent({
         eventId:
           "event_" +
@@ -573,6 +602,12 @@ implements AuthService {
         );
       }
 
+      this.ensureUserSharingKeys(
+        realUser.userId,
+        userMasterKey,
+        nowIso
+      );
+
       const refreshed =
         this.store.getUserById(
           realUser.userId
@@ -601,6 +636,219 @@ implements AuthService {
     } finally {
       keyEncryptionKey?.fill(0);
       userMasterKey?.fill(0);
+    }
+  }
+
+  async createUser(
+    actor: AuthenticatedContext,
+    input: {
+      loginName: string;
+      displayName: string;
+      password: string;
+    }
+  ): Promise<PublicLocalUser> {
+    if (
+      actor.user.appRole !==
+        "ADMIN"
+    ) {
+      throw new AuthError(
+        "AUTHORIZATION_DENIED",
+        403
+      );
+    }
+
+    const normalizedLoginName =
+      normalizeLoginName(
+        input.loginName
+      );
+    if (
+      !isValidLoginName(
+        normalizedLoginName
+      ) ||
+      this.store
+        .getUserByNormalizedLogin(
+          normalizedLoginName
+        )
+    ) {
+      if (
+        this.store
+          .getUserByNormalizedLogin(
+            normalizedLoginName
+          )
+      ) {
+        throw new AuthError(
+          "ACCOUNT_LOGIN_EXISTS",
+          409
+        );
+      }
+      throw new AuthError(
+        "INVALID_USER_REQUEST",
+        400
+      );
+    }
+
+    let password: string;
+    let displayName: string;
+    try {
+      password =
+        validateNewPassword(
+          input.password
+        );
+      displayName =
+        validateDisplayName(
+          input.displayName
+        );
+    } catch {
+      throw new AuthError(
+        "INVALID_USER_REQUEST",
+        400
+      );
+    }
+
+    const now =
+      new Date(
+        this.clock.now()
+      ).toISOString();
+    const userId =
+      "user_" +
+      randomBytes(16)
+        .toString("hex");
+    const salt =
+      randomKdfSalt();
+    const userMasterKey =
+      randomUserMasterKey();
+    const keyEncryptionKey =
+      await this.deriveKey(
+        password,
+        salt,
+        this.kdf
+      );
+
+    try {
+      const envelope =
+        encryptUserMasterKey(
+          keyEncryptionKey,
+          userMasterKey,
+          {
+            userId,
+            normalizedLoginName,
+            keyVersion: 1
+          }
+        );
+      const stored:
+        StoredLocalUser = {
+          userId,
+          loginName:
+            input.loginName
+              .normalize("NFKC")
+              .trim(),
+          normalizedLoginName,
+          displayName,
+          appRole: "USER",
+          status: "ACTIVE",
+          createdAt: now,
+          updatedAt: now,
+          authEpoch: 1,
+          kdf: {
+            ...this.kdf
+          },
+          kdfSalt: salt,
+          umkWrapNonce:
+            envelope.nonce,
+          umkWrapCiphertext:
+            envelope.ciphertext,
+          umkWrapTag:
+            envelope.tag,
+          umkKeyVersion: 1
+        };
+
+      try {
+        this.store.createUser(
+          stored
+        );
+      } catch (error) {
+        if (
+          error instanceof Error &&
+          /UNIQUE|normalized_login_name/i
+            .test(error.message)
+        ) {
+          throw new AuthError(
+            "ACCOUNT_LOGIN_EXISTS",
+            409
+          );
+        }
+        throw error;
+      }
+
+      this.ensureUserSharingKeys(
+        userId,
+        userMasterKey,
+        now
+      );
+      this.store.recordSecurityEvent({
+        eventId:
+          "event_" +
+          randomBytes(16)
+            .toString("hex"),
+        userId:
+          actor.user.userId,
+        eventType:
+          "account_created",
+        occurredAt: now,
+        result: "PASS",
+        metadata: {
+          targetUserId: userId,
+          appRole: "USER"
+        }
+      });
+      return publicUser(stored);
+    } finally {
+      keyEncryptionKey.fill(0);
+      userMasterKey.fill(0);
+    }
+  }
+
+  listUsers(
+    actor: AuthenticatedContext
+  ): PublicLocalUser[] {
+    if (
+      actor.user.appRole !==
+        "ADMIN"
+    ) {
+      throw new AuthError(
+        "AUTHORIZATION_DENIED",
+        403
+      );
+    }
+    return this.store
+      .listUsers()
+      .map(publicUser);
+  }
+
+  async withSessionUserMasterKey<T>(
+    sessionId: string,
+    callback: (
+      userMasterKey: Buffer
+    ) => T | Promise<T>
+  ): Promise<T> {
+    try {
+      return await this.sessions
+        .withUserMasterKey(
+          sessionId,
+          callback
+        );
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        error.message ===
+          "SESSION_KEY_UNAVAILABLE"
+      ) {
+        throw new AuthError(
+          "SESSION_REVOKED",
+          401
+        );
+      }
+      throw error;
     }
   }
 
@@ -728,6 +976,46 @@ implements AuthService {
         userId,
         "USER_REVOKED"
       );
+  }
+
+  private ensureUserSharingKeys(
+    userId: string,
+    userMasterKey: Buffer,
+    at: string
+  ): void {
+    if (
+      this.store
+        .getUserSharingKeys(userId)
+    ) {
+      return;
+    }
+    const generated =
+      generateUserSharingKeys(
+        userMasterKey,
+        userId
+      );
+    this.store.putUserSharingKeys({
+      userId,
+      algorithm: "X25519",
+      publicKeyDer:
+        generated.publicKeyDer,
+      privateKeyWrapNonce:
+        generated
+          .privateKeyEnvelope
+          .nonce,
+      privateKeyWrapCiphertext:
+        generated
+          .privateKeyEnvelope
+          .ciphertext,
+      privateKeyWrapTag:
+        generated
+          .privateKeyEnvelope
+          .tag,
+      keyVersion:
+        generated.keyVersion,
+      createdAt: at,
+      updatedAt: at
+    });
   }
 
   private recordSessionRevocation(
