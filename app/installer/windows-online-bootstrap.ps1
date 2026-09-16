@@ -94,8 +94,32 @@ if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
 }
 
 Write-Host "[3/6] Pinned Python/ML packages"
-& $pythonExe -m pip install --disable-pip-version-check --no-warn-script-location --upgrade-strategy only-if-needed -r $requirements
-if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PACKAGES_FAILED" }
+$expectedPackagesJson = $manifest.pythonPackages | ConvertTo-Json -Compress
+$packageCheck = @'
+import importlib.metadata
+import json
+import sys
+expected = json.loads(sys.argv[1])
+bad = []
+for name, wanted in expected.items():
+    try:
+        actual = importlib.metadata.version(name)
+    except importlib.metadata.PackageNotFoundError:
+        actual = None
+    if actual != wanted:
+        bad.append(f"{name}:{actual!r}!={wanted!r}")
+if bad:
+    print(";".join(bad))
+    raise SystemExit(1)
+print("PYTHON_PACKAGE_SET_PASS")
+'@
+& $pythonExe -c $packageCheck $expectedPackagesJson | Out-Host
+if ($LASTEXITCODE -ne 0) {
+  & $pythonExe -m pip install --disable-pip-version-check --no-warn-script-location --upgrade-strategy only-if-needed -r $requirements
+  if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PACKAGES_FAILED" }
+  & $pythonExe -c $packageCheck $expectedPackagesJson | Out-Host
+  if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PACKAGE_VERSION_MISMATCH" }
+}
 & $pythonExe -m pip freeze --all | Sort-Object |
   Out-File -FilePath (Join-Path $runtime "python-dependency-tree.txt") -Encoding utf8
 if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PROVENANCE_FAILED" }
@@ -144,7 +168,11 @@ if (-not $vcInstalled) {
 }
 
 Write-Host "[6/6] Integrity lock and offline acceptance"
-& (Join-Path $bootstrapRoot "generate-component-lock.ps1")   -PayloadRoot $runtime   -Output (Join-Path $runtime "component-lock.json")   -NetworkRequiredAtInstall $true   -IncludeBundledVisualCppRuntime $false
+& (Join-Path $bootstrapRoot "generate-component-lock.ps1") `
+  -PayloadRoot $runtime `
+  -Output (Join-Path $runtime "component-lock.json") `
+  -NetworkRequiredAtInstall $true `
+  -IncludeBundledVisualCppRuntime $false
 if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_COMPONENT_LOCK_FAILED" }
 
 & (Join-Path $bootstrapRoot "windows-payload-selftest.ps1") -PayloadRoot $runtime
