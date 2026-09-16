@@ -14,6 +14,10 @@ crate-type = ["lib", "cdylib", "staticlib"]
 name = "lex-machina"
 path = "src/main.rs"
 
+[[bin]]
+name = "lex-runtime-sidecar"
+path = "src/runtime_sidecar.rs"
+
 [build-dependencies]
 tauri-build = "=2.6.3"
 
