@@ -542,6 +542,14 @@ export default function App() {
               <dt>Routing</dt>
               <dd>{routeStatus === "valid" ? "zweryfikowany" : "do sprawdzenia"}</dd>
             </div>
+            <div>
+              <dt>Dokument</dt>
+              <dd>
+                {documentAttachments.length > 0
+                  ? `${documentAttachments[0]?.chunkIndices.length ?? 0} chronionych chunków`
+                  : "bez załącznika"}
+              </dd>
+            </div>
           </dl>
           <button
             type="button"
