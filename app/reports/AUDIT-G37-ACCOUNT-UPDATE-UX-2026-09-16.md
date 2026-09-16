@@ -129,7 +129,7 @@ Status: **DESIGN COMPLETE — implementation waits for desktop trust boundary**.
 
 ## 6. Provider API key onboarding
 
-Baseline:
+### Baseline
 
 - runtime resolver reads:
   - `OPENAI_API_KEY`;
@@ -149,7 +149,19 @@ This improves discovery but does not yet persist keys inside Lex Machina.
 
 Target persistent storage remains OS keychain/credential vault only.
 
-Status: **PARTIAL PASS — onboarding link implemented, credential settings open**.
+### G37C1 implementation and validation
+
+G37C1 is now **PASS** at code SHA `b8cdbeeb83a1b7a733dd47180e44deb3f95faadd`.
+
+Added:
+- memory-only backend credential overlay;
+- ADMIN-only set/delete credential endpoints;
+- environment fallback remains supported;
+- zeroization on replace, clear and server shutdown;
+- UI editor stores no key in browser persistence;
+- API never echoes the key.
+
+Persistent user-selected storage remains G37C2 and is blocked on OS credential-vault integration.
 
 ## 7. Drag-and-drop
 
@@ -175,6 +187,8 @@ Status: **PASS FOR SINGLE-FILE G37A SCOPE** — web tests, production build and 
 
 ## 8. Update mechanism
 
+### Existing architecture
+
 Existing G33 architecture already defines:
 
 - component lock;
@@ -195,7 +209,20 @@ Audit conclusion:
 
 Do not implement “update from latest branch commit”. Update source must be immutable GitHub Releases with signed release metadata/artifacts.
 
-Status: **DESIGN ONLY / BLOCKED BY G33D + G34G**.
+### G37E1 implementation and validation
+
+G37E1 is **PASS** at code SHA `b8cdbeeb83a1b7a733dd47180e44deb3f95faadd`.
+
+Implemented:
+- read-only GitHub Releases discovery;
+- strict semver;
+- draft/prerelease filtering;
+- repository-bound trusted release URLs;
+- `NO_RELEASE / UP_TO_DATE / AVAILABLE / UNAVAILABLE` state;
+- non-blocking UI status and manual refresh;
+- no download or installation side effect.
+
+G37E2 remains **OPEN / BLOCKED BY G33D + G34G** for signed metadata/artifacts, staging, self-test, atomic switch and rollback.
 
 ## 9. Repository closure audit
 
@@ -205,6 +232,12 @@ Open PRs observed before G37:
 - #39 — DR-09 module-count correction;
 - #17 — old F-108 line, still open and non-mergeable;
 - #40 — G37 work branch (this audit).
+
+During G37:
+- PR #39 was verified as byte-identical to the DR-09 file already carried by `feature/local-runtime`;
+- its F-138 workflow was green;
+- PR #39 was squash-merged into `main` as `54a696638fb58789e66c417f79219237004f75c1`;
+- PR #17 remains open because its historical branch still contains unique commits; later `main` contains its key F-86/F-108 module artifacts but not an exact preservation of the old T18 workflow, so it is not deleted automatically.
 
 Branch comparison found:
 
@@ -249,3 +282,18 @@ Evidence:
 - G22 live SN — PASS.
 
 This verdict applies only to G37A and the previously validated gates exercised by the workflow. It does not close G37B-G37G or the still-open desktop release gates.
+
+
+## 12. G37C1 + G37E1 validation
+
+Validated code SHA: `b8cdbeeb83a1b7a733dd47180e44deb3f95faadd`.
+
+- Lex Runtime Validation `35096139283` — SUCCESS;
+- F-138 structural audit `35096139253` — SUCCESS;
+- runtime: 50/50 test files, 192/192 tests PASS;
+- web: 1/1 test file, 12/12 tests PASS;
+- production build — PASS;
+- G14 — PASS;
+- G17/G19/G20/G22 live probes — PASS.
+
+Diff audit against `feature/local-runtime` confirms G37 changes are limited to `app/` runtime/web/version/reports. The legal corpus under `Wersja rozwojowa rozpakowana` is unchanged by G37.
