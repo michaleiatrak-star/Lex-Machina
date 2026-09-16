@@ -266,6 +266,13 @@ export type ProviderConfigurationStatus = {
   configured: boolean;
 };
 
+export type ProviderCredentialMutationResponse = {
+  provider: ProviderId;
+  storage: "PROCESS_MEMORY";
+  configured?: boolean;
+  cleared?: boolean;
+};
+
 export type ProviderStatusResponse = {
   providers: ProviderConfigurationStatus[];
 };
@@ -828,6 +835,32 @@ export async function uploadSharedTemplate(
 
 export function getRoutes(): Promise<RouteListResponse> {
   return json<RouteListResponse>("/api/routes");
+}
+
+export function setProviderApiKey(
+  provider: ProviderId,
+  apiKey: string
+): Promise<ProviderCredentialMutationResponse> {
+  return json<ProviderCredentialMutationResponse>(
+    `/api/admin/providers/${provider}/credential`,
+    {
+      method: "PUT",
+      body: JSON.stringify({
+        apiKey
+      })
+    }
+  );
+}
+
+export function clearProviderApiKey(
+  provider: ProviderId
+): Promise<ProviderCredentialMutationResponse> {
+  return json<ProviderCredentialMutationResponse>(
+    `/api/admin/providers/${provider}/credential`,
+    {
+      method: "DELETE"
+    }
+  );
 }
 
 export function getProviderStatus(): Promise<ProviderStatusResponse> {
