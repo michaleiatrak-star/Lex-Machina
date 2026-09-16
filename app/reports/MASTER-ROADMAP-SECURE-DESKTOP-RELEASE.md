@@ -1,6 +1,6 @@
 # Lex Machina — Master Roadmap to Secure Desktop Release
 
-Status: **IN EXECUTION — G36 + G34H1/H2/H3/H4 PASS; NEXT G34H5**  
+Status: **IN EXECUTION — G36 + G34H1-H5 PASS; NEXT LIFECYCLE CLOSURE + G31B2**  
 Date: 2026-09-16  
 Branch baseline: `feature/local-runtime`
 
@@ -33,14 +33,15 @@ Validated implementation baseline:
 - G34H2 — PASS
 - G34H3 — PASS
 - G34H4 — PASS
+- G34H5 — PASS
 - G36 — PASS
 
 Validated code SHA:
-- `5c19ec48f2c25b5bee7c39a63717e7c808cb3a3e`
+- `4599d4827eb724c480bb3c563a7b58134b844bdf`
 
 Validated CI:
-- Lex Runtime Validation `35084662270` — success
-- F-138 `35084662355` — success
+- Lex Runtime Validation `35091284197` — success
+- F-138 `35091284195` — success
 
 Designs completed but not yet fully implemented:
 - G31C2
@@ -48,7 +49,8 @@ Designs completed but not yet fully implemented:
 - G33A-G33D
 - full G34F integration with actual deanonymization/export
 - G34G
-- G34H5 legacy plaintext migration/removal
+- Phase 4B lifecycle completion: rename/archive/delete
+- G31B2 stored-file/member processing
 
 Open independent capability:
 - G30 — Open Web Discovery
@@ -1475,30 +1477,59 @@ At the end of every batch:
 
 Completed/validated on the current critical path:
 - G34A-G34E;
-- G34F1 foundation;
-- G31C1;
-- G35A/G35B;
-- G34H1/G34H2.
+- G34F1 transaction reauthorization foundation;
+- G31C1 encrypted persistent privacy vault;
+- G35A/G35B case workspace + shared template foundation;
+- G34H1/G34H2/G34H3/G34H4/G34H5;
+- G36 legal skill runtime completeness.
 
-Parallel core work completed:
-- G36 legal skill runtime completeness — PASS.
+Validated implementation SHA:
+- `4599d4827eb724c480bb3c563a7b58134b844bdf`
 
-Next: **G34H5 — explicit legacy plaintext migration/removal**, including a fail-closed review of remaining plaintext case metadata before any full G34H/shared-workstation claim.
+Validation:
+- Lex Runtime Validation `35091284197` — success;
+- F-138 `35091284195` — success;
+- G34H5 — PASS;
+- web build/bundle and G17/G19/G20/G22 live probes — success.
 
-Execution order:
+## Closure audit before moving forward
 
-1. define the LMV1 authenticated vault envelope and canonical payload;
-2. derive a dedicated privacy-vault key from the current case CDK using HKDF with a separate label;
-3. persist no clear token/value mapping;
-4. implement atomic `.partial → verify → rename` vault updates;
-5. enforce case ACL before every vault read/write;
-6. implement runtime restart round-trip using the current authenticated CDK envelope path;
-7. fail closed on wrong case AAD, wrong key version, modified tag, truncation and stale generation;
-8. integrate the existing pseudonymization service with the encrypted per-case vault;
-9. only after G31C1 is green, implement password/recovery lifecycle G34E;
-10. implement artifact/case-bound deanonymization intent and fresh password step-up G34F;
-11. issue one-use, short-lived reidentification grants and sensitive download tickets;
-12. prove session revoke/cancel removes partial sensitive outputs;
-13. run the full regression suite before beginning G34H encrypted raw-file migration.
+The following earlier phases are fully closed for their current gate scope:
+- Phase 1 — G34A/G34B identity/login/session;
+- Phase 2 — G34C/G34D ACL + case-key envelopes;
+- Phase 2B — G35A/G35B workspace/template foundation;
+- Phase 3 — G31C1 encrypted persistent vault;
+- parallel G36 legal-skill runtime completeness.
 
-Do not expose persistent deanonymization simply because `canReidentify` is true; G34F remains an independent mandatory step-up gate.
+The following earlier phases are **not** fully closed:
+- Phase 4A — G34E is PASS and G34F1 is PASS, but full G34F remains open until real G31D/G31E deanonymization/export consumes the one-use grant;
+- Phase 4B — list/create/reopen/select and explicit legacy import exist, but rename/archive/delete are not implemented;
+- Phase 5 — the G34H1-H5 encrypted-at-rest gate set is PASS, but the roadmap engineering checklist still contains direct HTTP streaming work: production upload intake is still whole-body memory buffered before encrypted persistence.
+
+G34H5 migration is deliberately fail-closed:
+- known legacy uploads are encrypted and verified before plaintext removal;
+- unknown/non-empty legacy documents/artifacts/audit content is preserved and blocks migration;
+- no secure-erase guarantee is claimed for SSD/flash storage.
+
+## Next execution order
+
+1. close Phase 4B case lifecycle:
+   - rename;
+   - archive/unarchive;
+   - OWNER + fresh reauth delete flow;
+   - migration status/recovery UX;
+2. implement G31B2 stored-file/member processing:
+   - opaque stored file/member ids;
+   - parser/signature validation;
+   - processing without browser re-upload;
+3. implement G31C2 typed LegalDocumentAst + generation aliases;
+4. implement G35C safe template-profile integration;
+5. implement G31D DOCX and G31E ODT;
+6. integrate full G34F grant consumption and one-use sensitive download into actual export;
+7. implement G34G Tauri production trust boundary;
+8. implement G33A-G33D installer and clean-machine release acceptance.
+
+Parallel/open:
+- G30 Open Web Discovery remains independently open and does not block the secure local-document path unless included in release scope.
+
+Do not claim full G31/G33/G34 release completion until their remaining gates are green.
