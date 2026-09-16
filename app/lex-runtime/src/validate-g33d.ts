@@ -7,7 +7,7 @@ const repo = path.resolve(here, "../../..");
 const read = (relative: string) =>
   fs.readFileSync(path.join(repo, relative), "utf8");
 
-const workflow = read(".github/workflows/lex-runtime.yml");
+const workflow = read(".github/workflows/lex-installer.yml");
 const acceptance = read("app/installer/windows-installer-acceptance.ps1");
 const selftest = read("app/installer/windows-payload-selftest.ps1");
 const hooks = read("app/lex-desktop/src-tauri/windows/hooks.nsh");
