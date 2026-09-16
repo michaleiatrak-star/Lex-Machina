@@ -81,7 +81,7 @@ try {
   }
 
   const bootstrap =
-    await bootstrapResponse.json()
+    (await bootstrapResponse.json())
       as {
         sessionToken?: string;
       };
