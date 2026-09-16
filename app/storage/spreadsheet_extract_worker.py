@@ -18,7 +18,7 @@ MAX_ROWS_PER_SHEET = 1_000_000
 MAX_CELLS = 5_000_000
 
 XLSX = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-XLSM = "application/vnd.ms-excel.sheet.macroEnabled.12"
+XLSM = "application/vnd.ms-excel.sheet.macroenabled.12"
 CSV = "text/csv"
 TSV = "text/tab-separated-values"
 
