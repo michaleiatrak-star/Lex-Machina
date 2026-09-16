@@ -33,7 +33,9 @@ export type StoredArchiveEntry = {
 export type StoredCaseMetadata = {
   caseId: string;
   createdAt: string;
+  updatedAt?: string;
   displayName?: string;
+  archivedAt?: string;
   createdByUserId?: string;
   keyVersion?: number;
 };
@@ -245,6 +247,7 @@ export class LocalCaseFileStore {
       StoredCaseMetadata = {
         caseId,
         createdAt,
+        updatedAt: createdAt,
         ...(trimmed
           ? {
               displayName:
@@ -298,11 +301,25 @@ export class LocalCaseFileStore {
     return {
       caseId,
       createdAt: raw.createdAt,
+      ...(typeof raw.updatedAt ===
+        "string"
+        ? {
+            updatedAt:
+              raw.updatedAt
+          }
+        : {}),
       ...(typeof raw.displayName ===
         "string"
         ? {
             displayName:
               raw.displayName
+          }
+        : {}),
+      ...(typeof raw.archivedAt ===
+        "string"
+        ? {
+            archivedAt:
+              raw.archivedAt
           }
         : {}),
       ...(typeof raw.createdByUserId ===
@@ -496,6 +513,99 @@ export class LocalCaseFileStore {
       temp,
       target
     );
+  }
+
+  async updateCaseLifecycleMetadata(
+    caseId: string,
+    args: {
+      updatedAt: string;
+      displayName?:
+        string | null;
+      archivedAt?:
+        string | null;
+    }
+  ): Promise<StoredCaseMetadata> {
+    const metadata =
+      await this.readCaseMetadata(
+        caseId
+      );
+    const next:
+      StoredCaseMetadata = {
+        ...metadata,
+        updatedAt:
+          args.updatedAt
+      };
+
+    if (
+      Object.prototype
+        .hasOwnProperty.call(
+          args,
+          "displayName"
+        )
+    ) {
+      const cleaned =
+        args.displayName
+          ?.normalize("NFKC")
+          .trim()
+          .slice(0, 160) ??
+        "";
+      if (cleaned) {
+        next.displayName =
+          cleaned;
+      } else {
+        delete next.displayName;
+      }
+    }
+
+    if (
+      Object.prototype
+        .hasOwnProperty.call(
+          args,
+          "archivedAt"
+        )
+    ) {
+      if (args.archivedAt) {
+        next.archivedAt =
+          args.archivedAt;
+      } else {
+        delete next.archivedAt;
+      }
+    }
+
+    const target = path.join(
+      this.caseDir(caseId),
+      "case.json"
+    );
+    const temp =
+      target +
+      "." +
+      randomBytes(8)
+        .toString("hex") +
+      ".partial";
+    try {
+      await writeFile(
+        temp,
+        JSON.stringify(
+          next,
+          null,
+          2
+        ),
+        {
+          encoding: "utf8",
+          flag: "wx"
+        }
+      );
+      await rename(
+        temp,
+        target
+      );
+    } finally {
+      await rm(
+        temp,
+        { force: true }
+      );
+    }
+    return next;
   }
 
   async removeCase(
