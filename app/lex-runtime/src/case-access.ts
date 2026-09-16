@@ -547,6 +547,25 @@ export class LocalCaseAccessService {
     caseId: string,
     displayName: string
   ): Promise<CaseView> {
+    return await this
+      .withCaseOperationLock(
+        caseId,
+        async () =>
+          await this
+            .renameCaseUnlocked(
+              context,
+              caseId,
+              displayName
+            )
+      );
+  }
+
+  private async renameCaseUnlocked(
+    context:
+      AuthenticatedContext,
+    caseId: string,
+    displayName: string
+  ): Promise<CaseView> {
     this.assertAccess(
       context,
       caseId,
@@ -626,6 +645,25 @@ export class LocalCaseAccessService {
   }
 
   async setCaseArchived(
+    context:
+      AuthenticatedContext,
+    caseId: string,
+    archived: boolean
+  ): Promise<CaseView> {
+    return await this
+      .withCaseOperationLock(
+        caseId,
+        async () =>
+          await this
+            .setCaseArchivedUnlocked(
+              context,
+              caseId,
+              archived
+            )
+      );
+  }
+
+  private async setCaseArchivedUnlocked(
     context:
       AuthenticatedContext,
     caseId: string,
@@ -712,6 +750,28 @@ export class LocalCaseAccessService {
   }
 
   async deleteCase(
+    context:
+      AuthenticatedContext,
+    caseId: string,
+    password: string
+  ): Promise<{
+    caseId: string;
+    deletedAt: string;
+  }> {
+    return await this
+      .withCaseOperationLock(
+        caseId,
+        async () =>
+          await this
+            .deleteCaseUnlocked(
+              context,
+              caseId,
+              password
+            )
+      );
+  }
+
+  private async deleteCaseUnlocked(
     context:
       AuthenticatedContext,
     caseId: string,
