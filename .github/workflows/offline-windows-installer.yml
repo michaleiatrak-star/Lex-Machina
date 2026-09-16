@@ -19,6 +19,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: offline-windows-installer-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-offline-installer:
     name: Build self-contained Windows NSIS installer
