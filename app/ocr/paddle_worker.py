@@ -83,9 +83,9 @@ def main() -> None:
         "textline_orientation_model_dir":
             model_root / "PP-LCNet_x1_0_textline_ori",
         "text_detection_model_dir":
-            model_root / "PP-OCRv6_mobile_det",
+            model_root / "PP-OCRv6_medium_det",
         "text_recognition_model_dir":
-            model_root / "PP-OCRv6_mobile_rec",
+            model_root / "PP-OCRv6_medium_rec",
     }
     missing = [
         str(path)
