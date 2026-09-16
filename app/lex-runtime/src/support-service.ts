@@ -258,6 +258,8 @@ export class LocalSupportService {
     this.vendorKeyId =
       options.vendorKeyId
         ?.trim() || undefined;
+    this.vendorPublicKey =
+      undefined;
     this.clock =
       options.clock ?? SYSTEM_CLOCK;
     this.events =
