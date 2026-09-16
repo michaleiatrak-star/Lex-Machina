@@ -48,10 +48,12 @@ The application MUST NOT duplicate or silently rewrite legal skill instructions.
 - **G35A — Case Workspace Browser:** authenticated per-case file inventory from persisted manifests.
 - **G35B — Shared Firm Template Library:** one shared DOCX/ODT template store reusable across independently authorized cases by reference.
 - **G31C1 — Encrypted Persistent Privacy Vault:** LMV1 AES-256-GCM reversible PII mapping persisted per case, restart-safe and rekeyed with the case CDK.
+- **G34E — Recovery / Password Lifecycle:** recovery envelope for the same UMK, password change/recovery without case re-encryption.
+- **G34F1 — Transaction Reauthorization Foundation:** exact artifact-bound password step-up and one-use deanonymization grants; full G34F remains open until DOCX/ODT integration.
 
 ## Current scope
 
-G0-G29 plus G27A/G28A, G31A/G31B/**G31C1**, G32, **G34A-G34D and G35A/G35B** are implemented on `feature/local-runtime`. G31A/G31B provide the storage/archive foundation. G34A/G34B add local identity/login/session controls. G34C/G34D add explicit case ownership, ACL-filtered case access, independent per-case CDKs, per-user envelopes and revoke-with-key-rotation. The workbench now lists ACL-visible cases and requires explicit selection/creation rather than creating a case on every mount. Heavy OCR/NER model weights are intentionally installed locally rather than downloaded in every CI run; CI verifies adapters, worker syntax, completeness contracts and fail-closed behavior.
+G0-G29 plus G27A/G28A, G31A/G31B/**G31C1**, G32, **G34A-G34E + G34F1 and G35A/G35B** are implemented on `feature/local-runtime`. G31A/G31B provide the storage/archive foundation. G34A/G34B add local identity/login/session controls. G34C/G34D add explicit case ownership, ACL-filtered case access, independent per-case CDKs, per-user envelopes and revoke-with-key-rotation. The workbench now lists ACL-visible cases and requires explicit selection/creation rather than creating a case on every mount. Heavy OCR/NER model weights are intentionally installed locally rather than downloaded in every CI run; CI verifies adapters, worker syntax, completeness contracts and fail-closed behavior.
 
 Full G31 is **not** claimed PASS: G31C1 encrypted file-backed reversible privacy vault is implemented and validated; G31C2 typed authoring AST/token aliases, G31D deterministic DOCX/deanonymization/download and G31E deterministic ODT/deanonymization/download remain open. G30 open-web discovery also remains open.
 
@@ -60,7 +62,7 @@ Full G31 is **not** claimed PASS: G31C1 encrypted file-backed reversible privacy
 
 ## Security architecture before installer
 
-**G34A-G34D are implemented and validated; G31C1 is also implemented and validated; G34E-G34H remain open.**
+**G34A-G34E, G34F1 and G31C1 are implemented and validated; full G34F and G34G/G34H remain open.**
 
 Implemented now:
 - zero-user first ADMIN bootstrap;
@@ -101,7 +103,7 @@ The consolidated implementation order from the current validated baseline throug
 
 - `app/reports/MASTER-ROADMAP-SECURE-DESKTOP-RELEASE.md`
 
-**Batch A / G34A-G34B, Batch B / G34C-G34D, G35A/G35B and G31C1 are complete and validated.** The next dependency is **G34E/G34F**: recovery/password lifecycle and transaction-bound reauthorization. G35C remains open for later template-assisted DOCX/ODT generation.
+**G34A-G34E, G34F1, G35A/G35B and G31C1 are complete and validated.** The next critical-path dependency is **G34H sensitive case encryption at rest**. Full G34F remains open until the real DOCX/ODT deanonymization/export path consumes the one-use grant. G35C remains open for later template-assisted DOCX/ODT generation.
 
 G30 remains a parallel capability and does not block the secure local-document/installer critical path unless explicitly included in the first desktop release scope.
 
@@ -159,3 +161,18 @@ Shared template generation is not yet claimed: G35C remains open and depends on 
 See `app/reports/BUILD-0033-G31C1.md`.
 
 G31C1 encrypts the reversible privacy mapping only. Raw uploads, extracted ZIP members and shared template originals remain plaintext until G34H.
+
+
+### Build 0034 validation
+
+- validated code SHA: `f057a0bb22ba89c8a4eb9cb5f9dc774c8cde6524`;
+- Lex Runtime Validation `35079648346`: success;
+- F-138 `35079648384`: success;
+- G34E recovery/password lifecycle: PASS;
+- G34F1 transaction reauthorization foundation: PASS;
+- G14-G35 web build/bundle: PASS;
+- G17/G19/G20/G22 live probes: PASS.
+
+See `app/reports/BUILD-0034-G34E-G34F1.md`.
+
+Full G34F is intentionally still open until a real tokenized DOCX/ODT artifact can only be deanonymized through the consumed G34F grant.
