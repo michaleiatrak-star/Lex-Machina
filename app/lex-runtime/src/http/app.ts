@@ -4078,6 +4078,9 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                     keyVersion:
                       caseView
                         .keyVersion,
+                    validationContext:
+                      generated
+                        .validationContext,
                     ...(typeof req
                       .body
                       ?.filename ===
@@ -4143,137 +4146,6 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               "PROVIDER_NOT_CONFIGURED",
             provider:
               error.provider
-          });
-        }
-      }
-    }
-  );
-
-  app.post(
-    "/api/cases/:caseId/artifacts/tokenized",
-    async (req, res) => {
-      if (
-        !options.caseAccessService ||
-        !options.documentAuthoringService
-      ) {
-        res.status(503).json({
-          error:
-            "DOCUMENT_AUTHORING_UNAVAILABLE"
-        });
-        return;
-      }
-      const caseId =
-        String(
-          req.params.caseId ??
-            ""
-        );
-      const format =
-        req.body?.format;
-      const sourceDocumentIds =
-        Array.isArray(
-          req.body?.sourceDocumentIds
-        )
-          ? req.body.sourceDocumentIds
-              .filter(
-                (
-                  value:
-                    unknown
-                ) =>
-                  typeof value ===
-                    "string"
-              )
-          : null;
-      if (
-        (
-          format !== "docx" &&
-          format !== "odt"
-        ) ||
-        !sourceDocumentIds ||
-        sourceDocumentIds.length <
-          1 ||
-        sourceDocumentIds.length >
-          99 ||
-        !req.body?.ast
-      ) {
-        res.status(400).json({
-          error:
-            "INVALID_AUTHORING_REQUEST"
-        });
-        return;
-      }
-
-      try {
-        const context =
-          responseAuthContext(res);
-        const view =
-          options.caseAccessService
-            .openCase(
-              context,
-              caseId
-            );
-        const result =
-          await options
-            .caseAccessService
-            .withCaseDataKey(
-              context,
-              caseId,
-              "WRITE",
-              async (
-                caseDataKey
-              ) =>
-                await options
-                  .documentAuthoringService!
-                  .createTokenized({
-                    caseId,
-                    createdByUserId:
-                      context.user
-                        .userId,
-                    format,
-                    ast:
-                      req.body.ast,
-                    sourceDocumentIds,
-                    caseDataKey,
-                    keyVersion:
-                      view.keyVersion,
-                    ...(typeof req
-                      .body
-                      ?.filename ===
-                    "string"
-                      ? {
-                          filename:
-                            req.body
-                              .filename
-                        }
-                      : {})
-                  })
-            );
-        res.status(201).json({
-          artifact:
-            result.artifact,
-          format:
-            result.format,
-          tokenizedSha256:
-            result
-              .tokenizedSha256,
-          vaultGeneration:
-            result
-              .vaultGeneration,
-          aliasesUsed:
-            result.aliasesUsed
-        });
-      } catch (error) {
-        if (
-          !sendCaseAccessError(
-            res,
-            error
-          )
-        ) {
-          res.status(422).json({
-            error:
-              error instanceof
-                Error
-                ? error.message
-                : "DOCUMENT_AUTHORING_RENDER_FAILED"
           });
         }
       }
