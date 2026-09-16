@@ -28,3 +28,5 @@ serde_json = "1.0"
 tauri = "=2.11.5"
 keyring = { version = "=3.6.3", default-features = false, features = ["windows-native"] }
 sha2 = "=0.10.9"
+base64 = "=0.22.1"
+ed25519-dalek = "=2.2.0"
