@@ -67,14 +67,14 @@
     "validate:g34g": "tsx src/validate-g34g.ts"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^4.0.49",
-    "@ai-sdk/openai": "^4.0.59",
-    "@ai-sdk/xai": "^4.0.58",
-    "ai": "^7.0.93",
-    "express": "^5.2.1",
-    "helmet": "^8.1.0",
-    "pdfjs-dist": "^6.3.289",
-    "yaml": "^2.8.1"
+    "@ai-sdk/anthropic": "4.0.49",
+    "@ai-sdk/openai": "4.0.59",
+    "@ai-sdk/xai": "4.0.58",
+    "ai": "7.0.93",
+    "express": "5.2.1",
+    "helmet": "8.1.0",
+    "pdfjs-dist": "6.3.289",
+    "yaml": "2.8.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
