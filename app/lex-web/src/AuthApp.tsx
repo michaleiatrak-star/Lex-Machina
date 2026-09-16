@@ -6,6 +6,7 @@ import {
 import App from "./App.js";
 import { AccountSecurityPanel } from "./AccountSecurityPanel.js";
 import { AdminUsersPanel } from "./AdminUsersPanel.js";
+import { AdminSupportPanel } from "./AdminSupportPanel.js";
 import { RecoveryAuthPanel } from "./RecoveryAuthPanel.js";
 import {
   ApiError,
@@ -630,11 +631,14 @@ export default function AuthenticatedApp() {
       {showUsers &&
         auth.user.appRole ===
           "ADMIN" && (
-          <AdminUsersPanel
-            currentUserId={
-              auth.user.userId
-            }
-          />
+          <>
+            <AdminUsersPanel
+              currentUserId={
+                auth.user.userId
+              }
+            />
+            <AdminSupportPanel />
+          </>
         )}
 
       {showSecurity && (
