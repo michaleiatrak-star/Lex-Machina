@@ -127,17 +127,31 @@ If an OS-protected secret store is unavailable, first-user bootstrap remains pas
 
 ## 5. G37C — provider credential settings
 
-Status: **PARTIAL — DEEP LINKS IMPLEMENTED; SECRET STORE OPEN**
+Status: **G37C1 PASS — memory-only runtime credentials; G37C2 OPEN — persistent OS keychain**
 
-### Current G37A behavior
+### G37C1 — PASS
 
-The UI guides users to the provider console. Runtime credentials are still supplied through:
+Validated code SHA: `b8cdbeeb83a1b7a733dd47180e44deb3f95faadd`.
 
-- `OPENAI_API_KEY`;
-- `ANTHROPIC_API_KEY`;
-- `XAI_API_KEY`.
+Implemented:
 
-### Target behavior
+- ADMIN may paste a provider key into the local UI;
+- the key is stored only in backend process memory;
+- memory value overrides the environment fallback;
+- clearing/replacing zeroizes the previous Buffer;
+- server shutdown zeroizes all memory-only keys;
+- no API response returns the key;
+- browser localStorage/sessionStorage remain unused;
+- provider links remain available for obtaining/managing keys;
+- environment variables remain supported as fallback.
+
+Validation:
+- runtime tests 50/50 files and 192/192 tests PASS;
+- web tests 12/12 PASS;
+- build/G14 PASS;
+- full runtime workflow and live probes PASS.
+
+### G37C2 — target persistent behavior
 
 Settings must support:
 
@@ -195,21 +209,29 @@ SERVICE may administer application/account/update state, but must not automatica
 
 ## 7. G37E — signed GitHub Release updater
 
-Status: **DESIGN / G33D DEPENDENCY**
+Status: **G37E1 PASS — trusted release discovery; G37E2 OPEN — signed install/rollback requires G33D/G34G**
 
-### Discovery
+### G37E1 — PASS: discovery
 
+Validated code SHA: `b8cdbeeb83a1b7a733dd47180e44deb3f95faadd`.
+
+Implemented:
 - source: GitHub Releases for `michaleiatrak-star/Lex-Machina`;
 - never use mutable `main` or feature branch HEAD as an update channel;
 - compare semantic application versions;
 - ignore drafts and prereleases unless the user opts into a prerelease channel;
-- display version, release notes and publication date.
+- display version/release identity and publication date when available;
+- ignore untrusted release URLs;
+- network/payload failure degrades to `UNAVAILABLE`;
+- discovery performs no artifact download.
 
-### User consent
+The UI checks non-blockingly and allows manual refresh.
+
+### G37E2 — user consent and installation
 
 Update discovery may occur automatically when network is available. Download/install starts only after the user chooses **Aktualizuj**.
 
-### Trust contract
+### G37E2 trust contract
 
 A release contains:
 
@@ -224,7 +246,7 @@ A release contains:
 
 The desktop app embeds only the updater verification public key.
 
-### Transaction
+### G37E2 transaction
 
 1. download to `<version>.staging`;
 2. verify metadata signature;
@@ -238,7 +260,7 @@ The desktop app embeds only the updater verification public key.
 10. if health/self-test fails, roll back;
 11. preserve case/vault data.
 
-### G37E PASS
+### G37E2 PASS
 
 - newer signed release detected;
 - same/older release ignored;
