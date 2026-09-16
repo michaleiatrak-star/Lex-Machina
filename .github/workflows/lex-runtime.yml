@@ -205,7 +205,7 @@ jobs:
       - name: G33A — installer component manifest
         run: npm run validate:g33a
 
-      - name: G33B — offline bundled installation
+      - name: G33B — verified online bootstrap installation
         run: npm run validate:g33b
 
       - name: G33C — zero-touch first run
