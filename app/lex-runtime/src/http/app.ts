@@ -39,8 +39,13 @@ import {
   type AuthService
 } from "../auth/service.js";
 import type {
-  AuthenticatedContext
+  AuthenticatedContext,
+  CaseRole
 } from "../auth/types.js";
+import {
+  CaseAccessError,
+  type LocalCaseAccessService
+} from "../case-access.js";
 
 const PROVIDERS = new Set<ProviderId>([
   "openai",
@@ -194,6 +199,19 @@ export type LexHttpAppOptions = {
     "createCase" | "saveUpload" | "assertCase"
   >;
   authService?: AuthService;
+  caseAccessService?: Pick<
+    LocalCaseAccessService,
+    | "createCase"
+    | "listCases"
+    | "openCase"
+    | "listLegacyCases"
+    | "importLegacyCase"
+    | "assertAccess"
+    | "listAccess"
+    | "grantAccess"
+    | "revokeAccess"
+    | "rotateCaseKey"
+  >;
 };
 
 
@@ -209,6 +227,24 @@ function sendAuthError(
     ...(error.retryAfter
       ? { retryAfter: error.retryAfter }
       : {})
+  });
+  return true;
+}
+
+function sendCaseAccessError(
+  res: Response,
+  error: unknown
+): boolean {
+  if (
+    !(error instanceof
+      CaseAccessError)
+  ) {
+    return false;
+  }
+  res.status(
+    error.httpStatus
+  ).json({
+    error: error.code
   });
   return true;
 }
@@ -357,6 +393,8 @@ function parseSessionRequest(
 export function createLexHttpApp(options: LexHttpAppOptions): Express {
   const app = express();
   const routing = new RoutingCatalog(options.registry);
+  const documentCaseIds =
+    new Map<string, string>();
 
   app.disable("x-powered-by");
   app.use(helmet());
@@ -568,31 +606,518 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     );
   }
 
-  app.post("/api/cases", async (req, res) => {
-    if (!options.caseFileStore) {
-      res.status(503).json({
-        error: "CASE_STORAGE_UNAVAILABLE"
-      });
-      return;
+  app.get(
+    "/api/admin/users",
+    (_req, res) => {
+      if (!options.authService) {
+        res.status(503).json({
+          error:
+            "AUTH_SERVICE_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.json({
+          users:
+            options.authService
+              .listUsers(
+                responseAuthContext(
+                  res
+                )
+              )
+        });
+      } catch (error) {
+        if (
+          !sendAuthError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "USER_LIST_FAILED"
+          });
+        }
+      }
     }
+  );
 
-    const displayName =
-      typeof req.body?.displayName === "string"
-        ? req.body.displayName
-        : undefined;
+  app.post(
+    "/api/admin/users",
+    async (req, res) => {
+      if (!options.authService) {
+        res.status(503).json({
+          error:
+            "AUTH_SERVICE_UNAVAILABLE"
+        });
+        return;
+      }
+      const loginName =
+        typeof req.body?.loginName ===
+          "string"
+          ? req.body.loginName
+          : "";
+      const displayName =
+        typeof req.body?.displayName ===
+          "string"
+          ? req.body.displayName
+          : "";
+      const password =
+        typeof req.body?.password ===
+          "string"
+          ? req.body.password
+          : "";
+      try {
+        const user =
+          await options.authService
+            .createUser(
+              responseAuthContext(res),
+              {
+                loginName,
+                displayName,
+                password
+              }
+            );
+        res.status(201).json({
+          user
+        });
+      } catch (error) {
+        if (
+          !sendAuthError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "USER_CREATE_FAILED"
+          });
+        }
+      }
+    }
+  );
 
-    try {
-      const created =
-        await options.caseFileStore.createCase(
-          displayName
+  app.get(
+    "/api/cases",
+    (_req, res) => {
+      if (
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_ACCESS_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        const cases =
+          options.caseAccessService
+            .listCases(
+              responseAuthContext(res)
+            );
+        res.json({
+          cases
+        });
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_LIST_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.get(
+    "/api/cases/legacy",
+    async (_req, res) => {
+      if (
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_ACCESS_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.json({
+          cases:
+            await options
+              .caseAccessService
+              .listLegacyCases(
+                responseAuthContext(
+                  res
+                )
+              )
+        });
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "LEGACY_CASE_LIST_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/import-legacy",
+    async (req, res) => {
+      if (
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_ACCESS_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        const imported =
+          await options
+            .caseAccessService
+            .importLegacyCase(
+              responseAuthContext(
+                res
+              ),
+              String(
+                req.params.caseId ??
+                ""
+              )
+            );
+        res.status(201).json(
+          imported
         );
-      res.status(201).json(created);
-    } catch {
-      res.status(500).json({
-        error: "CASE_CREATE_FAILED"
-      });
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "LEGACY_CASE_IMPORT_FAILED"
+          });
+        }
+      }
     }
-  });
+  );
+
+  app.get(
+    "/api/cases/:caseId",
+    (req, res) => {
+      if (
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_ACCESS_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.json(
+          options.caseAccessService
+            .openCase(
+              responseAuthContext(
+                res
+              ),
+              String(
+                req.params.caseId ??
+                ""
+              )
+            )
+        );
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_OPEN_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases",
+    async (req, res) => {
+      if (!options.caseFileStore) {
+        res.status(503).json({
+          error:
+            "CASE_STORAGE_UNAVAILABLE"
+        });
+        return;
+      }
+
+      const displayName =
+        typeof req.body?.displayName ===
+          "string"
+          ? req.body.displayName
+          : undefined;
+
+      try {
+        const created =
+          options.caseAccessService
+            ? await options
+                .caseAccessService
+                .createCase(
+                  responseAuthContext(
+                    res
+                  ),
+                  displayName
+                )
+            : await options
+                .caseFileStore
+                .createCase(
+                  displayName
+                );
+        res.status(201).json(
+          created
+        );
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_CREATE_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.get(
+    "/api/cases/:caseId/access",
+    (req, res) => {
+      if (
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_ACCESS_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.json({
+          access:
+            options.caseAccessService
+              .listAccess(
+                responseAuthContext(
+                  res
+                ),
+                String(
+                  req.params.caseId ??
+                  ""
+                )
+              )
+        });
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_ACCESS_LIST_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/access",
+    async (req, res) => {
+      if (
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_ACCESS_UNAVAILABLE"
+        });
+        return;
+      }
+      const role =
+        typeof req.body?.role ===
+          "string"
+          ? req.body.role
+          : "";
+      if (
+        ![
+          "EDITOR",
+          "ANALYST",
+          "VIEWER"
+        ].includes(role) ||
+        typeof req.body
+          ?.canReidentify !==
+          "boolean" ||
+        typeof req.body?.userId !==
+          "string"
+      ) {
+        res.status(400).json({
+          error:
+            "INVALID_CASE_ACCESS_REQUEST"
+        });
+        return;
+      }
+      try {
+        const granted =
+          await options
+            .caseAccessService
+            .grantAccess(
+              responseAuthContext(
+                res
+              ),
+              String(
+                req.params.caseId ??
+                ""
+              ),
+              {
+                userId:
+                  req.body.userId,
+                role:
+                  role as Exclude<
+                    CaseRole,
+                    "OWNER"
+                  >,
+                canReidentify:
+                  req.body
+                    .canReidentify
+              }
+            );
+        res.status(201).json(
+          granted
+        );
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_ACCESS_GRANT_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.delete(
+    "/api/cases/:caseId/access/:userId",
+    async (req, res) => {
+      if (
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_ACCESS_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.json(
+          await options
+            .caseAccessService
+            .revokeAccess(
+              responseAuthContext(
+                res
+              ),
+              String(
+                req.params.caseId ??
+                ""
+              ),
+              String(
+                req.params.userId ??
+                ""
+              )
+            )
+        );
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_ACCESS_REVOKE_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/rotate-key",
+    async (req, res) => {
+      if (
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_ACCESS_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.json(
+          await options
+            .caseAccessService
+            .rotateCaseKey(
+              responseAuthContext(
+                res
+              ),
+              String(
+                req.params.caseId ??
+                ""
+              )
+            )
+        );
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_KEY_ROTATE_FAILED"
+          });
+        }
+      }
+    }
+  );
 
   const caseUploadBody = express.raw({
     type: () => true,
@@ -605,7 +1130,8 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     async (req, res) => {
       if (!options.caseFileStore) {
         res.status(503).json({
-          error: "CASE_STORAGE_UNAVAILABLE"
+          error:
+            "CASE_STORAGE_UNAVAILABLE"
         });
         return;
       }
@@ -614,7 +1140,8 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         req.body.byteLength === 0
       ) {
         res.status(400).json({
-          error: "FILE_BODY_REQUIRED"
+          error:
+            "FILE_BODY_REQUIRED"
         });
         return;
       }
@@ -634,20 +1161,41 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         );
 
       try {
-        const stored =
-          await options.caseFileStore.saveUpload({
+        options.caseAccessService
+          ?.assertAccess(
+            responseAuthContext(
+              res
+            ),
             caseId,
-            filename,
-            mediaType,
-            data:
-              new Uint8Array(req.body),
-            extractArchive: true
+            "WRITE"
+          );
+        const stored =
+          await options.caseFileStore
+            .saveUpload({
+              caseId,
+              filename,
+              mediaType,
+              data:
+                new Uint8Array(
+                  req.body
+                ),
+              extractArchive: true
+            });
+        res.status(201).json(
+          stored
+        );
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(422).json({
+            error:
+              "CASE_FILE_STORE_FAILED"
           });
-        res.status(201).json(stored);
-      } catch {
-        res.status(422).json({
-          error: "CASE_FILE_STORE_FAILED"
-        });
+        }
       }
     }
   );
