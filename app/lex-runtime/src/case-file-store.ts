@@ -440,6 +440,58 @@ export class LocalCaseFileStore {
     );
   }
 
+  async updateCaseKeyVersion(
+    caseId: string,
+    keyVersion: number
+  ): Promise<void> {
+    if (
+      !Number.isInteger(
+        keyVersion
+      ) ||
+      keyVersion < 1
+    ) {
+      throw new Error(
+        "INVALID_CASE_KEY_VERSION"
+      );
+    }
+    const metadata =
+      await this.readCaseMetadata(
+        caseId
+      );
+    if (
+      !metadata.createdByUserId
+    ) {
+      throw new Error(
+        "LEGACY_CASE_REQUIRES_IMPORT"
+      );
+    }
+    const target = path.join(
+      this.caseDir(caseId),
+      "case.json"
+    );
+    const temp =
+      target + ".partial";
+    await writeFile(
+      temp,
+      JSON.stringify(
+        {
+          ...metadata,
+          keyVersion
+        },
+        null,
+        2
+      ),
+      {
+        encoding: "utf8",
+        flag: "wx"
+      }
+    );
+    await rename(
+      temp,
+      target
+    );
+  }
+
   async removeCase(
     caseId: string
   ): Promise<void> {
