@@ -1679,3 +1679,60 @@ textarea:focus {
 .knowledge-execution-controls small {
   color: #68736a;
 }
+
+
+.authoring-panel {
+  margin-top: 1.25rem;
+  padding: 1.2rem;
+  border: 1px solid var(--border, #d9dde5);
+  border-radius: 14px;
+  background: var(--surface, #fff);
+}
+
+.authoring-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.authoring-heading h3 {
+  margin: 0.1rem 0 0.35rem;
+}
+
+.authoring-heading p {
+  margin: 0;
+}
+
+.authoring-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin: 1rem 0;
+}
+
+.authoring-grid label,
+.authoring-finalize label {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.authoring-finalize {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border, #d9dde5);
+  border-radius: 12px;
+  display: grid;
+  gap: 0.8rem;
+}
+
+@media (max-width: 760px) {
+  .authoring-heading {
+    display: grid;
+  }
+
+  .authoring-grid {
+    grid-template-columns: 1fr;
+  }
+}
