@@ -37,7 +37,7 @@ export type AuthSessionInfo = {
 export type AuthSuccessResponse = {
   user: AuthenticatedUser;
   session: AuthSessionInfo;
-  sessionToken: string;
+  sessionToken?: string;
 };
 
 export type AuthMeResponse = {
@@ -521,6 +521,24 @@ export class ApiError extends Error {
 }
 
 const DEFAULT_API_BASE = "http://127.0.0.1:4317";
+const DESKTOP_API_BASE = "http://lex-api.localhost";
+
+export function isDesktopShell(): boolean {
+  if (
+    typeof window ===
+      "undefined"
+  ) {
+    return false;
+  }
+  return Boolean(
+    (
+      window as Window & {
+        __TAURI_INTERNALS__?:
+          unknown;
+      }
+    ).__TAURI_INTERNALS__
+  );
+}
 
 let inMemorySessionToken: string | null = null;
 let authenticationFailureHandler:
@@ -536,12 +554,22 @@ export function clearAuthSession(): void {
   inMemorySessionToken = null;
 }
 
-function setAuthSessionToken(token: string): void {
-  inMemorySessionToken = token;
+function setAuthSessionToken(
+  token: string | undefined
+): void {
+  if (isDesktopShell()) {
+    inMemorySessionToken = null;
+    return;
+  }
+  inMemorySessionToken =
+    token ?? null;
 }
 
 function authorizationHeaders():
   Record<string, string> {
+  if (isDesktopShell()) {
+    return {};
+  }
   return inMemorySessionToken
     ? {
         Authorization:
@@ -551,6 +579,9 @@ function authorizationHeaders():
 }
 
 export function apiBase(): string {
+  if (isDesktopShell()) {
+    return DESKTOP_API_BASE;
+  }
   const configured = import.meta.env.VITE_LEX_API_BASE;
   return typeof configured === "string" && configured.trim()
     ? configured.trim().replace(/\/$/, "")
