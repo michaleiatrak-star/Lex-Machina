@@ -228,6 +228,7 @@ export type LexHttpAppOptions = {
     | "grantAccess"
     | "revokeAccess"
     | "rotateCaseKey"
+    | "withCaseDataKey"
   >;
 };
 
@@ -1614,15 +1615,73 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             });
         }
 
-        const result =
-          mediaType === "application/pdf"
-            ? await options.documentService.ingestPdf(
-                data
-              )
-            : await options.documentService.ingestImage(
-                data,
-                mediaType
+        let result;
+        if (
+          caseId &&
+          options.caseAccessService
+        ) {
+          const context =
+            responseAuthContext(
+              res
+            );
+          const caseView =
+            options.caseAccessService
+              .openCase(
+                context,
+                caseId
               );
+          result =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                context,
+                caseId,
+                "WRITE",
+                async (
+                  caseDataKey
+                ) =>
+                  mediaType ===
+                    "application/pdf"
+                    ? await options
+                        .documentService!
+                        .ingestPdf(
+                          data,
+                          {
+                            caseId,
+                            caseDataKey,
+                            keyVersion:
+                              caseView.keyVersion
+                          }
+                        )
+                    : await options
+                        .documentService!
+                        .ingestImage(
+                          data,
+                          mediaType,
+                          {
+                            caseId,
+                            caseDataKey,
+                            keyVersion:
+                              caseView.keyVersion
+                          }
+                        )
+              );
+        } else {
+          result =
+            mediaType ===
+              "application/pdf"
+              ? await options
+                  .documentService
+                  .ingestPdf(
+                    data
+                  )
+              : await options
+                  .documentService
+                  .ingestImage(
+                    data,
+                    mediaType
+                  );
+        }
         if (stored) {
           documentCaseIds.set(
             result.documentId,
@@ -1728,7 +1787,10 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         const result =
           await options.documentService.review(
             data,
-            mediaType
+            mediaType,
+            caseId
+              ? { caseId }
+              : undefined
           );
         if (stored) {
           documentCaseIds.set(
@@ -1790,6 +1852,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       }
 
       try {
+        let result;
         if (
           options.caseAccessService
         ) {
@@ -1803,20 +1866,48 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               403
             );
           }
-          options.caseAccessService
-            .assertAccess(
-              responseAuthContext(
-                res
-              ),
-              caseId,
-              "WRITE"
+          const context =
+            responseAuthContext(
+              res
             );
+          const caseView =
+            options.caseAccessService
+              .openCase(
+                context,
+                caseId
+              );
+          result =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                context,
+                caseId,
+                "WRITE",
+                async (
+                  caseDataKey
+                ) =>
+                  await options
+                    .documentService!
+                    .finalizeReview(
+                      documentId,
+                      directives,
+                      {
+                        caseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView.keyVersion
+                      }
+                    )
+              );
+        } else {
+          result =
+            await options
+              .documentService
+              .finalizeReview(
+                documentId,
+                directives
+              );
         }
-        const result =
-          await options.documentService.finalizeReview(
-            documentId,
-            directives
-          );
         res.json(result);
       } catch (error) {
         if (
