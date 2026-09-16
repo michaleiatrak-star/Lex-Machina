@@ -80,3 +80,18 @@ CREATE TABLE security_events (
 );
 
 -- Session secrets/UMKs/CDKs are intentionally NOT persisted here.
+
+
+-- Normative G34B throttling uses an HMAC tag of normalized login, not plaintext
+-- guessed usernames. AuthRateKey is protected outside this database.
+CREATE TABLE auth_rate_limits (
+  login_tag BLOB PRIMARY KEY,
+  consecutive_failures INTEGER NOT NULL DEFAULT 0,
+  last_failure_at TEXT,
+  retry_after TEXT
+);
+
+-- Persistent authenticated sessions are intentionally forbidden.
+-- Live session / UMK / CDK / reauthorization grant state stays in trusted process memory.
+-- Session lifecycle and transaction grants are specified in
+-- app/reports/G34-AUTH-SESSION-REAUTH-PROTOCOL.md.
