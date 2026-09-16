@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { DatabaseSync } from "node:sqlite";
 import request from "supertest";
 import {
   afterEach,
@@ -260,6 +261,109 @@ describe(
             archived.archivedAt
         });
         reopenedStore.close();
+      }
+    );
+
+    it(
+      "migrates an existing case registry to archived_at without losing the case",
+      () => {
+        const root =
+          fs.mkdtempSync(
+            path.join(
+              os.tmpdir(),
+              "lex-p4b-v3-"
+            )
+          );
+        roots.push(root);
+        const authDir =
+          path.join(
+            root,
+            "auth"
+          );
+        fs.mkdirSync(
+          authDir,
+          { recursive: true }
+        );
+        const dbPath =
+          path.join(
+            authDir,
+            "auth.sqlite"
+          );
+        const db =
+          new DatabaseSync(
+            dbPath
+          );
+        const caseId =
+          "case_0123456789abcdef0123456789abcdef";
+        const userId =
+          "user_0123456789abcdef0123456789abcdef";
+        db.exec(`
+          CREATE TABLE auth_schema (
+            version INTEGER PRIMARY KEY
+          ) STRICT;
+          INSERT INTO auth_schema(version)
+          VALUES (3);
+
+          CREATE TABLE users (
+            user_id TEXT PRIMARY KEY
+          ) STRICT;
+          INSERT INTO users(user_id)
+          VALUES ('${userId}');
+
+          CREATE TABLE cases (
+            case_id TEXT PRIMARY KEY,
+            created_by_user_id TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL,
+            key_version INTEGER NOT NULL,
+            display_name TEXT
+          ) STRICT;
+        `);
+        db.prepare(`
+          INSERT INTO cases (
+            case_id,
+            created_by_user_id,
+            created_at,
+            updated_at,
+            key_version,
+            display_name
+          ) VALUES (?, ?, ?, ?, 1, ?)
+        `).run(
+          caseId,
+          userId,
+          "2026-09-15T00:00:00.000Z",
+          "2026-09-15T00:00:00.000Z",
+          "Istniejąca"
+        );
+        db.close();
+
+        const upgraded =
+          new LocalAuthStore({
+            rootDir: root
+          });
+        expect(
+          upgraded.getCase(
+            caseId
+          )
+        ).toMatchObject({
+          caseId,
+          displayName:
+            "Istniejąca"
+        });
+        upgraded
+          .setCaseArchivedAt(
+            caseId,
+            "2026-09-16T12:00:00.000Z",
+            "2026-09-16T12:00:00.000Z"
+          );
+        expect(
+          upgraded.getCase(
+            caseId
+          )?.archivedAt
+        ).toBe(
+          "2026-09-16T12:00:00.000Z"
+        );
+        upgraded.close();
       }
     );
 
