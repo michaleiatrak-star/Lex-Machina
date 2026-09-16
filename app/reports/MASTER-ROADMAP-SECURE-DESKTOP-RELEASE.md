@@ -1,6 +1,6 @@
 # Lex Machina — Master Roadmap to Secure Desktop Release
 
-Status: **IN EXECUTION — G34H1/H2/H3/H4 PASS; NEXT G34H5**  
+Status: **IN EXECUTION — G36 + G34H1/H2/H3/H4 PASS; NEXT G34H5**  
 Date: 2026-09-16  
 Branch baseline: `feature/local-runtime`
 
@@ -33,20 +33,22 @@ Validated implementation baseline:
 - G34H2 — PASS
 - G34H3 — PASS
 - G34H4 — PASS
+- G36 — PASS
 
 Validated code SHA:
-- `bfa79b656e302dda37ab000bda08c55f2f889525`
+- `5c19ec48f2c25b5bee7c39a63717e7c808cb3a3e`
 
 Validated CI:
-- Lex Runtime Validation `35083339870` — success
-- F-138 `35083339857` — success
+- Lex Runtime Validation `35084662270` — success
+- F-138 `35084662355` — success
 
 Designs completed but not yet fully implemented:
 - G31C2
 - G31D/G31E
 - G33A-G33D
 - full G34F integration with actual deanonymization/export
-- G34G/G34H
+- G34G
+- G34H5 legacy plaintext migration/removal
 
 Open independent capability:
 - G30 — Open Web Discovery
@@ -524,7 +526,19 @@ Local skill content is workflow/domain context, not fresh proof of statutory or 
 
 Legal citations still require the existing official-source verification tools and temporal gates.
 
-## G36 PASS
+## G36 PASS — IMPLEMENTED / VALIDATED
+
+Validated implementation SHA: `5c19ec48f2c25b5bee7c39a63717e7c808cb3a3e`.
+
+Production-corpus validation:
+- 32 registered skills;
+- 16 DR skills;
+- 1,252 listed resources;
+- 1,187 supported textual resources read fully;
+- 16,210,656 text characters read;
+- 0 structural issues;
+- 0 unreadable supported text resources.
+
 PASS requires:
 - actual core resource content present in execution prompt;
 - full paginated module read;
@@ -1466,8 +1480,8 @@ Completed/validated on the current critical path:
 - G35A/G35B;
 - G34H1/G34H2.
 
-Parallel work in progress:
-- G36 legal skill runtime completeness.
+Parallel core work completed:
+- G36 legal skill runtime completeness — PASS.
 
 Next: **G34H5 — explicit legacy plaintext migration/removal**, including a fail-closed review of remaining plaintext case metadata before any full G34H/shared-workstation claim.
 
