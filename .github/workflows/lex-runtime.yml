@@ -5,6 +5,7 @@ on:
     paths:
       - "app/lex-runtime/**"
       - "app/lex-web/**"
+      - "app/lex-desktop/**"
       - "app/ocr/**"
       - "app/privacy/**"
       - "app/storage/**"
@@ -17,6 +18,7 @@ on:
     paths:
       - "app/lex-runtime/**"
       - "app/lex-web/**"
+      - "app/lex-desktop/**"
       - "app/ocr/**"
       - "app/privacy/**"
       - "app/storage/**"
@@ -29,7 +31,7 @@ permissions:
 
 jobs:
   g1-g29-g32:
-    name: G1-G36 + G31C2/D/E + G34F + G35C + P4B deterministic validation
+    name: G1-G36 + G31C2/D/E + G34F/G34G + G35C + P4B deterministic validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -191,6 +193,9 @@ jobs:
       - name: G34F — full deanonymization and sensitive export
         run: npm run validate:g34f
 
+      - name: G34G — Tauri production trust boundary
+        run: npm run validate:g34g
+
       - name: G36 — legal skill runtime completeness
         run: npm run validate:g36
 
@@ -329,3 +334,47 @@ jobs:
 
       - name: G14-G32 — browser bundle safety
         run: npm run validate:g14
+
+  g34g-desktop-windows:
+    name: G34G Windows Tauri compile and trust-boundary tests
+    needs:
+      - g1-g29-g32
+      - g14-g32-web
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: app/lex-desktop
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Setup Rust
+        shell: pwsh
+        run: |
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+          rustc --version
+          cargo --version
+
+      - name: Install web dependencies
+        working-directory: app/lex-web
+        run: npm install --no-audit --no-fund
+
+      - name: Install desktop dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Rust trust-boundary tests
+        run: cargo test --manifest-path src-tauri/Cargo.toml
+
+      - name: Rust strict compile
+        run: cargo check --manifest-path src-tauri/Cargo.toml
+
+      - name: Tauri Windows application build
+        run: npx tauri build --no-bundle
+
