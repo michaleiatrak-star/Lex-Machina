@@ -67,6 +67,15 @@ import {
 import {
   LocalSpreadsheetTextExtractor
 } from "../spreadsheet-extractor.js";
+import {
+  DocumentGenerationStateStore
+} from "../document-generation-state.js";
+import {
+  LocalDocumentAuthoringService
+} from "../document-authoring-service.js";
+import {
+  DeanonymizationReauthorizationManager
+} from "../auth/reauthorization.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -182,6 +191,11 @@ export async function startLocalServer(options?: {
       rootDir:
         caseFileStore.rootDir
     });
+  const documentGenerationState =
+    new DocumentGenerationStateStore({
+      rootDir:
+        caseFileStore.rootDir
+    });
   const caseKnowledgeSearch =
     new LocalCaseKnowledgeSearch(
       secureCaseDocumentStore
@@ -215,6 +229,19 @@ export async function startLocalServer(options?: {
       caseFileStore,
       caseSecurityRotation
     );
+  const documentAuthoringService =
+    new LocalDocumentAuthoringService(
+      privacyVaultStore,
+      secureCaseArtifactStore,
+      documentGenerationState
+    );
+  const reauthorizationManager =
+    new DeanonymizationReauthorizationManager(
+      authService,
+      caseAccessService,
+      authStore,
+      documentGenerationState
+    );
 
   const credentials =
     new MemoryOverlayCredentialResolver(
@@ -243,6 +270,8 @@ export async function startLocalServer(options?: {
     authService,
     caseAccessService,
     caseKnowledgeSearch,
+    documentAuthoringService,
+    reauthorizationManager,
     documentService: new LocalPrivateDocumentService(
       new CompleteDocumentIngestor(
         new PdfJsDocumentPageSource(),
