@@ -86,6 +86,7 @@ export type CaseResponse = {
   keyVersion?: number;
   role?: CaseRole;
   canReidentify?: boolean;
+  archivedAt?: string;
 };
 
 export type CaseListItem = {
@@ -97,6 +98,7 @@ export type CaseListItem = {
   keyVersion: number;
   role: CaseRole;
   canReidentify: boolean;
+  archivedAt?: string;
 };
 
 export type CaseListResponse = {
@@ -635,6 +637,57 @@ export function createCase(
         : {})
     })
   });
+}
+
+export function renameCase(
+  caseId: string,
+  displayName: string
+): Promise<CaseListItem> {
+  return json<CaseListItem>(
+    `/api/cases/${caseId}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify({
+        displayName
+      })
+    }
+  );
+}
+
+export function archiveCase(
+  caseId: string
+): Promise<CaseListItem> {
+  return json<CaseListItem>(
+    `/api/cases/${caseId}/archive`,
+    { method: "POST" }
+  );
+}
+
+export function unarchiveCase(
+  caseId: string
+): Promise<CaseListItem> {
+  return json<CaseListItem>(
+    `/api/cases/${caseId}/unarchive`,
+    { method: "POST" }
+  );
+}
+
+export function deleteCase(
+  caseId: string,
+  password: string
+): Promise<{
+  caseId: string;
+  deletedAt: string;
+}> {
+  return json(
+    `/api/cases/${caseId}`,
+    {
+      method: "DELETE",
+      body: JSON.stringify({
+        password
+      })
+    }
+  );
 }
 
 export function listCaseFiles(
