@@ -232,6 +232,9 @@ export type LexHttpAppOptions = {
     | "createCase"
     | "listCases"
     | "openCase"
+    | "renameCase"
+    | "setCaseArchived"
+    | "deleteCase"
     | "listLegacyCases"
     | "importLegacyCase"
     | "assertAccess"
@@ -1182,6 +1185,194 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           res.status(500).json({
             error:
               "CASE_CREATE_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.patch(
+    "/api/cases/:caseId",
+    async (req, res) => {
+      if (
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_ACCESS_UNAVAILABLE"
+        });
+        return;
+      }
+      const displayName =
+        typeof req.body
+          ?.displayName ===
+          "string"
+          ? req.body
+              .displayName
+          : "";
+      try {
+        res.json(
+          await options
+            .caseAccessService
+            .renameCase(
+              responseAuthContext(
+                res
+              ),
+              String(
+                req.params.caseId ??
+                ""
+              ),
+              displayName
+            )
+        );
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_RENAME_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/archive",
+    async (req, res) => {
+      if (
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_ACCESS_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.json(
+          await options
+            .caseAccessService
+            .setCaseArchived(
+              responseAuthContext(
+                res
+              ),
+              String(
+                req.params.caseId ??
+                ""
+              ),
+              true
+            )
+        );
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_ARCHIVE_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/unarchive",
+    async (req, res) => {
+      if (
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_ACCESS_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.json(
+          await options
+            .caseAccessService
+            .setCaseArchived(
+              responseAuthContext(
+                res
+              ),
+              String(
+                req.params.caseId ??
+                ""
+              ),
+              false
+            )
+        );
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_UNARCHIVE_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.delete(
+    "/api/cases/:caseId",
+    async (req, res) => {
+      if (
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_ACCESS_UNAVAILABLE"
+        });
+        return;
+      }
+      const password =
+        typeof req.body?.password ===
+          "string"
+          ? req.body.password
+          : "";
+      try {
+        res.json(
+          await options
+            .caseAccessService
+            .deleteCase(
+              responseAuthContext(
+                res
+              ),
+              String(
+                req.params.caseId ??
+                ""
+              ),
+              password
+            )
+        );
+      } catch (error) {
+        if (
+          !sendAuthError(
+            res,
+            error
+          ) &&
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_DELETE_FAILED"
           });
         }
       }
