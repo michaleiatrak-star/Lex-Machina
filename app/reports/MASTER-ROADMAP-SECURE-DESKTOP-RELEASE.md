@@ -1,6 +1,6 @@
 # Lex Machina — Master Roadmap to Secure Desktop Release
 
-Status: **IN EXECUTION — P4B + G36 + G34H1-H5 + G37A/G37C1/G37E1 PASS; NEXT G31B2/G31C2**  
+Status: **IN EXECUTION — P4B + G36 + G34H1-H5 + G37A/G37C1/G37E1 PASS; G38 IMPLEMENTED / VALIDATION PENDING; NEXT G31C2/G35C**  
 Date: 2026-09-16  
 Branch baseline: `feature/local-runtime`
 
@@ -72,7 +72,7 @@ open existing or create new case
     ↓
 encrypted local case storage
     ↓
-upload PDF/image/ZIP
+upload PDF/image/ZIP/DOCX/ODT/TXT/Markdown/XLSX/XLSM/CSV/TSV
     ↓
 local extraction/OCR
     ↓
@@ -1421,6 +1421,7 @@ The first installer may be called release-ready only when all are PASS:
 - G35B;
 - G35C template-generation integration;
 - G36 legal skill runtime completeness;
+- G38 encrypted firm knowledge + case/firm retrieval + extended document intake;
 - G33A;
 - G33B;
 - G33C;
@@ -1631,7 +1632,7 @@ Multi-file drag-and-drop, queue/progress and multi-document privacy UX.
 
 Repository closure:
 - PR #39 merged to `main` during G37;
-- PR #17 remains under supersession audit;
+- PR #17 was closed as superseded after audit; its historical branch remains retained pending separate retention cleanup;
 - stale branches with `ahead=0` may be cleanup candidates;
 - diverged historical branches require explicit inspection before deletion;
 - PR #38 remains the parent application line;
@@ -1640,12 +1641,104 @@ Repository closure:
 ## Updated critical path
 
 1. preserve green `feature/local-runtime` + G37 work;
-2. close G31B2 end-user stored-file/member workflow;
+2. keep G38 green: encrypted firm know-how, case/firm retrieval and extended digital document intake;
 3. G31C2 + G35C;
 4. G31D/G31E + full G34F;
 5. G34G production Tauri trust boundary;
 6. G33A-G33D installer/update transaction;
 7. G37B/G37C2/G37D/G37E2 desktop integration;
 8. G37F multi-file UX;
-9. clean-machine acceptance;
+9. clean-machine acceptance including G38 PDF/DOCX/ODT/XLSX retrieval self-tests;
 10. G37G repository cleanup and signed release.
+
+
+---
+
+# G38 KNOWLEDGE AND RETRIEVAL TRACK — ENCRYPTED FIRM KNOW-HOW, CASE SEARCH AND EXTENDED DOCUMENT INTAKE
+
+Primary roadmap:
+- `G38-FIRM-KNOWLEDGE-RETRIEVAL-ROADMAP.md`
+
+Audit:
+- `AUDIT-G38-KNOWLEDGE-RETRIEVAL-FORMATS-2026-09-16.md`
+
+Current status: **IMPLEMENTED — VALIDATION PENDING ON LATEST HEAD**.
+
+## G38A — encrypted firm workspace
+
+Implemented:
+- unique `FIRM_KNOWLEDGE` workspace;
+- ADMIN creation;
+- same OWNER/EDITOR/ANALYST/VIEWER ACL as a matter;
+- per-user key envelopes;
+- revoke → key rotation/rekey;
+- dedicated firm-knowledge UI and collaborator management.
+
+## G38B — local protected retrieval
+
+Implemented:
+- local lexical search over protected/pseudonymized chunks;
+- current matter search;
+- firm-knowledge search;
+- search after ACL and case-key unwrap only;
+- no vault/reidentification map leaves the local trust boundary.
+
+## G38C — controlled use in provider context
+
+Implemented:
+- explicit `includeCase` and `includeFirm` session controls;
+- `ANALYZE` capability required;
+- local ranking;
+- bounded protected chunks only;
+- manual search hit may be added to analysis.
+
+## G38D — extended document formats
+
+Implemented local privacy/retrieval intake:
+- digital PDF — text layer first, OCR only for insufficient-text pages;
+- JPEG/PNG/WebP/TIFF;
+- TXT/Markdown;
+- DOCX/ODT;
+- XLSX/XLSM;
+- CSV/TSV.
+
+Spreadsheet safety:
+- no VBA execution;
+- no macro execution;
+- no formula evaluation;
+- formula source and optional cached result are treated only as text;
+- ZIP/XML limits and DTD/ENTITY rejection;
+- bounded worker execution.
+
+Legacy binary `.xls` remains explicitly unsupported until a pinned offline BIFF parser passes adversarial tests.
+
+## G38E — restart-safe document identity
+
+Implemented:
+- document attachment selection carries explicit `caseId`;
+- finalization binds document to explicit case;
+- protected document restoration from encrypted store after process restart;
+- no authorization dependence on ephemeral `documentId → caseId` process memory.
+
+## G38 validation requirements
+
+Before G38 may be marked PASS:
+- strict TypeScript typecheck;
+- Python worker syntax;
+- digital-PDF no-OCR regression;
+- DOCX/ODT tests;
+- XLSX/XLSM/CSV/TSV tests;
+- protected document privacy/chunk tests;
+- firm workspace ACL tests;
+- multi-user document grant/revoke/rekey test;
+- web tests/build/G14;
+- full deterministic runtime gates;
+- required live probes.
+
+Installer acceptance must later include at least:
+- digital PDF without OCR;
+- scanned PDF with OCR;
+- DOCX/ODT;
+- XLSX;
+- firm/case retrieval;
+- multi-user revoke/rekey.
