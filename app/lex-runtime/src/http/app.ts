@@ -46,6 +46,9 @@ import {
   CaseAccessError,
   type LocalCaseAccessService
 } from "../case-access.js";
+import type {
+  LocalSharedTemplateStore
+} from "../shared-template-store.js";
 
 const PROVIDERS = new Set<ProviderId>([
   "openai",
@@ -196,9 +199,17 @@ export type LexHttpAppOptions = {
   documentService?: DocumentService;
   caseFileStore?: Pick<
     LocalCaseFileStore,
-    "createCase" | "saveUpload" | "assertCase"
+    | "createCase"
+    | "saveUpload"
+    | "listUploads"
+    | "assertCase"
   >;
   authService?: AuthService;
+  sharedTemplateStore?: Pick<
+    LocalSharedTemplateStore,
+    | "saveTemplate"
+    | "listTemplates"
+  >;
   caseAccessService?: Pick<
     LocalCaseAccessService,
     | "createCase"
@@ -698,6 +709,124 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
   );
 
   app.get(
+    "/api/shared/templates",
+    async (_req, res) => {
+      if (
+        !options.sharedTemplateStore
+      ) {
+        res.status(503).json({
+          error:
+            "SHARED_TEMPLATE_STORE_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.json({
+          templates:
+            await options
+              .sharedTemplateStore
+              .listTemplates()
+        });
+      } catch {
+        res.status(500).json({
+          error:
+            "SHARED_TEMPLATE_LIST_FAILED"
+        });
+      }
+    }
+  );
+
+  const sharedTemplateBody =
+    express.raw({
+      type: () => true,
+      limit: "64mb"
+    });
+
+  app.post(
+    "/api/shared/templates",
+    sharedTemplateBody,
+    async (req, res) => {
+      if (
+        !options.sharedTemplateStore
+      ) {
+        res.status(503).json({
+          error:
+            "SHARED_TEMPLATE_STORE_UNAVAILABLE"
+        });
+        return;
+      }
+      const context =
+        responseAuthContext(res);
+      if (
+        context.user.appRole !==
+          "ADMIN"
+      ) {
+        res.status(403).json({
+          error:
+            "AUTHORIZATION_DENIED"
+        });
+        return;
+      }
+      if (
+        !Buffer.isBuffer(req.body) ||
+        req.body.byteLength === 0
+      ) {
+        res.status(400).json({
+          error:
+            "TEMPLATE_BODY_REQUIRED"
+        });
+        return;
+      }
+
+      const mediaType =
+        req.get("content-type")
+          ?.split(";", 1)[0]
+          ?.trim()
+          .toLowerCase() ||
+        "application/octet-stream";
+      const filename =
+        decodeUploadFilename(
+          req.get("x-lex-filename")
+        );
+
+      try {
+        const stored =
+          await options
+            .sharedTemplateStore
+            .saveTemplate({
+              filename,
+              mediaType,
+              data:
+                new Uint8Array(
+                  req.body
+                ),
+              createdByUserId:
+                context.user.userId
+            });
+        res.status(201).json(
+          stored
+        );
+      } catch (error) {
+        if (
+          error instanceof Error &&
+          error.message ===
+            "UNSUPPORTED_TEMPLATE_MEDIA_TYPE"
+        ) {
+          res.status(415).json({
+            error:
+              "UNSUPPORTED_TEMPLATE_MEDIA_TYPE"
+          });
+          return;
+        }
+        res.status(422).json({
+          error:
+            "SHARED_TEMPLATE_STORE_FAILED"
+        });
+      }
+    }
+  );
+
+  app.get(
     "/api/cases",
     (_req, res) => {
       if (
@@ -1123,6 +1252,106 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     type: () => true,
     limit: "512mb"
   });
+
+  app.get(
+    "/api/cases/:caseId/files",
+    async (req, res) => {
+      if (!options.caseFileStore) {
+        res.status(503).json({
+          error:
+            "CASE_STORAGE_UNAVAILABLE"
+        });
+        return;
+      }
+      const caseId =
+        String(
+          req.params.caseId ??
+          ""
+        ).trim();
+      try {
+        options.caseAccessService
+          ?.assertAccess(
+            responseAuthContext(
+              res
+            ),
+            caseId,
+            "READ"
+          );
+        res.json({
+          caseId,
+          uploads:
+            await options
+              .caseFileStore
+              .listUploads(
+                caseId
+              )
+        });
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(422).json({
+            error:
+              "CASE_FILE_LIST_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.get(
+    "/api/cases/:caseId/templates",
+    async (req, res) => {
+      if (
+        !options.caseAccessService ||
+        !options.sharedTemplateStore
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_TEMPLATE_LIBRARY_UNAVAILABLE"
+        });
+        return;
+      }
+      const caseId =
+        String(
+          req.params.caseId ??
+          ""
+        ).trim();
+      try {
+        options.caseAccessService
+          .assertAccess(
+            responseAuthContext(
+              res
+            ),
+            caseId,
+            "READ"
+          );
+        res.json({
+          caseId,
+          scope: "FIRM_SHARED",
+          templates:
+            await options
+              .sharedTemplateStore
+              .listTemplates()
+        });
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_TEMPLATE_LIST_FAILED"
+          });
+        }
+      }
+    }
+  );
 
   app.post(
     "/api/cases/:caseId/files",
