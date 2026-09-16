@@ -243,7 +243,11 @@ export type DocumentReviewResponse = {
     | "image/jpeg"
     | "image/png"
     | "image/webp"
-    | "image/tiff";
+    | "image/tiff"
+    | "text/plain"
+    | "text/markdown"
+    | "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    | "application/vnd.oasis.opendocument.text";
   complete: true;
   totalPages: number;
   pages: Array<{
