@@ -16,6 +16,8 @@ import {
   renameCase,
   unarchiveCase,
   getProviderStatus,
+  setProviderApiKey,
+  clearProviderApiKey,
   getRoutes,
   validateRoute,
   type AuthenticatedUser,
@@ -206,6 +208,15 @@ export default function App({
     anthropic: undefined,
     xai: undefined
   });
+  const [providerApiKey, setProviderApiKeyInput] =
+    useState("");
+  const [providerKeyBusy, setProviderKeyBusy] =
+    useState(false);
+  const [providerKeyMessage, setProviderKeyMessage] =
+    useState("");
+  const [providerKeyError, setProviderKeyError] =
+    useState("");
+
   const [models, setModels] = useState<ModelDescriptor[]>([]);
   const [model, setModel] = useState("");
   const [modelError, setModelError] = useState("");
@@ -509,6 +520,87 @@ export default function App({
       cancelled = true;
     };
   }, [provider, providerConfigured]);
+
+  async function refreshProviderStatus():
+    Promise<void> {
+    const result =
+      await getProviderStatus();
+    setProviderConfiguration(
+      Object.fromEntries(
+        result.providers.map(
+          (item) => [
+            item.provider,
+            item.configured
+          ]
+        )
+      ) as Record<
+        ProviderId,
+        boolean
+      >
+    );
+  }
+
+  async function saveProviderApiKey():
+    Promise<void> {
+    if (
+      user.appRole !== "ADMIN" ||
+      !providerApiKey.trim()
+    ) {
+      return;
+    }
+    setProviderKeyBusy(true);
+    setProviderKeyError("");
+    setProviderKeyMessage("");
+    try {
+      await setProviderApiKey(
+        provider,
+        providerApiKey
+      );
+      setProviderApiKeyInput("");
+      await refreshProviderStatus();
+      setProviderKeyMessage(
+        "Klucz jest aktywny w pamięci procesu. Nie został zapisany w przeglądarce ani na dysku."
+      );
+    } catch (error) {
+      setProviderKeyError(
+        error instanceof Error
+          ? error.message
+          : String(error)
+      );
+    } finally {
+      setProviderKeyBusy(false);
+    }
+  }
+
+  async function removeProviderApiKey():
+    Promise<void> {
+    if (
+      user.appRole !== "ADMIN"
+    ) {
+      return;
+    }
+    setProviderKeyBusy(true);
+    setProviderKeyError("");
+    setProviderKeyMessage("");
+    try {
+      await clearProviderApiKey(
+        provider
+      );
+      setProviderApiKeyInput("");
+      await refreshProviderStatus();
+      setProviderKeyMessage(
+        "Ulotny klucz usunięto. Jeśli provider nadal jest skonfigurowany, działa klucz przekazany przez środowisko procesu."
+      );
+    } catch (error) {
+      setProviderKeyError(
+        error instanceof Error
+          ? error.message
+          : String(error)
+      );
+    } finally {
+      setProviderKeyBusy(false);
+    }
+  }
 
   const selectedModel = useMemo(
     () => models.find((item) => item.id === model),
@@ -865,9 +957,14 @@ export default function App({
             <select
               id="provider"
               value={provider}
-              onChange={(event) =>
-                setProvider(event.target.value as ProviderId)
-              }
+              onChange={(event) => {
+                setProvider(
+                  event.target.value as ProviderId
+                );
+                setProviderApiKeyInput("");
+                setProviderKeyMessage("");
+                setProviderKeyError("");
+              }}
             >
               {PROVIDERS.map((item) => (
                 <option key={item.id} value={item.id}>
@@ -902,6 +999,71 @@ export default function App({
                   ? "Zarządzaj kluczem API"
                   : "Utwórz / pobierz klucz API"}
               </a>
+            )}
+
+            {user.appRole ===
+              "ADMIN" && (
+              <div className="provider-key-editor">
+                <label>
+                  Klucz API — tylko pamięć procesu
+                  <input
+                    type="password"
+                    autoComplete="off"
+                    value={
+                      providerApiKey
+                    }
+                    disabled={
+                      providerKeyBusy
+                    }
+                    onChange={(event) =>
+                      setProviderApiKeyInput(
+                        event.target
+                          .value
+                      )
+                    }
+                    placeholder="Wklej klucz; nie zostanie zapisany na dysku"
+                  />
+                </label>
+                <div className="provider-key-actions">
+                  <button
+                    type="button"
+                    disabled={
+                      providerKeyBusy ||
+                      !providerApiKey
+                        .trim()
+                    }
+                    onClick={() => {
+                      void saveProviderApiKey();
+                    }}
+                  >
+                    Użyj do restartu
+                  </button>
+                  <button
+                    type="button"
+                    disabled={
+                      providerKeyBusy
+                    }
+                    onClick={() => {
+                      void removeProviderApiKey();
+                    }}
+                  >
+                    Usuń ulotny klucz
+                  </button>
+                </div>
+                <p className="field-help">
+                  Trwałe zapamiętanie zostanie dodane dopiero przez systemowy magazyn poświadczeń w wersji desktopowej.
+                </p>
+                {providerKeyMessage && (
+                  <p className="field-help">
+                    {providerKeyMessage}
+                  </p>
+                )}
+                {providerKeyError && (
+                  <p className="field-error">
+                    {providerKeyError}
+                  </p>
+                )}
+              </div>
             )}
           </article>
 
