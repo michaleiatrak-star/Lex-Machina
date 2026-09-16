@@ -10,7 +10,10 @@ import { createLexHttpApp } from "./app.js";
 import { registerLegacyMigrationRoutes } from "./legacy-migration-routes.js";
 import { LexSkillRegistry } from "../registry.js";
 import { DynamicModelCatalog } from "../providers/model-catalog.js";
-import { EnvironmentCredentialResolver } from "../providers/credentials.js";
+import {
+  EnvironmentCredentialResolver,
+  MemoryOverlayCredentialResolver
+} from "../providers/credentials.js";
 import { createLiveProviderRegistry } from "../providers/ai-sdk-adapter.js";
 import { ProviderGateway } from "../providers/gateway.js";
 import { SafeSessionExecutor } from "../session-executor.js";
@@ -197,7 +200,10 @@ export async function startLocalServer(options?: {
       caseSecurityRotation
     );
 
-  const credentials = new EnvironmentCredentialResolver();
+  const credentials =
+    new MemoryOverlayCredentialResolver(
+      new EnvironmentCredentialResolver()
+    );
   const providerRegistry = createLiveProviderRegistry(credentials);
   const providerGateway = new ProviderGateway(providerRegistry);
 
@@ -212,6 +218,7 @@ export async function startLocalServer(options?: {
     registry,
     modelCatalog: new DynamicModelCatalog(credentials),
     credentialResolver: credentials,
+    credentialManager: credentials,
     caseFileStore,
     secureCaseUploadStore,
     sharedTemplateStore,
