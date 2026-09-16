@@ -820,6 +820,13 @@ export class LocalCaseAccessService {
       );
     }
 
+    await this.withCaseDataKey(
+      context,
+      caseId,
+      "MANAGE",
+      () => undefined
+    );
+
     const nextKeyVersion =
       record.keyVersion + 1;
     const nextKey =
@@ -896,22 +903,36 @@ export class LocalCaseAccessService {
         });
       }
 
-      this.store
-        .revokeAccessAndRotate({
-          caseId,
-          revokedUserId:
-            revokedUserId ??
-            "__none__",
-          newKeyVersion:
-            nextKeyVersion,
-          updatedAt: now,
-          remaining
-        });
       await this.files
         .updateCaseKeyVersion(
           caseId,
           nextKeyVersion
         );
+      try {
+        this.store
+          .revokeAccessAndRotate({
+            caseId,
+            revokedUserId:
+              revokedUserId ??
+              "__none__",
+            newKeyVersion:
+              nextKeyVersion,
+            updatedAt: now,
+            remaining
+          });
+      } catch (error) {
+        try {
+          await this.files
+            .updateCaseKeyVersion(
+              caseId,
+              record.keyVersion
+            );
+        } catch {
+          // DB remains unchanged; metadata repair is surfaced
+          // by the original transaction failure path.
+        }
+        throw error;
+      }
 
       this.audit(
         context.user.userId,
