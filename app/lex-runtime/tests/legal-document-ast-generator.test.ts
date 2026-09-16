@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { LegalDocumentAstGenerator } from "../src/legal-document-ast-generator.js";
-import type { SessionExecutor } from "../src/session-executor.js";
+import {
+  SESSION_EXECUTION_INTERNAL,
+  type SessionExecutor
+} from "../src/session-executor.js";
 
 describe("LegalDocumentAstGenerator", () => {
   it("accepts provider JSON and validates only declared aliases", async () => {
@@ -31,7 +34,40 @@ describe("LegalDocumentAstGenerator", () => {
           blockedReferences: [],
           verification: { records: 0, verified: 0, supported: 0, unverified: 0 },
           evidence: [],
-          audit: { result: "PASS", eventCount: 1, closed: true }
+          audit: { result: "PASS", eventCount: 4, closed: true },
+          [SESSION_EXECUTION_INTERNAL]: {
+            verificationRecords: [],
+            auditEvents: [
+              {
+                sequence: 1,
+                timestamp: "2026-09-16T10:00:00.000Z",
+                type: "session_started",
+                target: "session_test",
+                status: "OK"
+              },
+              {
+                sequence: 2,
+                timestamp: "2026-09-16T10:00:01.000Z",
+                type: "skill_read",
+                target: "prawny-router-v3",
+                status: "OK"
+              },
+              {
+                sequence: 3,
+                timestamp: "2026-09-16T10:00:02.000Z",
+                type: "provider_start",
+                target: "openai",
+                status: "OK"
+              },
+              {
+                sequence: 4,
+                timestamp: "2026-09-16T10:00:03.000Z",
+                type: "provider_end",
+                target: "openai",
+                status: "OK"
+              }
+            ]
+          }
         };
       }
     };
@@ -83,7 +119,40 @@ describe("LegalDocumentAstGenerator", () => {
         blockedReferences: [],
         verification: { records: 0, verified: 0, supported: 0, unverified: 0 },
         evidence: [],
-        audit: { result: "PASS", eventCount: 1, closed: true }
+        audit: { result: "PASS", eventCount: 4, closed: true },
+        [SESSION_EXECUTION_INTERNAL]: {
+          verificationRecords: [],
+          auditEvents: [
+            {
+              sequence: 1,
+              timestamp: "2026-09-16T10:00:00.000Z",
+              type: "session_started",
+              target: "session_test",
+              status: "OK"
+            },
+            {
+              sequence: 2,
+              timestamp: "2026-09-16T10:00:01.000Z",
+              type: "skill_read",
+              target: "prawny-router-v3",
+              status: "OK"
+            },
+            {
+              sequence: 3,
+              timestamp: "2026-09-16T10:00:02.000Z",
+              type: "provider_start",
+              target: "openai",
+              status: "OK"
+            },
+            {
+              sequence: 4,
+              timestamp: "2026-09-16T10:00:03.000Z",
+              type: "provider_end",
+              target: "openai",
+              status: "OK"
+            }
+          ]
+        }
       })
     };
     const generator = new LegalDocumentAstGenerator(sessions);
