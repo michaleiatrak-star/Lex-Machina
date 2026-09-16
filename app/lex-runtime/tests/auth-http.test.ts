@@ -21,6 +21,10 @@ import {
 import {
   LocalAuthService
 } from "../src/auth/service.js";
+import {
+  MemoryOverlayCredentialResolver,
+  StaticCredentialResolver
+} from "../src/providers/credentials.js";
 
 const roots: string[] = [];
 const DR =
@@ -384,6 +388,175 @@ describe("admin user lifecycle HTTP API", () => {
       )
     ).toBe(false);
 
+    authService.close();
+  });
+});
+
+
+describe("admin provider credential HTTP API", () => {
+  it("stores an API key only in backend memory and never echoes the secret", async () => {
+    const authService = auth();
+    const credentials =
+      new MemoryOverlayCredentialResolver(
+        new StaticCredentialResolver({})
+      );
+    const app =
+      createLexHttpApp({
+        registry: registry(),
+        modelCatalog: {
+          list: vi.fn(
+            async () => []
+          )
+        },
+        authService,
+        credentialResolver:
+          credentials,
+        credentialManager:
+          credentials
+      });
+
+    const bootstrap =
+      await request(app)
+        .post(
+          "/api/auth/bootstrap"
+        )
+        .send({
+          loginName:
+            "provider-admin",
+          displayName:
+            "Provider Admin",
+          password:
+            "Provider admin bardzo dlugie haslo 2026"
+        })
+        .expect(201);
+    const adminToken =
+      String(
+        bootstrap.body
+          .sessionToken
+      );
+    const secret =
+      "sk-test-memory-only-provider-key-123456789";
+
+    const saved =
+      await request(app)
+        .put(
+          "/api/admin/providers/openai/credential"
+        )
+        .set(
+          "Authorization",
+          `Bearer ${adminToken}`
+        )
+        .send({
+          apiKey: secret
+        })
+        .expect(200);
+
+    expect(
+      JSON.stringify(
+        saved.body
+      )
+    ).not.toContain(secret);
+    expect(
+      await credentials.getApiKey(
+        "openai"
+      )
+    ).toBe(secret);
+
+    const status =
+      await request(app)
+        .get(
+          "/api/providers"
+        )
+        .set(
+          "Authorization",
+          `Bearer ${adminToken}`
+        )
+        .expect(200);
+    expect(
+      status.body.providers
+    ).toContainEqual({
+      provider: "openai",
+      configured: true
+    });
+
+    const createdUser =
+      await request(app)
+        .post(
+          "/api/admin/users"
+        )
+        .set(
+          "Authorization",
+          `Bearer ${adminToken}`
+        )
+        .send({
+          loginName:
+            "provider-user",
+          displayName:
+            "Provider User",
+          password:
+            "Provider user bardzo dlugie haslo 2026"
+        })
+        .expect(201);
+    expect(
+      createdUser.body.user
+        .appRole
+    ).toBe("USER");
+
+    const userLogin =
+      await request(app)
+        .post(
+          "/api/auth/login"
+        )
+        .send({
+          loginName:
+            "provider-user",
+          password:
+            "Provider user bardzo dlugie haslo 2026"
+        })
+        .expect(200);
+
+    await request(app)
+      .put(
+        "/api/admin/providers/openai/credential"
+      )
+      .set(
+        "Authorization",
+        `Bearer ${String(
+          userLogin.body
+            .sessionToken
+        )}`
+      )
+      .send({
+        apiKey:
+          "another-valid-memory-key-123456"
+      })
+      .expect(403);
+
+    const cleared =
+      await request(app)
+        .delete(
+          "/api/admin/providers/openai/credential"
+        )
+        .set(
+          "Authorization",
+          `Bearer ${adminToken}`
+        )
+        .expect(200);
+    expect(
+      cleared.body
+    ).toEqual({
+      provider: "openai",
+      cleared: true,
+      storage:
+        "PROCESS_MEMORY"
+    });
+    expect(
+      await credentials.getApiKey(
+        "openai"
+      )
+    ).toBeNull();
+
+    credentials.close();
     authService.close();
   });
 });
