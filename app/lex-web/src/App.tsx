@@ -20,6 +20,7 @@ import {
   unarchiveCase,
   getProviderStatus,
   getUpdateStatus,
+  isDesktopShell,
   setProviderApiKey,
   clearProviderApiKey,
   getRoutes,
@@ -689,8 +690,11 @@ export default function App({
     );
   }
 
-  async function saveProviderApiKey():
-    Promise<void> {
+  async function saveProviderApiKey(
+    persistence:
+      "PROCESS_MEMORY" |
+      "OS_KEYRING"
+  ): Promise<void> {
     if (
       user.appRole !== "ADMIN" ||
       !providerApiKey.trim()
@@ -703,12 +707,16 @@ export default function App({
     try {
       await setProviderApiKey(
         provider,
-        providerApiKey
+        providerApiKey,
+        persistence
       );
       setProviderApiKeyInput("");
       await refreshProviderStatus();
       setProviderKeyMessage(
-        "Klucz jest aktywny w pamięci procesu. Nie został zapisany w przeglądarce ani na dysku."
+        persistence ===
+          "OS_KEYRING"
+          ? "Klucz jest aktywny i został zapisany w systemowym magazynie poświadczeń. Przeglądarka nie przechowuje jego wartości."
+          : "Klucz jest aktywny tylko w pamięci procesu. Ewentualny wcześniejszy wpis w systemowym magazynie poświadczeń został usunięty."
       );
     } catch (error) {
       setProviderKeyError(
@@ -1249,7 +1257,7 @@ export default function App({
               "ADMIN" && (
               <div className="provider-key-editor">
                 <label>
-                  Klucz API — tylko pamięć procesu
+                  Klucz API
                   <input
                     type="password"
                     autoComplete="off"
@@ -1277,11 +1285,30 @@ export default function App({
                         .trim()
                     }
                     onClick={() => {
-                      void saveProviderApiKey();
+                      void saveProviderApiKey(
+                        "PROCESS_MEMORY"
+                      );
                     }}
                   >
-                    Użyj do restartu
+                    Użyj tylko w tej sesji
                   </button>
+                  {isDesktopShell() && (
+                    <button
+                      type="button"
+                      disabled={
+                        providerKeyBusy ||
+                        !providerApiKey
+                          .trim()
+                      }
+                      onClick={() => {
+                        void saveProviderApiKey(
+                          "OS_KEYRING"
+                        );
+                      }}
+                    >
+                      Zapisz w systemowym magazynie
+                    </button>
+                  )}
                   <button
                     type="button"
                     disabled={
@@ -1291,11 +1318,13 @@ export default function App({
                       void removeProviderApiKey();
                     }}
                   >
-                    Usuń ulotny klucz
+                    Usuń klucz
                   </button>
                 </div>
                 <p className="field-help">
-                  Trwałe zapamiętanie zostanie dodane dopiero przez systemowy magazyn poświadczeń w wersji desktopowej.
+                  {isDesktopShell()
+                    ? "Wersja desktopowa pozwala jawnie wybrać pamięć procesu albo systemowy magazyn poświadczeń. Zapis trwały nie jest wykonywany bez wybrania tej opcji."
+                    : "W wersji przeglądarkowej klucz pozostaje wyłącznie w pamięci lokalnego procesu backendu."}
                 </p>
                 {providerKeyMessage && (
                   <p className="field-help">
