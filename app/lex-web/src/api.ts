@@ -419,6 +419,10 @@ export type ProviderConfigurationStatus = {
   configured: boolean;
 };
 
+export type ProviderCredentialPersistence =
+  | "PROCESS_MEMORY"
+  | "OS_KEYRING";
+
 export type ProviderCredentialMutationResponse = {
   provider: ProviderId;
   storage: "PROCESS_MEMORY";
@@ -1317,14 +1321,18 @@ export function getRoutes(): Promise<RouteListResponse> {
 
 export function setProviderApiKey(
   provider: ProviderId,
-  apiKey: string
+  apiKey: string,
+  persistence:
+    ProviderCredentialPersistence =
+      "PROCESS_MEMORY"
 ): Promise<ProviderCredentialMutationResponse> {
   return json<ProviderCredentialMutationResponse>(
     `/api/admin/providers/${provider}/credential`,
     {
       method: "PUT",
       body: JSON.stringify({
-        apiKey
+        apiKey,
+        persistence
       })
     }
   );
