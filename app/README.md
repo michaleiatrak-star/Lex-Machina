@@ -73,3 +73,14 @@ See:
 - `app/auth/schema.example.sql`
 
 Installer implementation should follow G34/G31C-D-E rather than freezing the current unauthenticated localhost prototype into a distributable package.
+
+
+## Master execution roadmap
+
+The consolidated implementation order from the current validated baseline through local identity, encrypted case storage, DOCX/ODT generation, Tauri and the offline installer is documented in:
+
+- `app/reports/MASTER-ROADMAP-SECURE-DESKTOP-RELEASE.md`
+
+The immediate next implementation batch is **Batch A / G34A-G34B**: local auth persistence, Argon2id, first ADMIN bootstrap, session manager, persistent throttling, authentication middleware and login/lock/logout UI.
+
+G30 remains a parallel capability and does not block the secure local-document/installer critical path unless explicitly included in the first desktop release scope.
