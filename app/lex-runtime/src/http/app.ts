@@ -64,6 +64,18 @@ function requestDocumentMediaType(
     : null;
 }
 
+const PRIVACY_KINDS = new Set([
+  "PESEL",
+  "NIP",
+  "REGON",
+  "IBAN",
+  "EMAIL",
+  "PHONE",
+  "PERSON",
+  "ADDRESS",
+  "CUSTOM"
+] as const);
+
 function parsePrivacyDirectives(
   value: unknown
 ): PagePrivacyDirective[] | null {
@@ -90,16 +102,33 @@ function parsePrivacyDirectives(
       return null;
     }
 
+    const rawKind =
+      typeof record.kind === "string"
+        ? record.kind
+        : undefined;
+    if (
+      rawKind !== undefined &&
+      !PRIVACY_KINDS.has(
+        rawKind as
+          typeof PRIVACY_KINDS extends Set<infer T>
+            ? T
+            : never
+      )
+    ) {
+      return null;
+    }
+
+    const kind = rawKind as
+      | NonNullable<PagePrivacyDirective["kind"]>
+      | undefined;
+
     directives.push({
       page: Number(record.page),
       start: Number(record.start),
       end: Number(record.end),
       action: action as PagePrivacyDirective["action"],
-      ...(typeof record.kind === "string"
-        ? {
-            kind:
-              record.kind as PagePrivacyDirective["kind"]
-          }
+      ...(kind !== undefined
+        ? { kind }
         : {}),
       ...(typeof record.label === "string"
         ? { label: record.label }
