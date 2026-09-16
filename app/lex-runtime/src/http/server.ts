@@ -24,6 +24,9 @@ import { LocalAuthService } from "../auth/service.js";
 import {
   LocalCaseAccessService
 } from "../case-access.js";
+import {
+  LocalSharedTemplateStore
+} from "../shared-template-store.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -76,6 +79,11 @@ export async function startLocalServer(options?: {
       rootDir:
         caseFileStore.rootDir
     });
+  const sharedTemplateStore =
+    new LocalSharedTemplateStore({
+      rootDir:
+        caseFileStore.rootDir
+    });
   const authService =
     new LocalAuthService(
       authStore
@@ -103,6 +111,7 @@ export async function startLocalServer(options?: {
     modelCatalog: new DynamicModelCatalog(credentials),
     credentialResolver: credentials,
     caseFileStore,
+    sharedTemplateStore,
     authService,
     caseAccessService,
     documentService: new LocalPrivateDocumentService(
