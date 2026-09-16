@@ -91,7 +91,7 @@ describe("office and text privacy ingestion", () => {
     expect(
       review.pages[0]?.text
     ).toContain(
-      "kara umowna"
+      "karze umownej"
     );
 
     const finalized =
