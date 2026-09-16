@@ -1095,6 +1095,7 @@ mod tests {
         assert!(route_allowed("POST", "/api/cases/case_abc/files"));
         assert!(route_allowed("GET", "/api/sensitive-download/download_abc"));
         assert!(!route_allowed("POST", "/api/update/status"));
+        assert!(!route_allowed("POST", "/api/auth/bootstrap-managed"));
         assert!(!route_allowed("GET", "/api/arbitrary"));
         assert!(!route_allowed("GET", "https://example.com/"));
     }
@@ -1150,6 +1151,46 @@ mod tests {
                 br#"{"apiKey":"bad-key-123456","persistence":"UNKNOWN"}"#,
             )
             .is_err()
+        );
+    }
+
+    #[test]
+    fn managed_password_setup_uses_native_secret_injection() {
+        let body = br#"{"currentPassword":"__LEX_NATIVE_REAUTH__","newPassword":"user-password-123456789"}"#;
+        assert!(
+            managed_password_setup_from_request(
+                "POST",
+                "/api/auth/password",
+                body,
+            )
+            .expect("setup detection")
+        );
+
+        let mut request = Request::builder()
+            .method("POST")
+            .uri("/api/auth/password")
+            .body(body.to_vec())
+            .expect("request");
+        inject_managed_password(
+            "/api/auth/password",
+            &mut request,
+            "managed-bootstrap-secret",
+        )
+        .expect("secret injection");
+        let value: Value =
+            serde_json::from_slice(request.body())
+                .expect("json");
+        assert_eq!(
+            value
+                .get("currentPassword")
+                .and_then(Value::as_str),
+            Some("managed-bootstrap-secret")
+        );
+        assert_eq!(
+            value
+                .get("newPassword")
+                .and_then(Value::as_str),
+            Some("user-password-123456789")
         );
     }
 
