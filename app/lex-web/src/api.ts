@@ -251,7 +251,7 @@ export type DocumentReviewResponse = {
     | "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     | "application/vnd.oasis.opendocument.text"
     | "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    | "application/vnd.ms-excel.sheet.macroEnabled.12";
+    | "application/vnd.ms-excel.sheet.macroenabled.12";
   complete: true;
   totalPages: number;
   pages: Array<{
@@ -1188,7 +1188,7 @@ function uploadMediaType(file: File): string {
     return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
   }
   if (lower.endsWith(".xlsm")) {
-    return "application/vnd.ms-excel.sheet.macroEnabled.12";
+    return "application/vnd.ms-excel.sheet.macroenabled.12";
   }
   if (lower.endsWith(".csv")) {
     return "text/csv";
