@@ -208,6 +208,10 @@ export default function App({
     useState<DocumentAttachmentSelection[]>([]);
   const [workspaceRefresh, setWorkspaceRefresh] =
     useState(0);
+  const [droppedDocumentFile, setDroppedDocumentFile] =
+    useState<File | null>(null);
+  const [queryDropActive, setQueryDropActive] =
+    useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -809,6 +813,14 @@ export default function App({
         ) : (
           <DocumentPrivacyPanel
             caseId={caseId}
+            incomingFile={
+              droppedDocumentFile
+            }
+            onIncomingFileConsumed={() =>
+              setDroppedDocumentFile(
+                null
+              )
+            }
             onCaseFilesChange={() =>
               setWorkspaceRefresh(
                 (value) => value + 1
@@ -941,7 +953,59 @@ export default function App({
             </div>
           </article>
 
-          <article className="config-card config-card-wide">
+          <article
+            className={
+              `config-card config-card-wide conversation-drop-zone${queryDropActive ? " conversation-drop-active" : ""}`
+            }
+            onDragEnter={(event) => {
+              if (
+                event.dataTransfer.types
+                  .includes("Files")
+              ) {
+                event.preventDefault();
+                setQueryDropActive(
+                  true
+                );
+              }
+            }}
+            onDragOver={(event) => {
+              if (
+                event.dataTransfer.types
+                  .includes("Files")
+              ) {
+                event.preventDefault();
+                event.dataTransfer.dropEffect =
+                  "copy";
+                setQueryDropActive(
+                  true
+                );
+              }
+            }}
+            onDragLeave={() =>
+              setQueryDropActive(
+                false
+              )
+            }
+            onDrop={(event) => {
+              event.preventDefault();
+              setQueryDropActive(
+                false
+              );
+              const file =
+                event.dataTransfer
+                  .files?.[0];
+              if (
+                file &&
+                caseId &&
+                !selectedCase
+                  ?.archivedAt
+              ) {
+                setDroppedDocumentFile(
+                  file
+                );
+              }
+            }}
+          >
             <span className="step">04</span>
             <label htmlFor="query">Pytanie / zadanie</label>
             <textarea
@@ -958,7 +1022,7 @@ export default function App({
             <p className="field-help">
               Treść zostanie przesłana do wybranego providera dopiero po
               uruchomieniu analizy. Wynik z niezweryfikowanym powołaniem
-              prawnym zostanie zatrzymany przez HARD GATE.
+              prawnym zostanie zatrzymany przez HARD GATE. Możesz też przeciągnąć PDF, obraz lub ZIP bezpośrednio na to pole — plik przejdzie przez lokalną ścieżkę prywatności przed użyciem w analizie.
             </p>
           </article>
         </section>
