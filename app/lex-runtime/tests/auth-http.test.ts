@@ -1,0 +1,208 @@
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import request from "supertest";
+import {
+  afterEach,
+  describe,
+  expect,
+  it,
+  vi
+} from "vitest";
+import {
+  createLexHttpApp
+} from "../src/http/app.js";
+import {
+  LexSkillRegistry
+} from "../src/registry.js";
+import {
+  LocalAuthStore
+} from "../src/auth/store.js";
+import {
+  LocalAuthService
+} from "../src/auth/service.js";
+
+const roots: string[] = [];
+const DR =
+  "dr-02-prawo-cywilne-rodzinne-gospodarcze";
+
+function registry(): LexSkillRegistry {
+  const root =
+    fs.mkdtempSync(
+      path.join(
+        os.tmpdir(),
+        "lex-auth-http-skills-"
+      )
+    );
+  roots.push(root);
+  for (
+    const name
+    of ["prawo-polskie-v2", DR]
+  ) {
+    const dir =
+      path.join(root, name);
+    fs.mkdirSync(
+      dir,
+      { recursive: true }
+    );
+    fs.writeFileSync(
+      path.join(
+        dir,
+        "SKILL.md"
+      ),
+      `---\nname: ${name}\n---\n# test\n`
+    );
+  }
+  fs.writeFileSync(
+    path.join(
+      root,
+      "prawo-polskie-v2",
+      "ROUTING-MAP.md"
+    ),
+    DR + "\n"
+  );
+  const result =
+    new LexSkillRegistry(root);
+  result.scan();
+  return result;
+}
+
+function auth(): LocalAuthService {
+  const root =
+    fs.mkdtempSync(
+      path.join(
+        os.tmpdir(),
+        "lex-auth-http-data-"
+      )
+    );
+  roots.push(root);
+  return new LocalAuthService(
+    new LocalAuthStore({
+      rootDir: root
+    }),
+    {
+      kdf: {
+        memoryKiB: 1024,
+        iterations: 1,
+        parallelism: 1,
+        keyLength: 32,
+        version: 1
+      }
+    }
+  );
+}
+
+afterEach(() => {
+  while (roots.length) {
+    fs.rmSync(
+      roots.pop()!,
+      {
+        recursive: true,
+        force: true
+      }
+    );
+  }
+});
+
+describe("authenticated localhost HTTP API", () => {
+  it("keeps only health/auth bootstrap public and protects private API", async () => {
+    const authService = auth();
+    const app =
+      createLexHttpApp({
+        registry: registry(),
+        modelCatalog: {
+          list: vi.fn(
+            async () => []
+          )
+        },
+        authService
+      });
+
+    await request(app)
+      .get("/health")
+      .expect(200);
+
+    await request(app)
+      .get("/api/routes")
+      .expect(401, {
+        error:
+          "AUTHENTICATION_REQUIRED"
+      });
+
+    await request(app)
+      .get("/api/auth/status")
+      .expect(200, {
+        initialized: false,
+        requiresBootstrap: true
+      });
+
+    const bootstrap =
+      await request(app)
+        .post(
+          "/api/auth/bootstrap"
+        )
+        .send({
+          loginName: "owner",
+          displayName:
+            "Wlasciciel",
+          password:
+            "Bardzo dlugie haslo wlasciciela 2026"
+        })
+        .expect(201);
+
+    const token =
+      String(
+        bootstrap.body
+          .sessionToken
+      );
+    expect(token).toMatch(
+      /^[A-Za-z0-9_-]{40,}$/
+    );
+
+    const routes =
+      await request(app)
+        .get("/api/routes")
+        .set(
+          "Authorization",
+          `Bearer ${token}`
+        )
+        .expect(200);
+    expect(
+      routes.body.primarySkills
+    ).toContain(DR);
+
+    await request(app)
+      .get("/api/auth/me")
+      .set(
+        "Authorization",
+        `Bearer ${token}`
+      )
+      .expect(200);
+
+    await request(app)
+      .post("/api/auth/logout")
+      .set(
+        "Authorization",
+        `Bearer ${token}`
+      )
+      .expect(204);
+
+    await request(app)
+      .get("/api/routes")
+      .set(
+        "Authorization",
+        `Bearer ${token}`
+      )
+      .expect(401);
+
+    await request(app)
+      .post("/api/auth/logout")
+      .set(
+        "Authorization",
+        `Bearer ${token}`
+      )
+      .expect(204);
+
+    authService.close();
+  });
+});
