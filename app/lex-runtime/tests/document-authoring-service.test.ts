@@ -26,6 +26,105 @@ import {
 const roots:
   string[] = [];
 
+function validationContext(
+  documentId: string
+) {
+  return {
+    schemaVersion: 1 as const,
+    sourceSessionId:
+      "session_authoring_test",
+    primarySkill:
+      "dr-02-prawo-cywilne-rodzinne-gospodarcze",
+    provider:
+      "openai" as const,
+    model: "test",
+    usedDocumentContext:
+      true,
+    verificationRecords: [],
+    auditEvents: [
+      {
+        sequence: 1,
+        timestamp:
+          "2026-09-16T10:00:00.000Z",
+        type:
+          "session_started" as const,
+        target:
+          "session_authoring_test",
+        status: "OK" as const
+      },
+      {
+        sequence: 2,
+        timestamp:
+          "2026-09-16T10:00:01.000Z",
+        type:
+          "skill_read" as const,
+        target:
+          "prawny-router-v3",
+        status: "OK" as const
+      },
+      {
+        sequence: 3,
+        timestamp:
+          "2026-09-16T10:00:02.000Z",
+        type:
+          "skill_read" as const,
+        target:
+          "prawo-polskie-v2",
+        status: "OK" as const
+      },
+      {
+        sequence: 4,
+        timestamp:
+          "2026-09-16T10:00:03.000Z",
+        type:
+          "route" as const,
+        target:
+          "dr-02-prawo-cywilne-rodzinne-gospodarcze",
+        status: "OK" as const
+      },
+      {
+        sequence: 5,
+        timestamp:
+          "2026-09-16T10:00:04.000Z",
+        type:
+          "resource_read" as const,
+        target:
+          "local-document:" +
+          documentId,
+        status: "OK" as const
+      },
+      {
+        sequence: 6,
+        timestamp:
+          "2026-09-16T10:00:05.000Z",
+        type:
+          "provider_start" as const,
+        target: "openai",
+        status: "OK" as const
+      },
+      {
+        sequence: 7,
+        timestamp:
+          "2026-09-16T10:00:06.000Z",
+        type:
+          "provider_end" as const,
+        target: "openai",
+        status: "OK" as const
+      },
+      {
+        sequence: 8,
+        timestamp:
+          "2026-09-16T10:00:07.000Z",
+        type:
+          "session_closed" as const,
+        target:
+          "session_authoring_test",
+        status: "OK" as const
+      }
+    ]
+  };
+}
+
 afterEach(() => {
   while (
     roots.length
@@ -190,6 +289,10 @@ describe("document authoring lifecycle", () => {
               current
                 .caseDataKey,
             keyVersion: 1,
+            validationContext:
+              validationContext(
+                current.documentId
+              ),
             ast: {
               schemaVersion:
                 "1",
