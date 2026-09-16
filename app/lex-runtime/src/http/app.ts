@@ -252,6 +252,7 @@ export type LexHttpAppOptions = {
     | "importLegacyCase"
     | "assertAccess"
     | "listAccess"
+    | "listAccessCandidates"
     | "grantAccess"
     | "revokeAccess"
     | "rotateCaseKey"
@@ -1481,6 +1482,48 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           res.status(500).json({
             error:
               "CASE_DELETE_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.get(
+    "/api/cases/:caseId/access-candidates",
+    (req, res) => {
+      if (
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_ACCESS_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.json({
+          users:
+            options.caseAccessService
+              .listAccessCandidates(
+                responseAuthContext(
+                  res
+                ),
+                String(
+                  req.params.caseId ??
+                    ""
+                )
+              )
+        });
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_ACCESS_CANDIDATES_FAILED"
           });
         }
       }
