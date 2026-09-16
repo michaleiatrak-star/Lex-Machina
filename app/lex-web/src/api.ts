@@ -36,6 +36,16 @@ export type AuthMeResponse = {
   session: AuthSessionInfo;
 };
 
+export type RecoveryCodeResponse = {
+  recoveryCode: string;
+  createdAt: string;
+};
+
+export type AuthRecoveryResponse =
+  AuthSuccessResponse & {
+    recoveryCode: string;
+  };
+
 export type PiiKind =
   | "PESEL"
   | "NIP"
@@ -462,6 +472,60 @@ export async function login(input: {
         body: JSON.stringify(input)
       },
       { authenticated: false }
+    );
+  setAuthSessionToken(
+    result.sessionToken
+  );
+  return result;
+}
+
+export async function createRecoveryCode(
+  password: string
+): Promise<RecoveryCodeResponse> {
+  return json<RecoveryCodeResponse>(
+    "/api/auth/recovery-code",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        password
+      })
+    }
+  );
+}
+
+export async function changePassword(input: {
+  currentPassword: string;
+  newPassword: string;
+}): Promise<AuthSuccessResponse> {
+  const result =
+    await json<AuthSuccessResponse>(
+      "/api/auth/password",
+      {
+        method: "POST",
+        body: JSON.stringify(input)
+      }
+    );
+  setAuthSessionToken(
+    result.sessionToken
+  );
+  return result;
+}
+
+export async function recoverAccount(input: {
+  loginName: string;
+  recoveryCode: string;
+  newPassword: string;
+}): Promise<AuthRecoveryResponse> {
+  const result =
+    await json<AuthRecoveryResponse>(
+      "/api/auth/recover",
+      {
+        method: "POST",
+        body: JSON.stringify(input)
+      },
+      {
+        authenticated: false
+      }
     );
   setAuthSessionToken(
     result.sessionToken
