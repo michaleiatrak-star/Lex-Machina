@@ -61,20 +61,37 @@ const checks = {
     )
 };
 
+const cbosaExternalTransportBlock =
+  cbosa.status === "OUT_OF_SCOPE" &&
+  [
+    "CBOSA_TRANSPORT_FAILED",
+    "CBOSA_PAGINATION_TRANSPORT_FAILED",
+    "CBOSA_DOCUMENT_TRANSPORT_FAILED"
+  ].includes(cbosa.reason ?? "");
+
 const pass =
-  Object.values(
-    checks
-  ).every(Boolean);
+  Object.values(checks).every(Boolean);
+
+const externalBlocked =
+  checks.saosLiveFound &&
+  checks.discoveryOnly &&
+  cbosaExternalTransportBlock;
+
+const result =
+  pass
+    ? "PASS"
+    : externalBlocked
+      ? "EXTERNAL_BLOCKED"
+      : "BLOCKED";
 
 console.log(
   JSON.stringify(
     {
       gate:
         "G30A_LIVE_CASE_LAW_DISCOVERY",
-      result:
-        pass
-          ? "PASS"
-          : "BLOCKED",
+      result,
+      releaseBlocking:
+        result === "BLOCKED",
       checks,
       saos: {
         status:
@@ -102,6 +119,6 @@ console.log(
   )
 );
 
-if (!pass) {
+if (result === "BLOCKED") {
   process.exitCode = 1;
 }
