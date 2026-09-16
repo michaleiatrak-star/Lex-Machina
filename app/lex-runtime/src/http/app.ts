@@ -30,6 +30,10 @@ import type {
   SupportedDocumentMediaType
 } from "../document-service.js";
 import { RoutingCatalog } from "./routing-catalog.js";
+import {
+  decodeUploadFilename,
+  type LocalCaseFileStore
+} from "../case-file-store.js";
 
 const PROVIDERS = new Set<ProviderId>([
   "openai",
@@ -178,6 +182,10 @@ export type LexHttpAppOptions = {
   credentialResolver?: ProviderCredentialResolver;
   sessionExecutor?: SessionExecutor;
   documentService?: DocumentService;
+  caseFileStore?: Pick<
+    LocalCaseFileStore,
+    "createCase" | "saveUpload" | "assertCase"
+  >;
 };
 
 function publicSkill(skill: {
@@ -323,6 +331,90 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     });
   });
 
+  app.post("/api/cases", async (req, res) => {
+    if (!options.caseFileStore) {
+      res.status(503).json({
+        error: "CASE_STORAGE_UNAVAILABLE"
+      });
+      return;
+    }
+
+    const displayName =
+      typeof req.body?.displayName === "string"
+        ? req.body.displayName
+        : undefined;
+
+    try {
+      const created =
+        await options.caseFileStore.createCase(
+          displayName
+        );
+      res.status(201).json(created);
+    } catch {
+      res.status(500).json({
+        error: "CASE_CREATE_FAILED"
+      });
+    }
+  });
+
+  const caseUploadBody = express.raw({
+    type: () => true,
+    limit: "512mb"
+  });
+
+  app.post(
+    "/api/cases/:caseId/files",
+    caseUploadBody,
+    async (req, res) => {
+      if (!options.caseFileStore) {
+        res.status(503).json({
+          error: "CASE_STORAGE_UNAVAILABLE"
+        });
+        return;
+      }
+      if (
+        !Buffer.isBuffer(req.body) ||
+        req.body.byteLength === 0
+      ) {
+        res.status(400).json({
+          error: "FILE_BODY_REQUIRED"
+        });
+        return;
+      }
+
+      const caseId =
+        String(req.params.caseId ?? "")
+          .trim();
+      const mediaType =
+        req.get("content-type")
+          ?.split(";", 1)[0]
+          ?.trim()
+          .toLowerCase() ||
+        "application/octet-stream";
+      const filename =
+        decodeUploadFilename(
+          req.get("x-lex-filename")
+        );
+
+      try {
+        const stored =
+          await options.caseFileStore.saveUpload({
+            caseId,
+            filename,
+            mediaType,
+            data:
+              new Uint8Array(req.body),
+            extractArchive: true
+          });
+        res.status(201).json(stored);
+      } catch {
+        res.status(422).json({
+          error: "CASE_FILE_STORE_FAILED"
+        });
+      }
+    }
+  );
+
   app.get("/api/skills", (_req, res) => {
     const skills = [...options.registry.skills.values()]
       .map((skill) =>
@@ -458,6 +550,36 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
 
       try {
         const data = new Uint8Array(req.body);
+        let stored:
+          Awaited<ReturnType<
+            NonNullable<
+              LexHttpAppOptions["caseFileStore"]
+            >["saveUpload"]
+          >> | undefined;
+
+        if (options.caseFileStore) {
+          const caseId =
+            req.get("x-lex-case-id")
+              ?.trim();
+          if (!caseId) {
+            res.status(400).json({
+              error: "CASE_ID_REQUIRED"
+            });
+            return;
+          }
+          stored =
+            await options.caseFileStore.saveUpload({
+              caseId,
+              filename:
+                decodeUploadFilename(
+                  req.get("x-lex-filename")
+                ),
+              mediaType,
+              data,
+              extractArchive: false
+            });
+        }
+
         const result =
           mediaType === "application/pdf"
             ? await options.documentService.ingestPdf(
@@ -467,7 +589,15 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                 data,
                 mediaType
               );
-        res.status(201).json(result);
+        res.status(201).json({
+          ...result,
+          ...(stored
+            ? {
+                caseId: stored.caseId,
+                uploadId: stored.uploadId
+              }
+            : {})
+        });
       } catch {
         res.status(422).json({
           error: "DOCUMENT_INGESTION_FAILED"
@@ -506,12 +636,52 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       }
 
       try {
+        const data =
+          new Uint8Array(req.body);
+        let stored:
+          Awaited<ReturnType<
+            NonNullable<
+              LexHttpAppOptions["caseFileStore"]
+            >["saveUpload"]
+          >> | undefined;
+
+        if (options.caseFileStore) {
+          const caseId =
+            req.get("x-lex-case-id")
+              ?.trim();
+          if (!caseId) {
+            res.status(400).json({
+              error: "CASE_ID_REQUIRED"
+            });
+            return;
+          }
+          stored =
+            await options.caseFileStore.saveUpload({
+              caseId,
+              filename:
+                decodeUploadFilename(
+                  req.get("x-lex-filename")
+                ),
+              mediaType,
+              data,
+              extractArchive: false
+            });
+        }
+
         const result =
           await options.documentService.review(
-            new Uint8Array(req.body),
+            data,
             mediaType
           );
-        res.status(201).json(result);
+        res.status(201).json({
+          ...result,
+          ...(stored
+            ? {
+                caseId: stored.caseId,
+                uploadId: stored.uploadId
+              }
+            : {})
+        });
       } catch {
         res.status(422).json({
           error: "DOCUMENT_REVIEW_FAILED"
