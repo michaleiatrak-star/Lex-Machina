@@ -44,6 +44,8 @@ export const CASE_LAW_SEARCH_HOSTS = [
 
 const SAOS_ENDPOINT =
   "https://www.saos.org.pl/api/search/judgments";
+const CBOSA_QUERY =
+  "https://orzeczenia.nsa.gov.pl/cbo/query";
 const CBOSA_SEARCH =
   "https://orzeczenia.nsa.gov.pl/cbo/search";
 
@@ -51,9 +53,14 @@ const REQUEST_TIMEOUT_MS = 60_000;
 const MAX_RESULTS = 10;
 const CBOSA_PAGE_SIZE = 10;
 const MAX_CBOSA_REDIRECTS = 3;
+const MAX_CBOSA_TRANSPORT_ATTEMPTS = 4;
 
 const USER_AGENT =
   "Lex-Machina/0.1 (+local legal research runtime)";
+const CBOSA_USER_AGENT =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+  "AppleWebKit/537.36 (KHTML, like Gecko) " +
+  "Chrome/140.0.0.0 Safari/537.36";
 
 function clampLimit(
   value: number | undefined
@@ -263,6 +270,18 @@ function mergeCookies(
   return [...byName.values()];
 }
 
+function sleep(
+  milliseconds: number
+): Promise<void> {
+  return new Promise(
+    (resolve) =>
+      setTimeout(
+        resolve,
+        milliseconds
+      )
+  );
+}
+
 async function fetchCbosa(
   fetcher: CaseLawSearchFetch,
   input: string,
@@ -299,9 +318,15 @@ async function fetchCbosa(
           ),
         headers: {
           "User-Agent":
-            USER_AGENT,
+            CBOSA_USER_AGENT,
           Accept:
-            "text/html,application/xhtml+xml",
+            "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          "Accept-Language":
+            "pl-PL,pl;q=0.9,en;q=0.7",
+          "Cache-Control":
+            "no-cache",
+          Pragma:
+            "no-cache",
           ...(init.headers ?? {}),
           ...(jar.length
             ? {
@@ -321,11 +346,45 @@ async function fetchCbosa(
       requestInit.body = body;
     }
 
-    const response =
-      await fetcher(
-        url,
-        requestInit
-      );
+    let response:
+      Response | undefined;
+    let lastError:
+      unknown;
+
+    for (
+      let attempt = 1;
+      attempt <=
+        MAX_CBOSA_TRANSPORT_ATTEMPTS;
+      attempt += 1
+    ) {
+      try {
+        response =
+          await fetcher(
+            url,
+            requestInit
+          );
+        break;
+      } catch (error) {
+        lastError = error;
+        if (
+          attempt >=
+          MAX_CBOSA_TRANSPORT_ATTEMPTS
+        ) {
+          throw lastError;
+        }
+        await sleep(
+          500 *
+          2 ** (attempt - 1)
+        );
+      }
+    }
+
+    if (!response) {
+      throw lastError ??
+        new Error(
+          "CBOSA_TRANSPORT_FAILED"
+        );
+    }
 
     jar = mergeCookies(
       jar,
@@ -728,6 +787,29 @@ export class CaseLawSearchService {
       | undefined;
 
     try {
+      const warmup =
+        await fetchCbosa(
+          this.fetcher,
+          CBOSA_QUERY,
+          {
+            method: "GET"
+          },
+          []
+        );
+
+      if (!warmup.response.ok) {
+        return {
+          source: "CBOSA",
+          status:
+            "OUT_OF_SCOPE",
+          query,
+          candidates: [],
+          reason:
+            "CBOSA_PROBE_HTTP_" +
+            warmup.response.status
+        };
+      }
+
       first =
         await fetchCbosa(
           this.fetcher,
@@ -736,12 +818,16 @@ export class CaseLawSearchService {
             method: "POST",
             headers: {
               "Content-Type":
-                "application/x-www-form-urlencoded"
+                "application/x-www-form-urlencoded",
+              Origin:
+                "https://orzeczenia.nsa.gov.pl",
+              Referer:
+                CBOSA_QUERY
             },
             body:
               form.toString()
           },
-          []
+          warmup.cookies
         );
     } catch {
       return {
