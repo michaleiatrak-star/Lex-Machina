@@ -40,12 +40,14 @@ function rangesOverlap(
 
 export function DocumentPrivacyPanel({
   caseId,
-  onAttachmentSelectionChange
+  onAttachmentSelectionChange,
+  onCaseFilesChange
 }: {
   caseId: string;
   onAttachmentSelectionChange?: (
     selection: DocumentAttachmentSelection | null
   ) => void;
+  onCaseFilesChange?: () => void;
 }) {
   const textRef =
     useRef<HTMLTextAreaElement>(null);
@@ -131,6 +133,7 @@ export function DocumentPrivacyPanel({
             file
           );
         setArchiveUpload(stored);
+        onCaseFilesChange?.();
         return;
       }
 
@@ -140,6 +143,7 @@ export function DocumentPrivacyPanel({
           caseId
         );
       setReview(result);
+      onCaseFilesChange?.();
       setPage(
         result.pages[0]?.page ?? 1
       );
