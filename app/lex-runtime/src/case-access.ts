@@ -46,7 +46,8 @@ export type CaseAccessErrorCode =
   | "OWNER_ACCESS_IMMUTABLE"
   | "LEGACY_CASE_REQUIRES_IMPORT"
   | "LEGACY_CASE_ALREADY_IMPORTED"
-  | "CASE_KEY_UNAVAILABLE";
+  | "CASE_KEY_UNAVAILABLE"
+  | "CASE_ARCHIVED";
 
 export class CaseAccessError extends Error {
   constructor(
@@ -486,6 +487,27 @@ export class LocalCaseAccessService {
         403
       );
     }
+    const caseRecord =
+      this.store.getCase(
+        caseId
+      );
+    if (!caseRecord) {
+      throw new CaseAccessError(
+        "CASE_NOT_FOUND",
+        404
+      );
+    }
+    if (
+      caseRecord.archivedAt &&
+      capability !== "READ" &&
+      capability !== "MANAGE"
+    ) {
+      throw new CaseAccessError(
+        "CASE_ARCHIVED",
+        409
+      );
+    }
+
     if (
       capability ===
         "REIDENTIFY"
@@ -511,6 +533,241 @@ export class LocalCaseAccessService {
       );
     }
     return access;
+  }
+
+  async renameCase(
+    context:
+      AuthenticatedContext,
+    caseId: string,
+    displayName: string
+  ): Promise<CaseView> {
+    this.assertAccess(
+      context,
+      caseId,
+      "MANAGE"
+    );
+    const cleaned =
+      cleanDisplayName(
+        displayName
+      );
+    if (!cleaned) {
+      throw new CaseAccessError(
+        "INVALID_CASE_ACCESS_REQUEST",
+        400
+      );
+    }
+    const record =
+      this.store.getCase(
+        caseId
+      );
+    if (!record) {
+      throw new CaseAccessError(
+        "CASE_NOT_FOUND",
+        404
+      );
+    }
+    const now =
+      new Date().toISOString();
+
+    await this.files
+      .updateCaseLifecycleMetadata(
+        caseId,
+        {
+          updatedAt: now,
+          displayName: cleaned
+        }
+      );
+    try {
+      this.store
+        .updateCaseDisplayName(
+          caseId,
+          cleaned,
+          now
+        );
+    } catch (error) {
+      try {
+        await this.files
+          .updateCaseLifecycleMetadata(
+            caseId,
+            {
+              updatedAt:
+                record.updatedAt,
+              displayName:
+                record.displayName ??
+                null
+            }
+          );
+      } catch {
+        throw new Error(
+          "CASE_LIFECYCLE_ROLLBACK_FAILED"
+        );
+      }
+      throw error;
+    }
+
+    this.audit(
+      context.user.userId,
+      "case_renamed",
+      now,
+      {
+        caseId
+      }
+    );
+    return this.openCase(
+      context,
+      caseId
+    );
+  }
+
+  async setCaseArchived(
+    context:
+      AuthenticatedContext,
+    caseId: string,
+    archived: boolean
+  ): Promise<CaseView> {
+    this.assertAccess(
+      context,
+      caseId,
+      "MANAGE"
+    );
+    const record =
+      this.store.getCase(
+        caseId
+      );
+    if (!record) {
+      throw new CaseAccessError(
+        "CASE_NOT_FOUND",
+        404
+      );
+    }
+    if (
+      Boolean(record.archivedAt) ===
+        archived
+    ) {
+      return this.openCase(
+        context,
+        caseId
+      );
+    }
+
+    const now =
+      new Date().toISOString();
+    const archivedAt =
+      archived ? now : null;
+
+    await this.files
+      .updateCaseLifecycleMetadata(
+        caseId,
+        {
+          updatedAt: now,
+          archivedAt
+        }
+      );
+    try {
+      this.store
+        .setCaseArchivedAt(
+          caseId,
+          archivedAt,
+          now
+        );
+    } catch (error) {
+      try {
+        await this.files
+          .updateCaseLifecycleMetadata(
+            caseId,
+            {
+              updatedAt:
+                record.updatedAt,
+              archivedAt:
+                record.archivedAt ??
+                null
+            }
+          );
+      } catch {
+        throw new Error(
+          "CASE_LIFECYCLE_ROLLBACK_FAILED"
+        );
+      }
+      throw error;
+    }
+
+    this.audit(
+      context.user.userId,
+      archived
+        ? "case_archived"
+        : "case_unarchived",
+      now,
+      { caseId }
+    );
+    return this.openCase(
+      context,
+      caseId
+    );
+  }
+
+  async deleteCase(
+    context:
+      AuthenticatedContext,
+    caseId: string,
+    password: string
+  ): Promise<{
+    caseId: string;
+    deletedAt: string;
+  }> {
+    const access =
+      this.assertAccess(
+        context,
+        caseId,
+        "MANAGE"
+      );
+    if (
+      access.role !== "OWNER"
+    ) {
+      throw new CaseAccessError(
+        "CASE_ACCESS_DENIED",
+        403
+      );
+    }
+    if (
+      typeof password !==
+        "string" ||
+      password.length < 1
+    ) {
+      throw new CaseAccessError(
+        "INVALID_CASE_ACCESS_REQUEST",
+        400
+      );
+    }
+
+    await this.auth
+      .reauthenticate(
+        context,
+        password,
+        "DELETE_CASE"
+      );
+
+    const deletedAt =
+      new Date().toISOString();
+
+    // Files first: if SQLite removal unexpectedly fails, retrying the
+    // delete can finish a stale registration without leaving case data.
+    await this.files
+      .removeCase(caseId);
+    this.store
+      .deleteCaseRegistration(
+        caseId
+      );
+
+    this.audit(
+      context.user.userId,
+      "case_deleted",
+      deletedAt,
+      { caseId }
+    );
+    return {
+      caseId,
+      deletedAt
+    };
   }
 
   listAccess(
