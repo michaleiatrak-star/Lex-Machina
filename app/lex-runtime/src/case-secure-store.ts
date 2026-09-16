@@ -322,6 +322,206 @@ export class SecureCaseUploadStore {
     return target;
   }
 
+  private extractedDir(
+    caseId: string,
+    uploadId: string
+  ): string {
+    return path.join(
+      this.uploadDir(
+        caseId,
+        uploadId
+      ),
+      "extracted"
+    );
+  }
+
+  private extractedFileDir(
+    caseId: string,
+    uploadId: string,
+    fileId: string
+  ): string {
+    if (!validFileId(fileId)) {
+      throw new Error(
+        "INVALID_FILE_ID"
+      );
+    }
+    const base =
+      path.resolve(
+        this.extractedDir(
+          caseId,
+          uploadId
+        )
+      );
+    const target =
+      path.resolve(
+        base,
+        fileId
+      );
+    if (
+      !target.startsWith(
+        base + path.sep
+      )
+    ) {
+      throw new Error(
+        "EXTRACTED_FILE_PATH_ESCAPE"
+      );
+    }
+    return target;
+  }
+
+  private async readExtractedManifest(
+    args: {
+      caseId: string;
+      uploadId: string;
+      fileId: string;
+      caseDataKey: Buffer;
+      keyVersion: number;
+    }
+  ): Promise<EncryptedExtractedManifest> {
+    const data =
+      await readCaseBlob({
+        targetFile:
+          path.join(
+            this.extractedFileDir(
+              args.caseId,
+              args.uploadId,
+              args.fileId
+            ),
+            "manifest.lme"
+          ),
+        identity:
+          extractedManifestIdentity(
+            args.caseId,
+            args.fileId,
+            args.keyVersion
+          ),
+        caseDataKey:
+          args.caseDataKey,
+        maxBytes:
+          this.manifestMaxBytes
+      });
+    try {
+      const parsed =
+        JSON.parse(
+          data.toString("utf8")
+        ) as
+          EncryptedExtractedManifest;
+      if (
+        parsed.fileId !==
+          args.fileId ||
+        parsed.uploadId !==
+          args.uploadId ||
+        parsed.storage !==
+          "ENCRYPTED_LME1" ||
+        typeof parsed.relativePath !==
+          "string" ||
+        !parsed.relativePath ||
+        typeof parsed.compressedBytes !==
+          "number" ||
+        !Number.isSafeInteger(
+          parsed.compressedBytes
+        ) ||
+        parsed.compressedBytes < 0 ||
+        typeof parsed.uncompressedBytes !==
+          "number" ||
+        !Number.isSafeInteger(
+          parsed.uncompressedBytes
+        ) ||
+        parsed.uncompressedBytes < 0 ||
+        !/^[a-f0-9]{64}$/.test(
+          parsed.sha256
+        ) ||
+        !(
+          parsed.mediaType === null ||
+          typeof parsed.mediaType ===
+            "string"
+        ) ||
+        typeof parsed.processable !==
+          "boolean"
+      ) {
+        throw new Error(
+          "SECURE_EXTRACTED_MANIFEST_INVALID"
+        );
+      }
+      return parsed;
+    } finally {
+      data.fill(0);
+    }
+  }
+
+  private async listExtractedEntries(
+    args: {
+      caseId: string;
+      uploadId: string;
+      caseDataKey: Buffer;
+      keyVersion: number;
+    }
+  ): Promise<StoredArchiveEntry[]> {
+    let entries: Dirent[];
+    try {
+      entries =
+        await readdir(
+          this.extractedDir(
+            args.caseId,
+            args.uploadId
+          ),
+          {
+            withFileTypes: true
+          }
+        );
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        "code" in error &&
+        error.code === "ENOENT"
+      ) {
+        return [];
+      }
+      throw error;
+    }
+
+    const result:
+      StoredArchiveEntry[] = [];
+    for (const entry of entries) {
+      if (
+        !entry.isDirectory() ||
+        !validFileId(entry.name)
+      ) {
+        throw new Error(
+          "SECURE_EXTRACTED_DIRECTORY_INVALID"
+        );
+      }
+      const manifest =
+        await this.readExtractedManifest({
+          ...args,
+          fileId: entry.name
+        });
+      result.push({
+        fileId:
+          manifest.fileId,
+        relativePath:
+          manifest.relativePath,
+        compressedBytes:
+          manifest.compressedBytes,
+        uncompressedBytes:
+          manifest.uncompressedBytes,
+        sha256:
+          manifest.sha256,
+        mediaType:
+          manifest.mediaType,
+        processable:
+          manifest.processable
+      });
+    }
+    return result.sort(
+      (a, b) =>
+        a.relativePath
+          .localeCompare(
+            b.relativePath
+          )
+    );
+  }
+
   private async assertCaseKeyVersion(
     caseId: string,
     keyVersion: number
@@ -751,6 +951,7 @@ export class SecureCaseUploadStore {
 
         const stored:
           StoredArchiveEntry = {
+            fileId,
             relativePath,
             compressedBytes,
             uncompressedBytes,
@@ -1130,6 +1331,20 @@ export class SecureCaseUploadStore {
               "SECURE_UPLOAD_MANIFEST_INVALID"
             );
           }
+          if (parsed.archive) {
+            parsed.extracted =
+              await this
+                .listExtractedEntries({
+                  caseId:
+                    args.caseId,
+                  uploadId:
+                    entry.name,
+                  caseDataKey:
+                    args.caseDataKey,
+                  keyVersion:
+                    args.keyVersion
+                });
+          }
           result.push(
             parsed
           );
@@ -1183,6 +1398,101 @@ export class SecureCaseUploadStore {
       maxBytes:
         args.maxBytes
     });
+  }
+
+  async readExtractedPayload(args: {
+    caseId: string;
+    uploadId: string;
+    fileId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+    maxBytes: number;
+  }): Promise<{
+    manifest:
+      StoredArchiveEntry & {
+        fileId: string;
+      };
+    data: Buffer;
+  }> {
+    await this
+      .assertCaseKeyVersion(
+        args.caseId,
+        args.keyVersion
+      );
+    const manifest =
+      await this
+        .readExtractedManifest({
+          caseId:
+            args.caseId,
+          uploadId:
+            args.uploadId,
+          fileId:
+            args.fileId,
+          caseDataKey:
+            args.caseDataKey,
+          keyVersion:
+            args.keyVersion
+        });
+    if (
+      manifest.uncompressedBytes >
+        args.maxBytes
+    ) {
+      throw new Error(
+        "EXTRACTED_PAYLOAD_LIMIT_EXCEEDED"
+      );
+    }
+    const data =
+      await readCaseBlob({
+        targetFile:
+          path.join(
+            this.extractedFileDir(
+              args.caseId,
+              args.uploadId,
+              args.fileId
+            ),
+            "payload.lme"
+          ),
+        identity:
+          extractedPayloadIdentity(
+            args.caseId,
+            args.fileId,
+            args.keyVersion
+          ),
+        caseDataKey:
+          args.caseDataKey,
+        maxBytes:
+          args.maxBytes
+      });
+    if (
+      data.byteLength !==
+        manifest.uncompressedBytes ||
+      sha256(data) !==
+        manifest.sha256
+    ) {
+      data.fill(0);
+      throw new Error(
+        "EXTRACTED_PAYLOAD_INTEGRITY_FAILED"
+      );
+    }
+    return {
+      manifest: {
+        fileId:
+          manifest.fileId,
+        relativePath:
+          manifest.relativePath,
+        compressedBytes:
+          manifest.compressedBytes,
+        uncompressedBytes:
+          manifest.uncompressedBytes,
+        sha256:
+          manifest.sha256,
+        mediaType:
+          manifest.mediaType,
+        processable:
+          manifest.processable
+      },
+      data
+    };
   }
 
   async rekeyCaseIncoming(args: {
