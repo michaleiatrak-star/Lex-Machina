@@ -515,6 +515,90 @@ export class LocalCaseFileStore {
     );
   }
 
+  async listUploads(
+    caseId: string
+  ): Promise<StoredUpload[]> {
+    await this.assertCase(caseId);
+    const incoming = path.join(
+      this.caseDir(caseId),
+      "incoming"
+    );
+
+    let entries: Dirent[];
+    try {
+      entries = await readdir(
+        incoming,
+        {
+          withFileTypes: true
+        }
+      );
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        "code" in error &&
+        error.code === "ENOENT"
+      ) {
+        return [];
+      }
+      throw error;
+    }
+
+    const uploads:
+      StoredUpload[] = [];
+    for (const entry of entries) {
+      if (
+        !entry.isDirectory() ||
+        !/^upload_[a-f0-9]{32}$/
+          .test(entry.name)
+      ) {
+        continue;
+      }
+      try {
+        const parsed = JSON.parse(
+          await readFile(
+            path.join(
+              incoming,
+              entry.name,
+              "manifest.json"
+            ),
+            "utf8"
+          )
+        ) as StoredUpload;
+        if (
+          parsed.caseId !== caseId ||
+          parsed.uploadId !==
+            entry.name ||
+          typeof parsed.filename !==
+            "string" ||
+          typeof parsed.mediaType !==
+            "string" ||
+          typeof parsed.sha256 !==
+            "string" ||
+          typeof parsed.bytes !==
+            "number" ||
+          typeof parsed.storedAt !==
+            "string" ||
+          typeof parsed.archive !==
+            "boolean" ||
+          !Array.isArray(
+            parsed.extracted
+          )
+        ) {
+          continue;
+        }
+        uploads.push(parsed);
+      } catch {
+        // Ignore incomplete/corrupt entries in the browser inventory.
+      }
+    }
+
+    return uploads.sort((a, b) =>
+      b.storedAt.localeCompare(
+        a.storedAt
+      )
+    );
+  }
+
   async saveUpload(args: {
     caseId: string;
     filename: string;
