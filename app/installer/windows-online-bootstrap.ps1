@@ -161,8 +161,18 @@ try {
   $vcInstalled = $false
 }
 if (-not $vcInstalled) {
-  $vcInstaller = Join-Path $cache "vc_redist.x64-$($vc.version).exe"
-  Get-VerifiedDownload $vc.url $vc.sha256 $vcInstaller "visual-cpp-runtime"
+  $bundledVc = Join-Path $runtime "prerequisites\vc_redist.x64.exe"
+  if (Test-Path -LiteralPath $bundledVc -PathType Leaf) {
+    $bundledHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $bundledVc).Hash.ToLowerInvariant()
+    if ($bundledHash -ne $vc.sha256.ToLowerInvariant()) {
+      throw "BOOTSTRAP_HASH_MISMATCH:visual-cpp-runtime-bundled expected=$($vc.sha256) actual=$bundledHash"
+    }
+    Write-Host "Using verified bundled visual-cpp-runtime"
+    $vcInstaller = $bundledVc
+  } else {
+    $vcInstaller = Join-Path $cache "vc_redist.x64-$($vc.version).exe"
+    Get-VerifiedDownload $vc.url $vc.sha256 $vcInstaller "visual-cpp-runtime"
+  }
   $vcInstall = Start-Process -FilePath $vcInstaller -ArgumentList @(
     "/install", "/quiet", "/norestart"
   ) -Verb RunAs -Wait -PassThru
