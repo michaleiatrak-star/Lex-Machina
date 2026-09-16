@@ -1,6 +1,6 @@
 # Lex Machina — Master Roadmap to Secure Desktop Release
 
-Status: **IN EXECUTION — BATCH A/B COMPLETE; NEXT G31C1**  
+Status: **IN EXECUTION — BATCH A/B COMPLETE; G35A/G35B ADDED; NEXT G31C1**  
 Date: 2026-09-16  
 Branch baseline: `feature/local-runtime`
 
@@ -103,6 +103,10 @@ BASELINE
                 v
  PHASE 2 — G34C/G34D
  case ACL + per-user case-key envelopes
+                |
+                v
+ PHASE 2B — G35A/G35B
+ case workspace + shared firm templates
                 |
                 v
  PHASE 3 — G31C1
@@ -400,6 +404,66 @@ Case ACL is enforced on all case-scoped access.
 
 ## G34D PASS
 Per-user case-key envelopes and tested grant/revoke/key-rotation mechanics exist.
+
+---
+
+# PHASE 2B — G35A/G35B CASE WORKSPACE + FIRM TEMPLATE LIBRARY
+
+Goal: one browsable workspace per legal case plus one reusable office-template library shared safely across authorized cases.
+
+Primary spec:
+- `G35-CASE-WORKSPACE-TEMPLATE-LIBRARY.md`
+
+## P2B-T01 — Case file inventory
+List persisted upload manifests and safe ZIP member metadata from exactly one selected case.
+
+## P2B-T02 — Case file API
+`GET /api/cases/:caseId/files`:
+- requires READ;
+- no arbitrary path parameter;
+- metadata only in G35A.
+
+## P2B-T03 — Case workspace UI
+When case selection changes:
+- clear prior-case file inventory;
+- load only selected case files;
+- show filename/type/size/time/archive members.
+
+## P2B-T04 — Shared template store
+Create application scope:
+`shared/templates/template_<opaque-id>/`.
+
+Persist:
+- manifest;
+- original DOCX/ODT;
+- hash;
+- safe filename;
+- creator user id.
+
+## P2B-T05 — Shared template permissions
+Initial policy:
+- authenticated users: list metadata;
+- ADMIN: add template;
+- no case ACL row is created for a template.
+
+## P2B-T06 — Cross-case template reference
+`GET /api/cases/:caseId/templates` first verifies READ for that case and then returns references to the same shared library.
+
+No physical copy into the case.
+
+## P2B-T07 — Template UI
+Show common office templates beside the selected case.
+ADMIN may add a template.
+Changing cases does not duplicate or move the shared template.
+
+## G35A PASS
+Authorized user can browse the persisted file inventory of one selected case without seeing another case's files.
+
+## G35B PASS
+A single stored firm template can be listed from multiple independently authorized cases without weakening case ACL or copying the template.
+
+## G35C — later generation integration
+After G31C2/G31D/G31E, selected `templateId` may supply a locally validated style/structure profile to deterministic generation. Raw template package bytes must not be sent automatically to AI.
 
 ---
 
@@ -1222,6 +1286,9 @@ The first installer may be called release-ready only when all are PASS:
 - G31D;
 - G31E;
 - G34G;
+- G35A;
+- G35B;
+- G35C template-generation integration;
 - G33A;
 - G33B;
 - G33C;
