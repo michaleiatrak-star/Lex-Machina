@@ -86,7 +86,11 @@ const DOCUMENT_MEDIA_TYPES =
     "image/jpeg",
     "image/png",
     "image/webp",
-    "image/tiff"
+    "image/tiff",
+    "text/plain",
+    "text/markdown",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/vnd.oasis.opendocument.text"
   ]);
 
 function requestDocumentMediaType(
@@ -2949,7 +2953,11 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       "image/jpeg",
       "image/png",
       "image/webp",
-      "image/tiff"
+      "image/tiff",
+      "text/plain",
+      "text/markdown",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/vnd.oasis.opendocument.text"
     ],
     limit: "512mb"
   });
