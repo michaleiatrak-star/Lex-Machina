@@ -21,6 +21,7 @@ import type {
   StoredRecoveryEnvelope
 } from "./types.js";
 import type {
+  CaseKind,
   CaseListItem,
   StoredCaseAccess,
   StoredCaseRecord,
@@ -348,6 +349,31 @@ export class LocalAuthStore {
     this.db.prepare(
       "INSERT OR IGNORE INTO auth_schema(version) VALUES (4)"
     ).run();
+    if (
+      !caseColumns.some(
+        (column) =>
+          column.name ===
+            "case_kind"
+      )
+    ) {
+      this.db.exec(
+        "ALTER TABLE cases " +
+        "ADD COLUMN case_kind TEXT NOT NULL DEFAULT 'MATTER' " +
+        "CHECK (case_kind IN ('MATTER','FIRM_KNOWLEDGE'))"
+      );
+    }
+    this.db.exec(`
+      CREATE UNIQUE INDEX IF NOT EXISTS
+        idx_cases_single_firm_knowledge
+      ON cases(case_kind)
+      WHERE case_kind =
+        'FIRM_KNOWLEDGE';
+    `);
+    this.db.prepare(
+      "INSERT OR IGNORE INTO auth_schema(version) VALUES (5)"
+    ).run();
+
+
   }
 
   close(): void {
@@ -762,6 +788,13 @@ export class LocalAuthStore {
           row.key_version,
           "key_version"
         ),
+      caseKind:
+        (
+          optionalText(
+            row.case_kind
+          ) ??
+          "MATTER"
+        ) as CaseKind,
       createdAt:
         textValue(
           row.created_at,
@@ -1071,15 +1104,17 @@ export class LocalAuthStore {
           created_at,
           updated_at,
           key_version,
-          display_name
-        ) VALUES (?, ?, ?, ?, ?, ?)
+          display_name,
+          case_kind
+        ) VALUES (?, ?, ?, ?, ?, ?, ?)
       `).run(
         args.caseRecord.caseId,
         args.caseRecord.createdByUserId,
         args.caseRecord.createdAt,
         args.caseRecord.updatedAt,
         args.caseRecord.keyVersion,
-        args.caseRecord.displayName ?? null
+        args.caseRecord.displayName ?? null,
+        args.caseRecord.caseKind
       );
       this.insertCaseAccess(
         args.ownerAccess
@@ -1145,6 +1180,22 @@ export class LocalAuthStore {
     this.db.prepare(
       "DELETE FROM cases WHERE case_id = ?"
     ).run(caseId);
+  }
+
+  getCaseByKind(
+    caseKind: CaseKind
+  ): StoredCaseRecord | null {
+    const row = this.db.prepare(`
+      SELECT *
+      FROM cases
+      WHERE case_kind = ?
+      LIMIT 1
+    `).get(caseKind) as
+      | Record<string, unknown>
+      | undefined;
+    return row
+      ? this.mapCase(row)
+      : null;
   }
 
   getCase(
