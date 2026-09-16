@@ -25,6 +25,33 @@ export type PagePrivacyDirective = {
   label?: string;
 };
 
+export type CaseResponse = {
+  caseId: string;
+  displayName?: string;
+  createdAt: string;
+};
+
+export type StoredArchiveEntry = {
+  relativePath: string;
+  compressedBytes: number;
+  uncompressedBytes: number;
+  sha256: string;
+  mediaType: string | null;
+  processable: boolean;
+};
+
+export type StoredUploadResponse = {
+  caseId: string;
+  uploadId: string;
+  filename: string;
+  mediaType: string;
+  sha256: string;
+  bytes: number;
+  storedAt: string;
+  archive: boolean;
+  extracted: StoredArchiveEntry[];
+};
+
 export type DocumentReviewResponse = {
   documentId: string;
   mediaType:
@@ -227,6 +254,19 @@ export function getHealth(): Promise<HealthResponse> {
   return json<HealthResponse>("/health");
 }
 
+export function createCase(
+  displayName?: string
+): Promise<CaseResponse> {
+  return json<CaseResponse>("/api/cases", {
+    method: "POST",
+    body: JSON.stringify({
+      ...(displayName?.trim()
+        ? { displayName: displayName.trim() }
+        : {})
+    })
+  });
+}
+
 export function getRoutes(): Promise<RouteListResponse> {
   return json<RouteListResponse>("/api/routes");
 }
@@ -267,8 +307,47 @@ export function executeSession(input: {
   });
 }
 
-export async function reviewDocument(
+function uploadMediaType(file: File): string {
+  if (file.type) return file.type;
+  if (file.name.toLowerCase().endsWith(".zip")) {
+    return "application/zip";
+  }
+  return "application/octet-stream";
+}
+
+export async function uploadCaseFile(
+  caseId: string,
   file: File
+): Promise<StoredUploadResponse> {
+  const response = await fetch(
+    `${apiBase()}/api/cases/${caseId}/files`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": uploadMediaType(file),
+        "X-Lex-Filename":
+          encodeURIComponent(file.name)
+      },
+      body: file
+    }
+  );
+  const payload =
+    await response.json() as
+      | StoredUploadResponse
+      | ApiFailure;
+  if (!response.ok) {
+    throw new Error(
+      (payload as ApiFailure).error ||
+      `HTTP_${response.status}`
+    );
+  }
+  return payload as StoredUploadResponse;
+}
+
+export async function reviewDocument(
+  file: File,
+  caseId: string
 ): Promise<DocumentReviewResponse> {
   const response = await fetch(
     `${apiBase()}/api/documents/review`,
@@ -276,7 +355,10 @@ export async function reviewDocument(
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": file.type
+        "Content-Type": uploadMediaType(file),
+        "X-Lex-Case-Id": caseId,
+        "X-Lex-Filename":
+          encodeURIComponent(file.name)
       },
       body: file
     }
