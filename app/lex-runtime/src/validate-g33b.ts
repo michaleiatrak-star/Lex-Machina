@@ -53,6 +53,8 @@ const checks = {
     hooks.includes("/install /quiet /norestart"),
   paddleNetworkDisabled:
     paddle.includes("LEX_PADDLE_MODEL_DIR is required") &&
+    sidecar.includes("LEX_PADDLE_MODEL_DIR") &&
+    sidecar.includes('join("official_models")') &&
     sidecar.includes("PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK"),
   stanzaNetworkDisabled:
     stanza.includes("download_method=None") &&
