@@ -36,7 +36,9 @@
     "validate:g25": "tsx src/validate-g25.ts",
     "validate:g26": "tsx src/validate-g26.ts",
     "validate:g27": "tsx src/validate-g27.ts",
+    "validate:g27a": "tsx src/validate-g27a.ts",
     "validate:g28": "tsx src/validate-g28.ts",
+    "validate:g28a": "tsx src/validate-g28a.ts",
     "validate:g29": "tsx src/validate-g29.ts"
   },
   "dependencies": {
