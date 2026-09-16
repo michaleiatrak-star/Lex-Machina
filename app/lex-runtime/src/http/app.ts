@@ -53,6 +53,9 @@ import {
   type LocalCaseAccessService
 } from "../case-access.js";
 import type {
+  LocalCaseKnowledgeSearch
+} from "../case-knowledge-search.js";
+import type {
   LocalSharedTemplateStore
 } from "../shared-template-store.js";
 import type {
@@ -241,9 +244,15 @@ export type LexHttpAppOptions = {
     | "saveTemplate"
     | "listTemplates"
   >;
+  caseKnowledgeSearch?: Pick<
+    LocalCaseKnowledgeSearch,
+    "search"
+  >;
   caseAccessService?: Pick<
     LocalCaseAccessService,
     | "createCase"
+    | "createFirmKnowledgeWorkspace"
+    | "getFirmKnowledgeWorkspace"
     | "listCases"
     | "openCase"
     | "renameCase"
@@ -1104,6 +1113,89 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           error:
             "SHARED_TEMPLATE_STORE_FAILED"
         });
+      }
+    }
+  );
+
+  app.get(
+    "/api/firm-knowledge",
+    (_req, res) => {
+      if (
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_ACCESS_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        const workspace =
+          options.caseAccessService
+            .getFirmKnowledgeWorkspace(
+              responseAuthContext(
+                res
+              )
+            );
+        res.json({
+          workspace
+        });
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "FIRM_KNOWLEDGE_STATUS_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/firm-knowledge",
+    async (_req, res) => {
+      if (
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_ACCESS_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        const workspace =
+          await options
+            .caseAccessService
+            .createFirmKnowledgeWorkspace(
+              responseAuthContext(
+                res
+              )
+            );
+        res.status(201).json({
+          workspace
+        });
+      } catch (error) {
+        if (
+          !sendAuthError(
+            res,
+            error
+          ) &&
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "FIRM_KNOWLEDGE_CREATE_FAILED"
+          });
+        }
       }
     }
   );
