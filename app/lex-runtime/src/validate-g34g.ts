@@ -118,6 +118,16 @@ const checks = {
     webApi.includes(
       "if (isDesktopShell()) {\n    return {};"
     ),
+  osCredentialVault:
+    trust.includes(
+      "MANAGED_KEYRING_SERVICE"
+    ) &&
+    trust.includes(
+      "PROVIDER_KEYRING_SERVICE"
+    ) &&
+    trust.includes(
+      "restore_provider_credentials"
+    ),
   noShellPlugin:
     !JSON.stringify(
       tauriConfig
