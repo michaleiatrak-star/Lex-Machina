@@ -255,6 +255,7 @@ export type LexHttpAppOptions = {
     | "listAccess"
     | "listAccessCandidates"
     | "grantAccess"
+    | "transferOwnership"
     | "revokeAccess"
     | "rotateCaseKey"
     | "withCaseDataKey"
@@ -1665,6 +1666,66 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           res.status(500).json({
             error:
               "CASE_ACCESS_GRANT_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/transfer-owner",
+    async (req, res) => {
+      if (
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_ACCESS_UNAVAILABLE"
+        });
+        return;
+      }
+      const userId =
+        typeof req.body?.userId ===
+          "string"
+          ? req.body.userId
+          : "";
+      const password =
+        typeof req.body?.password ===
+          "string"
+          ? req.body.password
+          : "";
+      try {
+        res.json(
+          await options
+            .caseAccessService
+            .transferOwnership(
+              responseAuthContext(
+                res
+              ),
+              String(
+                req.params.caseId ??
+                  ""
+              ),
+              {
+                userId,
+                password
+              }
+            )
+        );
+      } catch (error) {
+        if (
+          !sendAuthError(
+            res,
+            error
+          ) &&
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_OWNER_TRANSFER_FAILED"
           });
         }
       }
