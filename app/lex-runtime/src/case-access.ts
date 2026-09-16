@@ -171,14 +171,20 @@ export class LocalCaseAccessService {
       let metadata:
         StoredCaseMetadata;
       try {
+        const cleanedName =
+          cleanDisplayName(
+            displayName
+          );
         metadata =
           await this.files
             .createCase({
               caseId,
-              displayName:
-                cleanDisplayName(
-                  displayName
-                ),
+              ...(cleanedName
+                ? {
+                    displayName:
+                      cleanedName
+                  }
+                : {}),
               createdByUserId:
                 context.user.userId,
               keyVersion
