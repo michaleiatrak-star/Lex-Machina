@@ -29,7 +29,7 @@ permissions:
 
 jobs:
   g1-g29-g32:
-    name: G1-G29 + G31A/G31B/G31C1 + G32 + G34A-G34E + G35A/G35B deterministic validation
+    name: G1-G29 + G31A/G31B/G31C1 + G32 + G34A-G34E + G34F1 + G35A/G35B deterministic validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -172,6 +172,9 @@ jobs:
 
       - name: G34E — recovery and password lifecycle
         run: npm run validate:g34e
+
+      - name: G34F1 — transaction reauthorization foundation
+        run: npm run validate:g34f1
 
   g19-live-freshness:
     name: G19 live temporal freshness probe
