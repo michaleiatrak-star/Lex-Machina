@@ -36,6 +36,9 @@ import {
 import {
   CaseSecurityRotationCoordinator
 } from "../case-security-rotation.js";
+import {
+  SecureCaseDocumentStore
+} from "../case-document-store.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -103,10 +106,16 @@ export async function startLocalServer(options?: {
       rootDir:
         caseFileStore.rootDir
     });
+  const secureCaseDocumentStore =
+    new SecureCaseDocumentStore({
+      rootDir:
+        caseFileStore.rootDir
+    });
   const caseSecurityRotation =
     new CaseSecurityRotationCoordinator(
       privacyVaultStore,
-      secureCaseUploadStore
+      secureCaseUploadStore,
+      secureCaseDocumentStore
     );
   await secureCaseUploadStore
     .cleanupOrphanedWorkdirs();
@@ -153,7 +162,8 @@ export async function startLocalServer(options?: {
       new CompleteImageIngestor(
         new LocalPaddleImageOcrEngine()
       ),
-      privacyVaultStore
+      privacyVaultStore,
+      secureCaseDocumentStore
     ),
     sessionExecutor: new SafeSessionExecutor(
       registry,
