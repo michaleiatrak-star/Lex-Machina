@@ -76,6 +76,9 @@ import {
 import {
   DeanonymizationReauthorizationManager
 } from "../auth/reauthorization.js";
+import {
+  SensitiveDownloadTicketManager
+} from "../sensitive-download-ticket.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -242,6 +245,10 @@ export async function startLocalServer(options?: {
       authStore,
       documentGenerationState
     );
+  const sensitiveDownloadTickets =
+    new SensitiveDownloadTicketManager(
+      authService
+    );
 
   const credentials =
     new MemoryOverlayCredentialResolver(
@@ -272,6 +279,8 @@ export async function startLocalServer(options?: {
     caseKnowledgeSearch,
     documentAuthoringService,
     reauthorizationManager,
+    sensitiveDownloadTickets,
+    secureCaseArtifactStore,
     documentService: new LocalPrivateDocumentService(
       new CompleteDocumentIngestor(
         new PdfJsDocumentPageSource(),
