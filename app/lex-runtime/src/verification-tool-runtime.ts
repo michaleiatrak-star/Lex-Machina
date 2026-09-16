@@ -4,6 +4,12 @@ import {
   supremeCourtSearchUrl
 } from "./case-law-verifier.js";
 import {
+  CASE_LAW_SEARCH_HOSTS,
+  CaseLawSearchService,
+  caseLawSearchEntryUrl,
+  type CaseLawSearchSource
+} from "./case-law-search.js";
+import {
   DeterministicLegalActResolver,
   LegalActResolutionError,
   type LegalActDescriptor
@@ -33,6 +39,8 @@ import {
 } from "./verification-ledger.js";
 
 const TOOL_NAME = "verify_legal_reference";
+const CASE_SEARCH_TOOL_NAME =
+  "search_case_law";
 const CASE_TOOL_NAME = "verify_case_reference";
 const CASE_QUOTE_TOOL_NAME =
   "verify_case_quote";
@@ -72,6 +80,46 @@ const TOOL_SCHEMA: NormalizedToolSchema = {
           type: "string",
           description:
             "Optional historical legal-state date in YYYY-MM-DD. Use only when the user asks for a past legal state. Omit for current law."
+        }
+      }
+    }
+  }
+};
+
+
+const CASE_SEARCH_TOOL_SCHEMA: NormalizedToolSchema = {
+  type: "function",
+  function: {
+    name: CASE_SEARCH_TOOL_NAME,
+    description:
+      "Search Polish case-law candidates in SAOS or CBOSA. " +
+      "This is discovery only: returned candidates are NOT verified for citation. " +
+      "Use source=SAOS for broad full-text discovery and source=CBOSA for NSA/WSA discovery. " +
+      "After selecting a candidate, run the applicable verification workflow before citing it.",
+    parameters: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "query",
+        "source"
+      ],
+      properties: {
+        query: {
+          type: "string",
+          description:
+            "Full-text legal phrase or issue to search for. Do not use this field to fabricate a case signature."
+        },
+        source: {
+          type: "string",
+          enum: [
+            "SAOS",
+            "CBOSA"
+          ]
+        },
+        limit: {
+          type: "integer",
+          minimum: 1,
+          maximum: 10
         }
       }
     }
@@ -450,6 +498,9 @@ export const LEGAL_VERIFICATION_SYSTEM_APPENDIX = [
   "- For VERIFIED results, copy the returned marker verbatim onto the SAME LINE as the exact citation.",
   "- Never invent a verification marker, source URL, or tool result.",
   "- For UNVERIFIED/DENIED results, do not represent the citation as verified.",
+  "- For case-law discovery, call search_case_law. Search SAOS and CBOSA as separate sources when both are relevant.",
+  "- search_case_law returns candidates only and never creates a VERIFIED ledger record. Never cite a discovered signature as verified without the applicable verification step.",
+  "- SAOS is a discovery source; CBOSA discovery is direct NSA/WSA retrieval but remains DISCOVERY until the candidate is verified under the case-law rules.",
   "- Before emitting a case signature (sygn.), call verify_case_reference.",
   "- The first supported courtFamily is SN. Pass only claim + signature + courtFamily; never invent or supply the sn.pl URL.",
   "- VERIFIED case output confirms exact official signature/metadata and full-text identity. It does not authorize an invented thesis or quote.",
@@ -472,16 +523,68 @@ export class LegalVerificationToolRuntime {
     private readonly freshnessChecker:
       TemporalSourceFreshnessChecker | null = null,
     private readonly caseVerifier =
-      new SupremeCourtCaseVerifier()
+      new SupremeCourtCaseVerifier(),
+    private readonly caseLawSearch =
+      new CaseLawSearchService()
   ) {
     this.broker = new ToolBroker(
       new ToolPolicy({
         allowNetwork: true,
         allowedNetworkHosts: [
-          ...OFFICIAL_LEGAL_SOURCE_HOSTS
+          ...OFFICIAL_LEGAL_SOURCE_HOSTS,
+          ...CASE_LAW_SEARCH_HOSTS
         ]
       })
     );
+
+    this.broker.register({
+      name: CASE_SEARCH_TOOL_NAME,
+      capability: "network",
+      execute: async (input) => {
+        const query =
+          typeof input.query === "string"
+            ? input.query.trim()
+            : "";
+        const source =
+          typeof input.source === "string"
+            ? input.source.trim()
+            : "";
+        const limit =
+          typeof input.limit === "number"
+            ? input.limit
+            : undefined;
+
+        if (
+          !query ||
+          (
+            source !== "SAOS" &&
+            source !== "CBOSA"
+          )
+        ) {
+          throw new Error(
+            "INVALID_CASE_SEARCH_INPUT"
+          );
+        }
+
+        const result =
+          await this.caseLawSearch.search({
+            query,
+            source:
+              source as CaseLawSearchSource,
+            ...(limit !== undefined
+              ? { limit }
+              : {})
+          });
+
+        return JSON.stringify({
+          ...result,
+          verificationStatus:
+            "DISCOVERY_ONLY",
+          instruction:
+            "Do not cite a candidate as verified. Run the applicable case verification workflow first."
+        });
+      }
+    });
 
     this.broker.register({
       name: CASE_PROPOSITION_TOOL_NAME,
@@ -864,6 +967,7 @@ export class LegalVerificationToolRuntime {
   schemas(): NormalizedToolSchema[] {
     return [
       TOOL_SCHEMA,
+      CASE_SEARCH_TOOL_SCHEMA,
       CASE_TOOL_SCHEMA,
       CASE_QUOTE_TOOL_SCHEMA,
       CASE_PROPOSITION_TOOL_SCHEMA
@@ -890,6 +994,90 @@ export class LegalVerificationToolRuntime {
     const results: NormalizedToolResult[] = [];
 
     for (const call of calls) {
+      if (
+        call.name ===
+        CASE_SEARCH_TOOL_NAME
+      ) {
+        const query =
+          typeof call.input.query === "string"
+            ? call.input.query.trim()
+            : "";
+        const source =
+          typeof call.input.source === "string"
+            ? call.input.source.trim()
+            : "";
+        const limit =
+          typeof call.input.limit === "number"
+            ? call.input.limit
+            : undefined;
+
+        if (
+          !query ||
+          (
+            source !== "SAOS" &&
+            source !== "CBOSA"
+          )
+        ) {
+          this.resolverAudit.push({
+            sequence:
+              this.resolverAudit.length + 1,
+            tool:
+              CASE_SEARCH_TOOL_NAME,
+            capability: "network",
+            decision: "DENY",
+            reason:
+              "INVALID_CASE_SEARCH_INPUT"
+          });
+          results.push({
+            tool_use_id: call.id,
+            content:
+              JSON.stringify({
+                status:
+                  "OUT_OF_SCOPE",
+                error:
+                  "INVALID_CASE_SEARCH_INPUT"
+              })
+          });
+          continue;
+        }
+
+        const typedSource =
+          source as CaseLawSearchSource;
+        const result =
+          await this.broker.execute({
+            name:
+              CASE_SEARCH_TOOL_NAME,
+            input: {
+              query,
+              source:
+                typedSource,
+              ...(limit !== undefined
+                ? { limit }
+                : {}),
+              url:
+                caseLawSearchEntryUrl(
+                  typedSource
+                )
+            }
+          });
+
+        results.push({
+          tool_use_id: call.id,
+          content: result.ok
+            ? String(
+                result.output ?? ""
+              )
+            : JSON.stringify({
+                status:
+                  "OUT_OF_SCOPE",
+                error:
+                  result.error ??
+                  "CASE_SEARCH_TOOL_FAILED"
+              })
+        });
+        continue;
+      }
+
       if (
         call.name ===
         CASE_PROPOSITION_TOOL_NAME
