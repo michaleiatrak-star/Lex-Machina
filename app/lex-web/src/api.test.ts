@@ -509,6 +509,7 @@ describe("local API client", () => {
     }];
 
     await finalizeDocument(
+      "case_0123456789abcdef0123456789abcdef",
       "doc_0123456789abcdef01234567",
       directives
     );
@@ -517,7 +518,11 @@ describe("local API client", () => {
       "http://127.0.0.1:4317/api/documents/doc_0123456789abcdef01234567/finalize",
       expect.objectContaining({
         method: "POST",
-        body: JSON.stringify({ directives })
+        body: JSON.stringify({
+          caseId:
+            "case_0123456789abcdef0123456789abcdef",
+          directives
+        })
       })
     );
   });
