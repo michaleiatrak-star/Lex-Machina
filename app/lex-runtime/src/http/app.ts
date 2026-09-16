@@ -93,6 +93,76 @@ const DOCUMENT_MEDIA_TYPES =
     "application/vnd.oasis.opendocument.text"
   ]);
 
+type ImageDocumentMediaType =
+  Parameters<
+    DocumentService[
+      "ingestImage"
+    ]
+  >[1];
+
+function isImageDocumentMediaType(
+  value:
+    SupportedDocumentMediaType
+): value is
+  ImageDocumentMediaType {
+  return [
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+    "image/tiff"
+  ].includes(value);
+}
+
+async function ingestDocumentMedia(
+  service:
+    DocumentService,
+  data:
+    Uint8Array,
+  mediaType:
+    SupportedDocumentMediaType,
+  security?:
+    Parameters<
+      DocumentService[
+        "review"
+      ]
+    >[2]
+) {
+  if (
+    mediaType ===
+      "application/pdf"
+  ) {
+    return await service
+      .ingestPdf(
+        data,
+        security
+      );
+  }
+  if (
+    isImageDocumentMediaType(
+      mediaType
+    )
+  ) {
+    return await service
+      .ingestImage(
+        data,
+        mediaType,
+        security
+      );
+  }
+  const review =
+    await service.review(
+      data,
+      mediaType,
+      security
+    );
+  return await service
+    .finalizeReview(
+      review.documentId,
+      [],
+      security
+    );
+}
+
 function requestDocumentMediaType(
   req: Request
 ): SupportedDocumentMediaType | null {
@@ -3116,47 +3186,27 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                 async (
                   caseDataKey
                 ) =>
-                  mediaType ===
-                    "application/pdf"
-                    ? await options
-                        .documentService!
-                        .ingestPdf(
-                          data,
-                          {
-                            caseId,
-                            caseDataKey,
-                            keyVersion:
-                              caseView.keyVersion
-                          }
-                        )
-                    : await options
-                        .documentService!
-                        .ingestImage(
-                          data,
-                          mediaType,
-                          {
-                            caseId,
-                            caseDataKey,
-                            keyVersion:
-                              caseView.keyVersion
-                          }
-                        )
+                  await ingestDocumentMedia(
+                    options
+                      .documentService!,
+                    data,
+                    mediaType,
+                    {
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    }
+                  )
               );
         } else {
           result =
-            mediaType ===
-              "application/pdf"
-              ? await options
-                  .documentService
-                  .ingestPdf(
-                    data
-                  )
-              : await options
-                  .documentService
-                  .ingestImage(
-                    data,
-                    mediaType
-                  );
+            await ingestDocumentMedia(
+              options
+                .documentService,
+              data,
+              mediaType
+            );
         }
         if (stored) {
           documentCaseIds.set(
