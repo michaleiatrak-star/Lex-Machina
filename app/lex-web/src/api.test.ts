@@ -7,6 +7,9 @@ import {
   getHealth,
   getModels,
   getUpdateStatus,
+  getFirmKnowledgeWorkspace,
+  createFirmKnowledgeWorkspace,
+  searchCaseKnowledge,
   login,
   logoutAuth,
   listCaseAccess,
@@ -287,6 +290,163 @@ describe("local API client", () => {
         })
       );
     }
+  });
+
+  it("supports firm knowledge workspace and local retrieval client calls", async () => {
+    const authPayload = {
+      user: {
+        userId:
+          "user_0123456789abcdef0123456789abcdef",
+        loginName:
+          "knowledge-admin",
+        displayName:
+          "Knowledge Admin",
+        appRole:
+          "ADMIN",
+        status:
+          "ACTIVE",
+        createdAt:
+          "2026-09-16T08:00:00.000Z"
+      },
+      session: {
+        sessionId:
+          "authsess_0123456789abcdef0123456789abcdef",
+        userId:
+          "user_0123456789abcdef0123456789abcdef",
+        createdAt:
+          "2026-09-16T08:00:00.000Z",
+        lastActivityAt:
+          "2026-09-16T08:00:00.000Z",
+        lastFullAuthenticationAt:
+          "2026-09-16T08:00:00.000Z",
+        idleExpiresAt:
+          "2026-09-16T08:15:00.000Z",
+        overallExpiresAt:
+          "2026-09-16T16:00:00.000Z"
+      },
+      sessionToken:
+        "D".repeat(43)
+    };
+    const workspace = {
+      caseId:
+        "case_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      caseKind:
+        "FIRM_KNOWLEDGE",
+      displayName:
+        "Wiedza kancelarii",
+      createdByUserId:
+        authPayload.user
+          .userId,
+      createdAt:
+        "2026-09-16T08:10:00.000Z",
+      updatedAt:
+        "2026-09-16T08:10:00.000Z",
+      keyVersion: 1,
+      role: "OWNER",
+      canReidentify:
+        true
+    };
+
+    const fetchMock =
+      vi.spyOn(
+        globalThis,
+        "fetch"
+      )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify(
+              authPayload
+            ),
+            { status: 200 }
+          )
+        )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify({
+              workspace: null
+            }),
+            { status: 200 }
+          )
+        )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify({
+              workspace
+            }),
+            { status: 201 }
+          )
+        )
+        .mockResolvedValueOnce(
+          new Response(
+            JSON.stringify({
+              caseId:
+                workspace.caseId,
+              caseKind:
+                "FIRM_KNOWLEDGE",
+              hits: [{
+                documentId:
+                  "doc_0123456789abcdef01234567",
+                chunkIndex: 1,
+                pageStart: 1,
+                pageEnd: 1,
+                score: 9.5,
+                text:
+                  "Praktyka kancelarii dotycząca kary umownej."
+              }]
+            }),
+            { status: 200 }
+          )
+        );
+
+    await login({
+      loginName:
+        "knowledge-admin",
+      password:
+        "Knowledge admin bezpieczne haslo 2026"
+    });
+    await expect(
+      getFirmKnowledgeWorkspace()
+    ).resolves.toEqual({
+      workspace: null
+    });
+    await expect(
+      createFirmKnowledgeWorkspace()
+    ).resolves.toEqual({
+      workspace
+    });
+    await expect(
+      searchCaseKnowledge(
+        workspace.caseId,
+        "kara umowna",
+        6
+      )
+    ).resolves.toMatchObject({
+      caseId:
+        workspace.caseId,
+      caseKind:
+        "FIRM_KNOWLEDGE"
+    });
+
+    expect(
+      fetchMock.mock.calls[1]
+        ?.[0]
+    ).toBe(
+      "http://127.0.0.1:4317/api/firm-knowledge"
+    );
+    expect(
+      fetchMock.mock.calls[2]
+        ?.[1]?.method
+    ).toBe("POST");
+    expect(
+      fetchMock.mock.calls[3]
+        ?.[1]?.body
+    ).toBe(
+      JSON.stringify({
+        query:
+          "kara umowna",
+        limit: 6
+      })
+    );
   });
 
   it("creates a local case before file work", async () => {
