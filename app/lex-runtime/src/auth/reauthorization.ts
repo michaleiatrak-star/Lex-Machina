@@ -72,6 +72,8 @@ export type DeanonymizationGrant = {
   userId: string;
   caseId: string;
   artifactId: string;
+  artifactFormat:
+    DeanonymizationArtifactFormat;
   tokenizedSha256: string;
   vaultGeneration: number;
   caseKeyVersion: number;
@@ -184,7 +186,8 @@ export class DeanonymizationReauthorizationManager {
     private readonly auth:
       Pick<
         AuthService,
-        "reauthenticate"
+        | "reauthenticate"
+        | "onSessionRevoked"
       >,
     private readonly cases:
       Pick<
@@ -214,6 +217,13 @@ export class DeanonymizationReauthorizationManager {
     this.grantTtlMs =
       options?.grantTtlMs ??
       90 * 1000;
+    this.auth
+      .onSessionRevoked(
+        (event) =>
+          this.revokeSession(
+            event.sessionId
+          )
+      );
   }
 
   async createIntent(
@@ -385,6 +395,8 @@ export class DeanonymizationReauthorizationManager {
           intent.caseId,
         artifactId:
           intent.artifactId,
+        artifactFormat:
+          intent.artifactFormat,
         tokenizedSha256:
           intent.tokenizedSha256,
         vaultGeneration:
