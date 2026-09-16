@@ -18,6 +18,7 @@ import { LocalPaddleImageOcrEngine } from "../ocr/paddle-image-ocr-engine.js";
 import { CompleteImageIngestor } from "../image-ingestion.js";
 import { LocalStanzaNamedEntityRecognizer } from "../privacy/stanza-ner.js";
 import { LocalPrivateDocumentService } from "../document-service.js";
+import { LocalCaseFileStore } from "../case-file-store.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -78,6 +79,7 @@ export async function startLocalServer(options?: {
     registry,
     modelCatalog: new DynamicModelCatalog(credentials),
     credentialResolver: credentials,
+    caseFileStore: new LocalCaseFileStore(),
     documentService: new LocalPrivateDocumentService(
       new CompleteDocumentIngestor(
         new PdfJsDocumentPageSource(),
