@@ -247,6 +247,20 @@ export default function App({
   const [executionError, setExecutionError] = useState("");
   const [documentAttachments, setDocumentAttachments] =
     useState<DocumentAttachmentSelection[]>([]);
+  const [
+    includeCaseKnowledge,
+    setIncludeCaseKnowledge
+  ] = useState(false);
+  const [
+    includeFirmKnowledge,
+    setIncludeFirmKnowledge
+  ] = useState(false);
+  const [
+    firmKnowledgeWorkspace,
+    setFirmKnowledgeWorkspace
+  ] = useState<
+    CaseListItem | null
+  >(null);
   const [updateStatus, setUpdateStatus] =
     useState<UpdateStatusResponse | null>(
       null
