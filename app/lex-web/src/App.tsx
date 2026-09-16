@@ -1158,6 +1158,9 @@ export default function App({
           onUseHit={
             addKnowledgeAttachment
           }
+          onWorkspaceChange={
+            setFirmKnowledgeWorkspace
+          }
         />
 
         {selectedCase?.archivedAt ? (
