@@ -17,6 +17,15 @@ import {
   type NamedEntityRecognizer,
   type PiiKind
 } from "./privacy/pseudonymizer.js";
+import type {
+  EncryptedPrivacyVaultStore
+} from "./privacy/vault-store.js";
+
+export type DocumentSecurityContext = {
+  caseId: string;
+  caseDataKey?: Buffer;
+  keyVersion?: number;
+};
 
 export type SupportedDocumentMediaType =
   | "application/pdf"
@@ -97,19 +106,23 @@ export type PublicDocumentIngestion = {
 
 export interface DocumentService {
   ingestPdf(
-    data: Uint8Array
+    data: Uint8Array,
+    security?: DocumentSecurityContext
   ): Promise<PublicDocumentIngestion>;
   ingestImage(
     data: Uint8Array,
-    mediaType: SupportedImageMediaType
+    mediaType: SupportedImageMediaType,
+    security?: DocumentSecurityContext
   ): Promise<PublicDocumentIngestion>;
   review(
     data: Uint8Array,
-    mediaType: SupportedDocumentMediaType
+    mediaType: SupportedDocumentMediaType,
+    security?: DocumentSecurityContext
   ): Promise<PublicDocumentReview>;
   finalizeReview(
     documentId: string,
-    directives: PagePrivacyDirective[]
+    directives: PagePrivacyDirective[],
+    security?: DocumentSecurityContext
   ): Promise<PublicDocumentIngestion>;
   resolveProtectedChunks(
     selection: DocumentChunkSelection
@@ -118,6 +131,7 @@ export interface DocumentService {
 
 type PrivateDocumentRecord = {
   mediaType: SupportedDocumentMediaType;
+  caseId?: string;
   vault: PseudonymizationVault;
   source: DocumentIngestionResult;
   protectedChunks?: PublicDocumentChunk[];
@@ -132,7 +146,12 @@ implements DocumentService {
     private readonly pdfIngestor: CompleteDocumentIngestor,
     private readonly namedEntities: NamedEntityRecognizer,
     private readonly maxChunkChars = 24_000,
-    private readonly imageIngestor?: CompleteImageIngestor
+    private readonly imageIngestor?: CompleteImageIngestor,
+    private readonly privacyVaultStore?: Pick<
+      EncryptedPrivacyVaultStore,
+      "loadDocumentVault" |
+      "saveDocumentVault"
+    >
   ) {}
 
   private async extract(
@@ -153,7 +172,8 @@ implements DocumentService {
 
   async review(
     data: Uint8Array,
-    mediaType: SupportedDocumentMediaType
+    mediaType: SupportedDocumentMediaType,
+    security?: DocumentSecurityContext
   ): Promise<PublicDocumentReview> {
     const source = await this.extract(
       data,
@@ -165,6 +185,12 @@ implements DocumentService {
     const vault = new PseudonymizationVault();
     this.documents.set(documentId, {
       mediaType,
+      ...(security?.caseId
+        ? {
+            caseId:
+              security.caseId
+          }
+        : {}),
       vault,
       source
     });
@@ -215,7 +241,8 @@ implements DocumentService {
 
   async finalizeReview(
     documentId: string,
-    directives: PagePrivacyDirective[]
+    directives: PagePrivacyDirective[],
+    security?: DocumentSecurityContext
   ): Promise<PublicDocumentIngestion> {
     const record = this.documents.get(documentId);
     if (!record) {
@@ -230,6 +257,42 @@ implements DocumentService {
       ) {
         throw new Error("INVALID_PRIVACY_DIRECTIVE_PAGE");
       }
+    }
+
+    const persistentVault =
+      Boolean(
+        this.privacyVaultStore &&
+        record.caseId
+      );
+
+    if (persistentVault) {
+      if (
+        !security ||
+        security.caseId !==
+          record.caseId ||
+        !security.caseDataKey ||
+        !Number.isInteger(
+          security.keyVersion
+        ) ||
+        (security.keyVersion ?? 0) <
+          1
+      ) {
+        throw new Error(
+          "DOCUMENT_VAULT_CONTEXT_REQUIRED"
+        );
+      }
+      record.vault =
+        await this
+          .privacyVaultStore!
+          .loadDocumentVault({
+            caseId:
+              record.caseId!,
+            documentId,
+            caseDataKey:
+              security.caseDataKey,
+            keyVersion:
+              security.keyVersion!
+          });
     }
 
     const pseudonymizer =
@@ -306,6 +369,27 @@ implements DocumentService {
     }));
     record.protectedChunks = publicChunks;
 
+    if (
+      persistentVault &&
+      security?.caseDataKey &&
+      security.keyVersion &&
+      record.caseId
+    ) {
+      await this
+        .privacyVaultStore!
+        .saveDocumentVault({
+          caseId:
+            record.caseId,
+          documentId,
+          vault:
+            record.vault,
+          caseDataKey:
+            security.caseDataKey,
+          keyVersion:
+            security.keyVersion
+        });
+    }
+
     return {
       documentId,
       mediaType: record.mediaType,
@@ -331,29 +415,35 @@ implements DocumentService {
   }
 
   async ingestPdf(
-    data: Uint8Array
+    data: Uint8Array,
+    security?: DocumentSecurityContext
   ): Promise<PublicDocumentIngestion> {
     const review = await this.review(
       data,
-      "application/pdf"
+      "application/pdf",
+      security
     );
     return this.finalizeReview(
       review.documentId,
-      []
+      [],
+      security
     );
   }
 
   async ingestImage(
     data: Uint8Array,
-    mediaType: SupportedImageMediaType
+    mediaType: SupportedImageMediaType,
+    security?: DocumentSecurityContext
   ): Promise<PublicDocumentIngestion> {
     const review = await this.review(
       data,
-      mediaType
+      mediaType,
+      security
     );
     return this.finalizeReview(
       review.documentId,
-      []
+      [],
+      security
     );
   }
 
