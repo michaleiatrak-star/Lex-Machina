@@ -28,6 +28,16 @@ import type {
 import type {
   EncryptedPrivacyVaultStore
 } from "./privacy/vault-store.js";
+import type {
+  DocumentGenerationValidationContext
+} from "./document-generation-validation.js";
+import {
+  rebuildGenerationExportState,
+  validateLocalHybridDocument
+} from "./document-generation-validation.js";
+import {
+  ExportGate
+} from "./export-gate.js";
 
 export type TokenizedDocumentResult = {
   artifact:
@@ -75,6 +85,7 @@ export class LocalDocumentAuthoringService {
         DocumentGenerationStateStore,
         | "saveTokenized"
         | "loadAliases"
+        | "loadValidationContext"
         | "markFinalized"
       >,
     private readonly renderer =
@@ -154,6 +165,8 @@ export class LocalDocumentAuthoringService {
       Buffer;
     keyVersion:
       number;
+    validationContext:
+      DocumentGenerationValidationContext;
     filename?: string;
   }): Promise<
     TokenizedDocumentResult
@@ -296,6 +309,8 @@ export class LocalDocumentAuthoringService {
                 .toISOString()
           },
           aliases,
+          validation:
+            args.validationContext,
           caseDataKey:
             args.caseDataKey
         });
@@ -362,6 +377,21 @@ export class LocalDocumentAuthoringService {
         "GENERATION_VAULT_CHANGED"
       );
     }
+
+    const validationContext =
+      await this.states
+        .loadValidationContext({
+          caseId:
+            args.target
+              .caseId,
+          artifactId:
+            args.target
+              .artifactId,
+          caseDataKey:
+            args.caseDataKey,
+          keyVersion:
+            args.keyVersion
+        });
 
     const aliases =
       await this.states
@@ -475,6 +505,62 @@ export class LocalDocumentAuthoringService {
             "FINAL_DOCUMENT_TOKEN_RESIDUE"
           );
         }
+        const hybrid =
+          validateLocalHybridDocument(
+            validation.text,
+            validationContext
+          );
+        if (
+          hybrid.result !==
+            "PASS"
+        ) {
+          throw new Error(
+            "FINAL_DOCUMENT_HYBRID_BLOCKED:" +
+            hybrid.reasons
+              .join(",")
+          );
+        }
+
+        const exportState =
+          rebuildGenerationExportState(
+            validationContext
+          );
+        const exportReport =
+          new ExportGate()
+            .evaluate({
+              documentContent:
+                finalPackage
+                  .data,
+              documentText:
+                validation.text,
+              documentKind:
+                args.target
+                  .artifactFormat,
+              documentSkill:
+                validationContext
+                  .primarySkill,
+              ledger:
+                exportState
+                  .ledger,
+              audit:
+                exportState
+                  .audit,
+              hybridValidation:
+                "PASS"
+            });
+        if (
+          exportReport.result !==
+            "PASS" ||
+          !exportReport
+            .documentHash
+        ) {
+          throw new Error(
+            "FINAL_DOCUMENT_EXPORT_GATE_BLOCKED:" +
+            exportReport.reasons
+              .join(",")
+          );
+        }
+
         const sha256 =
           createHash("sha256")
             .update(
@@ -482,6 +568,16 @@ export class LocalDocumentAuthoringService {
                 .data
             )
             .digest("hex");
+        if (
+          sha256 !==
+            exportReport
+              .documentHash
+        ) {
+          throw new Error(
+            "FINAL_DOCUMENT_EXPORT_HASH_MISMATCH"
+          );
+        }
+
         const format =
           args.target
             .artifactFormat;
