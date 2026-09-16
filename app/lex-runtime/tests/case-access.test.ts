@@ -185,6 +185,109 @@ afterEach(() => {
 });
 
 describe("G34C/G34D case access", () => {
+  it("creates a single encrypted firm-knowledge workspace and shares it only through ACL", async () => {
+    const current =
+      fixture();
+    const owner =
+      await current.auth.bootstrap({
+        loginName:
+          "knowledge-owner",
+        displayName:
+          "Knowledge Owner",
+        password:
+          "Knowledge owner bezpieczne haslo 2026"
+      });
+    const ownerContext =
+      context(owner);
+    const colleague =
+      await current.auth.createUser(
+        ownerContext,
+        {
+          loginName:
+            "knowledge-user",
+          displayName:
+            "Knowledge User",
+          password:
+            "Knowledge user bezpieczne haslo 2026"
+        }
+      );
+
+    const workspace =
+      await current.cases
+        .createFirmKnowledgeWorkspace(
+          ownerContext
+        );
+    expect(
+      workspace
+    ).toMatchObject({
+      caseKind:
+        "FIRM_KNOWLEDGE",
+      displayName:
+        "Wiedza kancelarii",
+      role: "OWNER",
+      canReidentify:
+        true,
+      keyVersion: 1
+    });
+
+    await expect(
+      current.cases
+        .createFirmKnowledgeWorkspace(
+          ownerContext
+        )
+    ).rejects.toThrow(
+      "FIRM_KNOWLEDGE_ALREADY_EXISTS"
+    );
+
+    const colleagueLogin =
+      await current.auth.login({
+        loginName:
+          "knowledge-user",
+        password:
+          "Knowledge user bezpieczne haslo 2026"
+      });
+    const colleagueContext =
+      context(
+        colleagueLogin
+      );
+    expect(
+      current.cases
+        .getFirmKnowledgeWorkspace(
+          colleagueContext
+        )
+    ).toBeNull();
+
+    await current.cases
+      .grantAccess(
+        ownerContext,
+        workspace.caseId,
+        {
+          userId:
+            colleague.userId,
+          role: "ANALYST",
+          canReidentify:
+            false
+        }
+      );
+
+    expect(
+      current.cases
+        .getFirmKnowledgeWorkspace(
+          colleagueContext
+        )
+    ).toMatchObject({
+      caseId:
+        workspace.caseId,
+      caseKind:
+        "FIRM_KNOWLEDGE",
+      role: "ANALYST",
+      canReidentify:
+        false
+    });
+
+    current.auth.close();
+  });
+
   it("creates owner ACL and unwraps the same CDK for an offline-granted user", async () => {
     const current = fixture();
     const owner =
