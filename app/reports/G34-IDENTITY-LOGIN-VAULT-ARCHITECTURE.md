@@ -1,32 +1,30 @@
 # G34 — Local Identity, Login, ACL and Encrypted Vault Architecture
 
-Status: **DESIGN COMPLETE — NOT IMPLEMENTED / NOT PASS**  
+Status: **PARTIALLY IMPLEMENTED — G34A-G34D PASS; G34E-G34H OPEN**  
 Date: 2026-09-16
 
 ## 1. Feasibility conclusion
 
-Adding local Lex Machina user accounts and a login mechanism is feasible with the current architecture.
+Local identity and case authorization are now implemented through G34D.
 
-Current repository state has:
-- no user/account model;
-- no login endpoint;
-- no password verifier;
-- no authentication cookie/bearer/session;
-- no `ownerId` / user ACL on cases;
-- no authentication middleware on localhost APIs.
+Current validated repository state includes:
+- local ADMIN/USER identities;
+- Argon2id password unlocking and encrypted UMK envelopes;
+- authenticated expiring sessions;
+- localhost authentication middleware;
+- explicit case ownership and ACL roles;
+- separate `canReidentify` capability;
+- independent per-case CDKs;
+- UMK/X25519 per-user CDK envelopes;
+- explicit legacy-case import;
+- ACL-filtered case selection and document/session authorization.
 
-The current localhost runtime is therefore a single-trust-zone prototype.
-
-A secure multi-user release requires more than a login screen. It needs:
-1. local identity;
-2. password-derived account unlocking;
-3. per-user master keys;
-4. authenticated sessions;
-5. case ACLs;
-6. per-case key envelopes;
-7. encrypted persistent privacy vault;
-8. re-authentication before sensitive re-identification;
-9. encryption-at-rest hardening for raw case files.
+A secure multi-user release still requires:
+1. encrypted persistent privacy vault (G31C1);
+2. recovery/password lifecycle (G34E);
+3. transaction-bound reauthentication before sensitive re-identification (G34F);
+4. production Tauri session/secret boundary (G34G);
+5. encryption-at-rest hardening for raw case files and artifacts (G34H).
 
 ---
 
