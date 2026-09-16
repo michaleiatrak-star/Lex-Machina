@@ -24,8 +24,8 @@ const checks = {
     Array.isArray(config.bundle?.resources) &&
     config.bundle.resources.some(
       (resource: unknown) =>
-        typeof resource === "string" &&
-        /^runtime\\/\\*{1,2}(?:\\/\\*)?$/.test(resource)
+        resource === "runtime/**" ||
+        resource === "runtime/**/*"
     ),
   privateNode:
     build.includes("Private Node") &&
@@ -39,7 +39,7 @@ const checks = {
     build.includes("prefetch-release-models.py") &&
     selftest.includes("PP-OCRv6_medium_det") &&
     selftest.includes("PP-OCRv6_medium_rec") &&
-    selftest.includes('models\\\\stanza') &&
+    selftest.includes('models\\stanza') &&
     sidecar.includes('join("models").join("paddle")') &&
     sidecar.includes('join("models").join("stanza")'),
   bundledVisualCppRuntime:
