@@ -62,6 +62,9 @@ def validate_archive(zf: zipfile.ZipFile) -> None:
             fail("SPREADSHEET_ARCHIVE_TOO_LARGE")
 
 def parse_xml(data: bytes):
+    upper = data[:4096].upper()
+    if b"<!DOCTYPE" in upper or b"<!ENTITY" in upper:
+        fail("SPREADSHEET_XML_DTD_FORBIDDEN")
     try:
         return ET.fromstring(data)
     except ET.ParseError:
@@ -159,10 +162,13 @@ def xlsx_text(data: bytes) -> str:
         shared = shared_strings(zf)
         sheets = workbook_sheets(zf)
         lines = []
+        text_chars = 0
         cell_count = 0
 
         for sheet_name, member in sheets:
-            lines.append("[ARKUSZ: " + sheet_name + "]")
+            header = "[ARKUSZ: " + sheet_name + "]"
+            lines.append(header)
+            text_chars += len(header) + 1
             root = parse_xml(read_member(zf, member))
             row_tag = "{" + NS_MAIN + "}row"
             cell_tag = "{" + NS_MAIN + "}c"
@@ -183,16 +189,20 @@ def xlsx_text(data: bytes) -> str:
                     if value:
                         row_values.append(ref + "=" + value.replace("\n", " ↵ "))
                 if row_values:
-                    lines.append(" | ".join(row_values))
-                if sum(len(x) + 1 for x in lines) > MAX_TEXT_CHARS:
+                    line = " | ".join(row_values)
+                    lines.append(line)
+                    text_chars += len(line) + 1
+                if text_chars > MAX_TEXT_CHARS:
                     fail("SPREADSHEET_TEXT_TOO_LARGE")
             lines.append("")
+            text_chars += 1
         return "\n".join(lines).strip()
 
 def delimited_text(data: bytes, delimiter: str) -> str:
     text = data.decode("utf-8-sig", errors="replace")
     reader = csv.reader(io.StringIO(text), delimiter=delimiter)
     lines = []
+    text_chars = 0
     cells = 0
     for row_index, row in enumerate(reader, start=1):
         if row_index > MAX_ROWS_PER_SHEET:
@@ -206,8 +216,10 @@ def delimited_text(data: bytes, delimiter: str) -> str:
             if cleaned:
                 values.append("C" + str(col_index) + "=" + cleaned.replace("\n", " ↵ "))
         if values:
-            lines.append("ROW " + str(row_index) + " | " + " | ".join(values))
-        if sum(len(x) + 1 for x in lines) > MAX_TEXT_CHARS:
+            line = "ROW " + str(row_index) + " | " + " | ".join(values)
+            lines.append(line)
+            text_chars += len(line) + 1
+        if text_chars > MAX_TEXT_CHARS:
             fail("SPREADSHEET_TEXT_TOO_LARGE")
     return "\n".join(lines)
 
