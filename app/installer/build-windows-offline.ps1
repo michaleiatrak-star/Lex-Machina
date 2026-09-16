@@ -11,27 +11,21 @@ $payload = Join-Path $tauri "runtime"
 $sourceLock = Get-Content -Raw (Join-Path $installer "windows-release-source.json") | ConvertFrom-Json
 
 function Assert-Sha256([string]$Path, [string]$Expected, [string]$Label) {
-  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
-    throw "SOURCE_FILE_MISSING:$Label:$Path"
-  }
-  if ($Expected -notmatch '^[a-fA-F0-9]{64}$') {
-    throw "SOURCE_HASH_INVALID:$Label"
-  }
+  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { throw "SOURCE_FILE_MISSING:$Label:$Path" }
+  if ($Expected -notmatch '^[a-fA-F0-9]{64}$') { throw "SOURCE_HASH_INVALID:$Label" }
   $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $Path).Hash.ToLowerInvariant()
-  if ($actual -ne $Expected.ToLowerInvariant()) {
-    throw "SOURCE_HASH_MISMATCH:$Label expected=$Expected actual=$actual"
-  }
+  if ($actual -ne $Expected.ToLowerInvariant()) { throw "SOURCE_HASH_MISMATCH:$Label expected=$Expected actual=$actual" }
   Write-Host "Verified $Label SHA-256: $actual"
 }
 
-if ($env:OS -ne "Windows_NT") {
-  throw "Windows offline payload must be built on Windows."
-}
+if ($env:OS -ne "Windows_NT") { throw "Windows offline payload must be built on Windows." }
 
 Remove-Item $payload -Recurse -Force -ErrorAction SilentlyContinue
 New-Item $payload -ItemType Directory | Out-Null
+$cache = Join-Path $installer ".cache"
+New-Item $cache -ItemType Directory -Force | Out-Null
 
-Write-Host "[1/9] Build runtime JS"
+Write-Host "[1/10] Build runtime JS"
 Push-Location (Join-Path $repo "app\lex-runtime")
 try {
   npm install --no-audit --no-fund
@@ -54,15 +48,13 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "runtime production dependency provenance failed" }
 } finally { Pop-Location }
 
-Write-Host "[2/9] Copy workers and corpus"
+Write-Host "[2/10] Copy workers and corpus"
 Copy-Item (Join-Path $repo "app\ocr") (Join-Path $payload "ocr") -Recurse
 Copy-Item (Join-Path $repo "app\privacy") (Join-Path $payload "privacy") -Recurse
 Copy-Item (Join-Path $repo "app\storage") (Join-Path $payload "storage") -Recurse
 Copy-Item (Join-Path $repo "Wersja rozwojowa rozpakowana") (Join-Path $payload "corpus") -Recurse
 
-Write-Host "[3/9] Private Node"
-$cache = Join-Path $installer ".cache"
-New-Item $cache -ItemType Directory -Force | Out-Null
+Write-Host "[3/10] Private Node"
 $nodeZip = Join-Path $cache "node-$($sourceLock.runtime.node.version)-win-x64.zip"
 Invoke-WebRequest -UseBasicParsing -Uri $sourceLock.runtime.node.url -OutFile $nodeZip
 Assert-Sha256 $nodeZip $sourceLock.runtime.node.sha256 "node-runtime-source"
@@ -73,42 +65,43 @@ $nodeDir = Get-ChildItem $nodeExtract -Directory | Select-Object -First 1
 if (-not $nodeDir) { throw "NODE_ARCHIVE_LAYOUT_INVALID" }
 Copy-Item $nodeDir.FullName (Join-Path $payload "node") -Recurse
 
-Write-Host "[4/9] Private Python"
+Write-Host "[4/10] Private Python"
 $pythonInstaller = Join-Path $cache "python-$($sourceLock.runtime.python.version)-amd64.exe"
 Invoke-WebRequest -UseBasicParsing -Uri $sourceLock.runtime.python.url -OutFile $pythonInstaller
 Assert-Sha256 $pythonInstaller $sourceLock.runtime.python.sha256 "python-runtime-source"
 $pythonDir = Join-Path $payload "python"
 $args = @(
-  "/quiet",
-  "InstallAllUsers=0",
-  "TargetDir=$pythonDir",
-  "Include_launcher=0",
-  "Include_test=0",
-  "Include_doc=0",
-  "Include_tcltk=0",
-  "Include_tools=0",
-  "Include_pip=1",
-  "PrependPath=0",
-  "Shortcuts=0"
+  "/quiet", "InstallAllUsers=0", "TargetDir=$pythonDir", "Include_launcher=0",
+  "Include_test=0", "Include_doc=0", "Include_tcltk=0", "Include_tools=0",
+  "Include_pip=1", "PrependPath=0", "Shortcuts=0"
 )
 $install = Start-Process -FilePath $pythonInstaller -ArgumentList $args -Wait -PassThru
 if ($install.ExitCode -ne 0) { throw "Private Python install failed: $($install.ExitCode)" }
 $python = Join-Path $pythonDir "python.exe"
 if (-not (Test-Path -LiteralPath $python -PathType Leaf)) { throw "PRIVATE_PYTHON_MISSING" }
 
-Write-Host "[5/9] Pinned Python/ML packages"
+Write-Host "[5/10] Pinned Python/ML packages"
 & $python -m pip install --disable-pip-version-check --no-warn-script-location -r (Join-Path $installer "windows-release-requirements.txt")
 if ($LASTEXITCODE -ne 0) { throw "Pinned Python package install failed" }
 & $python -m pip freeze --all | Sort-Object | Out-File -FilePath (Join-Path $payload "python-dependency-tree.txt") -Encoding utf8
 if ($LASTEXITCODE -ne 0) { throw "Python dependency provenance failed" }
 
-Write-Host "[6/9] Prefetch OCR/NER models"
+Write-Host "[6/10] Prefetch OCR/NER models"
 $modelRoot = Join-Path $payload "models"
 New-Item $modelRoot -ItemType Directory -Force | Out-Null
 & $python (Join-Path $installer "prefetch-release-models.py") $modelRoot
 if ($LASTEXITCODE -ne 0) { throw "Model prefetch failed" }
 
-Write-Host "[7/9] Build native runtime sidecar"
+Write-Host "[7/10] Bundle Visual C++ runtime prerequisite"
+$prerequisites = Join-Path $payload "prerequisites"
+New-Item $prerequisites -ItemType Directory -Force | Out-Null
+$vcSource = $sourceLock.systemPrerequisites.visualCppRuntime
+$vcRedist = Join-Path $cache "vc_redist.x64-$($vcSource.version).exe"
+Invoke-WebRequest -UseBasicParsing -Uri $vcSource.url -OutFile $vcRedist
+Assert-Sha256 $vcRedist $vcSource.sha256 "visual-cpp-runtime-source"
+Copy-Item $vcRedist (Join-Path $prerequisites "vc_redist.x64.exe")
+
+Write-Host "[8/10] Build native runtime sidecar"
 Push-Location $desktop
 try {
   cargo build --release --bin lex-runtime-sidecar --manifest-path src-tauri/Cargo.toml
@@ -118,12 +111,12 @@ $sidecar = Join-Path $tauri "target\release\lex-runtime-sidecar.exe"
 if (-not (Test-Path $sidecar)) { throw "Built runtime sidecar not found" }
 Copy-Item $sidecar (Join-Path $payload "lex-runtime-sidecar.exe")
 
-Write-Host "[8/9] Generate immutable component lock"
+Write-Host "[9/10] Generate immutable component lock"
 $lock = Join-Path $payload "component-lock.json"
 & (Join-Path $installer "generate-component-lock.ps1") -PayloadRoot $payload -Output $lock
 if ($LASTEXITCODE -ne 0) { throw "Component lock failed" }
 
-Write-Host "[9/9] Offline self-test"
+Write-Host "[10/10] Offline self-test"
 & (Join-Path $installer "windows-payload-selftest.ps1") -PayloadRoot $payload
 if ($LASTEXITCODE -ne 0) { throw "Offline payload self-test failed" }
 
