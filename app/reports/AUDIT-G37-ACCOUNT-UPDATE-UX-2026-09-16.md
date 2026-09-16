@@ -31,7 +31,7 @@ Work branch changes separate:
 
 A regression test now requires callback errors to remain visible to the caller.
 
-Status: **IMPLEMENTED — CI validation pending/currently running at audit time**.
+Status: **PASS** — validated at code SHA `f4cb530e47b8af15d5a7320330939fcfc0054176`.
 
 ## 3. User administration audit
 
@@ -171,7 +171,7 @@ Current limitation:
 - first file only;
 - multi-file queue not implemented.
 
-Status: **IMPLEMENTED FOR SINGLE FILE — browser/build validation pending**.
+Status: **PASS FOR SINGLE-FILE G37A SCOPE** — web tests, production build and G14 passed.
 
 ## 8. Update mechanism
 
@@ -231,16 +231,21 @@ Even if G37A becomes fully green, the secure desktop release still has open work
 - clean-machine acceptance;
 - repository/PR/branch cleanup.
 
-## 11. Audit verdict rules
+## 11. Validation verdict
 
-G37A can be marked PASS only after the exact implementation SHA has:
+G37A is **PASS** at validated code SHA `f4cb530e47b8af15d5a7320330939fcfc0054176`.
 
-- Lex Runtime Validation success;
-- F-138 structural audit success;
-- runtime unit tests success;
-- web unit tests success;
-- production web build success;
-- G14 success;
-- live probes that are part of the parent workflow success.
+Evidence:
 
-Until then the work is **implemented but not validated**.
+- Lex Runtime Validation `35095122173` — SUCCESS;
+- F-138 structural audit `35095122216` — SUCCESS;
+- runtime unit tests — 49/49 files, 185/185 tests PASS;
+- web unit tests — 1/1 file, 10/10 tests PASS;
+- production web build — PASS;
+- G14 — PASS;
+- G17 live ELI — PASS;
+- G19 live temporal freshness — PASS;
+- G20 official PDF — PASS;
+- G22 live SN — PASS.
+
+This verdict applies only to G37A and the previously validated gates exercised by the workflow. It does not close G37B-G37G or the still-open desktop release gates.
