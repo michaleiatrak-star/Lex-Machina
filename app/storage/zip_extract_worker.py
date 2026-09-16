@@ -73,7 +73,7 @@ def extract_archive(input_path: Path, output_dir: Path) -> list[dict]:
             if kind == "directory":
                 (output_dir / relative).mkdir(
                     parents=True,
-                    exist_ok=False
+                    exist_ok=True
                 )
                 continue
 
