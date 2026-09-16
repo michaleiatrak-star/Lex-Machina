@@ -24,7 +24,9 @@ import type {
   SessionExecutionRequest
 } from "../session-executor.js";
 import type {
-  DocumentService
+  DocumentService,
+  PagePrivacyDirective,
+  SupportedDocumentMediaType
 } from "../document-service.js";
 import { RoutingCatalog } from "./routing-catalog.js";
 
@@ -36,6 +38,75 @@ const PROVIDERS = new Set<ProviderId>([
 
 function isProviderId(value: string): value is ProviderId {
   return PROVIDERS.has(value as ProviderId);
+}
+
+const DOCUMENT_MEDIA_TYPES =
+  new Set<SupportedDocumentMediaType>([
+    "application/pdf",
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+    "image/tiff"
+  ]);
+
+function requestDocumentMediaType(
+  req: Request
+): SupportedDocumentMediaType | null {
+  const raw = req.get("content-type")
+    ?.split(";", 1)[0]
+    ?.trim()
+    .toLowerCase();
+  return raw &&
+    DOCUMENT_MEDIA_TYPES.has(
+      raw as SupportedDocumentMediaType
+    )
+    ? raw as SupportedDocumentMediaType
+    : null;
+}
+
+function parsePrivacyDirectives(
+  value: unknown
+): PagePrivacyDirective[] | null {
+  if (!Array.isArray(value)) return null;
+
+  const directives: PagePrivacyDirective[] = [];
+  for (const item of value) {
+    if (
+      !item ||
+      typeof item !== "object" ||
+      Array.isArray(item)
+    ) {
+      return null;
+    }
+    const record = item as Record<string, unknown>;
+    const action = record.action;
+    if (
+      !Number.isInteger(record.page) ||
+      !Number.isInteger(record.start) ||
+      !Number.isInteger(record.end) ||
+      !["PSEUDONYMIZE", "KEEP", "LABEL"]
+        .includes(String(action))
+    ) {
+      return null;
+    }
+
+    directives.push({
+      page: Number(record.page),
+      start: Number(record.start),
+      end: Number(record.end),
+      action: action as PagePrivacyDirective["action"],
+      ...(typeof record.kind === "string"
+        ? {
+            kind:
+              record.kind as PagePrivacyDirective["kind"]
+          }
+        : {}),
+      ...(typeof record.label === "string"
+        ? { label: record.label }
+        : {})
+    });
+  }
+  return directives;
 }
 
 function isLoopbackOrigin(origin: string): boolean {
@@ -261,16 +332,33 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     }
   });
 
+  const documentBody = express.raw({
+    type: [
+      "application/pdf",
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+      "image/tiff"
+    ],
+    limit: "512mb"
+  });
+
   app.post(
     "/api/documents/ingest",
-    express.raw({
-      type: ["application/pdf", "application/octet-stream"],
-      limit: "512mb"
-    }),
+    documentBody,
     async (req, res) => {
       if (!options.documentService) {
         res.status(503).json({
           error: "DOCUMENT_INGESTION_UNAVAILABLE"
+        });
+        return;
+      }
+
+      const mediaType =
+        requestDocumentMediaType(req);
+      if (!mediaType) {
+        res.status(415).json({
+          error: "UNSUPPORTED_DOCUMENT_MEDIA_TYPE"
         });
         return;
       }
@@ -280,20 +368,114 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         req.body.byteLength === 0
       ) {
         res.status(400).json({
-          error: "PDF_BODY_REQUIRED"
+          error: "DOCUMENT_BODY_REQUIRED"
+        });
+        return;
+      }
+
+      try {
+        const data = new Uint8Array(req.body);
+        const result =
+          mediaType === "application/pdf"
+            ? await options.documentService.ingestPdf(
+                data
+              )
+            : await options.documentService.ingestImage(
+                data,
+                mediaType
+              );
+        res.status(201).json(result);
+      } catch {
+        res.status(422).json({
+          error: "DOCUMENT_INGESTION_FAILED"
+        });
+      }
+    }
+  );
+
+  app.post(
+    "/api/documents/review",
+    documentBody,
+    async (req, res) => {
+      if (!options.documentService) {
+        res.status(503).json({
+          error: "DOCUMENT_INGESTION_UNAVAILABLE"
+        });
+        return;
+      }
+
+      const mediaType =
+        requestDocumentMediaType(req);
+      if (!mediaType) {
+        res.status(415).json({
+          error: "UNSUPPORTED_DOCUMENT_MEDIA_TYPE"
+        });
+        return;
+      }
+      if (
+        !Buffer.isBuffer(req.body) ||
+        req.body.byteLength === 0
+      ) {
+        res.status(400).json({
+          error: "DOCUMENT_BODY_REQUIRED"
         });
         return;
       }
 
       try {
         const result =
-          await options.documentService.ingestPdf(
-            new Uint8Array(req.body)
+          await options.documentService.review(
+            new Uint8Array(req.body),
+            mediaType
           );
         res.status(201).json(result);
       } catch {
         res.status(422).json({
-          error: "DOCUMENT_INGESTION_FAILED"
+          error: "DOCUMENT_REVIEW_FAILED"
+        });
+      }
+    }
+  );
+
+  app.post(
+    "/api/documents/:documentId/finalize",
+    async (req, res) => {
+      if (!options.documentService) {
+        res.status(503).json({
+          error: "DOCUMENT_INGESTION_UNAVAILABLE"
+        });
+        return;
+      }
+
+      const documentId =
+        String(req.params.documentId ?? "")
+          .trim();
+      const directives =
+        parsePrivacyDirectives(
+          req.body?.directives
+        );
+      if (
+        !/^doc_[a-f0-9]{24}$/.test(
+          documentId
+        ) ||
+        directives === null
+      ) {
+        res.status(400).json({
+          error: "INVALID_DOCUMENT_PRIVACY_REQUEST"
+        });
+        return;
+      }
+
+      try {
+        const result =
+          await options.documentService.finalizeReview(
+            documentId,
+            directives
+          );
+        res.json(result);
+      } catch {
+        res.status(422).json({
+          error: "DOCUMENT_PRIVACY_FINALIZATION_FAILED"
         });
       }
     }
