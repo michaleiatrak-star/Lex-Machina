@@ -1332,89 +1332,92 @@ export class LocalCaseAccessService {
           let caseDataKey:
             Buffer | undefined;
           try {
-            if (
-              access.envelope
-                .algorithm ===
-                "UMK-HKDF-SHA256-AES-256-GCM"
-            ) {
-              caseDataKey =
-                unwrapCaseKeyForSessionUser(
-                  userMasterKey,
-                  {
-                    userId:
-                      context.user.userId,
-                    caseId,
-                    keyVersion:
-                      record.keyVersion,
-                    envelope:
-                      access.envelope
-                  }
-                );
-            } else {
-              const userKeys =
-                this.store
-                  .getUserSharingKeys(
-                    context.user.userId
+            try {
+              if (
+                access.envelope
+                  .algorithm ===
+                  "UMK-HKDF-SHA256-AES-256-GCM"
+              ) {
+                caseDataKey =
+                  unwrapCaseKeyForSessionUser(
+                    userMasterKey,
+                    {
+                      userId:
+                        context.user.userId,
+                      caseId,
+                      keyVersion:
+                        record.keyVersion,
+                      envelope:
+                        access.envelope
+                    }
                   );
-              if (!userKeys) {
+              } else {
+                const userKeys =
+                  this.store
+                    .getUserSharingKeys(
+                      context.user.userId
+                    );
+                if (!userKeys) {
+                  throw new CaseAccessError(
+                    "CASE_KEY_UNAVAILABLE",
+                    409
+                  );
+                }
+                const privateKey =
+                  unwrapUserSharingPrivateKey(
+                    userMasterKey,
+                    context.user.userId,
+                    userKeys.keyVersion,
+                    {
+                      nonce:
+                        userKeys
+                          .privateKeyWrapNonce,
+                      ciphertext:
+                        userKeys
+                          .privateKeyWrapCiphertext,
+                      tag:
+                        userKeys
+                          .privateKeyWrapTag
+                    }
+                  );
+                caseDataKey =
+                  unwrapCaseKeyForOfflineUser(
+                    privateKey,
+                    {
+                      userId:
+                        context.user.userId,
+                      caseId,
+                      keyVersion:
+                        record.keyVersion,
+                      envelope:
+                        access.envelope
+                    }
+                  );
+              }
+
+              if (
+                caseDataKey.length !== 32
+              ) {
                 throw new CaseAccessError(
                   "CASE_KEY_UNAVAILABLE",
                   409
                 );
               }
-              const privateKey =
-                unwrapUserSharingPrivateKey(
-                  userMasterKey,
-                  context.user.userId,
-                  userKeys.keyVersion,
-                  {
-                    nonce:
-                      userKeys
-                        .privateKeyWrapNonce,
-                    ciphertext:
-                      userKeys
-                        .privateKeyWrapCiphertext,
-                    tag:
-                      userKeys
-                        .privateKeyWrapTag
-                  }
-                );
-              caseDataKey =
-                unwrapCaseKeyForOfflineUser(
-                  privateKey,
-                  {
-                    userId:
-                      context.user.userId,
-                    caseId,
-                    keyVersion:
-                      record.keyVersion,
-                    envelope:
-                      access.envelope
-                  }
-                );
-            }
-
-            if (
-              caseDataKey.length !== 32
-            ) {
+            } catch (error) {
+              if (
+                error instanceof
+                  CaseAccessError
+              ) {
+                throw error;
+              }
               throw new CaseAccessError(
                 "CASE_KEY_UNAVAILABLE",
                 409
               );
             }
+
             return await callback(
               caseDataKey
-            );
-          } catch (error) {
-            if (
-              error instanceof
-                CaseAccessError
-            ) {
-              throw error;
-            }
-            throw new CaseAccessError(
-              "CASE_KEY_UNAVAILABLE",
-              409
             );
           } finally {
             caseDataKey?.fill(0);
