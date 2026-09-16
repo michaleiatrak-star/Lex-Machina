@@ -55,14 +55,12 @@ const REQUEST_TIMEOUT_MS = 60_000;
 const MAX_RESULTS = 10;
 const CBOSA_PAGE_SIZE = 10;
 const MAX_CBOSA_REDIRECTS = 3;
-const MAX_CBOSA_TRANSPORT_ATTEMPTS = 4;
+const MAX_CBOSA_TRANSPORT_ATTEMPTS = 3;
 
 const USER_AGENT =
   "Lex-Machina/0.1 (+local legal research runtime)";
 const CBOSA_USER_AGENT =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
-  "AppleWebKit/537.36 (KHTML, like Gecko) " +
-  "Chrome/140.0.0.0 Safari/537.36";
+  "curl/8.5.0";
 
 function clampLimit(
   value: number | undefined
@@ -318,13 +316,7 @@ async function fetchCbosa(
           "User-Agent":
             CBOSA_USER_AGENT,
           Accept:
-            "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-          "Accept-Language":
-            "pl-PL,pl;q=0.9,en;q=0.7",
-          "Cache-Control":
-            "no-cache",
-          Pragma:
-            "no-cache",
+            "*/*",
           ...(init.headers ?? {}),
           ...(jar.length
             ? {
