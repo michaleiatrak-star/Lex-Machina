@@ -2,9 +2,7 @@ name: Lex Machina Offline Windows Installer
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - codex/g39-authoring-installer-prereqs-2026-09-16
+  pull_request:
     paths:
       - "app/installer/**"
       - "app/lex-desktop/**"
@@ -13,6 +11,7 @@ on:
       - "app/ocr/**"
       - "app/privacy/**"
       - "app/storage/**"
+      - "app/lex-version.yaml"
       - "Wersja rozwojowa rozpakowana/**"
       - ".github/workflows/offline-windows-installer.yml"
 
@@ -20,12 +19,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: offline-windows-installer-${{ github.ref }}
+  group: offline-windows-installer-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
   build-offline-installer:
-    name: Build self-contained Windows NSIS installer
+    name: Build and accept self-contained Windows NSIS installer
     runs-on: windows-latest
     timeout-minutes: 180
 
@@ -46,6 +45,14 @@ jobs:
           rustc --version
           cargo --version
 
+      - name: Install runtime validation dependencies
+        working-directory: app/lex-runtime
+        run: npm install --no-audit --no-fund
+
+      - name: Offline release contract
+        working-directory: app/lex-runtime
+        run: npm run validate:release-offline
+
       - name: Install web dependencies
         working-directory: app/lex-web
         run: npm install --no-audit --no-fund
@@ -56,8 +63,7 @@ jobs:
 
       - name: Build complete offline private runtime payload
         shell: pwsh
-        run: |
-          ./app/installer/build-windows-offline.ps1
+        run: ./app/installer/build-windows-offline.ps1
 
       - name: Verify native G34G tests
         working-directory: app/lex-desktop
@@ -67,24 +73,45 @@ jobs:
         working-directory: app/lex-desktop
         env:
           CI: "true"
-        run: npx tauri build
+        run: npx tauri build --bundles nsis --config src-tauri/tauri.offline.conf.json
 
       - name: Locate installer
         id: locate
         shell: pwsh
         run: |
-          $installer = Get-ChildItem "app/lex-desktop/src-tauri/target/release/bundle/nsis" -Filter "*-setup.exe" -File | Select-Object -First 1
-          if (-not $installer) { throw "NSIS installer not found" }
+          $installer = Get-ChildItem "app/lex-desktop/src-tauri/target/release/bundle/nsis" -Filter "*-setup.exe" -File |
+            Sort-Object LastWriteTime -Descending |
+            Select-Object -First 1
+          if (-not $installer) { throw "NSIS_OFFLINE_INSTALLER_NOT_FOUND" }
           "installer=$($installer.FullName)" >> $env:GITHUB_OUTPUT
           Write-Host "Installer: $($installer.FullName)"
-          Get-FileHash -Algorithm SHA256 $installer.FullName | Format-List
+
+      - name: Offline installed-copy acceptance
+        shell: pwsh
+        run: |
+          ./app/installer/windows-installer-acceptance.ps1 `
+            -InstallerPath "${{ steps.locate.outputs.installer }}" `
+            -ExpectedNetworkRequiredAtInstall $false `
+            -BlockNetworkDuringInstall
+
+      - name: Record installer SHA-256
+        shell: pwsh
+        run: |
+          $installer = "${{ steps.locate.outputs.installer }}"
+          $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $installer).Hash.ToLowerInvariant()
+          $shaFile = "app/lex-desktop/src-tauri/target/release/bundle/nsis/SHA256-OFFLINE.txt"
+          "installer=$(Split-Path -Leaf $installer)" | Out-File -FilePath $shaFile -Encoding utf8
+          "sha256=$hash" | Out-File -FilePath $shaFile -Encoding utf8 -Append
+          "bytes=$((Get-Item -LiteralPath $installer).Length)" | Out-File -FilePath $shaFile -Encoding utf8 -Append
+          Get-Content $shaFile
 
       - name: Upload offline installer
         uses: actions/upload-artifact@v4
         with:
           name: LexMachina-Windows-Offline-Setup
           path: |
-            ${{ steps.locate.outputs.installer }}
+            app/lex-desktop/src-tauri/target/release/bundle/nsis/*-setup.exe
+            app/lex-desktop/src-tauri/target/release/bundle/nsis/SHA256-OFFLINE.txt
             app/lex-desktop/src-tauri/runtime/component-lock.json
           if-no-files-found: error
           retention-days: 14
