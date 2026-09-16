@@ -200,6 +200,108 @@ export type SharedTemplateListResponse = {
   templates: SharedTemplateManifest[];
 };
 
+export type LegalDocumentFormat =
+  | "docx"
+  | "odt";
+
+export type LegalDocumentType =
+  | "pleading"
+  | "contract"
+  | "opinion"
+  | "letter"
+  | "report"
+  | "other";
+
+export type LegalStyleProfile =
+  | "lex-classic-clean-v1"
+  | "lex-light-legal-design-v1"
+  | "lex-classic-tnr-v1";
+
+export type StoredCaseArtifact = {
+  schemaVersion: 1;
+  caseId: string;
+  artifactId: string;
+  filename: string;
+  mediaType: string;
+  sha256: string;
+  bytes: number;
+  createdAt: string;
+  createdByUserId?: string;
+  sensitivity:
+    | "PROTECTED"
+    | "CLEAR_PII";
+  storage:
+    "ENCRYPTED_LME1";
+};
+
+export type GeneratedDocumentResponse = {
+  sessionId: string;
+  artifact:
+    StoredCaseArtifact;
+  format:
+    LegalDocumentFormat;
+  tokenizedSha256: string;
+  vaultGeneration: number;
+  aliasesUsed: string[];
+  templateProfile?: {
+    templateId: string;
+    sourceFormat:
+      LegalDocumentFormat;
+    styleProfile:
+      LegalStyleProfile;
+    sourceSha256: string;
+  };
+};
+
+export type DeanonymizationIntentResponse = {
+  intent: {
+    intentId: string;
+    caseId: string;
+    artifactId: string;
+    artifactFormat:
+      LegalDocumentFormat;
+    expiresAt: string;
+    status:
+      | "PENDING"
+      | "AUTHORIZED"
+      | "CONSUMED"
+      | "REVOKED"
+      | "EXPIRED";
+  };
+};
+
+export type DeanonymizationReauthorizationResponse = {
+  grant: {
+    grantId: string;
+    intentId: string;
+    caseId: string;
+    artifactId: string;
+    artifactFormat:
+      LegalDocumentFormat;
+    expiresAt: string;
+  };
+  session:
+    AuthSessionInfo;
+};
+
+export type FinalizedDocumentResponse = {
+  artifact:
+    StoredCaseArtifact;
+  format:
+    LegalDocumentFormat;
+  sha256: string;
+  replacements: number;
+  downloadTicket?: {
+    ticketId: string;
+    caseId: string;
+    artifactId: string;
+    finalSha256: string;
+    expiresAt: string;
+    remainingUses:
+      0 | 1;
+  };
+};
+
 export type CaseTemplateListResponse = {
   caseId: string;
   scope: "FIRM_SHARED";
@@ -1017,6 +1119,149 @@ export async function uploadSharedTemplate(
   }
   return payload as
     SharedTemplateManifest;
+}
+
+export function generateLegalDocument(
+  caseId: string,
+  input: {
+    query: string;
+    provider: ProviderId;
+    model: string;
+    primarySkill: string;
+    mode:
+      | "LAIK"
+      | "PRAWNIK";
+    format:
+      LegalDocumentFormat;
+    documentType:
+      LegalDocumentType;
+    styleProfile?:
+      LegalStyleProfile;
+    templateId?: string;
+    attachments:
+      DocumentAttachmentSelection[];
+    filename?: string;
+  }
+): Promise<
+  GeneratedDocumentResponse
+> {
+  return json<
+    GeneratedDocumentResponse
+  >(
+    `/api/cases/${caseId}/artifacts/generate`,
+    {
+      method: "POST",
+      body:
+        JSON.stringify(
+          input
+        )
+    }
+  );
+}
+
+export function createDeanonymizationIntent(
+  caseId: string,
+  artifactId: string
+): Promise<
+  DeanonymizationIntentResponse
+> {
+  return json<
+    DeanonymizationIntentResponse
+  >(
+    `/api/cases/${caseId}/artifacts/${artifactId}/deanonymization-intent`,
+    {
+      method: "POST"
+    }
+  );
+}
+
+export function reauthorizeDeanonymization(
+  intentId: string,
+  password: string
+): Promise<
+  DeanonymizationReauthorizationResponse
+> {
+  return json<
+    DeanonymizationReauthorizationResponse
+  >(
+    "/api/deanonymization/reauthorize",
+    {
+      method: "POST",
+      body:
+        JSON.stringify({
+          intentId,
+          password
+        })
+    }
+  );
+}
+
+export function finalizeDeanonymization(
+  grantId: string,
+  filename?: string
+): Promise<
+  FinalizedDocumentResponse
+> {
+  return json<
+    FinalizedDocumentResponse
+  >(
+    "/api/deanonymization/finalize",
+    {
+      method: "POST",
+      body:
+        JSON.stringify({
+          grantId,
+          ...(filename
+            ? {
+                filename
+              }
+            : {})
+        })
+    }
+  );
+}
+
+export async function downloadSensitiveArtifact(
+  ticketId: string
+): Promise<Blob> {
+  const response =
+    await fetch(
+      `${apiBase()}/api/sensitive-download/${ticketId}`,
+      {
+        headers: {
+          ...authorizationHeaders()
+        },
+        cache: "no-store"
+      }
+    );
+  if (!response.ok) {
+    let code =
+      `HTTP_${response.status}`;
+    try {
+      const failure =
+        await response
+          .json() as
+            ApiFailure;
+      code =
+        failure.error ||
+        code;
+    } catch {
+      // no JSON body
+    }
+    if (
+      response.status ===
+        401
+    ) {
+      clearAuthSession();
+      authenticationFailureHandler
+        ?.();
+    }
+    throw new ApiError(
+      code,
+      response.status
+    );
+  }
+  return await response.blob();
 }
 
 export function getRoutes(): Promise<RouteListResponse> {
