@@ -13,7 +13,7 @@ const requirements = read("app/installer/windows-release-requirements.txt")
   .map((line: string) => line.trim())
   .filter(Boolean);
 const generator = read("app/installer/generate-component-lock.ps1");
-const builder = read("app/installer/build-windows-offline.ps1");
+const bootstrap = read("app/installer/windows-online-bootstrap.ps1");
 
 const exactProd = Object.values(runtime.dependencies ?? {})
   .every((value) =>
@@ -26,7 +26,8 @@ const exactPython = requirements.every((line: string) =>
 const sha256 = (value: unknown) =>
   typeof value === "string" && /^[a-f0-9]{64}$/i.test(value);
 const pinnedSources =
-  source.schemaVersion === 1 &&
+  source.schemaVersion === 2 &&
+  source.installerMode === "ONLINE_BOOTSTRAP_DEFAULT" &&
   source.target === "windows-x86_64" &&
   /^\d+\.\d+\.\d+$/.test(source.runtime?.node?.version ?? "") &&
   /^https:\/\//.test(source.runtime?.node?.url ?? "") &&
@@ -34,15 +35,20 @@ const pinnedSources =
   /^\d+\.\d+\.\d+$/.test(source.runtime?.python?.version ?? "") &&
   /^https:\/\//.test(source.runtime?.python?.url ?? "") &&
   sha256(source.runtime?.python?.sha256) &&
+  /^https:\/\//.test(source.systemPrerequisites?.visualCppRuntime?.url ?? "") &&
+  sha256(source.systemPrerequisites?.visualCppRuntime?.sha256) &&
   !JSON.stringify(source).includes("TBD");
 const sourceHashEnforced =
-  builder.includes("Assert-Sha256") &&
-  builder.includes("sourceLock.runtime.node.sha256") &&
-  builder.includes("sourceLock.runtime.python.sha256");
+  bootstrap.includes("Get-VerifiedDownload") &&
+  bootstrap.includes("manifest.runtime.node.sha256") &&
+  bootstrap.includes("manifest.runtime.python.sha256") &&
+  bootstrap.includes("vc.sha256") &&
+  bootstrap.includes("BOOTSTRAP_HASH_MISMATCH");
 const lockContract =
   generator.includes("sha256Manifest") &&
   generator.includes("sourceCommit") &&
-  generator.includes("networkRequiredAtInstall = $false") &&
+  generator.includes("NetworkRequiredAtInstall") &&
+  generator.includes("runtimeNetworkRequiredAfterBootstrap = $false") &&
   generator.includes('expectedUserActionAfterInstall = "PROVIDER_API_KEY_ONLY"');
 
 const pass =
@@ -58,6 +64,6 @@ console.log(JSON.stringify({
   exactPythonPackages: exactPython,
   pinnedSources,
   sourceHashEnforced,
-  perFileAndComponentHashes: lockContract
+  postBootstrapPerFileAndComponentHashes: lockContract
 }, null, 2));
 if (!pass) process.exitCode = 1;
