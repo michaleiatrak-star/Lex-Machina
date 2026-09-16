@@ -874,6 +874,15 @@ export class SecureCaseUploadStore {
       }
     }
     await mkdir(
+      this.incomingDir(
+        args.caseId
+      ),
+      {
+        recursive: true,
+        mode: 0o700
+      }
+    );
+    await mkdir(
       dir,
       {
         recursive: false,
