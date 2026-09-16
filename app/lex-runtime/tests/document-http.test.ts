@@ -132,6 +132,18 @@ function service(): DocumentService {
           ]
         }
       })
+    ),
+    resolveProtectedChunks: vi.fn(
+      async (selection) => ({
+        documentId: selection.documentId,
+        chunks: [{
+          index: 1,
+          pageStart: 1,
+          pageEnd: 1,
+          text: "[STRONA 1 · OCR]\n[PII:PERSON:0001]"
+        }],
+        totalChars: 41
+      })
     )
   };
 }
