@@ -58,8 +58,7 @@ fn safe_relative_path(root: &Path, relative: &str) -> Result<PathBuf, String> {
     {
         return Err("SIDECAR_LOCK_PATH_INVALID".to_string());
     }
-    let joined = root.join(normalized);
-    Ok(joined)
+    Ok(root.join(normalized))
 }
 
 fn sha256_file(path: &Path) -> Result<String, String> {
@@ -94,9 +93,16 @@ fn validate_component_lock(root: &Path) -> Result<usize, String> {
     if lock
         .get("networkRequiredAtInstall")
         .and_then(|value| value.as_bool())
+        .is_none()
+    {
+        return Err("SIDECAR_COMPONENT_LOCK_INSTALL_NETWORK_POLICY".to_string());
+    }
+    if lock
+        .get("runtimeNetworkRequiredAfterBootstrap")
+        .and_then(|value| value.as_bool())
         != Some(false)
     {
-        return Err("SIDECAR_COMPONENT_LOCK_NETWORK_POLICY".to_string());
+        return Err("SIDECAR_COMPONENT_LOCK_RUNTIME_NETWORK_POLICY".to_string());
     }
     if lock
         .get("expectedUserActionAfterInstall")
@@ -113,7 +119,6 @@ fn validate_component_lock(root: &Path) -> Result<usize, String> {
         "legal-corpus",
         "paddle-ocr-pl",
         "stanza-pl-ner",
-        "visual-cpp-runtime",
         "runtime-sidecar",
     ];
     let components = lock
@@ -180,10 +185,6 @@ fn self_test(root: &Path) -> Result<(), String> {
         root.join("models").join("stanza").join("pl"),
         "SIDECAR_STANZA_MODELS_MISSING",
     )?;
-    required_file(
-        root.join("prerequisites").join("vc_redist.x64.exe"),
-        "SIDECAR_VC_REDIST_MISSING",
-    )?;
 
     let verified_files = validate_component_lock(root)?;
     println!(
@@ -192,7 +193,7 @@ fn self_test(root: &Path) -> Result<(), String> {
             "gate": "G33_PAYLOAD_NATIVE_SELF_TEST",
             "result": "PASS",
             "verifiedFiles": verified_files,
-            "networkRequiredAtInstall": false,
+            "runtimeNetworkRequiredAfterBootstrap": false,
             "expectedUserActionAfterInstall": "PROVIDER_API_KEY_ONLY"
         })
     );
