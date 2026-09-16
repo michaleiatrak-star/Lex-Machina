@@ -85,8 +85,11 @@ if (-not (Test-Path (Join-Path $stanza "pl") -PathType Container)) {
 }
 
 $lock = Get-Content -Raw -LiteralPath $lockPath | ConvertFrom-Json
-if ($lock.networkRequiredAtInstall -ne $false) {
-  throw "SELFTEST_LOCK_NETWORK_POLICY_INVALID"
+if ($null -eq $lock.networkRequiredAtInstall) {
+  throw "SELFTEST_LOCK_INSTALL_NETWORK_POLICY_MISSING"
+}
+if ($lock.runtimeNetworkRequiredAfterBootstrap -ne $false) {
+  throw "SELFTEST_LOCK_RUNTIME_NETWORK_POLICY_INVALID"
 }
 if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_ONLY") {
   throw "SELFTEST_LOCK_USER_ACTION_POLICY_INVALID"
