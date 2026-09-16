@@ -1,6 +1,7 @@
 import {
   createCipheriv,
   createDecipheriv,
+  hkdfSync,
   randomBytes
 } from "node:crypto";
 import * as nodeCrypto from "node:crypto";
@@ -305,4 +306,181 @@ export class PasswordKdfExecutor {
       next.resolve();
     }
   }
+}
+
+
+const RECOVERY_PREFIX =
+  "LMR1_";
+
+function recoveryAad(args: {
+  userId: string;
+  keyVersion: number;
+}): Buffer {
+  return Buffer.from(
+    [
+      "lex-auth-recovery-v1",
+      args.userId,
+      String(args.keyVersion)
+    ].join("\u0000"),
+    "utf8"
+  );
+}
+
+export function generateRecoveryCode(): string {
+  return (
+    RECOVERY_PREFIX +
+    randomBytes(32).toString(
+      "base64url"
+    )
+  );
+}
+
+export function randomRecoverySalt(): Buffer {
+  return randomBytes(16);
+}
+
+function recoverySecretBytes(
+  recoveryCode: string
+): Buffer {
+  const match =
+    /^LMR1_([A-Za-z0-9_-]{43})$/
+      .exec(
+        recoveryCode.trim()
+      );
+  if (!match) {
+    throw new Error(
+      "INVALID_RECOVERY_CODE_FORMAT"
+    );
+  }
+  const secret =
+    Buffer.from(
+      match[1]!,
+      "base64url"
+    );
+  if (
+    secret.byteLength !== 32
+  ) {
+    secret.fill(0);
+    throw new Error(
+      "INVALID_RECOVERY_CODE_FORMAT"
+    );
+  }
+  return secret;
+}
+
+export function deriveRecoveryKey(
+  recoveryCode: string,
+  salt: Buffer,
+  args: {
+    userId: string;
+    keyVersion: number;
+  }
+): Buffer {
+  const secret =
+    recoverySecretBytes(
+      recoveryCode
+    );
+  try {
+    return Buffer.from(
+      hkdfSync(
+        "sha256",
+        secret,
+        salt,
+        Buffer.from(
+          [
+            "lex/recovery-umk/v1",
+            args.userId,
+            String(
+              args.keyVersion
+            )
+          ].join("\u0000"),
+          "utf8"
+        ),
+        32
+      )
+    );
+  } finally {
+    secret.fill(0);
+  }
+}
+
+export function encryptRecoveryUserMasterKey(
+  recoveryKey: Buffer,
+  userMasterKey: Buffer,
+  args: {
+    userId: string;
+    keyVersion: number;
+  }
+): UmkEnvelope {
+  if (
+    recoveryKey.byteLength !==
+      32
+  ) {
+    throw new Error(
+      "INVALID_RECOVERY_KEY"
+    );
+  }
+  const nonce =
+    randomBytes(12);
+  const cipher =
+    createCipheriv(
+      "aes-256-gcm",
+      recoveryKey,
+      nonce
+    );
+  cipher.setAAD(
+    recoveryAad(args)
+  );
+  const ciphertext =
+    Buffer.concat([
+      cipher.update(
+        userMasterKey
+      ),
+      cipher.final()
+    ]);
+  return {
+    nonce,
+    ciphertext,
+    tag: cipher.getAuthTag()
+  };
+}
+
+export function decryptRecoveryUserMasterKey(
+  recoveryKey: Buffer,
+  envelope: {
+    nonce: Buffer;
+    ciphertext: Buffer;
+    tag: Buffer;
+  },
+  args: {
+    userId: string;
+    keyVersion: number;
+  }
+): Buffer {
+  if (
+    recoveryKey.byteLength !==
+      32
+  ) {
+    throw new Error(
+      "INVALID_RECOVERY_KEY"
+    );
+  }
+  const decipher =
+    createDecipheriv(
+      "aes-256-gcm",
+      recoveryKey,
+      envelope.nonce
+    );
+  decipher.setAAD(
+    recoveryAad(args)
+  );
+  decipher.setAuthTag(
+    envelope.tag
+  );
+  return Buffer.concat([
+    decipher.update(
+      envelope.ciphertext
+    ),
+    decipher.final()
+  ]);
 }
