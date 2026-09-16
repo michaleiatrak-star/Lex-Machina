@@ -45,10 +45,12 @@ The application MUST NOT duplicate or silently rewrite legal skill instructions.
 - **G34B — Login / Session Boundary:** authenticated private API, persistent failed-attempt backoff, idle/overall expiry, lock/logout and in-memory browser session handling.
 - **G34C — Case ACL:** explicit case ownership, OWNER/EDITOR/ANALYST/VIEWER roles, separate canReidentify capability and ACL enforcement on case/document operations.
 - **G34D — Case Key Envelopes:** independent 256-bit CDK per case, UMK/X25519 per-user envelopes and revoke-with-rotation path.
+- **G35A — Case Workspace Browser:** authenticated per-case file inventory from persisted manifests.
+- **G35B — Shared Firm Template Library:** one shared DOCX/ODT template store reusable across independently authorized cases by reference.
 
 ## Current scope
 
-G0-G29 plus G27A/G28A, G31A/G31B, G32 and **G34A-G34D** are implemented on `feature/local-runtime`. G31A/G31B provide the storage/archive foundation. G34A/G34B add local identity/login/session controls. G34C/G34D add explicit case ownership, ACL-filtered case access, independent per-case CDKs, per-user envelopes and revoke-with-key-rotation. The workbench now lists ACL-visible cases and requires explicit selection/creation rather than creating a case on every mount. Heavy OCR/NER model weights are intentionally installed locally rather than downloaded in every CI run; CI verifies adapters, worker syntax, completeness contracts and fail-closed behavior.
+G0-G29 plus G27A/G28A, G31A/G31B, G32, **G34A-G34D and G35A/G35B** are implemented on `feature/local-runtime`. G31A/G31B provide the storage/archive foundation. G34A/G34B add local identity/login/session controls. G34C/G34D add explicit case ownership, ACL-filtered case access, independent per-case CDKs, per-user envelopes and revoke-with-key-rotation. The workbench now lists ACL-visible cases and requires explicit selection/creation rather than creating a case on every mount. Heavy OCR/NER model weights are intentionally installed locally rather than downloaded in every CI run; CI verifies adapters, worker syntax, completeness contracts and fail-closed behavior.
 
 Full G31 is **not** claimed PASS: G31C now includes an encrypted file-backed reversible privacy vault plus typed authoring AST/token aliases; G31D deterministic DOCX/deanonymization/download and G31E deterministic ODT/deanonymization/download remain open. G30 open-web discovery also remains open.
 
@@ -98,7 +100,7 @@ The consolidated implementation order from the current validated baseline throug
 
 - `app/reports/MASTER-ROADMAP-SECURE-DESKTOP-RELEASE.md`
 
-**Batch A / G34A-G34B and Batch B / G34C-G34D are complete and validated.** The next dependency is **G31C1**: the encrypted persistent privacy vault, followed by G34E/G34F recovery and transaction-bound reauthorization.
+**Batch A / G34A-G34B, Batch B / G34C-G34D and G35A/G35B are complete and validated.** The next dependency is **G31C1**: the encrypted persistent privacy vault, followed by G34E/G34F recovery and transaction-bound reauthorization. G35C remains open for later template-assisted DOCX/ODT generation.
 
 G30 remains a parallel capability and does not block the secure local-document/installer critical path unless explicitly included in the first desktop release scope.
 
@@ -127,3 +129,17 @@ See `app/reports/BUILD-0030-G34AB.md`.
 See `app/reports/BUILD-0031-G34CD.md`.
 
 Important: G34H remains open. Current original uploads and extracted ZIP members are still plaintext local files even though case ownership and CDK envelopes now exist.
+
+
+### Build 0032 validation
+
+- validated code SHA: `181e439232dac1c3e00f9cb45fd1596329d986a8`;
+- Lex Runtime Validation `35074544206`: success;
+- F-138 `35074544281`: success;
+- G35A/G35B deterministic validation: PASS;
+- G14-G35 web build/bundle safety: PASS;
+- G17/G19/G20/G22 live probes: PASS.
+
+See `app/reports/BUILD-0032-G35AB.md`.
+
+Shared template generation is not yet claimed: G35C remains open and depends on the typed authoring/rendering pipeline.
