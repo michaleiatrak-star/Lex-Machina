@@ -11,7 +11,7 @@ $payload = Join-Path $tauri "runtime"
 $sourceLock = Get-Content -Raw (Join-Path $installer "windows-release-source.json") | ConvertFrom-Json
 
 function Assert-Sha256([string]$Path, [string]$Expected, [string]$Label) {
-  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { throw "SOURCE_FILE_MISSING:$Label:$Path" }
+  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { throw "SOURCE_FILE_MISSING:${Label}:$Path" }
   if ($Expected -notmatch '^[a-fA-F0-9]{64}$') { throw "SOURCE_HASH_INVALID:$Label" }
   $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $Path).Hash.ToLowerInvariant()
   if ($actual -ne $Expected.ToLowerInvariant()) { throw "SOURCE_HASH_MISMATCH:$Label expected=$Expected actual=$actual" }
