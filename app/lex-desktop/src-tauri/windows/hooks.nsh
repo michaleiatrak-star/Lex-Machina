@@ -1,12 +1,9 @@
 !macro NSIS_HOOK_POSTINSTALL
   DetailPrint "Instalacja wymaganego Microsoft Visual C++ Runtime..."
-  nsExec::ExecToStack '"$INSTDIR\runtime\prerequisites\vc_redist.x64.exe" /install /quiet /norestart'
-  Pop $0
-  Pop $1
-  ${If} $0 != 0
-  ${AndIf} $0 != 3010
-  ${AndIf} $0 != 1638
-    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: instalacja Microsoft Visual C++ Runtime nie powiodła się (kod $0).$\r$\n$1"
+  ClearErrors
+  ExecShellWait "runas" "$INSTDIR\runtime\prerequisites\vc_redist.x64.exe" "/install /quiet /norestart" SW_HIDE
+  ${If} ${Errors}
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: nie udało się uruchomić instalacji Microsoft Visual C++ Runtime z wymaganymi uprawnieniami."
     Abort
   ${EndIf}
 
