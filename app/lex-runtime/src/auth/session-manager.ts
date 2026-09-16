@@ -88,8 +88,9 @@ export class AuthSessionManager {
   private readonly clock: AuthClock;
   private readonly scheduleExpiryTimers:
     boolean;
-  private revocationListener?:
-    (event: SessionRevocationEvent) => void;
+  private revocationListener:
+    | ((event: SessionRevocationEvent) => void)
+    | undefined;
 
   constructor(options?: {
     policy?: Partial<AuthSessionPolicy>;
