@@ -844,3 +844,52 @@ Next planned gates:
 - **G30 — Open Web Discovery:** local SearXNG-backed discovery across unrestricted public domains, with source-tier classification after discovery.
 - **G31 — Local DOCX Generation:** backend document generation with template support and G10 export validation.
 - **G32 — Document Attachment Session Flow:** select ingested chunks for provider context without sending the re-identification vault.
+
+
+### 2026-09-16 — Build 0025A
+
+Status: **PASS — G27A DIRECT IMAGE OCR**
+
+Implemented:
+- direct JPEG / PNG / WebP / TIFF ingestion;
+- local PaddleOCR PP-OCRv6 Polish image worker;
+- image treated as a fully accounted single OCR page;
+- orientation classification, document unwarping and text-line orientation retained;
+- same chunk integrity contract as document OCR;
+- localhost API accepts image media types for both direct ingest and review.
+
+Validation evidence:
+- strict TypeScript: PASS;
+- image-ingestion unit test: PASS;
+- Python OCR worker syntax: PASS;
+- G27A deterministic gate: PASS;
+- GitHub Actions run `35058485740`: success.
+
+### 2026-09-16 — Build 0026A
+
+Status: **PASS — G28A USER-DIRECTED PRIVACY REVIEW**
+
+Implemented:
+- local document/image review endpoint returning page text and automatic PII suggestions;
+- user may select an exact range and choose:
+  - PSEUDONYMIZE;
+  - KEEP;
+  - LABEL;
+- optional semantic label may accompany manual pseudonymization;
+- LABEL preserves the text and suppresses automatic anonymization for that exact range;
+- KEEP also suppresses automatic anonymization for the selected range;
+- overlapping manual directives fail closed;
+- finalization happens only after the user's decisions;
+- React workbench supports PDF and image upload, page selection, text selection, automatic suggestions and decision removal;
+- raw review text remains local and is not sent to model providers by the review/finalize flow.
+
+Validation evidence:
+- strict TypeScript: PASS;
+- runtime unit tests: PASS;
+- G28A deterministic gate: PASS;
+- web unit tests: PASS;
+- production web build: PASS;
+- browser bundle safety: PASS;
+- G17/G19/G20/G22 live probes: PASS;
+- GitHub Actions run `35058485740`: success;
+- F-138 structural audit `35058485712`: success.
