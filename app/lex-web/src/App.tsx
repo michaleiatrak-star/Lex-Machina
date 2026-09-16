@@ -9,9 +9,11 @@ import {
   executeSession,
   getHealth,
   getModels,
+  listCases,
   getProviderStatus,
   getRoutes,
   validateRoute,
+  type CaseListItem,
   type DocumentAttachmentSelection,
   type EvidenceItem,
   type ModelDescriptor,
@@ -155,6 +157,14 @@ function EvidencePanel({
 export default function App() {
   const [runtimeOnline, setRuntimeOnline] = useState(false);
   const [caseId, setCaseId] = useState("");
+  const [cases, setCases] =
+    useState<CaseListItem[]>([]);
+  const [newCaseName, setNewCaseName] =
+    useState("");
+  const [caseBusy, setCaseBusy] =
+    useState(false);
+  const [caseError, setCaseError] =
+    useState("");
   const [runtimeError, setRuntimeError] = useState("");
   const [provider, setProvider] = useState<ProviderId>("openai");
   const [providerConfiguration, setProviderConfiguration] = useState<
@@ -188,15 +198,19 @@ export default function App() {
       getHealth(),
       getRoutes(),
       getProviderStatus(),
-      createCase()
+      listCases()
     ])
-      .then(([health, routeList, providerStatus, localCase]) => {
+      .then(([health, routeList, providerStatus, caseList]) => {
         if (cancelled) return;
         setRuntimeOnline(
           health.status === "ok" && health.localOnly === true
         );
         setRoutes(routeList.primarySkills);
-        setCaseId(localCase.caseId);
+        setCases(caseList.cases);
+        setCaseId(
+          caseList.cases[0]?.caseId ??
+          ""
+        );
         setProviderConfiguration(
           Object.fromEntries(
             providerStatus.providers.map((item) => [
@@ -221,6 +235,40 @@ export default function App() {
       cancelled = true;
     };
   }, []);
+
+  async function createLocalCase():
+    Promise<void> {
+    if (caseBusy) return;
+    setCaseBusy(true);
+    setCaseError("");
+    try {
+      const created =
+        await createCase(
+          newCaseName.trim() ||
+            undefined
+        );
+      const refreshed =
+        await listCases();
+      setCases(
+        refreshed.cases
+      );
+      setCaseId(
+        created.caseId
+      );
+      setNewCaseName("");
+      setDocumentAttachments([]);
+      setExecution(null);
+      setExecutionError("");
+    } catch (error) {
+      setCaseError(
+        error instanceof Error
+          ? error.message
+          : String(error)
+      );
+    } finally {
+      setCaseBusy(false);
+    }
+  }
 
   const providerConfigured = providerConfiguration[provider];
 
@@ -385,6 +433,93 @@ export default function App() {
             Backend lokalny jest niedostępny: {runtimeError}
           </div>
         )}
+
+        <section className="case-selector">
+          <div className="case-selector-head">
+            <div>
+              <p className="eyebrow">Sprawa</p>
+              <h3>Wybierz sprawę</h3>
+              <p>
+                Aplikacja nie tworzy już spraw automatycznie po zalogowaniu. Widzisz wyłącznie sprawy dostępne w Twoim ACL.
+              </p>
+            </div>
+            {caseId && (
+              <span className="security-pill">
+                {cases.find((item) => item.caseId === caseId)?.role ?? "—"}
+              </span>
+            )}
+          </div>
+
+          <div className="case-selector-controls">
+            <label>
+              Dostępne sprawy
+              <select
+                value={caseId}
+                onChange={(event) => {
+                  setCaseId(event.target.value);
+                  setDocumentAttachments([]);
+                  setExecution(null);
+                  setExecutionError("");
+                  setCaseError("");
+                }}
+              >
+                <option value="">
+                  — wybierz sprawę —
+                </option>
+                {cases.map((item) => (
+                  <option key={item.caseId} value={item.caseId}>
+                    {item.displayName || item.caseId.slice(0, 18)}
+                    {" · "}
+                    {item.role}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              Nowa sprawa
+              <input
+                value={newCaseName}
+                maxLength={160}
+                placeholder="Opcjonalna nazwa sprawy"
+                onChange={(event) =>
+                  setNewCaseName(event.target.value)
+                }
+              />
+            </label>
+
+            <button
+              type="button"
+              className="primary-button"
+              disabled={caseBusy}
+              onClick={() => void createLocalCase()}
+            >
+              {caseBusy ? "Tworzę…" : "Utwórz sprawę"}
+            </button>
+          </div>
+
+          {caseId ? (
+            <p className="case-selector-meta">
+              {(() => {
+                const selected =
+                  cases.find((item) => item.caseId === caseId);
+                return selected
+                  ? `Rola: ${selected.role} · reidentyfikacja: ${selected.canReidentify ? "dozwolona przez ACL" : "niedozwolona"} · klucz v${selected.keyVersion}`
+                  : "";
+              })()}
+            </p>
+          ) : (
+            <p className="case-selector-meta">
+              Wybierz istniejącą sprawę albo utwórz nową przed pracą z dokumentami.
+            </p>
+          )}
+
+          {caseError && (
+            <div className="alert alert-error">
+              Operacja na sprawie nie powiodła się: {caseError}
+            </div>
+          )}
+        </section>
 
         <DocumentPrivacyPanel
           caseId={caseId}
