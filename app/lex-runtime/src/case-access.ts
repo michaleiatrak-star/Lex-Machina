@@ -108,6 +108,16 @@ function cleanDisplayName(
   return cleaned || undefined;
 }
 
+export interface CaseKeyRotationParticipant {
+  rekeyCaseVault(args: {
+    caseId: string;
+    oldCaseDataKey: Buffer;
+    oldKeyVersion: number;
+    newCaseDataKey: Buffer;
+    newKeyVersion: number;
+  }): Promise<boolean>;
+}
+
 export type CaseView =
   StoredCaseRecord & {
     role: CaseRole;
@@ -130,7 +140,9 @@ export class LocalCaseAccessService {
     private readonly auth:
       AuthService,
     private readonly files:
-      LocalCaseFileStore
+      LocalCaseFileStore,
+    private readonly keyRotationParticipant?:
+      CaseKeyRotationParticipant
   ) {}
 
   async createCase(
@@ -826,13 +838,6 @@ export class LocalCaseAccessService {
       );
     }
 
-    await this.withCaseDataKey(
-      context,
-      caseId,
-      "MANAGE",
-      () => undefined
-    );
-
     const nextKeyVersion =
       record.keyVersion + 1;
     const nextKey =
@@ -841,125 +846,187 @@ export class LocalCaseAccessService {
       new Date().toISOString();
 
     try {
-      const remaining:
-        StoredCaseAccess[] = [];
-      for (
-        const existing
-        of currentAccess
-      ) {
-        let envelope:
-          StoredCaseAccess[
-            "envelope"
-          ];
+      return await this.withCaseDataKey(
+        context,
+        caseId,
+        "MANAGE",
+        async (
+          currentCaseDataKey
+        ) => {
+          const remaining:
+            StoredCaseAccess[] = [];
+          for (
+            const existing
+            of currentAccess
+          ) {
+            let envelope:
+              StoredCaseAccess[
+                "envelope"
+              ];
 
-        if (
-          existing.userId ===
-            context.user.userId
-        ) {
-          envelope =
-            await this.auth
-              .withSessionUserMasterKey(
-                context.session
-                  .sessionId,
-                (userMasterKey) =>
-                  wrapCaseKeyForSessionUser(
-                    userMasterKey,
-                    {
-                      userId:
-                        existing.userId,
-                      caseId,
-                      caseDataKey:
-                        nextKey,
-                      keyVersion:
-                        nextKeyVersion
-                    }
-                  )
-              );
-        } else {
-          const userKeys =
-            this.store
-              .getUserSharingKeys(
-                existing.userId
-              );
-          if (!userKeys) {
-            throw new CaseAccessError(
-              "TARGET_CRYPTO_NOT_READY",
-              409
-            );
+            if (
+              existing.userId ===
+                context.user.userId
+            ) {
+              envelope =
+                await this.auth
+                  .withSessionUserMasterKey(
+                    context.session
+                      .sessionId,
+                    (
+                      userMasterKey
+                    ) =>
+                      wrapCaseKeyForSessionUser(
+                        userMasterKey,
+                        {
+                          userId:
+                            existing.userId,
+                          caseId,
+                          caseDataKey:
+                            nextKey,
+                          keyVersion:
+                            nextKeyVersion
+                        }
+                      )
+                  );
+            } else {
+              const userKeys =
+                this.store
+                  .getUserSharingKeys(
+                    existing.userId
+                  );
+              if (!userKeys) {
+                throw new CaseAccessError(
+                  "TARGET_CRYPTO_NOT_READY",
+                  409
+                );
+              }
+              envelope =
+                wrapCaseKeyForOfflineUser(
+                  userKeys.publicKeyDer,
+                  {
+                    targetUserId:
+                      existing.userId,
+                    caseId,
+                    caseDataKey:
+                      nextKey,
+                    keyVersion:
+                      nextKeyVersion
+                  }
+                );
+            }
+
+            remaining.push({
+              ...existing,
+              envelope
+            });
           }
-          envelope =
-            wrapCaseKeyForOfflineUser(
-              userKeys
-                .publicKeyDer,
-              {
-                targetUserId:
-                  existing.userId,
+
+          let vaultRekeyed =
+            false;
+          try {
+            if (
+              this
+                .keyRotationParticipant
+            ) {
+              vaultRekeyed =
+                await this
+                  .keyRotationParticipant
+                  .rekeyCaseVault({
+                    caseId,
+                    oldCaseDataKey:
+                      currentCaseDataKey,
+                    oldKeyVersion:
+                      record.keyVersion,
+                    newCaseDataKey:
+                      nextKey,
+                    newKeyVersion:
+                      nextKeyVersion
+                  });
+            }
+
+            await this.files
+              .updateCaseKeyVersion(
                 caseId,
-                caseDataKey:
-                  nextKey,
+                nextKeyVersion
+              );
+            try {
+              this.store
+                .revokeAccessAndRotate({
+                  caseId,
+                  revokedUserId:
+                    revokedUserId ??
+                    "__none__",
+                  newKeyVersion:
+                    nextKeyVersion,
+                  updatedAt: now,
+                  remaining
+                });
+            } catch (error) {
+              try {
+                await this.files
+                  .updateCaseKeyVersion(
+                    caseId,
+                    record.keyVersion
+                  );
+              } catch {
+                // Original DB error remains primary.
+              }
+              throw error;
+            }
+
+            this.audit(
+              context.user.userId,
+              "case_key_rotated",
+              now,
+              {
+                caseId,
+                previousKeyVersion:
+                  record.keyVersion,
                 keyVersion:
-                  nextKeyVersion
+                  nextKeyVersion,
+                ...(revokedUserId
+                  ? {
+                      revokedUserId
+                    }
+                  : {})
               }
             );
-        }
-
-        remaining.push({
-          ...existing,
-          envelope
-        });
-      }
-
-      await this.files
-        .updateCaseKeyVersion(
-          caseId,
-          nextKeyVersion
-        );
-      try {
-        this.store
-          .revokeAccessAndRotate({
-            caseId,
-            revokedUserId:
-              revokedUserId ??
-              "__none__",
-            newKeyVersion:
-              nextKeyVersion,
-            updatedAt: now,
-            remaining
-          });
-      } catch (error) {
-        try {
-          await this.files
-            .updateCaseKeyVersion(
+            return {
               caseId,
-              record.keyVersion
-            );
-        } catch {
-          // DB remains unchanged; metadata repair is surfaced
-          // by the original transaction failure path.
-        }
-        throw error;
-      }
-
-      this.audit(
-        context.user.userId,
-        "case_key_rotated",
-        now,
-        {
-          caseId,
-          previousKeyVersion:
-            record.keyVersion,
-          keyVersion:
-            nextKeyVersion,
-          ...(revokedUserId
-            ? { revokedUserId }
-            : {})
+              keyVersion:
+                nextKeyVersion
+            };
+          } catch (error) {
+            if (
+              vaultRekeyed &&
+              this
+                .keyRotationParticipant
+            ) {
+              try {
+                await this
+                  .keyRotationParticipant
+                  .rekeyCaseVault({
+                    caseId,
+                    oldCaseDataKey:
+                      nextKey,
+                    oldKeyVersion:
+                      nextKeyVersion,
+                    newCaseDataKey:
+                      currentCaseDataKey,
+                    newKeyVersion:
+                      record.keyVersion
+                  });
+              } catch {
+                throw new Error(
+                  "CASE_KEY_ROTATION_ROLLBACK_FAILED"
+                );
+              }
+            }
+            throw error;
+          }
         }
       );
-      return {
-        caseId,
-        keyVersion:
-          nextKeyVersion
-      };
     } finally {
       nextKey.fill(0);
     }
