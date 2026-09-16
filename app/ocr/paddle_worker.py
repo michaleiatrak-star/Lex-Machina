@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import os
 from pathlib import Path
 
 import fitz
@@ -70,12 +71,43 @@ def main() -> None:
     args = parser.parse_args()
 
     pages = parse_pages(args.pages)
+    model_root_raw = os.environ.get("LEX_PADDLE_MODEL_DIR", "").strip()
+    if not model_root_raw:
+        raise RuntimeError("LEX_PADDLE_MODEL_DIR is required; network model downloads are disabled")
+    model_root = Path(model_root_raw).resolve()
+    required_models = {
+        "doc_orientation_classify_model_dir":
+            model_root / "PP-LCNet_x1_0_doc_ori",
+        "doc_unwarping_model_dir":
+            model_root / "UVDoc",
+        "textline_orientation_model_dir":
+            model_root / "PP-LCNet_x1_0_textline_ori",
+        "text_detection_model_dir":
+            model_root / "PP-OCRv6_mobile_det",
+        "text_recognition_model_dir":
+            model_root / "PP-OCRv6_mobile_rec",
+    }
+    missing = [
+        str(path)
+        for path in required_models.values()
+        if not path.is_dir()
+    ]
+    if missing:
+        raise RuntimeError(
+            "Local PaddleOCR models are incomplete: " +
+            ", ".join(missing)
+        )
+
     ocr_kwargs = dict(
         lang=args.lang,
         ocr_version="PP-OCRv6",
         use_doc_orientation_classify=True,
         use_doc_unwarping=True,
         use_textline_orientation=True,
+        **{
+            key: str(value)
+            for key, value in required_models.items()
+        },
     )
     if args.device:
         ocr_kwargs["device"] = args.device
