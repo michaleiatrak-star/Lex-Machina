@@ -51,7 +51,9 @@ function serviceAt(
     });
   const sessionManager =
     new AuthSessionManager({
-      clock: options?.clock,
+      ...(options?.clock
+        ? { clock: options.clock }
+        : {}),
       scheduleExpiryTimers: false,
       policy: {
         idleTimeoutMs:
@@ -66,7 +68,9 @@ function serviceAt(
     new LocalAuthService(
       store,
       {
-        clock: options?.clock,
+        ...(options?.clock
+          ? { clock: options.clock }
+          : {}),
         sessionManager,
         kdf: {
           memoryKiB: 1024,
