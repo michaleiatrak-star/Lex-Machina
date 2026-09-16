@@ -43,6 +43,94 @@ describe("local Polish pseudonymizer", () => {
     expect(JSON.stringify(vault)).not.toContain("Jan Kowalski");
   });
 
+  it("supports explicit user pseudonymize, keep and label selections", async () => {
+    const vault = new PseudonymizationVault();
+    const service =
+      new LocalPolishPseudonymizer(vault);
+    const text =
+      "Jan Kowalski PESEL 44051401458 kontakt jan@example.pl.";
+
+    const janStart = text.indexOf("Jan Kowalski");
+    const peselStart = text.indexOf("44051401458");
+    const emailStart = text.indexOf("jan@example.pl");
+
+    const result = await service.pseudonymize(
+      text,
+      [
+        {
+          start: janStart,
+          end: janStart + "Jan Kowalski".length,
+          action: "PSEUDONYMIZE",
+          kind: "PERSON",
+          label: "świadek"
+        },
+        {
+          start: peselStart,
+          end: peselStart + 11,
+          action: "KEEP"
+        },
+        {
+          start: emailStart,
+          end: emailStart + "jan@example.pl".length,
+          action: "LABEL",
+          label: "kontakt służbowy"
+        }
+      ]
+    );
+
+    expect(result.text)
+      .toContain("[PII:PERSON:0001]");
+    expect(result.text)
+      .toContain("44051401458");
+    expect(result.text)
+      .not.toContain("[PII:PESEL:");
+    expect(result.text)
+      .toContain("jan@example.pl");
+    expect(result.annotations).toEqual([
+      {
+        start: emailStart,
+        end: emailStart + "jan@example.pl".length,
+        label: "kontakt służbowy"
+      }
+    ]);
+    expect(result.keptRanges).toEqual([
+      {
+        start: peselStart,
+        end: peselStart + 11
+      }
+    ]);
+    expect(result.findings[0]?.source)
+      .toBe("USER");
+  });
+
+  it("rejects overlapping manual selections instead of guessing priority", async () => {
+    const service =
+      new LocalPolishPseudonymizer(
+        new PseudonymizationVault()
+      );
+
+    await expect(
+      service.pseudonymize(
+        "Jan Kowalski",
+        [
+          {
+            start: 0,
+            end: 3,
+            action: "KEEP"
+          },
+          {
+            start: 0,
+            end: 12,
+            action: "PSEUDONYMIZE",
+            kind: "PERSON"
+          }
+        ]
+      )
+    ).rejects.toThrow(
+      "OVERLAPPING_PRIVACY_DIRECTIVES"
+    );
+  });
+
   it("uses a stable token for the same value in one vault", async () => {
     const vault = new PseudonymizationVault();
     const service = new LocalPolishPseudonymizer(vault);
