@@ -1,6 +1,8 @@
 param(
   [Parameter(Mandatory=$true)][string]$PayloadRoot,
-  [Parameter(Mandatory=$true)][string]$Output
+  [Parameter(Mandatory=$true)][string]$Output,
+  [bool]$NetworkRequiredAtInstall = $false,
+  [bool]$IncludeBundledVisualCppRuntime = $true
 )
 
 $ErrorActionPreference = "Stop"
@@ -26,9 +28,11 @@ $components = @(
   @{ id="legal-corpus"; path="corpus"; required=$true },
   @{ id="paddle-ocr-pl"; path="models/paddle"; required=$true },
   @{ id="stanza-pl-ner"; path="models/stanza"; required=$true },
-  @{ id="visual-cpp-runtime"; path="prerequisites/vc_redist.x64.exe"; required=$true },
   @{ id="runtime-sidecar"; path="lex-runtime-sidecar.exe"; required=$true }
 )
+if ($IncludeBundledVisualCppRuntime) {
+  $components += @{ id="visual-cpp-runtime"; path="prerequisites/vc_redist.x64.exe"; required=$true }
+}
 
 $componentRows = foreach ($component in $components) {
   $prefix = $component.path.TrimEnd('/') + "/"
@@ -54,15 +58,17 @@ $componentRows = foreach ($component in $components) {
 }
 
 $lock = [ordered]@{
-  schemaVersion = 1
+  schemaVersion = 2
   status = "RELEASE_CANDIDATE_LOCK"
   applicationVersion = "0.1.0"
   target = "windows-x86_64"
   generatedAt = (Get-Date).ToUniversalTime().ToString("o")
   sourceCommit = if ($env:GITHUB_SHA) { $env:GITHUB_SHA } else { "LOCAL_BUILD" }
   sourceRepository = "michaleiatrak-star/Lex-Machina"
-  networkRequiredAtInstall = $false
+  networkRequiredAtInstall = $NetworkRequiredAtInstall
+  runtimeNetworkRequiredAfterBootstrap = $false
   expectedUserActionAfterInstall = "PROVIDER_API_KEY_ONLY"
+  systemPrerequisites = @("webview2", "visual-cpp-runtime")
   components = @($componentRows)
   files = @($entries)
 }
