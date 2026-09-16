@@ -1,6 +1,6 @@
 # G37 — Account Administration, Provider Onboarding, Support Access and Update UX
 
-Status: **IN EXECUTION — G37A PASS; G37B-G37E remain staged behind desktop trust dependencies**  
+Status: **IN EXECUTION — G37A/G37C1/G37E1 PASS; G37C2 implemented and under exact-head validation; G37B/G37D/G37E2/G37F/G37G remain open**  
 Date: 2026-09-16  
 Base: `feature/local-runtime`  
 Work branch: `codex/g37-admin-settings-dnd-updater-audit-2026-09-16`
@@ -127,7 +127,7 @@ If an OS-protected secret store is unavailable, first-user bootstrap remains pas
 
 ## 5. G37C — provider credential settings
 
-Status: **G37C1 PASS — memory-only runtime credentials; G37C2 OPEN — persistent OS keychain**
+Status: **G37C1 PASS — memory-only runtime credentials; G37C2 IMPLEMENTED — persistent OS keychain, exact-head CI pending**
 
 ### G37C1 — PASS
 
@@ -151,16 +151,19 @@ Validation:
 - build/G14 PASS;
 - full runtime workflow and live probes PASS.
 
-### G37C2 — target persistent behavior
+### G37C2 — persistent OS keychain implementation
 
-Settings must support:
+Implemented on the desktop trust boundary:
 
-- memory-only API key;
-- persistent API key stored in OS keychain;
-- test/validate key;
-- replace key;
-- delete key;
-- configured/not-configured + last validation timestamp only.
+- persistent provider key stored in the OS credential backend through Rust `keyring`;
+- restore on desktop startup into the existing memory-only runtime overlay;
+- replace/persist only after the runtime accepts the credential;
+- delete removes the OS-vault entry;
+- provider allowlist is limited to OpenAI, Anthropic and xAI;
+- transient Rust secret strings and replaced backend Buffers are zeroized;
+- browser localStorage/sessionStorage are not used.
+
+A dedicated `G37C2_OS_KEYRING_PROVIDER_CREDENTIALS` validator is wired into `Lex Runtime Validation`. Final PASS requires the exact-head workflow to be green.
 
 The API must never return key prefix, length, hash or fingerprint.
 
