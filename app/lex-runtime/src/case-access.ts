@@ -13,6 +13,7 @@ import {
   LocalAuthStore
 } from "./auth/store.js";
 import type {
+  CaseKind,
   CaseListItem,
   StoredCaseAccess,
   StoredCaseRecord
