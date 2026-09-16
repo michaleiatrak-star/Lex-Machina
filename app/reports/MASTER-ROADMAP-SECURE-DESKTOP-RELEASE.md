@@ -1662,7 +1662,17 @@ Primary roadmap:
 Audit:
 - `AUDIT-G38-KNOWLEDGE-RETRIEVAL-FORMATS-2026-09-16.md`
 
-Current status: **IMPLEMENTED — VALIDATION PENDING ON LATEST HEAD**.
+Current status: **PASS**.
+
+Validated code SHA:
+- `2e42a4e29ad48e8c5004866e7535746fdd0ac44a`
+
+Validated CI:
+- F-138 `35102533273` — success;
+- Lex Runtime Validation `35102533235` — success;
+- runtime 55/55 files, 207/207 tests;
+- web 1/1 file, 15/15 tests;
+- production build/G14/live G17/G19/G20/G22 — success.
 
 ## G38A — encrypted firm workspace
 
