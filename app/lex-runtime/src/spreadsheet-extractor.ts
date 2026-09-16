@@ -9,7 +9,7 @@ import {
 export const XLSX_MEDIA_TYPE =
   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 export const XLSM_MEDIA_TYPE =
-  "application/vnd.ms-excel.sheet.macroEnabled.12";
+  "application/vnd.ms-excel.sheet.macroenabled.12";
 export const CSV_MEDIA_TYPE =
   "text/csv";
 export const TSV_MEDIA_TYPE =
