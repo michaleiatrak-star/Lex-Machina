@@ -1,5 +1,11 @@
 export type AppRole = "ADMIN" | "USER";
 
+export type CaseRole =
+  | "OWNER"
+  | "EDITOR"
+  | "ANALYST"
+  | "VIEWER";
+
 export type LocalUserStatus =
   | "ACTIVE"
   | "DISABLED";
@@ -33,6 +39,12 @@ export type StoredLocalUser = PublicLocalUser & {
   umkWrapCiphertext: Buffer;
   umkWrapTag: Buffer;
   umkKeyVersion: number;
+  sharingPublicKeyAlgorithm?: "X25519";
+  sharingPublicKey?: Buffer;
+  sharingPrivateKeyWrapNonce?: Buffer;
+  sharingPrivateKeyWrapCiphertext?: Buffer;
+  sharingPrivateKeyWrapTag?: Buffer;
+  sharingKeyVersion?: number;
 };
 
 export type AuthSessionView = {
