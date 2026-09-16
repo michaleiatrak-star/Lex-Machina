@@ -5,6 +5,7 @@ description = "Lex Machina secure desktop shell"
 authors = ["Lex Machina"]
 edition = "2021"
 rust-version = "1.77.2"
+default-run = "lex-machina"
 
 [lib]
 name = "lex_machina_desktop_lib"
