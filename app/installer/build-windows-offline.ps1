@@ -30,10 +30,14 @@ $appStage = Join-Path $payload "app"
 New-Item $appStage -ItemType Directory | Out-Null
 Copy-Item (Join-Path $repo "app\lex-runtime\dist") $appStage -Recurse
 Copy-Item (Join-Path $repo "app\lex-runtime\package.json") $appStage
+Copy-Item (Join-Path $installer "windows-release-source.json") (Join-Path $payload "release-source.json")
+Copy-Item (Join-Path $installer "windows-release-requirements.txt") (Join-Path $payload "release-requirements.txt")
 Push-Location $appStage
 try {
   npm install --omit=dev --ignore-scripts --no-audit --no-fund
   if ($LASTEXITCODE -ne 0) { throw "production runtime dependencies failed" }
+  npm ls --all --json | Out-File -FilePath (Join-Path $payload "npm-dependency-tree.json") -Encoding utf8
+  if ($LASTEXITCODE -ne 0) { throw "runtime dependency provenance failed" }
 } finally { Pop-Location }
 
 Write-Host "[2/9] Copy workers and corpus"
