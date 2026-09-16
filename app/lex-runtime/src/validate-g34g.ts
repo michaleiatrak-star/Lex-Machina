@@ -143,11 +143,11 @@ const checks = {
     tauriConfig?.bundle?.windows
       ?.nsis?.installMode ===
       "currentUser",
-  offlineWebView2:
+  webViewDownloadBootstrapper:
     tauriConfig?.bundle?.windows
       ?.webviewInstallMode
       ?.type ===
-      "offlineInstaller"
+      "downloadBootstrapper"
 };
 
 const pass =
