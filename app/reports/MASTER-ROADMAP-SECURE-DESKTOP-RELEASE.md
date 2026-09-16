@@ -1,6 +1,6 @@
 # Lex Machina — Master Roadmap to Secure Desktop Release
 
-Status: **IN EXECUTION — G34A-G34D + G35A/G35B PASS; NEXT G31C1**  
+Status: **IN EXECUTION — G31C1 PASS; NEXT G34E/G34F**  
 Date: 2026-09-16  
 Branch baseline: `feature/local-runtime`
 
@@ -26,16 +26,17 @@ Validated implementation baseline:
 - G34D — PASS
 - G35A — PASS
 - G35B — PASS
+- G31C1 — PASS
 
 Validated code SHA:
-- `a41fd86dd550dc41c93705edc423516d05199d8c`
+- `8c1a4c3c61b3e3b28c5c648adcfbf932c7dd7394`
 
 Validated CI:
-- Lex Runtime Validation `35072926001` — success
-- F-138 `35072925987` — success
+- Lex Runtime Validation `35076077413` — success
+- F-138 `35076077538` — success
 
 Designs completed but not yet implemented:
-- G31C1/G31C2
+- G31C2
 - G31D/G31E
 - G33A-G33D
 - G34E-G34H
@@ -533,8 +534,20 @@ Test:
 
 All fail closed.
 
-## G31C1 PASS
+## G31C1 PASS — IMPLEMENTED / VALIDATED
+
 No plaintext reversible map is written to disk and mapping survives restart.
+
+Validated code SHA: `8c1a4c3c61b3e3b28c5c648adcfbf932c7dd7394`.
+
+Validation:
+- restart round-trip;
+- wrong key fail-closed;
+- corruption/truncation fail-closed;
+- wrong case/AAD fail-closed;
+- wrong keyVersion fail-closed;
+- stale generation/meta mismatch fail-closed;
+- CDK rotation rekeys the vault.
 
 ---
 
