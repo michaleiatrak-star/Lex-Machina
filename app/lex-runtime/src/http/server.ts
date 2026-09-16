@@ -41,6 +41,9 @@ import {
   LocalSharedTemplateStore
 } from "../shared-template-store.js";
 import {
+  LocalTemplateProfileService
+} from "../template-profile-service.js";
+import {
   EncryptedPrivacyVaultStore
 } from "../privacy/vault-store.js";
 import {
@@ -177,6 +180,10 @@ export async function startLocalServer(options?: {
       rootDir:
         caseFileStore.rootDir
     });
+  const templateProfileService =
+    new LocalTemplateProfileService(
+      sharedTemplateStore
+    );
   const privacyVaultStore =
     new EncryptedPrivacyVaultStore({
       rootDir:
@@ -295,6 +302,7 @@ export async function startLocalServer(options?: {
     caseFileStore,
     secureCaseUploadStore,
     sharedTemplateStore,
+    templateProfileService,
     authService,
     caseAccessService,
     caseKnowledgeSearch,
