@@ -2139,14 +2139,65 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           }
         }
 
-        const result =
-          await options.documentService.review(
-            data,
-            mediaType,
-            caseId
-              ? { caseId }
-              : undefined
-          );
+        let result:
+          Awaited<
+            ReturnType<
+              NonNullable<
+                LexHttpAppOptions[
+                  "documentService"
+                ]
+              >["review"]
+            >
+          >;
+        if (
+          caseId &&
+          options.caseAccessService
+        ) {
+          const context =
+            responseAuthContext(
+              res
+            );
+          const caseView =
+            options.caseAccessService
+              .openCase(
+                context,
+                caseId
+              );
+          result =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                context,
+                caseId,
+                "WRITE",
+                async (
+                  caseDataKey
+                ) =>
+                  await options
+                    .documentService!
+                    .review(
+                      data,
+                      mediaType,
+                      {
+                        caseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView.keyVersion
+                      }
+                    )
+              );
+        } else {
+          result =
+            await options
+              .documentService
+              .review(
+                data,
+                mediaType,
+                caseId
+                  ? { caseId }
+                  : undefined
+              );
+        }
         if (stored) {
           documentCaseIds.set(
             result.documentId,
