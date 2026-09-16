@@ -5,6 +5,7 @@ import {
 } from "react";
 import App from "./App.js";
 import { AccountSecurityPanel } from "./AccountSecurityPanel.js";
+import { AdminUsersPanel } from "./AdminUsersPanel.js";
 import { RecoveryAuthPanel } from "./RecoveryAuthPanel.js";
 import {
   ApiError,
@@ -298,6 +299,8 @@ export default function AuthenticatedApp() {
     useState(() => Date.now());
   const [showSecurity, setShowSecurity] =
     useState(false);
+  const [showUsers, setShowUsers] =
+    useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -531,6 +534,21 @@ export default function AuthenticatedApp() {
             ? "Ukryj bezpieczeństwo"
             : "Hasło i recovery"}
         </button>
+        {auth.user.appRole ===
+          "ADMIN" && (
+          <button
+            type="button"
+            onClick={() =>
+              setShowUsers(
+                (value) => !value
+              )
+            }
+          >
+            {showUsers
+              ? "Ukryj użytkowników"
+              : "Użytkownicy"}
+          </button>
+        )}
         <button
           type="button"
           onClick={() => {
@@ -548,6 +566,16 @@ export default function AuthenticatedApp() {
           Wyloguj
         </button>
       </div>
+
+      {showUsers &&
+        auth.user.appRole ===
+          "ADMIN" && (
+          <AdminUsersPanel
+            currentUserId={
+              auth.user.userId
+            }
+          />
+        )}
 
       {showSecurity && (
         <AccountSecurityPanel
