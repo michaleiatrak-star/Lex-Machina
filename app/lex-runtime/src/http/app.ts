@@ -89,8 +89,12 @@ const DOCUMENT_MEDIA_TYPES =
     "image/tiff",
     "text/plain",
     "text/markdown",
+    "text/csv",
+    "text/tab-separated-values",
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    "application/vnd.oasis.opendocument.text"
+    "application/vnd.oasis.opendocument.text",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "application/vnd.ms-excel.sheet.macroEnabled.12"
   ]);
 
 type ImageDocumentMediaType =
@@ -3026,8 +3030,12 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       "image/tiff",
       "text/plain",
       "text/markdown",
+      "text/csv",
+      "text/tab-separated-values",
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-      "application/vnd.oasis.opendocument.text"
+      "application/vnd.oasis.opendocument.text",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "application/vnd.ms-excel.sheet.macroEnabled.12"
     ],
     limit: "512mb"
   });
