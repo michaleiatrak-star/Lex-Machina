@@ -1,9 +1,9 @@
 # G34B/G34F — Authentication, Session, Lockout and Deanonymization Reauthorization Protocol
 
-Status: **DESIGN COMPLETE — NOT IMPLEMENTED / NOT PASS**  
+Status: **PARTIALLY IMPLEMENTED — G34B + G34E + G34F1 PASS; FULL G34F/G34G OPEN**  
 Date: 2026-09-16
 
-This document is normative for the planned local multi-user Lex Machina runtime. It refines G34B (login/session) and G34F (step-up reauthorization).
+This document is normative for the local multi-user Lex Machina runtime. G34B login/session and G34E recovery/password lifecycle are implemented and validated; G34F1 transaction-bound reauthorization foundation is implemented and validated. Full G34F remains open until real DOCX/ODT deanonymization/export consumes the grant with no bypass path, and G34G remains open until the Tauri production boundary exists.
 
 The policy is intentionally stricter than generic low-risk web defaults because Lex Machina processes sensitive legal files.
 
