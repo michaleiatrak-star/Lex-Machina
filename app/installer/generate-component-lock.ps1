@@ -58,7 +58,10 @@ $lock = [ordered]@{
   applicationVersion = "0.1.0"
   target = "windows-x86_64"
   generatedAt = (Get-Date).ToUniversalTime().ToString("o")
+  sourceCommit = if ($env:GITHUB_SHA) { $env:GITHUB_SHA } else { "LOCAL_BUILD" }
+  sourceRepository = "michaleiatrak-star/Lex-Machina"
   networkRequiredAtInstall = $false
+  expectedUserActionAfterInstall = "PROVIDER_API_KEY_ONLY"
   components = @($componentRows)
   files = @($entries)
 }
