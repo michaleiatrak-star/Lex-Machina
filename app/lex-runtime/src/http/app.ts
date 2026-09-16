@@ -540,6 +540,57 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
   );
 
   app.post(
+    "/api/auth/recover",
+    async (req, res) => {
+      if (!options.authService) {
+        res.status(503).json({
+          error:
+            "AUTH_SERVICE_UNAVAILABLE"
+        });
+        return;
+      }
+      const loginName =
+        typeof req.body?.loginName ===
+          "string"
+          ? req.body.loginName
+          : "";
+      const recoveryCode =
+        typeof req.body?.recoveryCode ===
+          "string"
+          ? req.body.recoveryCode
+          : "";
+      const newPassword =
+        typeof req.body?.newPassword ===
+          "string"
+          ? req.body.newPassword
+          : "";
+
+      try {
+        res.json(
+          await options.authService
+            .recoverAccount({
+              loginName,
+              recoveryCode,
+              newPassword
+            })
+        );
+      } catch (error) {
+        if (
+          !sendAuthError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "AUTH_RECOVERY_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
     "/api/auth/logout",
     (req, res) => {
       if (!options.authService) {
@@ -620,6 +671,86 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               .sessionId
           );
         res.status(204).end();
+      }
+    );
+
+    app.post(
+      "/api/auth/recovery-code",
+      async (req, res) => {
+        const password =
+          typeof req.body?.password ===
+            "string"
+            ? req.body.password
+            : "";
+        try {
+          res.status(201).json(
+            await options
+              .authService!
+              .createRecoveryCode(
+                responseAuthContext(
+                  res
+                ),
+                { password }
+              )
+          );
+        } catch (error) {
+          if (
+            !sendAuthError(
+              res,
+              error
+            )
+          ) {
+            res.status(500).json({
+              error:
+                "RECOVERY_CODE_CREATE_FAILED"
+            });
+          }
+        }
+      }
+    );
+
+    app.post(
+      "/api/auth/password",
+      async (req, res) => {
+        const currentPassword =
+          typeof req.body
+            ?.currentPassword ===
+            "string"
+            ? req.body
+                .currentPassword
+            : "";
+        const newPassword =
+          typeof req.body?.newPassword ===
+            "string"
+            ? req.body.newPassword
+            : "";
+        try {
+          res.json(
+            await options
+              .authService!
+              .changePassword(
+                responseAuthContext(
+                  res
+                ),
+                {
+                  currentPassword,
+                  newPassword
+                }
+              )
+          );
+        } catch (error) {
+          if (
+            !sendAuthError(
+              res,
+              error
+            )
+          ) {
+            res.status(500).json({
+              error:
+                "PASSWORD_CHANGE_FAILED"
+            });
+          }
+        }
       }
     );
   }
