@@ -43,10 +43,18 @@ const required = [
   "/api/auth/bootstrap",
   "/api/auth/lock",
   "/api/auth/logout",
+  "/api/auth/recover",
+  "/api/auth/recovery-code",
+  "/api/auth/password",
   "Utwórz konto właściciela",
   "Zaloguj się",
   "Zablokuj",
   "Wyloguj",
+  "Hasło i recovery",
+  "Odzyskaj konto kodem recovery",
+  "Zapisz nowy kod recovery",
+  "Wygeneruj nowy kod recovery",
+  "Zmień hasło",
   "Wybierz sprawę",
   "Aplikacja nie tworzy już spraw automatycznie",
   "reidentyfikacja:",
@@ -80,7 +88,7 @@ const missing = required.filter((token) => !content.includes(token));
 const pass = exposed.length === 0 && missing.length === 0;
 
 process.stdout.write(JSON.stringify({
-  gate: "G14_G31AB_G32_G34AD_G35AB_LOCAL_WEB_UI",
+  gate: "G14_G31AB_G32_G34AE_G35AB_LOCAL_WEB_UI",
   result: pass ? "PASS" : "BLOCKED",
   bundleFiles: files.length,
   forbiddenTokensFound: exposed,
