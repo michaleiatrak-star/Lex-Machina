@@ -818,3 +818,87 @@ textarea:focus {
     flex-direction: column;
   }
 }
+
+
+.attachment-selector {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid #cdd8cc;
+  border-radius: 16px;
+  background: #f7faf5;
+}
+
+.attachment-selector-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.attachment-selector-head p {
+  max-width: 720px;
+  margin: 6px 0 0;
+  color: #667168;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.attachment-selector-head > span {
+  flex: 0 0 auto;
+  color: #56665a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.attachment-actions {
+  display: flex;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.attachment-actions button {
+  padding: 8px 10px;
+  border: 1px solid #cbd3c9;
+  border-radius: 9px;
+  background: #fff;
+  color: #314337;
+}
+
+.attachment-chunk-list {
+  display: grid;
+  gap: 8px;
+  max-height: 300px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.attachment-chunk {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #dbe1d8;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.attachment-chunk small {
+  color: #7a847d;
+}
+
+@media (max-width: 720px) {
+  .attachment-selector-head,
+  .attachment-actions {
+    flex-direction: column;
+  }
+
+  .attachment-chunk {
+    grid-template-columns: auto 1fr;
+  }
+
+  .attachment-chunk small {
+    grid-column: 2;
+  }
+}
