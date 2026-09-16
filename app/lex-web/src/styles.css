@@ -1462,3 +1462,23 @@ textarea:focus {
 .conversation-drop-active textarea {
   pointer-events: none;
 }
+
+
+.provider-key-editor {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(198, 208, 197, 0.78);
+}
+
+.provider-key-editor label {
+  display: grid;
+  gap: 6px;
+}
+
+.provider-key-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
