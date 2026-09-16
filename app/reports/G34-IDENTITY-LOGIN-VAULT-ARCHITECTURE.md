@@ -1179,3 +1179,25 @@ PASS:
 13. G33 installer implementation.
 
 This order prevents the installer from freezing an insecure storage/auth architecture into a distributable package.
+
+
+---
+
+## 48. Normative authentication/session protocol
+
+Detailed login, logout, idle expiry, failed-attempt backoff and transaction-bound deanonymization reauthorization are specified in:
+
+`app/reports/G34-AUTH-SESSION-REAUTH-PROTOCOL.md`
+
+That protocol is normative for G34B and G34F and supersedes earlier shorthand such as a generic "recent authentication within five minutes" rule.
+
+Key decisions:
+- 15-minute idle timeout;
+- 8-hour overall timeout;
+- LOCKED has no valid session or unlocked UMK/CDK;
+- increasing temporary login backoff, no permanent automatic password lockout;
+- every deanonymization requires an exact artifact-bound one-use password reauthorization grant;
+- intent lifetime 5 minutes;
+- grant lifetime 90 seconds;
+- immediate sensitive-download ticket 60 seconds / one use;
+- later access to a deanonymized artifact requires fresh transaction authorization.
