@@ -52,6 +52,9 @@ jobs:
       - name: TypeScript strict typecheck
         run: npm run typecheck
 
+      - name: Runtime release JS build
+        run: npm run build
+
       - name: Unit tests — runtime and app contracts
         run: npm test
 
