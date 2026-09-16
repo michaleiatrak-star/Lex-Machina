@@ -27,6 +27,9 @@ import {
 import {
   LocalSharedTemplateStore
 } from "../shared-template-store.js";
+import {
+  EncryptedPrivacyVaultStore
+} from "../privacy/vault-store.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -84,6 +87,11 @@ export async function startLocalServer(options?: {
       rootDir:
         caseFileStore.rootDir
     });
+  const privacyVaultStore =
+    new EncryptedPrivacyVaultStore({
+      rootDir:
+        caseFileStore.rootDir
+    });
   const authService =
     new LocalAuthService(
       authStore
@@ -92,7 +100,8 @@ export async function startLocalServer(options?: {
     new LocalCaseAccessService(
       authStore,
       authService,
-      caseFileStore
+      caseFileStore,
+      privacyVaultStore
     );
 
   const credentials = new EnvironmentCredentialResolver();
@@ -123,7 +132,8 @@ export async function startLocalServer(options?: {
       24_000,
       new CompleteImageIngestor(
         new LocalPaddleImageOcrEngine()
-      )
+      ),
+      privacyVaultStore
     ),
     sessionExecutor: new SafeSessionExecutor(
       registry,
