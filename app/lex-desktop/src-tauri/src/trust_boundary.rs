@@ -1,3 +1,11 @@
+use base64::{
+    engine::general_purpose::URL_SAFE_NO_PAD,
+    Engine as _,
+};
+use ed25519_dalek::{
+    Signer,
+    SigningKey,
+};
 use getrandom::fill as random_fill;
 use keyring::{Entry, Error as KeyringError};
 use serde_json::{json, Value};
@@ -18,6 +26,9 @@ const MAX_RESPONSE_BYTES: usize = 192 * 1024 * 1024;
 const MANAGED_LOGIN: &str = "local-admin";
 const MANAGED_KEYRING_SERVICE: &str = "LexMachina/Desktop";
 const PROVIDER_KEYRING_SERVICE: &str = "LexMachina/ProviderCredential";
+const SUPPORT_KEYRING_SERVICE: &str = "LexMachina/SupportIdentity";
+const SUPPORT_INSTALLATION_ACCOUNT: &str = "installation-id";
+const SUPPORT_SIGNING_KEY_ACCOUNT: &str = "challenge-signing-key";
 const NATIVE_LOGIN_SENTINEL: &str = "__LEX_NATIVE_LOGIN__";
 const NATIVE_REAUTH_SENTINEL: &str = "__LEX_NATIVE_REAUTH__";
 
@@ -25,6 +36,7 @@ struct BridgeState {
     address: Option<SocketAddr>,
     bootstrap_token: String,
     session_token: Option<String>,
+    service_token: Option<String>,
     managed_password: Option<String>,
     child: Option<Child>,
 }
@@ -49,6 +61,7 @@ impl RuntimeBridge {
                 address: None,
                 bootstrap_token,
                 session_token: None,
+                service_token: None,
                 managed_password: None,
                 child: None,
             }),
@@ -91,7 +104,12 @@ impl RuntimeBridge {
             ));
         }
 
-        let mut child = Command::new(&executable)
+        let support_identity =
+            load_or_create_support_identity()
+                .ok();
+
+        let mut command = Command::new(&executable);
+        command
             .env("LEX_HOST", "127.0.0.1")
             .env("LEX_PORT", "0")
             .env(
@@ -100,7 +118,42 @@ impl RuntimeBridge {
             )
             .stdin(Stdio::null())
             .stdout(Stdio::piped())
-            .stderr(Stdio::null())
+            .stderr(Stdio::null());
+
+        if let Some(identity) =
+            support_identity.as_ref()
+        {
+            command.env(
+                "LEX_SUPPORT_INSTALLATION_ID",
+                &identity.installation_id,
+            );
+            command.env(
+                "LEX_SUPPORT_CHALLENGE_PUBLIC_KEY",
+                &identity.public_key,
+            );
+        }
+        if let Some(public_key) =
+            option_env!(
+                "LEX_SUPPORT_VENDOR_PUBLIC_KEY_PEM"
+            )
+        {
+            command.env(
+                "LEX_SUPPORT_VENDOR_PUBLIC_KEY_PEM",
+                public_key,
+            );
+        }
+        if let Some(key_id) =
+            option_env!(
+                "LEX_SUPPORT_VENDOR_KEY_ID"
+            )
+        {
+            command.env(
+                "LEX_SUPPORT_VENDOR_KEY_ID",
+                key_id,
+            );
+        }
+
+        let mut child = command
             .spawn()
             .map_err(|error| format!("DESKTOP_RUNTIME_SPAWN_FAILED:{error}"))?;
 
