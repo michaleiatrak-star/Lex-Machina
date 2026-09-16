@@ -26,6 +26,7 @@ $components = @(
   @{ id="legal-corpus"; path="corpus"; required=$true },
   @{ id="paddle-ocr-pl"; path="models/paddle"; required=$true },
   @{ id="stanza-pl-ner"; path="models/stanza"; required=$true },
+  @{ id="visual-cpp-runtime"; path="prerequisites/vc_redist.x64.exe"; required=$true },
   @{ id="runtime-sidecar"; path="lex-runtime-sidecar.exe"; required=$true }
 )
 
