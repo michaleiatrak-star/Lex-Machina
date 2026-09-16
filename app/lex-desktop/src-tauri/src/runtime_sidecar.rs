@@ -228,6 +228,11 @@ fn run_runtime(root: &Path) -> Result<i32, String> {
             root.join("models").join("paddle"),
             "SIDECAR_PADDLE_MODELS_MISSING",
         )?;
+    let paddle_official =
+        required_dir(
+            paddle.join("official_models"),
+            "SIDECAR_PADDLE_OFFICIAL_MODELS_MISSING",
+        )?;
     let stanza =
         required_dir(
             root.join("models").join("stanza"),
@@ -243,6 +248,7 @@ fn run_runtime(root: &Path) -> Result<i32, String> {
             .env("LEX_NER_PYTHON", &python)
             .env("LEX_STORAGE_PYTHON", &python)
             .env("PADDLE_PDX_CACHE_HOME", &paddle)
+            .env("LEX_PADDLE_MODEL_DIR", &paddle_official)
             .env("PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK", "True")
             .env("STANZA_RESOURCES_DIR", stanza)
             .env("PYTHONNOUSERSITE", "1")
