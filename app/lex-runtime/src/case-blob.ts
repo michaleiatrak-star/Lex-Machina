@@ -32,7 +32,9 @@ export type CaseBlobPurpose =
   | "extracted-payload"
   | "document-source"
   | "protected-document"
-  | "artifact";
+  | "artifact"
+  | "artifact-manifest"
+  | "artifact-payload";
 
 export type CaseBlobIdentity = {
   caseId: string;
