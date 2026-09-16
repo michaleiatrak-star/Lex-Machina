@@ -15,8 +15,19 @@ import type {
   LegalVerificationToolFactory
 } from "./verification-tool-runtime.js";
 
+export type SessionDocumentAttachment = {
+  documentId: string;
+  chunks: Array<{
+    index: number;
+    pageStart: number;
+    pageEnd: number;
+    text: string;
+  }>;
+};
+
 export type SessionExecutionRequest = {
   query: string;
+  documentAttachments?: SessionDocumentAttachment[];
   provider: ProviderId;
   model: string;
   primarySkill: string;
@@ -132,6 +143,32 @@ export type SessionExecutionResponse = {
   };
 };
 
+function buildDocumentContext(
+  attachments: SessionDocumentAttachment[]
+): string {
+  if (attachments.length > 4) {
+    throw new Error("TOO_MANY_DOCUMENT_ATTACHMENTS");
+  }
+
+  let totalChars = 0;
+  const sections = attachments.map((attachment) => {
+    const chunks = attachment.chunks.map((chunk) => {
+      totalChars += chunk.text.length;
+      return [
+        `[DOCUMENT ${attachment.documentId} · CHUNK ${chunk.index} · PAGES ${chunk.pageStart}-${chunk.pageEnd}]`,
+        chunk.text
+      ].join("\n");
+    });
+    return chunks.join("\n\n");
+  });
+
+  if (totalChars > 160_000) {
+    throw new Error("DOCUMENT_ATTACHMENT_CONTEXT_TOO_LARGE");
+  }
+
+  return sections.join("\n\n---\n\n");
+}
+
 function transferExecutionEvents(
   events: ExecutionEvent[],
   audit: AuditTrail
@@ -187,8 +224,32 @@ export class SafeSessionExecutor implements SessionExecutor {
     const verificationTools =
       this.verificationToolFactory?.(ledger);
 
+    const attachments =
+      request.documentAttachments ?? [];
+    const documentContext =
+      attachments.length > 0
+        ? buildDocumentContext(attachments)
+        : undefined;
+
+    for (const attachment of attachments) {
+      audit.record(
+        "resource_read",
+        `local-document:${attachment.documentId}`,
+        "OK",
+        {
+          chunks: attachment.chunks.map(
+            (chunk) => chunk.index
+          ),
+          protectedOnly: true
+        }
+      );
+    }
+
     const execution = await this.engine.executePolishLegalQuery({
       query: request.query,
+      ...(documentContext
+        ? { documentContext }
+        : {}),
       provider: request.provider,
       model: request.model,
       route: {
