@@ -25,6 +25,7 @@ import type {
   UpdateDiscovery
 } from "../update-discovery.js";
 import type {
+  SessionDocumentAttachment,
   SessionExecutor,
   SessionExecutionRequest
 } from "../session-executor.js";
@@ -3524,7 +3525,15 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       parseDocumentAttachments(
         req.body?.attachments
       );
-    if (!request || attachments === null) {
+    const knowledge =
+      parseSessionKnowledgeRequest(
+        req.body?.knowledge
+      );
+    if (
+      !request ||
+      attachments === null ||
+      knowledge === null
+    ) {
       res.status(400).json({
         error: "INVALID_SESSION_REQUEST"
       });
@@ -3541,6 +3550,9 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     }
 
     try {
+      const sessionAttachments:
+        SessionDocumentAttachment[] = [];
+
       if (attachments.length > 0) {
         if (!options.documentService) {
           res.status(503).json({
@@ -3550,8 +3562,6 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           return;
         }
 
-        const resolved:
-          ResolvedDocumentAttachment[] = [];
         if (
           options.caseAccessService
         ) {
@@ -3614,7 +3624,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                 );
             }
 
-            resolved.push(
+            const resolved =
               await options
                 .documentService!
                 .resolveProtectedChunks({
@@ -3624,12 +3634,24 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                   chunkIndices:
                     selection
                       .chunkIndices
-                })
-            );
+                });
+            sessionAttachments.push({
+              caseId,
+              documentId:
+                resolved.documentId,
+              sourceScope:
+                "MANUAL",
+              chunks:
+                resolved.chunks.map(
+                  (chunk) => ({
+                    ...chunk
+                  })
+                )
+            });
           }
         } else {
-          resolved.push(
-            ...await Promise.all(
+          const resolved =
+            await Promise.all(
               attachments.map(
                 (selection) =>
                   options
@@ -3643,18 +3665,229 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                           .chunkIndices
                     })
               )
+            );
+          sessionAttachments.push(
+            ...resolved.map(
+              (attachment) => ({
+                documentId:
+                  attachment.documentId,
+                sourceScope:
+                  "MANUAL" as const,
+                chunks:
+                  attachment.chunks.map(
+                    (chunk) => ({
+                      ...chunk
+                    })
+                  )
+              })
             )
           );
         }
+      }
+
+      if (
+        knowledge.includeCase ||
+        knowledge.includeFirm
+      ) {
+        if (
+          !options.caseAccessService ||
+          !options.caseKnowledgeSearch
+        ) {
+          res.status(503).json({
+            error:
+              "CASE_KNOWLEDGE_UNAVAILABLE"
+          });
+          return;
+        }
+
+        const context =
+          responseAuthContext(res);
+        const knowledgeSources:
+          Array<{
+            caseId: string;
+            sourceScope:
+              | "CASE_KNOWLEDGE"
+              | "FIRM_KNOWLEDGE";
+          }> = [];
+
+        if (
+          knowledge.includeCase &&
+          knowledge.caseId
+        ) {
+          knowledgeSources.push({
+            caseId:
+              knowledge.caseId,
+            sourceScope:
+              "CASE_KNOWLEDGE"
+          });
+        }
+
+        if (
+          knowledge.includeFirm
+        ) {
+          const firm =
+            options.caseAccessService
+              .getFirmKnowledgeWorkspace(
+                context
+              );
+          if (!firm) {
+            throw new CaseAccessError(
+              "CASE_ACCESS_DENIED",
+              403
+            );
+          }
+          knowledgeSources.push({
+            caseId:
+              firm.caseId,
+            sourceScope:
+              "FIRM_KNOWLEDGE"
+          });
+        }
+
+        const ranked:
+          Array<{
+            caseId: string;
+            sourceScope:
+              | "CASE_KNOWLEDGE"
+              | "FIRM_KNOWLEDGE";
+            documentId: string;
+            chunkIndex: number;
+            pageStart: number;
+            pageEnd: number;
+            score: number;
+            text: string;
+          }> = [];
+
+        for (
+          const source
+          of knowledgeSources
+        ) {
+          const caseView =
+            options.caseAccessService
+              .openCase(
+                context,
+                source.caseId
+              );
+          const hits =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                context,
+                source.caseId,
+                "ANALYZE",
+                async (
+                  caseDataKey
+                ) =>
+                  await options
+                    .caseKnowledgeSearch!
+                    .search({
+                      caseId:
+                        source.caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion,
+                      query:
+                        request.query,
+                      limit:
+                        knowledge.limit
+                    })
+              );
+          ranked.push(
+            ...hits.map(
+              (hit) => ({
+                ...hit,
+                sourceScope:
+                  source.sourceScope
+              })
+            )
+          );
+        }
+
+        ranked.sort(
+          (left, right) =>
+            right.score -
+              left.score ||
+            left.caseId
+              .localeCompare(
+                right.caseId
+              ) ||
+            left.documentId
+              .localeCompare(
+                right.documentId
+              ) ||
+            left.chunkIndex -
+              right.chunkIndex
+        );
+
+        const selected =
+          ranked.slice(
+            0,
+            knowledge.limit
+          );
+        const grouped =
+          new Map<
+            string,
+            SessionDocumentAttachment
+          >();
+
+        for (
+          const hit
+          of selected
+        ) {
+          const key =
+            [
+              hit.sourceScope,
+              hit.caseId,
+              hit.documentId
+            ].join(":");
+          let attachment =
+            grouped.get(key);
+          if (!attachment) {
+            if (
+              sessionAttachments.length +
+                grouped.size >=
+              4
+            ) {
+              continue;
+            }
+            attachment = {
+              caseId:
+                hit.caseId,
+              documentId:
+                hit.documentId,
+              sourceScope:
+                hit.sourceScope,
+              chunks: []
+            };
+            grouped.set(
+              key,
+              attachment
+            );
+          }
+          attachment.chunks.push({
+            index:
+              hit.chunkIndex,
+            pageStart:
+              hit.pageStart,
+            pageEnd:
+              hit.pageEnd,
+            text:
+              hit.text
+          });
+        }
+
+        sessionAttachments.push(
+          ...grouped.values()
+        );
+      }
+
+      if (
+        sessionAttachments.length >
+          0
+      ) {
         request.documentAttachments =
-          resolved.map((attachment) => ({
-            documentId:
-              attachment.documentId,
-            chunks:
-              attachment.chunks.map(
-                (chunk) => ({ ...chunk })
-              )
-          }));
+          sessionAttachments;
       }
 
       const result = await options.sessionExecutor.execute(request);
