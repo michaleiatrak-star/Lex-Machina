@@ -453,9 +453,7 @@ export class SafeSessionExecutor implements SessionExecutor {
       ...(safeToPresent
         ? { answer: execution.output }
         : {}),
-      finalization: safeToPresent
-        ? finalization.result
-        : "BLOCKED",
+      finalization: finalization.result,
       blockedReferences,
       verification: {
         records: verificationRecords.length,
