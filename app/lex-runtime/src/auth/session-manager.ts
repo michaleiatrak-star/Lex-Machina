@@ -225,6 +225,59 @@ export class AuthSessionManager {
       : null;
   }
 
+  async withUserMasterKey<T>(
+    sessionId: string,
+    callback: (
+      userMasterKey: Buffer
+    ) => T | Promise<T>
+  ): Promise<T> {
+    const digest =
+      this.digestBySessionId.get(
+        sessionId
+      );
+    const session = digest
+      ? this.byDigest.get(digest)
+      : undefined;
+    if (!digest || !session) {
+      throw new Error(
+        "SESSION_KEY_UNAVAILABLE"
+      );
+    }
+
+    const now = this.clock.now();
+    if (
+      now >= session.overallExpiresAtMs
+    ) {
+      this.revokeDigest(
+        digest,
+        "OVERALL_TIMEOUT"
+      );
+      throw new Error(
+        "SESSION_KEY_UNAVAILABLE"
+      );
+    }
+    if (
+      now >= session.idleExpiresAtMs
+    ) {
+      this.revokeDigest(
+        digest,
+        "IDLE_TIMEOUT"
+      );
+      throw new Error(
+        "SESSION_KEY_UNAVAILABLE"
+      );
+    }
+
+    const copy = Buffer.from(
+      session.userMasterKey
+    );
+    try {
+      return await callback(copy);
+    } finally {
+      copy.fill(0);
+    }
+  }
+
   touch(
     sessionId: string
   ): AuthSessionView | null {
