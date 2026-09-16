@@ -22,8 +22,8 @@ permissions:
   contents: read
 
 jobs:
-  g1-g32:
-    name: G1-G32 deterministic validation
+  g1-g29-g32:
+    name: G1-G29 + G32 deterministic validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -139,7 +139,7 @@ jobs:
 
   g19-live-freshness:
     name: G19 live temporal freshness probe
-    needs: g1-g32
+    needs: g1-g29-g32
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -162,7 +162,7 @@ jobs:
 
   g20-live-pdf:
     name: G20 live official PDF probe
-    needs: g1-g32
+    needs: g1-g29-g32
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -185,7 +185,7 @@ jobs:
 
   g22-live-sn:
     name: G22 live SN case-law probe
-    needs: g1-g32
+    needs: g1-g29-g32
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -208,7 +208,7 @@ jobs:
 
   g17-live-source:
     name: G17 live official-source probe
-    needs: g1-g32
+    needs: g1-g29-g32
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -231,7 +231,7 @@ jobs:
 
   g14-g28a-web:
     name: G14-G28A local web UI
-    needs: g1-g32
+    needs: g1-g29-g32
     runs-on: ubuntu-latest
     defaults:
       run:
