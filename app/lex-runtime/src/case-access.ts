@@ -135,6 +135,12 @@ export type CaseAccessView = {
 };
 
 export class LocalCaseAccessService {
+  private readonly caseOperationTails =
+    new Map<
+      string,
+      Promise<void>
+    >();
+
   constructor(
     private readonly store:
       LocalAuthStore,
@@ -1358,6 +1364,30 @@ export class LocalCaseAccessService {
       caseDataKey: Buffer
     ) => T | Promise<T>
   ): Promise<T> {
+    return await this
+      .withCaseOperationLock(
+        caseId,
+        async () =>
+          await this
+            .withCaseDataKeyUnlocked(
+              context,
+              caseId,
+              capability,
+              callback
+            )
+      );
+  }
+
+  private async withCaseDataKeyUnlocked<T>(
+    context:
+      AuthenticatedContext,
+    caseId: string,
+    capability:
+      CaseCapability,
+    callback: (
+      caseDataKey: Buffer
+    ) => T | Promise<T>
+  ): Promise<T> {
     const access =
       this.assertAccess(
         context,
@@ -1477,6 +1507,51 @@ export class LocalCaseAccessService {
           }
         }
       );
+  }
+
+  private async withCaseOperationLock<T>(
+    caseId: string,
+    operation:
+      () => Promise<T>
+  ): Promise<T> {
+    const previous =
+      this.caseOperationTails
+        .get(caseId) ??
+      Promise.resolve();
+
+    let release:
+      (() => void) | undefined;
+    const current =
+      new Promise<void>(
+        (resolve) => {
+          release = resolve;
+        }
+      );
+    const tail =
+      previous.then(
+        () => current,
+        () => current
+      );
+    this.caseOperationTails.set(
+      caseId,
+      tail
+    );
+
+    await previous.catch(
+      () => undefined
+    );
+    try {
+      return await operation();
+    } finally {
+      release?.();
+      if (
+        this.caseOperationTails
+          .get(caseId) === tail
+      ) {
+        this.caseOperationTails
+          .delete(caseId);
+      }
+    }
   }
 
   private assertAdmin(
