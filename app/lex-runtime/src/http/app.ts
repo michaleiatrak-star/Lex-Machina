@@ -335,13 +335,21 @@ function sanitizeModels(models: ModelDescriptor[]): ModelDescriptor[] {
 
 function parseDocumentAttachments(
   value: unknown
-): DocumentChunkSelection[] | null {
+): Array<
+  DocumentChunkSelection & {
+    caseId?: string;
+  }
+> | null {
   if (value === undefined) return [];
   if (!Array.isArray(value) || value.length > 4) {
     return null;
   }
 
-  const selections: DocumentChunkSelection[] = [];
+  const selections: Array<
+    DocumentChunkSelection & {
+      caseId?: string;
+    }
+  > = [];
   for (const item of value) {
     if (
       !item ||
@@ -351,6 +359,10 @@ function parseDocumentAttachments(
       return null;
     }
     const record = item as Record<string, unknown>;
+    const caseId =
+      typeof record.caseId === "string"
+        ? record.caseId.trim()
+        : "";
     const documentId =
       typeof record.documentId === "string"
         ? record.documentId.trim()
@@ -361,6 +373,10 @@ function parseDocumentAttachments(
         : null;
 
     if (
+      (
+        caseId &&
+        !/^case_[a-f0-9]{32}$/.test(caseId)
+      ) ||
       !/^doc_[a-f0-9]{24}$/.test(documentId) ||
       !chunkIndices ||
       chunkIndices.length < 1 ||
@@ -375,6 +391,9 @@ function parseDocumentAttachments(
     }
 
     selections.push({
+      ...(caseId
+        ? { caseId }
+        : {}),
       documentId,
       chunkIndices:
         [...new Set(
@@ -3026,6 +3045,11 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       const documentId =
         String(req.params.documentId ?? "")
           .trim();
+      const requestedCaseId =
+        typeof req.body?.caseId ===
+          "string"
+          ? req.body.caseId.trim()
+          : "";
       const directives =
         parsePrivacyDirectives(
           req.body?.directives
@@ -3033,6 +3057,12 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       if (
         !/^doc_[a-f0-9]{24}$/.test(
           documentId
+        ) ||
+        (
+          requestedCaseId &&
+          !/^case_[a-f0-9]{32}$/.test(
+            requestedCaseId
+          )
         ) ||
         directives === null
       ) {
@@ -3048,6 +3078,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           options.caseAccessService
         ) {
           const caseId =
+            requestedCaseId ||
             documentCaseIds.get(
               documentId
             );
@@ -3164,6 +3195,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             of attachments
           ) {
             const caseId =
+              selection.caseId ||
               documentCaseIds.get(
                 selection.documentId
               );
@@ -3179,13 +3211,53 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                 caseId,
                 "ANALYZE"
               );
+
+            if (
+              options
+                .documentService
+                .restoreDocument
+            ) {
+              const caseView =
+                options.caseAccessService
+                  .openCase(
+                    context,
+                    caseId
+                  );
+              await options
+                .caseAccessService
+                .withCaseDataKey(
+                  context,
+                  caseId,
+                  "ANALYZE",
+                  async (
+                    caseDataKey
+                  ) =>
+                    await options
+                      .documentService!
+                      .restoreDocument!({
+                        caseId,
+                        documentId:
+                          selection
+                            .documentId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      })
+                );
+            }
           }
         }
 
         const resolved = await Promise.all(
           attachments.map((selection) =>
             options.documentService!
-              .resolveProtectedChunks(selection)
+              .resolveProtectedChunks({
+                documentId:
+                  selection.documentId,
+                chunkIndices:
+                  selection.chunkIndices
+              })
           )
         );
         request.documentAttachments =
