@@ -45,6 +45,10 @@ const acceptance =
   read(
     "app/installer/windows-installer-acceptance.ps1"
   );
+const bootstrap =
+  read(
+    "app/installer/windows-online-bootstrap.ps1"
+  );
 const componentLock =
   read(
     "app/installer/generate-component-lock.ps1"
@@ -86,6 +90,19 @@ const checks = {
     ) &&
     componentLock.includes(
       "runtimeNetworkRequiredAfterBootstrap = $false"
+    ),
+  bundledVisualCppFallback:
+    build.includes(
+      'Copy-Item $vcRedist (Join-Path $prerequisites "vc_redist.x64.exe")'
+    ) &&
+    bootstrap.includes(
+      'Join-Path $runtime "prerequisites\\vc_redist.x64.exe"'
+    ) &&
+    bootstrap.includes(
+      "Using verified bundled visual-cpp-runtime"
+    ) &&
+    bootstrap.includes(
+      "BOOTSTRAP_HASH_MISMATCH:visual-cpp-runtime-bundled"
     ),
   installedCopyAcceptance:
     workflow.includes(
