@@ -95,3 +95,26 @@ export const DEFAULT_AUTH_KDF:
     keyLength: 32,
     version: 1
   };
+
+
+export type StoredRecoveryEnvelope = {
+  userId: string;
+  algorithm: "HKDF-SHA256-AES-256-GCM";
+  salt: Buffer;
+  nonce: Buffer;
+  ciphertext: Buffer;
+  tag: Buffer;
+  keyVersion: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type RecoveryCodeResult = {
+  recoveryCode: string;
+  createdAt: string;
+};
+
+export type AuthRecoverySuccess =
+  AuthSuccess & {
+    recoveryCode: string;
+  };
