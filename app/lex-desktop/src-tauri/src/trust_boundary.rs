@@ -17,6 +17,7 @@ const MAX_REQUEST_BYTES: usize = 160 * 1024 * 1024;
 const MAX_RESPONSE_BYTES: usize = 192 * 1024 * 1024;
 const MANAGED_LOGIN: &str = "local-admin";
 const MANAGED_KEYRING_SERVICE: &str = "LexMachina/Desktop";
+const PROVIDER_KEYRING_SERVICE: &str = "LexMachina/ProviderCredential";
 const NATIVE_LOGIN_SENTINEL: &str = "__LEX_NATIVE_LOGIN__";
 const NATIVE_REAUTH_SENTINEL: &str = "__LEX_NATIVE_REAUTH__";
 
@@ -221,7 +222,83 @@ impl RuntimeBridge {
         if let Some(secret) = password {
             self.replace_managed_password(secret);
         }
+        self.restore_provider_credentials()?;
         Ok(true)
+    }
+
+    fn restore_provider_credentials(&self) -> Result<(), String> {
+        for provider in ["openai", "anthropic", "xai"] {
+            let entry = Entry::new(
+                PROVIDER_KEYRING_SERVICE,
+                provider,
+            )
+            .map_err(|error| format!(
+                "DESKTOP_PROVIDER_KEYRING_OPEN_FAILED:{error}"
+            ))?;
+            let api_key = match entry.get_password() {
+                Ok(value) => value,
+                Err(KeyringError::NoEntry) => continue,
+                Err(error) => {
+                    return Err(format!(
+                        "DESKTOP_PROVIDER_KEYRING_READ_FAILED:{error}"
+                    ));
+                }
+            };
+
+            let response = self.internal_json_request(
+                "PUT",
+                &format!(
+                    "/api/admin/providers/{provider}/credential"
+                ),
+                Some(json!({
+                    "apiKey": api_key
+                })),
+            )?;
+            if !response.status().is_success() {
+                return Err(format!(
+                    "DESKTOP_PROVIDER_RESTORE_FAILED:{provider}:{}",
+                    response.status()
+                ));
+            }
+        }
+        Ok(())
+    }
+
+    fn persist_provider_credential(
+        &self,
+        provider: &str,
+        api_key: &str,
+    ) -> Result<(), String> {
+        Entry::new(
+            PROVIDER_KEYRING_SERVICE,
+            provider,
+        )
+        .map_err(|error| format!(
+            "DESKTOP_PROVIDER_KEYRING_OPEN_FAILED:{error}"
+        ))?
+        .set_password(api_key)
+        .map_err(|error| format!(
+            "DESKTOP_PROVIDER_KEYRING_WRITE_FAILED:{error}"
+        ))
+    }
+
+    fn delete_provider_credential(
+        &self,
+        provider: &str,
+    ) -> Result<(), String> {
+        let entry = Entry::new(
+            PROVIDER_KEYRING_SERVICE,
+            provider,
+        )
+        .map_err(|error| format!(
+            "DESKTOP_PROVIDER_KEYRING_OPEN_FAILED:{error}"
+        ))?;
+        match entry.delete_credential() {
+            Ok(()) | Err(KeyringError::NoEntry) => Ok(()),
+            Err(error) => Err(format!(
+                "DESKTOP_PROVIDER_KEYRING_DELETE_FAILED:{error}"
+            )),
+        }
     }
 
     fn internal_json_request(
@@ -273,6 +350,13 @@ impl RuntimeBridge {
 
     fn proxy(&self, mut request: Request<Vec<u8>>) -> Result<Response<Vec<u8>>, String> {
         let path = request.uri().path().to_string();
+        let method = request.method().as_str().to_string();
+        let provider_credential_input =
+            provider_credential_from_request(
+                &method,
+                &path,
+                request.body(),
+            )?;
         let (address, bootstrap_token, session_token, managed_password) = {
             let state = self
                 .state
@@ -329,6 +413,29 @@ impl RuntimeBridge {
             self.clear_session();
         }
 
+        if status.is_success() {
+            if let Some((provider, operation)) =
+                provider_credential_input
+            {
+                match operation {
+                    ProviderCredentialOperation::Set(mut api_key) => {
+                        let result =
+                            self.persist_provider_credential(
+                                &provider,
+                                &api_key,
+                            );
+                        unsafe_zero_string(&mut api_key);
+                        result?;
+                    }
+                    ProviderCredentialOperation::Delete => {
+                        self.delete_provider_credential(
+                            &provider
+                        )?;
+                    }
+                }
+            }
+        }
+
         Ok(build_response(proxied))
     }
 
@@ -383,6 +490,70 @@ impl Drop for RuntimeBridge {
             }
         }
     }
+}
+
+enum ProviderCredentialOperation {
+    Set(String),
+    Delete,
+}
+
+fn provider_credential_from_request(
+    method: &str,
+    path: &str,
+    body: &[u8],
+) -> Result<Option<(String, ProviderCredentialOperation)>, String> {
+    let prefix = "/api/admin/providers/";
+    let suffix = "/credential";
+    if !path.starts_with(prefix)
+        || !path.ends_with(suffix)
+    {
+        return Ok(None);
+    }
+    let provider = &path[
+        prefix.len()..
+        path.len() - suffix.len()
+    ];
+    if !matches!(
+        provider,
+        "openai" | "anthropic" | "xai"
+    ) {
+        return Err(
+            "DESKTOP_PROVIDER_INVALID".to_string()
+        );
+    }
+
+    if method == "DELETE" {
+        return Ok(Some((
+            provider.to_string(),
+            ProviderCredentialOperation::Delete,
+        )));
+    }
+    if method != "PUT" {
+        return Ok(None);
+    }
+
+    let value: Value = serde_json::from_slice(body)
+        .map_err(|_|
+            "DESKTOP_PROVIDER_CREDENTIAL_REQUEST_INVALID"
+                .to_string()
+        )?;
+    let api_key = value
+        .get("apiKey")
+        .and_then(Value::as_str)
+        .filter(|value| {
+            !value.trim().is_empty()
+                && value.len() <= 16_384
+        })
+        .ok_or_else(||
+            "DESKTOP_PROVIDER_CREDENTIAL_REQUEST_INVALID"
+                .to_string()
+        )?
+        .to_string();
+
+    Ok(Some((
+        provider.to_string(),
+        ProviderCredentialOperation::Set(api_key),
+    )))
 }
 
 fn random_secret() -> Result<String, String> {
