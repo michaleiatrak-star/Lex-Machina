@@ -416,6 +416,82 @@ function parseDocumentAttachments(
   return selections;
 }
 
+type SessionKnowledgeRequest = {
+  caseId?: string;
+  includeCase: boolean;
+  includeFirm: boolean;
+  limit: number;
+};
+
+function parseSessionKnowledgeRequest(
+  value: unknown
+): SessionKnowledgeRequest | null {
+  if (value === undefined) {
+    return {
+      includeCase: false,
+      includeFirm: false,
+      limit: 8
+    };
+  }
+  if (
+    !value ||
+    typeof value !== "object" ||
+    Array.isArray(value)
+  ) {
+    return null;
+  }
+
+  const record =
+    value as
+      Record<string, unknown>;
+  const caseId =
+    typeof record.caseId ===
+      "string"
+      ? record.caseId.trim()
+      : undefined;
+  const includeCase =
+    record.includeCase ===
+      true;
+  const includeFirm =
+    record.includeFirm ===
+      true;
+  const limit =
+    record.limit ===
+      undefined
+      ? 8
+      : Number(
+          record.limit
+        );
+
+  if (
+    (
+      caseId !== undefined &&
+      !/^case_[a-f0-9]{32}$/
+        .test(caseId)
+    ) ||
+    (
+      includeCase &&
+      !caseId
+    ) ||
+    !Number.isInteger(
+      limit
+    ) ||
+    limit < 1 ||
+    limit > 12
+  ) {
+    return null;
+  }
+
+  return {
+    ...(caseId
+      ? { caseId }
+      : {}),
+    includeCase,
+    includeFirm,
+    limit
+  };
+}
+
 function parseSessionRequest(
   body: unknown
 ): SessionExecutionRequest | null {
