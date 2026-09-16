@@ -1,4 +1,5 @@
 import { spawn } from "node:child_process";
+import type { Dirent } from "node:fs";
 import {
   access,
   mkdir,
@@ -324,8 +325,7 @@ export class LocalCaseFileStore {
       this.rootDir,
       "cases"
     );
-    let entries:
-      Awaited<ReturnType<typeof readdir>>;
+    let entries: Dirent[];
     try {
       entries = await readdir(
         base,
