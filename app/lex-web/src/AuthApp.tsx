@@ -17,6 +17,7 @@ import {
   lockAuth,
   login,
   logoutAuth,
+  isDesktopShell,
   setAuthenticationFailureHandler,
   type AuthMeResponse
 } from "./api.js";
@@ -60,6 +61,11 @@ function AuthPanel({
     useState<string | undefined>();
   const [submitting, setSubmitting] =
     useState(false);
+  const nativeUnlock =
+    isDesktopShell() &&
+    phase !== "bootstrap" &&
+    lastUser?.loginName ===
+      "local-admin";
 
   const retryLabel = useMemo(() => {
     if (!retryAfter) return "";
@@ -78,7 +84,10 @@ function AuthPanel({
   async function submit(): Promise<void> {
     if (
       !loginName.trim() ||
-      !password ||
+      (
+        !nativeUnlock &&
+        !password
+      ) ||
       (
         phase === "bootstrap" &&
         !displayName.trim()
@@ -101,7 +110,10 @@ function AuthPanel({
             })
           : await login({
               loginName,
-              password
+              password:
+                nativeUnlock
+                  ? "__LEX_NATIVE_LOGIN__"
+                  : password
             });
 
       setPassword("");
@@ -198,29 +210,35 @@ function AuthPanel({
           />
         </label>
 
-        <label>
-          Hasło
-          <input
-            type="password"
-            value={password}
-            autoComplete={
-              phase === "bootstrap"
-                ? "new-password"
-                : "current-password"
-            }
-            maxLength={128}
-            onChange={(event) =>
-              setPassword(
-                event.target.value
-              )
-            }
-            onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                void submit();
+        {nativeUnlock ? (
+          <p className="auth-copy">
+            To konto jest chronione przez magazyn poświadczeń Windows. Odblokowanie nie wymaga wpisywania hasła aplikacji.
+          </p>
+        ) : (
+          <label>
+            Hasło
+            <input
+              type="password"
+              value={password}
+              autoComplete={
+                phase === "bootstrap"
+                  ? "new-password"
+                  : "current-password"
               }
-            }}
-          />
-        </label>
+              maxLength={128}
+              onChange={(event) =>
+                setPassword(
+                  event.target.value
+                )
+              }
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  void submit();
+                }
+              }}
+            />
+          </label>
+        )}
 
         {error && (
           <div className="alert alert-error auth-alert">
@@ -237,7 +255,10 @@ function AuthPanel({
           disabled={
             submitting ||
             !loginName.trim() ||
-            !password ||
+            (
+              !nativeUnlock &&
+              !password
+            ) ||
             (
               phase === "bootstrap" &&
               !displayName.trim()
@@ -305,23 +326,52 @@ export default function AuthenticatedApp() {
   useEffect(() => {
     let cancelled = false;
 
-    Promise.all([
-      getHealth(),
-      getAuthStatus()
-    ])
-      .then(([, status]) => {
-        if (cancelled) return;
-        setPhase(
-          status.requiresBootstrap
-            ? "bootstrap"
-            : "login"
-        );
-      })
-      .catch(() => {
-        if (!cancelled) {
-          setPhase("login");
+    const initialize =
+      async () => {
+        try {
+          const [, status] =
+            await Promise.all([
+              getHealth(),
+              getAuthStatus()
+            ]);
+          if (cancelled) {
+            return;
+          }
+
+          if (isDesktopShell()) {
+            try {
+              const current =
+                await getAuthMe();
+              if (cancelled) {
+                return;
+              }
+              setAuth(current);
+              setLastUser(
+                current.user
+              );
+              setNow(Date.now());
+              setPhase(
+                "authenticated"
+              );
+              return;
+            } catch {
+              // Native managed identity can fall back to manual multi-user login.
+            }
+          }
+
+          setPhase(
+            status.requiresBootstrap
+              ? "bootstrap"
+              : "login"
+          );
+        } catch {
+          if (!cancelled) {
+            setPhase("login");
+          }
         }
-      });
+      };
+
+    void initialize();
 
     return () => {
       cancelled = true;
