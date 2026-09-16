@@ -828,6 +828,7 @@ export class SecureCaseUploadStore {
     data: Uint8Array;
     caseDataKey: Buffer;
     keyVersion: number;
+    uploadId?: string;
   }): Promise<StoredUpload> {
     await this
       .assertCaseKeyVersion(
@@ -836,18 +837,46 @@ export class SecureCaseUploadStore {
       );
 
     const uploadId =
-      "upload_" +
-      randomBytes(16)
-        .toString("hex");
+      args.uploadId ??
+      (
+        "upload_" +
+        randomBytes(16)
+          .toString("hex")
+      );
+    if (
+      !validUploadId(
+        uploadId
+      )
+    ) {
+      throw new Error(
+        "INVALID_UPLOAD_ID"
+      );
+    }
     const dir =
       this.uploadDir(
         args.caseId,
         uploadId
       );
+    try {
+      await access(dir);
+      throw new Error(
+        "SECURE_UPLOAD_ALREADY_EXISTS"
+      );
+    } catch (error) {
+      if (
+        !(
+          error instanceof Error &&
+          "code" in error &&
+          error.code === "ENOENT"
+        )
+      ) {
+        throw error;
+      }
+    }
     await mkdir(
       dir,
       {
-        recursive: true,
+        recursive: false,
         mode: 0o700
       }
     );
