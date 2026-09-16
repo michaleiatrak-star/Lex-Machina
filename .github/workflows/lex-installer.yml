@@ -65,6 +65,74 @@ jobs:
         shell: pwsh
         run: ./app/installer/build-windows-offline.ps1
 
+      - name: Prepare large-installer NSISBI toolchain
+        shell: pwsh
+        run: |
+          $nsisRoot = Join-Path $env:LOCALAPPDATA "tauri\NSIS"
+          $archive = Join-Path $env:RUNNER_TEMP "nsisbi-electronbuilder-3.10.3.7z"
+          $extractRoot = Join-Path $env:RUNNER_TEMP "nsisbi-3.10.3"
+          $url = "https://github.com/SoundSafari/NSISBI-ElectronBuilder/releases/download/1.0.0/nsisbi-electronbuilder-3.10.3.7z"
+          $expectedSha512 = "WRmZUsACjIc2s7bvsFGFRofK31hfS7riPlcfI1V9uFB2Q8s7tidgI/9U16+X0I9X2ZhNxi8N7Z3gKvm6ojvLvg=="
+
+          Invoke-WebRequest -Uri $url -OutFile $archive
+          $sha512 = [Security.Cryptography.SHA512]::Create()
+          try {
+            $actualSha512 = [Convert]::ToBase64String(
+              $sha512.ComputeHash([IO.File]::ReadAllBytes($archive))
+            )
+          } finally {
+            $sha512.Dispose()
+          }
+          if ($actualSha512 -ne $expectedSha512) {
+            throw "NSISBI_SHA512_MISMATCH:$actualSha512"
+          }
+
+          Remove-Item $extractRoot -Recurse -Force -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Force -Path $extractRoot | Out-Null
+          $sevenZip = (Get-Command 7z.exe -ErrorAction Stop).Source
+          & $sevenZip x $archive "-o$extractRoot" -y | Out-Host
+          if ($LASTEXITCODE -ne 0) { throw "NSISBI_EXTRACT_FAILED:$LASTEXITCODE" }
+
+          $toolRoot = Get-ChildItem $extractRoot -Directory |
+            Where-Object { Test-Path (Join-Path $_.FullName "makensis.exe") } |
+            Select-Object -First 1
+          if (-not $toolRoot) {
+            if (Test-Path (Join-Path $extractRoot "makensis.exe")) {
+              $toolRoot = Get-Item $extractRoot
+            } else {
+              throw "NSISBI_TOOL_ROOT_NOT_FOUND"
+            }
+          }
+
+          Remove-Item $nsisRoot -Recurse -Force -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Force -Path $nsisRoot | Out-Null
+          Copy-Item (Join-Path $toolRoot.FullName "*") $nsisRoot -Recurse -Force
+
+          $pluginDir = Join-Path $nsisRoot "Plugins\x86-unicode\additional"
+          New-Item -ItemType Directory -Force -Path $pluginDir | Out-Null
+          $plugin = Join-Path $pluginDir "nsis_tauri_utils.dll"
+          Invoke-WebRequest -Uri "https://github.com/tauri-apps/nsis-tauri-utils/releases/download/nsis_tauri_utils-v0.5.3/nsis_tauri_utils.dll" -OutFile $plugin
+          $pluginSha1 = (Get-FileHash -Algorithm SHA1 -LiteralPath $plugin).Hash.ToUpperInvariant()
+          if ($pluginSha1 -ne "75197FEE3C6A814FE035788D1C34EAD39349B860") {
+            throw "NSIS_TAURI_UTILS_SHA1_MISMATCH:$pluginSha1"
+          }
+
+          foreach ($required in @(
+            "makensis.exe",
+            "Bin\makensis.exe",
+            "Stubs\lzma-x86-unicode",
+            "Stubs\lzma_solid-x86-unicode",
+            "Include\MUI2.nsh",
+            "Plugins\x86-unicode\additional\nsis_tauri_utils.dll"
+          )) {
+            if (-not (Test-Path -LiteralPath (Join-Path $nsisRoot $required) -PathType Leaf)) {
+              throw "NSISBI_REQUIRED_FILE_MISSING:$required"
+            }
+          }
+
+          & (Join-Path $nsisRoot "makensis.exe") /VERSION | Out-Host
+          if ($LASTEXITCODE -ne 0) { throw "NSISBI_VERSION_PROBE_FAILED" }
+
       - name: Build NSIS full offline installer
         working-directory: app/lex-desktop
         run: npx tauri build --bundles nsis
