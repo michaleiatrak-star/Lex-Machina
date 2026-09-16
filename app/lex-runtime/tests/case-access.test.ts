@@ -539,6 +539,19 @@ describe("G34C/G34D case access", () => {
       "CASE_ACCESS_DENIED"
     );
 
+    expect(
+      current.cases
+        .listCases(
+          colleagueContext
+        )
+        .map(
+          (item) =>
+            item.caseId
+        )
+    ).not.toContain(
+      localCase.caseId
+    );
+
     const ownerAfter =
       current.cases.openCase(
         ownerContext,
