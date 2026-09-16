@@ -6,6 +6,7 @@ import {
   readFile,
   readdir,
   rm,
+  rmdir,
   stat
 } from "node:fs/promises";
 import type {
@@ -562,10 +563,7 @@ export class LegacyCaseStorageMigrator {
         );
       if (entries.length === 0) {
         try {
-          await rm(directory, {
-            recursive: false,
-            force: true
-          });
+          await rmdir(directory);
           removedLegacyDirectories.push(
             name
           );
