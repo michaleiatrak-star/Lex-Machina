@@ -1601,6 +1601,141 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     }
   );
 
+  app.post(
+    "/api/cases/:caseId/knowledge/search",
+    async (req, res) => {
+      if (
+        !options.caseAccessService ||
+        !options.caseKnowledgeSearch
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_KNOWLEDGE_UNAVAILABLE"
+        });
+        return;
+      }
+
+      const caseId =
+        String(
+          req.params.caseId ?? ""
+        ).trim();
+      const query =
+        typeof req.body?.query ===
+          "string"
+          ? req.body.query.trim()
+          : "";
+      const limit =
+        req.body?.limit ===
+          undefined
+          ? 8
+          : Number(
+              req.body.limit
+            );
+
+      if (
+        !/^case_[a-f0-9]{32}$/
+          .test(caseId) ||
+        query.length < 2 ||
+        query.length > 500 ||
+        !Number.isInteger(
+          limit
+        ) ||
+        limit < 1 ||
+        limit > 16
+      ) {
+        res.status(400).json({
+          error:
+            "INVALID_KNOWLEDGE_QUERY"
+        });
+        return;
+      }
+
+      try {
+        const context =
+          responseAuthContext(
+            res
+          );
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              context,
+              caseId
+            );
+        const hits =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              context,
+              caseId,
+              "READ",
+              async (
+                caseDataKey
+              ) =>
+                await options
+                  .caseKnowledgeSearch!
+                  .search({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView
+                        .keyVersion,
+                    query,
+                    limit
+                  })
+            );
+        res.json({
+          caseId,
+          caseKind:
+            caseView.caseKind,
+          hits: hits.map(
+            (hit) => ({
+              documentId:
+                hit.documentId,
+              chunkIndex:
+                hit.chunkIndex,
+              pageStart:
+                hit.pageStart,
+              pageEnd:
+                hit.pageEnd,
+              score:
+                hit.score,
+              text:
+                hit.text
+            })
+          )
+        });
+      } catch (error) {
+        if (
+          sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          return;
+        }
+        if (
+          error instanceof Error &&
+          [
+            "INVALID_KNOWLEDGE_QUERY",
+            "INVALID_KNOWLEDGE_LIMIT"
+          ].includes(
+            error.message
+          )
+        ) {
+          res.status(400).json({
+            error:
+              error.message
+          });
+          return;
+        }
+        res.status(422).json({
+          error:
+            "CASE_KNOWLEDGE_SEARCH_FAILED"
+        });
+      }
+    }
+  );
+
   app.get(
     "/api/cases/:caseId/access-candidates",
     (req, res) => {
