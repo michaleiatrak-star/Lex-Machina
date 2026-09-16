@@ -38,7 +38,6 @@ const required = [
   "Archiwum zapisane i rozpakowane lokalnie",
   "Akta sprawy, OCR i ręczna anonimizacja",
   "Konfiguracja API",
-  "OCR zdjęć i ręczna anonimizacja",
   "Anonimizuj / pseudonimizuj",
   "Pozostaw bez anonimizacji",
   "Oznacz, co ten fragment znaczy",
