@@ -47,6 +47,59 @@ export type AuthMeResponse = {
   session: AuthSessionInfo;
 };
 
+export type SupportCapability =
+  | "DIAGNOSTICS"
+  | "ACCOUNT_READ"
+  | "UPDATE_READ";
+
+export type SupportSessionInfo = {
+  sessionId: string;
+  role: "SERVICE";
+  installationId: string;
+  capabilities: SupportCapability[];
+  ticket: string;
+  approvedByUserId: string;
+  activatedAt: string;
+  expiresAt: string;
+};
+
+export type SupportStatusResponse = {
+  installationId: string;
+  roleModel:
+    ["SERVICE", "ADMIN", "USER"];
+  configured: boolean;
+  nativeIdentityReady: boolean;
+  vendorKeyId?: string;
+  activeSessions: number;
+};
+
+export type SupportChallengeResponse = {
+  installationId: string;
+  challengePublicKey: string;
+  nonce: string;
+  issuedAt: string;
+  expiresAt: string;
+  challengeSignature: string;
+  challengeProofAlgorithm?: "Ed25519";
+};
+
+export type SignedSupportEntitlement = {
+  keyId: string;
+  entitlement: {
+    version: 1;
+    installationId: string;
+    challengePublicKey: string;
+    nonce: string;
+    challengeSignature: string;
+    capabilities:
+      SupportCapability[];
+    issuedAt: string;
+    expiresAt: string;
+    ticket: string;
+  };
+  signature: string;
+};
+
 export type RecoveryCodeResponse = {
   recoveryCode: string;
   createdAt: string;
@@ -714,6 +767,104 @@ export async function login(input: {
     result.sessionToken
   );
   return result;
+}
+
+export function getSupportStatus():
+  Promise<SupportStatusResponse> {
+  return json<SupportStatusResponse>(
+    "/api/admin/support/status"
+  );
+}
+
+export function issueSupportChallenge():
+  Promise<SupportChallengeResponse> {
+  return json<SupportChallengeResponse>(
+    "/api/admin/support/challenge",
+    {
+      method: "POST"
+    }
+  );
+}
+
+export function activateSupport(
+  input: SignedSupportEntitlement
+): Promise<{
+  session: SupportSessionInfo;
+  serviceToken?: string;
+}> {
+  return json<{
+    session: SupportSessionInfo;
+    serviceToken?: string;
+  }>(
+    "/api/admin/support/activate",
+    {
+      method: "POST",
+      body: JSON.stringify(input)
+    }
+  );
+}
+
+export function getSupportSession():
+  Promise<{
+    session: SupportSessionInfo;
+  }> {
+  return json<{
+    session: SupportSessionInfo;
+  }>(
+    "/api/support/me",
+    undefined,
+    {
+      authenticated: false
+    }
+  );
+}
+
+export function getSupportDiagnostics():
+  Promise<{
+    service: string;
+    localOnly: true;
+    role: "SERVICE";
+    installationId: string;
+    expiresAt: string;
+  }> {
+  return json(
+    "/api/support/diagnostics",
+    undefined,
+    {
+      authenticated: false
+    }
+  );
+}
+
+export async function deactivateSupport():
+  Promise<void> {
+  const response = await fetch(
+    `${apiBase()}/api/support/logout`,
+    {
+      method: "POST",
+      headers: {
+        Accept:
+          "application/json"
+      }
+    }
+  );
+  if (!response.ok) {
+    let code =
+      `HTTP_${response.status}`;
+    try {
+      const payload =
+        await response.json() as
+          ApiFailure;
+      code =
+        payload.error || code;
+    } catch {
+      // Preserve generic HTTP code.
+    }
+    throw new ApiError(
+      code,
+      response.status
+    );
+  }
 }
 
 export function listAdminUsers():
