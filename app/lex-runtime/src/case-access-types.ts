@@ -1,6 +1,10 @@
 import type {
   CaseRole
 } from "./auth/types.js";
+
+export type CaseKind =
+  | "MATTER"
+  | "FIRM_KNOWLEDGE";
 import type {
   CaseKeyEnvelope
 } from "./case-crypto.js";
@@ -23,6 +27,7 @@ export type StoredCaseRecord = {
   createdAt: string;
   updatedAt: string;
   keyVersion: number;
+  caseKind: CaseKind;
   displayName?: string;
   archivedAt?: string;
 };
