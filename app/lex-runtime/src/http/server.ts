@@ -108,6 +108,9 @@ export async function startLocalServer(options?: {
       privacyVaultStore,
       secureCaseUploadStore
     );
+  await secureCaseUploadStore
+    .cleanupOrphanedWorkdirs();
+
   const authService =
     new LocalAuthService(
       authStore
@@ -136,6 +139,7 @@ export async function startLocalServer(options?: {
     modelCatalog: new DynamicModelCatalog(credentials),
     credentialResolver: credentials,
     caseFileStore,
+    secureCaseUploadStore,
     sharedTemplateStore,
     authService,
     caseAccessService,
