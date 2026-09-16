@@ -115,7 +115,7 @@ print("PYTHON_PACKAGE_SET_PASS")
 '@
 & $pythonExe -c $packageCheck $expectedPackagesJson | Out-Host
 if ($LASTEXITCODE -ne 0) {
-  & $pythonExe -m pip install --disable-pip-version-check --no-warn-script-location --upgrade-strategy only-if-needed -r $requirements
+  & $pythonExe -m pip install --quiet --disable-pip-version-check --no-warn-script-location --upgrade-strategy only-if-needed -r $requirements
   if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PACKAGES_FAILED" }
   & $pythonExe -c $packageCheck $expectedPackagesJson | Out-Host
   if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PACKAGE_VERSION_MISMATCH" }
@@ -148,15 +148,19 @@ if (-not $modelsReady) {
 }
 
 Write-Host "[5/6] System prerequisites"
-Set-RegView 64
 $vcInstalled = $false
+$vc = $manifest.systemPrerequisites.visualCppRuntime
 try {
-  $vcInstalled = (Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64" -Name Installed -ErrorAction Stop) -eq 1
+  $installedFlag = Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64" -Name Installed -ErrorAction Stop
+  $installedVersionText = (Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64" -Name Version -ErrorAction Stop).ToString().TrimStart("v")
+  $vcInstalled = (
+    $installedFlag -eq 1 -and
+    ([Version]$installedVersionText) -ge ([Version]$vc.version)
+  )
 } catch {
   $vcInstalled = $false
 }
 if (-not $vcInstalled) {
-  $vc = $manifest.systemPrerequisites.visualCppRuntime
   $vcInstaller = Join-Path $cache "vc_redist.x64-$($vc.version).exe"
   Get-VerifiedDownload $vc.url $vc.sha256 $vcInstaller "visual-cpp-runtime"
   $vcInstall = Start-Process -FilePath $vcInstaller -ArgumentList @(
