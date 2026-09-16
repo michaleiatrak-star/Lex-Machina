@@ -410,6 +410,19 @@ describe("G34C/G34D case access", () => {
       viewerCase.role
     ).toBe("VIEWER");
 
+    expect(
+      current.cases
+        .listCases(
+          colleagueContext
+        )
+        .map(
+          (item) =>
+            item.caseId
+        )
+    ).toContain(
+      localCase.caseId
+    );
+
     const viewerUploads =
       await current.cases
         .withCaseDataKey(
