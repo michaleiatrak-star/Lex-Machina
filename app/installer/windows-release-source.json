@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "target": "windows-x86_64",
+  "applicationVersion": "0.1.0",
+  "runtime": {
+    "node": {
+      "version": "24.21.0",
+      "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-win-x64.zip"
+    },
+    "python": {
+      "version": "3.13.14",
+      "url": "https://www.python.org/ftp/python/3.13.14/python-3.13.14-amd64.exe"
+    }
+  },
+  "pythonPackages": {
+    "paddleocr": "3.7.0",
+    "paddlepaddle": "3.3.1",
+    "PyMuPDF": "1.28.2",
+    "numpy": "2.5.3",
+    "Pillow": "12.3.0",
+    "stanza": "1.14.0",
+    "torch": "2.14.0"
+  },
+  "models": {
+    "paddle": [
+      "PP-LCNet_x1_0_doc_ori",
+      "UVDoc",
+      "PP-LCNet_x1_0_textline_ori",
+      "PP-OCRv6_medium_det",
+      "PP-OCRv6_medium_rec"
+    ],
+    "stanza": {
+      "language": "pl",
+      "processors": "tokenize,ner"
+    }
+  },
+  "systemPrerequisites": {
+    "webview2": {
+      "delivery": "TAURI_OFFLINE_INSTALLER"
+    }
+  },
+  "notes": {
+    "libreOffice": "Not a runtime prerequisite. DOCX/ODT generation and validation are implemented by the deterministic Lex renderer; LibreOffice remains optional release QA only.",
+    "networkAtInstall": "FORBIDDEN",
+    "networkAtFirstRunBeforeProviderUse": "FORBIDDEN"
+  }
+}
