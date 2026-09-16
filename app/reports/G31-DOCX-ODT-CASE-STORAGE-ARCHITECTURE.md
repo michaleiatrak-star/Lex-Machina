@@ -697,3 +697,29 @@ The UI should expose **Pobierz DOCX** / **Pobierz ODT** immediately after succes
 - immediate download.
 
 G31 should be reported PASS only when the implemented sub-gates required by the release scope are green.
+
+
+---
+
+## 22. Privacy persistence decision — file-backed local vault
+
+Decision added 2026-09-16:
+
+Full G31 will not rely on a RAM-only reversible map.
+
+Before G31D/G31E can PASS, each case must have an encrypted local privacy vault, as specified by G31C1 in `G33-INSTALLER-BOOTSTRAP-ARCHITECTURE.md`.
+
+Required semantics:
+- clear-value token map persisted only as authenticated ciphertext;
+- case data key protected by the current user's OS credential-protection facility;
+- no plaintext fallback;
+- atomic `.partial` → verified vault replacement;
+- restart must preserve reversible pseudonymization;
+- audit/public metadata contain token ids/counts only, never clear values.
+
+DOCX/ODT deanonymization is a file-to-file local transform:
+`tokenized package → final.partial → reopen/validate → atomic result.docx|result.odt`.
+
+The tokenized package is never modified in place. Clear-text OOXML/ODF directory trees are not persisted; whitelisted XML parts are transformed locally in memory while a new final package is written.
+
+No provider call is permitted after the local vault is unlocked for final deanonymization.
