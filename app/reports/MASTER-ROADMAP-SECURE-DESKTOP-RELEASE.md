@@ -1,6 +1,6 @@
 # Lex Machina — Master Roadmap to Secure Desktop Release
 
-Status: **PLANNED — execution not started**  
+Status: **IN EXECUTION — BATCH A/B COMPLETE; NEXT G31C1**  
 Date: 2026-09-16  
 Branch baseline: `feature/local-runtime`
 
@@ -20,25 +20,29 @@ Validated implementation baseline:
 - G31A — PASS
 - G31B — PASS
 - G32 — PASS
+- G34A — PASS
+- G34B — PASS
+- G34C — PASS
+- G34D — PASS
 
 Validated code SHA:
-- `56134cfa983e8ea88957e08ed46c6d8d3c5565c7`
+- `a41fd86dd550dc41c93705edc423516d05199d8c`
 
 Validated CI:
-- Lex Runtime Validation `35061645463` — success
-- F-138 `35061645590` — success
+- Lex Runtime Validation `35072926001` — success
+- F-138 `35072925987` — success
 
-Designs completed but not implemented:
+Designs completed but not yet implemented:
 - G31C1/G31C2
 - G31D/G31E
 - G33A-G33D
-- G34A-G34H
-- detailed G34B/G34F auth/session protocol
+- G34E-G34H
+- detailed G34F transaction reauthorization protocol
 
 Open independent capability:
 - G30 — Open Web Discovery
 
-Do not claim G31/G33/G34 PASS until implementation and tests are green.
+Do not claim full G31/G33/G34 PASS until their remaining implementation gates are green. G34A-G34D are validated sub-gates only.
 
 ---
 
@@ -1239,8 +1243,12 @@ Validated code SHA: `b3783309189a6d043fc077e52c736e16b64c10d5`
 Validation run: `35069444351`  
 F-138: `35069444331`
 
-### Batch B — Case authorization/key ownership — NEXT
+### Batch B — Case authorization/key ownership — COMPLETE / PASS
 P2
+
+Validated code SHA: `a41fd86dd550dc41c93705edc423516d05199d8c`  
+Validation run: `35072926001`  
+F-138: `35072925987`
 
 ### Batch C — Vault + recovery + reauthorization
 P3 + P4A
@@ -1279,25 +1287,24 @@ At the end of every batch:
 
 # 9. Immediate next implementation batch
 
-**Batch A / G34A-G34B is complete and validated.**
+**Batch A / G34A-G34B and Batch B / G34C-G34D are complete and validated.**
 
-Next: **Batch B / G34C-G34D — Case Authorization + Key Ownership**.
+Next: **Batch C — start with G31C1 Encrypted Persistent Privacy Vault**, then continue into **G34E/G34F Recovery + Transaction Reauthorization**.
 
 Execution order:
 
-1. define transactional case/ACL persistence migration;
-2. add explicit case ownership for newly-created cases;
-3. design explicit legacy-case ownership import rather than silently assigning old G31A cases;
-4. implement OWNER / EDITOR / ANALYST / VIEWER authorization;
-5. implement independent `canReidentify` capability;
-6. generate an independent random 256-bit Case Data Key (CDK) for each new case;
-7. derive authenticated per-user case-wrap keys from the user's UMK;
-8. persist only encrypted CDK envelopes, never plaintext CDK;
-9. add the user asymmetric-key foundation for granting a case to an offline/logged-out local user;
-10. enforce case ACL on every case/upload/document/attachment route;
-11. add authenticated case list/open APIs;
-12. stop auto-creating a new case merely because the workbench mounts once the explicit case selector is available;
-13. add deterministic G34C/G34D validators and adversarial authorization tests;
-14. run the full existing regression suite before beginning G31C1 vault implementation.
+1. define the LMV1 authenticated vault envelope and canonical payload;
+2. derive a dedicated privacy-vault key from the current case CDK using HKDF with a separate label;
+3. persist no clear token/value mapping;
+4. implement atomic `.partial → verify → rename` vault updates;
+5. enforce case ACL before every vault read/write;
+6. implement runtime restart round-trip using the current authenticated CDK envelope path;
+7. fail closed on wrong case AAD, wrong key version, modified tag, truncation and stale generation;
+8. integrate the existing pseudonymization service with the encrypted per-case vault;
+9. only after G31C1 is green, implement password/recovery lifecycle G34E;
+10. implement artifact/case-bound deanonymization intent and fresh password step-up G34F;
+11. issue one-use, short-lived reidentification grants and sensitive download tickets;
+12. prove session revoke/cancel removes partial sensitive outputs;
+13. run the full regression suite before beginning G34H encrypted raw-file migration.
 
-Do not begin persistent vault encryption until case identity, authorization and CDK ownership are green.
+Do not expose persistent deanonymization simply because `canReidentify` is true; G34F remains an independent mandatory step-up gate.
