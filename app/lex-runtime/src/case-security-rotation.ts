@@ -10,6 +10,9 @@ import type {
 import type {
   SecureCaseDocumentStore
 } from "./case-document-store.js";
+import type {
+  SecureCaseArtifactStore
+} from "./case-artifact-store.js";
 
 type RotationArgs =
   Parameters<
@@ -35,6 +38,11 @@ implements CaseKeyRotationParticipant {
       Pick<
         SecureCaseDocumentStore,
         "rekeyCaseDocuments"
+      >,
+    private readonly artifacts?:
+      Pick<
+        SecureCaseArtifactStore,
+        "rekeyCaseArtifacts"
       >
   ) {}
 
@@ -44,6 +52,7 @@ implements CaseKeyRotationParticipant {
     let vaultChanged = false;
     let uploadsChanged = false;
     let documentsChanged = false;
+    let artifactsChanged = false;
 
     const reverse = {
       caseId:
@@ -78,13 +87,32 @@ implements CaseKeyRotationParticipant {
               args
             );
       }
+      if (
+        this.artifacts
+      ) {
+        artifactsChanged =
+          await this.artifacts
+            .rekeyCaseArtifacts(
+              args
+            );
+      }
       return (
         vaultChanged ||
         uploadsChanged ||
-        documentsChanged
+        documentsChanged ||
+        artifactsChanged
       );
     } catch (error) {
       try {
+        if (
+          artifactsChanged &&
+          this.artifacts
+        ) {
+          await this.artifacts
+            .rekeyCaseArtifacts(
+              reverse
+            );
+        }
         if (
           documentsChanged &&
           this.documents
