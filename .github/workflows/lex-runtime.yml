@@ -229,6 +229,29 @@ jobs:
       - name: G34H5 — legacy plaintext migration/removal
         run: npm run validate:g34h5
 
+  g30a-live-case-law:
+    name: G30A live SAOS and CBOSA discovery probe
+    needs: g1-g29-g32
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: G30A — real SAOS and CBOSA discovery
+        run: npm run validate:g30a-live
+
   g19-live-freshness:
     name: G19 live temporal freshness probe
     needs: g1-g29-g32
