@@ -327,6 +327,27 @@ export class LocalAuthStore {
       INSERT OR IGNORE INTO auth_schema(version)
       VALUES (3);
     `);
+
+    const caseColumns =
+      this.db.prepare(
+        "PRAGMA table_info(cases)"
+      ).all() as
+        Record<string, unknown>[];
+    if (
+      !caseColumns.some(
+        (column) =>
+          column.name ===
+            "archived_at"
+      )
+    ) {
+      this.db.exec(
+        "ALTER TABLE cases " +
+        "ADD COLUMN archived_at TEXT"
+      );
+    }
+    this.db.prepare(
+      "INSERT OR IGNORE INTO auth_schema(version) VALUES (4)"
+    ).run();
   }
 
   close(): void {
@@ -1011,6 +1032,52 @@ export class LocalAuthStore {
     }
   }
 
+  updateCaseDisplayName(
+    caseId: string,
+    displayName: string | null,
+    updatedAt: string
+  ): void {
+    const result =
+      this.db.prepare(`
+        UPDATE cases
+        SET display_name = ?,
+            updated_at = ?
+        WHERE case_id = ?
+      `).run(
+        displayName,
+        updatedAt,
+        caseId
+      );
+    if (result.changes !== 1) {
+      throw new Error(
+        "CASE_RECORD_NOT_FOUND"
+      );
+    }
+  }
+
+  setCaseArchivedAt(
+    caseId: string,
+    archivedAt: string | null,
+    updatedAt: string
+  ): void {
+    const result =
+      this.db.prepare(`
+        UPDATE cases
+        SET archived_at = ?,
+            updated_at = ?
+        WHERE case_id = ?
+      `).run(
+        archivedAt,
+        updatedAt,
+        caseId
+      );
+    if (result.changes !== 1) {
+      throw new Error(
+        "CASE_RECORD_NOT_FOUND"
+      );
+    }
+  }
+
   deleteCaseRegistration(
     caseId: string
   ): void {
@@ -1226,6 +1293,10 @@ export class LocalAuthStore {
       optionalText(
         row.display_name
       );
+    const archivedAt =
+      optionalText(
+        row.archived_at
+      );
     return {
       caseId:
         textValue(
@@ -1254,6 +1325,9 @@ export class LocalAuthStore {
         ),
       ...(displayName
         ? { displayName }
+        : {}),
+      ...(archivedAt
+        ? { archivedAt }
         : {})
     };
   }
