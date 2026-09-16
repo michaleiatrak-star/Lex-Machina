@@ -48,6 +48,8 @@ const CBOSA_QUERY =
   "https://orzeczenia.nsa.gov.pl/cbo/query";
 const CBOSA_SEARCH =
   "https://orzeczenia.nsa.gov.pl/cbo/search";
+const CBOSA_SEARCH_GET =
+  "https://orzeczenia.nsa.gov.pl/cbo/search";
 
 const REQUEST_TIMEOUT_MS = 60_000;
 const MAX_RESULTS = 10;
@@ -788,6 +790,9 @@ export class CaseLawSearchService {
         }
       | undefined;
 
+    let warmupCookies:
+      string[] = [];
+
     try {
       const warmup =
         await fetchCbosa(
@@ -799,19 +804,15 @@ export class CaseLawSearchService {
           []
         );
 
-      if (!warmup.response.ok) {
-        return {
-          source: "CBOSA",
-          status:
-            "OUT_OF_SCOPE",
-          query,
-          candidates: [],
-          reason:
-            "CBOSA_PROBE_HTTP_" +
-            warmup.response.status
-        };
+      if (warmup.response.ok) {
+        warmupCookies =
+          warmup.cookies;
       }
+    } catch {
+      // Continue to the same-host search fallback below.
+    }
 
+    try {
       first =
         await fetchCbosa(
           this.fetcher,
@@ -829,18 +830,51 @@ export class CaseLawSearchService {
             body:
               form.toString()
           },
-          warmup.cookies
+          warmupCookies
         );
     } catch {
-      return {
-        source: "CBOSA",
-        status:
-          "OUT_OF_SCOPE",
-        query,
-        candidates: [],
-        reason:
-          "CBOSA_TRANSPORT_FAILED"
-      };
+      try {
+        const fallbackUrl =
+          new URL(
+            CBOSA_SEARCH_GET
+          );
+        for (
+          const [key, value]
+          of form.entries()
+        ) {
+          fallbackUrl
+            .searchParams
+            .set(
+              key,
+              value
+            );
+        }
+
+        first =
+          await fetchCbosa(
+            this.fetcher,
+            fallbackUrl.toString(),
+            {
+              method:
+                "GET",
+              headers: {
+                Referer:
+                  CBOSA_QUERY
+              }
+            },
+            warmupCookies
+          );
+      } catch {
+        return {
+          source: "CBOSA",
+          status:
+            "OUT_OF_SCOPE",
+          query,
+          candidates: [],
+          reason:
+            "CBOSA_TRANSPORT_FAILED"
+        };
+      }
     }
 
     if (!first.response.ok) {
