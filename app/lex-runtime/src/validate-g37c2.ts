@@ -35,6 +35,14 @@ const desktopLib =
   read(
     "app/lex-desktop/src-tauri/src/lib.rs"
   );
+const webApp =
+  read(
+    "app/lex-web/src/App.tsx"
+  );
+const webApiClient =
+  read(
+    "app/lex-web/src/api.ts"
+  );
 
 const checks = {
   osKeyringService:
@@ -64,6 +72,29 @@ const checks = {
     ) &&
     trust.includes(
       "self.persist_provider_credential("
+    ),
+  explicitPersistenceOptIn:
+    trust.includes(
+      'Some("OS_KEYRING") => true'
+    ) &&
+    trust.includes(
+      'Some("PROCESS_MEMORY") | None => false'
+    ) &&
+    webApiClient.includes(
+      '"PROCESS_MEMORY"'
+    ) &&
+    webApiClient.includes(
+      '"OS_KEYRING"'
+    ) &&
+    webApp.includes(
+      "Zapisz w systemowym magazynie"
+    ),
+  memoryOnlyRemovesStoredCredential:
+    trust.includes(
+      "if persist"
+    ) &&
+    trust.includes(
+      "self.delete_provider_credential("
     ),
   deleteFromOsKeyring:
     trust.includes(
