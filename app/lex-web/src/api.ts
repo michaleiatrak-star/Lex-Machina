@@ -1,5 +1,41 @@
 export type ProviderId = "openai" | "anthropic" | "xai";
 
+export type AuthStatusResponse = {
+  initialized: boolean;
+  requiresBootstrap: boolean;
+};
+
+export type AuthenticatedUser = {
+  userId: string;
+  loginName: string;
+  displayName: string;
+  appRole: "ADMIN" | "USER";
+  status: "ACTIVE" | "DISABLED";
+  createdAt: string;
+  lastLoginAt?: string;
+};
+
+export type AuthSessionInfo = {
+  sessionId: string;
+  userId: string;
+  createdAt: string;
+  lastActivityAt: string;
+  lastFullAuthenticationAt: string;
+  idleExpiresAt: string;
+  overallExpiresAt: string;
+};
+
+export type AuthSuccessResponse = {
+  user: AuthenticatedUser;
+  session: AuthSessionInfo;
+  sessionToken: string;
+};
+
+export type AuthMeResponse = {
+  user: AuthenticatedUser;
+  session: AuthSessionInfo;
+};
+
 export type PiiKind =
   | "PESEL"
   | "NIP"
@@ -218,9 +254,49 @@ export type ApiFailure = {
   error: string;
   provider?: ProviderId;
   reason?: string;
+  retryAfter?: string;
 };
 
+export class ApiError extends Error {
+  constructor(
+    readonly code: string,
+    readonly status: number,
+    readonly retryAfter?: string
+  ) {
+    super(code);
+    this.name = "ApiError";
+  }
+}
+
 const DEFAULT_API_BASE = "http://127.0.0.1:4317";
+
+let inMemorySessionToken: string | null = null;
+let authenticationFailureHandler:
+  (() => void) | null = null;
+
+export function setAuthenticationFailureHandler(
+  handler: (() => void) | null
+): void {
+  authenticationFailureHandler = handler;
+}
+
+export function clearAuthSession(): void {
+  inMemorySessionToken = null;
+}
+
+function setAuthSessionToken(token: string): void {
+  inMemorySessionToken = token;
+}
+
+function authorizationHeaders():
+  Record<string, string> {
+  return inMemorySessionToken
+    ? {
+        Authorization:
+          `Bearer ${inMemorySessionToken}`
+      }
+    : {};
+}
 
 export function apiBase(): string {
   const configured = import.meta.env.VITE_LEX_API_BASE;
@@ -231,27 +307,182 @@ export function apiBase(): string {
 
 async function json<T>(
   pathname: string,
-  init?: RequestInit
+  init?: RequestInit,
+  options?: {
+    authenticated?: boolean;
+  }
 ): Promise<T> {
-  const response = await fetch(`${apiBase()}${pathname}`, {
-    ...init,
-    headers: {
-      Accept: "application/json",
-      ...(init?.body ? { "Content-Type": "application/json" } : {}),
-      ...init?.headers
+  const authenticated =
+    options?.authenticated !== false;
+  const response = await fetch(
+    `${apiBase()}${pathname}`,
+    {
+      ...init,
+      headers: {
+        Accept: "application/json",
+        ...(init?.body
+          ? {
+              "Content-Type":
+                "application/json"
+            }
+          : {}),
+        ...(authenticated
+          ? authorizationHeaders()
+          : {}),
+        ...init?.headers
+      }
     }
-  });
+  );
 
-  const payload = await response.json() as T | ApiFailure;
+  const payload =
+    await response.json() as
+      | T
+      | ApiFailure;
   if (!response.ok) {
-    const failure = payload as ApiFailure;
-    throw new Error(failure.error || `HTTP_${response.status}`);
+    const failure =
+      payload as ApiFailure;
+    if (
+      authenticated &&
+      response.status === 401
+    ) {
+      clearAuthSession();
+      authenticationFailureHandler?.();
+    }
+    throw new ApiError(
+      failure.error ||
+        `HTTP_${response.status}`,
+      response.status,
+      failure.retryAfter
+    );
   }
   return payload as T;
 }
 
 export function getHealth(): Promise<HealthResponse> {
-  return json<HealthResponse>("/health");
+  return json<HealthResponse>(
+    "/health",
+    undefined,
+    { authenticated: false }
+  );
+}
+
+export function getAuthStatus():
+  Promise<AuthStatusResponse> {
+  return json<AuthStatusResponse>(
+    "/api/auth/status",
+    undefined,
+    { authenticated: false }
+  );
+}
+
+export async function bootstrapAdmin(input: {
+  loginName: string;
+  displayName: string;
+  password: string;
+}): Promise<AuthSuccessResponse> {
+  const result =
+    await json<AuthSuccessResponse>(
+      "/api/auth/bootstrap",
+      {
+        method: "POST",
+        body: JSON.stringify(input)
+      },
+      { authenticated: false }
+    );
+  setAuthSessionToken(
+    result.sessionToken
+  );
+  return result;
+}
+
+export async function login(input: {
+  loginName: string;
+  password: string;
+}): Promise<AuthSuccessResponse> {
+  const result =
+    await json<AuthSuccessResponse>(
+      "/api/auth/login",
+      {
+        method: "POST",
+        body: JSON.stringify(input)
+      },
+      { authenticated: false }
+    );
+  setAuthSessionToken(
+    result.sessionToken
+  );
+  return result;
+}
+
+export function getAuthMe():
+  Promise<AuthMeResponse> {
+  return json<AuthMeResponse>(
+    "/api/auth/me"
+  );
+}
+
+export async function lockAuth():
+  Promise<void> {
+  const response = await fetch(
+    `${apiBase()}/api/auth/lock`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        ...authorizationHeaders()
+      }
+    }
+  );
+  clearAuthSession();
+  if (
+    !response.ok &&
+    response.status !== 401
+  ) {
+    let code =
+      `HTTP_${response.status}`;
+    try {
+      const body =
+        await response.json() as
+          ApiFailure;
+      code = body.error || code;
+    } catch {
+      // no body
+    }
+    throw new ApiError(
+      code,
+      response.status
+    );
+  }
+}
+
+export async function logoutAuth():
+  Promise<void> {
+  const headers =
+    authorizationHeaders();
+  try {
+    const response = await fetch(
+      `${apiBase()}/api/auth/logout`,
+      {
+        method: "POST",
+        headers: {
+          Accept:
+            "application/json",
+          ...headers
+        }
+      }
+    );
+    if (
+      !response.ok &&
+      response.status !== 401
+    ) {
+      throw new ApiError(
+        `HTTP_${response.status}`,
+        response.status
+      );
+    }
+  } finally {
+    clearAuthSession();
+  }
 }
 
 export function createCase(
@@ -326,6 +557,7 @@ export async function uploadCaseFile(
       headers: {
         Accept: "application/json",
         "Content-Type": uploadMediaType(file),
+        ...authorizationHeaders(),
         "X-Lex-Filename":
           encodeURIComponent(file.name)
       },
@@ -356,6 +588,7 @@ export async function reviewDocument(
       headers: {
         Accept: "application/json",
         "Content-Type": uploadMediaType(file),
+        ...authorizationHeaders(),
         "X-Lex-Case-Id": caseId,
         "X-Lex-Filename":
           encodeURIComponent(file.name)
