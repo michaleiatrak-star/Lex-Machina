@@ -197,13 +197,19 @@ export type LexHttpAppOptions = {
   credentialResolver?: ProviderCredentialResolver;
   sessionExecutor?: SessionExecutor;
   documentService?: DocumentService;
-  caseFileStore?: Pick<
-    LocalCaseFileStore,
-    | "createCase"
-    | "saveUpload"
-    | "listUploads"
-    | "assertCase"
-  >;
+  caseFileStore?:
+    Pick<
+      LocalCaseFileStore,
+      | "createCase"
+      | "saveUpload"
+      | "assertCase"
+    > &
+    Partial<
+      Pick<
+        LocalCaseFileStore,
+        "listUploads"
+      >
+    >;
   authService?: AuthService;
   sharedTemplateStore?: Pick<
     LocalSharedTemplateStore,
@@ -1256,7 +1262,11 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
   app.get(
     "/api/cases/:caseId/files",
     async (req, res) => {
-      if (!options.caseFileStore) {
+      if (
+        !options.caseFileStore ||
+        !options.caseFileStore
+          .listUploads
+      ) {
         res.status(503).json({
           error:
             "CASE_STORAGE_UNAVAILABLE"
