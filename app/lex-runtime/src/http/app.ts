@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import express, {
   type Express,
   type NextFunction,
@@ -55,6 +56,10 @@ import type {
 import type {
   StoredUpload
 } from "../case-file-store.js";
+import {
+  assertStoredDocumentSignature,
+  storedDocumentMediaType
+} from "../stored-document-source.js";
 
 const PROVIDERS = new Set<ProviderId>([
   "openai",
@@ -220,6 +225,8 @@ export type LexHttpAppOptions = {
     SecureCaseUploadStore,
     | "saveUpload"
     | "listUploads"
+    | "readUploadPayload"
+    | "readExtractedPayload"
   >;
   authService?: AuthService;
   sharedTemplateStore?: Pick<
@@ -1682,6 +1689,321 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           });
         }
       }
+    }
+  );
+
+  async function processStoredCaseFile(
+    req: Request,
+    res: Response,
+    fileId?: string
+  ): Promise<void> {
+    if (
+      !options.documentService ||
+      !options.caseAccessService ||
+      !options.secureCaseUploadStore
+    ) {
+      res.status(503).json({
+        error:
+          "STORED_FILE_PROCESSING_UNAVAILABLE"
+      });
+      return;
+    }
+
+    const caseId =
+      String(
+        req.params.caseId ?? ""
+      ).trim();
+    const uploadId =
+      String(
+        req.params.uploadId ?? ""
+      ).trim();
+    const memberId =
+      fileId?.trim();
+
+    if (
+      !/^case_[a-f0-9]{32}$/
+        .test(caseId) ||
+      !/^upload_[a-f0-9]{32}$/
+        .test(uploadId) ||
+      (
+        memberId !== undefined &&
+        !/^file_[a-f0-9]{32}$/
+          .test(memberId)
+      )
+    ) {
+      res.status(400).json({
+        error:
+          "INVALID_STORED_FILE_REQUEST"
+      });
+      return;
+    }
+
+    try {
+      const context =
+        responseAuthContext(res);
+      options.caseAccessService
+        .assertAccess(
+          context,
+          caseId,
+          "WRITE"
+        );
+      const caseView =
+        options.caseAccessService
+          .openCase(
+            context,
+            caseId
+          );
+
+      const result =
+        await options
+          .caseAccessService
+          .withCaseDataKey(
+            context,
+            caseId,
+            "WRITE",
+            async (caseDataKey) => {
+              let data: Buffer;
+              let mediaType:
+                SupportedDocumentMediaType;
+              let sourceFileId:
+                string | undefined;
+
+              if (memberId) {
+                const restored =
+                  await options
+                    .secureCaseUploadStore!
+                    .readExtractedPayload({
+                      caseId,
+                      uploadId,
+                      fileId:
+                        memberId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion,
+                      maxBytes:
+                        512 *
+                        1024 *
+                        1024
+                    });
+                if (
+                  !restored
+                    .manifest
+                    .processable
+                ) {
+                  restored.data.fill(0);
+                  throw new Error(
+                    "STORED_FILE_NOT_PROCESSABLE"
+                  );
+                }
+                const resolved =
+                  storedDocumentMediaType(
+                    restored
+                      .manifest
+                      .mediaType
+                  );
+                if (!resolved) {
+                  restored.data.fill(0);
+                  throw new Error(
+                    "STORED_FILE_MEDIA_UNSUPPORTED"
+                  );
+                }
+                data =
+                  restored.data;
+                mediaType =
+                  resolved;
+                sourceFileId =
+                  restored
+                    .manifest
+                    .fileId;
+              } else {
+                const uploads =
+                  await options
+                    .secureCaseUploadStore!
+                    .listUploads({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                const upload =
+                  uploads.find(
+                    (item) =>
+                      item.uploadId ===
+                        uploadId
+                  );
+                if (!upload) {
+                  throw new Error(
+                    "STORED_UPLOAD_NOT_FOUND"
+                  );
+                }
+                if (upload.archive) {
+                  throw new Error(
+                    "STORED_ARCHIVE_MEMBER_REQUIRED"
+                  );
+                }
+                const resolved =
+                  storedDocumentMediaType(
+                    upload.mediaType
+                  );
+                if (!resolved) {
+                  throw new Error(
+                    "STORED_FILE_MEDIA_UNSUPPORTED"
+                  );
+                }
+                data =
+                  await options
+                    .secureCaseUploadStore!
+                    .readUploadPayload({
+                      caseId,
+                      uploadId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion,
+                      maxBytes:
+                        512 *
+                        1024 *
+                        1024
+                    });
+                const digest =
+                  createHash(
+                    "sha256"
+                  )
+                    .update(data)
+                    .digest("hex");
+                if (
+                  data.byteLength !==
+                    upload.bytes ||
+                  digest !==
+                    upload.sha256
+                ) {
+                  data.fill(0);
+                  throw new Error(
+                    "STORED_UPLOAD_INTEGRITY_FAILED"
+                  );
+                }
+                mediaType =
+                  resolved;
+              }
+
+              try {
+                assertStoredDocumentSignature(
+                  data,
+                  mediaType
+                );
+                return await options
+                  .documentService!
+                  .review(
+                    data,
+                    mediaType,
+                    {
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    }
+                  );
+              } finally {
+                data.fill(0);
+              }
+            }
+          );
+
+      documentCaseIds.set(
+        result.documentId,
+        caseId
+      );
+      res.status(201).json({
+        ...result,
+        caseId,
+        uploadId,
+        ...(memberId
+          ? {
+              fileId:
+                memberId
+            }
+          : {})
+      });
+    } catch (error) {
+      if (
+        sendCaseAccessError(
+          res,
+          error
+        )
+      ) {
+        return;
+      }
+      const code =
+        error instanceof Error
+          ? error.message
+          : "";
+      if (
+        code ===
+          "STORED_UPLOAD_NOT_FOUND" ||
+        code ===
+          "INVALID_FILE_ID" ||
+        code ===
+          "ENOENT"
+      ) {
+        res.status(404).json({
+          error:
+            "STORED_FILE_NOT_FOUND"
+        });
+        return;
+      }
+      if (
+        code ===
+          "STORED_FILE_MEDIA_UNSUPPORTED" ||
+        code ===
+          "STORED_FILE_NOT_PROCESSABLE" ||
+        code ===
+          "STORED_ARCHIVE_MEMBER_REQUIRED"
+      ) {
+        res.status(415).json({
+          error: code
+        });
+        return;
+      }
+      if (
+        code ===
+          "STORED_DOCUMENT_SIGNATURE_MISMATCH" ||
+        code ===
+          "STORED_UPLOAD_INTEGRITY_FAILED" ||
+        code ===
+          "EXTRACTED_PAYLOAD_INTEGRITY_FAILED"
+      ) {
+        res.status(422).json({
+          error:
+            "STORED_FILE_VALIDATION_FAILED"
+        });
+        return;
+      }
+      res.status(422).json({
+        error:
+          "STORED_FILE_PROCESSING_FAILED"
+      });
+    }
+  }
+
+  app.post(
+    "/api/cases/:caseId/files/:uploadId/process",
+    async (req, res) => {
+      await processStoredCaseFile(
+        req,
+        res
+      );
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/files/:uploadId/members/:fileId/process",
+    async (req, res) => {
+      await processStoredCaseFile(
+        req,
+        res,
+        String(
+          req.params.fileId ?? ""
+        )
+      );
     }
   );
 
