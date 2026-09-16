@@ -732,6 +732,61 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
   );
 
   app.post(
+    "/api/auth/bootstrap-managed",
+    async (req, res) => {
+      if (
+        !process.env
+          .LEX_DESKTOP_BOOTSTRAP_TOKEN
+          ?.trim()
+      ) {
+        res.status(403).json({
+          error:
+            "DESKTOP_BOOTSTRAP_REQUIRED"
+        });
+        return;
+      }
+      if (!options.authService) {
+        res.status(503).json({
+          error:
+            "AUTH_SERVICE_UNAVAILABLE"
+        });
+        return;
+      }
+      const password =
+        typeof req.body?.password ===
+          "string"
+          ? req.body.password
+          : "";
+      try {
+        const result =
+          await options.authService
+            .bootstrap({
+              loginName:
+                "local-admin",
+              displayName:
+                "Administrator lokalny",
+              password,
+              passwordSetupPending:
+                true
+            });
+        res.status(201).json(result);
+      } catch (error) {
+        if (
+          !sendAuthError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "AUTH_BOOTSTRAP_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
     "/api/auth/bootstrap",
     async (req, res) => {
       if (!options.authService) {
