@@ -61,6 +61,9 @@ import type {
   LocalDocumentAuthoringService
 } from "../document-authoring-service.js";
 import type {
+  LegalDocumentAstGenerator
+} from "../legal-document-ast-generator.js";
+import type {
   LocalCaseKnowledgeSearch
 } from "../case-knowledge-search.js";
 import type {
@@ -345,6 +348,10 @@ export type LexHttpAppOptions = {
     | "aliasManifest"
     | "createTokenized"
     | "deanonymizeConsumed"
+  >;
+  documentAstGenerator?: Pick<
+    LegalDocumentAstGenerator,
+    "generate"
   >;
   reauthorizationManager?: Pick<
     DeanonymizationReauthorizationManager,
@@ -3728,6 +3735,347 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                 Error
                 ? error.message
                 : "DOCUMENT_AUTHORING_ALIAS_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/artifacts/generate",
+    async (req, res) => {
+      if (
+        !options.caseAccessService ||
+        !options.documentAuthoringService ||
+        !options.documentAstGenerator ||
+        !options.documentService
+      ) {
+        res.status(503).json({
+          error:
+            "DOCUMENT_GENERATION_UNAVAILABLE"
+        });
+        return;
+      }
+
+      const caseId =
+        String(
+          req.params.caseId ??
+            ""
+        );
+      const sessionRequest =
+        parseSessionRequest(
+          req.body
+        );
+      const attachments =
+        parseDocumentAttachments(
+          req.body?.attachments
+        );
+      const format =
+        req.body?.format;
+      const documentType =
+        req.body?.documentType;
+      const styleProfile =
+        req.body?.styleProfile;
+
+      if (
+        !sessionRequest ||
+        attachments === null ||
+        attachments.length < 1 ||
+        (
+          format !== "docx" &&
+          format !== "odt"
+        ) ||
+        ![
+          "pleading",
+          "contract",
+          "opinion",
+          "letter",
+          "report",
+          "other"
+        ].includes(
+          String(
+            documentType
+          )
+        ) ||
+        ![
+          "lex-classic-clean-v1",
+          "lex-light-legal-design-v1",
+          "lex-classic-tnr-v1"
+        ].includes(
+          String(
+            styleProfile
+          )
+        ) ||
+        attachments.some(
+          (selection) =>
+            Boolean(
+              selection.caseId
+            ) &&
+            selection.caseId !==
+              caseId
+        )
+      ) {
+        res.status(400).json({
+          error:
+            "INVALID_DOCUMENT_GENERATION_REQUEST"
+        });
+        return;
+      }
+
+      const route =
+        routing.validate(
+          sessionRequest
+            .primarySkill
+        );
+      if (!route.valid) {
+        res.status(422).json({
+          error:
+            "INVALID_ROUTE",
+          reason:
+            route.reason
+        });
+        return;
+      }
+
+      try {
+        const context =
+          responseAuthContext(
+            res
+          );
+        const caseView =
+          options
+            .caseAccessService
+            .openCase(
+              context,
+              caseId
+            );
+
+        const resolvedAttachments:
+          SessionDocumentAttachment[] =
+          [];
+        for (
+          const selection
+          of attachments
+        ) {
+          options
+            .caseAccessService
+            .assertAccess(
+              context,
+              caseId,
+              "ANALYZE"
+            );
+
+          if (
+            options
+              .documentService
+              .restoreDocument
+          ) {
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                context,
+                caseId,
+                "ANALYZE",
+                async (
+                  caseDataKey
+                ) =>
+                  await options
+                    .documentService!
+                    .restoreDocument!({
+                      caseId,
+                      documentId:
+                        selection
+                          .documentId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion
+                    })
+              );
+          }
+
+          const resolved =
+            await options
+              .documentService
+              .resolveProtectedChunks({
+                documentId:
+                  selection
+                    .documentId,
+                chunkIndices:
+                  selection
+                    .chunkIndices
+              });
+          resolvedAttachments.push({
+            caseId,
+            documentId:
+              resolved
+                .documentId,
+            sourceScope:
+              "MANUAL",
+            chunks:
+              resolved.chunks.map(
+                (chunk) => ({
+                  ...chunk
+                })
+              )
+          });
+        }
+
+        const sourceDocumentIds =
+          [
+            ...new Set(
+              resolvedAttachments
+                .map(
+                  (item) =>
+                    item.documentId
+                )
+            )
+          ];
+
+        const aliases =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              context,
+              caseId,
+              "ANALYZE",
+              async (
+                caseDataKey
+              ) =>
+                await options
+                  .documentAuthoringService!
+                  .aliasManifest({
+                    caseId,
+                    sourceDocumentIds,
+                    caseDataKey,
+                    keyVersion:
+                      caseView
+                        .keyVersion
+                  })
+            );
+
+        const generated =
+          await options
+            .documentAstGenerator
+            .generate({
+              query:
+                sessionRequest
+                  .query,
+              provider:
+                sessionRequest
+                  .provider,
+              model:
+                sessionRequest
+                  .model,
+              primarySkill:
+                sessionRequest
+                  .primarySkill,
+              mode:
+                sessionRequest
+                  .mode,
+              documentType:
+                documentType as
+                  | "pleading"
+                  | "contract"
+                  | "opinion"
+                  | "letter"
+                  | "report"
+                  | "other",
+              styleProfile:
+                styleProfile as
+                  | "lex-classic-clean-v1"
+                  | "lex-light-legal-design-v1"
+                  | "lex-classic-tnr-v1",
+              attachments:
+                resolvedAttachments,
+              aliases
+            });
+
+        const tokenized =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              context,
+              caseId,
+              "WRITE",
+              async (
+                caseDataKey
+              ) =>
+                await options
+                  .documentAuthoringService!
+                  .createTokenized({
+                    caseId,
+                    createdByUserId:
+                      context.user
+                        .userId,
+                    format,
+                    ast:
+                      generated.ast,
+                    sourceDocumentIds,
+                    caseDataKey,
+                    keyVersion:
+                      caseView
+                        .keyVersion,
+                    ...(typeof req
+                      .body
+                      ?.filename ===
+                    "string"
+                      ? {
+                          filename:
+                            req.body
+                              .filename
+                        }
+                      : {})
+                  })
+            );
+
+        res.status(201).json({
+          sessionId:
+            generated
+              .sessionId,
+          artifact:
+            tokenized
+              .artifact,
+          format:
+            tokenized
+              .format,
+          tokenizedSha256:
+            tokenized
+              .tokenizedSha256,
+          vaultGeneration:
+            tokenized
+              .vaultGeneration,
+          aliasesUsed:
+            tokenized
+              .aliasesUsed
+        });
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          ) &&
+          !(error instanceof
+            MissingProviderCredentialError)
+        ) {
+          res.status(422).json({
+            error:
+              error instanceof
+                Error
+                ? error.message
+                : "DOCUMENT_GENERATION_FAILED"
+          });
+          return;
+        }
+        if (
+          error instanceof
+            MissingProviderCredentialError
+        ) {
+          res.status(503).json({
+            error:
+              "PROVIDER_NOT_CONFIGURED",
+            provider:
+              error.provider
           });
         }
       }
