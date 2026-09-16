@@ -770,6 +770,59 @@ export class LocalCaseAccessService {
     };
   }
 
+  listAccessCandidates(
+    context:
+      AuthenticatedContext,
+    caseId: string
+  ): PublicLocalUser[] {
+    this.assertAccess(
+      context,
+      caseId,
+      "MANAGE"
+    );
+    const existing =
+      new Set(
+        this.store
+          .listCaseAccess(
+            caseId
+          )
+          .map(
+            (item) =>
+              item.userId
+          )
+      );
+    return this.store
+      .listUsers()
+      .filter(
+        (user) =>
+          user.status ===
+            "ACTIVE" &&
+          !existing.has(
+            user.userId
+          )
+      )
+      .map((user) => ({
+        userId:
+          user.userId,
+        loginName:
+          user.loginName,
+        displayName:
+          user.displayName,
+        appRole:
+          user.appRole,
+        status:
+          user.status,
+        createdAt:
+          user.createdAt,
+        ...(user.lastLoginAt
+          ? {
+              lastLoginAt:
+                user.lastLoginAt
+            }
+          : {})
+      }));
+  }
+
   listAccess(
     context:
       AuthenticatedContext,
