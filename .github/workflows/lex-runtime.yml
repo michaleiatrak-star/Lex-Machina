@@ -29,7 +29,7 @@ permissions:
 
 jobs:
   g1-g29-g32:
-    name: G1-G29 + G31A/G31B/G31C1 + G32 + G34A-G34E + G34F1 + G34H1/H2/H3/H4/H5 + G35A/G35B + P4B deterministic validation
+    name: G1-G36 + G31C2/D/E + G34F + G35C + P4B deterministic validation
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -54,7 +54,7 @@ jobs:
         run: npm test
 
       - name: Python worker syntax
-        run: python -m py_compile ../ocr/paddle_worker.py ../privacy/stanza_ner_worker.py ../storage/zip_extract_worker.py
+        run: python -m py_compile ../ocr/paddle_worker.py ../privacy/stanza_ner_worker.py ../storage/zip_extract_worker.py ../storage/office_extract_worker.py ../storage/spreadsheet_extract_worker.py ../storage/legal_document_worker.py
 
       - name: G1 — corpus integrity
         run: npm run validate:corpus
@@ -167,14 +167,29 @@ jobs:
       - name: G35B — shared firm template library
         run: npm run validate:g35b
 
+      - name: G35C — template-assisted safe generation profile
+        run: npm run validate:g35c
+
       - name: G31C1 — encrypted persistent privacy vault
         run: npm run validate:g31c1
+
+      - name: G31C2 — typed authoring AST and generation aliases
+        run: npm run validate:g31c2
+
+      - name: G31D — deterministic DOCX generation
+        run: npm run validate:g31d
+
+      - name: G31E — deterministic ODT generation
+        run: npm run validate:g31e
 
       - name: G34E — recovery and password lifecycle
         run: npm run validate:g34e
 
       - name: G34F1 — transaction reauthorization foundation
         run: npm run validate:g34f1
+
+      - name: G34F — full deanonymization and sensitive export
+        run: npm run validate:g34f
 
       - name: G36 — legal skill runtime completeness
         run: npm run validate:g36
