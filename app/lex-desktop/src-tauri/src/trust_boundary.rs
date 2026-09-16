@@ -1,5 +1,6 @@
 use getrandom::fill as random_fill;
-use serde_json::Value;
+use keyring::{Entry, Error as KeyringError};
+use serde_json::{json, Value};
 use std::{
     env,
     io::{BufRead, BufReader, Read, Write},
@@ -14,11 +15,16 @@ use tauri::http::{Request, Response, StatusCode};
 
 const MAX_REQUEST_BYTES: usize = 160 * 1024 * 1024;
 const MAX_RESPONSE_BYTES: usize = 192 * 1024 * 1024;
+const MANAGED_LOGIN: &str = "local-admin";
+const MANAGED_KEYRING_SERVICE: &str = "LexMachina/Desktop";
+const NATIVE_LOGIN_SENTINEL: &str = "__LEX_NATIVE_LOGIN__";
+const NATIVE_REAUTH_SENTINEL: &str = "__LEX_NATIVE_REAUTH__";
 
 struct BridgeState {
     address: Option<SocketAddr>,
     bootstrap_token: String,
     session_token: Option<String>,
+    managed_password: Option<String>,
     child: Option<Child>,
 }
 
@@ -42,6 +48,7 @@ impl RuntimeBridge {
                 address: None,
                 bootstrap_token,
                 session_token: None,
+                managed_password: None,
                 child: None,
             }),
         })
@@ -126,6 +133,121 @@ impl RuntimeBridge {
         Ok(())
     }
 
+    pub fn ensure_managed_identity(&self) -> Result<bool, String> {
+        let entry = Entry::new(
+            MANAGED_KEYRING_SERVICE,
+            MANAGED_LOGIN,
+        )
+        .map_err(|error| format!("DESKTOP_KEYRING_OPEN_FAILED:{error}"))?;
+
+        let stored_password = match entry.get_password() {
+            Ok(password) => Some(password),
+            Err(KeyringError::NoEntry) => None,
+            Err(error) => {
+                return Err(format!(
+                    "DESKTOP_KEYRING_READ_FAILED:{error}"
+                ));
+            }
+        };
+
+        let status_response = self.internal_json_request(
+            "GET",
+            "/api/auth/status",
+            None,
+        )?;
+        if !status_response.status().is_success() {
+            return Err(format!(
+                "DESKTOP_AUTH_STATUS_FAILED:{}",
+                status_response.status()
+            ));
+        }
+        let status: Value = serde_json::from_slice(
+            status_response.body()
+        )
+        .map_err(|_| "DESKTOP_AUTH_STATUS_INVALID".to_string())?;
+        let requires_bootstrap = status
+            .get("requiresBootstrap")
+            .and_then(Value::as_bool)
+            .ok_or_else(|| "DESKTOP_AUTH_STATUS_INVALID".to_string())?;
+
+        let mut password = stored_password;
+        if requires_bootstrap {
+            if password.is_none() {
+                let generated = random_secret()?;
+                entry
+                    .set_password(&generated)
+                    .map_err(|error| format!(
+                        "DESKTOP_KEYRING_WRITE_FAILED:{error}"
+                    ))?;
+                password = Some(generated);
+            }
+
+            let secret = password
+                .as_ref()
+                .ok_or_else(|| "DESKTOP_MANAGED_PASSWORD_MISSING".to_string())?;
+            let response = self.internal_json_request(
+                "POST",
+                "/api/auth/bootstrap",
+                Some(json!({
+                    "loginName": MANAGED_LOGIN,
+                    "displayName": "Administrator lokalny",
+                    "password": secret
+                })),
+            )?;
+            if !response.status().is_success() {
+                return Err(format!(
+                    "DESKTOP_NATIVE_BOOTSTRAP_FAILED:{}",
+                    response.status()
+                ));
+            }
+        } else if let Some(secret) = password.as_ref() {
+            let response = self.internal_json_request(
+                "POST",
+                "/api/auth/login",
+                Some(json!({
+                    "loginName": MANAGED_LOGIN,
+                    "password": secret
+                })),
+            )?;
+            if !response.status().is_success() {
+                // Existing multi-user or manually changed account: keep
+                // the normal login UI available rather than fail startup.
+                return Ok(false);
+            }
+        } else {
+            return Ok(false);
+        }
+
+        if let Some(secret) = password {
+            self.replace_managed_password(secret);
+        }
+        Ok(true)
+    }
+
+    fn internal_json_request(
+        &self,
+        method: &str,
+        path: &str,
+        body: Option<Value>,
+    ) -> Result<Response<Vec<u8>>, String> {
+        let bytes = match body {
+            Some(value) => serde_json::to_vec(&value)
+                .map_err(|_| "DESKTOP_INTERNAL_JSON_INVALID".to_string())?,
+            None => Vec::new(),
+        };
+        let mut builder = Request::builder()
+            .method(method)
+            .uri(path)
+            .header("Accept", "application/json");
+        if !bytes.is_empty() {
+            builder = builder.header("Content-Type", "application/json");
+        }
+        let request = builder
+            .body(bytes)
+            .map_err(|_| "DESKTOP_INTERNAL_REQUEST_INVALID".to_string())?;
+        self.proxy(request)
+    }
+
     pub fn handle(&self, request: Request<Vec<u8>>) -> Response<Vec<u8>> {
         if request.method() == "OPTIONS" {
             return cors_response(StatusCode::NO_CONTENT, Vec::new(), None);
@@ -149,9 +271,9 @@ impl RuntimeBridge {
         }
     }
 
-    fn proxy(&self, request: Request<Vec<u8>>) -> Result<Response<Vec<u8>>, String> {
+    fn proxy(&self, mut request: Request<Vec<u8>>) -> Result<Response<Vec<u8>>, String> {
         let path = request.uri().path().to_string();
-        let (address, bootstrap_token, session_token) = {
+        let (address, bootstrap_token, session_token, managed_password) = {
             let state = self
                 .state
                 .lock()
@@ -162,8 +284,17 @@ impl RuntimeBridge {
                     .ok_or_else(|| "DESKTOP_RUNTIME_NOT_READY".to_string())?,
                 state.bootstrap_token.clone(),
                 state.session_token.clone(),
+                state.managed_password.clone(),
             )
         };
+
+        if let Some(secret) = managed_password.as_ref() {
+            inject_managed_password(
+                &path,
+                &mut request,
+                secret,
+            )?;
+        }
 
         let authenticated = requires_session(&path);
         let bearer = if authenticated {
@@ -218,6 +349,15 @@ impl RuntimeBridge {
         }
     }
 
+    fn replace_managed_password(&self, password: String) {
+        if let Ok(mut state) = self.state.lock() {
+            if let Some(mut previous) = state.managed_password.take() {
+                unsafe_zero_string(&mut previous);
+            }
+            state.managed_password = Some(password);
+        }
+    }
+
     #[cfg(test)]
     fn has_session(&self) -> bool {
         self.state
@@ -233,6 +373,9 @@ impl Drop for RuntimeBridge {
             if let Some(mut token) = state.session_token.take() {
                 unsafe_zero_string(&mut token);
             }
+            if let Some(mut password) = state.managed_password.take() {
+                unsafe_zero_string(&mut password);
+            }
             unsafe_zero_string(&mut state.bootstrap_token);
             if let Some(child) = state.child.as_mut() {
                 let _ = child.kill();
@@ -240,6 +383,61 @@ impl Drop for RuntimeBridge {
             }
         }
     }
+}
+
+fn random_secret() -> Result<String, String> {
+    let mut bytes = [0_u8; 48];
+    random_fill(&mut bytes)
+        .map_err(|error| format!("DESKTOP_RANDOM_FAILED:{error}"))?;
+    let secret = bytes
+        .iter()
+        .map(|byte| format!("{byte:02x}"))
+        .collect::<String>();
+    bytes.fill(0);
+    Ok(secret)
+}
+
+fn inject_managed_password(
+    path: &str,
+    request: &mut Request<Vec<u8>>,
+    managed_password: &str,
+) -> Result<(), String> {
+    if path != "/api/auth/login"
+        && path != "/api/deanonymization/reauthorize"
+    {
+        return Ok(());
+    }
+    let mut value: Value = serde_json::from_slice(request.body())
+        .map_err(|_| "DESKTOP_MANAGED_REQUEST_INVALID".to_string())?;
+    let object = value
+        .as_object_mut()
+        .ok_or_else(|| "DESKTOP_MANAGED_REQUEST_INVALID".to_string())?;
+    let password = object
+        .get("password")
+        .and_then(Value::as_str)
+        .unwrap_or("");
+
+    let allowed = if path == "/api/auth/login" {
+        object
+            .get("loginName")
+            .and_then(Value::as_str)
+            == Some(MANAGED_LOGIN)
+            && password == NATIVE_LOGIN_SENTINEL
+    } else {
+        password == NATIVE_REAUTH_SENTINEL
+    };
+
+    if !allowed {
+        return Ok(());
+    }
+
+    object.insert(
+        "password".to_string(),
+        Value::String(managed_password.to_string()),
+    );
+    *request.body_mut() = serde_json::to_vec(&value)
+        .map_err(|_| "DESKTOP_MANAGED_REQUEST_INVALID".to_string())?;
+    Ok(())
 }
 
 fn runtime_executable_name() -> &'static str {
