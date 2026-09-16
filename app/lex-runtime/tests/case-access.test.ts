@@ -594,6 +594,104 @@ describe("G34C/G34D case access", () => {
     current.auth.close();
   });
 
+  it("serializes active writes with lifecycle changes on the same case", async () => {
+    const current =
+      fixture();
+    const owner =
+      await current.auth.bootstrap({
+        loginName:
+          "lock-owner",
+        displayName:
+          "Lock Owner",
+        password:
+          "Lock owner bezpieczne haslo 2026"
+      });
+    const ownerContext =
+      context(owner);
+    const localCase =
+      await current.cases.createCase(
+        ownerContext,
+        "Sprawa blokowana"
+      );
+
+    let releaseWrite:
+      (() => void) | undefined;
+    let markWriteStarted:
+      (() => void) | undefined;
+    const writeStarted =
+      new Promise<void>(
+        (resolve) => {
+          markWriteStarted =
+            resolve;
+        }
+      );
+    const writeGate =
+      new Promise<void>(
+        (resolve) => {
+          releaseWrite =
+            resolve;
+        }
+      );
+
+    const activeWrite =
+      current.cases
+        .withCaseDataKey(
+          ownerContext,
+          localCase.caseId,
+          "WRITE",
+          async () => {
+            markWriteStarted?.();
+            await writeGate;
+          }
+        );
+
+    await writeStarted;
+
+    let archiveFinished =
+      false;
+    const archive =
+      current.cases
+        .setCaseArchived(
+          ownerContext,
+          localCase.caseId,
+          true
+        )
+        .then((result) => {
+          archiveFinished =
+            true;
+          return result;
+        });
+
+    await Promise.resolve();
+    await Promise.resolve();
+    expect(
+      archiveFinished
+    ).toBe(false);
+
+    releaseWrite?.();
+    await activeWrite;
+    const archived =
+      await archive;
+    expect(
+      archived.archivedAt
+    ).toBeDefined();
+
+    await expect(
+      current.cases
+        .withCaseDataKey(
+          ownerContext,
+          localCase.caseId,
+          "WRITE",
+          async () =>
+            undefined
+        )
+    ).rejects.toThrow(
+      "CASE_ARCHIVED"
+    );
+
+    current.auth.close();
+  });
+
   it("revokes access with mandatory CDK rotation", async () => {
     const current = fixture();
     const owner =
