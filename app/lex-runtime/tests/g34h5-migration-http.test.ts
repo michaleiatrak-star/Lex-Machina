@@ -90,6 +90,7 @@ function fixture() {
     app,
     {
       authService: auth,
+      securityEvents: authStore,
       caseAccessService: cases,
       migrator
     }
