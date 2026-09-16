@@ -7,19 +7,26 @@ import type {
   AuthKdfPolicy,
   AuthStatus,
   AuthSuccess,
+  AuthRecoverySuccess,
   PublicLocalUser,
+  RecoveryCodeResult,
   StoredLocalUser
 } from "./types.js";
 import {
   DEFAULT_AUTH_KDF
 } from "./types.js";
 import {
+  decryptRecoveryUserMasterKey,
   decryptUserMasterKey,
+  deriveRecoveryKey,
+  encryptRecoveryUserMasterKey,
   encryptUserMasterKey,
+  generateRecoveryCode,
   isValidLoginName,
   normalizeLoginName,
   PasswordKdfExecutor,
   randomKdfSalt,
+  randomRecoverySalt,
   randomUserMasterKey,
   validateDisplayName,
   validateNewPassword
@@ -48,7 +55,10 @@ export type AuthErrorCode =
   | "ACCOUNT_LOGIN_EXISTS"
   | "SESSION_IDLE_EXPIRED"
   | "SESSION_OVERALL_EXPIRED"
-  | "SESSION_REVOKED";
+  | "SESSION_REVOKED"
+  | "INVALID_PASSWORD_CHANGE"
+  | "INVALID_RECOVERY_REQUEST"
+  | "INVALID_RECOVERY_CREDENTIALS";
 
 export class AuthError extends Error {
   constructor(
@@ -95,6 +105,24 @@ export interface AuthService {
   listUsers(
     actor: AuthenticatedContext
   ): PublicLocalUser[];
+  createRecoveryCode(
+    actor: AuthenticatedContext,
+    input: {
+      password: string;
+    }
+  ): Promise<RecoveryCodeResult>;
+  changePassword(
+    actor: AuthenticatedContext,
+    input: {
+      currentPassword: string;
+      newPassword: string;
+    }
+  ): Promise<AuthSuccess>;
+  recoverAccount(input: {
+    loginName: string;
+    recoveryCode: string;
+    newPassword: string;
+  }): Promise<AuthRecoverySuccess>;
   withSessionUserMasterKey<T>(
     sessionId: string,
     callback: (
@@ -825,6 +853,519 @@ implements AuthService {
       .map(publicUser);
   }
 
+  async createRecoveryCode(
+    actor: AuthenticatedContext,
+    input: {
+      password: string;
+    }
+  ): Promise<RecoveryCodeResult> {
+    const user =
+      this.store.getUserById(
+        actor.user.userId
+      );
+    if (
+      !user ||
+      user.status !== "ACTIVE"
+    ) {
+      throw new AuthError(
+        "SESSION_REVOKED",
+        401
+      );
+    }
+
+    const userMasterKey =
+      await this
+        .verifyPasswordForUser(
+          user,
+          input.password,
+          "recovery_setup"
+        );
+    const now =
+      new Date(
+        this.clock.now()
+      ).toISOString();
+    const previous =
+      this.store
+        .getRecoveryEnvelope(
+          user.userId
+        );
+    const keyVersion =
+      (previous?.keyVersion ??
+        0) + 1;
+    const recoveryCode =
+      generateRecoveryCode();
+    const salt =
+      randomRecoverySalt();
+    const recoveryKey =
+      deriveRecoveryKey(
+        recoveryCode,
+        salt,
+        {
+          userId:
+            user.userId,
+          keyVersion
+        }
+      );
+
+    try {
+      const envelope =
+        encryptRecoveryUserMasterKey(
+          recoveryKey,
+          userMasterKey,
+          {
+            userId:
+              user.userId,
+            keyVersion
+          }
+        );
+      this.store
+        .putRecoveryEnvelope({
+          userId:
+            user.userId,
+          algorithm:
+            "HKDF-SHA256-AES-256-GCM",
+          salt,
+          nonce:
+            envelope.nonce,
+          ciphertext:
+            envelope.ciphertext,
+          tag:
+            envelope.tag,
+          keyVersion,
+          createdAt: now,
+          updatedAt: now
+        });
+      this.store
+        .recordSecurityEvent({
+          eventId:
+            "event_" +
+            randomBytes(16)
+              .toString("hex"),
+          userId:
+            user.userId,
+          eventType:
+            "recovery_code_created",
+          occurredAt: now,
+          result: "PASS",
+          metadata: {
+            keyVersion
+          }
+        });
+      return {
+        recoveryCode,
+        createdAt: now
+      };
+    } finally {
+      userMasterKey.fill(0);
+      recoveryKey.fill(0);
+      salt.fill(0);
+    }
+  }
+
+  async changePassword(
+    actor: AuthenticatedContext,
+    input: {
+      currentPassword: string;
+      newPassword: string;
+    }
+  ): Promise<AuthSuccess> {
+    const user =
+      this.store.getUserById(
+        actor.user.userId
+      );
+    if (
+      !user ||
+      user.status !== "ACTIVE"
+    ) {
+      throw new AuthError(
+        "SESSION_REVOKED",
+        401
+      );
+    }
+
+    let newPassword: string;
+    try {
+      newPassword =
+        validateNewPassword(
+          input.newPassword
+        );
+    } catch {
+      throw new AuthError(
+        "INVALID_PASSWORD_CHANGE",
+        400
+      );
+    }
+
+    const userMasterKey =
+      await this
+        .verifyPasswordForUser(
+          user,
+          input.currentPassword,
+          "password_change"
+        );
+    const salt =
+      randomKdfSalt();
+    const newKey =
+      await this.deriveKey(
+        newPassword,
+        salt,
+        this.kdf
+      );
+    const now =
+      new Date(
+        this.clock.now()
+      ).toISOString();
+    const keyVersion =
+      user.umkKeyVersion + 1;
+
+    try {
+      const envelope =
+        encryptUserMasterKey(
+          newKey,
+          userMasterKey,
+          {
+            userId:
+              user.userId,
+            normalizedLoginName:
+              user
+                .normalizedLoginName,
+            keyVersion
+          }
+        );
+
+      this.store
+        .updatePasswordEnvelopeAndIncrementEpoch({
+          userId:
+            user.userId,
+          updatedAt: now,
+          kdf: this.kdf,
+          kdfSalt: salt,
+          nonce:
+            envelope.nonce,
+          ciphertext:
+            envelope.ciphertext,
+          tag: envelope.tag,
+          keyVersion
+        });
+
+      this.sessions
+        .revokeUser(
+          user.userId,
+          "AUTH_EPOCH"
+        );
+      const refreshed =
+        this.store.getUserById(
+          user.userId
+        );
+      if (!refreshed) {
+        throw new Error(
+          "AUTH_USER_MISSING_AFTER_PASSWORD_CHANGE"
+        );
+      }
+      this.store
+        .recordSecurityEvent({
+          eventId:
+            "event_" +
+            randomBytes(16)
+              .toString("hex"),
+          userId:
+            user.userId,
+          eventType:
+            "password_changed",
+          occurredAt: now,
+          result: "PASS",
+          metadata: {
+            authEpoch:
+              refreshed.authEpoch,
+            umkKeyVersion:
+              keyVersion
+          }
+        });
+
+      return this.createSuccess(
+        refreshed,
+        userMasterKey
+      );
+    } finally {
+      userMasterKey.fill(0);
+      newKey.fill(0);
+      salt.fill(0);
+    }
+  }
+
+  async recoverAccount(input: {
+    loginName: string;
+    recoveryCode: string;
+    newPassword: string;
+  }): Promise<AuthRecoverySuccess> {
+    const normalizedLoginName =
+      normalizeLoginName(
+        input.loginName
+          .slice(0, 256)
+      );
+    let newPassword: string;
+    try {
+      if (
+        !isValidLoginName(
+          normalizedLoginName
+        )
+      ) {
+        throw new Error(
+          "INVALID_LOGIN"
+        );
+      }
+      newPassword =
+        validateNewPassword(
+          input.newPassword
+        );
+    } catch {
+      throw new AuthError(
+        "INVALID_RECOVERY_REQUEST",
+        400
+      );
+    }
+
+    const user =
+      this.store
+        .getUserByNormalizedLogin(
+          normalizedLoginName
+        );
+    const recovery =
+      user
+        ? this.store
+            .getRecoveryEnvelope(
+              user.userId
+            )
+        : null;
+
+    if (
+      !user ||
+      user.status !== "ACTIVE" ||
+      !recovery
+    ) {
+      throw new AuthError(
+        "INVALID_RECOVERY_CREDENTIALS",
+        401
+      );
+    }
+
+    let recoveryKey:
+      Buffer | undefined;
+    let userMasterKey:
+      Buffer | undefined;
+    try {
+      recoveryKey =
+        deriveRecoveryKey(
+          input.recoveryCode,
+          recovery.salt,
+          {
+            userId:
+              user.userId,
+            keyVersion:
+              recovery.keyVersion
+          }
+        );
+      userMasterKey =
+        decryptRecoveryUserMasterKey(
+          recoveryKey,
+          {
+            nonce:
+              recovery.nonce,
+            ciphertext:
+              recovery.ciphertext,
+            tag:
+              recovery.tag
+          },
+          {
+            userId:
+              user.userId,
+            keyVersion:
+              recovery.keyVersion
+          }
+        );
+    } catch {
+      recoveryKey?.fill(0);
+      userMasterKey?.fill(0);
+      this.store
+        .recordSecurityEvent({
+          eventId:
+            "event_" +
+            randomBytes(16)
+              .toString("hex"),
+          userId:
+            user.userId,
+          eventType:
+            "recovery_failure",
+          occurredAt:
+            new Date(
+              this.clock.now()
+            ).toISOString(),
+          result: "BLOCKED",
+          metadata: {
+            reason:
+              "INVALID_RECOVERY_CREDENTIALS"
+          }
+        });
+      throw new AuthError(
+        "INVALID_RECOVERY_CREDENTIALS",
+        401
+      );
+    } finally {
+      recoveryKey?.fill(0);
+    }
+
+    const passwordSalt =
+      randomKdfSalt();
+    const passwordKey =
+      await this.deriveKey(
+        newPassword,
+        passwordSalt,
+        this.kdf
+      );
+    const nextRecoveryCode =
+      generateRecoveryCode();
+    const nextRecoverySalt =
+      randomRecoverySalt();
+    const nextRecoveryVersion =
+      recovery.keyVersion + 1;
+    const nextRecoveryKey =
+      deriveRecoveryKey(
+        nextRecoveryCode,
+        nextRecoverySalt,
+        {
+          userId:
+            user.userId,
+          keyVersion:
+            nextRecoveryVersion
+        }
+      );
+    const now =
+      new Date(
+        this.clock.now()
+      ).toISOString();
+    const passwordKeyVersion =
+      user.umkKeyVersion + 1;
+
+    try {
+      const passwordEnvelope =
+        encryptUserMasterKey(
+          passwordKey,
+          userMasterKey!,
+          {
+            userId:
+              user.userId,
+            normalizedLoginName:
+              user
+                .normalizedLoginName,
+            keyVersion:
+              passwordKeyVersion
+          }
+        );
+      const recoveryEnvelope =
+        encryptRecoveryUserMasterKey(
+          nextRecoveryKey,
+          userMasterKey!,
+          {
+            userId:
+              user.userId,
+            keyVersion:
+              nextRecoveryVersion
+          }
+        );
+
+      this.store
+        .recoverPasswordAndRotateRecovery({
+          password: {
+            userId:
+              user.userId,
+            updatedAt: now,
+            kdf: this.kdf,
+            kdfSalt:
+              passwordSalt,
+            nonce:
+              passwordEnvelope.nonce,
+            ciphertext:
+              passwordEnvelope
+                .ciphertext,
+            tag:
+              passwordEnvelope.tag,
+            keyVersion:
+              passwordKeyVersion
+          },
+          recovery: {
+            userId:
+              user.userId,
+            algorithm:
+              "HKDF-SHA256-AES-256-GCM",
+            salt:
+              nextRecoverySalt,
+            nonce:
+              recoveryEnvelope.nonce,
+            ciphertext:
+              recoveryEnvelope
+                .ciphertext,
+            tag:
+              recoveryEnvelope.tag,
+            keyVersion:
+              nextRecoveryVersion,
+            createdAt: now,
+            updatedAt: now
+          }
+        });
+
+      this.sessions
+        .revokeUser(
+          user.userId,
+          "AUTH_EPOCH"
+        );
+      const refreshed =
+        this.store.getUserById(
+          user.userId
+        );
+      if (!refreshed) {
+        throw new Error(
+          "AUTH_USER_MISSING_AFTER_RECOVERY"
+        );
+      }
+      this.store
+        .recordSecurityEvent({
+          eventId:
+            "event_" +
+            randomBytes(16)
+              .toString("hex"),
+          userId:
+            user.userId,
+          eventType:
+            "recovery_used",
+          occurredAt: now,
+          result: "PASS",
+          metadata: {
+            authEpoch:
+              refreshed.authEpoch,
+            recoveryKeyVersion:
+              nextRecoveryVersion,
+            umkKeyVersion:
+              passwordKeyVersion
+          }
+        });
+
+      return {
+        ...this.createSuccess(
+          refreshed,
+          userMasterKey!
+        ),
+        recoveryCode:
+          nextRecoveryCode
+      };
+    } finally {
+      userMasterKey?.fill(0);
+      passwordKey.fill(0);
+      passwordSalt.fill(0);
+      nextRecoveryKey.fill(0);
+      nextRecoverySalt.fill(0);
+    }
+  }
+
   async withSessionUserMasterKey<T>(
     sessionId: string,
     callback: (
@@ -976,6 +1517,129 @@ implements AuthService {
         userId,
         "USER_REVOKED"
       );
+  }
+
+  private async verifyPasswordForUser(
+    user: StoredLocalUser,
+    password: string,
+    purpose: string
+  ): Promise<Buffer> {
+    const nowMs =
+      this.clock.now();
+    const nowIso =
+      new Date(
+        nowMs
+      ).toISOString();
+    const loginTag =
+      this.store.loginTag(
+        user.normalizedLoginName
+      );
+    const rate =
+      this.normalizedRateRecord(
+        this.store.getRateLimit(
+          loginTag
+        ),
+        nowMs
+      );
+    if (
+      rate?.retryAfter &&
+      Date.parse(
+        rate.retryAfter
+      ) > nowMs
+    ) {
+      throw new AuthError(
+        "AUTH_BACKOFF_ACTIVE",
+        429,
+        rate.retryAfter
+      );
+    }
+
+    const normalizedPassword =
+      password.normalize("NFKC");
+    const length =
+      Array.from(
+        normalizedPassword
+      ).length;
+    const passwordForKdf =
+      length <= 128
+        ? password
+        : "invalid-overlong-password";
+    let key:
+      Buffer | undefined;
+    let umk:
+      Buffer | undefined;
+    try {
+      key =
+        await this.deriveKey(
+          passwordForKdf,
+          user.kdfSalt,
+          user.kdf
+        );
+      try {
+        umk =
+          decryptUserMasterKey(
+            key,
+            user
+          );
+      } catch {
+        umk = undefined;
+      }
+
+      if (
+        length > 128 ||
+        !umk ||
+        user.status !== "ACTIVE"
+      ) {
+        const retryAfter =
+          this.recordFailure(
+            loginTag,
+            rate,
+            nowMs
+          );
+        this.store
+          .recordSecurityEvent({
+            eventId:
+              "event_" +
+              randomBytes(16)
+                .toString("hex"),
+            userId:
+              user.userId,
+            eventType:
+              "reauth_failure",
+            occurredAt:
+              nowIso,
+            result: "BLOCKED",
+            metadata: {
+              purpose,
+              reason:
+                "INVALID_CREDENTIALS",
+              ...(retryAfter
+                ? {
+                    retryAfter
+                  }
+                : {})
+            }
+          });
+        if (retryAfter) {
+          throw new AuthError(
+            "AUTH_BACKOFF_ACTIVE",
+            429,
+            retryAfter
+          );
+        }
+        throw new AuthError(
+          "INVALID_CREDENTIALS",
+          401
+        );
+      }
+
+      this.store.clearRateLimit(
+        loginTag
+      );
+      return umk;
+    } finally {
+      key?.fill(0);
+    }
   }
 
   private ensureUserSharingKeys(
