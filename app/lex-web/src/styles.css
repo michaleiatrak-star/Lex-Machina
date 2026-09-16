@@ -1435,3 +1435,30 @@ textarea:focus {
     flex-direction: column;
   }
 }
+
+
+.provider-key-link {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.conversation-drop-zone {
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    transform 120ms ease;
+}
+
+.conversation-drop-active {
+  border-color: currentColor;
+  box-shadow: 0 0 0 3px rgba(80, 105, 84, 0.14);
+  transform: translateY(-1px);
+}
+
+.conversation-drop-active textarea {
+  pointer-events: none;
+}
