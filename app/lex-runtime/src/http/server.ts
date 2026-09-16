@@ -61,6 +61,9 @@ import {
 import {
   LegacyCaseStorageMigrator
 } from "../legacy-case-migration.js";
+import {
+  LocalOfficeDocumentTextExtractor
+} from "../office-document-extractor.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -248,7 +251,8 @@ export async function startLocalServer(options?: {
         new LocalPaddleImageOcrEngine()
       ),
       privacyVaultStore,
-      secureCaseDocumentStore
+      secureCaseDocumentStore,
+      new LocalOfficeDocumentTextExtractor()
     ),
     sessionExecutor: new SafeSessionExecutor(
       registry,
