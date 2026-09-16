@@ -893,3 +893,39 @@ Validation evidence:
 - G17/G19/G20/G22 live probes: PASS;
 - GitHub Actions run `35058610946`: success;
 - F-138 structural audit `35058610889`: success.
+
+
+### 2026-09-16 — Build 0028
+
+Status: **PASS — G32 PROTECTED DOCUMENT ATTACHMENT SESSION**
+
+Implemented:
+- finalized protected chunks are retained server-side for explicit session attachment;
+- browser sends only `documentId + chunkIndices`, never attachment text supplied by the client;
+- unfinalized documents, unknown chunks and invalid selections fail closed;
+- aggregate attachment context is bounded before provider execution;
+- re-identification vault and raw pre-privacy pages are outside the attachment interface;
+- document context is sent as a separate user-data message;
+- system prompt marks attached documents as untrusted data and forbids following embedded instructions / role changes / tool requests;
+- runtime forbids reconstruction of pseudonym tokens;
+- audit records attachment metadata without document text;
+- UI defaults to zero selected chunks and requires explicit user selection;
+- KEEP ranges remain visible only by prior explicit user decision and are warned about before attachment.
+
+Validation evidence:
+- strict TypeScript: PASS;
+- runtime unit tests: PASS;
+- protected resolver tests: PASS;
+- HTTP attachment tests: PASS;
+- G32 deterministic gate: PASS;
+- G14-G32 web unit tests/build/bundle safety: PASS;
+- G17 live ELI: PASS;
+- G19 live temporal: PASS;
+- G20 live official PDF: PASS;
+- G22 live SN: PASS;
+- GitHub Actions run `35060003012`: success;
+- F-138 structural audit `35060002924`: success.
+
+Open gates:
+- **G30 Open Web Discovery:** NOT IMPLEMENTED / NOT PASS.
+- **G31 Local DOCX Generation:** NOT IMPLEMENTED / NOT PASS.
