@@ -89,12 +89,15 @@ const required = [
   "Know-how i wzory kancelarii",
   "Know-how kancelarii",
   "Dodaj wiedzę / dokument",
-  "Akta sprawy, OCR i ręczna anonimizacja",
-  "Anonimizuj / pseudonimizuj",
-  "Pozostaw bez anonimizacji",
-  "Oznacz, co ten fragment znaczy",
+  "OCR automatyczny i anonimizacja per plik",
+  "Zdjęcia są od razu kierowane do lokalnego OCR",
+  "Decyzja prywatności dla",
+  "Anonimizuj / pseudonimizuj automatycznie",
+  "Przejrzyj ręcznie",
+  "Pozostaw ten plik bez anonimizacji",
+  "Ta decyzja dotyczy tylko tego pliku",
+  "Mapa reidentyfikacji jest odrębna dla tego documentId",
   "Chunki do analizy AI",
-  "Domyślnie nic nie jest wysyłane do providera",
   "Cytowany fragment dokumentu",
   "Przejdź do cytowanego fragmentu",
   "Dokładny cytat zaznaczony w źródle",
@@ -132,6 +135,11 @@ process.stdout.write(JSON.stringify({
     content.includes("Struktura katalogów") &&
     content.includes("Otwórz w systemie") &&
     content.includes("+ Folder"),
+  automaticOcrPerFilePrivacyPresent:
+    content.includes("OCR automatyczny i anonimizacja per plik") &&
+    content.includes("Ta decyzja dotyczy tylko tego pliku") &&
+    content.includes("Anonimizuj / pseudonimizuj automatycznie") &&
+    content.includes("Mapa reidentyfikacji jest odrębna dla tego documentId"),
   documentDeepLinksPresent:
     content.includes("Cytowany fragment dokumentu") &&
     content.includes("Dokładny cytat zaznaczony w źródle"),
