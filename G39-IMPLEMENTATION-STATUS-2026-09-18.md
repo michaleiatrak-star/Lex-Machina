@@ -60,6 +60,8 @@ Production blocker:
 - `applicationUpdate.trustedSignerThumbprints` is intentionally empty;
 - application updates therefore fail closed until the production Authenticode certificate thumbprint is configured and release artifacts are signed by that certificate.
 
+Negative unit tests now also prove that the signer policy rejects an empty trust root, malformed thumbprints and any weakened `SHA256_ONLY` policy.
+
 Do not mark G39F PASS before a signed release acceptance test succeeds.
 
 ## G39E — skill update transaction
@@ -140,13 +142,15 @@ Implemented:
 - legacy sessions whose model context is unknown retain the previous 160k-character hard cap;
 - existing deterministic local knowledge retrieval remains the source of case/firm knowledge chunks;
 - existing `LEXDOC` citation markers remain validated against real document/chunk identifiers and exact quote locations;
-- session audit/response exposes context strategy, model window, document budget, estimated usage and selected/omitted chunk/document counts.
+- session audit/response exposes context strategy, model window, document budget, estimated usage and selected/omitted chunk/document counts;
+- final local-document citations are re-resolved immediately before HTTP presentation; case-bound citations first restore the current encrypted document through case ACL/key access;
+- changed/unavailable cited chunks fail closed with HTTP 409 before process-workflow state is advanced;
+- UI distinguishes native model context, active runtime context and effective document-context usage;
+- HTTP tests cover both successful citation refresh and source mutation between execution and presentation.
 
 Still required before G39C PASS:
 
 - summary backlinks for context compression;
-- re-fetch the encrypted original evidence immediately before final citation acceptance;
-- expose native context / active runtime context / effective retrieved context distinctly in the UI;
 - quality/regression benchmarks across 64k / 96k / 128k / 160k / 200k;
 - token estimation calibration against the bundled tokenizer/runtime rather than the current conservative character heuristic.
 
