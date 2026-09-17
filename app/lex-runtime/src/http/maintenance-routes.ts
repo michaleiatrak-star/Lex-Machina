@@ -51,15 +51,20 @@ function sendMaintenanceError(
     ? error.message.split(":", 1)[0]!
     : "MAINTENANCE_FAILED";
   const status =
-    code.includes("NOT_AVAILABLE")
+    code.includes("IN_PROGRESS")
       ? 409
-      : code.includes("UNKNOWN")
-        ? 404
-        : code.includes("MISSING") ||
-            code.includes("NOT_VERIFIED") ||
-            code.includes("VALIDATION")
-          ? 503
-          : 500;
+      : code.includes("NOT_AVAILABLE") ||
+          code.includes("UNSUPPORTED") ||
+          code.includes("INVALID")
+        ? 409
+        : code.includes("UNKNOWN")
+          ? 404
+          : code.includes("MISSING") ||
+              code.includes("NOT_VERIFIED") ||
+              code.includes("VALIDATION") ||
+              code.includes("PROVISIONING_FAILED")
+            ? 503
+            : 500;
   res.status(status).json({ error: code });
 }
 
@@ -95,6 +100,38 @@ export function registerMaintenanceRoutes(
           return;
         }
         throw error;
+      }
+    }
+  );
+
+  app.post(
+    "/api/local-models/provision",
+    async (req, res) => {
+      if (!requireAdmin(req, res, authService)) return;
+      try {
+        const modelId =
+          typeof req.body?.modelId === "string"
+            ? req.body.modelId.trim()
+            : "";
+        const contextTokens = Number(req.body?.contextTokens);
+        if (!modelId) {
+          res.status(400).json({ error: "LOCAL_MODEL_ID_REQUIRED" });
+          return;
+        }
+        if (!Number.isInteger(contextTokens)) {
+          res.status(400).json({ error: "LOCAL_MODEL_CONTEXT_INVALID" });
+          return;
+        }
+        const provisioned = await localModels.provision(
+          modelId,
+          contextTokens
+        );
+        res.json({
+          ...provisioned,
+          runtime: localModels.status()
+        });
+      } catch (error) {
+        sendMaintenanceError(res, error);
       }
     }
   );
