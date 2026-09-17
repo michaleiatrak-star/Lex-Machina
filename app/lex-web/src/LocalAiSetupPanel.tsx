@@ -75,6 +75,20 @@ type LocalRuntimeStatus = {
     percent: number | null;
     updatedAt: string;
   } | null;
+  hardware: {
+    platform: string;
+    arch: string;
+    totalMemoryBytes: number;
+    logicalCpuCount: number;
+    cpuModel: string | null;
+    accelerators: Array<{
+      name: string;
+      driverVersion?: string;
+    }>;
+    packagedBackend: string;
+    gpuOffloadEnabled: false;
+    detectedAt: string;
+  };
 };
 
 type LocalModelsResponse = {
@@ -517,6 +531,23 @@ export function LocalAiSetupPanel({
                   <span>Natywny kontekst: {formatTokens(selected.nativeContextWindow)}</span>
                   <span>Dozwolony profil: {formatTokens(selected.minimumContextWindow)}–{formatTokens(selected.maximumContextWindow)}</span>
                   <span>{extended ? "Tryb: YaRN — rozszerzenie ponad natywne okno" : "Tryb: natywny / zredukowany"}</span>
+                  <span>
+                    Sprzęt: {formatBytes(data.runtime.hardware.totalMemoryBytes)} RAM
+                    {" · "}{data.runtime.hardware.logicalCpuCount} wątków logicznych
+                    {data.runtime.hardware.cpuModel
+                      ? ` · ${data.runtime.hardware.cpuModel}`
+                      : ""}
+                  </span>
+                  <span>
+                    Backend inference: {data.runtime.hardware.packagedBackend}
+                    {data.runtime.hardware.accelerators.length > 0
+                      ? ` · GPU wykryte: ${data.runtime.hardware.accelerators.map((item) => item.name).join(", ")}`
+                      : " · brak wykrytego GPU"}
+                    {!data.runtime.hardware.gpuOffloadEnabled &&
+                    data.runtime.hardware.accelerators.length > 0
+                      ? " · GPU nie jest używane przez obecny pakiet"
+                      : ""}
+                  </span>
                   {data.runtime.qualification &&
                   data.runtime.qualification.modelId === selected.id ? (
                     <span>
