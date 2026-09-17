@@ -35,6 +35,10 @@ import type {
   ProcessPleadingMode,
   ProcessPleadingStage
 } from "./process-pleading-state.js";
+import {
+  orchestrateDocumentContext,
+  type ContextBudgetReport
+} from "./context-orchestrator.js";
 
 export type SessionDocumentAttachment = {
   documentId: string;
@@ -58,6 +62,7 @@ export type SessionExecutionRequest = {
   model: string;
   primarySkill: string;
   mode: "LAIK" | "PRAWNIK";
+  modelContextTokens?: number;
   processWorkflowContext?: {
     stage: ProcessPleadingStage;
     checkpoint: ProcessPleadingCheckpoint;
@@ -155,6 +160,7 @@ export type SessionExecutionResponse = {
     requiredResources: string[];
     missingResources: string[];
   };
+  context?: ContextBudgetReport;
   processWorkflow?: {
     caseId: string;
     mode: ProcessPleadingMode;
@@ -173,14 +179,8 @@ export type SessionExecutionResponse = {
 function buildDocumentContext(
   attachments: SessionDocumentAttachment[]
 ): string {
-  if (attachments.length > 4) {
-    throw new Error("TOO_MANY_DOCUMENT_ATTACHMENTS");
-  }
-
-  let totalChars = 0;
   const sections = attachments.map((attachment) => {
     const chunks = attachment.chunks.map((chunk) => {
-      totalChars += chunk.text.length;
       const sourceLabel =
         attachment.sourceScope === "FIRM_KNOWLEDGE"
           ? "FIRM KNOWLEDGE"
@@ -194,10 +194,6 @@ function buildDocumentContext(
     });
     return chunks.join("\n\n");
   });
-
-  if (totalChars > 160_000) {
-    throw new Error("DOCUMENT_ATTACHMENT_CONTEXT_TOO_LARGE");
-  }
 
   return sections.join("\n\n---\n\n");
 }
@@ -255,10 +251,35 @@ export class SafeSessionExecutor implements SessionExecutor {
     const verificationTools = this.verificationToolFactory?.(ledger);
     const corpusTools = new LegalCorpusToolRuntime(this.registry);
 
-    const attachments = request.documentAttachments ?? [];
-    const documentContext = attachments.length > 0
-      ? buildDocumentContext(attachments)
-      : undefined;
+    const contextSelection =
+      orchestrateDocumentContext({
+        attachments:
+          request.documentAttachments ?? [],
+        query: request.query,
+        ...(request.modelContextTokens
+          ? {
+              modelContextTokens:
+                request.modelContextTokens
+            }
+          : {})
+      });
+    const attachments =
+      contextSelection.attachments;
+    const documentContext =
+      attachments.length > 0
+        ? buildDocumentContext(
+            attachments
+          )
+        : undefined;
+
+    audit.record(
+      "gate",
+      "G39C_CONTEXT_BUDGET",
+      "OK",
+      {
+        ...contextSelection.report
+      }
+    );
 
     for (const attachment of attachments) {
       audit.record(
@@ -488,6 +509,9 @@ export class SafeSessionExecutor implements SessionExecutor {
         unverified: verificationRecords.filter((record) => record.status === "UNVERIFIED").length
       },
       evidence: publicEvidenceBundle(verificationRecords),
+      context: {
+        ...contextSelection.report
+      },
       audit: {
         result: completeness.result,
         eventCount: completeness.eventCount,
