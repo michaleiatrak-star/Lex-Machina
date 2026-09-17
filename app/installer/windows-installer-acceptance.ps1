@@ -100,12 +100,23 @@ try {
     throw "INSTALLER_ACCEPTANCE_INSTALL_FAILED:$($process.ExitCode)"
   }
 
-  $sidecar = Get-ChildItem -Path $InstallRoot -File -Recurse -Filter "lex-runtime-sidecar.exe" |
-    Select-Object -First 1
-  if (-not $sidecar) {
-    throw "INSTALLER_ACCEPTANCE_SIDECAR_MISSING"
+  # The desktop trust boundary resolves the runtime from resource_dir\runtime.
+  # Validate that exact installed-copy contract rather than whichever duplicate
+  # sidecar Get-ChildItem happens to return first.
+  $runtimeRoot = Join-Path $InstallRoot "runtime"
+  $sidecarPath = Join-Path $runtimeRoot "lex-runtime-sidecar.exe"
+  if (-not (Test-Path -LiteralPath $sidecarPath -PathType Leaf)) {
+    $sidecarCandidates = @(
+      Get-ChildItem -Path $InstallRoot -File -Recurse -Filter "lex-runtime-sidecar.exe" |
+        ForEach-Object { $_.FullName }
+    )
+    if ($sidecarCandidates.Count -gt 0) {
+      Write-Host "Installed sidecar candidates outside the required runtime root:"
+      $sidecarCandidates | ForEach-Object { Write-Host " - $_" }
+    }
+    throw "INSTALLER_ACCEPTANCE_SIDECAR_MISSING:$sidecarPath"
   }
-  $runtimeRoot = $sidecar.Directory.FullName
+  $sidecar = Get-Item -LiteralPath $sidecarPath
   $componentLock = Join-Path $runtimeRoot "component-lock.json"
   $privateNode = Join-Path $runtimeRoot "node\node.exe"
   $privatePython = Join-Path $runtimeRoot "python\python.exe"
