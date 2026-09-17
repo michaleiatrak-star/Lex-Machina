@@ -76,6 +76,32 @@ const CASE_ID = /^case_[a-f0-9]{32}$/;
 const ISO_DATE_MAX = 64;
 const HISTORY_MAX = 256;
 
+const CHECKPOINT_STAGE:
+  Readonly<Record<
+    ProcessPleadingCheckpoint,
+    Exclude<
+      ProcessPleadingStage,
+      "CG_ACCEPTANCE" | "FINAL"
+    >
+  >> = {
+    "CP-1a": "W1",
+    "CP-1b": "W1",
+    "CP-1c-skan": "W1",
+    "CP-PD": "W1",
+    "CP-FSL-D": "W1",
+    "CP-1c-macierz": "W1",
+    "CP-1c-lancuch": "W1",
+    "CP-1d-anomalie": "W1",
+    "CP-1d": "W1",
+    "CP-W1": "W1",
+    "CP-PRE-W2": "PRE_W2",
+    "CP-ATAK": "W2",
+    "CP-PODMIOT": "W3",
+    "CP-QUALITY": "W3",
+    "CP-AUDYT": "W3",
+    "CP-PEER": "W3"
+  };
+
 const MAIN_STAGE_CHECKPOINTS:
   Readonly<Record<
     Exclude<ProcessPleadingStage, "CG_ACCEPTANCE" | "FINAL">,
@@ -405,7 +431,9 @@ export function markProcessCheckpointReady(
     state.stage === "FINAL" ||
     state.pendingCheckpoint !== null ||
     state.checkpoints[checkpoint] !==
-      "OPEN"
+      "OPEN" ||
+    CHECKPOINT_STAGE[checkpoint] !==
+      state.stage
   ) {
     throw new Error(
       "PROCESS_PLEADING_CHECKPOINT_TRANSITION_INVALID"
@@ -551,6 +579,8 @@ export function markProcessCheckpointNotApplicable(
     state.pendingCheckpoint !== null ||
     state.checkpoints[checkpoint] !==
       "OPEN" ||
+    CHECKPOINT_STAGE[checkpoint] !==
+      state.stage ||
     MAIN_STAGE_CHECKPOINTS[
       state.stage
     ].includes(checkpoint)
