@@ -58,12 +58,12 @@ function registryWithSkills(): LexSkillRegistry {
     },
     {
       name: "chronologia-sprawy-v1",
-      description: "chronologia sprawy sądowej zdarzenia terminy i dokumenty",
+      description: "oś czasu zdarzeń dokumentów i terminów",
       type: "executive-chronologia"
     },
     {
       name: "raport-klienta-v1",
-      description: "raport dla klienta o sprawie sądowej ryzykach i działaniach",
+      description: "podsumowanie dla klienta rekomendacje ryzyka i działania",
       type: "executive-raport"
     },
     {
@@ -82,6 +82,13 @@ function registryWithSkills(): LexSkillRegistry {
       type: "executive-guide"
     }
   ];
+  const crossSkillBodies: Record<string, string> = {
+    "analiza-sadowa-v6": [
+      "Integracje między-skillowe:",
+      "- chronologia-sprawy-v1",
+      "- raport-klienta-v1"
+    ].join("\n")
+  };
 
   for (const skill of skills) {
     const directory = path.join(root, skill.name);
@@ -94,7 +101,8 @@ function registryWithSkills(): LexSkillRegistry {
         `type: ${skill.type}`,
         `description: \"${skill.description}\"`,
         "---",
-        `# ${skill.name}`
+        `# ${skill.name}`,
+        crossSkillBodies[skill.name] ?? ""
       ].join("\n")
     );
   }
@@ -122,7 +130,7 @@ describe("skill selection", () => {
     const registry = registryWithSkills();
     const selected = resolveAdditionalSkills(
       registry,
-      "Przeanalizuj sprawę sądową, ułóż chronologię i przygotuj raport dla klienta o ryzykach.",
+      "Przeanalizuj sprawę sądową, wykonaj chronologia sprawy i przygotuj raport klienta o ryzykach.",
       "dr-03-prawo-procesowe",
       true,
       []
@@ -138,6 +146,21 @@ describe("skill selection", () => {
         "raport-klienta-v1"
       ])
     );
+  });
+
+  it("lets an active execution skill delegate to referenced execution skills", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Wykonaj analizę sprawy sądowej i dobierz potrzebne moduły.",
+      "dr-03-prawo-procesowe",
+      true,
+      []
+    );
+
+    expect(selected.executionSkills).toContain("analiza-sadowa-v6");
+    expect(selected.executionSkills).toContain("chronologia-sprawy-v1");
+    expect(selected.executionSkills).toContain("raport-klienta-v1");
   });
 
   it("can add more than one legal domain to a single turn", () => {
