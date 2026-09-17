@@ -45,6 +45,14 @@ const onlineBuild =
   read(
     "app/installer/build-windows-online.ps1"
   );
+const standaloneBuild =
+  read(
+    "app/installer/build-offline-standalone.ps1"
+  );
+const selfExtractor =
+  read(
+    "app/installer/offline-selfextract/OfflineSelfExtractor.cs"
+  );
 const acceptance =
   read(
     "app/installer/windows-installer-acceptance.ps1"
@@ -70,7 +78,7 @@ const checks = {
   pullRequestGate:
     workflow.includes("pull_request:") &&
     workflow.includes(
-      "Build and accept offline Windows distribution bundle"
+      "Build and accept standalone offline Windows EXE"
     ),
   offlineWebView2:
     offlineConfig.bundle?.windows
@@ -108,6 +116,31 @@ const checks = {
     ) &&
     workflow.includes(
       "tar.exe -a -c -f"
+    ) &&
+    workflow.includes(
+      "Build standalone offline EXE"
+    ) &&
+    workflow.includes(
+      "build-offline-standalone.ps1"
+    ),
+  standaloneSelfExtractorIntegrity:
+    standaloneBuild.includes(
+      "LEXOFF01"
+    ) &&
+    standaloneBuild.includes(
+      "Get-FileHash -Algorithm SHA256"
+    ) &&
+    selfExtractor.includes(
+      'FooterMagic = "LEXOFF01"'
+    ) &&
+    selfExtractor.includes(
+      "SHA256.Create()"
+    ) &&
+    selfExtractor.includes(
+      "OFFLINE_WRAPPER_PAYLOAD_HASH_MISMATCH"
+    ) &&
+    selfExtractor.includes(
+      "LexMachina-Offline-Runtime.zip"
     ),
   offlineComponentPolicy:
     componentLock.includes(
@@ -144,7 +177,7 @@ const checks = {
     ),
   installedCopyAcceptance:
     workflow.includes(
-      "Offline clean-machine installed-copy acceptance"
+      "Offline clean-machine standalone EXE acceptance"
     ) &&
     workflow.includes(
       "-ExpectedNetworkRequiredAtInstall $false"
@@ -155,8 +188,14 @@ const checks = {
     workflow.includes(
       "-ForceVisualCppRuntimeInstall"
     ) &&
+    workflow.includes(
+      "-StandaloneOfflineExe"
+    ) &&
     acceptance.includes(
-      "BlockNetworkDuringInstall"
+      "StandaloneOfflineExe"
+    ) &&
+    acceptance.includes(
+      "INSTALLER_ACCEPTANCE_STANDALONE_HAS_ADJACENT_RUNTIME_BUNDLE"
     ) &&
     acceptance.includes(
       "New-NetFirewallRule"
@@ -195,7 +234,13 @@ const checks = {
       "SHA256-OFFLINE.txt"
     ) &&
     workflow.includes(
+      '"sha256=$standaloneHash"'
+    ) &&
+    workflow.includes(
       "runtime_bundle_sha256"
+    ) &&
+    workflow.includes(
+      "standalone/LexMachina-Offline-Setup.exe"
     ) &&
     workflow.includes(
       "LexMachina-Windows-Offline-Setup"
