@@ -3,6 +3,11 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import {
+  WindowsAuthenticodeInstallerVerifier,
+  type ApplicationInstallerVerifier,
+  type VerifiedApplicationPublisher
+} from "./application-update-verifier.js";
 import { LexSkillRegistry } from "./registry.js";
 import {
   CURRENT_APPLICATION_VERSION,
@@ -15,9 +20,24 @@ import {
 export type ApplicationUpdateDownload = {
   version: string;
   token: string;
+  receiptToken: string;
   filename: string;
   sha256: string;
   bytes: number;
+  stagedAt: string;
+  publisher: VerifiedApplicationPublisher;
+};
+
+export type ApplicationUpdateReceipt = {
+  schemaVersion: 1;
+  kind: "LEX_MACHINA_APPLICATION_UPDATE";
+  version: string;
+  installerToken: string;
+  originalFilename: string;
+  sha256: string;
+  bytes: number;
+  stagedAt: string;
+  publisher: VerifiedApplicationPublisher;
 };
 
 export type SkillUpdateStatus = {
@@ -44,6 +64,10 @@ function localAppDataRoot(): string {
 
 export function installedSkillOverlayRoot(): string {
   return path.join(localAppDataRoot(), "skills", "current");
+}
+
+export function applicationUpdateStagingRoot(): string {
+  return path.join(os.tmpdir(), "LexMachinaUpdate");
 }
 
 function markerPath(root: string): string {
@@ -154,7 +178,9 @@ function locateSkillRoot(stage: string): string {
 export class MaintenanceService {
   constructor(
     private readonly discovery: UpdateDiscovery,
-    private readonly fetchImpl: typeof fetch = fetch
+    private readonly fetchImpl: typeof fetch = fetch,
+    private readonly installerVerifier: ApplicationInstallerVerifier =
+      new WindowsAuthenticodeInstallerVerifier()
   ) {}
 
   async applicationStatus(): Promise<UpdateDiscoveryResult> {
@@ -171,21 +197,55 @@ export class MaintenanceService {
     }
     const version = requireLatestVersion(status);
     const bytes = await downloadVerified(status.installer, this.fetchImpl);
-    const root = path.join(os.tmpdir(), "LexMachinaUpdate");
+    const root = applicationUpdateStagingRoot();
     fs.mkdirSync(root, { recursive: true });
     const nonce = randomBytes(8).toString("hex");
     const token = `update_${version.replaceAll(".", "-")}_${nonce}.exe`;
+    const receiptToken = token.replace(/\.exe$/i, ".json");
     const target = path.join(root, token);
     const temporary = `${target}.tmp`;
-    fs.writeFileSync(temporary, bytes, { flag: "wx" });
-    fs.renameSync(temporary, target);
-    return {
-      version,
-      token,
-      filename: status.installer.name,
-      sha256: status.installer.sha256,
-      bytes: bytes.byteLength
-    };
+    const receiptPath = path.join(root, receiptToken);
+    const receiptTemporary = `${receiptPath}.tmp`;
+
+    try {
+      fs.writeFileSync(temporary, bytes, { flag: "wx" });
+      fs.renameSync(temporary, target);
+      const publisher = this.installerVerifier.verify(target);
+      const stagedAt = new Date().toISOString();
+      const receipt: ApplicationUpdateReceipt = {
+        schemaVersion: 1,
+        kind: "LEX_MACHINA_APPLICATION_UPDATE",
+        version,
+        installerToken: token,
+        originalFilename: status.installer.name,
+        sha256: status.installer.sha256.toLowerCase(),
+        bytes: bytes.byteLength,
+        stagedAt,
+        publisher
+      };
+      fs.writeFileSync(
+        receiptTemporary,
+        `${JSON.stringify(receipt, null, 2)}\n`,
+        { encoding: "utf8", flag: "wx" }
+      );
+      fs.renameSync(receiptTemporary, receiptPath);
+      return {
+        version,
+        token,
+        receiptToken,
+        filename: status.installer.name,
+        sha256: status.installer.sha256.toLowerCase(),
+        bytes: bytes.byteLength,
+        stagedAt,
+        publisher
+      };
+    } catch (error) {
+      fs.rmSync(temporary, { force: true });
+      fs.rmSync(receiptTemporary, { force: true });
+      fs.rmSync(receiptPath, { force: true });
+      fs.rmSync(target, { force: true });
+      throw error;
+    }
   }
 
   async skillStatus(): Promise<SkillUpdateStatus> {
