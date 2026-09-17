@@ -416,6 +416,7 @@ export async function startLocalServer(options?: {
   app.use(helmet());
   app.use(desktopBootstrapGuard);
   app.use(loopbackOriginGuard);
+  app.use(express.json({ limit: "2mb" }));
   registerLegacyMigrationRoutes(
     app,
     {
