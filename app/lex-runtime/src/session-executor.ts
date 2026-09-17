@@ -135,6 +135,8 @@ export type SessionExecutionResponse = {
     result: "PASS" | "BLOCKED";
     eventCount: number;
     closed: boolean;
+    missing?: string[];
+    violations?: string[];
   };
   workflow?: {
     id: string;
@@ -460,7 +462,9 @@ export class SafeSessionExecutor implements SessionExecutor {
       audit: {
         result: completeness.result,
         eventCount: completeness.eventCount,
-        closed: audit.isClosed
+        closed: audit.isClosed,
+        missing: [...completeness.missing],
+        violations: [...completeness.violations]
       },
       workflow: {
         id: execution.workflowPlan.id,
