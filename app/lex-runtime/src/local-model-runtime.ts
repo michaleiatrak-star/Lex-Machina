@@ -632,9 +632,69 @@ export class LocalModelRuntime {
     await this.stop();
     fs.mkdirSync(this.rootDir, { recursive: true });
     const configPath = this.configPath();
+    const previousConfigObject =
+      this.readConfig();
     const previousConfig = fs.existsSync(configPath)
       ? fs.readFileSync(configPath)
       : null;
+    const targetModelPath =
+      path.join(
+        this.rootDir,
+        "models",
+        model.filename
+      );
+    const rollbackModelPath =
+      `${targetModelPath}.lex-rollback`;
+    const previousTargetWasActive =
+      Boolean(
+        previousConfigObject &&
+        path.resolve(
+          previousConfigObject
+            .model.path
+        ) ===
+          path.resolve(
+            targetModelPath
+          ) &&
+        fs.existsSync(
+          targetModelPath
+        )
+      );
+
+    if (previousTargetWasActive) {
+      fs.rmSync(
+        rollbackModelPath,
+        { force: true }
+      );
+      fs.renameSync(
+        targetModelPath,
+        rollbackModelPath
+      );
+    }
+
+    const restoreModelFile = () => {
+      if (
+        previousTargetWasActive &&
+        fs.existsSync(
+          rollbackModelPath
+        )
+      ) {
+        fs.rmSync(
+          targetModelPath,
+          { force: true }
+        );
+        fs.renameSync(
+          rollbackModelPath,
+          targetModelPath
+        );
+      }
+    };
+    const commitModelFile = () => {
+      fs.rmSync(
+        rollbackModelPath,
+        { force: true }
+      );
+    };
+
     const restorePreviousConfig = () => {
       if (previousConfig) {
         fs.writeFileSync(configPath, previousConfig);
@@ -727,12 +787,14 @@ export class LocalModelRuntime {
         await this.stop();
       }
 
+      commitModelFile();
       return {
         model: this.publicDescriptor(model, config),
         contextTokens: config.context.requestedTokens,
         configPath
       };
     } catch (error) {
+      restoreModelFile();
       restorePreviousConfig();
       this.provisioningProgress = {
         phase: "FAILED",
@@ -1030,8 +1092,16 @@ export class LocalModelRuntime {
       throw new Error("LOCAL_MODEL_CONTEXT_INVALID");
     }
     const policy = this.contextPolicy();
-    const minimum = model.minimumContext ?? policy.minimum;
-    const maximum = model.maximumRuntimeContext ?? model.nativeContext;
+    const minimum = Math.max(
+      policy.minimum,
+      model.minimumContext ??
+        policy.minimum
+    );
+    const maximum = Math.min(
+      policy.maximum,
+      model.maximumRuntimeContext ??
+        model.nativeContext
+    );
     if (contextTokens < minimum || contextTokens > maximum) {
       throw new Error(
         `LOCAL_MODEL_CONTEXT_UNSUPPORTED:${contextTokens}:${minimum}:${maximum}`
