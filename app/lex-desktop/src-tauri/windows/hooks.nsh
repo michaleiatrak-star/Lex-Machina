@@ -1,3 +1,22 @@
+!define LEX_HOOK_FILE_DIR "${__FILEDIR__}"
+
+!macro NSIS_HOOK_PREINSTALL
+  SetOutPath "$PLUGINSDIR"
+  File "/oname=lex-get-install-state.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\get-install-state.ps1"
+  File "/oname=lex-target-release-source.json" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-release-source.json"
+
+  DetailPrint "Lex Machina: rozpoznawanie stanu istniejącej instalacji..."
+  nsExec::ExecToStack '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$PLUGINSDIR\lex-get-install-state.ps1" -RuntimeRoot "$INSTDIR\runtime" -TargetManifestPath "$PLUGINSDIR\lex-target-release-source.json" -OutputPath "$PLUGINSDIR\lex-install-state.json" -FailOnDowngrade'
+  Pop $0
+  Pop $1
+  ${If} $0 != 0
+    DetailPrint "Lex Machina: preinstall state gate zablokował instalację (exit=$0)."
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: instalacja została zatrzymana przez kontrolę stanu.$\r$\n$1$\r$\n$\r$\nJeżeli zainstalowana wersja jest nowsza, użyj nowszego instalatora zamiast wykonywać downgrade." /SD IDOK
+    Abort
+  ${EndIf}
+  DetailPrint "Lex Machina: stan instalacji $1"
+!macroend
+
 !macro NSIS_HOOK_POSTINSTALL
   IfFileExists "$EXEDIR\LexMachina-Offline-Runtime.zip" lex_offline_bundle lex_online_bootstrap
 
