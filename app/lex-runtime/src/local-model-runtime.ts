@@ -334,6 +334,45 @@ export class LocalModelRuntime {
     return this.models().map((model) => this.publicDescriptor(model, configured));
   }
 
+  installedModelUpdateIdentity(): {
+    modelId: LocalModelId;
+    sha256: string;
+    contextTokens: number;
+  } | null {
+    const config = this.readConfig();
+    if (
+      !config ||
+      !/^[a-f0-9]{64}$/i.test(
+        config.model.sha256
+      )
+    ) {
+      return null;
+    }
+    const modelId =
+      normalizeModelId(
+        config.model.id
+      );
+    const spec =
+      this.modelSpec(modelId);
+    if (
+      !spec ||
+      !fs.existsSync(
+        config.model.path
+      )
+    ) {
+      return null;
+    }
+    return {
+      modelId,
+      sha256:
+        config.model.sha256
+          .toLowerCase(),
+      contextTokens:
+        config.context
+          .requestedTokens
+    };
+  }
+
   hardwareProfile(): LocalHardwareProfile {
     const now = Date.now();
     if (
