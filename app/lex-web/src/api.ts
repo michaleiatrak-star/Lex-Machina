@@ -590,6 +590,12 @@ export type SessionExecutionResponse = {
     eventCount: number;
     closed: boolean;
   };
+  workflow?: {
+    id: string;
+    result: "PASS" | "BLOCKED";
+    requiredResources: string[];
+    missingResources: string[];
+  };
 };
 
 export type ApiFailure = {
