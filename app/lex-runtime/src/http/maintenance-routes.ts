@@ -250,6 +250,50 @@ export function registerMaintenanceRoutes(
     }
   );
 
+  app.post(
+    "/api/local-models/update/apply",
+    async (req, res) => {
+      if (!requireAdmin(req, res, authService)) return;
+      try {
+        const installed =
+          localModels.installedModelUpdateIdentity();
+        if (!installed) {
+          throw new Error(
+            "MODEL_PACK_UPDATE_MODEL_NOT_INSTALLED"
+          );
+        }
+        const target =
+          await maintenance
+            .verifiedModelPackTarget(
+              installed.modelId
+            );
+        const result =
+          await localModels
+            .applyVerifiedModelPack({
+              target,
+              contextTokens:
+                installed.contextTokens
+            });
+        res.json({
+          ...result,
+          runtime:
+            localModels.status(),
+          update:
+            await maintenance
+              .modelPackStatus({
+                modelId:
+                  installed.modelId,
+                sha256:
+                  result.receipt
+                    .modelSha256
+              })
+        });
+      } catch (error) {
+        sendMaintenanceError(res, error);
+      }
+    }
+  );
+
   app.get(
     "/api/skills/update/status",
     async (req, res) => {
