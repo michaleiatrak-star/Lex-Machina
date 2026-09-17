@@ -1,0 +1,45 @@
+name: UI Chat Validation
+
+on:
+  pull_request:
+    paths:
+      - "app/lex-web/**"
+      - "app/lex-runtime/src/execution-engine.ts"
+      - "app/lex-runtime/src/validate-g37c2.ts"
+      - "app/lex-runtime/src/validate-g37f.ts"
+      - "app/lex-desktop/src-tauri/tauri.conf.json"
+      - ".github/workflows/ui-chat-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-web-chat:
+    name: Build and test chat workspace
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install web dependencies
+        working-directory: app/lex-web
+        run: npm install --no-audit --no-fund
+
+      - name: Run web tests
+        working-directory: app/lex-web
+        run: npm test
+
+      - name: Build web application
+        working-directory: app/lex-web
+        run: npm run build
+
+      - name: Validate built distribution
+        working-directory: app/lex-web
+        run: npm run validate:g14

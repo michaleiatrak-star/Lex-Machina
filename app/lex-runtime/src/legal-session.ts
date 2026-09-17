@@ -40,7 +40,8 @@ export class LegalSession {
 
   constructor(
     private readonly registry: LexSkillRegistry,
-    private readonly routerSkill = "prawny-router-v3"
+    private readonly routerSkill = "prawny-router-v3",
+    private readonly sharedSkill = "shared"
   ) {}
 
   private emit(
@@ -70,9 +71,24 @@ export class LegalSession {
       );
     }
 
-    // The router is the first skill read for every legal execution.
+    // The legal router is always the first skill read.
     this.emit("skill_read", this.routerSkill, "OK");
     this.state = "ROUTER_LOADED";
+
+    // shared is the mandatory base library for all legal skills. We do not
+    // inject its entire body into the provider prompt; instead we require the
+    // library to be present and then load the canonical shared resources below.
+    const shared = this.registry.get(this.sharedSkill);
+    if (!shared) {
+      this.state = "BLOCKED";
+      this.emit("skill_read", this.sharedSkill, "BLOCKED");
+      throw new LegalSessionBootstrapError(
+        "Mandatory shared legal library is unavailable.",
+        this.sharedSkill,
+        [...this.events]
+      );
+    }
+    this.emit("skill_read", this.sharedSkill, "OK");
 
     for (const resource of CORE_LEGAL_RESOURCES) {
       let resolved: string | null = null;
