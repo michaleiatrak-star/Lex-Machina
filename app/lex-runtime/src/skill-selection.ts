@@ -1,4 +1,4 @@
-import type { LexSkillRegistry } from "./registry.js";
+import type { LexSkillRecord, LexSkillRegistry } from "./registry.js";
 
 export const SKILL_SELECTION_ENVELOPE_PREFIX = "__LEX_SKILLS_V1__";
 export const MANDATORY_SESSION_SKILLS = [
@@ -23,6 +23,7 @@ export type SkillSelectionEnvelope = {
 export type ResolvedSkillSelection = {
   additionalSkills: string[];
   loadedSkills: string[];
+  executionSkill?: string;
 };
 
 function normalize(value: string): string {
@@ -107,6 +108,19 @@ function scoreSkill(
   return score;
 }
 
+function isExecutionSkill(skill: LexSkillRecord): boolean {
+  return (
+    typeof skill.frontmatter.type === "string" &&
+    skill.frontmatter.type.toLowerCase().startsWith("executive-")
+  );
+}
+
+function descriptionOf(skill: LexSkillRecord): string {
+  return typeof skill.frontmatter.description === "string"
+    ? skill.frontmatter.description
+    : "";
+}
+
 export function resolveAdditionalSkills(
   registry: LexSkillRegistry,
   query: string,
@@ -129,26 +143,61 @@ export function resolveAdditionalSkills(
   );
 
   const selected = new Set<string>(manual);
+  let executionSkill = manual.find((name) => {
+    const skill = registry.get(name);
+    return Boolean(skill && isExecutionSkill(skill));
+  });
 
   if (automatic) {
     const queryTokens = tokens(query);
-    const ranked = [...registry.skills.values()]
-      .filter((skill) => !core.has(skill.name) && skill.name !== "shared")
+    const candidates = [...registry.skills.values()]
+      .filter((skill) => !core.has(skill.name) && skill.name !== "shared");
+
+    if (!executionSkill) {
+      const rankedExecution = candidates
+        .filter(isExecutionSkill)
+        .map((skill) => ({
+          skill,
+          score: scoreSkill(
+            queryTokens,
+            skill.name,
+            descriptionOf(skill)
+          )
+        }))
+        .sort((left, right) =>
+          right.score - left.score ||
+          left.skill.name.localeCompare(right.skill.name, "pl")
+        );
+
+      const bestExecution =
+        rankedExecution.find((item) => item.score >= 2)?.skill ??
+        candidates.find((skill) => skill.name === "przewodnik-prawny-v2") ??
+        rankedExecution[0]?.skill;
+
+      if (bestExecution) {
+        executionSkill = bestExecution.name;
+        selected.add(bestExecution.name);
+      }
+    }
+
+    const rankedAuxiliary = candidates
+      .filter((skill) => !isExecutionSkill(skill))
       .map((skill) => ({
         name: skill.name,
         score: scoreSkill(
           queryTokens,
           skill.name,
-          typeof skill.frontmatter.description === "string"
-            ? skill.frontmatter.description
-            : ""
+          descriptionOf(skill)
         )
       }))
       .filter((item) => item.score >= 4)
-      .sort((left, right) => right.score - left.score || left.name.localeCompare(right.name, "pl"))
-      .slice(0, 4);
+      .sort((left, right) =>
+        right.score - left.score ||
+        left.name.localeCompare(right.name, "pl")
+      )
+      .slice(0, 3);
 
-    for (const item of ranked) {
+    for (const item of rankedAuxiliary) {
       selected.add(item.name);
     }
   }
@@ -162,6 +211,7 @@ export function resolveAdditionalSkills(
       "prawo-polskie-v2",
       primarySkill,
       ...additionalSkills
-    ]
+    ],
+    ...(executionSkill ? { executionSkill } : {})
   };
 }
