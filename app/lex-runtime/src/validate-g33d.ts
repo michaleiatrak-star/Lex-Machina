@@ -63,6 +63,7 @@ console.log(JSON.stringify({
   gate: "G33D_INSTALLER_BOOTSTRAP_SELFTEST_ACCEPTANCE",
   result: pass ? "PASS" : "BLOCKED",
   checks,
-  expectedUserActionAfterInstall: "PROVIDER_API_KEY_ONLY"
+  expectedUserActionAfterInstall:
+    "PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"
 }, null, 2));
 if (!pass) process.exitCode = 1;
