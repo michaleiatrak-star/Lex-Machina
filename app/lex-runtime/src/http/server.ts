@@ -375,6 +375,12 @@ export async function startLocalServer(options?: {
     localModels
   );
   const providerGateway = new ProviderGateway(providerRegistry);
+  const modelCatalog =
+    new DynamicModelCatalog(
+      credentials,
+      undefined,
+      localModels
+    );
 
   const legalSourceVerifier =
     new OfficialLegalSourceVerifier(
@@ -419,7 +425,7 @@ export async function startLocalServer(options?: {
 
   const coreApp = createLexHttpApp({
     registry,
-    modelCatalog: new DynamicModelCatalog(credentials),
+    modelCatalog,
     credentialResolver: credentials,
     credentialManager: credentials,
     updateDiscovery,
