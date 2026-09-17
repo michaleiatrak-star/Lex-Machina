@@ -24,9 +24,9 @@ concurrency:
 
 jobs:
   build-offline-installer:
-    name: Build and accept offline Windows distribution bundle
+    name: Build and accept standalone offline Windows EXE
     runs-on: windows-latest
-    timeout-minutes: 180
+    timeout-minutes: 210
 
     steps:
       - name: Checkout
@@ -96,11 +96,6 @@ jobs:
       - name: Rebuild thin installer payload
         shell: pwsh
         run: |
-          # The complete offline runtime contains tens of thousands of files. The
-          # payload self-test can leave a private Node/sidecar child alive briefly,
-          # which keeps a Windows handle inside runtime and makes Directory.Move
-          # fail with AccessDenied. Retire only processes whose executable lives
-          # inside this generated runtime, then atomically move the tree aside.
           $fullRuntime = (Resolve-Path "app/lex-desktop/src-tauri/runtime").Path
           $retiredRuntime = Join-Path $env:RUNNER_TEMP "lex-offline-runtime-built"
 
@@ -153,7 +148,7 @@ jobs:
           CI: "true"
         run: npx tauri build --bundles nsis --config src-tauri/tauri.offline.conf.json
 
-      - name: Assemble offline distribution
+      - name: Assemble internal offline distribution
         id: locate
         shell: pwsh
         run: |
@@ -166,37 +161,62 @@ jobs:
           $bundle = "${{ steps.runtime_bundle.outputs.bundle }}"
           $bundleDest = Join-Path $installer.Directory.FullName "LexMachina-Offline-Runtime.zip"
           Copy-Item -LiteralPath $bundle -Destination $bundleDest -Force
-          Copy-Item -LiteralPath (Join-Path (Split-Path $bundle) "component-lock-offline.json") -Destination (Join-Path $installer.Directory.FullName "component-lock-offline.json") -Force
+          $lockDest = Join-Path $installer.Directory.FullName "component-lock-offline.json"
+          Copy-Item -LiteralPath (Join-Path (Split-Path $bundle) "component-lock-offline.json") -Destination $lockDest -Force
 
           "installer=$($installer.FullName)" >> $env:GITHUB_OUTPUT
           "bundle=$bundleDest" >> $env:GITHUB_OUTPUT
-          Write-Host "Installer: $($installer.FullName)"
+          "lock=$lockDest" >> $env:GITHUB_OUTPUT
+          Write-Host "Internal installer: $($installer.FullName)"
           Write-Host "Runtime bundle: $bundleDest"
 
-      - name: Offline clean-machine installed-copy acceptance
+      - name: Build standalone offline EXE
+        id: standalone
+        shell: pwsh
+        run: |
+          $standaloneDir = "app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone"
+          New-Item -ItemType Directory -Force -Path $standaloneDir | Out-Null
+          $output = Join-Path $standaloneDir "LexMachina-Offline-Setup.exe"
+          ./app/installer/build-offline-standalone.ps1 `
+            -InstallerPath "${{ steps.locate.outputs.installer }}" `
+            -RuntimeBundlePath "${{ steps.locate.outputs.bundle }}" `
+            -ComponentLockPath "${{ steps.locate.outputs.lock }}" `
+            -OutputPath $output
+
+          $resolved = (Resolve-Path -LiteralPath $output).Path
+          "installer=$resolved" >> $env:GITHUB_OUTPUT
+          Write-Host "Standalone offline installer: $resolved"
+
+      - name: Offline clean-machine standalone EXE acceptance
         shell: pwsh
         run: |
           ./app/installer/windows-installer-acceptance.ps1 `
-            -InstallerPath "${{ steps.locate.outputs.installer }}" `
+            -InstallerPath "${{ steps.standalone.outputs.installer }}" `
             -ExpectedNetworkRequiredAtInstall $false `
             -BlockNetworkDuringInstall `
             -ForceVisualCppRuntimeInstall `
-            -InstallTimeoutSeconds 5400
+            -StandaloneOfflineExe `
+            -InstallTimeoutSeconds 6000
 
-      - name: Record distribution SHA-256
+      - name: Record standalone distribution SHA-256
         shell: pwsh
         run: |
-          $installer = "${{ steps.locate.outputs.installer }}"
+          $standalone = "${{ steps.standalone.outputs.installer }}"
+          $innerInstaller = "${{ steps.locate.outputs.installer }}"
           $bundle = "${{ steps.locate.outputs.bundle }}"
-          $shaFile = "app/lex-desktop/src-tauri/target/release/bundle/nsis/SHA256-OFFLINE.txt"
+          $shaFile = "app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/SHA256-OFFLINE.txt"
 
-          $installerHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $installer).Hash.ToLowerInvariant()
+          $standaloneHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $standalone).Hash.ToLowerInvariant()
+          $innerHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $innerInstaller).Hash.ToLowerInvariant()
           $bundleHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $bundle).Hash.ToLowerInvariant()
 
-          "installer=$(Split-Path -Leaf $installer)" | Out-File -FilePath $shaFile -Encoding utf8
-          "installer_sha256=$installerHash" | Out-File -FilePath $shaFile -Encoding utf8 -Append
-          "installer_bytes=$((Get-Item -LiteralPath $installer).Length)" | Out-File -FilePath $shaFile -Encoding utf8 -Append
-          "runtime_bundle=$(Split-Path -Leaf $bundle)" | Out-File -FilePath $shaFile -Encoding utf8 -Append
+          "installer=LexMachina-Offline-Setup.exe" | Out-File -FilePath $shaFile -Encoding utf8
+          "sha256=$standaloneHash" | Out-File -FilePath $shaFile -Encoding utf8 -Append
+          "bytes=$((Get-Item -LiteralPath $standalone).Length)" | Out-File -FilePath $shaFile -Encoding utf8 -Append
+          "inner_installer=$(Split-Path -Leaf $innerInstaller)" | Out-File -FilePath $shaFile -Encoding utf8 -Append
+          "inner_installer_sha256=$innerHash" | Out-File -FilePath $shaFile -Encoding utf8 -Append
+          "inner_installer_bytes=$((Get-Item -LiteralPath $innerInstaller).Length)" | Out-File -FilePath $shaFile -Encoding utf8 -Append
+          "runtime_bundle=LexMachina-Offline-Runtime.zip" | Out-File -FilePath $shaFile -Encoding utf8 -Append
           "runtime_bundle_sha256=$bundleHash" | Out-File -FilePath $shaFile -Encoding utf8 -Append
           "runtime_bundle_bytes=$((Get-Item -LiteralPath $bundle).Length)" | Out-File -FilePath $shaFile -Encoding utf8 -Append
 
@@ -205,15 +225,20 @@ jobs:
           }
           Get-Content $shaFile
 
-      - name: Upload offline distribution
+      - name: Copy offline component lock beside standalone receipt
+        shell: pwsh
+        run: |
+          Copy-Item -LiteralPath "${{ steps.locate.outputs.lock }}" `
+            -Destination "app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/component-lock-offline.json" -Force
+
+      - name: Upload standalone offline EXE
         uses: actions/upload-artifact@v4
         with:
           name: LexMachina-Windows-Offline-Setup
           path: |
-            app/lex-desktop/src-tauri/target/release/bundle/nsis/*-setup.exe
-            app/lex-desktop/src-tauri/target/release/bundle/nsis/LexMachina-Offline-Runtime.zip
-            app/lex-desktop/src-tauri/target/release/bundle/nsis/SHA256-OFFLINE.txt
-            app/lex-desktop/src-tauri/target/release/bundle/nsis/component-lock-offline.json
+            app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/LexMachina-Offline-Setup.exe
+            app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/SHA256-OFFLINE.txt
+            app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/component-lock-offline.json
           if-no-files-found: error
           compression-level: 0
           retention-days: 14
