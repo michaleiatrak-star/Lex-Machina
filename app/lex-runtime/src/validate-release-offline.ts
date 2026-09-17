@@ -144,7 +144,7 @@ const checks = {
     ),
   installedCopyAcceptance:
     workflow.includes(
-      "Offline installed-copy acceptance"
+      "Offline clean-machine installed-copy acceptance"
     ) &&
     workflow.includes(
       "-ExpectedNetworkRequiredAtInstall $false"
@@ -152,8 +152,20 @@ const checks = {
     workflow.includes(
       "-BlockNetworkDuringInstall"
     ) &&
+    workflow.includes(
+      "-ForceVisualCppRuntimeInstall"
+    ) &&
     acceptance.includes(
       "BlockNetworkDuringInstall"
+    ) &&
+    acceptance.includes(
+      "New-NetFirewallRule"
+    ) &&
+    acceptance.includes(
+      "LEX_FORCE_VC_RUNTIME_INSTALL"
+    ) &&
+    offlineBundleInstall.includes(
+      "Forcing bundled Visual C++ runtime fallback for acceptance coverage"
     ) &&
     acceptance.includes(
       "INSTALLER_ACCEPTANCE_INSTALL_TIMEOUT"
