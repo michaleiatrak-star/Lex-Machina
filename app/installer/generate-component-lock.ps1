@@ -28,9 +28,6 @@ $components = @(
   @{ id="legal-corpus"; path="corpus"; required=$true },
   @{ id="paddle-ocr-pl"; path="models/paddle"; required=$true },
   @{ id="stanza-pl-ner"; path="models/stanza"; required=$true },
-  @{ id="local-llm-engine"; path="llm/llama"; required=$true },
-  @{ id="mistral-nemo-local"; path="llm/models/Mistral-Nemo-Instruct-2407-Q4_K_M.gguf"; required=$true },
-  @{ id="bielik-local"; path="llm/models/Bielik-11B-v3.0-Instruct.Q4_K_M.gguf"; required=$true },
   @{ id="runtime-sidecar"; path="lex-runtime-sidecar.exe"; required=$true }
 )
 if ($IncludeBundledVisualCppRuntime) {
@@ -61,7 +58,7 @@ $componentRows = foreach ($component in $components) {
 }
 
 $lock = [ordered]@{
-  schemaVersion = 3
+  schemaVersion = 4
   status = "RELEASE_CANDIDATE_LOCK"
   applicationVersion = "0.1.3"
   target = "windows-x86_64"
@@ -70,7 +67,17 @@ $lock = [ordered]@{
   sourceRepository = "michaleiatrak-star/Lex-Machina"
   networkRequiredAtInstall = $NetworkRequiredAtInstall
   runtimeNetworkRequiredAfterBootstrap = $false
-  expectedUserActionAfterInstall = "PROVIDER_API_KEY_OR_LOCAL_MODEL"
+  optionalNetworkActionsAfterInstall = @(
+    "LOCAL_AI_PROVISIONING",
+    "APPLICATION_UPDATE",
+    "SKILL_UPDATE"
+  )
+  expectedUserActionAfterInstall = "PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"
+  localAi = [ordered]@{
+    requiredForApplicationHealth = $false
+    delivery = "USER_INITIATED_AFTER_INSTALL"
+    installRoot = "%LOCALAPPDATA%\LexMachina\local-ai"
+  }
   systemPrerequisites = @("webview2", "visual-cpp-runtime")
   components = @($componentRows)
   files = @($entries)
