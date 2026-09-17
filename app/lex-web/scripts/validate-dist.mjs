@@ -55,11 +55,11 @@ const required = [
   "Zapisz nowy kod recovery",
   "Wygeneruj nowy kod recovery",
   "Zmień hasło",
-  "Typ sprawy",
-  "Automatyczny — dobierz skille wykonawcze",
-  "System może dobrać kilka współpracujących skilli wykonawczych i kilka dziedzin prawa do jednej wiadomości.",
-  "Skill priorytetowy:",
-  "System nadal może dobrać kolejne skille wykonawcze i dodatkowe dziedziny prawa.",
+  "Typ i sterowanie sprawą",
+  "Automatyczny",
+  "system dobiera równolegle potrzebne skille wykonawcze i wszystkie pasujące dziedziny prawa",
+  "Priorytetowe skille",
+  "Automatyczny routing może nadal dołożyć kolejne skille i dodatkowe domeny DR.",
   "Wybierz sprawę",
   "Utwórz sprawę",
   "Zmień nazwę",
@@ -110,10 +110,12 @@ process.stdout.write(JSON.stringify({
   requiredExecutionMarkersMissing: missing,
   localApiReferencePresent: content.includes("127.0.0.1:4317"),
   sessionExecutionEndpointPresent: content.includes("/api/sessions/execute"),
-  caseTypeSelectorPresent: content.includes("Automatyczny — dobierz skille wykonawcze"),
+  caseTypeSelectorPresent:
+    content.includes("Automatyczny") &&
+    content.includes("Priorytetowe skille"),
   multiSkillRoutingPresent:
-    content.includes("kilka współpracujących skilli wykonawczych") &&
-    content.includes("kilka dziedzin prawa"),
+    content.includes("równolegle potrzebne skille wykonawcze") &&
+    content.includes("wszystkie pasujące dziedziny prawa"),
   caseLifecyclePresent:
     content.includes("Archiwizuj sprawę") &&
     content.includes("Usuń sprawę trwale"),
