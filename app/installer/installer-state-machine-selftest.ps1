@@ -24,13 +24,10 @@ function Write-Utf8([string]$Path, [string]$Content) {
 
 function Write-InstalledManifest([string]$Runtime, [string]$Version) {
   $manifest = [ordered]@{
-    schemaVersion = 3
+    schemaVersion = 4
     applicationVersion = $Version
-    models = [ordered]@{
-      localLlm = @(
-        [ordered]@{ filename = "Mistral-Nemo-Instruct-2407-Q4_K_M.gguf" },
-        [ordered]@{ filename = "Bielik-11B-v3.0-Instruct.Q4_K_M.gguf" }
-      )
+    localAi = [ordered]@{
+      delivery = "USER_INITIATED_AFTER_INSTALL"
     }
   } | ConvertTo-Json -Depth 8
   Write-Utf8 (Join-Path $Runtime "release-source.json") $manifest
@@ -68,13 +65,10 @@ function Assert-State([string]$Expected, [object]$Actual, [string]$Label) {
 try {
   $target = Join-Path $temp "target-release-source.json"
   $targetManifest = [ordered]@{
-    schemaVersion = 3
+    schemaVersion = 4
     applicationVersion = "0.1.3"
-    models = [ordered]@{
-      localLlm = @(
-        [ordered]@{ filename = "Mistral-Nemo-Instruct-2407-Q4_K_M.gguf" },
-        [ordered]@{ filename = "Bielik-11B-v3.0-Instruct.Q4_K_M.gguf" }
-      )
+    localAi = [ordered]@{
+      delivery = "USER_INITIATED_AFTER_INSTALL"
     }
   } | ConvertTo-Json -Depth 8
   Write-Utf8 $target $targetManifest
@@ -107,24 +101,30 @@ try {
   foreach ($relative in @(
     "lex-runtime-sidecar.exe",
     "node\node.exe",
-    "python\python.exe",
-    "llm\llama\llama-server.exe",
-    "llm\models\Mistral-Nemo-Instruct-2407-Q4_K_M.gguf",
-    "llm\models\Bielik-11B-v3.0-Instruct.Q4_K_M.gguf"
+    "python\python.exe"
   )) {
     Write-Utf8 (Join-Path $currentRuntime $relative) "fixture"
   }
   $lock = [ordered]@{
-    schemaVersion = 3
+    schemaVersion = 4
     applicationVersion = "0.1.3"
     runtimeNetworkRequiredAfterBootstrap = $false
-    expectedUserActionAfterInstall = "PROVIDER_API_KEY_OR_LOCAL_MODEL"
+    optionalNetworkActionsAfterInstall = @("LOCAL_AI_PROVISIONING")
+    expectedUserActionAfterInstall = "PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"
+    localAi = [ordered]@{
+      requiredForApplicationHealth = $false
+      delivery = "USER_INITIATED_AFTER_INSTALL"
+    }
   } | ConvertTo-Json -Depth 6
   Write-Utf8 (Join-Path $currentRuntime "component-lock.json") $lock
-  Assert-State "CURRENT" (Invoke-Probe $currentRuntime $target) "current"
+  $current = Invoke-Probe $currentRuntime $target
+  Assert-State "CURRENT" $current "current-without-local-ai"
+  if ($current.Result.localAiConfigured -ne $false) {
+    throw "INSTALL_STATE_SELFTEST_LOCAL_AI_OPTIONAL_FAILED"
+  }
 
-  Remove-Item -LiteralPath (Join-Path $currentRuntime "llm\models\Bielik-11B-v3.0-Instruct.Q4_K_M.gguf") -Force
-  Assert-State "REPAIR" (Invoke-Probe $currentRuntime $target) "repair-corrupt-current"
+  Remove-Item -LiteralPath (Join-Path $currentRuntime "python\python.exe") -Force
+  Assert-State "REPAIR" (Invoke-Probe $currentRuntime $target) "repair-corrupt-core-runtime"
 
   Write-Host "G39G_INSTALL_STATE_SELFTEST_PASS"
 } finally {
