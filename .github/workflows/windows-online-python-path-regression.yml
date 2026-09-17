@@ -35,9 +35,6 @@ jobs:
           New-Item -ItemType Directory -Force -Path $runtimeRoot | Out-Null
           Copy-Item "app\installer\windows-release-source.json" (Join-Path $runtimeRoot "release-source.json")
 
-          # Simulate a machine affected by a previous Python install and make the
-          # legacy full-installer source unusable. The production entry point must
-          # still build its private runtime solely from the pinned embeddable ZIP.
           $manifestPath = Join-Path $runtimeRoot "release-source.json"
           $manifest = Get-Content -Raw $manifestPath | ConvertFrom-Json
           $manifest.runtime.python.url = "http://127.0.0.1:9/legacy-python-installer-must-not-be-used.exe"
@@ -67,19 +64,19 @@ jobs:
               throw "REGRESSION_PRIVATE_PYTHON_MISSING:$python"
             }
 
-            $version = (& $python --version 2>&1 | Select-Object -First 1).ToString().Trim()
+            $version = (& $python -X utf8 --version 2>&1 | Select-Object -First 1).ToString().Trim()
             $expected = "Python $($manifest.runtime.python.version)"
             if ($version -ne $expected) {
               throw "REGRESSION_PRIVATE_PYTHON_VERSION_INVALID expected=$expected actual=$version"
             }
 
-            $pipVersion = (& $python -c "import importlib.metadata; print(importlib.metadata.version('pip'))" 2>&1 | Select-Object -First 1).ToString().Trim()
+            $pipVersion = (& $python -X utf8 -c "import importlib.metadata; print(importlib.metadata.version('pip'))" 2>&1 | Select-Object -First 1).ToString().Trim()
             $expectedPip = $manifest.runtime.python.pipBootstrap.version.ToString()
             if ($pipVersion -ne $expectedPip) {
               throw "REGRESSION_PRIVATE_PIP_VERSION_INVALID expected=$expectedPip actual=$pipVersion"
             }
 
-            $isolation = (& $python -c "import site,sys; print(str(sys.flags.isolated)+'|'+str(site.ENABLE_USER_SITE))").ToString().Trim()
+            $isolation = (& $python -X utf8 -c "import site,sys; u=site.getusersitepackages(); print(str(sys.flags.isolated)+'|'+str(u in sys.path))").ToString().Trim()
             if ($isolation -ne "1|False") {
               throw "REGRESSION_PRIVATE_PYTHON_ISOLATION_INVALID:$isolation"
             }
@@ -91,8 +88,6 @@ jobs:
               throw "REGRESSION_PRIVATE_PYTHON_SITE_PACKAGES_PATH_MISSING"
             }
 
-            # A second run must reuse the verified private runtime and remain
-            # independent from Windows Python registration / the poisoned legacy URL.
             & ".\app\installer\windows-online-bootstrap-entry.ps1" `
               -RuntimeRoot $runtimeRoot `
               -StopAfterPythonValidation
