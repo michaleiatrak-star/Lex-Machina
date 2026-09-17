@@ -104,6 +104,28 @@ type LocalProvisionResponse = {
   runtime: LocalRuntimeStatus;
 };
 
+type ModelPackUpdateStatus = {
+  status:
+    | "NOT_CONFIGURED"
+    | "UP_TO_DATE"
+    | "AVAILABLE"
+    | "UNAVAILABLE"
+    | "BLOCKED";
+  checkedAt: string;
+  modelId?: string;
+  currentSha256?: string;
+  latestPackVersion?: string;
+  targetSha256?: string;
+  verificationReady: boolean;
+  signerKeyId?: string;
+  blockedReason?:
+    | "SIGNED_INDEX_MISSING"
+    | "SIGNER_POLICY_MISSING"
+    | "APP_INCOMPATIBLE"
+    | "MODEL_NOT_IN_INDEX"
+    | "INDEX_INVALID";
+};
+
 async function request<T>(
   pathname: string,
   init?: RequestInit
@@ -185,6 +207,8 @@ export function LocalAiSetupPanel({
   const [modelId, setModelId] = useState("");
   const [contextTokens, setContextTokens] = useState(64_000);
   const [busy, setBusy] = useState(false);
+  const [modelUpdate, setModelUpdate] =
+    useState<ModelPackUpdateStatus | null>(null);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
@@ -206,8 +230,19 @@ export function LocalAiSetupPanel({
   async function refresh(): Promise<void> {
     if (!available) return;
     try {
-      const next = await request<LocalModelsResponse>("/api/local-models");
+      const [next, update] =
+        await Promise.all([
+          request<LocalModelsResponse>(
+            "/api/local-models"
+          ),
+          user.appRole === "ADMIN"
+            ? request<ModelPackUpdateStatus>(
+                "/api/local-models/update/status"
+              )
+            : Promise.resolve(null)
+        ]);
       setData(next);
+      setModelUpdate(update);
       const preferred =
         next.runtime.selectedModelId ??
         next.models[0]?.id ??
@@ -237,7 +272,7 @@ export function LocalAiSetupPanel({
 
   useEffect(() => {
     void refresh();
-  }, [available]);
+  }, [available, user.appRole]);
 
   function startProvisioningPolling(): number {
     return window.setInterval(() => {
@@ -558,6 +593,20 @@ export function LocalAiSetupPanel({
                   ) : (
                     <span>Walidacja sprzętowa: brak potwierdzonego profilu dla tego modelu.</span>
                   )}
+                  {user.appRole === "ADMIN" && modelUpdate ? (
+                    <span>
+                      Kanał aktualizacji modelu:{" "}
+                      {modelUpdate.status === "UP_TO_DATE"
+                        ? "aktualny"
+                        : modelUpdate.status === "AVAILABLE"
+                          ? `dostępna podpisana aktualizacja ${modelUpdate.latestPackVersion ?? ""} (instalacja zostanie włączona po domknięciu transakcji model-pack)`
+                          : modelUpdate.status === "NOT_CONFIGURED"
+                            ? "model nie jest jeszcze skonfigurowany"
+                            : modelUpdate.status === "UNAVAILABLE"
+                              ? "sprawdzenie niedostępne"
+                              : `zablokowany bezpiecznie: ${modelUpdate.blockedReason ?? "INDEX_INVALID"}`}
+                    </span>
+                  ) : null}
                 </div>
 
                 {extended ? (
