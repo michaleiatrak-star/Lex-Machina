@@ -4,12 +4,12 @@ import {
   SKILL_SELECTION_ENVELOPE_PREFIX,
   buildSkillSelectionEnvelope,
   choosePrimaryRoute,
-  getCaseTypeExecutionSkill,
-  setCaseTypeExecutionSkill
+  getCaseTypeExecutionSkills,
+  setCaseTypeExecutionSkills
 } from "./chat-routing.js";
 
 afterEach(() => {
-  setCaseTypeExecutionSkill("");
+  setCaseTypeExecutionSkills([]);
 });
 
 describe("chat routing", () => {
@@ -65,34 +65,63 @@ describe("chat routing", () => {
     expect(encoded.startsWith(SKILL_SELECTION_ENVELOPE_PREFIX)).toBe(true);
     expect(encoded).toContain("terminy-procesowe");
     expect(encoded).not.toContain('\"shared\"');
-    expect(encoded).toContain('\"caseType\":\"AUTO\"');
+    expect(encoded).toContain(`\"caseType\":\"${AUTO_CASE_TYPE}\"`);
     expect(encoded.endsWith("\nPytanie")).toBe(true);
   });
 
-  it("forces automatic selection when the case type is Automatyczny", () => {
-    setCaseTypeExecutionSkill(AUTO_CASE_TYPE);
+  it("forces automatic selection when no execution case type is prioritized", () => {
+    setCaseTypeExecutionSkills([]);
     const encoded = buildSkillSelectionEnvelope(
       "Pytanie",
       false,
       []
     );
 
-    expect(getCaseTypeExecutionSkill()).toBe("");
+    expect(getCaseTypeExecutionSkills()).toEqual([]);
     expect(encoded).toContain('\"auto\":true');
     expect(encoded).toContain('\"caseType\":\"AUTO\"');
   });
 
-  it("adds a manually selected execution case type to the envelope", () => {
-    setCaseTypeExecutionSkill("analizator-umow-v1");
+  it("adds several prioritized execution case types to the envelope", () => {
+    setCaseTypeExecutionSkills([
+      "analiza-sadowa-v6",
+      "chronologia-sprawy-v1",
+      "raport-klienta-v1"
+    ]);
     const encoded = buildSkillSelectionEnvelope(
-      "Przeanalizuj umowę",
-      false,
+      "Przeanalizuj sprawę i przygotuj raport",
+      true,
       []
     );
 
-    expect(getCaseTypeExecutionSkill()).toBe("analizator-umow-v1");
-    expect(encoded).toContain('\"auto\":false');
-    expect(encoded).toContain("analizator-umow-v1");
-    expect(encoded).toContain('\"caseType\":\"analizator-umow-v1\"');
+    expect(getCaseTypeExecutionSkills()).toEqual([
+      "analiza-sadowa-v6",
+      "chronologia-sprawy-v1",
+      "raport-klienta-v1"
+    ]);
+    expect(encoded).toContain('\"auto\":true');
+    expect(encoded).toContain("analiza-sadowa-v6");
+    expect(encoded).toContain("chronologia-sprawy-v1");
+    expect(encoded).toContain("raport-klienta-v1");
+    expect(encoded).toContain(
+      '\"caseType\":[\"analiza-sadowa-v6\",\"chronologia-sprawy-v1\",\"raport-klienta-v1\"]'
+    );
+  });
+
+  it("allows manual domain skills and prioritized execution skills in one turn", () => {
+    setCaseTypeExecutionSkills([
+      "analiza-sadowa-v6",
+      "chronologia-sprawy-v1"
+    ]);
+    const encoded = buildSkillSelectionEnvelope(
+      "Sprawa z pogranicza prawa pracy i cywilnego",
+      true,
+      ["dr-01-prawo-pracy", "dr-02-prawo-cywilne"]
+    );
+
+    expect(encoded).toContain("dr-01-prawo-pracy");
+    expect(encoded).toContain("dr-02-prawo-cywilne");
+    expect(encoded).toContain("analiza-sadowa-v6");
+    expect(encoded).toContain("chronologia-sprawy-v1");
   });
 });
