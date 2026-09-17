@@ -11,6 +11,12 @@ $payload = Join-Path $tauri "runtime"
 
 if ($env:OS -ne "Windows_NT") { throw "Windows online bootstrap payload must be built on Windows." }
 
+$iconBuilder = Join-Path $installer "prepare-windows-icon.ps1"
+if (-not (Test-Path -LiteralPath $iconBuilder -PathType Leaf)) {
+  throw "WINDOWS_ICON_BUILDER_MISSING:$iconBuilder"
+}
+& $iconBuilder -OutputPath (Join-Path $tauri "icons\icon.ico")
+
 Remove-Item $payload -Recurse -Force -ErrorAction SilentlyContinue
 New-Item $payload -ItemType Directory | Out-Null
 
