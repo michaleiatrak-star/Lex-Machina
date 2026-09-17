@@ -284,6 +284,14 @@ export function MaintenancePanel({
             </span>
           </div>
 
+          {skillStatus?.blockedReason ? (
+            <small className="maintenance-trust-warning">
+              {skillStatus.blockedReason === "SIGNER_POLICY_MISSING"
+                ? "Aktualizacja skilli jest zablokowana do czasu skonfigurowania produkcyjnego klucza Ed25519 wydawcy."
+                : "Release nie zawiera kompletnego podpisanego indeksu skilli (.json + .sig)."}
+            </small>
+          ) : null}
+
           {user.appRole === "ADMIN" ? (
             <button
               type="button"
