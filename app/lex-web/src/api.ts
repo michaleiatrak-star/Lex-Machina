@@ -503,6 +503,37 @@ export type UpdateStatusResponse = {
   publishedAt?: string;
 };
 
+export type ApplicationUpdateDownloadResponse = {
+  version: string;
+  token: string;
+  receiptToken: string;
+  filename: string;
+  sha256: string;
+  bytes: number;
+  stagedAt: string;
+  publisher: {
+    verification: "AUTHENTICODE";
+    subject: string;
+    thumbprint: string;
+  };
+};
+
+export type SkillUpdateStatusResponse = {
+  currentVersion: string;
+  status: "UP_TO_DATE" | "AVAILABLE" | "UNAVAILABLE";
+  latestVersion?: string;
+  checkedAt: string;
+  bundleReady: boolean;
+};
+
+export type SkillUpdateApplyResponse = {
+  previousVersion: string;
+  installedVersion: string;
+  installedAt: string;
+  restartRequired: true;
+  skillRoot: string;
+};
+
 
 
 export type BlockedReference = {
@@ -1506,6 +1537,60 @@ export function getUpdateStatus():
   Promise<UpdateStatusResponse> {
   return json<UpdateStatusResponse>(
     "/api/update/status"
+  );
+}
+
+export function getSkillUpdateStatus():
+  Promise<SkillUpdateStatusResponse> {
+  return json<SkillUpdateStatusResponse>(
+    "/api/skills/update/status"
+  );
+}
+
+export function applySkillUpdate():
+  Promise<SkillUpdateApplyResponse> {
+  return json<SkillUpdateApplyResponse>(
+    "/api/skills/update/apply",
+    { method: "POST" }
+  );
+}
+
+export function downloadApplicationUpdate():
+  Promise<ApplicationUpdateDownloadResponse> {
+  return json<ApplicationUpdateDownloadResponse>(
+    "/api/update/download",
+    { method: "POST" }
+  );
+}
+
+export async function installStagedApplicationUpdate(
+  receiptToken: string
+): Promise<void> {
+  if (!isDesktopShell()) {
+    throw new ApiError(
+      "APPLICATION_UPDATE_DESKTOP_REQUIRED",
+      409
+    );
+  }
+  const internals = (
+    window as Window & {
+      __TAURI_INTERNALS__?: {
+        invoke?: (
+          command: string,
+          args?: Record<string, unknown>
+        ) => Promise<unknown>;
+      };
+    }
+  ).__TAURI_INTERNALS__;
+  if (!internals?.invoke) {
+    throw new ApiError(
+      "TAURI_INVOKE_UNAVAILABLE",
+      503
+    );
+  }
+  await internals.invoke(
+    "install_application_update",
+    { receiptToken }
   );
 }
 
