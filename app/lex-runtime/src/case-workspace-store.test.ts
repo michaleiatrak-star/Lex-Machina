@@ -4,6 +4,11 @@ import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import { randomBytes } from "node:crypto";
 import { EncryptedCaseWorkspaceStore } from "./case-workspace-store.js";
+import {
+  acceptProcessPleadingStart,
+  createProcessPleadingState,
+  markProcessCheckpointReady
+} from "./process-pleading-state.js";
 
 const roots: string[] = [];
 
@@ -108,6 +113,83 @@ describe("encrypted case workspace", () => {
       keyVersion: 1,
       folderId: folder.folderId
     })).resolves.toBeUndefined();
+  });
+
+  it("keeps process pleading workflow state encrypted and preserves it across key rotation", async () => {
+    const { rootDir, caseId, key, store } = fixture();
+    let state = createProcessPleadingState(
+      caseId,
+      "CHECKPOINT",
+      "2026-09-18T00:00:00.000Z"
+    );
+    state = acceptProcessPleadingStart(
+      state,
+      "2026-09-18T00:00:01.000Z"
+    );
+    state = markProcessCheckpointReady(
+      state,
+      "CP-W1",
+      "2026-09-18T00:00:02.000Z"
+    );
+
+    await store.saveProcessPleadingState({
+      caseId,
+      caseDataKey: key,
+      keyVersion: 1,
+      state
+    });
+
+    const loaded =
+      await store.getProcessPleadingState({
+        caseId,
+        caseDataKey: key,
+        keyVersion: 1
+      });
+    expect(loaded?.stage).toBe("W1");
+    expect(loaded?.pendingCheckpoint)
+      .toBe("CP-W1");
+    expect(loaded?.documentStatus)
+      .toBe("DRAFT");
+
+    const onDisk = fs.readFileSync(
+      path.join(
+        rootDir,
+        "cases",
+        caseId,
+        "secure",
+        "workspace",
+        "index.lmw1"
+      ),
+      "utf8"
+    );
+    expect(onDisk)
+      .not.toContain("PROCESS_PLEADING_V1");
+    expect(onDisk)
+      .not.toContain("CP-W1");
+    expect(onDisk)
+      .not.toContain("PENDING_CONFIRMATION");
+
+    const next = randomBytes(32);
+    expect(
+      await store.rekeyCaseWorkspace({
+        caseId,
+        oldCaseDataKey: key,
+        oldKeyVersion: 1,
+        newCaseDataKey: next,
+        newKeyVersion: 2
+      })
+    ).toBe(true);
+
+    const afterRekey =
+      await store.getProcessPleadingState({
+        caseId,
+        caseDataKey: next,
+        keyVersion: 2
+      });
+    expect(afterRekey?.pendingCheckpoint)
+      .toBe("CP-W1");
+    expect(afterRekey?.history.length)
+      .toBeGreaterThanOrEqual(3);
   });
 
   it("re-encrypts the workspace when the case key rotates", async () => {
