@@ -5329,6 +5329,10 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         | {
             caseId: string;
             revision: number;
+            checkpoint:
+              NonNullable<
+                ProcessPleadingState["pendingCheckpoint"]
+              >;
             state: ProcessPleadingState;
           }
         | null = null;
@@ -5440,11 +5444,26 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             "PROCESS_PLEADING_ALREADY_FINAL"
           );
         }
+        const checkpoint =
+          nextRequiredProcessCheckpoint(
+            state
+          );
+        if (!checkpoint) {
+          throw new Error(
+            "PROCESS_PLEADING_CHECKPOINT_UNAVAILABLE"
+          );
+        }
+        request.processWorkflowContext = {
+          stage: state.stage,
+          checkpoint,
+          mode: state.mode
+        };
         processContext = {
           caseId:
             processCaseId,
           revision:
             state.revision,
+          checkpoint,
           state
         };
       }
@@ -5514,9 +5533,14 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                     nextRequiredProcessCheckpoint(
                       current
                     );
-                  if (!checkpoint) {
+                  if (
+                    !checkpoint ||
+                    checkpoint !==
+                      processContext!
+                        .checkpoint
+                  ) {
                     throw new Error(
-                      "PROCESS_PLEADING_CHECKPOINT_UNAVAILABLE"
+                      "PROCESS_PLEADING_CHECKPOINT_CONFLICT"
                     );
                   }
                   const next =
