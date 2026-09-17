@@ -1,3 +1,5 @@
+import type { LocalModelRuntime } from "../local-model-runtime.js";
+import { LocalModelRuntime as DefaultLocalModelRuntime } from "../local-model-runtime.js";
 import {
   MissingProviderCredentialError,
   type ProviderCredentialResolver
@@ -106,20 +108,58 @@ async function parseJson(response: Response, provider: ProviderId): Promise<unkn
 export class DynamicModelCatalog {
   constructor(
     private readonly credentials: ProviderCredentialResolver,
-    private readonly fetcher: FetchLike = globalThis.fetch.bind(globalThis)
+    private readonly fetcher: FetchLike = globalThis.fetch.bind(globalThis),
+    private readonly localModels: LocalModelRuntime = new DefaultLocalModelRuntime()
   ) {}
 
   async list(provider: ProviderId): Promise<ModelDescriptor[]> {
+    if (provider === "openai") {
+      const local = this.listConfiguredLocalOpenAiModels();
+      const key = await this.credentials.getApiKey(provider);
+      if (!key) {
+        if (local.length > 0) return local;
+        throw new MissingProviderCredentialError(provider);
+      }
+      return [
+        ...local,
+        ...await this.listOpenAI(key)
+      ];
+    }
+
     const key = await this.credentials.getApiKey(provider);
     if (!key) throw new MissingProviderCredentialError(provider);
-
-    if (provider === "openai") {
-      return this.listOpenAI(key);
-    }
     if (provider === "anthropic") {
       return this.listAnthropic(key);
     }
     return this.listXai(key);
+  }
+
+  private listConfiguredLocalOpenAiModels(): ModelDescriptor[] {
+    const runtime = this.localModels.status();
+    if (!runtime.configured || !runtime.selectedModelId) return [];
+    const selected = this.localModels
+      .listModels()
+      .find((model) => model.id === runtime.selectedModelId);
+    if (!selected || !selected.installed) return [];
+    return [{
+      provider: "openai",
+      id: selected.id,
+      displayName: `Lokalny · ${selected.displayName}`,
+      selectable: true,
+      contextWindow:
+        selected.configuredContextWindow ??
+        selected.contextWindow,
+      ownedBy: "local",
+      inputModalities: ["text"],
+      outputModalities: ["text"],
+      capabilities: [
+        "local-only",
+        "offline-inference",
+        selected.contextMode === "YARN_EXTENDED"
+          ? "yarn-context-extension"
+          : "native-context"
+      ]
+    }];
   }
 
   private async listOpenAI(apiKey: string): Promise<ModelDescriptor[]> {
