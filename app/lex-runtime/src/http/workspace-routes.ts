@@ -479,7 +479,12 @@ export function registerWorkspaceRoutes(
         createdAt: String(raw.createdAt ?? ""),
         ...(typeof raw.meta === "string" ? { meta: raw.meta } : {}),
         ...(Array.isArray(raw.documentCitations)
-          ? { documentCitations: raw.documentCitations as WorkspaceThreadMessage["documentCitations"] }
+          ? {
+              documentCitations:
+                raw.documentCitations as NonNullable<
+                  WorkspaceThreadMessage["documentCitations"]
+                >
+            }
           : {})
       };
       const saved = await dependencies.caseAccessService.withCaseDataKey(
