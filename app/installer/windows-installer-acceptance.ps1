@@ -4,13 +4,19 @@ param(
   [bool]$ExpectedNetworkRequiredAtInstall = $true,
   [switch]$BlockNetworkDuringInstall,
   [switch]$ForceVisualCppRuntimeInstall,
+  [switch]$StandaloneOfflineExe,
   [int]$InstallTimeoutSeconds = 3600
 )
 
 $ErrorActionPreference = "Stop"
 $installer = (Resolve-Path -LiteralPath $InstallerPath).Path
 $installerInfo = Get-Item -LiteralPath $installer
-if ($installerInfo.Length -gt 1GB) {
+if ($StandaloneOfflineExe) {
+  if ($ExpectedNetworkRequiredAtInstall) {
+    throw "INSTALLER_ACCEPTANCE_STANDALONE_OFFLINE_NETWORK_POLICY_INVALID"
+  }
+  Write-Host "Acceptance: single-file offline wrapper mode ($($installerInfo.Length) bytes)"
+} elseif ($installerInfo.Length -gt 1GB) {
   throw "INSTALLER_ACCEPTANCE_MONOLITHIC_BUNDLE_TOO_LARGE:$($installerInfo.Length)"
 }
 if (-not $InstallRoot) {
@@ -21,7 +27,11 @@ Remove-Item $InstallRoot -Recurse -Force -ErrorAction SilentlyContinue
 
 if (-not $ExpectedNetworkRequiredAtInstall) {
   $offlineBundle = Join-Path $installerInfo.Directory.FullName "LexMachina-Offline-Runtime.zip"
-  if (-not (Test-Path -LiteralPath $offlineBundle -PathType Leaf)) {
+  if ($StandaloneOfflineExe) {
+    if (Test-Path -LiteralPath $offlineBundle -PathType Leaf) {
+      throw "INSTALLER_ACCEPTANCE_STANDALONE_HAS_ADJACENT_RUNTIME_BUNDLE"
+    }
+  } elseif (-not (Test-Path -LiteralPath $offlineBundle -PathType Leaf)) {
     throw "INSTALLER_ACCEPTANCE_OFFLINE_BUNDLE_MISSING"
   }
 }
@@ -95,7 +105,13 @@ try {
       Write-Host "Installer bootstrap diagnostic follows:"
       Get-Content -LiteralPath $diagnosticLog | Out-Host
     } else {
-      Write-Host "Installer bootstrap diagnostic file not found: $diagnosticLog"
+      $wrapperDiagnostic = Join-Path $env:TEMP "LexMachinaOfflineSelfExtract-error.log"
+      if ($StandaloneOfflineExe -and (Test-Path -LiteralPath $wrapperDiagnostic -PathType Leaf)) {
+        Write-Host "Standalone wrapper diagnostic follows:"
+        Get-Content -LiteralPath $wrapperDiagnostic | Out-Host
+      } else {
+        Write-Host "Installer bootstrap diagnostic file not found: $diagnosticLog"
+      }
     }
     throw "INSTALLER_ACCEPTANCE_INSTALL_FAILED:$($process.ExitCode)"
   }
