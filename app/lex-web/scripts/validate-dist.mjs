@@ -55,9 +55,10 @@ const required = [
   "Zapisz nowy kod recovery",
   "Wygeneruj nowy kod recovery",
   "Zmień hasło",
+  "Typ sprawy",
+  "Automatyczny — dobierz skill wykonawczy",
+  "System analizuje wiadomość i sam wybiera właściwy skill wykonawczy.",
   "Wybierz sprawę",
-  "Aplikacja nie tworzy już spraw automatycznie",
-  "reidentyfikacja:",
   "Utwórz sprawę",
   "Zmień nazwę",
   "Archiwizuj sprawę",
@@ -66,6 +67,12 @@ const required = [
   "Wpisz USUŃ",
   "Usuń sprawę trwale",
   "ARCHIWALNA (tylko odczyt)",
+  "Kliknij lub przeciągnij",
+  "Otwórz eksplorator",
+  "prawny-router-v3",
+  "shared",
+  "Automatyczny dobór skilli",
+  "Ręczny wybór",
   "Akta wybranej sprawy",
   "Dokumenty sprawy",
   "Katalog wspólny",
@@ -74,20 +81,19 @@ const required = [
   "integracja z generatorem w G35C",
   "Archiwum zapisane i rozpakowane lokalnie",
   "Akta sprawy, OCR i ręczna anonimizacja",
-  "Konfiguracja API",
   "Anonimizuj / pseudonimizuj",
   "Pozostaw bez anonimizacji",
   "Oznacz, co ten fragment znaczy",
   "Chunki do analizy AI",
   "Domyślnie nic nie jest wysyłane do providera",
   "DRAFT_PRESENTABLE",
-  "BLOCKED",
-  "Uruchom analizę",
-  "Evidence bundle",
+  "HARD GATE",
+  "Źródła i weryfikacja",
   "VERIFIED",
   "SUPPORTED",
-  "Stan prawny",
-  "Otwórz urzędowe źródło"
+  "Otwórz źródło",
+  "Model i klucz API",
+  "Konfiguracja lokalna"
 ];
 
 const exposed = forbidden.filter((token) => content.includes(token));
@@ -102,10 +108,14 @@ process.stdout.write(JSON.stringify({
   requiredExecutionMarkersMissing: missing,
   localApiReferencePresent: content.includes("127.0.0.1:4317"),
   sessionExecutionEndpointPresent: content.includes("/api/sessions/execute"),
-  evidenceBundlePresent: content.includes("Evidence bundle"),
-  verifiedStatusPresent: content.includes("VERIFIED"),
-  supportedStatusPresent: content.includes("SUPPORTED"),
-  historicalStatePresent: content.includes("Stan prawny")
+  caseTypeSelectorPresent: content.includes("Automatyczny — dobierz skill wykonawczy"),
+  caseLifecyclePresent:
+    content.includes("Archiwizuj sprawę") &&
+    content.includes("Usuń sprawę trwale"),
+  verificationUiPresent:
+    content.includes("Źródła i weryfikacja") &&
+    content.includes("VERIFIED") &&
+    content.includes("SUPPORTED")
 }, null, 2) + "\n");
 
 if (!pass) process.exitCode = 1;
