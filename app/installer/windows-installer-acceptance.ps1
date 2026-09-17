@@ -35,7 +35,7 @@ function Test-IsAdministrator {
 $firewallRules = [Collections.Generic.List[string]]::new()
 function Add-AcceptanceFirewallBlock([string]$Program, [string]$Label) {
   if (-not (Test-Path -LiteralPath $Program -PathType Leaf)) {
-    throw "INSTALLER_ACCEPTANCE_FIREWALL_PROGRAM_MISSING:$Label:$Program"
+    throw "INSTALLER_ACCEPTANCE_FIREWALL_PROGRAM_MISSING:${Label}:${Program}"
   }
   $ruleName = "LexMachina-Acceptance-$Label-$([Guid]::NewGuid().ToString('N'))"
   New-NetFirewallRule `
