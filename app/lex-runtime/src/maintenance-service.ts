@@ -172,7 +172,7 @@ function skillFileSha256(
     .digest("hex");
 }
 
-function validateSkillCandidateAgainstIndex(
+export function validateSkillCandidateAgainstIndex(
   registry: LexSkillRegistry,
   index: SkillUpdateIndex
 ): void {
