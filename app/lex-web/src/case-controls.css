@@ -21,25 +21,59 @@
   flex: 1;
 }
 
-.case-controls-primary label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 360px;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.case-controls-primary select {
-  min-width: 280px;
-  max-width: 520px;
-}
-
 .case-controls-primary small {
   color: #657067;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.case-type-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  max-width: min(820px, 62vw);
+}
+
+.case-type-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+
+.case-type-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  min-height: 36px;
+  padding: 0 10px;
+  border: 1px solid #c7cec5;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.case-type-chip input {
+  width: 14px;
+  height: 14px;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.case-type-chip.selected,
+.case-controls .case-type-auto.selected {
+  border-color: #526b57;
+  background: #e5eee4;
+  color: #17331e;
 }
 
 .case-controls select,
@@ -148,9 +182,14 @@
     width: 100%;
   }
 
-  .case-controls-primary label,
-  .case-controls-primary select {
-    min-width: 0;
+  .case-type-picker {
+    align-items: stretch;
+    flex-direction: column;
+    max-width: none;
+    width: 100%;
+  }
+
+  .case-type-chips {
     width: 100%;
   }
 
