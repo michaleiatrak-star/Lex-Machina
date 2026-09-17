@@ -27,6 +27,14 @@ import type {
   EncryptedCaseWorkspaceStore,
   WorkspaceThreadMessage
 } from "../case-workspace-store.js";
+import {
+  PROCESS_PLEADING_CHECKPOINTS,
+  acceptProcessPleadingStart,
+  confirmProcessCheckpoint,
+  createProcessPleadingState,
+  type ProcessPleadingCheckpoint,
+  type ProcessPleadingMode
+} from "../process-pleading-state.js";
 
 const CASE_ID = /^case_[a-f0-9]{32}$/;
 const UPLOAD_ID = /^upload_[a-f0-9]{32}$/;
@@ -64,7 +72,11 @@ function sendError(res: Response, error: unknown): void {
   }
   if (
     code === "CASE_ARCHIVED" ||
-    code === "WORKSPACE_FOLDER_NOT_EMPTY"
+    code === "WORKSPACE_FOLDER_NOT_EMPTY" ||
+    code === "PROCESS_PLEADING_STATE_EXISTS" ||
+    code === "PROCESS_PLEADING_STATE_CONFLICT" ||
+    code.includes("PROCESS_PLEADING_CONFIRMATION") ||
+    code.includes("PROCESS_PLEADING_START_TRANSITION")
   ) {
     res.status(409).json({ error: code });
     return;
@@ -219,6 +231,271 @@ export function registerWorkspaceRoutes(
       sendError(res, error);
     }
   });
+
+  app.get(
+    "/api/cases/:caseId/workflow/process-pleading",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "READ"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "READ",
+              (caseDataKey) =>
+                dependencies.workspace
+                  .getProcessPleadingState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion
+                  })
+            );
+        res.json({
+          caseId,
+          state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/process-pleading/initialize",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const mode: ProcessPleadingMode =
+          req.body?.mode === "AUTO"
+            ? "AUTO"
+            : "CHECKPOINT";
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              async (caseDataKey) => {
+                const existing =
+                  await dependencies
+                    .workspace
+                    .getProcessPleadingState({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (existing) {
+                  throw new Error(
+                    "PROCESS_PLEADING_STATE_EXISTS"
+                  );
+                }
+                return await dependencies
+                  .workspace
+                  .saveProcessPleadingState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    state:
+                      createProcessPleadingState(
+                        caseId,
+                        mode
+                      )
+                  });
+              }
+            );
+        res.status(201).json({
+          caseId,
+          state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/process-pleading/accept-start",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              async (caseDataKey) => {
+                const current =
+                  await dependencies
+                    .workspace
+                    .getProcessPleadingState({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (!current) {
+                  throw new Error(
+                    "PROCESS_PLEADING_STATE_NOT_FOUND"
+                  );
+                }
+                const next =
+                  acceptProcessPleadingStart(
+                    current
+                  );
+                return await dependencies
+                  .workspace
+                  .saveProcessPleadingState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    state: next,
+                    expectedRevision:
+                      current.revision
+                  });
+              }
+            );
+        res.json({
+          caseId,
+          state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/process-pleading/confirm",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const checkpoint =
+          typeof req.body?.checkpoint ===
+            "string"
+            ? req.body.checkpoint.trim()
+            : "";
+        if (
+          !PROCESS_PLEADING_CHECKPOINTS
+            .includes(
+              checkpoint as
+                ProcessPleadingCheckpoint
+            )
+        ) {
+          throw new Error(
+            "PROCESS_PLEADING_CHECKPOINT_INVALID"
+          );
+        }
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              async (caseDataKey) => {
+                const current =
+                  await dependencies
+                    .workspace
+                    .getProcessPleadingState({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (!current) {
+                  throw new Error(
+                    "PROCESS_PLEADING_STATE_NOT_FOUND"
+                  );
+                }
+                const next =
+                  confirmProcessCheckpoint(
+                    current,
+                    checkpoint as
+                      ProcessPleadingCheckpoint
+                  );
+                return await dependencies
+                  .workspace
+                  .saveProcessPleadingState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    state: next,
+                    expectedRevision:
+                      current.revision
+                  });
+              }
+            );
+        res.json({
+          caseId,
+          state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
 
   app.post("/api/cases/:caseId/workspace/folders", async (req, res) => {
     try {
