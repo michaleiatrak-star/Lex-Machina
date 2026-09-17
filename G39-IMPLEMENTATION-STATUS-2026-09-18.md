@@ -64,26 +64,33 @@ Do not mark G39F PASS before a signed release acceptance test succeeds.
 
 ## G39E — skill update transaction
 
-Status: **PARTIAL**
+Status: **IMPLEMENTED / BLOCKED FOR PRODUCTION SIGNING**
 
 Implemented:
 
-- update discovery;
-- verified release asset digest;
-- download to work directory;
-- archive extraction;
-- full corpus registry scan and declaration validation before activation;
+- update discovery for ZIP + `LexMachina-Skills-Index.json` + detached `.sig`;
+- verified GitHub release-asset SHA-256 for all three transport artifacts;
+- independent Ed25519 publisher trust root from the installed release manifest;
+- fail-closed behavior when the production skill signer is not configured;
+- signed index schema with release version, bundle SHA/size, min/max app compatibility and per-skill version/SHA/dependencies;
+- signed release version must equal the discovered release version;
+- app compatibility is checked before downloading/activating the bundle;
+- archive extraction into an isolated work directory;
+- full corpus registry scan and declaration validation;
+- exact skill-set, version, `SKILL.md` hash and dependency comparison against the signed index;
 - candidate -> current atomic rename;
 - previous version rollback if activation fails;
-- version marker;
-- maintenance UI for checking and applying skill updates.
+- installed marker stores signed-index SHA-256 and signer key id;
+- maintenance UI exposes trust readiness and explains missing signer/index states;
+- unit tests cover valid Ed25519 signature, tampered index, unknown signer and invalid schema.
 
-Still required for full roadmap gate:
+Still required for full roadmap PASS:
 
-- signed `skills-index.json` / independent publisher trust root;
-- explicit dependency/minAppVersion/maxAppVersion compatibility matrix;
-- retained rollback package policy and healthcheck after runtime restart;
-- negative tests for tampered index, dependency conflict and incompatible app version.
+- configure the real production Ed25519 public key in the release manifest;
+- publish signed index/signature assets from the release pipeline;
+- acceptance test against a real signed skills release;
+- retained rollback package policy across restarts and post-restart healthcheck;
+- negative integration tests for dependency mismatch and incompatible app version.
 
 ## G39A/B/D — Local AI runtime, model provisioning and UI
 
@@ -134,17 +141,34 @@ A 200k llama.cpp context is not a substitute for this gate.
 
 ## G39H/I — deterministic execution engine and skill migration
 
-Status: **OPEN**
+Status: **PARTIAL / VERIFYING**
 
-Target order:
+Implemented first migration slice:
 
-1. prawny-router-v3;
-2. pisma-proste-v2;
-3. pisma-procesowe-v3;
-4. analiza-sadowa-v6;
-5. analizator-dowodow-v3;
-6. analizator-przepisow-v2;
-7. remaining execution skills.
+- router-first and core legal resources remain runtime-enforced by `LegalSession`;
+- explicit deterministic execution-routing rules are evaluated before semantic scoring;
+- process pleading has priority over simple-letter routing when both rules match;
+- Polish `ł` normalization is deterministic for routing;
+- workflow plans: `LEGAL_QUERY_V1`, `SIMPLE_LETTER_V1`, `PROCESS_PLEADING_V1`;
+- deterministic phase order: PREFLIGHT -> SEMANTIC_EXECUTION -> FINALIZATION;
+- simple-letter preflight requires the always-on M1/M2/M4/M8/M9 + naming + hybrid-validation resources to exist;
+- process-pleading preflight requires AUTOMAT-STANOW, CP-GATE, MOD-STEP-TRACKER and SELF-CHECK-PISMA to exist;
+- the model is instructed to perform fresh corpus reads, but completion is not trusted from text;
+- runtime checks actual `read_legal_resource` audit events after provider execution;
+- missing mandatory fresh read blocks presentation fail-closed;
+- audit validates deterministic gate order: workflow preflight -> provider completion -> resource-read gate -> workflow finalization;
+- source/citation/finalization gates remain deterministic and mandatory in every mode;
+- unit tests cover workflow selection, strict-process escalation, missing resource, missing fresh read and explicit routing priority.
+
+Still required:
+
+1. persist a multi-turn process-pleading state object for W1 -> user approval -> PRE-W2 -> W2 -> W3 instead of treating the full skill as one semantic provider phase;
+2. move CP registry / step tracker state from prompt text into typed runtime state;
+3. implement deterministic document-generation checkpoints and DRAFT/FINAL watermark state;
+4. migrate analiza-sadowa-v6;
+5. migrate analizator-dowodow-v3;
+6. migrate analizator-przepisow-v2;
+7. migrate remaining execution skills.
 
 Invariant:
 
