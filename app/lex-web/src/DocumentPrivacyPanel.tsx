@@ -497,7 +497,7 @@ export function DocumentPrivacyPanel({
   }
 
   async function finalizeBatch(): Promise<void> {
-    if (batchDrafts.length === 0) return;
+    if (batchDrafts.length === 0 || incomingFile || loading) return;
     setBatchFinalizing(true);
     setError("");
     const successful: FinalizedBatchItem[] = [];
@@ -998,7 +998,7 @@ export function DocumentPrivacyPanel({
         </div>
       )}
 
-      {batchDrafts.length > 0 && !review ? (
+      {batchDrafts.length > 0 && !review && !incomingFile && !loading ? (
         <div className="privacy-decisions privacy-batch-preview">
           <div className="privacy-decision-head">
             <div>
