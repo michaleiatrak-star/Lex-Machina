@@ -95,7 +95,12 @@ const required = [
   "Anonimizuj / pseudonimizuj automatycznie",
   "Przejrzyj ręcznie",
   "Pozostaw ten plik bez anonimizacji",
-  "Ta decyzja dotyczy tylko tego pliku",
+  "Ta decyzja jest na razie wersją roboczą dla tego pliku",
+  "Zbiorczy podgląd anonimizacji",
+  "Wykryte automatycznie",
+  "Moje ręczne zaznaczenia",
+  "Końcowa decyzja dla pliku",
+  "Zatwierdź decyzje dla",
   "Mapa reidentyfikacji jest odrębna dla tego documentId",
   "Chunki do analizy AI",
   "Cytowany fragment dokumentu",
@@ -137,9 +142,15 @@ process.stdout.write(JSON.stringify({
     content.includes("+ Folder"),
   automaticOcrPerFilePrivacyPresent:
     content.includes("OCR automatyczny i anonimizacja per plik") &&
-    content.includes("Ta decyzja dotyczy tylko tego pliku") &&
+    content.includes("Ta decyzja jest na razie wersją roboczą dla tego pliku") &&
     content.includes("Anonimizuj / pseudonimizuj automatycznie") &&
     content.includes("Mapa reidentyfikacji jest odrębna dla tego documentId"),
+  multiFilePrivacyBatchPreviewPresent:
+    content.includes("Zbiorczy podgląd anonimizacji") &&
+    content.includes("Wykryte automatycznie") &&
+    content.includes("Moje ręczne zaznaczenia") &&
+    content.includes("Końcowa decyzja dla pliku") &&
+    content.includes("Zatwierdź decyzje dla"),
   documentDeepLinksPresent:
     content.includes("Cytowany fragment dokumentu") &&
     content.includes("Dokładny cytat zaznaczony w źródle"),
