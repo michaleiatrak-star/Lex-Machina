@@ -130,7 +130,7 @@ describe("skill selection", () => {
     const registry = registryWithSkills();
     const selected = resolveAdditionalSkills(
       registry,
-      "Przeanalizuj sprawę sądową, wykonaj chronologia sprawy i przygotuj raport klienta o ryzykach.",
+      "analiza sadowa chronologia sprawy raport klienta ryzyka",
       "dr-03-prawo-procesowe",
       true,
       []
@@ -152,7 +152,7 @@ describe("skill selection", () => {
     const registry = registryWithSkills();
     const selected = resolveAdditionalSkills(
       registry,
-      "Wykonaj analizę sprawy sądowej i dobierz potrzebne moduły.",
+      "analiza sadowa",
       "dr-03-prawo-procesowe",
       true,
       []
