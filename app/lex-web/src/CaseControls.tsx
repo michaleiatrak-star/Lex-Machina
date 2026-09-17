@@ -172,7 +172,7 @@ export default function CaseControls({
             aria-label="Typ sprawy według skilla wykonawczego"
           >
             <option value={AUTO_CASE_TYPE}>
-              Automatyczny — dobierz skill wykonawczy
+              Automatyczny — dobierz skille wykonawcze
             </option>
             {executionSkills.map((skill) => (
               <option key={skill.name} value={skill.name}>
@@ -183,8 +183,8 @@ export default function CaseControls({
         </label>
         <small>
           {caseType === AUTO_CASE_TYPE
-            ? "System analizuje wiadomość i sam wybiera właściwy skill wykonawczy."
-            : `Wymuszony skill: ${labelForSkill(caseType)}.`}
+            ? "System może dobrać kilka współpracujących skilli wykonawczych i kilka dziedzin prawa do jednej wiadomości."
+            : `Skill priorytetowy: ${labelForSkill(caseType)}. System nadal może dobrać kolejne skille wykonawcze i dodatkowe dziedziny prawa.`}
         </small>
       </div>
 
