@@ -31,9 +31,6 @@ $documentWorker = Require-File "storage\legal_document_worker.py"
 $corpus = Require-Dir "corpus"
 $paddle = Require-Dir "models\paddle\official_models"
 $stanza = Require-Dir "models\stanza"
-$llamaServer = Require-File "llm\llama\llama-server.exe"
-$mistralModel = Require-File "llm\models\Mistral-Nemo-Instruct-2407-Q4_K_M.gguf"
-$bielikModel = Require-File "llm\models\Bielik-11B-v3.0-Instruct.Q4_K_M.gguf"
 $pythonSelftest = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "windows-payload-python-selftest.py"
 if (-not (Test-Path -LiteralPath $pythonSelftest -PathType Leaf)) {
   throw "SELFTEST_PYTHON_HELPER_MISSING"
@@ -78,12 +75,6 @@ if (-not (Test-Path (Join-Path $stanza "pl") -PathType Container)) {
   throw "SELFTEST_STANZA_PL_MISSING"
 }
 
-foreach ($localLlmFile in @($llamaServer, $mistralModel, $bielikModel)) {
-  if ((Get-Item -LiteralPath $localLlmFile).Length -le 0) {
-    throw "SELFTEST_LOCAL_LLM_FILE_EMPTY:$localLlmFile"
-  }
-}
-
 $lock = Get-Content -Raw -LiteralPath $lockPath | ConvertFrom-Json
 if ($null -eq $lock.networkRequiredAtInstall) {
   throw "SELFTEST_LOCK_INSTALL_NETWORK_POLICY_MISSING"
@@ -91,8 +82,14 @@ if ($null -eq $lock.networkRequiredAtInstall) {
 if ($lock.runtimeNetworkRequiredAfterBootstrap -ne $false) {
   throw "SELFTEST_LOCK_RUNTIME_NETWORK_POLICY_INVALID"
 }
-if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_OR_LOCAL_MODEL") {
+if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP") {
   throw "SELFTEST_LOCK_USER_ACTION_POLICY_INVALID"
+}
+if ($null -eq $lock.localAi -or $lock.localAi.requiredForApplicationHealth -ne $false) {
+  throw "SELFTEST_LOCK_LOCAL_AI_POLICY_INVALID"
+}
+if (@($lock.optionalNetworkActionsAfterInstall) -notcontains "LOCAL_AI_PROVISIONING") {
+  throw "SELFTEST_LOCK_LOCAL_AI_PROVISIONING_POLICY_MISSING"
 }
 foreach ($entry in $lock.files) {
   $path = Join-Path $root ($entry.path -replace '/','\')
@@ -227,7 +224,7 @@ try {
     $env:LEX_DESKTOP_BOOTSTRAP_TOKEN = $oldBootstrap
   }
 
-  Write-Host "LEX_INSTALLER_SELFTEST_PASS"
+  Write-Host "LEX_INSTALLER_SELFTEST_PASS:LOCAL_AI_OPTIONAL"
 } finally {
   foreach ($key in $oldEnv.Keys) {
     Set-Item -Path ("Env:" + $key) -Value $oldEnv[$key] -ErrorAction SilentlyContinue
