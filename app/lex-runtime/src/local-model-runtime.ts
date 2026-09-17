@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { spawn, type ChildProcess } from "node:child_process";
+import { spawn, spawnSync, type ChildProcess } from "node:child_process";
 
 export type LocalModelId = string;
 
@@ -38,6 +38,12 @@ type ReleaseLocalModel = {
 
 type ReleaseManifest = {
   applicationVersion?: string;
+  runtime?: {
+    llamaCpp?: {
+      version?: string;
+      backend?: string;
+    };
+  };
   models?: {
     localLlm?: ReleaseLocalModel[];
   };
@@ -79,6 +85,21 @@ export type LocalProvisioningProgress = {
   bytesTotal: number | null;
   percent: number | null;
   updatedAt: string;
+};
+
+export type LocalHardwareProfile = {
+  platform: NodeJS.Platform;
+  arch: string;
+  totalMemoryBytes: number;
+  logicalCpuCount: number;
+  cpuModel: string | null;
+  accelerators: Array<{
+    name: string;
+    driverVersion?: string;
+  }>;
+  packagedBackend: string;
+  gpuOffloadEnabled: false;
+  detectedAt: string;
 };
 
 const PROGRESS_PREFIX =
@@ -287,6 +308,13 @@ export class LocalModelRuntime {
   private provisioning: Promise<void> | null = null;
   private provisioningProgress:
     LocalProvisioningProgress | null = null;
+  private hardwareCache:
+    | {
+        value:
+          LocalHardwareProfile;
+        expiresAt: number;
+      }
+    | null = null;
 
   constructor(options?: {
     rootDir?: string;
@@ -304,6 +332,165 @@ export class LocalModelRuntime {
   listModels(): LocalModelDescriptor[] {
     const configured = this.readConfig();
     return this.models().map((model) => this.publicDescriptor(model, configured));
+  }
+
+  hardwareProfile(): LocalHardwareProfile {
+    const now = Date.now();
+    if (
+      this.hardwareCache &&
+      this.hardwareCache.expiresAt >
+        now
+    ) {
+      return {
+        ...this.hardwareCache.value,
+        accelerators:
+          this.hardwareCache.value
+            .accelerators.map(
+              (item) => ({
+                ...item
+              })
+            )
+      };
+    }
+
+    const cpus = os.cpus();
+    const accelerators: LocalHardwareProfile["accelerators"] =
+      [];
+
+    if (
+      process.platform ===
+        "win32"
+    ) {
+      const powershell =
+        process.env.SystemRoot
+          ? path.join(
+              process.env.SystemRoot,
+              "System32",
+              "WindowsPowerShell",
+              "v1.0",
+              "powershell.exe"
+            )
+          : "powershell.exe";
+      const command = [
+        "$ErrorActionPreference='SilentlyContinue'",
+        "$items=@(Get-CimInstance Win32_VideoController | Select-Object Name,DriverVersion)",
+        "$items | ConvertTo-Json -Compress"
+      ].join("; ");
+      const result =
+        spawnSync(
+          powershell,
+          [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            command
+          ],
+          {
+            encoding: "utf8",
+            windowsHide: true,
+            timeout: 5_000
+          }
+        );
+      if (
+        result.status === 0 &&
+        result.stdout.trim()
+      ) {
+        try {
+          const parsed =
+            JSON.parse(
+              result.stdout.trim()
+            ) as unknown;
+          const items =
+            Array.isArray(parsed)
+              ? parsed
+              : [parsed];
+          for (
+            const value
+            of items.slice(0, 8)
+          ) {
+            if (
+              !value ||
+              typeof value !==
+                "object" ||
+              Array.isArray(value)
+            ) {
+              continue;
+            }
+            const record =
+              value as Record<
+                string,
+                unknown
+              >;
+            if (
+              typeof record.Name !==
+                "string" ||
+              !record.Name.trim()
+            ) {
+              continue;
+            }
+            accelerators.push({
+              name:
+                record.Name
+                  .trim()
+                  .slice(0, 200),
+              ...(typeof record.DriverVersion ===
+                "string" &&
+              record.DriverVersion.trim()
+                ? {
+                    driverVersion:
+                      record.DriverVersion
+                        .trim()
+                        .slice(
+                          0,
+                          100
+                        )
+                  }
+                : {})
+            });
+          }
+        } catch {
+          // Accelerator discovery is informational only.
+        }
+      }
+    }
+
+    const value: LocalHardwareProfile = {
+      platform:
+        process.platform,
+      arch:
+        process.arch,
+      totalMemoryBytes:
+        os.totalmem(),
+      logicalCpuCount:
+        cpus.length,
+      cpuModel:
+        cpus[0]?.model?.trim() ||
+        null,
+      accelerators,
+      packagedBackend:
+        this.manifest()
+          .runtime
+          ?.llamaCpp
+          ?.backend ??
+        "UNKNOWN",
+      gpuOffloadEnabled: false,
+      detectedAt:
+        new Date().toISOString()
+    };
+    this.hardwareCache = {
+      value,
+      expiresAt:
+        now + 60_000
+    };
+    return {
+      ...value,
+      accelerators:
+        value.accelerators.map(
+          (item) => ({
+            ...item
+          })
+        )
+    };
   }
 
   contextPolicy(): {
@@ -346,6 +533,7 @@ export class LocalModelRuntime {
     contextPolicy: ReturnType<LocalModelRuntime["contextPolicy"]>;
     qualification: LocalContextQualification | null;
     progress: LocalProvisioningProgress | null;
+    hardware: LocalHardwareProfile;
   } {
     const config = this.readConfig();
     const enginePresent = Boolean(config && fs.existsSync(config.engine.executable));
@@ -381,7 +569,8 @@ export class LocalModelRuntime {
       qualification: this.readQualification(),
       progress: this.provisioningProgress
         ? { ...this.provisioningProgress }
-        : null
+        : null,
+      hardware: this.hardwareProfile()
     };
   }
 
