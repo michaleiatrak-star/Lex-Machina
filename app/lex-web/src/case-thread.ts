@@ -143,7 +143,7 @@ export function useCaseThread(
   return {
     messages,
     setMessages,
-    loading,
+    loading: Boolean(caseId && loadedCaseId !== caseId) || loading,
     loadedCaseId,
     error
   };
