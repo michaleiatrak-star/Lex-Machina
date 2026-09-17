@@ -1,4 +1,5 @@
 export const SKILL_SELECTION_ENVELOPE_PREFIX = "__LEX_SKILLS_V1__";
+export const AUTO_CASE_TYPE = "AUTO";
 
 export type PublicSkillDescriptor = {
   name: string;
@@ -15,6 +16,32 @@ const STOP_WORDS = new Set([
   "wobec", "zeby", "and", "for", "from", "into", "that", "the", "this",
   "with"
 ]);
+
+let caseTypeExecutionSkill = "";
+
+export function setCaseTypeExecutionSkill(name: string): void {
+  const normalized = name.trim();
+  if (
+    !normalized ||
+    normalized === AUTO_CASE_TYPE ||
+    normalized === "prawny-router-v3" ||
+    normalized === "shared" ||
+    normalized === "prawo-polskie-v2" ||
+    normalized.startsWith("dr-")
+  ) {
+    caseTypeExecutionSkill = "";
+    return;
+  }
+  if (!/^[a-z0-9][a-z0-9._-]{1,159}$/i.test(normalized)) {
+    caseTypeExecutionSkill = "";
+    return;
+  }
+  caseTypeExecutionSkill = normalized;
+}
+
+export function getCaseTypeExecutionSkill(): string {
+  return caseTypeExecutionSkill;
+}
 
 function normalize(value: string): string {
   return value
@@ -75,8 +102,12 @@ export function buildSkillSelectionEnvelope(
   automatic: boolean,
   manualSkills: readonly string[]
 ): string {
+  const forcedExecutionSkill = getCaseTypeExecutionSkill();
   const manual = [
-    ...new Set(manualSkills)
+    ...new Set([
+      ...manualSkills,
+      ...(forcedExecutionSkill ? [forcedExecutionSkill] : [])
+    ])
   ]
     .filter((name) =>
       name !== "prawny-router-v3" &&
@@ -85,9 +116,15 @@ export function buildSkillSelectionEnvelope(
     )
     .slice(0, 16);
 
+  const effectiveAutomatic =
+    forcedExecutionSkill.length === 0
+      ? true
+      : automatic;
+
   return `${SKILL_SELECTION_ENVELOPE_PREFIX} ${JSON.stringify({
-    auto: automatic,
-    manual
+    auto: effectiveAutomatic,
+    manual,
+    caseType: forcedExecutionSkill || AUTO_CASE_TYPE
   })}\n${query}`;
 }
 
