@@ -179,6 +179,34 @@ export function registerMaintenanceRoutes(
   );
 
   app.post(
+    "/api/local-models/remove",
+    async (req, res) => {
+      if (!requireAdmin(req, res, authService)) return;
+      try {
+        const modelId =
+          typeof req.body?.modelId === "string"
+            ? req.body.modelId.trim()
+            : "";
+        if (!modelId) {
+          res.status(400).json({
+            error: "LOCAL_MODEL_ID_REQUIRED"
+          });
+          return;
+        }
+        const result =
+          await localModels.remove(modelId);
+        res.json({
+          ...result,
+          runtime: localModels.status(),
+          models: localModels.listModels()
+        });
+      } catch (error) {
+        sendMaintenanceError(res, error);
+      }
+    }
+  );
+
+  app.post(
     "/api/local-models/start",
     async (req, res) => {
       try {
