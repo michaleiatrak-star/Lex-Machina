@@ -368,7 +368,11 @@ export function resolveAdditionalSkills(
       .filter(
         (item) =>
           item.score >= 2 &&
-          !executionSkills.has(item.skill.name)
+          !executionSkills.has(item.skill.name) &&
+          !(
+            explicitExecution.includes("pisma-procesowe-v3") &&
+            item.skill.name === "pisma-proste-v2"
+          )
       )
       .slice(
         0,
