@@ -152,6 +152,9 @@ if (issues.length > 0) {
         status: safe.status,
         finalization: safe.finalization,
         audit: safeAudit.result,
+        auditMissing: safeAudit.missing ?? [],
+        auditViolations: safeAudit.violations ?? [],
+        workflow: safe.workflow ?? null,
         answerReleased: typeof safe.answer === "string"
       },
       blockedPath: {
@@ -159,6 +162,9 @@ if (issues.length > 0) {
         status: unsafe.status,
         finalization: unsafe.finalization,
         audit: unsafeAudit.result,
+        auditMissing: unsafeAudit.missing ?? [],
+        auditViolations: unsafeAudit.violations ?? [],
+        workflow: unsafe.workflow ?? null,
         answerReleased: "answer" in unsafe,
         references: unsafeReferences
       },
