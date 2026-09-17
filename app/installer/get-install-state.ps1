@@ -1,13 +1,102 @@
 param(
-  [Parameter(Mandatory=$true)][string]$RuntimeRoot,
+  [string]$RuntimeRoot,
   [Parameter(Mandatory=$true)][string]$TargetManifestPath,
   [string]$OutputPath,
+  [string]$ProductName = "Lex Machina",
+  [switch]$DiscoverRegisteredInstall,
+  [switch]$FailOnInstallRootMismatch,
   [switch]$FailOnDowngrade
 )
 
 $ErrorActionPreference = "Stop"
-$runtime = [IO.Path]::GetFullPath($RuntimeRoot)
+$preferredRuntime = if ([string]::IsNullOrWhiteSpace($RuntimeRoot)) {
+  $null
+} else {
+  [IO.Path]::GetFullPath($RuntimeRoot)
+}
 $targetManifestFile = [IO.Path]::GetFullPath($TargetManifestPath)
+
+function Normalize-InstallRoot([object]$Value) {
+  if ($null -eq $Value) { return $null }
+  $text = $Value.ToString().Trim().Trim('"')
+  if ([string]::IsNullOrWhiteSpace($text)) { return $null }
+  try { return [IO.Path]::GetFullPath($text) }
+  catch { return $null }
+}
+
+function Get-RegisteredInstallRoot([string]$Name) {
+  if (-not $DiscoverRegisteredInstall) { return $null }
+  if ([string]::IsNullOrWhiteSpace($Name) -or $Name.Length -gt 160) {
+    throw "INSTALL_STATE_PRODUCT_NAME_INVALID"
+  }
+
+  $key = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\$Name"
+  try {
+    $item = Get-ItemProperty -LiteralPath $key -ErrorAction Stop
+    $location = Normalize-InstallRoot $item.InstallLocation
+    if ($location) {
+      return [pscustomobject]@{
+        Root = $location
+        Source = "HKCU_UNINSTALL_INSTALLLOCATION"
+        RegistryKey = $key
+      }
+    }
+
+    $uninstall = [string]$item.UninstallString
+    if ($uninstall -match '^"([^"]+)\\uninstall\.exe"') {
+      $root = Normalize-InstallRoot ([IO.Path]::GetDirectoryName($matches[1]))
+      if ($root) {
+        return [pscustomobject]@{
+          Root = $root
+          Source = "HKCU_UNINSTALL_UNINSTALLSTRING"
+          RegistryKey = $key
+        }
+      }
+    }
+  } catch {
+    return $null
+  }
+  return $null
+}
+
+$registered = Get-RegisteredInstallRoot $ProductName
+$registeredInstallRoot = if ($registered) { $registered.Root } else { $null }
+$registeredRuntime = if ($registeredInstallRoot) {
+  [IO.Path]::GetFullPath((Join-Path $registeredInstallRoot "runtime"))
+} else {
+  $null
+}
+
+$runtime = if (
+  $registeredRuntime -and
+  (
+    -not $preferredRuntime -or
+    -not (Test-Path -LiteralPath $preferredRuntime -PathType Container)
+  )
+) {
+  $registeredRuntime
+} elseif ($preferredRuntime) {
+  $preferredRuntime
+} elseif ($registeredRuntime) {
+  $registeredRuntime
+} else {
+  throw "INSTALL_STATE_RUNTIME_ROOT_MISSING"
+}
+
+$preferredInstallRoot = if ($preferredRuntime) {
+  [IO.Path]::GetDirectoryName($preferredRuntime)
+} else {
+  $null
+}
+$installRootMismatch = [bool](
+  $registeredInstallRoot -and
+  $preferredInstallRoot -and
+  -not [string]::Equals(
+    $registeredInstallRoot.TrimEnd('\'),
+    $preferredInstallRoot.TrimEnd('\'),
+    [StringComparison]::OrdinalIgnoreCase
+  )
+)
 
 function Get-StrictVersion([object]$Value, [string]$Label) {
   if ($null -eq $Value) { throw "INSTALL_STATE_VERSION_MISSING:$Label" }
@@ -46,11 +135,28 @@ $localAiConfig = if ($env:LOCALAPPDATA) {
   Join-Path $env:LOCALAPPDATA "LexMachina\local-ai\config.json"
 } else { $null }
 $base = @{
-  schemaVersion = 2
+  schemaVersion = 3
   runtimeRoot = $runtime
+  preferredRuntimeRoot = $preferredRuntime
+  preferredInstallRoot = $preferredInstallRoot
+  registeredInstallRoot = $registeredInstallRoot
+  discoverySource = if ($registered) { $registered.Source } elseif ($preferredRuntime) { "PREFERRED_RUNTIME_ROOT" } else { "NONE" }
+  installRootMismatch = $installRootMismatch
   targetVersion = $targetVersion
   checkedAt = $checkedAt
   localAiConfigured = [bool]($localAiConfig -and (Test-Path -LiteralPath $localAiConfig -PathType Leaf))
+}
+
+if ($installRootMismatch -and $FailOnInstallRootMismatch) {
+  $base.state = "INSTALL_ROOT_MISMATCH"
+  $base.installedVersion = $null
+  $base.reasons = @(
+    "REGISTERED_INSTALL_ROOT_DIFFERS_FROM_INSTALLER_TARGET",
+    "REGISTERED:$registeredInstallRoot",
+    "TARGET:$preferredInstallRoot"
+  )
+  Write-Result $base
+  exit 24
 }
 
 if (-not (Test-Path -LiteralPath $runtime -PathType Container)) {
