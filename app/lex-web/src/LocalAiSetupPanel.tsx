@@ -60,6 +60,21 @@ type LocalRuntimeStatus = {
     startupMs: number;
     validatedAt: string;
   } | null;
+  progress: {
+    phase:
+      | "STARTING"
+      | "DOWNLOAD"
+      | "CACHE_HIT"
+      | "VERIFIED"
+      | "VALIDATING_RUNTIME"
+      | "READY"
+      | "FAILED";
+    label: string;
+    bytesDownloaded: number;
+    bytesTotal: number | null;
+    percent: number | null;
+    updatedAt: string;
+  } | null;
 };
 
 type LocalModelsResponse = {
@@ -100,6 +115,42 @@ async function request<T>(
 
 function formatTokens(value: number): string {
   return value.toLocaleString("pl-PL");
+}
+
+function formatBytes(value: number): string {
+  if (value >= 1024 ** 3) {
+    return `${(value / (1024 ** 3)).toFixed(2)} GB`;
+  }
+  if (value >= 1024 ** 2) {
+    return `${(value / (1024 ** 2)).toFixed(1)} MB`;
+  }
+  if (value >= 1024) {
+    return `${(value / 1024).toFixed(1)} KB`;
+  }
+  return `${value} B`;
+}
+
+function progressLabel(
+  phase: NonNullable<
+    LocalRuntimeStatus["progress"]
+  >["phase"]
+): string {
+  switch (phase) {
+    case "STARTING":
+      return "Przygotowanie";
+    case "DOWNLOAD":
+      return "Pobieranie";
+    case "CACHE_HIT":
+      return "Zweryfikowany cache";
+    case "VERIFIED":
+      return "SHA-256 zweryfikowane";
+    case "VALIDATING_RUNTIME":
+      return "Test uruchomienia";
+    case "READY":
+      return "Gotowe";
+    case "FAILED":
+      return "Błąd";
+  }
 }
 
 function contextLabel(
@@ -174,6 +225,20 @@ export function LocalAiSetupPanel({
     void refresh();
   }, [available]);
 
+  function startProvisioningPolling(): number {
+    return window.setInterval(() => {
+      void request<LocalModelsResponse>(
+        "/api/local-models"
+      )
+        .then((next) => {
+          setData(next);
+        })
+        .catch(() => {
+          // The provisioning request owns user-visible errors.
+        });
+    }, 750);
+  }
+
   useEffect(() => {
     if (!selected) return;
     setContextTokens((current) =>
@@ -207,6 +272,8 @@ export function LocalAiSetupPanel({
     setMessage(
       "Pobieram zweryfikowany silnik i wybrany model. Aplikacja pozostaje zainstalowana niezależnie od tej operacji."
     );
+    const polling =
+      startProvisioningPolling();
     try {
       const result = await request<LocalProvisionResponse>(
         "/api/local-models/provision",
@@ -233,6 +300,10 @@ export function LocalAiSetupPanel({
       setError(problem instanceof Error ? problem.message : String(problem));
       setMessage("");
     } finally {
+      window.clearInterval(
+        polling
+      );
+      await refresh();
       setBusy(false);
     }
   }
@@ -250,6 +321,8 @@ export function LocalAiSetupPanel({
     setMessage(
       "Weryfikuję zapisany model, silnik i kontekst oraz wykonuję test uruchomienia."
     );
+    const polling =
+      startProvisioningPolling();
     try {
       const result = await request<LocalProvisionResponse>(
         "/api/local-models/repair",
@@ -269,6 +342,10 @@ export function LocalAiSetupPanel({
       setError(problem instanceof Error ? problem.message : String(problem));
       setMessage("");
     } finally {
+      window.clearInterval(
+        polling
+      );
+      await refresh();
       setBusy(false);
     }
   }
@@ -460,6 +537,36 @@ export function LocalAiSetupPanel({
                   </p>
                 ) : null}
               </>
+            ) : null}
+
+            {data.runtime.progress ? (
+              <div className="local-ai-progress">
+                <div>
+                  <strong>
+                    {progressLabel(data.runtime.progress.phase)}
+                  </strong>
+                  <small>
+                    {data.runtime.progress.label}
+                  </small>
+                </div>
+                {data.runtime.progress.percent !== null ? (
+                  <progress
+                    max={100}
+                    value={data.runtime.progress.percent}
+                  />
+                ) : data.runtime.provisioning ? (
+                  <progress />
+                ) : null}
+                <small>
+                  {formatBytes(data.runtime.progress.bytesDownloaded)}
+                  {data.runtime.progress.bytesTotal !== null
+                    ? ` / ${formatBytes(data.runtime.progress.bytesTotal)}`
+                    : ""}
+                  {data.runtime.progress.percent !== null
+                    ? ` · ${data.runtime.progress.percent}%`
+                    : ""}
+                </small>
+              </div>
             ) : null}
 
             {user.appRole === "ADMIN" ? (
