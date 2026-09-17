@@ -10,6 +10,12 @@ import {
 } from "./application-update-verifier.js";
 import { LexSkillRegistry } from "./registry.js";
 import {
+  skillUpdateTrustReady,
+  verifySkillUpdateIndex,
+  type SkillUpdateIndex,
+  type VerifiedSkillIndex
+} from "./skill-update-verifier.js";
+import {
   CURRENT_APPLICATION_VERSION,
   compareVersions,
   type UpdateDiscovery,
@@ -46,6 +52,10 @@ export type SkillUpdateStatus = {
   latestVersion?: string;
   checkedAt: string;
   bundleReady: boolean;
+  verificationReady: boolean;
+  blockedReason?:
+    | "SIGNED_INDEX_MISSING"
+    | "SIGNER_POLICY_MISSING";
 };
 
 export type SkillUpdateApplyResult = {
@@ -154,6 +164,88 @@ function extractZip(zipPath: string, destination: string): void {
   }
 }
 
+function skillFileSha256(
+  filePath: string
+): string {
+  return createHash("sha256")
+    .update(fs.readFileSync(filePath))
+    .digest("hex");
+}
+
+function validateSkillCandidateAgainstIndex(
+  registry: LexSkillRegistry,
+  index: SkillUpdateIndex
+): void {
+  const actualIds = [
+    ...registry.skills.keys()
+  ].sort();
+  const indexedIds =
+    index.skills
+      .map((skill) => skill.id)
+      .sort();
+
+  if (
+    JSON.stringify(actualIds) !==
+    JSON.stringify(indexedIds)
+  ) {
+    throw new Error(
+      "SKILL_UPDATE_INDEX_SKILL_SET_MISMATCH"
+    );
+  }
+
+  for (const expected of index.skills) {
+    const actual =
+      registry.get(expected.id);
+    if (!actual) {
+      throw new Error(
+        "SKILL_UPDATE_INDEX_SKILL_SET_MISMATCH"
+      );
+    }
+    const version =
+      typeof actual.frontmatter.version ===
+        "string"
+        ? actual.frontmatter.version.trim()
+        : "";
+    if (version !== expected.version) {
+      throw new Error(
+        `SKILL_UPDATE_INDEX_VERSION_MISMATCH:${expected.id}`
+      );
+    }
+
+    const actualHash =
+      skillFileSha256(
+        actual.skillFile
+      );
+    if (
+      actualHash !==
+      expected.sha256.toLowerCase()
+    ) {
+      throw new Error(
+        `SKILL_UPDATE_INDEX_HASH_MISMATCH:${expected.id}`
+      );
+    }
+
+    const dependencies = [
+      ...new Set(
+        actual.frontmatter
+          .dependencies?.requires ??
+          []
+      )
+    ].sort();
+    if (
+      JSON.stringify(dependencies) !==
+      JSON.stringify(
+        [...expected.dependencies]
+          .sort()
+      )
+    ) {
+      throw new Error(
+        `SKILL_UPDATE_INDEX_DEPENDENCY_MISMATCH:${expected.id}`
+      );
+    }
+  }
+}
+
 function locateSkillRoot(stage: string): string {
   for (const candidate of [
     path.join(stage, "Wersja rozwojowa rozpakowana"),
@@ -180,7 +272,20 @@ export class MaintenanceService {
     private readonly discovery: UpdateDiscovery,
     private readonly fetchImpl: typeof fetch = fetch,
     private readonly installerVerifier: ApplicationInstallerVerifier =
-      new WindowsAuthenticodeInstallerVerifier()
+      new WindowsAuthenticodeInstallerVerifier(),
+    private readonly skillTrustReady:
+      () => boolean =
+        skillUpdateTrustReady,
+    private readonly skillIndexVerifier:
+      (
+        indexBytes: Uint8Array,
+        signatureBytes: Uint8Array
+      ) => VerifiedSkillIndex =
+        (indexBytes, signatureBytes) =>
+          verifySkillUpdateIndex(
+            indexBytes,
+            signatureBytes
+          )
   ) {}
 
   async applicationStatus(): Promise<UpdateDiscoveryResult> {
@@ -257,6 +362,13 @@ export class MaintenanceService {
     const available =
       Boolean(status.skillsBundle && latestVersion) &&
       compareVersions(currentVersion, latestVersion!) < 0;
+    const signedAssetsReady = Boolean(
+      status.skillsBundle &&
+      status.skillsIndex &&
+      status.skillsSignature
+    );
+    const verificationReady =
+      this.skillTrustReady();
     return {
       currentVersion,
       status:
@@ -267,7 +379,21 @@ export class MaintenanceService {
             : "UP_TO_DATE",
       ...(latestVersion ? { latestVersion } : {}),
       checkedAt: status.checkedAt,
-      bundleReady: Boolean(status.skillsBundle)
+      bundleReady:
+        signedAssetsReady &&
+        verificationReady,
+      verificationReady,
+      ...(available && !signedAssetsReady
+        ? {
+            blockedReason:
+              "SIGNED_INDEX_MISSING" as const
+          }
+        : available && !verificationReady
+          ? {
+              blockedReason:
+                "SIGNER_POLICY_MISSING" as const
+            }
+          : {})
     };
   }
 
@@ -283,8 +409,95 @@ export class MaintenanceService {
     if (!status.skillsBundle) {
       throw new Error("SKILL_UPDATE_BUNDLE_NOT_VERIFIED");
     }
+    if (
+      !status.skillsIndex ||
+      !status.skillsSignature
+    ) {
+      throw new Error(
+        "SKILL_UPDATE_SIGNED_INDEX_MISSING"
+      );
+    }
+    if (!this.skillTrustReady()) {
+      throw new Error(
+        "SKILL_UPDATE_SIGNER_POLICY_MISSING"
+      );
+    }
 
-    const bytes = await downloadVerified(status.skillsBundle, this.fetchImpl);
+    const [
+      indexBytes,
+      signatureBytes
+    ] = await Promise.all([
+      downloadVerified(
+        status.skillsIndex,
+        this.fetchImpl
+      ),
+      downloadVerified(
+        status.skillsSignature,
+        this.fetchImpl
+      )
+    ]);
+    const verifiedIndex =
+      this.skillIndexVerifier(
+        indexBytes,
+        signatureBytes
+      );
+    const index =
+      verifiedIndex.index;
+
+    if (index.version !== version) {
+      throw new Error(
+        "SKILL_UPDATE_INDEX_RELEASE_VERSION_MISMATCH"
+      );
+    }
+    if (
+      compareVersions(
+        CURRENT_APPLICATION_VERSION,
+        index.compatibility.minAppVersion
+      ) < 0 ||
+      (
+        index.compatibility.maxAppVersion &&
+        compareVersions(
+          CURRENT_APPLICATION_VERSION,
+          index.compatibility.maxAppVersion
+        ) > 0
+      )
+    ) {
+      throw new Error(
+        "SKILL_UPDATE_APP_INCOMPATIBLE"
+      );
+    }
+    if (
+      index.bundle.filename !==
+        status.skillsBundle.name ||
+      index.bundle.sha256 !==
+        status.skillsBundle.sha256
+          .toLowerCase() ||
+      (
+        status.skillsBundle.bytes !==
+          undefined &&
+        index.bundle.bytes !==
+          status.skillsBundle.bytes
+      )
+    ) {
+      throw new Error(
+        "SKILL_UPDATE_INDEX_BUNDLE_MISMATCH"
+      );
+    }
+
+    const bytes = await downloadVerified(
+      status.skillsBundle,
+      this.fetchImpl
+    );
+    if (
+      sha256(bytes) !==
+        index.bundle.sha256 ||
+      bytes.byteLength !==
+        index.bundle.bytes
+    ) {
+      throw new Error(
+        "SKILL_UPDATE_SIGNED_BUNDLE_MISMATCH"
+      );
+    }
     const skillsRoot = path.join(localAppDataRoot(), "skills");
     const workRoot = path.join(
       skillsRoot,
@@ -308,11 +521,37 @@ export class MaintenanceService {
       fs.rmSync(workRoot, { recursive: true, force: true });
       throw new Error("SKILL_UPDATE_VALIDATION_FAILED");
     }
+    try {
+      validateSkillCandidateAgainstIndex(
+        validation,
+        index
+      );
+    } catch (error) {
+      fs.rmSync(
+        workRoot,
+        {
+          recursive: true,
+          force: true
+        }
+      );
+      throw error;
+    }
 
     const installedAt = new Date().toISOString();
     fs.writeFileSync(
       markerPath(candidate),
-      JSON.stringify({ version, installedAt }, null, 2),
+      JSON.stringify(
+        {
+          version,
+          installedAt,
+          indexSha256:
+            verifiedIndex.indexSha256,
+          signerKeyId:
+            verifiedIndex.signerKeyId
+        },
+        null,
+        2
+      ),
       "utf8"
     );
 
