@@ -2,7 +2,7 @@
 
 Data audytu: 2026-09-17
 
-Zakres: aplikacja instalacyjna Lex Machina, model sprawy/wątku, routing skilli, pliki i foldery, know-how kancelarii, otwieranie zasobów zewnętrznych i lokalnych oraz cytowania dokumentów.
+Zakres: aplikacja instalacyjna Lex Machina, model sprawy/wątku, routing skilli, pliki i foldery, know-how kancelarii, automatyczny OCR, prywatność wieloplikowa, otwieranie zasobów zewnętrznych i lokalnych oraz cytowania dokumentów.
 
 ## Metoda
 
@@ -35,7 +35,7 @@ Wniosek: nazwa biznesowa sprawy i przyszła sygnatura nie są utożsamiane.
 
 ## A-03 — Multi-skill i multi-domain
 
-Status: IMPLEMENTED; deterministic tests existed and passed on earlier head; revalidation required on final SHA.
+Status: IMPLEMENTED; deterministic tests passed on wcześniejszym head; revalidation required on final SHA.
 
 - Runtime może aktywować kilka skilli wykonawczych w jednej turze.
 - Skill wykonawczy może delegować do innych skilli wykonawczych.
@@ -83,7 +83,7 @@ Wniosek bezpieczeństwa: UI nie może wskazać dowolnego lokalnego pliku poza ko
 
 ## A-07 — Linki internetowe do przeglądarki
 
-Status: IMPLEMENTED / native compile/test pending on final SHA
+Status: IMPLEMENTED / final native revalidation pending
 
 - `open_external_url` akceptuje wyłącznie `https://` i odrzuca CR/LF.
 - Windows używa systemowego `FileProtocolHandler`, macOS `open`, Linux `xdg-open`.
@@ -118,15 +118,46 @@ Status: IMPLEMENTED
 
 Wniosek: nowa organizacja folderów/wątków nie omija dotychczasowej granicy kryptograficznej sprawy.
 
-## A-10 — Ryzyka regresji do objęcia CI
+## A-10 — Automatyczny OCR w czacie i izolacja prywatności per plik
+
+Status: IMPLEMENTED / CI PENDING
+
+Przepływ:
+
+1. Obraz jest kierowany do lokalnego `CompleteImageIngestor` i Paddle OCR bez ręcznego przełącznika.
+2. PDF jest analizowany przez `CompleteDocumentIngestor`; strony z użytecznym tekstem cyfrowym zachowują źródło `DIGITAL`, a strony skanowane/bez użytecznej warstwy tekstowej przechodzą przez lokalny OCR i otrzymują źródło `OCR`.
+3. `MatterChatApp.tsx` utrzymuje kolejkę w toku czatu. Dodanie plików z kompozytora nie przełącza użytkownika do osobnego ekranu.
+4. `DocumentPrivacyPanel.tsx` nie konsumuje pliku po samym review/OCR. Kolejka przesuwa się dopiero po `finalizeDocument` albo po jawnym pominięciu błędnego pliku.
+5. Dla każdego pliku osobno wyświetlane jest pytanie: automatyczna pseudonimizacja, ręczny przegląd albo pozostawienie danych jawnych.
+6. Opcja jawna nie wyłącza mechanizmu „na słowo”: UI tworzy dyrektywy `KEEP` dla wykrytych zakresów, dzięki czemu decyzja jest utrwalona jawnie w finalizacji.
+7. `LocalPrivateDocumentService` tworzy osobny `PseudonymizationVault` dla każdego `documentId`; persistent vault przechowuje snapshoty pod kluczem dokumentu.
+8. Przy dokumentach wynikowych z wielu źródeł `generation-aliases.ts` nadaje osobne przestrzenie nazw `D01`, `D02`, …, a reidentyfikacja rozwiązuje alias przez vault wskazanego `documentId`.
+
+Granica bezpieczeństwa: czat nie deanonymizuje automatycznie odpowiedzi providera. Kontrolowana deanonymizacja dokumentu wynikowego nadal wymaga istniejącego kontraktu reautoryzacji G34F. Dzięki temu funkcja wieloplikowa nie obchodzi granicy dla danych jawnych.
+
+Ryzyko kontrolowane: poprzednia implementacja konsumowała plik po review, co przy wielu plikach mogło przełączyć ekran przed finalizacją prywatności. Nowa kolejka jest sekwencyjna i blokuje następny dokument do zakończenia bieżącego.
+
+## A-11 — Pełne usuwanie źródła i danych pochodnych
+
+Status: IMPLEMENTED / CI PENDING
+
+- `documentId` jest deterministycznie wyprowadzany z SHA-256 źródła; dla ZIP analogicznie można wyprowadzić identyfikatory przetworzonych członków archiwum.
+- `workspace-routes.ts` podczas usunięcia uploadu wylicza wszystkie takie `documentId`.
+- Dla każdego usuwa wpis zaszyfrowanego privacy vaultu, katalog chronionego dokumentu (`source.lme`/`protected.lme`) oraz rekord in-memory `LocalPrivateDocumentService`.
+- Dopiero po purge danych pochodnych usuwany jest zaszyfrowany upload źródłowy i pozycja workspace.
+- `privacyVaultStore` i główne API korzystają z tej samej instancji `LocalPrivateDocumentService`, więc stary dokument nie pozostaje rozwiązywalny w bieżącym procesie po usunięciu.
+
+Wniosek: akcja `Usuń` ma semantykę usunięcia dokumentu z akt wraz z pochodnymi danymi OCR/prywatności, a nie tylko ukrycia źródła w eksploratorze.
+
+## A-12 — Ryzyka regresji do objęcia CI
 
 Status: OPEN UNTIL FINAL 0.1.2 ACCEPTANCE
 
 Finalny SHA musi wykazać:
 
 - strict TS runtime + web,
-- unit tests workspace i document citations,
-- G14 bundle safety z markerami nowych funkcji,
+- unit tests workspace, OCR/prywatności i document citations,
+- G14 bundle safety z markerami automatycznego OCR i sekwencyjnej prywatności per plik,
 - G34G natywne testy Tauri, w tym walidację HTTPS i tokenów plików,
 - G37F file input + drag/drop,
 - P4B lifecycle,
@@ -136,4 +167,4 @@ Finalny SHA musi wykazać:
 
 ## Ocena końcowa audytu na tym etapie
 
-Architektura spełnia żądany model prywatności: sprawa jest podstawową granicą danych i rozmowy, foldery są metadanymi wewnątrz zaszyfrowanego workspace, lokalne pliki są otwierane przez ograniczony staging token, a deep-link cytowania jest rozwiązywany po stronie zaufanego runtime. Finalny status release pozostaje `CI PENDING` do czasu przejścia wszystkich bramek z jednego, niezmienionego SHA i publikacji nowych instalatorów 0.1.2.
+Architektura spełnia żądany model prywatności: sprawa jest podstawową granicą danych i rozmowy, foldery są metadanymi wewnątrz zaszyfrowanego workspace, OCR działa lokalnie i automatycznie tam, gdzie wymaga tego format/strona dokumentu, a każdy plik ma osobny cykl decyzji prywatności oraz osobny vault. Usunięcie dokumentu czyści także dane pochodne. Lokalny plik jest otwierany przez ograniczony staging token, a deep-link cytowania jest rozwiązywany po stronie zaufanego runtime. Finalny status release pozostaje `CI PENDING` do czasu przejścia wszystkich bramek z jednego, niezmienionego SHA i publikacji nowych instalatorów 0.1.2.
