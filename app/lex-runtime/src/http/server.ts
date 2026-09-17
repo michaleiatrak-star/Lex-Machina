@@ -372,6 +372,22 @@ export async function startLocalServer(options?: {
     new LegalDocumentAstGenerator(
       sessionExecutor
     );
+  const documentService =
+    new LocalPrivateDocumentService(
+      new CompleteDocumentIngestor(
+        new PdfJsDocumentPageSource(),
+        new LocalPaddleOcrEngine()
+      ),
+      new LocalStanzaNamedEntityRecognizer(),
+      24_000,
+      new CompleteImageIngestor(
+        new LocalPaddleImageOcrEngine()
+      ),
+      privacyVaultStore,
+      secureCaseDocumentStore,
+      new LocalOfficeDocumentTextExtractor(),
+      new LocalSpreadsheetTextExtractor()
+    );
 
   const coreApp = createLexHttpApp({
     registry,
@@ -393,21 +409,7 @@ export async function startLocalServer(options?: {
     reauthorizationManager,
     sensitiveDownloadTickets,
     secureCaseArtifactStore,
-    documentService: new LocalPrivateDocumentService(
-      new CompleteDocumentIngestor(
-        new PdfJsDocumentPageSource(),
-        new LocalPaddleOcrEngine()
-      ),
-      new LocalStanzaNamedEntityRecognizer(),
-      24_000,
-      new CompleteImageIngestor(
-        new LocalPaddleImageOcrEngine()
-      ),
-      privacyVaultStore,
-      secureCaseDocumentStore,
-      new LocalOfficeDocumentTextExtractor(),
-      new LocalSpreadsheetTextExtractor()
-    ),
+    documentService,
     sessionExecutor
   });
 
@@ -436,6 +438,9 @@ export async function startLocalServer(options?: {
         secureCaseUploadStore,
       templates:
         sharedTemplateStore,
+      privacyVaults:
+        privacyVaultStore,
+      documentService,
       workspace:
         workspaceStore,
       rootDir:
