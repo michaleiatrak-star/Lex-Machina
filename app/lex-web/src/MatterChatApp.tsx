@@ -506,7 +506,7 @@ export default function MatterChatApp({
       setDocumentDropQueue((current) =>
         enqueueDocumentDropFiles(current, incoming)
       );
-      setActiveTab("files");
+      setActiveTab("chat");
     } catch {
       setExecutionError(
         "Nie udało się utworzyć aktywnej sprawy dla dodawanych plików."
@@ -875,6 +875,53 @@ export default function MatterChatApp({
           </div>
         ))}
 
+        {documentDropQueue.total > 0 ? (
+          <section className="chat-card-stack chat-document-flow" aria-label="OCR i prywatność plików">
+            <article className="chat-card">
+              <p className="eyebrow">OCR w czacie · plik po pliku</p>
+              <h2>
+                {documentDropQueue.completed}/{documentDropQueue.total} zakończono
+              </h2>
+              <p>
+                Każdy plik przechodzi osobno: wykrycie skanu → lokalny OCR → decyzja o anonimizacji →
+                osobny zaszyfrowany vault. Następny plik nie rozpocznie decyzji prywatności, dopóki
+                bieżący nie zostanie zakończony lub pominięty.
+              </p>
+              {documentDropQueue.rejected > 0 ? (
+                <p className="chat-inline-error">
+                  Pominięto {documentDropQueue.rejected} plików.
+                </p>
+              ) : null}
+              <ul className="chat-file-list">
+                {documentDropQueue.files.slice(0, 12).map((file, index) => (
+                  <li key={`${file.name}-${file.lastModified}-${index}`}>
+                    <strong>{file.name}</strong>
+                    <small>
+                      {index === 0 ? "OCR / decyzja prywatności" : "Oczekuje"} · {describeDocumentFile(file)}
+                    </small>
+                  </li>
+                ))}
+              </ul>
+              <small>limit kolejki {MAX_DOCUMENT_DROP_QUEUE}</small>
+            </article>
+
+            <DocumentPrivacyPanel
+              caseId={caseId}
+              incomingFile={documentDropQueue.files[0] ?? null}
+              onIncomingFileConsumed={() =>
+                setDocumentDropQueue((current) => consumeDocumentDropFile(current))
+              }
+              onCaseFilesChange={() =>
+                setWorkspaceRefresh((value) => value + 1)
+              }
+              onAttachmentSelectionChange={(selection) => {
+                if (!selection) return;
+                setDocumentAttachments((current) => upsertAttachment(current, selection));
+              }}
+            />
+          </section>
+        ) : null}
+
         {activeTab === "chat" ? (
           <section
             className={dropActive ? "chat-panel chat-drop-active" : "chat-panel"}
@@ -1033,7 +1080,8 @@ export default function MatterChatApp({
                 <h2>Kliknij lub przeciągnij pliki</h2>
                 <p>
                   Pliki trafiają do zaszyfrowanego magazynu bieżącej sprawy.
-                  Po dodaniu można je przenieść do dowolnego folderu logicznego.
+                  OCR i pytanie o prywatność są prowadzone w czacie plik po pliku;
+                  tutaj zarządzasz już zapisanymi aktami i strukturą folderów.
                 </p>
               </div>
               <button
@@ -1045,44 +1093,6 @@ export default function MatterChatApp({
                 Otwórz eksplorator
               </button>
             </article>
-
-            {documentDropQueue.total > 0 ? (
-              <article className="chat-card">
-                <p className="eyebrow">Kolejka</p>
-                <h2>{documentDropQueue.completed}/{documentDropQueue.total} przetworzono</h2>
-                {documentDropQueue.rejected > 0 ? (
-                  <p className="chat-inline-error">
-                    Pominięto {documentDropQueue.rejected} plików.
-                  </p>
-                ) : null}
-                <ul className="chat-file-list">
-                  {documentDropQueue.files.slice(0, 12).map((file, index) => (
-                    <li key={`${file.name}-${file.lastModified}-${index}`}>
-                      <strong>{file.name}</strong>
-                      <small>
-                        {index === 0 ? "Przetwarzanie" : "Oczekuje"} · {describeDocumentFile(file)}
-                      </small>
-                    </li>
-                  ))}
-                </ul>
-                <small>limit kolejki {MAX_DOCUMENT_DROP_QUEUE}</small>
-              </article>
-            ) : null}
-
-            <DocumentPrivacyPanel
-              caseId={caseId}
-              incomingFile={documentDropQueue.files[0] ?? null}
-              onIncomingFileConsumed={() =>
-                setDocumentDropQueue((current) => consumeDocumentDropFile(current))
-              }
-              onCaseFilesChange={() =>
-                setWorkspaceRefresh((value) => value + 1)
-              }
-              onAttachmentSelectionChange={(selection) => {
-                if (!selection) return;
-                setDocumentAttachments((current) => upsertAttachment(current, selection));
-              }}
-            />
 
             <WorkspaceManager
               caseId={caseId}
