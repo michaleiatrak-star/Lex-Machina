@@ -357,6 +357,64 @@ export function LocalAiSetupPanel({
     }
   }
 
+  async function applyModelUpdate(): Promise<void> {
+    if (
+      user.appRole !== "ADMIN" ||
+      busy ||
+      modelUpdate?.status !== "AVAILABLE"
+    ) {
+      return;
+    }
+
+    setBusy(true);
+    setError("");
+    setMessage(
+      "Pobieram podpisaną aktualizację modelu do stagingu. Stary GGUF pozostaje rollbackiem do czasu udanego testu /health."
+    );
+    const polling =
+      startProvisioningPolling();
+    try {
+      const result = await request<
+        LocalProvisionResponse & {
+          receipt: {
+            packVersion: string;
+            signerKeyId: string;
+            indexSha256: string;
+            modelSha256: string;
+          };
+          update: ModelPackUpdateStatus;
+        }
+      >(
+        "/api/local-models/update/apply",
+        { method: "POST" }
+      );
+      setData((current) => current ? {
+        ...current,
+        runtime: result.runtime,
+        models: current.models.map((item) =>
+          item.id === result.model.id ? result.model : item
+        )
+      } : current);
+      setModelUpdate(result.update);
+      setMessage(
+        `Model zaktualizowano z podpisanego pakietu ${result.receipt.packVersion}. Podpis: ${result.receipt.signerKeyId}. Profil ${formatTokens(result.contextTokens)} tokenów przeszedł ponowną walidację.`
+      );
+    } catch (problem) {
+      setError(
+        problem instanceof Error
+          ? problem.message
+          : String(problem)
+      );
+      setMessage("");
+    } finally {
+      window.clearInterval(
+        polling
+      );
+      await refresh();
+      setBusy(false);
+    }
+  }
+
   async function repair(): Promise<void> {
     if (
       user.appRole !== "ADMIN" ||
@@ -599,7 +657,7 @@ export function LocalAiSetupPanel({
                       {modelUpdate.status === "UP_TO_DATE"
                         ? "aktualny"
                         : modelUpdate.status === "AVAILABLE"
-                          ? `dostępna podpisana aktualizacja ${modelUpdate.latestPackVersion ?? ""} (instalacja zostanie włączona po domknięciu transakcji model-pack)`
+                          ? `dostępna podpisana aktualizacja ${modelUpdate.latestPackVersion ?? ""}`
                           : modelUpdate.status === "NOT_CONFIGURED"
                             ? "model nie jest jeszcze skonfigurowany"
                             : modelUpdate.status === "UNAVAILABLE"
@@ -686,6 +744,17 @@ export function LocalAiSetupPanel({
                       onClick={() => void repair()}
                     >
                       Napraw
+                    </button>
+                    <button
+                      type="button"
+                      disabled={
+                        busy ||
+                        data.runtime.provisioning ||
+                        modelUpdate?.status !== "AVAILABLE"
+                      }
+                      onClick={() => void applyModelUpdate()}
+                    >
+                      Aktualizuj model
                     </button>
                     <button
                       type="button"
