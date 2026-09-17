@@ -68,18 +68,18 @@ function assertReadableResource(
 
 export function createDeterministicWorkflowPlan(
   registry: LexSkillRegistry,
-  executionSkills: readonly string[]
+  workflowExecutionSkill: string | null
 ): DeterministicWorkflowPlan {
   const hasProcess =
-    executionSkills.includes("pisma-procesowe-v3");
+    workflowExecutionSkill === "pisma-procesowe-v3";
   const hasSimple =
-    executionSkills.includes("pisma-proste-v2");
+    workflowExecutionSkill === "pisma-proste-v2";
 
   const executionSkill = hasProcess
     ? "pisma-procesowe-v3"
     : hasSimple
       ? "pisma-proste-v2"
-      : null;
+      : workflowExecutionSkill;
 
   const id: DeterministicWorkflowId = hasProcess
     ? "PROCESS_PLEADING_V1"
@@ -112,8 +112,7 @@ export function createDeterministicWorkflowPlan(
   return {
     id,
     executionSkill,
-    escalatedFromSimpleLetter:
-      hasProcess && hasSimple,
+    escalatedFromSimpleLetter: false,
     requiredFreshResources,
     phases: [
       "PREFLIGHT",
