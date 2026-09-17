@@ -42,9 +42,29 @@ function registryWithSkills(): LexSkillRegistry {
       type: "domain"
     },
     {
+      name: "dr-03-prawo-procesowe",
+      description: "pozew apelacja zażalenie postępowanie sądowe terminy procesowe",
+      type: "domain"
+    },
+    {
       name: "terminy-procesowe",
       description: "obliczanie terminów procesowych i doręczeń",
       type: "helper"
+    },
+    {
+      name: "analiza-sadowa-v6",
+      description: "analiza sprawy sądowej strategia procesowa ryzyka i dowody",
+      type: "executive-sadowa"
+    },
+    {
+      name: "chronologia-sprawy-v1",
+      description: "chronologia sprawy sądowej zdarzenia terminy i dokumenty",
+      type: "executive-chronologia"
+    },
+    {
+      name: "raport-klienta-v1",
+      description: "raport dla klienta o sprawie sądowej ryzykach i działaniach",
+      type: "executive-raport"
     },
     {
       name: "analizator-umow-v1",
@@ -98,41 +118,55 @@ describe("skill selection", () => {
     });
   });
 
-  it("selects one matching execution skill automatically and keeps matching helpers", () => {
+  it("can select several cooperating execution skills automatically", () => {
     const registry = registryWithSkills();
     const selected = resolveAdditionalSkills(
       registry,
-      "Przeanalizuj ryzyka i klauzule tej umowy oraz policz termin procesowy.",
-      "dr-02-prawo-cywilne",
+      "Przeanalizuj sprawę sądową, ułóż chronologię i przygotuj raport dla klienta o ryzykach.",
+      "dr-03-prawo-procesowe",
       true,
-      ["terminy-procesowe"]
+      []
     );
 
-    expect(selected.loadedSkills.slice(0, 4)).toEqual([
-      "prawny-router-v3",
-      "shared",
-      "prawo-polskie-v2",
-      "dr-02-prawo-cywilne"
-    ]);
-    expect(selected.executionSkill).toBe("analizator-umow-v1");
-    expect(selected.additionalSkills).toContain("analizator-umow-v1");
-    expect(selected.additionalSkills).toContain("terminy-procesowe");
-    expect(selected.additionalSkills).not.toContain("pisma-procesowe-v3");
+    expect(selected.executionSkills).toContain("analiza-sadowa-v6");
+    expect(selected.executionSkills).toContain("chronologia-sprawy-v1");
+    expect(selected.executionSkills).toContain("raport-klienta-v1");
+    expect(selected.additionalSkills).toEqual(
+      expect.arrayContaining([
+        "analiza-sadowa-v6",
+        "chronologia-sprawy-v1",
+        "raport-klienta-v1"
+      ])
+    );
   });
 
-  it("keeps a manually selected execution skill instead of replacing it", () => {
+  it("can add more than one legal domain to a single turn", () => {
     const registry = registryWithSkills();
     const selected = resolveAdditionalSkills(
       registry,
-      "Przygotuj analizę umowy.",
-      "dr-02-prawo-cywilne",
+      "Pracownik pozywa pracodawcę; trzeba ocenić wypowiedzenie i przygotować pozew oraz terminy procesowe.",
+      "dr-01-prawo-pracy",
       true,
-      ["pisma-procesowe-v3"]
+      []
     );
 
-    expect(selected.executionSkill).toBe("pisma-procesowe-v3");
-    expect(selected.additionalSkills).toContain("pisma-procesowe-v3");
-    expect(selected.additionalSkills).not.toContain("analizator-umow-v1");
+    expect(selected.domainSkills[0]).toBe("dr-01-prawo-pracy");
+    expect(selected.domainSkills).toContain("dr-03-prawo-procesowe");
+  });
+
+  it("keeps manually selected execution and domain skills while auto-routing may add more", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Przygotuj analizę umowy i raport dla klienta.",
+      "dr-02-prawo-cywilne",
+      true,
+      ["analizator-umow-v1", "dr-03-prawo-procesowe"]
+    );
+
+    expect(selected.executionSkills).toContain("analizator-umow-v1");
+    expect(selected.domainSkills).toContain("dr-03-prawo-procesowe");
+    expect(selected.executionSkills.length).toBeGreaterThanOrEqual(1);
   });
 
   it("uses the general legal guide when automatic mode has no semantic match", () => {
@@ -145,7 +179,7 @@ describe("skill selection", () => {
       []
     );
 
-    expect(selected.executionSkill).toBe("przewodnik-prawny-v2");
+    expect(selected.executionSkills).toContain("przewodnik-prawny-v2");
   });
 
   it("ignores unknown manual skill names when automatic mode is disabled", () => {
@@ -159,7 +193,8 @@ describe("skill selection", () => {
     );
 
     expect(selected.additionalSkills).toEqual([]);
-    expect(selected.executionSkill).toBeUndefined();
+    expect(selected.executionSkills).toEqual([]);
+    expect(selected.domainSkills).toEqual(["dr-02-prawo-cywilne"]);
     expect(selected.loadedSkills).toContain("shared");
   });
 });
