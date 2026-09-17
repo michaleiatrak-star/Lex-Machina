@@ -24,6 +24,7 @@ export type ResolvedSkillSelection = {
   additionalSkills: string[];
   loadedSkills: string[];
   executionSkills: string[];
+  workflowExecutionSkill: string | null;
   domainSkills: string[];
 };
 
@@ -334,12 +335,32 @@ export function resolveAdditionalSkills(
 
   const selected = new Set<string>(manual);
   const executionSkills = new Set<string>();
+  let workflowExecutionSkill: string | null = null;
+  const promoteWorkflowExecutionSkill = (name: string) => {
+    if (name === "pisma-procesowe-v3") {
+      workflowExecutionSkill = name;
+      return;
+    }
+    if (
+      workflowExecutionSkill !== "pisma-procesowe-v3" &&
+      name === "pisma-proste-v2"
+    ) {
+      workflowExecutionSkill = name;
+      return;
+    }
+    if (workflowExecutionSkill === null) {
+      workflowExecutionSkill = name;
+    }
+  };
   const domainSkills = new Set<string>([primarySkill]);
 
   for (const name of manual) {
     const skill = registry.get(name);
     if (!skill) continue;
-    if (isExecutionSkill(skill)) executionSkills.add(name);
+    if (isExecutionSkill(skill)) {
+      executionSkills.add(name);
+      promoteWorkflowExecutionSkill(name);
+    }
     if (isDomainSkill(skill)) domainSkills.add(name);
   }
 
@@ -362,6 +383,7 @@ export function resolveAdditionalSkills(
       if (executionSkills.size >= 4) break;
       executionSkills.add(name);
       selected.add(name);
+      promoteWorkflowExecutionSkill(name);
     }
 
     const matchingExecution = rankedExecution
@@ -390,11 +412,15 @@ export function resolveAdditionalSkills(
       if (fallback) {
         executionSkills.add(fallback.name);
         selected.add(fallback.name);
+        promoteWorkflowExecutionSkill(fallback.name);
       }
     } else {
       for (const item of matchingExecution) {
         executionSkills.add(item.skill.name);
         selected.add(item.skill.name);
+        if (workflowExecutionSkill === null) {
+          promoteWorkflowExecutionSkill(item.skill.name);
+        }
       }
     }
 
@@ -450,6 +476,10 @@ export function resolveAdditionalSkills(
       ...additionalSkills
     ],
     executionSkills: [...executionSkills].filter((name) => retained.has(name)),
+    workflowExecutionSkill:
+      workflowExecutionSkill && retained.has(workflowExecutionSkill)
+        ? workflowExecutionSkill
+        : null,
     domainSkills: [...domainSkills].filter(
       (name) => name === primarySkill || retained.has(name)
     )
