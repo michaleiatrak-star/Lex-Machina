@@ -132,6 +132,14 @@
     "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation.",
     "applicationUpdateSigning": "Application updates are deliberately blocked until trustedSignerThumbprints contains the production Authenticode certificate thumbprint."
   },
+  "modelPackUpdate": {
+    "verification": "SHA256_AND_ED25519_SIGNED_INDEX",
+    "trustedEd25519PublicKeys": [],
+    "indexAsset": "LexMachina-ModelPack-Index.json",
+    "signatureAsset": "LexMachina-ModelPack-Index.sig",
+    "activation": "VERIFY_INDEX_THEN_DOWNLOAD_SELECTED_MODEL_TO_STAGING",
+    "policy": "FAIL_CLOSED_UNTIL_MODEL_PACK_SIGNER_IS_CONFIGURED"
+  },
   "skillUpdate": {
     "verification": "SHA256_AND_ED25519_SIGNED_INDEX",
     "trustedEd25519PublicKeys": [],
