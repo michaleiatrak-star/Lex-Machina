@@ -10,6 +10,7 @@ const config = JSON.parse(read("app/lex-desktop/src-tauri/tauri.conf.json"));
 const source = JSON.parse(read("app/installer/windows-release-source.json"));
 const build = read("app/installer/build-windows-online.ps1");
 const bootstrap = read("app/installer/windows-online-bootstrap.ps1");
+const packageVerifier = read("app/installer/verify-python-package-set.py");
 const hooks = read("app/lex-desktop/src-tauri/windows/hooks.nsh");
 const sidecar = read("app/lex-desktop/src-tauri/src/runtime_sidecar.rs");
 const selftest = read("app/installer/windows-payload-selftest.ps1");
@@ -25,7 +26,8 @@ const checks = {
     Array.isArray(config.bundle?.resources) &&
     config.bundle.resources.includes("runtime/**/*") &&
     build.includes("Thin payload contract") &&
-    build.includes("windows-online-bootstrap.ps1"),
+    build.includes("windows-online-bootstrap.ps1") &&
+    build.includes("verify-python-package-set.py"),
   privateNodeDownloadIfMissing:
     bootstrap.includes("Test-CommandVersion") &&
     bootstrap.includes("manifest.runtime.node.url") &&
@@ -38,7 +40,10 @@ const checks = {
     sidecar.includes('join("python")') &&
     sidecar.includes('join("python.exe")'),
   pinnedPackagesOnlyIfNeeded:
-    bootstrap.includes("PYTHON_PACKAGE_SET_PASS") &&
+    bootstrap.includes("verify-python-package-set.py") &&
+    bootstrap.includes("& $pythonExe $packageVerifier $manifestPath") &&
+    packageVerifier.includes("importlib.metadata.version") &&
+    packageVerifier.includes('print("PYTHON_PACKAGE_SET_PASS")') &&
     bootstrap.includes("--upgrade-strategy only-if-needed") &&
     bootstrap.includes("windows-release-requirements.txt") === false &&
     build.includes("release-requirements.txt"),
