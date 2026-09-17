@@ -135,30 +135,15 @@ if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
 }
 
 Write-Host "[3/6] Pinned Python/ML packages"
-$expectedPackagesJson = $manifest.pythonPackages | ConvertTo-Json -Compress
-$packageCheck = @'
-import importlib.metadata
-import json
-import sys
-expected = json.loads(sys.argv[1])
-bad = []
-for name, wanted in expected.items():
-    try:
-        actual = importlib.metadata.version(name)
-    except importlib.metadata.PackageNotFoundError:
-        actual = None
-    if actual != wanted:
-        bad.append(f"{name}:{actual!r}!={wanted!r}")
-if bad:
-    print(";".join(bad))
-    raise SystemExit(1)
-print("PYTHON_PACKAGE_SET_PASS")
-'@
-& $pythonExe -c $packageCheck $expectedPackagesJson | Out-Host
+$packageVerifier = Join-Path $bootstrapRoot "verify-python-package-set.py"
+if (-not (Test-Path -LiteralPath $packageVerifier -PathType Leaf)) {
+  throw "BOOTSTRAP_PYTHON_PACKAGE_VERIFIER_MISSING"
+}
+& $pythonExe $packageVerifier $manifestPath | Out-Host
 if ($LASTEXITCODE -ne 0) {
   & $pythonExe -m pip install --quiet --disable-pip-version-check --no-warn-script-location --upgrade-strategy only-if-needed -r $requirements
   if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PACKAGES_FAILED" }
-  & $pythonExe -c $packageCheck $expectedPackagesJson | Out-Host
+  & $pythonExe $packageVerifier $manifestPath | Out-Host
   if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PACKAGE_VERSION_MISMATCH" }
 }
 & $pythonExe -m pip freeze --all | Sort-Object |
