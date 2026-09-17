@@ -1,6 +1,6 @@
 [package]
 name = "lex-machina-desktop"
-version = "0.1.2"
+version = "0.1.3"
 description = "Lex Machina secure desktop shell"
 authors = ["Lex Machina"]
 edition = "2021"
