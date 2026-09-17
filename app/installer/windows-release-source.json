@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "target": "windows-x86_64",
   "applicationVersion": "0.1.3",
   "installerMode": "ONLINE_BOOTSTRAP_DEFAULT",
@@ -19,7 +19,8 @@
       "url": "https://github.com/ggml-org/llama.cpp/releases/download/b10964/llama-b10964-bin-win-cpu-x64.zip",
       "sha256": "917f39c076402c421224824607397af20f53625a60defc20e8dd22446bf4c5d7",
       "backend": "CPU_X64_PORTABLE",
-      "bind": "127.0.0.1"
+      "bind": "127.0.0.1",
+      "delivery": "ON_DEMAND_AFTER_INSTALL"
     }
   },
   "pythonPackages": {
@@ -54,13 +55,19 @@
         "sha256": "186ac886e5cf42a6ca0815e60504f13c7cc95446eb05ac2f1515e388976cebcf",
         "quantization": "Q4_K_M",
         "nativeContext": 131072,
-        "runtimeContext": 131072,
-        "contextMode": "NATIVE",
+        "minimumContext": 64000,
+        "maximumRuntimeContext": 200000,
+        "contextExtension": {
+          "enabled": true,
+          "mode": "YARN",
+          "requiresExplicitUserChoiceAboveNative": true
+        },
+        "delivery": "ON_DEMAND_AFTER_INSTALL",
         "license": "Apache-2.0"
       },
       {
-        "id": "local/bielik-11b-v3-q4km-64k-yarn",
-        "displayName": "Bielik 11B v3 Instruct Q4_K_M 64k YaRN",
+        "id": "local/bielik-11b-v3-q4km",
+        "displayName": "Bielik 11B v3 Instruct Q4_K_M",
         "sourceModel": "speakleash/Bielik-11B-v3.0-Instruct",
         "ggufRepository": "speakleash/Bielik-11B-v3.0-Instruct-GGUF",
         "filename": "Bielik-11B-v3.0-Instruct.Q4_K_M.gguf",
@@ -68,11 +75,30 @@
         "sha256": "c16841621efe93c7c8ebf1b374709a96276f3741e649f83ed90131a7b5ad23a8",
         "quantization": "Q4_K_M",
         "nativeContext": 32768,
-        "runtimeContext": 65536,
-        "contextMode": "YARN_EXTENDED",
+        "minimumContext": 64000,
+        "maximumRuntimeContext": 200000,
+        "contextExtension": {
+          "enabled": true,
+          "mode": "YARN",
+          "requiresExplicitUserChoiceAboveNative": true
+        },
+        "delivery": "ON_DEMAND_AFTER_INSTALL",
         "license": "Apache-2.0"
       }
     ]
+  },
+  "localAi": {
+    "delivery": "USER_INITIATED_AFTER_INSTALL",
+    "installRoot": "%LOCALAPPDATA%\\LexMachina\\local-ai",
+    "contextSelection": {
+      "minimum": 64000,
+      "maximum": 200000,
+      "step": 1000,
+      "recommendedProfiles": [64000, 96000, 128000, 160000, 200000],
+      "default": 64000
+    },
+    "networkRequiredOnlyWhenProvisioning": true,
+    "applicationUsableWithoutLocalAi": true
   },
   "systemPrerequisites": {
     "webview2": {
@@ -87,9 +113,9 @@
   },
   "notes": {
     "libreOffice": "Not a runtime prerequisite. DOCX/ODT generation and validation are implemented by the deterministic Lex renderer; LibreOffice remains optional release QA only.",
-    "networkAtInstall": "REQUIRED_FOR_MISSING_COMPONENTS_INCLUDING_LOCAL_LLM_MODELS",
-    "networkAfterBootstrapBeforeProviderUse": "FORBIDDEN",
+    "networkAtInstall": "REQUIRED_FOR_MISSING_CORE_COMPONENTS_ONLY; LOCAL_LLM_IS_NOT_INSTALLED_DURING_APPLICATION_INSTALL",
+    "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_ONLY_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING_AND_UPDATES",
     "cachePolicy": "REUSE_ONLY_AFTER_SHA256_VERIFICATION",
-    "bielikContext": "64k is an explicit llama.cpp YaRN extension over the model's native 32k context and is shown as such in the UI."
+    "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation."
   }
 }
