@@ -37,7 +37,7 @@ const desktopLib =
   );
 const webApp =
   read(
-    "app/lex-web/src/App.tsx"
+    "app/lex-web/src/ChatApp.tsx"
   );
 const webApiClient =
   read(
@@ -87,7 +87,10 @@ const checks = {
       '"OS_KEYRING"'
     ) &&
     webApp.includes(
-      "Zapisz w systemowym magazynie"
+      'isDesktopShell()\n          ? "Zapisz w systemie"\n          : "Użyj w sesji"'
+    ) &&
+    webApp.includes(
+      'isDesktopShell()\n          ? "OS_KEYRING"\n          : "PROCESS_MEMORY"'
     ),
   memoryOnlyRemovesStoredCredential:
     trust.includes(
