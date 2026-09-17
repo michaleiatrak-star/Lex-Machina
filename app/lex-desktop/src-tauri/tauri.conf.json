@@ -44,7 +44,10 @@
           "Polish",
           "English"
         ],
-        "installerHooks": "./windows/hooks.nsh"
+        "installerHooks": "./windows/hooks.nsh",
+        "customLanguageFiles": {
+          "Polish": "./windows/Polish.nsh"
+        }
       }
     },
     "resources": [
