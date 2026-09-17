@@ -1,3 +1,6 @@
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import type { ProviderId } from "./types.js";
 
 export interface ProviderCredentialResolver {
@@ -15,9 +18,47 @@ const PROVIDERS: ProviderId[] = [
   "xai"
 ];
 
+function localAiRoot(): string {
+  const configured = process.env.LEX_LOCAL_LLM_ROOT?.trim();
+  if (configured) return path.resolve(configured);
+  const local = process.env.LOCALAPPDATA?.trim();
+  if (local) return path.resolve(local, "LexMachina", "local-ai");
+  return path.resolve(os.homedir(), ".lex-machina", "local-ai");
+}
+
+function localAiExecutionReady(): boolean {
+  try {
+    const config = JSON.parse(
+      fs.readFileSync(path.join(localAiRoot(), "config.json"), "utf8")
+    ) as {
+      schemaVersion?: unknown;
+      model?: { path?: unknown };
+      engine?: { executable?: unknown };
+    };
+    if (config.schemaVersion !== 1) return false;
+    const modelPath =
+      typeof config.model?.path === "string"
+        ? config.model.path
+        : "";
+    const enginePath =
+      typeof config.engine?.executable === "string"
+        ? config.engine.executable
+        : "";
+    return Boolean(
+      modelPath &&
+      enginePath &&
+      fs.existsSync(modelPath) &&
+      fs.existsSync(enginePath)
+    );
+  } catch {
+    return false;
+  }
+}
+
 export async function providerConfigurationStatus(
   resolver: ProviderCredentialResolver
 ): Promise<ProviderConfigurationStatus[]> {
+  const localOpenAiCompatibleReady = localAiExecutionReady();
   return Promise.all(
     PROVIDERS.map(async (provider) => ({
       provider,
@@ -26,6 +67,10 @@ export async function providerConfigurationStatus(
           await resolver.getApiKey(
             provider
           )
+        ) ||
+        (
+          provider === "openai" &&
+          localOpenAiCompatibleReady
         )
     }))
   );
