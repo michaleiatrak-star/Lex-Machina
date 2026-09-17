@@ -12,6 +12,7 @@ const acceptance = read("app/installer/windows-installer-acceptance.ps1");
 const selftest = read("app/installer/windows-payload-selftest.ps1");
 const hooks = read("app/lex-desktop/src-tauri/windows/hooks.nsh");
 const bootstrap = read("app/installer/windows-online-bootstrap.ps1");
+const packageVerifier = read("app/installer/verify-python-package-set.py");
 
 const checks = {
   realOnlineBootstrapJob:
@@ -45,7 +46,10 @@ const checks = {
     selftest.includes("SELFTEST_DOCX_RENDER_FAILED"),
   missingOnlyAndHashChecked:
     bootstrap.includes("Test-CommandVersion") &&
-    bootstrap.includes("PYTHON_PACKAGE_SET_PASS") &&
+    bootstrap.includes("verify-python-package-set.py") &&
+    bootstrap.includes("& $pythonExe $packageVerifier $manifestPath") &&
+    packageVerifier.includes("importlib.metadata.version") &&
+    packageVerifier.includes('print("PYTHON_PACKAGE_SET_PASS")') &&
     bootstrap.includes("Using verified cache") &&
     bootstrap.includes("BOOTSTRAP_HASH_MISMATCH"),
   postInstallFailClosed:
