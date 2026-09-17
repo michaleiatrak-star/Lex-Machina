@@ -118,7 +118,7 @@ Status: IMPLEMENTED
 
 Wniosek: nowa organizacja folderów/wątków nie omija dotychczasowej granicy kryptograficznej sprawy.
 
-## A-10 — Automatyczny OCR w czacie i izolacja prywatności per plik
+## A-10 — Automatyczny OCR w czacie, izolacja prywatności per plik i zbiorcze zatwierdzenie
 
 Status: IMPLEMENTED / CI PENDING
 
@@ -127,15 +127,19 @@ Przepływ:
 1. Obraz jest kierowany do lokalnego `CompleteImageIngestor` i Paddle OCR bez ręcznego przełącznika.
 2. PDF jest analizowany przez `CompleteDocumentIngestor`; strony z użytecznym tekstem cyfrowym zachowują źródło `DIGITAL`, a strony skanowane/bez użytecznej warstwy tekstowej przechodzą przez lokalny OCR i otrzymują źródło `OCR`.
 3. `MatterChatApp.tsx` utrzymuje kolejkę w toku czatu. Dodanie plików z kompozytora nie przełącza użytkownika do osobnego ekranu.
-4. `DocumentPrivacyPanel.tsx` nie konsumuje pliku po samym review/OCR. Kolejka przesuwa się dopiero po `finalizeDocument` albo po jawnym pominięciu błędnego pliku.
-5. Dla każdego pliku osobno wyświetlane jest pytanie: automatyczna pseudonimizacja, ręczny przegląd albo pozostawienie danych jawnych.
-6. Opcja jawna nie wyłącza mechanizmu „na słowo”: UI tworzy dyrektywy `KEEP` dla wykrytych zakresów, dzięki czemu decyzja jest utrwalona jawnie w finalizacji.
-7. `LocalPrivateDocumentService` tworzy osobny `PseudonymizationVault` dla każdego `documentId`; persistent vault przechowuje snapshoty pod kluczem dokumentu.
-8. Przy dokumentach wynikowych z wielu źródeł `generation-aliases.ts` nadaje osobne przestrzenie nazw `D01`, `D02`, …, a reidentyfikacja rozwiązuje alias przez vault wskazanego `documentId`.
+4. `DocumentPrivacyPanel.tsx` po OCR/review nie wywołuje już od razu `finalizeDocument`. Wybór użytkownika tworzy wersję roboczą decyzji (`PRIVACY_STAGED`) przypisaną do konkretnego `documentId`; dopiero wtedy kolejka może przejść do następnego pliku.
+5. Dla każdego pliku osobno pozostaje wybór: automatyczna pseudonimizacja, ręczny przegląd albo pozostawienie danych jawnych.
+6. Po zebraniu decyzji dla wielu plików UI pokazuje jeden zbiorczy podgląd przed finalizacją. Każdy plik ma osobną sekcję z: (a) wykryciami automatycznymi i tekstem zakresu, (b) ręcznymi dyrektywami użytkownika, (c) wyliczoną decyzją końcową dla każdego wykrycia.
+7. Wyliczenie efektu respektuje semantykę runtime: ręczne `PSEUDONYMIZE` ma pierwszeństwo, a nakładające się `KEEP` i `LABEL` wyłączają automatyczne pseudonimizowanie danego zakresu; niezmienione wykrycia automatyczne pozostają pseudonimizowane.
+8. Z podglądu można wrócić do edycji konkretnego dokumentu bez ponownego OCR, ponieważ wersja robocza zachowuje lokalny wynik review i oryginalny `File` wyłącznie w pamięci UI.
+9. Wspólny przycisk zatwierdzenia uruchamia `finalizeDocument` osobno dla każdego `documentId`. To nie jest transakcja atomowa między dokumentami: pliki zakończone sukcesem pozostają gotowe, a plik zakończony błędem pozostaje jako draft do ponownego zatwierdzenia. UI komunikuje tę semantykę jawnie.
+10. Opcja jawna nie wyłącza mechanizmu „na słowo”: UI tworzy dyrektywy `KEEP` dla wykrytych zakresów, dzięki czemu decyzja jest utrwalona jawnie w finalizacji.
+11. `LocalPrivateDocumentService` tworzy osobny `PseudonymizationVault` dla każdego `documentId`; persistent vault przechowuje snapshoty pod kluczem dokumentu.
+12. Przy dokumentach wynikowych z wielu źródeł `generation-aliases.ts` nadaje osobne przestrzenie nazw `D01`, `D02`, …, a reidentyfikacja rozwiązuje alias przez vault wskazanego `documentId`.
 
-Granica bezpieczeństwa: czat nie deanonymizuje automatycznie odpowiedzi providera. Kontrolowana deanonymizacja dokumentu wynikowego nadal wymaga istniejącego kontraktu reautoryzacji G34F. Dzięki temu funkcja wieloplikowa nie obchodzi granicy dla danych jawnych.
+Granica bezpieczeństwa: zbiorczy podgląd nie tworzy wspólnego vaultu i nie łączy map reidentyfikacji. Przechowuje jedynie lokalne, robocze decyzje UI przed wywołaniem istniejącej finalizacji per dokument. Czat nadal nie deanonymizuje automatycznie odpowiedzi providera; kontrolowana deanonymizacja dokumentu wynikowego wymaga istniejącego kontraktu reautoryzacji G34F.
 
-Ryzyko kontrolowane: poprzednia implementacja konsumowała plik po review, co przy wielu plikach mogło przełączyć ekran przed finalizacją prywatności. Nowa kolejka jest sekwencyjna i blokuje następny dokument do zakończenia bieżącego.
+Ryzyko kontrolowane: wcześniejszy przepływ finalizował każdy dokument natychmiast po jego decyzji, co uniemożliwiało użytkownikowi audyt całej partii przed zastosowaniem zmian. Nowy przepływ rozdziela „wybór decyzji” od „zastosowania decyzji” i daje użytkownikowi zbiorczy punkt kontroli przed finalizacją wielu plików.
 
 ## A-11 — Pełne usuwanie źródła i danych pochodnych
 
@@ -157,7 +161,7 @@ Finalny SHA musi wykazać:
 
 - strict TS runtime + web,
 - unit tests workspace, OCR/prywatności i document citations,
-- G14 bundle safety z markerami automatycznego OCR i sekwencyjnej prywatności per plik,
+- G14 bundle safety z markerami automatycznego OCR, prywatności per plik i zbiorczego podglądu przed zatwierdzeniem,
 - G34G natywne testy Tauri, w tym walidację HTTPS i tokenów plików,
 - G37F file input + drag/drop,
 - P4B lifecycle,
@@ -167,4 +171,4 @@ Finalny SHA musi wykazać:
 
 ## Ocena końcowa audytu na tym etapie
 
-Architektura spełnia żądany model prywatności: sprawa jest podstawową granicą danych i rozmowy, foldery są metadanymi wewnątrz zaszyfrowanego workspace, OCR działa lokalnie i automatycznie tam, gdzie wymaga tego format/strona dokumentu, a każdy plik ma osobny cykl decyzji prywatności oraz osobny vault. Usunięcie dokumentu czyści także dane pochodne. Lokalny plik jest otwierany przez ograniczony staging token, a deep-link cytowania jest rozwiązywany po stronie zaufanego runtime. Finalny status release pozostaje `CI PENDING` do czasu przejścia wszystkich bramek z jednego, niezmienionego SHA i publikacji nowych instalatorów 0.1.2.
+Architektura spełnia żądany model prywatności: sprawa jest podstawową granicą danych i rozmowy, foldery są metadanymi wewnątrz zaszyfrowanego workspace, OCR działa lokalnie i automatycznie tam, gdzie wymaga tego format/strona dokumentu, a każdy plik ma osobny cykl decyzji prywatności oraz osobny vault. Przy wielu plikach decyzje są najpierw stagingowane per dokument, a użytkownik otrzymuje zbiorczy podgląd wykryć, ręcznych zmian i końcowego efektu przed ich zastosowaniem. Usunięcie dokumentu czyści także dane pochodne. Lokalny plik jest otwierany przez ograniczony staging token, a deep-link cytowania jest rozwiązywany po stronie zaufanego runtime. Finalny status release pozostaje `CI PENDING` do czasu przejścia wszystkich bramek z jednego, niezmienionego SHA i publikacji nowych instalatorów 0.1.2.
