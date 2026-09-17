@@ -31,6 +31,10 @@ const forbidden = [
   "indexedDB"
 ];
 
+// G14 validates the current user-facing product contract. The September 2026
+// chat-first redesign intentionally replaced the old configuration dashboard,
+// so the gate now requires equivalent safety/case/document/provider functions
+// plus the new chat, card, file-drop and skill-routing affordances.
 const required = [
   "127.0.0.1:4317",
   "/api/sessions/execute",
@@ -55,17 +59,11 @@ const required = [
   "Zapisz nowy kod recovery",
   "Wygeneruj nowy kod recovery",
   "Zmień hasło",
-  "Wybierz sprawę",
-  "Aplikacja nie tworzy już spraw automatycznie",
-  "reidentyfikacja:",
+
+  // Explicit matter selection/creation; no silent automatic case creation.
+  "— wybierz sprawę —",
   "Utwórz sprawę",
-  "Zmień nazwę",
-  "Archiwizuj sprawę",
-  "Przywróć z archiwum",
-  "Trwałe usunięcie sprawy",
-  "Wpisz USUŃ",
-  "Usuń sprawę trwale",
-  "ARCHIWALNA (tylko odczyt)",
+  "Sprawa jest zarchiwizowana",
   "Akta wybranej sprawy",
   "Dokumenty sprawy",
   "Katalog wspólny",
@@ -74,20 +72,44 @@ const required = [
   "integracja z generatorem w G35C",
   "Archiwum zapisane i rozpakowane lokalnie",
   "Akta sprawy, OCR i ręczna anonimizacja",
-  "Konfiguracja API",
+
+  // Provider configuration remains local and explicit.
+  "Klucz API",
+  "Zapisz w magazynie systemowym",
+
+  // Existing privacy review pipeline remains reachable from the Files tab.
   "Anonimizuj / pseudonimizuj",
   "Pozostaw bez anonimizacji",
   "Oznacz, co ten fragment znaczy",
   "Chunki do analizy AI",
   "Domyślnie nic nie jest wysyłane do providera",
+
+  // Chat-first product contract.
+  "Czat",
+  "Pliki",
+  "Skille",
+  "Ustawienia",
+  "Napisz pytanie lub opisz zadanie prawne",
+  "Dobieram skille, sprawdzam źródła",
   "DRAFT_PRESENTABLE",
   "BLOCKED",
-  "Uruchom analizę",
-  "Evidence bundle",
-  "VERIFIED",
-  "SUPPORTED",
-  "Stan prawny",
-  "Otwórz urzędowe źródło"
+  "Evidence:",
+
+  // File picker + multi-file drag/drop.
+  "+ Dodaj pliki",
+  "Wybierz pliki z dysku",
+  "Upuść tutaj pliki",
+  "lub przeciągnij pliki w dowolne miejsce okna",
+  "Przetwarzanie",
+  "Przetworzono",
+
+  // Mandatory and user-selectable skill routing.
+  "Prawny router v3",
+  "Shared",
+  "Prawo polskie v2",
+  "Automatyczny dobór",
+  "Dodatkowe skille",
+  "automatycznie sugerowany"
 ];
 
 const exposed = forbidden.filter((token) => content.includes(token));
@@ -102,10 +124,11 @@ process.stdout.write(JSON.stringify({
   requiredExecutionMarkersMissing: missing,
   localApiReferencePresent: content.includes("127.0.0.1:4317"),
   sessionExecutionEndpointPresent: content.includes("/api/sessions/execute"),
-  evidenceBundlePresent: content.includes("Evidence bundle"),
-  verifiedStatusPresent: content.includes("VERIFIED"),
-  supportedStatusPresent: content.includes("SUPPORTED"),
-  historicalStatePresent: content.includes("Stan prawny")
+  chatWorkspacePresent: content.includes("Dobieram skille, sprawdzam źródła"),
+  fileDropPresent: content.includes("Upuść tutaj pliki"),
+  mandatoryRouterPresent: content.includes("Prawny router v3"),
+  mandatorySharedPresent: content.includes("Shared"),
+  selectableSkillsPresent: content.includes("Dodatkowe skille")
 }, null, 2) + "\n");
 
 if (!pass) process.exitCode = 1;
