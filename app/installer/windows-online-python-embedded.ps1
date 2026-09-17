@@ -68,14 +68,20 @@ function Get-VerifiedDownload(
 
 function Test-PrivatePython([string]$Executable, [string]$ExpectedVersion, [string]$ExpectedPipVersion) {
   if (-not (Test-Path -LiteralPath $Executable -PathType Leaf)) { return $false }
+  $oldPreference = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
   try {
     $pythonVersion = @(& $Executable --version 2>&1 | ForEach-Object { $_.ToString().Trim() } | Where-Object { $_ }) | Select-Object -First 1
-    if ($LASTEXITCODE -ne 0 -or $pythonVersion -ne "Python $ExpectedVersion") { return $false }
+    $pythonExit = $LASTEXITCODE
+    if ($pythonExit -ne 0 -or $pythonVersion -ne "Python $ExpectedVersion") { return $false }
     $pipVersionLine = @(& $Executable -m pip --version 2>&1 | ForEach-Object { $_.ToString().Trim() } | Where-Object { $_ }) | Select-Object -First 1
-    if ($LASTEXITCODE -ne 0 -or $pipVersionLine -notmatch ('^pip\s+' + [regex]::Escape($ExpectedPipVersion) + '\s+')) { return $false }
+    $pipExit = $LASTEXITCODE
+    if ($pipExit -ne 0 -or $pipVersionLine -notmatch ('^pip\s+' + [regex]::Escape($ExpectedPipVersion) + '\s+')) { return $false }
     return $true
   } catch {
     return $false
+  } finally {
+    $ErrorActionPreference = $oldPreference
   }
 }
 
@@ -84,15 +90,21 @@ function Write-PrivatePythonDiagnostics([string]$Executable) {
     Write-Host "EMBEDDED_PYTHON_DIAG executable=missing"
     return
   }
-  $versionOutput = @(& $Executable --version 2>&1 | ForEach-Object { $_.ToString() }) -join " | "
-  $versionExit = $LASTEXITCODE
-  $pipOutput = @(& $Executable -m pip --version 2>&1 | ForEach-Object { $_.ToString() }) -join " | "
-  $pipExit = $LASTEXITCODE
-  $pathOutput = @(& $Executable -c "import sys; print(repr(sys.path))" 2>&1 | ForEach-Object { $_.ToString() }) -join " | "
-  $pathExit = $LASTEXITCODE
-  Write-Host "EMBEDDED_PYTHON_DIAG versionExit=$versionExit version=$versionOutput"
-  Write-Host "EMBEDDED_PYTHON_DIAG pipExit=$pipExit pip=$pipOutput"
-  Write-Host "EMBEDDED_PYTHON_DIAG pathExit=$pathExit path=$pathOutput"
+  $oldPreference = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
+  try {
+    $versionOutput = @(& $Executable --version 2>&1 | ForEach-Object { $_.ToString() }) -join " | "
+    $versionExit = $LASTEXITCODE
+    $pipOutput = @(& $Executable -m pip --version 2>&1 | ForEach-Object { $_.ToString() }) -join " | "
+    $pipExit = $LASTEXITCODE
+    $pathOutput = @(& $Executable -c "import sys; print(repr(sys.path))" 2>&1 | ForEach-Object { $_.ToString() }) -join " | "
+    $pathExit = $LASTEXITCODE
+    Write-Host "EMBEDDED_PYTHON_DIAG versionExit=$versionExit version=$versionOutput"
+    Write-Host "EMBEDDED_PYTHON_DIAG pipExit=$pipExit pip=$pipOutput"
+    Write-Host "EMBEDDED_PYTHON_DIAG pathExit=$pathExit path=$pathOutput"
+  } finally {
+    $ErrorActionPreference = $oldPreference
+  }
 }
 
 $pythonDir = Join-Path $runtime "python"
@@ -136,13 +148,10 @@ $pathLines.Add("import site")
 $sitePackages = Join-Path $pythonDir "Lib\site-packages"
 New-Item -ItemType Directory -Force -Path $sitePackages | Out-Null
 Add-Type -AssemblyName System.IO.Compression.FileSystem
-$wheelStage = Join-Path $cache ("pip-wheel-stage-" + [Guid]::NewGuid().ToString("N"))
-New-Item -ItemType Directory -Force -Path $wheelStage | Out-Null
-try {
-  [IO.Compression.ZipFile]::ExtractToDirectory($pipWheel, $wheelStage)
-  Copy-Item -Path (Join-Path $wheelStage "*") -Destination $sitePackages -Recurse -Force
-} finally {
-  Remove-Item -LiteralPath $wheelStage -Recurse -Force -ErrorAction SilentlyContinue
+[IO.Compression.ZipFile]::ExtractToDirectory($pipWheel, $sitePackages)
+$pipInit = Join-Path $sitePackages "pip\__init__.py"
+if (-not (Test-Path -LiteralPath $pipInit -PathType Leaf)) {
+  throw "ONLINE_EMBEDDED_PIP_PACKAGE_MISSING:$pipInit"
 }
 
 if (-not (Test-PrivatePython $pythonExe $pythonVersion $pipVersion)) {
@@ -150,8 +159,15 @@ if (-not (Test-PrivatePython $pythonExe $pythonVersion $pipVersion)) {
   throw "ONLINE_EMBEDDED_PYTHON_VALIDATION_FAILED"
 }
 
-$isolation = & $pythonExe -c "import site,sys; assert sys.flags.isolated == 1; assert site.ENABLE_USER_SITE is False; print('PYTHON_ISOLATION_PASS')"
-if ($LASTEXITCODE -ne 0 -or $isolation -notcontains "PYTHON_ISOLATION_PASS") {
+$oldPreference = $ErrorActionPreference
+$ErrorActionPreference = "Continue"
+try {
+  $isolation = @(& $pythonExe -c "import site,sys; assert sys.flags.isolated == 1; assert site.ENABLE_USER_SITE is False; print('PYTHON_ISOLATION_PASS')" 2>&1 | ForEach-Object { $_.ToString().Trim() })
+  $isolationExit = $LASTEXITCODE
+} finally {
+  $ErrorActionPreference = $oldPreference
+}
+if ($isolationExit -ne 0 -or $isolation -notcontains "PYTHON_ISOLATION_PASS") {
   Write-PrivatePythonDiagnostics $pythonExe
   throw "ONLINE_EMBEDDED_PYTHON_ISOLATION_FAILED"
 }
