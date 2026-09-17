@@ -1,0 +1,32 @@
+name: G39 Installer State Machine
+
+on:
+  pull_request:
+    paths:
+      - "app/installer/get-install-state.ps1"
+      - "app/installer/installer-state-machine-selftest.ps1"
+      - "app/installer/windows-release-source.json"
+      - "app/lex-desktop/src-tauri/windows/hooks.nsh"
+      - ".github/workflows/g39-installer-state.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: g39-installer-state-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  g39g-installer-state-machine:
+    name: G39G installer state machine self-test
+    runs-on: windows-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Exercise Fresh / Upgrade / Repair / Current / DowngradeBlocked
+        shell: pwsh
+        run: ./app/installer/installer-state-machine-selftest.ps1
