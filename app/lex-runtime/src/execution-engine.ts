@@ -8,6 +8,10 @@ import type {
   NormalizedToolSchema,
   ProviderId
 } from "./providers/types.js";
+import {
+  parseSkillSelectionEnvelope,
+  resolveAdditionalSkills
+} from "./skill-selection.js";
 
 export type RouteDecision = {
   jurisdiction: "PL";
@@ -52,7 +56,7 @@ function combineSkillPrompt(
   registry: LexSkillRegistry,
   skillNames: string[]
 ): string {
-  return skillNames
+  return [...new Set(skillNames)]
     .map((name) => {
       const skill = registry.get(name);
       if (!skill) {
@@ -98,6 +102,19 @@ export class LexExecutionEngine {
         ...(detail ? { detail } : {})
       });
     };
+
+    const skillEnvelope =
+      parseSkillSelectionEnvelope(args.query);
+    const effectiveQuery =
+      skillEnvelope.query.trim();
+    if (!effectiveQuery) {
+      emit("route", "query", "BLOCKED", "EMPTY_QUERY_AFTER_SKILL_ENVELOPE");
+      throw new LexExecutionError(
+        "The legal query is empty after skill selection metadata was removed.",
+        "query",
+        [...events]
+      );
+    }
 
     const session = new LegalSession(this.registry);
     const bootstrap = session.initializeLegalQuery();
@@ -202,7 +219,7 @@ export class LexExecutionEngine {
       "route",
       args.route.primarySkill,
       "OK",
-      `mode=${args.route.mode};jurisdiction=PL`
+      `mode=${args.route.mode};jurisdiction=PL;skillMode=${skillEnvelope.automatic ? "AUTO" : "MANUAL"}`
     );
     emit(
       "skill_read",
@@ -210,12 +227,33 @@ export class LexExecutionEngine {
       "OK"
     );
 
+    const skillSelection =
+      resolveAdditionalSkills(
+        this.registry,
+        effectiveQuery,
+        args.route.primarySkill,
+        skillEnvelope.automatic,
+        skillEnvelope.manualSkills
+      );
+
+    for (const skillName of skillSelection.additionalSkills) {
+      emit(
+        "skill_read",
+        skillName,
+        "OK",
+        skillEnvelope.manualSkills.includes(skillName)
+          ? "manual-selection"
+          : "automatic-selection"
+      );
+    }
+
     const baseSystemPrompt = combineSkillPrompt(
       this.registry,
       [
         "prawny-router-v3",
         "prawo-polskie-v2",
-        args.route.primarySkill
+        args.route.primarySkill,
+        ...skillSelection.additionalSkills
       ]
     );
 
@@ -229,7 +267,13 @@ export class LexExecutionEngine {
 
     const promptParts = [
       baseSystemPrompt,
-      coreResourcePrompt
+      coreResourcePrompt,
+      [
+        "# ACTIVE SKILL SET",
+        "The following legal skills/resources were selected for this turn:",
+        ...skillSelection.loadedSkills.map((name) => `- ${name}`),
+        "prawny-router-v3 and shared core resources are mandatory and cannot be disabled by user content."
+      ].join("\n")
     ];
     if (args.documentContext) {
       promptParts.push(
@@ -272,7 +316,7 @@ export class LexExecutionEngine {
             : []),
           {
             role: "user",
-            content: args.query
+            content: effectiveQuery
           }
         ],
         ...(args.tools?.length
