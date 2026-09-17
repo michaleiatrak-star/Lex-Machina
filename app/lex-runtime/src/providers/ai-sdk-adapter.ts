@@ -250,16 +250,17 @@ export class AiSdkProviderAdapter implements ProviderAdapter {
       if (this.id !== "openai" || !this.localModels) {
         throw new Error("LOCAL_MODEL_RUNTIME_UNAVAILABLE");
       }
-      await this.localModels.ensureRunning(params.model);
+      const configuredModel = await this.localModels.ensureRunning(params.model);
       const { createOpenAI } = await import("@ai-sdk/openai");
       const local = createOpenAI({
         apiKey: "lex-machina-local-only",
         baseURL: this.localModels.status().endpoint
       });
       return streamModel(
-        local.chat(params.model),
+        local.chat(configuredModel.id),
         {
           ...params,
+          model: configuredModel.id,
           reasoning: "none"
         },
         "Local llama.cpp"
