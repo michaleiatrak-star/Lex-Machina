@@ -59,6 +59,7 @@ export type ProcessPleadingState = {
   workflowId: "PROCESS_PLEADING_V1";
   caseId: string;
   mode: ProcessPleadingMode;
+  revision: number;
   stage: ProcessPleadingStage;
   documentStatus: "DRAFT" | "FINAL";
   startAccepted: boolean;
@@ -148,6 +149,7 @@ function pushEvent(
   >,
   at: string
 ): void {
+  state.revision += 1;
   state.history.push({
     sequence:
       (state.history.at(-1)?.sequence ?? 0) + 1,
@@ -228,6 +230,7 @@ export function createProcessPleadingState(
       "PROCESS_PLEADING_V1",
     caseId,
     mode,
+    revision: 1,
     stage: "CG_ACCEPTANCE",
     documentStatus: "DRAFT",
     startAccepted: false,
@@ -256,6 +259,10 @@ export function validateProcessPleadingState(
     !["CHECKPOINT", "AUTO"].includes(
       input.mode
     ) ||
+    !Number.isSafeInteger(
+      input.revision
+    ) ||
+    input.revision < 1 ||
     ![
       "CG_ACCEPTANCE",
       "W1",
