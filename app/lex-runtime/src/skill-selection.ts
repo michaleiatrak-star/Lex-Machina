@@ -31,7 +31,8 @@ function normalize(value: string): string {
   return value
     .normalize("NFKD")
     .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase();
+    .toLowerCase()
+    .replaceAll("ł", "l");
 }
 
 function tokens(value: string): Set<string> {
