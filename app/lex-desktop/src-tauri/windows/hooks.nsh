@@ -7,6 +7,9 @@ lex_offline_bundle:
   Pop $0
   Pop $1
   ${If} $0 != 0
+    FileOpen $2 "$INSTDIR\runtime\bootstrap-install-error.log" w
+    FileWrite $2 "stage=offline-bundle$\r$\nexit=$0$\r$\noutput=$1$\r$\n"
+    FileClose $2
     MessageBox MB_ICONSTOP|MB_OK "Lex Machina: instalacja lokalnego runtime offline nie powiodła się.$\r$\n$1" /SD IDOK
     Abort
   ${EndIf}
@@ -18,6 +21,9 @@ lex_online_bootstrap:
   Pop $0
   Pop $1
   ${If} $0 != 0
+    FileOpen $2 "$INSTDIR\runtime\bootstrap-install-error.log" w
+    FileWrite $2 "stage=online-bootstrap$\r$\nexit=$0$\r$\noutput=$1$\r$\n"
+    FileClose $2
     MessageBox MB_ICONSTOP|MB_OK "Lex Machina: przygotowanie składników nie powiodło się.$\r$\n$1" /SD IDOK
     Abort
   ${EndIf}
@@ -28,6 +34,9 @@ lex_runtime_selftest:
   Pop $0
   Pop $1
   ${If} $0 != 0
+    FileOpen $2 "$INSTDIR\runtime\bootstrap-install-error.log" w
+    FileWrite $2 "stage=runtime-selftest$\r$\nexit=$0$\r$\noutput=$1$\r$\n"
+    FileClose $2
     MessageBox MB_ICONSTOP|MB_OK "Lex Machina: lokalny self-test nie powiódł się.$\r$\n$1" /SD IDOK
     Abort
   ${EndIf}
