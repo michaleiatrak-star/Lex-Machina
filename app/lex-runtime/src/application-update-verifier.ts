@@ -1,4 +1,6 @@
 import { spawnSync } from "node:child_process";
+import fs from "node:fs";
+import path from "node:path";
 
 export type VerifiedApplicationPublisher = {
   verification: "AUTHENTICODE";
@@ -10,26 +12,78 @@ export interface ApplicationInstallerVerifier {
   verify(installerPath: string): VerifiedApplicationPublisher;
 }
 
-function normalizedTrustedThumbprint(value: string | undefined): string {
-  const normalized = value?.replaceAll(/\s+/g, "").toUpperCase() ?? "";
-  if (!/^[A-F0-9]{40}$/.test(normalized)) {
+type UpdateTrustManifest = {
+  applicationUpdate?: {
+    verification?: unknown;
+    trustedSignerThumbprints?: unknown;
+  };
+};
+
+function normalizeThumbprint(value: string): string {
+  return value.replaceAll(/\s+/g, "").toUpperCase();
+}
+
+function validateTrustedThumbprints(values: readonly string[]): string[] {
+  const normalized = [
+    ...new Set(values.map(normalizeThumbprint))
+  ];
+  if (
+    normalized.length === 0 ||
+    normalized.some((value) => !/^[A-F0-9]{40}$/.test(value))
+  ) {
     throw new Error("APPLICATION_UPDATE_SIGNER_POLICY_MISSING");
   }
   return normalized;
 }
 
+function defaultManifestPath(): string {
+  const runtimeRoot = process.env.LEX_RUNTIME_ROOT?.trim();
+  if (!runtimeRoot) {
+    throw new Error("APPLICATION_UPDATE_RUNTIME_ROOT_MISSING");
+  }
+  return path.join(path.resolve(runtimeRoot), "release-source.json");
+}
+
+export function trustedUpdateSignerThumbprints(
+  manifestPath: string = defaultManifestPath()
+): string[] {
+  let manifest: UpdateTrustManifest;
+  try {
+    manifest = JSON.parse(
+      fs.readFileSync(manifestPath, "utf8")
+    ) as UpdateTrustManifest;
+  } catch {
+    throw new Error("APPLICATION_UPDATE_SIGNER_POLICY_MISSING");
+  }
+  if (
+    manifest.applicationUpdate?.verification !==
+      "SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER" ||
+    !Array.isArray(
+      manifest.applicationUpdate?.trustedSignerThumbprints
+    )
+  ) {
+    throw new Error("APPLICATION_UPDATE_SIGNER_POLICY_MISSING");
+  }
+  const values = manifest.applicationUpdate
+    .trustedSignerThumbprints
+    .filter((value): value is string => typeof value === "string");
+  return validateTrustedThumbprints(values);
+}
+
 export class WindowsAuthenticodeInstallerVerifier
 implements ApplicationInstallerVerifier {
   constructor(
-    private readonly trustedThumbprint: string | undefined =
-      process.env.LEX_UPDATE_SIGNER_THUMBPRINT
+    private readonly configuredTrustedThumbprints?: readonly string[],
+    private readonly manifestPath?: string
   ) {}
 
   verify(installerPath: string): VerifiedApplicationPublisher {
     if (process.platform !== "win32") {
       throw new Error("APPLICATION_UPDATE_PLATFORM_UNSUPPORTED");
     }
-    const trusted = normalizedTrustedThumbprint(this.trustedThumbprint);
+    const trusted = this.configuredTrustedThumbprints
+      ? validateTrustedThumbprints(this.configuredTrustedThumbprints)
+      : trustedUpdateSignerThumbprints(this.manifestPath);
     const command = [
       "$ErrorActionPreference='Stop'",
       "$signature=Get-AuthenticodeSignature -LiteralPath $args[0]",
@@ -69,8 +123,8 @@ implements ApplicationInstallerVerifier {
     ) {
       throw new Error("APPLICATION_UPDATE_SIGNATURE_RESULT_INVALID");
     }
-    const actual = parsed.thumbprint.replaceAll(/\s+/g, "").toUpperCase();
-    if (actual !== trusted) {
+    const actual = normalizeThumbprint(parsed.thumbprint);
+    if (!trusted.includes(actual)) {
       throw new Error("APPLICATION_UPDATE_SIGNER_NOT_TRUSTED");
     }
     return {
