@@ -101,7 +101,7 @@ const required = [
   "Moje ręczne zaznaczenia",
   "Końcowa decyzja dla pliku",
   "Zatwierdź decyzje dla",
-  "Mapa reidentyfikacji jest odrębna dla tego documentId",
+  "Mapy reidentyfikacji pozostają odrębne dla każdego documentId",
   "Chunki do analizy AI",
   "Cytowany fragment dokumentu",
   "Przejdź do cytowanego fragmentu",
@@ -144,7 +144,7 @@ process.stdout.write(JSON.stringify({
     content.includes("OCR automatyczny i anonimizacja per plik") &&
     content.includes("Ta decyzja jest na razie wersją roboczą dla tego pliku") &&
     content.includes("Anonimizuj / pseudonimizuj automatycznie") &&
-    content.includes("Mapa reidentyfikacji jest odrębna dla tego documentId"),
+    content.includes("Mapy reidentyfikacji pozostają odrębne dla każdego documentId"),
   multiFilePrivacyBatchPreviewPresent:
     content.includes("Zbiorczy podgląd anonimizacji") &&
     content.includes("Wykryte automatycznie") &&
