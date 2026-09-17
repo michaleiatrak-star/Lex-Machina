@@ -65,10 +65,12 @@ export function useCaseThread(
   messages: CaseChatMessage[];
   setMessages: Dispatch<SetStateAction<CaseChatMessage[]>>;
   loading: boolean;
+  loadedCaseId: string;
   error: string;
 } {
   const [messages, setLocalMessages] = useState<CaseChatMessage[]>([welcome]);
   const [loading, setLoading] = useState(false);
+  const [loadedCaseId, setLoadedCaseId] = useState("");
   const [error, setError] = useState("");
   const caseRef = useRef(caseId);
   const messagesRef = useRef<CaseChatMessage[]>([welcome]);
@@ -81,8 +83,10 @@ export function useCaseThread(
     caseRef.current = caseId;
     let cancelled = false;
     setError("");
+    setLoadedCaseId("");
     if (!caseId) {
       setLocalMessages([welcome]);
+      messagesRef.current = [welcome];
       setLoading(false);
       return;
     }
@@ -91,16 +95,20 @@ export function useCaseThread(
       .then((result) => {
         if (cancelled || caseRef.current !== caseId) return;
         const loaded = result.messages.map(fromStored);
-        setLocalMessages(loaded.length > 0 ? loaded : [welcome]);
+        const hydrated = loaded.length > 0 ? loaded : [welcome];
+        messagesRef.current = hydrated;
+        setLocalMessages(hydrated);
+        setLoadedCaseId(caseId);
       })
       .catch((failure) => {
-        if (!cancelled) {
+        if (!cancelled && caseRef.current === caseId) {
           setError(failure instanceof Error ? failure.message : String(failure));
+          messagesRef.current = [welcome];
           setLocalMessages([welcome]);
         }
       })
       .finally(() => {
-        if (!cancelled) setLoading(false);
+        if (!cancelled && caseRef.current === caseId) setLoading(false);
       });
     return () => {
       cancelled = true;
@@ -116,7 +124,7 @@ export function useCaseThread(
       messagesRef.current = next;
       setLocalMessages(next);
 
-      if (!caseId) return;
+      if (!caseId || loadedCaseId !== caseId) return;
       const previousIds = new Set(previous.map((item) => item.id));
       const added = next.filter(
         (item) => !previousIds.has(item.id) && item.content.trim()
@@ -129,8 +137,14 @@ export function useCaseThread(
           });
       }
     },
-    [caseId]
+    [caseId, loadedCaseId]
   );
 
-  return { messages, setMessages, loading, error };
+  return {
+    messages,
+    setMessages,
+    loading,
+    loadedCaseId,
+    error
+  };
 }
