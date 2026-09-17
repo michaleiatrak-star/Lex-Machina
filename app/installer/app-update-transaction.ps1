@@ -305,7 +305,11 @@ try {
   $journalState.state = "INSTALLING"
   Write-JsonAtomic $journal $journalState
 
-  $installProcess = Start-Process -FilePath $installer -ArgumentList @("/S") -Wait -PassThru
+  $installProcess = Start-Process -FilePath $installer -ArgumentList @(
+    "/S",
+    "/UPDATE",
+    "/D=$install"
+  ) -Wait -PassThru
   if ($installProcess.ExitCode -notin @(0, 3010)) {
     throw "UPDATE_INSTALLER_FAILED:$($installProcess.ExitCode)"
   }
@@ -323,6 +327,9 @@ try {
     throw "UPDATE_INSTALLED_VERSION_MISMATCH:expected=$targetVersion actual=$installedVersion"
   }
 
+  if (-not (Test-Path -LiteralPath $appExe -PathType Leaf)) {
+    throw "UPDATE_POSTCHECK_APP_MISSING"
+  }
   $sidecar = Join-Path $newRuntime "lex-runtime-sidecar.exe"
   if (-not (Test-Path -LiteralPath $sidecar -PathType Leaf)) {
     throw "UPDATE_POSTCHECK_SIDECAR_MISSING"
