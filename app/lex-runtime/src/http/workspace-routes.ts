@@ -17,6 +17,12 @@ import type { AuthService } from "../auth/service.js";
 import type { LocalCaseAccessService } from "../case-access.js";
 import type { SecureCaseUploadStore } from "../case-secure-store.js";
 import type { LocalSharedTemplateStore } from "../shared-template-store.js";
+import type { EncryptedPrivacyVaultStore } from "../privacy/vault-store.js";
+import type { LocalPrivateDocumentService } from "../document-service.js";
+import {
+  documentIdFromSha256,
+  purgeSecureCaseDocument
+} from "../case-document-purge.js";
 import type {
   EncryptedCaseWorkspaceStore,
   WorkspaceThreadMessage
@@ -126,6 +132,14 @@ export function registerWorkspaceRoutes(
       LocalSharedTemplateStore,
       "listTemplates" | "readTemplate"
     > & { templatesDir: string };
+    privacyVaults: Pick<
+      EncryptedPrivacyVaultStore,
+      "deleteDocumentVault"
+    >;
+    documentService: Pick<
+      LocalPrivateDocumentService,
+      "forget"
+    >;
     workspace: EncryptedCaseWorkspaceStore;
     rootDir: string;
   }
@@ -307,6 +321,30 @@ export function registerWorkspaceRoutes(
               maxBytes: Math.max(1, upload.bytes)
             });
             payload.fill(0);
+
+            const documentIds = [
+              ...new Set(
+                [
+                  upload.sha256,
+                  ...upload.extracted.map((entry) => entry.sha256)
+                ].map(documentIdFromSha256)
+              )
+            ];
+            for (const documentId of documentIds) {
+              await dependencies.privacyVaults.deleteDocumentVault({
+                caseId,
+                documentId,
+                caseDataKey,
+                keyVersion: data.caseView.keyVersion
+              });
+              await purgeSecureCaseDocument({
+                rootDir: dependencies.rootDir,
+                caseId,
+                documentId
+              });
+              dependencies.documentService.forget(documentId);
+            }
+
             const target = path.resolve(
               dependencies.rootDir,
               "cases",
