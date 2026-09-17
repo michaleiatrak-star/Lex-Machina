@@ -8,6 +8,41 @@ $runtime = [IO.Path]::GetFullPath($RuntimeRoot)
 $bundle = (Resolve-Path -LiteralPath $BundlePath).Path
 $receiptPath = Join-Path $runtime "offline-runtime.json"
 
+# NSIS invokes Windows PowerShell directly. On some clean-machine/CI hosts its
+# inherited module path does not expose the built-in Get-FileHash cmdlet.
+# Provide a SHA-256-compatible fallback so this installer and child self-tests
+# stay independent of PowerShell module auto-loading.
+if (-not (Get-Command Get-FileHash -ErrorAction SilentlyContinue)) {
+  function Get-FileHash {
+    param(
+      [string]$Path,
+      [string]$LiteralPath,
+      [string]$Algorithm = "SHA256"
+    )
+    if ($Algorithm.ToUpperInvariant() -ne "SHA256") {
+      throw "OFFLINE_HASH_ALGORITHM_UNSUPPORTED:$Algorithm"
+    }
+    $target = if ($LiteralPath) { $LiteralPath } else { $Path }
+    if (-not $target) { throw "OFFLINE_HASH_PATH_MISSING" }
+    $stream = [IO.File]::OpenRead($target)
+    try {
+      $sha = [Security.Cryptography.SHA256]::Create()
+      try {
+        $bytes = $sha.ComputeHash($stream)
+      } finally {
+        $sha.Dispose()
+      }
+    } finally {
+      $stream.Dispose()
+    }
+    [pscustomobject]@{
+      Algorithm = "SHA256"
+      Hash = ([BitConverter]::ToString($bytes) -replace '-','')
+      Path = [IO.Path]::GetFullPath($target)
+    }
+  }
+}
+
 function Test-IsAdministrator {
   $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
   $principal = [Security.Principal.WindowsPrincipal]::new($identity)
