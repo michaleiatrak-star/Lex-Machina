@@ -10,7 +10,9 @@ use trust_boundary::RuntimeBridge;
 
 fn is_allowed_external_url(url: &str) -> bool {
     let normalized = url.trim().to_ascii_lowercase();
-    normalized.starts_with("https://") && !normalized.contains(['\r', '\n'])
+    normalized.starts_with("https://")
+        && !normalized.contains('\r')
+        && !normalized.contains('\n')
 }
 
 #[tauri::command]
