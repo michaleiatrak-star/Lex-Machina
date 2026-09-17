@@ -1202,6 +1202,7 @@ fn route_allowed(method: &str, path: &str) -> bool {
         | "/api/routes"
         | "/api/update/status"
         | "/api/local-models"
+        | "/api/local-models/update/status"
         | "/api/skills/update/status" => {
             method == "GET" || (path == "/api/cases" && method == "POST")
         }
@@ -1583,6 +1584,7 @@ mod tests {
         assert!(!route_allowed("POST", "/api/update/status"));
         assert!(route_allowed("POST", "/api/update/download"));
         assert!(route_allowed("GET", "/api/local-models"));
+        assert!(route_allowed("GET", "/api/local-models/update/status"));
         assert!(route_allowed("POST", "/api/local-models/provision"));
         assert!(route_allowed("POST", "/api/local-models/repair"));
         assert!(route_allowed("POST", "/api/local-models/remove"));
