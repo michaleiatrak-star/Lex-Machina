@@ -423,6 +423,8 @@ export async function startLocalServer(options?: {
     credentialResolver: credentials,
     credentialManager: credentials,
     updateDiscovery,
+    processWorkflowStore:
+      workspaceStore,
     caseFileStore,
     secureCaseUploadStore,
     sharedTemplateStore,
