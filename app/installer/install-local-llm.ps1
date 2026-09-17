@@ -1,6 +1,9 @@
 param(
   [Parameter(Mandatory=$true)][string]$RuntimeRoot,
   [Parameter(Mandatory=$true)][string]$ManifestPath,
+  [Parameter(Mandatory=$true)][string]$ModelId,
+  [Parameter(Mandatory=$true)][int]$ContextTokens,
+  [string]$LocalAiRoot,
   [string]$CacheRoot
 )
 
@@ -8,12 +11,19 @@ $ErrorActionPreference = "Stop"
 $runtime = [IO.Path]::GetFullPath($RuntimeRoot)
 $manifestFile = [IO.Path]::GetFullPath($ManifestPath)
 $manifest = Get-Content -Raw -LiteralPath $manifestFile | ConvertFrom-Json
+
+$localRoot = if ($LocalAiRoot) {
+  [IO.Path]::GetFullPath($LocalAiRoot)
+} else {
+  Join-Path $env:LOCALAPPDATA "LexMachina\local-ai"
+}
 $cache = if ($CacheRoot) {
   [IO.Path]::GetFullPath($CacheRoot)
 } else {
   Join-Path $env:LOCALAPPDATA "LexMachina\bootstrap-cache\local-llm"
 }
 New-Item -ItemType Directory -Force -Path $cache | Out-Null
+New-Item -ItemType Directory -Force -Path $localRoot | Out-Null
 
 if (-not (Get-Command Get-FileHash -ErrorAction SilentlyContinue)) {
   function Get-FileHash {
@@ -70,67 +80,159 @@ function Get-VerifiedDownload(
 if ($null -eq $manifest.runtime.llamaCpp) {
   throw "LOCAL_LLM_ENGINE_MANIFEST_MISSING"
 }
-if ($null -eq $manifest.models.localLlm -or @($manifest.models.localLlm).Count -lt 2) {
+if ($null -eq $manifest.models.localLlm -or @($manifest.models.localLlm).Count -lt 1) {
   throw "LOCAL_LLM_MODEL_MANIFEST_MISSING"
 }
+if ($null -eq $manifest.localAi.contextSelection) {
+  throw "LOCAL_LLM_CONTEXT_POLICY_MISSING"
+}
 
-$llmRoot = Join-Path $runtime "llm"
-$engineDir = Join-Path $llmRoot "llama"
-$modelDir = Join-Path $llmRoot "models"
-New-Item -ItemType Directory -Force -Path $llmRoot | Out-Null
+$policy = $manifest.localAi.contextSelection
+$minimum = [int]$policy.minimum
+$maximum = [int]$policy.maximum
+$step = [int]$policy.step
+if ($minimum -lt 1 -or $maximum -lt $minimum -or $step -lt 1) {
+  throw "LOCAL_LLM_CONTEXT_POLICY_INVALID"
+}
+if ($ContextTokens -lt $minimum -or $ContextTokens -gt $maximum) {
+  throw "LOCAL_LLM_CONTEXT_OUT_OF_RANGE:$ContextTokens:$minimum:$maximum"
+}
+if ((($ContextTokens - $minimum) % $step) -ne 0) {
+  throw "LOCAL_LLM_CONTEXT_STEP_INVALID:$ContextTokens:$step"
+}
+
+$model = @($manifest.models.localLlm | Where-Object { $_.id -eq $ModelId }) | Select-Object -First 1
+if ($null -eq $model) {
+  throw "LOCAL_LLM_MODEL_UNKNOWN:$ModelId"
+}
+if (-not $model.filename -or -not $model.url -or -not $model.sha256) {
+  throw "LOCAL_LLM_MODEL_MANIFEST_INVALID:$ModelId"
+}
+$nativeContext = [int]$model.nativeContext
+$modelMinimum = if ($model.minimumContext) { [int]$model.minimumContext } else { $minimum }
+$modelMaximum = if ($model.maximumRuntimeContext) { [int]$model.maximumRuntimeContext } else { $nativeContext }
+if ($ContextTokens -lt $modelMinimum -or $ContextTokens -gt $modelMaximum) {
+  throw "LOCAL_LLM_MODEL_CONTEXT_UNSUPPORTED:$ModelId:$ContextTokens:$modelMinimum:$modelMaximum"
+}
+$extended = $ContextTokens -gt $nativeContext
+if ($extended -and ($null -eq $model.contextExtension -or $model.contextExtension.enabled -ne $true)) {
+  throw "LOCAL_LLM_CONTEXT_EXTENSION_NOT_ALLOWED:$ModelId:$ContextTokens"
+}
+
+$engineDir = Join-Path $localRoot "engine\llama"
+$modelDir = Join-Path $localRoot "models"
 New-Item -ItemType Directory -Force -Path $modelDir | Out-Null
 
 $engine = $manifest.runtime.llamaCpp
 $engineZip = Join-Path $cache ("llama-" + $engine.version + "-win-cpu-x64.zip")
 Get-VerifiedDownload $engine.url $engine.sha256 $engineZip "llama.cpp"
-if (-not (Test-Path -LiteralPath (Join-Path $engineDir "llama-server.exe") -PathType Leaf)) {
+$serverPath = Join-Path $engineDir "llama-server.exe"
+if (-not (Test-Path -LiteralPath $serverPath -PathType Leaf)) {
   $extract = Join-Path $cache ("llama-extract-" + $engine.version)
   Remove-Item $extract -Recurse -Force -ErrorAction SilentlyContinue
   Expand-Archive -LiteralPath $engineZip -DestinationPath $extract -Force
-  Remove-Item $engineDir -Recurse -Force -ErrorAction SilentlyContinue
-  New-Item -ItemType Directory -Force -Path $engineDir | Out-Null
   $server = Get-ChildItem -Path $extract -Recurse -File -Filter "llama-server.exe" | Select-Object -First 1
   if (-not $server) { throw "LOCAL_LLM_ENGINE_ARCHIVE_LAYOUT_INVALID" }
   $sourceDir = Split-Path -Parent $server.FullName
-  Copy-Item (Join-Path $sourceDir "*") $engineDir -Recurse -Force
+  $stagedEngine = Join-Path $localRoot ("engine\llama-stage-" + [Guid]::NewGuid().ToString("N"))
+  New-Item -ItemType Directory -Force -Path $stagedEngine | Out-Null
+  Copy-Item (Join-Path $sourceDir "*") $stagedEngine -Recurse -Force
+  if (-not (Test-Path -LiteralPath (Join-Path $stagedEngine "llama-server.exe") -PathType Leaf)) {
+    Remove-Item $stagedEngine -Recurse -Force -ErrorAction SilentlyContinue
+    throw "LOCAL_LLM_SERVER_MISSING"
+  }
+  Remove-Item $engineDir -Recurse -Force -ErrorAction SilentlyContinue
+  Move-Item $stagedEngine $engineDir
 }
-if (-not (Test-Path -LiteralPath (Join-Path $engineDir "llama-server.exe") -PathType Leaf)) {
+if (-not (Test-Path -LiteralPath $serverPath -PathType Leaf)) {
   throw "LOCAL_LLM_SERVER_MISSING"
 }
 
-foreach ($model in @($manifest.models.localLlm)) {
-  if (-not $model.filename -or -not $model.url -or -not $model.sha256) {
-    throw "LOCAL_LLM_MODEL_MANIFEST_INVALID"
-  }
-  $cachedModel = Join-Path $cache $model.filename
-  Get-VerifiedDownload $model.url $model.sha256 $cachedModel ("model:" + $model.id)
-  $target = Join-Path $modelDir $model.filename
-  $copyRequired = $true
-  if (Test-Path -LiteralPath $target -PathType Leaf) {
-    $targetHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $target).Hash.ToLowerInvariant()
-    $copyRequired = $targetHash -ne $model.sha256.ToLowerInvariant()
-  }
-  if ($copyRequired) {
-    $temporary = $target + ".tmp"
+$cachedModel = Join-Path $cache $model.filename
+Get-VerifiedDownload $model.url $model.sha256 $cachedModel ("model:" + $model.id)
+$target = Join-Path $modelDir $model.filename
+$copyRequired = $true
+if (Test-Path -LiteralPath $target -PathType Leaf) {
+  $targetHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $target).Hash.ToLowerInvariant()
+  $copyRequired = $targetHash -ne $model.sha256.ToLowerInvariant()
+}
+if ($copyRequired) {
+  $temporary = $target + ".tmp"
+  Remove-Item -LiteralPath $temporary -Force -ErrorAction SilentlyContinue
+  Copy-Item -LiteralPath $cachedModel -Destination $temporary -Force
+  $temporaryHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $temporary).Hash.ToLowerInvariant()
+  if ($temporaryHash -ne $model.sha256.ToLowerInvariant()) {
     Remove-Item -LiteralPath $temporary -Force -ErrorAction SilentlyContinue
-    Copy-Item -LiteralPath $cachedModel -Destination $temporary -Force
-    $temporaryHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $temporary).Hash.ToLowerInvariant()
-    if ($temporaryHash -ne $model.sha256.ToLowerInvariant()) {
-      Remove-Item -LiteralPath $temporary -Force -ErrorAction SilentlyContinue
-      throw "LOCAL_LLM_STAGED_HASH_MISMATCH:$($model.id)"
-    }
-    Move-Item -LiteralPath $temporary -Destination $target -Force
+    throw "LOCAL_LLM_STAGED_HASH_MISMATCH:$($model.id)"
   }
+  Move-Item -LiteralPath $temporary -Destination $target -Force
 }
 
-$required = @(
-  "Mistral-Nemo-Instruct-2407-Q4_K_M.gguf",
-  "Bielik-11B-v3.0-Instruct.Q4_K_M.gguf"
+$launchArgs = @(
+  "--model", $target,
+  "--host", "127.0.0.1",
+  "--port", "0",
+  "--ctx-size", $ContextTokens.ToString()
 )
-foreach ($name in $required) {
-  if (-not (Test-Path -LiteralPath (Join-Path $modelDir $name) -PathType Leaf)) {
-    throw "LOCAL_LLM_REQUIRED_MODEL_MISSING:$name"
-  }
+$contextMode = "NATIVE_OR_REDUCED"
+$ropeScale = 1.0
+if ($extended) {
+  $contextMode = "YARN_EXTENDED"
+  $ropeScale = [Math]::Round(($ContextTokens / [double]$nativeContext), 8)
+  $launchArgs += @(
+    "--rope-scaling", "yarn",
+    "--rope-scale", $ropeScale.ToString([Globalization.CultureInfo]::InvariantCulture),
+    "--yarn-orig-ctx", $nativeContext.ToString()
+  )
 }
 
-Write-Host "LEX_LOCAL_LLM_INSTALL_PASS:$llmRoot"
+$config = [ordered]@{
+  schemaVersion = 1
+  configuredAt = (Get-Date).ToUniversalTime().ToString("o")
+  applicationVersion = $manifest.applicationVersion
+  model = [ordered]@{
+    id = $model.id
+    displayName = $model.displayName
+    filename = $model.filename
+    path = $target
+    sha256 = $model.sha256.ToLowerInvariant()
+    quantization = $model.quantization
+    nativeContext = $nativeContext
+  }
+  context = [ordered]@{
+    requestedTokens = $ContextTokens
+    mode = $contextMode
+    extendedBeyondNative = $extended
+    ropeScale = $ropeScale
+  }
+  engine = [ordered]@{
+    type = "llama.cpp"
+    version = $engine.version
+    executable = $serverPath
+    bind = "127.0.0.1"
+    launchArgs = @($launchArgs)
+  }
+  network = [ordered]@{
+    requiredForProvisioning = $true
+    requiredForInference = $false
+  }
+}
+$configPath = Join-Path $localRoot "config.json"
+$configTemp = $configPath + ".tmp"
+[IO.File]::WriteAllText(
+  $configTemp,
+  (($config | ConvertTo-Json -Depth 10) + [Environment]::NewLine),
+  [Text.UTF8Encoding]::new($false)
+)
+Move-Item -LiteralPath $configTemp -Destination $configPath -Force
+
+$result = [ordered]@{
+  status = "READY"
+  root = $localRoot
+  configPath = $configPath
+  modelId = $model.id
+  contextTokens = $ContextTokens
+  contextMode = $contextMode
+} | ConvertTo-Json -Compress
+Write-Output $result
+Write-Host "LEX_LOCAL_LLM_INSTALL_PASS:$localRoot"
