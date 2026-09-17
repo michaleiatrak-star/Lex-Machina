@@ -93,6 +93,21 @@ import {
   assertStoredDocumentSignature,
   storedDocumentMediaType
 } from "../stored-document-source.js";
+import type {
+  EncryptedCaseWorkspaceStore
+} from "../case-workspace-store.js";
+import {
+  parseSkillSelectionEnvelope,
+  resolveAdditionalSkills
+} from "../skill-selection.js";
+import {
+  createDeterministicWorkflowPlan
+} from "../deterministic-workflow.js";
+import {
+  markProcessCheckpointReady,
+  nextRequiredProcessCheckpoint,
+  type ProcessPleadingState
+} from "../process-pleading-state.js";
 
 const PROVIDERS = new Set<ProviderId>([
   "openai",
@@ -320,6 +335,11 @@ export type LexHttpAppOptions = {
   credentialManager?: ProviderCredentialManager;
   updateDiscovery?: UpdateDiscovery;
   sessionExecutor?: SessionExecutor;
+  processWorkflowStore?: Pick<
+    EncryptedCaseWorkspaceStore,
+    | "getProcessPleadingState"
+    | "saveProcessPleadingState"
+  >;
   documentService?: DocumentService;
   caseFileStore?:
     Pick<
@@ -687,6 +707,35 @@ function parseSessionKnowledgeRequest(
     includeFirm,
     limit
   };
+}
+
+function previewSessionWorkflow(
+  registry: LexSkillRegistry,
+  request: SessionExecutionRequest
+) {
+  const envelope =
+    parseSkillSelectionEnvelope(
+      request.query
+    );
+  const effectiveQuery =
+    envelope.query.trim();
+  if (!effectiveQuery) {
+    throw new Error(
+      "EMPTY_QUERY_AFTER_SKILL_ENVELOPE"
+    );
+  }
+  const selection =
+    resolveAdditionalSkills(
+      registry,
+      effectiveQuery,
+      request.primarySkill,
+      envelope.automatic,
+      envelope.manualSkills
+    );
+  return createDeterministicWorkflowPlan(
+    registry,
+    selection.workflowExecutionSkill
+  );
 }
 
 function parseSessionRequest(
