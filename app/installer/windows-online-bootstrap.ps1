@@ -85,7 +85,23 @@ function Test-CommandVersion(
 ) {
   if (-not (Test-Path -LiteralPath $Executable -PathType Leaf)) { return $false }
   try {
-    $value = (& $Executable @Arguments 2>&1 | Select-Object -First 1).ToString().Trim()
+    # Windows PowerShell can surface native stderr as ErrorRecord objects when
+    # streams are merged. Normalize every native output record to text and
+    # require a successful process exit before comparing the pinned version.
+    $previousErrorActionPreference = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    try {
+      $lines = @(& $Executable @Arguments 2>&1)
+      $exitCode = $LASTEXITCODE
+    } finally {
+      $ErrorActionPreference = $previousErrorActionPreference
+    }
+    if ($exitCode -ne 0) { return $false }
+    $value = @(
+      $lines |
+        ForEach-Object { $_.ToString().Trim() } |
+        Where-Object { $_ }
+    ) | Select-Object -First 1
     return $value -eq $Expected
   } catch {
     return $false
@@ -120,14 +136,23 @@ if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
   Remove-Item $pythonDir -Recurse -Force -ErrorAction SilentlyContinue
   $pythonInstaller = Join-Path $cache "python-$($manifest.runtime.python.version)-amd64.exe"
   Get-VerifiedDownload $manifest.runtime.python.url $manifest.runtime.python.sha256 $pythonInstaller "python-runtime"
+
+  # Start-Process flattens ArgumentList into a single Windows command line.
+  # Without embedded quotes, TargetDir is split at the space in the production
+  # path "Lex Machina", so the Python installer can return 0 while installing
+  # outside $pythonDir. Preserve TargetDir as one native argument explicitly.
+  $pythonTargetArgument = 'TargetDir="{0}"' -f $pythonDir
   $args = @(
-    "/quiet", "InstallAllUsers=0", "TargetDir=$pythonDir", "Include_launcher=0",
+    "/quiet", "InstallAllUsers=0", $pythonTargetArgument, "Include_launcher=0",
     "Include_test=0", "Include_doc=0", "Include_tcltk=0", "Include_tools=0",
     "Include_pip=1", "PrependPath=0", "Shortcuts=0"
   )
   $install = Start-Process -FilePath $pythonInstaller -ArgumentList $args -Wait -PassThru
   if ($install.ExitCode -ne 0) {
     throw "BOOTSTRAP_PYTHON_INSTALL_FAILED:$($install.ExitCode)"
+  }
+  if (-not (Test-Path -LiteralPath $pythonExe -PathType Leaf)) {
+    throw "BOOTSTRAP_PYTHON_EXECUTABLE_MISSING:$pythonExe"
   }
 }
 if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
