@@ -138,6 +138,10 @@ export type SessionExecutionResponse = {
   domainSkills?: string[];
   answer?: string;
   documentCitations?: PublicDocumentCitation[];
+  documentCitationFreshness?: {
+    result: "PASS";
+    checked: number;
+  };
   finalization: "PASS" | "DEGRADED" | "BLOCKED";
   blockedReferences: PublicBlockedReference[];
   verification: {
