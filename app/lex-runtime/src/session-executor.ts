@@ -58,6 +58,11 @@ export type SessionExecutionRequest = {
   model: string;
   primarySkill: string;
   mode: "LAIK" | "PRAWNIK";
+  processWorkflowContext?: {
+    stage: ProcessPleadingStage;
+    checkpoint: ProcessPleadingCheckpoint;
+    mode: ProcessPleadingMode;
+  };
 };
 
 export type PublicBlockedReference = {
@@ -293,6 +298,12 @@ export class SafeSessionExecutor implements SessionExecutor {
         primarySkill: request.primarySkill,
         mode: request.mode
       },
+      ...(request.processWorkflowContext
+        ? {
+            processWorkflowContext:
+              request.processWorkflowContext
+          }
+        : {}),
       tools: toolSchemas,
       toolSystemPromptAppendix: toolPrompt,
       runTools: async (calls) => {
