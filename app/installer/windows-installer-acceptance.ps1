@@ -90,6 +90,13 @@ try {
   }
   $process.Refresh()
   if ($process.ExitCode -ne 0) {
+    $diagnosticLog = Join-Path $InstallRoot "runtime\bootstrap-install-error.log"
+    if (Test-Path -LiteralPath $diagnosticLog -PathType Leaf) {
+      Write-Host "Installer bootstrap diagnostic follows:"
+      Get-Content -LiteralPath $diagnosticLog | Out-Host
+    } else {
+      Write-Host "Installer bootstrap diagnostic file not found: $diagnosticLog"
+    }
     throw "INSTALLER_ACCEPTANCE_INSTALL_FAILED:$($process.ExitCode)"
   }
 
