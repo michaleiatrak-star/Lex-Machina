@@ -32,6 +32,7 @@ import {
   acceptProcessPleadingStart,
   confirmProcessCheckpoint,
   createProcessPleadingState,
+  markProcessCheckpointNotApplicable,
   type ProcessPleadingCheckpoint,
   type ProcessPleadingMode
 } from "../process-pleading-state.js";
@@ -84,7 +85,8 @@ function sendError(res: Response, error: unknown): void {
   if (
     code.includes("INVALID") ||
     code.includes("TOO_LARGE") ||
-    code.includes("LIMIT_EXCEEDED")
+    code.includes("LIMIT_EXCEEDED") ||
+    code.includes("TRANSITION")
   ) {
     res.status(422).json({ error: code });
     return;
@@ -490,6 +492,169 @@ export function registerWorkspaceRoutes(
         res.json({
           caseId,
           state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/process-pleading/not-applicable",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const checkpoint =
+          typeof req.body?.checkpoint === "string"
+            ? req.body.checkpoint.trim()
+            : "";
+        const reason =
+          typeof req.body?.reason === "string"
+            ? req.body.reason
+            : "";
+        const expectedRevision =
+          Number(req.body?.expectedRevision);
+
+        if (
+          !PROCESS_PLEADING_CHECKPOINTS.includes(
+            checkpoint as ProcessPleadingCheckpoint
+          ) ||
+          !Number.isSafeInteger(expectedRevision) ||
+          expectedRevision < 1
+        ) {
+          throw new Error(
+            "PROCESS_PLEADING_NA_REQUEST_INVALID"
+          );
+        }
+
+        dependencies.caseAccessService.assertAccess(
+          actor,
+          caseId,
+          "WRITE"
+        );
+        const caseView =
+          dependencies.caseAccessService.openCase(
+            actor,
+            caseId
+          );
+
+        const state =
+          await dependencies.caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              async (caseDataKey) => {
+                const current =
+                  await dependencies.workspace
+                    .getProcessPleadingState({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (!current) {
+                  throw new Error(
+                    "PROCESS_PLEADING_STATE_NOT_FOUND"
+                  );
+                }
+                if (
+                  current.revision !==
+                    expectedRevision
+                ) {
+                  throw new Error(
+                    "PROCESS_PLEADING_STATE_CONFLICT"
+                  );
+                }
+                const next =
+                  markProcessCheckpointNotApplicable(
+                    current,
+                    checkpoint as
+                      ProcessPleadingCheckpoint,
+                    reason
+                  );
+                return await dependencies.workspace
+                  .saveProcessPleadingState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    state: next,
+                    expectedRevision:
+                      current.revision
+                  });
+              }
+            );
+
+        res.json({ caseId, state });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/process-pleading/reset",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const expectedRevision =
+          Number(req.body?.expectedRevision);
+        const confirmation =
+          typeof req.body?.confirmation === "string"
+            ? req.body.confirmation
+            : "";
+
+        if (
+          confirmation !==
+            "RESET_PROCESS_PLEADING" ||
+          !Number.isSafeInteger(
+            expectedRevision
+          ) ||
+          expectedRevision < 1
+        ) {
+          throw new Error(
+            "PROCESS_PLEADING_RESET_REQUEST_INVALID"
+          );
+        }
+
+        dependencies.caseAccessService.assertAccess(
+          actor,
+          caseId,
+          "WRITE"
+        );
+        const caseView =
+          dependencies.caseAccessService.openCase(
+            actor,
+            caseId
+          );
+        const cleared =
+          await dependencies.caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              (caseDataKey) =>
+                dependencies.workspace
+                  .clearProcessPleadingState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    expectedRevision
+                  })
+            );
+
+        if (!cleared) {
+          throw new Error(
+            "PROCESS_PLEADING_STATE_NOT_FOUND"
+          );
+        }
+        res.json({
+          caseId,
+          reset: true
         });
       } catch (error) {
         sendError(res, error);
