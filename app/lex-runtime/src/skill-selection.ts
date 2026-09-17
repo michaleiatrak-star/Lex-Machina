@@ -92,6 +92,144 @@ export function parseSkillSelectionEnvelope(rawQuery: string): SkillSelectionEnv
   }
 }
 
+type ExplicitExecutionRule = {
+  skill: string;
+  patterns: RegExp[];
+};
+
+const EXPLICIT_EXECUTION_RULES: readonly ExplicitExecutionRule[] = [
+  {
+    skill: "pisma-procesowe-v3",
+    patterns: [
+      /\bpozew\b/,
+      /\bapelacj[a-z]*\b/,
+      /\bzazalen[a-z]*\b/,
+      /\bodpowiedz na pozew\b/,
+      /\bpismo procesow[a-z]*\b/,
+      /\bpismo wielowatk[a-z]*\b/,
+      /\bskarga kasacyjn[a-z]*\b/
+    ]
+  },
+  {
+    skill: "pisma-proste-v2",
+    patterns: [
+      /\bsprzeciw od nakazu\b/,
+      /\bklauzul[a-z]* wykonalnosci\b/,
+      /\bprzywrocen[a-z]* terminu\b/,
+      /\bwglad do akt\b/,
+      /\bwniosek o uzasadnienie\b/,
+      /\bwezwanie do zaplaty\b/,
+      /\bostateczne wezwanie\b/
+    ]
+  },
+  {
+    skill: "analizator-umow-v1",
+    patterns: [
+      /\bumow[a-z]*\b/,
+      /\bowu\b/,
+      /\bkontrakt[a-z]*\b/,
+      /\bugod[a-z]*\b/,
+      /\bregulamin[a-z]*\b/,
+      /\btestament[a-z]*\b/,
+      /\bklauzul[a-z]*\b/
+    ]
+  },
+  {
+    skill: "analiza-sadowa-v6",
+    patterns: [
+      /\bjakie mam szanse\b/,
+      /\banaliza pozycji\b/,
+      /\bpismo przeciwnika\b/,
+      /\bwyrok[a-z]*\b/,
+      /\bnakaz zaplaty\b/
+    ]
+  },
+  {
+    skill: "orzeczenia-sadowe-v2",
+    patterns: [
+      /\bznajdz wyrok\b/,
+      /\bprecedens[a-z]*\b/,
+      /\blinia orzecznicz[a-z]*\b/,
+      /\bweryfikacj[a-z]* sygnatur[a-z]*\b/
+    ]
+  },
+  {
+    skill: "analizator-dowodow-v3",
+    patterns: [
+      /\bmail[a-z]*\b/,
+      /\bsms[a-z]*\b/,
+      /\bnagran[a-z]*\b/,
+      /\bfaktur[a-z]*\b/,
+      /\btermin[a-z]* procesow[a-z]*\b/,
+      /\bkoszt[a-z]* sadow[a-z]*\b/,
+      /\boplat[a-z]* komornicz[a-z]*\b/
+    ]
+  },
+  {
+    skill: "przesluchanie-swiadkow-v2-min90",
+    patterns: [
+      /\bswiadek\b/,
+      /\bswiadk[a-z]*\b/,
+      /\bbiegly\b/,
+      /\bpytani[a-z]* do swiadk[a-z]*\b/,
+      /\bcross examination\b/
+    ]
+  },
+  {
+    skill: "analizator-przepisow-v2",
+    patterns: [
+      /\bart\.?\s*\d+/,
+      /\bprzeslank[a-z]*\b/,
+      /\bwykladni[a-z]*\b/,
+      /\bczy mnie dotyczy\b/,
+      /\bzweryfikuj[a-z]* (?:te |ten )?przepis[a-z]*\b/
+    ]
+  },
+  {
+    skill: "przewodnik-prawny-v2",
+    patterns: [
+      /\bco mam zrobic\b/,
+      /\bod czego zaczac\b/,
+      /\bwyjasn[a-z]* wynik[a-z]*\b/
+    ]
+  }
+];
+
+function explicitExecutionSkillHints(
+  query: string,
+  candidates: readonly LexSkillRecord[]
+): string[] {
+  const normalized = normalize(query)
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const available = new Set(
+    candidates
+      .filter(isExecutionSkill)
+      .map((skill) => skill.name)
+  );
+
+  const matched = EXPLICIT_EXECUTION_RULES
+    .filter(
+      (rule) =>
+        available.has(rule.skill) &&
+        rule.patterns.some((pattern) =>
+          pattern.test(normalized)
+        )
+    )
+    .map((rule) => rule.skill);
+
+  if (
+    matched.includes("pisma-procesowe-v3") &&
+    matched.includes("pisma-proste-v2")
+  ) {
+    return matched.filter(
+      (skill) => skill !== "pisma-proste-v2"
+    );
+  }
+  return matched;
+}
+
 function scoreSkill(
   queryTokens: Set<string>,
   name: string,
@@ -213,11 +351,34 @@ export function resolveAdditionalSkills(
       candidates.filter(isExecutionSkill),
       queryTokens
     );
-    const matchingExecution = rankedExecution
-      .filter((item) => item.score >= 2)
-      .slice(0, 4);
+    const explicitExecution =
+      explicitExecutionSkillHints(
+        query,
+        candidates
+      );
 
-    if (matchingExecution.length === 0 && executionSkills.size === 0) {
+    for (const name of explicitExecution) {
+      if (executionSkills.size >= 4) break;
+      executionSkills.add(name);
+      selected.add(name);
+    }
+
+    const matchingExecution = rankedExecution
+      .filter(
+        (item) =>
+          item.score >= 2 &&
+          !executionSkills.has(item.skill.name)
+      )
+      .slice(
+        0,
+        Math.max(0, 4 - executionSkills.size)
+      );
+
+    if (
+      explicitExecution.length === 0 &&
+      matchingExecution.length === 0 &&
+      executionSkills.size === 0
+    ) {
       const fallback =
         candidates.find((skill) => skill.name === "przewodnik-prawny-v2") ??
         rankedExecution[0]?.skill;
