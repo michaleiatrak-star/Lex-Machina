@@ -124,9 +124,9 @@ export type SessionExecutionResponse = {
   provider: ProviderId;
   model: string;
   primarySkill: string;
-  loadedSkills: string[];
-  executionSkills: string[];
-  domainSkills: string[];
+  loadedSkills?: string[];
+  executionSkills?: string[];
+  domainSkills?: string[];
   answer?: string;
   finalization: "PASS" | "DEGRADED" | "BLOCKED";
   blockedReferences: PublicBlockedReference[];
