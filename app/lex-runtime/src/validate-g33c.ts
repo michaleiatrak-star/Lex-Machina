@@ -38,15 +38,22 @@ const checks = {
     trust.includes("PROVIDER_KEYRING_SERVICE") &&
     trust.includes("restore_provider_credentials") &&
     trust.includes("persist_provider_credential"),
-  providerKeyOnlyPolicy:
+  providerOrOptionalLocalAiPolicy:
     read("app/installer/generate-component-lock.ps1")
-      .includes('expectedUserActionAfterInstall = "PROVIDER_API_KEY_ONLY"')
+      .includes(
+        'expectedUserActionAfterInstall = "PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"'
+      ) &&
+    read("app/installer/generate-component-lock.ps1")
+      .includes('delivery = "USER_INITIATED_AFTER_INSTALL"')
 };
 const pass = Object.values(checks).every(Boolean);
 console.log(JSON.stringify({
   gate: "G33C_ZERO_TOUCH_FIRST_RUN",
   result: pass ? "PASS" : "BLOCKED",
   checks,
-  normalUserActionsAfterSetup: ["PROVIDER_API_KEY"]
+  normalUserActionsAfterSetup: [
+    "PROVIDER_API_KEY",
+    "OPTIONAL_LOCAL_AI_SETUP"
+  ]
 }, null, 2));
 if (!pass) process.exitCode = 1;
