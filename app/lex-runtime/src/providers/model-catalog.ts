@@ -15,6 +15,10 @@ export type ModelDescriptor = {
   createdAt?: string;
   ownedBy?: string;
   contextWindow?: number;
+  nativeContextWindow?: number;
+  contextMode?:
+    | "NATIVE_OR_REDUCED"
+    | "YARN_EXTENDED";
   inputModalities?: string[];
   outputModalities?: string[];
   capabilities?: string[];
@@ -182,6 +186,10 @@ export class DynamicModelCatalog {
       contextWindow:
         selected.configuredContextWindow ??
         selected.contextWindow,
+      nativeContextWindow:
+        selected.nativeContextWindow,
+      contextMode:
+        selected.contextMode,
       ownedBy: "local",
       inputModalities: ["text"],
       outputModalities: ["text"],
