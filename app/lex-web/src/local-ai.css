@@ -95,6 +95,31 @@
   font-size: 12px;
 }
 
+.local-ai-progress {
+  display: grid;
+  gap: 7px;
+  padding: 10px 12px;
+  border: 1px solid rgba(120, 120, 120, 0.22);
+  border-radius: 10px;
+}
+
+.local-ai-progress > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.local-ai-progress small {
+  font-size: 11px;
+  opacity: 0.72;
+}
+
+.local-ai-progress progress {
+  width: 100%;
+  min-height: 10px;
+}
+
 .local-ai-primary {
   min-height: 42px;
   border: 0;
