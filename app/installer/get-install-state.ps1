@@ -42,11 +42,15 @@ $targetManifest = Read-JsonFile $targetManifestFile "INSTALL_STATE_TARGET_MANIFE
 $targetVersionObject = Get-StrictVersion $targetManifest.applicationVersion "target"
 $targetVersion = $targetVersionObject.ToString()
 $checkedAt = (Get-Date).ToUniversalTime().ToString("o")
+$localAiConfig = if ($env:LOCALAPPDATA) {
+  Join-Path $env:LOCALAPPDATA "LexMachina\local-ai\config.json"
+} else { $null }
 $base = @{
-  schemaVersion = 1
+  schemaVersion = 2
   runtimeRoot = $runtime
   targetVersion = $targetVersion
   checkedAt = $checkedAt
+  localAiConfigured = [bool]($localAiConfig -and (Test-Path -LiteralPath $localAiConfig -PathType Leaf))
 }
 
 if (-not (Test-Path -LiteralPath $runtime -PathType Container)) {
@@ -104,24 +108,12 @@ if ($installedVersionObject -lt $targetVersionObject) {
 }
 
 $reasons = [Collections.Generic.List[string]]::new()
-$requiredFiles = [Collections.Generic.List[string]]::new()
-foreach ($relative in @(
+$requiredFiles = @(
   "component-lock.json",
   "lex-runtime-sidecar.exe",
   "node\node.exe",
-  "python\python.exe",
-  "llm\llama\llama-server.exe"
-)) {
-  $requiredFiles.Add($relative)
-}
-
-foreach ($model in @($targetManifest.models.localLlm)) {
-  if ($null -eq $model -or -not $model.filename) {
-    $reasons.Add("TARGET_LOCAL_LLM_MANIFEST_INVALID")
-    continue
-  }
-  $requiredFiles.Add(("llm\models\" + $model.filename))
-}
+  "python\python.exe"
+)
 
 foreach ($relative in $requiredFiles) {
   $path = Join-Path $runtime $relative
@@ -142,8 +134,11 @@ if (Test-Path -LiteralPath $lockPath -PathType Leaf) {
     if ($lock.runtimeNetworkRequiredAfterBootstrap -ne $false) {
       $reasons.Add("COMPONENT_LOCK_RUNTIME_NETWORK_POLICY_INVALID")
     }
-    if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_OR_LOCAL_MODEL") {
+    if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP") {
       $reasons.Add("COMPONENT_LOCK_USER_ACTION_POLICY_INVALID")
+    }
+    if ($null -eq $lock.localAi -or $lock.localAi.requiredForApplicationHealth -ne $false) {
+      $reasons.Add("COMPONENT_LOCK_LOCAL_AI_POLICY_INVALID")
     }
   } catch {
     $reasons.Add("COMPONENT_LOCK_INVALID")
