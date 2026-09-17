@@ -69,24 +69,65 @@ jobs:
         working-directory: app/lex-desktop
         run: cargo test --manifest-path src-tauri/Cargo.toml
 
-      - name: Stage external offline runtime bundle
+      - name: Stage and verify external offline runtime bundle
         id: runtime_bundle
         shell: pwsh
         run: |
           $bundleDir = Join-Path $env:RUNNER_TEMP "lex-offline-bundle"
-          New-Item -ItemType Directory -Force -Path $bundleDir | Out-Null
-          $runtime = (Resolve-Path "app/lex-desktop/src-tauri/runtime").Path
-          $bundle = Join-Path $bundleDir "LexMachina-Offline-Runtime.zip"
-          Remove-Item -LiteralPath $bundle -Force -ErrorAction SilentlyContinue
-
-          & tar.exe -a -c -f $bundle -C $runtime .
-          if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $bundle -PathType Leaf)) {
-            throw "OFFLINE_RUNTIME_ARCHIVE_FAILED"
+          $archiveSource = Join-Path $env:RUNNER_TEMP "lex-offline-archive-source"
+          $verifyRoot = Join-Path $env:RUNNER_TEMP "lex-offline-archive-verify"
+          foreach ($path in @($bundleDir, $archiveSource, $verifyRoot)) {
+            Remove-Item -LiteralPath $path -Recurse -Force -ErrorAction SilentlyContinue
+            New-Item -ItemType Directory -Force -Path $path | Out-Null
           }
+
+          $runtime = (Resolve-Path "app/lex-desktop/src-tauri/runtime").Path
+          $lockPath = Join-Path $runtime "component-lock.json"
+          if (-not (Test-Path -LiteralPath $lockPath -PathType Leaf)) {
+            throw "OFFLINE_RUNTIME_COMPONENT_LOCK_MISSING"
+          }
+
+          # Materialize a fresh copy before archiving. Some Python wheels contain
+          # file/link metadata that can confuse bsdtar's self-archive detection.
+          $null = robocopy.exe $runtime $archiveSource /E /COPY:DAT /DCOPY:DAT /R:1 /W:1 /NFL /NDL /NJH /NJS /NP
+          $copyCode = $LASTEXITCODE
+          if ($copyCode -gt 7) {
+            throw "OFFLINE_ARCHIVE_SOURCE_COPY_FAILED:$copyCode"
+          }
+
+          $bundle = Join-Path $bundleDir "LexMachina-Offline-Runtime.zip"
+          & tar.exe -a -c -f $bundle -C $archiveSource .
+          if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $bundle -PathType Leaf)) {
+            throw "OFFLINE_RUNTIME_ARCHIVE_FAILED:$LASTEXITCODE"
+          }
+
+          # Fail closed before building the standalone wrapper: extract the exact
+          # ZIP that will ship and verify every immutable component-lock entry.
+          & tar.exe -xf $bundle -C $verifyRoot
+          if ($LASTEXITCODE -ne 0) {
+            throw "OFFLINE_RUNTIME_ARCHIVE_VERIFY_EXTRACT_FAILED:$LASTEXITCODE"
+          }
+          $lock = Get-Content -Raw -LiteralPath $lockPath | ConvertFrom-Json
+          $verifiedCount = 0
+          foreach ($entry in $lock.files) {
+            $candidate = Join-Path $verifyRoot ($entry.path -replace '/','\')
+            if (-not (Test-Path -LiteralPath $candidate -PathType Leaf)) {
+              throw "OFFLINE_RUNTIME_ARCHIVE_LOCK_FILE_MISSING:$($entry.path)"
+            }
+            $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $candidate).Hash.ToLowerInvariant()
+            if ($actual -ne $entry.sha256.ToLowerInvariant()) {
+              throw "OFFLINE_RUNTIME_ARCHIVE_LOCK_HASH_MISMATCH:$($entry.path)"
+            }
+            $verifiedCount++
+          }
+          if ($verifiedCount -ne @($lock.files).Count) {
+            throw "OFFLINE_RUNTIME_ARCHIVE_VERIFY_COUNT_MISMATCH"
+          }
+          Write-Host "OFFLINE_RUNTIME_ARCHIVE_LOCK_PASS:$verifiedCount"
 
           $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $bundle).Hash.ToLowerInvariant()
           $bytes = (Get-Item -LiteralPath $bundle).Length
-          Copy-Item -LiteralPath (Join-Path $runtime "component-lock.json") -Destination (Join-Path $bundleDir "component-lock-offline.json")
+          Copy-Item -LiteralPath $lockPath -Destination (Join-Path $bundleDir "component-lock-offline.json")
 
           "bundle=$bundle" >> $env:GITHUB_OUTPUT
           "sha256=$hash" >> $env:GITHUB_OUTPUT
