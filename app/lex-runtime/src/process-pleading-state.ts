@@ -426,6 +426,31 @@ export function acceptProcessPleadingStart(
   );
 }
 
+export function nextRequiredProcessCheckpoint(
+  input: ProcessPleadingState
+): ProcessPleadingCheckpoint | null {
+  const state =
+    validateProcessPleadingState(input);
+  if (
+    state.stage === "CG_ACCEPTANCE" ||
+    state.stage === "FINAL" ||
+    state.pendingCheckpoint !== null
+  ) {
+    return null;
+  }
+  const required =
+    MAIN_STAGE_CHECKPOINTS[
+      state.stage
+    ];
+  return (
+    required.find(
+      (checkpoint) =>
+        state.checkpoints[checkpoint] ===
+          "OPEN"
+    ) ?? null
+  );
+}
+
 export function markProcessCheckpointReady(
   input: ProcessPleadingState,
   checkpoint: ProcessPleadingCheckpoint,
