@@ -4,6 +4,8 @@ import json
 import os
 from pathlib import Path
 import sys
+import threading
+import time
 
 
 root = Path(sys.argv[1]).resolve()
@@ -17,17 +19,34 @@ os.environ["PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK"] = "True"
 os.environ.setdefault("HF_HUB_DISABLE_PROGRESS_BARS", "1")
 os.environ.setdefault("TQDM_DISABLE", "1")
 
-# The installed-copy bootstrap runs under Windows PowerShell 5.1 and NSIS
-# nsExec::ExecToStack. Paddle/PaddleX/Stanza can emit a large amount of normal
-# progress and informational output on both native stdout and stderr. Passing
-# that stream through ExecToStack is neither release evidence nor a reliable
-# error channel. Capture both native file descriptors to a local log and expose
-# only a bounded summary after Python has completed. The Python exit code remains
-# the authoritative success/failure signal.
+# The installer streams bootstrap output with NSIS ExecToLog. Paddle/PaddleX/Stanza
+# can still emit a very large amount of ordinary output, so keep their raw output
+# in a local file while emitting a small heartbeat to the original stdout. This
+# makes long model downloads visibly active without flooding the installer UI.
 log_path = root / "model-prefetch.log"
 original_stdout = os.dup(sys.stdout.fileno())
 original_stderr = os.dup(sys.stderr.fileno())
 prefetch_error: BaseException | None = None
+heartbeat_stop = threading.Event()
+started = time.monotonic()
+
+
+def heartbeat() -> None:
+    while not heartbeat_stop.wait(15):
+        elapsed = int(time.monotonic() - started)
+        try:
+            os.write(
+                original_stdout,
+                f"MODEL_PREFETCH_WORKING elapsed={elapsed}s - pobieranie modeli OCR/NER trwa...\n".encode(
+                    "utf-8", errors="replace"
+                ),
+            )
+        except OSError:
+            return
+
+
+heartbeat_thread = threading.Thread(target=heartbeat, name="model-prefetch-heartbeat", daemon=True)
+heartbeat_thread.start()
 
 try:
     with log_path.open("w", encoding="utf-8", errors="replace") as log:
@@ -62,6 +81,8 @@ try:
             sys.stdout.flush()
             sys.stderr.flush()
 finally:
+    heartbeat_stop.set()
+    heartbeat_thread.join(timeout=2)
     os.dup2(original_stdout, sys.stdout.fileno())
     os.dup2(original_stderr, sys.stderr.fileno())
     os.close(original_stdout)
