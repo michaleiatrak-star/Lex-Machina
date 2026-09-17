@@ -2,6 +2,9 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawn, spawnSync, type ChildProcess } from "node:child_process";
+import type {
+  ModelPackEntry
+} from "./model-pack-verifier.js";
 
 export type LocalModelId = string;
 
@@ -85,6 +88,17 @@ export type LocalProvisioningProgress = {
   bytesTotal: number | null;
   percent: number | null;
   updatedAt: string;
+};
+
+export type LocalModelPackReceipt = {
+  schemaVersion: 1;
+  kind: "LEX_MACHINA_MODEL_PACK_INSTALL";
+  packVersion: string;
+  signerKeyId: string;
+  indexSha256: string;
+  modelId: string;
+  modelSha256: string;
+  installedAt: string;
 };
 
 export type LocalHardwareProfile = {
@@ -613,7 +627,14 @@ export class LocalModelRuntime {
     };
   }
 
-  async provision(modelId: string, contextTokens: number): Promise<{
+  async provision(
+    modelId: string,
+    contextTokens: number,
+    sourceOverride?: {
+      model: ReleaseLocalModel;
+      manifestPath: string;
+    }
+  ): Promise<{
     model: LocalModelDescriptor;
     contextTokens: number;
     configPath: string;
@@ -625,8 +646,16 @@ export class LocalModelRuntime {
       throw new Error("LOCAL_MODEL_PROVISIONING_IN_PROGRESS");
     }
     const canonical = normalizeModelId(modelId);
-    const model = this.modelSpec(canonical);
-    if (!model) throw new Error("LOCAL_MODEL_UNKNOWN");
+    const model =
+      sourceOverride?.model ??
+      this.modelSpec(canonical);
+    if (
+      !model ||
+      normalizeModelId(model.id) !==
+        canonical
+    ) {
+      throw new Error("LOCAL_MODEL_UNKNOWN");
+    }
     this.validateContext(model, contextTokens);
 
     await this.stop();
@@ -714,7 +743,8 @@ export class LocalModelRuntime {
     };
     const task = this.runProvisioner(
       canonical,
-      contextTokens
+      contextTokens,
+      sourceOverride?.manifestPath
     );
     this.provisioning = task;
     try {
@@ -817,6 +847,245 @@ export class LocalModelRuntime {
     }
   }
 
+  async applyVerifiedModelPack(args: {
+    target: {
+      packVersion: string;
+      signerKeyId: string;
+      indexSha256: string;
+      model: ModelPackEntry;
+    };
+    contextTokens: number;
+  }): Promise<{
+    model: LocalModelDescriptor;
+    contextTokens: number;
+    configPath: string;
+    receipt: LocalModelPackReceipt;
+  }> {
+    const entry =
+      args.target.model;
+    const canonical =
+      normalizeModelId(
+        entry.id
+      );
+    const installed =
+      this.installedModelUpdateIdentity();
+    if (
+      !installed ||
+      installed.modelId !==
+        canonical
+    ) {
+      throw new Error(
+        "MODEL_PACK_UPDATE_MODEL_NOT_INSTALLED"
+      );
+    }
+    if (
+      installed.sha256 ===
+        entry.sha256
+          .toLowerCase()
+    ) {
+      throw new Error(
+        "MODEL_PACK_UPDATE_NOT_AVAILABLE"
+      );
+    }
+
+    const trustedModel =
+      this.modelSpec(canonical);
+    if (!trustedModel) {
+      throw new Error(
+        "MODEL_PACK_UPDATE_MODEL_UNKNOWN"
+      );
+    }
+
+    if (
+      trustedModel.filename !==
+        entry.filename ||
+      trustedModel.quantization !==
+        entry.quantization ||
+      trustedModel.nativeContext !==
+        entry.nativeContext ||
+      (
+        trustedModel.minimumContext ??
+          this.contextPolicy()
+            .minimum
+      ) !==
+        entry.minimumContext ||
+      (
+        trustedModel
+          .maximumRuntimeContext ??
+          trustedModel
+            .nativeContext
+      ) !==
+        entry.maximumRuntimeContext ||
+      (
+        trustedModel.license ??
+          ""
+      ) !== entry.license
+    ) {
+      throw new Error(
+        "MODEL_PACK_UPDATE_METADATA_CHANGE_REQUIRES_APP_UPDATE"
+      );
+    }
+
+    this.validateContext(
+      trustedModel,
+      args.contextTokens
+    );
+
+    const rawManifest =
+      JSON.parse(
+        fs.readFileSync(
+          this.manifestPath(),
+          "utf8"
+        )
+      ) as Record<
+        string,
+        unknown
+      >;
+    const rawModels =
+      (
+        rawManifest.models &&
+        typeof rawManifest.models ===
+          "object" &&
+        !Array.isArray(
+          rawManifest.models
+        )
+      )
+        ? rawManifest.models as
+            Record<string, unknown>
+        : null;
+    const localLlm =
+      Array.isArray(
+        rawModels?.localLlm
+      )
+        ? rawModels!.localLlm as
+            Array<
+              Record<
+                string,
+                unknown
+              >
+            >
+        : [];
+    const trustedRaw =
+      localLlm.find(
+        (value) =>
+          value.id === canonical
+      );
+    if (!trustedRaw) {
+      throw new Error(
+        "MODEL_PACK_UPDATE_TRUSTED_MODEL_MISSING"
+      );
+    }
+
+    const stagingRoot =
+      path.join(
+        this.rootDir,
+        "staging"
+      );
+    fs.mkdirSync(
+      stagingRoot,
+      { recursive: true }
+    );
+    const nonce =
+      `${Date.now()}-${process.pid}`;
+    const manifestPath =
+      path.join(
+        stagingRoot,
+        `model-pack-${nonce}.json`
+      );
+    const stagedManifest = {
+      ...rawManifest,
+      models: {
+        ...rawModels,
+        localLlm: [
+          {
+            ...trustedRaw,
+            url:
+              entry.url,
+            sha256:
+              entry.sha256
+                .toLowerCase()
+          }
+        ]
+      }
+    };
+
+    fs.writeFileSync(
+      manifestPath,
+      `${JSON.stringify(
+        stagedManifest,
+        null,
+        2
+      )}\n`,
+      {
+        encoding: "utf8",
+        flag: "wx"
+      }
+    );
+
+    try {
+      const result =
+        await this.provision(
+          canonical,
+          args.contextTokens,
+          {
+            model:
+              trustedModel,
+            manifestPath
+          }
+        );
+
+      const config =
+        this.readConfig();
+      if (
+        !config ||
+        config.model.sha256
+          .toLowerCase() !==
+          entry.sha256
+            .toLowerCase()
+      ) {
+        throw new Error(
+          "MODEL_PACK_UPDATE_CONFIG_HASH_MISMATCH"
+        );
+      }
+
+      const receipt:
+        LocalModelPackReceipt = {
+          schemaVersion: 1,
+          kind:
+            "LEX_MACHINA_MODEL_PACK_INSTALL",
+          packVersion:
+            args.target
+              .packVersion,
+          signerKeyId:
+            args.target
+              .signerKeyId,
+          indexSha256:
+            args.target
+              .indexSha256,
+          modelId:
+            canonical,
+          modelSha256:
+            entry.sha256
+              .toLowerCase(),
+          installedAt:
+            new Date()
+              .toISOString()
+        };
+      this.writeModelPackReceipt(
+        receipt
+      );
+      return {
+        ...result,
+        receipt
+      };
+    } finally {
+      fs.rmSync(
+        manifestPath,
+        { force: true }
+      );
+    }
+  }
+
   async repair(): Promise<{
     model: LocalModelDescriptor;
     contextTokens: number;
@@ -866,6 +1135,10 @@ export class LocalModelRuntime {
     );
     if (configRemoved) {
       fs.rmSync(this.configPath(), { force: true });
+      fs.rmSync(
+        this.modelPackReceiptPath(),
+        { force: true }
+      );
     }
     const qualification =
       this.readQualification();
@@ -949,6 +1222,38 @@ export class LocalModelRuntime {
 
   private configPath(): string {
     return path.join(this.rootDir, "config.json");
+  }
+
+  private modelPackReceiptPath(): string {
+    return path.join(
+      this.rootDir,
+      "model-pack-install.json"
+    );
+  }
+
+  private writeModelPackReceipt(
+    receipt: LocalModelPackReceipt
+  ): void {
+    const target =
+      this.modelPackReceiptPath();
+    const temporary =
+      `${target}.tmp`;
+    fs.writeFileSync(
+      temporary,
+      `${JSON.stringify(
+        receipt,
+        null,
+        2
+      )}\n`,
+      {
+        encoding: "utf8",
+        flag: "w"
+      }
+    );
+    fs.renameSync(
+      temporary,
+      target
+    );
   }
 
   private qualificationPath(): string {
@@ -1112,9 +1417,18 @@ export class LocalModelRuntime {
     }
   }
 
-  private async runProvisioner(modelId: string, contextTokens: number): Promise<void> {
+  private async runProvisioner(
+    modelId: string,
+    contextTokens: number,
+    manifestOverride?: string
+  ): Promise<void> {
     const script = this.provisionerPath();
-    const manifest = this.manifestPath();
+    const manifest =
+      manifestOverride
+        ? path.resolve(
+            manifestOverride
+          )
+        : this.manifestPath();
     if (!fs.existsSync(script)) {
       throw new Error("LOCAL_MODEL_PROVISIONER_MISSING");
     }
