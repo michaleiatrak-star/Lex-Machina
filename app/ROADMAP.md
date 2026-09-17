@@ -74,7 +74,10 @@ Roadmapa obejmuje produkt instalacyjny Windows i jest traktowana jako kontrakt z
 
 - Dodanie obrazu uruchamia lokalny OCR automatycznie.
 - PDF jest analizowany strona po stronie; użyteczna warstwa tekstowa jest wykorzystywana bez OCR, a strony skanowane są automatycznie kierowane do OCR.
-- Kolejka wieloplikowa jest sekwencyjna: kolejny plik nie przechodzi do decyzji prywatności, dopóki bieżący nie zostanie sfinalizowany albo jawnie pominięty.
+- Kolejka wieloplikowa jest sekwencyjna na etapie OCR i decyzji: kolejny plik przechodzi dalej dopiero po zapisaniu wersji roboczej decyzji prywatności albo jawnym pominięciu bieżącego pliku.
+- Decyzje nie są już stosowane natychmiast po każdym pliku. Dla całej partii najpierw powstają wersje robocze per `documentId`, a następnie użytkownik otrzymuje zbiorczy podgląd przed finalizacją.
+- Zbiorczy podgląd pokazuje osobno dla każdego pliku: elementy wykryte automatycznie, ręczne zaznaczenia użytkownika oraz końcową decyzję po uwzględnieniu reguł `PSEUDONYMIZE` / `KEEP` / `LABEL`.
+- Z podglądu można wrócić do edycji konkretnego pliku bez ponownego OCR; zatwierdzenie wykonuje finalizację osobno dla każdego `documentId`, a plik zakończony błędem pozostaje do ponownej decyzji.
 - Każdy plik otrzymuje własny `documentId` i własny wpis w zaszyfrowanym `PseudonymizationVault`.
 - Dla każdego pliku użytkownik osobno wybiera: automatyczna pseudonimizacja, ręczny przegląd decyzji albo jawne pozostawienie wykrytych danych bez anonimizacji (`KEEP`).
 - Po finalizacji maksymalnie 32 pierwsze chunki pliku mogą zostać automatycznie zaznaczone do bieżącej analizy; limit bezpośrednich dokumentów jednej sesji nadal jest egzekwowany przez runtime.
