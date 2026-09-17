@@ -225,6 +225,135 @@ export function LocalAiSetupPanel({
     }
   }
 
+  async function repair(): Promise<void> {
+    if (
+      user.appRole !== "ADMIN" ||
+      busy ||
+      !configured
+    ) {
+      return;
+    }
+    setBusy(true);
+    setError("");
+    setMessage(
+      "Weryfikuję zapisany model, silnik i kontekst oraz wykonuję test uruchomienia."
+    );
+    try {
+      const result = await request<LocalProvisionResponse>(
+        "/api/local-models/repair",
+        { method: "POST" }
+      );
+      setData((current) => current ? {
+        ...current,
+        runtime: result.runtime,
+        models: current.models.map((item) =>
+          item.id === result.model.id ? result.model : item
+        )
+      } : current);
+      setMessage(
+        `Naprawa zakończona: ${result.model.displayName}, ${formatTokens(result.contextTokens)} tokenów.`
+      );
+    } catch (problem) {
+      setError(problem instanceof Error ? problem.message : String(problem));
+      setMessage("");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function startLocal(): Promise<void> {
+    if (!configured || busy || !data?.runtime.selectedModelId) return;
+    setBusy(true);
+    setError("");
+    try {
+      const result = await request<{
+        runtime: LocalRuntimeStatus;
+      }>(
+        "/api/local-models/start",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            modelId: data.runtime.selectedModelId
+          })
+        }
+      );
+      setData((current) => current ? {
+        ...current,
+        runtime: result.runtime
+      } : current);
+      setMessage("Lokalny model został uruchomiony.");
+    } catch (problem) {
+      setError(problem instanceof Error ? problem.message : String(problem));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function stopLocal(): Promise<void> {
+    if (busy) return;
+    setBusy(true);
+    setError("");
+    try {
+      const result = await request<{
+        runtime: LocalRuntimeStatus;
+      }>(
+        "/api/local-models/stop",
+        { method: "POST" }
+      );
+      setData((current) => current ? {
+        ...current,
+        runtime: result.runtime
+      } : current);
+      setMessage("Lokalny model został zatrzymany.");
+    } catch (problem) {
+      setError(problem instanceof Error ? problem.message : String(problem));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function removeSelected(): Promise<void> {
+    if (
+      user.appRole !== "ADMIN" ||
+      busy ||
+      !selected?.installed
+    ) {
+      return;
+    }
+    if (
+      !window.confirm(
+        `Usunąć lokalny plik modelu „${selected.displayName}”? Ponowne użycie będzie wymagało ponownego pobrania modelu.`
+      )
+    ) {
+      return;
+    }
+
+    setBusy(true);
+    setError("");
+    setMessage("Usuwam wybrany lokalny model.");
+    try {
+      await request<{
+        removedModelId: string;
+        configRemoved: boolean;
+        runtime: LocalRuntimeStatus;
+      }>(
+        "/api/local-models/remove",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            modelId: selected.id
+          })
+        }
+      );
+      setMessage("Model został usunięty. Odświeżam konfigurację.");
+      window.setTimeout(() => window.location.reload(), 350);
+    } catch (problem) {
+      setError(problem instanceof Error ? problem.message : String(problem));
+      setMessage("");
+      setBusy(false);
+    }
+  }
+
   return (
     <details className="local-ai-setup" open={!configured}>
       <summary>
@@ -312,20 +441,56 @@ export function LocalAiSetupPanel({
             ) : null}
 
             {user.appRole === "ADMIN" ? (
-              <button
-                type="button"
-                className="local-ai-primary"
-                disabled={!canProvision}
-                onClick={() => void provision()}
-              >
-                {busy || data.runtime.provisioning
-                  ? "Pobieranie i konfiguracja…"
-                  : configured
-                    ? "Zmień model / kontekst"
-                    : "Pobierz i skonfiguruj lokalną AI"}
-              </button>
+              <>
+                <button
+                  type="button"
+                  className="local-ai-primary"
+                  disabled={!canProvision}
+                  onClick={() => void provision()}
+                >
+                  {busy || data.runtime.provisioning
+                    ? "Operacja w toku…"
+                    : configured
+                      ? "Zmień model / kontekst"
+                      : "Pobierz i skonfiguruj lokalną AI"}
+                </button>
+
+                {configured ? (
+                  <div className="local-ai-actions">
+                    <button
+                      type="button"
+                      disabled={busy || data.runtime.state === "READY"}
+                      onClick={() => void startLocal()}
+                    >
+                      Uruchom
+                    </button>
+                    <button
+                      type="button"
+                      disabled={busy || data.runtime.state === "STOPPED"}
+                      onClick={() => void stopLocal()}
+                    >
+                      Zatrzymaj
+                    </button>
+                    <button
+                      type="button"
+                      disabled={busy || data.runtime.provisioning}
+                      onClick={() => void repair()}
+                    >
+                      Napraw
+                    </button>
+                    <button
+                      type="button"
+                      className="local-ai-danger"
+                      disabled={busy || !selected?.installed}
+                      onClick={() => void removeSelected()}
+                    >
+                      Usuń model
+                    </button>
+                  </div>
+                ) : null}
+              </>
             ) : (
-              <small>Instalację lub zmianę modelu lokalnego może wykonać administrator aplikacji.</small>
+              <small>Instalację, naprawę lub usunięcie modelu lokalnego może wykonać administrator aplikacji.</small>
             )}
           </>
         ) : null}
