@@ -497,7 +497,12 @@ export function DocumentPrivacyPanel({
   }
 
   async function finalizeBatch(): Promise<void> {
-    if (batchDrafts.length === 0 || incomingFile || loading) return;
+    if (
+      batchFinalizing ||
+      batchDrafts.length === 0 ||
+      incomingFile ||
+      loading
+    ) return;
     setBatchFinalizing(true);
     setError("");
     const successful: FinalizedBatchItem[] = [];
@@ -655,13 +660,17 @@ export function DocumentPrivacyPanel({
       {error && (
         <div className="alert alert-error">
           <span>{error}</span>
-          {incomingFile && review ? (
+          {incomingFile ? (
             <button
               type="button"
               onClick={() => {
                 setReview(null);
+                setDirectives([]);
+                setSelection(null);
+                setArchiveUpload(null);
                 activeFileRef.current = null;
                 setActiveFileName("");
+                setError("");
                 onIncomingFileConsumed?.();
               }}
             >
