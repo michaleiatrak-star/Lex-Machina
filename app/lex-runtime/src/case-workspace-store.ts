@@ -621,9 +621,11 @@ export class EncryptedCaseWorkspaceStore {
       args.caseDataKey,
       args.keyVersion
     );
+    const workflows =
+      index.workflows;
     const current =
-      index.workflows?.processPleading;
-    if (!current) {
+      workflows?.processPleading;
+    if (!workflows || !current) {
       return false;
     }
     if (
@@ -636,8 +638,7 @@ export class EncryptedCaseWorkspaceStore {
         "PROCESS_PLEADING_STATE_CONFLICT"
       );
     }
-    delete index.workflows
-      .processPleading;
+    delete workflows.processPleading;
     await this.write(
       index,
       args.caseDataKey,
