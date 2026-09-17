@@ -92,7 +92,7 @@ function Test-CommandVersion(
   }
 }
 
-Write-Host "[1/6] Private Node"
+Write-Host "[1/7] Private Node"
 $nodeDir = Join-Path $runtime "node"
 $nodeExe = Join-Path $nodeDir "node.exe"
 $nodeExpected = "v$($manifest.runtime.node.version)"
@@ -112,7 +112,7 @@ if (-not (Test-CommandVersion $nodeExe @("--version") $nodeExpected)) {
   throw "BOOTSTRAP_NODE_VERSION_INVALID"
 }
 
-Write-Host "[2/6] Private Python"
+Write-Host "[2/7] Private Python"
 $pythonDir = Join-Path $runtime "python"
 $pythonExe = Join-Path $pythonDir "python.exe"
 $pythonExpected = "Python $($manifest.runtime.python.version)"
@@ -134,7 +134,7 @@ if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
   throw "BOOTSTRAP_PYTHON_VERSION_INVALID"
 }
 
-Write-Host "[3/6] Pinned Python/ML packages"
+Write-Host "[3/7] Pinned Python/ML packages"
 $packageVerifier = Join-Path $bootstrapRoot "verify-python-package-set.py"
 if (-not (Test-Path -LiteralPath $packageVerifier -PathType Leaf)) {
   throw "BOOTSTRAP_PYTHON_PACKAGE_VERIFIER_MISSING"
@@ -150,7 +150,7 @@ if ($LASTEXITCODE -ne 0) {
   Out-File -FilePath (Join-Path $runtime "python-dependency-tree.txt") -Encoding utf8
 if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PROVENANCE_FAILED" }
 
-Write-Host "[4/6] OCR/NER models"
+Write-Host "[4/7] OCR/NER models"
 $modelRoot = Join-Path $runtime "models"
 $paddleOfficial = Join-Path $modelRoot "paddle\official_models"
 $stanzaPl = Join-Path $modelRoot "stanza\pl"
@@ -173,7 +173,18 @@ if (-not $modelsReady) {
   if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_MODEL_PREFETCH_FAILED" }
 }
 
-Write-Host "[5/6] System prerequisites"
+Write-Host "[5/7] Verified local LLM runtime and models"
+$localLlmInstaller = Join-Path $bootstrapRoot "install-local-llm.ps1"
+if (-not (Test-Path -LiteralPath $localLlmInstaller -PathType Leaf)) {
+  throw "BOOTSTRAP_LOCAL_LLM_INSTALLER_MISSING"
+}
+& $localLlmInstaller `
+  -RuntimeRoot $runtime `
+  -ManifestPath $manifestPath `
+  -CacheRoot (Join-Path $cache "local-llm")
+if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_LOCAL_LLM_INSTALL_FAILED" }
+
+Write-Host "[6/7] System prerequisites"
 $vcInstalled = $false
 $vc = $manifest.systemPrerequisites.visualCppRuntime
 try {
@@ -214,7 +225,7 @@ if (-not $vcInstalled) {
   }
 }
 
-Write-Host "[6/6] Integrity lock and offline acceptance"
+Write-Host "[7/7] Integrity lock and offline acceptance"
 & (Join-Path $bootstrapRoot "generate-component-lock.ps1") `
   -PayloadRoot $runtime `
   -Output (Join-Path $runtime "component-lock.json") `
