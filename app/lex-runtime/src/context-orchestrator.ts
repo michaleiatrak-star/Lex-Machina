@@ -86,6 +86,12 @@ export function orchestrateDocumentContext(args: {
       )
     );
 
+  if (attachments.length > 4) {
+    throw new Error(
+      "TOO_MANY_DOCUMENT_ATTACHMENTS"
+    );
+  }
+
   if (attachments.length === 0) {
     return {
       attachments: [],
@@ -181,19 +187,30 @@ export function orchestrateDocumentContext(args: {
         )
       )
     );
-  const systemEstimate =
-    estimateTokens(
-      args.systemPrompt ?? ""
-    ) +
-    estimateTokens(args.query);
   const systemReserve =
-    Math.max(
-      4_096,
-      Math.min(
-        24_576,
-        systemEstimate + 2_048
-      )
-    );
+    args.systemPrompt === undefined
+      ? Math.min(
+          48_000,
+          Math.max(
+            12_000,
+            Math.floor(
+              modelContextTokens * 0.3
+            )
+          )
+        )
+      : Math.max(
+          4_096,
+          Math.min(
+            48_000,
+            estimateTokens(
+              args.systemPrompt
+            ) +
+              estimateTokens(
+                args.query
+              ) +
+              2_048
+          )
+        );
   const safetyReserve =
     Math.max(
       2_048,
