@@ -122,10 +122,19 @@ export function registerMaintenanceRoutes(
           res.status(400).json({ error: "LOCAL_MODEL_CONTEXT_INVALID" });
           return;
         }
-        const provisioned = await localModels.provision(
-          modelId,
-          contextTokens
-        );
+        const provisioned =
+          localModels.configuredModelId() ===
+            modelId
+            ? await localModels
+                .reconfigureContext(
+                  modelId,
+                  contextTokens
+                )
+            : await localModels
+                .provision(
+                  modelId,
+                  contextTokens
+                );
         res.json({
           ...provisioned,
           runtime: localModels.status()
@@ -141,7 +150,34 @@ export function registerMaintenanceRoutes(
     async (req, res) => {
       if (!requireAdmin(req, res, authService)) return;
       try {
-        const repaired = await localModels.repair();
+        const repaired =
+          localModels
+            .requiresSignedModelPackRepair()
+            ? await (async () => {
+                const installed =
+                  localModels
+                    .installedModelUpdateIdentity();
+                if (!installed) {
+                  throw new Error(
+                    "MODEL_PACK_REPAIR_MODEL_NOT_INSTALLED"
+                  );
+                }
+                const target =
+                  await maintenance
+                    .verifiedModelPackTarget(
+                      installed.modelId
+                    );
+                return await localModels
+                  .applyVerifiedModelPack({
+                    target,
+                    contextTokens:
+                      installed
+                        .contextTokens,
+                    force: true
+                  });
+              })()
+            : await localModels
+                .repair();
         res.json({
           ...repaired,
           runtime: localModels.status()
