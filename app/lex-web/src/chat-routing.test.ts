@@ -1,9 +1,16 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import {
+  AUTO_CASE_TYPE,
   SKILL_SELECTION_ENVELOPE_PREFIX,
   buildSkillSelectionEnvelope,
-  choosePrimaryRoute
+  choosePrimaryRoute,
+  getCaseTypeExecutionSkill,
+  setCaseTypeExecutionSkill
 } from "./chat-routing.js";
+
+afterEach(() => {
+  setCaseTypeExecutionSkill("");
+});
 
 describe("chat routing", () => {
   const routes = [
@@ -57,7 +64,35 @@ describe("chat routing", () => {
 
     expect(encoded.startsWith(SKILL_SELECTION_ENVELOPE_PREFIX)).toBe(true);
     expect(encoded).toContain("terminy-procesowe");
-    expect(encoded).not.toContain('"shared"');
+    expect(encoded).not.toContain('\"shared\"');
+    expect(encoded).toContain('\"caseType\":\"AUTO\"');
     expect(encoded.endsWith("\nPytanie")).toBe(true);
+  });
+
+  it("forces automatic selection when the case type is Automatyczny", () => {
+    setCaseTypeExecutionSkill(AUTO_CASE_TYPE);
+    const encoded = buildSkillSelectionEnvelope(
+      "Pytanie",
+      false,
+      []
+    );
+
+    expect(getCaseTypeExecutionSkill()).toBe("");
+    expect(encoded).toContain('\"auto\":true');
+    expect(encoded).toContain('\"caseType\":\"AUTO\"');
+  });
+
+  it("adds a manually selected execution case type to the envelope", () => {
+    setCaseTypeExecutionSkill("analizator-umow-v1");
+    const encoded = buildSkillSelectionEnvelope(
+      "Przeanalizuj umowę",
+      false,
+      []
+    );
+
+    expect(getCaseTypeExecutionSkill()).toBe("analizator-umow-v1");
+    expect(encoded).toContain('\"auto\":false');
+    expect(encoded).toContain("analizator-umow-v1");
+    expect(encoded).toContain('\"caseType\":\"analizator-umow-v1\"');
   });
 });
