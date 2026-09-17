@@ -116,13 +116,16 @@ Context policy:
 - values above a model native context are explicitly marked `YARN_EXTENDED`;
 - requested context must satisfy manifest range and step;
 - after provisioning the runtime actually launches llama.cpp with the selected context and waits for `/health`;
-- if the selected context cannot start successfully, the configuration is rolled back while downloaded files remain cached for a lower-context retry.
+- if the selected context cannot start successfully, the configuration is rolled back while downloaded files remain cached for a lower-context retry;
+- successful provisioning/repair writes a local qualification receipt with model id, exact context, native/YaRN mode, validation timestamp and measured startup time;
+- the Local AI UI shows the last hardware-qualified profile instead of presenting a configured context as implicitly validated;
+- repair and deterministic model removal are implemented; removal clears only the selected GGUF/config/qualification and keeps the shared engine cache when appropriate.
 
 Still required for full gates:
 
 - GPU/backend discovery and selection;
 - progress reporting during multi-GB downloads;
-- update / repair / delete actions for model packs;
+- explicit model-pack update discovery/versioning beyond repair/re-provision;
 - benchmark matrix for 64k / 96k / 128k / 160k / 200k;
 - explicit quality acceptance thresholds for extended context;
 - signed model-pack metadata rather than relying only on fixed upstream URLs and hashes.
@@ -213,18 +216,26 @@ Invariant:
 
 ## G39J — release / supply-chain hardening
 
-Status: **BLOCKED / OPEN**
+Status: **PARTIAL / BLOCKED FOR PRODUCTION TRUST CONFIGURATION**
 
-Required before production PASS:
+Implemented in repo:
 
-- production Authenticode signing;
-- signed application update trust root;
-- signed skill index;
-- signed model-pack metadata;
-- protected release branch/rules;
-- release-critical workflow pinning;
-- SBOM/provenance;
-- negative signature/hash tests.
+- release-critical online/offline/skill-candidate workflows pin `checkout`, `setup-node` and `upload-artifact` to exact commit SHA;
+- Windows signing gate verifies that the CI PFX certificate thumbprint is already present in the committed application trust root; the signing secret cannot define its own trust root;
+- Authenticode signing requires SHA-256, RFC3161 timestamping and a post-signature verification pass;
+- negative CI self-test covers empty trust root and missing signing secret and must fail closed without producing a receipt;
+- manual signed Windows release-candidate workflow builds the online installer, signs it, runs installed-copy acceptance, generates npm CycloneDX SBOMs and Rust dependency inventory, writes a release provenance receipt and requests GitHub build-provenance attestation;
+- signed skill-update release-candidate workflow exists and requires an Ed25519 private key secret;
+- application updater and skill updater remain fail-closed while their committed public trust roots are empty.
+
+External / production blockers:
+
+- configure the real production Authenticode certificate and commit its public thumbprint to `applicationUpdate.trustedSignerThumbprints`;
+- configure the corresponding CI PFX/password secrets and execute a signed installer/update acceptance;
+- configure the production Ed25519 skill signing key and commit its public key to the skill trust root;
+- signed model-pack metadata/trust root is still required;
+- protect `main` / release rules and required status checks in GitHub repository administration. The current GitHub integration cannot read or modify branch-protection settings (403: administration permission unavailable), so this cannot be marked PASS from this session;
+- add/verify negative tests for a correctly hashed installer signed by an untrusted certificate and for tampered signed model metadata once model-pack signing exists.
 
 ## Current closure order
 
