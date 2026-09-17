@@ -16,6 +16,12 @@ import {
   type VerifiedSkillIndex
 } from "./skill-update-verifier.js";
 import {
+  modelPackTrustReady,
+  verifyModelPackIndex,
+  type ModelPackEntry,
+  type VerifiedModelPackIndex
+} from "./model-pack-verifier.js";
+import {
   CURRENT_APPLICATION_VERSION,
   compareVersions,
   type UpdateDiscovery,
@@ -64,6 +70,35 @@ export type SkillUpdateApplyResult = {
   installedAt: string;
   restartRequired: true;
   skillRoot: string;
+};
+
+export type ModelPackUpdateStatus = {
+  status:
+    | "NOT_CONFIGURED"
+    | "UP_TO_DATE"
+    | "AVAILABLE"
+    | "UNAVAILABLE"
+    | "BLOCKED";
+  checkedAt: string;
+  modelId?: string;
+  currentSha256?: string;
+  latestPackVersion?: string;
+  targetSha256?: string;
+  verificationReady: boolean;
+  signerKeyId?: string;
+  blockedReason?:
+    | "SIGNED_INDEX_MISSING"
+    | "SIGNER_POLICY_MISSING"
+    | "APP_INCOMPATIBLE"
+    | "MODEL_NOT_IN_INDEX"
+    | "INDEX_INVALID";
+};
+
+export type VerifiedModelPackTarget = {
+  packVersion: string;
+  signerKeyId: string;
+  indexSha256: string;
+  model: ModelPackEntry;
 };
 
 function localAppDataRoot(): string {
@@ -285,6 +320,19 @@ export class MaintenanceService {
           verifySkillUpdateIndex(
             indexBytes,
             signatureBytes
+          ),
+    private readonly modelPackTrustReady:
+      () => boolean =
+        modelPackTrustReady,
+    private readonly modelPackIndexVerifier:
+      (
+        indexBytes: Uint8Array,
+        signatureBytes: Uint8Array
+      ) => VerifiedModelPackIndex =
+        (indexBytes, signatureBytes) =>
+          verifyModelPackIndex(
+            indexBytes,
+            signatureBytes
           )
   ) {}
 
@@ -395,6 +443,226 @@ export class MaintenanceService {
             }
           : {})
     };
+  }
+
+  async verifiedModelPackTarget(
+    modelId: string
+  ): Promise<VerifiedModelPackTarget> {
+    const status =
+      await this.discovery.check();
+    if (
+      !status.modelPackIndex ||
+      !status.modelPackSignature
+    ) {
+      throw new Error(
+        "MODEL_PACK_SIGNED_INDEX_MISSING"
+      );
+    }
+    if (
+      !this.modelPackTrustReady()
+    ) {
+      throw new Error(
+        "MODEL_PACK_SIGNER_POLICY_MISSING"
+      );
+    }
+
+    const [
+      indexBytes,
+      signatureBytes
+    ] = await Promise.all([
+      downloadVerified(
+        status.modelPackIndex,
+        this.fetchImpl
+      ),
+      downloadVerified(
+        status.modelPackSignature,
+        this.fetchImpl
+      )
+    ]);
+    const verified =
+      this.modelPackIndexVerifier(
+        indexBytes,
+        signatureBytes
+      );
+    const index =
+      verified.index;
+
+    if (
+      compareVersions(
+        CURRENT_APPLICATION_VERSION,
+        index.compatibility
+          .minAppVersion
+      ) < 0 ||
+      (
+        index.compatibility
+          .maxAppVersion &&
+        compareVersions(
+          CURRENT_APPLICATION_VERSION,
+          index.compatibility
+            .maxAppVersion
+        ) > 0
+      )
+    ) {
+      throw new Error(
+        "MODEL_PACK_APP_INCOMPATIBLE"
+      );
+    }
+
+    const model =
+      index.models.find(
+        (item) =>
+          item.id === modelId
+      );
+    if (!model) {
+      throw new Error(
+        "MODEL_PACK_MODEL_NOT_IN_INDEX"
+      );
+    }
+
+    return {
+      packVersion:
+        index.version,
+      signerKeyId:
+        verified.signerKeyId,
+      indexSha256:
+        verified.indexSha256,
+      model
+    };
+  }
+
+  async modelPackStatus(
+    installed:
+      | {
+          modelId: string;
+          sha256: string;
+        }
+      | null
+  ): Promise<ModelPackUpdateStatus> {
+    const discovery =
+      await this.discovery.check();
+    const verificationReady =
+      this.modelPackTrustReady();
+
+    if (!installed) {
+      return {
+        status:
+          "NOT_CONFIGURED",
+        checkedAt:
+          discovery.checkedAt,
+        verificationReady
+      };
+    }
+
+    if (
+      discovery.status ===
+        "UNAVAILABLE" ||
+      discovery.status ===
+        "NO_RELEASE"
+    ) {
+      return {
+        status:
+          "UNAVAILABLE",
+        checkedAt:
+          discovery.checkedAt,
+        modelId:
+          installed.modelId,
+        currentSha256:
+          installed.sha256,
+        verificationReady
+      };
+    }
+
+    if (
+      !discovery.modelPackIndex ||
+      !discovery.modelPackSignature
+    ) {
+      return {
+        status: "BLOCKED",
+        checkedAt:
+          discovery.checkedAt,
+        modelId:
+          installed.modelId,
+        currentSha256:
+          installed.sha256,
+        verificationReady,
+        blockedReason:
+          "SIGNED_INDEX_MISSING"
+      };
+    }
+
+    if (!verificationReady) {
+      return {
+        status: "BLOCKED",
+        checkedAt:
+          discovery.checkedAt,
+        modelId:
+          installed.modelId,
+        currentSha256:
+          installed.sha256,
+        verificationReady,
+        blockedReason:
+          "SIGNER_POLICY_MISSING"
+      };
+    }
+
+    try {
+      const target =
+        await this
+          .verifiedModelPackTarget(
+            installed.modelId
+          );
+      const available =
+        target.model.sha256 !==
+          installed.sha256
+            .toLowerCase();
+      return {
+        status:
+          available
+            ? "AVAILABLE"
+            : "UP_TO_DATE",
+        checkedAt:
+          discovery.checkedAt,
+        modelId:
+          installed.modelId,
+        currentSha256:
+          installed.sha256
+            .toLowerCase(),
+        latestPackVersion:
+          target.packVersion,
+        targetSha256:
+          target.model.sha256,
+        verificationReady:
+          true,
+        signerKeyId:
+          target.signerKeyId
+      };
+    } catch (error) {
+      const code =
+        error instanceof Error
+          ? error.message
+          : String(error);
+      const blockedReason:
+        ModelPackUpdateStatus["blockedReason"] =
+        code ===
+          "MODEL_PACK_APP_INCOMPATIBLE"
+          ? "APP_INCOMPATIBLE"
+          : code ===
+              "MODEL_PACK_MODEL_NOT_IN_INDEX"
+            ? "MODEL_NOT_IN_INDEX"
+            : "INDEX_INVALID";
+      return {
+        status: "BLOCKED",
+        checkedAt:
+          discovery.checkedAt,
+        modelId:
+          installed.modelId,
+        currentSha256:
+          installed.sha256,
+        verificationReady:
+          true,
+        blockedReason
+      };
+    }
   }
 
   async applySkillUpdate(): Promise<SkillUpdateApplyResult> {
