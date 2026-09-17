@@ -337,10 +337,14 @@ function loopbackOriginGuard(
 
 export type LexHttpAppOptions = {
   registry: LexSkillRegistry;
-  modelCatalog: Pick<
-    DynamicModelCatalog,
-    "list" | "localContextWindow"
-  >;
+  modelCatalog:
+    Pick<DynamicModelCatalog, "list"> &
+    Partial<
+      Pick<
+        DynamicModelCatalog,
+        "localContextWindow"
+      >
+    >;
   credentialResolver?: ProviderCredentialResolver;
   credentialManager?: ProviderCredentialManager;
   updateDiscovery?: UpdateDiscovery;
@@ -5539,7 +5543,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
 
       const localContextWindow =
         options.modelCatalog
-          .localContextWindow(
+          .localContextWindow?.(
             request.model
           );
       if (localContextWindow) {
