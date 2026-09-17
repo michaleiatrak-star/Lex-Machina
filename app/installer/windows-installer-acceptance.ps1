@@ -136,16 +136,10 @@ try {
   $componentLock = Join-Path $runtimeRoot "component-lock.json"
   $privateNode = Join-Path $runtimeRoot "node\node.exe"
   $privatePython = Join-Path $runtimeRoot "python\python.exe"
-  $llamaServer = Join-Path $runtimeRoot "llm\llama\llama-server.exe"
-  $mistralModel = Join-Path $runtimeRoot "llm\models\Mistral-Nemo-Instruct-2407-Q4_K_M.gguf"
-  $bielikModel = Join-Path $runtimeRoot "llm\models\Bielik-11B-v3.0-Instruct.Q4_K_M.gguf"
   foreach ($required in @(
     $componentLock,
     $privateNode,
-    $privatePython,
-    $llamaServer,
-    $mistralModel,
-    $bielikModel
+    $privatePython
   )) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
       throw "INSTALLER_ACCEPTANCE_PRIVATE_RUNTIME_MISSING:$required"
@@ -156,7 +150,6 @@ try {
     Add-AcceptanceFirewallBlock $sidecar.FullName "runtime-sidecar"
     Add-AcceptanceFirewallBlock $privateNode "private-node"
     Add-AcceptanceFirewallBlock $privatePython "private-python"
-    Add-AcceptanceFirewallBlock $llamaServer "local-llm-server"
   }
 
   $lock = Get-Content -Raw -LiteralPath $componentLock | ConvertFrom-Json
@@ -166,8 +159,14 @@ try {
   if ($lock.runtimeNetworkRequiredAfterBootstrap -ne $false) {
     throw "INSTALLER_ACCEPTANCE_RUNTIME_NETWORK_POLICY_INVALID"
   }
-  if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_OR_LOCAL_MODEL") {
+  if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP") {
     throw "INSTALLER_ACCEPTANCE_USER_ACTION_POLICY_INVALID"
+  }
+  if ($lock.localAi.requiredForApplicationHealth -ne $false) {
+    throw "INSTALLER_ACCEPTANCE_LOCAL_AI_OPTIONAL_POLICY_INVALID"
+  }
+  if ($lock.localAi.delivery -ne "USER_INITIATED_AFTER_INSTALL") {
+    throw "INSTALLER_ACCEPTANCE_LOCAL_AI_DELIVERY_POLICY_INVALID"
   }
 
   # Do not let the acceptance test accidentally use runner Node/Python.
@@ -225,7 +224,7 @@ try {
   }
 
   Write-Host "G33D_INSTALLER_ACCEPTANCE_PASS"
-  Write-Host "User action after installation: PROVIDER_API_KEY_OR_LOCAL_MODEL"
+  Write-Host "User action after installation: PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"
 } finally {
   foreach ($ruleName in $firewallRules) {
     Remove-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
