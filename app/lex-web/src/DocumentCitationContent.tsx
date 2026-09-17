@@ -1,4 +1,9 @@
-import { useMemo, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 import type { WorkspaceDocumentCitation } from "./workspace-client.js";
 
 function HighlightedContext({
@@ -20,7 +25,9 @@ function HighlightedContext({
   return (
     <pre className="document-citation-context">
       {citation.contextText.slice(0, start)}
-      <mark>{citation.contextText.slice(start, end)}</mark>
+      <mark id={`highlight-${citation.citationId}`}>
+        {citation.contextText.slice(start, end)}
+      </mark>
       {citation.contextText.slice(end)}
     </pre>
   );
@@ -34,11 +41,21 @@ export function DocumentCitationContent({
   citations?: WorkspaceDocumentCitation[];
 }) {
   const [selected, setSelected] = useState<WorkspaceDocumentCitation | null>(null);
+  const viewerRef = useRef<HTMLElement>(null);
   const byMarker = useMemo(
     () => new Map(citations.map((item) => [item.marker, item])),
     [citations]
   );
   const parts = content.split(/(\[\[LEXDOCREF:docref_\d+\]\])/g);
+
+  useEffect(() => {
+    if (!selected) return;
+    viewerRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest"
+    });
+    viewerRef.current?.focus({ preventScroll: true });
+  }, [selected]);
 
   return (
     <>
@@ -51,7 +68,8 @@ export function DocumentCitationContent({
               key={`${citation.citationId}-${index}`}
               type="button"
               className="document-citation-link"
-              title={`Pokaż źródło: ${citation.label}`}
+              title={`Przejdź do cytowanego fragmentu: ${citation.label}`}
+              aria-controls={`citation-${citation.citationId}`}
               onClick={() => setSelected(citation)}
             >
               [{citation.label}]
@@ -61,7 +79,14 @@ export function DocumentCitationContent({
       </div>
 
       {selected ? (
-        <aside className="document-citation-viewer" aria-label="Cytowany fragment dokumentu">
+        <aside
+          ref={viewerRef}
+          id={`citation-${selected.citationId}`}
+          className="document-citation-viewer"
+          aria-label="Cytowany fragment dokumentu"
+          aria-live="polite"
+          tabIndex={-1}
+        >
           <div className="document-citation-head">
             <div>
               <strong>{selected.label}</strong>
@@ -80,10 +105,13 @@ export function DocumentCitationContent({
               Strona {selected.pageStart}
               {selected.pageEnd !== selected.pageStart ? `–${selected.pageEnd}` : ""}
             </span>
-            {selected.highlightStart !== undefined ? (
+            {selected.highlightStart !== undefined && selected.highlightEnd !== undefined ? (
               <strong>Dokładny cytat zaznaczony w źródle</strong>
             ) : (
-              <span>Odnośnik do źródłowego fragmentu bez deklarowania cytatu dosłownego</span>
+              <span>
+                Odnośnik prowadzi do źródłowego chunka; brak dokładnego zaznaczenia oznacza,
+                że odpowiedź opiera się na fragmencie, ale nie deklaruje cytatu dosłownego.
+              </span>
             )}
           </div>
         </aside>
