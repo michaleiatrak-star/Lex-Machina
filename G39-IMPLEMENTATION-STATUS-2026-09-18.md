@@ -22,7 +22,12 @@ Implemented:
 - downgrade fail-closed preinstall gate;
 - Local AI is no longer part of application-health REPAIR criteria;
 - installer-critical PowerShell bootstrap toolchain is explicitly embedded by NSIS and copied into `runtime/bootstrap` before execution;
-- online/offline acceptance contract now treats Local AI as optional post-install provisioning.
+- online/offline acceptance contract now treats Local AI as optional post-install provisioning;
+- the state probe can discover an existing current-user install from the Tauri uninstall key and records the registered install root plus discovery source;
+- an upgrade/repair attempt targeting a different directory than the registered installation fails closed with exit code 24 instead of creating a second inconsistent copy;
+- the self-test covers a registered installation in a non-default directory, a correctly restored target path, and the mismatched-target block;
+- Tauri's built-in maintenance page remains in use, avoiding a fork of the full NSIS template;
+- an explicit Polish custom language file makes the maintenance choices user-facing as update-in-place / repair-reinstall / uninstall rather than the ambiguous default wording.
 
 Evidence already observed on an earlier head:
 
@@ -197,18 +202,18 @@ Implemented multi-turn process-pleading state slice:
 - the desktop UI has deterministic controls for initialization, start acceptance, current checkpoint confirmation and continuation; it has no control that can directly mark a checkpoint as completed;
 - conditional N/A decisions require an explicit bounded reason and valid optimistic-concurrency revision;
 - workflow reset requires a dedicated confirmation token plus matching revision; stale reset/N/A requests fail with conflict;
-- no public endpoint exists for `checkpoint-ready`; only the verified runtime execution gate can move semantic work into pending confirmation.
+- no public endpoint exists for `checkpoint-ready`; only the verified runtime execution gate can move semantic work into pending confirmation;
+- document generation records a workflow requirement for process pleadings, and final deanonymization/export is guarded by the persisted workflow state: process artifacts requiring finalization cannot become final unless stage/documentStatus are FINAL and no checkpoint confirmation is pending; tokenized DOCX/ODT may exist earlier only as draft-safe artifacts.
 
 Still required before G39H/I PASS:
 
 1. deterministically evaluate conditional checkpoint applicability where possible (file counts, attachment presence, evidence counts, document classes) and record an explicit N/A reason rather than relying on semantic narrative;
 2. make AUTO mode run a bounded sequence of semantic checkpoint nodes in one requested workflow without requiring repeated user messages, while preserving all deterministic invariant gates;
-3. bind DRAFT/FINAL state directly to document generation/export so a FINAL artifact cannot be emitted unless the persisted workflow is FINAL;
-4. add end-to-end HTTP tests around ACL + encrypted workflow store + provider call suppression;
-5. migrate `analiza-sadowa-v6`;
-6. migrate `analizator-dowodow-v3`;
-7. migrate `analizator-przepisow-v2`;
-8. migrate remaining execution skills.
+3. add end-to-end HTTP tests around ACL + encrypted workflow store + provider call suppression and final-artifact suppression;
+4. migrate `analiza-sadowa-v6`;
+5. migrate `analizator-dowodow-v3`;
+6. migrate `analizator-przepisow-v2`;
+7. migrate remaining execution skills.
 
 Invariant:
 
