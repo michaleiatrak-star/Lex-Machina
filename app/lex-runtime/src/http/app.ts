@@ -27,7 +27,8 @@ import type {
 import type {
   SessionDocumentAttachment,
   SessionExecutor,
-  SessionExecutionRequest
+  SessionExecutionRequest,
+  SessionExecutionResponse
 } from "../session-executor.js";
 import type {
   DocumentChunkSelection,
@@ -864,6 +865,98 @@ function parseSessionRequest(
     primarySkill,
     mode
   };
+}
+
+async function refreshDocumentCitations(args: {
+  result: SessionExecutionResponse;
+  documentService: DocumentService;
+  caseAccessService?: Pick<
+    LocalCaseAccessService,
+    "assertAccess" | "openCase" | "withCaseDataKey"
+  >;
+  actor?: AuthenticatedContext;
+}): Promise<number> {
+  const citations =
+    args.result.documentCitations ?? [];
+  if (citations.length === 0) {
+    return 0;
+  }
+
+  for (const citation of citations) {
+    if (
+      citation.caseId &&
+      args.caseAccessService &&
+      args.documentService.restoreDocument
+    ) {
+      if (!args.actor) {
+        throw new Error(
+          "DOCUMENT_CITATION_REFRESH_AUTH_REQUIRED"
+        );
+      }
+      args.caseAccessService.assertAccess(
+        args.actor,
+        citation.caseId,
+        "ANALYZE"
+      );
+      const caseView =
+        args.caseAccessService.openCase(
+          args.actor,
+          citation.caseId
+        );
+      await args.caseAccessService
+        .withCaseDataKey(
+          args.actor,
+          citation.caseId,
+          "ANALYZE",
+          (caseDataKey) =>
+            args.documentService
+              .restoreDocument!({
+                caseId:
+                  citation.caseId!,
+                documentId:
+                  citation.documentId,
+                caseDataKey,
+                keyVersion:
+                  caseView.keyVersion
+              })
+        );
+    }
+
+    const refreshed =
+      await args.documentService
+        .resolveProtectedChunks({
+          documentId:
+            citation.documentId,
+          chunkIndices: [
+            citation.chunkIndex
+          ]
+        });
+    const chunk =
+      refreshed.chunks.find(
+        (item) =>
+          item.index ===
+            citation.chunkIndex
+      );
+    if (!chunk) {
+      throw new Error(
+        "DOCUMENT_CITATION_SOURCE_UNAVAILABLE"
+      );
+    }
+    if (
+      chunk.pageStart !==
+        citation.pageStart ||
+      chunk.pageEnd !==
+        citation.pageEnd ||
+      chunk.text !==
+        citation.contextText
+    ) {
+      throw new Error(
+        "DOCUMENT_CITATION_SOURCE_CHANGED"
+      );
+    }
+  }
+
+  return citations.length;
 }
 
 export function createLexHttpApp(options: LexHttpAppOptions): Express {
@@ -5571,6 +5664,40 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           .execute(request);
 
       if (
+        result.documentCitations &&
+        result.documentCitations.length > 0
+      ) {
+        if (!options.documentService) {
+          throw new Error(
+            "DOCUMENT_CITATION_SOURCE_UNAVAILABLE"
+          );
+        }
+        const actor =
+          options.caseAccessService
+            ? responseAuthContext(res)
+            : undefined;
+        const checked =
+          await refreshDocumentCitations({
+            result,
+            documentService:
+              options.documentService,
+            ...(options.caseAccessService
+              ? {
+                  caseAccessService:
+                    options.caseAccessService
+                }
+              : {}),
+            ...(actor
+              ? { actor }
+              : {})
+          });
+        result.documentCitationFreshness = {
+          result: "PASS",
+          checked
+        };
+      }
+
+      if (
         processContext &&
         options.caseAccessService &&
         options.processWorkflowStore
@@ -5676,6 +5803,20 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         res.status(503).json({
           error: "PROVIDER_NOT_CONFIGURED",
           provider: error.provider
+        });
+        return;
+      }
+
+      if (
+        error instanceof Error &&
+        [
+          "DOCUMENT_CITATION_SOURCE_CHANGED",
+          "DOCUMENT_CITATION_SOURCE_UNAVAILABLE",
+          "DOCUMENT_CITATION_REFRESH_AUTH_REQUIRED"
+        ].includes(error.message)
+      ) {
+        res.status(409).json({
+          error: error.message
         });
         return;
       }
