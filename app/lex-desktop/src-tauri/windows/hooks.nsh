@@ -18,6 +18,31 @@
 !macroend
 
 !macro NSIS_HOOK_POSTINSTALL
+  ; Installer-critical bootstrap files are embedded explicitly instead of
+  ; relying on the ordinary Tauri resource copy layout. This keeps online,
+  ; offline and repair paths deterministic and available before bootstrap.
+  SetOutPath "$PLUGINSDIR\lex-bootstrap"
+  File "/oname=windows-online-bootstrap.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-online-bootstrap.ps1"
+  File "/oname=windows-offline-bundle-install.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-offline-bundle-install.ps1"
+  File "/oname=generate-component-lock.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\generate-component-lock.ps1"
+  File "/oname=windows-payload-selftest.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-payload-selftest.ps1"
+  File "/oname=windows-payload-python-selftest.py" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-payload-python-selftest.py"
+  File "/oname=verify-python-package-set.py" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\verify-python-package-set.py"
+  File "/oname=release-source.json" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-release-source.json"
+  File "/oname=release-requirements.txt" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-release-requirements.txt"
+
+  CreateDirectory "$INSTDIR\runtime"
+  CreateDirectory "$INSTDIR\runtime\bootstrap"
+  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\windows-online-bootstrap.ps1" "$INSTDIR\runtime\bootstrap\windows-online-bootstrap.ps1"
+  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\windows-offline-bundle-install.ps1" "$INSTDIR\runtime\bootstrap\windows-offline-bundle-install.ps1"
+  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\generate-component-lock.ps1" "$INSTDIR\runtime\bootstrap\generate-component-lock.ps1"
+  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\windows-payload-selftest.ps1" "$INSTDIR\runtime\bootstrap\windows-payload-selftest.ps1"
+  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\windows-payload-python-selftest.py" "$INSTDIR\runtime\bootstrap\windows-payload-python-selftest.py"
+  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\verify-python-package-set.py" "$INSTDIR\runtime\bootstrap\verify-python-package-set.py"
+  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\release-source.json" "$INSTDIR\runtime\release-source.json"
+  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\release-requirements.txt" "$INSTDIR\runtime\release-requirements.txt"
+  SetOutPath "$INSTDIR"
+
   IfFileExists "$EXEDIR\LexMachina-Offline-Runtime.zip" lex_offline_bundle lex_online_bootstrap
 
 lex_offline_bundle:
