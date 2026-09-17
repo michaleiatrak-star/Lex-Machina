@@ -1,5 +1,6 @@
 param(
-  [Parameter(Mandatory=$true)][string]$RuntimeRoot
+  [Parameter(Mandatory=$true)][string]$RuntimeRoot,
+  [switch]$StopAfterPythonValidation
 )
 
 $ErrorActionPreference = "Stop"
@@ -157,6 +158,10 @@ if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
 }
 if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
   throw "BOOTSTRAP_PYTHON_VERSION_INVALID"
+}
+if ($StopAfterPythonValidation) {
+  Write-Host "LEX_ONLINE_BOOTSTRAP_PYTHON_PATH_PASS"
+  return
 }
 
 Write-Host "[3/6] Pinned Python/ML packages"
