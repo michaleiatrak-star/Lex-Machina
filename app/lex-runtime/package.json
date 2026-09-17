@@ -75,7 +75,8 @@
     "validate:g37d": "tsx src/validate-g37d.ts",
     "validate:g37c2": "tsx src/validate-g37c2.ts",
     "validate:g37f": "tsx src/validate-g37f.ts",
-    "validate:release-offline": "tsx src/validate-release-offline.ts"
+    "validate:release-offline": "tsx src/validate-release-offline.ts",
+    "build:skill-update-release": "tsx src/build-skill-update-release.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "4.0.49",
