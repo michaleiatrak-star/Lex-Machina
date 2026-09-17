@@ -1,0 +1,47 @@
+name: Windows Online Python Path Regression
+
+on:
+  pull_request:
+    paths:
+      - "app/installer/windows-online-bootstrap.ps1"
+      - "app/installer/windows-release-source.json"
+      - ".github/workflows/windows-online-python-path-regression.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python-target-path:
+    name: Windows PowerShell Python target path with spaces and Unicode
+    runs-on: windows-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Exercise production bootstrap through Python stage
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Stop"
+          $runtimeRoot = Join-Path $env:RUNNER_TEMP "Lex Machina Łódź\runtime"
+          Remove-Item (Split-Path -Parent $runtimeRoot) -Recurse -Force -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Force -Path $runtimeRoot | Out-Null
+          Copy-Item "app\installer\windows-release-source.json" (Join-Path $runtimeRoot "release-source.json")
+
+          & ".\app\installer\windows-online-bootstrap.ps1" `
+            -RuntimeRoot $runtimeRoot `
+            -StopAfterPythonValidation
+
+          $manifest = Get-Content -Raw (Join-Path $runtimeRoot "release-source.json") | ConvertFrom-Json
+          $python = Join-Path $runtimeRoot "python\python.exe"
+          if (-not (Test-Path -LiteralPath $python -PathType Leaf)) {
+            throw "REGRESSION_PRIVATE_PYTHON_MISSING:$python"
+          }
+          $version = (& $python --version 2>&1 | Select-Object -First 1).ToString().Trim()
+          $expected = "Python $($manifest.runtime.python.version)"
+          if ($version -ne $expected) {
+            throw "REGRESSION_PRIVATE_PYTHON_VERSION_INVALID expected=$expected actual=$version"
+          }
+          Write-Host "WINDOWS_ONLINE_PYTHON_PATH_REGRESSION_PASS:$python"
