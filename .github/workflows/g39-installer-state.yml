@@ -6,6 +6,8 @@ on:
       - "app/installer/get-install-state.ps1"
       - "app/installer/installer-state-machine-selftest.ps1"
       - "app/installer/windows-release-source.json"
+      - "app/installer/sign-windows-artifact.ps1"
+      - "app/installer/sign-windows-artifact-selftest.ps1"
       - "app/lex-desktop/src-tauri/windows/hooks.nsh"
       - ".github/workflows/g39-installer-state.yml"
   workflow_dispatch:
@@ -25,8 +27,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Exercise Fresh / Upgrade / Repair / Current / DowngradeBlocked
         shell: pwsh
         run: ./app/installer/installer-state-machine-selftest.ps1
+
+      - name: G39J Authenticode fail-closed policy
+        shell: pwsh
+        run: ./app/installer/sign-windows-artifact-selftest.ps1
