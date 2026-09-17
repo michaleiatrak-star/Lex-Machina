@@ -107,7 +107,7 @@ fn validate_component_lock(root: &Path) -> Result<usize, String> {
     if lock
         .get("expectedUserActionAfterInstall")
         .and_then(|value| value.as_str())
-        != Some("PROVIDER_API_KEY_ONLY")
+        != Some("PROVIDER_API_KEY_OR_LOCAL_MODEL")
     {
         return Err("SIDECAR_COMPONENT_LOCK_USER_ACTION_POLICY".to_string());
     }
@@ -119,6 +119,9 @@ fn validate_component_lock(root: &Path) -> Result<usize, String> {
         "legal-corpus",
         "paddle-ocr-pl",
         "stanza-pl-ner",
+        "local-llm-engine",
+        "mistral-nemo-local",
+        "bielik-local",
         "runtime-sidecar",
     ];
     let components = lock
@@ -169,6 +172,23 @@ fn validate_component_lock(root: &Path) -> Result<usize, String> {
     Ok(verified)
 }
 
+fn require_local_llm(root: &Path) -> Result<PathBuf, String> {
+    let llm = required_dir(root.join("llm"), "SIDECAR_LLM_ROOT_MISSING")?;
+    required_file(
+        llm.join("llama").join("llama-server.exe"),
+        "SIDECAR_LLAMA_SERVER_MISSING",
+    )?;
+    required_file(
+        llm.join("models").join("Mistral-Nemo-Instruct-2407-Q4_K_M.gguf"),
+        "SIDECAR_MISTRAL_MODEL_MISSING",
+    )?;
+    required_file(
+        llm.join("models").join("Bielik-11B-v3.0-Instruct.Q4_K_M.gguf"),
+        "SIDECAR_BIELIK_MODEL_MISSING",
+    )?;
+    Ok(llm)
+}
+
 fn self_test(root: &Path) -> Result<(), String> {
     required_file(root.join("node").join("node.exe"), "SIDECAR_NODE_MISSING")?;
     required_file(
@@ -185,6 +205,7 @@ fn self_test(root: &Path) -> Result<(), String> {
         root.join("models").join("stanza").join("pl"),
         "SIDECAR_STANZA_MODELS_MISSING",
     )?;
+    require_local_llm(root)?;
 
     let verified_files = validate_component_lock(root)?;
     println!(
@@ -194,7 +215,8 @@ fn self_test(root: &Path) -> Result<(), String> {
             "result": "PASS",
             "verifiedFiles": verified_files,
             "runtimeNetworkRequiredAfterBootstrap": false,
-            "expectedUserActionAfterInstall": "PROVIDER_API_KEY_ONLY"
+            "expectedUserActionAfterInstall": "PROVIDER_API_KEY_OR_LOCAL_MODEL",
+            "localModelsPreinstalled": ["Mistral NeMo 12B Q4_K_M", "Bielik 11B v3 Q4_K_M"]
         })
     );
     Ok(())
@@ -239,12 +261,14 @@ fn run_runtime(root: &Path) -> Result<i32, String> {
             root.join("models").join("stanza"),
             "SIDECAR_STANZA_MODELS_MISSING",
         )?;
+    let llm = require_local_llm(root)?;
 
     let status =
         Command::new(node)
             .arg(server)
             .current_dir(root.join("app"))
-            .env("LEX_SKILLS_PATH", corpus)
+            .env("LEX_BUNDLED_SKILLS_PATH", corpus)
+            .env("LEX_LOCAL_LLM_ROOT", llm)
             .env("LEX_OCR_PYTHON", &python)
             .env("LEX_NER_PYTHON", &python)
             .env("LEX_STORAGE_PYTHON", &python)
