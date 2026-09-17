@@ -50,6 +50,7 @@ foreach ($file in @(
   "windows-online-bootstrap.ps1",
   "windows-offline-bundle-install.ps1",
   "prefetch-release-models.py",
+  "verify-python-package-set.py",
   "generate-component-lock.ps1",
   "windows-payload-selftest.ps1"
 )) {
@@ -74,6 +75,7 @@ foreach ($required in @(
   "release-requirements.txt",
   "bootstrap\windows-online-bootstrap.ps1",
   "bootstrap\windows-offline-bundle-install.ps1",
+  "bootstrap\verify-python-package-set.py",
   "bootstrap\windows-payload-selftest.ps1"
 )) {
   if (-not (Test-Path -LiteralPath (Join-Path $payload $required) -PathType Leaf)) {
