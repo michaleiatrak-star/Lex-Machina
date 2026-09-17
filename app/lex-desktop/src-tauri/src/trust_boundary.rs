@@ -1200,7 +1200,16 @@ fn route_allowed(method: &str, path: &str) -> bool {
         "/api/cases"
         | "/api/providers"
         | "/api/routes"
-        | "/api/update/status" => method == "GET" || (path == "/api/cases" && method == "POST"),
+        | "/api/update/status"
+        | "/api/local-models"
+        | "/api/skills/update/status" => {
+            method == "GET" || (path == "/api/cases" && method == "POST")
+        }
+        "/api/update/download"
+        | "/api/local-models/provision"
+        | "/api/local-models/start"
+        | "/api/local-models/stop"
+        | "/api/skills/update/apply" => method == "POST",
         "/api/firm-knowledge" | "/api/shared/templates" => {
             method == "GET" || method == "POST"
         }
@@ -1570,6 +1579,14 @@ mod tests {
         assert!(route_allowed("POST", "/api/cases/case_abc/files"));
         assert!(route_allowed("GET", "/api/sensitive-download/download_abc"));
         assert!(!route_allowed("POST", "/api/update/status"));
+        assert!(route_allowed("POST", "/api/update/download"));
+        assert!(route_allowed("GET", "/api/local-models"));
+        assert!(route_allowed("POST", "/api/local-models/provision"));
+        assert!(route_allowed("POST", "/api/local-models/start"));
+        assert!(route_allowed("POST", "/api/local-models/stop"));
+        assert!(route_allowed("GET", "/api/skills/update/status"));
+        assert!(route_allowed("POST", "/api/skills/update/apply"));
+        assert!(!route_allowed("DELETE", "/api/local-models"));
         assert!(!route_allowed("POST", "/api/auth/bootstrap-managed"));
         assert!(route_allowed("POST", "/api/admin/support/challenge"));
         assert!(route_allowed("POST", "/api/admin/support/activate"));
