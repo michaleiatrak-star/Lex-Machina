@@ -491,19 +491,6 @@ export function nextRequiredProcessCheckpoint(
 ): ProcessPleadingCheckpoint | null {
   const state =
     validateProcessPleadingState(input);
-  const normalizedReason = reason
-    .normalize("NFKC")
-    .replace(/[\x00-\x1f\x7f]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-  if (
-    normalizedReason.length < 3 ||
-    normalizedReason.length > 500
-  ) {
-    throw new Error(
-      "PROCESS_PLEADING_NA_REASON_INVALID"
-    );
-  }
   if (
     state.stage === "CG_ACCEPTANCE" ||
     state.stage === "FINAL" ||
@@ -639,6 +626,19 @@ export function markProcessCheckpointNotApplicable(
 ): ProcessPleadingState {
   const state =
     validateProcessPleadingState(input);
+  const normalizedReason = reason
+    .normalize("NFKC")
+    .replace(/[\x00-\x1f\x7f]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (
+    normalizedReason.length < 3 ||
+    normalizedReason.length > 500
+  ) {
+    throw new Error(
+      "PROCESS_PLEADING_NA_REASON_INVALID"
+    );
+  }
   if (
     state.stage === "CG_ACCEPTANCE" ||
     state.stage === "FINAL" ||
