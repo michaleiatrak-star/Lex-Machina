@@ -226,6 +226,31 @@ export function registerMaintenanceRoutes(
   );
 
   app.get(
+    "/api/local-models/update/status",
+    async (req, res) => {
+      if (!requireAdmin(req, res, authService)) return;
+      try {
+        const installed =
+          localModels.installedModelUpdateIdentity();
+        res.json(
+          await maintenance.modelPackStatus(
+            installed
+              ? {
+                  modelId:
+                    installed.modelId,
+                  sha256:
+                    installed.sha256
+                }
+              : null
+          )
+        );
+      } catch (error) {
+        sendMaintenanceError(res, error);
+      }
+    }
+  );
+
+  app.get(
     "/api/skills/update/status",
     async (req, res) => {
       if (!requireAdmin(req, res, authService)) return;
