@@ -593,6 +593,8 @@ export type SessionExecutionResponse = {
     result: "PASS" | "BLOCKED";
     eventCount: number;
     closed: boolean;
+    missing?: string[];
+    violations?: string[];
   };
   workflow?: {
     id: string;
