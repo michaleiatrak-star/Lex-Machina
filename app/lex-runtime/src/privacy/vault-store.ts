@@ -561,7 +561,6 @@ function decodeEnvelope(args: {
           "PRIVACY_VAULT_PAYLOAD_INVALID"
         );
       }
-      // Hydration validates counters, tokens and duplicates.
       new PseudonymizationVault(
         snapshot
       );
@@ -1010,6 +1009,62 @@ export class EncryptedPrivacyVaultStore {
           next
         );
         return next.generation;
+      }
+    );
+  }
+
+  async deleteDocumentVault(args: {
+    caseId: string;
+    documentId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }): Promise<boolean> {
+    if (
+      !validDocumentId(
+        args.documentId
+      )
+    ) {
+      throw new Error(
+        "INVALID_DOCUMENT_ID"
+      );
+    }
+    return await this.withCaseQueue(
+      args.caseId,
+      async () => {
+        const payload =
+          await this.readPayload(
+            args.caseId,
+            args.caseDataKey,
+            args.keyVersion
+          );
+        if (
+          payload.documents[
+            args.documentId
+          ] === undefined
+        ) {
+          return false;
+        }
+        const documents = {
+          ...payload.documents
+        };
+        delete documents[
+          args.documentId
+        ];
+        const next:
+          PrivacyVaultPayloadV1 = {
+            ...payload,
+            generation:
+              payload.generation +
+              1,
+            documents
+          };
+        await this.writePayload(
+          args.caseId,
+          args.caseDataKey,
+          args.keyVersion,
+          next
+        );
+        return true;
       }
     );
   }
