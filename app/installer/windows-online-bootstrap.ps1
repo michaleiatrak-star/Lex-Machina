@@ -70,13 +70,14 @@ function Get-VerifiedDownload(
     }
     Remove-Item -LiteralPath $Destination -Force
   }
-  Write-Host "Downloading $Label"
+  Write-Host "Downloading $Label - instalator nadal pracuje..."
   Invoke-WebRequest -UseBasicParsing -Uri $Url -OutFile $Destination
   $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $Destination).Hash.ToLowerInvariant()
   if ($actual -ne $ExpectedSha256.ToLowerInvariant()) {
     Remove-Item -LiteralPath $Destination -Force -ErrorAction SilentlyContinue
     throw "BOOTSTRAP_HASH_MISMATCH:$Label expected=$ExpectedSha256 actual=$actual"
   }
+  Write-Host "Downloaded and verified $Label"
 }
 
 function Test-CommandVersion(
@@ -128,6 +129,7 @@ if (-not (Test-CommandVersion $nodeExe @("--version") $nodeExpected)) {
 if (-not (Test-CommandVersion $nodeExe @("--version") $nodeExpected)) {
   throw "BOOTSTRAP_NODE_VERSION_INVALID"
 }
+Write-Host "[1/6] Private Node ready"
 
 Write-Host "[2/6] Private Python"
 $pythonDir = Join-Path $runtime "python"
@@ -148,6 +150,7 @@ if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
     "Include_test=0", "Include_doc=0", "Include_tcltk=0", "Include_tools=0",
     "Include_pip=1", "PrependPath=0", "Shortcuts=0"
   )
+  Write-Host "[2/6] Installing private Python..."
   $install = Start-Process -FilePath $pythonInstaller -ArgumentList $args -Wait -PassThru
   if ($install.ExitCode -ne 0) {
     throw "BOOTSTRAP_PYTHON_INSTALL_FAILED:$($install.ExitCode)"
@@ -159,19 +162,21 @@ if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
 if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
   throw "BOOTSTRAP_PYTHON_VERSION_INVALID"
 }
+Write-Host "[2/6] Private Python ready"
 if ($StopAfterPythonValidation) {
   Write-Host "LEX_ONLINE_BOOTSTRAP_PYTHON_PATH_PASS"
   return
 }
 
-Write-Host "[3/6] Pinned Python/ML packages"
+Write-Host "[3/6] Pinned Python/ML packages - pobieranie i instalacja pakietow moze potrwac kilka minut"
 $packageVerifier = Join-Path $bootstrapRoot "verify-python-package-set.py"
 if (-not (Test-Path -LiteralPath $packageVerifier -PathType Leaf)) {
   throw "BOOTSTRAP_PYTHON_PACKAGE_VERIFIER_MISSING"
 }
 & $pythonExe $packageVerifier $manifestPath | Out-Host
 if ($LASTEXITCODE -ne 0) {
-  & $pythonExe -m pip install --quiet --disable-pip-version-check --no-warn-script-location --upgrade-strategy only-if-needed -r $requirements
+  Write-Host "[3/6] Installing pinned Python/ML packages..."
+  & $pythonExe -m pip install --disable-pip-version-check --no-warn-script-location --progress-bar off --upgrade-strategy only-if-needed -r $requirements
   if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PACKAGES_FAILED" }
   & $pythonExe $packageVerifier $manifestPath | Out-Host
   if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PACKAGE_VERSION_MISMATCH" }
@@ -179,8 +184,9 @@ if ($LASTEXITCODE -ne 0) {
 & $pythonExe -m pip freeze --all | Sort-Object |
   Out-File -FilePath (Join-Path $runtime "python-dependency-tree.txt") -Encoding utf8
 if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PROVENANCE_FAILED" }
+Write-Host "[3/6] Python/ML packages ready"
 
-Write-Host "[4/6] OCR/NER models"
+Write-Host "[4/6] OCR/NER models - pobieranie modeli moze potrwac kilka minut"
 $modelRoot = Join-Path $runtime "models"
 $paddleOfficial = Join-Path $modelRoot "paddle\official_models"
 $stanzaPl = Join-Path $modelRoot "stanza\pl"
@@ -202,6 +208,7 @@ if (-not $modelsReady) {
   & $pythonExe (Join-Path $bootstrapRoot "prefetch-release-models.py") $modelRoot
   if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_MODEL_PREFETCH_FAILED" }
 }
+Write-Host "[4/6] OCR/NER models ready"
 
 Write-Host "[5/6] System prerequisites"
 $vcInstalled = $false
@@ -238,13 +245,15 @@ if (-not $vcInstalled) {
   if (-not (Test-IsAdministrator)) {
     $startArgs.Verb = "RunAs"
   }
+  Write-Host "[5/6] Installing Microsoft Visual C++ runtime..."
   $vcInstall = Start-Process @startArgs
   if ($vcInstall.ExitCode -notin @(0, 1638, 3010)) {
     throw "BOOTSTRAP_VC_RUNTIME_FAILED:$($vcInstall.ExitCode)"
   }
 }
+Write-Host "[5/6] System prerequisites ready"
 
-Write-Host "[6/6] Integrity lock and offline acceptance"
+Write-Host "[6/6] Integrity lock and final runtime verification"
 & (Join-Path $bootstrapRoot "generate-component-lock.ps1") `
   -PayloadRoot $runtime `
   -Output (Join-Path $runtime "component-lock.json") `
