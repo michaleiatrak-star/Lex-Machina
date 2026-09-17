@@ -31,6 +31,9 @@ $documentWorker = Require-File "storage\legal_document_worker.py"
 $corpus = Require-Dir "corpus"
 $paddle = Require-Dir "models\paddle\official_models"
 $stanza = Require-Dir "models\stanza"
+$llamaServer = Require-File "llm\llama\llama-server.exe"
+$mistralModel = Require-File "llm\models\Mistral-Nemo-Instruct-2407-Q4_K_M.gguf"
+$bielikModel = Require-File "llm\models\Bielik-11B-v3.0-Instruct.Q4_K_M.gguf"
 $pythonSelftest = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "windows-payload-python-selftest.py"
 if (-not (Test-Path -LiteralPath $pythonSelftest -PathType Leaf)) {
   throw "SELFTEST_PYTHON_HELPER_MISSING"
@@ -75,6 +78,12 @@ if (-not (Test-Path (Join-Path $stanza "pl") -PathType Container)) {
   throw "SELFTEST_STANZA_PL_MISSING"
 }
 
+foreach ($localLlmFile in @($llamaServer, $mistralModel, $bielikModel)) {
+  if ((Get-Item -LiteralPath $localLlmFile).Length -le 0) {
+    throw "SELFTEST_LOCAL_LLM_FILE_EMPTY:$localLlmFile"
+  }
+}
+
 $lock = Get-Content -Raw -LiteralPath $lockPath | ConvertFrom-Json
 if ($null -eq $lock.networkRequiredAtInstall) {
   throw "SELFTEST_LOCK_INSTALL_NETWORK_POLICY_MISSING"
@@ -82,7 +91,7 @@ if ($null -eq $lock.networkRequiredAtInstall) {
 if ($lock.runtimeNetworkRequiredAfterBootstrap -ne $false) {
   throw "SELFTEST_LOCK_RUNTIME_NETWORK_POLICY_INVALID"
 }
-if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_ONLY") {
+if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_OR_LOCAL_MODEL") {
   throw "SELFTEST_LOCK_USER_ACTION_POLICY_INVALID"
 }
 foreach ($entry in $lock.files) {
