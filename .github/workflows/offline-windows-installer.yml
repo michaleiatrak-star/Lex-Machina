@@ -173,13 +173,14 @@ jobs:
           Write-Host "Installer: $($installer.FullName)"
           Write-Host "Runtime bundle: $bundleDest"
 
-      - name: Offline installed-copy acceptance
+      - name: Offline clean-machine installed-copy acceptance
         shell: pwsh
         run: |
           ./app/installer/windows-installer-acceptance.ps1 `
             -InstallerPath "${{ steps.locate.outputs.installer }}" `
             -ExpectedNetworkRequiredAtInstall $false `
             -BlockNetworkDuringInstall `
+            -ForceVisualCppRuntimeInstall `
             -InstallTimeoutSeconds 5400
 
       - name: Record distribution SHA-256
