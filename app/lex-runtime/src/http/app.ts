@@ -96,6 +96,9 @@ import {
 import type {
   EncryptedCaseWorkspaceStore
 } from "../case-workspace-store.js";
+import type {
+  DocumentGenerationStateStore
+} from "../document-generation-state.js";
 import {
   parseSkillSelectionEnvelope,
   resolveAdditionalSkills
@@ -342,6 +345,10 @@ export type LexHttpAppOptions = {
     EncryptedCaseWorkspaceStore,
     | "getProcessPleadingState"
     | "saveProcessPleadingState"
+  >;
+  documentGenerationState?: Pick<
+    DocumentGenerationStateStore,
+    "readState"
   >;
   documentService?: DocumentService;
   caseFileStore?:
@@ -710,6 +717,71 @@ function parseSessionKnowledgeRequest(
     includeFirm,
     limit
   };
+}
+
+async function assertDocumentWorkflowFinalizationAllowed(
+  options: Pick<
+    LexHttpAppOptions,
+    | "documentGenerationState"
+    | "processWorkflowStore"
+  >,
+  args: {
+    caseId: string;
+    artifactId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }
+): Promise<void> {
+  if (!options.documentGenerationState) {
+    throw new Error(
+      "DOCUMENT_GENERATION_STATE_SERVICE_UNAVAILABLE"
+    );
+  }
+  const generation =
+    await options
+      .documentGenerationState
+      .readState(
+        args.caseId,
+        args.artifactId
+      );
+  if (!generation) {
+    throw new Error(
+      "GENERATION_STATE_MISSING"
+    );
+  }
+  if (
+    generation.workflowRequirement !==
+      "PROCESS_PLEADING_FINAL"
+  ) {
+    return;
+  }
+  if (!options.processWorkflowStore) {
+    throw new Error(
+      "PROCESS_PLEADING_STATE_SERVICE_UNAVAILABLE"
+    );
+  }
+  const processState =
+    await options
+      .processWorkflowStore
+      .getProcessPleadingState({
+        caseId: args.caseId,
+        caseDataKey:
+          args.caseDataKey,
+        keyVersion:
+          args.keyVersion
+      });
+  if (
+    !processState ||
+    processState.stage !== "FINAL" ||
+    processState.documentStatus !==
+      "FINAL" ||
+    processState.pendingCheckpoint !==
+      null
+  ) {
+    throw new Error(
+      "PROCESS_PLEADING_FINAL_REQUIRED"
+    );
+  }
 }
 
 function previewSessionWorkflow(
