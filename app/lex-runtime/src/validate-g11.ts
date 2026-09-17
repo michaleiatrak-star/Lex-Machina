@@ -8,6 +8,20 @@ import {
 } from "./skill-contract-matrix.js";
 import { ProviderGateway, ProviderRegistry } from "./providers/gateway.js";
 import { ScriptedProviderAdapter } from "./providers/scripted-provider.js";
+import {
+  parseSkillSelectionEnvelope,
+  resolveAdditionalSkills
+} from "./skill-selection.js";
+import {
+  createDeterministicWorkflowPlan
+} from "./deterministic-workflow.js";
+import {
+  acceptProcessPleadingStart,
+  createProcessPleadingState
+} from "./process-pleading-state.js";
+import {
+  requireProcessExecutionPermit
+} from "./process-pleading-execution-gate.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(here, "../../..");
@@ -37,15 +51,79 @@ if (declarationIssues.length === 0 && matrix.result === "PASS") {
 
   for (const skill of EXPECTED_DR_SKILLS) {
     try {
+      const query =
+        `G11 technical routing contract for ${skill}; no legal analysis.`;
+      const envelope =
+        parseSkillSelectionEnvelope(query);
+      const selection =
+        resolveAdditionalSkills(
+          registry,
+          envelope.query.trim(),
+          skill,
+          envelope.automatic,
+          envelope.manualSkills
+        );
+      const workflow =
+        createDeterministicWorkflowPlan(
+          registry,
+          selection.workflowExecutionSkill
+        );
+
+      let processWorkflowContext:
+        | {
+            stage:
+              "W1" |
+              "PRE_W2" |
+              "W2" |
+              "W3";
+            checkpoint:
+              import("./process-pleading-state.js")
+                .ProcessPleadingCheckpoint;
+            mode:
+              import("./process-pleading-state.js")
+                .ProcessPleadingMode;
+          }
+        | undefined;
+
+      if (
+        workflow.id ===
+          "PROCESS_PLEADING_V1"
+      ) {
+        const state =
+          acceptProcessPleadingStart(
+            createProcessPleadingState(
+              "case_" + "0".repeat(32),
+              "CHECKPOINT",
+              "2026-01-01T00:00:00.000Z"
+            ),
+            "2026-01-01T00:00:01.000Z"
+          );
+        const permit =
+          requireProcessExecutionPermit(
+            state
+          );
+        processWorkflowContext = {
+          stage: permit.stage,
+          checkpoint:
+            permit.checkpoint,
+          mode: permit.mode
+        };
+      }
+
       const result = await engine.executePolishLegalQuery({
-        query: `G11 technical routing contract for ${skill}; no legal analysis.`,
+        query,
         provider: "openai",
         model: "g11-contract-model",
         route: {
           jurisdiction: "PL",
           primarySkill: skill,
           mode: "PRAWNIK"
-        }
+        },
+        ...(processWorkflowContext
+          ? {
+              processWorkflowContext
+            }
+          : {})
       });
       const finalGate = result.events.at(-1)?.target;
       routeResults.push({
