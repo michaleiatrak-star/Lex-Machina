@@ -17,30 +17,41 @@ const STOP_WORDS = new Set([
   "with"
 ]);
 
-let caseTypeExecutionSkill = "";
+let caseTypeExecutionSkills: string[] = [];
 
+function safeExecutionSkillNames(names: readonly string[]): string[] {
+  return [
+    ...new Set(
+      names
+        .map((name) => name.trim())
+        .filter((name) =>
+          Boolean(name) &&
+          name !== AUTO_CASE_TYPE &&
+          name !== "prawny-router-v3" &&
+          name !== "shared" &&
+          name !== "prawo-polskie-v2" &&
+          !name.startsWith("dr-") &&
+          /^[a-z0-9][a-z0-9._-]{1,159}$/i.test(name)
+        )
+    )
+  ].slice(0, 8);
+}
+
+export function setCaseTypeExecutionSkills(names: readonly string[]): void {
+  caseTypeExecutionSkills = safeExecutionSkillNames(names);
+}
+
+export function getCaseTypeExecutionSkills(): string[] {
+  return [...caseTypeExecutionSkills];
+}
+
+// Compatibility aliases for older callers/tests. New UI uses the plural API.
 export function setCaseTypeExecutionSkill(name: string): void {
-  const normalized = name.trim();
-  if (
-    !normalized ||
-    normalized === AUTO_CASE_TYPE ||
-    normalized === "prawny-router-v3" ||
-    normalized === "shared" ||
-    normalized === "prawo-polskie-v2" ||
-    normalized.startsWith("dr-")
-  ) {
-    caseTypeExecutionSkill = "";
-    return;
-  }
-  if (!/^[a-z0-9][a-z0-9._-]{1,159}$/i.test(normalized)) {
-    caseTypeExecutionSkill = "";
-    return;
-  }
-  caseTypeExecutionSkill = normalized;
+  setCaseTypeExecutionSkills(name ? [name] : []);
 }
 
 export function getCaseTypeExecutionSkill(): string {
-  return caseTypeExecutionSkill;
+  return caseTypeExecutionSkills[0] ?? "";
 }
 
 function normalize(value: string): string {
@@ -102,11 +113,11 @@ export function buildSkillSelectionEnvelope(
   automatic: boolean,
   manualSkills: readonly string[]
 ): string {
-  const forcedExecutionSkill = getCaseTypeExecutionSkill();
+  const prioritizedExecutionSkills = getCaseTypeExecutionSkills();
   const manual = [
     ...new Set([
       ...manualSkills,
-      ...(forcedExecutionSkill ? [forcedExecutionSkill] : [])
+      ...prioritizedExecutionSkills
     ])
   ]
     .filter((name) =>
@@ -116,15 +127,21 @@ export function buildSkillSelectionEnvelope(
     )
     .slice(0, 16);
 
+  // AUTO is always genuinely automatic. When execution skills are explicitly
+  // prioritized, the user's Auto-skills switch still controls whether the
+  // router may add further cooperating skills and additional DR domains.
   const effectiveAutomatic =
-    forcedExecutionSkill.length === 0
+    prioritizedExecutionSkills.length === 0
       ? true
       : automatic;
 
   return `${SKILL_SELECTION_ENVELOPE_PREFIX} ${JSON.stringify({
     auto: effectiveAutomatic,
     manual,
-    caseType: forcedExecutionSkill || AUTO_CASE_TYPE
+    caseType:
+      prioritizedExecutionSkills.length > 0
+        ? prioritizedExecutionSkills
+        : AUTO_CASE_TYPE
   })}\n${query}`;
 }
 
