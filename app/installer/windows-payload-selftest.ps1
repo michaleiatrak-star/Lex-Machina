@@ -31,6 +31,10 @@ $documentWorker = Require-File "storage\legal_document_worker.py"
 $corpus = Require-Dir "corpus"
 $paddle = Require-Dir "models\paddle\official_models"
 $stanza = Require-Dir "models\stanza"
+$pythonSelftest = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "windows-payload-python-selftest.py"
+if (-not (Test-Path -LiteralPath $pythonSelftest -PathType Leaf)) {
+  throw "SELFTEST_PYTHON_HELPER_MISSING"
+}
 
 & $sidecar --self-test | Out-Host
 if ($LASTEXITCODE -ne 0) {
@@ -40,29 +44,16 @@ if ($LASTEXITCODE -ne 0) {
 & $node --version | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_NODE_FAILED" }
 
-$pythonCoreCode = @'
-import sys
-import fitz, numpy, PIL
-print("PYTHON_CORE_IMPORTS_PASS", sys.version)
-'@
-& $python -c $pythonCoreCode | Out-Host
+& $python $pythonSelftest core | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_PYTHON_CORE_IMPORT_FAILED" }
 
 # Keep native ML stacks in separate interpreter processes. Paddle/PaddleX and
 # Torch load independent native DLL graphs on Windows; production OCR and NER
 # workers are separate processes as well.
-$pythonOcrCode = @'
-from paddleocr import PaddleOCR
-print("PYTHON_OCR_IMPORT_PASS")
-'@
-& $python -c $pythonOcrCode | Out-Host
+& $python $pythonSelftest ocr-import | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_PYTHON_OCR_IMPORT_FAILED" }
 
-$pythonNerCode = @'
-import stanza, torch
-print("PYTHON_NER_IMPORT_PASS", torch.__version__)
-'@
-& $python -c $pythonNerCode | Out-Host
+& $python $pythonSelftest ner-import | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_PYTHON_NER_IMPORT_FAILED" }
 
 $requiredPaddle = @(
@@ -132,15 +123,7 @@ try {
   Write-Host "Self-test: actual local OCR inference"
   $image = Join-Path $temp "ocr.png"
   $ocrOut = Join-Path $temp "ocr.json"
-  $makeImage = @'
-from PIL import Image, ImageDraw
-import sys
-im = Image.new("RGB", (720, 180), "white")
-d = ImageDraw.Draw(im)
-d.text((30, 60), "LEX MACHINA TEST 123", fill="black")
-im.save(sys.argv[1])
-'@
-  & $python -c $makeImage $image
+  & $python $pythonSelftest make-ocr-fixture $image
   if ($LASTEXITCODE -ne 0) { throw "SELFTEST_OCR_FIXTURE_FAILED" }
   & $python $ocrWorker --input $image --output $ocrOut --pages 1 --mode image --device cpu
   if ($LASTEXITCODE -ne 0) { throw "SELFTEST_OCR_INFERENCE_FAILED" }
