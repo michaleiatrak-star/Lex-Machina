@@ -53,6 +53,7 @@ New-Item $bootstrap -ItemType Directory | Out-Null
 foreach ($file in @(
   "windows-online-bootstrap.ps1",
   "windows-offline-bundle-install.ps1",
+  "app-update-transaction.ps1",
   "install-local-llm.ps1",
   "get-install-state.ps1",
   "installer-state-machine-selftest.ps1",
@@ -83,6 +84,7 @@ foreach ($required in @(
   "release-requirements.txt",
   "bootstrap\windows-online-bootstrap.ps1",
   "bootstrap\windows-offline-bundle-install.ps1",
+  "bootstrap\app-update-transaction.ps1",
   "bootstrap\install-local-llm.ps1",
   "bootstrap\get-install-state.ps1",
   "bootstrap\installer-state-machine-selftest.ps1",
