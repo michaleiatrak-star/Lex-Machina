@@ -47,6 +47,26 @@ fn valid_workspace_open_token(token: &str) -> bool {
     })
 }
 
+fn valid_update_receipt_token(token: &str) -> bool {
+    if token.len() < 16
+        || token.len() > 180
+        || !token.starts_with("update_")
+        || !token.ends_with(".json")
+        || token.contains('/')
+        || token.contains('\\')
+        || token.contains(':')
+        || token.contains("..")
+        || token.contains('\r')
+        || token.contains('\n')
+    {
+        return false;
+    }
+    token.bytes().all(|byte| {
+        byte.is_ascii_alphanumeric()
+            || matches!(byte, b'_' | b'-' | b'.')
+    })
+}
+
 fn authorized_workspace_open_path(token: &str) -> Result<PathBuf, String> {
     if !valid_workspace_open_token(token) {
         return Err("WORKSPACE_OPEN_TOKEN_INVALID".to_string());
@@ -128,6 +148,86 @@ fn open_workspace_file(token: String) -> Result<(), String> {
     launch_default_handler(&target)
 }
 
+#[tauri::command]
+fn install_application_update(
+    app: tauri::AppHandle,
+    receipt_token: String,
+) -> Result<(), String> {
+    #[cfg(not(target_os = "windows"))]
+    {
+        let _ = app;
+        let _ = receipt_token;
+        return Err("APPLICATION_UPDATE_PLATFORM_UNSUPPORTED".to_string());
+    }
+
+    #[cfg(target_os = "windows")]
+    {
+        if !valid_update_receipt_token(&receipt_token) {
+            return Err("APPLICATION_UPDATE_RECEIPT_TOKEN_INVALID".to_string());
+        }
+
+        let resource_dir = app
+            .path()
+            .resource_dir()
+            .map_err(|_| "APPLICATION_UPDATE_RESOURCE_DIR_MISSING".to_string())?;
+        let runtime_root = resource_dir.join("runtime");
+        let runner = runtime_root
+            .join("bootstrap")
+            .join("app-update-transaction.ps1");
+        if !runner.is_file() {
+            return Err("APPLICATION_UPDATE_RUNNER_MISSING".to_string());
+        }
+
+        let receipt = env::temp_dir()
+            .join("LexMachinaUpdate")
+            .join(&receipt_token);
+        if !receipt.is_file() {
+            return Err("APPLICATION_UPDATE_RECEIPT_MISSING".to_string());
+        }
+
+        let executable = env::current_exe()
+            .map_err(|_| "APPLICATION_UPDATE_EXECUTABLE_MISSING".to_string())?;
+        let install_root = executable
+            .parent()
+            .map(Path::to_path_buf)
+            .ok_or_else(|| "APPLICATION_UPDATE_INSTALL_ROOT_MISSING".to_string())?;
+        let powershell = env::var_os("SystemRoot")
+            .map(PathBuf::from)
+            .map(|root| {
+                root.join("System32")
+                    .join("WindowsPowerShell")
+                    .join("v1.0")
+                    .join("powershell.exe")
+            })
+            .unwrap_or_else(|| PathBuf::from("powershell.exe"));
+
+        Command::new(powershell)
+            .arg("-NoProfile")
+            .arg("-NonInteractive")
+            .arg("-ExecutionPolicy")
+            .arg("Bypass")
+            .arg("-WindowStyle")
+            .arg("Hidden")
+            .arg("-File")
+            .arg(&runner)
+            .arg("-ReceiptPath")
+            .arg(&receipt)
+            .arg("-RuntimeRoot")
+            .arg(&runtime_root)
+            .arg("-InstallRoot")
+            .arg(&install_root)
+            .arg("-AppExecutable")
+            .arg(&executable)
+            .arg("-ParentPid")
+            .arg(std::process::id().to_string())
+            .spawn()
+            .map_err(|error| format!("APPLICATION_UPDATE_RUNNER_START_FAILED:{error}"))?;
+
+        app.exit(0);
+        Ok(())
+    }
+}
+
 pub fn run() {
     let bridge = Arc::new(
         RuntimeBridge::new()
@@ -140,7 +240,8 @@ pub fn run() {
         .invoke_handler(
             tauri::generate_handler![
                 open_external_url,
-                open_workspace_file
+                open_workspace_file,
+                install_application_update
             ]
         )
         .register_asynchronous_uri_scheme_protocol(
@@ -173,6 +274,7 @@ pub fn run() {
 mod tests {
     use super::{
         is_allowed_external_url,
+        valid_update_receipt_token,
         valid_workspace_open_token,
     };
 
@@ -199,5 +301,16 @@ mod tests {
         assert!(!valid_workspace_open_token(
             "open_0123456789abcdef0123456789abcdef.PDF"
         ));
+    }
+
+    #[test]
+    fn update_receipt_token_cannot_escape_staging_root() {
+        assert!(valid_update_receipt_token(
+            "update_0-1-4_0123456789abcdef.json"
+        ));
+        assert!(!valid_update_receipt_token("../update.json"));
+        assert!(!valid_update_receipt_token("update_a/b.json"));
+        assert!(!valid_update_receipt_token("update_a\\b.json"));
+        assert!(!valid_update_receipt_token("receipt.json"));
     }
 }
