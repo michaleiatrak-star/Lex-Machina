@@ -11,6 +11,12 @@ $payload = Join-Path $tauri "runtime"
 
 if ($env:OS -ne "Windows_NT") { throw "Windows online bootstrap payload must be built on Windows." }
 
+$iconBuilder = Join-Path $installer "prepare-windows-icon.ps1"
+if (-not (Test-Path -LiteralPath $iconBuilder -PathType Leaf)) {
+  throw "WINDOWS_ICON_BUILDER_MISSING:$iconBuilder"
+}
+& $iconBuilder -OutputPath (Join-Path $tauri "icons\icon.ico")
+
 Remove-Item $payload -Recurse -Force -ErrorAction SilentlyContinue
 New-Item $payload -ItemType Directory | Out-Null
 
@@ -47,6 +53,8 @@ Copy-Item (Join-Path $installer "windows-release-requirements.txt") (Join-Path $
 $bootstrap = Join-Path $payload "bootstrap"
 New-Item $bootstrap -ItemType Directory | Out-Null
 foreach ($file in @(
+  "windows-online-bootstrap-entry.ps1",
+  "windows-online-python-embedded.ps1",
   "windows-online-bootstrap.ps1",
   "windows-offline-bundle-install.ps1",
   "prefetch-release-models.py",
@@ -74,6 +82,8 @@ foreach ($required in @(
   "lex-runtime-sidecar.exe",
   "release-source.json",
   "release-requirements.txt",
+  "bootstrap\windows-online-bootstrap-entry.ps1",
+  "bootstrap\windows-online-python-embedded.ps1",
   "bootstrap\windows-online-bootstrap.ps1",
   "bootstrap\windows-offline-bundle-install.ps1",
   "bootstrap\verify-python-package-set.py",

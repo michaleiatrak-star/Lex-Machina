@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: lex-installer-${{ github.event.pull_request.number || github.ref }}
@@ -130,3 +130,31 @@ jobs:
             app/lex-desktop/src-tauri/runtime/npm-dependency-tree.json
           if-no-files-found: error
           retention-days: 7
+
+      - name: Publish accepted online hotfix to v0.1.0
+        if: github.event_name == 'pull_request' && github.head_ref == 'codex/hotfix-offline-lock-icon-2026-09-17'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $installer = Get-ChildItem "app\lex-desktop\src-tauri\target\release\bundle\nsis\*.exe" |
+            Sort-Object LastWriteTime -Descending |
+            Select-Object -First 1
+          if (-not $installer) { throw "RELEASE_ONLINE_INSTALLER_NOT_FOUND" }
+
+          $releaseDir = Join-Path $env:RUNNER_TEMP "lex-release-online"
+          Remove-Item -LiteralPath $releaseDir -Recurse -Force -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Force -Path $releaseDir | Out-Null
+
+          $releaseInstaller = Join-Path $releaseDir "Lex-Machina-0.1.0-Online-x64-Setup.exe"
+          Copy-Item -LiteralPath $installer.FullName -Destination $releaseInstaller -Force
+          $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $releaseInstaller).Hash.ToLowerInvariant()
+          $shaFile = Join-Path $releaseDir "SHA256-ONLINE.txt"
+          "$hash  Lex-Machina-0.1.0-Online-x64-Setup.exe" | Set-Content -LiteralPath $shaFile -Encoding ascii
+
+          $headFile = Join-Path $releaseDir "ONLINE-HOTFIX-HEAD.txt"
+          "${{ github.event.pull_request.head.sha }}" | Set-Content -LiteralPath $headFile -Encoding ascii
+
+          gh release upload v0.1.0 $releaseInstaller $shaFile $headFile --clobber --repo "${{ github.repository }}"
+          if ($LASTEXITCODE -ne 0) { throw "RELEASE_ONLINE_UPLOAD_FAILED:$LASTEXITCODE" }
+          Write-Host "RELEASE_ONLINE_ASSET_PUBLISHED sha256=$hash"

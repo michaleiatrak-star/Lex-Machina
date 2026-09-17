@@ -18,6 +18,35 @@ function Assert-Sha256([string]$Path, [string]$Expected, [string]$Label) {
   Write-Host "Verified $Label SHA-256: $actual"
 }
 
+function Remove-TransientPythonCaches([string]$PythonRoot) {
+  if (-not (Test-Path -LiteralPath $PythonRoot -PathType Container)) { return }
+
+  $cacheDirs = @(
+    Get-ChildItem -LiteralPath $PythonRoot -Directory -Recurse -Force -ErrorAction SilentlyContinue |
+      Where-Object { $_.Name -eq "__pycache__" } |
+      Sort-Object { $_.FullName.Length } -Descending
+  )
+  foreach ($dir in $cacheDirs) {
+    Remove-Item -LiteralPath $dir.FullName -Recurse -Force -ErrorAction SilentlyContinue
+  }
+
+  Get-ChildItem -LiteralPath $PythonRoot -File -Recurse -Force -ErrorAction SilentlyContinue |
+    Where-Object { $_.Extension -in @(".pyc", ".pyo") } |
+    Remove-Item -Force -ErrorAction SilentlyContinue
+
+  $remaining = @(
+    Get-ChildItem -LiteralPath $PythonRoot -File -Recurse -Force -ErrorAction SilentlyContinue |
+      Where-Object {
+        $_.Extension -in @(".pyc", ".pyo") -or
+        $_.FullName -match '[\\/]__pycache__[\\/]'
+      }
+  )
+  if ($remaining.Count -ne 0) {
+    throw "TRANSIENT_PYTHON_CACHE_CLEANUP_FAILED:$($remaining[0].FullName)"
+  }
+  Write-Host "Transient Python bytecode caches removed before offline lock/archive"
+}
+
 if ($env:OS -ne "Windows_NT") { throw "Windows offline payload must be built on Windows." }
 
 Remove-Item $payload -Recurse -Force -ErrorAction SilentlyContinue
@@ -70,8 +99,9 @@ $pythonInstaller = Join-Path $cache "python-$($sourceLock.runtime.python.version
 Invoke-WebRequest -UseBasicParsing -Uri $sourceLock.runtime.python.url -OutFile $pythonInstaller
 Assert-Sha256 $pythonInstaller $sourceLock.runtime.python.sha256 "python-runtime-source"
 $pythonDir = Join-Path $payload "python"
+$pythonTargetArgument = 'TargetDir="{0}"' -f $pythonDir
 $args = @(
-  "/quiet", "InstallAllUsers=0", "TargetDir=$pythonDir", "Include_launcher=0",
+  "/quiet", "InstallAllUsers=0", $pythonTargetArgument, "Include_launcher=0",
   "Include_test=0", "Include_doc=0", "Include_tcltk=0", "Include_tools=0",
   "Include_pip=1", "PrependPath=0", "Shortcuts=0"
 )
@@ -120,10 +150,20 @@ $sidecar = Join-Path $tauri "target\release\lex-runtime-sidecar.exe"
 if (-not (Test-Path $sidecar)) { throw "Built runtime sidecar not found" }
 Copy-Item $sidecar (Join-Path $payload "lex-runtime-sidecar.exe")
 
+Remove-TransientPythonCaches $pythonDir
+
 Write-Host "[9/10] Generate immutable component lock"
 $lock = Join-Path $payload "component-lock.json"
 & (Join-Path $installer "generate-component-lock.ps1") -PayloadRoot $payload -Output $lock
 if ($LASTEXITCODE -ne 0) { throw "Component lock failed" }
+
+$lockCheck = Get-Content -Raw -LiteralPath $lock | ConvertFrom-Json
+$transientEntries = @($lockCheck.files | Where-Object {
+  $_.path -match '(^|/)__pycache__(/|$)' -or $_.path -match '\.py[co]$'
+})
+if ($transientEntries.Count -ne 0) {
+  throw "OFFLINE_LOCK_CONTAINS_TRANSIENT_PYTHON_CACHE:$($transientEntries[0].path)"
+}
 
 Write-Host "[10/10] Offline self-test"
 & (Join-Path $installer "windows-payload-selftest.ps1") -PayloadRoot $payload

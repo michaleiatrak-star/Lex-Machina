@@ -106,7 +106,7 @@ const checks = {
     ),
   externalizedRuntimeAvoidsNsisLimit:
     workflow.includes(
-      "Stage external offline runtime bundle"
+      "Stage and verify external offline runtime bundle"
     ) &&
     workflow.includes(
       "Rebuild thin installer payload"
@@ -115,7 +115,16 @@ const checks = {
       "LexMachina-Offline-Runtime.zip"
     ) &&
     workflow.includes(
+      "robocopy.exe $runtime $archiveSource"
+    ) &&
+    workflow.includes(
       "tar.exe -a -c -f"
+    ) &&
+    workflow.includes(
+      "OFFLINE_RUNTIME_ARCHIVE_LOCK_PASS"
+    ) &&
+    workflow.includes(
+      "OFFLINE_RUNTIME_ARCHIVE_LOCK_FILE_MISSING"
     ) &&
     workflow.includes(
       "Build standalone offline EXE"

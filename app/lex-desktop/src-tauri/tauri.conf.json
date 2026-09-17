@@ -32,7 +32,9 @@
     "targets": [
       "nsis"
     ],
-    "icon": [],
+    "icon": [
+      "icons/icon.ico"
+    ],
     "windows": {
       "webviewInstallMode": {
         "type": "downloadBootstrapper",
@@ -44,7 +46,9 @@
           "Polish",
           "English"
         ],
-        "installerHooks": "./windows/hooks.nsh"
+        "installerHooks": "./windows/hooks.nsh",
+        "installerIcon": "icons/icon.ico",
+        "uninstallerIcon": "icons/icon.ico"
       }
     },
     "resources": [

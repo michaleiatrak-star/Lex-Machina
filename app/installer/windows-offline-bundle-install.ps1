@@ -71,7 +71,10 @@ if ($actualHash -ne $receipt.sha256.ToLowerInvariant()) {
   throw "OFFLINE_BUNDLE_HASH_MISMATCH:expected=$($receipt.sha256) actual=$actualHash"
 }
 
-$stage = Join-Path $env:TEMP ("LexMachinaOfflineRuntime-" + [Guid]::NewGuid().ToString("N"))
+# Keep the extraction leaf deliberately short. Windows PowerShell 5.1 and some
+# archive/file APIs still encounter MAX_PATH behavior when the user's TEMP path
+# is already long and the Python package tree contains deep __pycache__ paths.
+$stage = Join-Path $env:TEMP ("LMO-" + [Guid]::NewGuid().ToString("N").Substring(0, 12))
 New-Item -ItemType Directory -Path $stage | Out-Null
 $vcFirewallRule = $null
 
@@ -97,6 +100,13 @@ try {
   }
   if ($lock.runtimeNetworkRequiredAfterBootstrap -ne $false) {
     throw "OFFLINE_BUNDLE_RUNTIME_NETWORK_POLICY_INVALID"
+  }
+
+  $transientEntries = @($lock.files | Where-Object {
+    $_.path -match '(^|/)__pycache__(/|$)' -or $_.path -match '\.py[co]$'
+  })
+  if ($transientEntries.Count -ne 0) {
+    throw "OFFLINE_BUNDLE_LOCK_TRANSIENT_FILE_INVALID:$($transientEntries[0].path)"
   }
 
   Write-Host "Verifying component-lock before installation"

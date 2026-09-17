@@ -16,7 +16,7 @@ on:
       - ".github/workflows/offline-windows-installer.yml"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: offline-windows-installer-${{ github.event.pull_request.number || github.ref }}
@@ -69,24 +69,65 @@ jobs:
         working-directory: app/lex-desktop
         run: cargo test --manifest-path src-tauri/Cargo.toml
 
-      - name: Stage external offline runtime bundle
+      - name: Stage and verify external offline runtime bundle
         id: runtime_bundle
         shell: pwsh
         run: |
           $bundleDir = Join-Path $env:RUNNER_TEMP "lex-offline-bundle"
-          New-Item -ItemType Directory -Force -Path $bundleDir | Out-Null
-          $runtime = (Resolve-Path "app/lex-desktop/src-tauri/runtime").Path
-          $bundle = Join-Path $bundleDir "LexMachina-Offline-Runtime.zip"
-          Remove-Item -LiteralPath $bundle -Force -ErrorAction SilentlyContinue
-
-          & tar.exe -a -c -f $bundle -C $runtime .
-          if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $bundle -PathType Leaf)) {
-            throw "OFFLINE_RUNTIME_ARCHIVE_FAILED"
+          $archiveSource = Join-Path $env:RUNNER_TEMP "lex-offline-archive-source"
+          $verifyRoot = Join-Path $env:RUNNER_TEMP "lex-offline-archive-verify"
+          foreach ($path in @($bundleDir, $archiveSource, $verifyRoot)) {
+            Remove-Item -LiteralPath $path -Recurse -Force -ErrorAction SilentlyContinue
+            New-Item -ItemType Directory -Force -Path $path | Out-Null
           }
+
+          $runtime = (Resolve-Path "app/lex-desktop/src-tauri/runtime").Path
+          $lockPath = Join-Path $runtime "component-lock.json"
+          if (-not (Test-Path -LiteralPath $lockPath -PathType Leaf)) {
+            throw "OFFLINE_RUNTIME_COMPONENT_LOCK_MISSING"
+          }
+
+          # Materialize a fresh copy before archiving. Some Python wheels contain
+          # file/link metadata that can confuse bsdtar's self-archive detection.
+          $null = robocopy.exe $runtime $archiveSource /E /COPY:DAT /DCOPY:DAT /R:1 /W:1 /NFL /NDL /NJH /NJS /NP
+          $copyCode = $LASTEXITCODE
+          if ($copyCode -gt 7) {
+            throw "OFFLINE_ARCHIVE_SOURCE_COPY_FAILED:$copyCode"
+          }
+
+          $bundle = Join-Path $bundleDir "LexMachina-Offline-Runtime.zip"
+          & tar.exe -a -c -f $bundle -C $archiveSource .
+          if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $bundle -PathType Leaf)) {
+            throw "OFFLINE_RUNTIME_ARCHIVE_FAILED:$LASTEXITCODE"
+          }
+
+          # Fail closed before building the standalone wrapper: extract the exact
+          # ZIP that will ship and verify every immutable component-lock entry.
+          & tar.exe -xf $bundle -C $verifyRoot
+          if ($LASTEXITCODE -ne 0) {
+            throw "OFFLINE_RUNTIME_ARCHIVE_VERIFY_EXTRACT_FAILED:$LASTEXITCODE"
+          }
+          $lock = Get-Content -Raw -LiteralPath $lockPath | ConvertFrom-Json
+          $verifiedCount = 0
+          foreach ($entry in $lock.files) {
+            $candidate = Join-Path $verifyRoot ($entry.path -replace '/','\')
+            if (-not (Test-Path -LiteralPath $candidate -PathType Leaf)) {
+              throw "OFFLINE_RUNTIME_ARCHIVE_LOCK_FILE_MISSING:$($entry.path)"
+            }
+            $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $candidate).Hash.ToLowerInvariant()
+            if ($actual -ne $entry.sha256.ToLowerInvariant()) {
+              throw "OFFLINE_RUNTIME_ARCHIVE_LOCK_HASH_MISMATCH:$($entry.path)"
+            }
+            $verifiedCount++
+          }
+          if ($verifiedCount -ne @($lock.files).Count) {
+            throw "OFFLINE_RUNTIME_ARCHIVE_VERIFY_COUNT_MISMATCH"
+          }
+          Write-Host "OFFLINE_RUNTIME_ARCHIVE_LOCK_PASS:$verifiedCount"
 
           $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $bundle).Hash.ToLowerInvariant()
           $bytes = (Get-Item -LiteralPath $bundle).Length
-          Copy-Item -LiteralPath (Join-Path $runtime "component-lock.json") -Destination (Join-Path $bundleDir "component-lock-offline.json")
+          Copy-Item -LiteralPath $lockPath -Destination (Join-Path $bundleDir "component-lock-offline.json")
 
           "bundle=$bundle" >> $env:GITHUB_OUTPUT
           "sha256=$hash" >> $env:GITHUB_OUTPUT
@@ -181,6 +222,7 @@ jobs:
             -InstallerPath "${{ steps.locate.outputs.installer }}" `
             -RuntimeBundlePath "${{ steps.locate.outputs.bundle }}" `
             -ComponentLockPath "${{ steps.locate.outputs.lock }}" `
+            -IconPath "app/lex-desktop/src-tauri/icons/icon.ico" `
             -OutputPath $output
 
           $resolved = (Resolve-Path -LiteralPath $output).Path
@@ -242,3 +284,90 @@ jobs:
           if-no-files-found: error
           compression-level: 0
           retention-days: 14
+
+      - name: Publish accepted offline hotfix and refresh v0.1.0
+        if: github.event_name == 'pull_request' && github.head_ref == 'codex/hotfix-offline-lock-icon-2026-09-17'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $repo = "${{ github.repository }}"
+          $headSha = "${{ github.event.pull_request.head.sha }}"
+          $releaseDir = Join-Path $env:RUNNER_TEMP "lex-release-final"
+          Remove-Item -LiteralPath $releaseDir -Recurse -Force -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Force -Path $releaseDir | Out-Null
+
+          $marker = Join-Path $releaseDir "ONLINE-HOTFIX-HEAD.txt"
+          $onlineReady = $false
+          for ($attempt = 1; $attempt -le 80; $attempt++) {
+            Remove-Item -LiteralPath $marker -Force -ErrorAction SilentlyContinue
+            gh release download v0.1.0 --pattern "ONLINE-HOTFIX-HEAD.txt" --dir $releaseDir --clobber --repo $repo 2>$null
+            if ($LASTEXITCODE -eq 0 -and (Test-Path -LiteralPath $marker -PathType Leaf)) {
+              $publishedHead = (Get-Content -Raw -LiteralPath $marker).Trim()
+              if ($publishedHead -eq $headSha) {
+                $onlineReady = $true
+                break
+              }
+              Write-Host "Online release marker is for $publishedHead; waiting for $headSha."
+            } else {
+              Write-Host "Online release marker not available yet; waiting."
+            }
+            Start-Sleep -Seconds 15
+          }
+          if (-not $onlineReady) {
+            throw "RELEASE_ONLINE_ASSET_NOT_READY_FOR_HEAD:$headSha"
+          }
+
+          gh release download v0.1.0 --pattern "Lex-Machina-0.1.0-Online-x64-Setup.exe" --dir $releaseDir --clobber --repo $repo
+          if ($LASTEXITCODE -ne 0) { throw "RELEASE_ONLINE_DOWNLOAD_FAILED:$LASTEXITCODE" }
+          $onlineInstaller = Join-Path $releaseDir "Lex-Machina-0.1.0-Online-x64-Setup.exe"
+          if (-not (Test-Path -LiteralPath $onlineInstaller -PathType Leaf)) {
+            throw "RELEASE_ONLINE_FILE_MISSING"
+          }
+
+          $offlineInstaller = Join-Path $releaseDir "Lex-Machina-0.1.0-Offline-x64-Setup.exe"
+          Copy-Item -LiteralPath "${{ steps.standalone.outputs.installer }}" -Destination $offlineInstaller -Force
+          $onlineHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $onlineInstaller).Hash.ToLowerInvariant()
+          $offlineHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $offlineInstaller).Hash.ToLowerInvariant()
+
+          $shaFile = Join-Path $releaseDir "SHA256SUMS.txt"
+          [IO.File]::WriteAllLines($shaFile, @(
+            "$onlineHash  Lex-Machina-0.1.0-Online-x64-Setup.exe",
+            "$offlineHash  Lex-Machina-0.1.0-Offline-x64-Setup.exe"
+          ), [Text.ASCIIEncoding]::new())
+
+          $offlineReceipt = "app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/SHA256-OFFLINE.txt"
+          $offlineHead = Join-Path $releaseDir "OFFLINE-HOTFIX-HEAD.txt"
+          $headSha | Set-Content -LiteralPath $offlineHead -Encoding ascii
+
+          gh release upload v0.1.0 $offlineInstaller $offlineReceipt $shaFile $offlineHead --clobber --repo $repo
+          if ($LASTEXITCODE -ne 0) { throw "RELEASE_OFFLINE_UPLOAD_FAILED:$LASTEXITCODE" }
+
+          $notesFile = Join-Path $releaseDir "RELEASE-NOTES.md"
+          $notes = @"
+# Lex Machina v0.1.0
+
+Windows x64 hotfix release with refreshed online and offline installers.
+
+## Installer fixes
+
+- Online bootstrap uses the accepted private-Python path/runtime fixes and is tested on paths containing spaces and Polish Unicode characters.
+- Offline payload generation removes transient Python bytecode cache entries, rejects them from component locking, and uses shorter extraction staging paths to avoid Windows path-length failures.
+- The Lex Machina application icon is explicitly used for the application EXE, NSIS installers and uninstaller; the standalone offline wrapper is compiled with the same icon. Installed shortcuts resolve to the branded application executable.
+
+## Accepted hotfix source
+
+`$headSha`
+
+## Checksums
+
+- Online SHA-256: `$onlineHash`
+- Offline SHA-256: `$offlineHash`
+
+`SHA256SUMS.txt` contains the canonical checksums for both published installers.
+"@
+          [IO.File]::WriteAllText($notesFile, $notes, [Text.UTF8Encoding]::new($false))
+          gh release edit v0.1.0 --notes-file $notesFile --repo $repo
+          if ($LASTEXITCODE -ne 0) { throw "RELEASE_NOTES_UPDATE_FAILED:$LASTEXITCODE" }
+
+          Write-Host "RELEASE_REFRESH_PASS head=$headSha online=$onlineHash offline=$offlineHash"
