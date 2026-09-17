@@ -264,24 +264,55 @@ export class LocalModelRuntime {
 
     await this.stop();
     fs.mkdirSync(this.rootDir, { recursive: true });
+    const configPath = this.configPath();
+    const previousConfig = fs.existsSync(configPath)
+      ? fs.readFileSync(configPath)
+      : null;
+    const restorePreviousConfig = () => {
+      if (previousConfig) {
+        fs.writeFileSync(configPath, previousConfig);
+      } else {
+        fs.rmSync(configPath, { force: true });
+      }
+    };
+
     const task = this.runProvisioner(canonical, contextTokens);
     this.provisioning = task;
     try {
       await task;
+
+      const config = this.readConfig();
+      if (!config || normalizeModelId(config.model.id) !== canonical) {
+        throw new Error("LOCAL_MODEL_PROVISIONING_CONFIG_MISSING");
+      }
+      this.assertConfiguredComponents(config);
+
+      try {
+        await this.ensureRunning(canonical);
+      } catch (error) {
+        restorePreviousConfig();
+        const detail =
+          error instanceof Error
+            ? error.message
+            : String(error);
+        throw new Error(
+          `LOCAL_MODEL_RESOURCE_VALIDATION_FAILED:${detail}`
+        );
+      } finally {
+        await this.stop();
+      }
+
+      return {
+        model: this.publicDescriptor(model, config),
+        contextTokens: config.context.requestedTokens,
+        configPath
+      };
+    } catch (error) {
+      restorePreviousConfig();
+      throw error;
     } finally {
       this.provisioning = null;
     }
-
-    const config = this.readConfig();
-    if (!config || normalizeModelId(config.model.id) !== canonical) {
-      throw new Error("LOCAL_MODEL_PROVISIONING_CONFIG_MISSING");
-    }
-    this.assertConfiguredComponents(config);
-    return {
-      model: this.publicDescriptor(model, config),
-      contextTokens: config.context.requestedTokens,
-      configPath: this.configPath()
-    };
   }
 
   async ensureRunning(id: string): Promise<LocalModelDescriptor> {
