@@ -13,7 +13,7 @@ $files = Get-ChildItem -Path $root -File -Recurse |
 
 $entries = @()
 foreach ($file in $files) {
-  $relative = $file.FullName.Substring($root.Length).TrimStart('\\','/') -replace '\\\\','/'
+  $relative = $file.FullName.Substring($root.Length).TrimStart([char]92, [char]47) -replace '\\','/'
   $entries += [pscustomobject][ordered]@{
     path = $relative
     bytes = $file.Length
