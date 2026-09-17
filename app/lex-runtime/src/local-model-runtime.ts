@@ -52,6 +52,19 @@ type ReleaseManifest = {
   };
 };
 
+export type LocalContextQualification = {
+  schemaVersion: 1;
+  result: "PASS";
+  modelId: LocalModelId;
+  contextTokens: number;
+  contextMode:
+    | "NATIVE_OR_REDUCED"
+    | "YARN_EXTENDED";
+  engine: "llama.cpp";
+  startupMs: number;
+  validatedAt: string;
+};
+
 type LocalAiConfig = {
   schemaVersion: number;
   configuredAt: string;
@@ -211,6 +224,7 @@ export class LocalModelRuntime {
     state: "STOPPED" | "PROVISIONING" | "STARTING" | "READY";
     endpoint: string;
     contextPolicy: ReturnType<LocalModelRuntime["contextPolicy"]>;
+    qualification: LocalContextQualification | null;
   } {
     const config = this.readConfig();
     const enginePresent = Boolean(config && fs.existsSync(config.engine.executable));
@@ -242,7 +256,8 @@ export class LocalModelRuntime {
             ? "READY"
             : "STOPPED",
       endpoint: `http://${this.host}:${this.port}/v1`,
-      contextPolicy: this.contextPolicy()
+      contextPolicy: this.contextPolicy(),
+      qualification: this.readQualification()
     };
   }
 
@@ -288,7 +303,26 @@ export class LocalModelRuntime {
       this.assertConfiguredComponents(config);
 
       try {
+        const startupStartedAt = Date.now();
         await this.ensureRunning(canonical);
+        this.writeQualification({
+          schemaVersion: 1,
+          result: "PASS",
+          modelId: canonical,
+          contextTokens:
+            config.context.requestedTokens,
+          contextMode:
+            config.context.mode,
+          engine: "llama.cpp",
+          startupMs:
+            Math.max(
+              0,
+              Date.now() -
+                startupStartedAt
+            ),
+          validatedAt:
+            new Date().toISOString()
+        });
       } catch (error) {
         restorePreviousConfig();
         const detail =
@@ -365,6 +399,17 @@ export class LocalModelRuntime {
     if (configRemoved) {
       fs.rmSync(this.configPath(), { force: true });
     }
+    const qualification =
+      this.readQualification();
+    if (
+      qualification?.modelId ===
+        canonical
+    ) {
+      fs.rmSync(
+        this.qualificationPath(),
+        { force: true }
+      );
+    }
 
     return {
       removedModelId: canonical,
@@ -436,6 +481,84 @@ export class LocalModelRuntime {
 
   private configPath(): string {
     return path.join(this.rootDir, "config.json");
+  }
+
+  private qualificationPath(): string {
+    return path.join(
+      this.rootDir,
+      "context-qualification.json"
+    );
+  }
+
+  private readQualification():
+    LocalContextQualification | null {
+    const receipt =
+      readJson<LocalContextQualification>(
+        this.qualificationPath()
+      );
+    if (
+      !receipt ||
+      receipt.schemaVersion !== 1 ||
+      receipt.result !== "PASS" ||
+      typeof receipt.modelId !== "string" ||
+      !finiteInteger(
+        receipt.contextTokens
+      ) ||
+      ![
+        "NATIVE_OR_REDUCED",
+        "YARN_EXTENDED"
+      ].includes(
+        receipt.contextMode
+      ) ||
+      receipt.engine !==
+        "llama.cpp" ||
+      !Number.isFinite(
+        receipt.startupMs
+      ) ||
+      receipt.startupMs < 0 ||
+      typeof receipt.validatedAt !==
+        "string" ||
+      Number.isNaN(
+        Date.parse(
+          receipt.validatedAt
+        )
+      )
+    ) {
+      return null;
+    }
+    return {
+      ...receipt,
+      modelId:
+        normalizeModelId(
+          receipt.modelId
+        )
+    };
+  }
+
+  private writeQualification(
+    receipt: LocalContextQualification
+  ): void {
+    fs.mkdirSync(
+      this.rootDir,
+      { recursive: true }
+    );
+    const target =
+      this.qualificationPath();
+    const temporary =
+      `${target}.tmp`;
+    fs.writeFileSync(
+      temporary,
+      `${JSON.stringify(
+        receipt,
+        null,
+        2
+      )}\n`,
+      "utf8"
+    );
+    fs.renameSync(
+      temporary,
+      target
+    );
   }
 
   private manifest(): ReleaseManifest {
