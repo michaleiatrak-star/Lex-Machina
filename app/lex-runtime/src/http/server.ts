@@ -10,6 +10,7 @@ import { fileURLToPath } from "node:url";
 import { createLexHttpApp } from "./app.js";
 import { registerLegacyMigrationRoutes } from "./legacy-migration-routes.js";
 import { registerWorkspaceRoutes } from "./workspace-routes.js";
+import { registerMaintenanceRoutes } from "./maintenance-routes.js";
 import { LexSkillRegistry } from "../registry.js";
 import { DynamicModelCatalog } from "../providers/model-catalog.js";
 import {
@@ -21,6 +22,12 @@ import { ProviderGateway } from "../providers/gateway.js";
 import {
   GitHubReleaseUpdateDiscovery
 } from "../update-discovery.js";
+import {
+  installedSkillOverlayRoot,
+  installedSkillOverlayVersion,
+  MaintenanceService
+} from "../maintenance-service.js";
+import { LocalModelRuntime } from "../local-model-runtime.js";
 import { SafeSessionExecutor } from "../session-executor.js";
 import { LegalVerificationToolRuntime } from "../verification-tool-runtime.js";
 import { TemporalSourceFreshnessChecker } from "../temporal-source-freshness.js";
@@ -194,11 +201,20 @@ function loopbackOriginGuard(
 }
 
 export function resolveRuntimeRoot(): string {
+  const explicitlyConfigured =
+    process.env.LEX_SKILLS_PATH?.trim();
+  if (explicitlyConfigured) {
+    return path.resolve(explicitlyConfigured);
+  }
+
+  if (installedSkillOverlayVersion()) {
+    return installedSkillOverlayRoot();
+  }
+
   const here = path.dirname(fileURLToPath(import.meta.url));
   const repositoryRoot = path.resolve(here, "../../../..");
   return path.resolve(
-    process.env.LEX_SKILLS_PATH ??
-      path.join(repositoryRoot, "Wersja rozwojowa rozpakowana")
+    path.join(repositoryRoot, "Wersja rozwojowa rozpakowana")
   );
 }
 
@@ -341,11 +357,23 @@ export async function startLocalServer(options?: {
       authService
     );
 
+  const updateDiscovery =
+    new GitHubReleaseUpdateDiscovery();
+  const maintenance =
+    new MaintenanceService(
+      updateDiscovery
+    );
+  const localModels =
+    new LocalModelRuntime();
+
   const credentials =
     new MemoryOverlayCredentialResolver(
       new EnvironmentCredentialResolver()
     );
-  const providerRegistry = createLiveProviderRegistry(credentials);
+  const providerRegistry = createLiveProviderRegistry(
+    credentials,
+    localModels
+  );
   const providerGateway = new ProviderGateway(providerRegistry);
 
   const legalSourceVerifier =
@@ -394,8 +422,7 @@ export async function startLocalServer(options?: {
     modelCatalog: new DynamicModelCatalog(credentials),
     credentialResolver: credentials,
     credentialManager: credentials,
-    updateDiscovery:
-      new GitHubReleaseUpdateDiscovery(),
+    updateDiscovery,
     caseFileStore,
     secureCaseUploadStore,
     sharedTemplateStore,
@@ -447,6 +474,14 @@ export async function startLocalServer(options?: {
         caseFileStore.rootDir
     }
   );
+  registerMaintenanceRoutes(
+    app,
+    {
+      authService,
+      localModels,
+      maintenance
+    }
+  );
   app.use(coreApp);
 
   return new Promise((resolve, reject) => {
@@ -465,6 +500,7 @@ export async function startLocalServer(options?: {
         close: () =>
           new Promise<void>((closeResolve, closeReject) => {
             server.close((error) => {
+              void localModels.stop();
               credentials.close();
               supportService.close();
               authService.close();
