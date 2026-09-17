@@ -11,9 +11,20 @@ $files = Get-ChildItem -Path $root -File -Recurse |
   Where-Object { $_.FullName -ne (Join-Path $root "component-lock.json") } |
   Sort-Object FullName
 
+function Test-TransientRuntimePath([string]$RelativePath) {
+  $normalized = $RelativePath -replace '\\','/'
+  return (
+    $normalized -match '(^|/)__pycache__(/|$)' -or
+    $normalized -match '\.py[co]$'
+  )
+}
+
 $entries = @()
 foreach ($file in $files) {
   $relative = $file.FullName.Substring($root.Length).TrimStart([char]92, [char]47) -replace '\\','/'
+  if (Test-TransientRuntimePath $relative) {
+    continue
+  }
   $entries += [pscustomobject][ordered]@{
     path = $relative
     bytes = $file.Length
