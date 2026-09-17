@@ -10,7 +10,9 @@ import { DocumentCitationContent } from "./DocumentCitationContent.js";
 import { DocumentPrivacyPanel } from "./DocumentPrivacyPanel.js";
 import { FirmKnowledgePanel } from "./FirmKnowledgePanel.js";
 import { WorkspaceManager } from "./WorkspaceManager.js";
+import { ProcessPleadingWorkflowPanel } from "./ProcessPleadingWorkflowPanel.js";
 import {
+  ApiError,
   apiBase,
   archiveCase,
   clearProviderApiKey,
@@ -292,6 +294,10 @@ export default function MatterChatApp({
   const [pendingFirstMessage, setPendingFirstMessage] = useState<string | null>(null);
   const [executing, setExecuting] = useState(false);
   const [executionError, setExecutionError] = useState("");
+  const [processWorkflowVisible, setProcessWorkflowVisible] =
+    useState(false);
+  const [processWorkflowRefresh, setProcessWorkflowRefresh] =
+    useState(0);
   const {
     messages,
     setMessages,
@@ -449,6 +455,8 @@ export default function MatterChatApp({
     setCaseNameDraft(selectedCase?.displayName ?? "");
     setDeletePhrase("");
     setDeletePassword("");
+    setProcessWorkflowVisible(false);
+    setProcessWorkflowRefresh((value) => value + 1);
   }, [caseId, selectedCase?.displayName]);
 
   useEffect(() => {
@@ -627,25 +635,41 @@ export default function MatterChatApp({
         ...(documentAttachments.length > 0
           ? { attachments: documentAttachments }
           : {}),
-        ...(includeCaseKnowledge || includeFirmKnowledge
-          ? {
-              knowledge: {
-                ...(includeCaseKnowledge
-                  ? { caseId, includeCase: true }
-                  : { includeCase: false }),
-                includeFirm: includeFirmKnowledge,
-                limit: 8
-              }
-            }
-          : {})
+        knowledge: {
+          caseId,
+          includeCase: includeCaseKnowledge,
+          includeFirm: includeFirmKnowledge,
+          limit: 8
+        }
       }) as ExtendedExecution;
 
+      if (result.processWorkflow) {
+        setProcessWorkflowVisible(true);
+        setProcessWorkflowRefresh(
+          (value) => value + 1
+        );
+      }
       setMessages((current) => [
         ...current,
         executionMessage(result, route)
       ]);
     } catch (error) {
-      const code = error instanceof Error ? error.message : String(error);
+      const code =
+        error instanceof ApiError
+          ? error.code
+          : error instanceof Error
+            ? error.message
+            : String(error);
+      if (
+        code.startsWith(
+          "PROCESS_PLEADING_"
+        )
+      ) {
+        setProcessWorkflowVisible(true);
+        setProcessWorkflowRefresh(
+          (value) => value + 1
+        );
+      }
       const friendly =
         code === "PROVIDER_NOT_CONFIGURED"
           ? "Brak lokalnego klucza API dla wybranego dostawcy."
@@ -653,7 +677,19 @@ export default function MatterChatApp({
             ? "Provider odrzucił lub przerwał wykonanie."
             : code === "DOCUMENT_ATTACHMENT_RESOLUTION_FAILED"
               ? "Nie udało się bezpiecznie dołączyć wybranych fragmentów dokumentu."
-              : `Nie udało się wykonać sesji: ${code}`;
+              : code === "PROCESS_PLEADING_STATE_REQUIRED"
+                ? "To zadanie wymaga deterministycznego pipeline pisma procesowego. Uruchom go w panelu procesu i zaakceptuj start."
+                : code === "PROCESS_PLEADING_START_ACCEPTANCE_REQUIRED"
+                  ? "Pipeline pisma procesowego czeka na Twoją akceptację startu."
+                  : code === "PROCESS_PLEADING_CONFIRMATION_REQUIRED"
+                    ? "Pipeline czeka na potwierdzenie bieżącego checkpointu."
+                    : code === "PROCESS_PLEADING_CASE_REQUIRED"
+                      ? "Pismo procesowe musi być powiązane z aktywną sprawą."
+                      : code === "PROCESS_PLEADING_ALREADY_FINAL"
+                        ? "Pipeline tej sprawy ma już status FINAL."
+                        : code.startsWith("PROCESS_PLEADING_")
+                          ? `Pipeline pisma procesowego zablokował wykonanie: ${code}`
+                          : `Nie udało się wykonać sesji: ${code}`;
       setExecutionError(friendly);
       setMessages((current) => [
         ...current,
@@ -945,6 +981,22 @@ export default function MatterChatApp({
             }}
             onDrop={handleDrop}
           >
+            <ProcessPleadingWorkflowPanel
+              caseId={caseId}
+              forceVisible={processWorkflowVisible}
+              refreshToken={processWorkflowRefresh}
+              canWrite={Boolean(
+                selectedCase &&
+                !selectedCase.archivedAt &&
+                canWriteCase(selectedCase)
+              )}
+              busy={executing || caseBusy}
+              onContinue={() => {
+                void executeMessage(
+                  "Kontynuuj pipeline pisma procesowego zgodnie z aktywnym checkpointem."
+                );
+              }}
+            />
             <div className="chat-message-list" aria-live="polite">
               {threadLoading ? (
                 <article className="chat-message chat-message-system">
