@@ -187,6 +187,45 @@ impl RuntimeBridge {
         Ok(())
     }
 
+    pub fn shutdown(&self) -> Result<(), String> {
+        let mut state = self
+            .state
+            .lock()
+            .map_err(|_| "DESKTOP_STATE_POISONED".to_string())?;
+
+        state.address = None;
+        if let Some(mut token) = state.session_token.take() {
+            unsafe_zero_string(&mut token);
+        }
+        if let Some(mut token) = state.service_token.take() {
+            unsafe_zero_string(&mut token);
+        }
+        if let Some(mut secret) = state.managed_password.take() {
+            unsafe_zero_string(&mut secret);
+        }
+
+        if let Some(mut child) = state.child.take() {
+            #[cfg(target_os = "windows")]
+            {
+                let pid = child.id().to_string();
+                let _ = Command::new("taskkill.exe")
+                    .args(["/PID", &pid, "/T", "/F"])
+                    .stdout(Stdio::null())
+                    .stderr(Stdio::null())
+                    .status();
+            }
+
+            #[cfg(not(target_os = "windows"))]
+            {
+                let _ = child.kill();
+            }
+
+            let _ = child.wait();
+        }
+
+        Ok(())
+    }
+
     pub fn ensure_managed_identity(&self) -> Result<bool, String> {
         let entry = match Entry::new(
             MANAGED_KEYRING_SERVICE,
