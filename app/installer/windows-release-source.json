@@ -3,6 +3,13 @@
   "target": "windows-x86_64",
   "applicationVersion": "0.1.3",
   "installerMode": "ONLINE_BOOTSTRAP_DEFAULT",
+  "applicationUpdate": {
+    "verification": "SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER",
+    "trustedSignerThumbprints": [],
+    "transaction": "EXTERNAL_RUNNER_BACKUP_HEALTHCHECK_ROLLBACK",
+    "stagingRoot": "%TEMP%\\LexMachinaUpdate",
+    "policy": "FAIL_CLOSED_UNTIL_RELEASE_SIGNER_IS_CONFIGURED"
+  },
   "runtime": {
     "node": {
       "version": "24.21.0",
@@ -116,6 +123,7 @@
     "networkAtInstall": "REQUIRED_FOR_MISSING_CORE_COMPONENTS_ONLY; LOCAL_LLM_IS_NOT_INSTALLED_DURING_APPLICATION_INSTALL",
     "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_ONLY_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING_AND_UPDATES",
     "cachePolicy": "REUSE_ONLY_AFTER_SHA256_VERIFICATION",
-    "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation."
+    "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation.",
+    "applicationUpdateSigning": "Application updates are deliberately blocked until trustedSignerThumbprints contains the production Authenticode certificate thumbprint."
   }
 }
