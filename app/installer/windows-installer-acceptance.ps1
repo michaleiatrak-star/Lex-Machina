@@ -136,7 +136,17 @@ try {
   $componentLock = Join-Path $runtimeRoot "component-lock.json"
   $privateNode = Join-Path $runtimeRoot "node\node.exe"
   $privatePython = Join-Path $runtimeRoot "python\python.exe"
-  foreach ($required in @($componentLock, $privateNode, $privatePython)) {
+  $llamaServer = Join-Path $runtimeRoot "llm\llama\llama-server.exe"
+  $mistralModel = Join-Path $runtimeRoot "llm\models\Mistral-Nemo-Instruct-2407-Q4_K_M.gguf"
+  $bielikModel = Join-Path $runtimeRoot "llm\models\Bielik-11B-v3.0-Instruct.Q4_K_M.gguf"
+  foreach ($required in @(
+    $componentLock,
+    $privateNode,
+    $privatePython,
+    $llamaServer,
+    $mistralModel,
+    $bielikModel
+  )) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
       throw "INSTALLER_ACCEPTANCE_PRIVATE_RUNTIME_MISSING:$required"
     }
@@ -146,6 +156,7 @@ try {
     Add-AcceptanceFirewallBlock $sidecar.FullName "runtime-sidecar"
     Add-AcceptanceFirewallBlock $privateNode "private-node"
     Add-AcceptanceFirewallBlock $privatePython "private-python"
+    Add-AcceptanceFirewallBlock $llamaServer "local-llm-server"
   }
 
   $lock = Get-Content -Raw -LiteralPath $componentLock | ConvertFrom-Json
@@ -155,7 +166,7 @@ try {
   if ($lock.runtimeNetworkRequiredAfterBootstrap -ne $false) {
     throw "INSTALLER_ACCEPTANCE_RUNTIME_NETWORK_POLICY_INVALID"
   }
-  if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_ONLY") {
+  if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_OR_LOCAL_MODEL") {
     throw "INSTALLER_ACCEPTANCE_USER_ACTION_POLICY_INVALID"
   }
 
@@ -214,7 +225,7 @@ try {
   }
 
   Write-Host "G33D_INSTALLER_ACCEPTANCE_PASS"
-  Write-Host "User action after installation: PROVIDER_API_KEY_ONLY"
+  Write-Host "User action after installation: PROVIDER_API_KEY_OR_LOCAL_MODEL"
 } finally {
   foreach ($ruleName in $firewallRules) {
     Remove-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
