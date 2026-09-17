@@ -15,9 +15,8 @@ import {
   type CaseListItem
 } from "./api.js";
 import {
-  AUTO_CASE_TYPE,
   labelForSkill,
-  setCaseTypeExecutionSkill,
+  setCaseTypeExecutionSkills,
   type PublicSkillDescriptor
 } from "./chat-routing.js";
 import "./case-controls.css";
@@ -53,7 +52,7 @@ export default function CaseControls({
   onCasesChanged: () => void;
 }) {
   const [expanded, setExpanded] = useState(false);
-  const [caseType, setCaseType] = useState(AUTO_CASE_TYPE);
+  const [caseTypeSkills, setCaseTypeSkills] = useState<string[]>([]);
   const [skills, setSkills] = useState<PublicSkillDescriptor[]>([]);
   const [cases, setCases] = useState<CaseListItem[]>([]);
   const [selectedCaseId, setSelectedCaseId] = useState("");
@@ -83,6 +82,7 @@ export default function CaseControls({
       ),
     [skills]
   );
+  const automaticCaseType = caseTypeSkills.length === 0;
 
   async function refreshCases(preferred?: string): Promise<void> {
     const response = await listCases();
@@ -130,21 +130,27 @@ export default function CaseControls({
       });
     return () => {
       cancelled = true;
-      setCaseTypeExecutionSkill("");
+      setCaseTypeExecutionSkills([]);
     };
   }, []);
 
   useEffect(() => {
-    setCaseTypeExecutionSkill(
-      caseType === AUTO_CASE_TYPE ? "" : caseType
-    );
-  }, [caseType]);
+    setCaseTypeExecutionSkills(caseTypeSkills);
+  }, [caseTypeSkills]);
 
   useEffect(() => {
     setRenameValue(selectedCase?.displayName ?? "");
     setDeletePhrase("");
     setDeletePassword("");
   }, [selectedCase?.caseId, selectedCase?.displayName]);
+
+  function toggleCaseTypeSkill(name: string): void {
+    setCaseTypeSkills((current) =>
+      current.includes(name)
+        ? current.filter((item) => item !== name)
+        : [...current, name].slice(0, 8)
+    );
+  }
 
   async function runCaseAction(action: () => Promise<unknown>, success: string): Promise<void> {
     setBusy(true);
@@ -164,27 +170,38 @@ export default function CaseControls({
   return (
     <section className="case-controls" aria-label="Typ i sterowanie sprawą">
       <div className="case-controls-primary">
-        <label>
-          <span>Typ sprawy</span>
-          <select
-            value={caseType}
-            onChange={(event) => setCaseType(event.target.value)}
-            aria-label="Typ sprawy według skilla wykonawczego"
+        <div className="case-type-picker" aria-label="Typ sprawy według skilli wykonawczych">
+          <button
+            type="button"
+            className={automaticCaseType ? "case-type-auto selected" : "case-type-auto"}
+            onClick={() => setCaseTypeSkills([])}
+            aria-pressed={automaticCaseType}
           >
-            <option value={AUTO_CASE_TYPE}>
-              Automatyczny — dobierz skille wykonawcze
-            </option>
-            {executionSkills.map((skill) => (
-              <option key={skill.name} value={skill.name}>
-                {labelForSkill(skill.name)}
-              </option>
-            ))}
-          </select>
-        </label>
+            Automatyczny
+          </button>
+          <div className="case-type-chips">
+            {executionSkills.map((skill) => {
+              const checked = caseTypeSkills.includes(skill.name);
+              return (
+                <label
+                  key={skill.name}
+                  className={checked ? "case-type-chip selected" : "case-type-chip"}
+                >
+                  <input
+                    type="checkbox"
+                    checked={checked}
+                    onChange={() => toggleCaseTypeSkill(skill.name)}
+                  />
+                  <span>{labelForSkill(skill.name)}</span>
+                </label>
+              );
+            })}
+          </div>
+        </div>
         <small>
-          {caseType === AUTO_CASE_TYPE
-            ? "System może dobrać kilka współpracujących skilli wykonawczych i kilka dziedzin prawa do jednej wiadomości."
-            : `Skill priorytetowy: ${labelForSkill(caseType)}. System nadal może dobrać kolejne skille wykonawcze i dodatkowe dziedziny prawa.`}
+          {automaticCaseType
+            ? "Automatyczny: system dobiera równolegle potrzebne skille wykonawcze i wszystkie pasujące dziedziny prawa dla każdej wiadomości."
+            : `Priorytetowe skille (${caseTypeSkills.length}): ${caseTypeSkills.map(labelForSkill).join(", ")}. Automatyczny routing może nadal dołożyć kolejne skille i dodatkowe domeny DR.`}
         </small>
       </div>
 
