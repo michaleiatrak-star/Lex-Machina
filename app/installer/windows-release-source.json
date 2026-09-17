@@ -101,7 +101,13 @@
       "minimum": 64000,
       "maximum": 200000,
       "step": 1000,
-      "recommendedProfiles": [64000, 96000, 128000, 160000, 200000],
+      "recommendedProfiles": [
+        64000,
+        96000,
+        128000,
+        160000,
+        200000
+      ],
       "default": 64000
     },
     "networkRequiredOnlyWhenProvisioning": true,
@@ -125,5 +131,13 @@
     "cachePolicy": "REUSE_ONLY_AFTER_SHA256_VERIFICATION",
     "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation.",
     "applicationUpdateSigning": "Application updates are deliberately blocked until trustedSignerThumbprints contains the production Authenticode certificate thumbprint."
+  },
+  "skillUpdate": {
+    "verification": "SHA256_AND_ED25519_SIGNED_INDEX",
+    "trustedEd25519PublicKeys": [],
+    "indexAsset": "LexMachina-Skills-Index.json",
+    "signatureAsset": "LexMachina-Skills-Index.sig",
+    "activation": "VALIDATE_THEN_ATOMIC_SWITCH_WITH_ROLLBACK",
+    "policy": "FAIL_CLOSED_UNTIL_SKILL_SIGNER_IS_CONFIGURED"
   }
 }
