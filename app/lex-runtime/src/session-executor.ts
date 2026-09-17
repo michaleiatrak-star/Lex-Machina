@@ -421,7 +421,8 @@ export class SafeSessionExecutor implements SessionExecutor {
     const completeness = audit.validateCompletion({
       requireVerification: finalization.references.length > 0,
       requireToolActivity:
-        finalization.references.length > 0 && Boolean(verificationTools)
+        finalization.references.length > 0 && Boolean(verificationTools),
+      requireDeterministicWorkflow: true
     });
     const blockedReferences = finalization.findings
       .filter((finding) => finding.status !== "VERIFIED")
