@@ -28,6 +28,9 @@ $components = @(
   @{ id="legal-corpus"; path="corpus"; required=$true },
   @{ id="paddle-ocr-pl"; path="models/paddle"; required=$true },
   @{ id="stanza-pl-ner"; path="models/stanza"; required=$true },
+  @{ id="local-llm-engine"; path="llm/llama"; required=$true },
+  @{ id="mistral-nemo-local"; path="llm/models/Mistral-Nemo-Instruct-2407-Q4_K_M.gguf"; required=$true },
+  @{ id="bielik-local"; path="llm/models/Bielik-11B-v3.0-Instruct.Q4_K_M.gguf"; required=$true },
   @{ id="runtime-sidecar"; path="lex-runtime-sidecar.exe"; required=$true }
 )
 if ($IncludeBundledVisualCppRuntime) {
@@ -58,16 +61,16 @@ $componentRows = foreach ($component in $components) {
 }
 
 $lock = [ordered]@{
-  schemaVersion = 2
+  schemaVersion = 3
   status = "RELEASE_CANDIDATE_LOCK"
-  applicationVersion = "0.1.0"
+  applicationVersion = "0.1.3"
   target = "windows-x86_64"
   generatedAt = (Get-Date).ToUniversalTime().ToString("o")
   sourceCommit = if ($env:GITHUB_SHA) { $env:GITHUB_SHA } else { "LOCAL_BUILD" }
   sourceRepository = "michaleiatrak-star/Lex-Machina"
   networkRequiredAtInstall = $NetworkRequiredAtInstall
   runtimeNetworkRequiredAfterBootstrap = $false
-  expectedUserActionAfterInstall = "PROVIDER_API_KEY_ONLY"
+  expectedUserActionAfterInstall = "PROVIDER_API_KEY_OR_LOCAL_MODEL"
   systemPrerequisites = @("webview2", "visual-cpp-runtime")
   components = @($componentRows)
   files = @($entries)
