@@ -23,7 +23,8 @@ export type SkillSelectionEnvelope = {
 export type ResolvedSkillSelection = {
   additionalSkills: string[];
   loadedSkills: string[];
-  executionSkill?: string;
+  executionSkills: string[];
+  domainSkills: string[];
 };
 
 function normalize(value: string): string {
@@ -115,10 +116,33 @@ function isExecutionSkill(skill: LexSkillRecord): boolean {
   );
 }
 
+function isDomainSkill(skill: LexSkillRecord): boolean {
+  return skill.name.startsWith("dr-");
+}
+
 function descriptionOf(skill: LexSkillRecord): string {
   return typeof skill.frontmatter.description === "string"
     ? skill.frontmatter.description
     : "";
+}
+
+function rankSkills(
+  skills: LexSkillRecord[],
+  queryTokens: Set<string>
+): Array<{ skill: LexSkillRecord; score: number }> {
+  return skills
+    .map((skill) => ({
+      skill,
+      score: scoreSkill(
+        queryTokens,
+        skill.name,
+        descriptionOf(skill)
+      )
+    }))
+    .sort((left, right) =>
+      right.score - left.score ||
+      left.skill.name.localeCompare(right.skill.name, "pl")
+    );
 }
 
 export function resolveAdditionalSkills(
@@ -143,66 +167,75 @@ export function resolveAdditionalSkills(
   );
 
   const selected = new Set<string>(manual);
-  let executionSkill = manual.find((name) => {
+  const executionSkills = new Set<string>();
+  const domainSkills = new Set<string>([primarySkill]);
+
+  for (const name of manual) {
     const skill = registry.get(name);
-    return Boolean(skill && isExecutionSkill(skill));
-  });
+    if (!skill) continue;
+    if (isExecutionSkill(skill)) executionSkills.add(name);
+    if (isDomainSkill(skill)) domainSkills.add(name);
+  }
 
   if (automatic) {
     const queryTokens = tokens(query);
     const candidates = [...registry.skills.values()]
       .filter((skill) => !core.has(skill.name) && skill.name !== "shared");
 
-    if (!executionSkill) {
-      const rankedExecution = candidates
-        .filter(isExecutionSkill)
-        .map((skill) => ({
-          skill,
-          score: scoreSkill(
-            queryTokens,
-            skill.name,
-            descriptionOf(skill)
-          )
-        }))
-        .sort((left, right) =>
-          right.score - left.score ||
-          left.skill.name.localeCompare(right.skill.name, "pl")
-        );
+    const rankedExecution = rankSkills(
+      candidates.filter(isExecutionSkill),
+      queryTokens
+    );
+    const matchingExecution = rankedExecution
+      .filter((item) => item.score >= 2)
+      .slice(0, 4);
 
-      const bestExecution =
-        rankedExecution.find((item) => item.score >= 2)?.skill ??
+    if (matchingExecution.length === 0 && executionSkills.size === 0) {
+      const fallback =
         candidates.find((skill) => skill.name === "przewodnik-prawny-v2") ??
         rankedExecution[0]?.skill;
-
-      if (bestExecution) {
-        executionSkill = bestExecution.name;
-        selected.add(bestExecution.name);
+      if (fallback) {
+        executionSkills.add(fallback.name);
+        selected.add(fallback.name);
+      }
+    } else {
+      for (const item of matchingExecution) {
+        executionSkills.add(item.skill.name);
+        selected.add(item.skill.name);
       }
     }
 
-    const rankedAuxiliary = candidates
-      .filter((skill) => !isExecutionSkill(skill))
-      .map((skill) => ({
-        name: skill.name,
-        score: scoreSkill(
-          queryTokens,
-          skill.name,
-          descriptionOf(skill)
-        )
-      }))
+    const rankedDomains = rankSkills(
+      candidates.filter(isDomainSkill),
+      queryTokens
+    )
       .filter((item) => item.score >= 4)
-      .sort((left, right) =>
-        right.score - left.score ||
-        left.name.localeCompare(right.name, "pl")
-      )
       .slice(0, 3);
 
+    for (const item of rankedDomains) {
+      domainSkills.add(item.skill.name);
+      selected.add(item.skill.name);
+    }
+
+    const rankedAuxiliary = rankSkills(
+      candidates.filter(
+        (skill) =>
+          !isExecutionSkill(skill) &&
+          !isDomainSkill(skill)
+      ),
+      queryTokens
+    )
+      .filter((item) => item.score >= 4)
+      .slice(0, 4);
+
     for (const item of rankedAuxiliary) {
-      selected.add(item.name);
+      selected.add(item.skill.name);
     }
   }
 
   const additionalSkills = [...selected].slice(0, 12);
+  const retained = new Set(additionalSkills);
+
   return {
     additionalSkills,
     loadedSkills: [
@@ -212,6 +245,9 @@ export function resolveAdditionalSkills(
       primarySkill,
       ...additionalSkills
     ],
-    ...(executionSkill ? { executionSkill } : {})
+    executionSkills: [...executionSkills].filter((name) => retained.has(name)),
+    domainSkills: [...domainSkills].filter(
+      (name) => name === primarySkill || retained.has(name)
+    )
   };
 }
