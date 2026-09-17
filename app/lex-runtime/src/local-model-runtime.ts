@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
+import { spawn, type ChildProcess } from "node:child_process";
 
 export type LocalModelId =
   | "local/mistral-nemo-12b-q4km"
@@ -83,7 +83,7 @@ export class LocalModelRuntime {
   readonly host = "127.0.0.1";
   readonly port: number;
 
-  private child: ChildProcessWithoutNullStreams | null = null;
+  private child: ChildProcess | null = null;
   private activeModelId: LocalModelId | null = null;
   private startup: Promise<void> | null = null;
 
@@ -236,9 +236,9 @@ export class LocalModelRuntime {
     this.child = child;
 
     let stderrTail = "";
-    child.stderr.setEncoding("utf8");
-    child.stderr.on("data", (chunk: string) => {
-      stderrTail = `${stderrTail}${chunk}`.slice(-8_000);
+    child.stderr?.setEncoding("utf8");
+    child.stderr?.on("data", (chunk: string | Buffer) => {
+      stderrTail = `${stderrTail}${chunk.toString()}`.slice(-8_000);
     });
 
     const exited = new Promise<never>((_resolve, reject) => {
