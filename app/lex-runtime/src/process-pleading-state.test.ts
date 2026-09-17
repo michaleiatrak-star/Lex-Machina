@@ -198,7 +198,8 @@ describe(
           state =
             markProcessCheckpointNotApplicable(
               state,
-              checkpoint
+              checkpoint,
+              "Warunek checkpointu nie występuje w tej sprawie testowej."
             );
         }
         expect(() =>
