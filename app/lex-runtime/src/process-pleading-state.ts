@@ -103,6 +103,36 @@ const CHECKPOINT_STAGE:
     "CP-PEER": "W3"
   };
 
+const ORDERED_STAGE_CHECKPOINTS:
+  Readonly<Record<
+    Exclude<
+      ProcessPleadingStage,
+      "CG_ACCEPTANCE" | "FINAL"
+    >,
+    readonly ProcessPleadingCheckpoint[]
+  >> = {
+    W1: [
+      "CP-1a",
+      "CP-1b",
+      "CP-1c-skan",
+      "CP-PD",
+      "CP-FSL-D",
+      "CP-1c-macierz",
+      "CP-1c-lancuch",
+      "CP-1d-anomalie",
+      "CP-1d",
+      "CP-W1"
+    ],
+    PRE_W2: ["CP-PRE-W2"],
+    W2: ["CP-ATAK"],
+    W3: [
+      "CP-PODMIOT",
+      "CP-QUALITY",
+      "CP-AUDYT",
+      "CP-PEER"
+    ]
+  };
+
 const MAIN_STAGE_CHECKPOINTS:
   Readonly<Record<
     Exclude<ProcessPleadingStage, "CG_ACCEPTANCE" | "FINAL">,
@@ -166,19 +196,33 @@ function advanceStageIfReady(
   at: string
 ): void {
   const previous = state.stage;
-  const next: ProcessPleadingStage | null =
+  if (
+    previous === "CG_ACCEPTANCE" ||
+    previous === "FINAL"
+  ) {
+    return;
+  }
+
+  const stageResolved =
+    ORDERED_STAGE_CHECKPOINTS[
+      previous
+    ].every(
+      (checkpoint) =>
+        state.checkpoints[checkpoint] ===
+          "CLOSED" ||
+        state.checkpoints[checkpoint] ===
+          "NA"
+    );
+  if (!stageResolved) return;
+
+  const next: ProcessPleadingStage =
     previous === "W1"
       ? "PRE_W2"
       : previous === "PRE_W2"
         ? "W2"
         : previous === "W2"
           ? "W3"
-          : previous === "W3" &&
-              state.checkpoints["CP-PEER"] === "CLOSED"
-            ? "FINAL"
-            : null;
-
-  if (!next) return;
+          : "FINAL";
 
   state.stage = next;
   pushEvent(
@@ -439,7 +483,7 @@ export function nextRequiredProcessCheckpoint(
     return null;
   }
   const required =
-    MAIN_STAGE_CHECKPOINTS[
+    ORDERED_STAGE_CHECKPOINTS[
       state.stage
     ];
   return (
@@ -472,19 +516,10 @@ export function markProcessCheckpointReady(
     );
   }
 
-  const mandatory =
-    MAIN_STAGE_CHECKPOINTS[
+  const stageCheckpoints =
+    ORDERED_STAGE_CHECKPOINTS[
       state.stage
     ];
-  if (
-    mandatory.includes(checkpoint) ===
-      false &&
-    state.mode === "AUTO"
-  ) {
-    // AUTO may run conditional checkpoints,
-    // but does not wait for confirmation.
-  }
-
   state.checkpoints[checkpoint] =
     state.mode === "AUTO"
       ? "CLOSED"
@@ -512,24 +547,10 @@ export function markProcessCheckpointReady(
       },
       at
     );
-    if (
-      mandatory.includes(checkpoint)
-    ) {
-      const allMandatoryClosed =
-        mandatory.every(
-          (item) =>
-            state.checkpoints[item] ===
-              "CLOSED" ||
-            state.checkpoints[item] ===
-              "NA"
-        );
-      if (allMandatoryClosed) {
-        advanceStageIfReady(
-          state,
-          at
-        );
-      }
-    }
+    advanceStageIfReady(
+      state,
+      at
+    );
   }
 
   return validateProcessPleadingState(
@@ -568,30 +589,10 @@ export function confirmProcessCheckpoint(
     at
   );
 
-  const mandatory =
-    state.stage === "W1" ||
-    state.stage === "PRE_W2" ||
-    state.stage === "W2" ||
-    state.stage === "W3"
-      ? MAIN_STAGE_CHECKPOINTS[
-          state.stage
-        ]
-      : [];
-  if (
-    mandatory.includes(checkpoint) &&
-    mandatory.every(
-      (item) =>
-        state.checkpoints[item] ===
-          "CLOSED" ||
-        state.checkpoints[item] ===
-          "NA"
-    )
-  ) {
-    advanceStageIfReady(
-      state,
-      at
-    );
-  }
+  advanceStageIfReady(
+    state,
+    at
+  );
 
   return validateProcessPleadingState(
     state
@@ -628,6 +629,10 @@ export function markProcessCheckpointNotApplicable(
       type: "CHECKPOINT_NA",
       checkpoint
     },
+    at
+  );
+  advanceStageIfReady(
+    state,
     at
   );
   return validateProcessPleadingState(
