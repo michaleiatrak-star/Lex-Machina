@@ -4608,7 +4608,9 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     "/api/cases/:caseId/artifacts/:artifactId/deanonymization-intent",
     async (req, res) => {
       if (
-        !options.reauthorizationManager
+        !options.reauthorizationManager ||
+        !options.caseAccessService ||
+        !options.documentGenerationState
       ) {
         res.status(503).json({
           error:
@@ -4617,22 +4619,52 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         return;
       }
       try {
+        const context =
+          responseAuthContext(res);
+        const caseId =
+          String(
+            req.params.caseId ??
+              ""
+          );
+        const artifactId =
+          String(
+            req.params
+              .artifactId ??
+              ""
+          );
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              context,
+              caseId
+            );
+        await options
+          .caseAccessService
+          .withCaseDataKey(
+            context,
+            caseId,
+            "ANALYZE",
+            async (
+              caseDataKey
+            ) =>
+              await assertDocumentWorkflowFinalizationAllowed(
+                options,
+                {
+                  caseId,
+                  artifactId,
+                  caseDataKey,
+                  keyVersion:
+                    caseView.keyVersion
+                }
+              )
+          );
         const intent =
           await options
             .reauthorizationManager
             .createIntent(
-              responseAuthContext(
-                res
-              ),
-              String(
-                req.params.caseId ??
-                  ""
-              ),
-              String(
-                req.params
-                  .artifactId ??
-                  ""
-              )
+              context,
+              caseId,
+              artifactId
             );
         res.status(201).json({
           intent
@@ -4770,8 +4802,21 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               "REIDENTIFY",
               async (
                 caseDataKey
-              ) =>
-                await options
+              ) => {
+                await assertDocumentWorkflowFinalizationAllowed(
+                  options,
+                  {
+                    caseId:
+                      target.caseId,
+                    artifactId:
+                      target.artifactId,
+                    caseDataKey,
+                    keyVersion:
+                      target
+                        .caseKeyVersion
+                  }
+                );
+                return await options
                   .documentAuthoringService!
                   .deanonymizeConsumed({
                     target,
@@ -4792,7 +4837,8 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                               .filename
                         }
                       : {})
-                  })
+                  });
+              }
             );
         const downloadTicket =
           options
