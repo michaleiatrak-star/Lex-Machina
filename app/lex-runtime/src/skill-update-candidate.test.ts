@@ -32,7 +32,7 @@ function fixture() {
     [
       "---",
       "name: shared",
-      "version: 1.0",
+      "version: \"1.0\"",
       "dependencies:",
       "  requires: []",
       "---",
@@ -48,7 +48,7 @@ function fixture() {
     [
       "---",
       "name: prawny-router-v3",
-      "version: 3.52",
+      "version: \"3.52\"",
       "dependencies:",
       "  requires:",
       "    - shared",
