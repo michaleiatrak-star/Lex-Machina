@@ -348,6 +348,41 @@ export class LocalModelRuntime {
     return this.models().map((model) => this.publicDescriptor(model, configured));
   }
 
+  configuredModelId(): LocalModelId | null {
+    const config = this.readConfig();
+    return config
+      ? normalizeModelId(
+          config.model.id
+        )
+      : null;
+  }
+
+  requiresSignedModelPackRepair(): boolean {
+    const config = this.readConfig();
+    if (!config) return false;
+    const canonical =
+      normalizeModelId(
+        config.model.id
+      );
+    const trusted =
+      this.modelSpec(canonical);
+    if (
+      !trusted ||
+      !trusted.sha256 ||
+      !/^[a-f0-9]{64}$/i.test(
+        trusted.sha256
+      )
+    ) {
+      return false;
+    }
+    return (
+      config.model.sha256
+        .toLowerCase() !==
+      trusted.sha256
+        .toLowerCase()
+    );
+  }
+
   installedModelUpdateIdentity(): {
     modelId: LocalModelId;
     sha256: string;
@@ -847,6 +882,185 @@ export class LocalModelRuntime {
     }
   }
 
+  async reconfigureContext(
+    modelId: string,
+    contextTokens: number
+  ): Promise<{
+    model: LocalModelDescriptor;
+    contextTokens: number;
+    configPath: string;
+  }> {
+    if (this.provisioning) {
+      throw new Error(
+        "LOCAL_MODEL_PROVISIONING_IN_PROGRESS"
+      );
+    }
+    const config =
+      this.readConfig();
+    if (!config) {
+      throw new Error(
+        "LOCAL_MODEL_NOT_CONFIGURED"
+      );
+    }
+    const canonical =
+      normalizeModelId(
+        modelId
+      );
+    if (
+      normalizeModelId(
+        config.model.id
+      ) !== canonical
+    ) {
+      throw new Error(
+        "LOCAL_MODEL_RECONFIGURE_MODEL_MISMATCH"
+      );
+    }
+    const model =
+      this.modelSpec(canonical);
+    if (!model) {
+      throw new Error(
+        "LOCAL_MODEL_UNKNOWN"
+      );
+    }
+    this.validateContext(
+      model,
+      contextTokens
+    );
+    this.assertConfiguredComponents(
+      config
+    );
+
+    await this.stop();
+    const configPath =
+      this.configPath();
+    const previousConfig =
+      fs.readFileSync(
+        configPath
+      );
+    const updated:
+      LocalAiConfig = {
+        ...config,
+        configuredAt:
+          new Date()
+            .toISOString(),
+        context: {
+          requestedTokens:
+            contextTokens,
+          mode:
+            contextTokens >
+              config.model
+                .nativeContext
+              ? "YARN_EXTENDED"
+              : "NATIVE_OR_REDUCED",
+          extendedBeyondNative:
+            contextTokens >
+              config.model
+                .nativeContext,
+          ropeScale:
+            Math.max(
+              1,
+              contextTokens /
+                config.model
+                  .nativeContext
+            )
+        }
+      };
+
+    const temporary =
+      `${configPath}.tmp`;
+    fs.writeFileSync(
+      temporary,
+      `${JSON.stringify(
+        updated,
+        null,
+        2
+      )}\n`,
+      "utf8"
+    );
+    fs.renameSync(
+      temporary,
+      configPath
+    );
+
+    this.provisioningProgress = {
+      phase:
+        "VALIDATING_RUNTIME",
+      label: canonical,
+      bytesDownloaded: 0,
+      bytesTotal: 0,
+      percent: 100,
+      updatedAt:
+        new Date().toISOString()
+    };
+
+    try {
+      const startedAt =
+        Date.now();
+      await this.ensureRunning(
+        canonical
+      );
+      this.writeQualification({
+        schemaVersion: 1,
+        result: "PASS",
+        modelId: canonical,
+        contextTokens,
+        contextMode:
+          updated.context.mode,
+        engine: "llama.cpp",
+        startupMs:
+          Math.max(
+            0,
+            Date.now() -
+              startedAt
+          ),
+        validatedAt:
+          new Date()
+            .toISOString()
+      });
+      this.provisioningProgress = {
+        phase: "READY",
+        label: canonical,
+        bytesDownloaded: 0,
+        bytesTotal: 0,
+        percent: 100,
+        updatedAt:
+          new Date().toISOString()
+      };
+      return {
+        model:
+          this.publicDescriptor(
+            model,
+            updated
+          ),
+        contextTokens,
+        configPath
+      };
+    } catch (error) {
+      fs.writeFileSync(
+        configPath,
+        previousConfig
+      );
+      this.provisioningProgress = {
+        phase: "FAILED",
+        label: canonical,
+        bytesDownloaded: 0,
+        bytesTotal: 0,
+        percent: null,
+        updatedAt:
+          new Date().toISOString()
+      };
+      const detail =
+        error instanceof Error
+          ? error.message
+          : String(error);
+      throw new Error(
+        `LOCAL_MODEL_CONTEXT_RECONFIGURATION_FAILED:${detail}`
+      );
+    } finally {
+      await this.stop();
+    }
+  }
+
   async applyVerifiedModelPack(args: {
     target: {
       packVersion: string;
@@ -855,6 +1069,7 @@ export class LocalModelRuntime {
       model: ModelPackEntry;
     };
     contextTokens: number;
+    force?: boolean;
   }): Promise<{
     model: LocalModelDescriptor;
     contextTokens: number;
@@ -879,6 +1094,7 @@ export class LocalModelRuntime {
       );
     }
     if (
+      !args.force &&
       installed.sha256 ===
         entry.sha256
           .toLowerCase()
