@@ -187,7 +187,7 @@ describe("encrypted case workspace", () => {
         keyVersion: 2
       });
     expect(afterRekey?.pendingCheckpoint)
-      .toBe("CP-W1");
+      .toBe("CP-1a");
     expect(afterRekey?.history.length)
       .toBeGreaterThanOrEqual(3);
   });
