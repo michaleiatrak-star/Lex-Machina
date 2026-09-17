@@ -132,25 +132,31 @@ export function parseLocalAiProgressLine(
     typeof label !== "string" ||
     label.length < 1 ||
     label.length > 200 ||
+    typeof bytesDownloaded !==
+      "number" ||
     !Number.isSafeInteger(
       bytesDownloaded
     ) ||
-    Number(bytesDownloaded) < 0 ||
+    bytesDownloaded < 0 ||
     !(
       bytesTotal === null ||
       (
+        typeof bytesTotal ===
+          "number" &&
         Number.isSafeInteger(
           bytesTotal
         ) &&
-        Number(bytesTotal) >= 0
+        bytesTotal >= 0
       )
     ) ||
     !(
       percent === null ||
       (
+        typeof percent ===
+          "number" &&
         Number.isInteger(percent) &&
-        Number(percent) >= 0 &&
-        Number(percent) <= 100
+        percent >= 0 &&
+        percent <= 100
       )
     )
   ) {
@@ -159,8 +165,8 @@ export function parseLocalAiProgressLine(
 
   if (
     bytesTotal !== null &&
-    Number(bytesDownloaded) >
-      Number(bytesTotal)
+    bytesDownloaded >
+      bytesTotal
   ) {
     return null;
   }
@@ -169,16 +175,9 @@ export function parseLocalAiProgressLine(
     phase: phase as
       LocalProvisioningProgress["phase"],
     label,
-    bytesDownloaded:
-      Number(bytesDownloaded),
-    bytesTotal:
-      bytesTotal === null
-        ? null
-        : Number(bytesTotal),
-    percent:
-      percent === null
-        ? null
-        : Number(percent),
+    bytesDownloaded,
+    bytesTotal,
+    percent,
     updatedAt:
       new Date().toISOString()
   };
