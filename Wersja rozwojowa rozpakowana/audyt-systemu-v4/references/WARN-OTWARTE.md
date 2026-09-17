@@ -1,12 +1,12 @@
 # WARN-OTWARTE — rejestr żywy otwartych flag audytowych
 
-**Stan:** 2026-09-16. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
+**Stan:** 2026-09-16g. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
 
 ## Tablica sterująca
 
 | Kategoria | Liczba | Pozycje |
 |---|---:|---|
-| Wykonalne sesją audytową | 4 | F-135 (część merytoryczna), F-167, O-11, **F-189** |
+| Wykonalne sesją audytową | 3 | F-135 (część merytoryczna), F-167, **F-189** |
 | Reaktywne | 1 | F-5 |
 | Zależne od środowiska/dewelopera | 15 | F-8, F-9, F-11, F-94, F-113, F-133, F-137, F-143, F-144, **F-157b**, F-158(c), F-171, **F-183a**, **F-184**, **F-185** |
 
@@ -28,14 +28,20 @@
 > library=ECHR&id={itemid}` → pełny tekst. Wyszukiwanie po frazie w HUDOC
 > pozostaje nierozstrzygnięte, ale nie jako otwarta flaga — jako znany brak.
 | Odnotowane bez działania | 1 | O-8 (ograniczenie strukturalne aparatu) |
-| **Razem** | **21** | — |
+| **Razem** | **20** | — |
 
 > **F-189 (2026-09-16, OTWARTA — przyczyna) — nadpisanie skilli dziedzinowych starszym stanem.**
 > Treść 10 skilli odtworzona i wydana (AUDYT-2026-09-16). Pozostaje: (1) ustalić mechanizm
 > nadpisania — `shared` i `audyt-systemu-v4` z tych samych sesji przetrwały, więc wydanie
-> skilli dziedzinowych szło inną ścieżką; (2) przed każdym kolejnym wydaniem uruchomić T12
-> na drzewie docelowym — po naprawie parsera jest to jedyna kontrola wykrywająca tę klasę;
-> (3) T11 WARN: `Dz.U. 2026 poz. 174` w ROUTING-MAP bez wiersza w mapie Dz.U. — przegląd.
+> skilli dziedzinowych szło inną ścieżką; ⛔ **2026-09-16b: co najmniej DWIE fale** (stan
+> `dr-09` z 10.09 zaginął przed 13.09; stan 12f–12n — po 12.09) — mechanizm powtarzalny,
+> nie jednorazowy; (2) przed każdym wydaniem uruchomić T12 na drzewie docelowym ORAZ
+> kontrolę treści „było → jest" (T12 nie widzi utraty bez cofnięcia numeru — przypadek
+> `dr-09` 3.29, kolizja numeru w dwóch sesjach). ✅ 2026-09-16c: ta kontrola jest
+> automatem — **T30** (`check_utrata_tresci.py`, bloker orkiestratora). Otwarte pozostaje
+> wyłącznie ustalenie MECHANIZMU nadpisań (poza repozytorium — proces wgrywania paczek).
+>
+> F-190 ZAMKNIĘTA 2026-09-16c — trzy luki uzupełnione z odczytu treści (AUDYT-2026-09-16c).
 
 > **F-183a (2026-09-14, OTWARTA — WYŁĄCZNIE środowisko docelowe) — direct
 > CBOSA wdrożona strukturalnie; pozostaje pomiar live w docelowym runtime.**
@@ -165,7 +171,10 @@
 > ustawie o **medycynie** laboratoryjnej. Przemianowanie pliku dotyka rejestrów
 > `modules:` w kilku miejscach — osobna operacja, nie łatka.
 
-> **O-11 OTWARTA (2026-09-10s) — nikt nie pyta, czy LICZBA odpowiada przepisowi.**
+> ✅✅ **O-11 ZAMKNIĘTA W CAŁOŚCI 2026-09-16e** — (b) T32, (c) klasa ZASTĄPIONY_TJ w T27, (d) moduł
+> opłaty skarbowej. Opis historyczny poniżej zostaje do czasu przeglądu rejestru (ZASADA 10).
+>
+> **O-11 (historia, 2026-09-10s) — nikt nie pyta, czy LICZBA odpowiada przepisowi.**
 > Cały aparat (T3, T11, T15, T24, T27) pyta o **akty**: czy numer istnieje, czy
 > opisuje ten akt, czy akt żyje, czy już obowiązuje. ⛔ Żaden nie pyta, czy kwota,
 > termin albo próg podany w module odpowiada **treści przepisu**.
@@ -223,9 +232,8 @@
 > t.j. aktu bazowego i jest ślepy na wypadek, w którym nowe rozporządzenie
 > **uchyla** poprzednie, a ustawa pozostaje nietknięta (zmierzony przypadek:
 > zryczałtowana równowartość wydatków z art. 621 § 2 KPK, 300 zł → 1000 zł od
-> 1.07.2025, `Dz.U. 2025 poz. 770`); (d) **brak modułu opłaty skarbowej
-> w `dr-06`** — ustawa `Dz.U. 2025 poz. 1154` powoływana tylko ubocznie;
-> utworzenie modułu wymaga rejestracji w 3 rejestrach (Reguła 2/3 HARDGATE).
+> 1.07.2025, `Dz.U. 2025 poz. 770`). ✅ (d) moduł opłaty skarbowej — ZAMKNIĘTE
+> 2026-09-16d (`dr-06/mod-ustawa-oplata-skarbowa`).
 
 > **O-8 ODNOTOWANA BEZ DZIAŁANIA (2026-09-10b) — zestaw regresyjny nie sprawdza
 > przesłanek faktycznych.** F-179 (profil LEKKI uzasadniony liczbą, która nie
@@ -535,10 +543,7 @@
 
 | Flaga | Priorytet | Pozostały zakres | Kryterium zamknięcia |
 |---|---|---|---|
-| F-141 | średni | Trzecia oś T11 (lokalne/ROUTING-MAP vs centralna mapa Dz.U.) — 8 pozycji obecnych w mapach dziedzinowych, brakujących w `mapa_dzu_2026-08-28.md`. Lista robocza (klasa F-104): **2026/980** ustawa o wspieraniu rodziny i systemie pieczy zastępczej (dr-02); **2026/731** zmiana ustawy o radcach prawnych (dr-12); **2026/113** ustawa o pomocy publicznej na ratowanie/restrukturyzację (dr-02); **2024/1111** ustawa lombardowa (dr-02); **2023/845** UPNPR (dr-02); **2022/1722** ustawa o radiofonii i telewizji (dr-02); **2023/123** opłaty w sprawach karnych (dr-03); **2026/1123** prospektywna zmiana ustawy o SN od 1.01.2028 (ROUTING-MAP). ⛔ NIE domykać propagacją z map lokalnych: sekcja „Uzupełnienie mapy” wymaga wprost, by każdy tytuł, typ i status sprawdzić odrębnie w API ELI. Pierwsza próba weryfikacji (2026-08-31, poz. 2026/980) NIE potwierdziła numeru — wyszukiwanie zwróciło t.j. 2025/49 dla tej ustawy. Część numerów w mapach lokalnych może więc być błędna, a nie tylko nieprzeniesiona; przy tej fladze trzeba je rozstrzygnąć, nie przepisać. Powiązane: sześć wierszy ROUTING-MAP zsynchronizowanych 2026-08-31 nosi jawny znacznik ⚠️ NIEZWERYFIKOWANY w RZĘDZIE 1 — znacznik zdejmuje się dopiero po weryfikacji w ramach tej flagi. | Wszystkie 8 pozycji rozstrzygnięte w ELI (potwierdzone albo skorygowane), wpisane do bieżącej mapy Dz.U. z tytułem/typem/statusem; znaczniki ⚠️ NIEZWERYFIKOWANY zdjęte z ROUTING-MAP; T11 w pełnym przebiegu bez WARN. |
-| F-148 | średni | Dwie luki czułości testu T15 (`audit_tj_inventory.py`), wykryte 2026-09-01b przy pierwszym przebiegu z ŻYWYM ELI. **(a) Ślepota na podmianę aktu:** test grupuje deklaracje po tytule kanonicznym pobranym z ELI, nie porównuje go z nazwą użytą w rejestrze lokalnym — więc numer, który istnieje, jest obwieszczeniem i jest najnowszy dla SWOJEGO aktu, przechodzi kontrolę nawet wtedy, gdy lokalnie opisano nim inną ustawę. Tak przeszedł błąd F-149(3): `Dz.U. 2026 poz. 884` (t.j. ustawy rehabilitacyjnej) przypisany ustawie o świadczeniu uzupełniającym. Wykrył to człowiek czytający kontekst, nie test. **(b) Dwa trwałe fałszywe trafienia:** `prawo-polskie-v2/ROUTING-MAP.md:219` (parser czyta numer aktu pierwotnego z komórki, która obok podaje poprawny t.j. 2024.1111) oraz `dr-03/modules/mod-KW-art119-131-przeciwko-mieniu.md:220` (świadome odesłanie historyczne; wiersz wyżej cytuje bieżący t.j. 2025.734). ⛔ NIE domykać przez edycję korpusu — modyfikacja treści dla uciszenia testu jest gorsza od szumu; poprawka należy do skryptu, analogicznie do poprawki czułości T11 z F-106. | (a) test porównuje tytuł z ELI z nazwą lokalną i zgłasza rozjazd jako osobną kategorię, z mutacją negatywną na przypadku F-149(3); (b) oba znane trafienia przestają się pojawiać bez zmiany treści korpusu; T15 w trybach `maps`+`operational` bez zgłoszeń nierozstrzygniętych. |
-| O-4 | średni | Rejestracja skryptu w `scripts:` NIE gwarantuje, że jest on wywoływany przez `run_regression_suite.py`. Wykryte 2026-09-01: trzy skrypty żyły poza pełnym przebiegiem (`test_f108_trade.py`, `mock_eli_server_test.py` — oba ZEPSUTE od dni, awaria niewidoczna; oraz świeżo dodany T22). Wpięte ręcznie w tej sesji, ale nic nie pilnuje, żeby następny dodany test też został wpięty. Do rozstrzygnięcia: czy dodać test T23 wymagający, by każdy zarejestrowany skrypt testowy był albo wywoływany przez orkiestrator, albo miał jawnie odnotowany status RĘCZNY (jak T4/T5). ⛔ NIE domykać samym przeglądem wzrokowym listy — to dokładnie ten rodzaj kontroli, który przepuścił F-147. | Każdy skrypt `test_*`/`check_*` z rejestru `scripts:` ma przypisany status: wywoływany przez orkiestrator albo RĘCZNY z uzasadnieniem; rozbieżność wykrywana automatycznie. |
-| F-135 | średni | Dokończyć cross-check wartości prawnych w pozostałych DR, elementów unikalnych oraz `shared`; każdą rozbieżność rozstrzygnąć w źródle urzędowym albo jawnie oznaczyć jako nieweryfikowalną. | Zero nieuzasadnionych rozbieżności albo jawne oznaczenie nieweryfikowalnych pozycji. |
+| F-135 | średni | Dokończyć cross-check wartości prawnych w pozostałych DR, elementów unikalnych oraz `shared`; każdą rozbieżność rozstrzygnąć w źródle urzędowym albo jawnie oznaczyć jako nieweryfikowalną. ⚡ 2026-09-16e: warstwa NUMERÓW aktów domknięta automatem w mapach (T15, T31) i w prozie (T27 z klasą ZASTĄPIONY_TJ) — wszystkie 0 poza jednym znanym kontekstem historycznym; zostaje warstwa WARTOŚCI w modułach — dziedzina po dziedzinie. ✅ 2026-09-16f: **terminy KC przerobione w całości** (25 jednostek, 11 usterek, w tym 2 w kierunku niebezpiecznym). ✅ 2026-09-16g: **terminy i progi KKS** (24 jednostki, 7 usterek). Kolejne kandydatki: prawo spadkowe proceduralne (KPC), terminy z ustaw szczególnych (RODO, KSC, PZP). | Zero nieuzasadnionych rozbieżności albo jawne oznaczenie nieweryfikowalnych pozycji. |
 
 ## Reaktywne
 
@@ -645,44 +650,4 @@
 
 ---
 
-> ⛔⛔ **F-OP-2026-09 OTWARTA (2026-09-12i) — PIĘĆ NOWELIZACJI ORDYNACJI
-> PODATKOWEJ W KOLEJCE, TRZY W CIĄGU TRZECH TYGODNI.**
-> Tekst jednolity `Dz.U. 2026 poz. 622` pochodzi z **22.04.2026**. Po tej dacie
-> ogłoszono pięć ustaw zmieniających, **wszystkie z odroczonym wejściem w życie**:
->
-> | Akt | Wejście w życie | Zakres ustalony 2026-09-12i |
-> |---|---|---|
-> | `Dz.U. 2026 poz. 1154` | **16.09.2026** | ⚠️ nieustalony — ustawa o jakości handlowej artykułów rolno-spożywczych, zmiana uboczna w OP |
-> | `Dz.U. 2026 poz. 825` | **24.09.2026** | wąska — interpretacje indywidualne (art. 14i § 6–7, art. 14j § 3) |
-> | `Dz.U. 2026 poz. 846` | **1.10.2026** | szeroka — uchylenia i zmiany m.in. w art. 86a–86m, 119m, 144; ⛔ **NIE dotyka art. 70**, ⛔ **nie zawiera słowa „ugoda"** |
-> | `Dz.U. 2026 poz. 875` | 1.01.2027 | ⚠️ nieustalony; **nie dotyka art. 70** |
-> | `Dz.U. 2026 poz. 1098` | 1.01.2027 | osobiste konta inwestycyjne; ⚠️ **dotyka art. 70** — zakres zmiany nieustalony |
->
-> ⛔ **Dlaczego to flaga, a nie notatka.** Wszystkie moduły `dr-06` opisujące
-> postępowanie podatkowe oraz sekcja Ordynacji w `shared/terminy.md` zostały
-> zweryfikowane **na stanie z 12.09.2026**. Adnotacja ✅ [VER] RZĄD 1 przestaje
-> być prawdziwa dla części przepisów **16 września**, a dla dalszych
-> **24 września** i **1 października**. To nie jest ryzyko odległe — to trzy daty
-> w kalendarzu.
->
-> ⚠️ **Zakres poz. 1154, 875 i 1098 nie został ustalony w tej sesji** —
-> sprawdzono wyłącznie, czy dotykają art. 70 (poz. 1098: **tak**). Przed
-> najbliższym użyciem modułów podatkowych odczytać te trzy ustawy w całości.
->
-> ⛔ **Powiązane twierdzenie do rozstrzygnięcia:** `dr-06` podawał uchylenie
-> **art. 70 § 6 pkt 1 OP** oraz **„ugodę podatkową od 01.10.2026"**. Art. 70 § 6
-> pkt 1 **jest w mocy** w tekście jednolitym, a poz. 825 i 846 go nie zmieniają
-> ani nie zawierają słowa „ugoda". Twierdzenie oznaczone w module jako **opis
-> zamiaru legislacyjnego, nie stanu prawa**. Zamknięcie flagi wymaga ustalenia,
-> **z którego aktu** pochodzi — albo stwierdzenia, że pochodzi z projektu.
->
-> **Co robić przy trafieniu:** po każdej z trzech najbliższych dat — ponowny
-> odczyt treści art. 223, 236, 162, 241, 68 i 70 OP oraz aktualizacja adnotacji
-> [VER] w `shared/terminy.md` (sekcja Ordynacja) i w `dr-06`. Przy zmianie
-> któregokolwiek z nich — wpis do dziennika i podbicie wersji obu skilli.
->
-> ⚠️ **Wzorzec do zapamiętania:** KROK 2C pytał dotąd „czy są nowelizacje po
-> tekście jednolitym". Tutaj odpowiedź brzmi „pięć, ale żadna jeszcze nie
-> obowiązuje" — czyli **odczyt jest poprawny i jednocześnie ma datę ważności**.
-> Dotychczasowe wpisy [VER] tego wymiaru nie miały. Kandydat na rozszerzenie
-> formatu adnotacji o pole **„ważne do"**.
+> F-OP-2026-09 ZAMKNIĘTA 2026-09-16 — zakres pięciu nowelizacji Op ustalony z treści; opis: AUDIT-JOURNAL, AUDYT-2026-09-16b.

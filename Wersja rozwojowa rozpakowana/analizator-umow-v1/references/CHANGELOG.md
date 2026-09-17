@@ -1,5 +1,6 @@
 # CHANGELOG — Analizator Umów v1
 
+- 1.35 (2026-09-16, F-189): mod-J10-ubezpieczenia — IDD: wygasły t.j. `2024/1214` → `2026/12`; mod-J7-pzp — PZP: wygasły t.j. `2024/1320` → `2026/793` (RZĄD 1; T27).
 - 1.34 (2026-09-16, F-189): ODTWORZENIE utraconego wydania 1.33 (F-189), RZĄD 1: Zasady techniki prawodawczej 2016/283 → Dz.U. 2026 poz. 300; UUDE 2024/695 → Dz.U. 2026 poz. 880 (3 miejsca).
 - 1.33 — LUKA JAWNA: wydanie AUDYT-2026-09-10l nieobecne na dysku — odtworzone w 1.34
 - 1.32 (2026-09-10f): mod-J4-finansowanie: wygasły t.j. ustawy o kredycie konsumenckim Dz.U. 2023 poz. 1028 zastąpiony aktualnym Dz.U. 2025 poz. 1362 (✅ RZĄD 1)

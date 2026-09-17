@@ -178,7 +178,7 @@ podatkowej; wejście w życie 1.10.2026 r.
 
 | Źródło | URL | Zakres |
 |---|---|---|
-| ISAP — tekst jednolity | isap.sejm.gov.pl | Dz.U. 2024 poz. 749, Dz.U. 2025 poz. 1679 |
+| ISAP — tekst jednolity | isap.sejm.gov.pl | t.j. Dz.U. 2026 poz. 778 (✅ [VER] RZĄD 1 2026-09-16e; `2024/749` — poprzedni t.j., wygasły; `2025/1679` — nowelizacja objęta t.j.) |
 | Urząd Patentowy RP | uprp.gov.pl | Lista rzeczników, postępowania, decyzje |
 | Polska Izba Rzeczników Patentowych | rzecznikpatentowy.org.pl | Samorząd, KRRP, sądy dyscyplinarne |
 | Orzecznictwo NSA | orzeczenia.nsa.gov.pl | Skargi na decyzje UP RP |

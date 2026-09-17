@@ -13,7 +13,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Prawo budowlane — pozostałe części | jw. | `mod-PrBud-uzupelnienie-pokrycia-2026` | 🟡 B+ |
 | Prawo budowlane — zmiana użytkowania / małe obiekty / ograniczenia | jw. + właściwe akty wykonawcze | `mod-PrBud-patodeweloperka-uzytkowanie-male-obiekty-ograniczenia` | ✅ aktywny; fresh gate |
 | Samorządy zawodowe architektów i inżynierów budownictwa | Dz.U. 2025 poz. 1783 t.j. ze zm. | `mod-ustawa-architekci-inzynierowie-budownictwa-zawod` | ✅ aktywny |
-| Prawo energetyczne / URE / OZE | Dz.U. 2025 poz. 459 t.j. ze zm. | `mod-PrEnergetyczne-URE-OZE` | ✅ aktywny; temporal gate |
+| Prawo energetyczne / URE / OZE | Dz.U. 2026 poz. 43 t.j. ze zm. ✅ [VER] RZĄD 1 2026-09-16d (było `2025/459` — obwieszczenie MF, podmiana aktu) | `mod-PrEnergetyczne-URE-OZE` | ✅ aktywny; temporal gate |
 | Prawo geodezyjne i kartograficzne / wywłaszczenia | Dz.U. 2024 poz. 1151 t.j. ze zm. | `mod-PrGeodezyjne-kartografia-wywlaszczenia` | ✅ aktywny |
 | Ustawa o gospodarce nieruchomościami (UGN) | Dz.U. 2026 poz. 399 t.j. ze zm. | `mod-UGN-gospodarka-nieruchomosciami` | 🟢 B+/COV |
 | Ustawa o przekształceniu prawa użytkowania wieczystego w prawo własności nieruchomości (29.07.2005) — przekształcenie NA WNIOSEK | **Dz.U. 2024 poz. 900 t.j.** ✅ [VER] RZĄD 1 2026-09-10e — obwieszczenie Marszałka Sejmu z 11.06.2024, akt bazowy Dz.U. 2005 nr 175 poz. 1459, najnowszy z 3 t.j., zero nowelizacji po tekście jednolitym | brak dedykowanego modułu — obsługa przez `mod-UGN-gospodarka-nieruchomosciami` | 🔴 KATALOGOWANY, bez modułu |
@@ -31,7 +31,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Ustawa o OOŚ / oceny środowiskowe | Dz.U. 2026 poz. 670 t.j. ze zm. | `mod-ustawa-OOS-oceny-srodowiskowe` | ✅ aktywny |
 | Ustawa o elektromobilności i paliwach alternatywnych | Dz.U. 2024 poz. 1289 t.j. ze zm. | `mod-ustawa-charakterystyka-energetyczna` | ✅ aktywny; fresh gate; ✅ VER 2026-09-01 RZĄD 1 (ELI DU/2024/1289: obwieszczenie 19.08.2024, status obowiązujący) — KOREKTA: dawny numer 2024 poz. 1634 należy do rozporządzenia MF ws. zwrotu VAT siłom zbrojnym |
 | Ustawa o planowaniu i zagospodarowaniu przestrzennym | Dz.U. 2026 poz. 538 t.j. ze zm. | `mod-ustawa-planowanie-przestrzenne` | ✅ aktywny |
-| Prawo gazowe | Dz.U. 2024 poz. 1538 ze zm. | `mod-ustawa-prawo-gazowe` | ✅ aktywny; fresh gate |
+| Prawo energetyczne — rynek gazu (brak odrębnej ustawy „Prawo gazowe") | Dz.U. 2026 poz. 43 t.j. ze zm. ✅ [VER] RZĄD 1 2026-09-16d (było `2024/1538` — obwieszczenie MSWiA, podmiana aktu) | `mod-ustawa-prawo-gazowe` | ✅ aktywny; fresh gate |
 | Transport drogowy / kolejowy / lotniczy / morski | właściwe bieżące ustawy sektorowe | `mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski` | ✅ aktywny; fresh gate |
 | Specustawa drogowa / ZRID | Dz.U. 2024 poz. 311 t.j. ze zm. | `mod-GDDKiA-specustawa-drogowa-ZRID` | ✅ aktywny |
 | Ustawa o odpadach / gospodarka komunalna | Dz.U. 2023 poz. 1587 t.j. ze zm. | `mod-ustawa-odpadach-gospodarka-komunalna` | ✅ aktywny; fresh gate |

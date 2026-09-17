@@ -27,7 +27,7 @@ Kategorie:
   • Radiofarmaceutyk
   • Lek recepturowy i apteczny
 
-UWAGA: Wyrób medyczny ≠ produkt leczniczy (odrębna ustawa 7.04.2022, Dz.U. 2022 poz. 974)
+UWAGA: Wyrób medyczny ≠ produkt leczniczy (odrębna ustawa 7.04.2022, t.j. Dz.U. 2024 poz. 1620)
 Suplement diety ≠ produkt leczniczy (ustawa o bezpieczeństwie żywności)
 ```
 
@@ -279,7 +279,7 @@ Inwentaryzacja i zwrot do wytwórcy: obowiązki przy wycofaniu z rynku (recall)
 ## CZĘŚĆ IX — WYROBY MEDYCZNE (ODRĘBNA REGULACJA)
 
 → Wydzielone do `mod-wyroby-medyczne.md` (sesja 2026-06-12). Ustawa o wyrobach
-medycznych z 7.04.2022 (Dz.U. 2022 poz. 974), MDR/IVDR, EUDAMED, klasyfikacja
+medycznych z 7.04.2022 (t.j. Dz.U. 2024 poz. 1620), MDR/IVDR, EUDAMED, klasyfikacja
 ryzyka, Prezes URPL.
 
 > ⚠️ Audyt 2026-06-14: ta sekcja była zduplikowaną kopią treści już wydzielonej

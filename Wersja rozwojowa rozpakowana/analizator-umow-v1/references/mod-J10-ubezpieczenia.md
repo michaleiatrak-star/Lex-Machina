@@ -23,7 +23,7 @@
 > isap.sejm.gov.pl → ustawa z 11.09.2015 o działalności ubezpieczeniowej i reasekuracyjnej
 >                    (DUiR) → podział na DZIAŁ I (na życie) i DZIAŁ II (majątkowe/pozostałe),
 >                    grupy ubezpieczeń (załącznik do ustawy)
-> isap.sejm.gov.pl → ustawa z 15.12.2017 o dystrybucji ubezpieczeń (IDD; Dz.U. 2024 poz. 1214 t.j.)
+> isap.sejm.gov.pl → ustawa z 15.12.2017 o dystrybucji ubezpieczeń (IDD; Dz.U. 2026 poz. 12 t.j. — ✅ RZĄD 1 2026-09-16e)
 >                    → art. 8 (analiza wymagań i potrzeb klienta — APK), obowiązki informacyjne, IPID
 > Ubezpieczenia obowiązkowe (OC poj., OC rolników, OC zawodowe) → odrębne ustawy/rozporządzenia
 > eur-lex.europa.eu → dyrektywa IDD 2016/97; rozporządzenie PRIIP 1286/2014 (KID dla IBIP)

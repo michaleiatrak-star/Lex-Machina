@@ -1,5 +1,17 @@
 # CHANGELOG — Biblioteka shared
 
+## 3.66 — 2026-09-16 — F-189
+
+- terminy.md — nowa sekcja „Kodeks karny skarbowy (KKS) — terminy i progi” (F-135; RZĄD 1 — KKS 2025/633 + KROK 2C: 2026/347, 421, 846, 901): karalność art. 44 i 51, terminy zapłaty art. 16–16a, dobrowolne poddanie się art. 142–144, grzywna art. 48, progi art. 53, art. 27, mandat karny zaoczny (od 26.12.2026).
+## 3.65 — 2026-09-16 — F-189
+
+- terminy.md (F-135, RZĄD 1 — KC 2026/795): nowa podsekcja „Dalsze terminy KC” (1007 § 1–4, 994 § 1, 819, 817, 812 § 4, 174 § 1, 764⁶, 704, 660) i ostrzeżenie o art. 117; szybka tabela — zachowek z punktami startowymi, art. 1015 § 1¹–§ 2, art. 264 § 1–3 KP (dyscyplinarka to § 2), art. 14 ust. 2a–2c FUS, art. 25 ust. 1a uWŁ. definicje/DEF-ODPOWIEDZIALNOSC-SZKODA — art. 442¹ § 2–4 (⛔ szkoda na osobie: granica 10 lat nie obowiązuje).
+## 3.64 — 2026-09-16 — F-189
+
+- T27 klasa ZASTĄPIONY_TJ (RZĄD 1): ⛔ `2024/1360` (rozporządzenie RM) jako t.j. KC → `2026/795` w 9 miejscach (orka-bas cz. 03, 08; definicje DEF-INTERES-WLASNY, DEF-ODPOWIEDZIALNOSC; mod-niepelnosprawnosc); `2025/1515` (rozporządzenie RM) jako t.j. u.s.g. → `2026/662`; `2024/655` (rozporządzenie MZ) jako t.j. ustawy o obronie Ojczyzny → `2025/825`; ustawa deweloperska `2021/1177` → t.j. `2026/880` (×2). oplaty/03: tabela spraw rodzinnych — kolumna podstawy § 4 ust. 1 pkt 1–9 i trzy pominięte pozycje (T32). TABELE-OPLAT §7: wskaźnik dr-06 → moduł opłaty skarbowej; opis egzekwowania T32.
+## 3.63 — 2026-09-16 — F-189
+
+- terminy.md, sekcja Ordynacja — zakres pięciu nowelizacji po t.j. ustalony z treści (F-OP-2026-09 zamknięta): żadna nie zmienia art. 68, 70, 162, 223, 236, 241; poz. 1098 NIE dotyka art. 70 (korekta 12i); poz. 875 — milczące umorzenie (art. 67a § 3–15, od 1.01.2027); ⚠️ od 1.10.2026 art. 213 § 5 — odmowa uzupełnienia/sprostowania decyzji bez zażalenia, termin odwołania od doręczenia postanowienia.
 ## 3.62 — 2026-09-16 — F-189
 
 - terminy.md — (1) KRO: dopisane terminy macierzyństwa art. 61¹¹, 61¹³ § 1–2, 61¹⁴ § 1 (ROK; ✅ RZĄD 1 Dz.U. 2026 poz. 236) i ostrzeżenie o błędzie „6 miesięcy/3 lata”; (2) KP: zakres nowelizacji poz. 1046 poprawiony z odczytu treści (art. 11 nie jest zmieniany). Pole YAML `changelog:` skrócone do odesłania (T12).

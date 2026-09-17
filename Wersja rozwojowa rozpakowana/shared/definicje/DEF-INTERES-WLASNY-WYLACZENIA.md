@@ -249,7 +249,7 @@ PEŁNOMOCNICTWO A "STRONA UKRYTA" — działanie na rzecz osoby trzeciej:
 ## 5. CZYNNOŚĆ PRAWNA UKRYTA / POZORNA (art. 83 KC) — DR-02/16
 
 ```
-Weryfikacja: KC art. 83 (Dz.U. 2024 poz. 1360 t.j.)
+Weryfikacja: KC art. 83 (Dz.U. 2026 poz. 795 t.j.)
 
 PRZEPIS (art. 83 §1 KC):
   "Nieważne jest oświadczenie woli złożone drugiej stronie za jej zgodą

@@ -8,7 +8,7 @@ Przedawnienie karalności (art. 101 KK) — zależne od zagrożenia:
   Powyżej 5 lat (art. 269a — sabotaż systemów): 15 lat
 Zawiadomienie o przestępstwie:    brak terminu zawitego (ale jak najszybciej)
 Zabezpieczenie dowodów cyfrowych: NATYCHMIAST — dane mogą być usunięte w godzinach
-Pozew cywilny (dobra osobiste):   art. 4421 KC — 3 lata od dowiedzenia się o szkodzie (delikt); art. 117 §1 KC — 6 lat (ogólny termin roszczeń majątkowych)
+Pozew cywilny (dobra osobiste):   art. 4421 KC — 3 lata od dowiedzenia się o szkodzie (delikt); art. 118 KC — 6 lat (ogólny termin; ⛔ art. 117 § 1 mówi tylko, ŻE roszczenia majątkowe się przedawniają — korekta 2026-09-16f)
 ```
 
 ## FAZA 0 — INTAKE
@@ -83,7 +83,7 @@ B. PLATFORMA / PORTAL:
 
 C. POWÓDZTWO CYWILNE O UJAWNIENIE DANYCH:
    → Sąd cywilny może nakazać operatorowi ujawnienie danych abonenta
-   → Podstawa: art. 159 ust. 2 pkt 4 Prawa telekomunikacyjnego (Dz.U. 2024 poz. 1221 t.j.) lub odpowiednik w ustawie o komunikacji elektronicznej — weryfikuj aktualnie w isap.sejm.gov.pl
+   → Podstawa: art. 159 ust. 2 pkt 4 Prawa telekomunikacyjnego (⛔ ustawa uchylona; `Dz.U. 2024 poz. 1221` to AKT PIERWOTNY Prawa komunikacji elektronicznej, nie t.j. Prawa telekomunikacyjnego — 2026-09-16d) lub odpowiednik w ustawie o komunikacji elektronicznej — weryfikuj aktualnie w isap.sejm.gov.pl
    → Skuteczne np. wobec operatorów polskich — szybsze niż MLAT
 
 D. EUROPEJSKI NAKAZ ZACHOWANIA DANYCH (e-Evidence):
@@ -158,7 +158,7 @@ REKOMENDACJA: □ Zawiadomienie karne  □ Pozew cywilny  □ Zgłoszenie platfo
 | Orzecznictwo SN / SA | `orzeczenia-sadowe-v2` |
 
 *KK: Dz.U. 2025 poz. 383; sprawdź zmiany Dz.U. 2025 poz. 1818 i 1872 t.j. | Rozdział XXXIII — Przestępstwa przeciwko ochronie informacji*
-*Prawo telekomunikacyjne: Dz.U. 2024 poz. 1221 t.j. — weryfikuj w isap.sejm.gov.pl*
+*Prawo komunikacji elektronicznej: Dz.U. 2024 poz. 1221 (akt pierwotny; zastąpiło Prawo telekomunikacyjne) — weryfikuj w isap.sejm.gov.pl (korekta 2026-09-16d)*
 *DSA (Rozp. UE 2022/2065): stosowany od 17.02.2024 dla wszystkich platform*
 *e-Evidence (Rozp. UE 2023/1543): wdrożenie transgraniczne — weryfikuj stan w EUR-LEX*
 *Weryfikacja: 22.05.2026 — zakaz cytowania przepisów z pamięci*

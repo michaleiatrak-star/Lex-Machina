@@ -289,7 +289,7 @@ ZAWIESZENIE PRZETARGU:
 ---
 
 *← Powrót do routingu: `view references/mod-J0-routing.md`*
-*Podstawa prawna: PZP t.j. Dz.U. 2024 poz. 1320 — isap.sejm.gov.pl*
+*Podstawa prawna: PZP t.j. Dz.U. 2026 poz. 793 (✅ RZĄD 1 2026-09-16e) — isap.sejm.gov.pl*
 *Weryfikacja PZP: ISAP → tekst ujednolicony Kancelarii Sejmu; dla stanu na 03.06.2026 bazowo oprac. 2026-05-27.*
 *Portal UZP: uzp.gov.pl · KIO: uzp.gov.pl/kio*
 *Wskaźniki GUS: stat.gov.pl · FIDIC: fidic.org*

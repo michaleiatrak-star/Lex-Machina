@@ -101,6 +101,11 @@ lub PRZYSPIESZENIE, nie o CAŁKOWITE uniknięcie odpowiedzialności)
 
 ### Art. 16 KKS — forma OGÓLNA
 
+> ✅ [VER] RZĄD 1 2026-09-16g — KKS t.j. `Dz.U. 2025 poz. 633`; nowelizacje po t.j.
+> (`2026/347`, `421`, `846`, `901`) nie zmieniają art. 16 ani 16a. ⚠️ `2026/846` **uchyla
+> art. 16b** (niepodleganie karze przy zeznaniu PIT przygotowanym przez organ — błędy z winy
+> organu lub płatnika) z dniem **1.10.2026**.
+
 ```
 □ NIE PODLEGA KARZE za przestępstwo/wykroczenie SKARBOWE sprawca,
   KTÓRY PO popełnieniu czynu ZABRONIONEGO ZAWIADOMIŁ o TYM organ
@@ -129,8 +134,25 @@ TYLKO CZĘŚCIĄ wymogu, NIE całością
 □ ⭐ DLA SKUTECZNOŚCI CZYNNEGO ŻALU NIE MA znaczenia, JAKA kara
   GROZI za dane przestępstwo/wykroczenie skarbowe — MOŻE to BYĆ nawet
   SAMA kara grzywny
-□ Art. 16 KKS STOSUJE SIĘ ODPOWIEDNIO również do USIŁOWANIA (nie
-  tylko dokonania)
+□ FORMA (§ 4–4a): na piśmie albo ustnie do protokołu; do finansowego
+  organu postępowania przygotowawczego — także przez konto w e-Urzędzie
+  Skarbowym
+□ ⛔ BEZSKUTECZNOŚĆ (§ 5) — zawiadomienie jest bezskuteczne, jeżeli złożono je:
+  1) gdy organ ścigania miał już WYRAŹNIE UDOKUMENTOWANĄ wiadomość o czynie;
+  2) PO ROZPOCZĘCIU czynności służbowej — w szczególności PRZESZUKANIA,
+     CZYNNOŚCI SPRAWDZAJĄCEJ lub KONTROLI zmierzającej do ujawnienia czynu —
+     chyba że czynność nie dała podstaw do wszczęcia postępowania o ten czyn
+□ ⛔ WYŁĄCZENIA PODMIOTOWE (§ 6) — art. 16 nie chroni sprawcy, który:
+  1) kierował wykonaniem ujawnionego czynu; 2) wykorzystując uzależnienie
+  innej osoby, polecił jej wykonanie czynu; 3) zorganizował grupę lub
+  związek albo nim kierował — chyba że zawiadomił wraz ze WSZYSTKIMI
+  członkami; 4) nakłaniał inną osobę do czynu, by skierować przeciw niej
+  postępowanie
+□ USIŁOWANIE — ⛔ KOREKTA 2026-09-16g: art. 16 KKS NIE zawiera odesłania do
+  usiłowania (poprzedni zapis „stosuje się odpowiednio do usiłowania" nie
+  miał podstawy). Przy usiłowaniu art. 21 § 3 KKS odsyła do art. 13, 14 § 2
+  i **art. 15 Kodeksu karnego** (dobrowolne odstąpienie / zapobieżenie
+  skutkowi) oraz art. 20 § 4 KKS
 ```
 
 ### Art. 16a KKS — forma SZCZEGÓLNA (deklaracje/księgi)
@@ -149,9 +171,11 @@ TYLKO CZĘŚCIĄ wymogu, NIE całością
   STOSUJE SIĘ TYLKO, gdy należność UISZCZONO NIEZWŁOCZNIE, NIE
   PÓŹNIEJ niż w TERMINIE wyznaczonym PRZEZ finansowy organ postępowania
   przygotowawczego
-□ ⚠️ ISTNIEJE WYŁĄCZENIE stosowania §1 w OKREŚLONYCH okolicznościach
-  (⚠️ dokładny katalog niepotwierdzony w pełni w tej sesji — sprawdź
-  ISAP przy konkretnej sprawie)
+□ ⛔ WYŁĄCZENIE (§ 3) — art. 16a nie działa, jeżeli PRZED złożeniem korekty
+  WSZCZĘTO postępowanie przygotowawcze o przestępstwo lub wykroczenie
+  skarbowe albo UJAWNIONO je w toku toczącego się postępowania
+  przygotowawczego (✅ RZĄD 1 2026-09-16g; poprzednio „katalog
+  niepotwierdzony")
 ```
 
 ### Praktyczne aspekty (oba przepisy)
@@ -176,10 +200,11 @@ TYLKO CZĘŚCIĄ wymogu, NIE całością
 
 ```
 □ Czy organ ŚCIGANIA/podatkowy JUŻ WIE o czynie (np. trwa KONTROLA) —
-  JEŚLI TAK, czynny żal PRAWDOPODOBNIE NIE BĘDZIE już skuteczny
-  (WARUNKIEM jest zgłoszenie PRZED wykryciem — ⚠️ dokładny próg
-  "wykrycia" zweryfikuj przy konkretnej sprawie, np. czy WSZCZĘCIE
-  czynności SPRAWDZAJĄCYCH już WYKLUCZA skuteczność)
+  JEŚLI TAK, czynny żal z art. 16 jest BEZSKUTECZNY (art. 16 § 5): wyraźnie
+  udokumentowana wiadomość organu albo rozpoczęta czynność służbowa —
+  przeszukanie, CZYNNOŚĆ SPRAWDZAJĄCA, kontrola — chyba że czynność nie dała
+  podstaw do wszczęcia postępowania. Dla art. 16a granicą jest WSZCZĘCIE
+  postępowania przygotowawczego albo ujawnienie w jego toku (art. 16a § 3)
 □ Czy czyn dotyczy DEKLARACJI/KSIĘGI (art. 16a, prostsza ścieżka
   korekty) czy INNEGO typu naruszenia (art. 16, pełne zawiadomienie +
   ujawnienie współsprawców)

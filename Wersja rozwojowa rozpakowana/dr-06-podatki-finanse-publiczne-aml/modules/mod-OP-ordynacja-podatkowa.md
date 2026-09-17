@@ -453,8 +453,12 @@ art. 70 § 6 pkt 1" i o „ugodzie podatkowej" traktuj jako OPIS ZAMIARU
 LEGISLACYJNEGO (projekt / druk), NIE jako stan prawa. Przed powołaniem —
 wskaż pozycję Dz.U. i datę wejścia w życie z odczytu treści; bez tego
 NIE używaj. Pozostałe nowelizacje Op po t.j.: poz. 825 (24.09.2026, art. 14i–14j),
-poz. 1154 (16.09.2026, wyłącznie art. 299 § 3 pkt 17), poz. 875 i 1098
-(1.01.2027) — zakres dwóch ostatnich nieustalony (flaga F-OP-2026-09).
+poz. 1154 (16.09.2026, wyłącznie art. 299 § 3 pkt 17), poz. 875 (1.01.2027,
+wyłącznie art. 67a § 3–15 — milczące umorzenie do kwoty minimalnego wynagrodzenia)
+i poz. 1098 (1.01.2027, OKI — art. 3b, 297–299c, 306; NIE art. 70). Pełny zakres:
+`shared/terminy.md`, sekcja Ordynacja (F-OP-2026-09 zamknięta 2026-09-16).
+⚠️ Od 1.10.2026 art. 213 § 5 (poz. 846): odmowa uzupełnienia/sprostowania decyzji
+— bez zażalenia; termin odwołania biegnie od doręczenia tego postanowienia.
 
 ⭐⭐ DODANE 2026-08-08 (na żądanie użytkownika, zamknięcie flagi F-17)
 — ⚡ NOWELIZACJA z 15.05.2026 (druk 2287, uchwalona jednogłośnie
@@ -808,7 +812,7 @@ Organ podatkowy może wydać decyzję o zabezpieczeniu przed wydaniem decyzji us
 ## 12. ORZECZNICTWO
 
 ```
-web_search: "Ordynacja podatkowa Op Dz.U. 2025 poz. 111 isap.sejm.gov.pl"
+web_search: "Ordynacja podatkowa Op Dz.U. 2026 poz. 622 isap.sejm.gov.pl"
 web_search: "GAAR art 119a Op NSA orzecznictwo przesłanki sztuczność 2025 2026"
 web_search: "odpowiedzialność zarządu art 116 Op NSA termin upadłości 2025"
 web_search: "przedawnienie podatek art 70 Op NSA przerwanie zawiadomienie TK SK 40/12"

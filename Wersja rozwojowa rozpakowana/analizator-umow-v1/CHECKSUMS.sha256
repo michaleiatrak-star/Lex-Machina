@@ -1,8 +1,8 @@
 532165db1bcdc6a9634490d21847bb93a4f1596436b397287344d820e5beeec1  ./PORTABILITY-MANIFEST.md
-0a7b778e0011dbdc4ef8b9a5031b616b13b710ddef5b7fb42727377a394671e9  ./SKILL.md
+6145cfb34e0b6a40cec11e956f31af4bf96e01a009ccfeb120c0ceb3972d7fcd  ./SKILL.md
 a8894e5463f321487a6233c1b9b10f5caea8ac2a2b8a9deb9824ae245d237348  ./agents/openai.yaml
 49315dda7125ec5fc77ef5f2b96126d8b2121c6e72944b4702972e90f321d3ee  ./assets/icon.svg
-e24b640d20b9629cba504da1794a5628950fd0daf5022707aaba342bd1c2b948  ./references/CHANGELOG.md
+c31dd107953122d8852ddd982c9b415982b18974f1045f470bcb36ade3ded05c  ./references/CHANGELOG.md
 5709c427fef0395e20466a9efa4e7053e17d741801cc44b502d84eef9162444b  ./references/b2b-podwykonawcze.md
 41e7a97f2c301f10047726ecb0db6fb299031235548f6d6951871d62b4c72f68  ./references/generator/boilerplate-strukturalne.md
 e4375906431043f4663beb45c0d6f8f1a91e3245126d8e173d019747ecbecfc1  ./references/generator/doktryna-uzupelnienie.md
@@ -14,14 +14,14 @@ fceb85ef3a0c1f5d3905a671217407a367b595a1abc16520b83a53f9b3061830  ./references/g
 5e26366ceede74e3be263b0162489fb63d22e9bb7c462212754ad6da0d1f0bff  ./references/mod-FA-founders-dokumenty-zalozycielskie.md
 b42d21f307eaef3768f2062edffe65e023aaca3abbd02c47c8b41277b5e97c25  ./references/mod-J0-routing.md
 0e46dd7d4e5e94e36c7e5c8a736ce57f8345af8f09ff1e8e9453174ad24897d3  ./references/mod-J1-najem.md
-33a1b2436e429fb595354e89627f85d64604cfa345c57dc4ef9c1b40ac190f1b  ./references/mod-J10-ubezpieczenia.md
+bbe4ee2a4410b066b104fcde8752a1a0cbd69238c6a3ed37f52ad1aa4cb9b3fc  ./references/mod-J10-ubezpieczenia.md
 40e2c3facfd34988dafad8915fd75c56f56dff9c00070af89a9d60fe187dfb1a  ./references/mod-J2-nieruchomosci.md
 83a8574d8cb8d1dc0fc465bcedabbea6e901440edef041158614c6a78ede8558  ./references/mod-J21-rodo-archiwizacja-regulaminy.md
 ae248b7dfc3949ed0eb1e1f68f57c95587a9a4554b4edb00c80206a3f11090de  ./references/mod-J3-dystrybucja.md
 0e9e1e76d90f4704ae5836f643c96409b0b38a2cb9e28d9c755ec2471f721917  ./references/mod-J4-finansowanie.md
 9298542639cf3fd88fa5a018316c9377d9be8d440953dd6dca66f4b82a032902  ./references/mod-J5-umowy-wykonawcze.md
 f7ed4bb2c9a177fef958e1a88da3e14fdfb500a853899ff102906c72f75c65f5  ./references/mod-J6-it-konsorcjum.md
-4a6af48a001030be6820db3525e4a7bd112151b6385f00f5528fe6cad6d017a0  ./references/mod-J7-pzp.md
+485831a990817a255e4f677039e16d54aac780b7e2f7661313d102be985cbce2  ./references/mod-J7-pzp.md
 8e3e9366b2b9a4a0dd2bae2b3e89d75e3eb600ad26166ec364157c8613cdb19b  ./references/mod-J8-b2c.md
 9b349b8ad5a2d68823f0e7d50832006edca34e20dcaceccbc6cf54162c9437f1  ./references/mod-J9-ip-prawa-autorskie.md
 be2f8947f82e40806763730ec6c2ef62655b575bdfb59fe9895f8376714e09e6  ./references/mod-MA-transakcje.md

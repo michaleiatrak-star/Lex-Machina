@@ -68,13 +68,13 @@ ręcznie — nie ma testu, który by tego pilnował.
 | **3 tygodnie** ⚠️ | Apelacja cywilna, gdy **przedłużono termin** do sporządzenia uzasadnienia; sąd zawiadamia o tym stronę, a przy błędnym pouczeniu apelację uważa się za wniesioną w terminie | **art. 369 § 1¹ KPC** |
 | **14 dni** | Apelacja karna | art. 445 §1 KPK |
 | **14 dni** | **Odwołanie od decyzji** administracyjnej — od doręczenia, a gdy decyzję ogłoszono ustnie — od ogłoszenia; ⚠️ przepisy szczególne mogą przewidywać inne terminy (§ 3) | **art. 129 § 2 KPA** |
-| **14 dni** | Sprzeciw od orzeczenia lekarza ZUS | art. 14 ustawy FUS |
+| **14 dni** | Sprzeciw od orzeczenia lekarza orzecznika ZUS do komisji lekarskiej — od **doręczenia** orzeczenia; wnoszony za pośrednictwem jednostki ZUS; po terminie komisja nie rozpatruje (przywrócenie — ust. 2c) | art. 14 ust. 2a–2c ustawy FUS (t.j. `Dz.U. 2025 poz. 1749`, ✅ RZĄD 1 2026-09-16f) |
 | **14 dni** | Odstąpienie od umowy (internet/poza lokalem) | art. 27 ustawy PK |
-| **⚠ 21 dni** | Odwołanie od wypowiedzenia/dyscyplinarki | **art. 264 §1 KP** |
+| **⚠ 21 dni** | Odwołanie od wypowiedzenia (§ 1); żądanie przywrócenia / odszkodowania po rozwiązaniu bez wypowiedzenia **lub wygaśnięciu** (§ 2); nawiązanie umowy — od doręczenia odmowy (§ 3) | **art. 264 § 1–3 KP** (korekta 2026-09-16f: dyscyplinarka to § 2, nie § 1) |
 | **30 dni** | **Skarga do WSA** na rozstrzygnięcie — od doręczenia skarżącemu | **art. 53 § 1 PPSA** |
 | **1 miesiąc** | Odwołanie od decyzji ZUS do sądu | art. 477⁹ §1 KPC |
-| **6 tygodni** | Zaskarżenie uchwały wspólnoty mieszkaniowej | art. 25 uWŁ |
-| **6 miesięcy** | Przyjęcie/odrzucenie spadku | art. 1015 §1 KC |
+| **6 tygodni** | Zaskarżenie uchwały wspólnoty mieszkaniowej — od **podjęcia** uchwały na zebraniu albo od **powiadomienia** o uchwale podjętej w trybie indywidualnego zbierania głosów | art. 25 ust. 1a uWŁ (t.j. `Dz.U. 2026 poz. 232`, ✅ RZĄD 1 2026-09-16f) |
+| **6 miesięcy** | Przyjęcie/odrzucenie spadku — od dowiedzenia się o tytule powołania; ⚠️ wystarcza złożenie przed upływem **wniosku do sądu** o odebranie oświadczenia (§ 1¹); postępowanie o zezwolenie sądu **zawiesza** bieg (§ 1²); brak oświadczenia = przyjęcie z dobrodziejstwem inwentarza (§ 2) | art. 1015 KC |
 | **tydzień** | Wniosek o **przywrócenie terminu** — od ustania przyczyny uchybienia; równocześnie należy dokonać czynności (§ 3); po roku tylko w wypadkach wyjątkowych (§ 4) | **art. 169 § 1 KPC** |
 | **tydzień** | **Skarga na czynności komornika** — od dokonania czynności | art. 767 § 4 KPC |
 | **3 miesiące** | Skarga o **wznowienie** postępowania cywilnego | art. 407 § 1 KPC |
@@ -153,7 +153,7 @@ ręcznie — nie ma testu, który by tego pilnował.
 |--------|--------|----------|
 | 3 lata | Roszczenia ze stosunku pracy | art. 291 KP |
 | 3/6 lat | Roszczenia cywilne ogólne — ⛔ szczegóły i pułapka końca roku kalendarzowego: sekcja **Prawo cywilne materialne (KC)** niżej | art. 118 KC |
-| 5 lat | Zachowek | art. 1007 KC |
+| 5 lat | Zachowek — wobec spadkobierców od **ogłoszenia testamentu** (§ 1); wobec obdarowanych, zapisobierców windykacyjnych, fundacji rodzinnej — od **otwarcia spadku** (§ 2–4) | art. 1007 KC |
 | 1 rok / maks. 3 lata przy wszczęciu postępowania w pierwszym roku | Wykroczenia — karalność | art. 45 §1 KW; re-ver ELI Dz.U. 2025 poz. 734, 2026-08-28 |
 
 ---
@@ -278,6 +278,25 @@ zmieniających**, wszystkie z odroczonym wejściem w życie:
 (1.10.2026), `poz. 875` i `poz. 1098` (1.01.2027). **Brzmienia niżej są
 aktualne na 12.09.2026**, ale trzy z tych ustaw wchodzą w życie **w ciągu
 najbliższych trzech tygodni**. Przy sprawie po 16.09.2026 odczytać ponownie.
+
+✅ **ZAKRES WSZYSTKICH PIĘCIU USTALONY — odczyt treści 2026-09-16 (F-OP-2026-09 zamknięta).**
+Żadna z nich **nie zmienia art. 68, 70, 162, 223, 236 ani 241** — brzmienia w tabeli
+niżej pozostają aktualne także po 16.09, 24.09, 1.10.2026 i 1.01.2027.
+- `poz. 1154` (16.09.2026) — wyłącznie art. 299 § 3 pkt 17;
+- `poz. 825` (24.09.2026) — art. 14i § 6–7, art. 14j § 3 (interpretacje indywidualne);
+- `poz. 846` (1.10.2026) — szeroka (m.in. art. 12, 67a, 73–81b, 86a–86o, 119m, 165,
+  199b, 210, 213, 228, 297–299j); nie zawiera słowa „ugoda";
+- `poz. 875` (1.01.2027) — wyłącznie art. 67a § 3–15: **milczące umorzenie** zaległości,
+  odsetek lub opłaty prolongacyjnej po 60 dniach bez decyzji, do kwoty minimalnego
+  wynagrodzenia w roku podatkowym (z wyłączeniami § 5);
+- `poz. 1098` (1.01.2027, OKI) — art. 3b § 2–3, 297, 298, 299 § 1, 299c, 306 § 2;
+  ⛔ **NIE dotyka art. 70** (zapis „dotyka art. 70" z 2026-09-12i był błędny).
+
+⚠️ **Zmiana terminowa od 1.10.2026 (poz. 846, art. 1 pkt 57):** art. 213 § 5 —
+odmowa uzupełnienia lub sprostowania decyzji następuje postanowieniem **bez zażalenia**
+(dziś: „na które służy zażalenie"), a **termin do wniesienia odwołania od decyzji lub
+skargi biegnie od dnia doręczenia tego postanowienia**. Art. 228 § 1 pkt 3 — pozostawienie
+odwołania bez rozpatrzenia także przy niespełnieniu warunków z art. 168 § 2, 3 lub 3a.
 
 | Termin | Czynność | Podstawa |
 |---|---|---|
@@ -618,6 +637,27 @@ prowadzi do błędnego wniosku o przedawnieniu.
 | **20 lat** / **30 lat** w złej wierze | **zasiedzenie** nieruchomości | art. 172 § 1 i § 2 KC |
 | ⚠️ **+2 lata** | zasiedzenie nie może skończyć się wcześniej niż 2 lata od uzyskania pełnoletności przez właściciela **małoletniego** | art. 173 KC |
 
+### Dalsze terminy KC (dopisane 2026-09-16f, F-135)
+
+✅ [VER] RZĄD 1 2026-09-16f — odczyt treści `Dz.U. 2026 poz. 795`.
+
+| Termin | Instytucja | Podstawa |
+|---|---|---|
+| **5 lat** | **zachowek** — od **ogłoszenia testamentu** wobec spadkobierców; od **otwarcia spadku** wobec obdarowanego, zapisobiercy windykacyjnego, fundacji rodzinnej | art. 1007 § 1–4 KC |
+| **10 lat** wstecz od otwarcia spadku | darowizny na rzecz osób **niebędących** spadkobiercami ani uprawnionymi do zachowku — nie dolicza się do substratu | art. 994 § 1 KC |
+| **3 lata** | roszczenia z umowy ubezpieczenia; OC — poszkodowany wobec ubezpieczyciela: termin jak dla roszczenia wobec sprawcy (§ 3); zgłoszenie **przerywa** bieg do pisemnej odpowiedzi (§ 4) | art. 819 KC |
+| **30 dni** / 14 dni od wyjaśnienia | spełnienie świadczenia przez ubezpieczyciela; bezsporna część — zawsze w 30 dni | art. 817 KC |
+| **30 dni** (przedsiębiorca: **7 dni**) | odstąpienie od umowy ubezpieczenia zawartej na okres **dłuższy niż 6 miesięcy**; konsument niepoinformowany — od dowiedzenia się | art. 812 § 4 KC |
+| **3 lata** | **zasiedzenie ruchomości** — posiadacz samoistny w dobrej wierze | art. 174 § 1 KC |
+| **2 lata** maksimum | zakaz konkurencji agenta po rozwiązaniu umowy (forma pisemna pod rygorem nieważności) | art. 764⁶ § 1–2 KC |
+| **rok** / **6 miesięcy** naprzód | wypowiedzenie dzierżawy gruntu rolnego (na koniec roku dzierżawnego) / innej dzierżawy (przed upływem roku dzierżawnego) — w braku odmiennej umowy | art. 704 KC |
+| powyżej **roku** | najem nieruchomości lub pomieszczenia — forma pisemna; bez niej umowa na **czas nieoznaczony** | art. 660 KC |
+
+⛔ **Art. 117 § 1 KC nie podaje żadnego terminu** — stanowi tylko, że roszczenia majątkowe
+ulegają przedawnieniu. Liczba „6 lat" pochodzi z art. 118. Konsument: po upływie terminu
+nie można domagać się zaspokojenia (art. 117 § 2¹), a sąd wyjątkowo może nie uwzględnić
+upływu (art. 117¹).
+
 ⛔ **Art. 344 § 2 KC mówi „WYGASA", nie „przedawnia się".** Roszczenie
 posesoryjne po roku **przestaje istnieć** — sąd uwzględnia to z urzędu, nie
 trzeba podnosić zarzutu. To inna konstrukcja niż przedawnienie z art. 118.
@@ -629,6 +669,41 @@ sprawy.
 uprawnienia z rękojmi, jeżeli nie zbadał rzeczy i nie zawiadomił sprzedawcy —
 akt staranności, którego nie ma w obrocie konsumenckim.
 
+
+## Kodeks karny skarbowy (KKS) — terminy i progi (dodane 2026-09-16g, F-135)
+
+✅ [VER] RZĄD 1 2026-09-16g — `Dz.U. 2025 poz. 633`. **KROK 2C:** po t.j. KKS zmieniały
+`2026/347` (art. 80cb, od 18.03.2026), `2026/421` (art. 113, od 14.04.2026), `2026/901`
+(art. 122, od 21.07.2026) i `2026/846` (art. 16b uchylony, 80f, 133 — od 1.10.2026; mandat
+zaoczny art. 137–140 — od 26.12.2026). **Żadna nie dotyka art. 16, 16a, 17–18, 27, 44, 48,
+51, 53, 142–144.**
+
+| Termin / wartość | Instytucja | Podstawa |
+|---|---|---|
+| **5 lat** od popełnienia | karalność przestępstwa skarbowego zagrożonego grzywną, ograniczeniem wolności albo pozbawieniem wolności **do 3 lat** | art. 44 § 1 pkt 1 KKS |
+| **10 lat** od popełnienia | karalność przestępstwa skarbowego zagrożonego pozbawieniem wolności **ponad 3 lata** | art. 44 § 1 pkt 2 KKS |
+| ⛔ bieg od **końca roku**, w którym upłynął termin płatności | przestępstwo polegające na uszczupleniu lub narażeniu na uszczuplenie należności (cło — od powstania długu celnego) | art. 44 § 3 KKS |
+| ⛔ karalność ustaje także z **przedawnieniem należności** | przestępstwo „uszczupleniowe" | art. 44 § 2 KKS |
+| **+5 lat** / **+10 lat** po upływie terminu z § 1 | gdy w okresie z § 1 lub § 2 **wszczęto postępowanie przeciwko sprawcy** | art. 44 § 5 KKS |
+| **rok** od popełnienia; **+2 lata** po wszczęciu postępowania | karalność **wykroczenia** skarbowego | art. 51 § 1–2 KKS |
+| **3 lata** od uprawomocnienia | niewykonanie kary za wykroczenie skarbowe | art. 51 § 3 KKS |
+| niezwłocznie, **najpóźniej w terminie wyznaczonym** przez finansowy organ postępowania przygotowawczego | zapłata należności przy **korekcie** (art. 16a); przy **czynnym żalu** (art. 16) — w terminie wyznaczonym przez uprawniony organ | art. 16 § 2, art. 16a § 2 KKS |
+| ⛔ do **wniesienia aktu oskarżenia** | wniosek o **dobrowolne poddanie się odpowiedzialności** (w postępowaniu finansowego organu) | art. 142 § 1 KKS |
+| ⛔ **nie przed upływem miesiąca** od złożenia; ponowny wniosek — niedopuszczalny | cofnięcie wniosku o dobrowolne poddanie się | art. 144 § 1–2 KKS |
+| ≥ **1/3** minimalnego wynagrodzenia (wykroczenie: ≥ **1/10**) | kwota tytułem grzywny przy wniosku o dobrowolne poddanie się | art. 143 § 1 pkt 2 KKS |
+| od **1/10** do **20-krotności** minimalnego wynagrodzenia; mandat ≤ **5-krotności**; wyrok nakazowy ≤ **10-krotności** | kara grzywny za wykroczenie skarbowe | art. 48 § 1–3 KKS |
+| ≤ **5-krotność** minimalnego wynagrodzenia | **ustawowy próg** — granica wykroczenia skarbowego | art. 53 § 3, § 6 KKS |
+| ≤ **200-krotność** / > **500-krotności** / > **1000-krotności** | **mała** / **duża** / **wielka** wartość (w czasie czynu) | art. 53 § 14–16 KKS |
+| **5 dni – 5 lat** | kara pozbawienia wolności, jeżeli kodeks nie stanowi inaczej | art. 27 § 1 KKS |
+| ⏳ **14 dni** od doręczenia mandatu | **mandat karny zaoczny** — zapłata; prawomocność z chwilą zapłaty w terminie; wpłata po terminie — zabezpieczenie, jeżeli postępowanie wszczęto w 14 dni od wpłaty, inaczej zwrot | art. 138 § 1 pkt 3, § 4 pkt 3, § 5a–5b KKS **w brzmieniu od 26.12.2026** (`Dz.U. 2026 poz. 846`) |
+
+⛔ **Kwoty „krotności" liczy się według minimalnego wynagrodzenia z CZASU CZYNU**
+(art. 53 § 3, § 14–16) — nie z dnia orzekania. Kotwica kwotowa: `shared/oplaty/04-wartosci-powtarzalne-kotwice.md`.
+⛔ **Art. 16 § 5:** czynny żal jest bezskuteczny po rozpoczęciu przeszukania, **czynności
+sprawdzającej** lub kontroli zmierzającej do ujawnienia czynu (chyba że nie dała podstaw do
+wszczęcia postępowania). **Art. 16a § 3:** korekta nie działa po wszczęciu postępowania
+przygotowawczego albo ujawnieniu czynu w jego toku.
+⚠️ **Od 1.10.2026** (`2026/846`): uchylony art. 16b; zmienione art. 80f i 133 § 1 pkt 1.
 
 ## ⛔ Reguła, która wyszła z tego audytu
 

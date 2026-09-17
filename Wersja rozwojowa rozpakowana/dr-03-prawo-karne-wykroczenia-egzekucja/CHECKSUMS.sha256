@@ -1,7 +1,7 @@
 84fd215a23e06fb7e8bae0ccdcec1c8cb63781bfd88cd926d87289f5a379dcc3  ./MAPA-AKTOW.md
 5775153126593f838a4043bc579540f7c032712b49af25614579a8d78cd9ea34  ./MAPA-POKRYCIA.md
 7114bc8b687168e76fb874a553183db97691e69a7864d60a31f348a6e408dc3f  ./PORTABILITY-MANIFEST.md
-b7433bc2f51ad4b3d7deee8283424ad7eef031f273341915dd91c69f8957578f  ./SKILL.md
+9feec2900ce4e5a0b0f3ab2275b8d74968ec1980fba6c25eb8d6653f73afffac  ./SKILL.md
 d015e63761fe4291d6a7faa309515a05d52d9d0e65242b36d2693f056fef03b1  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 6ce128a0b7cfe3beb8e2de5bcfb8489c89ef17aca6f5d7a1dbb400ab797a7108  ./modules/kwalifikator-karnomaterialny/part-01-ogolny-mienie-rozboj.md
@@ -39,12 +39,12 @@ a83d0378e0947f5a8c5895bc424cc16ef4b2914d56f746f4d4d8e8b339f6b2de  ./modules/mod-
 323e7fdadba03433b71e1d2c6be562e3d96186a9b37120f342c9ff29ac0c683e  ./modules/mod-KK-art64-recydywa.md
 97d66a8836c6eec62e0f895a7a0796e5521c705190be6cb80c634c0184335d91  ./modules/mod-KK-art69-84-warunkowe-zawieszenie-zwolnienie.md
 db0ce888c9b6bb0e387ef5fdd171ec237d46e5ad851e225ab564b24771979d1a  ./modules/mod-KK-current-state-COV.md
-6733df1be21742e9a2bc72b2ac019147ab782dbbb001aaa8bf7e0c91596673df  ./modules/mod-KK-cyberprzestepstwa-szczegolowy.md
+bd560b31412b2491b05abda11a47b8bb2592a2fb9c98998f8888fb881a945e04  ./modules/mod-KK-cyberprzestepstwa-szczegolowy.md
 633f56cad899c4bb0f67a3e08c721d78b7016bebc88628b3210b5919f30680c2  ./modules/mod-KK-kodeks-karny.md
 4358f862473f77f1c8f74f78726672c11727228614e84a6df656c7c0c721f35f  ./modules/mod-KK-kwalifikator-karnomaterialny.md
-32979a9679318974ed33d4dbf7bf97dcca3487efc8bd5bc80e639ed996074246  ./modules/mod-KK-przemoc-domowa-szczegolowy.md
+8b158b1d5a260f323bd08fd34b2c1a4b314dff301ac83649591fcc62bdab8cdc  ./modules/mod-KK-przemoc-domowa-szczegolowy.md
 5ef8aa4d762a16dbb69bc42b9e8e42bb36331027cbc7113ad36cf38c288978ec  ./modules/mod-KK-slupy-fikcyjna-reprezentacja-spolki.md
-467baf47428e71ad4bdf7a6525becfb81ca18fbcb38b3d1c59616c2d218296ef  ./modules/mod-KKS-karny-skarbowy-i-AML.md
+7e5919d2022fb49601773e56af1d6e60c182a3dad2e77d6198fdb4074e4b62f2  ./modules/mod-KKS-karny-skarbowy-i-AML.md
 739c6addf47c9ea0bf20e1fce7f0a9fd27b267344286888ef13706e7ef31d219  ./modules/mod-KKW-current-state-COV.md
 bf84d76991447ad0e6d47fcca50d203406b22f7c40f79c9892a285d0b0c932d2  ./modules/mod-KKW-kodeks-karny-wykonawczy.md
 8df4dfbc0571ad66d05b82a75c5c3ae13666dbebf5547214e88ca31562d5258e  ./modules/mod-KKW-uzupelnienie-pokrycia-2026.md
@@ -66,7 +66,7 @@ c1b92ee9c11b49302a1566dc24f710dfb05519b77889be5dbcd370ba2ab890d8  ./modules/mod-
 9dbe86f5bff9dfa35f7c6389dfb892d354a9a4009f85d704c12483e54baa4f43  ./modules/mod-KW-kodeks-wykroczen.md
 fcc993c1783324ec943006bf2d1dfa8ac79f1f73814e545e9658d79fbe998766  ./modules/mod-PRD-nowe-przestepstwa-drogowe-BRD.md
 cefc657590f3854ee7f58eca787072ed0660c92a61db9f94e4fbe84dcae102f1  ./modules/mod-PRD-prawo-jazdy-punkty-karne.md
-b2824328582c634141610c0d1f8f7e7b59ea65a93e6e90ad41114c64ed951540  ./modules/mod-czynny-zal-KK-KKS-samooskarzenie.md
+f2c6b29de063c4f3812353ad3a5ea9e4191cf23986b905a67d8b977cd69bccd8  ./modules/mod-czynny-zal-KK-KKS-samooskarzenie.md
 6e2d7d4055261b5565ebd6ec3aae1153a068190397d61a48f1bf6b5ab911b3a4  ./modules/mod-dobrowolne-poddanie-sie-karze-KPK.md
 51948bf8ba684452a3808e8eff9da117f72d5ebb59e3e9710a587d844f1d9e28  ./modules/mod-grzywny-mandaty-szczegolowe.md
 7f2726f127de253b3dd8c4d8c4648fc05f9f883f552a0dd466f47b0c2754b8ac  ./modules/mod-lincz-ochrona-swiadkow-lowcy-pedofili.md
@@ -78,8 +78,8 @@ b2824328582c634141610c0d1f8f7e7b59ea65a93e6e90ad41114c64ed951540  ./modules/mod-
 fd884413ae8fa051109132d8f0a7c08a71c6bc24b4e305944bef8c3adb97688f  ./modules/mod-przymusowe-leczenie-odwykowe.md
 600f303363cdd1693fe8c1e5c98f44545a0e88cbd4de1ab2e0a8a174adb291fd  ./modules/mod-swiadek-koronny-duzy-maly.md
 cd92c0a01a9255db6e1fa80bf81e9e05ab3ba30b16ee0d36a4a1d1e4ba13fe6b  ./modules/mod-tajemnica-zawodowa-poufnosc.md
-eaa563622647fbeac6d4ea494dd9d65db068eaa7bcc55d37cdd7aa62ffa47cf1  ./modules/mod-ustawa-fundusz-pomocy-pokrzywdzonym.md
+5841b0dfc2351d0ae500eceae9360267a622f2aa861202892b5c88877e175c51  ./modules/mod-ustawa-fundusz-pomocy-pokrzywdzonym.md
 cbfb578625767f1932dea098e49459d326ad7a0895a356d087b6924ef30cba7c  ./modules/mod-ustawa-narkomania.md
 563847913f46be8c5e6a0538b26b0737029e14e3e3ee93c4d86b48eb432326fe  ./modules/mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych.md
-554c94fb27b2e0472dc75e2e2d5fa9c1854747eb581edc22781cbcb2615e6322  ./modules/mod-ustawa-oplaty-w-sprawach-karnych.md
-3c643217b5e552fe1acf700a474fb008fa5fb819c299e7caaf323df73470c1e9  ./references/CHANGELOG.md
+284436b77e82d5f5996debb93ca1141184fe701bc97b0f67cc8fff0336d40bfd  ./modules/mod-ustawa-oplaty-w-sprawach-karnych.md
+3abe3d8cdf80aeca1352110ef80f6cf93d2498d39de47dc154050d168bf59fca  ./references/CHANGELOG.md

@@ -73,7 +73,9 @@ Odpowiedzialność zarządcy za szkodę z nieutrzymania drogi:
   → Art. 20 ustawy o drogach + art. 415 KC / 429 KC
   → Orzecznictwo SN: zarządca odpowiada jak sprawca deliktu
   → Szkoda: przewrót pojazdu na dziurze, poślizgnięcie na lodzie, wpadnięcie w wyrwę
-  → Przedawnienie: 3 lata od dowiedzenia się o szkodzie (art. 4421 KC) lub 10 lat od zdarzenia
+  → Przedawnienie: 3 lata od dowiedzenia się o szkodzie (art. 442¹ § 1 KC), nie dłużej niż 10 lat od zdarzenia
+    — ⛔ WYJĄTEK: przy szkodzie na osobie (obrażenia) granica 10 lat nie obowiązuje (§ 3);
+    przestępstwo — 20 lat (§ 2). ✅ [VER] RZĄD 1 2026-09-16f (KC `Dz.U. 2026 poz. 795`)
   → Pozew do sądu cywilnego właściwego dla siedziby zarządcy
 ```
 

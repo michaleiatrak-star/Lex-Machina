@@ -13,7 +13,7 @@
 
 ---
 
-## Ustawa o wyrobach medycznych z 7.04.2022 (Dz.U. 2022 poz. 974 — weryfikuj t.j.)
+## Ustawa o wyrobach medycznych z 7.04.2022 (t.j. Dz.U. 2024 poz. 1620 — ✅ [VER] RZĄD 1 2026-09-16e; akt pierwotny: Dz.U. 2022 poz. 974)
 
 ```
 Zakres: wyroby medyczne, wyposażenie, systemy i zestawy zabiegowe

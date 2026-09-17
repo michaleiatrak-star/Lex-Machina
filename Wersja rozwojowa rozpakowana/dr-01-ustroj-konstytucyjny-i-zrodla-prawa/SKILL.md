@@ -1,6 +1,6 @@
 ---
 name: dr-01-ustroj-konstytucyjny-i-zrodla-prawa
-version: "3.9"
+version: "3.10"
 description: "Prawo konstytucyjne i ustrojowe: Konstytucja, organy państwa, TK, źródła prawa, legislacja i skarga konstytucyjna; analiza z aktualną weryfikacją źródeł."
 ---
 

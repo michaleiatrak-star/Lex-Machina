@@ -1,6 +1,6 @@
 ---
 name: dr-12-sadownictwo-prokuratura-zawody-prawnicze
-version: "4.16"
+version: "4.17"
 description: "Sądownictwo, prokuratura i zawody prawnicze: ustrój sądów, prokuratura, adwokaci, radcowie, notariusze, komornicy, koszty i odpowiedzialność zawodowa."
 ---
 

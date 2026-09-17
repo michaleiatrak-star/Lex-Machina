@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.62"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.66"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -50,7 +50,7 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.62 (2026-09-16, F-189): terminy.md — (1) KRO: dopisane terminy macierzyństwa art. 61¹¹, 61¹³ § 1–2, 61¹⁴ § 1 (ROK; ✅ RZĄD 1 Dz.U. 2026 poz. 236) i ostrzeżenie o błędzie „6 miesięcy/3 l…
+  Wersja bieżąca: 3.66 (2026-09-16, F-189): terminy.md — nowa sekcja „Kodeks karny skarbowy (KKS) — terminy i progi” (F-135; RZĄD 1 — KKS 2025/633 + KROK 2C: 2026/347, 421, 846, 901): karalność art. 44 i…
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 

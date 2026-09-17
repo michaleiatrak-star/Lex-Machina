@@ -8,7 +8,7 @@ Przedawnienie karalności (art. 101 KK) — zależne od zagrożenia:
   Powyżej 5 lat (art. 269a — sabotaż systemów): 15 lat
 Zawiadomienie o przestępstwie:    brak terminu zawitego (ale jak najszybciej)
 Zabezpieczenie dowodów cyfrowych: NATYCHMIAST — dane mogą być usunięte w godzinach
-Pozew cywilny (dobra osobiste):   art. 4421 KC — 3 lata od dowiedzenia się o szkodzie (delikt); art. 117 §1 KC — 6 lat (ogólny termin roszczeń majątkowych)
+Pozew cywilny (dobra osobiste):   art. 4421 KC — 3 lata od dowiedzenia się o szkodzie (delikt); art. 118 KC — 6 lat (ogólny termin; ⛔ art. 117 § 1 mówi tylko, ŻE roszczenia majątkowe się przedawniają — korekta 2026-09-16f)
 ```
 
 ## FAZA 0 — INTAKE

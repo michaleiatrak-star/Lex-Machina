@@ -126,7 +126,7 @@ Weryfikacja: ustawa o samorządzie gminnym art. 43 (Dz.U. 2026 poz. 662 t.j.)
   ZWERYFIKOWANO — definicja bez zmian, aktualny t.j. 2025
 Definicja: Własność i inne prawa majątkowe należące do gmin, związków gmin
 oraz innych gminnych osób prawnych.
-Podstawa: art. 43 ustawy o samorządzie gminnym (weryfikuj Dz.U. 2025 poz. 1515 t.j.)
+Podstawa: art. 43 ustawy o samorządzie gminnym (weryfikuj Dz.U. 2026 poz. 662 t.j.)
 Reguła: Mienie komunalne jest odrębne od mienia Skarbu Państwa. Gmina odpowiada
 za swoje mienie niezależnie od Skarbu Państwa (art. 165 ust. 1 Konstytucji).
 ```

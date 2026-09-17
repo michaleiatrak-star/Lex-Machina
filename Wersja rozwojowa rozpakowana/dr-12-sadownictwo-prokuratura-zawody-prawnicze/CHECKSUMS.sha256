@@ -1,7 +1,7 @@
 d84df35654a57cb9b445db3a98a40e3d1fc9d9f066c6c7bc22a2b8cf05732c34  ./MAPA-AKTOW.md
 601a3dbac3a7233e0bfc7b70194fd08fa5380bf42b4cb614fc9b4522ee986f1b  ./MAPA-POKRYCIA.md
 eac5e4f81d8a3c6282ed293c7dec591f0c0415e02c2739425f139bb644ff1846  ./PORTABILITY-MANIFEST.md
-453d6ad50ef7275ae63f35911ddd3939812c658998a6a09cc03e263a2c3a7d35  ./SKILL.md
+ca6800c6b9111d78681c4fece389e47e8dacd0a3e8dc869eae56f70d17c2dc84  ./SKILL.md
 56eed0622890a10e5faf863e13f3e2c692f13d83c5e8e0f49319936852b100c5  ./agents/openai.yaml
 9be88f8dd4c5e658961515c71389eafd45142ffa68bcae58e8dcff57d178ed91  ./assets/icon.svg
 41ecf6d89da12743636c67ab29de443bbe34596f68de7355e2aba491e60cf183  ./modules/mod-KPC-arbitraz-mediacja-ADR.md
@@ -15,6 +15,6 @@ e519a6e2c37d133ac95259337f88f6f7495fbd55f318232580ae2f03218e16e1  ./modules/mod-
 33d80de69d930fcf569e25375ebe6a4fb87bb5c34d1523a7e8d661da26f57a13  ./modules/mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md
 5702753d43ea9ce2ac26ac5ff3dfec18d1cbf493851f9e52208337ab66c52223  ./modules/mod-ustawa-radcowie-prawni.md
 dc534dc03bb206096a9c58859bd144d5da1eb2294af8c527cc09331c398fc2a2  ./modules/mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF.md
-35ae12640e414b57e5ebe1afb80ab91a780847058b131d949ae739f28fc0040b  ./modules/mod-ustawa-rzecznicy-patentowi-zawod.md
+9ea7c2ea009dc0958e12eaf373debefd5ceda6fb10e3ddc2799c7139577f141b  ./modules/mod-ustawa-rzecznicy-patentowi-zawod.md
 afa8ab53255af6dbbdcbbc346cb7afe0e66c3d3f7054b29ace68b1f5ad4e4529  ./modules/mod-ustawa-sedziowie-referendarze-kuratorzy.md
-45695c9a66fc937de8409e9c441560f27f02195c166b87fd57377afdcd24497d  ./references/CHANGELOG.md
+9025c9d05f7fb088afb7e0a68322b05824b542673717d4c06bbd4b445846397f  ./references/CHANGELOG.md

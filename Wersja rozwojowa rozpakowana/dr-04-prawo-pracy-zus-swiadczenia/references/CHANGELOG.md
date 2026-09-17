@@ -1,5 +1,6 @@
 # CHANGELOG — dr-04-prawo-pracy-zus-swiadczenia
 
+- 3.35 (2026-09-16, F-189): mod-wypadek-przy-pracy-choroba-zawodowa — ⛔ „max 10 lat od zdarzenia” przy wypadku przy pracy: dopisany art. 442¹ § 3 KC (szkoda na osobie — granica 10 lat nie obowiązuje), § 2 i § 4 (F-135, RZĄD 1).
 - 3.34 (2026-09-16, F-189): ODTWORZENIE utraconego wydania 3.33 (F-189), RZĄD 1 (KP Dz.U. 2025 poz. 277): art. 264 § 2 — także od wygaśnięcia umowy; art. 264 § 3 — od doręczenia odmowy przyjęcia (⛔ NOWE: poprzednio „od dnia, gdy umowa miała być zawarta”); art. 265 § 2; art. 112 § 1–2 z milczącą zgodą; granice pracodawcy (art. 52 § 2, 109 § 1 i § 3) jako zarzut obrony; art. 291 § 1–5. KROK 2C: poz. 1046 — zakres odczytany z treści (art. 18³ᵃ–18³ᵍ, 94, 94³–94³ᵃ, 104¹ KP; nie art. 11).
 - 3.33 — LUKA JAWNA: wydanie AUDYT-2026-09-12n nieobecne na dysku — odtworzone w 3.34
 - 3.32 (2026-09-10r, O-10): ustawa o zwolnieniach grupowych: 2025/570 (wygasniecie aktu) na 2026/1195 (RZAD 1, zero nowelizacji po t.j.) w 5 miejscach - wykryte przez T27

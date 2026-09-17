@@ -1,5 +1,9 @@
 # CHANGELOG — dr-03-prawo-karne-wykroczenia-egzekucja
 
+- 3.44 (2026-09-16, F-189): F-135 (RZĄD 1 — KKS 2025/633): mod-KKS-karny-skarbowy-i-AML — nowa sekcja 1a „Terminy i progi KKS”, poz. 2026/421 i daty szczegółowe 2026/846 (uchylenie art. 16b od 1.10.2026; mandat zaoczny od 26.12.2026); mod-czynny-zal-KK-KKS-samooskarzenie — art. 16 § 4–6 (forma, bezskuteczność, wyłączenia), art. 16a § 3 z odczytu, ⛔ korekta: art. 16 KKS nie odsyła do usiłowania (art. 21 § 3 KKS → art. 15 KK).
+- 3.43 (2026-09-16, F-189): mod-KK-cyberprzestepstwa-szczegolowy — „art. 117 § 1 KC — 6 lat” → art. 118 KC (art. 117 nie podaje terminu; F-135, RZĄD 1).
+- 3.42 (2026-09-16, F-189): mod-ustawa-oplaty-w-sprawach-karnych — podstawy w wierszach tabeli kar (art. 2 ust. 1 pkt 1–5) i art. 2 ust. 2 (ograniczenie wolności) — T32, RZĄD 1 (2023/123); mod-KK-przemoc-domowa-szczegolowy — wygasły t.j. `2021/1249` → ustawa o przeciwdziałaniu przemocy domowej `2024/1673` (T27).
+- 3.41 (2026-09-16, F-189): mod-ustawa-fundusz-pomocy-pokrzywdzonym — rozporządzenie MS w sprawie Funduszu Sprawiedliwości: brzmienie pierwotne `2017/1760` (ELI: „akt posiada tekst jednolity”) → t.j. `Dz.U. 2025 poz. 1298` (RZĄD 1; wykryte testem T5).
 - 3.40 (2026-09-16, F-189): ODTWORZENIE utraconych wydań 3.38–3.39 (F-189), RZĄD 1: art. 94 § 1 KPW w zw. z art. 506 § 1 KPK zamiast „art. 94 KPSW” w 3 modułach (KPW Dz.U. 2025 poz. 860, KPK Dz.U. 2026 poz. 490); mod-KKW — nowa sekcja 0T: terminy KKW (art. 6 § 4, 7 § 3, 49, 151, 153 § 3, 161 § 3–4, 162 § 2), karencja ≠ termin zawity, art. 152 uchylony (KKW Dz.U. 2025 poz. 911).
 - 3.39 — LUKA JAWNA: wydanie AUDYT-2026-09-12j nieobecne na dysku — odtworzone w 3.40
 - 3.38 — LUKA JAWNA: wydanie AUDYT-2026-09-12f nieobecne na dysku — odtworzone w 3.40

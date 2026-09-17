@@ -420,5 +420,5 @@ PKWiU:
 
 ---
 *mod-interpretacje-definicje-podatkowe.md · DR-06 · 2026-06-09*
-*Podstawa: Op (Dz.U. 2025 poz. 111) + EUREKA (podatki.gov.pl) + Uchwały NSA + Interpretacje ogólne MF*
+*Podstawa: Op (Dz.U. 2026 poz. 622 t.j.) + EUREKA (podatki.gov.pl) + Uchwały NSA + Interpretacje ogólne MF*
 *Weryfikuj sygnatury ZAWSZE przed powołaniem: podatki.gov.pl/eureka lub web_search*

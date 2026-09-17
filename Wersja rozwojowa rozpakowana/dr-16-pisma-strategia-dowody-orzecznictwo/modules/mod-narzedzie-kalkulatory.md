@@ -44,7 +44,7 @@ OSTRZEŻENIA:
 | **6 miesięcy** | Przyjęcie / odrzucenie spadku | art. 1015 KC | ZAWITY |
 | **3 lata** | Przedawnienie — roszczenia prac. | art. 291 KP | PRZEDAWNIENIE |
 | **3 lata** | Przedawnienie — delikt od wiedzy | art. 442¹ §1 KC | PRZEDAWNIENIE |
-| **5 lat** | Zachowek — przedawnienie | art. 1007 KC | PRZEDAWNIENIE |
+| **5 lat** | Zachowek — przedawnienie (od ogłoszenia testamentu albo od otwarcia spadku — § 1 / § 2–4) | art. 1007 KC | PRZEDAWNIENIE |
 | **6 lat** | Przedawnienie ogólne KC | art. 118 KC | PRZEDAWNIENIE |
 
 ---
@@ -69,8 +69,13 @@ PRZYKŁAD:
   Udział ustawowy syna: 1/2 | Udział zachowkowy: 1/2 × 1/2 = 1/4
   Zachowek = 300 000 × 1/4 = 75 000 zł
 
-PRZEDAWNIENIE: 5 lat od ogłoszenia / otwarcia testamentu (art. 1007 KC)
-WERYFIKUJ: czy darowizny sprzed ponad 10 lat można wyłączyć (art. 994 KC)
+PRZEDAWNIENIE: 5 lat — wobec spadkobierców od OGŁOSZENIA TESTAMENTU (art. 1007 § 1 KC);
+  wobec obdarowanych, zapisobierców windykacyjnych i fundacji rodzinnej — od OTWARCIA SPADKU
+  (§ 2–4). ⛔ Poprzednio „od otwarcia testamentu" — takiego punktu startowego ustawa nie zna.
+SUBSTRAT: nie dolicza się drobnych darowizn zwyczajowo przyjętych ani darowizn sprzed ponad
+  10 lat (wstecz od otwarcia spadku) na rzecz osób NIEBĘDĄCYCH spadkobiercami ani uprawnionymi
+  do zachowku (art. 994 § 1 KC); darowizny dla spadkobierców i uprawnionych — dolicza się bez
+  względu na datę. ✅ RZĄD 1 2026-09-16f
 ```
 
 ---

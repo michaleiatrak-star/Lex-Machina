@@ -1,12 +1,12 @@
 ---
 name: prawo-polskie-v2
-version: "6.21"
+version: "6.25"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
 description: "Fasada routingu prawa polskiego: wybiera jeden z DR-01–DR-16 i przekazuje sprawę do właściwego skilla dziedzinowego; nie zawiera treści prawa materialnego."
 changelog: |
-  Wersja bieżąca: 6.21 (2026-09-16, F-189): T12: pole YAML `changelog:` (numer 6.18 przy version 6.20) skrócone do odesłania (ZASADA 15). Treść bez zmian.…
+  Wersja bieżąca: 6.25 (2026-09-16, F-189): ROUTING-MAP — ustawa o przeciwdziałaniu przemocy domowej: wygasły t.j. `2021/1249` → `2024/1673` w dwóch wierszach (KK art. 207; przemoc domowa szczegółowo) — R…
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 

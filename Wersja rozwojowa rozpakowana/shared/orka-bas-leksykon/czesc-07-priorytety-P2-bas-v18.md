@@ -58,7 +58,7 @@ Reguła: zawsze wskazuj którą ustawę stosujemy i jaką definicję przyjmuje.
 
 ### BAS-122 — Żołnierz (DR-13)
 ```
-Weryfikacja: ustawa o obronie Ojczyzny art. 4 pkt 1 (Dz.U. 2024 poz. 655 t.j. — weryfikuj)
+Weryfikacja: ustawa o obronie Ojczyzny art. 4 pkt 1 (Dz.U. 2025 poz. 825 t.j. — weryfikuj)
 
 DEFINICJA USTAWOWA:
   Żołnierzem jest osoba wchodząca w skład Sił Zbrojnych RP:

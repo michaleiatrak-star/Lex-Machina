@@ -89,7 +89,7 @@ GŁĘBOKI (IQ < 20):
 
 ```
 STAN OBECNY (do czasu nowelizacji KC — weryfikuj!):
-  Podstawa: KC art. 12–16 (Dz.U. 2024 poz. 1360 t.j.)
+  Podstawa: KC art. 12–16 (Dz.U. 2026 poz. 795 t.j.)
 
 UBEZWŁASNOWOLNIENIE CAŁKOWITE (art. 13 KC):
   Przesłanki ŁĄCZNIE:
@@ -491,7 +491,7 @@ WCZYTAJ ZAWSZE:
 ```
 AKTY PRAWNE (weryfikuj aktualne t.j. w ISAP):
   KC art. 12–16: zdolność do czynności prawnych, ubezwłasnowolnienie
-    isap.sejm.gov.pl → Dz.U. 2024 poz. 1360
+    isap.sejm.gov.pl → Dz.U. 2026 poz. 795 (KC t.j.)
   KPK art. 79: obrona obligatoryjna
     isap.sejm.gov.pl → Dz.U. 2026 poz. 490
   KPK art. 72 §2: tłumacz przy czynnościach

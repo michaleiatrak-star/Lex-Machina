@@ -79,7 +79,10 @@ Protokół powypadkowy: max 14 dni od zawiadomienia (art. 234 §1 KP — weryfik
 Zatwierdzenie protokołu przez pracodawcę: niezwłocznie po sporządzeniu
 Wniosek o jednorazowe odszkodowanie do ZUS: po zakończeniu leczenia/rehabilitacji
 Przedawnienie roszczeń z KC (wypadek): 3 lata od dnia, gdy poszkodowany dowiedział
-  się o szkodzie i zobowiązanym (art. 442¹ KC); max 10 lat od zdarzenia — weryfikuj ISAP
+  się o szkodzie i zobowiązanym (art. 442¹ § 1 KC).
+  ⛔ SZKODA NA OSOBIE (art. 442¹ § 3): przedawnienie nie może skończyć się wcześniej niż 3 lata od dowiedzenia się — granica 10 lat NIE obowiązuje
+  — wypadek przy pracy to szkoda na osobie; małoletni — nie wcześniej niż 2 lata od
+  pełnoletności (§ 4); przestępstwo — 20 lat od czynu (§ 2). ✅ [VER] RZĄD 1 2026-09-16f (KC `Dz.U. 2026 poz. 795`)
 ```
 
 ### Ścieżka sporna

@@ -120,8 +120,13 @@ ustanawiająca (ten plik → przepis), nie plik satelicki.
 | `pisma-proste-v2/SKILL.md` (tabela opłat) | duplikat M6 w korpusie skilla | 🔧 naprawiona 2026-09-12 |
 | `pisma-procesowe-v3/modules/MOD-OPLATY.md` | tabela robocza dla pism procesowych | 🔧 naprawiona 2026-09-12 |
 | `analiza-sadowa-v6/references/koszty-terminy.md` | tabele kosztów i terminów do bilansu sprawy | 🔧 naprawiona 2026-09-12 |
-| `dr-06-.../modules/*` (opłata skarbowa) | dziedzina: ustawa o opłacie skarbowej | ⚠️ sekcja 6c tutaj jest wyciągiem — kwoty z załącznika odczytać przy sprawie |
+| `dr-06-.../modules/mod-ustawa-oplata-skarbowa.md` | dziedzina: ustawa o opłacie skarbowej (moduł od 2026-09-16d, **bez utrwalonych stawek** — deleguje do 6c) | ⚠️ sekcja 6c tutaj jest wyciągiem — kwoty z załącznika odczytać przy sprawie |
 | `dr-07-.../` (wpis od odwołania do KIO) | dziedzina: PZP | ⚠️ art. 34 ust. 1 KSCU odsyła do wpisu z PZP — kwota **nie** stoi w KSCU |
+
+⚡ **Egzekwowanie (O-11(b), od 2026-09-16e):** `audyt-systemu-v4/scripts/check_tabele_satelickie.py`
+(T32) czyta ten rejestr i w każdym pliku z kolumną „Plik" zgłasza **wiersz tabeli z kwotą bez
+podstawy prawnej** (ani w wierszu, ani w kolumnie „Podstawa" / „Przepis"). Ścieżka `…/`
+rozwija się do katalogu skilla. Wiersz bez ścieżki do pliku (np. `dr-07`) — poza testem.
 
 ⚠️ **Wzorzec błędu wykryty w trzech z nich naraz:** progi WPS opisane jako
 **„art. 27 pkt 1–6 KSCU"**. Art. 27 ustanawia opłatę stałą 200 zł od <!-- T28-OK: cytat opisowy — dokumentacja naprawy -->

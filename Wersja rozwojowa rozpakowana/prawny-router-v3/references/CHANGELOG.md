@@ -1,5 +1,7 @@
 # CHANGELOG — prawny-router-v3
 
+- 3.52 (2026-09-16, F-189): references/legacy-material-router/cyberprzestepstwa.md — „art. 117 § 1 KC — 6 lat” → art. 118 KC (F-135). Treść routera bez zmian.
+- 3.51 (2026-09-16, F-189): references/legacy-material-router/cyberprzestepstwa.md — „Prawo telekomunikacyjne, Dz.U. 2024 poz. 1221 t.j.” skorygowane: 2024/1221 to akt pierwotny Prawa komunikacji elektronicznej (RZĄD 1; T31). Treść routera bez zmian.
 - 3.50 (2026-09-16, F-189): T12: pole YAML `changelog:` skrócone do odesłania; wersja 3.49 bez opisu oznaczona jako LUKA JAWNA. Treść bez zmian.
 - 3.49 — LUKA JAWNA: numer obecny na dysku 2026-09-16, brak wpisu w changelogu i w AUDIT-JOURNAL; zakresu zmian nie da się odtworzyć — wpis celowo niezmyślony
 - 3.48 (2026-09-10x, O-11): **KWOTA-GATE — kontrola przy każdej podawanej kwocie.**

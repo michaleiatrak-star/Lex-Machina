@@ -2,13 +2,19 @@
 
 ## TERMINY — SPRAWDŹ JAKO PIERWSZE
 ```
-Przedawnienie roszczenia o błąd medyczny (art. 4421 KC):
-  → 3 lata od dowiedzenia się o szkodzie i osobie zobowiązanej
-  → MAX 20 lat od zdarzenia (dla szkód na osobie — art. 4421 §3 KC)
-  → Małoletni: 3 lata od uzyskania pełnoletności (ostrożnie — weryfikuj)
-Wniosek do FKZM (Fundusz Kompensacyjny Zdarzeń Medycznych):
-  → 1 rok od dowiedzenia się o zdarzeniu (art. 67t ust. 8 u.p.p.)
-  → MAX 3 lata od zdarzenia medycznego
+Przedawnienie roszczenia o błąd medyczny (art. 442¹ KC) — ✅ [VER] RZĄD 1 2026-09-16f (KC `Dz.U. 2026 poz. 795`):
+  → 3 lata od dowiedzenia się (albo możliwości dowiedzenia się) o szkodzie i osobie
+    zobowiązanej (§ 1 zd. 1)
+  → ⛔ SZKODA NA OSOBIE (§ 3): przedawnienie nie może skończyć się wcześniej niż
+    3 lata od dowiedzenia się — granica 10 lat z § 1 zd. 2 NIE OBOWIĄZUJE
+    (błąd medyczny to z reguły szkoda na osobie — nie odrzucaj sprawy za „ponad 10 lat")
+  → 20 lat od popełnienia przestępstwa, gdy szkoda wynikła ze zbrodni lub występku (§ 2)
+  → Małoletni — szkoda na osobie: nie wcześniej niż 2 LATA od pełnoletności (§ 4)
+  (⛔ poprzednio: „max 20 lat dla szkód na osobie — § 3" i „małoletni: 3 lata" — błędne)
+Wniosek do FKZM (Fundusz Kompensacyjny Zdarzeń Medycznych) — art. 67t ust. 3 u.p.p.
+(t.j. `Dz.U. 2024 poz. 581`, ✅ RZĄD 1 2026-09-16f; poprzednio błędnie „ust. 8"):
+  → rok od dowiedzenia się o zakażeniu, uszkodzeniu ciała, rozstroju zdrowia albo śmierci
+  → nie dłużej niż 3 lata od zdarzenia; opłata od wniosku — art. 67t ust. 4–6 (waloryzowana)
 Odwołanie od decyzji NFZ (odmowa świadczenia):
   → 14 dni (KPA) lub 30 dni (PPSA) — zależnie od trybu
 Skarga do RPP:                   brak terminu zawitego
@@ -105,6 +111,8 @@ KARY: upomnienie / nagana / zawieszenie prawa wykonywania zawodu / pozbawienie
 PODSTAWA: naruszenie zasad etyki lekarskiej lub przepisów o wykonywaniu zawodu
 NIE: nie przyznaje odszkodowania; niezależne od postępowania cywilnego/karnego
 ```
+
+> Ustawa o działalności leczniczej — t.j. `Dz.U. 2026 poz. 156` (✅ [VER] RZĄD 1 2026-09-16, status obowiązujący; F-190).
 
 ## PRAWA PACJENTA — KATALOG (u.p.p. Dz.U. 2024 poz. 581 t.j.)
 | Prawo | Podstawa | Jak egzekwować |

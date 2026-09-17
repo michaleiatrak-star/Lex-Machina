@@ -1,6 +1,6 @@
 ---
 name: dr-13-sluzby-bezpieczenstwo-informacje-niejawne
-version: "3.10"
+version: "3.11"
 description: "Służby, bezpieczeństwo i informacje niejawne: Policja, ABW/AW i inne służby, obrona, ochrona informacji niejawnych oraz publicznoprawne ramy bezpieczeństwa."
 ---
 
@@ -32,7 +32,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 
 **Prawo służb mundurowych było wielokrotnie nowelizowane w 2024–2025.**
 Dz.U. 2025 poz. 1366 zmienia równocześnie: Policję, SG, PSP, ABW, AW, SKW, SWW, SOP.
-Ustawa o obronie Ojczyzny (Dz.U. 2022 poz. 655) nie ma nowego t.j. — weryfikuj każdą nowelizację.
+Ustawa o obronie Ojczyzny — t.j. Dz.U. 2025 poz. 825 (✅ [VER] RZĄD 1 2026-09-16e; ⛔ poprzedni zapis „nie ma nowego t.j." był nieprawdziwy; akt pierwotny 2022 poz. 655) — weryfikuj nowelizacje po t.j.
 
 
 > ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
@@ -127,7 +127,7 @@ INFORMACJE NIEJAWNE:
 
 OBRONA I BEZPIECZEŃSTWO PAŃSTWA:
   [✓] OK    mod-ustawa-obrona-ojczyzny-mobilizacja
-              (Dz.U. 2022 poz. 655 ze zm.: Dz.U. 2025 poz. 825, 1014;
+              (t.j. Dz.U. 2025 poz. 825, ze zm.: Dz.U. 2025 poz. 1014;
                obowiązek obrony, kwalifikacja wojskowa WKU/WKL,
                WCR, mobilizacja, świadczenia na rzecz obrony, rekwizycja)
   [✓] OK    mod-ustawa-zarzadzanie-kryzysowe-obrona-cywilna

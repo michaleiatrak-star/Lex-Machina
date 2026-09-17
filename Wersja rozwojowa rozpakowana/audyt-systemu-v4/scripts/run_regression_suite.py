@@ -152,6 +152,10 @@ def main():
         # nie zmieniało wyniku pełnego przebiegu.
         ("T28", "T28 KRYTYCZNY — wartości i cytaty (W1/W2 FAIL, W3 WARN)", "check_wartosci_prawne.py", ["--katalog", str(root), "--tylko-fail"]),
         ("T29", "T29 WYSOKI — integralność podziału TABELE-OPLAT", "check_oplaty_mapa.py", ["--katalog", str(root)]),
+        # F-189 (2026-09-16c): utrata treści bez cofnięcia numeru — T12 tego nie widzi.
+        ("T30", "T30 KRYTYCZNY — utrata treści vs AUDIT-JOURNAL", "check_utrata_tresci.py", ["--repo-root", str(root)]),
+        # O-11(b), 2026-09-16e: FAIL tylko przy pliku z rejestru, którego nie ma; kwota bez podstawy = WARN.
+        ("T32", "T32 WYSOKI — tabele satelickie opłat: kwota bez podstawy", "check_tabele_satelickie.py", ["--repo-root", str(root)]),
         ("MOCK", "MOCK — self-test sync_dzu_eli wobec lokalnego mock-ELI", "mock_eli_server_test.py", []),
     ]:
         sekcja(label)
@@ -170,7 +174,7 @@ def main():
     # do profilu uniwersalnego; nadal jest jawnie raportowany.
     # T28 i T29 dołączyły 2026-09-16 (F-189): W1 to nawrót błędu JUŻ naprawionego
     # po odczycie treści — dokładnie ta klasa, którą regresja ma blokować.
-    BLOCKERY = ("T1", "T6_T7", "T18", "T19", "T19b", "T22", "T28", "T29")
+    BLOCKERY = ("T1", "T6_T7", "T18", "T19", "T19b", "T22", "T28", "T29", "T30")
     critical_fail = False
     for key, code in results.items():
         if code == "MANUAL":

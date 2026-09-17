@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.53 (2026-09-16, F-189): F-135 (RZĄD 1 — KC 2026/795): mod-KC-ubezpieczenia — art. 819 § 1, § 3, § 4 i 442¹ § 1–3 (⛔ szkoda na osobie; ⛔ wezwanie do zapłaty NIE przerywa biegu — art. 123); mod-KC-cywilne-zobowiazania-odpowiedzialnosc — § 3 w tabeli deliktu; mod-KC-spadki-zachowek-dzial-rozrzadzenia — art. 1007 § 1–4 (punkty startowe).
+- 3.52 (2026-09-16, F-189): mod-ustawa-deweloperska — akt pierwotny `2021/1177` jako aktualna podstawa → t.j. `2026/880` (3 miejsca; RZĄD 1; T27 ZASTĄPIONY_TJ).
 - 3.51 (2026-09-16, F-189): ODTWORZENIE utraconych wydań 3.48–3.50 (F-189), RZĄD 1 — KRO (Dz.U. 2026 poz. 236): terminy zaprzeczenia ojcostwa (art. 63–65, 69 § 1, 70 § 1, 70¹, 86) i bezskuteczności uznania (art. 78–81¹); ⛔ NOWE: art. 61¹³–61¹⁵ — macierzyństwo: ROK, nie 6 miesięcy/3 lata (poprzednio „potwierdzone RZĄD 2B”). PrUp (Dz.U. 2026 poz. 913): adresat zgłoszenia — syndyk przez system teleinformatyczny (art. 236 ust. 1), skutek spóźnienia — ryczałt 15% wskaźnika GUS (art. 235 ust. 1), domniemanie i 24 miesiące ≠ termin. PrRestr art. 91 podniesiony do RZĘDU 1 (Dz.U. 2026 poz. 533). KSH (Dz.U. 2024 poz. 18): cztery reżimy zaskarżania uchwał (art. 251, 252 § 3–4, 424, 425).
 - 3.50 — LUKA JAWNA: wydanie AUDYT-2026-09-12m nieobecne na dysku — odtworzone w 3.51
 - 3.49 — LUKA JAWNA: wydanie AUDYT-2026-09-12l nieobecne na dysku — odtworzone w 3.51

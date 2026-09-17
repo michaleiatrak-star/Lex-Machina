@@ -1,7 +1,7 @@
 e63088dde2ef8acbcbf696c3ce9f2f35ecbdb5342950dddbd6be87a0223f2412  ./MAPA-AKTOW.md
 211351fa3498f08fe19b2e1baf5fab00bd1063cbc83030069f822bb6d00eb494  ./MAPA-POKRYCIA.md
 8e0e5d369ae15b2cf0cbffcf2f05fd3f5d72c5032b89c3665c892a71fa9017ae  ./PORTABILITY-MANIFEST.md
-488de12e36834652432accc7bb8d9afb06f98f1c6f4362b95fd71267bcbfca95  ./SKILL.md
+62866d3d85253697ae29436e424c169f6e41295b4f08b68efd5f80bfb665b9ae  ./SKILL.md
 069bc49db133821e80d2750404468587e1e29b9982151c0e333c89f68c55a153  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 30ab26948e79d1c7b08b828048c750ccf6c53ccb969fb31914b4d25ea3e48c41  ./modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md
@@ -21,13 +21,13 @@ f48c7fa6a192d580260d7165e3a8b12268157a17df7139e9c52a52615dffff2f  ./modules/kro-
 d7940f86dc437c2e9e14d43015c9b42a638a1db3b78cb4763791d8fb91f6c8ba  ./modules/kro-rodzinne/czesc-07-procedura-dowody-zmiana-danych.md
 1305d551b880dc26e2a7965e2c0843e016fbc54a241346b00fb68a5bb0f85e5f  ./modules/kro-rodzinne/czesc-08-referencje-strategia.md
 4757761bf4dd7fd6a0a2b0067a841d9190f8f2d45b50cb4fd14677383a42a761  ./modules/mod-KC-current-state-COV.md
-c0902991435fd5524dc9592df878b0a21b5c1dcedd533ae9cc08746ba0bdf6e3  ./modules/mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md
+79a8eff29b5694327d29b8e21ae2b729cc044c5c7d85a8e894f1ffb16811b97f  ./modules/mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md
 9f267acb563f7aabf961bf922b59c71cb5f119b5c1107f4bcd16b08bb463265f  ./modules/mod-KC-konsumenckie.md
 b6646312a08cbd6903b913f786de0d35bbc89f50485550363b54d165cd26c81d  ./modules/mod-KC-kredyty-frankowe.md
 05e5cd13daf3e03d903a258cdacae7c37846fc67227afce2109fa9d7ca151149  ./modules/mod-KC-spadki-dlugi-umowy-transgraniczne.md
-6bb7bc51013e56ac938e07fa8807b7e0c11c9bfcd9dcce89bf83380d3b2e9db2  ./modules/mod-KC-spadki-zachowek-dzial-rozrzadzenia.md
+770d03bdc147f5658deb7abbb59a4bd75b1fca2d5a4f79c7069aef7cb1de864a  ./modules/mod-KC-spadki-zachowek-dzial-rozrzadzenia.md
 3cfda914f39fed7ee9d37adf62fa4163f4c634718d248cbc85f9e68716831551  ./modules/mod-KC-spadki.md
-481d13f0e7022cba4feec071e17a2c1ca3864a50a9b33f6da97ffacc731dcc35  ./modules/mod-KC-ubezpieczenia.md
+e5b3d7296c312d0df1b718e3ea351a01dd73eedd61ed6513e7a4b876e7e36122  ./modules/mod-KC-ubezpieczenia.md
 51558489bce3c9156a871d5f806e3adf8344ac01f4a444c9ceb6487cd08b2920  ./modules/mod-KP-art943-mobbing-dyskryminacja.md
 70c3ab1f164125d0c2dd1f04c72f566a1605fb213bc4ada81f7ee834d7425913  ./modules/mod-KPC-art162-zastrzezenie-protokol.md
 8273cdd0c8414b00cd4f7dcc53c75120879ffb490ecbffd35f1fe2b8337948cc  ./modules/mod-KPC-current-state-COV.md
@@ -73,7 +73,7 @@ c30daded1d6e82a214500fc541797137d344fd5ad0ff3d79306debcfc9ba41d0  ./modules/mod-
 8de473ec24deb6faf2da874d585478e4ec2f6289b26fba593f8aa6619a35ea26  ./modules/mod-ustawa-UOKIK-antymonopolowe.md
 27cf8d65072f286ee2c86b08f96b04746fec5ed0a735598fea93bda95a1815ad  ./modules/mod-ustawa-UZNK-nieuczciwa-konkurencja.md
 c911cf9ff0e1e95bd51d15799b769972c15a0719154c549948e0c57ad10f6be7  ./modules/mod-ustawa-cudzoziemcy.md
-a47a35b90447f8e3ef8e985010dda1ffc67cdec4e8c9f24abf4a97a716fc5579  ./modules/mod-ustawa-deweloperska.md
+457f80718843cf065111d1c3f31fdc3d14a593ae37ab6e6a6db9c2b9040d28a9  ./modules/mod-ustawa-deweloperska.md
 d355097e96923dcbba322483ff70aa1a3efd4fcb301206fd284820da4113ec57  ./modules/mod-ustawa-doradca-restrukturyzacyjny-zawod.md
 2a63597c880a4f744e2f1035f08070b1773b34e7f4fb8fedcb75441aefbe0123  ./modules/mod-ustawa-frankowa-2026-procedura.md
 a11c4e83753e09468c42eeb39094c305a79f22429fcb854879c3cfed42e7c9ef  ./modules/mod-ustawa-fundacja-rodzinna.md
@@ -89,4 +89,4 @@ b964da825f36e7db06a74fce20ef7f4b18e16a8245a5173c212a4a0e717d2b88  ./modules/mod-
 c6ea7ab2905c46963de42d3150e6f1e1de7197a05c2df189e10d263d56240ad6  ./modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md
 0d27f04cfedf651c1c4feedb203e2c1e456b673688952c2472f1cacf3f29a6cf  ./modules/mod-ustawa-zastaw-rejestrowy.md
 97bcd7a9e0c8dd6cafe8c7fe949eab13ea34e8c54955f0a513256289d6f23285  ./modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md
-2b04c8020cc7338bd1032f26e5c325053f3c3853ae9b8542aebfc8010bbdb7ee  ./references/CHANGELOG.md
+4b9aeee6b8805cf57116f7406d3ed903cf6cc7786c0ff4a3cc3a8a3b65ab2b4f  ./references/CHANGELOG.md

@@ -65847,3 +65847,378 @@ przyczyny (mechanizm nadpisania nieustalony) — patrz WARN-OTWARTE.
 `dr-16-pisma-strategia-dowody-orzecznictwo` 3.5 → 3.6, `analizator-umow-v1` 1.32 → 1.34,
 `analizator-dowodow-v3` 5.16.8 → 5.16.9, `prawo-polskie-v2` 6.20 → 6.21, `prawny-router-v3` 3.49 → 3.50,
 `shared` 3.61 → 3.62, `audyt-systemu-v4` 6.98 → 6.99.
+
+
+---
+
+## AUDYT-2026-09-16b — T11, T5, F-OP-2026-09 zamknięta, rekonstrukcja utraconej treści z dziennika
+
+**Tryb:** kontynuacja AUDYT-2026-09-16 (pozycje otwarte). Każde rozstrzygnięcie z odczytu
+RZĘDU 1 (API ELI, 2026-09-16).
+
+### 1. T11 — `Dz.U. 2026 poz. 174` (ROZSTRZYGNIĘTE)
+
+Nowelizacja ustawy o gospodarce opakowaniami (system kaucyjny, w życie 18.02.2026),
+powoływana w ROUTING-MAP (wiersz PPWR) jako fakt historyczny. Obwieszczenie t.j.
+`2026/619` (pkt 1 ppkt 2) **włącza ją do tekstu jednolitego**. Ten sam punkt włącza
+`2026/176` — nowelizację KSH, która zmienia też ustawę opakowaniową (t.j. obejmuje zmianę
+wchodzącą 18.02.2027). Dopisany wiersz NW w `mapa_dzu_2026-09-10.md`. T11: OK.
+
+### 2. T5 — widmowe pokrycie (WYKONANY; nowy skrypt)
+
+`scripts/check_widmowe_pokrycie.py` — heurystyka kandydatów (selftest 4/4), status ręczny.
+565 powiązań wiersz→moduł, 30 kandydatów. Po odczycie:
+
+| Wynik | Wiersze | Działanie |
+|---|---|---|
+| błędny wskaźnik (treść istnieje gdzie indziej) | przewlekłość, OZSS, Fundusz Pomocy, stop-the-clock ×2, elektromobilność, zawód lekarza, zdrowie psychiczne, UFG/PBUK, KRUS | przepięcie |
+| ⛔ **PODMIANA AKTU** | „podatek od wydobycia kopalin — `2024 poz. 44`" (to t.j. ustawy o **rehabilitacji**, wygasły) → `2026 poz. 454` | numer + mapa |
+| ⛔ **PODMIANA AKTU** | „Adwokatura / zawody medyczne — `2024 poz. 1564`" → moduł o pielęgniarkach; akt to **Prawo o adwokaturze** | wiersz przepisany → `dr-12/mod-ustawa-adwokatura` |
+| ⛔ nieistniejący tytuł | „ustawa o ubezpieczeniach obowiązkowych lekarzy" — `2026/783` to ustawa o ubezpieczeniach obowiązkowych, UFG i PBUK | tytuł + wskaźnik → `dr-02` |
+| ⛔ **WIDMO** | podatek od wydobycia kopalin — w `dr-06` zero treści | oznaczone; flaga F-190 |
+| ⛔ **WIDMO** | `2026/516` (Prawo energetyczne) — `dr-09` nie powołuje; dodatkowo „art. 9, 11, 13, 14" to artykuły ustawy ZMIENIAJĄCEJ | oznaczone; F-190 |
+| status nieaktualny | `2026/638` KPK „⚡ WCHODZI" — w mocy od 28.05.2026 | zamknięte |
+| wskaźnik bez numeru | działalność lecznicza `2026/156` — żaden z modułów nie cytuje numeru | oznaczone |
+| wiersze meta | rejestracje current-state, moduły przekrojowe (UOKiK, KP 94³), DORA, Rzym I/II, SOFA, RODO-DSAR | bez działania |
+
+Przy okazji: `dr-03/mod-ustawa-fundusz-pomocy-pokrzywdzonym` cytował rozporządzenie
+w brzmieniu pierwotnym `2017/1760` (ELI: „akt posiada tekst jednolity") → t.j. `2025/1298`.
+
+### 3. F-OP-2026-09 — ZAMKNIĘTA
+
+Pełne listy zmienianych artykułów Op odczytane z treści pięciu ustaw:
+`1154` — art. 299; `825` — 14i, 14j; `846` — 73 jednostki (m.in. 12, 67a, 73–81b, 86a–86o,
+119m, 165, 199b, 210, 213, 228, 297–299j); `875` — wyłącznie art. 67a § 3–15 (milczące
+umorzenie do kwoty minimalnego wynagrodzenia, w życie 1.01.2027); `1098` — 3b, 182, 297,
+298, 299, 299c, 306.
+
+⛔ **KOREKTA WPISU 12i:** „poz. 1098 **dotyka art. 70**" — **NIEPRAWDA**. Art. 35 ustawy
+o OKI nie zmienia art. 70 Op.
+✅ Protokół flagi: **żadna** z pięciu nie zmienia art. 68, 70, 162, 223, 236, 241 — adnotacje
+[VER] w `shared/terminy.md` i `dr-06` pozostają prawdziwe po wszystkich pięciu datach.
+✅ Żadna z pięciu nie zawiera słowa „ugoda" — twierdzenie z `dr-06` nie pochodzi z żadnej
+ogłoszonej nowelizacji po t.j. (opis zamiaru legislacyjnego — oznaczenie w module zostaje).
+⚠️ **Zmiana terminowa od 1.10.2026** (poz. 846 art. 1 pkt 57), poza listą protokołu:
+art. 213 § 5 — odmowa uzupełnienia/sprostowania decyzji **bez zażalenia**, termin odwołania
+biegnie od doręczenia tego postanowienia; art. 228 § 1 pkt 3 rozszerzony o art. 168 § 2–3a.
+Wpisane do `shared/terminy.md` i `dr-06`.
+
+### 4. Rekonstrukcja z dziennika — czego T12 nie widzi
+
+T12 wykrywa utratę tylko wtedy, gdy cofnął się numer wersji. Trzy dodatkowe kontrole:
+
+(a) **Tabele „było → jest"** z numerami Dz.U. (cała historia) — konfrontacja z dyskiem
+i kontekstem wystąpienia starego numeru. Wynik: ⛔ **`dr-09` — naprawa z 10l
+(`UOOŚiS 2024/1112 → 2026/670`) utracona**; ⚠️ `dr-06` — `2025 poz. 111` (wygasły t.j. Op)
+w 2 miejscach, których 10l nie objęła (skan 10l dotyczył nagłówków). Oba naprawione.
+
+(b) **Wydania z dziennika bez wpisu w changelogu** — po 2026-08-24 (od kiedy changelogi
+są prowadzone): **brak**. 118 trafień sprzed tej daty to znana luka ZASADY 15.
+
+(c) **Kolizje numerów** (ta sama wersja w dwóch sesjach): jedna — `dr-09` 3.29
+(AUDYT-2026-09-10l i AUDYT-2026-09-13). Sesja 13 zaczynała od 3.28, czyli **stan 10l
+zaginął przed 13.09**, a stan z 12f–12n — po 12.09. ⛔ **Nadpisania nastąpiły co najmniej
+dwiema falami.** To zmienia hipotezę F-189 z „jednorazowego wgrania starego archiwum" na
+powtarzalny mechanizm.
+
+(d) Kontrola 12d: `art. 328¹ KPC`, `art. 503 KPC`, KPW — czysto (T28 = 0).
+
+**Wersje:** `prawo-polskie-v2` 6.21 → 6.22, `shared` 3.62 → 3.63,
+`dr-06-podatki-finanse-publiczne-aml` 3.82 → 3.83, `dr-09-budownictwo-srodowisko-energia-transport`
+3.31 → 3.32, `dr-03-prawo-karne-wykroczenia-egzekucja` 3.40 → 3.41, `audyt-systemu-v4` 6.99 → 6.100.
+
+
+---
+
+## AUDYT-2026-09-16c — F-190 zamknięta (trzy moduły z odczytem treści), T30 — automat na utratę treści
+
+**Tryb:** kontynuacja 16b. Każda treść z odczytu RZĘDU 1 (API ELI, 2026-09-16).
+
+### 1. F-190 — trzy luki treściowe ZAMKNIĘTE
+
+**(1) `dr-06` — nowy moduł `mod-ustawa-podatek-wydobycie-kopalin`** (46. moduł). Źródło:
+t.j. `Dz.U. 2026 poz. 454` (stan na 25.03.2026, z nowelizacją `2025/1804`). Zakres:
+przedmiot i wyłączenia (art. 1, 3), podatnik i umowa o współpracy (art. 4), obowiązek
+podatkowy (art. 5), podstawa (art. 6), stawki — miedź i srebro jako WZORY z maksimami
+16 000 zł/t i 2100 zł/kg oraz minimum 0,5 % ceny (art. 7), gaz 1,5/3 %, ropa 3/6 % (art. 7a),
+zwolnienia odwiertów 1100 MWh / 80 t (art. 7b), średnie ceny (art. 8), waloryzacja (art. 9),
+odliczenia 19 % straty (art. 10a) i 40 % nakładów (art. 10b) z oknem 2026–2028 (art. 5 ustawy
+`2025/1804`, poza t.j.), deklaracja i zapłata do 25. dnia, wyłącznie elektronicznie (art. 14),
+organy (art. 11; rozporządzenie `2025/1850`), pomiary i ewidencja (art. 15–16).
+⛔ **Doktryna „formuła zamiast liczby" zastosowana:** progi 15 000 / 12 000 / 1200 / 1000 zł
+są waloryzowane corocznie (art. 9, odnośnik 2 t.j.) — moduł wymaga kwot z obwieszczenia MF.
+Rejestracja: SKILL.md (licznik 45 → 46), MAPA-AKTOW, ROUTING-MAP. KROK 2C: brak nowelizacji
+po t.j. w wyszukiwaniu tytułowym (zastrzeżenie o zmianach przy okazji innych ustaw — w module).
+
+**(2) `dr-09` — sekcja o `Dz.U. 2026 poz. 516` w `mod-PrEnergetyczne-URE-OZE`.** Zakres
+zmian w PE (art. 3, 4j, 5, 5ad, 5ga, 5gb, 6g, 7, 16, 33a, 33c, 43g, 50b, 56), daty wejścia
+(art. 38), ⛔ **wygaśnięcie umów o przyłączenie powyżej 1 kV z mocy prawa** przy braku
+zawiadomienia operatora o ostatecznym pozwoleniu na budowę (art. 13–14 ustawy zmieniającej:
+30 / 42 / 60 miesięcy; dla umów starszych niż 48 miesięcy — 6 albo 3 miesiące), połowa
+dodatkowego zabezpieczenia, przepisy przejściowe art. 9, 11, 15, 22, 23.
+⛔ **NIEROZSTRZYGNIĘTE, zapisane w module:** art. 13–14 wchodzą w życie 16.10.2026, a liczą
+terminy „od dnia wejścia w życie niniejszej ustawy" (ustawa — 30.04.2026). Przy pierwszym
+odczycie 3-miesięczny termin z art. 14 ust. 1 pkt 2 upłynąłby przed wejściem przepisu
+w życie. Moduł nie rozstrzyga — nakazuje przyjąć datę wcześniejszą jako graniczną.
+
+**(3) `dr-10`** — numer t.j. ustawy o działalności leczniczej (`2026/156`) dopisany do obu
+modułów wskazywanych przez ROUTING-MAP (wraz z t.j. u.p.p. `2024/581` i KC `2026/795`).
+
+### 2. T30 — `scripts/check_utrata_tresci.py` (BLOKER w orkiestratorze)
+
+Odpowiedź na F-189: T12 nie widzi utraty, po której numer podbito ponownie. T30:
+(A) tabele „było → jest" z dziennika vs dysk, (B) kolizje numerów wersji od 2026-08-24,
+z honorowaniem deklaracji „LUKA JAWNA"/„KOLIZJA" w CHANGELOG. Selftest 5/5.
+**Walidacja na stanie sprzed napraw 2026-09-16: 5 trafień A + 1 B** (w tym `dr-09`,
+niewidoczne dla T12); na stanie bieżącym: 0.
+
+### 3. T28 — dwie nowe pozycje W1
+
+`W1-kopaliny-2024-44` (podatek od kopalin z numerem ustawy rehabilitacyjnej),
+`W1-UbezpObowLekarzy` (nieistniejący tytuł). Selftest 26 → 29.
+
+**Wersje:** `dr-06-podatki-finanse-publiczne-aml` 3.83 → 3.84,
+`dr-09-budownictwo-srodowisko-energia-transport` 3.32 → 3.33,
+`dr-10-zdrowie-farmacja-zywnosc-rolnictwo` 3.42 → 3.43, `prawo-polskie-v2` 6.22 → 6.23,
+`audyt-systemu-v4` 6.100 → 6.101.
+
+
+---
+
+## AUDYT-2026-09-16d — T31: podmiany aktu poza zasięgiem T15; O-11(d) zamknięta; porządek rejestru
+
+**Tryb:** kontynuacja 16c. Każde rozstrzygnięcie z odczytu RZĘDU 1 (API ELI, 2026-09-16).
+
+### 1. Porządek rejestru żywego (ZASADA 10)
+
+Tabela priorytetów w WARN-OTWARTE zawierała **F-141, F-148 i O-4**, choć tablica sterująca
+ich nie liczyła. Sprawdzone w dzienniku: F-141 [ZAMKNIĘTA] (poz. 2026/1123 celowo
+w MONITORING — potwierdzone odczytem: art. 20 ustawy zmienia ustawę o SN), F-148(a) i (b)
+zamknięte 2026-09-10c/f, O-4 [ZAMKNIĘTA] (T23). Wiersze usunięte.
+
+### 2. T15 — wiersz aliasu uszkodzony przez podmianę numeru (10r)
+
+T15 zgłaszał `TITLE_MISMATCH` dla `Dz.U. 2026 poz. 1195` („ustawa o zwolnieniach
+grupowych"). Przyczyna: sesja 10r zamieniła `2025/570 → 2026/1195` także w
+`ALIASY-NAZW-AKTOW.md` i wkleiła adnotację do komórki numeru — kontrakt maszynowy T15
+przestał rozpoznawać wiersz. Naprawione; T15 `maps` i `operational`: 0 problemów.
+⚠️ To ta sama klasa co F-148(b): masowa podmiana numeru bez oglądania kontekstu.
+
+### 3. ⛔ T31 — podmiany aktu, których T15 nie widzi (NOWY skrypt, ręczny, sieć)
+
+T15 porównuje tytuł z ELI z nazwą tylko dla deklaracji „t.j.". Wiersze „… ze zm." przechodziły
+bez porównania — tak przetrwała podmiana z 16b (kopaliny → ustawa rehabilitacyjna).
+`scripts/check_podmiana_aktu.py`: każdy wiersz ROUTING-MAP / MAPA-AKTOW z nazwą aktu
+i jednym numerem — porównanie rdzeni nazwy z tytułem ELI, z honorowaniem rejestru aliasów.
+Selftest 3/3. **Pierwszy przebieg: 27 kandydatów → 5 PODMIAN AKTU:**
+
+| Wiersz | Było | Co to jest wg ELI | Jest |
+|---|---|---|---|
+| UOKiK (ROUTING-MAP) | `2024/1221` | Prawo komunikacji elektronicznej | `2025/1714` |
+| Prawo energetyczne (ROUTING-MAP, MAPA dr-09) | `2025/459` | obwieszczenie MF o t.j. rozporządzenia | `2026/43` |
+| „Prawo gazowe" (ROUTING-MAP, MAPA dr-09, moduł) | `2024/1538` | obwieszczenie MSWiA o t.j. rozporządzenia | `2026/43` — ⛔ odrębna ustawa „Prawo gazowe" nie istnieje |
+| charakterystyka energetyczna (ROUTING-MAP, moduł) | `2024/544` | rozporządzenie MON | `2024/101` |
+| rolnictwo ekologiczne (ROUTING-MAP) | `2024/1284` | rozporządzenie MKiŚ | `2023/1235` |
+
+Przy okazji: `dr-10/mod-ustawa-inspekcja-weterynaryjna` podawał „dawniej: Dz.U. 2024 poz.
+1284" dla starej ustawy o ochronie zdrowia zwierząt (to ten sam obcy numer) → `2023/1075`;
+legacy router (`cyberprzestepstwa.md`) — „Prawo telekomunikacyjne, `2024/1221` t.j." →
+akt pierwotny Prawa komunikacji elektronicznej; nazwy wierszy: „Ustawa o medycynie — edukacja
+specjalna" → ustawa o zapewnianiu dostępności (`2024/1411`); „sędziowie, referendarze,
+kuratorzy" → PUSP + ustawa o kuratorach sądowych (`2026/200`).
+Pozostałe 18 kandydatów — nazwy potoczne i wiersze złożone; 11 nowych aliasów wpisanych
+po odczycie tytułów. Po naprawach T31: **0**. Na stanie sprzed dzisiejszych napraw: 25.
+
+⭐ **Wniosek:** wszystkie pięć podmian to obwieszczenia lub rozporządzenia z tego samego roku
+co właściwy akt — numer „wygląda" wiarygodnie. Taki błąd powstaje przy dopasowaniu numeru
+do nazwy (klasa zapisana w ALIASY przy F-148a) i jest niewidoczny dla każdego testu,
+który nie czyta tytułu.
+
+### 4. O-11(d) — moduł opłaty skarbowej (ZAMKNIĘTA)
+
+`dr-06/modules/mod-ustawa-oplata-skarbowa.md` (47. moduł) — t.j. `2025/1154`: przedmiot
+(art. 1, 3–4), zobowiązani i solidarność (art. 5), powstanie obowiązku = termin zapłaty
+(art. 6), zwolnienia podmiotowe (art. 7), dowód zapłaty — kopia uwierzytelniona przez
+profesjonalnego pełnomocnika (art. 8 ust. 5), zwrot z terminem 5 lat (art. 9), kontrola
+(art. 11), organ — wójt/burmistrz/prezydent (art. 12); skutek braku opłaty w KPA
+(art. 261, t.j. `2025/1691`). Stawki pozostają kanonicznie w `shared/oplaty/07` (6c).
+
+### 5. Mapa Dz.U.
+
+Dopisane: `2026/200`, `2025/1154`, `2024/101`, `2023/1235`. T11: OK.
+
+**Wersje:** `dr-06-podatki-finanse-publiczne-aml` 3.84 → 3.85,
+`dr-09-budownictwo-srodowisko-energia-transport` 3.33 → 3.34,
+`dr-10-zdrowie-farmacja-zywnosc-rolnictwo` 3.43 → 3.44, `prawo-polskie-v2` 6.23 → 6.24,
+`prawny-router-v3` 3.50 → 3.51, `audyt-systemu-v4` 6.101 → 6.102.
+
+
+---
+
+## AUDYT-2026-09-16e — O-11 ZAMKNIĘTA w całości (T32 + klasa ZASTĄPIONY_TJ w T27); 12 dalszych podmian i martwych numerów
+
+**Tryb:** kontynuacja 16d. Każdy nowy numer — odczyt tytułu i statusu w ELI (RZĄD 1).
+
+### 1. O-11(b) — T32 `scripts/check_tabele_satelickie.py` (orkiestrator)
+
+Rejestr tabel satelickich (`shared/TABELE-OPLAT.md` §7) jest odtąd egzekwowany: plik z rejestru
+musi istnieć (FAIL), wiersz z kwotą bez podstawy — w wierszu, w kolumnie „Podstawa" albo
+w nagłówku / zdaniu wprowadzającym nad tabelą — WARN. Selftest 9/9.
+Przebieg 1: 62 WARN (tabele progowe z podstawą w nagłówku). Przebieg 2 (kontekst 8 linii): 0 —
+⛔ **zbyt pobłażliwy**: dwie tabele pokryła proza (polecenie `curl` z „Art.", zdanie „nie stosować
+tabeli z § 2"). Przebieg 3 (kontekst tylko jako nagłówek, zdanie z „:" albo „Dz.U."): **2 realne
+braki** — `dr-03` tabela kar do 5 lat bez przepisu → art. 2 ust. 1 pkt 1–5 i ust. 2;
+`shared/oplaty/03` sprawy rodzinne bez paragrafu → § 4 ust. 1 pkt 1–9 obu taks, **plus trzy
+pominięte pozycje** (pkt 2 stwierdzenie istnienia małżeństwa 720 zł, pkt 3 przysposobienie 360 zł,
+pkt 4 władza rodzicielska 480 zł) — odczyt `2026/215` i `2026/118`.
+Rejestr §7: wiersz `dr-06` wskazuje odtąd konkretny moduł opłaty skarbowej.
+
+### 2. O-11(c) — T27: trzecia klasa ZASTĄPIONY_TJ
+
+Statusy „akt posiada tekst jednolity" / „akt objęty tekstem jednolitym" przy numerze w pozycji
+aktualnej podstawy. Filtr historyczny T27 poszerzony o „pierwotn", „podmian".
+Przebieg na pełnym korpusie (320 numerów, 1277 miejsc): **6 MARTWYCH + 9 ZASTĄPIONYCH**.
+
+| Numer | Co to jest wg ELI | Gdzie stał jako | Jest |
+|---|---|---|---|
+| ⛔ `2024/1360` | rozporządzenie RM (objęte t.j.) | **t.j. KC — 9 miejsc w `shared`** (orka-bas, definicje, mod-niepełnosprawność) | `2026/795` |
+| ⛔ `2025/1515` | rozporządzenie RM | t.j. ustawy o samorządzie gminnym (`shared`) | `2026/662` |
+| ⛔ `2024/655` | rozporządzenie MZ | t.j. ustawy o obronie Ojczyzny (`shared`) | `2025/825` |
+| ⛔ `2022/2032` | obwieszczenie MSWiA o rozporządzeniu (wygasłe) | ustawa o Radzie Ministrów (`dr-01`) | `2025/780` |
+| `2021/1177` | akt pierwotny ustawy deweloperskiej | aktualna podstawa (`shared`, `dr-02` ×3) | `2026/880` |
+| `2022/655` | akt pierwotny ustawy o obronie Ojczyzny | „nie ma nowego t.j." (`dr-13`) — **nieprawda** | `2025/825` |
+| `2022/974` | akt pierwotny ustawy o wyrobach medycznych | aktualna podstawa (`dr-10` ×6) | `2024/1620` |
+| `2024/749`, `2025/1679` | wygasły t.j.; nowelizacja objęta t.j. | „ISAP — tekst jednolity" (`dr-12`) | `2026/778` |
+| `2020/289` | rozporządzenie zmieniające objęte t.j. | „późniejsza zmiana t.j. z 2021" (`dr-06`) — sprzeczne chronologicznie | t.j. `2021/999` (metryka ELI: akty zmieniające / t.j.) |
+| `2021/1249` | wygasły t.j. (ustawa przemianowana) | `dr-03`, ROUTING-MAP ×2 | `2024/1673` |
+| `2024/1320` | wygasły t.j. PZP | `analizator-umow`, `dr-15` | `2026/793` |
+| `2024/1214` | wygasły t.j. IDD | `analizator-umow` | `2026/12` |
+| `2024/1290` | wygasły t.j. PGG | `dr-09` | `2026/69` |
+
+Po naprawach: MARTWE 1 (`2023/2119` — zdanie o tym, co t.j. „odnotowuje"; kontekst
+historyczny, znany), ZASTĄPIONE 0. T28: nowa pozycja `W1-KC-2024-1360` (selftest 30/30).
+
+⭐ **Wniosek:** klasa ZASTĄPIONY_TJ dała więcej podmian aktu niż MARTWY — numer rozporządzenia
+zmieniającego „wygląda" jak t.j., bo ELI nadaje mu status wskazujący na tekst jednolity.
+`shared/orka-bas-leksykon` po raz drugi (po F-181) okazał się głównym nośnikiem błędu, bo cytuje
+podstawy w treści definicji.
+
+### 3. Stan zapory numerów aktów (F-135, warstwa numerów)
+
+T11 OK · T15 `maps`/`operational` 0 · T27 1 znany · T31 0 · T28 0.
+Warstwa WARTOŚCI w modułach pozostaje w F-135.
+
+**Wersje:** `shared` 3.63 → 3.64, `audyt-systemu-v4` 6.102 → 6.103,
+`dr-01-ustroj-konstytucyjny-i-zrodla-prawa` 3.9 → 3.10,
+`dr-02-prawo-cywilne-rodzinne-gospodarcze` 3.51 → 3.52,
+`dr-03-prawo-karne-wykroczenia-egzekucja` 3.41 → 3.42,
+`dr-06-podatki-finanse-publiczne-aml` 3.85 → 3.86,
+`dr-09-budownictwo-srodowisko-energia-transport` 3.34 → 3.35,
+`dr-10-zdrowie-farmacja-zywnosc-rolnictwo` 3.44 → 3.45,
+`dr-12-sadownictwo-prokuratura-zawody-prawnicze` 4.16 → 4.17,
+`dr-13-sluzby-bezpieczenstwo-informacje-niejawne` 3.10 → 3.11,
+`dr-15-compliance-iso-governance-audyt` 3.12 → 3.13, `prawo-polskie-v2` 6.24 → 6.25,
+`analizator-umow-v1` 1.34 → 1.35.
+
+
+---
+
+## AUDYT-2026-09-16f — F-135: dziedzina „terminy KC" przerobiona w całości (odczyt treści)
+
+**Tryb:** F-135, warstwa WARTOŚCI, jedna dziedzina od początku do końca (zgodnie z zapisem flagi).
+Źródło: KC t.j. `Dz.U. 2026 poz. 795` (obwieszczenie z 27.05.2026, stan na 19.05.2026). KROK 2C:
+metryka aktu bazowego — nowelizacje z 2026 r. (`2026/184`, `2026/507`) poprzedzają obwieszczenie.
+
+### 1. Metoda
+
+Skan korpusu: każda linia z „art. N KC" i okresem czasu → 63 miejsca w 24 artykułach.
+Odczyt treści 25 jednostek: art. 11, 58, 88, 117, 118, 119, 120, 123, 172, 173, 174, 344, 390,
+442¹, 534, 563, 568, 660, 704, 764⁶, 812, 817, 819, 929, 994, 1007, 1015. Następnie skan
+uzupełniający modułów KC w `dr-02` bez skrótu „KC" w linii.
+Sekcja KC w `shared/terminy.md` (odczyt 12o) — ponownie potwierdzona w 14 jednostkach.
+
+### 2. ⛔ Usterki — postać 1 i 4 (błędna liczba, pominięcie)
+
+| Usterka | Miejsca | Kierunek |
+|---|---|---|
+| **art. 442¹ § 3 pominięty** — przy szkodzie NA OSOBIE granica 10 lat NIE obowiązuje; moduły podawały „max 10 lat" przy błędzie medycznym, wypadku przy pracy, wypadku drogowym, OC | `dr-10` ×2, `dr-04`, `dr-09`, `dr-02` ×3, `shared/definicje` | ⛔ **niebezpieczny** — fałszywe przedawnienie |
+| „max 20 lat dla szkód na osobie — § 3" (20 lat to § 2, przestępstwo) | `dr-10` | błędna jednostka i konstrukcja |
+| „małoletni: 3 lata od pełnoletności" (§ 4: **2 lata**) | `dr-10` | zawyżenie |
+| FKZM „art. 67t **ust. 8** u.p.p." (jest **ust. 3**) | `dr-10` | błędna jednostka |
+| „art. 117 § 1 KC — 6 lat" (art. 117 nie podaje terminu; 6 lat — art. 118) | `dr-03`, router (legacy) | błędna jednostka |
+| zachowek „5 lat od ogłoszenia / **otwarcia testamentu**" — ustawa zna ogłoszenie testamentu (§ 1) i otwarcie **spadku** (§ 2–4) | `dr-16` | nieistniejący punkt startowy |
+| zachowek tylko § 1 — brak § 2–4 (obdarowany, zapisobierca windykacyjny, fundacja rodzinna) | `dr-02`, `shared/terminy.md` | pominięcie |
+| art. 1015 bez § 1¹ (wniosek do sądu zachowuje termin) i § 1² (zawieszenie) | `shared/terminy.md` | pominięcie |
+| ubezpieczenia: „3 lata od decyzji lub zakończenia likwidacji; **przerwij przedawnienie wezwaniem**" — wezwanie NIE przerywa (art. 123 § 1); bieg rusza od pisemnej odpowiedzi (art. 819 § 4) | `dr-02` | ⛔ **niebezpieczny** |
+| roboty budowlane „3 lata (DG)" bez zastrzeżenia — inwestor-konsument: 6 lat | `dr-09` | pominięcie |
+| szybka tabela: „dyscyplinarka — art. 264 **§ 1** KP" (jest § 2; poprawione w `dr-04` 16a, tu nie) | `shared/terminy.md` | błędna jednostka |
+
+Potwierdzone bez zmian: art. 11, 58, 88, 118, 119, 120, 172, 173, 174, 344, 390, 534, 563, 568,
+660, 704, 764⁶, 812 § 4, 817, 819 § 1, 929, 994, 1015 § 1.
+Poza KC przy okazji: art. 14 ust. 2a–2c FUS (`2025/1749`) i art. 25 ust. 1a uWŁ (`2026/232`) —
+wartości poprawne, doprecyzowane jednostki i punkty startowe.
+
+### 3. `shared/terminy.md` — nowa podsekcja „Dalsze terminy KC"
+
+Dziewięć wierszy z odczytu: 1007 § 1–4, 994 § 1, 819, 817, 812 § 4, 174 § 1, 764⁶, 704, 660,
+oraz ostrzeżenie o art. 117 (brak terminu; § 2¹ i art. 117¹ — konsument).
+
+### 4. T28 — trzy pozycje W1 (selftest 34/34)
+
+`W1-117-KC-6lat`, `W1-1007-otwarcie-testamentu`, `W1-4421-par3-20lat`. Na stanie sprzed
+napraw: 3 trafienia (czwarte — plik `legacy-material-router`, który T28 pomija z założenia).
+⚠️ Najgroźniejsza usterka tej sesji (§ 3 pominięty) jest **postaci 4 — pominięciem**
+i pozostaje niewykrywalna testem: „3 lata / max 10 lat" jest poprawnym zdaniem o § 1.
+Zapora to wyłącznie tabela kanoniczna i odczyt przy sprawie.
+
+**Wersje:** `shared` 3.64 → 3.65, `audyt-systemu-v4` 6.103 → 6.104,
+`dr-02-prawo-cywilne-rodzinne-gospodarcze` 3.52 → 3.53,
+`dr-03-prawo-karne-wykroczenia-egzekucja` 3.42 → 3.43,
+`dr-04-prawo-pracy-zus-swiadczenia` 3.34 → 3.35,
+`dr-09-budownictwo-srodowisko-energia-transport` 3.35 → 3.36,
+`dr-10-zdrowie-farmacja-zywnosc-rolnictwo` 3.45 → 3.46,
+`dr-16-pisma-strategia-dowody-orzecznictwo` 3.6 → 3.7, `prawny-router-v3` 3.51 → 3.52.
+
+
+---
+
+## AUDYT-2026-09-16g — F-135: dziedzina „terminy i progi KKS" przerobiona (odczyt treści)
+
+**Źródło:** KKS t.j. `Dz.U. 2025 poz. 633`. **KROK 2C** (metryka `DU/1999/930`): po t.j. —
+`2026/347` (art. 80cb, 18.03.2026), `2026/421` (art. 113 § 3 pkt 2 — odesłanie, 14.04.2026),
+`2026/901` (art. 122, 21.07.2026), `2026/846` (ogłoszona 25.06.2026: uchylenie art. 16b, art. 80f,
+art. 133 § 1 pkt 1, art. 140 § 1b–1c — **1.10.2026**; mandat karny zaoczny, art. 137, 138,
+140 § 1 zd. 1 — **26.12.2026**). Żadna nie dotyka art. 16, 16a, 17–18, 27, 44, 48, 51, 53, 142–144.
+
+Odczytane jednostki: art. 16, 16a, 16b, 17, 18, 21, 27, 44, 45, 48, 51, 53, 54, 63–69a (nagłówki),
+65, 86, 87, 91, 92, 113, 142, 143, 144.
+
+### Usterki
+
+| Usterka | Plik | Postać |
+|---|---|---|
+| tabela: art. 86 KKS jako „**przemyt akcyzowy**" (jest przemyt **celny**) | `dr-06/…/part-06-clo-naruszenia` | 2 — błędny cytat |
+| tabela: art. 87 KKS „do **360** stawek" (jest do 720 stawek albo pozbawienie wolności) | jw. | 1 — błędna liczba |
+| tabela: art. 91 KKS jako „niedopełnienie obowiązku celnego" (jest **paserstwo celne**, pozbawienie wolności do 3 lat) | jw. | 2 |
+| „art. 16 KKS stosuje się odpowiednio do usiłowania" — **brak podstawy**; przy usiłowaniu art. 21 § 3 KKS odsyła do art. 15 KK | `dr-03/mod-czynny-zal` | 2 |
+| art. 16a § 3 opisany jako „katalog niepotwierdzony"; brak art. 16 § 4–6 (forma, **bezskuteczność po czynności sprawdzającej**, wyłączenia podmiotowe) | jw. | 4 — pominięcie |
+| brak `2026/421` i dat szczegółowych `2026/846` (w tym uchylenie art. 16b i mandat zaoczny) | `dr-03/mod-KKS` | 4 |
+| **brak sekcji KKS w `shared/terminy.md`** (odnotowane jako otwarte w 12m) | `shared` | 4 |
+
+Potwierdzone: art. 54 KKS z sankcją „do 720 stawek / do 5 lat" (5 lat z art. 27 § 1), próg
+„mała wartość 5–200-krotność" w opisie art. 87 (`dr-06/part-07`).
+
+### Uzupełnienia
+
+Nowa sekcja „Terminy i progi KKS" (16 wierszy) w `shared/terminy.md` i w `dr-03/mod-KKS`
+(§ 1a): karalność z art. 44 § 1–5 (w tym ⛔ bieg od końca roku terminu płatności i wygaśnięcie
+z przedawnieniem należności), art. 51, terminy zapłaty z art. 16–16a, dobrowolne poddanie się
+(art. 142–144: do aktu oskarżenia, cofnięcie nie przed miesiącem, kwoty minimalne), grzywna
+(art. 48), progi z art. 53 § 3, 6, 14–16 (⛔ minimalne wynagrodzenie z czasu czynu), art. 27,
+mandat zaoczny (14 dni — od 26.12.2026).
+
+T28: `W1-86-KKS-akcyzowy`, `W1-87-KKS-360` (selftest 36/36; na stanie sprzed napraw 2 trafienia).
+
+**Wersje:** `shared` 3.65 → 3.66, `audyt-systemu-v4` 6.104 → 6.105,
+`dr-03-prawo-karne-wykroczenia-egzekucja` 3.43 → 3.44,
+`dr-06-podatki-finanse-publiczne-aml` 3.86 → 3.87.

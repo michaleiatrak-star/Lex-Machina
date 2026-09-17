@@ -1,6 +1,6 @@
 # mod-ustawa-deweloperska
 
-**Źródło weryfikacji:** Ustawa deweloperska (ochrona nabywcy) — Dz.U. 2021 poz. 1177 ze zm.
+**Źródło weryfikacji:** Ustawa deweloperska (ochrona nabywcy) — t.j. Dz.U. 2026 poz. 880 ze zm. (✅ [VER] RZĄD 1 2026-09-16e; akt pierwotny: Dz.U. 2021 poz. 1177)
 **Data weryfikacji online:** 2026-06-05
 **ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -49,7 +49,7 @@ Deweloper: 14 DNI na pisemne uznanie LUB odrzucenie zgłoszonych wad
 Deweloper: 30 dni na usunięcie UZNANYCH wad od podpisania protokołu
   (POTWIERDZONE 2026-07-27 — art. 41 ust. 6 ustawy z 20.05.2021 r.
   o ochronie praw nabywcy lokalu mieszkalnego lub domu jednorodzinnego
-  oraz Deweloperskim Funduszu Gwarancyjnym, Dz.U. 2021 poz. 1177 ze zm.;
+  oraz Deweloperskim Funduszu Gwarancyjnym, t.j. Dz.U. 2026 poz. 880 ze zm.;
   liczone jako dni kalendarzowe, nie robocze)
   ↓ brak usunięcia
 Nabywca: wyznacza dodatkowy termin ALBO
@@ -64,7 +64,7 @@ Nabywca: wyznacza dodatkowy termin ALBO
 ## WERYFIKACJA ONLINE
 
 ```
-web_search: "ustawa deweloperska ochrona nabywcy isap.sejm.gov.pl Dz.U. 2021 poz. 1177"
+web_search: "ustawa deweloperska ochrona nabywcy isap.sejm.gov.pl Dz.U. 2026 poz. 880"
 web_search: "mieszkaniowy rachunek powierniczy MRP deweloper obowiązki 2022"
 web_search: "Deweloperski Fundusz Gwarancyjny UOKiK nabywca upadłość"
 web_search: "wady lokalu protokół odbioru deweloper termin orzecznictwo"

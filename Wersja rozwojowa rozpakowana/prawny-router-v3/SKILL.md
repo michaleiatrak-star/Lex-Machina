@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.50"
+version: "3.52"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -107,7 +107,7 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog: |
-  Wersja bieżąca: 3.50 (2026-09-16, F-189): T12: pole YAML `changelog:` skrócone do odesłania; wersja 3.49 bez opisu oznaczona jako LUKA JAWNA. Treść bez zmian.…
+  Wersja bieżąca: 3.52 (2026-09-16, F-189): references/legacy-material-router/cyberprzestepstwa.md — „art. 117 § 1 KC — 6 lat” → art. 118 KC (F-135). Treść routera bez zmian.…
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 

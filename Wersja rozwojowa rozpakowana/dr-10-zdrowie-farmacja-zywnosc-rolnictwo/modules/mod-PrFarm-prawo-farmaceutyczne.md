@@ -25,7 +25,7 @@ Farmaceutyczna (GIF/WIF), sankcje karne i administracyjne.
 | Nowelizacja PF z 24.06.2025 | Dz.U. 2025 poz. 924 | isap.sejm.gov.pl |
 | Ustawa o refundacji leków z 12.05.2011 | Dz.U. 2026 poz. 253 t.j. | isap.sejm.gov.pl |
 | Nowelizacja ustawy refundacyjnej z 25.07.2025 | Dz.U. 2025 poz. 1192 | isap.sejm.gov.pl |
-| Ustawa o wyrobach medycznych z 7.04.2022 | Dz.U. 2022 poz. 974 | isap.sejm.gov.pl |
+| Ustawa o wyrobach medycznych z 7.04.2022 | t.j. Dz.U. 2024 poz. 1620 (akt pierwotny: 2022 poz. 974) | isap.sejm.gov.pl |
 | Rozporządzenie MDR 2017/745 (UE) | Dz.Urz. UE | eur-lex.europa.eu |
 
 ---
@@ -456,7 +456,7 @@ Kategorie:
   • Radiofarmaceutyk
   • Lek recepturowy i apteczny
 
-UWAGA: Wyrób medyczny ≠ produkt leczniczy (odrębna ustawa 7.04.2022, Dz.U. 2022 poz. 974)
+UWAGA: Wyrób medyczny ≠ produkt leczniczy (odrębna ustawa 7.04.2022, t.j. Dz.U. 2024 poz. 1620)
 Suplement diety ≠ produkt leczniczy (ustawa o bezpieczeństwie żywności)
 ```
 
@@ -836,7 +836,7 @@ Odwołanie: do GIF / wniosek o uchylenie → skarga do WSA
 
 ## CZĘŚĆ IX — WYROBY MEDYCZNE — WYDZIELONE
 
-⚠️ Wyroby medyczne to ODRĘBNA REGULACJA (ustawa z 7.04.2022, Dz.U. 2022 poz. 974)
+⚠️ Wyroby medyczne to ODRĘBNA REGULACJA (ustawa z 7.04.2022, t.j. Dz.U. 2024 poz. 1620)
 — wydzielona 2026-06-12 do samodzielnego modułu:
 → `view dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-wyroby-medyczne.md`
 
