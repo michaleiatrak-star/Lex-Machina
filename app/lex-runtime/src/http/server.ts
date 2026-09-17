@@ -9,6 +9,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createLexHttpApp } from "./app.js";
 import { registerLegacyMigrationRoutes } from "./legacy-migration-routes.js";
+import { registerWorkspaceRoutes } from "./workspace-routes.js";
+import { registerMaintenanceRoutes } from "./maintenance-routes.js";
 import { LexSkillRegistry } from "../registry.js";
 import { DynamicModelCatalog } from "../providers/model-catalog.js";
 import {
@@ -20,6 +22,12 @@ import { ProviderGateway } from "../providers/gateway.js";
 import {
   GitHubReleaseUpdateDiscovery
 } from "../update-discovery.js";
+import {
+  installedSkillOverlayRoot,
+  installedSkillOverlayVersion,
+  MaintenanceService
+} from "../maintenance-service.js";
+import { LocalModelRuntime } from "../local-model-runtime.js";
 import { SafeSessionExecutor } from "../session-executor.js";
 import { LegalVerificationToolRuntime } from "../verification-tool-runtime.js";
 import { TemporalSourceFreshnessChecker } from "../temporal-source-freshness.js";
@@ -62,6 +70,9 @@ import {
 import {
   SecureCaseArtifactStore
 } from "../case-artifact-store.js";
+import {
+  EncryptedCaseWorkspaceStore
+} from "../case-workspace-store.js";
 import {
   LegacyCaseStorageMigrator
 } from "../legacy-case-migration.js";
@@ -190,11 +201,20 @@ function loopbackOriginGuard(
 }
 
 export function resolveRuntimeRoot(): string {
+  const explicitlyConfigured =
+    process.env.LEX_SKILLS_PATH?.trim();
+  if (explicitlyConfigured) {
+    return path.resolve(explicitlyConfigured);
+  }
+
+  if (installedSkillOverlayVersion()) {
+    return installedSkillOverlayRoot();
+  }
+
   const here = path.dirname(fileURLToPath(import.meta.url));
   const repositoryRoot = path.resolve(here, "../../../..");
   return path.resolve(
-    process.env.LEX_SKILLS_PATH ??
-      path.join(repositoryRoot, "Wersja rozwojowa rozpakowana")
+    path.join(repositoryRoot, "Wersja rozwojowa rozpakowana")
   );
 }
 
@@ -258,6 +278,11 @@ export async function startLocalServer(options?: {
       rootDir:
         caseFileStore.rootDir
     });
+  const workspaceStore =
+    new EncryptedCaseWorkspaceStore({
+      rootDir:
+        caseFileStore.rootDir
+    });
   const documentGenerationState =
     new DocumentGenerationStateStore({
       rootDir:
@@ -280,7 +305,8 @@ export async function startLocalServer(options?: {
       privacyVaultStore,
       secureCaseUploadStore,
       secureCaseDocumentStore,
-      secureCaseArtifactStore
+      secureCaseArtifactStore,
+      workspaceStore
     );
   await secureCaseUploadStore
     .cleanupOrphanedWorkdirs();
@@ -331,11 +357,23 @@ export async function startLocalServer(options?: {
       authService
     );
 
+  const updateDiscovery =
+    new GitHubReleaseUpdateDiscovery();
+  const maintenance =
+    new MaintenanceService(
+      updateDiscovery
+    );
+  const localModels =
+    new LocalModelRuntime();
+
   const credentials =
     new MemoryOverlayCredentialResolver(
       new EnvironmentCredentialResolver()
     );
-  const providerRegistry = createLiveProviderRegistry(credentials);
+  const providerRegistry = createLiveProviderRegistry(
+    credentials,
+    localModels
+  );
   const providerGateway = new ProviderGateway(providerRegistry);
 
   const legalSourceVerifier =
@@ -362,28 +400,8 @@ export async function startLocalServer(options?: {
     new LegalDocumentAstGenerator(
       sessionExecutor
     );
-
-  const coreApp = createLexHttpApp({
-    registry,
-    modelCatalog: new DynamicModelCatalog(credentials),
-    credentialResolver: credentials,
-    credentialManager: credentials,
-    updateDiscovery:
-      new GitHubReleaseUpdateDiscovery(),
-    caseFileStore,
-    secureCaseUploadStore,
-    sharedTemplateStore,
-    templateProfileService,
-    authService,
-    supportService,
-    caseAccessService,
-    caseKnowledgeSearch,
-    documentAuthoringService,
-    documentAstGenerator,
-    reauthorizationManager,
-    sensitiveDownloadTickets,
-    secureCaseArtifactStore,
-    documentService: new LocalPrivateDocumentService(
+  const documentService =
+    new LocalPrivateDocumentService(
       new CompleteDocumentIngestor(
         new PdfJsDocumentPageSource(),
         new LocalPaddleOcrEngine()
@@ -397,7 +415,28 @@ export async function startLocalServer(options?: {
       secureCaseDocumentStore,
       new LocalOfficeDocumentTextExtractor(),
       new LocalSpreadsheetTextExtractor()
-    ),
+    );
+
+  const coreApp = createLexHttpApp({
+    registry,
+    modelCatalog: new DynamicModelCatalog(credentials),
+    credentialResolver: credentials,
+    credentialManager: credentials,
+    updateDiscovery,
+    caseFileStore,
+    secureCaseUploadStore,
+    sharedTemplateStore,
+    templateProfileService,
+    authService,
+    supportService,
+    caseAccessService,
+    caseKnowledgeSearch,
+    documentAuthoringService,
+    documentAstGenerator,
+    reauthorizationManager,
+    sensitiveDownloadTickets,
+    secureCaseArtifactStore,
+    documentService,
     sessionExecutor
   });
 
@@ -406,6 +445,7 @@ export async function startLocalServer(options?: {
   app.use(helmet());
   app.use(desktopBootstrapGuard);
   app.use(loopbackOriginGuard);
+  app.use(express.json({ limit: "2mb" }));
   registerLegacyMigrationRoutes(
     app,
     {
@@ -414,6 +454,32 @@ export async function startLocalServer(options?: {
       caseAccessService,
       migrator:
         legacyCaseStorageMigrator
+    }
+  );
+  registerWorkspaceRoutes(
+    app,
+    {
+      authService,
+      caseAccessService,
+      uploads:
+        secureCaseUploadStore,
+      templates:
+        sharedTemplateStore,
+      privacyVaults:
+        privacyVaultStore,
+      documentService,
+      workspace:
+        workspaceStore,
+      rootDir:
+        caseFileStore.rootDir
+    }
+  );
+  registerMaintenanceRoutes(
+    app,
+    {
+      authService,
+      localModels,
+      maintenance
     }
   );
   app.use(coreApp);
@@ -434,6 +500,7 @@ export async function startLocalServer(options?: {
         close: () =>
           new Promise<void>((closeResolve, closeReject) => {
             server.close((error) => {
+              void localModels.stop();
               credentials.close();
               supportService.close();
               authService.close();

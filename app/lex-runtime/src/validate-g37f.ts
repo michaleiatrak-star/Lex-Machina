@@ -19,11 +19,13 @@ const read =
     );
 
 const app =
-  read("app/lex-web/src/App.tsx");
+  read("app/lex-web/src/ChatApp.tsx");
 const queue =
   read("app/lex-web/src/document-drop-queue.ts");
 const test =
   read("app/lex-web/src/document-drop-queue.test.ts");
+const tauri =
+  read("app/lex-desktop/src-tauri/tauri.conf.json");
 
 const checks = {
   multiFileDrop:
@@ -31,7 +33,7 @@ const checks = {
       "event.dataTransfer.files"
     ) &&
     app.includes(
-      "enqueueDocumentFiles"
+      "enqueueDocumentDropFiles"
     ),
   boundedSequentialQueue:
     queue.includes(
@@ -42,10 +44,10 @@ const checks = {
     ),
   nestedDragCounter:
     app.includes(
-      "queryDragDepth.current += 1"
+      "dragDepth.current += 1"
     ) &&
     app.includes(
-      "queryDragDepth.current - 1"
+      "dragDepth.current - 1"
     ),
   keyboardEquivalent:
     app.includes(
@@ -56,6 +58,9 @@ const checks = {
     ) &&
     app.includes(
       "DOCUMENT_FILE_ACCEPT"
+    ) &&
+    app.includes(
+      "fileInputRef.current?.click()"
     ),
   progressAndAccessibility:
     app.includes(
@@ -65,7 +70,7 @@ const checks = {
       "Przetwarzanie"
     ) &&
     app.includes(
-      "Kolejka zakończona"
+      "documentDropQueue.completed"
     ),
   perFileFeedback:
     app.includes(
@@ -90,6 +95,10 @@ const checks = {
     ) &&
     app.includes(
       "}, [caseId]);"
+    ),
+  desktopHtmlDropEnabled:
+    tauri.includes(
+      '"dragDropEnabled": false'
     ),
   regressionTests:
     test.includes(

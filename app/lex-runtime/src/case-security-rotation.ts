@@ -13,6 +13,9 @@ import type {
 import type {
   SecureCaseArtifactStore
 } from "./case-artifact-store.js";
+import type {
+  EncryptedCaseWorkspaceStore
+} from "./case-workspace-store.js";
 
 type RotationArgs =
   Parameters<
@@ -43,6 +46,11 @@ implements CaseKeyRotationParticipant {
       Pick<
         SecureCaseArtifactStore,
         "rekeyCaseArtifacts"
+      >,
+    private readonly workspace?:
+      Pick<
+        EncryptedCaseWorkspaceStore,
+        "rekeyCaseWorkspace"
       >
   ) {}
 
@@ -53,6 +61,7 @@ implements CaseKeyRotationParticipant {
     let uploadsChanged = false;
     let documentsChanged = false;
     let artifactsChanged = false;
+    let workspaceChanged = false;
 
     const reverse = {
       caseId:
@@ -96,14 +105,33 @@ implements CaseKeyRotationParticipant {
               args
             );
       }
+      if (
+        this.workspace
+      ) {
+        workspaceChanged =
+          await this.workspace
+            .rekeyCaseWorkspace(
+              args
+            );
+      }
       return (
         vaultChanged ||
         uploadsChanged ||
         documentsChanged ||
-        artifactsChanged
+        artifactsChanged ||
+        workspaceChanged
       );
     } catch (error) {
       try {
+        if (
+          workspaceChanged &&
+          this.workspace
+        ) {
+          await this.workspace
+            .rekeyCaseWorkspace(
+              reverse
+            );
+        }
         if (
           artifactsChanged &&
           this.artifacts

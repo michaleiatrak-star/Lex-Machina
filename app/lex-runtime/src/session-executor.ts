@@ -20,6 +20,11 @@ import type {
 import {
   LegalCorpusToolRuntime
 } from "./legal-corpus-tool-runtime.js";
+import {
+  documentCitationSystemPrompt,
+  processDocumentCitationMarkers,
+  type PublicDocumentCitation
+} from "./document-citations.js";
 
 export type SessionDocumentAttachment = {
   documentId: string;
@@ -76,72 +81,31 @@ export function publicEvidenceBundle(
     claim: record.claim,
     kind: record.kind,
     status: record.status,
-    ...(record.sourceUrl
-      ? { sourceUrl: record.sourceUrl }
-      : {}),
-    ...(record.sourceTier
-      ? { sourceTier: record.sourceTier }
-      : {}),
+    ...(record.sourceUrl ? { sourceUrl: record.sourceUrl } : {}),
+    ...(record.sourceTier ? { sourceTier: record.sourceTier } : {}),
     fetchedAt: record.fetchedAt,
     ...(record.verificationMethod
-      ? {
-          verificationMethod:
-            record.verificationMethod
-        }
+      ? { verificationMethod: record.verificationMethod }
       : {}),
-    ...(record.temporalMode
-      ? {
-          temporalMode:
-            record.temporalMode
-        }
-      : {}),
-    ...(record.asOf
-      ? { asOf: record.asOf }
-      : {}),
-    ...(record.sourceFormat
-      ? {
-          sourceFormat:
-            record.sourceFormat
-        }
-      : {}),
-    ...(record.caseScope
-      ? {
-          caseScope:
-            record.caseScope
-        }
-      : {}),
-    ...(record.caseSignature
-      ? {
-          caseSignature:
-            record.caseSignature
-        }
-      : {}),
-    ...(record.evidenceHash
-      ? {
-          evidenceHash:
-            record.evidenceHash
-        }
-      : {}),
+    ...(record.temporalMode ? { temporalMode: record.temporalMode } : {}),
+    ...(record.asOf ? { asOf: record.asOf } : {}),
+    ...(record.sourceFormat ? { sourceFormat: record.sourceFormat } : {}),
+    ...(record.caseScope ? { caseScope: record.caseScope } : {}),
+    ...(record.caseSignature ? { caseSignature: record.caseSignature } : {}),
+    ...(record.evidenceHash ? { evidenceHash: record.evidenceHash } : {}),
     ...(record.supportQuoteHash
-      ? {
-          supportQuoteHash:
-            record.supportQuoteHash
-        }
+      ? { supportQuoteHash: record.supportQuoteHash }
       : {})
   }));
 }
 
 export type SessionExecutionInternalState = {
-  verificationRecords:
-    VerificationRecord[];
-  auditEvents:
-    AuditEvent[];
+  verificationRecords: VerificationRecord[];
+  auditEvents: AuditEvent[];
 };
 
 export const SESSION_EXECUTION_INTERNAL =
-  Symbol(
-    "LEX_SESSION_EXECUTION_INTERNAL"
-  );
+  Symbol("LEX_SESSION_EXECUTION_INTERNAL");
 
 export type SessionExecutionResponse = {
   sessionId: string;
@@ -149,7 +113,11 @@ export type SessionExecutionResponse = {
   provider: ProviderId;
   model: string;
   primarySkill: string;
+  loadedSkills?: string[];
+  executionSkills?: string[];
+  domainSkills?: string[];
   answer?: string;
+  documentCitations?: PublicDocumentCitation[];
   finalization: "PASS" | "DEGRADED" | "BLOCKED";
   blockedReferences: PublicBlockedReference[];
   verification: {
@@ -164,8 +132,7 @@ export type SessionExecutionResponse = {
     eventCount: number;
     closed: boolean;
   };
-  [SESSION_EXECUTION_INTERNAL]?:
-    SessionExecutionInternalState;
+  [SESSION_EXECUTION_INTERNAL]?: SessionExecutionInternalState;
 };
 
 function buildDocumentContext(
@@ -180,11 +147,9 @@ function buildDocumentContext(
     const chunks = attachment.chunks.map((chunk) => {
       totalChars += chunk.text.length;
       const sourceLabel =
-        attachment.sourceScope ===
-          "FIRM_KNOWLEDGE"
+        attachment.sourceScope === "FIRM_KNOWLEDGE"
           ? "FIRM KNOWLEDGE"
-          : attachment.sourceScope ===
-              "CASE_KNOWLEDGE"
+          : attachment.sourceScope === "CASE_KNOWLEDGE"
             ? "CASE KNOWLEDGE"
             : "DOCUMENT";
       return [
@@ -226,9 +191,7 @@ function transferExecutionEvents(
 }
 
 export interface SessionExecutor {
-  execute(
-    request: SessionExecutionRequest
-  ): Promise<SessionExecutionResponse>;
+  execute(request: SessionExecutionRequest): Promise<SessionExecutionResponse>;
 }
 
 export class SafeSessionExecutor implements SessionExecutor {
@@ -254,19 +217,13 @@ export class SafeSessionExecutor implements SessionExecutor {
     });
 
     const ledger = new VerificationLedger();
-    const verificationTools =
-      this.verificationToolFactory?.(ledger);
-    const corpusTools =
-      new LegalCorpusToolRuntime(
-        this.registry
-      );
+    const verificationTools = this.verificationToolFactory?.(ledger);
+    const corpusTools = new LegalCorpusToolRuntime(this.registry);
 
-    const attachments =
-      request.documentAttachments ?? [];
-    const documentContext =
-      attachments.length > 0
-        ? buildDocumentContext(attachments)
-        : undefined;
+    const attachments = request.documentAttachments ?? [];
+    const documentContext = attachments.length > 0
+      ? buildDocumentContext(attachments)
+      : undefined;
 
     for (const attachment of attachments) {
       audit.record(
@@ -274,159 +231,93 @@ export class SafeSessionExecutor implements SessionExecutor {
         `local-document:${attachment.documentId}`,
         "OK",
         {
-          chunks: attachment.chunks.map(
-            (chunk) => chunk.index
-          ),
+          chunks: attachment.chunks.map((chunk) => chunk.index),
           protectedOnly: true,
-          ...(attachment.caseId
-            ? {
-                caseId:
-                  attachment.caseId
-              }
-            : {}),
-          ...(attachment.sourceScope
-            ? {
-                sourceScope:
-                  attachment.sourceScope
-              }
-            : {})
+          ...(attachment.caseId ? { caseId: attachment.caseId } : {}),
+          ...(attachment.sourceScope ? { sourceScope: attachment.sourceScope } : {})
         }
       );
     }
 
     const toolSchemas = [
       ...corpusTools.schemas(),
-      ...(verificationTools
-        ? verificationTools.schemas()
-        : [])
+      ...(verificationTools ? verificationTools.schemas() : [])
     ];
     const toolPrompt = [
       corpusTools.systemPromptAppendix(),
       ...(verificationTools
-        ? [
-            verificationTools
-              .systemPromptAppendix()
-          ]
+        ? [verificationTools.systemPromptAppendix()]
+        : []),
+      ...(attachments.length > 0
+        ? [documentCitationSystemPrompt(attachments)]
         : [])
     ].join("\n\n");
 
-    const execution =
-      await this.engine.executePolishLegalQuery({
-        query: request.query,
-        ...(documentContext
-          ? { documentContext }
-          : {}),
-        provider: request.provider,
-        model: request.model,
-        route: {
-          jurisdiction: "PL",
-          primarySkill:
-            request.primarySkill,
-          mode: request.mode
-        },
-        tools: toolSchemas,
-        toolSystemPromptAppendix:
-          toolPrompt,
-        runTools: async (calls) => {
-          const corpusCalls =
-            calls.filter((call) =>
-              corpusTools.handles(
-                call.name
-              )
-            );
-          const verificationCalls =
-            calls.filter((call) =>
-              !corpusTools.handles(
-                call.name
-              )
-            );
+    const execution = await this.engine.executePolishLegalQuery({
+      query: request.query,
+      ...(documentContext ? { documentContext } : {}),
+      provider: request.provider,
+      model: request.model,
+      route: {
+        jurisdiction: "PL",
+        primarySkill: request.primarySkill,
+        mode: request.mode
+      },
+      tools: toolSchemas,
+      toolSystemPromptAppendix: toolPrompt,
+      runTools: async (calls) => {
+        const corpusCalls = calls.filter((call) => corpusTools.handles(call.name));
+        const verificationCalls = calls.filter((call) => !corpusTools.handles(call.name));
 
-          const corpusResults =
-            corpusCalls.length > 0
-              ? await corpusTools
-                  .runTools(
-                    corpusCalls
-                  )
-              : [];
-          const verificationResults =
-            verificationCalls.length > 0 &&
-            verificationTools
-              ? await verificationTools
-                  .runTools(
-                    verificationCalls
-                  )
-              : [];
+        const corpusResults = corpusCalls.length > 0
+          ? await corpusTools.runTools(corpusCalls)
+          : [];
+        const verificationResults = verificationCalls.length > 0 && verificationTools
+          ? await verificationTools.runTools(verificationCalls)
+          : [];
 
-          const byId = new Map(
-            [
-              ...corpusResults,
-              ...verificationResults
-            ].map((result) => [
-              result.tool_use_id,
-              result
-            ])
-          );
+        const byId = new Map(
+          [...corpusResults, ...verificationResults].map((result) => [
+            result.tool_use_id,
+            result
+          ])
+        );
 
-          return calls.map(
-            (call) =>
-              byId.get(call.id) ?? {
-                tool_use_id:
-                  call.id,
-                content:
-                  JSON.stringify({
-                    status:
-                      "BLOCKED",
-                    error:
-                      "UNKNOWN_RUNTIME_TOOL"
-                  })
-              }
-          );
-        }
-      });
+        return calls.map((call) =>
+          byId.get(call.id) ?? {
+            tool_use_id: call.id,
+            content: JSON.stringify({
+              status: "BLOCKED",
+              error: "UNKNOWN_RUNTIME_TOOL"
+            })
+          }
+        );
+      }
+    });
 
     transferExecutionEvents(execution.events, audit);
 
-    const corpusAudit =
-      corpusTools.auditEvents();
-    for (
-      const event
-      of corpusAudit
-    ) {
+    const corpusAudit = corpusTools.auditEvents();
+    for (const event of corpusAudit) {
       audit.record(
-        event.tool ===
-          "read_legal_resource"
+        event.tool === "read_legal_resource"
           ? "resource_read"
           : "tool_decision",
         event.target,
-        event.decision ===
-          "ALLOW"
-          ? "OK"
-          : "BLOCKED",
+        event.decision === "ALLOW" ? "OK" : "BLOCKED",
         {
           tool: event.tool,
-          ...(event.detail
-            ? event.detail
-            : {})
+          ...(event.detail ? event.detail : {})
         }
       );
     }
 
-    const corpusBlocked =
-      corpusAudit.some(
-        (event) =>
-          event.decision ===
-            "BLOCK"
-      );
+    const corpusBlocked = corpusAudit.some((event) => event.decision === "BLOCK");
     audit.record(
       "gate",
       "G36_LEGAL_CORPUS_RUNTIME",
-      corpusBlocked
-        ? "BLOCKED"
-        : "OK",
-      {
-        toolEvents:
-          corpusAudit.length
-      }
+      corpusBlocked ? "BLOCKED" : "OK",
+      { toolEvents: corpusAudit.length }
     );
 
     if (verificationTools) {
@@ -443,37 +334,46 @@ export class SafeSessionExecutor implements SessionExecutor {
         );
       }
     }
+
+    const processedDocumentCitations =
+      processDocumentCitationMarkers(execution.output, attachments);
+    audit.record(
+      "gate",
+      "LOCAL_DOCUMENT_DEEP_LINKS",
+      "OK",
+      {
+        accepted: processedDocumentCitations.citations.length,
+        rejected: processedDocumentCitations.rejectedMarkers,
+        exactHighlights: processedDocumentCitations.citations.filter(
+          (item) => item.highlightStart !== undefined && item.highlightEnd !== undefined
+        ).length
+      }
+    );
+
     const finalization = this.finalizer.finalize({
-      text: execution.output,
+      text: processedDocumentCitations.text,
       ledger,
       audit,
       closeSession: false
     });
 
-    const safeToPresent =
-      finalization.result === "PASS" &&
-      !corpusBlocked;
+    const safeToPresent = finalization.result === "PASS" && !corpusBlocked;
     audit.record(
       "gate",
       "G15_SAFE_SESSION_EXECUTION",
       safeToPresent ? "OK" : "BLOCKED",
-      {
-        finalization: finalization.result
-      }
+      { finalization: finalization.result }
     );
     audit.close(
       safeToPresent ? "OK" : "BLOCKED",
-      {
-        finalization: finalization.result
-      }
+      { finalization: finalization.result }
     );
 
     const verificationRecords = ledger.all();
     const completeness = audit.validateCompletion({
       requireVerification: finalization.references.length > 0,
       requireToolActivity:
-        finalization.references.length > 0 &&
-        Boolean(verificationTools)
+        finalization.references.length > 0 && Boolean(verificationTools)
     });
     const blockedReferences = finalization.findings
       .filter((finding) => finding.status !== "VERIFIED")
@@ -484,36 +384,30 @@ export class SafeSessionExecutor implements SessionExecutor {
         status: finding.status
       }));
 
-    const response:
-      SessionExecutionResponse = {
+    const response: SessionExecutionResponse = {
       sessionId: audit.sessionId,
-      status: safeToPresent
-        ? "DRAFT_PRESENTABLE"
-        : "BLOCKED",
+      status: safeToPresent ? "DRAFT_PRESENTABLE" : "BLOCKED",
       provider: request.provider,
       model: request.model,
       primarySkill: request.primarySkill,
+      loadedSkills: execution.loadedSkills,
+      executionSkills: execution.executionSkills,
+      domainSkills: execution.domainSkills,
       ...(safeToPresent
-        ? { answer: execution.output }
+        ? {
+            answer: processedDocumentCitations.text,
+            documentCitations: processedDocumentCitations.citations
+          }
         : {}),
       finalization: finalization.result,
       blockedReferences,
       verification: {
         records: verificationRecords.length,
-        verified: verificationRecords.filter(
-          (record) => record.status === "VERIFIED"
-        ).length,
-        supported: verificationRecords.filter(
-          (record) => record.status === "SUPPORTED"
-        ).length,
-        unverified: verificationRecords.filter(
-          (record) => record.status === "UNVERIFIED"
-        ).length
+        verified: verificationRecords.filter((record) => record.status === "VERIFIED").length,
+        supported: verificationRecords.filter((record) => record.status === "SUPPORTED").length,
+        unverified: verificationRecords.filter((record) => record.status === "UNVERIFIED").length
       },
-      evidence:
-        publicEvidenceBundle(
-          verificationRecords
-        ),
+      evidence: publicEvidenceBundle(verificationRecords),
       audit: {
         result: completeness.result,
         eventCount: completeness.eventCount,
@@ -526,29 +420,12 @@ export class SafeSessionExecutor implements SessionExecutor {
       SESSION_EXECUTION_INTERNAL,
       {
         value: {
-          verificationRecords:
-            verificationRecords
-              .map(
-                (record) => ({
-                  ...record
-                })
-              ),
-          auditEvents:
-            audit.events
-              .map(
-                (event) => ({
-                  ...event,
-                  ...(event.detail
-                    ? {
-                        detail: {
-                          ...event.detail
-                        }
-                      }
-                    : {})
-                })
-              )
-        } satisfies
-          SessionExecutionInternalState,
+          verificationRecords: verificationRecords.map((record) => ({ ...record })),
+          auditEvents: audit.events.map((event) => ({
+            ...event,
+            ...(event.detail ? { detail: { ...event.detail } } : {})
+          }))
+        } satisfies SessionExecutionInternalState,
         enumerable: false,
         configurable: false,
         writable: false
