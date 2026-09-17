@@ -4,6 +4,7 @@ import {
   it
 } from "vitest";
 import {
+  PROCESS_PLEADING_CHECKPOINTS,
   acceptProcessPleadingStart,
   confirmProcessCheckpoint,
   createProcessPleadingState,
@@ -37,7 +38,7 @@ describe(
   "deterministic process pleading state",
   () => {
     it(
-      "requires start acceptance and advances only after mandatory checkpoints",
+      "requires start acceptance and resolves the complete registry before FINAL",
       () => {
         let state =
           createProcessPleadingState(
@@ -57,10 +58,23 @@ describe(
           );
         expect(state.stage).toBe("W1");
 
-        state = close(
-          state,
+        for (const checkpoint of [
+          "CP-1a",
+          "CP-1b",
+          "CP-1c-skan",
+          "CP-PD",
+          "CP-FSL-D",
+          "CP-1c-macierz",
+          "CP-1c-lancuch",
+          "CP-1d-anomalie",
+          "CP-1d",
           "CP-W1"
-        );
+        ] as const) {
+          state = close(
+            state,
+            checkpoint
+          );
+        }
         expect(state.stage)
           .toBe("PRE_W2");
 
@@ -78,31 +92,34 @@ describe(
         expect(state.stage)
           .toBe("W3");
 
-        state = close(
-          state,
-          "CP-PODMIOT"
-        );
-        state = close(
-          state,
-          "CP-QUALITY"
-        );
-        state = close(
-          state,
-          "CP-AUDYT"
-        );
-        expect(state.stage)
-          .toBe("W3");
-        expect(state.documentStatus)
-          .toBe("DRAFT");
-
-        state = close(
-          state,
+        for (const checkpoint of [
+          "CP-PODMIOT",
+          "CP-QUALITY",
+          "CP-AUDYT",
           "CP-PEER"
-        );
+        ] as const) {
+          state = close(
+            state,
+            checkpoint
+          );
+        }
+
         expect(state.stage)
           .toBe("FINAL");
         expect(state.documentStatus)
           .toBe("FINAL");
+        expect(
+          PROCESS_PLEADING_CHECKPOINTS
+            .every(
+              (checkpoint) =>
+                state.checkpoints[
+                  checkpoint
+                ] === "CLOSED" ||
+                state.checkpoints[
+                  checkpoint
+                ] === "NA"
+            )
+        ).toBe(true);
       }
     );
 
@@ -155,6 +172,10 @@ describe(
               CASE_ID
             )
           );
+        state = close(
+          state,
+          "CP-1a"
+        );
         state =
           markProcessCheckpointNotApplicable(
             state,
@@ -164,6 +185,21 @@ describe(
           state.checkpoints["CP-1b"]
         ).toBe("NA");
 
+        for (const checkpoint of [
+          "CP-1c-skan",
+          "CP-PD",
+          "CP-FSL-D",
+          "CP-1c-macierz",
+          "CP-1c-lancuch",
+          "CP-1d-anomalie",
+          "CP-1d"
+        ] as const) {
+          state =
+            markProcessCheckpointNotApplicable(
+              state,
+              checkpoint
+            );
+        }
         expect(() =>
           markProcessCheckpointNotApplicable(
             state,
@@ -188,10 +224,10 @@ describe(
         state =
           markProcessCheckpointReady(
             state,
-            "CP-W1"
+            "CP-1a"
           );
         expect(state.stage)
-          .toBe("PRE_W2");
+          .toBe("W1");
         expect(state.pendingCheckpoint)
           .toBeNull();
 
