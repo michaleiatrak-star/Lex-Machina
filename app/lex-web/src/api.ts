@@ -459,6 +459,10 @@ export type ModelDescriptor = {
   createdAt?: string;
   ownedBy?: string;
   contextWindow?: number;
+  nativeContextWindow?: number;
+  contextMode?:
+    | "NATIVE_OR_REDUCED"
+    | "YARN_EXTENDED";
   inputModalities?: string[];
   outputModalities?: string[];
   capabilities?: string[];
@@ -580,6 +584,24 @@ export type SessionExecutionResponse = {
   model: string;
   primarySkill: string;
   answer?: string;
+  documentCitationFreshness?: {
+    result: "PASS";
+    checked: number;
+  };
+  context?: {
+    strategy:
+      | "MODEL_CONTEXT_WINDOW"
+      | "LEGACY_CHAR_CAP";
+    modelContextTokens?: number;
+    reservedOutputTokens?: number;
+    reservedSystemTokens?: number;
+    documentBudgetTokens?: number;
+    estimatedDocumentTokens: number;
+    selectedChunks: number;
+    omittedChunks: number;
+    selectedDocuments: number;
+    omittedDocuments: number;
+  };
   finalization: "PASS" | "DEGRADED" | "BLOCKED";
   blockedReferences: BlockedReference[];
   verification: {
