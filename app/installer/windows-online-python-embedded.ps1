@@ -79,6 +79,22 @@ function Test-PrivatePython([string]$Executable, [string]$ExpectedVersion, [stri
   }
 }
 
+function Write-PrivatePythonDiagnostics([string]$Executable) {
+  if (-not (Test-Path -LiteralPath $Executable -PathType Leaf)) {
+    Write-Host "EMBEDDED_PYTHON_DIAG executable=missing"
+    return
+  }
+  $versionOutput = @(& $Executable --version 2>&1 | ForEach-Object { $_.ToString() }) -join " | "
+  $versionExit = $LASTEXITCODE
+  $pipOutput = @(& $Executable -m pip --version 2>&1 | ForEach-Object { $_.ToString() }) -join " | "
+  $pipExit = $LASTEXITCODE
+  $pathOutput = @(& $Executable -c "import sys; print(repr(sys.path))" 2>&1 | ForEach-Object { $_.ToString() }) -join " | "
+  $pathExit = $LASTEXITCODE
+  Write-Host "EMBEDDED_PYTHON_DIAG versionExit=$versionExit version=$versionOutput"
+  Write-Host "EMBEDDED_PYTHON_DIAG pipExit=$pipExit pip=$pipOutput"
+  Write-Host "EMBEDDED_PYTHON_DIAG pathExit=$pathExit path=$pathOutput"
+}
+
 $pythonDir = Join-Path $runtime "python"
 $pythonExe = Join-Path $pythonDir "python.exe"
 $pythonVersion = $manifest.runtime.python.version.ToString()
@@ -130,11 +146,13 @@ try {
 }
 
 if (-not (Test-PrivatePython $pythonExe $pythonVersion $pipVersion)) {
+  Write-PrivatePythonDiagnostics $pythonExe
   throw "ONLINE_EMBEDDED_PYTHON_VALIDATION_FAILED"
 }
 
 $isolation = & $pythonExe -c "import site,sys; assert sys.flags.isolated == 1; assert site.ENABLE_USER_SITE is False; print('PYTHON_ISOLATION_PASS')"
 if ($LASTEXITCODE -ne 0 -or $isolation -notcontains "PYTHON_ISOLATION_PASS") {
+  Write-PrivatePythonDiagnostics $pythonExe
   throw "ONLINE_EMBEDDED_PYTHON_ISOLATION_FAILED"
 }
 
