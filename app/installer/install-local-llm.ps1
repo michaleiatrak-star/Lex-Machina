@@ -51,6 +51,23 @@ if (-not (Get-Command Get-FileHash -ErrorAction SilentlyContinue)) {
   }
 }
 
+function Write-LocalAiProgress(
+  [string]$Phase,
+  [string]$Label,
+  [int64]$BytesDownloaded,
+  $BytesTotal,
+  $Percent
+) {
+  $payload = [ordered]@{
+    phase = $Phase
+    label = $Label
+    bytesDownloaded = $BytesDownloaded
+    bytesTotal = if ($null -eq $BytesTotal) { $null } else { [int64]$BytesTotal }
+    percent = if ($null -eq $Percent) { $null } else { [int]$Percent }
+  }
+  Write-Host ("LEX_LOCAL_AI_PROGRESS:" + ($payload | ConvertTo-Json -Compress))
+}
+
 function Get-VerifiedDownload(
   [string]$Url,
   [string]$ExpectedSha256,
@@ -60,20 +77,96 @@ function Get-VerifiedDownload(
   if ($ExpectedSha256 -notmatch '^[a-fA-F0-9]{64}$') {
     throw "LOCAL_LLM_HASH_INVALID:$Label"
   }
+
+  $expected = $ExpectedSha256.ToLowerInvariant()
   if (Test-Path -LiteralPath $Destination -PathType Leaf) {
     $cached = (Get-FileHash -Algorithm SHA256 -LiteralPath $Destination).Hash.ToLowerInvariant()
-    if ($cached -eq $ExpectedSha256.ToLowerInvariant()) {
+    if ($cached -eq $expected) {
+      $cachedBytes = (Get-Item -LiteralPath $Destination).Length
       Write-Host "Using verified cache for $Label"
+      Write-LocalAiProgress "CACHE_HIT" $Label $cachedBytes $cachedBytes 100
       return
     }
     Remove-Item -LiteralPath $Destination -Force
   }
+
+  $partial = $Destination + ".part"
+  Remove-Item -LiteralPath $partial -Force -ErrorAction SilentlyContinue
   Write-Host "Downloading $Label"
-  Invoke-WebRequest -UseBasicParsing -Uri $Url -OutFile $Destination
-  $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $Destination).Hash.ToLowerInvariant()
-  if ($actual -ne $ExpectedSha256.ToLowerInvariant()) {
-    Remove-Item -LiteralPath $Destination -Force -ErrorAction SilentlyContinue
-    throw "LOCAL_LLM_HASH_MISMATCH:$Label expected=$ExpectedSha256 actual=$actual"
+
+  try {
+    Add-Type -AssemblyName System.Net.Http
+    $client = [System.Net.Http.HttpClient]::new()
+    try {
+      $response = $client.GetAsync(
+        $Url,
+        [System.Net.Http.HttpCompletionOption]::ResponseHeadersRead
+      ).GetAwaiter().GetResult()
+
+      try {
+        $response.EnsureSuccessStatusCode()
+        $total = $response.Content.Headers.ContentLength
+        $input = $response.Content.ReadAsStreamAsync().GetAwaiter().GetResult()
+
+        try {
+          $output = [IO.File]::Open(
+            $partial,
+            [IO.FileMode]::CreateNew,
+            [IO.FileAccess]::Write,
+            [IO.FileShare]::None
+          )
+          try {
+            $buffer = New-Object byte[] (1024 * 1024)
+            [int64]$downloaded = 0
+            [int]$lastPercent = -1
+            [int64]$lastReportedBytes = 0
+
+            Write-LocalAiProgress "DOWNLOAD" $Label 0 $total $(if ($null -ne $total -and $total -gt 0) { 0 } else { $null })
+
+            while (($read = $input.Read($buffer, 0, $buffer.Length)) -gt 0) {
+              $output.Write($buffer, 0, $read)
+              $downloaded += $read
+
+              if ($null -ne $total -and $total -gt 0) {
+                $percent = [Math]::Min(
+                  100,
+                  [Math]::Floor(($downloaded * 100.0) / $total)
+                )
+                if ($percent -gt $lastPercent) {
+                  $lastPercent = [int]$percent
+                  Write-LocalAiProgress "DOWNLOAD" $Label $downloaded $total $lastPercent
+                }
+              } elseif (($downloaded - $lastReportedBytes) -ge (64MB)) {
+                $lastReportedBytes = $downloaded
+                Write-LocalAiProgress "DOWNLOAD" $Label $downloaded $null $null
+              }
+            }
+
+            $output.Flush()
+          } finally {
+            $output.Dispose()
+          }
+        } finally {
+          $input.Dispose()
+        }
+      } finally {
+        $response.Dispose()
+      }
+    } finally {
+      $client.Dispose()
+    }
+
+    $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $partial).Hash.ToLowerInvariant()
+    if ($actual -ne $expected) {
+      throw "LOCAL_LLM_HASH_MISMATCH:$Label expected=$ExpectedSha256 actual=$actual"
+    }
+
+    $verifiedBytes = (Get-Item -LiteralPath $partial).Length
+    Move-Item -LiteralPath $partial -Destination $Destination -Force
+    Write-LocalAiProgress "VERIFIED" $Label $verifiedBytes $verifiedBytes 100
+  } catch {
+    Remove-Item -LiteralPath $partial -Force -ErrorAction SilentlyContinue
+    throw
   }
 }
 
