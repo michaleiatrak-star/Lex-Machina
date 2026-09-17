@@ -9,6 +9,8 @@ const read = (p: string) => fs.readFileSync(path.join(repo, p), "utf8");
 const config = JSON.parse(read("app/lex-desktop/src-tauri/tauri.conf.json"));
 const source = JSON.parse(read("app/installer/windows-release-source.json"));
 const build = read("app/installer/build-windows-online.ps1");
+const entry = read("app/installer/windows-online-bootstrap-entry.ps1");
+const embeddedPython = read("app/installer/windows-online-python-embedded.ps1");
 const bootstrap = read("app/installer/windows-online-bootstrap.ps1");
 const packageVerifier = read("app/installer/verify-python-package-set.py");
 const hooks = read("app/lex-desktop/src-tauri/windows/hooks.nsh");
@@ -26,6 +28,8 @@ const checks = {
     Array.isArray(config.bundle?.resources) &&
     config.bundle.resources.includes("runtime/**/*") &&
     build.includes("Thin payload contract") &&
+    build.includes("windows-online-bootstrap-entry.ps1") &&
+    build.includes("windows-online-python-embedded.ps1") &&
     build.includes("windows-online-bootstrap.ps1") &&
     build.includes("verify-python-package-set.py"),
   privateNodeDownloadIfMissing:
@@ -35,8 +39,17 @@ const checks = {
     sidecar.includes('join("node")') &&
     sidecar.includes('join("node.exe")'),
   privatePythonDownloadIfMissing:
-    bootstrap.includes("manifest.runtime.python.url") &&
-    bootstrap.includes("manifest.runtime.python.sha256") &&
+    entry.includes("windows-online-python-embedded.ps1") &&
+    embeddedPython.includes("onlineEmbeddable") &&
+    embeddedPython.includes("pipBootstrap") &&
+    embeddedPython.includes("Get-VerifiedDownload") &&
+    embeddedPython.includes("Expand-Archive") &&
+    embeddedPython.includes("ONLINE_EMBEDDED_PYTHON_EXECUTABLE_MISSING") &&
+    embeddedPython.includes("sys.flags.isolated == 1") &&
+    source.runtime?.python?.onlineEmbeddable?.url &&
+    /^[a-f0-9]{64}$/i.test(source.runtime?.python?.onlineEmbeddable?.sha256 ?? "") &&
+    source.runtime?.python?.pipBootstrap?.url &&
+    /^[a-f0-9]{64}$/i.test(source.runtime?.python?.pipBootstrap?.sha256 ?? "") &&
     sidecar.includes('join("python")') &&
     sidecar.includes('join("python.exe")'),
   pinnedPackagesOnlyIfNeeded:
@@ -67,6 +80,8 @@ const checks = {
     bootstrap.includes('$startArgs.Verb = "RunAs"'),
   verifiedSourceCache:
     source.notes?.cachePolicy === "REUSE_ONLY_AFTER_SHA256_VERIFICATION" &&
+    embeddedPython.includes("Using verified cache") &&
+    embeddedPython.includes("ONLINE_EMBEDDED_PYTHON_HASH_MISMATCH") &&
     bootstrap.includes("Using verified cache") &&
     bootstrap.includes("BOOTSTRAP_HASH_MISMATCH"),
   postBootstrapNetworkIndependent:
@@ -77,7 +92,8 @@ const checks = {
     sidecar.includes("PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK") &&
     stanza.includes("download_method=None"),
   postInstallBootstrapFailClosed:
-    hooks.includes("windows-online-bootstrap.ps1") &&
+    hooks.includes("windows-online-bootstrap-entry.ps1") &&
+    hooks.includes("stage=online-bootstrap-entry") &&
     hooks.includes("Abort")
 };
 const pass = Object.values(checks).every(Boolean);
