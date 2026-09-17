@@ -96,6 +96,17 @@ jobs:
       - name: Rebuild thin installer payload
         shell: pwsh
         run: |
+          # The complete offline runtime contains tens of thousands of files. Moving
+          # it out of the Tauri resource path is atomic on the runner volume and
+          # avoids a slow/partial recursive delete before the thin payload rebuild.
+          $fullRuntime = (Resolve-Path "app/lex-desktop/src-tauri/runtime").Path
+          $retiredRuntime = Join-Path $env:RUNNER_TEMP "lex-offline-runtime-built"
+          Remove-Item -LiteralPath $retiredRuntime -Recurse -Force -ErrorAction SilentlyContinue
+          [IO.Directory]::Move($fullRuntime, $retiredRuntime)
+          if (Test-Path -LiteralPath $fullRuntime) {
+            throw "OFFLINE_FULL_RUNTIME_RETIRE_FAILED"
+          }
+
           ./app/installer/build-windows-online.ps1
 
           $receipt = [ordered]@{
