@@ -1,0 +1,190 @@
+name: Publish Windows application release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "WERSJA APLIKACJA/0.1.0-2026-09-17/RELEASE.json"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: publish-windows-app-0.1.0-2026-09-17
+  cancel-in-progress: false
+
+env:
+  RELEASE_RECORD: WERSJA APLIKACJA/0.1.0-2026-09-17/RELEASE.json
+  RELEASE_TAG: app-windows-0.1.0-2026-09-17
+  SOURCE_SHA: 726b26c0ec35b6f773feefe0dfd575f5c9a396ef
+  ONLINE_RUN_ID: "35209913121"
+  OFFLINE_RUN_ID: "35209913261"
+  ONLINE_ARTIFACT: LexMachina-Windows-Online-Installer
+  OFFLINE_ARTIFACT: LexMachina-Windows-Offline-Setup
+  ONLINE_SHA256: dcb308efd0c551bed3abe554126955236590cd9a3b58c4030239a5af17f124dd
+  ONLINE_BYTES: "23686568"
+  OFFLINE_INSTALLER_SHA256: 5e1450b1c16a8b8c884cd6310d9427f22ee2cc7ce7856e17c83511004f96e7f6
+  OFFLINE_INSTALLER_BYTES: "239211137"
+  OFFLINE_RUNTIME_SHA256: 91859675b3cd50b5d1a16588247c9daea3b7e7c4a30e78c68255d55ee4751e5b
+  OFFLINE_RUNTIME_BYTES: "985275297"
+
+jobs:
+  publish:
+    name: Verify accepted artifacts and publish release
+    runs-on: windows-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Checkout release catalog
+        uses: actions/checkout@v4
+
+      - name: Verify immutable release record and source runs
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $ErrorActionPreference = "Stop"
+          $record = Get-Content -Raw -LiteralPath $env:RELEASE_RECORD | ConvertFrom-Json
+          if ($record.sourceSha -ne $env:SOURCE_SHA) { throw "RELEASE_SOURCE_SHA_MISMATCH" }
+          if ([string]$record.online.runId -ne $env:ONLINE_RUN_ID) { throw "RELEASE_ONLINE_RUN_MISMATCH" }
+          if ([string]$record.offline.runId -ne $env:OFFLINE_RUN_ID) { throw "RELEASE_OFFLINE_RUN_MISMATCH" }
+
+          foreach ($runId in @($env:ONLINE_RUN_ID, $env:OFFLINE_RUN_ID)) {
+            $run = gh api "repos/$env:GITHUB_REPOSITORY/actions/runs/$runId" | ConvertFrom-Json
+            if ($run.head_sha -ne $env:SOURCE_SHA) {
+              throw "RELEASE_RUN_HEAD_MISMATCH:$runId:$($run.head_sha)"
+            }
+            if ($run.status -ne "completed" -or $run.conclusion -ne "success") {
+              throw "RELEASE_RUN_NOT_SUCCESS:$runId:$($run.status):$($run.conclusion)"
+            }
+          }
+
+      - name: Download accepted online artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.ONLINE_ARTIFACT }}
+          path: accepted/online
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: ${{ env.ONLINE_RUN_ID }}
+
+      - name: Download accepted offline artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.OFFLINE_ARTIFACT }}
+          path: accepted/offline
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: ${{ env.OFFLINE_RUN_ID }}
+
+      - name: Verify hashes and assemble named release assets
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          New-Item -ItemType Directory -Force -Path release | Out-Null
+
+          $onlineInstaller = @(Get-ChildItem accepted/online -File -Recurse -Filter "*-setup.exe")
+          if ($onlineInstaller.Count -ne 1) { throw "ONLINE_INSTALLER_COUNT_INVALID:$($onlineInstaller.Count)" }
+          $onlineHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $onlineInstaller[0].FullName).Hash.ToLowerInvariant()
+          if ($onlineHash -ne $env:ONLINE_SHA256) { throw "ONLINE_INSTALLER_HASH_MISMATCH:$onlineHash" }
+          if ([string]$onlineInstaller[0].Length -ne $env:ONLINE_BYTES) { throw "ONLINE_INSTALLER_SIZE_MISMATCH:$($onlineInstaller[0].Length)" }
+          Copy-Item -LiteralPath $onlineInstaller[0].FullName -Destination "release/LexMachina-Online-Setup.exe"
+
+          $offlineInstaller = @(Get-ChildItem accepted/offline -File -Recurse -Filter "*-setup.exe")
+          if ($offlineInstaller.Count -ne 1) { throw "OFFLINE_INSTALLER_COUNT_INVALID:$($offlineInstaller.Count)" }
+          $offlineRuntime = @(Get-ChildItem accepted/offline -File -Recurse -Filter "LexMachina-Offline-Runtime.zip")
+          if ($offlineRuntime.Count -ne 1) { throw "OFFLINE_RUNTIME_COUNT_INVALID:$($offlineRuntime.Count)" }
+          $offlineReceipt = @(Get-ChildItem accepted/offline -File -Recurse -Filter "SHA256-OFFLINE.txt")
+          if ($offlineReceipt.Count -ne 1) { throw "OFFLINE_RECEIPT_COUNT_INVALID:$($offlineReceipt.Count)" }
+          $offlineLock = @(Get-ChildItem accepted/offline -File -Recurse -Filter "component-lock-offline.json")
+          if ($offlineLock.Count -ne 1) { throw "OFFLINE_LOCK_COUNT_INVALID:$($offlineLock.Count)" }
+
+          $offlineInstallerHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $offlineInstaller[0].FullName).Hash.ToLowerInvariant()
+          $offlineRuntimeHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $offlineRuntime[0].FullName).Hash.ToLowerInvariant()
+          if ($offlineInstallerHash -ne $env:OFFLINE_INSTALLER_SHA256) { throw "OFFLINE_INSTALLER_HASH_MISMATCH:$offlineInstallerHash" }
+          if ([string]$offlineInstaller[0].Length -ne $env:OFFLINE_INSTALLER_BYTES) { throw "OFFLINE_INSTALLER_SIZE_MISMATCH:$($offlineInstaller[0].Length)" }
+          if ($offlineRuntimeHash -ne $env:OFFLINE_RUNTIME_SHA256) { throw "OFFLINE_RUNTIME_HASH_MISMATCH:$offlineRuntimeHash" }
+          if ([string]$offlineRuntime[0].Length -ne $env:OFFLINE_RUNTIME_BYTES) { throw "OFFLINE_RUNTIME_SIZE_MISMATCH:$($offlineRuntime[0].Length)" }
+
+          $offlineStage = Join-Path $env:RUNNER_TEMP "lex-offline-release"
+          Remove-Item -LiteralPath $offlineStage -Recurse -Force -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Force -Path $offlineStage | Out-Null
+          Copy-Item -LiteralPath $offlineInstaller[0].FullName -Destination (Join-Path $offlineStage "LexMachina-Offline-Setup.exe")
+          Copy-Item -LiteralPath $offlineRuntime[0].FullName -Destination (Join-Path $offlineStage "LexMachina-Offline-Runtime.zip")
+          Copy-Item -LiteralPath $offlineReceipt[0].FullName -Destination (Join-Path $offlineStage "SHA256-OFFLINE.txt")
+          Copy-Item -LiteralPath $offlineLock[0].FullName -Destination (Join-Path $offlineStage "component-lock-offline.json")
+
+          $offlineZip = Join-Path (Resolve-Path release).Path "LexMachina-Offline-Setup.zip"
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          [IO.Compression.ZipFile]::CreateFromDirectory(
+            $offlineStage,
+            $offlineZip,
+            [IO.Compression.CompressionLevel]::NoCompression,
+            $false
+          )
+
+          $outerOfflineHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $offlineZip).Hash.ToLowerInvariant()
+          $outerOfflineBytes = (Get-Item -LiteralPath $offlineZip).Length
+          @(
+            "source_sha=$env:SOURCE_SHA",
+            "online_file=LexMachina-Online-Setup.exe",
+            "online_sha256=$onlineHash",
+            "online_bytes=$($onlineInstaller[0].Length)",
+            "offline_file=LexMachina-Offline-Setup.zip",
+            "offline_sha256=$outerOfflineHash",
+            "offline_bytes=$outerOfflineBytes",
+            "offline_installer_sha256=$offlineInstallerHash",
+            "offline_installer_bytes=$($offlineInstaller[0].Length)",
+            "offline_runtime_sha256=$offlineRuntimeHash",
+            "offline_runtime_bytes=$($offlineRuntime[0].Length)"
+          ) | Set-Content -LiteralPath "release/SHA256-RELEASE.txt" -Encoding utf8
+          Copy-Item -LiteralPath $env:RELEASE_RECORD -Destination "release/RELEASE-MANIFEST.json"
+
+          Write-Host "ONLINE_RELEASE_SHA256=$onlineHash"
+          Write-Host "OFFLINE_RELEASE_SHA256=$outerOfflineHash"
+          Get-Content -LiteralPath "release/SHA256-RELEASE.txt"
+
+      - name: Prepare release notes
+        shell: pwsh
+        run: |
+          @'
+          # Lex Machina — Windows application 0.1.0 (2026-09-17)
+
+          This release is built from accepted source SHA `726b26c0ec35b6f773feefe0dfd575f5c9a396ef`.
+
+          - `LexMachina-Online-Setup.exe` — current online installer. It uses the per-component verified bootstrap; it does not use the retired temporary `LexMachinaBootstrap/LexMachina-Offline-Runtime.zip` online path.
+          - `LexMachina-Offline-Setup.zip` — complete offline distribution. Extract the whole ZIP and run `LexMachina-Offline-Setup.exe`; keep `LexMachina-Offline-Runtime.zip` beside it during installation.
+          - `SHA256-RELEASE.txt` — immutable hashes and byte counts.
+          - `RELEASE-MANIFEST.json` — source/run provenance.
+
+          Acceptance: structural audit PASS, runtime validation PASS, online installed-copy acceptance PASS, offline clean-machine acceptance PASS with network blocked during installation.
+          '@ | Set-Content -LiteralPath "release/RELEASE-NOTES.md" -Encoding utf8
+
+      - name: Publish immutable GitHub Release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $ErrorActionPreference = "Stop"
+          gh release view $env:RELEASE_TAG *> $null
+          if ($LASTEXITCODE -eq 0) { throw "RELEASE_TAG_ALREADY_EXISTS:$env:RELEASE_TAG" }
+
+          gh release create $env:RELEASE_TAG `
+            "release/LexMachina-Online-Setup.exe" `
+            "release/LexMachina-Offline-Setup.zip" `
+            "release/SHA256-RELEASE.txt" `
+            "release/RELEASE-MANIFEST.json" `
+            --repo $env:GITHUB_REPOSITORY `
+            --target $env:GITHUB_SHA `
+            --title "Lex Machina Windows 0.1.0 — 2026-09-17" `
+            --notes-file "release/RELEASE-NOTES.md" `
+            --draft
+          if ($LASTEXITCODE -ne 0) { throw "RELEASE_CREATE_FAILED" }
+
+          gh release edit $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY --draft=false
+          if ($LASTEXITCODE -ne 0) { throw "RELEASE_PUBLISH_FAILED" }
+
+          gh release view $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY
