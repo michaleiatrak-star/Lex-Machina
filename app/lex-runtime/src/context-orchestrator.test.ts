@@ -21,7 +21,9 @@ function attachment(
 ): SessionDocumentAttachment {
   return {
     documentId: id,
-    sourceScope: scope,
+    ...(scope
+      ? { sourceScope: scope }
+      : {}),
     chunks: chunks.map((chunk) => ({
       index: chunk.index,
       pageStart: chunk.index + 1,
