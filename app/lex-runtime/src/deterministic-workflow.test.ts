@@ -87,7 +87,7 @@ describe("deterministic legal workflow", () => {
     const registry = fixture();
     const plan = createDeterministicWorkflowPlan(
       registry,
-      ["pisma-proste-v2"]
+      "pisma-proste-v2"
     );
 
     expect(plan.id).toBe("SIMPLE_LETTER_V1");
@@ -110,7 +110,7 @@ describe("deterministic legal workflow", () => {
     const registry = fixture();
     const plan = createDeterministicWorkflowPlan(
       registry,
-      ["pisma-proste-v2"]
+      "pisma-proste-v2"
     );
     const report = evaluateDeterministicWorkflowReads(
       plan,
@@ -127,18 +127,15 @@ describe("deterministic legal workflow", () => {
     ]);
   });
 
-  it("uses the stricter process workflow when both pleading skills are active", () => {
+  it("uses the process workflow when process pleading controls the turn", () => {
     const registry = fixture();
     const plan = createDeterministicWorkflowPlan(
       registry,
-      [
-        "pisma-proste-v2",
-        "pisma-procesowe-v3"
-      ]
+      "pisma-procesowe-v3"
     );
 
     expect(plan.id).toBe("PROCESS_PLEADING_V1");
-    expect(plan.escalatedFromSimpleLetter).toBe(true);
+    expect(plan.escalatedFromSimpleLetter).toBe(false);
     expect(plan.requiredFreshResources)
       .toEqual(processResources);
   });
@@ -155,7 +152,7 @@ describe("deterministic legal workflow", () => {
     expect(() =>
       createDeterministicWorkflowPlan(
         registry,
-        ["pisma-procesowe-v3"]
+        "pisma-procesowe-v3"
       )
     ).toThrow(
       "DETERMINISTIC_WORKFLOW_RESOURCE_MISSING:shared/CP-GATE.md"
@@ -166,7 +163,7 @@ describe("deterministic legal workflow", () => {
     const registry = fixture();
     const plan = createDeterministicWorkflowPlan(
       registry,
-      []
+      null
     );
     expect(plan.id).toBe("LEGAL_QUERY_V1");
     expect(plan.requiredFreshResources).toEqual([]);
