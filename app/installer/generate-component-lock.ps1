@@ -13,8 +13,8 @@ $files = Get-ChildItem -Path $root -File -Recurse |
 
 $entries = @()
 foreach ($file in $files) {
-  $relative = $file.FullName.Substring($root.Length).TrimStart('\','/') -replace '\\','/'
-  $entries += [ordered]@{
+  $relative = $file.FullName.Substring($root.Length).TrimStart('\\','/') -replace '\\\\','/'
+  $entries += [pscustomobject][ordered]@{
     path = $relative
     bytes = $file.Length
     sha256 = (Get-FileHash -Algorithm SHA256 -Path $file.FullName).Hash.ToLowerInvariant()
