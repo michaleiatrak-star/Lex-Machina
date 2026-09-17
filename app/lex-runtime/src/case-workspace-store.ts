@@ -566,6 +566,7 @@ export class EncryptedCaseWorkspaceStore {
     caseDataKey: Buffer;
     keyVersion: number;
     state: ProcessPleadingState;
+    expectedRevision?: number;
   }): Promise<ProcessPleadingState> {
     const state =
       validateProcessPleadingState(
@@ -581,6 +582,21 @@ export class EncryptedCaseWorkspaceStore {
       args.caseDataKey,
       args.keyVersion
     );
+    const current =
+      index.workflows?.processPleading;
+    if (
+      args.expectedRevision !==
+        undefined &&
+      (
+        !current ||
+        current.revision !==
+          args.expectedRevision
+      )
+    ) {
+      throw new Error(
+        "PROCESS_PLEADING_STATE_CONFLICT"
+      );
+    }
     index.workflows ??= {};
     index.workflows.processPleading =
       state;
