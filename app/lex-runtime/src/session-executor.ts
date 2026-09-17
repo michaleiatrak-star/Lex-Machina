@@ -136,7 +136,7 @@ export type SessionExecutionResponse = {
     eventCount: number;
     closed: boolean;
   };
-  workflow: {
+  workflow?: {
     id: string;
     result: "PASS" | "BLOCKED";
     requiredResources: string[];
