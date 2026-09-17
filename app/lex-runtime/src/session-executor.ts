@@ -29,6 +29,12 @@ import {
   processDocumentCitationMarkers,
   type PublicDocumentCitation
 } from "./document-citations.js";
+import type {
+  ProcessPleadingCheckpoint,
+  ProcessPleadingCheckpointStatus,
+  ProcessPleadingMode,
+  ProcessPleadingStage
+} from "./process-pleading-state.js";
 
 export type SessionDocumentAttachment = {
   documentId: string;
@@ -143,6 +149,18 @@ export type SessionExecutionResponse = {
     result: "PASS" | "BLOCKED";
     requiredResources: string[];
     missingResources: string[];
+  };
+  processWorkflow?: {
+    caseId: string;
+    mode: ProcessPleadingMode;
+    revision: number;
+    stage: ProcessPleadingStage;
+    documentStatus: "DRAFT" | "FINAL";
+    pendingCheckpoint: ProcessPleadingCheckpoint | null;
+    checkpoints: Record<
+      ProcessPleadingCheckpoint,
+      ProcessPleadingCheckpointStatus
+    >;
   };
   [SESSION_EXECUTION_INTERNAL]?: SessionExecutionInternalState;
 };
