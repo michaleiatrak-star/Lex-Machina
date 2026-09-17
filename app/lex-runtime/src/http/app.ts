@@ -103,11 +103,14 @@ import {
 import {
   createDeterministicWorkflowPlan
 } from "../deterministic-workflow.js";
-import {
-  markProcessCheckpointReady,
-  nextRequiredProcessCheckpoint,
-  type ProcessPleadingState
+import type {
+  ProcessPleadingState
 } from "../process-pleading-state.js";
+import {
+  completeProcessExecution,
+  requireProcessExecutionPermit,
+  type ProcessExecutionPermit
+} from "../process-pleading-execution-gate.js";
 
 const PROVIDERS = new Set<ProviderId>([
   "openai",
@@ -5328,11 +5331,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       let processContext:
         | {
             caseId: string;
-            revision: number;
-            checkpoint:
-              NonNullable<
-                ProcessPleadingState["pendingCheckpoint"]
-              >;
+            permit: ProcessExecutionPermit;
             state: ProcessPleadingState;
           }
         | null = null;
@@ -5417,54 +5416,21 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                       caseView.keyVersion
                   })
             );
-        if (!state) {
-          throw new Error(
-            "PROCESS_PLEADING_STATE_REQUIRED"
-          );
-        }
-        if (
-          state.stage ===
-            "CG_ACCEPTANCE"
-        ) {
-          throw new Error(
-            "PROCESS_PLEADING_START_ACCEPTANCE_REQUIRED"
-          );
-        }
-        if (
-          state.pendingCheckpoint
-        ) {
-          throw new Error(
-            `PROCESS_PLEADING_CONFIRMATION_REQUIRED:${state.pendingCheckpoint}`
-          );
-        }
-        if (
-          state.stage === "FINAL"
-        ) {
-          throw new Error(
-            "PROCESS_PLEADING_ALREADY_FINAL"
-          );
-        }
-        const checkpoint =
-          nextRequiredProcessCheckpoint(
+        const permit =
+          requireProcessExecutionPermit(
             state
           );
-        if (!checkpoint) {
-          throw new Error(
-            "PROCESS_PLEADING_CHECKPOINT_UNAVAILABLE"
-          );
-        }
         request.processWorkflowContext = {
-          stage: state.stage,
-          checkpoint,
-          mode: state.mode
+          stage: permit.stage,
+          checkpoint:
+            permit.checkpoint,
+          mode: permit.mode
         };
         processContext = {
           caseId:
             processCaseId,
-          revision:
-            state.revision,
-          checkpoint,
-          state
+          permit,
+          state: state!
         };
       }
 
@@ -5519,34 +5485,16 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                           caseView
                             .keyVersion
                       });
-                  if (
-                    !current ||
-                    current.revision !==
-                      processContext!
-                        .revision
-                  ) {
+                  if (!current) {
                     throw new Error(
                       "PROCESS_PLEADING_STATE_CONFLICT"
                     );
                   }
-                  const checkpoint =
-                    nextRequiredProcessCheckpoint(
-                      current
-                    );
-                  if (
-                    !checkpoint ||
-                    checkpoint !==
-                      processContext!
-                        .checkpoint
-                  ) {
-                    throw new Error(
-                      "PROCESS_PLEADING_CHECKPOINT_CONFLICT"
-                    );
-                  }
                   const next =
-                    markProcessCheckpointReady(
+                    completeProcessExecution(
                       current,
-                      checkpoint
+                      processContext!
+                        .permit
                     );
                   return await options
                     .processWorkflowStore!
