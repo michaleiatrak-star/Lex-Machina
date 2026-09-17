@@ -52,6 +52,7 @@ export type ProcessPleadingStateEvent = {
   checkpoint?: ProcessPleadingCheckpoint;
   fromStage?: ProcessPleadingStage;
   toStage?: ProcessPleadingStage;
+  reason?: string;
 };
 
 export type ProcessPleadingState = {
@@ -435,7 +436,15 @@ export function validateProcessPleadingState(
     if (
       !Number.isInteger(event.sequence) ||
       event.sequence <= previousSequence ||
-      !validIso(event.at)
+      !validIso(event.at) ||
+      (
+        event.reason !== undefined &&
+        (
+          typeof event.reason !== "string" ||
+          event.reason.length < 3 ||
+          event.reason.length > 500
+        )
+      )
     ) {
       throw new Error(
         "PROCESS_PLEADING_HISTORY_INVALID"
@@ -482,6 +491,19 @@ export function nextRequiredProcessCheckpoint(
 ): ProcessPleadingCheckpoint | null {
   const state =
     validateProcessPleadingState(input);
+  const normalizedReason = reason
+    .normalize("NFKC")
+    .replace(/[\x00-\x1f\x7f]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (
+    normalizedReason.length < 3 ||
+    normalizedReason.length > 500
+  ) {
+    throw new Error(
+      "PROCESS_PLEADING_NA_REASON_INVALID"
+    );
+  }
   if (
     state.stage === "CG_ACCEPTANCE" ||
     state.stage === "FINAL" ||
@@ -612,6 +634,7 @@ export function confirmProcessCheckpoint(
 export function markProcessCheckpointNotApplicable(
   input: ProcessPleadingState,
   checkpoint: ProcessPleadingCheckpoint,
+  reason: string,
   at = new Date().toISOString()
 ): ProcessPleadingState {
   const state =
@@ -644,7 +667,8 @@ export function markProcessCheckpointNotApplicable(
     state,
     {
       type: "CHECKPOINT_NA",
-      checkpoint
+      checkpoint,
+      reason: normalizedReason
     },
     at
   );
