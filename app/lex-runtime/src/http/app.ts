@@ -3423,6 +3423,38 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         models: sanitizeModels(models)
       });
     } catch (error) {
+      if (
+        error instanceof Error &&
+        error.message.startsWith(
+          "PROCESS_PLEADING_"
+        )
+      ) {
+        const code =
+          error.message.split(
+            ":",
+            1
+          )[0]!;
+        res.status(
+          code ===
+            "PROCESS_PLEADING_CASE_REQUIRED"
+            ? 422
+            : 409
+        ).json({
+          error: code,
+          ...(error.message.includes(":")
+            ? {
+                detail:
+                  error.message.slice(
+                    error.message.indexOf(
+                      ":"
+                    ) + 1
+                  )
+              }
+            : {})
+        });
+        return;
+      }
+
       if (error instanceof MissingProviderCredentialError) {
         res.status(503).json({
           error: "PROVIDER_NOT_CONFIGURED",
@@ -5288,7 +5320,244 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           sessionAttachments;
       }
 
-      const result = await options.sessionExecutor.execute(request);
+      const previewPlan =
+        previewSessionWorkflow(
+          options.registry,
+          request
+        );
+      let processContext:
+        | {
+            caseId: string;
+            revision: number;
+            state: ProcessPleadingState;
+          }
+        | null = null;
+
+      if (
+        previewPlan.id ===
+          "PROCESS_PLEADING_V1"
+      ) {
+        if (
+          !options.caseAccessService ||
+          !options.processWorkflowStore
+        ) {
+          res.status(503).json({
+            error:
+              "PROCESS_PLEADING_STATE_SERVICE_UNAVAILABLE"
+          });
+          return;
+        }
+
+        const nonFirmCaseIds =
+          new Set(
+            sessionAttachments
+              .filter(
+                (attachment) =>
+                  attachment.sourceScope !==
+                    "FIRM_KNOWLEDGE"
+              )
+              .map(
+                (attachment) =>
+                  attachment.caseId
+              )
+              .filter(
+                (caseId):
+                  caseId is string =>
+                    Boolean(caseId)
+              )
+          );
+        const processCaseId =
+          knowledge.caseId ??
+          (
+            nonFirmCaseIds.size === 1
+              ? [
+                  ...nonFirmCaseIds
+                ][0]
+              : undefined
+          );
+        if (!processCaseId) {
+          throw new Error(
+            "PROCESS_PLEADING_CASE_REQUIRED"
+          );
+        }
+
+        const actor =
+          responseAuthContext(res);
+        options.caseAccessService
+          .assertAccess(
+            actor,
+            processCaseId,
+            "WRITE"
+          );
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              processCaseId
+            );
+        const state =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              processCaseId,
+              "WRITE",
+              (caseDataKey) =>
+                options
+                  .processWorkflowStore!
+                  .getProcessPleadingState({
+                    caseId:
+                      processCaseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion
+                  })
+            );
+        if (!state) {
+          throw new Error(
+            "PROCESS_PLEADING_STATE_REQUIRED"
+          );
+        }
+        if (
+          state.stage ===
+            "CG_ACCEPTANCE"
+        ) {
+          throw new Error(
+            "PROCESS_PLEADING_START_ACCEPTANCE_REQUIRED"
+          );
+        }
+        if (
+          state.pendingCheckpoint
+        ) {
+          throw new Error(
+            `PROCESS_PLEADING_CONFIRMATION_REQUIRED:${state.pendingCheckpoint}`
+          );
+        }
+        if (
+          state.stage === "FINAL"
+        ) {
+          throw new Error(
+            "PROCESS_PLEADING_ALREADY_FINAL"
+          );
+        }
+        processContext = {
+          caseId:
+            processCaseId,
+          revision:
+            state.revision,
+          state
+        };
+      }
+
+      const result =
+        await options
+          .sessionExecutor
+          .execute(request);
+
+      if (
+        processContext &&
+        options.caseAccessService &&
+        options.processWorkflowStore
+      ) {
+        const actor =
+          responseAuthContext(res);
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              processContext.caseId
+            );
+
+        let state =
+          processContext.state;
+        if (
+          result.status ===
+            "DRAFT_PRESENTABLE" &&
+          result.workflow?.id ===
+            "PROCESS_PLEADING_V1" &&
+          result.workflow.result ===
+            "PASS"
+        ) {
+          state =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                actor,
+                processContext.caseId,
+                "WRITE",
+                async (
+                  caseDataKey
+                ) => {
+                  const current =
+                    await options
+                      .processWorkflowStore!
+                      .getProcessPleadingState({
+                        caseId:
+                          processContext!
+                            .caseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                  if (
+                    !current ||
+                    current.revision !==
+                      processContext!
+                        .revision
+                  ) {
+                    throw new Error(
+                      "PROCESS_PLEADING_STATE_CONFLICT"
+                    );
+                  }
+                  const checkpoint =
+                    nextRequiredProcessCheckpoint(
+                      current
+                    );
+                  if (!checkpoint) {
+                    throw new Error(
+                      "PROCESS_PLEADING_CHECKPOINT_UNAVAILABLE"
+                    );
+                  }
+                  const next =
+                    markProcessCheckpointReady(
+                      current,
+                      checkpoint
+                    );
+                  return await options
+                    .processWorkflowStore!
+                    .saveProcessPleadingState({
+                      caseId:
+                        processContext!
+                          .caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion,
+                      state: next,
+                      expectedRevision:
+                        current.revision
+                    });
+                }
+              );
+        }
+
+        result.processWorkflow = {
+          caseId:
+            processContext.caseId,
+          mode: state.mode,
+          revision: state.revision,
+          stage: state.stage,
+          documentStatus:
+            state.documentStatus,
+          pendingCheckpoint:
+            state.pendingCheckpoint,
+          checkpoints: {
+            ...state.checkpoints
+          }
+        };
+      }
+
       res.json(result);
     } catch (error) {
       if (
