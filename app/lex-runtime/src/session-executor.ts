@@ -20,6 +20,11 @@ import type {
 import {
   LegalCorpusToolRuntime
 } from "./legal-corpus-tool-runtime.js";
+import {
+  documentCitationSystemPrompt,
+  processDocumentCitationMarkers,
+  type PublicDocumentCitation
+} from "./document-citations.js";
 
 export type SessionDocumentAttachment = {
   documentId: string;
@@ -76,34 +81,18 @@ export function publicEvidenceBundle(
     claim: record.claim,
     kind: record.kind,
     status: record.status,
-    ...(record.sourceUrl
-      ? { sourceUrl: record.sourceUrl }
-      : {}),
-    ...(record.sourceTier
-      ? { sourceTier: record.sourceTier }
-      : {}),
+    ...(record.sourceUrl ? { sourceUrl: record.sourceUrl } : {}),
+    ...(record.sourceTier ? { sourceTier: record.sourceTier } : {}),
     fetchedAt: record.fetchedAt,
     ...(record.verificationMethod
       ? { verificationMethod: record.verificationMethod }
       : {}),
-    ...(record.temporalMode
-      ? { temporalMode: record.temporalMode }
-      : {}),
-    ...(record.asOf
-      ? { asOf: record.asOf }
-      : {}),
-    ...(record.sourceFormat
-      ? { sourceFormat: record.sourceFormat }
-      : {}),
-    ...(record.caseScope
-      ? { caseScope: record.caseScope }
-      : {}),
-    ...(record.caseSignature
-      ? { caseSignature: record.caseSignature }
-      : {}),
-    ...(record.evidenceHash
-      ? { evidenceHash: record.evidenceHash }
-      : {}),
+    ...(record.temporalMode ? { temporalMode: record.temporalMode } : {}),
+    ...(record.asOf ? { asOf: record.asOf } : {}),
+    ...(record.sourceFormat ? { sourceFormat: record.sourceFormat } : {}),
+    ...(record.caseScope ? { caseScope: record.caseScope } : {}),
+    ...(record.caseSignature ? { caseSignature: record.caseSignature } : {}),
+    ...(record.evidenceHash ? { evidenceHash: record.evidenceHash } : {}),
     ...(record.supportQuoteHash
       ? { supportQuoteHash: record.supportQuoteHash }
       : {})
@@ -128,6 +117,7 @@ export type SessionExecutionResponse = {
   executionSkills?: string[];
   domainSkills?: string[];
   answer?: string;
+  documentCitations?: PublicDocumentCitation[];
   finalization: "PASS" | "DEGRADED" | "BLOCKED";
   blockedReferences: PublicBlockedReference[];
   verification: {
@@ -257,6 +247,9 @@ export class SafeSessionExecutor implements SessionExecutor {
       corpusTools.systemPromptAppendix(),
       ...(verificationTools
         ? [verificationTools.systemPromptAppendix()]
+        : []),
+      ...(attachments.length > 0
+        ? [documentCitationSystemPrompt(attachments)]
         : [])
     ].join("\n\n");
 
@@ -342,8 +335,23 @@ export class SafeSessionExecutor implements SessionExecutor {
       }
     }
 
+    const processedDocumentCitations =
+      processDocumentCitationMarkers(execution.output, attachments);
+    audit.record(
+      "gate",
+      "LOCAL_DOCUMENT_DEEP_LINKS",
+      "OK",
+      {
+        accepted: processedDocumentCitations.citations.length,
+        rejected: processedDocumentCitations.rejectedMarkers,
+        exactHighlights: processedDocumentCitations.citations.filter(
+          (item) => item.highlightStart !== undefined && item.highlightEnd !== undefined
+        ).length
+      }
+    );
+
     const finalization = this.finalizer.finalize({
-      text: execution.output,
+      text: processedDocumentCitations.text,
       ledger,
       audit,
       closeSession: false
@@ -385,7 +393,12 @@ export class SafeSessionExecutor implements SessionExecutor {
       loadedSkills: execution.loadedSkills,
       executionSkills: execution.executionSkills,
       domainSkills: execution.domainSkills,
-      ...(safeToPresent ? { answer: execution.output } : {}),
+      ...(safeToPresent
+        ? {
+            answer: processedDocumentCitations.text,
+            documentCitations: processedDocumentCitations.citations
+          }
+        : {}),
       finalization: finalization.result,
       blockedReferences,
       verification: {
