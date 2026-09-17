@@ -65,6 +65,125 @@ export type LocalContextQualification = {
   validatedAt: string;
 };
 
+export type LocalProvisioningProgress = {
+  phase:
+    | "STARTING"
+    | "DOWNLOAD"
+    | "CACHE_HIT"
+    | "VERIFIED"
+    | "VALIDATING_RUNTIME"
+    | "READY"
+    | "FAILED";
+  label: string;
+  bytesDownloaded: number;
+  bytesTotal: number | null;
+  percent: number | null;
+  updatedAt: string;
+};
+
+const PROGRESS_PREFIX =
+  "LEX_LOCAL_AI_PROGRESS:";
+
+export function parseLocalAiProgressLine(
+  line: string
+): LocalProvisioningProgress | null {
+  const trimmed = line.trim();
+  if (!trimmed.startsWith(PROGRESS_PREFIX)) {
+    return null;
+  }
+
+  let value: unknown;
+  try {
+    value = JSON.parse(
+      trimmed.slice(
+        PROGRESS_PREFIX.length
+      )
+    );
+  } catch {
+    return null;
+  }
+  if (
+    !value ||
+    typeof value !== "object" ||
+    Array.isArray(value)
+  ) {
+    return null;
+  }
+
+  const record =
+    value as Record<string, unknown>;
+  const phase = record.phase;
+  const label = record.label;
+  const bytesDownloaded =
+    record.bytesDownloaded;
+  const bytesTotal =
+    record.bytesTotal;
+  const percent =
+    record.percent;
+
+  if (
+    ![
+      "DOWNLOAD",
+      "CACHE_HIT",
+      "VERIFIED"
+    ].includes(
+      String(phase)
+    ) ||
+    typeof label !== "string" ||
+    label.length < 1 ||
+    label.length > 200 ||
+    !Number.isSafeInteger(
+      bytesDownloaded
+    ) ||
+    Number(bytesDownloaded) < 0 ||
+    !(
+      bytesTotal === null ||
+      (
+        Number.isSafeInteger(
+          bytesTotal
+        ) &&
+        Number(bytesTotal) >= 0
+      )
+    ) ||
+    !(
+      percent === null ||
+      (
+        Number.isInteger(percent) &&
+        Number(percent) >= 0 &&
+        Number(percent) <= 100
+      )
+    )
+  ) {
+    return null;
+  }
+
+  if (
+    bytesTotal !== null &&
+    Number(bytesDownloaded) >
+      Number(bytesTotal)
+  ) {
+    return null;
+  }
+
+  return {
+    phase: phase as
+      LocalProvisioningProgress["phase"],
+    label,
+    bytesDownloaded:
+      Number(bytesDownloaded),
+    bytesTotal:
+      bytesTotal === null
+        ? null
+        : Number(bytesTotal),
+    percent:
+      percent === null
+        ? null
+        : Number(percent),
+    updatedAt:
+      new Date().toISOString()
+  };
+}
+
 type LocalAiConfig = {
   schemaVersion: number;
   configuredAt: string;
@@ -167,6 +286,8 @@ export class LocalModelRuntime {
   private activeModelId: LocalModelId | null = null;
   private startup: Promise<void> | null = null;
   private provisioning: Promise<void> | null = null;
+  private provisioningProgress:
+    LocalProvisioningProgress | null = null;
 
   constructor(options?: {
     rootDir?: string;
@@ -225,6 +346,7 @@ export class LocalModelRuntime {
     endpoint: string;
     contextPolicy: ReturnType<LocalModelRuntime["contextPolicy"]>;
     qualification: LocalContextQualification | null;
+    progress: LocalProvisioningProgress | null;
   } {
     const config = this.readConfig();
     const enginePresent = Boolean(config && fs.existsSync(config.engine.executable));
@@ -257,7 +379,10 @@ export class LocalModelRuntime {
             : "STOPPED",
       endpoint: `http://${this.host}:${this.port}/v1`,
       contextPolicy: this.contextPolicy(),
-      qualification: this.readQualification()
+      qualification: this.readQualification(),
+      progress: this.provisioningProgress
+        ? { ...this.provisioningProgress }
+        : null
     };
   }
 
@@ -291,7 +416,19 @@ export class LocalModelRuntime {
       }
     };
 
-    const task = this.runProvisioner(canonical, contextTokens);
+    this.provisioningProgress = {
+      phase: "STARTING",
+      label: canonical,
+      bytesDownloaded: 0,
+      bytesTotal: null,
+      percent: null,
+      updatedAt:
+        new Date().toISOString()
+    };
+    const task = this.runProvisioner(
+      canonical,
+      contextTokens
+    );
     this.provisioning = task;
     try {
       await task;
@@ -301,6 +438,20 @@ export class LocalModelRuntime {
         throw new Error("LOCAL_MODEL_PROVISIONING_CONFIG_MISSING");
       }
       this.assertConfiguredComponents(config);
+      this.provisioningProgress = {
+        phase:
+          "VALIDATING_RUNTIME",
+        label: canonical,
+        bytesDownloaded:
+          this.provisioningProgress
+            ?.bytesDownloaded ?? 0,
+        bytesTotal:
+          this.provisioningProgress
+            ?.bytesTotal ?? null,
+        percent: 100,
+        updatedAt:
+          new Date().toISOString()
+      };
 
       try {
         const startupStartedAt = Date.now();
@@ -323,6 +474,19 @@ export class LocalModelRuntime {
           validatedAt:
             new Date().toISOString()
         });
+        this.provisioningProgress = {
+          phase: "READY",
+          label: canonical,
+          bytesDownloaded:
+            this.provisioningProgress
+              ?.bytesDownloaded ?? 0,
+          bytesTotal:
+            this.provisioningProgress
+              ?.bytesTotal ?? null,
+          percent: 100,
+          updatedAt:
+            new Date().toISOString()
+        };
       } catch (error) {
         restorePreviousConfig();
         const detail =
@@ -343,6 +507,21 @@ export class LocalModelRuntime {
       };
     } catch (error) {
       restorePreviousConfig();
+      this.provisioningProgress = {
+        phase: "FAILED",
+        label: canonical,
+        bytesDownloaded:
+          this.provisioningProgress
+            ?.bytesDownloaded ?? 0,
+        bytesTotal:
+          this.provisioningProgress
+            ?.bytesTotal ?? null,
+        percent:
+          this.provisioningProgress
+            ?.percent ?? null,
+        updatedAt:
+          new Date().toISOString()
+      };
       throw error;
     } finally {
       this.provisioning = null;
@@ -681,15 +860,65 @@ export class LocalModelRuntime {
       });
       let stdout = "";
       let stderr = "";
+      let stdoutLineBuffer = "";
+      const consumeStdoutLine = (
+        line: string
+      ) => {
+        const progress =
+          parseLocalAiProgressLine(
+            line
+          );
+        if (progress) {
+          this.provisioningProgress =
+            progress;
+        }
+      };
       const timeout = setTimeout(() => {
         child.kill();
         reject(new Error("LOCAL_MODEL_PROVISIONING_TIMEOUT"));
       }, 2 * 60 * 60_000);
       child.stdout?.setEncoding("utf8");
       child.stderr?.setEncoding("utf8");
-      child.stdout?.on("data", (chunk: string | Buffer) => {
-        stdout = `${stdout}${chunk.toString()}`.slice(-16_000);
-      });
+      child.stdout?.on(
+        "data",
+        (
+          chunk:
+            string | Buffer
+        ) => {
+          const text =
+            chunk.toString();
+          stdout =
+            `${stdout}${text}`
+              .slice(-16_000);
+          stdoutLineBuffer +=
+            text;
+          let newline =
+            stdoutLineBuffer
+              .indexOf("\n");
+          while (newline >= 0) {
+            const line =
+              stdoutLineBuffer
+                .slice(
+                  0,
+                  newline
+                )
+                .replace(
+                  /\r$/,
+                  ""
+                );
+            stdoutLineBuffer =
+              stdoutLineBuffer.slice(
+                newline + 1
+              );
+            consumeStdoutLine(
+              line
+            );
+            newline =
+              stdoutLineBuffer
+                .indexOf("\n");
+          }
+        }
+      );
       child.stderr?.on("data", (chunk: string | Buffer) => {
         stderr = `${stderr}${chunk.toString()}`.slice(-16_000);
       });
@@ -699,6 +928,13 @@ export class LocalModelRuntime {
       });
       child.once("exit", (code) => {
         clearTimeout(timeout);
+        if (
+          stdoutLineBuffer.trim()
+        ) {
+          consumeStdoutLine(
+            stdoutLineBuffer
+          );
+        }
         if (code === 0) resolve();
         else reject(
           new Error(
