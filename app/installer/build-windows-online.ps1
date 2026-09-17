@@ -11,6 +11,10 @@ $payload = Join-Path $tauri "runtime"
 
 if ($env:OS -ne "Windows_NT") { throw "Windows online bootstrap payload must be built on Windows." }
 
+Write-Host "[0/4] Installer state machine self-test"
+& (Join-Path $installer "installer-state-machine-selftest.ps1")
+if ($LASTEXITCODE -ne 0) { throw "Installer state machine self-test failed" }
+
 Remove-Item $payload -Recurse -Force -ErrorAction SilentlyContinue
 New-Item $payload -ItemType Directory | Out-Null
 
@@ -50,6 +54,8 @@ foreach ($file in @(
   "windows-online-bootstrap.ps1",
   "windows-offline-bundle-install.ps1",
   "install-local-llm.ps1",
+  "get-install-state.ps1",
+  "installer-state-machine-selftest.ps1",
   "prefetch-release-models.py",
   "verify-python-package-set.py",
   "generate-component-lock.ps1",
@@ -78,6 +84,8 @@ foreach ($required in @(
   "bootstrap\windows-online-bootstrap.ps1",
   "bootstrap\windows-offline-bundle-install.ps1",
   "bootstrap\install-local-llm.ps1",
+  "bootstrap\get-install-state.ps1",
+  "bootstrap\installer-state-machine-selftest.ps1",
   "bootstrap\verify-python-package-set.py",
   "bootstrap\windows-payload-selftest.ps1",
   "bootstrap\windows-payload-python-selftest.py"
