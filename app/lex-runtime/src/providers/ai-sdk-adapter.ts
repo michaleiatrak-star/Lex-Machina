@@ -14,6 +14,7 @@ import type {
   ProviderStreamParams,
   ProviderStreamResult
 } from "./types.js";
+import type { LocalModelRuntime } from "../local-model-runtime.js";
 
 const MAX_OUTPUT_TOKENS = 16_384;
 
@@ -236,7 +237,8 @@ export class AiSdkProviderAdapter implements ProviderAdapter {
 
   constructor(
     readonly id: ProviderId,
-    private readonly credentials: ProviderCredentialResolver
+    private readonly credentials: ProviderCredentialResolver,
+    private readonly localModels?: LocalModelRuntime
   ) {
     this.label = providerLabel(id);
   }
@@ -244,6 +246,26 @@ export class AiSdkProviderAdapter implements ProviderAdapter {
   async stream(
     params: ProviderStreamParams
   ): Promise<ProviderStreamResult> {
+    if (params.model.startsWith("local/")) {
+      if (this.id !== "openai" || !this.localModels) {
+        throw new Error("LOCAL_MODEL_RUNTIME_UNAVAILABLE");
+      }
+      await this.localModels.ensureRunning(params.model);
+      const { createOpenAI } = await import("@ai-sdk/openai");
+      const local = createOpenAI({
+        apiKey: "lex-machina-local-only",
+        baseURL: this.localModels.status().endpoint
+      });
+      return streamModel(
+        local.chat(params.model),
+        {
+          ...params,
+          reasoning: "none"
+        },
+        "Local llama.cpp"
+      );
+    }
+
     const apiKey = await this.credentials.getApiKey(this.id);
     if (!apiKey) {
       throw new MissingProviderCredentialError(this.id);
@@ -261,12 +283,17 @@ export class AiSdkProviderAdapter implements ProviderAdapter {
 }
 
 export function createLiveProviderRegistry(
-  credentials: ProviderCredentialResolver
+  credentials: ProviderCredentialResolver,
+  localModels?: LocalModelRuntime
 ): ProviderRegistry {
   const registry = new ProviderRegistry();
   for (const id of ["openai", "anthropic", "xai"] as const) {
     registry.register(
-      new AiSdkProviderAdapter(id, credentials)
+      new AiSdkProviderAdapter(
+        id,
+        credentials,
+        id === "openai" ? localModels : undefined
+      )
     );
   }
   return registry;
