@@ -48,6 +48,18 @@ type LocalRuntimeStatus = {
   state: "STOPPED" | "PROVISIONING" | "STARTING" | "READY";
   endpoint: string;
   contextPolicy: ContextPolicy;
+  qualification: {
+    schemaVersion: 1;
+    result: "PASS";
+    modelId: string;
+    contextTokens: number;
+    contextMode:
+      | "NATIVE_OR_REDUCED"
+      | "YARN_EXTENDED";
+    engine: "llama.cpp";
+    startupMs: number;
+    validatedAt: string;
+  } | null;
 };
 
 type LocalModelsResponse = {
@@ -428,6 +440,16 @@ export function LocalAiSetupPanel({
                   <span>Natywny kontekst: {formatTokens(selected.nativeContextWindow)}</span>
                   <span>Dozwolony profil: {formatTokens(selected.minimumContextWindow)}–{formatTokens(selected.maximumContextWindow)}</span>
                   <span>{extended ? "Tryb: YaRN — rozszerzenie ponad natywne okno" : "Tryb: natywny / zredukowany"}</span>
+                  {data.runtime.qualification &&
+                  data.runtime.qualification.modelId === selected.id ? (
+                    <span>
+                      Walidacja sprzętowa: PASS · {formatTokens(data.runtime.qualification.contextTokens)} tokenów
+                      {" · "}start {data.runtime.qualification.startupMs.toLocaleString("pl-PL")} ms
+                      {" · "}{new Date(data.runtime.qualification.validatedAt).toLocaleString("pl-PL")}
+                    </span>
+                  ) : (
+                    <span>Walidacja sprzętowa: brak potwierdzonego profilu dla tego modelu.</span>
+                  )}
                 </div>
 
                 {extended ? (
