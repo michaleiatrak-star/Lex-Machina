@@ -431,6 +431,7 @@ export async function startLocalServer(options?: {
     updateDiscovery,
     processWorkflowStore:
       workspaceStore,
+    documentGenerationState,
     caseFileStore,
     secureCaseUploadStore,
     sharedTemplateStore,
