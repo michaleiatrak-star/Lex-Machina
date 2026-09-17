@@ -315,6 +315,57 @@ export class LocalModelRuntime {
     }
   }
 
+  async repair(): Promise<{
+    model: LocalModelDescriptor;
+    contextTokens: number;
+    configPath: string;
+  }> {
+    const config = this.readConfig();
+    if (!config) {
+      throw new Error("LOCAL_MODEL_NOT_CONFIGURED");
+    }
+    return await this.provision(
+      normalizeModelId(config.model.id),
+      config.context.requestedTokens
+    );
+  }
+
+  async remove(modelId: string): Promise<{
+    removedModelId: LocalModelId;
+    configRemoved: boolean;
+  }> {
+    if (this.provisioning) {
+      throw new Error("LOCAL_MODEL_PROVISIONING_IN_PROGRESS");
+    }
+    const canonical = normalizeModelId(modelId);
+    const model = this.modelSpec(canonical);
+    if (!model) {
+      throw new Error("LOCAL_MODEL_UNKNOWN");
+    }
+
+    await this.stop();
+    const target = path.join(
+      this.rootDir,
+      "models",
+      model.filename
+    );
+    fs.rmSync(target, { force: true });
+
+    const config = this.readConfig();
+    const configRemoved = Boolean(
+      config &&
+      normalizeModelId(config.model.id) === canonical
+    );
+    if (configRemoved) {
+      fs.rmSync(this.configPath(), { force: true });
+    }
+
+    return {
+      removedModelId: canonical,
+      configRemoved
+    };
+  }
+
   async ensureRunning(id: string): Promise<LocalModelDescriptor> {
     const canonical = normalizeModelId(id);
     const spec = this.modelSpec(canonical);
