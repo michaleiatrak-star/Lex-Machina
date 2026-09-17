@@ -407,6 +407,13 @@ export function validateProcessPleadingState(
       input.documentStatus !== "FINAL" ||
       input.checkpoints["CP-PEER"] !==
         "CLOSED" ||
+      PROCESS_PLEADING_CHECKPOINTS.some(
+        (checkpoint) =>
+          input.checkpoints[checkpoint] !==
+            "CLOSED" &&
+          input.checkpoints[checkpoint] !==
+            "NA"
+      ) ||
       input.pendingCheckpoint !== null
     )
   ) {
@@ -516,10 +523,6 @@ export function markProcessCheckpointReady(
     );
   }
 
-  const stageCheckpoints =
-    ORDERED_STAGE_CHECKPOINTS[
-      state.stage
-    ];
   state.checkpoints[checkpoint] =
     state.mode === "AUTO"
       ? "CLOSED"
