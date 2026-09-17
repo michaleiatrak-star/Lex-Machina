@@ -38,6 +38,10 @@ const required = [
   "/api/documents/review",
   "/api/documents/",
   "/api/cases",
+  "/workspace/thread",
+  "/workspace/folders",
+  "/preview",
+  "/open",
   "/api/auth/status",
   "/api/auth/login",
   "/api/auth/bootstrap",
@@ -55,46 +59,54 @@ const required = [
   "Zapisz nowy kod recovery",
   "Wygeneruj nowy kod recovery",
   "Zmień hasło",
-  "Typ i sterowanie sprawą",
-  "Automatyczny",
-  "system dobiera równolegle potrzebne skille wykonawcze i wszystkie pasujące dziedziny prawa",
-  "Priorytetowe skille",
-  "Automatyczny routing może nadal dołożyć kolejne skille i dodatkowe domeny DR.",
-  "Wybierz sprawę",
-  "Utwórz sprawę",
-  "Zmień nazwę",
+  "1 wątek = 1 sprawa",
+  "Wątki / sprawy",
+  "Nazwa sprawy",
+  "Sygnatura nie jest wymagana",
+  "ID katalogu:",
+  "Automatyczny — dobierz skille wykonawcze",
+  "priorytetowych skilli wykonawczych",
+  "współpracować np. z chronologią",
+  "kilka dziedzin prawa",
+  "prawny-router-v3",
+  "shared",
+  "Dodatkowe skille i dziedziny",
   "Archiwizuj sprawę",
   "Przywróć z archiwum",
   "Trwałe usunięcie sprawy",
   "Wpisz USUŃ",
   "Usuń sprawę trwale",
   "ARCHIWALNA (tylko odczyt)",
-  "Kliknij lub przeciągnij",
+  "Kliknij lub przeciągnij pliki",
   "Otwórz eksplorator",
-  "prawny-router-v3",
-  "shared",
-  "Automatyczny dobór skilli",
-  "Ręczny wybór",
-  "Akta wybranej sprawy",
-  "Dokumenty sprawy",
-  "Katalog wspólny",
-  "Wzory kancelarii",
-  "Jeden wzór jest przechowywany raz",
-  "integracja z generatorem w G35C",
-  "Archiwum zapisane i rozpakowane lokalnie",
+  "Struktura katalogów",
+  "Główny katalog",
+  "+ Folder",
+  "Podgląd",
+  "Otwórz w systemie",
+  "Usuń",
+  "Foldery są logiczną, szyfrowaną strukturą workspace",
+  "Know-how i wzory kancelarii",
+  "Know-how kancelarii",
+  "Dodaj wiedzę / dokument",
   "Akta sprawy, OCR i ręczna anonimizacja",
   "Anonimizuj / pseudonimizuj",
   "Pozostaw bez anonimizacji",
   "Oznacz, co ten fragment znaczy",
   "Chunki do analizy AI",
   "Domyślnie nic nie jest wysyłane do providera",
+  "Cytowany fragment dokumentu",
+  "Przejdź do cytowanego fragmentu",
+  "Dokładny cytat zaznaczony w źródle",
+  "źródłowego chunka",
   "DRAFT_PRESENTABLE",
   "HARD GATE",
   "Źródła i weryfikacja",
   "VERIFIED",
   "SUPPORTED",
-  "Otwórz źródło",
+  "Otwórz źródło w przeglądarce",
   "Model i klucz API",
+  "otwórz w przeglądarce",
   "Konfiguracja lokalna"
 ];
 
@@ -103,19 +115,29 @@ const missing = required.filter((token) => !content.includes(token));
 const pass = exposed.length === 0 && missing.length === 0;
 
 process.stdout.write(JSON.stringify({
-  gate: "G14_G31AB_G32_G34AE_G35AB_P4B_LOCAL_WEB_UI",
+  gate: "G14_MATTER_CHAT_WORKSPACE_DOCUMENT_DEEP_LINK_UI",
   result: pass ? "PASS" : "BLOCKED",
   bundleFiles: files.length,
   forbiddenTokensFound: exposed,
   requiredExecutionMarkersMissing: missing,
   localApiReferencePresent: content.includes("127.0.0.1:4317"),
   sessionExecutionEndpointPresent: content.includes("/api/sessions/execute"),
-  caseTypeSelectorPresent:
-    content.includes("Automatyczny") &&
-    content.includes("Priorytetowe skille"),
+  oneThreadOneCasePresent:
+    content.includes("1 wątek = 1 sprawa") &&
+    content.includes("/workspace/thread"),
   multiSkillRoutingPresent:
-    content.includes("równolegle potrzebne skille wykonawcze") &&
-    content.includes("wszystkie pasujące dziedziny prawa"),
+    content.includes("współpracować np. z chronologią") &&
+    content.includes("kilka dziedzin prawa"),
+  workspaceLifecyclePresent:
+    content.includes("Struktura katalogów") &&
+    content.includes("Otwórz w systemie") &&
+    content.includes("+ Folder"),
+  documentDeepLinksPresent:
+    content.includes("Cytowany fragment dokumentu") &&
+    content.includes("Dokładny cytat zaznaczony w źródle"),
+  browserLinksPresent:
+    content.includes("Otwórz źródło w przeglądarce") &&
+    content.includes("otwórz w przeglądarce"),
   caseLifecyclePresent:
     content.includes("Archiwizuj sprawę") &&
     content.includes("Usuń sprawę trwale"),
