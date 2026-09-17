@@ -602,6 +602,74 @@ export type SessionExecutionResponse = {
     requiredResources: string[];
     missingResources: string[];
   };
+  processWorkflow?: ProcessPleadingWorkflowView;
+};
+
+export type ProcessPleadingCheckpoint =
+  | "CP-1a"
+  | "CP-1b"
+  | "CP-1c-skan"
+  | "CP-PD"
+  | "CP-FSL-D"
+  | "CP-1c-macierz"
+  | "CP-1c-lancuch"
+  | "CP-1d-anomalie"
+  | "CP-1d"
+  | "CP-W1"
+  | "CP-PRE-W2"
+  | "CP-ATAK"
+  | "CP-PODMIOT"
+  | "CP-QUALITY"
+  | "CP-AUDYT"
+  | "CP-PEER";
+
+export type ProcessPleadingCheckpointStatus =
+  | "OPEN"
+  | "PENDING_CONFIRMATION"
+  | "CLOSED"
+  | "NA";
+
+export type ProcessPleadingStage =
+  | "CG_ACCEPTANCE"
+  | "W1"
+  | "PRE_W2"
+  | "W2"
+  | "W3"
+  | "FINAL";
+
+export type ProcessPleadingWorkflowView = {
+  caseId: string;
+  mode: "CHECKPOINT" | "AUTO";
+  revision: number;
+  stage: ProcessPleadingStage;
+  documentStatus: "DRAFT" | "FINAL";
+  pendingCheckpoint: ProcessPleadingCheckpoint | null;
+  checkpoints: Record<
+    ProcessPleadingCheckpoint,
+    ProcessPleadingCheckpointStatus
+  >;
+};
+
+export type ProcessPleadingWorkflowState =
+  ProcessPleadingWorkflowView & {
+    schemaVersion: 1;
+    workflowId: "PROCESS_PLEADING_V1";
+    startAccepted: boolean;
+    history: Array<{
+      sequence: number;
+      at: string;
+      type: string;
+      checkpoint?: ProcessPleadingCheckpoint;
+      fromStage?: ProcessPleadingStage;
+      toStage?: ProcessPleadingStage;
+    }>;
+    createdAt: string;
+    updatedAt: string;
+  };
+
+export type ProcessPleadingWorkflowResponse = {
+  caseId: string;
+  state: ProcessPleadingWorkflowState | null;
 };
 
 export type ApiFailure = {
@@ -1623,6 +1691,60 @@ export function getModels(
   provider: ProviderId
 ): Promise<ModelsResponse> {
   return json<ModelsResponse>(`/api/models/${provider}`);
+}
+
+export function getProcessPleadingWorkflow(
+  caseId: string
+): Promise<ProcessPleadingWorkflowResponse> {
+  return json<ProcessPleadingWorkflowResponse>(
+    `/api/cases/${caseId}/workflow/process-pleading`
+  );
+}
+
+export function initializeProcessPleadingWorkflow(
+  caseId: string,
+  mode: "CHECKPOINT" | "AUTO" = "CHECKPOINT"
+): Promise<{
+  caseId: string;
+  state: ProcessPleadingWorkflowState;
+}> {
+  return json(
+    `/api/cases/${caseId}/workflow/process-pleading/initialize`,
+    {
+      method: "POST",
+      body: JSON.stringify({ mode })
+    }
+  );
+}
+
+export function acceptProcessPleadingWorkflowStart(
+  caseId: string
+): Promise<{
+  caseId: string;
+  state: ProcessPleadingWorkflowState;
+}> {
+  return json(
+    `/api/cases/${caseId}/workflow/process-pleading/accept-start`,
+    { method: "POST" }
+  );
+}
+
+export function confirmProcessPleadingCheckpoint(
+  caseId: string,
+  checkpoint: ProcessPleadingCheckpoint
+): Promise<{
+  caseId: string;
+  state: ProcessPleadingWorkflowState;
+}> {
+  return json(
+    `/api/cases/${caseId}/workflow/process-pleading/confirm`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        checkpoint
+      })
+    }
+  );
 }
 
 export function executeSession(input: {
