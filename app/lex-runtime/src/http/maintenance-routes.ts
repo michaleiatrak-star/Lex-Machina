@@ -196,7 +196,10 @@ export function registerMaintenanceRoutes(
         const result =
           await localModels.remove(modelId);
         res.json({
-          ...result,
+          removedModelId: result.modelId,
+          removed: result.removed,
+          configRemoved:
+            result.configurationCleared,
           runtime: localModels.status(),
           models: localModels.listModels()
         });
