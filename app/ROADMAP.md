@@ -32,6 +32,7 @@ Roadmapa obejmuje produkt instalacyjny Windows i jest traktowana jako kontrakt z
 - Usuwanie pustych folderów.
 - Przenoszenie dokumentów między folderami.
 - Usuwanie dokumentów z kontrolą ACL.
+- Usunięcie uploadu usuwa również odpowiadające mu dokumenty pochodne OCR/chunki, wpisy prywatnego vaultu oraz stan in-memory; dotyczy także przetworzonych elementów ZIP.
 - Podgląd tekstu, JSON, PDF i obrazów w aplikacji tam, gdzie jest to bezpiecznie obsługiwane.
 - Otwieranie dokumentu w domyślnej aplikacji systemowej z kontrolowanego pliku tymczasowego.
 
@@ -69,13 +70,25 @@ Roadmapa obejmuje produkt instalacyjny Windows i jest traktowana jako kontrakt z
 - Archiwalna sprawa jest tylko do odczytu.
 - Trwałe usunięcie wymaga uprawnień i ponownej autoryzacji zgodnie z istniejącym kontraktem bezpieczeństwa.
 
-### M8 — Release 0.1.2 — IN PROGRESS
+### M8 — Automatyczny OCR i prywatność plik po pliku w czacie — DONE
+
+- Dodanie obrazu uruchamia lokalny OCR automatycznie.
+- PDF jest analizowany strona po stronie; użyteczna warstwa tekstowa jest wykorzystywana bez OCR, a strony skanowane są automatycznie kierowane do OCR.
+- Kolejka wieloplikowa jest sekwencyjna: kolejny plik nie przechodzi do decyzji prywatności, dopóki bieżący nie zostanie sfinalizowany albo jawnie pominięty.
+- Każdy plik otrzymuje własny `documentId` i własny wpis w zaszyfrowanym `PseudonymizationVault`.
+- Dla każdego pliku użytkownik osobno wybiera: automatyczna pseudonimizacja, ręczny przegląd decyzji albo jawne pozostawienie wykrytych danych bez anonimizacji (`KEEP`).
+- Po finalizacji maksymalnie 32 pierwsze chunki pliku mogą zostać automatycznie zaznaczone do bieżącej analizy; limit bezpośrednich dokumentów jednej sesji nadal jest egzekwowany przez runtime.
+- Przy generowaniu dokumentów z wielu źródeł tokeny są przestrzenią nazw per dokument (`D01`, `D02`, …), a kontrolowana deanonymizacja rozwiązuje wartości z vaultu konkretnego `documentId` po istniejącej reautoryzacji.
+- Odpowiedzi czatu nie są automatycznie deanonymizowane z pominięciem istniejącej granicy bezpieczeństwa G34F.
+- Dialog OCR/prywatności jest częścią toku czatu; zakładka `Akta` służy do późniejszego zarządzania zapisanymi dokumentami i folderami.
+
+### M9 — Release 0.1.2 — IN PROGRESS
 
 Kryteria zamknięcia:
 
 - strict TypeScript runtime + web: PASS,
-- testy jednostkowe routingu, workspace i cytowań: PASS,
-- G14 browser bundle safety: PASS,
+- testy jednostkowe routingu, workspace, OCR/prywatności i cytowań: PASS,
+- G14 browser bundle safety z markerami nowych funkcji: PASS,
 - G34G Tauri compile/trust-boundary: PASS,
 - pełny deterministyczny zestaw runtime: PASS,
 - Windows Online Installer: NSIS + installed-copy acceptance: PASS,
