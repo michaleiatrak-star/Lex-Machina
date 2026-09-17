@@ -21,6 +21,10 @@ import {
   LegalCorpusToolRuntime
 } from "./legal-corpus-tool-runtime.js";
 import {
+  evaluateDeterministicWorkflowReads,
+  type DeterministicWorkflowReadReport
+} from "./deterministic-workflow.js";
+import {
   documentCitationSystemPrompt,
   processDocumentCitationMarkers,
   type PublicDocumentCitation
@@ -131,6 +135,12 @@ export type SessionExecutionResponse = {
     result: "PASS" | "BLOCKED";
     eventCount: number;
     closed: boolean;
+  };
+  workflow: {
+    id: string;
+    result: "PASS" | "BLOCKED";
+    requiredResources: string[];
+    missingResources: string[];
   };
   [SESSION_EXECUTION_INTERNAL]?: SessionExecutionInternalState;
 };
@@ -320,6 +330,25 @@ export class SafeSessionExecutor implements SessionExecutor {
       { toolEvents: corpusAudit.length }
     );
 
+    const workflowReads: DeterministicWorkflowReadReport =
+      evaluateDeterministicWorkflowReads(
+        execution.workflowPlan,
+        corpusAudit
+      );
+    const workflowResourcesBlocked =
+      workflowReads.result === "BLOCKED";
+    audit.record(
+      "gate",
+      "G39H_WORKFLOW_RESOURCE_READS",
+      workflowResourcesBlocked ? "BLOCKED" : "OK",
+      {
+        workflow: workflowReads.workflow,
+        required: workflowReads.required,
+        observed: workflowReads.observed,
+        missing: workflowReads.missing
+      }
+    );
+
     if (verificationTools) {
       for (const toolEvent of verificationTools.auditEvents()) {
         audit.record(
@@ -357,7 +386,26 @@ export class SafeSessionExecutor implements SessionExecutor {
       closeSession: false
     });
 
-    const safeToPresent = finalization.result === "PASS" && !corpusBlocked;
+    const workflowFinalizationBlocked =
+      finalization.result !== "PASS" ||
+      corpusBlocked ||
+      workflowResourcesBlocked;
+    audit.record(
+      "gate",
+      "G39H_WORKFLOW_FINALIZATION",
+      workflowFinalizationBlocked ? "BLOCKED" : "OK",
+      {
+        workflow: execution.workflowPlan.id,
+        finalization: finalization.result,
+        corpusBlocked,
+        workflowResourcesBlocked
+      }
+    );
+
+    const safeToPresent =
+      finalization.result === "PASS" &&
+      !corpusBlocked &&
+      !workflowResourcesBlocked;
     audit.record(
       "gate",
       "G15_SAFE_SESSION_EXECUTION",
@@ -412,6 +460,15 @@ export class SafeSessionExecutor implements SessionExecutor {
         result: completeness.result,
         eventCount: completeness.eventCount,
         closed: audit.isClosed
+      },
+      workflow: {
+        id: execution.workflowPlan.id,
+        result:
+          workflowResourcesBlocked || finalization.result !== "PASS"
+            ? "BLOCKED"
+            : "PASS",
+        requiredResources: workflowReads.required,
+        missingResources: workflowReads.missing
       }
     };
 
