@@ -20,6 +20,10 @@ function Assert-Sha256([string]$Path, [string]$Expected, [string]$Label) {
 
 if ($env:OS -ne "Windows_NT") { throw "Windows offline payload must be built on Windows." }
 
+Write-Host "[0/11] Installer state machine self-test"
+& (Join-Path $installer "installer-state-machine-selftest.ps1")
+if ($LASTEXITCODE -ne 0) { throw "Installer state machine self-test failed" }
+
 Remove-Item $payload -Recurse -Force -ErrorAction SilentlyContinue
 New-Item $payload -ItemType Directory | Out-Null
 $cache = Join-Path $installer ".cache"
@@ -59,6 +63,8 @@ foreach ($file in @(
   "windows-online-bootstrap.ps1",
   "windows-offline-bundle-install.ps1",
   "install-local-llm.ps1",
+  "get-install-state.ps1",
+  "installer-state-machine-selftest.ps1",
   "prefetch-release-models.py",
   "verify-python-package-set.py",
   "generate-component-lock.ps1",
