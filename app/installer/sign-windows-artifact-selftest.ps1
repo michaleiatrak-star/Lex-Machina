@@ -86,3 +86,8 @@ try {
 } finally {
   Remove-Item -LiteralPath $root -Recurse -Force -ErrorAction SilentlyContinue
 }
+
+# GitHub's pwsh wrapper propagates the last native-process exit code even when
+# that failure was intentionally asserted above. Reaching this line means every
+# expected fail-closed condition matched, so make the harness outcome explicit.
+exit 0
