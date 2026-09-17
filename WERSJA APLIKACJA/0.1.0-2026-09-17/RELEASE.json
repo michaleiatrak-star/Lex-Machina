@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "application": "Lex Machina",
+  "platform": "windows-x86_64",
+  "version": "0.1.0",
+  "releaseDate": "2026-09-17",
+  "sourceSha": "726b26c0ec35b6f773feefe0dfd575f5c9a396ef",
+  "acceptance": {
+    "f138StructuralAudit": "PASS",
+    "runtimeValidation": "PASS",
+    "onlineInstalledCopy": "PASS",
+    "offlineCleanMachineNetworkBlocked": "PASS"
+  },
+  "online": {
+    "runId": 35209913121,
+    "artifact": "LexMachina-Windows-Online-Installer",
+    "installerFile": "LexMachina-Online-Setup.exe",
+    "sha256": "dcb308efd0c551bed3abe554126955236590cd9a3b58c4030239a5af17f124dd",
+    "bytes": 23686568,
+    "bootstrap": "PER_COMPONENT_VERIFIED_DOWNLOAD"
+  },
+  "offline": {
+    "runId": 35209913261,
+    "artifact": "LexMachina-Windows-Offline-Setup",
+    "distributionFile": "LexMachina-Offline-Setup.zip",
+    "installerSha256": "5e1450b1c16a8b8c884cd6310d9427f22ee2cc7ce7856e17c83511004f96e7f6",
+    "installerBytes": 239211137,
+    "runtimeBundleFile": "LexMachina-Offline-Runtime.zip",
+    "runtimeBundleSha256": "91859675b3cd50b5d1a16588247c9daea3b7e7c4a30e78c68255d55ee4751e5b",
+    "runtimeBundleBytes": 985275297
+  },
+  "releaseTag": "app-windows-0.1.0-2026-09-17",
+  "note": "Only assets published from these accepted workflow runs are the current Windows release. Retired installers using the temporary LexMachinaBootstrap/Offline-Runtime online path are not part of this release."
+}
