@@ -1,0 +1,128 @@
+.local-ai-setup {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 50;
+  width: min(430px, calc(100vw - 40px));
+  max-height: min(78vh, 720px);
+  overflow: auto;
+  border: 1px solid rgba(120, 120, 120, 0.28);
+  border-radius: 16px;
+  background: var(--panel-bg, #ffffff);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.18);
+}
+
+.local-ai-setup > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.local-ai-setup > summary::-webkit-details-marker {
+  display: none;
+}
+
+.local-ai-setup > summary span:first-child {
+  display: grid;
+  gap: 2px;
+}
+
+.local-ai-setup > summary small {
+  opacity: 0.72;
+}
+
+.local-ai-badge {
+  flex: none;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: rgba(120, 120, 120, 0.14);
+}
+
+.local-ai-badge.ready {
+  background: rgba(28, 133, 80, 0.14);
+}
+
+.local-ai-body {
+  display: grid;
+  gap: 14px;
+  padding: 0 16px 16px;
+}
+
+.local-ai-body p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.local-ai-body label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.local-ai-body select,
+.local-ai-body input[type="range"] {
+  width: 100%;
+}
+
+.local-ai-body select {
+  min-height: 40px;
+  border: 1px solid rgba(120, 120, 120, 0.3);
+  border-radius: 10px;
+  padding: 0 10px;
+  background: inherit;
+  color: inherit;
+}
+
+.local-ai-facts {
+  display: grid;
+  gap: 5px;
+  font-size: 12px;
+  opacity: 0.82;
+}
+
+.local-ai-warning {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(184, 119, 0, 0.12);
+  font-size: 12px;
+}
+
+.local-ai-primary {
+  min-height: 42px;
+  border: 0;
+  border-radius: 11px;
+  padding: 0 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.local-ai-primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.local-ai-message,
+.local-ai-error {
+  font-size: 12px;
+}
+
+.local-ai-error {
+  color: #b42318;
+}
+
+@media (max-width: 720px) {
+  .local-ai-setup {
+    right: 10px;
+    bottom: 10px;
+    width: calc(100vw - 20px);
+    max-height: 70vh;
+  }
+}
