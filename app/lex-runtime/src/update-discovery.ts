@@ -26,6 +26,8 @@ export type UpdateDiscoveryResult = {
   skillsBundle?: VerifiedReleaseAsset;
   skillsIndex?: VerifiedReleaseAsset;
   skillsSignature?: VerifiedReleaseAsset;
+  modelPackIndex?: VerifiedReleaseAsset;
+  modelPackSignature?: VerifiedReleaseAsset;
 };
 
 export interface UpdateDiscovery {
@@ -138,6 +140,8 @@ function chooseAssets(
   skillsBundle?: VerifiedReleaseAsset;
   skillsIndex?: VerifiedReleaseAsset;
   skillsSignature?: VerifiedReleaseAsset;
+  modelPackIndex?: VerifiedReleaseAsset;
+  modelPackSignature?: VerifiedReleaseAsset;
 } {
   const assets = Array.isArray(release.assets)
     ? release.assets
@@ -166,12 +170,20 @@ function chooseAssets(
   const skillsSignature = assets.find((asset) =>
     /^LexMachina-Skills-Index\.sig$/i.test(asset.name)
   );
+  const modelPackIndex = assets.find((asset) =>
+    /^LexMachina-ModelPack-Index\.json$/i.test(asset.name)
+  );
+  const modelPackSignature = assets.find((asset) =>
+    /^LexMachina-ModelPack-Index\.sig$/i.test(asset.name)
+  );
 
   return {
     ...(installer ? { installer } : {}),
     ...(skillsBundle ? { skillsBundle } : {}),
     ...(skillsIndex ? { skillsIndex } : {}),
-    ...(skillsSignature ? { skillsSignature } : {})
+    ...(skillsSignature ? { skillsSignature } : {}),
+    ...(modelPackIndex ? { modelPackIndex } : {}),
+    ...(modelPackSignature ? { modelPackSignature } : {})
   };
 }
 
