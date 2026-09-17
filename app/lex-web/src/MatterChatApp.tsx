@@ -218,6 +218,16 @@ function executionMessage(
     const domainMeta = execution.domainSkills?.length
       ? ` · domeny: ${execution.domainSkills.map(labelForSkill).join(", ")}`
       : "";
+    const contextMeta =
+      execution.context?.modelContextTokens
+        ? ` · runtime ${execution.context.modelContextTokens.toLocaleString("pl-PL")} tok. · dokumenty ~${execution.context.estimatedDocumentTokens.toLocaleString("pl-PL")} tok.${execution.context.omittedChunks > 0 ? ` · pominięte chunki: ${execution.context.omittedChunks}` : ""}`
+        : execution.context
+          ? ` · dokumenty ~${execution.context.estimatedDocumentTokens.toLocaleString("pl-PL")} tok.`
+          : "";
+    const citationMeta =
+      execution.documentCitationFreshness
+        ? ` · cytaty odświeżone: ${execution.documentCitationFreshness.checked}`
+        : "";
     return {
       id: messageId(),
       role: "assistant",
@@ -228,6 +238,8 @@ function executionMessage(
         `routing: ${labelForSkill(execution.primarySkill || route)}` +
         skillMeta +
         domainMeta +
+        contextMeta +
+        citationMeta +
         ` · VERIFIED ${execution.verification.verified}` +
         ` · SUPPORTED ${execution.verification.supported}`
     };
@@ -1452,7 +1464,15 @@ export default function MatterChatApp({
                 </p>
               ) : null}
               {selectedModel?.contextWindow ? (
-                <small>Kontekst: {selectedModel.contextWindow.toLocaleString("pl-PL")} tokenów</small>
+                <small>
+                  Aktywne okno runtime: {selectedModel.contextWindow.toLocaleString("pl-PL")} tokenów
+                  {selectedModel.nativeContextWindow
+                    ? ` · natywne: ${selectedModel.nativeContextWindow.toLocaleString("pl-PL")}`
+                    : ""}
+                  {selectedModel.contextMode === "YARN_EXTENDED"
+                    ? " · rozszerzone YaRN"
+                    : ""}
+                </small>
               ) : null}
               {providerDefinition ? (
                 <button
