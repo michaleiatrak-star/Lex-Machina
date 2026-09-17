@@ -438,12 +438,13 @@ export function validateProcessPleadingState(
       event.sequence <= previousSequence ||
       !validIso(event.at) ||
       (
-        event.reason !== undefined &&
-        (
-          typeof event.reason !== "string" ||
-          event.reason.length < 3 ||
-          event.reason.length > 500
-        )
+        event.type === "CHECKPOINT_NA"
+          ? (
+              typeof event.reason !== "string" ||
+              event.reason.length < 3 ||
+              event.reason.length > 500
+            )
+          : event.reason !== undefined
       )
     ) {
       throw new Error(
