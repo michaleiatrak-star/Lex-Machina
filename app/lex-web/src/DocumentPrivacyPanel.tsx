@@ -32,6 +32,29 @@ const PII_KINDS: Array<{
   { value: "CUSTOM", label: "Inne" }
 ];
 
+export type DocumentProcessingEvent = {
+  fileName: string;
+  stage:
+    | "ANALYZING"
+    | "OCR_COMPLETE"
+    | "PRIVACY_REQUIRED"
+    | "FINALIZED"
+    | "ARCHIVE_STORED";
+  documentId?: string;
+  totalPages?: number;
+  ocrPages?: number;
+  suggestions?: number;
+  privacyMode?:
+    | "AUTO_PSEUDONYMIZE"
+    | "MANUAL"
+    | "KEEP_CLEAR";
+};
+
+type PrivacyMode =
+  | "ASK"
+  | "MANUAL"
+  | "FINALIZED";
+
 function rangesOverlap(
   a: { start: number; end: number },
   b: { start: number; end: number }
@@ -39,12 +62,44 @@ function rangesOverlap(
   return a.start < b.end && a.end > b.start;
 }
 
+function keepAllAutomaticFindings(
+  review: DocumentReviewResponse
+): PagePrivacyDirective[] {
+  const accepted: PagePrivacyDirective[] = [];
+  const suggestions = [...review.suggestions].sort(
+    (a, b) =>
+      a.page - b.page ||
+      a.start - b.start ||
+      (b.end - b.start) - (a.end - a.start)
+  );
+
+  for (const suggestion of suggestions) {
+    if (
+      accepted.some(
+        (item) =>
+          item.page === suggestion.page &&
+          rangesOverlap(item, suggestion)
+      )
+    ) {
+      continue;
+    }
+    accepted.push({
+      page: suggestion.page,
+      start: suggestion.start,
+      end: suggestion.end,
+      action: "KEEP"
+    });
+  }
+  return accepted;
+}
+
 export function DocumentPrivacyPanel({
   caseId,
   incomingFile,
   onIncomingFileConsumed,
   onAttachmentSelectionChange,
-  onCaseFilesChange
+  onCaseFilesChange,
+  onProcessingEvent
 }: {
   caseId: string;
   incomingFile?: File | null;
@@ -53,9 +108,16 @@ export function DocumentPrivacyPanel({
     selection: DocumentAttachmentSelection | null
   ) => void;
   onCaseFilesChange?: () => void;
+  onProcessingEvent?: (
+    event: DocumentProcessingEvent
+  ) => void;
 }) {
   const textRef =
     useRef<HTMLTextAreaElement>(null);
+  const autoStartedFiles =
+    useRef<WeakSet<File>>(new WeakSet());
+  const [activeFileName, setActiveFileName] =
+    useState("");
   const [review, setReview] =
     useState<DocumentReviewResponse | null>(
       null
@@ -64,6 +126,8 @@ export function DocumentPrivacyPanel({
     useState<DocumentIngestionResponse | null>(
       null
     );
+  const [privacyMode, setPrivacyMode] =
+    useState<PrivacyMode>("ASK");
   const [page, setPage] = useState(1);
   const [selection, setSelection] =
     useState<{ start: number; end: number } | null>(
@@ -86,18 +150,10 @@ export function DocumentPrivacyPanel({
 
   useEffect(() => {
     if (!incomingFile) return;
-    let cancelled = false;
-    void openFile(
-      incomingFile
-    ).finally(() => {
-      if (!cancelled) {
-        onIncomingFileConsumed?.();
-      }
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, [incomingFile]);
+    if (autoStartedFiles.current.has(incomingFile)) return;
+    autoStartedFiles.current.add(incomingFile);
+    void openFile(incomingFile);
+  }, [incomingFile, caseId]);
 
   const currentPage = useMemo(
     () =>
@@ -115,6 +171,23 @@ export function DocumentPrivacyPanel({
     [review, page]
   );
 
+  const reviewStats = useMemo(() => {
+    if (!review) return null;
+    const ocrPages = review.pages.filter(
+      (item) => item.source === "OCR"
+    ).length;
+    const digitalPages = review.pages.filter(
+      (item) => item.source === "DIGITAL"
+    ).length;
+    return {
+      ocrPages,
+      digitalPages,
+      scannedPdf:
+        review.mediaType === "application/pdf" &&
+        ocrPages > 0
+    };
+  }, [review]);
+
   const selectedText =
     selection && currentPage
       ? currentPage.text.slice(
@@ -129,13 +202,19 @@ export function DocumentPrivacyPanel({
     if (!file) return;
     setLoading(true);
     setError("");
+    setActiveFileName(file.name);
     setReview(null);
     setFinalized(null);
     setArchiveUpload(null);
+    setPrivacyMode("ASK");
     setDirectives([]);
     setSelection(null);
     setSelectedChunkIndices([]);
     onAttachmentSelectionChange?.(null);
+    onProcessingEvent?.({
+      fileName: file.name,
+      stage: "ANALYZING"
+    });
 
     try {
       if (!caseId) {
@@ -154,6 +233,11 @@ export function DocumentPrivacyPanel({
           );
         setArchiveUpload(stored);
         onCaseFilesChange?.();
+        onProcessingEvent?.({
+          fileName: file.name,
+          stage: "ARCHIVE_STORED"
+        });
+        onIncomingFileConsumed?.();
         return;
       }
 
@@ -167,6 +251,26 @@ export function DocumentPrivacyPanel({
       setPage(
         result.pages[0]?.page ?? 1
       );
+      const ocrPages = result.pages.filter(
+        (item) => item.source === "OCR"
+      ).length;
+      if (ocrPages > 0) {
+        onProcessingEvent?.({
+          fileName: file.name,
+          stage: "OCR_COMPLETE",
+          documentId: result.documentId,
+          totalPages: result.totalPages,
+          ocrPages
+        });
+      }
+      onProcessingEvent?.({
+        fileName: file.name,
+        stage: "PRIVACY_REQUIRED",
+        documentId: result.documentId,
+        totalPages: result.totalPages,
+        ocrPages,
+        suggestions: result.suggestions.length
+      });
     } catch (cause) {
       setError(
         cause instanceof Error
@@ -251,7 +355,13 @@ export function DocumentPrivacyPanel({
     setError("");
   }
 
-  async function finalize(): Promise<void> {
+  async function finalizeWith(
+    decisions: PagePrivacyDirective[],
+    mode:
+      | "AUTO_PSEUDONYMIZE"
+      | "MANUAL"
+      | "KEEP_CLEAR"
+  ): Promise<void> {
     if (!review) return;
     setLoading(true);
     setError("");
@@ -260,11 +370,36 @@ export function DocumentPrivacyPanel({
         await finalizeDocument(
           caseId,
           review.documentId,
-          directives
+          decisions
         );
       setFinalized(result);
-      setSelectedChunkIndices([]);
-      onAttachmentSelectionChange?.(null);
+      setPrivacyMode("FINALIZED");
+      const automaticallySelected = result.chunks
+        .slice(0, 32)
+        .map((chunk) => chunk.index);
+      setSelectedChunkIndices(automaticallySelected);
+      onAttachmentSelectionChange?.(
+        automaticallySelected.length > 0
+          ? {
+              caseId,
+              documentId: result.documentId,
+              chunkIndices: automaticallySelected
+            }
+          : null
+      );
+      onProcessingEvent?.({
+        fileName:
+          activeFileName ||
+          incomingFile?.name ||
+          result.documentId,
+        stage: "FINALIZED",
+        documentId: result.documentId,
+        totalPages: result.totalPages,
+        ocrPages: result.ocrPages,
+        suggestions: result.privacy.findings,
+        privacyMode: mode
+      });
+      onIncomingFileConsumed?.();
     } catch (cause) {
       setError(
         cause instanceof Error
@@ -274,6 +409,13 @@ export function DocumentPrivacyPanel({
     } finally {
       setLoading(false);
     }
+  }
+
+  async function finalize(): Promise<void> {
+    await finalizeWith(
+      directives,
+      "MANUAL"
+    );
   }
 
   function setChunkSelected(
@@ -321,13 +463,18 @@ export function DocumentPrivacyPanel({
             Dokumenty lokalne
           </p>
           <h3>
-            Akta sprawy, OCR i ręczna anonimizacja
+            OCR automatyczny i anonimizacja per plik
           </h3>
           <p>
-            PDF, obrazy, TXT/Markdown, DOCX/ODT oraz XLSX/XLSM/CSV/TSV są przetwarzane lokalnie i zapisywane
-            w szyfrowanym kontekście sprawy. Cyfrowy PDF korzysta z warstwy tekstowej bez OCR, jeśli tekst jest wystarczający. ZIP jest bezpiecznie rozpakowywany do katalogu
-            sprawy; żaden plik z archiwum nie trafia automatycznie do providera.
+            Zdjęcia są od razu kierowane do lokalnego OCR. PDF jest analizowany strona po stronie:
+            jeśli ma użyteczną warstwę tekstową, OCR nie jest potrzebny, a strony skanowane są OCR-owane
+            automatycznie. Każdy plik otrzymuje osobny documentId i osobną zaszyfrowaną mapę reidentyfikacji.
           </p>
+          {activeFileName ? (
+            <small>
+              Aktualny plik: {activeFileName}
+            </small>
+          ) : null}
         </div>
 
         <label className="file-button">
@@ -350,7 +497,15 @@ export function DocumentPrivacyPanel({
 
       {error && (
         <div className="alert alert-error">
-          {error}
+          <span>{error}</span>
+          {incomingFile ? (
+            <button
+              type="button"
+              onClick={() => onIncomingFileConsumed?.()}
+            >
+              Pomiń ten plik
+            </button>
+          ) : null}
         </div>
       )}
 
@@ -376,7 +531,63 @@ export function DocumentPrivacyPanel({
         </div>
       )}
 
-      {review && currentPage && (
+      {review && privacyMode === "ASK" ? (
+        <div className="privacy-decisions">
+          <div className="privacy-decision-head">
+            <div>
+              <strong>
+                Decyzja prywatności dla „{activeFileName || review.documentId}”
+              </strong>
+              <p>
+                {reviewStats?.ocrPages
+                  ? `OCR wykonano automatycznie na ${reviewStats.ocrPages} z ${review.totalPages} stron${reviewStats.scannedPdf ? " skanowanego PDF" : ""}.`
+                  : "Dokument ma użyteczną warstwę tekstową; OCR nie był potrzebny."}
+                {" "}Wykryto {review.suggestions.length} lokalnych sugestii danych wrażliwych.
+              </p>
+              <p>
+                Ta decyzja dotyczy tylko tego pliku. Następny plik w kolejce zostanie zatrzymany
+                na własnym pytaniu o anonimizację.
+              </p>
+            </div>
+          </div>
+          <div className="attachment-actions">
+            <button
+              type="button"
+              className="primary-button"
+              disabled={loading}
+              onClick={() => {
+                void finalizeWith(
+                  [],
+                  "AUTO_PSEUDONYMIZE"
+                );
+              }}
+            >
+              Anonimizuj / pseudonimizuj automatycznie
+            </button>
+            <button
+              type="button"
+              disabled={loading}
+              onClick={() => setPrivacyMode("MANUAL")}
+            >
+              Przejrzyj ręcznie
+            </button>
+            <button
+              type="button"
+              disabled={loading}
+              onClick={() => {
+                void finalizeWith(
+                  keepAllAutomaticFindings(review),
+                  "KEEP_CLEAR"
+                );
+              }}
+            >
+              Pozostaw ten plik bez anonimizacji
+            </button>
+          </div>
+        </div>
+      ) : null}
+
+      {review && currentPage && privacyMode === "MANUAL" && (
         <div className="privacy-review-grid">
           <div className="privacy-document">
             <div className="privacy-toolbar">
@@ -572,11 +783,11 @@ export function DocumentPrivacyPanel({
         </div>
       )}
 
-      {review && (
+      {review && privacyMode === "MANUAL" && (
         <div className="privacy-decisions">
           <div className="privacy-decision-head">
             <strong>
-              Decyzje: {directives.length}
+              Decyzje dla tego pliku: {directives.length}
             </strong>
             <button
               type="button"
@@ -651,6 +862,11 @@ export function DocumentPrivacyPanel({
               ·{" "}
               {finalized.privacy.annotations.length} oznaczeń
             </span>
+            <small>
+              Mapa reidentyfikacji jest odrębna dla tego documentId, zaszyfrowana lokalnie
+              i nie jest przekazywana providerowi. Deanonymizacja dokumentu wynikowego korzysta
+              z map przypisanych do konkretnych dokumentów źródłowych.
+            </small>
           </div>
 
           <div className="attachment-selector">
@@ -660,9 +876,8 @@ export function DocumentPrivacyPanel({
                   Chunki do analizy AI
                 </strong>
                 <p>
-                  Domyślnie nic nie jest wysyłane do providera. Zaznacz tylko te
-                  chronione chunki, które mają wejść do kontekstu sesji.
-                  Backend nie przekazuje mapy reidentyfikacji.
+                  Dla pliku z kolejki maksymalnie 32 chunki są zaznaczane automatycznie po finalizacji.
+                  Możesz zmienić wybór. Backend nie przekazuje mapy reidentyfikacji.
                 </p>
               </div>
               <span>
@@ -735,15 +950,14 @@ export function DocumentPrivacyPanel({
 
             {finalized.chunks.length > 32 && (
               <p className="field-help">
-                Dokument ma więcej niż 32 chunki. Do jednej sesji wybierz
-                maksymalnie 32; kolejne partie możesz analizować osobno.
+                Dokument ma więcej niż 32 chunki. Pierwsze 32 zostały zaznaczone
+                automatycznie; kolejne partie możesz analizować osobno.
               </p>
             )}
 
             <p className="field-help">
-              Uwaga: fragmenty oznaczone wcześniej jako KEEP pozostają jawne
-              zgodnie z decyzją użytkownika i mogą trafić do providera, jeśli
-              wybierzesz zawierający je chunk.
+              Uwaga: fragmenty oznaczone jako KEEP pozostają jawne zgodnie z decyzją użytkownika
+              i mogą trafić do providera, jeśli wybierzesz zawierający je chunk.
             </p>
           </div>
         </>
