@@ -128,7 +128,7 @@ describe("encrypted case workspace", () => {
     );
     state = markProcessCheckpointReady(
       state,
-      "CP-W1",
+      "CP-1a",
       "2026-09-18T00:00:02.000Z"
     );
 
@@ -147,7 +147,7 @@ describe("encrypted case workspace", () => {
       });
     expect(loaded?.stage).toBe("W1");
     expect(loaded?.pendingCheckpoint)
-      .toBe("CP-W1");
+      .toBe("CP-1a");
     expect(loaded?.documentStatus)
       .toBe("DRAFT");
 
@@ -165,7 +165,7 @@ describe("encrypted case workspace", () => {
     expect(onDisk)
       .not.toContain("PROCESS_PLEADING_V1");
     expect(onDisk)
-      .not.toContain("CP-W1");
+      .not.toContain("CP-1a");
     expect(onDisk)
       .not.toContain("PENDING_CONFIRMATION");
 
