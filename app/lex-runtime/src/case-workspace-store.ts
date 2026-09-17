@@ -13,6 +13,10 @@ import {
 } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import {
+  validateProcessPleadingState,
+  type ProcessPleadingState
+} from "./process-pleading-state.js";
 
 export type WorkspaceFolder = {
   folderId: string;
@@ -53,6 +57,9 @@ export type CaseWorkspaceIndex = {
   itemLocations: Record<string, string | null>;
   thread: {
     messages: WorkspaceThreadMessage[];
+  };
+  workflows?: {
+    processPleading?: ProcessPleadingState;
   };
 };
 
@@ -208,7 +215,8 @@ export class EncryptedCaseWorkspaceStore {
       updatedAt: new Date().toISOString(),
       folders: [],
       itemLocations: {},
-      thread: { messages: [] }
+      thread: { messages: [] },
+      workflows: {}
     };
   }
 
@@ -253,6 +261,25 @@ export class EncryptedCaseWorkspaceStore {
       throw new Error("WORKSPACE_INDEX_INVALID");
     }
     index.thread.messages.forEach(safeMessage);
+
+    if (index.workflows !== undefined) {
+      if (
+        !index.workflows ||
+        typeof index.workflows !== "object" ||
+        Array.isArray(index.workflows)
+      ) {
+        throw new Error("WORKSPACE_INDEX_INVALID");
+      }
+      if (index.workflows.processPleading) {
+        const workflow =
+          validateProcessPleadingState(
+            index.workflows.processPleading
+          );
+        if (workflow.caseId !== caseId) {
+          throw new Error("WORKSPACE_INDEX_INVALID");
+        }
+      }
+    }
   }
 
   private async read(
@@ -515,6 +542,81 @@ export class EncryptedCaseWorkspaceStore {
     index.thread.messages = [...withoutDuplicate, message].slice(-this.maxMessages);
     await this.write(index, args.caseDataKey, args.keyVersion);
     return message;
+  }
+
+  async getProcessPleadingState(args: {
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }): Promise<ProcessPleadingState | null> {
+    const index = await this.read(
+      args.caseId,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    const state =
+      index.workflows?.processPleading;
+    return state
+      ? validateProcessPleadingState(state)
+      : null;
+  }
+
+  async saveProcessPleadingState(args: {
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+    state: ProcessPleadingState;
+  }): Promise<ProcessPleadingState> {
+    const state =
+      validateProcessPleadingState(
+        args.state
+      );
+    if (state.caseId !== args.caseId) {
+      throw new Error(
+        "PROCESS_PLEADING_CASE_ID_MISMATCH"
+      );
+    }
+    const index = await this.read(
+      args.caseId,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    index.workflows ??= {};
+    index.workflows.processPleading =
+      state;
+    await this.write(
+      index,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    return validateProcessPleadingState(
+      state
+    );
+  }
+
+  async clearProcessPleadingState(args: {
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }): Promise<boolean> {
+    const index = await this.read(
+      args.caseId,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    if (
+      !index.workflows?.processPleading
+    ) {
+      return false;
+    }
+    delete index.workflows
+      .processPleading;
+    await this.write(
+      index,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    return true;
   }
 
   async rekeyCaseWorkspace(args: {
