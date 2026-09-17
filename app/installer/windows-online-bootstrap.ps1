@@ -11,6 +11,12 @@ $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
 $cache = Join-Path $env:LOCALAPPDATA "LexMachina\bootstrap-cache"
 New-Item -ItemType Directory -Force -Path $cache | Out-Null
 
+function Test-IsAdministrator {
+  $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+  $principal = [Security.Principal.WindowsPrincipal]::new($identity)
+  return $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+}
+
 function Get-VerifiedDownload(
   [string]$Url,
   [string]$ExpectedSha256,
@@ -173,9 +179,16 @@ if (-not $vcInstalled) {
     $vcInstaller = Join-Path $cache "vc_redist.x64-$($vc.version).exe"
     Get-VerifiedDownload $vc.url $vc.sha256 $vcInstaller "visual-cpp-runtime"
   }
-  $vcInstall = Start-Process -FilePath $vcInstaller -ArgumentList @(
-    "/install", "/quiet", "/norestart"
-  ) -Verb RunAs -Wait -PassThru
+  $startArgs = @{
+    FilePath = $vcInstaller
+    ArgumentList = @("/install", "/quiet", "/norestart")
+    Wait = $true
+    PassThru = $true
+  }
+  if (-not (Test-IsAdministrator)) {
+    $startArgs.Verb = "RunAs"
+  }
+  $vcInstall = Start-Process @startArgs
   if ($vcInstall.ExitCode -notin @(0, 1638, 3010)) {
     throw "BOOTSTRAP_VC_RUNTIME_FAILED:$($vcInstall.ExitCode)"
   }
