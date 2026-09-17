@@ -126,3 +126,28 @@
     max-height: 70vh;
   }
 }
+
+
+.local-ai-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.local-ai-actions button {
+  min-height: 38px;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.local-ai-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.local-ai-danger {
+  border-color: rgba(180, 35, 24, 0.35);
+  color: #b42318;
+}
