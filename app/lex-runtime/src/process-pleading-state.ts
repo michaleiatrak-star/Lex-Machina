@@ -516,7 +516,14 @@ export function markProcessCheckpointReady(
     state.checkpoints[checkpoint] !==
       "OPEN" ||
     CHECKPOINT_STAGE[checkpoint] !==
+      state.stage ||
+    ORDERED_STAGE_CHECKPOINTS[
       state.stage
+    ].find(
+      (candidate) =>
+        state.checkpoints[candidate] ===
+          "OPEN"
+    ) !== checkpoint
   ) {
     throw new Error(
       "PROCESS_PLEADING_CHECKPOINT_TRANSITION_INVALID"
@@ -617,6 +624,13 @@ export function markProcessCheckpointNotApplicable(
       "OPEN" ||
     CHECKPOINT_STAGE[checkpoint] !==
       state.stage ||
+    ORDERED_STAGE_CHECKPOINTS[
+      state.stage
+    ].find(
+      (candidate) =>
+        state.checkpoints[candidate] ===
+          "OPEN"
+    ) !== checkpoint ||
     MAIN_STAGE_CHECKPOINTS[
       state.stage
     ].includes(checkpoint)
